@@ -1202,7 +1202,7 @@
 
 		public function doAI():void
 		{
-			if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FreezingBreathStun)) {
+			if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FreezingBreathStun) || hasStatusEffect(StatusEffects.StunnedTornado)) {
 				if (!handleStun()) return;
 			}
 			if (hasStatusEffect(StatusEffects.Fear)) {
@@ -1323,6 +1323,11 @@
 		{
 			if (statusEffectv1(StatusEffects.Stunned) <= 0) removeStatusEffect(StatusEffects.Stunned);
 			else addStatusValue(StatusEffects.Stunned, 1, -1);
+			if (statusEffectv1(StatusEffects.StunnedTornado) <= 0) removeStatusEffect(StatusEffects.StunnedTornado);
+			else {
+				game.outputText(capitalA + short + " is still caught in the tornado.");
+				addStatusValue(StatusEffects.StunnedTornado, 1, -1);
+			}
 			if (hasStatusEffect(StatusEffects.InkBlind)) {
 				if (plural) game.outputText("Your foes are busy trying to remove the ink and therefore does no other action then flay their hand about its faces.");
 				else game.outputText("Your foe is busy trying to remove the ink and therefore does no other action then flay its hand about its face.");

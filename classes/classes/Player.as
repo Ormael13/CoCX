@@ -1167,15 +1167,29 @@ use namespace kGAMECLASS;
 			var race:String = "human";
 			if (catScore() >= 4) 
 			{
-				if (isTaur() && lowerBody == LOWER_BODY_TYPE_CAT) {
-					race = "cat-taur";
-					if (faceType == FACE_HUMAN)
-						race = "sphinx-morph"; // no way to be fully feral anyway
+				if (catScore() >= 8) {
+					if (isTaur() && lowerBody == LOWER_BODY_TYPE_CAT) {
+						race = "cat-taur";
+						if (faceType == FACE_HUMAN)
+							race = "sphinx-morph"; // no way to be fully feral anyway
+					}
+					else {
+						race = "cat-morph";
+						if (faceType == FACE_HUMAN)
+							race = "cat-" + mf("boy", "girl");
+					}
 				}
 				else {
-					race = "cat-morph";
-					if (faceType == FACE_HUMAN)
-						race = "cat-" + mf("boy", "girl");
+					if (isTaur() && lowerBody == LOWER_BODY_TYPE_CAT) {
+						race = "half cat-taur";
+						if (faceType == FACE_HUMAN)
+							race = "half sphinx-morph"; // no way to be fully feral anyway
+					}
+					else {
+						race = " half cat-morph";
+						if (faceType == FACE_HUMAN)
+							race = "half cat-" + mf("boy", "girl");
+					}
 				}
 			}
 			if (lizardScore() >= 4)
@@ -1882,8 +1896,8 @@ use namespace kGAMECLASS;
 		public function grandchimeraScore():Number {
 			Begin("Player","racialScore","grandchimera");
 			var grandchimeraCounter:Number = 0;
-//			if (catScore() >= 4)
-//				grandchimeraCounter++;
+			if (catScore() >= 8)
+				grandchimeraCounter++;
 			if (lizardScore() >= 8)
 				grandchimeraCounter++;
 			if (dragonScore() >= 10)
@@ -2460,8 +2474,7 @@ use namespace kGAMECLASS;
 				catCounter++;
 			if (breastRows.length > 3)
 				catCounter -= 2;
-			//Fur only counts if some canine features are present
-			if (hasFur() && catCounter > 0)
+			if (hasFur() || hasPartialCoat(SKIN_COAT_FUR))
 				catCounter++;
 			if (hornType == HORNS_DEMON || hornType == HORNS_DRACONIC_X2 || hornType == HORNS_DRACONIC_X4_12_INCH_LONG)
 					catCounter -= 2;
@@ -2482,6 +2495,66 @@ use namespace kGAMECLASS;
 			
 			End("Player","racialScore");
 			return catCounter;
+		}
+		//Determine nekomata Rating
+		public function nekomataScore():Number {
+			Begin("Player","racialScore","nekomata");
+			var nekomataCounter:Number = 0;
+			if (faceType == FACE_CAT)
+				nekomataCounter++;
+			if (eyeType == EYES_CAT_SLITS)
+				nekomataCounter++;
+			if (earType == EARS_CAT)
+				nekomataCounter++;
+			if (tongueType == TONGUE_CAT)
+				nekomataCounter++;
+			if (tailType == TAIL_TYPE_CAT)
+				nekomataCounter++;
+			if (lowerBody == LOWER_BODY_TYPE_CAT)
+				nekomataCounter++;
+			if (hasFur() || hasPartialCoat(SKIN_COAT_FUR))
+				nekomataCounter++;
+			if (findPerk(PerkLib.Flexibility) > 0)
+				nekomataCounter++;
+			if (findPerk(PerkLib.CatlikeNimbleness) > 0)
+				nekomataCounter++;
+			if (findPerk(PerkLib.CatlikeNimblenessEvolved) > 0)
+				nekomataCounter++;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && nekomataCounter >= 7)
+				nekomataCounter += 1;
+			
+			End("Player","racialScore");
+			return nekomataCounter;
+		}
+		//Determine cheshire Rating
+		public function cheshireScore():Number {
+			Begin("Player","racialScore","cheshire");
+			var cheshireCounter:Number = 0;
+			if (faceType == FACE_CAT)
+				cheshireCounter++;
+			if (eyeType == EYES_CAT_SLITS)
+				cheshireCounter++;
+			if (earType == EARS_CAT)
+				cheshireCounter++;
+			if (tongueType == TONGUE_CAT)
+				cheshireCounter++;
+			if (tailType == TAIL_TYPE_CAT)
+				cheshireCounter++;
+			if (lowerBody == LOWER_BODY_TYPE_CAT)
+				cheshireCounter++;
+			if (hasFur() || hasPartialCoat(SKIN_COAT_FUR))
+				cheshireCounter++;
+			if (findPerk(PerkLib.Flexibility) > 0)
+				cheshireCounter++;
+			if (findPerk(PerkLib.CatlikeNimbleness) > 0)
+				cheshireCounter++;
+			if (findPerk(PerkLib.CatlikeNimblenessEvolved) > 0)
+				cheshireCounter++;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && cheshireCounter >= 7)
+				cheshireCounter += 1;
+			
+			End("Player","racialScore");
+			return cheshireCounter;
 		}
 
 		//Determine lizard rating
@@ -2823,7 +2896,7 @@ use namespace kGAMECLASS;
 				gorgonCounter -= 3;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				gorgonCounter += 10;
-			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && gorgonCounter >= 3)
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && gorgonCounter >= 7)
 				gorgonCounter += 1;
 			if (findPerk(PerkLib.GorgonsEyes) >= 0 && findPerk(PerkLib.ChimericalBodyAdvancedStage) >= 0)
 				gorgonCounter++;
@@ -2841,7 +2914,7 @@ use namespace kGAMECLASS;
 				vouivreCounter++;
 			if (faceType == FACE_SNAKE_FANGS)
 				vouivreCounter++;
-			if (armType == ARM_TYPE_HUMAN)
+			if (armType == ARM_TYPE_DRAGON)
 				vouivreCounter++;
 			if (hasCoatOfType(SKIN_COAT_DRAGON_SCALES))
 				vouivreCounter++;
@@ -2865,6 +2938,8 @@ use namespace kGAMECLASS;
 				vouivreCounter++;
 			if (findPerk(PerkLib.DraconicLungsEvolved) >= 0)
 				vouivreCounter++;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && vouivreCounter >= 7)
+				vouivreCounter += 1;
 			
 			End("Player","racialScore");
 			return vouivreCounter;
@@ -2891,6 +2966,8 @@ use namespace kGAMECLASS;
 				couatlCounter++;
 			if (wingType == WING_TYPE_FEATHERED_LARGE)
 				couatlCounter += 2;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && couatlCounter >= 7)
+				couatlCounter += 1;
 			
 			End("Player","racialScore");
 			return couatlCounter;
@@ -4782,8 +4859,17 @@ use namespace kGAMECLASS;
 				}
 			}//+10/10-20
 			if (catScore() >= 4) {
-				if (findPerk(PerkLib.Flexibility) > 0) maxSpe += (20 * newGamePlusMod);
-				else maxSpe += (10 * newGamePlusMod);
+				if (catScore() >= 8) {
+					if (findPerk(PerkLib.Flexibility) > 0) maxSpe += (70 * newGamePlusMod);
+					else maxSpe += (60 * newGamePlusMod);
+					maxLib += (60 * newGamePlusMod);
+				}
+				else {
+					if (findPerk(PerkLib.Flexibility) > 0) maxSpe += (50 * newGamePlusMod);
+					else maxSpe += (40 * newGamePlusMod);
+					maxLib += (20 * newGamePlusMod);
+				}
+				
 			}//+10/10-20
 			if (bunnyScore() >= 4) {
 				maxSpe += (10 * newGamePlusMod);

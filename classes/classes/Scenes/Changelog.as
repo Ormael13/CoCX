@@ -39,7 +39,7 @@ package classes.Scenes
 			outputText("-Any PC can now use in limited form Power Attack. Namely just like monsters PC that not have perk Job: Warrior will be still able to use 100 wrath to make 2x stronger melee attack.\n");
 			outputText("-Perk Lifeline will now scale with NG tiers with amount of HP restored (it peak bonus will be reached in NG5+). Perks Bigger Golem Bag 1-6 would now increase pernament golems storage space by 1 when PC get perk Master Golem Maker.\n");
 			outputText("-Elemental Conjurer Dedication perk was moved from tier 1 to tier 4 increasing wisdom req. for it to 120. Perk Elemental Contract Rank 2 no longer req. this perk and it was moved as one of req. perks to perk Elemental Contract Rank 5. Elemental Conjurer Sacrifice perk was moved from tier 4 to tier 6 increasing wisdom req. for it to 220.");
-			outputText(" Mana cost reduction for perks Stronger Elemental Bond and Strongest Elemental Bond reduced to 20 and 40 from 30 and 90.\n");
+			outputText(" Mana cost reduction for perks Stronger Elemental Bond and Strongest Elemental Bond reduced to 20 and 40 from 30 and 90. Amount of mana used by attacking elementals increased by 25%.\n");
 			outputText("-Pearl gained by beating enemy in Hidden Cave will be giving Elemental Conjurer Mind and Body Dedication perk instead of Elemental Conjurer Mind and Body Resolve. For all PC's that used it already it will just replace perks and for those that still need to use this item will be granting new perk.\n");
 			outputText("-New event related perk: Elemental Conjurer Mind and Body Dedication. Req.: Using Five-colored Elemental Pearl, which can be found after beating 2nd boss of Hidden Cave dungeon. Effect: It'll neutralize negative effects on max Str/Tou/Spe due to picking Elemental Conjurer Dedication perk.\n");
 			outputText("-New tier 4 wisdom lvl-up perk: First Attack: Elementals. Req. Strong Elemental Bond and Elemental Contract Rank 4 perks. Effect: Opens new possible options for elementals help - attacking alongside PC instead of replacing his/her melee attack. They will also attack first and PC would be able to pick which of current summoned elementals will attack\n");
@@ -67,7 +67,19 @@ package classes.Scenes
 			outputText("-New tier 14 libido lvl-up perk: Mythic Self-Control. Req. Half-step-to Mythic Self-Control perk, 450+ lib and 300+ int. Effect: Inrease max Lust by 5000\n");
 			outputText("-Manticore bonuses increased (req. 6/12 pts now) to : +50/100 max spe, +25/50 max int, +30/60 max lib, +15/30 min sens, +0/50 max HP. ALso having cat tongue and not having cock will count as point to maticore score.\n");
 			outputText("-New type of resistance added: Magic Resistance. Some of enemy attacks that use non physical attacks/specials will req. this resistance to reduce recived damage. Rising intelligence and wisdom will let PC rise it to 25%. Other ways to increase it higher would be having specific status effects or perks.\n");
-			outputText("-Perk Naked Truth will now provide magical resistance like physical one it have now (-10% dmg).\n");
+			outputText("-Perk Naked Truth will now provide magical resistance like physical one it have now -10% dmg (to both physical and magical).\n");
+			outputText("-New way to count physical/magical resistance with cap that would rise each new game tier. Now each 10 pts in tou/int/wis would add 1% ot phys (tou) or mag (int/wis) resistance with each stopping when phys or magical resistance reach 25% (+5% for each ascension).\n");
+			outputText("-New Physical Special: Tornado Strike. Req. to be Vouivre and flying at the moment. It will deal damage and stun enemies that aren't resistant to stun for 3 turns. Cooldown for again use is 8 turns.\n");
+			outputText("-Cat race bonuses adjusted for Half Cat-morph/Cat-morph (4+/8+ points in cat score): +40/60 to max spe, +25/60 to max Lib\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -75,6 +87,8 @@ package classes.Scenes
 			outputText("-New melee weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
 			outputText("-New melee weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
 			outputText("-New melee weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
+			outputText("-\n");//opis zmian w jewel shop i kto to zrobił
+			outputText("-\n");//zmiany w kodzie od Ox (cleanup of He'Xin'Dao)
 			outputText("-Fixed bugs: \n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
@@ -82,8 +96,6 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -133,6 +145,10 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): dodać yuki-onna TF
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

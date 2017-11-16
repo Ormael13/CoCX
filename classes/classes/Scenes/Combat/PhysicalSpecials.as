@@ -269,6 +269,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if ((player.wingType == WING_TYPE_BAT_ARM || player.wingType == WING_TYPE_VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType)) {
 			buttons.add("Embrace", vampireEmbrace).hint("Embrace an opponent in your wings.");
 		}
+		//Tornado Strike
+		if (player.vouivreScore() >= 11) {
+			bd = buttons.add("Tornado Strike", TornadoStrike).hint("Use wind to forcefully lift a foe in the air and deal damage.  \n\nWould go into cooldown after use for: 8 rounds");
+			bd.requireFatigue(physicalCost(60));
+			if (player.hasStatusEffect(StatusEffects.CooldownTornadoStrike)) {
+				bd.disable("<b>You need more time before you can perform Tornado Strike again.</b>\n\n");
+			}
+		}
 	}
 	
 	public function powerAttackMenu():void {
@@ -1524,6 +1532,48 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+		checkAchievementDamage(damage);
+		outputText("\n\n");
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
+		enemyAI();
+	}
+	
+	public function TornadoStrike():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
+		fatigue(60, USEFATG_PHYSICAL);
+		player.createStatusEffect(StatusEffects.CooldownTornadoStrike,8,0,0,0);
+		var damage:Number = 0;
+		//spe bonuses
+		damage += player.spe;
+		damage += speedscalingbonus();
+		//other bonuses
+		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
+			if (player.inte <= 100) critChance += (player.inte - 50) / 5;
+			if (player.inte > 100) critChance += 10;
+		}
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		damage = doDamage(damage);
+		outputText("You start to channel power into your body unleashing it it into the form of a mighty swirling tornado. " + monster.capitalA + monster.short + " is caught in it and carried into the windstorm taking hit from various other flying objects. <b><font color=\"#800000\">" + damage + "</font></b> damage.");
+		if (crit == true) {
+			outputText(" <b>*Critical Hit!*</b>");
+			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
+		}
+		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
 		checkAchievementDamage(damage);
 		outputText("\n\n");
 		if (player.hasStatusEffect(StatusEffects.HeroBane)) {

@@ -3704,33 +3704,24 @@ package classes
 
 		public function damageToughnessModifier(displayMode:Boolean = false):Number {
 			var temp:Number = 0;
-			if (tou < 25) temp = (tou * 0.4);
-			else if (tou < 50) temp = 10 + ((tou-25) * 0.3);
-			else if (tou < 75) temp = 17.5 + ((tou-50) * 0.2);
-			else if (tou < 100) temp = 22.5 + ((tou-75) * 0.1);
-			else temp = 25;
+			temp += tou / 10;
+			if (temp > (25 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]))) temp = 25 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			//displayMode is for stats screen.
 			if (displayMode) return temp;
 			else return rand(temp);
 		}
 		public function damageIntelligenceModifier(displayMode:Boolean = false):Number {
 			var temp:Number = 0;
-			if (inte < 25) temp = (inte * 0.8);
-			else if (inte < 50) temp = 5 + ((inte-25) * 0.6);
-			else if (inte < 75) temp = 8.75 + ((inte-50) * 0.4);
-			else if (inte < 100) temp = 11.25 + ((inte-75) * 0.2);
-			else temp = 12.5;
+			temp += inte / 10;
+			if (temp > (12.5 + (2.5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]))) temp = 12.5 + (2.5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			//displayMode is for stats screen.
 			if (displayMode) return temp;
 			else return rand(temp);
 		}
 		public function damageWisdomModifier(displayMode:Boolean = false):Number {
 			var temp:Number = 0;
-			if (wis < 25) temp = (wis * 0.8);
-			else if (wis < 50) temp = 5 + ((wis-25) * 0.6);
-			else if (wis < 75) temp = 8.75 + ((wis-50) * 0.4);
-			else if (wis < 100) temp = 11.25 + ((wis-75) * 0.2);
-			else temp = 12.5;
+			temp += wis / 10;
+			if (temp > (12.5 + (2.5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]))) temp = 12.5 + (2.5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			//displayMode is for stats screen.
 			if (displayMode) return temp;
 			else return rand(temp);

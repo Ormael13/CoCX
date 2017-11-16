@@ -757,8 +757,8 @@ public function baseelementalattacksEther():void {
 public function baseelementalattacks():void {
 	clearOutput();
 	var manacostofelementalattacking:Number = 1;
-	manacostofelementalattacking += player.inte / 10;
-	manacostofelementalattacking += player.wis / 10;
+	manacostofelementalattacking += player.inte / 8;
+	manacostofelementalattacking += player.wis / 8;
 	manacostofelementalattacking = Math.round(manacostofelementalattacking);
 	if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1) {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 4 && manacostofelementalattacking > 15 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manacostofelementalattacking -= 10;
@@ -4441,6 +4441,15 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 		}
 		else {
 			player.addStatusValue(StatusEffects.CooldownSonicScream,1,-1);
+		}
+	}
+	//Tornado Strike
+	if (player.hasStatusEffect(StatusEffects.CooldownTornadoStrike)) {
+		if (player.statusEffectv1(StatusEffects.CooldownTornadoStrike) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownTornadoStrike);
+		}
+		else {
+			player.addStatusValue(StatusEffects.CooldownTornadoStrike,1,-1);
 		}
 	}
 	if (player.hasStatusEffect(StatusEffects.BladeDance)) player.removeStatusEffect(StatusEffects.BladeDance);

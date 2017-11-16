@@ -4052,6 +4052,12 @@
 				removeWings();
 				changes++;
 			}
+			//Dragon Arms
+			if (type == 1 && player.wingType == WING_TYPE_DRACONIC_HUGE && player.armType != ARM_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of dragon one with leathery scales and short claws replacing your fingernails.  <b>You now have a dragon arms.</b>");
+				setArmType(ARM_TYPE_DRAGON);
+				changes++;
+			}
 			//Feathery Arms
 			if (type == 2 && !InCollection(player.armType, ARM_TYPE_GARGOYLE, ARM_TYPE_HARPY) && player.earType == EARS_SNAKE && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nWhen you go to wipe your mouth form remains of the oil, instead of the usual texture of your [skin.type] on your lips, you feel feathers! You look on in horror while more of the avian plumage sprouts from your [skin.type], covering your forearms until <b>your arms look vaguely like wings</b>. Your hands remain unchanged thankfully. It'd be impossible to be a champion without hands! The feathery limbs might help you maneuver if you were to fly, but there's no way they'd support you alone.");

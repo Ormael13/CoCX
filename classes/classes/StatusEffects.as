@@ -565,6 +565,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const StoneLust:StatusEffectType                 = mkCombat("Stone Lust");
 		public static const StoneSkin:StatusEffectType                 = mkCombat("Stone Skin");
 		public static const Stunned:StatusEffectType                   = mkCombat("Stunned");
+		public static const StunnedTornado:StatusEffectType            = mkCombat("Stunned (Tornado)");
 		public static const TailWhip:StatusEffectType                  = mkCombat("Tail Whip");
 		public static const TemporaryHeat:StatusEffectType             = mkCombat("Temporary Heat");
 		public static const TentacleBind:StatusEffectType              = mkCombat("TentacleBind");
@@ -611,6 +612,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CooldownStoneClaw:StatusEffectType          = mkCombat("Cooldown Stone Claw");
 		public static const CooldownTailSlam:StatusEffectType           = mkCombat("Cooldown Tail Slam");
 		public static const CooldownTailSmack:StatusEffectType          = mkCombat("Cooldown Tail Smack");
+		public static const CooldownTornadoStrike:StatusEffectType      = mkCombat("Cooldown Tornado Strike");
 		public static const CooldownTerror:StatusEffectType             = mkCombat("Cooldown Terror");
 		public static const CooldownWingBuffet:StatusEffectType         = mkCombat("Cooldown Wing Buffet");
 		
