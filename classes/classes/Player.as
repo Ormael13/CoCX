@@ -5655,6 +5655,14 @@ use namespace kGAMECLASS;
 			}
 			End("Player","getAllMaxStats.effects");
 			End("Player","getAllMaxStats");
+			maxStr = Math.max(maxStr,1);
+			maxTou = Math.max(maxTou,1);
+			maxSpe = Math.max(maxSpe,1);
+			maxInt = Math.max(maxInt,1);
+			maxWis = Math.max(maxWis,1);
+			maxLib = Math.max(maxLib,1);
+			maxSen = Math.max(maxSen,1);
+			maxCor = Math.max(maxCor,1);
 			return {
 				str:maxStr,
 				tou:maxTou,
