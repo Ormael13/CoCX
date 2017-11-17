@@ -197,12 +197,6 @@ package classes.Scenes.Areas.Swamp
 			this.drop = new WeightedDrop().add(consumables.B_GOSSR,5)
 					.add(useables.T_SSILK,1)
 					.add(null,4);
-			this.str += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 2610;
 			checkMonster();
 		}
 

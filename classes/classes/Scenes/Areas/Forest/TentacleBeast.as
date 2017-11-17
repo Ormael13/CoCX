@@ -151,12 +151,6 @@
 			this.special2 = tentacleEntwine;
 			this.special3 = tentaclePhysicalAttack;
 			this.tailType = TAIL_TYPE_DEMONIC;
-			this.str += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1200;
 			checkMonster();
 		}
 

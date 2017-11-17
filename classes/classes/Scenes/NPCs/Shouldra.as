@@ -127,12 +127,6 @@ package classes.Scenes.NPCs
 			this.level = 12;
 			this.gems = 0;
 			this.drop = new ChainedDrop().add(consumables.ECTOPLS,1/3);
-			this.str += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 28 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1460;
 			checkMonster();
 		}
 		

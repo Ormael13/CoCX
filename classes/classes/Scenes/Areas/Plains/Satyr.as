@@ -173,12 +173,6 @@ package classes.Scenes.Areas.Plains
 			this.gems = rand(30) + 30;
 			this.drop = new ChainedDrop().add(consumables.INCUBID,1/2);
 			this.tailType = TAIL_TYPE_COW;
-			this.str += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1540;
 			checkMonster();
 		}
 		

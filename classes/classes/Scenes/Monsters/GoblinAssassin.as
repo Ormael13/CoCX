@@ -157,12 +157,6 @@
 							consumables.BLUEDYE,
 							consumables.ORANGDY,
 							consumables.PURPDYE);// TODO this is a copy of goblin drop. consider replacement with higher-lever stuff
-			this.str += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1460;
 			checkMonster();
 		}
 

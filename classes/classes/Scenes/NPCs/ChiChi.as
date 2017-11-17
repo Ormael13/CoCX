@@ -118,12 +118,6 @@ package classes.Scenes.NPCs
 			this.createPerk(PerkLib.FireAffinity, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
-			this.str += 75 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 75 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 72 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 51 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 18180;
 			checkMonster();
 		}
 		

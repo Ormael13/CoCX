@@ -44,12 +44,6 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.drop = NO_DROP;
-			this.str += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 37 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 8750;
 			checkMonster();
 			createStatusEffect(StatusEffects.TentagrappleCooldown, 10, 0, 0, 0);
 		}

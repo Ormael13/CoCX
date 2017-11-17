@@ -77,12 +77,6 @@ package classes.Scenes.Areas.Beach
 			this.hornType = HORNS_DEMON;
 			this.horns = 2;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
-			this.str += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 4240;
 			checkMonster();
 		}
 		

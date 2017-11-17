@@ -256,12 +256,6 @@ package classes.Scenes.Areas.HighMountains
 			this.drop = new WeightedDrop(consumables.PURPEAC, 1);
 			this.wingType = WING_TYPE_HARPY;
 			this.wingDesc = "fluffy feathery";
-			this.str += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 2130;
 			checkMonster();
 		}
 		

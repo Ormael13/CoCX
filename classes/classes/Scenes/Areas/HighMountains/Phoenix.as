@@ -165,12 +165,6 @@ package classes.Scenes.Areas.HighMountains
 			this.special3 = lustBang;
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);
-			this.str += 37 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 5840;
 			checkMonster();
 		}
 		

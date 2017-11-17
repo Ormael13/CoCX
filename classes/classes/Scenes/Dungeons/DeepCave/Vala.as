@@ -147,12 +147,6 @@ package classes.Scenes.Dungeons.DeepCave
 			this.wingType = WING_TYPE_BEE_LIKE_LARGE;
 			this.wingDesc = wingDesc;
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
-			this.str += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 3570;
 			checkMonster();
 		}
 		

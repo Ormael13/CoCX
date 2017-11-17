@@ -45,12 +45,6 @@ package classes.Scenes.Dungeons.D3
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.drop = new WeightedDrop(weapons.L_WHIP, 1);
-			this.str += 96 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 96 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 54 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 20160;
 			this.checkMonster();
 		}
 		

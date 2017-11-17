@@ -143,12 +143,6 @@ import classes.internals.ChainedDrop;
 			this.tailType = TAIL_TYPE_BEE_ABDOMEN;
 			this.tailVenom = 100;
 			this.special1 = beeStingAttack;
-			this.str += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 380;
 			checkMonster();
 		}
 

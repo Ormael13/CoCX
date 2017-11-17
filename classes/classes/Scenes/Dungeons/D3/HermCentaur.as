@@ -48,12 +48,6 @@ package classes.Scenes.Dungeons.D3
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.drop = NO_DROP;
-			this.str += 63 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 63 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 12000;
 			this.checkMonster();
 		}
 		

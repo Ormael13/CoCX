@@ -208,12 +208,6 @@ package classes.Scenes.NPCs
 				this.armorDef = 18 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 600;
 				this.level = 20;
-				this.str += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 2280;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 1) {
 				initStrTouSpeInte(100, 130, 85, 73);
@@ -222,12 +216,6 @@ package classes.Scenes.NPCs
 				this.armorDef = 24 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 800;
 				this.level = 26;
-				this.str += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 6480;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 2) {
 				initStrTouSpeInte(120, 155, 100, 82);
@@ -236,12 +224,6 @@ package classes.Scenes.NPCs
 				this.armorDef = 30 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 1000;
 				this.level = 32;
-				this.str += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 6480;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 3) {
 				initStrTouSpeInte(140, 180, 115, 91);
@@ -250,12 +232,6 @@ package classes.Scenes.NPCs
 				this.armorDef = 36 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 1200;
 				this.level = 38;
-				this.str += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 39 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 10900;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 4) {
 				initStrTouSpeInte(160, 210, 130, 100);
@@ -264,12 +240,6 @@ package classes.Scenes.NPCs
 				this.armorDef = 42 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 1400;
 				this.level = 44;
-				this.str += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 39 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 10900;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 5) {
 				initStrTouSpeInte(180, 240, 145, 110);
@@ -278,12 +248,6 @@ package classes.Scenes.NPCs
 				this.armorDef = 48 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 1600;
 				this.level = 50;
-				this.str += 60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 75 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 16380;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 6) {
 				initStrTouSpeInte(200, 270, 160, 120);
@@ -292,12 +256,6 @@ package classes.Scenes.NPCs
 				this.armorDef = 54 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 1800;
 				this.level = 56;
-				this.str += 60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 75 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 16380;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 7) {
 				initStrTouSpeInte(220, 300, 175, 130);
@@ -306,12 +264,6 @@ package classes.Scenes.NPCs
 				this.armorDef = 60 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 2000;
 				this.level = 62;
-				this.str += 60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 75 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 16380;
 			}
 			this.weaponName = "giant shield";
 			this.weaponVerb="smash";

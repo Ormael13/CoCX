@@ -136,12 +136,6 @@ package classes.Scenes.Quests.UrtaQuest
 			this.special1 = nagaPoisonBiteAttack;
 			this.special2 = nagaConstrict;
 			this.special3 = nagaTailWhip;
-			this.str += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 2760;
 			checkMonster();
 		}
 

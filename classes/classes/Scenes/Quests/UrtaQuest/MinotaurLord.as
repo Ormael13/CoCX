@@ -212,12 +212,6 @@ package classes.Scenes.Quests.UrtaQuest
 			this.tailType = TAIL_TYPE_COW;
 			this.special1 = game.mountain.minotaurScene.minoPheromones;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			this.str += 60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 4860;
 			checkMonster();
 		}
 

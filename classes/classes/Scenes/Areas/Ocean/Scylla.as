@@ -104,12 +104,6 @@ package classes.Scenes.Areas.Ocean
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
-			this.str += 140 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 40 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 40 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 40 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 26400;
 			checkMonster();
 		}
 		

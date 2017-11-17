@@ -130,12 +130,6 @@ package classes.Scenes.NPCs
 			this.level = 30;
 			this.gems = rand(50)+80;
 			this.drop = NO_DROP;
-			this.str += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 6000;
 			checkMonster();
 		}
 		

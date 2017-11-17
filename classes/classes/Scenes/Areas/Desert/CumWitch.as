@@ -213,12 +213,6 @@ package classes.Scenes.Areas.Desert
 					consumables.W__BOOK,
 					consumables.B__BOOK,
 					null);
-			this.str += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 17 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1180;
 			checkMonster();
 		}
 		

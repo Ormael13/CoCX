@@ -113,12 +113,6 @@ package classes.Scenes.Areas.BlightRidge
 			this.hornType = HORNS_DEMON;
 			this.horns = 2;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
-			this.str += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 5280;
 			checkMonster();
 		}
 		

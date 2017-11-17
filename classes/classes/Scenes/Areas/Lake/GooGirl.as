@@ -190,12 +190,6 @@ package classes.Scenes.Areas.Lake
 			this.special3 = 5039;
 */
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
-			this.str += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 340;
 			checkMonster();
 		}
 

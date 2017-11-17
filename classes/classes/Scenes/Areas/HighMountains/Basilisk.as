@@ -124,12 +124,6 @@ import classes.internals.ChainedDrop;
 			this.tailType = TAIL_TYPE_COW;
 			this.tailRecharge = 0;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			this.str += 19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 2250;
 			checkMonster();
 		}
 		

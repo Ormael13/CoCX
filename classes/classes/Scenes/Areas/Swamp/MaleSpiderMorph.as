@@ -65,12 +65,6 @@ package classes.Scenes.Areas.Swamp
 					.add(null,4);
 			this.tailType = TAIL_TYPE_SPIDER_ADBOMEN;
 			this.tailRecharge = 0;
-			this.str += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1460;
 			checkMonster();
 		}
 		

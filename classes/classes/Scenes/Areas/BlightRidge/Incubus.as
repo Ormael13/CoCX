@@ -185,12 +185,6 @@ package classes.Scenes.Areas.BlightRidge
 			this.wingType = WING_TYPE_BAT_LIKE_TINY;
 			this.wingDesc = "tiny hidden";
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
-			this.str += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 31 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 5070;
 			checkMonster();
 		}
 	}

@@ -106,12 +106,6 @@ package classes.Scenes.Monsters
 			this.wingType = WING_TYPE_IMP;
 			this.special1 = lustMagicAttack;
 			this.special2 = clawAttack;
-			this.str += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1400;
 			checkMonster();
 		}
 		

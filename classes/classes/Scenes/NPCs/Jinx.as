@@ -95,12 +95,6 @@ package classes.Scenes.NPCs
 			this.armorName = "light ayo armor";//zamienić na coś innego?
 			this.armorDef = 30 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			//this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
-			this.str += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 800;//*20
 			checkMonster();
 		}
 		

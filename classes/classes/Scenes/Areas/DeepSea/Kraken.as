@@ -110,12 +110,6 @@ package classes.Scenes.Areas.DeepSea
 			//this.createPerk(PerkLib., 0, 0, 0, 0);
 			//this.createPerk(PerkLib., 0, 0, 0, 0);
 			//this.createPerk(PerkLib., 0, 0, 0, 0);
-			this.str += 350 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 100 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 100 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 125 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 100 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 85250;
 			checkMonster();
 		}
 		

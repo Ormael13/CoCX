@@ -113,12 +113,6 @@ package classes.Scenes.NPCs
 				this.armorDef = 21 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 100;
 				this.level = 15;
-				this.str += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 40 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 50 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 3120;
 			}/*
 			if (flags[kFLAGS.RANGIKU_LVL_UP] == 1) {
 				initStrTouSpeInte(110, 120, 100, 200);
@@ -130,12 +124,6 @@ package classes.Scenes.NPCs
 				this.armorDef = 21 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 100;
 				this.level = 30;
-				this.str +=  * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou +=  * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe +=  * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte +=  * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib +=  * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 0;
 			}
 			if (flags[kFLAGS.RANGIKU_LVL_UP] == 2) {
 				initStrTouSpeInte(110, 120, 100, 200);
@@ -147,12 +135,6 @@ package classes.Scenes.NPCs
 				this.armorDef = 21 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 100;
 				this.level = 45;
-				this.str +=  * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou +=  * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe +=  * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte +=  * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib +=  * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 0;
 			}
 			if (flags[kFLAGS.RANGIKU_LVL_UP] == 3) {
 				initStrTouSpeInte(110, 120, 100, 200);
@@ -164,12 +146,6 @@ package classes.Scenes.NPCs
 				this.armorDef = 21 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 100;
 				this.level = 60;
-				this.str +=  * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou +=  * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe +=  * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte +=  * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib +=  * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 0;
 			}
 			if (flags[kFLAGS.RANGIKU_LVL_UP] == 4) {
 				initStrTouSpeInte(110, 120, 100, 200);
@@ -181,12 +157,6 @@ package classes.Scenes.NPCs
 				this.armorDef = 21 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 100;
 				this.level = 70;
-				this.str +=  * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou +=  * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe +=  * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte +=  * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib +=  * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 0;
 			}*/
 			this.bonusLust = 20;
 			this.lust = 30;

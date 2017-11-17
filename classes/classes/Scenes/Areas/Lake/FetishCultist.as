@@ -188,12 +188,6 @@
 					.add(consumables.L_DRAFT,6);
 			this.special1 = cultistRaisePlayerLust;
 			this.special2 = cultistLustTransfer;
-			this.str += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 350;
 			checkMonster();
 		}
 

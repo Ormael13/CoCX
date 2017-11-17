@@ -246,12 +246,6 @@ package classes.Scenes.Areas.Forest
 					add(armors.ARCBANG,1).
 					add(consumables.FOXJEWL,4);
 			this.tailType = TAIL_TYPE_FOX;
-			this.str += 7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1460;
 			checkMonster();
 		}
 

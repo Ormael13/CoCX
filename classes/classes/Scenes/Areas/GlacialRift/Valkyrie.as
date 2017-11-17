@@ -182,12 +182,6 @@ package classes.Scenes.Areas.GlacialRift
 			this.special2 = shieldBash;
 			this.special3 = aerialRave;
 			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);
-			this.str += 43 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 5560;
 			checkMonster();			
 		}
 		

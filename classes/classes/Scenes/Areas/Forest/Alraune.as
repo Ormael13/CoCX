@@ -188,12 +188,6 @@ package classes.Scenes.Areas.Forest
 			this.createPerk(PerkLib.EnemyPlantType, 0, 0, 0, 0);
 			this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
 			createStatusEffect(StatusEffects.Level,4,0,0,0);
-			this.str += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1680;
 			checkMonster();
 		}
 		

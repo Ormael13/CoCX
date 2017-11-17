@@ -80,12 +80,6 @@ package classes.Scenes.NPCs
 			//this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			//this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			this.str += 75 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 54 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 9960;
 			checkMonster();
 		}
 		

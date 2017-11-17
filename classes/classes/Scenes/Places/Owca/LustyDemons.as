@@ -99,12 +99,6 @@ package classes.Scenes.Places.Owca
 					add(consumables.IMPFOOD, 1);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			createStatusEffect(StatusEffects.Vapula,0,0,0,0);
-			this.str += 54 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 3780;
 			checkMonster();
 		}
 	}

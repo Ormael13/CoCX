@@ -152,12 +152,6 @@ package classes.Scenes.Dungeons.HelDungeon
 			this.createPerk(PerkLib.MindOverBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
-			this.str += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 6120;
 			checkMonster();
 		}
 		

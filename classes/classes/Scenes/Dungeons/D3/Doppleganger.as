@@ -278,12 +278,6 @@ package classes.Scenes.Dungeons.D3
 			this.pronoun2 = "[him]";
 			this.pronoun3 = "[his]";
 			this.drop = NO_DROP;
-			this.str += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1000;
 			checkMonster();
 		}
 		

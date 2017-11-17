@@ -195,12 +195,6 @@ package classes.Scenes.NPCs
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Berzerker, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Lustzerker, 0, 0, 0, 0);
-			this.str += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 6360;
 			checkMonster();
 		}
 		

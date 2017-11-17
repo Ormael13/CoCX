@@ -259,12 +259,6 @@ package classes.Scenes.Monsters
 					add(weapons.SCIMITR, 1).
 					add(armors.BEEARMR, 1);
 			this.wingType = WING_TYPE_IMP;
-			this.str += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 17 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 2550;
 			checkMonster();
 		}
 		

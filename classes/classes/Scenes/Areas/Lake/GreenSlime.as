@@ -93,12 +93,6 @@
 			this.special2 = lustAttack;
 			this.special3 = lustAttack;
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
-			this.str += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 240;
 			checkMonster();
 		}
 

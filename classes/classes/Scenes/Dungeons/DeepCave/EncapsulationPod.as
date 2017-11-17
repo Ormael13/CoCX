@@ -234,12 +234,6 @@
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyPlantType, 0, 0, 0, 0);
-			this.str += 54 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1740;
 			checkMonster();
 		}
 

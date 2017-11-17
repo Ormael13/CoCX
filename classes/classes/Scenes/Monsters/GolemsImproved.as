@@ -77,12 +77,6 @@ package classes.Scenes.Monsters
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);
-			this.str += 78 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 9300;
 			checkMonster();
 		}
 		

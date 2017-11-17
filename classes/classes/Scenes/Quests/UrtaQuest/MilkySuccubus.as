@@ -133,12 +133,6 @@ package classes.Scenes.Quests.UrtaQuest
 			this.special2 = seduceAttack;
 			this.special3 = whipAttack;
 			this.drop = NO_DROP;
-			this.str += 39 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 54 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 8160;
 			checkMonster();
 		}
 

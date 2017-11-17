@@ -88,12 +88,6 @@ package classes.Scenes.Areas.VolcanicCrag
 			this.special1 = tailWhip;
 			this.special2 = tease;
 			//this.special3 = aerialRave;
-			this.str += 54 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 39 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 34 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 6680;
 			checkMonster();
 		}
 		

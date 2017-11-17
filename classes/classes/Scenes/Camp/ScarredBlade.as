@@ -43,11 +43,6 @@ package classes.Scenes.Camp
 			this.level = 17;
 			this.gems = 0;
 			this.drop = new WeightedDrop(weapons.B_SCARB, 1);
-			this.str += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.newgamebonusHP = 1220;
 			checkMonster();
 		}
 		

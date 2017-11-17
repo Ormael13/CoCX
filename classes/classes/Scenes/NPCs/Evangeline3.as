@@ -230,12 +230,6 @@ package classes.Scenes.NPCs
 				this.lustVuln = .7;
 				this.additionalXP += 70;
 				this.level = 28;//succubus TF effects
-				this.str += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 1560;//dodane this.str/tou/spe/inte/lib a nastepnie pomnożone przez 30
 				this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 13) {
@@ -258,12 +252,6 @@ package classes.Scenes.NPCs
 				this.lustVuln = .7;
 				this.additionalXP += 75;
 				this.level = 30;
-				this.str += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 2160;//dodane this.str/tou/spe/inte/lib a nastepnie pomnożone przez 40
 				this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);//pewnie perk dla demonów albo odzyskała jego efekt kiedy użyła succubus milk 2 lvl wcześniej a tu coś innego dać... ^^
 			}
@@ -287,12 +275,6 @@ package classes.Scenes.NPCs
 				this.lustVuln = .65;
 				this.additionalXP += 85;
 				this.level = 34;//kitsune TF effects
-				this.str += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 2160;//dodane this.str/tou/spe/inte/lib a nastepnie pomnożone przez 40
 				this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
@@ -318,12 +300,6 @@ package classes.Scenes.NPCs
 				this.lustVuln = .65;
 				this.additionalXP += 90;
 				this.level = 36;
-				this.str += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 2160;//dodane this.str/tou/spe/inte/lib a nastepnie pomnożone przez 40
 				this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
@@ -350,12 +326,6 @@ package classes.Scenes.NPCs
 				this.lustVuln = .6;
 				this.additionalXP += 100;
 				this.level = 40;//dragoness TF effects
-				this.str += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 2700;//dodane this.str/tou/spe/inte/lib a nastepnie pomnożone przez 50
 				this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
@@ -384,12 +354,6 @@ package classes.Scenes.NPCs
 				this.lustVuln = .6;//im bedziej poteżna bedzie tym bliżej 0 powinno być czyli trudniej ją lustem pobijać ^^
 				this.additionalXP += 105;
 				this.level = 42;//nastepny lvl to xx w Evangeline 4 zamieścić etapy zmiany obejmujące inne rasy jak mantis/salamander a w Evangeline 5 awasowanie jako bogini (max do lvl 200) ^^
-				this.str += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 2700;//dodane this.str/tou/spe/inte/lib a nastepnie pomnożone przez 50
 				this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);

@@ -50,12 +50,6 @@ package classes.Scenes.Places.Prison
 			this.drop = NO_DROP;
 			this.special1 = lustMagicAttack;
 			this.wingType = WING_TYPE_IMP;
-			this.str += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 360;
 			checkMonster();
 		}
 		

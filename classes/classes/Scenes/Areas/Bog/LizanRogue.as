@@ -126,12 +126,6 @@ import classes.internals.*;
 			this.special1 = chooseBlowpipe;
 			this.special2 = wingstickThrow;
 			this.special3 = tongueAttack;
-			this.str += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 54 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 6600;
 			checkMonster();
 		}
 		

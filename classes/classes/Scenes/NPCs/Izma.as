@@ -177,12 +177,6 @@ package classes.Scenes.NPCs
 			this.gems = rand(15) + 10;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			this.str += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 31 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 4140;
 			checkMonster();
 		}
 		

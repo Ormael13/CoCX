@@ -346,11 +346,6 @@ package classes.Scenes.NPCs
 				this.bonusHP = 30;
 				this.bonusLust = 5;
 				this.additionalXP += 5;
-				this.str += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.newgamebonusHP = 150;
 				this.level = 2;
 				this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
 			}
@@ -366,11 +361,6 @@ package classes.Scenes.NPCs
 				this.bonusLust = 10;
 				this.additionalXP += 10;
 				this.level = 4;
-				this.str += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.newgamebonusHP = 220;
 				this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
 				this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
 			}
@@ -386,11 +376,6 @@ package classes.Scenes.NPCs
 				this.bonusLust = 15;
 				this.additionalXP += 15;
 				this.level = 6;
-				this.str += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.newgamebonusHP = 350;
 				this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
 				this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
 				this.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
@@ -407,11 +392,6 @@ package classes.Scenes.NPCs
 				this.bonusLust = 20;
 				this.additionalXP += 20;
 				this.level = 8;
-				this.str += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.newgamebonusHP = 390;
 				this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
 				this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
 				this.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
@@ -429,11 +409,6 @@ package classes.Scenes.NPCs
 				this.bonusLust = 25;
 				this.additionalXP += 25;
 				this.level = 10;
-				this.str += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.newgamebonusHP = 820;
 				this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
 				this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
 				this.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
@@ -452,11 +427,6 @@ package classes.Scenes.NPCs
 				this.bonusLust = 30;
 				this.additionalXP += 30;
 				this.level = 12;
-				this.str += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.newgamebonusHP = 860;
 				this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
 				this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
 				this.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);

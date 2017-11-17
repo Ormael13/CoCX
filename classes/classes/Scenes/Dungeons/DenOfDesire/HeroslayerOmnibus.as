@@ -188,12 +188,6 @@ package classes.Scenes.Dungeons.DenOfDesire
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
-			this.str += 31 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 6760;
 			checkMonster();
 		}
 	}

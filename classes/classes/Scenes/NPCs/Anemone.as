@@ -86,12 +86,6 @@ import classes.internals.WeightedDrop;
 			this.level = 12;
 			this.gems = rand(20) + 20;
 			this.drop = new WeightedDrop(consumables.DRYTENT, 1);
-			this.str += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1000;
 			checkMonster();
 		}
 		

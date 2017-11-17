@@ -68,12 +68,6 @@ package classes.Scenes.Monsters
 			this.drop = new WeightedDrop().
 					add(weaponsrange.BOWLIGH,1).
 					add(consumables.ELFEARS,4);
-			this.str += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 72 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 96 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 52 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 32 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 18000;
 			checkMonster();
 		}
 		

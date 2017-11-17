@@ -42,12 +42,6 @@ package classes.Scenes.Areas.HighMountains
 			this.gems = 50 + rand(50);
 			this.additionalXP = 150;
 			this.drop = new WeightedDrop(consumables.ONISAKE, 1);
-			this.str += 72 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 7560;
 			checkMonster();
 		}
 

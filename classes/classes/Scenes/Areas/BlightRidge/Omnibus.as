@@ -82,12 +82,6 @@ package classes.Scenes.Areas.BlightRidge
 			this.special2 = seduceAttack;
 			this.special3 = whipAttack;
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
-			this.str += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 34 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 5610;
 			checkMonster();
 		}
 	}

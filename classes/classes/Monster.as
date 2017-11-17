@@ -38,6 +38,9 @@
 		{
 			return game.player;
 		}
+        public function newGamePlusMod():int {
+            return player.newGamePlusMod();
+        }
 		protected final function outputText(text:String,clear:Boolean=false):void{
 			if (clear) game.clearOutputTextOnly();
 			game.outputText(text);
@@ -101,7 +104,14 @@
 		public var bonusInte:Number = 0;
 		public var bonusWis:Number = 0;
 		public var bonusLib:Number = 0;
-		public var newgamebonusHP:Number = 0;
+		protected var bonusAscStr:Number = 0;
+		protected var bonusAscTou:Number = 0;
+		protected var bonusAscSpe:Number = 0;
+		protected var bonusAscInt:Number = 0;
+		protected var bonusAscWis:Number = 0;
+		protected var bonusAscLib:Number = 0;
+		protected var bonusAscSen:Number = 0;
+		protected var bonusAscMaxHP:Number = 0;
 		private var _long:String = "<b>You have encountered an unitialized  Please report this as a bug</b>.";
 		public function get long():String
 		{
@@ -193,32 +203,32 @@
 			if (this.tou >= 901) temp += (this.tou*38);
 			if (this.tou >= 951) temp += (this.tou*40);
 			//Apply NG+, NG++, NG+++, etc.
-			temp += this.newgamebonusHP * player.newGamePlusMod();
+			temp += this.bonusAscMaxHP * newGamePlusMod();
 			//Apply perks
-			if (findPerk(PerkLib.RefinedBodyI) >= 0) temp += (50 * (1 + player.newGamePlusMod()));
-			if (findPerk(PerkLib.TankI) >= 0) temp += ((this.tou*3) * (1 + player.newGamePlusMod()));
-			if (findPerk(PerkLib.GoliathI) >= 0) temp += ((this.str*2) * (1 + player.newGamePlusMod()));
-			if (findPerk(PerkLib.CheetahI) >= 0) temp += (this.spe * (1 + player.newGamePlusMod()));
+			if (findPerk(PerkLib.RefinedBodyI) >= 0) temp += (50 * (1 + newGamePlusMod()));
+			if (findPerk(PerkLib.TankI) >= 0) temp += ((this.tou*3) * (1 + newGamePlusMod()));
+			if (findPerk(PerkLib.GoliathI) >= 0) temp += ((this.str*2) * (1 + newGamePlusMod()));
+			if (findPerk(PerkLib.CheetahI) >= 0) temp += (this.spe * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.JobGuardian) >= 0) temp += 30;
 			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) temp += 150;
-			if (findPerk(PerkLib.BodyCultivator) >= 0) temp += (25 * (1 + player.newGamePlusMod()));
+			if (findPerk(PerkLib.BodyCultivator) >= 0) temp += (25 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.FleshBodyApprenticeStage) >= 0) {
-				if (findPerk(PerkLib.SoulApprentice) >= 0) temp += (50 * (1 + player.newGamePlusMod()));
-				if (findPerk(PerkLib.SoulPersonage) >= 0) temp += (50 * (1 + player.newGamePlusMod()));
-				if (findPerk(PerkLib.SoulWarrior) >= 0) temp += (50 * (1 + player.newGamePlusMod()));
+				if (findPerk(PerkLib.SoulApprentice) >= 0) temp += (50 * (1 + newGamePlusMod()));
+				if (findPerk(PerkLib.SoulPersonage) >= 0) temp += (50 * (1 + newGamePlusMod()));
+				if (findPerk(PerkLib.SoulWarrior) >= 0) temp += (50 * (1 + newGamePlusMod()));
 			}
 			if (findPerk(PerkLib.FleshBodyWarriorStage) >= 0) {
-				if (findPerk(PerkLib.SoulSprite) >= 0) temp += (75 * (1 + player.newGamePlusMod()));
-				if (findPerk(PerkLib.SoulScholar) >= 0) temp += (75 * (1 + player.newGamePlusMod()));
-				if (findPerk(PerkLib.SoulElder) >= 0) temp += (75 * (1 + player.newGamePlusMod()));
+				if (findPerk(PerkLib.SoulSprite) >= 0) temp += (75 * (1 + newGamePlusMod()));
+				if (findPerk(PerkLib.SoulScholar) >= 0) temp += (75 * (1 + newGamePlusMod()));
+				if (findPerk(PerkLib.SoulElder) >= 0) temp += (75 * (1 + newGamePlusMod()));
 			}
 			if (findPerk(PerkLib.FleshBodyElderStage) >= 0) {
-				if (findPerk(PerkLib.SoulExalt) >= 0) temp += (100 * (1 + player.newGamePlusMod()));
-				if (findPerk(PerkLib.SoulOverlord) >= 0) temp += (100 * (1 + player.newGamePlusMod()));
-				if (findPerk(PerkLib.SoulTyrant) >= 0) temp += (100 * (1 + player.newGamePlusMod()));
+				if (findPerk(PerkLib.SoulExalt) >= 0) temp += (100 * (1 + newGamePlusMod()));
+				if (findPerk(PerkLib.SoulOverlord) >= 0) temp += (100 * (1 + newGamePlusMod()));
+				if (findPerk(PerkLib.SoulTyrant) >= 0) temp += (100 * (1 + newGamePlusMod()));
 			}
-			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) temp += (150 * (1 + player.newGamePlusMod()));
-			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) temp += (225 * (1 + player.newGamePlusMod()));
+			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) temp += (150 * (1 + newGamePlusMod()));
+			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) temp += (225 * (1 + newGamePlusMod()));
 			return temp;
 		}
 		protected override function maxHP_mult():Number {
@@ -264,15 +274,15 @@
 			if (findPerk(PerkLib.EpicSelfControl) >= 0) temp += 2250;
 			if (findPerk(PerkLib.HalfStepToMythicalSelfControl) >= 0) temp += 3500;
 			if (findPerk(PerkLib.MythicalSelfControl) >= 0) temp += 5000;
-			if (findPerk(PerkLib.InhumanDesireI) >= 0) temp += (20 * (1 + player.newGamePlusMod()));
-			if (findPerk(PerkLib.DemonicDesireI) >= 0) temp += Math.round(this.lib * (1 + player.newGamePlusMod()));
+			if (findPerk(PerkLib.InhumanDesireI) >= 0) temp += (20 * (1 + newGamePlusMod()));
+			if (findPerk(PerkLib.DemonicDesireI) >= 0) temp += Math.round(this.lib * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.JobCourtesan) >= 0) temp += 20;
 			if (findPerk(PerkLib.JobSeducer) >= 0) temp += 10;
 			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) temp += 50;
-			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) temp += (50 * (1 + player.newGamePlusMod()));
-			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) temp += (75 * (1 + player.newGamePlusMod()));
+			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) temp += (50 * (1 + newGamePlusMod()));
+			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) temp += (75 * (1 + newGamePlusMod()));
 			//Apply NG+, NG++, NG+++, etc.
-			temp += this.bonusLust * player.newGamePlusMod();
+			temp += this.bonusLust * newGamePlusMod();
 			return temp;
 		}
 		
@@ -296,16 +306,16 @@
 			if (findPerk(PerkLib.EpicEndurance) >= 0) temp += 4500;
 			if (findPerk(PerkLib.HalfStepToMythicalEndurance) >= 0) temp += 7000;
 			if (findPerk(PerkLib.MythicalEndurance) >= 0) temp += 10000;
-			if (findPerk(PerkLib.ArchersStaminaI) >= 0) temp += Math.round(this.spe * (1 + player.newGamePlusMod()));
-			if (findPerk(PerkLib.NaturesSpringI) >= 0) temp += (20 * (1 + player.newGamePlusMod()));
+			if (findPerk(PerkLib.ArchersStaminaI) >= 0) temp += Math.round(this.spe * (1 + newGamePlusMod()));
+			if (findPerk(PerkLib.NaturesSpringI) >= 0) temp += (20 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.JobHunter) >= 0) temp += 50;
 			if (findPerk(PerkLib.JobRanger) >= 0) temp += 5;
 			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) temp += 100;
 			if (findPerk(PerkLib.PrestigeJobArcaneArcher) >= 0) temp += 600;
 			if (findPerk(PerkLib.PrestigeJobSoulArcher) >= 0) temp += 150;
 			if (findPerk(PerkLib.PrestigeJobSeer) >= 0) temp += 900;
-			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) temp += (100 * (1 + player.newGamePlusMod()));
-			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) temp += (150 * (1 + player.newGamePlusMod()));
+			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) temp += (100 * (1 + newGamePlusMod()));
+			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) temp += (150 * (1 + newGamePlusMod()));
 			return temp;
 		}
 		
@@ -327,7 +337,7 @@
 				if (this.level >= 14) temp += 40;
 				if (this.level >= 16) temp += 40;
 			}
-			if (findPerk(PerkLib.InsightfulResourcesI) >= 0) temp += Math.round((this.wis*5) * (1 + player.newGamePlusMod()));
+			if (findPerk(PerkLib.InsightfulResourcesI) >= 0) temp += Math.round((this.wis*5) * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) temp *= 1.1;
 			return temp;
 		}
@@ -343,7 +353,7 @@
 			if (findPerk(PerkLib.HexaAttack) >= 0) temp += 10;
 			if (findPerk(PerkLib.DoubleAttackLarge) >= 0) temp += 20;
 			if (findPerk(PerkLib.TripleAttackLarge) >= 0) temp += 20;
-			if (findPerk(PerkLib.PrimalFuryI) >= 0) temp += (10 * (1 + player.newGamePlusMod()));
+			if (findPerk(PerkLib.PrimalFuryI) >= 0) temp += (10 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.BasicTranquilness) >= 0) temp += 15;
 			if (findPerk(PerkLib.HalfStepToImprovedTranquilness) >= 0) temp += 25;
 			if (findPerk(PerkLib.ImprovedTranquilness) >= 0) temp += 40;
@@ -394,11 +404,11 @@
 			if (findPerk(PerkLib.EpicSpirituality) >= 0) temp += 6750;
 			if (findPerk(PerkLib.HalfStepToMythicalSpirituality) >= 0) temp += 10500;
 			if (findPerk(PerkLib.MythicalSpirituality) >= 0) temp += 15000;
-			if (findPerk(PerkLib.ManaAffinityI) >= 0) temp += (35 * (1 + player.newGamePlusMod()));
-			if (findPerk(PerkLib.MindOverBodyI) >= 0) temp += Math.round((this.inte * 2) * (1 + player.newGamePlusMod()));
+			if (findPerk(PerkLib.ManaAffinityI) >= 0) temp += (35 * (1 + newGamePlusMod()));
+			if (findPerk(PerkLib.MindOverBodyI) >= 0) temp += Math.round((this.inte * 2) * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.ArcanePoolI) >= 0) {
-				temp += Math.round(this.inte * (1 + player.newGamePlusMod()));
-				temp += Math.round(this.wis * (1 + player.newGamePlusMod()));
+				temp += Math.round(this.inte * (1 + newGamePlusMod()));
+				temp += Math.round(this.wis * (1 + newGamePlusMod()));
 			}
 			if (findPerk(PerkLib.Archmage) >= 0 && inte >= 75) temp += 45;
 			if (findPerk(PerkLib.Channeling) >= 0 && inte >= 60) temp += 30;
@@ -1921,7 +1931,7 @@
 			|| findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.MonsterRegeneration) >= 0 || findPerk(PerkLib.Lifeline) >= 0) && (this.HP < maxHP()) && (this.HP > 0)) {
 				var healingPercent:Number = 0;
 				var temp2:Number = 0;
-				if (findPerk(PerkLib.Regeneration) >= 0) healingPercent += (0.5 * (1 + player.newGamePlusMod()));
+				if (findPerk(PerkLib.Regeneration) >= 0) healingPercent += (0.5 * (1 + newGamePlusMod()));
 				if (findPerk(PerkLib.LizanRegeneration) >= 0) healingPercent += 1.5;
 				if (findPerk(PerkLib.LizanMarrow) >= 0) healingPercent += 0.5;
 				if (findPerk(PerkLib.LizanMarrowEvolved) >= 0) healingPercent += 0.5;
@@ -1932,7 +1942,7 @@
 				if (findPerk(PerkLib.EnemyGodType) >= 0) healingPercent += 5;
 				if (findPerk(PerkLib.MonsterRegeneration) >= 0) healingPercent += perkv1(PerkLib.MonsterRegeneration);
 				temp2 = Math.round(maxHP() * healingPercent / 100);
-				if (findPerk(PerkLib.Lifeline) >= 0) temp2 += (50 * (1 + player.newGamePlusMod()));
+				if (findPerk(PerkLib.Lifeline) >= 0) temp2 += (50 * (1 + newGamePlusMod()));
 				if (this is ChiChi) {
 					outputText("To your surprise, Chi Chi’s wounds start closing! <b>(<font color=\"#008000\">+" + temp2 + "</font>)</b>.\n\n");
 				}
@@ -1995,6 +2005,122 @@
 			}
 			return 8; //This allows different monsters to delay the player by different amounts of time after a combat loss. Normal loss causes an eight hour blackout
 		}
-
+		public function prepareForCombat():void {
+			var bonusStatsAmp:Number = 0.2;
+			if (hasPerk(PerkLib.EzekielBlessing)) {
+				str += (5 * (1 + newGamePlusMod()));
+				tou += (5 * (1 + newGamePlusMod()));
+				spe += (5 * (1 + newGamePlusMod()));
+				inte += (5 * (1 + newGamePlusMod()));
+				lib += (5 * (1 + newGamePlusMod()));
+				sens += (5 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.JobAllRounder)) {
+				str += (10 * (1 + newGamePlusMod()));
+				tou += (10 * (1 + newGamePlusMod()));
+				spe += (10 * (1 + newGamePlusMod()));
+				inte += (10 * (1 + newGamePlusMod()));
+				wis += (10 * (1 + newGamePlusMod()));
+				lib += (6 * (1 + newGamePlusMod()));
+				sens += (6 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.JobBrawler)) str += (10 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.JobCourtesan)) lib += (15 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.JobDefender)) tou += (15 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.JobElementalConjurer)) wis += (5 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.JobEnchanter)) inte += (15 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.JobEromancer)) {
+				inte += (5 * (1 + newGamePlusMod()));
+				lib += (5 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.JobGolemancer)) {
+				inte += (5 * (1 + newGamePlusMod()));
+				wis += (5 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.JobGuardian)) tou += (5 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.JobHunter)) {
+				spe += (10 * (1 + newGamePlusMod()));
+				inte += (5 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.JobKnight)) tou += (10 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.JobMonk)) wis += (15 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.JobRanger)) spe += (5 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.JobSeducer)) lib += (5 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.JobSorcerer)) inte += (5 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.JobSoulCultivator)) wis += (5 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.JobWarlord)) tou += (20 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.JobWarrior)) str += (5 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.PrestigeJobArcaneArcher)) {
+				spe += (40 * (1 + newGamePlusMod()));
+				inte += (40 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.PrestigeJobBerserker)) {
+				str += (60 * (1 + newGamePlusMod()));
+				tou += (20 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.PrestigeJobSeer)) {
+				inte += (60 * (1 + newGamePlusMod()));
+				wis += (20 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.PrestigeJobSoulArcher)) {
+				spe += (40 * (1 + newGamePlusMod()));
+				wis += (40 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.PrestigeJobSoulArtMaster)) {
+				str += (40 * (1 + newGamePlusMod()));
+				wis += (40 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.DeityJobMunchkin)) {
+				str += (25 * (1 + newGamePlusMod()));
+				tou += (25 * (1 + newGamePlusMod()));
+				spe += (25 * (1 + newGamePlusMod()));
+				inte += (25 * (1 + newGamePlusMod()));
+				wis += (25 * (1 + newGamePlusMod()));
+				lib += (15 * (1 + newGamePlusMod()));
+				sens += (15 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) {
+				str += (10 * (1 + newGamePlusMod()));
+				tou += (10 * (1 + newGamePlusMod()));
+				spe += (10 * (1 + newGamePlusMod()));
+				inte += (10 * (1 + newGamePlusMod()));
+				wis += (10 * (1 + newGamePlusMod()));
+				lib += (10 * (1 + newGamePlusMod()));
+				sens += (10 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) {
+				str += (15 * (1 + newGamePlusMod()));
+				tou += (15 * (1 + newGamePlusMod()));
+				spe += (15 * (1 + newGamePlusMod()));
+				inte += (15 * (1 + newGamePlusMod()));
+				wis += (15 * (1 + newGamePlusMod()));
+				lib += (15 * (1 + newGamePlusMod()));
+				sens += (15 * (1 + newGamePlusMod()));
+			}
+			if (level > 25) bonusStatsAmp += 0.1*((int)(level-1)/25);
+			bonusAscStr += bonusStatsAmp * str;
+			bonusAscTou += bonusStatsAmp * tou;
+			bonusAscSpe += bonusStatsAmp * spe;
+			bonusAscInt += bonusStatsAmp * inte;
+			bonusAscWis += bonusStatsAmp * wis;
+			bonusAscLib += bonusStatsAmp * lib;
+			bonusAscSen += bonusStatsAmp * sens;
+			bonusAscStr = Math.round(bonusAscStr);
+			bonusAscTou = Math.round(bonusAscTou);
+			bonusAscSpe = Math.round(bonusAscSpe);
+			bonusAscInt = Math.round(bonusAscInt);
+			bonusAscWis = Math.round(bonusAscWis);
+			bonusAscLib = Math.round(bonusAscLib);
+			bonusAscSen = Math.round(bonusAscSen);
+			this.str += bonusAscStr;
+			this.tou += bonusAscTou;
+			this.spe += bonusAscSpe;
+			this.inte += bonusAscInt;
+			this.wis += bonusAscWis;
+			this.lib += bonusAscLib;
+			this.sens += bonusAscSen;
+			bonusAscMaxHP += bonusAscStr + bonusAscTou + bonusAscSpe + bonusAscInt + bonusAscWis + bonusAscLib + bonusAscSen;
+			if (level > 10) bonusAscMaxHP *= (int)(level / 10 + 1);
+		}
 	}
 }

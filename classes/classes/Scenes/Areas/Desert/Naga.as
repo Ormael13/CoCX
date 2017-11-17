@@ -135,12 +135,6 @@
 			this.special2 = nagaConstrict;
 			this.special3 = nagaTailWhip;
 			this.faceType = FACE_SNAKE_FANGS;
-			this.str += 7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 470;
 			checkMonster();
 		}
 

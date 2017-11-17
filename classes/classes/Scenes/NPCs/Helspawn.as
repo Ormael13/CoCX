@@ -184,12 +184,6 @@ private function calledShot():void {
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
 			if (flags[kFLAGS.HELSPAWN_WEAPON] == "scimitar and shield") this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);
-			this.str += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1100;
 			checkMonster();
 		}
 

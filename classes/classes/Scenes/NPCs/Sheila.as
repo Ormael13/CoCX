@@ -347,12 +347,6 @@ package classes.Scenes.NPCs
 						add(consumables.INCUBID,1/2);
 			}
 			this.tailType = TAIL_TYPE_KANGAROO;
-			this.str += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1280;
 			checkMonster();
 		}
 

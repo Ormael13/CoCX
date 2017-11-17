@@ -151,12 +151,6 @@ package classes.Scenes.NPCs
 				this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 100;
 				this.level = 30;
-				this.str += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 72 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 51 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 51 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 9960;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 1) {
 				initStrTouSpeInte(110, 165, 270, 180);
@@ -165,12 +159,6 @@ package classes.Scenes.NPCs
 				this.armorDef = 12 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 150;
 				this.level = 36;
-				this.str += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 51 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 84 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 54 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 14100;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 2) {
 				initStrTouSpeInte(120, 180, 300, 190);
@@ -179,12 +167,6 @@ package classes.Scenes.NPCs
 				this.armorDef = 14 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 150;
 				this.level = 42;
-				this.str += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 51 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 84 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 54 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 14100;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 3) {
 				initStrTouSpeInte(130, 195, 330, 200);
@@ -193,12 +175,6 @@ package classes.Scenes.NPCs
 				this.armorDef = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 200;
 				this.level = 48;
-				this.str += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 57 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 96 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 57 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 69 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 18900;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 4) {
 				initStrTouSpeInte(140, 210, 360, 210);
@@ -207,12 +183,6 @@ package classes.Scenes.NPCs
 				this.armorDef = 18 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 200;
 				this.level = 54;
-				this.str += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 57 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 96 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 57 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 69 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 18900;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 5) {
 				initStrTouSpeInte(150, 225, 390, 220);
@@ -221,12 +191,6 @@ package classes.Scenes.NPCs
 				this.armorDef = 20 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 250;
 				this.level = 60;
-				this.str += 52 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 84 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 144 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 80 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 104 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 32480;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 6) {
 				initStrTouSpeInte(160, 240, 420, 230);
@@ -235,12 +199,6 @@ package classes.Scenes.NPCs
 				this.armorDef = 22 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 250;
 				this.level = 66;
-				this.str += 52 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 84 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 144 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 80 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 104 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 32480;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 7) {
 				initStrTouSpeInte(170, 255, 450, 240);
@@ -249,12 +207,6 @@ package classes.Scenes.NPCs
 				this.armorDef = 24 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusHP = 250;
 				this.level = 72;
-				this.str += 52 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 84 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 144 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 80 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 104 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 32480;
 			}
 			createVagina(true,VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_TIGHT);
 			this.createStatusEffect(StatusEffects.BonusVCapacity,60,0,0,0);

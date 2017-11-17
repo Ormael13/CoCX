@@ -331,11 +331,6 @@ package classes.Scenes.NPCs
 				this.lust = 40;
 				this.additionalXP += 35;
 				this.level = 14;
-				this.str += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.newgamebonusHP = 700;//dodane this.str/tou/spe/inte/lib a nastepnie pomnożone przez 20
 				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			}//nie gotowy etap
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 8) {
@@ -357,12 +352,7 @@ package classes.Scenes.NPCs
 				this.lustVuln = .8;
 				this.lust = 70;
 				this.additionalXP += 40;
-				this.level = 16;//dodane this.str/tou/spe/inte/lib a nastepnie pomnożone przez 20
-				this.str += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.newgamebonusHP = 860;
+				this.level = 16;
 				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 				this.createPerk(PerkLib.Channeling, 0, 0, 0, 0);
 			}//nie gotowy etap
@@ -386,11 +376,6 @@ package classes.Scenes.NPCs
 				this.lust = 70;
 				this.additionalXP += 45;
 				this.level = 18;
-				this.str += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.newgamebonusHP = 860;//dodane this.str/tou/spe/inte/lib a nastepnie pomnożone przez 20
 				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 				this.createPerk(PerkLib.Channeling, 0, 0, 0, 0);
 				this.createPerk(PerkLib.JobEnchanter, 0, 0, 0, 0);
@@ -415,11 +400,6 @@ package classes.Scenes.NPCs
 				this.lustVuln = .75;//im bedziej poteżna bedzie tym bliżej 0 powinno być czyli trudniej ją lustem pobijać ^^
 				this.additionalXP += 55;
 				this.level = 22;
-				this.str += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.newgamebonusHP = 1380;//dodane this.str/tou/spe/inte/lib a nastepnie pomnożone przez 30
 				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 				this.createPerk(PerkLib.Channeling, 0, 0, 0, 0);
 				this.createPerk(PerkLib.JobEnchanter, 0, 0, 0, 0);
@@ -447,11 +427,6 @@ package classes.Scenes.NPCs
 				this.additionalXP += 60;
 				this.level = 24;//nastepny lvl to 28 i dać kilka kolejnych etapów zmiany dot. bazowych mutacji: cow, succubus, kitsune i dragoness. zawsze wpierw danej rasy zmiany i +4 lvl w gór a potem +2 lvl i inne zmiany/dostosowania do nowej formy ;)
 				//w Evangeline 4 zamieścić etapy zmiany obejmujące inne rasy jak mantis/salamander a w Evangeline 5 awasowanie jako bogini (max do lvl 200) ^^
-				this.str += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.newgamebonusHP = 1440;//dodane this.str/tou/spe/inte/lib a nastepnie pomnożone przez 30
 				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 				this.createPerk(PerkLib.Channeling, 0, 0, 0, 0);
 				this.createPerk(PerkLib.JobEnchanter, 0, 0, 0, 0);

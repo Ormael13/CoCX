@@ -150,12 +150,6 @@ package classes.Scenes.Areas.Plains
 			this.drop = new WeightedDrop().add(weapons.SCIMITR, 1);
 			this.gems = 300;
 			this.special1 = scimitarSpecial;
-			this.str += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 5320;
 			checkMonster();
 		}
 	}

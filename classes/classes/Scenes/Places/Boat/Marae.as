@@ -148,12 +148,6 @@ package classes.Scenes.Places.Boat
 				this.weaponName = "tentacles";
 				this.weaponVerb="slap";
 				this.weaponAttack = 100 + (21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.str += 150 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 150 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 85 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 90 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 75 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];//na lvl 75-99 +50% statów a potem +60/70% co każde przedział 25 lvl-i
-				this.newgamebonusHP = 55000;//dodane this.str/tou/spe/inte/lib a nastepnie pomnożone przez 100 (dla lvl 90-99, dla każdego kolejnego przedziału 10 lvl kolejne 10 x wiecej)
 			}
 			else {
 				initStrTouSpeInte(370, 370, 220, 260);
@@ -161,12 +155,6 @@ package classes.Scenes.Places.Boat
 				this.weaponName = "fists";
 				this.weaponVerb="wrathful punch";
 				this.weaponAttack = 126 + (26 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.str += 185 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 185 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 110 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 130 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];//na lvl 75-99 +50% statów a potem +60/70% co każde przedział 25 lvl-i
-				this.newgamebonusHP = 62500;//dodane this.str/tou/spe/inte/lib a nastepnie pomnożone przez 100 (dla lvl 90-99, dla każdego kolejnego przedziału 10 lvl kolejne 10 x wiecej)
 			}
 			this.weaponPerk = "";
 			this.weaponValue = 70 + (15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);

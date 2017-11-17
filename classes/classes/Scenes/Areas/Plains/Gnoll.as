@@ -391,12 +391,6 @@ package classes.Scenes.Areas.Plains
 					add(consumables.REDUCTO,1/5).
 					add(consumables.SUCMILK,1/2).
 					elseDrop(consumables.BLACK_D);
-			this.str += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1440;
 			checkMonster();
 		}
 		

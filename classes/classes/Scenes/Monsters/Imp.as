@@ -163,12 +163,6 @@
 					add(consumables.IMPFOOD,4);
 			this.special1 = lustMagicAttack1;
 			this.wingType = WING_TYPE_IMP;
-			this.str += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 105;
 			checkMonster();
 		}
 

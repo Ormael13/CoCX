@@ -132,12 +132,6 @@
 			this.special1 = harpyUberCharge;
 			this.special2 = harpyTease;
 			this.createStatusEffect(StatusEffects.Flying,50,0,0,0);
-			this.str += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 2400;
 			checkMonster();
 		}
 

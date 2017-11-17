@@ -45,12 +45,6 @@ package classes.Scenes.Places.Ingnam
 			this.drop = new WeightedDrop().add(weapons.DAGGER,1)
 					.add(armors.LEATHRA,1)
 					.add(null,8);
-			this.str += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 80;
 			checkMonster();
 		}
 		

@@ -96,12 +96,6 @@ package classes.Scenes.Areas.Ocean
 			this.special1 = sharkTease;
 			this.special2 = sharkBiteAttack;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			this.str += 100 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 68 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 82 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 44 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 20520;
 			checkMonster();
 		}
 		

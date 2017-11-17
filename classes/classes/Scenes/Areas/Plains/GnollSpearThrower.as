@@ -368,12 +368,6 @@ import classes.internals.*;
 			this.special1 = hyenaJavelinAttack;
 			this.special2 = hyenaSnapKicku;
 			this.special3 = hyenaArousalAttack;
-			this.str += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1480;
 			checkMonster();
 		}
 	}

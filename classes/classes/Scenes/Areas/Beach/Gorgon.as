@@ -175,12 +175,6 @@ package classes.Scenes.Areas.Beach
 					add(consumables.REPTLUM,5).
 					add(consumables.GORGOIL,4);
 			this.faceType = FACE_SNAKE_FANGS;
-			this.str += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 2820;
 			checkMonster();
 		}
 		

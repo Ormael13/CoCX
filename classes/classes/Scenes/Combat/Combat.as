@@ -4663,6 +4663,7 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 	//Flag the game as being "in combat"
 	inCombat = true;
 	monster = monster_;
+	monster.prepareForCombat();
 	if(monster.short == "Ember") {
 		monster.pronoun1 = kGAMECLASS.emberScene.emberMF("he","she");
 		monster.pronoun2 = kGAMECLASS.emberScene.emberMF("him","her");
@@ -4678,94 +4679,6 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 		if (player.findPerk(PerkLib.GreyMage) < 0 && player.lust < 50) player.lust = 50;
 	}
 	magic.applyAutocast();
-	//Bonus stats from monster perks
-	if (monster.findPerk(PerkLib.EzekielBlessing) >= 0) {
-		monster.str += (5 * (1 + player.newGamePlusMod()));
-		monster.tou += (5 * (1 + player.newGamePlusMod()));
-		monster.spe += (5 * (1 + player.newGamePlusMod()));
-		monster.inte += (5 * (1 + player.newGamePlusMod()));
-		monster.lib += (5 * (1 + player.newGamePlusMod()));
-	}
-	if (monster.findPerk(PerkLib.JobAllRounder) >= 0) {
-		monster.str += (10 * (1 + player.newGamePlusMod()));
-		monster.tou += (10 * (1 + player.newGamePlusMod()));
-		monster.spe += (10 * (1 + player.newGamePlusMod()));
-		monster.inte += (10 * (1 + player.newGamePlusMod()));
-		monster.wis += (10 * (1 + player.newGamePlusMod()));
-		monster.lib += (6 * (1 + player.newGamePlusMod()));
-		monster.sens += (6 * (1 + player.newGamePlusMod()));
-	}
-	if (monster.findPerk(PerkLib.JobBrawler) >= 0) monster.str += (10 * (1 + player.newGamePlusMod()));
-	if (monster.findPerk(PerkLib.JobCourtesan) >= 0) monster.lib += (15 * (1 + player.newGamePlusMod()));
-	if (monster.findPerk(PerkLib.JobDefender) >= 0) monster.tou += (15 * (1 + player.newGamePlusMod()));
-	if (monster.findPerk(PerkLib.JobElementalConjurer) >= 0) monster.wis += (5 * (1 + player.newGamePlusMod()));
-	if (monster.findPerk(PerkLib.JobEnchanter) >= 0) monster.inte += (15 * (1 + player.newGamePlusMod()));
-	if (monster.findPerk(PerkLib.JobEromancer) >= 0) {
-		monster.inte += (5 * (1 + player.newGamePlusMod()));
-		monster.lib += (5 * (1 + player.newGamePlusMod()));
-	}
-	if (monster.findPerk(PerkLib.JobGolemancer) >= 0) {
-		monster.inte += (5 * (1 + player.newGamePlusMod()));
-		monster.wis += (5 * (1 + player.newGamePlusMod()));
-	}
-	if (monster.findPerk(PerkLib.JobGuardian) >= 0) monster.tou += (5 * (1 + player.newGamePlusMod()));
-	if (monster.findPerk(PerkLib.JobHunter) >= 0) {
-		monster.spe += (10 * (1 + player.newGamePlusMod()));
-		monster.inte += (5 * (1 + player.newGamePlusMod()));
-	}
-	if (monster.findPerk(PerkLib.JobKnight) >= 0) monster.tou += (10 * (1 + player.newGamePlusMod()));
-	if (monster.findPerk(PerkLib.JobMonk) >= 0) monster.wis += (15 * (1 + player.newGamePlusMod()));
-	if (monster.findPerk(PerkLib.JobRanger) >= 0) monster.spe += (5 * (1 + player.newGamePlusMod()));
-	if (monster.findPerk(PerkLib.JobSeducer) >= 0) monster.lib += (5 * (1 + player.newGamePlusMod()));
-	if (monster.findPerk(PerkLib.JobSorcerer) >= 0) monster.inte += (5 * (1 + player.newGamePlusMod()));
-	if (monster.findPerk(PerkLib.JobSoulCultivator) >= 0) monster.wis += (5 * (1 + player.newGamePlusMod()));
-	if (monster.findPerk(PerkLib.JobWarlord) >= 0) monster.tou += (20 * (1 + player.newGamePlusMod()));
-	if (monster.findPerk(PerkLib.JobWarrior) >= 0) monster.str += (5 * (1 + player.newGamePlusMod()));
-	if (monster.findPerk(PerkLib.PrestigeJobArcaneArcher) >= 0) {
-		monster.spe += (40 * (1 + player.newGamePlusMod()));
-		monster.inte += (40 * (1 + player.newGamePlusMod()));
-	}
-	if (monster.findPerk(PerkLib.PrestigeJobBerserker) >= 0) {
-		monster.str += (60 * (1 + player.newGamePlusMod()));
-		monster.tou += (20 * (1 + player.newGamePlusMod()));
-	}
-	if (monster.findPerk(PerkLib.PrestigeJobSeer) >= 0) {
-		monster.inte += (60 * (1 + player.newGamePlusMod()));
-		monster.wis += (20 * (1 + player.newGamePlusMod()));
-	}
-	if (monster.findPerk(PerkLib.PrestigeJobSoulArcher) >= 0) {
-		monster.spe += (40 * (1 + player.newGamePlusMod()));
-		monster.wis += (40 * (1 + player.newGamePlusMod()));
-	}
-	if (monster.findPerk(PerkLib.PrestigeJobSoulArtMaster) >= 0) {
-		monster.str += (40 * (1 + player.newGamePlusMod()));
-		monster.wis += (40 * (1 + player.newGamePlusMod()));
-	}
-	if (monster.findPerk(PerkLib.DeityJobMunchkin) >= 0) {
-		monster.str += (25 * (1 + player.newGamePlusMod()));
-		monster.tou += (25 * (1 + player.newGamePlusMod()));
-		monster.spe += (25 * (1 + player.newGamePlusMod()));
-		monster.inte += (25 * (1 + player.newGamePlusMod()));
-		monster.wis += (25 * (1 + player.newGamePlusMod()));
-		monster.lib += (15 * (1 + player.newGamePlusMod()));
-		monster.sens += (15 * (1 + player.newGamePlusMod()));
-	}
-	if (monster.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) {
-		monster.str += (10 * (1 + player.newGamePlusMod()));
-		monster.tou += (10 * (1 + player.newGamePlusMod()));
-		monster.spe += (10 * (1 + player.newGamePlusMod()));
-		monster.inte += (10 * (1 + player.newGamePlusMod()));
-		monster.wis += (10 * (1 + player.newGamePlusMod()));
-		monster.lib += (10 * (1 + player.newGamePlusMod()));
-	}
-	if (monster.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) {
-		monster.str += (15 * (1 + player.newGamePlusMod()));
-		monster.tou += (15 * (1 + player.newGamePlusMod()));
-		monster.spe += (15 * (1 + player.newGamePlusMod()));
-		monster.inte += (15 * (1 + player.newGamePlusMod()));
-		monster.wis += (15 * (1 + player.newGamePlusMod()));
-		monster.lib += (15 * (1 + player.newGamePlusMod()));
-	}
 	//Adjust lust vulnerability in New Game+.
 	if (player.newGamePlusMod() == 1) monster.lustVuln *= 0.9;
 	else if (player.newGamePlusMod() == 2) monster.lustVuln *= 0.8;
