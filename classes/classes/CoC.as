@@ -569,7 +569,7 @@ the text from being too boring.
 			//{ region PlayerVariables
 
 			//The Player object, used everywhere
-			player = new Player();
+			//player = new Player();
 			model.player = player;
 			player2 = new Player();
 			playerEvent = new PlayerEvents();
