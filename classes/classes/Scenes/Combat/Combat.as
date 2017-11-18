@@ -2668,10 +2668,10 @@ public function attack():void {
 	}
 	if (player.weapon == weapons.EBNYBLD || player.weapon == weapons.BLETTER) {
 		if (monster.cor >= 66) damage = Math.round(damage * 1.0);
-		else if (monster.cor >= 50) dmg = Math.round(damage * 1.1);
-		else if (monster.cor >= 25) dmg = Math.round(damage * 1.2);
-		else if (monster.cor >= 10) dmg = Math.round(damage * 1.3);
-		else dmg = Math.round(damage * 1.4);
+		else if (monster.cor >= 50) damage = Math.round(damage * 1.1);
+		else if (monster.cor >= 25) damage = Math.round(damage * 1.2);
+		else if (monster.cor >= 10) damage = Math.round(damage * 1.3);
+		else damage = Math.round(damage * 1.4);
 	}
 	//Determine if critical hit!
 	var crit:Boolean = false;

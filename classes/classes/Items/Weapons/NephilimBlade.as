@@ -1,7 +1,9 @@
 package classes.Items.Weapons 
 {
-	import classes.PerkLib;
-	public class NephilimBlade extends WeaponWithPerk
+	import classes.Items.Weapon;
+	import classes.Player;
+
+	public class NephilimBlade extends Weapon
 	{
 		
 		public function NephilimBlade() 

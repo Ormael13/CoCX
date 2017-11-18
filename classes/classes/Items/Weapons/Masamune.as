@@ -1,7 +1,9 @@
 package classes.Items.Weapons 
 {
-	import classes.PerkLib;
-	public class Masamune extends WeaponWithPerk
+	import classes.Items.Weapon;
+	import classes.Player;
+
+	public class Masamune extends Weapon
 	{
 		
 		public function Masamune() 

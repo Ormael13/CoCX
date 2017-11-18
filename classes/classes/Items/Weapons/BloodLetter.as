@@ -1,7 +1,9 @@
 package classes.Items.Weapons 
 {
-	import classes.PerkLib;
-	public class BloodLetter extends WeaponWithPerk
+	import classes.Items.Weapon;
+	import classes.Player;
+
+	public class BloodLetter extends Weapon
 	{
 		
 		public function BloodLetter() 

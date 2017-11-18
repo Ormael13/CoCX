@@ -1,7 +1,9 @@
 package classes.Items.Weapons 
 {
-	import classes.PerkLib;
-	public class EbonyDestroyer extends WeaponWithPerk
+	import classes.Items.Weapon;
+	import classes.Player;
+
+	public class EbonyDestroyer extends Weapon
 	{
 		public function EbonyDestroyer() 
 		{
