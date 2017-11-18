@@ -369,7 +369,7 @@ package classes
 			return 100;
 		}
 		public function maxSoulforce():Number {
-			return 50;
+			return 0;
 		}
 		public function maxMana():Number {
 			return 100;
@@ -2517,7 +2517,7 @@ package classes
 		//Wrath Weapons
 		public function isLowGradeWrathWeapon():Boolean
 		{
-			if (game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.OTETSU || game.player.weapon == game.weapons.CNTWHIP)
+			if (game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.NPHBLDE || game.player.weapon == game.weapons.EBNYBLD || game.player.weapon == game.weapons.OTETSU || game.player.weapon == game.weapons.CNTWHIP)
 				return true;
 			return false;
 		}

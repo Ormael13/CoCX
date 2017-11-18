@@ -1320,6 +1320,9 @@ package classes
 		public static const ScyllaInkGlands:PerkType = mk("Scylla Ink Glands", "Scylla Ink Glands",
 				"Your Scylla Ink Glands increase rate at which your body produce ink and slight boost to your natural strength.",
 				"You choose the 'Scylla Ink Glands' perk, due to repeadly use of ink attack leading to denveloping ink glands!");
+		public static const SecondWind:PerkType = mk("SecondWind", "SecondWind",
+				"Using ... fatigue increase by 5% regeneration in combat for ... turns.",
+				"You choose the 'SecondWind' perk, allowing to once per fight increase for few turns natural regeneration at cost of some fatigue.");
 		public static const Seduction:PerkType = mk("Seduction", "Seduction",
 				"Upgrades your tease attack, making it more effective.",
 				"You choose the 'Seduction' perk, upgrading the 'tease' attack with a more powerful damage and a higher chance of success.");
@@ -1869,6 +1872,7 @@ package classes
 		public static const EnemyGodType:PerkType = mk("God-type enemy", "God-type enemy", "");
 		public static const EnemyGroupType:PerkType = mk("Group-type enemy", "Group-type enemy", "");
 		public static const EnemyPlantType:PerkType = mk("Plant-type enemy", "Plant-type enemy", "");
+		public static const EnemyTrueDemon:PerkType = mk("True Demon-type enemy", "True Demon-type enemy", "");
 		public static const FireNature:PerkType = mk("Fire Nature", "Fire Nature", "");
 		public static const FireVulnerability:PerkType = mk("Fire Vulnerability", "Fire Vulnerability", "");
 		public static const IceNature:PerkType = mk("Ice Nature", "Ice Nature", "");
@@ -2299,15 +2303,17 @@ package classes
 						 .requirePerk(HalfStepToPeerlessEndurance)
 						 .requireLevel(48);
 		SteelImpact.requirePerk(PrestigeJobSentinel)
-				   .requireLevel(42);
+				   .requireLevel(48);
 		//Tier 9 Toughness Perks
 		ShieldCombat.requirePerk(SteelImpact)
-					.requireLevel(48);
+					.requireLevel(54);
 		HalfStepToInhumanEndurance.requireTou(300)
 								  .requireStr(200)
 								  .requirePerk(PeerlessEndurance)
 								  .requireLevel(54);
 		//Tier 10 Toughness Perks
+		SecondWind.requirePerk(ShieldCombat)
+				  .requireLevel(60);
 		InhumanEndurance.requireTou(330)
 						.requireStr(220)
 						.requirePerk(HalfStepToInhumanEndurance)

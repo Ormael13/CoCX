@@ -85,6 +85,7 @@ package classes.Scenes.Dungeons.Factory
 			this.special2 = seduceAttack;
 			this.special3 = whipAttack;
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}
 

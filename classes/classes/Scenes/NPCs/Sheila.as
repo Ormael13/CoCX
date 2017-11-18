@@ -325,6 +325,7 @@ package classes.Scenes.NPCs
 				//-little higher difficulty than other plains fights, but not much
 				//-now totally okay with taking gems and riding the player so hard he passes out for 8 hours regardless
 				//-drops shitty kangaroo item and imp food
+				this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			}
 			this.weaponName = "foot";
 			this.weaponVerb="kick";

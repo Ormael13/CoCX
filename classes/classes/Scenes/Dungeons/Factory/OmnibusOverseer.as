@@ -115,6 +115,7 @@ package classes.Scenes.Dungeons.Factory
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

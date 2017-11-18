@@ -203,6 +203,7 @@ package classes.Scenes.Dungeons.DeepCave
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

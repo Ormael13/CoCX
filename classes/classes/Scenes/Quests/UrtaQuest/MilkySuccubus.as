@@ -133,6 +133,7 @@ package classes.Scenes.Quests.UrtaQuest
 			this.special2 = seduceAttack;
 			this.special3 = whipAttack;
 			this.drop = NO_DROP;
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}
 

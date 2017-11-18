@@ -476,6 +476,9 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 		if (player.hasPerk(PerkLib.JobDefender)) {
 			buttons.add("Defend", defendpose).hint("Take no offensive action for this round.  Why would you do this?  Maybe because you will assume defensive pose?");
 		}
+	//	if (player.hasPerk(PerkLib.SecondWind)) {
+	//		buttons.add("Second Wind", seconwindGo).hint("");
+	//	}
 		if (!player.isFlying() && monster.isFlying()) {
 			if (player.canFly()) {
 				buttons.add("Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
@@ -2315,6 +2318,16 @@ public function defendpose():void {
 	}
 	enemyAI();
 }
+public function seconwindGo():void {
+	clearOutput();
+	outputText("\n\n");
+	player.createStatusEffect(StatusEffects.SecondWindRegen, 5, 0, 0, 0);
+	wrathregeneration();
+	fatigueRecovery();
+	manaregeneration();
+	soulforceregeneration();
+	enemyAI();
+}
 public function surrender():void {
 	var temp3:Number = 0;
 	doNext(combatMenu);
@@ -2646,6 +2659,20 @@ public function attack():void {
 		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 2;
 		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 5;
 	}
+	if (player.weapon == weapons.NPHBLDE || player.weapon == weapons.MASAMUN) {
+		if (monster.cor < 33) damage = Math.round(damage * 1.0);
+		else if (monster.cor < 50) damage = Math.round(damage * 1.1);
+		else if (monster.cor < 75) damage = Math.round(damage * 1.2);
+		else if (monster.cor < 90) damage = Math.round(damage * 1.3);
+		else damage = Math.round(damage * 1.4);
+	}
+	if (player.weapon == weapons.EBNYBLD || player.weapon == weapons.BLETTER) {
+		if (monster.cor >= 66) damage = Math.round(damage * 1.0);
+		else if (monster.cor >= 50) dmg = Math.round(damage * 1.1);
+		else if (monster.cor >= 25) dmg = Math.round(damage * 1.2);
+		else if (monster.cor >= 10) dmg = Math.round(damage * 1.3);
+		else dmg = Math.round(damage * 1.4);
+	}
 	//Determine if critical hit!
 	var crit:Boolean = false;
 	var critChance:int = 5;
@@ -2657,6 +2684,7 @@ public function attack():void {
 	if (player.findPerk(PerkLib.WeaponMastery) >= 0 && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
 	if (player.findPerk(PerkLib.WeaponGrandMastery) >= 0 && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
 	if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
+	if (player.weapon == weapons.MASAMUN) critChance += 10;
 	if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 	if (rand(100) < critChance) {
 		crit = true;
@@ -2851,8 +2879,9 @@ public function attack():void {
 			}
 		}
 		//Selfcorrupting weapons
-		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		if ((player.weapon == weapons.DEMSCYT || player.weapon == weapons.EBNYBLD) && player.cor < 90) dynStats("cor", 0.3);
 		//Selfpurifying and Lust lowering weapons
+		if (player.weapon == weapons.NPHBLDE && player.cor > 10) dynStats("cor", -0.3);
 		if (player.weapon == weapons.EXCALIB) {
 			if (player.cor > 10) dynStats("cor", -0.3);
 			var excaliburLustSelf:Number = 0;
@@ -3094,6 +3123,13 @@ public function meleeattackdamage():void {
 }
 
 public function WrathWeaponsProc():void {
+	if (player.weapon == weapons.BLETTER) {
+		takeDamage(player.maxHP() * 0.02);
+		if (player.HP < 1) {
+			doNext(endHpLoss);
+			return;
+		}
+	}
 	if (player.isLowGradeWrathWeapon()) {
 		if (player.findPerk(PerkLib.PrestigeJobBerserker) >= 0 && player.wrath >= 10) player.wrath -= 10;
 		else {
@@ -3872,7 +3908,7 @@ private function combatStatusesUpdate():void {
 		}
 		else outputText("You're restrained by the harpies so that they can beat on you with impunity.  You'll need to struggle to break free!\n\n");
 	}
-if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(StatusEffects.ScyllaBind)) && flags[kFLAGS.PC_FETISH] >= 2) {
+	if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(StatusEffects.ScyllaBind)) && flags[kFLAGS.PC_FETISH] >= 2) {
 		outputText("Coiled tightly by [monster a] [monster name] and utterly immobilized, you can't help but become aroused thanks to your bondage fetish.\n\n");
 		dynStats("lus", 5);
 	}
@@ -4452,6 +4488,14 @@ if((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(Sta
 			player.addStatusValue(StatusEffects.CooldownTornadoStrike,1,-1);
 		}
 	}
+	//Second Wind Regen
+	if (player.hasStatusEffect(StatusEffects.SecondWindRegen)) {
+		if (player.statusEffectv2(StatusEffects.SecondWindRegen) <= 0) {
+			player.removeStatusEffect(StatusEffects.SecondWindRegen);
+			outputText("<b></b>\n\n");
+		}
+		else player.addStatusValue(StatusEffects.SecondWindRegen,2,-1);
+	}
 	if (player.hasStatusEffect(StatusEffects.BladeDance)) player.removeStatusEffect(StatusEffects.BladeDance);
 	if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) player.removeStatusEffect(StatusEffects.ResonanceVolley);
 	if (player.hasStatusEffect(StatusEffects.Defend)) player.removeStatusEffect(StatusEffects.Defend);
@@ -4487,6 +4531,7 @@ public function regeneration(combat:Boolean = true):void {
 		if (player.perkv1(PerkLib.Sanctuary) == 1) healingPercent += ((player.corruptionTolerance() - player.cor) / (100 + player.corruptionTolerance()));
 		if (player.perkv1(PerkLib.Sanctuary) == 2) healingPercent += player.cor / (100 + player.corruptionTolerance());
 		if ((player.internalChimeraRating() >= 1 && player.hunger < 1 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.internalChimeraRating() >= 1 && flags[kFLAGS.HUNGER_ENABLED] <= 0)) healingPercent -= (0.5 * player.internalChimeraRating());
+		if (player.hasStatusEffect(StatusEffects.SecondWindRegen)) healingPercent += 5;
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) healingPercent -= 10;
 		if (healingPercent > maximumRegeneration()) healingPercent = maximumRegeneration();
 		HPChange(Math.round((player.maxHP() * healingPercent / 100) + nonPercentBasedRegeneration()), false);
@@ -4686,7 +4731,7 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 	else if (player.newGamePlusMod() >= 4) monster.lustVuln *= 0.6;
 	monster.HP = monster.maxHP();
 	monster.mana = monster.maxMana();
-	//monster.soulforce = monster.maxSoulforce(); - later work solution for demons that can't have any soulforce
+	monster.soulforce = monster.maxSoulforce();
 	monster.XP = monster.totalXP();
 	if (player.weaponRangeName == "gnoll throwing spear") player.ammo = 20;
 	if (player.weaponRangeName == "gnoll throwing axes") player.ammo = 10;

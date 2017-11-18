@@ -44,6 +44,7 @@ package classes.Scenes.Dungeons.D3
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			this.drop = new WeightedDrop(weapons.L_WHIP, 1);
 			this.checkMonster();
 		}

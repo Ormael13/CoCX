@@ -50,6 +50,7 @@ package classes.Scenes.Places.Prison
 			this.drop = NO_DROP;
 			this.special1 = lustMagicAttack;
 			this.wingType = WING_TYPE_IMP;
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

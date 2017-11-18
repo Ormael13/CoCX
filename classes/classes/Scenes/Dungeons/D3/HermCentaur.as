@@ -47,6 +47,7 @@ package classes.Scenes.Dungeons.D3
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			this.drop = NO_DROP;
 			this.checkMonster();
 		}

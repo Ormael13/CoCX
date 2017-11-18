@@ -136,6 +136,7 @@
 			this.hornType = HORNS_DEMON;
 			this.horns = 2;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}
 

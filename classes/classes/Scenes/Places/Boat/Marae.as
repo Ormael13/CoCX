@@ -128,11 +128,29 @@ package classes.Scenes.Places.Boat
 				this.long = "This being is known as the goddess of Mareth. She is corrupted due to the aftermath of the factory valves being blown up. She's white all over and textured with bark. The \"flower\" below her belly button resembles more of a vagina than a flower. Her G-cup sized breasts jiggle with every motion."
 				this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL);
 				createBreastRow(Appearance.breastCupInverse("G"));
+				initStrTouSpeInte(300, 300, 170, 180);
+				initWisLibSensCor(180, 150, 25, 100);
+				this.weaponName = "tentacles";
+				this.weaponVerb="slap";
+				this.weaponAttack = 100;
+				this.bonusLust += 300;
+				this.special1 = tentacleAttack;
+				this.special2 = tentacleRape;
+				this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			}
 			else {
 				this.long = "This being is known as the goddess of Mareth. She is no longer corrupted thanks to your actions at the factory. She's white all over and textured with bark. Her breasts are modestly sized."
 				this.createVagina(false, VAGINA_WETNESS_WET, VAGINA_LOOSENESS_NORMAL);
 				createBreastRow(Appearance.breastCupInverse("DD"));
+				initStrTouSpeInte(370, 370, 220, 260);
+				initWisLibSensCor(260, 30, 25, 0);
+				this.weaponName = "fists";
+				this.weaponVerb="wrathful punch";
+				this.weaponAttack = 126;
+				this.bonusHP += 3000;
+				if (game.flags[kFLAGS.MINERVA_TOWER_TREE] > 0) this.bonusHP += 1150;
+				this.additionalXP += 750;
+				this.special1 = smite;
 			}
 			this.ass.analLooseness = 1;
 			this.ass.analWetness = 1;
@@ -142,50 +160,19 @@ package classes.Scenes.Places.Boat
 			this.skin.base.color = "white";
 			this.hairColor = "green";
 			this.hairLength = 36;
-			if (game.flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
-				initStrTouSpeInte(300, 300, 170, 180);
-				initWisLibSensCor(180, 150, 25, 100);
-				this.weaponName = "tentacles";
-				this.weaponVerb="slap";
-				this.weaponAttack = 100;
-			}
-			else {
-				initStrTouSpeInte(370, 370, 220, 260);
-				initWisLibSensCor(260, 30, 25, 0);
-				this.weaponName = "fists";
-				this.weaponVerb="wrathful punch";
-				this.weaponAttack = 126;
-			}
 			this.weaponPerk = "";
 			this.weaponValue = 70;
 			this.armorName = "bark";
 			this.armorDef = 140;
 			this.bonusHP = 5000;
-			if (game.flags[kFLAGS.FACTORY_SHUTDOWN] == 1) {
-				this.bonusHP += 3000;
-				if (game.flags[kFLAGS.MINERVA_TOWER_TREE] > 0) this.bonusHP += 1150;
-			}
 			this.bonusLust = 100;
-			if (game.flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
-				this.bonusLust += 300;
-			}
 			this.lust = 30;
 			this.lustVuln = .04;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 99;
 			this.additionalXP = 3000;
-			if (game.flags[kFLAGS.FACTORY_SHUTDOWN] == 1) {
-				this.additionalXP += 750;
-			}
 			this.drop = NO_DROP;
 			this.gems = 1000;
-			if (game.flags[kFLAGS.FACTORY_SHUTDOWN] == 1) {
-				this.special1 = smite;
-			}
-			if (game.flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
-				this.special1 = tentacleAttack;
-				this.special2 = tentacleRape;
-			}
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);

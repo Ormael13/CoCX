@@ -98,6 +98,7 @@ package classes.Scenes.Places.Owca
 					add(armors.BONSTRP,2).
 					add(consumables.IMPFOOD, 1);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			createStatusEffect(StatusEffects.Vapula,0,0,0,0);
 			checkMonster();
 		}

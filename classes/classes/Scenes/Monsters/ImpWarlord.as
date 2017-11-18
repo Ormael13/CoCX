@@ -106,6 +106,7 @@ package classes.Scenes.Monsters
 			this.wingType = WING_TYPE_IMP;
 			this.special1 = lustMagicAttack;
 			this.special2 = clawAttack;
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

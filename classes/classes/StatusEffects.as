@@ -559,6 +559,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const ScyllaBind:StatusEffectType                = mkCombat("Scylla Bind");
 		public static const Sealed:StatusEffectType                    = mkCombat("Sealed");
 		public static const Sealed2:StatusEffectType                   = mkCombat("Sealed2");
+		public static const SecondWindRegen:StatusEffectType           = mkCombat("Second Wind Regen");
 		public static const SharkBiteBleed:StatusEffectType            = mkCombat("Shark Bite Bleed");
 		public static const SheilaOil:StatusEffectType                 = mkCombat("Sheila Oil");
 		public static const Shielding:StatusEffectType                 = mkCombat("Sheilding");

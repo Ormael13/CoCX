@@ -44,6 +44,7 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.drop = NO_DROP;
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 			createStatusEffect(StatusEffects.TentagrappleCooldown, 10, 0, 0, 0);
 		}

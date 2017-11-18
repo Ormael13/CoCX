@@ -235,6 +235,7 @@
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}
 

@@ -259,6 +259,7 @@ package classes.Scenes.Monsters
 					add(weapons.SCIMITR, 1).
 					add(armors.BEEARMR, 1);
 			this.wingType = WING_TYPE_IMP;
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

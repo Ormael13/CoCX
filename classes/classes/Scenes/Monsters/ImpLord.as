@@ -127,6 +127,7 @@
 					add(consumables.SUCMILK,6);
 			this.wingType = WING_TYPE_IMP;
 			this.special1 = lustMagicAttack;
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

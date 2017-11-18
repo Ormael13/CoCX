@@ -143,7 +143,7 @@ package classes.Scenes.Monsters
 			//avoid!
 			if (player.spe > spe && rand(4) == 0 || (player.findPerk(PerkLib.Evade) >= 0 && rand(4) == 0) || (player.findPerk(PerkLib.Misdirection) >= 0 && rand(4) == 0 && player.armorName == "red, high-society bodysuit")) {
 				outputText("  You start to sidestep and realize it's a feint.   Ducking low, you slide under her real attack... a kiss?!  ");
-				if (player.lust >= 70) outputText("  Maybe you shouldn't have bothered to move, it might have been fun.");
+				if (player.lust >= maxLust() * 0.7) outputText("  Maybe you shouldn't have bothered to move, it might have been fun.");
 			}
 			//get hit
 			else {
@@ -187,7 +187,7 @@ package classes.Scenes.Monsters
 				if (breastRows.length == 1) {
 					//50+ breastsize% success rate
 					outputText(capitalA + short + " caresses some of her ample chest-flesh before shaking it from side to side enticingly.");
-					if (lust >= 50) outputText("  " + pronoun2 + " hard nipples seem to demand your attention.");
+					if (lust >= maxLust() * 0.5) outputText("  " + pronoun2 + " hard nipples seem to demand your attention.");
 					if (rand(100) <= (65 + biggestTitSize())) {
 						player.dynStats("lus", rand(breastRows[0].breastRating) + breastRows.length + 10);
 						outputText("\nThe display is quite arousing.");
@@ -197,7 +197,7 @@ package classes.Scenes.Monsters
 				if (breastRows.length > 1) {
 					//50 + 10% per breastRow + breastSize%
 					outputText(capitalA + short + " caresses " + pronoun2 + " some of her rows of ample chest-flesh before shaking it all from side to side enticingly.");
-					if (lust >= 50) outputText(", your " + nippleDescript(0) + "s painfully visible.");
+					if (lust >= maxLust() * 0.5) outputText(", your " + nippleDescript(0) + "s painfully visible.");
 					else outputText(".");
 					if (rand(100) <= (54 + (breastRows.length - 1) * 15 + breastRows[0].breastRating)) {
 						player.dynStats("lus", rand(breastRows[0].breastRating) + breastRows.length * breastRows[0].breasts + 5);

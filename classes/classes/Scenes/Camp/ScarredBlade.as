@@ -43,6 +43,7 @@ package classes.Scenes.Camp
 			this.level = 17;
 			this.gems = 0;
 			this.drop = new WeightedDrop(weapons.B_SCARB, 1);
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

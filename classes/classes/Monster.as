@@ -339,6 +339,7 @@
 			}
 			if (findPerk(PerkLib.InsightfulResourcesI) >= 0) temp += Math.round((this.wis*5) * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) temp *= 1.1;
+			if (hasPerk(PerkLib.EnemyTrueDemon)) temp = 0;
 			return temp;
 		}
 		

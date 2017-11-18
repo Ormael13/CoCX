@@ -226,6 +226,7 @@ import classes.internals.WeightedDrop;
 			this.tailType = TAIL_TYPE_DOG;
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}
 

@@ -224,6 +224,7 @@ package classes.Scenes.Dungeons.Factory
 			this.wingType = WING_TYPE_BAT_LIKE_TINY;
 			this.wingDesc = "tiny hidden";
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}
 	}
