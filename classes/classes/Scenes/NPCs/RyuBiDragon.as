@@ -57,9 +57,9 @@ package classes.Scenes.NPCs
 		{
 			if (flags[kFLAGS.RYUBI_LVL_UP] == 1) {
 				initStrTouSpeInte(100, 100, 20, 10);
-				initLibSensCor(50, 35, 50);
-				this.weaponAttack = 4 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 4 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(10, 50, 35, 50);
+				this.weaponAttack = 4;
+				this.armorDef = 4;
 				this.lustVuln = .95;
 				this.bonusHP = 50;
 				this.bonusLust = 10;
@@ -67,9 +67,9 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.RYUBI_LVL_UP] == 2) {
 				initStrTouSpeInte(110, 120, 30, 25);
-				initLibSensCor(50, 35, 50);
-				this.weaponAttack = 7 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 7 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(25, 50, 35, 50);
+				this.weaponAttack = 7;
+				this.armorDef = 7;
 				this.lustVuln = .95;
 				this.bonusHP = 100;
 				this.bonusLust = 20;
@@ -77,9 +77,9 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.RYUBI_LVL_UP] == 3) {
 				initStrTouSpeInte(120, 140, 40, 40);
-				initLibSensCor(50, 35, 50);
-				this.weaponAttack = 10 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(40, 50, 35, 50);
+				this.weaponAttack = 10;
+				this.armorDef = 10;
 				this.lustVuln = .9;
 				this.bonusHP = 150;
 				this.bonusLust = 30;
@@ -87,9 +87,9 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.RYUBI_LVL_UP] == 4) {
 				initStrTouSpeInte(130, 160, 50, 60);
-				initLibSensCor(50, 35, 50);
-				this.weaponAttack = 15 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 15 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(60, 50, 35, 50);
+				this.weaponAttack = 15;
+				this.armorDef = 15;
 				this.lustVuln = .9;
 				this.bonusHP = 200;
 				this.bonusLust = 40;
@@ -97,9 +97,9 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.RYUBI_LVL_UP] == 5) {
 				initStrTouSpeInte(140, 180, 60, 80);
-				initLibSensCor(50, 35, 50);
-				this.weaponAttack = 20 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 20 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(80, 50, 35, 50);
+				this.weaponAttack = 20;
+				this.armorDef = 20;
 				this.lustVuln = .85;
 				this.bonusHP = 250;
 				this.bonusLust = 50;
@@ -107,9 +107,9 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.RYUBI_LVL_UP] == 6) {
 				initStrTouSpeInte(150, 200, 70, 100);
-				initLibSensCor(50, 35, 50);
-				this.weaponAttack = 25 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 25 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(100, 50, 35, 50);
+				this.weaponAttack = 25;
+				this.armorDef = 25;
 				this.lustVuln = .85;
 				this.bonusHP = 300;
 				this.bonusLust = 60;
@@ -117,9 +117,9 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.RYUBI_LVL_UP] == 7) {
 				initStrTouSpeInte(150, 200, 70, 100);
-				initLibSensCor(50, 35, 50);
-				this.weaponAttack = 36 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 54 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(100, 50, 35, 50);
+				this.weaponAttack = 36;
+				this.armorDef = 54;
 				this.lustVuln = .85;
 				this.bonusHP = 300;
 				this.bonusLust = 60;

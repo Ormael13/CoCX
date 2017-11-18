@@ -84,12 +84,12 @@ package classes.Scenes.Monsters
 			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
 			this.skinTone = "red";
 			initStrTouSpeInte(80, 71, 75, 56);
-			initLibSensCor(71, 35, 100);
+			initWisLibSensCor(56, 71, 35, 100);
 			this.weaponName = "sword";
 			this.weaponVerb="slash";
-			this.weaponAttack = 20 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 20;
 			this.armorName = "platemail";
-			this.armorDef = 17 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 17;
 			this.bonusHP = 350;
 			this.bonusLust = 30;
 			this.lust = 30;

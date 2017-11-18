@@ -62,7 +62,7 @@ package classes.Scenes.Monsters
 			this.long = "You're currently fighting advanced true golems. They're all around eight feet tall without any sexual characteristics, their stone body covered in cracks and using bare stone fists to smash enemies.";
 			this.plural = true;
 			initStrTouSpeInte(250, 200, 150, 10);
-			initLibSensCor(10, 10, 50);
+			initWisLibSensCor(10, 10, 10, 50);
 			this.tallness = 96;
 			this.drop = new ChainedDrop()
 					.add(useables.GOLCORE, 1);
@@ -71,9 +71,9 @@ package classes.Scenes.Monsters
 			this.additionalXP = 650;
 			this.weaponName = "stone fists";
 			this.weaponVerb = "smash";
-			this.weaponAttack = 70 + (15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 70;
 			this.armorName = "stone";
-			this.armorDef = 70 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 70;
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);

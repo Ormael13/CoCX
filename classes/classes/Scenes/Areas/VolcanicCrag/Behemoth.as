@@ -71,12 +71,12 @@ package classes.Scenes.Areas.VolcanicCrag
 			this.lowerBody = LOWER_BODY_TYPE_CAT
 			this.tailType = TAIL_TYPE_BEHEMOTH
 			initStrTouSpeInte(180, 130, 100, 115);
-			initLibSensCor(35, 15, 15);
+			initWisLibSensCor(100, 35, 15, 15);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 34 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 34;
 			this.armorName = "loincloth";
-			this.armorDef = 12 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 12;
 			this.bonusHP = 900;
 			this.bonusLust = 20;
 			this.lust = 15;

@@ -127,12 +127,12 @@ package classes.Scenes.Dungeons.HelDungeon
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(100, 90, 160, 80);
-			initLibSensCor(80, 45, 50);
+			initWisLibSensCor(80, 80, 45, 50);
 			this.weaponName = "eldritch staff";
 			this.weaponVerb="thwack";
-			this.weaponAttack = 27 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 27;
 			this.armorName = "armor";
-			this.armorDef = 26 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 26;
 			this.bonusHP = 1000;
 			this.bonusLust = 30;
 			this.fatigue = 0;

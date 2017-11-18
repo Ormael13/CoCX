@@ -171,12 +171,12 @@ package classes.Scenes.Dungeons.DenOfDesire
 			this.hairColor = "red";
 			this.hairLength = 20;
 			initStrTouSpeInte(104, 100, 90, 150);
-			initLibSensCor(120, 50, 100);
+			initWisLibSensCor(150, 120, 50, 100);
 			this.weaponName = "flaming whip";
 			this.weaponVerb="flame-whip";
-			this.weaponAttack = 26 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 26;
 			this.armorName = "demon-skin";
-			this.armorDef = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 1;
 			this.bonusHP = 2500;
 			this.bonusLust = 50;
 			this.lust = 30;

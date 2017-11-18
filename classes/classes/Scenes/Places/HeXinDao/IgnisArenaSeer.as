@@ -138,12 +138,12 @@ package classes.Scenes.Places.HeXinDao
 			this.hairColor = "silver";
 			this.hairLength = 13 + rand(20);
 			initStrTouSpeInte(35, 55, 110, 105);
-			initLibSensCor(60, 65, 45);
+			initWisLibSensCor(105, 60, 65, 45);
 			this.weaponName = "staff";
 			this.weaponVerb="smack";
-			this.weaponAttack = 8 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 8;
 			this.armorName = "grey kimono";
-			this.armorDef = 20 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 20;
 			this.bonusHP = 120;
 			this.bonusLust = 20;
 			this.lust = 20;

@@ -49,12 +49,12 @@ package classes.Scenes.Places.Owca
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(40, 120, 110, 100);
-			initLibSensCor(35, 35, 20);
+			initWisLibSensCor(100, 35, 35, 20);
 			this.weaponName = "pitchforks";
 			this.weaponVerb="stab";
-			this.weaponAttack = 20 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 20;
 			this.armorName = "chitin";
-			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 10;
 			this.bonusHP = 300;
 			this.bonusLust = 10;
 			this.lustVuln = 0;

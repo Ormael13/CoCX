@@ -87,12 +87,12 @@ package classes.Scenes.Areas.Ocean
 			this.hairColor = "brown";
 			this.hairLength = 5;
 			initStrTouSpeInte(350, 100, 100, 150);
-			initLibSensCor(100, 50, 50);
+			initWisLibSensCor(150, 100, 50, 50);
 			this.weaponName = "tentacle";
 			this.weaponVerb="slash";
-			this.weaponAttack = 86 + (18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 86;
 			this.armorName = "thick skin";
-			this.armorDef = 52 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 52;
 			this.bonusHP = 5000;
 			this.bonusLust = 20;
 			this.lust = 20;

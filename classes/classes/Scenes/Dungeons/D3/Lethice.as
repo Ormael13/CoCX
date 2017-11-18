@@ -26,12 +26,12 @@ package classes.Scenes.Dungeons.D3
 			this.hipRating = HIP_RATING_SLENDER;
 			this.buttRating = BUTT_RATING_TIGHT;
 			initStrTouSpeInte(320, 320, 150, 150);
-			initLibSensCor(180, 50, 100);
+			initWisLibSensCor(150, 180, 50, 100);
 			this.weaponName = "whip";
-			this.weaponAttack = 70 + (15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 70;
 			this.weaponVerb = "whip";
 			this.armorName = "wraps";
-			this.armorDef = 36 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 36;
 			this.bonusHP = 3000;
 			this.bonusLust = 150;
 			this.gems = 200 + rand(100);

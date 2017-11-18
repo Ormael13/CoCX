@@ -61,7 +61,7 @@ package classes.Scenes.Monsters
 			this.imageName = "advanced golems";
 			this.long = "You're currently fighting advanced golems. They're all around eight feet tall without any sexual characteristics, their stone body covered in cracks and using bare stone fists to smash enemies.";
 			initStrTouSpeInte(320, 250, 180, 10);
-			initLibSensCor(10, 10, 50);
+			initWisLibSensCor(10, 10, 10, 50);
 			this.tallness = 96;
 			this.drop = new ChainedDrop()
 					.add(useables.GOLCORE, 1);
@@ -70,9 +70,9 @@ package classes.Scenes.Monsters
 			this.additionalXP = 900;
 			this.weaponName = "stone fists";
 			this.weaponVerb = "smash";
-			this.weaponAttack = 100 + (21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 100;
 			this.armorName = "stone";
-			this.armorDef = 100 + (11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 100;
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);

@@ -218,12 +218,12 @@ package classes.Scenes.NPCs
 				this.hipRating = HIP_RATING_FERTILE+3;//hipRating = 18
 				this.buttRating = BUTT_RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(41, 46, 80, 50);
-				initLibSensCor(45, 35, 100);
+				initWisLibSensCor(15, 45, 35, 100);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
-				this.weaponAttack = 9 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 9;
 				this.armorName = "lusty maiden's armor";
-				this.armorDef = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 16;
 				this.bonusHP = 420;
 				this.bonusLust = 40;
 				this.lust = 70;
@@ -240,12 +240,12 @@ package classes.Scenes.NPCs
 				this.hipRating = HIP_RATING_FERTILE+3;//hipRating = 18
 				this.buttRating = BUTT_RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(46, 46, 80, 50);
-				initLibSensCor(50, 35, 100);
+				initWisLibSensCor(15, 50, 35, 100);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
-				this.weaponAttack = 9 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 9;
 				this.armorName = "lusty maiden's armor";
-				this.armorDef = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 16;
 				this.bonusHP = 450;
 				this.bonusLust = 40;
 				this.lust = 70;
@@ -263,12 +263,12 @@ package classes.Scenes.NPCs
 				this.hipRating = HIP_RATING_FERTILE+3;//hipRating = 18
 				this.buttRating = BUTT_RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(46, 46, 80, 50);
-				initLibSensCor(50, 35, 100);
+				initWisLibSensCor(15, 50, 35, 100);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
-				this.weaponAttack = 9 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 9;
 				this.armorName = "lusty maiden's armor";
-				this.armorDef = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 16;
 				this.bonusHP = 510;
 				this.bonusLust = 40;
 				this.lust = 70;
@@ -288,12 +288,12 @@ package classes.Scenes.NPCs
 				this.hipRating = HIP_RATING_FERTILE+3;//hipRating = 18
 				this.buttRating = BUTT_RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(46, 46, 80, 50);
-				initLibSensCor(50, 35, 100);
+				initWisLibSensCor(15, 50, 35, 100);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
-				this.weaponAttack = 9 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 9;
 				this.armorName = "lusty maiden's armor";
-				this.armorDef = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 16;
 				this.bonusHP = 540;
 				this.bonusLust = 40;
 				this.lust = 70;
@@ -314,12 +314,12 @@ package classes.Scenes.NPCs
 				this.hipRating = HIP_RATING_FERTILE+3;//hipRating = 18
 				this.buttRating = BUTT_RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(46, 46, 80, 50);
-				initLibSensCor(50, 35, 100);
+				initWisLibSensCor(15, 50, 35, 100);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
-				this.weaponAttack = 9 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 9;
 				this.armorName = "lusty maiden's armor";
-				this.armorDef = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 16;
 				this.bonusHP = 600;
 				this.bonusLust = 40;
 				this.lust = 70;
@@ -342,12 +342,12 @@ package classes.Scenes.NPCs
 				this.hipRating = HIP_RATING_FERTILE+3;//hipRating = 18
 				this.buttRating = BUTT_RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(46, 46, 80, 50);
-				initLibSensCor(50, 35, 100);
+				initWisLibSensCor(15, 50, 35, 100);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
-				this.weaponAttack = 9 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 9;
 				this.armorName = "lusty maiden's armor";
-				this.armorDef = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 16;
 				this.bonusHP = 630;
 				this.bonusLust = 40;//Jak zyska perk BoosTierEnemy wtedy bonus lust musi wzrosnac do 50 z 40 wiec do tego czasu nie ma bonus lust bedzie na 40 stał
 				this.lust = 70;

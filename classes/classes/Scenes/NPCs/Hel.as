@@ -192,12 +192,12 @@ package classes.Scenes.NPCs
 			this.hairColor = "red";
 			this.hairLength = 13;
 			initStrTouSpeInte(90, 80, 75, 60);
-			initLibSensCor(70, 25, 30);
+			initWisLibSensCor(60, 70, 25, 30);
 			this.weaponName = "sword";
 			this.weaponVerb="slashing blade";
-			this.weaponAttack = 26 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 26;
 			this.armorName = "scales";
-			this.armorDef = 21 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 21;
 			this.armorPerk = "";
 			this.armorValue = 50;
 			this.bonusHP = 300;

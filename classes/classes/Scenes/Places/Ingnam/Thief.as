@@ -31,12 +31,12 @@ package classes.Scenes.Places.Ingnam
 			this.hairColor = "brown";
 			this.hairLength = 4;
 			initStrTouSpeInte(17, 16, 16, 17);
-			initLibSensCor(20, 15, 20);
+			initWisLibSensCor(17, 20, 15, 20);
 			this.weaponName = "knife";
 			this.weaponVerb = "slash";
-			this.weaponAttack = 4 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 4;
 			this.armorName = "leather armor";
-			this.armorDef = 4 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 4;
 			this.bonusLust = 10;
 			this.lust = 25;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;

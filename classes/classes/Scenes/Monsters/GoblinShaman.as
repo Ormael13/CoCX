@@ -153,12 +153,12 @@ package classes.Scenes.Monsters
 			this.hairColor = "indigo";
 			this.hairLength = 4;
 			initStrTouSpeInte(74, 50, 70, 87);
-			initLibSensCor(45, 45, 60);
+			initWisLibSensCor(87, 45, 45, 60);
 			this.weaponName = "wizard staff";
 			this.weaponVerb = "bludgeon";
-			this.weaponAttack = 14 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 14;
 			this.armorName = "fur loincloth";
-			this.armorDef = 6 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 6;
 			this.fatigue = 0;
 			this.bonusHP = 275;
 			this.bonusLust = 20;

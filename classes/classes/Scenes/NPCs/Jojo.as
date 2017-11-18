@@ -80,12 +80,12 @@
 			this.hairColor = "white";
 			this.hairLength = 2;
 			initStrTouSpeInte(45, 50, 75, 64);
-			initLibSensCor(15, 40, game.monk * 15);
+			initWisLibSensCor(64, 15, 40, game.monk * 15);
 			this.weaponName = "paw";
 			this.weaponVerb="punch";
-			this.weaponAttack = 5 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 5;
 			this.armorName = "robes";
-			this.armorDef = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 1;
 			this.lust = 15;
 			this.lustVuln = .9;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;

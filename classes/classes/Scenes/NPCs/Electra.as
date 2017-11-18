@@ -147,12 +147,12 @@ package classes.Scenes.NPCs
 			this.hairColor = "blue";
 			this.hairLength = 13;
 			initStrTouSpeInte(60, 110, 100, 150);
-			initLibSensCor(220, 80, 80);
+			initWisLibSensCor(150, 220, 80, 80);
 			this.weaponName = "claw";
 			this.weaponVerb="claw-slash";
-			this.weaponAttack = 12 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 12;
 			this.armorName = "indecent spider silk robe";
-			this.armorDef = 12 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 12;
 			this.bonusHP = 100;
 			this.bonusLust = 50;
 			this.lust = 30;

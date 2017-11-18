@@ -80,7 +80,7 @@ package classes.Scenes.Dungeons.HiddenCave
 			this.createBreastRow(0, 1);
 			initGenderless();
 			initStrTouSpeInte(30, 40, 30, 20);
-			initLibSensCor(10, 10, 50);
+			initWisLibSensCor(20, 10, 10, 50);
 			this.tallness = 72;
 			this.drop = new ChainedDrop()
 					.add(consumables.E_PEARL, 1);
@@ -88,9 +88,9 @@ package classes.Scenes.Dungeons.HiddenCave
 			this.bonusHP = 100;
 			this.weaponName = "stone fists";
 			this.weaponVerb = "smash";
-			this.weaponAttack = 16 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 16;
 			this.armorName = "slight cracked stone";
-			this.armorDef = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 16;
 			this.createPerk(PerkLib.Resolute, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);

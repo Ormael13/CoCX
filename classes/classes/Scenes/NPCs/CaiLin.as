@@ -257,9 +257,9 @@ import classes.internals.*;
 				this.tallness = 5*12+10;
 				this.hairLength = 10;
 				initStrTouSpeInte(75, 100, 95, 50);
-				initLibSensCor(30, 20, 40);
-				this.weaponAttack = 45 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 40 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(50, 30, 20, 40);
+				this.weaponAttack = 45;
+				this.armorDef = 40;
 				this.bonusHP = 300;
 				this.lustVuln = .9;
 				this.level = 20;
@@ -272,9 +272,9 @@ import classes.internals.*;
 				this.tallness = 6*12;//potem z każdą zmianą dodawać jej 2 wzrostu tak aby ostatecznie osiągneła coś koło 6*12+10
 				this.hairLength = 12;
 				initStrTouSpeInte(90, 120, 110, 70);//lvl-up daje +15, +20, +15, +20
-				initLibSensCor(45, 30, 40);//lvl-up daje +15, +10, +0
-				this.weaponAttack = 45 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 40 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(70, 45, 30, 40);//lvl-up daje +20, +15, +10, +0
+				this.weaponAttack = 45;
+				this.armorDef = 40;
 				this.bonusHP = 400;
 				this.lustVuln = .8;//każdy lvl up to kolejne 0.1 niżej
 				this.level = 25;//każdy lvl up to +5 lvl-i chyba xD

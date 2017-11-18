@@ -98,13 +98,13 @@ package classes.Scenes.Dungeons.D3
 			lowerBody = LOWER_BODY_TYPE_LIZARD;
 			skinDesc = "green-purple mottled hide";
 			initStrTouSpeInte(100, 200, 110, 70);
-			initLibSensCor(40, 40, 80);
+			initWisLibSensCor(70, 40, 40, 80);
 			faceType = FACE_LIZARD;
 			weaponName = "cutlass";
 			weaponVerb = "slash";
-			weaponAttack = 25 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			weaponAttack = 25;
 			armorName = "leather tunic";
-			armorDef = 25 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			armorDef = 25;
 			this.bonusHP = 1000;
 			this.bonusLust = 30;
 			lustVuln = 0.6;

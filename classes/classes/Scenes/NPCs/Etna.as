@@ -146,65 +146,65 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] < 1) {
 				initStrTouSpeInte(100, 150, 240, 170);
-				initLibSensCor(170, 80, 80);
-				this.weaponAttack = 36 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(170, 170, 80, 80);
+				this.weaponAttack = 36;
+				this.armorDef = 10;
 				this.bonusHP = 100;
 				this.level = 30;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 1) {
 				initStrTouSpeInte(110, 165, 270, 180);
-				initLibSensCor(190, 90, 80);
-				this.weaponAttack = 42 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 12 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(180, 190, 90, 80);
+				this.weaponAttack = 42;
+				this.armorDef = 12;
 				this.bonusHP = 150;
 				this.level = 36;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 2) {
 				initStrTouSpeInte(120, 180, 300, 190);
-				initLibSensCor(210, 100, 80);
-				this.weaponAttack = 48 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 14 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(190, 210, 100, 80);
+				this.weaponAttack = 48;
+				this.armorDef = 14;
 				this.bonusHP = 150;
 				this.level = 42;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 3) {
 				initStrTouSpeInte(130, 195, 330, 200);
-				initLibSensCor(230, 110, 80);
-				this.weaponAttack = 54 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(200, 230, 110, 80);
+				this.weaponAttack = 54;
+				this.armorDef = 16;
 				this.bonusHP = 200;
 				this.level = 48;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 4) {
 				initStrTouSpeInte(140, 210, 360, 210);
-				initLibSensCor(250, 120, 80);
-				this.weaponAttack = 60 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 18 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(210, 250, 120, 80);
+				this.weaponAttack = 60;
+				this.armorDef = 18;
 				this.bonusHP = 200;
 				this.level = 54;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 5) {
 				initStrTouSpeInte(150, 225, 390, 220);
-				initLibSensCor(270, 130, 80);
-				this.weaponAttack = 66 + (11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 20 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(220, 270, 130, 80);
+				this.weaponAttack = 66;
+				this.armorDef = 20;
 				this.bonusHP = 250;
 				this.level = 60;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 6) {
 				initStrTouSpeInte(160, 240, 420, 230);
-				initLibSensCor(290, 140, 80);
-				this.weaponAttack = 72 + (11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 22 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(230, 290, 140, 80);
+				this.weaponAttack = 72;
+				this.armorDef = 22;
 				this.bonusHP = 250;
 				this.level = 66;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 7) {
 				initStrTouSpeInte(170, 255, 450, 240);
-				initLibSensCor(310, 150, 80);
-				this.weaponAttack = 78 + (11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 24 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(240, 310, 150, 80);
+				this.weaponAttack = 78;
+				this.armorDef = 24;
 				this.bonusHP = 250;
 				this.level = 72;
 			}

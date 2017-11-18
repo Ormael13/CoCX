@@ -54,12 +54,12 @@ package classes.Scenes.NPCs
 			this.hairColor = "red";
 			this.hairLength = 1;
 			initStrTouSpeInte(250, 200, 150, 180);
-			initLibSensCor(50, 50, 100);
+			initWisLibSensCor(180, 50, 50, 100);
 			this.weaponName = "twin hammers";
 			this.weaponVerb="smash";
-			this.weaponAttack = 70 + (15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 70;
 			this.armorName = "thick fur";
-			this.armorDef = 30 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 30;
 			this.bonusHP = 100;
 			this.bonusLust = 30;
 			this.lust = 30;

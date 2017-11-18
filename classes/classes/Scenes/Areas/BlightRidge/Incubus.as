@@ -160,14 +160,14 @@ package classes.Scenes.Areas.BlightRidge
 			this.hairColor = "black";
 			this.hairLength = 12;
 			initStrTouSpeInte(150, 100, 110, 105);
-			initLibSensCor(110, 70, 100);
+			initWisLibSensCor(105, 110, 70, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 16 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 16;
 			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
-			this.armorDef = 18 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 18;
 			this.bonusHP = 500;
 			this.bonusLust = 40;
 			this.lust = 30;

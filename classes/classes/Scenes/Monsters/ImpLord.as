@@ -107,12 +107,12 @@
 			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
 			this.skinTone = "red";
 			initStrTouSpeInte(55, 40, 45, 42);
-			initLibSensCor(55, 35, 100);
+			initWisLibSensCor(42, 55, 35, 100);
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
-			this.weaponAttack = 10 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 10;
 			this.armorName = "leathery skin";
-			this.armorDef = 5 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 5;
 			this.bonusHP = 100;
 			this.bonusLust = 30;
 			this.lust = 30;

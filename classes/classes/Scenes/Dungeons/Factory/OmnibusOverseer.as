@@ -90,14 +90,14 @@ package classes.Scenes.Dungeons.Factory
 			this.hairColor = "purple";
 			this.hairLength = 42;
 			initStrTouSpeInte(100, 70, 45, 85);
-			initLibSensCor(90, 70, 80);
+			initWisLibSensCor(85, 90, 70, 80);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 12 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 12;
 			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
-			this.armorDef = 18 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 18;
 			this.bonusHP = 400;
 			this.bonusLust = 50;
 			this.lust = 20;

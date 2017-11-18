@@ -144,12 +144,12 @@ package classes.Scenes.Areas.Forest
 			this.hairColor = "pink and black";
 			this.hairLength = 16;
 			initStrTouSpeInte(37, 58, 55, 62);
-			initLibSensCor(64, 65, 50);
+			initWisLibSensCor(60, 64, 65, 50);
 			this.weaponName = "fists";
 			this.weaponVerb="tiny punch";
-			this.weaponAttack = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 1;
 			this.armorName = "leather straps";
-			this.armorDef = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 1;
 			this.bonusHP = 60;
 			this.bonusLust = 20;
 			this.lust = 40;

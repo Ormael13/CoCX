@@ -32,12 +32,12 @@ package classes.Scenes.Dungeons.D3
 			this.hipRating = HIP_RATING_FERTILE;
 			this.buttRating = BUTT_RATING_EXPANSIVE;
 			initStrTouSpeInte(210, 210, 120, 120);
-			initLibSensCor(140, 40, 100);
+			initWisLibSensCor(120, 140, 40, 100);
 			this.weaponName = "fists";
-			this.weaponAttack = 30 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 30;
 			this.weaponVerb = "punch";
 			this.armorName = "wraps";
-			this.armorDef = 26 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 26;
 			this.bonusHP = 1800;
 			this.bonusLust = 40;
 			this.gems = 300 + rand(90);

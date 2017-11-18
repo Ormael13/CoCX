@@ -146,12 +146,12 @@
 			this.hairColor = "black";
 			this.hairLength = 5;
 			initStrTouSpeInte(20, 10, 20, 12);
-			initLibSensCor(45, 45, 100);
+			initWisLibSensCor(12, 45, 45, 100);
 			this.weaponName = "claws";
 			this.weaponVerb = "claw-slash";
-			this.weaponAttack = 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.weaponAttack = 1;
 			this.armorName = "leathery skin";
-			this.armorDef = 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.armorDef = 1;
 			this.bonusLust = 30;
 			this.lust = 40;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;

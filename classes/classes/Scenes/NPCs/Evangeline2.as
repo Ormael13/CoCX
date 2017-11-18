@@ -322,9 +322,9 @@ package classes.Scenes.NPCs
 				initStrTouSpeInte(29, 34, 45, 50);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
-				this.weaponAttack = 9 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 9;
 				this.armorName = "practically indecent steel armor";
-				this.armorDef = 11 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 11;
 				this.bonusHP = 210;
 				this.bonusLust = 40;
 				this.lustVuln = .8;
@@ -344,9 +344,9 @@ package classes.Scenes.NPCs
 				initStrTouSpeInte(41, 46, 55, 50);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
-				this.weaponAttack = 9 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 9;
 				this.armorName = "lusty maiden's armor";
-				this.armorDef = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 16;
 				this.bonusHP = 240;
 				this.bonusLust = 40;
 				this.lustVuln = .8;
@@ -367,9 +367,9 @@ package classes.Scenes.NPCs
 				initStrTouSpeInte(41, 46, 55, 50);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
-				this.weaponAttack = 9 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 9;
 				this.armorName = "lusty maiden's armor";
-				this.armorDef = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 16;
 				this.bonusHP = 270;
 				this.bonusLust = 40;
 				this.lustVuln = .8;
@@ -391,9 +391,9 @@ package classes.Scenes.NPCs
 				initStrTouSpeInte(41, 46, 70, 50);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
-				this.weaponAttack = 9 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 9;
 				this.armorName = "lusty maiden's armor";
-				this.armorDef = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 16;
 				this.bonusHP = 330;
 				this.bonusLust = 40;//Jak zyska perk BoosTierEnemy wtedy bonus lust musi wzrosnac do 50 z 40 wiec do tego czasu nie ma bonus lust bedzie na 40 stał
 				this.lust = 70;
@@ -417,9 +417,9 @@ package classes.Scenes.NPCs
 				initStrTouSpeInte(41, 46, 80, 50);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
-				this.weaponAttack = 9 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 9;
 				this.armorName = "lusty maiden's armor";
-				this.armorDef = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 16;
 				this.bonusHP = 360;
 				this.bonusLust = 40;
 				this.lust = 70;
@@ -437,7 +437,7 @@ package classes.Scenes.NPCs
 			this.ass.analWetness = ANAL_WETNESS_DRY;
 			this.skinTone = "olive";
 			this.hairLength = 36;
-			initLibSensCor(25, 35, 100);
+			initWisLibSensCor(15, 25, 35, 100);
 			this.fatigue = 0;
 			this.gems = 0;
 			this.drop = NO_DROP;

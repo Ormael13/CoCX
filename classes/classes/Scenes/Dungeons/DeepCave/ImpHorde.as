@@ -214,12 +214,12 @@
 			this.hairColor = "black";
 			this.hairLength = 1;
 			initStrTouSpeInte(50, 30, 25, 12);
-			initLibSensCor(45, 45, 100);
+			initWisLibSensCor(10, 45, 45, 100);
 			this.weaponName = "fists";
 			this.weaponVerb="punches";
-			this.weaponAttack = 12 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 12;
 			this.armorName = "skin";
-			this.armorDef = 6 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 6;
 			this.bonusHP = 800;
 			this.bonusLust = 150;
 			this.lust = 10;

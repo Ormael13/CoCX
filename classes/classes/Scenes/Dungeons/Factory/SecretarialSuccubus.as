@@ -62,14 +62,14 @@ package classes.Scenes.Dungeons.Factory
 			this.hairColor = "blond";
 			this.hairLength = 13;
 			initStrTouSpeInte(60, 50, 85, 35);
-			initLibSensCor(80, 70, 80);
+			initWisLibSensCor(35, 80, 70, 80);
 			this.weaponName = "claws";
 			this.weaponVerb="slap";
-			this.weaponAttack = 12 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 12;
 			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
-			this.armorDef = 6 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 6;
 			this.bonusHP = 200;
 			this.bonusLust = 40;
 			this.lust = 30;

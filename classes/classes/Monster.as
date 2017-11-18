@@ -881,8 +881,8 @@
 		protected function set initedStrTouSpeInte(value:Boolean):void{
 			initsCalled.str_tou_spe_inte = value;
 		}
-		protected function set initedLibSensCor(value:Boolean):void{
-			initsCalled.lib_sens_cor = value;
+		protected function set initedWisLibSensCor(value:Boolean):void{
+			initsCalled.wis_lib_sens_cor = value;
 		}
 		protected const NO_DROP:WeightedDrop = new WeightedDrop();
 
@@ -986,12 +986,13 @@
 			initedStrTouSpeInte = true;
 		}
 
-		protected function initLibSensCor(lib:Number, sens:Number, cor:Number):void
+		protected function initWisLibSensCor(wis:Number, lib:Number, sens:Number, cor:Number):void
 		{
+			this.wis = wis;
 			this.lib = lib;
 			this.sens = sens;
 			this.cor = cor;
-			initedLibSensCor = true;
+			initedWisLibSensCor = true;
 		}
 
 
@@ -1592,11 +1593,11 @@
 			result +=".\n\n";
 
 			// COMBAT AND OTHER STATS
-			result += Hehas + "str=" + str + ", tou=" + tou + ", spe=" + spe+", inte=" + inte+", lib=" + lib + ", sens=" + sens + ", cor=" + cor + ".\n";
+			result += Hehas + "str=" + str + ", tou=" + tou + ", spe=" + spe +", inte=" + inte +", wis=" + wis +", lib=" + lib + ", sens=" + sens + ", cor=" + cor + ".\n";
 			result += Pronoun1 + " can " + weaponVerb + " you with  " + weaponPerk + " " + weaponName+" (attack " + weaponAttack + ", value " + weaponValue+").\n";
 			result += Pronoun1 + " is guarded with " + armorPerk + " " + armorName+" (defense " + armorDef + ", value " + armorValue+").\n";
-			result += Hehas + HP + "/" + maxHP() + " HP, " + lust + "/" + maxLust() + " lust, " + fatigue + "/" + maxFatigue() + " fatigue, " + mana + "/" + maxMana() + " mana. " + Pronoun3 + " bonus HP=" + bonusHP + ", bonus lust=" + bonusLust + ", and lust vulnerability=" + lustVuln + ".\n";
-			result += Heis + "level " + level + " and " + have+" " + gems + " gems. You will be awarded " + XP + " XP.\n";		//, " + soulforce + "/" + eMaxSoulforce() + " soulforce
+			result += Hehas + HP + "/" + maxHP() + " HP, " + lust + "/" + maxLust() + " lust, " + fatigue + "/" + maxFatigue() + " fatigue, " + wrath + "/" + maxWrath() + " wrath, " + soulforce + "/" + maxSoulforce() + " soulforce, " + mana + "/" + maxMana() + " mana. " + Pronoun3 + " bonus HP=" + bonusHP + ", bonus lust=" + bonusLust + ", and lust vulnerability=" + lustVuln + ".\n";
+			result += Heis + "level " + level + " and " + have+" " + gems + " gems. You will be awarded " + XP + " XP.\n";
 			
 			var numSpec:int = (special1 != null ? 1 : 0) + (special2 != null ? 1 : 0) + (special3 != null ? 1 : 0);
 			if (numSpec > 0) {
@@ -2098,13 +2099,13 @@
 				sens += (15 * (1 + newGamePlusMod()));
 			}
 			if (level > 25) bonusStatsAmp += 0.1*((int)(level-1)/25);
-			bonusAscStr += bonusStatsAmp * str;
-			bonusAscTou += bonusStatsAmp * tou;
-			bonusAscSpe += bonusStatsAmp * spe;
-			bonusAscInt += bonusStatsAmp * inte;
-			bonusAscWis += bonusStatsAmp * wis;
-			bonusAscLib += bonusStatsAmp * lib;
-			bonusAscSen += bonusStatsAmp * sens;
+			bonusAscStr += bonusStatsAmp * str * newGamePlusMod();
+			bonusAscTou += bonusStatsAmp * tou * newGamePlusMod();
+			bonusAscSpe += bonusStatsAmp * spe * newGamePlusMod();
+			bonusAscInt += bonusStatsAmp * inte * newGamePlusMod();
+			bonusAscWis += bonusStatsAmp * wis * newGamePlusMod();
+			bonusAscLib += bonusStatsAmp * lib * newGamePlusMod();
+			bonusAscSen += bonusStatsAmp * sens * newGamePlusMod();
 			bonusAscStr = Math.round(bonusAscStr);
 			bonusAscTou = Math.round(bonusAscTou);
 			bonusAscSpe = Math.round(bonusAscSpe);
@@ -2121,6 +2122,9 @@
 			this.sens += bonusAscSen;
 			bonusAscMaxHP += bonusAscStr + bonusAscTou + bonusAscSpe + bonusAscInt + bonusAscWis + bonusAscLib + bonusAscSen;
 			if (level > 10) bonusAscMaxHP *= (int)(level / 10 + 1);
+			weaponAttack += (1 + (int)(weaponAttack / 5)) * newGamePlusMod();
+			if (weaponRangeAttack > 0) weaponRangeAttack += (1 + (int)(weaponRangeAttack/5)) * newGamePlusMod();
+			armorDef += ((int)(1 + armorDef/10)) * newGamePlusMod();
 		}
 	}
 }

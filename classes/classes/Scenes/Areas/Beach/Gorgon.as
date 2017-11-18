@@ -158,12 +158,12 @@ package classes.Scenes.Areas.Beach
 			this.hairColor = "green";
 			this.hairLength = 16;
 			initStrTouSpeInte(91, 125, 110, 75);
-			initLibSensCor(72, 55, 40);
+			initWisLibSensCor(75, 72, 55, 40);
 			this.weaponName = "claws";
 			this.weaponVerb="claw-slash";
-			this.weaponAttack = 31 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 31;
 			this.armorName = "scales";
-			this.armorDef = 31 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 31;
 			this.bonusHP = 500;
 			this.bonusLust = 10;
 			this.lust = 30;

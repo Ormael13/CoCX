@@ -77,13 +77,13 @@
 			this.hairColor = furColor;
 			this.hairLength = 3;
 			initStrTouSpeInte(hasAxe ? 100 : 75, 70, 35, 20);
-			initLibSensCor(40 + this.ballSize * 2, 15 + this.ballSize * 2, 35);
+			initWisLibSensCor(20, 40 + this.ballSize * 2, 15 + this.ballSize * 2, 35);
 			this.faceType = FACE_COW_MINOTAUR;
 			this.weaponName = hasAxe?"axe":"fist";
 			this.weaponVerb = hasAxe?"cleave":"punch";
-			this.weaponAttack = (hasAxe ? (50 + (11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) : (40 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL])));
+			this.weaponAttack = hasAxe?50:40;
 			this.armorName = "thick fur";
-			this.armorDef = 12 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 12;
 			this.bonusHP = 20 + rand(this.ballSize*2);
 			this.bonusLust = 30 + rand(this.ballSize*3);
 			this.lust = this.ballSize * 3;

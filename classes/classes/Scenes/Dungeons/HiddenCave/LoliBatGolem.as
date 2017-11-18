@@ -56,7 +56,7 @@ package classes.Scenes.Dungeons.HiddenCave
 			this.ass.analWetness = ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,100,0,0,0);
 			initStrTouSpeInte(30, 30, 50, 10);
-			initLibSensCor(10, 10, 50);
+			initWisLibSensCor(10, 10, 10, 50);
 			this.hipRating = HIP_RATING_AMPLE+2;
 			this.buttRating = BUTT_RATING_LARGE;
 			this.skinTone = "light grey";
@@ -68,9 +68,9 @@ package classes.Scenes.Dungeons.HiddenCave
 			this.bonusHP = 100;
 			this.weaponName = "stone claws";
 			this.weaponVerb = "claw";
-			this.weaponAttack = 20 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 20;
 			this.armorName = "polished stone";
-			this.armorDef = 26 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 26;
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);

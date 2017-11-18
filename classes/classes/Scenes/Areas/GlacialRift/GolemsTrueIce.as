@@ -67,7 +67,7 @@ package classes.Scenes.Areas.GlacialRift
 			this.long = "You're currently fighting true ice golems. They're all around seven feet tall without any sexual characteristics, their body covered in ice and using bare fists to smash enemies.";
 			this.plural = true;
 			initStrTouSpeInte(150, 120, 90, 10);
-			initLibSensCor(10, 10, 50);
+			initWisLibSensCor(10, 10, 10, 50);
 			this.lustVuln = 0;
 			this.tallness = 84;
 			this.createBreastRow(0, 1);
@@ -79,9 +79,9 @@ package classes.Scenes.Areas.GlacialRift
 			this.additionalXP = 350;
 			this.weaponName = "fists";
 			this.weaponVerb = "smash";
-			this.weaponAttack = 40 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 40;
 			this.armorName = "ice armor";
-			this.armorDef = 40 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 40;
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);

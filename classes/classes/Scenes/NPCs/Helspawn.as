@@ -160,15 +160,15 @@ private function calledShot():void {
 			this.hairColor = "red";
 			this.hairLength = 13;
 			initStrTouSpeInte(60, 60, 64, 50);
-			initLibSensCor(45, 55, 20);
+			initWisLibSensCor(50, 45, 55, 20);
 			this.weaponName = weapon;
 			this.weaponVerb = {
 				'bow': "blunted arrow",
 				'scimitar': "slash",
 				'scimitar and shield': "slash"}[weapon];
-			this.weaponAttack = 20 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 20;
 			this.armorName = "scales";
-			this.armorDef = 12 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 12;
 			this.armorPerk = "";
 			this.armorValue = 50;
 			this.bonusHP = 175;

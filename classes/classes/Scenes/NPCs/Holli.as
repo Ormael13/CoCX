@@ -253,12 +253,12 @@ package classes.Scenes.NPCs
 			this.hairColor = "sandy-blonde";
 			this.hairLength = 15;
 			initStrTouSpeInte(150, 80, 80, 85);
-			initLibSensCor(75, 40, 80);
+			initWisLibSensCor(85, 75, 40, 80);
 			this.weaponName = "branches";
 			this.weaponVerb="branchy thwack";
-			this.weaponAttack = 6 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 6;
 			this.armorName = "bark";
-			this.armorDef = 40 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 40;
 			this.bonusHP = 1000;
 			this.bonusLust = 40;
 			this.lust = 20;

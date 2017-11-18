@@ -189,65 +189,65 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] < 1) {
 				initStrTouSpeInte(120, 90, 100, 90);
-				initLibSensCor(50, 35, game.flags[kFLAGS.EMBER_COR]);
-				this.weaponAttack = 36 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 54 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(90, 50, 35, game.flags[kFLAGS.EMBER_COR]);
+				this.weaponAttack = 36;
+				this.armorDef = 54;
 				this.bonusHP = 800;
 				this.level = 20;
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] == 1) {
 				initStrTouSpeInte(140, 110, 115, 105);
-				initLibSensCor(60, 40, game.flags[kFLAGS.EMBER_COR]);
-				this.weaponAttack = 43 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 73 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(105, 60, 40, game.flags[kFLAGS.EMBER_COR]);
+				this.weaponAttack = 43;
+				this.armorDef = 73;
 				this.bonusHP = 900;
 				this.level = 26;
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] == 2) {
 				initStrTouSpeInte(165, 135, 130, 120);
-				initLibSensCor(70, 45, game.flags[kFLAGS.EMBER_COR]);
-				this.weaponAttack = 50 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 92 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(120, 70, 45, game.flags[kFLAGS.EMBER_COR]);
+				this.weaponAttack = 50;
+				this.armorDef = 92;
 				this.bonusHP = 1000;
 				this.level = 32;
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] == 3) {
 				initStrTouSpeInte(190, 160, 145, 135);
-				initLibSensCor(80, 50, game.flags[kFLAGS.EMBER_COR]);
-				this.weaponAttack = 57 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 111 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(135, 80, 50, game.flags[kFLAGS.EMBER_COR]);
+				this.weaponAttack = 57;
+				this.armorDef = 111;
 				this.bonusHP = 1200;
 				this.level = 38;
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] == 4) {
 				initStrTouSpeInte(220, 190, 160, 150);
-				initLibSensCor(90, 55, game.flags[kFLAGS.EMBER_COR]);
-				this.weaponAttack = 64 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 130 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(150, 90, 55, game.flags[kFLAGS.EMBER_COR]);
+				this.weaponAttack = 64;
+				this.armorDef = 130;
 				this.bonusHP = 1400;
 				this.level = 44;
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] == 5) {
 				initStrTouSpeInte(250, 220, 175, 165);
-				initLibSensCor(100, 60, game.flags[kFLAGS.EMBER_COR]);
-				this.weaponAttack = 71 + (11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 150 + (12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(165, 100, 60, game.flags[kFLAGS.EMBER_COR]);
+				this.weaponAttack = 71;
+				this.armorDef = 150;
 				this.bonusHP = 1600;
 				this.level = 50;
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] == 6) {
 				initStrTouSpeInte(280, 250, 190, 180);
-				initLibSensCor(110, 65, game.flags[kFLAGS.EMBER_COR]);
-				this.weaponAttack = 78 + (14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 170 + (16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(180, 110, 65, game.flags[kFLAGS.EMBER_COR]);
+				this.weaponAttack = 78;
+				this.armorDef = 170;
 				this.bonusHP = 1800;
 				this.level = 56;
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] == 7) {
 				initStrTouSpeInte(310, 280, 205, 195);
-				initLibSensCor(120, 70, game.flags[kFLAGS.EMBER_COR]);
-				this.weaponAttack = 85 + (14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 190 + (16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(195, 120, 70, game.flags[kFLAGS.EMBER_COR]);
+				this.weaponAttack = 85;
+				this.armorDef = 190;
 				this.bonusHP = 2000;
 				this.level = 62;
 			}

@@ -189,12 +189,12 @@ package classes.Scenes.Quests.UrtaQuest
 			this.hairLength = 3;
 			this.faceType = FACE_COW_MINOTAUR;
 			initStrTouSpeInte(200, 140, 80, 50);
-			initLibSensCor(70, 25, 85);
+			initWisLibSensCor(50, 70, 25, 85);
 			this.weaponName = "chain";
 			this.weaponVerb="chain-whip";
-			this.weaponAttack = 66 + (14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 66;
 			this.armorName = "thick fur";
-			this.armorDef = 22 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 22;
 			this.bonusHP = 640 + rand(this.ballSize*4);
 			this.bonusLust = 40 + rand(this.ballSize*3);
 			this.lust = 50;

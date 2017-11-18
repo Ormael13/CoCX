@@ -156,12 +156,12 @@
 			this.hairColor = "brown";
 			this.hairLength = 13;
 			initStrTouSpeInte(57, 64, 35, 60);
-			initLibSensCor(25, 45, 40);
+			initWisLibSensCor(60, 25, 45, 40);
 			this.weaponName = "mace";
 			this.weaponVerb="smack";
-			this.weaponAttack = 16 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 16;
 			this.armorName = "tough hide";
-			this.armorDef = 6 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 6;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 12;
 			this.bonusHP = 30;

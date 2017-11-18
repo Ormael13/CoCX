@@ -132,14 +132,14 @@ package classes.Scenes.Areas.Plains
 			this.hairColor = "black";
 			this.hairLength = 8;
 			initStrTouSpeInte(120, 140, 100, 70);
-			initLibSensCor(15, 10, 55);
+			initWisLibSensCor(70, 15, 10, 55);
 			this.weaponName = "dual scimitars";
 			this.weaponVerb="slash";
-			this.weaponAttack = 28 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 28;
 			this.weaponPerk = "";
 			this.weaponValue = 25;
 			this.armorName = "tunic and pants";
-			this.armorDef = 14 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 14;
 			this.bonusHP = 1750;
 			this.bonusLust = 40;
 			this.lust = 0;

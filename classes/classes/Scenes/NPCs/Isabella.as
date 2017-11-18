@@ -203,65 +203,65 @@ package classes.Scenes.NPCs
 			this.hairLength = 13;
 			if (flags[kFLAGS.ISABELLA_LVL_UP] < 1) {
 				initStrTouSpeInte(80, 108, 75, 64);
-				initLibSensCor(64, 25, 40);
-				this.weaponAttack = 18 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 18 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(64, 64, 25, 40);
+				this.weaponAttack = 18;
+				this.armorDef = 18;
 				this.bonusHP = 600;
 				this.level = 20;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 1) {
 				initStrTouSpeInte(100, 130, 85, 73);
-				initLibSensCor(70, 30, 40);
-				this.weaponAttack = 21 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 24 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(73, 70, 30, 40);
+				this.weaponAttack = 21;
+				this.armorDef = 24;
 				this.bonusHP = 800;
 				this.level = 26;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 2) {
 				initStrTouSpeInte(120, 155, 100, 82);
-				initLibSensCor(80, 35, 40);
-				this.weaponAttack = 24 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 30 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(82, 80, 35, 40);
+				this.weaponAttack = 24;
+				this.armorDef = 30;
 				this.bonusHP = 1000;
 				this.level = 32;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 3) {
 				initStrTouSpeInte(140, 180, 115, 91);
-				initLibSensCor(90, 40, 40);
-				this.weaponAttack = 27 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 36 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(91, 90, 40, 40);
+				this.weaponAttack = 27;
+				this.armorDef = 36;
 				this.bonusHP = 1200;
 				this.level = 38;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 4) {
 				initStrTouSpeInte(160, 210, 130, 100);
-				initLibSensCor(100, 45, 40);
-				this.weaponAttack = 30 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 42 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(100, 100, 45, 40);
+				this.weaponAttack = 30;
+				this.armorDef = 42;
 				this.bonusHP = 1400;
 				this.level = 44;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 5) {
 				initStrTouSpeInte(180, 240, 145, 110);
-				initLibSensCor(110, 50, 40);
-				this.weaponAttack = 33 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 48 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(110, 110, 50, 40);
+				this.weaponAttack = 33;
+				this.armorDef = 48;
 				this.bonusHP = 1600;
 				this.level = 50;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 6) {
 				initStrTouSpeInte(200, 270, 160, 120);
-				initLibSensCor(120, 55, 40);
-				this.weaponAttack = 36 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 54 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(120, 120, 55, 40);
+				this.weaponAttack = 36;
+				this.armorDef = 54;
 				this.bonusHP = 1800;
 				this.level = 56;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 7) {
 				initStrTouSpeInte(220, 300, 175, 130);
-				initLibSensCor(130, 60, 40);
-				this.weaponAttack = 39 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 60 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(130, 130, 60, 40);
+				this.weaponAttack = 39;
+				this.armorDef = 60;
 				this.bonusHP = 2000;
 				this.level = 62;
 			}

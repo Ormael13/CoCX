@@ -32,12 +32,12 @@ package classes.Scenes.Areas.Battlefield
 			this.hairColor = "brown";
 			this.hairLength = 5;
 			initStrTouSpeInte(150, 100, 50, 100);
-			initLibSensCor(50, 50, 50);
+			initWisLibSensCor(50, 50, 50, 50);
 			this.weaponName = "tentacle";
 			this.weaponVerb="slash";
-			this.weaponAttack = 60 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 60;
 			this.armorName = "thick skin";
-			this.armorDef = 30 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 30;
 			this.bonusHP = 150;
 			this.bonusLust = 20;
 			this.lust = 20;
@@ -54,12 +54,6 @@ package classes.Scenes.Areas.Battlefield
 			//this.createPerk(PerkLib., 0, 0, 0, 0);
 			//this.createPerk(PerkLib., 0, 0, 0, 0);
 			//this.createPerk(PerkLib., 0, 0, 0, 0);
-			this.str += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 37;
 			checkMonster();
 		}
 		

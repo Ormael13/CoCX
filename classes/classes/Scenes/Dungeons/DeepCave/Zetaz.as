@@ -181,12 +181,12 @@ package classes.Scenes.Dungeons.DeepCave
 			this.hairColor = "black";
 			this.hairLength = 5;
 			initStrTouSpeInte(125, 100, 70, 55);
-			initLibSensCor(55, 35, 100);
+			initWisLibSensCor(55, 55, 35, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw-slash";
-			this.weaponAttack = 21 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 21;
 			this.armorName = "leathery skin";
-			this.armorDef = 14 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 14;
 			this.bonusHP = 600;
 			this.bonusLust = 50;
 			this.lust = 40;

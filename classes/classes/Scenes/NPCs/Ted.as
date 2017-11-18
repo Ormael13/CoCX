@@ -120,12 +120,12 @@ package classes.Scenes.NPCs
 			this.hairColor = "brown";
 			this.hairLength = 2;
 			initStrTouSpeInte(30, 50, 50, 30);
-			initLibSensCor(20, 40, 50);
+			initWisLibSensCor(30, 20, 40, 50);
 			this.weaponName = "bam hammer";
 			this.weaponVerb="bam";
-			this.weaponAttack = 8 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 8;
 			this.armorName = "dragonscales armor";
-			this.armorDef = 5 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 5;
 			this.lust = 15;
 			this.lustVuln = .9;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;

@@ -127,12 +127,12 @@ package classes.Scenes.Areas.GlacialRift
 			this.hairColor = "white";
 			this.hairLength = 8;
 			initStrTouSpeInte(140, 160, 80, 50);
-			initLibSensCor(40, 20, 45);
+			initWisLibSensCor(40, 40, 20, 45);
 			this.weaponName = "fists";
 			this.weaponVerb="punch";
-			this.weaponAttack = 36 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 36;
 			this.armorName = "thick fur";
-			this.armorDef = 30 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 30;
 			this.bonusHP = 1000;
 			this.bonusLust = 10;
 			this.lust = 10;

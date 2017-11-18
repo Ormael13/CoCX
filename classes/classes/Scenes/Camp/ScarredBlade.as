@@ -30,12 +30,12 @@ package classes.Scenes.Camp
 			this.pronoun2 = "it";
 			this.pronoun3 = "its";
 			initStrTouSpeInte(80, 100, 75, 50);
-			initLibSensCor(0, 0, 100);
+			initWisLibSensCor(50, 0, 0, 100);
 			this.weaponName = "scarred blade";
 			this.weaponVerb="slash";
-			this.weaponAttack = 50 + (11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 50;
 			this.armorName = "lethicite";
-			this.armorDef = 15 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 15;
 			this.bonusHP = 400;
 			this.lust = 0;
 			this.lustVuln = 0;

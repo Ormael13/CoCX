@@ -144,22 +144,22 @@ package classes.Scenes.Places.Boat
 			this.hairLength = 36;
 			if (game.flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
 				initStrTouSpeInte(300, 300, 170, 180);
-				initLibSensCor(150, 25, 100);
+				initWisLibSensCor(180, 150, 25, 100);
 				this.weaponName = "tentacles";
 				this.weaponVerb="slap";
-				this.weaponAttack = 100 + (21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 100;
 			}
 			else {
 				initStrTouSpeInte(370, 370, 220, 260);
-				initLibSensCor(30, 25, 0);
+				initWisLibSensCor(260, 30, 25, 0);
 				this.weaponName = "fists";
 				this.weaponVerb="wrathful punch";
-				this.weaponAttack = 126 + (26 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 126;
 			}
 			this.weaponPerk = "";
-			this.weaponValue = 70 + (15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponValue = 70;
 			this.armorName = "bark";
-			this.armorDef = 140 + (15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 140;
 			this.bonusHP = 5000;
 			if (game.flags[kFLAGS.FACTORY_SHUTDOWN] == 1) {
 				this.bonusHP += 3000;

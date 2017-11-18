@@ -98,12 +98,12 @@ package classes.Scenes.Dungeons.HelDungeon
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(150, 120, 130, 80);
-			initLibSensCor(90, 45, 50);
+			initWisLibSensCor(80, 90, 45, 50);
 			this.weaponName = "spears";
 			this.weaponVerb="stab";
-			this.weaponAttack = 59 + (12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 59;
 			this.armorName = "armor";
-			this.armorDef = 46 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 46;
 			this.bonusHP = 1000;
 			this.bonusLust = 100;
 			this.lust = 20;

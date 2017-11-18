@@ -199,109 +199,109 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 1) {
 				initStrTouSpeInte(30, 50, 100, 80);
-				initLibSensCor(30, 40, 10);
+				initWisLibSensCor(80, 30, 40, 10);
 				this.weaponName = "dagger";
-				this.weaponAttack = 8 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 8;
 				this.weaponRangeName = "bow";
-				this.weaponRangeAttack = 20 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponRangeAttack = 20;
 				this.armorName = "clothes";
-				this.armorDef = 5 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 5;
 				this.bonusHP = 50;
 				this.level = 20;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 2) {
 				initStrTouSpeInte(40, 65, 120, 100);
-				initLibSensCor(30, 40, 10);
+				initWisLibSensCor(100, 30, 40, 10);
 				this.weaponName = "dagger";
-				this.weaponAttack = 8 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 8;
 				this.weaponRangeName = "bow";
-				this.weaponRangeAttack = 20 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponRangeAttack = 20;
 				this.armorName = "clothes";
-				this.armorDef = 5 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 5;
 				this.bonusHP = 100;
 				this.level = 25;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 3) {
 				initStrTouSpeInte(50, 80, 140, 120);
-				initLibSensCor(30, 40, 10);
+				initWisLibSensCor(120, 30, 40, 10);
 				this.weaponName = "dagger";
-				this.weaponAttack = 8 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 8;
 				this.weaponRangeName = "bow";
-				this.weaponRangeAttack = 20 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponRangeAttack = 20;
 				this.armorName = "clothes";
-				this.armorDef = 5 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 5;
 				this.bonusHP = 150;
 				this.level = 30;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 4) {
 				initStrTouSpeInte(60, 95, 160, 140);
-				initLibSensCor(30, 40, 10);
+				initWisLibSensCor(140, 30, 40, 10);
 				this.weaponName = "dagger";
-				this.weaponAttack = 8 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 8;
 				this.weaponRangeName = "bow";
-				this.weaponRangeAttack = 20 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponRangeAttack = 20;
 				this.armorName = "clothes";
-				this.armorDef = 5 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 5;
 				this.bonusHP = 200;
 				this.level = 35;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 5) {
 				initStrTouSpeInte(70, 110, 180, 150);
-				initLibSensCor(30, 40, 10);
+				initWisLibSensCor(150, 30, 40, 10);
 				this.weaponName = "dagger";
-				this.weaponAttack = 8 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 8;
 				this.weaponRangeName = "bow";
-				this.weaponRangeAttack = 20 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponRangeAttack = 20;
 				this.armorName = "clothes";
-				this.armorDef = 5 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 5;
 				this.bonusHP = 250;
 				this.level = 40;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 6) {
 				initStrTouSpeInte(80, 130, 205, 150);
-				initLibSensCor(30, 40, 10);
+				initWisLibSensCor(150, 30, 40, 10);
 				this.weaponName = "dagger";
-				this.weaponAttack = 8 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 8;
 				this.weaponRangeName = "bow";
-				this.weaponRangeAttack = 20 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponRangeAttack = 20;
 				this.armorName = "clothes";
-				this.armorDef = 5 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 5;
 				this.bonusHP = 300;
 				this.level = 45;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 7) {
 				initStrTouSpeInte(100, 150, 235, 150);
-				initLibSensCor(50, 50, 10);
+				initWisLibSensCor(150, 50, 50, 10);
 				this.weaponName = "sharp dagger";
-				this.weaponAttack = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 16;
 				this.weaponRangeName = "long bow";
-				this.weaponRangeAttack = 50 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponRangeAttack = 50;
 				this.armorName = "light leather armor";
-				this.armorDef = 16 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 16;
 				this.bonusHP = 300;
 				this.level = 51;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 8) {
 				initStrTouSpeInte(120, 170, 270, 150);
-				initLibSensCor(70, 60, 10);
+				initWisLibSensCor(150, 70, 60, 10);
 				this.weaponName = "sharp dagger";
-				this.weaponAttack = 17 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 17;
 				this.weaponRangeName = "long bow";
-				this.weaponRangeAttack = 55 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponRangeAttack = 55;
 				this.armorName = "light leather armor";
-				this.armorDef = 18 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 18;
 				this.bonusHP = 300;
 				this.level = 57;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 9) {
 				initStrTouSpeInte(140, 190, 310, 150);
-				initLibSensCor(90, 70, 10);
+				initWisLibSensCor(150, 90, 70, 10);
 				this.weaponName = "sharp dagger";
-				this.weaponAttack = 18 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 18;
 				this.weaponRangeName = "long bow";//potem jak stanie sie wiecej niż sheep-morph kolejna zmiana łuku
-				this.weaponRangeAttack = 60 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponRangeAttack = 60;
 				this.armorName = "light leather armor";
-				this.armorDef = 20 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 20;
 				this.bonusHP = 300;
 				this.level = 63;
 			}

@@ -48,12 +48,12 @@ package classes.Scenes.Areas.Swamp
 			this.hairColor = "red";
 			this.hairLength = 13;
 			initStrTouSpeInte(70, 60, 99, 99);
-			initLibSensCor(45, 35, 20);
+			initWisLibSensCor(99, 45, 35, 20);
 			this.weaponName = "dagger";
 			this.weaponVerb="stab";
-			this.weaponAttack = 24 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 24;
 			this.armorName = "exoskeleton";
-			this.armorDef = 23 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 23;
 			this.armorPerk = "";
 			this.armorValue = 50;
 			this.bonusHP = 200;

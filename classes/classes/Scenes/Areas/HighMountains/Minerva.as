@@ -233,16 +233,16 @@ package classes.Scenes.Areas.HighMountains
 			this.hairColor = "red";
 			this.hairLength = 25;
 			initStrTouSpeInte(64, 80, 110, 75);
-			initLibSensCor(30, 25, 45);
+			initWisLibSensCor(70, 30, 25, 45);
 			if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) cor = 0; //Set to 0 corruption if purified.
 			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10) cor = 80; //Set to 80 corruption if corrupted.
 			this.weaponName = "halberd";
 			this.weaponVerb="slash";
-			this.weaponAttack = 50 + (11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 50;
 			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = game.armors.TUBETOP.name;
-			this.armorDef = 7 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 7;
 			this.armorPerk = "";
 			this.armorValue = 5;
 			this.bonusHP = 470;

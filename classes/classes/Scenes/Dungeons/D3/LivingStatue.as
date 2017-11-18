@@ -31,7 +31,7 @@ package classes.Scenes.Dungeons.D3
 			this.imageName = "livingstatue";
 			this.long = "This animate marble statue shows numerous signs of wear and tear, but remains as strong and stable as the day it was carved. Its pearly, white skin is pockmarked in places from age, yet the alabaster muscles seem to move with almost liquid grace. You get the impression that the statue was hewn in the days before the demons, then brought to life shortly after. It bears a complete lack of genitalia - an immaculately carved leaf is all that occupies its loins. It wields a hammer carved from the same material as the rest of it.";
 			initStrTouSpeInte(300, 340, 50, 80);
-			initLibSensCor(10, 10, 100);
+			initWisLibSensCor(80, 10, 10, 100);
 			this.lustVuln = 0;
 			this.tallness = 16 * 12;
 			this.createBreastRow(0, 1);
@@ -41,9 +41,9 @@ package classes.Scenes.Dungeons.D3
 			this.bonusHP = 3000;
 			this.weaponName = "stone greathammer";
 			this.weaponVerb = "smash";
-			this.weaponAttack = 120 + (25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 120;
 			this.armorName = "cracked stone";
-			this.armorDef = 100 + (11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 100;
 			this.additionalXP = 1000;
 			createPerk(PerkLib.Resolute, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);

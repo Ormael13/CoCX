@@ -168,12 +168,12 @@ package classes.Scenes.Areas.Swamp
 			this.hairColor = hairColor;
 			this.hairLength = 24;
 			initStrTouSpeInte(110, 75, 70, 100);
-			initLibSensCor(80, 50, 90);
+			initWisLibSensCor(100, 80, 50, 90);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 30 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 30;
 			this.armorName = "carapace";
-			this.armorDef = 60 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 60;
 			this.armorPerk = "";
 			this.armorValue = 70;
 			if (pierced) {

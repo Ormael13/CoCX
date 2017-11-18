@@ -49,12 +49,12 @@ package classes.Scenes.Camp
 			this.pronoun2 = "them";
 			this.pronoun3 = "their";
 			initStrTouSpeInte(70, 40, 75, 42);
-			initLibSensCor(55, 35, 100);
+			initWisLibSensCor(42, 55, 35, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 10 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 10;
 			this.armorName = "leathery skin";
-			this.armorDef = 3 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 3;
 			this.bonusHP = 300;
 			this.bonusLust = 150;
 			this.lust = 30;

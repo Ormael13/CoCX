@@ -114,12 +114,12 @@ package classes.Scenes.NPCs
 			this.hairColor = "white";
 			this.hairLength = 3;
 			initStrTouSpeInte(55, 40, 10, 140);
-			initLibSensCor(120, 0, 33);
+			initWisLibSensCor(140, 120, 0, 33);
 			this.weaponName = "fists";
 			this.weaponVerb="punches";
-			this.weaponAttack = 14 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 14;
 			this.armorName = "comfortable clothes";
-			this.armorDef = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 1;
 			this.bonusHP = 30;
 			this.bonusLust = 10;
 			this.lust = 10;

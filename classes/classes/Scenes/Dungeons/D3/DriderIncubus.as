@@ -26,12 +26,12 @@ package classes.Scenes.Dungeons.D3
 			this.hipRating = HIP_RATING_SLENDER;
 			this.buttRating = BUTT_RATING_TIGHT;
 			initStrTouSpeInte(140, 300, 140, 90);
-			initLibSensCor(160, 40, 100);
+			initWisLibSensCor(80, 160, 40, 100);
 			this.weaponName = "spear";
-			this.weaponAttack = 38 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 38;
 			this.weaponVerb = "lunge";
 			this.armorName = "chitin";
-			this.armorDef = 60 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 60;
 			this.bonusHP = 1500;
 			this.bonusLust = 40;
 			this.gems = 200 + rand(80);

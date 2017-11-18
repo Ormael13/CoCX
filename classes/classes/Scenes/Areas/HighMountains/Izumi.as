@@ -27,12 +27,12 @@ package classes.Scenes.Areas.HighMountains
 			this.hairColor = "golden";
 			this.hairLength = 25;
 			initStrTouSpeInte(230, 150, 110, 100);
-			initLibSensCor(30, 25, 15);
+			initWisLibSensCor(100, 30, 25, 15);
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
-			this.weaponAttack = 50 + (11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 50;
 			this.armorName = "silken kimono";
-			this.armorDef = 14 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 14;
 			this.bonusHP = 800;
 			this.bonusLust = 10;
 			this.lust = 10;

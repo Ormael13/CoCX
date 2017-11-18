@@ -306,7 +306,7 @@ package classes.Scenes.NPCs
 			this.hairColor = "auburn";
 			this.hairLength = 11;
 			initStrTouSpeInte(90, 45, 105, 50);
-			initLibSensCor(30, 45, 25);
+			initWisLibSensCor(50, 30, 45, 25);
 			var lust:Number = 30;
 			var lustVuln:Number = 0.4;
 			var bonusHP:Number = 200;
@@ -328,9 +328,9 @@ package classes.Scenes.NPCs
 			}
 			this.weaponName = "foot";
 			this.weaponVerb="kick";
-			this.weaponAttack = 12 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 12;
 			this.armorName = "clothes";
-			this.armorDef = 7 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 7;
 			this.bonusHP = bonusHP;
 			this.bonusLust = 10;
 			this.lust = lust;

@@ -88,12 +88,12 @@ package classes.Scenes.Areas.DeepSea
 			this.hairColor = "brown";
 			this.hairLength = 5;
 			initStrTouSpeInte(700, 200, 200, 250);
-			initLibSensCor(200, 50, 50);
+			initWisLibSensCor(250, 200, 50, 50);
 			this.weaponName = "large tentacle";
 			this.weaponVerb="slash";
-			this.weaponAttack = 145 + (30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 145;
 			this.armorName = "super thick skin";
-			this.armorDef = 95 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 95;
 			this.bonusHP = 10000;
 			this.bonusLust = 20;
 			this.lust = 20;

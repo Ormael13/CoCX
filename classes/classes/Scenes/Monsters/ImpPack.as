@@ -51,12 +51,12 @@ package classes.Scenes.Monsters
 			this.pronoun2 = "them";
 			this.pronoun3 = "their";
 			initStrTouSpeInte(70, 40, 50, 42);
-			initLibSensCor(55, 35, 100);
+			initWisLibSensCor(42, 55, 35, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 16 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 16;
 			this.armorName = "leathery skin";
-			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 10;
 			this.bonusHP = 500;
 			this.bonusLust = 150;
 			this.lust = 30;

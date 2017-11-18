@@ -134,12 +134,12 @@
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(55, 15, 45, 55);
-			initLibSensCor(60, 45, 50);
+			initWisLibSensCor(50, 60, 45, 50);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 10 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 10;
 			this.armorName = "chitin";
-			this.armorDef = 20 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 20;
 			this.bonusHP = 100;
 			this.bonusLust = 20;
 			this.lust = 20;

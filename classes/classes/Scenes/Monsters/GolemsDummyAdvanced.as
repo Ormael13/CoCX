@@ -42,7 +42,7 @@ package classes.Scenes.Monsters
 			this.imageName = "advanced dummy golems";
 			this.long = "You're currently fighting advanced dummy golems. They're all around seven feet tall without any sexual characteristics, their stone body covered in cracks and using bare stone fists to smash enemies.";
 			initStrTouSpeInte(60, 60, 30, 10);
-			initLibSensCor(10, 10, 50);
+			initWisLibSensCor(10, 10, 10, 50);
 			this.tallness = 84;
 			this.drop = new ChainedDrop()
 					.add(useables.GOLCORE, 1);
@@ -51,9 +51,9 @@ package classes.Scenes.Monsters
 			this.additionalXP = 150;
 			this.weaponName = "stone fists";
 			this.weaponVerb = "smash";
-			this.weaponAttack = 20 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 20;
 			this.armorName = "cracked stone";
-			this.armorDef = 20 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 20;
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);

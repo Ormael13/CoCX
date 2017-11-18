@@ -75,12 +75,12 @@ package classes.Scenes.Areas.Ocean
 			this.hairColor = "silver";
 			this.hairLength = 20;
 			initStrTouSpeInte(250, 170, 205, 110);
-			initLibSensCor(120, 25, 40);
+			initWisLibSensCor(110, 120, 25, 40);
 			this.weaponName = "shark teeth";
 			this.weaponVerb="bite";
-			this.weaponAttack = 66 + (14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 66;
 			this.armorName = "tough skin";
-			this.armorDef = 20 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 20;
 			this.bonusHP = 500;
 			this.bonusLust = 20;
 			this.lust = 20;

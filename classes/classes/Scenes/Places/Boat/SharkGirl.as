@@ -59,12 +59,12 @@
 			this.hairColor = "silver";
 			this.hairLength = 16;
 			initStrTouSpeInte(90, 90, 60, 42);
-			initLibSensCor(75, 35, 40);
+			initWisLibSensCor(42, 75, 35, 40);
 			this.weaponName = "shark teeth";
 			this.weaponVerb="bite";
-			this.weaponAttack = 20 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 20;
 			this.armorName = "tough skin";
-			this.armorDef = 12 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 12;
 			this.bonusHP = 20;
 			this.bonusLust = 20;
 			this.lust = 40;

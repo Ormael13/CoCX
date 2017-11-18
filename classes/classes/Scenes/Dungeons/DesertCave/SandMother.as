@@ -150,14 +150,14 @@ package classes.Scenes.Dungeons.DesertCave
 			this.hairColor = "platinum-blonde";
 			this.hairLength = 15;
 			initStrTouSpeInte(64, 80, 55, 64);
-			initLibSensCor(60, 40, 30);
+			initWisLibSensCor(64, 60, 40, 30);
 			this.weaponName = "fists";
 			this.weaponVerb="punches";
-			this.weaponAttack = 6 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 6;
 			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "robes";
-			this.armorDef = 10 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 10;
 			this.bonusHP = 130;
 			this.bonusLust = 30;
 			this.lust = 20;

@@ -113,12 +113,12 @@
 			this.hairColor = "blue";
 			this.hairLength = 16;
 			initStrTouSpeInte(90, 70, 110, 60);
-			initLibSensCor(70, 30, 80);
+			initWisLibSensCor(50, 70, 30, 80);
 			this.weaponName = "talons";
 			this.weaponVerb="slashing talons";
-			this.weaponAttack = 35 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 35;
 			this.armorName = "feathers";
-			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 10;
 			this.bonusHP = 200;
 			this.bonusLust = 20;
 			this.lust = 10;

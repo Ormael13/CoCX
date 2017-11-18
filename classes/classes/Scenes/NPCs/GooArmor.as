@@ -117,12 +117,12 @@ package classes.Scenes.NPCs
 			this.hairLength = 15;
 			this.hairType = HAIR_GOO;
 			initStrTouSpeInte(120, 110, 100, 80);
-			initLibSensCor(90, 35, 50);
+			initWisLibSensCor(80, 90, 35, 50);
 			this.weaponName = "goo sword";
 			this.weaponVerb="slash";
-			this.weaponAttack = 70 + (15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 70;
 			this.armorName = "armor";
-			this.armorDef = 60 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 60;
 			this.bonusHP = 500;
 			this.bonusLust = 20;
 			this.lustVuln = .35;

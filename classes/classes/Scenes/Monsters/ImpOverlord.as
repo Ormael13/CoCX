@@ -237,12 +237,12 @@ package classes.Scenes.Monsters
 			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
 			this.skinTone = "red";
 			initStrTouSpeInte(100, 95, 85, 71);
-			initLibSensCor(75, 35, 100);
+			initWisLibSensCor(71, 75, 35, 100);
 			this.weaponName = "scimitar";
 			this.weaponVerb="slash";
-			this.weaponAttack = 30 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 30;
 			this.armorName = "sexy black chitin armor-plating";
-			this.armorDef = 20 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 20;
 			this.bonusHP = 600;
 			this.bonusLust = 30;
 			this.lust = 30;

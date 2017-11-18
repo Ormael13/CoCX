@@ -79,7 +79,7 @@ package classes.Scenes.NPCs
 			this.hairColor = "blue";//eyes: red
 			this.hairLength = 20;
 			initStrTouSpeInte(50, 50, 40, 40);
-			initLibSensCor(20, 10, 50);
+			initWisLibSensCor(40, 20, 10, 50);
 			this.lustVuln = 0.85;
 			this.drop = NO_DROP;
 			//this.drop = new ChainedDrop()
@@ -88,12 +88,12 @@ package classes.Scenes.NPCs
 			//this.bonusHP = 200;
 			this.weaponName = "ayotech gaunlets";
 			this.weaponVerb = "smash";
-			this.weaponAttack = 16 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 16;
 			this.weaponRangeName = "ayotech pistol";
 			this.weaponRangeVerb = "shoot";
-			this.weaponRangeAttack = 12 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponRangeAttack = 12;
 			this.armorName = "light ayo armor";//zamienić na coś innego?
-			this.armorDef = 30 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 30;
 			//this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
 			checkMonster();
 		}

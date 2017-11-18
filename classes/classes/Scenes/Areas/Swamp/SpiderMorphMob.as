@@ -120,12 +120,12 @@ package classes.Scenes.Areas.Swamp
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(100, 80, 99, 99);
-			initLibSensCor(35, 35, 20);
+			initWisLibSensCor(99, 35, 35, 20);
 			this.weaponName = "claws";
 			this.weaponVerb="claws";
-			this.weaponAttack = 34 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 34;
 			this.armorName = "chitin";
-			this.armorDef = 30 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 30;
 			this.bonusHP = 1200;
 			this.bonusLust = 50;
 			this.lustVuln = .2;

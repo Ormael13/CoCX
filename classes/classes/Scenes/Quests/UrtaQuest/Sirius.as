@@ -120,12 +120,12 @@ package classes.Scenes.Quests.UrtaQuest
 			this.hairColor = "orange";
 			this.hairLength = 16;
 			initStrTouSpeInte(110, 90, 125, 92);
-			initLibSensCor(45, 35, 40);
+			initWisLibSensCor(92, 45, 35, 40);
 			this.weaponName = "fangs";
 			this.weaponVerb="bite";
-			this.weaponAttack = 37 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 37;
 			this.armorName = "scales";
-			this.armorDef = 31 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 31;
 			this.bonusHP = 400;
 			this.bonusLust = 20;
 			this.lust = 30;

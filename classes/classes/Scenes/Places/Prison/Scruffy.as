@@ -36,12 +36,12 @@ package classes.Scenes.Places.Prison
 			this.hairColor = "black";
 			this.hairLength = 5;
 			initStrTouSpeInte(40, 30, 40, 28);
-			initLibSensCor(45, 45, 90);
+			initWisLibSensCor(28, 45, 45, 90);
 			this.weaponName = "mop";
 			this.weaponVerb = "thwack";
-			this.weaponAttack = 10 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 10;
 			this.armorName = "leathery skin";
-			this.armorDef = 5 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 5;
 			this.bonusLust = 30;
 			this.lust = 40;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;

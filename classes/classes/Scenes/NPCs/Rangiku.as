@@ -105,56 +105,56 @@ package classes.Scenes.NPCs
 			this.hairLength = 39;
 			if (flags[kFLAGS.RANGIKU_LVL_UP] < 1) {
 				initStrTouSpeInte(110, 120, 100, 200);
-				initLibSensCor(250, 200, 50);
+				initWisLibSensCor(200, 250, 200, 50);
 				this.weaponName = "dual large axes";
 				this.weaponVerb="cleaves";
-				this.weaponAttack = 26 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 26;
 				this.armorName = "black robe";
-				this.armorDef = 21 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 21;
 				this.bonusHP = 100;
 				this.level = 15;
 			}/*
 			if (flags[kFLAGS.RANGIKU_LVL_UP] == 1) {
 				initStrTouSpeInte(110, 120, 100, 200);
-				initLibSensCor(250, 200, 50);
+				initWisLibSensCor(200, 250, 200, 50);
 				this.weaponName = "dual large axes";
 				this.weaponVerb="cleaves";
-				this.weaponAttack = 26 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 26;
 				this.armorName = "black robe";
-				this.armorDef = 21 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 21;
 				this.bonusHP = 100;
 				this.level = 30;
 			}
 			if (flags[kFLAGS.RANGIKU_LVL_UP] == 2) {
 				initStrTouSpeInte(110, 120, 100, 200);
-				initLibSensCor(250, 200, 50);
+				initWisLibSensCor(200, 250, 200, 50);
 				this.weaponName = "dual large axes";
 				this.weaponVerb="cleaves";
-				this.weaponAttack = 26 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 26;
 				this.armorName = "black robe";
-				this.armorDef = 21 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 21;
 				this.bonusHP = 100;
 				this.level = 45;
 			}
 			if (flags[kFLAGS.RANGIKU_LVL_UP] == 3) {
 				initStrTouSpeInte(110, 120, 100, 200);
-				initLibSensCor(250, 200, 50);
+				initWisLibSensCor(200, 250, 200, 50);
 				this.weaponName = "dual large axes";
 				this.weaponVerb="cleaves";
-				this.weaponAttack = 26 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 26;
 				this.armorName = "black robe";
-				this.armorDef = 21 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 21;
 				this.bonusHP = 100;
 				this.level = 60;
 			}
 			if (flags[kFLAGS.RANGIKU_LVL_UP] == 4) {
 				initStrTouSpeInte(110, 120, 100, 200);
-				initLibSensCor(250, 200, 50);
+				initWisLibSensCor(200, 250, 200, 50);
 				this.weaponName = "dual large axes";
 				this.weaponVerb="cleaves";
-				this.weaponAttack = 26 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 26;
 				this.armorName = "black robe";
-				this.armorDef = 21 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 21;
 				this.bonusHP = 100;
 				this.level = 70;
 			}*/

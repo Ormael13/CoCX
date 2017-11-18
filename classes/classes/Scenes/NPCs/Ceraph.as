@@ -311,12 +311,12 @@
 			this.hairColor = "black";
 			this.hairLength = 20;
 			initStrTouSpeInte(75, 55, 90, 80);
-			initLibSensCor(75, 15, 100);
+			initWisLibSensCor(80, 75, 15, 100);
 			this.weaponName = "flaming whip";
 			this.weaponVerb="flame-whip";
-			this.weaponAttack = 20 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 20;
 			this.armorName = "demon-skin";
-			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 10;
 			this.bonusHP = 200;
 			this.bonusLust = 40;
 			this.lust = 30;

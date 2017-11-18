@@ -116,12 +116,12 @@
 			this.hairColor = "brown";
 			this.hairLength = 16;
 			initStrTouSpeInte(38, 50, 55, 42);
-			initLibSensCor(55, 55, 40);
+			initWisLibSensCor(50, 55, 55, 40);
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
-			this.weaponAttack = 5 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 5;
 			this.armorName = "scales";
-			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 10;
 			this.bonusLust = 10;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

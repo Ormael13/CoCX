@@ -117,12 +117,12 @@ package classes.Scenes.Dungeons.DeepCave
 			this.hairColor = "purple";
 			this.hairLength = 22;
 			initStrTouSpeInte(75, 90, 90, 90);
-			initLibSensCor(55, 35, 50);
+			initWisLibSensCor(90, 55, 35, 50);
 			this.weaponName = "fists";
 			this.weaponVerb="caresses";
-			this.weaponAttack = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 1;
 			this.armorName = "skin";
-			this.armorDef = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 1;
 			var lustVuln:Number = .5;
 			if(game.flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 0) lustVuln += .25;
 			if(game.flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 2) lustVuln += .5;

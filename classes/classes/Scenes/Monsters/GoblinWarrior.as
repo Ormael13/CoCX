@@ -81,12 +81,12 @@ package classes.Scenes.Monsters
 			this.hairColor = "red";
 			this.hairLength = 4;
 			initStrTouSpeInte(75, 50, 70, 72);
-			initLibSensCor(45, 45, 60);
+			initWisLibSensCor(70, 45, 45, 60);
 			this.weaponName = "sword and shield";
 			this.weaponVerb = "slash";
-			this.weaponAttack = 14 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 14;
 			this.armorName = "platemail";
-			this.armorDef = 12 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 12;
 			this.bonusHP = 400;
 			this.bonusLust = 20;
 			this.lust = 50;

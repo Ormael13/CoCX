@@ -158,12 +158,12 @@ package classes.Scenes.Areas.Plains
 			this.hairLength = 3+rand(20);
 			this.faceType = FACE_COW_MINOTAUR;
 			initStrTouSpeInte(75, 70, 110, 70);
-			initLibSensCor(60, 35, 45);
+			initWisLibSensCor(60, 60, 35, 45);
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
-			this.weaponAttack = 0 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 0;
 			this.armorName = "thick fur";
-			this.armorDef = 2 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 2;
 			this.bonusHP = 300;
 			this.bonusLust = 20;
 			this.lust = 20;

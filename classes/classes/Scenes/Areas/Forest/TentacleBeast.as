@@ -133,12 +133,12 @@
 			this.hairColor = "green";
 			this.hairLength = 1;
 			initStrTouSpeInte(73, 90, 25, 45);
-			initLibSensCor(90, 20, 100);
+			initWisLibSensCor(40, 90, 20, 100);
 			this.weaponName = "whip-tendril";
 			this.weaponVerb="thorny tendril";
-			this.weaponAttack = 10 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 10;
 			this.armorName = "rubbery skin";
-			this.armorDef = 18 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 18;
 			this.bonusHP = 400;
 			this.bonusLust = 20;
 			this.lust = 10;

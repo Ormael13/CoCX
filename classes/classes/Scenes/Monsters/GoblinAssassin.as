@@ -138,12 +138,12 @@
 			this.hairColor = "blue";
 			this.hairLength = 7;
 			initStrTouSpeInte(45, 55, 110, 95);
-			initLibSensCor(64, 35, 60);
+			initWisLibSensCor(95, 64, 35, 60);
 			this.weaponName = "needles";
 			this.weaponVerb = "stabbing needles";
-			this.weaponAttack = 2 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 2;
 			this.armorName = "leather straps";
-			this.armorDef = 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.armorDef = 1;
 			this.bonusHP = 70;
 			this.bonusLust = 20;
 			this.lust = 50;

@@ -72,12 +72,12 @@
 			this.hairColor = "sandy-blonde";
 			this.hairLength = 15;
 			initStrTouSpeInte(30, 45, 35, 45);
-			initLibSensCor(55, 40, 30);
+			initWisLibSensCor(50, 55, 40, 30);
 			this.weaponName = "kick";
 			this.weaponVerb="kick";
-			this.weaponAttack = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 1;
 			this.armorName = "robes";
-			this.armorDef = 2 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 2;
 			this.bonusHP = 100;
 			this.bonusLust = 20;
 			this.lust = 30;

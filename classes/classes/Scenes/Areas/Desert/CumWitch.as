@@ -192,12 +192,12 @@ package classes.Scenes.Areas.Desert
 			this.hairColor = "sandy-blonde";
 			this.hairLength = 15;
 			initStrTouSpeInte(50, 60, 45, 85);
-			initLibSensCor(55, 40, 30);
+			initWisLibSensCor(90, 55, 40, 30);
 			this.weaponName = "fists";
 			this.weaponVerb="punches";
-			this.weaponAttack = 2 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 2;
 			this.armorName = "robes";
-			this.armorDef = 4 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 4;
 			this.bonusHP = 150;
 			this.bonusLust = 20;
 			this.lust = 30;

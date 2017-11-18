@@ -216,65 +216,65 @@ package classes.Scenes.NPCs
 			this.hairLength = 3;
 			if (flags[kFLAGS.KIHA_LVL_UP] < 1) {
 				initStrTouSpeInte(85, 80, 85, 60);
-				initLibSensCor(50, 45, 66);
-				this.weaponAttack = 28 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 35 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(60, 50, 45, 66);
+				this.weaponAttack = 28;
+				this.armorDef = 35;
 				this.bonusHP = 500;
 				this.level = 21;
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 1) {
 				initStrTouSpeInte(110, 105, 110, 70);
-				initLibSensCor(70, 55, 66);
-				this.weaponAttack = 38 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 50 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(70, 70, 55, 66);
+				this.weaponAttack = 38;
+				this.armorDef = 50;
 				this.bonusHP = 600;
 				this.level = 27;
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 2) {
 				initStrTouSpeInte(135, 130, 135, 80);
-				initLibSensCor(90, 65, 66);
-				this.weaponAttack = 48 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 65 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(80, 90, 65, 66);
+				this.weaponAttack = 48;
+				this.armorDef = 65;
 				this.bonusHP = 700;
 				this.level = 33;
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 3) {
 				initStrTouSpeInte(160, 155, 160, 90);
-				initLibSensCor(110, 75, 66);
-				this.weaponAttack = 58 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 80 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(90, 110, 75, 66);
+				this.weaponAttack = 58;
+				this.armorDef = 80;
 				this.bonusHP = 800;
 				this.level = 39;
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 4) {
 				initStrTouSpeInte(185, 180, 185, 100);
-				initLibSensCor(130, 85, 66);
-				this.weaponAttack = 68 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 95 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(100, 130, 85, 66);
+				this.weaponAttack = 68;
+				this.armorDef = 95;
 				this.bonusHP = 900;
 				this.level = 45;
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 5) {
 				initStrTouSpeInte(210, 205, 210, 110);
-				initLibSensCor(150, 95, 66);
-				this.weaponAttack = 78 + (12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 110 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(110, 150, 95, 66);
+				this.weaponAttack = 78;
+				this.armorDef = 110;
 				this.bonusHP = 1000;
 				this.level = 51;
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 6) {
 				initStrTouSpeInte(235, 230, 235, 120);
-				initLibSensCor(170, 105, 66);
-				this.weaponAttack = 88 + (12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 125 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(120, 170, 105, 66);
+				this.weaponAttack = 88;
+				this.armorDef = 125;
 				this.bonusHP = 1200;
 				this.level = 57;
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 7) {
 				initStrTouSpeInte(260, 255, 260, 130);
-				initLibSensCor(190, 115, 66);
-				this.weaponAttack = 98 + (12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 140 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(130, 190, 115, 66);
+				this.weaponAttack = 98;
+				this.armorDef = 140;
 				this.bonusHP = 1400;
 				this.level = 63;
 			}

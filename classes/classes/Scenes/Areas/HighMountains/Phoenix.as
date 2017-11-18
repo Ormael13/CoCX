@@ -143,12 +143,12 @@ package classes.Scenes.Areas.HighMountains
 			this.hairColor = "red";
 			this.hairLength = 16;
 			initStrTouSpeInte(125, 110, 120, 84);
-			initLibSensCor(50, 30, 45);
+			initWisLibSensCor(80, 50, 30, 45);
 			this.weaponName = "scimitar and shield";
 			this.weaponVerb="slash";
-			this.weaponAttack = 41 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 41;
 			this.armorName = "chainmail and loincloth";
-			this.armorDef = 37 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 37;
 			this.bonusHP = 800;
 			this.bonusLust = 10;
 			this.lust = 10;

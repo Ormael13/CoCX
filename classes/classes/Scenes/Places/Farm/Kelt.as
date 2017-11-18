@@ -159,12 +159,12 @@ package classes.Scenes.Places.Farm
 			this.hairColor = randomChoice("black","brown");
 			this.hairLength = 3;
 			initStrTouSpeInte(70, 80, 50, 20);
-			initLibSensCor(40, 25, 55);
+			initWisLibSensCor(20, 40, 25, 55);
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
-			this.weaponAttack = 11 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 11;
 			this.armorName = "tough skin";
-			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 10;
 			this.bonusHP = 250;
 			this.bonusLust = 20;
 			this.lust = 40;

@@ -286,12 +286,12 @@ package classes.Scenes.Areas.Bog
 			this.hairLength = 1;
 			this.earType = EARS_ELFIN;
 			initStrTouSpeInte(90, 70, 140, 40);
-			initLibSensCor(90, 35, 100);
+			initWisLibSensCor(40, 90, 35, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 34 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 34;
 			this.armorName = "skin";
-			this.armorDef = 110 + (12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 110;
 			this.bonusHP = 300;
 			this.bonusLust = 10;
 			this.lust = 30;

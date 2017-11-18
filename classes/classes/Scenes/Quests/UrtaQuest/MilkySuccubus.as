@@ -107,14 +107,14 @@ package classes.Scenes.Quests.UrtaQuest
 			this.hairColor = "black";
 			this.hairLength = 13;
 			initStrTouSpeInte(130, 100, 180, 120);
-			initLibSensCor(150, 60, 100);
+			initWisLibSensCor(120, 150, 60, 100);
 			this.weaponName = "whip";
 			this.weaponVerb="whipping";
-			this.weaponAttack = 34 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 34;
 			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
-			this.armorDef = 22 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 22;
 			this.bonusHP = 700;
 			this.bonusLust = 40;
 			this.lust = 40;

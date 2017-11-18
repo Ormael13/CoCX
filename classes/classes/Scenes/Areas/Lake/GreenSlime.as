@@ -74,12 +74,12 @@
 			this.lowerBody = LOWER_BODY_TYPE_GOO;
 			this.skinTone = "green";
 			initStrTouSpeInte(25, 30, 10, 5);
-			initLibSensCor(50, 60, 20);
+			initWisLibSensCor(5, 50, 60, 20);
 			this.weaponName = "hands";
 			this.weaponVerb = "slap";
-			this.weaponAttack = 3 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 3;
 			this.armorName = "gelatinous skin";
-			this.armorDef = 3 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 3;
 			this.bonusHP = 50;
 			this.bonusLust = 20;
 			this.lust = 30;

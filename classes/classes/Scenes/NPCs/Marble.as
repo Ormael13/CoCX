@@ -98,12 +98,12 @@
 			this.hairColor = "brown";
 			this.hairLength = 13;
 			initStrTouSpeInte(85, 80, 45, 40);
-			initLibSensCor(25, 45, 40);
+			initWisLibSensCor(40, 25, 45, 40);
 			this.weaponName = "large hammer";
 			this.weaponVerb="hammer-blow";
-			this.weaponAttack = 26 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 26;
 			this.armorName = "tough hide";
-			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 10;
 			this.bonusLust = 20;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 14;

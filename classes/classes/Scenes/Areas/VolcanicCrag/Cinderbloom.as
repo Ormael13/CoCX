@@ -29,8 +29,8 @@ package classes.Scenes.Areas.VolcanicCrag
 			}
 			this.imageName = "cinderbloom alraune";
 			initStrTouSpeInte(10, 250, 10, 100);
-			initLibSensCor(200, 50, 0);
-			this.armorDef = 90 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			initWisLibSensCor(100, 200, 50, 0);
+			this.armorDef = 90;
 			this.bonusHP = 200;
 			this.level = 40;
 			this.gems = rand(25) + 15;

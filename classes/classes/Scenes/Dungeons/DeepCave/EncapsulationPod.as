@@ -214,12 +214,12 @@
 			this.hairColor = "black";
 			this.hairLength = 0;
 			initStrTouSpeInte(180, 1, 1, 1);
-			initLibSensCor(1, 1, 100);
+			initWisLibSensCor(1, 1, 1, 100);
 			this.weaponName = "pod";
 			this.weaponVerb="pod";
-			this.weaponAttack = 4 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 4;
 			this.armorName = "pod";
-			this.armorDef = 4 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 4;
 			this.bonusHP = 1200;
 			this.lust = 10;
 			this.lustVuln = 0;
