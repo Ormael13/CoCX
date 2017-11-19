@@ -27,7 +27,7 @@ public class SandWitch extends Monster
 		{
 			if (pcCameWorms){
 				outputText("\n\nThe witch blanches and backs away, leaving you to your fate.");
-				game.cleanupAfterCombat();
+				SceneLib.combat.cleanupAfterCombatImpl();
 			} else {
 				SceneLib.desert.sandWitchScene.sandwitchRape();
 			}

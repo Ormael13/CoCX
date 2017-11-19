@@ -272,8 +272,8 @@ public function tryToTalkDownAngryCow():void {
 		outputText("Your reply is blotted out by the thundering of her hooves as she lowers her shield and charges.\n\n");
 		startCombat(new Isabella());
 		if(!isabellaFollower()) isabellaFollowerScene.isabellaAffection(-2);
-		kGAMECLASS.enemyAI();
-	}
+        SceneLib.combat.enemyAIImpl();
+    }
 	//(int below 50)
 	else if(player.inte < 50) {
 		outputText("You start to try to explain your reasons for coming here, stuttering slightly in haste as the angry cow-girl looks to be paying less and less attention.  She snorts and lowers her shield, shouting, \"<i>You zink Izabella vould fall for zuch nonzense? HAH!  Prepare to face mein fury!</i>\"");

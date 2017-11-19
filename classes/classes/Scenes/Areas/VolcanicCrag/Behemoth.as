@@ -37,7 +37,7 @@ public class Behemoth extends Monster
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void {
 			if (pcCameWorms){
 				outputText("\n\nYour opponent doesn't seem to care.");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
 				SceneLib.volcanicCrag.behemothScene.loseToBehemoth();
 			}

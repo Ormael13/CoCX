@@ -1043,7 +1043,7 @@ public class EngineCore {
         if (kGAMECLASS.flags[kFLAGS.SFW_MODE] > 0) {
             if (kGAMECLASS.player.HP <= 0) outputText("You collapse from your injuries.");
             else outputText("You collapse from your overwhelming desires.");
-            if (kGAMECLASS.inCombat) kGAMECLASS.cleanupAfterCombat();
+            if (kGAMECLASS.inCombat) SceneLib.combat.cleanupAfterCombatImpl();
             else doNext(SceneLib.camp.returnToCampUseOneHour);
             return true;
         }

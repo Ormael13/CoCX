@@ -29,7 +29,7 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n");
-				game.combatRoundOver();
+				SceneLib.combat.combatRoundOverImpl();
 				return;
 			}
 			//Determine if dodged!
@@ -83,7 +83,7 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 			}
 			EngineCore.statScreenRefresh();
 			outputText("\n");
-			game.combatRoundOver();
+			SceneLib.combat.combatRoundOverImpl();
 		}
 
 		//(Special Attacks)
@@ -134,7 +134,7 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 			//Dodge all!
 			else outputText("Amily dashes at you and quickly slashes you twice, but you quickly sidestep her first blow and jump back to avoid any follow-ups.");
 
-			game.combatRoundOver();
+			SceneLib.combat.combatRoundOverImpl();
 		}
 
 		//-Poison Dart: Deals speed and str damage to the PC. (Not constant)
@@ -144,13 +144,13 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 			if (player.hasStatusEffect(StatusEffects.WindWall)) {
 				outputText(capitalA + short + " attack from her dartgun stops at wind wall weakening it slightly.\n");
 				player.addStatusValue(StatusEffects.WindWall,2,-1);
-				game.combatRoundOver();
+				SceneLib.combat.combatRoundOverImpl();
 				return;
 			}
 			//Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack from her dartgun!\n");
-				game.combatRoundOver();
+				SceneLib.combat.combatRoundOverImpl();
 				return;
 			}
 			//Determine if dodged!
@@ -199,14 +199,14 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 				var ase:AmilyVenomDebuff = player.createOrFindStatusEffect(StatusEffects.AmilyVenom) as AmilyVenomDebuff;
 				ase.increase();
 			}
-			game.combatRoundOver();
+			SceneLib.combat.combatRoundOverImpl();
 		}
 
 		//Concentrate: always avoids the next attack. Can be disrupted by tease/seduce.
 		private function amilyConcentration():void {
 			outputText("Amily takes a deep breath and attempts to concentrate on your movements.");
 			createStatusEffect(StatusEffects.Concentration,0,0,0,0);
-			game.combatRoundOver();
+			SceneLib.combat.combatRoundOverImpl();
 		}
 
 		//(if PC uses tease/seduce after this)

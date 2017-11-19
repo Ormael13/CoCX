@@ -46,11 +46,11 @@ import flash.utils.getQualifiedClassName;
 			EngineCore.outputText(text);
 		}
 		protected final function combatRoundOver():void{
-			game.combatRoundOver();
+			SceneLib.combat.combatRoundOverImpl();
 		}
 		protected final function cleanupAfterCombat():void
 		{
-			game.cleanupAfterCombat();
+			SceneLib.combat.cleanupAfterCombatImpl();
 		}
 		protected static function showStatDown(a:String):void{
 			kGAMECLASS.mainView.statsView.showStatDown(a);
@@ -1083,8 +1083,8 @@ import flash.utils.getQualifiedClassName;
 				attacks--;
 			}
 			removeStatusEffect(StatusEffects.Attacks);
-//			if (!game.combatRoundOver()) game.doNext(1);
-			game.combatRoundOver(); //The doNext here was not required
+//			if (!SceneLib.combat.combatRoundOverImpl()) game.doNext(1);
+			SceneLib.combat.combatRoundOverImpl(); //The doNext here was not required
 		}
 
 		/**
@@ -1269,7 +1269,7 @@ import flash.utils.getQualifiedClassName;
 				removeStatusEffect(StatusEffects.ConstrictedScylla);
 			}
 			addStatusValue(StatusEffects.ConstrictedScylla, 1, -1);
-			game.combatRoundOver();
+			SceneLib.combat.combatRoundOverImpl();
 			return false;
 			}
 			else if (player.lowerBody == 8) {
@@ -1279,7 +1279,7 @@ import flash.utils.getQualifiedClassName;
 				removeStatusEffect(StatusEffects.GooEngulf);
 			}
 			addStatusValue(StatusEffects.GooEngulf, 1, -1);
-			game.combatRoundOver();
+			SceneLib.combat.combatRoundOverImpl();
 			return false;
 			}
 			else if (hasStatusEffect(StatusEffects.EmbraceVampire)) {
@@ -1289,7 +1289,7 @@ import flash.utils.getQualifiedClassName;
 			}
 			else EngineCore.outputText("" + capitalA + short + " struggle but you manage to maintain the embrace.");
 			addStatusValue(StatusEffects.EmbraceVampire, 1, -1);
-			game.combatRoundOver();
+			SceneLib.combat.combatRoundOverImpl();
 			return false;
 			}
 			else {
@@ -1299,7 +1299,7 @@ import flash.utils.getQualifiedClassName;
 				removeStatusEffect(StatusEffects.Constricted);
 			}
 			addStatusValue(StatusEffects.Constricted, 1, -1);
-			game.combatRoundOver();
+			SceneLib.combat.combatRoundOverImpl();
 			return false;
 			}
 		}
@@ -1324,7 +1324,7 @@ import flash.utils.getQualifiedClassName;
 				if (plural) EngineCore.outputText(capitalA + short + " are too busy shivering with fear to fight.");
 				else EngineCore.outputText(capitalA + short + " is too busy shivering with fear to fight.");
 			}
-			game.combatRoundOver();
+			SceneLib.combat.combatRoundOverImpl();
 			return false;
 		}
 
@@ -1337,7 +1337,7 @@ import flash.utils.getQualifiedClassName;
 			else addStatusValue(StatusEffects.Stunned, 1, -1);
 			if (statusEffectv1(StatusEffects.StunnedTornado) <= 0) removeStatusEffect(StatusEffects.StunnedTornado);
 			else {
-				game.outputText(capitalA + short + " is still caught in the tornado.");
+				EngineCore.outputText(capitalA + short + " is still caught in the tornado.");
 				addStatusValue(StatusEffects.StunnedTornado, 1, -1);
 			}
 			if (hasStatusEffect(StatusEffects.InkBlind)) {
@@ -1353,7 +1353,7 @@ import flash.utils.getQualifiedClassName;
 				if (plural) EngineCore.outputText("Your foes are too dazed from your last hit to strike back!");
 				else EngineCore.outputText("Your foe is too dazed from your last hit to strike back!");
 			}
-			game.combatRoundOver();
+			SceneLib.combat.combatRoundOverImpl();
 			return false;
 		}
 
@@ -1397,8 +1397,8 @@ import flash.utils.getQualifiedClassName;
 				player.lust = 0;
 			}
 			game.inCombat = false;
-			game.clearStatuses(false);
-			var temp:Number = rand(10) + 1;
+            game.player.clearStatuses(false);
+            var temp:Number = rand(10) + 1;
 			if(temp > player.gems) temp = player.gems;
 			outputText("\n\nYou'll probably wake up in eight hours or so, missing " + temp + " gems.");
 			player.gems -= temp;
@@ -1747,7 +1747,7 @@ import flash.utils.getQualifiedClassName;
 				else {
 					var store:Number = maxHP() * (4 + rand(7)) / 100;
 					if (game.player.findPerk(PerkLib.ThirstForBlood) >= 0) store *= 1.5;
-					store = game.doDamage(store);
+					store = SceneLib.combat.doDamage(store);
 					if (plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
 				}
@@ -1763,7 +1763,7 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var store3:Number = (player.str + player.spe) * 2;
-					store3 = game.doDamage(store3);
+					store3 = SceneLib.combat.doDamage(store3);
 					if(plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your bite left behind. <b>(<font color=\"#800000\">" + store3 + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your bite left behind. <b>(<font color=\"#800000\">" + store3 + "</font>)</b>\n\n");
 				}
@@ -1782,7 +1782,7 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var store5:Number = (player.str + player.spe) * 2;
-					store5 = game.doDamage(store5);
+					store5 = SceneLib.combat.doDamage(store5);
 					if (plural) {
 						outputText(capitalA + short + " bleed profusely from the jagged ");
 						if (player.hornType == AppearanceDefs.HORNS_COW_MINOTAUR) outputText("wounds your horns");
@@ -1889,7 +1889,7 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var store2:Number = int(50+(player.inte/10));
-					store2 = game.doDamage(store2);
+					store2 = SceneLib.combat.doDamage(store2);
 					if(plural) outputText(capitalA + short + " burn from lingering immolination after-effect. <b>(<font color=\"#800000\">" + store2 + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " burns from lingering immolination after-effect. <b>(<font color=\"#800000\">" + store2 + "</font>)</b>\n\n");
 				}
@@ -1906,7 +1906,7 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var store4:Number = (player.str + player.spe) * 2.5;
-					store4 = game.doDamage(store4);
+					store4 = SceneLib.combat.doDamage(store4);
 					if(plural) outputText(capitalA + short + " burn from lingering Burn after-effect. <b>(<font color=\"#800000\">" + store4 + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " burns from lingering Burn after-effect. <b>(<font color=\"#800000\">" + store4 + "</font>)</b>\n\n");
 				}
@@ -1923,7 +1923,7 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var store6:Number = (player.spe + player.inte) * SceneLib.combat.soulskillMod() * 0.5;
-					store6 = game.doDamage(store6);
+					store6 = SceneLib.combat.doDamage(store6);
 					if(plural) outputText(capitalA + short + " burn from lingering Fire Punch after-effect. <b>(<font color=\"#800000\">" + store6 + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " burns from lingering Fire Punch after-effect. <b>(<font color=\"#800000\">" + store6 + "</font>)</b>\n\n");
 				}

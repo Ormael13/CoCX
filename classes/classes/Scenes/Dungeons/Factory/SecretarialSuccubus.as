@@ -4,6 +4,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Dungeons.Factory;
 import classes.Scenes.Monsters.AbstractSuccubus;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class SecretarialSuccubus extends AbstractSuccubus
@@ -37,7 +38,7 @@ public class SecretarialSuccubus extends AbstractSuccubus
 		{
 			if(pcCameWorms){
 				outputText("\n\nYour foe doesn't seem to care...");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
 				doNext(factory.doLossSuccubus);
 			}

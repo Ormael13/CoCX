@@ -138,7 +138,7 @@ import classes.Scenes.SceneLib;
 		{
 			if (pcCameWorms) {
 				outputText("\n\nThe minutaurs share a laugh while you cum, but their throbbing erections don't subside in the slightest.");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
 				SceneLib.highMountains.minotaurMobScene.minotaurDeFeet();
 			}

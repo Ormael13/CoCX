@@ -33,7 +33,7 @@ public class SharkGirl extends Monster
 		{
 			if (pcCameWorms){
 				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
 				SceneLib.boat.sharkGirlScene.sharkLossRape();
 			}

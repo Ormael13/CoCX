@@ -138,7 +138,7 @@ import classes.internals.*;
 		{
 			if (pcCameWorms){
 				outputText("\n\nThe drider licks her lips in anticipation...");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
 				SceneLib.swamp.corruptedDriderScene.loseToDrider();
 			}

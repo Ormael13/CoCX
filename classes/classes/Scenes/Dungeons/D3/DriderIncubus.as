@@ -539,7 +539,7 @@ this.HP -= (this.maxHP() * 0.08);
 			outputText("\n\nYou’re forced to drop her as the enraged drider prepares his counterattack. She lands on her feet, surprisingly enough.");
 			outputText("\n\n<i>“Oh, forgive me master! I’ll still get you off - I promise!”</i> The green slut wiggles away from you, trying to get at her master’s loins.");
 			outputText("\n\nWell... maybe she didn’t want free after all. At least she’ll make for a good distraction.");
-			kGAMECLASS.enemyAI();
-		}
+            SceneLib.combat.enemyAIImpl();
+        }
 	}
 }

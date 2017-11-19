@@ -39,7 +39,7 @@ public class BeeGirl extends Monster {
 		{
 			if (pcCameWorms) {
 				outputText("\n\nThe bee-girl goes white and backs away with a disgusted look on her face.\n\n");
-				game.cleanupAfterCombat();
+				SceneLib.combat.cleanupAfterCombatImpl();
 			}
 			else {
 				SceneLib.forest.beeGirlScene.beeRapesYou();
@@ -99,7 +99,7 @@ public class BeeGirl extends Monster {
 				paralyze.increase();
 			}
 			if (player.lust >= player.maxLust())
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			else doNext(EventParser.playerMenu);
 		}
 

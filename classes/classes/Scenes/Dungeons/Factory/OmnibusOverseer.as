@@ -3,6 +3,7 @@ package classes.Scenes.Dungeons.Factory
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Dungeons.Factory;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class OmnibusOverseer extends Monster
@@ -19,7 +20,7 @@ public class OmnibusOverseer extends Monster
 		{
 			if (pcCameWorms){
 				outputText("\n\nYour foe doesn't seem to care...");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
 				factory.doLossOmnibus();
 			}
@@ -34,7 +35,7 @@ public class OmnibusOverseer extends Monster
 			else {
 				createStatusEffect(StatusEffects.LustAura, 0, 0, 0, 0);
 			}
-			game.combatRoundOver();
+			SceneLib.combat.combatRoundOverImpl();
 		}
 		
 		private function milkAttack():void {
@@ -63,7 +64,7 @@ public class OmnibusOverseer extends Monster
 				player.dynStats("lus", 7 + player.sens / 20);
 				if (player.biggestLactation() > 1) outputText("Milk dribbles from your [allbreasts] in sympathy.");
 			}
-			game.combatRoundOver();
+			SceneLib.combat.combatRoundOverImpl();
 		}
 		
 		public function OmnibusOverseer()

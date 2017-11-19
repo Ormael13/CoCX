@@ -22,7 +22,7 @@ public class Sheila extends Monster
 			if(player.tallness < 42 && rand(2) == 0) {
 				outputText("Sheila bounces up to you and crouches low, curling her body like a watchspring.  She uncoils with her fist aimed at your jaw, but you easily perform a crouch of your own and duck under her lanky form, unbending yourself to push her legs up as she flies harmlessly overhead.  You can hear a partial shriek before she crashes face-first into the dirt behind you. ");
 				damage = 3 + rand(10);
-				damage = kGAMECLASS.doDamage(damage, true);
+				damage = SceneLib.combat.doDamage(damage, true);
 			}
 			//Miss:
 			else if(player.getEvasionRoll() || hasStatusEffect(StatusEffects.Blind)) {
@@ -62,7 +62,7 @@ public class Sheila extends Monster
 				outputText("Sheila squats down, then bounds explosively toward you!  She swings her leg out in front to kick, but you roll to the side and she slips past your shoulder.  You hear an \"<i>Oof!</i>\" as she lands on her butt behind you.  When you turn to look, she's already back to her feet, rubbing her smarting posterior and looking a bit embarrassed.");
 				//(small Sheila HP loss)
 				damage = 3 + rand(10);
-				damage = kGAMECLASS.doDamage(damage);
+				damage = SceneLib.combat.doDamage(damage);
 				outputText(" (" + damage + ")");
 			}
 			//Hit:

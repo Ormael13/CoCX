@@ -31,7 +31,7 @@ public class IncubusMechanic extends Monster {
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
 				EngineCore.addButton(0, "Anally", SceneLib.dungeons.factory.doRideIncubusAnally).hint("Ride him anally.");
 				EngineCore.addButton(1, "Orally", SceneLib.dungeons.factory.doOralIncubus).hint("Service the incubus orally.");
-				EngineCore.addButton(4, "Leave", game.cleanupAfterCombat);
+				EngineCore.addButton(4, "Leave", SceneLib.combat.cleanupAfterCombatImpl);
 			}
 			else {
 				player.dynStats("lus", 1);
@@ -47,7 +47,7 @@ public class IncubusMechanic extends Monster {
 				EngineCore.addButton(0, "Rape", SceneLib.dungeons.factory.doRapeIncubus).hint(player.hasCock() ? "Fuck his butt." : "Ride him vaginally.");
 				EngineCore.addButton(1, "Service Him", SceneLib.dungeons.factory.doOralIncubus).hint("Service the incubus orally.");
 				EngineCore.addButton(2, "Anal", SceneLib.dungeons.factory.doRideIncubusAnally).hint("Ride him anally.");
-				EngineCore.addButton(4, "Nothing", game.cleanupAfterCombat);
+				EngineCore.addButton(4, "Nothing", SceneLib.combat.cleanupAfterCombatImpl);
 			}
 		}
 		
@@ -72,7 +72,7 @@ public class IncubusMechanic extends Monster {
 		{
 			if(pcCameWorms){
 				outputText("\n\nYour foe doesn't seem to care...");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
 				SceneLib.dungeons.factory.doLossIncubus();
 			}
@@ -87,7 +87,7 @@ public class IncubusMechanic extends Monster {
 		private function cockTripAttack():void {
 			if (hasStatusEffect(StatusEffects.Blind)) { //Blind dodge change
 				outputText(capitalA + short + " suddenly grows it's dick to obscene lengths and tries to trip you with it.  Thankfully he's so blind he wasn't aiming anywhere near you!");
-				game.combatRoundOver();
+				SceneLib.combat.combatRoundOverImpl();
 				return;
 			}
 			outputText("The incubus lunges forward in a clumsy attack that you start to side-step, only to feel something grip behind your " + Appearance.buttDescription(player) + " and pull your [legs] out from under you.");
@@ -111,13 +111,13 @@ public class IncubusMechanic extends Monster {
 				SceneLib.combat.takeDamage(5);
 			}
 			outputText("\nThe incubus gives an overconfident smile as his cock retracts away from you, returning to its normal size.");
-			game.combatRoundOver();
+			SceneLib.combat.combatRoundOverImpl();
 		}
 		
 		private function spoogeAttack():void {
 			if (hasStatusEffect(StatusEffects.Blind)) { //Blind dodge change
 				outputText(capitalA + short + " pumps and thrusts his hips lewdly before cumming with intense force in your direction!  Thankfully his aim was off due to the blindness currently affect him.");
-				game.combatRoundOver();
+				SceneLib.combat.combatRoundOverImpl();
 				return;
 			}
 			outputText("Your demonic foe places his hands behind his head and lewdly pumps and thrusts his hips at you.  Your eyes open wide as a globule of cum erupts from the demon-prick and flies right at you.  ");
@@ -159,7 +159,7 @@ public class IncubusMechanic extends Monster {
 					}
 					else outputText("crotch.  Thankfully, it doesn't seem to have much effect.");
 			}
-			game.combatRoundOver();
+			SceneLib.combat.combatRoundOverImpl();
 			lust -= 10;
 			if (lust < 0) lust = 10;
 		}

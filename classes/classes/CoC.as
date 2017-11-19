@@ -166,38 +166,6 @@ public class CoC extends MovieClip
     public function resetGameState():void {
         _gameState = 3;
     }
-
-    public static function cleanupAfterCombat(nextFunc:Function = null):void {
-        SceneLib.combat.cleanupAfterCombatImpl(nextFunc);
-    }
-
-    public static function combatRoundOver():Boolean {
-        return SceneLib.combat.combatRoundOverImpl();
-    }
-
-    public static function enemyAI():void {
-        SceneLib.combat.enemyAIImpl();
-    }
-    public static function endHpLoss():void {
-        SceneLib.combat.endHpLoss();
-    }
-    public static function endLustLoss():void {
-        SceneLib.combat.endLustLoss();
-    }
-    public static function endHpVictory():void {
-        SceneLib.combat.endHpVictory();
-    }
-    public static function endLustVictory():void {
-        SceneLib.combat.endLustVictory();
-    }
-    public function clearStatuses(visibility: Boolean):void
-    {
-        player.clearStatuses(visibility);
-    }
-    public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
-        return SceneLib.combat.doDamage(damage,apply,display);
-    }
-
     private function gameStateDirectGet():int { return _gameState; }
 
     private function gameStateDirectSet(value:int):void { _gameState = value; }

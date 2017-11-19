@@ -135,7 +135,7 @@ if (!kGAMECLASS.inCombat && inDungeon == false && inRoomedDungeon == false && fl
 			if (foundItem) {
                 if (kGAMECLASS.inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv1(StatusEffects.Sealed) == 3) {
                     outputText("\nYou reach for your items, but you just can't get your pouches open.  <b>Your ability to use items was sealed, and now you've wasted a chance to attack!</b>\n\n");
-                    kGAMECLASS.enemyAI();
+                    SceneLib.combat.enemyAIImpl();
                     return;
 				}
 				outputText("\nWhich item will you use? (To discard unwanted items, hold Shift then click the item.)");

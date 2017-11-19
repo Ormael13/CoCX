@@ -18,7 +18,7 @@ public class MaleSpiderMorph extends AbstractSpiderMorph
 		{
 			if(pcCameWorms){
 				outputText("\n\nThe spider flashes a predatory grin while she waits it out...");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
 				SceneLib.swamp.maleSpiderMorphScene.loseToMaleSpiderMorph();
 			}

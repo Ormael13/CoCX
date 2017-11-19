@@ -128,7 +128,7 @@ public class GooGirl extends Monster
 		{
 			if (pcCameWorms) {
 				outputText("\n\nThe goo-girl seems confused but doesn't mind.");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
 				SceneLib.lake.gooGirlScene.getBeatByGooGirl();
 			}

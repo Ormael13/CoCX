@@ -102,7 +102,7 @@ public class SandTrap extends Monster
 		{
 			if (pcCameWorms) {
 				outputText("\n\nThe sand trap seems bemused by the insects your body houses...");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
 				SceneLib.desert.sandTrapScene.sandtrapmentLoss(true);
 			}

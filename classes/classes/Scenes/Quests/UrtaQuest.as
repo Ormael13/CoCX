@@ -968,7 +968,7 @@ public function urtaSpecials():void {
     if (kGAMECLASS.inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 5) {
         clearOutput();
 		outputText("You try to ready a special attack, but wind up stumbling dizzily instead.  <b>Your ability to use physical special attacks was sealed, and now you've wasted a chance to attack!</b>\n\n");
-        kGAMECLASS.enemyAI();
+        SceneLib.combat.enemyAIImpl();
         return;
 	}
 	menu();
@@ -1005,7 +1005,7 @@ private function berzerk():void {
 	}
 	outputText("You roar and unleash your savage fury, forgetting about defense in order to destroy your foe!\n\n");
 	player.createStatusEffect(StatusEffects.Berzerking,0,0,0,0);
-	kGAMECLASS.enemyAI();
+    SceneLib.combat.enemyAIImpl();
 }
 
 private function urtaMetabolize():void {
@@ -1013,7 +1013,7 @@ private function urtaMetabolize():void {
 	var damage:int = player.takeDamage(Math.round(player.maxHP()/10));
 	outputText("You work your body as hard as you can, restoring your fatigue at the cost of health. (" + damage + ")\nRestored 20 fatigue!\n\n");
 	fatigue(-20);
-	kGAMECLASS.enemyAI();
+    SceneLib.combat.enemyAIImpl();
 }
 
 private function urtaSecondWind():void {
@@ -1031,7 +1031,7 @@ private function urtaSecondWind():void {
 	fatigue(-150);
 	dynStats("lus", -100);
 	outputText("Closing your eyes for a moment, you focus all of your willpower on pushing yourself to your absolute limits, forcing your lusts down and drawing on reserves of energy you didn't know you had!\n\n");
-	kGAMECLASS.enemyAI();
+    SceneLib.combat.enemyAIImpl();
 }
 
 //Combo: 3x attack, higher miss chance, guaranteed hit vs blind
@@ -1075,8 +1075,8 @@ private function urtaComboAttack():void {
 		}
 		else {
 			outputText("\n");
-			kGAMECLASS.enemyAI();
-			return;
+            SceneLib.combat.enemyAIImpl();
+            return;
 		}
 	}
 	//Determine damage
@@ -1138,7 +1138,7 @@ private function urtaComboAttack():void {
 	if(damage > 0) {
 		if(player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
 		if(player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
-		damage = kGAMECLASS.doDamage(damage);
+		damage = SceneLib.combat.doDamage(damage);
 	}
 	if(damage <= 0) {
 		damage = 0;
@@ -1163,11 +1163,11 @@ private function urtaComboAttack():void {
 		}
 		trace("DONE ATTACK");
 		outputText("\n");
-		kGAMECLASS.enemyAI();
-	}
+        SceneLib.combat.enemyAIImpl();
+    }
 	else {
-		if(monster.HP <= 0) doNext(kGAMECLASS.endHpVictory);
-		else doNext(kGAMECLASS.endLustVictory);
+		if(monster.HP <= 0) doNext(SceneLib.combat.endHpVictory);
+		else doNext(SceneLib.combat.endLustVictory);
 	}
 }
 
@@ -1191,8 +1191,8 @@ private function urtaDirtKick():void {
 	//Dodged!
 	if(rand(20) + 1 + monster.spe/20 > 15 + player.spe/20) {
 		outputText(monster.mf("He","She") + " manages to shield " + monster.mf("his","her") + " eyes.  Damn!\n\n");
-		kGAMECLASS.enemyAI();
-		return;
+        SceneLib.combat.enemyAIImpl();
+        return;
 	}
 	else if(monster.hasStatusEffect(StatusEffects.Blind)) {
 		outputText(monster.mf("He","She") + "'s already blinded.  What a waste.\n\n");
@@ -1201,7 +1201,7 @@ private function urtaDirtKick():void {
 		outputText(monster.mf("He","She") + "'s blinded!\n\n");
 		monster.createStatusEffect(StatusEffects.Blind, 2 + rand(3),0,0,0);
 	}
-	kGAMECLASS.enemyAI();
+    SceneLib.combat.enemyAIImpl();
 }
 
 //SideWinder: 70% damage + stun chance
@@ -1228,8 +1228,8 @@ private function urtaSidewinder():void {
 		if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
 		if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
 		outputText("\n\n");
-		kGAMECLASS.enemyAI();
-		return;
+        SceneLib.combat.enemyAIImpl();
+        return;
 	}
 	//Determine damage
 	/*Determine damage - str modified by enemy toughness!
@@ -1291,7 +1291,7 @@ private function urtaSidewinder():void {
 	if(damage > 0) {
 		if(player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
 		if(player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
-		damage = kGAMECLASS.doDamage(damage);
+		damage = SceneLib.combat.doDamage(damage);
 	}
 	if(damage <= 0) {
 		damage = 0;
@@ -1323,11 +1323,11 @@ private function urtaSidewinder():void {
 			return;
 		}
 		outputText("\n");
-		kGAMECLASS.enemyAI();
-	}
+        SceneLib.combat.enemyAIImpl();
+    }
 	else {
-		if(monster.HP <= 0) doNext(kGAMECLASS.endHpVictory);
-		else doNext(kGAMECLASS.endLustVictory);
+		if(monster.HP <= 0) doNext(SceneLib.combat.endHpVictory);
+		else doNext(SceneLib.combat.endLustVictory);
 	}
 }
 
@@ -1346,8 +1346,8 @@ private function urtaVaultAttack():void {
 	fatigue(20);
 	if(player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 0) {
 		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  The seals have made normal attack impossible!  Maybe you could try something else?\n\n");
-		kGAMECLASS.enemyAI();
-		return;
+        SceneLib.combat.enemyAIImpl();
+        return;
 	}
 	//Blind
 	if(player.hasStatusEffect(StatusEffects.Blind)) {
@@ -1429,7 +1429,7 @@ private function urtaVaultAttack():void {
 	if(damage > 0) {
 		if(player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
 		if(player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
-		damage = kGAMECLASS.doDamage(damage);
+		damage = SceneLib.combat.doDamage(damage);
 	}
 	if(damage <= 0) {
 		damage = 0;
@@ -1455,8 +1455,8 @@ private function urtaVaultAttack():void {
 		combat.enemyAIImpl();
 	}
 	else {
-		if(monster.HP <= 0) doNext(kGAMECLASS.endHpVictory);
-		else doNext(kGAMECLASS.endLustVictory);
+		if(monster.HP <= 0) doNext(SceneLib.combat.endHpVictory);
+		else doNext(SceneLib.combat.endLustVictory);
 	}
 }
 
@@ -1477,8 +1477,8 @@ public function nagaPleaseNagaStoleMyDick():void {
 	outputText("\n\n\"<i>Sirius.  But I'm already with someone, quite happy with " + player2.mf("him","her") + ", and not looking for anyone else.  Besides, I'm only passing through and I have places to go yet,</i>\" you say, trying to be polite but firm; you'd be less than flattered by the attention even if you didn't have a painful history of guys asking you out, then changing their minds upon seeing your stallion-king-sized manhood.");
 	outputText("\n\n\"<i>You invade my territory... ssstep on my tail... and have the gall to tell me you're not going to make up for it!</i>\"  He hisses ominously.  \"<i>Hey, it was an acci-</i>\"  \"<i>Worthlesss female!  You are mine!</i>\"  He charges at you!");
 	outputText("\n\n<b>It's a fight!</b>");
-	kGAMECLASS.clearStatuses(false);
-	startCombat(new Sirius());
+    kGAMECLASS.player.clearStatuses(false);
+    startCombat(new Sirius());
 }
 
 //Tease*
@@ -1621,8 +1621,8 @@ private function gnollAlphaBitchIntro():void {
 	outputText("\n\nThe terrain gives way to flat dirt with tall grasses, a vast savanna stretching away as far as your eyes can see.  You move through it heedlessly, drunk on the idea that you can find the temple on the same day that you set out!");
 	outputText("\n\nHow wrong you are.  A spear smacks into the ground, the tip exploding into some sticky, restraining substance by your foot.  A high pitched war-cry chases the missile, barely giving you the warning you need to avoid the onrushing gnoll!  This one doesn't quite look like what you'd expect from their race, but she's moving too fast to really dwell on it.");
 	outputText("\n\n<b>It's a fight!</b>");
-	kGAMECLASS.clearStatuses(false);
-	startCombat(new GnollSpearThrower());
+    kGAMECLASS.player.clearStatuses(false);
+    startCombat(new GnollSpearThrower());
 	monster.str += 20 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 	monster.tou += 25 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 	monster.spe += 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
@@ -1931,8 +1931,8 @@ private function introSuccubiAndMinotaur():void {
 	outputText("\n\n\"<i>Sic 'em, boy!</i>\" she screeches, dropping the chain.");
 	outputText("\n\nThe minotaur lord thunders towards you, picking up the loose chain to use a weapon.  It's a fight!");
 	//{start fight}
-	kGAMECLASS.clearStatuses(false);
-	startCombat(new MinotaurLord());
+    kGAMECLASS.player.clearStatuses(false);
+    startCombat(new MinotaurLord());
 }
 
 
@@ -2119,8 +2119,8 @@ public function beatMinoLordOnToSuccubi():void {
 	}
 	outputText("\n\n\"<i>We'll see how your tune changes when you're licking my heels and begging for a drop of my milk!</i>\"  She snaps her whip angrily.");
 	outputText("\n\n<b>It's a fight!</b>");
-	kGAMECLASS.clearStatuses(false);
-	player.setWeapon(weapons.URTAHLB);
+    kGAMECLASS.player.clearStatuses(false);
+    player.setWeapon(weapons.URTAHLB);
 	//player.weapon = weapons.URTAHLB;
 	startCombat(new MilkySuccubus(),true);
 }

@@ -114,7 +114,7 @@ public class Zetaz extends Monster
 				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == AppearanceDefs.VAGINA_WETNESS_DROOLING && player.vaginas.length > 0) outputText("Thick runners of girl-lube stream down the insides of your thighs as your crotch gives into the demonic magics.  You wonder what " + a + short + "'s cock would feel like inside you?  ");
 				if (player.lust >= 60 && player.vaginas[0].vaginalWetness == AppearanceDefs.VAGINA_WETNESS_SLAVERING && player.vaginas.length == 1) outputText("Your [vagina] instantly soaks your groin with the heady proof of your need.  You wonder just how slippery you could " + a + short + "'s dick when it's rammed inside you?  ");
 			}
-			if(player.lust >= player.maxLust()) doNext(game.endLustLoss);
+			if(player.lust >= player.maxLust()) doNext(SceneLib.combat.endLustLoss);
 			else combatRoundOver();
 		}
 
@@ -154,7 +154,7 @@ public class Zetaz extends Monster
 		{
 			if (pcCameWorms){
 				outputText("\n\nYour foe doesn't seem put off enough to care...");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
 				SceneLib.dungeons.deepcave.loseToZetaz();
 			}

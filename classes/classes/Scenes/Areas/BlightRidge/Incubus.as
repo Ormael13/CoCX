@@ -30,7 +30,7 @@ use namespace kGAMECLASS;
 		private function cockTripAttack():void {
 			if (hasStatusEffect(StatusEffects.Blind)) { //Blind dodge change
 				outputText(capitalA + short + " suddenly grows it's dick to obscene lengths and tries to trip you with it.  Thankfully he's so blind he wasn't aiming anywhere near you!");
-				game.combatRoundOver();
+				SceneLib.combat.combatRoundOverImpl();
 				return;
 			}
 			outputText("The incubus lunges forward in a clumsy attack that you start to side-step, only to feel something grip behind your " + Appearance.buttDescription(player) + " and pull your [legs] out from under you.");
@@ -54,13 +54,13 @@ use namespace kGAMECLASS;
 				SceneLib.combat.takeDamage(5);
 			}
 			outputText("\nThe incubus gives an overconfident smile as his cock retracts away from you, returning to its normal size.");
-			game.combatRoundOver();
+			SceneLib.combat.combatRoundOverImpl();
 		}
 		
 		private function cockTripAttack2():void {
 			if (hasStatusEffect(StatusEffects.Blind)) { //Blind dodge change
 				outputText(capitalA + short + " suddenly grows it's dick to obscene lengths and tries to trip you with it.  Thankfully he's so blind he wasn't aiming anywhere near you!");
-				game.combatRoundOver();
+				SceneLib.combat.combatRoundOverImpl();
 				return;
 			}
 			outputText("The incubus lunges forward in a clumsy attack that you start to side-step, only to feel something grip behind your " + Appearance.buttDescription(player) + " and pull your [legs] out from under you.");
@@ -84,13 +84,13 @@ use namespace kGAMECLASS;
 				SceneLib.combat.takeDamage(4);
 			}
 			outputText("\nThe incubus gives an overconfident smile as his cock retracts away from you, returning to its normal size.");
-			game.combatRoundOver();
+			SceneLib.combat.combatRoundOverImpl();
 		}
 		
 		private function spoogeAttack2():void {
 			if (hasStatusEffect(StatusEffects.Blind)) { //Blind dodge change
 				outputText(capitalA + short + " pumps and thrusts his hips lewdly before cumming with intense force in your direction!  Thankfully his aim was off due to the blindness currently affect him.");
-				game.combatRoundOver();
+				SceneLib.combat.combatRoundOverImpl();
 				return;
 			}
 			outputText("Your demonic foe places his hands behind his head and lewdly pumps and thrusts his hips at you.  Your eyes open wide as a globule of cum erupts from the demon-prick and flies right at you.  ");
@@ -132,7 +132,7 @@ use namespace kGAMECLASS;
 					}
 					else outputText("crotch.  Thankfully, it doesn't seem to have much effect.");
 			}
-			game.combatRoundOver();
+			SceneLib.combat.combatRoundOverImpl();
 			lust -= 10;
 			if (lust < 0) lust = 10;
 		}

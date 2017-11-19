@@ -24,7 +24,7 @@ public class Ember extends Monster
 			gems = 0;
 			XP = 0;
 			HP = 0;
-			game.cleanupAfterCombat();
+			SceneLib.combat.cleanupAfterCombatImpl();
 		}
 		//Ember Attacks:
 		private function emberAttack():void {
@@ -59,7 +59,7 @@ public class Ember extends Monster
 				//Blind Ember: 
 				outputText("The blinded dragon tracks you with difficulty as you sprint around the landscape; seeing an opportunity, you strafe around " + emberMF("his","her") + " side, planting yourself behind a large flat boulder near " + emberMF("him","her") + " and pelting " + emberMF("him","her") + " with a small rock.  The scream as the dragon turns the magical conflagration toward you, only to have it hit the rock and blow up in " + emberMF("his","her") + " face, is quite satisfying.");
 				//(Ember HP damage)
-				game.doDamage(50);
+				SceneLib.combat.doDamage(50);
 			}
 			else {
 				outputText("Ember inhales deeply, then "+ emberMF("his","her") + " jaws open up, releasing streams of fire, ice and lightning; magical rather than physical, the gaudy displays lose cohesion and amalgamate into a column of raw energy as they fly at you.");

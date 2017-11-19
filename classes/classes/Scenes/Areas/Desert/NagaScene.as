@@ -904,8 +904,8 @@ public function nagaPlayerConstrict():void {
 	if(monster.plural) {
 		outputText("You launch yourself at " + monster.a + monster.short + ", but with multiple enemies, wrapping one up would leave you completely open to attack.  You hastily slither backwards before you expose yourself to danger.");
 		outputText("\n\n");
-		kGAMECLASS.enemyAI();
-		return;
+        SceneLib.combat.enemyAIImpl();
+        return;
 	}
 	if(monster.short == "pod") {
 		outputText("You can't constrict something you're trapped inside of!");
@@ -918,8 +918,8 @@ public function nagaPlayerConstrict():void {
 	//Amily!
 	if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 		outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-		kGAMECLASS.enemyAI();
-		return;
+        SceneLib.combat.enemyAIImpl();
+        return;
 	}
 	//WRAP IT UPPP
 	if(rand(player.spe + 40) > monster.spe) {
@@ -943,7 +943,7 @@ public function nagaPlayerConstrict():void {
 		}
 	}
 	outputText("\n\n");
-	kGAMECLASS.enemyAI();
+    SceneLib.combat.enemyAIImpl();
 }
 
 public function naggaSqueeze():void {
@@ -956,7 +956,7 @@ public function naggaSqueeze():void {
 	//Squeeze -
 	outputText("Your coils wrap tighter around your prey, leaving " + monster.pronoun2 + " short of breath. You can feel it in your tail as " + monster.pronoun3 + " struggles are briefly intensified. ");
 	var damage:int = monster.maxHP() * (.10 + rand(15) / 100);
-	kGAMECLASS.doDamage(damage, true, true);
+	SceneLib.combat.doDamage(damage, true, true);
 	fatigue(20, USEFATG_PHYSICAL);
 	//Enemy faints -
 	if(monster.HP < 1) {
@@ -968,7 +968,7 @@ public function naggaSqueeze():void {
 		return;
 	}
 	outputText("\n\n");
-	kGAMECLASS.enemyAI();
+    SceneLib.combat.enemyAIImpl();
 }
 //Tease
 public function naggaTease():void {
@@ -1106,7 +1106,7 @@ public function naggaTease():void {
         doNext(SceneLib.combat.endLustVictory);
         return;
     }
-	kGAMECLASS.enemyAI();
+    SceneLib.combat.enemyAIImpl();
 }
 
 public function nagaLeggoMyEggo():void {
@@ -1114,7 +1114,7 @@ public function nagaLeggoMyEggo():void {
 	outputText("You release " + monster.a + monster.short + " from " + monster.pronoun3 + " bonds, and " + monster.pronoun1 + " drops to the ground, catching " + monster.pronoun3 + " breath before " + monster.pronoun1 + " stands back up, apparently prepared to fight some more.");
 	outputText("\n\n");
 	monster.removeStatusEffect(StatusEffects.Constricted);
-	kGAMECLASS.enemyAI();
+    SceneLib.combat.enemyAIImpl();
 }
 
 

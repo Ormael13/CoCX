@@ -24,19 +24,19 @@ public class Akbal extends Monster
 					outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!");
 				if (player.spe - spe >= 20)
 					outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".");
-				game.combatRoundOver();
+				SceneLib.combat.combatRoundOverImpl();
 				return;
 			}
 			//Determine if evaded
 			if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.");
-				game.combatRoundOver();
+				SceneLib.combat.combatRoundOverImpl();
 				return;
 			}
 			//Determine if flexibilitied
 			if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 10) {
 				outputText("Using your cat-like agility, you twist out of the way of " + a + short + "'s attack.");
-				game.combatRoundOver();
+				SceneLib.combat.combatRoundOverImpl();
 				return;
 			}
 			//Determine damage - str modified by enemy toughness!
@@ -68,7 +68,7 @@ public class Akbal extends Monster
 					player.takeDamage(damage);
 				}
 			}
-			game.combatRoundOver();
+			SceneLib.combat.combatRoundOverImpl();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
@@ -79,7 +79,7 @@ public class Akbal extends Monster
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			SceneLib.forest.akbalScene.akbalWon(hpVictory,pcCameWorms);
-			game.cleanupAfterCombat();
+			SceneLib.combat.cleanupAfterCombatImpl();
 		}
 		
 		public function akbalLustAttack():void
@@ -99,7 +99,7 @@ public class Akbal extends Monster
 				//(Lust increase)
 				player.dynStats("lus", 12 + rand(12));
 			}
-			game.combatRoundOver();
+			SceneLib.combat.combatRoundOverImpl();
 		}
 		
 		public function akbalSpecial():void
@@ -126,21 +126,21 @@ public class Akbal extends Monster
 						outputText("You dodge " + a + short + "'s fire with superior quickness!");
 					if (player.spe - spe >= 20)
 						outputText("You deftly avoid " + a + short + "'s slow fire-breath.");
-					game.combatRoundOver();
+					SceneLib.combat.combatRoundOverImpl();
 					return;
 				}
 				//Determine if evaded
 				if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 20)
 				{
 					outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s fire-breath.");
-					game.combatRoundOver();
+					SceneLib.combat.combatRoundOverImpl();
 					return;
 				}
 				//Determine if flexibilitied
 				if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 10)
 				{
 					outputText("Using your cat-like agility, you contort your body to avoid " + a + short + "'s fire-breath.");
-					game.combatRoundOver();
+					SceneLib.combat.combatRoundOverImpl();
 					return;
 				}
 				if (player.hasStatusEffect(StatusEffects.Blizzard)) {
@@ -152,7 +152,7 @@ public class Akbal extends Monster
 					outputText("Surrounding your blizzard absorbed huge part of the attack at the price of loosing some of it protective power.\n");
 					outputText("You are burned badly by the flames! ");
 					damage2 = player.takeMagicDamage(damage2, true);
-					game.combatRoundOver();
+					SceneLib.combat.combatRoundOverImpl();
 					return;
 				}
 				var damage:int = inte;
@@ -162,7 +162,7 @@ public class Akbal extends Monster
 				outputText("You are burned badly by the flames! ");
 				damage = player.takeMagicDamage(damage, true);
 			}
-			game.combatRoundOver();
+			SceneLib.combat.combatRoundOverImpl();
 		}
 		
 		//*Support ability - 
@@ -174,7 +174,7 @@ public class Akbal extends Monster
 				outputText("Akbal licks one of his wounds, and you scowl as the injury quickly heals itself.");
 			addHP(30 * (1 + rand(4)));
 			lust += 10;
-			game.combatRoundOver();
+			SceneLib.combat.combatRoundOverImpl();
 		}
 
 		public function Akbal()

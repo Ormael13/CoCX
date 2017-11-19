@@ -94,9 +94,9 @@ public class Tamani extends Goblin
 				if (!SceneLib.forest.tamaniScene.pregnancy.isPregnant && player.canOvipositSpider()) {
 					temp2 = SceneLib.forest.tamaniScene.tamaniBeaten;
 				}
-				EngineCore.simpleChoices("Fuck", SceneLib.forest.tamaniScene.tamaniSexWon, "Buttfuck", temp, "", null, "Lay Eggs", temp2, "Leave", game.cleanupAfterCombat);
+				EngineCore.simpleChoices("Fuck", SceneLib.forest.tamaniScene.tamaniSexWon, "Buttfuck", temp, "", null, "Lay Eggs", temp2, "Leave", SceneLib.combat.cleanupAfterCombatImpl);
 			}
-			else game.cleanupAfterCombat();
+			else SceneLib.combat.cleanupAfterCombatImpl();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -107,7 +107,7 @@ public class Tamani extends Goblin
 					else SceneLib.forest.tamaniScene.tamaniSexLetHer();
 				}else {
 					outputText("Tamani sighs as you begin to lose conscious, \"<i>You dummy, why'd you get rid of the fun parts?</i>\"", true);
-					game.cleanupAfterCombat();
+					SceneLib.combat.cleanupAfterCombatImpl();
 				}
 			} else {
 				if(player.cockTotal() > 0) {
@@ -119,7 +119,7 @@ public class Tamani extends Goblin
 				} else {
 					outputText("You give into your lusts and masturbate, but Tamani doesn't seem to care.  She kicks and punches you over and over, screaming, \"<i>You dummy, why'd you get rid of the fun parts?</i>\"", true);
 					SceneLib.combat.takeDamage(10000);
-					game.cleanupAfterCombat();
+					SceneLib.combat.cleanupAfterCombatImpl();
 				}
 			}
 		}

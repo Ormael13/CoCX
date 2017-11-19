@@ -122,11 +122,11 @@ public class Goblin extends Monster
 		{
 			if (player.gender == 0 || flags[kFLAGS.SFW_MODE] > 0) {
 				outputText("You collapse in front of the goblin, too wounded to fight.  She giggles and takes out a tube of lipstick smearing it whorishly on your face.  You pass into unconsciousness immediately.  It must have been drugged.");
-				game.cleanupAfterCombat();
+				SceneLib.combat.cleanupAfterCombatImpl();
 			} else if (pcCameWorms) {
 				outputText("\n\nThe goblin's eyes go wide and she turns to leave, no longer interested in you.");
 				player.orgasm();
-				doNext(game.cleanupAfterCombat);
+				doNext(SceneLib.combat.cleanupAfterCombatImpl);
 			} else {
 				SceneLib.goblinScene.goblinRapesPlayer();
 			}

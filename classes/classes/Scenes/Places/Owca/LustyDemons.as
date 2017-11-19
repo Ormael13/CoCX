@@ -32,7 +32,7 @@ public class LustyDemons extends Monster
 		{
 			if (pcCameWorms){
 				outputText("\n\nThe demons smile to one at another as they watch your display, then close in...");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
 				SceneLib.owca.loseOrSubmitToVapula();
 			}

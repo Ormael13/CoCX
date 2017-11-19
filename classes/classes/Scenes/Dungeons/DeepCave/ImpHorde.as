@@ -184,7 +184,7 @@ public class ImpHorde extends Monster
 		{
 			if(pcCameWorms){
 				outputText("\n\nYour foes don't seem put off enough to leave...");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
 				SceneLib.dungeons.deepcave.loseToImpMob();
 			}

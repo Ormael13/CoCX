@@ -88,7 +88,7 @@ public class TamanisDaughters extends Goblin
 		{
 			if(pcCameWorms){
 				outputText("\n\nYour foes seem visibly disgusted and leave, telling you to, \"<i>quit being so fucking gross...</i>\"");
-				game.cleanupAfterCombat();
+				SceneLib.combat.cleanupAfterCombatImpl();
 			} else {
 				SceneLib.forest.tamaniDaughtersScene.loseToDaughters();
 			}

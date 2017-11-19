@@ -177,7 +177,7 @@ public class Isabella extends Monster
 		{
 			if(pcCameWorms){
 				outputText("\n\n\"<i>Ick,</i>\" Isabella tuts as she turns to leave...");
-				game.cleanupAfterCombat();
+				SceneLib.combat.cleanupAfterCombatImpl();
 			} else {
 				SceneLib.isabellaScene.isabellaDefeats();
 			}

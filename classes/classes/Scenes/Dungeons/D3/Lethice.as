@@ -213,8 +213,8 @@ public class Lethice extends Monster
 			flags[kFLAGS.SPELLS_CAST]++;
 			SceneLib.combat.spellPerkUnlock();
 			EngineCore.statScreenRefresh();
-			game.enemyAI();
-		}
+            SceneLib.combat.enemyAIImpl();
+        }
 
 		private function demonfire():void
 		{
@@ -287,15 +287,15 @@ public class Lethice extends Monster
 		{
 			clearOutput();
 			outputText("You pull with all your might against the grasping tentacles to no avail; their grip is simply too strong!");
-			game.enemyAI();
-		}
+            SceneLib.combat.enemyAIImpl();
+        }
 		
 		public function grappleWait():void
 		{
 			clearOutput();
 			outputText("You can't bring yourself to fight back against Lethice's tentaclespawn. The sensuous, coiling grasp around your limbs, their questing, pliant tips digging around inside your [armor]... you relax in their grip for a little while longer, too enticed by their movement to struggle right now.");
-			game.enemyAI();
-		}
+            SceneLib.combat.enemyAIImpl();
+        }
 		
 		private function phase1Ends(hpVictory:Boolean):void
 		{

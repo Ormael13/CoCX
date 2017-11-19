@@ -134,7 +134,7 @@ import classes.Scenes.SceneLib;
 		{
 			if (pcCameWorms){
 				outputText("\n\n\"<i>Gross!</i>\" Izma cries as she backs away, leaving you to recover alone.");
-				game.cleanupAfterCombat();
+				SceneLib.combat.cleanupAfterCombatImpl();
 			} else {
 				SceneLib.izmaScene.IzmaWins();
 			}

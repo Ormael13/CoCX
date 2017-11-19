@@ -49,11 +49,11 @@ public class HellHound extends Monster
 				player.dynStats("lus", 20+(player.sens/10));
 				statScreenRefresh();
 				if(player.HP <= 0) {
-					doNext(game.endHpLoss);
+					doNext(SceneLib.combat.endHpLoss);
 					return;
 				}
 				if(player.lust >= player.maxLust()) {
-					doNext(game.endLustLoss);
+					doNext(SceneLib.combat.endLustLoss);
 					return;
 				}
 			}
@@ -109,9 +109,9 @@ public class HellHound extends Monster
 				//Rape if not naga, turned on, and girl that can fit!
 				if (player.hasVagina() && player.lust >= 33 && !player.isNaga()) {
 					outputText("  You find yourself musing that you could probably take advantage of the poor 'doggy'.  Do you fuck it?");
-					EngineCore.simpleChoices("Fuck it", SceneLib.mountain.hellHoundScene.hellHoundPropahRape, "", null, "", null, "", null, "Leave", game.cleanupAfterCombat);
+					EngineCore.simpleChoices("Fuck it", SceneLib.mountain.hellHoundScene.hellHoundPropahRape, "", null, "", null, "", null, "Leave", SceneLib.combat.cleanupAfterCombatImpl);
 				} else {
-					game.cleanupAfterCombat();
+					SceneLib.combat.cleanupAfterCombatImpl();
 				}
 			} else {
 				outputText("Unable to bear hurting you anymore, the hellhound's flames dim as he stops his attack. The two heads look at you, whining plaintively.  The hellhound slowly pads over to you and nudges its noses at your crotch.  It seems he wishes to pleasure you.\n\n", true);
@@ -124,11 +124,11 @@ public class HellHound extends Monster
 						temp2 = SceneLib.mountain.hellHoundScene.hellHoundPropahRape;
 					}
 					outputText(".  What do you do?");
-					EngineCore.simpleChoices("Lick", SceneLib.mountain.hellHoundScene.hellHoundGetsRaped, "Fuck", temp2, "", null, "", null, "Leave", game.cleanupAfterCombat);
+					EngineCore.simpleChoices("Lick", SceneLib.mountain.hellHoundScene.hellHoundGetsRaped, "Fuck", temp2, "", null, "", null, "Leave", SceneLib.combat.cleanupAfterCombatImpl);
 				}
 				else {
 					outputText("You turn away, not really turned on enough to be interested in such an offer.");
-					game.cleanupAfterCombat();
+					SceneLib.combat.cleanupAfterCombatImpl();
 				}
 			}
 		}
@@ -137,7 +137,7 @@ public class HellHound extends Monster
 		{
 			if(pcCameWorms){
 				outputText("\n\nThe hellhound snorts and leaves you to your fate.");
-				doNext(game.cleanupAfterCombat);
+				doNext(SceneLib.combat.cleanupAfterCombatImpl);
 			} else {
 				SceneLib.mountain.hellHoundScene.hellhoundRapesPlayer();
 			}

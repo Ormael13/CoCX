@@ -128,7 +128,7 @@ public class Kelt extends Monster
 		{
 			if (pcCameWorms){
 				outputText("\n\nKelt recoils for a moment before assuming a look of superiority...");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
 				SceneLib.farm.kelly.keltFucksShitUp();
 			}
