@@ -232,12 +232,12 @@ public class FrostGiant extends Monster
 			this.hairColor = "white";
 			this.hairLength = 8;
 			initStrTouSpeInte(280, 220, 100, 80);
-			initLibSensCor(20, 15, 35);
+			initWisLibSensCor(80, 20, 15, 35);
 			this.weaponName = "fists";
 			this.weaponVerb="punch";
-			this.weaponAttack = 96 + (20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 96;
 			this.armorName = "ice";
-			this.armorDef = 90 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 90;
 			this.bonusHP = 800;
 			this.bonusLust = 10;
 			this.lust = 10;
@@ -252,12 +252,6 @@ public class FrostGiant extends Monster
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGigantType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.IceNature, 0, 0, 0, 0);
-			this.str += 84 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 66 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 10500;
 			checkMonster();
 		}
 		

@@ -200,7 +200,7 @@ use namespace kGAMECLASS;
 						name  : "bigjunk",
 						call  : bigJunkForestScene,
 						chance: bigJunkChance
-					}/*,{
+					},{
 						name: "celess-unicorn",
 						call: celessUnicornIntro,
 						when: function():Boolean{
@@ -212,7 +212,7 @@ use namespace kGAMECLASS;
 						when: function():Boolean{
 							return CelessScene.getInstance().isCompanion() && !CelessScene.getInstance().armorFound;
 						}
-					}*/);
+					});
 					/*
 					{
 						name  : "mimic",

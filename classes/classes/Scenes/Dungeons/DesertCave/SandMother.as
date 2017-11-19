@@ -70,7 +70,7 @@ public class SandMother extends Monster
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			damage = Math.round(damage);
-			damage = player.takeDamage(damage, true);
+			damage = player.takeMagicDamage(damage, true);
 			removeStatusEffect(StatusEffects.Gigafire);
 			combatRoundOver();
 		}
@@ -103,7 +103,7 @@ public class SandMother extends Monster
 		public function eatALightningBolt():void {
 			outputText("Holding her staff back, she lifts her free hand with her fingers outstretched in a fan.  Sparks dance between her slender digits, coiling around them like snakes.  In a flash, they rush to her palm and erupt in a lightning bolt, striking you instantly and unavoidably! ");
 			var damage:int = 30 + rand(10);
-			damage = player.takeDamage(damage, true);
+			damage = player.takeMagicDamage(damage, true);
 			combatRoundOver();
 		}
 		//*Whisper:
@@ -151,14 +151,14 @@ public class SandMother extends Monster
 			this.hairColor = "platinum-blonde";
 			this.hairLength = 15;
 			initStrTouSpeInte(64, 80, 55, 64);
-			initLibSensCor(60, 40, 30);
+			initWisLibSensCor(64, 60, 40, 30);
 			this.weaponName = "fists";
 			this.weaponVerb="punches";
-			this.weaponAttack = 6 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 6;
 			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "robes";
-			this.armorDef = 10 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 10;
 			this.bonusHP = 130;
 			this.bonusLust = 30;
 			this.lust = 20;
@@ -170,12 +170,6 @@ public class SandMother extends Monster
 			this.createPerk(PerkLib.Focused,0,0,0,0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.drop = NO_DROP;
-			this.str += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1260;
 			checkMonster();
 		}
 		

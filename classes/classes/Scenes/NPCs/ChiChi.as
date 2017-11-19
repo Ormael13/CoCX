@@ -97,12 +97,12 @@ use namespace kGAMECLASS;
 			this.hairColor = "pinkish red";
 			this.hairLength = 13;
 			initStrTouSpeInte(250, 250, 240, 170);
-			initLibSensCor(100, 80, 80);
+			initWisLibSensCor(170, 100, 80, 80);
 			this.weaponName = "master gloves";
 			this.weaponVerb="punch";
-			this.weaponAttack = 68 + (14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 68;
 			this.armorName = "qipao";
-			this.armorDef = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 1;
 			this.bonusHP = 25000;
 			this.bonusLust = 20;
 			this.lust = 30;
@@ -119,12 +119,6 @@ use namespace kGAMECLASS;
 			this.createPerk(PerkLib.FireAffinity, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
-			this.str += 75 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 75 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 72 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 51 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 18180;
 			checkMonster();
 		}
 		

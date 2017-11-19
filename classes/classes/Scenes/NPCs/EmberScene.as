@@ -464,10 +464,13 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			if (flags[kFLAGS.EMBER_HATCHED] == 0) outputText("\nThat mysterious egg that you brought back to the camp is sitting in the crude nest you made.\n");
 			//NOT AN EGG! HAHA!
 			else {
-				var choice:Number = rand(3);
-				if (choice == 0) outputText("Ember is lying in front of " + emberMF("his", "her") + " excavated den, watching the camp and resting.  Every once in a while " + emberMF("his", "her") + " eyes dart in your direction, before " + emberMF("he", "she") + " quickly looks away.\n\n");
-				else if (choice == 1) outputText("Ember doesn't seem to be around " + emberMF("his", "her") + " excavated den... it doesn't take long before Ember lands in front of it and then takes off again, apparently occupied with darting around in the sky for fun.\n\n");
-				else outputText("Ember appears to be fighting to stay awake; sometimes " + emberMF("he", "she") + " falls into a doze, but quickly snaps back to consciousness.\n\n");
+				if (player.statusEffectv1(StatusEffects.CampSparingNpcsTimers1) > 0) outputText("Ember doesn't seem to be around " + emberMF("his", "her") + " excavated den... " + emberMF("he", "she") + "'s probably training somewhere and will be back soon.\n\n");
+				else {
+					var choice:Number = rand(3);
+					if (choice == 0) outputText("Ember is lying in front of " + emberMF("his", "her") + " excavated den, watching the camp and resting.  Every once in a while " + emberMF("his", "her") + " eyes dart in your direction, before " + emberMF("he", "she") + " quickly looks away.\n\n");
+					else if (choice == 1) outputText("Ember doesn't seem to be around " + emberMF("his", "her") + " excavated den... it doesn't take long before Ember lands in front of it and then takes off again, apparently occupied with darting around in the sky for fun.\n\n");
+					else outputText("Ember appears to be fighting to stay awake; sometimes " + emberMF("he", "she") + " falls into a doze, but quickly snaps back to consciousness.\n\n");
+				}
 			}
 		}
 
@@ -2071,8 +2074,52 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("\n\n\"<i>Okay, let's go back then,</i>\" Ember says, pulling you close and walking back to the camp with you.");
 				emberAffection(5);
 			}
-			//if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 1) flags[kFLAGS.EMBER_DEFEATS_COUNTER]++;
-			//else flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 1;
+			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
+				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] >= 1) flags[kFLAGS.EMBER_DEFEATS_COUNTER]++;
+				else flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 1;
+				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 4 && flags[kFLAGS.EMBER_LVL_UP] < 1) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 24);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 24, 0, 0, 0);
+					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.EMBER_LVL_UP] = 1;
+				}
+				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 5 && flags[kFLAGS.EMBER_LVL_UP] == 1) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 30);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 30, 0, 0, 0);
+					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.EMBER_LVL_UP] = 2;
+				}
+				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 6 && flags[kFLAGS.EMBER_LVL_UP] == 2) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 36);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 36, 0, 0, 0);
+					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.EMBER_LVL_UP] = 3;
+				}
+				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 7 && flags[kFLAGS.EMBER_LVL_UP] == 3) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 42);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 42, 0, 0, 0);
+					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.EMBER_LVL_UP] = 4;
+				}
+				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 8 && flags[kFLAGS.EMBER_LVL_UP] == 4) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 48);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 48, 0, 0, 0);
+					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.EMBER_LVL_UP] = 5;
+				}
+				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 9 && flags[kFLAGS.EMBER_LVL_UP] == 5) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 54);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 54, 0, 0, 0);
+					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.EMBER_LVL_UP] = 6;
+				}
+				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 10 && flags[kFLAGS.EMBER_LVL_UP] == 6) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 60);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 60, 0, 0, 0);
+					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.EMBER_LVL_UP] = 7;
+				}
+			}
 			cleanupAfterCombat();
 		}
 

@@ -43,7 +43,7 @@ public class Jojo extends Monster
 			}
 			
 			if (lust >= 100) {
-				doNext(game.endLustVictory);
+				doNext(SceneLib.combat.endLustVictory);
 				return;
 			}
 			else if (lust >= 85)
@@ -81,12 +81,12 @@ public class Jojo extends Monster
 			this.hairColor = "white";
 			this.hairLength = 2;
 			initStrTouSpeInte(45, 50, 75, 64);
-			initLibSensCor(15, 40, JojoScene.monk * 15);
+			initWisLibSensCor(64, 15, 40, JojoScene.monk * 15);
 			this.weaponName = "paw";
 			this.weaponVerb="punch";
-			this.weaponAttack = 5 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 5;
 			this.armorName = "robes";
-			this.armorDef = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 1;
 			this.lust = 15;
 			this.lustVuln = .9;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
@@ -123,12 +123,6 @@ public class Jojo extends Monster
 			}
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			this.str += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 980;
 			checkMonster();
 		}
 

@@ -140,12 +140,12 @@ public class ChameleonGirl extends Monster
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(120, 120, 105, 95);
-			initLibSensCor(60, 45, 50);
+			initWisLibSensCor(100, 60, 45, 50);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 40 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 40;
 			this.armorName = "skin";
-			this.armorDef = 30 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 30;
 			this.bonusHP = 350;
 			this.bonusLust = 10;
 			this.lust = 30;
@@ -155,12 +155,6 @@ public class ChameleonGirl extends Monster
 			this.gems = 50 + rand(60);
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			this.str += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 31 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 28 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 4470;
 			checkMonster();
 		}
 

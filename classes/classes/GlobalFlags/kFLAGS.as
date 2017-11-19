@@ -2564,10 +2564,10 @@ public static const TEMPLE_OF_THE_DIVINE_MARAE:int                              
 public static const TEMPLE_OF_THE_DIVINE_TAOTH:int                                  = 2556;
 public static const TEMPLE_OF_THE_DIVINE_FENRIR:int                                 = 2557;
 public static const TEMPLE_OF_THE_DIVINE_FERA:int                                   = 2558;
-public static const TEMPLE_OF_THE_DIVINE_2559:int                                   = 2559;
-public static const TEMPLE_OF_THE_DIVINE_2560:int                                   = 2560;
-public static const UNKNOWN_FLAG_NUMBER_02561:int                                   = 2561;
-public static const UNKNOWN_FLAG_NUMBER_02562:int                                   = 2562;
+public static const GOLEMANCER_PERM_GOLEMS:int	                                    = 2559;
+public static const IN_COMBAT_PLAYER_GOLEM_ATTACKED:int	                            = 2560;
+public static const IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED:int                         = 2561;
+public static const IN_COMBAT_PLAYER_COMPANION_1_ACTION:int                         = 2562;
 public static const UNKNOWN_FLAG_NUMBER_02563:int                                   = 2563;
 public static const UNKNOWN_FLAG_NUMBER_02564:int                                   = 2564;
 public static const UNKNOWN_FLAG_NUMBER_02565:int                                   = 2565;
@@ -2979,7 +2979,7 @@ public static const UNKNOWN_FLAG_NUMBER_02970:int                               
 public static const UNKNOWN_FLAG_NUMBER_02971:int                                   = 2971;
 public static const UNKNOWN_FLAG_NUMBER_02972:int                                   = 2972;
 public static const UNKNOWN_FLAG_NUMBER_02973:int                                   = 2973;
-public static const UNKNOWN_FLAG_NUMBER_02974:int                                   = 2974;
+public static const SPARRABLE_NPCS_TRAINING:int                                     = 2974;
 public static const STAT_GAIN_MODE:int                                              = 2975;
 public static const UNKNOWN_FLAG_NUMBER_02976:int                                   = 2976;
 public static const UNKNOWN_FLAG_NUMBER_02977:int                                   = 2977;

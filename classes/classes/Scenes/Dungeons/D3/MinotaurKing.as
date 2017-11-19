@@ -25,12 +25,12 @@ public class MinotaurKing extends Monster
 			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
 			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			initStrTouSpeInte(290, 290, 100, 70);
-			initLibSensCor(220, 10, 100);
+			initWisLibSensCor(60, 220, 10, 100);
 			this.weaponName = "axe";
-			this.weaponAttack = 90 + (19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 90;
 			this.weaponVerb = "swing";
 			this.armorName = "rags";
-			this.armorDef = 80 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 80;
 			this.bonusHP = 2000;
 			this.bonusLust = 100;
 			this.gems = 600 + rand(200);
@@ -44,12 +44,6 @@ public class MinotaurKing extends Monster
 			this.drop = NO_DROP;
 			drop = new WeightedDrop(consumables.PROMEAD, 1);
 			//I don’t know if we ever got multiple item drops set up for CoC. If we did, have this guy drop a five-stack of God’s Mead for the Lethice fight. Otherwise, perhaps drop a single item that will full heal once?
-			this.str += 87 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 87 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 66 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 14550;
 			this.checkMonster();
 			_lastSpellCastCount = flags[kFLAGS.SPELLS_CAST];
 		}

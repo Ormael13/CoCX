@@ -48,15 +48,15 @@ public class DarkElfSniper extends DarkElfScout
 			this.hairColor = "silver";
 			this.hairLength = 13;
 			initStrTouSpeInte(120, 180, 240, 130);
-			initLibSensCor(80, 90, 95);
+			initWisLibSensCor(130, 80, 90, 95);
 			this.weaponName = "dagger";
 			this.weaponVerb= "stab";
-			this.weaponAttack = 5 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 5;
 			this.weaponRangeName = "elven bow";
 			this.weaponRangeVerb= "shoot";
-			this.weaponRangeAttack = 36 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponRangeAttack = 36;
 			this.armorName = "elven armor";
-			this.armorDef = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 16;
 			this.bonusLust = 20;
 			this.lustVuln = .7;
 			this.lust = 50;
@@ -66,12 +66,6 @@ public class DarkElfSniper extends DarkElfScout
 			this.drop = new WeightedDrop().
 					add(weaponsrange.BOWLIGH,1).
 					add(consumables.ELFEARS,4);
-			this.str += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 72 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 96 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 52 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 32 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 18000;
 			checkMonster();
 		}
 		

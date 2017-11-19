@@ -205,7 +205,7 @@ public class CoCButton extends Block {
 	 * @return this
 	 */
 	public function call(fn:Function,...args:Array):CoCButton {
-		this.callback = Utils.curry.apply(null,args);
+		this.callback = Utils.curry.apply(null,[fn].concat(args));
 		return this;
 	}
 	/**

@@ -135,12 +135,12 @@ public class SandTrap extends Monster
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(55, 15, 45, 55);
-			initLibSensCor(60, 45, 50);
+			initWisLibSensCor(50, 60, 45, 50);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 10 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 10;
 			this.armorName = "chitin";
-			this.armorDef = 20 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 20;
 			this.bonusHP = 100;
 			this.bonusLust = 20;
 			this.lust = 20;
@@ -151,12 +151,6 @@ public class SandTrap extends Monster
 			this.drop = new ChainedDrop(consumables.TRAPOIL).add(consumables.OVIELIX,1/3);
 			this.tailType = AppearanceDefs.TAIL_TYPE_DEMONIC;
 			createStatusEffect(StatusEffects.Level,4,0,0,0);
-			this.str += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 460;
 			checkMonster();
 		}
 		

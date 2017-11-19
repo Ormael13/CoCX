@@ -37,12 +37,12 @@ public class Scruffy extends Imp
 			this.hairColor = "black";
 			this.hairLength = 5;
 			initStrTouSpeInte(40, 30, 40, 28);
-			initLibSensCor(45, 45, 90);
+			initWisLibSensCor(28, 45, 45, 90);
 			this.weaponName = "mop";
 			this.weaponVerb = "thwack";
-			this.weaponAttack = 10 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 10;
 			this.armorName = "leathery skin";
-			this.armorDef = 5 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 5;
 			this.bonusLust = 30;
 			this.lust = 40;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
@@ -51,12 +51,7 @@ public class Scruffy extends Imp
 			this.drop = NO_DROP;
 			this.special1 = lustMagicAttack;
 			this.wingType = AppearanceDefs.WING_TYPE_IMP;
-			this.str += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 360;
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

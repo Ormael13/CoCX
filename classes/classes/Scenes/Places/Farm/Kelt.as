@@ -160,12 +160,12 @@ public class Kelt extends Monster
 			this.hairColor = randomChoice("black","brown");
 			this.hairLength = 3;
 			initStrTouSpeInte(70, 80, 50, 20);
-			initLibSensCor(40, 25, 55);
+			initWisLibSensCor(20, 40, 25, 55);
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
-			this.weaponAttack = 11 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 11;
 			this.armorName = "tough skin";
-			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 10;
 			this.bonusHP = 250;
 			this.bonusLust = 20;
 			this.lust = 40;
@@ -176,12 +176,6 @@ public class Kelt extends Monster
 			this.tailType = AppearanceDefs.TAIL_TYPE_HORSE;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			this.str += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1040;
 			checkMonster();
 		}
 		

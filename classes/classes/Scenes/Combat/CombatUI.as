@@ -180,6 +180,25 @@ public class CombatUI extends BaseCombatContent {
 			}
 			else addButtonDisabled(0, "Bite", "If only you had fangs.");
 			addButton(4, "Release", combat.VampireLeggoMyEggo);
+		} else if (player.hasPerk(PerkLib.FirstAttackElementals) && flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] != 1) {
+			menu();
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) addButton(0, "Air", combat.baseelementalattacksAir);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) addButton(1, "Earth", combat.baseelementalattacksEarth);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire)) addButton(2, "Fire", combat.baseelementalattacksFire);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater)) addButton(3, "Water", combat.baseelementalattacksWater);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEther)) addButton(4, "Ether", combat.baseelementalattacksEther);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWood)) addButton(5, "Wood", combat.baseelementalattacksWood);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsMetal)) addButton(6, "Metal", combat.baseelementalattacksMetal);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce)) addButton(7, "Ice", combat.baseelementalattacksIce);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning)) addButton(8, "Lightning", combat.baseelementalattacksLightning);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) addButton(9, "Darkness", combat.baseelementalattacksDarkness);
+		} else if (player.hasPerk(PerkLib.FirstAttackGolems) && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1) {
+			menu();
+			addButton(0, "Send P.Gol/1", combat.pspecials.sendPernamentGolem1);
+			if (monster.plural) {
+				if (flags[kFLAGS.PERNAMENT_GOLEMS_BAG] > 2) addButton(1, "Send P.Gol/3", combat.pspecials.sendPernamentGolem3);
+				if (flags[kFLAGS.PERNAMENT_GOLEMS_BAG] > 4) addButton(2, "Send P.Gol/4", combat.pspecials.sendPernamentGolem5);
+			}
 		}
 		
 		// Modifications - monster-special actions
@@ -250,7 +269,7 @@ public class CombatUI extends BaseCombatContent {
 		var chtype:StatusEffectClass = player.statusEffectByType(StatusEffects.ChanneledAttackType);
 		var btnContinue:CoCButton    = button(0);
 		var btnStop:CoCButton        = button(1);
-		btnStop.show("Stop", combat.stopChanneledSpecial, "Stop singing.");
+		btnStop.show("Stop", combat.stopChanneledSpecial, "Stop channeling.");
 		if (chatk && chatk.value1 >= 1) {
 			if (!isPlayerBound() && !isPlayerSilenced() && !isPlayerStunned()) {
 				switch (chtype.value1) {
@@ -259,6 +278,9 @@ public class CombatUI extends BaseCombatContent {
 						break;
 					case 2:
 						btnContinue.show("Continue", combat.mspecials.startOniRampage, "Continue starting rampage.");
+						break;
+					case 3:
+						btnContinue.show("Continue", combat.mspecials.OrgasmicLightningStrike, "Continue masturbating.");
 						break;
 				}
 			}

@@ -25,12 +25,12 @@ public class DriderIncubus extends AbstractSpiderMorph
 			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
 			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			initStrTouSpeInte(140, 300, 140, 90);
-			initLibSensCor(160, 40, 100);
+			initWisLibSensCor(80, 160, 40, 100);
 			this.weaponName = "spear";
-			this.weaponAttack = 38 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 38;
 			this.weaponVerb = "lunge";
 			this.armorName = "chitin";
-			this.armorDef = 60 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 60;
 			this.bonusHP = 1500;
 			this.bonusLust = 40;
 			this.gems = 200 + rand(80);
@@ -41,13 +41,8 @@ public class DriderIncubus extends AbstractSpiderMorph
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			this.drop = NO_DROP;
-			this.str += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 90 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 12450;
 			this.checkMonster();
 		}
 

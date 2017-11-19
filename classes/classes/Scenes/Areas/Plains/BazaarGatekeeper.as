@@ -75,7 +75,7 @@ import classes.internals.*;
 		
 		override public function doAI():void
 		{
-			if (hasStatusEffect(StatusEffects.Stunned)) {
+			if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FreezingBreathStun) || hasStatusEffect(StatusEffects.StunnedTornado)) {
 				outputText("Your foe is too dazed from your last hit to strike back!");
 				if (hasStatusEffect(StatusEffects.Uber)) {
 					outputText(" You've managed to interrupt his special attack!");
@@ -134,14 +134,14 @@ import classes.internals.*;
 			this.hairColor = "black";
 			this.hairLength = 8;
 			initStrTouSpeInte(120, 140, 100, 70);
-			initLibSensCor(15, 10, 55);
+			initWisLibSensCor(70, 15, 10, 55);
 			this.weaponName = "dual scimitars";
 			this.weaponVerb="slash";
-			this.weaponAttack = 28 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 28;
 			this.weaponPerk = "";
 			this.weaponValue = 25;
 			this.armorName = "tunic and pants";
-			this.armorDef = 14 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 14;
 			this.bonusHP = 1750;
 			this.bonusLust = 40;
 			this.lust = 0;
@@ -152,12 +152,6 @@ import classes.internals.*;
 			this.drop = new WeightedDrop().add(weapons.SCIMITR, 1);
 			this.gems = 300;
 			this.special1 = scimitarSpecial;
-			this.str += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 5320;
 			checkMonster();
 		}
 	}

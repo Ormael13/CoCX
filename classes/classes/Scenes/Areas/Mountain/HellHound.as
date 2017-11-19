@@ -45,7 +45,7 @@ public class HellHound extends Monster
 				outputText("Both the hellhound's heads breathe in deeply before blasting a wave of dark fire at you. While the flames don't burn much, the unnatural heat fills your body with arousal. ");
 				}
 				temp = Math.round(temp);
-				player.takeDamage(temp, true);
+				player.takeMagicDamage(temp, true);
 				player.dynStats("lus", 20+(player.sens/10));
 				statScreenRefresh();
 				if(player.HP <= 0) {
@@ -171,12 +171,12 @@ public class HellHound extends Monster
 			this.hairColor = "red";
 			this.hairLength = 3;
 			initStrTouSpeInte(64, 64, 50, 1);
-			initLibSensCor(95, 20, 100);
+			initWisLibSensCor(1, 95, 20, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 10 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 10;
 			this.armorName = "thick fur";
-			this.armorDef = 7 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 7;
 			this.bonusLust = 10;
 			this.lust = 25;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
@@ -193,12 +193,6 @@ public class HellHound extends Monster
 			this.special2 = hellhoundScent;
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			this.str += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1080;
 			checkMonster();
 		}
 

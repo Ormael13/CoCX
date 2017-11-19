@@ -114,12 +114,12 @@ public class Harpy extends Monster
 			this.hairColor = "blue";
 			this.hairLength = 16;
 			initStrTouSpeInte(90, 70, 110, 60);
-			initLibSensCor(70, 30, 80);
+			initWisLibSensCor(50, 70, 30, 80);
 			this.weaponName = "talons";
 			this.weaponVerb="slashing talons";
-			this.weaponAttack = 35 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 35;
 			this.armorName = "feathers";
-			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 10;
 			this.bonusHP = 200;
 			this.bonusLust = 20;
 			this.lust = 10;
@@ -133,12 +133,6 @@ public class Harpy extends Monster
 			this.special1 = harpyUberCharge;
 			this.special2 = harpyTease;
 			this.createStatusEffect(StatusEffects.Flying,50,0,0,0);
-			this.str += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 2400;
 			checkMonster();
 		}
 

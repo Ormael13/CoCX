@@ -161,7 +161,7 @@ public class Evangeline2 extends Monster
 				outputText("It's super effective!  ");
 			}
 			damage = Math.round(damage);
-			player.takeDamage(damage, true);
+			player.takeMagicDamage(damage, true);
 			fatigue += spellCostWhitefire();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;
 		}
@@ -320,20 +320,15 @@ public class Evangeline2 extends Monster
 				initStrTouSpeInte(29, 34, 45, 50);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
-				this.weaponAttack = 9 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 9;
 				this.armorName = "practically indecent steel armor";
-				this.armorDef = 11 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 11;
 				this.bonusHP = 210;
 				this.bonusLust = 40;
 				this.lustVuln = .8;
 				this.lust = 40;
 				this.additionalXP += 35;
 				this.level = 14;
-				this.str += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.newgamebonusHP = 700;//dodane this.str/tou/spe/inte/lib a nastepnie pomnożone przez 20
 				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			}//nie gotowy etap
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 8) {
@@ -347,20 +342,15 @@ public class Evangeline2 extends Monster
 				initStrTouSpeInte(41, 46, 55, 50);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
-				this.weaponAttack = 9 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 9;
 				this.armorName = "lusty maiden's armor";
-				this.armorDef = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 16;
 				this.bonusHP = 240;
 				this.bonusLust = 40;
 				this.lustVuln = .8;
 				this.lust = 70;
 				this.additionalXP += 40;
-				this.level = 16;//dodane this.str/tou/spe/inte/lib a nastepnie pomnożone przez 20
-				this.str += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.newgamebonusHP = 860;
+				this.level = 16;
 				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 				this.createPerk(PerkLib.Channeling, 0, 0, 0, 0);
 			}//nie gotowy etap
@@ -375,20 +365,15 @@ public class Evangeline2 extends Monster
 				initStrTouSpeInte(41, 46, 55, 50);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
-				this.weaponAttack = 9 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 9;
 				this.armorName = "lusty maiden's armor";
-				this.armorDef = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 16;
 				this.bonusHP = 270;
 				this.bonusLust = 40;
 				this.lustVuln = .8;
 				this.lust = 70;
 				this.additionalXP += 45;
 				this.level = 18;
-				this.str += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.newgamebonusHP = 860;//dodane this.str/tou/spe/inte/lib a nastepnie pomnożone przez 20
 				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 				this.createPerk(PerkLib.Channeling, 0, 0, 0, 0);
 				this.createPerk(PerkLib.JobEnchanter, 0, 0, 0, 0);
@@ -404,20 +389,15 @@ public class Evangeline2 extends Monster
 				initStrTouSpeInte(41, 46, 70, 50);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
-				this.weaponAttack = 9 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 9;
 				this.armorName = "lusty maiden's armor";
-				this.armorDef = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 16;
 				this.bonusHP = 330;
 				this.bonusLust = 40;//Jak zyska perk BoosTierEnemy wtedy bonus lust musi wzrosnac do 50 z 40 wiec do tego czasu nie ma bonus lust bedzie na 40 stał
 				this.lust = 70;
 				this.lustVuln = .75;//im bedziej poteżna bedzie tym bliżej 0 powinno być czyli trudniej ją lustem pobijać ^^
 				this.additionalXP += 55;
 				this.level = 22;
-				this.str += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.newgamebonusHP = 1380;//dodane this.str/tou/spe/inte/lib a nastepnie pomnożone przez 30
 				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 				this.createPerk(PerkLib.Channeling, 0, 0, 0, 0);
 				this.createPerk(PerkLib.JobEnchanter, 0, 0, 0, 0);
@@ -435,9 +415,9 @@ public class Evangeline2 extends Monster
 				initStrTouSpeInte(41, 46, 80, 50);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
-				this.weaponAttack = 9 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 9;
 				this.armorName = "lusty maiden's armor";
-				this.armorDef = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 16;
 				this.bonusHP = 360;
 				this.bonusLust = 40;
 				this.lust = 70;
@@ -445,11 +425,6 @@ public class Evangeline2 extends Monster
 				this.additionalXP += 60;
 				this.level = 24;//nastepny lvl to 28 i dać kilka kolejnych etapów zmiany dot. bazowych mutacji: cow, succubus, kitsune i dragoness. zawsze wpierw danej rasy zmiany i +4 lvl w gór a potem +2 lvl i inne zmiany/dostosowania do nowej formy ;)
 				//w Evangeline 4 zamieścić etapy zmiany obejmujące inne rasy jak mantis/salamander a w Evangeline 5 awasowanie jako bogini (max do lvl 200) ^^
-				this.str += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.newgamebonusHP = 1440;//dodane this.str/tou/spe/inte/lib a nastepnie pomnożone przez 30
 				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 				this.createPerk(PerkLib.Channeling, 0, 0, 0, 0);
 				this.createPerk(PerkLib.JobEnchanter, 0, 0, 0, 0);
@@ -460,7 +435,7 @@ public class Evangeline2 extends Monster
 			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.skinTone = "olive";
 			this.hairLength = 36;
-			initLibSensCor(25, 35, 100);
+			initWisLibSensCor(15, 25, 35, 100);
 			this.fatigue = 0;
 			this.gems = 0;
 			this.drop = NO_DROP;

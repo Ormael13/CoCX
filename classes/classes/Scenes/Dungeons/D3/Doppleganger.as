@@ -169,7 +169,7 @@ import classes.VaginaClass;
 				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 				damage = Math.round(damage);
-				player.takeDamage(damage, true);
+				player.takeMagicDamage(damage, true);
 			}
 			else if (spell == "whitefire")
 			{
@@ -177,7 +177,7 @@ import classes.VaginaClass;
 				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage2 *= 3;
 				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage2 *= 0.3;
 				damage2 = Math.round(damage2);
-				player.takeDamage(damage2, true);
+				player.takeMagicDamage(damage2, true);
 			}
 			
 			addTalkShit();
@@ -227,16 +227,16 @@ import classes.VaginaClass;
 			lowerBody = player.lowerBody;
 			skinDesc = player.skinDesc;
 			initStrTouSpeInte(player.str, player.tou, player.spe, player.inte);
-			initLibSensCor(player.lib, player.sens, player.cor);
+			initWisLibSensCor(player.wis, player.lib, player.sens, player.cor);
 			if (cor < 50) cor = 50;
 			faceType = player.faceType;
 			skin.setAllProps(player.skin.saveToObject());
 			this.bonusHP = 500;
 			this.bonusLust = 40;
 			this.weaponName = player.weaponName;
-			this.weaponAttack = player.weaponAttack + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = player.weaponAttack;
 			this.weaponVerb = player.weaponVerb;
-			this.armorDef = player.armorDef + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = player.armorDef;
 			this.armorName = player.armorName;
 			this.level = player.level;
 			this.ass.analLooseness = player.ass.analLooseness;
@@ -281,12 +281,6 @@ import classes.VaginaClass;
 			this.pronoun2 = "[him]";
 			this.pronoun3 = "[his]";
 			this.drop = NO_DROP;
-			this.str += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1000;
 			checkMonster();
 		}
 		

@@ -68,9 +68,9 @@ public class TentacleBeast extends Monster
 			else {
 				if(!hpVictory && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 					outputText("  Perhaps you could use it to sate yourself?", true);
-					EngineCore.doYesNo(SceneLib.forest.tentacleBeastScene.tentacleVictoryRape,game.cleanupAfterCombat);
+					EngineCore.doYesNo(SceneLib.forest.tentacleBeastScene.tentacleVictoryRape,cleanupAfterCombat);
 				} else {
-					game.cleanupAfterCombat();
+					cleanupAfterCombat();
 				}
 			}
 		}
@@ -134,12 +134,12 @@ public class TentacleBeast extends Monster
 			this.hairColor = "green";
 			this.hairLength = 1;
 			initStrTouSpeInte(73, 90, 25, 45);
-			initLibSensCor(90, 20, 100);
+			initWisLibSensCor(40, 90, 20, 100);
 			this.weaponName = "whip-tendril";
 			this.weaponVerb="thorny tendril";
-			this.weaponAttack = 10 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 10;
 			this.armorName = "rubbery skin";
-			this.armorDef = 18 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 18;
 			this.bonusHP = 400;
 			this.bonusLust = 20;
 			this.lust = 10;
@@ -152,12 +152,6 @@ public class TentacleBeast extends Monster
 			this.special2 = tentacleEntwine;
 			this.special3 = tentaclePhysicalAttack;
 			this.tailType = AppearanceDefs.TAIL_TYPE_DEMONIC;
-			this.str += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1200;
 			checkMonster();
 		}
 

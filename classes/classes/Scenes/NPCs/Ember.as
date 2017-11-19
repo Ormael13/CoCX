@@ -37,7 +37,13 @@ public class Ember extends Monster
 			//Miss/dodge
 			else if(player.getEvasionRoll()) outputText("You dodge aside at the last second and Ember's claws whistle past you.");
 			else {
-				var damage:int = int((str + weaponAttack) - rand(player.tou) - player.armorDef);
+				var damage:Number = 0;
+				if (wrath >= 100) {
+					wrath -= 100;
+					damage += (((str + weaponAttack) * 2) - rand(player.tou) - player.armorDef);
+				}
+				else damage += ((str + weaponAttack) - rand(player.tou) - player.armorDef);
+				if (flags[kFLAGS.EMBER_LVL_UP] >= 1) damage += (1 + (flags[kFLAGS.EMBER_LVL_UP] * 0.1));
 				if(damage <= 0) outputText("Ember's claws scrape noisily but harmlessly off your [armor].");
 				else {
 					outputText("Ember's claws rip into you, leaving stinging wounds. ");
@@ -59,19 +65,19 @@ public class Ember extends Monster
 				outputText("Ember inhales deeply, then "+ emberMF("his","her") + " jaws open up, releasing streams of fire, ice and lightning; magical rather than physical, the gaudy displays lose cohesion and amalgamate into a column of raw energy as they fly at you.");
 				if(player.getEvasionRoll()) outputText("  It's a narrow thing, but you manage to throw yourself aside at the last moment.  Fortunately, the energy whirling around and tearing up the soil blinds Ember to your escape until you have recovered and are ready to keep fighting.");
 				else {
+					var damage2:Number = 0;
 					if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 						player.addStatusValue(StatusEffects.Blizzard, 1, -1);
 						outputText("  The pain as the deadly combination washes over you is indescribable.  Despite it wasn't pure fire attack surrounding you blizzard still managed to block prt of it power and you endure it somehow making even Ember looks amazed to see you still standing. ");
-						var damage2:Number = 140 + (this.inte * 1.5) + rand(140);
-						if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0 || player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 1.6;
-						damage2 = player.takeDamage(damage2, true);
+						damage2 += 140 + (this.inte * 1.5) + rand(140);
 					}
 					else {
 						outputText("  The pain as the deadly combination washes over you is indescribable.  It's a miracle that you endure it, and even Ember looks amazed to see you still standing. ");
-						var damage:Number = 200 + (this.inte * 2) + rand(200);
-						if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0 || player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 1.6;
-						damage = player.takeDamage(damage, true);
+						damage2 += 200 + (this.inte * 2) + rand(200);
 					}
+					if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0 || player.findPerk(PerkLib.FireAffinity) >= 0) damage2 *= 1.6;
+					if (flags[kFLAGS.EMBER_LVL_UP] >= 1) damage2 *= (1 + (flags[kFLAGS.EMBER_LVL_UP] * 0.1));
+					damage2 = player.takeMagicDamage(damage2, true);
 				}
 			}
 			combatRoundOver();
@@ -93,9 +99,11 @@ public class Ember extends Monster
 				outputText(" the tail at the last moment, causing Ember to lose control of "+ emberMF("his","her") + " own momentum and stumble.");
 			}
 			else {
-				var damage:int = int((str + weaponAttack + 100) - rand(player.tou) - player.armorDef);
+				var damage3:Number = 0;
+				damage3 += ((str + weaponAttack + 100) - rand(player.tou) - player.armorDef);
+				if (flags[kFLAGS.EMBER_LVL_UP] >= 1) damage3 *= (1 + (flags[kFLAGS.EMBER_LVL_UP] * 0.1));
 				outputText("  The tail slams into you with bone-cracking force, knocking you heavily to the ground even as the spines jab you wickedly.  You gasp for breath in pain and shock, but manage to struggle to your feet again. ");
-				damage = player.takeDamage(damage, true);
+				damage3 = player.takeDamage(damage3, true);
 			}
 			combatRoundOver();
 		}
@@ -114,9 +122,9 @@ public class Ember extends Monster
 					outputText("Your head swims - it'll take a moment before you can regain your balance. ");
 					player.createStatusEffect(StatusEffects.Stunned,0,0,0,0);
 				}
-				createStatusEffect(StatusEffects.StunCooldown,4,0,0,0);
-				var damage:Number = 10 + rand(10);
-				damage = player.takeDamage(damage, true);
+				createStatusEffect(StatusEffects.StunCooldown,2,0,0,0);
+				var damage4:Number = 10 + rand(10);
+				damage4 = player.takeDamage(damage4, true);
 			}
 			combatRoundOver();
 		}
@@ -131,13 +139,14 @@ public class Ember extends Monster
 				addStatusValue(StatusEffects.StunCooldown, 1, -1);
 				if (statusEffectv1(StatusEffects.StunCooldown) <= 0) removeStatusEffect(StatusEffects.StunCooldown);
 			}
-			else if (rand(3) == 0) {
-				dragonFarce();
-				return;
+			var choice:Number = rand(5);
+			if (choice == 0) embersSupahSpecialDragonBreath();
+			if (choice == 1) emberTailSlap();
+			if (choice == 2) {
+				if (hasStatusEffect(StatusEffects.StunCooldown)) emberTailSlap();
+				else dragonFarce();
 			}
-			if (rand(4) == 0) embersSupahSpecialDragonBreath();
-			else if (rand(3) == 0) emberTailSlap();
-			else emberAttack();
+			if (choice > 2) emberAttack();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
@@ -181,73 +190,67 @@ public class Ember extends Monster
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] < 1) {
 				initStrTouSpeInte(120, 90, 100, 90);
-				initLibSensCor(50, 35, game.flags[kFLAGS.EMBER_COR]);
-				this.weaponAttack = 36 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 54 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(90, 50, 35, game.flags[kFLAGS.EMBER_COR]);
+				this.weaponAttack = 36;
+				this.armorDef = 54;
 				this.bonusHP = 800;
 				this.level = 20;
-				this.str += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 2700;
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] == 1) {
-				initStrTouSpeInte(130, 100, 120, 100);
-				initLibSensCor(60, 40, game.flags[kFLAGS.EMBER_COR]);
-				this.weaponAttack = 43 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 74 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initStrTouSpeInte(140, 110, 115, 105);
+				initWisLibSensCor(105, 60, 40, game.flags[kFLAGS.EMBER_COR]);
+				this.weaponAttack = 43;
+				this.armorDef = 73;
 				this.bonusHP = 900;
-				this.level = 30;
-				this.str += 39 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 6120;
+				this.level = 26;
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] == 2) {
-				initStrTouSpeInte(140, 110, 140, 110);
-				initLibSensCor(70, 45, game.flags[kFLAGS.EMBER_COR]);
-				this.weaponAttack = 49 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 94 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initStrTouSpeInte(165, 135, 130, 120);
+				initWisLibSensCor(120, 70, 45, game.flags[kFLAGS.EMBER_COR]);
+				this.weaponAttack = 50;
+				this.armorDef = 92;
 				this.bonusHP = 1000;
-				this.level = 40;
-				this.str += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 8550;
+				this.level = 32;
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] == 3) {
-				initStrTouSpeInte(150, 120, 160, 120);
-				initLibSensCor(80, 50, game.flags[kFLAGS.EMBER_COR]);
-				this.weaponAttack = 54 + (11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 114 + (12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.bonusHP = 1100;
-				this.level = 50;
-				this.str += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 11340;
+				initStrTouSpeInte(190, 160, 145, 135);
+				initWisLibSensCor(135, 80, 50, game.flags[kFLAGS.EMBER_COR]);
+				this.weaponAttack = 57;
+				this.armorDef = 111;
+				this.bonusHP = 1200;
+				this.level = 38;
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] == 4) {
-				initStrTouSpeInte(250, 200, 210, 200);
-				initLibSensCor(100, 55, game.flags[kFLAGS.EMBER_COR]);
-				this.weaponAttack = 66 + (14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 150 + (16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.bonusHP = 1500;
-				this.level = 60;
-				this.str += 100 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 80 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 84 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 80 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 40 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 26880;
+				initStrTouSpeInte(220, 190, 160, 150);
+				initWisLibSensCor(150, 90, 55, game.flags[kFLAGS.EMBER_COR]);
+				this.weaponAttack = 64;
+				this.armorDef = 130;
+				this.bonusHP = 1400;
+				this.level = 44;
+			}
+			if (flags[kFLAGS.EMBER_LVL_UP] == 5) {
+				initStrTouSpeInte(250, 220, 175, 165);
+				initWisLibSensCor(165, 100, 60, game.flags[kFLAGS.EMBER_COR]);
+				this.weaponAttack = 71;
+				this.armorDef = 150;
+				this.bonusHP = 1600;
+				this.level = 50;
+			}
+			if (flags[kFLAGS.EMBER_LVL_UP] == 6) {
+				initStrTouSpeInte(280, 250, 190, 180);
+				initWisLibSensCor(180, 110, 65, game.flags[kFLAGS.EMBER_COR]);
+				this.weaponAttack = 78;
+				this.armorDef = 170;
+				this.bonusHP = 1800;
+				this.level = 56;
+			}
+			if (flags[kFLAGS.EMBER_LVL_UP] == 7) {
+				initStrTouSpeInte(310, 280, 205, 195);
+				initWisLibSensCor(195, 120, 70, game.flags[kFLAGS.EMBER_COR]);
+				this.weaponAttack = 85;
+				this.armorDef = 190;
+				this.bonusHP = 2000;
+				this.level = 62;
 			}
 			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_NORMAL;
 			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
@@ -268,9 +271,22 @@ public class Ember extends Monster
 			this.horns = 4;
 			this.tailType = AppearanceDefs.TAIL_TYPE_DRACONIC;
 			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.2);
-			if (flags[kFLAGS.EMBER_LVL_UP] >= 1) this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
-			if (flags[kFLAGS.EMBER_LVL_UP] >= 2) this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
-			if (flags[kFLAGS.EMBER_LVL_UP] >= 3) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+			if (flags[kFLAGS.EMBER_LVL_UP] >= 1) this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
+			if (flags[kFLAGS.EMBER_LVL_UP] >= 2) {
+				this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+				this.createPerk(PerkLib.BasicSelfControl, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.EMBER_LVL_UP] >= 3) this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
+			if (flags[kFLAGS.EMBER_LVL_UP] >= 4) {
+				this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.HalfStepToImprovedSelfControl, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.EMBER_LVL_UP] >= 5) this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			if (flags[kFLAGS.EMBER_LVL_UP] >= 6) {
+				this.createPerk(PerkLib.GoliathI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.EMBER_LVL_UP] >= 7) this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

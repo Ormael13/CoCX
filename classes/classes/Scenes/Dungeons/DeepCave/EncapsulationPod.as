@@ -215,12 +215,12 @@ import classes.internals.*;
 			this.hairColor = "black";
 			this.hairLength = 0;
 			initStrTouSpeInte(180, 1, 1, 1);
-			initLibSensCor(1, 1, 100);
+			initWisLibSensCor(1, 1, 1, 100);
 			this.weaponName = "pod";
 			this.weaponVerb="pod";
-			this.weaponAttack = 4 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 4;
 			this.armorName = "pod";
-			this.armorDef = 4 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 4;
 			this.bonusHP = 1200;
 			this.lust = 10;
 			this.lustVuln = 0;
@@ -235,12 +235,6 @@ import classes.internals.*;
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyPlantType, 0, 0, 0, 0);
-			this.str += 54 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1740;
 			checkMonster();
 		}
 

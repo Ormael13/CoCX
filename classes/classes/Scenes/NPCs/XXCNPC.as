@@ -54,7 +54,7 @@ import coc.xxc.BoundStory;
 		}
 		public function display(toDisplay:String,locals:*=null):void
 		{
-			story.display(toDisplay);
+			story.display(toDisplay,locals);
 		}
 		protected function displaySimple(path:String):void{
 			clearOutput();

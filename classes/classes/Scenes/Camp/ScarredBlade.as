@@ -31,12 +31,12 @@ public class ScarredBlade extends Monster
 			this.pronoun2 = "it";
 			this.pronoun3 = "its";
 			initStrTouSpeInte(80, 100, 75, 50);
-			initLibSensCor(0, 0, 100);
+			initWisLibSensCor(50, 0, 0, 100);
 			this.weaponName = "scarred blade";
 			this.weaponVerb="slash";
-			this.weaponAttack = 50 + (11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 50;
 			this.armorName = "lethicite";
-			this.armorDef = 15 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 15;
 			this.bonusHP = 400;
 			this.lust = 0;
 			this.lustVuln = 0;
@@ -44,11 +44,7 @@ public class ScarredBlade extends Monster
 			this.level = 17;
 			this.gems = 0;
 			this.drop = new WeightedDrop(weapons.B_SCARB, 1);
-			this.str += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.newgamebonusHP = 1220;
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

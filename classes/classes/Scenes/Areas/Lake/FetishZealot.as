@@ -163,12 +163,12 @@ public class FetishZealot extends Monster
 			this.hairColor = "black";
 			this.hairLength = 4;
 			initStrTouSpeInte(45, 55, 40, 1);
-			initLibSensCor(75, 80, 90);
+			initWisLibSensCor(1, 75, 80, 90);
 			this.weaponName = "wavy dagger";
 			this.weaponVerb="stab";
-			this.weaponAttack = 12 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 12;
 			this.armorName = RELIGIOUS_CLOTHES;
-			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 10;
 			this.bonusLust = 20;
 			this.lust = 25;
 			this.lustVuln = 0.75;
@@ -181,12 +181,6 @@ public class FetishZealot extends Monster
 					.add(null,4);
 			this.special1 = zealotSpecial1;
 			this.special2 = zealotSpecial2;
-			this.str += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 440;
 			checkMonster();
 		}
 

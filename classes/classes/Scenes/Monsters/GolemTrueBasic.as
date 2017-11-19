@@ -19,7 +19,7 @@ package classes.Scenes.Monsters
 			if (damage <= 0 || (player.getEvasionRoll())) outputText(" You slide underneath the surprise swing!");
 			else
 			{
-				outputText(" It chits you square in the chest. ");
+				outputText(" It hits you square in the chest. ");
 				damage = player.takeDamage(damage, true);
 			}
 		}
@@ -61,7 +61,7 @@ package classes.Scenes.Monsters
 			this.imageName = "basic true golem";
 			this.long = "You're currently fighting basic true golem. It's seven feet tall without any sexual characteristics, it stone body lacking any cracks dummy ones possesed and using it bare stone fists to smash enemies.";
 			initStrTouSpeInte(150, 120, 90, 10);
-			initLibSensCor(10, 10, 50);
+			initWisLibSensCor(10, 10, 10, 50);
 			this.tallness = 84;
 			this.drop = new ChainedDrop()
 					.add(useables.GOLCORE, 1/4);
@@ -70,18 +70,12 @@ package classes.Scenes.Monsters
 			this.additionalXP = 350;
 			this.weaponName = "stone fists";
 			this.weaponVerb = "smash";
-			this.weaponAttack = 40 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 40;
 			this.armorName = "stone";
-			this.armorDef = 40 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 40;
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);
-			this.str += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 4560;
 			checkMonster();
 		}
 		

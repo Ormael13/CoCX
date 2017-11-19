@@ -65,8 +65,8 @@ public class Yeti extends Monster
 				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 0.1;
 				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 3;
 				damage = Math.round(damage);
-				damage = player.reduceDamage(damage);
-				player.takeDamage(damage, true);
+				damage = player.reduceMagicDamage(damage);
+				player.takeMagicDamage(damage, true);
 				tempSpeedLoss += 10;
 				player.dynStats("spe", -10);
 			}
@@ -128,12 +128,12 @@ public class Yeti extends Monster
 			this.hairColor = "white";
 			this.hairLength = 8;
 			initStrTouSpeInte(140, 160, 80, 50);
-			initLibSensCor(40, 20, 45);
+			initWisLibSensCor(40, 40, 20, 45);
 			this.weaponName = "fists";
 			this.weaponVerb="punch";
-			this.weaponAttack = 36 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 36;
 			this.armorName = "thick fur";
-			this.armorDef = 30 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 30;
 			this.bonusHP = 1000;
 			this.bonusLust = 10;
 			this.lust = 10;
@@ -149,12 +149,6 @@ public class Yeti extends Monster
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			this.str += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 5640;
 			checkMonster();
 		}
 		

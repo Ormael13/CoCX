@@ -116,7 +116,7 @@ public class Evangeline3 extends Monster
 				outputText("It's super effective!  ");
 			}
 			damage = Math.round(damage);
-			player.takeDamage(damage, true);
+			player.takeMagicDamage(damage, true);
 			fatigue += spellCostWhitefire();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;
 		}
@@ -216,24 +216,18 @@ public class Evangeline3 extends Monster
 				this.hipRating = AppearanceDefs.HIP_RATING_FERTILE+3;//hipRating = 18
 				this.buttRating = AppearanceDefs.BUTT_RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(41, 46, 80, 50);
-				initLibSensCor(45, 35, 100);
+				initWisLibSensCor(15, 45, 35, 100);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
-				this.weaponAttack = 9 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 9;
 				this.armorName = "lusty maiden's armor";
-				this.armorDef = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 16;
 				this.bonusHP = 420;
 				this.bonusLust = 40;
 				this.lust = 70;
 				this.lustVuln = .7;
 				this.additionalXP += 70;
 				this.level = 28;//succubus TF effects
-				this.str += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 1560;//dodane this.str/tou/spe/inte/lib a nastepnie pomnożone przez 30
 				this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 13) {
@@ -244,24 +238,18 @@ public class Evangeline3 extends Monster
 				this.hipRating = AppearanceDefs.HIP_RATING_FERTILE+3;//hipRating = 18
 				this.buttRating = AppearanceDefs.BUTT_RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(46, 46, 80, 50);
-				initLibSensCor(50, 35, 100);
+				initWisLibSensCor(15, 50, 35, 100);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
-				this.weaponAttack = 9 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 9;
 				this.armorName = "lusty maiden's armor";
-				this.armorDef = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 16;
 				this.bonusHP = 450;
 				this.bonusLust = 40;
 				this.lust = 70;
 				this.lustVuln = .7;
 				this.additionalXP += 75;
 				this.level = 30;
-				this.str += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 2160;//dodane this.str/tou/spe/inte/lib a nastepnie pomnożone przez 40
 				this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);//pewnie perk dla demonów albo odzyskała jego efekt kiedy użyła succubus milk 2 lvl wcześniej a tu coś innego dać... ^^
 			}
@@ -273,24 +261,18 @@ public class Evangeline3 extends Monster
 				this.hipRating = AppearanceDefs.HIP_RATING_FERTILE+3;//hipRating = 18
 				this.buttRating = AppearanceDefs.BUTT_RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(46, 46, 80, 50);
-				initLibSensCor(50, 35, 100);
+				initWisLibSensCor(15, 50, 35, 100);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
-				this.weaponAttack = 9 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 9;
 				this.armorName = "lusty maiden's armor";
-				this.armorDef = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 16;
 				this.bonusHP = 510;
 				this.bonusLust = 40;
 				this.lust = 70;
 				this.lustVuln = .65;
 				this.additionalXP += 85;
 				this.level = 34;//kitsune TF effects
-				this.str += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 2160;//dodane this.str/tou/spe/inte/lib a nastepnie pomnożone przez 40
 				this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
@@ -304,24 +286,18 @@ public class Evangeline3 extends Monster
 				this.hipRating = AppearanceDefs.HIP_RATING_FERTILE+3;//hipRating = 18
 				this.buttRating = AppearanceDefs.BUTT_RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(46, 46, 80, 50);
-				initLibSensCor(50, 35, 100);
+				initWisLibSensCor(15, 50, 35, 100);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
-				this.weaponAttack = 9 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 9;
 				this.armorName = "lusty maiden's armor";
-				this.armorDef = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 16;
 				this.bonusHP = 540;
 				this.bonusLust = 40;
 				this.lust = 70;
 				this.lustVuln = .65;
 				this.additionalXP += 90;
 				this.level = 36;
-				this.str += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 2160;//dodane this.str/tou/spe/inte/lib a nastepnie pomnożone przez 40
 				this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
@@ -336,24 +312,18 @@ public class Evangeline3 extends Monster
 				this.hipRating = AppearanceDefs.HIP_RATING_FERTILE+3;//hipRating = 18
 				this.buttRating = AppearanceDefs.BUTT_RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(46, 46, 80, 50);
-				initLibSensCor(50, 35, 100);
+				initWisLibSensCor(15, 50, 35, 100);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
-				this.weaponAttack = 9 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 9;
 				this.armorName = "lusty maiden's armor";
-				this.armorDef = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 16;
 				this.bonusHP = 600;
 				this.bonusLust = 40;
 				this.lust = 70;
 				this.lustVuln = .6;
 				this.additionalXP += 100;
 				this.level = 40;//dragoness TF effects
-				this.str += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 2700;//dodane this.str/tou/spe/inte/lib a nastepnie pomnożone przez 50
 				this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
@@ -370,24 +340,18 @@ public class Evangeline3 extends Monster
 				this.hipRating = AppearanceDefs.HIP_RATING_FERTILE+3;//hipRating = 18
 				this.buttRating = AppearanceDefs.BUTT_RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(46, 46, 80, 50);
-				initLibSensCor(50, 35, 100);
+				initWisLibSensCor(15, 50, 35, 100);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
-				this.weaponAttack = 9 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack = 9;
 				this.armorName = "lusty maiden's armor";
-				this.armorDef = 16 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.armorDef = 16;
 				this.bonusHP = 630;
 				this.bonusLust = 40;//Jak zyska perk BoosTierEnemy wtedy bonus lust musi wzrosnac do 50 z 40 wiec do tego czasu nie ma bonus lust bedzie na 40 stał
 				this.lust = 70;
 				this.lustVuln = .6;//im bedziej poteżna bedzie tym bliżej 0 powinno być czyli trudniej ją lustem pobijać ^^
 				this.additionalXP += 105;
 				this.level = 42;//nastepny lvl to xx w Evangeline 4 zamieścić etapy zmiany obejmujące inne rasy jak mantis/salamander a w Evangeline 5 awasowanie jako bogini (max do lvl 200) ^^
-				this.str += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 2700;//dodane this.str/tou/spe/inte/lib a nastepnie pomnożone przez 50
 				this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);

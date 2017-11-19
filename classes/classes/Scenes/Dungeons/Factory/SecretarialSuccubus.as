@@ -62,14 +62,14 @@ public class SecretarialSuccubus extends AbstractSuccubus
 			this.hairColor = "blond";
 			this.hairLength = 13;
 			initStrTouSpeInte(60, 50, 85, 35);
-			initLibSensCor(80, 70, 80);
+			initWisLibSensCor(35, 80, 70, 80);
 			this.weaponName = "claws";
 			this.weaponVerb="slap";
-			this.weaponAttack = 12 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 12;
 			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
-			this.armorDef = 6 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 6;
 			this.bonusHP = 200;
 			this.bonusLust = 40;
 			this.lust = 30;
@@ -85,12 +85,7 @@ public class SecretarialSuccubus extends AbstractSuccubus
 			this.special2 = seduceAttack;
 			this.special3 = whipAttack;
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
-			this.str += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 17 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1240;
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}
         //[FACTORY SUCCUBUS]

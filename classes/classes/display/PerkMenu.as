@@ -11,6 +11,7 @@ import classes.PerkClass;
 import classes.PerkLib;
 import classes.PerkTree;
 import classes.PerkType;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 
 import flash.events.MouseEvent;
@@ -35,6 +36,7 @@ public class PerkMenu extends BaseContent {
 			outputText(" to spend.</b>");
 			addButton(button++, "Perk Up", kGAMECLASS.playerInfo.perkBuyMenu);
 		}
+		addButton(4, "Database", perkDatabase);
 		if (player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0) {
 			outputText("\n<b>You can adjust your melee attack settings.</b>");
 			addButton(5, "Melee Opt",doubleAttackOptions);
@@ -51,7 +53,10 @@ public class PerkMenu extends BaseContent {
 			outputText("\n<b>You can adjust your elemental summons behaviour during combat.</b>");
 			addButton(8, "Elementals",summonsbehaviourOptions);
 		}
-		addButton(9, "Database", perkDatabase);
+		if (flags[kFLAGS.PERNAMENT_GOLEMS_BAG] > 0 && player.findPerk(PerkLib.FirstAttackGolems) >= 0) {
+			outputText("\n<b>You can adjust your pernament golems behaviour during combat.</b>");
+			addButton(9, "P.Golems",golemsbehaviourOptions);
+		}
 		addButton(10, "Number of", EngineCore.doNothing);
 		addButton(11, "perks: " + player.perks.length, EngineCore.doNothing);
 	}
@@ -356,7 +361,7 @@ if (kGAMECLASS.inCombat) addButton(14, "Back", combat.combatMenu);
 		outputText("\n<b>Elementals behavious:</b>\n");
 		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3) outputText("Elemental will attack enemy on it own alongside PC.");
 		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 2) outputText("Attacking instead of PC each time melee attack command is chosen.");
-		else outputText("Not participating");
+		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] < 2) outputText("Not participating");
 		outputText("\n\n<b>Elemental, which would attack in case option to them helping in attacks is enabled:</b>\n");
 		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1) outputText("Air");
 		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 2) outputText("Earth");
@@ -380,7 +385,7 @@ if (kGAMECLASS.inCombat) addButton(14, "Back", combat.combatMenu);
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 7) addButton(9, "Darkness", attackingElementalDarkness);
 		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] > 1) addButton(10, "NotHelping", elementalNotAttacking);
 		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] != 2 && player.hasStatusEffect(StatusEffects.SummonedElementals)) addButton(11, "MeleeAtk", elementalAttackReplacingPCmeleeAttack);
-	//	if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] != 3 && player.hasStatusEffect(StatusEffects.SummonedElementals)) addButton(12, "Helping", elementalAttackingAlongsidePC);//dodatkowy perk wymagano do tej opcji
+		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] != 3 && player.hasStatusEffect(StatusEffects.SummonedElementals) && player.hasPerk(PerkLib.FirstAttackElementals)) addButton(12, "Helping", elementalAttackingAlongsidePC);
 
 		var e:MouseEvent;
         if (kGAMECLASS.inCombat) addButton(14, "Back", combat.combatMenu);
@@ -451,6 +456,30 @@ if (kGAMECLASS.inCombat) addButton(14, "Back", combat.combatMenu);
 	public function attackingElementalEther():void {
 		flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 10;
 		summonsbehaviourOptions();
+	}
+
+	public function golemsbehaviourOptions():void {
+		clearOutput();
+		menu();
+		outputText("You can choose how your pernament golems will behave during each fight.\n\n");
+		outputText("\n<b>Pernament golems behavious:</b>\n");
+		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) outputText("Attacking at the begining of each turn (owner would need to just choose how many of them will be sent).");
+		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] < 1) outputText("Waiting for the owner to give an attack command each turn.");
+		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) addButton(10, "Waiting", golemsWaiting);
+		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] != 1) addButton(11, "Attacking", golemsAttacking);
+
+		var e:MouseEvent;
+		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu);
+		else addButton(14, "Back", displayPerks);
+	}
+
+	public function golemsWaiting():void {
+		flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] = 0;
+		golemsbehaviourOptions();
+	}
+	public function golemsAttacking():void {
+		flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] = 1;
+		golemsbehaviourOptions();
 	}
 
 	public function perkDatabase(page:int=0, count:int=20):void {

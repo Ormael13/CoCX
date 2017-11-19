@@ -69,7 +69,7 @@ public class Kitsune extends Monster
 				outputText("\n\nThe flames burn furiously, but leave you with an incredibly pleasant tingling sensation all over your body.  Your skin flushes with excitement, and you can feel blood rushing to your extremities, making you shudder with pleasure. ");
 			}
 			damage = Math.round(damage);
-			damage = player.takeDamage(damage, true);
+			damage = player.takeMagicDamage(damage, true);
 			player.dynStats("lus", 15 + player.sens / 10);
 			combatRoundOver();
 		}
@@ -189,7 +189,7 @@ public class Kitsune extends Monster
 		{
 			if (pcCameWorms) {
 				outputText("\n\nThe kitsune recoils before running off, no longer interested in you...");
-				game.cleanupAfterCombat();
+				cleanupAfterCombat();
 			} else {
 				SceneLib.forest.kitsuneScene.loseToKitsunes();
 			}
@@ -230,12 +230,12 @@ public class Kitsune extends Monster
 			this.hairColor = hairColor;
 			this.hairLength = 13 + rand(20);
 			initStrTouSpeInte(35, 55, 110, 105);
-			initLibSensCor(60, 65, 45);
+			initWisLibSensCor(110, 60, 65, 45);
 			this.weaponName = "claws";
 			this.weaponVerb="punch";
-			this.weaponAttack = 8 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 8;
 			this.armorName = "skin";
-			this.armorDef = 5 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 5;
 			this.bonusHP = 120;
 			this.bonusLust = 20;
 			this.lust = 20;
@@ -247,12 +247,6 @@ public class Kitsune extends Monster
 					add(armors.ARCBANG,1).
 					add(consumables.FOXJEWL,4);
 			this.tailType = AppearanceDefs.TAIL_TYPE_FOX;
-			this.str += 7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1460;
 			checkMonster();
 		}
 

@@ -71,12 +71,12 @@ public class Behemoth extends Monster
 			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_CAT;
 			this.tailType = AppearanceDefs.TAIL_TYPE_BEHEMOTH;
 			initStrTouSpeInte(180, 130, 100, 115);
-			initLibSensCor(35, 15, 15);
+			initWisLibSensCor(100, 35, 15, 15);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 34 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 34;
 			this.armorName = "loincloth";
-			this.armorDef = 12 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 12;
 			this.bonusHP = 900;
 			this.bonusLust = 20;
 			this.lust = 15;
@@ -88,12 +88,6 @@ public class Behemoth extends Monster
 			this.special1 = tailWhip;
 			this.special2 = tease;
 			//this.special3 = aerialRave;
-			this.str += 54 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 39 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 34 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 6680;
 			checkMonster();
 		}
 		

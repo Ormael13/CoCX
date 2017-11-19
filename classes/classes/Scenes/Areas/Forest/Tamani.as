@@ -145,12 +145,12 @@ public class Tamani extends Goblin
 			this.hairColor = "pink and black";
 			this.hairLength = 16;
 			initStrTouSpeInte(37, 58, 55, 62);
-			initLibSensCor(64, 65, 50);
+			initWisLibSensCor(60, 64, 65, 50);
 			this.weaponName = "fists";
 			this.weaponVerb="tiny punch";
-			this.weaponAttack = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 1;
 			this.armorName = "leather straps";
-			this.armorDef = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 1;
 			this.bonusHP = 60;
 			this.bonusLust = 20;
 			this.lust = 40;
@@ -171,12 +171,6 @@ public class Tamani extends Goblin
 							null);
 			this.special1 = goblinDrugAttack;
 			this.special2 = goblinTeaseAttack;
-			this.str += 7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 530;
 			checkMonster();
 		}
 		

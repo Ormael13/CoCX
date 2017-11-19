@@ -31,6 +31,7 @@ public class Kiha extends Monster
 				damage += 5;
 				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
+				if (flags[kFLAGS.KIHA_LVL_UP] >= 1) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.1));
 				damage = Math.round(damage);
 				if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 					player.addStatusValue(StatusEffects.Blizzard, 1, -1);
@@ -42,7 +43,7 @@ public class Kiha extends Monster
 				if(!SceneLib.kihaFollower.followerKiha()) outputText("the swamp");
 				else outputText("the fight");
 				outputText(". ");
-				damage = player.takeDamage(damage, true);
+				damage = player.takeMagicDamage(damage, true);
 				outputText("\n");
 				if(player.HP >= 1) outputText("You follow the shrill cry of \"<i>B-BAKA!</i>\" in the distance until you reach the exact location you were in a few seconds earlier, prepared to fight again.");
 			}
@@ -74,9 +75,10 @@ public class Kiha extends Monster
 				var damage:int = int((str) - (player.armorDef));
 				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
+				if (flags[kFLAGS.KIHA_LVL_UP] >= 1) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.1));
 				damage = Math.round(damage);
 				outputText("Before you can react, you're struck by the power of her blows, feeling an intense pain in your chest as each fist makes contact.  With a final thrust, you're pushed backwards onto the ground; the dragoness smiles as she pulls her axe out of the ground, her hands still steaming from the fingertips. ");
-				damage = player.takeDamage(damage, true);
+				damage = player.takeMagicDamage(damage, true);
 				outputText("\n");
 			}
 			combatRoundOver();
@@ -104,9 +106,10 @@ public class Kiha extends Monster
 				var damage:Number = Math.round(90 + rand(10) + (player.newGamePlusMod() * 30));
 				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
+				if (flags[kFLAGS.KIHA_LVL_UP] >= 1) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.1));
 				damage = Math.round(damage);
 				outputText("You try to avoid the flames, but you're too slow!  The inferno slams into you, setting you alight!  You drop and roll on the ground, putting out the fires as fast as you can.  As soon as the flames are out, you climb back up, smelling of smoke and soot. ");
-				damage = player.takeDamage(damage, true);
+				damage = player.takeMagicDamage(damage, true);
 				outputText("\n");
 			}
 			combatRoundOver();
@@ -139,21 +142,22 @@ public class Kiha extends Monster
 			var flame:int = level + rand(6);
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) flame *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) flame *= 0.3;
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 1) flame *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.1));
 			flame = Math.round(flame);
 			outputText("\nAn afterwash of flames trails behind her blow, immolating you! ");
-			flame = player.takeDamage(flame, true);
+			flame = player.takeMagicDamage(flame, true);
 		}
 
 		override protected function performCombatAction():void
 		{
 			var select:Number = rand(5);
-			if (select <= 1) eAttack();
-			else if (select == 2) {
+			if (select == 0) kihaTimeWaster();
+			if (select == 1) kihaFireBreath();
+			if (select == 2) {
 				if (EngineCore.silly()) sillyModeKihaAttack();
 				else kihaFirePunch();
 			}
-			else if (select == 3) kihaFireBreath();
-			else kihaTimeWaster();
+			if (select > 2) eAttack();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
@@ -178,7 +182,7 @@ public class Kiha extends Monster
 				SceneLib.kihaFollower.sparWithFriendlyKihaLose();
 			else if (pcCameWorms){
 				outputText("\n\nKiha seems visibly disturbed by your infection, enough that she turns to leave.");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
 				SceneLib.kihaScene.kihaLossIntro();
 			}
@@ -213,65 +217,73 @@ public class Kiha extends Monster
 			this.hairLength = 3;
 			if (flags[kFLAGS.KIHA_LVL_UP] < 1) {
 				initStrTouSpeInte(85, 80, 85, 60);
-				initLibSensCor(50, 45, 66);
-				this.weaponAttack = 28 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 35 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(60, 50, 45, 66);
+				this.weaponAttack = 28;
+				this.armorDef = 35;
 				this.bonusHP = 500;
 				this.level = 21;
-				this.str += 17 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 17 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 2160;
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 1) {
-				initStrTouSpeInte(115, 110, 115, 80);
-				initLibSensCor(75, 65, 66);
-				this.weaponAttack = 38 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 50 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initStrTouSpeInte(110, 105, 110, 70);
+				initWisLibSensCor(70, 70, 55, 66);
+				this.weaponAttack = 38;
+				this.armorDef = 50;
 				this.bonusHP = 600;
-				this.level = 31;
-				this.str += 34 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 5840;
+				this.level = 27;
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 2) {
-				initStrTouSpeInte(165, 150, 160, 100);
-				initLibSensCor(100, 85, 66);
-				this.weaponAttack = 48 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 65 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initStrTouSpeInte(135, 130, 135, 80);
+				initWisLibSensCor(80, 90, 65, 66);
+				this.weaponAttack = 48;
+				this.armorDef = 65;
 				this.bonusHP = 700;
-				this.level = 41;
-				this.str += 49 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 10100;
+				this.level = 33;
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 3) {
-				initStrTouSpeInte(230, 210, 220, 120);
-				initLibSensCor(125, 105, 66);
-				this.weaponAttack = 58 + (12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 80 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initStrTouSpeInte(160, 155, 160, 90);
+				initWisLibSensCor(90, 110, 75, 66);
+				this.weaponAttack = 58;
+				this.armorDef = 80;
 				this.bonusHP = 800;
+				this.level = 39;
+			}
+			if (flags[kFLAGS.KIHA_LVL_UP] == 4) {
+				initStrTouSpeInte(185, 180, 185, 100);
+				initWisLibSensCor(100, 130, 85, 66);
+				this.weaponAttack = 68;
+				this.armorDef = 95;
+				this.bonusHP = 900;
+				this.level = 45;
+			}
+			if (flags[kFLAGS.KIHA_LVL_UP] == 5) {
+				initStrTouSpeInte(210, 205, 210, 110);
+				initWisLibSensCor(110, 150, 95, 66);
+				this.weaponAttack = 78;
+				this.armorDef = 110;
+				this.bonusHP = 1000;
 				this.level = 51;
-				this.str += 92 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 84 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 88 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 50 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 21720;
+			}
+			if (flags[kFLAGS.KIHA_LVL_UP] == 6) {
+				initStrTouSpeInte(235, 230, 235, 120);
+				initWisLibSensCor(120, 170, 105, 66);
+				this.weaponAttack = 88;
+				this.armorDef = 125;
+				this.bonusHP = 1200;
+				this.level = 57;
+			}
+			if (flags[kFLAGS.KIHA_LVL_UP] == 7) {
+				initStrTouSpeInte(260, 255, 260, 130);
+				initWisLibSensCor(130, 190, 115, 66);
+				this.weaponAttack = 98;
+				this.armorDef = 140;
+				this.bonusHP = 1400;
+				this.level = 63;
 			}
 			this.weaponName = "double-bladed axe";
 			this.weaponVerb="fiery cleave";
 			this.armorName = "thick scales";
 			if (game.flags[kFLAGS.KIHA_UNDERGARMENTS] > 0)
-				this.armorDef += 2;
+				this.armorDef += (2 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			this.bonusLust = 20;
 			this.lust = 10;
 			this.lustVuln = 0.4;
@@ -281,9 +293,31 @@ public class Kiha extends Monster
 			this.wingType = AppearanceDefs.WING_TYPE_DRACONIC_LARGE;
 			this.wingDesc = "huge";
 			this.tailType = AppearanceDefs.TAIL_TYPE_LIZARD;
-			if (flags[kFLAGS.KIHA_LVL_UP] >= 1) this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
-			if (flags[kFLAGS.KIHA_LVL_UP] >= 2) this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
-			if (flags[kFLAGS.KIHA_LVL_UP] >= 3) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 1) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 2) {
+				this.createPerk(PerkLib.Lifeline, 0, 0, 0, 0);
+				this.createPerk(PerkLib.BasicTranquilness, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 3) {
+				this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 4) {
+				this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
+				this.createPerk(PerkLib.HalfStepToImprovedTranquilness, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 5) {
+				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 6) {
+				this.createPerk(PerkLib.LizanRegeneration, 0, 0, 0, 0);
+				this.createPerk(PerkLib.ImprovedTranquilness, 0, 0, 0, 0);
+			}
+			//if (flags[kFLAGS.KIHA_LVL_UP] >= 7) this.createPerk(PerkLib., 0, 0, 0, 0);
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 8) this.createPerk(PerkLib.LizanMarrow, 0, 0, 0, 0);
+			//if (flags[kFLAGS.KIHA_LVL_UP] >= 9) this.createPerk(PerkLib., 0, 0, 0, 0);
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 10) this.createPerk(PerkLib.LizanMarrowEvolved, 0, 0, 0, 0);
 			checkMonster();
 		}
 

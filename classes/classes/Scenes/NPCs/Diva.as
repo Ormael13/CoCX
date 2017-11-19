@@ -31,12 +31,12 @@ public class Diva extends Monster {
         this.skinTone = "pale";
         this.hairColor = "blonde";
         this.hairLength = 16;
-        initLibSensCor(40,50,50);
+        initWisLibSensCor(4*levelBonus,40,50,50);
         initStrTouSpeInte(levelBonus,2.5*levelBonus,3.5*levelBonus,4*levelBonus);
         this.weaponName = "dive";
         this.weaponVerb = "swoop";
         this.armorName = "dress";
-        this.armorDef = levelBonus+ (2*flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+        this.armorDef = levelBonus;
         this.wingType = AppearanceDefs.WING_TYPE_BAT_LIKE_LARGE;
         this.bonusHP = levelBonus * 1000;
         this.bonusLust = 50;
@@ -61,7 +61,7 @@ public class Diva extends Monster {
             if(finalFight && !player.hasStatusEffect(StatusEffects.Blind)){options.push(moveDarkness);}
             if(attackSucceeded()){options[rand(options.length)]();}
         }
-        game.combatRoundOver();
+        combatRoundOver();
     }
     private function display(ref:String,locals:*=null):void{
         _scene.display(ref,locals);

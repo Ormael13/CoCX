@@ -317,6 +317,8 @@ import flash.errors.IllegalOperationError;
 			if (findPerk(PerkLib.InhumanSelfControl) >= 0) max += 1000;
 			if (findPerk(PerkLib.HalfStepToEpicSelfControl) >= 0) max += 1500;
 			if (findPerk(PerkLib.EpicSelfControl) >= 0) max += 2250;
+			if (findPerk(PerkLib.HalfStepToMythicalSelfControl) >= 0) max += 3500;
+			if (findPerk(PerkLib.MythicalSelfControl) >= 0) max += 5000;
 			if (findPerk(PerkLib.ElementalBondUrges) >= 0) {
 				if (hasStatusEffect(StatusEffects.SummonedElementalsAir)) max += 5 * statusEffectv2(StatusEffects.SummonedElementalsAir);
 				if (hasStatusEffect(StatusEffects.SummonedElementalsEarth)) max += 5 * statusEffectv2(StatusEffects.SummonedElementalsEarth);
@@ -349,11 +351,11 @@ import flash.errors.IllegalOperationError;
 		}
 		public function maxHP():Number {
 			var max:Number = Math.round(maxHP_base()*maxHP_mult());
-			return Math.min(149999,max);
+			return Math.min(199999,max);
 		}
 		public function maxLust():Number {
 			var max:Number = Math.round(maxLust_base()*maxLust_mult());
-			return Math.min(15999,max);
+			return Math.min(24499,max);
 		}
 		public function maxFatigue():Number {
 			return 100;
@@ -362,7 +364,7 @@ import flash.errors.IllegalOperationError;
 			return 100;
 		}
 		public function maxSoulforce():Number {
-			return 50;
+			return 0;
 		}
 		public function maxMana():Number {
 			return 100;
@@ -491,6 +493,10 @@ import flash.errors.IllegalOperationError;
 			HP = boundFloat(0,HP-Math.round(damage),HP);
 			return (damage > 0 && damage < 1) ? 1 : damage;
 		}
+		public function takeMagicDamage(damage:Number, display:Boolean = false):Number {
+			HP = boundFloat(0,HP-Math.round(damage),HP);
+			return (damage > 0 && damage < 1) ? 1 : damage;
+		}
 		public function takeLustDamage(lustDmg:Number, display:Boolean = true, applyRes:Boolean = true):Number{
 			if (applyRes) lustDmg *= lustPercent()/100;
 			lust = boundFloat(minLust(),lust+Math.round(lustDmg),maxLust());
@@ -566,8 +572,8 @@ import flash.errors.IllegalOperationError;
 		 * @return -1 if hasCoat(), skin.coat.type otherwise
 		 */
 		public function coatType():int { return skin.coatType(); }
-		public function hasCoatOfType(...types:Array):Boolean { return skin.hasCoatOfType(types); }
-		public function hasFullCoatOfType(...types:Array):Boolean { return skin.hasFullCoatOfType(types); }
+		public function hasCoatOfType(...types:Array):Boolean { return skin.hasCoatOfType.apply(skin,types); }
+		public function hasFullCoatOfType(...types:Array):Boolean { return skin.hasFullCoatOfType.apply(skin,types); }
 	//	[Deprecated]
 		public function set skinTone(value:String):void {
 			trace("[DEPRECATED] set skinTone");
@@ -2485,8 +2491,7 @@ import flash.errors.IllegalOperationError;
 		//Wrath Weapons
 		public function isLowGradeWrathWeapon():Boolean
 		{
-			return game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.OTETSU || game.player.weapon == game.weapons.CNTWHIP;
-
+			return game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.NPHBLDE || game.player.weapon == game.weapons.EBNYBLD || game.player.weapon == game.weapons.OTETSU || game.player.weapon == game.weapons.CNTWHIP;
 		}
 		public function isDualLowGradeWrathWeapon():Boolean
 		{
@@ -3654,11 +3659,24 @@ import flash.errors.IllegalOperationError;
 
 		public function damageToughnessModifier(displayMode:Boolean = false):Number {
 			var temp:Number = 0;
-			if (tou < 25) temp = (tou * 0.4);
-			else if (tou < 50) temp = 10 + ((tou-25) * 0.3);
-			else if (tou < 75) temp = 17.5 + ((tou-50) * 0.2);
-			else if (tou < 100) temp = 22.5 + ((tou-75) * 0.1);
-			else temp = 25;
+			temp += tou / 10;
+			if (temp > (25 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]))) temp = 25 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			//displayMode is for stats screen.
+			if (displayMode) return temp;
+			else return rand(temp);
+		}
+		public function damageIntelligenceModifier(displayMode:Boolean = false):Number {
+			var temp:Number = 0;
+			temp += inte / 10;
+			if (temp > (12.5 + (2.5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]))) temp = 12.5 + (2.5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			//displayMode is for stats screen.
+			if (displayMode) return temp;
+			else return rand(temp);
+		}
+		public function damageWisdomModifier(displayMode:Boolean = false):Number {
+			var temp:Number = 0;
+			temp += wis / 10;
+			if (temp > (12.5 + (2.5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]))) temp = 12.5 + (2.5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			//displayMode is for stats screen.
 			if (displayMode) return temp;
 			else return rand(temp);
@@ -3681,7 +3699,6 @@ import flash.errors.IllegalOperationError;
 				if (armorMod < 0) armorMod = 0;
 			}
 			mult -= armorMod;
-
 			//--PERKS--
 			//Take damage you masochist!
 			if (findPerk(PerkLib.Masochist) >= 0 && lib >= 60) {
@@ -3709,7 +3726,6 @@ import flash.errors.IllegalOperationError;
 			if (findPerk(PerkLib.NakedTruth) >= 0 && spe >= 75 && lib >= 60 && (armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "nothing")) {
 				mult *= 0.9;
 			}
-
 			//--STATUS AFFECTS--
 			//Black cat beer = 25% reduction!
 			if (statusEffectv1(StatusEffects.BlackCatBeer) > 0) {
@@ -3721,6 +3737,43 @@ import flash.errors.IllegalOperationError;
 			if (statusEffectv1(StatusEffects.EarthStance) > 0) {
 				mult *= 0.7;
 			}
+			//Defend = 50-(99)% reduction
+			if (hasStatusEffect(StatusEffects.Defend)) {
+				if (findPerk(PerkLib.DefenceStance) >= 0 && tou >= 80) {
+					if (findPerk(PerkLib.MasteredDefenceStance) >= 0 && tou >= 120) {
+						if (findPerk(PerkLib.PerfectDefenceStance) >= 0 && tou >= 160) mult *= 0.05;
+						else mult *= 0.25;
+					}
+					else mult *= 0.4;
+				}
+				else mult *= 0.5;
+			}
+			// Uma's Massage bonuses
+			var sac:StatusEffectClass = statusEffectByType(StatusEffects.UmasMassage);
+			if (sac && sac.value1 == UmasShop.MASSAGE_RELAXATION) {
+				mult *= sac.value2;
+			}
+			//Round things off.
+			mult = Math.round(mult);
+			//Caps damage reduction at 95/99%.
+			if (hasStatusEffect(StatusEffects.Defend) && findPerk(PerkLib.PerfectDefenceStance) >= 0 && tou >= 160 && mult < 1) mult = 1;
+			if (!hasStatusEffect(StatusEffects.Defend) && mult < 5) mult = 5;
+			return mult;
+		}
+		public function damageMagicalPercent(displayMode:Boolean = false, applyModifiers:Boolean = false):Number {
+			var mult:Number = 100;
+			//--BASE--
+			//Intelligence/Wisdom modifier.
+			if (!displayMode) {
+				mult -= damageIntelligenceModifier();
+				mult -= damageWisdomModifier();
+				if (mult < 75) mult = 75;
+			}
+			//--PERKS--
+			if (findPerk(PerkLib.NakedTruth) >= 0 && spe >= 75 && lib >= 60 && (armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "nothing")) {
+				mult *= 0.9;
+			}
+			//--STATUS AFFECTS--
 			//Defend = 50-(99)% reduction
 			if (hasStatusEffect(StatusEffects.Defend)) {
 				if (findPerk(PerkLib.DefenceStance) >= 0 && tou >= 80) {

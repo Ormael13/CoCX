@@ -373,14 +373,14 @@ import classes.internals.*;
 			this.hairColor = "black";
 			this.hairLength = 22;
 			initStrTouSpeInte(90, 75, 75, 60);
-			initLibSensCor(64, 25, 60);
+			initWisLibSensCor(60, 64, 25, 60);
 			this.weaponName = "twisted club";
 			this.weaponVerb="smash";
-			this.weaponAttack = 11 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 11;
 			this.weaponPerk = "";
 			this.weaponValue = 25;
 			this.armorName = "skin";
-			this.armorDef = 7 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 7;
 			this.bonusHP = 600;
 			this.bonusLust = 10;
 			this.lust = 30;
@@ -392,12 +392,6 @@ import classes.internals.*;
 					add(consumables.REDUCTO,1/5).
 					add(consumables.SUCMILK,1/2).
 					elseDrop(consumables.BLACK_D);
-			this.str += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1440;
 			checkMonster();
 		}
 		

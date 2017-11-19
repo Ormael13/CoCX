@@ -40,7 +40,7 @@ package classes.Scenes.Monsters
 			initGenderless();
 			this.tallness = 120;
 			initStrTouSpeInte(150, 120, 90, 10);
-			initLibSensCor(10, 10, 50);
+			initWisLibSensCor(10, 10, 10, 50);
 			this.tallness = 120;
 			this.drop = new ChainedDrop()
 					.add(useables.GOLCORE, 1/4);
@@ -50,19 +50,13 @@ package classes.Scenes.Monsters
 			this.lustVuln = 0;
 			this.weaponName = "stone claws";
 			this.weaponVerb = "claw-slash";
-			this.weaponAttack = 75 + (16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 75;
 			this.armorName = "stone";
-			this.armorDef = 75 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 75;
 			this.createPerk(PerkLib.Resolute, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);
-			this.str += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 4560;
 			checkMonster();
 		}
 		

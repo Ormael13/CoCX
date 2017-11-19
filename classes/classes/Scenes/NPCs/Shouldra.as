@@ -71,7 +71,7 @@ import classes.internals.*;
 		//(magic attack)
 		private function shouldraMagicLazers():void {
 			outputText("Falling back a step, the girl raises a hand and casts a small spell. From her fingertips shoot four magic missiles that slam against your skin and cause a surprising amount of discomfort. ");
-			var damage:Number = player.takeDamage(this.inte + rand(10), true);
+			var damage:Number = player.takeMagicDamage(this.inte + rand(10), true);
 			outputText("\n");
 			combatRoundOver();
 		}
@@ -114,12 +114,12 @@ import classes.internals.*;
 			this.hairColor = "white";
 			this.hairLength = 3;
 			initStrTouSpeInte(55, 40, 10, 140);
-			initLibSensCor(120, 0, 33);
+			initWisLibSensCor(140, 120, 0, 33);
 			this.weaponName = "fists";
 			this.weaponVerb="punches";
-			this.weaponAttack = 14 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 14;
 			this.armorName = "comfortable clothes";
-			this.armorDef = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 1;
 			this.bonusHP = 30;
 			this.bonusLust = 10;
 			this.lust = 10;
@@ -127,12 +127,6 @@ import classes.internals.*;
 			this.level = 12;
 			this.gems = 0;
 			this.drop = new ChainedDrop().add(consumables.ECTOPLS,1/3);
-			this.str += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 28 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1460;
 			checkMonster();
 		}
 		

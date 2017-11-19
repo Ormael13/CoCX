@@ -28,7 +28,7 @@ public class Kraken extends Monster
 			clearOutput();
 			var damage:Number = 0;
 			damage += eBaseStrengthDamage() * 2;
-			outputText("The scylla slaps you with her tentacles, dealing ");
+			outputText("The kraken slaps you with her tentacles, dealing ");
 			player.takeDamage(damage, true);
 			player.takeDamage(damage, true);
 			player.takeDamage(damage, true);
@@ -41,7 +41,7 @@ public class Kraken extends Monster
 			clearOutput();
 			var damage:Number = 0;
 			damage += eBaseStrengthDamage() * 2;
-			outputText("The scylla slaps you with her tentacles, dealing ");
+			outputText("The kraken slaps you with her tentacles, dealing ");
 			player.takeDamage(damage, true);
 			player.takeDamage(damage, true);
 			outputText(" damage!");
@@ -87,12 +87,12 @@ public class Kraken extends Monster
 			this.hairColor = "brown";
 			this.hairLength = 5;
 			initStrTouSpeInte(700, 200, 200, 250);
-			initLibSensCor(200, 50, 50);
+			initWisLibSensCor(250, 200, 50, 50);
 			this.weaponName = "large tentacle";
 			this.weaponVerb="slash";
-			this.weaponAttack = 145 + (30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 145;
 			this.armorName = "super thick skin";
-			this.armorDef = 95 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 95;
 			this.bonusHP = 10000;
 			this.bonusLust = 20;
 			this.lust = 20;
@@ -109,12 +109,6 @@ public class Kraken extends Monster
 			//this.createPerk(PerkLib., 0, 0, 0, 0);
 			//this.createPerk(PerkLib., 0, 0, 0, 0);
 			//this.createPerk(PerkLib., 0, 0, 0, 0);
-			this.str += 350 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 100 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 100 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 125 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 100 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 85250;
 			checkMonster();
 		}
 		

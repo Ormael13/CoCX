@@ -84,7 +84,7 @@ public class Sirius extends Naga
 //Hit:
 			outputText("The snake-man moves too quickly for you to evade and he sinks long fangs into your flesh, leaving a wound that burns with horrific pain. ");
 			var damage:Number = 40 + rand(20);
-			damage = player.takeDamage(damage, true);
+			damage = player.takeMagicDamage(damage, true);
 			combatRoundOver();
 		}
 
@@ -119,12 +119,12 @@ public class Sirius extends Naga
 			this.hairColor = "orange";
 			this.hairLength = 16;
 			initStrTouSpeInte(110, 90, 125, 92);
-			initLibSensCor(45, 35, 40);
+			initWisLibSensCor(92, 45, 35, 40);
 			this.weaponName = "fangs";
 			this.weaponVerb="bite";
-			this.weaponAttack = 37 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 37;
 			this.armorName = "scales";
-			this.armorDef = 31 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 31;
 			this.bonusHP = 400;
 			this.bonusLust = 20;
 			this.lust = 30;
@@ -135,12 +135,6 @@ public class Sirius extends Naga
 			this.special1 = nagaPoisonBiteAttack;
 			this.special2 = nagaConstrict;
 			this.special3 = nagaTailWhip;
-			this.str += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 2760;
 			checkMonster();
 		}
 

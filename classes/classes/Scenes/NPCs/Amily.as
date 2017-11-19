@@ -247,12 +247,12 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 			this.hairColor = "brown";
 			this.hairLength = 5;
 			initStrTouSpeInte(40, 40, 120, 80);
-			initLibSensCor(44, 45, 10);
+			initWisLibSensCor(80, 44, 45, 10);
 			this.weaponName = "knife";
 			this.weaponVerb="slash";
-			this.weaponAttack = 9 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 9;
 			this.armorName = "rags";
-			this.armorDef = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 1;
 			this.bonusHP = 20;
 			this.bonusLust = 10;
 			this.lust = 20;
@@ -261,12 +261,6 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 			this.gems = 8 + rand(11);
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			this.str += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1280;
 			checkMonster();
 		}
 		

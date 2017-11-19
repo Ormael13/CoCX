@@ -807,25 +807,25 @@
                 <case test="breastRows[0].breastRating lte 1"><!--FLAT,A-->
                     <show part="breasts/0"/>
                 </case>
-                <case test="breastRows[0].breastRating lte 5"><!--B,C,D,DD-->
+                <case test="breastRows[0].breastRating lte 5 and hasPlainSkinOnly()"><!--B,C,D,DD-->
                     <show part="breasts/B"/>
                 </case>
                 <default>
                     <switch>
-                        <case test="hasFullCoatOfType([1])"><!--FUR-->
+                        <case test="hasFullCoatOfType(1)"><!--FUR-->
                             <show part="breasts/Dfur"/>
                         </case>
-                        <case value="hasFullCoatOfType([5])"><!--CHITIN-->
+                        <case test="hasFullCoatOfType(5)"><!--CHITIN-->
                             <show part="breasts/Dchitin"/>
                             <if test="skin.coat.pattern==3"><!--BEE_STRIPES-->
                                 <hide part="breasts/*"/>
                                 <show part="breasts/Dbee"/>
                             </if>
                         </case>
-                        <case value="hasFullCoatOfType([2,9,14])"><!--SCALES,AQUA_SCALES,DRAGON_SCALES-->
+                        <case test="hasFullCoatOfType(2,9,14)"><!--SCALES,AQUA_SCALES,DRAGON_SCALES-->
                             <show part="breasts/Dscales"/>
                         </case>
-                        <case value="hasPartialCoatOfType([2,9,14])"><!--SCALES,AQUA_SCALES,DRAGON_SCALES-->
+                        <case test="hasPartialCoatOfType(2,9,14)"><!--SCALES,AQUA_SCALES,DRAGON_SCALES-->
                             <show part="breasts/Dscales_p"/>
                         </case>
                         <case value="'never'"><!--TODO GOO,BARK,STONE,MOSS-->

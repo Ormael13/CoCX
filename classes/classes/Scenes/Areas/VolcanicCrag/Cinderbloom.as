@@ -30,8 +30,8 @@ public class Cinderbloom extends Alraune
 			}
 			this.imageName = "cinderbloom alraune";
 			initStrTouSpeInte(10, 250, 10, 100);
-			initLibSensCor(200, 50, 0);
-			this.armorDef = 90 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			initWisLibSensCor(100, 200, 50, 0);
+			this.armorDef = 90;
 			this.bonusHP = 200;
 			this.level = 40;
 			this.gems = rand(25) + 15;
@@ -42,12 +42,6 @@ public class Cinderbloom extends Alraune
 			this.removePerk(PerkLib.FireVulnerability);
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyPlantType, 0, 0, 0, 0);
-			this.str += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 75 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 4050;//x50
 			checkMonster();
 		}
 		

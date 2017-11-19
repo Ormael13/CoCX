@@ -32,12 +32,12 @@ public class Thief extends Monster
 			this.hairColor = "brown";
 			this.hairLength = 4;
 			initStrTouSpeInte(17, 16, 16, 17);
-			initLibSensCor(20, 15, 20);
+			initWisLibSensCor(17, 20, 15, 20);
 			this.weaponName = "knife";
 			this.weaponVerb = "slash";
-			this.weaponAttack = 4 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 4;
 			this.armorName = "leather armor";
-			this.armorDef = 4 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 4;
 			this.bonusLust = 10;
 			this.lust = 25;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
@@ -46,12 +46,6 @@ public class Thief extends Monster
 			this.drop = new WeightedDrop().add(weapons.DAGGER,1)
 					.add(armors.LEATHRA,1)
 					.add(null,8);
-			this.str += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 80;
 			checkMonster();
 		}
 		

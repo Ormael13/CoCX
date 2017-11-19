@@ -90,14 +90,14 @@ public class OmnibusOverseer extends Monster
 			this.hairColor = "purple";
 			this.hairLength = 42;
 			initStrTouSpeInte(100, 70, 45, 85);
-			initLibSensCor(90, 70, 80);
+			initWisLibSensCor(85, 90, 70, 80);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 12 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 12;
 			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
-			this.armorDef = 18 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 18;
 			this.bonusHP = 400;
 			this.bonusLust = 50;
 			this.lust = 20;
@@ -115,12 +115,7 @@ public class OmnibusOverseer extends Monster
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
-			this.str += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 17 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1560;
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

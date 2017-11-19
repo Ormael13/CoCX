@@ -120,12 +120,12 @@ import classes.internals.*;
 			this.hairColor = "red";
 			this.hairLength = 3;
 			initStrTouSpeInte(75, 64, 50, 1);
-			initLibSensCor(95, 20, 100);
+			initWisLibSensCor(1, 95, 20, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 5 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 5;
 			this.armorName = "thick fur";
-			this.armorDef = 7 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 7;
 			this.bonusLust = 10;
 			this.lust = 50;
 			this.lustVuln = 0.87;
@@ -144,12 +144,6 @@ import classes.internals.*;
 			this.tailType = AppearanceDefs.TAIL_TYPE_DOG;
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			this.str += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1140;
 			checkMonster();
 		}
 

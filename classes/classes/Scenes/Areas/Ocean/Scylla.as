@@ -87,12 +87,12 @@ public class Scylla extends Monster
 			this.hairColor = "brown";
 			this.hairLength = 5;
 			initStrTouSpeInte(350, 100, 100, 150);
-			initLibSensCor(100, 50, 50);
+			initWisLibSensCor(150, 100, 50, 50);
 			this.weaponName = "tentacle";
 			this.weaponVerb="slash";
-			this.weaponAttack = 86 + (18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 86;
 			this.armorName = "thick skin";
-			this.armorDef = 52 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 52;
 			this.bonusHP = 5000;
 			this.bonusLust = 20;
 			this.lust = 20;
@@ -104,12 +104,6 @@ public class Scylla extends Monster
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
-			this.str += 140 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 40 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 40 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 40 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 26400;
 			checkMonster();
 		}
 		

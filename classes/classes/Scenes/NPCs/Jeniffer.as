@@ -68,7 +68,7 @@ package classes.Scenes.NPCs
 			this.long = "You're currently fighting a golemancer controling personaly created golem called J1c. It's ten feet tall with general shape of a female but lacking any fine details. It stone body is covered with soulmetal plates in many placed and from it looks like using spike covered fists to smash enemies. Despite been controled by a goblin it construction greatly reduce effects of most of sexual moves.";
 			this.plural = false;
 			initStrTouSpeInte(120, 120, 20, 10);
-			initLibSensCor(10, 10, 50);
+			initWisLibSensCor(10, 10, 10, 50);
 			this.lustVuln = .1;
 			this.tallness = 120;
 			this.createBreastRow(0, 1);
@@ -79,18 +79,12 @@ package classes.Scenes.NPCs
 			//this.bonusHP = 200;
 			this.weaponName = "spiked fists";
 			this.weaponVerb = "smash";
-			this.weaponAttack = 36 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 36;
 			this.armorName = "stone covered by soulmetal plating";
-			this.armorDef = 45 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 45;
 			this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
-			this.str += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1120;//*20
 			checkMonster();
 		}
 		

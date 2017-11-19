@@ -169,12 +169,12 @@ public class GooGirl extends Monster
 			this.hairColor = tone;
 			this.hairLength = 12 + rand(10);
 			initStrTouSpeInte(32, 40, 20, 30);
-			initLibSensCor(50, 40, 10);
+			initWisLibSensCor(30, 50, 40, 10);
 			this.weaponName = "hands";
 			this.weaponVerb="slap";
-			this.weaponAttack = 7 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 7;
 			this.armorName = "gelatinous skin";
-			this.armorDef = 4 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 4;
 			this.bonusHP = 40;
 			this.bonusLust = 10;
 			this.lust = 45;
@@ -191,12 +191,6 @@ public class GooGirl extends Monster
 			this.special3 = 5039;
 */
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
-			this.str += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 340;
 			checkMonster();
 		}
 

@@ -50,12 +50,12 @@ public class Farmers extends Monster
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(40, 120, 110, 100);
-			initLibSensCor(35, 35, 20);
+			initWisLibSensCor(100, 35, 35, 20);
 			this.weaponName = "pitchforks";
 			this.weaponVerb="stab";
-			this.weaponAttack = 20 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 20;
 			this.armorName = "chitin";
-			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 10;
 			this.bonusHP = 300;
 			this.bonusLust = 10;
 			this.lustVuln = 0;
@@ -68,12 +68,6 @@ public class Farmers extends Monster
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			this.str += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 2430;
 			checkMonster();
 		}
 		

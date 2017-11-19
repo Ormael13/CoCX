@@ -99,12 +99,12 @@ public class LizanRogue extends Monster
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(140, 180, 120, 90);
-			initLibSensCor(20, 10, 0);
+			initWisLibSensCor(80, 20, 10, 0);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 38 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 38;
 			this.armorName = "loincloth";
-			this.armorDef = 18 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 18;
 			this.bonusHP = 350;
 			this.bonusLust = 10;
 			this.lust = 20;
@@ -126,12 +126,6 @@ public class LizanRogue extends Monster
 			this.special1 = chooseBlowpipe;
 			this.special2 = wingstickThrow;
 			this.special3 = tongueAttack;
-			this.str += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 54 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 6600;
 			checkMonster();
 		}
 		

@@ -100,7 +100,7 @@ public class GoblinAssassin extends Monster
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			damage = Math.round(damage);
-			damage = player.takeDamage(damage, true);
+			damage = player.takeMagicDamage(damage, true);
 			combatRoundOver();
 		}
 		override public function defeated(hpVictory:Boolean):void
@@ -139,12 +139,12 @@ public class GoblinAssassin extends Monster
 			this.hairColor = "blue";
 			this.hairLength = 7;
 			initStrTouSpeInte(45, 55, 110, 95);
-			initLibSensCor(64, 35, 60);
+			initWisLibSensCor(95, 64, 35, 60);
 			this.weaponName = "needles";
 			this.weaponVerb = "stabbing needles";
-			this.weaponAttack = 2 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 2;
 			this.armorName = "leather straps";
-			this.armorDef = 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.armorDef = 1;
 			this.bonusHP = 70;
 			this.bonusLust = 20;
 			this.lust = 50;
@@ -158,12 +158,6 @@ public class GoblinAssassin extends Monster
 							consumables.BLUEDYE,
 							consumables.ORANGDY,
 							consumables.PURPDYE);// TODO this is a copy of goblin drop. consider replacement with higher-lever stuff
-			this.str += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1460;
 			checkMonster();
 		}
 

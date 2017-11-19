@@ -54,11 +54,11 @@ public class WinterWolf extends Monster
 				else {
 					player.createStatusEffect(StatusEffects.Frostbite,0,0,0,0);
 					damage += 20 + Math.round(rand(str / 4));
-					player.takeDamage(damage);
+					player.takeMagicDamage(damage);
 					dmgtaken += damage;
 				}
 				damage += 20 + Math.round(rand(str / 4));
-				player.takeDamage(damage);
+				player.takeMagicDamage(damage);
 				dmgtaken += damage;
 				outputText(" (<b><font color=\"#800000\">" + damage + "</font></b>)");
 			}
@@ -71,11 +71,11 @@ public class WinterWolf extends Monster
 				}
 				else {
 					damage += 20 + Math.round(rand(str / 4));
-					player.takeDamage(damage);
+					player.takeMagicDamage(damage);
 					dmgtaken += damage;
 				}
 				damage += 20 + Math.round(rand(str / 4));
-				player.takeDamage(damage);
+				player.takeMagicDamage(damage);
 				dmgtaken += damage;
 				outputText(" (<b><font color=\"#800000\">" + damage + "</font></b>)");
 			}
@@ -121,12 +121,12 @@ public class WinterWolf extends Monster
 			this.hairColor = "glacial white";
 			this.hairLength = 8;
 			initStrTouSpeInte(130, 160, 80, 90);
-			initLibSensCor(20, 15, 75);
+			initWisLibSensCor(80, 20, 15, 75);
 			this.weaponName = "paws";
 			this.weaponVerb="paw-slash";
-			this.weaponAttack = 37 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 37;
 			this.armorName = "fur";
-			this.armorDef = 27 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 27;
 			this.bonusHP = 800;
 			this.bonusLust = 10;
 			this.lust = 10;
@@ -142,12 +142,6 @@ public class WinterWolf extends Monster
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.IceNature, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			this.str += 39 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 5760;
 			checkMonster();
 		}
 		

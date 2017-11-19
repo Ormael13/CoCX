@@ -215,12 +215,12 @@ public class ImpHorde extends Monster
 			this.hairColor = "black";
 			this.hairLength = 1;
 			initStrTouSpeInte(50, 30, 25, 12);
-			initLibSensCor(45, 45, 100);
+			initWisLibSensCor(10, 45, 45, 100);
 			this.weaponName = "fists";
 			this.weaponVerb="punches";
-			this.weaponAttack = 12 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 12;
 			this.armorName = "skin";
-			this.armorDef = 6 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 6;
 			this.bonusHP = 800;
 			this.bonusLust = 150;
 			this.lust = 10;
@@ -236,12 +236,7 @@ public class ImpHorde extends Monster
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
-			this.str += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 960;
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}
 

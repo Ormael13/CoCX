@@ -128,7 +128,7 @@ public class Satyr extends Monster
 		{
 			if (pcCameWorms) {
 				outputText("\n\nThe satyr laughs heartily at your eagerness...");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
 				SceneLib.plains.satyrScene.loseToSatyr();
 			}
@@ -159,12 +159,12 @@ public class Satyr extends Monster
 			this.hairLength = 3+rand(20);
 			this.faceType = AppearanceDefs.FACE_COW_MINOTAUR;
 			initStrTouSpeInte(75, 70, 110, 70);
-			initLibSensCor(60, 35, 45);
+			initWisLibSensCor(60, 60, 35, 45);
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
-			this.weaponAttack = 0 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 0;
 			this.armorName = "thick fur";
-			this.armorDef = 2 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 2;
 			this.bonusHP = 300;
 			this.bonusLust = 20;
 			this.lust = 20;
@@ -174,12 +174,6 @@ public class Satyr extends Monster
 			this.gems = rand(30) + 30;
 			this.drop = new ChainedDrop().add(consumables.INCUBID,1/2);
 			this.tailType = AppearanceDefs.TAIL_TYPE_COW;
-			this.str += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1540;
 			checkMonster();
 		}
 		

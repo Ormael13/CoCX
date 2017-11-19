@@ -73,12 +73,12 @@ public class SandWitch extends Monster
 			this.hairColor = "sandy-blonde";
 			this.hairLength = 15;
 			initStrTouSpeInte(30, 45, 35, 45);
-			initLibSensCor(55, 40, 30);
+			initWisLibSensCor(50, 55, 40, 30);
 			this.weaponName = "kick";
 			this.weaponVerb="kick";
-			this.weaponAttack = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 1;
 			this.armorName = "robes";
-			this.armorDef = 2 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 2;
 			this.bonusHP = 100;
 			this.bonusLust = 20;
 			this.lust = 30;
@@ -96,12 +96,6 @@ public class SandWitch extends Monster
 			this.special1 = lustMagicAttack;
 			this.special2 = special2;
 			this.special3 = special3;
-			this.str += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 420;
 			checkMonster();
 		}
 

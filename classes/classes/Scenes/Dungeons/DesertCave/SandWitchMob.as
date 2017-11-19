@@ -172,14 +172,14 @@ public class SandWitchMob extends Monster
 			this.hairColor = "sandy-blonde";
 			this.hairLength = 15;
 			initStrTouSpeInte(30, 45, 35, 45);
-			initLibSensCor(55, 40, 30);
+			initWisLibSensCor(45, 55, 40, 30);
 			this.weaponName = "fists";
 			this.weaponVerb="punches";
-			this.weaponAttack = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 1;
 			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "robes";
-			this.armorDef = 2 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 2;
 			this.armorPerk = "";
 			this.armorValue = 5;
 			this.bonusHP = 100;
@@ -191,12 +191,6 @@ public class SandWitchMob extends Monster
 			this.gems = rand(20) + 15;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
-			this.str += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 420;
 			checkMonster();
 
 		}

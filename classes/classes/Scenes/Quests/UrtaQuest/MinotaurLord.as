@@ -190,12 +190,12 @@ use namespace kGAMECLASS;
 			this.hairLength = 3;
 			this.faceType = AppearanceDefs.FACE_COW_MINOTAUR;
 			initStrTouSpeInte(200, 140, 80, 50);
-			initLibSensCor(70, 25, 85);
+			initWisLibSensCor(50, 70, 25, 85);
 			this.weaponName = "chain";
 			this.weaponVerb="chain-whip";
-			this.weaponAttack = 66 + (14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 66;
 			this.armorName = "thick fur";
-			this.armorDef = 22 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 22;
 			this.bonusHP = 640 + rand(this.ballSize*4);
 			this.bonusLust = 40 + rand(this.ballSize*3);
 			this.lust = 50;
@@ -213,12 +213,6 @@ use namespace kGAMECLASS;
 			this.tailType = AppearanceDefs.TAIL_TYPE_COW;
 			this.special1 = SceneLib.mountain.minotaurScene.minoPheromones;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			this.str += 60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 4860;
 			checkMonster();
 		}
 

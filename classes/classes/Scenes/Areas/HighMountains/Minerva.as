@@ -126,7 +126,7 @@ public class Minerva extends Monster
 				outputText("The siren holds her hand out, flashing you a cunning smirk and snapping her fingers.  Your entire body is engulfed in white-hot flames, searing flesh and burning your [armor].  The sudden flash of heat and fire elicit panic from deep within you, causing you to cry out and roll on the ground to put the fires out.  The burns aren't too severe, but you know you can't keep getting hit like that! ");
 			}
 			damage = Math.round(damage);
-			player.takeDamage(damage, true);
+			player.takeMagicDamage(damage, true);
 			combatRoundOver();
 		}
 
@@ -234,16 +234,16 @@ public class Minerva extends Monster
 			this.hairColor = "red";
 			this.hairLength = 25;
 			initStrTouSpeInte(64, 80, 110, 75);
-			initLibSensCor(30, 25, 45);
+			initWisLibSensCor(70, 30, 25, 45);
 			if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) cor = 0; //Set to 0 corruption if purified.
 			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10) cor = 80; //Set to 80 corruption if corrupted.
 			this.weaponName = "halberd";
 			this.weaponVerb="slash";
-			this.weaponAttack = 50 + (11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 50;
 			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = game.armors.TUBETOP.name;
-			this.armorDef = 7 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 7;
 			this.armorPerk = "";
 			this.armorValue = 5;
 			this.bonusHP = 470;
@@ -257,12 +257,6 @@ public class Minerva extends Monster
 			this.drop = new WeightedDrop(consumables.PURPEAC, 1);
 			this.wingType = AppearanceDefs.WING_TYPE_HARPY;
 			this.wingDesc = "fluffy feathery";
-			this.str += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 2130;
 			checkMonster();
 		}
 		

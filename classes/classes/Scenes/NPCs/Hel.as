@@ -110,7 +110,7 @@ public class Hel extends Monster
 					lust += 5 * lustVuln;
 				}
 			}
-			if(damage > 0) damage = player.takeDamage(damage, true);
+			if(damage > 0) damage = player.takeMagicDamage(damage, true);
 			statScreenRefresh();
 			outputText("\n");
 			combatRoundOver();
@@ -193,12 +193,12 @@ public class Hel extends Monster
 			this.hairColor = "red";
 			this.hairLength = 13;
 			initStrTouSpeInte(90, 80, 75, 60);
-			initLibSensCor(70, 25, 30);
+			initWisLibSensCor(60, 70, 25, 30);
 			this.weaponName = "sword";
 			this.weaponVerb="slashing blade";
-			this.weaponAttack = 26 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 26;
 			this.armorName = "scales";
-			this.armorDef = 21 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 21;
 			this.armorPerk = "";
 			this.armorValue = 50;
 			this.bonusHP = 300;
@@ -216,12 +216,6 @@ public class Hel extends Monster
 			this.tailRecharge = 0;
 			this.createStatusEffect(StatusEffects.Keen, 0, 0, 0, 0);
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
-			this.str += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 2250;
 			checkMonster();
 		}
 		

@@ -311,12 +311,12 @@ public class Ceraph extends Monster
 			this.hairColor = "black";
 			this.hairLength = 20;
 			initStrTouSpeInte(75, 55, 90, 80);
-			initLibSensCor(75, 15, 100);
+			initWisLibSensCor(80, 75, 15, 100);
 			this.weaponName = "flaming whip";
 			this.weaponVerb="flame-whip";
-			this.weaponAttack = 20 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 20;
 			this.armorName = "demon-skin";
-			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 10;
 			this.bonusHP = 200;
 			this.bonusLust = 40;
 			this.lust = 30;
@@ -328,12 +328,6 @@ public class Ceraph extends Monster
 			this.special1 = ceraphSpecial1;
 			this.special2 = ceraphSpecial2;
 			this.special3 = ceraphSpecial3;
-			this.str += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1500;
 			checkMonster();
 		}
 

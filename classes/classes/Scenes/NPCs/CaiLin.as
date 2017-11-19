@@ -82,13 +82,13 @@ public class CaiLin extends Monster
 					player.spe -= 6;
 					showStatDown( 'spe' );
 					player.createStatusEffect(StatusEffects.MedusaVenom, 0,0,6,0);
-					player.takeDamage(5+rand(5));
+					player.takeMagicDamage(5+rand(5));
 				}
 				else {
 					player.createStatusEffect(StatusEffects.MedusaVenom,0,0,0,0);
-					player.takeDamage(5+rand(5));
+					player.takeMagicDamage(5+rand(5));
 				}
-				player.takeDamage(5+rand(5));
+				player.takeMagicDamage(5+rand(5));
 			}
 			else {
 				outputText("The venom's effects intensify causing yor body and mind further weaker and mind even more muddled.");
@@ -129,10 +129,10 @@ public class CaiLin extends Monster
 					player.spe -= 3;
 					showStatDown( 'spe' );
 					player.addStatusValue(StatusEffects.MedusaVenom,3,3);
-					player.takeDamage(5+rand(5));
+					player.takeMagicDamage(5+rand(5));
 				}
-				else player.takeDamage(5+rand(5));
-				player.takeDamage(5+rand(5));
+				else player.takeMagicDamage(5+rand(5));
+				player.takeMagicDamage(5+rand(5));
 			}
 		}
 		
@@ -227,7 +227,7 @@ public class CaiLin extends Monster
 				outputText("It's super effective!  ");
 			}
 			damage = Math.round(damage);
-			player.takeDamage(damage, true);
+			player.takeMagicDamage(damage, true);
 			fatigue += spellCostWhitefire();
 			flags[kFLAGS.CAILIN_SPELLS_CASTED]++;
 		}
@@ -257,18 +257,12 @@ public class CaiLin extends Monster
 				this.tallness = 5*12+10;
 				this.hairLength = 10;
 				initStrTouSpeInte(75, 100, 95, 50);
-				initLibSensCor(30, 20, 40);
-				this.weaponAttack = 45 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 40 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(50, 30, 20, 40);
+				this.weaponAttack = 45;
+				this.armorDef = 40;
 				this.bonusHP = 300;
 				this.lustVuln = .9;
 				this.level = 20;
-				this.str += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 1800;
 			}
 			if (flags[kFLAGS.CAILIN_LVL_UP] == 1) {
 				this.long = "You are fighting Cai'Lin. Despite that she not looking exactly the same as other gorgon due to huge parts of her skin not covered in seven-colored scales, striped in a pattern reminiscent of the dunes around you. Scaleless areas includes most of her face, front torso and abdomen. Instead of bifurcating into legs, her hips elongate into a snake's body which stretches far out behind her, leaving a long and curving trail in the sand.  She's wearing only make-shift bra over her A-cup breasts and simple loincloth. In her mouth you can see a pair of sharp, venomous fangs and a long forked tongue moving rapidly as she hisses at you.";
@@ -278,18 +272,12 @@ public class CaiLin extends Monster
 				this.tallness = 6*12;//potem z każdą zmianą dodawać jej 2 wzrostu tak aby ostatecznie osiągneła coś koło 6*12+10
 				this.hairLength = 12;
 				initStrTouSpeInte(90, 120, 110, 70);//lvl-up daje +15, +20, +15, +20
-				initLibSensCor(45, 30, 40);//lvl-up daje +15, +10, +0
-				this.weaponAttack = 45 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 40 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				initWisLibSensCor(70, 45, 30, 40);//lvl-up daje +20, +15, +10, +0
+				this.weaponAttack = 45;
+				this.armorDef = 40;
 				this.bonusHP = 400;
 				this.lustVuln = .8;//każdy lvl up to kolejne 0.1 niżej
 				this.level = 25;//każdy lvl up to +5 lvl-i chyba xD
-				this.str += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 87 * 30;//kolejne lvl dodawć beda jej perki na libido/max lust boosting jak demonic desier/selfcontrol a także zwiekszać jej lust resitance trzeba by ;)^^
 				this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			}
 			// this.plural = false;

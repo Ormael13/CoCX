@@ -148,12 +148,12 @@ use namespace kGAMECLASS;
 			this.hairColor = "blue";
 			this.hairLength = 13;
 			initStrTouSpeInte(60, 110, 100, 150);
-			initLibSensCor(220, 80, 80);
+			initWisLibSensCor(150, 220, 80, 80);
 			this.weaponName = "claw";
 			this.weaponVerb="claw-slash";
-			this.weaponAttack = 12 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 12;
 			this.armorName = "indecent spider silk robe";
-			this.armorDef = 12 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 12;
 			this.bonusHP = 100;
 			this.bonusLust = 50;
 			this.lust = 30;
@@ -174,12 +174,6 @@ use namespace kGAMECLASS;
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			this.str += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 66 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 7680;
 			checkMonster();
 		}
 		

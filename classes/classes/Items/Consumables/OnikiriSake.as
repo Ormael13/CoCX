@@ -157,7 +157,7 @@ public class OnikiriSake extends Consumable {
 			changes++;
 		}
 		//Face
-		if (player.earType == AppearanceDefs.EARS_ONI && player.faceType != AppearanceDefs.FACE_MANTICORE && changes < changeLimit && rand(3) == 0) {
+		if (player.earType == AppearanceDefs.EARS_ONI && player.faceType != AppearanceDefs.FACE_ONI_TEETH && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nY");
 			if (player.faceType != AppearanceDefs.FACE_HUMAN) outputText("our face suddenly mold back into it’s former human shape. However y");
 			outputText("ou feel your canines changing, growing bigger and slightly sharper. Hey you could pretend to be some kind of demon with that kind of mouth. <b>You now have oni canines.</b>");

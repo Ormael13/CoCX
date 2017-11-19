@@ -30,12 +30,12 @@ public class RyuBiHuman extends Monster
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(100, 90, 80, 90);
-			initLibSensCor(50, 35, 50);
+			initWisLibSensCor(90, 50, 35, 50);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 36 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 36;
 			this.armorName = "scales";
-			this.armorDef = 54 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 54;
 			this.bonusHP = 600;
 			this.bonusLust = 10;
 			this.lust = 20;
@@ -49,12 +49,6 @@ public class RyuBiHuman extends Monster
 			this.tailType = AppearanceDefs.TAIL_TYPE_DRACONIC;
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGigantType, 0, 0, 0, 0);
-			this.str += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 2700;
 			checkMonster();
 		}
 		

@@ -53,8 +53,8 @@ public class Phoenix extends Monster
 						outputText("As she zooms over you a great gout of flame erupts from the phoenix’s mouth! You dive out of the way, but all too late. The wall of fire rolls over you as you leap through it, the brief contact with the inferno searing both you and your [armor] badly. ");
 					}
 					damage = Math.round(damage);
-					damage = player.reduceDamage(damage);
-					player.takeDamage(damage, true);
+					damage = player.reduceMagicDamage(damage);
+					player.takeMagicDamage(damage, true);
 				}
 				removeStatusEffect(StatusEffects.Uber);
 			}
@@ -143,12 +143,12 @@ public class Phoenix extends Monster
 			this.hairColor = "red";
 			this.hairLength = 16;
 			initStrTouSpeInte(125, 110, 120, 84);
-			initLibSensCor(50, 30, 45);
+			initWisLibSensCor(80, 50, 30, 45);
 			this.weaponName = "scimitar and shield";
 			this.weaponVerb="slash";
-			this.weaponAttack = 41 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 41;
 			this.armorName = "chainmail and loincloth";
-			this.armorDef = 37 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 37;
 			this.bonusHP = 800;
 			this.bonusLust = 10;
 			this.lust = 10;
@@ -165,12 +165,6 @@ public class Phoenix extends Monster
 			this.special3 = lustBang;
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);
-			this.str += 37 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 5840;
 			checkMonster();
 		}
 		

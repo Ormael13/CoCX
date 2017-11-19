@@ -72,7 +72,7 @@ public class GoblinShaman extends Goblin
 				else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) damage *= 1.5;
 				else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) damage *= 2;
 				damage = Math.round(damage);
-				player.takeDamage(damage, true);
+				player.takeMagicDamage(damage, true);
 				fatigue += spellCostWhitefire;
 			}
 			//Arouse
@@ -153,12 +153,12 @@ public class GoblinShaman extends Goblin
 			this.hairColor = "indigo";
 			this.hairLength = 4;
 			initStrTouSpeInte(74, 50, 70, 87);
-			initLibSensCor(45, 45, 60);
+			initWisLibSensCor(87, 45, 45, 60);
 			this.weaponName = "wizard staff";
 			this.weaponVerb = "bludgeon";
-			this.weaponAttack = 14 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 14;
 			this.armorName = "fur loincloth";
-			this.armorDef = 6 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 6;
 			this.fatigue = 0;
 			this.bonusHP = 275;
 			this.bonusLust = 20;
@@ -182,12 +182,6 @@ public class GoblinShaman extends Goblin
 			this.special1 = goblinDrugAttack;
 			this.special2 = goblinTeaseAttack;
 			this.special3 = castSpell;
-			this.str += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 17 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1280;
 			checkMonster();
 		}
 		

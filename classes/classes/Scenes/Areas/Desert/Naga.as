@@ -24,9 +24,9 @@ public class Naga extends Monster
 				}
 				else {
 					player.createStatusEffect(StatusEffects.NagaVenom,0,0,0,0);
-					player.takeDamage(5+rand(5));
+					player.takeMagicDamage(5+rand(5));
 				}
-				player.takeDamage(5+rand(5));
+				player.takeMagicDamage(5+rand(5));
 			}
 			else {
 				outputText("The venom's effects intensify as your vision begins to blur and it becomes increasingly harder to stand.");
@@ -37,8 +37,8 @@ public class Naga extends Monster
 					// speDown.visible = true;
 					player.addStatusValue(StatusEffects.NagaVenom,1,2);
 				}
-				else player.takeDamage(5+rand(5));
-				player.takeDamage(5+rand(5));
+				else player.takeMagicDamage(5+rand(5));
+				player.takeMagicDamage(5+rand(5));
 			}
 			combatRoundOver();
 		}
@@ -88,7 +88,7 @@ public class Naga extends Monster
 			if(pcCameWorms){
 				outputText("\n\nThe naga's eyes go wide and she turns to leave, no longer interested in you.");
 				player.orgasm();
-				doNext(game.cleanupAfterCombat);
+				doNext(cleanupAfterCombat);
 			} else {
 				SceneLib.desert.nagaScene.nagaFUCKSJOOOOOO();
 			}
@@ -117,12 +117,12 @@ public class Naga extends Monster
 			this.hairColor = "brown";
 			this.hairLength = 16;
 			initStrTouSpeInte(38, 50, 55, 42);
-			initLibSensCor(55, 55, 40);
+			initWisLibSensCor(50, 55, 55, 40);
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
-			this.weaponAttack = 5 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 5;
 			this.armorName = "scales";
-			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 10;
 			this.bonusLust = 10;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
@@ -136,12 +136,6 @@ public class Naga extends Monster
 			this.special2 = nagaConstrict;
 			this.special3 = nagaTailWhip;
 			this.faceType = AppearanceDefs.FACE_SNAKE_FANGS;
-			this.str += 7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 470;
 			checkMonster();
 		}
 

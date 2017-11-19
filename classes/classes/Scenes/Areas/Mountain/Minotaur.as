@@ -35,7 +35,7 @@ import classes.internals.*;
 				SceneLib.desert.antsScene.phyllaPCLostToMino();
 			} else if (pcCameWorms){
 				outputText("\n\nThe minotaur picks you up and forcibly tosses you from his cave, grunting in displeasure.");
-				game.cleanupAfterCombat();
+				cleanupAfterCombat();
 			} else
 				SceneLib.mountain.minotaurScene.getRapedByMinotaur();
 		}
@@ -78,13 +78,13 @@ import classes.internals.*;
 			this.hairColor = furColor;
 			this.hairLength = 3;
 			initStrTouSpeInte(hasAxe ? 100 : 75, 70, 35, 20);
-			initLibSensCor(40 + this.ballSize * 2, 15 + this.ballSize * 2, 35);
+			initWisLibSensCor(20, 40 + this.ballSize * 2, 15 + this.ballSize * 2, 35);
 			this.faceType = AppearanceDefs.FACE_COW_MINOTAUR;
 			this.weaponName = hasAxe?"axe":"fist";
 			this.weaponVerb = hasAxe?"cleave":"punch";
-			this.weaponAttack = (hasAxe ? (50 + (11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) : (40 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL])));
+			this.weaponAttack = hasAxe?50:40;
 			this.armorName = "thick fur";
-			this.armorDef = 12 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 12;
 			this.bonusHP = 20 + rand(this.ballSize*2);
 			this.bonusLust = 30 + rand(this.ballSize*3);
 			this.lust = this.ballSize * 3;
@@ -102,12 +102,6 @@ import classes.internals.*;
 			this.special1 = SceneLib.mountain.minotaurScene.minoPheromones;
 			this.tailType = AppearanceDefs.TAIL_TYPE_COW;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			this.str += (hasAxe ? 20 : 15) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = (hasAxe ? 940 : 840);
 			checkMonster();
 		}
 

@@ -286,8 +286,8 @@ public class CoC extends MovieClip
         //model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8g2";
-			version = ver + " (<b>Bugfixing</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8h";
+			version = ver + " (<b></b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);
@@ -303,11 +303,11 @@ public class CoC extends MovieClip
          */
         //{ region PlayerVariables
 
-        //The Player object, used everywhere
-        player = new Player();
-        model.player = player;
-        player2 = new Player();
-        new PlayerEvents();
+			//The Player object, used everywhere
+			//player = new Player();
+			model.player = player;
+			player2 = new Player();
+			new PlayerEvents();
 
         //Used in perk selection, mainly eventParser, input and engineCore
         //tempPerk = null;

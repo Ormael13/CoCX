@@ -169,12 +169,12 @@ import classes.internals.*;
 			this.hairColor = hairColor;
 			this.hairLength = 24;
 			initStrTouSpeInte(110, 75, 70, 100);
-			initLibSensCor(80, 50, 90);
+			initWisLibSensCor(100, 80, 50, 90);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 30 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 30;
 			this.armorName = "carapace";
-			this.armorDef = 60 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 60;
 			this.armorPerk = "";
 			this.armorValue = 70;
 			if (pierced) {
@@ -198,12 +198,6 @@ import classes.internals.*;
 			this.drop = new WeightedDrop().add(consumables.B_GOSSR,5)
 					.add(useables.T_SSILK,1)
 					.add(null,4);
-			this.str += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 2610;
 			checkMonster();
 		}
 

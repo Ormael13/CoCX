@@ -23,7 +23,7 @@ public class ImpLord extends Imp
 			outputText("The imp mutters something to himself. Before you have time to react the demonic creature's hand is filled with a bright red fire that he hurls at you.  The flames lick at your body leaving a painful burn on you torso, as well as an arousing heat in your groin. ");
 			}
 			damage = Math.round(damage);
-			player.takeDamage(damage, true);
+			player.takeMagicDamage(damage, true);
 			player.dynStats("lus", 20 + player.cor / 10);
 			combatRoundOver();
 		}
@@ -108,12 +108,12 @@ public class ImpLord extends Imp
 			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
 			this.skinTone = "red";
 			initStrTouSpeInte(55, 40, 45, 42);
-			initLibSensCor(55, 35, 100);
+			initWisLibSensCor(42, 55, 35, 100);
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
-			this.weaponAttack = 10 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 10;
 			this.armorName = "leathery skin";
-			this.armorDef = 5 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 5;
 			this.bonusHP = 100;
 			this.bonusLust = 30;
 			this.lust = 30;
@@ -128,12 +128,7 @@ public class ImpLord extends Imp
 					add(consumables.SUCMILK,6);
 			this.wingType = AppearanceDefs.WING_TYPE_IMP;
 			this.special1 = lustMagicAttack;
-			this.str += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 470;
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

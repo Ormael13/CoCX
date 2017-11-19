@@ -118,12 +118,12 @@ public class TamanisDaughters extends Goblin
 			this.hairColor = "pink";
 			this.hairLength = 16;
 			initStrTouSpeInte(55, 30, 45, 50);
-			initLibSensCor(70, 70, 50);
+			initWisLibSensCor(50, 70, 70, 50);
 			this.weaponName = "fists";
 			this.weaponVerb="tiny punch";
-			this.weaponAttack = 5 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 5;
 			this.armorName = "leather straps";
-			this.armorDef = 5 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 5;
 			this.bonusHP = 50 + (int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 2) * 15);
 			if (bonusHP > 3350) bonusHP = 3350;
 			this.bonusLust = 20 + (int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 2) * 10);
@@ -144,12 +144,6 @@ public class TamanisDaughters extends Goblin
 			this.special1 = goblinDrugAttack;
 			this.special2 = goblinTeaseAttack;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
-			this.str += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 2000;
 			checkMonster();
 		}
 

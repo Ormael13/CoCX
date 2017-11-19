@@ -121,12 +121,12 @@ public class SpiderMorphMob extends Monster
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(100, 80, 99, 99);
-			initLibSensCor(35, 35, 20);
+			initWisLibSensCor(99, 35, 35, 20);
 			this.weaponName = "claws";
 			this.weaponVerb="claws";
-			this.weaponAttack = 34 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 34;
 			this.armorName = "chitin";
-			this.armorDef = 30 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 30;
 			this.bonusHP = 1200;
 			this.bonusLust = 50;
 			this.lustVuln = .2;
@@ -138,12 +138,6 @@ public class SpiderMorphMob extends Monster
 			this.tailType = AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
-			this.str += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 2430;
 			checkMonster();
 		}
 		

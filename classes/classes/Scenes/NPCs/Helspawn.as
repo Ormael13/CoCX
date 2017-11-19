@@ -88,7 +88,7 @@ private function calledShot():void {
 			if(damage <= 0 || player.getEvasionRoll()) outputText("\nYou evade the strike.");
 			else {
 				outputText("\n" + flags[kFLAGS.HELSPAWN_NAME] + "'s tail catches you as you try to dodge.  Your [armor] sizzles, and you leap back with a yelp as she gives you a light burning. ");
-				damage = player.takeDamage(damage, true);
+				damage = player.takeMagicDamage(damage, true);
 			}
 		}
 
@@ -161,15 +161,15 @@ private function calledShot():void {
 			this.hairColor = "red";
 			this.hairLength = 13;
 			initStrTouSpeInte(60, 60, 64, 50);
-			initLibSensCor(45, 55, 20);
+			initWisLibSensCor(50, 45, 55, 20);
 			this.weaponName = weapon;
 			this.weaponVerb = {
 				'bow': "blunted arrow",
 				'scimitar': "slash",
 				'scimitar and shield': "slash"}[weapon];
-			this.weaponAttack = 20 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 20;
 			this.armorName = "scales";
-			this.armorDef = 12 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 12;
 			this.armorPerk = "";
 			this.armorValue = 50;
 			this.bonusHP = 175;
@@ -185,12 +185,6 @@ private function calledShot():void {
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
 			if (flags[kFLAGS.HELSPAWN_WEAPON] == "scimitar and shield") this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);
-			this.str += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1100;
 			checkMonster();
 		}
 

@@ -280,23 +280,23 @@ public class PerkLib
 						"]",
 				"You choose the 'Berserker' perk, which unlocks the 'Berserk' magical ability.  Berserking increases attack and lust resistance but reduces physical defenses.");
 		public static const BiggerGolemBag1:PerkType = mk("Bigger Golem Bag 1", "Bigger Golem Bag 1",
-				"Your extra dimensional golem bag can store 2 more temporal golems.",
-				"You choose 'Bigger Golem Bag 1' perk, increasing your temporal golems bag.");
+				"Your extra dimensional golem bag can store 2 more temporal (and 1 more pernament when becoming Master Golem Maker) golems.",
+				"You choose 'Bigger Golem Bag 1' perk, increasing your golems bag.");
 		public static const BiggerGolemBag2:PerkType = mk("Bigger Golem Bag 2", "Bigger Golem Bag 2",
-				"Your extra dimensional golem bag can store 2 more temporal golems.",
-				"You choose 'Bigger Golem Bag 2' perk, increasing your temporal golems bag.");
+				"Your extra dimensional golem bag can store 2 more temporal (and 1 more pernament when becoming Master Golem Maker) golems.",
+				"You choose 'Bigger Golem Bag 2' perk, increasing your golems bag.");
 		public static const BiggerGolemBag3:PerkType = mk("Bigger Golem Bag 3", "Bigger Golem Bag 3",
-				"Your extra dimensional golem bag can store 2 more temporal golems.",
-				"You choose 'Bigger Golem Bag 3' perk, increasing your temporal golems bag.");
+				"Your extra dimensional golem bag can store 2 more temporal (and 1 more pernament when becoming Master Golem Maker) golems.",
+				"You choose 'Bigger Golem Bag 3' perk, increasing your golems bag.");
 		public static const BiggerGolemBag4:PerkType = mk("Bigger Golem Bag 4", "Bigger Golem Bag 4",
-				"Your extra dimensional golem bag can store 2 more temporal golems.",
-				"You choose 'Bigger Golem Bag 4' perk, increasing your temporal golems bag.");
+				"Your extra dimensional golem bag can store 2 more temporal (and 1 more pernament when becoming Master Golem Maker) golems.",
+				"You choose 'Bigger Golem Bag 4' perk, increasing your golems bag.");
 		public static const BiggerGolemBag5:PerkType = mk("Bigger Golem Bag 5", "Bigger Golem Bag 5",
-				"Your extra dimensional golem bag can store 2 more temporal golems.",
-				"You choose 'Bigger Golem Bag 5' perk, increasing your temporal golems bag.");
+				"Your extra dimensional golem bag can store 2 more temporal (and 1 more pernament when becoming Master Golem Maker) golems.",
+				"You choose 'Bigger Golem Bag 5' perk, increasing your golems bag.");
 		public static const BiggerGolemBag6:PerkType = mk("Bigger Golem Bag 6", "Bigger Golem Bag 6",
-				"Your extra dimensional golem bag can store 2 more temporal golems.",
-				"You choose 'Bigger Golem Bag 6' perk, increasing your temporal golems bag.");
+				"Your extra dimensional golem bag can store 2 more temporal (and 1 more pernament when becoming Master Golem Maker) golems.",
+				"You choose 'Bigger Golem Bag 6' perk, increasing your golems bag.");
 		public static const BlackHeart:PerkType = mk("Black Heart", "Black Heart",
 				"You intelligence to increase power of lust strike as well making fascinate slightly stronger.",
 				"You choose the 'Black Heart' perk. Your heart due to repeadly exposition to corruption turned black.");
@@ -559,8 +559,17 @@ public class PerkLib
 				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to rank 7.",
 				"You choose 'Elemental Contract Rank 7' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementalContractRank8:PerkType = mk("Elemental Contract Rank 8", "Elemental Contract Rank 8",
-				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to elder rank.",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to 3rd elder rank.",
 				"You choose 'Elemental Contract Rank 8' perk, rising your ability to command more and stronger elementals.");
+		public static const ElementalContractRank9:PerkType = mk("Elemental Contract Rank 9", "Elemental Contract Rank 9",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to 2nd elder rank.",
+				"You choose 'Elemental Contract Rank 9' perk, rising your ability to command more and stronger elementals.");
+		public static const ElementalContractRank10:PerkType = mk("Elemental Contract Rank 10", "Elemental Contract Rank 10",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to 1st elder rank.",
+				"You choose 'Elemental Contract Rank 10' perk, rising your ability to command more and stronger elementals.");
+		public static const ElementalContractRank11:PerkType = mk("Elemental Contract Rank 11", "Elemental Contract Rank 11",
+				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 2. Allow to rank-up summoned elementals to grand elder rank.",
+				"You choose 'Elemental Contract Rank 11' perk, rising your ability to command more and stronger elementals.");
 		public static const ElementsOfMarethBasics:PerkType = mk("Elements of Mareth: Basics", "Elements of Mareth: Basics",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
 				"You choose 'Elements of Mareth: Basics' perk, your time spent in Mareth allowed you to get basic understanding of native elements that aren't classified as one of four traditional.");
@@ -576,6 +585,9 @@ public class PerkLib
 		public static const EpicEndurance:PerkType = mk("Epic Endurance", "Epic Endurance",
 				"Increases maximum fatigue by 4500.",
 				"You choose the 'Epic Endurance' perk. Thanks to your epic physical conditioning, your maximum fatigue has been increased by 4500!");
+		public static const EpicGolemMaker:PerkType = mk("Epic Golem Maker", "Epic Golem Maker",
+				"Your proficiency in making golems allows to make stronger golems and slightly rise your intelligence and wisdom.",
+				"You choose 'Epic Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const EpicSelfControl:PerkType = mk("Epic Self-Control", "Epic Self-Control",
 				"Increases maximum lust by 2250.",
 				"You choose the 'Epic Self-Control' perk. Thanks to your epic mental conditioning, your maximum lust has been increased by 2250!");
@@ -612,6 +624,12 @@ public class PerkLib
 		public static const FertilityPlus:PerkType = mk("Fertility+", "Fertility+",
 				"Increases fertility rating by 15 and cum volume by up to 50%.",
 				"You choose the 'Fertility+' perk, making it easier to get pregnant.  It also increases your cum volume by up to 50% (if appropriate)!");
+		public static const FirstAttackElementals:PerkType = mk("First Attack: Elementals", "First Attack: Elementals",
+				"Instead of melee attacking in PC place one of summoned elementals will attack before PC allowing latter to take any action even personaly attaking with melee weapon.",
+				"You choose the 'First Attack: Elementals' perk, allowing your summoned elementals to attack independly from you.");
+		public static const FirstAttackGolems:PerkType = mk("First Attack: Golems", "First Attack: Golems",
+				"Before your actions one or more of your golems will attack.",
+				"You choose the 'First Attack: Golems' perk, allowing some of your pernament golems strike before you.");
 		public static const FleshBodyApprenticeStage:PerkType = mk("Flesh Body: Apprentice Stage", "Flesh Body: Apprentice Stage",
 				"Your reached first stage of body cultivating.",
 				"You choose the 'Flesh Body: Apprentice Stage' perk, working on cultivating power of your fleshy body.");
@@ -639,6 +657,21 @@ public class PerkLib
 		public static const GlacialStorm:PerkType = mk("Glacial Storm", "Glacial Storm",
 				"Cumulative 20% damage increase for every subsequent ice spell without interruption.",
 				"You choose the 'Glacial Storm' perk. Cumulative 20% damage increase for every subsequent ice spell without interruption.");
+		public static const GolemArmyCaptain:PerkType = mk("Golem Army Captain", "Golem Army Captain",
+				"+2 to max limit of pernament and temporal stored golems.",
+				"You choose the 'Golem Army Captain' perk, allowing to store additional pernament and temporal golems in your golem bag.");
+		public static const GolemArmyColonel:PerkType = mk("Golem Army Colonel", "Golem Army Colonel",
+				"+4 to max limit of pernament and temporal stored golems.",
+				"You choose the 'Golem Army Colonel' perk, allowing to store additional pernament and temporal golems in your golem bag.");
+		public static const GolemArmyGeneral:PerkType = mk("Golem Army General", "Golem Army General",
+				"+5 to max limit of pernament and temporal stored golems.",
+				"You choose the 'Golem Army General' perk, allowing to store additional pernament and temporal golems in your golem bag.");
+		public static const GolemArmyLieutenant:PerkType = mk("Golem Army Lieutenant", "Golem Army Lieutenant",
+				"+1 to max limit of pernament and temporal stored golems.",
+				"You choose the 'Golem Army Lieutenant' perk, allowing to store additional pernament and temporal golems in your golem bag.");
+		public static const GolemArmyMajor:PerkType = mk("Golem Army Major", "Golem Army Major",
+				"+3 to max limit of pernament and temporal stored golems.",
+				"You choose the 'Golem Army Major' perk, allowing to store additional pernament and temporal golems in your golem bag.");
 		public static const GoliathI:PerkType = mk("Goliath I", "Goliath I",
 				"+2 extra HP per point of strength.",
 				"You choose the 'Goliath I' perk, granting +2 extra maximum HP for each point of strength.");
@@ -668,7 +701,7 @@ public class PerkLib
 						"]",
 				"You choose the 'Grand Archmage' perk, increasing base spell strength by 40% and mana pool by 60.");
 		public static const GrandMasterGolemMaker:PerkType = mk("Grand-Master Golem Maker", "Grand-Master Golem Maker",
-				"Your proficiency in making golems allows to .",
+				"Your proficiency in making golems allows to make golems that can attack flying enemies at small cost in mana drawn form it owner (aka PC). Also allowing to store one more in golem bag.",
 				"You choose 'Grand-Master Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const GreaterCrinosShape:PerkType = mk("Greater Crinos Shape", "Greater Crinos Shape",
 				"Crinos Shape increase to physical might rise to 15% of str/tou/spe.",
@@ -703,8 +736,8 @@ public class PerkLib
 				"Increases maximum wrath by 60.",
 				"You choose the 'Half-step-to Advanced Tranquilness' perk. Thanks to your advanced anger managment training, your maximum wrath has been increased by 60!");	
 		public static const HalfStepToEpicEndurance:PerkType = mk("Half-step-to Epic Endurance", "Half-step-to Epic Endurance",
-				"Increases maximum fatigue by 3500.",
-				"You choose the 'Half-step-to Epic Endurance' perk. Thanks to your epic physical conditioning, your maximum fatigue has been increased by 3500!");
+				"Increases maximum fatigue by 3000.",
+				"You choose the 'Half-step-to Epic Endurance' perk. Thanks to your epic physical conditioning, your maximum fatigue has been increased by 3000!");
 		public static const HalfStepToEpicSelfControl:PerkType = mk("Half-step-to Epic Self-Control", "Half-step-to Epic Self-Control",
 				"Increases maximum lust by 1500.",
 				"You choose the 'Half-step-to Epic Self-Control' perk. Thanks to your epic mental conditioning, your maximum lust has been increased by 1500!");
@@ -738,6 +771,18 @@ public class PerkLib
 		public static const HalfStepToInhumanTranquilness:PerkType = mk("Half-step-to Inhuman Tranquilness", "Half-step-to Inhuman Tranquilness",
 				"Increases maximum wrath by 750.",
 				"You choose the 'Half-step-to Inhuman Tranquilness' perk. Thanks to your inhuman anger managment training, your maximum wrath has been increased by 750!");
+		public static const HalfStepToMythicalEndurance:PerkType = mk("Half-step-to Mythical Endurance", "Half-step-to Mythical Endurance",
+				"Increases maximum fatigue by 7000.",
+				"You choose the 'Half-step-to Mythical Endurance' perk. Thanks to your mythical physical conditioning, your maximum fatigue has been increased by 7000!");
+		public static const HalfStepToMythicalSelfControl:PerkType = mk("Half-step-to Mythical Self-Control", "Half-step-to Mythical Self-Control",
+				"Increases maximum lust by 3500.",
+				"You choose the 'Half-step-to Mythical Self-Control' perk. Thanks to your mythical mental conditioning, your maximum lust has been increased by 3500!");
+		public static const HalfStepToMythicalSpirituality:PerkType = mk("Half-step-to Mythical Spirituality", "Half-step-to Mythical Spirituality",
+				"Increases maximum mana by 10500.",
+				"You choose the 'Half-step-to Mythical Spirituality' perk. Thanks to your mythical mystical conditioning, your maximum mana has been increased by 10500!");
+		public static const HalfStepToMythicalTranquilness:PerkType = mk("Half-step-to Mythical Tranquilness", "Half-step-to Mythical Tranquilness",
+				"Increases maximum wrath by 3500.",
+				"You choose the 'Half-step-to Mythical Tranquilness' perk. Thanks to your mythical anger managment training, your maximum wrath has been increased by 3500!");
 		public static const HalfStepToPeerlessEndurance:PerkType = mk("Half-step-to Peerless Endurance", "Half-step-to Peerless Endurance",
 				"Increases maximum fatigue by 700.",
 				"You choose the 'Half-step-to Peerless Endurance' perk. Thanks to your peerless physical conditioning, your maximum fatigue has been increased by 700!");
@@ -768,6 +813,12 @@ public class PerkLib
 		public static const HexaAttack:PerkType = mk("Hexa Attack", "Hexa Attack",
 				"Allows you to perform six melee attacks with non-large weapons per round.",
 				"You choose the 'Hexa Attack' perk. This allows you to make six melee attacks with non-large weapons.");
+		public static const HiddenDualMomentum:PerkType = mk("Hidden Dual Momentum", "Hidden Dual Momentum",
+				"You've trained in using your speed to enhance power of your dual large weapons swings.",
+				"You choose 'Hidden Dual Momentum' perk, allowing to use your speed to enhance power of your attacks with dual large weapons.");
+		public static const HiddenMomentum:PerkType = mk("Hidden Momentum", "Hidden Momentum",
+				"You've trained in using your speed to enhance power of your single large weapons swings.",
+				"You choose 'Hidden Momentum' perk, allowing to use your speed to enhance power of your attacks with single large weapons.");
 		public static const HighVoltage:PerkType = mk("High Voltage", "High Voltage",
 				"Cumulative 20% damage increase for every subsequent lightning spell without interruption.",
 				"You choose the 'High Voltage' perk. Cumulative 20% damage increase for every subsequent lightning spell without interruption.");
@@ -956,7 +1007,7 @@ public class PerkLib
 				"Kitsune Thyroid Gland (Evolved) increase speed of the recovery after using magic, boost PC speed and wisdom. And make fox fire specials 50% stronger when having 9 tails (both fire and lust damage).",
 				"You choose the 'Kitsune Thyroid Gland (Evolved)' perk. Continued using of kitsune powers caused your thyroid gland to evolve.");
 		public static const LegendaryGolemMaker:PerkType = mk("Legendary Golem Maker", "Legendary Golem Maker",
-				"Your proficiency in making golems allows to .",
+				"Your proficiency in making golems allows to make stronger than before golems and slightly rise your intelligence and wisdom.",
 				"You choose 'Legendary Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const Lifeline:PerkType = mk("Lifeline", "Lifeline",
 				"Increases self heling by 100 out of combat and by 50 in combat (using defend option will double it).",
@@ -1006,9 +1057,6 @@ public class PerkLib
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
 				"You choose the 'Mage' perk.  You are able to focus your magical abilities even more keenly, boosting your base spell effects by 20% and mana pool by 30.");
-		public static const HiddenDualMomentum:PerkType = mk("Hidden Dual Momentum", "Hidden Dual Momentum",
-				"You've trained in using your speed to enhance power of your dual large weapons swings.",
-				"You choose 'Hidden Dual Momentum' perk, allowing to use your speed to enhance power of your attacks with dual large weapons.");
 		public static const MakeItDouble:PerkType = mk("Make it Double", "Make it Double",
 				"Increased damage when using specials like Whirlwind/Whipping with dual weapons rather than single weapons.",
 				"You choose the 'Make it Double' perk, allowing to make full use of dual weapons when using moves like whirlwind or whipping.");
@@ -1052,7 +1100,7 @@ public class PerkLib
 				"Defend move now futher reduce incoming damage and allow for slight improved fatigue/mana/soulforce recovery.",
 				"You choose 'Mastered Defence Stance' perk, finally attaining mastery with your defence pose.");
 		public static const MasterGolemMaker:PerkType = mk("Master Golem Maker", "Master Golem Maker",
-				"Your proficiency in making golems allows to .",
+				"Your proficiency in making golems allows to make pernament golems that will not longer shatter after one attack. Allows to store one such golem in golem bag.",
 				"You choose 'Master Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const Medicine:PerkType = mk("Medicine", "Medicine",
 				"Grants 15% chance per round of cleansing poisons/drugs from your body. Increases HP restoration on rest.",
@@ -1081,9 +1129,21 @@ public class PerkLib
 		public static const Multishot:PerkType = mk("Multishot", "Multishot",
 				"Allows you to perform additional range attack per round.",
 				"You choose the 'Multishot' perk, This allows you to make additional range attack.");
-		public static const HiddenMomentum:PerkType = mk("Hidden Momentum", "Hidden Momentum",
-				"You've trained in using your speed to enhance power of your single large weapons swings.",
-				"You choose 'Hidden Momentum' perk, allowing to use your speed to enhance power of your attacks with single large weapons.");
+		public static const MythicalEndurance:PerkType = mk("Mythical Endurance", "Mythical Endurance",
+				"Increases maximum fatigue by 14000.",
+				"You choose the 'Mythical Endurance' perk. Thanks to your mythical physical conditioning, your maximum fatigue has been increased by 10000!");
+		public static const MythicalGolemMaker:PerkType = mk("Mythical Golem Maker", "Mythical Golem Maker",
+				"Your proficiency in making golems allows to make stronger golems as much stronger their creator became and slightly rise your intelligence and wisdom.",
+				"You choose 'Mythical Golem Maker' perk, increasing your proficiency in making golems.");
+		public static const MythicalSelfControl:PerkType = mk("Mythical Self-Control", "Mythical Self-Control",
+				"Increases maximum lust by 7000.",
+				"You choose the 'Mythical Self-Control' perk. Thanks to your mythical mental conditioning, your maximum lust has been increased by 5000!");
+		public static const MythicalSpirituality:PerkType = mk("Mythical Spirituality", "Mythical Spirituality",
+				"Increases maximum mana by 21000.",
+				"You choose the 'Mythical Spirituality' perk. Thanks to your mythical mystical conditioning, your maximum mana has been increased by 15000!");
+		public static const MythicalTranquilness:PerkType = mk("Mythical Tranquilness", "Mythical Tranquilness",
+				"Increases maximum wrath by 7000.",
+				"You choose the 'Mythical Tranquilness' perk. Thanks to your mythical anger managment training, your maximum wrath has been increased by 5000!");
 		public static const NakedTruth:PerkType = mk("Naked Truth", "Naked Truth",
 				"Opponent have a hard time dealing serious damage as the sight of your naked body distract them (+10% dmg reduction).",
 				"You choose the 'Naked Truth' perk, causing opponent have a hard time dealing serious damage as the sight of your naked body distract them.");
@@ -1257,6 +1317,9 @@ public class PerkLib
 		public static const ScyllaInkGlands:PerkType = mk("Scylla Ink Glands", "Scylla Ink Glands",
 				"Your Scylla Ink Glands increase rate at which your body produce ink and slight boost to your natural strength.",
 				"You choose the 'Scylla Ink Glands' perk, due to repeadly use of ink attack leading to denveloping ink glands!");
+		public static const SecondWind:PerkType = mk("SecondWind", "SecondWind",
+				"Using ... fatigue increase by 5% regeneration in combat for ... turns.",
+				"You choose the 'SecondWind' perk, allowing to once per fight increase for few turns natural regeneration at cost of some fatigue.");
 		public static const Seduction:PerkType = mk("Seduction", "Seduction",
 				"Upgrades your tease attack, making it more effective.",
 				"You choose the 'Seduction' perk, upgrading the 'tease' attack with a more powerful damage and a higher chance of success.");
@@ -1806,6 +1869,7 @@ public class PerkLib
 		public static const EnemyGodType:PerkType = mk("God-type enemy", "God-type enemy", "");
 		public static const EnemyGroupType:PerkType = mk("Group-type enemy", "Group-type enemy", "");
 		public static const EnemyPlantType:PerkType = mk("Plant-type enemy", "Plant-type enemy", "");
+		public static const EnemyTrueDemon:PerkType = mk("True Demon-type enemy", "True Demon-type enemy", "");
 		public static const FireNature:PerkType = mk("Fire Nature", "Fire Nature", "");
 		public static const FireVulnerability:PerkType = mk("Fire Vulnerability", "Fire Vulnerability", "");
 		public static const IceNature:PerkType = mk("Ice Nature", "Ice Nature", "");
@@ -2006,6 +2070,18 @@ public class PerkLib
 						.requireSpe(130)
 						.requirePerk(HalfStepToEpicTranquilness)
 						.requireLevel(72);
+		//Tier 13 Strength Perks
+		HalfStepToMythicalTranquilness.requireStr(430)
+									  .requireTou(140)
+									  .requireSpe(140)
+									  .requirePerk(EpicTranquilness)
+									  .requireLevel(78);
+		//Tier 14 Strength Perks
+		MythicalTranquilness.requireStr(450)
+							.requireTou(150)
+							.requireSpe(150)
+							.requirePerk(HalfStepToMythicalTranquilness)
+							.requireLevel(84);
 		//------------
 		// TOUGHNESS
 		//------------
@@ -2224,15 +2300,17 @@ public class PerkLib
 						 .requirePerk(HalfStepToPeerlessEndurance)
 						 .requireLevel(48);
 		SteelImpact.requirePerk(PrestigeJobSentinel)
-				   .requireLevel(42);
+				   .requireLevel(48);
 		//Tier 9 Toughness Perks
 		ShieldCombat.requirePerk(SteelImpact)
-					.requireLevel(48);
+					.requireLevel(54);
 		HalfStepToInhumanEndurance.requireTou(300)
 								  .requireStr(200)
 								  .requirePerk(PeerlessEndurance)
 								  .requireLevel(54);
 		//Tier 10 Toughness Perks
+		SecondWind.requirePerk(ShieldCombat)
+				  .requireLevel(60);
 		InhumanEndurance.requireTou(330)
 						.requireStr(220)
 						.requirePerk(HalfStepToInhumanEndurance)
@@ -2247,6 +2325,16 @@ public class PerkLib
 					 .requireStr(260)
 					 .requirePerk(HalfStepToEpicEndurance)
 					 .requireLevel(72);
+		//Tier 13 Toughness Perks
+		HalfStepToMythicalEndurance.requireTou(420)
+								   .requireStr(280)
+								   .requirePerk(EpicEndurance)
+								   .requireLevel(78);
+		//Tier 14 Toughness Perks
+		MythicalEndurance.requireTou(450)
+						 .requireStr(300)
+						 .requirePerk(HalfStepToMythicalEndurance)
+						 .requireLevel(84);
 		//------------
 		// SPEED
 		//------------
@@ -2750,6 +2838,16 @@ public class PerkLib
 						.requireInt(390)
 						.requirePerk(HalfStepToEpicSpirituality)
 						.requireLevel(72);
+		//Tier 13 Intelligence perks
+		HalfStepToMythicalSpirituality.requireWis(280)
+									  .requireInt(420)
+									  .requirePerk(EpicSpirituality)
+									  .requireLevel(78);
+		//Tier 14 Intelligence perks
+		MythicalSpirituality.requireWis(300)
+							.requireInt(450)
+							.requirePerk(HalfStepToMythicalSpirituality)
+							.requireLevel(84);
 		//------------
 		// WISDOM
 		//------------
@@ -2763,11 +2861,7 @@ public class PerkLib
 		ElementsOfMarethBasics.requirePerk(ElementsOfTheOrtodoxPath)
 							  .requireWis(35);
 		//Tier 1 Wisdom perks
-		ElementalConjurerDedication.requirePerk(ElementalConjurerResolve)
-								   .requireWis(40)
-								   .requireLevel(6);
-		ElementalContractRank2.requirePerk(ElementalConjurerDedication)
-							  .requirePerk(ElementalContractRank1)
+		ElementalContractRank2.requirePerk(ElementalContractRank1)
 							  .requireWis(50)
 							  .requireLevel(6);
 		ElementalBondFlesh.requirePerk(ElementalContractRank1)
@@ -2800,18 +2894,25 @@ public class PerkLib
 					 .requireWis(80)
 					 .requireSpe(100)
 					 .requireLevel(18);
-		//
+
 		//Tier 4 Wisdom perks
 		ComboMaster.requirePerk(Combo)
 				   .requireWis(125)
 				   .requireStr(100)
 				   .requireLevel(24);
 		ElementalContractRank5.requirePerk(ElementalContractRank4)
+							  .requirePerk(ElementalConjurerDedication)
 							  .requireWis(125)
 							  .requireLevel(24);
 		StrongerElementalBond.requirePerk(StrongElementalBond)
 							 .requirePerk(ElementalContractRank5)
 							 .requireWis(125)
+							 .requireLevel(24);
+		ElementalConjurerDedication.requirePerk(ElementalConjurerResolve)
+								   .requireWis(120)
+								   .requireLevel(24);
+		FirstAttackElementals.requirePerk(StrongElementalBond)
+							 .requirePerk(ElementalContractRank4)
 							 .requireLevel(24);
 		//Tier 5 Wisdom perks
 		UnlockMind2ndStage.requirePerk(UnlockMind)
@@ -2822,27 +2923,38 @@ public class PerkLib
 							  .requireLevel(30);
 		//Tier 6 Wisdom perks
 		ElementalContractRank7.requirePerk(ElementalContractRank6)
+							  .requirePerk(ElementalConjurerSacrifice)
 							  .requireWis(175)
 							  .requireLevel(36);
 		StrongestElementalBond.requirePerk(StrongerElementalBond)
 							  .requirePerk(ElementalContractRank7)
 							  .requireWis(175)
 							  .requireLevel(36);
-		ElementalConjurerSacrifice.requirePerk(ElementalConjurerDedication)
-								  .requireWis(160)
-								  .requireLevel(36);
 		//Tier 7 Wisdom perks
 		PrestigeJobSoulArtMaster.requirePrestigeJobSlot()
 								.requirePerk(FleshBodyApprenticeStage)
 								.requirePerk(JobMonk)
 								.requireWis(200)
 								.requireLevel(42);
-		ElementalContractRank8.requirePerk(ElementalConjurerSacrifice)
-							  .requirePerk(ElementalContractRank7)
+		ElementalContractRank8.requirePerk(ElementalContractRank7)
 							  .requireWis(200)
 							  .requireLevel(42);
 		//Tier 8 Wisdom perks
+		ElementalContractRank9.requirePerk(ElementalContractRank8)
+							  .requirePerk(ElementalConjurerSacrifice)
+							  .requireWis(225)
+							  .requireLevel(42);
+		ElementalConjurerSacrifice.requirePerk(ElementalConjurerDedication)
+								  .requireWis(220)
+								  .requireLevel(48);
 		//Tier 9 Wisdom perks
+		ElementalContractRank10.requirePerk(ElementalContractRank9)
+							   .requireWis(250)
+							   .requireLevel(54);
+		//Tier 10 Wisdom perks
+		ElementalContractRank11.requirePerk(ElementalContractRank10)
+							   .requireWis(275)
+							   .requireLevel(60);
 		//------------
 		// LIBIDO
 		//------------
@@ -3006,6 +3118,16 @@ public class PerkLib
 					   .requireInt(260)
 					   .requirePerk(HalfStepToEpicSelfControl)
 					   .requireLevel(72);
+		//Tier 13 Libido Perks
+		HalfStepToMythicalSelfControl.requireLib(420)
+									 .requireInt(280)
+									 .requirePerk(EpicSelfControl)
+									 .requireLevel(78);
+		//Tier 14 Libido Perks
+		MythicalSelfControl.requireLib(450)
+						   .requireInt(300)
+						   .requirePerk(HalfStepToMythicalSelfControl)
+						   .requireLevel(84);
 		//------------
 		// SENSITIVITY
 		//------------
@@ -3181,7 +3303,7 @@ public class PerkLib
 				return player.lizardScore() >= 4
 			}, "Lizan race");
 		ManticoreMetabolism.requireCustomFunction(function (player:Player):Boolean {
-			return player.manticoreScore() >= 10 && player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL
+			return player.manticoreScore() >= 6 && player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL
 		}, "Manticore race and tail");
 		MantislikeAgility.requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
 			return player.mantisScore() >= 6
@@ -3444,10 +3566,10 @@ public class PerkLib
 					 .requireStr(70)
 					 .requireTou(70)
 					 .requirePerk(CycloneStage1);
-	//	.requireLevel(24)
-	//				.requireInt(40)
-	//				.requireWis(40)
-	//				.requirePerk(JobGolemancer);//perk for making permanent golem
+		MasterGolemMaker.requireLevel(24)
+						.requireInt(100)
+						.requireWis(100)
+						.requirePerk(ExpertGolemMaker);
 		GiantsReach.requireLevel(24)
 				   .requireStr(100)
 				   .requireTou(100)
@@ -3458,6 +3580,10 @@ public class PerkLib
 						  .requireTou(80)
 						  .requireSpe(80)
 						  .requireLevel(24);
+		FirstAttackGolems.requireLevel(24)
+						 .requirePerk(MasterGolemMaker);
+		//.requireLevel(24)
+		//				 .requirePerk(MasterGolemMaker);
 		//Tier 5
 		//	if (requireMinLevel(30)) {
 		//		if (player.internalChimeraScore() >= 15 && requirePerk(ChimericalBodyPerfectStage)) {
@@ -3497,6 +3623,10 @@ public class PerkLib
 											  .requireTou(95)
 											  .requireSpe(95)
 											  .requireLevel(30);
+		GolemArmyLieutenant.requireLevel(30)
+						   .requireInt(110)
+						   .requireWis(110)
+						   .requirePerk(MasterGolemMaker);
 		//Tier 6
 		CycloneStage4.requireLevel(36)
 					 .requireStr(120)
@@ -3507,11 +3637,53 @@ public class PerkLib
 						 .requireTou(110)
 						 .requireSpe(110)
 						 .requireLevel(36);
+		GrandMasterGolemMaker.requireLevel(36)
+							 .requireInt(125)
+							 .requireWis(125)
+							 .requirePerk(MasterGolemMaker);
 		//Tier 7
 		CycloneStage5.requireLevel(42)
 					 .requireStr(160)
 					 .requireTou(160)
 					 .requirePerk(CycloneStage4);
+		GolemArmyCaptain.requireLevel(42)
+						.requireInt(135)
+						.requireWis(135)
+						.requirePerk(GolemArmyLieutenant)
+						.requirePerk(GrandMasterGolemMaker);
+		//Tier 8
+		EpicGolemMaker.requireLevel(48)
+					  .requireInt(150)
+					  .requireWis(150)
+					  .requirePerk(GrandMasterGolemMaker);
+		//Tier 9
+		GolemArmyMajor.requireLevel(54)
+					  .requireInt(160)
+					  .requireWis(160)
+					  .requirePerk(GolemArmyCaptain)
+					  .requirePerk(EpicGolemMaker);
+		//Tier 10
+		LegendaryGolemMaker.requireLevel(60)
+						   .requireInt(175)
+						   .requireWis(175)
+						   .requirePerk(EpicGolemMaker);
+		//Tier 11
+		GolemArmyColonel.requireLevel(66)
+						.requireInt(185)
+						.requireWis(185)
+						.requirePerk(GolemArmyMajor)
+						.requirePerk(LegendaryGolemMaker);
+		//Tier 12
+		MythicalGolemMaker.requireLevel(72)
+						  .requireInt(200)
+						  .requireWis(200)
+						  .requirePerk(LegendaryGolemMaker);
+		//Tier 13
+		GolemArmyGeneral.requireLevel(78)
+						.requireInt(210)
+						.requireWis(210)
+						.requirePerk(GolemArmyColonel)
+						.requirePerk(MythicalGolemMaker);
 	}
 }
 }

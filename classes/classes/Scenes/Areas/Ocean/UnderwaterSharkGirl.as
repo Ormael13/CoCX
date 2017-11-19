@@ -72,12 +72,12 @@ public class UnderwaterSharkGirl extends Monster
 			this.hairColor = "silver";
 			this.hairLength = 16;
 			initStrTouSpeInte(200, 140, 160, 90);
-			initLibSensCor(100, 35, 40);
+			initWisLibSensCor(90, 100, 35, 40);
 			this.weaponName = "shark teeth";
 			this.weaponVerb="bite";
-			this.weaponAttack = 30 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 30;
 			this.armorName = "tough skin";
-			this.armorDef = 20 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 20;
 			this.bonusHP = 100;
 			this.bonusLust = 20;
 			this.lust = 40;
@@ -93,12 +93,6 @@ public class UnderwaterSharkGirl extends Monster
 			this.special1 = sharkTease;
 			this.special2 = sharkBiteAttack;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			this.str += 80 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 56 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 64 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 40 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 16560;
 			checkMonster();
 		}
 		

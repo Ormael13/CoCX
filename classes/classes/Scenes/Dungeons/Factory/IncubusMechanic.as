@@ -186,14 +186,14 @@ public class IncubusMechanic extends Monster {
 			this.hairColor = "black";
 			this.hairLength = 12;
 			initStrTouSpeInte(95, 60, 45, 85);
-			initLibSensCor(80, 70, 80);
+			initWisLibSensCor(85, 80, 70, 80);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 12 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 12;
 			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
-			this.armorDef = 12 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 12;
 			this.bonusHP = 350;
 			this.bonusLust = 40;
 			this.lust = 50;
@@ -212,7 +212,7 @@ public class IncubusMechanic extends Monster {
 				this.tou += 50 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.spe += 35 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.inte += 30 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.weaponAttack += 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack += 10;
 				this.HP = maxHP();
 				this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			}
@@ -222,12 +222,7 @@ public class IncubusMechanic extends Monster {
 			this.wingType = AppearanceDefs.WING_TYPE_BAT_LIKE_TINY;
 			this.wingDesc = "tiny hidden";
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
-			this.str += 19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 17 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1460;
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}
 	}

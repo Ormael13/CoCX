@@ -16,7 +16,7 @@ public class Brigid extends Monster
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			damage = Math.round(damage);
-			damage = player.takeDamage(damage, true);
+			damage = player.takeMagicDamage(damage, true);
 			game.combatRoundOver();
 		}
 
@@ -82,12 +82,12 @@ public class Brigid extends Monster
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(140, 110, 140, 50);
-			initLibSensCor(70, 45, 50);
+			initWisLibSensCor(50, 70, 45, 50);
 			this.weaponName = "poker";
 			this.weaponVerb="burning stab";
-			this.weaponAttack = 34 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 34;
 			this.armorName = "armor";
-			this.armorDef = 24 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 24;
 			this.bonusHP = 1000;
 			this.bonusLust = 30;
 			this.lust = 20;
@@ -102,12 +102,6 @@ public class Brigid extends Monster
 			this.horns = 2;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);
-			this.str += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 4590;
 			checkMonster();
 		}
 		

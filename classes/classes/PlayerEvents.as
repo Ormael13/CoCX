@@ -109,6 +109,25 @@ import classes.StatusEffects.VampireThirstEffect;
 				}
 				if (flags[kFLAGS.VALERIA_FLUIDS] > 100) flags[kFLAGS.VALERIA_FLUIDS] = 100;
 			}
+			//Camp npc's training time countdown timers
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) {
+				if (player.statusEffectv1(StatusEffects.CampSparingNpcsTimers1) > 0) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, -1);
+				if (player.statusEffectv2(StatusEffects.CampSparingNpcsTimers1) > 0) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, -1);
+				if (player.statusEffectv3(StatusEffects.CampSparingNpcsTimers1) > 0) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 3, -1);
+				if (player.statusEffectv4(StatusEffects.CampSparingNpcsTimers1) > 0) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, -1);
+				if (player.statusEffectv1(StatusEffects.CampSparingNpcsTimers1) <= 0 && player.statusEffectv2(StatusEffects.CampSparingNpcsTimers1) <= 0 && player.statusEffectv3(StatusEffects.CampSparingNpcsTimers1) <= 0 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers1) <= 0) {
+					player.removeStatusEffect(StatusEffects.CampSparingNpcsTimers1);
+				}
+			}
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) {
+				if (player.statusEffectv1(StatusEffects.CampSparingNpcsTimers2) > 0) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 1, -1);
+				if (player.statusEffectv2(StatusEffects.CampSparingNpcsTimers2) > 0) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 2, -1);
+				if (player.statusEffectv3(StatusEffects.CampSparingNpcsTimers2) > 0) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 3, -1);
+				if (player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) > 0) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, -1);
+				if (player.statusEffectv1(StatusEffects.CampSparingNpcsTimers2) <= 0 && player.statusEffectv2(StatusEffects.CampSparingNpcsTimers2) <= 0 && player.statusEffectv3(StatusEffects.CampSparingNpcsTimers2) <= 0 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) <= 0) {
+					player.removeStatusEffect(StatusEffects.CampSparingNpcsTimers2);
+				}
+			}
 			Begin("PlayerEvents","hourlyCheckRacialPerks");
 			needNext = hourlyCheckRacialPerks();
 			End("PlayerEvents","hourlyCheckRacialPerks");

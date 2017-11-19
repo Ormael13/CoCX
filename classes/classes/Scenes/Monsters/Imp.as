@@ -80,7 +80,7 @@ public class Imp extends Monster
 			}
 			outputText("\n");
 			if (player.lust >= player.maxLust())
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			else doNext(EventParser.playerMenu);
 		}
 		
@@ -121,7 +121,7 @@ public class Imp extends Monster
 			}
 			outputText("\n");
 			if (player.lust >= player.maxLust())
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			else doNext(EventParser.playerMenu);
 		}
         public function allVaginaDescript():String {
@@ -131,7 +131,7 @@ public class Imp extends Monster
             CoC_Settings.error("ERROR: allVaginaDescript called with no vaginas.");
             return "ERROR: allVaginaDescript called with no vaginas.";
         }
-		
+
 		public function Imp(noInit:Boolean=false)
 		{
 			if (noInit) return;
@@ -154,12 +154,12 @@ public class Imp extends Monster
 			this.hairColor = "black";
 			this.hairLength = 5;
 			initStrTouSpeInte(20, 10, 20, 12);
-			initLibSensCor(45, 45, 100);
+			initWisLibSensCor(12, 45, 45, 100);
 			this.weaponName = "claws";
 			this.weaponVerb = "claw-slash";
-			this.weaponAttack = 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.weaponAttack = 1;
 			this.armorName = "leathery skin";
-			this.armorDef = 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.armorDef = 1;
 			this.bonusLust = 30;
 			this.lust = 40;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
@@ -171,12 +171,7 @@ public class Imp extends Monster
 					add(consumables.IMPFOOD,4);
 			this.special1 = lustMagicAttack1;
 			this.wingType = AppearanceDefs.WING_TYPE_IMP;
-			this.str += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 105;
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}
 

@@ -182,12 +182,12 @@ public class Zetaz extends Monster
 			this.hairColor = "black";
 			this.hairLength = 5;
 			initStrTouSpeInte(125, 100, 70, 55);
-			initLibSensCor(55, 35, 100);
+			initWisLibSensCor(55, 55, 35, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw-slash";
-			this.weaponAttack = 21 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 21;
 			this.armorName = "leathery skin";
-			this.armorDef = 14 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 14;
 			this.bonusHP = 600;
 			this.bonusLust = 50;
 			this.lust = 40;
@@ -204,12 +204,7 @@ public class Zetaz extends Monster
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
-			this.str += 37 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 4800;
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

@@ -105,12 +105,12 @@ import classes.internals.ChainedDrop;
 			this.hairColor = "none";
 			this.hairLength = 0;
 			initStrTouSpeInte(98, 107, 45, 80);
-			initLibSensCor(50, 35, 60);
+			initWisLibSensCor(80, 50, 35, 60);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 38 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 38;
 			this.armorName = "scales";
-			this.armorDef = 18 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 18;
 			this.armorPerk = "";
 			this.armorValue = 70;
 			this.bonusHP = 200;
@@ -125,12 +125,6 @@ import classes.internals.ChainedDrop;
 			this.tailType = AppearanceDefs.TAIL_TYPE_COW;
 			this.tailRecharge = 0;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			this.str += 19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 2250;
 			checkMonster();
 		}
 		

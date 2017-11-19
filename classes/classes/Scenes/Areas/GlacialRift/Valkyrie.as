@@ -159,12 +159,12 @@ public class Valkyrie extends Monster
 			this.hairColor = "white";
 			this.hairLength = 12;
 			initStrTouSpeInte(145, 120, 100, 60);
-			initLibSensCor(40, 50, 15);
+			initWisLibSensCor(60, 40, 50, 15);
 			this.weaponName = "spear and shield";
 			this.weaponVerb="pummel";
-			this.weaponAttack = 32 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 32;
 			this.armorName = "bronze plates";
-			this.armorDef = 26 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 26;
 			this.bonusHP = 400;
 			this.bonusLust = 10;
 			this.lust = 25 + rand(15);
@@ -183,12 +183,6 @@ public class Valkyrie extends Monster
 			this.special2 = shieldBash;
 			this.special3 = aerialRave;
 			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);
-			this.str += 43 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 5560;
 			checkMonster();			
 		}
 		

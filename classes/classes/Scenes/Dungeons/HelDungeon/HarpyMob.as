@@ -98,12 +98,12 @@ public class HarpyMob extends Monster
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(85, 100, 160, 50);
-			initLibSensCor(80, 45, 50);
+			initWisLibSensCor(50, 80, 45, 50);
 			this.weaponName = "claw";
 			this.weaponVerb="claw";
-			this.weaponAttack = 37 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 37;
 			this.armorName = "armor";
-			this.armorDef = 20 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 20;
 			this.bonusHP = 1000;
 			this.bonusLust = 100;
 			this.lust = 20;
@@ -115,12 +115,6 @@ public class HarpyMob extends Monster
 			this.tailType = AppearanceDefs.TAIL_TYPE_HARPY;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
-			this.str += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 4260;
 			checkMonster();
 		}
 		

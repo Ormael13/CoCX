@@ -23,7 +23,7 @@ public class Gorgon extends Monster
 			if(pcCameWorms){
 				outputText("\n\nThe gorgon's eyes go wide and she turns to leave, no longer interested in you.");
 				player.orgasm();
-				doNext(game.cleanupAfterCombat);
+				doNext(cleanupAfterCombat);
 			} else {
 				nagaScene.nagaFUCKSJOOOOOO();
 			}
@@ -157,12 +157,12 @@ public class Gorgon extends Monster
 			this.hairColor = "green";
 			this.hairLength = 16;
 			initStrTouSpeInte(91, 125, 110, 75);
-			initLibSensCor(72, 55, 40);
+			initWisLibSensCor(75, 72, 55, 40);
 			this.weaponName = "claws";
 			this.weaponVerb="claw-slash";
-			this.weaponAttack = 31 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 31;
 			this.armorName = "scales";
-			this.armorDef = 31 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 31;
 			this.bonusHP = 500;
 			this.bonusLust = 10;
 			this.lust = 30;
@@ -174,12 +174,6 @@ public class Gorgon extends Monster
 					add(consumables.REPTLUM,5).
 					add(consumables.GORGOIL,4);
 			this.faceType = AppearanceDefs.FACE_SNAKE_FANGS;
-			this.str += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 2820;
 			checkMonster();
 		}
 		

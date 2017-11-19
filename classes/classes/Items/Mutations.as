@@ -91,27 +91,6 @@ public final class Mutations extends MutationsHelper
 			player.refillHunger(10);
 		}
 
-//Warding Tome
-		public function wardingTome(player:Player):void
-		{
-			clearOutput();
-			outputText("You open the tome and begin to read.  The first chapter is a primer on white magic, while most of it is already familiar to you it briefly goes over a handful of theories that are new to you.");
-			if (player.inte < 100) {
-				outputText(" You feel yourself smarter for this.");
-				dynStats("int", 1 + rand(4));
-			}
-			else outputText(" However, this does little for your already considerable intellect.");
-			if (!player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
-				outputText(" After rereading the chapter a few times and a few experiments, you’ve worked out how to put these theories to use in combat.  <b>You have learned a new spell: Charged Armor</b>");
-				player.createStatusEffect(StatusEffects.KnowsChargeA, 0, 0, 0, 0);
-			}
-			else outputText(" As interesting as the theory is, you already have mastered the practical applications");
-			outputText(".  The final few chapters...  After a quick skim, you believe that with enough stone and some time, you could set up a ward around your camp.");
-			if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) outputText("  Sort of like Tel’Adre’s defences in miniature.");
-			player.createKeyItem("Warding Tome", 0, 0, 0, 0);
-			flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] = 1;
-		}
-
 		/* ITEMZZZZZ FUNCTIONS GO HERE */
 		public function incubiDraft(tainted:Boolean,player:Player):void
 		{
@@ -2353,11 +2332,23 @@ public final class Mutations extends MutationsHelper
 			player.refillHunger(50);
 		}
 
-		public function elementalPearl(player:Player):void
+		public function lowgradeelementalPearl(player:Player):void
 		{
 			clearOutput();
-			outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a calming sensation of four steams of mystical energies spreading in your body.");
+			outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a calming sensation of three steams of mystical energies spreading in your body.");
 			if (player.findPerk(PerkLib.ElementalConjurerMindAndBodyResolve) < 0) player.createPerk(PerkLib.ElementalConjurerMindAndBodyResolve, 0, 0, 0, 0);
+		}
+		public function middlegradeelementalPearl(player:Player):void
+		{
+			clearOutput();
+			outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a calming sensation of five steams of mystical energies spreading in your body.");
+			if (player.findPerk(PerkLib.ElementalConjurerMindAndBodyDedication) < 0) player.createPerk(PerkLib.ElementalConjurerMindAndBodyDedication, 0, 0, 0, 0);
+		}
+		public function highgradeelementalPearl(player:Player):void
+		{
+			clearOutput();
+			outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a calming sensation of seven steams of mystical energies spreading in your body.");
+			if (player.findPerk(PerkLib.ElementalConjurerMindAndBodySacrifice) < 0) player.createPerk(PerkLib.ElementalConjurerMindAndBodySacrifice, 0, 0, 0, 0);
 		}
 
 		public function bagofcosmos(player:Player):void
@@ -2604,7 +2595,6 @@ public final class Mutations extends MutationsHelper
 					else outputText("\n\nYour bones and joints feel sore for a moment, and before long you realize they've gotten more durable.");
 					dynStats("tou", temp / 10);
 					changes++;
-
 				}
 			}
 			//Decrease player spd if it is over 30:
@@ -2665,7 +2655,6 @@ public final class Mutations extends MutationsHelper
 					player.vaginas[0].virgin = true;
 					player.clitLength = .25;
 					outputText("\n\nAn itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
-
 					changes++;
 					dynStats("lus", 10);
 				}
@@ -4042,6 +4031,12 @@ public final class Mutations extends MutationsHelper
 				removeWings();
 				changes++;
 			}
+			//Dragon Arms
+			if (type == 1 && player.wingType == AppearanceDefs.WING_TYPE_DRACONIC_HUGE && player.armType != AppearanceDefs.ARM_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of dragon one with leathery scales and short claws replacing your fingernails.  <b>You now have a dragon arms.</b>");
+				setArmType(AppearanceDefs.ARM_TYPE_DRAGON);
+				changes++;
+			}
 			//Feathery Arms
 			if (type == 2 && !InCollection(player.armType, AppearanceDefs.ARM_TYPE_GARGOYLE, AppearanceDefs.ARM_TYPE_HARPY) && player.earType == AppearanceDefs.EARS_SNAKE && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nWhen you go to wipe your mouth form remains of the oil, instead of the usual texture of your [skin.type] on your lips, you feel feathers! You look on in horror while more of the avian plumage sprouts from your [skin.type], covering your forearms until <b>your arms look vaguely like wings</b>. Your hands remain unchanged thankfully. It'd be impossible to be a champion without hands! The feathery limbs might help you maneuver if you were to fly, but there's no way they'd support you alone.");
@@ -5169,7 +5164,7 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//-Scales – color changes to red, green, white, blue, or black.  Rarely: purple or silver.
-			if (player.hasFullCoatOfType(AppearanceDefs.SKIN_TYPE_SCALES) && player.earType == AppearanceDefs.EARS_LIZARD && player.tailType == AppearanceDefs.TAIL_TYPE_LIZARD && player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(5) == 0) {
+			if (!player.hasFullCoatOfType(AppearanceDefs.SKIN_TYPE_SCALES) && player.earType == AppearanceDefs.EARS_LIZARD && player.tailType == AppearanceDefs.TAIL_TYPE_LIZARD && player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(5) == 0) {
 				var color:String;
 				if (rand(10) == 0) {
 					color = randomChoice("purple","silver");
@@ -7286,7 +7281,7 @@ public final class Mutations extends MutationsHelper
 					setLowerBody(AppearanceDefs.LOWER_BODY_TYPE_ELF);
 				}
 				else humanizeLowerBody();
-				changes++;	
+				changes++;
 			}
 			if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_ELF && player.armType != AppearanceDefs.ARM_TYPE_ELF && changes < changeLimit && rand(3) == 0) {
 				if (player.armType == AppearanceDefs.ARM_TYPE_HUMAN) {
@@ -7294,7 +7289,7 @@ public final class Mutations extends MutationsHelper
 					setArmType(AppearanceDefs.ARM_TYPE_ELF);
 				}
 				else humanizeArms();
-				changes++;	
+				changes++;
 			}
 			if (player.armType == AppearanceDefs.ARM_TYPE_ELF && player.earType != AppearanceDefs.EARS_ELVEN && changes < changeLimit && rand(3) == 0) {
 				if (player.earType == AppearanceDefs.EARS_HUMAN) {
@@ -7408,7 +7403,7 @@ public final class Mutations extends MutationsHelper
 					setLowerBody(AppearanceDefs.LOWER_BODY_TYPE_RAIJU);
 				}
 				else humanizeLowerBody();
-				changes++;	
+				changes++;
 			}
 			if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_RAIJU && player.armType != AppearanceDefs.ARM_TYPE_RAIJU && changes < changeLimit && rand(3) == 0) {
 				if (player.armType == AppearanceDefs.ARM_TYPE_HUMAN) {
@@ -7422,7 +7417,7 @@ public final class Mutations extends MutationsHelper
 					setArmType(AppearanceDefs.ARM_TYPE_RAIJU);
 				}
 				else humanizeArms();
-				changes++;	
+				changes++;
 			}
 			if (player.armType == AppearanceDefs.ARM_TYPE_RAIJU && player.tailType != AppearanceDefs.TAIL_TYPE_RAIJU && changes < changeLimit && rand(3) == 0) {
 				if (player.tailType == AppearanceDefs.TAIL_TYPE_NONE) outputText("\n\nYou yelp as a huge lightning bolt bursts out the area just above your ass. You watch in amazement as it twist and curls, slowly becoming thicker and thicker before it fizzles out, <b>leaving you with a silky Raiju tail!</b>");
@@ -7465,7 +7460,7 @@ public final class Mutations extends MutationsHelper
 				setHairType(AppearanceDefs.HAIR_STORM);
 				changes++;
 			}
-			if (!player.skin.hasLightningShapedTattoo() && rand(3) == 0 && changes < changeLimit) {//player.skin.base.type == SKIN_TYPE_PLAIN && 
+			if (!player.skin.hasLightningShapedTattoo() && rand(3) == 0 && changes < changeLimit) {//player.skin.base.type == SKIN_TYPE_PLAIN &&
 				outputText("\n\nYou suddenly feel a rush of electricity on your skin as glowing tattoos in the shape of lightning bolts form in various place across your body. Well, how shocking. <b>Your skin is now inscribed with some lightning shaped tattoos.</b>");
 			//	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedTattoed)) {
 			//		outputText("\n\n<b>Genetic Memory: Tattoed Skin - Memorized!</b>\n\n");
@@ -8341,7 +8336,7 @@ public final class Mutations extends MutationsHelper
 			
 			switch(rand(12)) {
 			//[Fox Jewel]
-				case 0: 
+				case 0:
 				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, sitting in the center is a small teardrop-shaped jewel!");
 				outputText("\n\n<b>You've received a shining Fox Jewel from the kitsune's gift!  How generous!</b>  ");
 				inventory.takeItem(consumables.FOXJEWL, inventory.inventoryMenu);
@@ -8520,7 +8515,7 @@ public final class Mutations extends MutationsHelper
 			else if (player.findPerk(PerkLib.FutaFaculties) >= 0) {
 				outputText("\n\n(<b>Perk Removed:  Futa Faculties - Your intelligence and speech patterns are no longer limited to that of a futanari bimbo.</b>)");
 				player.removePerk(PerkLib.FutaFaculties);
-			}			
+			}
 			else if (player.findPerk(PerkLib.BroBrains) >= 0) {
 				outputText("\n\n(<b>Perk Removed:  Bro Brains - Your intelligence gains are no longer hampered. You now gain intelligence at a normal pace.</b>)");
 				player.removePerk(PerkLib.BroBrains);
@@ -9729,7 +9724,7 @@ public final class Mutations extends MutationsHelper
 			if (rand(boar ? 2 : 3) == 0 && changes < changeLimit && player.earType == AppearanceDefs.EARS_PIG && player.tailType != AppearanceDefs.TAIL_TYPE_PIG) {
 				if (player.tailType > 0) //If you have non-pig tail.
 					outputText("\n\nYou feel a pinching sensation in your [tail] as it begins to warp in change. When the sensation dissipates, <b>you are left with a small, curly pig tail.</b>");
-				else //If you don't have a tail. 
+				else //If you don't have a tail.
 					outputText("\n\nYou feel a tug at the base of your spine as it lengthens ever so slightly. Looking over your shoulder, <b>you find that you have sprouted a small, curly pig tail.</b>");
 				setTailType(AppearanceDefs.TAIL_TYPE_PIG);
 				changes++;
@@ -9806,7 +9801,7 @@ public final class Mutations extends MutationsHelper
 				setHornType(AppearanceDefs.HORNS_ANTLERS, 4 + rand(12));
 				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
-			//[Show this description instead if the player already had horns when the transformation occurred.] 
+			//[Show this description instead if the player already had horns when the transformation occurred.]
 			else if(player.horns > 0 && player.hornType != AppearanceDefs.HORNS_ANTLERS && player.hornType != AppearanceDefs.HORNS_ORCHID && player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE && rand(2) == 0) {
 				outputText("\n\nYou hear the sound of cracking branches erupting from the tip of your skull.  The horns on your head begin to twist and turn fanatically, their texture and size morphing considerably until they resemble something more like trees than anything else.  Branching out rebelliously, you've come to the conclusion that <b>you've somehow gained antlers!</b>");
 				//[Player horn type changed to Antlers.]
@@ -10096,7 +10091,7 @@ public final class Mutations extends MutationsHelper
 				player.breastRows[player.smallestTitRow()].breastRating++;
 				changes++;
 			}
-			//Change one prick to a vine-like tentacle cock. 
+			//Change one prick to a vine-like tentacle cock.
 			if ((type == 2 || type == 1) && rand(3) == 0 && player.cocks.length > 0) {
 				if (player.tentacleCocks() < player.cockTotal()) {
 					if (player.cocks.length == 1) { //Single cawks
@@ -10229,7 +10224,7 @@ public final class Mutations extends MutationsHelper
 			player.refillHunger(5);
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
-	/*	
+	/*
 		public function krakenInk(type:Number, player:Player):void
 		{
 			//'type' refers to the variety of ink.
@@ -10256,7 +10251,7 @@ public final class Mutations extends MutationsHelper
 			
 			
 		}
-	*/	
+	*/
 		public function yetiCum(player:Player):void
 		{
 			player.slimeFeed();
@@ -10715,7 +10710,7 @@ public final class Mutations extends MutationsHelper
 			if (changes < changeLimit && player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE && (player.antennae == AppearanceDefs.ANTENNAE_NONE || player.antennae == AppearanceDefs.ANTENNAE_BEE) && player.horns == 0 && rand(3) == 0) {
 				if (player.antennae == AppearanceDefs.ANTENNAE_BEE) outputText("\n\nYour head itches momentarily as your two floppy antennae changes slowly into long prehensile ones similar to those seen at mantis.");
 				else outputText("\n\nYour head itches momentarily as two long prehensile antennae sprout from your [hair].");
-				player.antennae = AppearanceDefs.ANTENNAE_MANTIS;
+				setAntennae(AppearanceDefs.ANTENNAE_MANTIS);
 				changes++;
 			}
 			//Horns
@@ -10835,7 +10830,6 @@ public final class Mutations extends MutationsHelper
 					outputText("A perfect pair of A cup breasts, complete with tiny nipples, form on your chest.");
 					player.createBreastRow();
 					player.breastRows[0].breasts = 2;
-					//player.breastRows[0].breastsPerRow = 2;
 					player.breastRows[0].nipplesPerBreast = 1;
 					player.breastRows[0].breastRating = 1;
 					outputText("\n");

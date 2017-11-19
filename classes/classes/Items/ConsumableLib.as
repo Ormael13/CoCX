@@ -144,7 +144,9 @@ public final class ConsumableLib extends BaseContent
 		public const HUMMUS2:SimpleConsumable = mk("Hummus2", "S.Hummus", "a blob of cheesy-looking super hummus", 6, "This pile of hummus doesn't look that clean, and you really don't remember where you got it from.  It looks bland.  So bland that you feel blander just by looking at it.", m.superHummus);
 		public const P_PEARL:SimpleConsumable = mk("P.Pearl", "P.Pearl", "a pure pearl", 1000, "Marae gave you this pure pearl as a reward for shutting down the demonic factory.", m.purePearl);
 		public const EZEKFRU:SimpleConsumable = mk("EzekFru", "EzekielFruit", "a simple looking fruit", 300, "Evangeline gave you this fruit as means of showing her gratitude.", m.ezekielfruit);
-		public const E_PEARL:SimpleConsumable = mk("E.Pearl", "ElementalPearl", "a simple looking five-colored pearl", 400, "Pearl formed after defeating group of golems. It's surrounded by fait aura of elements.", m.elementalPearl);
+		public const E3PEARL:SimpleConsumable = mk("E.Pearl", "Elemental3CPearl", "a simple looking three-colored pearl", 200, "Pearl formed after defeating . It's surrounded by faint aura of elements.", m.lowgradeelementalPearl);
+		public const E_PEARL:SimpleConsumable = mk("E.Pearl", "Elemental5CPearl", "a simple looking five-colored pearl", 400, "Pearl formed after defeating group of golems. It's surrounded by weak aura of elements.", m.middlegradeelementalPearl);
+		public const E7PEARL:SimpleConsumable = mk("E.Pearl", "Elemental7CPearl", "a simple looking seven-colored pearl", 800, "Pearl formed after defeating . It's surrounded by aura of elements.", m.highgradeelementalPearl);
 
 		//NON-TRANSFORMATIVE ITEMS
 		public const AGILI_E:SimpleConsumable = mk("Agil.E.", "Agility E.", "an agility elixir", 6, "This greenish elixir is supposed to increase the user’s natural swiftness and agility.", m.agilityElixir);
@@ -185,7 +187,6 @@ public final class ConsumableLib extends BaseContent
 		public const VITAL_T:Consumable = new VitalityTincture();
 		public const VIXEN_T:SimpleConsumable = mk("Vixen T", "Vixen T.", "a cup of vixen tea", 15, "An exotic tea made by kitsunes. This herbal infusion is rumored to improve your expertise and expand your sexual knowledge.", m.vixenTea);
 		public const W_STICK:WingStick = new WingStick();
-		public const WARDTOM:SimpleConsumable = mk("WardTom", "WardingTome", "a Warding Tome", 60, "This is the book of warding magic you’ve recovered from the Factory.  Perhaps you could learn something useful from it.", m.wardingTome);
 		//Aqua Seed - prawdopodobnie nazwa dla Siren TF ; Bubble Lemonade - nazwa dla Dark Slime TF
 		//TRANSFORMATIVE ITEMS
 		public const ABYSSIN:SimpleConsumable = mk("AbyssIn", "AbyssalInk", "a vial of abyssal ink", 10, "Pitch black ink normaly used for writing consuming this doesnt seem like the best idea.", curry(m.scyllaInk, 3));

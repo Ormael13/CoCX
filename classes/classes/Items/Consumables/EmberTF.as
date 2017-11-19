@@ -142,7 +142,7 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 	if (player.hasPartialCoat(AppearanceDefs.SKIN_COAT_DRAGON_SCALES) && changes < changeLimit && rand(3) == 0) {
 		outputText("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, as new scales grew up filling the gaps. ");
 		player.skin.growCoat(AppearanceDefs.SKIN_COAT_DRAGON_SCALES,{},Skin.COVERAGE_COMPLETE);
-		outputText("<b>Your body is now fully covered in " + color + " shield-shaped dragon scales.</b>");
+		outputText("<b>Your body is now fully covered in " + player.skin.coat.color + " shield-shaped dragon scales.</b>");
 		if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedDragonScales)) {
 			outputText("\n\n<b>Genetic Memory: Dragon Scales - Memorized!</b>\n\n");
 			player.createStatusEffect(StatusEffects.UnlockedDragonScales, 0, 0, 0, 0);

@@ -307,7 +307,7 @@ public class Sheila extends Monster
 			this.hairColor = "auburn";
 			this.hairLength = 11;
 			initStrTouSpeInte(90, 45, 105, 50);
-			initLibSensCor(30, 45, 25);
+			initWisLibSensCor(50, 30, 45, 25);
 			var lust:Number = 30;
 			var lustVuln:Number = 0.4;
 			var bonusHP:Number = 200;
@@ -326,12 +326,13 @@ public class Sheila extends Monster
 				//-little higher difficulty than other plains fights, but not much
 				//-now totally okay with taking gems and riding the player so hard he passes out for 8 hours regardless
 				//-drops shitty kangaroo item and imp food
+				this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			}
 			this.weaponName = "foot";
 			this.weaponVerb="kick";
-			this.weaponAttack = 12 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 12;
 			this.armorName = "clothes";
-			this.armorDef = 7 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 7;
 			this.bonusHP = bonusHP;
 			this.bonusLust = 10;
 			this.lust = lust;
@@ -348,12 +349,6 @@ public class Sheila extends Monster
 						add(consumables.INCUBID,1/2);
 			}
 			this.tailType = AppearanceDefs.TAIL_TYPE_KANGAROO;
-			this.str += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1280;
 			checkMonster();
 		}
 

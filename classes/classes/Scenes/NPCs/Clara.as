@@ -156,12 +156,12 @@ public class Clara extends Monster
 			this.hairColor = "brown";
 			this.hairLength = 13;
 			initStrTouSpeInte(57, 64, 35, 60);
-			initLibSensCor(25, 45, 40);
+			initWisLibSensCor(60, 25, 45, 40);
 			this.weaponName = "mace";
 			this.weaponVerb="smack";
-			this.weaponAttack = 16 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 16;
 			this.armorName = "tough hide";
-			this.armorDef = 6 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 6;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 12;
 			this.bonusHP = 30;
@@ -172,12 +172,6 @@ public class Clara extends Monster
 			//this.special1 = marbleSpecialAttackOne;
 			//this.special2 = marbleSpecialAttackTwo;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			this.str += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 940;
 			checkMonster();
 		}
 

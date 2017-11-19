@@ -32,7 +32,7 @@ public class PhoenixPlatoon extends Monster
 			outputText("Suddenly, the shield wall parts, revealing a single member of the platoon, a particularly muscular girl with a raging erection.  Before you can consider what's going on, she rears back and huffs at you.  To your horror, a great gout of fire erupts from her mouth, rolling towards you.  You dive, but are still caught partially in the inferno.");
 			}
 			damage = Math.round(damage);
-			damage = player.takeDamage(damage, true);
+			damage = player.takeMagicDamage(damage, true);
 			combatRoundOver();
 		}
 		//ATTACK THREE: LUSTBANG GRENADE
@@ -99,12 +99,12 @@ public class PhoenixPlatoon extends Monster
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(150, 120, 130, 80);
-			initLibSensCor(90, 45, 50);
+			initWisLibSensCor(80, 90, 45, 50);
 			this.weaponName = "spears";
 			this.weaponVerb="stab";
-			this.weaponAttack = 59 + (12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 59;
 			this.armorName = "armor";
-			this.armorDef = 46 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 46;
 			this.bonusHP = 1000;
 			this.bonusLust = 100;
 			this.lust = 20;
@@ -120,12 +120,6 @@ public class PhoenixPlatoon extends Monster
 			this.drop = new WeightedDrop(consumables.NOCELIQ, 1);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
-			this.str += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 39 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 6840;
 			checkMonster();
 		}
 		

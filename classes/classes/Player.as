@@ -834,7 +834,39 @@ use namespace kGAMECLASS;
 			if (damageMultiplier < 0.2) damageMultiplier = 0;
 			return int(damage * damageMultiplier);
 		}
-		
+		public function reduceMagicDamage(damage:Number):Number {
+			var magicdamageMultiplier:Number = 1;
+			//EZ MOAD half damage
+			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) magicdamageMultiplier /= 2;
+			//Difficulty modifier flags.
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) magicdamageMultiplier *= 1.15;
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) magicdamageMultiplier *= 1.3;
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) magicdamageMultiplier *= 1.5;
+			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) magicdamageMultiplier *= 2;
+
+			//Opponents can critical too!
+			var crit:Boolean = false;
+			var critChanceMonster:int = 5;
+			/*if (kGAMECLASS.monster.findPerk(PerkLib.Tactician) >= 0 && kGAMECLASS.monster.inte >= 50) {
+				if (kGAMECLASS.monster.inte <= 100) critChanceMonster += (kGAMECLASS.monster.inte - 50) / 5;
+				if (kGAMECLASS.monster.inte > 100) critChanceMonster += 10;
+			}
+			if (kGAMECLASS.monster.findPerk(PerkLib.VitalShot) >= 0 && kGAMECLASS.monster.inte >= 50) critChanceMonster += 10;
+			*/if (rand(100) < critChanceMonster) {
+				crit = true;
+				damage *= 1.75;
+				flags[kFLAGS.ENEMY_CRITICAL] = 1;
+			}
+			if (hasStatusEffect(StatusEffects.Shielding)) {
+				damage -= 30;
+				if (damage < 1) damage = 1;
+			}
+			//Apply magic damage resistance percentage.
+			damage *= damageMagicalPercent() / 100;
+			if (magicdamageMultiplier < 0.2) magicdamageMultiplier = 0;
+			return int(damage * magicdamageMultiplier);
+		}
+
 		public override function lustPercent():Number {
 			var lust:Number = 100;
 			var minLustCap:Number = 25;
@@ -925,6 +957,50 @@ use namespace kGAMECLASS;
 					dynStats("lus", 0); //Force display arrow.
 				}
 				else {
+					damage = reduceDamage(damage);
+					//Wrath
+					var gainedWrath:Number = 0;
+					gainedWrath += damage / 10;
+					gainedWrath = Math.round(gainedWrath);
+					wrath += gainedWrath;
+					if (wrath > maxWrath()) wrath = maxWrath();
+					//game.HPChange(-damage, display);
+					HP -= damage;
+					if (display) {
+						if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+						else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
+					}
+					game.mainView.statsView.showStatDown('hp');
+					dynStats("lus", 0); //Force display arrow.
+				}
+				if (flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
+					dynStats("lus", int(damage / 2));
+				}
+				//Prevent negatives
+				if (HP<=0){
+					HP = 0;
+					//This call did nothing. There is no event 5010: if (game.inCombat) game.doNext(5010);
+				}
+			}
+			return returnDamage;
+		}
+		public override function takeMagicDamage(damage:Number, display:Boolean = false):Number{
+			//Round
+			damage = Math.round(damage);
+			// we return "1 damage received" if it is in (0..1) but deduce no HP
+			var returnDamage:int = (damage>0 && damage<1)?1:damage;
+			if (damage>0){
+				if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
+					mana -= damage / 2;
+					if (display) {
+						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
+						else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
+					}
+					game.mainView.statsView.showStatDown('mana');
+					dynStats("lus", 0); //Force display arrow.
+				}
+				else {
+					damage = reduceDamage(damage);
 					//Wrath
 					var gainedWrath:Number = 0;
 					gainedWrath += damage / 10;
@@ -1094,15 +1170,29 @@ use namespace kGAMECLASS;
 			var race:String = "human";
 			if (catScore() >= 4) 
 			{
-				if (isTaur() && lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CAT) {
-					race = "cat-taur";
-					if (faceType == AppearanceDefs.FACE_HUMAN)
-						race = "sphinx-morph"; // no way to be fully feral anyway
+				if (catScore() >= 8) {
+					if (isTaur() && lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CAT) {
+						race = "cat-taur";
+						if (faceType == AppearanceDefs.FACE_HUMAN)
+							race = "sphinx-morph"; // no way to be fully feral anyway
+					}
+					else {
+						race = "cat-morph";
+						if (faceType == AppearanceDefs.FACE_HUMAN)
+							race = "cat-" + mf("boy", "girl");
+					}
 				}
 				else {
-					race = "cat-morph";
-					if (faceType == AppearanceDefs.FACE_HUMAN)
-						race = "cat-" + mf("boy", "girl");
+					if (isTaur() && lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CAT) {
+						race = "half cat-taur";
+						if (faceType == AppearanceDefs.FACE_HUMAN)
+							race = "half sphinx-morph"; // no way to be fully feral anyway
+					}
+					else {
+						race = " half cat-morph";
+						if (faceType == AppearanceDefs.FACE_HUMAN)
+							race = "half cat-" + mf("boy", "girl");
+					}
 				}
 			}
 			if (lizardScore() >= 4)
@@ -1583,15 +1673,15 @@ use namespace kGAMECLASS;
 						race = "dragonne-" + mf("man", "girl");
 				}
 			}
-			if (manticoreScore() >= 5)
+			if (manticoreScore() >= 6)
 			{
 				if (isTaur() && lowerBody == AppearanceDefs.LOWER_BODY_TYPE_LION) {
-					if (manticoreScore() < 10)
+					if (manticoreScore() < 12)
 						race = "half manticore-taur";
-					if (manticoreScore() >= 10)	
+					if (manticoreScore() >= 12)
 						race = "manticore-taur";
 				}
-				else if (manticoreScore() >= 10)
+				else if (manticoreScore() >= 12)
 					race = "manticore";
 				else
 					race = "half manticore";
@@ -1786,7 +1876,7 @@ use namespace kGAMECLASS;
 				chimeraCounter++;
 			if (deerScore() >= 4)
 				chimeraCounter++;
-			if (manticoreScore() >= 5)
+			if (manticoreScore() >= 6)
 				chimeraCounter++;
 			if (sirenScore() >= 10)
 				chimeraCounter++;
@@ -1809,8 +1899,8 @@ use namespace kGAMECLASS;
 		public function grandchimeraScore():Number {
 			Begin("Player","racialScore","grandchimera");
 			var grandchimeraCounter:Number = 0;
-//			if (catScore() >= 4)
-//				grandchimeraCounter++;
+			if (catScore() >= 8)
+				grandchimeraCounter++;
 			if (lizardScore() >= 8)
 				grandchimeraCounter++;
 			if (dragonScore() >= 10)
@@ -1901,7 +1991,7 @@ use namespace kGAMECLASS;
 				grandchimeraCounter++;
 			if (deerScore() >= 4)
 				grandchimeraCounter++;
-*/			if (manticoreScore() >= 10)
+*/			if (manticoreScore() >= 12)
 				grandchimeraCounter += 2;
 			if (sirenScore() >= 10)
 				grandchimeraCounter++;
@@ -2387,8 +2477,7 @@ use namespace kGAMECLASS;
 				catCounter++;
 			if (breastRows.length > 3)
 				catCounter -= 2;
-			//Fur only counts if some canine features are present
-			if (hasFur() && catCounter > 0)
+			if (hasFur() || hasPartialCoat(AppearanceDefs.SKIN_COAT_FUR))
 				catCounter++;
 			if (hornType == AppearanceDefs.HORNS_DEMON || hornType == AppearanceDefs.HORNS_DRACONIC_X2 || hornType == AppearanceDefs.HORNS_DRACONIC_X4_12_INCH_LONG)
 					catCounter -= 2;
@@ -2409,6 +2498,66 @@ use namespace kGAMECLASS;
 			
 			End("Player","racialScore");
 			return catCounter;
+		}
+		//Determine nekomata Rating
+		public function nekomataScore():Number {
+			Begin("Player","racialScore","nekomata");
+			var nekomataCounter:Number = 0;
+			if (faceType == AppearanceDefs.FACE_CAT)
+				nekomataCounter++;
+			if (eyeType == AppearanceDefs.EYES_CAT_SLITS)
+				nekomataCounter++;
+			if (earType == AppearanceDefs.EARS_CAT)
+				nekomataCounter++;
+			if (tongueType == AppearanceDefs.TONGUE_CAT)
+				nekomataCounter++;
+			if (tailType == AppearanceDefs.TAIL_TYPE_CAT)
+				nekomataCounter++;
+			if (lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CAT)
+				nekomataCounter++;
+			if (hasFur() || hasPartialCoat(AppearanceDefs.SKIN_COAT_FUR))
+				nekomataCounter++;
+			if (findPerk(PerkLib.Flexibility) > 0)
+				nekomataCounter++;
+			if (findPerk(PerkLib.CatlikeNimbleness) > 0)
+				nekomataCounter++;
+			if (findPerk(PerkLib.CatlikeNimblenessEvolved) > 0)
+				nekomataCounter++;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && nekomataCounter >= 7)
+				nekomataCounter += 1;
+
+			End("Player","racialScore");
+			return nekomataCounter;
+		}
+		//Determine cheshire Rating
+		public function cheshireScore():Number {
+			Begin("Player","racialScore","cheshire");
+			var cheshireCounter:Number = 0;
+			if (faceType == AppearanceDefs.FACE_CAT)
+				cheshireCounter++;
+			if (eyeType == AppearanceDefs.EYES_CAT_SLITS)
+				cheshireCounter++;
+			if (earType == AppearanceDefs.EARS_CAT)
+				cheshireCounter++;
+			if (tongueType == AppearanceDefs.TONGUE_CAT)
+				cheshireCounter++;
+			if (tailType == AppearanceDefs.TAIL_TYPE_CAT)
+				cheshireCounter++;
+			if (lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CAT)
+				cheshireCounter++;
+			if (hasFur() || hasPartialCoat(AppearanceDefs.SKIN_COAT_FUR))
+				cheshireCounter++;
+			if (findPerk(PerkLib.Flexibility) > 0)
+				cheshireCounter++;
+			if (findPerk(PerkLib.CatlikeNimbleness) > 0)
+				cheshireCounter++;
+			if (findPerk(PerkLib.CatlikeNimblenessEvolved) > 0)
+				cheshireCounter++;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && cheshireCounter >= 7)
+				cheshireCounter += 1;
+
+			End("Player","racialScore");
+			return cheshireCounter;
 		}
 
 		//Determine lizard rating
@@ -2750,7 +2899,7 @@ use namespace kGAMECLASS;
 				gorgonCounter -= 3;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				gorgonCounter += 10;
-			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && gorgonCounter >= 3)
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && gorgonCounter >= 7)
 				gorgonCounter += 1;
 			if (findPerk(PerkLib.GorgonsEyes) >= 0 && findPerk(PerkLib.ChimericalBodyAdvancedStage) >= 0)
 				gorgonCounter++;
@@ -2768,7 +2917,7 @@ use namespace kGAMECLASS;
 				vouivreCounter++;
 			if (faceType == AppearanceDefs.FACE_SNAKE_FANGS)
 				vouivreCounter++;
-			if (armType == AppearanceDefs.ARM_TYPE_HUMAN)
+			if (armType == AppearanceDefs.ARM_TYPE_DRAGON)
 				vouivreCounter++;
 			if (hasCoatOfType(AppearanceDefs.SKIN_COAT_DRAGON_SCALES))
 				vouivreCounter++;
@@ -2792,7 +2941,9 @@ use namespace kGAMECLASS;
 				vouivreCounter++;
 			if (findPerk(PerkLib.DraconicLungsEvolved) >= 0)
 				vouivreCounter++;
-			
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && vouivreCounter >= 7)
+				vouivreCounter += 1;
+
 			End("Player","racialScore");
 			return vouivreCounter;
 		}
@@ -2818,7 +2969,9 @@ use namespace kGAMECLASS;
 				couatlCounter++;
 			if (wingType == AppearanceDefs.WING_TYPE_FEATHERED_LARGE)
 				couatlCounter += 2;
-			
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && couatlCounter >= 7)
+				couatlCounter += 1;
+
 			End("Player","racialScore");
 			return couatlCounter;
 		}
@@ -3825,23 +3978,18 @@ use namespace kGAMECLASS;
 				manticoreCounter++;
 			if (lowerBody == AppearanceDefs.LOWER_BODY_TYPE_LION)
 				manticoreCounter++;
-		//	if (manticoreCounter >= 4) {
-		//		if (hornType == HORNS_DEMON || hornType == HORNS_DRACONIC_X2 || hornType == HORNS_DRACONIC_X4_12_INCH_LONG)
-		//			manticoreCounter++;
+			if (tongueType == AppearanceDefs.TONGUE_CAT)
+				manticoreCounter++;
 			if (wingType == AppearanceDefs.WING_TYPE_MANTICORE_LIKE_SMALL)
-					manticoreCounter++;
+				manticoreCounter++;
 			if (wingType == AppearanceDefs.WING_TYPE_MANTICORE_LIKE_LARGE)
-					manticoreCounter += 2;
-		//		if (wingType == WING_TYPE_BAT_LIKE_LARGE_2 || wingType == WING_TYPE_DRACONIC_HUGE)
-		//			manticoreCounter += 3;
-		//	}
-			//Fur only counts if some canine features are present
-		//	if (hasFur() && manticoreCounter > 2)
-		//		manticoreCounter++;
-			if (findPerk(PerkLib.ManticoreMetabolism) >= 0)
+				manticoreCounter += 2;
+			if (!hasCock())
 				manticoreCounter++;
 			if (cocks.length > 0)
 				manticoreCounter -= 3;
+			if (findPerk(PerkLib.ManticoreMetabolism) >= 0)
+				manticoreCounter++;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && manticoreCounter >= 3)
 				manticoreCounter += 1;
 			if (findPerk(PerkLib.ChimericalBodyAdvancedStage) >= 0 && findPerk(PerkLib.ManticoreMetabolism) >= 0)
@@ -4440,6 +4588,8 @@ use namespace kGAMECLASS;
 			if(this.hasPerk(PerkLib.ProductivityDrugs)) {minLib+=this.perkv1(PerkLib.ProductivityDrugs);minCor+=this.perkv2(PerkLib.ProductivityDrugs);}
 
 			//Minimum Sensitivity
+			if(this.manticoreScore() >= 6) minSen += 30;
+			if(this.manticoreScore() >= 12) minSen += 15;
 			if(this.devilkinScore() >= 7) minSen += 10;
 			if(this.devilkinScore() >= 10) minSen += 15;
 			if(this.devilkinScore() >= 14) minSen += 30;
@@ -4712,8 +4862,17 @@ use namespace kGAMECLASS;
 				}
 			}//+10/10-20
 			if (catScore() >= 4) {
-				if (findPerk(PerkLib.Flexibility) > 0) maxSpe += (20 * newGamePlusMod);
-				else maxSpe += (10 * newGamePlusMod);
+				if (catScore() >= 8) {
+					if (findPerk(PerkLib.Flexibility) > 0) maxSpe += (70 * newGamePlusMod);
+					else maxSpe += (60 * newGamePlusMod);
+					maxLib += (60 * newGamePlusMod);
+				}
+				else {
+					if (findPerk(PerkLib.Flexibility) > 0) maxSpe += (50 * newGamePlusMod);
+					else maxSpe += (40 * newGamePlusMod);
+					maxLib += (20 * newGamePlusMod);
+				}
+
 			}//+10/10-20
 			if (bunnyScore() >= 4) {
 				maxSpe += (10 * newGamePlusMod);
@@ -4943,16 +5102,16 @@ use namespace kGAMECLASS;
 				maxStr += (5 * newGamePlusMod);
 				maxSpe += (5 * newGamePlusMod);
 			}//+10/10-20
-			if (manticoreScore() >= 5) {
-				if (manticoreScore() >= 10) {
-					maxSpe += (80 * newGamePlusMod);
-					maxInt += (20 * newGamePlusMod);
-					maxLib += (50 * newGamePlusMod);
+			if (manticoreScore() >= 6) {
+				if (manticoreScore() >= 12) {
+					maxSpe += (100 * newGamePlusMod);
+					maxInt += (50 * newGamePlusMod);
+					maxLib += (60 * newGamePlusMod);
 				}
 				else {
-					maxSpe += (40 * newGamePlusMod);
-					maxInt += (10 * newGamePlusMod);
-					maxLib += (25 * newGamePlusMod);
+					maxSpe += (50 * newGamePlusMod);
+					maxInt += (25 * newGamePlusMod);
+					maxLib += (30 * newGamePlusMod);
 				}
 			}//+60/50-60
 			if (mantisScore() >= 6) {
@@ -5364,20 +5523,20 @@ use namespace kGAMECLASS;
 				maxWis += (30 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.ElementalConjurerDedication) >= 0) {
-				//if (findPerk(PerkLib.) < 0) {
+				if (findPerk(PerkLib.ElementalConjurerMindAndBodyDedication) < 0) {
 					maxStr -= (30 * newGamePlusMod);
 					maxTou -= (30 * newGamePlusMod);
 					maxSpe -= (30 * newGamePlusMod);
-				//}
+				}
 				maxInt += (40 * newGamePlusMod);
 				maxWis += (60 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.ElementalConjurerSacrifice) >= 0) {
-				//if (findPerk(PerkLib.) < 0) {
+				if (findPerk(PerkLib.ElementalConjurerMindAndBodySacrifice) < 0) {
 					maxStr -= (45 * newGamePlusMod);
 					maxTou -= (45 * newGamePlusMod);
 					maxSpe -= (45 * newGamePlusMod);
-				//}
+				}
 				maxInt += (60 * newGamePlusMod);
 				maxWis += (90 * newGamePlusMod);
 			}
@@ -5411,6 +5570,18 @@ use namespace kGAMECLASS;
 			if (findPerk(PerkLib.SoulKing) >= 0) maxWis += 5;
 			if (findPerk(PerkLib.SoulEmperor) >= 0) maxWis += 5;
 			if (findPerk(PerkLib.SoulAncestor) >= 0) maxWis += 5;
+			if (findPerk(PerkLib.EpicGolemMaker) >= 0) {
+				maxInt += 10;
+				maxWis += 10;
+			}
+			if (findPerk(PerkLib.LegendaryGolemMaker) >= 0) {
+				maxInt += 20;
+				maxWis += 20;
+			}
+			if (findPerk(PerkLib.MythicalGolemMaker) >= 0) {
+				maxInt += 30;
+				maxWis += 30;
+			}
 			if (findPerk(PerkLib.CarefulButRecklessAimAndShooting) >= 0 && findPerk(PerkLib.ColdAim) < 0) maxTou -= (15 * newGamePlusMod);
 			End("Player","getAllMaxStats.perks2");
 			Begin("Player","getAllMaxStats.effects");
@@ -5487,6 +5658,14 @@ use namespace kGAMECLASS;
 			}
 			End("Player","getAllMaxStats.effects");
 			End("Player","getAllMaxStats");
+			maxStr = Math.max(maxStr,1);
+			maxTou = Math.max(maxTou,1);
+			maxSpe = Math.max(maxSpe,1);
+			maxInt = Math.max(maxInt,1);
+			maxWis = Math.max(maxWis,1);
+			maxLib = Math.max(maxLib,1);
+			maxSen = Math.max(maxSen,1);
+			maxCor = Math.max(maxCor,1);
 			return {
 				str:maxStr,
 				tou:maxTou,
@@ -6145,7 +6324,7 @@ use namespace kGAMECLASS;
 			if (gorgonScore() >= 11) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (horseScore() >= 4) max += (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (horseScore() >= 7) max += (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (manticoreScore() >= 5) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (manticoreScore() >= 6) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (rhinoScore() >= 4) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (scyllaScore() >= 4) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (scyllaScore() >= 7) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));

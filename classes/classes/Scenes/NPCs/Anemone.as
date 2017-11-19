@@ -73,12 +73,12 @@ public class Anemone extends Monster
 			this.hairLength = 20;
 			this.hairType = AppearanceDefs.HAIR_ANEMONE;
 			initStrTouSpeInte(64, 45, 40, 50);
-			initLibSensCor(55, 35, 50);
+			initWisLibSensCor(50, 55, 35, 50);
 			this.weaponName = "tendrils";
 			this.weaponVerb="tentacle";
-			this.weaponAttack = 16 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 16;
 			this.armorName = "clammy skin";
-			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 10;
 			this.bonusHP = 120;
 			this.bonusLust = 20;
 			this.lust = 30;
@@ -87,12 +87,6 @@ public class Anemone extends Monster
 			this.level = 12;
 			this.gems = rand(20) + 20;
 			this.drop = new WeightedDrop(consumables.DRYTENT, 1);
-			this.str += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1000;
 			checkMonster();
 		}
 		

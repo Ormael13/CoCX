@@ -172,12 +172,12 @@ public class FetishCultist extends Monster
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(40, 25, 30, 1);
-			initLibSensCor(75, 80, 90);
+			initWisLibSensCor(1, 75, 80, 90);
 			this.weaponName = "whip";
 			this.weaponVerb = "whip-crack";
-			this.weaponAttack = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 1;
 			this.armorName = FETISHY_OUTFIT;
-			this.armorDef = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 1;
 			this.bonusLust = 20;
 			this.lust = 25;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
@@ -189,12 +189,6 @@ public class FetishCultist extends Monster
 					.add(consumables.L_DRAFT,6);
 			this.special1 = cultistRaisePlayerLust;
 			this.special2 = cultistLustTransfer;
-			this.str += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 350;
 			checkMonster();
 		}
 

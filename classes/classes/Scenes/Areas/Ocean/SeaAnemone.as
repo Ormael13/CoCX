@@ -77,12 +77,12 @@ public class SeaAnemone extends Monster
 			this.hairLength = 20;
 			this.hairType = AppearanceDefs.HAIR_ANEMONE;
 			initStrTouSpeInte(200, 160, 127, 140);
-			initLibSensCor(150, 70, 50);
+			initWisLibSensCor(140, 150, 70, 50);
 			this.weaponName = "tendrils";
 			this.weaponVerb="tentacle";
-			this.weaponAttack = 46 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 46;
 			this.armorName = "clammy skin";
-			this.armorDef = 30 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 30;
 			this.bonusHP = 500;
 			this.bonusLust = 20;
 			this.lust = 30;
@@ -91,12 +91,6 @@ public class SeaAnemone extends Monster
 			this.level = 50;
 			this.gems = rand(50) + 70;
 			this.drop = new WeightedDrop(consumables.DRYTENT, 1);
-			this.str += 60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 38 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 13980;
 			checkMonster();
 		}
 		

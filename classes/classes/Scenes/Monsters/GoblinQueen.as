@@ -26,12 +26,12 @@ public class GoblinQueen extends Goblin
 			this.hairColor = "dark green";
 			this.hairLength = 4;
 			initStrTouSpeInte(85, 64, 70, 100);
-			initLibSensCor(55, 35, 65);
+			initWisLibSensCor(100, 55, 35, 65);
 			this.weaponName = "sword";
 			this.weaponVerb = "slash";
-			this.weaponAttack = 14 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 14;
 			this.armorName = "fur loincloth";
-			this.armorDef = 6 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 6;
 			this.fatigue = 0;
 			this.bonusHP = 275;
 			this.bonusLust = 20;
@@ -55,12 +55,6 @@ public class GoblinQueen extends Goblin
 			this.special2 = goblinTeaseAttack;
 			//this.special3 = castSpell;
 			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);
-			this.str += 17 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1480;
 			checkMonster();
 		}
 		

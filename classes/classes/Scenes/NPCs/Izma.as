@@ -163,12 +163,12 @@ import classes.Scenes.SceneLib;
 			this.hairColor = "silver";
 			this.hairLength = 20;
 			initStrTouSpeInte(100, 110, 106, 74);
-			initLibSensCor(75, 25, 40);
+			initWisLibSensCor(74, 75, 25, 40);
 			this.weaponName = "clawed gauntlets";
 			this.weaponVerb="clawed punches";
-			this.weaponAttack = 45 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 45;
 			this.armorName = "bikini and grass skirt";
-			this.armorDef = 12 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 12;
 			this.bonusHP = 330;
 			this.bonusLust = 20;
 			this.lust = 20;
@@ -178,12 +178,6 @@ import classes.Scenes.SceneLib;
 			this.gems = rand(15) + 10;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			this.str += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 31 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 4140;
 			checkMonster();
 		}
 		

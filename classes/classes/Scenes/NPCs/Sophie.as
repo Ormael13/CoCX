@@ -284,12 +284,12 @@ import classes.internals.*;
 			this.hairColor = "pink";
 			this.hairLength = 16;
 			initStrTouSpeInte(80, 70, 130, 80);
-			initLibSensCor(60, 50, 60);
+			initWisLibSensCor(80, 60, 50, 60);
 			this.weaponName = "talons";
 			this.weaponVerb="slashing talons";
-			this.weaponAttack = 40 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 40;
 			this.armorName = "feathers";
-			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 10;
 			this.bonusHP = 300;
 			this.bonusLust = 20;
 			this.lust = 10;
@@ -303,12 +303,6 @@ import classes.internals.*;
 			this.wingDesc = "large feathery";
 			this.special1 = harpyUberCharge;
 			this.special2 = harpyTease;
-			this.str += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 23 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 2520;
 			checkMonster();
 		}
 

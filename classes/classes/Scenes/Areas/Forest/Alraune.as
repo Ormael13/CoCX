@@ -168,12 +168,12 @@ public class Alraune extends Monster
 			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER;
 			this.hairLength = 6;
 			initStrTouSpeInte(10, 100, 10, 60);
-			initLibSensCor(100, 50, 0);
+			initWisLibSensCor(60, 100, 50, 0);
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
-			this.weaponAttack = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 1;
 			this.armorName = "skin";
-			this.armorDef = 45 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 45;
 			this.bonusHP = 100;
 			this.bonusLust = 20;
 			this.lust = 20 + rand(40);
@@ -190,12 +190,6 @@ public class Alraune extends Monster
 			this.createPerk(PerkLib.EnemyPlantType, 0, 0, 0, 0);
 			this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
 			createStatusEffect(StatusEffects.Level,4,0,0,0);
-			this.str += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1680;
 			checkMonster();
 		}
 		

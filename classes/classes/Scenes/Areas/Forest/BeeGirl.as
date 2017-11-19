@@ -122,12 +122,12 @@ public class BeeGirl extends Monster {
 			this.hairColor = randomChoice("black","black and yellow");
 			this.hairLength = 6;
 			initStrTouSpeInte(30, 50, 30, 20);
-			initLibSensCor(60, 55, 0);
+			initWisLibSensCor(20, 60, 55, 0);
 			this.weaponName = "chitin-plated fist";
 			this.weaponVerb="armored punch";
-			this.weaponAttack = 4 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 4;
 			this.armorName = "chitin";
-			this.armorDef = 12 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 12;
 			this.bonusHP = 40;
 			this.bonusLust = 20;
 			this.lust = 20 + rand(40);
@@ -144,12 +144,6 @@ public class BeeGirl extends Monster {
 			this.tailType = AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN;
 			this.tailVenom = 100;
 			this.special1 = beeStingAttack;
-			this.str += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 380;
 			checkMonster();
 		}
 

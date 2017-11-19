@@ -120,12 +120,12 @@ use namespace kGAMECLASS;
 			this.hairColor = "brown";
 			this.hairLength = 2;
 			initStrTouSpeInte(30, 50, 50, 30);
-			initLibSensCor(20, 40, 50);
+			initWisLibSensCor(30, 20, 40, 50);
 			this.weaponName = "bam hammer";
 			this.weaponVerb="bam";
-			this.weaponAttack = 8 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 8;
 			this.armorName = "dragonscales armor";
-			this.armorDef = 5 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 5;
 			this.lust = 15;
 			this.lustVuln = .9;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
@@ -138,12 +138,6 @@ use namespace kGAMECLASS;
 			this.createPerk(PerkLib.LizanRegeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.LizanMarrow, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
-			this.str += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 360;
 			checkMonster();
 		}
 		

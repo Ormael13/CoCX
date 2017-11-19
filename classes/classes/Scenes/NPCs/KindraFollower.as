@@ -77,6 +77,28 @@ public function wonFightWithKindra():void {
 	outputText("You tell her she don’t have to worry about her talent as an huntress either.\n\n");
 	outputText("\"<i>You don’t really get my point but it's fine perhaps you will get it eventually.</i>\"\n\n");
 	outputText("The both of you head back to camp.");
+	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
+		if (flags[kFLAGS.KINDRA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.KINDRA_DEFEATS_COUNTER]++;
+		else flags[kFLAGS.KINDRA_DEFEATS_COUNTER] = 1;
+		if (flags[kFLAGS.KINDRA_DEFEATS_COUNTER] == 8 && flags[kFLAGS.KINDRA_LVL_UP] == 6) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 1, 48);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 48, 0, 0, 0);
+			flags[kFLAGS.KINDRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KINDRA_LVL_UP] = 7;
+		}
+		if (flags[kFLAGS.KINDRA_DEFEATS_COUNTER] == 9 && flags[kFLAGS.KINDRA_LVL_UP] == 7) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 1, 54);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 54, 0, 0, 0);
+			flags[kFLAGS.KINDRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KINDRA_LVL_UP] = 8;
+		}
+		if (flags[kFLAGS.KINDRA_DEFEATS_COUNTER] == 10 && flags[kFLAGS.KINDRA_LVL_UP] == 8) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 1, 60);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 60, 0, 0, 0);
+			flags[kFLAGS.KINDRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KINDRA_LVL_UP] = 9;
+		}
+	}
 	kindraAffection(1);
 	cleanupAfterCombat();
 	return;

@@ -151,7 +151,7 @@ public class Akbal extends Monster
 					damage2 = Math.round(damage2);
 					outputText("Surrounding your blizzard absorbed huge part of the attack at the price of loosing some of it protective power.\n");
 					outputText("You are burned badly by the flames! ");
-					damage2 = player.takeDamage(damage2, true);
+					damage2 = player.takeMagicDamage(damage2, true);
 					game.combatRoundOver();
 					return;
 				}
@@ -160,7 +160,7 @@ public class Akbal extends Monster
 				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 				damage = Math.round(damage);
 				outputText("You are burned badly by the flames! ");
-				damage = player.takeDamage(damage, true);
+				damage = player.takeMagicDamage(damage, true);
 			}
 			game.combatRoundOver();
 		}
@@ -203,12 +203,12 @@ public class Akbal extends Monster
 			this.hairColor = "black";
 			this.hairLength = 5;
 			initStrTouSpeInte(61, 89, 75, 86);
-			initLibSensCor(80, 50, 100);
+			initWisLibSensCor(85, 80, 50, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw-slash";
-			this.weaponAttack = 17 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 17;
 			this.armorName = "shimmering pelt";
-			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 10;
 			this.bonusHP = 100;
 			this.bonusLust = 40;
 			this.lust = 30;
@@ -227,12 +227,7 @@ public class Akbal extends Monster
 			this.tailType = AppearanceDefs.TAIL_TYPE_DOG;
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			this.str += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 17 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 2340;
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}
 

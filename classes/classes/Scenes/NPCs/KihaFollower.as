@@ -1852,10 +1852,54 @@ internal function pcLosesDomFight():void {
 //[PC wins the fight]
 internal function pcWinsDomFight():void {
 	clearOutput();
-	/*if(flags[kFLAGS.KIHA_FOLLOWER] == 1) {
-		if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.KIHA_DEFEATS_COUNTER]++;
-		else flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 1;
-	}*/
+	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
+		if (flags[kFLAGS.KIHA_FOLLOWER] == 1) {
+			if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.KIHA_DEFEATS_COUNTER]++;
+			else flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 1;
+		}
+		if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] == 4 && flags[kFLAGS.KIHA_LVL_UP] < 1) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 3, 24);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 24, 0);
+			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KIHA_LVL_UP] = 1;
+		}
+		if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] == 5 && flags[kFLAGS.KIHA_LVL_UP] == 1) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 3, 30);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 30, 0);
+			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KIHA_LVL_UP] = 2;
+		}
+		if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] == 6 && flags[kFLAGS.KIHA_LVL_UP] == 2) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 3, 36);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 36, 0);
+			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KIHA_LVL_UP] = 3;
+		}
+		if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] == 7 && flags[kFLAGS.KIHA_LVL_UP] == 3) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 3, 42);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 42, 0);
+			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KIHA_LVL_UP] = 4;
+		}
+		if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] == 8 && flags[kFLAGS.KIHA_LVL_UP] == 4) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 3, 48);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 48, 0);
+			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KIHA_LVL_UP] = 5;
+		}
+		if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] == 9 && flags[kFLAGS.KIHA_LVL_UP] == 5) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 3, 54);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 54, 0);
+			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KIHA_LVL_UP] = 6;
+		}
+		if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] == 10 && flags[kFLAGS.KIHA_LVL_UP] == 6) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 3, 60);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 60, 0);
+			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KIHA_LVL_UP] = 7;
+		}
+	}
 	outputText(images.showImage("kiha-dom-win"));
 	spriteSelect(72);
 	var x:Number = player.cockThatFits(67);

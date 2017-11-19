@@ -82,7 +82,7 @@ public class Syth extends Monster
 					lust += 5 * lustVuln;
 				}
 			}
-			if(damage > 0) damage = player.takeDamage(damage, true);
+			if(damage > 0) damage = player.takeMagicDamage(damage, true);
 			statScreenRefresh();
 			outputText("\n");
 		}
@@ -167,12 +167,12 @@ public class Syth extends Monster
 			this.hairColor = "white";
 			this.hairLength = 1;
 			initStrTouSpeInte(160, 120, 70, 60);
-			initLibSensCor(120, 25, 70);
+			initWisLibSensCor(60, 120, 25, 70);
 			this.weaponName = "pair of big fucking swords";
 			this.weaponVerb= "slash";
-			this.weaponAttack = 56 + (12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 56;
 			this.armorName = "scales";
-			this.armorDef = 27 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 27;
 			this.bonusHP = 300;
 			this.additionalXP = 300;
 			this.bonusLust = 20;
@@ -195,12 +195,6 @@ public class Syth extends Monster
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Berzerker, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Lustzerker, 0, 0, 0, 0);
-			this.str += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 6360;
 			checkMonster();
 		}
 		

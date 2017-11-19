@@ -176,12 +176,12 @@ import classes.Scenes.SceneLib;
 			this.hairLength = 3;
 			this.faceType = AppearanceDefs.FACE_COW_MINOTAUR;
 			initStrTouSpeInte(80, 110, 30, 20);
-			initLibSensCor(100, 15, 35);
+			initWisLibSensCor(20, 100, 15, 35);
 			this.weaponName = "fists";
 			this.weaponVerb="punches";
-			this.weaponAttack = 36 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 36;
 			this.armorName = "thick fur";
-			this.armorDef = 30 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 30;
 			var bonusHP:Number = 600 + 50 * (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3);
 			var lustVuln:Number = 0.45;
 			if((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 2 > 13) lustVuln = .3;
@@ -200,12 +200,6 @@ import classes.Scenes.SceneLib;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			this.str += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 2040;
 			checkMonster();
 		}
 	}

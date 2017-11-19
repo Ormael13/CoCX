@@ -73,7 +73,7 @@ public class GoblinElder extends Goblin
 				else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) damage *= 1.5;
 				else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) damage *= 2;
 				damage = Math.round(damage);
-				player.takeDamage(damage, true);
+				player.takeMagicDamage(damage, true);
 				fatigue += spellCostWhitefire;
 			}
 			//Arouse
@@ -194,12 +194,12 @@ public class GoblinElder extends Goblin
 			this.hairColor = "dark green";
 			this.hairLength = 4;
 			initStrTouSpeInte(95, 75, 70, 100);
-			initLibSensCor(55, 35, 45);
+			initWisLibSensCor(100, 55, 35, 45);
 			this.weaponName = "primal sword";
 			this.weaponVerb = "slash";
-			this.weaponAttack = 25 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 25;
 			this.armorName = "bone armor";
-			this.armorDef = 24 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 24;
 			this.fatigue = 0;
 			this.bonusHP = 425;
 			this.bonusLust = 20;
@@ -224,12 +224,6 @@ public class GoblinElder extends Goblin
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);
-			this.str += 19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 2370;
 			checkMonster();
 		}
 		

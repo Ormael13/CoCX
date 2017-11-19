@@ -36,8 +36,13 @@ public class Isabella extends Monster
 			}
 			else {
 				var damage:Number;
-				damage = Math.round((weaponAttack + str + 20) - rand(player.tou+player.armorDef));
-				if(damage < 0) {
+				if (flags[kFLAGS.ISABELLA_LVL_UP] >= 1) damage = Math.round(((weaponAttack + str + 20) * flags[kFLAGS.ISABELLA_LVL_UP]) - rand(player.tou+player.armorDef));
+				else damage = Math.round((weaponAttack + str + 20) - rand(player.tou + player.armorDef));
+				if (wrath >= 100) {
+					wrath -= 100;
+					damage *= 2;
+				}
+				if (damage < 0) {
 					outputText("You brace yourself and catch her shield in both hands, dragging through the dirt as you slow her charge to a stop.  She gapes down, completely awestruck by the show of power.");
 				}
 				else {
@@ -75,7 +80,8 @@ public class Isabella extends Monster
 			}
 			else {
 				var damage:Number = 0;
-				damage = Math.round((weaponAttack + str) - rand(player.tou+player.armorDef));
+				if (flags[kFLAGS.ISABELLA_LVL_UP] >= 1) damage = Math.round(((weaponAttack + str) * (1 + (flags[kFLAGS.ISABELLA_LVL_UP] * 0.1))) - rand(player.tou+player.armorDef));
+				else damage = Math.round((weaponAttack + str) - rand(player.tou+player.armorDef));
 				if(damage < 0) {
 					outputText("You deflect her blow away, taking no damage.\n");
 					damage = 0;
@@ -119,7 +125,8 @@ public class Isabella extends Monster
 			}
 			else {
 				var damage:Number;
-				damage = Math.round(str - rand(player.tou+player.armorDef));
+				if (flags[kFLAGS.ISABELLA_LVL_UP] >= 1) damage = Math.round((str * (1 + (flags[kFLAGS.ISABELLA_LVL_UP] * 0.1))) - rand(player.tou+player.armorDef));
+				else damage = Math.round(str - rand(player.tou+player.armorDef));
 				if(damage <= 0) {
 					outputText("You manage to block her with your own fists.\n");
 				}
@@ -139,7 +146,8 @@ public class Isabella extends Monster
 		//[Milk Self-Heal]
 		public function drankMalkYaCunt():void {
 			outputText("Isabella pulls one of her breasts out of her low-cut shirt and begins to suckle at one of the many-tipped nipples. Her cheeks fill and hollow a few times while you watch with spellbound intensity.  She finishes and tucks the weighty orb away, blushing furiously.  The quick drink seems to have reinvigorated her, and watching it has definitely aroused you.");
-			HP += 100;
+			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 1) HP += 100 * flags[kFLAGS.ISABELLA_LVL_UP];
+			else HP += 100;
 			lust += 5;
 			player.dynStats("lus", (10+player.lib/20));
 			combatRoundOver();
@@ -148,7 +156,7 @@ public class Isabella extends Monster
 		override protected function performCombatAction():void
 		{
 			//-If below 70% HP, 50% chance of milk drinking
-			if (HPRatio() < .7 && rand(3) == 0) drankMalkYaCunt();
+			if (HPRatio() < .7 && rand(2) == 0) drankMalkYaCunt();
 			//if PC has spells and isn't silenced, 1/3 chance of silence.
 			else if (player.hasSpells() && !player.hasStatusEffect(StatusEffects.ThroatPunch) && rand(3) == 0) {
 				isabellaThroatPunch();
@@ -196,59 +204,67 @@ public class Isabella extends Monster
 			this.hairLength = 13;
 			if (flags[kFLAGS.ISABELLA_LVL_UP] < 1) {
 				initStrTouSpeInte(80, 108, 75, 64);
-				initLibSensCor(64, 25, 40);
-				this.weaponAttack = 18 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 18 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.bonusHP = 700;
+				initWisLibSensCor(64, 64, 25, 40);
+				this.weaponAttack = 18;
+				this.armorDef = 18;
+				this.bonusHP = 600;
 				this.level = 20;
-				this.str += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 2280;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 1) {
-				initStrTouSpeInte(110, 150, 100, 90);
-				initLibSensCor(90, 25, 40);
-				this.weaponAttack = 24 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 24 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.bonusHP = 1000;
-				this.level = 30;
-				this.str += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 6480;
+				initStrTouSpeInte(100, 130, 85, 73);
+				initWisLibSensCor(73, 70, 30, 40);
+				this.weaponAttack = 21;
+				this.armorDef = 24;
+				this.bonusHP = 800;
+				this.level = 26;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 2) {
-				initStrTouSpeInte(150, 200, 130, 120);
-				initLibSensCor(120, 25, 40);
-				this.weaponAttack = 30 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 30 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.bonusHP = 1400;
-				this.level = 40;
-				this.str += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 39 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 10900;
+				initStrTouSpeInte(120, 155, 100, 82);
+				initWisLibSensCor(82, 80, 35, 40);
+				this.weaponAttack = 24;
+				this.armorDef = 30;
+				this.bonusHP = 1000;
+				this.level = 32;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 3) {
-				initStrTouSpeInte(200, 250, 160, 150);
-				initLibSensCor(150, 25, 40);
-				this.weaponAttack = 36 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.armorDef = 36 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.bonusHP = 1800;
+				initStrTouSpeInte(140, 180, 115, 91);
+				initWisLibSensCor(91, 90, 40, 40);
+				this.weaponAttack = 27;
+				this.armorDef = 36;
+				this.bonusHP = 1200;
+				this.level = 38;
+			}
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 4) {
+				initStrTouSpeInte(160, 210, 130, 100);
+				initWisLibSensCor(100, 100, 45, 40);
+				this.weaponAttack = 30;
+				this.armorDef = 42;
+				this.bonusHP = 1400;
+				this.level = 44;
+			}
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 5) {
+				initStrTouSpeInte(180, 240, 145, 110);
+				initWisLibSensCor(110, 110, 50, 40);
+				this.weaponAttack = 33;
+				this.armorDef = 48;
+				this.bonusHP = 1600;
 				this.level = 50;
-				this.str += 60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 75 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 16380;
+			}
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 6) {
+				initStrTouSpeInte(200, 270, 160, 120);
+				initWisLibSensCor(120, 120, 55, 40);
+				this.weaponAttack = 36;
+				this.armorDef = 54;
+				this.bonusHP = 1800;
+				this.level = 56;
+			}
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 7) {
+				initStrTouSpeInte(220, 300, 175, 130);
+				initWisLibSensCor(130, 130, 60, 40);
+				this.weaponAttack = 39;
+				this.armorDef = 60;
+				this.bonusHP = 2000;
+				this.level = 62;
 			}
 			this.weaponName = "giant shield";
 			this.weaponVerb="smash";
@@ -265,9 +281,22 @@ public class Isabella extends Monster
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 1) this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
-			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 2) this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
-			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 3) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 1) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 2) {
+				this.createPerk(PerkLib.Lifeline, 0, 0, 0, 0);
+				this.createPerk(PerkLib.BasicTranquilness, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 3) this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
+			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 4) {
+				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.HalfStepToImprovedTranquilness, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 5) this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
+			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 6) {
+				this.createPerk(PerkLib.GoliathI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.ImprovedTranquilness, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 7) this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

@@ -85,12 +85,12 @@ public class ImpWarlord extends Imp
 			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
 			this.skinTone = "red";
 			initStrTouSpeInte(80, 71, 75, 56);
-			initLibSensCor(71, 35, 100);
+			initWisLibSensCor(56, 71, 35, 100);
 			this.weaponName = "sword";
 			this.weaponVerb="slash";
-			this.weaponAttack = 20 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 20;
 			this.armorName = "platemail";
-			this.armorDef = 17 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 17;
 			this.bonusHP = 350;
 			this.bonusLust = 30;
 			this.lust = 30;
@@ -107,12 +107,7 @@ public class ImpWarlord extends Imp
 			this.wingType = AppearanceDefs.WING_TYPE_IMP;
 			this.special1 = lustMagicAttack;
 			this.special2 = clawAttack;
-			this.str += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1400;
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

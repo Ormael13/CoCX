@@ -18,7 +18,7 @@ public class GuardianGolems extends Monster
 			if (damage <= 0 || (player.getEvasionRoll())) outputText(" You slide underneath the surprise swings!");
 			else
 			{
-				outputText(" They chits you square in the chest from a few different angles. ");
+				outputText(" They hits you square in the chest from a few different angles. ");
 				damage = player.takeDamage(damage, true);
 			}
 		}
@@ -52,7 +52,7 @@ public class GuardianGolems extends Monster
 			this.createBreastRow(0, 1);
 			initGenderless();
 			initStrTouSpeInte(20, 25, 20, 10);
-			initLibSensCor(10, 10, 50);
+			initWisLibSensCor(10, 10, 10, 50);
 			this.tallness = 72;
 			this.drop = new ChainedDrop()
 					.add(useables.GOLCORE, 1);
@@ -60,20 +60,14 @@ public class GuardianGolems extends Monster
 			this.bonusHP = 75;
 			this.weaponName = "stone fists";
 			this.weaponVerb = "smash";
-			this.weaponAttack = 12 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 12;
 			this.armorName = "cracked stone";
-			this.armorDef = 12 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 12;
 			this.createPerk(PerkLib.Resolute, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);
-			this.str += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 170;
 			checkMonster();
 		}
 		

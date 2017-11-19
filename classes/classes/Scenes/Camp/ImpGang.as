@@ -49,12 +49,12 @@ public class ImpGang extends Imp
 			this.pronoun2 = "them";
 			this.pronoun3 = "their";
 			initStrTouSpeInte(70, 40, 75, 42);
-			initLibSensCor(55, 35, 100);
+			initWisLibSensCor(42, 55, 35, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 10 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 10;
 			this.armorName = "leathery skin";
-			this.armorDef = 3 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 3;
 			this.bonusHP = 300;
 			this.bonusLust = 150;
 			this.lust = 30;
@@ -66,12 +66,7 @@ public class ImpGang extends Imp
 			this.wingType = AppearanceDefs.WING_TYPE_IMP;
 			this.special1 = lustMagicAttack;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
-			this.str += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1120;
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

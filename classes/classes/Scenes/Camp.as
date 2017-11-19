@@ -937,6 +937,9 @@ public function followersCount():Number {
 	if (flags[kFLAGS.ANEMONE_KID] > 0) counter++;
 	if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4) counter++;
 	if (flags[kFLAGS.FLOWER_LEVEL] >= 4) counter++;
+    for each (var npc:XXCNPC in _campFollowers){
+        if(npc.isCompanion(XXCNPC.FOLLOWER)){counter++;}
+    }
 	return counter;
 }
 
@@ -950,6 +953,9 @@ public function slavesCount():Number {
 	if (bimboSophie() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
 	if (ceraphIsFollower()) counter++;
 	if (milkSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) counter++;
+    for each (var npc:XXCNPC in _campFollowers){
+        if(npc.isCompanion(XXCNPC.SLAVE)){counter++;}
+    }
 	return counter;
 }
 
@@ -966,6 +972,9 @@ public function loversCount():Number {
 	if (followerKiha()) counter++;
 	if (flags[kFLAGS.NIEVE_STAGE] == 5) counter++;
 	if (flags[kFLAGS.ANT_WAIFU] > 0) counter++;
+	for each (var npc:XXCNPC in _campFollowers){
+        if(npc.isCompanion(XXCNPC.LOVER)){counter++;}
+    }
 	return counter;
 }
 
@@ -1041,10 +1050,12 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 	}
 	//Cai'Lin
 //	addButtonDisabled(2, "???", "Look into my eyes and answer me: Am I beautiful?");
+	//Diva - button 3
 	//Etna
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) {
 		outputText("Etna is resting lazily on a rug in a very cat-like manner. She’s looking at you always with this adorable expression of hers, her tail wagging expectantly at your approach.\n\n");
-		addButton(3, "Etna", SceneLib.etnaScene.etnaCampMenu);
+		if (player.statusEffectv4(StatusEffects.CampSparingNpcsTimers1) > 0) addButtonDisabled(4, "Etna", "Training.");
+		else addButton(4, "Etna", SceneLib.etnaScene.etnaCampMenu);
 	}
 	//Helia
 	if(SceneLib.helScene.followerHel()) {
@@ -1067,7 +1078,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 				outputText("<b>You see the salamander Helia pacing around camp, anxiously awaiting your departure to the harpy roost. Seeing you looking her way, she perks up, obviously ready to get underway.</b>\n\n");
 			}
 		}
-		addButton(4, "Helia", helFollower.heliaFollowerMenu);
+		addButton(5, "Helia", helFollower.heliaFollowerMenu);
 	}
 	//Isabella
 	if(isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) {
@@ -1138,7 +1149,8 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 			outputText("You have " + formatStringArray(babiesList) + " with her, all living here; unlike native Marethians, they will need years and years of care before they can go out into the world on their own.");
 		}
 		outputText("\n\n");
-		addButton(5, "Isabella", isabellaFollowerScene.callForFollowerIsabella);
+		if (player.statusEffectv2(StatusEffects.CampSparingNpcsTimers1) > 0) addButtonDisabled(6, "Isabella", "Training.");
+		else addButton(6, "Isabella", isabellaFollowerScene.callForFollowerIsabella);
 	}
 	//Izma
 	if(izmaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) {
@@ -1150,7 +1162,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 			else if (model.time.hours <= 22) outputText("Izmael has built a fire and is flopped down next to it. You can’t help but notice that he’s used several of his books for kindling. His eyes are locked on the flames, mesmerized by the dancing light and heat.");
 			else outputText("Izmael is currently on his bedroll, sleeping for the night.");
 			outputText("\n\n");
-			addButton(6, "Izmael", izmaScene.izmaelScene.izmaelMenu);
+			addButton(7, "Izmael", izmaScene.izmaelScene.izmaelMenu);
 		}
 		else {
 			outputText("Neatly laid near the base of your own is a worn bedroll belonging to Izma, your tigershark lover. It's a snug fit for her toned body, though it has some noticeable cuts and tears in the fabric. Close to her bed is her old trunk, almost as if she wants to have it at arms length if anyone tries to rob her in her sleep.\n\n");
@@ -1160,7 +1172,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 				case 2: outputText("Izma is lying on her back near her bedroll. You wonder at first just why she isn't using her bed, but as you look closer you notice all the water pooled beneath her and the few droplets running down her arm, evidence that she's just returned from the stream."); break;
 			}
 			outputText("\n\n");
-			addButton(6, "Izma", izmaScene.izmaFollowerMenu);
+			addButton(7, "Izma", izmaScene.izmaFollowerMenu);
 		}
 	}
 	//Kiha!
@@ -1186,7 +1198,8 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 				outputText("Most of them are on fire.\n\n");
 			}
 		}
-		addButton(7, "Kiha", kihaScene.encounterKiha);
+		if (player.statusEffectv3(StatusEffects.CampSparingNpcsTimers1) > 0) addButtonDisabled(8, "Kiha", "Training.");
+		else addButton(8, "Kiha", kihaScene.encounterKiha);
 	}
 	//MARBLE
 	if(player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) {
@@ -1254,7 +1267,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		//Out getting family
 		//else outputText("Marble is out in the wilderness right now, searching for a relative.");
 		outputText("\n\n");
-		if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 4) addButton(8, "Marble", marbleScene.interactWithMarbleAtCamp).hint("Go to Marble the cowgirl for talk and companionship.");
+		if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 4) addButton(9, "Marble", marbleScene.interactWithMarbleAtCamp).hint("Go to Marble the cowgirl for talk and companionship.");
 	}
 	//Phylla
 	if (flags[kFLAGS.ANT_WAIFU] > 0) {
@@ -1265,14 +1278,14 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		else if(flags[kFLAGS.ANT_KIDS] > 1000) outputText(" some of your children exit the anthill using main or one of the additionally entrances to unload some dirt. Some of them instead of unloading dirt coming out to fulfill some other task that their mother gave them.  You feel a little nostalgic seeing how this former small colony grown to such a magnificent size.");
 		else outputText(" Phylla appear out of the anthill to unload some dirt.  She looks over to your campsite and gives you an excited wave before heading back into the colony.  It makes you feel good to know she's so close.");
 		outputText("\n\n");
-        addButton(9, "Phylla", SceneLib.desert.antsScene.introductionToPhyllaFollower);
+        addButton(10, "Phylla", SceneLib.desert.antsScene.introductionToPhyllaFollower);
     }
-//	addButtonDisabled(10, "???", "We have been entangled since the beginning.");
+	addButtonDisabled(11, "???", "We have been entangled since the beginning.");//Samirah
 	//Nieve (jako, ze jest sezonowym camp member powinna byc na koncu listy...chyba, ze zrobie cos w stylu utworzenia mini lodowej jaskini dla niej)
 	if(flags[kFLAGS.NIEVE_STAGE] == 5) {
 		Holidays.nieveCampDescs();
 		outputText("\n\n");
-        addButton(11, "Nieve", Holidays.approachNieve);
+        addButton(12, "Nieve", Holidays.approachNieve);
     }
     for each(var npc:XXCNPC in _campFollowers){
         npc.campDescription(XXCNPC.LOVER,descOnly);
@@ -1344,7 +1357,8 @@ public function campFollowers(descOnly:Boolean = false):void {
 	//Ember
 	if(emberScene.followerEmber()) {
 		emberScene.emberCampDesc();
-		addButton(0, "Ember", emberScene.emberCampMenu).hint("Check up on Ember the dragon-" + (flags[kFLAGS.EMBER_ROUNDFACE] == 0 ? "morph" : flags[kFLAGS.EMBER_GENDER] == 1 ? "boy" : "girl" ) + "");
+		if (player.statusEffectv1(StatusEffects.CampSparingNpcsTimers1) > 0) addButtonDisabled(0, "Ember", "Training.");
+		else addButton(0, "Ember", emberScene.emberCampMenu).hint("Check up on Ember the dragon-" + (flags[kFLAGS.EMBER_ROUNDFACE] == 0 ? "morph" : flags[kFLAGS.EMBER_GENDER] == 1 ? "boy" : "girl" ) + "");
 	}
 	//Sophie
 	if(sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
@@ -1386,6 +1400,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 			addButton(2, "Jojo", jojoScene.jojoCamp).hint("Go find Jojo around the edges of your camp and meditate with him or talk about watch duty.");
 		}
 	}
+	//Celess - button 3
 	//Evangeline
 	if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1 && flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] <= 0) {
 		outputText("There is a small bedroll for Evangeline near the camp edge");
@@ -1395,7 +1410,8 @@ public function campFollowers(descOnly:Boolean = false):void {
 		addButton(5, "Evangeline", EvangelineF.meetEvangeline).hint("Visit Evangeline.");
 	}
 	else if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1 && flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] >= 1) {
-		outputText("Evangeline isn't in the camp as she went to buy some items. She should be out no longer than a few hours.\n\n");
+		/*if (flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] >= 1)*/ outputText("Evangeline isn't in the camp as she went to buy some items. She should be out no longer than a few hours.\n\n");
+		//if () outputText("Evangeline is busy training now. She should be done with it in a few hours.\n\n");
 	}
 	//Kindra
 	if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) {
@@ -1510,12 +1526,13 @@ private function campActions():void {
 	addButton(5, "Build", campBuildingSim).hint("Check your camp build options.");
 	if (player.hasPerk(PerkLib.JobElementalConjurer) >= 0 || player.hasPerk(PerkLib.JobGolemancer) >= 0) addButton(6, "Winions", campWinionsArmySim).hint("Check your options for making some Winions.");
 	else addButtonDisabled(6, "Winions", "You need to be able to make some minions that fight for you to use this option like elementals or golems...");
+	if (player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(7, "Heal", spellHealcamp).hint("Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  \n\nMana Cost: 30");
 	//addButton(8, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
 	addButton(9, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
 	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2) addButton(10, "Ward", MagicWardMenu).hint("Activate or Deactivate Magic Ward around camp.");
 	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) addButton(11, "Kitsune Shrine", campScenes.KitsuneShrine).hint("Meditate at camp Kitsune Shrine.");
 	if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(12, "Hot Spring", campScenes.HotSpring).hint("Visit Hot Spring.");
-	if (player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(13, "Heal", spellHealcamp).hint("Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  \n\nMana Cost: 30");
+	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(13, "NPC's Training", SparrableNPCsMenu);
 	addButton(14, "Back", playerMenu);
 }
 
@@ -1552,6 +1569,28 @@ private function MagicWardMenu():void {
 		doNext(campActions);
 		return;
 	}
+}
+
+private function SparrableNPCsMenu():void {
+	clearOutput();
+	outputText("Placeholder text about deciding if sparrable npc's in camp should train or relax (train mean rising in lvl after enough time loosing to PC in sparrings).");
+	outputText("\n\nPlaceholder text about current mode camp combat NPC's are in: ");
+	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) outputText("Training Mode");
+	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) outputText("Relax Mode");
+	menu();
+	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) addButton(0, "Train", NPCsTrain);
+	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) addButton(1, "Relax", NPCsRelax);
+	addButton(14, "Back", campActions);
+}
+private function NPCsTrain():void {
+	outputText("\n\nPlaceholder text about telling NPC's to train.");
+	flags[kFLAGS.SPARRABLE_NPCS_TRAINING] = 2;
+	doNext(SparrableNPCsMenu);
+}
+private function NPCsRelax():void {
+	outputText("\n\nPlaceholder text about telling NPC's to relax.");
+	flags[kFLAGS.SPARRABLE_NPCS_TRAINING] = 1;
+	doNext(SparrableNPCsMenu);
 }
 
 public function spellHealcamp():void {
@@ -3255,13 +3294,24 @@ private function promptSaveUpdate():void {
 	}
 /*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 19) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 20;
+		if (player.findPerk(PerkLib.ElementalConjurerMindAndBodyResolve) >= 0) {
+			player.removePerk(PerkLib.ElementalConjurerMindAndBodyResolve);
+			player.createPerk(PerkLib.ElementalConjurerMindAndBodyDedication, 0, 0, 0, 0);
+		}
 		clearOutput();
-		outputText("Text.");
+		outputText("Switching one perk...if needed.");
 		doNext(doCamp);
 		return;
 	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 20) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 21;
+		clearOutput();
+		outputText("Text.");
+		doNext(doCamp);
+		return;
+	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 21) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 22;
 		clearOutput();
 		outputText("Text.");
 		doNext(doCamp);

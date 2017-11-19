@@ -68,7 +68,7 @@ public class Marae extends Monster
 				if (player.cor >= 50) outputText("The intensity of the pain is unbearable. ");
 				var damage:int = 100 + str + (player.cor * 5);
 				damage = player.reduceDamage(damage);
-				player.takeDamage(damage, true);
+				player.takeMagicDamage(damage, true);
 			}
 			if (hasStatusEffect(StatusEffects.Uber)) removeStatusEffect(StatusEffects.Uber);
 			combatRoundOver();
@@ -128,11 +128,29 @@ public class Marae extends Monster
 				this.long = "This being is known as the goddess of Mareth. She is corrupted due to the aftermath of the factory valves being blown up. She's white all over and textured with bark. The \"flower\" below her belly button resembles more of a vagina than a flower. Her G-cup sized breasts jiggle with every motion.";
 				this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DROOLING, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 				createBreastRow(Appearance.breastCupInverse("G"));
+				initStrTouSpeInte(300, 300, 170, 180);
+				initWisLibSensCor(180, 150, 25, 100);
+				this.weaponName = "tentacles";
+				this.weaponVerb="slap";
+				this.weaponAttack = 100;
+				this.bonusLust += 300;
+				this.special1 = tentacleAttack;
+				this.special2 = tentacleRape;
+				this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			}
 			else {
 				this.long = "This being is known as the goddess of Mareth. She is no longer corrupted thanks to your actions at the factory. She's white all over and textured with bark. Her breasts are modestly sized.";
 				this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_WET, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 				createBreastRow(Appearance.breastCupInverse("DD"));
+				initStrTouSpeInte(370, 370, 220, 260);
+				initWisLibSensCor(260, 30, 25, 0);
+				this.weaponName = "fists";
+				this.weaponVerb="wrathful punch";
+				this.weaponAttack = 126;
+				this.bonusHP += 3000;
+				if (game.flags[kFLAGS.MINERVA_TOWER_TREE] > 0) this.bonusHP += 1150;
+				this.additionalXP += 750;
+				this.special1 = smite;
 			}
 			this.ass.analLooseness = 1;
 			this.ass.analWetness = 1;
@@ -142,62 +160,19 @@ public class Marae extends Monster
 			this.skin.base.color = "white";
 			this.hairColor = "green";
 			this.hairLength = 36;
-			if (game.flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
-				initStrTouSpeInte(300, 300, 170, 180);
-				initLibSensCor(150, 25, 100);
-				this.weaponName = "tentacles";
-				this.weaponVerb="slap";
-				this.weaponAttack = 100 + (21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.str += 150 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 150 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 85 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 90 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 75 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];//na lvl 75-99 +50% statów a potem +60/70% co każde przedział 25 lvl-i
-				this.newgamebonusHP = 55000;//dodane this.str/tou/spe/inte/lib a nastepnie pomnożone przez 100 (dla lvl 90-99, dla każdego kolejnego przedziału 10 lvl kolejne 10 x wiecej)
-			}
-			else {
-				initStrTouSpeInte(370, 370, 220, 260);
-				initLibSensCor(30, 25, 0);
-				this.weaponName = "fists";
-				this.weaponVerb="wrathful punch";
-				this.weaponAttack = 126 + (26 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.str += 185 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 185 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.spe += 110 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.inte += 130 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];//na lvl 75-99 +50% statów a potem +60/70% co każde przedział 25 lvl-i
-				this.newgamebonusHP = 62500;//dodane this.str/tou/spe/inte/lib a nastepnie pomnożone przez 100 (dla lvl 90-99, dla każdego kolejnego przedziału 10 lvl kolejne 10 x wiecej)
-			}
 			this.weaponPerk = "";
-			this.weaponValue = 70 + (15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponValue = 70;
 			this.armorName = "bark";
-			this.armorDef = 140 + (15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 140;
 			this.bonusHP = 5000;
-			if (game.flags[kFLAGS.FACTORY_SHUTDOWN] == 1) {
-				this.bonusHP += 3000;
-				if (game.flags[kFLAGS.MINERVA_TOWER_TREE] > 0) this.bonusHP += 1150;
-			}
 			this.bonusLust = 100;
-			if (game.flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
-				this.bonusLust += 300;
-			}
 			this.lust = 30;
 			this.lustVuln = .04;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 99;
 			this.additionalXP = 3000;
-			if (game.flags[kFLAGS.FACTORY_SHUTDOWN] == 1) {
-				this.additionalXP += 750;
-			}
 			this.drop = NO_DROP;
 			this.gems = 1000;
-			if (game.flags[kFLAGS.FACTORY_SHUTDOWN] == 1) {
-				this.special1 = smite;
-			}
-			if (game.flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
-				this.special1 = tentacleAttack;
-				this.special2 = tentacleRape;
-			}
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);

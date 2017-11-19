@@ -24,12 +24,12 @@ public class Lethice extends Monster
 			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
 			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			initStrTouSpeInte(320, 320, 150, 150);
-			initLibSensCor(180, 50, 100);
+			initWisLibSensCor(150, 180, 50, 100);
 			this.weaponName = "whip";
-			this.weaponAttack = 70 + (15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 70;
 			this.weaponVerb = "whip";
 			this.armorName = "wraps";
-			this.armorDef = 36 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 36;
 			this.bonusHP = 3000;
 			this.bonusLust = 150;
 			this.gems = 200 + rand(100);
@@ -42,13 +42,8 @@ public class Lethice extends Monster
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			this.drop = new WeightedDrop(weapons.L_WHIP, 1);
-			this.str += 96 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 96 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 54 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 20160;
 			this.checkMonster();
 		}
 		
@@ -230,7 +225,7 @@ public class Lethice extends Monster
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			damage = Math.round(damage);
-			damage = player.takeDamage(damage);
+			damage = player.takeMagicDamage(damage);
 
 			outputText(" (" + damage + ")");
 		}
@@ -767,7 +762,7 @@ public class Lethice extends Monster
 				damage = 100 + weaponAttack + str - rand(player.tou);
 			}
 
-			damage = player.takeDamage(damage);
+			damage = player.takeMagicDamage(damage);
 
 			outputText(" ("+ damage +")");
 		}
@@ -777,7 +772,7 @@ public class Lethice extends Monster
 			outputText("Lethice raises her sizzling, flame-spitting whip high up overhead, then snaps her arm out and back in an instant, cracking the whip so hard that it gives birth to a shockwave of flame and cacophonous thunder. There’s no avoiding the all-encompassing wave of energy. There’s not even time to brace yourself. It slams into you, rattling bones and scorching flesh.");
 
 			var damage:Number = 75 + weaponAttack + str;
-			damage = player.takeDamage(damage);
+			damage = player.takeMagicDamage(damage);
 			outputText(" (" + damage +")");
 		}
 

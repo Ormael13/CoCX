@@ -67,7 +67,7 @@ public class ImpOverlord extends Imp
 					outputText("It's super effective!  ");
 				}
 				damage = Math.round(damage);
-				player.takeDamage(damage, true);
+				player.takeMagicDamage(damage, true);
 				fatigue += spellCostWhitefire;
 			}
 			//Arouse
@@ -106,7 +106,7 @@ public class ImpOverlord extends Imp
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			damage = Math.round(damage);
-			player.takeDamage(damage, true);
+			player.takeMagicDamage(damage, true);
 			player.dynStats("lus", 20 + player.cor / 10);
 			combatRoundOver();
 		}
@@ -238,12 +238,12 @@ public class ImpOverlord extends Imp
 			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
 			this.skinTone = "red";
 			initStrTouSpeInte(100, 95, 85, 71);
-			initLibSensCor(75, 35, 100);
+			initWisLibSensCor(71, 75, 35, 100);
 			this.weaponName = "scimitar";
 			this.weaponVerb="slash";
-			this.weaponAttack = 30 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 30;
 			this.armorName = "sexy black chitin armor-plating";
-			this.armorDef = 20 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 20;
 			this.bonusHP = 600;
 			this.bonusLust = 30;
 			this.lust = 30;
@@ -260,12 +260,7 @@ public class ImpOverlord extends Imp
 					add(weapons.SCIMITR, 1).
 					add(armors.BEEARMR, 1);
 			this.wingType = AppearanceDefs.WING_TYPE_IMP;
-			this.str += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 17 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 2550;
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

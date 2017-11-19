@@ -19,7 +19,7 @@ public class HarpyQueen extends Monster
 			outputText("The Harpy Queen flicks her left wrist at you. Before you can blink, ropes of white-hot magic hurtle toward you. You manage to duck and dodge a few of them, but a pair still grab your wrists, pulling painfully at your arms.");
 			//(Effect: Grab + Physical Damage)
 			var damage:int = 25 + rand(10);
-			damage = player.takeDamage(damage, true);
+			damage = player.takeMagicDamage(damage, true);
 			createStatusEffect(StatusEffects.QueenBind,0,0,0,0);
 			combatRoundOver();
 		}
@@ -30,7 +30,7 @@ public class HarpyQueen extends Monster
 			if(rand(10) > 0 && player.str/5 + rand(20) < 23 || wait) {
 				outputText("You give a mighty try, but cannot pull free of the magic ropes!  The Harpy Queen laughs uproariously, pulling at your arms harder.");
 				if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {var damage:int = 25 + rand(10);
-				damage = player.takeDamage(damage, true);
+				damage = player.takeMagicDamage(damage, true);
 				}
 			}
 			else {
@@ -53,7 +53,7 @@ public class HarpyQueen extends Monster
 			outputText("The queen swings her arm at you and, despite being a few feet away, you feel a kinetic wall slam into you, and you go flying - right into the harpy brood!  You feel claws, teeth and talons dig into you, but you're saved by a familiar pair of scaled arms.  \"<i>Get back in there!</i>\" Helia shouts, throwing you back into the battle!");
 			//(Effect; Heavy Damage)
 			var damage:Number = 100 + rand(50);
-			damage = player.takeDamage(damage, true);
+			damage = player.takeMagicDamage(damage, true);
 			combatRoundOver();
 		}
 		
@@ -77,7 +77,7 @@ public class HarpyQueen extends Monster
 			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) damage *= 1.5;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) damage *= 2;
 			damage = Math.round(damage);
-			player.takeDamage(damage, true);
+			player.takeMagicDamage(damage, true);
 			fatigue += spellCostWhitefire;
 			combatRoundOver();
 		}
@@ -126,12 +126,12 @@ public class HarpyQueen extends Monster
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(100, 90, 160, 80);
-			initLibSensCor(80, 45, 50);
+			initWisLibSensCor(80, 80, 45, 50);
 			this.weaponName = "eldritch staff";
 			this.weaponVerb="thwack";
-			this.weaponAttack = 27 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 27;
 			this.armorName = "armor";
-			this.armorDef = 26 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 26;
 			this.bonusHP = 1000;
 			this.bonusLust = 30;
 			this.fatigue = 0;
@@ -151,12 +151,6 @@ public class HarpyQueen extends Monster
 			this.createPerk(PerkLib.MindOverBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
-			this.str += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 6120;
 			checkMonster();
 		}
 		

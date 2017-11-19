@@ -22,7 +22,7 @@ import classes.internals.*;
 		{
 			if(pcCameWorms){
 				outputText("\n\nThe spider flashes a predatory grin while she waits it out...");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
 				SceneLib.swamp.femaleSpiderMorphScene.loseToFemaleSpiderMorph();
 			}
@@ -49,12 +49,12 @@ import classes.internals.*;
 			this.hairColor = "red";
 			this.hairLength = 13;
 			initStrTouSpeInte(70, 60, 99, 99);
-			initLibSensCor(45, 35, 20);
+			initWisLibSensCor(99, 45, 35, 20);
 			this.weaponName = "dagger";
 			this.weaponVerb="stab";
-			this.weaponAttack = 24 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 24;
 			this.armorName = "exoskeleton";
-			this.armorDef = 23 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 23;
 			this.armorPerk = "";
 			this.armorValue = 50;
 			this.bonusHP = 200;
@@ -68,12 +68,6 @@ import classes.internals.*;
 					.add(useables.T_SSILK,1)
 					.add(null,4);
 			this.tailType = AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN;
-			this.str += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 1460;
 			checkMonster();
 		}
 		

@@ -367,8 +367,52 @@ public function etnaRapeIntro2():void
 	else outputText("too horny to fight back");
 	outputText(". She looks at you with a hopeful expression as she holds her tail with one hand. \"<i>So strong... so powerful! If you would only let me taste you I promise I will make it feel sooooo good.</i>\"\n\n");
 	outputText("Do you grant her request?");
-	//if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.ETNA_DEFEATS_COUNTER]++;
-	//else flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 1;
+	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
+		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.ETNA_DEFEATS_COUNTER]++;
+		else flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 1;
+		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] == 5 && flags[kFLAGS.ETNA_LVL_UP] < 1) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, 30);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 30);
+			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ETNA_LVL_UP] = 1;
+		}
+		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] == 6 && flags[kFLAGS.ETNA_LVL_UP] == 1) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, 36);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 36);
+			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ETNA_LVL_UP] = 2;
+		}
+		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] == 7 && flags[kFLAGS.ETNA_LVL_UP] == 2) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, 42);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 42);
+			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ETNA_LVL_UP] = 3;
+		}
+		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] == 8 && flags[kFLAGS.ETNA_LVL_UP] == 3) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, 48);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 48);
+			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ETNA_LVL_UP] = 4;
+		}
+		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] == 9 && flags[kFLAGS.ETNA_LVL_UP] == 4) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, 54);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 54);
+			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ETNA_LVL_UP] = 5;
+		}
+		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] == 10 && flags[kFLAGS.ETNA_LVL_UP] == 5) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, 60);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 60);
+			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ETNA_LVL_UP] = 6;
+		}
+		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.ETNA_LVL_UP] == 6) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, 66);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 66);
+			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ETNA_LVL_UP] = 7;
+		}
+	}
 	menu();
 	if (player.lust >= 33 && player.hasCock()) addButton(0, "Yes (M)", etnaRapeYesM);
 	if (player.lust >= 33 && player.hasVagina()) addButton(1, "Yes (F)", etnaRapeYesF);

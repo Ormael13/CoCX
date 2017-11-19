@@ -152,12 +152,12 @@ public class Goblin extends Monster
 			this.hairColor = "purple";
 			this.hairLength = 4;
 			initStrTouSpeInte(15, 20, 35, 42);
-			initLibSensCor(45, 45, 60);
+			initWisLibSensCor(42, 45, 45, 60);
 			this.weaponName = "fists";
 			this.weaponVerb = "tiny punch";
-			this.weaponAttack = 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.weaponAttack = 1;
 			this.armorName = "leather straps";
-			this.armorDef = 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.armorDef = 1;
 			this.bonusLust = 20;
 			this.lust = 50;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
@@ -172,12 +172,6 @@ public class Goblin extends Monster
 							consumables.PURPDYE);
 			this.special1 = goblinDrugAttack;
 			this.special2 = goblinTeaseAttack;
-			this.str += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 155;
 			checkMonster();
 		}
 

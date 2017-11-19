@@ -73,12 +73,12 @@ public class LustyDemons extends Monster
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(180, 100, 10, 10);
-			initLibSensCor(120, 60, 100);
+			initWisLibSensCor(10, 120, 60, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 4 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 4;
 			this.armorName = "demonic skin";
-			this.armorDef = 8 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 8;
 			//6 attacks: 5 from demons (10 damage each), 1 from Vapula (80 damage), 200 gems, 200 xp, 700 hp*/
 			this.bonusHP = 1200;
 			this.bonusLust = 350;
@@ -99,13 +99,8 @@ public class LustyDemons extends Monster
 					add(armors.BONSTRP,2).
 					add(consumables.IMPFOOD, 1);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			createStatusEffect(StatusEffects.Vapula,0,0,0,0);
-			this.str += 54 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 3780;
 			checkMonster();
 		}
 	}

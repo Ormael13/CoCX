@@ -25,6 +25,9 @@ import flash.utils.getDefinitionByName;
 
 CONFIG::AIR
 {
+    import flash.filesystem.File;
+    import flash.filesystem.FileMode;
+    import flash.filesystem.FileStream;
 }
 
 public class Saves extends BaseContent {
@@ -340,7 +343,7 @@ public function saveLoad(e:MouseEvent = null):void
 	//screen so it doesnt overlap everything.
 	mainView.nameBox.visible = false;
 	var autoSaveSuffix:String = "";
-	if (player.autoSave) autoSaveSuffix = "ON";
+	if (player && player.autoSave) autoSaveSuffix = "ON";
 	else autoSaveSuffix = "OFF";
 	
 	clearOutput();
@@ -373,7 +376,7 @@ public function saveLoad(e:MouseEvent = null):void
 		addButton(14, "Back", EventParser.gameOver, true);
 		return;
 	}
-	if (player.str == 0) {
+	if (!player) {
 		addButton(14, "Back", kGAMECLASS.mainMenu.mainMenu);
 		return;
 	}
@@ -1441,12 +1444,11 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 	DungeonAbstractContent.inRoomedDungeonResume = null;
 
 	//Autosave stuff
-	player.slotName = slot;
-
-	var counter:Number = player.cocks.length;
+	if(player){
+        player.slotName = slot;
+	}
 	trace("Loading save!");
-	//Initialize the save file
-	//var saveFile:Object = loader.data.readObject();
+
 	var saveFile:* = saveData;
 	var data:Object = saveFile.data;
 	if (saveFile.data.exists)
