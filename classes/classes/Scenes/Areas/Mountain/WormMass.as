@@ -10,13 +10,11 @@ public class WormMass extends Monster
 			//Dodged!
 			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
 				outputText("The worm colony flails at you with its simulated arms, but its lack of coordination allows you to easily dodge its attack.\n");
-				combatRoundOver();
 				return;
 			}
 			//Evade
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "' attacks.\n");
-				combatRoundOver();
 				return;
 			}
 			var temp:int = int((str + weaponAttack) - Math.random()*(player.tou+player.armorDef));
@@ -27,7 +25,6 @@ public class WormMass extends Monster
 			outputText(" damage and the limb splatters, dispersing the worms comprising the false arm.");
 			statScreenRefresh();
 			outputText("\n");
-			combatRoundOver();
 			return;
 		}
 		
@@ -36,7 +33,6 @@ public class WormMass extends Monster
 			if(rand(2) == 0) {
 				if(player.lust < 50) outputText("The worm colony stands before you and begins secreting a significant amount of slime. You are perplexed as to why the worms have done this. You shrug your shoulders and remain on guard.\n");
 				else outputText("The worm colony shambles over to you and attempts to grapple you. Quickly sidestepping the clumsy movements of the creature, you avoid what could have been a horrible fate as the mass falls over and splatters in its failed attempt to engulf you.\n");
-				combatRoundOver();
 				return;
 			}
 			//SUCCESS
@@ -58,7 +54,6 @@ public class WormMass extends Monster
 					player.createStatusEffect(StatusEffects.InfestAttempted,0,0,0,0);
 				}
 			}
-			combatRoundOver();
 		}
 		
 		override protected function performCombatAction():void

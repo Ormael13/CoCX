@@ -12,7 +12,6 @@ public class Kiha extends Monster
 			game.spriteSelect(72);
 			outputText("She supports the axe on a shoulder, cracking her neck and arching her back to stretch herself, giving you an unintended show.  ");
 			player.dynStats("lus", 5);
-			combatRoundOver();
 		}
 
 		//This could be silly mode worthy! Should Expand? oh ok
@@ -47,7 +46,6 @@ public class Kiha extends Monster
 				outputText("\n");
 				if(player.HP >= 1) outputText("You follow the shrill cry of \"<i>B-BAKA!</i>\" in the distance until you reach the exact location you were in a few seconds earlier, prepared to fight again.");
 			}
-			combatRoundOver();
 		}
 
 		private function kihaFirePunch():void {
@@ -81,7 +79,6 @@ public class Kiha extends Monster
 				damage = player.takeMagicDamage(damage, true);
 				outputText("\n");
 			}
-			combatRoundOver();
 		}
 
 
@@ -112,7 +109,6 @@ public class Kiha extends Monster
 				damage = player.takeMagicDamage(damage, true);
 				outputText("\n");
 			}
-			combatRoundOver();
 		}
 		/*
 		Special 2: Kiha lifts her axe overhead and then hurls it at you in a surprising feat of speed and strength. Not keen on getting cleaved in two, you sidestep the jagged metal.

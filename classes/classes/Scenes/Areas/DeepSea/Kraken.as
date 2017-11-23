@@ -64,7 +64,6 @@ public class Kraken extends Monster
 				}
 				else krakenInkSpray();
 			}
-			combatRoundOver();
 		}
 		
 		public function Kraken() 

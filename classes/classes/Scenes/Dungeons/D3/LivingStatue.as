@@ -208,7 +208,6 @@ import classes.StatusEffects;
 				opts[rand(opts.length)]();
 			}
 			
-			combatRoundOver();
 		}
 		
 	}

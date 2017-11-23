@@ -109,7 +109,6 @@ if (this.lust < .65 * this.maxLust() && this.HP < .33 * this.maxHP()) {
 				goblinAI();
 			}
 			
-			combatRoundOver();
 		}
 		
 		private function performPhysicalAttack():void

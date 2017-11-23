@@ -36,7 +36,6 @@ public class Holli extends Monster
 			}
 			outputText("\n\n");
 			player.createStatusEffect(StatusEffects.HolliConstrict, 0, 0, 0, 0);
-			combatRoundOver();
 		}
 
 //End of Round, if no Jojo Fire -Z
@@ -88,7 +87,6 @@ public class Holli extends Monster
 
 				}
 			}
-			combatRoundOver();
 		}
 
 //if player uses whitefire/firebreath successfully, suppress these, go to 'Fire Lit' EOR events, and output additional line after the attack:
@@ -125,7 +123,6 @@ public class Holli extends Monster
 				var damage:Number = 20 + rand(10);
 				damage = player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 
 //constrict -Z
@@ -150,7 +147,6 @@ public class Holli extends Monster
 				player.dynStats("lus", 15);
 				player.createStatusEffect(StatusEffects.HolliConstrict, 0, 0, 0, 0);
 			}
-			combatRoundOver();
 		}
 
 		public function struggleOutOfHolli():void
@@ -176,7 +172,6 @@ public class Holli extends Monster
 				waitForHolliConstrict(false);
 				return;
 			}
-			combatRoundOver();
 		}
 
 		public function waitForHolliConstrict(newScreen:Boolean = true):void
@@ -187,7 +182,6 @@ public class Holli extends Monster
 			lust -= 20;
 			if (lust < 20) lust = 20;
 			player.dynStats("lus", 15 + player.sens / 5);
-			combatRoundOver();
 		}
 
 //heal -Z
@@ -198,7 +192,6 @@ public class Holli extends Monster
 			outputText("The bark splits part way and the woman's mouth suddenly explodes with color, her lips folding out into a rather yonic-looking orchid.  Copious white-tinted sap oozes from the bloom, coating her bark and healing the lesions.  Petals rustle as she speaks wetly through it.  \"<i>Your efforts are nothing!  Throw yourself on my mercy; be my slave and do my bidding!</i>\"");
 			//heal some fuckin' hp
 			addHP(200);
-			combatRoundOver();
 		}
 
 		override protected function performCombatAction():void

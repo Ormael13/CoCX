@@ -22,7 +22,6 @@ import classes.internals.*;
 			outputText("The gatekeeper raises his scimitars ");
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) > 0) {
 				outputText("and slashes his scimitars blindly, missing you by a great deal!");
-				combatRoundOver();
 				return;
 			}
 			else {
@@ -48,13 +47,11 @@ import classes.internals.*;
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		
 		public function scimitarCrossAttack():void {
 			if (!hasStatusEffect(StatusEffects.Uber)) {
 				outputText("The gatekeeper raises his scimitars! Judging from the way he is holding, <b>he is going to cross-slash you!</b>");
-				combatRoundOver();
 				return;
 			}
 			if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] > 0) {
@@ -70,7 +67,6 @@ import classes.internals.*;
 				player.takeDamage(damage, true);
 			}
 			removeStatusEffect(StatusEffects.Uber);
-			combatRoundOver();
 		}
 		
 		override public function doAI():void
@@ -83,7 +79,6 @@ import classes.internals.*;
 				}
 				if (statusEffectv1(StatusEffects.Stunned) <= 0) removeStatusEffect(StatusEffects.Stunned);
 				else addStatusValue(StatusEffects.Stunned, 1, -1);
-				combatRoundOver();
 				return;
 			}
 			if (hasStatusEffect(StatusEffects.Fear)) {

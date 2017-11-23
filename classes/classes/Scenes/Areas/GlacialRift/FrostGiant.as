@@ -29,7 +29,6 @@ public class FrostGiant extends Monster
 					player.takeDamage(damage, true);
 				}
 			}
-			combatRoundOver();
 		}
 		
 		public function giantGrab():void {
@@ -49,7 +48,6 @@ public class FrostGiant extends Monster
 				outputText("Your attempt to make way fails, and the giant grabs you in his very large, very cold, very strong hands. \"<i>Now, you die!</i>\"");
 				player.createStatusEffect(StatusEffects.GiantGrabbed, 2, 0, 0, 0);
 			}
-			combatRoundOver();
 		}
 		public function giantGrabStruggle():void {
 			if (rand(200) >= player.str || rand(10) == 0) giantGrabFail();
@@ -104,7 +102,6 @@ public class FrostGiant extends Monster
 					damage = 50 + rand(str * 0.4);
 					damage = player.reduceDamage(damage);
 					player.takeDamage(damage, true);
-					combatRoundOver();
 					break;
 				case 3:
 				case 4: //Ground Pound
@@ -114,7 +111,6 @@ public class FrostGiant extends Monster
 					damage = 180 + rand(str * 1.2);
 					damage = player.reduceDamage(damage);
 					player.takeDamage(damage, true);
-					combatRoundOver();
 					break;
 				case 5: //Throw
 					outputText("\"<i>Oh, little [race] wants to be let go? Ha! Then GO!</i>\" He rears back and chucks you as hard as he can against the nearest rock face. Fortunately, his aim is off and he throws you into a patch of snow. The snow helps cushion the impact, but you're still very disoriented. ");
@@ -124,10 +120,8 @@ public class FrostGiant extends Monster
 					damage = player.reduceDamage(damage);
 					if (damage < 50) damage = 50;
 					player.takeDamage(damage, true);
-					combatRoundOver();
 					break;
 				default:
-					combatRoundOver();
 			}
 		}
 		public function giantGrabSuccess():void {
@@ -141,14 +135,12 @@ public class FrostGiant extends Monster
 				outputText("Struggling with every fiber of your being, you manage to tickle the giant into dropping you. Slightly embarrassed, you get as far away from the giant without running away as you can, and ready your weapon. You think it wise to try to escape. ");
 			}
 			player.removeStatusEffect(StatusEffects.GiantGrabbed);
-			combatRoundOver();
 		}
 		
 		public function giantBoulderThrow():void {
 			outputText("The giant walks over to a boulder much larger than you and hefts it up. You had better wait and be ready to dodge, or this could be very bad. ");
 			outputText("<b>With a grunt and a shove, the giant throws the boulder directly at you!</b>");
 			if (!player.hasStatusEffect(StatusEffects.GiantBoulder)) player.createStatusEffect(StatusEffects.GiantBoulder, 0, 0, 0, 0);
-			combatRoundOver();
 		}
 		public function giantBoulderFantasize():void {
 			outputText("You wonder how you could fuck something so large. ");
@@ -179,7 +171,6 @@ public class FrostGiant extends Monster
 			if (damage < 200) damage = 200;
 			player.takeDamage(damage, true);
 			outputText("\n\n");
-			combatRoundOver();
 		}
 		public function giantBoulderMiss():void {
 			clearOutput();
@@ -189,7 +180,6 @@ public class FrostGiant extends Monster
 			damage = player.reduceDamage(damage);
 			player.takeDamage(damage, true);
 			outputText("\n\n");
-			combatRoundOver();
 		}
 		
 		override protected function performCombatAction():void

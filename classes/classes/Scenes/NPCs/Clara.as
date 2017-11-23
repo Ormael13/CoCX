@@ -13,7 +13,6 @@ public class Clara extends Monster
 			HP += 45;
 			lust += 5;
 			player.dynStats("lus", (5+player.lib/5));
-			combatRoundOver();
 		}
 		//Clara throws a goblin potion, she has the web potion, the lust potion, and the weakening potion
 		//should she try to drug them instead?
@@ -42,8 +41,6 @@ public class Clara extends Monster
 					EngineCore.fatigue(10 + rand(25));
 				}
 			}
-			combatRoundOver();
-			return;
 		}
 		//Clara teases the PC, and tries to get them to give up
 		protected function claraTeaseAttack():void
@@ -54,7 +51,6 @@ public class Clara extends Monster
 			else outputText("Instead of attacking, Clara runs her hands up and down her body, emphasizing all the curves it has.  \"<i>You were made to be the milk slave of this, stop fighting it!</i>\" she says almost exasperated.  Even so, you find your gaze lingering on those curves against your will.");
 			outputText("\n");
 			player.dynStats("lus",5+player.lib/20);
-			combatRoundOver();
 		}
 
 		//Once Clara is at half health or lower, she'll cast blind.
@@ -71,7 +67,6 @@ public class Clara extends Monster
 					outputText("Your mutated eyes not been affected at all by this flash!");
 				}
 			else outputText("\nYou manage to close your eyes just in time to avoid being blinded by the bright flash of light that erupts in your face!  Clara curses when she see's you're unaffected by her magic.");
-			combatRoundOver();
 		}
 		public function claraGropesBlindPCs():void
 		{
@@ -82,21 +77,18 @@ public class Clara extends Monster
 			//Bum: 
 			else outputText("Thanks to Clara robbing you of your sight, you lose track of her.  She takes advantage of this, and grabs you from behind, and rubs her considerable curvy cans against your undefended back!  You manage to get her off you after a moment, but not before she gives your [ass] a smack.  \"<i>Everyone will be soo much happier when yoou finally stop fighting me!</i>\" she taunts you behind your dazzled vision.");
 			player.dynStats("lus",7+player.lib/15);
-			combatRoundOver();
 		}
 		//Every round if you're in Clara’s base; the PC’s lust is raised slightly.
 		protected function claraBonusBaseLustDamage():void
 		{
 			outputText("\nThe early effects of your addiction are making it harder and harder to continue the fight.  You need to end it soon or you’ll give in to those urges.");
 			player.dynStats("lus",2+player.lib/20);
-			combatRoundOver();
 		}
 		override protected function performCombatAction():void
 		{
 			if(player.hasStatusEffect(StatusEffects.ClaraFoughtInCamp) && player.statusEffectv1(StatusEffects.ClaraCombatRounds) >= 10)
 			{
 				HP = 0;
-				combatRoundOver();
 			}
 			if(HP < 50 && rand(2) == 0) {
 				notMurbleEnjoysTheLacticAcid();

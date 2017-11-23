@@ -29,7 +29,6 @@ public class LoliBatGolem extends Monster
 			var choice:Number = rand(2);
 			if (choice == 0) eAttack();
 			if (choice == 1) clawstrike();
-			combatRoundOver();
 		}
 		
 	//	override public function defeated(hpVictory:Boolean):void

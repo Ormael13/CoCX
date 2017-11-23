@@ -30,7 +30,6 @@ public class SandTrap extends Monster
 			}
 			outputText("\n\n");
 			doAI();
-			//combatRoundOver();
 		}
 
 		public function trapLevel(adjustment:Number = 0):Number {
@@ -89,7 +88,6 @@ public class SandTrap extends Monster
 					trapLevel(-1);
 				}
 				else removeStatusEffect(StatusEffects.Climbed);
-				combatRoundOver();
 			} else super.performCombatAction();
 		}
 

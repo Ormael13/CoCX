@@ -135,7 +135,6 @@ public class HeroslayerOmnibus extends Monster
 				}
 				if (choice == 4) eAttack();
 			}
-			combatRoundOver();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void

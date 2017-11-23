@@ -107,7 +107,6 @@ use namespace kGAMECLASS;
 					else */moveMasturbate();
 				}
 			}
-			combatRoundOver();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void

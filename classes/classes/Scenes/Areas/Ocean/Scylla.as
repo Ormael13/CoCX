@@ -64,7 +64,6 @@ public class Scylla extends Monster
 				}
 				else scyllaInkSpray();
 			}
-			combatRoundOver();
 		}
 		
 		public function Scylla() 

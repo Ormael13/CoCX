@@ -143,7 +143,6 @@ public class Lethice extends Monster
 				case 3: phase3(); break;
 				default: phase1(); break;
 			}
-			combatRoundOver();
 		}
 
 		private function phase1():void
@@ -339,7 +338,6 @@ public class Lethice extends Monster
 			if (hasStatusEffect(StatusEffects.PhysicalDisabled)) removeStatusEffect(StatusEffects.PhysicalDisabled);
 			if (hasStatusEffect(StatusEffects.AttackDisabled)) removeStatusEffect(StatusEffects.AttackDisabled);
 			
-			combatRoundOver();
 		}
 
 		private function phase2():void
@@ -348,7 +346,6 @@ public class Lethice extends Monster
 			if (rand(10) == 0 && !player.hasStatusEffect(StatusEffects.Blind)) atks.push(bukkakeTime);
 
 			atks[rand(atks.length)]();
-			combatRoundOver();
 		}
 
 		private function demonLustMagic():void
@@ -629,7 +626,7 @@ public class Lethice extends Monster
 			EngineCore.menu();
 			
 			if (doLethNext) EngineCore.addButton(0, "Next", p2Next);
-			else combatRoundOver();
+			else SceneLib.combat.combatRoundOver();
 		}
 
 		private function phase3():void

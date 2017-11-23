@@ -50,7 +50,6 @@ public class Ember extends Monster
 					damage = player.takeDamage(damage, true);
 				}
 			}
-			combatRoundOver();
 		}
 		
 		//Dragon Breath: Very rare attack, very high damage
@@ -80,7 +79,6 @@ public class Ember extends Monster
 					damage2 = player.takeMagicDamage(damage2, true);
 				}
 			}
-			combatRoundOver();
 		}
 		
 		//Tailslap: Rare attack, high damage, low accuracy
@@ -88,7 +86,6 @@ public class Ember extends Monster
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind)) {
 				outputText(capitalA + short + " completely misses you with a blind tail-slap!");
-				combatRoundOver();
 				return;
 			}
 			outputText("Ember suddenly spins on "+ emberMF("his","her") + " heel, the long tail that splays behind " + emberMF("him","her") + " lashing out like a whip.  As it hurtles through the air towards you, your attention focuses on the set of spikes suddenly protruding from its tip!");
@@ -105,7 +102,6 @@ public class Ember extends Monster
 				outputText("  The tail slams into you with bone-cracking force, knocking you heavily to the ground even as the spines jab you wickedly.  You gasp for breath in pain and shock, but manage to struggle to your feet again. ");
 				damage3 = player.takeDamage(damage3, true);
 			}
-			combatRoundOver();
 		}
 				
 		//Dragon Force: Tainted Ember only
@@ -126,7 +122,6 @@ public class Ember extends Monster
 				var damage4:Number = 10 + rand(10);
 				damage4 = player.takeDamage(damage4, true);
 			}
-			combatRoundOver();
 		}
 		
 		override protected function performCombatAction():void

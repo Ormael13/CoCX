@@ -71,7 +71,6 @@ public class Rangiku extends Monster
 				}
 				if (choice1 >= 2) eAttack();
 			}
-			combatRoundOver();
 		}
 		
 		override public function get long():String

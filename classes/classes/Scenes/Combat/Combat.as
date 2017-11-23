@@ -987,7 +987,6 @@ public function packAttack():void {
 		statScreenRefresh();
 		outputText("\n");
 	}
-	combatRoundOver();
 }
 
 public function lustAttack():void {
@@ -1010,7 +1009,6 @@ public function lustAttack():void {
 		if (player.gender == 0) outputText("groin, before remember there is nothing there to caress.");
 	}
 	dynStats("lus", 10 + player.sens / 10);
-	combatRoundOver();
 }
 
 internal function wait():void {
@@ -1244,6 +1242,7 @@ internal function wait():void {
 	}
 	else if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) {
 		(monster as FrostGiant).giantGrabStruggle();
+		combatRoundOver(); // TODO @aimozg other cases
 	}
 	else {
 		clearOutput();
@@ -3418,6 +3417,7 @@ public function enemyAIImpl():void {
 	}
 	if (player.hasStatusEffect(StatusEffects.TranceTransformation)) player.soulforce -= 50;
 	if (player.hasStatusEffect(StatusEffects.CrinosShape)) player.wrath -= mspecials.crinosshapeCost();
+	combatRoundOver();
 }
 public function finishCombat():void
 {

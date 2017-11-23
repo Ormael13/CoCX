@@ -28,8 +28,6 @@ inspection and compare it with description.
 Default monsters can have up to 3 special attacks stored in fields `special1`, `special2`, `special3`.
 Values could be either 5xxx event codes (old-style, use **ONLY** for existing special) or function references.
 
-Any special attack at all the return points should call `combatRoundOver()` to mark end of monster action.
-
 ### Scenes: approach, defeated, won
 
 You might want to write a special Scene class for the monster, which will contain

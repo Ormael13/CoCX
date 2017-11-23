@@ -125,7 +125,6 @@ public class Alraune extends Monster
 					trapLevel(-1);
 				}
 				else removeStatusEffect(StatusEffects.Climbed);
-				combatRoundOver();
 			}
 			else super.performCombatAction();
 		}

@@ -80,7 +80,6 @@ public class GooGirl extends Monster
 			if (damage > 0) player.takeDamage(damage, true);
 			statScreenRefresh();
 			outputText("\n");
-			combatRoundOver();
 		}
 
 //Play – 
@@ -88,7 +87,6 @@ public class GooGirl extends Monster
 		{
 			outputText("The goo-girl lunges, wrapping her slimy arms around your waist in a happy hug, hot muck quivering excitedly against you. She looks up, empty eyes confused by your lack of enthusiasm and forms her mouth into a petulant pout before letting go.  You shiver in the cold air, regretting the loss of her embrace.");
 			player.dynStats("lus", 3 + rand(3) + player.sens / 10);
-			combatRoundOver();
 		}
 
 //Throw – 
@@ -98,7 +96,6 @@ public class GooGirl extends Monster
 			var damage:Number = 1;
 			player.takeDamage(damage, true);
 			player.dynStats("lus", 5 + rand(3) + player.sens / 10);
-			combatRoundOver();
 		}
 
 //Engulf – 
@@ -106,7 +103,6 @@ public class GooGirl extends Monster
 		{
 			outputText("The goo-girl gleefully throws her entire body at you and, before you can get out of the way, she has engulfed you in her oozing form! Tendrils of " + skinTone + " slime slide up your nostrils and through your lips, filling your lungs with the girl's muck. You begin suffocating!");
 			if (!player.hasStatusEffect(StatusEffects.GooBind)) player.createStatusEffect(StatusEffects.GooBind, 0, 0, 0, 0);
-			combatRoundOver();
 		}
 
 		override protected function performCombatAction():void

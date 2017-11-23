@@ -24,7 +24,6 @@ public class UnderwaterSharkGirl extends Monster
 				player.takeDamage(10+rand(10), true);
 				player.dynStats("lus", (5+(player.lib/5)));
 			}
-			combatRoundOver();
 		}
 		private function sharkBiteAttack():void {
 			game.spriteSelect(70);
@@ -34,7 +33,6 @@ public class UnderwaterSharkGirl extends Monster
 			player.takeDamage(damage, true);
 			if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
 			else player.createStatusEffect(StatusEffects.Hemorrhage,3,0.05,0,0);
-			combatRoundOver();
 		}
 		/*
 		override public function defeated(hpVictory:Boolean):void

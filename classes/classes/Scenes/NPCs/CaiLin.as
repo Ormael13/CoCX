@@ -40,7 +40,6 @@ public class CaiLin extends Monster
 				}
 			}
 			if (choice == 5) castSpell();
-			combatRoundOver();
 		}
 		
 		public function medusaPoisonBiteAttack():void {

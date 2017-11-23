@@ -52,14 +52,12 @@ public class SpiderMorphMob extends Monster
 			//SPIDER HORDE WEB - Miss (guaranteed if turns 1-3 and PC lost to Kiha)
 			if(hasStatusEffect(StatusEffects.MissFirstRound) || player.getEvasionRoll()) {
 				outputText("One of the driders launches a huge glob of webbing right at you!  Luckily, Kiha manages to burn it out of the air with a well-timed gout of flame!");
-				combatRoundOver();
 			}
 			else {
 				outputText("Some of the spiders and driders launch huge globs of wet webbing right at you, hitting you in the torso!  You try to wiggle out, but it's no use; you're stuck like this for now.  Though comfortingly, the driders' open stance and self-satisfaction allow Kiha to blast them in the side with a huge conflagration!");
 				//(PC cannot attack or use spells for one turn; can use Magical Special and Possess)
 				player.createStatusEffect(StatusEffects.UBERWEB,0,0,0,0);
 				HP -= 250;
-				combatRoundOver();
 			}
 		}
 
@@ -69,7 +67,6 @@ public class SpiderMorphMob extends Monster
 			outputText("While they're tangled up with you, however, Kiha takes the opportunity to get in a few shallow swings with her axe, to the accompaniment of crunching chitin.");
 			//horde loses HP
 			HP -= 50;
-			combatRoundOver();
 		}
 
 		override protected function performCombatAction():void

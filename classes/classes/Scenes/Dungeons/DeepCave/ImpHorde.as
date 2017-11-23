@@ -20,7 +20,6 @@ public class ImpHorde extends Monster
 				outputText("\nOne of the tiny demons latches onto one of your [legs] and starts humping it.  You shake the little bastard off and keep fighting!");
 				player.dynStats("lus", 1);
 			}
-			combatRoundOver();
 		}
 		
 		public function impGangUber():void {

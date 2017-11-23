@@ -94,7 +94,6 @@ public class Gorgon extends Monster
 				else player.takeDamage(15+rand(15));
 				player.takeDamage(15+rand(15));
 			}
-			combatRoundOver();
 		}
 		
 		public function gorgonConstrict():void {
@@ -103,7 +102,6 @@ public class Gorgon extends Monster
 			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
 				player.takeDamage(4+rand(8));
 			}
-			combatRoundOver();
 		}
 		
 		public function TailWhip():void {
@@ -125,7 +123,6 @@ public class Gorgon extends Monster
 				damage += rand(25);
 				damage = player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		
 		public function petrify():void {
@@ -133,7 +130,6 @@ public class Gorgon extends Monster
 			player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 			createStatusEffect(StatusEffects.AbilityCooldown1, 3, 0, 0, 0);
 			if (player.hasStatusEffect(StatusEffects.NagaBind)) player.removeStatusEffect(StatusEffects.NagaBind);
-			combatRoundOver();
 		}
 		
 		public function Gorgon() 

@@ -25,7 +25,6 @@ public class Vala extends Monster
 				outputText("  The cloying, thick cloud of pink spools out from her mouth and fills the room with a haze of bubblegum-pink sweetness.  Even the shallowest, most experimental breath makes your heart pound and your crotch thrum with excitement.  You gasp in another quick breath and sway back and forth on your feet, already on the edge of giving in to the faerie.");
 				player.dynStats("lus", 30 + player.lib/10);
 			}
-			combatRoundOver();
 		}
 		//Milk magic
 		public function valaSpecial2():void {
@@ -42,13 +41,11 @@ public class Vala extends Monster
 				outputText("You aren't sure if there's something in her milk, the dust, or just watching her squirt and shake for you, but it's turning you on.");
 			}
 			player.dynStats("lus", statusEffectv1(StatusEffects.Milk) + player.lib / 20);
-			combatRoundOver();
 		}
 		//Masturbation
 		public function valaMasturbate():void {
 			outputText("The mind-fucked faerie spreads her alabaster thighs and dips a finger into the glistening slit between her legs, sliding in and out, only pausing to circle her clit.  She brazenly masturbates, putting on quite the show.  Vala slides another two fingers inside herself and finger-fucks herself hard, moaning and panting lewdly.  Then she pulls them out and asks, \"<i>Did you like that?  Will you fuck Vala now?</i>\"");
 			player.dynStats("lus", 4 + player.cor/10);
-			combatRoundOver();
 		}
 
 

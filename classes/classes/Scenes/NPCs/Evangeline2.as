@@ -255,7 +255,6 @@ public class Evangeline2 extends Monster
 					}
 					//if (choice3 == 3) EvangelineTease();
 				}
-				combatRoundOver();
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 8 || flags[kFLAGS.EVANGELINE_LVL_UP] == 9) {
 				//var choice2:Number = rand(3);
@@ -273,7 +272,6 @@ public class Evangeline2 extends Monster
 					else eAttack();
 				}
 				//if (choice2 == 3) EvangelineTease();
-				combatRoundOver();
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 7) {
 				//var choice1:Number = rand(3);
@@ -300,7 +298,6 @@ public class Evangeline2 extends Monster
 					}
 				}
 				//if (choice1 == 3) EvangelineTease();
-				combatRoundOver();
 			}
 		}
 		

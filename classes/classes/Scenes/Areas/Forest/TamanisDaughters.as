@@ -76,7 +76,6 @@ public class TamanisDaughters extends Goblin
 					special3();
 					break;
 			}
-			combatRoundOver();
 		}
 
 		override public function defeated(hpVictory:Boolean):void

@@ -210,7 +210,6 @@ import classes.internals.*;
 				if (plural) outputText("Your foes are too dazed from your last hit to strike back!");
 				else outputText("Your foe is too dazed from your last hit to strike back!");
 				removeStatusEffect(StatusEffects.Stunned);
-				combatRoundOver();
 			}
 			if (hasStatusEffect(StatusEffects.Fear)) {
 				if (statusEffectv1(StatusEffects.Fear) == 0) {
@@ -228,7 +227,6 @@ import classes.internals.*;
 					if (plural) outputText(capitalA + short + " are too busy shivering with fear to fight.");
 					else outputText(capitalA + short + " is too busy shivering with fear to fight.");
 				}
-				combatRoundOver();
 			}
 			var select:Number = 1;
 			var rando:Number = 1;
@@ -245,7 +243,6 @@ import classes.internals.*;
 					removeStatusEffect(StatusEffects.Constricted);
 				}
 				addStatusValue(StatusEffects.Constricted, 1, -1);
-				combatRoundOver();
 			}
 
 			if (rand(2) == 0) gnollTease();
@@ -327,7 +324,6 @@ import classes.internals.*;
 				}
 				gnollAttackText();
 			}
-			combatRoundOver();
 		}
 
 

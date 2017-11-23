@@ -53,7 +53,6 @@ public class GoblinAssassin extends Monster
 				outputText("\nThe black fluid splashes all over you and wicks into your skin near-instantly.  It makes you feel tired and drowsy.\n");
 				EngineCore.fatigue(10 + rand(25));
 			}
-			combatRoundOver();
 			return;
 		}
 		//Lust Needle
@@ -72,7 +71,6 @@ public class GoblinAssassin extends Monster
 				outputText("\nYou’re far too distracted to notice the needle injected into the back of your neck, but by the time she flips back into her original position you already feel the contents of the syringe beginning to take effect.");
 				player.dynStats("lus", rand(player.lib/4)+20);
 			}
-			combatRoundOver();
 		}
 		//Dual Shot
 		protected function dualShot():void {
@@ -89,7 +87,6 @@ public class GoblinAssassin extends Monster
 				var damage:int = int((str + weaponAttack + 40) - rand(player.tou) - player.armorDef);
 				damage = player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		//Explosion
 		protected function goblinExplosion():void {
@@ -101,7 +98,6 @@ public class GoblinAssassin extends Monster
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			damage = Math.round(damage);
 			damage = player.takeMagicDamage(damage, true);
-			combatRoundOver();
 		}
 		override public function defeated(hpVictory:Boolean):void
 		{

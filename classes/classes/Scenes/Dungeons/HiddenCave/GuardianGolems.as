@@ -28,7 +28,6 @@ public class GuardianGolems extends Monster
 			var choice:Number = rand(3);
 			if (choice < 2) eAttack();
 			if (choice == 2) backhand();
-			combatRoundOver();
 		}
 		
 	//	override public function defeated(hpVictory:Boolean):void

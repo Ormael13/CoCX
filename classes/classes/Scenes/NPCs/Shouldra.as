@@ -58,7 +58,6 @@ import classes.internals.*;
 			}
 			statScreenRefresh();
 			outputText("\n");
-			combatRoundOver();
 		}
 
 		//(lust attack 1)
@@ -66,14 +65,12 @@ import classes.internals.*;
 			if(rand(2) == 0) outputText("The girl spins away from one of your swings, her tunic flaring around her hips. The motion gives you a good view of her firm and moderately large butt. She notices your glance and gives you a little wink.\n");
 			else outputText("The girl's feet get tangled on each other and she tumbles to the ground. Before you can capitalize on her slip, she rolls with the impact and comes up smoothly. As she rises, however, you reel back and raise an eyebrow in confusion; are her breasts FILLING the normally-loose tunic? She notices your gaze and smiles, performing a small pirouette on her heel before squaring up to you again. Your confusion only heightens when her torso comes back into view, her breasts back to their normal proportions. A trick of the light, perhaps? You shake your head and try to fall into the rhythm of the fight.\n");
 			player.dynStats("lus", (8+player.lib/10));
-			combatRoundOver();
 		}
 		//(magic attack)
 		private function shouldraMagicLazers():void {
 			outputText("Falling back a step, the girl raises a hand and casts a small spell. From her fingertips shoot four magic missiles that slam against your skin and cause a surprising amount of discomfort. ");
 			var damage:Number = player.takeMagicDamage(this.inte + rand(10), true);
 			outputText("\n");
-			combatRoundOver();
 		}
 
 		override protected function performCombatAction():void

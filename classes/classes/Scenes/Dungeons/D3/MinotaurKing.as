@@ -88,14 +88,14 @@ public class MinotaurKing extends Monster
 			if (_orgasms == 0 && !hpVictory)
 			{
 				lustDump();
-				combatRoundOver();
+				SceneLib.combat.combatRoundOver();
 				return;
 			}
 			
 			if (hpVictory)
 			{
 				hpRestore();
-				combatRoundOver();
+				SceneLib.combat.combatRoundOver();
 				return;
 			}
 			
@@ -138,7 +138,6 @@ public class MinotaurKing extends Monster
 				atks[rand(atks.length)]();
 			}
 
-			combatRoundOver();
 		}
 
 		private function backhand():void

@@ -115,7 +115,6 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 				opts[rand(opts.length)]();
 			}
 			statScreenRefresh();
-			combatRoundOver();
 		}
 		
 		override protected function handleStun():Boolean
@@ -214,7 +213,6 @@ this.HP = this.maxHP();
 				
 				player.removeStatusEffect(StatusEffects.Tentagrappled);
 				
-				combatRoundOver();
 			}
 			else
 			{
@@ -235,7 +233,6 @@ this.HP = this.maxHP();
 				}
 				player.dynStats("lus+", 3 + rand(3));
 				if (flags[kFLAGS.PC_FETISH] >= 2) player.dynStats("lus+", 5);
-				combatRoundOver();
 			}
 		}
 		
@@ -262,7 +259,6 @@ this.HP = this.maxHP();
 				player.takeDamage(.75*this.str + rand(15));
 			}
 			player.dynStats("lus+", 3 + rand(3));
-			combatRoundOver();
 		}
 		
 		private function sicem():void
@@ -359,7 +355,6 @@ this.HP = this.maxHP();
 			{
 				outputText("Ohhh fuck, there's no holding it back now. You're gonna do it, and there's nothing you could do it stop it even if you wanted to. You're going to drop to your knees and take off your [armor]. You're going to give this beautiful demoness what she wants. You're going to let her fuck you and use you, just so long as she allows you to cum. You'll be fine once you cum, even if it means throwing away a chance to defeat Lethice.\n\n");
 				// I think this will work, but 9999 in case
-				combatRoundOver();
 				return;
 			}
 			

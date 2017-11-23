@@ -31,7 +31,6 @@ public class SandMother extends Monster
 			//Surrounds the witch a vortex of stones, raising her defense greatly and conferring 25% block to standard attacks.
 			outputText("Lowering her scepter towards the ground, the eight-foot tall sorceress suddenly grunts, lifting it as if carrying great weight.  As the small staff passes her chest, bits of stone and rock begin to lift out of the ground, accelerating into a vortex of earth that spins around her.  <b>It's going to be harder to hit her with physical attacks now!</b>");
 			createStatusEffect(StatusEffects.Earthshield,0,0,0,0);
-			combatRoundOver();
 		}
 		//*GigaFire
 		public function gigaFire():void {
@@ -39,7 +38,6 @@ public class SandMother extends Monster
 			outputText("Releasing the scepter, the Sand Mother spreads her hands, each glowing with eldritch, white flames.  Her heels slowly float up off the ground as she closes her eyes in concentration.  You can sense the power and heat rolling off her in waves, and if you don't do something to disrupt her, you'll likely be burned to a crisp.");
 			if(player.inte > 40) outputText("  She's not even looking at you and seems steeled against lusty interruptions.  Perhaps you can hit her hard enough to shatter her concentration.");
 			createStatusEffect(StatusEffects.Gigafire,0,0,0,0);
-			combatRoundOver();
 		}
 		public function gigaFire2():void {
 			var damage:int = 40 + rand(11);
@@ -72,7 +70,6 @@ public class SandMother extends Monster
 			damage = Math.round(damage);
 			damage = player.takeMagicDamage(damage, true);
 			removeStatusEffect(StatusEffects.Gigafire);
-			combatRoundOver();
 		}
 			
 		//*Telekinesis
@@ -95,7 +92,6 @@ public class SandMother extends Monster
 			var damage:Number = 20;
 			damage = multiplier * damage;
 			damage = player.takeDamage(damage, true);
-			combatRoundOver();
 		}
 		
 		//*Lightning Bolt
@@ -104,7 +100,6 @@ public class SandMother extends Monster
 			outputText("Holding her staff back, she lifts her free hand with her fingers outstretched in a fan.  Sparks dance between her slender digits, coiling around them like snakes.  In a flash, they rush to her palm and erupt in a lightning bolt, striking you instantly and unavoidably! ");
 			var damage:int = 30 + rand(10);
 			damage = player.takeMagicDamage(damage, true);
-			combatRoundOver();
 		}
 		//*Whisper:
 		//As ackbal, stuns the PC 1 round.  Cannot be resisted.
@@ -112,12 +107,10 @@ public class SandMother extends Monster
 			outputText("Mouthing, \"<i>Can you hear me?</i>\" the witch's voice intrudes into your mind, matching her mouth word for word.  She floods your psyche with words and thoughts, all of your defeat or submission, each more degrading and more humiliating than the last.  Perhaps the worst are the ones where she turns you over to Lethice after you're broken...  The tumultous thoughts and emotions both stun and arouse you, preventing you from attacking while you try to clear your beleaguered consciousness.");
 			player.createStatusEffect(StatusEffects.Whispered,0,0,0,0);
 			player.dynStats("lus", 15);
-			combatRoundOver();
 		}
 		public function sandStormAttack():void {
 			outputText("With a smirk, the Sand Mother decrees, \"<i>You fight not just me, but the shifting sands as well.</i>\"  She casually flicks her wrist, and sand rises up from the floors, the walls, everywhere really.  It begins to spin about, blown by an unseen wind, and the entire chamber is wreathed in a shifting sandstorm.  The grit constantly tries to get into your eyes.  It's likely you're going to be blinded by it every now and then.");
 			createStatusEffect(StatusEffects.Sandstorm,0,0,0,0);
-			combatRoundOver();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void

@@ -45,7 +45,6 @@ public class Sirius extends Naga
 //Miss:
 			if (rand(10) == 0) {
 				outputText("  You blink and shake yourself free of the effects of the snake-man's penetrating gaze.");
-				combatRoundOver();
 			}
 //Hit (Blind):
 			if (hasStatusEffect(StatusEffects.Blind)) {
@@ -57,7 +56,6 @@ public class Sirius extends Naga
 				outputText("  Those pools of yellow suck you into their golden depths, making you forget all your worries, if only for an instant.  All you can focus on is your growing arousal as you sink deeper into his gaze.  You shake your head, clearing your mind of the hypnotising effects the snake-man's eyes seem to possess, though the arousal remains.");
 				player.dynStats("lus", (10 + player.lib / 7 - player.inte / 20));
 			}
-			combatRoundOver();
 		}
 
 		private function nagaSpitAttack():void
@@ -70,7 +68,6 @@ public class Sirius extends Naga
 			}
 			//Miss:
 			else outputText("You quickly lean to the side, narrowly avoiding being blinded by the snake-man's spit!");
-			combatRoundOver();
 		}
 
 		private function poisonBite():void
@@ -79,13 +76,11 @@ public class Sirius extends Naga
 //Miss:
 			if (player.getEvasionRoll()) {
 				outputText("You dodge just in the nick of time, and deliver a punishing blow with the butt of your halberd as Sirius soars past, forcing him to slither past you to make himself ready to defend himself again.");
-				combatRoundOver();
 			}
 //Hit:
 			outputText("The snake-man moves too quickly for you to evade and he sinks long fangs into your flesh, leaving a wound that burns with horrific pain. ");
 			var damage:Number = 40 + rand(20);
 			damage = player.takeMagicDamage(damage, true);
-			combatRoundOver();
 		}
 
 		override public function defeated(hpVictory:Boolean):void

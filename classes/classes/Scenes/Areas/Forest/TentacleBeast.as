@@ -24,7 +24,6 @@ public class TentacleBeast extends Monster
 				outputText("The tentacles crash upon your body mercilessly. ");
 				player.takeDamage(temp, true);
 			}
-			combatRoundOver();
 		}
 		private function tentacleEntwine():void {
 			outputText("The beast lunges its tentacles at you from all directions in an attempt to immobilize you.\n");
@@ -47,7 +46,6 @@ public class TentacleBeast extends Monster
 					player.createStatusEffect(StatusEffects.TentacleBind,0,0,0,0);
 				}
 			}
-			combatRoundOver();
 		}
 
 		override public function defeated(hpVictory:Boolean):void

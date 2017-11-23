@@ -12,7 +12,6 @@ public class Kelt extends Monster
 			//Miss:
 			if(player.getEvasionRoll()) {
 				outputText("You roll out of the way at the last moment, avoiding his dangerous hooves.");
-				combatRoundOver();
 				return;
 			}
 
@@ -29,7 +28,6 @@ public class Kelt extends Monster
 				outputText("You can't get out of the way in time, and you're knocked down!  Kelt tramples overtop of you!  ");
 			}
 			if(damage > 0) damage = player.takeDamage(damage, true);
-			combatRoundOver();
 		}
 
 		//Arrow Attack
@@ -40,13 +38,11 @@ public class Kelt extends Monster
 			//Miss:
 			if (player.getEvasionRoll()) {
 				outputText("You manage to avoid the missile by the skin of your teeth!");
-				combatRoundOver();
 				return;
 			}
 			if (player.hasStatusEffect(StatusEffects.WindWall)) {
 				outputText("Still his arrow hits wind wall dealing no damage to you.");
 				player.addStatusValue(StatusEffects.WindWall,2,-1);
-				combatRoundOver();
 				return;
 			}
 
@@ -55,14 +51,12 @@ public class Kelt extends Monster
 			if(damage < 0) damage = 0;
 			if(damage == 0) {
 				outputText("You deflect the hit, preventing it from damaging you.");
-				combatRoundOver();
 				return;
 			}
 			//Hit:
 			
 			outputText("The arrow bites into you before you can react. ");
 			damage = player.takeDamage(damage, true);
-			combatRoundOver();
 		}
 
 		//Aura Arouse
@@ -79,7 +73,6 @@ public class Kelt extends Monster
 				else outputText("Your hands twitch towards your groin but you arrest them.  Still, the idea seems to buzz at the back of your brain, exciting you.");
 			}
 			player.dynStats("lus", player.lib/5 + rand(10));
-			combatRoundOver();
 		}
 
 		//Attacks as normal + daydream "attack"
@@ -88,7 +81,6 @@ public class Kelt extends Monster
 			if(rand(2) == 0) outputText("Kelt pauses mid-draw, looking you up and down.  He licks his lips for a few moments before shaking his head to rouse himself from his lusty stupor.  He must miss the taste of your sperm.");
 			else outputText("Flaring 'his' nostrils, Kelt inhales deeply, his eyelids fluttering closed as he gives a rather lady-like moan.   His hands roam over his stiff nipples, tweaking them slightly before he recovers.");
 			lust += 5;
-			combatRoundOver();
 		}
 
 

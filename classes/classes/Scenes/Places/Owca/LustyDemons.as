@@ -20,7 +20,6 @@ public class LustyDemons extends Monster
 			str = 140;
 			this.weaponAttack = 56 + (12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			eAttack();
-			combatRoundOver();
 		}
 
 		override public function defeated(hpVictory:Boolean):void

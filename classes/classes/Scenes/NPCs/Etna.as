@@ -103,7 +103,6 @@ use namespace kGAMECLASS;
 				if (choice > 4 && choice < 8) moveTailSpike();
 				if (choice > 7) moveTakeFlight();
 			}
-			combatRoundOver();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void

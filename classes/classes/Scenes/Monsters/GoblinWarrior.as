@@ -19,7 +19,6 @@ public class GoblinWarrior extends Goblin
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		
 		public function shieldBash():void {
@@ -38,7 +37,6 @@ public class GoblinWarrior extends Goblin
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		
 		public function warriorSpecial():void {

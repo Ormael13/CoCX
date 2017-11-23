@@ -199,7 +199,6 @@ public class Evangeline3 extends Monster
 					}
 					//if (choice1 == 3) EvangelineTease();
 				}
-				combatRoundOver();
 			}
 		}//HPRatio() > .5 - to używać jeśli coś ma być użyte powyżej lub poniżej x% max HP Evangeline
 		

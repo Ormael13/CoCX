@@ -99,7 +99,6 @@ import classes.internals.*;
 			if(damage > 0) damage = player.takeDamage(damage, true);
 			statScreenRefresh();
 			outputText("\n");
-			combatRoundOver();
 		}
 		
 		//<Writers note: I recommend that the javelin have a chance to greatly decrease speed for the remaining battle.  I am writing the flavor text for this event if you choose to include it>
@@ -150,7 +149,6 @@ import classes.internals.*;
 				outputText("The gnoll pulls a long, dark wooden javelin from over her shoulder.  Her spotted arm strikes forward, launching the missile through the air.  The javelin flashes through the intervening distance, slamming into your chest.  The blunted tip doesn't skewer you, but pain radiates from the bruising impact. ");
 				damage = player.takeDamage(25+rand(20), true);
 			}
-			combatRoundOver();
 		}
 		
 		//<Writer's Note: With the third attack, I intend that the damage be increased based on the breast size of the player.  Thus, the text will vary if the player is flat-chested as indicated by colored text.>
@@ -194,7 +192,6 @@ import classes.internals.*;
 					player.takeDamage(damage, true);
 				}
 			}
-			combatRoundOver();
 		}
 		
 		private function hyenaArousalAttack():void {
@@ -214,7 +211,6 @@ import classes.internals.*;
 			else {
 				outputText("A knowing glint fills the dark eyes of the gnoll before she sprints forward.  Your muscles tense as she reaches you and starts to lock two spotted paws behind your neck.  She pulls you down towards her musky crotch, but just as you brush her loincloth, you twist away.  The hyena snarls in frustration, and you're left wondering if that was her idea of foreplay.");
 			}
-			combatRoundOver();
 		}
 
 		override public function eAttack():void
@@ -302,7 +298,6 @@ import classes.internals.*;
 			if (damage > 0) damage = player.takeDamage(damage, true);
 			statScreenRefresh();
 			outputText("\n");
-			combatRoundOver();
 		}
 
 		override public function defeated(hpVictory:Boolean):void

@@ -117,7 +117,6 @@ use namespace kGAMECLASS;
 					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
 					else eAttack();
 				}
-				combatRoundOver();
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 6) {
 				if (fatigue < (maxFatigue() - (bowShooting() * 6))) KindraFireBow06();
@@ -125,7 +124,6 @@ use namespace kGAMECLASS;
 					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
 					else eAttack();
 				}
-				combatRoundOver();
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 5) {
 				if (fatigue < (maxFatigue() - (bowShooting() * 5))) KindraFireBow05();
@@ -133,7 +131,6 @@ use namespace kGAMECLASS;
 					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
 					else eAttack();
 				}
-				combatRoundOver();
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 4) {
 				if (fatigue < (maxFatigue() - (bowShooting() * 4))) KindraFireBow04();
@@ -141,7 +138,6 @@ use namespace kGAMECLASS;
 					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
 					else eAttack();
 				}
-				combatRoundOver();
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 3) {
 				if (fatigue < (maxFatigue() - (bowShooting() * 3))) KindraFireBow03();
@@ -149,7 +145,6 @@ use namespace kGAMECLASS;
 					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
 					else eAttack();
 				}
-				combatRoundOver();
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 2) {
 				if (fatigue < (maxFatigue() - (bowShooting() * 2))) KindraFireBow02();
@@ -157,7 +152,6 @@ use namespace kGAMECLASS;
 					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
 					else eAttack();
 				}
-				combatRoundOver();
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 1) {
 				if (fatigue < (maxFatigue() - bowShooting())) KindraFireBow01();
@@ -165,7 +159,6 @@ use namespace kGAMECLASS;
 					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
 					else eAttack();
 				}
-				combatRoundOver();
 			}
 		}//używanie sheep milk w czasie walki czasami (daje -60 fat i -20 lust)
 		//nie zapomnieć używać KINDRA_ARROWS_SHOT flagi do śledzenia ile już strzał wystrzeliła kindra w celu zmniejszania kosztu ich

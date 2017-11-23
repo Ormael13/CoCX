@@ -87,7 +87,6 @@ public class Izumi extends Monster
 					cleanupChokeslam();
 				}
 				
-				combatRoundOver();
 				return;
 			}
 			
@@ -105,7 +104,6 @@ public class Izumi extends Monster
 			// Handle titsmother
 			if (player.hasStatusEffect(StatusEffects.Titsmother))
 			{
-				combatRoundOver();
 				return;
 			}
 			
@@ -173,7 +171,6 @@ public class Izumi extends Monster
 				
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 
 		// Roundhouse Kick
@@ -195,7 +192,6 @@ public class Izumi extends Monster
 				player.dynStats("lus", 5 + player.lib / 20);
 			}
 
-			combatRoundOver();
 		}
 		
 		// Bind player for 3 turns. If the player doesn't break out in time, they take huge damage.
@@ -213,7 +209,6 @@ public class Izumi extends Monster
 				
 				if (combatDebug) trace("Applied Chokeslam effect");
 			}
-			combatRoundOver();
 		}
 		
 		// Struggle against izumi's chokeslam
@@ -233,7 +228,6 @@ public class Izumi extends Monster
 				if (combatDebug) trace("Escaped from Chokeslam grapple");
 				
 				chokeSlamEscape();
-				combatRoundOver();
 			}
 			else
 			{
@@ -276,8 +270,6 @@ public class Izumi extends Monster
 			
 			var damage:int = int ((str + 225) - rand(player.tou) - player.armorDef);
 			player.takeDamage(damage, true);
-			
-			combatRoundOver();
 		}
 		
 		// Player escapes from the chokeslam attack
@@ -298,7 +290,6 @@ public class Izumi extends Monster
 			
 			this.HP -= damage;
 			
-			combatRoundOver();
 		}
 		
 		// Remove the effect post-combat
@@ -332,7 +323,6 @@ public class Izumi extends Monster
 				if (combatDebug) trace("Applying Groundslam slow");
 			}
 			
-			combatRoundOver();
 		}
 		
 		// Remove the effect post-combat, fixup stats
@@ -365,7 +355,6 @@ public class Izumi extends Monster
 			
 			player.createStatusEffect(StatusEffects.Titsmother, 0, 0, 0, 0);
 			player.dynStats("lus", (player.lib / 15) + 5 + rand(5));
-			combatRoundOver();
 		}
 		
 		// Remove the effect post-combat
@@ -395,7 +384,6 @@ public class Izumi extends Monster
 				if (combatDebug) trace("Broke free of Titsmother!");
 				
 				titSmotherEscape();
-				combatRoundOver();
 			}
 			else
 			{
@@ -462,7 +450,6 @@ public class Izumi extends Monster
 			var damage:Number = (15 + rand(player.str));
 			this.HP -= damage;
 			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-			combatRoundOver();
 		}
 		
 		// Wait handler for titsmother attack

@@ -27,7 +27,6 @@ package classes.Scenes.Monsters
 				}
 			}
 			else eAttack();
-			combatRoundOver();
 		}
 		
 		public function GargoyleBasic() 

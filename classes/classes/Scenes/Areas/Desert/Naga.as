@@ -40,7 +40,6 @@ public class Naga extends Monster
 				else player.takeMagicDamage(5+rand(5));
 				player.takeMagicDamage(5+rand(5));
 			}
-			combatRoundOver();
 		}
 		
 		//2b)  Ability - Constrict - entangles player, raises lust 
@@ -51,7 +50,6 @@ public class Naga extends Monster
 			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
 				player.takeDamage(2+rand(4));
 			}
-			combatRoundOver();
 		}
 		
 		//2c) Abiliy - Tail Whip - minus ??? HP 
@@ -75,7 +73,6 @@ public class Naga extends Monster
 				damage += rand(10);
 				damage = player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void

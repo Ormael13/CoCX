@@ -79,7 +79,6 @@ public class WinterWolf extends Monster
 				dmgtaken += damage;
 				outputText(" (<b><font color=\"#800000\">" + damage + "</font></b>)");
 			}
-			combatRoundOver();
 		}
 		
 		protected function wolfHold():void {
@@ -88,7 +87,6 @@ public class WinterWolf extends Monster
 			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
 				player.takeDamage(8+rand(10));
 			}
-			combatRoundOver();
 		}
 		
 		public function paw():void {
@@ -97,7 +95,6 @@ public class WinterWolf extends Monster
 			player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 			createStatusEffect(StatusEffects.AbilityCooldown1, 3, 0, 0, 0);
 			if (player.hasStatusEffect(StatusEffects.WolfHold)) player.removeStatusEffect(StatusEffects.WolfHold);
-			combatRoundOver();
 		}
 		
 		public function WinterWolf() 

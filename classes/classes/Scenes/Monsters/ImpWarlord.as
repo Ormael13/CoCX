@@ -11,7 +11,6 @@ public class ImpWarlord extends Imp
 			outputText("The imp warlord charges at you with his claws ready! ");
 			if (player.getEvasionRoll()) {
 				outputText("You manage to avoid his claws thanks to your reaction!");
-				combatRoundOver();
 				return;
 			}
 			else {
@@ -21,14 +20,12 @@ public class ImpWarlord extends Imp
 				if (damage < 20) damage = 20;
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 
 		public function doubleAttack():void {
 			outputText("The imp warlord charges at you with his claws ready and sword raised! ");
 			if (player.getEvasionRoll()) {
 				outputText("You manage to dodge his deadly attack!");
-				combatRoundOver();
 				return;
 			}
 			else {
@@ -45,7 +42,6 @@ public class ImpWarlord extends Imp
 				}
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 
 		

@@ -47,7 +47,6 @@ public class SandWitchMob extends Monster
 				outputText("\nShe hits you square in the face, bloodying your face and sending you stumbling back in agony. ");
 				damage = player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 
 		//Sand Stones
@@ -113,7 +112,6 @@ public class SandWitchMob extends Monster
 				outputText("\nThe stones then make a ninety degree turn into the purple fire, and then nothing.  One sand-witch smacks another upside the head, yelling something about focusing.");
 			}
 			removeStatusEffect(StatusEffects.Sandstorm);
-			combatRoundOver();
 		}
 		
 		//Milk is Good
@@ -124,7 +122,6 @@ public class SandWitchMob extends Monster
 			player.dynStats("lus", 4 + player.lib/10);
 			//+ 30 HP, +light lust damage to PC and mob
 			addHP(30);
-			combatRoundOver();
 		}
 		
 		//*Sandstorm
@@ -132,7 +129,6 @@ public class SandWitchMob extends Monster
 		public function sandStormAttack():void {
 			outputText("The witches link their hands together and begin to chant together, lifting their voices high as loose sand trickles in from every corner, every doorway, even the ceiling.  \"<i>Enevretni llahs tresed eht!</i>\"  Swirling around the chamber, a cloud of biting, stinging sand clouds your vision and bites into your skin.  It's going to keep blinding you and hurting you every round!");
 			createStatusEffect(StatusEffects.Sandstorm,0,0,0,0);
-			combatRoundOver();
 		}
 		
 		override protected function performCombatAction():void
