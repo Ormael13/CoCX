@@ -19,6 +19,10 @@ public class BaseCombatContent extends BaseContent {
 	protected function combatMenu(newRound:Boolean = true):void {
 		combat.combatMenu(newRound);
 	}
+	protected function combatRoundOver():Boolean
+	{
+		return combat.combatRoundOver();
+	}
 	protected function endHpVictory():void {
 		combat.endHpVictory();
 	}

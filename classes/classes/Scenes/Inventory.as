@@ -544,7 +544,7 @@ if (!kGAMECLASS.inCombat && inDungeon == false && inRoomedDungeon == false && fl
 		}
 		
 		private function inventoryCombatHandler():void {
-			if (!combatRoundOver()) { //Check if the battle is over. If not then go to the enemy's action.
+			if (!combat.combatRoundOver()) { //Check if the battle is over. If not then go to the enemy's action.
 				outputText("\n\n");
 				enemyAI();
 			}

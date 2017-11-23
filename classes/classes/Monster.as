@@ -46,7 +46,7 @@ import flash.utils.getQualifiedClassName;
 			EngineCore.outputText(text);
 		}
 		protected final function combatRoundOver():void{
-			SceneLib.combat.combatRoundOverImpl();
+			SceneLib.combat.combatRoundOver();
 		}
 		protected final function cleanupAfterCombat():void
 		{
@@ -866,7 +866,7 @@ import flash.utils.getQualifiedClassName;
 			breasts:false,
 			tallness:false,
 			str_tou_spe_inte:false,
-			lib_sens_cor:false,
+			wis_lib_sens_cor:false,
 			drop:false
 		};
 		// MONSTER INITIALIZATION HELPER FUNCTIONS
@@ -1084,7 +1084,7 @@ import flash.utils.getQualifiedClassName;
 			}
 			removeStatusEffect(StatusEffects.Attacks);
 //			if (!SceneLib.combat.combatRoundOverImpl()) game.doNext(1);
-			SceneLib.combat.combatRoundOverImpl(); //The doNext here was not required
+			SceneLib.combat.combatRoundOver(); //The doNext here was not required
 		}
 
 		/**
@@ -1269,7 +1269,7 @@ import flash.utils.getQualifiedClassName;
 				removeStatusEffect(StatusEffects.ConstrictedScylla);
 			}
 			addStatusValue(StatusEffects.ConstrictedScylla, 1, -1);
-			SceneLib.combat.combatRoundOverImpl();
+			SceneLib.combat.combatRoundOver();
 			return false;
 			}
 			else if (player.lowerBody == 8) {
@@ -1279,7 +1279,7 @@ import flash.utils.getQualifiedClassName;
 				removeStatusEffect(StatusEffects.GooEngulf);
 			}
 			addStatusValue(StatusEffects.GooEngulf, 1, -1);
-			SceneLib.combat.combatRoundOverImpl();
+			SceneLib.combat.combatRoundOver();
 			return false;
 			}
 			else if (hasStatusEffect(StatusEffects.EmbraceVampire)) {
@@ -1289,7 +1289,7 @@ import flash.utils.getQualifiedClassName;
 			}
 			else EngineCore.outputText("" + capitalA + short + " struggle but you manage to maintain the embrace.");
 			addStatusValue(StatusEffects.EmbraceVampire, 1, -1);
-			SceneLib.combat.combatRoundOverImpl();
+			SceneLib.combat.combatRoundOver();
 			return false;
 			}
 			else {
@@ -1299,7 +1299,7 @@ import flash.utils.getQualifiedClassName;
 				removeStatusEffect(StatusEffects.Constricted);
 			}
 			addStatusValue(StatusEffects.Constricted, 1, -1);
-			SceneLib.combat.combatRoundOverImpl();
+			SceneLib.combat.combatRoundOver();
 			return false;
 			}
 		}
@@ -1324,7 +1324,7 @@ import flash.utils.getQualifiedClassName;
 				if (plural) EngineCore.outputText(capitalA + short + " are too busy shivering with fear to fight.");
 				else EngineCore.outputText(capitalA + short + " is too busy shivering with fear to fight.");
 			}
-			SceneLib.combat.combatRoundOverImpl();
+			SceneLib.combat.combatRoundOver();
 			return false;
 		}
 
@@ -1353,7 +1353,7 @@ import flash.utils.getQualifiedClassName;
 				if (plural) EngineCore.outputText("Your foes are too dazed from your last hit to strike back!");
 				else EngineCore.outputText("Your foe is too dazed from your last hit to strike back!");
 			}
-			SceneLib.combat.combatRoundOverImpl();
+			SceneLib.combat.combatRoundOver();
 			return false;
 		}
 

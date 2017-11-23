@@ -35,7 +35,7 @@ public class OmnibusOverseer extends Monster
 			else {
 				createStatusEffect(StatusEffects.LustAura, 0, 0, 0, 0);
 			}
-			SceneLib.combat.combatRoundOverImpl();
+			SceneLib.combat.combatRoundOver();
 		}
 		
 		private function milkAttack():void {
@@ -64,7 +64,7 @@ public class OmnibusOverseer extends Monster
 				player.dynStats("lus", 7 + player.sens / 20);
 				if (player.biggestLactation() > 1) outputText("Milk dribbles from your [allbreasts] in sympathy.");
 			}
-			SceneLib.combat.combatRoundOverImpl();
+			SceneLib.combat.combatRoundOver();
 		}
 		
 		public function OmnibusOverseer()

@@ -5110,7 +5110,7 @@ public function teaseXP(XP:Number = 0):void {
 }
 
 //VICTORY OR DEATH?
-public function combatRoundOverImpl():Boolean { //Called after the monster's action
+public function combatRoundOver():Boolean { //Called after the monster's action
 	combatRound++;
 	statScreenRefresh();
 	flags[kFLAGS.ENEMY_CRITICAL] = 0;

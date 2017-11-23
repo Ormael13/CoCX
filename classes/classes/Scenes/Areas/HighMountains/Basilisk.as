@@ -44,7 +44,7 @@ import classes.internals.ChainedDrop;
 			else {
 				outputText("You concentrate, focus your mind and resist the basilisk's psychic compulsion.");
 			}
-			SceneLib.combat.combatRoundOverImpl();
+			SceneLib.combat.combatRoundOver();
 		}
 
 
@@ -55,7 +55,7 @@ import classes.internals.ChainedDrop;
 			if(damage == 0) outputText("The fall didn't harm you at all.  ");
 			var damage:Number = int((str + 20) - Math.random()*(player.tou+player.armorDef));
 			damage = player.takeDamage(damage, true);			
-			SceneLib.combat.combatRoundOverImpl();
+			SceneLib.combat.combatRoundOver();
 		}
 
 		//basilisk physical attack: With lightning speed, the basilisk slashes you with its index claws!

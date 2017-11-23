@@ -182,11 +182,6 @@ import coc.xxc.StoryContext;
 			SceneLib.combat.cleanupAfterCombatImpl(nextFunc);
 		}
 
-		protected function combatRoundOver():Boolean
-		{
-			return SceneLib.combat.combatRoundOverImpl();
-		}
-
 		protected function enemyAI():void
 		{
 			SceneLib.combat.enemyAIImpl();

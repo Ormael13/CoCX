@@ -6,7 +6,7 @@ import classes.Scenes.Dungeons.D3.*;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.SceneLib;
 
-public class CombatTeases extends BaseContent {
+public class CombatTeases extends BaseCombatContent {
 	public function CombatTeases() {}
 
 	public function teaseAttack():void {
