@@ -846,6 +846,12 @@ public class EngineCore {
         Utils.Begin("engineCore", "statScreenRefresh");
         kGAMECLASS.mainView.statsView.show(); // show() method refreshes.
         kGAMECLASS.mainViewManager.refreshStats();
+        if (kGAMECLASS.inCombat) {
+            kGAMECLASS.mainView.monsterStatsView.show();
+            kGAMECLASS.mainView.monsterStatsView.refreshStats(kGAMECLASS);
+        } else {
+            kGAMECLASS.mainView.monsterStatsView.hide();
+        }
         Utils.End("engineCore", "statScreenRefresh");
     }
 
@@ -864,6 +870,7 @@ public class EngineCore {
     public static function hideStats():void {
         if (!kGAMECLASS.mainViewManager.buttonsTweened) kGAMECLASS.mainView.statsView.hide();
         kGAMECLASS.mainViewManager.tweenOutStats();
+		kGAMECLASS.mainView.monsterStatsView.hide();
     }
 
     /**
