@@ -1,8 +1,9 @@
 ﻿package classes.Scenes.Places.TelAdre {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
-	public class Niamh extends TelAdreAbstractContent implements TimeAwareInterface {
+public class Niamh extends TelAdreAbstractContent implements TimeAwareInterface {
 //const MET_NIAMH:int = 446;
 //const GOT_NIAMH_BEER:int = 447;
 //const TALKED_NIAMH:int = 448;
@@ -15,7 +16,7 @@
 
 		public function Niamh()
 		{
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 
 		//Implementation of TimeAwareInterface
@@ -537,7 +538,7 @@ public function bazaarNiamh():void {
 	var fuck:Function =null;
 	if(player.hasCock())
 		fuck = bazaarSex;
-	simpleChoices("Get A Drink", drink, "Tit-Fuck", fuck, "", null, "", null, "Back", getGame().bazaar.enterTheBazaar);
+    simpleChoices("Get A Drink", drink, "Tit-Fuck", fuck, "", null, "", null, "Back", SceneLib.bazaar.enterTheBazaar);
 }
 
 //[bimbo/corrupted beer drink texts]
@@ -619,7 +620,7 @@ public function seanBimboBrewing():void {
 	//[Yep][Nope]
 	if (player.gems < 500) outputText("<b>\n\nYou're too poor to get Sean to make you bimbo liqueur.</b>");
 	else yep = yeahSeanLetsBimbooze;
-	simpleChoices("Yep", yep, "", null, "", null, "", null, "Back", getGame().dungeons.deepcave.incubusShop);
+    simpleChoices("Yep", yep, "", null, "", null, "", null, "Back", SceneLib.dungeons.deepcave.incubusShop);
 }
 
 //yeah I got this
@@ -649,7 +650,7 @@ public function getBimboozeFromSean():void {
 	outputText("You drop the vial into a pouch on your person.\n\n");
 	//bimbo liqueur aqcquired
 	flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] = 0;
-	inventory.takeItem(consumables.BIMBOLQ, getGame().dungeons.deepcave.incubusShop);
+    inventory.takeItem(consumables.BIMBOLQ, SceneLib.dungeons.deepcave.incubusShop);
 }
 
 // [LEAVE]

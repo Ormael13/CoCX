@@ -1,19 +1,14 @@
 ﻿package classes
 {
-	import flash.events.Event;
-	import flash.events.KeyboardEvent;
-	import flash.display.Stage;
-	import classes.CoC_Settings
+import flash.display.Stage;
+import flash.events.Event;
+import flash.events.KeyboardEvent;
 
-	
-	CONFIG::debug 
+CONFIG::debug
 	{
-		import flash.events.UncaughtErrorEvent;
-	}
-	import flash.system.Capabilities;
-	import flash.display.Sprite;
-	
-	/**
+    import flash.events.UncaughtErrorEvent;
+}
+/**
 	 * Chaos Monkey!
 	 * Basically a tool to randomly generate BUTTON_DOWN events, to 
 	 * stress-test the game.
@@ -26,7 +21,7 @@
 		Utility to randomly hammer buttons in the hope of generating a crash
 
 		*/
-		public var run:Boolean
+		public var run:Boolean;
 		private var _excludeMenuKeys:Boolean;
 		private var _catchOutputTextErrors:Boolean;
 		private var _mainClassPtr:CoC;
@@ -143,11 +138,11 @@
 		{
 			public function catchGlobalError(event:UncaughtErrorEvent):void
 			{
-				this.stopMonkey();
+                import flash.events.ErrorEvent;
 
-				import flash.events.ErrorEvent;
+                this.stopMonkey();
 
-				this._mainClassPtr.rawOutputText("<b>OMG ERROR LOL WUT</b>\n\n", true);
+                EngineCore.rawOutputText("<b>OMG ERROR LOL WUT</b>\n\n", true);
 				
 				var stackTrace:String = "";
 				
@@ -160,21 +155,21 @@
 				else if (event.error is ErrorEvent)
 				{
 					var errorEvent:ErrorEvent = event.error as ErrorEvent;
-					this._mainClassPtr.rawOutputText("<b>ERROR EVENT WAT</b>\n\n");
+					EngineCore.rawOutputText("<b>ERROR EVENT WAT</b>\n\n");
 					stackTrace += errorEvent + "\n";
 					// do something with the error
 				}
 				else
 				{
-					this._mainClassPtr.rawOutputText("<b>DURRRRR</b>\n\n");
+					EngineCore.rawOutputText("<b>DURRRRR</b>\n\n");
 				}
 				
-				this._mainClassPtr.rawOutputText("<b>SOMETHING IS BROKEN LOL WAT</b>\n");
-				this._mainClassPtr.rawOutputText(stackTrace);
+				EngineCore.rawOutputText("<b>SOMETHING IS BROKEN LOL WAT</b>\n");
+				EngineCore.rawOutputText(stackTrace);
 
-				this._mainClassPtr.rawOutputText("\n\n<b>Preceeding button Events:</b>\n");
-				this._mainClassPtr.rawOutputText(CoC_Settings.getButtonEvents());
-				this._mainClassPtr.menu();
+				EngineCore.rawOutputText("\n\n<b>Preceeding button Events:</b>\n");
+				EngineCore.rawOutputText(CoC_Settings.getButtonEvents());
+				EngineCore.menu();
 
 			}
 		}

@@ -71,7 +71,6 @@ public class AbstractSpiderMorph extends Monster
 				web.increase();
 
 			}
-			combatRoundOver();
 		}
 
 		/**-Bite - Raises arousal by 30*/
@@ -93,7 +92,6 @@ public class AbstractSpiderMorph extends Monster
 				if (player.lust >= player.maxLust()) outputText("wobble, utterly defeated and about to cave in to your lust.");
 				else outputText("struggle not to fall down and start masturbating on the spot.");
 				outputText("\n");
-				combatRoundOver();
 				return;
 			}
 			outputText("The spider-" + mf("boy", "girl") + " lunges forward with " + mf("his", "her") + " mouth open, " + mf("his", "her") + " two needle-like fangs closing rapidly.  ");
@@ -129,7 +127,6 @@ public class AbstractSpiderMorph extends Monster
 					player.dynStats("lus", 30);
 				}
 			}
-			combatRoundOver();
 		}
 
 		/**-Disarm - hits the PC's weapon with web and sticks it to a
@@ -174,7 +171,6 @@ public class AbstractSpiderMorph extends Monster
 //				player.weapon.unequip(player,false,true);
 				player.createStatusEffect(StatusEffects.Disarmed, 0, 0, 0, 0);
 			}
-			combatRoundOver();
 		}
 
 		/**-Silence - sprays webs on the PC's mouth, silencing them for 1 to 3 turns.*/
@@ -205,7 +201,6 @@ public class AbstractSpiderMorph extends Monster
 				outputText("They hit you before you can move, covering most of your nose and mouth and making it hard to breathe.  You'll be unable to use your magic while you're constantly struggling just to draw air!\n");
 				player.createStatusEffect(StatusEffects.WebSilence, 0, 0, 0, 0);
 			}
-			combatRoundOver();
 		}
 	}
 }

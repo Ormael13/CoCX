@@ -3,12 +3,9 @@
  */
 package classes
 {
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Perks.*;
-	import classes.GlobalFlags.*;
-	import classes.Creature;
+import classes.Perks.*;
 
-	public class PerkLib
+public class PerkLib
 	{
 
 		// UNSORTED perks TODO these are mostly incorrect perks: tested but never created
@@ -1894,1804 +1891,1805 @@ package classes
 
 	// Perk requirements
 	private static function initDependencies():void {
-		//------------
-		// STRENGTH
-		//------------
-		JobWarrior.requireStr(10);
-		StrongBack.requireStr(25);
-		StrongBack2.requirePerk(StrongBack)
-				   .requireStr(50);
-		BasicTranquilness.requireStr(30)
-						 .requireTou(10)
-						 .requireSpe(10);
-		//Tier 1 Strength Perks
-		ThunderousStrikes.requireLevel(6)
-						 .requireStr(80)
-						 .requirePerk(JobWarrior);
-		BrutalBlows.requireLevel(6)
-				   .requireStr(75)
-				   .requirePerk(JobWarrior);
-		JobBrawler.requireLevel(6)
-				  .requireStr(60);
-		JobBarbarian.requireLevel(6)
-					.requireStr(60);
-		IronFistsI.requireLevel(6)
-				  .requireStr(60)
-				  .requirePerk(JobBrawler);
-		IronFistsII.requireNGPlus(1)
-				   .requireLevel(8)
-				   .requireStr(75)
-				   .requirePerk(IronFistsI);
-		IronFistsIII.requireNGPlus(2)
-					.requireLevel(10)
-					.requireStr(90)
-					.requirePerk(IronFistsII);
-		Parry.requireLevel(6)
-			 .requireStr(50)
-			 .requireSpe(50);
-		ThirstForBlood.requireLevel(6)
-					  .requireStr(75)
-					  .requirePerk(JobWarrior);
-		HalfStepToImprovedTranquilness.requireStr(60)
-									  .requireTou(20)
-									  .requireSpe(20)
-									  .requirePerk(BasicTranquilness)
-									  .requireLevel(6);
-		//Tier 2 Strength Perks
-		IronFistsIV.requireNGPlus(3)
-				   .requireLevel(12)
-				   .requireStr(105)
-				   .requirePerk(IronFistsIII);
-		IronFistsV.requireNGPlus(4)
-				  .requireLevel(14)
-				  .requireStr(120)
-				  .requirePerk(IronFistsIV);
-		IronFistsVI.requireNGPlus(5)
-				   .requireLevel(16)
-				   .requireStr(135)
-				   .requirePerk(IronFistsV);
-		Berzerker.requireLevel(12)
-				 .requireStr(75);
-		HoldWithBothHands.requireLevel(12)
-						 .requireStr(80)
-						 .requirePerk(JobWarrior);
-		ShieldSlam.requireLevel(12)
-				  .requireStr(80)
-				  .requireTou(60);
-		WeaponMastery.requireLevel(12)
-					 .requirePerk(JobBarbarian)
-					 .requireStr(100);
-		DoubleAttackLarge.requireLevel(12)
-						 .requirePerk(JobBarbarian)
-						 .requireStr(75)
-						 .requireStr(50);
-		ImprovedTranquilness.requireStr(90)
-							.requireTou(30)
-							.requireSpe(30)
-							.requirePerk(HalfStepToImprovedTranquilness)
-							.requireLevel(12);
-		//Tier 3 Strength Perks
-		ColdFury.requireLevel(18)
-				.requirePerk(Berzerker)
-				.requirePerk(ImprovedSelfControl)
-				.requireStr(75);
-		TitanGrip.requireLevel(18)
-				 .requirePerk(WeaponMastery)
-				 .requireStr(100);
-		HiddenMomentum.requireLevel(18)
-					  .requirePerk(JobBarbarian)
-					  .requireStr(75)
-					  .requireSpe(50);
-		HalfStepToAdvancedTranquilness.requireStr(120)
-									  .requireTou(40)
-									  .requireSpe(40)
-									  .requirePerk(ImprovedTranquilness)
-									  .requireLevel(18);
-		//Tier 4 Strength Perks
-		WeaponGrandMastery.requirePerk(WeaponMastery)
-						  .requireStr(140)
-						  .requireLevel(24);
-		DualWieldLarge.requirePerk(DualWield)
-					  .requirePerk(TitanGrip)
-					  .requireStr(125)
-					  .requireLevel(24);
-		TripleAttackLarge.requirePerk(DoubleAttackLarge)
-						 .requireStr(125)
-						 .requireSpe(100)
-						 .requireLevel(24);
-		AdvancedTranquilness.requireStr(150)
-							.requireTou(50)
-							.requireSpe(50)
-							.requirePerk(HalfStepToAdvancedTranquilness)
-							.requireLevel(24);
-		//Tier 5 Strength Perks
-		HiddenDualMomentum.requirePerk(HiddenMomentum)
-						  .requirePerk(DualWield)
-						  .requireStr(150)
-						  .requireSpe(100)
-						  .requireLevel(30);
-		UnlockId2ndStage.requirePerk(UnlockId)
-						.requireStr(150)
-						.requireLevel(30);
-		HalfStepToSuperiorTranquilness.requireStr(180)
-									  .requireTou(60)
-									  .requireSpe(60)
-									  .requirePerk(AdvancedTranquilness)
-									  .requireLevel(30);
-		//Tier 6 Strength Perks
-		SuperiorTranquilness.requireStr(210)
-							.requireTou(70)
-							.requireSpe(70)
-							.requirePerk(HalfStepToSuperiorTranquilness)
-							.requireLevel(36);
-		//HiddenDualMomentum.requirePerk(HiddenMomentum).requireStr(175).requireSpe(100).requireLevel(30);	//herculanmight - perk dodający limit do str cap (i może do max tone też)
-		//a może właśnie perk dodający do max str cap tyle ile wynosi obecnie PC tone?
-		//Tier 7 Strength Perks
-		PrestigeJobBerserker.requirePrestigeJobSlot()
-							.requirePerk(JobBarbarian)
-							.requirePerk(JobGuardian)
-							.requireAnyPerk(Berzerker, Lustzerker)
-							.requireStr(200)
-							.requireLevel(42);
-		HalfStepToPeerlessTranquilness.requireStr(240)
-									  .requireTou(80)
-									  .requireSpe(80)
-									  .requirePerk(SuperiorTranquilness)
-									  .requireLevel(42);
-		//Tier 8 Strength Perks
-		Rage.requirePerk(PrestigeJobBerserker)
-			.requireLevel(48);
-		PeerlessTranquilness.requireStr(270)
-							.requireTou(90)
-							.requireSpe(90)
-							.requirePerk(HalfStepToPeerlessTranquilness)
-							.requireLevel(48);
-		//Tier 9 Strength Perks
-		Anger.requirePerk(Rage)
-			 .requireLevel(54);
-		HalfStepToInhumanTranquilness.requireStr(300)
-									 .requireTou(100)
-									 .requireSpe(100)
-									 .requirePerk(PeerlessTranquilness)
-									 .requireLevel(54);
-		//Tier 10 Strength Perks
-		//		Too Angry to Die perk
-		InhumanTranquilness.requireStr(330)
-						   .requireTou(110)
-						   .requireSpe(110)
-						   .requirePerk(HalfStepToInhumanTranquilness)
-						   .requireLevel(60);
-		//Tier 11 Strength Perks
-		HalfStepToEpicTranquilness.requireStr(360)
-								  .requireTou(120)
-								  .requireSpe(120)
-								  .requirePerk(InhumanTranquilness)
-								  .requireLevel(66);
-		//Tier 12 Strength Perks
-		EpicTranquilness.requireStr(390)
-						.requireTou(130)
-						.requireSpe(130)
-						.requirePerk(HalfStepToEpicTranquilness)
-						.requireLevel(72);
-		//Tier 13 Strength Perks
-		HalfStepToMythicalTranquilness.requireStr(430)
-									  .requireTou(140)
-									  .requireSpe(140)
-									  .requirePerk(EpicTranquilness)
-									  .requireLevel(78);
-		//Tier 14 Strength Perks
-		MythicalTranquilness.requireStr(450)
-							.requireTou(150)
-							.requireSpe(150)
-							.requirePerk(HalfStepToMythicalTranquilness)
-							.requireLevel(84);
-		//------------
-		// TOUGHNESS
-		//------------
-		JobGuardian.requireTou(10);
-		RefinedBodyI.requirePerk(JobGuardian)
-					.requireTou(25);
-		RefinedBodyII.requirePerk(RefinedBodyI)
-					 .requireTou(40)
-					 .requireLevel(2)
-					 .requireNGPlus(1);
-		RefinedBodyIII.requirePerk(RefinedBodyII)
-					  .requireTou(55)
-					  .requireLevel(4)
-					  .requireNGPlus(2);
-		Regeneration.requireTou(50);
-		Regeneration2.requirePerk(Regeneration)
-					 .requireTou(70)
-					 .requireLevel(2)
-					 .requireNGPlus(1);
-		Regeneration3.requirePerk(Regeneration2)
-					 .requireTou(90)
-					 .requireLevel(4)
-					 .requireNGPlus(2);
-		BasicEndurance.requireTou(30)
-					  .requireStr(20);
-		UnlockBody.requireTou(20);
-		//Tier 1 Toughness Perks
-		RefinedBodyIV.requirePerk(RefinedBodyIII)
-					 .requireTou(70)
-					 .requireNGPlus(3)
-					 .requireLevel(6);
-		RefinedBodyV.requirePerk(RefinedBodyIV)
-					.requireTou(85)
-					.requireLevel(8)
-					.requireNGPlus(4);
-		RefinedBodyVI.requirePerk(RefinedBodyV)
-					 .requireTou(100)
-					 .requireLevel(10)
-					 .requireNGPlus(5);
-		Regeneration4.requirePerk(Regeneration3)
-					 .requireTou(110)
-					 .requireNGPlus(3)
-					 .requireLevel(6);
-		Regeneration5.requirePerk(Regeneration4)
-					 .requireTou(130)
-					 .requireLevel(8)
-					 .requireNGPlus(4);
-		Regeneration6.requirePerk(Regeneration5)
-					 .requireTou(150)
-					 .requireLevel(10)
-					 .requireNGPlus(5);
-		TankI.requirePerk(RefinedBodyI)
-			 .requireTou(60)
-			 .requireLevel(6);
-		TankII.requirePerk(TankI)
-			  .requireTou(80)
-			  .requireLevel(8)
-			  .requireNGPlus(1);
-		TankIII.requirePerk(TankII)
-			   .requireTou(100)
-			   .requireLevel(10)
-			   .requireNGPlus(2);
-		JobKnight.requirePerk(JobGuardian)
-				 .requireTou(50)
-				 .requireLevel(6);
-		ShieldMastery.requirePerk(JobKnight)
-					 .requireTou(50)
-					 .requireLevel(6);
-		HalfStepToImprovedEndurance.requireTou(60)
-								   .requireStr(40)
-								   .requirePerk(BasicEndurance)
-								   .requireLevel(6);
-		ArmorMaster.requirePerk(JobKnight)
-				   .requireTou(50)
-				   .requireLevel(6);
-		//Tier 2 Toughness Perks
-		JobDefender.requirePerk(JobGuardian)
-				   .requireTou(75)
-				   .requireLevel(12);
-		ImmovableObject.requirePerk(JobDefender)
-					   .requireTou(75)
-					   .requireLevel(12);
-		Resolute.requirePerk(JobDefender)
-				.requireTou(75)
-				.requireLevel(12);
-		HeavyArmorProficiency.requirePerk(JobKnight)
-							 .requireTou(75)
-							 .requireLevel(12);
-		IronMan.requireTou(60)
-			   .requireLevel(12);
-		TankIV.requirePerk(TankIII)
-			  .requireTou(120)
-			  .requireNGPlus(3)
-			  .requireLevel(12);
-		TankV.requirePerk(TankIV)
-			 .requireTou(140)
-			 .requireLevel(14)
-			 .requireNGPlus(4);
-		TankVI.requirePerk(TankV)
-			  .requireTou(140)
-			  .requireLevel(16)
-			  .requireNGPlus(5);
-		ImprovedEndurance.requireTou(90)
-						 .requireStr(60)
-						 .requirePerk(HalfStepToImprovedEndurance)
-						 .requireLevel(12);
-		ShieldExpertise.requirePerk(JobKnight)
-					   .requireTou(70)
-					   .requireLevel(12);
-		//Tier 3 Toughness Perks
-		Juggernaut.requireTou(100)
-				  .requirePerk(HeavyArmorProficiency)
-				  .requireLevel(18);
-		//AyoArmorProficiency.requireMinTou(80).requirePerk(HeavyArmorProficiency);
-		HalfStepToAdvancedEndurance.requireTou(120)
-								   .requireStr(80)
-								   .requireLevel(18)
-								   .requirePerk(ImprovedEndurance);
-		DefenceStance.requirePerk(JobDefender)
-					 .requireTou(80)
-					 .requireLevel(18);
-		ShieldHarmony.requirePerk(ShieldExpertise)
-					 .requireTou(80)
-					 .requireLevel(18);
-		Lifeline.requirePerk(JobDefender)
-				.requireTou(75)
-				.requireLevel(18);
-		//Tier 4 Toughness Perks
-		AdvancedEndurance.requireLevel(24)
-						 .requireTou(150)
-						 .requireStr(100)
-						 .requirePerk(HalfStepToAdvancedEndurance);
-		ShieldGrandmastery.requirePerk(ShieldMastery)
-						  .requireTou(100)
-						  .requireLevel(24);
-		//perk związany z ayotech armors na pewno tu umieścić coś podobnego do juggernaut pewnie a moze właśnie wersja juggernaut dla ayo tech armors może?
-		MasteredDefenceStance.requirePerk(DefenceStance)
-							 .requireTou(120)
-							 .requireLevel(24);
-		GoliathI.requirePerk(JobDefender)
-				.requirePerk(TankI)
-				.requireTou(100)
-				.requireLevel(24);
-		GoliathII.requirePerk(GoliathI)
-				 .requireTou(115)
-				 .requireLevel(26)
-				 .requireNGPlus(1);
-		GoliathIII.requirePerk(GoliathII)
-				  .requireTou(130)
-				  .requireLevel(28)
-				  .requireNGPlus(2);
-		//Tier 5 Toughness Perks
-		HalfStepToSuperiorEndurance.requireTou(180)
-								   .requireStr(120)
-								   .requirePerk(AdvancedEndurance)
-								   .requireLevel(30);
-		PerfectDefenceStance.requirePerk(MasteredDefenceStance)
-							.requireTou(160)
-							.requireLevel(30);
-		ShieldWard.requirePerk(ShieldGrandmastery)
-				  .requireTou(120)
-				  .requireLevel(30);
-		GoliathIV.requirePerk(GoliathIII)
-				 .requireTou(145)
-				 .requireLevel(30)
-				 .requireNGPlus(3);
-		GoliathV.requirePerk(GoliathIV)
-				.requireTou(160)
-				.requireLevel(32)
-				.requireNGPlus(4);
-		GoliathVI.requirePerk(GoliathV)
-				 .requireTou(175)
-				 .requireLevel(34)
-				 .requireNGPlus(5);
-		//Tier 6 Toughness Perks
-		SuperiorEndurance.requireTou(210)
-						 .requireStr(140)
-						 .requirePerk(HalfStepToSuperiorEndurance)
-						 .requireLevel(36);
-		CheetahI.requirePerk(GoliathI)
-				.requireTou(150)
-				.requireLevel(36);
-		CheetahII.requirePerk(CheetahI)
-				 .requireTou(165)
-				 .requireLevel(38)
-				 .requireNGPlus(1);
-		CheetahIII.requirePerk(CheetahII)
-				  .requireTou(180)
-				  .requireLevel(40)
-				  .requireNGPlus(2);
-		//Tier 7 Toughness Perks
-		HalfStepToPeerlessEndurance.requireTou(240)
-								   .requireStr(160)
-								   .requirePerk(SuperiorEndurance)
-								   .requireLevel(42);
-		PrestigeJobSentinel.requirePrestigeJobSlot()
-						   .requirePerk(JobKnight)
-						   .requirePerk(JobWarrior)
-						   .requireTou(200)
-						   .requireLevel(42);
-		CheetahIV.requirePerk(CheetahIII)
-				 .requireTou(195)
-				 .requireLevel(42)
-				 .requireNGPlus(3);
-		CheetahV.requirePerk(CheetahIV)
-				.requireTou(210)
-				.requireLevel(44)
-				.requireNGPlus(4);
-		CheetahVI.requirePerk(CheetahV)
-				 .requireTou(225)
-				 .requireLevel(46)
-				 .requireNGPlus(5);
-		//Tier 8 Toughness Perks
-		PeerlessEndurance.requireTou(270)
-						 .requireStr(180)
-						 .requirePerk(HalfStepToPeerlessEndurance)
-						 .requireLevel(48);
-		SteelImpact.requirePerk(PrestigeJobSentinel)
-				   .requireLevel(48);
-		//Tier 9 Toughness Perks
-		ShieldCombat.requirePerk(SteelImpact)
-					.requireLevel(54);
-		HalfStepToInhumanEndurance.requireTou(300)
-								  .requireStr(200)
-								  .requirePerk(PeerlessEndurance)
-								  .requireLevel(54);
-		//Tier 10 Toughness Perks
-		SecondWind.requirePerk(ShieldCombat)
-				  .requireLevel(60);
-		InhumanEndurance.requireTou(330)
-						.requireStr(220)
-						.requirePerk(HalfStepToInhumanEndurance)
-						.requireLevel(60);
-		//Tier 11 Toughness Perks
-		HalfStepToEpicEndurance.requireTou(360)
-							   .requireStr(240)
-							   .requirePerk(InhumanEndurance)
-							   .requireLevel(66);
-		//Tier 12 Toughness Perks
-		EpicEndurance.requireTou(390)
-					 .requireStr(260)
-					 .requirePerk(HalfStepToEpicEndurance)
-					 .requireLevel(72);
-		//Tier 13 Toughness Perks
-		HalfStepToMythicalEndurance.requireTou(420)
-								   .requireStr(280)
-								   .requirePerk(EpicEndurance)
-								   .requireLevel(78);
-		//Tier 14 Toughness Perks
-		MythicalEndurance.requireTou(450)
-						 .requireStr(300)
-						 .requirePerk(HalfStepToMythicalEndurance)
-						 .requireLevel(84);
-		//------------
-		// SPEED
-		//------------
-		JobRanger.requireSpe(10);
-		Runner.requireSpe(25);
-		//slot 3 - speed perk
-		Evade.requirePerk(JobRanger)
-			 .requireSpe(25);
-		ArchersStaminaI.requirePerk(JobRanger)
-					   .requireSpe(25);
-		ArchersStaminaII.requirePerk(ArchersStaminaI)
-						.requireSpe(45)
-						.requireLevel(2)
-						.requireNGPlus(1);
-		ArchersStaminaIII.requirePerk(ArchersStaminaII)
-						 .requireSpe(65)
-						 .requireLevel(4)
-						 .requireNGPlus(2);
-		CarefulButRecklessAimAndShooting.requirePerk(JobRanger)
-										.requireSpe(30);
-		Sharpshooter.requirePerk(JobRanger);
-		NaturesSpringI.requirePerk(ArchersStaminaI)
-					  .requireSpe(30);
-		NaturesSpringII.requirePerk(NaturesSpringI)
-					   .requireSpe(50)
-					   .requireLevel(2)
-					   .requireNGPlus(1);
-		NaturesSpringIII.requirePerk(NaturesSpringII)
-						.requireSpe(70)
-						.requireLevel(4)
-						.requireNGPlus(2);
-		//Tier 1 Speed Perks
-		//Speedy Recovery - Regain Fatigue 50% faster speed.
-		SpeedyRecovery.requirePerk(Evade)
-					  .requireSpe(60)
-					  .requireLevel(6);
-		//Agility - A small portion of your speed is applied to your defense rating when wearing light armors.
-		Agility.requireSpe(75)
-			   .requirePerk(Runner)
-			   .requireLevel(6);
-		//slot 3 - Double Attack perk
-		DoubleAttack.requirePerk(JobDervish)
-					.requireSpe(50)
-					.requireLevel(6);
-		DoubleStrike.requirePerk(Evade)
-					.requirePerk(Runner)
-					.requireSpe(50)
-					.requireLevel(6);
-		Unhindered.requireSpe(75)
-				  .requirePerk(Evade)
-				  .requirePerk(Agility)
-				  .requireLevel(6);
-		LightningStrikes.requireSpe(60)
-						.requireLevel(6);
-		Naturaljouster.requireSpe(60)
-					  .requireLevel(6);
-		VitalShot.requireSpe(60)
-				 .requirePerk(JobRanger)
-				 .requirePerk(Tactician)
-				 .requireLevel(6);
-		DeadlyAim.requireSpe(60)
-				 .requirePerk(JobRanger)
-				 .requirePerk(Precision)
-				 .requireLevel(6);
-		ArchersStaminaIV.requirePerk(ArchersStaminaIII)
-						.requireSpe(85)
-						.requireNGPlus(3)
-						.requireLevel(6);
-		ArchersStaminaV.requirePerk(ArchersStaminaIV)
-					   .requireSpe(105)
-					   .requireLevel(8)
-					   .requireNGPlus(4);
-		ArchersStaminaVI.requirePerk(ArchersStaminaV)
-					    .requireSpe(125)
-					    .requireLevel(10)
-					    .requireNGPlus(5);
-		JobDervish.requirePerk(JobRanger)
-				  .requireSpe(40)
-				  .requireLevel(6);
-		NaturesSpringIV.requirePerk(NaturesSpringIII)
-					   .requireSpe(90)
-					   .requireNGPlus(3)
-					   .requireLevel(6);
-		NaturesSpringV.requirePerk(NaturesSpringIV)
-					  .requireSpe(110)
-					  .requireLevel(8)
-					  .requireNGPlus(4);
-		NaturesSpringVI.requirePerk(NaturesSpringV)
-					   .requireSpe(130)
-					   .requireLevel(10)
-					   .requireNGPlus(5);
-		/*Brawler.requireMinSpe(60)
-		 .requireMinStr(60);*/ //Would it be fitting to have Urta teach you?
-		//Tier 2 Speed Perks
-		LungingAttacks.requirePerk(JobRanger)
-					  .requireSpe(75)
-					  .requireLevel(12);
-		Blademaster.requirePerk(JobRanger)
-				   .requireSpe(80)
-				   .requireStr(60)
-				   .requireLevel(12);
-		TripleAttack.requirePerk(DoubleAttack)
-					.requireSpe(75)
-					.requireLevel(12);
-		SluttySimplicity.requireSpe(80)
-						.requireLib(50)
-						.requirePerk(Unhindered)
-						.requireLevel(12);
-		NakedTruth.requireSpe(80)
-				  .requireLib(50)
-				  .requirePerk(Unhindered)
-				  .requirePerk(JobEromancer)
-				  .requireLevel(12);
-		TripleStrike.requirePerk(DoubleStrike)
-					.requireSpe(75)
-					.requireLevel(12);
-		JobHunter.requirePerk(JobRanger)
-				 .requirePerk(ArchersStaminaI)
-				 .requireSpe(80)
-				 .requireLevel(12);
-		ColdAim.requirePerk(CarefulButRecklessAimAndShooting)
-			   .requireSpe(50)
-			   .requireLevel(12);
-		DancersVitalityI.requirePerk(JobDervish)
-						.requireSpe(60)
-						.requireLevel(12);
-		DancersVitalityII.requirePerk(DancersVitalityI)
-						 .requireSpe(75)
-						 .requireLevel(14)
-						 .requireNGPlus(1);
-		DancersVitalityIII.requirePerk(DancersVitalityII)
-						  .requireSpe(90)
-						  .requireLevel(16)
-						  .requireNGPlus(2);
-		DeadlyThrow.requirePerk(JobHunter);
-		//requirePerk(JobMonk).requireMinSpe(50) //perk dajacy 2 ataki kiedy uzywa sie tylko fists -
-		// - cos jak double attack ale bez limitu sily ^^ (ale dodac nowy status aby byl niezalezny od double strike)
-		//Tier 3 Speed Perks
-		Manyshot.requirePerk(JobHunter)
-				.requirePerk(TripleStrike)
-				.requireSpe(100)
-				.requireLevel(18);
-		QuadrupleAttack.requirePerk(TripleAttack)
-					   .requireSpe(100)
-					   .requireLevel(18);
-		EnvenomedBolt.requireLevel(18)
+        try {
+			//------------
+            // STRENGTH
+            //------------
+            JobWarrior.requireStr(10);
+            StrongBack.requireStr(25);
+            StrongBack2.requirePerk(StrongBack)
+                    .requireStr(50);
+            BasicTranquilness.requireStr(30)
+                    .requireTou(10)
+                    .requireSpe(10);
+            //Tier 1 Strength Perks
+            ThunderousStrikes.requireLevel(6)
+                    .requireStr(80)
+                    .requirePerk(JobWarrior);
+            BrutalBlows.requireLevel(6)
+                    .requireStr(75)
+                    .requirePerk(JobWarrior);
+            JobBrawler.requireLevel(6)
+                    .requireStr(60);
+            JobBarbarian.requireLevel(6)
+                    .requireStr(60);
+            IronFistsI.requireLevel(6)
+                    .requireStr(60)
+                    .requirePerk(JobBrawler);
+            IronFistsII.requireNGPlus(1)
+                    .requireLevel(8)
+                    .requireStr(75)
+                    .requirePerk(IronFistsI);
+            IronFistsIII.requireNGPlus(2)
+                    .requireLevel(10)
+                    .requireStr(90)
+                    .requirePerk(IronFistsII);
+            Parry.requireLevel(6)
+                    .requireStr(50)
+                    .requireSpe(50);
+            ThirstForBlood.requireLevel(6)
+                    .requireStr(75)
+                    .requirePerk(JobWarrior);
+            HalfStepToImprovedTranquilness.requireStr(60)
+                    .requireTou(20)
+                    .requireSpe(20)
+                    .requirePerk(BasicTranquilness)
+                    .requireLevel(6);
+            //Tier 2 Strength Perks
+            IronFistsIV.requireNGPlus(3)
+                    .requireLevel(12)
+                    .requireStr(105)
+                    .requirePerk(IronFistsIII);
+            IronFistsV.requireNGPlus(4)
+                    .requireLevel(14)
+                    .requireStr(120)
+                    .requirePerk(IronFistsIV);
+            IronFistsVI.requireNGPlus(5)
+                    .requireLevel(16)
+                    .requireStr(135)
+                    .requirePerk(IronFistsV);
+            Berzerker.requireLevel(12)
+                    .requireStr(75);
+            HoldWithBothHands.requireLevel(12)
+                    .requireStr(80)
+                    .requirePerk(JobWarrior);
+            ShieldSlam.requireLevel(12)
+                    .requireStr(80)
+                    .requireTou(60);
+            WeaponMastery.requireLevel(12)
+                    .requirePerk(JobBarbarian)
+                    .requireStr(100);
+            DoubleAttackLarge.requireLevel(12)
+                    .requirePerk(JobBarbarian)
+                    .requireStr(75)
+                    .requireStr(50);
+            ImprovedTranquilness.requireStr(90)
+                    .requireTou(30)
+                    .requireSpe(30)
+                    .requirePerk(HalfStepToImprovedTranquilness)
+                    .requireLevel(12);
+            //Tier 3 Strength Perks
+            ColdFury.requireLevel(18)
+                    .requirePerk(Berzerker)
+                    .requirePerk(ImprovedSelfControl)
+                    .requireStr(75);
+            TitanGrip.requireLevel(18)
+                    .requirePerk(WeaponMastery)
+                    .requireStr(100);
+            HiddenMomentum.requireLevel(18)
+                    .requirePerk(JobBarbarian)
+                    .requireStr(75)
+                    .requireSpe(50);
+            HalfStepToAdvancedTranquilness.requireStr(120)
+                    .requireTou(40)
+                    .requireSpe(40)
+                    .requirePerk(ImprovedTranquilness)
+                    .requireLevel(18);
+            //Tier 4 Strength Perks
+            WeaponGrandMastery.requirePerk(WeaponMastery)
+                    .requireStr(140)
+                    .requireLevel(24);
+            DualWieldLarge.requirePerk(DualWield)
+                    .requirePerk(TitanGrip)
+                    .requireStr(125)
+                    .requireLevel(24);
+            TripleAttackLarge.requirePerk(DoubleAttackLarge)
+                    .requireStr(125)
+                    .requireSpe(100)
+                    .requireLevel(24);
+            AdvancedTranquilness.requireStr(150)
+                    .requireTou(50)
+                    .requireSpe(50)
+                    .requirePerk(HalfStepToAdvancedTranquilness)
+                    .requireLevel(24);
+            //Tier 5 Strength Perks
+            HiddenDualMomentum.requirePerk(HiddenMomentum)
+                    .requirePerk(DualWield)
+                    .requireStr(150)
+                    .requireSpe(100)
+                    .requireLevel(30);
+            UnlockId2ndStage.requirePerk(UnlockId)
+                    .requireStr(150)
+                    .requireLevel(30);
+            HalfStepToSuperiorTranquilness.requireStr(180)
+                    .requireTou(60)
+                    .requireSpe(60)
+                    .requirePerk(AdvancedTranquilness)
+                    .requireLevel(30);
+            //Tier 6 Strength Perks
+            SuperiorTranquilness.requireStr(210)
+                    .requireTou(70)
+                    .requireSpe(70)
+                    .requirePerk(HalfStepToSuperiorTranquilness)
+                    .requireLevel(36);
+            //HiddenDualMomentum.requirePerk(HiddenMomentum).requireStr(175).requireSpe(100).requireLevel(30);	//herculanmight - perk dodający limit do str cap (i może do max tone też)
+            //a może właśnie perk dodający do max str cap tyle ile wynosi obecnie PC tone?
+            //Tier 7 Strength Perks
+            PrestigeJobBerserker.requirePrestigeJobSlot()
+                    .requirePerk(JobBarbarian)
+                    .requirePerk(JobGuardian)
+                    .requireAnyPerk(Berzerker, Lustzerker)
+                    .requireStr(200)
+                    .requireLevel(42);
+            HalfStepToPeerlessTranquilness.requireStr(240)
+                    .requireTou(80)
+                    .requireSpe(80)
+                    .requirePerk(SuperiorTranquilness)
+                    .requireLevel(42);
+            //Tier 8 Strength Perks
+            Rage.requirePerk(PrestigeJobBerserker)
+                    .requireLevel(48);
+            PeerlessTranquilness.requireStr(270)
+                    .requireTou(90)
+                    .requireSpe(90)
+                    .requirePerk(HalfStepToPeerlessTranquilness)
+                    .requireLevel(48);
+            //Tier 9 Strength Perks
+            Anger.requirePerk(Rage)
+                    .requireLevel(54);
+            HalfStepToInhumanTranquilness.requireStr(300)
+                    .requireTou(100)
+                    .requireSpe(100)
+                    .requirePerk(PeerlessTranquilness)
+                    .requireLevel(54);
+            //Tier 10 Strength Perks
+            //		Too Angry to Die perk
+            InhumanTranquilness.requireStr(330)
+                    .requireTou(110)
+                    .requireSpe(110)
+                    .requirePerk(HalfStepToInhumanTranquilness)
+                    .requireLevel(60);
+            //Tier 11 Strength Perks
+            HalfStepToEpicTranquilness.requireStr(360)
+                    .requireTou(120)
+                    .requireSpe(120)
+                    .requirePerk(InhumanTranquilness)
+                    .requireLevel(66);
+            //Tier 12 Strength Perks
+            EpicTranquilness.requireStr(390)
+                    .requireTou(130)
+                    .requireSpe(130)
+                    .requirePerk(HalfStepToEpicTranquilness)
+                    .requireLevel(72);
+            //Tier 13 Strength Perks
+            HalfStepToMythicalTranquilness.requireStr(430)
+                    .requireTou(140)
+                    .requireSpe(140)
+                    .requirePerk(EpicTranquilness)
+                    .requireLevel(78);
+            //Tier 14 Strength Perks
+            MythicalTranquilness.requireStr(450)
+                    .requireTou(150)
+                    .requireSpe(150)
+                    .requirePerk(HalfStepToMythicalTranquilness)
+                    .requireLevel(84);
+            //------------
+            // TOUGHNESS
+            //------------
+            JobGuardian.requireTou(10);
+            RefinedBodyI.requirePerk(JobGuardian)
+                    .requireTou(25);
+            RefinedBodyII.requirePerk(RefinedBodyI)
+                    .requireTou(40)
+                    .requireLevel(2)
+                    .requireNGPlus(1);
+            RefinedBodyIII.requirePerk(RefinedBodyII)
+                    .requireTou(55)
+                    .requireLevel(4)
+                    .requireNGPlus(2);
+            Regeneration.requireTou(50);
+            Regeneration2.requirePerk(Regeneration)
+                    .requireTou(70)
+                    .requireLevel(2)
+                    .requireNGPlus(1);
+            Regeneration3.requirePerk(Regeneration2)
+                    .requireTou(90)
+                    .requireLevel(4)
+                    .requireNGPlus(2);
+            BasicEndurance.requireTou(30)
+                    .requireStr(20);
+            UnlockBody.requireTou(20);
+            //Tier 1 Toughness Perks
+            RefinedBodyIV.requirePerk(RefinedBodyIII)
+                    .requireTou(70)
+                    .requireNGPlus(3)
+                    .requireLevel(6);
+            RefinedBodyV.requirePerk(RefinedBodyIV)
+                    .requireTou(85)
+                    .requireLevel(8)
+                    .requireNGPlus(4);
+            RefinedBodyVI.requirePerk(RefinedBodyV)
+                    .requireTou(100)
+                    .requireLevel(10)
+                    .requireNGPlus(5);
+            Regeneration4.requirePerk(Regeneration3)
+                    .requireTou(110)
+                    .requireNGPlus(3)
+                    .requireLevel(6);
+            Regeneration5.requirePerk(Regeneration4)
+                    .requireTou(130)
+                    .requireLevel(8)
+                    .requireNGPlus(4);
+            Regeneration6.requirePerk(Regeneration5)
+                    .requireTou(150)
+                    .requireLevel(10)
+                    .requireNGPlus(5);
+            TankI.requirePerk(RefinedBodyI)
+                    .requireTou(60)
+                    .requireLevel(6);
+            TankII.requirePerk(TankI)
+                    .requireTou(80)
+                    .requireLevel(8)
+                    .requireNGPlus(1);
+            TankIII.requirePerk(TankII)
+                    .requireTou(100)
+                    .requireLevel(10)
+                    .requireNGPlus(2);
+            JobKnight.requirePerk(JobGuardian)
+                    .requireTou(50)
+                    .requireLevel(6);
+            ShieldMastery.requirePerk(JobKnight)
+                    .requireTou(50)
+                    .requireLevel(6);
+            HalfStepToImprovedEndurance.requireTou(60)
+                    .requireStr(40)
+                    .requirePerk(BasicEndurance)
+                    .requireLevel(6);
+            ArmorMaster.requirePerk(JobKnight)
+                    .requireTou(50)
+                    .requireLevel(6);
+            //Tier 2 Toughness Perks
+            JobDefender.requirePerk(JobGuardian)
+                    .requireTou(75)
+                    .requireLevel(12);
+            ImmovableObject.requirePerk(JobDefender)
+                    .requireTou(75)
+                    .requireLevel(12);
+            Resolute.requirePerk(JobDefender)
+                    .requireTou(75)
+                    .requireLevel(12);
+            HeavyArmorProficiency.requirePerk(JobKnight)
+                    .requireTou(75)
+                    .requireLevel(12);
+            IronMan.requireTou(60)
+                    .requireLevel(12);
+            TankIV.requirePerk(TankIII)
+                    .requireTou(120)
+                    .requireNGPlus(3)
+                    .requireLevel(12);
+            TankV.requirePerk(TankIV)
+                    .requireTou(140)
+                    .requireLevel(14)
+                    .requireNGPlus(4);
+            TankVI.requirePerk(TankV)
+                    .requireTou(140)
+                    .requireLevel(16)
+                    .requireNGPlus(5);
+            ImprovedEndurance.requireTou(90)
+                    .requireStr(60)
+                    .requirePerk(HalfStepToImprovedEndurance)
+                    .requireLevel(12);
+            ShieldExpertise.requirePerk(JobKnight)
+                    .requireTou(70)
+                    .requireLevel(12);
+            //Tier 3 Toughness Perks
+            Juggernaut.requireTou(100)
+                    .requirePerk(HeavyArmorProficiency)
+                    .requireLevel(18);
+            //AyoArmorProficiency.requireMinTou(80).requirePerk(HeavyArmorProficiency);
+            HalfStepToAdvancedEndurance.requireTou(120)
+                    .requireStr(80)
+                    .requireLevel(18)
+                    .requirePerk(ImprovedEndurance);
+            DefenceStance.requirePerk(JobDefender)
+                    .requireTou(80)
+                    .requireLevel(18);
+            ShieldHarmony.requirePerk(ShieldExpertise)
+                    .requireTou(80)
+                    .requireLevel(18);
+            Lifeline.requirePerk(JobDefender)
+                    .requireTou(75)
+                    .requireLevel(18);
+            //Tier 4 Toughness Perks
+            AdvancedEndurance.requireLevel(24)
+                    .requireTou(150)
+                    .requireStr(100)
+                    .requirePerk(HalfStepToAdvancedEndurance);
+            ShieldGrandmastery.requirePerk(ShieldMastery)
+                    .requireTou(100)
+                    .requireLevel(24);
+            //perk związany z ayotech armors na pewno tu umieścić coś podobnego do juggernaut pewnie a moze właśnie wersja juggernaut dla ayo tech armors może?
+            MasteredDefenceStance.requirePerk(DefenceStance)
+                    .requireTou(120)
+                    .requireLevel(24);
+            GoliathI.requirePerk(JobDefender)
+                    .requirePerk(TankI)
+                    .requireTou(100)
+                    .requireLevel(24);
+            GoliathII.requirePerk(GoliathI)
+                    .requireTou(115)
+                    .requireLevel(26)
+                    .requireNGPlus(1);
+            GoliathIII.requirePerk(GoliathII)
+                    .requireTou(130)
+                    .requireLevel(28)
+                    .requireNGPlus(2);
+            //Tier 5 Toughness Perks
+            HalfStepToSuperiorEndurance.requireTou(180)
+                    .requireStr(120)
+                    .requirePerk(AdvancedEndurance)
+                    .requireLevel(30);
+            PerfectDefenceStance.requirePerk(MasteredDefenceStance)
+                    .requireTou(160)
+                    .requireLevel(30);
+            ShieldWard.requirePerk(ShieldGrandmastery)
+                    .requireTou(120)
+                    .requireLevel(30);
+            GoliathIV.requirePerk(GoliathIII)
+                    .requireTou(145)
+                    .requireLevel(30)
+                    .requireNGPlus(3);
+            GoliathV.requirePerk(GoliathIV)
+                    .requireTou(160)
+                    .requireLevel(32)
+                    .requireNGPlus(4);
+            GoliathVI.requirePerk(GoliathV)
+                    .requireTou(175)
+                    .requireLevel(34)
+                    .requireNGPlus(5);
+            //Tier 6 Toughness Perks
+            SuperiorEndurance.requireTou(210)
+                    .requireStr(140)
+                    .requirePerk(HalfStepToSuperiorEndurance)
+                    .requireLevel(36);
+            CheetahI.requirePerk(GoliathI)
+                    .requireTou(150)
+                    .requireLevel(36);
+            CheetahII.requirePerk(CheetahI)
+                    .requireTou(165)
+                    .requireLevel(38)
+                    .requireNGPlus(1);
+            CheetahIII.requirePerk(CheetahII)
+                    .requireTou(180)
+                    .requireLevel(40)
+                    .requireNGPlus(2);
+            //Tier 7 Toughness Perks
+            HalfStepToPeerlessEndurance.requireTou(240)
+                    .requireStr(160)
+                    .requirePerk(SuperiorEndurance)
+                    .requireLevel(42);
+            PrestigeJobSentinel.requirePrestigeJobSlot()
+                    .requirePerk(JobKnight)
+                    .requirePerk(JobWarrior)
+                    .requireTou(200)
+                    .requireLevel(42);
+            CheetahIV.requirePerk(CheetahIII)
+                    .requireTou(195)
+                    .requireLevel(42)
+                    .requireNGPlus(3);
+            CheetahV.requirePerk(CheetahIV)
+                    .requireTou(210)
+                    .requireLevel(44)
+                    .requireNGPlus(4);
+            CheetahVI.requirePerk(CheetahV)
+                    .requireTou(225)
+                    .requireLevel(46)
+                    .requireNGPlus(5);
+            //Tier 8 Toughness Perks
+            PeerlessEndurance.requireTou(270)
+                    .requireStr(180)
+                    .requirePerk(HalfStepToPeerlessEndurance)
+                    .requireLevel(48);
+            SteelImpact.requirePerk(PrestigeJobSentinel)
+                    .requireLevel(48);
+            //Tier 9 Toughness Perks
+            ShieldCombat.requirePerk(SteelImpact)
+                    .requireLevel(54);
+            HalfStepToInhumanEndurance.requireTou(300)
+                    .requireStr(200)
+                    .requirePerk(PeerlessEndurance)
+                    .requireLevel(54);
+            //Tier 10 Toughness Perks
+            SecondWind.requirePerk(ShieldCombat)
+                    .requireLevel(60);
+            InhumanEndurance.requireTou(330)
+                    .requireStr(220)
+                    .requirePerk(HalfStepToInhumanEndurance)
+                    .requireLevel(60);
+            //Tier 11 Toughness Perks
+            HalfStepToEpicEndurance.requireTou(360)
+                    .requireStr(240)
+                    .requirePerk(InhumanEndurance)
+                    .requireLevel(66);
+            //Tier 12 Toughness Perks
+            EpicEndurance.requireTou(390)
+                    .requireStr(260)
+                    .requirePerk(HalfStepToEpicEndurance)
+                    .requireLevel(72);
+            //Tier 13 Toughness Perks
+            HalfStepToMythicalEndurance.requireTou(420)
+                    .requireStr(280)
+                    .requirePerk(EpicEndurance)
+                    .requireLevel(78);
+            //Tier 14 Toughness Perks
+            MythicalEndurance.requireTou(450)
+                    .requireStr(300)
+                    .requirePerk(HalfStepToMythicalEndurance)
+                    .requireLevel(84);
+            //------------
+            // SPEED
+            //------------
+            JobRanger.requireSpe(10);
+            Runner.requireSpe(25);
+            //slot 3 - speed perk
+            Evade.requirePerk(JobRanger)
+                    .requireSpe(25);
+            ArchersStaminaI.requirePerk(JobRanger)
+                    .requireSpe(25);
+            ArchersStaminaII.requirePerk(ArchersStaminaI)
+                    .requireSpe(45)
+                    .requireLevel(2)
+                    .requireNGPlus(1);
+            ArchersStaminaIII.requirePerk(ArchersStaminaII)
+                    .requireSpe(65)
+                    .requireLevel(4)
+                    .requireNGPlus(2);
+            CarefulButRecklessAimAndShooting.requirePerk(JobRanger)
+                    .requireSpe(30);
+            Sharpshooter.requirePerk(JobRanger);
+            NaturesSpringI.requirePerk(ArchersStaminaI)
+                    .requireSpe(30);
+            NaturesSpringII.requirePerk(NaturesSpringI)
+                    .requireSpe(50)
+                    .requireLevel(2)
+                    .requireNGPlus(1);
+            NaturesSpringIII.requirePerk(NaturesSpringII)
+                    .requireSpe(70)
+                    .requireLevel(4)
+                    .requireNGPlus(2);
+            //Tier 1 Speed Perks
+            //Speedy Recovery - Regain Fatigue 50% faster speed.
+            SpeedyRecovery.requirePerk(Evade)
+                    .requireSpe(60)
+                    .requireLevel(6);
+            //Agility - A small portion of your speed is applied to your defense rating when wearing light armors.
+            Agility.requireSpe(75)
+                    .requirePerk(Runner)
+                    .requireLevel(6);
+            //slot 3 - Double Attack perk
+            DoubleAttack.requirePerk(JobDervish)
+                    .requireSpe(50)
+                    .requireLevel(6);
+            DoubleStrike.requirePerk(Evade)
+                    .requirePerk(Runner)
+                    .requireSpe(50)
+                    .requireLevel(6);
+            Unhindered.requireSpe(75)
+                    .requirePerk(Evade)
+                    .requirePerk(Agility)
+                    .requireLevel(6);
+            LightningStrikes.requireSpe(60)
+                    .requireLevel(6);
+            Naturaljouster.requireSpe(60)
+                    .requireLevel(6);
+            VitalShot.requireSpe(60)
+                    .requirePerk(JobRanger)
+                    .requirePerk(Tactician)
+                    .requireLevel(6);
+            DeadlyAim.requireSpe(60)
+                    .requirePerk(JobRanger)
+                    .requirePerk(Precision)
+                    .requireLevel(6);
+            ArchersStaminaIV.requirePerk(ArchersStaminaIII)
+                    .requireSpe(85)
+                    .requireNGPlus(3)
+                    .requireLevel(6);
+            ArchersStaminaV.requirePerk(ArchersStaminaIV)
+                    .requireSpe(105)
+                    .requireLevel(8)
+                    .requireNGPlus(4);
+            ArchersStaminaVI.requirePerk(ArchersStaminaV)
+                    .requireSpe(125)
+                    .requireLevel(10)
+                    .requireNGPlus(5);
+            JobDervish.requirePerk(JobRanger)
+                    .requireSpe(40)
+                    .requireLevel(6);
+            NaturesSpringIV.requirePerk(NaturesSpringIII)
+                    .requireSpe(90)
+                    .requireNGPlus(3)
+                    .requireLevel(6);
+            NaturesSpringV.requirePerk(NaturesSpringIV)
+                    .requireSpe(110)
+                    .requireLevel(8)
+                    .requireNGPlus(4);
+            NaturesSpringVI.requirePerk(NaturesSpringV)
+                    .requireSpe(130)
+                    .requireLevel(10)
+                    .requireNGPlus(5);
+            /*Brawler.requireMinSpe(60)
+					.requireMinStr(60);*/ //Would it be fitting to have Urta teach you?
+            //Tier 2 Speed Perks
+            LungingAttacks.requirePerk(JobRanger)
+                    .requireSpe(75)
+                    .requireLevel(12);
+            Blademaster.requirePerk(JobRanger)
+                    .requireSpe(80)
+                    .requireStr(60)
+                    .requireLevel(12);
+            TripleAttack.requirePerk(DoubleAttack)
+                    .requireSpe(75)
+                    .requireLevel(12);
+            SluttySimplicity.requireSpe(80)
+                    .requireLib(50)
+                    .requirePerk(Unhindered)
+                    .requireLevel(12);
+            NakedTruth.requireSpe(80)
+                    .requireLib(50)
+                    .requirePerk(Unhindered)
+                    .requirePerk(JobEromancer)
+                    .requireLevel(12);
+            TripleStrike.requirePerk(DoubleStrike)
+                    .requireSpe(75)
+                    .requireLevel(12);
+            JobHunter.requirePerk(JobRanger)
+                    .requirePerk(ArchersStaminaI)
+                    .requireSpe(80)
+                    .requireLevel(12);
+            ColdAim.requirePerk(CarefulButRecklessAimAndShooting)
+                    .requireSpe(50)
+                    .requireLevel(12);
+            DancersVitalityI.requirePerk(JobDervish)
+                    .requireSpe(60)
+                    .requireLevel(12);
+            DancersVitalityII.requirePerk(DancersVitalityI)
+                    .requireSpe(75)
+                    .requireLevel(14)
+                    .requireNGPlus(1);
+            DancersVitalityIII.requirePerk(DancersVitalityII)
+                    .requireSpe(90)
+                    .requireLevel(16)
+                    .requireNGPlus(2);
+            DeadlyThrow.requirePerk(JobHunter);
+            //requirePerk(JobMonk).requireMinSpe(50) //perk dajacy 2 ataki kiedy uzywa sie tylko fists -
+            // - cos jak double attack ale bez limitu sily ^^ (ale dodac nowy status aby byl niezalezny od double strike)
+            //Tier 3 Speed Perks
+            Manyshot.requirePerk(JobHunter)
+                    .requirePerk(TripleStrike)
+                    .requireSpe(100)
+                    .requireLevel(18);
+            QuadrupleAttack.requirePerk(TripleAttack)
+                    .requireSpe(100)
+                    .requireLevel(18);
+            EnvenomedBolt.requireLevel(18)
+                    .requirePerk(JobHunter)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.tail.isAny(AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN, AppearanceDefs.TAIL_TYPE_SCORPION, AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL)
+                                || player.facePart.isAny(AppearanceDefs.FACE_SNAKE_FANGS, AppearanceDefs.FACE_SPIDER_FANGS);
+                    }, "Venom-producing tail, abdomen, or fangs");
+            DancersVitalityIV.requirePerk(DancersVitalityIII)
+                    .requireSpe(105)
+                    .requireNGPlus(3)
+                    .requireLevel(18);
+            DancersVitalityV.requirePerk(DancersVitalityIV)
+                    .requireSpe(120)
+                    .requireLevel(20)
+                    .requireNGPlus(4);
+            DancersVitalityVI.requirePerk(DancersVitalityV)
+                    .requireSpe(140)
+                    .requireLevel(22)
+                    .requireNGPlus(5);
+            Impale.requirePerk(Naturaljouster)
+                    .requireSpe(100)
+                    .requireLevel(18);
+            //Tier 4 Speed Perks
+            WildQuiver.requirePerk(Manyshot)
+                    .requireSpe(125)
+                    .requireLevel(24);
+            PentaAttack.requirePerk(QuadrupleAttack)
+                    .requireSpe(125)
+                    .requireLevel(24);
+            //Tier 5 Speed Perks
+            HexaAttack.requirePerk(PentaAttack)
+                    .requireSpe(150)
+                    .requireLevel(30);
+            Multishot.requirePerk(WildQuiver)
+                    .requireSpe(150)
+                    .requireLevel(30);
+            UnlockBody2ndStage.requirePerk(UnlockBody)
+                    .requireSpe(150)
+                    .requireLevel(30);
+            //Tier 6 Speed Perks
+            NaturaljousterMastergrade.requirePerk(Naturaljouster)
+                    .requireSpe(180)
+                    .requireLevel(36);
+            //Tier 7 Speed Perks
+            /*		PrestigeJobSoulArcher.requirePrestigeJobSlot()
+					 .requirePerk(SoulOverlord)
 					 .requirePerk(JobHunter)
-					 .requireCustomFunction(function (player:Player):Boolean {
-						 return player.tail.isAny(Creature.TAIL_TYPE_BEE_ABDOMEN, Creature.TAIL_TYPE_SCORPION, Creature.TAIL_TYPE_MANTICORE_PUSSYTAIL)
-								|| player.facePart.isAny(Creature.FACE_SNAKE_FANGS, Creature.FACE_SPIDER_FANGS);
-					 }, "Venom-producing tail, abdomen, or fangs");
-		DancersVitalityIV.requirePerk(DancersVitalityIII)
-						 .requireSpe(105)
-						 .requireNGPlus(3)
-						 .requireLevel(18);
-		DancersVitalityV.requirePerk(DancersVitalityIV)
-						.requireSpe(120)
-						.requireLevel(20)
-						.requireNGPlus(4);
-		DancersVitalityVI.requirePerk(DancersVitalityV)
-						 .requireSpe(140)
-						 .requireLevel(22)
-						 .requireNGPlus(5);
-		Impale.requirePerk(Naturaljouster)
-			  .requireSpe(100)
-			  .requireLevel(18);
-		//Tier 4 Speed Perks
-		WildQuiver.requirePerk(Manyshot)
-				  .requireSpe(125)
-				  .requireLevel(24);
-		PentaAttack.requirePerk(QuadrupleAttack)
-				   .requireSpe(125)
-				   .requireLevel(24);
-		//Tier 5 Speed Perks
-		HexaAttack.requirePerk(PentaAttack)
-				  .requireSpe(150)
-				  .requireLevel(30);
-		Multishot.requirePerk(WildQuiver)
-				 .requireSpe(150)
-				 .requireLevel(30);
-		UnlockBody2ndStage.requirePerk(UnlockBody)
-						  .requireSpe(150)
-						  .requireLevel(30);
-		//Tier 6 Speed Perks
-		NaturaljousterMastergrade.requirePerk(Naturaljouster)
-								 .requireSpe(180)
-								 .requireLevel(36);
-		//Tier 7 Speed Perks
-/*		PrestigeJobSoulArcher.requirePrestigeJobSlot()
-							 .requirePerk(SoulOverlord)
-							 .requirePerk(JobHunter)
-							 .requireSpe(200)
-							 .requireLevel(42);
-*/		PrestigeJobArcaneArcher.requirePrestigeJobSlot()
-							   .requirePerk(JobSorcerer)
-							   .requirePerk(JobHunter)
-							   .requireSpe(200)
-							   .requireInt(150)
-							   .requireLevel(42);
-		//Tier 8 Speed Perks
-		ElementalArrows.requireLevel(48)
-					   .requirePerk(PrestigeJobArcaneArcher)
-					   .requireCustomFunction(function(player: Player): Boolean {
-						   return player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasStatusEffect(StatusEffects.KnowsIceSpike)
-					   }, "Whitefire or Ice Spike spell");
-		//Tier 9 Speed Perks
-		Cupid.requireLevel(54)
-			 .requirePerk(PrestigeJobArcaneArcher)
-			 .requireStatusEffect(StatusEffects.KnowsArouse, "Arouse spell");
-		//------------
-		// INTELLIGENCE
-		//------------
-		JobSorcerer.requireInt(10);
-		//Slot 4 - precision - -10 enemy toughness for damage calc
-		Precision.requireInt(25);
-		//Spellpower - boosts spell power
-		Spellpower.requirePerk(JobSorcerer)
-				  .requireInt(50);
-		UnlockMind.requireInt(20);
-		ManaAffinityI.requirePerk(JobSorcerer)
-					 .requireInt(25);
-		ManaAffinityII.requirePerk(ManaAffinityI)
-					  .requireInt(45)
-					  .requireLevel(2)
-					  .requireNGPlus(1);
-		ManaAffinityIII.requirePerk(ManaAffinityII)
-					   .requireInt(65)
-					   .requireLevel(4)
-					   .requireNGPlus(2);
-		BasicSpirituality.requireWis(20)
-						 .requireInt(30);
-		//Tier 1 Intelligence Perks
-		Mage.requirePerk(Spellpower)
-			.requireInt(50)
-			.requireLevel(6);
-		Tactician.requireInt(50)
-				 .requireLevel(6);
-		Channeling.requirePerk(Spellpower)
-				  .requirePerk(Mage)
-				  .requireInt(60)
-				  .requireCustomFunction(function (player:Player):Boolean {
-					  return player.spellCount() > 0;
-				  }, "Any spell")
-				  .requireLevel(6);
-		Medicine.requireInt(60);
-		StaffChanneling.requirePerk(Channeling)
-					   .requireInt(60)
-					   .requireLevel(6);
-		ManaAffinityIV.requirePerk(ManaAffinityIII)
-					  .requireInt(85)
-					  .requireNGPlus(3)
-					  .requireLevel(6);
-		ManaAffinityV.requirePerk(ManaAffinityIV)
-					 .requireInt(105)
-					 .requireLevel(8)
-					 .requireNGPlus(4);
-		ManaAffinityVI.requirePerk(ManaAffinityV)
-					  .requireInt(125)
-					  .requireLevel(10)
-					  .requireNGPlus(5);
-		MindOverBodyI.requirePerk(ManaAffinityI)
-					 .requireInt(50);
-		MindOverBodyII.requirePerk(MindOverBodyI)
-					  .requireInt(70)
-					  .requireLevel(8)
-					  .requireNGPlus(1);
-		MindOverBodyIII.requirePerk(MindOverBodyII)
-					   .requireInt(90)
-					   .requireLevel(10)
-					   .requireNGPlus(2);
-		HalfStepToImprovedSpirituality.requireWis(40)
-									  .requireInt(60)
-									  .requirePerk(BasicSpirituality)
-									  .requireLevel(6);
-		ArcaneRegenerationMinor.requirePerk(Mage)
-							   .requireInt(50)
-							   .requireLevel(6);
-		//Tier 2 Intelligence perks
-		Archmage.requirePerk(Mage)
-				.requireInt(75)
-				.requireLevel(12);
-		JobEnchanter.requirePerk(Mage)
-					.requireInt(75)
-					.requireLevel(12);
-		FocusedMind.requirePerk(Mage)
-				   .requireInt(75)
-				   .requireLevel(12);
-		RagingInferno.requirePerk(Archmage)
-					 .requirePerk(Channeling)
-					 .requireCustomFunction(function (player:Player):Boolean {
-						 return player.hasStatusEffect(StatusEffects.KnowsWhitefire)
-								|| player.hasPerk(DragonFireBreath)
-								|| player.hasPerk(FireLord)
-								|| player.hasPerk(Hellfire)
-								|| player.hasPerk(EnlightenedNinetails)
-								|| player.hasPerk(CorruptedNinetails)
-					 }, "Any fire spell")
-					 .requireLevel(12)
-					 .requireInt(75);
-		GlacialStorm.requirePerk(Archmage)
-					.requirePerk(Channeling)
-					.requireCustomFunction(function (player:Player):Boolean {
-						return player.hasStatusEffect(StatusEffects.KnowsIceSpike)
-								|| player.hasStatusEffect(StatusEffects.KnowsIceRain)
-								|| player.hasPerk(DragonIceBreath)
-								|| player.hasPerk(FreezingBreath)
-								|| player.hasPerk(FreezingBreathYeti)
-					}, "Any ice spell")
-					.requireLevel(12)
-					.requireInt(75);
-		HighVoltage.requirePerk(Archmage)
-				   .requirePerk(Channeling)
-				   .requireCustomFunction(function (player:Player):Boolean {
-					   return player.hasStatusEffect(StatusEffects.KnowsLightningBolt)
-								|| player.hasPerk(DragonLightningBreath)
-				   }, "Any lightning spell")
-				   .requireLevel(12)
-				   .requireInt(75);
-		EclipsingShadow.requirePerk(Archmage)
-					   .requirePerk(Channeling)
-					   .requireCustomFunction(function (player:Player):Boolean {
-						   return player.hasStatusEffect(StatusEffects.KnowsDarknessShard)
-								|| player.hasPerk(DragonDarknessBreath)
-					   }, "Any darkness spell")
-					   .requireLevel(12)
-					   .requireInt(75);
-		// Spell-boosting perks
-		// Battlemage: auto-use Might
-		Battlemage.requireLevel(12)
-				  .requirePerk(JobEnchanter)
-				  .requireInt(80)
-				  .requirePerk(Channeling)
-				  .requireStatusEffect(StatusEffects.KnowsMight, "Might spell");
-		// Spellsword: auto-use Charge Weapon
-		Spellsword.requireLevel(12)
-				  .requirePerk(JobEnchanter)
-				  .requirePerk(Channeling)
-				  .requireInt(80)
-				  .requireStatusEffect(StatusEffects.KnowsCharge, "Charge spell");
-		MindOverBodyIV.requirePerk(MindOverBodyIII)
-					  .requireInt(110)
-					  .requireNGPlus(3)
-					  .requireLevel(12);
-		MindOverBodyV.requirePerk(MindOverBodyIV)
-					 .requireInt(130)
-					 .requireLevel(14)
-					 .requireNGPlus(4);
-		MindOverBodyVI.requirePerk(MindOverBodyV)
-					  .requireInt(150)
-					  .requireLevel(16)
-					  .requireNGPlus(5);
-		ImprovedSpirituality.requireWis(60)
-							.requireInt(90)
-							.requirePerk(HalfStepToImprovedSpirituality)
-							.requireLevel(12);
-		ArcaneRegenerationMajor.requirePerk(Archmage)
-							   .requirePerk(ArcaneRegenerationMinor)
-							   .requireInt(75)
-							   .requireLevel(12);
-		//Tier 3 Intelligence perks
-		GrandArchmage.requirePerk(Archmage)
-					 .requireInt(100).requireLevel(18);
-		// Battleflash: auto-use Blink
-		Battleflash.requireLevel(18)
-				   .requirePerk(Battlemage)
-				   .requireInt(90)
-				   .requireStatusEffect(StatusEffects.KnowsBlink, "Blink spell");
-		// Spellarmor: auto-use Charge Armor
-		Spellarmor.requireLevel(18)
-				  .requirePerk(Spellsword)
-				  .requireInt(90)
-				  .requireStatusEffect(StatusEffects.KnowsChargeA, "Charge Armor spell");
-		TraditionalMageI.requireLevel(18)
-						.requirePerk(Archmage)
-						.requireInt(80);
-		TraditionalMageII.requireLevel(20)
-						 .requirePerk(TraditionalMageI)
-						 .requireInt(100)
-						 .requireNGPlus(1);
-		TraditionalMageIII.requireLevel(22)
-						  .requirePerk(TraditionalMageII)
-						  .requireInt(120)
-						  .requireNGPlus(2);
-		HalfStepToAdvancedSpirituality.requireWis(80)
-									  .requireInt(120)
-									  .requirePerk(ImprovedSpirituality)
-									  .requireLevel(18);
-		FortressOfIntellect.requireStatusEffect(StatusEffects.KnowsMight, "Might spell")
-						   .requirePerk(Archmage)
-						   .requireInt(100)
-						   .requireLevel(18);
-		ArcaneRegenerationEpic.requirePerk(GrandArchmage)
-							  .requirePerk(ArcaneRegenerationMajor)
-							  .requireInt(100)
-							  .requireLevel(18);
-		//Tier 4 Intelligence perks
-		GreyMage.requirePerk(GrandArchmage)
-				.requirePerk(FocusedMind)
-				.requireInt(125)
-				.requireLevel(24);
-		TraditionalMageIV.requireLevel(24)
-						 .requirePerk(TraditionalMageIII)
-						 .requireInt(140)
-						 .requireNGPlus(3);
-		TraditionalMageV.requireLevel(26)
-						.requirePerk(TraditionalMageIV)
-						.requireInt(160)
-						.requireNGPlus(4);
-		TraditionalMageVI.requireLevel(28)
-						 .requirePerk(TraditionalMageV)
-						 .requireInt(180)
-						 .requireNGPlus(5);
-		AdvancedSpirituality.requireWis(100)
-							.requireInt(150)
-							.requirePerk(HalfStepToAdvancedSpirituality)
-							.requireLevel(24);
-		LongerLastingBuffsI.requirePerk(JobEnchanter)
-						   .requireInt(120)
-						   .requireLevel(24);
-		LongerLastingBuffsII.requirePerk(LongerLastingBuffsI)
-							.requireInt(140)
-							.requireLevel(26)
-							.requireNGPlus(1);
-		LongerLastingBuffsIII.requirePerk(LongerLastingBuffsII)
-							 .requireInt(160)
-							 .requireLevel(28)
-							 .requireNGPlus(2);
-		ArcaneRegenerationLegendary.requirePerk(GreyMage)
-								   .requirePerk(ArcaneRegenerationEpic)
-								   .requireInt(125)
-								   .requireLevel(24);
-		//Tier 5 Intelligence perks
-		GreyArchmage.requirePerk(GreyMage)
-					.requireInt(150)
-					.requireLevel(30);
-		HalfStepToSuperiorSpirituality.requireWis(120)
-									  .requireInt(180)
-									  .requirePerk(AdvancedSpirituality)
-									  .requireLevel(30);
-		LongerLastingBuffsIV.requirePerk(LongerLastingBuffsIII)
-							.requireInt(180)
-							.requireLevel(30)
-							.requireNGPlus(3);
-		LongerLastingBuffsV.requirePerk(LongerLastingBuffsIV)
-						   .requireInt(200)
-						   .requireLevel(32)
-						   .requireNGPlus(4);
-		LongerLastingBuffsVI.requirePerk(LongerLastingBuffsV)
-						    .requireInt(220)
-						    .requireLevel(34)
-						    .requireNGPlus(5);
-		EverLastingBuffs.requirePerk(JobEnchanter)
-						.requireInt(160)
-						.requireLevel(30);
-		//Tier 6 Intelligence perks
-		Convergence.requirePerk(GreyArchmage)
-				   .requireInt(175)
-				   .requireLevel(36);
-		EternalyLastingBuffs.requirePerk(EverLastingBuffs)
-							.requireInt(190)
-							.requireLevel(36);
-		SuperiorSpirituality.requireWis(140)
-							.requireInt(210)
-							.requirePerk(HalfStepToSuperiorSpirituality)
-							.requireLevel(36);
-		//Tier 7 Intelligence perks
-		PrestigeJobSeer.requirePrestigeJobSlot()
-					   .requirePerk(GreyArchmage)
-					   .requirePerk(SoulElder)
-					   .requireInt(200)
-					   .requireLevel(42);
-		HalfStepToPeerlessSpirituality.requireWis(160)
-									  .requireInt(240)
-									  .requirePerk(SuperiorSpirituality)
-									  .requireLevel(42);
-		//Tier 8 Intelligence perks
-		PeerlessSpirituality.requireWis(180)
-							.requireInt(270)
-							.requirePerk(HalfStepToPeerlessSpirituality)
-							.requireLevel(48);
-		/*Trance.requirePerk(PrestigeJobSeer)
-			  .requireInt(240)
-			  .requireLevel(48);*/
-		//Tier 9 Intelligence perks
-		HalfStepToInhumanSpirituality.requireWis(200)
-									 .requireInt(300)
-									 .requirePerk(PeerlessSpirituality)
-									 .requireLevel(54);
-		//Tier 10 Intelligence perks
-		InhumanSpirituality.requireWis(220)
-						   .requireInt(330)
-						   .requirePerk(HalfStepToInhumanSpirituality)
-						   .requireLevel(60);
-		//Tier 11 Intelligence perks
-		HalfStepToEpicSpirituality.requireWis(240)
-								  .requireInt(360)
-								  .requirePerk(InhumanSpirituality)
-								  .requireLevel(66);
-		//Tier 12 Intelligence perks
-		EpicSpirituality.requireWis(260)
-						.requireInt(390)
-						.requirePerk(HalfStepToEpicSpirituality)
-						.requireLevel(72);
-		//Tier 13 Intelligence perks
-		HalfStepToMythicalSpirituality.requireWis(280)
-									  .requireInt(420)
-									  .requirePerk(EpicSpirituality)
-									  .requireLevel(78);
-		//Tier 14 Intelligence perks
-		MythicalSpirituality.requireWis(300)
-							.requireInt(450)
-							.requirePerk(HalfStepToMythicalSpirituality)
-							.requireLevel(84);
-		//------------
-		// WISDOM
-		//------------
-		JobElementalConjurer.requireWis(10);
-		ElementalConjurerResolve.requirePerk(JobElementalConjurer)
-								.requireWis(20);
-		ElementalContractRank1.requirePerk(ElementalConjurerResolve)
-							  .requireWis(25);
-		ElementsOfTheOrtodoxPath.requirePerk(ElementalContractRank1)
-								.requireWis(30);
-		ElementsOfMarethBasics.requirePerk(ElementsOfTheOrtodoxPath)
-							  .requireWis(35);
-		//Tier 1 Wisdom perks
-		ElementalContractRank2.requirePerk(ElementalContractRank1)
-							  .requireWis(50)
-							  .requireLevel(6);
-		ElementalBondFlesh.requirePerk(ElementalContractRank1)
-						  .requireWis(50)
-						  .requireLevel(6);
-		/*.requirePerk(ElementsOfMarethBasics)
-						.requireWis(35)
-						.requireLevel(6);*/
-		//Tier 2 Wisdom perks
-		JobMonk.requireWis(60)
-			   .requireLevel(12);
-		Combo.requirePerk(JobMonk)
-			 .requireWis(75)
-			 .requireStr(50)
-			 .requireLevel(12);
-		ElementalContractRank3.requirePerk(ElementalContractRank2)
-							  .requireWis(75)
-							  .requireLevel(12);
-		ElementalBondUrges.requirePerk(ElementalContractRank2)
-						  .requireWis(75)
-						  .requireLevel(12);
-		StrongElementalBond.requirePerk(ElementalContractRank3)
-						   .requireWis(75)
-						   .requireLevel(12);
-		//Tier 3 Wisdom perks
-		ElementalContractRank4.requirePerk(ElementalContractRank3)
-							  .requireWis(100)
-							  .requireLevel(18);
-		CatchTheBlade.requirePerk(JobMonk)
-					 .requireWis(80)
-					 .requireSpe(100)
-					 .requireLevel(18);
-		
-		//Tier 4 Wisdom perks
-		ComboMaster.requirePerk(Combo)
-				   .requireWis(125)
-				   .requireStr(100)
-				   .requireLevel(24);
-		ElementalContractRank5.requirePerk(ElementalContractRank4)
-							  .requirePerk(ElementalConjurerDedication)
-							  .requireWis(125)
-							  .requireLevel(24);
-		StrongerElementalBond.requirePerk(StrongElementalBond)
-							 .requirePerk(ElementalContractRank5)
-							 .requireWis(125)
-							 .requireLevel(24);
-		ElementalConjurerDedication.requirePerk(ElementalConjurerResolve)
-								   .requireWis(120)
-								   .requireLevel(24);
-		FirstAttackElementals.requirePerk(StrongElementalBond)
-							 .requirePerk(ElementalContractRank4)
-							 .requireLevel(24);
-		//Tier 5 Wisdom perks
-		UnlockMind2ndStage.requirePerk(UnlockMind)
-						  .requireWis(150)
-						  .requireLevel(30);
-		ElementalContractRank6.requirePerk(ElementalContractRank5)
-							  .requireWis(150)
-							  .requireLevel(30);
-		//Tier 6 Wisdom perks
-		ElementalContractRank7.requirePerk(ElementalContractRank6)
-							  .requirePerk(ElementalConjurerSacrifice)
-							  .requireWis(175)
-							  .requireLevel(36);
-		StrongestElementalBond.requirePerk(StrongerElementalBond)
-							  .requirePerk(ElementalContractRank7)
-							  .requireWis(175)
-							  .requireLevel(36);
-		//Tier 7 Wisdom perks
-		PrestigeJobSoulArtMaster.requirePrestigeJobSlot()
-								.requirePerk(FleshBodyApprenticeStage)
-								.requirePerk(JobMonk)
-								.requireWis(200)
-								.requireLevel(42);
-		ElementalContractRank8.requirePerk(ElementalContractRank7)
-							  .requireWis(200)
-							  .requireLevel(42);
-		//Tier 8 Wisdom perks
-		ElementalContractRank9.requirePerk(ElementalContractRank8)
-							  .requirePerk(ElementalConjurerSacrifice)
-							  .requireWis(225)
-							  .requireLevel(42);
-		ElementalConjurerSacrifice.requirePerk(ElementalConjurerDedication)
-								  .requireWis(220)
-								  .requireLevel(48);
-		//Tier 9 Wisdom perks
-		ElementalContractRank10.requirePerk(ElementalContractRank9)
-							   .requireWis(250)
-							   .requireLevel(54);
-		//Tier 10 Wisdom perks
-		ElementalContractRank11.requirePerk(ElementalContractRank10)
-							   .requireWis(275)
-							   .requireLevel(60);
-		//------------
-		// LIBIDO
-		//------------
-		//slot 5 - libido perks
+					 .requireSpe(200)
+					 .requireLevel(42);
+                    */
+            PrestigeJobArcaneArcher.requirePrestigeJobSlot()
+                    .requirePerk(JobSorcerer)
+                    .requirePerk(JobHunter)
+                    .requireSpe(200)
+                    .requireInt(150)
+                    .requireLevel(42);
+            //Tier 8 Speed Perks
+            ElementalArrows.requireLevel(48)
+                    .requirePerk(PrestigeJobArcaneArcher)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasStatusEffect(StatusEffects.KnowsIceSpike);
+                    }, "Whitefire or Ice Spike spell");
+            //Tier 9 Speed Perks
+            Cupid.requireLevel(54)
+                    .requirePerk(PrestigeJobArcaneArcher)
+                    .requireStatusEffect(StatusEffects.KnowsArouse, "Arouse spell");
+            //------------
+            // INTELLIGENCE
+            //------------
+            JobSorcerer.requireInt(10);
+            //Slot 4 - precision - -10 enemy toughness for damage calc
+            Precision.requireInt(25);
+            //Spellpower - boosts spell power
+            Spellpower.requirePerk(JobSorcerer)
+                    .requireInt(50);
+            UnlockMind.requireInt(20);
+            ManaAffinityI.requirePerk(JobSorcerer)
+                    .requireInt(25);
+            ManaAffinityII.requirePerk(ManaAffinityI)
+                    .requireInt(45)
+                    .requireLevel(2)
+                    .requireNGPlus(1);
+            ManaAffinityIII.requirePerk(ManaAffinityII)
+                    .requireInt(65)
+                    .requireLevel(4)
+                    .requireNGPlus(2);
+            BasicSpirituality.requireWis(20)
+                    .requireInt(30);
+            //Tier 1 Intelligence Perks
+            Mage.requirePerk(Spellpower)
+                    .requireInt(50)
+                    .requireLevel(6);
+            Tactician.requireInt(50)
+                    .requireLevel(6);
+            Channeling.requirePerk(Spellpower)
+                    .requirePerk(Mage)
+                    .requireInt(60)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.spellCount() > 0;
+                    }, "Any spell")
+                    .requireLevel(6);
+            Medicine.requireInt(60);
+            StaffChanneling.requirePerk(Channeling)
+                    .requireInt(60)
+                    .requireLevel(6);
+            ManaAffinityIV.requirePerk(ManaAffinityIII)
+                    .requireInt(85)
+                    .requireNGPlus(3)
+                    .requireLevel(6);
+            ManaAffinityV.requirePerk(ManaAffinityIV)
+                    .requireInt(105)
+                    .requireLevel(8)
+                    .requireNGPlus(4);
+            ManaAffinityVI.requirePerk(ManaAffinityV)
+                    .requireInt(125)
+                    .requireLevel(10)
+                    .requireNGPlus(5);
+            MindOverBodyI.requirePerk(ManaAffinityI)
+                    .requireInt(50);
+            MindOverBodyII.requirePerk(MindOverBodyI)
+                    .requireInt(70)
+                    .requireLevel(8)
+                    .requireNGPlus(1);
+            MindOverBodyIII.requirePerk(MindOverBodyII)
+                    .requireInt(90)
+                    .requireLevel(10)
+                    .requireNGPlus(2);
+            HalfStepToImprovedSpirituality.requireWis(40)
+                    .requireInt(60)
+                    .requirePerk(BasicSpirituality)
+                    .requireLevel(6);
+            ArcaneRegenerationMinor.requirePerk(Mage)
+                    .requireInt(50)
+                    .requireLevel(6);
+            //Tier 2 Intelligence perks
+            Archmage.requirePerk(Mage)
+                    .requireInt(75)
+                    .requireLevel(12);
+            JobEnchanter.requirePerk(Mage)
+                    .requireInt(75)
+                    .requireLevel(12);
+            FocusedMind.requirePerk(Mage)
+                    .requireInt(75)
+                    .requireLevel(12);
+            RagingInferno.requirePerk(Archmage)
+                    .requirePerk(Channeling)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.hasStatusEffect(StatusEffects.KnowsWhitefire)
+                                || player.hasPerk(DragonFireBreath)
+                                || player.hasPerk(FireLord)
+                                || player.hasPerk(Hellfire)
+                                || player.hasPerk(EnlightenedNinetails)
+                                || player.hasPerk(CorruptedNinetails);
+                    }, "Any fire spell")
+                    .requireLevel(12)
+                    .requireInt(75);
+            GlacialStorm.requirePerk(Archmage)
+                    .requirePerk(Channeling)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.hasStatusEffect(StatusEffects.KnowsIceSpike)
+                                || player.hasStatusEffect(StatusEffects.KnowsIceRain)
+                                || player.hasPerk(DragonIceBreath)
+                                || player.hasPerk(FreezingBreath)
+                                || player.hasPerk(FreezingBreathYeti);
+                    }, "Any ice spell")
+                    .requireLevel(12)
+                    .requireInt(75);
+            HighVoltage.requirePerk(Archmage)
+                    .requirePerk(Channeling)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.hasStatusEffect(StatusEffects.KnowsLightningBolt)
+                                || player.hasPerk(DragonLightningBreath);
+                    }, "Any lightning spell")
+                    .requireLevel(12)
+                    .requireInt(75);
+            EclipsingShadow.requirePerk(Archmage)
+                    .requirePerk(Channeling)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.hasStatusEffect(StatusEffects.KnowsDarknessShard)
+                                || player.hasPerk(DragonDarknessBreath);
+                    }, "Any darkness spell")
+                    .requireLevel(12)
+                    .requireInt(75);
+            // Spell-boosting perks
+            // Battlemage: auto-use Might
+            Battlemage.requireLevel(12)
+                    .requirePerk(JobEnchanter)
+                    .requireInt(80)
+                    .requirePerk(Channeling)
+                    .requireStatusEffect(StatusEffects.KnowsMight, "Might spell");
+            // Spellsword: auto-use Charge Weapon
+            Spellsword.requireLevel(12)
+                    .requirePerk(JobEnchanter)
+                    .requirePerk(Channeling)
+                    .requireInt(80)
+                    .requireStatusEffect(StatusEffects.KnowsCharge, "Charge spell");
+            MindOverBodyIV.requirePerk(MindOverBodyIII)
+                    .requireInt(110)
+                    .requireNGPlus(3)
+                    .requireLevel(12);
+            MindOverBodyV.requirePerk(MindOverBodyIV)
+                    .requireInt(130)
+                    .requireLevel(14)
+                    .requireNGPlus(4);
+            MindOverBodyVI.requirePerk(MindOverBodyV)
+                    .requireInt(150)
+                    .requireLevel(16)
+                    .requireNGPlus(5);
+            ImprovedSpirituality.requireWis(60)
+                    .requireInt(90)
+                    .requirePerk(HalfStepToImprovedSpirituality)
+                    .requireLevel(12);
+            ArcaneRegenerationMajor.requirePerk(Archmage)
+                    .requirePerk(ArcaneRegenerationMinor)
+                    .requireInt(75)
+                    .requireLevel(12);
+            //Tier 3 Intelligence perks
+            GrandArchmage.requirePerk(Archmage)
+                    .requireInt(100).requireLevel(18);
+            // Battleflash: auto-use Blink
+            Battleflash.requireLevel(18)
+                    .requirePerk(Battlemage)
+                    .requireInt(90)
+                    .requireStatusEffect(StatusEffects.KnowsBlink, "Blink spell");
+            // Spellarmor: auto-use Charge Armor
+            Spellarmor.requireLevel(18)
+                    .requirePerk(Spellsword)
+                    .requireInt(90)
+                    .requireStatusEffect(StatusEffects.KnowsChargeA, "Charge Armor spell");
+            TraditionalMageI.requireLevel(18)
+                    .requirePerk(Archmage)
+                    .requireInt(80);
+            TraditionalMageII.requireLevel(20)
+                    .requirePerk(TraditionalMageI)
+                    .requireInt(100)
+                    .requireNGPlus(1);
+            TraditionalMageIII.requireLevel(22)
+                    .requirePerk(TraditionalMageII)
+                    .requireInt(120)
+                    .requireNGPlus(2);
+            HalfStepToAdvancedSpirituality.requireWis(80)
+                    .requireInt(120)
+                    .requirePerk(ImprovedSpirituality)
+                    .requireLevel(18);
+            FortressOfIntellect.requireStatusEffect(StatusEffects.KnowsMight, "Might spell")
+                    .requirePerk(Archmage)
+                    .requireInt(100)
+                    .requireLevel(18);
+            ArcaneRegenerationEpic.requirePerk(GrandArchmage)
+                    .requirePerk(ArcaneRegenerationMajor)
+                    .requireInt(100)
+                    .requireLevel(18);
+            //Tier 4 Intelligence perks
+            GreyMage.requirePerk(GrandArchmage)
+                    .requirePerk(FocusedMind)
+                    .requireInt(125)
+                    .requireLevel(24);
+            TraditionalMageIV.requireLevel(24)
+                    .requirePerk(TraditionalMageIII)
+                    .requireInt(140)
+                    .requireNGPlus(3);
+            TraditionalMageV.requireLevel(26)
+                    .requirePerk(TraditionalMageIV)
+                    .requireInt(160)
+                    .requireNGPlus(4);
+            TraditionalMageVI.requireLevel(28)
+                    .requirePerk(TraditionalMageV)
+                    .requireInt(180)
+                    .requireNGPlus(5);
+            AdvancedSpirituality.requireWis(100)
+                    .requireInt(150)
+                    .requirePerk(HalfStepToAdvancedSpirituality)
+                    .requireLevel(24);
+            LongerLastingBuffsI.requirePerk(JobEnchanter)
+                    .requireInt(120)
+                    .requireLevel(24);
+            LongerLastingBuffsII.requirePerk(LongerLastingBuffsI)
+                    .requireInt(140)
+                    .requireLevel(26)
+                    .requireNGPlus(1);
+            LongerLastingBuffsIII.requirePerk(LongerLastingBuffsII)
+                    .requireInt(160)
+                    .requireLevel(28)
+                    .requireNGPlus(2);
+            ArcaneRegenerationLegendary.requirePerk(GreyMage)
+                    .requirePerk(ArcaneRegenerationEpic)
+                    .requireInt(125)
+                    .requireLevel(24);
+            //Tier 5 Intelligence perks
+            GreyArchmage.requirePerk(GreyMage)
+                    .requireInt(150)
+                    .requireLevel(30);
+            HalfStepToSuperiorSpirituality.requireWis(120)
+                    .requireInt(180)
+                    .requirePerk(AdvancedSpirituality)
+                    .requireLevel(30);
+            LongerLastingBuffsIV.requirePerk(LongerLastingBuffsIII)
+                    .requireInt(180)
+                    .requireLevel(30)
+                    .requireNGPlus(3);
+            LongerLastingBuffsV.requirePerk(LongerLastingBuffsIV)
+                    .requireInt(200)
+                    .requireLevel(32)
+                    .requireNGPlus(4);
+            LongerLastingBuffsVI.requirePerk(LongerLastingBuffsV)
+                    .requireInt(220)
+                    .requireLevel(34)
+                    .requireNGPlus(5);
+            EverLastingBuffs.requirePerk(JobEnchanter)
+                    .requireInt(160)
+                    .requireLevel(30);
+            //Tier 6 Intelligence perks
+            Convergence.requirePerk(GreyArchmage)
+                    .requireInt(175)
+                    .requireLevel(36);
+            EternalyLastingBuffs.requirePerk(EverLastingBuffs)
+                    .requireInt(190)
+                    .requireLevel(36);
+            SuperiorSpirituality.requireWis(140)
+                    .requireInt(210)
+                    .requirePerk(HalfStepToSuperiorSpirituality)
+                    .requireLevel(36);
+            //Tier 7 Intelligence perks
+            PrestigeJobSeer.requirePrestigeJobSlot()
+                    .requirePerk(GreyArchmage)
+                    .requirePerk(SoulElder)
+                    .requireInt(200)
+                    .requireLevel(42);
+            HalfStepToPeerlessSpirituality.requireWis(160)
+                    .requireInt(240)
+                    .requirePerk(SuperiorSpirituality)
+                    .requireLevel(42);
+            //Tier 8 Intelligence perks
+            PeerlessSpirituality.requireWis(180)
+                    .requireInt(270)
+                    .requirePerk(HalfStepToPeerlessSpirituality)
+                    .requireLevel(48);
+            /*Trance.requirePerk(PrestigeJobSeer)
+					.requireInt(240)
+					.requireLevel(48);*/
+            //Tier 9 Intelligence perks
+            HalfStepToInhumanSpirituality.requireWis(200)
+                    .requireInt(300)
+                    .requirePerk(PeerlessSpirituality)
+                    .requireLevel(54);
+            //Tier 10 Intelligence perks
+            InhumanSpirituality.requireWis(220)
+                    .requireInt(330)
+                    .requirePerk(HalfStepToInhumanSpirituality)
+                    .requireLevel(60);
+            //Tier 11 Intelligence perks
+            HalfStepToEpicSpirituality.requireWis(240)
+                    .requireInt(360)
+                    .requirePerk(InhumanSpirituality)
+                    .requireLevel(66);
+            //Tier 12 Intelligence perks
+            EpicSpirituality.requireWis(260)
+                    .requireInt(390)
+                    .requirePerk(HalfStepToEpicSpirituality)
+                    .requireLevel(72);
+            //Tier 13 Intelligence perks
+            HalfStepToMythicalSpirituality.requireWis(280)
+                    .requireInt(420)
+                    .requirePerk(EpicSpirituality)
+                    .requireLevel(78);
+            //Tier 14 Intelligence perks
+            MythicalSpirituality.requireWis(300)
+                    .requireInt(450)
+                    .requirePerk(HalfStepToMythicalSpirituality)
+                    .requireLevel(84);
+            //------------
+            // WISDOM
+            //------------
+            JobElementalConjurer.requireWis(10);
+            ElementalConjurerResolve.requirePerk(JobElementalConjurer)
+                    .requireWis(20);
+            ElementalContractRank1.requirePerk(ElementalConjurerResolve)
+                    .requireWis(25);
+            ElementsOfTheOrtodoxPath.requirePerk(ElementalContractRank1)
+                    .requireWis(30);
+            ElementsOfMarethBasics.requirePerk(ElementsOfTheOrtodoxPath)
+                    .requireWis(35);
+            //Tier 1 Wisdom perks
+            ElementalContractRank2.requirePerk(ElementalContractRank1)
+                    .requireWis(50)
+                    .requireLevel(6);
+            ElementalBondFlesh.requirePerk(ElementalContractRank1)
+                    .requireWis(50)
+                    .requireLevel(6);
+            /*.requirePerk(ElementsOfMarethBasics)
+					.requireWis(35)
+					.requireLevel(6);*/
+            //Tier 2 Wisdom perks
+            JobMonk.requireWis(60)
+                    .requireLevel(12);
+            Combo.requirePerk(JobMonk)
+                    .requireWis(75)
+                    .requireStr(50)
+                    .requireLevel(12);
+            ElementalContractRank3.requirePerk(ElementalContractRank2)
+                    .requireWis(75)
+                    .requireLevel(12);
+            ElementalBondUrges.requirePerk(ElementalContractRank2)
+                    .requireWis(75)
+                    .requireLevel(12);
+            StrongElementalBond.requirePerk(ElementalContractRank3)
+                    .requireWis(75)
+                    .requireLevel(12);
+            //Tier 3 Wisdom perks
+            ElementalContractRank4.requirePerk(ElementalContractRank3)
+                    .requireWis(100)
+                    .requireLevel(18);
+            CatchTheBlade.requirePerk(JobMonk)
+                    .requireWis(80)
+                    .requireSpe(100)
+                    .requireLevel(18);
 
-		//Slot 5 - Fertile+ increases cum production and fertility (+15%)
-		JobSeducer.requireLib(10);
-		UnlockId.requireLib(20);
-		FertilityPlus.requireLib(25);
-		FertilityPlus.defaultValue1 = 15;
-		FertilityPlus.defaultValue2 = 1.75;
-		BasicSelfControl.requireLib(30)
-						.requireInt(20);
-		//Slot 5 - minimum libido
-		ColdBlooded.requireMinLust(20);
-		ColdBlooded.defaultValue1 = 20;
-		HotBlooded.requireLib(50);
-		HotBlooded.defaultValue1 = 20;
-		//Tier 1 Libido Perks
-		//Slot 5 - minimum libido
-		//Slot 5 - Fertility- decreases cum production and fertility.
-		FertilityMinus.requireLibLessThan(25)
-					  .requireLevel(6);
-		FertilityMinus.defaultValue1 = 15;
-		FertilityMinus.defaultValue2 = 0.7;
-		WellAdjusted.requireLib(60)
-					.requireLevel(6);
-		//Slot 5 - minimum libido
-		Masochist.requireLib(60)
-				 .requireCor(50)
-				 .requireLevel(6);
-		JobEromancer.requirePerk(JobSeducer)
-					.requireLib(30)
-					.requireInt(60)
-					.requireLevel(6);
-		ArcaneLash.requirePerk(JobEromancer).requireLevel(6);
-		HalfStepToImprovedSelfControl.requireLib(60)
-									 .requireInt(40)
-									 .requirePerk(BasicSelfControl)
-									 .requireLevel(6);
-		InhumanDesireI.requirePerk(JobSeducer)
-					  .requireLib(50)
-					  .requireLevel(6);
-		InhumanDesireII.requirePerk(InhumanDesireI)
-					   .requireLib(70)
-					   .requireLevel(8)
-					   .requireNGPlus(1);
-		InhumanDesireIII.requirePerk(InhumanDesireII)
-						.requireLib(90)
-						.requireLevel(10)
-						.requireNGPlus(2);
+            //Tier 4 Wisdom perks
+            ComboMaster.requirePerk(Combo)
+                    .requireWis(125)
+                    .requireStr(100)
+                    .requireLevel(24);
+            ElementalContractRank5.requirePerk(ElementalContractRank4)
+                    .requirePerk(ElementalConjurerDedication)
+                    .requireWis(125)
+                    .requireLevel(24);
+            StrongerElementalBond.requirePerk(StrongElementalBond)
+                    .requirePerk(ElementalContractRank5)
+                    .requireWis(125)
+                    .requireLevel(24);
+            ElementalConjurerDedication.requirePerk(ElementalConjurerResolve)
+                    .requireWis(120)
+                    .requireLevel(24);
+            FirstAttackElementals.requirePerk(StrongElementalBond)
+                    .requirePerk(ElementalContractRank4)
+                    .requireLevel(24);
+            //Tier 5 Wisdom perks
+            UnlockMind2ndStage.requirePerk(UnlockMind)
+                    .requireWis(150)
+                    .requireLevel(30);
+            ElementalContractRank6.requirePerk(ElementalContractRank5)
+                    .requireWis(150)
+                    .requireLevel(30);
+            //Tier 6 Wisdom perks
+            ElementalContractRank7.requirePerk(ElementalContractRank6)
+                    .requirePerk(ElementalConjurerSacrifice)
+                    .requireWis(175)
+                    .requireLevel(36);
+            StrongestElementalBond.requirePerk(StrongerElementalBond)
+                    .requirePerk(ElementalContractRank7)
+                    .requireWis(175)
+                    .requireLevel(36);
+            //Tier 7 Wisdom perks
+            PrestigeJobSoulArtMaster.requirePrestigeJobSlot()
+                    .requirePerk(FleshBodyApprenticeStage)
+                    .requirePerk(JobMonk)
+                    .requireWis(200)
+                    .requireLevel(42);
+            ElementalContractRank8.requirePerk(ElementalContractRank7)
+                    .requireWis(200)
+                    .requireLevel(42);
+            //Tier 8 Wisdom perks
+            ElementalContractRank9.requirePerk(ElementalContractRank8)
+                    .requirePerk(ElementalConjurerSacrifice)
+                    .requireWis(225)
+                    .requireLevel(42);
+            ElementalConjurerSacrifice.requirePerk(ElementalConjurerDedication)
+                    .requireWis(220)
+                    .requireLevel(48);
+            //Tier 9 Wisdom perks
+            ElementalContractRank10.requirePerk(ElementalContractRank9)
+                    .requireWis(250)
+                    .requireLevel(54);
+            //Tier 10 Wisdom perks
+            ElementalContractRank11.requirePerk(ElementalContractRank10)
+                    .requireWis(275)
+                    .requireLevel(60);
+            //------------
+            // LIBIDO
+            //------------
+            //slot 5 - libido perks
 
-		//Tier 2 Libido Perks
-		InhumanDesireIV.requirePerk(InhumanDesireIII)
-					   .requireLib(110)
-					   .requireNGPlus(3)
-					   .requireLevel(12);
-		InhumanDesireV.requirePerk(InhumanDesireIV)
-					  .requireLib(130)
-					  .requireLevel(14)
-					  .requireNGPlus(4);
-		InhumanDesireVI.requirePerk(InhumanDesireV)
-					   .requireLib(150)
-					   .requireLevel(16)
-					   .requireNGPlus(5);
-		DemonicDesireI.requirePerk(InhumanDesireI)
-					  .requireLib(75)
-					  .requireLevel(12);
-		DemonicDesireII.requirePerk(DemonicDesireI)
-					   .requireLib(95)
-					   .requireLevel(14)
-					   .requireNGPlus(1);
-		DemonicDesireIII.requirePerk(DemonicDesireII)
-						.requireLib(115)
-						.requireLevel(16)
-						.requireNGPlus(2);
-		ImprovedSelfControl.requireLib(90)
-						   .requireInt(60)
-						   .requirePerk(HalfStepToImprovedSelfControl)
-						   .requireLevel(12);
-		Transference.requirePerk(JobEromancer)
-					.requireLevel(12)
-					.requireLib(50)
-					.requireStatusEffect(StatusEffects.KnowsArouse, "Arouse spell");
-		JobCourtesan.requirePerk(JobSeducer)
-					.requirePerk(Heroism)
-					.requireLib(50)
-					.requireLevel(12);
-		DazzlingDisplay.requirePerk(JobCourtesan)
-					   .requireLib(50)
-					   .requireLevel(12);
-		//Tier 3 Libido Perks
-		DemonicDesireIV.requirePerk(DemonicDesireIII)
-					   .requireLib(135)
-					   .requireNGPlus(3)
-					   .requireLevel(18);
-		DemonicDesireV.requirePerk(DemonicDesireIV)
-					  .requireLib(155)
-					  .requireLevel(20)
-					  .requireNGPlus(4);
-		DemonicDesireVI.requirePerk(DemonicDesireV)
-					   .requireLib(175)
-					   .requireLevel(22)
-					   .requireNGPlus(5);
-		HalfStepToAdvancedSelfControl.requireLib(120)
-									 .requireInt(80)
-									 .requirePerk(ImprovedSelfControl)
-									 .requireLevel(18);
-		ColdLust.requirePerk(Lustzerker)
-				.requirePerk(ImprovedSelfControl)
-				.requireLib(75)
-				.requireLevel(18);
-		ArouseTheAudience.requirePerk(JobCourtesan)
-						 .requireLib(75)
-						 .requireLevel(18);
-		//Tier 4 Libido Perks
-		AdvancedSelfControl.requireLib(150)
-						   .requireInt(100)
-						   .requirePerk(HalfStepToAdvancedSelfControl)
-						   .requireLevel(24);
-		CriticalPerformance.requirePerk(JobCourtesan)
-						   .requireLib(100)
-						   .requireLevel(24);
-		//Tier 5 Libido Perks
-		HalfStepToSuperiorSelfControl.requireLib(180)
-									 .requireInt(120)
-									 .requirePerk(AdvancedSelfControl)
-									 .requireLevel(30);
-		//Tier 6 Libido Perks
-		SuperiorSelfControl.requireLib(210)
-						   .requireInt(140)
-						   .requirePerk(HalfStepToSuperiorSelfControl)
-						   .requireLevel(36);
-		//Tier 7 Libido Perks
-		HalfStepToPeerlessSelfControl.requireLib(240)
-									 .requireInt(160)
-									 .requirePerk(SuperiorSelfControl)
-									 .requireLevel(42);
-		//Tier 8 Libido Perks
-		PeerlessSelfControl.requireLib(270)
-						   .requireInt(180)
-						   .requirePerk(HalfStepToPeerlessSelfControl)
-						   .requireLevel(48);
-		//Tier 9 Libido Perks
-		HalfStepToInhumanSelfControl.requireLib(300)
-									.requireInt(200)
-									.requirePerk(PeerlessSelfControl)
-									.requireLevel(54);
-		//Tier 10 Libido Perks
-		InhumanSelfControl.requireLib(330)
-						  .requireInt(220)
-						  .requirePerk(HalfStepToInhumanSelfControl)
-						  .requireLevel(60);
-		//Tier 11 Libido Perks
-		HalfStepToEpicSelfControl.requireLib(360)
-								 .requireInt(240)
-								 .requirePerk(InhumanSelfControl)
-								 .requireLevel(66);
-		//Tier 12 Libido Perks
-		EpicSelfControl.requireLib(390)
-					   .requireInt(260)
-					   .requirePerk(HalfStepToEpicSelfControl)
-					   .requireLevel(72);
-		//Tier 13 Libido Perks
-		HalfStepToMythicalSelfControl.requireLib(420)
-									 .requireInt(280)
-									 .requirePerk(EpicSelfControl)
-									 .requireLevel(78);
-		//Tier 14 Libido Perks
-		MythicalSelfControl.requireLib(450)
-						   .requireInt(300)
-						   .requirePerk(HalfStepToMythicalSelfControl)
-						   .requireLevel(84);
-		//------------
-		// SENSITIVITY
-		//------------
-		//Slot 6 - Tier 0
-		EyesOfTheHunterNovice.requireSen(25);
-		SenseWrath.requireSen(25);
-		//.requireMinSens(15);
-		//Tier 1
-		EyesOfTheHunterAdept.requireSen(50)
-							.requirePerk(EyesOfTheHunterNovice)
-							.requireLevel(6);
-		//Tier 2
-		EyesOfTheHunterMaster.requireSen(75)
-							 .requirePerk(EyesOfTheHunterAdept)
-							 .requireLevel(12);
-		//Tier 3
-		//------------
-		// CORRUPTION
-		//------------
-		//Slot 7 - Corrupted Libido - lust raises 10% slower.
-		CorruptedLibido.requireCor(25);
-		CorruptedLibido.defaultValue1 = 20;
-		//Slot 7 - Seduction (Must have seduced Jojo)
-		Seduction.requireCor(50);
-		//Slot 7 - Nymphomania
-		Nymphomania.requireCor(75)
-				   .requirePerk(CorruptedLibido);
-		//Slot 7 - UNFINISHED :3
-		Acclimation.requireCor(50)
-				   .requirePerk(CorruptedLibido)
-				   .requireMinLust(20);
-		SenseCorruption.requireCor(75);
-		//Tier 1 Corruption Perks - acclimation over-rides
-		Sadist.requireCor(60)
-			  .requirePerk(CorruptedLibido)
-			  .requireLevel(6);
-		ArousingAura.requireCor(70)
-					.requirePerk(CorruptedLibido)
-					.requireLevel(6);
-		//Tier 2
-		/*if (requireMinLevel(12))
-		 {
-		 if (requirePerk(JobSeducer)
-		 .requireMinCor(50)) {
-		 _add(new PerkClass(PerkLib				job:corrupter czy jakoś tak - daje efekt iż wszyscy reaguja jakby pc miał 10/15/20/25 mniej corruption, nie wiem czy jeszcze jakiś efekt dodać
-		 }
-		 }*/
-		//Tier 3
-		//Tier 4
-		//------------
-		// SOULFORCE
-		//------------
-		//Tier 0
-		JobSoulCultivator.requireWis(10);
-		Dantain.requirePerk(JobSoulCultivator)
-			   .requireMaxSoulforce(100);
-		BodyCultivator.requirePerk(JobSoulCultivator);
-		DaoistCultivator.requirePerk(JobSoulCultivator);
-		//HeartCultivator.requirePerk(JobSoulCultivator);		//psionic/min powers cultivation/psion class from D&D?
-		//requirePerk(JobSoulCultivator)		//allowing to use soulforce options more times per day - 1/2/3 time more?
-		//requirePerk(JobSoulCultivator)		//allowing to use soul artifacts - new slot?
-		//Tier 1
-		SoulApprentice.requireWis(20)
-					  .requireLevel(6)
-					  .requirePerk(JobSoulCultivator);
-		InsightfulResourcesI.requireLevel(6)
-							.requireWis(50)
-							.requirePerk(JobSoulCultivator);
-		FleshBodyApprenticeStage.requireLevel(6)
-								.requirePerk(BodyCultivator);
-		DaoistApprenticeStage.requireLevel(6)
-							 .requirePerk(DaoistCultivator);
-		InsightfulResourcesII.requireLevel(6)
-							 .requirePerk(InsightfulResourcesI)
-							 .requireWis(70)
-							 .requireLevel(8)
-							 .requireNGPlus(1);
-		InsightfulResourcesIII.requirePerk(InsightfulResourcesII)
-							  .requireWis(90)
-							  .requireLevel(10)
-							  .requireNGPlus(2);
-		//Tier 2
-		SoulPersonage.requireLevel(12)
-					 .requirePerk(SoulApprentice)
-					 .requireWis(40);
-		InsightfulResourcesIV.requireLevel(12)
-							 .requirePerk(InsightfulResourcesIII)
-							 .requireWis(110)
-							 .requireNGPlus(3);
-		InsightfulResourcesV.requirePerk(InsightfulResourcesIV)
-							.requireWis(130)
-							.requireLevel(20)
-							.requireNGPlus(4);
-		InsightfulResourcesVI.requirePerk(InsightfulResourcesV)
-							 .requireWis(150)
-							 .requireLevel(22)
-							 .requireNGPlus(5);
-		//Tier 3
-		SoulWarrior.requirePerk(SoulPersonage)
-				   .requireWis(60)
-				   .requireLevel(18);
-		//Tier 4
-		SoulSprite.requireLevel(24)
-				  .requirePerk(SoulWarrior)
-				  .requireWis(80); // && requirePerk(HclassHeavenTribulationSurvivor)
-		FleshBodyWarriorStage.requireLevel(24)
-							 .requirePerk(FleshBodyApprenticeStage);
-		DaoistWarriorStage.requireLevel(24)
-						  .requirePerk(DaoistApprenticeStage);
-		//Tier 5
-		SoulScholar.requirePerk(SoulSprite)
-				   .requireWis(100)
-				   .requireLevel(30);
-		//Tier 6
-		SoulElder.requirePerk(SoulScholar)
-				 .requireWis(120)
-				 .requireLevel(36);
-		//Tier 7
-		SoulExalt.requirePerk(SoulElder)
-				 .requireWis(140)
-				 .requireLevel(42);// && requirePerk(GclassHeavenTribulationSurvivor)
-		FleshBodyElderStage.requireLevel(42)
-						   .requirePerk(FleshBodyWarriorStage);
-		DaoistElderStage.requireLevel(42)
-						.requirePerk(DaoistWarriorStage);
-		//Tier 8
-		SoulOverlord.requirePerk(SoulExalt)
-					.requireWis(160)
-					.requireLevel(48);
-		//Tier 9
-		SoulTyrant.requireLevel(54)
-				  .requirePerk(SoulOverlord)
-				  .requireWis(180);
-		//Tier 10
-/*		SoulKing.requirePerk(SoulTyrant)
-				.requireWis(200)
-				.requireLevel(60);
-		FleshBodyOverlordStage.requireLevel(60)
-							  .requirePerk(FleshBodyElderStage);
-		DaoistOverlordStage.requireLevel(60)
-						   .requirePerk(DaoistElderStage);
-		//Tier 11
-		SoulEmperor.requirePerk(SoulKing)
-				   .requireWis(220)
-				   .requireLevel(66);
-		//Tier 12
-		SoulAncestor.requirePerk(SoulEmperor)
-					.requireWis(240)
-					.requireLevel(72);
-*/		//------------
-		// MISCELLANEOUS
-		//------------
-		//Tier 0
-		BlackHeart.requirePerk(DarkCharm).requireCor(90).requireCustomFunction(function (player:Player):Boolean {
-			return player.demonScore() >= 6;
-		}, "Demon race");
-		CatlikeNimbleness.requirePerk(Flexibility).requireCustomFunction(function (player:Player):Boolean {
-			return player.catScore() >= 4;
-		}, "Cat race");
-		DraconicLungs.requirePerk(DragonFireBreath)
-					 .requirePerk(DragonIceBreath)
-					 .requirePerk(DragonLightningBreath)
-					 .requirePerk(DragonDarknessBreath).requireCustomFunction(function (player:Player):Boolean {
-			return player.dragonScore() >= 4;
-		}, "Dragon race");
-		GorgonsEyes.requireCustomFunction(function (player:Player):Boolean {
-			return player.gorgonScore() >= 5 && player.eyeType == 4
-		}, "Gorgon race and eyes");
-		KitsuneThyroidGland.requireAnyPerk(EnlightenedKitsune, CorruptedKitsune).requireCustomFunction(function (player:Player):Boolean {
-			return player.kitsuneScore() >= 5;
-		}, "Kitsune race");
-		LizanMarrow.requirePerk(LizanRegeneration).requireCustomFunction(function (player:Player):Boolean {
-				return player.lizardScore() >= 4
-			}, "Lizan race");
-		ManticoreMetabolism.requireCustomFunction(function (player:Player):Boolean {
-			return player.manticoreScore() >= 6 && player.tailType == Creature.TAIL_TYPE_MANTICORE_PUSSYTAIL
-		}, "Manticore race and tail");
-		MantislikeAgility.requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
-			return player.mantisScore() >= 6
-		}, "Mantis race");
-		SalamanderAdrenalGlands.requirePerk(Lustzerker).requireCustomFunction(function (player:Player):Boolean {
-			return player.salamanderScore() >= 4
-		}, "Salamander race");
-		ScyllaInkGlands.requirePerk(InkSpray).requireCustomFunction(function (player:Player):Boolean {
-			return player.scyllaScore() >= 5
-		}, "Scylla race");
-		TrachealSystem.requireCustomFunction(function (player:Player):Boolean {
-			return player.beeScore() >= 4 || player.mantisScore() >= 4 || player.scorpionScore() >= 4 || player.spiderScore() >= 4;
-		}, "Any insect race");
-		/*
-		 if (player.() >=  && ) {
-		 _add(new PerkClass(PerkLib.));
-		 }
-		 if (player.() >=  && ) {
-		 _add(new PerkClass(PerkLib.));
-		 }
-		 Phoenix Thorax czy jakiś inny związany z morphami perk ub coś związane z gardłem - dla ras mogących używać ultradźwieki jako atak lub kogoś typu banshee atak wyciem
+            //Slot 5 - Fertile+ increases cum production and fertility (+15%)
+            JobSeducer.requireLib(10);
+            UnlockId.requireLib(20);
+            FertilityPlus.requireLib(25);
+            FertilityPlus.defaultValue1 = 15;
+            FertilityPlus.defaultValue2 = 1.75;
+            BasicSelfControl.requireLib(30)
+                    .requireInt(20);
+            //Slot 5 - minimum libido
+            ColdBlooded.requireMinLust(20);
+            ColdBlooded.defaultValue1 = 20;
+            HotBlooded.requireLib(50);
+            HotBlooded.defaultValue1 = 20;
+            //Tier 1 Libido Perks
+            //Slot 5 - minimum libido
+            //Slot 5 - Fertility- decreases cum production and fertility.
+            FertilityMinus.requireLibLessThan(25)
+                    .requireLevel(6);
+            FertilityMinus.defaultValue1 = 15;
+            FertilityMinus.defaultValue2 = 0.7;
+            WellAdjusted.requireLib(60)
+                    .requireLevel(6);
+            //Slot 5 - minimum libido
+            Masochist.requireLib(60)
+                    .requireCor(50)
+                    .requireLevel(6);
+            JobEromancer.requirePerk(JobSeducer)
+                    .requireLib(30)
+                    .requireInt(60)
+                    .requireLevel(6);
+            ArcaneLash.requirePerk(JobEromancer).requireLevel(6);
+            HalfStepToImprovedSelfControl.requireLib(60)
+                    .requireInt(40)
+                    .requirePerk(BasicSelfControl)
+                    .requireLevel(6);
+            InhumanDesireI.requirePerk(JobSeducer)
+                    .requireLib(50)
+                    .requireLevel(6);
+            InhumanDesireII.requirePerk(InhumanDesireI)
+                    .requireLib(70)
+                    .requireLevel(8)
+                    .requireNGPlus(1);
+            InhumanDesireIII.requirePerk(InhumanDesireII)
+                    .requireLib(90)
+                    .requireLevel(10)
+                    .requireNGPlus(2);
 
-		 Perk związany z mieśniami
+            //Tier 2 Libido Perks
+            InhumanDesireIV.requirePerk(InhumanDesireIII)
+                    .requireLib(110)
+                    .requireNGPlus(3)
+                    .requireLevel(12);
+            InhumanDesireV.requirePerk(InhumanDesireIV)
+                    .requireLib(130)
+                    .requireLevel(14)
+                    .requireNGPlus(4);
+            InhumanDesireVI.requirePerk(InhumanDesireV)
+                    .requireLib(150)
+                    .requireLevel(16)
+                    .requireNGPlus(5);
+            DemonicDesireI.requirePerk(InhumanDesireI)
+                    .requireLib(75)
+                    .requireLevel(12);
+            DemonicDesireII.requirePerk(DemonicDesireI)
+                    .requireLib(95)
+                    .requireLevel(14)
+                    .requireNGPlus(1);
+            DemonicDesireIII.requirePerk(DemonicDesireII)
+                    .requireLib(115)
+                    .requireLevel(16)
+                    .requireNGPlus(2);
+            ImprovedSelfControl.requireLib(90)
+                    .requireInt(60)
+                    .requirePerk(HalfStepToImprovedSelfControl)
+                    .requireLevel(12);
+            Transference.requirePerk(JobEromancer)
+                    .requireLevel(12)
+                    .requireLib(50)
+                    .requireStatusEffect(StatusEffects.KnowsArouse, "Arouse spell");
+            JobCourtesan.requirePerk(JobSeducer)
+                    .requirePerk(Heroism)
+                    .requireLib(50)
+                    .requireLevel(12);
+            DazzlingDisplay.requirePerk(JobCourtesan)
+                    .requireLib(50)
+                    .requireLevel(12);
+            //Tier 3 Libido Perks
+            DemonicDesireIV.requirePerk(DemonicDesireIII)
+                    .requireLib(135)
+                    .requireNGPlus(3)
+                    .requireLevel(18);
+            DemonicDesireV.requirePerk(DemonicDesireIV)
+                    .requireLib(155)
+                    .requireLevel(20)
+                    .requireNGPlus(4);
+            DemonicDesireVI.requirePerk(DemonicDesireV)
+                    .requireLib(175)
+                    .requireLevel(22)
+                    .requireNGPlus(5);
+            HalfStepToAdvancedSelfControl.requireLib(120)
+                    .requireInt(80)
+                    .requirePerk(ImprovedSelfControl)
+                    .requireLevel(18);
+            ColdLust.requirePerk(Lustzerker)
+                    .requirePerk(ImprovedSelfControl)
+                    .requireLib(75)
+                    .requireLevel(18);
+            ArouseTheAudience.requirePerk(JobCourtesan)
+                    .requireLib(75)
+                    .requireLevel(18);
+            //Tier 4 Libido Perks
+            AdvancedSelfControl.requireLib(150)
+                    .requireInt(100)
+                    .requirePerk(HalfStepToAdvancedSelfControl)
+                    .requireLevel(24);
+            CriticalPerformance.requirePerk(JobCourtesan)
+                    .requireLib(100)
+                    .requireLevel(24);
+            //Tier 5 Libido Perks
+            HalfStepToSuperiorSelfControl.requireLib(180)
+                    .requireInt(120)
+                    .requirePerk(AdvancedSelfControl)
+                    .requireLevel(30);
+            //Tier 6 Libido Perks
+            SuperiorSelfControl.requireLib(210)
+                    .requireInt(140)
+                    .requirePerk(HalfStepToSuperiorSelfControl)
+                    .requireLevel(36);
+            //Tier 7 Libido Perks
+            HalfStepToPeerlessSelfControl.requireLib(240)
+                    .requireInt(160)
+                    .requirePerk(SuperiorSelfControl)
+                    .requireLevel(42);
+            //Tier 8 Libido Perks
+            PeerlessSelfControl.requireLib(270)
+                    .requireInt(180)
+                    .requirePerk(HalfStepToPeerlessSelfControl)
+                    .requireLevel(48);
+            //Tier 9 Libido Perks
+            HalfStepToInhumanSelfControl.requireLib(300)
+                    .requireInt(200)
+                    .requirePerk(PeerlessSelfControl)
+                    .requireLevel(54);
+            //Tier 10 Libido Perks
+            InhumanSelfControl.requireLib(330)
+                    .requireInt(220)
+                    .requirePerk(HalfStepToInhumanSelfControl)
+                    .requireLevel(60);
+            //Tier 11 Libido Perks
+            HalfStepToEpicSelfControl.requireLib(360)
+                    .requireInt(240)
+                    .requirePerk(InhumanSelfControl)
+                    .requireLevel(66);
+            //Tier 12 Libido Perks
+            EpicSelfControl.requireLib(390)
+                    .requireInt(260)
+                    .requirePerk(HalfStepToEpicSelfControl)
+                    .requireLevel(72);
+            //Tier 13 Libido Perks
+            HalfStepToMythicalSelfControl.requireLib(420)
+                    .requireInt(280)
+                    .requirePerk(EpicSelfControl)
+                    .requireLevel(78);
+            //Tier 14 Libido Perks
+            MythicalSelfControl.requireLib(450)
+                    .requireInt(300)
+                    .requirePerk(HalfStepToMythicalSelfControl)
+                    .requireLevel(84);
+            //------------
+            // SENSITIVITY
+            //------------
+            //Slot 6 - Tier 0
+            EyesOfTheHunterNovice.requireSen(25);
+            SenseWrath.requireSen(25);
+            //.requireMinSens(15);
+            //Tier 1
+            EyesOfTheHunterAdept.requireSen(50)
+                    .requirePerk(EyesOfTheHunterNovice)
+                    .requireLevel(6);
+            //Tier 2
+            EyesOfTheHunterMaster.requireSen(75)
+                    .requirePerk(EyesOfTheHunterAdept)
+                    .requireLevel(12);
+            //Tier 3
+            //------------
+            // CORRUPTION
+            //------------
+            //Slot 7 - Corrupted Libido - lust raises 10% slower.
+            CorruptedLibido.requireCor(25);
+            CorruptedLibido.defaultValue1 = 20;
+            //Slot 7 - Seduction (Must have seduced Jojo)
+            Seduction.requireCor(50);
+            //Slot 7 - Nymphomania
+            Nymphomania.requireCor(75)
+                    .requirePerk(CorruptedLibido);
+            //Slot 7 - UNFINISHED :3
+            Acclimation.requireCor(50)
+                    .requirePerk(CorruptedLibido)
+                    .requireMinLust(20);
+            SenseCorruption.requireCor(75);
+            //Tier 1 Corruption Perks - acclimation over-rides
+            Sadist.requireCor(60)
+                    .requirePerk(CorruptedLibido)
+                    .requireLevel(6);
+            ArousingAura.requireCor(70)
+                    .requirePerk(CorruptedLibido)
+                    .requireLevel(6);
+            //Tier 2
+            /*if (requireMinLevel(12))
+			{
+			if (requirePerk(JobSeducer)
+			.requireMinCor(50)) {
+			_add(new PerkClass(PerkLib				job:corrupter czy jakoś tak - daje efekt iż wszyscy reaguja jakby pc miał 10/15/20/25 mniej corruption, nie wiem czy jeszcze jakiś efekt dodać
+			}
+			}*/
+            //Tier 3
+            //Tier 4
+            //------------
+            // SOULFORCE
+            //------------
+            //Tier 0
+            JobSoulCultivator.requireWis(10);
+            Dantain.requirePerk(JobSoulCultivator)
+                    .requireMaxSoulforce(100);
+            BodyCultivator.requirePerk(JobSoulCultivator);
+            DaoistCultivator.requirePerk(JobSoulCultivator);
+            //HeartCultivator.requirePerk(JobSoulCultivator);		//psionic/min powers cultivation/psion class from D&D?
+            //requirePerk(JobSoulCultivator)		//allowing to use soulforce options more times per day - 1/2/3 time more?
+            //requirePerk(JobSoulCultivator)		//allowing to use soul artifacts - new slot?
+            //Tier 1
+            SoulApprentice.requireWis(20)
+                    .requireLevel(6)
+                    .requirePerk(JobSoulCultivator);
+            InsightfulResourcesI.requireLevel(6)
+                    .requireWis(50)
+                    .requirePerk(JobSoulCultivator);
+            FleshBodyApprenticeStage.requireLevel(6)
+                    .requirePerk(BodyCultivator);
+            DaoistApprenticeStage.requireLevel(6)
+                    .requirePerk(DaoistCultivator);
+            InsightfulResourcesII.requireLevel(6)
+                    .requirePerk(InsightfulResourcesI)
+                    .requireWis(70)
+                    .requireLevel(8)
+                    .requireNGPlus(1);
+            InsightfulResourcesIII.requirePerk(InsightfulResourcesII)
+                    .requireWis(90)
+                    .requireLevel(10)
+                    .requireNGPlus(2);
+            //Tier 2
+            SoulPersonage.requireLevel(12)
+                    .requirePerk(SoulApprentice)
+                    .requireWis(40);
+            InsightfulResourcesIV.requireLevel(12)
+                    .requirePerk(InsightfulResourcesIII)
+                    .requireWis(110)
+                    .requireNGPlus(3);
+            InsightfulResourcesV.requirePerk(InsightfulResourcesIV)
+                    .requireWis(130)
+                    .requireLevel(20)
+                    .requireNGPlus(4);
+            InsightfulResourcesVI.requirePerk(InsightfulResourcesV)
+                    .requireWis(150)
+                    .requireLevel(22)
+                    .requireNGPlus(5);
+            //Tier 3
+            SoulWarrior.requirePerk(SoulPersonage)
+                    .requireWis(60)
+                    .requireLevel(18);
+            //Tier 4
+            SoulSprite.requireLevel(24)
+                    .requirePerk(SoulWarrior)
+                    .requireWis(80); // && requirePerk(HclassHeavenTribulationSurvivor)
+            FleshBodyWarriorStage.requireLevel(24)
+                    .requirePerk(FleshBodyApprenticeStage);
+            DaoistWarriorStage.requireLevel(24)
+                    .requirePerk(DaoistApprenticeStage);
+            //Tier 5
+            SoulScholar.requirePerk(SoulSprite)
+                    .requireWis(100)
+                    .requireLevel(30);
+            //Tier 6
+            SoulElder.requirePerk(SoulScholar)
+                    .requireWis(120)
+                    .requireLevel(36);
+            //Tier 7
+            SoulExalt.requirePerk(SoulElder)
+                    .requireWis(140)
+                    .requireLevel(42);// && requirePerk(GclassHeavenTribulationSurvivor)
+            FleshBodyElderStage.requireLevel(42)
+                    .requirePerk(FleshBodyWarriorStage);
+            DaoistElderStage.requireLevel(42)
+                    .requirePerk(DaoistWarriorStage);
+            //Tier 8
+            SoulOverlord.requirePerk(SoulExalt)
+                    .requireWis(160)
+                    .requireLevel(48);
+            //Tier 9
+            SoulTyrant.requireLevel(54)
+                    .requirePerk(SoulOverlord)
+                    .requireWis(180);
+            //Tier 10
+            /*		SoulKing.requirePerk(SoulTyrant)
+                                    .requireWis(200)
+                                    .requireLevel(60);
+                            FleshBodyOverlordStage.requireLevel(60)
+                                                  .requirePerk(FleshBodyElderStage);
+                            DaoistOverlordStage.requireLevel(60)
+                                               .requirePerk(DaoistElderStage);
+                            //Tier 11
+                            SoulEmperor.requirePerk(SoulKing)
+                                       .requireWis(220)
+                                       .requireLevel(66);
+                            //Tier 12
+                            SoulAncestor.requirePerk(SoulEmperor)
+                                        .requireWis(240)
+                                        .requireLevel(72);
+                    */		//------------
+            // MISCELLANEOUS
+            //------------
+            //Tier 0
+            BlackHeart.requirePerk(DarkCharm).requireCor(90).requireCustomFunction(function (player:Player):Boolean {
+                return player.demonScore() >= 6;
+            }, "Demon race");
+            CatlikeNimbleness.requirePerk(Flexibility).requireCustomFunction(function (player:Player):Boolean {
+                return player.catScore() >= 4;
+            }, "Cat race");
+            DraconicLungs.requirePerk(DragonFireBreath)
+                    .requirePerk(DragonIceBreath)
+                    .requirePerk(DragonLightningBreath)
+                    .requirePerk(DragonDarknessBreath).requireCustomFunction(function (player:Player):Boolean {
+                return player.dragonScore() >= 4;
+            }, "Dragon race");
+            GorgonsEyes.requireCustomFunction(function (player:Player):Boolean {
+                return player.gorgonScore() >= 5 && player.eyeType == 4;
+            }, "Gorgon race and eyes");
+            KitsuneThyroidGland.requireAnyPerk(EnlightenedKitsune, CorruptedKitsune).requireCustomFunction(function (player:Player):Boolean {
+                return player.kitsuneScore() >= 5;
+            }, "Kitsune race");
+            LizanMarrow.requirePerk(LizanRegeneration).requireCustomFunction(function (player:Player):Boolean {
+                return player.lizardScore() >= 4;
+            }, "Lizan race");
+            ManticoreMetabolism.requireCustomFunction(function (player:Player):Boolean {
+                return player.manticoreScore() >= 6 && player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL;
+            }, "Manticore race and tail");
+            MantislikeAgility.requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
+                return player.mantisScore() >= 6;
+            }, "Mantis race");
+            SalamanderAdrenalGlands.requirePerk(Lustzerker).requireCustomFunction(function (player:Player):Boolean {
+                return player.salamanderScore() >= 4;
+            }, "Salamander race");
+            ScyllaInkGlands.requirePerk(InkSpray).requireCustomFunction(function (player:Player):Boolean {
+                return player.scyllaScore() >= 5;
+            }, "Scylla race");
+            TrachealSystem.requireCustomFunction(function (player:Player):Boolean {
+                return player.beeScore() >= 4 || player.mantisScore() >= 4 || player.scorpionScore() >= 4 || player.spiderScore() >= 4;
+            }, "Any insect race");
+            /*
+			if (player.() >=  && ) {
+			_add(new PerkClass(PerkLib.));
+			}
+			if (player.() >=  && ) {
+			_add(new PerkClass(PerkLib.));
+			}
+			Phoenix Thorax czy jakiś inny związany z morphami perk ub coś związane z gardłem - dla ras mogących używać ultradźwieki jako atak lub kogoś typu banshee atak wyciem
 
-		 Perk związany ze skórą
+			Perk związany z mieśniami
 
-		 Perk związany z układem nerwowym
+			Perk związany ze skórą
 
-		 Perk związany z koścmi
+			Perk związany z układem nerwowym
 
-		 if (flags[kFLAGS.HUNGER_ENABLED] > 0 && game.player.humanScore() < 5) {
-		 _add(new PerkClass(PerkLib.)); - zelazny zoladek czy cos w tym stylu
-		 }
-		 */
-		Metamorph.requirePerk(GeneticMemory);
-	//	JobArtificer.requireInt(25)
-	//				.requireWis(25);
-		JobBeastWarrior.requireStr(20)
-					   .requireTou(20)
-					   .requireSpe(20);
-		PrimalFuryI.requirePerk(JobBeastWarrior);
-		PrimalFuryII.requirePerk(PrimalFuryI)
-					.requireLevel(2)
-					.requireNGPlus(1);
-		PrimalFuryIII.requirePerk(PrimalFuryII)
-					 .requireLevel(4)
-					 .requireNGPlus(2);
-		//Tier 1
-		ResistanceI.requireLevel(6);
-		Heroism.requireLevel(6);
-		DualWield.requireLevel(6);
-		Survivalist.requireLevel(6)
-				   .requireHungerEnabled();
-		ResistanceII.requirePerk(ResistanceI)
-					.requireLevel(8)
-					.requireNGPlus(1);
-		ResistanceIII.requirePerk(ResistanceII)
-					 .requireLevel(10)
-					 .requireNGPlus(2);
-		ChimericalBodyInitialStage.requireLevel(6)
-								  .requireCustomFunction(function (player:Player):Boolean {
-			return player.internalChimeraScore() >= 1;
-		}, "Any racial perk");
-		TrachealSystemEvolved.requireLevel(6).requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
-			return player.beeScore() >= 8 || player.mantisScore() >= 8 || player.scorpionScore() >= 8 || player.spiderScore() >= 8;
-		}, "Any insect race");
-		JobGolemancer.requireLevel(6)
-					 .requireInt(25)
-					 .requireWis(25);
-		ArcanePoolI.requireLevel(6)
-				   .requireInt(30)
-				   .requireWis(30)
-				   .requireAnyPerk(JobElementalConjurer, JobGolemancer);
-		ArcanePoolII.requireLevel(8)
-					.requireInt(40)
-					.requireWis(40)
-					.requirePerk(ArcanePoolI)
-					.requireNGPlus(1);
-		ArcanePoolIII.requireLevel(10)
-					 .requireInt(50)
-					 .requireWis(50)
-					 .requirePerk(ArcanePoolII)
-					 .requireNGPlus(2);
-		BeginnerGolemMaker.requireLevel(6)
-						  .requireInt(30)
-						  .requireWis(30)
-						  .requirePerk(JobGolemancer);
-		BiggerGolemBag1.requireLevel(6)
-					   .requireInt(40)
-					   .requireWis(40)
-					   .requirePerk(JobGolemancer);
-		BiggerGolemBag2.requireLevel(8)
-					   .requireInt(60)
-					   .requireWis(60)
-					   .requirePerk(BiggerGolemBag1)
-					   .requireNGPlus(1);
-		BiggerGolemBag3.requireLevel(10)
-					   .requireInt(80)
-					   .requireWis(80)
-					   .requirePerk(BiggerGolemBag2)
-					   .requireNGPlus(2);
-		ImprovingNaturesBlueprintsNaturalWeapons.requirePerk(JobBeastWarrior)
-												.requireStr(35)
-												.requireTou(35)
-												.requireSpe(35)
-												.requireLevel(6);
-		PrimalFuryIV.requirePerk(PrimalFuryIII)
-					.requireNGPlus(3);
-		PrimalFuryV.requirePerk(PrimalFuryIV)
-				   .requireLevel(8)
-				   .requireNGPlus(4);
-		PrimalFuryVI.requirePerk(PrimalFuryV)
-					.requireLevel(10)
-					.requireNGPlus(5);
-		//Tier 2
-		Survivalist2.requireLevel(12)
-					.requireHungerEnabled()
-					.requirePerk(Survivalist);
-		ResistanceIV.requireLevel(12)
-					.requirePerk(ResistanceIII)
-					.requireNGPlus(3);
-		ResistanceV.requirePerk(ResistanceIV)
-				   .requireLevel(14)
-				   .requireNGPlus(4);
-		ResistanceVI.requirePerk(ResistanceV)
-				    .requireLevel(16)
-				    .requireNGPlus(5);
-		ChimericalBodyBasicStage.requirePerk(ChimericalBodyInitialStage)
-								.requireLevel(12)
-								.requireCustomFunction(function (player:Player):Boolean {
-				return player.internalChimeraScore() >= 3;
-			}, "Three racial perks");
-		Whirlwind.requireLevel(12)
-				 .requirePerk(JobBarbarian);
-		Whipping.requireLevel(12)
-				.requirePerk(JobEromancer);
-		/*CatlikeNimblenessEvolved.requirePerk(CatlikeNimbleness).requireCustomFunction(function (player:Player):Boolean {
-			return player.catScore() >= 8;
-		}, "Cat race");*/
-		DraconicLungsEvolved.requireLevel(12)
-							.requirePerk(DraconicLungs)
-							.requireCustomFunction(function (player:Player):Boolean {
-			return player.dragonScore() >= 10;
-		}, "Dragon race");
-		KitsuneThyroidGlandEvolved.requireLevel(12)
-								  .requirePerk(KitsuneThyroidGland)
-								  .requireCustomFunction(function (player:Player):Boolean {
-			return player.kitsuneScore() >= 6;
-		}, "Kitsune race");
-		LizanMarrowEvolved.requirePerk(LizanMarrow).requireCustomFunction(function (player:Player):Boolean {
-			return player.lizardScore() >= 8
-		}, "Lizan race");
-		MantislikeAgilityEvolved.requirePerk(MantislikeAgility).requireCustomFunction(function (player:Player):Boolean {
-			return player.mantisScore() >= 12
-		}, "Mantis race");
-		SalamanderAdrenalGlandsEvolved.requirePerk(SalamanderAdrenalGlands).requireCustomFunction(function (player:Player):Boolean {
-			return player.salamanderScore() >= 7
-		}, "Salamander race");
-		ArcanePoolIV.requireLevel(12)
-					.requireInt(60)
-					.requireWis(60)
-					.requirePerk(ArcanePoolIII)
-					.requireNGPlus(3);
-		ArcanePoolV.requireLevel(14)
-				   .requireInt(70)
-				   .requireWis(70)
-				   .requirePerk(ArcanePoolIV)
-				   .requireNGPlus(4);
-		ArcanePoolVI.requireLevel(16)
-				   .requireInt(80)
-				   .requireWis(80)
-				   .requirePerk(ArcanePoolV)
-				   .requireNGPlus(5);
-		ApprenticeGolemMaker.requireLevel(12)
-							.requireInt(50)
-							.requireWis(50)
-							.requirePerk(BeginnerGolemMaker);
-		BiggerGolemBag4.requireLevel(12)
-					   .requireInt(100)
-					   .requireWis(100)
-					   .requirePerk(BiggerGolemBag3)
-					   .requireNGPlus(3);
-		BiggerGolemBag5.requireLevel(14)
-					   .requireInt(120)
-					   .requireWis(120)
-					   .requirePerk(BiggerGolemBag4)
-					   .requireNGPlus(4);
-		BiggerGolemBag6.requireLevel(14)
-					   .requireInt(140)
-					   .requireWis(140)
-					   .requirePerk(BiggerGolemBag5)
-					   .requireNGPlus(5);
-		ChargedCore.requireLevel(12)
-				   .requireInt(70)
-				   .requireWis(70)
-				   .requirePerk(ApprenticeGolemMaker);
-		ImprovedCrinosShape.requirePerk(ImprovingNaturesBlueprintsNaturalWeapons)
-						   .requireStr(50)
-						   .requireTou(50)
-						   .requireSpe(50)
-						   .requireLevel(12);
-		//Tier 3
-		ChimericalBodyAdvancedStage.requirePerk(ChimericalBodyBasicStage)
-								   .requireLevel(18)
-								   .requireCustomFunction(function (player:Player):Boolean {
-				return player.internalChimeraScore() >= 6;
-			}, "Six racial perks");
-		JobWarlord.requireAnyPerk(Whirlwind, Whipping)
-				  .requireLevel(18);
-		PowerSweep.requireLevel(18)
-				  .requireStr(60)
-				  .requireTou(60)
-				  .requirePerk(Whirlwind)
-				  .requirePerk(JobWarlord);
-		CycloneStage1.requireLevel(18)
-					 .requireStr(50)
-					 .requireTou(50)
-					 .requirePerk(JobWarlord);
-		ExpertGolemMaker.requireLevel(18)
-						.requireInt(70)
-						.requireWis(70)
-						.requirePerk(ApprenticeGolemMaker);
-		SuperChargedCore.requireLevel(18)
-						.requireInt(90)
-						.requireWis(90)
-						.requirePerk(ExpertGolemMaker)
-						.requirePerk(ChargedCore);
-		MakeItDouble.requireLevel(18)
-					.requireStr(50)
-					.requireTou(50)
-					.requirePerk(JobWarlord);
-		ImprovingNaturesBlueprintsNaturalArmor.requirePerk(ImprovedCrinosShape)
-											  .requireStr(65)
-											  .requireTou(65)
-											  .requireSpe(65)
-											  .requireLevel(18);
-		//Tier 4
-		JobAllRounder.requireLevel(24)
-					 .requirePerk(JobGuardian)
-					 .requirePerk(JobRanger)
-					 .requirePerk(JobSeducer)
-					 .requirePerk(JobSorcerer)
-					 .requirePerk(JobSoulCultivator)
-					 .requirePerk(JobWarrior)
-					 .requireStr(75)
-					 .requireTou(75)
-					 .requireSpe(75)
-					 .requireInt(75)
-					 .requireWis(75)
-					 .requireLib(45)
-					 .requireSen(45);
-	//	if(player.internalChimeraScore() >= 10 && requirePerk(ChimericalBodyAdvancedStage)) {
-	//		ChimericalBodyPerfectStage;
-	//	}
-		Tornado.requireLevel(24)
-			   .requireStr(75)
-			   .requireTou(75)
-			   .requirePerk(JobWarlord);
-		CycloneStage2.requireLevel(24)
-					 .requireStr(70)
-					 .requireTou(70)
-					 .requirePerk(CycloneStage1);
-		MasterGolemMaker.requireLevel(24)
-						.requireInt(100)
-						.requireWis(100)
-						.requirePerk(ExpertGolemMaker);
-		GiantsReach.requireLevel(24)
-				   .requireStr(100)
-				   .requireTou(100)
-				   .requirePerk(JobWarlord);
-		EnableCriticals.requireLevel(24);
-		GreaterCrinosShape.requirePerk(ImprovingNaturesBlueprintsNaturalArmor)
-						  .requireStr(80)
-						  .requireTou(80)
-						  .requireSpe(80)
-						  .requireLevel(24);
-		FirstAttackGolems.requireLevel(24)
-						 .requirePerk(MasterGolemMaker);
-		//.requireLevel(24)
-		//				 .requirePerk(MasterGolemMaker);
-		//Tier 5
-		//	if (requireMinLevel(30)) {
-		//		if (player.internalChimeraScore() >= 15 && requirePerk(ChimericalBodyPerfectStage)) {
-		//			ChimericalBodyUltimateStage;
-		//		}
-/*		DeityJobMunchkin.requirePerk(JobWarlord)
-						.requirePerk(JobMonk)
-						.requirePerk(JobKnight)
-						.requirePerk(JobGolemancer)
-						.requirePerk(JobHunter)
-						.requirePerk(JobEromancer)
-						.requirePerk(JobEnchanter)
-						.requirePerk(JobElementalConjurer)
-						.requirePerk(JobCourtesan)
-						.requirePerk(JobDervish)
-						.requirePerk(JobDefender)
-						.requirePerk(JobBrawler)
-						.requirePerk(JobBeastWarrior)
-						.requirePerk(JobBarbarian)
-						.requirePerk(JobAllRounder)
-						.requireStr(150)
-						.requireTou(150)
-						.requireSpe(150)
-						.requireInt(150)
-						.requireWis(150)
-						.requireLib(90)
-						.requireSen(90)
-						.requireLevel(30); //requirePerk(JobEromancer)
-*/		//(Still need some other related stuff added to make PC true Munchkin
-		//na razie jest perk GreyMage, potrzeba jeszcze pare innych perków tak z 3-5 innych jeszcze)
-		CycloneStage3.requireLevel(30)
-					 .requireStr(90)
-					 .requireTou(90)
-					 .requirePerk(CycloneStage2);
-		ImprovingNaturesBlueprintsApexPredator.requirePerk(GreaterCrinosShape)
-											  .requireStr(95)
-											  .requireTou(95)
-											  .requireSpe(95)
-											  .requireLevel(30);
-		GolemArmyLieutenant.requireLevel(30)
-						   .requireInt(110)
-						   .requireWis(110)
-						   .requirePerk(MasterGolemMaker);
-		//Tier 6
-		CycloneStage4.requireLevel(36)
-					 .requireStr(120)
-					 .requireTou(120)
-					 .requirePerk(CycloneStage3);
-		MasterCrinosShape.requirePerk(ImprovingNaturesBlueprintsApexPredator)
-						 .requireStr(110)
-						 .requireTou(110)
-						 .requireSpe(110)
-						 .requireLevel(36);
-		GrandMasterGolemMaker.requireLevel(36)
-							 .requireInt(125)
-							 .requireWis(125)
-							 .requirePerk(MasterGolemMaker);
-		//Tier 7
-		CycloneStage5.requireLevel(42)
-					 .requireStr(160)
-					 .requireTou(160)
-					 .requirePerk(CycloneStage4);
-		GolemArmyCaptain.requireLevel(42)
-						.requireInt(135)
-						.requireWis(135)
-						.requirePerk(GolemArmyLieutenant)
-						.requirePerk(GrandMasterGolemMaker);
-		//Tier 8
-		EpicGolemMaker.requireLevel(48)
-					  .requireInt(150)
-					  .requireWis(150)
-					  .requirePerk(GrandMasterGolemMaker);
-		//Tier 9
-		GolemArmyMajor.requireLevel(54)
-					  .requireInt(160)
-					  .requireWis(160)
-					  .requirePerk(GolemArmyCaptain)
-					  .requirePerk(EpicGolemMaker);
-		//Tier 10
-		LegendaryGolemMaker.requireLevel(60)
-						   .requireInt(175)
-						   .requireWis(175)
-						   .requirePerk(EpicGolemMaker);
-		//Tier 11
-		GolemArmyColonel.requireLevel(66)
-						.requireInt(185)
-						.requireWis(185)
-						.requirePerk(GolemArmyMajor)
-						.requirePerk(LegendaryGolemMaker);
-		//Tier 12
-		MythicalGolemMaker.requireLevel(72)
-						  .requireInt(200)
-						  .requireWis(200)
-						  .requirePerk(LegendaryGolemMaker);
-		//Tier 13
-		GolemArmyGeneral.requireLevel(78)
-						.requireInt(210)
-						.requireWis(210)
-						.requirePerk(GolemArmyColonel)
-						.requirePerk(MythicalGolemMaker);
+			Perk związany z koścmi
+
+			if (flags[kFLAGS.HUNGER_ENABLED] > 0 && game.player.humanScore() < 5) {
+			_add(new PerkClass(PerkLib.)); - zelazny zoladek czy cos w tym stylu
+			}
+			*/
+            Metamorph.requirePerk(GeneticMemory);
+            //	JobArtificer.requireInt(25)
+            //				.requireWis(25);
+            JobBeastWarrior.requireStr(20)
+                    .requireTou(20)
+                    .requireSpe(20);
+            PrimalFuryI.requirePerk(JobBeastWarrior);
+            PrimalFuryII.requirePerk(PrimalFuryI)
+                    .requireLevel(2)
+                    .requireNGPlus(1);
+            PrimalFuryIII.requirePerk(PrimalFuryII)
+                    .requireLevel(4)
+                    .requireNGPlus(2);
+            //Tier 1
+            ResistanceI.requireLevel(6);
+            Heroism.requireLevel(6);
+            DualWield.requireLevel(6);
+            Survivalist.requireLevel(6)
+                    .requireHungerEnabled();
+            ResistanceII.requirePerk(ResistanceI)
+                    .requireLevel(8)
+                    .requireNGPlus(1);
+            ResistanceIII.requirePerk(ResistanceII)
+                    .requireLevel(10)
+                    .requireNGPlus(2);
+            ChimericalBodyInitialStage.requireLevel(6)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.internalChimeraScore() >= 1;
+                    }, "Any racial perk");
+            TrachealSystemEvolved.requireLevel(6).requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
+                return player.beeScore() >= 8 || player.mantisScore() >= 8 || player.scorpionScore() >= 8 || player.spiderScore() >= 8;
+            }, "Any insect race");
+            JobGolemancer.requireLevel(6)
+                    .requireInt(25)
+                    .requireWis(25);
+            ArcanePoolI.requireLevel(6)
+                    .requireInt(30)
+                    .requireWis(30)
+                    .requireAnyPerk(JobElementalConjurer, JobGolemancer);
+            ArcanePoolII.requireLevel(8)
+                    .requireInt(40)
+                    .requireWis(40)
+                    .requirePerk(ArcanePoolI)
+                    .requireNGPlus(1);
+            ArcanePoolIII.requireLevel(10)
+                    .requireInt(50)
+                    .requireWis(50)
+                    .requirePerk(ArcanePoolII)
+                    .requireNGPlus(2);
+            BeginnerGolemMaker.requireLevel(6)
+                    .requireInt(30)
+                    .requireWis(30)
+                    .requirePerk(JobGolemancer);
+            BiggerGolemBag1.requireLevel(6)
+                    .requireInt(40)
+                    .requireWis(40)
+                    .requirePerk(JobGolemancer);
+            BiggerGolemBag2.requireLevel(8)
+                    .requireInt(60)
+                    .requireWis(60)
+                    .requirePerk(BiggerGolemBag1)
+                    .requireNGPlus(1);
+            BiggerGolemBag3.requireLevel(10)
+                    .requireInt(80)
+                    .requireWis(80)
+                    .requirePerk(BiggerGolemBag2)
+                    .requireNGPlus(2);
+            ImprovingNaturesBlueprintsNaturalWeapons.requirePerk(JobBeastWarrior)
+                    .requireStr(35)
+                    .requireTou(35)
+                    .requireSpe(35)
+                    .requireLevel(6);
+            PrimalFuryIV.requirePerk(PrimalFuryIII)
+                    .requireNGPlus(3);
+            PrimalFuryV.requirePerk(PrimalFuryIV)
+                    .requireLevel(8)
+                    .requireNGPlus(4);
+            PrimalFuryVI.requirePerk(PrimalFuryV)
+                    .requireLevel(10)
+                    .requireNGPlus(5);
+            //Tier 2
+            Survivalist2.requireLevel(12)
+                    .requireHungerEnabled()
+                    .requirePerk(Survivalist);
+            ResistanceIV.requireLevel(12)
+                    .requirePerk(ResistanceIII)
+                    .requireNGPlus(3);
+            ResistanceV.requirePerk(ResistanceIV)
+                    .requireLevel(14)
+                    .requireNGPlus(4);
+            ResistanceVI.requirePerk(ResistanceV)
+                    .requireLevel(16)
+                    .requireNGPlus(5);
+            ChimericalBodyBasicStage.requirePerk(ChimericalBodyInitialStage)
+                    .requireLevel(12)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.internalChimeraScore() >= 3;
+                    }, "Three racial perks");
+            Whirlwind.requireLevel(12)
+                    .requirePerk(JobBarbarian);
+            Whipping.requireLevel(12)
+                    .requirePerk(JobEromancer);
+            /*CatlikeNimblenessEvolved.requirePerk(CatlikeNimbleness).requireCustomFunction(function (player:Player):Boolean {
+return player.catScore() >= 8;
+}, "Cat race");*/
+            DraconicLungsEvolved.requireLevel(12)
+                    .requirePerk(DraconicLungs)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.dragonScore() >= 10;
+                    }, "Dragon race");
+            KitsuneThyroidGlandEvolved.requireLevel(12)
+                    .requirePerk(KitsuneThyroidGland)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.kitsuneScore() >= 6;
+                    }, "Kitsune race");
+            LizanMarrowEvolved.requirePerk(LizanMarrow).requireCustomFunction(function (player:Player):Boolean {
+                return player.lizardScore() >= 8
+            }, "Lizan race");
+            MantislikeAgilityEvolved.requirePerk(MantislikeAgility).requireCustomFunction(function (player:Player):Boolean {
+                return player.mantisScore() >= 12
+            }, "Mantis race");
+            SalamanderAdrenalGlandsEvolved.requirePerk(SalamanderAdrenalGlands).requireCustomFunction(function (player:Player):Boolean {
+                return player.salamanderScore() >= 7
+            }, "Salamander race");
+            ArcanePoolIV.requireLevel(12)
+                    .requireInt(60)
+                    .requireWis(60)
+                    .requirePerk(ArcanePoolIII)
+                    .requireNGPlus(3);
+            ArcanePoolV.requireLevel(14)
+                    .requireInt(70)
+                    .requireWis(70)
+                    .requirePerk(ArcanePoolIV)
+                    .requireNGPlus(4);
+            ArcanePoolVI.requireLevel(16)
+                    .requireInt(80)
+                    .requireWis(80)
+                    .requirePerk(ArcanePoolV)
+                    .requireNGPlus(5);
+            ApprenticeGolemMaker.requireLevel(12)
+                    .requireInt(50)
+                    .requireWis(50)
+                    .requirePerk(BeginnerGolemMaker);
+            BiggerGolemBag4.requireLevel(12)
+                    .requireInt(100)
+                    .requireWis(100)
+                    .requirePerk(BiggerGolemBag3)
+                    .requireNGPlus(3);
+            BiggerGolemBag5.requireLevel(14)
+                    .requireInt(120)
+                    .requireWis(120)
+                    .requirePerk(BiggerGolemBag4)
+                    .requireNGPlus(4);
+            BiggerGolemBag6.requireLevel(14)
+                    .requireInt(140)
+                    .requireWis(140)
+                    .requirePerk(BiggerGolemBag5)
+                    .requireNGPlus(5);
+            ChargedCore.requireLevel(12)
+                    .requireInt(70)
+                    .requireWis(70)
+                    .requirePerk(ApprenticeGolemMaker);
+            ImprovedCrinosShape.requirePerk(ImprovingNaturesBlueprintsNaturalWeapons)
+                    .requireStr(50)
+                    .requireTou(50)
+                    .requireSpe(50)
+                    .requireLevel(12);
+            //Tier 3
+            ChimericalBodyAdvancedStage.requirePerk(ChimericalBodyBasicStage)
+                    .requireLevel(18)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.internalChimeraScore() >= 6;
+                    }, "Six racial perks");
+            JobWarlord.requireAnyPerk(Whirlwind, Whipping)
+                    .requireLevel(18);
+            PowerSweep.requireLevel(18)
+                    .requireStr(60)
+                    .requireTou(60)
+                    .requirePerk(Whirlwind)
+                    .requirePerk(JobWarlord);
+            CycloneStage1.requireLevel(18)
+                    .requireStr(50)
+                    .requireTou(50)
+                    .requirePerk(JobWarlord);
+            ExpertGolemMaker.requireLevel(18)
+                    .requireInt(70)
+                    .requireWis(70)
+                    .requirePerk(ApprenticeGolemMaker);
+            SuperChargedCore.requireLevel(18)
+                    .requireInt(90)
+                    .requireWis(90)
+                    .requirePerk(ExpertGolemMaker)
+                    .requirePerk(ChargedCore);
+            MakeItDouble.requireLevel(18)
+                    .requireStr(50)
+                    .requireTou(50)
+                    .requirePerk(JobWarlord);
+            ImprovingNaturesBlueprintsNaturalArmor.requirePerk(ImprovedCrinosShape)
+                    .requireStr(65)
+                    .requireTou(65)
+                    .requireSpe(65)
+                    .requireLevel(18);
+            //Tier 4
+            JobAllRounder.requireLevel(24)
+                    .requirePerk(JobGuardian)
+                    .requirePerk(JobRanger)
+                    .requirePerk(JobSeducer)
+                    .requirePerk(JobSorcerer)
+                    .requirePerk(JobSoulCultivator)
+                    .requirePerk(JobWarrior)
+                    .requireStr(75)
+                    .requireTou(75)
+                    .requireSpe(75)
+                    .requireInt(75)
+                    .requireWis(75)
+                    .requireLib(45)
+                    .requireSen(45);
+            //	if(player.internalChimeraScore() >= 10 && requirePerk(ChimericalBodyAdvancedStage)) {
+            //		ChimericalBodyPerfectStage;
+            //	}
+            Tornado.requireLevel(24)
+                    .requireStr(75)
+                    .requireTou(75)
+                    .requirePerk(JobWarlord);
+            CycloneStage2.requireLevel(24)
+                    .requireStr(70)
+                    .requireTou(70)
+                    .requirePerk(CycloneStage1);
+            MasterGolemMaker.requireLevel(24)
+                    .requireInt(100)
+                    .requireWis(100)
+                    .requirePerk(ExpertGolemMaker);
+            GiantsReach.requireLevel(24)
+                    .requireStr(100)
+                    .requireTou(100)
+                    .requirePerk(JobWarlord);
+            EnableCriticals.requireLevel(24);
+            GreaterCrinosShape.requirePerk(ImprovingNaturesBlueprintsNaturalArmor)
+                    .requireStr(80)
+                    .requireTou(80)
+                    .requireSpe(80)
+                    .requireLevel(24);
+            FirstAttackGolems.requireLevel(24)
+                    .requirePerk(MasterGolemMaker);
+            //.requireLevel(24)
+            //				 .requirePerk(MasterGolemMaker);
+            //Tier 5
+            //	if (requireMinLevel(30)) {
+            //		if (player.internalChimeraScore() >= 15 && requirePerk(ChimericalBodyPerfectStage)) {
+            //			ChimericalBodyUltimateStage;
+            //		}
+            /*		DeityJobMunchkin.requirePerk(JobWarlord)
+                                            .requirePerk(JobMonk)
+                                            .requirePerk(JobKnight)
+                                            .requirePerk(JobGolemancer)
+                                            .requirePerk(JobHunter)
+                                            .requirePerk(JobEromancer)
+                                            .requirePerk(JobEnchanter)
+                                            .requirePerk(JobElementalConjurer)
+                                            .requirePerk(JobCourtesan)
+                                            .requirePerk(JobDervish)
+                                            .requirePerk(JobDefender)
+                                            .requirePerk(JobBrawler)
+                                            .requirePerk(JobBeastWarrior)
+                                            .requirePerk(JobBarbarian)
+                                            .requirePerk(JobAllRounder)
+                                            .requireStr(150)
+                                            .requireTou(150)
+                                            .requireSpe(150)
+                                            .requireInt(150)
+                                            .requireWis(150)
+                                            .requireLib(90)
+                                            .requireSen(90)
+                                            .requireLevel(30); //requirePerk(JobEromancer)
+                    */		//(Still need some other related stuff added to make PC true Munchkin
+            //na razie jest perk GreyMage, potrzeba jeszcze pare innych perków tak z 3-5 innych jeszcze)
+            CycloneStage3.requireLevel(30)
+                    .requireStr(90)
+                    .requireTou(90)
+                    .requirePerk(CycloneStage2);
+            ImprovingNaturesBlueprintsApexPredator.requirePerk(GreaterCrinosShape)
+                    .requireStr(95)
+                    .requireTou(95)
+                    .requireSpe(95)
+                    .requireLevel(30);
+            GolemArmyLieutenant.requireLevel(30)
+                    .requireInt(110)
+                    .requireWis(110)
+                    .requirePerk(MasterGolemMaker);
+            //Tier 6
+            CycloneStage4.requireLevel(36)
+                    .requireStr(120)
+                    .requireTou(120)
+                    .requirePerk(CycloneStage3);
+            MasterCrinosShape.requirePerk(ImprovingNaturesBlueprintsApexPredator)
+                    .requireStr(110)
+                    .requireTou(110)
+                    .requireSpe(110)
+                    .requireLevel(36);
+            GrandMasterGolemMaker.requireLevel(36)
+                    .requireInt(125)
+                    .requireWis(125)
+                    .requirePerk(MasterGolemMaker);
+            //Tier 7
+            CycloneStage5.requireLevel(42)
+                    .requireStr(160)
+                    .requireTou(160)
+                    .requirePerk(CycloneStage4);
+            GolemArmyCaptain.requireLevel(42)
+                    .requireInt(135)
+                    .requireWis(135)
+                    .requirePerk(GolemArmyLieutenant)
+                    .requirePerk(GrandMasterGolemMaker);
+            //Tier 8
+            EpicGolemMaker.requireLevel(48)
+                    .requireInt(150)
+                    .requireWis(150)
+                    .requirePerk(GrandMasterGolemMaker);
+            //Tier 9
+            GolemArmyMajor.requireLevel(54)
+                    .requireInt(160)
+                    .requireWis(160)
+                    .requirePerk(GolemArmyCaptain)
+                    .requirePerk(EpicGolemMaker);
+            //Tier 10
+            LegendaryGolemMaker.requireLevel(60)
+                    .requireInt(175)
+                    .requireWis(175)
+                    .requirePerk(EpicGolemMaker);
+            //Tier 11
+            GolemArmyColonel.requireLevel(66)
+                    .requireInt(185)
+                    .requireWis(185)
+                    .requirePerk(GolemArmyMajor)
+                    .requirePerk(LegendaryGolemMaker);
+            //Tier 12
+            MythicalGolemMaker.requireLevel(72)
+                    .requireInt(200)
+                    .requireWis(200)
+                    .requirePerk(LegendaryGolemMaker);
+            //Tier 13
+            GolemArmyGeneral.requireLevel(78)
+                    .requireInt(210)
+                    .requireWis(210)
+                    .requirePerk(GolemArmyColonel)
+                    .requirePerk(MythicalGolemMaker);
+        } catch (e:Error) {
+            trace(e.getStackTrace());
+        }
 	}
-	try {
-		initDependencies();
-	} catch (e:Error) {
-		trace(e.getStackTrace());
-	}
+	initDependencies();
 }
 }

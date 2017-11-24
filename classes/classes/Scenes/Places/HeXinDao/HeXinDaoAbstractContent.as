@@ -4,16 +4,17 @@
  */
 package classes.Scenes.Places.HeXinDao 
 {
-	import classes.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.Places.HeXinDao;
+import classes.*;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.Places.HeXinDao;
+import classes.Scenes.SceneLib;
 
-	use namespace kGAMECLASS;
+use namespace kGAMECLASS;
 
 	internal class HeXinDaoAbstractContent extends BaseContent
 	{
 		protected function get heXinDao():HeXinDao {
-			return kGAMECLASS.hexindao;
+			return SceneLib.hexindao;
 		}
 		public function HeXinDaoAbstractContent()
 		{

@@ -4,11 +4,11 @@
  */
 package classes.Scenes.NPCs 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.internals.*;
-	
-	public class Syth extends Monster
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.*;
+
+public class Syth extends Monster
 	{
 		private function sythBaseAttack():void {
 			if (hasStatusEffect(StatusEffects.Lustzerking) && wrath >= 20) {
@@ -36,7 +36,7 @@ package classes.Scenes.NPCs
 		private function sythAttack2():void {
 			var damage:Number;
 			//return to combat menu when finished
-			doNext(game.playerMenu);
+			doNext(EventParser.playerMenu);
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n");
@@ -131,7 +131,6 @@ package classes.Scenes.NPCs
 			if (choice == 3) sythAttack3();
 			//if (choice == 4) sythUltimateAttack();//some super cool channeled or not super attack that will be his ace - smth to mix salamanders and demons style xD
 			if (choice >= 4) sythBaseAttack();
-			combatRoundOver();
 		}
 		
 		override public function get long():String
@@ -158,12 +157,12 @@ package classes.Scenes.NPCs
 			this.cumMultiplier = 3;
 			// this.hoursSinceCum = 0;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = 8*12;
-			this.hipRating = HIP_RATING_SLENDER;
-			this.buttRating = BUTT_RATING_TIGHT;
-			this.lowerBody = LOWER_BODY_TYPE_SALAMANDER;
+			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_SALAMANDER;
 			this.hairColor = "white";
 			this.hairLength = 1;
 			initStrTouSpeInte(160, 120, 70, 60);
@@ -185,8 +184,8 @@ package classes.Scenes.NPCs
 					add(weapons.DBFSWO,1/50).
 					add(armors.LEATHRA,1/20).
 					add(consumables.SALAMFW,0.7);
-			this.wingType = WING_TYPE_BAT_LIKE_LARGE_2;
-			this.tailType = TAIL_TYPE_SALAMANDER;
+			this.wingType = AppearanceDefs.WING_TYPE_BAT_LIKE_LARGE_2;
+			this.tailType = AppearanceDefs.TAIL_TYPE_SALAMANDER;
 			this.tailRecharge = 0;
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);

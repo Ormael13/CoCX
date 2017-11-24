@@ -3,30 +3,27 @@
  */
 package classes.Scenes
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Items.Armor;
-	import classes.Items.Consumable;
-	import classes.Items.Useable;
-	import classes.Items.Weapon;
-	import classes.Items.WeaponRange;
-	import classes.Items.Jewelry;
-	import classes.Items.Shield;
-	import classes.Items.Undergarment;
-	import classes.Items.ArmorLib;
-	import classes.Items.WeaponLib;
-	import classes.Items.WeaponRangeLib;
-	import classes.Items.JewelryLib;
-	import classes.Items.ShieldLib;
-	import classes.Items.UndergarmentLib;
-	import classes.Scenes.NPCs.HolliPureScene;
-	import classes.Scenes.Dungeons.DungeonEngine;
-	import classes.Scenes.Camp.UniqueCampScenes;
-	import flash.events.KeyboardEvent;
-	import flash.ui.Keyboard;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Items.Armor;
+import classes.Items.ArmorLib;
+import classes.Items.Consumable;
+import classes.Items.Jewelry;
+import classes.Items.JewelryLib;
+import classes.Items.Shield;
+import classes.Items.ShieldLib;
+import classes.Items.Undergarment;
+import classes.Items.UndergarmentLib;
+import classes.Items.Useable;
+import classes.Items.Weapon;
+import classes.Items.WeaponLib;
+import classes.Items.WeaponRange;
+import classes.Items.WeaponRangeLib;
+import classes.Scenes.Camp.UniqueCampScenes;
+import classes.Scenes.NPCs.HolliPureScene;
 
-	use namespace kGAMECLASS;
+use namespace kGAMECLASS;
 
 	public class Inventory extends BaseContent {
 		private static const inventorySlotName:Array = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth"];
@@ -68,8 +65,8 @@ package classes.Scenes
 		public function inventoryMenu():void {
 			var x:int;
 			var foundItem:Boolean = false;
-			if (getGame().inCombat) {
-				callNext = inventoryCombatHandler; //Player will return to combat after item use
+            if (kGAMECLASS.inCombat) {
+                callNext = inventoryCombatHandler; //Player will return to combat after item use
 			}
 			else {
 				spriteSelect(-1);
@@ -78,7 +75,7 @@ package classes.Scenes
 			hideMenus();
 			hideUpDown();
 			clearOutput();
-			kGAMECLASS.displayHeader("Inventory");
+			EngineCore.displayHeader("Inventory");
 			outputText("<b><u>Equipment:</u></b>\n");
 			outputText("<b>Weapon (Melee):</b> " + player.weapon.name + " (Attack: " + player.weaponAttack + ")\n");
 			outputText("<b>Weapon (Range):</b> " + player.weaponRange.name + " (Attack: " + player.weaponRangeAttack + ")\n");
@@ -99,9 +96,9 @@ package classes.Scenes
 				}
 			}
 
-			if (!getGame().inCombat && inDungeon == false && inRoomedDungeon == false && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0) {
-				var miscNieve:Boolean = getGame().nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5;
-				var miscHolli:Boolean         = flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4 || flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4);
+if (!kGAMECLASS.inCombat && inDungeon == false && inRoomedDungeon == false && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0) {
+                var miscNieve:Boolean = Holidays.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5;
+                var miscHolli:Boolean         = flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4 || flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4);
 				if (miscNieve
 					|| miscHolli
 					|| player.hasKeyItem("Dragon Egg") >= 0
@@ -110,13 +107,13 @@ package classes.Scenes
 					if (miscNieve) {
 						if (flags[kFLAGS.NIEVE_STAGE] == 1)
 							outputText("\nThere's some odd snow here that you could do something with...\n");
-						else outputText("\nYou have a snow" + getGame().nieveMF("man", "woman") + " here that seems like it could use a little something...\n");
-					}
+                        else outputText("\nYou have a snow" + Holidays.nieveMF("man", "woman") + " here that seems like it could use a little something...\n");
+                    }
 					if (player.hasKeyItem("Dragon Egg") >= 0) {
-						getGame().emberScene.emberCampDesc();
+                        SceneLib.emberScene.emberCampDesc();
 					}
 					if (flags[kFLAGS.ANEMONE_KID] > 0) {
-						kGAMECLASS.anemoneScene.anemoneBarrelDescription();
+						SceneLib.anemoneScene.anemoneBarrelDescription();
 					}
 					if (flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
 						outputText("\nYou have " + flags[kFLAGS.ALRAUNE_SEEDS] + " alraune seeds planted in your garden.");
@@ -126,8 +123,8 @@ package classes.Scenes
 					addButton(13, "Misc.", miscitemsMenu);
 				}
 			}
-			if (!getGame().inCombat) {
-				addButton(10, "Unequip", manageEquipment);
+            if (!kGAMECLASS.inCombat) {
+                addButton(10, "Unequip", manageEquipment);
 				if (player.hasKeyItem("Bag of Cosmos") >= 0) {
 					addButton(11, "Bag of Cosmos", BagOfCosmosMenu);
 				}
@@ -136,16 +133,16 @@ package classes.Scenes
 				}
 			}
 			if (foundItem) {
-				if (getGame().inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv1(StatusEffects.Sealed) == 3) {
-					outputText("\nYou reach for your items, but you just can't get your pouches open.  <b>Your ability to use items was sealed, and now you've wasted a chance to attack!</b>\n\n");
-					getGame().enemyAI();
-					return;
+                if (kGAMECLASS.inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv1(StatusEffects.Sealed) == 3) {
+                    outputText("\nYou reach for your items, but you just can't get your pouches open.  <b>Your ability to use items was sealed, and now you've wasted a chance to attack!</b>\n\n");
+                    SceneLib.combat.enemyAIImpl();
+                    return;
 				}
 				outputText("\nWhich item will you use? (To discard unwanted items, hold Shift then click the item.)");
 			}
 			outputText("\n<b>Capacity:</b> " + getOccupiedSlots() + " / " + getMaxSlots());
-			if (getGame().inCombat)
-				addButton(14, "Back", kGAMECLASS.combat.combatMenu, false); //Player returns to the combat menu on cancel
+            if (kGAMECLASS.inCombat)
+                addButton(14, "Back", SceneLib.combat.combatMenu, false); //Player returns to the combat menu on cancel
 			else addButton(14, "Back", playerMenu);
 //Gone			menuLoc = 1;
 		}
@@ -153,12 +150,12 @@ package classes.Scenes
 		public function miscitemsMenu():void {
 			var foundItem:Boolean = false;
 			menu();
-			if (getGame().nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) {
-					addButton(0, "Snow", getGame().nieveBuilding);
-					foundItem = true;
+            if (Holidays.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) {
+                addButton(0, "Snow", Holidays.nieveBuilding);
+                foundItem = true;
 				}
 				if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4) {
-					addButton(2, (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 3 ? "Tree" : "Plant"), getGame().holliScene.treeMenu);
+					addButton(2, (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 3 ? "Tree" : "Plant"), SceneLib.holliScene.treeMenu);
 					foundItem = true;
 				}
 				if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4) {
@@ -166,12 +163,12 @@ package classes.Scenes
 					foundItem = true;
 				}
 				if (player.hasKeyItem("Dragon Egg") >= 0) {
-					addButton(3, "Egg", getGame().emberScene.emberEggInteraction);
+					addButton(3, "Egg", SceneLib.emberScene.emberEggInteraction);
 					foundItem = true;
 				}
 				if (flags[kFLAGS.ANEMONE_KID] > 0) {
 					//kGAMECLASS.anemoneScene.anemoneBarrelDescription();
-					if (model.time.hours >= 6) addButton(4, "Anemone", kGAMECLASS.anemoneScene.approachAnemoneBarrel);
+					if (model.time.hours >= 6) addButton(4, "Anemone", SceneLib.anemoneScene.approachAnemoneBarrel);
 				}
 				if (flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
 					if (model.time.hours >= 6) addButton(5, "Garden", Gardening.manageuyourgarden).hint("Visit your plant offspring");
@@ -387,8 +384,8 @@ package classes.Scenes
 					currentItemSlot.setItemAndQty(item, 1);
 				}
 			}
-			if (getGame().inCombat) {
-				enemyAI();
+            if (kGAMECLASS.inCombat) {
+                enemyAI();
 				return;
 			}
 			if (showNext)
@@ -425,7 +422,7 @@ package classes.Scenes
 			clearOutput();
 			if(flags[kFLAGS.TIMES_CHEATED_COUNTER] > 0) {
 				outputText("<b>I was a cheater until I took an arrow to the knee...</b>");
-				getGame().gameOver();
+				EventParser.gameOver();
 				return;
 			}
 			outputText("I AM NOT A CROOK.  BUT YOU ARE!  <b>CHEATER</b>!\n\n");
@@ -535,22 +532,13 @@ package classes.Scenes
 				outputText("You cannot use " + player.itemSlots[slotNum].itype.longName + "!\n\n");
 			}
 			itemGoNext(); //Normally returns to the inventory menu. In combat it goes to the inventoryCombatHandler function
-/* menuLoc is no longer needed, after enemyAI game will always move to the next round			
-			else if (menuLoc == 1) {
-				menuLoc = 0;
-				if (!combatRoundOver()) {
-					outputText("\n\n");
-					enemyAI();
-				}
-			}
-*/
 		}
 		
 		private function inventoryCombatHandler():void {
-			if (!combatRoundOver()) { //Check if the battle is over. If not then go to the enemy's action.
-				outputText("\n\n");
-				enemyAI();
-			}
+			//Check if the battle is over. If not then go to the enemy's action.
+			if (combat.combatIsOver()) return;
+			outputText("\n\n");
+			enemyAI();
 		}
 		private function deleteItemPrompt(item:Useable, slotNum:int):void {
 			clearOutput();

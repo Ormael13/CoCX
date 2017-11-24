@@ -1,7 +1,6 @@
 package classes {
 import classes.GlobalFlags.*;
 
-
 import coc.view.MainView;
 import coc.view.StatsView;
 
@@ -20,8 +19,8 @@ public class GameSettings extends BaseContent {
 		return flags[kFLAGS.CHARVIEWER_ENABLED];
 	}
 	public function settingsScreenMain():void {
-		getGame().saves.savePermObject(false);
-		mainView.showMenuButton(MainView.MENU_NEW_MAIN);
+        kGAMECLASS.saves.savePermObject(false);
+        mainView.showMenuButton(MainView.MENU_NEW_MAIN);
 		mainView.showMenuButton(MainView.MENU_DATA);
 		clearOutput();
 		displayHeader("Settings");
@@ -30,11 +29,10 @@ public class GameSettings extends BaseContent {
 		addButton(0, "Gameplay", settingsScreenGameSettings);
 		addButton(1, "Interface", settingsScreenInterfaceSettings);
 		addButton(3, "Font Size", fontSettingsMenu);
-		addButton(4, "Controls", getGame().displayControls);
+		addButton(4, "Controls", displayControls);
 
-		addButton(14, "Back", getGame().mainMenu.mainMenu);
-
-		if (flags[kFLAGS.HARDCORE_MODE] > 0) {
+addButton(14, "Back", kGAMECLASS.mainMenu.mainMenu);
+        if (flags[kFLAGS.HARDCORE_MODE] > 0) {
 			debug                               = false;
 			flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
 			flags[kFLAGS.HYPER_HAPPY]           = 0;
@@ -424,7 +422,7 @@ public class GameSettings extends BaseContent {
 
 		outputText("\n\n");
 
-		if (flags[kFLAGS.USE_METRICS] > 0)
+		if (Measurements.useMetrics)
 			outputText("Measurement: <b>Metric</b>\n Height and cock size will be measured in metres and centimetres.");
 		else
 			outputText("Measurement: <b>Imperial</b>\n Height and cock size will be measured in feet and inches.");
@@ -494,6 +492,7 @@ public class GameSettings extends BaseContent {
 			flags[kFLAGS.BACKGROUND_STYLE]           = type;
 			mainView.background.bitmapClass          = MainView.Backgrounds[flags[kFLAGS.BACKGROUND_STYLE]];
 			mainView.statsView.setBackground(StatsView.SidebarBackgrounds[flags[kFLAGS.BACKGROUND_STYLE]]);
+			mainView.monsterStatsView.setBackground(StatsView.SidebarBackgrounds[flags[kFLAGS.BACKGROUND_STYLE]]);
 			settingsScreenInterfaceSettings();
 		}
 
@@ -528,10 +527,10 @@ public class GameSettings extends BaseContent {
 	}
 
 	public function cycleQuality():void {
-		if (getGame().stage.quality == StageQuality.LOW) getGame().stage.quality = StageQuality.MEDIUM;
-		else if (getGame().stage.quality == StageQuality.MEDIUM) getGame().stage.quality = StageQuality.HIGH;
-		else if (getGame().stage.quality == StageQuality.HIGH) getGame().stage.quality = StageQuality.LOW;
-		settingsScreenInterfaceSettings();
+        if (kGAMECLASS.stage.quality == StageQuality.LOW) kGAMECLASS.stage.quality = StageQuality.MEDIUM;
+        else if (kGAMECLASS.stage.quality == StageQuality.MEDIUM) kGAMECLASS.stage.quality = StageQuality.HIGH;
+        else if (kGAMECLASS.stage.quality == StageQuality.HIGH) kGAMECLASS.stage.quality = StageQuality.LOW;
+        settingsScreenInterfaceSettings();
 	}
 
 	public function toggleImages():void {
@@ -558,8 +557,7 @@ public class GameSettings extends BaseContent {
 	 }
 	 */
 	public function toggleMeasurements():void {
-		if (flags[kFLAGS.USE_METRICS] < 1) flags[kFLAGS.USE_METRICS] = 1;
-		else flags[kFLAGS.USE_METRICS] = 0;
+		Measurements.useMetrics = !Measurements.useMetrics;
 		settingsScreenInterfaceSettings();
 	}
 
@@ -610,6 +608,58 @@ public class GameSettings extends BaseContent {
 		mainView.mainText.setTextFormat(fmt);
 		flags[kFLAGS.CUSTOM_FONT_SIZE] = 0;
 	}
+
+    private function displayControls():void
+    {
+        mainView.hideAllMenuButtons();
+        kGAMECLASS.inputManager.DisplayBindingPane();
+        EngineCore.menu();
+        EngineCore.addButton(0, "Reset Ctrls", resetControls);
+        EngineCore.addButton(1, "Clear Ctrls", clearControls);
+        EngineCore.addButton(4, "Back", hideControls);
+    }
+
+    private function hideControls():void
+    {
+        kGAMECLASS.inputManager.HideBindingPane();
+        kGAMECLASS.gameSettings.settingsScreenMain();
+    }
+
+    private function resetControls():void
+    {
+        kGAMECLASS.inputManager.HideBindingPane();
+        EngineCore.clearOutput();
+        EngineCore.outputText("Are you sure you want to reset all of the currently bound controls to their defaults?");
+
+        EngineCore.doYesNo(resetControlsYes, displayControls);
+    }
+
+    private function resetControlsYes():void
+    {
+        kGAMECLASS.inputManager.ResetToDefaults();
+        EngineCore.clearOutput();
+        EngineCore.outputText("Controls have been reset to defaults!\n\n");
+
+        EngineCore.doNext(displayControls);
+    }
+
+    private function clearControls():void
+    {
+        kGAMECLASS.inputManager.HideBindingPane();
+        EngineCore.clearOutput();
+        EngineCore.outputText("Are you sure you want to clear all of the currently bound controls?");
+
+        EngineCore.doYesNo(clearControlsYes, displayControls);
+    }
+
+    private function clearControlsYes():void
+    {
+        kGAMECLASS.inputManager.ClearAllBinds();
+        EngineCore.clearOutput();
+        EngineCore.outputText("Controls have been cleared!");
+
+        EngineCore.doNext(displayControls);
+    }
 }
 
 }

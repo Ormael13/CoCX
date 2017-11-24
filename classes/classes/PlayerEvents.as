@@ -1,24 +1,24 @@
 package classes {
-	
-	import classes.*;
+
 	import classes.GlobalFlags.*;
 	import classes.Items.*;
-	import classes.Scenes.Camp;
-	import classes.Scenes.Camp.HclassHeavenTribulation;
-import classes.Scenes.NPCs.DivaScene;
+	import classes.Scenes.Dreams;
+	import classes.Scenes.Holidays;
+	import classes.Scenes.SceneLib;
+	import classes.Scenes.NPCs.DivaScene;
 import classes.StatusEffects.VampireThirstEffect;
-
-public class PlayerEvents extends BaseContent implements TimeAwareInterface {
+	public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//Handles all timeChange events for the player. Needed because player is not unique.
 		
 		public function PlayerEvents():void {
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 		
 		private var checkedTurkey:int; //Make sure we test each of these events just once in timeChangeLarge
 		private var checkedDream:int;
 		private var displayedBeeCock:Boolean;
-		
+		private var dreams:Dreams = new Dreams();
+
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean {
 			var needNext:Boolean = false;
@@ -99,7 +99,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_CLEAN_SLATE] == 1) flags[kFLAGS.ACHIEVEMENT_PROGRESS_CLEAN_SLATE]++
 			}
 			//Decrement Valeria's fluid in New Game+.
-			if (kGAMECLASS.valeria.valeriaFluidsEnabled()) {
+			if (SceneLib.valeria.valeriaFluidsEnabled()) {
 				if (flags[kFLAGS.VALERIA_FLUIDS] > 0) {
 					flags[kFLAGS.VALERIA_FLUIDS]--;
 				}
@@ -140,15 +140,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				else { //Bigga titayz
 					if (player.breastRows[0].breastRating < 5) {
-						outputText("\nYour " + getGame().breastDescript(0) + " start to jiggle and wobble as time passes, seeming to refill with your inexhaustible supply of milk.  It doesn't look like you'll be able to keep them below a DD cup so long as you're so focused on breast-feeding.\n");
+						outputText("\nYour " + player.breastDescript(0) + " start to jiggle and wobble as time passes, seeming to refill with your inexhaustible supply of milk.  It doesn't look like you'll be able to keep them below a DD cup so long as you're so focused on breast-feeding.\n");
 						player.breastRows[0].breastRating = 5;
 						needNext = true;
 					}
 					player.addStatusValue(StatusEffects.Feeder, 2, 1); //Increase 'time since breastfed'
 					//trace("Feeder status: " + player.statusEffectv2(StatusEffects.Feeder) + " (modded " + ((player.statusEffectv2(StatusEffects.Feeder)) - 70) + ")");
 					//After 3 days without feeding someone sensitivity jumps.
-					if (player.statusEffectv2(StatusEffects.Feeder) >= 72 && getGame().model.time.hours == 14) {
-						outputText("\n<b>After having gone so long without feeding your milk to someone, you're starting to feel strange.  Every inch of your skin practically thrums with sensitivity, particularly your sore, dripping nipples.</b>\n");
+                    if (player.statusEffectv2(StatusEffects.Feeder) >= 72 && kGAMECLASS.model.time.hours == 14) {
+                        outputText("\n<b>After having gone so long without feeding your milk to someone, you're starting to feel strange.  Every inch of your skin practically thrums with sensitivity, particularly your sore, dripping nipples.</b>\n");
 						player.dynStats("sen", 2 + (((player.statusEffectv2(StatusEffects.Feeder)) - 70) / 20));
 						needNext = true;
 					}
@@ -177,7 +177,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.hasStatusEffect(StatusEffects.Milked)) { //"Milked"
 				player.addStatusValue(StatusEffects.Milked, 1, -1);
 				if (player.statusEffectv1(StatusEffects.Milked) <= 0) {
-					outputText("\n<b>Your " + getGame().nippleDescript(0) + "s are no longer sore from the milking.</b>\n");
+					outputText("\n<b>Your " + Appearance.nippleDescription(player, 0) + "s are no longer sore from the milking.</b>\n");
 					player.removeStatusEffect(StatusEffects.Milked);
 					needNext = true;
 				}
@@ -204,7 +204,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.statusEffectv1(StatusEffects.LactationReduction) >= 48) {
 					if (!player.hasStatusEffect(StatusEffects.LactationReduc0)) {
 						player.createStatusEffect(StatusEffects.LactationReduc0, 0, 0, 0, 0);
-						if (player.biggestLactation() >= 1) outputText("\n<b>Your " + getGame().nippleDescript(0) + "s feel swollen and bloated, needing to be milked.</b>\n");
+						if (player.biggestLactation() >= 1) outputText("\n<b>Your " + Appearance.nippleDescription(player, 0) + "s feel swollen and bloated, needing to be milked.</b>\n");
 						if (player.biggestLactation() <= 2) player.createStatusEffect(StatusEffects.LactationReduc1, 0, 0, 0, 0);
 						if (player.biggestLactation() <= 1) player.createStatusEffect(StatusEffects.LactationReduc2, 0, 0, 0, 0);
 						needNext = true;
@@ -232,27 +232,27 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.addStatusValue(StatusEffects.CuntStretched, 1, 1);
 				if (player.vaginas.length > 0) {
 					if (player.findPerk(PerkLib.FerasBoonWideOpen) < 0) {
-						if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LOOSE && player.statusEffectv1(StatusEffects.CuntStretched) >= 200) {
-							outputText("\nYour " + getGame().vaginaDescript(0) + " recovers from your ordeals, tightening up a bit.\n");
+						if (player.vaginas[0].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_LOOSE && player.statusEffectv1(StatusEffects.CuntStretched) >= 200) {
+							outputText("\nYour " + Appearance.vaginaDescript(player,0) + " recovers from your ordeals, tightening up a bit.\n");
 							player.vaginas[0].vaginalLooseness--;
 							player.changeStatusValue(StatusEffects.CuntStretched, 1, 0);
 							needNext = true;
 						}
-						if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING && player.statusEffectv1(StatusEffects.CuntStretched) >= 100) {
-							outputText("\nYour " + getGame().vaginaDescript(0) + " recovers from your ordeals, tightening up a bit.\n");
+						if (player.vaginas[0].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_GAPING && player.statusEffectv1(StatusEffects.CuntStretched) >= 100) {
+							outputText("\nYour " + Appearance.vaginaDescript(player,0) + " recovers from your ordeals, tightening up a bit.\n");
 							player.vaginas[0].vaginalLooseness--;
 							player.changeStatusValue(StatusEffects.CuntStretched, 1, 0);
 							needNext = true;
 						}
-						if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE && player.statusEffectv1(StatusEffects.CuntStretched) >= 70) {
-							outputText("\nYour " + getGame().vaginaDescript(0) + " recovers from your ordeals and becomes tighter.\n");
+						if (player.vaginas[0].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE && player.statusEffectv1(StatusEffects.CuntStretched) >= 70) {
+							outputText("\nYour " + Appearance.vaginaDescript(player,0) + " recovers from your ordeals and becomes tighter.\n");
 							player.vaginas[0].vaginalLooseness--;
 							player.changeStatusValue(StatusEffects.CuntStretched, 1, 0);
 							needNext = true;
 						}
 					}
-					if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LEVEL_CLOWN_CAR && player.statusEffectv1(StatusEffects.CuntStretched) >= 50) {
-						outputText("\nYour " + getGame().vaginaDescript(0) + " recovers from the brutal stretching it has received and tightens up a little bit, but not much.\n");
+					if (player.vaginas[0].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_LEVEL_CLOWN_CAR && player.statusEffectv1(StatusEffects.CuntStretched) >= 50) {
+						outputText("\nYour " + Appearance.vaginaDescript(player,0) + " recovers from the brutal stretching it has received and tightens up a little bit, but not much.\n");
 						player.vaginas[0].vaginalLooseness--;
 						player.changeStatusValue(StatusEffects.CuntStretched, 1, 0);
 						needNext = true;
@@ -262,42 +262,41 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.hasStatusEffect(StatusEffects.ButtStretched)) { //Butt stretching stuff
 				player.addStatusValue(StatusEffects.ButtStretched, 1, 1);
 				if (player.ass.analLooseness == 2 && player.statusEffectv1(StatusEffects.ButtStretched) >= 72) {
-					outputText("\n<b>Your " + getGame().assholeDescript() + " recovers from your ordeals, tightening up a bit.</b>\n");
+					outputText("\n<b>Your " + Appearance.assholeDescript(player) + " recovers from your ordeals, tightening up a bit.</b>\n");
 					player.ass.analLooseness--;
 					player.changeStatusValue(StatusEffects.ButtStretched, 1, 0);
 					needNext = true;
 				}
 				if (player.ass.analLooseness == 3 && player.statusEffectv1(StatusEffects.ButtStretched) >= 48) {
-					outputText("\n<b>Your " + getGame().assholeDescript() + " recovers from your ordeals, tightening up a bit.</b>\n");
+					outputText("\n<b>Your " + Appearance.assholeDescript(player) + " recovers from your ordeals, tightening up a bit.</b>\n");
 					player.ass.analLooseness--;
 					player.changeStatusValue(StatusEffects.ButtStretched, 1, 0);
 					needNext = true;
 				}
 				if (player.ass.analLooseness == 4 && player.statusEffectv1(StatusEffects.ButtStretched) >= 24) {
-					outputText("\n<b>Your " + getGame().assholeDescript() + " recovers from your ordeals and becomes tighter.</b>\n");
+					outputText("\n<b>Your " + Appearance.assholeDescript(player) + " recovers from your ordeals and becomes tighter.</b>\n");
 					player.ass.analLooseness--;
 					player.changeStatusValue(StatusEffects.ButtStretched, 1, 0);
 					needNext = true;
 				}
 				if (player.ass.analLooseness == 5 && player.statusEffectv1(StatusEffects.ButtStretched) >= 12) {
-					outputText("\n<b>Your " + getGame().assholeDescript() + " recovers from the brutal stretching it has received and tightens up.</b>\n");
+					outputText("\n<b>Your " + Appearance.assholeDescript(player) + " recovers from the brutal stretching it has received and tightens up.</b>\n");
 					player.ass.analLooseness--;
 					player.changeStatusValue(StatusEffects.ButtStretched, 1, 0);
 					needNext = true;
 				}
 			}
 			if (player.findPerk(PerkLib.SlimeCore) >= 0) { //Lose slime core perk
-				if (player.vaginalCapacity() < 9000 || player.skinAdj != "slimy" || player.skinDesc != "skin" || player.lowerBody != LOWER_BODY_TYPE_GOO) {
-					outputText("\nYour form ripples, as if uncertain at the changes your body is undergoing.  The goo of your flesh cools, its sensitive, responsive membrane thickening into [skin] while bones and muscles knit themselves into a cohesive torso, chest and hips gaining definition.  Translucent ooze clouds and the gushing puddle at your feet melts together, splitting into solid trunks as you regain your legs.  Before long, you can no longer see through your own body and, with an unsteady shiver, you pat yourself down, readjusting to solidity.  A lurching heat in your chest suddenly reminds you of the slime core that used to float inside you.  Gingerly touching your " + getGame().chestDesc() + ", you can feel a small, second heartbeat under your ribs that gradually seems to be sinking, past your belly. A lurching wave of warmth sparks through you, knocking you off your fresh legs and onto your " + getGame().buttDescript() + ".  A delicious pressure pulses in your abdomen and you loosen your [armor] as sweat beads down your neck.  You clench your eyes, tongue lolling in your mouth, and the pressure builds and builds until, in ecstatic release, your body arches in an orgasmic release.\n\n");
-	
-					outputText("\nPanting, you open your eyes and see that, for once, the source of your climax wasn't your loins.  Feeling a warm, wetness on your abs, you investigate and find the small, heart-shaped nucleus that used to be inside your body has somehow managed to pass through your belly button. Exposed to the open air, the crimson organ slowly crystallizes, shrinking and hardening into a tiny ruby.  Rubbing the stone with your thumb, you're surprised to find that you can still feel a pulse within its glittering facets.  You stow the ruby heart, in case you need it again.\n");
+				if (player.vaginalCapacity() < 9000 || player.skinAdj != "slimy" || player.skinDesc != "skin" || player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_GOO) {
+                    outputText("\nYour form ripples, as if uncertain at the changes your body is undergoing.  The goo of your flesh cools, its sensitive, responsive membrane thickening into [skin] while bones and muscles knit themselves into a cohesive torso, chest and hips gaining definition.  Translucent ooze clouds and the gushing puddle at your feet melts together, splitting into solid trunks as you regain your legs.  Before long, you can no longer see through your own body and, with an unsteady shiver, you pat yourself down, readjusting to solidity.  A lurching heat in your chest suddenly reminds you of the slime core that used to float inside you.  Gingerly touching your " + kGAMECLASS.player.chestDesc() + ", you can feel a small, second heartbeat under your ribs that gradually seems to be sinking, past your belly. A lurching wave of warmth sparks through you, knocking you off your fresh legs and onto your " + Appearance.buttDescription(player) + ".  A delicious pressure pulses in your abdomen and you loosen your [armor] as sweat beads down your neck.  You clench your eyes, tongue lolling in your mouth, and the pressure builds and builds until, in ecstatic release, your body arches in an orgasmic release.\n\n");
+                    outputText("\nPanting, you open your eyes and see that, for once, the source of your climax wasn't your loins.  Feeling a warm, wetness on your abs, you investigate and find the small, heart-shaped nucleus that used to be inside your body has somehow managed to pass through your belly button. Exposed to the open air, the crimson organ slowly crystallizes, shrinking and hardening into a tiny ruby.  Rubbing the stone with your thumb, you're surprised to find that you can still feel a pulse within its glittering facets.  You stow the ruby heart, in case you need it again.\n");
 					player.createKeyItem("Ruby Heart", 0, 0, 0, 0); //[Add 'Ruby Heart' to key items. Player regains slime core if returning to goo body]
 					player.removePerk(PerkLib.SlimeCore);
 					needNext = true;
 				}
 			}
 			if (player.hasKeyItem("Ruby Heart") >= 0) { //Regain slime core
-				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && player.findPerk(PerkLib.SlimeCore) < 0 && player.isGoo() && player.gooScore() >= 4 && player.vaginalCapacity() >= 9000 && player.skinAdj == "slimy" && player.skinDesc == "skin" && player.lowerBody == LOWER_BODY_TYPE_GOO) {
+				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && player.findPerk(PerkLib.SlimeCore) < 0 && player.isGoo() && player.gooScore() >= 4 && player.vaginalCapacity() >= 9000 && player.skinAdj == "slimy" && player.skinDesc == "skin" && player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_GOO) {
 					outputText("\nAs you adjust to your new, goo-like body, you remember the ruby heart you expelled so long ago.  As you reach to pick it up, it quivers and pulses with a warm, cheerful light.  Your fingers close on it and the nucleus slides through your palm, into your body!\n\n");
 					
 					outputText("There is a momentary pressure in your chest and a few memories that are not your own flicker before your eyes.  The dizzying sight passes and the slime core settles within your body, imprinted with your personality and experiences.  There is a comforting calmness from your new nucleus and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n");
@@ -309,7 +308,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			if (player.hasStatusEffect(StatusEffects.SlimeCraving)) { //Slime craving stuff
-				if (player.vaginalCapacity() < 9000 || player.skinAdj != "slimy" || player.skinDesc != "skin" || player.lowerBody != LOWER_BODY_TYPE_GOO) {
+				if (player.vaginalCapacity() < 9000 || player.skinAdj != "slimy" || player.skinDesc != "skin" || player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_GOO) {
 					outputText("\n<b>You realize you no longer crave fluids like you once did.</b>\n");
 					player.removeStatusEffect(StatusEffects.SlimeCraving);
 					player.removeStatusEffect(StatusEffects.SlimeCravingFeed);
@@ -402,16 +401,16 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-			if (getGame().model.time.hours == 6 && player.armorName == "bimbo skirt" && rand(10) == 0 && player.biggestTitSize() < 12) {
-				outputText("\n<b>As you wake up, you feel a strange tingling starting in your nipples that extends down into your breasts.  After a minute, the tingling dissipates in a soothing wave.  As you cup your tits, you realize they've gotten larger!</b>");
+            if (kGAMECLASS.model.time.hours == 6 && player.armorName == "bimbo skirt" && rand(10) == 0 && player.biggestTitSize() < 12) {
+                outputText("\n<b>As you wake up, you feel a strange tingling starting in your nipples that extends down into your breasts.  After a minute, the tingling dissipates in a soothing wave.  As you cup your tits, you realize they've gotten larger!</b>");
 				player.growTits(1, player.bRows(), false, 2);
 				player.dynStats("lus", 10);
 				needNext = true;
 			}
 			if (flags[kFLAGS.BIKINI_ARMOR_BONUS] > 0) {
 				if (player.armorName == "lusty maiden's armor") {
-					if (getGame().model.time.hours == 0) flags[kFLAGS.BIKINI_ARMOR_BONUS]--; //Adjust for inflation
-					if (flags[kFLAGS.BIKINI_ARMOR_BONUS] < 0) flags[kFLAGS.BIKINI_ARMOR_BONUS] = 0; //Keep in bounds.
+                    if (kGAMECLASS.model.time.hours == 0) flags[kFLAGS.BIKINI_ARMOR_BONUS]--; //Adjust for inflation
+                    if (flags[kFLAGS.BIKINI_ARMOR_BONUS] < 0) flags[kFLAGS.BIKINI_ARMOR_BONUS] = 0; //Keep in bounds.
 					if (flags[kFLAGS.BIKINI_ARMOR_BONUS] > 8) flags[kFLAGS.BIKINI_ARMOR_BONUS] = 8;
 				}
 				else flags[kFLAGS.BIKINI_ARMOR_BONUS] = 0;
@@ -420,9 +419,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//No better place for these since the code for the event is part of CoC.as or one of its included files
 			if (flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC] > 0) flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC]--; //Vala post-rape countdown
 			if (flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] > 0 && flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] < 500) flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY]++;
-			
-			if (getGame().model.time.hours > 23) { //Once per day
-				if (flags[kFLAGS.STAT_GAIN_MODE] == CoC.STAT_GAIN_DAILY) {
+
+if (kGAMECLASS.model.time.hours > 23) { //Once per day
+                if (flags[kFLAGS.STAT_GAIN_MODE] == CoC.STAT_GAIN_DAILY) {
 					if (player.level > player.statPoints) {
 						if (player.level < 6) player.statPoints = 15;
 						else if (player.level >= 6 && player.level < 12) player.statPoints = 18;
@@ -433,8 +432,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					}
 				}
 				flags[kFLAGS.BROOKE_MET_TODAY] = 0;
-				if (getGame().model.time.days % 2 == 0 && flags[kFLAGS.KAIJU_BAD_END_COUNTER] > 0) {
-					flags[kFLAGS.KAIJU_BAD_END_COUNTER]--;
+                if (kGAMECLASS.model.time.days % 2 == 0 && flags[kFLAGS.KAIJU_BAD_END_COUNTER] > 0) {
+                    flags[kFLAGS.KAIJU_BAD_END_COUNTER]--;
 					if (flags[kFLAGS.KAIJU_BAD_END_COUNTER] < 0) flags[kFLAGS.KAIJU_BAD_END_COUNTER] = 0;
 				}
 				if (flags[kFLAGS.GILDED_JERKED] > 0) flags[kFLAGS.GILDED_JERKED] = 0;
@@ -442,8 +441,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (flags[kFLAGS.NOT_HELPED_ARIAN_TODAY] != 0) flags[kFLAGS.NOT_HELPED_ARIAN_TODAY] = 0;
 				if (flags[kFLAGS.RUBI_PROSTITUTION] > 0) flags[kFLAGS.RUBI_PROFIT] += 2 + rand(4);
 				flags[kFLAGS.BENOIT_TALKED_TODAY] = 0;
-				getGame().bazaar.benoit.updateBenoitInventory();
-				flags[kFLAGS.ROGAR_FUCKED_TODAY] = 0;
+                SceneLib.bazaar.benoit.updateBenoitInventory();
+                flags[kFLAGS.ROGAR_FUCKED_TODAY] = 0;
 				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00285] > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00285]--; //Reduce lust-stick resistance building
 				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00155] > 0) { //Dominika fellatrix countdown
 					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00155]--;
@@ -457,17 +456,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					flags[kFLAGS.WEEKLY_FAIRY_ORGY_COUNTDOWN]--;
 					if (flags[kFLAGS.WEEKLY_FAIRY_ORGY_COUNTDOWN] < 0) flags[kFLAGS.WEEKLY_FAIRY_ORGY_COUNTDOWN] = 0;
 				}
-				if (getGame().model.time.days % 7 == 0) flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] = 0; //Clear Whitney's Weekly limit
-				if (flags[kFLAGS.USED_MILKER_TODAY] > 0) flags[kFLAGS.USED_MILKER_TODAY] = 0; //Clear 'has fucked milker today'
-				if (getGame().latexGirl.latexGooFollower()) { //Latex goo follower daily updates
-					getGame().latexGirl.gooFluid(-2, false);
-					if (getGame().latexGirl.gooFluid() < 50) getGame().latexGirl.gooHappiness(-1, false);
-					if (getGame().latexGirl.gooFluid() < 25) getGame().latexGirl.gooHappiness(-1, false);
-					if (getGame().latexGirl.gooHappiness() < 75) getGame().latexGirl.gooObedience(-1, false);
-					if (getGame().latexGirl.gooHappiness() >= 90) getGame().latexGirl.gooObedience(1, false);
-				}
-				getGame().farm.farmCorruption.updateFarmCorruption(); //Farm Corruption updating
-				if (player.hasStatusEffect(StatusEffects.Contraceptives)) { // Herbal contraceptives countdown
+                if (kGAMECLASS.model.time.days % 7 == 0) flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] = 0; //Clear Whitney's Weekly limit
+                if (flags[kFLAGS.USED_MILKER_TODAY] > 0) flags[kFLAGS.USED_MILKER_TODAY] = 0; //Clear 'has fucked milker today'
+                if (SceneLib.latexGirl.latexGooFollower()) { //Latex goo follower daily updates
+                    SceneLib.latexGirl.gooFluid(-2, false);
+                    if (SceneLib.latexGirl.gooFluid() < 50) SceneLib.latexGirl.gooHappiness(-1, false);
+                    if (SceneLib.latexGirl.gooFluid() < 25) SceneLib.latexGirl.gooHappiness(-1, false);
+                    if (SceneLib.latexGirl.gooHappiness() < 75) SceneLib.latexGirl.gooObedience(-1, false);
+                    if (SceneLib.latexGirl.gooHappiness() >= 90) SceneLib.latexGirl.gooObedience(1, false);
+                }
+                SceneLib.farm.farmCorruption.updateFarmCorruption(); //Farm Corruption updating
+                if (player.hasStatusEffect(StatusEffects.Contraceptives)) { // Herbal contraceptives countdown
 					if (player.statusEffectv1(StatusEffects.Contraceptives) == 1) {
 						player.addStatusValue(StatusEffects.Contraceptives, 2, -1);
 						if (player.statusEffectv1(StatusEffects.Contraceptives) < 0) player.removeStatusEffect(StatusEffects.Contraceptives);
@@ -477,16 +476,16 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING] > 0) {
 					switch (flags[kFLAGS.INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED]) {
 						case 1:
-							if (!needNext) needNext = getGame().growHair(0.2);
-							else getGame().growHair(0.2);
+							if (!needNext) needNext = EventParser.growHair(0.2);
+							else EventParser.growHair(0.2);
 							break;
 						case 2:
-							if (!needNext) needNext = getGame().growHair(0.5);
-							else getGame().growHair(0.5);
+							if (!needNext) needNext = EventParser.growHair(0.5);
+							else EventParser.growHair(0.5);
 							break;
 						case 3:
-							if (!needNext) needNext = getGame().growHair(1.1);
-							else getGame().growHair(1.1);
+							if (!needNext) needNext = EventParser.growHair(1.1);
+							else EventParser.growHair(1.1);
 						default:
 					}
 					flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING]--;
@@ -507,9 +506,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				//Hair grows if not disabled by lizardness
 				if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
-					if (!needNext) needNext = getGame().growHair(0.1);
-					else getGame().growHair(0.1);
-					if (player.beardLength > 0 && player.beardLength < 12) getGame().growBeard(0.02);
+					if (!needNext) needNext = EventParser.growHair(0.1);
+					else EventParser.growHair(0.1);
+					if (player.beardLength > 0 && player.beardLength < 12) EventParser.growBeard(0.02);
 				}
 				//Clear dragon breath cooldowns!
 				if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(PerkLib.DraconicLungsEvolved) < 0) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
@@ -545,7 +544,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (player.mana > player.maxMana()) player.mana = player.maxMana();
 				}
 			}
-			if (getGame().model.time.hours == 6) {
+			if (kGAMECLASS.model.time.hours == 6) {
 				var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
 				if (vthirst != null) {
 					vthirst.modSatiety(-1);
@@ -582,7 +581,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.hunger <= 0)
 				{
 					if (prison.inPrison) {
-						kGAMECLASS.prison.changeWill(-1, prison.inPrison);
+						SceneLib.prison.changeWill(-1, prison.inPrison);
 						fatigue(2);
 					}
 					else {
@@ -601,7 +600,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				else {
 					if (prison.inPrison) {
-						kGAMECLASS.prison.changeWill((player.esteem / 50) + 1);
+						SceneLib.prison.changeWill((player.esteem / 50) + 1);
 					}
 				}
 				if (player.hunger < 10 && model.time.hours % 4 == 0 && !prison.inPrison) {
@@ -630,7 +629,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		private function hourlyCheckRacialPerks():Boolean {
 			var needNext:Boolean = false;
 			//Recharge tail
-			if (player.tailType == TAIL_TYPE_BEE_ABDOMEN || player.tailType == TAIL_TYPE_SPIDER_ADBOMEN || player.tailType == TAIL_TYPE_SCORPION || player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL || player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS) { //Spider, Bee, Scorpion, Manticore and Naga Venom Recharge
+			if (player.tailType == AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN || player.tailType == AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN || player.tailType == AppearanceDefs.TAIL_TYPE_SCORPION || player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL || player.faceType == AppearanceDefs.FACE_SNAKE_FANGS || player.faceType == AppearanceDefs.FACE_SPIDER_FANGS) { //Spider, Bee, Scorpion, Manticore and Naga Venom Recharge
 				if (player.tailRecharge < 5) player.tailRecharge = 5;
 				player.tailVenom += player.tailRecharge;
 				if (player.findPerk(PerkLib.ImprovedVenomGland) >= 0) player.tailVenom += 10;
@@ -642,7 +641,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.ImprovedVenomGland, 0, 0, 0, 0);
 			}
 			//Flexibility perk
-			if (player.tailType == TAIL_TYPE_CAT && player.lowerBody == LOWER_BODY_TYPE_CAT && player.earType == EARS_CAT) { //Check for gain of cat agility - requires legs, tail, and ears
+			if (player.tailType == AppearanceDefs.TAIL_TYPE_CAT && player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CAT && player.earType == AppearanceDefs.EARS_CAT) { //Check for gain of cat agility - requires legs, tail, and ears
 				if (player.findPerk(PerkLib.Flexibility) < 0) {
 					outputText("\nWhile stretching, you notice that you're much more flexible than you were before.  Perhaps this will make it a bit easier to dodge attacks in battle?\n\n(<b>Gained Perk: Flexibility</b>)\n");
 					player.createPerk(PerkLib.Flexibility, 0, 0, 0, 0);
@@ -655,7 +654,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Lustzerker perk
-			if ((player.tailType == TAIL_TYPE_SALAMANDER && player.lowerBody == LOWER_BODY_TYPE_SALAMANDER && player.armType == ARM_TYPE_SALAMANDER) || (player.findPerk(PerkLib.Lustzerker) < 0 && player.findPerk(PerkLib.SalamanderAdrenalGlands) >= 0)) { //Check for gain of lustzerker - requires legs, arms and tail
+			if ((player.tailType == AppearanceDefs.TAIL_TYPE_SALAMANDER && player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_SALAMANDER && player.armType == AppearanceDefs.ARM_TYPE_SALAMANDER) || (player.findPerk(PerkLib.Lustzerker) < 0 && player.findPerk(PerkLib.SalamanderAdrenalGlands) >= 0)) { //Check for gain of lustzerker - requires legs, arms and tail
 				if (player.findPerk(PerkLib.Lustzerker) < 0) {
 					outputText("\nAfter drinking the last drop another hip flask of firewater you starts to feel a weird, maybe slightly unpleasant feeling inside your body.  Like many tiny flames cursing inside your veins making you ponder whats just happening with your body.  Remembering about salamanders natural talent to enter a berserk-like state you quess that should be it.\n\n(<b>Gained Perk: Lustzerker</b>)");
 					player.createPerk(PerkLib.Lustzerker, 0, 0, 0, 0);
@@ -668,7 +667,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Lizan Regeneration perk
-			if ((player.tailType == TAIL_TYPE_LIZARD && player.lowerBody == LOWER_BODY_TYPE_LIZARD && player.earType == EARS_LIZARD) || (player.findPerk(PerkLib.LizanRegeneration) < 0 && player.findPerk(PerkLib.LizanMarrow) >= 0)) { //Check for gain of lustzerker - requires legs, arms and tail
+			if ((player.tailType == AppearanceDefs.TAIL_TYPE_LIZARD && player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_LIZARD && player.earType == AppearanceDefs.EARS_LIZARD) || (player.findPerk(PerkLib.LizanRegeneration) < 0 && player.findPerk(PerkLib.LizanMarrow) >= 0)) { //Check for gain of lustzerker - requires legs, arms and tail
 				if (player.findPerk(PerkLib.LizanRegeneration) < 0) {
 					outputText("\nAfter drinking the last drop of reptilium you starts to feel unusual feeling somewhere inside your body.  Like many tiny waves moving inside your veins making you feel so much more refreshed than moment ago.  Remembering about fact that lizans are so much similar to lizards and those usualy posses natural talent to regenerate from even sever injuries you quessing it's could be that.\n\n(<b>Gained Perk: Lizan Regeneration</b>)");
 					player.createPerk(PerkLib.LizanRegeneration, 0, 0, 0, 0);
@@ -707,30 +706,30 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Freezing Breath
-			if (player.faceType == FACE_WOLF && player.findPerk(PerkLib.FreezingBreath) < 0 && player.hasKeyItem("Fenrir Collar") >= 0) {
+			if (player.faceType == AppearanceDefs.FACE_WOLF && player.findPerk(PerkLib.FreezingBreath) < 0 && player.hasKeyItem("Fenrir Collar") >= 0) {
 				outputText("\nYou suddenly feel something raging in you wanting to be unleashed as it slowly climbs out of your chest. It rushes through your throat and you scream a titanic primordial roar as the air in front of you ondulate with a massive drop of temperature and everything covers with a thick layer of solid ice. You massage your throat for a moment noticing as thin volume of condensation constantly escape from your maw.\n\n(<b>Gained Perk: Freezing Breath</b>)\n");
 				player.createPerk(PerkLib.FreezingBreath, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if (player.faceType != FACE_WOLF && player.findPerk(PerkLib.FreezingBreath) >= 0 && player.hasKeyItem("Fenrir Collar") >= 0) {
+			else if (player.faceType != AppearanceDefs.FACE_WOLF && player.findPerk(PerkLib.FreezingBreath) >= 0 && player.hasKeyItem("Fenrir Collar") >= 0) {
 				outputText("\nAs you no longer are wolf like enough to maintain the form of a full Fenrir your breath no longer freeze the ambient air.\n\n<b>(Lost Perk: Freezing Breath)</b>\n");
 				player.removePerk(PerkLib.FreezingBreath);
 				needNext = true;
 			}
 			//Fenrir Eyes
-			if (player.eyeType != EYES_FENRIR && player.hasKeyItem("Fenrir Collar") >= 0) {
+			if (player.eyeType != AppearanceDefs.EYES_FENRIR && player.hasKeyItem("Fenrir Collar") >= 0) {
 				outputText("\nThe bone chilling voice of Fenrir ring in the back of your mind.");
 				outputText("\n\n\"<i>How dare you throw away my gifts...</i>\"");
 				outputText("\n\nThe collar power suddenly forcefully surge through your body transforming you back. \"<b>You now have glowing icy eyes.</b>\"\n");
-				player.eyeType = EYES_FENRIR;
+				player.eyeType = AppearanceDefs.EYES_FENRIR;
 				needNext = true;
 			}
 			//Fenrir Back Ice Shards
-			if (player.rearBody != REAR_BODY_FENRIR_ICE_SPIKES && player.hasKeyItem("Fenrir Collar") >= 0) {
+			if (player.rearBody != AppearanceDefs.REAR_BODY_FENRIR_ICE_SPIKES && player.hasKeyItem("Fenrir Collar") >= 0) {
 				outputText("\nThe bone chilling voice of Fenrir ring in the back of your mind.");
 				outputText("\n\n\"<i>How dare you throw away my gift...</i>\"");
 				outputText("\n\nThe collar power suddenly forcefully surge through your body transforming you back.\"<b>Your back is now covered with sharp ice spike constantly cooling the air around you. (Gained Frozen Waste and Cold Mastery perks)</b>\"\n");
-				player.rearBody = REAR_BODY_FENRIR_ICE_SPIKES;
+				player.rearBody = AppearanceDefs.REAR_BODY_FENRIR_ICE_SPIKES;
 				needNext = true;
 			}
 			//Cold Affinity
@@ -758,16 +757,16 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Aquatic Affinity
-			if (player.lowerBody == LOWER_BODY_TYPE_ORCA && player.armType == ARM_TYPE_ORCA && player.tailType == TAIL_TYPE_ORCA && player.earType == EARS_ORCA && player.findPerk(PerkLib.AquaticAffinity) < 0) {
+			if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_ORCA && player.armType == AppearanceDefs.ARM_TYPE_ORCA && player.tailType == AppearanceDefs.TAIL_TYPE_ORCA && player.earType == AppearanceDefs.EARS_ORCA && player.findPerk(PerkLib.AquaticAffinity) < 0) {
 				outputText("\nYou suddenly feel an urge to jump into the nearest pool of water as your breath becomes ragged and messy. You swiftly run up to the stream and scream in release as you fill your aching respiratory systems with water. Wait water? You realise you just gained the ability to breath underwater but to make sure you can still breath normal air you go back to the surface. It soon appears you can still breath fresh air. Reassured on your condition you head back to camp.\n");
-				if (player.rearBody == REAR_BODY_ORCA_BLOWHOLE) outputText("\nIt dawns on you that you didn't breath for a full hour. When you realise this you relax your blowhole and take in some air. Well wow it seems you can now hold in your oxigen for very lengthy period. This will be perfect for underwater explorations.\n");
+				if (player.rearBody == AppearanceDefs.REAR_BODY_ORCA_BLOWHOLE) outputText("\nIt dawns on you that you didn't breath for a full hour. When you realise this you relax your blowhole and take in some air. Well wow it seems you can now hold in your oxigen for very lengthy period. This will be perfect for underwater explorations.\n");
 				outputText("\n(<b>Gained Perk: Aquatic Affinity</b>)\n");
 				player.createPerk(PerkLib.AquaticAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if ((player.lowerBody != LOWER_BODY_TYPE_ORCA || player.armType != ARM_TYPE_ORCA || player.tailType != TAIL_TYPE_ORCA || player.earType != EARS_ORCA) && player.findPerk(PerkLib.AquaticAffinity) >= 0) {
+			else if ((player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_ORCA || player.armType != AppearanceDefs.ARM_TYPE_ORCA || player.tailType != AppearanceDefs.TAIL_TYPE_ORCA || player.earType != AppearanceDefs.EARS_ORCA) && player.findPerk(PerkLib.AquaticAffinity) >= 0) {
 				outputText("\nAs you lose the respiratory organ to breath underwater it also becomes obvious that you will drown if attempting to breath water in. You will need to get items or transform to breath underwater again.\n");
-				if (player.rearBody == REAR_BODY_ORCA_BLOWHOLE) outputText("\nYou take a deep breath in then out. It seems you can no longer hold your breath like the whales do. It will take some using to.</b>\n");
+				if (player.rearBody == AppearanceDefs.REAR_BODY_ORCA_BLOWHOLE) outputText("\nYou take a deep breath in then out. It seems you can no longer hold your breath like the whales do. It will take some using to.</b>\n");
 				outputText("\n<b>(Lost Perk: Aquatic Affinity)</b>\n");
 				player.removePerk(PerkLib.AquaticAffinity);
 				needNext = true;
@@ -820,31 +819,31 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Tail Hunger
-			if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL && player.findPerk(PerkLib.ManticoreCumAddict) < 0) {
+			if (player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL && player.findPerk(PerkLib.ManticoreCumAddict) < 0) {
 				outputText("\nYou suddenly feel a desire to eat, or rather, drink. It's like you have been thirsty for months, yet the thirst does not originate from your throat. Your tail pussy is dying for a mans meat and you feel that as long as you don't sate it, you will only be getting hornier! Cum... You need cum, a lot of it. It’s obvious now why manticores are this crazy for sex as you feel the urge to pounce and feed on every single male in Mareth you can find!\n");
 				flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] = 50;
 				player.createPerk(PerkLib.ManticoreCumAddict, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if (player.tailType != TAIL_TYPE_MANTICORE_PUSSYTAIL && player.findPerk(PerkLib.ManticoreCumAddict) >= 0) {
+			if (player.tailType != AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL && player.findPerk(PerkLib.ManticoreCumAddict) >= 0) {
 				outputText("\nYou suddently feel like your mind is clear of the constant haze of lust and hunger for the first time since you had that tail. Losing it was perhaps for the best.\n");
 				player.removePerk(PerkLib.ManticoreCumAddict);
 				needNext = true;
 			}
 			//Vampire Thirst
-			if (player.faceType == FACE_VAMPIRE && !player.hasStatusEffect(StatusEffects.VampireThirst)) {
+			if (player.faceType == AppearanceDefs.FACE_VAMPIRE && !player.hasStatusEffect(StatusEffects.VampireThirst)) {
 				outputText("\nAn ominous thirst settle in your throat as you begin to hallucinate glasses of blood… how delicious it would feel on your palates. You realise you are salivating and do your best to control yourself. Still you now are clearly dependant on blood.\n");
 				player.createStatusEffect(StatusEffects.VampireThirst, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if (player.faceType != FACE_VAMPIRE && player.hasStatusEffect(StatusEffects.VampireThirst)) {
+			if (player.faceType != AppearanceDefs.FACE_VAMPIRE && player.hasStatusEffect(StatusEffects.VampireThirst)) {
 				outputText("\nAs your fang disappear so do your vampiric urges. You become disgusted with yourself as you realise how much blood you drank.\n");
 				player.removeStatusEffect(StatusEffects.VampireThirst);
 				needNext = true;
 			}
 			//Reset bad end warning
 			if (flags[kFLAGS.FOX_BAD_END_WARNING] == 1) {
-				if (player.faceType != FACE_FOX || player.tailType != TAIL_TYPE_FOX || player.earType != EARS_FOX || player.lowerBody != LOWER_BODY_TYPE_FOX || player.skinType != SKIN_TYPE_FUR) {
+				if (player.faceType != AppearanceDefs.FACE_FOX || player.tailType != AppearanceDefs.TAIL_TYPE_FOX || player.earType != AppearanceDefs.EARS_FOX || player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_FOX || player.skinType != AppearanceDefs.SKIN_TYPE_FUR) {
 					flags[kFLAGS.FOX_BAD_END_WARNING] = 0;
 				}
 			}
@@ -866,26 +865,26 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\nYou feel a strange tingling sensation. It seems as if you've finally adapted to the transformative properties of the food in Mareth and your body has finally built up enough resistance! You suspect that you can still transform but at somewhat diminished rate. \n\n(<b>Gained Perk: Transformation Resistance - Transformative items now have less chance to transform you. In addition, any Bad Ends related to overdose of certain transformative items are now disabled.</b>)\n");
 				player.createPerk(PerkLib.TransformationResistance, 0, 0, 0, 0);
 			}
-			if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 && player.perkv4(PerkLib.EnlightenedNinetails) == 0 && (player.tailType != TAIL_TYPE_FOX || player.tailCount < 9)) { //Check ninetails perks!
+			if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 && player.perkv4(PerkLib.EnlightenedNinetails) == 0 && (player.tailType != AppearanceDefs.TAIL_TYPE_FOX || player.tailCount < 9)) { //Check ninetails perks!
 				outputText("\n<b>Without your tails, the magic power they once granted withers and dies, vanishing completely.</b>\n");
 				player.removePerk(PerkLib.EnlightenedNinetails);
 				needNext = true;
 			}
-			if (player.findPerk(PerkLib.CorruptedNinetails) >= 0 && player.perkv4(PerkLib.CorruptedNinetails) == 0 && (player.tailType != TAIL_TYPE_FOX || player.tailCount < 9)) { //Check ninetails perks!
+			if (player.findPerk(PerkLib.CorruptedNinetails) >= 0 && player.perkv4(PerkLib.CorruptedNinetails) == 0 && (player.tailType != AppearanceDefs.TAIL_TYPE_FOX || player.tailCount < 9)) { //Check ninetails perks!
 				outputText("\n<b>Without your tails, the magic power they once granted withers and dies, vanishing completely.</b>\n");
 				player.removePerk(PerkLib.CorruptedNinetails);
 				needNext = true;
 			}
-			if (!player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.hasPerk(PerkLib.EnlightenedNinetails) && player.perkv4(PerkLib.EnlightenedNinetails) > 0 && player.hasPerk(PerkLib.CorruptedNinetails) && player.perkv4(PerkLib.CorruptedNinetails) > 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount == 9) {
+			if (!player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.hasPerk(PerkLib.EnlightenedNinetails) && player.perkv4(PerkLib.EnlightenedNinetails) > 0 && player.hasPerk(PerkLib.CorruptedNinetails) && player.perkv4(PerkLib.CorruptedNinetails) > 0 && player.tailType == AppearanceDefs.TAIL_TYPE_FOX && player.tailCount == 9) {
 				outputText("\n<b>With your nine tails you suddenly feel something beyond merely two paths of corruption and true enlightenment. A third way, the way of treading a fragile path of balance between other two paths. \n\n(Gained Perk: Nine-tails Kitsune of Balance)</b>\n");
 				player.createPerk(PerkLib.NinetailsKitsuneOfBalance, 0, 0, 0, 0);
 			}
-			if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) == 0 && (player.tailType != TAIL_TYPE_FOX || player.tailCount < 9)) {
+			if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) == 0 && (player.tailType != AppearanceDefs.TAIL_TYPE_FOX || player.tailCount < 9)) {
 				outputText("\n<b>Without your tails, the balance is disturbed and you loose your insights into the third path.</b>\n");
 				player.removePerk(PerkLib.NinetailsKitsuneOfBalance);
 				needNext = true;
 			}
-			if (player.lowerBody == LOWER_BODY_TYPE_HARPY && player.tailType == TAIL_TYPE_HARPY && player.findPerk(PerkLib.HarpyWomb) >= 0) { //Make eggs big if harpied!
+			if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HARPY && player.tailType == AppearanceDefs.TAIL_TYPE_HARPY && player.findPerk(PerkLib.HarpyWomb) >= 0) { //Make eggs big if harpied!
 				if (player.hasStatusEffect(StatusEffects.Eggs) && player.statusEffectv2(StatusEffects.Eggs) == 0) {
 					player.changeStatusValue(StatusEffects.Eggs, 2, 1);
 					outputText("\n<b>A familiar, motherly rumble lets you know that your harpy-like womb is growing your eggs nice and large.</b>\n");
@@ -915,22 +914,22 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.Diapause);
 				needNext = true;
 			}
-			if (player.lowerBody == LOWER_BODY_TYPE_NAGA) {
-				if (player.tailType > TAIL_TYPE_NONE) {
+			if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_NAGA) {
+				if (player.tailType > AppearanceDefs.TAIL_TYPE_NONE) {
 					outputText("\nYour tail squirms, wriggling against your larger naga tail as the scales part around it, absorbing it.  <b>Your form is completely scaly and smooth from the waist down.</b>\n");
-					player.tailType = TAIL_TYPE_NONE;
+					player.tailType = AppearanceDefs.TAIL_TYPE_NONE;
 					needNext = true;
 				}
 			}
 			if (player.findPerk(PerkLib.WetPussy) >= 0 && player.hasVagina()) {
-				if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_WET) {
+				if (player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_WET) {
 					outputText("\n<b>Your " + player.vaginaDescript(0) + " returns to its normal, wet state.</b>\n");
-					player.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
+					player.vaginas[0].vaginalWetness = AppearanceDefs.VAGINA_WETNESS_WET;
 					needNext = true;
 				}
 			}
 			if (player.findPerk(PerkLib.MaraesGiftButtslut) >= 0 && player.ass.analWetness < 2) { //Prevent Buttsluts from getting dry backdoors
-				outputText("\n<b>Your " + getGame().assholeDescript() + " quickly re-moistens.  It looks like Marae's 'gift' can't be removed.</b>\n");
+				outputText("\n<b>Your " + Appearance.assholeDescript(player) + " quickly re-moistens.  It looks like Marae's 'gift' can't be removed.</b>\n");
 				player.ass.analWetness = 2;
 				needNext = true;
 			}
@@ -976,16 +975,16 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			if (player.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00285] >= 50 && player.findPerk(PerkLib.LuststickAdapted) < 0) { //Luststick resistance unlock
-				getGame().sophieBimbo.unlockResistance();
-				if (player.hasStatusEffect(StatusEffects.Luststick)) player.removeStatusEffect(StatusEffects.Luststick);
+                SceneLib.sophieBimbo.unlockResistance();
+                if (player.hasStatusEffect(StatusEffects.Luststick)) player.removeStatusEffect(StatusEffects.Luststick);
 				needNext = true;
 			}
 			if (flags[kFLAGS.DICK_EGG_INCUBATION] > 0) {
 				flags[kFLAGS.DICK_EGG_INCUBATION]--;
 				trace("DICK BIRTH TIMER: " + flags[kFLAGS.DICK_EGG_INCUBATION]);
 				if (flags[kFLAGS.DICK_EGG_INCUBATION] == 1) {
-					getGame().masturbation.birthBeeEggsOutYourWang();
-					needNext = true;
+                    SceneLib.masturbation.birthBeeEggsOutYourWang();
+                    needNext = true;
 				}
 			}
 			if (player.hasStatusEffect(StatusEffects.Eggchest)) { //Eggs in tits!
@@ -999,17 +998,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			if (player.findPerk(PerkLib.SpiderOvipositor) >= 0 || player.findPerk(PerkLib.BeeOvipositor) >= 0 || player.findPerk(PerkLib.MantisOvipositor) >= 0) { //Spider, Bee and Mantis ovipositor updates
-				if (player.findPerk(PerkLib.SpiderOvipositor) >= 0 && (!player.isDrider() || player.tailType != TAIL_TYPE_SPIDER_ADBOMEN)) { //Remove dat shit!
+				if (player.findPerk(PerkLib.SpiderOvipositor) >= 0 && (!player.isDrider() || player.tailType != AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN)) { //Remove dat shit!
 					outputText("\n<b>Your ovipositor (and eggs) vanish since your body has become less spider-like.</b>\n");
 					player.removePerk(PerkLib.SpiderOvipositor);
 					needNext = true;
 				}
-				else if (player.findPerk(PerkLib.BeeOvipositor) >= 0 && player.tailType != TAIL_TYPE_BEE_ABDOMEN) { //Remove dat shit!
+				else if (player.findPerk(PerkLib.BeeOvipositor) >= 0 && player.tailType != AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN) { //Remove dat shit!
 					outputText("\n<b>Your ovipositor (and eggs) vanish since your body has become less bee-like.</b>\n");
 					player.removePerk(PerkLib.BeeOvipositor);
 					needNext = true;
 				}
-				else if (player.findPerk(PerkLib.MantisOvipositor) >= 0 && player.tailType != TAIL_TYPE_MANTIS_ABDOMEN) { //Remove dat shit!
+				else if (player.findPerk(PerkLib.MantisOvipositor) >= 0 && player.tailType != AppearanceDefs.TAIL_TYPE_MANTIS_ABDOMEN) { //Remove dat shit!
 					outputText("\n<b>Your ovipositor (and eggs) vanish since your body has become less mantis-like.</b>\n");
 					player.removePerk(PerkLib.MantisOvipositor);
 					needNext = true;
@@ -1019,11 +1018,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (prevEggs < 10) {
 						player.addEggs(2);
 					}
-					else if (prevEggs < 20 && getGame().model.time.hours % 2 == 0) {
-						player.addEggs(1);
+                    else if (prevEggs < 20 && kGAMECLASS.model.time.hours % 2 == 0) {
+                        player.addEggs(1);
 					}
-					else if (getGame().model.time.hours % 4 == 0) {
-						player.addEggs(1);
+                    else if (kGAMECLASS.model.time.hours % 4 == 0) {
+                        player.addEggs(1);
 					}
 					if (prevEggs < 10 && player.eggs() >= 10) { //Stage 1 egg message
 						if (player.findPerk(PerkLib.SpiderOvipositor) >= 0) {
@@ -1074,9 +1073,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.removePerk(PerkLib.BunnyEggs);
 					needNext = true;
 				}
-				else if (player.pregnancyIncubation < 1 && player.hasVagina() && getGame().model.time.hours == 1) { //Otherwise pregger check, once every morning
-					if ((player.totalFertility() > 50 && getGame().model.time.days % 15 == 0) || getGame().model.time.days % 30 == 0) { //every 15 days if high fertility get egg preg
-						outputText("\n<b>Somehow you know that eggs have begun to form inside you.  You wonder how long it will be before they start to show?</b>\n");
+                else if (player.pregnancyIncubation < 1 && player.hasVagina() && kGAMECLASS.model.time.hours == 1) { //Otherwise pregger check, once every morning
+                    if ((player.totalFertility() > 50 && kGAMECLASS.model.time.days % 15 == 0) || kGAMECLASS.model.time.days % 30 == 0) { //every 15 days if high fertility get egg preg
+                        outputText("\n<b>Somehow you know that eggs have begun to form inside you.  You wonder how long it will be before they start to show?</b>\n");
 						player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS, 1, 1);
 						player.createStatusEffect(StatusEffects.Eggs, rand(6), rand(2), (5 + rand(3)), 0); //v1 is type, v2 is size (1 == large) and v3 is quantity
 						player.addPerkValue(PerkLib.Oviposition, 1, 1); //Count times eggpregged this way in perk.
@@ -1089,7 +1088,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.dynStats("lib", -player.statusEffectv2(StatusEffects.Heat), "scale", false);
 					player.removeStatusEffect(StatusEffects.Heat); //remove heat
 					if (player.lib < 1) player.lib = 1;
-					getGame().statScreenRefresh();
+					EngineCore.statScreenRefresh();
 					outputText("\n<b>Your body calms down, at last getting over your heat.</b>\n");
 					needNext = true;
 				}
@@ -1098,11 +1097,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 
 			if (player.inRut) { //Rut v1 is bonus cum, v2 is bonus libido, v3 is hours till it's gone
 				trace("RUT:" + player.statusEffectv3(StatusEffects.Rut));
-				if (player.statusEffectv3(StatusEffects.Rut) <= 1 || player.totalCocks() == 0) { //Remove bonus libido from rut
+				if (player.statusEffectv3(StatusEffects.Rut) <= 1 || player.cockTotal() == 0) { //Remove bonus libido from rut
 					player.dynStats("lib", -player.statusEffectv2(StatusEffects.Rut), "scale", false);
 					player.removeStatusEffect(StatusEffects.Rut); //remove heat
 					if (player.lib < 10) player.lib = 10;
-					getGame().statScreenRefresh();
+                    EngineCore.statScreenRefresh();
 					outputText("\n<b>Your body calms down, at last getting over your rut.</b>\n");
 					needNext = true;
 				}
@@ -1171,11 +1170,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			if (player.statusEffectv2(StatusEffects.Kelt) > 0) player.addStatusValue(StatusEffects.Kelt, 2, -0.15); //Reduce kelt submissiveness by 1 every 5 hours
 			//Mino cum update.
-			if (getGame().mountain.minotaurScene.minoCumUpdate()) {
-				needNext = true;
+            if (SceneLib.mountain.minotaurScene.minoCumUpdate()) {
+                needNext = true;
 			}
-			else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 2 && getGame().model.time.hours % 13 == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00330] == 0) { //Repeated warnings!
-				if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2)
+            else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 2 && kGAMECLASS.model.time.hours % 13 == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00330] == 0) { //Repeated warnings!
+                if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2)
 					outputText("\n<b>You shiver, feeling a little cold.  Maybe you ought to get some more minotaur cum?  You just don't feel right without that pleasant buzz in the back of your mind.</b>\n");
 				else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3)
 					outputText("\n<b>The steady fire of lust within you burns hot, making you shiver and grab at your head.  You're STILL in withdrawal after having gone so long without a dose of minotaur love.  You just know you're going to be horny and achy until you get some.</b>\n");
@@ -1215,7 +1214,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.breastRows[0].breastRating = 5;
 					if (player.findPerk(PerkLib.FutaFaculties) >= 0)
 						outputText("\n<b>Your tits get nice and full again.  You'll have lots of fun now that your breasts are back to being big, swollen knockers!</b>\n");
-					else outputText("\n<b>Your " + getGame().breastDescript(0) + " have regained their former bimbo-like size.  It looks like you'll be stuck with large, sensitive breasts forever, but at least it'll help you tease your enemies into submission!</b>\n");
+					else outputText("\n<b>Your " + player.breastDescript(0) + " have regained their former bimbo-like size.  It looks like you'll be stuck with large, sensitive breasts forever, but at least it'll help you tease your enemies into submission!</b>\n");
 					player.dynStats("int", -1, "lus", 15);
 					needNext = true;
 				}
@@ -1233,7 +1232,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.breastRows[0].breastRating = 5;
 					if (player.findPerk(PerkLib.BimboBrains) >= 0 || player.hasStatusEffect(StatusEffects.BimboChampagne))
 						outputText("\n<b>Your boobies like, get all big an' wobbly again!  You'll have lots of fun now that your tits are back to being big, yummy knockers!</b>\n");
-					else outputText("\n<b>Your " + getGame().breastDescript(0) + " have regained their former bimbo-like size.  It looks like you'll be stuck with large, sensitive breasts forever, but at least it'll help you tease your enemies into submission!</b>\n");
+					else outputText("\n<b>Your " + player.breastDescript(0) + " have regained their former bimbo-like size.  It looks like you'll be stuck with large, sensitive breasts forever, but at least it'll help you tease your enemies into submission!</b>\n");
 					player.dynStats("int", -1, "lus", 15);
 					needNext = true;
 				}
@@ -1296,21 +1295,21 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		}
 
 		public function timeChangeLarge():Boolean {
-			if (rand(4) == 0 && getGame().isHolidays() && player.gender > 0 && getGame().model.time.hours == 6 && flags[kFLAGS.XMAS_CHICKEN_YEAR] < getGame().date.fullYear) {
-				getGame().getAChristmasChicken();
-				return true;
+            if (rand(4) == 0 && Holidays.isHolidays() && player.gender > 0 && kGAMECLASS.model.time.hours == 6 && flags[kFLAGS.XMAS_CHICKEN_YEAR] < kGAMECLASS.date.fullYear) {
+                Holidays.getAChristmasChicken();
+                return true;
 			}
-			if (getGame().model.time.hours == 1 && getGame().isHolidays() && getGame().date.fullYear > flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE]) { //XMAS ELF
-				getGame().xmasBitchEncounter(); //Set it to remember the last year encountered
-				return true;
+            if (kGAMECLASS.model.time.hours == 1 && Holidays.isHolidays() && kGAMECLASS.date.fullYear > flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE]) { //XMAS ELF
+                Holidays.xmasBitchEncounter(); //Set it to remember the last year encountered
+                return true;
 			}
-			if (checkedTurkey++ == 0 && (rand(5) == 0 && (getGame().model.time.hours == 18 || getGame().model.time.hours == 19)) && (getGame().date.fullYear > flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] || flags[kFLAGS.MORE_TURKEY] > 0) && getGame().isThanksgiving() && player.gender > 0 && flags[kFLAGS.IN_INGNAM] <= 0) {
-				getGame().datTurkeyRumpMeeting(); //TURKEY SURPRISE
-				return true;
+            if (checkedTurkey++ == 0 && (rand(5) == 0 && (kGAMECLASS.model.time.hours == 18 || kGAMECLASS.model.time.hours == 19)) && (kGAMECLASS.date.fullYear > flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] || flags[kFLAGS.MORE_TURKEY] > 0) && Holidays.isThanksgiving() && player.gender > 0 && flags[kFLAGS.IN_INGNAM] <= 0) {
+                Holidays.datTurkeyRumpMeeting(); //TURKEY SURPRISE
+                return true;
 			}
-			if (checkedDream++ == 0 && getGame().model.time.hours == 3) { //You can only have one dream each night
-				if (player.gender > 0 && getGame().model.time.days == 10) { //Day 10 dream - since this can happen only once it takes priority over all other dreams
-					getGame().dayTenDreams();
+            if (checkedDream++ == 0 && kGAMECLASS.model.time.hours == 3) { //You can only have one dream each night
+                if (player.gender > 0 && kGAMECLASS.model.time.days == 10) { //Day 10 dream - since this can happen only once it takes priority over all other dreams
+                    dreams.dayTenDreams();
 					return true;
 				}
 				if (player.hasCock() && player.findPerk(PerkLib.BeeOvipositor) >= 0 && (player.eggs() >= 20 && rand(6) == 0)) { //Bee dreams proc
@@ -1330,15 +1329,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.fertilizeEggs(); //convert eggs to fertilized based on player cum output, reduce lust by 100 and then add 20 lust
 					player.orgasm(); //reduce lust by 100 and add 20, convert eggs to fertilized depending on cum output
 					player.dynStats("lus", 20);
-					getGame().doNext(playerMenu);
+                    EngineCore.doNext(playerMenu);
 					//Hey Fenoxo - maybe the unsexed characters get a few \"cock up the ovipositor\" scenes for fertilization with some characters (probably only willing ones)?
 					//Hey whoever, maybe you write them? -Z
 					return true;
 				}
 				if (player.hasCock() && player.findPerk(PerkLib.MantisOvipositor) >= 0 && (player.eggs() >= 20 && rand(6) == 0)) { //Mantis dreams proc
 					outputText("\nIn a moonlit forest, you sit upon a thick tree branch silently above fresh web after you naturaly 'take care' of it owner.  You watch with rising lust as a hapless traveler strolls along below, utterly unaware of the trap set.  Your breath catches as " + player.mf("he","she") + " finally encounters web, flailing against the sticky strands in a futile attempt to free " + player.mf("him","her") + "self.  Once the traveller's struggles slow in fatigue, you descend easily to the forest floor, with few pecise swings of your scythes wrapping " + player.mf("him","her") + " in an elegant makeshift silk cocoon before pulling " + player.mf("him","her") + " up into the canopy.  Cutting " + player.mf("his","her") + " crotch free of your webbing, you open " + player.mf("his","her") + " [armor] and release the ");
-					if (player.hasVagina()) outputText(getGame().vaginaDescript(0) + " and ");
-					outputText(getGame().cockDescript(0) + " therein; you lower yourself onto " + player.mf("him","her") + " over and over again, spearing your eager pussy with " + player.mf("him","her") + " prick");
+					if (player.hasVagina()) outputText(Appearance.vaginaDescript(player,0) + " and ");
+					outputText(player.cockDescript(0) + " therein; you lower yourself onto " + player.mf("him","her") + " over and over again, spearing your eager pussy with " + player.mf("him","her") + " prick");
 					if (player.hasVagina()) outputText(" while you bend and force your own into her cunt");
 					outputText(".  It's not long until you feel ");
 					if (player.hasVagina()) outputText("her pussy clenching around you as you orgasm explosively inside, followed by ");
@@ -1350,13 +1349,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.fertilizeEggs(); //reduce lust by 100 and add 20, convert eggs to fertilized depending on cum output
 					player.orgasm();
 					player.dynStats("lus", 20);
-					getGame().doNext(playerMenu);
+					EngineCore.doNext(playerMenu);
 					return true;
 				}
 				if (player.hasCock() && player.findPerk(PerkLib.SpiderOvipositor) >= 0 && (player.eggs() >= 20 && rand(6) == 0)) { //Drider dreams proc
 					outputText("\nIn a moonlit forest, you hang upside down from a thick tree branch suspended by only a string of webbing.  You watch with rising lust as a hapless traveler strolls along below, utterly unaware of the trap you've set.  Your breath catches as " + player.mf("he","she") + " finally encounters your web, flailing against the sticky strands in a futile attempt to free " + player.mf("him","her") + "self.  Once the traveller's struggles slow in fatigue, you descend easily to the forest floor, wrapping " + player.mf("him","her") + " in an elegant silk cocoon before pulling " + player.mf("him","her") + " up into the canopy.  Positioning your catch against the tree's trunk, you sink your fangs through the web and into flesh, feeling " + player.mf("his","her") + " body heat with every drop of venom.  Cutting " + player.mf("his","her") + " crotch free of your webbing, you open " + player.mf("his","her") + " [armor] and release the ");
-					if (player.hasVagina()) outputText(getGame().vaginaDescript(0) + " and ");
-					outputText(getGame().cockDescript(0) + " therein; you lower yourself onto " + player.mf("him","her") + " over and over again, spearing your eager pussy with " + player.mf("him","her") + " prick");
+					if (player.hasVagina()) outputText(Appearance.vaginaDescript(player,0) + " and ");
+					outputText(player.cockDescript(0) + " therein; you lower yourself onto " + player.mf("him","her") + " over and over again, spearing your eager pussy with " + player.mf("him","her") + " prick");
 					if (player.hasVagina()) outputText(" while you bend and force your own into her cunt");
 					outputText(".  It's not long until you feel ");
 					if (player.hasVagina()) outputText("her pussy clenching around you as you orgasm explosively inside, followed by ");
@@ -1368,7 +1367,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.fertilizeEggs(); //reduce lust by 100 and add 20, convert eggs to fertilized depending on cum output
 					player.orgasm();
 					player.dynStats("lus", 20);
-					getGame().doNext(playerMenu);
+					EngineCore.doNext(playerMenu);
 					//Hey Fenoxo - maybe the unsexed characters get a few \"cock up the ovipositor\" scenes for fertilization with some characters (probably only willing ones)?
 					//Hey whoever, maybe you write them? -Z
 					return true;
@@ -1382,48 +1381,48 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					case  4: ceraph =  4; break;
 					default: ceraph =  3;
 				}
-				if (ceraph > 0 && getGame().model.time.days % ceraph == 0) {
-					getGame().ceraphScene.ceraphBodyPartDreams();
-					return true;
+                if (ceraph > 0 && kGAMECLASS.model.time.days % ceraph == 0) {
+                    SceneLib.ceraphScene.ceraphBodyPartDreams();
+                    return true;
 				}
 				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00157] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00157] < 4) { //Dominika Dream
 					outputText("\n<b>Your rest is somewhat troubled with odd dreams...</b>\n");
-					getGame().telAdre.dominika.fellatrixDream();
-					return true;
+                    SceneLib.telAdre.dominika.fellatrixDream();
+                    return true;
 				}
-				if (getGame().anemoneScene.kidAXP() >= 40 && flags[kFLAGS.HAD_KID_A_DREAM] == 0 && player.gender > 0) {
-					getGame().anemoneScene.kidADreams();
-					flags[kFLAGS.HAD_KID_A_DREAM] = 1;
+                if (SceneLib.anemoneScene.kidAXP() >= 40 && flags[kFLAGS.HAD_KID_A_DREAM] == 0 && player.gender > 0) {
+                    SceneLib.anemoneScene.kidADreams();
+                    flags[kFLAGS.HAD_KID_A_DREAM] = 1;
 					return true;
 				}
 				if (player.viridianChange()) {
-					getGame().fuckedUpCockDreamChange();
+					dreams.fuckedUpCockDreamChange();
 					return true;
 				}
 				if (player.plantScore() >= 4 && player.findPerk(PerkLib.SoulSense) >= 0 && flags[kFLAGS.SOUL_SENSE_WORLD_TREE] < 1) {
 					outputText("\nYou find yourself in a forest. You feel a delicate melody fill the air around you, and while it has no discernable sound it somehow resonates with your being. Without even realizing it, you find yourself walking towards the source. Before long, you’re standing before a towering goliath of a tree, much larger than the others around you. As you touch the bark, you hear a soft voice. “Welcome home”. You bolt awake, and realize it was but a dream.  But somehow, you still feel the song whispering in your mind... <b>Perhaps you could seek out this tree in the waking world?</b>");
 					flags[kFLAGS.SOUL_SENSE_WORLD_TREE] = 1;
-					getGame().doNext(playerMenu);
+					EngineCore.doNext(playerMenu);
 					return true;
 				}
 				if (player.lib > 50 || player.lust > 40) { //Randomly generated dreams here
-					if (getGame().dreamSelect()) return true;
+					if (dreams.dreamSelect()) return true;
 				}
 			}
 			if (player.statusEffectv1(StatusEffects.SlimeCraving) >= 18 && player.str <= 1) { //Bad end!
-				getGame().lake.gooGirlScene.slimeBadEnd();
-				return true;
+                SceneLib.lake.gooGirlScene.slimeBadEnd();
+                return true;
 			}
 			//Bee cocks
 			if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE && player.lust >= player.maxLust()) {
 				if (player.hasItem(consumables.BEEHONY) || player.hasItem(consumables.PURHONY) || player.hasItem(consumables.SPHONEY)) {
 					outputText("\nYou can't help it anymore. Thankfully, you have the honey in your pouch so you pull out a vial of honey. You're definitely going to masturbate with honey covering your bee-cock.");
-					doNext(getGame().masturbation.masturbateGo);
-					return true;
+                    doNext(SceneLib.masturbation.masturbateGo);
+                    return true;
 				}
 				outputText("\nYou can’t help it anymore, you need to find the bee girl right now.  You rush off to the forest to find the release that you absolutely must have.  Going on instinct you soon find the bee girl's clearing and her in it.\n\n");
-				getGame().forest.beeGirlScene.beeSexForCocks(false);
-				return true;
+                SceneLib.forest.beeGirlScene.beeSexForCocks(false);
+                return true;
 			}
 			return false;
 		}

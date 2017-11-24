@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.Places.TelAdre {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
 //  BROOKE_AFFECTION:int = 915;
 //  BROOKE_SHOWERED_WITH:int = 916;
@@ -1161,7 +1161,7 @@ public function leaveHeckelEncounter():void {
 	outputText("Well, whatever.  You came here looking for Heckel, and she's not here, as far as you can tell.  You turn around and leave the gym, without investigating the cause of the commotion.");
 	//Return to Tel'Adre, no time loss
 	menu();
-	addButton(0,"Next",kGAMECLASS.telAdre.telAdreMenu);
+	addButton(0,"Next",SceneLib.telAdre.telAdreMenu);
 }
 
 //[=Butterfly=]

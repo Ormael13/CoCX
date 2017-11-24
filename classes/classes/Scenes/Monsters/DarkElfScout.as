@@ -4,12 +4,12 @@
  */
 package classes.Scenes.Monsters 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Places.HeXinDao;
-	
-	public class DarkElfScout extends Monster
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Places.HeXinDao;
+import classes.internals.*;
+
+public class DarkElfScout extends Monster
 	{
 		public var darkelf:DarkElfScene = new DarkElfScene();
 		public var golems:HeXinDao = new HeXinDao();
@@ -106,7 +106,6 @@ package classes.Scenes.Monsters
 				if (player.isFlying() && rand(4) == 0) WingClip();
 				else DarkElfBowShooting();
 			}
-			combatRoundOver();
 		}
 		
 		public function DarkElfScout() 
@@ -115,15 +114,15 @@ package classes.Scenes.Monsters
 			this.short = "dark elf scout";
 			this.imageName = "dark elf";
 			this.long = "This woman with dark skin has long pointed ears. You suspect her to be a dark elf, though why she’s here on the surface, you have no idea. Regardless, she’s dangerous and seems well equipped for kidnapping.";
-			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 30, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_SLIME_DROOLING;
 			this.tallness = 72;
-			this.hipRating = HIP_RATING_CURVY;
-			this.buttRating = BUTT_RATING_LARGE+1;
-			this.lowerBody = LOWER_BODY_TYPE_ELF;
+			this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE+1;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_ELF;
 			this.skinTone = "dark";
 			this.hairColor = "silver";
 			this.hairLength = 13;

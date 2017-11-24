@@ -1,18 +1,21 @@
 ﻿package classes 
 {
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Items.*;
-	import classes.Scenes.Camp;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Items.*;
+import classes.Scenes.Camp;
 import classes.Scenes.Combat.Combat;
+import classes.Scenes.Dungeons.D3.D3;
+import classes.Scenes.Dungeons.DungeonAbstractContent;
+import classes.Scenes.Holidays;
+import classes.Scenes.Inventory;
 import classes.Scenes.Places.Ingnam;
-	import classes.Scenes.Places.Prison;
-	import classes.Scenes.Dungeons.D3.D3;
-	import classes.Scenes.Inventory;
+import classes.Scenes.Places.Prison;
+import classes.Scenes.SceneLib;
 import classes.internals.RootCounters;
 import classes.internals.Utils;
 
-	import coc.model.GameModel;
-	import coc.model.TimeModel;
+import coc.model.GameModel;
+import coc.model.TimeModel;
 import coc.view.ButtonData;
 import coc.view.ButtonDataList;
 import coc.view.CoCButton;
@@ -29,21 +32,14 @@ import coc.xxc.StoryContext;
 	 */
 	public class BaseContent extends Utils
 	{
-		// TODO remove when we have proper enums for this
-		include "../../includes/appearanceDefs.as";
-
-		public function BaseContent()
+        public function BaseContent()
 		{
 			
-		}
-		protected function getGame():CoC
-		{
-			return kGAMECLASS;
 		}
 
 		protected function cheatTime(time:Number, needNext:Boolean = false):void
 		{
-			kGAMECLASS.cheatTime(time, needNext);
+			EventParser.cheatTime(time, needNext);
 		}
 		/*protected function incrementDay(time:Number):void
 		{
@@ -54,65 +50,65 @@ import coc.xxc.StoryContext;
 			return kGAMECLASS.timeQ;
 		}
 
-		protected function get measurements():Measurements
+		/*protected function get measurements():Class
 		{
-			return kGAMECLASS.measurements;
-		}
+			return Measurements;
+		}*/
 
 		protected function get camp():Camp {
-			return kGAMECLASS.camp;
+			return SceneLib.camp;
 		}
 		
 		protected function get ingnam():Ingnam {
-			return kGAMECLASS.ingnam;
+			return SceneLib.ingnam;
 		}
 		
 		protected function get prison():Prison {
-			return kGAMECLASS.prison;
+			return SceneLib.prison;
 		}
 		
 		protected function get d3():D3 {
-			return kGAMECLASS.d3;
+			return SceneLib.d3;
 		}
 
 		public function goNext(time:Number,defNext:Boolean):Boolean
 		{
-			return kGAMECLASS.goNext(time,defNext);
+			return EventParser.goNext(time,defNext);
 		}
 		
 		protected function awardAchievement(title:String, achievement:*, display:Boolean = true, nl:Boolean = false, nl2:Boolean = true):void
 		{
-			return kGAMECLASS.awardAchievement(title, achievement, display, nl, nl2);
+			return EngineCore.awardAchievement(title, achievement, display, nl, nl2);
 		}
 		
 		protected function isHalloween():Boolean
 		{
-			return kGAMECLASS.isHalloween();
+			return Holidays.isHalloween();
 		}
 
 		protected function isValentine():Boolean
 		{
-			return kGAMECLASS.isValentine();
+			return Holidays.isValentine();
 		}
 
 		protected function isHolidays():Boolean
 		{
-			return kGAMECLASS.isHolidays();
+			return Holidays.isHolidays();
 		}
 
 		public function isEaster():Boolean
 		{
-			return kGAMECLASS.isEaster();
+			return Holidays.isEaster();
 		}
 
 		protected function isThanksgiving():Boolean
 		{
-			return kGAMECLASS.isThanksgiving();
+			return Holidays.isThanksgiving();
 		}
 
 		protected function isAprilFools():Boolean
 		{
-			return kGAMECLASS.isAprilFools();
+			return Holidays.isAprilFools();
 		}
 		
 		protected function get date():Date
@@ -129,7 +125,7 @@ import coc.xxc.StoryContext;
 		//Curse you, CoC updates!
 		protected function get inDungeon():Boolean
 		{
-			return kGAMECLASS.inDungeon;
+			return DungeonAbstractContent.inDungeon;
 		}
 /* inDungeon is now read only
 		protected function set inDungeon(v:Boolean):void
@@ -140,20 +136,20 @@ import coc.xxc.StoryContext;
 		
 		protected function get inRoomedDungeon():Boolean
 		{
-			return kGAMECLASS.inRoomedDungeon;
+			return DungeonAbstractContent.inRoomedDungeon;
 		}
 		protected function set inRoomedDungeon(v:Boolean):void
 		{
-			kGAMECLASS.inRoomedDungeon = v;
+			DungeonAbstractContent.inRoomedDungeon = v;
 		}
 		
 		protected function get inRoomedDungeonResume():Function
 		{
-			return kGAMECLASS.inRoomedDungeonResume;
+			return DungeonAbstractContent.inRoomedDungeonResume;
 		}
 		protected function set inRoomedDungeonResume(v:Function):void
 		{
-			kGAMECLASS.inRoomedDungeonResume = v;
+			DungeonAbstractContent.inRoomedDungeonResume = v;
 		}
 		
 /*
@@ -169,31 +165,26 @@ import coc.xxc.StoryContext;
 		
 		protected function showStats():void
 		{
-			kGAMECLASS.showStats();
+			EngineCore.showStats();
 		}
 
 		protected function statScreenRefresh():void
 		{
-			kGAMECLASS.statScreenRefresh();
+			EngineCore.statScreenRefresh();
 		}
 
 		protected function get combat():Combat {
-			return kGAMECLASS.combat;
+			return SceneLib.combat;
 		}
 
 		protected function cleanupAfterCombat(nextFunc:Function = null):void
 		{
-			kGAMECLASS.combat.cleanupAfterCombatImpl(nextFunc);
-		}
-
-		protected function combatRoundOver():Boolean
-		{
-			return kGAMECLASS.combat.combatRoundOverImpl();
+			SceneLib.combat.cleanupAfterCombatImpl(nextFunc);
 		}
 
 		protected function enemyAI():void
 		{
-			kGAMECLASS.combat.enemyAIImpl();
+			SceneLib.combat.enemyAIImpl();
 		}
 
 		protected function clearStatuses(visibility: Boolean):void
@@ -208,11 +199,11 @@ import coc.xxc.StoryContext;
 
 		protected function hideStats():void
 		{
-			kGAMECLASS.hideStats();
+			EngineCore.hideStats();
 		}
 		protected function hideUpDown():void
 		{
-			kGAMECLASS.hideUpDown();
+			EngineCore.hideUpDown();
 		}
 
 		/* This class extends Utils, no need for a non-static version of this function
@@ -239,47 +230,47 @@ import coc.xxc.StoryContext;
 
 		protected function createCallBackFunction(func:Function, arg:*):Function
 		{
-			return kGAMECLASS.createCallBackFunction(func,arg);
+			return EngineCore.createCallBackFunction(func,arg);
 		}
 
 		protected function createCallBackFunction2(func:Function, ...args):Function
 		{
-			return kGAMECLASS.createCallBackFunction2.apply(null,[func].concat(args));
+			return EngineCore.createCallBackFunction2.apply(null,[func].concat(args));
 		}
 
 		protected function startCombat(monster_:Monster,plotFight_:Boolean=false):void{
-			kGAMECLASS.combat.startCombatImpl(monster_,plotFight_);
+			SceneLib.combat.startCombatImpl(monster_,plotFight_);
 		}
 
 		protected function doSFWloss():Boolean {
-			return kGAMECLASS.doSFWloss();
+			return EngineCore.doSFWloss();
 		}
 		
 		
 		protected function startCombatImmediate(monster:Monster, _plotFight:Boolean = false):void
 		{
-			kGAMECLASS.combat.startCombatImmediateImpl(monster, _plotFight);
+			SceneLib.combat.startCombatImmediateImpl(monster, _plotFight);
 		}
 
 		// Needed in a few rare cases for dumping text coming from a source that can't properly escape it's brackets
 		// (Mostly traceback printing, etc...)
 		protected function rawOutputText(output:String, purgeText:Boolean = false):void
 		{
-			kGAMECLASS.rawOutputText(output, purgeText);
+			EngineCore.rawOutputText(output, purgeText);
 		}
 
 		protected function outputText(output:String):void
 		{
-			kGAMECLASS.outputText(output);
+			EngineCore.outputText(output);
 		}
 		
 		protected function clearOutput():void
 		{
-			kGAMECLASS.clearOutputTextOnly();
+			EngineCore.clearOutputTextOnly();
 		}
 		protected function displayHeader(string:String):void
 		{
-			kGAMECLASS.displayHeader(string);
+			EngineCore.displayHeader(string);
 		}
 		
 		protected function flushOutputTextToGUI():void {
@@ -288,17 +279,17 @@ import coc.xxc.StoryContext;
 
 		protected function doNext(eventNo:Function):void //Now typesafe
 		{
-			kGAMECLASS.doNext(eventNo);
+			EngineCore.doNext(eventNo);
 		}
 		
 		protected function menu():void
 		{
-			kGAMECLASS.menu();
+			EngineCore.menu();
 		}
 
 		protected function hideMenus():void
 		{
-			kGAMECLASS.hideMenus();
+			EngineCore.hideMenus();
 		}
 		
 		//To be phased out
@@ -312,7 +303,7 @@ import coc.xxc.StoryContext;
 								text8:String, butt8:Function,
 								text9:String, butt9:Function,
 								text0:String, butt0:Function):void { //Now typesafe
-			kGAMECLASS.choices(
+			EngineCore.choices(
 					text1, butt1,
 					text2, butt2,
 					text3, butt3,
@@ -332,7 +323,7 @@ import coc.xxc.StoryContext;
 								text3:String, butt3:Function,
 								text4:String, butt4:Function,
 								text5:String, butt5:Function):void { //Now typesafe
-			kGAMECLASS.simpleChoices(text1, butt1,
+			EngineCore.simpleChoices(text1, butt1,
 					text2, butt2,
 					text3, butt3,
 					text4, butt4,
@@ -340,31 +331,31 @@ import coc.xxc.StoryContext;
 		}
 
 		protected function doYesNo(eventYes:Function, eventNo:Function):void { //Now typesafe
-			kGAMECLASS.doYesNo(eventYes, eventNo);
+			EngineCore.doYesNo(eventYes, eventNo);
 		}
 
 		protected function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, toolTipText:String = "", toolTipHeader:String = ""):CoCButton
 		{
-			return kGAMECLASS.addButton(pos, text, func1, arg1, arg2, arg3, toolTipText, toolTipHeader);
+			return EngineCore.addButton(pos, text, func1, arg1, arg2, arg3, toolTipText, toolTipHeader);
 		}
 		
 		protected function addButtonDisabled(pos:int, text:String = "", toolTipText:String = "", toolTipHeader:String = ""):CoCButton
 		{
-			return kGAMECLASS.addButtonDisabled(pos, text, toolTipText, toolTipHeader);
+			return EngineCore.addButtonDisabled(pos, text, toolTipText, toolTipHeader);
 		}
 		protected function button(pos:int):CoCButton
 		{
-			return kGAMECLASS.button(pos);
+			return EngineCore.button(pos);
 		}
 		
 		protected function removeButton(arg:*):void
 		{
-			kGAMECLASS.removeButton(arg);
+			EngineCore.removeButton(arg);
 		}
 
 		protected function hasButton(arg:*):Boolean
 		{
-			return kGAMECLASS.hasButton(arg);
+			return EngineCore.hasButton(arg);
 		}
 
 /* Replaced by Utils.formatStringArray, which does almost the same thing in one function
@@ -382,7 +373,7 @@ import coc.xxc.StoryContext;
 */
 		
 		protected function openURL(url:String):void{
-			return kGAMECLASS.openURL(url);
+			return EngineCore.openURL(url);
 		}
 		
 		protected function sackDescript():String
@@ -392,7 +383,8 @@ import coc.xxc.StoryContext;
 		
 		protected function cockClit(value:int = 0):String
 		{
-			return kGAMECLASS.cockClit(value);
+			if(player.hasCock() && value >= 0 && value < player.cockTotal()) return player.cockDescript(value);
+			else return clitDescript();
 		}
 		
 /* Was only used in Scylla's code. Replaced with conditionals
@@ -420,7 +412,7 @@ import coc.xxc.StoryContext;
 		
 		protected function allBreastsDescript():String
 		{
-			return kGAMECLASS.allBreastsDescript();
+			return Appearance.allBreastsDescript(player);
 		}
 		
 		protected function sMultiCockDesc():String
@@ -445,15 +437,15 @@ import coc.xxc.StoryContext;
 		
 		protected function tongueDescript():String
 		{
-			return kGAMECLASS.tongueDescript();
+            return Appearance.tongueDescription(player);
 		}
 		
 		protected function ballsDescriptLight(forcedSize:Boolean = true):String {
-			return kGAMECLASS.ballsDescriptLight(forcedSize);
+            return Appearance.ballsDescription(forcedSize, true, player);
 		}
 
 		protected function ballDescript():String {
-			return kGAMECLASS.ballDescript();
+            return Appearance.ballsDescription(false, false, player);
 		}
 
 		/* All calls changed to monster.ballsDescriptLight
@@ -469,15 +461,15 @@ import coc.xxc.StoryContext;
 		*/
 
 		protected function ballsDescript():String {
-			return kGAMECLASS.ballsDescript();
+            return Appearance.ballsDescription(false, true, player, true);
 		}
 		
 		protected function simpleBallsDescript():String {
-			return kGAMECLASS.simpleBallsDescript();
+            return Appearance.ballsDescription(false, true, player);
 		}
 
 		protected function assholeDescript():String {
-			return kGAMECLASS.assholeDescript();
+			return Appearance.assholeDescript(player)
 		}
 		
 		protected function eAssholeDescript():String {
@@ -485,15 +477,15 @@ import coc.xxc.StoryContext;
 		}
 				
 		protected function hipDescript():String {
-			return kGAMECLASS.hipDescript();
+			return Appearance.hipDescription(player);
 		}
 		
 		protected function assDescript():String {
-			return kGAMECLASS.assDescript();
+			return Appearance.buttDescription(player);
 		}
 		
 		protected  function buttDescript():String {
-			return kGAMECLASS.buttDescript();
+			return Appearance.buttDescription(player);
 		}
 
 		protected function assholeOrPussy():String {
@@ -532,7 +524,7 @@ import coc.xxc.StoryContext;
 		
 		protected function nippleDescript(rowNum:Number):String
 		{
-			return kGAMECLASS.nippleDescript(rowNum);
+			return Appearance.nippleDescription(player, rowNum)
 		}
 		
 		protected function cockDescript(cockNum:int = 0):String
@@ -598,32 +590,36 @@ import coc.xxc.StoryContext;
 		
 		protected function hairDescript():String
 		{
-			return kGAMECLASS.hairDescript();
+			return Appearance.hairDescription(player);
 		}
 		
 		protected function beardDescript():String
 		{
-			return kGAMECLASS.beardDescript();
+			return Appearance.beardDescription(player);
 		}
 		
 		protected function hairOrFur():String
 		{
-			return kGAMECLASS.hairOrFur();
+            return Appearance.hairOrFur(player);
 		}
 		
 		protected function clitDescript():String
 		{
-			return kGAMECLASS.clitDescript();
+            return Appearance.clitDescription(player);
 		}
 		
 		protected function vaginaDescript(vaginaNum:Number = 0):String
 		{
-			return kGAMECLASS.vaginaDescript(vaginaNum);
+            return Appearance.vaginaDescript(player, vaginaNum);
 		}
 		
 		protected function allVaginaDescript():String
 		{
-			return kGAMECLASS.allVaginaDescript();
+            if (player.vaginas.length == 1) return vaginaDescript(rand(player.vaginas.length - 1));
+            if (player.vaginas.length > 1) return (vaginaDescript(rand(player.vaginas.length - 1)) + "s");
+
+            CoC_Settings.error("ERROR: allVaginaDescript called with no vaginas.");
+            return "ERROR: allVaginaDescript called with no vaginas.";
 		}
 		
 /* Now called directly
@@ -663,12 +659,12 @@ import coc.xxc.StoryContext;
 
 		protected function silly():Boolean
 		{
-			return kGAMECLASS.silly();
+			return EngineCore.silly();
 		}
 
 		protected function HPChange(changeNum:Number,display:Boolean):void
 		{
-			kGAMECLASS.HPChange(changeNum,display);
+			EngineCore.HPChange(changeNum,display);
 		}
 
 		// For fatigue(mod,type) calls
@@ -682,12 +678,12 @@ import coc.xxc.StoryContext;
 		public static const USEFATG_WHITE_NOBM:int = 7;
 		public static const USEFATG_BLACK_NOBM:int = 8;
 		protected function fatigue(mod:Number,type:Number=0):void {
-			kGAMECLASS.fatigue(mod, type);
+			EngineCore.fatigue(mod, type);
 		}
 
 		protected function useMana(mod:Number,type:Number=0):void
 		{
-			kGAMECLASS.combat.useManaImpl(mod,type);
+			SceneLib.combat.useManaImpl(mod,type);
 		}
 
 
@@ -698,7 +694,7 @@ import coc.xxc.StoryContext;
 		}
 */
 		
-		protected function playerMenu():void { kGAMECLASS.playerMenu(); }
+		protected function playerMenu():void { EventParser.playerMenu(); }
 		
 		protected function get player():Player
 		{
@@ -785,7 +781,7 @@ import coc.xxc.StoryContext;
 			return kGAMECLASS.undergarments;
 		}
 		protected function get inventory():Inventory{
-			return kGAMECLASS.inventory;
+			return SceneLib.inventory;
 		}
 
 /* No longer used
@@ -936,15 +932,15 @@ import coc.xxc.StoryContext;
 		}
 		
 		protected function buttonTextIsOneOf(index:int, possibleLabels:Array):Boolean {
-			return kGAMECLASS.buttonTextIsOneOf(index, possibleLabels);
+			return EngineCore.buttonTextIsOneOf(index, possibleLabels);
 		}		
 		
 		protected function getButtonText(index:int):String {
-			return kGAMECLASS.getButtonText(index);
+			return EngineCore.getButtonText(index);
 		}
 		
 		protected function buttonIsVisible(index:int):Boolean {
-			return kGAMECLASS.buttonIsVisible(index);
+			return EngineCore.buttonIsVisible(index);
 		}
 				
 		protected function darkTheme():Boolean {

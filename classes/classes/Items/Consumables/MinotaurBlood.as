@@ -3,7 +3,9 @@
  */
 package classes.Items.Consumables {
 import classes.Appearance;
+import classes.AppearanceDefs;
 import classes.CockTypesEnum;
+import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumable;
 import classes.PerkLib;
@@ -106,28 +108,28 @@ public class MinotaurBlood extends Consumable {
 			}
 			else {
 				player.ballSize++;
-				if (player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " + game.simpleBallsDescript() + " have grown larger than a human's.");
-				if (player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your " + game.sackDescript() + ".  Walking becomes difficult as you discover your " + game.simpleBallsDescript() + " have enlarged again.");
+				if (player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " +  Appearance.ballsDescription(false, true, player) + " have grown larger than a human's.");
+				if (player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your " + Appearance.sackDescript(player) + ".  Walking becomes difficult as you discover your " + Appearance.ballsDescription(false, true, player) + " have enlarged again.");
 				dynStats("lib", 1, "lus", 3);
 			}
 			changes++;
 		}
 		//+hooves
-		if (changes < changeLimit && !InCollection(player.armType, ARM_TYPE_HUMAN, ARM_TYPE_GARGOYLE) && rand(4) == 0) {
+		if (changes < changeLimit && !InCollection(player.armType, AppearanceDefs.ARM_TYPE_HUMAN, AppearanceDefs.ARM_TYPE_GARGOYLE) && rand(4) == 0) {
 			mutations.humanizeArms();
 			changes++;
 		}
-		if (player.lowerBody != LOWER_BODY_TYPE_HOOFED && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE) {
+		if (player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_HOOFED && player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE) {
 			if (changes < changeLimit && rand(3) == 0) {
 				changes++;
-				if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) outputText("\n\nYou stagger as your feet change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
-				if (player.lowerBody == LOWER_BODY_TYPE_DOG) outputText("\n\nYou stagger as your paws change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
-				if (player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!");
+				if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HUMAN) outputText("\n\nYou stagger as your feet change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
+				if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_DOG) outputText("\n\nYou stagger as your paws change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
+				if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_NAGA) outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!");
 				//Catch-all
-				if (player.lowerBody > LOWER_BODY_TYPE_NAGA) outputText("\n\nYou stagger as your [feet] change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
+				if (player.lowerBody > AppearanceDefs.LOWER_BODY_TYPE_NAGA) outputText("\n\nYou stagger as your [feet] change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
 				if (!player.hasFur()) outputText("  A fine coat of fur grows out below your waist, itching briefly as it fills in.");
 				outputText("<b>  You now have hooves in place of your feet!</b>");
-				mutations.setLowerBody(LOWER_BODY_TYPE_HOOFED);
+				mutations.setLowerBody(AppearanceDefs.LOWER_BODY_TYPE_HOOFED);
 				player.legCount = 2;
 				dynStats("spe", 1);
 				changes++;
@@ -137,13 +139,13 @@ public class MinotaurBlood extends Consumable {
 		{
 			//Kills vagina size (and eventually the whole vagina)
 			if (player.vaginas.length > 0) {
-				if (player.vaginas[0].vaginalLooseness > VAGINA_LOOSENESS_TIGHT) {
+				if (player.vaginas[0].vaginalLooseness > AppearanceDefs.VAGINA_LOOSENESS_TIGHT) {
 					//tighten that bitch up!
-					outputText("\n\nYour " + game.vaginaDescript(0) + " clenches up painfully as it tightens up, becoming smaller and tighter.");
+					outputText("\n\nYour " + Appearance.vaginaDescript(player,0) + " clenches up painfully as it tightens up, becoming smaller and tighter.");
 					player.vaginas[0].vaginalLooseness--;
 				}
 				else {
-					outputText("\n\nA tightness in your groin is the only warning you get before your <b>" + game.vaginaDescript(0) + " disappears forever</b>!");
+					outputText("\n\nA tightness in your groin is the only warning you get before your <b>" + Appearance.vaginaDescript(player,0) + " disappears forever</b>!");
 					//Goodbye womanhood!
 					player.removeVagina(0, 1);
 					if (player.cocks.length == 0) {
@@ -160,10 +162,10 @@ public class MinotaurBlood extends Consumable {
 			//-Remove extra breast rows
 			if (changes < changeLimit && player.bRows() > 1 && rand(3) == 0) {
 				changes++;
-				outputText("\n\nYou stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + game.breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
+				outputText("\n\nYou stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + player.breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
 				if (player.bRows() >= 3) outputText("abdomen");
 				else outputText("chest");
-				outputText(". The " + game.nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but [skin] remains. <b>You've lost a row of breasts!</b>");
+				outputText(". The " + Appearance.nippleDescription(player, player.breastRows.length - 1) + "s even fade until nothing but [skin] remains. <b>You've lost a row of breasts!</b>");
 				dynStats("sen", -5);
 				player.removeBreastRow(player.breastRows.length - 1, 1);
 			}
@@ -181,7 +183,7 @@ public class MinotaurBlood extends Consumable {
 							player.breastRows[0].breastRating--;
 						}
 						//Talk about shrinkage
-						if (temp == 1) outputText("\n\nYou feel a weight lifted from you, and realize your " + game.breastDescript(0) + " have shrunk to " + player.breastCup(0) + "s.");
+						if (temp == 1) outputText("\n\nYou feel a weight lifted from you, and realize your " + player.breastDescript(0) + " have shrunk to " + player.breastCup(0) + "s.");
 						if (temp == 2) outputText("\n\nYou feel significantly lighter.  Looking down, you realize your breasts are MUCH smaller, down to " + player.breastCup(0) + "s.");
 						changes++;
 					}
@@ -203,7 +205,7 @@ public class MinotaurBlood extends Consumable {
 							//If this isn't the first change...
 							if (temp2 > 1) outputText("...and y");
 							else outputText("Y");
-							outputText("our " + game.breastDescript(temp3) + " shrink, dropping to " + player.breastCup(temp3) + "s.");
+							outputText("our " + player.breastDescript(temp3) + " shrink, dropping to " + player.breastCup(temp3) + "s.");
 						}
 						temp3++;
 					}
@@ -234,8 +236,8 @@ public class MinotaurBlood extends Consumable {
 					temp = player.increaseCock(selectedCock, 2 + rand(8));
 					temp += player.cocks[selectedCock].thickenCock(1);
 					//Comment on length changes
-					if (temp > 6) outputText("\n\nGasping in sudden pleasure, your " + game.cockDescript(selectedCock) + " surges free of its sheath, emerging with over half a foot of new dick-flesh.");
-					if (temp <= 6 && temp >= 3) outputText("\n\nYou pant in delight as a few inches of " + game.cockDescript(selectedCock) + " pop free from your sheath, the thick new horse-flesh still slick and sensitive.");
+					if (temp > 6) outputText("\n\nGasping in sudden pleasure, your " + player.cockDescript(selectedCock) + " surges free of its sheath, emerging with over half a foot of new dick-flesh.");
+					if (temp <= 6 && temp >= 3) outputText("\n\nYou pant in delight as a few inches of " + player.cockDescript(selectedCock) + " pop free from your sheath, the thick new horse-flesh still slick and sensitive.");
 					if (temp < 3) outputText("\n\nGroaning softly, you feel a pleasurable change in your groin.  Looking down, you see [oneCock] grow slightly longer.");
 					//Add a blurb about thickness...
 					outputText("  To your delight and surprise, you discover it has grown slightly thicker as well!");
@@ -245,8 +247,8 @@ public class MinotaurBlood extends Consumable {
 					//Increase by 2 + rand(8), and store the actual amount in temp
 					temp = player.increaseCock(selectedCock, 2 + rand(8));
 					//Comment on length changes
-					if (temp > 6) outputText("\n\nGasping in sudden pleasure, your " + game.cockDescript(selectedCock) + " surges free of its sheath, emerging with over half a foot of new dick-flesh.");
-					if (temp <= 6 && temp >= 3) outputText("\n\nYou pant in delight as a few inches of " + game.cockDescript(selectedCock) + " pop free from your sheath, the thick new horse-flesh still slick and sensitive.");
+					if (temp > 6) outputText("\n\nGasping in sudden pleasure, your " + player.cockDescript(selectedCock) + " surges free of its sheath, emerging with over half a foot of new dick-flesh.");
+					if (temp <= 6 && temp >= 3) outputText("\n\nYou pant in delight as a few inches of " + player.cockDescript(selectedCock) + " pop free from your sheath, the thick new horse-flesh still slick and sensitive.");
 					if (temp < 3) outputText("\n\nGroaning softly, you feel a pleasurable change in your groin.  Looking down, you see [oneCock] grow slightly longer.");
 				}
 				changes++;
@@ -266,14 +268,14 @@ public class MinotaurBlood extends Consumable {
 
 			if (selectedCockValue != -1) {
 				//Text for humandicks or others
-				if (player.cocks[selectedCockValue].cockType == CockTypesEnum.HUMAN || player.cocks[selectedCockValue].cockType.Index > 2) outputText("\n\nYour " + game.cockDescript(selectedCockValue) + " begins to feel strange... you pull down your pants to take a look and see it darkening as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.  A hot feeling envelops your member as it suddenly grows into a horse penis, dwarfing its old size.  The skin is mottled brown and black and feels more sensitive than normal.  Your hands are irresistibly drawn to it, and you jerk yourself off, splattering cum with intense force.");
+				if (player.cocks[selectedCockValue].cockType == CockTypesEnum.HUMAN || player.cocks[selectedCockValue].cockType.Index > 2) outputText("\n\nYour " + player.cockDescript(selectedCockValue) + " begins to feel strange... you pull down your pants to take a look and see it darkening as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.  A hot feeling envelops your member as it suddenly grows into a horse penis, dwarfing its old size.  The skin is mottled brown and black and feels more sensitive than normal.  Your hands are irresistibly drawn to it, and you jerk yourself off, splattering cum with intense force.");
 				//Text for dogdicks
 				if (player.cocks[selectedCockValue].cockType == CockTypesEnum.DOG) outputText("\n\nYour " + Appearance.cockNoun(CockTypesEnum.DOG) + " begins to feel odd...  You pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.cockNoun(CockTypesEnum.DOG) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond its traditional size.  You notice your knot vanishing, the extra flesh pushing more fresh horsecock out from your sheath.  <b>Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + "</b>, and you jerk yourself off, splattering thick ropes of cum with intense force.");
 				player.cocks[selectedCockValue].cockType = CockTypesEnum.HORSE;
 				player.increaseCock(selectedCockValue, 4);
 				dynStats("lib", 5, "sen", 4, "lus", 35);
 				outputText("<b>  You now have a");
-				if (player.horseCocks() > 1) outputText("nother")
+				if (player.horseCocks() > 1) outputText("nother");
 				outputText(" horse-penis.</b>");
 				changes++;
 			}
@@ -286,8 +288,8 @@ public class MinotaurBlood extends Consumable {
 
 		//Anti-masturbation status
 		if (rand(4) == 0 && changes < changeLimit && !player.hasStatusEffect(StatusEffects.Dysfunction)) {
-			if (player.cocks.length > 0) outputText("\n\nYour " + game.cockDescript(0) + " tingles abruptly, then stops.  Worried, you reach down to check it, only to discover that it feels... numb.  It will be very hard to masturbate like this.");
-			else if (player.hasVagina()) outputText("\n\nYour " + game.vaginaDescript(0) + " tingles abruptly, then stops.  Worried, you reach down to check it, only to discover that it feels... numb.  It will be very hard to masturbate like this.");
+			if (player.cocks.length > 0) outputText("\n\nYour " + player.cockDescript(0) + " tingles abruptly, then stops.  Worried, you reach down to check it, only to discover that it feels... numb.  It will be very hard to masturbate like this.");
+			else if (player.hasVagina()) outputText("\n\nYour " + Appearance.vaginaDescript(player,0) + " tingles abruptly, then stops.  Worried, you reach down to check it, only to discover that it feels... numb.  It will be very hard to masturbate like this.");
 			if (player.cocks.length > 0 || player.hasVagina()) {
 				player.createStatusEffect(StatusEffects.Dysfunction, 96, 0, 0, 0);
 				changes++;
@@ -310,20 +312,20 @@ public class MinotaurBlood extends Consumable {
 			changes++;
 		}
 		//Face change, requires Ears + Height + Hooves
-		if (player.earType == EARS_COW && player.lowerBody == LOWER_BODY_TYPE_HOOFED && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.tallness >= 90 && changes < changeLimit && rand(3) == 0) {
-			if (player.faceType != FACE_COW_MINOTAUR) {
+		if (player.earType == AppearanceDefs.EARS_COW && player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HOOFED && player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE && player.tallness >= 90 && changes < changeLimit && rand(3) == 0) {
+			if (player.faceType != AppearanceDefs.FACE_COW_MINOTAUR) {
 				outputText("\n\nBones shift and twist painfully as your visage twists and morphs to resemble that of the beast whose blood you now drink.  <b>You now have a minotaur-like face.</b>");
 				changes++;
-				mutations.setFaceType(FACE_COW_MINOTAUR);
+				mutations.setFaceType(AppearanceDefs.FACE_COW_MINOTAUR);
 			}
 		}
 		//+mino horns require ears/tail
-		if (changes < changeLimit && rand(3) == 0 && player.earType == EARS_COW && player.tailType == TAIL_TYPE_COW && player.tailType != TAIL_TYPE_GARGOYLE) {
+		if (changes < changeLimit && rand(3) == 0 && player.earType == AppearanceDefs.EARS_COW && player.tailType == AppearanceDefs.TAIL_TYPE_COW && player.tailType != AppearanceDefs.TAIL_TYPE_GARGOYLE) {
 			temp = 1;
 			//New horns or expanding mino horns
-			if (player.hornType == HORNS_COW_MINOTAUR || player.hornType == HORNS_NONE) {
+			if (player.hornType == AppearanceDefs.HORNS_COW_MINOTAUR || player.hornType == AppearanceDefs.HORNS_NONE) {
 				//Get bigger if player has horns
-				if (player.hornType == HORNS_COW_MINOTAUR) {
+				if (player.hornType == AppearanceDefs.HORNS_COW_MINOTAUR) {
 					//Fems horns don't get bigger.
 					if (player.vaginas.length > 0) {
 						if (player.horns > 4) {
@@ -363,36 +365,36 @@ public class MinotaurBlood extends Consumable {
 				//If no horns yet..
 				else {
 					outputText("\n\nWith painful pressure, the skin on your forehead splits around two tiny nub-like horns, similar to those you would see on the cattle back in your homeland.");
-					mutations.setHornType(HORNS_COW_MINOTAUR, 2);
+					mutations.setHornType(AppearanceDefs.HORNS_COW_MINOTAUR, 2);
 					changes++;
 				}
 			}
 			//Not mino horns, change to cow-horns
-			if ((player.hornType == HORNS_DEMON || player.hornType > HORNS_COW_MINOTAUR) && player.hornType != HORNS_ORCHID) {
+			if ((player.hornType == AppearanceDefs.HORNS_DEMON || player.hornType > AppearanceDefs.HORNS_COW_MINOTAUR) && player.hornType != AppearanceDefs.HORNS_ORCHID) {
 				outputText("\n\nYour horns vibrate and shift as if made of clay, reforming into two horns with a bovine-like shape.");
-				mutations.setHornType(HORNS_COW_MINOTAUR);
+				mutations.setHornType(AppearanceDefs.HORNS_COW_MINOTAUR);
 				changes++;
 			}
 		}
 		//+cow ears	- requires tail
-		if (player.earType != EARS_COW && changes < changeLimit && player.tailType == TAIL_TYPE_COW && player.tailType != TAIL_TYPE_GARGOYLE && rand(2) == 0) {
+		if (player.earType != AppearanceDefs.EARS_COW && changes < changeLimit && player.tailType == AppearanceDefs.TAIL_TYPE_COW && player.tailType != AppearanceDefs.TAIL_TYPE_GARGOYLE && rand(2) == 0) {
 			outputText("\n\nYou feel your ears tug on your scalp as they twist shape, becoming oblong and cow-like.  <b>You now have cow ears.</b>");
-			mutations.setEarType(EARS_COW);
+			mutations.setEarType(AppearanceDefs.EARS_COW);
 			changes++;
 		}
 		//+cow tail
-		if (changes < changeLimit && rand(2) == 0 && player.tailType != TAIL_TYPE_COW && player.tailType != TAIL_TYPE_GARGOYLE) {
-			if (player.tailType == TAIL_TYPE_NONE) outputText("\n\nYou feel the flesh above your " + game.buttDescript() + " knotting and growing.  It twists and writhes around itself before flopping straight down, now shaped into a distinctly bovine form.  You have a <b>cow tail</b>.");
+		if (changes < changeLimit && rand(2) == 0 && player.tailType != AppearanceDefs.TAIL_TYPE_COW && player.tailType != AppearanceDefs.TAIL_TYPE_GARGOYLE) {
+			if (player.tailType == AppearanceDefs.TAIL_TYPE_NONE) outputText("\n\nYou feel the flesh above your " + Appearance.buttDescription(player) + " knotting and growing.  It twists and writhes around itself before flopping straight down, now shaped into a distinctly bovine form.  You have a <b>cow tail</b>.");
 			else {
-				if (player.tailType < TAIL_TYPE_SPIDER_ADBOMEN || player.tailType > TAIL_TYPE_BEE_ABDOMEN) {
+				if (player.tailType < AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN || player.tailType > AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN) {
 					outputText("\n\nYour tail bunches uncomfortably, twisting and writhing around itself before flopping straight down, now shaped into a distinctly bovine form.  You have a <b>cow tail</b>.");
 				}
 				//insect
-				if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN || player.tailType == TAIL_TYPE_BEE_ABDOMEN) {
+				if (player.tailType == AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN || player.tailType == AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN) {
 					outputText("\n\nYour insect-like abdomen tingles pleasantly as it begins shrinking and softening, chitin morphing and reshaping until it looks exactly like a <b>cow tail</b>.");
 				}
 			}
-			mutations.setTailType(TAIL_TYPE_COW);
+			mutations.setTailType(AppearanceDefs.TAIL_TYPE_COW);
 			changes++;
 		}
 		// Remove gills
@@ -415,7 +417,7 @@ public class MinotaurBlood extends Consumable {
 				outputText("Your balls feel as if they've grown heavier with the weight of more sperm.\n");
 				player.hoursSinceCum += 200;
 			}
-			game.HPChange(50, true);
+			EngineCore.HPChange(50, true);
 			dynStats("lus", 50);
 		}
 		player.refillHunger(25);

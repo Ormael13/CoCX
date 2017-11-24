@@ -1,33 +1,33 @@
 ﻿package classes
 {
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Items.ArmorLib;
-	import classes.Items.ConsumableLib;
-	import classes.Items.JewelryLib;
-	import classes.Items.UseableLib;
-	import classes.Items.WeaponLib;
-	import classes.Items.WeaponRangeLib;
-	import classes.Items.ShieldLib;
-	import classes.Items.UndergarmentLib;
-	import classes.Scenes.Areas.Forest.Alraune;
-	import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
-	import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
-	import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
-	import classes.Scenes.Dungeons.Factory.OmnibusOverseer;
-	import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
-	import classes.Scenes.NPCs.ChiChi;
-	import classes.Scenes.NPCs.Kiha;
-	import classes.Scenes.Quests.UrtaQuest.MilkySuccubus;
-	import classes.internals.ChainedDrop;
-	import classes.internals.MonsterCounters;
-	import classes.internals.RandomDrop;
-	import classes.internals.Utils;
-	import classes.internals.WeightedDrop;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Items.ArmorLib;
+import classes.Items.ConsumableLib;
+import classes.Items.JewelryLib;
+import classes.Items.ShieldLib;
+import classes.Items.UndergarmentLib;
+import classes.Items.UseableLib;
+import classes.Items.WeaponLib;
+import classes.Items.WeaponRangeLib;
+import classes.Scenes.Areas.Forest.Alraune;
+import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
+import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
+import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
+import classes.Scenes.Dungeons.Factory.OmnibusOverseer;
+import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
+import classes.Scenes.NPCs.ChiChi;
+import classes.Scenes.Quests.UrtaQuest.MilkySuccubus;
+import classes.Scenes.SceneLib;
+import classes.internals.ChainedDrop;
+import classes.internals.MonsterCounters;
+import classes.internals.RandomDrop;
+import classes.internals.Utils;
+import classes.internals.WeightedDrop;
 
-	import flash.utils.getQualifiedClassName;
+import flash.utils.getQualifiedClassName;
 
-	/**
+/**
 	 * ...
 	 * @author Yoffy, Fake-Name, aimozg
 	 */
@@ -42,33 +42,30 @@
             return player.newGamePlusMod();
         }
 		protected final function outputText(text:String,clear:Boolean=false):void{
-			if (clear) game.clearOutputTextOnly();
-			game.outputText(text);
-		}
-		protected final function combatRoundOver():void{
-			game.combatRoundOver();
+			if (clear) EngineCore.clearOutputTextOnly();
+			EngineCore.outputText(text);
 		}
 		protected final function cleanupAfterCombat():void
 		{
-			game.cleanupAfterCombat();
+			SceneLib.combat.cleanupAfterCombatImpl();
 		}
 		protected static function showStatDown(a:String):void{
 			kGAMECLASS.mainView.statsView.showStatDown(a);
 		}
 		protected final function statScreenRefresh():void {
-			game.statScreenRefresh();
+			EngineCore.statScreenRefresh();
 		}
 		protected final function doNext(eventNo:Function):void { //Now typesafe
-			game.doNext(eventNo);
+			EngineCore.doNext(eventNo);
 		}
 		protected final function combatMiss():Boolean {
-			return game.combat.combatMiss();
+			return SceneLib.combat.combatMiss();
 		}
 		protected final function combatParry():Boolean {
-			return game.combat.combatParry();
+			return SceneLib.combat.combatParry();
 		}
 		protected final function combatBlock(doFatigue:Boolean = false):Boolean {
-			return game.combat.combatBlock(doFatigue);
+			return SceneLib.combat.combatBlock(doFatigue);
 		}
 		protected function get consumables():ConsumableLib{
 			return game.consumables;
@@ -866,7 +863,7 @@
 			breasts:false,
 			tallness:false,
 			str_tou_spe_inte:false,
-			lib_sens_cor:false,
+			wis_lib_sens_cor:false,
 			drop:false
 		};
 		// MONSTER INITIALIZATION HELPER FUNCTIONS
@@ -1074,7 +1071,7 @@
 				    var damage:int = eOneAttack();
 					outputAttack(damage);
 					postAttack(damage);
-					game.statScreenRefresh();
+					EngineCore.statScreenRefresh();
 					outputText("\n");
 				}
 				if (statusEffectv1(StatusEffects.Attacks) >= 0) {
@@ -1083,8 +1080,6 @@
 				attacks--;
 			}
 			removeStatusEffect(StatusEffects.Attacks);
-//			if (!game.combatRoundOver()) game.doNext(1);
-			game.combatRoundOver(); //The doNext here was not required
 		}
 
 		/**
@@ -1206,7 +1201,7 @@
 			//Block with shield
 			if (combatBlock(true)) {
 				outputText("You block " + a + short + "'s " + weaponVerb + " with your [shield]! ");
-				if (game.player.findPerk(PerkLib.ShieldCombat) >= 0) game.combat.pspecials.shieldBash();
+				if (game.player.findPerk(PerkLib.ShieldCombat) >= 0) SceneLib.combat.pspecials.shieldBash();
 				return true;
 			}
 			return false;
@@ -1222,7 +1217,7 @@
 			}
 			//Exgartuan gets to do stuff!
 			if (game.player.hasStatusEffect(StatusEffects.Exgartuan) && game.player.statusEffectv2(StatusEffects.Exgartuan) == 0 && rand(3) == 0) {
-				if (game.exgartuan.exgartuanCombatUpdate()) game.outputText("\n\n");
+				if (SceneLib.exgartuan.exgartuanCombatUpdate()) EngineCore.outputText("\n\n");
 			}
 			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire)) {
 				if (!handleConstricted()) return;
@@ -1263,43 +1258,39 @@
 		protected function handleConstricted():Boolean
 		{
 			if (player.lowerBody == 26) {
-			game.outputText("Your prey pushes at your tentacles, twisting and writhing in an effort to escape from your tentacle's tight bonds.");
+			EngineCore.outputText("Your prey pushes at your tentacles, twisting and writhing in an effort to escape from your tentacle's tight bonds.");
 			if (statusEffectv1(StatusEffects.ConstrictedScylla) <= 0) {
-				game.outputText("  " + capitalA + short + " proves to be too much for your tentacles to handle, breaking free of your tightly bound coils.");
+				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your tentacles to handle, breaking free of your tightly bound coils.");
 				removeStatusEffect(StatusEffects.ConstrictedScylla);
 			}
 			addStatusValue(StatusEffects.ConstrictedScylla, 1, -1);
-			game.combatRoundOver();
 			return false;
 			}
 			else if (player.lowerBody == 8) {
-			game.outputText("" + capitalA + short + " struggle in your fluid form kicking and screaming to try and get out.");
+			EngineCore.outputText("" + capitalA + short + " struggle in your fluid form kicking and screaming to try and get out.");
 			if (statusEffectv1(StatusEffects.GooEngulf) <= 0) {
-				game.outputText("  " + capitalA + short + " proves to be too much for your tentacles to handle, breaking free of your tightly bound coils.");
+				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your tentacles to handle, breaking free of your tightly bound coils.");
 				removeStatusEffect(StatusEffects.GooEngulf);
 			}
 			addStatusValue(StatusEffects.GooEngulf, 1, -1);
-			game.combatRoundOver();
 			return false;
 			}
 			else if (hasStatusEffect(StatusEffects.EmbraceVampire)) {
 			if (statusEffectv1(StatusEffects.EmbraceVampire) <= 0) {
-				game.outputText("You try to maintain your grip but " + a + short + " shove you off escaping your embrace!");
+				EngineCore.outputText("You try to maintain your grip but " + a + short + " shove you off escaping your embrace!");
 				removeStatusEffect(StatusEffects.EmbraceVampire);
 			}
-			else game.outputText("" + capitalA + short + " struggle but you manage to maintain the embrace.");
+			else EngineCore.outputText("" + capitalA + short + " struggle but you manage to maintain the embrace.");
 			addStatusValue(StatusEffects.EmbraceVampire, 1, -1);
-			game.combatRoundOver();
 			return false;
 			}
 			else {
-			game.outputText("Your prey pushes at your tail, twisting and writhing in an effort to escape from your tail's tight bonds.");
+			EngineCore.outputText("Your prey pushes at your tail, twisting and writhing in an effort to escape from your tail's tight bonds.");
 			if (statusEffectv1(StatusEffects.Constricted) <= 0) {
-				game.outputText("  " + capitalA + short + " proves to be too much for your tail to handle, breaking free of your tightly bound coils.");
+				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your tail to handle, breaking free of your tightly bound coils.");
 				removeStatusEffect(StatusEffects.Constricted);
 			}
 			addStatusValue(StatusEffects.Constricted, 1, -1);
-			game.combatRoundOver();
 			return false;
 			}
 		}
@@ -1312,19 +1303,18 @@
 			if (statusEffectv1(StatusEffects.Fear) == 0) {
 				if (plural) {
 					removeStatusEffect(StatusEffects.Fear);
-					game.outputText("Your foes shake free of their fear and ready themselves for battle.");
+					EngineCore.outputText("Your foes shake free of their fear and ready themselves for battle.");
 				}
 				else {
 					removeStatusEffect(StatusEffects.Fear);
-					game.outputText("Your foe shakes free of its fear and readies itself for battle.");
+					EngineCore.outputText("Your foe shakes free of its fear and readies itself for battle.");
 				}
 			}
 			else {
 				addStatusValue(StatusEffects.Fear, 1, -1);
-				if (plural) game.outputText(capitalA + short + " are too busy shivering with fear to fight.");
-				else game.outputText(capitalA + short + " is too busy shivering with fear to fight.");
+				if (plural) EngineCore.outputText(capitalA + short + " are too busy shivering with fear to fight.");
+				else EngineCore.outputText(capitalA + short + " is too busy shivering with fear to fight.");
 			}
-			game.combatRoundOver();
 			return false;
 		}
 
@@ -1337,23 +1327,22 @@
 			else addStatusValue(StatusEffects.Stunned, 1, -1);
 			if (statusEffectv1(StatusEffects.StunnedTornado) <= 0) removeStatusEffect(StatusEffects.StunnedTornado);
 			else {
-				game.outputText(capitalA + short + " is still caught in the tornado.");
+				EngineCore.outputText(capitalA + short + " is still caught in the tornado.");
 				addStatusValue(StatusEffects.StunnedTornado, 1, -1);
 			}
 			if (hasStatusEffect(StatusEffects.InkBlind)) {
-				if (plural) game.outputText("Your foes are busy trying to remove the ink and therefore does no other action then flay their hand about its faces.");
-				else game.outputText("Your foe is busy trying to remove the ink and therefore does no other action then flay its hand about its face.");
+				if (plural) EngineCore.outputText("Your foes are busy trying to remove the ink and therefore does no other action then flay their hand about its faces.");
+				else EngineCore.outputText("Your foe is busy trying to remove the ink and therefore does no other action then flay its hand about its face.");
 			}
 			else if (hasStatusEffect(StatusEffects.FreezingBreathStun)) {
-				if (plural) game.outputText("Your foes are too busy trying to break out of their icy prison to fight back.");
-				else game.outputText("Your foe is too busy trying to break out of his icy prison to fight back.");
+				if (plural) EngineCore.outputText("Your foes are too busy trying to break out of their icy prison to fight back.");
+				else EngineCore.outputText("Your foe is too busy trying to break out of his icy prison to fight back.");
 			}
-			else if (hasStatusEffect(StatusEffects.MonsterAttacksDisabled)) game.outputText(capitalA + short + " try to hit you but is unable to reach you!");
+			else if (hasStatusEffect(StatusEffects.MonsterAttacksDisabled)) EngineCore.outputText(capitalA + short + " try to hit you but is unable to reach you!");
 			else {
-				if (plural) game.outputText("Your foes are too dazed from your last hit to strike back!");
-				else game.outputText("Your foe is too dazed from your last hit to strike back!");
+				if (plural) EngineCore.outputText("Your foes are too dazed from your last hit to strike back!");
+				else EngineCore.outputText("Your foe is too dazed from your last hit to strike back!");
 			}
-			game.combatRoundOver();
 			return false;
 		}
 
@@ -1380,7 +1369,7 @@
 		 */
 		public function defeated(hpVictory:Boolean):void
 		{
-			game.combat.finishCombat();
+			SceneLib.combat.finishCombat();
 		}
 
 		/**
@@ -1397,12 +1386,12 @@
 				player.lust = 0;
 			}
 			game.inCombat = false;
-			game.clearStatuses(false);
-			var temp:Number = rand(10) + 1;
+            game.player.clearStatuses(false);
+            var temp:Number = rand(10) + 1;
 			if(temp > player.gems) temp = player.gems;
 			outputText("\n\nYou'll probably wake up in eight hours or so, missing " + temp + " gems.");
 			player.gems -= temp;
-			game.doNext(game.camp.returnToCampUseEightHours);
+			EngineCore.doNext(SceneLib.camp.returnToCampUseEightHours);
 		}
 
 		/**
@@ -1544,13 +1533,13 @@
 					+(Appearance.DEFAULT_TONGUE_NAMES[tongueType]||("tongueType#"+tongueType))+" tongue and "
 					+(Appearance.DEFAULT_EYES_NAMES[eyeType]||("eyeType#"+eyeType))+" eyes.\n";
 			result += Hehas;
-			if (tailType == TAIL_TYPE_NONE) result += "no tail, ";
+			if (tailType == AppearanceDefs.TAIL_TYPE_NONE) result += "no tail, ";
 			else result+=(Appearance.DEFAULT_TAIL_NAMES[tailType]||("tailType#"+tailType))+" "+tailCount+" tails with venom="+tailVenom+" and recharge="+tailRecharge+", ";
-			if (hornType == HORNS_NONE) result += "no horns, ";
+			if (hornType == AppearanceDefs.HORNS_NONE) result += "no horns, ";
 			else result += horns+" "+(Appearance.DEFAULT_HORNS_NAMES[hornType]||("hornType#"+hornType))+" horns, ";
-			if (wingType == WING_TYPE_NONE) result += "no wings, ";
+			if (wingType == AppearanceDefs.WING_TYPE_NONE) result += "no wings, ";
 			else result += wingDesc+" wings (type "+(Appearance.DEFAULT_WING_NAMES[wingType]||("wingType#"+wingType))+"), ";
-			if (antennae == ANTENNAE_NONE) result += "no antennae.\n\n";
+			if (antennae == AppearanceDefs.ANTENNAE_NONE) result += "no antennae.\n\n";
 			else result += (Appearance.DEFAULT_ANTENNAE_NAMES[antennae]||("antennaeType#"+antennae))+" antennae.\n\n";
 
 			// GENITALS AND BREASTS
@@ -1613,7 +1602,7 @@
 
 		protected function clearOutput():void
 		{
-			game.clearOutput();
+			EngineCore.clearOutput();
 		}
 
 		public function dropLoot():ItemType
@@ -1624,7 +1613,7 @@
 		public function combatRoundUpdate():void
 		{
 			if(hasStatusEffect(StatusEffects.MilkyUrta)) {
-				game.urtaQuest.milkyUrtaTic();
+				SceneLib.urtaQuest.milkyUrtaTic();
 			}
 			//Countdown
 			var sac:StatusEffectClass = statusEffectByType(StatusEffects.TentacleCoolDown);
@@ -1747,7 +1736,7 @@
 				else {
 					var store:Number = maxHP() * (4 + rand(7)) / 100;
 					if (game.player.findPerk(PerkLib.ThirstForBlood) >= 0) store *= 1.5;
-					store = game.doDamage(store);
+					store = SceneLib.combat.doDamage(store);
 					if (plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
 				}
@@ -1763,7 +1752,7 @@
 				//Deal damage if still wounded.
 				else {
 					var store3:Number = (player.str + player.spe) * 2;
-					store3 = game.doDamage(store3);
+					store3 = SceneLib.combat.doDamage(store3);
 					if(plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your bite left behind. <b>(<font color=\"#800000\">" + store3 + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your bite left behind. <b>(<font color=\"#800000\">" + store3 + "</font>)</b>\n\n");
 				}
@@ -1774,7 +1763,7 @@
 				//Heal wounds
 				if(statusEffectv1(StatusEffects.GoreBleed) <= 0) {
 					outputText("The ");
-					if (player.hornType == HORNS_COW_MINOTAUR) outputText("horns wounds");
+					if (player.hornType == AppearanceDefs.HORNS_COW_MINOTAUR) outputText("horns wounds");
 					else outputText("horn wound");
 					outputText(" you left on " + a + short + " stop bleeding so profusely.\n\n");
 					removeStatusEffect(StatusEffects.GoreBleed);
@@ -1782,16 +1771,16 @@
 				//Deal damage if still wounded.
 				else {
 					var store5:Number = (player.str + player.spe) * 2;
-					store5 = game.doDamage(store5);
+					store5 = SceneLib.combat.doDamage(store5);
 					if (plural) {
 						outputText(capitalA + short + " bleed profusely from the jagged ");
-						if (player.hornType == HORNS_COW_MINOTAUR) outputText("wounds your horns");
+						if (player.hornType == AppearanceDefs.HORNS_COW_MINOTAUR) outputText("wounds your horns");
 						else outputText("wound your horn");
 						outputText(" left behind. <b>(<font color=\"#800000\">" + store5 + "</font>)</b>\n\n");
 					}
 					else {
 						outputText(capitalA + short + " bleeds profusely from the jagged ");
-						if (player.hornType == HORNS_COW_MINOTAUR) outputText("wounds your horns");
+						if (player.hornType == AppearanceDefs.HORNS_COW_MINOTAUR) outputText("wounds your horns");
 						else outputText("wound your horn");
 						outputText(" left behind. <b>(<font color=\"#800000\">" + store5 + "</font>)</b>\n\n");
 					}
@@ -1889,7 +1878,7 @@
 				//Deal damage if still wounded.
 				else {
 					var store2:Number = int(50+(player.inte/10));
-					store2 = game.doDamage(store2);
+					store2 = SceneLib.combat.doDamage(store2);
 					if(plural) outputText(capitalA + short + " burn from lingering immolination after-effect. <b>(<font color=\"#800000\">" + store2 + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " burns from lingering immolination after-effect. <b>(<font color=\"#800000\">" + store2 + "</font>)</b>\n\n");
 				}
@@ -1906,7 +1895,7 @@
 				//Deal damage if still wounded.
 				else {
 					var store4:Number = (player.str + player.spe) * 2.5;
-					store4 = game.doDamage(store4);
+					store4 = SceneLib.combat.doDamage(store4);
 					if(plural) outputText(capitalA + short + " burn from lingering Burn after-effect. <b>(<font color=\"#800000\">" + store4 + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " burns from lingering Burn after-effect. <b>(<font color=\"#800000\">" + store4 + "</font>)</b>\n\n");
 				}
@@ -1922,8 +1911,8 @@
 				}
 				//Deal damage if still wounded.
 				else {
-					var store6:Number = (player.spe + player.inte) * game.combat.soulskillMod() * 0.5;
-					store6 = game.doDamage(store6);
+					var store6:Number = (player.spe + player.inte) * SceneLib.combat.soulskillMod() * 0.5;
+					store6 = SceneLib.combat.doDamage(store6);
 					if(plural) outputText(capitalA + short + " burn from lingering Fire Punch after-effect. <b>(<font color=\"#800000\">" + store6 + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " burns from lingering Fire Punch after-effect. <b>(<font color=\"#800000\">" + store6 + "</font>)</b>\n\n");
 				}
@@ -1974,12 +1963,12 @@
 		public function handleCombatLossText(inDungeon:Boolean, gemsLost:int):int
 		{ //New Function, override this function in child classes if you want a monster to output special text after the player loses in combat
 			//This function doesn’t take the gems away from the player, it just provides the output text
-			if (game.prison.inPrison) {
-				game.prison.doPrisonEscapeFightLoss();
+			if (SceneLib.prison.inPrison) {
+				SceneLib.prison.doPrisonEscapeFightLoss();
 				return 8;
 			}
 			if (!inDungeon) {
-				if (game.prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists()) {
+				if (SceneLib.prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists()) {
 					if (short == "goblin" || short == "goblin assassin" || short == "goblin warrior" || short == "goblin shaman" || short == "imp" || short == "imp lord" || short == "imp warlord" || short == "imp overlord" || //Generic encounter
 						short == "tentacle beast" || (short == "kitsune" && hairColor == "red") || short == "Akbal" || short == "Tamani" || //Forest, deepwoods
 						short == "goo-girl" || short == "green slime" || short == "fetish cultist" || short == "fetish zealot" || //Lake
@@ -1987,7 +1976,7 @@
 						short == "hellhound" || short == "infested hellhound" || short == "minotaur" || short == "minotaur lord" || short == "minotaur gang" || short == "minotaur tribe" || short == "basilisk" || short == "phoenix" || //Mountain, high mountains
 						short == "satyr" || short == "gnoll" || short == "gnoll spear-thrower" || short == "female spider-morph" || short == "male spider-morph" || short == "corrupted drider" || //Plains, swamp, bog
 						short == "yeti" || short == "behemoth") { //Glacial rift, volcanic crag
-						game.prison.trainingFeed.prisonCaptorFeedingQuestTrainingProgress(1, 1);
+						SceneLib.prison.trainingFeed.prisonCaptorFeedingQuestTrainingProgress(1, 1);
 					}
 				}
 				outputText("\n\nYou'll probably come to your senses in eight hours or so");

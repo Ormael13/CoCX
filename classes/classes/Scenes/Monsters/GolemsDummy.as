@@ -4,13 +4,13 @@
  */
 package classes.Scenes.Monsters 
 {
-	import classes.*;
-	import classes.Scenes.Places.HeXinDao;
-	import classes.internals.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	
-	public class GolemsDummy extends AbstractGolem
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Places.HeXinDao;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
+
+public class GolemsDummy extends AbstractGolem
 	{
 		public var golems:HeXinDao = new HeXinDao();
 		
@@ -19,7 +19,7 @@ package classes.Scenes.Monsters
 			if (player.hasStatusEffect(StatusEffects.SoulArena)) {
 				golems.gaunletchallange1fight2();
 			}
-			else game.combat.finishCombat();
+			else SceneLib.combat.finishCombat();
 		}
 		
 		public function backhand():void {
@@ -42,7 +42,6 @@ package classes.Scenes.Monsters
 				if (choice == 3) backhand();
 			}
 			else eAttack();
-			combatRoundOver();
 		}
 		
 		public function GolemsDummy() 

@@ -1,11 +1,12 @@
 package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.internals.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
 
-	public class Sheila extends Monster
+public class Sheila extends Monster
 	{
 
 		/*
@@ -21,7 +22,7 @@ package classes.Scenes.NPCs
 			if(player.tallness < 42 && rand(2) == 0) {
 				outputText("Sheila bounces up to you and crouches low, curling her body like a watchspring.  She uncoils with her fist aimed at your jaw, but you easily perform a crouch of your own and duck under her lanky form, unbending yourself to push her legs up as she flies harmlessly overhead.  You can hear a partial shriek before she crashes face-first into the dirt behind you. ");
 				damage = 3 + rand(10);
-				damage = kGAMECLASS.doDamage(damage, true);
+				damage = SceneLib.combat.doDamage(damage, true);
 			}
 			//Miss:
 			else if(player.getEvasionRoll() || hasStatusEffect(StatusEffects.Blind)) {
@@ -39,7 +40,7 @@ package classes.Scenes.NPCs
 			else {
 				outputText("Sheila bounces up to you and crouches low, curling up her body like a watchspring.  The girl uncoils just as quickly, launching herself at your face with a fist raised in front of her.  She lands a staggering crack on your jaw which knocks your head back and blurs your vision!  ");
 				//deals minor concussion which adds 5-10 pts fatigue, may stun pc and prevent attack, misses while blinded or misfires on pcs under 3'6")
-				kGAMECLASS.fatigue(5+rand(5));
+				EngineCore.fatigue(5+rand(5));
 				if(rand(2) == 0 && player.findPerk(PerkLib.Resolute) < 0) {
 					player.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 					outputText("<b>You are stunned!</b>  ");
@@ -49,7 +50,6 @@ package classes.Scenes.NPCs
 				damage = player.takeDamage(damage, true);
 			}
 			spe += 30;
-			combatRoundOver();
 		}
 
 		//special 2: flying kick rabbit punch (high damage, much lower accuracy than reg attack, deals concussion which adds 10-15 pts fatigue, may stun pc and prevent attack)
@@ -61,7 +61,7 @@ package classes.Scenes.NPCs
 				outputText("Sheila squats down, then bounds explosively toward you!  She swings her leg out in front to kick, but you roll to the side and she slips past your shoulder.  You hear an \"<i>Oof!</i>\" as she lands on her butt behind you.  When you turn to look, she's already back to her feet, rubbing her smarting posterior and looking a bit embarrassed.");
 				//(small Sheila HP loss)
 				damage = 3 + rand(10);
-				damage = kGAMECLASS.doDamage(damage);
+				damage = SceneLib.combat.doDamage(damage);
 				outputText(" (" + damage + ")");
 			}
 			//Hit:
@@ -75,10 +75,9 @@ package classes.Scenes.NPCs
 				damage = int((str + 50 + weaponAttack) - rand(player.tou) - player.armorDef);
 				if(damage < 1) damage = 2;
 				damage = player.takeDamage(damage, true);
-				kGAMECLASS.fatigue(10+rand(6));
+				EngineCore.fatigue(10+rand(6));
 			}
 			spe += 60;
-			combatRoundOver();
 		}
 
 
@@ -128,17 +127,16 @@ package classes.Scenes.NPCs
 				}
 				player.dynStats("lus", 30 + player.lib/10 + player.cor/10);
 			}
-			combatRoundOver();
 		}
 
 		//2: Tittymonster
 		private function tittyMonsterAttack():void {
-			outputText("Sheila giggles and strokes her " + game.sheilaScene.sheilaCup() + " breasts, trying to entice you.");
+			outputText("Sheila giggles and strokes her " + SceneLib.sheilaScene.sheilaCup() + " breasts, trying to entice you.");
 			//results, no new pg
 			//[(sheila corruption < 20; 'miss')
-			if(game.sheilaScene.sheilaCorruption() < 20) outputText("  But with nothing there for her to work with, it's a lot like being teased by a dressmaker's mannequin.");
+			if(SceneLib.sheilaScene.sheilaCorruption() < 20) outputText("  But with nothing there for her to work with, it's a lot like being teased by a dressmaker's mannequin.");
 			//(else if sheila corruption < 150; 'hit')
-			else if(game.sheilaScene.sheilaCorruption() < 150) {
+			else if(SceneLib.sheilaScene.sheilaCorruption() < 150) {
 				outputText("  As her hands run over the soft-looking mammaries, kneading and squeezing them, teasing the nipples relentlessly until she lets out a cute little moan, you feel the blood rush to your face.  \"<i>Enjoying this, are you?</i>\" she calls sweetly.  \"<i>Why don't you stop being contrary and come play with them too?</i>\"");
 				//med lib-based lust damage if 20 < sheila corruption < 150
 				player.dynStats("lus", 25+player.lib/10);
@@ -147,7 +145,6 @@ package classes.Scenes.NPCs
 			else {
 				outputText("  She has trouble even budging tits so comically mismatched to her slender frame; her hands just sink into the voluminous flesh when she tries to squeeze them together, but the demon doesn't manage to move mountains.  It's like watching someone try to push half-inflated swimming equipment around.  You actually laugh a little as she gives up, rubbing her lower back with a gripe.");
 			}
-			combatRoundOver();
 		}
 
 		//3: Splash (spd-based hit chance)
@@ -163,7 +160,6 @@ package classes.Scenes.NPCs
 			else {
 				outputText("You easily lean away from the path of her tainted fluids, and she sighs.  \"<i>You're no fun, mate.</i>\"");
 			}
-			combatRoundOver();
 		}
 		//4: Sit 'n Pout
 		//should only be used after turn 4 or 5
@@ -179,7 +175,6 @@ package classes.Scenes.NPCs
 				cleanupAfterCombat();
 				return;
 			}
-			combatRoundOver();
 			//end fight, suppress xp/gem/item reward, go to victory choices if lust >= 30
 		}
 
@@ -205,7 +200,6 @@ package classes.Scenes.NPCs
 				player.dynStats("lus", 25+player.sens/20 + player.lib/20);
 				//harder to resist and bigger damage than normal Suspicious Glint
 			}
-			combatRoundOver();
 		}
 
 		//6: "Pressure Points"
@@ -214,11 +208,11 @@ package classes.Scenes.NPCs
 			outputText("For a moment, all goes quiet, save for a soft rustle.\n\n");
 			//results, no new pg
 			//[(sheila corruption < 100; hit, 'light damage')]
-			if(game.sheilaScene.sheilaCorruption() < 100) {
-				outputText("The silence is broken with a giggle as the demon catches you in an embrace, pressing her " + game.sheilaScene.sheilaCup() + " breasts into you.  You shiver as she drags the perky nipples over your " + player.skinFurScales() + ", but push her away.");
+			if(SceneLib.sheilaScene.sheilaCorruption() < 100) {
+				outputText("The silence is broken with a giggle as the demon catches you in an embrace, pressing her " + SceneLib.sheilaScene.sheilaCup() + " breasts into you.  You shiver as she drags the perky nipples over your " + player.skinFurScales() + ", but push her away.");
 				player.dynStats("lus", 15+player.sens/20 + player.lib/20);
 			}
-			else if(game.sheilaScene.sheilaCorruption() < 300) {
+			else if(SceneLib.sheilaScene.sheilaCorruption() < 300) {
 				outputText("A sigh ends the silence as your body is partially enfolded in the hot valley of an aroused Sheila's cleavage. As the demon grabs you and pushes her tits into you, the skin-on-" + player.skinFurScales() + " contact makes you shiver, and your attempts to get free meet with some resistance... or rather, a lack of resistance, as the soft, yielding breast flesh quivers and heats to your touch without moving the demon overmuch.  You accidentally brush her nipples several times before you can escape, unleashing horny moans from Sheila that linger in your mind.");
 				player.dynStats("lus", 25+player.sens/20 + player.lib/20);
 			}
@@ -226,7 +220,6 @@ package classes.Scenes.NPCs
 				outputText("You're a bit unnerved, but soon realize that you can tell where Sheila is by listening for the telltale sounds of her colossal breasts scraping the ground as she draws closer to you.  With this in mind, you continue to face your opponent and back away as you wipe your eyes.");
 				outputText("\n\n\"<i>Aww, come on!</i>\" she whines.");
 			}
-			combatRoundOver();
 		}
 
 
@@ -265,14 +258,14 @@ package classes.Scenes.NPCs
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(game.flags[kFLAGS.SHEILA_DEMON] == 1) game.sheilaScene.beatUpDemonSheila();
-			else game.sheilaScene.sheilaGotWhomped();
+			if(game.flags[kFLAGS.SHEILA_DEMON] == 1) SceneLib.sheilaScene.beatUpDemonSheila();
+			else SceneLib.sheilaScene.sheilaGotWhomped();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if(game.flags[kFLAGS.SHEILA_DEMON] == 1) game.sheilaScene.loseToSheila();
-			else game.sheilaScene.getBeatUpBySheila();
+			if(game.flags[kFLAGS.SHEILA_DEMON] == 1) SceneLib.sheilaScene.loseToSheila();
+			else SceneLib.sheilaScene.getBeatUpBySheila();
 		}
 
 		public function Sheila()
@@ -284,24 +277,24 @@ package classes.Scenes.NPCs
 			
 			if (sheilaDemon)
 			{
-				this.long = "Sheila is a slim, somewhat athletic woman, over six feet in height.  Her smooth, dark skin is exposed from her head to her clawed feet, and she makes no effort to conceal anything your eyes might linger on.  The " + game.sheilaScene.sheilaCup() + " breasts on her chest" +(game.sheilaScene.sheilaCorruption() <= 40 ? " are firm, squeezable teardrops; she runs a hand absently over one from time to time." :	" jiggle as she moves, and she shoves them out to make sure you see just how lewd her body has become since your first meeting.") +"  Straight, jaw-length auburn hair frames her face along with two long, smooth ears that stick out sideways.  Her only nods to civilization are a dangling purple earring and the finger rings that she wears on her hands, and the wild woman stares openly at you, touching herself.";
+				this.long = "Sheila is a slim, somewhat athletic woman, over six feet in height.  Her smooth, dark skin is exposed from her head to her clawed feet, and she makes no effort to conceal anything your eyes might linger on.  The " + SceneLib.sheilaScene.sheilaCup() + " breasts on her chest" +(SceneLib.sheilaScene.sheilaCorruption() <= 40 ? " are firm, squeezable teardrops; she runs a hand absently over one from time to time." :	" jiggle as she moves, and she shoves them out to make sure you see just how lewd her body has become since your first meeting.") +"  Straight, jaw-length auburn hair frames her face along with two long, smooth ears that stick out sideways.  Her only nods to civilization are a dangling purple earring and the finger rings that she wears on her hands, and the wild woman stares openly at you, touching herself.";
 			}
 			else
 			{
-				this.long = "Sheila is a slim, somewhat athletic woman, over six feet in height.  Most of her lightly-tanned skin is hidden, either by her vest and shorts or by the fuzzy fur that covers her legs from the thighs down to her prominent nails.  Her " + game.sheilaScene.sheilaCup() + " breasts are briefly defined against the white of her shirt as she sways on her feet, " + (game.sheilaScene.sheilaCorruption() <= 40 ? "small, round things that match her slender frame." : "swollen, jiggling globes that stand in contrast to her slender body and tell a tale of all the corruption that has been pumped into her.") + "  Her straight, jaw-length auburn hair hangs unrestrained, falling around the fuzzy ears that stick out sideways from her head.  The hat she usually wears is hanging on her back by a string, pushed off to prevent its being lost in the chaos.  Something about slipping a rope around her own neck just to keep a hat tells you that Sheila's mind isn't really staying in the fight - though it could also be the desperate, faraway look in her eyes.";
+				this.long = "Sheila is a slim, somewhat athletic woman, over six feet in height.  Most of her lightly-tanned skin is hidden, either by her vest and shorts or by the fuzzy fur that covers her legs from the thighs down to her prominent nails.  Her " + SceneLib.sheilaScene.sheilaCup() + " breasts are briefly defined against the white of her shirt as she sways on her feet, " + (SceneLib.sheilaScene.sheilaCorruption() <= 40 ? "small, round things that match her slender frame." : "swollen, jiggling globes that stand in contrast to her slender body and tell a tale of all the corruption that has been pumped into her.") + "  Her straight, jaw-length auburn hair hangs unrestrained, falling around the fuzzy ears that stick out sideways from her head.  The hat she usually wears is hanging on her back by a string, pushed off to prevent its being lost in the chaos.  Something about slipping a rope around her own neck just to keep a hat tells you that Sheila's mind isn't really staying in the fight - though it could also be the desperate, faraway look in her eyes.";
 			}
 			
 			// this.plural = false;
-			this.createVagina(game.flags[kFLAGS.SHEILA_XP] <= 3 && !sheilaDemon, VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(game.flags[kFLAGS.SHEILA_XP] <= 3 && !sheilaDemon, AppearanceDefs.VAGINA_WETNESS_SLICK, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 30, 0, 0, 0);
 			this.createBreastRow(game.flags[kFLAGS.SHEILA_CORRUPTION]/10);
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,20,0,0,0);
 			this.tallness = 6*12;
-			this.hipRating = HIP_RATING_AVERAGE;
-			this.buttRating = BUTT_RATING_AVERAGE+1;
-			this.lowerBody = LOWER_BODY_TYPE_KANGAROO;
+			this.hipRating = AppearanceDefs.HIP_RATING_AVERAGE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_AVERAGE+1;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_KANGAROO;
 			this.skinTone = "tan";
 			this.hairColor = "auburn";
 			this.hairLength = 11;
@@ -347,7 +340,7 @@ package classes.Scenes.NPCs
 						add(consumables.SUCMILK,1/3).
 						add(consumables.INCUBID,1/2);
 			}
-			this.tailType = TAIL_TYPE_KANGAROO;
+			this.tailType = AppearanceDefs.TAIL_TYPE_KANGAROO;
 			checkMonster();
 		}
 

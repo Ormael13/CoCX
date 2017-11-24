@@ -1,9 +1,9 @@
 ﻿package classes.Scenes.NPCs{
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
-	public class IzmaScene extends NPCAwareContent implements TimeAwareInterface
+public class IzmaScene extends NPCAwareContent implements TimeAwareInterface
 	{
 
 //const IZMA_NO_COCK:int = 439;
@@ -26,7 +26,7 @@
 			pregnancy = new PregnancyStore(kFLAGS.IZMA_PREGNANCY_TYPE, kFLAGS.IZMA_INCUBATION, 0, 0);
 			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 250, 200, 150, 100, 50);
 												//Event: 0 (= not pregnant),  1,   2,   3,   4,  5,  6 (< 50)
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 		
 		private var checkedIzmaLatexy:int; //Make sure we test each of these events just once in timeChangeLarge
@@ -498,7 +498,7 @@ internal function IzmaWins():void {
 	clearOutput();
 	//(if Worms)
 	if(player.hasStatusEffect(StatusEffects.Infested)) {
-		kGAMECLASS.mountain.wormsScene.infestOrgasm();
+		SceneLib.mountain.wormsScene.infestOrgasm();
 		outputText("\n\nIzma looks on in horror as you push out the load of wormy cargo onto the sand at her feet, only snapping out of her daze as several of the parasites begin climbing her ankle with an eye toward her cock.  She shrieks and jumps back, then drags her foot in the sand, dislodging or pulverizing the squirming vermin.  \"<i>[name], that's nasty!  Get away!  Get away and don't talk to me again!  Ugh!</i>\"  She takes off, grabbing her chest of books and kicking sand up in her flight down the beach.");
 		flags[kFLAGS.IZMA_WORMS_SCARED] = 1;
 		player.orgasm();
@@ -826,7 +826,7 @@ private function IzmaBadEnd():void {
 
 	outputText("Izma seems to pause for a moment, distracted by something; you whine slightly in protest.  \"<i>Shut up for a second,</i>\" she orders.  You turn your head and narrow your eyes in a bid to see what Izma is looking at, and eventually pick out a figure drawing closer along the sands.  A human girl, from what you can see.  The sight manages to bring back a few memories of a more confused time, before you met your alpha. Izma grins at the sight and licks her lips.  \"<i>Well, wouldja look at that.  Hm... I suppose I could do with a harem...</i>\"");
 	//GAME OVERYUUUUU
-	getGame().gameOver();
+	EventParser.gameOver();
 }
 
 
@@ -1732,7 +1732,7 @@ public function izmaFollowerMenu():void {
 	}
 	if (player.hasItem(consumables.BROBREW) && flags[kFLAGS.IZMA_BROFIED] == 0) addButton(9, "Brotize", izmaelScene.brotizeIzma);
 	addButton(14, "Back", camp.campLoversMenu);
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) addButton(14, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) addButton(14, "Back", SceneLib.farm.farmCorruption.rootScene);
 }
 
 private function sendToFarm():void
@@ -1764,7 +1764,7 @@ private function backToCamp():void
 
 	flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] = 0;
 	
-	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+	doNext(SceneLib.farm.farmCorruption.rootScene);
 }
 
 //Get a tiger shark tooth
@@ -1872,8 +1872,8 @@ private function followerIzmaMountsPC(lastHalf:Boolean = false):void {
 	//[(if vagina)
 	if(player.hasVagina()) {
 		outputText(", your cunt ");
-		if(player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_SLICK) outputText("dripping");
-		else if(player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_DROOLING) outputText("gushing");
+		if(player.vaginas[0].vaginalWetness <= AppearanceDefs.VAGINA_WETNESS_SLICK) outputText("dripping");
+		else if(player.vaginas[0].vaginalWetness <= AppearanceDefs.VAGINA_WETNESS_DROOLING) outputText("gushing");
 		else outputText("cascading");
 		outputText(" feminine fluids onto the sticky ground beneath you both");
 	}
@@ -1909,8 +1909,8 @@ private function RadarIzmaLeaveHerWangUnWingWanged():void {
 	//[(if vagina)
 	if(player.hasVagina()) {
 		outputText(", your cunt ");
-		if(player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_SLICK) outputText("dripping");
-		else if(player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_DROOLING) outputText("gushing");
+		if(player.vaginas[0].vaginalWetness <= AppearanceDefs.VAGINA_WETNESS_SLICK) outputText("dripping");
+		else if(player.vaginas[0].vaginalWetness <= AppearanceDefs.VAGINA_WETNESS_DROOLING) outputText("gushing");
 		else outputText("cascading");
 		outputText(" feminine fluids onto the sticky ground beneath you both");
 	}
@@ -2269,7 +2269,7 @@ private function followerIzmaTakesIt69():void {
 	if(player.hasCock()) {
 		outputText(" fire loads into Izma's cheeks");
 		//[(multi)
-		if(player.totalCocks() > 1) outputText(" and hair");
+		if(player.cockTotal() > 1) outputText(" and hair");
 		outputText(".");
 		//[(big/mega skeet)
 		if(player.cumQ() >= 750) outputText("  You continue to shoot off stroke after stroke long after her mouth has filled up and she's pulled away.  \"<i>For the love of Marae, [name], I can't swallow all that!</i>\"");

@@ -11,7 +11,7 @@ package classes.Items.Weapons
 		
 		override public function get attack():Number {
 			var boost:int = 0;
-			var base:int = 0
+			var base:int = 0;
 			base += 7;
 			if (game.player.spe >= 75) base += 3;
 			if (game.player.isMeetingNaturalJousterMasterGradeReq()) boost += base * 4;

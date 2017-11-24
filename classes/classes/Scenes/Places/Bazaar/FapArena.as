@@ -1,9 +1,8 @@
 ﻿package classes.Scenes.Places.Bazaar{
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
 
-	public class FapArena extends BazaarAbstractContent{
+public class FapArena extends BazaarAbstractContent{
 
 	public function FapArena()
 	{
@@ -128,7 +127,7 @@ private function fapArenaPageII():void {
 	else if(player.cocks[x].cockType == CockTypesEnum.LIZARD) c = 3;
 	else if(player.cocks[x].cockType == CockTypesEnum.HORSE) c = 2;
 	//R the player's lust resistance (0<R<1)
-	var r:Number = kGAMECLASS.lustPercent()/100;
+	var r:Number = EngineCore.lustPercent()/100;
 	//The game does a roll between 0 and 100, call it N.
 	var n:Number = rand(100);
 	//We define the PC's stamina as ST = (N-S*R-4*D)/(D+1) + C

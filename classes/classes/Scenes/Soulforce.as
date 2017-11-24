@@ -4,33 +4,27 @@
  */
 package classes.Scenes 
 {
-	import classes.*
-	import classes.BaseContent;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kACHIEVEMENTS;
-	import classes.Scenes.Places.Boat;
-	import classes.Scenes.Areas.Forest.Tamani;
-	import classes.Scenes.Areas.Forest.TamaniScene;
-	import classes.Scenes.Areas.Forest.TamanisDaughters;
-	import classes.Scenes.Areas.Forest.TamainsDaughtersScene;
-	import classes.Scenes.Areas.Forest.WorldTree;
-	import classes.Scenes.Areas.HighMountains.IzumiScene;
-	import classes.Scenes.Areas.DeepSea.Kraken;
-	import classes.Scenes.Areas.Forest.Alraune;
-	import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
-	import classes.Scenes.Dungeons.DenOfDesire.ObsidianGargoyle;
-	import classes.Scenes.Places.Boat.Marae;
-	import classes.Scenes.Monsters.DarkElfScout;
-	import classes.Scenes.Monsters.DarkElfSlaver;
-	import classes.Scenes.Monsters.DarkElfRanger;
-	import classes.Scenes.Monsters.DarkElfSniper;
-	import classes.Scenes.Monsters.DarkElfSniper;
-	import classes.Scenes.NPCs.Electra;
-	import classes.Scenes.NPCs.Sonya;
-	import classes.Scenes.NPCs.RyuBiDragon;
-	
-	use namespace kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.Areas.DeepSea.Kraken;
+import classes.Scenes.Areas.Forest.Alraune;
+import classes.Scenes.Areas.Forest.TamainsDaughtersScene;
+import classes.Scenes.Areas.Forest.TamaniScene;
+import classes.Scenes.Areas.Forest.WorldTree;
+import classes.Scenes.Areas.HighMountains.IzumiScene;
+import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
+import classes.Scenes.Dungeons.DenOfDesire.ObsidianGargoyle;
+import classes.Scenes.Monsters.DarkElfRanger;
+import classes.Scenes.Monsters.DarkElfScout;
+import classes.Scenes.Monsters.DarkElfSlaver;
+import classes.Scenes.Monsters.DarkElfSniper;
+import classes.Scenes.NPCs.Electra;
+import classes.Scenes.NPCs.RyuBiDragon;
+import classes.Scenes.NPCs.Sonya;
+import classes.Scenes.Places.Boat.Marae;
+
+use namespace kGAMECLASS;
 	
 	public class Soulforce extends BaseContent
 	{
@@ -178,7 +172,7 @@ package classes.Scenes
 			if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit) addButton(4, "Adj. Corr.", CorruptionAndSoulforce).hint("Spend some soulforce on affecting your current corruption."); //używanie soulforce do zmniejszania corruption w stosunku 1:100 a zdobywanie corruption w stosunku 1:50
 			if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit && player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(3, "Mana", ManaAndSoulforce).hint("Convert some soulforce into mana or vice versa."); //używanie soulforce do zmniejszania fatigue w stosunku 1:1 a fatigue do soulforce 1:2, używalne nawet w walce też ale z wiekszym kosztem przeliczania czyli 1:2 i 1:4
 			//addButton(5, "Upgrade", UpgradeItems).hint("."); //ulepszanie itemów
-			if (player.findPerk(PerkLib.Metamorph) >= 0) addButton(6, "Metamorf", kGAMECLASS.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold freely your body.")//używanie metamorfowania z użyciem soulforce
+			if (player.findPerk(PerkLib.Metamorph) >= 0) addButton(6, "Metamorf", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold freely your body.");//używanie metamorfowania z użyciem soulforce
 			if (player.findPerk(PerkLib.SoulSense) >= 0) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounter."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
 			addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
 			addButton(14, "Back", playerMenu);
@@ -979,7 +973,7 @@ private function resetHeroslayerOmnibusFlag():void {
 			StatsMenuSens();
 		}
 		public function AddCor1():void {
-			player.cor = player.cor + 1
+			player.cor = player.cor + 1;
 			statScreenRefresh();
 			StatsMenuCor();
 		}
@@ -1431,19 +1425,19 @@ private function resetHeroslayerOmnibusFlag():void {
 		}
 		public function BackToHumanForm():void {
 			flags[kFLAGS.GARGOYLE_BODY_MATERIAL] = 0;
-			player.armType = ARM_TYPE_HUMAN;
-			player.eyeType = EYES_HUMAN;
-			player.antennae = ANTENNAE_NONE;
-			player.lowerBody = LOWER_BODY_TYPE_HUMAN;
+			player.armType = AppearanceDefs.ARM_TYPE_HUMAN;
+			player.eyeType = AppearanceDefs.EYES_HUMAN;
+			player.antennae = AppearanceDefs.ANTENNAE_NONE;
+			player.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HUMAN;
 			player.legCount = 2;
-			player.wingType = WING_TYPE_NONE;
+			player.wingType = AppearanceDefs.WING_TYPE_NONE;
 			player.wingDesc = "non-existant";
-			player.tongueType = TONGUE_HUMAN;
-			player.tailType = TAIL_TYPE_NONE;
+			player.tongueType = AppearanceDefs.TONGUE_HUMAN;
+			player.tailType = AppearanceDefs.TAIL_TYPE_NONE;
 			player.tailRecharge = 0;
 			player.horns = 0;
-			player.hornType = HORNS_NONE;
-			player.earType = EARS_HUMAN;
+			player.hornType = AppearanceDefs.HORNS_NONE;
+			player.earType = AppearanceDefs.EARS_HUMAN;
 			player.skin.restore();
 			clearOutput();
 			outputText("You have become fully human again.");
@@ -1479,23 +1473,23 @@ private function resetHeroslayerOmnibusFlag():void {
 			doNext(GargoyleBodyChanges);
 		}
 		public function GargoyleBodyChanges():void {
-			player.skin.setBaseOnly({type:SKIN_TYPE_STONE});
-			player.hairType = HAIR_NORMAL;
-			player.faceType = FACE_HUMAN;
-			player.hornType = HORNS_GARGOYLE;
+			player.skin.setBaseOnly({type:AppearanceDefs.SKIN_TYPE_STONE});
+			player.hairType = AppearanceDefs.HAIR_NORMAL;
+			player.faceType = AppearanceDefs.FACE_HUMAN;
+			player.hornType = AppearanceDefs.HORNS_GARGOYLE;
 			player.horns = 12 + rand(4); 
-			player.armType = ARM_TYPE_GARGOYLE;
-			player.tailType = TAIL_TYPE_GARGOYLE;
+			player.armType = AppearanceDefs.ARM_TYPE_GARGOYLE;
+			player.tailType = AppearanceDefs.TAIL_TYPE_GARGOYLE;
 			player.tailRecharge = 0;
-			player.wingType = WING_TYPE_GARGOYLE_LIKE_LARGE;
-			player.lowerBody = LOWER_BODY_TYPE_GARGOYLE;
+			player.wingType = AppearanceDefs.WING_TYPE_GARGOYLE_LIKE_LARGE;
+			player.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE;
 			player.legCount = 2;
-			player.eyeType = EYES_HUMAN;
-			player.antennae = ANTENNAE_NONE;
-			player.tongueType = TONGUE_HUMAN;
-			player.earType = EARS_HUMAN;
-			player.gillType = GILLS_NONE;
-			player.rearBody = REAR_BODY_NONE;
+			player.eyeType = AppearanceDefs.EYES_HUMAN;
+			player.antennae = AppearanceDefs.ANTENNAE_NONE;
+			player.tongueType = AppearanceDefs.TONGUE_HUMAN;
+			player.earType = AppearanceDefs.EARS_HUMAN;
+			player.gillType = AppearanceDefs.GILLS_NONE;
+			player.rearBody = AppearanceDefs.REAR_BODY_NONE;
 			if (player.hasStatusEffect(StatusEffects.BlackNipples)) player.removeStatusEffect(StatusEffects.BlackNipples);
 		//	if (player.averageNipplesPerBreast() > 1) player.breastRows[x].nipplesPerBreast = 1;
 			if (player.hasStatusEffect(StatusEffects.Feeder)) {
@@ -2361,7 +2355,7 @@ private function resetHeroslayerOmnibusFlag():void {
 			if (player.soulforce >= 90) {
 				player.soulforce -= 90;
 				statScreenRefresh();
-				kGAMECLASS.kitsuneScene.enterTheTrickster();
+				SceneLib.kitsuneScene.enterTheTrickster();
 			}
 			else {
 				outputText("Your current soulforce is too low.");

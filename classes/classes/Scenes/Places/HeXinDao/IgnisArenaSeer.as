@@ -4,12 +4,11 @@
  */
 package classes.Scenes.Places.HeXinDao 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.internals.*;
-	import classes.Scenes.Places.HeXinDao.IgnisArenaSeerScene;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.*;
 
-	public class IgnisArenaSeer extends Monster
+public class IgnisArenaSeer extends Monster
 	{
 		public var ignisfight:IgnisArenaSeerScene = new IgnisArenaSeerScene();
 		
@@ -88,7 +87,6 @@ package classes.Scenes.Places.HeXinDao
 				if (this.statusEffectv1(StatusEffects.IgnisCounter) > 2) IgnisCastsComet();
 				else IgnisCastsFoxFire();
 			}
-			combatRoundOver();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -128,12 +126,12 @@ package classes.Scenes.Places.HeXinDao
 			this.cumMultiplier = 6;
 			this.hoursSinceCum = 400;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.createStatusEffect(StatusEffects.BonusACapacity,20,0,0,0);
 			this.tallness = rand(24) + 60;
-			this.hipRating = HIP_RATING_SLENDER;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			this.skinTone = "white";
 			this.hairColor = "silver";
 			this.hairLength = 13 + rand(20);
@@ -160,7 +158,7 @@ package classes.Scenes.Places.HeXinDao
 					add(consumables.MG_SFRP,1).
 					add(consumables.FOXJEWL, 4);
 			}
-			this.tailType = TAIL_TYPE_FOX;
+			this.tailType = AppearanceDefs.TAIL_TYPE_FOX;
 			checkMonster();
 		}
 		

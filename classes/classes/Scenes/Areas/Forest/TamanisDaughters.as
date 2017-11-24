@@ -1,11 +1,12 @@
 package classes.Scenes.Areas.Forest
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Monsters.Goblin;
-	import classes.internals.WeightedDrop;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Monsters.Goblin;
+import classes.Scenes.SceneLib;
+import classes.internals.WeightedDrop;
 
-	public class TamanisDaughters extends Goblin
+public class TamanisDaughters extends Goblin
 	{
 		private function midRoundMadness():void {
 			var selector:Number = rand(4);
@@ -75,21 +76,20 @@ package classes.Scenes.Areas.Forest
 					special3();
 					break;
 			}
-			combatRoundOver();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.forest.tamaniDaughtersScene.combatWinAgainstDaughters();
+			SceneLib.forest.tamaniDaughtersScene.combatWinAgainstDaughters();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if(pcCameWorms){
 				outputText("\n\nYour foes seem visibly disgusted and leave, telling you to, \"<i>quit being so fucking gross...</i>\"");
-				game.cleanupAfterCombat();
+				SceneLib.combat.cleanupAfterCombatImpl();
 			} else {
-				game.forest.tamaniDaughtersScene.loseToDaughters();
+				SceneLib.forest.tamaniDaughtersScene.loseToDaughters();
 			}
 		}
 
@@ -104,15 +104,15 @@ package classes.Scenes.Areas.Forest
 			this.pronoun1 = "they";
 			this.pronoun2 = "them";
 			this.pronoun3 = "their";
-			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_TIGHT);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DROOLING, AppearanceDefs.VAGINA_LOOSENESS_TIGHT);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("D"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,25,0,0,0);
 			this.tallness = 40;
-			this.hipRating = HIP_RATING_AMPLE+1;
-			this.buttRating = BUTT_RATING_NOTICEABLE+1;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+1;
+			this.buttRating = AppearanceDefs.BUTT_RATING_NOTICEABLE+1;
 			this.skinTone = "greenish gray";
 			this.hairColor = "pink";
 			this.hairLength = 16;

@@ -1,11 +1,11 @@
 ﻿package classes.Scenes.NPCs{
-	import adobe.utils.CustomActions;
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.Areas.HighMountains.Harpy;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.Areas.HighMountains.Harpy;
+import classes.Scenes.SceneLib;
 
-	public class SophieScene extends BaseContent implements TimeAwareInterface {
+public class SophieScene extends BaseContent implements TimeAwareInterface {
 
 		public var pregnancy:PregnancyStore;
 
@@ -14,7 +14,7 @@
 			pregnancy = new PregnancyStore(kFLAGS.SOPHIE_PREGNANCY_TYPE, kFLAGS.SOPHIE_INCUBATION, 0, 0);
 			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 150, 120, 100);
 												//Event: 0 (= not pregnant),  1,   2,   3,  4 (< 100)
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 		
 		private var checkedSophie:int; //Make sure we test this event just once in timeChangeLarge
@@ -161,11 +161,11 @@ Lasts 4-8 hours.
 //Forces minimum lust to be at least 50.
 
 		private function get sophieBimbo():SophieBimbo {
-			return kGAMECLASS.sophieBimbo;
+			return SceneLib.sophieBimbo;
 		}
 		
 		private function get sophieFollowerScene():SophieFollowerScene {
-			return kGAMECLASS.sophieFollowerScene;
+			return SceneLib.sophieFollowerScene;
 		}
 		
 		public function sophieAtCamp():Boolean { //Whether she's a bimbo or not
@@ -270,7 +270,7 @@ public function meetSophieRepeat():void {
 		return;
 	}
 	//(Has dick)
-	if(player.totalCocks() > 0) {
+	if(player.cockTotal() > 0) {
 		//(Random Rape) 
 		if(rand(2) == 0 && !pregnancy.isPregnant) {
 			outputText("During your exploration of the mountains you wind up passing close to the harpy nests again, and Sophie flaps her way over to you.  Her breasts jiggle pleasantly and she hooks her talons through the belt you use to hold your pouches before you can stop her.  The force of her flapping wings pulls you off the mountain, suspending you hundreds of feet above the ground as she flies you back towards her nest.  ");
@@ -404,7 +404,7 @@ private function sophieMeetingChoseSex():void {
 	sophieBimbo.sophieSprite();
 	clearOutput();
 	//(FEMALE\Unsexed)(Genderless –  forces Leave.)
-	if(player.totalCocks() == 0) {
+	if(player.cockTotal() == 0) {
 		outputText("Sophie looks you up and down");
 		if(player.hasVagina()) outputText(" and insists, \"<i>Well, keep looking; if I wanted a girl I'd be busy with one of my nieces right now.</i>\"");
 		outputText(".  She turns around and fluffs her tail-feathers at you in what is clearly a dismissal.");
@@ -447,7 +447,7 @@ private function sophieMeetingGotLost():void {
 	//(Incongruity here: she disdains the young ones for wanting to fuck instead of talk and then jumps right to wanting to fuck. Not that cougars aren't dumb as hell. - Z)
 
 	outputText("The older harpy reclines in her nest and dips a hand between her muscled thighs while she talks, \"<i>");
-	if(player.totalCocks() > 0) {
+	if(player.cockTotal() > 0) {
 		outputText("Would you stay and help a lonely matron with her needs?</i>\"\n\n");
 		//[To consensual sex or sophie sadface.
 		doYesNo(consensualSexSelector,shootDownSophieSex);
@@ -487,8 +487,8 @@ private function cramANippleInIt():void {
 	player.boostLactation(.01);
 	clearOutput();
 	//Not a combat win
-	if (!getGame().inCombat) outputText("Sophie steps back and drops onto her knees, balancing herself with her wings.   You pull your [armor] open with deliberate slowness, exposing your [allbreasts] one at a time.  Sophie licks her lips as she patiently awaits the sharing of your bounty.\n\n");
-	//COMBAT
+    if (!kGAMECLASS.inCombat) outputText("Sophie steps back and drops onto her knees, balancing herself with her wings.   You pull your [armor] open with deliberate slowness, exposing your [allbreasts] one at a time.  Sophie licks her lips as she patiently awaits the sharing of your bounty.\n\n");
+    //COMBAT
 	else {
 		//(Lust Win)
 		if(monster.lust >= monster.maxLust()) outputText("Sophie pants and pulls herself up to her knees.  She barely keeps her balance as she rams four of her fingers deep into her dripping pussy, fiddling at her clit with her thumb.  The harpy opens her mouth to beg for your milk with her glossy lips as you slowly undress.\n\n");
@@ -544,16 +544,16 @@ private function cramANippleInIt():void {
 	else if(player.biggestLactation() >= 2) outputText("a satisfied burp.");
 	else outputText("a satisfied 'ahhh'.");
 	outputText("  She wipes a bit of milk from her lips and says, \"<i>");
-	if (getGame().inCombat) {
-		//(Fought HP won:
+    if (kGAMECLASS.inCombat) {
+        //(Fought HP won:
 		if(monster.HP < 1) outputText("You know you don't have to beat me up to get me to drink your milk right? It's too delicious to turn down!</i>\"\n\n");
 		//(Fought Lust won:
 		else {
 			outputText("Mmmm, you sure know how to get a woman's blood pumping before you give her what she wants, don't you?");
 			//(Dick:
-			if(player.totalCocks() > 0) outputText("  Maybe you'll let me try your 'other' milk next time?");
+			if(player.cockTotal() > 0) outputText("  Maybe you'll let me try your 'other' milk next time?");
 			outputText("</i>\"");
-			if(player.totalCocks() > 0) {
+			if(player.cockTotal() > 0) {
 				outputText("  The harpy laughs and caresses your backside tenderly as she whispers, \"<i>It's been a long time, you know...</i>\"\n\n");
 				dynStats("lus", 25);
 			}
@@ -564,7 +564,7 @@ private function cramANippleInIt():void {
 	//(Volunteered: 
 	else {
 		outputText("Delicious!  It's been so long since I've had someone to bring me such fresh milk.");
-		if(player.totalCocks() > 0) {
+		if(player.cockTotal() > 0) {
 			outputText("  Maybe you'll let me try your 'other' milk next time?</i>\"  The harpie laughs and caresses your backside tenderly as she whispers, \"<i>It's been a long time, you know...</i>\"\n\n");
 			//(+25 lust)
 			dynStats("lus", 25);
@@ -581,8 +581,8 @@ private function cramANippleInIt():void {
 	dynStats("lus", -50);
 	//increment times bfed.
 	flags[kFLAGS.BREASTFEAD_SOPHIE_COUNTER]++;
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 	//You've now been milked, reset the timer for that
 	if(player.hasStatusEffect(StatusEffects.Feeder)) {
@@ -602,16 +602,16 @@ private function consensualHotSophieDickings():void {
 		CoC_Settings.error("");
 		outputText("ERROR: No cock found that fits, yet 'fits' scene was called.");
 		doNext(playerMenu);
-		getGame().inCombat = false;
-		return;
+        kGAMECLASS.inCombat = false;
+        return;
 	}
 	else if(x > player.cocks.length-1) 
 	{
 		CoC_Settings.error("");
 		outputText("ERROR: Cock above max cocks selected for Sophie sex.  Please report bug on fen's bug report forum.");
 		doNext(playerMenu);
-		getGame().inCombat = false;
-		return;
+        kGAMECLASS.inCombat = false;
+        return;
 	}
 
 	outputText("With her spread thighs beckoning you so invitingly, there's no way you could resist.  You tear off your [armor] and jump into her nest with her, hardening delightfully from your close proximity to the well-endowed woman.  Sophie places a hand ");
@@ -626,7 +626,7 @@ private function consensualHotSophieDickings():void {
 		else outputText("her breasts pressing against your stomach");
 	}
 	outputText(", ");
-	if(player.totalCocks() > 1) outputText("each of ");
+	if(player.cockTotal() > 1) outputText("each of ");
 	outputText("your [cocks] begins to poke and prod against her crotch and slightly parted slit.  ");
 	if(player.cockArea(x) <= 6) {
 		outputText("She frowns and asks, \"<i>Is that all there is?  You're so small you may as well get rid of it and become a girl!  You'd be a cute little girl, you know that?</i>\"");
@@ -919,7 +919,7 @@ internal function sophieLostCombat():void {
 		var clitFuck:Function = null;
 		var cuntFuck:Function = null;
 		var bimbo:Function = null;
-		if(player.lust >= 33 && player.totalCocks() > 0) {
+		if(player.lust >= 33 && player.cockTotal() > 0) {
 			//Set dick rape to correct scene.
 			//Too big
 			if(player.cockThatFits(232) == -1) {dickRape = maleVictorySophieRapeHUGE;}
@@ -1085,9 +1085,9 @@ private function sophieVictoryPussyGrind():void {
 		else outputText("  Jism rains everywhere until she's thoroughly glazed with spooge and the nest is brimming with your spunk-puddle.");
 	}
 	outputText("  Sophie grunts and moans as your measured grinding turns into a seizure-like spasm.   The frenzy of friction pushes her over the edge, making her thighs convulse and her legs splay wide.  ");
-	if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLAVERING) outputText("Juices squirt from the joined pussies");
-	else if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLICK) outputText("Juices soak the nesting material");
-	else if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_WET) outputText("Juice trickles from the paired pussies");
+	if(player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_SLAVERING) outputText("Juices squirt from the joined pussies");
+	else if(player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_SLICK) outputText("Juices soak the nesting material");
+	else if(player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_WET) outputText("Juice trickles from the paired pussies");
 	else outputText("Sophie's pussy soaks your own with her juices");
 	outputText(" until you fall away from each other, spent and rubbing your tender cunts.  The older bird-woman reluctantly admits, \"<i>");
 	if(flags[kFLAGS.TIMES_FUCKED_SOPHIE_LESBIAN] == 0) outputText("Cutey, you sure know your way around a pussy, but I just don't like to do this kind of thing.  Don't expect me to be some lesbo bird-slut who'll lick your slit at the drop of a hat.");
@@ -1126,7 +1126,7 @@ private function fuckDatClit():void {
 	outputText("The motherly harpy groans out more commands, \"<i>That's it; relax and let me take over, little girl. We're going to make each other feel very good.</i>\"  Though she isn't in any position to command you, you can feel your body accepting her words.  It occurs to you that she's using some kind of compulsion to help her, but you're too relaxed and sexually excited to give a damn.  You lie your head down and lightly fondle her nipples while you clit is savagely milked by Sophie's pussy as if it were a cow's teat.  Even with her command to relax, your " + hipDescript() + " still shiver and buck with excitement, and you know orgasm is close.\n\n");
 	
 	outputText("A quick uptake in the rhythm of Sophie's squeezes brings you to climax, and your relaxed body is wracked by tiny quivers of movement while your clit balloons with blood inside her.  It feels so good that your eyes roll back and you struggle to hold on.  ");
-	if(player.totalCocks() > 0) {
+	if(player.cockTotal() > 0) {
 		outputText("Whiteness erupts from " + sMultiCockDesc() + " as the orgasm hits your groin.  ");
 		if(player.cumQ() < 50) outputText("It leaves a small puddle of white submission on Sophie's back.  ");
 		else if(player.cumQ() < 250) outputText("It leaves a thick puddle of seed dripping from Sophie's back.  ");
@@ -1135,7 +1135,7 @@ private function fuckDatClit():void {
 	outputText("She's breathing hard but hardly close to getting off, and she purrs, \"<i>I'm not done with you yet, cutey.  Just keep that clitty hard inside me and let me squeeze until I cum.  You can pass out if it's too much for you.</i>\"\n\n");
 	
 	outputText("She's not... not done yet?  You try to pull out, but with the compulsion and the exhaustion of your orgasm, it's impossible.  Ah!  She squeezes again and your eyes cross for a moment.  Everything is still so sensitive!  You can't stand this for long.  ");
-	if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) outputText("Juice dribbles down your [legs] as your body enjoys the treatment.  ");
+	if(player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_DROOLING) outputText("Juice dribbles down your [legs] as your body enjoys the treatment.  ");
 	outputText("Sophie's managed to take control of the situation, and your helplessness only compounds the pleasure you're forced to endure.  The harpy wiggles her hips and curves her wings over-top of you, holding you tightly as she forces another climax upon you.  Your eyes roll back into your head and you start to drool, knocked out by the harpy.\n\n");
 	
 	outputText("It's several hours later when you wake up at the base of the mountain.   Your [armor] is back on, and your gem-pouch feels a little lighter.  Maybe you'll think twice about jamming something as sensitive as your " + clitDescript() + " into a slick vice next time?  Then again, you might have to go visit her again.  You're still tingling from the aftereffects of those orgasms.");

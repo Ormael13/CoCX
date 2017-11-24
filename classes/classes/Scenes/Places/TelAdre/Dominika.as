@@ -1,9 +1,8 @@
 ﻿package classes.Scenes.Places.TelAdre {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
 
-	public class Dominika extends TelAdreAbstractContent {
+public class Dominika extends TelAdreAbstractContent {
 public function Dominika(){
 
 }
@@ -33,7 +32,7 @@ public function fellatrixBarApproach():void {
 		return;
 	}
 	//[First encounter, player is minotaur (If you lose minotaur characteristics and come back, Dominika will not recognize you and do a regular first encounter)]
-	if(player.minotaurScore() >= 3 && player.faceType == FACE_COW_MINOTAUR && player.gender == 1) {
+	if(player.minotaurScore() >= 3 && player.faceType == AppearanceDefs.FACE_COW_MINOTAUR && player.gender == 1) {
 		outputText("You approach the woman, delivering what you consider a polite greeting. Icily she turns to you, raises an eyebrow, and in a low husky voice snarls \"<i>Don't bother. I'm not interested in being your bimbo.</i>\" She turns away from you, and ignores any further attempts to start a conversation.\n\n");
 
 		outputText("A tavern maid with shaggy dreadlocks and a long tongue she can barely fit in her mouth waves you over. \"<i>Don't wowwy 'bout Dominika,</i>\" she says through her lisp, \"<i>The's a liddle wacist against, you know, your type. Thays you're only interethted in wape. Motht of uth aren't like dat.</i>\"\n\n");
@@ -412,7 +411,7 @@ private function acceptFellatrixOral():void {
 			outputText("Once you arrive at the second-story apartment, Dominika practically pulls you into the other room, eager to descend upon your " + vaginaDescript(0) + ". She lays you on the bed again, removing the bottom of your [armor] and laying beneath you. Gliding her hands over your thighs she aggressively begins lapping at your " + vaginaDescript(0) + " with her tongue, coating it in spit. \"<i>Mmm, I hope you squirt a river,</i>\" she purrs, giving your " + clitDescript() + " a kiss as intimate as a lover's. The way her lips move is intoxicating, sliding their slippery glossy surface over every inch of your " + vaginaDescript(0) + " before engulfing the delicate flesh.\n\n");
 			outputText("She forces your legs open and holds your hands at your side so that she can have free reign over your exposed cunt, hardly submissive even as she takes you in her mouth. Her lips twist from side to side as she rubs her mouth lewdly over your flesh. Spit drips between your legs, and deep satisfied slurping noises arise from the bobbing blonde hair before you. Her mouth is warm and breathy against you, but her plump lips press to your skin like a seal, letting you know that you can only leave her mouth when she is ready. The friction is electric, and you drool nectar into her mouth. All of it is slurped down into her waiting throat.\n\n");
 			outputText("Her tongue aggressively shoves itself into you once more, slapping against the walls of your " + vaginaDescript(0) + " as though trying to break them down. You can practically feel your juices splattering across your cunt and then slurped up by her in the frenzy she approaches you with. Your world becomes consumed by raw sensation as effortlessly as your own " + vaginaDescript(0) + " is consumed by her ravenous maw, losing yourself in the pleasure granted you by those plump fuckable puckers. ");
-			if(player.totalCocks() == 0) outputText("A part of you even wishes that you had a cock so you could shove through them!\n\n");
+			if(player.cockTotal() == 0) outputText("A part of you even wishes that you had a cock so you could shove through them!\n\n");
 			else outputText("A part of you even wishes that she had chosen your cock so you could shove it through them!\n\n");
 			outputText("You don't speak, cannot speak as she sucks and gulps at your flesh. You can only offer up strangled gasps and shuddered squeals to her actions, prostrated like a servant before her, gripping the covers and mattress beneath you. Your " + vaginaDescript(0) + " is hers, to impose whatever demands she wishes, and the insatiable suckling upon you makes her demands clear. Her tongue twists about in you and against you, mocking your fingers with how much better it seems to know your pleasure.\n\n");
 			outputText("You cannot resist for long after she takes over your spot once again, grinding against it and forcing you to arc your back. Pleasure surrounds you as effortlessly as her lips surround your " + clitDescript() + ", and you find yourself cumming hard against her. She drinks everything you give her, sucking on your " + vaginaDescript(0) + " to ensure as little as possible escapes. You feel as though the orgasm could last forever, but settle slowly as she gently kisses your lips, stroking along your belly.\n\n");
@@ -922,7 +921,7 @@ private function dominikaBlowjobs2():void {
 public function dominikaSpellblade():void {
 	clearOutput();
 	//[Approach Dominika post-D2 in bar, on Dominika's \"<i>I'm a racist bitch</i>\" list]
-	if((player.minotaurScore() >= 3 && player.faceType == FACE_COW_MINOTAUR && player.gender == 1) || !player.isBiped()) {
+	if((player.minotaurScore() >= 3 && player.faceType == AppearanceDefs.FACE_COW_MINOTAUR && player.gender == 1) || !player.isBiped()) {
 		outputText("You greet Dominika and make small talk, but as usual she seems distracted and the conversation is strained at best.  Drumming her fingers on the table and glancing outside her attention is constantly drawn away from you, and eventually she outright cuts the conversation off.  \"<i>I need to go, I'm afraid,</i>\" she says quickly, and half-heartedly adds, \"<i>It was nice talking to you.</i>\"\n\n");
 
 		outputText("She exits, leaving you at the table alone.  You shrug a little and finish your drink, before noticing that she left something behind.  It looks like a wrapped sword and, while you don't know why she'd have such a thing, you figure you might as well give it back to her.  Hell, maybe she'll actually be worth a goddamn conversation afterwards.\n\n");

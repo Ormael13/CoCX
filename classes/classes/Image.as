@@ -7,7 +7,7 @@ package classes
 	public class Image 
 	{
 		private var _id:String;
-		private var _url:String
+		private var _url:String;
 		private var _width:int;
 		private var _height:int;		
 		

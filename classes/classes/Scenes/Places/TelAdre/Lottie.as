@@ -1,9 +1,10 @@
 package classes.Scenes.Places.TelAdre {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
-	use namespace kGAMECLASS;
+use namespace kGAMECLASS;
 
 	public class Lottie extends TelAdreAbstractContent {
 public function Lottie(){
@@ -413,8 +414,8 @@ public function analLottieMilkshake():void {
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
 	outputText("You brush her grip off of " + oMultiCockDesc() + ", only to turn her around and fit your girth between her large cheeks");
-	if(player.totalCocks() == 2) outputText(", managing to squeeze in your other cock along with it");
-	else if(player.totalCocks() > 2) outputText(", the rest of your dicks poking and prodding against her soft flesh");
+	if(player.cockTotal() == 2) outputText(", managing to squeeze in your other cock along with it");
+	else if(player.cockTotal() > 2) outputText(", the rest of your dicks poking and prodding against her soft flesh");
 	outputText(".  \"<i>You sure do like my butt, huh?</i>\"  She giggles softly, satisfied that at least some of her fat is being put to use.  You groan as she starts to move her ample hips, massaging your " + cockDescript(x) + " within her jiggling buttocks.  Your tip brushes against her asshole, smearing pre-cum all over the hot entrance.  Lottie starts to push back towards your cock, clearly overcome with lust.  You wait a few seconds as she aimlessly grinds against you before you spread her cheeks and plunge your " + cockDescript(x) + " into her tight backdoor. Lottie squeals against the wall in delight as you fill her stomach and begin pounding away at her relentlessly, her large tits bouncing rhythmically. She continues to drive herself into you, her tight, fiery insides squeezing your length whilst you watch her heavy butt ripple with every thrust.\n\n");
 
 	outputText("Lottie is a complete mess, gasping and convulsing underneath you as you plunge into her depths. Her mouth hangs wide open as she holds on to one of her plush tits, using her free hand to pleasure herself. You take hold of her lavish buttcheeks and force your length in deep, bottoming out inside her hot ass. You remain inside her and begin gyrating your hips, rubbing against the tight walls of her interior. Her legs collapse underneath you and you wrap one hand around her pot belly to hold her in place, resuming your thrusting.\n\n");
@@ -2039,7 +2040,7 @@ private function lottieAndIfrisNTREpilogue():void {
 	outputText("A dry wind across your face rouses you from your peaceful sleep.  It seems you're outside the walls of Tel'Adre.  All your equipment is sitting to the right of you, and when you gather the pile of your gear you find a note underneath.\n\n");
 
 	outputText("\"<i>Dear [name],\n\nSleep well?  I hope so, considering I found you snoring on top of two luscious babes.  Don't worry about getting in trouble at the gym.  Most of the staff and customers were too busy getting themselves off to be angry or offended, though I have to admit I'm a bit jealous.  The little piggy and that tight piece of red ass are both safe in their homes.  ");
-	if(!kGAMECLASS.urta.urtaLove()) {
+	if(!SceneLib.urta.urtaLove()) {
 		outputText("Of course, I had to fine you for public indecency - you really ought to watch how you behave, lest someone take you for a demon agent.  Next time, try and keep it in your pants.\n\n-Urta, Captain of the Guard");
 		if(player.gems > 0) {
 			player.gems -= 200;

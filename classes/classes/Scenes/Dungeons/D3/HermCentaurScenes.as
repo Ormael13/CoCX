@@ -1,11 +1,12 @@
 ﻿package classes.Scenes.Dungeons.D3 
 {
-	import classes.BaseContent;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Appearance;
-	import classes.PregnancyStore;
-	
-	/**
+import classes.BaseContent;
+import classes.EventParser;
+import classes.GlobalFlags.kFLAGS;
+import classes.PregnancyStore;
+import classes.Scenes.SceneLib;
+
+/**
 	 * ...
 	 * @author Gedan
 	 */
@@ -34,7 +35,7 @@
 		public function beatThePony(hpVictory:Boolean):void
 		{
 			clearOutput();
-			outputText("With a heavy 'thud', the demonic red-head slumps onto her side in the grass.  Her tail flails fitfully")
+			outputText("With a heavy 'thud', the demonic red-head slumps onto her side in the grass.  Her tail flails fitfully");
 			if (hpVictory) outputText(" as she tries to rise");
 			else outputText(" as she tries to stretch for her pulsating, cum-dripping member");
 			outputText(", but it's a futile gesture.  She doesn't have the power to face you on her own terms anymore, and she watches you with a");
@@ -61,8 +62,8 @@
 			flags[kFLAGS.D3_CENTAUR_DEFEATED] = CENTAUR_KILLED;
 
 			menu();
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
-		}
+            cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+        }
 
 		private function letHerGo():void
 		{
@@ -71,8 +72,8 @@
 			flags[kFLAGS.D3_CENTAUR_DEFEATED] = CENTAUR_RELEASED;
 
 			menu();
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
-		}
+            cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+        }
 
 		private function maleFuckHer():void
 		{
@@ -119,8 +120,8 @@
 			player.orgasm();
 			dynStats("cor+", 5);
 
-			cleanupAfterCombat(getGame().d3.resumeFromFight)
-		}
+cleanupAfterCombat(SceneLib.d3.resumeFromFight)
+        }
 
 		private const HORZGOG:int = 0;
 		private const DOGGECOCK:int = 1;
@@ -248,8 +249,8 @@
 			dynStats("cor+", 5);
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 			menu();
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
-		}
+            cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+        }
 		
 		public function inSovietCoCPonyRidesYou(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
@@ -366,7 +367,7 @@
 			outputText("\n\nThe rest of your days are lived out like that, interrupted only for fresh injections of demonic chemicals and thick centaur-cum.  Amazingly, the demon's experiments bear fruit, and you have the honor of birthing the first true demon offspring - the first of many.  Though you're eventually traded to a new owner once you're well used and other sluts have been similar prepared, you keep a sense of a perverse pride through it all.  You were the first demon mother.  You helped the new species propagate and assure their dominance over lesser forms of life, like yourself.");
 
 			dynStats("lus=", player.maxLust(), "lib", 50, "cor", 50);
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 		
 		private function maleLoss(hpVictory:Boolean):void
@@ -459,7 +460,7 @@
 		{
 			clearOutput();
 			outputText("As the years roll by, you see lots of pussy, and lots of injections.  They test all kinds of cocktails on you.  Ones that makes your balls swell, or your seed runny, or thick, or even black.  Eventually, one of your children comes out as something other than an imp.  The first proper demon infant.  Too fucked up to feel anything but pride, you can only marvel at your amazing virility as you seed the birth of a new species, knocking up every demon with a cunt in a month-long orgy.  Your jism fuels the ascendency of an entire race, dooming Mareth.");
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 		
 	}

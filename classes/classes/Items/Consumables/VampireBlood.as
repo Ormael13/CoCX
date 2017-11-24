@@ -1,4 +1,5 @@
 package classes.Items.Consumables {
+import classes.AppearanceDefs;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Items.Consumable;
 
@@ -30,7 +31,7 @@ public class VampireBlood extends Consumable {
     }
     override public function useItem():Boolean{
         clearOutput();
-        var story:BoundStory = getGame().rootStory.locate("diva/item").bind(kGAMECLASS.context);
+        var story:BoundStory = kGAMECLASS.rootStory.locate("diva/item").bind(kGAMECLASS.context);
         if(first){
             story.display("useText/first");
             first = false;
@@ -45,20 +46,20 @@ public class VampireBlood extends Consumable {
         var tfArr:Array = [
             {
                 BodyPart: 'wingType',
-                ChangeTo: pure ? WING_TYPE_VAMPIRE : WING_TYPE_BAT_ARM,
+                ChangeTo: pure ? AppearanceDefs.WING_TYPE_VAMPIRE : AppearanceDefs.WING_TYPE_BAT_ARM,
                 Check   : player.hasGooSkin(),
                 Override: mutations.humanizeSkin
             }, {
                 BodyPart: 'earType',
-                ChangeTo: pure ? EARS_VAMPIRE : EARS_BAT,
-                Check   : pure ? player.earType != EARS_HUMAN : false,
+                ChangeTo: pure ? AppearanceDefs.EARS_VAMPIRE : AppearanceDefs.EARS_BAT,
+                Check   : pure ? player.earType != AppearanceDefs.EARS_HUMAN : false,
                 Override: pure ? mutations.humanizeEars : null
             }, {
                 BodyPart: 'eyeType',
-                ChangeTo: EYES_VAMPIRE
+                ChangeTo: AppearanceDefs.EYES_VAMPIRE
             }, {
                 BodyPart: 'faceType',
-                ChangeTo: FACE_VAMPIRE
+                ChangeTo: AppearanceDefs.FACE_VAMPIRE
             }
         ];
         if(pure){
@@ -75,7 +76,7 @@ public class VampireBlood extends Consumable {
         } else {
             tfArr.push({
                 BodyPart: 'rearBody',
-                ChangeTo: REAR_BODY_BAT_COLLAR
+                ChangeTo: AppearanceDefs.REAR_BODY_BAT_COLLAR
             });
         }
         changeLimit = 1;

@@ -1,9 +1,10 @@
 ﻿package classes.Scenes.Areas.Desert {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
-	public class NagaScene extends BaseContent{
+public class NagaScene extends BaseContent{
         private var gorgonOrNaga:String = "naga";
         private var location:String = "desert";
 		private var isGorgon:Boolean=false;
@@ -23,7 +24,7 @@ public function nagaEncounter():void {
 	//Create status if needed
 	if(!player.hasStatusEffect(StatusEffects.Naga)) player.createStatusEffect(StatusEffects.Naga,0,0,0,0);
 	clearOutput();
-	if(player.lowerBody == LOWER_BODY_TYPE_NAGA) {
+	if(player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_NAGA) {
 		//Set 'last fuck as naga'
 		player.changeStatusValue(StatusEffects.Naga,1,1);
 		//Not met as naga before
@@ -48,7 +49,7 @@ public function nagaEncounter():void {
 		}
 		outputText("She lets out a soft moan and leans her head forward, pressing her lips against yours. You squeeze her body even more firmly against yours in response, the tips of your tails wrapping around one another. You open your mouth slightly and press your tongue against her lips. She offers no resistance and you begin caressing the inside of her mouth with your tongue, circling her fangs as she uses her own tongue to gently stroke ");
 		//[If player has fangs]
-		if(player.faceType == FACE_SNAKE_FANGS) outputText("your own.");
+		if(player.faceType == AppearanceDefs.FACE_SNAKE_FANGS) outputText("your own.");
 		//[player has no fangs]
 		else outputText("the inside of your mouth.");
 		outputText("\n\n");
@@ -75,19 +76,19 @@ public function nagaEncounter():void {
 				else outputText("they start ");
 				outputText("to grow hard against the naga's soft belly. Feeling this, the naga gently pulls away, slowly letting your tongue out of her mouth as she does so. Her hands make their way over your shoulders, down your abs, and stop at your [cocks].\n\n");
 				//[player has one dick]
-				if(player.totalCocks() == 1) outputText("Gently she starts to stroke the length of your [cock] with one hand while circling the tip with the other. ");
+				if(player.cockTotal() == 1) outputText("Gently she starts to stroke the length of your [cock] with one hand while circling the tip with the other. ");
 				//[player has two dicks]
-				if(player.totalCocks() == 2) outputText("She takes one in each of her hands and gently strokes them up and down. Every few seconds she stops at the tip to rub her palms over them. ");
+				if(player.cockTotal() == 2) outputText("She takes one in each of her hands and gently strokes them up and down. Every few seconds she stops at the tip to rub her palms over them. ");
 				//[player has three or more dicks]
-				if(player.totalCocks() >= 3) outputText("She takes one in each hand, stroking them slowly and making sure to pay attention to the tip. Every so often she switches to a different dick to make sure that each and every one of your throbbing cocks has some love given to them. ");
+				if(player.cockTotal() >= 3) outputText("She takes one in each hand, stroking them slowly and making sure to pay attention to the tip. Every so often she switches to a different dick to make sure that each and every one of your throbbing cocks has some love given to them. ");
 				outputText("A hiss of pleasure escapes your lips as the naga strokes your [cocks], her talented fingers bringing you further into a state of arousal. She stops her caress and brings her hand to a scaly covering at her crotch, spreading it wide to reveal her soft pussy.\n\n");
 
 				//[player has one dick]
-				if(player.totalCocks() == 1) outputText("She carefully lines it up with your member and starts to tease the tip before gently inserting the first few inches. ");
+				if(player.cockTotal() == 1) outputText("She carefully lines it up with your member and starts to tease the tip before gently inserting the first few inches. ");
 				//[player has two dicks]
-				if(player.totalCocks() == 2) outputText("She carefully lines it up with both of your members and starts to tease their tips before gently inserting the first few inches. ");
+				if(player.cockTotal() == 2) outputText("She carefully lines it up with both of your members and starts to tease their tips before gently inserting the first few inches. ");
 				//[player has three or more dicks]
-				if(player.totalCocks() >= 3) outputText("She carefully lines it up with one of your members and starts to tease the tip before gently inserting the first few inches. ");
+				if(player.cockTotal() >= 3) outputText("She carefully lines it up with one of your members and starts to tease the tip before gently inserting the first few inches. ");
 				outputText("She pulls her hips back slightly before pushing them back down, swallowing a bit more of you into her.  As she pulls back the second time, she shifts her arms to rest on your shoulders and grips your back tightly as she pushes you deeper inside of her.\n\n");
 				outputText("Every thrust brings you deeper inside of her pussy, its soft walls massaging you. It seems like her pussy managed to swallow your entire cock in no time at all. The naga pauses for a moment, your hips pressed together, panting. You shift your arms up a little higher to rest at her waist and lower your head to nuzzle at her neck. The naga leans her head into yours and wraps one of her arms around your head. Once more she pulls back her hips before thrusting them back onto your cock. No longer is she slowly bringing you inside her, now she thrusts herself onto you, going faster and faster. Your tails tighten around each other as you reach climax. A sudden yell escapes your throat as you cum inside of her, your tail squeezing hard enough to crush a lesser being. The naga shudders in your grip as she reaches her own climax. ");
 				//[lots of jizz]
@@ -103,7 +104,7 @@ public function nagaEncounter():void {
 		else if(player.hasVagina()) {
 			outputText("The kiss continues and you can feel your " + breastDescript(0) + " pressing against her own. You kiss her harder, pressing your body as close to her as you can, enjoying the feeling of your two bodies entwined together. You wrap your tail around hers, trying to make every part of your body touch every part of hers.  The feeling of her scaled tail rubbing against your body sends shivers of ecstasy down your spine. You pull away from her mouth and move your head to kiss at her neck, ");
 			//(if player has fangs)
-			if(player.faceType == FACE_SNAKE_FANGS) outputText("carefully nibbling at it so as to not break the skin.  ");
+			if(player.faceType == AppearanceDefs.FACE_SNAKE_FANGS) outputText("carefully nibbling at it so as to not break the skin.  ");
 			else outputText("nibbling gently at it.  ");
 			outputText("Traveling down, you pause at her collarbone, letting go of her hips to bring your hands up to her perfectly rounded breasts. A moan escapes the naga's lips as you massage her erect nipples. Your mouth continues its trek down the naga's supple body and you make sure to pause on each breast, circling inward and stopping on each nipple to suck gently on them.\n\n");
  			outputText("Once more your hands move down the naga's body, making their way across her sides as your mouth simultaneously kisses at the smooth flesh of her exposed belly. Goose pimples slowly begin to appear, denoting how much she enjoys it. You pause at her hips, hovering over the slit at her crotch. One of your hands slide down to the slit and you start to stroke at it gently as you kiss at the area around it. Your partner shudders a bit, overcome by the sensations. Slowly you slide a finger into her, hearing a gasp of pleasure as you move it around inside her.  ");
@@ -213,7 +214,7 @@ private function gooNagaRape():void {
     outputText("You pause for a moment, enjoying the sensation of filling someone up with your body, surprised at just how good it feels. Grabbing the " + gorgonOrNaga);
 	outputText("'s hips you slowly push yourself in and out of her now full pussy, ");
 	//(if male)
-	if(player.totalCocks() > 0) {
+	if(player.cockTotal() > 0) {
 		if(player.cockTotal() == 1) outputText("your " + cockDescript(0));
 		else outputText("one of your " + multiCockDescriptLight());
         outputText(" hitting the " + gorgonOrNaga);
@@ -261,7 +262,7 @@ private function gooNagaRape():void {
 	else if(player.gender == 2) {
 		outputText("You shriek in delight as wave after wave of orgasms rush over you");
 		//(if squirter)
-		if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) {
+		if (player.vaginas[0].vaginalWetness == AppearanceDefs.VAGINA_WETNESS_SLAVERING) {
             outputText(", your girlcum gushing out and pooling on the stomach of the " + gorgonOrNaga);
 			outputText("");
 		}
@@ -270,7 +271,7 @@ private function gooNagaRape():void {
 	//(if herm)
 	if(player.gender == 3) {
 		outputText("You scream in ecstasy as you hit your peak, your girlcum ");
-		if(player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLAVERING) outputText("leaking out");
+		if(player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_SLAVERING) outputText("leaking out");
 		else {
             outputText("gushing out to form a pool on the " + gorgonOrNaga);
 			outputText("'s stomach");
@@ -301,7 +302,7 @@ private function nagaVictoryMale():void {
 	clearOutput();
 	player.orgasm();
 	//Male or 50% herms
-	if(player.totalCocks() > 0) {
+	if(player.cockTotal() > 0) {
 		//Centaur
 		if(player.isTaur()) {
             outputText("As your massive bulk looms over the defeated " + gorgonOrNaga);
@@ -523,7 +524,7 @@ private function nagaVictoryGenderless():void {
         outputText("You thrust yourself on top of her and roughly open the scaly covering at her crotch, revealing her awaiting pussy. You bring your mouth over her opening and thrust your tongue deep inside. A mix between a whimper and a moan escapes the " + gorgonOrNaga);
 		outputText("'s lips as you twist your tongue deeper inside her, as though trying to taste every part of her.\n\n");
         //(If player has no fangs)
-		if(player.faceType != FACE_SNAKE_FANGS) {
+		if(player.faceType != AppearanceDefs.FACE_SNAKE_FANGS) {
             outputText("You feel her start to thrust her hips into your face to try to gain more pleasure, but you won't be having ANY of that. You quickly take your tongue out of her and move your way up to her breasts, groping at them and biting at her nipples. The " + gorgonOrNaga);
 			outputText(" cries out in pain and tries to push your head away. You give her one last bite, hard enough to draw blood from her before getting up.\n\n");
             outputText("The " + gorgonOrNaga);
@@ -865,7 +866,7 @@ public function nagaRapeChoice():void {
 	if(player.canOvipositBee() && player.gender > 0) eggs = beePositANagaPlease;
 	if(player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
 		outputText("Your body aches for further satisfaction - do you rape the snake woman?");
-		if(player.lowerBody == LOWER_BODY_TYPE_GOO) {
+		if(player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_GOO) {
 			if (player.gender == 0) simpleChoices("Yes", nagaVictoryGenderless, "Gooey Rape", gooNagaRape, "Lay Eggs", eggs, "", null, "Leave", cleanupAfterCombat);
 			if (player.gender == 1) simpleChoices("Yes", nagaVictoryMale, "Gooey Rape", gooNagaRape, "Lay Eggs", eggs, "", null, "Leave", cleanupAfterCombat);
 			if (player.gender == 2) simpleChoices("Yes", nagaVictoryFemale, "Gooey Rape", gooNagaRape, "Lay Eggs", eggs, "", null, "Leave", cleanupAfterCombat);
@@ -896,29 +897,29 @@ public function nagaPlayerConstrict():void {
 		outputText("You just don't have the energy to wrap yourself so tightly around someone right now...");
 //Gone		menuLoc = 1;
 		menu();
-		addButton(0, "Next", kGAMECLASS.combat.combatMenu, false);
+		addButton(0, "Next", SceneLib.combat.combatMenu, false);
 		return;
 	}
 	//Cannot be used on plural enemies
 	if(monster.plural) {
 		outputText("You launch yourself at " + monster.a + monster.short + ", but with multiple enemies, wrapping one up would leave you completely open to attack.  You hastily slither backwards before you expose yourself to danger.");
 		outputText("\n\n");
-		kGAMECLASS.enemyAI();
-		return;
+        SceneLib.combat.enemyAIImpl();
+        return;
 	}
 	if(monster.short == "pod") {
 		outputText("You can't constrict something you're trapped inside of!");
 //Gone		menuLoc = 1;
 		menu();
-		addButton(0, "Next", kGAMECLASS.combat.combatMenu, false);
+		addButton(0, "Next", SceneLib.combat.combatMenu, false);
 		return;
 	}
 	fatigue(10, USEFATG_PHYSICAL);
 	//Amily!
 	if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 		outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
-		kGAMECLASS.enemyAI();
-		return;
+        SceneLib.combat.enemyAIImpl();
+        return;
 	}
 	//WRAP IT UPPP
 	if(rand(player.spe + 40) > monster.spe) {
@@ -937,25 +938,25 @@ public function nagaPlayerConstrict():void {
 		outputText("You launch yourself at your opponent and attempt to wrap yourself around " + monster.pronoun2 + ". Before you can even get close enough, " +monster.a + monster.short + " jumps out of the way, causing you to fall flat on your face. You quickly pick yourself up and jump back. ");
 		player.takeDamage(5, true);
 		if(player.HP <= 0) {
-			doNext(kGAMECLASS.combat.endHpLoss);
+			doNext(SceneLib.combat.endHpLoss);
 			return;
 		}
 	}
 	outputText("\n\n");
-	kGAMECLASS.enemyAI();
+    SceneLib.combat.enemyAIImpl();
 }
 
 public function naggaSqueeze():void {
 	clearOutput();
 	if (player.fatigue + combat.physicalCost(20) > player.maxFatigue()) {
 		outputText("You are too tired to squeeze " + monster.a + " " + monster.short + ".");
-		addButton(0, "Next", kGAMECLASS.combat.combatMenu, false);
+		addButton(0, "Next", SceneLib.combat.combatMenu, false);
 		return;
 	}
 	//Squeeze -
 	outputText("Your coils wrap tighter around your prey, leaving " + monster.pronoun2 + " short of breath. You can feel it in your tail as " + monster.pronoun3 + " struggles are briefly intensified. ");
 	var damage:int = monster.maxHP() * (.10 + rand(15) / 100);
-	kGAMECLASS.doDamage(damage, true, true);
+	SceneLib.combat.doDamage(damage, true, true);
 	fatigue(20, USEFATG_PHYSICAL);
 	//Enemy faints -
 	if(monster.HP < 1) {
@@ -963,11 +964,11 @@ public function naggaSqueeze():void {
 		if(monster.short == "demons")
 			outputText("The others quickly back off, terrified at the idea of what you might do to them.");
 		outputText("\n\n");
-		doNext(kGAMECLASS.combat.endHpVictory);
+		doNext(SceneLib.combat.endHpVictory);
 		return;
 	}
 	outputText("\n\n");
-	kGAMECLASS.enemyAI();
+    SceneLib.combat.enemyAIImpl();
 }
 //Tease
 public function naggaTease():void {
@@ -986,7 +987,7 @@ public function naggaTease():void {
         enemyAI();
         return;
     }
-    kGAMECLASS.combat.fatigueRecovery();
+    SceneLib.combat.fatigueRecovery();
     var damage:Number;
     var chance:Number = 60;
     var bimbo:Boolean = false;
@@ -1037,16 +1038,16 @@ public function naggaTease():void {
     damage += rand(7);
     //partial skins bonuses
     switch (player.coatType()) {
-        case SKIN_COAT_FUR:
+        case AppearanceDefs.SKIN_COAT_FUR:
             damage += (1 + player.newGamePlusMod());
             break;
-        case SKIN_COAT_SCALES:
+        case AppearanceDefs.SKIN_COAT_SCALES:
             damage += (2 * (1 + player.newGamePlusMod()));
             break;
-        case SKIN_COAT_CHITIN:
+        case AppearanceDefs.SKIN_COAT_CHITIN:
             damage += (3 * (1 + player.newGamePlusMod()));
             break;
-        case SKIN_COAT_BARK:
+        case AppearanceDefs.SKIN_COAT_BARK:
             damage += (4 * (1 + player.newGamePlusMod()));
             break;
     }
@@ -1091,21 +1092,21 @@ public function naggaTease():void {
         }
         monster.teased(monster.lustVuln * damage);
         if (crit == true) outputText(" <b>Critical!</b>");
-        kGAMECLASS.combat.teaseXP(1);
+        SceneLib.combat.teaseXP(1);
     }
     //Nuttin honey
     else {
-        kGAMECLASS.combat.teaseXP(5);
+        SceneLib.combat.teaseXP(5);
         outputText("\n" + monster.capitalA + monster.short + " seems unimpressed.");
     }
     outputText("\n\n");
     //OLD
     //monster.lust += 5 + rand(15);
     if (monster.lust >= monster.maxLust()) {
-        doNext(kGAMECLASS.combat.endLustVictory);
+        doNext(SceneLib.combat.endLustVictory);
         return;
     }
-	kGAMECLASS.enemyAI();
+    SceneLib.combat.enemyAIImpl();
 }
 
 public function nagaLeggoMyEggo():void {
@@ -1113,7 +1114,7 @@ public function nagaLeggoMyEggo():void {
 	outputText("You release " + monster.a + monster.short + " from " + monster.pronoun3 + " bonds, and " + monster.pronoun1 + " drops to the ground, catching " + monster.pronoun3 + " breath before " + monster.pronoun1 + " stands back up, apparently prepared to fight some more.");
 	outputText("\n\n");
 	monster.removeStatusEffect(StatusEffects.Constricted);
-	kGAMECLASS.enemyAI();
+    SceneLib.combat.enemyAIImpl();
 }
 
 

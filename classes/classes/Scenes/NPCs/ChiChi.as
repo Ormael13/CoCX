@@ -4,16 +4,17 @@
  */
 package classes.Scenes.NPCs 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	
-	use namespace kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
+
+use namespace kGAMECLASS;
 	
 	public class ChiChi extends Monster
 	{
-		public var chichiScene:ChiChiFollower = game.chichiScene;
+		public var chichiScene:ChiChiFollower = SceneLib.chichiScene;
 		
 		public function PentaStrike():void {
 			outputText("Chi Chi unleashes a devastating combo at you. ");
@@ -52,11 +53,10 @@ package classes.Scenes.NPCs
 			outputText("<b>There is an obsessed fury about it, like she is determined to defeat you at all cost. Perhaps you should surrender?</b>");
 			createStatusEffect(StatusEffects.DefendMonsterVer, 50, 0.9, 0, 0);
 		}
-		
+
 		override protected function performCombatAction():void {
 			if (this.HPRatio() < 0.5 && !hasStatusEffect(StatusEffects.DefendMonsterVer)) DefensiveStance();
 			else PentaStrike();
-			combatRoundOver();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
@@ -64,13 +64,13 @@ package classes.Scenes.NPCs
 			/*if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] == 2) chichiScene
 			else */chichiScene.WonFirstFight();
 		}
-		
+
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			/*if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] == 2) chichiScene
 			else */chichiScene.LostFirstFight();
 		}
-		
+
 		override public function get long():String {
 			var str:String = "";
 			str += "Chi Chi is a mouse morph albeit a strange one because her fist, tail and even legs are on fire. She has pink fur and bright red hairs which always seems as if about to catch fire. She wears a pair of gauntlet and a qipao characteristic of her homeland.";
@@ -83,15 +83,15 @@ package classes.Scenes.NPCs
 			this.a = "";
 			this.short = "Master Chi Chi of the four winds";
 			this.long = "";
-			createVagina(true,VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_TIGHT);
+			createVagina(true,AppearanceDefs.VAGINA_WETNESS_NORMAL,AppearanceDefs.VAGINA_LOOSENESS_TIGHT);
 			this.createStatusEffect(StatusEffects.BonusVCapacity,60,0,0,0);
 			createBreastRow(Appearance.breastCupInverse("C"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,20,0,0,0);
 			this.tallness = 72;
-			this.hipRating = HIP_RATING_AMPLE+2;
-			this.buttRating = BUTT_RATING_NOTICEABLE+1;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
+			this.buttRating = AppearanceDefs.BUTT_RATING_NOTICEABLE+1;
 			this.skinTone = "light";
 			this.hairColor = "pinkish red";
 			this.hairLength = 13;

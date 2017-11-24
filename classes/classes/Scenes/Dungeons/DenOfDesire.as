@@ -1,17 +1,12 @@
 //Quest Dungeon: Den of Desire (Gargoyle TF Quest)
 package classes.Scenes.Dungeons 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.BaseContent;
-	import classes.Scenes.Dungeons.DungeonAbstractContent;
-	import classes.Scenes.Dungeons.DungeonEngine;
-	import classes.Scenes.Dungeons.DenOfDesire.*;
-	//import classes.Scenes.NPCs.;
-	import classes.PerkLib;
-	
-	public class DenOfDesire extends DungeonAbstractContent
+import classes.EventParser;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Dungeons.DenOfDesire.*;
+
+//import classes.Scenes.NPCs.;
+public class DenOfDesire extends DungeonAbstractContent
 	{
 		private static const DUNGEON_DEN_OF_DESIRE_ENTRANCE:int  			= 64;
 		private static const DUNGEON_DEN_OF_DESIRE_GREAT_HALL_AREA:int  	= 65;
@@ -21,12 +16,12 @@ package classes.Scenes.Dungeons
 		public function DenOfDesire() { }
 		
 		public function enterDungeon():void {
-			kGAMECLASS.inDungeon = true;
-			kGAMECLASS.dungeonLoc = 64;
+			inDungeon = true;
+			dungeonLoc = 64;
 			playerMenu();
 		}
 		public function exitDungeon():void {
-			kGAMECLASS.inDungeon = false;
+			inDungeon = false;
 			clearOutput();
 			outputText("You leave the den behind and take off through the ridge back towards camp.");
 			doNext(camp.returnToCampUseOneHour);
@@ -38,7 +33,7 @@ package classes.Scenes.Dungeons
 			outputText(" \"<i>Sorry, it seems I made yet another victim. It's ok though, you'll get to experience pleasure from the feelings of this body while you’re here. Albeit you'll likely go mad from it before long, as they all have before you.</i>\" She laughs hysterically then jumps back right into the fray.\n\n");
 			outputText("You scream in horror as you finally realize what's happening. The gargoyle didn't just rape you, she literally devoured your soul and now you're stuck for eternity, to be a part of the many victims powering this foul creature’s twisted core!\n\n");
 			//[GAME OVER]
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 		public function defeatedObsidianGargoyle():void {
 			clearOutput();
@@ -71,7 +66,7 @@ package classes.Scenes.Dungeons
 			outputText("Each woman or man you fuck becomes a new demon and each soul you steal fuels you with more power and desire. It is just so good and right to serve.\n\n");
 			outputText("You've long forgotten everything about your past life. You are ‘master’s’ fuck toy and pet now and your only duty and joy is as ‘master’s’ tool, to thoroughly rape anyone who dares to enter these ruins.\n\n");
 			//[GAME OVER]
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 		public function defeatedHeroslayerOmnibus():void {
 			clearOutput();
@@ -89,7 +84,7 @@ package classes.Scenes.Dungeons
 		
 		//Rooms
 		public function roomEntrance():void {
-			kGAMECLASS.dungeonLoc = 64;
+			dungeonLoc = 64;
 			clearOutput();
 			outputText("<b><u>Entrance</u></b>\n");
 			outputText("You stand in what looks like the entrance to some very old ruins, yet for some reason it's uncharacteristically tidy and clean. Likely something lives here, and not something friendly either.");
@@ -97,7 +92,7 @@ package classes.Scenes.Dungeons
 			addButton(11, "Leave", exitDungeon);
 		}
 		public function roomGreatHallArea():void {
-			kGAMECLASS.dungeonLoc = 65;
+			dungeonLoc = 65;
 			clearOutput();
 			outputText("<b><u>Great Hall</u></b>\n");
 			if(flags[kFLAGS.DEN_OF_DESIRE_BOSSES] < 2) {
@@ -113,14 +108,14 @@ package classes.Scenes.Dungeons
 			dungeons.setDungeonButtons(roomLaboratory, roomEntrance, null, null);
 		}
 		public function roomLaboratory():void {
-			kGAMECLASS.dungeonLoc = 66;
+			dungeonLoc = 66;
 			clearOutput();
 			outputText("<b><u>Laboratory</u></b>\n");
 			outputText("This room seems to have served as a laboratory used to perform magical experiments on not so willing test subjects. Many lifeless corpses are stockpiled in a container, likely the bodies of failed experiments.");
 			dungeons.setDungeonButtons(roomHeroSlayerOmnibusRoom, roomGreatHallArea, null, null);
 		}
 		public function roomHeroSlayerOmnibusRoom():void {
-			kGAMECLASS.dungeonLoc = 67;
+			dungeonLoc = 67;
 			clearOutput();
 			outputText("<b><u>Hero slayer omnibus room</u></b>\n");
 			if(flags[kFLAGS.DEN_OF_DESIRE_BOSSES] < 3) {

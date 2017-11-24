@@ -3,13 +3,12 @@
  */
 package classes.Items.Consumables
 {
-	import classes.Items.Consumable;
-	import classes.Items.ConsumableLib;
-	import classes.PerkLib;
-	import classes.Player;
-	import classes.internals.Utils;
+import classes.EngineCore;
+import classes.Items.Consumable;
+import classes.Scenes.SceneLib;
+import classes.internals.Utils;
 
-	public final class GroPlus extends Consumable {
+public final class GroPlus extends Consumable {
 		
 		public function GroPlus() {
 			super("GroPlus", "GroPlus", "a needle filled with Gro+", 50, "This is a small needle with a reservoir full of blue liquid.  A faded label marks it as 'GroPlus'.  Its purpose seems obvious.");
@@ -29,7 +28,7 @@ package classes.Items.Consumables
 			var gpNipples:Function	= (game.player.totalNipples() > 0 ? growPlusNipples : null);
 			clearOutput();
 			outputText("You ponder the needle in your hand knowing it will enlarge the injection site.  What part of your body will you use it on?  ");
-			game.choices("Balls", gpBalls, "Breasts", gpBreasts, "Clit", gpClit, "Cock", gpCock, "Nipples", gpNipples, "", null, "", null, "", null, "", null, "Nevermind", growPlusCancel);
+			EngineCore.choices("Balls", gpBalls, "Breasts", gpBreasts, "Clit", gpClit, "Cock", gpCock, "Nipples", gpNipples, "", null, "", null, "", null, "", null, "Nevermind", growPlusCancel);
 			return(true);
 		}
 		
@@ -49,7 +48,7 @@ package classes.Items.Consumables
 			}
 			if (game.player.ballSize > 10) outputText("Walking gets even tougher with the swollen masses between your legs.  Maybe this was a bad idea.");
 			game.player.dynStats("lus", 10);
-			game.inventory.itemGoNext();
+			SceneLib.inventory.itemGoNext();
 		}
 
 		private function growPlusBreasts():void {
@@ -61,7 +60,7 @@ package classes.Items.Consumables
 			else
 				game.player.growTits(Utils.rand(2) + 1, game.player.breastRows.length, true, 1);
 			game.player.dynStats("lus", 10);
-			game.inventory.itemGoNext();
+			SceneLib.inventory.itemGoNext();
 		}
 
 		private function growPlusClit():void {
@@ -71,7 +70,7 @@ package classes.Items.Consumables
 			game.player.clitLength++;
 			outputText("Your " + game.player.clitDescript() + " stops growing after an inch of new flesh surges free of your netherlips.  It twitches, feeling incredibly sensitive.");
 			game.player.dynStats("sen", 2, "lus", 10);
-			game.inventory.itemGoNext();
+			SceneLib.inventory.itemGoNext();
 		}
 
 		private function growPlusCock():void {
@@ -97,7 +96,7 @@ package classes.Items.Consumables
 				outputText("sheath.");
 			else outputText("crotch.");
 			game.player.dynStats("sen", 2, "lus", 10);
-			game.inventory.itemGoNext();
+			SceneLib.inventory.itemGoNext();
 		}
 
 		private function growPlusNipples():void {
@@ -120,13 +119,13 @@ package classes.Items.Consumables
 				//Talk about if anything was changed.
 				if (nowFuckable) outputText("Your " + game.player.allBreastsDescript() + " tingle with warmth that slowly migrates to your nipples, filling them with warmth.  You pant and moan, rubbing them with your fingers.  A trickle of wetness suddenly coats your finger as it slips inside the nipple.  Shocked, you pull the finger free.  <b>You now have fuckable nipples!</b>\n\n");
 			}
-			game.inventory.itemGoNext();
+			SceneLib.inventory.itemGoNext();
 		}
 
 		private function growPlusCancel():void {
 			clearOutput();
 			outputText("You put the vial away.\n\n");
-			game.inventory.returnItemToInventory(this);
+			SceneLib.inventory.returnItemToInventory(this);
 		}
 	}
 }

@@ -1,9 +1,9 @@
 ﻿package classes.Scenes.Areas.Desert {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Items.Armors.LustyMaidensArmor;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.Armors.LustyMaidensArmor;
 
-	public class SandTrapScene extends BaseContent{
+public class SandTrapScene extends BaseContent{
 		private function get sandTrap():SandTrap{
 			return monster as SandTrap;
 		}
@@ -22,7 +22,7 @@
 public function encounterASandTarp():void {
 	clearOutput();
 	spriteSelect(97);
-	if(flags[kFLAGS.SANDTRAP_LOSS_REPEATS] >= 2 && player.eyeType == EYES_BLACK_EYES_SAND_TRAP && player.wingType == WING_TYPE_GIANT_DRAGONFLY) {
+	if(flags[kFLAGS.SANDTRAP_LOSS_REPEATS] >= 2 && player.eyeType == AppearanceDefs.EYES_BLACK_EYES_SAND_TRAP && player.wingType == AppearanceDefs.WING_TYPE_GIANT_DRAGONFLY) {
 		sandTrapBadEnd();
 		return;
 	}
@@ -130,7 +130,7 @@ public function sandtrapmentLoss(clear:Boolean = false):void {
 		cleanupAfterCombat();
 		return;
 	}
-	if(flags[kFLAGS.SANDTRAP_LOSS_REPEATS] >= 2 && player.eyeType == EYES_BLACK_EYES_SAND_TRAP && player.wingType == WING_TYPE_GIANT_DRAGONFLY) {
+	if(flags[kFLAGS.SANDTRAP_LOSS_REPEATS] >= 2 && player.eyeType == AppearanceDefs.EYES_BLACK_EYES_SAND_TRAP && player.wingType == AppearanceDefs.WING_TYPE_GIANT_DRAGONFLY) {
 		loseLastFightWithSandTrap();
 		return;
 	}
@@ -163,7 +163,7 @@ internal function pcBeatsATrap():void {
 	var bikiniTits:Function = null;
 	if(player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster);
 	//Requirements: Player is naga with tail and fangs, has met desert naga as naga at least once
-	if(player.isNaga() && player.hasStatusEffect(StatusEffects.Naga) && player.gender > 0 && player.faceType == FACE_SNAKE_FANGS) nagaThreeSome = nagaThreesomeWithSandTrap;
+	if(player.isNaga() && player.hasStatusEffect(StatusEffects.Naga) && player.gender > 0 && player.faceType == AppearanceDefs.FACE_SNAKE_FANGS) nagaThreeSome = nagaThreesomeWithSandTrap;
 	
 	//Requires: Penis and str requirement
 	if(player.hasCock() && player.str >= 60) putYourDickInIt = stickWangInSandgina;
@@ -565,7 +565,7 @@ private function nagaThreesomeWithSandTrap():void {
 		//14 inches or more: 
 		else {
 			outputText("\n\nYour [cock] is bigger than what the sandtrap's mouth can accommodate, and it isn't long before you are beginning to push into the creature's tight throat.  It lavishes its oil and saliva onto your straining cock, lying its head back and opening its mouth as wide as it can to aid you in your task, and soon you are ");
-			if(player.skinType == SKIN_TYPE_PLAIN) outputText("beading sweat, ");
+			if(player.skinType == AppearanceDefs.SKIN_TYPE_PLAIN) outputText("beading sweat, ");
 			outputText("pistoning into its submissive opening with fervor, ");
 			if(player.balls > 0) outputText("your [balls] swinging heavily in front of the sandtrap's nose, ");
 			outputText("pushing as much of your lubricated dick down the creature's gullet as you can.");
@@ -678,7 +678,7 @@ private function sandTrapBadEndFinale():void {
 	outputText(".  But, of course, as a fresh dominant urge takes you and drags you reluctantly from your needy genitals, there is much still left to be done.");
 	
 	outputText("\n\nYou spend the rest of your life fulfilling the duties of a Flytrap, leading unsuspecting wanderers of the desert into the grasp of the Sandtraps.  When times are lean you gladly submit to the Sandtraps yourself - gleefully allow them to pump your moist, obedient ass full of eggs.  They don't have to do that too often though, because you quickly become an absolute master at fooling travellers with your looks; able to sense what even the most cautious want to see and becoming it at the twitch of a wing, the ultimate desert mirage.  Before too long the air of Mareth's desert and plains become full of little Flytraps, their reaches treacherously pregnant with shifting Sandtraps, deadly even to the demons; you are joined by many others who willingly submit to the warm oil and the thoughts in the sky.  You have fulfilled your desztiny.");
-	getGame().gameOver();
+	EventParser.gameOver();
 }
 	}
 }

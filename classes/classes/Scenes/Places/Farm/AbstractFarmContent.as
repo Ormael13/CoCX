@@ -3,17 +3,17 @@
  */
 package classes.Scenes.Places.Farm
 {
-	import classes.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.Places.Farm;
+import classes.*;
+import classes.Scenes.Places.Farm;
+import classes.Scenes.SceneLib;
 
-	public class AbstractFarmContent extends BaseContent
+public class AbstractFarmContent extends BaseContent
 	{
 		public function AbstractFarmContent()
 		{
 		}
 		protected function get farm():Farm {
-			return kGAMECLASS.farm;
+			return SceneLib.farm;
 		}
 
 	}

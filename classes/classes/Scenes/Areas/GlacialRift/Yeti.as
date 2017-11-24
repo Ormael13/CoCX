@@ -1,10 +1,11 @@
 package classes.Scenes.Areas.GlacialRift 
 {
-	import classes.*;
-	import classes.internals.WeightedDrop;
-	import classes.GlobalFlags.kFLAGS;
-	
-	public class Yeti extends Monster
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.WeightedDrop;
+
+public class Yeti extends Monster
 	{
 		public var tempSpeedLoss:Number = 0;
 		
@@ -22,15 +23,13 @@ package classes.Scenes.Areas.GlacialRift
 						outputText("<b>He is now stunned.</b>");
 						createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 					}
-					combatRoundOver();
 					return;
 				}
-				outputText("Like a white blur the yeti charges you, striking at you with his claws and slashing over your [armor] before a fist collides with your side, sending you sliding over the icy floor. ")
+				outputText("Like a white blur the yeti charges you, striking at you with his claws and slashing over your [armor] before a fist collides with your side, sending you sliding over the icy floor. ");
 				var damage:Number = str + 25 + rand(50);
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		public function yetiTackleTumble():void {
 			if (player.getEvasionRoll()) {
@@ -47,7 +46,6 @@ package classes.Scenes.Areas.GlacialRift
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);				
 			}
-			combatRoundOver();
 		}
 		public function yetiSnowball():void {
 			if (player.getEvasionRoll()) {
@@ -56,7 +54,6 @@ package classes.Scenes.Areas.GlacialRift
 			else {
 				if (hasStatusEffect(StatusEffects.Blind) && rand(3) > 0) {
 					outputText("The beast takes a step back, mist forming into a ball in his clenched fist. It condenses into a ball before your eyes, and with a growl the beast whips it at you. Blind as he is, the ball ends up missing you and hitting the wall instead.");
-					combatRoundOver();
 					return;
 				}
 				outputText("The beast takes a step back, mist forming into a ball in his clenched fist. It condenses into a ball before your eyes, and with a growl the beast whips it at you. The ball slams into your [armor] and explodes into frost, you hiss at the sting. The frost is also restricting your movement. ");
@@ -69,18 +66,16 @@ package classes.Scenes.Areas.GlacialRift
 				tempSpeedLoss += 10;
 				player.dynStats("spe", -10);
 			}
-			combatRoundOver();
 			//take slight damage, reduce speed
 			//nothing
 		}
 		public function yetiTease():void {
 			//lust increased
 			if (rand(player.lib + player.cor) >= 30 && rand(3) > 0) {
-				outputText("You stare the beast down, though it looks like he’s distracted, with a hand dipping down to fondle his own ballsack. As your eyes follow it, you see a girthy red tip peeking out of his sheath, looking slick and releasing a wisp of steam in the air. Watching something so lewd has brought warmth to your body in this frozen cave, and you begin to wonder if his intentions are to eat or fuck you.")
+				outputText("You stare the beast down, though it looks like he’s distracted, with a hand dipping down to fondle his own ballsack. As your eyes follow it, you see a girthy red tip peeking out of his sheath, looking slick and releasing a wisp of steam in the air. Watching something so lewd has brought warmth to your body in this frozen cave, and you begin to wonder if his intentions are to eat or fuck you.");
 				player.dynStats("lust", 20 + rand(10));
 			}
 			else outputText("The beast before you seems a bit distracted, a hand dipping to fondle his ballsack, but you keep your focus fixed on the monsters face, unwilling to let your guard waver for even a moment.");
-			combatRoundOver();
 		}
 		
 		override protected function performCombatAction():void
@@ -97,13 +92,13 @@ package classes.Scenes.Areas.GlacialRift
 		override public function defeated(hpVictory:Boolean):void
 		{
 			player.dynStats("spe", tempSpeedLoss);
-			game.glacialRift.yetiScene.winAgainstYeti();
+			SceneLib.glacialRift.yetiScene.winAgainstYeti();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			player.dynStats("spe", tempSpeedLoss);
-			game.glacialRift.yetiScene.loseToYeti();
+			SceneLib.glacialRift.yetiScene.loseToYeti();
 		}
 		
 		public function Yeti() 
@@ -118,11 +113,11 @@ package classes.Scenes.Areas.GlacialRift
 			this.ballSize = 2;
 			this.cumMultiplier = 2;
 			createBreastRow(Appearance.breastCupInverse("flat"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = 8*12;
-			this.hipRating = HIP_RATING_BOYISH;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			this.skin.growFur({color:"light"});
 			this.hairColor = "white";
 			this.hairLength = 8;

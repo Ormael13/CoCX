@@ -1,10 +1,9 @@
 package classes.Scenes.Areas.HighMountains 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
 
-	public class PhoenixScene extends BaseContent
+public class PhoenixScene extends BaseContent
 	{
 		//" + (player.cocks.length == 1 ? "": "") + "
 		public function PhoenixScene() 
@@ -41,7 +40,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("Strolling along the mountain path, you spot the familiar Phoenix. You ready your [weapon].");
 			if (flags[kFLAGS.PHOENIX_ENCOUNTERED] == 1) outputText("\n\n\"<i>Back again?</i>\" The phoenix says with a glare. \"<i>But... I guess you're a worthy opponent. Let's see what you're made of!</i>\" The phoenix yells as she readies her scimitar and shield. You assume a combat stance.");
 			else outputText("\n\n\"<i>Back again?</i>\" The phoenix says with a glare. \"<i>Get ready for a rematch!</i>\" The phoenix yells as she readies her scimitar and shield. You assume a combat stance.");
-			flags[kFLAGS.PHOENIX_ENCOUNTERED]++
+			flags[kFLAGS.PHOENIX_ENCOUNTERED]++;
 			startCombat(new Phoenix());
 		}
 		
@@ -65,7 +64,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("Strolling along the vulcanic crag, you spot the familiar Phoenix. You ready your [weapon].");
 			if (flags[kFLAGS.PHOENIX_ENCOUNTERED] == 1) outputText("\n\n\"<i>Back again?</i>\" The phoenix says with a glare. \"<i>But... I guess you're a worthy opponent. Let's see what you're made of!</i>\" The phoenix yells as she readies her scimitar and shield. You assume a combat stance.");
 			else outputText("\n\n\"<i>Back again?</i>\" The phoenix says with a glare. \"<i>Get ready for a rematch!</i>\" The phoenix yells as she readies her scimitar and shield. You assume a combat stance.");
-			flags[kFLAGS.PHOENIX_ENCOUNTERED]++
+			flags[kFLAGS.PHOENIX_ENCOUNTERED]++;
 			startCombat(new Phoenix());
 		}
 		
@@ -133,7 +132,7 @@ package classes.Scenes.Areas.HighMountains
 		
 		public function fuckPhoenixsButt():void {
 			clearOutput();
-			var x:int = player.cockThatFits(monster.analCapacity())
+			var x:int = player.cockThatFits(monster.analCapacity());
 			if (x < 0) x = 0;
 			outputText("With your mind made up, you're definitely in control. You tell the phoenix that you're going to fuck her ass. You quickly yank her scimitar away so she's defenseless and loincloth off to expose her tailhole and firm butt-cheeks. You give her a hard shove on the grounds and step on her back like you're dominating. She gives you a glare and yells, \"<i>I'll never submit to you! I never will!</i>\"");
 			if (player.armorName == "goo armor") outputText("\n\nThe goo opens up to reveal your " + player.cockDescript(x) + ". ");
@@ -310,7 +309,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\n\"<i>The harpy queen will be avenged,</i>\" she says with a glare on your face. She raises her scimitar. You look up at the sharp blade. You clearly know where it's going.");
 			outputText("\n\n\"<i>Hasta la vista, baby!</i>\" These are the last words you hear as the speeding scimitar finally makes contact with your neck.");
 			rawOutputText("\n\n[DATA EXPUNGED]");
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 	}
 

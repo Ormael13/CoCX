@@ -1,11 +1,11 @@
 package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.internals.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
 
-	/**
+/**
 	 * ...
 	 * @author ...
 	 */
@@ -15,7 +15,7 @@ package classes.Scenes.NPCs
 		private function shouldrattack():void {
 			var damage:Number = 0;
 			//return to combat menu when finished
-			doNext(game.playerMenu);
+			doNext(EventParser.playerMenu);
 			//Determine if dodged!
 			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
 				outputText("The girl wades in for a swing, but you deftly dodge to the side. She recovers quickly, spinning back at you.");
@@ -45,7 +45,7 @@ package classes.Scenes.NPCs
 				//(regular attack 1)
 				if(choice == 0) outputText("Ducking in close, the girl thunders a punch against your midsection, leaving a painful sting. ");
 				//(regular attack 2)
-				else if(choice == 1) outputText("The girl feints a charge, leans back, and snaps a kick against your " + kGAMECLASS.hipDescript() + ". You stagger, correct your posture, and plunge back into combat. ");
+				else if(choice == 1) outputText("The girl feints a charge, leans back, and snaps a kick against your " + Appearance.hipDescription(player) + ". You stagger, correct your posture, and plunge back into combat. ");
 				//(regular attack 3)
 				else if(choice == 2) outputText("You momentarily drop your guard as the girl appears to stumble. She rights herself as you step forward and lands a one-two combination against your torso. ");
 				damage = player.takeDamage(damage, true);
@@ -58,7 +58,6 @@ package classes.Scenes.NPCs
 			}
 			statScreenRefresh();
 			outputText("\n");
-			combatRoundOver();
 		}
 
 		//(lust attack 1)
@@ -66,14 +65,12 @@ package classes.Scenes.NPCs
 			if(rand(2) == 0) outputText("The girl spins away from one of your swings, her tunic flaring around her hips. The motion gives you a good view of her firm and moderately large butt. She notices your glance and gives you a little wink.\n");
 			else outputText("The girl's feet get tangled on each other and she tumbles to the ground. Before you can capitalize on her slip, she rolls with the impact and comes up smoothly. As she rises, however, you reel back and raise an eyebrow in confusion; are her breasts FILLING the normally-loose tunic? She notices your gaze and smiles, performing a small pirouette on her heel before squaring up to you again. Your confusion only heightens when her torso comes back into view, her breasts back to their normal proportions. A trick of the light, perhaps? You shake your head and try to fall into the rhythm of the fight.\n");
 			player.dynStats("lus", (8+player.lib/10));
-			combatRoundOver();
 		}
 		//(magic attack)
 		private function shouldraMagicLazers():void {
 			outputText("Falling back a step, the girl raises a hand and casts a small spell. From her fingertips shoot four magic missiles that slam against your skin and cause a surprising amount of discomfort. ");
 			var damage:Number = player.takeMagicDamage(this.inte + rand(10), true);
 			outputText("\n");
-			combatRoundOver();
 		}
 
 		override protected function performCombatAction():void
@@ -86,12 +83,12 @@ package classes.Scenes.NPCs
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.shouldraScene.defeatDannyPhantom();
+			SceneLib.shouldraScene.defeatDannyPhantom();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.shouldraScene.loseToShouldra();
+			SceneLib.shouldraScene.loseToShouldra();
 		}
 
 		public function Shouldra()
@@ -101,15 +98,15 @@ package classes.Scenes.NPCs
 			this.imageName = "shouldra";
 			this.long = "Her face has nothing overly attractive about it; a splash of freckles flits across her cheeks, her brows are too strong to be considered feminine, and her jaw is a tad bit square. Regardless, the features come together to make an aesthetically pleasing countenance, framed by a stylish brown-haired bob. Her breasts are obscured by her grey, loose-fitting tunic, flowing down to reach the middle of her thigh. Her legs are clad in snug, form-fitting leather breeches, and a comfortable pair of leather shoes shield her soles from the potentially harmful environment around her.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_WET, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_WET, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("D"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,40,0,0,0);
 			this.tallness = 65;
-			this.hipRating = HIP_RATING_AMPLE;
-			this.buttRating = BUTT_RATING_AVERAGE+1;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_AVERAGE+1;
 			this.skinTone = "white";
 			this.hairColor = "white";
 			this.hairLength = 3;

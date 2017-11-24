@@ -1,14 +1,16 @@
 package classes.Scenes.Dungeons.D3
 {
-	import classes.BaseContent;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Appearance;
-	import classes.Items.WeaponLib;
-	import classes.StatusEffects;
-	import classes.PerkLib;
-	import classes.PregnancyStore;
+import classes.AppearanceDefs;
+import classes.BaseContent;
+import classes.EventParser;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.WeaponLib;
+import classes.PerkLib;
+import classes.PregnancyStore;
+import classes.Scenes.SceneLib;
+import classes.StatusEffects;
 
-	public class DriderIncubusScenes extends BaseContent
+public class DriderIncubusScenes extends BaseContent
 	{
 		public function DriderIncubusScenes()
 		{
@@ -192,7 +194,7 @@ package classes.Scenes.Dungeons.D3
 			else outputText(" and");
 			outputText(" served in the breeding pits, endlessly fornicating to maintain an army of expendable imps.");
 			outputText("\n\nThe Dark Queen did not forget her favorite prize. At least once a week, time permitting, she would visit the former champion and allow "+ player.mf("him", "her") +" to tend to her endless, corrupted needs. Hours would pass with little more than the friction of a tongue against a slick slit, and the former champion had never been happier.");
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 
 		public function beatTheSpooderbutt(hpVictory:Boolean):void
@@ -288,9 +290,9 @@ package classes.Scenes.Dungeons.D3
 
 		public function afterDriderbuttFight():void
 		{
-			
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
-		}
+
+cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+        }
 
 		public function killDrider():void
 		{
@@ -355,11 +357,10 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\nJust looking at the goblin’s smiling face as you smear it back and forth through puddles of demon-cum has you almost ready to go off. You swat her cushy heiny in between rapid-fire thrusts, wondering if you should keep her while your orgasm rises up like a slumbering beast.");
 
 			//Followers
-			if (getGame().camp.companionsCount() > 0)
-			{
+            if (SceneLib.camp.companionsCount() > 0) {
 				outputText("\n\nYour other follower");
-				if (getGame().camp.companionsCount() > 1) outputText("s");
-				outputText(" wouldn’t mind having a well-practiced goblin cooze around, would they? You certainly wouldn’t.");
+                if (SceneLib.camp.companionsCount() > 1) outputText("s");
+                outputText(" wouldn’t mind having a well-practiced goblin cooze around, would they? You certainly wouldn’t.");
 			}
 			//No Followers
 			else
@@ -623,7 +624,7 @@ package classes.Scenes.Dungeons.D3
 
 			outputText("You push the goblin aside and");
 			if (player.isNaga()) outputText(" slither");
-			else if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) outputText(" clop");
+			else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HOOFED) outputText(" clop");
 			else outputText(" stride");
 			outputText(" victoriously toward your prize, still hard and jutting, polished to a mirror sheen by the goblin’s vigorous, mid-fight fucking. Trickles of pearlescent pre-cum spill from the tip the moment your eyes fix upon it. The mere sight is enough to conjure the taste to your tongue, and the needy whines from the fallen goblin whore beside you spur you forward.");
 			if (player.cor <= 33) outputText(" You feel a little guilty, about to copulate with a demon to better slay another. You’re supposed to be a force of purity, not stuffing a hot, throbbing, demonic dick inside yourself in Lethice’s throneroom, but you can’t see any better way to ensure you’re fully sated before the next confrontation.");

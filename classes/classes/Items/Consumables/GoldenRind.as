@@ -1,7 +1,9 @@
 package classes.Items.Consumables 
 {
-	import classes.Items.*;
-	/**
+import classes.Items.*;
+import classes.Scenes.SceneLib;
+
+/**
 	 * Golden Rind/Deer TF, part of the Wild Hunt by Frogapus
 	 * @author Kitteh6660
 	 */
@@ -15,9 +17,9 @@ package classes.Items.Consumables
 		
 		override public function useItem():Boolean {
 			outputText("You pop the sliver of fruit in your mouth, delighting in the sweetness and tanginess as you chew it.  A burst of lime-like tartness slaps your senses, and you feel an answering tingle further down in your body.");
-			getGame().player.refillHunger(10);
-			getGame().forest.erlkingScene.deerTFs();
-			return false;
+            player.refillHunger(10);
+            SceneLib.forest.erlkingScene.deerTFs();
+            return false;
 		}
 	}
 

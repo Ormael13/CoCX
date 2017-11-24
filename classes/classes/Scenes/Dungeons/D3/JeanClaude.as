@@ -1,11 +1,11 @@
 package classes.Scenes.Dungeons.D3 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.Items.*
-	import classes.GlobalFlags.kFLAGS;
-	
-	/**
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.*;
+import classes.Scenes.SceneLib;
+
+/**
 	 * ...
 	 * @author Gedan
 	 */
@@ -16,7 +16,6 @@ package classes.Scenes.Dungeons.D3
 			outputText("The monstrous basilisk suddenly lunges forward, snarling wordlessly as he swings his cutlass at you twice, the blows of a savage yet expert swordsman.\n\n");
 			createStatusEffect(StatusEffects.Attacks, 2, 0, 0, 0);
 			eAttack();
-			combatRoundOver();
 		}
 		
 		override public function doAI():void
@@ -26,12 +25,12 @@ package classes.Scenes.Dungeons.D3
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.d3.jeanClaude.beatDaFuckhugeBasilisk(hpVictory);
+			SceneLib.d3.jeanClaude.beatDaFuckhugeBasilisk(hpVictory);
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.d3.jeanClaude.fuckhugeBasiliskFuckedYouUp(hpVictory);
+			SceneLib.d3.jeanClaude.fuckhugeBasiliskFuckedYouUp(hpVictory);
 		}
 		
 		public function handleTease(lustDelta:Number, successful:Boolean):void
@@ -93,13 +92,13 @@ package classes.Scenes.Dungeons.D3
 			tallness = 86;
 			ass.analLooseness = 0;
 			ass.analWetness = 0;
-			hipRating = HIP_RATING_AVERAGE;
-			buttRating = BUTT_RATING_AVERAGE;
-			lowerBody = LOWER_BODY_TYPE_LIZARD;
+			hipRating = AppearanceDefs.HIP_RATING_AVERAGE;
+			buttRating = AppearanceDefs.BUTT_RATING_AVERAGE;
+			lowerBody = AppearanceDefs.LOWER_BODY_TYPE_LIZARD;
 			skinDesc = "green-purple mottled hide";
 			initStrTouSpeInte(100, 200, 110, 70);
 			initWisLibSensCor(70, 40, 40, 80);
-			faceType = FACE_LIZARD;
+			faceType = AppearanceDefs.FACE_LIZARD;
 			weaponName = "cutlass";
 			weaponVerb = "slash";
 			weaponAttack = 25;

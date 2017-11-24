@@ -4,13 +4,12 @@
  */
 package classes.Scenes.Areas.Forest 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.StatusEffects;
-	import classes.BodyParts.Skin;
-	import classes.Items.MutationsHelper;
+import classes.*;
+import classes.BodyParts.Skin;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.MutationsHelper;
 
-	public class WorldTree extends BaseContent
+public class WorldTree extends BaseContent
 	{
 		public var mutations:MutationsHelper = new MutationsHelper();
 		
@@ -231,11 +230,11 @@ package classes.Scenes.Areas.Forest
 				}
 			}
 			//{hair exists, no leaves/tentacle hair: leaves/tentacle hair tf}
-			if (player.hairColor == "green" && player.hairLength > 0 && (player.hairType != HAIR_LEAF && player.hairType != HAIR_GRASS && player.hairType != HAIR_ANEMONE) && !player.isGargoyle() && changes < changeLimit)
+			if (player.hairColor == "green" && player.hairLength > 0 && (player.hairType != AppearanceDefs.HAIR_LEAF && player.hairType != AppearanceDefs.HAIR_GRASS && player.hairType != AppearanceDefs.HAIR_ANEMONE) && !player.isGargoyle() && changes < changeLimit)
 			{
 				if (player.cor >= 66) {
 					outputText("Your balance slides way off, and you plop down on the ground as mass concentrates on your head.  Reaching up, you give a little shriek as you feel a disturbingly thick, squirming thing where your hair should be.  Pulling it down in front of your eyes, you notice it's still attached to your head; what's more, it's the same color as your hair used to be.  <b>You now have squirming tentacles in place of hair!</b>  As you gaze at it, a gentle heat starts to suffuse your hand.  The tentacles must be developing their characteristic stingers!  You quickly let go; you'll have to take care to keep them from rubbing on your skin at all hours.  On the other hand, they're quite short and you find you can now flex and extend them as you would any other muscle, so that shouldn't be too hard.  You settle on a daring, windswept look for now.");
-					player.hairType = HAIR_ANEMONE;
+					player.hairType = AppearanceDefs.HAIR_ANEMONE;
 					player.hairLength = 5;
 					if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
 						outputText("  <b>(Your hair has stopped growing.)</b>\n\n");
@@ -245,7 +244,7 @@ package classes.Scenes.Areas.Forest
 				if (player.cor >= 33 && player.cor < 66) {
 					if (rand(2) == 0) {
 						outputText("Your balance slides way off, and you plop down on the ground as mass concentrates on your head.  Reaching up, you give a little shriek as you feel a disturbingly thick, squirming thing where your hair should be.  Pulling it down in front of your eyes, you notice it's still attached to your head; what's more, it's the same color as your hair used to be.  <b>You now have squirming tentacles in place of hair!</b>  As you gaze at it, a gentle heat starts to suffuse your hand.  The tentacles must be developing their characteristic stingers!  You quickly let go; you'll have to take care to keep them from rubbing on your skin at all hours.  On the other hand, they're quite short and you find you can now flex and extend them as you would any other muscle, so that shouldn't be too hard.  You settle on a daring, windswept look for now.");
-						player.hairType = HAIR_ANEMONE;
+						player.hairType = AppearanceDefs.HAIR_ANEMONE;
 						player.hairLength = 5;
 						if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
 							outputText("  <b>(Your hair has stopped growing.)</b>\n\n");
@@ -255,22 +254,22 @@ package classes.Scenes.Areas.Forest
 					else {
 						if (rand(2) == 0) {
 							outputText("Your [hair] begins to fall out in clumps, eventually leaving your scalp completely bald.  Although, thankfully, it does not remain like that for long.  Within moments a full head of grass sprouts from the skin of your scalp, protecting it from the chilly wind which was starting to annoy you.  You run your hands through your newly grown hair-like grass, stifling a moan at how sensitive the thousands of long, soft and leafy blades that replaced your hair are.  <b>Your hair has been replaced by grass, your scalp is now covered with soft blades of verdant greenery...</b>\n\n");
-							player.hairType = HAIR_GRASS;
+							player.hairType = AppearanceDefs.HAIR_GRASS;
 						}
 						else {
 							outputText("Your [hair] begins to fall out in globs, eventually leaving you with a bald head.  Your head is not left bald for long, though.  Within moments, a full head of leaf sprouts from the skin of your scalp.  You run your hands through your new growth, sighing at the pleasure of being able to feel each individual leaf.  <b>Your hair turned into thin leafs replacing your current hair!</b>\n\n");
-							player.hairType = HAIR_LEAF;
+							player.hairType = AppearanceDefs.HAIR_LEAF;
 						}
 					}
 				}
 				if (player.cor < 33) {
 					if (rand(2) == 0) {
 						outputText("Your [hair] begins to fall out in clumps, eventually leaving your scalp completely bald.  Although, thankfully, it does not remain like that for long.  Within moments a full head of grass sprouts from the skin of your scalp, protecting it from the chilly wind which was starting to annoy you.  You run your hands through your newly grown hair-like grass, stifling a moan at how sensitive the thousands of long, soft and leafy blades that replaced your hair are.  <b>Your hair has been replaced by grass, your scalp is now covered with soft blades of verdant greenery...</b>\n\n");
-						player.hairType = HAIR_GRASS;
+						player.hairType = AppearanceDefs.HAIR_GRASS;
 					}
 					else {
 						outputText("Your [hair] begins to fall out in globs, eventually leaving you with a bald head.  Your head is not left bald for long, though.  Within moments, a full head of leaf sprouts from the skin of your scalp.  You run your hands through your new growth, sighing at the pleasure of being able to feel each individual leaf.  <b>Your hair turned into thin leafs replacing your current hair!</b>\n\n");
-						player.hairType = HAIR_LEAF;
+						player.hairType = AppearanceDefs.HAIR_LEAF;
 					}
 				}
 				changes++;
@@ -283,43 +282,43 @@ package classes.Scenes.Areas.Forest
 			}
 			//Vines/tentacles arms
 			if (player.cor >= 66) {
-				if (player.armType != ARM_TYPE_PLANT2 && changes < changeLimit) {
+				if (player.armType != AppearanceDefs.ARM_TYPE_PLANT2 && changes < changeLimit) {
 					outputText("You watch, spellbound, while your arms gradually change their entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.Looking over them you can see veined, vaguely phallic vines wrapping their way around your entire arm, in a manner that is decorative but oddly perverse. They remind you of the tentacle monsters in the forest...  <b>You now have tentacle-covered arms.</b>\n\n");
-					player.armType = ARM_TYPE_PLANT2;
+					player.armType = AppearanceDefs.ARM_TYPE_PLANT2;
 					changes++;
 				}
 			}
 			if (player.cor >= 33 && player.cor < 66) {
 				if (rand(2) == 0) {
-					if (player.armType != ARM_TYPE_PLANT2 && changes < changeLimit) {
+					if (player.armType != AppearanceDefs.ARM_TYPE_PLANT2 && changes < changeLimit) {
 						outputText("You watch, spellbound, while your arms gradually change their entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.Looking over them you can see veined, vaguely phallic vines wrapping their way around your entire arm, in a manner that is decorative but oddly perverse. They remind you of the tentacle monsters in the forest...  <b>You now have tentacle-covered arms.</b>\n\n");
-						player.armType = ARM_TYPE_PLANT2;
+						player.armType = AppearanceDefs.ARM_TYPE_PLANT2;
 						changes++;
 					}
 				}
 				else {
-					if (player.armType != ARM_TYPE_PLANT && changes < changeLimit) {
+					if (player.armType != AppearanceDefs.ARM_TYPE_PLANT && changes < changeLimit) {
 						outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.  Looking on them you can see a thin, delicate vines, with spade-shaped leaves unfolding from them as they curl snugly around your biceps and deltoids all the way down to your wrists. <b>You now have vine-covered arms.</b>\n\n");
-						player.armType = ARM_TYPE_PLANT;
+						player.armType = AppearanceDefs.ARM_TYPE_PLANT;
 						changes++;
 					}
 				}
 			}
 			if (player.cor < 33) {
-				if (player.armType != ARM_TYPE_PLANT && changes < changeLimit) {
+				if (player.armType != AppearanceDefs.ARM_TYPE_PLANT && changes < changeLimit) {
 					outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.  Looking on them you can see a thin, delicate vines, with spade-shaped leaves unfolding from them as they curl snugly around your biceps and deltoids all the way down to your wrists. <b>You now have vine-covered arms.</b>\n\n");
-					player.armType = ARM_TYPE_PLANT;
+					player.armType = AppearanceDefs.ARM_TYPE_PLANT;
 					changes++;
 				}
 			}
 			//Cockvine wings
-			if ((player.armType == ARM_TYPE_PLANT || player.armType == ARM_TYPE_PLANT2) && player.wingType != WING_TYPE_PLANT && player.lowerBody != LOWER_BODY_TYPE_PLANT_FLOWER && changes < changeLimit && rand(3) == 0) {
-				if (player.wingType != WING_TYPE_NONE) {
+			if ((player.armType == AppearanceDefs.ARM_TYPE_PLANT || player.armType == AppearanceDefs.ARM_TYPE_PLANT2) && player.wingType != AppearanceDefs.WING_TYPE_PLANT && player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER && changes < changeLimit && rand(3) == 0) {
+				if (player.wingType != AppearanceDefs.WING_TYPE_NONE) {
 					outputText("Your old wings are drooping leaving your back as smooth and unbroken as the day you entered the portal. But this state not last long.\n\n");
 				}
 				outputText("Pressure is building in multiple spots on your upper back. It feels more like several over-eager erections trapped in incredibly tight undies. You can’t help but groan with relief when finally the pressure peaks and many thick protrusions burst impatiently out of your [skin.type]. The hot, thick, vine-like growths thrust their way into being, feet of oily green tentacles, alarmingly energetic and prehensile, thrashing around your " + hipDescript() + ".");
 				outputText(" After a moment of concentration you cause one of these growths to rear around into your hand to take a closer look at it. It feels unmistakably dick-like - bulging, tender flesh under the fibrous skin, with quite a bit of flexible, able to bend all along its length and dart its wet, distended head in any direction you wish. <b>You now have cockvine wings.</b>\n\n");
-				player.wingType = WING_TYPE_PLANT;
+				player.wingType = AppearanceDefs.WING_TYPE_PLANT;
 				changes++;
 			}
 			//Bark claws
@@ -329,50 +328,50 @@ package classes.Scenes.Areas.Forest
 		//		changes++;
 		//	}
 			//Root claws
-			if (player.wingType == WING_TYPE_PLANT && player.lowerBody != LOWER_BODY_TYPE_YGG_ROOT_CLAWS && changes < changeLimit) {
+			if (player.wingType == AppearanceDefs.WING_TYPE_PLANT && player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_YGG_ROOT_CLAWS && changes < changeLimit) {
 				outputText("You lose your balance and fall to the ground as your feet begin to contort. You watch as your roots rearrange into a more solid configuration. <b>Your roots have assumed the form of three-toed, clawed feet, complete with a small vestigial claw-toe on the back for added grip.</b>\n\n");
-				player.lowerBody = LOWER_BODY_TYPE_YGG_ROOT_CLAWS;
+				player.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_YGG_ROOT_CLAWS;
 				if (player.legCount != 2) player.legCount = 2;
 				changes++;//player.armType == ARM_TYPE_ORCA && 
 			}
 			//Plant Dragon face
-			if (player.lowerBody == LOWER_BODY_TYPE_YGG_ROOT_CLAWS && player.faceType != FACE_PLANT_DRAGON && changes < changeLimit) {
+			if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_YGG_ROOT_CLAWS && player.faceType != AppearanceDefs.FACE_PLANT_DRAGON && changes < changeLimit) {
 				outputText("The familiar tingle of transformation spreads across your face. Your ");
 				if (player.hasMuzzle()) outputText("muzzle");
 				else outputText("face");
 				outputText(" shifts into a vaguely triangular shape, something that would look at home on a predatory reptile...  or a dragon. You feel pride swell within you as you look at your reflection inh a puddle at your feet, your new look now resembles a majestic creature of the old myths. <b>Your face is now a dragonlike muzzle!</b>\n\n");
-				player.faceType = FACE_PLANT_DRAGON;
+				player.faceType = AppearanceDefs.FACE_PLANT_DRAGON;
 				changes++;
 			}
 			//Plant dragon tail
-			if (player.faceType == FACE_PLANT_DRAGON && player.tailType != TAIL_TYPE_YGGDRASIL && changes < changeLimit) {
+			if (player.faceType == AppearanceDefs.FACE_PLANT_DRAGON && player.tailType != AppearanceDefs.TAIL_TYPE_YGGDRASIL && changes < changeLimit) {
 				outputText("You feel a weird sensation in your ");
-				if (player.tailType > TAIL_TYPE_NONE) {
+				if (player.tailType > AppearanceDefs.TAIL_TYPE_NONE) {
 					outputText("tail");
 					if (player.tailCount > 1) outputText("s");
 				}
 				else outputText("tailbone");
 				outputText(". It kind of feels cool, pleasurable and makes you queasy all at once. Suddenly, ");
-				if (player.tailType > TAIL_TYPE_NONE) outputText("it begins to twist and writhe as the odd sensation intensifies.  Before your eyes, it twists into a reptilian appendage");
+				if (player.tailType > AppearanceDefs.TAIL_TYPE_NONE) outputText("it begins to twist and writhe as the odd sensation intensifies.  Before your eyes, it twists into a reptilian appendage");
 				else outputText("your tailbone erupts and elongates into a new limb, your new tail");
 				outputText(". Long, thin, prehensile, good for maintaining your balance. As if in conclusion, a leaf suddenly sprouts from the tip of your tail. <b>You now have a leaf-tipped reptilian tail!</b>\n\n");
-				player.tailType = TAIL_TYPE_YGGDRASIL;
+				player.tailType = AppearanceDefs.TAIL_TYPE_YGGDRASIL;
 				if (player.tailCount != 1) player.tailCount = 1;
 				changes++;
 			}
 			//Moss (fur)/else Bark skin
-			if ((player.skinType != SKIN_TYPE_BARK || player.skinType != SKIN_TYPE_PARTIAL_BARK) && !player.isGargoyle() && changes < changeLimit && player.faceType == FACE_PLANT_DRAGON) {
+			if ((player.skinType != AppearanceDefs.SKIN_TYPE_BARK || player.skinType != AppearanceDefs.SKIN_TYPE_PARTIAL_BARK) && !player.isGargoyle() && changes < changeLimit && player.faceType == AppearanceDefs.FACE_PLANT_DRAGON) {
 				if (player.hasFur()) outputText("You scratch yourself, and come away with a large clump of " + player.coatColor + " fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, removing the fur to see the changes beneath.");
 				else outputText("You idly scratch an itch, but recoil when you feel the wrong texture in the wrong place.");
 				outputText(" You watch as flakes of skin peel away to reveal...  scales?  On closer examination, it appears that your “scales” are actually some form of bark. <b>You are now covered by scale-like bark from head to toe.</b>\n\n");
-				player.skin.growCoat(SKIN_COAT_SCALES,{color:"mahogany",adj:"bark-like"},Skin.COVERAGE_COMPLETE);
+				player.skin.growCoat(AppearanceDefs.SKIN_COAT_SCALES,{color:"mahogany",adj:"bark-like"},Skin.COVERAGE_COMPLETE);
 				changes++;	
 			}
-			if (player.earType != EARS_LIZARD && player.tailType == TAIL_TYPE_YGGDRASIL && player.lowerBody == LOWER_BODY_TYPE_YGG_ROOT_CLAWS && changes < changeLimit) {
+			if (player.earType != AppearanceDefs.EARS_LIZARD && player.tailType == AppearanceDefs.TAIL_TYPE_YGGDRASIL && player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_YGG_ROOT_CLAWS && changes < changeLimit) {
 				outputText("All around you, a omnipresent buzzing is gradually becoming louder and louder.  Suddenly, you realize that it’s become painfully loud, the force of the sound making your eardrums throb painfully.  You attempt to block the sound with your ears, but your hands can’t find any ears to plug!  Suddenly, the buzzing stops, and the ringing in your ears begins to subside.  Probing the side of your head with your hands, you realize that your ears have become ");
 				if (player.hasFur() || player.hairLength > 0) outputText("discreet ");
 				outputText("earholes onthe side of your head. <b>You now have lizardlike ears.</b>\n\n");
-				player.earType = EARS_LIZARD;
+				player.earType = AppearanceDefs.EARS_LIZARD;
 				changes++;
 			}
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;

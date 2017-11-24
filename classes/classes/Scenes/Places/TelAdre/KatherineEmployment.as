@@ -1,9 +1,10 @@
 package classes.Scenes.Places.TelAdre{
-	import classes.*;
-	import classes.GlobalFlags.*;
-	import classes.Scenes.NPCs.Urta;
+import classes.*;
+import classes.GlobalFlags.*;
+import classes.Scenes.NPCs.Urta;
+import classes.Scenes.SceneLib;
 
-	public class KatherineEmployment extends TelAdreAbstractContent {
+public class KatherineEmployment extends TelAdreAbstractContent {
 		//This class holds all the employment quest specific content for Katherine. It's split off to reduce the size of Katherine.as
 
 		private static const KBIT_TRAINING_TALK_EDRYN:int	=    4;
@@ -19,7 +20,7 @@ package classes.Scenes.Places.TelAdre{
 
 		public function get threesome():KatherineThreesome { return telAdre.katherineThreesome; }
 
-		public function get urta():Urta { return kGAMECLASS.urta; }
+		public function get urta():Urta { return SceneLib.urta; }
 
 		public function employmentTalk():void
 		{
@@ -120,7 +121,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("You smile and thank the centauress for her help.  “<i>It was nothing,</i>” she replies, looking quite pleased at your thanks all the same.\n\n");
 			flags[kFLAGS.KATHERINE_TRAINING] |= KBIT_TRAINING_TALK_EDRYN; //Using a mask so it doesn’t matter what order you talk to Edryn and Urta in
 			var cockFitIndex:int = player.cockThatFits(300);
-			if ((cockFitIndex >= 0 && player.cockArea(cockFitIndex) >= 24) && (player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.horseCocks() > 0 || player.cor > 50 || player.statusEffectv1(StatusEffects.Edryn) > 0)) {
+			if ((cockFitIndex >= 0 && player.cockArea(cockFitIndex) >= 24) && (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HOOFED || player.horseCocks() > 0 || player.cor > 50 || player.statusEffectv1(StatusEffects.Edryn) > 0)) {
 				outputText("“<i>So... I don’t suppose there’s anything else you might have on your mind...?</i>”  She gives you a coy look and fiddles with a nipple through her shirt.");
 				doYesNo((edryn.pregnancy.isPregnant ? pregnantEdrynSexSelector : edryn.edrynSexSelecter), telAdre.barTelAdre);
 			}
@@ -658,7 +659,7 @@ package classes.Scenes.Places.TelAdre{
 			if (silly()) {
 				outputText("You joke that maybe you should get your ghostbusting gear?  Just in case?\n\n");
 				outputText("“<i>There’s no such thing as ghosts!</i>” Urta snaps.");
-				if (kGAMECLASS.shouldraFollower.followerShouldra()) {
+				if (SceneLib.shouldraFollower.followerShouldra()) {
 					outputText("You would beg to differ, you happen to not only know one... but is also carrying one right at this instant...\n\n");
 					outputText("“<i>Oh? So why doesn’t he come out and say hello, huh?</i>” Urta snarks, clearly feeling very put out.\n\n");
 					outputText("“<i>Don’t mind if I do!</i>” an ethereal voice replies out of your chest.  A familiar face emerges, grinning widely.  “<i>Boo,</i>” Shouldra states, simply.\n\n");

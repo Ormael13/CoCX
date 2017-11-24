@@ -38,7 +38,7 @@ package classes.Items.Armors
 		override public function get description():String {
 			var desc:String = _description;
 			//Type
-			desc += "\n\nType: "
+			desc += "\n\nType: ";
 			if (name.indexOf("armor") >= 0 || name.indexOf("armour") >= 0 || name.indexOf("chain") >= 0 || name.indexOf("mail") >= 0 || name.indexOf("plates") >= 0) {
 				desc += "Armor ";
 				if (perk == "Light" || perk == "Medium") {

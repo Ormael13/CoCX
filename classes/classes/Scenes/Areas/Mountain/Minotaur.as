@@ -1,11 +1,12 @@
 ﻿package classes.Scenes.Areas.Mountain
 {
 
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
 
-	/**
+/**
 	 * ...
 	 * @author Fake-Name
 	 */
@@ -21,9 +22,9 @@
 			if(hasStatusEffect(StatusEffects.PhyllaFight)) {
 				removeStatusEffect(StatusEffects.PhyllaFight);
 				outputText("You defeat a minotaur!  ", true);
-				game.desert.antsScene.phyllaBeatAMino();
+				SceneLib.desert.antsScene.phyllaBeatAMino();
 			} else {
-				game.mountain.minotaurScene.minoVictoryRapeChoices();
+				SceneLib.mountain.minotaurScene.minoVictoryRapeChoices();
 			}
 		}
 
@@ -31,12 +32,12 @@
 		{
 			if(hasStatusEffect(StatusEffects.PhyllaFight)) {
 				removeStatusEffect(StatusEffects.PhyllaFight);
-				game.desert.antsScene.phyllaPCLostToMino();
+				SceneLib.desert.antsScene.phyllaPCLostToMino();
 			} else if (pcCameWorms){
 				outputText("\n\nThe minotaur picks you up and forcibly tosses you from his cave, grunting in displeasure.");
-				game.cleanupAfterCombat();
+				cleanupAfterCombat();
 			} else
-				game.mountain.minotaurScene.getRapedByMinotaur();
+				SceneLib.mountain.minotaurScene.getRapedByMinotaur();
 		}
 
 		override public function get long():String
@@ -65,20 +66,20 @@
 			this.cumMultiplier = 1.5;
 			this.hoursSinceCum = this.ballSize * 10;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = rand(37) + 84;
-			this.hipRating = HIP_RATING_AVERAGE;
-			this.buttRating = BUTT_RATING_AVERAGE;
-			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
+			this.hipRating = AppearanceDefs.HIP_RATING_AVERAGE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_AVERAGE;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
 			this.skin.growFur({color:furColor});
 			this.skinDesc = "shaggy fur";
 			this.hairColor = furColor;
 			this.hairLength = 3;
 			initStrTouSpeInte(hasAxe ? 100 : 75, 70, 35, 20);
 			initWisLibSensCor(20, 40 + this.ballSize * 2, 15 + this.ballSize * 2, 35);
-			this.faceType = FACE_COW_MINOTAUR;
+			this.faceType = AppearanceDefs.FACE_COW_MINOTAUR;
 			this.weaponName = hasAxe?"axe":"fist";
 			this.weaponVerb = hasAxe?"cleave":"punch";
 			this.weaponAttack = hasAxe?50:40;
@@ -98,8 +99,8 @@
 						.add(consumables.MINOBLO, 1 / 2)
 						.elseDrop(null);
 			}
-			this.special1 = game.mountain.minotaurScene.minoPheromones;
-			this.tailType = TAIL_TYPE_COW;
+			this.special1 = SceneLib.mountain.minotaurScene.minoPheromones;
+			this.tailType = AppearanceDefs.TAIL_TYPE_COW;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			checkMonster();
 		}

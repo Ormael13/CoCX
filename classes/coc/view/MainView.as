@@ -80,7 +80,7 @@ public class MainView extends Block {
 	public static const MENU_APPEARANCE:String = 'appearance';
 
 
-	internal static const GAP:Number   = 4; // Gap between UI panels
+	public static const GAP:Number   = 4; // Gap between UI panels
 	internal static const BTN_W:Number = 150; // Button size
 	internal static const BTN_H:Number = 40;
 
@@ -135,6 +135,10 @@ public class MainView extends Block {
 	internal static const BOTTOM_W:Number         = TEXTZONE_W; // width = textzone width
 	internal static const BOTTOM_HGAP:Number      = (BOTTOM_W - BTN_W * BOTTOM_COLS) / (2 * BOTTOM_COLS); // between btns
 	internal static const BOTTOM_Y:Number         = SCREEN_H - BOTTOM_H; // bottom = screen bottom
+	internal static const MONSTER_X:Number        = TEXTZONE_X + MainView.TEXTZONE_W + GAP;
+	internal static const MONSTER_Y:Number        = TEXTZONE_Y;
+	internal static const MONSTER_W:Number        = SCREEN_W - MONSTER_X;
+	internal static const MONSTER_H:Number        = TEXTZONE_H;
 
 	private var blackBackground:BitmapDataSprite;
 	public var textBGWhite:BitmapDataSprite;
@@ -150,6 +154,7 @@ public class MainView extends Block {
 
 	public var toolTipView:ToolTipView;
 	public var statsView:StatsView;
+	public var monsterStatsView:MonsterStatsView;
 	public var sideBarDecoration:Sprite;
 
 	private var _onBottomButtonClick:Function;//(index:int)=>void
@@ -285,16 +290,20 @@ public class MainView extends Block {
 				font: 'Arial'
 			}
 		});
-		addElement(sprite = new BitmapDataSprite({
-			x      : SPRITE_X,
-			y      : SPRITE_Y,
-			stretch: true
-		}));
 		// Init subviews.
 		this.statsView = new StatsView(this/*, this.model*/);
 		this.statsView.hide();
 		this.addElement(this.statsView);
 
+		this.monsterStatsView = new MonsterStatsView(this);
+		this.monsterStatsView.hide();
+		this.addElement(this.monsterStatsView);
+		
+		addElement(sprite = new BitmapDataSprite({
+			x      : SPRITE_X,
+			y      : SPRITE_Y,
+			stretch: true
+		}));
 
 		this.formatMiscItems();
 

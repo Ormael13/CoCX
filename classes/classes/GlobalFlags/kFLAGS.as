@@ -2992,7 +2992,7 @@ public static const SPRITE_STYLE:int                                            
 public static const AUTO_LEVEL:int                                                  = 2984; // 1 if automatic leveling is enabled.
 public static const SFW_MODE:int                                                    = 2985; // 1 if SFW is enabled.
 public static const WATERSPORTS_ENABLED:int                                         = 2986; // 1 if watersport scenes are enabled.
-public static const USE_METRICS:int                                                 = 2987; // 0 for imperial, 1 for metric.
+public static const USE_METRICS:int                                                 = 2987; // No longer used. Previously: 0 for imperial, 1 for metric.
 public static const USE_OLD_FONT:int                                                = 2988; // Side bar font.
 public static const BACKGROUND_STYLE:int                                            = 2989; // Background theme.
 public static const GAME_DIFFICULTY:int                                             = 2990; // 0 is normal, 1 is hard, 2 is nightmare, 3 is extreme. Affects HP and damage.

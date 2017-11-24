@@ -1,13 +1,14 @@
 package classes.Scenes.Dungeons.Factory
 {
-	import classes.*;
-	import classes.Scenes.Dungeons.Factory;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Dungeons.Factory;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
 
-	public class OmnibusOverseer extends Monster
+public class OmnibusOverseer extends Monster
 	{
-		public var factory:Factory = new Factory()
+		public var factory:Factory = new Factory();
 		private var temp:Number = 0;
 		
 		override public function defeated(hpVictory:Boolean):void
@@ -19,7 +20,7 @@ package classes.Scenes.Dungeons.Factory
 		{
 			if (pcCameWorms){
 				outputText("\n\nYour foe doesn't seem to care...");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
 				factory.doLossOmnibus();
 			}
@@ -34,7 +35,6 @@ package classes.Scenes.Dungeons.Factory
 			else {
 				createStatusEffect(StatusEffects.LustAura, 0, 0, 0, 0);
 			}
-			game.combatRoundOver();
 		}
 		
 		private function milkAttack():void {
@@ -63,7 +63,6 @@ package classes.Scenes.Dungeons.Factory
 				player.dynStats("lus", 7 + player.sens / 20);
 				if (player.biggestLactation() > 1) outputText("Milk dribbles from your [allbreasts] in sympathy.");
 			}
-			game.combatRoundOver();
 		}
 		
 		public function OmnibusOverseer()
@@ -78,14 +77,14 @@ package classes.Scenes.Dungeons.Factory
 			this.ballSize = 0;
 			this.cumMultiplier = 3;
 			// this.hoursSinceCum = 0;
-			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DROOLING, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_SLIME_DROOLING;
 			this.tallness = rand(9) + 70;
-			this.hipRating = HIP_RATING_AMPLE+2;
-			this.buttRating = BUTT_RATING_TIGHT;
-			this.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
 			this.skinTone = "light purple";
 			this.hairColor = "purple";
 			this.hairLength = 42;
@@ -109,9 +108,9 @@ package classes.Scenes.Dungeons.Factory
 			this.drop = new WeightedDrop(null, 1);
 			this.special1 = lustAura;
 			this.special2 = milkAttack;
-			this.wingType = WING_TYPE_BAT_LIKE_TINY;
+			this.wingType = AppearanceDefs.WING_TYPE_BAT_LIKE_TINY;
 			this.wingDesc = "tiny hidden";
-			this.tailType = TAIL_TYPE_DEMONIC;
+			this.tailType = AppearanceDefs.TAIL_TYPE_DEMONIC;
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);

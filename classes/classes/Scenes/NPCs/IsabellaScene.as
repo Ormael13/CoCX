@@ -1,9 +1,10 @@
 ﻿package classes.Scenes.NPCs{
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
-	public class IsabellaScene extends NPCAwareContent implements TimeAwareInterface {
+public class IsabellaScene extends NPCAwareContent implements TimeAwareInterface {
 //Isabella Flags:
 //256	PC decided to approach Isabella's camp yet? 1
 //257	Met Isabella?
@@ -17,7 +18,7 @@
 		{
 			pregnancy = new PregnancyStore(kFLAGS.ISABELLA_PREGNANCY_TYPE, kFLAGS.ISABELLA_PREGNANCY_INCUBATION, 0, 0);
 			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 2160, 1920, 1680, 1440, 1200, 960, 720, 480, 240);
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 		
 		private var checkedIsabella:int; //Make sure we test this event just once in timeChangeLarge
@@ -65,7 +66,7 @@
 			}
 			if (model.time.hours > 23) {
 				if (flags[kFLAGS.FOUND_ISABELLA_AT_FARM_TODAY] == 1) flags[kFLAGS.FOUND_ISABELLA_AT_FARM_TODAY] = 0;
-				if (kGAMECLASS.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.ISABELLA_MILKED_YET] >= 0 && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) {
+				if (SceneLib.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.ISABELLA_MILKED_YET] >= 0 && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) {
 					flags[kFLAGS.ISABELLA_MILKED_YET]++;
 				}
 			}
@@ -271,8 +272,8 @@ public function tryToTalkDownAngryCow():void {
 		outputText("Your reply is blotted out by the thundering of her hooves as she lowers her shield and charges.\n\n");
 		startCombat(new Isabella());
 		if(!isabellaFollower()) isabellaFollowerScene.isabellaAffection(-2);
-		kGAMECLASS.enemyAI();
-	}
+        SceneLib.combat.enemyAIImpl();
+    }
 	//(int below 50)
 	else if(player.inte < 50) {
 		outputText("You start to try to explain your reasons for coming here, stuttering slightly in haste as the angry cow-girl looks to be paying less and less attention.  She snorts and lowers her shield, shouting, \"<i>You zink Izabella vould fall for zuch nonzense? HAH!  Prepare to face mein fury!</i>\"");
@@ -333,7 +334,7 @@ public function nomOnMommaIzzysTits():void {
 		outputText("Her areolae are large, maybe two or three inches across, though perched as they are atop such glorious globes, they still seem small.  Each of them has four nipples protruding nearly an inch up from the surface, and each of them is starting to bead with tiny drops of milk.  You lean closer, a little hesitantly, and watch the beads slowly grow to droplets before they roll down the dark-skinned arc of the cow-girl's chest.  It smells very sweet... sweeter than you'd expect, but there is another smell in the air coming from lower on Isabella's body that indicates a whole other type of need.  There are faint, muffled wet squelches at the edge of your hearing, and it's then that you notice one of her hands has disappeared below her skirt.\n\n");
 		
 		outputText("Before you can comment, her other hand is grabbing ");
-		if(player.horns > 0 && player.hornType > HORNS_NONE) outputText("your horns");
+		if(player.horns > 0 && player.hornType > AppearanceDefs.HORNS_NONE) outputText("your horns");
 		else outputText("the back of your head");
 		outputText(" and smashing your face into her leaky milk-spouts.  You react fast enough to open wide, and all four of the nipples slide into your mouth.  Their tips press together and leave a steady stream of milk on your tongue as you lick and slurp around the needy nipples, relieving Isabella's desire to breastfeed while sating your own thirst.  The surface of the large, rounded breast wraps around most of your head, practically molding to your face from how hard Isabella's pulling on you.  Without light, you close your eyes and drink, sucking deeply as the flow intensifies.  It even seems to get sweeter with each gulp of the cow-girl's breast-milk.\n\n");
 		
@@ -347,7 +348,7 @@ public function nomOnMommaIzzysTits():void {
 		outputText("Milk runs down the curvature of the unused tit in a slow waterfall until your lips are sealed around the 'spring'.  Just like before, she pushes harder and harder until her milk is squirting into your throat and the blushing bronzed tit is wrapped around you.  The cow-girl's delicious nectar is better than you remember, and it's still getting sweeter!  Her flared hips and curvy thighs keep bumping you, getting faster and harder as the noise of Isabella's masturbation grows louder.  Yet rather than being roused by the racket, you block it out and continue to drink deeply, savoring the thickening milk as it blasts into your throat.\n\n");
 	
 		outputText("Isabella lets out a thunderous scream of pleasure, but you just sigh in between swallows, devouring the thick, candy-sweet cream she's pouring into you.  Her arms wrap around your shoulders");
-		if(player.wingType > WING_TYPE_NONE) outputText(" and stroke your wings");
+		if(player.wingType > AppearanceDefs.WING_TYPE_NONE) outputText(" and stroke your wings");
 		outputText(", lulling you into a state of peaceful relaxation where the only things you feel are her soft flesh enveloping you and her wonderful cream filling your belly until it's fit to burst.  You pop off with a sigh and snuggle into her neck, starting to doze as she croons hypnotically into your ear.\n\n");
 		
 		//(Male and it fits end)
@@ -401,7 +402,7 @@ public function nomOnMommaIzzysTits():void {
 		{
 			outputText("Isabella pants as she pulls you back, giving you your first glimpse of just how rosy her tanned skin has gotten, but then you're moving across her chest towards an untapped reservoir of pale nectar.  You start to mention that you've had enough, but Isabella shushes you in between low, lurid moans.  \"<i>No, drink up my friend.  We don't want you to suffer heat-stroke");
 			
-			if (!isabellaFollower()) outputText(" on the way back!")
+			if (!isabellaFollower()) outputText(" on the way back!");
 			else outputText(" while you're out and about!");
 			
 			outputText(" Ooooh...</i>\" she groans as she presses your mouth into the milk-dripping waterfall that is her other breast.  You mumble a reply, but it turns into a messy burble as nipples and milk fill your opened mouth.  Immediately you begin to suckle anew, your protests washed away in syrupy-sweetness.\n\n");
@@ -953,7 +954,7 @@ public function IsabellaPostSpankFeedSex():void {
 	outputText(", pushing your torso so hard it sinks an inch or two into mud that reeks of Isabella's sex-juices.  You lie there, immobilized and defeated while you're forcibly raped, used like a small, disposable dildo.\n\n");
 	
 	outputText("The cow-girl lets some of the pressure off in order to tweak one of your " + nippleDescript(0) + "s, but as you gasp, her tongue is forced into your mouth, smothering your ");
-	if(player.tongueType == TONGUE_HUMAN) outputText("smaller");
+	if(player.tongueType == AppearanceDefs.TONGUE_HUMAN) outputText("smaller");
 	else outputText("longer");
 	outputText(" one with the slippery smoothness of her cow-like organ.  It slides over the top, curls around squeezing, and then it's underneath yours, beckoning you to venture past Isabella's naturally darker lips.  Her fingers find her way into your hair, pulling on it to keep you exactly where she wants you, like a dog on a leash.  You groan helplessly into her mouth, your voice melding with her frenzied moans as she splatters mud, milk, and girl-cum from each thigh-jiggling impact.\n\n");
 	
@@ -973,7 +974,7 @@ public function IsabellaPostSpankFeedSex():void {
 	
 	outputText("Once you've emptied the last of your submission into Isabella, she rolls off of you, panting heavily.");
 	if (isabellaAccent()) outputText("\"<i>Das vas a very good [boy]!  I hope I taught you some manners.  Maybe come visit me some time, but be polite for me or I'll have to give you another spanking!</i>\"");
-	else outputText("\"<i>You're a very good [boy]! I hope I taught you some manners. Maybe you should come and visit me some time, but be polite for me or I'll have to give you another spanking!</i>\"")
+	else outputText("\"<i>You're a very good [boy]! I hope I taught you some manners. Maybe you should come and visit me some time, but be polite for me or I'll have to give you another spanking!</i>\"");
 	outputText(" She climbs up on woozy legs and walks off, leaving you to doze in the defiled well of earth like a discarded tissue.\n\n");
 	if(!isabellaFollower()) isabellaFollowerScene.isabellaAffection(3);
 	player.orgasm();
@@ -1392,8 +1393,8 @@ public function victoryAgainstIzzzzzySixtyNine():void {
 	if(!isabellaFollower()) isabellaFollowerScene.isabellaAffection(9);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] = 0;
 	player.slimeFeed();
-	if (getGame().inCombat) cleanupAfterCombat();
-	else doNext(camp.returnToCampUseOneHour);
+    if (kGAMECLASS.inCombat) cleanupAfterCombat();
+    else doNext(camp.returnToCampUseOneHour);
 }
 
 //['Too Big' Victory Titfucking Funtimes With Milk]
@@ -1524,9 +1525,9 @@ public function vaginalProdNPokeIsabella():void {
 	outputText("You smirk and slap at one of the cow-girl's breasts in response, setting off a geyser of lactic fluid that rains down on both of you.  Now that Isabella's tits have started to let down her milk, there's no stopping the alabaster flow.  Her spray of lactation covers her, you, and her belongings, unfettered by the sopping-wet shirt plastered tightly to her chocolate-toned mounds.  You lick a few droplets from your lips and marvel at the sweetness.  She's absolutely delicious.\n\n");
 	
 	outputText("In spite of the distracting milk-fountains, your main focus remains on her cunt, and how wonderful that hot little box feels around your " + cockDescript(x) + ".  ");
-	if(player.totalCocks() > 1) {
+	if(player.cockTotal() > 1) {
 		outputText("You wish you had room for ");
-		if(player.totalCocks() > 2) outputText("another " + oMultiCockDesc());
+		if(player.cockTotal() > 2) outputText("another " + oMultiCockDesc());
 		else outputText("your other penis");
 		outputText(" inside her, but her arousal-slicked lips are squeezing too tightly on you for you to cram anything else into that hole, and at this angle, anal sex would be nigh impossible.  ");
 	}

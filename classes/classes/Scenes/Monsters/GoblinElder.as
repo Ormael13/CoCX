@@ -1,10 +1,11 @@
 package classes.Scenes.Monsters 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.*;
-	
-	public class GoblinElder extends Goblin
+import classes.*;
+import classes.GlobalFlags.*;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
+
+public class GoblinElder extends Goblin
 	{
 		public var spellCostCharge:int = 6;
 		public var spellCostBlind:int = 8;
@@ -79,7 +80,7 @@ package classes.Scenes.Monsters
 			else if (spellChooser == 3 && fatigue <= (100 - spellCostArouse)) {
 				outputText("She makes a series of arcane gestures, drawing on her lust to inflict it upon you! ");
 				var lustDamage:int = (inte / 10) + (player.lib / 10) + rand(10) * spellMultiplier();
-				lustDamage = lustDamage * (game.lustPercent() / 100);
+				lustDamage = lustDamage * (EngineCore.lustPercent() / 100);
 				player.dynStats("lus", lustDamage, "scale", false);
 				outputText(" <b>(<font color=\"#ff00ff\">" + (Math.round(lustDamage * 10) / 10) + "</font>)</b>");
 				fatigue += spellCostArouse;
@@ -101,7 +102,6 @@ package classes.Scenes.Monsters
 				tou += 15 * spellMultiplier();
 				fatigue += spellCostMight;
 			}
-			combatRoundOver();
 		}
 		
 		//Melee specials
@@ -118,7 +118,6 @@ package classes.Scenes.Monsters
 				if (damage < 10) damage = 10;
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		
 		public function shieldBash():void {
@@ -138,7 +137,6 @@ package classes.Scenes.Monsters
 				if (damage < 10) damage = 10;
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		
 		private function spellMultiplier():Number {
@@ -157,16 +155,16 @@ package classes.Scenes.Monsters
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.goblinElderScene.goblinElderRapeIntro();
+			SceneLib.goblinElderScene.goblinElderRapeIntro();
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if (player.gender == 0 || flags[kFLAGS.SFW_MODE] > 0) {
 				outputText("You collapse in front of the goblin, too wounded to fight.  She growls and kicks you in the head, making your vision swim. As your sight fades, you hear her murmur, \"<i>Fucking dicks can't even bother to grow a dick or cunt.</i>\"");
-				game.cleanupAfterCombat();
+				SceneLib.combat.cleanupAfterCombatImpl();
 			} 
 			else {
-				game.goblinElderScene.goblinElderBeatYaUp();
+				SceneLib.goblinElderScene.goblinElderBeatYaUp();
 			}
 		}
 		
@@ -180,15 +178,15 @@ package classes.Scenes.Monsters
 			}
 			this.imageName = "goblinelder";
 			this.long = "The goblin before you stands a little over four feet tall. It's difficult to determine an age of goblin thanks to their corrupt nature but this one looks unusual. Her skin tone is yellowish-green skin and her hair is crimson black. Her body is painted in imp and minotaur blood to scare away anybody who would try to rape her. She's wearing a shark-tooth necklace and her ears are pierced with what appears to be lethicite. Her breasts look to be FF-cups despite her \"age\". Unlike most goblins, she's well armed. She's wielding a crudely fashioned metal sword and a large metal square shield. She's wearing a spider-silk loincloth and the imp skulls hang from the leather strap holding her loincloth together. Her helmet is fashioned out of a minotaur skull and her chestpiece appears to be carved from minotaur ribcage. Her pauldrons are also fashioned from bones. Despite how well-armored she is, her lethicite-pierced nipples are exposed. It's obvious she has travelled quite a lot and slain a lot of minotaurs and imps. She must have lived long thanks to Reducto to keep her breasts at normal size.";
-			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DROOLING, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("FF"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = 48;
-			this.hipRating = HIP_RATING_AMPLE+2;
-			this.buttRating = BUTT_RATING_LARGE;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
 			this.skinTone = "yellowish-green";
 			this.hairColor = "dark green";
 			this.hairLength = 4;

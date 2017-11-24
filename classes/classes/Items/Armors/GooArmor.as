@@ -3,13 +3,13 @@
  */
 package classes.Items.Armors
 {
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kACHIEVEMENTS;
-	import classes.ItemType;
-	import classes.Items.Armor;
-	import classes.Player;
+import classes.EngineCore;
+import classes.GlobalFlags.kACHIEVEMENTS;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.Armor;
+import classes.Scenes.SceneLib;
 
-	public final class GooArmor extends Armor {
+public final class GooArmor extends Armor {
 		
 		public function GooArmor() {
 			super("GooArmr","GooArmr","goo armor","Valeria, the goo-girl armor",22,1,"This shining suit of platemail is more than just platemail - it houses the goo-girl, Valeria!  Together, they provide one tough defense, but you had better be okay with having goo handling your junk while you fight if you wear this!","Heavy");
@@ -26,11 +26,11 @@ package classes.Items.Armors
 			outputText(", encasing your loins in case you need a little mid-battle release, she says.");
 			outputText("\n\nAfter a few minutes, you and your armor-friend are settled and ready to go.");
 			if (game.flags[kFLAGS.MET_VALERIA] == 0) {
-				outputText("  As you ready yourself for the " + (getGame().dungeons.checkPhoenixTowerClear() ? "adventures": "dungeon") + " ahead, the goo giggles into your ear.  \"<i>Oh shit, silly me.  I forgot, my name's Valeria.  Ser Valeria, if you're feeling fancy.</i>\"  You introduce yourself, awkwardly shaking your own hand by way of pleasantries.");
-				game.flags[kFLAGS.MET_VALERIA]++;
+                outputText("  As you ready yourself for the " + (SceneLib.dungeons.checkPhoenixTowerClear() ? "adventures" : "dungeon") + " ahead, the goo giggles into your ear.  \"<i>Oh shit, silly me.  I forgot, my name's Valeria.  Ser Valeria, if you're feeling fancy.</i>\"  You introduce yourself, awkwardly shaking your own hand by way of pleasantries.");
+                game.flags[kFLAGS.MET_VALERIA]++;
 			}
 			outputText("\n\n\"<i>Well alright then, [name]!</i>\" Valeria says excitedly, \"<i>Let's go!</i>\"\n\n");
-			game.awardAchievement("Goo Armor", kACHIEVEMENTS.GENERAL_GOO_ARMOR);
+			EngineCore.awardAchievement("Goo Armor", kACHIEVEMENTS.GENERAL_GOO_ARMOR);
 		}
 		
 		override public function removeText():void { //Produces any text seen when removing the armor normally
@@ -43,7 +43,7 @@ package classes.Items.Armors
 		}
 		
 		override public function get def():Number { 
-			if (game.valeria.valeriaFluidsEnabled()) {
+			if (SceneLib.valeria.valeriaFluidsEnabled()) {
 				if (game.flags[kFLAGS.VALERIA_FLUIDS] < 50) {
 					return 15 + int(game.flags[kFLAGS.VALERIA_FLUIDS] / 5);
 				}

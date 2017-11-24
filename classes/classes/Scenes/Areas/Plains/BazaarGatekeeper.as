@@ -1,9 +1,11 @@
 package classes.Scenes.Areas.Plains 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
-	/**
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
+
+/**
 	 * ...
 	 * @author Kitteh6660
 	 */
@@ -20,7 +22,6 @@ package classes.Scenes.Areas.Plains
 			outputText("The gatekeeper raises his scimitars ");
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) > 0) {
 				outputText("and slashes his scimitars blindly, missing you by a great deal!");
-				combatRoundOver();
 				return;
 			}
 			else {
@@ -46,13 +47,11 @@ package classes.Scenes.Areas.Plains
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		
 		public function scimitarCrossAttack():void {
 			if (!hasStatusEffect(StatusEffects.Uber)) {
 				outputText("The gatekeeper raises his scimitars! Judging from the way he is holding, <b>he is going to cross-slash you!</b>");
-				combatRoundOver();
 				return;
 			}
 			if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] > 0) {
@@ -68,7 +67,6 @@ package classes.Scenes.Areas.Plains
 				player.takeDamage(damage, true);
 			}
 			removeStatusEffect(StatusEffects.Uber);
-			combatRoundOver();
 		}
 		
 		override public function doAI():void
@@ -81,11 +79,10 @@ package classes.Scenes.Areas.Plains
 				}
 				if (statusEffectv1(StatusEffects.Stunned) <= 0) removeStatusEffect(StatusEffects.Stunned);
 				else addStatusValue(StatusEffects.Stunned, 1, -1);
-				combatRoundOver();
 				return;
 			}
 			if (hasStatusEffect(StatusEffects.Fear)) {
-				game.outputText("The gatekeeper appears to be immune to your fear.\n\n");
+				EngineCore.outputText("The gatekeeper appears to be immune to your fear.\n\n");
 				removeStatusEffect(StatusEffects.Fear);
 			}
 			if (hasStatusEffect(StatusEffects.Uber)) {
@@ -101,7 +98,7 @@ package classes.Scenes.Areas.Plains
 		override public function defeated(hpVictory:Boolean):void
 		{
 			outputText("You manage to knock the guard off his feet. With the guard unconscious, you manage to check for loot before you head in.", true);
-			doNext(game.bazaar.winAgainstGuard);
+			doNext(SceneLib.bazaar.winAgainstGuard);
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -120,7 +117,7 @@ package classes.Scenes.Areas.Plains
 			this.a = "the ";
 			this.short = "guard";
 			this.imageName = "bazaarguard";
-			this.long = "This crimson-skinned demon-morph guarding the entrance to Bizarre Bazaar stands ten feet tall. He has red skin and is wearing almost sky-blue turban on his head. He has solid black eyes. He is wearing a simple tunic and loose-fitting pants. He is wielding a pair of scimitars."
+			this.long = "This crimson-skinned demon-morph guarding the entrance to Bizarre Bazaar stands ten feet tall. He has red skin and is wearing almost sky-blue turban on his head. He has solid black eyes. He is wearing a simple tunic and loose-fitting pants. He is wielding a pair of scimitars.";
 			this.createCock(8, 1.5, CockTypesEnum.DEMON);
 			createBreastRow(Appearance.breastCupInverse("flat"));
 			this.ass.analLooseness = 1;

@@ -1,9 +1,10 @@
 ﻿package classes.Scenes.Places.TelAdre {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.NPCs.JojoScene;
+import classes.Scenes.SceneLib;
 
-	public class Cotton extends TelAdreAbstractContent implements TimeAwareInterface {
+public class Cotton extends TelAdreAbstractContent implements TimeAwareInterface {
 
 //176 TIMES HAD YOGA
 //177 MET/FUCKED - 0 = never met.  1 = met but not fucked. 2 = fucked
@@ -26,7 +27,7 @@
 			pregnancy = new PregnancyStore(kFLAGS.COTTON_PREGNANCY_TYPE, kFLAGS.COTTON_PREGNANCY_INCUBATION, 0, 0);
 			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 300, 200, 100, 40);
 												//Event: 0 (= not pregnant),  1,   2,   3,  4,  5 (< 40)
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 
 		//Implementation of TimeAwareInterface
@@ -353,7 +354,7 @@ private function cottonChat():void {
 	if(flags[kFLAGS.FREED_VALA] != 0)
 		chats[chats.length] = 3;
 	//(Jojo chat)
-	if(kGAMECLASS.monk > 0)
+	if(JojoScene.monk > 0)
 		chats[chats.length] = 4;
 	var choice:Number = chats[rand(chats.length)];
 
@@ -362,7 +363,7 @@ private function cottonChat():void {
 		//(If you've rejected Urta's love or left her)
 		if(flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] < 0 || flags[kFLAGS.URTA_PC_LOVE_COUNTER] < 0) outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre. \"<i>Urta?</i>\" Cotton says, \"<i>She's a good woman, but she's been pretty depressed lately.</i>\" Your yoga partner scowls at you, and presses you into an uncomfortable pose, \"<i>I hear you upset her. The poor girl has had an awfully cruel life.  I hope you didn't make it any worse for her.</i>\"\n\n");
 		//(If you've accepted Urta's love)
-		else if(kGAMECLASS.urta.urtaLove()) outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre. \"<i>Urta?</i>\" Cotton says, \"<i>She's a good woman. I hear you two have been quite the couple lately.</i>\" You blush. \"<i>No need to be embarrassed, from what I hear you've been a good influence on her. She's not nearly as high-strung or stressed anymore. Whatever you're doing with her, keep it up, pet.</i>\"\n\n");
+		else if(SceneLib.urta.urtaLove()) outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre. \"<i>Urta?</i>\" Cotton says, \"<i>She's a good woman. I hear you two have been quite the couple lately.</i>\" You blush. \"<i>No need to be embarrassed, from what I hear you've been a good influence on her. She's not nearly as high-strung or stressed anymore. Whatever you're doing with her, keep it up, pet.</i>\"\n\n");
 		//(If Urta's relationship with PC is low, so she's still uncomfortable with her body)
 		else outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre. \"<i>Urta?</i>\" Cotton says, \"<i>She's a good woman. A bit high strung sometimes, but she's got a lot on her plate keeping us all safe here. I'd invite her 'round for some yoga, maybe to help her relax, but I don't think it's really her thing.</i>\"\n\n");
 	}
@@ -390,12 +391,12 @@ private function cottonChat():void {
 	//(Jojo chat)
 	else if(choice == 5) {
 		//(If Jojo hasn't been corrupted)
-		if(kGAMECLASS.monk == 1) {
+		if(JojoScene.monk == 1) {
 			outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre and beyond. \"<i>Jojo?</i>\" Cotton says, \"<i>You know Jojo too? I met him a while back. He taught me the finer points of meditation, which I incorporate into my yoga. Here, let's try.</i>\" You spend the rest of the workout in meditative poses, and by the time you're done, you feel... lighter somehow.\n\n");
 			dynStats("cor", -1);
 		}
 		//(If Jojo has been corrupted)
-		else if(kGAMECLASS.monk > 1) outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre. \"<i>Jojo?</i>\" Cotton says, \"<i>You know Jojo too? I met him a while back. He taught me the finer points of meditation. I haven't seen him much lately, though. I wonder where he's gone to.</i>\" You smile inwardly, knowing exactly where he's gone to.\n\n");
+		else if(JojoScene.monk > 1) outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre. \"<i>Jojo?</i>\" Cotton says, \"<i>You know Jojo too? I met him a while back. He taught me the finer points of meditation. I haven't seen him much lately, though. I wonder where he's gone to.</i>\" You smile inwardly, knowing exactly where he's gone to.\n\n");
 	}
 }
 //(If Leave)

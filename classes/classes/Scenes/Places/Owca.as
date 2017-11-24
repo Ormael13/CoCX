@@ -1,12 +1,13 @@
 ﻿package classes.Scenes.Places{
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Items.WeaponLib;
-	import classes.Scenes.Places.Owca.*;
-	import classes.Scenes.NPCs.Kindra;
-	
-	use namespace kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Items.WeaponLib;
+import classes.Scenes.NPCs.Kindra;
+import classes.Scenes.Places.Owca.*;
+import classes.Scenes.SceneLib;
+
+use namespace kGAMECLASS;
 
 	public class Owca extends BaseContent{
 
@@ -273,7 +274,7 @@ public function loseOrSubmitToVapula():void {
 	outputText("\n\nYou can't talk, muted as you are by a pair of fat red peckers stuffing your mouth and bumping against your throat as you unwillingly suck them off.  Your jaw hurts, your itching insides are driving you mad; your whole body is being bruised from the cock-slaps, your palms are forced to rub four shafts at the same time, and even as you pump, your fingers are occasionally grabbed and stuffed into wet fuck-holes, making a few succubi moan.  A tentacle dick brushes against you, then wraps around your limbs, slithering against your skin and leaving behind a trail of pre-cum on your torso and belly.");
 	if(player.hasCock()) outputText("  It wraps around [eachCock] for a while, jerking it for a bit and rubbing its tip against yours.");
 	//[if antennae]
-	if(player.antennae > ANTENNAE_NONE) outputText("  Your antennae are being harshly pulled and twisted; some imps, in a crazy show of libertinism, start inserting your sensitive peduncles down their bloated urethrae. The intimate friction and the sudden jolts when the internal walls slather your appendages in slick, hot pre-cum are driving you mad with irregular shots of unbearable pleasure.");
+	if(player.antennae > AppearanceDefs.ANTENNAE_NONE) outputText("  Your antennae are being harshly pulled and twisted; some imps, in a crazy show of libertinism, start inserting your sensitive peduncles down their bloated urethrae. The intimate friction and the sudden jolts when the internal walls slather your appendages in slick, hot pre-cum are driving you mad with irregular shots of unbearable pleasure.");
 	//[if horns]
 	if(player.horns > 0) outputText("  You feel your horns being used as leverage to slap your head with even more rock-hard dick.  The impacts stun you until your whole forehead feels numb and coated with a mixture of ballsweat and pre-cum.");
 	//[if vagina
@@ -350,8 +351,8 @@ private function wakeUpAfterDemonGangBangs():void {
 	fatigue(20);
 	player.slimeFeed();
 	dynStats("str", -2,"tou", -2, "spe", -1, "int", -1, "lib", 1, "sen", 1, "lus=", 100, "cor", 3);
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 	//PC is redirected to camp, next morning. No nightly camp scenes or dreams.
 }
@@ -533,7 +534,7 @@ private function rapeZeVapula():void {
 private function owcaMainScreenOn():void {
 	clearOutput();
 	
-	if(flags[kFLAGS.REBECCS_LAST_PLEA] == 1 && !kGAMECLASS.vapula.vapulaSlave()) {
+	if(flags[kFLAGS.REBECCS_LAST_PLEA] == 1 && !SceneLib.vapula.vapulaSlave()) {
 		rebeccsLastPlea();
 		return;
 	}
@@ -824,9 +825,9 @@ private function rapeRebecc(outside:Boolean = false):void {
 	player.orgasm();
 	dynStats("lib", -2, "cor", 5);
 	flags[kFLAGS.OWCA_UNLOCKED] = -1;
-	
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+
+if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -936,8 +937,8 @@ private function forgiveOwca():void {
 	flags[kFLAGS.OWCAS_ATTITUDE] = 60;
 	flags[kFLAGS.OWCA_ANGER_DISABLED] = 1;
 	//To main owca menu
-	if (getGame().inCombat)
-		cleanupAfterCombat(gangbangVillageStuff);
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat(gangbangVillageStuff);
 	else doNext(gangbangVillageStuff);
 }
 //Option: Leave (Z)
@@ -945,8 +946,8 @@ private function fuckThisShit():void {
 	clearOutput();
 	outputText("You stare at the wretched, whimpering creature before you for a moment.  There's nothing to say.  Without a word, you head back to your camp, carefully closing Rebecc's door behind you as you leave.");
 	flags[kFLAGS.REBECCS_LAST_PLEA] = 1;
-	if (getGame().inCombat)
-		cleanupAfterCombat();
+    if (kGAMECLASS.inCombat)
+        cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 //Rebecc's Last Plea (Z)
@@ -1002,7 +1003,7 @@ private function slaveToVapulaBadEnd():void {
 	outputText("\n\nThese spontaneous, dirty words make the imp fucking you from behind instantly cum; with a powerful last push, he blasts you with his seed, filling and soaking your backside with thick white goo.  You reach for Vapula, helplessly hugging her tits and suckling her nipples as you sob in pleasure-induced humiliation.");
 	outputText("\n\n\"<i>Very well, slut.  Your former life as a villager is over.  It's time to move on to your new life; and trust me, it's going to be much more exciting.  Actually, I don't think you'll be willing to ever leave this place...</i>\"");
 	outputText("\n\nYou furiously nod in approval.");
-	getGame().gameOver();
+	EventParser.gameOver();
 }
 
 //Subdue Vapula Scene - begins Vapula Follower Content(Z)

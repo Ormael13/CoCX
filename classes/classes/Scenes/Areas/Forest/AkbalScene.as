@@ -3,12 +3,11 @@
  */
 package classes.Scenes.Areas.Forest
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Items.Armors.LustyMaidensArmor;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.Armors.LustyMaidensArmor;
 
-	public class AkbalScene extends BaseContent
+public class AkbalScene extends BaseContent
 	{
 		
 		
@@ -50,7 +49,7 @@ package classes.Scenes.Areas.Forest
 						buttFuck = rapeAkbal;
 					outputText("\n\nDo you rape him?");
 					//Rape / Don't Rape
-					kGAMECLASS.simpleChoices("Butt-fuck", buttFuck, "Take Vaginally", vagoo, "Force Lick", vagooLick, "B.Titfuck", bikiniTits, "Leave", cleanupAfterCombat);
+					EngineCore.simpleChoices("Butt-fuck", buttFuck, "Take Vaginally", vagoo, "Force Lick", vagooLick, "B.Titfuck", bikiniTits, "Leave", cleanupAfterCombat);
 					return;
 				}
 			}
@@ -144,12 +143,12 @@ package classes.Scenes.Areas.Forest
 				primary = 0;
 			clearOutput();
 			//Naga RAPPUUUUUU
-			if (player.lowerBody == LOWER_BODY_TYPE_NAGA)
+			if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_NAGA)
 			{
 				outputText("You slither around the demon cat's form, wrapping him up until a scared whimper rises from his chest.  You continue to tighten your coils around Akbal until he's gasping for breath.  You ask him if he's going to be a good little demon for you.  He nods.\n\n");
 
 				//(If player has a dick)
-				if (player.totalCocks() > 0)
+				if (player.cockTotal() > 0)
 				{
 					outputText(images.showImage("akbal-deepwoods-male-naga-rapeakbal"));
 					//(Sm Penis: 7 inches or less)
@@ -225,7 +224,7 @@ package classes.Scenes.Areas.Forest
 				outputText("\"<i>Who's gonna submit now... bitch?</i>\"\n\n");
 
 				//(If player has a dick)
-				if (player.totalCocks() > 0)
+				if (player.cockTotal() > 0)
 				{
 					outputText(images.showImage("akbal-deepwoods-male-taur-rapeakbal"));
 					//(Sm Penis: 7 inches or less)
@@ -309,7 +308,7 @@ package classes.Scenes.Areas.Forest
 			outputText("You roughly grab the scruff of the demon's neck and give a gut-crushing blow to his stomach, causing him to call out in pain.");
 			outputText("\n\n\"<i>Who's gonna submit now, bitch?</i>\"\n\n");
 			//[Player has a dick]
-			if (player.totalCocks() > 0)
+			if (player.cockTotal() > 0)
 			{
 				outputText(images.showImage("akbal-deepwoods-male-rapeakbal"));
 				outputText("Akbal grunts as you smash his face into the ground.  At your command he raises his hind quarters, allowing you a perfect view of his tight pucker.  From the looks of it, his tightly sealed rim would look at home on a virgin.\n\n");
@@ -453,7 +452,7 @@ package classes.Scenes.Areas.Forest
 		private function girlsRapeAkbalPart2():void
 		{
 			clearOutput();
-			kGAMECLASS.hideUpDown();
+			EngineCore.hideUpDown();
 			//Centaur
 			outputText(images.showImage("akbal-deepwoods-female-taur-bindakbal"));
 			if (player.isTaur())
@@ -809,7 +808,7 @@ package classes.Scenes.Areas.Forest
 			}
 			clearOutput();
 			//Naga variant goez here
-			if (player.lowerBody == LOWER_BODY_TYPE_NAGA)
+			if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_NAGA)
 			{
 				outputText(images.showImage("akbal-deepwoods-naga-sumbitanal"));
 				outputText("After a few moments of thinking you nod to Akbal and the masculine voice in your head commands you to disrobe. You take off your [armor], setting it aside moments before the demon is upon you.\n\n");
@@ -879,7 +878,7 @@ package classes.Scenes.Areas.Forest
 				outputText("You watch with fascination as Akbal rises onto his hind legs, his body melting into a more humanoid form.  His long, demonic cat-dick is already rock-hard and jutting out of his sheath.  He walks past your top half, moving around your body while sliding his hand across your haunch.  His hands are oddly warm.");
 
 				//(if centaur player has a tail)
-				if (player.tailType > TAIL_TYPE_NONE)
+				if (player.tailType > AppearanceDefs.TAIL_TYPE_NONE)
 					outputText("  As he makes his way to your hind quarters he grabs you by the tail, pulling it up and out the way with a feral, jaguar grin.  His free hand slides a finger across your " + assholeDescript() + " making you paw the ground with your hooves.");
 
 				//(No tail)
@@ -928,7 +927,7 @@ package classes.Scenes.Areas.Forest
 				outputText("After a few moments you realize Akbal isn't slowing down.  His piston pumping hips drive right through his orgasm and never stop slamming into your " + buttDescript() + ".  He continues until he's erupted no less than eight times, masterfully working your hole the entire time.\n\n");
 
 				outputText("After his last massive eruption you feel the jaguar demon pull out, releasing even more of his copious load from your happy hole in an oddly satisfying cascade of thick white cream that rushes like a waterfall down your legs");
-				if (player.totalCocks() > 0)
+				if (player.cockTotal() > 0)
 					outputText(" to join your own");
 				outputText(".\n\n");
 
@@ -999,7 +998,7 @@ package classes.Scenes.Areas.Forest
 			}
 
 			outputText("Akbal works his hips fast, piston-pumping his long demon cat-dick in and out of your " + assholeDescript() + ".  The rampant babbling coming from your mouth breaks with his every thrust, and your body is racked by orgasm after orgasm. You're soon on your chest and knees ");
-			if (player.hasVagina() || player.totalCocks() > 0)
+			if (player.hasVagina() || player.cockTotal() > 0)
 				outputText("in a pool of your own love juices");
 			else
 				outputText("in sexual bliss");

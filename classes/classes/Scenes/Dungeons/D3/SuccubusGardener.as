@@ -1,11 +1,12 @@
 ﻿package classes.Scenes.Dungeons.D3 
 {
-	import classes.Appearance;
-	import classes.Monster;
-	import classes.StatusEffects;
-	import classes.PerkLib;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
+import classes.Appearance;
+import classes.AppearanceDefs;
+import classes.GlobalFlags.kFLAGS;
+import classes.Monster;
+import classes.PerkLib;
+import classes.Scenes.SceneLib;
+import classes.StatusEffects;
 import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 
 /**
@@ -23,11 +24,11 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 			this.long = "This succubus has everything you would expect from one of her kind: a bust that would drive women wild with jealousy, hips that could melt a preacher's conviction, an ass so perfectly rounded that it seems designed to be cupped, and a smoldering visage that simultaneously entices whilst wearing a domineering grin. Her raven hair cascades around ram horns that gleam like polished ivory, and her red eyes greedily drink in your every motion. What clothing she wears is only designed to enhance her rampant sexuality, somehow making her look more naked than if she actually were.\n\nBehind her, the shrubbery itself has come to life, revealing corded vines with inhuman strength, some capped with oozing, phallus-like tips. A few are as thick as your arm and tipped with gasping, swollen lips or violet, blooming pussies. Others still bear no ornamentation at all. There is little rhyme or reason to the mass of vegetation: only a theme of rampant, overgrown sexuality encouraged to an obscene degree.";
 			this.createVagina(false, 3, 3);
 			this.createBreastRow(Appearance.breastCupInverse("FF"));
-			this.ass.analLooseness = ANAL_LOOSENESS_LOOSE;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_LOOSE;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.tallness = 8 * 12;
-			this.hipRating = HIP_RATING_AVERAGE;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_AVERAGE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			this.weaponName = "tentacles";
 			this.weaponVerb = "lash";
 			this.weaponAttack = 29;
@@ -58,13 +59,13 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 		override public function defeated(hpVictory:Boolean):void
 		{
 			cleanupEffects();
-			game.d3.succubusGardener.fuckUpTheGardener(hpVictory);
+			SceneLib.d3.succubusGardener.fuckUpTheGardener(hpVictory);
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			cleanupEffects();
-			game.d3.succubusGardener.surrenderToTheGardener(hpVictory);
+			SceneLib.d3.succubusGardener.surrenderToTheGardener(hpVictory);
 		}
 		
 		override protected function performCombatAction():void
@@ -114,7 +115,6 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 				opts[rand(opts.length)]();
 			}
 			statScreenRefresh();
-			combatRoundOver();
 		}
 		
 		override protected function handleStun():Boolean
@@ -213,7 +213,6 @@ this.HP = this.maxHP();
 				
 				player.removeStatusEffect(StatusEffects.Tentagrappled);
 				
-				combatRoundOver();
 			}
 			else
 			{
@@ -234,7 +233,6 @@ this.HP = this.maxHP();
 				}
 				player.dynStats("lus+", 3 + rand(3));
 				if (flags[kFLAGS.PC_FETISH] >= 2) player.dynStats("lus+", 5);
-				combatRoundOver();
 			}
 		}
 		
@@ -261,7 +259,6 @@ this.HP = this.maxHP();
 				player.takeDamage(.75*this.str + rand(15));
 			}
 			player.dynStats("lus+", 3 + rand(3));
-			combatRoundOver();
 		}
 		
 		private function sicem():void
@@ -358,7 +355,6 @@ this.HP = this.maxHP();
 			{
 				outputText("Ohhh fuck, there's no holding it back now. You're gonna do it, and there's nothing you could do it stop it even if you wanted to. You're going to drop to your knees and take off your [armor]. You're going to give this beautiful demoness what she wants. You're going to let her fuck you and use you, just so long as she allows you to cum. You'll be fine once you cum, even if it means throwing away a chance to defeat Lethice.\n\n");
 				// I think this will work, but 9999 in case
-				combatRoundOver();
 				return;
 			}
 			

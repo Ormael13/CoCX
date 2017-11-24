@@ -3,20 +3,23 @@
  */
 package classes.Scenes.Areas
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.API.GroupEncounter;
-	import classes.Scenes.API.Encounters;
-	import classes.Scenes.API.FnHelpers;
-	import classes.Scenes.Areas.Forest.*;
-	import classes.Scenes.Monsters.DarkElfScene;
-	import classes.Scenes.NPCs.CelessScene;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.API.Encounters;
+import classes.Scenes.API.FnHelpers;
+import classes.Scenes.API.GroupEncounter;
+import classes.Scenes.Areas.Forest.*;
+import classes.Scenes.Holidays;
+import classes.Scenes.Monsters.DarkElfScene;
+import classes.Scenes.NPCs.CelessScene;
+import classes.Scenes.NPCs.JojoScene;
+import classes.Scenes.SceneLib;
 
-	import coc.xxc.BoundStory;
-	import coc.xxc.stmts.ZoneStmt;
+import coc.xxc.BoundStory;
+import coc.xxc.stmts.ZoneStmt;
 
-	use namespace kGAMECLASS;
+use namespace kGAMECLASS;
 
 	public class Forest extends BaseContent
 	{
@@ -80,18 +83,18 @@ package classes.Scenes.Areas
 		private var forestStory:BoundStory;
 		private var deepwoodsStory:BoundStory;
 		private function init():void {
-			const game:CoC     = getGame();
-			const fn:FnHelpers = Encounters.fn;
+            const game:CoC = kGAMECLASS;
+            const fn:FnHelpers = Encounters.fn;
 			_forestEncounter = Encounters.group("forest", {
 						//General Golems, Goblin and Imp Encounters
 						name: "common",
-						call: game.exploration.genericGolGobImpEncounters
+						call: SceneLib.exploration.genericGolGobImpEncounters
 					}, {
 						//Helia monogamy fucks
 						name  : "helcommon",
-						call  : game.helScene.helSexualAmbush,
+						call  : SceneLib.helScene.helSexualAmbush,
 						chance: 0.2,
-						when  : game.helScene.helSexualAmbushCondition
+						when  : SceneLib.helScene.helSexualAmbushCondition
 					}, {
 						name  : "deepwoods",
 						call  : discoverDeepwoods,
@@ -113,7 +116,7 @@ package classes.Scenes.Areas
 						when  : function ():Boolean {
 							return flags[kFLAGS.TAMANI_TIME_OUT] == 0
 								   && player.gender > 0
-								   && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)
+								   && (player.cockTotal() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)
 								   && flags[kFLAGS.SOUL_SENSE_TAMANI] < 3;
 						}
 					}, {
@@ -122,14 +125,14 @@ package classes.Scenes.Areas
 							return !player.hasStatusEffect(StatusEffects.PureCampJojo)
 								   && !camp.campCorruptJojo()
 								   && flags[kFLAGS.JOJO_DEAD_OR_GONE] <= 0
-								   && (kGAMECLASS.monk < 2 || rand(2) == 0);
+								   && (JojoScene.monk < 2 || rand(2) == 0);
 						},
 						mods  : [fn.ifLevelMin(4)],
 						chance: function ():Number {
 							//Extra chance of Jojo encounter.
 							return (player.findPerk(PerkLib.PiercedFurrite) >= 0
 									&& rand(5) == 0
-									&& (player.cor > 25 || kGAMECLASS.monk > 0)) ? 1.2 : 1;
+									&& (player.cor > 25 || JojoScene.monk > 0)) ? 1.2 : 1;
 						},
 						call  : jojoEncounter
 					}, {
@@ -236,23 +239,23 @@ package classes.Scenes.Areas
 			}, {
 				//Helia monogamy fucks
 				name  : "helcommon",
-				call  : game.helScene.helSexualAmbush,
+				call  : SceneLib.helScene.helSexualAmbush,
 				chance: 0.2,
-				when  : game.helScene.helSexualAmbushCondition
+				when  : SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name  : "etna",
 				when  : function():Boolean {
 					return flags[kFLAGS.ETNA_FOLLOWER] < 1
 						   && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2;
 				},
-				call  : kGAMECLASS.etnaScene.repeatYandereEnc
+				call  : SceneLib.etnaScene.repeatYandereEnc
 			}, {
 				name  : "electra",
 				when  : function():Boolean {
 					return flags[kFLAGS.ELECTRA_FOLLOWER] < 1
 						   && flags[kFLAGS.ELECTRA_AFFECTION] >= 2;
 				},
-				call  : kGAMECLASS.electraScene.repeatDeepwoodsEnc
+				call  : SceneLib.electraScene.repeatDeepwoodsEnc
 			}, {
 				name: "kitsune",
 				when: function():Boolean {
@@ -279,7 +282,7 @@ package classes.Scenes.Areas
 				when  : function ():Boolean {
 					return flags[kFLAGS.TAMANI_TIME_OUT] == 0
 						   && player.gender > 0
-						   && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)
+						   && (player.cockTotal() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)
 						   && flags[kFLAGS.SOUL_SENSE_TAMANI] < 3;
 				}
 			}, {
@@ -300,7 +303,7 @@ package classes.Scenes.Areas
 						   && player.findPerk(PerkLib.FerasBoonAlpha) < 0
 						   && date.fullYear > flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE];
 				},
-				call: game.pumpkinFuckEncounter
+				call: Holidays.pumpkinFuckEncounter
 			}, {
 				name: "fera_2",
 				when: function():Boolean {
@@ -308,7 +311,7 @@ package classes.Scenes.Areas
 						   && flags[kFLAGS.FERAS_TRAP_SPRUNG_YEAR] == 0
 						   && date.fullYear > flags[kFLAGS.FERAS_GLADE_EXPLORED_YEAR];
 				},
-				call: game.feraSceneTwoIntroduction
+				call: Holidays.feraSceneTwoIntroduction
 			},{
 				name  : "woods",
 				call  : camp.cabinProgress.gatherWoods,
@@ -337,8 +340,8 @@ package classes.Scenes.Areas
 				chance: 0.8
 			}, {
 				name: "dungeon",
-				call: getGame().dungeons.enterDeepCave,
-				when: getGame().dungeons.canFindDeepCave
+				call: SceneLib.dungeons.enterDeepCave,
+				when: SceneLib.dungeons.canFindDeepCave
 			}, {
 				name  : "walk",
 				call  : deepwoodsWalkFn,
@@ -477,7 +480,7 @@ package classes.Scenes.Areas
 				if (player.vaginas.length >= 1) {
 					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + buttDescript() + " above.");
 					//IF CHARACTER HAS A DROOLING PUSSY ADD SENTENCE
-					if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) {
+					if (player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_DROOLING) {
 						outputText("  Juices stream from your womanhood and begin pooling on the dirt and twigs beneath you.  ");
 						if (lake) outputText("The drooling fem-spunk only makes the ground more muddy.");
 						else outputText("The sticky fem-spunk immediately soaks down into the rich soil.");
@@ -502,7 +505,7 @@ package classes.Scenes.Areas
 				if (player.vaginas.length >= 1) {
 					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + buttDescript() + " above.");
 					//IF CHARACTER HAS A DROOLING PUSSY ADD SENTENCE
-					if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) {
+					if (player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_DROOLING) {
 						if (lake) outputText("  A leaf falls from a tree and lands on the wet lips of your cunt, its light touch teasing your sensitive skin.  Like a mare or cow in heat, your juices stream from your womanhood and pool in the mud beneath you.  The sloppy fem-spunk only makes the ground more muddy.");
 						else outputText("  A leaf falls from a tree and lands on the wet lips of your cunt, its light touch teasing your sensitive skin.  Like a mare or cow in heat, your juices stream from your womanhood and pool in the dirt and twigs beneath you.");
 					}
@@ -600,16 +603,16 @@ package classes.Scenes.Areas
 		}
 		private function jojoEncounter():void {
 			clearOutput();
-			if (kGAMECLASS.monk == 0 && !player.hasStatusEffect(StatusEffects.PureCampJojo)) {
+			if (JojoScene.monk == 0 && !player.hasStatusEffect(StatusEffects.PureCampJojo)) {
 				if (player.cor < 25) {
-					kGAMECLASS.monk = 1;
-					kGAMECLASS.jojoScene.lowCorruptionJojoEncounter();
+					JojoScene.monk = 1;
+					SceneLib.jojoScene.lowCorruptionJojoEncounter();
 				}
-				else kGAMECLASS.jojoScene.highCorruptionJojoEncounter();
-			} else if (kGAMECLASS.monk == 1 || kGAMECLASS.monk < 0) { //Negative monk value indicates rape is disabled.
-				kGAMECLASS.jojoScene.repeatJojoEncounter();
-			} else if (kGAMECLASS.monk >= 2) { //Angry/Horny Jojo
-				kGAMECLASS.jojoScene.corruptJojoEncounter();
+				else SceneLib.jojoScene.highCorruptionJojoEncounter();
+			} else if (JojoScene.monk == 1 || JojoScene.monk < 0) { //Negative monk value indicates rape is disabled.
+				SceneLib.jojoScene.repeatJojoEncounter();
+			} else if (JojoScene.monk >= 2) { //Angry/Horny Jojo
+				SceneLib.jojoScene.corruptJojoEncounter();
 			}
 		}
 		private function tentacleBeastEncounterFn():void {

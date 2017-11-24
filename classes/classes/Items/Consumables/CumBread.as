@@ -1,9 +1,10 @@
 package classes.Items.Consumables 
 {
-	import classes.Items.Consumable;
-	import classes.Items.ConsumableLib;
-	
-	public class CumBread extends Consumable 
+import classes.Items.Consumable;
+import classes.Items.ConsumableLib;
+import classes.Scenes.SceneLib;
+
+public class CumBread extends Consumable
 	{
 		
 		public function CumBread() {
@@ -15,7 +16,7 @@ package classes.Items.Consumables
 		}
 		
 		override public function useItem():Boolean {
-			game.prison.prisonItemBread(true, true);
+			SceneLib.prison.prisonItemBread(true, true);
 			return true;
 		}
 		

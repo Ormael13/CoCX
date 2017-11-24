@@ -5,14 +5,12 @@
 package classes.Scenes.Areas.BlightRidge 
 {
 
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.Dungeons.Factory;
-	import classes.Scenes.UniqueSexScenes;
-	
-	//use namespace kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Dungeons.Factory;
+import classes.Scenes.UniqueSexScenes;
+
+//use namespace kGAMECLASS;
 	
 	public class DemonScene extends BaseContent
 	{
@@ -57,11 +55,11 @@ package classes.Scenes.Areas.BlightRidge
 					addButton (2, "Service Him", GiveIncubusOral);
 					addButton (3, "Catch Anal", FactoryScene.doRideIncubusAnally);
 				}
-				if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) addButton(7, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
+				if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER) addButton(7, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
 			}
 			addButton (4, "Leave", cleanupAfterCombat);
 			if (monster.HP < 1) addButton (5, "Kill Him", killDemon);
-			if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(6, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
+			if (player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(6, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
 		}
 		
 		public function lustyPaizuri():void {
@@ -163,9 +161,9 @@ package classes.Scenes.Areas.BlightRidge
 			outputText("He looks up at you with a practiced eye, adjusting his demon-tool's size to better fill your  " + vaginaDescript(0) + ".  ");
 			//(set cocksize = to 80% vaginalCapacity).
 			outputText("Thankful for the gesture, you sink down onto him, letting the nubs of his crown stimulate your lips and the underside of your " + clitDescript() + ".  ");
-			if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLICK) outputText("In no time flat your drooling fluids soak him in slippery wetness.  ");
-			if(player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLICK && player.vaginas[0].vaginalWetness != VAGINA_WETNESS_DRY) outputText("Before long, you've lubricated a fair portion of his tool with wetness.  ");
-			if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) outputText("Despite your usual light lubrication, you manage to moisten the top-half of his tool with wetness.  ");
+			if(player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_SLICK) outputText("In no time flat your drooling fluids soak him in slippery wetness.  ");
+			if(player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_SLICK && player.vaginas[0].vaginalWetness != AppearanceDefs.VAGINA_WETNESS_DRY) outputText("Before long, you've lubricated a fair portion of his tool with wetness.  ");
+			if(player.vaginas[0].vaginalWetness == AppearanceDefs.VAGINA_WETNESS_DRY) outputText("Despite your usual light lubrication, you manage to moisten the top-half of his tool with wetness.  ");
 			outputText("Relaxing the muscles in your [legs], you let a few inches of his length slip inside you, every nub and nodule of his corrupted prick filling the walls of your love-canal with inhuman pleasures that make your knees weak.  A particularly delightful bump brushes your " + clitDescript() + ", causing your [legs] to finally give out. The incubus' nubbly cock plunges entirely inside you.\n\n");
 			outputText("You gasp and moan like a cheap whore, disgusted by yourself and yet so turned on by the total loss of self-control.  The incubus is leering up at you, having regained some of his lost confidence.  Despite the lust, desire and pleasure burning through the hot pole buried in your abdomen, you work up enough rage to grip his neck with your left hand and practically choke him out.  You work your hips quickly as you feel his pre start to drip into your canal, spreading tingling warmth in the deepest parts of your passage and into your cervix.  You tighten your grip as you forcibly take your pleasure, barking in displeasure at the demon, \"<i>Don't look like you're enjoying this too much bitch, or I'll take it out of your hide.</i>\"  Satisfied at the renewed look of fear in his eyes, you return to using his magnificent tool as a masturbation aid.\n\n");
 			outputText("Unable to contain your body's desires due to either the demon's aura or his wonderful penis, you slam your " + vaginaDescript(0) + " onto his member with impunity, twitching and squeezing involuntarily.  His tainted pre-cum begins seeping deep inside your uterus and you cry out with orgasmic intensity.  Your entire body clenches down, even the hand clamped on the incubus' windpipe. You feel his demon-cock swell up inside you in response to his stress, stretching your cunt taut.  His skin darkens from the lack of oxygen as he begins cumming HARD inside you.  Your womb immediately fills with his demon-seed, leaving ribbons of spunk to drip from your tightly-stretched cunt.  You sigh in delight as your muscles slowly stop quivering.  With a pleasured gasp, you rise off the distended demon-prick, and realize that you've choked your foe into unconsciousness. Still, you did let him cum, so maybe he won't mind too much when he wakes.  Feeling sensual and sated, you redress and prepare to come back to the camp. ");
@@ -306,7 +304,7 @@ package classes.Scenes.Areas.BlightRidge
 				outputText("\nNow would be the perfect opportunity to taste the fruits of her sex-ready form...\n\nDo you fuck her?");
 				if (player.gender == 1 || player.gender == 3) addButton (0, "M. Fuck", OmnibusGetsRapedByMale);
 				if (player.gender == 2 || player.gender == 3) addButton (1, "F. Fuck", OmnibusGetsRapedByFemale);
-				if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) {
+				if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER) {
 					addButton(2, "Seeding", uniquuuesexscene.alrauneSeedingScene);
 					addButton(3, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
 				}
@@ -334,7 +332,7 @@ package classes.Scenes.Areas.BlightRidge
 				else outputText("Her dishonest words anger you, and you slap her in the face.  Both of you know that she wants this almost as much as she wanted to rape you, and any pretense at disliking this act is a deceitful sham.");
 				outputText("  It's too late for her to have any hope of swaying you anyway.  You strip off your [armor] ");
 				outputText("and begin stroking ");
-				if (player.totalCocks() > 1) outputText("each of ");
+				if (player.cockTotal() > 1) outputText("each of ");
 				outputText("your stiff [cocks], preparing to penetrate her.\n\n");
 
 				outputText("Omnibus squirms in the dirt as you bring your [cock] closer and closer to her female hole, her cock twitching with need like some kind of perverse, mutant clit.  Her hips twitch at you, as if eager to devour your maleness.  You don't keep her waiting, ");
@@ -585,7 +583,7 @@ package classes.Scenes.Areas.BlightRidge
 					addButton (0, "M. Fuck", SuccubusGetsRapedByMale);
 					addButton (1, "F. Fuck", SuccubusGetsRapedByFemale);
 				}
-				if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) addButton(2, "Seeding", uniquuuesexscene.alrauneSeedingScene);
+				if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER) addButton(2, "Seeding", uniquuuesexscene.alrauneSeedingScene);
 			}
 			addButton (4, "Leave", cleanupAfterCombat);
 			if(monster.HP < 1) addButton (5, "Kill Her", killDemon);
@@ -711,9 +709,9 @@ package classes.Scenes.Areas.BlightRidge
 			outputText("You shove your crotch into your milk-dazed foe's white-stained visage, grinding your " + vaginaDescript(0) + " into her mouth until you cum all over her");
 			if(player.cocks.length == 0) {
 				temp = rand(3);
-				if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLAVERING) outputText(", soaking her with girl-cum.");
+				if(player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_SLAVERING) outputText(", soaking her with girl-cum.");
 				else {
-					if(player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_WET) outputText(", slicking her face with girlish cum.");
+					if(player.vaginas[0].vaginalWetness <= AppearanceDefs.VAGINA_WETNESS_WET) outputText(", slicking her face with girlish cum.");
 					else outputText(", drenching her with a deluge of girlcum.");
 				}
 			}

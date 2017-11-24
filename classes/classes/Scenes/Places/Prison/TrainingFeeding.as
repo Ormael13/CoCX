@@ -329,7 +329,7 @@ package classes.Scenes.Places.Prison
 								outputText("down to where her own tip bobs below");
 							}
 							outputText(" [eachCock] to gather her copious drippings, then back to rub them into ");
-							if(player.totalCocks() == 1)
+							if(player.cockTotal() == 1)
 							{
 								outputText("your");
 							}
@@ -394,11 +394,11 @@ package classes.Scenes.Places.Prison
 						}
 						else if(player.hasCock())
 						{
-							if(player.totalCocks() == 1)
+							if(player.cockTotal() == 1)
 							{
 								outputText("Your silly little cock is");
 							}
-							else if(player.totalCocks() == 1)
+							else if(player.cockTotal() == 1)
 							{
 								outputText("Your silly pair of cocks are");
 							}
@@ -408,7 +408,7 @@ package classes.Scenes.Places.Prison
 							}
 							
 							outputText(" going to have the flavor and scent of my cum for a month -- not that anyone other than you is likely to taste ");
-							if(player.totalCocks() == 1)
+							if(player.cockTotal() == 1)
 							{
 								outputText("it");
 							}
@@ -695,7 +695,7 @@ package classes.Scenes.Places.Prison
 				if(player.hasCock())
 				{
 					outputText("Cum pours from your own cock");
-					if(player.totalCocks() > 1)
+					if(player.cockTotal() > 1)
 					{
 						outputText("s");
 					}
@@ -3927,29 +3927,20 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorFeedingQuestOptedOut():Boolean
 		{
-			if(player.hasStatusEffect(StatusEffects.PrisonCaptorEllyQuest) && player.statusEffectv1(StatusEffects.PrisonCaptorEllyQuest) < 0)
-			{
-				return true;
-			}
-			return false;
+			return player.hasStatusEffect(StatusEffects.PrisonCaptorEllyQuest) && player.statusEffectv1(StatusEffects.PrisonCaptorEllyQuest) < 0;
+
 		}
 		
 		public function prisonCaptorFeedingQuestTrainingExists():Boolean
 		{
-			if(player.hasStatusEffect(StatusEffects.PrisonCaptorEllyQuest) && player.statusEffectv1(StatusEffects.PrisonCaptorEllyQuest) > 0)
-			{
-				return true;
-			}
-			return false;
+			return player.hasStatusEffect(StatusEffects.PrisonCaptorEllyQuest) && player.statusEffectv1(StatusEffects.PrisonCaptorEllyQuest) > 0;
+
 		}
 		
 		public function prisonCaptorFeedingQuestTrainingIsTimeUp():Boolean
 		{
-			if(player.hasStatusEffect(StatusEffects.PrisonCaptorEllyQuest) && player.statusEffectv2(StatusEffects.PrisonCaptorEllyQuest) <= 0)
-			{
-				return true;
-			}
-			return false;
+			return player.hasStatusEffect(StatusEffects.PrisonCaptorEllyQuest) && player.statusEffectv2(StatusEffects.PrisonCaptorEllyQuest) <= 0;
+
 		}
 		
 		public function prisonCaptorFeedingQuestTrainingStatusText():void

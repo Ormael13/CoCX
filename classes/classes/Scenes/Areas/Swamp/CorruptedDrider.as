@@ -1,10 +1,11 @@
 package classes.Scenes.Areas.Swamp
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
 
-	/**
+/**
 	 * ...
 	 * @author ...
 	 */
@@ -93,7 +94,6 @@ package classes.Scenes.Areas.Swamp
 					}
 				}
 			}
-			combatRoundOver();
 		}
 		
 		public function driderMasturbate():void {
@@ -105,7 +105,6 @@ package classes.Scenes.Areas.Swamp
 			if(nipplesPierced > 0) outputText("pierced ");
 			outputText("nipple-flesh.  Arching her back in a lurid pose, she cries out in high-pitched bliss, her cock pulsing in her hand and erupting out a stream of seed that lands in front of her.\n\n");
 			outputText("The display utterly distracts you until it finishes, and as you adopt your combat pose once more, you find your own needs harder to ignore, while hers seem to be sated, for now.\n");
-			combatRoundOver();
 		}
 
 		override protected function performCombatAction():void
@@ -130,16 +129,16 @@ package classes.Scenes.Areas.Swamp
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.swamp.corruptedDriderScene.defeatDriderIntro();
+			SceneLib.swamp.corruptedDriderScene.defeatDriderIntro();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if (pcCameWorms){
 				outputText("\n\nThe drider licks her lips in anticipation...");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
-				game.swamp.corruptedDriderScene.loseToDrider();
+				SceneLib.swamp.corruptedDriderScene.loseToDrider();
 			}
 		}
 
@@ -154,16 +153,16 @@ package classes.Scenes.Areas.Swamp
 			this.long = "This particular spider-woman is a drider - a creature with a humanoid top half and the lower body of a giant arachnid.  From a quick glance, you can tell that this one has fallen deeply to corruption.  She is utterly nude, exposing her four well-rounded, D-cup breasts with their shiny black nipples.  "+(pierced?"Gold piercings and chains link the curvy tits together, crossing in front of her four mounds in an 'x' pattern.  ":"")+"On her face and forehead, a quartet of lust-filled, " + skinTone + " eyes gaze back at you.  Behind her, the monster-girl's " + hairColor + " hair drapes down her back like a cloak.  The drider's lips seem to shine with a light all their own, and a steady trickle of purple, reflective fluid beads and drips from them.  At her waist, there's a juicy looking snatch with a large, highly visible clit.  From time to time it pulsates and grows, turning part-way into a demon-dick.  Her spider-half has eight spindly legs with black and " + hairColor + " stripes - a menacing display if ever you've seen one.";
 			// this.plural = false;
 			this.createCock(9,2,CockTypesEnum.DEMON);
-			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_GAPING);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DROOLING, AppearanceDefs.VAGINA_LOOSENESS_GAPING);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 70, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,70,0,0,0);
 			this.tallness = 10*12;
-			this.hipRating = HIP_RATING_CURVY+2;
-			this.buttRating = BUTT_RATING_LARGE+1;
-			this.lowerBody = LOWER_BODY_TYPE_DRIDER_LOWER_BODY;
+			this.hipRating = AppearanceDefs.HIP_RATING_CURVY+2;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE+1;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_DRIDER_LOWER_BODY;
 			player.skin.restore();
 			this.hairColor = hairColor;
 			this.hairLength = 24;

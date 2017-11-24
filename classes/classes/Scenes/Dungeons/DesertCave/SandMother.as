@@ -1,9 +1,10 @@
 package classes.Scenes.Dungeons.DesertCave
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
-	public class SandMother extends Monster
+public class SandMother extends Monster
 	{
 		//Notes:
 		//Starts combat with sandstorm.  GigaFire's every fifth round.
@@ -30,7 +31,6 @@ package classes.Scenes.Dungeons.DesertCave
 			//Surrounds the witch a vortex of stones, raising her defense greatly and conferring 25% block to standard attacks.
 			outputText("Lowering her scepter towards the ground, the eight-foot tall sorceress suddenly grunts, lifting it as if carrying great weight.  As the small staff passes her chest, bits of stone and rock begin to lift out of the ground, accelerating into a vortex of earth that spins around her.  <b>It's going to be harder to hit her with physical attacks now!</b>");
 			createStatusEffect(StatusEffects.Earthshield,0,0,0,0);
-			combatRoundOver();
 		}
 		//*GigaFire
 		public function gigaFire():void {
@@ -38,7 +38,6 @@ package classes.Scenes.Dungeons.DesertCave
 			outputText("Releasing the scepter, the Sand Mother spreads her hands, each glowing with eldritch, white flames.  Her heels slowly float up off the ground as she closes her eyes in concentration.  You can sense the power and heat rolling off her in waves, and if you don't do something to disrupt her, you'll likely be burned to a crisp.");
 			if(player.inte > 40) outputText("  She's not even looking at you and seems steeled against lusty interruptions.  Perhaps you can hit her hard enough to shatter her concentration.");
 			createStatusEffect(StatusEffects.Gigafire,0,0,0,0);
-			combatRoundOver();
 		}
 		public function gigaFire2():void {
 			var damage:int = 40 + rand(11);
@@ -71,7 +70,6 @@ package classes.Scenes.Dungeons.DesertCave
 			damage = Math.round(damage);
 			damage = player.takeMagicDamage(damage, true);
 			removeStatusEffect(StatusEffects.Gigafire);
-			combatRoundOver();
 		}
 			
 		//*Telekinesis
@@ -94,7 +92,6 @@ package classes.Scenes.Dungeons.DesertCave
 			var damage:Number = 20;
 			damage = multiplier * damage;
 			damage = player.takeDamage(damage, true);
-			combatRoundOver();
 		}
 		
 		//*Lightning Bolt
@@ -103,7 +100,6 @@ package classes.Scenes.Dungeons.DesertCave
 			outputText("Holding her staff back, she lifts her free hand with her fingers outstretched in a fan.  Sparks dance between her slender digits, coiling around them like snakes.  In a flash, they rush to her palm and erupt in a lightning bolt, striking you instantly and unavoidably! ");
 			var damage:int = 30 + rand(10);
 			damage = player.takeMagicDamage(damage, true);
-			combatRoundOver();
 		}
 		//*Whisper:
 		//As ackbal, stuns the PC 1 round.  Cannot be resisted.
@@ -111,22 +107,20 @@ package classes.Scenes.Dungeons.DesertCave
 			outputText("Mouthing, \"<i>Can you hear me?</i>\" the witch's voice intrudes into your mind, matching her mouth word for word.  She floods your psyche with words and thoughts, all of your defeat or submission, each more degrading and more humiliating than the last.  Perhaps the worst are the ones where she turns you over to Lethice after you're broken...  The tumultous thoughts and emotions both stun and arouse you, preventing you from attacking while you try to clear your beleaguered consciousness.");
 			player.createStatusEffect(StatusEffects.Whispered,0,0,0,0);
 			player.dynStats("lus", 15);
-			combatRoundOver();
 		}
 		public function sandStormAttack():void {
 			outputText("With a smirk, the Sand Mother decrees, \"<i>You fight not just me, but the shifting sands as well.</i>\"  She casually flicks her wrist, and sand rises up from the floors, the walls, everywhere really.  It begins to spin about, blown by an unseen wind, and the entire chamber is wreathed in a shifting sandstorm.  The grit constantly tries to get into your eyes.  It's likely you're going to be blinded by it every now and then.");
 			createStatusEffect(StatusEffects.Sandstorm,0,0,0,0);
-			combatRoundOver();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.dungeons.desertcave.defeatTheSandMother();
+			SceneLib.dungeons.desertcave.defeatTheSandMother();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.dungeons.desertcave.loseToTheSandMother();
+			SceneLib.dungeons.desertcave.loseToTheSandMother();
 		}
 		
 		public function SandMother()
@@ -136,16 +130,16 @@ package classes.Scenes.Dungeons.DesertCave
 			this.imageName = "sandmother";
 			this.long = "The Sand Mother is a towering woman of imposing stature and bust.  She wears a much silkier, regal-looking robe than her sisters, and it barely serves to contain her four milk-laden breasts, straining under their jiggling weight.  Dangling around her in a way that reminds you oddly of a halo, the Sand Mother's blonde-white hair fans around her, hanging long behind her.  The queen witch is brandishing a pearly white scepter rather threateningly, though from the way she holds it, it's clear she doesn't intend to use it as a physical weapon.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_WET, VAGINA_LOOSENESS_LOOSE);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_WET, AppearanceDefs.VAGINA_LOOSENESS_LOOSE);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 70, 0, 0, 0);
 			this.createBreastRow(Appearance.breastCupInverse("DD"));
 			this.createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.createStatusEffect(StatusEffects.BonusACapacity,50,0,0,0);
 			this.tallness = 8*12+6;
-			this.hipRating = HIP_RATING_CURVY;
-			this.buttRating = BUTT_RATING_LARGE;
+			this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
 			this.skinTone = "bronzed";
 			this.hairColor = "platinum-blonde";
 			this.hairLength = 15;

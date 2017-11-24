@@ -1,8 +1,10 @@
 ﻿package classes.Scenes.NPCs{
-	import classes.GlobalFlags.*;
-	import classes.PregnancyStore;
+import classes.AppearanceDefs;
+import classes.GlobalFlags.*;
+import classes.PregnancyStore;
+import classes.Scenes.SceneLib;
 
-	public class UrtaPregs extends NPCAwareContent {
+public class UrtaPregs extends NPCAwareContent {
 
 		public function UrtaPregs()
 		{
@@ -41,7 +43,7 @@ URTA_LATESTBORN_GENDER
 URTA_LATESTBORN_COCKTYPE
 */
 
-		private function get pregnancy():PregnancyStore { return kGAMECLASS.urta.pregnancy; }
+		private function get pregnancy():PregnancyStore { return SceneLib.urta.pregnancy; }
 
 //Urta Pregnancy Stages
 //Urta takes 2 days to progress from one pregnancy stage to the next
@@ -791,7 +793,7 @@ public function urtaIsHappyAboutPregnancyAtTheBar():void {
 public function urtaIsAPregnantCopScene():void {
 	clearOutput();
 	outputText("As you enter the main square and start looking around to decide where to go next, a commotion erupts across the square.  \"<i>Stop in the name of the law!</i>\"  Edryn's voice rings out as a young, raggedy-looking dog-morph erupts from the crowd, Edryn in hot pursuit.  Unfortunately for the centauress, the smaller biped is quicker, more nimble, and better suited for making his way through the crowd.");
-	if (kGAMECLASS.telAdre.edryn.pregnancy.isPregnant) outputText("  Edryn's pregnant belly isn't helping her, either.");
+	if (SceneLib.telAdre.edryn.pregnancy.isPregnant) outputText("  Edryn's pregnant belly isn't helping her, either.");
 	
 	outputText("\n\nAs you contemplate whether or not to get involved, you realize that the thief's path is taking him right to a certain pregnant fox-morph, who watches him approach with a cool expression.  The moment he gets close enough, she pounces - in a startlingly quick display of bone-crunching violence, she has him face down on the cobblestones and body pinned.  As you meander over, she speaks up.");
 	
@@ -812,11 +814,11 @@ public function urtaSpecialDeliveries():void {
 	clearOutput();
 	
 	outputText("As you enter through the gates, Edryn clops up to you, a small basket swinging from the crook of one arm");
-	if (kGAMECLASS.telAdre.edryn.pregnancy.isPregnant) outputText(" and her pregnant belly jiggling from the motions");
+	if (SceneLib.telAdre.edryn.pregnancy.isPregnant) outputText(" and her pregnant belly jiggling from the motions");
 	outputText(", a faint smile on her face.  \"<i>Hey there, [name]; can you do me a favor, please?  Urta's been getting deliveries to her place, but I got an unexpected call, so I'm too busy to take her groceries to her today - you're her " + player.mf("boyfriend","girlfriend") + "; can you please take this for me?</i>\"  The centauress asks.");
 	
 	outputText("\n\nReasoning that it shouldn't take you too long, and Urta's likely to appreciate the action, you agree to do so and she hands it over with a rather knowing smile.  She then gallops off, ");
-	if (kGAMECLASS.telAdre.edryn.pregnancy.isPregnant) outputText("as quickly as a pregnant mare can, anyway,");
+	if (SceneLib.telAdre.edryn.pregnancy.isPregnant) outputText("as quickly as a pregnant mare can, anyway,");
 	outputText(" leaving you to head on to Urta's house.");
 	
 	outputText("\n\nYou follow the familiar path to Urta's new house.  Along the way you wonder if she'll be there; usually she's out and only Lianna and the kids are in.  Once you arrive, you rap your knuckles on the door and wait.  Lianna opens the door.  \"<i>Hello [name], come in.</i>\"  She steps aside to let you in.");
@@ -990,11 +992,11 @@ private function massagePregnantUrtasBelly():void {
 	outputText("\n\nSmiling mischievously, you reach for the can and squirt some cream over her sensitive black nipples.  The vixen giggles and wriggles in place, \"<i>It feels like clouds tickling over my nipples,</i>\" she laughs.  It's evidently pleasurable in other ways, too; you can see precum beginning to distend the head of her condom out of the corner of your eye.  You begin spreading the cream over her breasts, just like her belly.  \"<i>Hey, now, what are you doing?  This is supposed to be a <b>belly</b> rub, lover,</i>\" Urta playfully scolds you, tail wagging all the same.");
 	
 	outputText("\n\nYou throw her a fake apology and tell her you'll clean it all up.  Then, you proceed to let your ");
-	if(player.tongueType == TONGUE_SNAKE) outputText("forked ");
-	else if(player.tongueType == TONGUE_DEMONIC) outputText("demonic ");
-	else if(player.tongueType == TONGUE_DRACONIC) outputText("draconic ");
+	if(player.tongueType == AppearanceDefs.TONGUE_SNAKE) outputText("forked ");
+	else if(player.tongueType == AppearanceDefs.TONGUE_DEMONIC) outputText("demonic ");
+	else if(player.tongueType == AppearanceDefs.TONGUE_DRACONIC) outputText("draconic ");
 	outputText("tongue hang and begin licking the cream off her breasts");
-	if(player.tongueType > TONGUE_HUMAN) outputText(", a task that is made far easier due to your tongue's ability to stretch to a surprising length");
+	if(player.tongueType > AppearanceDefs.TONGUE_HUMAN) outputText(", a task that is made far easier due to your tongue's ability to stretch to a surprising length");
 	outputText(".  You make sure to pay extra attention to her cream covered nubs.");
 	
 	outputText("\n\nUrta wiggles in pleasure at the stimulus, precum slowly bubbling into her condom, \"<i>[name], you're supposed to be rubbing me down, not eating me up!</i>\"  She laughs.  You quickly snatch the bottle in your hands and aim the lid at Urta's lips, covering them with cream.  Urta barely has time to react and by the time she gets over the shock, you're already laughing at her.  She looks like a rabid fox.");
@@ -1093,7 +1095,7 @@ private function urtaBoobWorshipScene():void {
 	outputText("\n\nYou do as she asks, jumping to her bedside table and getting a condom.  You throw her the small package.  Surprisingly, she catches it without opening her eyes, easily fitting it across her mottled shaft, then smiling at you.  \"<i>Thank you, lover; you're so considerate... now, if you don't mind?</i>\"  She smirks and gestures at her breasts.");
 	
 	outputText("\n\nYou jump back at her, attacking her breasts with gusto.  She moans and squeals in surprised pleasure at the sudden ferocity, a hint of pain before she grows used to it.  You lean in and take one of her nipples into your mouth, biting it lightly");
-	if(player.faceType == FACE_SHARK_TEETH || player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS) outputText(", always minding your sharp teeth");
+	if(player.faceType == AppearanceDefs.FACE_SHARK_TEETH || player.faceType == AppearanceDefs.FACE_SNAKE_FANGS || player.faceType == AppearanceDefs.FACE_SPIDER_FANGS) outputText(", always minding your sharp teeth");
 	outputText(".  She yelps loudly, but makes no move to push you off, so she's obviously enjoying it.  You alternate between biting and pulling, never repeating the same motion twice.  \"<i>I- I'm gonna...!</i>\"  She gasps out, bucking and wriggling under you.  You smile wickedly and bite her nipple one last time, pulling and sucking on it.");
 	
 	outputText("\n\nUrta lets out a shriek of equal parts pleasure and pain, arching her back as her cock suddenly explodes, bloating the hastily-applied condom with jet after jet of pregnant herm cum, swelling it into a misshapen, basketball-sized bubble of fluid-filled latex before she finally empties the last of herself into it.  With a long, drawn-out sigh she sinks back down, panting for air.  Finally, she musters the energy to say, \"<i>Nice massage, lover, but whose enjoyment was that for?  Mine or yours?</i>\"  The post-orgasmic glow on her face suggests she doesn't really care that much what your answer is.");
@@ -1160,11 +1162,11 @@ private function nurseFromMommaUrtasBooBees():void {
 	outputText("\n\nUrta gently lays herself down on the bed, shuffling over so that you have ample room to join her, then smiles and carefully lifts up her breasts in clear invitation to you.");
 	
 	outputText("\n\nYou waste no time, settling yourself beside her and grabbing the offered breasts.  You note that a few droplets seem to have escaped and formed a thin stream of white, which you promptly lick off with your ");
-	if(player.tongueType == TONGUE_SNAKE) outputText("forked ");
-	else if(player.tongueType == TONGUE_DEMONIC) outputText("demonic ");
-	else if(player.tongueType == TONGUE_DRACONIC) outputText("draconic ");
+	if(player.tongueType == AppearanceDefs.TONGUE_SNAKE) outputText("forked ");
+	else if(player.tongueType == AppearanceDefs.TONGUE_DEMONIC) outputText("demonic ");
+	else if(player.tongueType == AppearanceDefs.TONGUE_DRACONIC) outputText("draconic ");
 	outputText("tongue.  Urta lets out a sigh of pleasure, yipping softly as your tongue tantalizes her over-sensitive black nipples.  Noticing that she seemed to enjoy the licking you keep doing so, slathering her soft mounds in a thin layer of saliva, alternating between breasts.");
-	if(player.tongueType > TONGUE_HUMAN) outputText("  Every few licks you coil your tongue around one of her nipples and gently pull at it, milking a thin strand of white goodness straight on your tongue, much to the fox-herm's delight.");
+	if(player.tongueType > AppearanceDefs.TONGUE_HUMAN) outputText("  Every few licks you coil your tongue around one of her nipples and gently pull at it, milking a thin strand of white goodness straight on your tongue, much to the fox-herm's delight.");
 	
 	outputText("\n\nUrta shivers and moans, but then looks at you, \"<i>As nice as this may feel, it's not really getting them any emptier, you know,</i>\" she points out.");
 	
@@ -1500,9 +1502,9 @@ private function weirdUrtaCravingsConclusion():void {
 	outputText("  You gaze at her questioningly.  \"<i>I woke up before you and went and... shall we say cleaned myself up a little,</i>\" she replies, flicking her ears in the direction of the shower.");
 	
 	outputText("\n\nYou smile at her then draw her into another kiss, planting your lips to hers and invading her mouth with your ");
-	if(player.tongueType == TONGUE_SNAKE) outputText("forked ");
-	else if(player.tongueType == TONGUE_DEMONIC) outputText("demonic ");
-	else if(player.tongueType == TONGUE_DRACONIC) outputText("draconic ");
+	if(player.tongueType == AppearanceDefs.TONGUE_SNAKE) outputText("forked ");
+	else if(player.tongueType == AppearanceDefs.TONGUE_DEMONIC) outputText("demonic ");
+	else if(player.tongueType == AppearanceDefs.TONGUE_DRACONIC) outputText("draconic ");
 	outputText("tongue.  She yips in surprise, then moans as she eagerly sinks into your embrace, kissing you back with equal passion.  She suddenly breaks it, looking apologetic.  \"<i>Sorry, [name], but if we keep that up, I'll be wanting another round, and I have things to do.</i>\"  She pats your face apologetically and shifts herself, somewhat clumsily, out of the bed, gathering her clothes and starting to dress herself.");
 	outputText("\n\nTaking that as your cue, you do likewise, and the two of you go your separate ways after locking the apartment up behind you.");
 	dynStats("lib", -.5);
@@ -2266,7 +2268,7 @@ private function takeTheKidsForWalk():void {
 	outputText(" don't bother waiting or savouring their ice cream and neither do you, it's damned hot walking around this desert.  There's less cause for mischief too, " + urtaKidsText("his","her","their") + " face");
 	if(urtaKids() == 1) outputText("buried in cone");
 	else outputText("s buried in their cones");
-	outputText(" along with your own, greedily licking up melting droplets.  ")
+	outputText(" along with your own, greedily licking up melting droplets.  ");
 	player.refillHunger(20, false);
 	outputText("  There's just a bit of cone left as you return to Urta's house, and you quickly polish that off, upon entering.  \"<i>Oh, hey.  You're back.</i>\"  Lianna greets you in her usual inexpressive fashion.");
 	

@@ -1,13 +1,14 @@
 package classes.Scenes.Dungeons.D3
 {
-	import classes.BaseContent;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Appearance;
-	import classes.StatusEffects;
-	import classes.PerkLib;
-	import classes.Items.WeaponLib;
+import classes.BaseContent;
+import classes.EventParser;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.WeaponLib;
+import classes.PerkLib;
+import classes.Scenes.SceneLib;
+import classes.StatusEffects;
 
-	public class MinotaurKingScenes extends BaseContent
+public class MinotaurKingScenes extends BaseContent
 	{
 		public function MinotaurKingScenes()
 		{
@@ -24,8 +25,8 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\nA vision of curves and ripe sexuality emerges from the curtain of wet and wiggling flesh. She’s at least part cow, with upraised horns and a happily flicking tail - to say nothing of her egregiously supple breasts, still leaking milk from a recent suckle or their own overtly-abundant production. In her hands is a massive axe; it’s too large to be wielded by human hands.");
 			if (flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] != 0) outputText(" Even Isabella would struggle to wield such a weapon.");
 			else if (player.hasStatusEffect(StatusEffects.CampMarble)) outputText(" Even Marble would struggle to wield such a weapon");
-			else if (getGame().helFollower.followerHel()) outputText(" Even Helia would struggle to wield such a weapon.");
-			outputText(" This poor cow-slut, this ‘Excellia’ can barely to bring it to her lord without tipping forward onto her too-large tits.");
+            else if (SceneLib.helFollower.followerHel()) outputText(" Even Helia would struggle to wield such a weapon.");
+            outputText(" This poor cow-slut, this ‘Excellia’ can barely to bring it to her lord without tipping forward onto her too-large tits.");
 			outputText("\n\nTaking the gleaming metal shaft from his smaller slave, the proud beast stamps the butt-end into the worked stone floor, creating a spiderweb of cracks from brute strength alone.");
 			outputText("\n\n<i>“Careful not to damage my property, oh King of the Minotaurs. Remember within whose feast-hall you dwell,”</i> a chilly, yet feminine voice calls.");
 			outputText("\n\nEars twitching in irritation, the royal brute inclines his head ever so slightly. <i>“Your property, yes. I’ll not damage your precious floors, but this one... this Champion... "+ player.mf("he", "she") +" will be mine.”</i> The corners of the minotaur’s lips quirk upward in time with his tremendous erection. <i>“Do not make this more painful than it has to be.”</i>");
@@ -75,8 +76,8 @@ package classes.Scenes.Dungeons.D3
 			flags[kFLAGS.MINOTAURKING_KILLED] = 1;
 			clearOutput();
 			outputText("You make it quick, then straighten to stare Lethice in the eye. You’ll purge every single ounce of corruption from this world by any means necessary.");
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
-		}
+            cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+        }
 
 		private function dockucocku(cockIdx:int):void
 		{
@@ -118,8 +119,8 @@ package classes.Scenes.Dungeons.D3
 				outputText("\n\nSatisfied at last, you pull out with lurid ‘schliiiick’ sound. A few of the assembled demons clap and catcall, but most surprising of all is the monarch’s own roar of bliss, followed shortly after by his powerful hips lifting up off the floor. The well-fucked horse-cock erupts like a long-dormant volcano, spraying jizz from its sloppy, stretched slit until minotaur spunk is raining over the assembled crowd. Many of the demons immediately fall into fucking one another, but you have the good sense to avoid the bulk of it.");
 				outputText("\n\nAgain and again, those powerful, shaggy hips lift, and each time, more cow-cream explodes into the air, mixed with something else. Something better. Champion cum. Excellia is revitalized by erotic monsoon and manages to climb on top before he finishes, riding him like the bucking bronco that he is.");
 				outputText("\n\nNeither of them will be standing in your way any time soon. Time to deal with Lethice.");
-				cleanupAfterCombat(getGame().d3.resumeFromFight);
-			}
+                cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+            }
 			else
 			{
 				menu();
@@ -138,7 +139,7 @@ package classes.Scenes.Dungeons.D3
 			else outputText(". Your [sack] swells larger and larger, complete with the realization that your [balls] are being transformed into spooge-filled balloons.");
 			outputText("\n\nYou should be alarmed or worried, but mostly you’re amazed by how good it feels. How great it feels to go limp in his powerful arms. How wonderfully warm and content his narcotic spooge makes your body feel. You drool on his chest, then lick it back up, savoring the salty, sweaty tang of it. Your mouth feels empty without his cock, but then you realize you can suck his nipple until his cock is free.");
 			outputText("\n\nMinotaurs are so great. A fuzzy memory of some other desire tries to make itself known, but another buck of your bull’s hips has your head swimming and your body cumming. The pressure of your own ejaculation is nothing next to his of course. You doubt you could squirt anything out ever again. Your insides must be all stretched out with your lord’s love, but that’s fine so long as he uses you again. You can be his dribbly little spunksleeve.");
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 	
 		private function buttufucku():void
@@ -196,8 +197,8 @@ package classes.Scenes.Dungeons.D3
 			player.orgasm();
 			dynStats("lus", 10);
 
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
-		}
+cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+        }
 
 		private function mechanicalbullhue():void
 		{
@@ -291,8 +292,8 @@ package classes.Scenes.Dungeons.D3
 			dynStats("lus", 5, "scale", false);
 			player.createStatusEffect(StatusEffects.MinotaurKingsTouch, 0, 0, 0, 0);
 			flags[kFLAGS.MINOTAURKINGS_TOUCH] = 1;
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
-		}
+            cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+        }
 
 		private function titfuckCowslut():void
 		{
@@ -324,8 +325,8 @@ package classes.Scenes.Dungeons.D3
 
 			player.orgasm();
 			player.HP = player.maxHP();
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
-		}
+            cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+        }
 
 		private function sloppySeconds():void
 		{
@@ -378,8 +379,8 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\nLethice looks bored, drumming her fingers on the edge of her throne. Time to deal with her.");
 
 			player.orgasm();
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
-		}
+            cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+        }
 		
 		public function hailToTheKingBaby(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
@@ -441,7 +442,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\nSo what if you’re a dick-cozy, mounted on a minotaur’s beastly cock like some kind of trophy? Who cares if sometimes you have to lick out the Demon Queen while being reamed from behind? Everything is great. You never worry about anything, and there’s always someone filling you, fucking you full of liquid happiness.");
 			outputText("\n\nYou smile and request someone fuck your mouth. It always feels better with one in each end.");
 
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 
 		private function leavethem():void
@@ -459,7 +460,7 @@ package classes.Scenes.Dungeons.D3
 			else outputText("Not all of us are as enslaved by our desires as you.");
 			outputText("”</i>");
 
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
-		}
+cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+        }
 	}
 }

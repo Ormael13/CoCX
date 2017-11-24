@@ -1,14 +1,17 @@
 package classes.Scenes.Dungeons.D3 
 {
-	import classes.BreastRowClass;
-	import classes.Cock;
-	import classes.Monster;
-	import classes.VaginaClass;
-	import classes.StatusEffects;
-	import classes.PerkLib;
-	import classes.GlobalFlags.kFLAGS;
-	
-	/**
+import classes.Appearance;
+import classes.AppearanceDefs;
+import classes.BreastRowClass;
+import classes.Cock;
+import classes.GlobalFlags.kFLAGS;
+import classes.Monster;
+import classes.PerkLib;
+import classes.Scenes.SceneLib;
+import classes.StatusEffects;
+import classes.VaginaClass;
+
+/**
 	 * ...
 	 * @author Gedan
 	 */
@@ -72,25 +75,25 @@ package classes.Scenes.Dungeons.D3
 			
 			if (HP < 1)
 			{
-				doNext(game.endHpVictory);
+				doNext(SceneLib.combat.endHpVictory);
 				return;
 			}
 			
 			if (lust > maxLust())
 			{
-				doNext(game.endLustVictory);
+				doNext(SceneLib.combat.endLustVictory);
 				return;
 			}
 			
 			if (player.HP < 1)
 			{
-				doNext(game.endHpLoss);
+				doNext(SceneLib.combat.endHpLoss);
 				return;
 			}
 			
 			if (player.lust >= player.maxLust())
 			{
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 				return;
 			}
 			
@@ -101,7 +104,7 @@ package classes.Scenes.Dungeons.D3
 					outputText("\n\n[He] goes on in a dull croon as [he] continues to circle you, moving with the odd, syncopated jerks of a creature in a body that has only existed for a couple of minutes. “<i>Just let it happen, [name]. You can’t beat me. I am you, only with the knowledge and powers of a demon. Accept your fate.</i>”");
 					outputText("\n\nA weird fluttering feeling runs up your arm, and with a cold chill you look down to see it shimmer slightly, as if you were looking at it through running water.");
 					outputText("\n\n<b>You need to finish this as fast as you can.</b>");
-					break
+					break;
 					
 				case 1:
 					outputText("\n\n“<i>Do you know, I can’t even remember what gender I was before I got stuck in that mirror?</i>” the doppelganger says, as [he] slides a hand between your thighs’ mirror counterparts thoughtfully. “<i>I loved changing all the time. Being stuck as one gender seemed so boring when the tools to shift from one shape to the next were always there. That’s why this was my punishment. Forced to change all the time, at the unthinking behest of whoever happened to look into this cursed thing. You have to give Lethice credit, she’s not just cruel, she’s got imagination too. It’s a hell of a combination. I’d hate to see what she had in store for you.</i>”");
@@ -139,19 +142,17 @@ package classes.Scenes.Dungeons.D3
 					outputText("\n\n“<i>How did you even survive?</i>” the doppelganger looks in confusion. “<i>Regardless, I'm still taking your body.</i>”");
 					break;
 			}
-			
-			_roundCount++;
-			combatRoundOver();
+			_roundCount++; // ??? WTF
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.d3.doppleganger.punchYourselfInTheBalls();
+			SceneLib.d3.doppleganger.punchYourselfInTheBalls();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.d3.doppleganger.inSovietCoCSelfFucksYou();
+			SceneLib.d3.doppleganger.inSovietCoCSelfFucksYou();
 		}
 		
 		public function handleSpellResistance(spell:String):void
@@ -162,7 +163,7 @@ package classes.Scenes.Dungeons.D3
 			
 			if (spell == "fireball")
 			{
-				var damage:Number = player.level * 10 + 45 + rand(10)
+				var damage:Number = player.level * 10 + 45 + rand(10);
 				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 				damage = Math.round(damage);
@@ -170,7 +171,7 @@ package classes.Scenes.Dungeons.D3
 			}
 			else if (spell == "whitefire")
 			{
-				var damage2:Number = 10 + (player.inte / 3 + rand(player.inte / 2))
+				var damage2:Number = 10 + (player.inte / 3 + rand(player.inte / 2));
 				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage2 *= 3;
 				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage2 *= 0.3;
 				damage2 = Math.round(damage2);
@@ -191,7 +192,6 @@ package classes.Scenes.Dungeons.D3
 			if (hasStatusEffect(StatusEffects.Stunned)) {
 				removeStatusEffect(StatusEffects.Stunned);
 				outputText("Your duplicate is too stunned, buying you another round!");
-				combatRoundOver();
 				return;
 			}
 			outputText("Your duplicate chuckles in the face of your attacks.");
@@ -295,38 +295,38 @@ package classes.Scenes.Dungeons.D3
 			
 			switch(player.earType)
 			{
-				case EARS_HORSE:
+				case AppearanceDefs.EARS_HORSE:
 					str += " a pair of horse-like ears";
 					break;
-				case EARS_FERRET:
+				case AppearanceDefs.EARS_FERRET:
 					str += " a small pair of rounded ferret ears";
 					break;
-				case EARS_DOG:
+				case AppearanceDefs.EARS_DOG:
 					str += " a pair of dog ears";
 					break;
-				case EARS_COW:
+				case AppearanceDefs.EARS_COW:
 					str += " a pair of round, floppy cow ears";
 					break;
-				case EARS_ELFIN:
+				case AppearanceDefs.EARS_ELFIN:
 					str += " a large pair of pointy ears";
 					break;
-				case EARS_CAT:
+				case AppearanceDefs.EARS_CAT:
 					str += " a pair of cute, fuzzy cat ears";
 					break;
-				case EARS_LIZARD:
-				case EARS_DRAGON:
+				case AppearanceDefs.EARS_LIZARD:
+				case AppearanceDefs.EARS_DRAGON:
 					str += " a pair of rounded protrusions with small holes";
 					break;
-				case EARS_BUNNY:
+				case AppearanceDefs.EARS_BUNNY:
 					str += " a pair of floppy rabbit ears";
 					break;
-				case EARS_FOX:
+				case AppearanceDefs.EARS_FOX:
 					str += " a pair of large, adept fox ears";
 					break;
-				case EARS_RACCOON:
+				case AppearanceDefs.EARS_RACCOON:
 					str += " a pair of vaugely egg-shaped, furry racoon ears";
 					break;
-				case EARS_MOUSE:
+				case AppearanceDefs.EARS_MOUSE:
 					str += " a pair of large, dish-shaped mouse ears";
 					break;
 				default:
@@ -335,7 +335,7 @@ package classes.Scenes.Dungeons.D3
 			}
 			
 			str += ". " + player.mf("He", "She") + " keeps exploring the area around " + player.mf("his", "her") +" mouth with " + player.mf("his", "her") +" tongue with a horribly acquisitive, sensual interest.";
-			str += " " + player.mf("He", "She") + " moves around on " + player.mf("his", "her") +" [legs] with a twitchy jerkiness, " + player.mf("his", "her") + " " + game.hipDescript() + " swinging and tightening.";
+			str += " " + player.mf("He", "She") + " moves around on " + player.mf("his", "her") +" [legs] with a twitchy jerkiness, " + player.mf("his", "her") + " " + Appearance.hipDescription(player) + " swinging and tightening.";
 			if (player.tailType != 0) str += " " + player.mf("His", "Her") + " tail flicks this way and that.";
 			str += " " + player.mf("He", "She") + " wields the exact same [weapon] you do, and is dressed in the mirror image of your [armor]. ";
 			if (player.biggestTitSize() >= 2) str += "It’s difficult not to notice the way the mirror image of your " + player.breastDescript(player.biggestTitRow()) + " ebbs and heaves within it.";

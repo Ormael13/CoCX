@@ -6,14 +6,15 @@
 
 package classes.Scenes.Areas 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.Areas.Ocean.*;
-	import classes.Scenes.NPCs.CeaniScene;
-	import classes.Scenes.Places.Boat.SharkGirlScene;
-	
-	use namespace kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.Areas.Ocean.*;
+import classes.Scenes.NPCs.CeaniScene;
+import classes.Scenes.Places.Boat.SharkGirlScene;
+import classes.Scenes.SceneLib;
+
+use namespace kGAMECLASS;
 	
 	public class Ocean extends BaseContent
 	{
@@ -26,7 +27,7 @@ package classes.Scenes.Areas
 		}
 		
 		public function exploreOcean():void {
-			flags[kFLAGS.DISCOVERED_OCEAN]++
+			flags[kFLAGS.DISCOVERED_OCEAN]++;
 			
 			var choice:Array = [];
 			var select:int;
@@ -49,7 +50,7 @@ package classes.Scenes.Areas
 			switch(select) {
 				case 0:
 					flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] = 2;
-					kGAMECLASS.anemoneScene.mortalAnemoneeeeee();
+					SceneLib.anemoneScene.mortalAnemoneeeeee();
 					break;
 			/*	case 1:
 					scyllaScene.oceanScyllaEncounter();

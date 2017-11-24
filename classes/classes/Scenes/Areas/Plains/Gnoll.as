@@ -1,10 +1,11 @@
 package classes.Scenes.Areas.Plains
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
 
-	/**
+/**
 	 * ...
 	 * @author ...
 	 */
@@ -16,7 +17,7 @@ package classes.Scenes.Areas.Plains
 			var damage:Number = 0;
 			var attack:Number = rand(6);
 			//return to combat menu when finished
-			doNext(game.playerMenu);
+			doNext(EventParser.playerMenu);
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n");
@@ -86,7 +87,7 @@ package classes.Scenes.Areas.Plains
 					outputText(" ");
 					player.takeDamage(damage, true);
 				}
-				game.statScreenRefresh();
+				EngineCore.statScreenRefresh();
 			}
 		}
 		
@@ -129,7 +130,7 @@ package classes.Scenes.Areas.Plains
 			var damage:Number = 0;
 			var attack:Number = rand(6);
 //return to combat menu when finished
-			doNext(game.playerMenu);
+			doNext(EventParser.playerMenu);
 //Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n");
@@ -199,7 +200,7 @@ package classes.Scenes.Areas.Plains
 					outputText(" ");
 					player.takeDamage(damage, true);
 				}
-				game.statScreenRefresh();
+				EngineCore.statScreenRefresh();
 			}
 		}
 
@@ -209,7 +210,6 @@ package classes.Scenes.Areas.Plains
 				if (plural) outputText("Your foes are too dazed from your last hit to strike back!");
 				else outputText("Your foe is too dazed from your last hit to strike back!");
 				removeStatusEffect(StatusEffects.Stunned);
-				combatRoundOver();
 			}
 			if (hasStatusEffect(StatusEffects.Fear)) {
 				if (statusEffectv1(StatusEffects.Fear) == 0) {
@@ -227,13 +227,12 @@ package classes.Scenes.Areas.Plains
 					if (plural) outputText(capitalA + short + " are too busy shivering with fear to fight.");
 					else outputText(capitalA + short + " is too busy shivering with fear to fight.");
 				}
-				combatRoundOver();
 			}
 			var select:Number = 1;
 			var rando:Number = 1;
 //Exgartuan gets to do stuff!
 			if (player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0 && rand(3) == 0) {
-				game.exgartuan.exgartuanCombatUpdate();
+				SceneLib.exgartuan.exgartuanCombatUpdate();
 				outputText("\n\n");
 			}
 			if (hasStatusEffect(StatusEffects.Constricted)) {
@@ -244,7 +243,6 @@ package classes.Scenes.Areas.Plains
 					removeStatusEffect(StatusEffects.Constricted);
 				}
 				addStatusValue(StatusEffects.Constricted, 1, -1);
-				combatRoundOver();
 			}
 
 			if (rand(2) == 0) gnollTease();
@@ -252,7 +250,7 @@ package classes.Scenes.Areas.Plains
 				var damage:Number = 0;
 				var attack:Number = rand(6);
 //return to combat menu when finished
-				doNext(game.playerMenu);
+				doNext(EventParser.playerMenu);
 //Blind dodge change
 				if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 					outputText(capitalA + short + " completely misses you with a blind attack!\n");
@@ -322,11 +320,10 @@ package classes.Scenes.Areas.Plains
 						outputText(" ");
 						player.takeDamage(damage);
 					}
-					game.statScreenRefresh();
+					EngineCore.statScreenRefresh();
 				}
 				gnollAttackText();
 			}
-			combatRoundOver();
 		}
 
 
@@ -334,22 +331,22 @@ package classes.Scenes.Areas.Plains
 		{
 			if(hasStatusEffect(StatusEffects.PhyllaFight)) {
 				removeStatusEffect(StatusEffects.PhyllaFight);
-				game.desert.antsScene.phyllaPCBeatsGnoll();
+				SceneLib.desert.antsScene.phyllaPCBeatsGnoll();
 				return;
 			}
-			game.plains.gnollScene.defeatHyena();
+			SceneLib.plains.gnollScene.defeatHyena();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if(hasStatusEffect(StatusEffects.PhyllaFight)) {
 				removeStatusEffect(StatusEffects.PhyllaFight);
-				game.desert.antsScene.phyllaGnollBeatsPC();
+				SceneLib.desert.antsScene.phyllaGnollBeatsPC();
 			} else if(pcCameWorms) {
 				outputText("\n\nYour foe doesn't seem put off enough to leave...");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
-				game.plains.gnollScene.getRapedByGnoll();
+				SceneLib.plains.gnollScene.getRapedByGnoll();
 			}
 		}
 
@@ -360,14 +357,14 @@ package classes.Scenes.Areas.Plains
 			this.imageName = "gnoll";
 			this.long = "This lanky figure is dappled with black spots across rough, tawny fur. Wiry muscle ripples along long legs and arms, all of it seeming in perpetual frenetic motion: every moment half flinching and half lunging.  The head bears a dark muzzle curled in a perpetual leer and bright orange eyes watching with a savage animal cunning.  Between the legs hang what appears at first to be a long, thin dong; however, on closer inspection it is a fused tube of skin composed of elongated pussy lips and clitoris.  The hyena girl is sporting a pseudo-penis, and judging by the way it bobs higher as she jinks back and forth, she's happy to see you!\n\nShe wears torn rags scavenged from some other, somewhat smaller, creature, and in one hand clutches a twisted club.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_LOOSE);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DROOLING, AppearanceDefs.VAGINA_LOOSENESS_LOOSE);
 			createBreastRow(Appearance.breastCupInverse("C"));
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,25,0,0,0);
 			this.tallness = 6*12;
-			this.hipRating = HIP_RATING_AMPLE;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			this.skin.growFur({color:"tawny"});
 			this.hairColor = "black";
 			this.hairLength = 22;

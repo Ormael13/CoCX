@@ -1,16 +1,16 @@
 package classes.Scenes.Monsters 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
 
-	public class ImpWarlord extends Imp
+public class ImpWarlord extends Imp
 	{
 		public function clawAttack():void {
 			outputText("The imp warlord charges at you with his claws ready! ");
 			if (player.getEvasionRoll()) {
 				outputText("You manage to avoid his claws thanks to your reaction!");
-				combatRoundOver();
 				return;
 			}
 			else {
@@ -20,14 +20,12 @@ package classes.Scenes.Monsters
 				if (damage < 20) damage = 20;
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 
 		public function doubleAttack():void {
 			outputText("The imp warlord charges at you with his claws ready and sword raised! ");
 			if (player.getEvasionRoll()) {
 				outputText("You manage to dodge his deadly attack!");
-				combatRoundOver();
 				return;
 			}
 			else {
@@ -44,19 +42,18 @@ package classes.Scenes.Monsters
 				}
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
 			game.flags[kFLAGS.DEMONS_DEFEATED]++;
-			game.impScene.defeatImpLord();
+			SceneLib.impScene.defeatImpLord();
 		}
 
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			game.impScene.loseToAnImpLord();
+			SceneLib.impScene.loseToAnImpLord();
 		}
 		
 		public function ImpWarlord() 
@@ -76,12 +73,12 @@ package classes.Scenes.Monsters
 			this.cumMultiplier = 3;
 			this.hoursSinceCum = 20;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = rand(14) + 40;
-			this.hipRating = HIP_RATING_BOYISH;
-			this.buttRating = BUTT_RATING_TIGHT;
-			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
+			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
 			this.skinTone = "red";
 			initStrTouSpeInte(80, 71, 75, 56);
 			initWisLibSensCor(56, 71, 35, 100);
@@ -103,7 +100,7 @@ package classes.Scenes.Monsters
 					add(consumables.INCUBID,12).
 					add(consumables.SUCMILK,12).
 					add(jewelries.POWRRNG,1);
-			this.wingType = WING_TYPE_IMP;
+			this.wingType = AppearanceDefs.WING_TYPE_IMP;
 			this.special1 = lustMagicAttack;
 			this.special2 = clawAttack;
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);

@@ -3,10 +3,10 @@
 import classes.BodyParts.IOrifice;
 import classes.internals.Utils;
 
-	public class VaginaClass implements IOrifice
+public class VaginaClass implements IOrifice
 	{
-		include "../../includes/appearanceDefs.as";
-		public static const DEFAULT_CLIT_LENGTH:Number = 0.5;
+
+        public static const DEFAULT_CLIT_LENGTH:Number = 0.5;
 
 		//constructor
 		public function VaginaClass(vaginalWetness:Number = 1, vaginalLooseness:Number = 0, virgin:Boolean = false, clitLength:Number = DEFAULT_CLIT_LENGTH)
@@ -111,7 +111,7 @@ import classes.internals.Utils;
 		 */
 		public function stretch(cArea:Number, hasFeraMilkingTwat:Boolean = false):Boolean {
 			var stretched:Boolean = false;
-			if (hasFeraMilkingTwat || vaginalLooseness <= VAGINA_LOOSENESS_NORMAL) {
+			if (hasFeraMilkingTwat || vaginalLooseness <= AppearanceDefs.VAGINA_LOOSENESS_NORMAL) {
 				//cArea > capacity = autostreeeeetch.
 				if (cArea >= capacity()) {
 					vaginalLooseness++;
@@ -128,7 +128,7 @@ import classes.internals.Utils;
 					stretched = true;
 				}
 			}
-			if (vaginalLooseness > VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) vaginalLooseness = VAGINA_LOOSENESS_LEVEL_CLOWN_CAR;
+			if (vaginalLooseness > AppearanceDefs.VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) vaginalLooseness = AppearanceDefs.VAGINA_LOOSENESS_LEVEL_CLOWN_CAR;
 
 			if (virgin) {
 				virgin = false;

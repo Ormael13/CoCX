@@ -1,12 +1,12 @@
 package classes.Scenes.Areas.Bog 
 {
-	import classes.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects.Combat.LizanBlowpipeDebuff;
 import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	
-	public class LizanRogue extends Monster
+
+public class LizanRogue extends Monster
 	{
 		//1 - str
 		//2 - tou
@@ -24,7 +24,6 @@ import classes.internals.*;
 				outputText("The lizan flings himself back.  In the air he puts his blowgun to his lips and fires a single dart into your neck.  As you pull it out your limbs begin to feel like wet noodles, it appears you’ve been poisoned.");
 				(player.createOrFindStatusEffect(StatusEffects.LizanBlowpipe) as LizanBlowpipeDebuff).debuffStrSpe();
 			}
-			combatRoundOver();
 		}
 		
 		public function immaHurtYouBadly():void {
@@ -35,7 +34,6 @@ import classes.internals.*;
 				outputText("The lizan rushes at you.  As you raise your [weapon] to defend yourself he dives to the side, using his blowgun to fire a single stinging dart into your neck.  You pull out the dart and your skin begins to feel hypersensitive, you’re going to have trouble defending yourself");
 				(player.createOrFindStatusEffect(StatusEffects.LizanBlowpipe) as LizanBlowpipeDebuff).debuffTouSens();
 			}
-			combatRoundOver();
 		}
 		
 		public function wingstickThrow():void {
@@ -47,7 +45,6 @@ import classes.internals.*;
 				var damage:int = this.spe/3 + rand(60);
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 				
 		public function tongueAttack():void {
@@ -58,7 +55,6 @@ import classes.internals.*;
 				outputText("All you see is a flash of pink as the lizan’s long tongue hits your eyes. Some kind of chemical reaction causes your eyes to burn, you’ve been blinded!");
 				if (!player.hasStatusEffect(StatusEffects.Blind)) player.createStatusEffect(StatusEffects.Blind, 1 + rand(2), 0, 0, 0)
 			}
-			combatRoundOver();
 		}
 		
 		protected function chooseBlowpipe():void {
@@ -68,12 +64,12 @@ import classes.internals.*;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.bog.lizanScene.winAgainstLizan();
+			SceneLib.bog.lizanScene.winAgainstLizan();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.bog.lizanScene.loseToLizan();
+			SceneLib.bog.lizanScene.loseToLizan();
 		}
 		
 		private const SKIN_VARIATIONS:Array = ["emerald", "azure", "scarlet", "violet", "obsidian", "amber", "silver"];
@@ -81,7 +77,7 @@ import classes.internals.*;
 		public function LizanRogue() 
 		{
 			var skinToneAdj:String = randomChoice(SKIN_VARIATIONS);
-			this.skin.growCoat(SKIN_COAT_SCALES,{color:skinToneAdj});
+			this.skin.growCoat(AppearanceDefs.SKIN_COAT_SCALES,{color:skinToneAdj});
 			this.a = "the ";
 			this.short = "lizan rogue";
 			this.imageName = "lizanrogue";
@@ -90,11 +86,11 @@ import classes.internals.*;
 			createBreastRow(Appearance.breastCupInverse("flat"));
 			this.createCock(8, 3, CockTypesEnum.LIZARD);
 			this.createCock(8, 3, CockTypesEnum.LIZARD);
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_MOIST;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_MOIST;
 			this.tallness = 60 + rand(10);
-			this.hipRating = HIP_RATING_BOYISH;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			this.skinDesc = "skin";
 			this.hairColor = "black";
 			this.hairLength = 15;

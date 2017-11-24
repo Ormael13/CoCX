@@ -80,7 +80,7 @@ package classes.Scenes.Camp
 			if (player.findPerk(PerkLib.MythicalGolemMaker) >= 0) permGolemCost += 400;
 			return permGolemCost;
 		}
-		
+
 		public function accessMakeWinionsMainMenu():void {
 			clearOutput();
 			outputText("What helper would you like to make?\n\n");
@@ -153,7 +153,7 @@ package classes.Scenes.Camp
 			else flags[kFLAGS.PERNAMENT_GOLEMS_BAG]++;
 			doNext(accessMakeWinionsMainMenu);
 		}
-		
+
 		public function takeOutGolemCoreFromGolemBag():void {
 			clearOutput();
 			outputText("In order to not overload your bag for reusable golem cores you take out one of them.\n\n");
@@ -563,7 +563,7 @@ package classes.Scenes.Camp
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu);
 		}
-		
+
 		private function summonElementalAir():void {
 			clearOutput();
 			useMana(100);

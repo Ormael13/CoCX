@@ -4,12 +4,12 @@
  */
 package classes.Scenes.Dungeons.HiddenCave 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	
-	public class GuardianGolems extends Monster
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
+
+public class GuardianGolems extends Monster
 	{
 		public function backhand():void {
 			outputText("The golems visage twists into a grimace of irritation, and few of them swings their hands at you in a vicious backhand.");
@@ -28,7 +28,6 @@ package classes.Scenes.Dungeons.HiddenCave
 			var choice:Number = rand(3);
 			if (choice < 2) eAttack();
 			if (choice == 2) backhand();
-			combatRoundOver();
 		}
 		
 	//	override public function defeated(hpVictory:Boolean):void
@@ -38,7 +37,7 @@ package classes.Scenes.Dungeons.HiddenCave
 		
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			game.dungeons.hiddencave.defeatedByGuardianGolems();
+			SceneLib.dungeons.hiddencave.defeatedByGuardianGolems();
 		}
 		
 		public function GuardianGolems() 

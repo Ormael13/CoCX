@@ -3,11 +3,12 @@
  */
 package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Items.Armors.LustyMaidensArmor;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Items.Armors.LustyMaidensArmor;
 
-	public class CeraphScene extends NPCAwareContent
+public class CeraphScene extends NPCAwareContent
 	{
 		public function CeraphScene()
 		{
@@ -114,7 +115,7 @@ package classes.Scenes.NPCs
 					outputText("getting an exhibitionist thrill ");
 				}
 				outputText("and begin stroking ");
-				if (player.totalCocks() > 1) outputText("each of ");
+				if (player.cockTotal() > 1) outputText("each of ");
 				outputText("your stiff [cocks], preparing to penetrate her.\n\n");
 
 				outputText("Ceraph squirms in the dirt as you bring your [cock] closer and closer to her female hole, her cock twitching with need like some kind of perverse, mutant clit.  Her hips twitch at you, as if eager to devour your maleness.  You don't keep her waiting, ");
@@ -193,8 +194,8 @@ package classes.Scenes.NPCs
 			}
 			player.orgasm();
 			dynStats("lib", 3, "sen", 3, "cor", 1);
-			if (getGame().inCombat)
-				cleanupAfterCombat();
+            if (kGAMECLASS.inCombat)
+                cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -250,8 +251,8 @@ package classes.Scenes.NPCs
 			player.orgasm();
 			dynStats("lib", 3, "sen", 3,"cor", 1);
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
-			if (getGame().inCombat)
-				cleanupAfterCombat();
+            if (kGAMECLASS.inCombat)
+                cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -319,16 +320,16 @@ package classes.Scenes.NPCs
 			outputText("The demoness pulls out a diamond-studded piercing and closes in on you, her cock hard, her pussy moist, and her hips swaying seductively as she advances.  Ceraph gives you a serious look and warns you, \"<i>You know how close you are to being my pet, don't you?  You just need this piercing and a little time to get used to it.  Then if you're good, I'll strip you naked, tie you down, and let you lick me out.  We can even let the imps watch!</i>\"\n\n");
 
 			outputText("The idea turns you on immensely, and you pant and gasp as ");
-			if (player.totalCocks() > 0) {
+			if (player.cockTotal() > 0) {
 				outputText("pre-cum oozes from ");
-				if (player.totalCocks() > 1) outputText("each of ");
+				if (player.cockTotal() > 1) outputText("each of ");
 				outputText("your [cocks].");
 			}
 			else if (player.hasVagina()) outputText("feminine moisture drools from between your lips and your " + clitDescript() + " turns into a hard button.");
 			else outputText("your body aches for release.");
 			outputText("  With an amused grin, Ceraph yanks down your gear and ");
 			//[dicks]
-			if (player.totalCocks() > 0) {
+			if (player.cockTotal() > 0) {
 				outputText("grabs your " + cockDescript(0));
 				if (player.cocks[0].pierced > 0) outputText(", the old piercing clattering to the ground as it slides out of your flesh, ");
 				outputText(" and snaps the diamond stud through your sensitive flesh, making your vision haze red in pain.\n\n");
@@ -430,7 +431,7 @@ package classes.Scenes.NPCs
 			outputText("What the hell?  Did you just call yourself pet?  You struggle internally, thinking, \"<i>When did pet start thinking of " + player.mf("him", "her") + "self as pet?</i>\"  A tingle of new arousal shivers through you – Mistress Ceraph has made it impossible for you to think or call yourself anything other than pet!  What else is she going to do to you?\n\n");
 
 			outputText("\"<i>Oh it's so cute watching my pets and toys truly learn their new names.  Now come here pet, a good pet wears a collar so everyone knows who " + player.mf("he", "she") + " belongs to,</i>\" says Mistress as she pulls a thick black collar off a hook on the wall.  Compliant, you allow her to fasten it around your neck, waggling your ");
-			if (player.tailType == TAIL_TYPE_NONE) outputText("backside");
+			if (player.tailType == AppearanceDefs.TAIL_TYPE_NONE) outputText("backside");
 			else outputText("tail");
 			outputText(" back and forth to show Mistress how happy you are.  Obedience slowly crowds your mind, rolling over your other thoughts and concerns inexorably.  Your worries, cares, and troubles slide away, replaced with an all-consuming need to please.");
 			doNext(agreeToBeABitchPt2);
@@ -447,7 +448,7 @@ package classes.Scenes.NPCs
 
 			outputText("The champion that left Ingnam so long ago is totally unrecognizable, body and soul.  The spirit that once burned bright with the desire to save the innocents of the village has been warped and twisted beyond repair.  The once-champion known only as 'pet', not even worthy of a proper name, spends all " + player.mf("his", "her") + " time lusting after Mistress Ceraph, taking part in her depraved orgies and willingly submitting to any kinks or debaucheries that are presented to " + player.mf("him", "her") + ".  Pet's life of individuality and choice is over, all that remains is pleasure and pain.");
 
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 
 //[Initial Meeting Text]
@@ -547,9 +548,9 @@ package classes.Scenes.NPCs
 			spriteSelect(7);
 			outputText("You nod, biting your lip anxiously and undoing your armor to give her better access to your body.  The demoness pulls out a diamond-studded piercing and closes in on you, her cock hard, her pussy moist, and her hips swaying seductively as she advances.  Ceraph gives you a serious look and warns you, \"<i>You know how close you are to being my pet, don't you?  You just need this piercing and a little time to get used to it.  Then if you're good I'll strip you naked, tie you down, and let you lick me out.  We can even let the imps watch!</i>\"\n\n");
 			outputText("The idea turns you on immensely, and you pant and gasp as ");
-			if (player.totalCocks() > 0) {
+			if (player.cockTotal() > 0) {
 				outputText("pre-cum oozes from ");
-				if (player.totalCocks() > 1) outputText("each of ");
+				if (player.cockTotal() > 1) outputText("each of ");
 				outputText("your [cocks].");
 			}
 			else if (player.hasVagina()) {
@@ -635,13 +636,13 @@ package classes.Scenes.NPCs
 		{
 			//FOLLOWER CHANCE:
 			var leave:Function = cleanupAfterCombat;
-			if (!getGame().inCombat) {
-				//Load ceraph and set up win conditions
+            if (!kGAMECLASS.inCombat) {
+                //Load ceraph and set up win conditions
 				startCombat(new Ceraph());
 				leave = ceraphFollowerScene.ceraphFollowerAppearance;
 				//Exit combat
-				getGame().inCombat = false;
-				monster.lust = 100;
+                kGAMECLASS.inCombat = false;
+                monster.lust = 100;
 				monster.HP = 2;
 				if (player.lust < 34) player.lust = 34;
 			}
@@ -678,8 +679,8 @@ package classes.Scenes.NPCs
 				 */
 			}
 			else {
-				if (getGame().inCombat)
-					cleanupAfterCombat();
+                if (kGAMECLASS.inCombat)
+                    cleanupAfterCombat();
 				else doNext(ceraphFollowerScene.ceraphFollowerAppearance);
 			}
 		}
@@ -702,8 +703,8 @@ package classes.Scenes.NPCs
 			player.slimeFeed();
 			spriteSelect(7);
 			clearOutput();
-			if ((!getGame().inCombat) && flags[kFLAGS.PC_FETISH] < 3) outputText("The demoness touches your forehead, and suddenly your mind is awash with fetishes!  Judging by the playful look she has, it's temporary, and you play along.  ");
-			outputText("Ceraph throws her head back and laughs as you ");
+            if ((!kGAMECLASS.inCombat) && flags[kFLAGS.PC_FETISH] < 3) outputText("The demoness touches your forehead, and suddenly your mind is awash with fetishes!  Judging by the playful look she has, it's temporary, and you play along.  ");
+            outputText("Ceraph throws her head back and laughs as you ");
 			if (player.HP < 1) outputText("slump down, defeated");
 			else outputText("give up and start masturbating");
 			outputText(", \"<i>Really?  Is that it?  After being under my magic for so long, you try to make a stand and fail, like this?!  Pathetic.</i>\"\n\n");
@@ -726,8 +727,8 @@ package classes.Scenes.NPCs
 
 			outputText("You start to black out as you feel her release a wave of seed onto your " + hairDescript() + ".  Though you're too far gone to realize it, your eyes are slowly rolling back as your vision goes black.  Copious demonic fluids fill your mouth while Ceraph gets off on riding your face.  You're nearly gone when she finally pulls herself off of you, jacking her cock off and splattering a few ropes of thick male cum onto your chest and neck.  Coughing and sputtering out her sexual fluids, you fight back to consciousness, humiliated and aroused beyond measure.\n\n");
 
-			if (player.totalCocks() > 0) {
-				if (player.totalCocks() > 1) outputText("Each of y");
+			if (player.cockTotal() > 0) {
+				if (player.cockTotal() > 1) outputText("Each of y");
 				else outputText("Y");
 				outputText("our " + multiCockDescript() + " is twitching and dripping pre-cum, on the edge of orgasm.  ");
 			}
@@ -739,8 +740,8 @@ package classes.Scenes.NPCs
 
 			outputText("Her whip uncurls itself from around you, but by some sorcerous trick, you're unable to separate your limbs and free yourself.  Ceraph snickers and gives your rump a crack with her whip before sauntering off, leaving you to lie there, growing more and more sexually frustrated.  Eventually you doze off into a sort of half-sleep, dreaming of being dominated as the demon's fluids dry on your face.");
 			dynStats("lus", 200);
-			if (getGame().inCombat)
-				cleanupAfterCombat();
+            if (kGAMECLASS.inCombat)
+                cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -806,8 +807,8 @@ package classes.Scenes.NPCs
 			outputText(".  Ceraph's pussy gapes at least " + num2Text(int(player.cocks[x].cockThickness + 1)) + " inches wide, pushing her hips so far apart as to make it difficult to walk.  She shudders, drooling spit, pussy-juice, and sperm as her mouth, neck, and chest tighten up.  Her lower body doesn't change one iota; your magics are still overpowering her natural abilities below the waist.  The abused dom twitches a few more times before her eyes reappear and she pulls her tongue back into her mouth.\n\n");
 
 			outputText("Ceraph gasps, \"<i>Ohhhhkay.  That felt goooooooood.</i>\"  She gathers some of your sperm from her space and swallows it with a smile before she offers, \"<i>You've shown me a good time, mortal.");
-			if (!getGame().inCombat) {
-				outputText("</i>\"");
+            if (!kGAMECLASS.inCombat) {
+                outputText("</i>\"");
 				player.orgasm();
 				dynStats("lib", 3, "sen", 3, "cor", 1);
 				doNext(camp.returnToCampUseOneHour);
@@ -882,7 +883,7 @@ package classes.Scenes.NPCs
 			outputText("</i>\"\n\n");
 
 			outputText("The demoness lifts one heeled foot high onto a boulder and winks at you, letting her whip rub up and down her hard, nodule-studded shaft.  Her tail rises languidly between her perfect, lissomelegs, rubbing the glistening wet delta of her sex enticingly.  The demon coos, \"<i>Oh, I do love putting on a show for my future pets.  Tell me, did you really come up here to fight?  I'd rather lie back in the sunlight, rubbing my fingers over my glistening skin and showing everyone just how wondrous sex with me would be.  You can even go if you want, or maybe you'd have something worth trading with me?</i>\"");
-			dynStats("lus", (5 + player.cor / 10 + player.lib / 20), "cor", 0)
+			dynStats("lus", (5 + player.cor / 10 + player.lib / 20), "cor", 0);
 			//[Fight] [Trade] [Run]
 			simpleChoices("Fight", startAFightWithCeraph, "Trade", tradeCeraphSomething, "", null, "", null, "Run", runFromCeraphsNiceDeal);
 		}
@@ -993,7 +994,7 @@ package classes.Scenes.NPCs
 			var temp2:Number = 0;
 			//1 = wang, 2 = cunt, 3 = tits.
 			//Add dicks
-			temp = player.totalCocks();
+			temp = player.cockTotal();
 			while (temp > 0) {
 				temp--;
 				choices[choices.length] = 1;
@@ -1447,8 +1448,8 @@ package classes.Scenes.NPCs
 			if (player.cor < 33) outputText(" and a little bit by yourself");
 			outputText(", you drop her like a discarded rag.  She moans and begins masturbating, half-insensate from the rough treatment.  You ignore her, get dressed, and get out of there before the mountain's beasts show up.  Ceraph is in for a wild night!");
 			player.orgasm();
-			if (getGame().inCombat)
-				cleanupAfterCombat();
+            if (kGAMECLASS.inCombat)
+                cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 

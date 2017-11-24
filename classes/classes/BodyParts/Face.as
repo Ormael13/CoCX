@@ -2,9 +2,8 @@
  * Created by aimozg on 27.04.2017.
  */
 package classes.BodyParts {
-import classes.Appearance;
+import classes.AppearanceDefs;
 import classes.Creature;
-import classes.internals.Utils;
 
 public class Face extends SaveableBodyPart {
 
@@ -17,9 +16,9 @@ public class Face extends SaveableBodyPart {
 	}
 	public function hasMuzzle():Boolean {
 		return [
-				   FACE_HORSE, FACE_DOG, FACE_CAT, FACE_LIZARD, FACE_KANGAROO,
-				   FACE_FOX, FACE_DRAGON, FACE_RHINO, FACE_ECHIDNA, FACE_DEER,
-				   FACE_WOLF
+				   AppearanceDefs.FACE_HORSE, AppearanceDefs.FACE_DOG, AppearanceDefs.FACE_CAT, AppearanceDefs.FACE_LIZARD, AppearanceDefs.FACE_KANGAROO,
+				   AppearanceDefs.FACE_FOX, AppearanceDefs.FACE_DRAGON, AppearanceDefs.FACE_RHINO, AppearanceDefs.FACE_ECHIDNA, AppearanceDefs.FACE_DEER,
+				   AppearanceDefs.FACE_WOLF
 			   ].indexOf(type) >= 0;
 	}
 	public function hasBeard():Boolean {
@@ -34,38 +33,38 @@ public class Face extends SaveableBodyPart {
 		}
 	}
 	public function isHumanShaped():Boolean {
-		return isAny(FACE_HUMAN,
-				FACE_MANTICORE, FACE_BUCKTEETH, FACE_BUNNY, FACE_SHARK_TEETH,
-				FACE_SNAKE_FANGS, FACE_SPIDER_FANGS, FACE_YETI_FANGS, FACE_SALAMANDER_FANGS,
-				FACE_FERRET_MASK,FACE_VAMPIRE);
+		return isAny(AppearanceDefs.FACE_HUMAN,
+				AppearanceDefs.FACE_MANTICORE, AppearanceDefs.FACE_BUCKTEETH, AppearanceDefs.FACE_BUNNY, AppearanceDefs.FACE_SHARK_TEETH,
+				AppearanceDefs.FACE_SNAKE_FANGS, AppearanceDefs.FACE_SPIDER_FANGS, AppearanceDefs.FACE_YETI_FANGS, AppearanceDefs.FACE_SALAMANDER_FANGS,
+				AppearanceDefs.FACE_FERRET_MASK,AppearanceDefs.FACE_VAMPIRE);
 	}
 	public function nounPhrase():String {
 		var stringo:String = "";
-		if (type == FACE_HUMAN) return "face";
+		if (type == AppearanceDefs.FACE_HUMAN) return "face";
 		if (hasMuzzle()) {
 			if (trueOnceInN(3)) {
-				if (type == FACE_HORSE) stringo = "long ";
-				if (type == FACE_CAT) stringo = "feline ";
-				if (type == FACE_RHINO) stringo = "rhino ";
-				if (type == FACE_LIZARD
-					|| type == FACE_DRAGON) stringo = "reptilian ";
-				if (type == FACE_WOLF) stringo = "canine ";
+				if (type == AppearanceDefs.FACE_HORSE) stringo = "long ";
+				if (type == AppearanceDefs.FACE_CAT) stringo = "feline ";
+				if (type == AppearanceDefs.FACE_RHINO) stringo = "rhino ";
+				if (type == AppearanceDefs.FACE_LIZARD
+					|| type == AppearanceDefs.FACE_DRAGON) stringo = "reptilian ";
+				if (type == AppearanceDefs.FACE_WOLF) stringo = "canine ";
 			}
 			return stringo + randomChoice("muzzle", "snout", "face");
 		}
 		//3 - cowface
-		if (type == FACE_COW_MINOTAUR) {
+		if (type == AppearanceDefs.FACE_COW_MINOTAUR) {
 			if (trueOnceInN(4)) stringo = "bovine ";
 			return randomChoice("muzzle", stringo + "face");
 		}
 		//4 - sharkface-teeth
-		if (type == FACE_SHARK_TEETH) {
+		if (type == AppearanceDefs.FACE_SHARK_TEETH) {
 			if (trueOnceInN(4)) stringo = "angular ";
 			return stringo + "face";
 		}
-		if (type == FACE_PIG || type == FACE_BOAR) {
+		if (type == AppearanceDefs.FACE_PIG || type == AppearanceDefs.FACE_BOAR) {
 			if (trueOnceInN(4))
-				stringo = (type == FACE_PIG ? "pig" : "boar") + "-like ";
+				stringo = (type == AppearanceDefs.FACE_PIG ? "pig" : "boar") + "-like ";
 			if (trueOnceInN(4))
 				return stringo + "snout";
 			return stringo + "face";
@@ -141,7 +140,7 @@ public class Face extends SaveableBodyPart {
 				return a + "jaw-droppingly feminine shape with full, pouting lips, an adorable nose, and long, beautiful eyelashes";
 		}
 	override protected function loadFromOldSave(savedata:Object):void {
-		type = intOr(savedata.faceType,FACE_HUMAN);
+		type = intOr(savedata.faceType,AppearanceDefs.FACE_HUMAN);
 	}
 	override protected function saveToOldSave(savedata:Object):void {
 		savedata.faceType = type;

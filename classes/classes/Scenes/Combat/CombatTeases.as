@@ -2,13 +2,11 @@ package classes.Scenes.Combat {
 import classes.*;
 import classes.GlobalFlags.*;
 import classes.Items.*;
-import classes.Scenes.Areas.GlacialRift.FrostGiant;
 import classes.Scenes.Dungeons.D3.*;
-import classes.Scenes.Dungeons.HelDungeon.*;
-import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.Scenes.SceneLib;
 
-public class CombatTeases extends BaseContent {
+public class CombatTeases extends BaseCombatContent {
 	public function CombatTeases() {}
 
 	public function teaseAttack():void {
@@ -25,7 +23,8 @@ public class CombatTeases extends BaseContent {
 		}
 		else {
 			tease();
-			if (!combatRoundOver()) enemyAI();
+			if (combatIsOver()) return;
+			enemyAI();
 		}
 	}
 
@@ -124,16 +123,16 @@ public class CombatTeases extends BaseContent {
 		if (player.findPerk(PerkLib.JobCourtesan) >= 0 && monster.findPerk(PerkLib.EnemyBossType) >= 0) damage *= 1.2;
 		//partial skins bonuses
 		switch (player.coatType()) {
-			case SKIN_COAT_FUR:
+			case AppearanceDefs.SKIN_COAT_FUR:
 				damage += (1 + player.newGamePlusMod());
 				break;
-			case SKIN_COAT_SCALES:
+			case AppearanceDefs.SKIN_COAT_SCALES:
 				damage += (2 * (1 + player.newGamePlusMod()));
 				break;
-			case SKIN_COAT_CHITIN:
+			case AppearanceDefs.SKIN_COAT_CHITIN:
 				damage += (3 * (1 + player.newGamePlusMod()));
 				break;
-			case SKIN_COAT_BARK:
+			case AppearanceDefs.SKIN_COAT_BARK:
 				damage += (4 * (1 + player.newGamePlusMod()));
 				break;
 		}
@@ -371,7 +370,7 @@ public class CombatTeases extends BaseContent {
 			if (player.ass.analLooseness >= 5) choices[choices.length] = 16;
 		}
 		//17 Bee abdomen tease
-		if (player.tailType == TAIL_TYPE_BEE_ABDOMEN) {
+		if (player.tailType == AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN) {
 			choices[choices.length] = 17;
 			choices[choices.length] = 17;
 		}
@@ -399,7 +398,7 @@ public class CombatTeases extends BaseContent {
 			choices[choices.length] = 21;
 		}
 		//22 SPOIDAH SILK
-		if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN) {
+		if (player.tailType == AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN) {
 			choices[choices.length] = 22;
 			choices[choices.length] = 22;
 			choices[choices.length] = 22;
@@ -518,7 +517,7 @@ public class CombatTeases extends BaseContent {
 		//38 Kitsune Tease
 		//39 Kitsune Tease
 		//40 Kitsune Tease
-		if (player.kitsuneScore() >= 2 && player.tailType == TAIL_TYPE_FOX) {
+		if (player.kitsuneScore() >= 2 && player.tailType == AppearanceDefs.TAIL_TYPE_FOX) {
 			choices[choices.length] = 37;
 			choices[choices.length] = 37;
 			choices[choices.length] = 37;
@@ -537,14 +536,14 @@ public class CombatTeases extends BaseContent {
 			choices[choices.length] = 40;
 		}
 		//41 Kitsune Gendered Tease
-		if (player.kitsuneScore() >= 2 && player.tailType == TAIL_TYPE_FOX) {
+		if (player.kitsuneScore() >= 2 && player.tailType == AppearanceDefs.TAIL_TYPE_FOX) {
 			choices[choices.length] = 41;
 			choices[choices.length] = 41;
 			choices[choices.length] = 41;
 			choices[choices.length] = 41;
 		}
 		//42 Urta teases!
-		if (kGAMECLASS.urtaQuest.isUrta()) {
+		if (SceneLib.urtaQuest.isUrta()) {
 			choices[choices.length] = 42;
 			choices[choices.length] = 42;
 			choices[choices.length] = 42;
@@ -556,7 +555,7 @@ public class CombatTeases extends BaseContent {
 			choices[choices.length] = 42;
 		}
 		//43 - special mino + cowgirls
-		if (player.hasVagina() && player.lactationQ() >= 500 && player.biggestTitSize() >= 6 && player.cowScore() >= 3 && player.tailType == TAIL_TYPE_COW) {
+		if (player.hasVagina() && player.lactationQ() >= 500 && player.biggestTitSize() >= 6 && player.cowScore() >= 3 && player.tailType == AppearanceDefs.TAIL_TYPE_COW) {
 			choices[choices.length] = 43;
 			choices[choices.length] = 43;
 			choices[choices.length] = 43;
@@ -602,7 +601,7 @@ public class CombatTeases extends BaseContent {
 			choices[choices.length] = 46;
 		}
 		//47 - Manticore Tailpussy Tease
-		if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) {
+		if (player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL) {
 			choices[choices.length] = 47;
 			choices[choices.length] = 47;
 			choices[choices.length] = 47;
@@ -613,7 +612,7 @@ public class CombatTeases extends BaseContent {
 		//=======================================================
 		select = choices[rand(choices.length)];
 		if (monster.short.indexOf("minotaur") != -1) {
-			if (player.hasVagina() && player.lactationQ() >= 500 && player.biggestTitSize() >= 6 && player.cowScore() >= 3 && player.tailType == TAIL_TYPE_COW)
+			if (player.hasVagina() && player.lactationQ() >= 500 && player.biggestTitSize() >= 6 && player.cowScore() >= 3 && player.tailType == AppearanceDefs.TAIL_TYPE_COW)
 				select = 43;
 		}
 		if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) {
@@ -1495,17 +1494,17 @@ public class CombatTeases extends BaseContent {
 				monster.teased(damage);
 				if (crit == true) outputText(" <b>Critical!</b>");
 			}
-			if (flags[kFLAGS.PC_FETISH] >= 1 && !kGAMECLASS.urtaQuest.isUrta()) {
+			if (flags[kFLAGS.PC_FETISH] >= 1 && !SceneLib.urtaQuest.isUrta()) {
 				if (player.lust < (player.maxLust() * 0.75)) outputText("\nFlaunting your body in such a way gets you a little hot and bothered.");
 				else outputText("\nIf you keep exposing yourself you're going to get too horny to fight back.  This exhibitionism fetish makes it hard to resist just stripping naked and giving up.");
 				if (!justText) dynStats("lus", 2 + rand(3));
 			}
 			// Similar to fetish check, only add XP if the player IS the player...
-			if (!justText && !kGAMECLASS.urtaQuest.isUrta()) teaseXP(1);
+			if (!justText && !SceneLib.urtaQuest.isUrta()) teaseXP(1);
 		}
 		//Nuttin honey
 		else {
-			if (!justText && !kGAMECLASS.urtaQuest.isUrta()) teaseXP(5);
+			if (!justText && !SceneLib.urtaQuest.isUrta()) teaseXP(5);
 
 			if (monster is JeanClaude) (monster as JeanClaude).handleTease(0, false);
 			else if (monster is Doppleganger) (monster as Doppleganger).mirrorTease(0, false);

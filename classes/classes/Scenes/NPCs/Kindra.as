@@ -4,12 +4,12 @@
  */
 package classes.Scenes.NPCs 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	
-	use namespace kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.internals.*;
+
+use namespace kGAMECLASS;
 	
 	public class Kindra extends Monster
 	{
@@ -117,7 +117,6 @@ package classes.Scenes.NPCs
 					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
 					else eAttack();
 				}
-				combatRoundOver();
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 6) {
 				if (fatigue < (maxFatigue() - (bowShooting() * 6))) KindraFireBow06();
@@ -125,7 +124,6 @@ package classes.Scenes.NPCs
 					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
 					else eAttack();
 				}
-				combatRoundOver();
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 5) {
 				if (fatigue < (maxFatigue() - (bowShooting() * 5))) KindraFireBow05();
@@ -133,7 +131,6 @@ package classes.Scenes.NPCs
 					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
 					else eAttack();
 				}
-				combatRoundOver();
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 4) {
 				if (fatigue < (maxFatigue() - (bowShooting() * 4))) KindraFireBow04();
@@ -141,7 +138,6 @@ package classes.Scenes.NPCs
 					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
 					else eAttack();
 				}
-				combatRoundOver();
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 3) {
 				if (fatigue < (maxFatigue() - (bowShooting() * 3))) KindraFireBow03();
@@ -149,7 +145,6 @@ package classes.Scenes.NPCs
 					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
 					else eAttack();
 				}
-				combatRoundOver();
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 2) {
 				if (fatigue < (maxFatigue() - (bowShooting() * 2))) KindraFireBow02();
@@ -157,7 +152,6 @@ package classes.Scenes.NPCs
 					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
 					else eAttack();
 				}
-				combatRoundOver();
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 1) {
 				if (fatigue < (maxFatigue() - bowShooting())) KindraFireBow01();
@@ -165,7 +159,6 @@ package classes.Scenes.NPCs
 					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
 					else eAttack();
 				}
-				combatRoundOver();
 			}
 		}//używanie sheep milk w czasie walki czasami (daje -60 fat i -20 lust)
 		//nie zapomnieć używać KINDRA_ARROWS_SHOT flagi do śledzenia ile już strzał wystrzeliła kindra w celu zmniejszania kosztu ich
@@ -305,13 +298,13 @@ package classes.Scenes.NPCs
 				this.bonusHP = 300;
 				this.level = 63;
 			}
-			this.createVagina(false, VAGINA_WETNESS_NORMAL, VAGINA_LOOSENESS_TIGHT);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_NORMAL, AppearanceDefs.VAGINA_LOOSENESS_TIGHT);
 			createBreastRow(Appearance.breastCupInverse("C"));
-			this.ass.analLooseness = ANAL_LOOSENESS_VIRGIN;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_VIRGIN;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.tallness = 64;
-			this.hipRating = HIP_RATING_BOYISH;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			this.skinTone = "white";
 			this.hairColor = "white";
 			this.hairLength = 4;

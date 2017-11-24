@@ -1,10 +1,11 @@
 package classes.Scenes.Areas.Lake
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
 
-	public class GooGirl extends Monster
+public class GooGirl extends Monster
 	{
 		/*Fight-
 		 You are fighting a goo-girl.
@@ -18,7 +19,7 @@ package classes.Scenes.Areas.Lake
 		{
 			var damage:Number = 0;
 			//return to combat menu when finished
-			doNext(game.playerMenu);
+			doNext(EventParser.playerMenu);
 			if (findPerk(PerkLib.Acid) >= 0) outputText("Her body quivering from your flames, the goo-girl ");
 			else outputText("The slime holds its hands up and they morph into a replica of your [weapon].  Happily, she swings at you");
 			//Determine if dodged!
@@ -79,7 +80,6 @@ package classes.Scenes.Areas.Lake
 			if (damage > 0) player.takeDamage(damage, true);
 			statScreenRefresh();
 			outputText("\n");
-			combatRoundOver();
 		}
 
 //Play – 
@@ -87,7 +87,6 @@ package classes.Scenes.Areas.Lake
 		{
 			outputText("The goo-girl lunges, wrapping her slimy arms around your waist in a happy hug, hot muck quivering excitedly against you. She looks up, empty eyes confused by your lack of enthusiasm and forms her mouth into a petulant pout before letting go.  You shiver in the cold air, regretting the loss of her embrace.");
 			player.dynStats("lus", 3 + rand(3) + player.sens / 10);
-			combatRoundOver();
 		}
 
 //Throw – 
@@ -97,7 +96,6 @@ package classes.Scenes.Areas.Lake
 			var damage:Number = 1;
 			player.takeDamage(damage, true);
 			player.dynStats("lus", 5 + rand(3) + player.sens / 10);
-			combatRoundOver();
 		}
 
 //Engulf – 
@@ -105,7 +103,6 @@ package classes.Scenes.Areas.Lake
 		{
 			outputText("The goo-girl gleefully throws her entire body at you and, before you can get out of the way, she has engulfed you in her oozing form! Tendrils of " + skinTone + " slime slide up your nostrils and through your lips, filling your lungs with the girl's muck. You begin suffocating!");
 			if (!player.hasStatusEffect(StatusEffects.GooBind)) player.createStatusEffect(StatusEffects.GooBind, 0, 0, 0, 0);
-			combatRoundOver();
 		}
 
 		override protected function performCombatAction():void
@@ -120,16 +117,16 @@ package classes.Scenes.Areas.Lake
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.lake.gooGirlScene.beatUpGoo();
+			SceneLib.lake.gooGirlScene.beatUpGoo();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if (pcCameWorms) {
 				outputText("\n\nThe goo-girl seems confused but doesn't mind.");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
-				game.lake.gooGirlScene.getBeatByGooGirl();
+				SceneLib.lake.gooGirlScene.getBeatByGooGirl();
 			}
 		}
 
@@ -153,18 +150,18 @@ package classes.Scenes.Areas.Lake
 			this.imageName = "googirl";
 			this.long = "The goo-girl has a curious expression on her youthful, shimmering face. Her body is slender and globs of slime regularly drip from her limbs, splattering into the goo puddle pooling beneath her hips. A small, heart-shaped nucleus pulses in her chest with a red glow." + (playerHasBigBoobs ? ("  She has apparently made herself a bit more like you, as her chest appears to be a perfect copy of your [chest].") : "");
 			// this.long = false;
-			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 9001, 0, 0, 0);
 			this.createBreastRow(playerHasBigBoobs ? player.biggestTitSize() : 3);
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_SLIME_DROOLING;
 			this.createStatusEffect(StatusEffects.BonusACapacity,9001,0,0,0);
 			this.tallness = rand(8) + 70;
-			this.hipRating = HIP_RATING_AMPLE;
-			this.buttRating = BUTT_RATING_LARGE;
-			this.lowerBody = LOWER_BODY_TYPE_GOO;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_GOO;
 			var tone:String = randomChoice("blue", "purple", "crystal");
-			this.skin.setBaseOnly({color:tone,type:SKIN_BASE_GOO});
+			this.skin.setBaseOnly({color:tone,type:AppearanceDefs.SKIN_BASE_GOO});
 			this.hairColor = tone;
 			this.hairLength = 12 + rand(10);
 			initStrTouSpeInte(32, 40, 20, 30);

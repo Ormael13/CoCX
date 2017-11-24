@@ -1,6 +1,7 @@
 //The code that is responsible for managing MainView.
 package classes {
 import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
 
 import coc.view.BitmapDataSprite;
 import coc.view.MainView;
@@ -44,11 +45,15 @@ public class MainViewManager extends BaseContent {
 
 		//Set background
 		mainView.background.bitmapClass = MainView.Backgrounds[flags[kFLAGS.BACKGROUND_STYLE]];
-		mainView.statsView.setBackground(StatsView.SidebarBackgrounds[flags[kFLAGS.BACKGROUND_STYLE]]);
+		var sidebarBg:Class         = StatsView.SidebarBackgrounds[flags[kFLAGS.BACKGROUND_STYLE]];
+		mainView.statsView.setBackground(sidebarBg);
+		mainView.monsterStatsView.setBackground(sidebarBg);
 		//Set font
-		mainView.statsView.setTheme((flags[kFLAGS.USE_OLD_FONT] > 0) ? StatsView.ValueFontOld : StatsView.ValueFont,
-				textColorArray[flags[kFLAGS.BACKGROUND_STYLE]],
-				barAlphaArray[flags[kFLAGS.BACKGROUND_STYLE]]);
+		var font:String      = (flags[kFLAGS.USE_OLD_FONT] > 0) ? StatsView.ValueFontOld : StatsView.ValueFont;
+		var textColor:*      = textColorArray[flags[kFLAGS.BACKGROUND_STYLE]];
+		var barAlpha:* = barAlphaArray[flags[kFLAGS.BACKGROUND_STYLE]];
+		mainView.statsView.setTheme(font, textColor, barAlpha);
+		mainView.monsterStatsView.setTheme(font, textColor, barAlpha);
 	}
 
 	public function hideSprite():void {
@@ -66,8 +71,8 @@ public class MainViewManager extends BaseContent {
 		element.graphics.beginBitmapFill(bmp, null, false, false);
 		element.graphics.drawRect(0, 0, bmp.width, bmp.height);
 		element.graphics.endFill();
-		element.x = mainView.width - element.width;
-		element.y = mainView.height - element.height;
+		element.x = mainView.width - MainView.GAP - element.width;
+		element.y = mainView.height - MainView.GAP  - element.height;
 	}
 	//------------
 	// REFRESH
@@ -80,8 +85,8 @@ public class MainViewManager extends BaseContent {
 		}
 		//Set theme!
 		setTheme();
-		mainView.statsView.refreshStats(getGame());
-	}
+        mainView.statsView.refreshStats(kGAMECLASS);
+    }
 	public function showPlayerDoll(reload:Boolean=false):void {
 			tweenOutStats();
 		if (reload) mainView.charView.reload("external");
@@ -243,8 +248,8 @@ public class MainViewManager extends BaseContent {
 				return "\n" + s;
 			}
 		}
-		var obj:Stage = getGame().stage;
-		return chdump(obj, 0, obj.alpha, obj.visible, obj.scaleX, obj.scaleY);
+        var obj:Stage = kGAMECLASS.stage;
+        return chdump(obj, 0, obj.alpha, obj.visible, obj.scaleX, obj.scaleY);
 	}
 }
 }

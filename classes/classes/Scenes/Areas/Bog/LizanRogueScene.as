@@ -1,10 +1,10 @@
 package classes.Scenes.Areas.Bog 
 {
-	import classes.*;
-	import classes.GlobalFlags.*;
-	import classes.Scenes.UniqueSexScenes;
-	
-	public class LizanRogueScene extends BaseContent
+import classes.*;
+import classes.GlobalFlags.*;
+import classes.Scenes.UniqueSexScenes;
+
+public class LizanRogueScene extends BaseContent
 	{
 		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 		
@@ -83,8 +83,8 @@ package classes.Scenes.Areas.Bog
 					outputText("You wonder what you should do to the lizan.");
 					if (player.hasCock()) addButton(0, "Use Dick", rapeLizanInTheAss).hint("Anally penetrate him with your " + player.multiCockDescriptLight() + ".");
 					if (player.hasVagina()) addButton(1, "Use Pussy", rapeLizanWithPussy).hint("Get on top of the lizan and stuff his cock into your " + player.vaginaDescript() + ".");
-					if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(2, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
-					if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) addButton(3, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
+					if (player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(2, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
+					if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER) addButton(3, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
 					addButton(4, "Leave", cleanupAfterCombat);
 					return;
 				}
@@ -100,8 +100,8 @@ package classes.Scenes.Areas.Bog
 				if (player.lust >= 33) {
 					outputText("<b>You could have sex with him if you like to.</b> ");
 					addButton(0, "Sex", haveSexWithLizan).hint("Have some fun with the oh-so-sexy lizan.");
-					if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(2, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
-					if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) addButton(3, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
+					if (player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(2, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
+					if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER) addButton(3, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
 					addButton(4, "Leave", leaveLizanAfterCombat);
 					return;
 				}
@@ -183,8 +183,8 @@ package classes.Scenes.Areas.Bog
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
-			if (getGame().inCombat) cleanupAfterCombat();
-		}
+            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+        }
 		
 		public function consensualGetFucked():void {
 			clearOutput();
@@ -237,8 +237,8 @@ package classes.Scenes.Areas.Bog
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
-			if (getGame().inCombat) cleanupAfterCombat();
-		}
+            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+        }
 		
 		public function consensualGetButtFucked():void {
 			clearOutput();
@@ -287,8 +287,8 @@ package classes.Scenes.Areas.Bog
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
-			if (getGame().inCombat) cleanupAfterCombat();
-		}
+            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+        }
 		
 		public function consensualDoublePenetration():void {
 			clearOutput();
@@ -348,8 +348,8 @@ package classes.Scenes.Areas.Bog
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
-			if (getGame().inCombat) cleanupAfterCombat();
-		}
+            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+        }
 		
 		public function consensualWatersports():void { //Yay watersports!
 			clearOutput();
@@ -381,8 +381,8 @@ package classes.Scenes.Areas.Bog
 			outputText(" You cuddle with the lizan for a moment before you have to part ways" + player.clothedOrNaked(" and redress yourself in your [armor]", "") + ".");
 			outputText("\n\n\"<i>I hope you come back later,</i>\" the lizan says with a smile. You give him a kiss before you return to your camp.");
 			doNext(camp.returnToCampUseOneHour);
-			if (getGame().inCombat) cleanupAfterCombat();
-		}
+            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+        }
 		
 		public function rapeLizanInTheAss():void {
 			clearOutput();

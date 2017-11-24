@@ -3,12 +3,13 @@
  */
 package classes
 {
+import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 
 import flash.utils.Dictionary;
 
-	public class PerkType extends BaseContent
+public class PerkType extends BaseContent
 	{
 		private static var PERK_LIBRARY:Dictionary = new Dictionary();
 
@@ -262,7 +263,7 @@ import flash.utils.Dictionary;
 		public function requireMinLust(value:int):PerkType {
 			requirements.push({
 				fn  : function(player:Player):Boolean {
-					return kGAMECLASS.minLust() >= value;
+					return EngineCore.minLust() >= value;
 				},
 				text: "Min. Lust "+value,
 				type: "minlust",

@@ -14,7 +14,6 @@ package classes.Scenes.Monsters
 				//Blind dodge change
 				if (hasStatusEffect(StatusEffects.Blind)) {
 					outputText(capitalA + short + " swings her whip at you wildly, totally missing due to her blindness!!");
-					combatRoundOver();
 					return;
 				}
 				outputText("Grinning deviously, the ");
@@ -87,7 +86,7 @@ package classes.Scenes.Monsters
 						}
 						if (player.gender == 3) {
 							outputText("groin, dealing painful damage to your [cocks] and " + player.vaginaDescript(0) + ", doubling you over in agony");
-							damage = int((player.maxHP()) / 3)
+							damage = int((player.maxHP()) / 3);
 							if (groinProtection > 0) {
 								outputText("! Of course, it would have been worse if you didn't wear groin protection");
 								damage = int(damage / (groinProtection + 1));
@@ -126,7 +125,6 @@ package classes.Scenes.Monsters
 				this.weaponName = "whip";
 				this.weaponVerb = "brutal whip-crack";
 			}
-			combatRoundOver();
 		}
 
 		public function AbstractSuccubus()
@@ -150,7 +148,6 @@ package classes.Scenes.Monsters
 				outputText("  You start to dodge to the side, but she shifts direction expertly and plants a wet kiss on your lips.  She spins and dodges away with a ballet dancer's grace, leaving you to wonder what just happened.  ");
 				if (!player.hasStatusEffect(StatusEffects.KissOfDeath)) player.createStatusEffect(StatusEffects.KissOfDeath, 0, 0, 0, 0);
 			}
-			combatRoundOver();
 		}
 
 		protected function seduceAttack():void
@@ -218,7 +215,6 @@ package classes.Scenes.Monsters
 				}
 				else outputText("\nYou're unimpressed.\n\n");
 			}
-			combatRoundOver();
 		}
 	}
 }

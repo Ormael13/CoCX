@@ -1,10 +1,11 @@
 package classes.Scenes.Monsters 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
 
-	public class ImpOverlord extends Imp
+public class ImpOverlord extends Imp
 	{
 		public var spellCostCharge:int = 6;
 		public var spellCostBlind:int = 8;
@@ -73,7 +74,7 @@ package classes.Scenes.Monsters
 			else if (spellChooser == 3 && fatigue <= (maxFatigue() - spellCostArouse)) {
 				outputText("He makes a series of arcane gestures, drawing on his lust to inflict it upon you! ");
 				var lustDamage:int = (inte / 5) + rand(10);
-				lustDamage = lustDamage * (game.lustPercent() / 100);
+				lustDamage = lustDamage * (EngineCore.lustPercent() / 100);
 				player.dynStats("lus", lustDamage, "scale", false);
 				outputText(" <b>(<font color=\"#ff00ff\">" + (Math.round(lustDamage * 10) / 10) + "</font>)</b>");
 				fatigue += spellCostArouse;
@@ -93,7 +94,6 @@ package classes.Scenes.Monsters
 				createStatusEffect(StatusEffects.Might, 20, 20, 0, 0);
 				fatigue += spellCostMight;
 			}
-			combatRoundOver();
 		}
 		
 		//Imp Fire
@@ -107,7 +107,6 @@ package classes.Scenes.Monsters
 			damage = Math.round(damage);
 			player.takeMagicDamage(damage, true);
 			player.dynStats("lus", 20 + player.cor / 10);
-			combatRoundOver();
 		}
 
 		//Lust Attack
@@ -116,7 +115,6 @@ package classes.Scenes.Monsters
 			outputText("Lowering his loincloth the imp reveals his inhumanly thick shaft.  He smirks and licks his lips as he gives his cock a squeeze, milking a few beads of clear pre from the tip.  You shake your head and try to ignore your growing need.");
 			//[+Lust]
 			player.dynStats("lus", 15 + player.lib / 5 + player.cor / 5);
-			combatRoundOver();
 		}
 
 		//Lust and Light Attack
@@ -127,7 +125,6 @@ package classes.Scenes.Monsters
 			player.takeDamage(damage, true);
 			//[-HP(minor) // +Lust]
 			player.dynStats("lus", 25 + player.sens / 4 + player.cor / 10);
-			combatRoundOver();
 		}
 		
 		//Cum cannon!
@@ -138,12 +135,10 @@ package classes.Scenes.Monsters
 			if (lust < 0) lust = 0;
 			if (player.getEvasionRoll()) {
 				outputText("You manage to dodge his corrupted cum thanks to your reaction!");
-				combatRoundOver();
 				return;
 			}
 			else if (player.shieldName == "dragon-shell shield" && rand(3) == 0) {
 				outputText("The shield managed to absorb the cum!");
-				combatRoundOver();
 				return;
 			}
 			else {
@@ -151,14 +146,12 @@ package classes.Scenes.Monsters
 				player.slimeFeed();
 				player.dynStats("lus", 30 + player.sens / 4 + player.cor / 10);
 			}
-			combatRoundOver();
 		}
 		
 		public function clawAttack():void {
 			outputText("The imp overlord suddenly charges at you with his claws ready! ");
 			if (player.getEvasionRoll()) {
 				outputText("You manage to avoid his claws thanks to your reaction!");
-				combatRoundOver();
 				return;
 			}
 			else {
@@ -168,14 +161,12 @@ package classes.Scenes.Monsters
 				if (damage < 20) damage = 20;
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 
 		public function doubleAttack():void {
 			outputText("The imp overlord suddenly charges at you with his claws ready and scimitar raised! ");
 			if (player.getEvasionRoll()) {
 				outputText("You manage to dodge his deadly attack!");
-				combatRoundOver();
 				return;
 			}
 			else {
@@ -192,7 +183,6 @@ package classes.Scenes.Monsters
 				}
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		
 		override protected function performCombatAction():void
@@ -204,12 +194,12 @@ package classes.Scenes.Monsters
 		override public function defeated(hpVictory:Boolean):void
 		{
 			game.flags[kFLAGS.DEMONS_DEFEATED]++;
-			game.impScene.defeatImpLord();
+			SceneLib.impScene.defeatImpLord();
 		}
 
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			game.impScene.loseToAnImpLord();
+			SceneLib.impScene.loseToAnImpLord();
 		}
 		
 		public function ImpOverlord() 
@@ -229,12 +219,12 @@ package classes.Scenes.Monsters
 			this.cumMultiplier = 3;
 			this.hoursSinceCum = 20;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = rand(14) + 40;
-			this.hipRating = HIP_RATING_BOYISH;
-			this.buttRating = BUTT_RATING_TIGHT;
-			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
+			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
 			this.skinTone = "red";
 			initStrTouSpeInte(100, 95, 85, 71);
 			initWisLibSensCor(71, 75, 35, 100);
@@ -258,7 +248,7 @@ package classes.Scenes.Monsters
 					add(consumables.SUCMILK,12).
 					add(weapons.SCIMITR, 1).
 					add(armors.BEEARMR, 1);
-			this.wingType = WING_TYPE_IMP;
+			this.wingType = AppearanceDefs.WING_TYPE_IMP;
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}

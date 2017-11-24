@@ -1,14 +1,15 @@
 package classes.Scenes.Dungeons.D3 
 {
-	import classes.BaseContent;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.StatusEffects;
-	import classes.PerkLib;
-	import classes.Scenes.Dungeons.Factory.IncubusMechanic;
-	import classes.CockTypesEnum;
-	import classes.PregnancyStore;
-	
-	/**
+import classes.BaseContent;
+import classes.CockTypesEnum;
+import classes.EventParser;
+import classes.GlobalFlags.kFLAGS;
+import classes.PerkLib;
+import classes.PregnancyStore;
+import classes.Scenes.Dungeons.Factory.IncubusMechanic;
+import classes.Scenes.SceneLib;
+
+/**
 	 * ...
 	 * @author Gedan
 	 */
@@ -24,8 +25,8 @@ package classes.Scenes.Dungeons.D3
 		// IF you approach him, then we can track that (either you fight, or you talk and give him an item)
 		private function metIncubusMechanicInD1():Boolean
 		{
-			if (flags[kFLAGS.FACTORY_INCUBUS_DEFEATED] > 0 || flags[kFLAGS.FACTORY_INCUBUS_BRIBED] > 0) return true;
-			return false;
+			return flags[kFLAGS.FACTORY_INCUBUS_DEFEATED] > 0 || flags[kFLAGS.FACTORY_INCUBUS_BRIBED] > 0;
+
 		}
 		
 		private const MECHNIC_NO_SELECTION:int = 0;
@@ -47,7 +48,7 @@ package classes.Scenes.Dungeons.D3
 				outputText(" demonic mechanic lounges against a gleaming, metallic control panel");
 				if (flags[kFLAGS.FACTORY_INCUBUS_BRIBED] > 0) outputText(", a rolled-up hentai magazine tucked neatly into the chest-pocket of his overalls");
 				if (metIncubusMechanicInD1()) outputText(". This is the same incubus you met back in the factory! He still sports his familiar, stained coveralls, and the crotch is as torn as ever, revealing a cock that looks like an odd hybrid of a tentacle, a bumpy demon-dong, and a stinger-ringed anemone cock. While you watch, it idly divides into two... four... eight narrow, writhing tendrils before merging back together into a three-inch-thick monster-cock.");
-				else outputText(". He sports a pair of stained coveralls, with the crotch torn open, revealing a cock that looks like an odd hybrid of tentacle, a bumpy demon-dong, and a stinger-ringed anemone cock. While you watch, it idly divides into two... four... eight narrow, writhing tendriles before merging back together into a three-inch-thick monster-cock.")
+				else outputText(". He sports a pair of stained coveralls, with the crotch torn open, revealing a cock that looks like an odd hybrid of tentacle, a bumpy demon-dong, and a stinger-ringed anemone cock. While you watch, it idly divides into two... four... eight narrow, writhing tendriles before merging back together into a three-inch-thick monster-cock.");
 				outputText(" It stiffens under your ocular attentions, and a timeless voice with the smoothness of silk, yet an undercurrent of rumbling gravel calls, \"<i>Eyes up here, Champion.</i>\"");
 
 				outputText("\n\nScowling a little at being caught so openly studying his erection, you level your gaze at the haughty incubus.");
@@ -135,8 +136,8 @@ package classes.Scenes.Dungeons.D3
 
 			outputText("\n\nThe platform touches down roughly thirty minutes after your departure, and you head back to camp with all due haste.");
 
-			doNext(getGame().d3.exitD3);
-		}
+doNext(SceneLib.d3.exitD3);
+        }
 		
 		private function useLiftPostDefeat():void
 		{
@@ -145,9 +146,9 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\nThere's a railing to hold onto as you're lowered down to the mountains. While the platform does rock from side to side along the slow trip down, its motions are not erratic enough to put you in any significant danger. Even better, you aren't bothered by a single harpy along the way. This section of the high mountains seems to have been cleansed of them.");
 			
 			outputText("\n\nThe platform touches down roughly thirty minutes after your departure, and you head back to camp with all due haste.");
-			
-			doNext(getGame().d3.exitD3);
-		}
+
+doNext(SceneLib.d3.exitD3);
+        }
 		
 		public function suckIncubusDick():void
 		{
@@ -166,7 +167,7 @@ package classes.Scenes.Dungeons.D3
 				outputText(" You find your crotch becoming");
 				if (player.wetness() <= 2) outputText(" even more soaked than normal");
 				else if (player.wetness() <= 4) outputText(" wet with fresh lust");
-				else outputText(" sticky with lust")
+				else outputText(" sticky with lust");
 				outputText(" at his masculine scent and appearance.")
 			}
 			else if (player.hasCock())
@@ -201,8 +202,8 @@ package classes.Scenes.Dungeons.D3
 
 			dynStats("lib+", 5, "cor+", 5, "lus+", 100);
 
-			doNext(getGame().d3.exitD3);
-		}
+doNext(SceneLib.d3.exitD3);
+        }
 		
 		public function beatDaMechanic(hpVictory:Boolean):void
 		{
@@ -226,8 +227,8 @@ package classes.Scenes.Dungeons.D3
 			flags[kFLAGS.D3_MECHANIC_FIGHT_RESULT] = MECHANIC_KILLED;
 			clearOutput();
 			outputText("He proves blessedly easy to kill, and you roll the body off the cliffs to avoid alerting any of Lethice's other ilk.");
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
-		}
+            cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+        }
 
 		private function letMechanicGo(hpVictory:Boolean):void
 		{
@@ -242,8 +243,8 @@ package classes.Scenes.Dungeons.D3
 	
 			outputText("\n\nThe incubus mechanic flies away for good, though you can’t can say whether he will wreak havoc or live quietly.");
 
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
-		}
+cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+        }
 		
 		private function buttfuckTheMechanic(hpVictory:Boolean):void
 		{
@@ -338,8 +339,8 @@ package classes.Scenes.Dungeons.D3
 			player.orgasm();
 			dynStats("cor+", 5);
 
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
-		}
+cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+        }
 		
 		private const MECHANIC_DEMON_COCK:int = 0;
 		private const MECHANIC_HORZ_GOG:int = 1;
@@ -522,8 +523,8 @@ package classes.Scenes.Dungeons.D3
 			player.orgasm();
 			dynStats("cor+", 5);
 
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
-		}
+cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+        }
 		
 		public function mechanicFuckedYouUp(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
@@ -693,7 +694,7 @@ package classes.Scenes.Dungeons.D3
 			clearOutput();
 			outputText("The champion finally got to cum once Lethice had her turn, but by that point, pussy was all " + player.mf("he","she") + " could think about. Release came more frequently with the demon queen's permission. It didn't really matter, though. The champion was addicted to riding on the edge of climax, broken into nothing more than a demonic vibrator.");
 
-			getGame().gameOver(); // G-G-G-GAMEOVER.
+			EventParser.gameOver(); // G-G-G-GAMEOVER.
 		}
 		
 		
@@ -821,7 +822,7 @@ package classes.Scenes.Dungeons.D3
 
 			outputText("\n\nYou'll do anything to keep yourself pleasantly slick for your masters. You don't even protest when the plug is forced back into your mouth and hooked to a nutrient solution.");
 
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 		
 	}

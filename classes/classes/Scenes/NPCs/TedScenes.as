@@ -4,10 +4,10 @@
  */
 package classes.Scenes.NPCs 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	
-	public class TedScenes extends NPCAwareContent
+import classes.EventParser;
+import classes.GlobalFlags.kFLAGS;
+
+public class TedScenes extends NPCAwareContent
 	{
 		
 		public function TedScenes() 
@@ -34,7 +34,7 @@ package classes.Scenes.NPCs
 			outputText(" her smile become more wider (or maybe one would say more creppy), \"<i>he need also some examples to show how ends up thsoe that rejected his offer right away and forced him to send his faithfull minions to 'correct' those mortals. Of course there is always chance mortal can not survive 'corrections'...</i>\" ");
 			outputText("And with that she close the distance divinding you both and without any more words start to pummel you that not stops even when you loose consciousness again. Only when she is sure that you not longer breathing she stopping.\n\n");
 			outputText("\"<i>You're as reliable as always Aurora. If only other little sisters was as faithfull servants as you...</i>\".\n\n");
-			getGame().gameOver();
+			EventParser.gameOver();
 			removeButton(1);
 		}
 		

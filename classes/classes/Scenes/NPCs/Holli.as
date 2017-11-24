@@ -1,9 +1,10 @@
 package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
-	public class Holli extends Monster
+public class Holli extends Monster
 	{
 		/*Fight -Z
 		 Marae's offshoot, [monster] stands rooted in front of you.  Solid black eyes with golden pupils stare out at you.  Her normally-nude body is concealed inside her tree, though occasionally she will flash you the devilish grin of a sadistic temptress and the bark will split to reveal a pale, jiggling bit of flesh.  A pair of gnarled oak horns sprout from her forehead; leaves and flowers alternately bloom and wither on them as her face contorts with emotion.
@@ -35,7 +36,6 @@ package classes.Scenes.NPCs
 			}
 			outputText("\n\n");
 			player.createStatusEffect(StatusEffects.HolliConstrict, 0, 0, 0, 0);
-			combatRoundOver();
 		}
 
 //End of Round, if no Jojo Fire -Z
@@ -87,7 +87,6 @@ package classes.Scenes.NPCs
 
 				}
 			}
-			combatRoundOver();
 		}
 
 //if player uses whitefire/firebreath successfully, suppress these, go to 'Fire Lit' EOR events, and output additional line after the attack:
@@ -119,12 +118,11 @@ package classes.Scenes.NPCs
 				else outputText("have me inside you");
 				outputText(", forever...</i>\" ");
 				//lust damage, fatigue damage, light HP damage
-				game.fatigue(10);
+				EngineCore.fatigue(10);
 				player.dynStats("lus", 25);
 				var damage:Number = 20 + rand(10);
 				damage = player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 
 //constrict -Z
@@ -149,7 +147,6 @@ package classes.Scenes.NPCs
 				player.dynStats("lus", 15);
 				player.createStatusEffect(StatusEffects.HolliConstrict, 0, 0, 0, 0);
 			}
-			combatRoundOver();
 		}
 
 		public function struggleOutOfHolli():void
@@ -159,7 +156,7 @@ package classes.Scenes.NPCs
 			player.addStatusValue(StatusEffects.HolliConstrict, 1, 9);
 			//Struggle Succeed
 			//if demon/dragon tongue, automatic success
-			if (player.tongueType > TONGUE_HUMAN) {
+			if (player.tongueType > AppearanceDefs.TONGUE_HUMAN) {
 				outputText("You can't move an arm nor a [leg] to bat the flower away... but she's literally holding your mouth open.  Your long tongue rolls out, gripping and ripping out several of the petals on the end of her stalk!  Holli screams and her roots slacken, allowing you to batter your way out of them.");
 				player.removeStatusEffect(StatusEffects.HolliConstrict);
 			}
@@ -175,7 +172,6 @@ package classes.Scenes.NPCs
 				waitForHolliConstrict(false);
 				return;
 			}
-			combatRoundOver();
 		}
 
 		public function waitForHolliConstrict(newScreen:Boolean = true):void
@@ -186,7 +182,6 @@ package classes.Scenes.NPCs
 			lust -= 20;
 			if (lust < 20) lust = 20;
 			player.dynStats("lus", 15 + player.sens / 5);
-			combatRoundOver();
 		}
 
 //heal -Z
@@ -197,7 +192,6 @@ package classes.Scenes.NPCs
 			outputText("The bark splits part way and the woman's mouth suddenly explodes with color, her lips folding out into a rather yonic-looking orchid.  Copious white-tinted sap oozes from the bloom, coating her bark and healing the lesions.  Petals rustle as she speaks wetly through it.  \"<i>Your efforts are nothing!  Throw yourself on my mercy; be my slave and do my bidding!</i>\"");
 			//heal some fuckin' hp
 			addHP(200);
-			combatRoundOver();
 		}
 
 		override protected function performCombatAction():void
@@ -211,12 +205,12 @@ package classes.Scenes.NPCs
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.holliScene.defeatHolli();
+			SceneLib.holliScene.defeatHolli();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.holliScene.enjoyYourBadEndBIYAAAATCH();
+			SceneLib.holliScene.enjoyYourBadEndBIYAAAATCH();
 		}
 
 
@@ -241,14 +235,14 @@ package classes.Scenes.NPCs
 			this.ballSize = 0;
 			this.cumMultiplier = 3;
 			this.hoursSinceCum = 20;
-			this.createVagina(false, VAGINA_WETNESS_WET, VAGINA_LOOSENESS_LOOSE);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_WET, AppearanceDefs.VAGINA_LOOSENESS_LOOSE);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 20, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = rand(12) + 55;
-			this.hipRating = HIP_RATING_CURVY;
-			this.buttRating = BUTT_RATING_LARGE;
+			this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
 			this.skinTone = "black";
 			this.hairColor = "sandy-blonde";
 			this.hairLength = 15;

@@ -3,14 +3,14 @@
  */
 package classes.Scenes.Places.Bazaar
 {
-	import classes.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.Places.Bazaar;
+import classes.*;
+import classes.Scenes.Places.Bazaar;
+import classes.Scenes.SceneLib;
 
-	public class BazaarAbstractContent extends BaseContent
+public class BazaarAbstractContent extends BaseContent
 	{
 		protected function get bazaar():Bazaar {
-			return kGAMECLASS.bazaar;
+			return SceneLib.bazaar;
 		}
 		public function BazaarAbstractContent()
 		{

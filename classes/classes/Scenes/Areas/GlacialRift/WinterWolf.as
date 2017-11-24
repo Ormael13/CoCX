@@ -4,20 +4,21 @@
  */
 package classes.Scenes.Areas.GlacialRift 
 {
-	import classes.*;
-	import classes.internals.WeightedDrop;
-	import classes.GlobalFlags.kFLAGS;
-	
-	public class WinterWolf extends Monster 
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.WeightedDrop;
+
+public class WinterWolf extends Monster
 	{
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.glacialRift.winterwolfScene.winAgainstWinterWolf();
+			SceneLib.glacialRift.winterwolfScene.winAgainstWinterWolf();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.glacialRift.winterwolfScene.loseToWinterWolf();
+			SceneLib.glacialRift.winterwolfScene.loseToWinterWolf();
 		}
 		
 		override protected function performCombatAction():void
@@ -78,7 +79,6 @@ package classes.Scenes.Areas.GlacialRift
 				dmgtaken += damage;
 				outputText(" (<b><font color=\"#800000\">" + damage + "</font></b>)");
 			}
-			combatRoundOver();
 		}
 		
 		protected function wolfHold():void {
@@ -87,7 +87,6 @@ package classes.Scenes.Areas.GlacialRift
 			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
 				player.takeDamage(8+rand(10));
 			}
-			combatRoundOver();
 		}
 		
 		public function paw():void {
@@ -96,7 +95,6 @@ package classes.Scenes.Areas.GlacialRift
 			player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 			createStatusEffect(StatusEffects.AbilityCooldown1, 3, 0, 0, 0);
 			if (player.hasStatusEffect(StatusEffects.WolfHold)) player.removeStatusEffect(StatusEffects.WolfHold);
-			combatRoundOver();
 		}
 		
 		public function WinterWolf() 
@@ -111,11 +109,11 @@ package classes.Scenes.Areas.GlacialRift
 			this.ballSize = 2;
 			this.cumMultiplier = 2;
 			createBreastRow(Appearance.breastCupInverse("flat"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = 10*12;
-			this.hipRating = HIP_RATING_BOYISH;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			this.skin.growFur({color:"glacial white"});
 			this.hairColor = "glacial white";
 			this.hairLength = 8;

@@ -4,11 +4,11 @@
  */
 package classes.Scenes.Areas.Ocean 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.*;
 
-	public class UnderwaterSharkGirl extends Monster
+public class UnderwaterSharkGirl extends Monster
 	{
 		private function sharkTease():void {
 			game.spriteSelect(70);
@@ -24,7 +24,6 @@ package classes.Scenes.Areas.Ocean
 				player.takeDamage(10+rand(10), true);
 				player.dynStats("lus", (5+(player.lib/5)));
 			}
-			combatRoundOver();
 		}
 		private function sharkBiteAttack():void {
 			game.spriteSelect(70);
@@ -34,7 +33,6 @@ package classes.Scenes.Areas.Ocean
 			player.takeDamage(damage, true);
 			if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
 			else player.createStatusEffect(StatusEffects.Hemorrhage,3,0.05,0,0);
-			combatRoundOver();
 		}
 		/*
 		override public function defeated(hpVictory:Boolean):void
@@ -46,7 +44,7 @@ package classes.Scenes.Areas.Ocean
 		{
 			if (pcCameWorms){
 				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
 				game.boat.sharkGirlScene.sharkLossRape();
 			}
@@ -59,15 +57,15 @@ package classes.Scenes.Areas.Ocean
 			this.imageName = "sharkgirl";
 			this.long = "The shark girl is menacingly circling you off waiting for the opportunity to strike. These creatures clearly look way more deadly in the water then out of it!";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DROOLING, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 15, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("D"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,40,0,0,0);
 			this.tallness = 5*12+5;
-			this.hipRating = HIP_RATING_AMPLE+2;
-			this.buttRating = BUTT_RATING_LARGE;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
 			this.skinTone = "gray";
 			this.hairColor = "silver";
 			this.hairLength = 16;

@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.NPCs{
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kACHIEVEMENTS;
+import classes.*;
+import classes.GlobalFlags.kACHIEVEMENTS;
+import classes.GlobalFlags.kFLAGS;
 
 // ARIAN_FOLLOWER:int = 933;
 // ARIAN_PARK:int = 934; //-1 = disabled, 1 = helped.
@@ -91,7 +91,7 @@ Corruption Path (Arian's body is drastically altered, but [Arian eir] personalit
 	{
 		public function ArianScene()
 		{
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 
 		//Implementation of TimeAwareInterface
@@ -2036,7 +2036,7 @@ private function getButtWreckedByArian():void {
 	outputText("\n\n\"<i>Argh!  T-this is too much!</i>\"  With a groan of pleasure Arian shoots [Arian eir] cum into your bowels, lubricating it enough to allow you to easily slide down onto [Arian eir] shaft.");
 	if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) {
 		outputText("  [Arian Eir] other shaft twiches and sprays your ");
-		if(player.tailType == TAIL_TYPE_NONE) outputText("back");
+		if(player.tailType == AppearanceDefs.TAIL_TYPE_NONE) outputText("back");
 		else outputText("tail");
 		outputText(".");
 	}

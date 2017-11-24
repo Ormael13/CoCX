@@ -1,80 +1,70 @@
 package classes.Scenes.Areas.GlacialRift 
 {
-	import classes.*;
-	import classes.internals.WeightedDrop;
-	import classes.GlobalFlags.kFLAGS;
-	
-	public class Valkyrie extends Monster
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.WeightedDrop;
+
+public class Valkyrie extends Monster
 	{
 		public function spearAttack():void {
-			outputText("The valkyrie lunges at you, jabbing with her longspear.  You dodge the first attack easily, ")
+			outputText("The valkyrie lunges at you, jabbing with her longspear.  You dodge the first attack easily, ");
 			var evade:String = player.getEvasionReason();
 			if (evade == EVASION_EVADE) {
 				outputText("and you anticipate the upcoming spear strikes, dodging her attacks thanks to your incredible evasive ability!");
-				combatRoundOver();
 				return;
 			}
 			else if (evade == EVASION_FLEXIBILITY) {
 				outputText("and you use your incredible flexibility to barely fold your body and avoid her attacks!");
-				combatRoundOver();
 				return;
 			}
 			else if (evade == EVASION_MISDIRECTION) {
 				outputText("and you use technique from Raphael to sidestep and completely avoid her barrage of attacks!");
-				combatRoundOver();
 				return;
 			}
 			else if (evade == EVASION_SPEED || evade != null) {
 				outputText("and you successfully dodge her barrages of spear attacks!");
-				combatRoundOver();
 				return;
 			}
 			else if (hasStatusEffect(StatusEffects.Blind) && rand(3) > 0) {
 					outputText("and step away as you watch the valkyrie's blind attacks strike only air. ");
-					combatRoundOver();
 					return;
 				}
 			else
 			{
 				outputText("but she follows through with a rapid flurry of spear strikes, tearing into your " + (player.armor.name == "nothing" ? "" : "[armorName] and the underlying") + " flesh. ");
 				var attacks:int = 1 + rand(3);
-				var damage:int = 0
+				var damage:int = 0;
 				while (attacks > 0) {
-					damage += ((str) + rand(50))
+					damage += ((str) + rand(50));
 					damage = player.reduceDamage(damage);
 					attacks--
 				}
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		
 		public function shieldBash():void {
-			outputText("The valkyrie feints at you with her longspear; you dodge the blow, ")
+			outputText("The valkyrie feints at you with her longspear; you dodge the blow, ");
 			var evade:String = player.getEvasionReason();
 			if (evade == EVASION_EVADE) {
 				outputText("and you anticipate the upcoming shield bash, dodging her thanks to your incredible evasive ability!");
-				combatRoundOver();
 				return;
 			}
 			else if (evade == EVASION_FLEXIBILITY) {
 				outputText("and you use your incredible flexibility to barely fold your body and avoid her shield bash!");
-				combatRoundOver();
 				return;
 			}
 			else if (evade == EVASION_MISDIRECTION) {
 				outputText("and you use technique from Raphael to sidestep and avoid her shield bash!");
-				combatRoundOver();
 				return;
 			}
 			else if (evade == EVASION_SPEED || evade != null) {
 				outputText("and you successfully dodge her shield bash attack!");
-				combatRoundOver();
 				return;
 			}
 			else if (hasStatusEffect(StatusEffects.Blind) && rand(3) > 0) {
 					outputText("and step away as you watch the valkyrie's blind bash strikes only air. ");
-					combatRoundOver();
 					return;
 				}
 			else
@@ -86,58 +76,52 @@ package classes.Scenes.Areas.GlacialRift
 					player.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
 				}
 				else outputText("backwards. ");
-				var damage:int = ((str + 50) + rand(50))
+				var damage:int = ((str + 50) + rand(50));
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		
 		public function aerialRave():void {
 			if (rand(2) == 0 || player.canFly() /* it would be stupid to do this with someone winged */) {
-				spearAttack()
+				spearAttack();
 				return;
 			}
-			outputText("The valkyrie charges right at you!  You manage to dodge her spear-thrust, but she spins gracefully out of the attack and grabs you by the waist.  ")
+			outputText("The valkyrie charges right at you!  You manage to dodge her spear-thrust, but she spins gracefully out of the attack and grabs you by the waist.  ");
 			var evade:String = player.getEvasionReason();
 			if (evade == EVASION_EVADE) {
 				outputText("You manage to shake her hand off thanks to evasion.  ");
-				combatRoundOver();
 				return;
 			}
 			else if (evade == EVASION_FLEXIBILITY) {
 				outputText("Thanks to your incredibly flexibility, her hand slips off your wrist.  ");
-				combatRoundOver();
 				return;
 			}
 			else if (evade == EVASION_MISDIRECTION) {
 				outputText("Using Raphael's technique, you slip freely from her grip.");
-				combatRoundOver();
 				return;
 			}
 			else if (evade == EVASION_SPEED || evade != null) {
 				outputText("You suddenly jerk your arm away, causing her grip to break.");
-				combatRoundOver();
 				return;
 			}
 			else
 			{
 				outputText("Before you can react, she launches into the air, propelling the two of you upwards with her powerful wings.  You struggle, but it’s no use -- until she lets go.  You cry out in terror as you fall back to the earth, crashing painfully into a convenient snowbank, while your opponent lands gracefully a few feet away. ");
-				var damage:int = ((str + 200) + rand(100))
+				var damage:int = ((str + 200) + rand(100));
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.glacialRift.valkyrieScene.winAgainstValkyrie();
+			SceneLib.glacialRift.valkyrieScene.winAgainstValkyrie();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.glacialRift.valkyrieScene.loseToValkyrie();
+			SceneLib.glacialRift.valkyrieScene.loseToValkyrie();
 		}
 		
 		public function Valkyrie() 
@@ -149,11 +133,11 @@ package classes.Scenes.Areas.GlacialRift
 			// this.plural = false;
 			this.createVagina(false, 1, 1);
 			createBreastRow(Appearance.breastCupInverse("C"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = 7*12;
-			this.hipRating = HIP_RATING_SLENDER;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			this.skin.setBaseOnly({color:"light"});
 			this.hairColor = "white";
 			this.hairLength = 12;
@@ -176,8 +160,8 @@ package classes.Scenes.Areas.GlacialRift
 					.add(shields.GREATSH, 3)
 					.add(consumables.G__BOOK, 5)					
 					.add(null, 15);
-			this.wingType = WING_TYPE_HARPY
-			this.wingDesc = "fluffy feathery"
+			this.wingType = AppearanceDefs.WING_TYPE_HARPY;
+			this.wingDesc = "fluffy feathery";
 			this.special1 = spearAttack;
 			this.special2 = shieldBash;
 			this.special3 = aerialRave;

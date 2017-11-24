@@ -4,12 +4,11 @@
  */
 package classes.Scenes.Areas.DeepSea 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	
-	public class Kraken extends Monster
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.*;
+
+public class Kraken extends Monster
 	{
 		public function krakenConstrict():void {
 			outputText("The " + this.short + "’s tentacles grab you all at once and start to squeeze you!");
@@ -65,7 +64,6 @@ package classes.Scenes.Areas.DeepSea
 				}
 				else krakenInkSpray();
 			}
-			combatRoundOver();
 		}
 		
 		public function Kraken() 
@@ -75,15 +73,15 @@ package classes.Scenes.Areas.DeepSea
 			this.imageName = "kraken";
 			this.long = "You are currently fighting 24 feet tall Kraken.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_GAPING);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DROOLING, AppearanceDefs.VAGINA_LOOSENESS_GAPING);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 300, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("C"));
-			this.ass.analLooseness = ANAL_LOOSENESS_VIRGIN;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_VIRGIN;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = 24*12;
-			this.hipRating = HIP_RATING_AMPLE;
-			this.buttRating = BUTT_RATING_NOTICEABLE;
-			this.lowerBody = LOWER_BODY_TYPE_SCYLLA;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_NOTICEABLE;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_SCYLLA;
 			this.skin.setBaseOnly({color:"slippery"});
 			this.hairColor = "brown";
 			this.hairLength = 5;

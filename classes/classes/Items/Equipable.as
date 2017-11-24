@@ -20,9 +20,8 @@ package classes.Items
 
 		/**
 		 * Called on attempt to equip item.
-		 * @param output Print "equipping" scene to output
 		 */
-		override public function canUse(player:Player,output:Boolean):Boolean
+		override public function canUse():Boolean
 		{
 			return true;
 		}

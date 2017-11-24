@@ -3,14 +3,14 @@
  */
 package classes.Scenes.Areas.Lake
 {
-	import classes.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.Areas.Lake;
+import classes.*;
+import classes.Scenes.Areas.Lake;
+import classes.Scenes.SceneLib;
 
-	public class AbstractLakeContent extends BaseContent
+public class AbstractLakeContent extends BaseContent
 	{
 		protected function get lake():Lake{
-			return kGAMECLASS.lake;
+			return SceneLib.lake;
 		}
 		public function AbstractLakeContent()
 		{

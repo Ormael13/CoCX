@@ -1,10 +1,10 @@
 ﻿package classes.Scenes.Places.TelAdre {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kACHIEVEMENTS;
+import classes.*;
+import classes.GlobalFlags.kACHIEVEMENTS;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.NPCs.JojoScene;
 
-	public class Rubi extends TelAdreAbstractContent {
+public class Rubi extends TelAdreAbstractContent {
 public function Rubi(){
 
 }
@@ -682,7 +682,7 @@ public function rubisFuckingHouseYouPervert():void {
 	}
 	if(player.isNaga() && flags[kFLAGS.RUBI_BIMBO] == 0 && flags[kFLAGS.RUBI_COCK_SIZE] < player.biggestCockLength() && player.hasCock() && flags[kFLAGS.RUBI_SHE] == 0 && player.cor >= 85 && flags[kFLAGS.RUBI_BREAST_SIZE] <= 2)
 	{
-		outputText("\n\n<b>You could use your snake-like motions to hypnotize Rubi and turn [rubi em] into a more complacent, eager slut. Doing so is likely irreversible.</b>")
+		outputText("\n\n<b>You could use your snake-like motions to hypnotize Rubi and turn [rubi em] into a more complacent, eager slut. Doing so is likely irreversible.</b>");
 		addButton(5,"Hypno",hypnoBimboficationForRubiSloots);
 	}
 	addButton(14,"Leave",camp.returnToCampUseOneHour);
@@ -2446,7 +2446,7 @@ private function getFuckedByRubi():void {
 	else if(this.rubiGetCockType() == CockTypesEnum.HORSE) outputText("blunted, musky tip");
 	else if(this.rubiGetCockType() == CockTypesEnum.CAT) outputText("spiked tip");
 	else if(this.rubiGetCockType() == CockTypesEnum.ANEMONE) outputText("tentacle-ringed crown");
-	else outputText("<b>ERROR: Rubi Cock Type set invalid. Currently: " + this.rubiGetCockType() + "</b>  ")
+	else outputText("<b>ERROR: Rubi Cock Type set invalid. Currently: " + this.rubiGetCockType() + "</b>  ");
 	outputText(" emerges from the foreskin surrounding it as [rubi eir] cock strains, aching for something, anything to fill.");
 
 	outputText("\n\nWith a look into your eyes, confirming [rubi eir] desires, [rubi ey] gives [rubi eir] cock what it wants.  One swift motion is all it takes as Rubi sinks [rubi eir] dick inside you several inches.  The feeling of penetration makes you moan suddenly, louder than you wanted to.  Rubi smiles, pulls out a few inches, and pushes back inside, just a little deeper.  This time it's your demonic lover's turn to moan as you clamp your [vagOrAss] around [rubi eir] invading member, tightening around [rubi em] like a vice.");
@@ -3629,7 +3629,7 @@ public function hypnoBimboficationForRubiSloots():void
 	outputText("\n\nRubi is watching you in open mouthed fascination. His lips move, stammering, trying to talk, but he just can't get the words out. It's no wonder, really - you've got your big, hard tool");
 	if(player.cockTotal() > 1) outputText("s");
 	outputText(" whipped out and swaying with your sinuous movements, and all he has is his comparatively undersized little pecker. You rock your whole body with the snake-like grace given to you by your naga body, swaying rhythmically as you meet his eyes. Knowing full well just what kinds of depravity you'd like to force him into, you feel a ");
-	if(kGAMECLASS.monk >= 5) outputText("familiar ");
+	if(JojoScene.monk >= 5) outputText("familiar ");
 	else outputText("strange ");
 	outputText("dark power welling up within you.");
 	outputText("\n\nRubi is powerless to resist your hypnotic gaze. Your very eyes seem alight with wisps of dark, almost-demonic power, beginning to entrance the vulnerable ");

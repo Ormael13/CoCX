@@ -1,5 +1,7 @@
 package classes.Scenes.NPCs {
 import classes.Appearance;
+import classes.AppearanceDefs;
+import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Monster;
@@ -19,13 +21,13 @@ public class Diva extends Monster {
         this.a = "";
         this.short = "Diva";
         this.long = "";
-        this.createVagina(false,VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_NORMAL);
+        this.createVagina(false,AppearanceDefs.VAGINA_WETNESS_NORMAL,AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
         createBreastRow(Appearance.breastCupInverse("DD"));
-        this.ass.analLooseness= ANAL_LOOSENESS_NORMAL;
-        this.ass.analWetness = ANAL_WETNESS_DRY;
+        this.ass.analLooseness= AppearanceDefs.ANAL_LOOSENESS_NORMAL;
+        this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
         this.tallness = (5*12)+6;
-        this.hipRating = HIP_RATING_CURVY;
-        this.buttRating = BUTT_RATING_NOTICEABLE;
+        this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
+        this.buttRating = AppearanceDefs.BUTT_RATING_NOTICEABLE;
         this.skinTone = "pale";
         this.hairColor = "blonde";
         this.hairLength = 16;
@@ -35,7 +37,7 @@ public class Diva extends Monster {
         this.weaponVerb = "swoop";
         this.armorName = "dress";
         this.armorDef = levelBonus;
-        this.wingType = WING_TYPE_BAT_LIKE_LARGE;
+        this.wingType = AppearanceDefs.WING_TYPE_BAT_LIKE_LARGE;
         this.bonusHP = levelBonus * 1000;
         this.bonusLust = 50;
         this.lustVuln = 1;
@@ -59,7 +61,6 @@ public class Diva extends Monster {
             if(finalFight && !player.hasStatusEffect(StatusEffects.Blind)){options.push(moveDarkness);}
             if(attackSucceeded()){options[rand(options.length)]();}
         }
-        game.combatRoundOver();
     }
     private function display(ref:String,locals:*=null):void{
         _scene.display(ref,locals);
@@ -135,9 +136,9 @@ public class Diva extends Monster {
     override public function defeated(hpVictory:Boolean):void{
         if(finalFight){
             display("scenes/defeated/final/intro");
-            game.addButton(0,"Yes",finalChoice,0);
-            game.addButton(1,"No", finalChoice,1);
-            game.addButton(2,"Never",finalChoice,2);
+            EngineCore.addButton(0,"Yes",finalChoice,0);
+            EngineCore.addButton(1,"No", finalChoice,1);
+            EngineCore.addButton(2,"Never",finalChoice,2);
         }
         else{/*
             if (player.isGargoyle() || player.isAlraune()) {
@@ -152,7 +153,7 @@ public class Diva extends Monster {
         }
         game.flushOutputTextToGUI();
         function finalChoice(choice:int):void{
-            game.clearOutput();
+            EngineCore.clearOutput();
             if(choice == 0){
                 DivaScene.getInstance().status = -1;
                 display("scenes/defeated/final/yesChoice");

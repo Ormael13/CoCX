@@ -1,29 +1,30 @@
 ﻿package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
-	public class Jojo extends Monster
+public class Jojo extends Monster
 	{
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.jojoScene.defeatedJojo(hpVictory);
+			SceneLib.jojoScene.defeatedJojo(hpVictory);
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.jojoScene.loseToJojo();
+			SceneLib.jojoScene.loseToJojo();
 		}
 		
 		override protected function performCombatAction():void {
-			if (game.monk > 1 && rand(2) == 0)
+			if (JojoScene.monk > 1 && rand(2) == 0)
 				selfCorruption(); //Shouldn't do any self corruption at monk one. Otherwise a 50/50 chance
 			else eAttack();
 		}
 		
 		private function selfCorruption():void {
-			switch (game.monk) {
+			switch (JojoScene.monk) {
 				case 2:
 					outputText("Jojo looks lost in thought for a moment, and fails to attack.  ");
 					lust += 4;
@@ -42,7 +43,7 @@
 			}
 			
 			if (lust >= 100) {
-				doNext(game.endLustVictory);
+				doNext(SceneLib.combat.endLustVictory);
 				return;
 			}
 			else if (lust >= 85)
@@ -53,7 +54,7 @@
 				outputText("The mouse's eyes constantly dart over your most sexual parts, betraying his lust.  ");
 			else if (lust > 50)
 				outputText("The mouse's skin remains flushed with the beginnings of arousal.  ");
-			doNext(game.playerMenu);
+			doNext(EventParser.playerMenu);
 		}
 		
 		public function Jojo()
@@ -70,17 +71,17 @@
 			this.cumMultiplier = 1;
 			this.hoursSinceCum = 1000;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = 4*12;
-			this.hipRating = HIP_RATING_SLENDER;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			this.skin.growFur({color:"white"});
 			this.skinDesc = "fur";
 			this.hairColor = "white";
 			this.hairLength = 2;
 			initStrTouSpeInte(45, 50, 75, 64);
-			initWisLibSensCor(64, 15, 40, game.monk * 15);
+			initWisLibSensCor(64, 15, 40, JojoScene.monk * 15);
 			this.weaponName = "paw";
 			this.weaponVerb="punch";
 			this.weaponAttack = 5;
@@ -94,21 +95,21 @@
 			this.special1 = selfCorruption;
 			//Create jojo sex attributes
 			//Variations based on jojo's corruption.
-			if(game.monk == 3) {
+			if(JojoScene.monk == 3) {
 				this.lust += 30;
 				this.cocks[0].cockThickness += .2;
 				this.cocks[0].cockLength += 1.5;
 				this.bonusLust = 10;
 				if(player.gender == 1 || player.gender == 3) this.ass.analLooseness = 2;
 			}
-			if(game.monk == 4) {
+			if(JojoScene.monk == 4) {
 				this.lust += 40;
 				this.cocks[0].cockThickness += .5;
 				this.cocks[0].cockLength += 3.5;
 				this.bonusLust = 20;
 				if(player.gender == 1 || player.gender == 3) this.ass.analLooseness = 3;
 			}
-			if(game.monk == 5) {
+			if(JojoScene.monk == 5) {
 				this.lust += 50;
 				this.cocks[0].cockThickness += 1;
 				this.cocks[0].cockLength += 5.5;

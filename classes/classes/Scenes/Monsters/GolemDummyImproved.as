@@ -32,7 +32,6 @@ package classes.Scenes.Monsters
 				if (choice == 3) backhand();
 			}
 			else eAttack();
-			combatRoundOver();
 		}
 		
 		public function GolemDummyImproved() 

@@ -4,24 +4,25 @@
  */
 package classes.Scenes.Monsters
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	
-	use namespace kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
+
+use namespace kGAMECLASS;
 	
 	public class ImpPack extends Imp
 	{
 		override public function defeated(hpVictory:Boolean):void
 		{
 			game.flags[kFLAGS.DEMONS_DEFEATED]++;
-			game.impScene.defeatImpPack();
+			SceneLib.impScene.defeatImpPack();
 		}
 		
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			game.impScene.loseToAnImpPack();
+			SceneLib.impScene.loseToAnImpPack();
 		}
 		
 		public function ImpPack()
@@ -43,10 +44,10 @@ package classes.Scenes.Monsters
 			this.balls = 2;
 			this.ballSize = 3;
 			this.tallness = 36;
-			this.tailType = TAIL_TYPE_DEMONIC;
-			this.wingType = WING_TYPE_IMP;
+			this.tailType = AppearanceDefs.TAIL_TYPE_DEMONIC;
+			this.wingType = AppearanceDefs.WING_TYPE_IMP;
 			this.skinTone = "green";
-			this.long = "The imps stand anywhere from two to four feet tall, with scrawny builds and tiny demonic wings. Their red and orange skin is dirty, and their dark hair looks greasy. Some are naked, but most are dressed in ragged loincloths that do little to hide their groins. They all have a cocks as long and thick as a man's arm, far oversized for their bodies."
+			this.long = "The imps stand anywhere from two to four feet tall, with scrawny builds and tiny demonic wings. Their red and orange skin is dirty, and their dark hair looks greasy. Some are naked, but most are dressed in ragged loincloths that do little to hide their groins. They all have a cocks as long and thick as a man's arm, far oversized for their bodies.";
 			this.pronoun1 = "they";
 			this.pronoun2 = "them";
 			this.pronoun3 = "their";
@@ -69,7 +70,7 @@ package classes.Scenes.Monsters
 					add(consumables.LABOVA_,1).
 					add(consumables.INCUBID,6).
 					add(consumables.SUCMILK,6);
-			this.wingType = WING_TYPE_IMP;
+			this.wingType = AppearanceDefs.WING_TYPE_IMP;
 			this.special1 = lustMagicAttack;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);

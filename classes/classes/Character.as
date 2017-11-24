@@ -1,8 +1,7 @@
 ﻿package classes 
 {
-import classes.Scenes.Places.TelAdre.UmasShop;
-import classes.Items.JewelryLib;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.JewelryLib;
 
 /**
 	 * Character class for player and NPCs. Has subclasses Player and NonPlayer.
@@ -909,12 +908,12 @@ import classes.GlobalFlags.kFLAGS;
 		public function maxVenom():Number
 		{
 			var maxven:Number = 0;
-			if (game.player.faceType == FACE_SNAKE_FANGS) maxven += 100;
-			if (game.player.faceType == FACE_SPIDER_FANGS) maxven += 100;
-			if (game.player.tailType == TAIL_TYPE_BEE_ABDOMEN) maxven += 150;
-			if (game.player.tailType == TAIL_TYPE_SPIDER_ADBOMEN) maxven += 150;
-			if (game.player.tailType == TAIL_TYPE_SCORPION) maxven += 150;
-			if (game.player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) maxven += 200;
+			if (game.player.faceType == AppearanceDefs.FACE_SNAKE_FANGS) maxven += 100;
+			if (game.player.faceType == AppearanceDefs.FACE_SPIDER_FANGS) maxven += 100;
+			if (game.player.tailType == AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN) maxven += 150;
+			if (game.player.tailType == AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN) maxven += 150;
+			if (game.player.tailType == AppearanceDefs.TAIL_TYPE_SCORPION) maxven += 150;
+			if (game.player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL) maxven += 200;
 			if (findPerk(PerkLib.JobSoulCultivator) >= 0) {
 				var multimaxven:Number = 1;
 				if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) multimaxven += 0.1;
@@ -927,7 +926,7 @@ import classes.GlobalFlags.kFLAGS;
 		
 		public function maxHunger():Number
 		{
-			var max:Number = 100
+			var max:Number = 100;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 2) max += 10;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 3) max += 10;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 4) max += 20;

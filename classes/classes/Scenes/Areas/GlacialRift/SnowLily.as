@@ -4,18 +4,19 @@
  */
 package classes.Scenes.Areas.GlacialRift 
 {
-	import classes.*;
-	import classes.GlobalFlags.*;
-	import classes.Scenes.Areas.Forest.Alraune;
-	import classes.internals.ChainedDrop;
-	
-	public class SnowLily extends Alraune
+import classes.*;
+import classes.GlobalFlags.*;
+import classes.Scenes.Areas.Forest.Alraune;
+import classes.Scenes.Holidays;
+import classes.internals.ChainedDrop;
+
+public class SnowLily extends Alraune
 	{
 		
 		public function SnowLily() 
 		{
 			super();
-			if (game.isHalloween()) {
+			if (Holidays.isHalloween()) {
 				this.short = "Jack-O-Raune";
 				this.long = "You are fighting against a Jack-O-Raune, an intelligent plant with the torso of a woman and the lower body of a giant pumpkin with snaking tentacle vines. She seems really keen on raping you.";
 				this.skinTone = "pale orange";
@@ -34,7 +35,7 @@ package classes.Scenes.Areas.GlacialRift
 			this.bonusHP = 200;
 			this.level = 40;
 			this.gems = rand(25) + 15;
-			this.drop = new ChainedDrop().add(consumables.MARAFRU, 1 / 6)
+			this.drop = new ChainedDrop().add(consumables.MARAFRU, 1 / 6);
 				//	.add(consumables.W__BOOK, 1 / 4)
 				//	.add(consumables.BEEHONY, 1 / 2)
 				//	.elseDrop(useables.B_CHITN);

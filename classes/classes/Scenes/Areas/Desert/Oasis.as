@@ -1,8 +1,9 @@
 ﻿package classes.Scenes.Areas.Desert {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
 
-	public class Oasis extends BaseContent{
+public class Oasis extends BaseContent{
 
 		public function Oasis()
 		{
@@ -122,7 +123,7 @@ internal function oasisSexing():void {
 		//Girlies only!
 		else outputText("The demons quickly find your " + vaginaDescript(0) + " and tussle eagerly for position at your entrance, first with hands and then with a wide range of demonic dicks.  ");
 		//gaping cunners!
-		if(player.vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) outputText("However all of this fighting for place is in vain, as the leader with the huge cock has already marked you for his own. The broad demon shoves the smaller ones roughly to the side at the sight of your freakishly large pussy and carefully lowers his gigantic dick to the entrance of your gargantuan fuck hole. Without pause or ceremony the leader plunges his enormous phallus into you and although it takes all the muscles in his body he begins to drive it back and forth, filling every possible inch of your " + vaginaDescript(0) + ". You feel a curious pain that you've not felt in a long time and realize that your " + vaginaDescript(0) + " is stretching around his frankly frightening tool. As he withdraws the walls spring back with a curious elasticity, and it occurs to you that it may not actually be possible to stretch further with any permanence. Before long the huge demon begins to shudder and shake and he cums. His trio of heavy balls pump load after load into your waiting cunt until your belly bulges and spunk begins to spurt back out of your pussy from the sheer amount of cum being loaded into you.");
+		if(player.vaginas[0].vaginalLooseness >= AppearanceDefs.VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) outputText("However all of this fighting for place is in vain, as the leader with the huge cock has already marked you for his own. The broad demon shoves the smaller ones roughly to the side at the sight of your freakishly large pussy and carefully lowers his gigantic dick to the entrance of your gargantuan fuck hole. Without pause or ceremony the leader plunges his enormous phallus into you and although it takes all the muscles in his body he begins to drive it back and forth, filling every possible inch of your " + vaginaDescript(0) + ". You feel a curious pain that you've not felt in a long time and realize that your " + vaginaDescript(0) + " is stretching around his frankly frightening tool. As he withdraws the walls spring back with a curious elasticity, and it occurs to you that it may not actually be possible to stretch further with any permanence. Before long the huge demon begins to shudder and shake and he cums. His trio of heavy balls pump load after load into your waiting cunt until your belly bulges and spunk begins to spurt back out of your pussy from the sheer amount of cum being loaded into you.");
 		//Not gaping!
 		else {
 			outputText("Eventually one of the demons wins out and sets the tip of his hefty dog-cock at the entrance to your pussy. He rams his member into your " + vaginaDescript(0) + " with one swift thrust and begins to pump himself in and out of your cunt. However, the other demons will not be denied. You feel a pressure at your lips and without warning a second slightly smaller dick shoves itself into your already-stuffed " + vaginaDescript(0) + ".  ");
@@ -161,16 +162,16 @@ internal function oasisSexing():void {
 		outputText("You do your best to keep a vague mental catalogue of what has been in where, but eventually it becomes impossible to remember the type or number of demonic dicks that have filled you with their cum. The sand below your ass is wet with seed that has spilled out of your overflowing " + vaginaDescript(0) + " and there is every indication of more to come.\n\n");
 	}
 	//If you got here by winning combat!
-	if((monster.HP < 1 || monster.lust >= monster.maxLust()) && getGame().inCombat) {
-		outputText("You fuck and fuck until not a single demon is capable of servicing your needs. They lie moaning and panting at the edge of the oasis, unable to move. You survey the fallen fiends with just a touch of pride and a whole lot of satisfaction, your body feeling stronger for the endurance exercise.");
+    if ((monster.HP < 1 || monster.lust >= monster.maxLust()) && kGAMECLASS.inCombat) {
+        outputText("You fuck and fuck until not a single demon is capable of servicing your needs. They lie moaning and panting at the edge of the oasis, unable to move. You survey the fallen fiends with just a touch of pride and a whole lot of satisfaction, your body feeling stronger for the endurance exercise.");
 		cleanupAfterCombat();
 		player.orgasm();
 		dynStats("cor", 1.5);
 		return;
 	}
 	//If you got here by losing combat!
-	else if((player.HP < 1 || player.lust >= player.maxLust()) && getGame().inCombat) {
-		//►Oasis Demons Defeat PC as part of antm
+    else if ((player.HP < 1 || player.lust >= player.maxLust()) && kGAMECLASS.inCombat) {
+        //►Oasis Demons Defeat PC as part of antm
 		//Antmorph stuff
 		if(monster.hasStatusEffect(StatusEffects.phyllafight)) {
 			outputText("You sought to save the ant-girl from being raped, and looking around, you don't see her anywhere.  She must have gotten away safely.  Mission... accomplished?  Wait, that ungrateful little bitch just left you to suffer in her place!  Your ass is gonna be sore for a while, but not as sore as your pride...  ");
@@ -190,8 +191,8 @@ internal function oasisSexing():void {
 	outputText("You fuck for hours; 'feasting' with the demons. Pain, pleasure and exhaustion intermingle and no matter how hard you try to cling to consciousness you are in no state to concentrate. You dangle over the edge for what seems like eternity before another orgasm, stronger than any other, hits you like a solid wall and you black out. For a little while you drift in and out of conscious reality to find your body still the object of demonic attentions until eventually you wake to find that the seemingly endless string of orgasms has stopped. Looking around you see what demons remain awake engaged solely in fucking each other. Tender and sore from the abuse and still finding it hard to concentrate you gather your clothes and steal away, leaving them to the tail end of their orgy. In the aftermath you feel like you've just run an endurance race, but the rubbed raw sensitivity of your brutally fucked body tells another tale.");
 	player.orgasm();
 	dynStats("tou", .5, "sen", .5, "cor", 4);
-	if (getGame().inCombat) cleanupAfterCombat();
-	else doNext(playerMenu);
+    if (kGAMECLASS.inCombat) cleanupAfterCombat();
+    else doNext(playerMenu);
 }
 
 //Desert Tribe Bad End
@@ -230,7 +231,7 @@ private function oasisBadEndEpilogue():void {
 	if(player.gender <= 1) outputText(" and a few doses of fermented succubi milk");
 	outputText("...\n\n");
 	outputText("A year has gone by since the day you became a slave. You find yourself sitting at the feet of your master wearing nothing but a black collar around your neck. Your belly extends out in front of you, filled to the brim with your master's baby. You smile, happy to be here to please your master and carry his young as memories of your past and your mission fade deep into the depths of your mind. Your only mission in life now is to service your master and the other members of the tribe in whatever they ask, without question or hesitation. As the tribe prepares for the next 'Feast', a commotion at the other side of the encampment catches your attention. The guards bring forth a human captive they found wandering in the oasis, and you smile dimly as you watch master invite the stranger to join them all in the Feast...");
-	getGame().gameOver();
+	EventParser.gameOver();
 }
 	}
 }

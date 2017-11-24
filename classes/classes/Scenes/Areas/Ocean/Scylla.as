@@ -4,11 +4,11 @@
  */
 package classes.Scenes.Areas.Ocean 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.*;
 
-	public class Scylla extends Monster
+public class Scylla extends Monster
 	{
 		public function scyllaConstrict():void {
 			outputText("The " + this.short + "’s tentacles grab you all at once and start to squeeze you!");
@@ -64,7 +64,6 @@ package classes.Scenes.Areas.Ocean
 				}
 				else scyllaInkSpray();
 			}
-			combatRoundOver();
 		}
 		
 		public function Scylla() 
@@ -74,15 +73,15 @@ package classes.Scenes.Areas.Ocean
 			this.imageName = "scylla";
 			this.long = "You are currently fighting 10 feet tall scylla.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_GAPING);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DROOLING, AppearanceDefs.VAGINA_LOOSENESS_GAPING);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 200, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
-			this.ass.analLooseness = ANAL_LOOSENESS_VIRGIN;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_VIRGIN;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = 10*12;
-			this.hipRating = HIP_RATING_AMPLE;
-			this.buttRating = BUTT_RATING_NOTICEABLE;
-			this.lowerBody = LOWER_BODY_TYPE_SCYLLA;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_NOTICEABLE;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_SCYLLA;
 			this.skin.setBaseOnly({color:"slippery"});
 			this.hairColor = "brown";
 			this.hairLength = 5;

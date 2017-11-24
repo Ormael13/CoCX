@@ -1,45 +1,42 @@
 package classes.Scenes.Areas.VolcanicCrag 
 {
-	import classes.*;
-	import classes.internals.WeightedDrop;
-	import classes.GlobalFlags.kFLAGS;
-	
-	public class Behemoth extends Monster
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+
+public class Behemoth extends Monster
 	{
 		public function tailWhip():void {
 			outputText("The behemoth charges at you with his spiked tail raised!  ");
 			if (player.getEvasionRoll()) {
 				outputText("You manage to dodge in time to avoid his swinging tail!");
-				combatRoundOver();
 				return;
 			}
 			else {
 				outputText("You weren't aware of that and his tail hits you!  <b>Your defense has been reduced!</b>  ");
 				var damage:int = str + level;
-				damage = player.reduceDamage(damage)
+				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
 			}
 			if (hasStatusEffect(StatusEffects.TailWhip)) addStatusValue(StatusEffects.TailWhip, 1, 5);
 			else createStatusEffect(StatusEffects.TailWhip, 5, 0, 0, 0);
-			combatRoundOver();
 		}
 		
 		public function tease():void {
 			outputText("The behemoth lifts his loincloth to reveal his large prick and waves his cock left and right.  You blush from looking at his cock.");
 			player.dynStats("lus", 10 + (player.cor / 10) + (player.lib / 10));
-			combatRoundOver();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void {
-			game.volcanicCrag.behemothScene.winAgainstBehemoth();
+			SceneLib.volcanicCrag.behemothScene.winAgainstBehemoth();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void {
 			if (pcCameWorms){
 				outputText("\n\nYour opponent doesn't seem to care.");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
-				game.volcanicCrag.behemothScene.loseToBehemoth();
+				SceneLib.volcanicCrag.behemothScene.loseToBehemoth();
 			}
 		}
 		
@@ -55,21 +52,21 @@ package classes.Scenes.Areas.VolcanicCrag
 			this.ballSize = 3;
 			this.cumMultiplier = 25;
 			createBreastRow(Appearance.breastCupInverse("flat"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = 9*12;
-			this.hipRating = HIP_RATING_BOYISH;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			this.skin.base.color = "purple";
 			this.skin.growFur({color:"purple"});
 			this.hairColor = "black";
 			this.hairLength = 8;
-			this.earType = EARS_ELFIN;
-			this.faceType = FACE_CAT;
+			this.earType = AppearanceDefs.EARS_ELFIN;
+			this.faceType = AppearanceDefs.FACE_CAT;
 			this.horns = 7;
-			this.hornType = HORNS_DRACONIC_X2
-			this.lowerBody = LOWER_BODY_TYPE_CAT
-			this.tailType = TAIL_TYPE_BEHEMOTH
+			this.hornType = AppearanceDefs.HORNS_DRACONIC_X2;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_CAT;
+			this.tailType = AppearanceDefs.TAIL_TYPE_BEHEMOTH;
 			initStrTouSpeInte(180, 130, 100, 115);
 			initWisLibSensCor(100, 35, 15, 15);
 			this.weaponName = "claws";

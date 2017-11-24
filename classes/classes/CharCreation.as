@@ -1,24 +1,20 @@
 ﻿package classes 
 {
+import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kCOUNTERS;
 import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kACHIEVEMENTS;
-	import classes.Player;
-	import classes.Items.Armors.GooArmor;
-	import classes.Items.*;
-	import classes.Saves;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Items.*;
+import classes.Scenes.Dungeons.DungeonAbstractContent;
+import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.NPCs.XXCNPC;
+import classes.Scenes.SceneLib;
 import classes.internals.CountersStorage;
 import classes.internals.RootCounters;
 
-import fl.controls.ComboBox;
-	import fl.data.DataProvider;
-	import flash.events.Event;
-	
-	import coc.view.MainView;
+import coc.view.MainView;
 
-	//import flash.events.MouseEvent;
+//import flash.events.MouseEvent;
 
 	public class CharCreation extends BaseContent {
 		
@@ -126,10 +122,10 @@ import fl.controls.ComboBox;
 			}
 
 			//RESET DUNGEON
-			kGAMECLASS.inDungeon = false;
-			kGAMECLASS.dungeonLoc = 0;
-			kGAMECLASS.inRoomedDungeon = false;
-			kGAMECLASS.inRoomedDungeonResume = null;
+			DungeonAbstractContent.inDungeon = false;
+			DungeonAbstractContent.dungeonLoc = 0;
+			DungeonAbstractContent.inRoomedDungeon = false;
+			DungeonAbstractContent.inRoomedDungeonResume = null;
 			//Hold onto old data for NG+
 			var oldPlayer:Player = player;
 			//Reset all standard stats
@@ -157,7 +153,6 @@ import fl.controls.ComboBox;
 			player.obey = 10;
 			player.esteem = 50;
 			player.will = 80;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) kGAMECLASS.notes = "No Notes Available.";
 			player.lust = 15;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				player.XP = flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP];
@@ -167,9 +162,9 @@ import fl.controls.ComboBox;
 			}
 			player.hairLength = 5;
 			player.skin.restore();
-			player.faceType = FACE_HUMAN;
-			player.tailType = TAIL_TYPE_NONE;
-			player.tongueType = TONGUE_HUMAN;
+			player.faceType = AppearanceDefs.FACE_HUMAN;
+			player.tailType = AppearanceDefs.TAIL_TYPE_NONE;
+			player.tongueType = AppearanceDefs.TONGUE_HUMAN;
 			player.femininity = 50;
 			player.beardLength = 0;
 			player.beardStyle = 0;
@@ -193,14 +188,14 @@ import fl.controls.ComboBox;
 			player.tailCount = 0;
 			player.tailVenom = 0;
 			player.tailRecharge = 0;
-			player.gillType = GILLS_NONE;
-			player.rearBody = REAR_BODY_NONE;
-			player.wingType = WING_TYPE_NONE;
+			player.gillType = AppearanceDefs.GILLS_NONE;
+			player.rearBody = AppearanceDefs.REAR_BODY_NONE;
+			player.wingType = AppearanceDefs.WING_TYPE_NONE;
 			player.wingDesc = "non-existant";
 			//Default
 			player.skinTone = "light";
 			player.hairColor = "brown";
-			player.hairType = HAIR_NORMAL;
+			player.hairType = AppearanceDefs.HAIR_NORMAL;
 			player.beardLength = 0;
 			player.beardStyle = 0;
 			//Exploration
@@ -257,15 +252,15 @@ import fl.controls.ComboBox;
 
 
 			//PLOTZ
-			kGAMECLASS.monk = 0;
-			kGAMECLASS.whitney = 0;
-			kGAMECLASS.sand = 0;
+			JojoScene.monk                               = 0;
+			kGAMECLASS.whitney                           = 0;
+			kGAMECLASS.sand                              = 0;
 		//Replaced by flag	kGAMECLASS.beeProgress = 0;
-			kGAMECLASS.giacomo = 0;
-			kGAMECLASS.isabellaScene.isabellaOffspringData = []; //CLEAR!
+			kGAMECLASS.giacomo                           = 0;
+			SceneLib.isabellaScene.isabellaOffspringData = []; //CLEAR!
 			//Lets get this bitch started
 			kGAMECLASS.inCombat = false;
-			kGAMECLASS.inDungeon = false;
+			DungeonAbstractContent.inDungeon = false;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				//Clothes clear
 				player.setArmor(armors.C_CLOTH);
@@ -607,9 +602,9 @@ import fl.controls.ComboBox;
 			player.thickness = 30;
 			player.tone += 5;
 			
-			player.breastRows[0].breastRating = BREAST_CUP_FLAT;
-			player.buttRating = BUTT_RATING_TIGHT;
-			player.hipRating = HIP_RATING_SLENDER;
+			player.breastRows[0].breastRating = AppearanceDefs.BREAST_CUP_FLAT;
+			player.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			player.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
 			chooseComplexion();
 		}
 
@@ -621,9 +616,9 @@ import fl.controls.ComboBox;
 			player.thickness = 30;
 			player.tone += 5;
 			
-			player.breastRows[0].breastRating = BREAST_CUP_B;
-			player.buttRating = BUTT_RATING_TIGHT;
-			player.hipRating = HIP_RATING_AMPLE;
+			player.breastRows[0].breastRating = AppearanceDefs.BREAST_CUP_B;
+			player.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			player.hipRating = AppearanceDefs.HIP_RATING_AMPLE;
 			chooseComplexion();
 		}
 
@@ -631,9 +626,9 @@ import fl.controls.ComboBox;
 			player.femininity = 30;
 			player.thickness = 50;
 			
-			player.breastRows[0].breastRating = BREAST_CUP_FLAT;
-			player.buttRating = BUTT_RATING_AVERAGE;
-			player.hipRating = HIP_RATING_AVERAGE;
+			player.breastRows[0].breastRating = AppearanceDefs.BREAST_CUP_FLAT;
+			player.buttRating = AppearanceDefs.BUTT_RATING_AVERAGE;
+			player.hipRating = AppearanceDefs.HIP_RATING_AVERAGE;
 			chooseComplexion();
 		}
 
@@ -641,9 +636,9 @@ import fl.controls.ComboBox;
 			player.femininity = 70;
 			player.thickness = 50;
 			
-			player.breastRows[0].breastRating = BREAST_CUP_C;
-			player.buttRating = BUTT_RATING_NOTICEABLE;
-			player.hipRating = HIP_RATING_AMPLE;
+			player.breastRows[0].breastRating = AppearanceDefs.BREAST_CUP_C;
+			player.buttRating = AppearanceDefs.BUTT_RATING_NOTICEABLE;
+			player.hipRating = AppearanceDefs.HIP_RATING_AMPLE;
 			chooseComplexion();
 		}
 
@@ -656,9 +651,9 @@ import fl.controls.ComboBox;
 			player.thickness = 70;
 			player.tone -= 5;
 			
-			player.breastRows[0].breastRating = BREAST_CUP_FLAT;
-			player.buttRating = BUTT_RATING_NOTICEABLE;
-			player.hipRating = HIP_RATING_AVERAGE;
+			player.breastRows[0].breastRating = AppearanceDefs.BREAST_CUP_FLAT;
+			player.buttRating = AppearanceDefs.BUTT_RATING_NOTICEABLE;
+			player.hipRating = AppearanceDefs.HIP_RATING_AVERAGE;
 			chooseComplexion();
 		}
 
@@ -670,9 +665,9 @@ import fl.controls.ComboBox;
 			player.femininity = 71;
 			player.thickness = 70;
 			
-			player.breastRows[0].breastRating = BREAST_CUP_D;
-			player.buttRating = BUTT_RATING_LARGE;
-			player.hipRating = HIP_RATING_CURVY;
+			player.breastRows[0].breastRating = AppearanceDefs.BREAST_CUP_D;
+			player.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
+			player.hipRating = AppearanceDefs.HIP_RATING_CURVY;
 			chooseComplexion();
 		}
 
@@ -684,9 +679,9 @@ import fl.controls.ComboBox;
 			player.thickness = 50;
 			player.tone = 26;
 			
-			player.breastRows[0].breastRating = BREAST_CUP_A;
-			player.buttRating = BUTT_RATING_NOTICEABLE;
-			player.hipRating = HIP_RATING_SLENDER;
+			player.breastRows[0].breastRating = AppearanceDefs.BREAST_CUP_A;
+			player.buttRating = AppearanceDefs.BUTT_RATING_NOTICEABLE;
+			player.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
 			chooseComplexion();
 		}
 
@@ -698,9 +693,9 @@ import fl.controls.ComboBox;
 			player.thickness = 50;
 			player.tone = 50;
 			
-			player.breastRows[0].breastRating = BREAST_CUP_A;
-			player.buttRating = BUTT_RATING_TIGHT;
-			player.hipRating = HIP_RATING_SLENDER;
+			player.breastRows[0].breastRating = AppearanceDefs.BREAST_CUP_A;
+			player.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			player.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
 			chooseComplexion();
 		}
 
@@ -1051,7 +1046,7 @@ import fl.controls.ComboBox;
 				addButton(9, "Fertile", confirmEndowmentFertile);
 				addButton(10, "Wet Vagina", confirmEndowmentWetVagina);
 			}
-			if (player.gender == GENDER_HERM)
+			if (player.gender == AppearanceDefs.GENDER_HERM)
 			{
 				addButton(7, "Big Cock", confirmEndowmentBigCock);
 				addButton(8, "Lots of Jizz", confirmEndowmentMessyOrgasms);
@@ -1181,7 +1176,7 @@ import fl.controls.ComboBox;
 			player.tone += 5;
 			player.thickness += 5;
 			if (player.findPerk(PerkLib.Tough) < 0) player.createPerk(PerkLib.Tough, 0.25, 0, 0, 0);
-			player.HP = kGAMECLASS.maxHP();
+			player.HP = EngineCore.maxHP();
 			chooseHistory();
 		}
 		
@@ -1257,7 +1252,7 @@ import fl.controls.ComboBox;
 		
 		private function setEndowmentWetVagina():void {
 			player.femininity += 7;
-			player.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
+			player.vaginas[0].vaginalWetness = AppearanceDefs.VAGINA_WETNESS_WET;
 			if (player.findPerk(PerkLib.WetPussy) < 0) player.createPerk(PerkLib.WetPussy, 2, 0, 0, 0);
 			chooseHistory();
 		}
@@ -1348,7 +1343,7 @@ import fl.controls.ComboBox;
 			if (choice == PerkLib.HistorySlut || choice == PerkLib.HistoryWhore || player.findPerk(PerkLib.PastLifeSlut) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) {
 				if (player.hasVagina()) {
 					player.vaginas[0].virgin = false;
-					player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
+					player.vaginas[0].vaginalLooseness = AppearanceDefs.VAGINA_LOOSENESS_LOOSE;
 				}
 				player.ass.analLooseness = 1;
 			}
@@ -1389,7 +1384,7 @@ import fl.controls.ComboBox;
 			outputText("The walk to the tainted cave is long and silent.  Elder Nomur does not speak.  There is nothing left to say.  The two of you journey in companionable silence.  Slowly the black rock of Mount Ilgast looms closer and closer, and the temperature of the air drops.   You shiver and glance at the Elder, noticing he doesn't betray any sign of the cold.  Despite his age of nearly 80, he maintains the vigor of a man half his age.  You're glad for his strength, as assisting him across this distance would be draining, and you must save your energy for the trials ahead.\n\n");
 			outputText("The entrance of the cave gapes open, sharp stalactites hanging over the entrance, giving it the appearance of a monstrous mouth.  Elder Nomur stops and nods to you, gesturing for you to proceed alone.\n\n");
 			outputText("The cave is unusually warm and damp, ");
-			if (player.gender == GENDER_FEMALE)
+			if (player.gender == AppearanceDefs.GENDER_FEMALE)
 				outputText("and your body seems to feel the same way, flushing as you feel a warmth and dampness between your thighs. ");
 			else outputText("and your body reacts with a sense of growing warmth focusing in your groin, your manhood hardening for no apparent reason. ");
 			outputText("You were warned of this and press forward, ignoring your body's growing needs.  A glowing purple-pink portal swirls and flares with demonic light along the back wall.  Cringing, you press forward, keenly aware that your body seems to be anticipating coming in contact with the tainted magical construct.  Closing your eyes, you gather your resolve and leap forwards.  Vertigo overwhelms you and you black out...");
@@ -1404,7 +1399,7 @@ import fl.controls.ComboBox;
 			dynStats("lus", 40, "cor", 2);
 			model.time.hours = 18;
 			outputText("You wake with a splitting headache and a body full of burning desire.  A shadow darkens your view momentarily and your training kicks in.  You roll to the side across the bare ground and leap to your feet.  A surprised looking imp stands a few feet away, holding an empty vial.  He's completely naked, an improbably sized pulsing red cock hanging between his spindly legs.  You flush with desire as a wave of lust washes over you, your mind reeling as you fight ");
-			if (player.gender == GENDER_FEMALE)
+			if (player.gender == AppearanceDefs.GENDER_FEMALE)
 				outputText("the urge to chase down his rod and impale yourself on it.\n\n");
 			else
 				outputText("the urge to ram your cock down his throat.  The strangeness of the thought surprises you.\n\n");
@@ -1533,8 +1528,8 @@ import fl.controls.ComboBox;
 			player.startingRace = player.race();
 			if (flags[kFLAGS.HARDCORE_MODE] > 0) {
 				trace("Hardcore save file " + flags[kFLAGS.HARDCORE_SLOT] + " created.");
-				getGame().saves.saveGame(flags[kFLAGS.HARDCORE_SLOT])
-			}
+                kGAMECLASS.saves.saveGame(flags[kFLAGS.HARDCORE_SLOT])
+            }
 			kGAMECLASS.saves.loadPermObject();
 			flags[kFLAGS.MOD_SAVE_VERSION] = kGAMECLASS.modSaveVersion;
 			statScreenRefresh();
@@ -1585,7 +1580,7 @@ import fl.controls.ComboBox;
 			model.time.days = -(1 * (1 + player.newGamePlusMod()));
 			model.time.hours = 8;
 			flags[kFLAGS.IN_INGNAM] = 1;
-			kGAMECLASS.ingnam.menuIngnam();
+			SceneLib.ingnam.menuIngnam();
 		}
 
 		//-----------------
@@ -1596,7 +1591,7 @@ import fl.controls.ComboBox;
 			clearOutput();
 			hideMenus();
 			mainView.nameBox.visible = false;
-			kGAMECLASS.displayHeader("Ascension");
+			EngineCore.displayHeader("Ascension");
 			outputText("The world you have departed is irrelevant and you are in an endless black void dotted with tens of thousands of stars. You encompass everything and everything encompasses you.");
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
 			outputText("\n\n(When you're done, select Reincarnate.)");
@@ -2049,19 +2044,19 @@ import fl.controls.ComboBox;
 			player.cocks = [];
 			player.vaginas = new <VaginaClass>[];
 			player.horns = 0;
-			player.hornType = HORNS_NONE;
-			player.antennae = ANTENNAE_NONE;
-			player.earType = EARS_HUMAN;
-			player.eyeType = EYES_HUMAN;
-			player.tongueType = TONGUE_HUMAN;
-			player.gillType = GILLS_NONE;
-			player.armType = ARM_TYPE_HUMAN;
-			player.wingType = WING_TYPE_NONE;
+			player.hornType = AppearanceDefs.HORNS_NONE;
+			player.antennae = AppearanceDefs.ANTENNAE_NONE;
+			player.earType = AppearanceDefs.EARS_HUMAN;
+			player.eyeType = AppearanceDefs.EYES_HUMAN;
+			player.tongueType = AppearanceDefs.TONGUE_HUMAN;
+			player.gillType = AppearanceDefs.GILLS_NONE;
+			player.armType = AppearanceDefs.ARM_TYPE_HUMAN;
+			player.wingType = AppearanceDefs.WING_TYPE_NONE;
 			player.wingDesc = "non-existant";
-			player.rearBody = REAR_BODY_NONE;
-			player.lowerBody = LOWER_BODY_TYPE_HUMAN;
+			player.rearBody = AppearanceDefs.REAR_BODY_NONE;
+			player.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HUMAN;
 			player.legCount = 2;
-			player.tailType = TAIL_TYPE_NONE;
+			player.tailType = AppearanceDefs.TAIL_TYPE_NONE;
 			player.tailRecharge = 0;
 			player.level = 1;
 			player.teaseLevel = 0;

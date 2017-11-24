@@ -25,7 +25,7 @@
 			"smallest2" : function(thisPtr:*):*{ return kGAMECLASS.player.cockDescript(kGAMECLASS.player.smallestCockIndex2()); },
 			"longest"	: function(thisPtr:*):*{ return kGAMECLASS.player.cockDescript(kGAMECLASS.player.longestCock()); },
 			"shortest"	: function(thisPtr:*):*{ return kGAMECLASS.player.cockDescript(kGAMECLASS.player.shortestCockIndex()); }
-		}
+		};
 
 
 		public var cockHeadLookups:Object = // For subject: "cockHead"
@@ -38,7 +38,7 @@
 			"smallest2"	: function(thisPtr:*):*{ return kGAMECLASS.player.cockHead(kGAMECLASS.player.smallestCockIndex2()); },
 			"longest"	: function(thisPtr:*):*{ return kGAMECLASS.player.cockHead(kGAMECLASS.player.longestCock()); },			// the *head* of a cock has a length? Wut?
 			"shortest"	: function(thisPtr:*):*{ return kGAMECLASS.player.cockHead(kGAMECLASS.player.shortestCockIndex()); }
-		}
+		};
 
 		public var monsterLookups:Object = {
 			"a"							: function(thisPtr:*):* { return kGAMECLASS.monster.a; },
@@ -124,7 +124,7 @@
 			"skintone"					: function(thisPtr:*):* {
 				return kGAMECLASS.monster.skinTone;
 			},
-			"tallness"					: function(thisPtr:*):* { return kGAMECLASS.measurements.footInchOrMetres(kGAMECLASS.monster.tallness); },
+			"tallness"					: function(thisPtr:*):* { return Measurements.footInchOrMetres(kGAMECLASS.monster.tallness); },
 			"uppergarment"				: function(thisPtr:*):* { return kGAMECLASS.monster.upperGarmentName; },
 			"vag"						: function(thisPtr:*):* { return kGAMECLASS.monster.vaginaDescript(); },
 			"vagina"					: function(thisPtr:*):* { return kGAMECLASS.monster.vaginaDescript(); },
@@ -303,4 +303,4 @@
 
 			"skin"      : skinLookups,
 			"face"      : faceLookups
-		}
+		};

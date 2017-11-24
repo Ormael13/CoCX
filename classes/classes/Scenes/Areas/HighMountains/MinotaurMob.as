@@ -1,9 +1,10 @@
 package classes.Scenes.Areas.HighMountains
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
-	/**
+/**
 	 * ...
 	 * @author ...
 	 */
@@ -89,7 +90,6 @@ package classes.Scenes.Areas.HighMountains
 				if(player.lust <= 99) outputText("You pull back from the brink with a start.  It'll take more than a little drugged pre-cum to bring you down!");
 				else outputText("You sigh and let your tongue loll out.  It wouldn't so bad, would it?");
 			}
-			combatRoundOver();
 		}
 
 		//Grope
@@ -99,21 +99,18 @@ package classes.Scenes.Areas.HighMountains
 			if(player.lust >= 80) outputText(", and your pussy is absolutely soaking wet");
 			outputText(".");
 			player.dynStats("lus", (5 + player.sens/10));
-			combatRoundOver();
 		}
 		//Gang Grope
 		private function minotaurGangGangGropeAttack():void {
 			game.spriteSelect(94);
-			outputText("Before you can react, hands reach out from multiple angles and latch onto your body.  One pair squeezes at your " + game.buttDescript() + ", the strong grip massaging your cheeks with loving touches.  Another set of hands are sliding along your tummy, reaching down for, but not quite touching, the juicy delta below.  Palms encircle your [chest] and caress them, gently squeezing in spite of the brutish hands holding you.  You wriggle and squirm in the collective grip of the many minotaurs for a few moments, growing more and more turned on by the treatment.  At last, you shake out of their hold and stand free, panting hard from exertion and desire.");
+			outputText("Before you can react, hands reach out from multiple angles and latch onto your body.  One pair squeezes at your " + Appearance.buttDescription(player) + ", the strong grip massaging your cheeks with loving touches.  Another set of hands are sliding along your tummy, reaching down for, but not quite touching, the juicy delta below.  Palms encircle your [chest] and caress them, gently squeezing in spite of the brutish hands holding you.  You wriggle and squirm in the collective grip of the many minotaurs for a few moments, growing more and more turned on by the treatment.  At last, you shake out of their hold and stand free, panting hard from exertion and desire.");
 			player.dynStats("lus", (15 + player.sens/10));
-			combatRoundOver();
 		}
 		//Waste  a turn
 		private function minotaurGangWaste():void {
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] = 1;
 			game.spriteSelect(94);
 			outputText("\"<i>Oh man I can't wait to go hilt-deep in that pussy... I'm going to wreck " + player.mf("him", "her") + ",</i>\" promises one bull to his brother.  The other laughs and snorts, telling him how he'll have to do the deed during sloppy seconds.  It quickly escalates, and soon, every single one of the beast-men is taunting the others, bickering over how and when they'll get to have you.  While they're wasting their time, it's your chance to act!");
-			combatRoundOver();
 		}
 
 		override public function doAI():void
@@ -130,16 +127,16 @@ package classes.Scenes.Areas.HighMountains
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.highMountains.minotaurMobScene.victoryMinotaurGang();
+			SceneLib.highMountains.minotaurMobScene.victoryMinotaurGang();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if (pcCameWorms) {
 				outputText("\n\nThe minutaurs share a laugh while you cum, but their throbbing erections don't subside in the slightest.");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
-				game.highMountains.minotaurMobScene.minotaurDeFeet();
+				SceneLib.highMountains.minotaurMobScene.minotaurDeFeet();
 			}
 		}
 
@@ -162,18 +159,18 @@ package classes.Scenes.Areas.HighMountains
 			this.cumMultiplier = 1.5;
 			this.hoursSinceCum = ballSize * 10;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = rand(37) + 84;
-			this.hipRating = HIP_RATING_AVERAGE;
-			this.buttRating = BUTT_RATING_AVERAGE+1;
-			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
+			this.hipRating = AppearanceDefs.HIP_RATING_AVERAGE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_AVERAGE+1;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
 			this.skin.growFur({color:"red"});
 			this.skinDesc = "shaggy fur";
 			this.hairColor = randomChoice("black","brown");
 			this.hairLength = 3;
-			this.faceType = FACE_COW_MINOTAUR;
+			this.faceType = AppearanceDefs.FACE_COW_MINOTAUR;
 			initStrTouSpeInte(80, 110, 30, 20);
 			initWisLibSensCor(20, 100, 15, 35);
 			this.weaponName = "fists";
@@ -194,8 +191,8 @@ package classes.Scenes.Areas.HighMountains
 			if(level > 29) level = 29;
 			this.level = level;
 			this.gems = rand(50) + 100;
-			this.tailType = TAIL_TYPE_COW;
-			this.special1 = game.mountain.minotaurScene.minoPheromones;
+			this.tailType = AppearanceDefs.TAIL_TYPE_COW;
+			this.special1 = SceneLib.mountain.minotaurScene.minoPheromones;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);

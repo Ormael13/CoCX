@@ -1,10 +1,11 @@
 package classes.Scenes.Areas.Forest
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.internals.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
 
-	public class Kitsune extends Monster
+public class Kitsune extends Monster
 	{
 
 
@@ -17,7 +18,6 @@ package classes.Scenes.Areas.Forest
 			outputText("\n\nYour limbs are bound tightly while coils of delightfully soft fur caress you on all sides.  You can do little besides struggle against your furry bonds as the constant writhing of her tails sends shudders flying up and down your spine.");
 			createStatusEffect(StatusEffects.PCTailTangle, 0, 0, 0, 0);
 			player.dynStats("lus", 10 + player.sens / 8);
-			combatRoundOver();
 		}
 
 		//Struggle - event 5077 in Combat.as
@@ -38,7 +38,6 @@ package classes.Scenes.Areas.Forest
 				outputText("\n\nShe licks her lips, running her hands along you wherever she can find exposed flesh.  Her fingertips leave small trails of dazzling blue that make you flush with lust - you must escape her grasp soon or else you will be like putty in her hands!");
 				player.dynStats("lus", 5 + player.sens / 10);
 				addStatusValue(StatusEffects.PCTailTangle, 1, 3);
-				combatRoundOver();
 			}
 		}
 
@@ -46,10 +45,9 @@ package classes.Scenes.Areas.Forest
 		{
 			clearOutput();
 			outputText("Happily, you slump deeper into the fluffy tails, eliciting an amused giggle from the kitsune.");
-			if (game.silly()) outputText("  You're so glad you got to touch fluffy tail.");
+			if (EngineCore.silly()) outputText("  You're so glad you got to touch fluffy tail.");
 			outputText("\n\nShe licks her lips, running her hands along you wherever she can find exposed flesh.  Her fingertips leave small trails of dazzling blue that make you flush with lust - you must escape her grasp soon or else you will be like putty in her hands!");
 			player.dynStats("lus", 5 + player.sens / 10);
-			combatRoundOver();
 		}
 
 		//Fox Fire: - Low piercing damage, +10-15 LUST
@@ -70,7 +68,6 @@ package classes.Scenes.Areas.Forest
 			damage = Math.round(damage);
 			damage = player.takeMagicDamage(damage, true);
 			player.dynStats("lus", 15 + player.sens / 10);
-			combatRoundOver();
 		}
 
 //Illusion: - Raises enemy evasion, but can be resisted.
@@ -92,7 +89,6 @@ package classes.Scenes.Areas.Forest
 				createStatusEffect(StatusEffects.Illusion, 0, 0, 0, 0);
 				spe += 20;
 			}
-			combatRoundOver();
 		}
 
 //Seal: - cancels and disables whatever command the player uses this round. Lasts 3 rounds, cannot seal more than one command at a time.
@@ -151,7 +147,6 @@ package classes.Scenes.Areas.Forest
 				outputText("\n\nUpon your touch, the seal dissipates, and you are free of the kitsune's magic!  She pouts in disappointment, looking thoroughly irritated, but quickly resumes her coy trickster facade.");
 				player.removeStatusEffect(StatusEffects.Sealed);
 			}
-			combatRoundOver();
 		}
 
 //Tease Texts:
@@ -165,7 +160,6 @@ package classes.Scenes.Areas.Forest
 			//Redhead only:
 			else outputText("The kitsune sways her hips enticingly as she appears in front of you abruptly, rubbing up against your side.  Her teasing caresses make you shiver with arousal, and you can feel something thick and warm pressing against your [hips].  She gives you a wry grin as she breaks away from you, sporting an obvious tent in her robes.  \"<i>Just you wait...</i>\"");
 			player.dynStats("lus", 5 + player.sens / 7);
-			combatRoundOver();
 		}
 
 		override protected function performCombatAction():void
@@ -181,16 +175,16 @@ package classes.Scenes.Areas.Forest
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.forest.kitsuneScene.defeatTheKitsunes();
+			SceneLib.forest.kitsuneScene.defeatTheKitsunes();
 		}
 
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
 			if (pcCameWorms) {
 				outputText("\n\nThe kitsune recoils before running off, no longer interested in you...");
-				game.cleanupAfterCombat();
+				cleanupAfterCombat();
 			} else {
-				game.forest.kitsuneScene.loseToKitsunes();
+				SceneLib.forest.kitsuneScene.loseToKitsunes();
 			}
 		}
 
@@ -215,17 +209,17 @@ package classes.Scenes.Areas.Forest
 				this.cumMultiplier = 1.5;
 				this.hoursSinceCum = ballSize * 10;
 			}
-			this.createVagina(false, VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLICK, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 20, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("D"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.createStatusEffect(StatusEffects.BonusACapacity,20,0,0,0);
 			this.tallness = rand(24) + 60;
-			this.hipRating = HIP_RATING_AMPLE;
-			this.buttRating = BUTT_RATING_AVERAGE+1;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_AVERAGE+1;
 			this.skinTone = "pale";
-			this.skin.base.pattern = PATTERN_MAGICAL_TATTOO;
+			this.skin.base.pattern = AppearanceDefs.PATTERN_MAGICAL_TATTOO;
 			this.hairColor = hairColor;
 			this.hairLength = 13 + rand(20);
 			initStrTouSpeInte(35, 55, 110, 105);
@@ -245,7 +239,7 @@ package classes.Scenes.Areas.Forest
 			this.drop = new WeightedDrop().
 					add(armors.ARCBANG,1).
 					add(consumables.FOXJEWL,4);
-			this.tailType = TAIL_TYPE_FOX;
+			this.tailType = AppearanceDefs.TAIL_TYPE_FOX;
 			checkMonster();
 		}
 

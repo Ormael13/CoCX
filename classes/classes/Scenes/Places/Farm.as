@@ -1,17 +1,19 @@
 ﻿package classes.Scenes.Places{
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.NPCs.MarbleScene;
-	import classes.Scenes.Places.Farm.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.Holidays;
+import classes.Scenes.NPCs.MarbleScene;
+import classes.Scenes.Places.Farm.*;
+import classes.Scenes.SceneLib;
 
-	use namespace kGAMECLASS;
+use namespace kGAMECLASS;
 
 	public class Farm extends BaseContent{
 	public var keltScene:KeltScene = new KeltScene();
 	public var kelly:Kelly = new Kelly();
 	private function get marbleScene():MarbleScene {
-		return kGAMECLASS.marbleScene;
+		return SceneLib.marbleScene;
 	}
 	public var farmCorruption:FarmCorruption = new FarmCorruption();
 
@@ -427,7 +429,7 @@ public function workFarm():void {
 		outputText("  The first thing that hits you is the smell, a mingling of sweat, milk, droppings, and rotting hay. There are also probably some cows in Whitney's herd ready for breeding.\n\n");
 		outputText("Opening the door to one of the empty stalls, Whitney says, \"<i>I don't get to them as often as I should. Anything you can do would help.</i>\"\n\n");
 		outputText("You steel yourself, ignore your ");
-		if(player.faceType == FACE_DOG) outputText("sensitive ");
+		if(player.faceType == AppearanceDefs.FACE_DOG) outputText("sensitive ");
 		outputText("nose, and set to work.");
 		//[Lust increase based on libido, degree of cow/mino features] 
 		dynStats("lus", player.cowScore() + player.minotaurScore());
@@ -509,13 +511,13 @@ public function exploreFarm():void {
 		return;
 	}
 	//FIND CARROT!
-	if(kGAMECLASS.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] == 3 && player.hasKeyItem("Carrot") < 0) {
-		kGAMECLASS.findACarrot();
+	if(Holidays.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] == 3 && player.hasKeyItem("Carrot") < 0) {
+		Holidays.findACarrot();
 		return;
 	}
 	//Free Isabella Milkings!
-	if(player.hasCock() && flags[kFLAGS.FOUND_ISABELLA_AT_FARM_TODAY] == 0 && flags[kFLAGS.ISABELLA_MILKED_YET] < 0 && kGAMECLASS.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.ISABELLA_MILK_COOLDOWN] == 0 && rand(2) == 0) {
-		kGAMECLASS.isabellaFollowerScene.findIzzyMilking();
+	if(player.hasCock() && flags[kFLAGS.FOUND_ISABELLA_AT_FARM_TODAY] == 0 && flags[kFLAGS.ISABELLA_MILKED_YET] < 0 && SceneLib.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.ISABELLA_MILK_COOLDOWN] == 0 && rand(2) == 0) {
+		SceneLib.isabellaFollowerScene.findIzzyMilking();
 		return;
 	}
 	//Meet Marble First Time
@@ -639,13 +641,13 @@ public function getMilked():void {
 	else {
 		outputText("You walk over to the barn, eagerly anticipating the opportunity to get milked.");
 		//If ilk withdrawl or high lactation no dicks
-		if(player.hasStatusEffect(StatusEffects.LactationReduction) && player.totalCocks() == 0) outputText("  Your " + nippleDescript(0) + "s are engorged and ready to be taken care of.");
+		if(player.hasStatusEffect(StatusEffects.LactationReduction) && player.cockTotal() == 0) outputText("  Your " + nippleDescript(0) + "s are engorged and ready to be taken care of.");
 		//If cocks
-		else if(player.totalCocks() > 0) {
+		else if(player.cockTotal() > 0) {
 			outputText("Your [cocks] erect");
-			if(player.totalCocks() > 1) outputText("s");
+			if(player.cockTotal() > 1) outputText("s");
 			outputText(" and throb");
-			if(player.totalCocks() == 1) outputText("s");
+			if(player.cockTotal() == 1) outputText("s");
 			outputText(" with desire.");
 		}
 		//If both
@@ -731,7 +733,7 @@ public function getMilked():void {
 		//Medium 3
 		if(milksplosion == 2) {
 			outputText("Fat drops of milk pour out of your " + nippleDescript(0) + "s, pooling in the milking-cups as the machine begins to extract your creamy breast-milk.   The milk flow begins streaming out of you it bursts of fluid as the machinery switches to a pulsating suction.  You groan happily as your [allbreasts] empty, relieving you of pent up pressure.   The feeling is enjoyable in more than just that way, and you feel yourself getting ");
-			if(player.totalCocks() == 0) {
+			if(player.cockTotal() == 0) {
 				if(player.hasVagina()) outputText("wet");
 				else outputText("horny");
 			}
@@ -752,7 +754,7 @@ public function getMilked():void {
 		//High Output2
 		if(milksplosion == 1) {
 			outputText("Your " + nippleDescript(0) + " swell up like tiny balloons for a moment before they unleash a torrent of your milk.  The nipple-cylinders instantly flood to capacity, and the milking machinery chugs loudly as it tries to suck it all down the tubes, barely keeping up with you.  You pant and writhe in the harness, each pulse of milk sending a growing sensation of your warmth to your groin that makes you ");
-			if(player.totalCocks() == 0) {
+			if(player.cockTotal() == 0) {
 				if(player.hasVagina()) outputText("wet");
 				else outputText("horny");
 			}
@@ -1155,7 +1157,7 @@ private function cowBadEnd2():void {
 	outputText("You moo happily, shivering at the intensity of the fond memories and in anticipation of tonight's activities.  But first you need to get your swollen nipples emptied!  The straps to the harness hang there in front of you – how do you work them again?  Your happy moos turn to moos of confusion and stress, but thankfully Whitney pads into the barn before you have a chance to panic.  She looks down and sighs, filling you with confusion.  You weren't a bad cow, were you?\n\n");
 	outputText("The anthropomorphic country-girl gives you a gentle pat on the head as she works the straps, talking to herself as she does, \"<i>Don't worry girl, I'm not mad.  I reckon I should've given you a stronger warning is all.  But now the damage is done – what's left of your brains was mushed up by all that milking.  Don't worry none honey, there will always be a spot in my stall for you.  I'll just have to make sure you don't get out with the animals again, won't I?</i>\"\n\n");
 	outputText("You nod happily, determined to find someone or something that can stuff you as full as your bulls did.  Whitney gives a resigned sigh as she turns the machine on, watching your determined stare melt into a dopey painting of relief...");
-	getGame().gameOver();
+	EventParser.gameOver();
 }
 private function milkerBadEnd1():void {
 	var cumQ:Number = player.cumQ();
@@ -1267,12 +1269,12 @@ private function milkerBadEnd1():void {
 		//(multi)
 		else outputText("multiple gigantic, erect penises bobbing in front of you and dragging between your legs, head pinned against the floor");
 		outputText(".  Just in time she backs up and pulls a pitchfork down from the wall. \"<i>I expect I was wrong about you when we met, [name].  Get on out of here now and never come back or I'll make sure you never go anywhere again.</i>\"  Scowling, you break off your advance and head toward the door.  Though you definitely want to fuck her, giving yourself a chance to adjust to your magnificent new body might not be a bad idea either.  After all, no matter what she says you can always come back... meanwhile you vow to find something or someone to rape or turn into your personal cock-milker.  With an amazing ");
-		if(player.totalCocks() == 1) outputText("dick");
+		if(player.cockTotal() == 1) outputText("dick");
 		else outputText("set of dicks");
 		outputText(" like yours, why worry about anything else for the moment?");
 		dynStats("lib", 20, "sen", 10, "lus", 80, "cor", 100);
 	}
-	getGame().gameOver();
+	EventParser.gameOver();
 }
 
 //Introduction: Finding the Toys @ The Farm

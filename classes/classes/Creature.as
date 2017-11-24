@@ -1,37 +1,32 @@
 ﻿//CoC Creature.as
 package classes
 {
-	import classes.BodyParts.Claws;
-	import classes.BodyParts.Face;
-	import classes.BodyParts.IOrifice;
-	import classes.BodyParts.LowerBody;
-	import classes.BodyParts.Skin;
-	import classes.BodyParts.SkinLayer;
-	import classes.BodyParts.Tail;
-	import classes.BodyParts.UnderBody;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.PerkType;
-	import classes.StatusEffectType;
-	import classes.Items.JewelryLib;
-	import classes.StatusEffects.Combat.CombatInteBuff;
-	import classes.StatusEffects.Combat.CombatSpeBuff;
-	import classes.StatusEffects.Combat.CombatStrBuff;
-	import classes.StatusEffects.Combat.CombatTouBuff;
-	import classes.StatusEffects.Combat.CombatWisBuff;
-	import classes.StatusEffects.TemporaryBuff;
-	import classes.internals.Utils;
-	import classes.VaginaClass;
-	import classes.Scenes.Places.TelAdre.UmasShop;
-	import flash.display.InteractiveObject;
-	import flash.errors.IllegalOperationError;
+import classes.BodyParts.Claws;
+import classes.BodyParts.Face;
+import classes.BodyParts.IOrifice;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Skin;
+import classes.BodyParts.Tail;
+import classes.BodyParts.UnderBody;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Items.JewelryLib;
+import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.StatusEffects.Combat.CombatInteBuff;
+import classes.StatusEffects.Combat.CombatSpeBuff;
+import classes.StatusEffects.Combat.CombatStrBuff;
+import classes.StatusEffects.Combat.CombatTouBuff;
+import classes.StatusEffects.Combat.CombatWisBuff;
+import classes.internals.Utils;
 
-	public class Creature extends Utils
+import flash.errors.IllegalOperationError;
+
+
+    public class Creature extends Utils
 	{
 
-		include "../../includes/appearanceDefs.as";
 
-		public function get game():CoC {
+        public function get game():CoC {
 			return kGAMECLASS;
 		}
 		public function get flags():DefaultDict {
@@ -525,10 +520,10 @@ package classes
 		//Appearance Variables
 		//Gender 1M, 2F, 3H
 		public function get gender():int {
-			if (hasCock() && hasVagina()) return GENDER_HERM;
-			if (hasCock()) return GENDER_MALE;
-			if (hasVagina()) return GENDER_FEMALE;
-			return GENDER_NONE;
+			if (hasCock() && hasVagina()) return AppearanceDefs.GENDER_HERM;
+			if (hasCock()) return AppearanceDefs.GENDER_MALE;
+			if (hasVagina()) return AppearanceDefs.GENDER_FEMALE;
+			return AppearanceDefs.GENDER_NONE;
 		}
 		private var _tallness:Number = 0;
 		public function get tallness():Number { return _tallness; }
@@ -540,7 +535,7 @@ package classes
 		2- ghost
 		3- goo!
 		4- anemononeoenoeneo!*/
-		public var hairType:Number = HAIR_NORMAL;
+		public var hairType:Number = AppearanceDefs.HAIR_NORMAL;
 		private var _hairColor:String = "no";
 		public var hairLength:Number = 0;
 		public function get hairColor():String {
@@ -560,7 +555,7 @@ package classes
 			skin.coat.color = value;
 		}
 
-		public var beardStyle:Number = BEARD_NORMAL;
+		public var beardStyle:Number = AppearanceDefs.BEARD_NORMAL;
 		public var beardLength:Number = 0;
 				
 		public var skin:Skin;
@@ -613,11 +608,11 @@ package classes
 		// </mod>
 		public var underBody:UnderBody;
 
-		public var earType:Number = EARS_HUMAN;
+		public var earType:Number = AppearanceDefs.EARS_HUMAN;
 		public var earValue:Number = 0;
-		public var hornType:Number = HORNS_NONE;
+		public var hornType:Number = AppearanceDefs.HORNS_NONE;
 		public var horns:Number = 0;
-		private var _wingType:Number = WING_TYPE_NONE;
+		private var _wingType:Number = AppearanceDefs.WING_TYPE_NONE;
 		public var wingDesc:String = "non-existant";
 		public function get wingType():Number { return _wingType; }
 		public function set wingType(value:Number):void { _wingType = value; }
@@ -647,7 +642,7 @@ package classes
 		10 - curvy//flaring
 		15 - child-bearing/fertile
 		20 - inhumanly wide*/
-		public var hipRating:Number = HIP_RATING_BOYISH;
+		public var hipRating:Number = AppearanceDefs.HIP_RATING_BOYISH;
 		
 		/*buttRating
 		0 - buttless
@@ -659,7 +654,7 @@ package classes
 		13 - expansive
 		16 - huge
 		20 - inconceivably large/big/huge etc*/
-		public var buttRating:Number = BUTT_RATING_BUTTLESS;
+		public var buttRating:Number = AppearanceDefs.BUTT_RATING_BUTTLESS;
 		
 		//Piercings
 		//TODO: Pull this out into it's own class and enum.
@@ -683,24 +678,24 @@ package classes
 		public var nosePLong:String = "";
 
 		//Head ornaments. Definitely need to convert away from hard coded types.
-		public var antennae:Number = ANTENNAE_NONE;
+		public var antennae:Number = AppearanceDefs.ANTENNAE_NONE;
 
 		//Eyetype
-		public var eyeType:Number = EYES_HUMAN;
+		public var eyeType:Number = AppearanceDefs.EYES_HUMAN;
 		public var eyeColor:String = "brown";
 
 		//TongueType
-		public var tongueType:Number = TONGUE_HUMAN;
+		public var tongueType:Number = AppearanceDefs.TONGUE_HUMAN;
 
 		//ArmType
-		public var armType:Number = ARM_TYPE_HUMAN;
+		public var armType:Number = AppearanceDefs.ARM_TYPE_HUMAN;
 
 		//GillType
-		public var gillType:int = GILLS_NONE;
-		public function hasGills():Boolean { return gillType != GILLS_NONE; }
+		public var gillType:int = AppearanceDefs.GILLS_NONE;
+		public function hasGills():Boolean { return gillType != AppearanceDefs.GILLS_NONE; }
 		
 		//RearBody
-		public var rearBody:Number = REAR_BODY_NONE;
+		public var rearBody:Number = AppearanceDefs.REAR_BODY_NONE;
 
 		//Sexual Stuff		
 		//MALE STUFF
@@ -859,14 +854,14 @@ package classes
 			}
 			// 4.2. hair
 			if (hairLength <= 0) {
-				if (hairType != HAIR_NORMAL) error += "No hair but hairType = " + hairType + ". ";
+				if (hairType != AppearanceDefs.HAIR_NORMAL) error += "No hair but hairType = " + hairType + ". ";
 			}
 			// 4.3. tail
-			if (tailType == TAIL_TYPE_NONE) {
+			if (tailType == AppearanceDefs.TAIL_TYPE_NONE) {
 				if (tailCount != 0) error += "No tail but tailCount = "+tailCount+". ";
 			}
 			// 4.4. horns
-			if (hornType == HORNS_NONE){
+			if (hornType == AppearanceDefs.HORNS_NONE){
 				if (horns>0) error += "horns > 0 but hornType = HORNS_NONE. ";
 			} else {
 				if (horns==0) error += "Has horns but their number 'horns' = 0. ";
@@ -1822,7 +1817,7 @@ package classes
 			if (index < 0) index = biggestCockIndex();
 			var isPierced:Boolean = (cocks.length == 1) && (cocks[index].isPierced); //Only describe as pierced or sock covered if the creature has just one cock
 			var hasSock:Boolean = (cocks.length == 1) && (cocks[index].sock != "");
-			var isGooey:Boolean = (skin.type == SKIN_TYPE_GOO);
+			var isGooey:Boolean = (skin.type == AppearanceDefs.SKIN_TYPE_GOO);
 			return Appearance.cockAdjective(cocks[index].cockType, cocks[index].cockLength, cocks[index].cockThickness, lust, cumQ(), isPierced, hasSock, isGooey);
 		}
 
@@ -1945,18 +1940,6 @@ package classes
 		{
 			//Lactation * breastSize x 10 (milkPerBreast) determines scene
 			return biggestLactation() * biggestTitSize() * 10;
-		}
-
-		//Hacky code till I can figure out how to move appearance code out.
-		//TODO: Get rid of this
-		public virtual function dogScore():Number {
-			throw new Error("Not implemented. BAD");
-		}
-
-		//Hacky code till I can figure out how to move appearance code out.
-		//TODO: Get rid of this
-		public virtual function foxScore():Number {
-			throw new Error("Not implemented. BAD");
 		}
 
 		public function biggestLactation():Number
@@ -2401,16 +2384,8 @@ package classes
 			}
 			return -1;
 		}
-
-		//TODO Seriously wtf. 1500+ calls to cockTotal, 340+ call to totalCocks. I'm scared to touch either.
 		//How many cocks?
 		public function cockTotal():Number
-		{
-			return (cocks.length);
-		}
-
-		//Alternate
-		public function totalCocks():Number
 		{
 			return (cocks.length);
 		}
@@ -2471,20 +2446,20 @@ package classes
 		}
 
 		public static const canFlyWings:Array = [
-			WING_TYPE_BEE_LIKE_LARGE,
-			WING_TYPE_BAT_LIKE_LARGE,
-			WING_TYPE_BAT_LIKE_LARGE_2,
-			WING_TYPE_FEATHERED_LARGE,
-			WING_TYPE_FEATHERED_PHOENIX,
-			WING_TYPE_DRACONIC_LARGE,
-			WING_TYPE_DRACONIC_HUGE,
-			WING_TYPE_GIANT_DRAGONFLY,
-			WING_TYPE_MANTIS_LIKE_LARGE,
-			WING_TYPE_MANTIS_LIKE_LARGE_2,
-			WING_TYPE_MANTICORE_LIKE_LARGE,
-			WING_TYPE_GARGOYLE_LIKE_LARGE,
-			WING_TYPE_BAT_ARM,
-			WING_TYPE_VAMPIRE,
+			AppearanceDefs.WING_TYPE_BEE_LIKE_LARGE,
+			AppearanceDefs.WING_TYPE_BAT_LIKE_LARGE,
+			AppearanceDefs.WING_TYPE_BAT_LIKE_LARGE_2,
+			AppearanceDefs.WING_TYPE_FEATHERED_LARGE,
+			AppearanceDefs.WING_TYPE_FEATHERED_PHOENIX,
+			AppearanceDefs.WING_TYPE_DRACONIC_LARGE,
+			AppearanceDefs.WING_TYPE_DRACONIC_HUGE,
+			AppearanceDefs.WING_TYPE_GIANT_DRAGONFLY,
+			AppearanceDefs.WING_TYPE_MANTIS_LIKE_LARGE,
+			AppearanceDefs.WING_TYPE_MANTIS_LIKE_LARGE_2,
+			AppearanceDefs.WING_TYPE_MANTICORE_LIKE_LARGE,
+			AppearanceDefs.WING_TYPE_GARGOYLE_LIKE_LARGE,
+            AppearanceDefs.WING_TYPE_BAT_ARM,
+            AppearanceDefs.WING_TYPE_VAMPIRE,
 			//WING_TYPE_IMP_LARGE,
 		];
 
@@ -2501,7 +2476,7 @@ package classes
 		//PC can swim underwater?
 		public function canSwimUnderwater():Boolean
 		{
-			if (gillType != GILLS_NONE)
+			if (gillType != AppearanceDefs.GILLS_NONE)
 				return true;	//dodać jeszcze trzeba bedzie tu efekt of itemów i inne opcje dające oddych. pod wodą
 			return false;
 		}
@@ -2509,98 +2484,84 @@ package classes
 		//Artifacts Bows
 		public function isArtifactBow():Boolean
 		{
-			if (game.player.weaponRange == game.weaponsrange.BOWGUID)
-				return true;
-			return false;
+			return game.player.weaponRange == game.weaponsrange.BOWGUID;
+
 		}
 
 		//Wrath Weapons
 		public function isLowGradeWrathWeapon():Boolean
 		{
-			if (game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.NPHBLDE || game.player.weapon == game.weapons.EBNYBLD || game.player.weapon == game.weapons.OTETSU || game.player.weapon == game.weapons.POCDEST || game.player.weapon == game.weapons.DOCDEST || game.player.weapon == game.weapons.CNTWHIP)
-				return true;
-			return false;
+			return game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.NPHBLDE || game.player.weapon == game.weapons.EBNYBLD || game.player.weapon == game.weapons.OTETSU || game.player.weapon == game.weapons.POCDEST || game.player.weapon == game.weapons.DOCDEST || game.player.weapon == game.weapons.CNTWHIP;
 		}
 		public function isDualLowGradeWrathWeapon():Boolean
 		{
-			if (game.player.weapon == game.weapons.DBFSWO)
-				return true;
-			return false;
+			return game.player.weapon == game.weapons.DBFSWO;
+
 		}
 
 		//Fists and fist weapons
 		public function isFistOrFistWeapon():Boolean
 		{
-			if (game.player.weaponName == "fists" || game.player.weapon == game.weapons.S_GAUNT || game.player.weapon == game.weapons.H_GAUNT || game.player.weapon == game.weapons.MASTGLO)
-				return true;
-			return false;
+			return game.player.weaponName == "fists" || game.player.weapon == game.weapons.S_GAUNT || game.player.weapon == game.weapons.H_GAUNT || game.player.weapon == game.weapons.MASTGLO;
+
 		}
 
 		//Weapons for Whirlwind
 		public function isWeaponForWhirlwind():Boolean
 		{
-			if (game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.NPHBLDE || game.player.weapon == game.weapons.EBNYBLD || game.player.weapon == game.weapons.CLAYMOR || game.player.weapon == game.weapons.URTAHLB || game.player.weapon == game.weapons.KIHAAXE || game.player.weapon == game.weapons.L__AXE
+			return game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.NPHBLDE || game.player.weapon == game.weapons.EBNYBLD || game.player.weapon == game.weapons.CLAYMOR || game.player.weapon == game.weapons.URTAHLB || game.player.weapon == game.weapons.KIHAAXE || game.player.weapon == game.weapons.L__AXE
 			 || game.player.weapon == game.weapons.L_HAMMR || game.player.weapon == game.weapons.TRASAXE || game.player.weapon == game.weapons.WARHAMR || game.player.weapon == game.weapons.OTETSU || game.player.weapon == game.weapons.NODACHI || game.player.weapon == game.weapons.WGSWORD || game.player.weapon == game.weapons.DBFSWO
-			 || game.player.weapon == game.weapons.D_WHAM_ || game.player.weapon == game.weapons.DL_AXE_ || game.player.weapon == game.weapons.DSWORD_)// || game.player.weapon == game.weapons.
-				return true;
-			return false;
+			 || game.player.weapon == game.weapons.D_WHAM_ || game.player.weapon == game.weapons.DL_AXE_ || game.player.weapon == game.weapons.DSWORD_// || game.player.weapon == game.weapons.
 		}
 
 		//Weapons for Whipping
 		public function isWeaponsForWhipping():Boolean
 		{
-			if (game.player.weapon == game.weapons.FLAIL || game.player.weapon == game.weapons.L_WHIP || game.player.weapon == game.weapons.SUCWHIP || game.player.weapon == game.weapons.PSWHIP || game.player.weapon == game.weapons.WHIP || game.player.weapon == game.weapons.PWHIP || game.player.weapon == game.weapons.NTWHIP || game.player.weapon == game.weapons.CNTWHIP
-			 || game.player.weapon == game.weapons.RIBBON || game.player.weapon == game.weapons.ERIBBON)
-				return true;
-			return false;
+			return game.player.weapon == game.weapons.FLAIL || game.player.weapon == game.weapons.L_WHIP || game.player.weapon == game.weapons.SUCWHIP || game.player.weapon == game.weapons.PSWHIP || game.player.weapon == game.weapons.WHIP || game.player.weapon == game.weapons.PWHIP || game.player.weapon == game.weapons.NTWHIP || game.player.weapon == game.weapons.CNTWHIP
+                    || game.player.weapon == game.weapons.RIBBON || game.player.weapon == game.weapons.ERIBBON;
+
 		}
 
 		//Using Tome
 		public function isUsingTome():Boolean
 		{
-			if (game.player.weaponRangeName == "nothing" || game.player.weaponRangeName == "Inquisitor’s Tome" || game.player.weaponRangeName == "Sage’s Sketchbook")
-				return true;
-			return false;
+			return game.player.weaponRangeName == "nothing" || game.player.weaponRangeName == "Inquisitor’s Tome" || game.player.weaponRangeName == "Sage’s Sketchbook";
+
 		}
 
 		//Natural Jouster perks req check
 		public function isMeetingNaturalJousterReq():Boolean
 		{
-			if ((((game.player.isTaur() || game.player.isDrider()) && game.player.spe >= 60) && game.player.findPerk(PerkLib.Naturaljouster) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && kGAMECLASS.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
-			 || (game.player.spe >= 150 && game.player.findPerk(PerkLib.Naturaljouster) >= 0 && game.player.findPerk(PerkLib.DoubleAttack) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && kGAMECLASS.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0))))
-				return true;
-			return false;
+			return (((game.player.isTaur() || game.player.isDrider()) && game.player.spe >= 60) && game.player.findPerk(PerkLib.Naturaljouster) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && kGAMECLASS.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
+                    || (game.player.spe >= 150 && game.player.findPerk(PerkLib.Naturaljouster) >= 0 && game.player.findPerk(PerkLib.DoubleAttack) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && kGAMECLASS.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)));
+
 		}
 		public function isMeetingNaturalJousterMasterGradeReq():Boolean
 		{
-			if ((((game.player.isTaur() || game.player.isDrider()) && game.player.spe >= 180) && game.player.findPerk(PerkLib.NaturaljousterMastergrade) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && kGAMECLASS.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
-			 || (game.player.spe >= 450 && game.player.findPerk(PerkLib.NaturaljousterMastergrade) >= 0 && game.player.findPerk(PerkLib.DoubleAttack) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && kGAMECLASS.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0))))
-				return true;
-			return false;
+			return (((game.player.isTaur() || game.player.isDrider()) && game.player.spe >= 180) && game.player.findPerk(PerkLib.NaturaljousterMastergrade) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && kGAMECLASS.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
+                    || (game.player.spe >= 450 && game.player.findPerk(PerkLib.NaturaljousterMastergrade) >= 0 && game.player.findPerk(PerkLib.DoubleAttack) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && kGAMECLASS.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)));
+
 		}
 
 		//1H Weapons
 		public function isOneHandedWeapons():Boolean
 		{
-			if (game.player.weaponPerk != "Dual Large" && game.player.weaponPerk != "Dual" && game.player.weaponPerk != "Staff" && game.player.weaponPerk != "Large")
-				return true;
-			return false;
+			return game.player.weaponPerk != "Dual Large" && game.player.weaponPerk != "Dual" && game.player.weaponPerk != "Staff" && game.player.weaponPerk != "Large";
+
 		}
 
 		//Naked
 		public function isNaked():Boolean
 		{
-			if (game.player.armorName == "nothing" && game.player.upperGarmentName == "nothing" && game.player.lowerGarmentName == "nothing")
-				return true;
-			return false;
+			return game.player.armorName == "nothing" && game.player.upperGarmentName == "nothing" && game.player.lowerGarmentName == "nothing";
+
 		}
 
 		//Natural Armor (need at least to partialy covering whole body)
 		public function haveNaturalArmor():Boolean
 		{
-			if (game.player.findPerk(PerkLib.ThickSkin) >= 0 || game.player.skin.hasFur() || game.player.skin.hasChitin() || game.player.skin.hasScales() || game.player.skin.hasBark() || game.player.skin.hasDragonScales() || game.player.skin.hasBaseOnly(SKIN_BASE_STONE))
-				return true;
-			return false;
+			return game.player.findPerk(PerkLib.ThickSkin) >= 0 || game.player.skin.hasFur() || game.player.skin.hasChitin() || game.player.skin.hasScales() || game.player.skin.hasBark() || game.player.skin.hasDragonScales() || game.player.skin.hasBaseOnly(AppearanceDefs.SKIN_BASE_STONE);
+
 		}
 
 		//Crit immunity
@@ -2614,25 +2575,22 @@ package classes
 		//Eyes of the Hunter
 		public function whenEyesOfTheHunterActivates():Boolean
 		{
-			if ((game.player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && game.player.sens >= 25 && (game.monster.findPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0 || game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyGigantType) >= 0 || game.monster.findPerk(PerkLib.EnemyGroupType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0))
-			 || (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.EnemyGodType) >= 0 || game.monster.findPerk(PerkLib.EnemyBossType) >= 0 || game.monster.findPerk(PerkLib.DarknessNature) >= 0 || game.monster.findPerk(PerkLib.FireNature) >= 0 || game.monster.findPerk(PerkLib.IceNature) >= 0 || game.monster.findPerk(PerkLib.LightningNature) >= 0))
-			 || (game.player.findPerk(PerkLib.EyesOfTheHunterMaster) >= 0 && game.player.sens >= 75 && (game.monster.findPerk(PerkLib.DarknessVulnerability) >= 0 || game.monster.findPerk(PerkLib.FireVulnerability) >= 0 || game.monster.findPerk(PerkLib.IceVulnerability) >= 0 || game.monster.findPerk(PerkLib.LightningVulnerability) >= 0)))
-				return true;
-			return false;
+			return (game.player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && game.player.sens >= 25 && (game.monster.findPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0 || game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyGigantType) >= 0 || game.monster.findPerk(PerkLib.EnemyGroupType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0))
+                    || (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.EnemyGodType) >= 0 || game.monster.findPerk(PerkLib.EnemyBossType) >= 0 || game.monster.findPerk(PerkLib.DarknessNature) >= 0 || game.monster.findPerk(PerkLib.FireNature) >= 0 || game.monster.findPerk(PerkLib.IceNature) >= 0 || game.monster.findPerk(PerkLib.LightningNature) >= 0))
+                    || (game.player.findPerk(PerkLib.EyesOfTheHunterMaster) >= 0 && game.player.sens >= 75 && (game.monster.findPerk(PerkLib.DarknessVulnerability) >= 0 || game.monster.findPerk(PerkLib.FireVulnerability) >= 0 || game.monster.findPerk(PerkLib.IceVulnerability) >= 0 || game.monster.findPerk(PerkLib.LightningVulnerability) >= 0));
+
 		}
 		public function whenGeneralEnemyPerksDisplayed():Boolean
 		{
-			if ((game.player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && game.player.sens >= 25 && (game.monster.findPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0 || game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyGigantType) >= 0 || game.monster.findPerk(PerkLib.EnemyGroupType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0))
-			 || (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.EnemyGodType) >= 0 || game.monster.findPerk(PerkLib.EnemyBossType) >= 0)))
-				return true;
-			return false;
+			return (game.player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && game.player.sens >= 25 && (game.monster.findPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0 || game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyGigantType) >= 0 || game.monster.findPerk(PerkLib.EnemyGroupType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0))
+                    || (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.EnemyGodType) >= 0 || game.monster.findPerk(PerkLib.EnemyBossType) >= 0));
+
 		}
 		public function whenElementalEnemyPerksDisplayed():Boolean
 		{
-			if ((game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.DarknessNature) >= 0 || game.monster.findPerk(PerkLib.FireNature) >= 0 || game.monster.findPerk(PerkLib.IceNature) >= 0 || game.monster.findPerk(PerkLib.LightningNature) >= 0))
-			 || (game.player.findPerk(PerkLib.EyesOfTheHunterMaster) >= 0 && game.player.sens >= 75 && (game.monster.findPerk(PerkLib.DarknessVulnerability) >= 0 || game.monster.findPerk(PerkLib.FireVulnerability) >= 0 || game.monster.findPerk(PerkLib.IceVulnerability) >= 0 || game.monster.findPerk(PerkLib.LightningVulnerability) >= 0)))
-				return true;
-			return false;
+			return (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.DarknessNature) >= 0 || game.monster.findPerk(PerkLib.FireNature) >= 0 || game.monster.findPerk(PerkLib.IceNature) >= 0 || game.monster.findPerk(PerkLib.LightningNature) >= 0))
+                    || (game.player.findPerk(PerkLib.EyesOfTheHunterMaster) >= 0 && game.player.sens >= 75 && (game.monster.findPerk(PerkLib.DarknessVulnerability) >= 0 || game.monster.findPerk(PerkLib.FireVulnerability) >= 0 || game.monster.findPerk(PerkLib.IceVulnerability) >= 0 || game.monster.findPerk(PerkLib.LightningVulnerability) >= 0));
+
 		}
 
 		//check for vagoo
@@ -2665,7 +2623,7 @@ package classes
 		public function manWoman(caps:Boolean = false):String
 		{
 			//Dicks?
-			if (totalCocks() > 0)
+			if (cockTotal() > 0)
 			{
 				if (hasVagina())
 				{
@@ -2715,12 +2673,12 @@ package classes
 		public function looksFemale():Boolean {
 			var tits:Number = biggestTitSize();
 			switch(gender) {
-				case GENDER_HERM:
-                case GENDER_NONE:
+				case AppearanceDefs.GENDER_HERM:
+                case AppearanceDefs.GENDER_NONE:
                     return ((tits >= 3 || tits == 2 && femininity >= 15 || tits == 1 && femininity >= 40 || femininity >= 65) && (flags[kFLAGS.MALE_OR_FEMALE] == 0 || flags[kFLAGS.MALE_OR_FEMALE] == 2));
-				case GENDER_MALE:
+				case AppearanceDefs.GENDER_MALE:
                     return ((tits >= 3 && femininity >= 5 || tits == 2 && femininity >= 35 || tits == 1 && femininity >= 65 || femininity >= 95) && (flags[kFLAGS.MALE_OR_FEMALE] == 0 || flags[kFLAGS.MALE_OR_FEMALE] == 2));
-                case GENDER_FEMALE:
+                case AppearanceDefs.GENDER_FEMALE:
                     return ((tits > 1 || tits == 1 && femininity >= 15 || femininity >= 45) && (flags[kFLAGS.MALE_OR_FEMALE] == 0 || flags[kFLAGS.MALE_OR_FEMALE] == 2));
 				default: return false;
 			}
@@ -2734,10 +2692,10 @@ package classes
 		public function maleFemaleHerm(caps:Boolean = false):String
 		{
 			switch (gender) {
-				case GENDER_NONE:   return caps ? mf("Genderless", "Fem-genderless") : mf("genderless", "fem-genderless");
-				case GENDER_MALE:   return caps ? mf("Male", biggestTitSize() > BREAST_CUP_A ? "Shemale" : "Femboy")             : mf("male", biggestTitSize() > BREAST_CUP_A ? "shemale" : "femboy");
-				case GENDER_FEMALE: return caps ? mf("Cuntboy", "Female")            : mf("cuntboy", "female");
-				case GENDER_HERM:   return caps ? mf("Maleherm", "Hermaphrodite")    : mf("maleherm", "hermaphrodite");
+				case AppearanceDefs.GENDER_NONE:   return caps ? mf("Genderless", "Fem-genderless") : mf("genderless", "fem-genderless");
+				case AppearanceDefs.GENDER_MALE:   return caps ? mf("Male", biggestTitSize() > AppearanceDefs.BREAST_CUP_A ? "Shemale" : "Femboy")             : mf("male", biggestTitSize() > AppearanceDefs.BREAST_CUP_A ? "shemale" : "femboy");
+				case AppearanceDefs.GENDER_FEMALE: return caps ? mf("Cuntboy", "Female")            : mf("cuntboy", "female");
+				case AppearanceDefs.GENDER_HERM:   return caps ? mf("Maleherm", "Hermaphrodite")    : mf("maleherm", "hermaphrodite");
 				default: return "<b>Gender error!</b>";
 			}
 		}
@@ -2747,7 +2705,7 @@ package classes
 		 */
 		public function isMale():Boolean
 		{
-			return gender == GENDER_MALE;
+			return gender == AppearanceDefs.GENDER_MALE;
 		}
 		
 		/**
@@ -2755,7 +2713,7 @@ package classes
 		 */
 		public function isFemale():Boolean
 		{
-			return gender == GENDER_FEMALE;
+			return gender == AppearanceDefs.GENDER_FEMALE;
 					}
 
 		/**
@@ -2763,7 +2721,7 @@ package classes
 		 */
 		public function isHerm():Boolean
 					{
-			return gender == GENDER_HERM;
+			return gender == AppearanceDefs.GENDER_HERM;
 					}
 
 		/**
@@ -2771,7 +2729,7 @@ package classes
 		 */
 		public function isGenderless():Boolean
 				{
-			return gender == GENDER_NONE;
+			return gender == AppearanceDefs.GENDER_NONE;
 				}
 
 		/**
@@ -2779,7 +2737,7 @@ package classes
 		 */
 		public function isMaleOrHerm():Boolean
 			{
-			return (gender & GENDER_MALE) != 0;
+			return (gender & AppearanceDefs.GENDER_MALE) != 0;
 				}
 
 		/**
@@ -2787,7 +2745,7 @@ package classes
 		 */
 		public function isFemaleOrHerm():Boolean
 				{
-			return (gender & GENDER_FEMALE) != 0;
+			return (gender & AppearanceDefs.GENDER_FEMALE) != 0;
 					}
 
 		//Create a cock. Default type is HUMAN
@@ -2991,10 +2949,10 @@ package classes
 		public function cuntChangeNoDisplay(cArea:Number):Boolean{
 			if(vaginas.length == 0) return false;
 			var stretched:Boolean = false;
-			if(findPerk(PerkLib.FerasBoonMilkingTwat) < 0 || vaginas[0].vaginalLooseness <= VAGINA_LOOSENESS_NORMAL) {
+			if(findPerk(PerkLib.FerasBoonMilkingTwat) < 0 || vaginas[0].vaginalLooseness <= AppearanceDefs.VAGINA_LOOSENESS_NORMAL) {
 			//cArea > capacity = autostreeeeetch.
 			if(cArea >= vaginalCapacity()) {
-				if(vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) {}
+				if(vaginas[0].vaginalLooseness >= AppearanceDefs.VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) {}
 				else vaginas[0].vaginalLooseness++;
 				stretched = true;
 			}
@@ -3073,7 +3031,7 @@ package classes
 		public function hasPartialCoat(coat_type:int):Boolean { return skin.hasPartialCoat(coat_type); }
 		public function hasPlainSkin():Boolean { return skin.hasPlainSkin(); }
 		public function hasGooSkin():Boolean { return skin.hasGooSkin(); }
-		public function isGargoyle():Boolean { return skin.hasBaseOnly(SKIN_BASE_STONE); }
+		public function isGargoyle():Boolean { return skin.hasBaseOnly(AppearanceDefs.SKIN_BASE_STONE); }
 		public function skinDescript():String { return skin.describe('basic'); }
 		public function skinFurScales():String { return skin.describe('cover'); }
 
@@ -3099,23 +3057,20 @@ package classes
 
 		public function canOvipositSpider():Boolean
 		{
-			if (eggs() >= 10 && findPerk(PerkLib.SpiderOvipositor) >= 0 && isDrider() && tail.type == TAIL_TYPE_SPIDER_ADBOMEN)
-				return true;
-			return false;
+			return eggs() >= 10 && findPerk(PerkLib.SpiderOvipositor) >= 0 && isDrider() && tail.type == AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN;
+
 		}
 
 		public function canOvipositBee():Boolean
 		{
-			if (eggs() >= 10 && findPerk(PerkLib.BeeOvipositor) >= 0 && tail.type == TAIL_TYPE_BEE_ABDOMEN)
-				return true;
-			return false;
+			return eggs() >= 10 && findPerk(PerkLib.BeeOvipositor) >= 0 && tail.type == AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN;
+
 		}
 
 		public function canOviposit():Boolean
 		{
-			if (canOvipositSpider() || canOvipositBee())
-				return true;
-			return false;
+			return canOvipositSpider() || canOvipositBee();
+
 		}
 
 		public function eggs():int
@@ -3359,9 +3314,8 @@ package classes
 				if (breastRows[index].breasts < breastRows[counter].breasts && breastRows[counter].breastRating > 3)
 					index = counter;
 			}
-			if (breastRows[index].breasts >= 2 && breastRows[index].breastRating > 3)
-				return true;
-			return false;
+			return breastRows[index].breasts >= 2 && breastRows[index].breastRating > 3;
+
 		}
 
 		public function mostBreastsPerRow():Number
@@ -3640,7 +3594,7 @@ package classes
 		 * Echidna 1 ft long (i'd consider it barely qualifying), demonic 2 ft long, draconic 4 ft long
 		 */
 		public function hasLongTongue():Boolean {
-			return tongueType == TONGUE_DEMONIC || tongueType == TONGUE_DRACONIC || tongueType == TONGUE_ECHIDNA;
+			return tongueType == AppearanceDefs.TONGUE_DEMONIC || tongueType == AppearanceDefs.TONGUE_DRACONIC || tongueType == AppearanceDefs.TONGUE_ECHIDNA;
 		}
 		
 		public function hairOrFur():String

@@ -1,9 +1,10 @@
 package classes.Scenes.Places.Farm
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
-	public class Kelt extends Monster
+public class Kelt extends Monster
 	{
 		//Trample - once every five turns
 		private function keltTramplesJoo():void {
@@ -11,7 +12,6 @@ package classes.Scenes.Places.Farm
 			//Miss:
 			if(player.getEvasionRoll()) {
 				outputText("You roll out of the way at the last moment, avoiding his dangerous hooves.");
-				combatRoundOver();
 				return;
 			}
 
@@ -28,7 +28,6 @@ package classes.Scenes.Places.Farm
 				outputText("You can't get out of the way in time, and you're knocked down!  Kelt tramples overtop of you!  ");
 			}
 			if(damage > 0) damage = player.takeDamage(damage, true);
-			combatRoundOver();
 		}
 
 		//Arrow Attack
@@ -39,13 +38,11 @@ package classes.Scenes.Places.Farm
 			//Miss:
 			if (player.getEvasionRoll()) {
 				outputText("You manage to avoid the missile by the skin of your teeth!");
-				combatRoundOver();
 				return;
 			}
 			if (player.hasStatusEffect(StatusEffects.WindWall)) {
 				outputText("Still his arrow hits wind wall dealing no damage to you.");
 				player.addStatusValue(StatusEffects.WindWall,2,-1);
-				combatRoundOver();
 				return;
 			}
 
@@ -54,14 +51,12 @@ package classes.Scenes.Places.Farm
 			if(damage < 0) damage = 0;
 			if(damage == 0) {
 				outputText("You deflect the hit, preventing it from damaging you.");
-				combatRoundOver();
 				return;
 			}
 			//Hit:
 			
 			outputText("The arrow bites into you before you can react. ");
 			damage = player.takeDamage(damage, true);
-			combatRoundOver();
 		}
 
 		//Aura Arouse
@@ -78,7 +73,6 @@ package classes.Scenes.Places.Farm
 				else outputText("Your hands twitch towards your groin but you arrest them.  Still, the idea seems to buzz at the back of your brain, exciting you.");
 			}
 			player.dynStats("lus", player.lib/5 + rand(10));
-			combatRoundOver();
 		}
 
 		//Attacks as normal + daydream "attack"
@@ -87,7 +81,6 @@ package classes.Scenes.Places.Farm
 			if(rand(2) == 0) outputText("Kelt pauses mid-draw, looking you up and down.  He licks his lips for a few moments before shaking his head to rouse himself from his lusty stupor.  He must miss the taste of your sperm.");
 			else outputText("Flaring 'his' nostrils, Kelt inhales deeply, his eyelids fluttering closed as he gives a rather lady-like moan.   His hands roam over his stiff nipples, tweaking them slightly before he recovers.");
 			lust += 5;
-			combatRoundOver();
 		}
 
 
@@ -112,14 +105,14 @@ package classes.Scenes.Places.Farm
 		{
 			if (game.flags[kFLAGS.KELT_KILL_PLAN] == 1) {
 				if (hpVictory) {
-					game.farm.keltScene.fightToBeatKeltVictoryHP();
+					SceneLib.farm.keltScene.fightToBeatKeltVictoryHP();
 				} else {
-					game.farm.keltScene.fightToBeatKeltVictoryLust();
+					SceneLib.farm.keltScene.fightToBeatKeltVictoryLust();
 				}
 			}
 			else{
-				if(game.flags[kFLAGS.KELT_BREAK_LEVEL] == 1) game.farm.kelly.defeatKellyNDBREAKHIM();
-				else game.farm.kelly.breakingKeltNumeroThree();
+				if(game.flags[kFLAGS.KELT_BREAK_LEVEL] == 1) SceneLib.farm.kelly.defeatKellyNDBREAKHIM();
+				else SceneLib.farm.kelly.breakingKeltNumeroThree();
 			}
 		}
 
@@ -127,9 +120,9 @@ package classes.Scenes.Places.Farm
 		{
 			if (pcCameWorms){
 				outputText("\n\nKelt recoils for a moment before assuming a look of superiority...");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
-				game.farm.kelly.keltFucksShitUp();
+				SceneLib.farm.kelly.keltFucksShitUp();
 			}
 		}
 
@@ -147,13 +140,13 @@ package classes.Scenes.Places.Farm
 			this.cumMultiplier = 1.5;
 			this.hoursSinceCum = player.ballSize * 10;
 			this.createBreastRow(Appearance.breastCupInverse(breakLevel2?"B":"A"));
-			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_NORMAL;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,50,0,0,0);
 			this.tallness = 84;
-			this.hipRating = HIP_RATING_AVERAGE;
-			this.buttRating = BUTT_RATING_AVERAGE+1;
-			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
+			this.hipRating = AppearanceDefs.HIP_RATING_AVERAGE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_AVERAGE+1;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
 			this.legCount = 4;
 			this.skinTone = "tan";
 			this.hairColor = randomChoice("black","brown");
@@ -172,7 +165,7 @@ package classes.Scenes.Places.Farm
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 13;
 			this.gems = rand(15) + 25;
-			this.tailType = TAIL_TYPE_HORSE;
+			this.tailType = AppearanceDefs.TAIL_TYPE_HORSE;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			checkMonster();

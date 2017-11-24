@@ -1,10 +1,11 @@
 package classes.Scenes.Areas.Desert
 {
-	import classes.*;
-	import classes.internals.WeightedDrop;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.WeightedDrop;
 
-	public class CumWitch extends Monster
+public class CumWitch extends Monster
 	{
 		public function cumWitchAI():void {
 			//Hurt!
@@ -71,7 +72,6 @@ package classes.Scenes.Areas.Desert
 				hits--;
 			}
 			player.dynStats("lus", damage+bonus);
-			combatRoundOver();
 		}
 
 		//*Attack: Cum Magic
@@ -81,7 +81,6 @@ package classes.Scenes.Areas.Desert
 			//(15-30 lust, based on libido)
 			player.dynStats("lus", 5+player.lib/12);
 			player.hoursSinceCum += 100;
-			combatRoundOver();
 		}
 		//*Attack: Cum Hunger
 		//*Used on vagoozles, spell that causes womb to literally thirst for sperm.  Unavoidable moderate lust gain.  Pregnant character's are immune.
@@ -89,12 +88,10 @@ package classes.Scenes.Areas.Desert
 			outputText("Moaning luridly, the Cum Witch swivels her staff and opens her hand to spread her fingers wide.  At the same time, you feel her magic slam into your midsection, burrowing into your womb.  ");
 			if(player.pregnancyIncubation > 0) {
 				outputText("Yet, whatever she tries to do fails, as her otherworldly conjuration falls apart as soon as soon as it reaches you.");
-				combatRoundOver();
 				return;
 			}
 			outputText("It worms around your uterus, tickling it faintly before gently kneading your ovaries.  Your [legs] go weak as your womb throbs, hungering for something to fill it.  A trickle of wetness squirts from your [vagina] as the magic fades, and you squirm as your lust rises. If only something would make you pregnant!  Your eyes dart unbidden to the Witch's groin before you yank them away.");
 			player.dynStats("lus", 5+player.lib/12);
-			combatRoundOver();
 		}
 
 		//*Attack: Gender Confusion
@@ -108,14 +105,12 @@ package classes.Scenes.Areas.Desert
 			else {
 				outputText("You parse the flood of information with mental focus and expel the intruder from your mind with a clenching of your sizable intellect.");
 			}
-			combatRoundOver();
 		}
 		//*Attack: Shell
 		public function shellDefense():void {
 			//*Grants immunity to all magic-based attacks for the next two turns.
 			outputText("The Cum Witch holds her staff in both hands and rotates it in a circle, chanting all the while.  Her voice rises in pitch and intensity until she's screaming out unwords of power.  With one final cry, she slams her staff down into the ground hard enough to kick up a puff of sandy dust.  It quickly settles, but the Cum Witch has some kind of glittering, reflective shield around herself now!");
 			createStatusEffect(StatusEffects.Shell,3,0,0,0);
-			combatRoundOver();
 		}
 
 		//*Attack: Cocknosis
@@ -141,7 +136,6 @@ package classes.Scenes.Areas.Desert
 				else outputText("\n\nYou play with yourself until you're on the very edge of orgasm.  At that moment, a loud *SNAP* startles you back to wakefulness, and as you look down at the cock bobbing just a few inches away, you realize it's hopeless.  You can't fight this.");
 				outputText("\n\nThe witch smiles knowingly.");
 			}
-			combatRoundOver();
 		}
 
 		//*Attack: Heal
@@ -150,7 +144,6 @@ package classes.Scenes.Areas.Desert
 			outputText("The Witch smirks at you and holds her free hand under her robes.  When she pulls it out, you realize she's gathered a handful of her cum.  She holds it up and exhales over it, the air making a slight whistle as it blows through her parted lips.  The ebony sorceress then smears the goop over her wounds, which seem to drink in the cum and vanish before your eyes.  She scolds, \"<i>Physical damage?  How artless.</i>\"");
 			addHP(maxHP() * 0.33);
 			fatigue += 10;
-			combatRoundOver();
 		}
 		
 		override protected function performCombatAction():void
@@ -160,12 +153,12 @@ package classes.Scenes.Areas.Desert
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.dungeons.desertcave.cumWitchDefeated();
+			SceneLib.dungeons.desertcave.cumWitchDefeated();
 		}
 		
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			game.dungeons.desertcave.defeatedByCumWitch();
+			SceneLib.dungeons.desertcave.defeatedByCumWitch();
 		}
 		
 		public function CumWitch()
@@ -180,14 +173,14 @@ package classes.Scenes.Areas.Desert
 			this.ballSize = 0;
 			this.cumMultiplier = 3;
 			this.hoursSinceCum = 20;
-			this.createVagina(false, VAGINA_WETNESS_WET, VAGINA_LOOSENESS_LOOSE);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_WET, AppearanceDefs.VAGINA_LOOSENESS_LOOSE);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 20, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = rand(12) + 55;
-			this.hipRating = HIP_RATING_CURVY;
-			this.buttRating = BUTT_RATING_LARGE;
+			this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
 			this.skinTone = "black";
 			this.hairColor = "sandy-blonde";
 			this.hairLength = 15;

@@ -24,14 +24,15 @@ As Fenoxo has made his game code open source, this license DOES NOT transfer to 
 For further information and license requests, Dxasmodeus may be contacted through private message at the Futanari Palace. http://www.futanaripalace.com/forum.php. */
 
 package classes.Scenes.Explore {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
-	public class Giacomo extends BaseContent implements TimeAwareInterface {
+public class Giacomo extends BaseContent implements TimeAwareInterface {
 
 		public function Giacomo() {
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 		
 		private var checkedSuccubi:int;
@@ -49,9 +50,9 @@ package classes.Scenes.Explore {
 		public function timeChangeLarge():Boolean {
 			if (checkedSuccubi++ == 0 && model.time.hours == 4 && player.hasStatusEffect(StatusEffects.SuccubiNight) && (player.hasCock() || player.gender == 0)) { //Call secksins!
 				if (player.hasStatusEffect(StatusEffects.RepeatSuccubi)) {
-					if (getGame().vapula.vapulaSlave() && player.hasCock() && flags[kFLAGS.VAPULA_THREESOMES] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) //VapulaSurprise
-						getGame().vapula.vapulaAssistsCeruleanSuccubus();
-					else nightSuccubiRepeat(); //Normal night succubi shit
+                    if (SceneLib.vapula.vapulaSlave() && player.hasCock() && flags[kFLAGS.VAPULA_THREESOMES] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) //VapulaSurprise
+                        SceneLib.vapula.vapulaAssistsCeruleanSuccubus();
+                    else nightSuccubiRepeat(); //Normal night succubi shit
 				}
 				else {
 					nightSuccubiFirstTime();
@@ -902,7 +903,7 @@ package classes.Scenes.Explore {
 					outputText("  As the reality soaks in, you feel a sharp pain in your stomach and your cock. You NEED to feed. Cum, milk, it doesn't matter. Likewise, your dick is hard and you need to cum. Despite your need, you cannot bring yourself to masturbate. You want ANOTHER'S attention.\n\n");
 		
 					outputText("Without further acknowledgement, you take up your on your demonic wings to find your first \"meal\". The Succubus left behind simply giggles as she sees another of her kind take up the night in search for more meals and pleasure.");
-					getGame().gameOver();
+					EventParser.gameOver();
 					return;
 				}
 				else {

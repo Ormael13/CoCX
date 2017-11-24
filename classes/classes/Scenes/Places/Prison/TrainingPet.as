@@ -89,11 +89,8 @@ package classes.Scenes.Places.Prison
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyPet,0,0,0,0);
 			}
 			testVal = player.statusEffectv1(StatusEffects.PrisonCaptorEllyPet);
-			if(testVal < 0)
-			{
-				return true;
-			}
-			return false;
+			return testVal < 0;
+
 		}
 		
 		public function prisonCaptorPetScore():Number
@@ -374,7 +371,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorPetDreamLazy(branchChoice:String = "choose"):void
 		{
-			var currentTier:int = prisonCaptorPetTier()
+			var currentTier:int = prisonCaptorPetTier();
 			var currentEvent:int = prisonCaptorPetEvent();
 			var previousDreamValue:int = 0;
 			var dreamValue:int = 0;

@@ -1,7 +1,8 @@
 ﻿package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects.Combat.AmilyVenomDebuff;
 
 /**
@@ -24,11 +25,10 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 		public function amilyAttack():void {
 			var damage:Number;
 			//return to combat menu when finished
-			doNext(game.playerMenu);
+			doNext(EventParser.playerMenu);
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n");
-				game.combatRoundOver();
 				return;
 			}
 			//Determine if dodged!
@@ -80,9 +80,8 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 					lust += 10 * lustVuln;
 				}
 			}
-			game.statScreenRefresh();
+			EngineCore.statScreenRefresh();
 			outputText("\n");
-			game.combatRoundOver();
 		}
 
 		//(Special Attacks)
@@ -91,7 +90,7 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 			var dodged:Number = 0;
 			var damage:Number = 0;
 			//return to combat menu when finished
-			doNext(game.playerMenu);
+			doNext(EventParser.playerMenu);
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				dodged++;
@@ -133,7 +132,6 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 			//Dodge all!
 			else outputText("Amily dashes at you and quickly slashes you twice, but you quickly sidestep her first blow and jump back to avoid any follow-ups.");
 
-			game.combatRoundOver();
 		}
 
 		//-Poison Dart: Deals speed and str damage to the PC. (Not constant)
@@ -143,13 +141,11 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 			if (player.hasStatusEffect(StatusEffects.WindWall)) {
 				outputText(capitalA + short + " attack from her dartgun stops at wind wall weakening it slightly.\n");
 				player.addStatusValue(StatusEffects.WindWall,2,-1);
-				game.combatRoundOver();
 				return;
 			}
 			//Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack from her dartgun!\n");
-				game.combatRoundOver();
 				return;
 			}
 			//Determine if dodged!
@@ -198,14 +194,12 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 				var ase:AmilyVenomDebuff = player.createOrFindStatusEffect(StatusEffects.AmilyVenom) as AmilyVenomDebuff;
 				ase.increase();
 			}
-			game.combatRoundOver();
 		}
 
 		//Concentrate: always avoids the next attack. Can be disrupted by tease/seduce.
 		private function amilyConcentration():void {
 			outputText("Amily takes a deep breath and attempts to concentrate on your movements.");
 			createStatusEffect(StatusEffects.Concentration,0,0,0,0);
-			game.combatRoundOver();
 		}
 
 		//(if PC uses tease/seduce after this)
@@ -224,7 +218,7 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.amilyScene.conquerThatMouseBitch();
+			SceneLib.amilyScene.conquerThatMouseBitch();
 		}
 
 		public function Amily()
@@ -234,14 +228,14 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 			this.imageName = "amily";
 			this.long = "You are currently fighting Amily. The mouse-morph is dressed in rags and glares at you in rage, knife in hand. She keeps herself close to the ground, ensuring she can quickly close the distance between you two or run away.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_NORMAL, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_NORMAL, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 48, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("C"));
-			this.ass.analLooseness = ANAL_LOOSENESS_VIRGIN;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_VIRGIN;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.tallness = 4*12;
-			this.hipRating = HIP_RATING_AMPLE;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			this.skin.growFur({color:"tawny"});
 			this.hairColor = "brown";
 			this.hairLength = 5;

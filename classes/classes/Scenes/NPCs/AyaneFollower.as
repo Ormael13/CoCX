@@ -109,7 +109,7 @@ public function ayaneShop():void {
 		addButton(7, consumables.FOXJEWL.shortName, sellItem, consumables.FOXJEWL);
 		addButton(10, consumables.AGILI_E.shortName, sellItem, consumables.AGILI_E, 15);
 		addButton(11, consumables.SMART_T.shortName, sellItem, consumables.SMART_T);
-		addButton(12, consumables.VIXEN_T.shortName, sellItem, consumables.VIXEN_T)
+		addButton(12, consumables.VIXEN_T.shortName, sellItem, consumables.VIXEN_T);
 		addButton(13, consumables.INCOINS.shortName, sellItem, consumables.INCOINS);
 		if(atCamp){
 			addButton(14, "Back", ayaneCampMenu);

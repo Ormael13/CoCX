@@ -1,10 +1,10 @@
 package classes.Scenes.Places.Ingnam 
 {
-	import classes.*;
-	import classes.GlobalFlags.*;
-	import classes.Items.*;
-	
-	public class IngnamFarm extends BaseContent
+import classes.*;
+import classes.GlobalFlags.*;
+import classes.Scenes.SceneLib;
+
+public class IngnamFarm extends BaseContent
 	{
 		
 		public function IngnamFarm() 
@@ -27,7 +27,7 @@ package classes.Scenes.Places.Ingnam
 			outputText("\n\nYou could help out the farmer with some work for gems.");
 			menu();
 			addButton(0, "Work", workAtFarm).hint("Work at the farm for gems.");
-			addButton(14, "Leave", kGAMECLASS.ingnam.menuIngnam);
+			addButton(14, "Leave", SceneLib.ingnam.menuIngnam);
 		}
 		
 		public function workAtFarm():void { //Job at the farm.

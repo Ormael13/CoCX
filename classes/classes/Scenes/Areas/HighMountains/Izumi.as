@@ -1,10 +1,11 @@
 package classes.Scenes.Areas.HighMountains 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.internals.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
 
-	public class Izumi extends Monster
+public class Izumi extends Monster
 	{
 		// Set trace outout for this classes' content.
 		private var combatDebug:Boolean = true;
@@ -16,13 +17,13 @@ package classes.Scenes.Areas.HighMountains
 			this.imageName = "izumi";
 			this.long = "You're fighting the immense Oni, Izumi.  Standing around 9 feet tall and wielding little more than her fists, she is the picture of strength and power.  She is clad in a scandalous blue and white Kimono, the garment drawing your eyes to her humongous breasts, and her perfectly sculpted thighs.  A curious horn juts from her head, the texture of it almost lost amongst the rock lining the inside of the cave.\n\nA distinctly cocky grin is painted across her face, her undivided attention focused upon you.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLICK, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			createBreastRow(Appearance.breastCupInverse("FF")); // The doc mentions her breasts would be around D/DD on a "normal human" so err, winging this shit
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.tallness = 9*12+0;
-			this.hipRating = HIP_RATING_AVERAGE;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_AVERAGE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			this.skinTone = "creamy-white";
 			this.hairColor = "golden";
 			this.hairLength = 25;
@@ -49,7 +50,7 @@ package classes.Scenes.Areas.HighMountains
 		override public function defeated(hpVictory:Boolean):void
 		{
 			this.cleanup();
-			game.highMountains.izumiScenes.touchThatFluffyHorn();
+			SceneLib.highMountains.izumiScenes.touchThatFluffyHorn();
 		}
 		
 		// Monster won, not player, gg for descriptive method names
@@ -59,13 +60,13 @@ package classes.Scenes.Areas.HighMountains
 			if (player.hasStatusEffect(StatusEffects.Titsmother))
 			{
 				this.cleanup();
-				game.highMountains.izumiScenes.deathBySnuSnuIMeanGiantOniTits();
+				SceneLib.highMountains.izumiScenes.deathBySnuSnuIMeanGiantOniTits();
 				return;
 			}
 			else
 			{
 				this.cleanup();
-				game.highMountains.izumiScenes.fuckedUpByAFuckhugeOni();
+				SceneLib.highMountains.izumiScenes.fuckedUpByAFuckhugeOni();
 				return;
 			}
 		}
@@ -86,7 +87,6 @@ package classes.Scenes.Areas.HighMountains
 					cleanupChokeslam();
 				}
 				
-				combatRoundOver();
 				return;
 			}
 			
@@ -104,7 +104,6 @@ package classes.Scenes.Areas.HighMountains
 			// Handle titsmother
 			if (player.hasStatusEffect(StatusEffects.Titsmother))
 			{
-				combatRoundOver();
 				return;
 			}
 			
@@ -172,7 +171,6 @@ package classes.Scenes.Areas.HighMountains
 				
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 
 		// Roundhouse Kick
@@ -194,7 +192,6 @@ package classes.Scenes.Areas.HighMountains
 				player.dynStats("lus", 5 + player.lib / 20);
 			}
 
-			combatRoundOver();
 		}
 		
 		// Bind player for 3 turns. If the player doesn't break out in time, they take huge damage.
@@ -212,7 +209,6 @@ package classes.Scenes.Areas.HighMountains
 				
 				if (combatDebug) trace("Applied Chokeslam effect");
 			}
-			combatRoundOver();
 		}
 		
 		// Struggle against izumi's chokeslam
@@ -232,7 +228,6 @@ package classes.Scenes.Areas.HighMountains
 				if (combatDebug) trace("Escaped from Chokeslam grapple");
 				
 				chokeSlamEscape();
-				combatRoundOver();
 			}
 			else
 			{
@@ -275,8 +270,6 @@ package classes.Scenes.Areas.HighMountains
 			
 			var damage:int = int ((str + 225) - rand(player.tou) - player.armorDef);
 			player.takeDamage(damage, true);
-			
-			combatRoundOver();
 		}
 		
 		// Player escapes from the chokeslam attack
@@ -292,12 +285,11 @@ package classes.Scenes.Areas.HighMountains
 			outputText(" in the face.  Izumi drops you, staggering back in surprise.  “Ow!”  She actually yelps, covering her face with her hands.\n\n");
 
 			outputText("You drop to the ground and roll away, expecting some form of retribution.  Izumi glares at you from behind her hand for a moment, then snickers.  Slowly, she drops back into her fighting stance and gestures for your bout to continue.");
-			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>")
+			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			cleanupChokeslam();
 			
 			this.HP -= damage;
 			
-			combatRoundOver();
 		}
 		
 		// Remove the effect post-combat
@@ -331,7 +323,6 @@ package classes.Scenes.Areas.HighMountains
 				if (combatDebug) trace("Applying Groundslam slow");
 			}
 			
-			combatRoundOver();
 		}
 		
 		// Remove the effect post-combat, fixup stats
@@ -364,7 +355,6 @@ package classes.Scenes.Areas.HighMountains
 			
 			player.createStatusEffect(StatusEffects.Titsmother, 0, 0, 0, 0);
 			player.dynStats("lus", (player.lib / 15) + 5 + rand(5));
-			combatRoundOver();
 		}
 		
 		// Remove the effect post-combat
@@ -394,7 +384,6 @@ package classes.Scenes.Areas.HighMountains
 				if (combatDebug) trace("Broke free of Titsmother!");
 				
 				titSmotherEscape();
-				combatRoundOver();
 			}
 			else
 			{
@@ -410,15 +399,15 @@ package classes.Scenes.Areas.HighMountains
 					if (player.hasCock())
 					{
 						outputText("Assaulted by the sensation of being pressed against such warm flesh, you can already feel [eachCock] starting to stiffen against your will.  Your hardening erection");
-						if (player.totalCocks() > 1) outputText("s");
+						if (player.cockTotal() > 1) outputText("s");
 						outputText(" just makes things even more unbearable, as the harder");
-						if (player.totalCocks() > 1) outputText(" they get");
+						if (player.cockTotal() > 1) outputText(" they get");
 						else outputText(" it gets");
 						outputText(", the more insistently your");
-						if (player.totalCocks() > 1) outputText(" erections throb");
+						if (player.cockTotal() > 1) outputText(" erections throb");
 						else outputText(" erection throbs");
 						outputText(", pressed up against Izumi’s stomach muscles.  Her muscles ripple and undulate as she struggles to keep you in her grip, abs flexing, bumping, encircling your insistent erection");
-						if (player.totalCocks() > 1) outputText("s");
+						if (player.cockTotal() > 1) outputText("s");
 						outputText(", stimulating you even further.  You realize in a flash of panic that if you don’t get out of this soon, you may actually... ");
 					}
 					else
@@ -461,7 +450,6 @@ package classes.Scenes.Areas.HighMountains
 			var damage:Number = (15 + rand(player.str));
 			this.HP -= damage;
 			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-			combatRoundOver();
 		}
 		
 		// Wait handler for titsmother attack

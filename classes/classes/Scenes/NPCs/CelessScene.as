@@ -1,6 +1,6 @@
 package classes.Scenes.NPCs 
 {
-import classes.CoC;
+import classes.EventParser;
 import classes.Items.Useable;
 import classes.Scenes.Camp;
 import classes.TimeAwareInterface;
@@ -23,7 +23,7 @@ import flash.utils.getQualifiedClassName;
 		{
 			if (!_instance){
 				super("celess");
-				CoC.timeAwareClassAdd(this);
+				EventParser.timeAwareClassAdd(this);
 				Camp.addFollower(this);
                 _instance = this;
 				addSavedNPC(this);
@@ -44,7 +44,7 @@ import flash.utils.getQualifiedClassName;
             return getInstance();
         }
 		public override function unload():void{
-			CoC.timeAwareClassRemove(_instance);
+			EventParser.timeAwareClassRemove(_instance);
 			Camp.removeFollower(_instance);
 			removeSavedNPC(_instance);
 			_instance = null;

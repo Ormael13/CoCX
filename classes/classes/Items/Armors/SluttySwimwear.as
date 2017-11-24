@@ -22,7 +22,7 @@ package classes.Items.Armors
 				outputText("The bikini top clings tightly to your bustline, sending a shiver of pleasure through your body. It serves to turn you on quite nicely.  ");
 				game.player.dynStats("lus", 5);
 			}
-			if (game.player.totalCocks() == 0) {
+			if (game.player.cockTotal() == 0) {
 				outputText("The thong moves over your smooth groin, clinging onto your buttocks nicely.  ");
 				if (game.player.balls > 0) {
 					if (game.player.ballSize > 5) outputText("You do your best to put the thong on, and while the material is very stretchy, it simply can't even begin to cover everything, and your " + game.player.ballsDescriptLight() + " hang on the sides, exposed.  Maybe if you shrunk your male parts down a little...");
@@ -30,7 +30,7 @@ package classes.Items.Armors
 				}
 			}
 			else {
-				if (game.player.totalCocks() == 1) {
+				if (game.player.cockTotal() == 1) {
 					outputText("You grunt in discomfort, your " + game.player.cockDescript(0) + " flopping free from the thong's confines. The tight material rubbing against your dick does manage to turn you on slightly.  ");
 				}
 				else {

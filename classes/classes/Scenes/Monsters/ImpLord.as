@@ -1,10 +1,11 @@
 ﻿package classes.Scenes.Monsters
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
 
-	public class ImpLord extends Imp
+public class ImpLord extends Imp
 	{
 		//Special Attack 1
 		protected function impFire():void
@@ -24,7 +25,6 @@
 			damage = Math.round(damage);
 			player.takeMagicDamage(damage, true);
 			player.dynStats("lus", 20 + player.cor / 10);
-			combatRoundOver();
 		}
 		
 		//Heavy Attack
@@ -38,7 +38,6 @@
 				outputText("leaving a large gash. The attack leaves you slightly stunned, but you recover. ");
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 
 		//Lust Attack
@@ -47,7 +46,6 @@
 			outputText("Lowering his loincloth the imp reveals his inhumanly thick shaft.  He smirks and licks his lips as he gives his cock a squeeze, milking a few beads of clear pre from the tip.  You shake your head and try to ignore your growing need.");
 			//[+Lust]
 			player.dynStats("lus", 5 + player.lib / 5 + player.cor / 5);
-			combatRoundOver();
 		}
 
 		//Lust and Light Attack
@@ -58,7 +56,6 @@
 			player.takeDamage(damage, true);
 			//[-HP(minor) // +Lust]
 			player.dynStats("lus", 5 + player.sens / 4 + player.cor / 10);
-			combatRoundOver();
 		}
         override protected function performCombatAction():void
 		{
@@ -70,12 +67,12 @@
 		override public function defeated(hpVictory:Boolean):void
 		{
 			game.flags[kFLAGS.DEMONS_DEFEATED]++;
-			game.impScene.defeatImpLord();
+			SceneLib.impScene.defeatImpLord();
 		}
 
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			game.impScene.loseToAnImpLord();
+			SceneLib.impScene.loseToAnImpLord();
 		}
 
 		public function ImpLord()
@@ -99,12 +96,12 @@
 			this.pronoun1 = "he";
 			this.pronoun2 = "him";
 			this.pronoun3 = "his";
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = rand(14) + 40;
-			this.hipRating = HIP_RATING_BOYISH;
-			this.buttRating = BUTT_RATING_TIGHT;
-			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
+			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
 			this.skinTone = "red";
 			initStrTouSpeInte(55, 40, 45, 42);
 			initWisLibSensCor(42, 55, 35, 100);
@@ -125,7 +122,7 @@
 					add(consumables.LABOVA_,1).
 					add(consumables.INCUBID,6).
 					add(consumables.SUCMILK,6);
-			this.wingType = WING_TYPE_IMP;
+			this.wingType = AppearanceDefs.WING_TYPE_IMP;
 			this.special1 = lustMagicAttack;
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();

@@ -6,12 +6,14 @@
 
 package classes.Scenes.Areas 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.Areas.Beach.*;
-	import classes.Scenes.NPCs.CeaniScene;
-	//import classes.Scenes.NPCs.CaiLin;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.Areas.Beach.*;
+import classes.Scenes.NPCs.CeaniScene;
+import classes.Scenes.SceneLib;
+
+//import classes.Scenes.NPCs.CaiLin;
 
 	use namespace kGAMECLASS;
 	
@@ -27,16 +29,16 @@ package classes.Scenes.Areas
 		}
 		
 		public function exploreBeach():void {
-			flags[kFLAGS.DISCOVERED_BEACH]++
+			flags[kFLAGS.DISCOVERED_BEACH]++;
 			
 			//Helia monogamy fucks
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {
-				kGAMECLASS.helScene.helSexualAmbush();
+			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel()) {
+				SceneLib.helScene.helSexualAmbush();
 				return;
 			}
 			//Etna
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && rand(5) == 0) {
-				kGAMECLASS.etnaScene.repeatYandereEnc();
+				SceneLib.etnaScene.repeatYandereEnc();
 				return;
 			}
 			
@@ -96,7 +98,7 @@ package classes.Scenes.Areas
 					break;
 				case 2:
 					clearOutput();
-					outputText("As you walk on the beach you find a weird black bottle with a white line and a cap. You pick it up and read the tag. It claims to be 'Orca sunscreen'. ")
+					outputText("As you walk on the beach you find a weird black bottle with a white line and a cap. You pick it up and read the tag. It claims to be 'Orca sunscreen'. ");
 					inventory.takeItem(consumables.ORCASUN, camp.returnToCampUseOneHour);
 					break;
 				default:

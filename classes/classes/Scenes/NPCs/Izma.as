@@ -1,9 +1,10 @@
 package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
-	/**
+/**
 	 * ...
 	 * @author ...
 	 */
@@ -39,7 +40,7 @@ package classes.Scenes.NPCs
 			}
 			outputText("Izma rushes you with impressive speed, striking a few precise locations on your joints with her fingertips before leaping back.  It doesn't hurt, but you feel tired and sore. \"<i>Pressure points...</i>\" she laughs, seeing your confused expression.");
 			//(Fatigue damage)
-			game.fatigue(20+rand(20));
+			EngineCore.fatigue(20+rand(20));
 		}
 
 		private function IzmaSpecials2():void {
@@ -99,7 +100,6 @@ package classes.Scenes.NPCs
 				else choice = 4;
 			}
 			if(choice == 4) IzmaSpecials3();
-			combatRoundOver();
 		}
 
 		override public function eAttack():void
@@ -121,21 +121,20 @@ package classes.Scenes.NPCs
 				else choice = 4;
 			}
 			if (choice == 4) IzmaSpecials3();
-			combatRoundOver();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.izmaScene.defeatIzma();
+			SceneLib.izmaScene.defeatIzma();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if (pcCameWorms){
 				outputText("\n\n\"<i>Gross!</i>\" Izma cries as she backs away, leaving you to recover alone.");
-				game.cleanupAfterCombat();
+				SceneLib.combat.cleanupAfterCombatImpl();
 			} else {
-				game.izmaScene.IzmaWins();
+				SceneLib.izmaScene.IzmaWins();
 			}
 		}
 
@@ -149,15 +148,15 @@ package classes.Scenes.NPCs
 			this.createCock(15,2.2);
 			this.balls = 4;
 			this.ballSize = 3;
-			this.createVagina(false, VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_LOOSE);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLICK, AppearanceDefs.VAGINA_LOOSENESS_LOOSE);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 45, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_NORMAL;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = 5*12+5;
-			this.hipRating = HIP_RATING_CURVY;
-			this.buttRating = BUTT_RATING_NOTICEABLE;
+			this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
+			this.buttRating = AppearanceDefs.BUTT_RATING_NOTICEABLE;
 			this.skinTone = "striped orange";
 			this.hairColor = "silver";
 			this.hairLength = 20;

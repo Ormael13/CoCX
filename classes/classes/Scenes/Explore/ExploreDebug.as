@@ -4,6 +4,7 @@
 package classes.Scenes.Explore
 {
 	import classes.BaseContent;
+	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Monster;
 	import classes.Scenes.Areas.BlightRidge.*;
 	import classes.Scenes.Areas.Bog.*;
@@ -144,23 +145,23 @@ package classes.Scenes.Explore
 				var m:Monster = allMonsters[monsterIdx]();
 				m.onDefeated = function (hpVictory:Boolean):void
 				{
-					getGame().inCombat = false;
-					getGame().clearStatuses(false);
-					statScreenRefresh();
+                    kGAMECLASS.inCombat = false;
+                    kGAMECLASS.player.clearStatuses(false);
+                    statScreenRefresh();
 					exploreDebugMonsters(monsterIdx + 1);
 				};
 				m.onWon = function (hpVictory:Boolean, pcCameWorms:Boolean):void
 				{
-					getGame().inCombat = false;
-					getGame().clearStatuses(false);
-					statScreenRefresh();
+                    kGAMECLASS.inCombat = false;
+                    kGAMECLASS.player.clearStatuses(false);
+                    statScreenRefresh();
 					exploreDebugMonsters(monsterIdx + 1);
 				};
 				m.onPcRunAttempt = function ():void
 				{
-					getGame().inCombat = false;
-					getGame().clearStatuses(false);
-					statScreenRefresh();
+                    kGAMECLASS.inCombat = false;
+                    kGAMECLASS.player.clearStatuses(false);
+                    statScreenRefresh();
 					exploreDebugMonsters(monsterIdx + 1);
 				};
 				outputText("You are going to fight " + m.a + " " + m.short + ".");

@@ -1,10 +1,11 @@
 ﻿package classes.Scenes.Areas.Desert
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
 
-	public class SandTrap extends Monster
+public class SandTrap extends Monster
 	{
 		//Wait:
 		public function sandTrapWait():void {
@@ -28,8 +29,6 @@
 				}
 			}
 			outputText("\n\n");
-			doAI();
-			//combatRoundOver();
 		}
 
 		public function trapLevel(adjustment:Number = 0):Number {
@@ -55,7 +54,7 @@
 				var damage:Number = (10 + player.lib/10);
 				outputText("  Despite ducking away from the jet of fluid as best you can, you cannot avoid some of the stuff splashing upon your arms and face.  The substance feels oddly warm and oily, and though you quickly try to wipe it off it sticks resolutely to your skin and the smell hits your nose.  Your heart begins to beat faster as warmth radiates out from it; you feel languid, light-headed and sensual, eager to be touched and led by the hand to a sandy bed...  Shaking your head, you try to stifle what the foreign pheromones are making you feel.");
 				player.dynStats("lus", damage);
-				damage = Math.round(damage * game.lustPercent()/10)/10;
+				damage = Math.round(damage * EngineCore.lustPercent()/10)/10;
 				outputText(" <b>(<font color=\"#ff00ff\">" + damage +" lust</font>)</b>");
 			}
 		}
@@ -88,22 +87,21 @@
 					trapLevel(-1);
 				}
 				else removeStatusEffect(StatusEffects.Climbed);
-				combatRoundOver();
 			} else super.performCombatAction();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.desert.sandTrapScene.pcBeatsATrap();
+			SceneLib.desert.sandTrapScene.pcBeatsATrap();
 		}
 
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
 			if (pcCameWorms) {
 				outputText("\n\nThe sand trap seems bemused by the insects your body houses...");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
-				game.desert.sandTrapScene.sandtrapmentLoss(true);
+				SceneLib.desert.sandTrapScene.sandtrapmentLoss(true);
 			}
 		}
 
@@ -112,7 +110,7 @@
 			//1/3 have fertilized eggs!
 			if(rand(3) == 0) this.createStatusEffect(StatusEffects.Fertilized,0,0,0,0);
 			this.a = "the ";
-			if (game.silly())
+			if (EngineCore.silly())
 				this.short = "sand tarp";
 			else
 				this.short = "sandtrap";
@@ -125,11 +123,11 @@
 			this.cumMultiplier = 3;
 			// this.hoursSinceCum = 0;
 			this.createBreastRow(0,0);
-			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_NORMAL;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.tallness = rand(8) + 150;
-			this.hipRating = HIP_RATING_AMPLE+2;
-			this.buttRating = BUTT_RATING_LARGE;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
 			this.skinTone = "fair";
 			this.hairColor = "black";
 			this.hairLength = 15;
@@ -148,7 +146,7 @@
 			this.level = 5;
 			this.gems = 5 + rand(5);
 			this.drop = new ChainedDrop(consumables.TRAPOIL).add(consumables.OVIELIX,1/3);
-			this.tailType = TAIL_TYPE_DEMONIC;
+			this.tailType = AppearanceDefs.TAIL_TYPE_DEMONIC;
 			createStatusEffect(StatusEffects.Level,4,0,0,0);
 			checkMonster();
 		}

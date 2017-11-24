@@ -1,12 +1,13 @@
 ﻿package classes.Scenes.Areas.Forest
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kACHIEVEMENTS;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Places.HeXinDao;
+import classes.*;
+import classes.GlobalFlags.kACHIEVEMENTS;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Places.HeXinDao;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
 
-	public class TentacleBeast extends Monster
+public class TentacleBeast extends Monster
 	{
 		public var golems:HeXinDao = new HeXinDao();
 		
@@ -23,7 +24,6 @@
 				outputText("The tentacles crash upon your body mercilessly. ");
 				player.takeDamage(temp, true);
 			}
-			combatRoundOver();
 		}
 		private function tentacleEntwine():void {
 			outputText("The beast lunges its tentacles at you from all directions in an attempt to immobilize you.\n");
@@ -41,19 +41,18 @@
 					//Female Version:
 					else if(player.hasVagina()) outputText("The creature quickly positions a long tentacle with a single sucker over your clitoris. You feel the power of the suction on you, and your body quickly heats up.  Your clit engorges, prompting the beast to latch the sucker onto your [clit].\n");
 					//Genderless
-					else outputText("The creature quickly positions a long tentacle against your " + game.assholeDescript() + ". It circles your pucker with slow, delicate strokes that bring unexpected warmth to your body.\n");
+					else outputText("The creature quickly positions a long tentacle against your " + Appearance.assholeDescript(player) + ". It circles your pucker with slow, delicate strokes that bring unexpected warmth to your body.\n");
 					player.dynStats("lus", (8+player.sens/20));
 					player.createStatusEffect(StatusEffects.TentacleBind,0,0,0,0);
 				}
 			}
-			combatRoundOver();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (hpVictory) {
 				outputText("The creature lets out an ear-piercing screech as it collapses upon itself. Its green coloring quickly fades to brown as the life drains from it, leaving you victorious.", true);
-				game.awardAchievement("Tentacle Beast Slayer", kACHIEVEMENTS.GENERAL_TENTACLE_BEAST_SLAYER);
+				EngineCore.awardAchievement("Tentacle Beast Slayer", kACHIEVEMENTS.GENERAL_TENTACLE_BEAST_SLAYER);
 			} else {
 				outputText("The tentacle beast's mass begins quivering and sighing, the tentacles wrapping around each other and feverishly caressing each other.  It seems the beast has given up on fighting.");
 			}
@@ -62,14 +61,14 @@
 			}
 			else if (hasStatusEffect(StatusEffects.PhyllaFight)) {
 				removeStatusEffect(StatusEffects.PhyllaFight);
-				game.desert.antsScene.phyllaTentacleDefeat();
+				SceneLib.desert.antsScene.phyllaTentacleDefeat();
 			}
 			else {
 				if(!hpVictory && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 					outputText("  Perhaps you could use it to sate yourself?", true);
-					game.doYesNo(game.forest.tentacleBeastScene.tentacleVictoryRape,game.cleanupAfterCombat);
+					EngineCore.doYesNo(SceneLib.forest.tentacleBeastScene.tentacleVictoryRape,cleanupAfterCombat);
 				} else {
-					game.cleanupAfterCombat();
+					cleanupAfterCombat();
 				}
 			}
 		}
@@ -81,17 +80,17 @@
 				if (hasStatusEffect(StatusEffects.PhyllaFight)) {
 					removeStatusEffect(StatusEffects.PhyllaFight);
 					outputText("...and make it into the nearby tunnel.  ");
-					game.desert.antsScene.phyllaTentaclePCLoss();
+					SceneLib.desert.antsScene.phyllaTentaclePCLoss();
 				} else
-					game.forest.tentacleBeastScene.tentacleLossRape();
+					SceneLib.forest.tentacleBeastScene.tentacleLossRape();
 			} else {
 				outputText("You give up on fighting, too aroused to resist any longer.  Shrugging, you walk into the writhing mass...\n\n");
 				if(hasStatusEffect(StatusEffects.PhyllaFight)) {
 					removeStatusEffect(StatusEffects.PhyllaFight);
 					outputText("...but an insistent voice rouses you from your stupor.  You manage to run into a nearby tunnel.  ");
-					game.desert.antsScene.phyllaTentaclePCLoss();
+					SceneLib.desert.antsScene.phyllaTentaclePCLoss();
 				} else
-					doNext(game.forest.tentacleBeastScene.tentacleLossRape);
+					doNext(SceneLib.forest.tentacleBeastScene.tentacleLossRape);
 			}
 		}
 
@@ -123,11 +122,11 @@
 			this.pronoun2 = "it";
 			this.pronoun3 = "its";
 			this.createBreastRow(0,0);
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_SLIME_DROOLING;
 			this.tallness = rand(9) + 70;
-			this.hipRating = HIP_RATING_BOYISH;
-			this.buttRating = BUTT_RATING_BUTTLESS;
+			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
+			this.buttRating = AppearanceDefs.BUTT_RATING_BUTTLESS;
 			this.skin.setBaseOnly({color:"green"});
 			this.skinDesc = "bark";
 			this.hairColor = "green";
@@ -150,7 +149,7 @@
 			this.special1 = tentaclePhysicalAttack;
 			this.special2 = tentacleEntwine;
 			this.special3 = tentaclePhysicalAttack;
-			this.tailType = TAIL_TYPE_DEMONIC;
+			this.tailType = AppearanceDefs.TAIL_TYPE_DEMONIC;
 			checkMonster();
 		}
 

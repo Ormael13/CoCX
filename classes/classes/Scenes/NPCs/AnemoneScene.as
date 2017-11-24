@@ -3,14 +3,13 @@
  */
 package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Items.Armors.LustyMaidensArmor;
-	import classes.Items.Weapon;
-	import classes.Scenes.Areas.Ocean.SeaAnemone;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.Armors.LustyMaidensArmor;
+import classes.Items.Weapon;
+import classes.Scenes.Areas.Ocean.SeaAnemone;
 
-	public class AnemoneScene extends BaseContent implements TimeAwareInterface
+public class AnemoneScene extends BaseContent implements TimeAwareInterface
 	{
 
 		//Encountered via Boat (unless a new Under-Lake area is
@@ -56,7 +55,7 @@ package classes.Scenes.NPCs
 
 		public function AnemoneScene()
 		{
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 		
 		//Implementation of TimeAwareInterface
@@ -223,7 +222,7 @@ package classes.Scenes.NPCs
 			}
 			outputText(".  The anemone must have been right on the edge with you, because after a few more thrusts in your hungry asshole she achieves her own climax and shoots several strings of cool, thick semen into you.  You collapse backward against your partner and she idly caresses your " + nippleDescript(0) + ".  After several minutes of relaxing in the warm water, you sit up and push yourself off of the anemone's limp penis, which drags a string of semen out of your " + assholeDescript() + " and prompts ");
 			//[(dix)
-			if (player.totalCocks() > 0 || player.gender == 0) outputText("a ");
+			if (player.cockTotal() > 0 || player.gender == 0) outputText("a ");
 			else if (player.hasVagina()) outputText("another ");
 			outputText(" giggle from the blue girl.  Standing up, you gather your gear and blow her a kiss before you leave.  She darkens in color, her camouflage reflex causing her to 'blush' in discomfort at this display of affection.");
 			//(pass 1 hour, reduce lust to min)
@@ -396,7 +395,7 @@ package classes.Scenes.NPCs
 
 			outputText("The overwhelming sensations drive you over the edge and your " + vaginaDescript(0) + " contracts hungrily around the heat radiating from the anemone's cock.  As your orgasming pussy ");
 			//(squirter)
-			if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) outputText("soaks her crotch with juice and ");
+			if (player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_DROOLING) outputText("soaks her crotch with juice and ");
 			outputText("wrings her penis, the blue shaft responds enthusiastically; she pushes deeply into you as it begins spasming and squirting its load.  Your partner's mouth hangs open as you squeeze the cum out of her; with all her muscle control taken away, her head hangs limply");
 			if (player.isTaur()) outputText(" on your back");
 			//[(notits)
@@ -500,10 +499,10 @@ package classes.Scenes.NPCs
 					//[(cray-cray skeet)
 					if (player.cumQ() > 2000) outputText(" and squirting out her nose in thick ribbons");
 					//[(multi-dix)
-					if (player.totalCocks() > 1) {
+					if (player.cockTotal() > 1) {
 						outputText(" as ");
 						//[(dick2 = no)
-						if (player.totalCocks() == 2) outputText("your cocks shoot");
+						if (player.cockTotal() == 2) outputText("your cocks shoot");
 						else outputText("the rest of your [cocks] shoot");
 						outputText(" all over her face and hair, ");
 						//[(small skeet)
@@ -947,7 +946,7 @@ package classes.Scenes.NPCs
 			if (monster.HP < 1) outputText("reclining");
 			else outputText("vigorously masturbating");
 			outputText(" girl's pussy call to you.  Your insectile abdomen pulses as eggs shift, lining up for deposition, and your long, black ovipositor slides out, pulsing in time with your heartbeat.  The idea of having those feelers stroke your strange organ while you unload your pent-up eggs sounds so good that a drop of honey oozes out, filling the air with a sweet scent that makes your");
-			if (player.antennae > ANTENNAE_NONE) outputText(" antennae");
+			if (player.antennae > AppearanceDefs.ANTENNAE_NONE) outputText(" antennae");
 			else outputText("nose");
 			outputText(" tingle.  The anemone's eyes light up as your black shaft drools, and she leans forward, catching the nectar on a finger and raising it to her lips.");
 
@@ -972,7 +971,7 @@ package classes.Scenes.NPCs
 				//[(cock)
 				if (player.hasCock()) {
 					outputText("\n\nYou hurriedly open your armor as your ");
-					if (player.totalCocks() == 1) outputText("male part erupts");
+					if (player.cockTotal() == 1) outputText("male part erupts");
 					else outputText("male parts erupt");
 					outputText(" in sympathy, lancing semen over your partner.  Surprisingly, the anemone doesn't even notice, so absorbed is she in experimenting with your modified stinger.");
 				}
@@ -1269,7 +1268,7 @@ package classes.Scenes.NPCs
 				return item == consumables.W__BOOK || item == consumables.B__BOOK || item == consumables.W_STICK || item is Weapon;
 			}
 			menu();
-			kGAMECLASS.hideUpDown();
+			EngineCore.hideUpDown();
 			var foundItem:Boolean = false;
 			for (var x:int = 0; x < 10; x++) {
 				if (player.itemSlots[x].quantity > 0 && giveableToAnemone(player.itemSlots[x].itype)) {
@@ -1715,7 +1714,7 @@ package classes.Scenes.NPCs
 
 				outputText("\n\nLaughable as her reaction is, the venom now coursing through your " + vaginaDescript(0) + " ensures not a giggle escapes you; your hips begin writhing in her lap, trying to find purchase on the blue girl to better pump her shaft for its seed.");
 				//[(if pc is loose)
-				if (player.vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_GAPING) outputText("  You can barely feel her little shaft in your stretched cunt, but the chemical stimulation from the tentacles stroking your insides goes a long way toward making up for that.");
+				if (player.vaginas[0].vaginalLooseness >= AppearanceDefs.VAGINA_LOOSENESS_GAPING) outputText("  You can barely feel her little shaft in your stretched cunt, but the chemical stimulation from the tentacles stroking your insides goes a long way toward making up for that.");
 				outputText("  Emboldened, she picks up your legs haltingly, then begins to work herself in and out of your depths.");
 
 				outputText("\n\nWith all the grace of a first-timer, the girl clumsily leans down to kiss you, but falls short and can only plant a smooch on your still-clad [chest].  Still, she continues pumping enthusiastically, worry and shame evaporating from her brow as you moan lustily instead of rebuking her temerity.  Pausing to support you with one hand as she spreads your lips wider with her fingers, she exposes your " + clitDescript() + " to the air.");

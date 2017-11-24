@@ -3,16 +3,18 @@
  */
 package classes.Items.Armors
 {
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Items.Armor;
-	import classes.CoC;
-	import classes.Monster;
-	import classes.PerkLib;
-	import classes.Player;
-	import classes.Scenes.Areas.HighMountains.MinotaurMob;
-	import classes.Scenes.Areas.Mountain.Minotaur;
+import classes.AppearanceDefs;
+import classes.EngineCore;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.Armor;
+import classes.Monster;
+import classes.PerkLib;
+import classes.Player;
+import classes.Scenes.Areas.HighMountains.MinotaurMob;
+import classes.Scenes.Areas.Mountain.Minotaur;
+import classes.Scenes.SceneLib;
 
-	public final class LustyMaidensArmor extends Armor {
+public final class LustyMaidensArmor extends Armor {
 		
 		public function LustyMaidensArmor() {
 			super("LMArmor", "LMArmor", "lusty maiden's armor", "a bikini-like set of armor that could only belong to a lusty maiden", 10, 400, "This skimpy chain bikini barely qualifies as armor.  Indeed, the chain is made from links much finer and lighter than normal, so fine that it feels almost silken under your fingertips.  A simple seal in the g-string-like undergarment states, \"Virgins only.\" \nRequirements: breast size of at least DD-cups and be a female.", "Light", false, false);
@@ -27,11 +29,11 @@ package classes.Items.Armors
 			if (!super.canUse()) {
 				return false;
 			}
-			if (game.player.biggestTitSize() < CoC.BREAST_CUP_A) { //{No titties}
+			if (game.player.biggestTitSize() < AppearanceDefs.BREAST_CUP_A) { //{No titties}
 				outputText("You slide the bikini top over your chest and buckle it into place, but the material hangs almost comically across your flat chest.  The cold chain dangles away from you, swaying around ridiculously before smacking, cold and hard into your [nipples].  This simply won't do - it doesn't fit you, and you switch back to your old armor.\n\n");
 				return false;
 			}
-			if (game.player.biggestTitSize() < CoC.BREAST_CUP_D) { //{Too small titties}
+			if (game.player.biggestTitSize() < AppearanceDefs.BREAST_CUP_D) { //{Too small titties}
 				outputText("You slide the bikini top over your chest, shivering when the cold chains catch on your nipples, stiffening them nicely. The material nicely accentuates your chest, but there's a definite problem.  Your [chest] aren't big enough!  Sure, they look nice done up in glittering silver and gold trim.  If only the metal wasn't hanging loosely around your underbust, flopping around whenever you move.  It doesn't even look that sexy on you!  You'll need a bigger chest to truly make use of this armor.  For now, you switch back to your old equipment.\n\n");
 				return false;
 			}
@@ -137,8 +139,8 @@ package classes.Items.Armors
 			if(monster.short == "Ceraph") game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00291]++;
 			//Usable on: Imps, Minotaurs, Satyrs, Incubus Mechanic, Anemones, Spider Guys, Akbal, Drider, Fetish Zealot, Sand Trap, Very Corrupt Jojo (Maybe slight decorruption to him), Ceraph, Red Kitsune if cock out.
 			if (game.inCombat)
-				game.cleanupAfterCombat();
-			else game.doNext(game.camp.returnToCampUseOneHour);
+				SceneLib.combat.cleanupAfterCombatImpl();
+			else EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour);
 		}
 	}
 }

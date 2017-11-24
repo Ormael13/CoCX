@@ -4,12 +4,10 @@
  */
 package classes.Scenes.NPCs 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	
-	public class Evangeline2 extends Monster
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+
+public class Evangeline2 extends Monster
 	{
 		
 		public function spellCostChargeWeapon():Number {
@@ -257,7 +255,6 @@ package classes.Scenes.NPCs
 					}
 					//if (choice3 == 3) EvangelineTease();
 				}
-				combatRoundOver();
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 8 || flags[kFLAGS.EVANGELINE_LVL_UP] == 9) {
 				//var choice2:Number = rand(3);
@@ -275,7 +272,6 @@ package classes.Scenes.NPCs
 					else eAttack();
 				}
 				//if (choice2 == 3) EvangelineTease();
-				combatRoundOver();
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 7) {
 				//var choice1:Number = rand(3);
@@ -302,7 +298,6 @@ package classes.Scenes.NPCs
 					}
 				}
 				//if (choice1 == 3) EvangelineTease();
-				combatRoundOver();
 			}
 		}
 		
@@ -317,8 +312,8 @@ package classes.Scenes.NPCs
 				this.tallness = 90;
 				this.hairColor = "platinum blonde";
 				this.skin.setBaseOnly({color:"olive"});
-				this.hipRating = HIP_RATING_CURVY+2;//hipRating = 12
-				this.buttRating = BUTT_RATING_JIGGLY+2;//buttRating = 12
+				this.hipRating = AppearanceDefs.HIP_RATING_CURVY+2;//hipRating = 12
+				this.buttRating = AppearanceDefs.BUTT_RATING_JIGGLY+2;//buttRating = 12
 				initStrTouSpeInte(29, 34, 45, 50);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
@@ -339,8 +334,8 @@ package classes.Scenes.NPCs
 				this.tallness = 90;
 				this.hairColor = "platinum blonde";
 				this.skin.restore();
-				this.hipRating = HIP_RATING_CURVY+2;
-				this.buttRating = BUTT_RATING_JIGGLY+2;
+				this.hipRating = AppearanceDefs.HIP_RATING_CURVY+2;
+				this.buttRating = AppearanceDefs.BUTT_RATING_JIGGLY+2;
 				initStrTouSpeInte(41, 46, 55, 50);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
@@ -362,8 +357,8 @@ package classes.Scenes.NPCs
 				this.tallness = 90;
 				this.hairColor = "platinum crimson";
 				this.skin.setBaseOnly({});
-				this.hipRating = HIP_RATING_CURVY+2;
-				this.buttRating = BUTT_RATING_JIGGLY+2;
+				this.hipRating = AppearanceDefs.HIP_RATING_CURVY+2;
+				this.buttRating = AppearanceDefs.BUTT_RATING_JIGGLY+2;
 				initStrTouSpeInte(41, 46, 55, 50);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
@@ -386,8 +381,8 @@ package classes.Scenes.NPCs
 				this.tallness = 96;
 				this.hairColor = "crimson platinum";
 				this.skin.growFur();
-				this.hipRating = HIP_RATING_FERTILE+3;//hipRating = 18
-				this.buttRating = BUTT_RATING_EXPANSIVE+1;//buttRating = 14
+				this.hipRating = AppearanceDefs.HIP_RATING_FERTILE+3;//hipRating = 18
+				this.buttRating = AppearanceDefs.BUTT_RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(41, 46, 70, 50);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
@@ -412,8 +407,8 @@ package classes.Scenes.NPCs
 				this.tallness = 96;
 				this.hairColor = "crimson platinum";
 				this.skin.growFur();
-				this.hipRating = HIP_RATING_FERTILE+3;//hipRating = 18
-				this.buttRating = BUTT_RATING_EXPANSIVE+1;//buttRating = 14
+				this.hipRating = AppearanceDefs.HIP_RATING_FERTILE+3;//hipRating = 18
+				this.buttRating = AppearanceDefs.BUTT_RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(41, 46, 80, 50);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
@@ -432,9 +427,9 @@ package classes.Scenes.NPCs
 				this.createPerk(PerkLib.JobEnchanter, 0, 0, 0, 0);
 				this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			}
-			this.createVagina(false, VAGINA_WETNESS_DRY, VAGINA_LOOSENESS_TIGHT);
-			this.ass.analLooseness = ANAL_LOOSENESS_VIRGIN;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DRY, AppearanceDefs.VAGINA_LOOSENESS_TIGHT);
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_VIRGIN;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.skinTone = "olive";
 			this.hairLength = 36;
 			initWisLibSensCor(15, 25, 35, 100);

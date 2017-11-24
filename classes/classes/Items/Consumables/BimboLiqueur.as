@@ -3,13 +3,12 @@
  */
 package classes.Items.Consumables
 {
-	import classes.Appearance;
-	import classes.PerkLib;
-	import classes.Player;
-	import classes.internals.Utils;
-	import classes.Items.Consumable;
+import classes.AppearanceDefs;
+import classes.Items.Consumable;
+import classes.PerkLib;
+import classes.internals.Utils;
 
-	public class BimboLiqueur extends Consumable {
+public class BimboLiqueur extends Consumable {
 		
 		public function BimboLiqueur() {
 			super("BimboLq", "BimboLq", "a potent bottle of 'Bimbo Liqueur'", 1000, "This small bottle of liqueur is labelled 'Bimbo Liqueur'.  There's a HUGE warning label about the effects being strong and usually permanent, so you should handle this with care.");
@@ -83,21 +82,21 @@ package classes.Items.Consumables
 				if (!game.player.hasVagina()) {
 					game.player.createVagina();
 					game.player.clitLength = 0.25;
-					game.player.vaginas[0].vaginalWetness = Appearance.VAGINA_WETNESS_SLICK;
+					game.player.vaginas[0].vaginalWetness = AppearanceDefs.VAGINA_WETNESS_SLICK;
 					if (game.player.isTaur()) outputText("Wait!? Wet? You wish you could touch yourself between the " + game.player.legs() + ", but you can tell from the fluid running down your hind-legs just how soaked your new vagina is.");
 					else outputText("Wait!?  Wet?  You touch yourself between the " + game.player.legs() + " and groan when your fingers sink into a sloppy, wet cunt.");
 				}
 				else {
 					if (game.player.isTaur()) {
 						outputText("You wish you could sink your fingers into your sloppy, wet cunt, but as a centaur, you can't quite reach.");
-						if (game.player.vaginas[0].vaginalWetness < Appearance.VAGINA_WETNESS_SLICK)
-							game.player.vaginas[0].vaginalWetness = Appearance.VAGINA_WETNESS_SLICK;
+						if (game.player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_SLICK)
+							game.player.vaginas[0].vaginalWetness = AppearanceDefs.VAGINA_WETNESS_SLICK;
 					}
 					else {
 						outputText("You sink your fingers into your ");
-						if (game.player.vaginas[0].vaginalWetness < Appearance.VAGINA_WETNESS_SLICK) {
+						if (game.player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_SLICK) {
 							outputText("now ");
-							game.player.vaginas[0].vaginalWetness = Appearance.VAGINA_WETNESS_SLICK;
+							game.player.vaginas[0].vaginalWetness = AppearanceDefs.VAGINA_WETNESS_SLICK;
 						}
 						outputText("sloppy, wet cunt with a groan of satisfaction.");
 					}

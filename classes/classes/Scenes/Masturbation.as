@@ -1,11 +1,12 @@
 package classes.Scenes {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.*;
+import classes.Scenes.Dungeons.DungeonAbstractContent;
+import classes.Scenes.NPCs.JojoScene;
+
 //	import classes.Scenes.NPCs.*;
-	import classes.Items.*;
-	
-	public class Masturbation extends BaseContent {
+public class Masturbation extends BaseContent {
 		
 		public function Masturbation() {}
 		
@@ -67,7 +68,7 @@ package classes.Scenes {
 			if (player.tentacleCocks() > 0) {
 				addButton(button++, "Tentabutt", tentacleGoesUpYerPooperNewsAtEleven);
 			}
-			if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) {
+			if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER) {
 				if (player.hasVagina()) addButton(button++, "Stamenpussy", stamenSelfFuck);
 				addButton(button++, "Stamenbutt", stamenGoesUpYerPooperNewsAtEleven);
 			}
@@ -282,7 +283,7 @@ package classes.Scenes {
 				doNext(playerMenu);
 				return;
 			}
-			if (inDungeon && kGAMECLASS.dungeonLoc != -10) {
+			if (inDungeon && DungeonAbstractContent.dungeonLoc != -10) {
 				outputText("There is no way you could get away with masturbating in a place like this!  You'd better find your way back to camp if you want to take care of that.");
 				doNext(playerMenu);
 				return;		
@@ -305,9 +306,9 @@ package classes.Scenes {
 			if (player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) {
 				flags[kFLAGS.TIMES_MASTURBATED]++;
 				if (player.isNaga() && rand(2) == 0 && player.statusEffectv1(StatusEffects.Exgartuan) == 1)
-					getGame().exgartuan.exgartuanNagaStoleMyMasturbation();
-				else getGame().exgartuan.exgartuanMasturbation();
-				return;
+                    SceneLib.exgartuan.exgartuanNagaStoleMyMasturbation();
+                else SceneLib.exgartuan.exgartuanMasturbation();
+                return;
 			}
 			if (player.countCockSocks("gilded") > 0 && flags[kFLAGS.GILDED_JERKED] < player.countCockSocks("gilded")) {
 				flags[kFLAGS.TIMES_MASTURBATED]++;
@@ -352,18 +353,18 @@ package classes.Scenes {
 					if (player.lib < 45)
 						outputText("You touch and play with your [vagina], ");
 					else if (player.lib < 70)
-						outputText("You slap your pussy softly, ")
+						outputText("You slap your pussy softly, ");
 					else outputText("You touch your enflamed and aroused [vagina], ");
 					switch (player.vaginas[0].vaginalWetness) {
-						case VAGINA_WETNESS_DRY:
+						case AppearanceDefs.VAGINA_WETNESS_DRY:
 							outputText("expertly arousing your female parts.  "); break;
-						case VAGINA_WETNESS_NORMAL:
+						case AppearanceDefs.VAGINA_WETNESS_NORMAL:
 							outputText("sighing as it quickly becomes moist.  "); break;
-						case VAGINA_WETNESS_WET:
+						case AppearanceDefs.VAGINA_WETNESS_WET:
 							outputText("giggling as your fingers get a little wet.  "); break;
-						case VAGINA_WETNESS_SLICK:
+						case AppearanceDefs.VAGINA_WETNESS_SLICK:
 							outputText("smiling as your fingers become coated in your slick fluids.  "); break;
-						case VAGINA_WETNESS_DROOLING:
+						case AppearanceDefs.VAGINA_WETNESS_DROOLING:
 							outputText("slicking your fingers in the juices that constantly dribble from [vagina]  "); break;
 						default:
 							outputText("licking your lips as a small spurt of fluid squirts from your nethers.");
@@ -373,18 +374,18 @@ package classes.Scenes {
 					if (player.lib < 45)
 						outputText("You touch and play with your many folds, ");
 					else if (player.lib < 70)
-						outputText("You slap your pussies softly, ")
+						outputText("You slap your pussies softly, ");
 					else outputText("Touch your enflamed and aroused [vagina]s, ");
 					switch (player.vaginas[0].vaginalWetness) {
-						case VAGINA_WETNESS_DRY:
+						case AppearanceDefs.VAGINA_WETNESS_DRY:
 							outputText("expertly arousing your female parts.  "); break;
-						case VAGINA_WETNESS_NORMAL:
+						case AppearanceDefs.VAGINA_WETNESS_NORMAL:
 							outputText("sighing as they quickly becomes moist.  "); break;
-						case VAGINA_WETNESS_WET:
+						case AppearanceDefs.VAGINA_WETNESS_WET:
 							outputText("giggling as your fingers get a little wet.  "); break;
-						case VAGINA_WETNESS_SLICK:
+						case AppearanceDefs.VAGINA_WETNESS_SLICK:
 							outputText("smiling as your fingers become coated in your slick fluids.  "); break;
-						case VAGINA_WETNESS_DROOLING:
+						case AppearanceDefs.VAGINA_WETNESS_DROOLING:
 							outputText("slicking your fingers in the juices that constantly dribble from [vagina]s  "); break;
 						default:
 							outputText("licking your lips as small spurts of fluid squirt from your nethers.");
@@ -762,7 +763,7 @@ package classes.Scenes {
 					//Big clits
 					else if (player.clitLength < 4.5) {
 						outputText("Your large clit is already poking out from your ");
-						if (player.vaginas[0].vaginalWetness > VAGINA_WETNESS_DRY) outputText("glistening ");
+						if (player.vaginas[0].vaginalWetness > AppearanceDefs.VAGINA_WETNESS_DRY) outputText("glistening ");
 						outputText("lips.  You gently stroke and touch it until it grows as large as a tiny cock.  ");
 					}
 					//Cock-sized clits 
@@ -770,15 +771,15 @@ package classes.Scenes {
 						outputText("Your cock-sized clit is already fully engorged and deliciously sensitive.  You touch it softly, eliciting a quiet moan from your throat.  ");
 					}
 					switch (player.vaginas[0].vaginalWetness) {
-						case VAGINA_WETNESS_DRY:
+						case AppearanceDefs.VAGINA_WETNESS_DRY:
 							outputText("You have some difficulty with your relatively dry pussy, but you manage to gently and pleasurably masturbate by taking it slowly.  "); break;
-						case VAGINA_WETNESS_NORMAL:
+						case AppearanceDefs.VAGINA_WETNESS_NORMAL:
 							outputText("Your horny puss is aching for attention and you oblige it, dipping your fingers into the moist honeypot, and jilling yourself vigorously.  "); break;
-						case VAGINA_WETNESS_WET:
+						case AppearanceDefs.VAGINA_WETNESS_WET:
 							outputText("The moistened cleft on your groin demands your full attention, drawing your fingers deep inside to explore the wet passage.  "); break;
-						case VAGINA_WETNESS_SLICK:
+						case AppearanceDefs.VAGINA_WETNESS_SLICK:
 							outputText("The sweltering heat of your slick cunt aches for something to fill it, and you oblige, dipping your fingers into your slippery cunt.  "); break;
-						case VAGINA_WETNESS_DROOLING:
+						case AppearanceDefs.VAGINA_WETNESS_DROOLING:
 							outputText("Warm wetness runs down your legs in thick streams, pouring from your [vagina].  You smile sheepishly and stroke up your now slickened legs to your pussy-lips, parting them and letting your fingers dive inside the wet channel.  "); break;
 						default:
 							outputText("The heavy scent of female arousal fills the air as your steamy sexpot drizzles girl-lube everywhere.  You gasp in surprise as your fingers find their way inside, vigorously fingerfucking your passage, spurts of girlcum squirting out with each penetration.  ");
@@ -1661,8 +1662,7 @@ package classes.Scenes {
 				}
 			}
 			//if your dog cocks wouldnt fit, or you had enough holes for all your dicks (potentailly doubled up) then there are no dicks left for you to suck. Return false
-			if ((!doubleUp && fittableCocks <= holeTotal) || (doubleUp && fittableCocks <= holeTotal * 2)) return false;
-			return true;
+			return !((!doubleUp && fittableCocks <= holeTotal) || (doubleUp && fittableCocks <= holeTotal * 2));
 		}
 		
 		private function multiNippleFuckPrep(randomCock:Number):void {
@@ -1865,7 +1865,7 @@ package classes.Scenes {
 					else if (player.clitLength > 1.5)
 						outputText("Every muscle-twitch seems to stretch your big oversensitive clitty larger, causing you to squeal with delight at every bump and touch against it.  ");
 					//Wet orgasms
-					if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText("A veritable gush of fluid explodes from your nethers, pulsing in time with the ripples of your [vagina].  ");
+					if (player.vaginas[0].vaginalWetness == AppearanceDefs.VAGINA_WETNESS_SLAVERING) outputText("A veritable gush of fluid explodes from your nethers, pulsing in time with the ripples of your [vagina].  ");
 				}
 				//MultiCunt UNFINISHED
 				else {
@@ -1890,7 +1890,7 @@ package classes.Scenes {
 					else if (player.cumQ() >= 3500) valeriaFluids += 100;
 				}
 				valeriaFluids += Math.sqrt(player.lactationQ());
-				kGAMECLASS.valeria.feedValeria(valeriaFluids);
+				SceneLib.valeria.feedValeria(valeriaFluids);
 				if (valeriaFluids > 0) outputText("\"<i>Thanks for the fluids!</i>\" Valeria says.  ");
 			}
 			//DONE!
@@ -1983,16 +1983,16 @@ package classes.Scenes {
 				outputText("  You splay your [legs] and lie there with it inside you, feeling it respond to your wetness, becoming more and more turned on by the second.\n\n");
 			
 				//(Kinda dry)
-				if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLICK)
+				if (player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_SLICK)
 					outputText("The thickness of the toy gradually increases, filling you more and more effectively as it reacts to your bodily fluids.  You grab it two-handed and start slamming it into your [vagina], vigorously fucking yourself with the swelling dong.  The sensations just keep getting better and better as more and more of the goblin's sex-drug leaks into you.  Even your [clit] and cunt-lips tingle with need.  You answer that need by picking up the pace, pistoning faster and faster.\n\n"); 
 				//(Pretty wet)
-				else if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLAVERING) {
+				else if (player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_SLAVERING) {
 					outputText("The toy's girth seems to pulse and swell within you, spreading you wide open as it sops up your natural wetness and grows larger.  You grab it in a two-handed grip and begin working it in and out of your [vagina], gasping and twitching as every ridge and feature of the dildo rubs you just right.  Every inch of your nethers tingles with a desire to be touched, rubbed, and squeezed. ");
 					if (player.cocks.length > 0) {
 						outputText("Even your " + player.multiCockDescript() + " ache");
-						if (player.totalCocks() == 1) outputText("s");
+						if (player.cockTotal() == 1) outputText("s");
 						outputText(" and pulse");
-						if (player.totalCocks() == 1) outputText("s");
+						if (player.cockTotal() == 1) outputText("s");
 						outputText(", bouncing on your belly.  ");
 					}
 					outputText("You answer that need by pistoning the fat juicy dick even harder into your tightly stretched box, cooing as tiny squirts of fluid erupt with every thrust.\n\n");
@@ -2013,8 +2013,8 @@ package classes.Scenes {
 					//(+sensitivity by 3 & intellect -2 & libido +1	)
 				}
 				//Option Jojo veyeurism?
-				if (getGame().monk >= 5 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) {
-					outputText("\n\nAs you stand and try to clean up you manage to spot Jojo off in the woods, ");
+                if (JojoScene.monk >= 5 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) {
+                    outputText("\n\nAs you stand and try to clean up you manage to spot Jojo off in the woods, ");
 					if (player.hasStatusEffect(StatusEffects.TentacleJojo))
 						outputText("his tentacles splattering mouse-jizz everywhere as he gets off from your show.");
 					else outputText("splattering himself with mouse-spunk as he finishes enjoying your inadvertent show.  He runs off before you have a chance to react.");
@@ -2267,7 +2267,7 @@ package classes.Scenes {
 			outputText("\"<i>AHA!</i>\" the hawkish purveyor cries.  \"<i>I have a new product to sell! I will call it the 'One Woman Show!'</i>\"\n\n");
 			outputText("Giacomo cackles smugly at his idea.  \"<i>Who knows how much someone will pay me for a live woman who can't stop cumming!</i>\"\n\n");
 			outputText("Giacomo loads you up onto his cart and sets off for his next sale.  You do not care.  You do not realize what has happened.  All you know is that the creature keeps cumming and it feels... sooooo GODDAMN GOOD!");
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 		
 		private function lickYerGirlParts():void { //Female cat masturbation
@@ -2331,7 +2331,7 @@ package classes.Scenes {
 				outputText("A very familiar feeling of pleasure rushes through your body, causing you to shudder. You pull your cock out and begin to stroke it as you suck on the tip, practically drinking your pre-cum. You can feel your cum building up as it gets ready to be released. After flicking your tongue against the tip of your [cock], you feel the flood of cum flowing up your dick");
 				
 				if (player.countCockSocks("gilded") > 0 && flags[kFLAGS.GILDED_JERKED] < player.countCockSocks("gilded")) {
-					flags[kFLAGS.GILDED_JERKED]++
+					flags[kFLAGS.GILDED_JERKED]++;
 					
 					var gems:int = midasCockJackingGemsRoll();
 					
@@ -2439,7 +2439,7 @@ package classes.Scenes {
 			clearOutput();
 			outputText("You look at the thing in front of you and sigh, your [cocks] and [vagina] dripping with fluids. With a nervous sigh you step into the underwear looking device and slip it up your legs, the cold metal feeling so good on your [skin.type], sending a rush of feelings up your body. You slip your [cock] down and into a hole on the front of the belt, the extra length sticking out on the other side of it. Underneath the hole and right above your pussy is another metal square with what feels like a small nub on the inside rubbing against your clit. Shivering from the feeling of it, you stay there for a moment, waiting in anticipation. Finally, you reach down to the side of the belt and flick the switch to the on position.\n\n");
 			outputText("The belt whirs to life, shaking on your waist, sending jolts of pleasure through your clit as the small inside nub hits it. \"<i>Ohh...</i>\" Suddenly, the ring around your cock vibrates and then tightens hard around your cock, the belt sinking onto your body and locking in place. Worry sets in instantly as you try to wiggle and take it off, but it is no use. You see something black bubble from the edges of the metal, worried even more that it might be some sort of acid. It begins to creep across your skin at a disturbing rate, going down your [legs] and encasing them in the blackness, wrapping your cock, ");
-			if (player.tailType > TAIL_TYPE_NONE) outputText("covering up your tail, ");
+			if (player.tailType > AppearanceDefs.TAIL_TYPE_NONE) outputText("covering up your tail, ");
 			outputText("and then going up your body, covering your [allbreasts] and neck. The only part of your body unclad by the suit is your head. The blackness feels slick and smooth, almost cold, a strange type of feeling washes over you until you realize that it is a rubber suit.\n\n");
 			outputText("Before you can do anything else, the belt activates again and the latex covering of your [cock] begins to tighten and pulse around the meat, warming up to feel like a virgin cunt. A moan is dragged from your lips as it begins to ripple and pulse, simulating the feeling of fucking a tight hole as the entire suit molds itself to your body. Before you can get too used to the feeling of the suit milking your cock, the nub that had been teasing your clit suddenly expands and pushes out, the slick feeling of the latex pushing into your pussy.  The hardened black latex splits your tunnel and spreads you wide as it goes in deep. Your eyes widen for a moment as both stop, and then your world explodes in a flash of pleasure. The hardened lump begins to piston in and out of your [vagina], vibrating wildly as a lump grows in on top in precisely the right spot to rub back and forth on your g-spot.\n\n");
 			outputText("Meanwhile the latex around your [cock] begins to pulse and ripple faster than ever before. You quake and quiver, [legs] giving out as it teases and pulses around your [allbreasts]. Your hands go down your body helplessly and start stroking at your encased cock, rubbing up and down your length. Unfortunately, all things must come to an end as the pleasure gets to be way too much and you feel yourself cum. Your hips buck wildly as you feel cum spurt into the latex, the end swelling up and filling like a ");
@@ -2525,15 +2525,15 @@ package classes.Scenes {
 						outputText(player.multiCockDescriptLight() + " and " + player.vaginaDescript());
 					else outputText(player.cockDescript());
 					//Set as plural if multi dick or dick and vag.
-					if (player.hasVagina() || player.totalCocks() > 1) plural = true;
+					if (player.hasVagina() || player.cockTotal() > 1) plural = true;
 				}
 				else outputText(player.vaginaDescript());
 				if (plural)
 					outputText(" leak their own fluid, quivering with ache and need that you can't reach to satisfy.");
 				else outputText(" leaks its own fluids, quivering with ache and need that you can't reach to satisfy.");
-				if (player.totalCocks() > 1)
+				if (player.cockTotal() > 1)
 					outputText("  You feel each of your [cocks] tapping against your belly as your muscles clench, getting as much pleasure as possible from your male endowments.");
-				else if (player.totalCocks() == 1)
+				else if (player.cockTotal() == 1)
 					outputText("  You feel your [cocks] tapping against your belly as your muscles clench, getting as much pleasure as possible from your male endowment.");
 				if (player.balls > 0) outputText("  Rocking slightly inside your sack, your [balls] repeatedly clench up against your body, ready to release.");
 				outputText("\n\n");
@@ -2633,9 +2633,9 @@ package classes.Scenes {
 				outputText(".  It feels so good that you close your eyes and whinny with delight.\n\n");
 			
 				outputText("You smear your pre-cum over the tip, rolling your palm across the sensitive tip in a way that makes it hard to stand.  Meanwhile your other hand is busy fondling the underside, stroking what little of your length you can reach.  Even with the limited access, you can feel your " + player.cockDescript(primary) + " pulsing in your grip, growing harder with every touch and caress.");
-				if (player.totalCocks() == 2)
+				if (player.cockTotal() == 2)
 					outputText("  Your other dick mimics its lucky brother's pleasure, even though it's been ignored in order for you to focus on your current 'toy'.");
-				else if (player.totalCocks() > 2)
+				else if (player.cockTotal() > 2)
 					outputText("  Your other [cocks] mimic their lucky brother's pleasure, even though they've been ignored in order for you to focus on your current 'toy'.");
 				outputText("  You let your hind legs give out and slump down, locking your forelegs while you tremble with what can only be the approach of an orgasm.\n\n");
 			}	
@@ -2658,9 +2658,9 @@ package classes.Scenes {
 				
 				//STROKE (long)
 				outputText("You smear your pre-cum over the tip, rolling your palm across the sensitive tip in a way that makes it hard to stand.  Meanwhile your other hand is making great use of your incredible length, jacking you off with long fluid strokes.  In no time flat, you can feel your [cock] pulsing in your grip, growing harder in time with your fevered stroking.");
-				if (player.totalCocks() == 2)
+				if (player.cockTotal() == 2)
 					outputText("  Your other dick mimics its lucky brother's pleasure, even though it's been ignored in order for you to focus on your current 'toy'.");
-				else if (player.totalCocks() > 2)
+				else if (player.cockTotal() > 2)
 					outputText("  Your other [cocks] mimic their lucky brother's pleasure, even though they've been ignored in order for you to focus on your current 'toy'.");
 				outputText("  You let your hind legs give out and slump down, locking your forelegs while you tremble with what can only be the approach of an orgasm.\n\n");
 			}
@@ -2800,7 +2800,7 @@ package classes.Scenes {
 			
 			if (player.countCockSocks("gilded") > 0 && flags[kFLAGS.GILDED_JERKED] < player.countCockSocks("gilded")) {
 				
-				flags[kFLAGS.GILDED_JERKED]++
+				flags[kFLAGS.GILDED_JERKED]++;
 				
 				var gems:int = midasCockJackingGemsRoll();
 				
@@ -2891,8 +2891,8 @@ package classes.Scenes {
 				outputText("\n\nYou grin, flexing your muscles, and the slit next to your stinger opens; your ovipositor slides out freely, the flaccid tube hardening as your lust rises even further thanks to the visions of debauchery flowing through your mind.  You take your [cockHead 1] in hand and bend it toward your ovipositor, intending to bring the two together and see if it's really possible for you to lay your eggs down your own massive length.");
 				
 				outputText("\n\nThe demon within you, realizing just what's going on and wanting no part in it, begins to fight back.  Thus begins a struggle for your own body, as he attempts to both tug your [cock 1] away from your bee-half, and stimulate your length with his own magic and your hand so that you orgasm and feel no need to continue anyway.  You");
-				if (getGame().shouldraFollower.followerShouldra()) outputText(", with Shouldra's assistance,");
-				outputText(" manage to fight him, keeping your cock in place.  With his attention distracted, you're able to lower your ovipositor directly to the tip of your cock, and with a flex and a shove, you manage to force it in.");
+                if (SceneLib.shouldraFollower.followerShouldra()) outputText(", with Shouldra's assistance,");
+                outputText(" manage to fight him, keeping your cock in place.  With his attention distracted, you're able to lower your ovipositor directly to the tip of your cock, and with a flex and a shove, you manage to force it in.");
 				
 				outputText("\n\nYou feel your slit stretching with a feeling unlike anything you've ever experienced, being both the penetrated and the penetrating at the same time.  A lewd moan rolls from your lungs, and your back arches from the sheer pleasure of the sensation; unbidden, an egg attempts to push down into your cock, spreading the slit further.");
 				
@@ -2905,8 +2905,8 @@ package classes.Scenes {
 				outputText("\n\nMore eggs begin to rise up from your abdomen, one after the other beginning to shove its way down your poor stretched length.  The first is nearly halfway down your " + num2Text(player.cocks[player.biggestCockIndex()].cockLength) + " inches, and you feel another entering your slit.  Then you feel something else deep within, something that drops your jaw.  Your cock begins to lurch, as if beginning to orgasm, and you realize what Exartuan is doing. He's trying to make you climax to force the eggs out!");
 				
 				outputText("\n\nYou struggle, ");
-				if (getGame().shouldraFollower.followerShouldra()) outputText("ghost-assisted ");
-				outputText("will versus demon-induced orgasm, eggs versus cum, and you actually appear to be losing.  The base of your cock bulges out as you moan, rapidly filling and bloating with gathering seed, and you can feel orgasmic pressure rising as the demon turns the tide, so to speak.  Your eyes roll back up into your head, lids beginning to close, when you see your salvation.  Your stinger!  It hangs just above the tip of your cock, and though you dread what you're about to do, you hope that it will be able to give you the edge over your demon companion.  You steel yourself for what must be done.");
+                if (SceneLib.shouldraFollower.followerShouldra()) outputText("ghost-assisted ");
+                outputText("will versus demon-induced orgasm, eggs versus cum, and you actually appear to be losing.  The base of your cock bulges out as you moan, rapidly filling and bloating with gathering seed, and you can feel orgasmic pressure rising as the demon turns the tide, so to speak.  Your eyes roll back up into your head, lids beginning to close, when you see your salvation.  Your stinger!  It hangs just above the tip of your cock, and though you dread what you're about to do, you hope that it will be able to give you the edge over your demon companion.  You steel yourself for what must be done.");
 				
 				outputText("\n\nFlexing and clenching up as you anticipate what's to come, you drive your stinger toward your own [cockHead].  You nearly cry out from the pain as your venomous needle stabs into your length, piercing it, but your bee parts autonomously drive their lust-and-pleasure-inducing venom directly into your cock.  The combined pleasure and pain draw a fog over your eyes, but within moments the pleasure begins to mask everything else, and you find yourself a panting heap, tongue hanging from your [face] as you pour all the venom you can manage directly into your poor abused cock.");
 				
@@ -3612,7 +3612,7 @@ package classes.Scenes {
 				dynStats("sen", -1);
 			}
 			player.gems += gems;
-			flags[kFLAGS.GILDED_JERKED]++
+			flags[kFLAGS.GILDED_JERKED]++;
 			statScreenRefresh();
 			doNext(camp.returnToCampUseOneHour);
 		}

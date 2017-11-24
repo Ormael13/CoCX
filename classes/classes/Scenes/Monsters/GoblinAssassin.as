@@ -1,10 +1,11 @@
 ﻿package classes.Scenes.Monsters
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.*;
+import classes.*;
+import classes.GlobalFlags.*;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
 
-	public class GoblinAssassin extends Monster
+public class GoblinAssassin extends Monster
 	{
 		protected function goblinDrugAttack():void {
 			var temp2:Number = rand(5);
@@ -50,9 +51,8 @@
 			//Increase fatigue
 			if(color == "black") {
 				outputText("\nThe black fluid splashes all over you and wicks into your skin near-instantly.  It makes you feel tired and drowsy.\n");
-				game.fatigue(10 + rand(25));
+				EngineCore.fatigue(10 + rand(25));
 			}
-			combatRoundOver();
 			return;
 		}
 		//Lust Needle
@@ -71,7 +71,6 @@
 				outputText("\nYou’re far too distracted to notice the needle injected into the back of your neck, but by the time she flips back into her original position you already feel the contents of the syringe beginning to take effect.");
 				player.dynStats("lus", rand(player.lib/4)+20);
 			}
-			combatRoundOver();
 		}
 		//Dual Shot
 		protected function dualShot():void {
@@ -88,7 +87,6 @@
 				var damage:int = int((str + weaponAttack + 40) - rand(player.tou) - player.armorDef);
 				damage = player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		//Explosion
 		protected function goblinExplosion():void {
@@ -100,21 +98,20 @@
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			damage = Math.round(damage);
 			damage = player.takeMagicDamage(damage, true);
-			combatRoundOver();
 		}
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.goblinAssassinScene.gobboAssassinRapeIntro();
+			SceneLib.goblinAssassinScene.gobboAssassinRapeIntro();
 			
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if (player.gender == 0 || flags[kFLAGS.SFW_MODE] > 0) {
 				outputText("You collapse in front of the goblin, too wounded to fight.  She growls and kicks you in the head, making your vision swim. As your sight fades, you hear her murmur, \"<i>Fucking dicks can't even bother to grow a dick or cunt.</i>\"");
-				game.cleanupAfterCombat();
+				SceneLib.combat.cleanupAfterCombatImpl();
 			} 
 			else {
-				game.goblinAssassinScene.gobboAssassinBeatYaUp();
+				SceneLib.goblinAssassinScene.gobboAssassinBeatYaUp();
 			}
 		}
 		public function GoblinAssassin(noInit:Boolean=false)
@@ -125,15 +122,15 @@
 			this.imageName = "goblinassassin";
 			this.long = "Her appearance is that of a regular goblin, curvy and pale green, perhaps slightly taller than the norm. Her wavy, untamed hair is a deep shade of blue, covering her pierced ears and reaching just above her shoulders. Her soft curves are accentuated by her choice of wear, a single belt lined with assorted needles strapped across her full chest and a pair of fishnet stockings reaching up to her thick thighs. She bounces on the spot, preparing to dodge anything you might have in store, though your eyes seem to wander towards her bare slit and jiggling ass. Despite her obvious knowledge in combat, she’s a goblin all the same – a hard cock can go a long way.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DROOLING, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 90, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
-			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_NORMAL;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,50,0,0,0);
 			this.tallness = 35 + rand(4);
-			this.hipRating = HIP_RATING_AMPLE+2;
-			this.buttRating = BUTT_RATING_LARGE;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
 			this.skinTone = "dark green";
 			this.hairColor = "blue";
 			this.hairLength = 7;

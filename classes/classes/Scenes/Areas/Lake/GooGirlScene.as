@@ -3,11 +3,11 @@
  */
 package classes.Scenes.Areas.Lake
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
-	public class GooGirlScene extends AbstractLakeContent
+public class GooGirlScene extends AbstractLakeContent
 	{
 		public function GooGirlScene()
 		{
@@ -104,7 +104,7 @@ package classes.Scenes.Areas.Lake
 			outputText("You slide your nucleus down to the champion and she wraps her " + gooColor3() + " arms around it, kissing the heat of your core. Your gargantuan form ripples in shivering glee as a small piece of your heart splits off, sliding between your new daughter's lips, resting firmly between her gooey tits in a tiny, crimson ruby. Climaxing from the birth of a new goo-girl, your body convulses and clenches, squeezing the former champion back into the lake with a gushing, " + gooColor2() + " splash. Your daughter bows her head in reverence and embraces her sisters happily. The largest girl, a former minotaur, gives her a bear hug that nearly splits the smaller slime in two. The purple girl, who used to be a succubus before you showed her the error of her polluting ways, is more reserved, merely nodding and smiling. All the same, they stroke each other fondly, enjoying each other's rippling bodies.\n\n");
 
 			outputText("Radiating heat and vibrating the water between the four of you, you communicate your will to the girls. Hundreds of your sisters have already expanded the lake's shores to the mountains and others have nearly reached the forest. Deep in your memory, however, there remains a city in the desert filled with your friends. It seems like such a long time since you've seen them. Once your children flood the desert, you'll be able to pay a visit and show them what you've become. Maybe they'll even want to be reborn themselves. Yes, you decide, they will definitely want to join you.");
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 
 		public function slimeBadEnd():void { //Another gooey bad end; you should have drunk more fluids
@@ -121,7 +121,7 @@ package classes.Scenes.Areas.Lake
 			outputText("\n\nFilled with new-found vigor, the slime travels up the beach, still holding its captive trapped inside it.  Its body shifts as a half-remembered humanoid form grows out from the blob's surface.  The new body is a parody of its former self, with sexually distorted features and jiggling, globe-like breasts.  It presses the captive's lips against a nipple, allowing him to suckle down a bit of her essence.  He does so instinctively – his parched body seeking relief from the orgasm-induced dehydration afflicting him.");
 			outputText("\n\nIn a few hours he awakens, still entirely trapped by the wet-dream of a slime-girl.  His belly is full of her nutritious and corruptive slime, and his cock feels bigger and more sensitive than ever inside her tight embrace.  She squeezes and milks it, gurgling happily.  He cums for her.  Again and again he cums for her.  He can't stop or resist the feeling she gives him as he helplessly orgasms over and over.  She milks him forever, growing stronger, feeding him slime, and gathering incubi drafts and succubi's delight to satiate her ever-growing needs.");
 			outputText("\n\nEvery year thereafter the new champion is greeted with a slippery prison, forced to orgasm and feed the slime-queen for the rest of their natural life.  Most of them stop minding by the second day, too drunk on her breast-milk and all the drugs she's mixed into it.");
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 		
 //===============
@@ -306,7 +306,7 @@ package classes.Scenes.Areas.Lake
 				var sex3N:Function =null;
 				var sex4S:String = "";
 				var sex4N:Function =null;
-				var valeria:Function = kGAMECLASS.valeria.valeriaAndGooThreeStuff;
+				var valeria:Function = SceneLib.valeria.valeriaAndGooThreeStuff;
 				if (player.armorName != "goo armor" || player.isButtPregnant() || player.isPregnant()) valeria = null;
 				var eggs:Function =null;
 				if (player.canOvipositBee()) eggs = layBeeEggsInGoo;
@@ -340,7 +340,7 @@ package classes.Scenes.Areas.Lake
 				//corrupt chances
 				if ((flags[kFLAGS.GOO_TFED_MEAN] == 0 && flags[kFLAGS.GOO_TFED_NICE] == 0) && flags[kFLAGS.TIMES_FUCKED_NORMAL_GOOS] >= 2) {
 					if (player.cor < 50 && (player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && (player.hasItem(consumables.BLACKEG) || player.hasItem(consumables.L_BLKEG))) {
-						kGAMECLASS.latexGirl.pureGooRecruitmentStart();
+						SceneLib.latexGirl.pureGooRecruitmentStart();
 						return;
 					}
 					else if (flags[kFLAGS.PC_KNOWS_ABOUT_BLACK_EGGS] > 0) {
@@ -356,7 +356,7 @@ package classes.Scenes.Areas.Lake
 						}
 						if ((player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && (player.hasItem(consumables.BLACKEG) || player.hasItem(consumables.L_BLKEG))) {
 							outputText("  Good thing you have those handy!");
-							gooTF = kGAMECLASS.latexGirl.meanGooGirlRecruitment;
+							gooTF = SceneLib.latexGirl.meanGooGirlRecruitment;
 						}
 					}
 				}

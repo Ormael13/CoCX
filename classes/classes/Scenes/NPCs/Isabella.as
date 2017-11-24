@@ -1,9 +1,10 @@
 package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
-	public class Isabella extends Monster
+public class Isabella extends Monster
 	{
 
 		//IZZY AI:
@@ -50,7 +51,6 @@ package classes.Scenes.NPCs
 					outputText("\n");
 				}
 			}
-			combatRoundOver();
 		}
 
 		public function isabellaStun():void {
@@ -96,7 +96,6 @@ package classes.Scenes.NPCs
 					player.createStatusEffect(StatusEffects.IsabellaStunned,0,0,0,0);
 				}
 			}
-			combatRoundOver();
 		}
 
 		public function isabellaThroatPunch():void {
@@ -139,7 +138,6 @@ package classes.Scenes.NPCs
 					player.createStatusEffect(StatusEffects.ThroatPunch,2,0,0,0);
 				}
 			}
-			combatRoundOver();
 		}
 
 		//[Milk Self-Heal]
@@ -149,7 +147,6 @@ package classes.Scenes.NPCs
 			else HP += 100;
 			lust += 5;
 			player.dynStats("lus", (10+player.lib/20));
-			combatRoundOver();
 		}
 
 		override protected function performCombatAction():void
@@ -169,16 +166,16 @@ package classes.Scenes.NPCs
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.isabellaScene.defeatIsabella();
+			SceneLib.isabellaScene.defeatIsabella();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if(pcCameWorms){
 				outputText("\n\n\"<i>Ick,</i>\" Isabella tuts as she turns to leave...");
-				game.cleanupAfterCombat();
+				SceneLib.combat.cleanupAfterCombatImpl();
 			} else {
-				game.isabellaScene.isabellaDefeats();
+				SceneLib.isabellaScene.isabellaDefeats();
 			}
 		}
 
@@ -189,15 +186,15 @@ package classes.Scenes.NPCs
 			this.imageName = "isabella";
 			this.long = "Isabella is a seven foot tall, red-headed tower of angry cow-girl.  She's snarling at you from behind her massive shield, stamping her hooves in irritation as she prepares to lay into you.  Her skin is dusky, nearly chocolate except for a few white spots spattered over her body.  She wears a tight silk shirt and a corset that barely supports her bountiful breasts, but it's hard to get a good look at them behind her giant shield.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_GAPING);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DROOLING, AppearanceDefs.VAGINA_LOOSENESS_GAPING);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 45, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("EE+"));
-			this.ass.analLooseness = ANAL_LOOSENESS_VIRGIN;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_VIRGIN;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,38,0,0,0);
 			this.tallness = 7*12+6;
-			this.hipRating = HIP_RATING_CURVY+2;
-			this.buttRating = BUTT_RATING_LARGE+1;
+			this.hipRating = AppearanceDefs.HIP_RATING_CURVY+2;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE+1;
 			this.skinTone = "dusky";
 			this.hairColor = "red";
 			this.hairLength = 13;
@@ -275,7 +272,7 @@ package classes.Scenes.NPCs
 			this.lustVuln = .35;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = rand(10) + 25;
-			this.tailType = TAIL_TYPE_COW;
+			this.tailType = AppearanceDefs.TAIL_TYPE_COW;
 			this.tailRecharge = 0;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);

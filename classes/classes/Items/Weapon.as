@@ -3,11 +3,10 @@
  */
 package classes.Items
 {
-	import classes.ItemType;
-	import classes.PerkLib;
-	import classes.Player;
+import classes.PerkLib;
+import classes.Scenes.SceneLib;
 
-	public class Weapon extends Useable //Equipable
+public class Weapon extends Useable //Equipable
 	{
 		private var _verb:String;
 		private var _attack:Number;
@@ -65,7 +64,7 @@ package classes.Items
 			if ((perk == "Large" && game.player.shield != ShieldLib.NOTHING && game.player.findPerk(PerkLib.TitanGrip) < 0)
 			|| (perk == "Dual" && game.player.shield != ShieldLib.NOTHING)
 			|| (perk == "Dual Large" && game.player.shield != ShieldLib.NOTHING)) {
-				game.inventory.unequipShield();
+				SceneLib.inventory.unequipShield();
 			}
 			return this;
 		}

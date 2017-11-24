@@ -1,12 +1,13 @@
 package classes.Scenes.Areas.VolcanicCrag 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kACHIEVEMENTS;
-	import classes.Scenes.UniqueSexScenes;
-	
-	public class BehemothScene extends BaseContent
+import classes.*;
+import classes.GlobalFlags.kACHIEVEMENTS;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
+import classes.Scenes.UniqueSexScenes;
+
+public class BehemothScene extends BaseContent
 	{
 		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 		
@@ -193,7 +194,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			}
 			menu();
 			if (player.lust >= 33) addButton(0, "Sex", behemothSexMenu, true, null, null, "Initiate sexy time with the Behemoth.");
-			if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(1, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
+			if (player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(1, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
 			addButton(4, "Leave", cleanupAfterCombat);
 		}
 		
@@ -268,7 +269,7 @@ package classes.Scenes.Areas.VolcanicCrag
 				if (timesSexed() >= 3) addButton(5, "Watersports", watersportsWithBehemoth).hint("Do some urine activity with him.");
 				else addButtonDisabled(5, "Watersports", "Have sex with the behemoth enough times to unlock this!");
 			}
-			if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) addButton(6, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
+			if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER) addButton(6, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
 			if (!kGAMECLASS.inCombat) addButton(14, "Nevermind", camp.returnToCampUseOneHour);
 			else addButton(14, "Nevermind", cleanupAfterCombat);
 		}
@@ -355,7 +356,7 @@ package classes.Scenes.Areas.VolcanicCrag
 		}
 		
 		private function vagCatchBehemoth():void {
-			var isVirgin:Boolean = player.hasVirginVagina()
+			var isVirgin:Boolean = player.hasVirginVagina();
 			clearOutput();
 			outputText(images.showImage("behemoth-vag-catch"));
 			//Sorry, no centaur variant.
@@ -437,7 +438,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			flags[kFLAGS.BEHEMOTH_CUM_BATH]++;
 			HPChange(player.maxHP() / 2, false);
 			fatigue(-50);
-			if (player.armor == armors.GOOARMR) kGAMECLASS.valeria.feedValeria(100);
+			if (player.armor == armors.GOOARMR) SceneLib.valeria.feedValeria(100);
 			dynStats("str", 0.5, "tou", 0.5, "lus", 30);
 			player.slimeFeed();
 			if (kGAMECLASS.inCombat) cleanupAfterCombat();

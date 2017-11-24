@@ -1,4 +1,5 @@
 package classes.Scenes.NPCs {
+import classes.AppearanceDefs;
 import classes.Items.Consumables.VampireBlood;
 import classes.Scenes.Camp;
 
@@ -128,8 +129,8 @@ public class DivaScene extends XXCNPC{
         function setupSexMenu():void{
             _sexMenu.clear();
             _sexMenu.add("Moonlight Sonata",moonlightSonata);
-            _sexMenu.add("Share A Meal",shareAMeal).disableIf((player.vampireScore() < 6)|| !(player.faceType == FACE_VAMPIRE));
-            _sexMenu.add("Bloody Rose",bloodyRose).disableIf((player.vampireScore() < 6) || !(player.faceType == FACE_VAMPIRE));
+            _sexMenu.add("Share A Meal",shareAMeal).disableIf((player.vampireScore() < 6)|| !(player.faceType == AppearanceDefs.FACE_VAMPIRE));
+            _sexMenu.add("Bloody Rose",bloodyRose).disableIf((player.vampireScore() < 6) || !(player.faceType == AppearanceDefs.FACE_VAMPIRE));
 
             function shareAMeal():void{scene("camp/sexMenu/shareAMeal");}
             function bloodyRose():void{scene("camp/sexMenu/bloodyRose");}

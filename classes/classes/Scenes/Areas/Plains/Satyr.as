@@ -1,10 +1,11 @@
 package classes.Scenes.Areas.Plains
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
 
-	public class Satyr extends Monster
+public class Satyr extends Monster
 	{
 		//Attacks (Z)
 		private function satyrAttack():void {
@@ -25,7 +26,6 @@ package classes.Scenes.Areas.Plains
 				}
 				else outputText("You successfully block it.");
 			}
-			combatRoundOver();
 		}
 				
 		private function satyrBate():void {
@@ -33,7 +33,6 @@ package classes.Scenes.Areas.Plains
 			//(small Libido based Lust increase, and increase lust)
 			player.dynStats("lus", (player.lib/5)+4);
 			lust += 5;
-			combatRoundOver();
 		}
 		
 		internal function satyrCharge():void {
@@ -74,7 +73,6 @@ package classes.Scenes.Areas.Plains
 					else outputText("He charges at you, but you successfully deflect it at the last second.");
 				}
 			}
-			combatRoundOver();
 		}
 			
 		private function bottleChug():void {
@@ -82,7 +80,6 @@ package classes.Scenes.Areas.Plains
 			//(damage PC lust very slightly and raise the satyr's lust.)
 			player.dynStats("lus", (player.lib/5));
 			lust += 5;
-			combatRoundOver();
 		}
 		
 		//5:(Only executed at high lust) 
@@ -100,7 +97,6 @@ package classes.Scenes.Areas.Plains
 				lust -= 50;
 				player.dynStats("lus", (player.sens/5+20));
 			}
-			combatRoundOver();
 		}
 		
 		override protected function performCombatAction():void
@@ -119,7 +115,7 @@ package classes.Scenes.Areas.Plains
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.plains.satyrScene.defeatASatyr();
+			SceneLib.plains.satyrScene.defeatASatyr();
 		}
 
 
@@ -127,9 +123,9 @@ package classes.Scenes.Areas.Plains
 		{
 			if (pcCameWorms) {
 				outputText("\n\nThe satyr laughs heartily at your eagerness...");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
-				game.plains.satyrScene.loseToSatyr();
+				SceneLib.plains.satyrScene.loseToSatyr();
 			}
 		}
 
@@ -146,17 +142,17 @@ package classes.Scenes.Areas.Plains
 			this.cumMultiplier = 1.5;
 			this.hoursSinceCum = this.ballSize * 10;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.createStatusEffect(StatusEffects.BonusACapacity,20,0,0,0);
 			this.tallness = rand(37) + 64;
-			this.hipRating = HIP_RATING_AVERAGE;
-			this.buttRating = BUTT_RATING_AVERAGE+1;
-			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
+			this.hipRating = AppearanceDefs.HIP_RATING_AVERAGE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_AVERAGE+1;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
 			this.skinTone = "tan";
 			this.hairColor = randomChoice("black","brown");
 			this.hairLength = 3+rand(20);
-			this.faceType = FACE_COW_MINOTAUR;
+			this.faceType = AppearanceDefs.FACE_COW_MINOTAUR;
 			initStrTouSpeInte(75, 70, 110, 70);
 			initWisLibSensCor(60, 60, 35, 45);
 			this.weaponName = "fist";
@@ -172,7 +168,7 @@ package classes.Scenes.Areas.Plains
 			this.level = 19;
 			this.gems = rand(30) + 30;
 			this.drop = new ChainedDrop().add(consumables.INCUBID,1/2);
-			this.tailType = TAIL_TYPE_COW;
+			this.tailType = AppearanceDefs.TAIL_TYPE_COW;
 			checkMonster();
 		}
 		

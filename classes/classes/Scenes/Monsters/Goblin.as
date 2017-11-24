@@ -1,10 +1,11 @@
 ﻿package classes.Scenes.Monsters
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.*;
+import classes.*;
+import classes.GlobalFlags.*;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
 
-	public class Goblin extends Monster
+public class Goblin extends Monster
 	{
 		protected function goblinDrugAttack():void {
 			var temp2:Number = rand(2);
@@ -46,7 +47,6 @@
 						if (short == "Tamani") addHP((maxHP() / 4) * multiplier);
 					}
 					else outputText("  There doesn't seem to be any effect.\n");
-					combatRoundOver();
 				}
 				return;
 			}
@@ -74,11 +74,10 @@
 				else if (color == "black") {
 					//Increase fatigue
 					outputText("\nThe black fluid splashes all over you and wicks into your skin near-instantly.  It makes you feel tired and drowsy.\n");
-					game.fatigue(10 + rand(25) * multiplier);
+					EngineCore.fatigue(10 + rand(25) * multiplier);
 				}
 			}
-			if (!plural) combatRoundOver();
-			else outputText("\n");
+			if (plural) outputText("\n");
 		}
 		protected function goblinTeaseAttack():void {
 			var det:Number = rand(3);
@@ -109,25 +108,24 @@
 			if (short == "goblin elder") lustDmg *= 2;
 			player.dynStats("lus", lustDmg);
 			outputText("  The display distracts you long enough to prevent you from taking advantage of her awkward pose, leaving you more than a little flushed.\n\n");
-			combatRoundOver();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.goblinScene.gobboRapeIntro();
+			SceneLib.goblinScene.gobboRapeIntro();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if (player.gender == 0 || flags[kFLAGS.SFW_MODE] > 0) {
 				outputText("You collapse in front of the goblin, too wounded to fight.  She giggles and takes out a tube of lipstick smearing it whorishly on your face.  You pass into unconsciousness immediately.  It must have been drugged.");
-				game.cleanupAfterCombat();
+				SceneLib.combat.cleanupAfterCombatImpl();
 			} else if (pcCameWorms) {
 				outputText("\n\nThe goblin's eyes go wide and she turns to leave, no longer interested in you.");
 				player.orgasm();
-				doNext(game.cleanupAfterCombat);
+				doNext(SceneLib.combat.cleanupAfterCombatImpl);
 			} else {
-				game.goblinScene.goblinRapesPlayer();
+				SceneLib.goblinScene.goblinRapesPlayer();
 			}
 		}
 
@@ -138,15 +136,15 @@
 			this.short = "goblin";
 			this.imageName = "goblin";
 			this.long = "The goblin before you is a typical example of her species, with dark green skin, pointed ears, and purple hair that would look more at home on a punk-rocker.  She's only about three feet tall, but makes up for it with her curvy body, sporting hips and breasts that would entice any of the men in your village were she full-size.  There isn't a single scrap of clothing on her, just lewd leather straps and a few clinking pouches.  She does sport quite a lot of piercings – the most noticeable being large studs hanging from her purple nipples.  Her eyes are fiery red, and practically glow with lust.  This one isn't going to be satisfied until she has her way with you.  It shouldn't be too hard to subdue such a little creature, right?";
-			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DROOLING, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = 35 + rand(4);
-			this.hipRating = HIP_RATING_AMPLE+2;
-			this.buttRating = BUTT_RATING_LARGE;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
 			this.skinTone = "dark green";
 			this.hairColor = "purple";
 			this.hairLength = 4;

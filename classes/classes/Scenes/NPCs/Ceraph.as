@@ -1,10 +1,10 @@
 ﻿package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.internals.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
-	public class Ceraph extends Monster
+public class Ceraph extends Monster
 	{
 
 //[IN COMBAT SPECIALS]
@@ -47,7 +47,6 @@
 					}
 				}
 			}
-			combatRoundOver();
 		}
 //[SPECIAL] – Whip Binding
 		private function ceraphSpecial2():void
@@ -77,7 +76,6 @@
 					player.dynStats("lus", 5 + player.cor / 10 + player.lib / 20);
 				}
 			}
-			combatRoundOver();
 		}
 
 		//(Struggle)
@@ -92,7 +90,6 @@
 				}
 				outputText("!");
 				player.removeStatusEffect(StatusEffects.Bound);
-				combatRoundOver();
 				return;
 			}
 			else {
@@ -142,13 +139,12 @@
 				lust = (maxLust() * 0.33);
 				player.dynStats("lus", 30);
 				outputText("\n");
-				combatRoundOver();
 				return;
 			}
 			var damage:Number = 0;
 			outputText("The demoness weaves her whip in the air until you can practically hear it slithering like a snake, cutting the air as it weaves back and forth, still magically alight with flames.  In a blink she lashes out twice in quick succession!\n");
 			//First hit!
-			doNext(game.playerMenu);
+			doNext(EventParser.playerMenu);
 			//Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind) && rand(10) != 9) {
 				outputText(capitalA + short + " completely misses you with a blind attack!");
@@ -193,7 +189,7 @@
 				if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 				else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
 			}
-			game.statScreenRefresh();
+			EngineCore.statScreenRefresh();
 			outputText("\n");
 			//SECOND ATTACK HERE------
 			//Blind dodge change
@@ -240,9 +236,8 @@
 				if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 				else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
 			}
-			game.statScreenRefresh();
+			EngineCore.statScreenRefresh();
 			outputText("\n");
-			combatRoundOver();
 		}
 
 		override protected function performCombatAction():void
@@ -275,16 +270,16 @@
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.ceraphScene.winRapeChoices();
+			SceneLib.ceraphScene.winRapeChoices();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if(pcCameWorms){
 				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
-				game.ceraphScene.loseFUCKME();
+				SceneLib.ceraphScene.loseFUCKME();
 			}
 		}
 
@@ -297,16 +292,16 @@
 			this.long = "Ceraph the Omnibus is totally nude and reveling in it.  Her large yet perky breasts jiggle heavily against her chest as she moves.  The flawless purple skin of her twin mounds glistens with a thin sheen of sweat, inviting you to touch and rub your fingers along their slippery surface.  Her eyes are solid black, but convey a mix of amusement and desire, in spite of their alien appearance.  The demon's crotch is a combination of both genders – a drooling cunt topped with a thick demonic shaft, sprouting from where a clit should be.";
 			// this.plural = false;
 			this.createCock(10,2,CockTypesEnum.DEMON);
-			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_GAPING);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_GAPING);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 20, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,15,0,0,0);
 			this.tallness = 5*12+6;
-			this.hipRating = HIP_RATING_CURVY;
-			this.buttRating = BUTT_RATING_NOTICEABLE;
-			this.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
+			this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
+			this.buttRating = AppearanceDefs.BUTT_RATING_NOTICEABLE;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
 			this.skinTone = "purple";
 			this.hairColor = "black";
 			this.hairLength = 20;

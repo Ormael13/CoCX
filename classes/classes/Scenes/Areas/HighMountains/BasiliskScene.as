@@ -3,11 +3,11 @@
  */
 package classes.Scenes.Areas.HighMountains
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
-	public class BasiliskScene extends BaseContent
+public class BasiliskScene extends BaseContent
 	{
 		public function BasiliskScene()
 		{
@@ -376,7 +376,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("A pale blue finger traces the line of your frozen chin before a leering, female face swallows up your line of vision.  \"<i>Well, well, well. Look at what we have here,</i>\" purrs the succubus into your cold, marble ear.  Other shapes prowl into view, stalking reptile shapes, as the demon runs her hands sensually over your form, testing every smooth surface, protuberance and cranny that she can reach.  You cannot feel a thing, except an overwhelming sense of dread.  \"<i>Played with the lizards a bit too much did we, friend?  I hope you learnt your lesson.  It's a real shame, when you think about it.</i>\"  The succubus actually sounds almost upset as she looks you over.  \"<i>You would have made a fine slave.  The things we would have done to you... ah well.  Que sera sera. Remove this!</i>\" she straightens up smartly and claps her hands.  \"<i>Take this statue to Lethice's castle.  I am sure it will look excellent in her front hall, and I know she will appreciate the present.</i>\"  The basilisks snake up to you and then heave you into their arms.  As they haul you into the night, the succubus's voice reaches you.  \"<i>Did you know that marble is a metamorphic rock, statue? It takes tens of thousands of years to wear down. Meta-MORPH-ic, get it? Hahahahahaha!</i>\"\n\n");
 		
 			outputText("You have no voice, and you must scream.");
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 		//Defeated, Taken Advantage of: nobody
 		private function basiliskAdvantageNobody():void {
@@ -434,7 +434,7 @@ package classes.Scenes.Areas.HighMountains
 				
 				//(add harpy lipstick effect, add 20 fatigue and lose 100 lust if M/H, or add 100 lust if F/U)
 				fatigue(20);
-				kGAMECLASS.sophieScene.luststickApplication(20);
+				SceneLib.sophieScene.luststickApplication(20);
 				player.orgasm();
 			}
 			//Female: 
@@ -635,7 +635,7 @@ package classes.Scenes.Areas.HighMountains
 			spriteSelect(75);
 			clearOutput();
 			outputText("Completely destroyed, the basilisk lays face down on the ground, struggling pathetically to get up.  You giggle at the attempt as you ");
-			if(player.wingType == WING_TYPE_BEE_LIKE_SMALL || player.wingType == WING_TYPE_BEE_LIKE_LARGE ) outputText("buzz lightly over to the basilisk's writhing body");
+			if(player.wingType == AppearanceDefs.WING_TYPE_BEE_LIKE_SMALL || player.wingType == AppearanceDefs.WING_TYPE_BEE_LIKE_LARGE ) outputText("buzz lightly over to the basilisk's writhing body");
 			else outputText("saunter arrogantly over to the basilisk's crumpled up figure");
 			outputText(" and lightly nudge him in his ribs with your [foot].  His eyes are closed from to the ");
 			if(monster.HP < 1) outputText("pain");
@@ -647,9 +647,9 @@ package classes.Scenes.Areas.HighMountains
 			
 			else if(player.hasCock()) {
 				outputText("\n\nYou remove just enough of your [armor] to expose yourself and grab hold of your increasing length");
-				if(player.totalCocks()) outputText("s");
+				if(player.cockTotal()) outputText("s");
 				outputText("; rubbing enthusiastically, you start at the base but end in a gentle stroke at the sensitive tip.  With you doing your best to milk as much pre as you can, the viscous ooze that dribbles out of your dong");
-				if(player.totalCocks()) outputText("s");
+				if(player.cockTotal()) outputText("s");
 				outputText(" lands with soft pitters on the overgrown lizard's back, the intense mountain sun baking the gunk onto the scales.  You sigh in languor, but remember you're doing this for a reason.");
 			}
 			//(else if pc has vag:

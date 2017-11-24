@@ -2,9 +2,8 @@
  * Created by aimozg on 25.04.2017.
  */
 package classes.BodyParts {
-import classes.Appearance;
+import classes.AppearanceDefs;
 import classes.Creature;
-import classes.internals.Utils;
 
 public class LowerBody extends SaveableBodyPart {
 	public var legCount:int = 2;
@@ -13,48 +12,48 @@ public class LowerBody extends SaveableBodyPart {
 		super.type = value;
 		// Reset leg count
 		switch (value) {
-			case LOWER_BODY_TYPE_GOO:
-			case LOWER_BODY_TYPE_NAGA:
+			case AppearanceDefs.LOWER_BODY_TYPE_GOO:
+			case AppearanceDefs.LOWER_BODY_TYPE_NAGA:
 				legCount = 1;
 				break;
-			case LOWER_BODY_TYPE_BEE:
-			case LOWER_BODY_TYPE_BUNNY:
-			case LOWER_BODY_TYPE_CAT:
-			case LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS:
-			case LOWER_BODY_TYPE_DEMONIC_CLAWS:
-			case LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS:
-			case LOWER_BODY_TYPE_DOG:
-			case LOWER_BODY_TYPE_DRAGON:
-			case LOWER_BODY_TYPE_ECHIDNA:
-			case LOWER_BODY_TYPE_FERRET:
-			case LOWER_BODY_TYPE_FOX:
-			case LOWER_BODY_TYPE_HARPY:
-			case LOWER_BODY_TYPE_HUMAN:
-			case LOWER_BODY_TYPE_KANGAROO:
-			case LOWER_BODY_TYPE_LIZARD:
-			case LOWER_BODY_TYPE_RACCOON:
-			case LOWER_BODY_TYPE_SALAMANDER:
+			case AppearanceDefs.LOWER_BODY_TYPE_BEE:
+			case AppearanceDefs.LOWER_BODY_TYPE_BUNNY:
+			case AppearanceDefs.LOWER_BODY_TYPE_CAT:
+			case AppearanceDefs.LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS:
+			case AppearanceDefs.LOWER_BODY_TYPE_DEMONIC_CLAWS:
+			case AppearanceDefs.LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS:
+			case AppearanceDefs.LOWER_BODY_TYPE_DOG:
+			case AppearanceDefs.LOWER_BODY_TYPE_DRAGON:
+			case AppearanceDefs.LOWER_BODY_TYPE_ECHIDNA:
+			case AppearanceDefs.LOWER_BODY_TYPE_FERRET:
+			case AppearanceDefs.LOWER_BODY_TYPE_FOX:
+			case AppearanceDefs.LOWER_BODY_TYPE_HARPY:
+			case AppearanceDefs.LOWER_BODY_TYPE_HUMAN:
+			case AppearanceDefs.LOWER_BODY_TYPE_KANGAROO:
+			case AppearanceDefs.LOWER_BODY_TYPE_LIZARD:
+			case AppearanceDefs.LOWER_BODY_TYPE_RACCOON:
+			case AppearanceDefs.LOWER_BODY_TYPE_SALAMANDER:
 				legCount = 2;
 				break;
-			case LOWER_BODY_TYPE_CLOVEN_HOOFED:
-			case LOWER_BODY_TYPE_HOOFED:
+			case AppearanceDefs.LOWER_BODY_TYPE_CLOVEN_HOOFED:
+			case AppearanceDefs.LOWER_BODY_TYPE_HOOFED:
 				if (legCount != 4) legCount = 2;
 				break;
-			case LOWER_BODY_TYPE_PONY:
+			case AppearanceDefs.LOWER_BODY_TYPE_PONY:
 				legCount = 4;
 				break;
-			case LOWER_BODY_TYPE_CENTAUR: // deprecated value
+			case AppearanceDefs.LOWER_BODY_TYPE_CENTAUR: // deprecated value
 				legCount = 4;
-				type     = LOWER_BODY_TYPE_HOOFED;
+				type     = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
 				break;
-			case LOWER_BODY_TYPE_DEERTAUR:
+			case AppearanceDefs.LOWER_BODY_TYPE_DEERTAUR:
 				legCount = 4;
-				type     = LOWER_BODY_TYPE_CLOVEN_HOOFED;
+				type     = AppearanceDefs.LOWER_BODY_TYPE_CLOVEN_HOOFED;
 				break;
-			case LOWER_BODY_TYPE_DRIDER_LOWER_BODY:
+			case AppearanceDefs.LOWER_BODY_TYPE_DRIDER_LOWER_BODY:
 				legCount = 8;
 				break;
-			case LOWER_BODY_TYPE_PLANT_FLOWER:
+			case AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER:
 				legCount = 12;
 				break;
 		}
@@ -278,27 +277,27 @@ public class LowerBody extends SaveableBodyPart {
 		return "foot";
 	}
 	public function isDrider():Boolean {
-		return (type == LOWER_BODY_TYPE_DRIDER_LOWER_BODY);
+		return (type == AppearanceDefs.LOWER_BODY_TYPE_DRIDER_LOWER_BODY);
 	}
 	public function isGoo():Boolean {
-		return type == LOWER_BODY_TYPE_GOO;
+		return type == AppearanceDefs.LOWER_BODY_TYPE_GOO;
 	}
 	public function isBiped():Boolean {
 		return legCount == 2;
 	}
 	public function isNaga():Boolean {
-		return type == LOWER_BODY_TYPE_NAGA;
+		return type == AppearanceDefs.LOWER_BODY_TYPE_NAGA;
 	}
 
 	public function isTaur():Boolean {
 		// driders have genitals on their human part, inlike usual taurs... this is actually bad way to check, but too many places to fix just now
-		return legCount == 4 && type != LOWER_BODY_TYPE_PLANT_FLOWER;
+		return legCount == 4 && type != AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER;
 	}
 	public function isScylla():Boolean {
-		return type == LOWER_BODY_TYPE_SCYLLA;
+		return type == AppearanceDefs.LOWER_BODY_TYPE_SCYLLA;
 	}
 	public function isAlraune():Boolean {
-		return type == LOWER_BODY_TYPE_PLANT_FLOWER;
+		return type == AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER;
 	}
 	public function legs():String {
 		var select:Number = 0;
@@ -312,19 +311,19 @@ public class LowerBody extends SaveableBodyPart {
 			return num2Text(legCount) + " vine-like tentacle stamens";
 
 		switch (type) {
-			case LOWER_BODY_TYPE_HUMAN:
+			case AppearanceDefs.LOWER_BODY_TYPE_HUMAN:
 				return "legs";
-			case LOWER_BODY_TYPE_HOOFED:
+			case AppearanceDefs.LOWER_BODY_TYPE_HOOFED:
 				return "legs";
-			case LOWER_BODY_TYPE_DOG:
+			case AppearanceDefs.LOWER_BODY_TYPE_DOG:
 				return "legs";
-			case LOWER_BODY_TYPE_NAGA:
+			case AppearanceDefs.LOWER_BODY_TYPE_NAGA:
 				return "snake-like coils";
-			case LOWER_BODY_TYPE_GOO:
+			case AppearanceDefs.LOWER_BODY_TYPE_GOO:
 				return "mounds of goo";
-			case LOWER_BODY_TYPE_PONY:
+			case AppearanceDefs.LOWER_BODY_TYPE_PONY:
 				return "cute pony-legs";
-			case LOWER_BODY_TYPE_BUNNY: {
+			case AppearanceDefs.LOWER_BODY_TYPE_BUNNY: {
 				select = Math.floor(Math.random() * (5));
 				if (select == 0)
 					return "fuzzy, bunny legs";
@@ -335,7 +334,7 @@ public class LowerBody extends SaveableBodyPart {
 				else
 					return "legs";
 			}
-			case LOWER_BODY_TYPE_HARPY: {
+			case AppearanceDefs.LOWER_BODY_TYPE_HARPY: {
 				select = Math.floor(Math.random() * (5));
 				if (select == 0)
 					return "bird-like legs";
@@ -344,7 +343,7 @@ public class LowerBody extends SaveableBodyPart {
 				else
 					return "legs";
 			}
-			case LOWER_BODY_TYPE_FOX: {
+			case AppearanceDefs.LOWER_BODY_TYPE_FOX: {
 				select = Math.floor(Math.random() * (4));
 				if (select == 0)
 					return "fox-like legs";
@@ -355,14 +354,14 @@ public class LowerBody extends SaveableBodyPart {
 				else
 					return "vulpine legs";
 			}
-			case LOWER_BODY_TYPE_RACCOON: {
+			case AppearanceDefs.LOWER_BODY_TYPE_RACCOON: {
 				select = Math.floor(Math.random() * (4));
 				if (select == 0)
 					return "raccoon-like legs";
 				else
 					return "legs";
 			}
-			case LOWER_BODY_TYPE_CLOVEN_HOOFED: {
+			case AppearanceDefs.LOWER_BODY_TYPE_CLOVEN_HOOFED: {
 				select = Math.floor(Math.random() * (4));
 				if (select == 0)
 					return "pig-like legs";
@@ -378,11 +377,11 @@ public class LowerBody extends SaveableBodyPart {
 		}
 	}
 	override protected function loadFromOldSave(savedata:Object):void {
-		type = intOr(savedata.lowerBody,LOWER_BODY_TYPE_HUMAN);
-		if (type === LOWER_BODY_TYPE_CENTAUR) {
-			type = LOWER_BODY_TYPE_HOOFED;
-		} else if (type === LOWER_BODY_TYPE_DEERTAUR) {
-			type = LOWER_BODY_TYPE_CLOVEN_HOOFED;
+		type = intOr(savedata.lowerBody,AppearanceDefs.LOWER_BODY_TYPE_HUMAN);
+		if (type === AppearanceDefs.LOWER_BODY_TYPE_CENTAUR) {
+			type = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
+		} else if (type === AppearanceDefs.LOWER_BODY_TYPE_DEERTAUR) {
+			type = AppearanceDefs.LOWER_BODY_TYPE_CLOVEN_HOOFED;
 		}
 		legCount = intOr(savedata.legCount,2);
 	}

@@ -4,13 +4,12 @@
  */
 package classes.Scenes.Areas.Beach 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Areas.Desert.NagaScene;
-	
-	
-	public class Gorgon extends Monster
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Areas.Desert.NagaScene;
+import classes.internals.*;
+
+public class Gorgon extends Monster
 	{
 		public var nagaScene:NagaScene = new NagaScene(true);
 		
@@ -24,7 +23,7 @@ package classes.Scenes.Areas.Beach
 			if(pcCameWorms){
 				outputText("\n\nThe gorgon's eyes go wide and she turns to leave, no longer interested in you.");
 				player.orgasm();
-				doNext(game.cleanupAfterCombat);
+				doNext(cleanupAfterCombat);
 			} else {
 				nagaScene.nagaFUCKSJOOOOOO();
 			}
@@ -95,7 +94,6 @@ package classes.Scenes.Areas.Beach
 				else player.takeDamage(15+rand(15));
 				player.takeDamage(15+rand(15));
 			}
-			combatRoundOver();
 		}
 		
 		public function gorgonConstrict():void {
@@ -104,7 +102,6 @@ package classes.Scenes.Areas.Beach
 			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
 				player.takeDamage(4+rand(8));
 			}
-			combatRoundOver();
 		}
 		
 		public function TailWhip():void {
@@ -126,7 +123,6 @@ package classes.Scenes.Areas.Beach
 				damage += rand(25);
 				damage = player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		
 		public function petrify():void {
@@ -134,7 +130,6 @@ package classes.Scenes.Areas.Beach
 			player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 			createStatusEffect(StatusEffects.AbilityCooldown1, 3, 0, 0, 0);
 			if (player.hasStatusEffect(StatusEffects.NagaBind)) player.removeStatusEffect(StatusEffects.NagaBind);
-			combatRoundOver();
 		}
 		
 		public function Gorgon() 
@@ -144,17 +139,17 @@ package classes.Scenes.Areas.Beach
 			this.imageName = "gorgon";
 			this.long = "You are fighting a gorgon. She resembles a slender woman from the waist up, with green scale covered hair hanging down to her neck. Her whole body is covered with shiny green scales, striped in a pattern reminiscent of the dunes around you. Instead of bifurcating into legs, her hips elongate into a snake's body which stretches far out behind her, leaving a long and curving trail in the sand.  She's completely naked, with her round D-cup breasts showing in plain sight. In her mouth you can see a pair of sharp, venomous fangs and a long forked tongue moving rapidly as she hisses at you.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 60, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("D"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = 6*12+2;
-			this.hipRating = HIP_RATING_AMPLE+2;
-			this.buttRating = BUTT_RATING_LARGE;
-			this.lowerBody = LOWER_BODY_TYPE_NAGA;
-			this.skin.growCoat(SKIN_COAT_SCALES,{color:"green"});
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_NAGA;
+			this.skin.growCoat(AppearanceDefs.SKIN_COAT_SCALES,{color:"green"});
 			this.hairColor = "green";
 			this.hairLength = 16;
 			initStrTouSpeInte(91, 125, 110, 75);
@@ -174,7 +169,7 @@ package classes.Scenes.Areas.Beach
 					add(null,1).
 					add(consumables.REPTLUM,5).
 					add(consumables.GORGOIL,4);
-			this.faceType = FACE_SNAKE_FANGS;
+			this.faceType = AppearanceDefs.FACE_SNAKE_FANGS;
 			checkMonster();
 		}
 		

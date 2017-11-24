@@ -1,4 +1,5 @@
 package classes.StatusEffects.Combat {
+import classes.EngineCore;
 import classes.StatusEffectType;
 
 public class ParalyzeVenomDebuff extends CombatBuff {
@@ -11,7 +12,7 @@ public class ParalyzeVenomDebuff extends CombatBuff {
 
 	override public function onRemove():void {
 		if (playerHost) {
-			game.outputText("<b>You feel quicker and stronger as the paralyzation venom in your veins wears off.</b>\n\n");
+			EngineCore.outputText("<b>You feel quicker and stronger as the paralyzation venom in your veins wears off.</b>\n\n");
 		}
 	}
 

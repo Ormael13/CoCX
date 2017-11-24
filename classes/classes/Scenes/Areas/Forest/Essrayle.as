@@ -1,8 +1,8 @@
 ﻿package classes.Scenes.Areas.Forest{
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
 
-	public class Essrayle extends BaseContent{
+public class Essrayle extends BaseContent{
 
 	public function Essrayle()
 	{
@@ -150,7 +150,7 @@ private function plantsForMe2(BE:int = 0):void {
 	outputText(" and pulls you close, forcing your [legs] against her bulb.  They sink in slightly as you go down, reluctantly relinquishing her nipple from your mouth.  As it springs free, a thick glob of sap splatters over your lips and nose.  Essy giggles softly as she wipes them off with a hand.");
 	
 	outputText("\n\n\"<i>I'm glad you enjoy me, sweetie, I really want to enjoy more with you, but I need it so bad right now!</i>\" Essy whines, her shivering, fat breasts jiggling about as she does.  A multitude of vine-like tentacles burst from her back flower and arc about her, coiling about your arms, waist, ");
-	if(player.tailType > TAIL_TYPE_NONE) outputText("tail, ");
+	if(player.tailType > AppearanceDefs.TAIL_TYPE_NONE) outputText("tail, ");
 	outputText("and [legs], ");
 	if(!player.isTaur()) outputText("lifting you slowly into the air");
 	else outputText("forcing you to rear up");
@@ -247,7 +247,7 @@ public function approachTrappedEssy():void {
 		
 		outputText("\n\nA pair of ethereal hands deepens their kneading strokes as they pump the girl's enormous, gushing breasts, the flush of her lilac blush spreading from her cheeks all the way down to her chest. The hyacinth hue purples her green skin and brings a deep, violet blush to Essrayle's spasming nipples, her bovid moaning becoming louder, shorter, and higher pitched.  Amidst this wanton display she manages to gasp out a word now and then, trying to communicate through the suffocating haze of her lactation-induced climaxes.  It takes some time - punctuated by keening sounds of bliss, the constant torrent of fountaining milk, and gushing spray of femme-cum from the bulbous, scarlet bud between her legs - but you gather that she's explaining how too much stimulation leaves her too weak to escape her pot.");
 		
-		outputText("\n\nThe ensorcelled hands eventually fade away, allowing the plant to slump in utter exhaustion, skin shimmering with the milk-like sap she's covered herself in. The soil around her hips shifts and she slowly rouses, her breasts already refilling before your eyes. You can understand why the Sand Witches would want to keep the plant girl - the bounty of her vernal breasts seems endless! They must've planted her and gone to get help moving the leafy cow, safe in the knowledge she wouldn't be leaving on her own power any time soon.")
+		outputText("\n\nThe ensorcelled hands eventually fade away, allowing the plant to slump in utter exhaustion, skin shimmering with the milk-like sap she's covered herself in. The soil around her hips shifts and she slowly rouses, her breasts already refilling before your eyes. You can understand why the Sand Witches would want to keep the plant girl - the bounty of her vernal breasts seems endless! They must've planted her and gone to get help moving the leafy cow, safe in the knowledge she wouldn't be leaving on her own power any time soon.");
 	
 		outputText("\n\nThe two of you sit there and try to figure a way out of the mess she's gotten herself into, though you can't be sure if there's an ulterior motive to your lingering or not.  Talking is slow as she has to fight through lingering waves of pleasure - the ghostly hands tenderized her titanic tits so thoroughly that even a light breeze is enough to send orgasmic bliss through her loins.  Thankfully, none of the sand witches comes to investigate all the noise, though judging by the tracks on the ground around you, more than a few of them have paid Essy a social call before you found her.");
 		

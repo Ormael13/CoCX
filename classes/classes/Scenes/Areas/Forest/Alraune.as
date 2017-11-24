@@ -4,11 +4,13 @@
  */
 package classes.Scenes.Areas.Forest 
 {
-	import classes.*;
-	import classes.GlobalFlags.*;
-	import classes.internals.ChainedDrop;
+import classes.*;
+import classes.GlobalFlags.*;
+import classes.Scenes.Holidays;
+import classes.Scenes.SceneLib;
+import classes.internals.ChainedDrop;
 
-	public class Alraune extends Monster
+public class Alraune extends Monster
 	{
 		public function trapLevel(adjustment:Number = 0):Number {
 			if(!hasStatusEffect(StatusEffects.Level)) createStatusEffect(StatusEffects.Level,6,0,0,0);
@@ -23,17 +25,16 @@ package classes.Scenes.Areas.Forest
 		public function alrauneWait():void {
 			clearOutput();
 			outputText("You struggle against ");
-			if (game.isHalloween()) outputText("Jack-O-Raune");
+			if (Holidays.isHalloween()) outputText("Jack-O-Raune");
 			else outputText("the alraune");
 			outputText(" vines, forcefully pulling yourself a good distance away from her.\n\n");
 			trapLevel(2);
 			player.fatigue += 50;
-			doAI();
 		}
 		
 		public function alraunePollenCloud():void {
 			clearOutput();
-			if (game.isHalloween()) outputText("Jack-O-Raune");
+			if (Holidays.isHalloween()) outputText("Jack-O-Raune");
 			else outputText("The alraune");
 			outputText(" giggles as she unleashes a thick cloud of pollen in your general direction.\n\n");
 			outputText("\"<i>Just give in to me. I will make it so pleasurable for you.</i>\"\n\n");
@@ -43,10 +44,10 @@ package classes.Scenes.Areas.Forest
 		
 		public function alrauneStrangulate():void {
 			clearOutput();
-			if (game.isHalloween()) outputText("Jack-O-Raune");
+			if (Holidays.isHalloween()) outputText("Jack-O-Raune");
 			else outputText("The alraune");
 			outputText("’s vines suddenly wrap tight around your neck and strangle you, preventing you from pronouncing any incantations. The ");
-			if (game.isHalloween()) outputText("pumpkin");
+			if (Holidays.isHalloween()) outputText("pumpkin");
 			else outputText("plant");
 			outputText(" woman gives you an annoyed glare.");
 			outputText("\"<i>I’m done with your magic. Be a good " + player.mf("boy", "girl") + " and just give in.</i>\"");
@@ -57,13 +58,13 @@ package classes.Scenes.Areas.Forest
 		public function alrauneTeaseAttack():void {
 			clearOutput();
 			if (rand(2) == 1) {
-				if (game.isHalloween()) outputText("Jack-O-Raune");
+				if (Holidays.isHalloween()) outputText("Jack-O-Raune");
 				else outputText("The alraune");
 				outputText(" parts her grass-like hair away to reveal her supple breasts, moving her other hand to her nectar drenched pussy then back to her mouth. She sensually licks her fingers clean, then blows you a kiss.\n\n");
 				outputText("\"<i>Don’t you want a taste of what my lovely body can offer? It is all yours to play with, all you need to do is give in to me.</i>\"\n\n");
 			}
 			else {
-				if (game.isHalloween()) outputText("Jack-O-Raune");
+				if (Holidays.isHalloween()) outputText("Jack-O-Raune");
 				else outputText("The alraune");
 				outputText(" grabs some of her nectar suggestively, letting it flow all over her breast, thigh and even in her hair.\n\n");
 				outputText("\"<i>Mmmmmmm I so love being covered in sticky fluids. How about you?</i>\"\n\n");
@@ -100,7 +101,7 @@ package classes.Scenes.Areas.Forest
 			if (hasStatusEffect(StatusEffects.Level)) {
 				if (!hasStatusEffect(StatusEffects.Stunned) && player.hasStatusEffect(StatusEffects.CastedSpell)) alrauneStrangulate();
 				else {
-					if (game.isHalloween()) {
+					if (Holidays.isHalloween()) {
 						var choice1:Number = rand(3);
 						if (choice1 == 0) alrauneTeaseAttack();
 						if (choice1 == 1) {
@@ -123,25 +124,24 @@ package classes.Scenes.Areas.Forest
 					trapLevel(-1);
 				}
 				else removeStatusEffect(StatusEffects.Climbed);
-				combatRoundOver();
 			}
 			else super.performCombatAction();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.forest.alrauneScene.alrauneDeepwoodsWon();
+			SceneLib.forest.alrauneScene.alrauneDeepwoodsWon();
 		}
 
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			game.forest.alrauneScene.alrauneDeepwoodsLost();
+			SceneLib.forest.alrauneScene.alrauneDeepwoodsLost();
 		}
 		
 		public function Alraune() 
 		{
 			super();
-			if (game.isHalloween()) {
+			if (Holidays.isHalloween()) {
 				this.a = "";
 				this.short = "Jack-O-Raune";
 				this.long = "You are fighting against a Jack-O-Raune, an intelligent plant with the torso of a woman and the lower body of a giant pumpkin with snaking tentacle vines. She seems really keen on raping you.";
@@ -156,14 +156,14 @@ package classes.Scenes.Areas.Forest
 				this.hairColor = "dark green";
 			}
 			this.imageName = "alraune";
-			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_GAPING);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_GAPING);
 			createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = rand(14) + 59;
-			this.hipRating = HIP_RATING_CURVY+3;
-			this.buttRating = BUTT_RATING_EXPANSIVE;
-			this.lowerBody = LOWER_BODY_TYPE_PLANT_FLOWER;
+			this.hipRating = AppearanceDefs.HIP_RATING_CURVY+3;
+			this.buttRating = AppearanceDefs.BUTT_RATING_EXPANSIVE;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER;
 			this.hairLength = 6;
 			initStrTouSpeInte(10, 100, 10, 60);
 			initWisLibSensCor(60, 100, 50, 0);
@@ -179,7 +179,7 @@ package classes.Scenes.Areas.Forest
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 24;
 			this.gems = rand(20) + 5;
-			this.drop = new ChainedDrop().add(consumables.MARAFRU, 1 / 6)
+			this.drop = new ChainedDrop().add(consumables.MARAFRU, 1 / 6);
 				//	.add(consumables.W__BOOK, 1 / 4)
 				//	.add(consumables.BEEHONY, 1 / 2)
 				//	.elseDrop(useables.B_CHITN);

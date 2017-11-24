@@ -3,6 +3,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.ItemType;
 import classes.Items.Armor;
+import classes.Scenes.SceneLib;
 
 public class YvonneArmorShop extends Shop {
     public function YvonneArmorShop() {
@@ -29,7 +30,7 @@ public class YvonneArmorShop extends Shop {
         addButton(10,   shields.TOWERSH.shortName,  confirmBuy, shields.TOWERSH);
 
         if (player.hasKeyItem("Dragon Eggshell") >= 0 && player.gems >= 200) {
-            addButton(12, "Eggshell", kGAMECLASS.emberScene.getSomeStuff);
+            addButton(12, "Eggshell", SceneLib.emberScene.getSomeStuff);
         }
         addButton(13, "Flirt", yvonneFlirt);
         addButton(14, "Leave", telAdre.telAdreMenu);

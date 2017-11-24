@@ -4,16 +4,17 @@
  */
 package classes.Scenes.NPCs 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	
-	use namespace kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
+
+use namespace kGAMECLASS;
 	
 	public class Etna extends Monster
 	{
-		public var etnaScene:EtnaFollower = game.etnaScene;
+		public var etnaScene:EtnaFollower = SceneLib.etnaScene;
 
 		public function moveClawCombo():void {
 			createStatusEffect(StatusEffects.Attacks, 2, 0, 0, 0);
@@ -102,7 +103,6 @@ package classes.Scenes.NPCs
 				if (choice > 4 && choice < 8) moveTailSpike();
 				if (choice > 7) moveTakeFlight();
 			}
-			combatRoundOver();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
@@ -208,15 +208,15 @@ package classes.Scenes.NPCs
 				this.bonusHP = 250;
 				this.level = 72;
 			}
-			createVagina(true,VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_TIGHT);
+			createVagina(true,AppearanceDefs.VAGINA_WETNESS_NORMAL,AppearanceDefs.VAGINA_LOOSENESS_TIGHT);
 			this.createStatusEffect(StatusEffects.BonusVCapacity,60,0,0,0);
 			createBreastRow(Appearance.breastCupInverse("E"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,20,0,0,0);
 			this.tallness = 72;
-			this.hipRating = HIP_RATING_CURVY+2;
-			this.buttRating = BUTT_RATING_LARGE+1;
+			this.hipRating = AppearanceDefs.HIP_RATING_CURVY+2;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE+1;
 			this.skinTone = "light";
 			this.hairColor = "red";
 			this.hairLength = 13;
@@ -232,11 +232,11 @@ package classes.Scenes.NPCs
 					add(armors.S_SWMWR,1/12).
 					add(consumables.L_DRAFT,1/4).
 					add(consumables.MANTICV,0.7);
-			this.wingType = WING_TYPE_MANTICORE_LIKE_LARGE;
-			this.rearBody = REAR_BODY_LION_MANE;
-			this.armType = ARM_TYPE_LION;
-			this.lowerBody = LOWER_BODY_TYPE_LION;
-			this.tailType = TAIL_TYPE_MANTICORE_PUSSYTAIL;
+			this.wingType = AppearanceDefs.WING_TYPE_MANTICORE_LIKE_LARGE;
+			this.rearBody = AppearanceDefs.REAR_BODY_LION_MANE;
+			this.armType = AppearanceDefs.ARM_TYPE_LION;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_LION;
+			this.tailType = AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL;
 			this.tailRecharge = 0;
 			if (flags[kFLAGS.ETNA_FOLLOWER] > 1 || flags[kFLAGS.ETNA_TALKED_ABOUT_HER] > 1) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);

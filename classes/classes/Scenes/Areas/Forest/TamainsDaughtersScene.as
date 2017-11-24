@@ -1,9 +1,10 @@
 ﻿package classes.Scenes.Areas.Forest{
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
-	public class TamainsDaughtersScene extends BaseContent implements TimeAwareInterface {
+public class TamainsDaughtersScene extends BaseContent implements TimeAwareInterface {
 
 //New Status:
 //+Tamani's Husband – (Still need too big loss scene and centaur version)
@@ -52,7 +53,7 @@
 		public function TamainsDaughtersScene()
 		{
 			pregnancy = new PregnancyStore(kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_TYPE, kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN, 0, 0);
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 
 		//Implementation of TimeAwareInterface
@@ -184,7 +185,7 @@ private function fightTamanisDaughters():void {
 private function fuckYoDaughtersHomie():void {
 	spriteSelect(57);
 	flags[kFLAGS.TIMES_FUCKED_TAMANIS_DAUGHTERS]++;
-	var cocks:Number = player.totalCocks();
+	var cocks:Number = player.cockTotal();
 	var daughters:Number = int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 2);
 	
 	clearOutput();
@@ -251,7 +252,7 @@ private function fuckYoDaughtersHomie():void {
 		
 			if (tamaniPresent) {
 				outputText("Tamani pushes the slut on your face off and plants herself there, smearing your [face] with a mixture of cum and vaginal wetness.  ");
-				if (kGAMECLASS.forest.tamaniScene.pregnancy.isPregnant) {
+				if (SceneLib.forest.tamaniScene.pregnancy.isPregnant) {
 					outputText("She rubs her pregnancy swollen belly");
 				}
 				else outputText("She fondles her nipples");
@@ -353,18 +354,18 @@ private function fuckYoDaughtersHomie():void {
 	player.orgasm();
 	dynStats("lib", 1, "cor", 1);
 	//Knock the bitches up, boost libido, corruption
-	if (tamaniPresent) kGAMECLASS.forest.tamaniScene.tamaniKnockUp(); //If she wasn't pregnant she will be now
+	if (tamaniPresent) SceneLib.forest.tamaniScene.tamaniKnockUp(); //If she wasn't pregnant she will be now
 	knockUpDaughters();
 	player.cumMultiplier += .3;
-	if (getGame().inCombat) cleanupAfterCombat();
-	else doNext(camp.returnToCampUseFourHours);
+    if (kGAMECLASS.inCombat) cleanupAfterCombat();
+    else doNext(camp.returnToCampUseFourHours);
 }
 
 //[Let them]
 private function legTamanisDaughtersRAEPYou():void {
 	spriteSelect(57);
 	flags[kFLAGS.TIMES_FUCKED_TAMANIS_DAUGHTERS]++;
-	var cocks:Number = player.totalCocks();
+	var cocks:Number = player.cockTotal();
 	var daughters:Number = int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 2);
 	//Find a dick that fits
 	var primary:Number = player.cockThatFits(50);	
@@ -445,7 +446,7 @@ private function legTamanisDaughtersRAEPYou():void {
 			//increase hypno value
 			flags[kFLAGS.TAMANI_TIMES_HYPNOTISED]++;
 			//preggo up tamani
-			kGAMECLASS.forest.tamaniScene.tamaniKnockUp();
+			SceneLib.forest.tamaniScene.tamaniKnockUp();
 		}
 		//NO TAMANI:  
 		else {
@@ -699,7 +700,7 @@ private function legTamanisDaughtersRAEPYou():void {
 
 			outputText("Your mistress steps away, swaying her more-than ample hips from side to side as she saunters off.  You shake your head, feeling a little out of sorts, but before you get a chance to puzzle it out, the exhaustion of the encounter overwhelms you, blacking you out.");
 			//knock up tamani chance
-			kGAMECLASS.forest.tamaniScene.tamaniKnockUp();
+			SceneLib.forest.tamaniScene.tamaniKnockUp();
 			//increase hypno value
 			flags[kFLAGS.TAMANI_TIMES_HYPNOTISED]++;
 		}
@@ -707,10 +708,10 @@ private function legTamanisDaughtersRAEPYou():void {
 	//knock bitches up, slight libido gain, slight strength/toughness loss.
 	player.orgasm();
 	dynStats("str", -.5,"int", -.5, "lib", 1, "cor", 1);
-	if (tamaniPresent) kGAMECLASS.forest.tamaniScene.tamaniKnockUp(); //If she wasn't pregnant she will be now
+	if (tamaniPresent) SceneLib.forest.tamaniScene.tamaniKnockUp(); //If she wasn't pregnant she will be now
 	knockUpDaughters();
-	if (getGame().inCombat) cleanupAfterCombat();
-	else doNext(camp.returnToCampUseFourHours);
+    if (kGAMECLASS.inCombat) cleanupAfterCombat();
+    else doNext(camp.returnToCampUseFourHours);
 }
 
 //[Lose Combat, Get Your Dick DRAINED]
@@ -720,7 +721,7 @@ private function tamaniDaughtersCombatLossDrain():void {
 	clearOutput();
 	
 	//Vars
-	var cocks:Number = player.totalCocks();
+	var cocks:Number = player.cockTotal();
 	var daughters:Number = int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 2);
 
 	outputText("Your efforts to resist were in vain – there's simply too many of your slutty daughters to fight off.  The crowd flows over your ");
@@ -871,12 +872,12 @@ private function tamaniDaughtersYesBadEndMePlease():void {
 	spriteSelect(57);
 	clearOutput();
 	outputText("\"<i>Wonderful!</i>\" cries the excited pregnant slut.   She gives you a quick peck on the cheek as she prances back over to the machine.  You brace yourself in anticipation, eager to lose yourself to an eternal orgasm.  A switch clicks, and a dial whirs as it's turned up to the maximum.  The fluids pumping into your backside and directly into your veins suddenly jump in pressure, stinging painfully for a moment before the pleasure returns.  Your eyes slowly roll back, your jaw goes slack, and your [cocks] spew");
-	if(player.totalCocks() == 1) outputText("s");
+	if(player.cockTotal() == 1) outputText("s");
 	outputText(" cum into the tubes.\n\n");
 	if(player.statusEffectv1(StatusEffects.Exgartuan) == 1) outputText("Exgartuan moans, \"<i>Ohhhhhh yeeeeaaaaahhhh...</i>\" before slipping into silence.\n\n");
 	
 	outputText("You spend the rest of your life trapped in orgasm, constantly feeding the growth of what becomes the biggest goblin tribe in all the land of Mareth.  Even when every single one of them is pregnant, they let you enjoy your reward.  Over time your capacity for memory, morals, or anything other feeling besides pleasure dwindles.  Trapped in a heaven of your own choosing, you gave up everything that you were for never-ending bliss.");
-	getGame().gameOver();
+	EventParser.gameOver();
 }
 
 //[NO]
@@ -913,7 +914,7 @@ private function tamanisDaughtersFillIndividuallyBADEND():void {
 	outputText("A cheer reverberates off the ceiling as your daughters crowd around you, pressing their buxom chests and rounded backsides against you.  You're led to a secluded corner and fed food and strange drinks, while being kept incredibly horny for hours as you await Tamani's return.  True to her word, your daughter is on top of you in a flash once the clan's matriarch enters the room, and you're helpless to do anything but submit to her velvet pussy.  You cum loudly and messily, creaming her walls and flooding the area around you with spunk while Tamani is forced to watch with a jealous look on her face.\n\n");
 	
 	outputText("The rest of your life continues on in a similar fashion – you're kept happily fed, full, and pleasured by your hundreds of pregnant wives as your harem grows.  There's no shortage of sex, and no shortage of desire thanks to your wives' alchemical talents.  Within the span of a month you've utterly forgotten about your quest – it's hard to focus on anything but cuddling with your wives and daughters while you await your next fuck.");
-	getGame().gameOver();
+	EventParser.gameOver();
 }
 
 //[Lose to Daughters With Tamani There]
@@ -928,7 +929,7 @@ private function loseToDaughtersWithTamaniThere():void {
 	if(player.HP < 1) outputText("Lying in the dirt, too hurt to fight back, you can only tremble in anticipation of what pleasures they're going to force upon you this time.");
 	else {
 		outputText("Lying back in the dirt, you're too hard to fight back.  You stroke ");
-		if(player.totalCocks() > 1) outputText("one of ");
+		if(player.cockTotal() > 1) outputText("one of ");
 		outputText("your trembling [cocks], feeling it leak pre-cum in anticipation of getting to knock up some of these beautiful curvy women.");
 	}
 	outputText("  Tamani pushes her way to the front of the pack, her daughters looking disappointed but yielding to their mother's authority for the time being.  She walks over to you, stepping over your fallen form and uncorking a a potion.  You grunt as she drops her jiggling ass down on your ");
@@ -944,7 +945,7 @@ private function loseToDaughtersWithTamaniThere():void {
 	outputText("Tamani rubs your temples soothingly as your [face] creases with worry and reassures you, \"<i>Don't worry, this will wear off soon.  This drug just shuts down your mind so it'll be nice and open to suggestion.  You can feel how hard it is to think, can't you?  Every time you muster up a thought it gets caught up in the little pink clouds and whisked away.  Don't bother, just relax and listen to Tamani's voice.</i>\"\n\n");
 	
 	outputText("She reaches into your [armor] to rub ");
-	if(player.totalCocks() > 1) outputText("one of ");
+	if(player.cockTotal() > 1) outputText("one of ");
 	outputText("your [cocks], casually stroking the hard member as she pivots around to explain, \"<i>You get so hard for Mistress Tamani, don't you?  ");
 	if(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] > 10) outputText("Your body must remember how much it loves being my pussy-hungry husband.");
 	else outputText("That's because your body knows how hot and moist Tamani's pussy is and how much you want to service it.");
@@ -953,7 +954,7 @@ private function loseToDaughtersWithTamaniThere():void {
 	outputText("Of course she's right – you can feel her wetness on your chest and you want to bury your face in it while she strokes you.  Tamani watches your eyes and turns to give you a better view, presenting her snatch while she leans back to stroke you.  She titters, \"<i>Yes, get a good look at your wife's cunt.  It looks so delicious, so warm, so inviting.  You want nothing more than to bury your cock or face into it, don't you?  That's because it's your wife's cunt, and you're a good husband.</i>\"\n\n");
 	
 	outputText("Her hand starts stroking you faster and her juices start to drip down the sides of your torso");
-	if(player.skinType == SKIN_TYPE_FUR) outputText(", matting your [skin coat.color] fur");
+	if(player.skinType == AppearanceDefs.SKIN_TYPE_FUR) outputText(", matting your [skin coat.color] fur");
 	outputText(" as she continues ");
 	if(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] < 10) outputText("filling your mind with truths");
 	else outputText("reinforcing your image of yourself as an obedient husband");
@@ -1001,7 +1002,7 @@ private function loseToDaughtersWithTamaniThere():void {
 		outputText("Thankfully, the hungry goblin twat is able to devour your [cock] with ease.  Those pliable, fluid-slicked cunt-walls clench ever-so-tightly around you");
 		if(player.biggestCockArea() < 30) outputText(" in spite of the large sizes they usually handle.");
 		else outputText("r large size.");
-		if(player.totalCocks() > 1) {
+		if(player.cockTotal() > 1) {
 			outputText("  You grunt happily as your daughters begin to slide up and down your lengths, moaning lewdly with every wet squelch that escapes their drooling pussies.  Thanks to the drugs, the writhing form of your sexy daughters, and the desire to be a good patriarch for your family, you get off in no time.  You cry out and twitch, seeding your daughters' womb with spunk, treating them just like their mother now that they're all grown up.");
 			if(player.cumQ() > 700) outputText("  It gets everywhere as their wombs fail to contain your massive load, even after you've bloated their bellies with the stuff.");
 			if(player.cumQ() > 2000) outputText("  After a few more seconds the puddle from before gets even deeper, and your daughters kindly prop up your head to keep you from drowning in the jism pool.");
@@ -1017,13 +1018,13 @@ private function loseToDaughtersWithTamaniThere():void {
 	}
 	//Chance of tamani pregnancy, chance of daughter preggers
 	knockUpDaughters();
-	kGAMECLASS.forest.tamaniScene.tamaniKnockUp();
+	SceneLib.forest.tamaniScene.tamaniKnockUp();
 	flags[kFLAGS.TAMANI_TIMES_HYPNOTISED]++;
 	//daughter countdown reset. 
 	player.orgasm();
 	dynStats("str", -.5,"int", -.5, "lib", 1, "sen", 1, "cor", 1);
-	if (getGame().inCombat) cleanupAfterCombat();
-	else doNext(camp.returnToCampUseOneHour);
+    if (kGAMECLASS.inCombat) cleanupAfterCombat();
+    else doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -1073,7 +1074,7 @@ internal function loseToDaughters():void {
 	if(player.lust >= player.maxLust()) {
 		//worms r gross mmmmkay?
 		if(player.hasStatusEffect(StatusEffects.Infested)) {
-			kGAMECLASS.mountain.wormsScene.infestOrgasm();
+			SceneLib.mountain.wormsScene.infestOrgasm();
 			outputText("\n\nThe goblins sigh and say, \"<i>Dad, that's just gross.  Don't get me wrong, we're still gonna have you knock us up, but I hate the feeling of those worms inside me.</i>\"");
 			player.orgasm();
 		}

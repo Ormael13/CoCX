@@ -1,10 +1,11 @@
 ﻿package classes.Scenes.Areas.HighMountains
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.internals.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
 
-	public class Harpy extends Monster
+public class Harpy extends Monster
 	{
 
 //*Note, special attack one is an idea based on Ceraph.
@@ -37,7 +38,6 @@
 					HP -= 20;
 				}
 			}
-			combatRoundOver();
 		}
 
 		//(Harpy special attack 2, lust increase)
@@ -45,7 +45,6 @@
 		{
 			outputText("The harpy charges at you carelessly, her body striking you with the full weight of her motherly hips.  The pair of you go crashing backwards onto the ground.  You grapple with her weighty ass, trying your best not to think dirty thoughts, but the way she's maniacally flapping and writhing her curvy body against you makes it impossible! After a brief, groping wrestle on the ground, she pushes you away and takes flight again.");
 			player.dynStats("lus", (12 + rand(player.sens / 5)));
-			combatRoundOver();
 		}
 
 
@@ -61,7 +60,7 @@
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.highMountains.harpyScene.harpyVictoryuuuuu();
+			SceneLib.highMountains.harpyScene.harpyVictoryuuuuu();
 		}
 
 
@@ -69,9 +68,9 @@
 		{
 			if (pcCameWorms) {
 				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
-				game.highMountains.harpyScene.harpyLossU();
+				SceneLib.highMountains.harpyScene.harpyLossU();
 			}
 		}
 
@@ -98,16 +97,16 @@
 			this.imageName = "harpy";
 			this.long = "You are fighting a tall, deranged harpy. She appears very human, about six feet six inches tall but covered in a fine layer of powder-blue down. Her arms are sinewy and muscular, with a long web connecting them to her ample hips, covered in stringy blue feathers to aid her flight. A larger pair of powdery-blue wings also protrudes from her shoulder blades, flapping idly. She appears quite deranged as she circles you, approaching and backing away erratically. Her face is quite beautiful, with fine lilac makeup adorning the features of a handsome woman, and her lips are traced with rich golden lipstick. As she circles you, squawking frantically and trying to intimidate you, your eyes are drawn to her slender torso and small, pert breasts, each the size of a small fruit and covered in a layer of the softest feathers which ripple and move with the gusts from her wings. As astounding as her breasts are, her egg-bearing hips are even more impressive.  They're twice as wide as her torso, with enormous, jiggling buttocks where her huge, meaty thighs are coming up to meet them. Her legs end in three-pronged talons; their shadowy black curves glinting evilly in the light.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_GAPING_WIDE);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLICK, AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("B"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,20,0,0,0);
 			this.tallness = 6*12+6;
-			this.hipRating = HIP_RATING_INHUMANLY_WIDE;
-			this.buttRating = BUTT_RATING_EXPANSIVE;
-			this.lowerBody = LOWER_BODY_TYPE_HARPY;
+			this.hipRating = AppearanceDefs.HIP_RATING_INHUMANLY_WIDE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_EXPANSIVE;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HARPY;
 			this.skin.setBaseOnly({color:"pink"});
 			this.skinDesc = "feathers";
 			this.hairColor = "blue";
@@ -128,7 +127,7 @@
 			this.gems = 30 + rand(14);
 			this.drop = new ChainedDrop().add(armors.W_ROBES,1/10)
 					.elseDrop(consumables.GLDSEED);
-			this.wingType = WING_TYPE_HARPY;
+			this.wingType = AppearanceDefs.WING_TYPE_HARPY;
 			this.special1 = harpyUberCharge;
 			this.special2 = harpyTease;
 			this.createStatusEffect(StatusEffects.Flying,50,0,0,0);

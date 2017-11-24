@@ -3,10 +3,10 @@
  */
 package classes.Scenes.Areas.Lake
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
 
-	public class FetishCultistScene extends AbstractLakeContent
+public class FetishCultistScene extends AbstractLakeContent
 	{
 		public function FetishCultistScene()
 		{
@@ -48,7 +48,7 @@ package classes.Scenes.Areas.Lake
 			//ZOOKEEPER RAEPS.  WEIRDOZ
 			if (player.isTaur() || player.isNaga()) {
 				//Special centaur version by Astronomy
-				if (player.lowerBody == LOWER_BODY_TYPE_HOOFED && player.balls > 0 && player.totalCocks() > 0 && rand(4) < 3) {
+				if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HOOFED && player.balls > 0 && player.cockTotal() > 0 && rand(4) < 3) {
 					if (player.cocks[0].cockType == CockTypesEnum.HORSE) {
 						outputText("The entrance door to the stables swings open. Standing there is the familiar sight of your favorite zookeeper.  She's wearing overalls and a plain, dirt marked t-shirt, but you notice the overalls have the familiar logo of the zoo – your home.  You can make out a part of the logo says  \"Featsy's Slutty Beast Zoo - Zoo Keeper\" on it. As she walks into the stables, you see she's carrying a small stool with her, a sight that fills you with anticipation. You watch her walk down the aisle in between all the stable stands, glancing between all the zoo's pet centaurs, yourself included.  Most of them are male and you can even see the odd herm going by her big pair of tits and large set of balls with a dangling cock. The zookeeper smiles lustfully as she looks from side to side at the different centaurs available. As she slowly walks towards you, you can't help but hope that she'll choose you for today's 'treatment'.  To your immense delight, you see that the girl has stopped in front of you.  You try to move but the ropes holding you in place arrest your movement.  The omnipresent weight of your cock as it dangles between your legs grows heavier and heavier as your body remembers the zookeeper.  The girl steps into your stand, closing the door behind her.  As you look at her, you can see her face is blushing red, and her eyes are clearly fixated on your [cock] and [balls].\n\n");
 
@@ -150,9 +150,9 @@ package classes.Scenes.Areas.Lake
 					//boy's surprise
 					else if (player.gender == 1) {
 						outputText("and to your shame, you feel ");
-						if (player.totalCocks() > 1) outputText("each of ");
+						if (player.cockTotal() > 1) outputText("each of ");
 						outputText("your [cocks] poke out of your pelvic slit, growing to full erectness.  You strain against your bonds, desperate to bring release to ");
-						if (player.totalCocks() > 1) outputText("each of ");
+						if (player.cockTotal() > 1) outputText("each of ");
 						outputText("your [cocks], but there is nothing you can do and you keeper laughs at you.  \"<i>Oh so eager to bury that eager cock of yours inside my snatch?  Too bad, I'm the one who gets to choose what goes in there, and it's not your cock.</i>\" she says to you, clearly enjoying the frustration you're going through.\n\n");
 					}
 					//girl's surprise
@@ -162,7 +162,7 @@ package classes.Scenes.Areas.Lake
 					//herm's frustrations
 					else {
 						outputText("and with a shudder you feel your pelvic slit open up so that your " + vaginaDescript(0) + " is exposed and ");
-						if (player.totalCocks() > 1) outputText("each of ");
+						if (player.cockTotal() > 1) outputText("each of ");
 						outputText("your [cocks] can thrust up into the air.  You make a few futile thrusts into the air, desperate to find some way to get release from your mixed genitals.  \"<i>Hmm, sorry snakey, but I can't pick one of those to play with, maybe if you had only one...</i>\" she says to you with a snark, but you know she is lying and is clearly enjoying your frustration.\n\n");
 					}
 
@@ -615,7 +615,7 @@ package classes.Scenes.Areas.Lake
 			outputText(genderTag + " sits in the confessional.  It is clear this " + genderTag + "'s mind is devoid of conscious thoughts, but they have a clear purpose.  Feelings of anticipation and need surround this person as they open their mouth.  \"<i>Holy mother,</i>\" they speak to the woman sitting across from them with apprehension,\"<i>I have such strange thoughts and needs, they arouse me in ways that they probably shouldn't.  Is there anywhere where I can find my place?</i>\"\n\n\"<i>It's quite all right.</i>\" she replies.  \"<i>This is a sanctuary to those who have desires that others would call strange or bizarre, we welcome any who share our needs.  All that we ask is that you be willing to share those desires with those that you find.</i>\"  The other brightens and says, \"<i>Of course, I would love nothing more!</i>\"  The " + player.mf("man", "woman") + " who was once a champion and the fetish cultist who corrupted " + player.mf("him", "her") + " step out of the confessional, and soon the sounds of a massive orgy can be heard from the cathedral, as the followers of the fetish welcome their new member.\n\n");
 
 			outputText("Your mind has fallen prey to the followers of the fetish, and you are now one yourself.  You have completely forgotten who or what you were, including why you came to this world in the first place.  Perhaps the next champion will not lose their sense of self so easily.");
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 
 		public function fetishCultistHasAMilkFetish():void

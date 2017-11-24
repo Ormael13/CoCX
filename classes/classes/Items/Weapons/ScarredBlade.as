@@ -1,11 +1,9 @@
 package classes.Items.Weapons 
 {
-	import classes.Items.Weapon;
-	import classes.PerkLib;
-	import classes.Player;
-	import classes.GlobalFlags.*;
-	
-	public class ScarredBlade extends Weapon
+import classes.Items.Weapon;
+import classes.Scenes.SceneLib;
+
+public class ScarredBlade extends Weapon
 	{
 		
 		public function ScarredBlade() 
@@ -14,14 +12,14 @@ package classes.Items.Weapons
 		}
 		
 		override public function get attack():Number { 
-			var temp:int = 10 + int((game.player.cor - 70) / 3)
+			var temp:int = 10 + int((game.player.cor - 70) / 3);
 			if (temp < 10) temp = 10;
 			return temp; 
 		}
 		
 		override public function canUse():Boolean {
 			if (game.player.cor >= (66 - game.player.corruptionTolerance())) return true;
-			game.sheilaScene.rebellingScarredBlade(true);
+			SceneLib.sheilaScene.rebellingScarredBlade(true);
 			return false;
 		}
 	}

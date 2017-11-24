@@ -1,9 +1,9 @@
 ﻿package classes.Scenes.Places.Farm{
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
-	public class Kelly extends AbstractFarmContent implements TimeAwareInterface {
+public class Kelly extends AbstractFarmContent implements TimeAwareInterface {
 
 //const KELT_BREAK_LEVEL:int = 725;
 //const KELLY_CUNT_TYPE:int = 726;
@@ -44,7 +44,7 @@ Every encounter raises corruption by 5, except the last one that raises corrupti
 			pregnancy = new PregnancyStore(kFLAGS.KELLY_PREGNANCY_TYPE, kFLAGS.KELLY_INCUBATION, 0, 0);
 			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 280, 200, 100);
 												//Event: 0 (= not pregnant),  1,   2,   3,  4 (< 100)
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 
 		//Implementation of TimeAwareInterface
@@ -381,7 +381,7 @@ internal function defeatKellyNDBREAKHIM():void {
 	outputText("\n\nShe bursts into tears again, any attempt at a reply breaking off into another sob. You cockslap her repeatedly as you roar, \"<i>Do you think I have time to waste on whiny bitches like you?  You're even lucky I'm taking care of finding you a proper name.  I should call you Cumbucket or Sugarcunt because that's exactly what you are.  So what do you think?  Do you want to be called Cumbucket, Cumbucket?</i>\"");
 	
 	//(Silly:)
-	if(silly() && kGAMECLASS.amilyScene.amilyFollower() && kGAMECLASS.amilyScene.amilyCorrupt()) outputText("\n\nSomewhere, Amily perks up, \"<i>[Master]?</i>\"  How many cumbuckets do you need anyway?");
+	if(silly() && SceneLib.amilyScene.amilyFollower() && SceneLib.amilyScene.amilyCorrupt()) outputText("\n\nSomewhere, Amily perks up, \"<i>[Master]?</i>\"  How many cumbuckets do you need anyway?");
 	
 	outputText("\n\nThe broken centauress manages to shake her head convulsively.  Satisfied, you stop slapping her.");
 	
@@ -933,7 +933,7 @@ private function tentaFuckKelly():void {
 	var four:int = -4;
 	var five:int = -5;
 	var temp:int = 0;
-	while(temp < player.totalCocks()) {
+	while(temp < player.cockTotal()) {
 		if(player.cocks[temp].cockType == CockTypesEnum.TENTACLE) {
 			if(one < 0) one = temp;
 			else if(two < 0) two = temp;

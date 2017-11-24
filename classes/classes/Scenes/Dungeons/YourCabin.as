@@ -1,13 +1,9 @@
 package classes.Scenes.Dungeons 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.BaseContent;
-	import classes.Scenes.Dungeons.DungeonAbstractContent;
-	import classes.Scenes.Dungeons.DungeonEngine;
-	
-	public class YourCabin extends DungeonAbstractContent
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+
+public class YourCabin extends DungeonAbstractContent
 	{
 		
 		public function YourCabin() 
@@ -15,11 +11,11 @@ package classes.Scenes.Dungeons
 		}
 		
 		public function enterCabin():void {
-			kGAMECLASS.inDungeon = true;
-			kGAMECLASS.dungeonLoc = -10;
+			inDungeon = true;
+			dungeonLoc = -10;
 			menu();
 			clearOutput();
-			outputText("<b><u>Your Cabin</u></b>\n")
+			outputText("<b><u>Your Cabin</u></b>\n");
 			outputText("You are in your cabin.  Behind you is a door leading back to your camp.  Next to the door is a window to let the sunlight in. \n\n");
 			
 			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0)
@@ -56,8 +52,8 @@ package classes.Scenes.Dungeons
 			}
 			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BOOKSHELF] > 0)
 			{
-				var books:Number = 0
-				books++ //Your codex counts.
+				var books:Number = 0;
+				books++; //Your codex counts.
 				if (player.hasKeyItem("Dangerous Plants") >= 0) books++;
 				if (player.hasKeyItem("Traveler's Guide") >= 0) books++;
 				if (player.hasKeyItem("Hentai Comic") >= 0) books++;
@@ -89,9 +85,9 @@ package classes.Scenes.Dungeons
 			addButton(3, "Stash", inventory.stash);
 			addButton(4, "Furniture", menuFurniture);
 			addButton(9, "Wait", camp.doWait); //You can wait/rest/sleep in cabin.
-			if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", getGame().camp.rest);
-			if (model.time.hours >= 21 || model.time.hours < 6) addButton(9, "Sleep", getGame().camp.doSleep);
-			addButton(11, "South (Exit)", exitCabin);
+            if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", SceneLib.camp.rest);
+            if (model.time.hours >= 21 || model.time.hours < 6) addButton(9, "Sleep", SceneLib.camp.doSleep);
+            addButton(11, "South (Exit)", exitCabin);
 			addButton(14, "Codex", camp.codex.accessCodexMenu);
 			removeButton(7);
 			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_TABLE] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_CHAIR1] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_CHAIR2] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BOOKSHELF] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DESK] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DESKCHAIR] >= 1) removeButton(2);
@@ -101,8 +97,8 @@ package classes.Scenes.Dungeons
 		}
 		
 		private function exitCabin():void {
-			kGAMECLASS.inDungeon = false;
-			kGAMECLASS.dungeonLoc = -1;
+			inDungeon = false;
+			dungeonLoc = -1;
 			playerMenu();
 		}
 		
@@ -220,7 +216,7 @@ package classes.Scenes.Dungeons
 					}
 					else
 					{
-						kGAMECLASS.camp.cabinProgress.errorNotEnough();
+						SceneLib.camp.cabinProgress.errorNotEnough();
 						doNext(playerMenu);
 					}
 				}
@@ -232,7 +228,7 @@ package classes.Scenes.Dungeons
 			}
 			else
 			{
-				kGAMECLASS.camp.cabinProgress.errorNotHave();
+				SceneLib.camp.cabinProgress.errorNotHave();
 				doNext(playerMenu);
 			}		
 		}
@@ -263,7 +259,7 @@ package classes.Scenes.Dungeons
 					}
 					else
 					{
-						kGAMECLASS.camp.cabinProgress.errorNotEnough();
+						SceneLib.camp.cabinProgress.errorNotEnough();
 						doNext(playerMenu);
 					}
 				}
@@ -275,7 +271,7 @@ package classes.Scenes.Dungeons
 			}
 			else
 			{
-				kGAMECLASS.camp.cabinProgress.errorNotHave();
+				SceneLib.camp.cabinProgress.errorNotHave();
 				doNext(playerMenu);
 			}		
 		}
@@ -306,7 +302,7 @@ package classes.Scenes.Dungeons
 					}
 					else
 					{
-						kGAMECLASS.camp.cabinProgress.errorNotEnough();
+						SceneLib.camp.cabinProgress.errorNotEnough();
 						doNext(playerMenu);
 					}
 				}
@@ -318,7 +314,7 @@ package classes.Scenes.Dungeons
 			}
 			else
 			{
-				kGAMECLASS.camp.cabinProgress.errorNotHave();
+				SceneLib.camp.cabinProgress.errorNotHave();
 				doNext(playerMenu);
 			}		
 		}
@@ -350,7 +346,7 @@ package classes.Scenes.Dungeons
 					}
 					else
 					{
-						kGAMECLASS.camp.cabinProgress.errorNotEnough();
+						SceneLib.camp.cabinProgress.errorNotEnough();
 						doNext(playerMenu);
 					}
 				}
@@ -362,7 +358,7 @@ package classes.Scenes.Dungeons
 			}
 			else
 			{
-				kGAMECLASS.camp.cabinProgress.errorNotHave();
+				SceneLib.camp.cabinProgress.errorNotHave();
 				doNext(playerMenu);
 			}		
 		}
@@ -393,7 +389,7 @@ package classes.Scenes.Dungeons
 					}
 					else
 					{
-						kGAMECLASS.camp.cabinProgress.errorNotEnough();
+						SceneLib.camp.cabinProgress.errorNotEnough();
 						doNext(playerMenu);
 					}
 				}
@@ -405,7 +401,7 @@ package classes.Scenes.Dungeons
 			}
 			else
 			{
-				kGAMECLASS.camp.cabinProgress.errorNotHave();
+				SceneLib.camp.cabinProgress.errorNotHave();
 				doNext(playerMenu);
 			}		
 		}
@@ -444,7 +440,7 @@ package classes.Scenes.Dungeons
 					}
 					else
 					{
-						kGAMECLASS.camp.cabinProgress.errorNotEnough();
+						SceneLib.camp.cabinProgress.errorNotEnough();
 						doNext(playerMenu);
 					}
 				}
@@ -456,7 +452,7 @@ package classes.Scenes.Dungeons
 			}
 			else
 			{
-				kGAMECLASS.camp.cabinProgress.errorNotHave();
+				SceneLib.camp.cabinProgress.errorNotHave();
 				doNext(playerMenu);
 			}		
 		}
@@ -490,7 +486,7 @@ package classes.Scenes.Dungeons
 					}
 					else
 					{
-						kGAMECLASS.camp.cabinProgress.errorNotEnough();
+						SceneLib.camp.cabinProgress.errorNotEnough();
 						doNext(playerMenu);
 					}
 				}
@@ -502,7 +498,7 @@ package classes.Scenes.Dungeons
 			}
 			else
 			{
-				kGAMECLASS.camp.cabinProgress.errorNotHave();
+				SceneLib.camp.cabinProgress.errorNotHave();
 				doNext(playerMenu);
 			}		
 		}
@@ -513,7 +509,7 @@ package classes.Scenes.Dungeons
 			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 20;
 			outputText("You take the book from your toolbox and flip pages until you reach pages about how to construct a desk. You follow the instructions.\n\n");
 			outputText("You pick up the wood and begin to construct a desk. You cut the wood into lengths. You put it together by driving nails into place with your hammer. After putting the desk together, you paint the bookshelf for a polished look.\n\n");
-			outputText("Next, you construct a drawer to store small objects. You nail the drawer together and paint it. Finally, you install the drawer in place.\n\n")
+			outputText("Next, you construct a drawer to store small objects. You nail the drawer together and paint it. Finally, you install the drawer in place.\n\n");
 			outputText("The paint dries relatively quickly and it only took you two hours to finish your desk! \n\n");
 			outputText("<b>You have finished your desk!</b> \n\n");
 			flags[kFLAGS.CAMP_CABIN_FURNITURE_DESK] = 1;
@@ -534,7 +530,7 @@ package classes.Scenes.Dungeons
 					}
 					else
 					{
-						kGAMECLASS.camp.cabinProgress.errorNotEnough();
+						SceneLib.camp.cabinProgress.errorNotEnough();
 						doNext(playerMenu);
 					}
 				}
@@ -546,7 +542,7 @@ package classes.Scenes.Dungeons
 			}
 			else
 			{
-				kGAMECLASS.camp.cabinProgress.errorNotHave();
+				SceneLib.camp.cabinProgress.errorNotHave();
 				doNext(playerMenu);
 			}		
 		}

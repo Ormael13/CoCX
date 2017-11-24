@@ -4,12 +4,11 @@
  */
 package classes.Scenes.NPCs 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	
-	use namespace kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+
+use namespace kGAMECLASS;
 	
 	public class Jinx extends Monster
 	{
@@ -56,7 +55,6 @@ package classes.Scenes.NPCs
 			if (choice == 0) jinxBaseAttack();
 			if (choice == 1) jinxAyotechCanon();
 			//if (choice == 2) sythAttack1();
-			combatRoundOver();
 		}
 		
 		public function Jinx() 
@@ -67,14 +65,14 @@ package classes.Scenes.NPCs
 			this.long = "You're currently fighting an ayotech maniac.";//change Jinx to Minx???
 			this.plural = false;
 			createBreastRow(Appearance.breastCupInverse("A"));
-			this.createVagina(false, VAGINA_WETNESS_DRY, VAGINA_LOOSENESS_TIGHT);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DRY, AppearanceDefs.VAGINA_LOOSENESS_TIGHT);
 			this.createStatusEffect(StatusEffects.BonusVCapacity,10,0,0,0);
-			this.ass.analLooseness = ANAL_LOOSENESS_VIRGIN;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_VIRGIN;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = 120;
-			this.hipRating = HIP_RATING_BOYISH;
-			this.buttRating = BUTT_RATING_BUTTLESS;
+			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
+			this.buttRating = AppearanceDefs.BUTT_RATING_BUTTLESS;
 			this.skin.setBaseOnly({color:"olive"});//zmienić?
 			this.hairColor = "blue";//eyes: red
 			this.hairLength = 20;

@@ -1,9 +1,11 @@
 package classes.Scenes.Dungeons.DesertCave
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.Utils;
 
-	public class SandWitchMob extends Monster
+public class SandWitchMob extends Monster
 	{
 		public function sandWitchMobAI():void {
 			if(!hasStatusEffect(StatusEffects.Sandstorm)) sandStormAttack();
@@ -45,7 +47,6 @@ package classes.Scenes.Dungeons.DesertCave
 				outputText("\nShe hits you square in the face, bloodying your face and sending you stumbling back in agony. ");
 				damage = player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 
 		//Sand Stones
@@ -82,7 +83,7 @@ package classes.Scenes.Dungeons.DesertCave
 						outputText("  A small set of stones settle on your [balls].");
 						bonus++;
 					}
-					outputText("  " + game.num2Text(player.totalNipples()) + " crawl up to your chest and over your top [nipple]s");
+					outputText("  " + Utils.num2Text(player.totalNipples()) + " crawl up to your chest and over your top [nipple]s");
 					if(player.bRows() > 1) {
 						if(player.bRows() == 2) outputText(" and");
 						else outputText(",");
@@ -111,7 +112,6 @@ package classes.Scenes.Dungeons.DesertCave
 				outputText("\nThe stones then make a ninety degree turn into the purple fire, and then nothing.  One sand-witch smacks another upside the head, yelling something about focusing.");
 			}
 			removeStatusEffect(StatusEffects.Sandstorm);
-			combatRoundOver();
 		}
 		
 		//Milk is Good
@@ -122,7 +122,6 @@ package classes.Scenes.Dungeons.DesertCave
 			player.dynStats("lus", 4 + player.lib/10);
 			//+ 30 HP, +light lust damage to PC and mob
 			addHP(30);
-			combatRoundOver();
 		}
 		
 		//*Sandstorm
@@ -130,7 +129,6 @@ package classes.Scenes.Dungeons.DesertCave
 		public function sandStormAttack():void {
 			outputText("The witches link their hands together and begin to chant together, lifting their voices high as loose sand trickles in from every corner, every doorway, even the ceiling.  \"<i>Enevretni llahs tresed eht!</i>\"  Swirling around the chamber, a cloud of biting, stinging sand clouds your vision and bites into your skin.  It's going to keep blinding you and hurting you every round!");
 			createStatusEffect(StatusEffects.Sandstorm,0,0,0,0);
-			combatRoundOver();
 		}
 		
 		override protected function performCombatAction():void
@@ -140,12 +138,12 @@ package classes.Scenes.Dungeons.DesertCave
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.dungeons.desertcave.yoYouBeatUpSomeSandWitchesYOUMONSTER();
+			SceneLib.dungeons.desertcave.yoYouBeatUpSomeSandWitchesYOUMONSTER();
 		}
 		
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			game.dungeons.desertcave.loseToSammitchMob();
+			SceneLib.dungeons.desertcave.loseToSammitchMob();
 		}
 		
 		public function SandWitchMob()
@@ -158,14 +156,14 @@ package classes.Scenes.Dungeons.DesertCave
 			this.pronoun1 = "they";
 			this.pronoun2 = "them";
 			this.pronoun3 = "their";
-			this.createVagina(false, VAGINA_WETNESS_WET, VAGINA_LOOSENESS_LOOSE);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_WET, AppearanceDefs.VAGINA_LOOSENESS_LOOSE);
 			this.createBreastRow(Appearance.breastCupInverse("DD"));
 			this.createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = rand(12) + 55;
-			this.hipRating = HIP_RATING_CURVY;
-			this.buttRating = BUTT_RATING_LARGE;
+			this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
 			this.skinTone = "bronzed";
 			this.hairColor = "sandy-blonde";
 			this.hairLength = 15;

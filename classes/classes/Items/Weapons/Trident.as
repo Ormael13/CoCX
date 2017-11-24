@@ -17,7 +17,7 @@ package classes.Items.Weapons
 		
 		override public function get attack():Number {
 			var boost:int = 0;
-			var base:int = 0
+			var base:int = 0;
 			base += 6;
 			if (game.player.spe >= 100) base += 3;
 			if (game.player.spe >= 50) base += 3;

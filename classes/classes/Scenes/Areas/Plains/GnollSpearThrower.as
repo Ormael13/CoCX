@@ -1,10 +1,11 @@
 package classes.Scenes.Areas.Plains
 {
-	import classes.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
 
-	/**
+/**
 	 * ...
 	 * @author ...
 	 */
@@ -13,7 +14,7 @@ import classes.internals.*;
 		private function hyenaPhysicalAttack():void {
 			var damage:Number = 0;
 			//return to combat menu when finished
-			doNext(game.playerMenu);
+			doNext(EventParser.playerMenu);
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n");
@@ -98,7 +99,6 @@ import classes.internals.*;
 			if(damage > 0) damage = player.takeDamage(damage, true);
 			statScreenRefresh();
 			outputText("\n");
-			combatRoundOver();
 		}
 		
 		//<Writers note: I recommend that the javelin have a chance to greatly decrease speed for the remaining battle.  I am writing the flavor text for this event if you choose to include it>
@@ -149,7 +149,6 @@ import classes.internals.*;
 				outputText("The gnoll pulls a long, dark wooden javelin from over her shoulder.  Her spotted arm strikes forward, launching the missile through the air.  The javelin flashes through the intervening distance, slamming into your chest.  The blunted tip doesn't skewer you, but pain radiates from the bruising impact. ");
 				damage = player.takeDamage(25+rand(20), true);
 			}
-			combatRoundOver();
 		}
 		
 		//<Writer's Note: With the third attack, I intend that the damage be increased based on the breast size of the player.  Thus, the text will vary if the player is flat-chested as indicated by colored text.>
@@ -193,7 +192,6 @@ import classes.internals.*;
 					player.takeDamage(damage, true);
 				}
 			}
-			combatRoundOver();
 		}
 		
 		private function hyenaArousalAttack():void {
@@ -213,14 +211,13 @@ import classes.internals.*;
 			else {
 				outputText("A knowing glint fills the dark eyes of the gnoll before she sprints forward.  Your muscles tense as she reaches you and starts to lock two spotted paws behind your neck.  She pulls you down towards her musky crotch, but just as you brush her loincloth, you twist away.  The hyena snarls in frustration, and you're left wondering if that was her idea of foreplay.");
 			}
-			combatRoundOver();
 		}
 
 		override public function eAttack():void
 		{
 			var damage:Number = 0;
 //return to combat menu when finished
-			doNext(game.playerMenu);
+			doNext(EventParser.playerMenu);
 //Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n");
@@ -301,32 +298,31 @@ import classes.internals.*;
 			if (damage > 0) damage = player.takeDamage(damage, true);
 			statScreenRefresh();
 			outputText("\n");
-			combatRoundOver();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if(short == "alpha gnoll") {
-				game.clearOutput();
+				EngineCore.clearOutput();
 				outputText("The gnoll alpha is defeated!  You could use her for a quick, willing fuck to sate your lusts before continuing on.  Hell, you could even dose her up with that succubi milk you took from the goblin first - it might make her even hotter.  Do you?");
-				game.menu();
-				game.addButton(0,"Fuck",	game.urtaQuest.winRapeHyenaPrincess);
-				game.addButton(1,"Succ Milk", game.urtaQuest.useSuccubiMilkOnGnollPrincesses);
-				game.addButton(4,"Leave",game.urtaQuest.urtaNightSleep);
+				EngineCore.menu();
+				EngineCore.addButton(0,"Fuck",	SceneLib.urtaQuest.winRapeHyenaPrincess);
+				EngineCore.addButton(1,"Succ Milk", SceneLib.urtaQuest.useSuccubiMilkOnGnollPrincesses);
+				EngineCore.addButton(4,"Leave",SceneLib.urtaQuest.urtaNightSleep);
 			} else {
-				game.plains.gnollSpearThrowerScene.hyenaVictory();
+				SceneLib.plains.gnollSpearThrowerScene.hyenaVictory();
 			}
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if (short == "alpha gnoll"){
-				game.urtaQuest.loseToGnollPrincessAndGetGangBanged();
+				SceneLib.urtaQuest.loseToGnollPrincessAndGetGangBanged();
 			} else if (pcCameWorms){
 				outputText("\n\nYour foe doesn't seem put off enough to leave...");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
-				game.plains.gnollSpearThrowerScene.hyenaSpearLossAnal();
+				SceneLib.plains.gnollSpearThrowerScene.hyenaSpearLossAnal();
 			}
 		}
 
@@ -337,14 +333,14 @@ import classes.internals.*;
 			this.imageName = "gnollspearthrower";
 			this.long = "You are fighting a gnoll.  An amalgam of voluptuous, sensual lady and snarly, pissed off hyena, she clearly intends to punish you for trespassing.  Her dark-tan, spotted hide blends into a soft cream-colored fur covering her belly and two D-cup breasts, leaving two black nipples poking through the fur.  A crude loincloth is tied around her waist, obscuring her groin from view.  A leather strap cuts between her heavy breasts, holding a basket of javelins on her back.  Large, dish-shaped ears focus on you, leaving no doubt that she can hear every move you make.  Sharp, dark eyes are locked on your body, filled with aggression and a hint of lust.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_LOOSE);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DROOLING, AppearanceDefs.VAGINA_LOOSENESS_LOOSE);
 			createBreastRow(Appearance.breastCupInverse("D"));
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,25,0,0,0);
 			this.tallness = 72;
-			this.hipRating = HIP_RATING_AMPLE;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			this.skin.growFur({color:"tawny"});
 			this.hairColor = "black";
 			this.hairLength = 22;

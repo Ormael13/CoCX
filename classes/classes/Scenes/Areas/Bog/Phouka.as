@@ -3,11 +3,12 @@
  */
 package classes.Scenes.Areas.Bog
 {
-	import classes.*;
-	import classes.internals.WeightedDrop;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.WeightedDrop;
 
-	public class Phouka extends Monster
+public class Phouka extends Monster
 	{
 		protected function phoukaFightAttack():void
 		{ 
@@ -50,7 +51,6 @@ package classes.Scenes.Areas.Bog
 					outputText("\nYou get clipped by the stallion's legs and hooves as he charges. As he comes around for another pass you check over your body, amazed none of your bones are broken after that.");
 				}
 			}
-			combatRoundOver();
 		}
 
 		protected function phoukaFightLustAttack():void
@@ -74,7 +74,6 @@ package classes.Scenes.Areas.Bog
 				else outputText("You are hypnotized by the equine cock jabbing at the air.  Then the " + this.short + " charges past you and you can taste the musk in the air.");
 				player.dynStats("lus", 15 + player.lib / 10 + player.cor / 5 + rand(10));
 			}
-			combatRoundOver();
 		}
 
 		protected function phoukaFightSilence():void
@@ -100,7 +99,6 @@ package classes.Scenes.Areas.Bog
 					player.createStatusEffect(StatusEffects.WebSilence, 0, 0, 0, 0); //Probably safe to reuse the same status affect as for the spider morphs
 				}
 			}
-			combatRoundOver();
 		}
 
 		override protected function performCombatAction():void
@@ -145,7 +143,7 @@ package classes.Scenes.Areas.Bog
         
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.bog.phoukaScene.phoukaPlayerWins(hpVictory);
+			SceneLib.bog.phoukaScene.phoukaPlayerWins(hpVictory);
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -155,15 +153,15 @@ package classes.Scenes.Areas.Bog
 				if (player.hasVagina())
 					outputText("lass and spread yer legs for me.”</i>\n\n");
 				else outputText("lad and spread yer asscheeks for me.”</i>\n\n");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			}
 			else {
 				if (player.hasVagina()) { //Phouka prefer vaginal if they can get it
 					if (player.isTaur() || rand(2) == 0)
-						game.bog.phoukaScene.phoukaSexHorse(true, !hpVictory); //And they love mating with female or herm centaurs in their horse form
-					else game.bog.phoukaScene.phoukaSexBunny(true, !hpVictory);
+						SceneLib.bog.phoukaScene.phoukaSexHorse(true, !hpVictory); //And they love mating with female or herm centaurs in their horse form
+					else SceneLib.bog.phoukaScene.phoukaSexBunny(true, !hpVictory);
 				}
-				else game.bog.phoukaScene.phoukaSexGoat(true, !hpVictory);
+				else SceneLib.bog.phoukaScene.phoukaSexGoat(true, !hpVictory);
 			}
 		}
 
@@ -274,17 +272,17 @@ package classes.Scenes.Areas.Bog
 			this.cumMultiplier = 5;
 			this.hoursSinceCum = 20;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = 5;
-			this.hipRating = HIP_RATING_SLENDER;
-			this.buttRating = BUTT_RATING_TIGHT;
-			this.lowerBody = LOWER_BODY_TYPE_HUMAN
-			this.armType = ARM_TYPE_HUMAN;
+			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HUMAN;
+			this.armType = AppearanceDefs.ARM_TYPE_HUMAN;
 			this.skinTone = "black";
 			this.hairColor = "black";
 			this.hairLength = 1;
-			this.earType = EARS_ELFIN;
+			this.earType = AppearanceDefs.EARS_ELFIN;
 			initStrTouSpeInte(90, 70, 140, 40);
 			initWisLibSensCor(40, 90, 35, 100);
 			this.weaponName = "claws";
@@ -304,7 +302,7 @@ package classes.Scenes.Areas.Bog
 				.add(consumables.SDELITE, 13)
 				.add(consumables.P_WHSKY, 35)
 				.add(null, 20);
-			this.wingType = WING_TYPE_GIANT_DRAGONFLY; //Maybe later, if the PC can get them, make a Faerie wing type.
+			this.wingType = AppearanceDefs.WING_TYPE_GIANT_DRAGONFLY; //Maybe later, if the PC can get them, make a Faerie wing type.
 			this.wingDesc = "small black faerie wings";
 			checkMonster();
 		}

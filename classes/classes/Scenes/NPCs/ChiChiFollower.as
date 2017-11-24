@@ -8,8 +8,9 @@ package classes.Scenes.NPCs
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Places.HeXinDao;
+import classes.Scenes.SceneLib;
 
-	use namespace kGAMECLASS;
+use namespace kGAMECLASS;
 	
 	public class ChiChiFollower extends NPCAwareContent
 	{
@@ -83,7 +84,7 @@ public function MeetingChiChiInHeXinDao():void {
 	if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] < 2) addButton(0, "Yes", TrainingSoulArtsWithChiChi);//usunąć if () jak dodam ostatni trening/walke
 	addButton(1, "No", NotReadyForTheTraining);
 	addButton(2, "Shop", SoulskilsManualsShop);
-	addButton(4, "Leave", kGAMECLASS.hexindao.riverislandVillageStuff);
+	addButton(4, "Leave", SceneLib.hexindao.riverislandVillageStuff);
 }
 
 public function MeetingChiChiInHeXinDao2():void {
@@ -94,7 +95,7 @@ public function MeetingChiChiInHeXinDao2():void {
 	if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] < 2) addButton(0, "Yes", TrainingSoulArtsWithChiChi);//usunąć if () jak dodam ostatni trening/walke
 	addButton(1, "No", NotReadyForTheTraining);
 	addButton(2, "Shop", SoulskilsManualsShop);
-	addButton(4, "Leave", kGAMECLASS.hexindao.riverislandVillageStuff);
+	addButton(4, "Leave", SceneLib.hexindao.riverislandVillageStuff);
 }
 
 public function NotReadyForTheTraining():void {

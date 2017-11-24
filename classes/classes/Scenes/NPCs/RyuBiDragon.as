@@ -4,11 +4,11 @@
  */
 package classes.Scenes.NPCs 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.internals.ChainedDrop;
-	
-	public class RyuBiDragon extends Monster
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.ChainedDrop;
+
+public class RyuBiDragon extends Monster
 	{
 		override public function defeated(hpVictory:Boolean):void
 			{
@@ -130,15 +130,15 @@ package classes.Scenes.NPCs
 			this.imageName = "ryubidragon";
 			this.long = "You are currently battling a mighty dragon.";
 			//this.long = "You are currently 'battling' RyuBi in dragon from, in a playfight.  At least, that was the intention.  The way she lashes her tail along the ground, with claws spread and teeth bared ferociously, makes you wonder.";
-			createVagina(true,VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_NORMAL);
+			createVagina(true,AppearanceDefs.VAGINA_WETNESS_NORMAL,AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			createStatusEffect(StatusEffects.BonusVCapacity,10,0,0,0);
 			createBreastRow(Appearance.breastCupInverse("A"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = 340;
-			this.hipRating = HIP_RATING_SLENDER;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			this.skin.base.color = "white";
 			this.hairColor = "black";
 			this.hairLength = 1;
@@ -150,14 +150,14 @@ package classes.Scenes.NPCs
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.gems = 5 + rand(3);
 			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.2);
-			this.faceType = FACE_DRAGON;
-			this.tongueType = TONGUE_DRACONIC;
-			this.earType = EARS_DRAGON;
-			this.hornType = HORNS_DRACONIC_X4_12_INCH_LONG;
+			this.faceType = AppearanceDefs.FACE_DRAGON;
+			this.tongueType = AppearanceDefs.TONGUE_DRACONIC;
+			this.earType = AppearanceDefs.EARS_DRAGON;
+			this.hornType = AppearanceDefs.HORNS_DRACONIC_X4_12_INCH_LONG;
 			this.horns = 4;
-			this.wingType = WING_TYPE_DRACONIC_HUGE;
-			this.lowerBody = LOWER_BODY_TYPE_DRAGON;
-			this.tailType = TAIL_TYPE_DRACONIC;
+			this.wingType = AppearanceDefs.WING_TYPE_DRACONIC_HUGE;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_DRAGON;
+			this.tailType = AppearanceDefs.TAIL_TYPE_DRACONIC;
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGigantType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGodType, 0, 0, 0, 0);

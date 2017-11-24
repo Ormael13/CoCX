@@ -1,10 +1,11 @@
 package classes.Scenes.Dungeons.HelDungeon
 {
-	import classes.*;
-	import classes.internals.WeightedDrop;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.WeightedDrop;
 
-	public class PhoenixPlatoon extends Monster
+public class PhoenixPlatoon extends Monster
 	{
 		//ATTACK ONE: SPARTAN RUSH
 		public function phoenixPlatoonRush():void {
@@ -13,7 +14,6 @@ package classes.Scenes.Dungeons.HelDungeon
 			//(Effect: Multiple light attacks)
 			createStatusEffect(StatusEffects.Attacks, 2 + rand(3),0,0,0);
 			eAttack();
-			combatRoundOver();
 		}
 
 		//ATTACK TWO: FIRE BREATH
@@ -32,14 +32,12 @@ package classes.Scenes.Dungeons.HelDungeon
 			}
 			damage = Math.round(damage);
 			damage = player.takeMagicDamage(damage, true);
-			combatRoundOver();
 		}
 		//ATTACK THREE: LUSTBANG GRENADE
 		public function phoenixPlatoonLustbang():void {
 			outputText("\"<i>LUSTBANG OUT!</i>\" one of the rear-most phoenixes shouts, causing all the other warriors to duck down behind their shields.  Oh, shit!  A large glass sphere rolls out from the shield wall, and immediately explodes in a great pink cloud.  You cough and wave your arms, but by the time the cloud has dissipated, you feel lightheaded and lusty, barely able to resist the urge to throw yourself at the phoenixes and beg for their cocks and cunts.");
 			//(Effect: Large lust increase)
 			player.dynStats("lus", 40);
-			combatRoundOver();
 		}
 
 		public function phoenixPlatoonAI():void {
@@ -52,7 +50,7 @@ package classes.Scenes.Dungeons.HelDungeon
 				addStatusValue(StatusEffects.Platoon,1,1);
 			}
 			else {
-				phoenixPlatoonLustbang()
+				phoenixPlatoonLustbang();
 				removeStatusEffect(StatusEffects.Platoon);
 			}
 		}
@@ -64,12 +62,12 @@ package classes.Scenes.Dungeons.HelDungeon
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.dungeons.heltower.phoenixPlatoonLosesToPC();
+			SceneLib.dungeons.heltower.phoenixPlatoonLosesToPC();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.dungeons.heltower.phoenixPlatoonMurdersPC();
+			SceneLib.dungeons.heltower.phoenixPlatoonMurdersPC();
 		}
 		
 		public function PhoenixPlatoon()
@@ -86,14 +84,14 @@ package classes.Scenes.Dungeons.HelDungeon
 			this.balls = 2;
 			this.ballSize = 1;
 			this.cumMultiplier = 3;
-			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_LOOSE);
 			createBreastRow(Appearance.breastCupInverse("D"));
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.tallness = rand(8) + 70;
-			this.hipRating = HIP_RATING_AMPLE+2;
-			this.buttRating = BUTT_RATING_LARGE;
-			this.lowerBody = LOWER_BODY_TYPE_SALAMANDER;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_SALAMANDER;
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
@@ -112,10 +110,10 @@ package classes.Scenes.Dungeons.HelDungeon
 			this.level = 30;
 			this.gems = rand(40)+300;
 			this.additionalXP = 100;
-			this.hornType = HORNS_DRACONIC_X2;
+			this.hornType = AppearanceDefs.HORNS_DRACONIC_X2;
 			this.horns = 2;
-			this.tailType = TAIL_TYPE_SALAMANDER;
-			this.wingType = WING_TYPE_FEATHERED_PHOENIX;
+			this.tailType = AppearanceDefs.TAIL_TYPE_SALAMANDER;
+			this.wingType = AppearanceDefs.WING_TYPE_FEATHERED_PHOENIX;
 			this.drop = new WeightedDrop(consumables.NOCELIQ, 1);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);

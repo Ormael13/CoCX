@@ -3,15 +3,14 @@
  */
 package classes.Scenes.Monsters
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Items.Armors.LustyMaidensArmor;
-	import classes.Scenes.Camp.ImpGang;
-	import classes.Scenes.UniqueSexScenes;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Items.Armors.LustyMaidensArmor;
+import classes.Scenes.Camp.ImpGang;
+import classes.Scenes.UniqueSexScenes;
 
-	use namespace kGAMECLASS;
+use namespace kGAMECLASS;
 
 	public class ImpScene extends BaseContent
 	{
@@ -70,9 +69,9 @@ package classes.Scenes.Monsters
 			if (canBikiniTits) addButton(4, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 			if (maleRape == rapeImpWithDick && player.hasItem(useables.CONDOM)) addButton(5, "Use Condom", rapeImpWithDick, 1);
 			addButton(6, "Kill Him", killImp);
-			if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(7, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
+			if (player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(7, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
 			if (player.canOvipositBee()) addButton(8, "Oviposit", putBeeEggsInAnImpYouMonster);
-			if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) addButton(9, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
+			if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER) addButton(9, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
 			addButton(14, "Leave", cleanupAfterCombat);
 			
 		}
@@ -427,7 +426,7 @@ package classes.Scenes.Monsters
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 			outputText("As the imp lays beaten its hands stroke its " + monster.cockDescriptShort(0) + " as its eyes look over you in the hope that you might abuse it in some manner.  You lick your lips as you stare at the large member and you turn around to display your " + vaginaDescript(0) + ".  ");
 			//Not gaping?
-			if(player.vaginas[0].vaginalLooseness <= VAGINA_LOOSENESS_GAPING) {
+			if(player.vaginas[0].vaginalLooseness <= AppearanceDefs.VAGINA_LOOSENESS_GAPING) {
 				//Penetration for non-gape cases
 				outputText("With a lascivious grin the imp hops forward, gripping your flanks as it drives its member forward into your " + vaginaDescript(0) + ".  ");
 				//<<If Pussy Virgin>> 
@@ -617,7 +616,7 @@ package classes.Scenes.Monsters
 			}
 			if ((Math.sqrt(player.inte + player.spe) >= rand(16) || rand(3) == 0) && !loss) {
 				outputText("The imps stand anywhere from two to four feet tall, with scrawny builds and tiny demonic wings. Their red and orange skin is dirty, and their dark hair looks greasy. Some are naked, but most are dressed in ragged loincloths that do little to hide their groins. They all have a " + monster.cockDescript(0) + " as long and thick as a man's arm, far oversized for their bodies. Watching an imp trip over its " + monster.cockDescript(0) + " would be funny, if you weren't surrounded by a horde of leering imps closing in from all sides...\n\n");
-				outputText("You quickly get up in time to ready your [weapon]! It's a fight!")
+				outputText("You quickly get up in time to ready your [weapon]! It's a fight!");
 				startCombat(monster, true);
 				return;
 			}
@@ -746,7 +745,7 @@ package classes.Scenes.Monsters
 					if(player.cockTotal() > 0) outputText("Your [cocks] swell painfully as the rough fucking pumps blood into your groin.  ");
 					outputText("The big imp's snake tongue flicks out and slides around your " + vaginaDescript(0) + ", pulling at your pussy lips. He moves his tongue back and forth along the sides of your steaming cunt, alternating between stretching and flicking the lips. ");
 					//(If the character has a dick)
-					if(player.totalCocks() > 0) outputText("He draws his tongue back and wraps it around your [cock], sliding its length along your shaft and flicking his tongue over your cock-head.  ");
+					if(player.cockTotal() > 0) outputText("He draws his tongue back and wraps it around your [cock], sliding its length along your shaft and flicking his tongue over your cock-head.  ");
 					outputText("You gasp in time to the big imp's thrusts, whimpering when his cock or tongue hit a sensitive point. ");
 					//(Low Corruption)
 					if(player.cor < 50) outputText("You're being raped by a demon, milked like a cow, and you're about to cum hard. This corrupted land has left its mark on you.");
@@ -1056,7 +1055,7 @@ package classes.Scenes.Monsters
 					//(If the character has breasts)
 					if(player.biggestTitSize() >= 3) outputText("Your [allbreasts] bounce and jiggle back and forth as the master imp roughly fucks you.  ");
 					//(If the character has a dick)
-					if(player.totalCocks() > 0) outputText("Your [cocks] swell painfully as the rough fucking pumps blood into your groin.  ");
+					if(player.cockTotal() > 0) outputText("Your [cocks] swell painfully as the rough fucking pumps blood into your groin.  ");
 					outputText("The big imp's snake tongue lashes out to incredible length and wraps around one of your " + nippleDescript(0) + "s, pulling at it and stretching the flesh under it. He moves his tongue back and forth between your nipples, alternating between stretching and flicking them. ");
 					//(If the character has a dick)
 					if(player.cockTotal() > 0) outputText("He draws his tongue back and wraps it around your [cock], sliding its length along your shaft and flicking his tongue over your cock-head.");
@@ -1281,8 +1280,8 @@ package classes.Scenes.Monsters
 					}
 				}
 			}
-			if (getGame().inCombat) cleanupAfterCombat();
-			else doNext(playerMenu);
+            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+            else doNext(playerMenu);
 		}
 		
 		public function impRapesYou():void {
@@ -1559,7 +1558,7 @@ package classes.Scenes.Monsters
 					cleanupAfterCombat();
 					return;
 				}
-				if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(1, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
+				if (player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(1, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
 				addButton(4, "Leave", cleanupAfterCombat);
 			}
 			else {
@@ -1567,7 +1566,7 @@ package classes.Scenes.Monsters
 				//Leave // Rape]
 				menu();
 				if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) addButton(0, "Sex", sexAnImpLord);
-				if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(1, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
+				if (player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(1, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
 				addButton(4,"Leave",cleanupAfterCombat);
 			}
 		}
@@ -1599,7 +1598,7 @@ package classes.Scenes.Monsters
 				if(player.hasVagina()) addButton(2,"Ride Cock",femaleVagRape);
 				if(player.findPerk(PerkLib.Feeder) >= 0 && monster.short != "imp overlord" && monster.short != "imp warlord") addButton(3,"Breastfeed",feederBreastfeedRape);
 				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) addButton(4, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
-				if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) addButton(5, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
+				if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER) addButton(5, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
 			}
 			addButton(14,"Leave",cleanupAfterCombat);
 		}
@@ -2160,7 +2159,7 @@ package classes.Scenes.Monsters
 		public function impPackGetsRapedByFemale():void {
 			clearOutput();
 			outputText("You walk around to one of the demons and push him onto his back.  Your [armor] falls to the ground around you as you disrobe, looking over your tiny conquest.  A quick ripping motion disposes of his tiny loincloth, leaving his thick demon-tool totally unprotected. You grab and squat down towards it, rubbing the corrupted tool between your legs ");
-			if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLICK) outputText("and coating it with feminine drool ");
+			if(player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_SLICK) outputText("and coating it with feminine drool ");
 			outputText("as you become more and more aroused.  It parts your lips and slowly slides in.  The ring of tainted nodules tickles you just right as you take the oddly textured member further and further into your willing depths.");
 			player.cuntChange(15,true,true,false);
 			outputText("\n\n");
@@ -2170,7 +2169,7 @@ package classes.Scenes.Monsters
 			outputText("You begin riding the tiny demon, lifting up, and then dropping down, feeling each of the nodes gliding along your sex-lubed walls.   As time passes and your pleasure mounts, you pick up the pace, until you're bouncing happily atop your living demon-dildo.\n\n");
 	
 			outputText("The two of you cum together, though the demon's pleasure starts first.  A blast of his tainted seed pushes you over the edge.  You sink the whole way down, feeling him bump your cervix and twitch inside you, the bumps on his dick swelling in a pulsating wave in time with each explosion of fluid.  ");
-			if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLAVERING) outputText("Cunt juices splatter him as you squirt explosively, leaving a puddle underneath him.  ");
+			if(player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_SLAVERING) outputText("Cunt juices splatter him as you squirt explosively, leaving a puddle underneath him.  ");
 			else outputText("Cunt juices drip down his shaft, oozing off his balls to puddle underneath him.  ");
 			outputText("The two of you lie together, trembling happily as you're filled to the brim with tainted fluids.\n\n");
 			
@@ -2228,7 +2227,7 @@ package classes.Scenes.Monsters
 				outputText("\n\n");
 			}
 			//(DICK!)
-			if(player.totalCocks() > 0) {
+			if(player.cockTotal() > 0) {
 				outputText("Some of the other imps, feeling left out, fish out your " + multiCockDescript() + ".  They pull their own members alongside yours and begin humping against you, frotting as their demonic lubricants coat the bundle of cock with slippery slime.   Tiny hands bundle the dicks together and you find yourself enjoying the stimulation in spite of the brutal fucking you're forced to take.  Pre bubbles up, mixing with the demonic seed that leaks from your captors members until your crotch is sticky with frothing pre.\n\n");
 			}
 			//(ORGAZMO)

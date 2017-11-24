@@ -4,8 +4,11 @@
 package classes.Items
 {
 import classes.BaseContent;
+import classes.EngineCore;
 import classes.Items.Consumables.*;
 import classes.Player;
+import classes.Scenes.SceneLib;
+import classes.GlobalFlags.kGAMECLASS;
 
 public final class ConsumableLib extends BaseContent
 	{
@@ -25,19 +28,19 @@ public final class ConsumableLib extends BaseContent
 		public const PSDELIT:SimpleConsumable = mk("PSDelit", "PSDelit", "an untainted bottle of \"Succubi's Delight\"", 20, "This precious fluid is often given to men a succubus intends to play with for a long time.  It has been partially purified by Rathazul to prevent corruption.", curry(m.succubisDelight, false));
 
 		//DYES
-		public const AUBURND:HairDye = new HairDye("AuburnD", "Auburn");
-		public const BLACK_D:HairDye = new HairDye("Black D", "Black");
-		public const BLOND_D:HairDye = new HairDye("Blond D", "Blond");
-		public const BLUEDYE:HairDye = new HairDye("BlueDye", "Blue");
-		public const BROWN_D:HairDye = new HairDye("Brown D", "Brown");
-		public const GRAYDYE:HairDye = new HairDye("GrayDye", "Gray");
-		public const GREEN_D:HairDye = new HairDye("Green D", "Green");
-		public const ORANGDY:HairDye = new HairDye("OrangDy", "Orange");
-		public const PINKDYE:HairDye = new HairDye("PinkDye", "Pink");
-		public const PURPDYE:HairDye = new HairDye("PurpDye", "Purple");
+		public const AUBURND:HairDye = new HairDye("AuburnD", "Auburn",	DEFAULT_VALUE);
+		public const BLACK_D:HairDye = new HairDye("Black D", "Black",	DEFAULT_VALUE);
+		public const BLOND_D:HairDye = new HairDye("Blond D", "Blond",	DEFAULT_VALUE);
+		public const BLUEDYE:HairDye = new HairDye("BlueDye", "Blue",	DEFAULT_VALUE);
+		public const BROWN_D:HairDye = new HairDye("Brown D", "Brown",	DEFAULT_VALUE);
+		public const GRAYDYE:HairDye = new HairDye("GrayDye", "Gray",	DEFAULT_VALUE);
+		public const GREEN_D:HairDye = new HairDye("Green D", "Green",	DEFAULT_VALUE);
+		public const ORANGDY:HairDye = new HairDye("OrangDy", "Orange",	DEFAULT_VALUE);
+		public const PINKDYE:HairDye = new HairDye("PinkDye", "Pink",	DEFAULT_VALUE);
+		public const PURPDYE:HairDye = new HairDye("PurpDye", "Purple",	DEFAULT_VALUE);
 		public const RAINDYE:HairDye = new HairDye("RainDye", "Rainbow", 100);
-		public const RED_DYE:HairDye = new HairDye("Red Dye", "Red");
-		public const WHITEDY:HairDye = new HairDye("WhiteDy", "White");
+		public const RED_DYE:HairDye = new HairDye("Red Dye", "Red",	DEFAULT_VALUE);
+		public const WHITEDY:HairDye = new HairDye("WhiteDy", "White",	DEFAULT_VALUE);
 
 		//SKIN OILS & BODY LOTIONS
 		public const DARK_OL:SkinOil = new SkinOil("DarkOil", "Dark");
@@ -74,10 +77,14 @@ public final class ConsumableLib extends BaseContent
 		public const NPNKEGG:SimpleConsumable = mk("NPnkEgg", "NPnkEgg", "a neon pink egg", 6, "This is an oblong egg with an unnatural neon pink coloration.  It tingles in your hand with odd energies that make you feel as if you could jump straight into the sky.", curry(m.neonPinkEgg, false));
 
 		//FOOD & BEVERAGES
-		public const BC_BEER:SimpleConsumable = mk("BC Beer", "BC Beer", "a mug of Black Cat Beer", 1, "A capped mug containing an alcoholic drink secreted from the breasts of Niamh.  It smells tasty.", function (player:Player):void { getGame().telAdre.niamh.blackCatBeerEffects(player) });
-		public const BHMTCUM:SimpleConsumable = mk("BhmtCum", "BhmtCum", "a sealed bottle of behemoth cum", 15, "This bottle of behemoth cum looks thick and viscous.  You suspect that it might boost your strength and toughness.  It also has delicious taste.", m.behemothCum);
-		public const BIMBOCH:SimpleConsumable = mk("BimboCh", "BimboCh", "a bottle of bimbo champagne", 20, "A bottle of bimbo champagne. Drinking this might incur temporary bimbofication.", curry(function (player:Player):void {getGame().telAdre.niamh.bimboChampagne(player, true, true)}));
-		public const C_BREAD:CumBread         = new CumBread();
+        public const BC_BEER:SimpleConsumable = mk("BC Beer", "BC Beer", "a mug of Black Cat Beer", 1, "A capped mug containing an alcoholic drink secreted from the breasts of Niamh.  It smells tasty.", function (player:Player):void {
+            SceneLib.telAdre.niamh.blackCatBeerEffects(player)
+        });
+        public const BHMTCUM:SimpleConsumable = mk("BhmtCum", "BhmtCum", "a sealed bottle of behemoth cum", 15, "This bottle of behemoth cum looks thick and viscous.  You suspect that it might boost your strength and toughness.  It also has delicious taste.", m.behemothCum);
+        public const BIMBOCH:SimpleConsumable = mk("BimboCh", "BimboCh", "a bottle of bimbo champagne", 20, "A bottle of bimbo champagne. Drinking this might incur temporary bimbofication.", curry(function (player:Player):void {
+            SceneLib.telAdre.niamh.bimboChampagne(player, true, true)
+        }));
+        public const C_BREAD:CumBread         = new CumBread();
 		public const CCUPCAK:SimpleConsumable = mk("CCupcak", "CCupcak", "a gigantic, chocolate cupcake", 250, "A gigantic, chocolate cupcake. You could easily get full from eating this!", m.giantChocolateCupcake);
 		public const FISHFIL:SimpleConsumable = mk("FishFil", "FishFil", "a fish fillet", 6, "A perfectly cooked piece of fish.  You're not sure what type of fish is, since you're fairly certain \"delicious\" is not a valid species.", m.fishFillet);
 		public const FR_BEER:SimpleConsumable = mk("Fr Beer", "Fr Beer", "a mug of frothy beer", 6, "A bottle of beer from The Black Cock.", m.frothyBeer);
@@ -166,8 +173,14 @@ public final class ConsumableLib extends BaseContent
 		public const NUMBROX:Consumable = new NumbRocks();
 		public const NUMBOIL:Consumable = new NumbingOil();
 		public const OVIELIX:OvipositionElixir = new OvipositionElixir();
-		public const PEPPWHT:SimpleConsumable = mk("PeppWht", "PeppWht", "a vial of peppermint white", 120, "This tightly corked glass bottle gives of a pepperminty smell and reminds you of the winter holidays.  How odd.", function (player:Player):void {getGame().peppermintWhite(player)});
-		public const PPHILTR:Consumable = new PurityPhilter();
+        public const PEPPWHT:SimpleConsumable = mk("PeppWht", "PeppWht", "a vial of peppermint white", 120, "This tightly corked glass bottle gives of a pepperminty smell and reminds you of the winter holidays.  How odd.", function (player:Player):void {
+            EngineCore.clearOutput();
+            EngineCore.outputText("You pull the cork off the gift from the mysterious stranger.  The scent of alluring mint fills your nose once again.  You bring the head of the bottle to your lips and tip it back, the creamy white fluid hits your tongue and slips down your throat.  The liquid is surprisingly refreshing, the creamy mint flavor clings to your tongue and mouth, and makes your breath feel cool as you exhale over your lips.  You can feel the liquid drip down to your stomach and fill you with a pleasant warmth and holiday cheer.\n\n");
+            //Recovers health and fatigue, adds five to max health, and one to libido.*/
+            EngineCore.HPChange(EngineCore.maxHP(),true);
+            EngineCore.fatigue(-100);
+        });
+        public const PPHILTR:Consumable = new PurityPhilter();
 		public const PRNPKR :Consumable = new PrincessPucker();
 		public const SENSDRF:Consumable = new SensitivityDraft();
 		public const SMART_T:Consumable = new ScholarsTea();

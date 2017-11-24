@@ -4,13 +4,12 @@
  */
 package classes.Scenes.Dungeons.DenOfDesire 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Monsters.AbstractGargoyle;
-	
-	public class ObsidianGargoyle extends AbstractGargoyle
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Monsters.AbstractGargoyle;
+import classes.Scenes.SceneLib;
+
+public class ObsidianGargoyle extends AbstractGargoyle
 	{
 		public function moveLustBlast():void {
 			if (hasStatusEffect(StatusEffects.Uber)) {
@@ -109,17 +108,16 @@ package classes.Scenes.Dungeons.DenOfDesire
 				if (choice == 4) moveDevourMagic();
 				if (choice == 5) moveLustBlast();
 			}
-			combatRoundOver();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.dungeons.denofdesire.defeatedObsidianGargoyle();
+			SceneLib.dungeons.denofdesire.defeatedObsidianGargoyle();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.dungeons.denofdesire.defeatedByObsidianGargoyle();
+			SceneLib.dungeons.denofdesire.defeatedByObsidianGargoyle();
 		}
 		
 		public function ObsidianGargoyle() 
@@ -132,11 +130,11 @@ package classes.Scenes.Dungeons.DenOfDesire
 			this.createCock(18,3,CockTypesEnum.UNDEFINED);
 			this.balls = 2;
 			this.ballSize = 1;
-			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_GAPING);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_GAPING);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 20, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.tallness = 120;
 			initStrTouSpeInte(150, 120, 90, 10);
 			initWisLibSensCor(10, 10, 10, 50);

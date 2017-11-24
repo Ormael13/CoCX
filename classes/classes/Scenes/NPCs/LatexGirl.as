@@ -1,9 +1,10 @@
 ﻿package classes.Scenes.NPCs{
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
-	public class LatexGirl extends NPCAwareContent
+public class LatexGirl extends NPCAwareContent
 	{
 
 		public function LatexGirl()
@@ -129,8 +130,8 @@ private function gooTitSize():Number {
 
 //TF Scene:
 public function meanGooGirlRecruitment():void {
-	getGame().inCombat = false;
-	clearOutput();
+    kGAMECLASS.inCombat = false;
+    clearOutput();
 	flags[kFLAGS.GOO_TFED_MEAN] = 1;
 	flags[kFLAGS.GOO_EYES] = monster.skinTone;
 	if(player.hasItem(consumables.SUCMILK)) player.consumeItem(consumables.SUCMILK);
@@ -185,7 +186,7 @@ private function PCCarriedGooBackHome():void {
 	outputText("You set the once-goo down in a secluded section of your camp");
 	if(camp.companionsCount() > 0) outputText(", away from prying eyes");
 	outputText(".  She looks almost alien in a way... more than she did before, when she was just an aqueous blob with tits and faux hair.  Now, every facet of her being is shiny, reflective latex.  Even her vaginal secretions, which dribble freely, are liquid latex, glossy black juices that slowly harden into a flexible solid once freed from her body.");
-	if(player.totalCocks() > 1) outputText("  You can't help but wonder what it would feel like to let her sheath your [cocks] with her juices.");
+	if(player.cockTotal() > 1) outputText("  You can't help but wonder what it would feel like to let her sheath your [cocks] with her juices.");
 	outputText("\n\nSurprisingly, she has hair, or what passes for hair for a woman made entirely of supple, inorganic semi-solids.  Her tresses hang down past her shoulders, slender strands that are as reflective as her skin.  Unlike her skin, the latex-goo's hair seems perpetually oily, slippery and lubricated.  Hesitantly, you extend a hand to touch, carefully caressing a few of the rubbery strands.  Their texture is smooth and slick, unlike any hair you've ever had the pleasure of touching.");
 	outputText("\n\n\"<i>I can feel that, you know.</i>\"");
 	outputText("\n\nYou backpedal wildly, surprised at the sudden statement to such a degree that you nearly fall flat on your [butt].  Giggling laughter bubbles up in response, \"<i>Sorry, I didn't mean to scare you.</i>\"");
@@ -326,8 +327,8 @@ private function encounterLeftBehindGooSlaveII():void {
 
 //Pure Characters Intro(F):
 public function pureGooRecruitmentStart():void {
-	getGame().inCombat = false;
-	clearOutput();
+    kGAMECLASS.inCombat = false;
+    clearOutput();
 	flags[kFLAGS.GOO_TFED_NICE] = 1;
 	flags[kFLAGS.GOO_EYES] = monster.skinTone;
 	if(player.hasItem(consumables.SUCMILK)) player.consumeItem(consumables.SUCMILK);
@@ -583,7 +584,7 @@ public function approachLatexy():void {
 	addButton(3,"Breast Size",setLatexysBustSize);
 	addButton(4, "Dick Options", changeGooDick);
 	
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 1) addButton(14, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 1) addButton(14, "Back", SceneLib.farm.farmCorruption.rootScene);
 	
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(5, "Farm Work", sendToFarm);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 1) addButton(5, "Go Camp", backToCamp);
@@ -615,7 +616,7 @@ private function backToCamp():void
 	flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] = 0;
 	
 	//[+1 Obedience and -1 Happiness every two days kept at the farm]
-	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+	doNext(SceneLib.farm.farmCorruption.rootScene);
 }
 
 private function useLatexy():void {
@@ -1148,7 +1149,7 @@ private function maleDirectFeedLatexGooGoneWrong():void {
 private function feedCumDirectEpilogue():void {
 	clearOutput();
 	outputText("You wake with your mouth so dry that it feels like sandpaper.  Looking around, you see " + flags[kFLAGS.GOO_NAME] + " slumbering in the corner, looking rather... full and fecund, plump with weight.  You feel equally, obnoxiously empty.  Your groin is tingling painfully from the forceful draining.  Staggering away toward some water, you realize you'll have to raise her obedience if you want her to stop on command.  Letting her drink so deeply probably didn't help either.");
-	temp = 50
+	temp = 50;
 	if(player.cumQ() >= 500) temp += 30;
 	gooFluid(temp);
 	
@@ -1203,7 +1204,7 @@ private function feedLatexyGirlCumDirect():void {
 	outputText("\n\nThe pleasure doesn't fade fast.  In fact, the aftershocks that wrack your muscles continue to assault you with every kiss of your pet's eager lips.  She doesn't slow or stop after your orgasm.  If anything, she suckles your nether-lips and [clit] that much harder, greedy more of your delectable juices.  You wriggle and squirm, putting a hand to " + flags[kFLAGS.GOO_NAME] + "'s forehead and commanding her to stop.");
 	//{OBEDIENT:}
 	if(gooObedience() >= 60) {
-		outputText("\n\nAt the sound of your order, a whimper rolls over your [vagina], but the undulating pleasure of her glossy tongue inside you gradually recedes.  Your [clit] pops free from the imprisoning puckers, joined by a web of inky spit and lady-cum.  " + flags[kFLAGS.GOO_NAME] + " breathes hard, as if she's been holding her breath all this time, and for all you know, she may have.  In any event, she mewls hungrily, licking her gooey liquids from your box to clean it.  Again, it feels so good that it nearly saps your strength, but you hold tight while she finishes lapping up the lubricants and saliva, leaving your entrance completely clean.")
+		outputText("\n\nAt the sound of your order, a whimper rolls over your [vagina], but the undulating pleasure of her glossy tongue inside you gradually recedes.  Your [clit] pops free from the imprisoning puckers, joined by a web of inky spit and lady-cum.  " + flags[kFLAGS.GOO_NAME] + " breathes hard, as if she's been holding her breath all this time, and for all you know, she may have.  In any event, she mewls hungrily, licking her gooey liquids from your box to clean it.  Again, it feels so good that it nearly saps your strength, but you hold tight while she finishes lapping up the lubricants and saliva, leaving your entrance completely clean.");
 		//Happy: 
 		if(gooHappiness() >= 66) outputText("\n\n\"<i>Thank you for the food, [Master],</i>\" " + flags[kFLAGS.GOO_NAME] + " coos, \"<i>A pet like me only needs what you allow, isn't that right, [Master]?</i>\"");
 		//Mediocre:

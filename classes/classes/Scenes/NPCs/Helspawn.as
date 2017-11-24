@@ -1,7 +1,8 @@
 package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects.Combat.CalledShotDebuff;
 
 public class Helspawn extends Monster
@@ -24,7 +25,6 @@ public class Helspawn extends Monster
 			choices[rand(choices.length)]();
 			//Tail Whip
 			if(rand(4) == 0) tailWhipShitYo();
-			combatRoundOver();
 		}
 
 //Basic Attack - Twin Strike
@@ -120,13 +120,13 @@ private function calledShot():void {
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.helSpawnScene.beatUpYourDaughter();
+			SceneLib.helSpawnScene.beatUpYourDaughter();
 		}
 
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.helSpawnScene.loseSparringToDaughter();
+			SceneLib.helSpawnScene.loseSparringToDaughter();
 		}
 
 		public function Helspawn()
@@ -147,15 +147,15 @@ private function calledShot():void {
 							}[ weapon] +
 							".  Pacing around you, the well-built young warrior intently studies her mentor's defenses, readying for your next attack.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_NORMAL, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_NORMAL, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 85, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E+"));
-			this.ass.analLooseness = ANAL_LOOSENESS_VIRGIN;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_VIRGIN;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,85,0,0,0);
 			this.tallness = 90;
-			this.hipRating = HIP_RATING_CURVY+2;
-			this.buttRating = BUTT_RATING_LARGE+1;
+			this.hipRating = AppearanceDefs.HIP_RATING_CURVY+2;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE+1;
 			this.skinTone = "dusky";
 			this.hairColor = "red";
 			this.hairLength = 13;
@@ -178,7 +178,7 @@ private function calledShot():void {
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 18;
 			this.gems = 10 + rand(5);
-			this.tailType = TAIL_TYPE_SALAMANDER;
+			this.tailType = AppearanceDefs.TAIL_TYPE_SALAMANDER;
 			this.tailRecharge = 0;
 			this.createStatusEffect(StatusEffects.Keen, 0, 0, 0, 0);
 			this.drop = NO_DROP;

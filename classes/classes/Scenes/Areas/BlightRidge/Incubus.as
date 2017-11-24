@@ -4,13 +4,13 @@
  */
 package classes.Scenes.Areas.BlightRidge
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Areas.BlightRidge.DemonScene;
-	
-	use namespace kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
+
+use namespace kGAMECLASS;
 	
 	public class Incubus extends Monster
 	{
@@ -30,10 +30,9 @@ package classes.Scenes.Areas.BlightRidge
 		private function cockTripAttack():void {
 			if (hasStatusEffect(StatusEffects.Blind)) { //Blind dodge change
 				outputText(capitalA + short + " suddenly grows it's dick to obscene lengths and tries to trip you with it.  Thankfully he's so blind he wasn't aiming anywhere near you!");
-				game.combatRoundOver();
 				return;
 			}
-			outputText("The incubus lunges forward in a clumsy attack that you start to side-step, only to feel something grip behind your " + game.buttDescript() + " and pull your [legs] out from under you.");
+			outputText("The incubus lunges forward in a clumsy attack that you start to side-step, only to feel something grip behind your " + Appearance.buttDescription(player) + " and pull your [legs] out from under you.");
 			if ((player.spe-30) > rand(60)) {
 				outputText("  You spin as you fall, twisting your [legs] free and springing back to your [feet] unharmed.");
 			}
@@ -51,19 +50,17 @@ package classes.Scenes.Areas.BlightRidge
 					outputText("  Disgusted, you pull away from the purplish monstrosity, the act made easier by your well-slimed [legs].");
 					player.dynStats("lus", 5 + player.cor / 20);
 				}
-				game.combat.takeDamage(5);
+				SceneLib.combat.takeDamage(5);
 			}
 			outputText("\nThe incubus gives an overconfident smile as his cock retracts away from you, returning to its normal size.");
-			game.combatRoundOver();
 		}
 		
 		private function cockTripAttack2():void {
 			if (hasStatusEffect(StatusEffects.Blind)) { //Blind dodge change
 				outputText(capitalA + short + " suddenly grows it's dick to obscene lengths and tries to trip you with it.  Thankfully he's so blind he wasn't aiming anywhere near you!");
-				game.combatRoundOver();
 				return;
 			}
-			outputText("The incubus lunges forward in a clumsy attack that you start to side-step, only to feel something grip behind your " + game.buttDescript() + " and pull your [legs] out from under you.");
+			outputText("The incubus lunges forward in a clumsy attack that you start to side-step, only to feel something grip behind your " + Appearance.buttDescription(player) + " and pull your [legs] out from under you.");
 			if ((player.spe-30) > rand(60)) {
 				outputText("  You spin as you fall, twisting your [legs] free and springing back to your [feet] unharmed.");
 			}
@@ -81,23 +78,20 @@ package classes.Scenes.Areas.BlightRidge
 					outputText("  Disgusted, you pull away from the purplish monstrosity, the act made easier by your well-slimed [legs].");
 					player.dynStats("lus", 4 + player.cor / 25);
 				}
-				game.combat.takeDamage(4);
+				SceneLib.combat.takeDamage(4);
 			}
 			outputText("\nThe incubus gives an overconfident smile as his cock retracts away from you, returning to its normal size.");
-			game.combatRoundOver();
 		}
 		
 		private function spoogeAttack2():void {
 			if (hasStatusEffect(StatusEffects.Blind)) { //Blind dodge change
 				outputText(capitalA + short + " pumps and thrusts his hips lewdly before cumming with intense force in your direction!  Thankfully his aim was off due to the blindness currently affect him.");
-				game.combatRoundOver();
 				return;
 			}
 			outputText("Your demonic foe places his hands behind his head and lewdly pumps and thrusts his hips at you.  Your eyes open wide as a globule of cum erupts from the demon-prick and flies right at you.  ");
 			if (player.shield == game.shields.DRGNSHL && rand(2) == 0)
 			{
-				outputText("Your shield managed to absorb the attack!")
-				combatRoundOver();
+				outputText("Your shield managed to absorb the attack!");
 				return;
 			}
 			outputText("You do your best to dodge, but some still lands on your ");
@@ -132,7 +126,6 @@ package classes.Scenes.Areas.BlightRidge
 					}
 					else outputText("crotch.  Thankfully, it doesn't seem to have much effect.");
 			}
-			game.combatRoundOver();
 			lust -= 10;
 			if (lust < 0) lust = 10;
 		}
@@ -150,12 +143,12 @@ package classes.Scenes.Areas.BlightRidge
 			this.cumMultiplier = 3;
 			// this.hoursSinceCum = 0;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_SLIME_DROOLING;
 			this.tallness = rand(9) + 70;
-			this.hipRating = HIP_RATING_AMPLE;
-			this.buttRating = BUTT_RATING_TIGHT;
-			this.lowerBody = LOWER_BODY_TYPE_DEMONIC_CLAWS;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_DEMONIC_CLAWS;
 			this.skinTone = "light purple";
 			this.hairColor = "black";
 			this.hairLength = 12;
@@ -181,8 +174,8 @@ package classes.Scenes.Areas.BlightRidge
 			this.additionalXP = 50;
 			this.special1 = cockTripAttack2;
 			this.special2 = spoogeAttack2;
-			this.tailType = TAIL_TYPE_DEMONIC;
-			this.wingType = WING_TYPE_BAT_LIKE_TINY;
+			this.tailType = AppearanceDefs.TAIL_TYPE_DEMONIC;
+			this.wingType = AppearanceDefs.WING_TYPE_BAT_LIKE_TINY;
 			this.wingDesc = "tiny hidden";
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);

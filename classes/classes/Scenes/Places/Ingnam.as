@@ -1,15 +1,16 @@
 //Ingnam: The Prologue
 package classes.Scenes.Places 
 {
-	import classes.*;
-	import classes.GlobalFlags.*;
-	import classes.Items.*;
-	import classes.Scenes.Soulforce;
-	import classes.Scenes.Places.Ingnam.*;
-	
-	import coc.view.MainView;
-	
-	public class Ingnam extends BaseContent
+import classes.*;
+import classes.GlobalFlags.*;
+import classes.Items.*;
+import classes.Scenes.Places.Ingnam.*;
+import classes.Scenes.SceneLib;
+import classes.Scenes.Soulforce;
+
+import coc.view.MainView;
+
+public class Ingnam extends BaseContent
 	{
 		public var ingnamFarm:IngnamFarm = new IngnamFarm();
 		public var thiefScene:ThiefScene = new ThiefScene();
@@ -27,9 +28,9 @@ package classes.Scenes.Places
 			if (player.slotName != "VOID" && mainView.getButtonText(0) != "Game Over" && flags[kFLAGS.HARDCORE_MODE] > 0) 
 			{
 				trace("Autosaving to slot: " + player.slotName);
-				
-				getGame().saves.saveGame(player.slotName);
-			}
+
+kGAMECLASS.saves.saveGame(player.slotName);
+            }
 			//Banished to Mareth.
 			if (model.time.days >= 0 && flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] <= 0) {
 				getBanishedToMareth();
@@ -66,19 +67,19 @@ package classes.Scenes.Places
 					removeButton(0);
 					removeButton(4);
 				}
-				addButton(8, "Masturbate", kGAMECLASS.masturbation.masturbateMenu);
-				if ((((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", kGAMECLASS.masturbation.masturbateMenu);
+				addButton(8, "Masturbate", SceneLib.masturbation.masturbateMenu);
+				if ((((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", SceneLib.masturbation.masturbateMenu);
 			}
 			//Show wait/rest/sleep depending on conditions.
-			addButton(9, "Wait", kGAMECLASS.camp.doWait);
-			if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", getGame().camp.rest);
-			if (model.time.hours >= 21 || model.time.hours < 6) {
+			addButton(9, "Wait", SceneLib.camp.doWait);
+            if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", SceneLib.camp.rest);
+            if (model.time.hours >= 21 || model.time.hours < 6) {
 				removeButton(0);
 				removeButton(1);
 				removeButton(2);
 				removeButton(4);
-				addButton(9, "Sleep", getGame().camp.doSleep);
-			}
+                addButton(9, "Sleep", SceneLib.camp.doSleep);
+            }
 			if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) addButton(10, "Soulforce", soulforce.accessSoulforceMenu).hint("Spend some time on the cultivation or spend some of the soulforce.");
 		}
 		
@@ -292,13 +293,13 @@ package classes.Scenes.Places
 			}
 			else {
 				outputText("\n\nYou count out your gems and realize it's beyond your price range.");
-				menu()
+				menu();
 				addButton(0, "Next", transactionNo, shop);
 			}
 		}
 		public function transactionYes(item:ItemType, price:int, shop:int):void {
 			//Determine shop
-			var shopToGo:Function = null
+			var shopToGo:Function = null;
 			if (shop == 1) shopToGo = shopBlacksmith;
 			else if (shop == 2) shopToGo = shopBlacksmith;
 			else if (shop == 3) shopToGo = shopTailor;
@@ -348,7 +349,7 @@ package classes.Scenes.Places
 			outputText("\n\nIncense languorously wafts from the alcoves where offerings of fruit are left out for the Gods. Monks passively move amongst the parishioners, offering solace to those in need, food or drink to those who are weary, or in meditation.");
 			outputText("\n\nThere are several soft mats on the floor to provide soft areas for people to pray on.");
 			menu();
-			addButton(0, "Meditate", kGAMECLASS.masturbation.meditate);
+			addButton(0, "Meditate", SceneLib.masturbation.meditate);
 			addButton(14, "Leave", menuIngnam);
 		}
 		
@@ -385,7 +386,7 @@ package classes.Scenes.Places
 				outputText("The innkeeper looks at you and says, \"<i>I can see that you have changed quite a lot! Back then, before you left, you were a human. Now look at yourself!</i>\"");
 			}
 			if (player.horns > 0 && player.hornType > 0) {
-				outputText("\n\n\"<i>Are these " + (player.hornType == HORNS_ANTLERS ? "antlers" : "horns") + "? I can imagine they must be real,</i>\" The innkeeper says before touching your [horns]. You can already feel his fingers rubbing against your [horns]. \"<i>Yes, they're real and I think you look better,</i>\" he says. You thank him for complimenting on your horns.");
+				outputText("\n\n\"<i>Are these " + (player.hornType == AppearanceDefs.HORNS_ANTLERS ? "antlers" : "horns") + "? I can imagine they must be real,</i>\" The innkeeper says before touching your [horns]. You can already feel his fingers rubbing against your [horns]. \"<i>Yes, they're real and I think you look better,</i>\" he says. You thank him for complimenting on your horns.");
 			}
 			if (player.wingType > 0) {
 				outputText("\n\nNext, he looks at your wings that sprout from your back and says, \"<i>Wings? I've never seen a person with wings before!</i>\" ");
@@ -400,13 +401,13 @@ package classes.Scenes.Places
 			clearOutput();
 			outputText("The innkeeper stands up to see that there's something unusual with your appearance.");
 			if (player.earType > 0) {
-				if (player.earType == EARS_HORSE) {
+				if (player.earType == AppearanceDefs.EARS_HORSE) {
 					outputText("\n\nHe says, \"<i>Your ears... They look different! They look like horse's! I have no idea how your ears changed.</i>\"");
 				}
-				if (player.earType == EARS_DOG) {
+				if (player.earType == AppearanceDefs.EARS_DOG) {
 					outputText("\n\nHe says, \"<i>Your ears... They look like dog's! I have no idea how your ears changed.</i>\"");
 				}
-				if (player.earType == EARS_CAT) {
+				if (player.earType == AppearanceDefs.EARS_CAT) {
 					outputText("\n\nHe says, \"<i>Your ears... They look like cat's! I have no idea how your ears changed but other than that, you look much cuter with cat ears!</i>\" He walks over to you and scratch your cat-ears. \"<i>They look and feel so real,</i>\" he says.");
 				}
 				flags[kFLAGS.INGNAM_EARS_LAST_TYPE] = player.earType;
@@ -466,7 +467,7 @@ package classes.Scenes.Places
 				}
 				//Get so drunk you end up peeing! Genderless can still urinate.
 				if (player.statusEffectv2(StatusEffects.Drunk) >= 3) {
-					outputText("\n\nYou feel so drunk. Your vision is blurry and you realize something's not feeling right. Gasp! You have to piss like a racehorse! You stumble toward the back door and go outside. ")
+					outputText("\n\nYou feel so drunk. Your vision is blurry and you realize something's not feeling right. Gasp! You have to piss like a racehorse! You stumble toward the back door and go outside. ");
 					if (player.hasVagina() && !player.hasCock()) outputText("You open up your [armor] and squat down while you release your pressure onto the ground. ");
 					else outputText("You open up your [armor] and lean against the wall using one of your arms for support while you release your pressure onto the wall. ");
 					outputText("It's like as if the floodgate has opened! ");

@@ -42,6 +42,19 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
+      <configuration name="CoC-Mobile" target-platform="Mobile" main-class="classes.CoC" output-file="CoC-Mobile.swf" output-folder="$MODULE_DIR$" skip-build="true">
+        <dependencies>
+          <sdk name="4.6.0" />
+        </dependencies>
+        <compiler-options>
+          <map>
+            <entry key="compiler.define" value="CONFIG::AIR&#9;true&#10;CONFIG::STANDALONE&#9;false&#10;CONFIG::debug&#9;false&#10;CONFIG::release&#9;true" />
+          </map>
+        </compiler-options>
+        <packaging-air-desktop />
+        <packaging-android enabled="true" package-file-name="CoC-Mobile" />
+        <packaging-ios package-file-name="CoC-Mobile" />
+      </configuration>
     </configurations>
     <compiler-options />
   </component>

@@ -1,8 +1,8 @@
 ﻿package classes.Scenes.NPCs{
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
 
-	public class UrtaHeatRut extends NPCAwareContent {
+public class UrtaHeatRut extends NPCAwareContent {
 
 		public function UrtaHeatRut()
 		{
@@ -139,7 +139,7 @@ private function notInterestedInUburDrunkUrtaRuts():void {
 	//[Medium lust increase] 
 
 	//[If the PC has a snake tongue]
-	if(player.tongueType == TONGUE_SNAKE) outputText("You instinctively taste the air, and Urta suddenly seems utterly delicious. ");
+	if(player.tongueType == AppearanceDefs.TONGUE_SNAKE) outputText("You instinctively taste the air, and Urta suddenly seems utterly delicious. ");
 	//Rut: 
 	if(player.inRut && player.hasCock()) outputText("Your [cocks] hardens in your pants as you still force yourself to leave.");
 	//[Medium lust increase]
@@ -421,7 +421,7 @@ private function soberUrtaSatingPCHeat():void {
 	}
 
 	//([Regular Urta]"You probably should learn to control yourself well enough so that next time, we can get clean at my home, not to mention fucking in the middle of the street is just:"/[Lover Urta]â Baby, next time, at least wait until we get back home, okay? Not to mention, when you provoke me, you're completely irresistible, so try to be considerate: It was amazing, though. I love you.â She says, as she kisses you gently on the lips.)
-	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++
+	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 	urtaLove(1);
 	outputText("\n\nSatisfied, the two of you part ways here, Urta apparently searching for something after waving at you when you leave. Your heat somewhat calmer now, you find yourself on your way back to camp, sticky jism running in a thin trail down your [legs] while your [vagina] desperately clenches to hold it all in.");
 	//Usual one hour passes//
@@ -624,7 +624,7 @@ private function drunkenUrtaFucksPCInHeat():void {
 	dynStats("lust=",0);
 	dynStats("lust=",0);
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 24;
-	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++
+	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 	urtaLove(1);
 	doNext(camp.returnToCampUseFourHours);
 }
@@ -673,7 +673,7 @@ private function sateRutWithDrunkUrtaWithHugeDick():void {
 	dynStats("lib",1,"sen",-1,"lust=",0);
 	//player returns to TelâAdre and loses 1 hour
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 1;
-	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++
+	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 	urtaLove(1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -882,7 +882,7 @@ private function drunkUrtaRidesARutPCsCock():void {
 	player.orgasm();
 	player.orgasm();
 	player.orgasm();
-	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++
+	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 	urtaLove(1);
 	flags[kFLAGS.TIMES_RUT_FUCKED_URTAS_CUNT]++;
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 24;

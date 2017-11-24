@@ -1,10 +1,10 @@
 ﻿package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
-	public class Clara extends Monster
+public class Clara extends Monster
 	{
 		private function notMurbleEnjoysTheLacticAcid():void
 		{
@@ -13,7 +13,6 @@
 			HP += 45;
 			lust += 5;
 			player.dynStats("lus", (5+player.lib/5));
-			combatRoundOver();
 		}
 		//Clara throws a goblin potion, she has the web potion, the lust potion, and the weakening potion
 		//should she try to drug them instead?
@@ -39,11 +38,9 @@
 				//Increase fatigue
 				if(color == "black") {
 					outputText("\nThe black fluid splashes all over you and wicks into your skin near-instantly.  It makes you feel tired and drowsy.\n");
-					game.fatigue(10 + rand(25));
+					EngineCore.fatigue(10 + rand(25));
 				}
 			}
-			combatRoundOver();
-			return;
 		}
 		//Clara teases the PC, and tries to get them to give up
 		protected function claraTeaseAttack():void
@@ -54,7 +51,6 @@
 			else outputText("Instead of attacking, Clara runs her hands up and down her body, emphasizing all the curves it has.  \"<i>You were made to be the milk slave of this, stop fighting it!</i>\" she says almost exasperated.  Even so, you find your gaze lingering on those curves against your will.");
 			outputText("\n");
 			player.dynStats("lus",5+player.lib/20);
-			combatRoundOver();
 		}
 
 		//Once Clara is at half health or lower, she'll cast blind.
@@ -71,7 +67,6 @@
 					outputText("Your mutated eyes not been affected at all by this flash!");
 				}
 			else outputText("\nYou manage to close your eyes just in time to avoid being blinded by the bright flash of light that erupts in your face!  Clara curses when she see's you're unaffected by her magic.");
-			combatRoundOver();
 		}
 		public function claraGropesBlindPCs():void
 		{
@@ -82,21 +77,18 @@
 			//Bum: 
 			else outputText("Thanks to Clara robbing you of your sight, you lose track of her.  She takes advantage of this, and grabs you from behind, and rubs her considerable curvy cans against your undefended back!  You manage to get her off you after a moment, but not before she gives your [ass] a smack.  \"<i>Everyone will be soo much happier when yoou finally stop fighting me!</i>\" she taunts you behind your dazzled vision.");
 			player.dynStats("lus",7+player.lib/15);
-			combatRoundOver();
 		}
 		//Every round if you're in Clara’s base; the PC’s lust is raised slightly.
 		protected function claraBonusBaseLustDamage():void
 		{
 			outputText("\nThe early effects of your addiction are making it harder and harder to continue the fight.  You need to end it soon or you’ll give in to those urges.");
 			player.dynStats("lus",2+player.lib/20);
-			combatRoundOver();
 		}
 		override protected function performCombatAction():void
 		{
 			if(player.hasStatusEffect(StatusEffects.ClaraFoughtInCamp) && player.statusEffectv1(StatusEffects.ClaraCombatRounds) >= 10)
 			{
 				HP = 0;
-				combatRoundOver();
 			}
 			if(HP < 50 && rand(2) == 0) {
 				notMurbleEnjoysTheLacticAcid();
@@ -129,11 +121,11 @@
 				//PC wins via lust
 				else outputText("The fury and anger finally give out to the overwhelming lust that you’ve help Clara feel.  She can’t fight anymore, and falls onto her backside.  She starts feeling herself up, and desperately asks you to fuck her.\n\n");
 			}
-			game.marblePurification.defeatClaraCuntInAFight();
+			SceneLib.marblePurification.defeatClaraCuntInAFight();
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.marblePurification.loseToClara();
+			SceneLib.marblePurification.loseToClara();
 		}
 
 		public function Clara()
@@ -144,14 +136,14 @@
 			this.imageName = "marble";
 			this.long = "You are fighting Marble’s little sister Clara!  The cow-girl looks spitting mad, determined to steal you from her sister and make you into her milk slave, with her breasts hanging out for all to see.  Fortunately, she doesn’t look as big or strong as her sister, and you don’t think she’s been trained to fight like Marble has either.  Still, there is no telling what tricks she has up her sleeves, and she is holding a very angry looking heavy mace.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_NORMAL, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_NORMAL, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			createBreastRow(Appearance.breastCupInverse("F"));
-			this.ass.analLooseness = ANAL_LOOSENESS_VIRGIN;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_VIRGIN;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.tallness = 6*12+4;
-			this.hipRating = HIP_RATING_CURVY;
-			this.buttRating = BUTT_RATING_LARGE;
-			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
+			this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
 			this.skinTone = "pale";
 			this.hairColor = "brown";
 			this.hairLength = 13;
@@ -168,7 +160,7 @@
 			this.bonusLust = 20;
 			this.gems = rand(5) + 25;
 			this.drop = NO_DROP;
-			this.tailType = TAIL_TYPE_COW;
+			this.tailType = AppearanceDefs.TAIL_TYPE_COW;
 			//this.special1 = marbleSpecialAttackOne;
 			//this.special2 = marbleSpecialAttackTwo;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);

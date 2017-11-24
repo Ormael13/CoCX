@@ -1,16 +1,17 @@
 package classes.Items.Consumables 
 {
-import classes.Creature;
-import classes.GlobalFlags.kGAMECLASS;
-	import classes.internals.Utils;
-	import classes.Items.Consumable;
-	import classes.Items.ConsumableLib;
+import classes.Appearance;
+import classes.AppearanceDefs;
+import classes.EngineCore;
+import classes.Items.Consumable;
+import classes.Items.ConsumableLib;
+import classes.Scenes.SceneLib;
 
-	public class HairDye extends Consumable 
+public class HairDye extends Consumable
 	{
 		private var _color:String;
-		
-		public function HairDye(id:String, color:String, value:int = ConsumableLib.DEFAULT_VALUE) 
+
+		public function HairDye(id:String, color:String, value:int = 6)
 		{
 			_color = color.toLowerCase();
 			var shortName:String = color + " Dye";
@@ -25,27 +26,27 @@ import classes.GlobalFlags.kGAMECLASS;
 		
 		override public function useItem():Boolean {
 			clearOutput();
-			game.menu();
+			EngineCore.menu();
 			 
 			if (game.player.hairLength > 0) {
 				outputText("You have " + game.player.hairColor + " hair.");
-				if (game.player.hairColor != _color) game.addButton(0, "Hair", dyeHair);
-				else game.addButtonDisabled(0, "Hair", "Your already have " + game.player.hairColor + " hair!");
+				if (game.player.hairColor != _color) EngineCore.addButton(0, "Hair", dyeHair);
+				else EngineCore.addButtonDisabled(0, "Hair", "Your already have " + game.player.hairColor + " hair!");
 			} else {
 				outputText("You have no hair.");
-				game.addButtonDisabled(0, "Hair", "You are bald!");
+				EngineCore.addButtonDisabled(0, "Hair", "You are bald!");
 			}
 			
-			if (game.player.hasCoatOfType(SKIN_COAT_FUR)) {
+			if (game.player.hasCoatOfType(AppearanceDefs.SKIN_COAT_FUR)) {
 				outputText("\n\nYou have [skin coat].");
-				if (game.player.coatColor != _color) game.addButton(1, "Fur", dyeFur);
-				else game.addButtonDisabled(1, "Fur", "Your already have " + _color + " fur!");
+				if (game.player.coatColor != _color) EngineCore.addButton(1, "Fur", dyeFur);
+				else EngineCore.addButtonDisabled(1, "Fur", "Your already have " + _color + " fur!");
 			} else {
 				outputText("\n\nYou have no fur.");
-				game.addButtonDisabled(1, "Fur", "You have no fur!");
+				EngineCore.addButtonDisabled(1, "Fur", "You have no fur!");
 			}
 			
-			game.addButton(4, "Nevermind", dyeCancel);
+			EngineCore.addButton(4, "Nevermind", dyeCancel);
 			return true;
 		}
 		
@@ -55,18 +56,18 @@ import classes.GlobalFlags.kGAMECLASS;
 				outputText("You rub the dye into your bald head, but it has no effect.");
 			}
 			else if (game.player.hairColor.indexOf("rubbery") != -1 || game.player.hairColor.indexOf("latex-textured") != -1) {
-				outputText("You massage the dye into your " + game.hairDescript() + " but the dye cannot penetrate the impermeable material your hair is composed of.");
+				outputText("You massage the dye into your " + Appearance.hairDescription(player) + " but the dye cannot penetrate the impermeable material your hair is composed of.");
 			}
 			else {
-				outputText("You rub the dye into your " + game.hairDescript() + ", then use a bucket of cool lakewater to rinse clean a few minutes later.  ");
+				outputText("You rub the dye into your " + Appearance.hairDescription(player) + ", then use a bucket of cool lakewater to rinse clean a few minutes later.  ");
 				game.player.hairColor = _color;
-				outputText("You now have " + game.hairDescript() + ".");
+				outputText("You now have " + Appearance.hairDescription(player) + ".");
 				if (game.player.lust > 50) {
 					outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
 					game.player.dynStats("lus", -15);
 				}
 			}
-			game.inventory.itemGoNext();
+			SceneLib.inventory.itemGoNext();
 		}
 		
 		private function dyeFur():void {
@@ -78,13 +79,13 @@ import classes.GlobalFlags.kGAMECLASS;
 				outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
 				game.player.dynStats("lus", -15);
 			}
-			game.inventory.itemGoNext();
+			SceneLib.inventory.itemGoNext();
 		}
 		
 		private function dyeCancel():void {
 			clearOutput();
 			outputText("You put the dye away.\n\n");
-			game.inventory.returnItemToInventory(this);
+			SceneLib.inventory.returnItemToInventory(this);
 		}
 	}
 

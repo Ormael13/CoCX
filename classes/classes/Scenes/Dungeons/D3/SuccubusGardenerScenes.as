@@ -1,11 +1,13 @@
 ﻿package classes.Scenes.Dungeons.D3 
 {
-	import classes.BaseContent;
-	import classes.StatusEffects;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.CockTypesEnum;
-	
-	/**
+import classes.AppearanceDefs;
+import classes.BaseContent;
+import classes.CockTypesEnum;
+import classes.EventParser;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+
+/**
 	 * ...
 	 * @author Gedan
 	 */
@@ -23,26 +25,26 @@
 
 		public function gardenerDefeated():Boolean
 		{
-			if (flags[kFLAGS.D3_GARDENER_DEFEATED] > 0) return true;
-			return false;
+			return flags[kFLAGS.D3_GARDENER_DEFEATED] > 0;
+
 		}
 
 		public function gardenerKilled():Boolean
 		{
-			if (flags[kFLAGS.D3_GARDENER_DEFEATED] == 3) return true;
-			return false;
+			return flags[kFLAGS.D3_GARDENER_DEFEATED] == 3;
+
 		}
 
 		public function gardenerFucked():Boolean
 		{
-			if (flags[kFLAGS.D3_GARDENER_DEFEATED] == 2) return true;
-			return false;
+			return flags[kFLAGS.D3_GARDENER_DEFEATED] == 2;
+
 		}
 
 		public function gardenerLeft():Boolean
 		{
-			if (flags[kFLAGS.D3_GARDENER_DEFEATED] == 1) return true;
-			return false;
+			return flags[kFLAGS.D3_GARDENER_DEFEATED] == 1;
+
 		}
 
 		public function fuckUpTheGardener(hpVictory:Boolean):void
@@ -66,8 +68,8 @@
 			outputText(" like those are one in a million.");
 			
 			if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0) outputText(" Perhaps Scylla's ruby mouth could give her a run for her money, but there's only one way to be sure.");
-			else if (getGame().telAdre.dominika.fellatrixSucked() > 0) outputText(" Perhaps Dominika's all-consuming mouth could give her a run for her money, but there's only one way to be sure.");
-			outputText(" You grab hold of the blubbering slut by her curled horns, admiring the way the tentacle-juice on her lips shines in the light, and pull her against your crotch, pressing her against");
+            else if (SceneLib.telAdre.dominika.fellatrixSucked() > 0) outputText(" Perhaps Dominika's all-consuming mouth could give her a run for her money, but there's only one way to be sure.");
+            outputText(" You grab hold of the blubbering slut by her curled horns, admiring the way the tentacle-juice on her lips shines in the light, and pull her against your crotch, pressing her against");
 			if (player.hasCock()) outputText(" [oneCock]");
 			else if (player.hasVagina()) outputText(" your [vagina]");
 			else outputText(" the sensitive skin of your groin");
@@ -167,7 +169,7 @@
 
 					outputText("\n\nSometime later, you come to in between orgasms, surrounded in green, but there is so much sensory data coming from your crotch that your eyes might as well be blind by comparison. You marvel at this new life and wonder if you'll ever tire of admiring the texture of these walls. The next orgasm blasts those thoughts away, answering the question for you. Raw, unfiltered pleasure. That's what matters to you now.");
 
-					getGame().gameOver();
+					EventParser.gameOver();
 				}
 			}
 		}
@@ -177,7 +179,7 @@
 			clearOutput();
 			outputText("\n\nYou're held captive, overwhelmed by your own senses, and brought to nirvana ceaselessly. The demons never even try to free your fate, held captive as you are by one of the eldest tentacle beasts. You spend the rest of your life feeding it, incapable of focusing on anything but your own feelings of ecstasy.");
 			
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 
 		private function endHer():void
@@ -188,8 +190,8 @@
 			flags[kFLAGS.D3_GARDENER_DEFEATED] = GARDENER_KILLED;
 
 			menu();
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
-		}
+            cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+        }
 
 		private function leaveHer():void
 		{
@@ -199,8 +201,8 @@
 			flags[kFLAGS.D3_GARDENER_DEFEATED] = GARDENER_LEFT;
 
 			menu();
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
-		}
+            cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+        }
 
 		public function surrenderToTheGardener(hpVictory:Boolean = false):void
 		{
@@ -344,7 +346,7 @@
 			
 			outputText("\n\nAnother, larger tentacle takes its place, sealing most of the first's load inside. There's no waiting, only fucking and climbing to one orgasm after another. The space between climaxes narrows with each one until your world becomes a constant, irresistible tide of bliss.");
 			
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 		
 		private function maleLoss(hpVictory:Boolean):void
@@ -490,7 +492,7 @@
 			outputText("\n\nThere's just too much physical sensation going on for you to focus on coherent thoughts. Every part of your body feels like it's screaming its awareness at you. Your tail is a little itchy, for instance. Your legs are a little tired, but it's that good kind of 'just went for walkies' tired. Your nose can smell soooo much. And best of all, your cock feels like it's three times as sensitive. It's so much easier to just think in emotions and images instead of abstract concepts like words.");
 
 			outputText("\n\nMistress clasps a collar around your furry neck.");
-			if (player.skinType != SKIN_TYPE_FUR) outputText(" Was that there before?");
+			if (player.skinType != AppearanceDefs.SKIN_TYPE_FUR) outputText(" Was that there before?");
 			outputText(" It feels very right, and in your excitement, it's hard not to hump her leg. It must be obvious to her, because your dick");
 			if (player.cocks.length > 1) outputText("s are");
 			else outputText(" is");
@@ -527,7 +529,7 @@
 		{
 			clearOutput();
 			outputText("The champion, more canine than [man], became little more than one mutt among many that the demons had tamed, used for everything from breeding to hunting escaped slaves, and " + player.mf("he","she") + " loved it, delighted in it even. Eventually, " + player.mf("his","her") + " owner bred her numerous times, creating a bloodline of strong, loyal servants that eventually helped keep all of Mareth under the demon's heels.");
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 		
 		private function maleLossFeeder():void
@@ -655,7 +657,7 @@
 
 			outputText("\n\nYou never want to leave. In fact, you never want again.");
 
-			getGame().gameOver();
+			EventParser.gameOver();
 		}		
 	}
 }

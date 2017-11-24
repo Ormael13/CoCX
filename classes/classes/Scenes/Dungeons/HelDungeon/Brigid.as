@@ -1,9 +1,10 @@
 package classes.Scenes.Dungeons.HelDungeon
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
-	public class Brigid extends Monster
+public class Brigid extends Monster
 	{
 
 		//Attack One: Hot Poker, Right Up Your Ass!
@@ -16,7 +17,6 @@ package classes.Scenes.Dungeons.HelDungeon
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			damage = Math.round(damage);
 			damage = player.takeMagicDamage(damage, true);
-			game.combatRoundOver();
 		}
 
 		//Attack Two: SHIELD BOP! OOM BOP!
@@ -27,14 +27,12 @@ package classes.Scenes.Dungeons.HelDungeon
 			damage = player.takeDamage(damage, true);
 			if(player.findPerk(PerkLib.Resolute) >= 0) outputText("  Of course, your resolute posture prevents her from accomplishing much.");
 			else player.createStatusEffect(StatusEffects.Stunned,0,0,0,0);
-			game.combatRoundOver();
 		}
 
 		//Attack Three: Harpy Ass Grind GO!
 		private function BrigidAssGrind():void {
 			outputText("Brigid grins as she approaches you.  She handily deflects a few defensive blows and grabs you by the shoulders.  She forces you onto your knees and before you can blink, has turned around and smashed your face into her ass!  \"<i>Mmm, you like that, don'tcha?</i>\" she growls, grinding her huge, soft ass across your face, giving you an up-close and personal feel of her egg-laying hips.");
 			player.dynStats("lus", 30);
-			game.combatRoundOver();
 		}
 		override protected function performCombatAction():void
 		{
@@ -52,12 +50,12 @@ package classes.Scenes.Dungeons.HelDungeon
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.brigidScene.pcDefeatsBrigid();
+			SceneLib.brigidScene.pcDefeatsBrigid();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.brigidScene.pcDefeatedByBrigid();
+			SceneLib.brigidScene.pcDefeatedByBrigid();
 		}
 
 		public function Brigid()
@@ -67,16 +65,16 @@ package classes.Scenes.Dungeons.HelDungeon
 			this.imageName = "brigid";
 			this.long = "Brigid is a monster of a harpy, standing a foot taller than any other you've seen. She's covered in piercings, and her pink-dyed hair is shaved down to a long mohawk. She's nude, save for the hot poker in her right hand and the shield in her left, which jingles with every step she takes thanks to the cell keys beneath it.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE);
-			if (LOWER_BODY_TYPE_HARPY > 0) {
-				this.createStatusEffect(StatusEffects.BonusVCapacity, LOWER_BODY_TYPE_HARPY, 0, 0, 0);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_LOOSE);
+			if (AppearanceDefs.LOWER_BODY_TYPE_HARPY > 0) {
+				this.createStatusEffect(StatusEffects.BonusVCapacity, AppearanceDefs.LOWER_BODY_TYPE_HARPY, 0, 0, 0);
 			}
 			createBreastRow(Appearance.breastCupInverse("D"));
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.tallness = rand(8) + 70;
-			this.hipRating = HIP_RATING_AMPLE+2;
-			this.buttRating = BUTT_RATING_LARGE;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
@@ -95,9 +93,9 @@ package classes.Scenes.Dungeons.HelDungeon
 			this.level = 29;
 			this.gems = rand(37)+210;
 			this.additionalXP = 150;
-			this.wingType = WING_TYPE_FEATHERED_LARGE;
-			this.tailType = TAIL_TYPE_DEMONIC;
-			this.hornType = HORNS_DEMON;
+			this.wingType = AppearanceDefs.WING_TYPE_FEATHERED_LARGE;
+			this.tailType = AppearanceDefs.TAIL_TYPE_DEMONIC;
+			this.hornType = AppearanceDefs.HORNS_DEMON;
 			this.horns = 2;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);

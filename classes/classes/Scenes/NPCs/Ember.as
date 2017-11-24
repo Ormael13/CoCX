@@ -1,13 +1,14 @@
 package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.internals.ChainedDrop;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.ChainedDrop;
 
-	public class Ember extends Monster
+public class Ember extends Monster
 	{
 		private function emberMF(male:String,female:String):String{
-			return game.emberScene.emberMF(male,female);
+			return SceneLib.emberScene.emberMF(male,female);
 		}
 		//The Actual Ember Fight (Z)
 		//PC can't use any sexual moves in this battle. This means anything that deals or affects Ember's lust in any way.
@@ -23,7 +24,7 @@ package classes.Scenes.NPCs
 			gems = 0;
 			XP = 0;
 			HP = 0;
-			game.cleanupAfterCombat();
+			SceneLib.combat.cleanupAfterCombatImpl();
 		}
 		//Ember Attacks:
 		private function emberAttack():void {
@@ -49,7 +50,6 @@ package classes.Scenes.NPCs
 					damage = player.takeDamage(damage, true);
 				}
 			}
-			combatRoundOver();
 		}
 		
 		//Dragon Breath: Very rare attack, very high damage
@@ -58,7 +58,7 @@ package classes.Scenes.NPCs
 				//Blind Ember: 
 				outputText("The blinded dragon tracks you with difficulty as you sprint around the landscape; seeing an opportunity, you strafe around " + emberMF("his","her") + " side, planting yourself behind a large flat boulder near " + emberMF("him","her") + " and pelting " + emberMF("him","her") + " with a small rock.  The scream as the dragon turns the magical conflagration toward you, only to have it hit the rock and blow up in " + emberMF("his","her") + " face, is quite satisfying.");
 				//(Ember HP damage)
-				game.doDamage(50);
+				SceneLib.combat.doDamage(50);
 			}
 			else {
 				outputText("Ember inhales deeply, then "+ emberMF("his","her") + " jaws open up, releasing streams of fire, ice and lightning; magical rather than physical, the gaudy displays lose cohesion and amalgamate into a column of raw energy as they fly at you.");
@@ -79,7 +79,6 @@ package classes.Scenes.NPCs
 					damage2 = player.takeMagicDamage(damage2, true);
 				}
 			}
-			combatRoundOver();
 		}
 		
 		//Tailslap: Rare attack, high damage, low accuracy
@@ -87,7 +86,6 @@ package classes.Scenes.NPCs
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind)) {
 				outputText(capitalA + short + " completely misses you with a blind tail-slap!");
-				combatRoundOver();
 				return;
 			}
 			outputText("Ember suddenly spins on "+ emberMF("his","her") + " heel, the long tail that splays behind " + emberMF("him","her") + " lashing out like a whip.  As it hurtles through the air towards you, your attention focuses on the set of spikes suddenly protruding from its tip!");
@@ -104,7 +102,6 @@ package classes.Scenes.NPCs
 				outputText("  The tail slams into you with bone-cracking force, knocking you heavily to the ground even as the spines jab you wickedly.  You gasp for breath in pain and shock, but manage to struggle to your feet again. ");
 				damage3 = player.takeDamage(damage3, true);
 			}
-			combatRoundOver();
 		}
 				
 		//Dragon Force: Tainted Ember only
@@ -125,7 +122,6 @@ package classes.Scenes.NPCs
 				var damage4:Number = 10 + rand(10);
 				damage4 = player.takeDamage(damage4, true);
 			}
-			combatRoundOver();
 		}
 		
 		override protected function performCombatAction():void
@@ -151,14 +147,14 @@ package classes.Scenes.NPCs
 		override public function defeated(hpVictory:Boolean):void
 		{
 			//Hackers gonna hate. Tested and working as intended.
-			if (hpVictory) game.emberScene.beatEmberSpar();
+			if (hpVictory) SceneLib.emberScene.beatEmberSpar();
 			else emberReactsToLustiness();
 		}
 
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.emberScene.loseToEmberSpar();
+			SceneLib.emberScene.loseToEmberSpar();
 		}
 
 		public function Ember()
@@ -182,7 +178,7 @@ package classes.Scenes.NPCs
 				// this.hoursSinceCum = 0;
 			}
 			if(gender >= 2) {
-				this.createVagina(game.flags[kFLAGS.EMBER_PUSSY_FUCK_COUNT] == 0, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE);
+				this.createVagina(game.flags[kFLAGS.EMBER_PUSSY_FUCK_COUNT] == 0, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_LOOSE);
 				createBreastRow(Appearance.breastCupInverse("F"));
 			} else {
 				createBreastRow(Appearance.breastCupInverse("flat"));
@@ -251,11 +247,11 @@ package classes.Scenes.NPCs
 				this.bonusHP = 2000;
 				this.level = 62;
 			}
-			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_NORMAL;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.tallness = rand(8) + 70;
-			this.hipRating = HIP_RATING_AMPLE+2;
-			this.buttRating = BUTT_RATING_LARGE;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
@@ -266,9 +262,9 @@ package classes.Scenes.NPCs
 			this.lust = 20;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.gems = 0;
-			this.hornType = HORNS_DRACONIC_X4_12_INCH_LONG;
+			this.hornType = AppearanceDefs.HORNS_DRACONIC_X4_12_INCH_LONG;
 			this.horns = 4;
-			this.tailType = TAIL_TYPE_DRACONIC;
+			this.tailType = AppearanceDefs.TAIL_TYPE_DRACONIC;
 			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.2);
 			if (flags[kFLAGS.EMBER_LVL_UP] >= 1) this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			if (flags[kFLAGS.EMBER_LVL_UP] >= 2) {

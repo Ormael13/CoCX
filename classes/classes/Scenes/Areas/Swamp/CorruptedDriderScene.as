@@ -3,12 +3,12 @@
  */
 package classes.Scenes.Areas.Swamp
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Items.Armors.LustyMaidensArmor;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Items.Armors.LustyMaidensArmor;
 
-	use namespace kGAMECLASS;
+use namespace kGAMECLASS;
 
 	public class CorruptedDriderScene extends BaseContent
 	{
@@ -41,7 +41,7 @@ package classes.Scenes.Areas.Swamp
 				outputText("Bushwhacking your way through the dense foliage of the swamp, it soon becomes clear that you've wandered into spider territory.  Webbing hangs from trees and the dark, dank air hides ambushes well.  Diligence and wariness pay off, for you become aware of a skittering too near to be simple background noise.\n\n");
 				outputText("As far as you're aware, it's unlikely you'll be able to scare your stalker off, and so you simply wait for them to show themselves.  You search with your eyes and, noisily clearing your throat, make it clear you're aware of their presence.  Soft chuckling chimes around you, seeming to originate from several places in the scrub, but nothing appears.  You turn about and call again, raising your [weapon].  A gentle tap on the shoulder answers you, but when you look the vista is equally as desolate as the first time.  And where the hell is that laughing coming from?\n\n");
 				outputText("Spinning again, you lose your patience and loudly demand your ambusher present itself.  A soft tug on your ");
-				if (player.tailType > TAIL_TYPE_NONE) outputText("tail ");
+				if (player.tailType > AppearanceDefs.TAIL_TYPE_NONE) outputText("tail ");
 				else outputText("hair ");
 				outputText("pulls you back halfway, but as you open your mouth to yell, the ground gives a quiet thump.  Just barely in your periphery, you see a white apparition with a yawning mouth stretching out to bite, and your reflexes take over, dropping your weight and rolling you away from it.\n\n");
 				outputText("\"<i>Clever little pet,</i>\" the phantom spits, resolving into the shape of a drider as your eyes focus and your adrenaline haze clears.  Raising a cupped hand to her ghoulishly grinning mouth, she laughs into it; a minute shivering in the air reveals the taut threads of silk attached to her finger.  The vibrations travel down them, shaking several silk-tied leaves and producing the raspy, laughing audience from before.  \"<i>It'd be so much easier on you if you'd just walked into the trap, sweetness.</i>\"\n\n");
@@ -74,7 +74,7 @@ package classes.Scenes.Areas.Swamp
 				if (player.cockThatFits(monster.vaginalCapacity()) >= 0) {
 					outputText("\nYou could fuck her pussy, though you'd be within easy reach of her lips.  If she gets any crazy ideas, it'd be hard to stop her.");
 					vagFuck = winDriderPCDickInSpiderCunt;
-					if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN || player.hasItem(useables.T_SSILK)) {
+					if (player.tailType == AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN || player.hasItem(useables.T_SSILK)) {
 						outputText("\nYou could bind her up with some webbing for some bondage.  Her lips are dangerous, after all.");
 						careful = driderVagSmartFuck;
 					}
@@ -328,7 +328,7 @@ package classes.Scenes.Areas.Swamp
 			if (monster.nipplesPierced > 0) outputText("pierced nipples, circling the metallic stud");
 			else outputText("nipples, circling the moist bud");
 			outputText(" with your tongue");
-			if (player.tongueType > TONGUE_HUMAN) outputText(" as the rest of its demonic length lashes out and wraps around her pillowy bosom");
+			if (player.tongueType > AppearanceDefs.TONGUE_HUMAN) outputText(" as the rest of its demonic length lashes out and wraps around her pillowy bosom");
 			outputText(".  With your free hand you massage one of her top breasts, your forearm pressing against the one below it.  The drider has no choice but to satisfy your hunger for her motherly tits, holding the back of your head with her hard gloved hand and groping your " + assDescript() + " with the other.  You begin to gyrate your hips in a sideways motion, allowing the demon-cock inside of you to grind against your inner walls with every bump protruding from its dark body.  The spider-woman bites her bottom lip as she forces herself not to paint your " + vaginaDescript(0) + " with her fervent seed.  You take your time switching through various techniques, slapping your butt against her groin or squeezing your thighs together and tightening your muscles against her thickness. Each advance is met with her lustful thrusting, the spider's cock pumping in and out in accordance to your own hip movements.  The slick juices of her cunt mix with yours, and you dwell in the pleasure of your " + vaginaDescript(0) + " filled with her own hot sex.\n\n");
 
 			outputText("You begin to feel yourself coming to a climax, increasing your movements and forcing the drider-woman to pump faster inside of you.  Lurching back, you drive yourself into the arachnid's crotch, her fat, demonic cock squeezing itself against your gripping walls.  Unable to take the pressure, your plaything explodes inside of you, hot white seed splattering against your inner walls and slowly oozing outside with every thrust.  You grind yourself against the spunk-machine forced inside, your orgasm causing you to shudder in pleasure along with her.  In the fullness of your vagina and time, you lay flat against her exhausted figure, your hips still squeezing the last few remaining drops of spooge left drooling from the spider's tip.  You figure it wouldn't hurt to lay still for another few hours, comfortable against the soft, plush curves of your new mate.");
@@ -826,7 +826,7 @@ package classes.Scenes.Areas.Swamp
 			}
 
 			outputText("Around you, your many drider children fervently explore their surroundings.  One climbs up your back and perches atop your head.  She raises one hand to her forehead to block the sun's glare and stretches all four of her jewel-like eyes wide, delighting in the wondrous world she surveys.");
-			if (player.eyeType != EYES_FOUR_SPIDER_EYES) outputText("  Suddenly she flops forward, leaning against your eyebrows and causing you to cross your eyes in an attempt to focus on her.  She seems confused by the way your eyes are different to hers.");
+			if (player.eyeType != AppearanceDefs.EYES_FOUR_SPIDER_EYES) outputText("  Suddenly she flops forward, leaning against your eyebrows and causing you to cross your eyes in an attempt to focus on her.  She seems confused by the way your eyes are different to hers.");
 			if (player.isNaga()) outputText("  A few baby driders crawl ponderously across your scaled tail.  You give your tail a little wiggle and suddenly they go wild crawling around it and letting out the faintest, cute little squeals.");
 			else outputText("  A few baby driders sit on each of your legs, facing each other.  Some gesture and squeak at each other in wonder while others pull faces.");
 			outputText("\n\n");
@@ -893,7 +893,7 @@ package classes.Scenes.Areas.Swamp
 			else outputText("stuffed with her fingers, femcum streaming down the front of her spider-half as she desperately plays with herself.");
 			outputText("  The need to bury your aching length inside that puffy snatch is almost unbearable, but you don't want to risk exposing yourself to any of her tricks, especially considering how close you'd be to her mouth as you take her.  Racking your brain for a solution, the mass of webbing that covers the canopy around this area catches your eye.");
 
-			if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN) {
+			if (player.tailType == AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN) {
 				outputText("\n\nA plan quickly forms in your mind and you feel your spinnerets twitch with anticipation as you ");
 				if (player.isDrider()) outputText("scuttle");
 				else outputText("saunter");

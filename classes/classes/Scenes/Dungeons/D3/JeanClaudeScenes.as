@@ -1,11 +1,12 @@
 ﻿package classes.Scenes.Dungeons.D3 
 {
-	import classes.BaseContent;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.StatusEffects;
-	import classes.PerkLib;
-	
-	/**
+import classes.BaseContent;
+import classes.EventParser;
+import classes.GlobalFlags.kFLAGS;
+import classes.PerkLib;
+import classes.StatusEffects;
+
+/**
 	 * ...
 	 * @author Gedan
 	 */
@@ -37,7 +38,7 @@
 		{
 			clearOutput();
 			
-			outputText("You breathe deep, steel yourself")
+			outputText("You breathe deep, steel yourself");
 			if (player.hasKeyItem("Laybans") >= 0) outputText(", put your shades on");
 			outputText(" and stride out onto the gantry. The plan is simple. You’ll keep your eyes up and march across as if you belong there, as if you are on official business.");
 			if (player.demonScore() > 4) outputText("  You can’t be mistaken for anything but a demon, after all.");
@@ -321,7 +322,7 @@
 			if (player.hasVagina()) outputText(" and [vagina]");
 			outputText(", it disappears into the depths forever. Your mind is a blank canvas of pure, submissive pleasure and it, like your limitless future, is golden.");
 			
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 		
 		private function bwombBadEnd():void
@@ -369,7 +370,7 @@
 
 			//THE END
 			// 9999
-			getGame().gameOver();
+			EventParser.gameOver();
 		}
 		
 	}

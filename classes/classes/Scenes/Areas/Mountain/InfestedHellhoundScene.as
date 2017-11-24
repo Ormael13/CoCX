@@ -3,10 +3,11 @@
  */
 package classes.Scenes.Areas.Mountain
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
 
-	public class InfestedHellhoundScene extends BaseContent
+public class InfestedHellhoundScene extends BaseContent
 	{
 		public function InfestedHellhoundScene()
 		{
@@ -18,7 +19,7 @@ package classes.Scenes.Areas.Mountain
 		{
 			clearOutput();
 			outputText("A low snarl vibrates through your body, ");
-			if (player.lowerBody == LOWER_BODY_TYPE_GOO) outputText("making your jello-like body jiggle");
+			if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_GOO) outputText("making your jello-like body jiggle");
 			else outputText("rattling your teeth");
 			outputText(".  Peeking fearfully over your shoulder, you see the black-furred form of a hell-hound emerging from behind a rock.  Its eyes narrow as its gaze locks onto your " + player.assholeOrPussy() + ", a pair of black, shiny dog-cocks emerge underneath him, dangling freely.  His balls look bloated and distended, the skin around them crawling and wriggling.  A few worms drip from its over-sized peckers, crawling on the ground under the infested beast.\n\n");
 			outputText("Somehow you know this thing isn't going to let you just walk away.");
@@ -33,14 +34,14 @@ package classes.Scenes.Areas.Mountain
 
 		public function infestedHellhoundLossRape():void
 		{
-			if (flags[kFLAGS.SFW_MODE] > 0 && getGame().inCombat) { //No rape in SFW mode.
-				clearOutput();
+            if (flags[kFLAGS.SFW_MODE] > 0 && kGAMECLASS.inCombat) { //No rape in SFW mode.
+                clearOutput();
 				cleanupAfterCombat();
 				return;
 			}
 			clearOutput();
 			//[BOTH INFESTED]
-			if (player.totalCocks() > 0 && player.hasStatusEffect(StatusEffects.Infested)) {
+			if (player.cockTotal() > 0 && player.hasStatusEffect(StatusEffects.Infested)) {
 				//(LUST)
 				if (player.lust >= player.maxLust()) {
 					outputText("No amount of shame from the act of submitting to such a beast can overpower the furnace of lust raging in your loins.  ");
@@ -74,7 +75,7 @@ package classes.Scenes.Areas.Mountain
 				else {
 					outputText("Too wounded to stand, you drop down to all fours in order to keep yourself off the ground.   Too late you realize your mistake – the snarling beast is behind you and its razor-shark teeth easily sink into your [armor] before tearing it off, exposing your " + assDescript() + " and [cocks].  A cold mountain breeze blows across your now exposed [skin.type], reminding you just how utterly vulnerable you are to the alien lusts of this symbiotic monstrosity.  With a brutal lunge it knocks you off your [feet] and onto your back.\n\n");
 				}
-				if (player.totalCocks() > 1) {
+				if (player.cockTotal() > 1) {
 					outputText("The infested hound repositions itself, blocking out the sun with its dark fur, leaving you with only the pale flames surrounding its fuzzy sack to look at.   The warm wetness of its smooth tongue starts sliding over ");
 					outputText("each of your [cocks].  It feels good, better than it has any right to.  ");
 					outputText("Every single one of your [cocks] hardens under the stimulation, happy to be so well-treated.\n\n");
@@ -118,7 +119,7 @@ package classes.Scenes.Areas.Mountain
 				cleanupAfterCombat();
 			}
 			//[HAS PUSSY AND NO DICK BIG ENOUGH TO BE INFECTED]
-			else if (player.hasVagina() && player.biggestCockArea() < 40 && player.lowerBody != LOWER_BODY_TYPE_NAGA) {
+			else if (player.hasVagina() && player.biggestCockArea() < 40 && player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_NAGA) {
 				//(LUST) 
 				if (player.lust >= player.maxLust()) {
 					outputText("No amount of shame from the act of submitting to such a beast can overpower the furnace of lust raging in your loins.  ");

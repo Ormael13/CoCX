@@ -1,10 +1,10 @@
 package classes.Scenes.Places.Boat 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.*;
+import classes.*;
+import classes.GlobalFlags.*;
+import classes.Scenes.SceneLib;
 
-	public class Marae extends Monster
+public class Marae extends Monster
 	{
 		
 		//Corrupted Marae's specials
@@ -22,12 +22,11 @@ package classes.Scenes.Places.Boat
 			else
 			{
 				outputText("but you fail and get hit instead! The feel of the tentacles left your groin slightly warmer. ");
-				var damage:int = ((str + 100) + rand(50))
+				var damage:int = ((str + 100) + rand(50));
 				player.dynStats("lust", rand(5) + 5);
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		
 		public function tentacleRape():void {
@@ -45,19 +44,17 @@ package classes.Scenes.Places.Boat
 			else
 			{
 				outputText("You attempt to slap away the tentacles but it's too late! The tentacles tickle your groin and you can feel your [ass] being teased! \"<i>You know you want me!</i>\" Marae giggles. ");
-				var lustDmg:int = (20 + rand(player.cor / 10) + rand(player.sens / 5) + rand(player.lib / 10) + rand(10)) * (game.lustPercent() / 100);
+				var lustDmg:int = (20 + rand(player.cor / 10) + rand(player.sens / 5) + rand(player.lib / 10) + rand(10)) * (EngineCore.lustPercent() / 100);
 				player.dynStats("lust", lustDmg, "scale", false);
 				outputText("(+" + lustDmg + " lust)");
 				
 			}
-			combatRoundOver();
 		}
 		
 		//Pure Marae's specials
 		public function smite():void {
 			outputText("Marae mouths a chant. The clouds gather and quickly darkens. <b>It looks like a lightning might strike you!</b>");
 			createStatusEffect(StatusEffects.Uber, 1, 0, 0, 0);
-			combatRoundOver();
 		}
 		public function smiteHit():void {
 			if (game.flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) {
@@ -71,17 +68,16 @@ package classes.Scenes.Places.Boat
 				player.takeMagicDamage(damage, true);
 			}
 			if (hasStatusEffect(StatusEffects.Uber)) removeStatusEffect(StatusEffects.Uber);
-			combatRoundOver();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.boat.marae.winAgainstMarae();
+			SceneLib.boat.marae.winAgainstMarae();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.boat.marae.loseAgainstMarae();
+			SceneLib.boat.marae.loseAgainstMarae();
 		}
 		
 		override public function doAI():void {
@@ -93,11 +89,10 @@ package classes.Scenes.Places.Boat
 				}
 				if (statusEffectv1(StatusEffects.Stunned) <= 0) removeStatusEffect(StatusEffects.Stunned);
 				else addStatusValue(StatusEffects.Stunned, 1, -1);
-				combatRoundOver();
 				return;
 			}
 			if (hasStatusEffect(StatusEffects.Fear)) {
-				game.outputText("\"<i>You think I'm afraid of anything? Foolish mortal.</i>\" Marae snarls.\n\n");
+				EngineCore.outputText("\"<i>You think I'm afraid of anything? Foolish mortal.</i>\" Marae snarls.\n\n");
 				removeStatusEffect(StatusEffects.Fear);
 			}
 			var chooser:int = rand(10);
@@ -125,8 +120,8 @@ package classes.Scenes.Places.Boat
 			this.short = "Marae";
 			this.imageName = "marae";
 			if (game.flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
-				this.long = "This being is known as the goddess of Mareth. She is corrupted due to the aftermath of the factory valves being blown up. She's white all over and textured with bark. The \"flower\" below her belly button resembles more of a vagina than a flower. Her G-cup sized breasts jiggle with every motion."
-				this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL);
+				this.long = "This being is known as the goddess of Mareth. She is corrupted due to the aftermath of the factory valves being blown up. She's white all over and textured with bark. The \"flower\" below her belly button resembles more of a vagina than a flower. Her G-cup sized breasts jiggle with every motion.";
+				this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DROOLING, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 				createBreastRow(Appearance.breastCupInverse("G"));
 				initStrTouSpeInte(300, 300, 170, 180);
 				initWisLibSensCor(180, 150, 25, 100);
@@ -139,8 +134,8 @@ package classes.Scenes.Places.Boat
 				this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			}
 			else {
-				this.long = "This being is known as the goddess of Mareth. She is no longer corrupted thanks to your actions at the factory. She's white all over and textured with bark. Her breasts are modestly sized."
-				this.createVagina(false, VAGINA_WETNESS_WET, VAGINA_LOOSENESS_NORMAL);
+				this.long = "This being is known as the goddess of Mareth. She is no longer corrupted thanks to your actions at the factory. She's white all over and textured with bark. Her breasts are modestly sized.";
+				this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_WET, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 				createBreastRow(Appearance.breastCupInverse("DD"));
 				initStrTouSpeInte(370, 370, 220, 260);
 				initWisLibSensCor(260, 30, 25, 0);

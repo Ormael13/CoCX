@@ -1,21 +1,16 @@
 //Quest Dungeon: Tower of the Phoenix (Helia's quest, one-time dungeon)
 package classes.Scenes.Dungeons 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kACHIEVEMENTS;
-	import classes.Items.Armor;
-	import classes.BaseContent;
-	import classes.Scenes.Dungeons.DungeonAbstractContent;
-	import classes.Scenes.Dungeons.DungeonEngine;
-	import classes.Scenes.Dungeons.HelDungeon.*;
-	
-	import classes.Scenes.NPCs.*;
-	
-	import coc.model.GameModel;
-	
-	use namespace kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kACHIEVEMENTS;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Items.Armor;
+import classes.Scenes.Dungeons.HelDungeon.*;
+import classes.Scenes.NPCs.*;
+import classes.Scenes.SceneLib;
+
+use namespace kGAMECLASS;
 	
 	public class HelDungeon extends DungeonAbstractContent
 	{
@@ -109,7 +104,7 @@ package classes.Scenes.Dungeons
 			flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] = 1;
 			flags[kFLAGS.HEL_FUCKBUDDY] = 0;
 			flags[kFLAGS.HEL_AFFECTION] = 0;
-			kGAMECLASS.helFollower.helAffection(-70);
+			SceneLib.helFollower.helAffection(-70);
 			doNext(playerMenu);
 		}
 
@@ -181,8 +176,8 @@ package classes.Scenes.Dungeons
 			outputText("\n\nNow safe from the watchful eyes of flying harpies and their sentries, Hel whispers, \"<i>Okay, so here's the plan.  I'm going to climb up the tower and hit them from the top; you go in through the main gates here,</i>\" she says, pointing to a rotting wooden door that seems to have been in disuse for a decade.  \"<i>Divide and conquer, right?  There are three floors, so... meet in the second, as soon as we can.  Yeah?</i>\"");
 			outputText("\n\nYou nod again, and give Helia a little boost as she starts to scale the high walls of the aging tower.  You, however, steel yourself and make your way through an opening in the main gates."); 
 			//(NEXT)
-			kGAMECLASS.dungeonLoc = DUNGEON_HEL_GUARD_HALL;
-			kGAMECLASS.inDungeon = true;
+			dungeonLoc = DUNGEON_HEL_GUARD_HALL;
+			inDungeon = true;
 			doNext(playerMenu);
 		}
 		
@@ -209,7 +204,7 @@ package classes.Scenes.Dungeons
 		public function declineRetry():void {
 			clearOutput();
 			outputText("Load your latest save-file. You can always try again later.");
-			getGame().gameOver();
+			EventParser.gameOver();
 			removeButton(1);
 		}
 		
@@ -219,15 +214,15 @@ package classes.Scenes.Dungeons
 			outputText(images.showImage("dungeon-entrance-phoenixtower"));
 			outputText("You make your way back to the high mountains. Next, you hike up the narrow ledges and crevices of the high mountains, slowly but steadily climbing toward a snow-capped peak.");
 			outputText("\n\nYou remember where the tower is. You make your way back to the tower.");
-			kGAMECLASS.dungeonLoc = DUNGEON_HEL_GUARD_HALL;
-			kGAMECLASS.inDungeon = true;
+			dungeonLoc = DUNGEON_HEL_GUARD_HALL;
+			inDungeon = true;
 			doNext(playerMenu);
 		}
 		public function exitHelTower():void {
-			clearOutput()
+			clearOutput();
 			outputText("You slip out the door, leaving the tower behind. You make your way back to your camp.");
-			kGAMECLASS.dungeonLoc = -1;
-			kGAMECLASS.inDungeon = false;
+			dungeonLoc = -1;
+			inDungeon = false;
 			doNext(camp.returnToCampUseOneHour);			
 		}
 		
@@ -411,8 +406,8 @@ package classes.Scenes.Dungeons
 			//(\"<i>You gained ValeriaArmor!</i>\")
 			cleanupAfterCombat();
 			//(\"<i>You put a (previous armorName) in your X pouch)
-			outputText("\n\nTo your surprise, you feel rather invigorated after the battle, thanks to Valeria's strange healing properties, and with a smirk, you turn your attention back to the " + (getGame().dungeons.checkPhoenixTowerClear() ? "adventures": "dungeon") + " ahead.\n\n");
-			//Set flags
+            outputText("\n\nTo your surprise, you feel rather invigorated after the battle, thanks to Valeria's strange healing properties, and with a smirk, you turn your attention back to the " + (SceneLib.dungeons.checkPhoenixTowerClear() ? "adventures" : "dungeon") + " ahead.\n\n");
+            //Set flags
 			flags[kFLAGS.MET_VALERIA] = 1;
 			flags[kFLAGS.VALERIA_FLUIDS] = 80;
 			HPChange(player.maxHP(),false);
@@ -459,7 +454,7 @@ package classes.Scenes.Dungeons
 		
 		//Kiri Interactions
 		public function kiriInteraction():void {
-			menu()
+			menu();
 			addButton(0, "Talk", talkToKiri).hint("Have some talk with Kiri.");
 			addButton(1, "Sex", kiriSexIntro).hint("Use Kiri to sate your lusts. After all, your lust can make a difference between your success and failure.");
 			addButton(4, "Back", playerMenu);
@@ -871,7 +866,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\nThe Harpy Queen stretches her wings wide as she steps away from Hel, now already being mounted by one of the Queen's daughters, and saunters over to you, salamander seed still freely leaking from her gaping egg-hole. She cups your cheek, sliding her long fingers across your sensitive, thoroughly drugged skin. Your entire body tingles as she smiles upon you, barely aware of the half-dozen sluts slurping at your spent seed as one of her daughters forces herself onto your enhanced member.");
 			outputText("\n\n\"<i>You've been a good stud since you came to me, [name],</i>\" the Queen laughs airily, patting your swollen nuts.  \"<i>The size of my brood has quadrupled since you and Hel 'volunteered' to help us.  Mmm, a free Mareth will surely have you to thank for the army that will liberate it from the demons.  You might even be something of a hero, if you want. The Champion of Free Mareth, if you will.  That wouldn't be so bad, would it?  After all, that's why you came here...</i>\"");
 			outputText("\n\nBefore you can respond, another orgasm washes over you, and a huge load of seed explodes into the thirty-first slut to claim your seed today.  And over her shoulders, you can see dozens more harpies, half of them your own spawn, waiting their turn.");
-			getGame().gameOver();
+			EventParser.gameOver();
 			if (flags[kFLAGS.HARDCORE_MODE] <= 0) addButton(1, "Retry", retryDungeonFromBadEndPrompt);
 		}
 
@@ -1192,12 +1187,12 @@ package classes.Scenes.Dungeons
 			//(PC returns to Camp)
 			//(If PC has Valeria: add \"<i>Valeria</i>\" to Followers menu)
 			flags[kFLAGS.CLEARED_HEL_TOWER] = 1;
-			kGAMECLASS.inDungeon = false;
+			inDungeon = false;
 			doNext(camp.returnToCampUseTwoHours);
 		}
 		//ROOMS
 		public function roomGuardHall():void {
-			kGAMECLASS.dungeonLoc = DUNGEON_HEL_GUARD_HALL;
+			dungeonLoc = DUNGEON_HEL_GUARD_HALL;
 			clearOutput();
 			outputText("<b><u>Guard Hall</u></b>\n");
 			outputText("You stand in what might have been a guard room once upon a time.  Now it is a ruined, ransacked mess.  It seems not to have been used in years, and the table, chairs, and spears lined up against the wall have all rotted away to almost nothing.");
@@ -1220,7 +1215,7 @@ package classes.Scenes.Dungeons
 
 		}
 		public function roomCellar():void {
-			kGAMECLASS.dungeonLoc = DUNGEON_HEL_WINE_CELLAR;
+			dungeonLoc = DUNGEON_HEL_WINE_CELLAR;
 			clearOutput();
 			outputText("<b><u>Wine Cellar</u></b>\n");
 			dungeons.setDungeonButtons(null, null, null, null);
@@ -1241,7 +1236,7 @@ package classes.Scenes.Dungeons
 			addButton(5, "Climb Up", roomGuardHall);
 		}
 		public function roomStairwell():void {
-			kGAMECLASS.dungeonLoc = DUNGEON_HEL_STAIR_WELL;
+			dungeonLoc = DUNGEON_HEL_STAIR_WELL;
 			clearOutput();
 			outputText("<b><u>Stair Well</u></b>\n");
 			dungeons.setDungeonButtons(null, roomGuardHall, null, null);
@@ -1273,7 +1268,7 @@ package classes.Scenes.Dungeons
 			}
 		}
 		public function roomDungeon():void {
-			kGAMECLASS.dungeonLoc = DUNGEON_HEL_DUNGEON;
+			dungeonLoc = DUNGEON_HEL_DUNGEON;
 			clearOutput();
 			outputText("<b><u>Dungeon</u></b>\n");
 			dungeons.setDungeonButtons(null, null, null, null);
@@ -1310,7 +1305,7 @@ package classes.Scenes.Dungeons
 			}
 		}
 		public function roomMezzanine():void {
-			kGAMECLASS.dungeonLoc = DUNGEON_HEL_MEZZANINE;
+			dungeonLoc = DUNGEON_HEL_MEZZANINE;
 			clearOutput();
 			outputText("<b><u>Mezzanine</u></b>\n");
 			dungeons.setDungeonButtons(null, null, null, null);
@@ -1333,7 +1328,7 @@ package classes.Scenes.Dungeons
 			}
 		}
 		public function roomThroneRoom():void {
-			kGAMECLASS.dungeonLoc = DUNGEON_HEL_THRONE_ROOM;
+			dungeonLoc = DUNGEON_HEL_THRONE_ROOM;
 			clearOutput();
 			outputText("<b><u>Throne Room</u></b>\n");
 			dungeons.setDungeonButtons(null, null, null, null);

@@ -1,9 +1,10 @@
 ﻿package classes.Scenes.Places.TelAdre{
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Holidays;
+import classes.Scenes.SceneLib;
 
-	public class BakeryScene extends TelAdreAbstractContent {
+public class BakeryScene extends TelAdreAbstractContent {
 
 	public function BakeryScene()
 	{
@@ -17,8 +18,8 @@ public function bakeryuuuuuu():void {
 		easterBakeSale();
 		return;
 	}
-	if(rand(10) <= 1 && kGAMECLASS.shouldraFollower.followerShouldra() && player.gender > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] == 4) {
-		kGAMECLASS.shouldraFollower.shouldraBakeryIntro();
+	if(rand(10) <= 1 && SceneLib.shouldraFollower.followerShouldra() && player.gender > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] == 4) {
+		SceneLib.shouldraFollower.shouldraBakeryIntro();
 		return;
 	}
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00243]++;
@@ -42,9 +43,9 @@ public function bakeryuuuuuu():void {
 	//[Repeat approach]
 	else {
 		//Kanga christmas!
-		if(kGAMECLASS.nieveHoliday()) {
-			kGAMECLASS.encounterKamiTheChristmasRoo();
-			if(flags[kFLAGS.KAMI_ENCOUNTER] == 1) addButton(3,"Pudding",kGAMECLASS.getWinterPudding);
+		if(Holidays.nieveHoliday()) {
+			Holidays.encounterKamiTheChristmasRoo();
+			if(flags[kFLAGS.KAMI_ENCOUNTER] == 1) addButton(3,"Pudding",Holidays.getWinterPudding);
 		}
 		//Normal repeats!
 		else outputText("You step into the bakery's domed interior and inhale, treated to a symphony of pleasant smells and the cozy warmth that radiates from the baking ovens.  There are plenty of tables and chairs around for one to eat at, and you find yourself stepping into line while you glance at the menu.\n\n");
@@ -119,7 +120,7 @@ private function displayIngredients():void {
 
 public function ingredientsMenu():void {
 	clearOutput();
-	displayIngredients()
+	displayIngredients();
 	menu();
 	addButton(0,"Fox Berry",buyFoxBerry);
 	addButton(1,"Ringtail Fig",buyFig);
@@ -305,19 +306,19 @@ private function talkBakeryMenu():void {
 	var rubiB:Function = telAdre.rubi.rubiIntros();
 	if (rubiB != null) addButton(1, rubiT, rubiB);
 
-	if(kGAMECLASS.nieveHoliday()) {
+	if(Holidays.nieveHoliday()) {
 		if(flags[kFLAGS.KAMI_ENCOUNTER] > 0) {
 			outputText("\nYou could 'burn off some steam' with Kami during her lunch break, since you already know how that'll end up!\n");
-			addButton(2,"Kami",kGAMECLASS.approachKamiTheChristmasRoo);
+			addButton(2,"Kami",Holidays.approachKamiTheChristmasRoo);
 		}
 		else {
 			outputText("\nYou could summon the curvaceous kangaroo waitress you ran into earlier - perhaps you can win her over.\n");
-			addButton(2,"Kangaroo",kGAMECLASS.approachKamiTheChristmasRoo);
+			addButton(2,"Kangaroo",Holidays.approachKamiTheChristmasRoo);
 		}
 	}
 	outputText("\nYou see a bubblegum-pink girl at the bakery, walking around and eagerly trying to hand out fliers to people. Her “uniform” is more like a yellow bikini with frills circling the waist of the bottom half. If this didn’t make her stand out from the crowd then her hair certainly would; it’s a big, poofy, curly, dark pink mess that reaches down to her ass with a huge cupcake hat sitting on top.\n");
-	if(flags[kFLAGS.MET_FROSTY] != 0) addButton(3,"Frosty",kGAMECLASS.telAdre.frosty.approachFrosty);
-	else addButton(3,"PinkGirl",kGAMECLASS.telAdre.frosty.approachFrosty);
+	if(flags[kFLAGS.MET_FROSTY] != 0) addButton(3,"Frosty",SceneLib.telAdre.frosty.approachFrosty);
+	else addButton(3,"PinkGirl",SceneLib.telAdre.frosty.approachFrosty);
 	addButton(14,"Leave",bakeryuuuuuu);
 }
 

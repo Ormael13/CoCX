@@ -1,15 +1,14 @@
 package classes.Scenes.Places.Farm
 {
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
+import classes.AppearanceDefs;
+import classes.EngineCore;
+import classes.EventParser;
+import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumable;
-import classes.Items.ConsumableLib;
-	import classes.Items.Consumables.SimpleConsumable;
-	import classes.ItemSlotClass;
-	import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
-	import classes.StatusEffects;
-	
-	/**
+import classes.Scenes.SceneLib;
+import classes.StatusEffects;
+
+/**
 	 * ...
 	 * @author Gedan
 	 */
@@ -30,13 +29,13 @@ import classes.Items.ConsumableLib;
 		{
 			var count:int = 0;
 			
-			if (kGAMECLASS.jojoScene.campCorruptJojo()) count++;
-			if (kGAMECLASS.amilyScene.amilyCorrupt()) count++;
-			if (kGAMECLASS.izmaScene.izmaFollower()) count++;
-			if (kGAMECLASS.sophieBimbo.bimboSophie()) count++;
-			if (kGAMECLASS.vapula.vapulaSlave()) count++;
-			if (kGAMECLASS.ceraphScene.ceraphIsFollower()) count++;
-			if (kGAMECLASS.latexGirl.latexGooFollower()) count++;
+			if (SceneLib.jojoScene.campCorruptJojo()) count++;
+			if (SceneLib.amilyScene.amilyCorrupt()) count++;
+			if (SceneLib.izmaScene.izmaFollower()) count++;
+			if (SceneLib.sophieBimbo.bimboSophie()) count++;
+			if (SceneLib.vapula.vapulaSlave()) count++;
+			if (SceneLib.ceraphScene.ceraphIsFollower()) count++;
+			if (SceneLib.latexGirl.latexGooFollower()) count++;
 			
 			return count;
 		}
@@ -229,7 +228,7 @@ import classes.Items.ConsumableLib;
 
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 1) modValue += 2;
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1) modValue += 2;
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && kGAMECLASS.sophieBimbo.bimboSophie()) modValue += 1;
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && SceneLib.sophieBimbo.bimboSophie()) modValue += 1;
 			// Izmael if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) modValue += 1;
 			// Bimbo if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 1) modValue += 2;
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1) modValue += 4;
@@ -257,7 +256,7 @@ import classes.Items.ConsumableLib;
 			{
 				if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO_GIBS_DRAFT] == 0) flags[kFLAGS.FOLLOWER_AT_FARM_JOJO_GIBS_DRAFT] = 1;
 				flags[kFLAGS.FARM_INCUDRAFT_STORED]++;
-				if (kGAMECLASS.jojoScene.tentacleJojo()) flags[kFLAGS.FARM_INCUDRAFT_STORED]++;
+				if (SceneLib.jojoScene.tentacleJojo()) flags[kFLAGS.FARM_INCUDRAFT_STORED]++;
 			}
 			
 			// If Sophie is producing, count up time since last egg and gib a new one when ready
@@ -299,8 +298,8 @@ import classes.Items.ConsumableLib;
 			// If Latexy is at the farm, further modify her status values
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 1)
 			{
-				kGAMECLASS.latexGirl.gooHappiness( -0.5, false);
-				kGAMECLASS.latexGirl.gooObedience(  0.5, false);
+				SceneLib.latexGirl.gooHappiness( -0.5, false);
+				SceneLib.latexGirl.gooObedience(  0.5, false);
 			}
 			
 			// If Ceraph is doing her thing
@@ -345,7 +344,7 @@ import classes.Items.ConsumableLib;
 				player.gems += flags[kFLAGS.FARM_CORRUPTION_GEMS_WAITING];
 				flags[kFLAGS.FARM_CORRUPTION_GEMS_WAITING] = 0;
 				flags[kFLAGS.FARM_CORRUPTION_DAYS_SINCE_LAST_PAYOUT] = 0;
-				kGAMECLASS.showStats();
+				EngineCore.showStats();
 			}
 			
 			if (flags[kFLAGS.FARM_SUCCUMILK_STORED] > 0 || flags[kFLAGS.FARM_INCUDRAFT_STORED] > 0 || flags[kFLAGS.FARM_EGG_STORED] > 0 || flags[kFLAGS.FARM_CONTRACEPTIVE_STORED] > 0)
@@ -395,7 +394,7 @@ import classes.Items.ConsumableLib;
 		{
 			if (flag == kFLAGS.FARM_SUCCUMILK_STORED) return consumables.SUCMILK;
 			if (flag == kFLAGS.FARM_INCUDRAFT_STORED) return consumables.INCUBID;
-			if (flag == kFLAGS.FARM_EGG_STORED) return kGAMECLASS.sophieBimbo.eggTypes[kGAMECLASS.sophieBimbo.eggColors.indexOf(flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLORCHOICE])];
+			if (flag == kFLAGS.FARM_EGG_STORED) return SceneLib.sophieBimbo.eggTypes[SceneLib.sophieBimbo.eggColors.indexOf(flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLORCHOICE])];
 			if (flag == kFLAGS.FARM_CONTRACEPTIVE_STORED) return consumables.HRBCNT;
 			
 			trace("No valid argument given.");
@@ -427,7 +426,7 @@ import classes.Items.ConsumableLib;
 
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1)
 			{
-				if (kGAMECLASS.sophieBimbo.bimboSophie()) protection += 1;
+				if (SceneLib.sophieBimbo.bimboSophie()) protection += 1;
 				else protection += 2;
 			}
 
@@ -472,7 +471,7 @@ import classes.Items.ConsumableLib;
 
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1)
 			{
-				if (kGAMECLASS.sophieBimbo.bimboSophie()) fValue += 4;
+				if (SceneLib.sophieBimbo.bimboSophie()) fValue += 4;
 				else fValue += 3;
 			}
 
@@ -555,10 +554,10 @@ import classes.Items.ConsumableLib;
 			outputText("\n\nNow you feel nothing but contempt. How <b>dare</b> that bitch kick you off her land as if you were some common vagrant, simply because you took your rightful revenge on the centaur cunt she allowed to hang around and do as he pleased? Would she have stepped in if he had done to you what you have done to him? You think not, no, not Whitney, she’d have quite happily sat on the hill and read her book whilst her pet asshole raped the hell out of you.");
 			
 			outputText("\n\nOnce it affects her, well skies above, we can’t be doing with that can we? Does she have any idea how lucky she is? Who she is dealing with? How easy it would be to do to her as you have done to Kelt");
-			if (kGAMECLASS.amilyScene.amilyCorrupt() || kGAMECLASS.jojoScene.campCorruptJojo())
+			if (SceneLib.amilyScene.amilyCorrupt() || SceneLib.jojoScene.campCorruptJojo())
 			{
 				outputText(" and the rodent slut");
-				if (kGAMECLASS.amilyScene.amilyCorrupt() && kGAMECLASS.jojoScene.campCorruptJojo())
+				if (SceneLib.amilyScene.amilyCorrupt() && SceneLib.jojoScene.campCorruptJojo())
 				{
 					outputText("s");
 				}
@@ -574,10 +573,10 @@ import classes.Items.ConsumableLib;
 			outputText("\n\nNow you feel nothing but contempt. How <b>dare</b> that bitch kick you off her land, as if you were some common vagrant, simply because you took what was rightfully yours from the cow bitch. Would Whitney have stepped in if Marble had done to you what you did to her? You think not, no, not Whitney, she’d have quite happily sat on the hill and read her book whilst the cow bitch did what she felt like to you, probably forcing her damn milk down your throat. But once it affects her, well skies above, we can’t be doing with that can we?");
 			
 			outputText("\n\nDoes she have any idea how lucky she is? Who she is dealing with? How easy it would be to break her will and make her your willing slave");
-			if (kGAMECLASS.amilyScene.amilyCorrupt() || kGAMECLASS.jojoScene.campCorruptJojo())
+			if (SceneLib.amilyScene.amilyCorrupt() || SceneLib.jojoScene.campCorruptJojo())
 			{
 				outputText(" and the rodent slut");
-				if (kGAMECLASS.amilyScene.amilyCorrupt() && kGAMECLASS.jojoScene.campCorruptJojo())
+				if (SceneLib.amilyScene.amilyCorrupt() && SceneLib.jojoScene.campCorruptJojo())
 				{
 					outputText("s");
 				}
@@ -796,13 +795,13 @@ import classes.Items.ConsumableLib;
 			}
 			
 			// Bimbo Sophie
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && kGAMECLASS.sophieBimbo.bimboSophie())
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && SceneLib.sophieBimbo.bimboSophie())
 			{
 				outputText("\n\nYou cannot see Sophie but distinctive coos and giggles are coming from the hen coop.");
 			}
 			
 			// Regular Sophie
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && !kGAMECLASS.sophieBimbo.bimboSophie())
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && !SceneLib.sophieBimbo.bimboSophie())
 			{
 				outputText("\n\nSophie has put together a huge nest on top of the hen coop from which she pensively stares out at the lake. When she sees you looking she brightens noticeably and begins to preen her plumage.");
 			}
@@ -940,7 +939,7 @@ import classes.Items.ConsumableLib;
 
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 1) count++;
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1) count++;
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && kGAMECLASS.sophieBimbo.bimboSophie()) count++;
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && SceneLib.sophieBimbo.bimboSophie()) count++;
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1) count++;
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 1) count++;
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1) count++;
@@ -958,17 +957,17 @@ import classes.Items.ConsumableLib;
 		{
 			menu();
 			
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 1) addButton(0, "Amily", kGAMECLASS.amilyScene.amilyFollowerEncounter);
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 1) addButton(0, "Amily", SceneLib.amilyScene.amilyFollowerEncounter);
 			
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1) addButton(1, "Jojo", kGAMECLASS.jojoScene.corruptCampJojo);
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1) addButton(1, "Jojo", SceneLib.jojoScene.corruptCampJojo);
 			
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && kGAMECLASS.sophieBimbo.bimboSophie()) addButton(2, "Sophie", kGAMECLASS.sophieBimbo.approachBimboSophieInCamp);
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && SceneLib.sophieBimbo.bimboSophie()) addButton(2, "Sophie", SceneLib.sophieBimbo.approachBimboSophieInCamp);
 			
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1) addButton(3, "Vapula", kGAMECLASS.vapula.callSlaveVapula);
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1) addButton(3, "Vapula", SceneLib.vapula.callSlaveVapula);
 			
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 1) addButton(4, flags[kFLAGS.GOO_NAME], kGAMECLASS.latexGirl.approachLatexy);
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 1) addButton(4, flags[kFLAGS.GOO_NAME], SceneLib.latexGirl.approachLatexy);
 			
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1) addButton(5, flags[kFLAGS.MILK_NAME], kGAMECLASS.milkWaifu.milkyMenu);
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1) addButton(5, flags[kFLAGS.MILK_NAME], SceneLib.milkWaifu.milkyMenu);
 			
 			addButton(14, "Back", farmMenu);
 		}
@@ -977,7 +976,7 @@ import classes.Items.ConsumableLib;
 		{
 			var count:int = 0;
 
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && !kGAMECLASS.sophieBimbo.bimboSophie()) count++;
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && !SceneLib.sophieBimbo.bimboSophie()) count++;
 
 			return count;
 		}
@@ -992,7 +991,7 @@ import classes.Items.ConsumableLib;
 		{
 			menu();
 			
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && !kGAMECLASS.sophieBimbo.bimboSophie()) addButton(0, "Sophie", kGAMECLASS.sophieFollowerScene.followerSophieMainScreen);
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && !SceneLib.sophieBimbo.bimboSophie()) addButton(0, "Sophie", SceneLib.sophieFollowerScene.followerSophieMainScreen);
 			
 			addButton(14, "Back", farmMenu);
 		}
@@ -1017,10 +1016,10 @@ import classes.Items.ConsumableLib;
 		{
 			menu();
 			
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) addButton(0, "Izma", kGAMECLASS.izmaScene.izmaFollowerMenu);
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 2) addButton(0, "Izmael", kGAMECLASS.gameOver);
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) addButton(0, "Izma", SceneLib.izmaScene.izmaFollowerMenu);
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 2) addButton(0, "Izmael", EventParser.gameOver);
 			
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 1) addButton(1, "Isabella", kGAMECLASS.isabellaFollowerScene.callForFollowerIsabella);
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 1) addButton(1, "Isabella", SceneLib.isabellaFollowerScene.callForFollowerIsabella);
 			
 			addButton(14, "Back", farmMenu);
 		}
@@ -1223,7 +1222,7 @@ import classes.Items.ConsumableLib;
 			if (player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") < 0 && flags[kFLAGS.QUEUE_COCKMILKER_UPGRADE] == 0) return true;
 			if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 0 && flags[kFLAGS.QUEUE_REFINERY_UPGRADE] == 0) return true;
 			if (flags[kFLAGS.FARM_UPGRADES_CONTRACEPTIVE] == 0 && flags[kFLAGS.QUEUE_CONTRACEPTIVE_UPGRADE] == 0) return true;
-			if (flags[kFLAGS.FARM_UPGRADES_MILKTANK] == 0 && kGAMECLASS.milkWaifu.milkSlave() && flags[kFLAGS.QUEUE_MILKTANK_UPGRADE] == 0) return true;
+			if (flags[kFLAGS.FARM_UPGRADES_MILKTANK] == 0 && SceneLib.milkWaifu.milkSlave() && flags[kFLAGS.QUEUE_MILKTANK_UPGRADE] == 0) return true;
 			return false;
 		}
 
@@ -1306,7 +1305,7 @@ import classes.Items.ConsumableLib;
 			if(player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") < 0 && flags[kFLAGS.QUEUE_COCKMILKER_UPGRADE] == 0) addButton(1, "Cock Milker", investmentCockMilker);
 			if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 0 && flags[kFLAGS.QUEUE_REFINERY_UPGRADE] == 0) addButton(2, "Refinery", investmentRefinery);
 			if (flags[kFLAGS.FARM_UPGRADES_CONTRACEPTIVE] == 0 && flags[kFLAGS.QUEUE_CONTRACEPTIVE_UPGRADE] == 0) addButton(3, "Contraceptive", investmentContraceptive);
-			if (flags[kFLAGS.FARM_UPGRADES_MILKTANK] == 0 && kGAMECLASS.milkWaifu.milkSlave() && flags[kFLAGS.QUEUE_MILKTANK_UPGRADE] == 0) addButton(4, "MilkTank", investmentMilktank);
+			if (flags[kFLAGS.FARM_UPGRADES_MILKTANK] == 0 && SceneLib.milkWaifu.milkSlave() && flags[kFLAGS.QUEUE_MILKTANK_UPGRADE] == 0) addButton(4, "MilkTank", investmentMilktank);
 
 			if (!whitneyCorrupt()) addButton(14, "Back", dogeNotCorruptYetMenu);
 			else addButton(14, "Back", dogeCorruptedMissionComplete);
@@ -1877,7 +1876,7 @@ import classes.Items.ConsumableLib;
 			if (player.hasCock()) outputText(" cocksucker");
 			else outputText(" pussy eater");
 			
-			(" there has ever been. Doubt wages war with aroused apprehension on Whitney’s face.");
+			outputText(" there has ever been. Doubt wages war with aroused apprehension on Whitney’s face.");
 
 			outputText("\n\n“<i>I, I will try, [master],</i>” she says. You reach down and hold her around the jaw-line.");
 
@@ -3057,7 +3056,7 @@ import classes.Items.ConsumableLib;
 			if (player.hasCock() && !player.hasVagina())
 			{
 				outputText("\n\nHer dry, smooth digits touch your turgid [cock biggest] at the base, rising slowly up the sensitive stem.");
-				if (player.totalCocks() > 1) outputText(" “<i>So many things to play with tucked away in here!</i>” comes her merry voice again, as you feel her grasp your [cock smallest] at the same time; you groan into the confines of her flesh as she gives it a soft, teasing pump. It’s obvious your main member has really caught her attention though, and both her hands soon return to it.");
+				if (player.cockTotal() > 1) outputText(" “<i>So many things to play with tucked away in here!</i>” comes her merry voice again, as you feel her grasp your [cock smallest] at the same time; you groan into the confines of her flesh as she gives it a soft, teasing pump. It’s obvious your main member has really caught her attention though, and both her hands soon return to it.");
 
 				outputText("\n\nThe rough oral you’ve been forced to give has sunk heat into your loins and it doesn’t take much of her hands’ gentle stroking for your cock to stand at full mast. You continue to lap away at her moist sex, working away from her labia momentarily to lick up the lubricant which has trickled out before bending in again, directed by the sounds of gratification coming from above you. ");
 
@@ -3155,7 +3154,7 @@ import classes.Items.ConsumableLib;
 			outputText("\n\nIn a position of complete supplication, your face and [chest] forced down into the bed, you look up in trepidation as your monstrously skilled slave mistress shifts around to your front end. She’s smiling her fanged smile down at you as she dangles the last two items she retrieved from her dressing table.");
 
 			// PC female & has Vapula
-			if (player.hasVagina() && !player.hasCock() && kGAMECLASS.vapula.vapulaSlave())
+			if (player.hasVagina() && !player.hasCock() && SceneLib.vapula.vapulaSlave())
 			{
 				outputText("\n\nThe wooden paddle in one hand perhaps isn’t much of a surprise, but the other... it’s a double ended strap-on, one end relatively small and flexible-looking, the other a purple monster with garish leopard spots painted across its bumps. It’s immediately recognizable to you and you look up at Whitney with a kind of horror, whose grin only widens.");
 
@@ -3248,7 +3247,7 @@ import classes.Items.ConsumableLib;
 			outputText("\n\nA " + ((whitneyDefurred()) ? "hand" : "paw") + " reaches around and clutches your [chest] for anchorage as she finally begins to pound into your tenderized hole with all she’s got. She catches a [nipple] between her fingers and you find yourself being forced towards orgasm again, your ears full of her harsh breathing, your nose full of her heavy scent. She’s no longer thrusting into you for your pleasure though, if she ever was; the hard, feral thrusting of the strap-on into your " + ((player.hasVagina()) ? "oozing cunt" : "ass") + " is all about her, all about working the smaller, teasing end in her own pussy as hard as she can. You are simply a vehicle for her own lusts, and when you come again with a juddering cry into her panties, " + ((player.hasVagina()) ? "wetting the bed this time with the jackhammer force of it" : "") + " she keeps going, hammering into your hapless " + ((player.hasVagina()) ? "[vagina]" : "butt") + ".");
 
 			outputText("\n\nThe relentless pounding forces your eyes to roll and your hands to grip uselessly at the air until finally, with a breathless, ecstatic bark and a final, hard paddle blow to your [butt], she reaches her own peak. You feel utterly dissolved as she thumps into you deliriously, caught in her own sumptuous orgasm for long seconds; you catch yourself thinking you should try timing your orgasms to better suit your mistress.");
-			if (player.hasVagina() && !player.hasCock() && kGAMECLASS.vapula.vapulaSlave()) outputText(" You feel the end of the dildo tense deep within you before releasing, filling you full of warm demon spunk until it pools out onto the bed. The feeling is horribly, disgustingly satisfying, and for a moment you can see exactly how Vapula views the world.");
+			if (player.hasVagina() && !player.hasCock() && SceneLib.vapula.vapulaSlave()) outputText(" You feel the end of the dildo tense deep within you before releasing, filling you full of warm demon spunk until it pools out onto the bed. The feeling is horribly, disgustingly satisfying, and for a moment you can see exactly how Vapula views the world.");
 
 			outputText("\n\nAt long last she comes to a halt. She lays herself on top of you as she gathers her breath, still holstered in you, her small, peachy breasts pushing into your shoulders, her soft stomach against your hands, her breath on the nape of your neck. After a short rest spooned together like this she rolls over and slowly goes about undoing your restraints. You roll onto your back when she’s done, staring at the ceiling as she possessively snuggles into you, feeling distinctly pulverized. You can’t say for sure why you signed on for this, but there’s no question letting Whitney do to you as she may is a strange, intense release you can’t find anywhere else, or at least anywhere else where they let you walk away at the end.");
 
@@ -3275,7 +3274,7 @@ import classes.Items.ConsumableLib;
 
 			outputText("\n\nOnce she’s done tying you down the dog woman gets off the bed with a spring and disappears from your limited sightline, rummaging around her bedroom with ominous-sounding intent. Is she shifting particularly heavy things about just to torment you? You crane your neck to get a glimpse at what she’s holding as she returns to your side - and then cry out in shock as a black curtain falls down on the world.");
 
-			outputText("\n\n“<i>Stop fussing now, sweetheart,</i>” Whitney croons, adjusting the black, elastic blindfold so it is firmly secured over your eyes." + ((player.eyeType == EYES_FOUR_SPIDER_EYES) ? " Once she’s finished with that she places another blindfold over your second pair of eyes. You can only groan with laughter at the sheer level of preparation the dog woman is capable of." : "") + " “<i>Wouldn’t want you to see what’s coming, would we? That’d ruin half the fun.</i>” ");
+			outputText("\n\n“<i>Stop fussing now, sweetheart,</i>” Whitney croons, adjusting the black, elastic blindfold so it is firmly secured over your eyes." + ((player.eyeType == AppearanceDefs.EYES_FOUR_SPIDER_EYES) ? " Once she’s finished with that she places another blindfold over your second pair of eyes. You can only groan with laughter at the sheer level of preparation the dog woman is capable of." : "") + " “<i>Wouldn’t want you to see what’s coming, would we? That’d ruin half the fun.</i>” ");
 
 			outputText("\n\nShe crawls down to your lower body, taking her time now as she slides her hands across your abdomen and [hips] and sits herself down in front of [eachCock]" + ((player.balls > 0) ? ", making you twitch as she momentarily cups your [balls]" : "") + ". She teases you with slow, deliberate movements of her smooth digits, fully aware that all you can do now in your black space is lie there, feeling and listening to what she’s doing to you.");
 
@@ -3426,7 +3425,7 @@ import classes.Items.ConsumableLib;
 					if (hasFreeTattooSlot("whitney")) addButton(0, "Whitney", brandWhitney);
 					if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 1 && hasFreeTattooSlot("amily")) addButton(1, "Amily", brandAmily);
 					if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1 && hasFreeTattooSlot("jojo")) addButton(2, "Jojo", brandJojo);
-					if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && kGAMECLASS.sophieBimbo.bimboSophie() && hasFreeTattooSlot("sophie")) addButton(3, "Sophie", brandBimboSophie);
+					if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && SceneLib.sophieBimbo.bimboSophie() && hasFreeTattooSlot("sophie")) addButton(3, "Sophie", brandBimboSophie);
 					if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1 && hasFreeTattooSlot("vapula")) addButton(4, "Vapula", brandVapula);
 					if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 4 && hasFreeTattooSlot("kelly")) addButton(5, "Kelly", brandKelly);
 					if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1 && flags[kFLAGS.MILK_SIZE] > 0 && hasFreeTattooSlot("milky")) addButton(6, flags[kFLAGS.MILK_NAME], brandSmallMilky);
@@ -6334,7 +6333,7 @@ import classes.Items.ConsumableLib;
 			if (player.isBiped())
 			{
 				outputText("\n\nShe spends a short time with your calves before encapsulating a [foot] in her oily hands.");
-				if (!(player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_NAGA || player.lowerBody == LOWER_BODY_TYPE_GOO || player.lowerBody == LOWER_BODY_TYPE_PONY))
+				if (!(player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HOOFED || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_NAGA || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_GOO || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PONY))
 				{
 					outputText(" Your mouth opens as a twinge of pure pleasure veins up your [leg] as she massages the soft arch of the sole, making your");
 					if (player.hasCock()) outputText(" cock thicken");
@@ -6343,7 +6342,7 @@ import classes.Items.ConsumableLib;
 					outputText(".");
 
 					outputText(" There must be a direct nerve link leading right from the bottom of your body up to your groin because my word, that really shouldn’t feel as good as it does. She swirls her thumbs across the rougher pads of your feet, dipping her warm fingers in and around the valleys of your");
-					if (player.lowerBody == LOWER_BODY_TYPE_DEMONIC_CLAWS || player.lowerBody == LOWER_BODY_TYPE_LIZARD || player.lowerBody == LOWER_BODY_TYPE_HARPY || player.lowerBody == LOWER_BODY_TYPE_DRAGON) outputText(" claws");
+					if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_DEMONIC_CLAWS || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_LIZARD || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HARPY || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_DRAGON) outputText(" claws");
 					else outputText(" toes");
 					outputText(", before returning deliberately to stroke at your arch, indulging that nervous link until you are deep in the unexpected bliss of it... before slowly releasing, leaving you to wallow delightfully in the knowledge that that same slow, delicious attention is about to be lavished on your other [foot].")
 				}
@@ -6376,7 +6375,7 @@ import classes.Items.ConsumableLib;
 				outputText("\n\n“<i>It’s just from watching you, [master],</i>” she replies quietly, as relaxing sensation inundates your lower half. “<i>When you sl- move around, you can see where the stress lands and builds. You may not have any hinges down here, but that don’t mean you don’t have the same needs as animals that do.</i>”");
 
 				outputText("\n\n“<i>You watch me a lot, then?</i>” Silence from behind you as the questing, rubbing oil moves down almost to your tip.");
-				if (player.tongueType == TONGUE_SNAKE) outputText(" You grin, flicking your forked tongue out to smell her arousal.");
+				if (player.tongueType == AppearanceDefs.TONGUE_SNAKE) outputText(" You grin, flicking your forked tongue out to smell her arousal.");
 				outputText(" “<i>I imagine watching your [master] move around is almost a masochistic experience for you. Something so alien and unnerving now linked forever with pleasure and obedience. Is that how it is? You can’t stop staring at my beautiful, deadly form because it’s almost like a slutty punishment for you?</i>”");
 
 				outputText("\n\n“<i>S-something like that,</i>” Whitney whispers, shakily. You smile serenely as a warm, oily hand grasps your reptilian tip, moving up and down in an almost masturbatory rhythm. It took almost as long again for her to rub oil into your coils as she spent on the rest of her body, but it was well worth it.");

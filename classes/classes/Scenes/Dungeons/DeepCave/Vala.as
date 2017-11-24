@@ -1,10 +1,11 @@
 package classes.Scenes.Dungeons.DeepCave
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.internals.WeightedDrop;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.WeightedDrop;
 
-	public class Vala extends Monster
+public class Vala extends Monster
 	{
 		//Vala AI
 
@@ -24,7 +25,6 @@ package classes.Scenes.Dungeons.DeepCave
 				outputText("  The cloying, thick cloud of pink spools out from her mouth and fills the room with a haze of bubblegum-pink sweetness.  Even the shallowest, most experimental breath makes your heart pound and your crotch thrum with excitement.  You gasp in another quick breath and sway back and forth on your feet, already on the edge of giving in to the faerie.");
 				player.dynStats("lus", 30 + player.lib/10);
 			}
-			combatRoundOver();
 		}
 		//Milk magic
 		public function valaSpecial2():void {
@@ -41,13 +41,11 @@ package classes.Scenes.Dungeons.DeepCave
 				outputText("You aren't sure if there's something in her milk, the dust, or just watching her squirt and shake for you, but it's turning you on.");
 			}
 			player.dynStats("lus", statusEffectv1(StatusEffects.Milk) + player.lib / 20);
-			combatRoundOver();
 		}
 		//Masturbation
 		public function valaMasturbate():void {
 			outputText("The mind-fucked faerie spreads her alabaster thighs and dips a finger into the glistening slit between her legs, sliding in and out, only pausing to circle her clit.  She brazenly masturbates, putting on quite the show.  Vala slides another two fingers inside herself and finger-fucks herself hard, moaning and panting lewdly.  Then she pulls them out and asks, \"<i>Did you like that?  Will you fuck Vala now?</i>\"");
 			player.dynStats("lus", 4 + player.cor/10);
-			combatRoundOver();
 		}
 
 
@@ -84,16 +82,16 @@ package classes.Scenes.Dungeons.DeepCave
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.dungeons.deepcave.fightValaVictory();
+			SceneLib.dungeons.deepcave.fightValaVictory();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if(pcCameWorms){
 				outputText("\n\nYour foe doesn't seem put off enough to leave...");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
-				game.dungeons.deepcave.loseToVala();
+				SceneLib.dungeons.deepcave.loseToVala();
 			}
 		}
 
@@ -104,15 +102,15 @@ package classes.Scenes.Dungeons.DeepCave
 			this.imageName = "vala";
 			this.long = "While the fey girl is whip-thin, her breasts are disproportionately huge. They'd be at least a DD-cup on a normal human, but for her height and body type, they're practically as large as her head. They jiggle at her slow, uneven breathing, tiny drops of milk bubbling at her nipples with every heartbeat.  She seems fixated on mating with you, and won't take no for an answer.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_GAPING_WIDE);
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLICK, AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 25, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = 4*12;
-			this.hipRating = HIP_RATING_CURVY;
-			this.buttRating = BUTT_RATING_LARGE;
+			this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
 			this.skinTone = "fair";
 			this.hairColor = "purple";
 			this.hairLength = 22;
@@ -144,7 +142,7 @@ package classes.Scenes.Dungeons.DeepCave
 			var wingDesc:String = "shimmering wings";
 			if(flags[kFLAGS.TIMES_PC_DEFEATED_VALA] == 0) this.drop = new WeightedDrop(consumables.NUMBROX);
 			else this.drop = NO_DROP;
-			this.wingType = WING_TYPE_BEE_LIKE_LARGE;
+			this.wingType = AppearanceDefs.WING_TYPE_BEE_LIKE_LARGE;
 			this.wingDesc = wingDesc;
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			checkMonster();

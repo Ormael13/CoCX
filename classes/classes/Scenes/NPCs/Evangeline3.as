@@ -4,12 +4,10 @@
  */
 package classes.Scenes.NPCs 
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kFLAGS;
-	
-	public class Evangeline3 extends Monster
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+
+public class Evangeline3 extends Monster
 	{
 		
 		public function spellCostBlind():Number {
@@ -201,7 +199,6 @@ package classes.Scenes.NPCs
 					}
 					//if (choice1 == 3) EvangelineTease();
 				}
-				combatRoundOver();
 			}
 		}//HPRatio() > .5 - to używać jeśli coś ma być użyte powyżej lub poniżej x% max HP Evangeline
 		
@@ -215,8 +212,8 @@ package classes.Scenes.NPCs
 				createBreastRow(Appearance.breastCupInverse("F"));//succubus milk może teoretycznie w nieskończoność zwiekszać rozmiar biustu
 				this.tallness = 96;
 				this.skin.setBaseOnly({});
-				this.hipRating = HIP_RATING_FERTILE+3;//hipRating = 18
-				this.buttRating = BUTT_RATING_EXPANSIVE+1;//buttRating = 14
+				this.hipRating = AppearanceDefs.HIP_RATING_FERTILE+3;//hipRating = 18
+				this.buttRating = AppearanceDefs.BUTT_RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(41, 46, 80, 50);
 				initWisLibSensCor(15, 45, 35, 100);
 				this.weaponName = "inscribed spellblade";
@@ -237,8 +234,8 @@ package classes.Scenes.NPCs
 				createBreastRow(Appearance.breastCupInverse("F"));
 				this.tallness = 96;
 				this.skin.setBaseOnly({});
-				this.hipRating = HIP_RATING_FERTILE+3;//hipRating = 18
-				this.buttRating = BUTT_RATING_EXPANSIVE+1;//buttRating = 14
+				this.hipRating = AppearanceDefs.HIP_RATING_FERTILE+3;//hipRating = 18
+				this.buttRating = AppearanceDefs.BUTT_RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(46, 46, 80, 50);
 				initWisLibSensCor(15, 50, 35, 100);
 				this.weaponName = "inscribed spellblade";
@@ -260,8 +257,8 @@ package classes.Scenes.NPCs
 				createBreastRow(Appearance.breastCupInverse("F"));
 				this.tallness = 96;
 				this.skin.setBaseOnly({});
-				this.hipRating = HIP_RATING_FERTILE+3;//hipRating = 18
-				this.buttRating = BUTT_RATING_EXPANSIVE+1;//buttRating = 14
+				this.hipRating = AppearanceDefs.HIP_RATING_FERTILE+3;//hipRating = 18
+				this.buttRating = AppearanceDefs.BUTT_RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(46, 46, 80, 50);
 				initWisLibSensCor(15, 50, 35, 100);
 				this.weaponName = "inscribed spellblade";
@@ -285,8 +282,8 @@ package classes.Scenes.NPCs
 				createBreastRow(Appearance.breastCupInverse("F"));
 				this.tallness = 96;
 				this.skin.setBaseOnly({});
-				this.hipRating = HIP_RATING_FERTILE+3;//hipRating = 18
-				this.buttRating = BUTT_RATING_EXPANSIVE+1;//buttRating = 14
+				this.hipRating = AppearanceDefs.HIP_RATING_FERTILE+3;//hipRating = 18
+				this.buttRating = AppearanceDefs.BUTT_RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(46, 46, 80, 50);
 				initWisLibSensCor(15, 50, 35, 100);
 				this.weaponName = "inscribed spellblade";
@@ -311,8 +308,8 @@ package classes.Scenes.NPCs
 				createBreastRow(Appearance.breastCupInverse("F"));
 				this.tallness = 96;
 				this.skin.setBaseOnly({});
-				this.hipRating = HIP_RATING_FERTILE+3;//hipRating = 18
-				this.buttRating = BUTT_RATING_EXPANSIVE+1;//buttRating = 14
+				this.hipRating = AppearanceDefs.HIP_RATING_FERTILE+3;//hipRating = 18
+				this.buttRating = AppearanceDefs.BUTT_RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(46, 46, 80, 50);
 				initWisLibSensCor(15, 50, 35, 100);
 				this.weaponName = "inscribed spellblade";
@@ -339,8 +336,8 @@ package classes.Scenes.NPCs
 				createBreastRow(Appearance.breastCupInverse("F"));//succubus milk może teoretycznie w nieskończoność zwiekszać rozmiar biustu
 				this.tallness = 96;
 				this.skin.setBaseOnly({});
-				this.hipRating = HIP_RATING_FERTILE+3;//hipRating = 18
-				this.buttRating = BUTT_RATING_EXPANSIVE+1;//buttRating = 14
+				this.hipRating = AppearanceDefs.HIP_RATING_FERTILE+3;//hipRating = 18
+				this.buttRating = AppearanceDefs.BUTT_RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(46, 46, 80, 50);
 				initWisLibSensCor(15, 50, 35, 100);
 				this.weaponName = "inscribed spellblade";
@@ -363,9 +360,9 @@ package classes.Scenes.NPCs
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);//pewnie perk dla dragon albo odzyskała jego efekt kiedy użyła drake flower 2 lvl wcześniej a tu coś innego dać... ^^
 			}
-			this.createVagina(false, VAGINA_WETNESS_DRY, VAGINA_LOOSENESS_TIGHT);
-			this.ass.analLooseness = ANAL_LOOSENESS_VIRGIN;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DRY, AppearanceDefs.VAGINA_LOOSENESS_TIGHT);
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_VIRGIN;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.skinTone = "olive";
 			this.hairColor = "crimson platinum";
 			this.hairLength = 36;

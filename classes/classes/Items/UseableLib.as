@@ -3,14 +3,13 @@
  */
 package classes.Items
 {
-	import classes.BaseContent;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Items.Other.DebugWand;
-	import classes.Items.Other.SimpleUseable;
-	import classes.Player;
-	import classes.internals.Utils;
+import classes.BaseContent;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Items.Other.DebugWand;
+import classes.Items.Other.SimpleUseable;
+import classes.Scenes.SceneLib;
 
-	use namespace kGAMECLASS;
+use namespace kGAMECLASS;
 
 	public final class UseableLib extends BaseContent
 	{
@@ -76,7 +75,7 @@ package classes.Items
 			"You look at rainbow vial.  It would help Arian change scales color.");
 		public const GLDSTAT:SimpleUseable = new SimpleUseable("GldStat", "GldStat", "a golden statue", 2000,
 			"An intricate golden idol of an androgynous humanoid figure with nine long tails.  It probably had some spiritual significance to its owner.",
-			"", kGAMECLASS.forest.kitsuneScene.kitsuneStatue);
+			"", SceneLib.forest.kitsuneScene.kitsuneStatue);
 		//MISCELLANEOUS
 		public const CONDOM :SimpleUseable = new SimpleUseable("Condom ", "Condom", "a packet of condom", 6,
 			"This wrapper contains a latex condom that can be worn over penis. It's designed to prevent pregnancy most of the time. Can be used in certain sex scenes.",

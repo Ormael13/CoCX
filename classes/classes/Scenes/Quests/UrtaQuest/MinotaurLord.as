@@ -1,12 +1,13 @@
 package classes.Scenes.Quests.UrtaQuest
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.internals.*;
-	import classes.Items.WeaponLib;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Items.WeaponLib;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
 
-	use namespace kGAMECLASS;
+use namespace kGAMECLASS;
 
 
 
@@ -44,7 +45,6 @@ package classes.Scenes.Quests.UrtaQuest
 				outputText("\n\nThe minotaur glares at you and snorts, obviously pissed at not getting his serving...");
 				addStatusValue(StatusEffects.MinoMilk, 1, 1);
 			}
-			kGAMECLASS.combatRoundOver();
 		}
 
 		private function minotaurDisarm():void
@@ -73,7 +73,6 @@ package classes.Scenes.Quests.UrtaQuest
 				player.setWeapon(WeaponLib.FISTS);
 				player.createStatusEffect(StatusEffects.Disarmed, 2, 0, 0, 0);
 			}
-			kGAMECLASS.combatRoundOver();
 		}
 
 		private function minotaurLordEntangle():void
@@ -90,7 +89,6 @@ package classes.Scenes.Quests.UrtaQuest
 				outputText("\n\n<b>You're tangled up in the minotaur lord's chain, and at his mercy, unless you can break free!</b>");
 				createStatusEffect(StatusEffects.MinotaurEntangled, 0, 0, 0, 0);
 			}
-			combatRoundOver();
 		}
 
 		private function minotaurCumPress():void
@@ -116,7 +114,6 @@ package classes.Scenes.Quests.UrtaQuest
 				outputText("You want another taste...");
 			}
 			removeStatusEffect(StatusEffects.MinotaurEntangled);
-			combatRoundOver();
 		}
 
 		private function minotaurPrecumTease():void
@@ -137,29 +134,28 @@ package classes.Scenes.Quests.UrtaQuest
 			//(1)
 			if (player.lust <= 75) outputText("  You shiver with need, wanting nothing more than to bury your face under that loincloth and slurp out every drop of goopey goodness.");
 			else outputText("  <b>You groan and lick your lips over and over, craving the taste of him in your mouth.</b>");
-			kGAMECLASS.combatRoundOver();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.clearOutput();
+			EngineCore.clearOutput();
 			outputText("The minotaur lord is defeated!  ");
 			if (flags[kFLAGS.URTA_QUEST_STATUS] == 0.75) {
 				outputText("  You could use him for a quick fuck to sate your lusts before continuing on.  Do you?");
-				game.menu();
-				game.addButton(0,"Fuck",game.urtaQuest.winRapeAMinoLordAsUrta);
-				game.addButton(4, "Leave", game.urtaQuest.beatMinoLordOnToSuccubi);
+				EngineCore.menu();
+				EngineCore.addButton(0,"Fuck",SceneLib.urtaQuest.winRapeAMinoLordAsUrta);
+				EngineCore.addButton(4, "Leave", SceneLib.urtaQuest.beatMinoLordOnToSuccubi);
 			}
-			else game.mountain.minotaurScene.minoVictoryRapeChoices();
+			else SceneLib.mountain.minotaurScene.minoVictoryRapeChoices();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if (flags[kFLAGS.URTA_QUEST_STATUS] == 0.75) {
-				if (hpVictory) game.urtaQuest.urtaLosesToMinotaurRoughVersion();
-				else game.urtaQuest.urtaSubmitsToMinotaurBadEnd();
+				if (hpVictory) SceneLib.urtaQuest.urtaLosesToMinotaurRoughVersion();
+				else SceneLib.urtaQuest.urtaSubmitsToMinotaurBadEnd();
 			}
-			else game.mountain.minotaurScene.getRapedByMinotaur();
+			else SceneLib.mountain.minotaurScene.getRapedByMinotaur();
 		}
 
 		public function MinotaurLord()
@@ -176,18 +172,18 @@ package classes.Scenes.Quests.UrtaQuest
 			this.cumMultiplier = 1.5;
 			this.hoursSinceCum = this.ballSize * 10;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.createStatusEffect(StatusEffects.BonusACapacity,50,0,0,0);
 			this.tallness = 132;
-			this.hipRating = HIP_RATING_AVERAGE;
-			this.buttRating = BUTT_RATING_AVERAGE+1;
-			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
+			this.hipRating = AppearanceDefs.HIP_RATING_AVERAGE;
+			this.buttRating = AppearanceDefs.BUTT_RATING_AVERAGE+1;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
 			this.skin.growFur({color:"red"});
 			this.skinDesc = "shaggy fur";
 			this.hairColor = randomChoice("black","brown");
 			this.hairLength = 3;
-			this.faceType = FACE_COW_MINOTAUR;
+			this.faceType = AppearanceDefs.FACE_COW_MINOTAUR;
 			initStrTouSpeInte(200, 140, 80, 50);
 			initWisLibSensCor(50, 70, 25, 85);
 			this.weaponName = "chain";
@@ -209,8 +205,8 @@ package classes.Scenes.Quests.UrtaQuest
 						.elseDrop(null);
 			}
 			else this.drop = NO_DROP;
-			this.tailType = TAIL_TYPE_COW;
-			this.special1 = game.mountain.minotaurScene.minoPheromones;
+			this.tailType = AppearanceDefs.TAIL_TYPE_COW;
+			this.special1 = SceneLib.mountain.minotaurScene.minoPheromones;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			checkMonster();
 		}

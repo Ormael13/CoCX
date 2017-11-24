@@ -1,9 +1,10 @@
 package classes.Items.Consumables 
 {
-	import classes.Items.Consumable;
-	import classes.Items.ConsumableLib;
-	
-	public class AkbalSaliva extends Consumable 
+import classes.EngineCore;
+import classes.Items.Consumable;
+import classes.Items.ConsumableLib;
+
+public class AkbalSaliva extends Consumable
 	{
 		public function AkbalSaliva() 
 		{
@@ -13,7 +14,7 @@ package classes.Items.Consumables
 		override public function useItem():Boolean
 		{
 			outputText("You uncork the vial and chug down the saliva.  ");
-			game.HPChange((player.maxHP() / 4), true);
+			EngineCore.HPChange((player.maxHP() / 4), true);
 			player.refillHunger(5);
 			
 			return false;

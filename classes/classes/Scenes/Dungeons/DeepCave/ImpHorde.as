@@ -1,10 +1,11 @@
 ﻿package classes.Scenes.Dungeons.DeepCave
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
 
-	public class ImpHorde extends Monster
+public class ImpHorde extends Monster
 	{
 		public function impGangAI():void {
 			if(hasStatusEffect(StatusEffects.ImpUber)) impGangUber();
@@ -19,7 +20,6 @@
 				outputText("\nOne of the tiny demons latches onto one of your [legs] and starts humping it.  You shake the little bastard off and keep fighting!");
 				player.dynStats("lus", 1);
 			}
-			combatRoundOver();
 		}
 		
 		public function impGangUber():void {
@@ -36,7 +36,7 @@
 				outputText(".  The lower portions of your coverings ");
 				if(player.cockTotal() > 0) {
 					outputText("are pulled tight by your " + multiCockDescript() + ", ");
-					if(player.totalCocks() > 1) outputText("each ");
+					if(player.cockTotal() > 1) outputText("each ");
 					outputText("beading a drop of pre-cum at the tip");
 					if(player.hasVagina()) outputText(", and in addition, the clothes around your groin ");
 				}
@@ -176,16 +176,16 @@
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.dungeons.deepcave.impGangVICTORY();
+			SceneLib.dungeons.deepcave.impGangVICTORY();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if(pcCameWorms){
 				outputText("\n\nYour foes don't seem put off enough to leave...");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
-				game.dungeons.deepcave.loseToImpMob();
+				SceneLib.dungeons.deepcave.loseToImpMob();
 			}
 		}
 
@@ -204,12 +204,12 @@
 			this.balls = 2;
 			this.ballSize = 1;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = 36;
-			this.hipRating = HIP_RATING_SLENDER;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 1;
@@ -229,7 +229,7 @@
 			this.gems = 30 + rand(30);
 			this.additionalXP = 100;
 			this.drop = new WeightedDrop(armors.NURSECL, 1);
-			this.wingType = WING_TYPE_IMP;
+			this.wingType = AppearanceDefs.WING_TYPE_IMP;
 			this.wingDesc = "imp wings";
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);

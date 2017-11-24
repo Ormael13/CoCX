@@ -1,12 +1,10 @@
 package classes.Scenes 
 {
-	import classes.*
-	import classes.BaseContent;
-	import classes.GlobalFlags.kACHIEVEMENTS;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	
-	public class Achievements extends BaseContent
+import classes.*;
+import classes.GlobalFlags.kACHIEVEMENTS;
+import classes.GlobalFlags.kGAMECLASS;
+
+public class Achievements extends BaseContent
 	{
 		public var achievementsEarned:int = 0;
 		public var achievementsTotal:int = 0;
@@ -46,7 +44,7 @@ package classes.Scenes
 			achievementsEarned = 0;
 			achievementsTotal = 0;
 			clearOutput();
-			kGAMECLASS.displayHeader("Achievements");
+			EngineCore.displayHeader("Achievements");
 			outputText("Note: Some achievements are contradictory and may require multiple playthroughs to obtain every achievement.\n");
 			titleAchievementSection("Storyline"); //4 achievements
 			addAchievement("Newcomer", kACHIEVEMENTS.STORY_NEWCOMER, "Enter the realm of Mareth.");
@@ -242,9 +240,9 @@ package classes.Scenes
 			addAchievement("Up to Eleven", kACHIEVEMENTS.GENERAL_UP_TO_11, "Take your height up to 11 feet.");
 			
 			menu();
-			addButton(10, "" + achievementsEarned + " of " + achievementsTotal + "", kGAMECLASS.doNothing);
-			addButton(11, "achievements", kGAMECLASS.doNothing);
-			addButton(12, "unlocked", kGAMECLASS.doNothing);
+			addButton(10, "" + achievementsEarned + " of " + achievementsTotal + "", EngineCore.doNothing);
+			addButton(11, "achievements", EngineCore.doNothing);
+			addButton(12, "unlocked", EngineCore.doNothing);
 			addButton(14, "Back", kGAMECLASS.mainMenu.mainMenu);
 		}
 		

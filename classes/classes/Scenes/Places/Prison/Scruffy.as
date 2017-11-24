@@ -1,19 +1,20 @@
 package classes.Scenes.Places.Prison 
 {
-	import classes.*;
-	import classes.Scenes.Monsters.Imp;
-	import classes.GlobalFlags.kFLAGS;
-	
-	public class Scruffy extends Imp
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Monsters.Imp;
+import classes.Scenes.SceneLib;
+
+public class Scruffy extends Imp
 	{
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.prison.scruffyScene.prisonCaptorRandomEventJizzJanitorBeatenUp();
+			SceneLib.prison.scruffyScene.prisonCaptorRandomEventJizzJanitorBeatenUp();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.prison.scruffyScene.prisonCaptorRandomEventJizzJanitorLoss();
+			SceneLib.prison.scruffyScene.prisonCaptorRandomEventJizzJanitorLoss();
 		}
 		
 		public function Scruffy() 
@@ -27,11 +28,11 @@ package classes.Scenes.Places.Prison
 			this.balls = 2;
 			this.ballSize = 1;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = 40;
-			this.hipRating = HIP_RATING_BOYISH;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 5;
@@ -49,7 +50,7 @@ package classes.Scenes.Places.Prison
 			this.gems = rand(5) + 25;
 			this.drop = NO_DROP;
 			this.special1 = lustMagicAttack;
-			this.wingType = WING_TYPE_IMP;
+			this.wingType = AppearanceDefs.WING_TYPE_IMP;
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}

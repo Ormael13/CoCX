@@ -1,10 +1,11 @@
 package classes.Scenes.Dungeons.DeepCave
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
 
-	public class Zetaz extends Monster
+public class Zetaz extends Monster
 	{
 		public function zetazAI():void {
 			//Zetaz taunts.
@@ -24,14 +25,13 @@ package classes.Scenes.Dungeons.DeepCave
 			if(hasStatusEffect(StatusEffects.Stunned)) {
 				outputText("Your foe is too dazed from your last hit to strike back!");
 				removeStatusEffect(StatusEffects.Stunned);
-				combatRoundOver();
 				return;
 			}
 			var select:Number=1;
 			var rando:Number=1;
 			//Exgartuan gets to do stuff!
 			if(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0 && rand(3) == 0) {
-				game.exgartuan.exgartuanCombatUpdate();
+				SceneLib.exgartuan.exgartuanCombatUpdate();
 				outputText("\n\n");
 			}
 			if(hasStatusEffect(StatusEffects.Constricted)) {
@@ -42,7 +42,6 @@ package classes.Scenes.Dungeons.DeepCave
 					removeStatusEffect(StatusEffects.Constricted);
 				}
 				addStatusValue(StatusEffects.Constricted,1,-1);
-				combatRoundOver();
 				return;
 			}
 			//STANDARD COMBAT STATUS AFFECTS END HERE
@@ -93,7 +92,6 @@ package classes.Scenes.Dungeons.DeepCave
 					gigaArouse();
 				}
 			}
-			combatRoundOver();
 		}
 		
 		public function gigaArouse():void {
@@ -107,14 +105,13 @@ package classes.Scenes.Dungeons.DeepCave
 				if(player.lust >= 30 && player.lust < 60 && player.cocks.length == 1) outputText(player.SMultiCockDesc() + " hardens and twitches, distracting you further.  ");
 			}
 			if(player.vaginas.length > 0) {
-				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL && player.vaginas.length == 1) outputText("Your [vagina] dampens perceptibly, feeling very empty.  ");
-				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET && player.vaginas.length > 0) outputText("Your crotch becomes sticky with girl-lust, making it clear to " + a + short + " just how welcome your body finds the spell.  ");
-				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK && player.vaginas.length == 1) outputText("Your [vagina] becomes sloppy and wet, dribbling with desire to be mounted and fucked.  ");
-				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING && player.vaginas.length > 0) outputText("Thick runners of girl-lube stream down the insides of your thighs as your crotch gives into the demonic magics.  You wonder what " + a + short + "'s cock would feel like inside you?  ");
-				if (player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING && player.vaginas.length == 1) outputText("Your [vagina] instantly soaks your groin with the heady proof of your need.  You wonder just how slippery you could " + a + short + "'s dick when it's rammed inside you?  ");
+				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == AppearanceDefs.VAGINA_WETNESS_NORMAL && player.vaginas.length == 1) outputText("Your [vagina] dampens perceptibly, feeling very empty.  ");
+				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == AppearanceDefs.VAGINA_WETNESS_WET && player.vaginas.length > 0) outputText("Your crotch becomes sticky with girl-lust, making it clear to " + a + short + " just how welcome your body finds the spell.  ");
+				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == AppearanceDefs.VAGINA_WETNESS_SLICK && player.vaginas.length == 1) outputText("Your [vagina] becomes sloppy and wet, dribbling with desire to be mounted and fucked.  ");
+				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == AppearanceDefs.VAGINA_WETNESS_DROOLING && player.vaginas.length > 0) outputText("Thick runners of girl-lube stream down the insides of your thighs as your crotch gives into the demonic magics.  You wonder what " + a + short + "'s cock would feel like inside you?  ");
+				if (player.lust >= 60 && player.vaginas[0].vaginalWetness == AppearanceDefs.VAGINA_WETNESS_SLAVERING && player.vaginas.length == 1) outputText("Your [vagina] instantly soaks your groin with the heady proof of your need.  You wonder just how slippery you could " + a + short + "'s dick when it's rammed inside you?  ");
 			}
-			if(player.lust >= player.maxLust()) doNext(game.endLustLoss)
-			else combatRoundOver();
+			if(player.lust >= player.maxLust()) doNext(SceneLib.combat.endLustLoss);
 		}
 
 		
@@ -146,16 +143,16 @@ package classes.Scenes.Dungeons.DeepCave
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.dungeons.deepcave.defeatZetaz();
+			SceneLib.dungeons.deepcave.defeatZetaz();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if (pcCameWorms){
 				outputText("\n\nYour foe doesn't seem put off enough to care...");
-				doNext(game.endLustLoss);
+				doNext(SceneLib.combat.endLustLoss);
 			} else {
-				game.dungeons.deepcave.loseToZetaz();
+				SceneLib.dungeons.deepcave.loseToZetaz();
 			}
 		}
 
@@ -171,12 +168,12 @@ package classes.Scenes.Dungeons.DeepCave
 			this.cumMultiplier = 3;
 			this.hoursSinceCum = 20;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.tallness = 4*12+1;
-			this.hipRating = HIP_RATING_BOYISH;
-			this.buttRating = BUTT_RATING_TIGHT;
-			this.lowerBody = LOWER_BODY_TYPE_KANGAROO;
+			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_KANGAROO;
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 5;
@@ -196,7 +193,7 @@ package classes.Scenes.Dungeons.DeepCave
 			this.gems = rand(75) + 175;
 			this.additionalXP = 200;
 			this.drop = new WeightedDrop(consumables.BIMBOLQ, 1);
-			this.wingType = WING_TYPE_IMP;
+			this.wingType = AppearanceDefs.WING_TYPE_IMP;
 			this.wingDesc = "small";
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);

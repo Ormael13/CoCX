@@ -1,14 +1,14 @@
 package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
-	public class Vapula extends NPCAwareContent implements TimeAwareInterface
+public class Vapula extends NPCAwareContent implements TimeAwareInterface
 	{
 		public function Vapula()
 		{
-			CoC.timeAwareClassAdd(this);
+			EventParser.timeAwareClassAdd(this);
 		}
 		
 		//Implementation of TimeAwareInterface
@@ -273,7 +273,7 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1 && flags[kFLAGS.FOLLOWER_PRODUCTION_VAPULA] == 0) addButton(7, "Harvest Milk", harvestMilk);
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1 && flags[kFLAGS.FOLLOWER_PRODUCTION_VAPULA] == 1) addButton(7, "Stop Harvest", stopHarvest);
 					
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1) addButton(14, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1) addButton(14, "Back", SceneLib.farm.farmCorruption.rootScene);
 			dynStats("lus", 10);
 		}
 		
@@ -304,7 +304,7 @@ package classes.Scenes.NPCs
 			
 			flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] = 0;
 			
-			doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+			doNext(SceneLib.farm.farmCorruption.rootScene);
 		}
 		
 		private function harvestMilk():void
@@ -320,7 +320,7 @@ package classes.Scenes.NPCs
 			
 			flags[kFLAGS.FOLLOWER_PRODUCTION_VAPULA] = 1;
 			
-			doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+			doNext(SceneLib.farm.farmCorruption.rootScene);
 		}
 		
 		private function stopHarvest():void
@@ -333,7 +333,7 @@ package classes.Scenes.NPCs
 			
 			flags[kFLAGS.FOLLOWER_PRODUCTION_VAPULA] = 0;
 			
-			doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+			doNext(SceneLib.farm.farmCorruption.rootScene);
 		}
 
 //Vapula Appearance - this bitch is purpler than a Nigerian (Z)
@@ -345,16 +345,16 @@ package classes.Scenes.NPCs
 			outputText("\n\nShe has a pink, wet pussy, although you know it can be stretched to take members of any size.  Drops of fem-juice often drip from her lush fuck-hole, leaving a trail behind her as she walks.");
 			outputText("\n\nVapula has a tight asshole, placed right between her plush buttcheeks where it belongs.");
 
-			if (kGAMECLASS.farm.farmCorruption.hasTattoo("vapula"))
+			if (SceneLib.farm.farmCorruption.hasTattoo("vapula"))
 			{
 				outputText("\n\n");
-				if (kGAMECLASS.farm.farmCorruption.vapulaFullTribalTats())
+				if (SceneLib.farm.farmCorruption.vapulaFullTribalTats())
 				{
 					outputText("She is covered from head to tail in tribal tattoos, erotic lines snaking all over her naked frame, giving her the look of a barely tamed savage.")
 				}
 				else
 				{
-					if (kGAMECLASS.farm.farmCorruption.numTattoos("vapula") > 1) outputText("She has the following tattoos emblazoned across her body:\n");
+					if (SceneLib.farm.farmCorruption.numTattoos("vapula") > 1) outputText("She has the following tattoos emblazoned across her body:\n");
 					else outputText("She has ");
 
 					if (flags[kFLAGS.VAPULA_TATTOO_COLLARBONE] != 0) outputText(flags[kFLAGS.VAPULA_TATTOO_COLLARBONE] + "\n");
@@ -629,7 +629,7 @@ package classes.Scenes.NPCs
 			if (player.balls > 0) outputText("balls and massages your ");
 			outputText(buttDescript() + ".");
 			//[if third cock]
-			if (player.totalCocks() > 2) outputText("  Using her extra flexibility, she bends over and start jerking your third pole, the sweet handjob adding to your pure cocktail of pleasure.");
+			if (player.cockTotal() > 2) outputText("  Using her extra flexibility, she bends over and start jerking your third pole, the sweet handjob adding to your pure cocktail of pleasure.");
 			outputText("  You can feel her hard nipples poke at your skin as they gently scrape across your torso.  Vapula hardly ever interrupts her embrace, only pulling back from your lips to take care of other intimate parts of your body.  You keep riding the bimbo senseless, making her squirm and squawk in ecstasy as your own cries of pleasure are muffled by Vapula's voracious lips.");
 			outputText("\n\nVapula's expert stimulation as well as Sophie's uncontrollably hot ass eventually drain your stamina and you feel [eachCock] flutter and twinge as it releases its milky load.  Sophie climaxes and squirts a copious amount of her juice as you deliver rope after rope of jism into her tight confines.  Remembering your succubus slut, you ");
 			if (player.cockTotal() < 3) outputText("hastily pull out and ");
@@ -1025,16 +1025,16 @@ package classes.Scenes.NPCs
 				outputText("\n\n\"<i>It has given me a valuable insight into cruelty, certainly,</i>\" Vapula growls.  She is having trouble concentrating, her lips instinctively reaching for your dildo's crown.  \"<i>It amazes me you still have a soul.</i>\"");
 				outputText("\n\n\"<i>That's not a very nice thing to say,</i>\" you purr, stopping your ministrations for a moment and pulling away slightly.  A look of anguish appears on Vapula's face.  \"<i>What would you do for me now, just to get your fix?</i>\"");
 				//[Hooves:
-				if (player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.isTaur()) outputText("\"<i>I would worship your feet, mistress.  I would clean your hooves with my tongue to a shine, tease out every scrap of dirt from every crevice.  And I would thank you for the privilege.</i>\"");
+				if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HOOFED || player.isTaur()) outputText("\"<i>I would worship your feet, mistress.  I would clean your hooves with my tongue to a shine, tease out every scrap of dirt from every crevice.  And I would thank you for the privilege.</i>\"");
 				//[Naga:
 				else if (player.isNaga()) outputText("\n\n\"<i>I would worship your scales, mistress.  I would buff every single one with my tongue so it shone, lick every inch of your tail, deep throat you all the way down into my belly.  And I would thank you for the privilege.</i>\"");
 				//[Drider:
 				else if (player.isDrider()) outputText("\n\n\"<i>I would be your egg dump, mistress.  I would take your dripping ovipositor in every hole, my cunt, my ass, my mouth, then clean it with my tongue afterwards.  I would find and feed you ovi-potions just so you could keep me stuffed with your essence constantly.  And I would thank you for the privilege.</i>\"");
 				//[Goo:
 				else if (player.isGoo()) outputText("\n\n\"<i>I would let you engulf me, mistress.  I would let you push yourself into my every hole and crevice, drown me in your essence, fuck me so completely I wouldn't know where I started and you began.  And I would thank you for the privilege.</i>\"");
-				else if (player.lowerBody == LOWER_BODY_TYPE_DOG || player.lowerBody == LOWER_BODY_TYPE_CAT || player.lowerBody == LOWER_BODY_TYPE_LIZARD || player.lowerBody == LOWER_BODY_TYPE_KANGAROO || player.lowerBody == LOWER_BODY_TYPE_FOX) outputText("\n\n\"<i>I would worship your feet, mistress.  I would lick every inch of your claws, massage your soft undersides with my tongue.  I would pare all of your claws to needle sharpness and then let you test them on my backside.  And I would thank you for the privilege.</i>\"");
+				else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_DOG || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CAT || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_LIZARD || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_KANGAROO || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_FOX) outputText("\n\n\"<i>I would worship your feet, mistress.  I would lick every inch of your claws, massage your soft undersides with my tongue.  I would pare all of your claws to needle sharpness and then let you test them on my backside.  And I would thank you for the privilege.</i>\"");
 				//[Insect:
-				else if (player.lowerBody == LOWER_BODY_TYPE_BEE || player.lowerBody == LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS) outputText("\n\n\"<i>I would worship your feet, mistress.  I would lick every inch of your boots, clean your soles with my tongue.  I wouldn't stop until they shone. And I would thank you for the privilege.</i>\"");
+				else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_BEE || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS) outputText("\n\n\"<i>I would worship your feet, mistress.  I would lick every inch of your boots, clean your soles with my tongue.  I wouldn't stop until they shone. And I would thank you for the privilege.</i>\"");
 				//[Human/demonic feet:
 				else outputText("\n\n\"<i>I would worship your feet, mistress.  I would lick every inch of them, clean your soles with my tongue, between your toes, lavish each of your pinkies with attention as if they were ten cocks belonging to you.  And I would thank you for the privilege.</i>\"");
 

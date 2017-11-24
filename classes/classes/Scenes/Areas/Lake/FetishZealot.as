@@ -1,10 +1,11 @@
 ﻿package classes.Scenes.Areas.Lake
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
 
-	public class FetishZealot extends Monster
+public class FetishZealot extends Monster
 	{
 
 		private static const RELIGIOUS_CLOTHES:String = "religious clothes";
@@ -102,7 +103,6 @@
 			outputText("The Zealot student looks at you a little shyly and sticks a pencil in his mouth while pushing a hand in front of his groin, trying to hide a rather obvious bulge.  The whole scene is rather cute, and you feel incredibly aroused afterwards.");
 		}
 		player.dynStats("lus", (7+rand(player.lib/20+player.cor/20)));
-		combatRoundOver();
 	}
 	//Special2: Lust transfer spell, it becomes more and 
 	//more likely that he will use this power as his lust gets 
@@ -111,7 +111,6 @@
 		outputText("The zealot suddenly cries out and extends his arms towards you; your mind is suddenly overwhelmed with a massive wave of arousal as images of every kind of fetish you can imagine wash over you, all blended together.  After a moment you are able to recover, but you notice that the Zealot doesn't seem to be as aroused as before.");
 		player.dynStats("lus", lust/2);
 		lust /= 2;
-		combatRoundOver();
 	}
 
 		override protected function postAttack(damage:int):void
@@ -127,7 +126,7 @@
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.lake.fetishZealotScene.zealotDefeated();
+			SceneLib.lake.fetishZealotScene.zealotDefeated();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -135,9 +134,9 @@
 			if (pcCameWorms){
 				outputText("\n\nThe fetish cultist ignores the perverse display and continues on as if nothing had happened...");
 				player.orgasm();
-				doNext(game.lake.fetishZealotScene.zealotLossRape);
+				doNext(SceneLib.lake.fetishZealotScene.zealotLossRape);
 			} else {
-				game.lake.fetishZealotScene.zealotLossRape();
+				SceneLib.lake.fetishZealotScene.zealotLossRape();
 			}
 		}
 
@@ -152,12 +151,12 @@
 			// this.plural = false;
 			this.createCock(7,1.5);
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_LOOSE;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_LOOSE;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,40,0,0,0);
 			this.tallness = 6*12;
-			this.hipRating = HIP_RATING_BOYISH+1;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH+1;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			this.skinTone = "tan";
 			this.hairColor = "black";
 			this.hairLength = 4;

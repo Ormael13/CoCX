@@ -1,9 +1,10 @@
 package classes.Scenes.NPCs 
 {
-	import classes.*;
-	import classes.GlobalFlags.*;
-	
-	/**
+import classes.*;
+import classes.GlobalFlags.*;
+import classes.Scenes.SceneLib;
+
+/**
 	 * Izmael by Nonesuch
 	 * @author Kitteh6660
 	 */
@@ -53,13 +54,13 @@ package classes.Scenes.NPCs
 		public function izmaelMenu():void {
 			menu();
 			addButton(0, "Appearance", izmaelAppearance).hint("Examine Izmael's appearance.");
-			addButton(1, "Books", getGame().izmaScene.IzmaCampBooks).hint("Ask Izmael if you can borrow his books.");
-			if (getGame().izmaScene.totalIzmaChildren() > 0) addButton(2, "Children", getGame().izmaScene.izmaKidsPlaytime);
-			if (player.lust >= 33) addButton(3, "Sex", izmaelSexMenu).hint("Do some romp with the tigershark!");
+            addButton(1, "Books", SceneLib.izmaScene.IzmaCampBooks).hint("Ask Izmael if you can borrow his books.");
+            if (SceneLib.izmaScene.totalIzmaChildren() > 0) addButton(2, "Children", SceneLib.izmaScene.izmaKidsPlaytime);
+            if (player.lust >= 33) addButton(3, "Sex", izmaelSexMenu).hint("Do some romp with the tigershark!");
 			else addButtonDisabled(3, "Sex", "You are not horny enough to consider that.");
 			addButton(4, "Talk", izmaelTalk).hint("Talk to Izmael about some stuff.");
-			addButton(5, "Tooth", getGame().izmaScene.gatASharkTooth);
-			addButton(6, "Toggle Herb", toggleIzmaelVirility).hint(flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 0 ? "Tell Izmael to stop taking the herbs so he can impregnate you vaginally.\n\nCurrently: ON" : "Tell Izmael to start taking the herbs so he can't impregnate you.\n\nCurrently: OFF");
+            addButton(5, "Tooth", SceneLib.izmaScene.gatASharkTooth);
+            addButton(6, "Toggle Herb", toggleIzmaelVirility).hint(flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 0 ? "Tell Izmael to stop taking the herbs so he can impregnate you vaginally.\n\nCurrently: ON" : "Tell Izmael to start taking the herbs so he can't impregnate you.\n\nCurrently: OFF");
 			if (player.hasItem(consumables.BIMBOLQ) && player.hasItem(consumables.DEBIMBO)) addButton(7, "Turn Back", revertIzmaelPrompt).hint("Turn Izmael back to Izma? This is an irreversible process and you then won't be able to remove her dick afterwards.");
 			else addButtonDisabled(7, "Turn Back", "You need 1 Bimbo Liqueur and 1 Debimbo to turn Izmael back into Izma.");
 			addButton(14, "Back", camp.campLoversMenu);
@@ -315,7 +316,7 @@ package classes.Scenes.NPCs
 			else outputText("\n\nYou smirk and with some difficulty sink as much of your monstrous half into the hot water as you can, perching yourself upon his chest, sighing as your lower half is encapsulated in wet heat.");
 			outputText("\n\nYou curl your fingers into Izmael's wet hair and begin to gently rub your [vagina] against the side of his face.  Your cunt is already softened and beading from the humidity which veils you, and it begins to glisten with anticipation as you enjoy the ever-so-slightly rough texture bouncing small shudders of pleasure into your [clit].  The realization that his shark skin makes him like one big piece of pumice stone to you sends shivers of delight down your spine; he groans and tries to shift himself as you rub your body gleefully against him up and down in the water, the satisfying scratching of his firm flesh upon your skin/scales/carapace/fur contrasting with the hot liquid relaxing your muscles.  He locks eyes with you again, not capable of understanding what you're doing or why you have rendered him so helpless, trapped under a weight of tired limbs, heat and fluid.  You hold his gaze as you gently press your pussy against his mouth.  \"<i>Open wide, beta.</i>\" Izmael is in no state to object.  You sigh as you feel his tongue push into your wet opening. ");
 			if (player.cockTotal() == 1) outputText("You sigh as you feel his tongue push into your wet opening, giggling lowly as your [cock] flops onto his head."); 
-			if (player.cockTotal() >= 2) ("You sigh as you feel his tongue push into your wet opening, your dicks sliding around his head, festooning his face and shoulders with your cock flesh.");
+			if (player.cockTotal() >= 2) outputText("You sigh as you feel his tongue push into your wet opening, your dicks sliding around his head, festooning his face and shoulders with your cock flesh.");
 			outputText("\n\nThe shark morph is clumsy at first; his teeth catch against your sensitive mons as you begin to gently thrust into his face, making you hiss slightly, and he laps at your inner flesh crudely; it feels like you're being gotten at by a dog.  You sigh in frustration at your unwieldy boy toy.");
 			outputText("\n\n\"<i>Cmon beta,</i>\" you rap out in your best gym instructor impression.  \"<i>Let's loosen that jaw and get that tongue moving! The warm down is just as important as the work-out, you should know that.  You want to thank your alpha for giving you such a vigorous work out the best you can, don't you?</i>\" The shark morph seems to be in a deep trance, but your words have the required effect: Izmael's jaw sags wider and you exhale in satisfaction as pointed edges disappear and he begins to twist his tongue into your depths with more care.  You begin to luxuriously ride his face, holding his head softly but firmly as you pump your [hips] in and out of the wet, sucking warmth, your thighs clenching into your beta's neck as you find a slow, indulgent rhythm, the gentle sound of the water filling your ears.");
 			outputText("\n\nThe shark morph is doubly sedated by your rough drill and steaming water, his mouth both relaxed and hot as he lavishes your pussy in attention, sliding his tongue as deep into your depths as he can at your inward push before licking at and testing every sensitive fold he can find, polishing your soft, dripping hole with his saliva, intermittently surrounding your labia with his soft lips and immersing your entire sex in soft, sucking pressure.  You reward him by inching your hand down his washboard stomach, enjoying each ripple of warm muscle along the way, bending back until you touch his trunk-like length.  Izmael groans long and low into your pussy, sending pleasurable vibrations running through you as you wrap one hand around his own cock and slowly begin to pull, letting your hand go soft and then clenching, working him up and down.  He closes his eyes again as you imprison him in pleasure.");

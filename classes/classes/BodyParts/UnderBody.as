@@ -1,7 +1,6 @@
 package classes.BodyParts 
 {
 import classes.Creature;
-import classes.internals.SimpleJsonable;
 
 /**
 	 * Container class for the players underbody
@@ -10,9 +9,8 @@ import classes.internals.SimpleJsonable;
 	 */
 	public class UnderBody extends BodyPart
 	{
-		include "../../../includes/appearanceDefs.as";
 
-		public var skin:Skin;
+        public var skin:Skin;
 
 		public function UnderBody(creature:Creature)
 		{

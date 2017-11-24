@@ -3,28 +3,23 @@
  */
 package classes.Scenes
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.Areas.Beach;
-	import classes.Scenes.Areas.Beach.*;
-	import classes.Scenes.Areas.BlightRidge;
-	import classes.Scenes.Areas.BlightRidge.*;
-	import classes.Scenes.Areas.DeepSea;
-	import classes.Scenes.Areas.DeepSea.*;
-	import classes.Scenes.Areas.Ocean;
-	import classes.Scenes.Areas.Ocean.*;
-	import classes.Scenes.Dungeons.HiddenCave;
-	import classes.Scenes.NPCs.EvangelineFollower;
-	import classes.Scenes.NPCs.RyuBiDragon;
-	import classes.Scenes.Places.HeXinDao;
-	//import classes.Scenes.Areas.nazwa lokacji;
-	//import classes.Scenes.Areas.nazwa lokacji;
-	import classes.Scenes.Explore.ExploreDebug;
-	import classes.Scenes.Explore.Giacomo;
-	import classes.Scenes.Monsters.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Areas.Beach;
+import classes.Scenes.Areas.BlightRidge;
+import classes.Scenes.Areas.BlightRidge.*;
+import classes.Scenes.Areas.DeepSea;
+import classes.Scenes.Areas.Ocean;
+import classes.Scenes.Dungeons.HiddenCave;
+import classes.Scenes.Explore.ExploreDebug;
+import classes.Scenes.Monsters.*;
+import classes.Scenes.NPCs.EvangelineFollower;
+import classes.Scenes.NPCs.RyuBiDragon;
+import classes.Scenes.Places.HeXinDao;
 
-	public class Exploration extends BaseContent
+//import classes.Scenes.Areas.nazwa lokacji;
+	//import classes.Scenes.Areas.nazwa lokacji;
+public class Exploration extends BaseContent
 	{
 		public var exploreDebug:ExploreDebug = new ExploreDebug();
 		public var blightridge:BlightRidge = new BlightRidge();
@@ -66,19 +61,19 @@ package classes.Scenes
 			hideMenus();
 			menu();
 			addButton(0, "Explore", tryDiscover).hint("Explore to find new regions and visit any discovered regions.");
-			if (kGAMECLASS.forest.isDiscovered()) addButton(1, "Forest", kGAMECLASS.forest.exploreForest).hint("Visit the lush forest. \n\nRecommended level: 1" + (player.level < 12 ? "\n\nBeware of Tentacle Beasts!" : "") + (debug ? "\n\nTimes explored: " + kGAMECLASS.forest.timesExplored() : ""));
-			if (player.exploredLake > 0) addButton(2, "Lake", kGAMECLASS.lake.exploreLake).hint("Visit the lake and explore the beach. \n\nRecommended level: 1" + (player.level < 3 ? "\n\nLooks like it's still quiet here!" : "") + (debug ? "\n\nTimes explored: " + player.exploredLake : ""));
-			if (player.exploredDesert > 0) addButton(3, "Desert", kGAMECLASS.desert.exploreDesert).hint("Visit the dry desert. \n\nRecommended level: 5" + (debug ? "\n\nTimes explored: " + player.exploredDesert : ""));
+			if (SceneLib.forest.isDiscovered()) addButton(1, "Forest", SceneLib.forest.exploreForest).hint("Visit the lush forest. \n\nRecommended level: 1" + (player.level < 12 ? "\n\nBeware of Tentacle Beasts!" : "") + (debug ? "\n\nTimes explored: " + SceneLib.forest.timesExplored() : ""));
+			if (player.exploredLake > 0) addButton(2, "Lake", SceneLib.lake.exploreLake).hint("Visit the lake and explore the beach. \n\nRecommended level: 1" + (player.level < 3 ? "\n\nLooks like it's still quiet here!" : "") + (debug ? "\n\nTimes explored: " + player.exploredLake : ""));
+			if (player.exploredDesert > 0) addButton(3, "Desert", SceneLib.desert.exploreDesert).hint("Visit the dry desert. \n\nRecommended level: 5" + (debug ? "\n\nTimes explored: " + player.exploredDesert : ""));
 			
 			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(5, "Battlefield", battlefield.exploreBattlefield).hint("Visit the battlefield. \n\nRecommended level: 6" + (player.level < 18 ? "\n\nBut it's still too dangerous place to visit lightly!" : "") + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_] : ""));
-			if (player.exploredMountain > 0) addButton(6, "Mountain", kGAMECLASS.mountain.exploreMountain).hint("Visit the mountain. \n\nRecommended level: 10" + (debug ? "\n\nTimes explored: " + player.exploredMountain : ""));
-			if (flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0) addButton(7, "Plains", kGAMECLASS.plains.explorePlains).hint("Visit the plains. \n\nRecommended level: 14" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_PLAINS] : ""));
-			if (flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0) addButton(8, "Swamp", kGAMECLASS.swamp.exploreSwamp).hint("Visit the wet swamplands. \n\nRecommended level: 18" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_SWAMP] : ""));
+			if (player.exploredMountain > 0) addButton(6, "Mountain", SceneLib.mountain.exploreMountain).hint("Visit the mountain. \n\nRecommended level: 10" + (debug ? "\n\nTimes explored: " + player.exploredMountain : ""));
+			if (flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0) addButton(7, "Plains", SceneLib.plains.explorePlains).hint("Visit the plains. \n\nRecommended level: 14" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_PLAINS] : ""));
+			if (flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0) addButton(8, "Swamp", SceneLib.swamp.exploreSwamp).hint("Visit the wet swamplands. \n\nRecommended level: 18" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_SWAMP] : ""));
 			
 			if (flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0) addButton(10, "Blight Ridge", blightridge.exploreBlightRidge).hint("Visit the corrupted blight ridge. \n\nRecommended level: 26" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] : ""));
 			if (flags[kFLAGS.DISCOVERED_BEACH] > 0) addButton(11, "Beach", beach.exploreBeach).hint("Visit the sunny beach. \n\nRecommended level: 15" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_BEACH] : ""));
-			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(12, "Glacial Rift", kGAMECLASS.glacialRift.exploreGlacialRift).hint("Visit the chilly glacial rift. \n\nRecommended level: 30" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] : ""));
-			if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0) addButton(13, "Volcanic Crag", kGAMECLASS.volcanicCrag.exploreVolcanicCrag).hint("Visit the infernal volcanic crag. \n\nRecommended level: 30" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] : ""));
+			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(12, "Glacial Rift", SceneLib.glacialRift.exploreGlacialRift).hint("Visit the chilly glacial rift. \n\nRecommended level: 30" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] : ""));
+			if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0) addButton(13, "Volcanic Crag", SceneLib.volcanicCrag.exploreVolcanicCrag).hint("Visit the infernal volcanic crag. \n\nRecommended level: 30" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] : ""));
 			
 			if (debug) addButton(9, "Debug", exploreDebug.doExploreDebug);
 			addButton(4, "Next", explorePageII);
@@ -89,11 +84,11 @@ package classes.Scenes
 		{
 			flags[kFLAGS.EXPLORATION_PAGE] = 2;
 			menu();
-			if (kGAMECLASS.forest.deepwoodsDiscovered()) addButton(0, "Deepwoods", kGAMECLASS.forest.exploreDeepwoods).hint("Visit the dark, bioluminescent deepwoods. \n\nRecommended level: 12" + (debug ? "\n\nTimes explored: " + kGAMECLASS.forest.timesExploredDeepwoods() : ""));
+			if (SceneLib.forest.deepwoodsDiscovered()) addButton(0, "Deepwoods", SceneLib.forest.exploreDeepwoods).hint("Visit the dark, bioluminescent deepwoods. \n\nRecommended level: 12" + (debug ? "\n\nTimes explored: " + SceneLib.forest.timesExploredDeepwoods() : ""));
 			if (flags[kFLAGS.DISCOVERED_OCEAN] > 0) addButton(1, "Ocean", ocean.exploreOcean).hint("Explore the ocean surface. But beware of... sharks. \n\nRecommended level: 30" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_OCEAN] : ""));
 			if (flags[kFLAGS.DISCOVERED_OCEAN] <= 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0) addButtonDisabled(1, "Ocean", "You need to find first some way to sail over the water surface to explore this area.");
-			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(2, "High Mountain", kGAMECLASS.highMountains.exploreHighMountain).hint("Visit the high mountains where basilisks and harpies are found. \n\nRecommended level: 20" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] : ""));
-			if (flags[kFLAGS.BOG_EXPLORED] > 0) addButton(3, "Bog", kGAMECLASS.bog.exploreBog).hint("Visit the dark bog. \n\nRecommended level: 28" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.BOG_EXPLORED] : ""));
+			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(2, "High Mountain", SceneLib.highMountains.exploreHighMountain).hint("Visit the high mountains where basilisks and harpies are found. \n\nRecommended level: 20" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] : ""));
+			if (flags[kFLAGS.BOG_EXPLORED] > 0) addButton(3, "Bog", SceneLib.bog.exploreBog).hint("Visit the dark bog. \n\nRecommended level: 28" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.BOG_EXPLORED] : ""));
 			
 			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(5, "",	//Wuxia related area - ?latająca wyspa?
 		//	if (flags[kFLAGS.DISCOVERED_DEEP_SEA] > 0 && player.gillType != 0) addButton(6, "Deep Sea", deepsea.exploreDeepSea).hint("Visit the 'almost virgin' deep sea. But beware of... scyllas and krakens. \n\nRecommended level: 50" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEEP_SEA] : ""));
@@ -117,7 +112,7 @@ package classes.Scenes
 		public function genericGolGobImpEncounters(even:Boolean = false):void {
 			var impGobGol:Number = 5;
 			if (!even) {
-				if (player.totalCocks() > 0) impGobGol--;
+				if (player.cockTotal() > 0) impGobGol--;
 				if (player.hasVagina()) impGobGol++;
 				if (player.totalFertility() >= 30) impGobGol++;
 				if (player.cumQ() >= 200) impGobGol--;
@@ -139,19 +134,19 @@ package classes.Scenes
 				else if (player.level < 16 && impChooser >= 80) impChooser = 79;
 				//Imp Lord
 				if (impChooser >= 50 && impChooser < 70) {
-					kGAMECLASS.impScene.impLordEncounter();
+					SceneLib.impScene.impLordEncounter();
 					spriteSelect(29);
 					return;
 				}
 				//Imp Warlord
 				else if (impChooser >= 70 && impChooser < 90) {
-					kGAMECLASS.impScene.impWarlordEncounter();
+					SceneLib.impScene.impWarlordEncounter();
 					spriteSelect(125);
 					return;
 				}
 				//Imp Overlord (Rare!)
 				else if (impChooser >= 90) {
-					kGAMECLASS.impScene.impOverlordEncounter();
+					SceneLib.impScene.impOverlordEncounter();
 					spriteSelect(126);
 					return;
 				}
@@ -274,25 +269,25 @@ package classes.Scenes
 					else if (player.level < 16 && goblinChooser >= 80) goblinChooser = 79;
 					//Goblin assassin!
 					if (goblinChooser >= 30 && goblinChooser < 50) {
-						kGAMECLASS.goblinAssassinScene.goblinAssassinEncounter();
+						SceneLib.goblinAssassinScene.goblinAssassinEncounter();
 						spriteSelect(24);
 						return;
 					}
 					//Goblin warrior! (Equal chance with Goblin Shaman)
 					else if (goblinChooser >= 50 && goblinChooser < 65) {
-						kGAMECLASS.goblinWarriorScene.goblinWarriorEncounter();
+						SceneLib.goblinWarriorScene.goblinWarriorEncounter();
 						spriteSelect(123);
 						return;
 					}
 					//Goblin shaman!
 					else if (goblinChooser >= 65 && goblinChooser < 80) {
-						kGAMECLASS.goblinShamanScene.goblinShamanEncounter();
+						SceneLib.goblinShamanScene.goblinShamanEncounter();
 						spriteSelect(124);
 						return;
 					}
 					//Goblin elder!
 					else if (goblinChooser >= 80) {
-						kGAMECLASS.goblinElderScene.goblinElderEncounter();
+						SceneLib.goblinElderScene.goblinElderEncounter();
 						spriteSelect(122);
 						return;
 					}
@@ -332,19 +327,19 @@ package classes.Scenes
 			if (player.level < 16 && impChooser >= 75) impChooser = 74;
 			//Imp Warlord
 			if (impChooser >= 50 && impChooser < 75) {
-				kGAMECLASS.impScene.impWarlordEncounter();
+				SceneLib.impScene.impWarlordEncounter();
 				spriteSelect(125);
 				return;
 			}
 			//Imp Overlord
 			else if (impChooser >= 75) {
-				kGAMECLASS.impScene.impOverlordEncounter();
+				SceneLib.impScene.impOverlordEncounter();
 				spriteSelect(126);
 				return;
 			}
 			//Pack of Imps
 			else {
-				kGAMECLASS.impScene.impPackEncounter();
+				SceneLib.impScene.impPackEncounter();
 				return;
 			}
 		}
@@ -460,8 +455,8 @@ package classes.Scenes
 				ryubirepenc();
 				return;
 			}
-*/			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helFollower.followerHel()) {
-				kGAMECLASS.helScene.helSexualAmbush();
+*/			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helFollower.followerHel()) {
+				SceneLib.helScene.helSexualAmbush();
 				return;
 			}
 			if (player.explored > 1) {
@@ -483,10 +478,10 @@ package classes.Scenes
 				}
 				if (player.exploredLake >= 1 && rand(3) == 0 && player.exploredDesert <= 0) {
 					outputText("You stumble as the ground shifts a bit underneath you.  Groaning in frustration, you straighten up and discover the rough feeling of sand ");
-					if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) outputText("inside your footwear, between your toes");
-					if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) outputText("in your hooves");
-					if (player.lowerBody == LOWER_BODY_TYPE_DOG) outputText("in your paws");
-					if (player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText("in your scales");
+					if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HUMAN) outputText("inside your footwear, between your toes");
+					if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HOOFED) outputText("in your hooves");
+					if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_DOG) outputText("in your paws");
+					if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_NAGA) outputText("in your scales");
 					outputText(".\n\n<b>You've discovered the Desert!</b>");
 					player.exploredDesert = 1;
 					player.explored++;
@@ -609,18 +604,18 @@ package classes.Scenes
 				//Chance of encountering Giacomo!
 				if (choosey == 0) {
 					player.explored++;
-					kGAMECLASS.giacomoShop.giacomoEncounter();
+					SceneLib.giacomoShop.giacomoEncounter();
 					return;
 				}
 				else if (choosey == 1) {
 					player.explored++;
-					kGAMECLASS.lumi.lumiEncounter();
+					SceneLib.lumi.lumiEncounter();
 					return;
 				}
 				else if (choosey == 2) {
 					player.explored++;
-					if (flags[kFLAGS.GAR_NAME] == 0) kGAMECLASS.gargoyle.gargoylesTheShowNowOnWBNetwork();
-					else kGAMECLASS.gargoyle.returnToCathedral();
+					if (flags[kFLAGS.GAR_NAME] == 0) SceneLib.gargoyle.gargoylesTheShowNowOnWBNetwork();
+					else SceneLib.gargoyle.returnToCathedral();
 					return;
 				}
 				else if (choosey == 3 && flags[kFLAGS.PRISON_CAPTURE_COUNTER] < 1 && rand(4) == 0) {
@@ -628,7 +623,7 @@ package classes.Scenes
 					clearOutput();
 					outputText("Your curiosity draws you towards the smoke of a campfire on the edges of the forest. In the gloom ahead you see what appears to be a cage wagon surrounded by several tents, and hear the sounds of guttural voices engaged in boisterous conversation. Inexplicably you find yourself struck by an unwholesome sense of foreboding. <b>Even from here that cage looks like it is designed to carry people off to somewhere very unpleasant, some place where your life could be turned upside down and the rules you have become accustomed to in this world may no longer apply.</b> You take a long moment to consider turning back. Do you throw caution to the wind and investigate further?");
 					//outputText("\n\n(<b>NOTE:</b> Prisoner mod is currently under development and not all scenes are available.)");
-					doYesNo(kGAMECLASS.prison.goDirectlyToPrisonDoNotPassGoDoNotCollect200Gems, camp.returnToCampUseOneHour);
+					doYesNo(SceneLib.prison.goDirectlyToPrisonDoNotPassGoDoNotCollect200Gems, camp.returnToCampUseOneHour);
 					return;
 				}
 				else if (choosey == 4 && flags[kFLAGS.HEXINDAO_UNLOCKED] < 1) {
@@ -640,7 +635,7 @@ package classes.Scenes
 					outputText("\n\n\"<i> Did you came to visit He'Xin'Dao stranger? </i>\" Suddenly you hear some voice from behind you.");
 					outputText("\n\nTurning around you see few hooded figures similar to the one you been following.  Cursing in thought on getting in such situation and fact that you not even notice them coming so close without you noticing anything, you reply you just been walking and just casually came here.  One of the them measure you for a moment before speaking again. \"<i>You not seems to have strong soulforce, but lucky your soul is enough intact to allow future cultivation. So since you already here what you think about visiting our village? Maybe you would come more often to it in the future?</i>\"");
 					outputText("\n\nYou ponder for a moment over the offer.  Well so far none of them tried to attack you nor rape so maybe it's a worth to check this place?  You shortly reply accepting offer and then their lead you over the wide bridge on the one of the islands.  After stepping on your way is blocked by few heavy armored guards that looking at you with suspicion but then one of your companions explaining to them your guest.  Only then their let you pass by.  Next thing you do is visiting one of smaller islands near the entrance to register yourself as guest and receiving guide to the village.");
-					outputText("\n\nAfter that you're left alone.  Spending some time you wander around checking few interesting places before you decides it's time to come back to the camp.  With guide in your hands you're sure you'll easily find this place again if you need to.")
+					outputText("\n\nAfter that you're left alone.  Spending some time you wander around checking few interesting places before you decides it's time to come back to the camp.  With guide in your hands you're sure you'll easily find this place again if you need to.");
 					outputText("\n\n\n<b>You have unlocked He'Xin'Dao in Places menu!</b>");
 					flags[kFLAGS.HEXINDAO_UNLOCKED] = 1;
 					doNext(camp.returnToCampUseTwoHours);
@@ -712,28 +707,28 @@ package classes.Scenes
 				outputText("The impending erection can't seem to be stopped.  Your sexual frustration forces stiffness into your [cocks], which forces your torso to the ground.  Normally your erection would merely raise itself skyward but your genitals have grown too large and heavy for your " + hipDescript() + " to hold them aloft.  Instead you feel your body forcibly pivoting at the hips until your torso is compelled to rest face down on top of your obscene [cocks].");
 
 				//IF CHARACTER HAS GIANT BREASTS ADD SENTENCE
-				if (player.biggestTitSize() >= 35)  outputText("  Your " + kGAMECLASS.allBreastsDescript() + " hang lewdly off your torso to rest on the desert sands, seeming to bury the dunes on either side of you.  Their immense weight anchors your body, further preventing your torso from lifting itself up.  The burning heat of the desert teases your " + nippleDescript(0) + "s mercilessly as they grind in the sand.");
+				if (player.biggestTitSize() >= 35)  outputText("  Your " + Appearance.allBreastsDescript(player) + " hang lewdly off your torso to rest on the desert sands, seeming to bury the dunes on either side of you.  Their immense weight anchors your body, further preventing your torso from lifting itself up.  The burning heat of the desert teases your " + nippleDescript(0) + "s mercilessly as they grind in the sand.");
 				//IF CHARACTER HAS A BALLS ADD SENTENCE
 				if (player.balls > 0) outputText("  Your " + player.skinTone + sackDescript() + " rests beneath your raised " + buttDescript() + ".  The fiery warmth of the desert caresses it, causing your [balls] to pulse with the need to release their sperm through your [cocks].");
 				//IF CHARACTER HAS A VAGINA ADD SENTENCE
 				if (player.vaginas.length >= 1) {
 					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + buttDescript() + " above.");
 					//IF CHARACTER HAS A DROOLING PUSSY ADD SENTENCE
-					if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) outputText("  Juices stream from your womanhood and begin pooling on the hot sand beneath you.  Wisps of steam rise up into the air only to tease your genitals further.  ");
+					if (player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_DROOLING) outputText("  Juices stream from your womanhood and begin pooling on the hot sand beneath you.  Wisps of steam rise up into the air only to tease your genitals further.  ");
 				}
 			}
 			//FOR CENTAURS
 			else {
 				outputText("The impending erection can't seem to be stopped.  Your sexual frustration forces stiffness into your [cocks], which forces the barrel of your horse-like torso to the ground.  Normally your erection would merely hover above the ground in between your centaurian legs, but your genitals have grown too large and heavy for your " + hipDescript() + " to hold them aloft.  Instead, you feel your body being forcibly pulled down at your hindquarters until you rest atop your [cocks].");
 				//IF CHARACTER HAS GIANT BREASTS ADD SENTENCE
-				if (player.biggestTitSize() >= 35)  outputText("  Your " + kGAMECLASS.allBreastsDescript() + " pull your human torso forward until it also is forced to rest facedown, just like your horse half.  Your tits rest, pinned on the desert sand to either side of you.  Their immense weight anchors you, further preventing any part of your equine body from lifting itself up.  The burning heat of the desert teases your " + nippleDescript(0) + "s incessantly.");
+				if (player.biggestTitSize() >= 35)  outputText("  Your " + Appearance.allBreastsDescript(player) + " pull your human torso forward until it also is forced to rest facedown, just like your horse half.  Your tits rest, pinned on the desert sand to either side of you.  Their immense weight anchors you, further preventing any part of your equine body from lifting itself up.  The burning heat of the desert teases your " + nippleDescript(0) + "s incessantly.");
 				//IF CHARACTER HAS A BALLS ADD SENTENCE
 				if (player.balls > 0) outputText("  Your " + player.skinTone + sackDescript() + " rests beneath your raised " + buttDescript() + ".  The airy warmth of the desert teases it, causing your [balls] pulse with the need to release their sperm through your [cocks].");
 				//IF CHARACTER HAS A VAGINA ADD SENTENCE
 				if (player.vaginas.length >= 1) {
 					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + buttDescript() + " above.");
 					//IF CHARACTER HAS A DROOLING PUSSY ADD SENTENCE
-					if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) outputText("  The desert sun beats down on your body, its fiery heat inflaming the senses of your vaginal lips.  Juices stream from your womanhood and begin pooling on the hot sand beneath you.");
+					if (player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_DROOLING) outputText("  The desert sun beats down on your body, its fiery heat inflaming the senses of your vaginal lips.  Juices stream from your womanhood and begin pooling on the hot sand beneath you.");
 				}
 			}
 			outputText("\n\n");

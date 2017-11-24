@@ -1,10 +1,11 @@
 ﻿package classes.Scenes.Places{
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Areas.Plains.BazaarGatekeeper;
-	import classes.Scenes.Places.Bazaar.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Areas.Plains.BazaarGatekeeper;
+import classes.Scenes.Places.Bazaar.*;
+import classes.Scenes.SceneLib;
 
-	public class Bazaar extends BaseContent {
+public class Bazaar extends BaseContent {
 // JOEY_OFFERED_MILKER:int = 466;
 // OWN_MAIDEN_BIKINI:int = 770;
 // COUNTDOWN_TO_NIGHT_RAPE:int = 872;
@@ -119,8 +120,8 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	//Bimbo Niamh
 	if (flags[kFLAGS.NIAMH_STATUS] > 0 && flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] == -1) {
 		if (flags[kFLAGS.NIAMH_STATUS] == 2) outputText("\n\nThe sounds of voices raised in song and girlish laughter makes it obvious where Niamh is holding a perpetual party.");
-		addButton(9, "Niamh", getGame().telAdre.niamh.bazaarNiamh);
-	}
+        addButton(9, "Niamh", SceneLib.telAdre.niamh.bazaarNiamh);
+    }
 	addButton(14,"Leave",camp.returnToCampUseOneHour);
 }
 
@@ -297,11 +298,11 @@ private function joeysMassageWifNoExtraJizz():void {
 	//(MALE)
 	if(player.hasCock()) {
 		outputText("slides his warm, ruby lips over your [cock], licking and slurping the [cockhead] like a treasured candy.  That hot, breathy embrace hugs tight to your urethral bulge, slobbering up the cock-tip.  The flexible, thin rabbit tongue swirls over your cum-slit to lap at the bubbling pre-cum, even as his quaking balls continue to bury your face in bunny-semen.");
-		if(player.totalCocks() > 1) {
+		if(player.cockTotal() > 1) {
 			outputText("  He takes your " + cockDescript(1) + " with his free hand and pulls it over, giving it an affectionate, loving smooch.");
-			if(player.totalCocks() > 2) {
+			if(player.cockTotal() > 2) {
 				outputText("  The process is repeated");
-				if(player.totalCocks() > 3) outputText(" as necessary until " + sMultiCockDesc() + " is coated with dick-drenching bunny spit.");
+				if(player.cockTotal() > 3) outputText(" as necessary until " + sMultiCockDesc() + " is coated with dick-drenching bunny spit.");
 				else outputText(", coating your " + cockDescript(2) + " with dick-drenching bunny spit.");
 			}
 		}
@@ -816,7 +817,7 @@ private function yesPutDatSockOnMe(target:int):void {
 	}
 	else { // Conflict! NOOOOO! Pull up! Pull up!
 
-		outputText("Then she suddenly stops, staring at your groin.\n\n\"<i>Oh, dear...</i>\" she says, \"<i>As much as I would love to take your money honey, I can't be mixing magics like that.</i>\"")
+		outputText("Then she suddenly stops, staring at your groin.\n\n\"<i>Oh, dear...</i>\" she says, \"<i>As much as I would love to take your money honey, I can't be mixing magics like that.</i>\"");
 		menu();
 		addButton(0,"Next",gretasGarments);		
 	}
@@ -1075,7 +1076,7 @@ private function abuseHisAss():void {
 	//[[If smallest cock is over 16 inches)
 	if(player.smallestCockLength() >= 16) {
 		outputText("\n\nYour lips part to let out a grunt of frustration.  Your cockhead is unable to break through the tiger man's tight resistance.  His struggles start to die down as [eachCock] continues to drool over his muscled rear.");
-		if(player.totalCocks() == 1) outputText("  You squeeze your [cocks] between his warm ass cheeks, stroking yourself with his exposed bottom.  The tiger whimpers meekly under you.");
+		if(player.cockTotal() == 1) outputText("  You squeeze your [cocks] between his warm ass cheeks, stroking yourself with his exposed bottom.  The tiger whimpers meekly under you.");
 		else outputText("  Your fattest cock grinds between the tiger man's rear, dripping spunk over his back and clothing while your other cocks make a sloppy mess of his ass.");
 		outputText("  The tiger man's muscled butt is soon glazed with your pre-cum.  Wet, slapping noises echo out into the alley as you grind your hips into his rear.  You can't help but think in the back of your head that the noise is stirring people inside the tent he came out of.");
 	}
@@ -1313,8 +1314,8 @@ private function finalGayFinallee(road:int = 0):void {
 	private function investigateBackAlley():void {
 		clearOutput();
 		outputText("Your curiousity draws you half way down a dark alleyway between two tents. In the gloom ahead you see what appears to be a cage wagon, and hear the sounds of guttural voices engaged in boisterous conversation. Inexplicably you find yourself struck by an unwholesome sense of foreboding. <b>Even from here that cage looks like it is designed to carry people off to somewhere very unpleasant, some place where your life could be turned upside down and the rules you have become accustomed to in this world may no longer apply.</b> You take a long moment to consider turning back. Do you throw caution to the wind and investigate further?");
-		doYesNo(getGame().prison.goDirectlyToPrisonDoNotPassGoDoNotCollect200Gems, enterTheBazaarAndMenu);
-	}
+        doYesNo(SceneLib.prison.goDirectlyToPrisonDoNotPassGoDoNotCollect200Gems, enterTheBazaarAndMenu);
+    }
 
 }
 }

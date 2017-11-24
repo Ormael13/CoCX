@@ -1,10 +1,11 @@
 ﻿package classes.Scenes.Areas.Forest
 {
-	import classes.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
-	import classes.GlobalFlags.kFLAGS;
-	
-	public class Akbal extends Monster
+
+public class Akbal extends Monster
 	{
 
 		override public function eAttack():void
@@ -23,19 +24,16 @@ import classes.internals.WeightedDrop;
 					outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!");
 				if (player.spe - spe >= 20)
 					outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".");
-				game.combatRoundOver();
 				return;
 			}
 			//Determine if evaded
 			if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.");
-				game.combatRoundOver();
 				return;
 			}
 			//Determine if flexibilitied
 			if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 10) {
 				outputText("Using your cat-like agility, you twist out of the way of " + a + short + "'s attack.");
-				game.combatRoundOver();
 				return;
 			}
 			//Determine damage - str modified by enemy toughness!
@@ -67,18 +65,17 @@ import classes.internals.WeightedDrop;
 					player.takeDamage(damage);
 				}
 			}
-			game.combatRoundOver();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.forest.akbalScene.akbalDefeated(hpVictory);
+			SceneLib.forest.akbalScene.akbalDefeated(hpVictory);
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.forest.akbalScene.akbalWon(hpVictory,pcCameWorms);
-			game.cleanupAfterCombat();
+			SceneLib.forest.akbalScene.akbalWon(hpVictory,pcCameWorms);
+			SceneLib.combat.cleanupAfterCombatImpl();
 		}
 		
 		public function akbalLustAttack():void
@@ -98,7 +95,6 @@ import classes.internals.WeightedDrop;
 				//(Lust increase)
 				player.dynStats("lus", 12 + rand(12));
 			}
-			game.combatRoundOver();
 		}
 		
 		public function akbalSpecial():void
@@ -125,21 +121,18 @@ import classes.internals.WeightedDrop;
 						outputText("You dodge " + a + short + "'s fire with superior quickness!");
 					if (player.spe - spe >= 20)
 						outputText("You deftly avoid " + a + short + "'s slow fire-breath.");
-					game.combatRoundOver();
 					return;
 				}
 				//Determine if evaded
 				if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 20)
 				{
 					outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s fire-breath.");
-					game.combatRoundOver();
 					return;
 				}
 				//Determine if flexibilitied
 				if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 10)
 				{
 					outputText("Using your cat-like agility, you contort your body to avoid " + a + short + "'s fire-breath.");
-					game.combatRoundOver();
 					return;
 				}
 				if (player.hasStatusEffect(StatusEffects.Blizzard)) {
@@ -151,7 +144,6 @@ import classes.internals.WeightedDrop;
 					outputText("Surrounding your blizzard absorbed huge part of the attack at the price of loosing some of it protective power.\n");
 					outputText("You are burned badly by the flames! ");
 					damage2 = player.takeMagicDamage(damage2, true);
-					game.combatRoundOver();
 					return;
 				}
 				var damage:int = inte;
@@ -161,7 +153,6 @@ import classes.internals.WeightedDrop;
 				outputText("You are burned badly by the flames! ");
 				damage = player.takeMagicDamage(damage, true);
 			}
-			game.combatRoundOver();
 		}
 		
 		//*Support ability - 
@@ -173,7 +164,6 @@ import classes.internals.WeightedDrop;
 				outputText("Akbal licks one of his wounds, and you scowl as the injury quickly heals itself.");
 			addHP(30 * (1 + rand(4)));
 			lust += 10;
-			game.combatRoundOver();
 		}
 
 		public function Akbal()
@@ -193,11 +183,11 @@ import classes.internals.WeightedDrop;
 			createBreastRow();
 			createBreastRow();
 			createBreastRow();
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
 			this.tallness = 4*12;
-			this.hipRating = HIP_RATING_SLENDER;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
+			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
 			this.skin.growFur({color:"spotted"});
 			this.hairColor = "black";
 			this.hairLength = 5;
@@ -223,7 +213,7 @@ import classes.internals.WeightedDrop;
 			this.special1 = akbalLustAttack;
 			this.special2 = akbalSpecial;
 			this.special3 = akbalHeal;
-			this.tailType = TAIL_TYPE_DOG;
+			this.tailType = AppearanceDefs.TAIL_TYPE_DOG;
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);

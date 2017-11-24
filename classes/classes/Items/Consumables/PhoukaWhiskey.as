@@ -3,14 +3,15 @@
  */
 package classes.Items.Consumables
 {
-	import classes.GlobalFlags.kFLAGS;
-    import classes.Player;
-	import classes.PregnancyStore;
-	import classes.StatusEffects;
-    import classes.internals.Utils;
-	import classes.Items.Consumable;
+import classes.EngineCore;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.Consumable;
+import classes.Player;
+import classes.PregnancyStore;
+import classes.StatusEffects;
+import classes.internals.Utils;
 
-	public class PhoukaWhiskey extends Consumable {
+public class PhoukaWhiskey extends Consumable {
 		
 		public function PhoukaWhiskey() {
 			super("P_Whsky", "Ph. Whiskey", "a small bottle of whiskey", 20, "A small, corked glass bottle with a dark amber liquid inside.  The whiskey smells strongly of peat.");
@@ -113,7 +114,7 @@ package classes.Items.Consumables
 					//The four stats we’re affecting get paired together to save space. This way we don’t need a second StatusEffect to store more info.
 				game.player.dynStats("lib", libidoChange, "sens", -sensChange, "spe", -speedChange, "int", -intChange);
 			}
-			game.statScreenRefresh();
+			EngineCore.statScreenRefresh();
         }
 		
 		public function phoukaWhiskeyExpires(player:Player):void
@@ -134,7 +135,7 @@ package classes.Items.Consumables
 				outputText("\n<b>The fuzzy, happy feeling ebbs away.  With it goes the warmth and carefree feelings.  Your head aches and you wonder if you should have another whiskey, just to tide you over</b>\n");
 			else
 				outputText("\n<b>The fuzzy, happy feeling ebbs away.  The weight of the world’s problems seems to settle on you once more.  It was nice while it lasted and you wouldn’t mind having another whiskey.</b>\n");
-			game.statScreenRefresh();
+			EngineCore.statScreenRefresh();
 		}
     }
 }

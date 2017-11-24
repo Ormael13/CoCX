@@ -2,14 +2,16 @@
  * Created by aimozg on 22.05.2017.
  */
 package classes.display {
+import classes.AppearanceDefs;
 import classes.BaseContent;
+import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.PerkClass;
 import classes.PerkLib;
 import classes.PerkTree;
 import classes.PerkType;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 
 import flash.events.MouseEvent;
@@ -55,8 +57,8 @@ public class PerkMenu extends BaseContent {
 			outputText("\n<b>You can adjust your pernament golems behaviour during combat.</b>");
 			addButton(9, "P.Golems",golemsbehaviourOptions);
 		}
-		addButton(10, "Number of", kGAMECLASS.doNothing);
-		addButton(11, "perks: " + player.perks.length, kGAMECLASS.doNothing);
+		addButton(10, "Number of", EngineCore.doNothing);
+		addButton(11, "perks: " + player.perks.length, EngineCore.doNothing);
 	}
 
 	public function doubleAttackOptions():void {
@@ -105,8 +107,8 @@ public class PerkMenu extends BaseContent {
 			else addButton(11, "All Hexe", hexaAttack);
 		}
 
-		if (getGame().inCombat) addButton(14, "Back", combat.combatMenu);
-		else addButton(14, "Back", displayPerks);
+if (kGAMECLASS.inCombat) addButton(14, "Back", combat.combatMenu);
+        else addButton(14, "Back", displayPerks);
 	}
 
 	public function hexaAttack():void {
@@ -199,11 +201,11 @@ public class PerkMenu extends BaseContent {
 		if (player.findPerk(PerkLib.Cupid) >= 0 && flags[kFLAGS.CUPID_ARROWS] != 0) addButton(10, "None", normalArrows2);
 		if (player.findPerk(PerkLib.Cupid) >= 0 && player.hasStatusEffect(StatusEffects.KnowsArouse) && flags[kFLAGS.CUPID_ARROWS] != 1) addButton(11, "Arouse", arouseArrows);
 		if (player.findPerk(PerkLib.EnvenomedBolt) >= 0 && flags[kFLAGS.ENVENOMED_BOLTS] != 0) addButton(12, "None", normalArrows3);
-		if (player.findPerk(PerkLib.EnvenomedBolt) >= 0 && (player.tailType == TAIL_TYPE_BEE_ABDOMEN || player.tailType == TAIL_TYPE_SCORPION || player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL || player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS) && flags[kFLAGS.ENVENOMED_BOLTS] != 1) addButton(13, "Venom", venomArrows);
+		if (player.findPerk(PerkLib.EnvenomedBolt) >= 0 && (player.tailType == AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN || player.tailType == AppearanceDefs.TAIL_TYPE_SCORPION || player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL || player.faceType == AppearanceDefs.FACE_SNAKE_FANGS || player.faceType == AppearanceDefs.FACE_SPIDER_FANGS) && flags[kFLAGS.ENVENOMED_BOLTS] != 1) addButton(13, "Venom", venomArrows);
 
 		var e:MouseEvent;
-		if (getGame().inCombat) addButton(14, "Back", combat.combatMenu);
-		else addButton(14, "Back", displayPerks);
+        if (kGAMECLASS.inCombat) addButton(14, "Back", combat.combatMenu);
+        else addButton(14, "Back", displayPerks);
 	}
 
 	public function darknessArrows():void {
@@ -386,8 +388,8 @@ public class PerkMenu extends BaseContent {
 		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] != 3 && player.hasStatusEffect(StatusEffects.SummonedElementals) && player.hasPerk(PerkLib.FirstAttackElementals)) addButton(12, "Helping", elementalAttackingAlongsidePC);
 
 		var e:MouseEvent;
-		if (getGame().inCombat) addButton(14, "Back", combat.combatMenu);
-		else addButton(14, "Back", displayPerks);
+        if (kGAMECLASS.inCombat) addButton(14, "Back", combat.combatMenu);
+        else addButton(14, "Back", displayPerks);
 	}
 
 	public function elementalNotAttacking():void {
@@ -455,7 +457,7 @@ public class PerkMenu extends BaseContent {
 		flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 10;
 		summonsbehaviourOptions();
 	}
-	
+
 	public function golemsbehaviourOptions():void {
 		clearOutput();
 		menu();
@@ -465,12 +467,12 @@ public class PerkMenu extends BaseContent {
 		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] < 1) outputText("Waiting for the owner to give an attack command each turn.");
 		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) addButton(10, "Waiting", golemsWaiting);
 		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] != 1) addButton(11, "Attacking", golemsAttacking);
-		
+
 		var e:MouseEvent;
-		if (getGame().inCombat) addButton(14, "Back", combat.combatMenu);
+		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu);
 		else addButton(14, "Back", displayPerks);
 	}
-	
+
 	public function golemsWaiting():void {
 		flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] = 0;
 		golemsbehaviourOptions();

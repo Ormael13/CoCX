@@ -1,12 +1,11 @@
 ﻿package classes.Scenes{
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Items.WeaponLib;
-	import classes.Items.ArmorLib;
-	import classes.Scenes.NPCs.NPCAwareContent;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.ArmorLib;
+import classes.Items.WeaponLib;
+import classes.Scenes.NPCs.NPCAwareContent;
 
-	public class FollowerInteractions extends NPCAwareContent {
+public class FollowerInteractions extends NPCAwareContent {
 
 		public function FollowerInteractions()
 		{
@@ -250,7 +249,7 @@ public function AmilyIntroducesSelfToRathazul():void {
 	
 	//(+5 lust!)/
 	dynStats("lus", 5);
-	doNext(kGAMECLASS.rathazul.returnToRathazulMenu);
+	doNext(SceneLib.rathazul.returnToRathazulMenu);
 }
 //[Amily delivers ingredients to Rathazul – happens at Rathazul]
 public function amilyIngredientDelivery():void {
@@ -266,7 +265,7 @@ public function amilyIngredientDelivery():void {
 	dynStats("lus", 4);
 	//[Prices reduced for reducto!
 	flags[kFLAGS.AMILY_MET_RATHAZUL]++;
-	doNext(kGAMECLASS.rathazul.returnToRathazulMenu);
+	doNext(SceneLib.rathazul.returnToRathazulMenu);
 }
 
 //[Amily ask Rathazul what happened to his village]
@@ -278,7 +277,7 @@ public function amilyAsksAboutRathazulsVillage():void {
 	outputText("Rathazul sighs and shuffles around uncomfortably as he wraps it up, \"<i>'What-ifs' will get us nowhere.  Our villages are gone, and we must look to the future, child.</i>\"\n\n");
 	
 	outputText("Amily nods solemnly and says her farewells.  She looks a little bleary-eyed as you pass her, and you give her a comforting squeeze on the shoulder.   The mouse gives you a tight smile and continues away, leaving you alone with the rat.");
-	doNext(kGAMECLASS.rathazul.returnToRathazulMenu);
+	doNext(SceneLib.rathazul.returnToRathazulMenu);
 }
 
 //[Rathazul and Corrupt/Tentacle Jojo] – Occurs instead of camp
@@ -339,7 +338,7 @@ public function jojoOffersRathazulMeditation():void {
 	
 	outputText("Jojo turns to you, gives a quick bow, and departs.");
 	//[To rathazul]
-	doNext(kGAMECLASS.rathazul.returnToRathazulMenu);
+	doNext(SceneLib.rathazul.returnToRathazulMenu);
 }
 //[Rathazul Napping]
 public function catchRathazulNapping():void {
@@ -425,7 +424,7 @@ private function srslyPimpinGuyz():void {
 	clearOutput();
 	outputText("\"<i>Yes I'm serious.  What, you don't think I can take both of you?</i>\" you say while putting your hands on your hips and swinging them around.  The two of them almost scream as one before descending upon you.  In an instant you're hit with a dart from Amily, causing your body to lock up, just before Marble brings her hammer down onto your head in a massive overhead swing and everything goes black.\n\n");
 	player.takeDamage(player.HP - 1);
-	outputText("You wake up several hours later to find that neither of the two girls are still around, your camp is in shambles, and most of your equipment is gone.  After looking around camp, you realize that all of your expendable items, gems, and even your weapons and armor have been taken.  ")
+	outputText("You wake up several hours later to find that neither of the two girls are still around, your camp is in shambles, and most of your equipment is gone.  After looking around camp, you realize that all of your expendable items, gems, and even your weapons and armor have been taken.  ");
 	if (player.armorName != "goo armor") outputText("All that is left is a suit of comfortable clothes that you put on.  ");
 	else outputText("\"<i>Are you all right?</i>\" the armor-goo asks.  You insist her that you have a terrible headache.  ");
 	outputText("You also find a note in a rough script that says: <i>This is what you get for being an asshole.</i>  Those damn bitches.");
@@ -535,7 +534,7 @@ public function askAboutAmily():void {
 	//after 1400 and Urta's on duty:
 	if(model.time.hours > 14) {
 		outputText("You ask the assembled bar patrons if anybody has seen either a strange mouse-woman or Urta around, but don't get much of a response.  One cat-boy drinking at the bar haltingly suggests he may have noticed someone like that earlier in the day, but that was before Urta went on duty.  You thank him for the info.");
-		doNext(kGAMECLASS.telAdre.barTelAdre);
+		doNext(SceneLib.telAdre.barTelAdre);
 		return;
 	}
 	//before Urta goes on duty at 1400:

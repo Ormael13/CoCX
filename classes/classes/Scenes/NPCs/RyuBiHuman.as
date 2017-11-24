@@ -4,11 +4,11 @@
  */
 package classes.Scenes.NPCs 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.internals.ChainedDrop;
-	
-	public class RyuBiHuman extends Monster
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.ChainedDrop;
+
+public class RyuBiHuman extends Monster
 	{
 		
 		public function RyuBiHuman() 
@@ -17,15 +17,15 @@ package classes.Scenes.NPCs
 			this.short = "RyuBi";
 			this.imageName = "ryubihuman";
 			this.long = "You are currently 'battling' RyuBi in human form, in a playfight.  At least, that was the intention.  The way she lashes her tail along the ground, with claws spread and teeth bared ferociously, makes you wonder.";
-			createVagina(true,VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_NORMAL);
+			createVagina(true,AppearanceDefs.VAGINA_WETNESS_NORMAL,AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
 			createStatusEffect(StatusEffects.BonusVCapacity,10,0,0,0);
 			createBreastRow(Appearance.breastCupInverse("F"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
+			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = rand(8) + 70;
-			this.hipRating = HIP_RATING_AMPLE+2;
-			this.buttRating = BUTT_RATING_LARGE;
+			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
+			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
@@ -44,9 +44,9 @@ package classes.Scenes.NPCs
 			this.level = 21;
 			this.gems = 15 + rand(8);
 			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.2);//zamienić na worek of spirit stones ^^
-			this.hornType = HORNS_DRACONIC_X4_12_INCH_LONG;
+			this.hornType = AppearanceDefs.HORNS_DRACONIC_X4_12_INCH_LONG;
 			this.horns = 4;
-			this.tailType = TAIL_TYPE_DRACONIC;
+			this.tailType = AppearanceDefs.TAIL_TYPE_DRACONIC;
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGigantType, 0, 0, 0, 0);
 			checkMonster();

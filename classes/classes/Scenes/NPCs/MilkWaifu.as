@@ -1,9 +1,10 @@
 ﻿package classes.Scenes.NPCs {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.SceneLib;
 
-	public class MilkWaifu extends NPCAwareContent{
+public class MilkWaifu extends NPCAwareContent{
 
 	public function MilkWaifu()
 	{
@@ -184,7 +185,7 @@ public function milkyMenu():void {
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1 && flags[kFLAGS.MILK_SIZE] > 0) addButton(5, "Go Camp", backToCamp);
 	
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) addButton(14, "Back", camp.campSlavesMenu);
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1) addButton(14, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1) addButton(14, "Back", SceneLib.farm.farmCorruption.rootScene);
 }
 
 private function sendToFarm():void
@@ -216,7 +217,7 @@ private function backToCamp():void
 	
 	flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] = 0;
 	
-	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
+	doNext(SceneLib.farm.farmCorruption.rootScene);
 }
 
 //Appearance
@@ -237,20 +238,20 @@ private function milkWriteFuAppearance():void {
 	
 	outputText("\n\nBetween her lithe legs and childbearing hips is her cunt, a short stripe of dark, downy hair drawing your attention just above it.  And, hidden between her pert cheeks is her tight little backdoor, right where it belongs.");
 
-	if (kGAMECLASS.farm.farmCorruption.hasTattoo("milky"))
+	if (SceneLib.farm.farmCorruption.hasTattoo("milky"))
 	{
 		outputText("\n\n");
-		if (kGAMECLASS.farm.farmCorruption.milkyFullTribalTats())
+		if (SceneLib.farm.farmCorruption.milkyFullTribalTats())
 		{
 			outputText("She is covered from head to tail in tribal tattoos, erotic lines snaking all over her naked frame, giving her the look of a barely tamed savage.")
 		}
-		else if (kGAMECLASS.farm.farmCorruption.numMilkyButterflyTats() == 4)
+		else if (SceneLib.farm.farmCorruption.numMilkyButterflyTats() == 4)
 		{
 			outputText("She is covered from head to tail in tattooed butterflies, as if the pretty insects are attracted to her chocolate skin. When she moves she does it with an extra bounce and flick of the head, admiring how she looks as she goes.");
 		}
 		else
 		{
-			if (kGAMECLASS.farm.farmCorruption.numTattoos("milky") > 1) outputText("She has the following tattoos emblazoned across her body:\n");
+			if (SceneLib.farm.farmCorruption.numTattoos("milky") > 1) outputText("She has the following tattoos emblazoned across her body:\n");
 			else outputText("She has ");
 
 			if (flags[kFLAGS.MILKY_TATTOO_COLLARBONE] != 0) outputText(flags[kFLAGS.MILKY_TATTOO_COLLARBONE] + "\n");

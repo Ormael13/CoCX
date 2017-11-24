@@ -3,6 +3,9 @@ package classes {
 import classes.GlobalFlags.*;
 import classes.Scenes.NPCs.IsabellaScene;
 import classes.StatusEffects.VampireThirstEffect;
+import classes.GlobalFlags.*;
+import classes.Scenes.NPCs.IsabellaScene;
+import classes.Scenes.SceneLib;
 
 import coc.view.MainView;
 
@@ -24,8 +27,9 @@ public class PlayerInfo extends BaseContent {
 		var combatStats:String = "";
 
 		combatStats += "<b>Resistance (Physical Damage):</b> " + (100 - Math.round(player.damagePercent(true))) + "-" + (100 - Math.round(player.damagePercent(true) - player.damageToughnessModifier(true))) + "% (Higher is better.)\n";
+
 		combatStats += "<b>Resistance (Magic Damage):</b> " + (100 - Math.round(player.damageMagicalPercent(true))) + "-" + (100 - Math.round(player.damageMagicalPercent(true) - player.damageIntelligenceModifier(true) - player.damageWisdomModifier(true))) + "% (Higher is better.)\n";
-		combatStats += "<b>Resistance (Lust):</b> " + (100 - Math.round(getGame().lustPercent())) + "% (Higher is better.)\n";
+		combatStats += "<b>Resistance (Lust):</b> " + (100 - Math.round(kGAMECLASS.player.lustPercent())) + "% (Higher is better.)\n";
 
 		combatStats += "<b>Spell Effect Multiplier:</b> " + Math.round(100 * combat.spellMod()) + "%\n";
 		combatStats += "<b>Spell Cost:</b> " + combat.spellCost(100) + "%\n";
@@ -112,25 +116,24 @@ public class PlayerInfo extends BaseContent {
 			childStats += "<b>Ember Offspring (Females):</b> " + flags[kFLAGS.EMBER_CHILDREN_FEMALES] + "\n";
 		if (flags[kFLAGS.EMBER_CHILDREN_HERMS] > 0)
 			childStats += "<b>Ember Offspring (Herms):</b> " + flags[kFLAGS.EMBER_CHILDREN_HERMS] + "\n";
-		if (getGame().emberScene.emberChildren() > 0)
-			childStats += "<b>Total Children With Ember:</b> " + (getGame().emberScene.emberChildren()) + "\n";
-
-		if (flags[kFLAGS.EMBER_EGGS] > 0)
+        if (SceneLib.emberScene.emberChildren() > 0)
+            childStats += "<b>Total Children With Ember:</b> " + (SceneLib.emberScene.emberChildren()) + "\n";
+        if (flags[kFLAGS.EMBER_EGGS] > 0)
 			childStats += "<b>Ember Eggs Produced:</b> " + flags[kFLAGS.EMBER_EGGS] + "\n";
 
-		if (getGame().isabellaScene.totalIsabellaChildren() > 0) {
-			if (getGame().isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_BOYS) > 0)
-				childStats += "<b>Children With Isabella (Human, Males):</b> " + getGame().isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_BOYS) + "\n";
-			if (getGame().isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_GIRLS) > 0)
-				childStats += "<b>Children With Isabella (Human, Females):</b> " + getGame().isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_GIRLS) + "\n";
-			if (getGame().isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_HERMS) > 0)
-				childStats += "<b>Children With Isabella (Human, Herms):</b> " + getGame().isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_HERMS) + "\n";
-			if (getGame().isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS) > 0)
-				childStats += "<b>Children With Isabella (Cowgirl, Females):</b> " + getGame().isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS) + "\n";
-			if (getGame().isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS) > 0)
-				childStats += "<b>Children With Isabella (Cowgirl, Herms):</b> " + getGame().isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS) + "\n";
-			childStats += "<b>Total Children With Isabella:</b> " + getGame().isabellaScene.totalIsabellaChildren() + "\n"
-		}
+        if (SceneLib.isabellaScene.totalIsabellaChildren() > 0) {
+            if (SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_BOYS) > 0)
+                childStats += "<b>Children With Isabella (Human, Males):</b> " + SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_BOYS) + "\n";
+            if (SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_GIRLS) > 0)
+                childStats += "<b>Children With Isabella (Human, Females):</b> " + SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_GIRLS) + "\n";
+            if (SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_HERMS) > 0)
+                childStats += "<b>Children With Isabella (Human, Herms):</b> " + SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_HERMS) + "\n";
+            if (SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS) > 0)
+                childStats += "<b>Children With Isabella (Cowgirl, Females):</b> " + SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS) + "\n";
+            if (SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS) > 0)
+                childStats += "<b>Children With Isabella (Cowgirl, Herms):</b> " + SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS) + "\n";
+            childStats += "<b>Total Children With Isabella:</b> " + SceneLib.isabellaScene.totalIsabellaChildren() + "\n"
+        }
 
 		if (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] > 0)
 			childStats += "<b>Children With Izma (Sharkgirls):</b> " + flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + "\n";
@@ -139,28 +142,26 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] > 0 && flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0)
 			childStats += "<b>Total Children with Izma:</b> " + (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS]) + "\n";
 
-		if (getGame().joyScene.getTotalLitters() > 0)
-			childStats += "<b>Litters With " + (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 ? "Joy" : "Jojo") + ":</b> " + getGame().joyScene.getTotalLitters() + "\n";
-
-		if (flags[kFLAGS.KELLY_KIDS_MALE] > 0)
+        if (SceneLib.joyScene.getTotalLitters() > 0)
+            childStats += "<b>Litters With " + (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 ? "Joy" : "Jojo") + ":</b> " + SceneLib.joyScene.getTotalLitters() + "\n";
+        if (flags[kFLAGS.KELLY_KIDS_MALE] > 0)
 			childStats += "<b>Children With Kelly (Males):</b> " + flags[kFLAGS.KELLY_KIDS_MALE] + "\n";
 		if (flags[kFLAGS.KELLY_KIDS] - flags[kFLAGS.KELLY_KIDS_MALE] > 0)
 			childStats += "<b>Children With Kelly (Females):</b> " + (flags[kFLAGS.KELLY_KIDS] - flags[kFLAGS.KELLY_KIDS_MALE]) + "\n";
 		if (flags[kFLAGS.KELLY_KIDS] > 0)
 			childStats += "<b>Total Children With Kelly:</b> " + flags[kFLAGS.KELLY_KIDS] + "\n";
-		if (getGame().kihaFollower.pregnancy.isPregnant)
-			childStats += "<b>Kiha's Pregnancy:</b> " + getGame().kihaFollower.pregnancy.incubation + "\n";
-		if (flags[kFLAGS.KIHA_CHILDREN_BOYS] > 0)
+        if (SceneLib.kihaFollower.pregnancy.isPregnant)
+            childStats += "<b>Kiha's Pregnancy:</b> " + SceneLib.kihaFollower.pregnancy.incubation + "\n";
+        if (flags[kFLAGS.KIHA_CHILDREN_BOYS] > 0)
 			childStats += "<b>Kiha Offspring (Males):</b> " + flags[kFLAGS.KIHA_CHILDREN_BOYS] + "\n";
 		if (flags[kFLAGS.KIHA_CHILDREN_GIRLS] > 0)
 			childStats += "<b>Kiha Offspring (Females):</b> " + flags[kFLAGS.KIHA_CHILDREN_GIRLS] + "\n";
 		if (flags[kFLAGS.KIHA_CHILDREN_HERMS] > 0)
 			childStats += "<b>Kiha Offspring (Herms):</b> " + flags[kFLAGS.KIHA_CHILDREN_HERMS] + "\n";
-		if (getGame().kihaFollower.totalKihaChildren() > 0)
-			childStats += "<b>Total Children With Kiha:</b> " + getGame().kihaFollower.totalKihaChildren() + "\n";
-
-		if (getGame().mountain.salon.lynnetteApproval() != 0)
-			childStats += "<b>Lynnette Children:</b> " + flags[kFLAGS.LYNNETTE_BABY_COUNT] + "\n";
+        if (SceneLib.kihaFollower.totalKihaChildren() > 0)
+            childStats += "<b>Total Children With Kiha:</b> " + SceneLib.kihaFollower.totalKihaChildren() + "\n";
+        if (SceneLib.mountain.salon.lynnetteApproval() != 0)
+            childStats += "<b>Lynnette Children:</b> " + flags[kFLAGS.LYNNETTE_BABY_COUNT] + "\n";
 
 		if (flags[kFLAGS.MARBLE_KIDS] > 0)
 			childStats += "<b>Children With Marble:</b> " + flags[kFLAGS.MARBLE_KIDS] + "\n";
@@ -197,10 +198,9 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] > 0)
 			childStats += "<b>Children With Tamani:</b> " + flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] + " (after all forms of natural selection)\n";
 
-		if (getGame().urtaPregs.urtaKids() > 0)
-			childStats += "<b>Children With Urta:</b> " + getGame().urtaPregs.urtaKids() + "\n";
-
-		//Mino sons
+        if (SceneLib.urtaPregs.urtaKids() > 0)
+            childStats += "<b>Children With Urta:</b> " + SceneLib.urtaPregs.urtaKids() + "\n";
+        //Mino sons
 		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] > 0)
 			childStats += "<b>Number of Adult Minotaur Offspring:</b> " + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] + "\n";
 
@@ -228,12 +228,12 @@ public class PlayerInfo extends BaseContent {
 			bodyStats += ")\n";
 		}
 		bodyStats += "<b>Times Transformed:</b> " + flags[kFLAGS.TIMES_TRANSFORMED] + "\n";
-		if (player.tailType == TAIL_TYPE_BEE_ABDOMEN || player.tailType == TAIL_TYPE_SCORPION || player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL || player.tailType == TAIL_TYPE_SPIDER_ADBOMEN || player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS) {
-			if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN && player.faceType != FACE_SNAKE_FANGS && player.faceType != FACE_SPIDER_FANGS)
+		if (player.tailType == AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN || player.tailType == AppearanceDefs.TAIL_TYPE_SCORPION || player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL || player.tailType == AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN || player.faceType == AppearanceDefs.FACE_SNAKE_FANGS || player.faceType == AppearanceDefs.FACE_SPIDER_FANGS) {
+			if (player.tailType == AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN && player.faceType != AppearanceDefs.FACE_SNAKE_FANGS && player.faceType != AppearanceDefs.FACE_SPIDER_FANGS)
 				bodyStats += "<b>Web:</b> " + player.tailVenom + "/" + player.maxVenom() + "\n";
-			else if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN && (player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS))
+			else if (player.tailType == AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN && (player.faceType == AppearanceDefs.FACE_SNAKE_FANGS || player.faceType == AppearanceDefs.FACE_SPIDER_FANGS))
 				bodyStats += "<b>Venom/Web:</b> " + player.tailVenom + "/" + player.maxVenom() + "\n";
-			else if (player.tailType != TAIL_TYPE_SPIDER_ADBOMEN)
+			else if (player.tailType != AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN)
 				bodyStats += "<b>Venom:</b> " + player.tailVenom + "/" + player.maxVenom() + "\n";
 		}
 
@@ -403,18 +403,15 @@ public class PlayerInfo extends BaseContent {
 		var interpersonStats:String = "";
 
 		if (flags[kFLAGS.ARIAN_PARK] > 0)
-			interpersonStats += "<b>Arian's Health:</b> " + Math.round(getGame().arianScene.arianHealth()) + "\n";
-
-		if (flags[kFLAGS.ARIAN_VIRGIN] > 0)
+            interpersonStats += "<b>Arian's Health:</b> " + Math.round(SceneLib.arianScene.arianHealth()) + "\n";
+        if (flags[kFLAGS.ARIAN_VIRGIN] > 0)
 			interpersonStats += "<b>Arian Sex Counter:</b> " + Math.round(flags[kFLAGS.ARIAN_VIRGIN]) + "\n";
 
-		if (getGame().bazaar.benoit.benoitAffection() > 0)
-			interpersonStats += "<b>" + getGame().bazaar.benoit.benoitMF("Benoit", "Benoite") + " Affection:</b> " + Math.round(getGame().bazaar.benoit.benoitAffection()) + "%\n";
-
-		if (flags[kFLAGS.BROOKE_MET] > 0)
-			interpersonStats += "<b>Brooke Affection:</b> " + Math.round(getGame().telAdre.brooke.brookeAffection()) + "\n";
-
-		if (flags[kFLAGS.CEANI_AFFECTION] > 0)
+if (SceneLib.bazaar.benoit.benoitAffection() > 0)
+            interpersonStats += "<b>" + SceneLib.bazaar.benoit.benoitMF("Benoit", "Benoite") + " Affection:</b> " + Math.round(SceneLib.bazaar.benoit.benoitAffection()) + "%\n";
+        if (flags[kFLAGS.BROOKE_MET] > 0)
+            interpersonStats += "<b>Brooke Affection:</b> " + Math.round(SceneLib.telAdre.brooke.brookeAffection()) + "\n";
+        if (flags[kFLAGS.CEANI_AFFECTION] > 0)
 			interpersonStats += "<b>Ceani Affection:</b> " + Math.round(flags[kFLAGS.CEANI_AFFECTION]) + "%\n";
 
 		if (flags[kFLAGS.CHI_CHI_AFFECTION] > 0)
@@ -438,9 +435,9 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.ELECTRA_AFFECTION] > 0)
 			interpersonStats += "<b>Electra Affection:</b> " + Math.round(flags[kFLAGS.ELECTRA_AFFECTION]) + "%\n";
 
-		if (getGame().emberScene.emberAffection() > 0) {
-			interpersonStats += "<b>Ember Affection:</b> " + Math.round(getGame().emberScene.emberAffection()) + "%\n";
-			if (flags[kFLAGS.EMBER_LVL_UP] == 7) interpersonStats += "<b>Ember lvl:</b> 62\n";
+if (SceneLib.emberScene.emberAffection() > 0) {
+            interpersonStats += "<b>Ember Affection:</b> " + Math.round(SceneLib.emberScene.emberAffection()) + "%\n";
+            if (flags[kFLAGS.EMBER_LVL_UP] == 7) interpersonStats += "<b>Ember lvl:</b> 62\n";
 			if (flags[kFLAGS.EMBER_LVL_UP] == 6) interpersonStats += "<b>Ember lvl:</b> 56\n";
 			if (flags[kFLAGS.EMBER_LVL_UP] == 5) interpersonStats += "<b>Ember lvl:</b> 50\n";
 			if (flags[kFLAGS.EMBER_LVL_UP] == 4) interpersonStats += "<b>Ember lvl:</b> 44\n";
@@ -450,15 +447,15 @@ public class PlayerInfo extends BaseContent {
 			if (flags[kFLAGS.EMBER_LVL_UP] < 1) interpersonStats += "<b>Ember lvl:</b> 20\n";
 		}
 
-		if (getGame().helFollower.helAffection() > 0)
-			interpersonStats += "<b>Helia Affection:</b> " + Math.round(getGame().helFollower.helAffection()) + "%\n";
-		if (getGame().helFollower.helAffection() >= 100)
-			interpersonStats += "<b>Helia Bonus Points:</b> " + Math.round(flags[kFLAGS.HEL_BONUS_POINTS]) + "\n";
+if (SceneLib.helFollower.helAffection() > 0)
+            interpersonStats += "<b>Helia Affection:</b> " + Math.round(SceneLib.helFollower.helAffection()) + "%\n";
+        if (SceneLib.helFollower.helAffection() >= 100)
+            interpersonStats += "<b>Helia Bonus Points:</b> " + Math.round(flags[kFLAGS.HEL_BONUS_POINTS]) + "\n";
 
 		if (flags[kFLAGS.ISABELLA_AFFECTION] > 0) {
 			interpersonStats += "<b>Isabella Affection:</b> ";
-			if (!getGame().isabellaFollowerScene.isabellaFollower())
-				interpersonStats += Math.round(flags[kFLAGS.ISABELLA_AFFECTION]) + "%\n";
+            if (!SceneLib.isabellaFollowerScene.isabellaFollower())
+                interpersonStats += Math.round(flags[kFLAGS.ISABELLA_AFFECTION]) + "%\n";
 			else
 				interpersonStats += "100%\n";
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 7) interpersonStats += "<b>Isabella lvl:</b> 62\n";
@@ -478,8 +475,8 @@ public class PlayerInfo extends BaseContent {
 		}
 
 		if (flags[kFLAGS.KATHERINE_UNLOCKED] >= 4) {
-			interpersonStats += "<b>Katherine Submissiveness:</b> " + getGame().telAdre.katherine.submissiveness() + "\n";
-		}
+            interpersonStats += "<b>Katherine Submissiveness:</b> " + SceneLib.telAdre.katherine.submissiveness() + "\n";
+        }
 
 		if (player.hasStatusEffect(StatusEffects.Kelt) && flags[kFLAGS.KELT_BREAK_LEVEL] == 0 && flags[kFLAGS.KELT_KILLED] == 0) {
 			if (player.statusEffectv2(StatusEffects.Kelt) >= 130)
@@ -490,11 +487,10 @@ public class PlayerInfo extends BaseContent {
 		}
 
 		if (flags[kFLAGS.ANEMONE_KID] > 0)
-			interpersonStats += "<b>Kid A's Confidence:</b> " + getGame().anemoneScene.kidAXP() + "%\n";
-
-		if (flags[kFLAGS.KIHA_AFFECTION_LEVEL] == 2) {
-			if (getGame().kihaFollower.followerKiha())
-				interpersonStats += "<b>Kiha Affection:</b> " + 100 + "%\n";
+            interpersonStats += "<b>Kid A's Confidence:</b> " + SceneLib.anemoneScene.kidAXP() + "%\n";
+        if (flags[kFLAGS.KIHA_AFFECTION_LEVEL] == 2) {
+            if (SceneLib.kihaFollower.followerKiha())
+                interpersonStats += "<b>Kiha Affection:</b> " + 100 + "%\n";
 			else
 				interpersonStats += "<b>Kiha Affection:</b> " + Math.round(flags[kFLAGS.KIHA_AFFECTION]) + "%\n";
 			if (flags[kFLAGS.KIHA_LVL_UP] == 7) interpersonStats += "<b>Kiha lvl:</b> 63\n";
@@ -518,34 +514,31 @@ public class PlayerInfo extends BaseContent {
 
 		//Lottie stuff
 		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0)
-			interpersonStats += "<b>Lottie's Encouragement:</b> " + getGame().telAdre.lottie.lottieMorale() + " (higher is better)\n" + "<b>Lottie's Figure:</b> " + getGame().telAdre.lottie.lottieTone() + " (higher is better)\n";
-
-		if (getGame().mountain.salon.lynnetteApproval() != 0)
-			interpersonStats += "<b>Lynnette's Approval:</b> " + getGame().mountain.salon.lynnetteApproval() + "\n";
-
-		if (flags[kFLAGS.OWCAS_ATTITUDE] > 0)
+            interpersonStats += "<b>Lottie's Encouragement:</b> " + SceneLib.telAdre.lottie.lottieMorale() + " (higher is better)\n" + "<b>Lottie's Figure:</b> " + SceneLib.telAdre.lottie.lottieTone() + " (higher is better)\n";
+        if (SceneLib.mountain.salon.lynnetteApproval() != 0)
+            interpersonStats += "<b>Lynnette's Approval:</b> " + SceneLib.mountain.salon.lynnetteApproval() + "\n";
+        if (flags[kFLAGS.OWCAS_ATTITUDE] > 0)
 			interpersonStats += "<b>Owca's Attitude:</b> " + flags[kFLAGS.OWCAS_ATTITUDE] + "\n";
 
-		if (getGame().telAdre.rubi.rubiAffection() > 0)
-			interpersonStats += "<b>Rubi's Affection:</b> " + Math.round(getGame().telAdre.rubi.rubiAffection()) + "%\n" + "<b>Rubi's Orifice Capacity:</b> " + Math.round(getGame().telAdre.rubi.rubiCapacity()) + "%\n";
-
-		if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 0)
+if (SceneLib.telAdre.rubi.rubiAffection() > 0)
+            interpersonStats += "<b>Rubi's Affection:</b> " + Math.round(SceneLib.telAdre.rubi.rubiAffection()) + "%\n" + "<b>Rubi's Orifice Capacity:</b> " + Math.round(SceneLib.telAdre.rubi.rubiCapacity()) + "%\n";
+        if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 0)
 			interpersonStats += "<b>Sapphire Affection:</b> " + Math.round(flags[kFLAGS.SAPPHIRE_AFFECTION]) + "%\n";
 		
 		if (flags[kFLAGS.SHEILA_XP] != 0) {
-			interpersonStats += "<b>Sheila's Corruption:</b> " + getGame().sheilaScene.sheilaCorruption();
-			if (getGame().sheilaScene.sheilaCorruption() > 100)
-				interpersonStats += " (Yes, it can go above 100)";
+            interpersonStats += "<b>Sheila's Corruption:</b> " + SceneLib.sheilaScene.sheilaCorruption();
+            if (SceneLib.sheilaScene.sheilaCorruption() > 100)
+                interpersonStats += " (Yes, it can go above 100)";
 			interpersonStats += "\n";
 		}
 
-		if (getGame().valeria.valeriaFluidsEnabled()) {
-			interpersonStats += "<b>Valeria's Fluid:</b> " + flags[kFLAGS.VALERIA_FLUIDS] + "%\n"
+if (SceneLib.valeria.valeriaFluidsEnabled()) {
+            interpersonStats += "<b>Valeria's Fluid:</b> " + flags[kFLAGS.VALERIA_FLUIDS] + "%\n"
 		}
 
 		if (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] != 0) {
-			if (getGame().urta.urtaLove()) {
-				if (flags[kFLAGS.URTA_QUEST_STATUS] == -1) interpersonStats += "<b>Urta Status:</b> <font color=\"#800000\">Gone</font>\n";
+            if (SceneLib.urta.urtaLove()) {
+                if (flags[kFLAGS.URTA_QUEST_STATUS] == -1) interpersonStats += "<b>Urta Status:</b> <font color=\"#800000\">Gone</font>\n";
 				if (flags[kFLAGS.URTA_QUEST_STATUS] == 0) interpersonStats += "<b>Urta Status:</b> Lover\n";
 				if (flags[kFLAGS.URTA_QUEST_STATUS] == 1) interpersonStats += "<b>Urta Status:</b> <font color=\"#008000\">Lover+</font>\n";
 			}
@@ -683,8 +676,8 @@ public class PlayerInfo extends BaseContent {
 		hideMenus();
 		mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
 		//Level up
-		if (player.XP >= player.requiredXP() && player.level < getGame().levelCap) {
-			player.XP -= player.requiredXP();
+        if (player.XP >= player.requiredXP() && player.level < kGAMECLASS.levelCap) {
+            player.XP -= player.requiredXP();
 			player.level++;
 			player.perkPoints++;
 			//if (player.level % 2 == 0) player.ascensionPerkPoints++;
@@ -931,8 +924,8 @@ public class PlayerInfo extends BaseContent {
 			doNext(playerMenu);
 			return;
 		}
-		if (getGame().testingBlockExiting) {
-			menu();
+        if (kGAMECLASS.testingBlockExiting) {
+            menu();
 			addButton(0, "Next", perkSelect, perks[rand(perks.length)]);
 		} else {
 			outputText("Please select a perk from the drop-down list, then click 'Okay'.  You can press 'Skip' to save your perk point for later.\n");
@@ -942,8 +935,8 @@ public class PlayerInfo extends BaseContent {
 						perk.defaultValue1, perk.defaultValue2, perk.defaultValue3, perk.defaultValue4);
 				perkList.push({label: p.perkName, perk: p});
 			}
-			getGame().showComboBox(perkList,"Choose a perk",perkCbChangeHandler);
-			if (player.perkPoints>1) outputText("You have "+numberOfThings(player.perkPoints,"perk point","perk points")+".");
+            kGAMECLASS.showComboBox(perkList, "Choose a perk", perkCbChangeHandler);
+            if (player.perkPoints>1) outputText("You have "+numberOfThings(player.perkPoints,"perk point","perk points")+".");
 			mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
 			menu();
 			addButton(1, "Skip", perkSkip);
@@ -966,9 +959,9 @@ public class PlayerInfo extends BaseContent {
 		var selected:PerkClass = selectedItem.perk;
 		outputText("You have selected the following perk:\n");
 		outputText("<b>" + selected.perkName + ":</b> " + selected.perkLongDesc);
-		getGame().placeComboBoxAfterText();
-		var unlocks:Array = getGame().perkTree.listUnlocks(selected.ptype);
-		if (unlocks.length > 0) {
+        kGAMECLASS.placeComboBoxAfterText();
+        var unlocks:Array = kGAMECLASS.perkTree.listUnlocks(selected.ptype);
+        if (unlocks.length > 0) {
 			outputText("<b>Unlocks:</b> <ul>");
 			for each (var pt:PerkType in unlocks) outputText("<li>" + pt.name + " (" + pt.longDesc + ")</li>");
 			outputText("</ul>");

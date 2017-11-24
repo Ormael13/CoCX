@@ -1,8 +1,9 @@
 package classes.Items.Consumables
 {
-	import classes.Items.Consumable;
-	
-	/**
+import classes.EngineCore;
+import classes.Items.Consumable;
+
+/**
 	 * Item that increases STR and/or VIT
 	 */
 	public class VitalityTincture extends Consumable
@@ -21,7 +22,7 @@ package classes.Items.Consumables
 			player.slimeFeed();
 			outputText("You down the contents of the bottle. The liquid is thick and tastes remarkably like cherries. Within moments, you feel much more healthy.");
 			dynStats("tou", 1 + rand(2));
-			if (game.HPChange(50, false)) outputText("  Any aches, pains and bruises you have suffered no longer hurt and you feel much better.");
+			if (EngineCore.HPChange(50, false)) outputText("  Any aches, pains and bruises you have suffered no longer hurt and you feel much better.");
 			player.refillHunger(10);
 			
 			return false;
