@@ -1,3 +1,4 @@
+//Quest Dungeon: Den of Desire (Gargoyle TF Quest)
 package classes.Scenes.Dungeons 
 {
 import classes.EventParser;

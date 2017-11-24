@@ -52,7 +52,7 @@ package classes.Scenes
 			outputText("-New tier 8 misc lvl-up perk: Epic Golem Maker. Req. Grand-Master Golem Maker perk, 150+ int and 150+ wis. Effect: increase pernament golems atk power by 25% of base value but increase a bit amount of used mana when their attacks or when creating them. PC can store additional pernament golem and gain +10 (non scalable) to max Int and Wis\n");
 			outputText("-New tier 9 wisdom lvl-up perk: Elemental Contract Rank 10. Req. perk Elemental Contract Rank 9 and 250+ wis. Effect: Increase limit of summoned elementals by 2 and unlock rank-up for elementals to 1st elder rank\n");
 			outputText("-New tier 9 misc lvl-up perk: Golem Army Major. Req. Epic Golem Maker perk, Golem Army Captain perk, 160+ int and 160+ wis. Effect: allow to store 3 more pernament/temporal golems and increase by 10% of base value all golems atk power\n");
-			//outputText("-New tier 10 toughness lvl-up perk: Second Wind. Req. perk Shield Combat. Effect: \n");
+			outputText("-New tier 10 toughness lvl-up perk: Second Wind. Req. perk Shield Combat. Effect: Once per fight using half remaining fatigue will gain 5% HP regeneration effect for 10 turns\n");
 			outputText("-New tier 10 wisdom lvl-up perk: Elemental Contract Rank 11. Req. perk Elemental Contract Rank 10 and 275+ wis. Effect: Increase limit of summoned elementals by 2 and unlock rank-up for elementals to grand elder rank\n");
 			outputText("-New tier 10 misc lvl-up perk: Legendary Golem Maker. Req. Epic Golem Maker perk, 175+ int and 175+ wis. Effect: increase pernament golems atk power by 65% of base value but increase amount of used mana when their attacks or when creating them. PC can store additional pernament golem and gain +20 (non scalable) to max Int and Wis\n");
 			outputText("-New tier 11 misc lvl-up perk: Golem Army Colonel. Req. Legendary Golem Maker perk, Golem Army Lieutenant perk, 185+ int and 185+ wis. Effect: allow to store 4 more pernament/temporal golems and increase by 10% of base value all golems atk power\n");
@@ -67,7 +67,7 @@ package classes.Scenes
 			outputText("-New tier 14 intelligence lvl-up perk: Mythic Spirituality. Req. Half-step-to Mythic Spirituality perk, 450+ int and 300+ wis. Effect: Inrease max Mana by 15000\n");
 			outputText("-New tier 14 libido lvl-up perk: Mythic Self-Control. Req. Half-step-to Mythic Self-Control perk, 450+ lib and 300+ int. Effect: Inrease max Lust by 5000\n");
 			outputText("-New perk for monsters: True Demon-type enemy. It would amke them not have any soulforce (since true demons not have soul to gather soulforce so why they need to have it, right? xD).\n");
-			outputText("-Manticore bonuses increased (req. 6/12 pts now) to : +50/100 max spe, +25/50 max int, +30/60 max lib, +15/30 min sens, +0/50 max HP. ALso having cat tongue and not having cock will count as point to maticore score.\n");
+			outputText("-Manticore bonuses increased (req. 6/12 pts now) to : +50/100 max spe, +25/50 max int, +30/60 max lib, +15/30 min sens, +0/50 max HP. ALso having cat tongue and not having cock will count as point to manticore score.\n");
 			outputText("-New type of resistance added: Magic Resistance. Some of enemy attacks that use non physical attacks/specials will req. this resistance to reduce recived damage. Rising intelligence and wisdom will let PC rise it to 25%. Other ways to increase it higher would be having specific status effects or perks.\n");
 			outputText("-Perk Naked Truth will now provide magical resistance like physical one it have now -10% dmg (to both physical and magical).\n");
 			outputText("-New way to count physical/magical resistance with cap that would rise each new game tier. Now each 10 pts in tou/int/wis would add 1% ot phys (tou) or mag (int/wis) resistance with each stopping when phys or magical resistance reach 25% (+5% for each ascension).\n");
@@ -75,8 +75,22 @@ package classes.Scenes
 			outputText("-Cat race bonuses adjusted for Half Cat-morph/Cat-morph (4+/8+ points in cat score): +40/60 to max spe, +25/60 to max Lib\n");
 			outputText("-New melee weapon (by Liadri): Nephilim Blade - obtainable by giving B.F.Sword to Pure Celess to purify. Increased by 6 base dmg, added scaling based on purity, deal bonus dmg to corrupted enemies and each attack will slowly purify user.\n");
 			outputText("-New melee weapon (by Liadri): Ebony Destroyer - obtainable by giving B.F.Sword to Corrupted Celess to corrupt. Increased by 6 base dmg, added scaling based on corruption, deal bonus dmg to pure enemies and each attack will slowly corrupt user.\n");
-			outputText("-New melee weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
-			outputText("-New melee weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
+			outputText("-New melee weapon (by Liadri): Masamune - obtainable by giving Katana to Pure Celess to purify. 18 base atk and up to 12 bonus atk based on pure scaling, higher crit rate than normal +10% and deal increased damage against the corrupt.\n");
+			outputText("-New melee weapon (by Liadri): Blood-letter - obtainable by giving Katana to Corrupted Celess to corrupt. 22 base atk and up to 18 atk scaling with corruption, using this weapon damage the user health by 2% per swing and deal increased damage against the pure.\n");
+			outputText("-New melee weapon (by Liadri): Seraph Spear - obtainable by giving Spear to Pure Celess to purify. Added purity scalling that can add up to 10 on base 10 atk of spear, using it will give 2/4% regeneration (in/out of combat) and deal increased damage against the corrupt.\n");
+			outputText("-New melee weapon (by Liadri): Demon Snakespear - obtainable by giving Spear to Corrupted Celess to corrupt. Added corruption scalling that can add up to 10 on base 10 atk of spear, each attack deal poison damage like naga bite and deal increased damage against the pure.\n");
+			outputText("-New melee weapon (by Liadri): Queen's Guard - obtainable by giving Jeweled Rapier to Pure Celess to purify. Base atk inc to 20 and additionaly scale on purity and masculinity gaining up to 5 atk from both (that makes max atk caps at 30). Bonus from rapier training apply as usual too.\n");
+			outputText("-New melee weapon (by Liadri): Black Widow - obtainable by giving Jeweled Rapier to Corrupted Celess to corrupt. Base atk inc to 20 and additionaly scale on corruption and feminity gaining up to 5 atk from both (that makes max atk caps at 30). Bonus from rapier training apply as usual too.\n");
+			outputText("-New melee weapon (by Liadri): Purified Oni Chieftain Destroyer - obtainable by giving Oni Tetsubo to Pure Celess to purify. Base atk up to 40 and additional atk scaling on purity (in total up to 60 atk) plus increased to 15% stun chance. Req. 210+ str for full atk value.\n");
+			outputText("-New melee weapon (by Liadri): Defiled Oni Chieftain Destroyer - obtainable by giving Oni Tetsubo to Corrupted Celess to corrupt. Base atk up to 40 and additional atk scaling on corruption (in total up to 60 atk) plus increased to 15% stun chance. Req. 210+ str for full atk value.\n");
+		//	outputText("-New melee weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
+		//	outputText("-New melee weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
+		//	outputText("-New range weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
+		//	outputText("-New range weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
+			outputText("-New shield (by Liadri): Sanctuary - obtainable form encounter in forest/deepword with guardian adter picking option to take shield instead of become mother for Celess. Block chance 20, no other properties.\n");
+			outputText("-New shield (by Liadri): Sanctuary - obtainable by giving Sanctuary to Pure Celess to purify. Block chance fully scalling on purity and adding regeneration effect also scalling on purity (on averange it's ~1%).\n");
+			outputText("-New shield (by Liadri): Dark Aegis - obtainable by giving Sanctuary to Corrupted Celess to corrupt. Block chance fully scalling on corruption and adding regeneration effect also scalling on corruption (on averange it's ~1%).\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -103,8 +117,17 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Bat, Vampire, 
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -145,16 +168,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): dodać yuki-onna TF
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

@@ -24,8 +24,8 @@ package classes.Items
 		public const TOWERSH:Shield = new TowerShield();
 		public const DRGNSHL:DragonShellShield = new DragonShellShield();
 		public const SANCTYN:Shield = new Shield ("SanctN", "Sanctuary", "Sanctuary", "a Sanctuary", 20, 1500, "The legendary shield");
-		public const SANCTYL:ShieldWithPerk = new ShieldWithPerk("SanctL", "Sanctuary", "Sanctuary", "Sanctuary", 20, 2000, "The legendary shield is said to heal and protect a knight of pure heart.", "", PerkLib.Sanctuary, 1, 0, 0, 0);
-		public const SANCTYD:ShieldWithPerk = new ShieldWithPerk("SanctD", "Dark Aegis", "dark aegis", "a dark aegis", 20, 2000, "The legendary shield is said to heal and protect a fallen knight.", "", PerkLib.Sanctuary, 2, 0, 0, 0);
+		public const SANCTYL:Sanctuary = new Sanctuary();
+		public const SANCTYD:DarkAegis = new DarkAegis();
 		
 		/*private static function mk(id:String,shortName:String,name:String,longName:String,effectId:Number,effectMagnitude:Number,value:Number,description:String,type:String,perk:String=""):Jewelry {
 			return new Shield(id,shortName,name,longName,effectId,effectMagnitude,value,description,type,perk);

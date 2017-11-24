@@ -294,16 +294,16 @@ import flash.utils.getQualifiedClassName;
 			 * I have used the sanctuary perk as a placeholder on some of these items.
 			 */
 			var improvableItems:Array = [
-					[weapons.BFSWORD,		weapons.NPHBLDE,	weapons.EBNYBLD],
-					[weapons.KATANA,		weapons.MASAMUN,	weapons.BLETTER],
-					[weapons.W_STAFF,		weapons.U_STAFF,	weapons.N_STAFF],
-					[shields.SANCTYN,		shields.SANCTYL,	shields.SANCTYD],
-					[weapons.DEMSCYT,		weapons.LHSCYTH,	null],
-					[weaponsrange.BOWLONG,	weaponsrange.ARTEMIS,	weaponsrange.WILDHUN],
-					[weapons.KIHAAXE,		weapons.WG_GAXE,	weapons.DE_GAXE],
-					[weapons.SPEAR,			weapons.SESPEAR,	weapons.DSSPEAR],
-					[weapons.JRAPIER,		weapons.Q_GUARD,	weapons.B_WIDOW],
-					[armors.CTPALAD,		null,				armors.CTBGUAR]
+					[weapons.BFSWORD,		weapons.NPHBLDE,		weapons.EBNYBLD],
+					[weapons.KATANA,		weapons.MASAMUN,		weapons.BLETTER],
+				//	[weapons.W_STAFF,		weapons.U_STAFF,		weapons.N_STAFF],
+					[shields.SANCTYN,		shields.SANCTYL,		shields.SANCTYD],
+				//	[weapons.DEMSCYT,		weapons.LHSCYTH,		null],
+				//	[weaponsrange.BOWLONG,	weaponsrange.ARTEMIS,	weaponsrange.WILDHUN],
+				//	[weapons.KIHAAXE,		weapons.WG_GAXE,		weapons.DE_GAXE],
+					[weapons.SPEAR,			weapons.SESPEAR,		weapons.DSSPEAR],
+					[weapons.JRAPIER,		weapons.Q_GUARD,		weapons.B_WIDOW]//,
+				//	[armors.CTPALAD,		null,					armors.CTBGUAR]
 				];
 			var selectfrom:int = 1;
 			clearOutput();

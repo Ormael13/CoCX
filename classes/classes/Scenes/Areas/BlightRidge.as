@@ -1,6 +1,6 @@
 /**
  * @author Ormael
- * Demon area with lvl 26-31 demonic enemies. Each exploration will even slowly corrupt PC unless corruption is above 66.
+ * Demon area with lvl 26-36 demonic enemies. Each exploration will even slowly corrupt PC unless corruption is above 66.
  * Currently a Work in Progress.
  */
 
