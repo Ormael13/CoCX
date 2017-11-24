@@ -124,12 +124,7 @@ import fl.controls.ComboBox;
 				kGAMECLASS.showComboBox(preList,"Pre-defined characters",selectName);
 				mainView.placeComboBox(mainView.nameBox.x + mainView.nameBox.width + 10,mainView.nameBox.y);
 			}
-			
-			//Reset autosave
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
-				player.slotName = "VOID";
-				player.autoSave = false;
-			}
+
 			//RESET DUNGEON
 			kGAMECLASS.inDungeon = false;
 			kGAMECLASS.dungeonLoc = 0;
@@ -139,6 +134,13 @@ import fl.controls.ComboBox;
 			var oldPlayer:Player = player;
 			//Reset all standard stats
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) player = new Player();
+
+            //Reset autosave
+            if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
+                player.slotName = "VOID";
+                player.autoSave = false;
+            }
+
 			model.player = player;
 			player.str = 15;
 			player.tou = 15;
@@ -219,26 +221,41 @@ import fl.controls.ComboBox;
 				player.itemSlot4.emptySlot();
 				player.itemSlot5.unlocked = false;
 				player.itemSlot5.emptySlot();
-				//PIERCINGS
-				player.nipplesPierced = 0;
-				player.nipplesPShort = "";
-				player.nipplesPLong = "";
-				player.lipPierced = 0;
-				player.lipPShort = "";
-				player.lipPLong = "";
-				player.tonguePierced = 0;
-				player.tonguePShort = "";
-				player.tonguePLong = "";
-				player.eyebrowPierced = 0;
-				player.eyebrowPShort = "";
-				player.eyebrowPLong = "";
-				player.earsPierced = 0;
-				player.earsPShort = "";
-				player.earsPLong = "";
-				player.nosePierced = 0;
-				player.nosePShort = "";
-				player.nosePLong = "";
 			}
+            //PIERCINGS
+            player.nipplesPierced = 0;
+            player.nipplesPShort = "";
+            player.nipplesPLong = "";
+            player.lipPierced = 0;
+            player.lipPShort = "";
+            player.lipPLong = "";
+            player.tonguePierced = 0;
+            player.tonguePShort = "";
+            player.tonguePLong = "";
+            player.eyebrowPierced = 0;
+            player.eyebrowPShort = "";
+            player.eyebrowPLong = "";
+            player.earsPierced = 0;
+            player.earsPShort = "";
+            player.earsPLong = "";
+            player.nosePierced = 0;
+            player.nosePShort = "";
+            player.nosePLong = "";
+            for each(var cock:Cock in player.cocks){
+				cock.pierced = 0;
+				cock.pShortDesc = "";
+				cock.pLongDesc = "";
+			}
+			for each(var vagina:VaginaClass in player.vaginas){
+				vagina.labiaPierced = 0;
+                vagina.labiaPShort = "";
+				vagina.labiaPLong = "";
+				vagina.clitPierced = 0;
+                vagina.clitPShort = "";
+				vagina.clitPLong = "";
+			}
+
+
 			//PLOTZ
 			kGAMECLASS.monk = 0;
 			kGAMECLASS.whitney = 0;
