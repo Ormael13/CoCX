@@ -110,7 +110,7 @@ public class Boat extends AbstractLakeContent
 					outputText("<b>You got a fish!</b>");
 					inventory.takeItem(consumables.FISHFIL, camp.returnToCampUseOneHour);
 					return;
-				case 5:
+				case 6:
 					flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] = 1;
 					SceneLib.anemoneScene.mortalAnemoneeeeee();
 					return;

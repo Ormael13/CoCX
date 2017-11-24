@@ -22,7 +22,6 @@ public class SharkGirl extends Monster
 				player.takeDamage(4+rand(4), true);
 				player.dynStats("lus", (5+(player.lib/10)));
 			}
-			combatRoundOver();
 		}
 		override public function defeated(hpVictory:Boolean):void
 		{

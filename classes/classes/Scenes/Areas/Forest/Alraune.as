@@ -30,7 +30,6 @@ public class Alraune extends Monster
 			outputText(" vines, forcefully pulling yourself a good distance away from her.\n\n");
 			trapLevel(2);
 			player.fatigue += 50;
-			doAI();
 		}
 		
 		public function alraunePollenCloud():void {
@@ -125,7 +124,6 @@ public class Alraune extends Monster
 					trapLevel(-1);
 				}
 				else removeStatusEffect(StatusEffects.Climbed);
-				combatRoundOver();
 			}
 			else super.performCombatAction();
 		}

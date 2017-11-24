@@ -47,7 +47,6 @@ public class Goblin extends Monster
 						if (short == "Tamani") addHP((maxHP() / 4) * multiplier);
 					}
 					else outputText("  There doesn't seem to be any effect.\n");
-					combatRoundOver();
 				}
 				return;
 			}
@@ -78,8 +77,7 @@ public class Goblin extends Monster
 					EngineCore.fatigue(10 + rand(25) * multiplier);
 				}
 			}
-			if (!plural) combatRoundOver();
-			else outputText("\n");
+			if (plural) outputText("\n");
 		}
 		protected function goblinTeaseAttack():void {
 			var det:Number = rand(3);
@@ -110,7 +108,6 @@ public class Goblin extends Monster
 			if (short == "goblin elder") lustDmg *= 2;
 			player.dynStats("lus", lustDmg);
 			outputText("  The display distracts you long enough to prevent you from taking advantage of her awkward pose, leaving you more than a little flushed.\n\n");
-			combatRoundOver();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void

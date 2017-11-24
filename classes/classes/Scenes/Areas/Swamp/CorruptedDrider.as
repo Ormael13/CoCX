@@ -94,7 +94,6 @@ import classes.internals.*;
 					}
 				}
 			}
-			combatRoundOver();
 		}
 		
 		public function driderMasturbate():void {
@@ -106,7 +105,6 @@ import classes.internals.*;
 			if(nipplesPierced > 0) outputText("pierced ");
 			outputText("nipple-flesh.  Arching her back in a lurid pose, she cries out in high-pitched bliss, her cock pulsing in her hand and erupting out a stream of seed that lands in front of her.\n\n");
 			outputText("The display utterly distracts you until it finishes, and as you adopt your combat pose once more, you find your own needs harder to ignore, while hers seem to be sated, for now.\n");
-			combatRoundOver();
 		}
 
 		override protected function performCombatAction():void

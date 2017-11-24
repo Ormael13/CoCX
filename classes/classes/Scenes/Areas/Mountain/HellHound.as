@@ -11,7 +11,6 @@ public class HellHound extends Monster
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind)) {
 				outputText(capitalA + short + " completely misses you with a wave of dark fire! Thank the gods it's blind!");
-				combatRoundOver();
 				return;
 			}
 			/*if(player.hasStatusEffect(StatusEffects.Web_dash_Silence) >= 0) {
@@ -75,7 +74,6 @@ public class HellHound extends Monster
 				outputText("The hellhound keeps his four eyes on you as he sniffs the ground where you were moments ago. He raises his heads back up and gives you a fiery grin - he seems to have acquired your scent!  It'll be hard to get away now...");
 				player.createStatusEffect(StatusEffects.NoFlee,0,0,0,0);
 			}
-			combatRoundOver();
 			/*if(spe >= 80) {
 				if(spe == 100) {
 					hellhoundFire();

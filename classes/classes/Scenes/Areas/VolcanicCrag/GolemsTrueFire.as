@@ -24,7 +24,6 @@ package classes.Scenes.Areas.VolcanicCrag
 				outputText(" They hits you square in the chest from a few different angles. ");
 				damage = player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		
 		public function overhandSmash():void {
@@ -56,7 +55,6 @@ package classes.Scenes.Areas.VolcanicCrag
 				if (choice1 == 3) backhand();
 			}
 			else eAttack();
-			combatRoundOver();
 		}
 		
 		public function GolemsTrueFire() 

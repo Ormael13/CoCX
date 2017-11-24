@@ -137,7 +137,6 @@ import classes.internals.*;
 				createStatusEffect(StatusEffects.Round,2,0,0,0);
 			}
 			else addStatusValue(StatusEffects.Round,1,1);
-			combatRoundOver();
 		}
 		
 		override protected function performCombatAction():void

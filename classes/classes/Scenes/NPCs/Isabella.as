@@ -51,7 +51,6 @@ public class Isabella extends Monster
 					outputText("\n");
 				}
 			}
-			combatRoundOver();
 		}
 
 		public function isabellaStun():void {
@@ -97,7 +96,6 @@ public class Isabella extends Monster
 					player.createStatusEffect(StatusEffects.IsabellaStunned,0,0,0,0);
 				}
 			}
-			combatRoundOver();
 		}
 
 		public function isabellaThroatPunch():void {
@@ -140,7 +138,6 @@ public class Isabella extends Monster
 					player.createStatusEffect(StatusEffects.ThroatPunch,2,0,0,0);
 				}
 			}
-			combatRoundOver();
 		}
 
 		//[Milk Self-Heal]
@@ -150,7 +147,6 @@ public class Isabella extends Monster
 			else HP += 100;
 			lust += 5;
 			player.dynStats("lus", (10+player.lib/20));
-			combatRoundOver();
 		}
 
 		override protected function performCombatAction():void

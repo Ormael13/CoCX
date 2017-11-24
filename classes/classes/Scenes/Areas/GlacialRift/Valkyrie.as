@@ -12,27 +12,22 @@ public class Valkyrie extends Monster
 			var evade:String = player.getEvasionReason();
 			if (evade == EVASION_EVADE) {
 				outputText("and you anticipate the upcoming spear strikes, dodging her attacks thanks to your incredible evasive ability!");
-				combatRoundOver();
 				return;
 			}
 			else if (evade == EVASION_FLEXIBILITY) {
 				outputText("and you use your incredible flexibility to barely fold your body and avoid her attacks!");
-				combatRoundOver();
 				return;
 			}
 			else if (evade == EVASION_MISDIRECTION) {
 				outputText("and you use technique from Raphael to sidestep and completely avoid her barrage of attacks!");
-				combatRoundOver();
 				return;
 			}
 			else if (evade == EVASION_SPEED || evade != null) {
 				outputText("and you successfully dodge her barrages of spear attacks!");
-				combatRoundOver();
 				return;
 			}
 			else if (hasStatusEffect(StatusEffects.Blind) && rand(3) > 0) {
 					outputText("and step away as you watch the valkyrie's blind attacks strike only air. ");
-					combatRoundOver();
 					return;
 				}
 			else
@@ -47,7 +42,6 @@ public class Valkyrie extends Monster
 				}
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		
 		public function shieldBash():void {
@@ -55,27 +49,22 @@ public class Valkyrie extends Monster
 			var evade:String = player.getEvasionReason();
 			if (evade == EVASION_EVADE) {
 				outputText("and you anticipate the upcoming shield bash, dodging her thanks to your incredible evasive ability!");
-				combatRoundOver();
 				return;
 			}
 			else if (evade == EVASION_FLEXIBILITY) {
 				outputText("and you use your incredible flexibility to barely fold your body and avoid her shield bash!");
-				combatRoundOver();
 				return;
 			}
 			else if (evade == EVASION_MISDIRECTION) {
 				outputText("and you use technique from Raphael to sidestep and avoid her shield bash!");
-				combatRoundOver();
 				return;
 			}
 			else if (evade == EVASION_SPEED || evade != null) {
 				outputText("and you successfully dodge her shield bash attack!");
-				combatRoundOver();
 				return;
 			}
 			else if (hasStatusEffect(StatusEffects.Blind) && rand(3) > 0) {
 					outputText("and step away as you watch the valkyrie's blind bash strikes only air. ");
-					combatRoundOver();
 					return;
 				}
 			else
@@ -91,7 +80,6 @@ public class Valkyrie extends Monster
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		
 		public function aerialRave():void {
@@ -103,22 +91,18 @@ public class Valkyrie extends Monster
 			var evade:String = player.getEvasionReason();
 			if (evade == EVASION_EVADE) {
 				outputText("You manage to shake her hand off thanks to evasion.  ");
-				combatRoundOver();
 				return;
 			}
 			else if (evade == EVASION_FLEXIBILITY) {
 				outputText("Thanks to your incredibly flexibility, her hand slips off your wrist.  ");
-				combatRoundOver();
 				return;
 			}
 			else if (evade == EVASION_MISDIRECTION) {
 				outputText("Using Raphael's technique, you slip freely from her grip.");
-				combatRoundOver();
 				return;
 			}
 			else if (evade == EVASION_SPEED || evade != null) {
 				outputText("You suddenly jerk your arm away, causing her grip to break.");
-				combatRoundOver();
 				return;
 			}
 			else
@@ -128,7 +112,6 @@ public class Valkyrie extends Monster
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void

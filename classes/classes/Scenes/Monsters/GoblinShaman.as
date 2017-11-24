@@ -101,7 +101,6 @@ public class GoblinShaman extends Goblin
 				tou += 20 * spellMultiplier();
 				fatigue += spellCostMight;
 			}
-			combatRoundOver();
 		}
 		
 		private function spellMultiplier():Number {

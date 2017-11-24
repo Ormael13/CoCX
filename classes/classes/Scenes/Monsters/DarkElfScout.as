@@ -106,7 +106,6 @@ public class DarkElfScout extends Monster
 				if (player.isFlying() && rand(4) == 0) WingClip();
 				else DarkElfBowShooting();
 			}
-			combatRoundOver();
 		}
 		
 		public function DarkElfScout() 

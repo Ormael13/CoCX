@@ -34,13 +34,11 @@ public class GooArmor extends GooGirl
 				if(damage <= 0) damage = 1;
 				damage = player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		//ATTACK TWO: Goo Consume
 		public function gooArmorAttackTwoGooConsume():void {
 			outputText("Suddenly, the goo-girl leaks half-way out of her heavy armor and lunges at you.  You attempt to dodge her attack, but she doesn't try and hit you - instead, she wraps around you, pinning your arms to your chest.  More and more goo latches onto you - you'll have to fight to get out of this.");
 			player.createStatusEffect(StatusEffects.GooArmorBind,0,0,0,0);
-			combatRoundOver();
 		}
 		//(Struggle)
 		public function struggleAtGooBind():void {
@@ -50,25 +48,18 @@ public class GooArmor extends GooGirl
 				outputText("You try and get out of the goo's grasp, but every bit of goop you pull off you seems to be replaced by twice as much!");
 				//(If fail 5 times, go to defeat scene)
 				player.addStatusValue(StatusEffects.GooArmorBind,1,1);
-				if(player.statusEffectv1(StatusEffects.GooArmorBind) >= 5) {
-					if(hasStatusEffect(StatusEffects.Spar)) SceneLib.valeria.pcWinsValeriaSparDefeat();
-					else SceneLib.dungeons.heltower.gooArmorBeatsUpPC();
-					return;
-				}
 			}
 			//If succeed: 
 			else {
 				outputText("You finally pull the goop off of you and dive out of her reach before the goo-girl can re-attach herself to you.  Pouting, she refills her suit of armor and reassumes her fighting stance.");
 				player.removeStatusEffect(StatusEffects.GooArmorBind);
 			}
-			combatRoundOver();
 		}
 		//ATTACK THREE: Goo Silence
 		public function gooSilenceAttack():void {
 			outputText("The goo pulls a hand off her greatsword and shoots her left wrist out towards you.  You recoil as a bit of goop slaps onto your mouth, preventing you from speaking - looks like you're silenced until you can pull it off!");
 			//(No spells until PC passes a moderate STR check or burns it away)
 			player.createStatusEffect(StatusEffects.GooArmorSilence,0,0,0,0);
-			combatRoundOver();
 		}
 		
 		override protected function performCombatAction():void

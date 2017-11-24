@@ -131,7 +131,6 @@ public class Syth extends Monster
 			if (choice == 3) sythAttack3();
 			//if (choice == 4) sythUltimateAttack();//some super cool channeled or not super attack that will be his ace - smth to mix salamanders and demons style xD
 			if (choice >= 4) sythBaseAttack();
-			combatRoundOver();
 		}
 		
 		override public function get long():String

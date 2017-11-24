@@ -18,7 +18,6 @@ public class Kitsune extends Monster
 			outputText("\n\nYour limbs are bound tightly while coils of delightfully soft fur caress you on all sides.  You can do little besides struggle against your furry bonds as the constant writhing of her tails sends shudders flying up and down your spine.");
 			createStatusEffect(StatusEffects.PCTailTangle, 0, 0, 0, 0);
 			player.dynStats("lus", 10 + player.sens / 8);
-			combatRoundOver();
 		}
 
 		//Struggle - event 5077 in Combat.as
@@ -39,7 +38,6 @@ public class Kitsune extends Monster
 				outputText("\n\nShe licks her lips, running her hands along you wherever she can find exposed flesh.  Her fingertips leave small trails of dazzling blue that make you flush with lust - you must escape her grasp soon or else you will be like putty in her hands!");
 				player.dynStats("lus", 5 + player.sens / 10);
 				addStatusValue(StatusEffects.PCTailTangle, 1, 3);
-				combatRoundOver();
 			}
 		}
 
@@ -50,7 +48,6 @@ public class Kitsune extends Monster
 			if (EngineCore.silly()) outputText("  You're so glad you got to touch fluffy tail.");
 			outputText("\n\nShe licks her lips, running her hands along you wherever she can find exposed flesh.  Her fingertips leave small trails of dazzling blue that make you flush with lust - you must escape her grasp soon or else you will be like putty in her hands!");
 			player.dynStats("lus", 5 + player.sens / 10);
-			combatRoundOver();
 		}
 
 		//Fox Fire: - Low piercing damage, +10-15 LUST
@@ -71,7 +68,6 @@ public class Kitsune extends Monster
 			damage = Math.round(damage);
 			damage = player.takeMagicDamage(damage, true);
 			player.dynStats("lus", 15 + player.sens / 10);
-			combatRoundOver();
 		}
 
 //Illusion: - Raises enemy evasion, but can be resisted.
@@ -93,7 +89,6 @@ public class Kitsune extends Monster
 				createStatusEffect(StatusEffects.Illusion, 0, 0, 0, 0);
 				spe += 20;
 			}
-			combatRoundOver();
 		}
 
 //Seal: - cancels and disables whatever command the player uses this round. Lasts 3 rounds, cannot seal more than one command at a time.
@@ -152,7 +147,6 @@ public class Kitsune extends Monster
 				outputText("\n\nUpon your touch, the seal dissipates, and you are free of the kitsune's magic!  She pouts in disappointment, looking thoroughly irritated, but quickly resumes her coy trickster facade.");
 				player.removeStatusEffect(StatusEffects.Sealed);
 			}
-			combatRoundOver();
 		}
 
 //Tease Texts:
@@ -166,7 +160,6 @@ public class Kitsune extends Monster
 			//Redhead only:
 			else outputText("The kitsune sways her hips enticingly as she appears in front of you abruptly, rubbing up against your side.  Her teasing caresses make you shiver with arousal, and you can feel something thick and warm pressing against your [hips].  She gives you a wry grin as she breaks away from you, sporting an obvious tent in her robes.  \"<i>Just you wait...</i>\"");
 			player.dynStats("lus", 5 + player.sens / 7);
-			combatRoundOver();
 		}
 
 		override protected function performCombatAction():void

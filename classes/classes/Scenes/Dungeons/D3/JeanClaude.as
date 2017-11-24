@@ -16,7 +16,6 @@ import classes.Scenes.SceneLib;
 			outputText("The monstrous basilisk suddenly lunges forward, snarling wordlessly as he swings his cutlass at you twice, the blows of a savage yet expert swordsman.\n\n");
 			createStatusEffect(StatusEffects.Attacks, 2, 0, 0, 0);
 			eAttack();
-			combatRoundOver();
 		}
 		
 		override public function doAI():void

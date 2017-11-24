@@ -17,7 +17,6 @@ public class ChameleonGirl extends Monster
 			this.weaponAttack = 30;
 			this.weaponName = "claws";
 			this.weaponVerb = "claw";
-			combatRoundOver();
 		}
 
 		//Ignores armor
@@ -39,7 +38,6 @@ public class ChameleonGirl extends Monster
 				}
 				else outputText("The chameleon swings her arm at you, catching you with her claws.  You defend against the razor sharp attack.");
 			}
-			combatRoundOver();
 		}
 
 		//Attack 3:
@@ -66,7 +64,6 @@ public class ChameleonGirl extends Monster
 				}
 				else outputText("The chameleon rolls in your direction and kicks up at your chest, but you knock her aside without taking any damage..");
 			}
-			combatRoundOver();
 		}
 
 		override protected function performCombatAction():void

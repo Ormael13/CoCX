@@ -24,7 +24,6 @@ public class LizanRogue extends Monster
 				outputText("The lizan flings himself back.  In the air he puts his blowgun to his lips and fires a single dart into your neck.  As you pull it out your limbs begin to feel like wet noodles, it appears you’ve been poisoned.");
 				(player.createOrFindStatusEffect(StatusEffects.LizanBlowpipe) as LizanBlowpipeDebuff).debuffStrSpe();
 			}
-			combatRoundOver();
 		}
 		
 		public function immaHurtYouBadly():void {
@@ -35,7 +34,6 @@ public class LizanRogue extends Monster
 				outputText("The lizan rushes at you.  As you raise your [weapon] to defend yourself he dives to the side, using his blowgun to fire a single stinging dart into your neck.  You pull out the dart and your skin begins to feel hypersensitive, you’re going to have trouble defending yourself");
 				(player.createOrFindStatusEffect(StatusEffects.LizanBlowpipe) as LizanBlowpipeDebuff).debuffTouSens();
 			}
-			combatRoundOver();
 		}
 		
 		public function wingstickThrow():void {
@@ -47,7 +45,6 @@ public class LizanRogue extends Monster
 				var damage:int = this.spe/3 + rand(60);
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 				
 		public function tongueAttack():void {
@@ -58,7 +55,6 @@ public class LizanRogue extends Monster
 				outputText("All you see is a flash of pink as the lizan’s long tongue hits your eyes. Some kind of chemical reaction causes your eyes to burn, you’ve been blinded!");
 				if (!player.hasStatusEffect(StatusEffects.Blind)) player.createStatusEffect(StatusEffects.Blind, 1 + rand(2), 0, 0, 0)
 			}
-			combatRoundOver();
 		}
 		
 		protected function chooseBlowpipe():void {

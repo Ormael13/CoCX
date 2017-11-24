@@ -47,7 +47,6 @@ public class Ceraph extends Monster
 					}
 				}
 			}
-			combatRoundOver();
 		}
 //[SPECIAL] – Whip Binding
 		private function ceraphSpecial2():void
@@ -77,7 +76,6 @@ public class Ceraph extends Monster
 					player.dynStats("lus", 5 + player.cor / 10 + player.lib / 20);
 				}
 			}
-			combatRoundOver();
 		}
 
 		//(Struggle)
@@ -92,7 +90,6 @@ public class Ceraph extends Monster
 				}
 				outputText("!");
 				player.removeStatusEffect(StatusEffects.Bound);
-				combatRoundOver();
 				return;
 			}
 			else {
@@ -142,7 +139,6 @@ public class Ceraph extends Monster
 				lust = (maxLust() * 0.33);
 				player.dynStats("lus", 30);
 				outputText("\n");
-				combatRoundOver();
 				return;
 			}
 			var damage:Number = 0;
@@ -242,7 +238,6 @@ public class Ceraph extends Monster
 			}
 			EngineCore.statScreenRefresh();
 			outputText("\n");
-			combatRoundOver();
 		}
 
 		override protected function performCombatAction():void

@@ -42,7 +42,6 @@ public class GolemsDummy extends AbstractGolem
 				if (choice == 3) backhand();
 			}
 			else eAttack();
-			combatRoundOver();
 		}
 		
 		public function GolemsDummy() 

@@ -26,7 +26,6 @@ public class Satyr extends Monster
 				}
 				else outputText("You successfully block it.");
 			}
-			combatRoundOver();
 		}
 				
 		private function satyrBate():void {
@@ -34,7 +33,6 @@ public class Satyr extends Monster
 			//(small Libido based Lust increase, and increase lust)
 			player.dynStats("lus", (player.lib/5)+4);
 			lust += 5;
-			combatRoundOver();
 		}
 		
 		internal function satyrCharge():void {
@@ -75,7 +73,6 @@ public class Satyr extends Monster
 					else outputText("He charges at you, but you successfully deflect it at the last second.");
 				}
 			}
-			combatRoundOver();
 		}
 			
 		private function bottleChug():void {
@@ -83,7 +80,6 @@ public class Satyr extends Monster
 			//(damage PC lust very slightly and raise the satyr's lust.)
 			player.dynStats("lus", (player.lib/5));
 			lust += 5;
-			combatRoundOver();
 		}
 		
 		//5:(Only executed at high lust) 
@@ -101,7 +97,6 @@ public class Satyr extends Monster
 				lust -= 50;
 				player.dynStats("lus", (player.sens/5+20));
 			}
-			combatRoundOver();
 		}
 		
 		override protected function performCombatAction():void

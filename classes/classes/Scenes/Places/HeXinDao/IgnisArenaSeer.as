@@ -87,7 +87,6 @@ public class IgnisArenaSeer extends Monster
 				if (this.statusEffectv1(StatusEffects.IgnisCounter) > 2) IgnisCastsComet();
 				else IgnisCastsFoxFire();
 			}
-			combatRoundOver();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void

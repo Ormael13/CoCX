@@ -27,7 +27,6 @@ public class Marae extends Monster
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		
 		public function tentacleRape():void {
@@ -50,14 +49,12 @@ public class Marae extends Monster
 				outputText("(+" + lustDmg + " lust)");
 				
 			}
-			combatRoundOver();
 		}
 		
 		//Pure Marae's specials
 		public function smite():void {
 			outputText("Marae mouths a chant. The clouds gather and quickly darkens. <b>It looks like a lightning might strike you!</b>");
 			createStatusEffect(StatusEffects.Uber, 1, 0, 0, 0);
-			combatRoundOver();
 		}
 		public function smiteHit():void {
 			if (game.flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) {
@@ -71,7 +68,6 @@ public class Marae extends Monster
 				player.takeMagicDamage(damage, true);
 			}
 			if (hasStatusEffect(StatusEffects.Uber)) removeStatusEffect(StatusEffects.Uber);
-			combatRoundOver();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
@@ -93,7 +89,6 @@ public class Marae extends Monster
 				}
 				if (statusEffectv1(StatusEffects.Stunned) <= 0) removeStatusEffect(StatusEffects.Stunned);
 				else addStatusValue(StatusEffects.Stunned, 1, -1);
-				combatRoundOver();
 				return;
 			}
 			if (hasStatusEffect(StatusEffects.Fear)) {

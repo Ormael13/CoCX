@@ -107,7 +107,6 @@ use namespace CoC;
 					else */moveMasturbate();
 				}
 			}
-			combatRoundOver();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void

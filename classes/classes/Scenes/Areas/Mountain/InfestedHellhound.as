@@ -61,7 +61,6 @@ import classes.internals.*;
 			}
 			lust -= 25;
 			if (lust < 40) lust = 40;
-			combatRoundOver();
 		}
 
 		override public function defeated(hpVictory:Boolean):void

@@ -229,7 +229,6 @@ import classes.internals.*;
 			select = rand(4);
 			if (select == 0) {
 				eAttack();
-				combatRoundOver();
 				return;
 			}
 			if (player.hasCock() && !hasStatusEffect(StatusEffects.BimboBrawl)) rando = 1 + rand(3);
@@ -237,7 +236,6 @@ import classes.internals.*;
 			if (rando == 1) special1();
 			if (rando == 2) special2();
 			if (rando == 3) special3();
-			combatRoundOver();
 		}
 
 		override public function defeated(hpVictory:Boolean):void

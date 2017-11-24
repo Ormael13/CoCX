@@ -11,7 +11,6 @@ public class Farmers extends Monster
 		{
 			createStatusEffect(StatusEffects.Attacks,4,0,0,0);
 			eAttack();
-			combatRoundOver();
 		}
 
 		override public function defeated(hpVictory:Boolean):void

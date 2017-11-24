@@ -20,7 +20,6 @@ use namespace CoC;
 			}
 			if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("You barely manage to avoid a wide sweeping attack from dragon-boy by rolling under it.");
-				combatRoundOver();
 				return;
 			}
 			damage = int((str + 60 + weaponAttack) - Math.random()*(player.tou) - player.armorDef);
@@ -37,17 +36,14 @@ use namespace CoC;
 			var damage:Number = 0;
 			if (hasStatusEffect(StatusEffects.Blind)) {
 				outputText("Dragon-boy unwisely tries to make a massive swing while blinded, which you are easily able to avoid.");
-				combatRoundOver();
 				return;
 			}
 			if (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 60) {
 				outputText("You manage to roll out of the way of a massive overhand swing.");
-				combatRoundOver();
 				return;
 			}
 			if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 60) {
 				outputText("You easily sidestep as dragon-boy tries to deliver a huge overhand blow.");
-				combatRoundOver();
 				return;
 			}
 			damage = int((str + 30 + weaponAttack) - Math.random()*(player.tou) - player.armorDef);
@@ -80,7 +76,6 @@ use namespace CoC;
 			if (choice1 == 0) eAttack();
 			if (choice1 == 1) tedSpecialAttackOne();
 			if (choice1 == 2) tedSpecialAttackTwo();
-			combatRoundOver();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void

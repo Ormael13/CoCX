@@ -102,7 +102,6 @@ public class GoblinElder extends Goblin
 				tou += 15 * spellMultiplier();
 				fatigue += spellCostMight;
 			}
-			combatRoundOver();
 		}
 		
 		//Melee specials
@@ -119,7 +118,6 @@ public class GoblinElder extends Goblin
 				if (damage < 10) damage = 10;
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		
 		public function shieldBash():void {
@@ -139,7 +137,6 @@ public class GoblinElder extends Goblin
 				if (damage < 10) damage = 10;
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		
 		private function spellMultiplier():Number {

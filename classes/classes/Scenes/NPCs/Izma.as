@@ -100,7 +100,6 @@ import classes.Scenes.SceneLib;
 				else choice = 4;
 			}
 			if(choice == 4) IzmaSpecials3();
-			combatRoundOver();
 		}
 
 		override public function eAttack():void
@@ -122,7 +121,6 @@ import classes.Scenes.SceneLib;
 				else choice = 4;
 			}
 			if (choice == 4) IzmaSpecials3();
-			combatRoundOver();
 		}
 
 		override public function defeated(hpVictory:Boolean):void

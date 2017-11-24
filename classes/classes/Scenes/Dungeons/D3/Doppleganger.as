@@ -142,9 +142,7 @@ import classes.VaginaClass;
 					outputText("\n\n“<i>How did you even survive?</i>” the doppelganger looks in confusion. “<i>Regardless, I'm still taking your body.</i>”");
 					break;
 			}
-			
-			_roundCount++;
-			combatRoundOver();
+			_roundCount++; // ??? WTF
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
@@ -194,7 +192,6 @@ import classes.VaginaClass;
 			if (hasStatusEffect(StatusEffects.Stunned)) {
 				removeStatusEffect(StatusEffects.Stunned);
 				outputText("Your duplicate is too stunned, buying you another round!");
-				combatRoundOver();
 				return;
 			}
 			outputText("Your duplicate chuckles in the face of your attacks.");

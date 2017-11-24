@@ -9,7 +9,7 @@ package classes.Items.Weapons
 		
 		public function BlackWidow() 
 		{
-			super("BWidow", "B. Widow", "black widow", "a black widow", "slash", 20, 2048, "This weapon’s pommel design looks similar to that of a spiderweb. It is said to poison the soul of the user and become stronger the more wicked and depraved the fencer is. This weapon was clearly designed for a deceitful woman who toys with men's hearts in order to obtain that which she desires as befits a black widow.");
+			super("BWidow", "B. Widow", "black widow", "a black widow", "slash", 20, 2400, "This weapon’s pommel design looks similar to that of a spiderweb. It is said to poison the soul of the user and become stronger the more wicked and depraved the fencer is. This weapon was clearly designed for a deceitful woman who toys with men's hearts in order to obtain that which she desires as befits a black widow.");
 		}
 		override public function get attack():Number{
 			var boost:int = 0;

@@ -32,6 +32,7 @@ package classes.Items
 		public const DRAPIER:DragonsRapier = new DragonsRapier();
 		public const D_WHAM_:DualHugeWarhammer = new DualHugeWarhammer();
 		public const DL_AXE_:DualLargeAxe = new DualLargeAxe();
+		public const DOCDEST:DefiledOniChieftainDestroyer = new DefiledOniChieftainDestroyer();
 		public const DSWORD_:DualSwords = new DualSwords();
 		public const DSSPEAR:DemonSnakespear = new DemonSnakespear();
 		public const E_STAFF:EldritchStaff = new EldritchStaff();
@@ -61,6 +62,7 @@ package classes.Items
 		public const NPHBLDE:NephilimBlade = new NephilimBlade();
 		public const OTETSU :OniTetsubo = new OniTetsubo();
 		public const PIPE   :Weapon = new Weapon("Pipe   ","Pipe","pipe","a pipe","smash",2,80,"This is a simple rusted pipe of unknown origins.  It's hefty and could probably be used as an effective bludgeoning tool.");
+		public const POCDEST:PurifiedOniChieftainDestroyer = new PurifiedOniChieftainDestroyer();
 		public const PTCHFRK:Weapon = new Weapon("PtchFrk","Pitchfork","pitchfork","a pitchfork","stab",10,400,"This is a pitchfork.  Intended for farm work but also useful as stabbing weapon.");
 		public const PSWHIP :DualSuccubiWhip = new DualSuccubiWhip();
 		public const PWHIP  :DualWhip = new DualWhip();

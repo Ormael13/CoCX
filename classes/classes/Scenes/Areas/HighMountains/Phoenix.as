@@ -26,7 +26,6 @@ public class Phoenix extends Monster
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		
 		protected function phoenixFireBreath():void {
@@ -58,7 +57,6 @@ public class Phoenix extends Monster
 				}
 				removeStatusEffect(StatusEffects.Uber);
 			}
-			combatRoundOver();
 		}
 		
 		protected function lustBang():void {
@@ -76,7 +74,6 @@ public class Phoenix extends Monster
 				player.dynStats("lus", lustDmg, "scale", false);
 				outputText(" <b>(<font color=\"#ff00ff\">" + (Math.round(lustDmg*10)/10) + "</font>)</b>");
 			}
-			combatRoundOver();
 		}
 		
 		override protected function performCombatAction():void

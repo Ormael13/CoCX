@@ -861,7 +861,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//New lines and moving on!
 		outputText("\n\n");
 		doNext(combatMenu);
-		if(!combatRoundOver()) enemyAI();
+		if(!combatIsOver()) enemyAI();
 	}
 
 
@@ -1630,8 +1630,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		awardAchievement("How Do I Shot Web?", kACHIEVEMENTS.COMBAT_SHOT_WEB);
 		outputText("\n\n");
-		if(monster.HP < 1 || monster.lust > monster.maxLust()) combatRoundOver();
-		else enemyAI();
+		if(!combatIsOver()) enemyAI();
 	}
 	public function scyllaGrapple():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
@@ -1805,8 +1804,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		player.tailVenom -= 25;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
-		if(monster.HP < 1 || monster.lust > monster.maxLust()) combatRoundOver();
-		else enemyAI();
+		if (!combatIsOver()) enemyAI();
 	}
 	public function spiderBiteAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
@@ -1852,8 +1850,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		player.tailVenom -= 25;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
-		if(monster.HP < 1 || monster.lust > monster.maxLust()) combatRoundOver();
-		else enemyAI();
+		if (!combatIsOver()) enemyAI();
 	}
 	public function fenrirFrostbite():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
@@ -1903,8 +1900,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			outputText("You lunge headfirst, maw open for a bite. Your attempt fails horrendously, as " + monster.a + monster.short + " manages to counter your lunge, knocking your head away with enough force to make your ears ring.");
 		}
 		outputText("\n\n");
-		if(monster.HP < 1 || monster.lust > monster.maxLust()) combatRoundOver();
-		else enemyAI();
+		if (!combatIsOver()) enemyAI();
 	}
 //Mantis Omni Slash (AoE attack)
 	public function mantisMultiSlash():void {
@@ -2495,7 +2491,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		monster.teased(monster.lustVuln * damage);
 		outputText("\n\n");
 		//Sets up for end of combat, and if not, goes to AI.
-		if(!combatRoundOver()) enemyAI();
+		if(!combatIsOver()) enemyAI();
 	}
 //Mouf Attack
 // (Similar to the bow attack, high damage but it raises your fatigue).
@@ -2732,8 +2728,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
 		}
 		combat.HeroBaneProc();
-		if(monster.HP < 1 || monster.lust > monster.maxLust()) combatRoundOver();
-		else enemyAI();
+		if (!combatIsOver())enemyAI();
 	}
 
 	public function shieldBash():void {

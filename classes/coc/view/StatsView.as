@@ -23,6 +23,20 @@ public class StatsView extends Block {
 	public static var SidebarBackgrounds:Array = [SidebarBg1,SidebarBg2,SidebarBg3,SidebarBg4,null,SidebarBgKaizo];
 	public static const ValueFontOld:String    = 'Lucida Sans Typewriter';
 	public static const ValueFont:String       = 'Georgia';
+	
+	public static const LABEL_FORMAT:Object = {
+		font:'Times New Roman',
+		bold:true,
+		size:22
+	};
+	public static const TEXT_FORMAT:Object = {
+		font:ValueFont,
+		size:16
+	};
+	public static const TIME_FORMAT:Object = {
+		font:'Lucida Sans Typewriter',
+		size:18
+	};
 
 	private var sideBarBG:BitmapDataSprite;
 	private var nameText:TextField;
@@ -71,15 +85,6 @@ public class StatsView extends Block {
 				gap: 1
 			}
 		});
-		const LABEL_FORMAT:Object = {
-			font:'Times New Roman',
-			bold:true,
-			size:22
-		};
-		const TIME_FORMAT:Object = {
-			font:'Lucida Sans Typewriter',
-			size:18
-		};
 		StatBar.setDefaultOptions({
 			barColor: '#600000',
 			width: innerWidth

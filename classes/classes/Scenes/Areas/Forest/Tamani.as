@@ -75,7 +75,6 @@ public class Tamani extends Goblin
 				}
 			}
 			player.dynStats("lus", (rand(player.lib/5)+3+(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED])));
-			combatRoundOver();
 		}
 
 		override public function defeated(hpVictory:Boolean):void

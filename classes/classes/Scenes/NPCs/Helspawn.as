@@ -25,7 +25,6 @@ public class Helspawn extends Monster
 			choices[rand(choices.length)]();
 			//Tail Whip
 			if(rand(4) == 0) tailWhipShitYo();
-			combatRoundOver();
 		}
 
 //Basic Attack - Twin Strike

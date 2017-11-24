@@ -25,7 +25,6 @@ public class Zetaz extends Monster
 			if(hasStatusEffect(StatusEffects.Stunned)) {
 				outputText("Your foe is too dazed from your last hit to strike back!");
 				removeStatusEffect(StatusEffects.Stunned);
-				combatRoundOver();
 				return;
 			}
 			var select:Number=1;
@@ -43,7 +42,6 @@ public class Zetaz extends Monster
 					removeStatusEffect(StatusEffects.Constricted);
 				}
 				addStatusValue(StatusEffects.Constricted,1,-1);
-				combatRoundOver();
 				return;
 			}
 			//STANDARD COMBAT STATUS AFFECTS END HERE
@@ -94,7 +92,6 @@ public class Zetaz extends Monster
 					gigaArouse();
 				}
 			}
-			combatRoundOver();
 		}
 		
 		public function gigaArouse():void {
@@ -115,7 +112,6 @@ public class Zetaz extends Monster
 				if (player.lust >= 60 && player.vaginas[0].vaginalWetness == AppearanceDefs.VAGINA_WETNESS_SLAVERING && player.vaginas.length == 1) outputText("Your [vagina] instantly soaks your groin with the heady proof of your need.  You wonder just how slippery you could " + a + short + "'s dick when it's rammed inside you?  ");
 			}
 			if(player.lust >= player.maxLust()) doNext(SceneLib.combat.endLustLoss);
-			else combatRoundOver();
 		}
 
 		

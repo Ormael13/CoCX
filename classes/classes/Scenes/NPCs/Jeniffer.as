@@ -17,7 +17,6 @@ package classes.Scenes.NPCs
 				if (!player.hasStatusEffect(StatusEffects.IzmaBleed) && rand(2) == 0) Specials1();
 				else eAttack();
 			}
-			combatRoundOver();
 		}
 		
 		public function Specials1():void {

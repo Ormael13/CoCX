@@ -2,6 +2,7 @@
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
+import classes.Scenes.SceneLib;
 
 public class TentacleBeastScene extends BaseContent{
 
@@ -132,7 +133,6 @@ private function tentacleEntice():void {
 			outputText("You begin shaking your hips and grabbing your [allbreasts] to distract the creature. However, the near-miss from the tentacle it attempted to swat you with convinces you of its desire to beat your ass, rather than fuck it.\n\n");
 		}
 	}
-	combatRoundOver();
 }
 
 internal function tentacleVictoryRape():void {

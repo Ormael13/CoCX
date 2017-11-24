@@ -61,7 +61,6 @@ public class Diva extends Monster {
             if(finalFight && !player.hasStatusEffect(StatusEffects.Blind)){options.push(moveDarkness);}
             if(attackSucceeded()){options[rand(options.length)]();}
         }
-        combatRoundOver();
     }
     private function display(ref:String,locals:*=null):void{
         _scene.display(ref,locals);

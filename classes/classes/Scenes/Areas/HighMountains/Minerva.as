@@ -27,7 +27,6 @@ public class Minerva extends Monster
 				outputText("  Her teeth dig right into your arm!  It's a bit of a struggle, but you're able to free yourself.  The damage doesn't look too serious. ");
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 
 //Flying kick:
@@ -48,7 +47,6 @@ public class Minerva extends Monster
 				damage = player.takeDamage(damage, true);
 			}
 			spe += 70;
-			combatRoundOver();
 		}
 
 //Tail-whip
@@ -69,7 +67,6 @@ public class Minerva extends Monster
 				if (hasStatusEffect(StatusEffects.TailWhip)) addStatusValue(StatusEffects.TailWhip, 1, 10);
 				else createStatusEffect(StatusEffects.TailWhip, 10, 0, 0, 0);
 			}
-			combatRoundOver();
 		}
 
 //Halberd stab:
@@ -88,7 +85,6 @@ public class Minerva extends Monster
 				outputText("  She pierces you right in the shoulder!  You wince in pain and step back, out of her reach again.");
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 
 //Halberd CHOP:
@@ -107,7 +103,6 @@ public class Minerva extends Monster
 				outputText("  You don't have time to avoid the downward chop and the axe head lands right in your shoulder blade!  You cry out in pain, but you can still move your arm despite the brutal blow.");
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 
 //White Fire
@@ -127,7 +122,6 @@ public class Minerva extends Monster
 			}
 			damage = Math.round(damage);
 			player.takeMagicDamage(damage, true);
-			combatRoundOver();
 		}
 
 //Lust Attacks for tainted Minerva
@@ -136,7 +130,6 @@ public class Minerva extends Monster
 		{
 			outputText("The blue beauty turns around and bends over so far that she uses her halberd like a pole to support herself.  She lifts her shark tail up so you can see her short-shorts hugging perfectly against her ample bottom.  Her tail waves to the left and to the right as she does a little booty shake for you.  The siren gives her big ass a nice, hard slap that echoes off the tower walls, and making it jiggle even more.  She quickly turns around to face you, smirking at what she just did. ");
 			player.dynStats("lus", 20 + player.lib / 10 + rand(5));
-			combatRoundOver();
 		}
 
 //Lust Attacks for all Minervas
@@ -145,7 +138,6 @@ public class Minerva extends Monster
 		{
 			outputText("Minerva stands, holding her halberd straight up next to her as she looks it over with a seductive stare.  Giving you a suggestive look she rolls out a two-foot long tongue from her mouth, licking a good length of the massive weapon, even wrapping her tongue around it a few times.  Suddenly she sucks her tongue back into her mouth and gives you a little smirk, almost to say \"<i>Yeah, I can do that... and more.</i>\" ");
 			player.dynStats("lus", 20 + player.lib / 10 + rand(5));
-			combatRoundOver();
 		}
 
 //Special attack
@@ -169,7 +161,6 @@ public class Minerva extends Monster
 				}
 				removeStatusEffect(StatusEffects.SirenSong);
 			}
-			combatRoundOver();
 		}
 
 		override protected function performCombatAction():void

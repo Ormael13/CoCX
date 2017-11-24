@@ -72,7 +72,6 @@ public class CumWitch extends Monster
 				hits--;
 			}
 			player.dynStats("lus", damage+bonus);
-			combatRoundOver();
 		}
 
 		//*Attack: Cum Magic
@@ -82,7 +81,6 @@ public class CumWitch extends Monster
 			//(15-30 lust, based on libido)
 			player.dynStats("lus", 5+player.lib/12);
 			player.hoursSinceCum += 100;
-			combatRoundOver();
 		}
 		//*Attack: Cum Hunger
 		//*Used on vagoozles, spell that causes womb to literally thirst for sperm.  Unavoidable moderate lust gain.  Pregnant character's are immune.
@@ -90,12 +88,10 @@ public class CumWitch extends Monster
 			outputText("Moaning luridly, the Cum Witch swivels her staff and opens her hand to spread her fingers wide.  At the same time, you feel her magic slam into your midsection, burrowing into your womb.  ");
 			if(player.pregnancyIncubation > 0) {
 				outputText("Yet, whatever she tries to do fails, as her otherworldly conjuration falls apart as soon as soon as it reaches you.");
-				combatRoundOver();
 				return;
 			}
 			outputText("It worms around your uterus, tickling it faintly before gently kneading your ovaries.  Your [legs] go weak as your womb throbs, hungering for something to fill it.  A trickle of wetness squirts from your [vagina] as the magic fades, and you squirm as your lust rises. If only something would make you pregnant!  Your eyes dart unbidden to the Witch's groin before you yank them away.");
 			player.dynStats("lus", 5+player.lib/12);
-			combatRoundOver();
 		}
 
 		//*Attack: Gender Confusion
@@ -109,14 +105,12 @@ public class CumWitch extends Monster
 			else {
 				outputText("You parse the flood of information with mental focus and expel the intruder from your mind with a clenching of your sizable intellect.");
 			}
-			combatRoundOver();
 		}
 		//*Attack: Shell
 		public function shellDefense():void {
 			//*Grants immunity to all magic-based attacks for the next two turns.
 			outputText("The Cum Witch holds her staff in both hands and rotates it in a circle, chanting all the while.  Her voice rises in pitch and intensity until she's screaming out unwords of power.  With one final cry, she slams her staff down into the ground hard enough to kick up a puff of sandy dust.  It quickly settles, but the Cum Witch has some kind of glittering, reflective shield around herself now!");
 			createStatusEffect(StatusEffects.Shell,3,0,0,0);
-			combatRoundOver();
 		}
 
 		//*Attack: Cocknosis
@@ -142,7 +136,6 @@ public class CumWitch extends Monster
 				else outputText("\n\nYou play with yourself until you're on the very edge of orgasm.  At that moment, a loud *SNAP* startles you back to wakefulness, and as you look down at the cock bobbing just a few inches away, you realize it's hopeless.  You can't fight this.");
 				outputText("\n\nThe witch smiles knowingly.");
 			}
-			combatRoundOver();
 		}
 
 		//*Attack: Heal
@@ -151,7 +144,6 @@ public class CumWitch extends Monster
 			outputText("The Witch smirks at you and holds her free hand under her robes.  When she pulls it out, you realize she's gathered a handful of her cum.  She holds it up and exhales over it, the air making a slight whistle as it blows through her parted lips.  The ebony sorceress then smears the goop over her wounds, which seem to drink in the cum and vanish before your eyes.  She scolds, \"<i>Physical damage?  How artless.</i>\"");
 			addHP(maxHP() * 0.33);
 			fatigue += 10;
-			combatRoundOver();
 		}
 		
 		override protected function performCombatAction():void

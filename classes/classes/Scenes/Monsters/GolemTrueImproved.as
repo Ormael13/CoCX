@@ -50,7 +50,6 @@ package classes.Scenes.Monsters
 				if (choice1 == 3) backhand();
 			}
 			else eAttack();
-			combatRoundOver();
 		}
 		
 		public function GolemTrueImproved() 

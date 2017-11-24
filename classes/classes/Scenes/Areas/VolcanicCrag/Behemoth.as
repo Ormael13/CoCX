@@ -10,7 +10,6 @@ public class Behemoth extends Monster
 			outputText("The behemoth charges at you with his spiked tail raised!  ");
 			if (player.getEvasionRoll()) {
 				outputText("You manage to dodge in time to avoid his swinging tail!");
-				combatRoundOver();
 				return;
 			}
 			else {
@@ -21,13 +20,11 @@ public class Behemoth extends Monster
 			}
 			if (hasStatusEffect(StatusEffects.TailWhip)) addStatusValue(StatusEffects.TailWhip, 1, 5);
 			else createStatusEffect(StatusEffects.TailWhip, 5, 0, 0, 0);
-			combatRoundOver();
 		}
 		
 		public function tease():void {
 			outputText("The behemoth lifts his loincloth to reveal his large prick and waves his cock left and right.  You blush from looking at his cock.");
 			player.dynStats("lus", 10 + (player.cor / 10) + (player.lib / 10));
-			combatRoundOver();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void {

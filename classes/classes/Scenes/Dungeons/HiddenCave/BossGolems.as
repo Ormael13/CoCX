@@ -54,7 +54,6 @@ public class BossGolems extends AbstractGargoyle
 					GargoyleTailCleaveAttack();
 				}
 			}
-			combatRoundOver();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void

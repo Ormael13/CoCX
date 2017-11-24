@@ -56,7 +56,6 @@ public class Hel extends Monster
 			
 			statScreenRefresh();
 			outputText("\n");
-			combatRoundOver();
 		}
 
 		//Attack 2 – Tail Slap (Hit)
@@ -113,7 +112,6 @@ public class Hel extends Monster
 			if(damage > 0) damage = player.takeMagicDamage(damage, true);
 			statScreenRefresh();
 			outputText("\n");
-			combatRoundOver();
 		}
 
 		private function helCleavage():void {
@@ -132,7 +130,6 @@ public class Hel extends Monster
 				lust = Math.round(lust * 10)/10;
 				outputText(" <b>(<font color=\"#ff00ff\">+" + lust + " lust</font>)</b>\n");
 			}
-			combatRoundOver();
 		}
 		override protected function performCombatAction():void
 		{

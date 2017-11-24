@@ -402,7 +402,8 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 	if (newRound) combatStatusesUpdate(); //Update Combat Statuses
 	display();
 	statScreenRefresh();
-	if (combatRoundOver()) return;
+	if (newRound) combatRoundOver();
+	if (combatIsOver()) return;
 	ui.mainMenu();
 	//Modify menus.
 	if (SceneLib.urtaQuest.isUrta()) {
@@ -468,9 +469,9 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 		if (player.hasPerk(PerkLib.JobDefender)) {
 			buttons.add("Defend", defendpose).hint("Take no offensive action for this round.  Why would you do this?  Maybe because you will assume defensive pose?");
 		}
-	//	if (player.hasPerk(PerkLib.SecondWind)) {
-	//		buttons.add("Second Wind", seconwindGo).hint("");
-	//	}
+		if (player.hasPerk(PerkLib.SecondWind) && !player.hasStatusEffect(StatusEffects.CooldownSecondWind)) {
+			buttons.add("Second Wind", seconwindGo).hint("Enter your second wind, recovering from your wound and fatigue once per battle.");
+		}
 		if (!player.isFlying() && monster.isFlying()) {
 			if (player.canFly()) {
 				buttons.add("Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
@@ -987,7 +988,6 @@ public function packAttack():void {
 		statScreenRefresh();
 		outputText("\n");
 	}
-	combatRoundOver();
 }
 
 public function lustAttack():void {
@@ -1010,10 +1010,10 @@ public function lustAttack():void {
 		if (player.gender == 0) outputText("groin, before remember there is nothing there to caress.");
 	}
 	dynStats("lus", 10 + player.sens / 10);
-	combatRoundOver();
 }
 
 internal function wait():void {
+	var skipMonsterAction:Boolean = false; // If false, enemyAI() will be called. If true, combatRoundOver()
 	flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 1;
 	//Gain fatigue if not fighting sand tarps
 	if (!monster.hasStatusEffect(StatusEffects.Level)) {
@@ -1024,6 +1024,7 @@ internal function wait():void {
 	}
 	if (monster.hasStatusEffect(StatusEffects.PCTailTangle)) {
 		(monster as Kitsune).kitsuneWait();
+		skipMonsterAction = true;
 	}
 	else if (monster.hasStatusEffect(StatusEffects.Level)) {
 		if (monster is SandTrap) {
@@ -1037,29 +1038,28 @@ internal function wait():void {
 		clearOutput();
 		outputText("You sigh and relax in the chains, eying the well-endowed minotaur as you await whatever rough treatment he desires to give.  His musky, utterly male scent wafts your way on the wind, and you feel droplets of your lust dripping down your thighs.  You lick your lips as you watch the pre-cum drip from his balls, eager to get down there and worship them.  Why did you ever try to struggle against this fate?\n\n");
 		dynStats("lus", 30 + rand(5), "scale", false);
-		enemyAI();
 	}
 	else if (player.hasStatusEffect(StatusEffects.Whispered)) {
 		clearOutput();
 		outputText("You shake off the mental compulsions and ready yourself to fight!\n\n");
 		player.removeStatusEffect(StatusEffects.Whispered);
-		enemyAI();
 	}
 	else if (player.hasStatusEffect(StatusEffects.HarpyBind)) {
 		clearOutput();
 		outputText("The brood continues to hammer away at your defenseless self. ");
-		temp = 80 + rand(40);
-		temp = takeDamage(temp, true);
-		combatRoundOver();
+		var temp:int = 80 + rand(40);
+		takeDamage(temp, true);
+		skipMonsterAction = true;
 	}
 	else if (monster.hasStatusEffect(StatusEffects.QueenBind)) {
 		(monster as HarpyQueen).ropeStruggles(true);
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.GooBind)) {
 		clearOutput();
 		outputText("You writhe uselessly, trapped inside the goo girl's warm, seething body. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girl's pulsing body around yours.");
-		temp = takeDamage(.35 * player.maxHP(), true);
-		combatRoundOver();
+		takeDamage(.35 * player.maxHP(), true);
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.GooArmorBind)) {
 		clearOutput();
@@ -1071,7 +1071,7 @@ internal function wait():void {
 			else SceneLib.dungeons.heltower.gooArmorBeatsUpPC();
 			return;
 		}
-		combatRoundOver();
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.NagaBind)) {
 		clearOutput();
@@ -1081,23 +1081,24 @@ internal function wait():void {
 		outputText("'s grip on you tightens as you relax into the stimulating pressure.");
 		dynStats("lus", player.sens / 5 + 5);
 		takeDamage(5 + rand(5));
-		combatRoundOver();
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.ScyllaBind)) {
 		clearOutput();
 		outputText("You're being squeezed tightly by the scylla’s powerful tentacles. That's without mentioning the fact she's rubbing in your sensitive place quite a bit, giving you a knowing grin.");
 		dynStats("lus", player.sens / 4 + 20);
 		takeDamage(100 + rand(40));
-		combatRoundOver();
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.WolfHold)) {
 		clearOutput();
 		outputText("The wolf tear your body with its maw wounding you greatly as it starts to eat you alive!");
 		takeDamage(5 + rand(5));
-		combatRoundOver();
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.HolliConstrict)) {
 		(monster as Holli).waitForHolliConstrict(true);
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.TentacleBind)) {
 		clearOutput();
@@ -1107,70 +1108,75 @@ internal function wait():void {
 			outputText("The creature continues sucking your clit and now has latched two more suckers on your nipples, amplifying your growing lust. You must escape or you will become a mere toy to this thing!");
 		else outputText("The creature continues probing at your asshole and has now latched " + num2Text(player.totalNipples()) + " more suckers onto your nipples, amplifying your growing lust.  You must escape or you will become a mere toy to this thing!");
 		dynStats("lus", (8 + player.sens / 10));
-		combatRoundOver();
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) {
 		clearOutput();
 		(monster as FrostGiant).giantGrabFail(false);
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 		clearOutput();
 		(monster as FrostGiant).giantBoulderMiss();
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.IsabellaStunned)) {
 		clearOutput();
 		outputText("You wobble about for some time but manage to recover. Isabella capitalizes on your wasted time to act again.\n\n");
 		player.removeStatusEffect(StatusEffects.IsabellaStunned);
-		enemyAI();
 	}
 	else if (player.hasStatusEffect(StatusEffects.Stunned)) {
 		clearOutput();
 		outputText("You wobble about, stunned for a moment.  After shaking your head, you clear the stars from your vision, but by then you've squandered your chance to act.\n\n");
 		player.removeStatusEffect(StatusEffects.Stunned);
-		enemyAI();
 	}
 	else if (player.hasStatusEffect(StatusEffects.Confusion)) {
 		clearOutput();
 		outputText("You shake your head and file your memories in the past, where they belong.  It's time to fight!\n\n");
 		player.removeStatusEffect(StatusEffects.Confusion);
-		enemyAI();
 	}
 	else if (monster is Doppleganger) {
 		clearOutput();
 		outputText("You decide not to take any action this round.\n\n");
 		(monster as Doppleganger).handlePlayerWait();
-		enemyAI();
 	}
 	else {
 		clearOutput();
 		outputText("You decide not to take any action this round.\n\n");
+	}
+	if (skipMonsterAction) {
+		combatRoundOver();
+	} else {
 		enemyAI();
 	}
 }
 	
 	internal function struggle():void {
+		var skipMonsterAction:Boolean = false; // If false, enemyAI() will be called. If true, combatRoundOver()
 	if (monster.hasStatusEffect(StatusEffects.MinotaurEntangled)) {
 		clearOutput();
 		if (player.str / 9 + rand(20) + 1 >= 15) {
 			outputText("Utilizing every ounce of your strength and cunning, you squirm wildly, shrugging through weak spots in the chain's grip to free yourself!  Success!\n\n");
 			monster.removeStatusEffect(StatusEffects.MinotaurEntangled);
 			if (flags[kFLAGS.URTA_QUEST_STATUS] == 0.75) outputText("\"<i>No!  You fool!  You let her get away!  Hurry up and finish her up!  I need my serving!</i>\"  The succubus spits out angrily.\n\n");
-			combatRoundOver();
+			skipMonsterAction = true;
 		}
 		//Struggle Free Fail*
 		else {
 			outputText("You wiggle and struggle with all your might, but the chains remain stubbornly tight, binding you in place.  Damnit!  You can't lose like this!\n\n");
-			enemyAI();
 		}
 	}
 	else if (monster.hasStatusEffect(StatusEffects.PCTailTangle)) {
 		(monster as Kitsune).kitsuneStruggle();
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.HolliConstrict)) {
 		(monster as Holli).struggleOutOfHolli();
+		skipMonsterAction = true;
 	}
 	else if (monster.hasStatusEffect(StatusEffects.QueenBind)) {
 		(monster as HarpyQueen).ropeStruggles();
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.GooBind)) {
 		clearOutput();
@@ -1184,19 +1190,25 @@ internal function wait():void {
 			outputText("You writhe uselessly, trapped inside the goo girl's warm, seething body. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girl's pulsing body around yours. ");
 			temp = takeDamage(.15 * player.maxHP(), true);
 		}
-		combatRoundOver();
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.HarpyBind)) {
 		(monster as HarpyMob).harpyHordeGangBangStruggle();
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.GooArmorBind)) {
 		(monster as GooArmor).struggleAtGooBind();
+		if(player.statusEffectv1(StatusEffects.GooArmorBind) >= 5) {
+			if(monster.hasStatusEffect(StatusEffects.Spar)) SceneLib.valeria.pcWinsValeriaSparDefeat();
+			else SceneLib.dungeons.heltower.gooArmorBeatsUpPC();
+			return;
+		}
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.UBERWEB)) {
 		clearOutput();
 		outputText("You claw your way out of the webbing while Kiha does her best to handle the spiders single-handedly!\n\n");
 		player.removeStatusEffect(StatusEffects.UBERWEB);
-		enemyAI();
 	}
 	else if (player.hasStatusEffect(StatusEffects.NagaBind)) {
 		clearOutput();
@@ -1214,7 +1226,7 @@ internal function wait():void {
 			if (monster is CaiLin) takeDamage(10 + rand(8));
 			if(monster is Diva){(monster as Diva).moveBite();}
 		}
-		combatRoundOver();
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.ScyllaBind)) {
 		clearOutput();
@@ -1228,7 +1240,7 @@ internal function wait():void {
 			dynStats("lus", player.sens / 5 + 5);
 			takeDamage(100 + rand(80));
 		}
-		combatRoundOver();
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.WolfHold)) {
 		clearOutput();
@@ -1240,10 +1252,11 @@ internal function wait():void {
 			outputText("The wolf tear your body with its maw wounding you greatly as it starts to eat you alive!");
 			takeDamage(7 + rand(5));
 		}
-		combatRoundOver();
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) {
 		(monster as FrostGiant).giantGrabStruggle();
+		skipMonsterAction = true;
 	}
 	else {
 		clearOutput();
@@ -1253,7 +1266,6 @@ internal function wait():void {
 			outputText("As the creature attempts to adjust your position in its grip, you free one of your [legs] and hit the beast in its beak, causing it to let out an inhuman cry and drop you to the ground smartly.\n\n");
 			player.removeStatusEffect(StatusEffects.TentacleBind);
 			monster.createStatusEffect(StatusEffects.TentacleCoolDown, 3, 0, 0, 0);
-			enemyAI();
 		}
 		//Fail to break free
 		else {
@@ -1265,9 +1277,14 @@ internal function wait():void {
 				outputText("The creature continues sucking your clit and now has latched two more suckers on your nipples, amplifying your growing lust. You must escape or you will become a mere toy to this thing!");
 			else outputText("The creature continues probing at your asshole and has now latched " + num2Text(player.totalNipples()) + " more suckers onto your nipples, amplifying your growing lust.  You must escape or you will become a mere toy to this thing!");
 			dynStats("lus", (3 + player.sens / 10 + player.lib / 20));
-			combatRoundOver();
+			skipMonsterAction = true;
 		}
 	}
+		if (skipMonsterAction) {
+			combatRoundOver();
+		} else {
+			enemyAI();
+		}
 }
 
 public function arrowsAccuracy():Number {
@@ -2312,8 +2329,10 @@ public function defendpose():void {
 }
 public function seconwindGo():void {
 	clearOutput();
-	outputText("\n\n");
-	player.createStatusEffect(StatusEffects.SecondWindRegen, 5, 0, 0, 0);
+	outputText("You enter your second wind, recovering your energy.\n\n");
+	fatigue((player.maxFatigue() - player.fatigue) / 2);
+	player.createStatusEffect(StatusEffects.SecondWindRegen, 10, 0, 0, 0);
+	player.createStatusEffect(StatusEffects.CooldownSecondWind, 0, 0, 0, 0);
 	wrathregeneration();
 	fatigueRecovery();
 	manaregeneration();
@@ -2651,14 +2670,14 @@ public function attack():void {
 		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 2;
 		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 5;
 	}
-	if (player.weapon == weapons.NPHBLDE || player.weapon == weapons.MASAMUN) {
+	if (player.weapon == weapons.NPHBLDE || player.weapon == weapons.MASAMUN || player.weapon == weapons.SESPEAR) {
 		if (monster.cor < 33) damage = Math.round(damage * 1.0);
 		else if (monster.cor < 50) damage = Math.round(damage * 1.1);
 		else if (monster.cor < 75) damage = Math.round(damage * 1.2);
 		else if (monster.cor < 90) damage = Math.round(damage * 1.3);
 		else damage = Math.round(damage * 1.4);
 	}
-	if (player.weapon == weapons.EBNYBLD || player.weapon == weapons.BLETTER) {
+	if (player.weapon == weapons.EBNYBLD || player.weapon == weapons.BLETTER || player.weapon == weapons.DSSPEAR) {
 		if (monster.cor >= 66) damage = Math.round(damage * 1.0);
 		else if (monster.cor >= 50) damage = Math.round(damage * 1.1);
 		else if (monster.cor >= 25) damage = Math.round(damage * 1.2);
@@ -2886,6 +2905,11 @@ public function attack():void {
 			outputText("\n" + monster.capitalA + monster.short + " reels from the brutal blow, stunned.");
 			if (!monster.hasStatusEffect(StatusEffects.Stunned)) monster.createStatusEffect(StatusEffects.Stunned,rand(2),0,0,0);
 		}
+		//15% Stun Chance
+		if ((player.weapon == weapons.POCDEST || player.weapon == weapons.DOCDEST) && rand(100) < 15 && monster.findPerk(PerkLib.Resolute) < 0) {
+			outputText("\n" + monster.capitalA + monster.short + " reels from the brutal blow, stunned.");
+			if (!monster.hasStatusEffect(StatusEffects.Stunned)) monster.createStatusEffect(StatusEffects.Stunned,rand(2),0,0,0);
+		}
 		//20% Stun chance
 		if (player.isFistOrFistWeapon() && player.findPerk(PerkLib.MightyFist) >= 0 && rand(5) == 0 && monster.findPerk(PerkLib.Resolute) < 0) {
 			outputText("\n" + monster.capitalA + monster.short + " reels from the brutal blow, stunned.");
@@ -2908,6 +2932,18 @@ public function attack():void {
 				else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your [weapon] leave behind.");
 			}
 		}
+	}
+	if (player.weapon == weapons.DSSPEAR) {
+	monster.str -= 2;
+	monster.spe -= 2;
+	if(monster.str < 1) monster.str = 1;
+	if(monster.spe < 1) monster.spe = 1;
+	if(monster.hasStatusEffect(StatusEffects.NagaVenom))
+	{
+		monster.addStatusValue(StatusEffects.NagaVenom,2,2);
+		monster.addStatusValue(StatusEffects.NagaVenom,1,2);
+	}
+	else monster.createStatusEffect(StatusEffects.NagaVenom, 2, 2, 0, 0);
 	}
 	
 	if (monster is JeanClaude && !player.hasStatusEffect(StatusEffects.FirstAttack))
@@ -3418,6 +3454,7 @@ public function enemyAIImpl():void {
 	}
 	if (player.hasStatusEffect(StatusEffects.TranceTransformation)) player.soulforce -= 50;
 	if (player.hasStatusEffect(StatusEffects.CrinosShape)) player.wrath -= mspecials.crinosshapeCost();
+	combatRoundOver();
 }
 public function finishCombat():void
 {
@@ -4511,6 +4548,7 @@ public function regeneration(combat:Boolean = true):void {
 		}
 		if (player.armor == armors.NURSECL) healingPercent += 0.5;
 		if (player.armor == armors.GOOARMR) healingPercent += (SceneLib.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 25 : 2) : 2);
+		if (player.weapon == weapons.SESPEAR) healingPercent += 2;
 		if (player.findPerk(PerkLib.LustyRegeneration) >= 0) healingPercent += 0.5;
 		if (player.findPerk(PerkLib.LizanRegeneration) >= 0) healingPercent += 1.5;
 		if (player.findPerk(PerkLib.LizanMarrow) >= 0) healingPercent += 0.5;
@@ -4542,6 +4580,7 @@ public function regeneration(combat:Boolean = true):void {
 		if (player.armorName == "skimpy nurse's outfit") healingPercent += 1;
 		if (player.armor == armors.NURSECL) healingPercent += 1;
 		if (player.armor == armors.GOOARMR) healingPercent += (SceneLib.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 16 : 3) : 3);
+		if (player.weapon == weapons.SESPEAR) healingPercent += 4;
 		if (player.findPerk(PerkLib.LustyRegeneration) >= 0) healingPercent += 1;
 		if (player.findPerk(PerkLib.LizanRegeneration) >= 0) healingPercent += 3;
 		if (player.findPerk(PerkLib.LizanMarrow) >= 0) healingPercent += 1;
@@ -4768,22 +4807,7 @@ public function display():void {
 		outputText("<B>/!\\BUG! Monster is not correctly initialized! </B>"+
 				monster.checkError+"</u></b>\n");
 	}
-	var hpDisplay:String = "";
-	var lustDisplay:String = "";
-	var fatigueDisplay:String = "";
-	var soulforceDisplay:String = "";
-	var manaDisplay:String = "";
-	var wrathDisplay:String = "";
-	var corruptionDisplay:String = "";
 	var math:Number = monster.HPRatio();
-	//hpDisplay = "(<b>" + String(int(math * 1000) / 10) + "% HP</b>)";
-	hpDisplay   = monster.HP + " / " + monster.maxHP() + " (" + (int(math * 1000) / 10) + "%)";
-	lustDisplay = Math.floor(monster.lust) + " / " + monster.maxLust();
-	fatigueDisplay = Math.floor(monster.fatigue) + " / " + monster.maxFatigue();
-	soulforceDisplay = Math.floor(monster.soulforce) + " / " + monster.maxSoulforce();
-	manaDisplay = Math.floor(monster.mana) + " / " + monster.maxMana();
-	wrathDisplay = Math.floor(monster.wrath) + " / " + monster.maxWrath();
-	corruptionDisplay = monster.cor + " / 100 ";
 
 	//trace("trying to show monster image!");
 	if (monster.imageName != "")
@@ -4897,46 +4921,34 @@ public function display():void {
 				outputText(", lashing you with strokes of red-hot desire. If you don’t take him down fast, you’re going to become his bitch.\n");
 			}
 		}
-		outputText("\n\n<b><u>" + capitalizeFirstLetter(monster.short) + "'s Stats</u></b>\n");
-		outputText("Level: " + monster.level + "\n");
-		outputText("HP: " + hpDisplay + "\n");
-		outputText("Lust: " + lustDisplay + "\n");
-		outputText("Fatigue: " + fatigueDisplay + "\n");
-		if (player.findPerk(PerkLib.SoulSense) >= 0) outputText("Soulforce: " + soulforceDisplay + "\n");
-		if (player.findPerk(PerkLib.JobSorcerer) >= 0) outputText("Mana: " + manaDisplay + "\n");
-		if (player.findPerk(PerkLib.SenseWrath) >= 0) outputText("Wrath: " + wrathDisplay + "\n");
-		if (player.findPerk(PerkLib.SenseCorruption) >= 0) outputText("Corruption: " + corruptionDisplay + "\n");
-		if (player.whenEyesOfTheHunterActivates()) {
-			outputText("\n----------------------------\n");
-			if (player.whenGeneralEnemyPerksDisplayed()) outputText("\n<b>General Type:</b>");
-			if (player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && player.sens >= 25) {
-				if (monster.hasPerk(PerkLib.EnemyBeastOrAnimalMorphType)) outputText("\n-Beast or Animal-morph");
-				if (monster.hasPerk(PerkLib.EnemyConstructType)) outputText("\n-Construct");
-				if (monster.hasPerk(PerkLib.EnemyGigantType)) outputText("\n-Gigant");
-				if (monster.hasPerk(PerkLib.EnemyGroupType)) outputText("\n-Group");
-				if (monster.hasPerk(PerkLib.EnemyPlantType)) outputText("\n-Plant");
-			}
-			if (player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && player.sens >= 50) {
-				if (monster.hasPerk(PerkLib.EnemyBossType)) outputText("\n-Boss");
-				if (monster.hasPerk(PerkLib.EnemyGodType)) outputText("\n-God");
-			}
-			if (player.whenElementalEnemyPerksDisplayed()) outputText("\n<b>Elemental Type:</b>");
-			if (player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && player.sens >= 50) {
-				if (monster.hasPerk(PerkLib.DarknessNature)) outputText("\n-Darkness Nature");
-				if (monster.hasPerk(PerkLib.FireNature)) outputText("\n-Fire Nature");
-				if (monster.hasPerk(PerkLib.IceNature)) outputText("\n-Ice Nature");
-				if (monster.hasPerk(PerkLib.LightningNature)) outputText("\n-Lightning Nature");
-			}
-			if (player.findPerk(PerkLib.EyesOfTheHunterMaster) >= 0 && player.sens >= 75) {
-				if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) outputText("\n-Darkness Vulnerability");
-				if (monster.findPerk(PerkLib.FireVulnerability) >= 0) outputText("\n-Fire Vulnerability");
-				if (monster.findPerk(PerkLib.IceVulnerability) >= 0) outputText("\n-Ice Vulnerability");
-				if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) outputText("\n-Lightning Vulnerability");
-				//if (monster.findPerk(PerkLib) >= 0) outputText("");
-				//if (monster.findPerk(PerkLib) >= 0) outputText("");
-			}
-			outputText("\n");
+		var generalTypes:/*String*/Array = [];
+		var elementalTypes:/*String*/Array = [];
+		if (player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && player.sens >= 25) {
+			if (monster.hasPerk(PerkLib.EnemyBeastOrAnimalMorphType)) generalTypes.push("Beast or Animal-morph");
+			if (monster.hasPerk(PerkLib.EnemyConstructType)) generalTypes.push("Construct");
+			if (monster.hasPerk(PerkLib.EnemyGigantType)) generalTypes.push("Gigant");
+			if (monster.hasPerk(PerkLib.EnemyGroupType)) generalTypes.push("Group");
+			if (monster.hasPerk(PerkLib.EnemyPlantType)) generalTypes.push("Plant");
 		}
+		if (player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && player.sens >= 50) {
+			if (monster.hasPerk(PerkLib.EnemyBossType)) generalTypes.push("Boss");
+			if (monster.hasPerk(PerkLib.EnemyGodType)) generalTypes.push("God");
+		}
+		if (player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && player.sens >= 50) {
+			if (monster.hasPerk(PerkLib.DarknessNature)) elementalTypes.push("Darkness Nature");
+			if (monster.hasPerk(PerkLib.FireNature)) elementalTypes.push("Fire Nature");
+			if (monster.hasPerk(PerkLib.IceNature)) elementalTypes.push("Ice Nature");
+			if (monster.hasPerk(PerkLib.LightningNature)) elementalTypes.push("Lightning Nature");
+		}
+		if (player.findPerk(PerkLib.EyesOfTheHunterMaster) >= 0 && player.sens >= 75) {
+			if (monster.hasPerk(PerkLib.DarknessVulnerability)) elementalTypes.push("Darkness Vulnerability");
+			if (monster.hasPerk(PerkLib.FireVulnerability)) elementalTypes.push("Fire Vulnerability");
+			if (monster.hasPerk(PerkLib.IceVulnerability)) elementalTypes.push("Ice Vulnerability");
+			if (monster.hasPerk(PerkLib.LightningVulnerability)) elementalTypes.push("Lightning Vulnerability");
+			//if (monster.findPerk(PerkLib) >= 0) outputText("");
+			//if (monster.findPerk(PerkLib) >= 0) outputText("");
+		}
+		mainView.monsterStatsView.setMonsterTypes(generalTypes,elementalTypes);
 	}
 	if (debug){
 		outputText("\n----------------------------\n");
@@ -4972,7 +4984,7 @@ public function showMonsterLust():void {
 		if (monster.spe < 1) monster.spe = 1;
 		if (monster.str < 1) monster.str = 1;
 		if (monster.statusEffectv3(StatusEffects.NagaVenom) >= 1) monster.lust += monster.statusEffectv3(StatusEffects.NagaVenom);
-		if (monster.lust > monster.maxLust()) combatRoundOver();
+		if (combatIsOver()) return;
 	}
 	if(monster.short == "harpy") {
 		//(Enemy slightly aroused) 
@@ -5110,10 +5122,15 @@ public function teaseXP(XP:Number = 0):void {
 }
 
 //VICTORY OR DEATH?
-public function combatRoundOverImpl():Boolean { //Called after the monster's action
+	// Called after the monster's action. Increments round counter. Setups doNext to win/loss/combat menu
+public function combatRoundOver():void {
 	combatRound++;
 	statScreenRefresh();
 	flags[kFLAGS.ENEMY_CRITICAL] = 0;
+	combatIsOver();
+}
+	// Returns true if combat is over. Setups doNext to win/loss/combat menu
+	public function combatIsOver():Boolean {
 	if (!inCombat) return false;
 	if(monster.HP < 1) {
 		doNext(endHpVictory);

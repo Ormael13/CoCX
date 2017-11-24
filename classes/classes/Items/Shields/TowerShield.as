@@ -19,5 +19,4 @@ package classes.Items.Shields
 			return (4 + block);
 		}
 	}
-
 }

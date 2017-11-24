@@ -94,7 +94,6 @@ public class ImpOverlord extends Imp
 				createStatusEffect(StatusEffects.Might, 20, 20, 0, 0);
 				fatigue += spellCostMight;
 			}
-			combatRoundOver();
 		}
 		
 		//Imp Fire
@@ -108,7 +107,6 @@ public class ImpOverlord extends Imp
 			damage = Math.round(damage);
 			player.takeMagicDamage(damage, true);
 			player.dynStats("lus", 20 + player.cor / 10);
-			combatRoundOver();
 		}
 
 		//Lust Attack
@@ -117,7 +115,6 @@ public class ImpOverlord extends Imp
 			outputText("Lowering his loincloth the imp reveals his inhumanly thick shaft.  He smirks and licks his lips as he gives his cock a squeeze, milking a few beads of clear pre from the tip.  You shake your head and try to ignore your growing need.");
 			//[+Lust]
 			player.dynStats("lus", 15 + player.lib / 5 + player.cor / 5);
-			combatRoundOver();
 		}
 
 		//Lust and Light Attack
@@ -128,7 +125,6 @@ public class ImpOverlord extends Imp
 			player.takeDamage(damage, true);
 			//[-HP(minor) // +Lust]
 			player.dynStats("lus", 25 + player.sens / 4 + player.cor / 10);
-			combatRoundOver();
 		}
 		
 		//Cum cannon!
@@ -139,12 +135,10 @@ public class ImpOverlord extends Imp
 			if (lust < 0) lust = 0;
 			if (player.getEvasionRoll()) {
 				outputText("You manage to dodge his corrupted cum thanks to your reaction!");
-				combatRoundOver();
 				return;
 			}
 			else if (player.shieldName == "dragon-shell shield" && rand(3) == 0) {
 				outputText("The shield managed to absorb the cum!");
-				combatRoundOver();
 				return;
 			}
 			else {
@@ -152,14 +146,12 @@ public class ImpOverlord extends Imp
 				player.slimeFeed();
 				player.dynStats("lus", 30 + player.sens / 4 + player.cor / 10);
 			}
-			combatRoundOver();
 		}
 		
 		public function clawAttack():void {
 			outputText("The imp overlord suddenly charges at you with his claws ready! ");
 			if (player.getEvasionRoll()) {
 				outputText("You manage to avoid his claws thanks to your reaction!");
-				combatRoundOver();
 				return;
 			}
 			else {
@@ -169,14 +161,12 @@ public class ImpOverlord extends Imp
 				if (damage < 20) damage = 20;
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 
 		public function doubleAttack():void {
 			outputText("The imp overlord suddenly charges at you with his claws ready and scimitar raised! ");
 			if (player.getEvasionRoll()) {
 				outputText("You manage to dodge his deadly attack!");
-				combatRoundOver();
 				return;
 			}
 			else {
@@ -193,7 +183,6 @@ public class ImpOverlord extends Imp
 				}
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		
 		override protected function performCombatAction():void

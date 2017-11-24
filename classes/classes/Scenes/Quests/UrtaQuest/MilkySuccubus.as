@@ -37,7 +37,6 @@ use namespace CoC;
 				player.dynStats("lus", 15);
 				createStatusEffect(StatusEffects.MilkyUrta, 3, 0, 0, 0);
 			}
-			combatRoundOver();
 		}
 
 		private function drinkMinoCum():void
@@ -55,7 +54,6 @@ use namespace CoC;
 			else {
 				outputText("\n\nShe frowns and looks behind her, pouting slightly when she turns to look back at you.  \"<i>Seems like I'm all out of cum.</i>\"  She grins evilly.  \"<i>I'll just have to get more after I'm done with you.</i>\"");
 			}
-			combatRoundOver();
 		}
 
 		private function succubusTease():void
@@ -65,7 +63,6 @@ use namespace CoC;
 			else if (rand(2) == 0) outputText("The succubus turns slightly and slowly bends over, sliding her hands down the sides of her milk laden jugs. \"<i>Mmm, would you help a poor girl relax? These things need some attention,</i>\" she says with a lust filled moan as her hands reach her multitude of nipples.");
 			else outputText("The succubus leans forwards holding her tits, while wrapping her fingers around her nipples.  \"<i>My boobs are soo full.  Would you like to help me drain them?</i>\" she says with a husky voice.");
 			player.dynStats("lus", 20);
-			combatRoundOver();
 		}
 
 		override public function defeated(hpVictory:Boolean):void

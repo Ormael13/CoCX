@@ -57,7 +57,6 @@ use namespace CoC;
 		override protected function performCombatAction():void {
 			if (this.HPRatio() < 0.5 && !hasStatusEffect(StatusEffects.DefendMonsterVer)) DefensiveStance();
 			else PentaStrike();
-			combatRoundOver();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void

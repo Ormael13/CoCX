@@ -4,12 +4,12 @@
  */
 package classes.Scenes.NPCs 
 {
-import classes.*;
-import classes.BodyParts.Skin;
-import classes.GlobalFlags.kFLAGS;
-import classes.internals.*;
-
-public class CaiLin extends Monster
+	import classes.*;
+	import classes.BodyParts.Skin;
+	import classes.internals.*;
+	import classes.GlobalFlags.kFLAGS;
+	
+	public class CaiLin extends Monster
 	{
 		override protected function performCombatAction():void
 		{
@@ -40,7 +40,6 @@ public class CaiLin extends Monster
 				}
 			}
 			if (choice == 5) castSpell();
-			combatRoundOver();
 		}
 		
 		public function medusaPoisonBiteAttack():void {

@@ -108,7 +108,6 @@ public class ObsidianGargoyle extends AbstractGargoyle
 				if (choice == 4) moveDevourMagic();
 				if (choice == 5) moveLustBlast();
 			}
-			combatRoundOver();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void

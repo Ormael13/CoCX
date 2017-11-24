@@ -23,7 +23,6 @@ public class Yeti extends Monster
 						outputText("<b>He is now stunned.</b>");
 						createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 					}
-					combatRoundOver();
 					return;
 				}
 				outputText("Like a white blur the yeti charges you, striking at you with his claws and slashing over your [armor] before a fist collides with your side, sending you sliding over the icy floor. ");
@@ -31,7 +30,6 @@ public class Yeti extends Monster
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		public function yetiTackleTumble():void {
 			if (player.getEvasionRoll()) {
@@ -48,7 +46,6 @@ public class Yeti extends Monster
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);				
 			}
-			combatRoundOver();
 		}
 		public function yetiSnowball():void {
 			if (player.getEvasionRoll()) {
@@ -57,7 +54,6 @@ public class Yeti extends Monster
 			else {
 				if (hasStatusEffect(StatusEffects.Blind) && rand(3) > 0) {
 					outputText("The beast takes a step back, mist forming into a ball in his clenched fist. It condenses into a ball before your eyes, and with a growl the beast whips it at you. Blind as he is, the ball ends up missing you and hitting the wall instead.");
-					combatRoundOver();
 					return;
 				}
 				outputText("The beast takes a step back, mist forming into a ball in his clenched fist. It condenses into a ball before your eyes, and with a growl the beast whips it at you. The ball slams into your [armor] and explodes into frost, you hiss at the sting. The frost is also restricting your movement. ");
@@ -70,7 +66,6 @@ public class Yeti extends Monster
 				tempSpeedLoss += 10;
 				player.dynStats("spe", -10);
 			}
-			combatRoundOver();
 			//take slight damage, reduce speed
 			//nothing
 		}
@@ -81,7 +76,6 @@ public class Yeti extends Monster
 				player.dynStats("lust", 20 + rand(10));
 			}
 			else outputText("The beast before you seems a bit distracted, a hand dipping to fondle his ballsack, but you keep your focus fixed on the monsters face, unwilling to let your guard waver for even a moment.");
-			combatRoundOver();
 		}
 		
 		override protected function performCombatAction():void

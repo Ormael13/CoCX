@@ -51,7 +51,6 @@ public class Phouka extends Monster
 					outputText("\nYou get clipped by the stallion's legs and hooves as he charges. As he comes around for another pass you check over your body, amazed none of your bones are broken after that.");
 				}
 			}
-			combatRoundOver();
 		}
 
 		protected function phoukaFightLustAttack():void
@@ -75,7 +74,6 @@ public class Phouka extends Monster
 				else outputText("You are hypnotized by the equine cock jabbing at the air.  Then the " + this.short + " charges past you and you can taste the musk in the air.");
 				player.dynStats("lus", 15 + player.lib / 10 + player.cor / 5 + rand(10));
 			}
-			combatRoundOver();
 		}
 
 		protected function phoukaFightSilence():void
@@ -101,7 +99,6 @@ public class Phouka extends Monster
 					player.createStatusEffect(StatusEffects.WebSilence, 0, 0, 0, 0); //Probably safe to reuse the same status affect as for the spider morphs
 				}
 			}
-			combatRoundOver();
 		}
 
 		override protected function performCombatAction():void

@@ -21,7 +21,6 @@ package classes.Scenes.Monsters
 				outputText(" They hits you square in the chest from a few different angles. ");
 				damage = player.takeDamage(damage, true);
 			}
-			combatRoundOver();
 		}
 		
 		public function overhandSmash():void {
@@ -50,7 +49,6 @@ package classes.Scenes.Monsters
 				if (choice1 == 3) backhand();
 			}
 			else eAttack();
-			combatRoundOver();
 		}
 		
 		public function GolemsBasic() 

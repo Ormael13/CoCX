@@ -18,7 +18,6 @@ public class HarpyMob extends Monster
 			//(Effect: Multiple light attacks)
 			createStatusEffect(StatusEffects.Attacks, 3 + rand(3),0,0,0);
 			eAttack();
-			combatRoundOver();
 		}
 		
 		//ATTACK TWO: Gangbang
@@ -43,7 +42,6 @@ public class HarpyMob extends Monster
 				player.removeStatusEffect(StatusEffects.HarpyBind);
 				outputText("With a mighty roar, you throw off the harpies grabbing you and return to the fight!");
 			}
-			combatRoundOver();
 		}
 		
 		//ATTACK THREE: LUSTY HARPIES!
@@ -57,7 +55,6 @@ public class HarpyMob extends Monster
 			}
 			outputText(".");
 			player.dynStats("lus", 10);
-			combatRoundOver();
 		}
 		
 		override protected function performCombatAction():void

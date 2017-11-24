@@ -50,7 +50,6 @@ public class BeeGirl extends Monster {
 			//Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind)) {
 				outputText(capitalA + short + " completely misses you with a blind sting!!");
-				combatRoundOver();
 				return;
 			}
 			//Determine if dodged!
@@ -58,13 +57,11 @@ public class BeeGirl extends Monster {
 				if (player.spe - spe < 8) outputText("You narrowly avoid " + a + short + "'s stinger!");
 				if (player.spe - spe >= 8 && player.spe - spe < 20) outputText("You dodge " + a + short + "'s stinger with superior quickness!");
 				if (player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow attempts to sting you.");
-				combatRoundOver();
 				return;
 			}
 			//determine if avoided with armor.
 			if (player.armorDef >= 10 && rand(4) > 0) {
 				outputText("Despite her best efforts, " + a + short + "'s sting attack can't penetrate your armor.");
-				combatRoundOver();
 				return;
 			}
 			//Sting successful!  Paralize or lust?

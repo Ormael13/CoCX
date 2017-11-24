@@ -49,7 +49,6 @@ public class Sheila extends Monster
 				damage = player.takeDamage(damage, true);
 			}
 			spe += 30;
-			combatRoundOver();
 		}
 
 		//special 2: flying kick rabbit punch (high damage, much lower accuracy than reg attack, deals concussion which adds 10-15 pts fatigue, may stun pc and prevent attack)
@@ -78,7 +77,6 @@ public class Sheila extends Monster
 				EngineCore.fatigue(10+rand(6));
 			}
 			spe += 60;
-			combatRoundOver();
 		}
 
 
@@ -128,7 +126,6 @@ public class Sheila extends Monster
 				}
 				player.dynStats("lus", 30 + player.lib/10 + player.cor/10);
 			}
-			combatRoundOver();
 		}
 
 		//2: Tittymonster
@@ -147,7 +144,6 @@ public class Sheila extends Monster
 			else {
 				outputText("  She has trouble even budging tits so comically mismatched to her slender frame; her hands just sink into the voluminous flesh when she tries to squeeze them together, but the demon doesn't manage to move mountains.  It's like watching someone try to push half-inflated swimming equipment around.  You actually laugh a little as she gives up, rubbing her lower back with a gripe.");
 			}
-			combatRoundOver();
 		}
 
 		//3: Splash (spd-based hit chance)
@@ -163,7 +159,6 @@ public class Sheila extends Monster
 			else {
 				outputText("You easily lean away from the path of her tainted fluids, and she sighs.  \"<i>You're no fun, mate.</i>\"");
 			}
-			combatRoundOver();
 		}
 		//4: Sit 'n Pout
 		//should only be used after turn 4 or 5
@@ -179,7 +174,6 @@ public class Sheila extends Monster
 				cleanupAfterCombat();
 				return;
 			}
-			combatRoundOver();
 			//end fight, suppress xp/gem/item reward, go to victory choices if lust >= 30
 		}
 
@@ -205,7 +199,6 @@ public class Sheila extends Monster
 				player.dynStats("lus", 25+player.sens/20 + player.lib/20);
 				//harder to resist and bigger damage than normal Suspicious Glint
 			}
-			combatRoundOver();
 		}
 
 		//6: "Pressure Points"
@@ -226,7 +219,6 @@ public class Sheila extends Monster
 				outputText("You're a bit unnerved, but soon realize that you can tell where Sheila is by listening for the telltale sounds of her colossal breasts scraping the ground as she draws closer to you.  With this in mind, you continue to face your opponent and back away as you wipe your eyes.");
 				outputText("\n\n\"<i>Aww, come on!</i>\" she whines.");
 			}
-			combatRoundOver();
 		}
 
 

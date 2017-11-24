@@ -95,7 +95,6 @@ import classes.Scenes.SceneLib;
 				opts[rand(opts.length)]();
 			}
 			
-			combatRoundOver();
 		}
 		
 		private function feminineMusk():void

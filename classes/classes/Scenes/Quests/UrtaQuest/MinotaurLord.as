@@ -45,7 +45,6 @@ use namespace CoC;
 				outputText("\n\nThe minotaur glares at you and snorts, obviously pissed at not getting his serving...");
 				addStatusValue(StatusEffects.MinoMilk, 1, 1);
 			}
-			SceneLib.combat.combatRoundOverImpl();
 		}
 
 		private function minotaurDisarm():void
@@ -74,7 +73,6 @@ use namespace CoC;
 				player.setWeapon(WeaponLib.FISTS);
 				player.createStatusEffect(StatusEffects.Disarmed, 2, 0, 0, 0);
 			}
-			SceneLib.combat.combatRoundOverImpl();
 		}
 
 		private function minotaurLordEntangle():void
@@ -91,7 +89,6 @@ use namespace CoC;
 				outputText("\n\n<b>You're tangled up in the minotaur lord's chain, and at his mercy, unless you can break free!</b>");
 				createStatusEffect(StatusEffects.MinotaurEntangled, 0, 0, 0, 0);
 			}
-			combatRoundOver();
 		}
 
 		private function minotaurCumPress():void
@@ -117,7 +114,6 @@ use namespace CoC;
 				outputText("You want another taste...");
 			}
 			removeStatusEffect(StatusEffects.MinotaurEntangled);
-			combatRoundOver();
 		}
 
 		private function minotaurPrecumTease():void
@@ -138,7 +134,6 @@ use namespace CoC;
 			//(1)
 			if (player.lust <= 75) outputText("  You shiver with need, wanting nothing more than to bury your face under that loincloth and slurp out every drop of goopey goodness.");
 			else outputText("  <b>You groan and lick your lips over and over, craving the taste of him in your mouth.</b>");
-			SceneLib.combat.combatRoundOverImpl();
 		}
 
 		override public function defeated(hpVictory:Boolean):void

@@ -103,7 +103,6 @@ public class FetishZealot extends Monster
 			outputText("The Zealot student looks at you a little shyly and sticks a pencil in his mouth while pushing a hand in front of his groin, trying to hide a rather obvious bulge.  The whole scene is rather cute, and you feel incredibly aroused afterwards.");
 		}
 		player.dynStats("lus", (7+rand(player.lib/20+player.cor/20)));
-		combatRoundOver();
 	}
 	//Special2: Lust transfer spell, it becomes more and 
 	//more likely that he will use this power as his lust gets 
@@ -112,7 +111,6 @@ public class FetishZealot extends Monster
 		outputText("The zealot suddenly cries out and extends his arms towards you; your mind is suddenly overwhelmed with a massive wave of arousal as images of every kind of fetish you can imagine wash over you, all blended together.  After a moment you are able to recover, but you notice that the Zealot doesn't seem to be as aroused as before.");
 		player.dynStats("lus", lust/2);
 		lust /= 2;
-		combatRoundOver();
 	}
 
 		override protected function postAttack(damage:int):void
