@@ -65,98 +65,86 @@ public class PerkMenu extends BaseContent {
 		clearOutput();
 		menu();
 		outputText("You will always attack ");
-		if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 5) outputText("six times");
-		if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 4) outputText("five times");
-		if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 3) outputText("four times");
-		if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 2) outputText("three times");
-		if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 1) outputText("twice");
-		if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] < 1) outputText("once");
+		var doubleAttackStyle:Function = curry(setFlag,doubleAttackOptions,kFLAGS.DOUBLE_ATTACK_STYLE);
+        var doubleAttackVal:int = flags[kFLAGS.DOUBLE_ATTACK_STYLE];
+        if (doubleAttackVal == 5) outputText("six times");
+		if (doubleAttackVal == 4) outputText("five times");
+		if (doubleAttackVal == 3) outputText("four times");
+		if (doubleAttackVal == 2) outputText("three times");
+		if (doubleAttackVal == 1) outputText("twice");
+		if (doubleAttackVal < 1) outputText("once");
 		outputText(" in combat turn");
-		if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 5) outputText(" using 75% of your current strength");
-		if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 4) outputText(" using 80% of your current strength");
-		if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 3) outputText(" using 85% of your current strength");
-		if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 2) outputText(" using 90% of your current strength");
-		if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 1) outputText(" using 95% of your current strength");
+		if (doubleAttackVal == 5) outputText(" using 75% of your current strength");
+		if (doubleAttackVal == 4) outputText(" using 80% of your current strength");
+		if (doubleAttackVal == 3) outputText(" using 85% of your current strength");
+		if (doubleAttackVal == 2) outputText(" using 90% of your current strength");
+		if (doubleAttackVal == 1) outputText(" using 95% of your current strength");
 		outputText(".");
 		outputText("\n\nYou can change it to different amount of attacks.");
-		if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 0) addButton(0, "All Single", singleAttack);
-		var maxFistAttacks:int = combat.maxFistAttacks();
-		var maxLargeAttacks:int = combat.maxLargeAttacks();
-		var maxCommonAttacks:int = combat.maxCommonAttacks();
-		var maxCurrentAttacks:int = combat.maxCurrentAttacks();
-		var maxAttacks:int = Math.max(maxFistAttacks,maxLargeAttacks,maxCommonAttacks);
 
-		if (maxAttacks >= 2 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 1) {
+        var maxCurrentAttacks:int = combat.maxCurrentAttacks();
+		var maxAttacks:int = Math.max(combat.maxFistAttacks(),combat.maxLargeAttacks(),combat.maxCommonAttacks());
+
+		if (doubleAttackVal != 0) addButton(0, "All Single", doubleAttackStyle,0);
+		if (maxAttacks >= 2 && doubleAttackVal != 1) {
 			if (maxCurrentAttacks < 2) addButtonDisabled(1, "All Double", "You current melee weapon not allow to use this option");
-			else addButton(1, "All Double", doubleAttack);
+			else addButton(1, "All Double", doubleAttackStyle,1);
 		}
-		if (maxAttacks >= 3 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 2) {
+		if (maxAttacks >= 3 && doubleAttackVal != 2) {
 			if (maxCurrentAttacks < 3) addButtonDisabled(5, "All Triple", "You current melee weapon not allow to use this option");
-			else addButton(5, "All Triple", tripleAttack);
+			else addButton(5, "All Triple", doubleAttackStyle,2);
 		}
-		if (maxAttacks >= 4 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 3) {
+		if (maxAttacks >= 4 && doubleAttackVal != 3) {
 			if (maxCurrentAttacks < 4) addButtonDisabled(6, "All Quadruple", "You current melee weapon not allow to use this option");
-			else addButton(6, "All Quadruple", quadrupleAttack);
+			else addButton(6, "All Quadruple", doubleAttackStyle,3);
 		}
-		if (maxAttacks >= 5 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 4) {
+		if (maxAttacks >= 5 && doubleAttackVal != 4) {
 			if (maxCurrentAttacks < 5) addButtonDisabled(10, "All Penta", "You current melee weapon not allow to use this option");
-			else addButton(10, "All Penta", pentaAttack);
+			else addButton(10, "All Penta", doubleAttackStyle,4);
 		}
-		if (maxAttacks >= 6 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 5) {
+		if (maxAttacks >= 6 && doubleAttackVal != 5) {
 			if (maxCurrentAttacks < 6) addButtonDisabled(11, "All Hexe", "You current melee weapon not allow to use this option");
-			else addButton(11, "All Hexe", hexaAttack);
+			else addButton(11, "All Hexa", doubleAttackStyle,5);
 		}
 
-if (kGAMECLASS.inCombat) addButton(14, "Back", combat.combatMenu);
+		if (kGAMECLASS.inCombat) addButton(14, "Back", combat.combatMenu);
         else addButton(14, "Back", displayPerks);
 	}
 
-	public function hexaAttack():void {
-		flags[kFLAGS.DOUBLE_ATTACK_STYLE] = 5;
-		doubleAttackOptions();
-	}
-	public function pentaAttack():void {
-		flags[kFLAGS.DOUBLE_ATTACK_STYLE] = 4;
-		doubleAttackOptions();
-	}
-	public function quadrupleAttack():void {
-		flags[kFLAGS.DOUBLE_ATTACK_STYLE] = 3;
-		doubleAttackOptions();
-	}
-	public function tripleAttack():void {
-		flags[kFLAGS.DOUBLE_ATTACK_STYLE] = 2;
-		doubleAttackOptions();
-	}
-	public function doubleAttack():void {
-		flags[kFLAGS.DOUBLE_ATTACK_STYLE] = 1;
-		doubleAttackOptions();
-	}
-	public function singleAttack():void {
-		flags[kFLAGS.DOUBLE_ATTACK_STYLE] = 0;
-		doubleAttackOptions();
-	}
-
 	public function doubleStrikeOptions():void {
+		const NONE:int = 0;
+		const FIRE:int = 1;
+		const ICE :int = 2;
+		const LIGHTNING:int = 3;
+		const DARKNESS:int = 4;
+		var toggleflag:Function = curry(toggleFlag,doubleStrikeOptions);
+        var doubleStrikeStyle:Function = curry(setFlag,doubleStrikeOptions,kFLAGS.DOUBLE_STRIKE_STYLE);
+        var elementalArrows:Function = curry(setFlag,doubleStrikeOptions,kFLAGS.ELEMENTAL_ARROWS);
 		clearOutput();
 		menu();
 		outputText("You will always shoot ");
-		if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 5) outputText("six");
-		if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 4) outputText("five");
-		if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 3) outputText("four");
-		if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 2) outputText("three");
-		if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 1) outputText("two");
-		if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] < 1) outputText("single");
+        var doubleStrikeVal:int = flags[kFLAGS.DOUBLE_STRIKE_STYLE];
+        if (doubleStrikeVal == 5) outputText("six");
+		if (doubleStrikeVal == 4) outputText("five");
+		if (doubleStrikeVal == 3) outputText("four");
+		if (doubleStrikeVal == 2) outputText("three");
+		if (doubleStrikeVal == 1) outputText("two");
+		if (doubleStrikeVal < 1) outputText("single");
 		outputText(" projectile");
-		if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] > 0) outputText("s");
+		if (doubleStrikeVal > 0) outputText("s");
 		outputText(" in combat.");
 		outputText("\n\nYou can change it to different amount of projectiles.");
 		if (player.findPerk(PerkLib.ElementalArrows) >= 0) {
 			outputText("\n\nIf you learned specific techniques you could even add some magical effects to the projectiles. (Working only with bows and crosbows)");
-			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 0) outputText("\n\nElemental effect added: <b>None</b>");
-			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) outputText("\n\nElemental effect added: <b>Fire</b>");
-			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) outputText("\n\nElemental effect added: <b>Ice</b>");
-			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) outputText("\n\nElemental effect added: <b>Lightning</b>");
-			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) outputText("\n\nElemental effect added: <b>Dakness</b>");
+			outputText("\n\nElemental effect added: <b>");
+			switch(flags[kFLAGS.ELEMENTAL_ARROWS]){
+				case NONE: outputText("None");break;
+				case FIRE: outputText("Fire");break;
+				case ICE : outputText("Ice") ;break;
+				case LIGHTNING: outputText("Lightning");break;
+				case DARKNESS: outputText("Darkness");break;
+			}
+			outputText("</b>");
 		}
 		if (player.findPerk(PerkLib.Cupid) >= 0) {
 			outputText("\n\nIf you learned specific black magical you could add it effects to the projectiles. (Working only with bows and crosbows)");
@@ -168,110 +156,58 @@ if (kGAMECLASS.inCombat) addButton(14, "Back", combat.combatMenu);
 			if (flags[kFLAGS.ENVENOMED_BOLTS] == 0) outputText("\n\nVenom effect added: <b>No</b>");
 			if (flags[kFLAGS.ENVENOMED_BOLTS] == 1) outputText("\n\nVenom effect added: <b>Yes</b>");
 		}
-		if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 0) addButton(0, "All Single", singleStrike);
-		var maxThrowingAttacks:int = combat.maxThrowingAttacks();
-		var maxCrossbowAttacks:int = combat.maxCrossbowAttacks();
-		var maxBowAttacks:int = combat.maxBowAttacks();
-		var maxCurrentRangeAttacks:int = combat.maxCurrentRangeAttacks();
-		var maxRangeAttacks:int = Math.max(maxThrowingAttacks, maxCrossbowAttacks, maxBowAttacks);
-		
-		if (maxRangeAttacks >= 2 && flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 1) {
-			if (maxCurrentRangeAttacks < 2) addButtonDisabled(1, "All Double", "You current range weapon not allow to use this option");
-			else addButton(1, "All Double", doubleStrike);
-		}
-		if (maxRangeAttacks >= 3 && flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 2) {
-			if (maxCurrentRangeAttacks < 3) addButtonDisabled(2, "All Triple", "You current range weapon not allow to use this option");
-			else addButton(2, "All Triple", tripleStrike);
-		}
-		if (maxRangeAttacks >= 4 && flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 3) {
-			if (maxCurrentRangeAttacks < 4) addButtonDisabled(5, "All Quad", "You current range weapon not allow to use this option");
-			else addButton(5, "All Quad", quadrupleStrike);
-		}
-		if (maxRangeAttacks >= 5 && flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 4) {
-			if (maxCurrentRangeAttacks < 5) addButtonDisabled(6, "All Penta", "You current range weapon not allow to use this option");
-			else addButton(6, "All Penta", pentaStrike);
-		}
-		if (maxRangeAttacks >= 6 && flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 5) {
-			if (maxCurrentRangeAttacks < 6) addButtonDisabled(7, "All Hexa", "You current range weapon not allow to use this option");
-			else addButton(7, "All Hexa", hexaStrike);
-		}
-		if (player.findPerk(PerkLib.ElementalArrows) >= 0 && flags[kFLAGS.ELEMENTAL_ARROWS] != 0) addButton(3, "None", normalArrows);
-		if (player.findPerk(PerkLib.ElementalArrows) >= 0 && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && flags[kFLAGS.ELEMENTAL_ARROWS] != 1) addButton(8, "Fire", fireArrows);
-		if (player.findPerk(PerkLib.ElementalArrows) >= 0 && player.hasStatusEffect(StatusEffects.KnowsIceSpike) && flags[kFLAGS.ELEMENTAL_ARROWS] != 2) addButton(9, "Ice", iceArrows);
-		if (player.findPerk(PerkLib.Cupid) >= 0 && flags[kFLAGS.CUPID_ARROWS] != 0) addButton(10, "None", normalArrows2);
-		if (player.findPerk(PerkLib.Cupid) >= 0 && player.hasStatusEffect(StatusEffects.KnowsArouse) && flags[kFLAGS.CUPID_ARROWS] != 1) addButton(11, "Arouse", arouseArrows);
-		if (player.findPerk(PerkLib.EnvenomedBolt) >= 0 && flags[kFLAGS.ENVENOMED_BOLTS] != 0) addButton(12, "None", normalArrows3);
-		if (player.findPerk(PerkLib.EnvenomedBolt) >= 0 && (player.tailType == AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN || player.tailType == AppearanceDefs.TAIL_TYPE_SCORPION || player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL || player.faceType == AppearanceDefs.FACE_SNAKE_FANGS || player.faceType == AppearanceDefs.FACE_SPIDER_FANGS) && flags[kFLAGS.ENVENOMED_BOLTS] != 1) addButton(13, "Venom", venomArrows);
 
-		var e:MouseEvent;
+        var maxCurrentRangeAttacks:int = combat.maxCurrentRangeAttacks();
+		var maxRangeAttacks:int = Math.max(combat.maxThrowingAttacks(), combat.maxCrossbowAttacks(), combat.maxBowAttacks());
+
+		if (doubleStrikeVal != 0) addButton(0, "All Single", doubleStrikeStyle,0);
+		if (maxRangeAttacks >= 2 && doubleStrikeVal != 1) {
+			if (maxCurrentRangeAttacks < 2) addButtonDisabled(1, "All Double", "You current range weapon not allow to use this option");
+			else addButton(1, "All Double", doubleStrikeStyle,1);
+		}
+		if (maxRangeAttacks >= 3 && doubleStrikeVal != 2) {
+			if (maxCurrentRangeAttacks < 3) addButtonDisabled(2, "All Triple", "You current range weapon not allow to use this option");
+			else addButton(2, "All Triple", doubleStrikeStyle,2);
+		}
+		if (maxRangeAttacks >= 4 && doubleStrikeVal != 3) {
+			if (maxCurrentRangeAttacks < 4) addButtonDisabled(5, "All Quad", "You current range weapon not allow to use this option");
+			else addButton(5, "All Quad", doubleStrikeStyle,3);
+		}
+		if (maxRangeAttacks >= 5 && doubleStrikeVal != 4) {
+			if (maxCurrentRangeAttacks < 5) addButtonDisabled(6, "All Penta", "You current range weapon not allow to use this option");
+			else addButton(6, "All Penta", doubleStrikeStyle,4);
+		}
+		if (maxRangeAttacks >= 6 && doubleStrikeVal != 5) {
+			if (maxCurrentRangeAttacks < 6) addButtonDisabled(7, "All Hexa", "You current range weapon not allow to use this option");
+			else addButton(7, "All Hexa", doubleStrikeStyle,5);
+		}
+		if (player.findPerk(PerkLib.ElementalArrows) >= 0 && flags[kFLAGS.ELEMENTAL_ARROWS] != 0) addButton(3, "None", elementalArrows,NONE);
+		if (player.findPerk(PerkLib.ElementalArrows) >= 0 && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && flags[kFLAGS.ELEMENTAL_ARROWS] != 1) addButton(8, "Fire", elementalArrows,FIRE);
+		if (player.findPerk(PerkLib.ElementalArrows) >= 0 && player.hasStatusEffect(StatusEffects.KnowsIceSpike) && flags[kFLAGS.ELEMENTAL_ARROWS] != 2) addButton(9, "Ice", elementalArrows,ICE);
+		if (player.findPerk(PerkLib.Cupid) >= 0 && flags[kFLAGS.CUPID_ARROWS] != 0) addButton(10, "None", toggleflag,kFLAGS.CUPID_ARROWS,false);
+		if (player.findPerk(PerkLib.Cupid) >= 0 && player.hasStatusEffect(StatusEffects.KnowsArouse) && flags[kFLAGS.CUPID_ARROWS] != 1) addButton(11, "Arouse", toggleflag,kFLAGS.CUPID_ARROWS,true);
+		if (player.findPerk(PerkLib.EnvenomedBolt) >= 0 && flags[kFLAGS.ENVENOMED_BOLTS] != 0) addButton(12, "None", toggleflag,kFLAGS.ENVENOMED_BOLTS,false);
+		if (
+				player.findPerk(PerkLib.EnvenomedBolt) >= 0
+				&& (player.tailType == AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN
+						|| player.tailType == AppearanceDefs.TAIL_TYPE_SCORPION
+						|| player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL
+						|| player.faceType == AppearanceDefs.FACE_SNAKE_FANGS
+						|| player.faceType == AppearanceDefs.FACE_SPIDER_FANGS)
+				&& flags[kFLAGS.ENVENOMED_BOLTS] != 1
+		)
+		{
+            addButton(13, "Venom", toggleflag,kFLAGS.ENVENOMED_BOLTS,true);
+		}
         if (kGAMECLASS.inCombat) addButton(14, "Back", combat.combatMenu);
         else addButton(14, "Back", displayPerks);
-	}
 
-	public function darknessArrows():void {
-		flags[kFLAGS.ELEMENTAL_ARROWS] = 4;
-		doubleStrikeOptions();
-	}
-	public function lightningArrows():void {
-		flags[kFLAGS.ELEMENTAL_ARROWS] = 3;
-		doubleStrikeOptions();
-	}
-	public function iceArrows():void {
-		flags[kFLAGS.ELEMENTAL_ARROWS] = 2;
-		doubleStrikeOptions();
-	}
-	public function fireArrows():void {
-		flags[kFLAGS.ELEMENTAL_ARROWS] = 1;
-		doubleStrikeOptions();
-	}
-	public function normalArrows():void {
-		flags[kFLAGS.ELEMENTAL_ARROWS] = 0;
-		doubleStrikeOptions();
-	}
-	public function arouseArrows():void {
-		flags[kFLAGS.CUPID_ARROWS] = 1;
-		doubleStrikeOptions();
-	}
-	public function normalArrows2():void {
-		flags[kFLAGS.CUPID_ARROWS] = 0;
-		doubleStrikeOptions();
-	}
-	public function venomArrows():void {
-		flags[kFLAGS.ENVENOMED_BOLTS] = 1;
-		doubleStrikeOptions();
-	}
-	public function normalArrows3():void {
-		flags[kFLAGS.ENVENOMED_BOLTS] = 0;
-		doubleStrikeOptions();
-	}
-	public function hexaStrike():void {
-		flags[kFLAGS.DOUBLE_STRIKE_STYLE] = 5;
-		doubleStrikeOptions();
-	}
-	public function pentaStrike():void {
-		flags[kFLAGS.DOUBLE_STRIKE_STYLE] = 4;
-		doubleStrikeOptions();
-	}
-	public function quadrupleStrike():void {
-		flags[kFLAGS.DOUBLE_STRIKE_STYLE] = 3;
-		doubleStrikeOptions();
-	}
-	public function tripleStrike():void {
-		flags[kFLAGS.DOUBLE_STRIKE_STYLE] = 2;
-		doubleStrikeOptions();
-	}
-	public function doubleStrike():void {
-		flags[kFLAGS.DOUBLE_STRIKE_STYLE] = 1;
-		doubleStrikeOptions();
-	}
-	public function singleStrike():void {
-		flags[kFLAGS.DOUBLE_STRIKE_STYLE] = 0;
-		doubleStrikeOptions();
 	}
 
 	public function spellautocastOptions():void {
 		clearOutput();
 		menu();
+		var toggleflag:Function = curry(toggleFlag,spellautocastOptions);
 		outputText("You can choose to autocast or not specific buff spells at the start of each combat.\n");
 		if (player.findPerk(PerkLib.Spellsword) >= 0) {
 			outputText("\n<b>Charge Weapon:</b> ");
@@ -298,165 +234,89 @@ if (kGAMECLASS.inCombat) addButton(14, "Back", combat.combatMenu);
 			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) outputText("On");
 			else outputText("Off");
 		}
-		if (flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] != 0) addButton(0, "Autocast", autoChargeWeapon);
-		if (player.findPerk(PerkLib.Spellsword) >= 0 && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] != 1) addButton(5, "Manual", manualChargeWeapon);
-		if (flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] != 0) addButton(1, "Autocast", autoChargeArmor);
-		if (player.findPerk(PerkLib.Spellarmor) >= 0 && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] != 1) addButton(6, "Manual", manualChargeArmor);
-		if (flags[kFLAGS.AUTO_CAST_MIGHT] != 0) addButton(2, "Autocast", autoMight);
-		if (player.findPerk(PerkLib.Battlemage) >= 0 && flags[kFLAGS.AUTO_CAST_MIGHT] != 1) addButton(7, "Manual", manualMight);
-		if (flags[kFLAGS.AUTO_CAST_BLINK] != 0) addButton(3, "Autocast", autoBlink);
-		if (player.findPerk(PerkLib.Battleflash) >= 0 && flags[kFLAGS.AUTO_CAST_BLINK] != 1) addButton(8, "Manual", manualBlink);
-		if (player.findPerk(PerkLib.FortressOfIntellect) >= 0 && !player.hasStatusEffect(StatusEffects.FortressOfIntellect)) addButton(12, "FoI On", toggleOnFortressOfIntelect);
-		if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) addButton(13, "FoI Off", toggleOffFortressOfIntelect);
+		if (flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] != 0) addButton(0, "Autocast", toggleflag,kFLAGS.AUTO_CAST_CHARGE_WEAPON,false);
+		if (player.findPerk(PerkLib.Spellsword) >= 0 && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] != 1) addButton(5, "Manual", toggleflag,kFLAGS.AUTO_CAST_CHARGE_WEAPON,true);
+		if (flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] != 0) addButton(1, "Autocast", toggleflag,kFLAGS.AUTO_CAST_CHARGE_ARMOR,false);
+		if (player.findPerk(PerkLib.Spellarmor) >= 0 && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] != 1) addButton(6, "Manual", toggleflag,kFLAGS.AUTO_CAST_CHARGE_ARMOR,true);
+		if (flags[kFLAGS.AUTO_CAST_MIGHT] != 0) addButton(2, "Autocast", toggleflag,kFLAGS.AUTO_CAST_MIGHT,false);
+		if (player.findPerk(PerkLib.Battlemage) >= 0 && flags[kFLAGS.AUTO_CAST_MIGHT] != 1) addButton(7, "Manual", toggleflag,kFLAGS.AUTO_CAST_MIGHT,true);
+		if (flags[kFLAGS.AUTO_CAST_BLINK] != 0) addButton(3, "Autocast", toggleflag,kFLAGS.AUTO_CAST_BLINK,false);
+		if (player.findPerk(PerkLib.Battleflash) >= 0 && flags[kFLAGS.AUTO_CAST_BLINK] != 1) addButton(8, "Manual", toggleflag,kFLAGS.AUTO_CAST_BLINK,false);
+		if (player.findPerk(PerkLib.FortressOfIntellect) >= 0 && !player.hasStatusEffect(StatusEffects.FortressOfIntellect)) addButton(12, "FoI On", toggleFortressOfIntelect,true);
+		if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) addButton(13, "FoI Off", toggleFortressOfIntelect,false);
 
 		var e:MouseEvent;
 		addButton(14, "Back", displayPerks);
+
+		function toggleFortressOfIntelect(on:Boolean):void{
+			if(on){player.createStatusEffect(StatusEffects.FortressOfIntellect,0,0,0,0);}
+			else{player.removeStatusEffect(StatusEffects.FortressOfIntellect);}
+			spellautocastOptions();
+		}
 	}
 
-	public function manualBlink():void {
-		flags[kFLAGS.AUTO_CAST_BLINK] = 1;
-		spellautocastOptions();
-	}
-	public function autoBlink():void {
-		flags[kFLAGS.AUTO_CAST_BLINK] = 0;
-		spellautocastOptions();
-	}
-	public function manualMight():void {
-		flags[kFLAGS.AUTO_CAST_MIGHT] = 1;
-		spellautocastOptions();
-	}
-	public function autoMight():void {
-		flags[kFLAGS.AUTO_CAST_MIGHT] = 0;
-		spellautocastOptions();
-	}
-	public function manualChargeArmor():void {
-		flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] = 1;
-		spellautocastOptions();
-	}
-	public function autoChargeArmor():void {
-		flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] = 0;
-		spellautocastOptions();
-	}
-	public function manualChargeWeapon():void {
-		flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] = 1;
-		spellautocastOptions();
-	}
-	public function autoChargeWeapon():void {
-		flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] = 0;
-		spellautocastOptions();
-	}
-	public function toggleOnFortressOfIntelect():void {
-		player.createStatusEffect(StatusEffects.FortressOfIntellect,0,0,0,0);
-		spellautocastOptions();
-	}
-	public function toggleOffFortressOfIntelect():void {
-		player.removeStatusEffect(StatusEffects.FortressOfIntellect);
-		spellautocastOptions();
-	}
 	
 	public function summonsbehaviourOptions():void {
+        var attackingElementalTypeFlag:int = flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE];
+        var elementalConjuerSummons:int = flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS];
+        var setflag:Function = curry(setFlag,summonsbehaviourOptions);
+        var attackingElementalType:Function = curry(setflag,kFLAGS.ATTACKING_ELEMENTAL_TYPE);
 		clearOutput();
 		menu();
 		outputText("You can choose how your summoned elementals will behave during each fight.\n\n");
 		outputText("\n<b>Elementals behavious:</b>\n");
-		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3) outputText("Elemental will attack enemy on it own alongside PC.");
-		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 2) outputText("Attacking instead of PC each time melee attack command is chosen.");
-		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] < 2) outputText("Not participating");
-		outputText("\n\n<b>Elemental, which would attack in case option to them helping in attacks is enabled:</b>\n");
-		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 1) outputText("Air");
-		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 2) outputText("Earth");
-		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 3) outputText("Fire");
-		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 4) outputText("Water");
-		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 10) outputText("Ether");
-		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 8) outputText("Wood");
-		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 9) outputText("Metal");
-		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 5) outputText("Ice");
-		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 6) outputText("Lightning");
-		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 7) outputText("Darkness");
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 1) addButton(0, "Air", attackingElementalAir);
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 2) addButton(1, "Earth", attackingElementalEarth);
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 3) addButton(2, "Fire", attackingElementalFire);
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 4) addButton(3, "Water", attackingElementalWater);
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsEther) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 10) addButton(4, "Ether", attackingElementalEther);
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsWood) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 8) addButton(5, "Wood", attackingElementalWood);
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsMetal) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 9) addButton(6, "Metal", attackingElementalMetal);
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 5) addButton(7, "Ice", attackingElementalIce);
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 6) addButton(8, "Lightning", attackingElementalLightning);
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness) && flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] != 7) addButton(9, "Darkness", attackingElementalDarkness);
-		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] > 1) addButton(10, "NotHelping", elementalNotAttacking);
-		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] != 2 && player.hasStatusEffect(StatusEffects.SummonedElementals)) addButton(11, "MeleeAtk", elementalAttackReplacingPCmeleeAttack);
-		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] != 3 && player.hasStatusEffect(StatusEffects.SummonedElementals) && player.hasPerk(PerkLib.FirstAttackElementals)) addButton(12, "Helping", elementalAttackingAlongsidePC);
 
-		var e:MouseEvent;
+        if (elementalConjuerSummons == 3) outputText("Elemental will attack enemy on it own alongside PC.");
+		if (elementalConjuerSummons == 2) outputText("Attacking instead of PC each time melee attack command is chosen.");
+		if (elementalConjuerSummons < 2) outputText("Not participating");
+		outputText("\n\n<b>Elemental, which would attack in case option to them helping in attacks is enabled:</b>\n");
+        switch(attackingElementalTypeFlag){
+			case 1: outputText("Air"); break;
+            case 2: outputText("Earth"); break;
+            case 3: outputText("Fire"); break;
+            case 4: outputText("Water"); break;
+            case 10: outputText("Ether"); break;
+            case 8: outputText("Wood"); break;
+            case 9: outputText("Metal"); break;
+            case 5: outputText("Ice"); break;
+            case 6: outputText("Lightning"); break;
+            case 7: outputText("Darkness"); break;
+		}
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir) && attackingElementalTypeFlag != 1) addButton(0, "Air", attackingElementalType,1);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth) && attackingElementalTypeFlag != 2) addButton(1, "Earth", attackingElementalType,2);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire) && attackingElementalTypeFlag != 3) addButton(2, "Fire", attackingElementalType,3);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater) && attackingElementalTypeFlag != 4) addButton(3, "Water", attackingElementalType,4);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsEther) && attackingElementalTypeFlag != 10) addButton(4, "Ether", attackingElementalType,10);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsWood) && attackingElementalTypeFlag != 8) addButton(5, "Wood", attackingElementalType,8);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsMetal) && attackingElementalTypeFlag != 9) addButton(6, "Metal", attackingElementalType,9);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce) && attackingElementalTypeFlag != 5) addButton(7, "Ice", attackingElementalType,5);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning) && attackingElementalTypeFlag != 6) addButton(8, "Lightning", attackingElementalType,6);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness) && attackingElementalTypeFlag != 7) addButton(9, "Darkness", attackingElementalType,7);
+		if (elementalConjuerSummons > 1) addButton(10, "NotHelping", setflag,kFLAGS.ELEMENTAL_CONJUER_SUMMONS,1);
+		if (elementalConjuerSummons != 2 && player.hasStatusEffect(StatusEffects.SummonedElementals)) addButton(11, "MeleeAtk", elementalAttackReplacingPCmeleeAttack);
+		if (elementalConjuerSummons != 3 && player.hasStatusEffect(StatusEffects.SummonedElementals) && player.hasPerk(PerkLib.FirstAttackElementals)) addButton(12, "Helping", setflag,kFLAGS.ELEMENTAL_CONJUER_SUMMONS,3);
+
         if (kGAMECLASS.inCombat) addButton(14, "Back", combat.combatMenu);
         else addButton(14, "Back", displayPerks);
+        function elementalAttackReplacingPCmeleeAttack():void {
+            flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 2;
+            if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 0) {
+                menu();
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) addButton(0, "Air", attackingElementalType,1);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) addButton(1, "Earth", attackingElementalType,2);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire)) addButton(2, "Fire", attackingElementalType,3);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater)) addButton(3, "Water", attackingElementalType,4);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsEther)) addButton(4, "Ether", attackingElementalType,10);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsWood)) addButton(5, "Wood", attackingElementalType,8);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsMetal)) addButton(6, "Metal", attackingElementalType,9);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce)) addButton(7, "Ice", attackingElementalType,5);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning)) addButton(8, "Lightning", attackingElementalType,6);
+                if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) addButton(9, "Darkness", attackingElementalType,7);
+            }
+        }
 	}
 
-	public function elementalNotAttacking():void {
-		flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 1;
-		summonsbehaviourOptions();
-	}
-	public function elementalAttackReplacingPCmeleeAttack():void {
-		flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 2;
-		if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 0) {
-			menu();
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) addButton(0, "Air", attackingElementalAir);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) addButton(1, "Earth", attackingElementalEarth);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire)) addButton(2, "Fire", attackingElementalFire);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater)) addButton(3, "Water", attackingElementalWater);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEther)) addButton(4, "Ether", attackingElementalEther);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWood)) addButton(5, "Wood", attackingElementalWood);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsMetal)) addButton(6, "Metal", attackingElementalMetal);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce)) addButton(7, "Ice", attackingElementalIce);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning)) addButton(8, "Lightning", attackingElementalLightning);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) addButton(9, "Darkness", attackingElementalDarkness);
-		}
-		summonsbehaviourOptions();
-	}
-	public function elementalAttackingAlongsidePC():void {
-		flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 3;
-		summonsbehaviourOptions();
-	}
-	public function attackingElementalAir():void {
-		flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 1;
-		summonsbehaviourOptions();
-	}
-	public function attackingElementalEarth():void {
-		flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 2;
-		summonsbehaviourOptions();
-	}
-	public function attackingElementalFire():void {
-		flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 3;
-		summonsbehaviourOptions();
-	}
-	public function attackingElementalWater():void {
-		flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 4;
-		summonsbehaviourOptions();
-	}
-	public function attackingElementalIce():void {
-		flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 5;
-		summonsbehaviourOptions();
-	}
-	public function attackingElementalLightning():void {
-		flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 6;
-		summonsbehaviourOptions();
-	}
-	public function attackingElementalDarkness():void {
-		flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 7;
-		summonsbehaviourOptions();
-	}
-	public function attackingElementalWood():void {
-		flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 8;
-		summonsbehaviourOptions();
-	}
-	public function attackingElementalMetal():void {
-		flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 9;
-		summonsbehaviourOptions();
-	}
-	public function attackingElementalEther():void {
-		flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = 10;
-		summonsbehaviourOptions();
-	}
+
 
 	public function golemsbehaviourOptions():void {
 		clearOutput();
@@ -465,21 +325,16 @@ if (kGAMECLASS.inCombat) addButton(14, "Back", combat.combatMenu);
 		outputText("\n<b>Pernament golems behavious:</b>\n");
 		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) outputText("Attacking at the begining of each turn (owner would need to just choose how many of them will be sent).");
 		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] < 1) outputText("Waiting for the owner to give an attack command each turn.");
-		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) addButton(10, "Waiting", golemsWaiting);
-		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] != 1) addButton(11, "Attacking", golemsAttacking);
+		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) addButton(10, "Waiting", golemsAttacking,false);
+		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] != 1) addButton(11, "Attacking", golemsAttacking,true);
 
 		var e:MouseEvent;
 		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu);
 		else addButton(14, "Back", displayPerks);
-	}
-
-	public function golemsWaiting():void {
-		flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] = 0;
-		golemsbehaviourOptions();
-	}
-	public function golemsAttacking():void {
-		flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] = 1;
-		golemsbehaviourOptions();
+        function golemsAttacking(attacking:Boolean):void {
+            flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] = (attacking)?1:0;
+            golemsbehaviourOptions();
+        }
 	}
 
 	public function perkDatabase(page:int=0, count:int=20):void {
@@ -515,6 +370,13 @@ if (kGAMECLASS.inCombat) addButton(14, "Back", combat.combatMenu);
 		if (page*count<allPerks.length) addButton(1,"Next",perkDatabase,page+1);
 		else addButtonDisabled(1,"Next");
 		addButton(9, "Back", playerMenu);
+	}
+    private function toggleFlag(returnTo:Function,flag:int,on:Boolean):void{
+        setFlag(returnTo,flag,((on)?1:0));
+    }
+	private function setFlag(returnTo:Function,flag:int,val:int):void{
+		flags[flag] =  val;
+		returnTo();
 	}
 	/* [INTERMOD: revamp]
 	 public function ascToleranceOption():void{
