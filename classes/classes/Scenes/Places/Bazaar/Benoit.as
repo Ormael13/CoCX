@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.Places.Bazaar {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 
 //  TIMES_IN_BENOITS:int = 562;
 //  BENOIT_AFFECTION:int = 563;
@@ -104,7 +104,7 @@ public function benoitInClutch():Boolean
 	
 	// Benoit enters "clutch" every 21 days, for 7 days
 	var startDay:int = flags[kFLAGS.FEMOIT_NEXTDAY_EVENT];
-    var currDay:int = kGAMECLASS.model.time.days;
+    var currDay:int = CoC.instance.model.time.days;
     var diffDays:int = (currDay - startDay) % 28;
 
 	if (diffDays >= 21) return true;
@@ -162,13 +162,13 @@ public function clearBenoitPreggers():void
 		flags[kFLAGS.FEMOIT_EGGS_LAID] += flags[kFLAGS.FEMOIT_EGGS];
 		flags[kFLAGS.FEMOIT_EGGS] = 0;
 		flags[kFLAGS.FEMOIT_INCUBATION] = 0;
-        flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] = kGAMECLASS.model.time.days; // Cycle "resets" based off birth day.
+        flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] = CoC.instance.model.time.days; // Cycle "resets" based off birth day.
     }
 }
 
 public function setBenoitShop(setButtonOnly:Boolean = false):void {
 	if (model.time.hours >= 9 && model.time.hours <= 17) {
-        if ((flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] == 1 && kGAMECLASS.model.time.days >= flags[kFLAGS.FEMOIT_NEXTDAY_EVENT]) || flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] != 1) {
+        if ((flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] == 1 && CoC.instance.model.time.days >= flags[kFLAGS.FEMOIT_NEXTDAY_EVENT]) || flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] != 1) {
 			if (flags[kFLAGS.TIMES_IN_BENOITS] == 0) 
 			{
 				if (!setButtonOnly) outputText("\n\nYou notice a large market stall wedged between two wagons, swaddled in carpets and overflowing with all manner of objects.  On top of its looming fabric canopy is a wooden sign with the words \"<b>Geckos Garbidg</b>\" crudely scrawled upon them.  You wonder what that's all about.");
@@ -201,7 +201,7 @@ public function benoitIntro():void {
 		suggest = eggySuggest;
 		suggestText = "Suggest";
 	}
-    else if (flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] == 1 && flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] <= kGAMECLASS.model.time.days && flags[kFLAGS.BENOIT_STATUS] == 0) {
+    else if (flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] == 1 && flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] <= CoC.instance.model.time.days && flags[kFLAGS.BENOIT_STATUS] == 0) {
 		femoitNextDayEvent();
 	}
 	else if (benoitInClutch() && flags[kFLAGS.FEMOIT_READY_FOR_EGGS] == 0 && (flags[kFLAGS.BENOIT_STATUS] == 1 || flags[kFLAGS.BENOIT_STATUS] == 2))
@@ -236,7 +236,7 @@ public function benoitIntro():void {
 			return;
 		}
 	}
-    else if (!benoitInClutch() && !benoitPreggers() && (kGAMECLASS.model.time.days - flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] >= 30) && (flags[kFLAGS.BENOIT_STATUS] > 0)) {
+    else if (!benoitInClutch() && !benoitPreggers() && (CoC.instance.model.time.days - flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] >= 30) && (flags[kFLAGS.BENOIT_STATUS] > 0)) {
 		if (flags[kFLAGS.FEMOIT_FIRST_CLUTCH_MISSED] == 0)
 		{
 			flags[kFLAGS.FEMOIT_FIRST_CLUTCH_MISSED]++;
@@ -1388,7 +1388,7 @@ public function benoitFeminise():void
 	{
 		outputText("You don't have the necessary ingredients to attempt this yet.");
 		outputText("\n\n<b>(Requires 2x Purified Succubus Milk, 1x Large Pink Egg, 1x Ovi Elixir, 1x Reptilium.)</b>");
-        kGAMECLASS.flushOutputTextToGUI();
+        CoC.instance.flushOutputTextToGUI();
     }
 	else
 	{
@@ -1411,7 +1411,7 @@ public function benoitFeminise():void
 
 		outputText("\n\n\"<i>C... could you come back tomorrow?</i>\" says " + benoitMF("Benoit","Benoite") + " unevenly.  \"<i>Zis is... I need some time to get my 'ead around zis.</i>\"  You put the books back on the counter, scratch a terrified-looking Pierre behind the ear, and take your leave.");
 
-flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] = kGAMECLASS.model.time.days + 1;
+flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] = CoC.instance.model.time.days + 1;
         flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] = 1;
 
 		menu();
@@ -1742,7 +1742,7 @@ public function femoitSexIntro():void
 		{
 			outputText("You don't have the necessary ingredients to attempt this yet.");
 			outputText("\n\n<b>(Requires 2x Purified Incubi Draft, 1x Purified Succubi's Delight, 1x Reptilium.)</b>");
-            kGAMECLASS.flushOutputTextToGUI();
+            CoC.instance.flushOutputTextToGUI();
         }
 		else
 		{

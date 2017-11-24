@@ -1,6 +1,5 @@
 package classes.Items.Consumables 
 {
-import classes.GlobalFlags.kGAMECLASS;
 import classes.Items.*;
 import classes.Scenes.SceneLib;
 

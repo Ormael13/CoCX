@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.SceneLib;
 
 public class ShouldraScene extends NPCAwareContent implements TimeAwareInterface {
@@ -50,13 +50,13 @@ public class ShouldraScene extends NPCAwareContent implements TimeAwareInterface
 					shouldraFollower.shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMakeThisFunctionNameQuestionMark();
 					needNext = true;
 				}
-                if (flags[kFLAGS.SHOULDRA_PLOT_COUNTDOWN] > 0 && kGAMECLASS.model.time.hours == 3) flags[kFLAGS.SHOULDRA_PLOT_COUNTDOWN]--;
+                if (flags[kFLAGS.SHOULDRA_PLOT_COUNTDOWN] > 0 && CoC.instance.model.time.hours == 3) flags[kFLAGS.SHOULDRA_PLOT_COUNTDOWN]--;
             }
 			return needNext;
 		}
 	
 		public function timeChangeLarge():Boolean {
-            if (shouldraFollower.followerShouldra() && flags[kFLAGS.SHOULDRA_PLOT_COUNTDOWN] == 0 && kGAMECLASS.model.time.hours == 3) {
+            if (shouldraFollower.followerShouldra() && flags[kFLAGS.SHOULDRA_PLOT_COUNTDOWN] == 0 && CoC.instance.model.time.hours == 3) {
                 flags[kFLAGS.SHOULDRA_PLOT_COUNTDOWN] = -1;
 				shouldraFollower.shouldraDream1();
 				return true;
@@ -432,7 +432,7 @@ private function slimeGinaFlation():void {
 	
 	outputText("The oozy evacuation keeps up for many long, pleasure-filled heartbeats, your breasts deflating as the slime spurts out of your body. Eventually, the spurts turn to a drizzle, and you push out the remainder of the goo with a compression of your back-to-normal boobs. Reaching into the diluted sage substance, you feel around for any signs of life for the poor ghost girl. You feel a slender hand wrap around your wrist, and you easily heave the spirit free of the twitching mess. Free of the mostly-empty influence of the green slime, she whimsically floats about you. \"<i>It took you long enough!</i>\" she berates you angrily. \"<i>...But, you managed to get me out of there with my sanity intact... and I DID have a good time, so...</i>\"  She substantiates in front of you, smiling radiantly. \"<i>Thanks,</i>\" she says amiably. \"<i>I'm gonna go home. Oh, before I go...</i>\"  She brazenly undoes her leggings, pulling them away from her crotch and reaching into her box. She extricates a good amount of ectoplasm, then pulls a small bottle from a pocket inside her tunic and squeezes the goop inside. With an amiable grin, she hands the bottle to you, and you nod your appreciation. You part ways there, with you redressing and heading back to your campsite, and the ghost girl beginning her trek back to the town ruins.");
 	player.orgasm();
-    if (kGAMECLASS.inCombat) {
+    if (CoC.instance.inCombat) {
         flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS.id;
 		cleanupAfterCombat();
 	}
@@ -491,7 +491,7 @@ private function slimeyPenorsAhoy():void {
 	outputText("You smile and shake your head. How much of her was left in that slime at the end, you wonder. Enough to recall a spell... oh well, you decide. You all came out unharmed, eventually. As soon as the ghost girl materializes, she rushes you and wraps you in a big hug. \"<i>I should be getting back now,</i>\" she admits. \"<i>Can't stick around here all day. Oh, before I go...</i>\"  She brazenly undoes her leggings, pulling them away from her crotch and reaching into her box. She extricates a good amount of ectoplasm, then pulls a small bottle from a pocket inside her tunic and squeezes the goop inside. With an amiable grin, she hands the bottle to you, and you nod your appreciation. You send her off, then begin back to your own camp. While redressing, you can't help a final cursory glance at the pile of slime, still humanoid in shape and now rubbing its enlarged measurements in mindless bliss. Interesting...\n\n");
 	player.orgasm();
 	flags[kFLAGS.SHOULDRA_SLIME_PENOR_TIMES]++;
-    if (kGAMECLASS.inCombat) {
+    if (CoC.instance.inCombat) {
         flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS.id;
 		cleanupAfterCombat();
 	}
@@ -610,7 +610,7 @@ private function penisLossThatIsntALoss():void {
 	outputText("Her pleasure dealt with, the ghost girl appears head-first from your belly, flowing out and reconstituting herself into the normal, brown-eyed girl you first encountered.  Almost as an afterthought, she reaches down and plunges a hand into her still-dripping cunt. Evidently, she's taken ahold of something, and with a bit of effort she tugs a handful of translucent green goo right out. \"<i>Ectoplasm,</i>\" she explains, reaching down and grabbing her tunic. Reaching into a pocket, she produces a small bottle and pushes the slimy substance inside. \"<i>Essentially the product of a ghost orgasm, which you've so kindly provided for me.</i>\" She smiles, hands you the bottle, then moves to her clothing and swiftly dresses. With a little wave, she wanders away, rounding a corner and disappearing from sight. You resolve to find her again—her magic was pretty fun!");
 	player.orgasm();
 	flags[kFLAGS.SHOULDRA_PENIS_DEFEAT_TIMES]++;
-    if (kGAMECLASS.inCombat) {
+    if (CoC.instance.inCombat) {
         flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS.id;
 		cleanupAfterCombat();
 	}
@@ -653,7 +653,7 @@ private function ghostBJFinisher(inside:Boolean):void {
 	else {
 		outputText("She wobbles almost exaggeratedly before falling sideways, smacking her head against the ground and sending up a small splash of cum.  If she felt any pain, however, she doesn't react to it at all, staring vacantly at a dilapidated building and drooling slightly.  That outta teach her to try to pull a fast one on you twice, you figure.  As you stride past her, you tug her pants down to her knees and scoop out a good amount of ectoplasm from her vagina.  You reach into her pocket and grab a bottle (honking her boob for good measure and eliciting an aroused twitch), dumping the goo in and stuffing it in your pack.  She'll probably find a goblin eventually, you figure as you begin your journey back to the camp.");
 	}
-    if (kGAMECLASS.inCombat) {
+    if (CoC.instance.inCombat) {
         flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS.id;
 		cleanupAfterCombat();
 	}
@@ -675,7 +675,7 @@ private function dewormYourGhost():void {
 	outputText("\n\n");
 	dynStats("lus", 15);
 	outputText("There's silence for a moment, then you are almost rendered unconscious as she cries, \"<i>NOOOOOOOOPE,</i>\" telepathically, surging out of your body in record time. She corporealizes and backs away from you until she bumps into one of the ruined buildings. Then, she's off, booking it down the street to get as far away from you as possible. You shrug, figuring at the very least you dealt with her arousal, albeit in an unexpected way, and begin your trek back to your camp.");
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 	flags[kFLAGS.SHOULDRA_WORM_SCENE_COUNTER]++;
@@ -719,7 +719,7 @@ private function penisGartuanGhostSmexVictory():void {
 	outputText("\"<i>THEY DON'T CALL ME 'THE DEVIL OF DICKINGS' FOR NOTHIN',</i>\" your dick-demon pipes in. The two of you share a laugh, and with a friendly wave, the spirit turns away. She sloshes through the layer of seed coating the ground, and you can't help but notice a little white fluid drip from her bare buttocks. The droplet causes a small wave to disperse through the jizz. You shake your head with a smile creeping across your cheeks. Spirit sex... what a ridiculous thing.\n\n");
 	player.orgasm();
 	flags[kFLAGS.SHOULDRA_EXGARTUAN_SPIRIT_SEX_COUNT]++;
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
@@ -745,7 +745,7 @@ private function ghostGinaWinSexings():void {
 	player.cuntChange(50,true,true,false);
 	player.orgasm();
 	flags[kFLAGS.SHOULDRA_VAGINAL_POSSESSIONS]++;
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
@@ -818,7 +818,7 @@ private function hermaphroditeGhostsCumEctoplasm():void {
 	outputText("Her pleasure dealt with, the ghost girl appears head-first from your belly, flowing out and reconstituting herself into the normal, brown-eyed girl you first encountered.  Almost as an afterthought, she smiles, moving to her clothing and swiftly dressing, then gives you a little wave before wandering away, rounding a corner and disappearing from sight. You resolve to find her again- her magic was pretty fun!");
 	player.orgasm();
 	flags[kFLAGS.SHOULDRA_HERMSEX_COUNT]++;
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
@@ -878,7 +878,7 @@ private function ourDadTaughtUsNotToBeAshamedOfOurDicks():void {
 	player.orgasm();
 	dynStats("sen", 1);
 	flags[kFLAGS.SHOULDRA_PENIS_DEFEAT_TIMES]++;
-    if (kGAMECLASS.inCombat) {
+    if (CoC.instance.inCombat) {
         flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS.id;
 		cleanupAfterCombat();
 	}
@@ -921,7 +921,7 @@ private function ghostGinaLosses():void {
 	flags[kFLAGS.SHOULDRA_VAGINAL_POSSESSIONS]++;
 	player.orgasm();
 	dynStats("sen", 1);
-    if (kGAMECLASS.inCombat) {
+    if (CoC.instance.inCombat) {
         flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS.id;
 		cleanupAfterCombat();
 	}
@@ -950,7 +950,7 @@ private function loseToShouldraAsHerm():void {
 	flags[kFLAGS.SHOULDRA_HERMSEX_COUNT]++;
 	player.orgasm();
 	dynStats("sen", 1);
-    if (kGAMECLASS.inCombat) {
+    if (CoC.instance.inCombat) {
         flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS.id;
 		cleanupAfterCombat();
 	}
@@ -1052,7 +1052,7 @@ private function shouldraGiantCockLoss():void {
 	player.orgasm();
 	dynStats("lib", 1, "sen", 1);
 	flags[kFLAGS.SHOULDRA_USES_YOUR_GIANT_COCK_COUNT]++;
-    if (kGAMECLASS.inCombat) {
+    if (CoC.instance.inCombat) {
         flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS.id;
 		cleanupAfterCombat();
 	}
@@ -1106,7 +1106,7 @@ private function genderlessShouldrasLossRapes():void {
 	flags[kFLAGS.SHOULDRA_GENDERLESS_FUCK_COUNT]++;
 	player.orgasm();
 	dynStats("sen", 1);
-    if (kGAMECLASS.inCombat) {
+    if (CoC.instance.inCombat) {
         flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS.id;
 		cleanupAfterCombat();
 	}
@@ -1224,7 +1224,7 @@ private function ginaBoobgartuanShouldra():void {
 	outputText("\n\nShe chuckles once, then snaps her fingers, throwing your perception back to reality.  You find yourself in the same flamboyant pose as the one Exgartuan left off in, which you hastily adjust.  A little rumbling and a numb sensation begins in your abdomen; the ghost girl tumbles out, snoring blissfully.  Luckily for you and the integrity of your midsection, her belly's back to its taut normality, but that doesn't stop her from rubbing her midsection and occasionally groaning.");
 	outputText("\n\nThough exhausted and a little sore from Exgartuan's treatment of your body, you keep the presence of mind to lean down -- pushing your " + breastDescript(0) + " out of the way -- and scoop up a little ectoplasm from her still-gaping box.  You make a point to ignore Exgartuan's triumphant chortle as you leave the ghost girl to her sleep and walk back to camp.  What a day.");
 	player.orgasm();
-    if (kGAMECLASS.inCombat) {
+    if (CoC.instance.inCombat) {
         flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS.id;
 		cleanupAfterCombat();
 	}
@@ -1305,7 +1305,7 @@ private function slimeGhostGalForHerms(clearOut:Boolean = false):void {
 	//ECTOPLZ
 	player.orgasm();
 	dynStats("sen", -1);
-    if (kGAMECLASS.inCombat) {
+    if (CoC.instance.inCombat) {
         flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS.id;
 		cleanupAfterCombat();
 	}

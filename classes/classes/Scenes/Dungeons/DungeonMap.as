@@ -773,7 +773,7 @@ public class DungeonMap extends BaseContent
 			}
 		}
 		/* - layout for future dungeon use
-					if (kGAMECLASS.dungeonLoc == 55) {
+					if (CoC.instance.dungeonLoc == 55) {
 						rawOutputText(", Stone Staircase Basement<");
 						rawOutputText("\n    [ ]             [ ]    ");
 						rawOutputText("\n     |               |     ");

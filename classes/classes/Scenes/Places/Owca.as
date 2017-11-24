@@ -1,13 +1,13 @@
 ﻿package classes.Scenes.Places{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Items.WeaponLib;
 import classes.Scenes.NPCs.Kindra;
 import classes.Scenes.Places.Owca.*;
 import classes.Scenes.SceneLib;
 
-use namespace kGAMECLASS;
+use namespace CoC;
 
 	public class Owca extends BaseContent{
 
@@ -351,7 +351,7 @@ private function wakeUpAfterDemonGangBangs():void {
 	fatigue(20);
 	player.slimeFeed();
 	dynStats("str", -2,"tou", -2, "spe", -1, "int", -1, "lib", 1, "sen", 1, "lus=", 100, "cor", 3);
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 	//PC is redirected to camp, next morning. No nightly camp scenes or dreams.
@@ -826,7 +826,7 @@ private function rapeRebecc(outside:Boolean = false):void {
 	dynStats("lib", -2, "cor", 5);
 	flags[kFLAGS.OWCA_UNLOCKED] = -1;
 
-if (kGAMECLASS.inCombat)
+if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
@@ -937,7 +937,7 @@ private function forgiveOwca():void {
 	flags[kFLAGS.OWCAS_ATTITUDE] = 60;
 	flags[kFLAGS.OWCA_ANGER_DISABLED] = 1;
 	//To main owca menu
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat(gangbangVillageStuff);
 	else doNext(gangbangVillageStuff);
 }
@@ -946,7 +946,7 @@ private function fuckThisShit():void {
 	clearOutput();
 	outputText("You stare at the wretched, whimpering creature before you for a moment.  There's nothing to say.  Without a word, you head back to your camp, carefully closing Rebecc's door behind you as you leave.");
 	flags[kFLAGS.REBECCS_LAST_PLEA] = 1;
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }

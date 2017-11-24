@@ -26,7 +26,7 @@ For further information and license requests, Dxasmodeus may be contacted throug
 package classes.Scenes.Explore {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.SceneLib;
 
 public class Giacomo extends BaseContent implements TimeAwareInterface {
@@ -71,7 +71,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		public function giacomoEncounter():void {
 			spriteSelect(23);
 			clearOutput();
-			if (kGAMECLASS.giacomo == 0) {
+			if (CoC.instance.giacomo == 0) {
 				firstEncounter();
 			}
 			else if (!player.hasStatusEffect(StatusEffects.WormOffer) && player.hasStatusEffect(StatusEffects.Infested)) { //If infested && no worm offer yet
@@ -114,7 +114,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			outputText("Giacomo pauses and turns his head in both directions in a mocking gesture of paranoid observation.  His little bit of theatrics does make you wonder what he is about to offer.\n");
 			outputText("\"<i>...maybe you would be interested in some items that enhance the pleasures of the flesh?  Hmmm?</i>\"\n\n");
 			outputText("Giacomo's grin is nothing short of creepy as he offers his wares to you.  What are you interested in?");
-			kGAMECLASS.giacomo = 1;
+			CoC.instance.giacomo = 1;
 		}
 		
 		private function potionMenu():void {

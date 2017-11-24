@@ -3,7 +3,7 @@ import classes.Appearance;
 import classes.AppearanceDefs;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Monster;
 import classes.StatusEffects;
 import classes.internals.ChainedDrop;
@@ -14,7 +14,7 @@ public class Diva extends Monster {
     private var _biteCounter:int = 0;
     private var finalFight:Boolean = false;
     private var _sonicScreamCooldown:int = 0;
-    private var _scene:BoundStory = game.rootStory.locate("diva/combat").bind(kGAMECLASS.context);
+    private var _scene:BoundStory = game.rootStory.locate("diva/combat").bind(CoC.instance.context);
     public function Diva(ff:Boolean=false) {
         this.finalFight = ff;
         var levelBonus:int = ff? 50:20;

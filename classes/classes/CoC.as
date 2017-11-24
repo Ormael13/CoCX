@@ -14,7 +14,7 @@ package classes
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kCOUNTERS;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Items.*;
 import classes.Parser.Parser;
 import classes.Scenes.*;
@@ -64,7 +64,10 @@ public class CoC extends MovieClip
 
         CoC.setUpLogging();
     }
-
+    private static var _instance:CoC;
+    public static function get instance():CoC{
+        return _instance;
+    }
     //System time
     public var date:Date = new Date();
 
@@ -93,7 +96,7 @@ public class CoC extends MovieClip
     public var undergarments:UndergarmentLib = new UndergarmentLib();
     public var jewelries:JewelryLib = new JewelryLib();
     public var shields:ShieldLib = new ShieldLib();
-    public var miscItems:MiscItemLib = new MiscItemLib();
+
 
     // Force updates in Pepper Flash ahuehue
     private var _updateHack:Sprite = new Sprite();
@@ -193,7 +196,7 @@ public class CoC extends MovieClip
     public function CoC()
     {
         // Cheatmode.
-        kGAMECLASS = this;
+        _instance = this;
         context = new StoryContext(this);
 
         useables = new UseableLib();

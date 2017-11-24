@@ -5,11 +5,11 @@
 package classes.Scenes.Places.HeXinDao 
 {
 import classes.*;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.Places.HeXinDao;
 import classes.Scenes.SceneLib;
 
-use namespace kGAMECLASS;
+use namespace CoC;
 
 	internal class HeXinDaoAbstractContent extends BaseContent
 	{

@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Items.*;
 import classes.Scenes.Camp.*;
 
@@ -3695,7 +3695,7 @@ private function sheilaGoesDemon():void {
 	flags[kFLAGS.SHEILA_CITE] = 1;
 	flags[kFLAGS.SHEILA_DEMON] = 1;
 	//good place to cut off content if you don't have time to code it all in one go
-    if (!kGAMECLASS.inCombat)
+    if (!CoC.instance.inCombat)
         doNext(camp.returnToCampUseOneHour);
 	else cleanupAfterCombat();
 }
@@ -4132,7 +4132,7 @@ private function loseToNormalSheilaAndGetRidden():void {
 		player.orgasm();
 		dynStats("cor", 10);
 		sheilaCorruption(-10);
-        if (kGAMECLASS.inCombat)
+        if (CoC.instance.inCombat)
             cleanupAfterCombat();
 		else doNext(camp.returnToCampUseOneHour);
 	}
@@ -4189,7 +4189,7 @@ private function loseToNormalSheilaAndGetRidden():void {
 		dynStats("cor", 10);
 		sheilaPreg();
 		sheilaCorruption(-10);
-        if (kGAMECLASS.inCombat)
+        if (CoC.instance.inCombat)
             cleanupAfterCombat();
 		else doNext(camp.returnToCampUseOneHour);
 	}
@@ -4233,7 +4233,7 @@ private function tailSpadeSoundingForFuckHugeDongsWithDemonSheila():void {
 	player.orgasm();
 	dynStats("cor", 10);
 	sheilaCorruption(-10);
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -4384,7 +4384,7 @@ private function clitSwellingDemonSheilaClitSoundingAnal():void {
 	}
 	player.orgasm();
 	dynStats("lib", -1, "sen", -2);
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
@@ -4407,7 +4407,7 @@ private function aintGotNoGenderAndKangarooRaped():void {
 	
 	//big lib-based lust gain, med lib gain if lust hits 100, pass 1 hour
 	dynStats("lus", 20+player.lib/4, "scale", false);
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
@@ -4513,7 +4513,7 @@ private function missionaryForThePurposesOfCreatingImpsWithSheila():void {
 		dynStats("lib", -1);
 		sheilaPreg();
 		//if short scene, sheilapreg check, reduce PC lust and libido
-        if (kGAMECLASS.inCombat)
+        if (CoC.instance.inCombat)
             cleanupAfterCombat();
 		else doNext(camp.returnToCampUseOneHour);
 	}
@@ -4570,7 +4570,7 @@ private function missionaryForThePurposesOfCreatingImpsWithSheila():void {
 			dynStats("cor", -10);
 			sheilaCorruption(10);
 		}
-        if (kGAMECLASS.inCombat)
+        if (CoC.instance.inCombat)
             cleanupAfterCombat();
 		else doNext(camp.returnToCampUseOneHour);
 	}
@@ -4659,7 +4659,7 @@ private function sheilaAnalHateFuckAGoGoNO():void {
 	//minus lust, minus libido, plus small corruption
 	player.orgasm();
 	dynStats("lib", -1, "cor", 2);
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
@@ -4694,7 +4694,7 @@ private function sheilaAnalHateFuckAGoGoGETYOUSOMEWORMS():void {
 	dynStats("cor", 10);
 	dynStats("lus", player.lib/5);
 	flags[kFLAGS.SHEILA_DISABLED] = 3;
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
@@ -4756,7 +4756,7 @@ private function analHateFucksWithJojoNo(clear:Boolean):void {
 	outputText("\n\nResponding quickly, Jojo falls into formation beside you as you back away from the debased demon.  As she pushes herself upright, covered in liquid filth, the only glow you can see in her eyes now is one of simmering anger.  Satisfied with ruining her fun, you depart.");
 	//lust raised, plus some corruption
 	dynStats("lus", player.lib/3, "cor", 2);
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
@@ -4806,7 +4806,7 @@ private function jojoRuinsTheAnalHateFuck(clear:Boolean = true):void {
 	dynStats("lus=", player.maxLust(), "cor", 10, "scale", false);
 	flags[kFLAGS.SHEILA_DISABLED] = 4;
 	flags[kFLAGS.JOJO_DEAD_OR_GONE] = 1;
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
@@ -4948,7 +4948,7 @@ private function bigDickAndThighs():void {
 		dynStats("cor", -10);
 		sheilaCorruption(10);
 	}
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
@@ -5027,7 +5027,7 @@ private function winAgainstDemoNSheilaForVaginas():void {
 		sheilaCorruption(10);
 		dynStats("cor", -10);
 	}
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
@@ -5037,7 +5037,7 @@ public function badEndScarredBlade():void {
 	outputText("You collapse from your injuries and realize what's the scarred blade's going to do. It's GOING FOR YOU! You scream as the saber thrusts towards you.");
 	if (silly()) rawOutputText("\n\n[DATA EXPUNGED]");
 	if (marbleFollower()) outputText("\n\n\"<i>NOOOOO! Sweetie!</i>\" Marble cries.");
-    kGAMECLASS.inCombat = false;
+    CoC.instance.inCombat = false;
     flags[kFLAGS.SCARRED_BLADE_STATUS] = 1;
 	EventParser.gameOver();
 }

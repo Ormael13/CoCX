@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.SceneLib;
 
 public class HelSpawnScene extends NPCAwareContent {
@@ -669,7 +669,7 @@ private function nameDatHelspawn():void {
 private function applyHelspawnName():void {
 	spriteSelect(68);
 	//Easter Egg Names Hel WILL NOT ALLOW:
-	if (kGAMECLASS.testingBlockExiting)
+	if (CoC.instance.testingBlockExiting)
 	{
 		// We're running under the testing script.
 		// Stuff a name in the box and go go go

@@ -5,7 +5,7 @@ package classes.Scenes.Areas.Swamp
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Scenes.UniqueSexScenes;
 
@@ -425,7 +425,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			else outputText("spraying your juices all over the ground and mixing in with the green slime, soaking your legs, each egg you squeeze out only prolonging the intense feeling.\n\n");
 
 			outputText("After what seems like hours, you have lost count of the eggs pushed out, and you collapse from sexual exhaustion.\n\n");
-			kGAMECLASS.timeQ += 2;
+			CoC.instance.timeQ += 2;
 			outputText("You awaken later on, a sticky feeling between your legs to go with your wet pussy");
 			if (player.hasCock()) outputText(" and raging hard on");
 			outputText(". Looking around, you notice the slimy pool appears to have dried up, but the broken eggshells show that you weren't just dreaming. Tiny dots in the dirt form a trail leading to the swamp, and you can only guess where your offspring went.\n");

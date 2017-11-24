@@ -3,7 +3,7 @@ package classes.Scenes
 	import classes.*
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+	import classes.CoC;
 	import classes.GlobalFlags.kACHIEVEMENTS;
 	
 	/**

@@ -1,6 +1,6 @@
 package classes.Scenes.Places.TelAdre {
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.ItemType;
 import classes.Items.Armor;
 import classes.Scenes.SceneLib;

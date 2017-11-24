@@ -5,7 +5,7 @@ package classes.Items.Weapons
 {
 	import classes.CoC_Settings;
 	import classes.Creature;
-	import classes.GlobalFlags.kGAMECLASS;
+	import classes.CoC;
 	import classes.Items.Weapon;
 	import classes.Player;
 

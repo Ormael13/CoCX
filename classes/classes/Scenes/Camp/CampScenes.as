@@ -6,11 +6,11 @@ package classes.Scenes.Camp
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.SceneLib;
 
-use namespace kGAMECLASS;
+use namespace CoC;
 	
 	public class CampScenes extends NPCAwareContent
 {

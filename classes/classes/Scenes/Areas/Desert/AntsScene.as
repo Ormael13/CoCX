@@ -6,7 +6,7 @@ package classes.Scenes.Areas.Desert
 import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.Areas.Forest.TentacleBeast;
 import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Areas.Plains.Gnoll;
@@ -417,7 +417,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 				flags[kFLAGS.ANTS_PC_BEAT_GNOLL]++;
 			}
 			else if (flags[kFLAGS.ANT_ARENA_WINS] - flags[kFLAGS.ANT_ARENA_LOSSES] >= 2 && flags[kFLAGS.ANT_ARENA_WINS] >= 3 && player.gender > 0) {
-                kGAMECLASS.inCombat = false;
+                CoC.instance.inCombat = false;
                 flags[kFLAGS.ANT_ARENA_WINS]++;
 				antGirlGoodEnd();
 				return;

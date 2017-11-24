@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.Areas.Forest{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 
 public class TamaniScene extends BaseContent implements TimeAwareInterface {
 
@@ -251,7 +251,7 @@ internal function tamaniSexLetHer():void {
 	tamaniKnockUp();
 	clearOutput();
 	//[lost combat]
-    if (kGAMECLASS.inCombat) {
+    if (CoC.instance.inCombat) {
         //Taurs
 		if(player.isTaur()) {
 			if(player.HP < 1) outputText("You stumble, legs weaving drunkenly as you try to keep your feet.  ");
@@ -345,7 +345,7 @@ internal function tamaniSexLetHer():void {
 		outputText("After a little while you redress, but the scent of horny goblin stays with you for hours.");
 		//Combat end: 
 
-        if (kGAMECLASS.inCombat) {
+        if (CoC.instance.inCombat) {
             outputText("  After the stress and strain of a lost fight and the stress of having your seed so expertly stolen, you lie down on your flank and go to sleep.");
 			cleanupAfterCombat();
 			player.orgasm();
@@ -389,7 +389,7 @@ internal function tamaniSexLetHer():void {
 			outputText("</i>\"\n\n");
 			//Combat end: 
 
-            if (kGAMECLASS.inCombat) {
+            if (CoC.instance.inCombat) {
                 outputText("You black out, exhausted from the ordeal.");
 				cleanupAfterCombat();
 				player.orgasm();
@@ -442,7 +442,7 @@ internal function tamaniSexLetHer():void {
 			
 			//Combat end: 
 
-            if (kGAMECLASS.inCombat) {
+            if (CoC.instance.inCombat) {
                 outputText("You black out, exhausted from the ordeal.");
 				cleanupAfterCombat();
 				player.orgasm();
@@ -545,7 +545,7 @@ internal function tamaniSexWon():void {
 		outputText("any more cream to give to me?</i>\"\n\n");
 		outputText("She doesn't give you a chance to answer as she wobbles off, jiggling pleasantly in all the right places, \"<i>Of course you do.  I'll be back for the rest later!</i>\"\n\n");
 		player.orgasm();
-        if (kGAMECLASS.inCombat) cleanupAfterCombat();
+        if (CoC.instance.inCombat) cleanupAfterCombat();
         else doNext(camp.returnToCampUseOneHour);
 	}
 	//Too big? Jerk off with feet and bukkake
@@ -573,7 +573,7 @@ internal function tamaniSexWon():void {
 		outputText("Tamani wiggles in the sexiest way as she leaves, arousing your body all over again...");
 		player.orgasm();
 		dynStats("lus", 35);
-        if (kGAMECLASS.inCombat) cleanupAfterCombat();
+        if (CoC.instance.inCombat) cleanupAfterCombat();
         else doNext(camp.returnToCampUseOneHour);
 	}
 }
@@ -844,7 +844,7 @@ internal function getRapedByTamaniYouHypnoSlut():void {
 		player.orgasm();
 		dynStats("int", -.5, "sen", -1);
 	}
-    if (kGAMECLASS.inCombat) cleanupAfterCombat();
+    if (CoC.instance.inCombat) cleanupAfterCombat();
     else doNext(camp.returnToCampUseOneHour);
 }
 

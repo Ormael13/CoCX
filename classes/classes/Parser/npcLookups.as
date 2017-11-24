@@ -1,6 +1,6 @@
-﻿		//Calls are now made through kGAMECLASS rather than thisPtr. This allows the compiler to detect if/when a function is inaccessible.
+﻿		//Calls are now made through CoC.instance rather than thisPtr. This allows the compiler to detect if/when a function is inaccessible.
 		import classes.CoC;
-		import classes.GlobalFlags.kGAMECLASS;
+		import classes.CoC;
         import classes.Scenes.SceneLib;
 
         // PRONOUNS: The parser uses Elverson/Spivak Pronouns specifically to allow characters to be written with non-specific genders.

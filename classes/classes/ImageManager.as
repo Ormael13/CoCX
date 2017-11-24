@@ -2,7 +2,7 @@
 {
 	import classes.Image;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+	import classes.CoC;
 
 import coc.view.MainView;
 
@@ -209,7 +209,7 @@ import flash.display.Loader;
 		{
 			var imageString:String = "";
 			
-			if (kGAMECLASS.flags[kFLAGS.IMAGEPACK_OFF] > 0) {
+			if (CoC.instance.flags[kFLAGS.IMAGEPACK_OFF] > 0) {
 				return "";
 			}
 			

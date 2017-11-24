@@ -1,7 +1,7 @@
 package classes 
 {
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Items.*;
 
 /**
@@ -1337,7 +1337,7 @@ import classes.Items.*;
 			//flags[kFLAGS.AMILY_FOLLOWER] = 2;
 			
 			// Jojo
-			//kGAMECLASS.monk = 5;
+			//CoC.instance.monk = 5;
 			
 			// Bimbo Sophie
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] = 1;

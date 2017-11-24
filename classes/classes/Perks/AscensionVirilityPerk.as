@@ -2,14 +2,14 @@ package classes.Perks
 {
 	import classes.PerkClass;
 	import classes.PerkType;
-	import classes.GlobalFlags.kGAMECLASS;
+	import classes.CoC;
 	
 	public class AscensionVirilityPerk extends PerkType
 	{
 		
 		override public function desc(params:PerkClass = null):String
 		{
-			return "(Rank: " + params.value1 + "/" + kGAMECLASS.charCreation.MAX_VIRILITY_LEVEL + ") Increases base virility rating by " + params.value1 * 5 + ".";
+			return "(Rank: " + params.value1 + "/" + CoC.instance.charCreation.MAX_VIRILITY_LEVEL + ") Increases base virility rating by " + params.value1 * 5 + ".";
 		}
 		
 		public function AscensionVirilityPerk() 

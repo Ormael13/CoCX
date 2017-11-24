@@ -5,7 +5,7 @@ import classes.CoC_Settings;
 import classes.EngineCore;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.ItemType;
 import classes.Items.JewelryLib;
 import classes.Items.ShieldLib;
@@ -46,10 +46,10 @@ public class Combat extends BaseContent {
 	public var ui:CombatUI                 = new CombatUI();
 
 	public function get inCombat():Boolean {
-        return kGAMECLASS.inCombat;
+        return CoC.instance.inCombat;
     }
 	public function set inCombat(value:Boolean):void {
-        kGAMECLASS.inCombat = value;
+        CoC.instance.inCombat = value;
     }
 
 	public function physicalCost(mod:Number):Number {
@@ -276,17 +276,17 @@ public function checkAchievementDamage(damage:Number):void
 /*public function checkMinionsAchievementDamage(damage:Number):void
 {
 	flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] += damage;
-	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] >= 50000) kGAMECLASS.awardAchievement("Bloodletter", kACHIEVEMENTS.COMBAT_BLOOD_LETTER);
-	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] >= 200000) kGAMECLASS.awardAchievement("Reiterpallasch", kACHIEVEMENTS.COMBAT_REITERPALLASCH);
-	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] >= 1000000) kGAMECLASS.awardAchievement("Uncanny Bloodletter", kACHIEVEMENTS.COMBAT_UNCANNY_BLOOD_LETTER);
-	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] >= 5000000) kGAMECLASS.awardAchievement("Uncanny Reiterpallasch", kACHIEVEMENTS.COMBAT_UNCANNY_REITERPALLASCH);
-	if (damage >= 50) kGAMECLASS.awardAchievement("Pain", kACHIEVEMENTS.COMBAT_PAIN);
-	if (damage >= 100) kGAMECLASS.awardAchievement("Fractured Limbs", kACHIEVEMENTS.COMBAT_FRACTURED_LIMBS);
-	if (damage >= 250) kGAMECLASS.awardAchievement("Broken Bones", kACHIEVEMENTS.COMBAT_BROKEN_BONES);
-	if (damage >= 500) kGAMECLASS.awardAchievement("Overkill", kACHIEVEMENTS.COMBAT_OVERKILL);
-	if (damage >= 1000) kGAMECLASS.awardAchievement("Meat Pasty", kACHIEVEMENTS.COMBAT_MEAT_PASTY);
-	if (damage >= 2500) kGAMECLASS.awardAchievement("Pulverize", kACHIEVEMENTS.COMBAT_PULVERIZE);
-	if (damage >= 5000) kGAMECLASS.awardAchievement("Erase", kACHIEVEMENTS.COMBAT_ERASE);
+	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] >= 50000) CoC.instance.awardAchievement("Bloodletter", kACHIEVEMENTS.COMBAT_BLOOD_LETTER);
+	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] >= 200000) CoC.instance.awardAchievement("Reiterpallasch", kACHIEVEMENTS.COMBAT_REITERPALLASCH);
+	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] >= 1000000) CoC.instance.awardAchievement("Uncanny Bloodletter", kACHIEVEMENTS.COMBAT_UNCANNY_BLOOD_LETTER);
+	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] >= 5000000) CoC.instance.awardAchievement("Uncanny Reiterpallasch", kACHIEVEMENTS.COMBAT_UNCANNY_REITERPALLASCH);
+	if (damage >= 50) CoC.instance.awardAchievement("Pain", kACHIEVEMENTS.COMBAT_PAIN);
+	if (damage >= 100) CoC.instance.awardAchievement("Fractured Limbs", kACHIEVEMENTS.COMBAT_FRACTURED_LIMBS);
+	if (damage >= 250) CoC.instance.awardAchievement("Broken Bones", kACHIEVEMENTS.COMBAT_BROKEN_BONES);
+	if (damage >= 500) CoC.instance.awardAchievement("Overkill", kACHIEVEMENTS.COMBAT_OVERKILL);
+	if (damage >= 1000) CoC.instance.awardAchievement("Meat Pasty", kACHIEVEMENTS.COMBAT_MEAT_PASTY);
+	if (damage >= 2500) CoC.instance.awardAchievement("Pulverize", kACHIEVEMENTS.COMBAT_PULVERIZE);
+	if (damage >= 5000) CoC.instance.awardAchievement("Erase", kACHIEVEMENTS.COMBAT_ERASE);
 }*/
 public function approachAfterKnockback1():void
 {
@@ -451,16 +451,16 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 		var bd:ButtonData;
 		buttons.add("Surrender",combat.surrender,"Fantasize about your opponent in a sexual way so much it would fill up your lust you'll end up getting raped.");
 		if (player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0) {
-			buttons.add("Melee Opt",kGAMECLASS.perkMenu.doubleAttackOptions,"You can adjust your melee attack settings.");
+			buttons.add("Melee Opt",CoC.instance.perkMenu.doubleAttackOptions,"You can adjust your melee attack settings.");
 		}
 		if (player.findPerk(PerkLib.DoubleStrike) >= 0 || player.findPerk(PerkLib.ElementalArrows) >= 0 || player.findPerk(PerkLib.Cupid) >= 0) {
-			buttons.add("Range Opt",kGAMECLASS.perkMenu.doubleStrikeOptions,"You can adjust your range strike settings.");
+			buttons.add("Range Opt",CoC.instance.perkMenu.doubleStrikeOptions,"You can adjust your range strike settings.");
 		}
 		if (player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) {
-			buttons.add("Elementals",kGAMECLASS.perkMenu.summonsbehaviourOptions,"You can adjust your elemental summons behaviour during combat.");
+			buttons.add("Elementals",CoC.instance.perkMenu.summonsbehaviourOptions,"You can adjust your elemental summons behaviour during combat.");
 		}
 		if (flags[kFLAGS.PERNAMENT_GOLEMS_BAG] > 0) {
-			buttons.add("P.Golems",kGAMECLASS.perkMenu.golemsbehaviourOptions,"You can adjust your pernament golems behaviour during combat.");
+			buttons.add("P.Golems",CoC.instance.perkMenu.golemsbehaviourOptions,"You can adjust your pernament golems behaviour during combat.");
 		}
 		if (CoC_Settings.debugBuild && !debug) {
 			buttons.add("Inspect", combat.debugInspect).hint("Use your debug powers to inspect your enemy.");
@@ -3455,7 +3455,7 @@ public function dropItem(monster:Monster, nextFunc:Function = null):void {
 						else itype = consumables.SDELITE;
 					}
 					//Not too tall, dont rob of axe!
-					else kGAMECLASS.plotFight = true;
+					else CoC.instance.plotFight = true;
 				}
 				else outputText("\nThe minotaur's axe appears to have been broken during the fight, rendering it useless.  ");
 			}
@@ -3483,16 +3483,16 @@ public function dropItem(monster:Monster, nextFunc:Function = null):void {
 		else itype = consumables.GLDSEED;
 	}
 	//Chance of armor if at level 1 pierce fetish
-	if(!kGAMECLASS.plotFight && !(monster is Ember) && !(monster is Kiha) && !(monster is Hel) && !(monster is Isabella)
+	if(!CoC.instance.plotFight && !(monster is Ember) && !(monster is Kiha) && !(monster is Hel) && !(monster is Isabella)
 	   && flags[kFLAGS.PC_FETISH] == 1 && rand(10) == 0 && !player.hasItem(armors.SEDUCTA, 1) && !SceneLib.ceraphFollowerScene.ceraphIsFollower()) {
 		itype = armors.SEDUCTA;
 	}
 	
-	if(!kGAMECLASS.plotFight && rand(200) == 0 && player.level >= 7) itype = consumables.BROBREW;
-	if(!kGAMECLASS.plotFight && rand(200) == 0 && player.level >= 7) itype = consumables.BIMBOLQ;
-	if(!kGAMECLASS.plotFight && rand(1000) == 0 && player.level >= 7) itype = consumables.RAINDYE;
+	if(!CoC.instance.plotFight && rand(200) == 0 && player.level >= 7) itype = consumables.BROBREW;
+	if(!CoC.instance.plotFight && rand(200) == 0 && player.level >= 7) itype = consumables.BIMBOLQ;
+	if(!CoC.instance.plotFight && rand(1000) == 0 && player.level >= 7) itype = consumables.RAINDYE;
 	//Chance of eggs if Easter!
-	if(!kGAMECLASS.plotFight && rand(6) == 0 && isEaster()) {
+	if(!CoC.instance.plotFight && rand(6) == 0 && isEaster()) {
 		temp = rand(13);
 		if(temp == 0) itype =consumables.BROWNEG;
 		if(temp == 1) itype =consumables.L_BRNEG;
@@ -4080,7 +4080,7 @@ private function combatStatusesUpdate():void {
 			
 			player.str += player.statusEffectv2(StatusEffects.DriderIncubusVenom);
 			player.removeStatusEffect(StatusEffects.DriderIncubusVenom);
-			kGAMECLASS.mainView.statsView.showStatUp('str');
+			CoC.instance.mainView.statsView.showStatUp('str');
 		}
 		else
 		{
@@ -4089,7 +4089,7 @@ private function combatStatusesUpdate():void {
 			{
 				player.str += player.statusEffectv2(StatusEffects.DriderIncubusVenom);
 				player.removeStatusEffect(StatusEffects.DriderIncubusVenom);
-				kGAMECLASS.mainView.statsView.showStatUp('str');
+				CoC.instance.mainView.statsView.showStatUp('str');
 				outputText("The drider incubus’ venom wanes, the effects of the poision weakening as strength returns to your limbs!\n\n");
 			}
 			else
@@ -4689,7 +4689,7 @@ public function nonPercentBasedRegeneration():Number {
 internal var combatRound:int = 0;
 public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):void {
 	combatRound = 0;
-	kGAMECLASS.plotFight = plotFight_;
+	CoC.instance.plotFight = plotFight_;
 	mainView.hideMenuButton( MainView.MENU_DATA );
 	mainView.hideMenuButton( MainView.MENU_APPEARANCE );
 	mainView.hideMenuButton( MainView.MENU_LEVEL );
@@ -4739,7 +4739,7 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 }
 public function startCombatImmediateImpl(monster_:Monster, _plotFight:Boolean):void
 {
-	kGAMECLASS.plotFight = _plotFight;
+	CoC.instance.plotFight = _plotFight;
 	mainView.hideMenuButton( MainView.MENU_DATA );
 	mainView.hideMenuButton( MainView.MENU_APPEARANCE );
 	mainView.hideMenuButton( MainView.MENU_LEVEL );
@@ -5683,7 +5683,7 @@ public function runAway(callHook:Boolean = true):void {
 	}
 	if (monster.short == "lizan rogue") {
 		outputText("As you retreat the lizan doesn't even attempt to stop you. When you look back to see if he's still there you find nothing but the empty bog around you.");
-		kGAMECLASS.inCombat = false;
+		CoC.instance.inCombat = false;
 		clearStatuses(false);
 		doNext(camp.returnToCampUseOneHour);
 		return;

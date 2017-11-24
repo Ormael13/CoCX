@@ -4,6 +4,7 @@ package classes.Parser
 import classes.CoC_Settings;
 import classes.EngineCore;
 import classes.display.DebugInfo;
+import classes.Measurements;
 
 // import classes.CoC;
 
@@ -1103,7 +1104,7 @@ import classes.display.DebugInfo;
 			ret = ret.replace(/\\\[/g, "[");
 
 			// And repeated spaces (this has to be done after markdown processing)
-			ret = ret.replace(/  +/g, " ");
+			ret = ret.replace(/ {2}/g, " ");
 
 
 			/*

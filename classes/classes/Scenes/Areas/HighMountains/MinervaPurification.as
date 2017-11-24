@@ -4,7 +4,7 @@ package classes.Scenes.Areas.HighMountains
 import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.SceneLib;
 
 public class MinervaPurification extends BaseContent
@@ -913,14 +913,14 @@ public class MinervaPurification extends BaseContent
 		}
 		private function sleepWithMinervaProcess():void {
 			clearOutput();
-			kGAMECLASS.timeQ = 10;
+			CoC.instance.timeQ = 10;
 			goNext(timeQ, true);
 			sleepWithMinervaII();
 		}
 		private function sleepWithMinervaHeal():void {
-			kGAMECLASS.timeQ = 10;
+			CoC.instance.timeQ = 10;
 			camp.sleepRecovery(true);
-			kGAMECLASS.timeQ = 0;	
+			CoC.instance.timeQ = 0;	
 		}
 		
 		//------------------
@@ -1017,7 +1017,7 @@ public class MinervaPurification extends BaseContent
 			flags[kFLAGS.TIMES_BUTTFUCKED_MINERVA]++;
 			player.orgasm();
 			dynStats("sen", -1);
-            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+            if (CoC.instance.inCombat) cleanupAfterCombat();
             else doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1127,7 +1127,7 @@ public class MinervaPurification extends BaseContent
 			player.orgasm();
 			SceneLib.highMountains.minervaScene.tryToImpregnateMinerva();
 			dynStats("lus", 20);
-            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+            if (CoC.instance.inCombat) cleanupAfterCombat();
             else doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1230,7 +1230,7 @@ public class MinervaPurification extends BaseContent
 			flags[kFLAGS.TIMES_MINERVA_LAPSEXED]++;
 			player.orgasm();
 			dynStats("sen", -1);
-            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+            if (CoC.instance.inCombat) cleanupAfterCombat();
             else doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1323,7 +1323,7 @@ public class MinervaPurification extends BaseContent
 			flags[kFLAGS.TIMES_MINERVA_LAPSEXED]++;
 			player.orgasm();
 			dynStats("sen", -1);
-            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+            if (CoC.instance.inCombat) cleanupAfterCombat();
             else doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1400,7 +1400,7 @@ public class MinervaPurification extends BaseContent
 			outputText("\n\nFor a long while, you just lay there, cuddled up with the mostly naked siren, the two of you idly chatting about various things that come to mind. Eventually, you must leave the gentle embrace and return to your duties as a Champion. Disentangling yourself from Minerva, you straighten your clothes out and, with a smile, tell her you had a wonderful time. Grinning up at you, Minerva climbs back onto her feet and pulls you into a deep, tongue-tangling goodbye kiss. \"<i>It was amazing, we have to do this again. Perhaps next time, I can do you, hmm?</i>\" she suggests, not wanting to be greedy and get all the pleasure. Giving you another peck on the cheek, the siren sends you on your way after telling you to come back and visit soon.");
 			
 			dynStats("lus", 20);
-            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+            if (CoC.instance.inCombat) cleanupAfterCombat();
             else doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1475,7 +1475,7 @@ public class MinervaPurification extends BaseContent
 			//PC returns to camp.
 			player.orgasm();
 
-if (kGAMECLASS.inCombat) cleanupAfterCombat();
+if (CoC.instance.inCombat) cleanupAfterCombat();
             else doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1623,7 +1623,7 @@ if (kGAMECLASS.inCombat) cleanupAfterCombat();
 		}
 		private function processSleepTime():void {
 			while (model.time.hours != 6) {
-				kGAMECLASS.timeQ = 1;
+				CoC.instance.timeQ = 1;
 				goNext(timeQ, false);
 			}
 		}

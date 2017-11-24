@@ -1053,7 +1053,6 @@ public class Masturbation extends BaseContent {
 						break;
 					case CockTypesEnum.TENTACLE:
 						outputText("bulbous ");
-					default:
 				}
 				outputText("tip of your [cock] against the opening of ");
 		/* Old method

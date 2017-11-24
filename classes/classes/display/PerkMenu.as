@@ -6,7 +6,7 @@ import classes.AppearanceDefs;
 import classes.BaseContent;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.PerkClass;
 import classes.PerkLib;
 import classes.PerkTree;
@@ -34,7 +34,7 @@ public class PerkMenu extends BaseContent {
 			outputText("\n<b>You have " + num2Text(player.perkPoints) + " perk point");
 			if(player.perkPoints > 1) outputText("s");
 			outputText(" to spend.</b>");
-			addButton(button++, "Perk Up", kGAMECLASS.playerInfo.perkBuyMenu);
+			addButton(button++, "Perk Up", CoC.instance.playerInfo.perkBuyMenu);
 		}
 		addButton(4, "Database", perkDatabase);
 		if (player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0) {
@@ -107,7 +107,7 @@ public class PerkMenu extends BaseContent {
 			else addButton(11, "All Hexa", doubleAttackStyle,5);
 		}
 
-		if (kGAMECLASS.inCombat) addButton(14, "Back", combat.combatMenu);
+		if (CoC.instance.inCombat) addButton(14, "Back", combat.combatMenu);
         else addButton(14, "Back", displayPerks);
 	}
 
@@ -199,7 +199,7 @@ public class PerkMenu extends BaseContent {
 		{
             addButton(13, "Venom", toggleflag,kFLAGS.ENVENOMED_BOLTS,true);
 		}
-        if (kGAMECLASS.inCombat) addButton(14, "Back", combat.combatMenu);
+        if (CoC.instance.inCombat) addButton(14, "Back", combat.combatMenu);
         else addButton(14, "Back", displayPerks);
 
 	}
@@ -296,7 +296,7 @@ public class PerkMenu extends BaseContent {
 		if (elementalConjuerSummons != 2 && player.hasStatusEffect(StatusEffects.SummonedElementals)) addButton(11, "MeleeAtk", elementalAttackReplacingPCmeleeAttack);
 		if (elementalConjuerSummons != 3 && player.hasStatusEffect(StatusEffects.SummonedElementals) && player.hasPerk(PerkLib.FirstAttackElementals)) addButton(12, "Helping", setflag,kFLAGS.ELEMENTAL_CONJUER_SUMMONS,3);
 
-        if (kGAMECLASS.inCombat) addButton(14, "Back", combat.combatMenu);
+        if (CoC.instance.inCombat) addButton(14, "Back", combat.combatMenu);
         else addButton(14, "Back", displayPerks);
         function elementalAttackReplacingPCmeleeAttack():void {
             flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 2;

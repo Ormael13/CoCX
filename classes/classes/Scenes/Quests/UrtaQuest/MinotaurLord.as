@@ -2,12 +2,12 @@ package classes.Scenes.Quests.UrtaQuest
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Items.WeaponLib;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
-use namespace kGAMECLASS;
+use namespace CoC;
 
 
 

@@ -5,16 +5,16 @@ package classes.Items
 {
 import classes.CoC;
 import classes.EngineCore;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.ItemType;
 import classes.Player;
 
-use namespace kGAMECLASS;
+use namespace CoC;
 
 	public class CommonItem extends ItemType{
 
 		public function get game():CoC{
-			return kGAMECLASS;
+			return CoC.instance;
 		}
 
 		public function clearOutput():void{

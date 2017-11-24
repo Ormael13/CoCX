@@ -93,10 +93,10 @@ public class Exploration extends BaseContent
 			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(5, "",	//Wuxia related area - ?latająca wyspa?
 		//	if (flags[kFLAGS.DISCOVERED_DEEP_SEA] > 0 && player.gillType != 0) addButton(6, "Deep Sea", deepsea.exploreDeepSea).hint("Visit the 'almost virgin' deep sea. But beware of... scyllas and krakens. \n\nRecommended level: 50" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEEP_SEA] : ""));
 		//	if (player.gillType == 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0) addButtonDisabled(6, "Deep Sea", "(Not yet ready to be unlockable - it wil happen after few more mod builds after 0.7c) Without any way to breathe underwater you can't explore this area!");
-			//if (flags[kFLAGS.DISCOVERED_PIT] > 0) addButton(7, "Pit", kGAMECLASS.abyss.explorePit).hint("Visit the pit. \n\nRecommended level: 36" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_PIT] : ""));
+			//if (flags[kFLAGS.DISCOVERED_PIT] > 0) addButton(7, "Pit", CoC.instance.abyss.explorePit).hint("Visit the pit. \n\nRecommended level: 36" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_PIT] : ""));
 			
 			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(10, "",	//Wuxia related area - ?latająca wyspa?
-			//if (flags[kFLAGS.DISCOVERED_ABYSS] > 0) addButton(12, "Abyss", kGAMECLASS.abyss.exploreAbyss).hint("Visit the abyss. \n\nRecommended level: 51" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_ABYSS] : ""));
+			//if (flags[kFLAGS.DISCOVERED_ABYSS] > 0) addButton(12, "Abyss", CoC.instance.abyss.exploreAbyss).hint("Visit the abyss. \n\nRecommended level: 51" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_ABYSS] : ""));
 			
 			if (debug) addButton(4, "Debug", exploreDebug.doExploreDebug);
 			addButton(9, "Previous", goBackToPageI);
@@ -428,7 +428,7 @@ public class Exploration extends BaseContent
 		public function tryDiscover():void
 		{
 
-			// kGAMECLASS.goblinAssassinScene.goblinAssassinEncounter();
+			// CoC.instance.goblinAssassinScene.goblinAssassinEncounter();
 			// return;
 
 			if (flags[kFLAGS.EVANGELINE_AFFECTION] < 1 && rand(3) == 0) {
@@ -567,7 +567,7 @@ public class Exploration extends BaseContent
 					return;
 				}/*
 				//Discover Abyss
-				if (player.exploredMountain >= 1 && rand(3) == 0 && flags[kFLAGS.TIMES_EXPLORED_ABYSS] <= 0 && flags[kGAMECLASS.dungeons.checkFactoryClear()] > 0 && (player.level >= 10) {
+				if (player.exploredMountain >= 1 && rand(3) == 0 && flags[kFLAGS.TIMES_EXPLORED_ABYSS] <= 0 && flags[CoC.instance.dungeons.checkFactoryClear()] > 0 && (player.level >= 10) {
 					flags[kFLAGS.DISCOVERED_ABYSS] = 1;
 					player.explored++;
 					clearOutput();

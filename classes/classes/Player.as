@@ -3,7 +3,7 @@
 import classes.BodyParts.ISexyPart;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Items.Armor;
 import classes.Items.ArmorLib;
 import classes.Items.Jewelry;
@@ -24,7 +24,7 @@ import classes.Scenes.SceneLib;
 import classes.StatusEffects.VampireThirstEffect;
 import classes.internals.Utils;
 
-use namespace kGAMECLASS;
+use namespace CoC;
 
 	/**
 	 * ...
@@ -403,8 +403,8 @@ use namespace kGAMECLASS;
 			if (hasStatusEffect(StatusEffects.StoneSkin)) armorDef += Math.round(statusEffectv1(StatusEffects.StoneSkin));
 			if (hasStatusEffect(StatusEffects.BarkSkin)) armorDef += Math.round(statusEffectv1(StatusEffects.BarkSkin));
 			if (hasStatusEffect(StatusEffects.MetalSkin)) armorDef += Math.round(statusEffectv1(StatusEffects.MetalSkin));
-			if (kGAMECLASS.monster.hasStatusEffect(StatusEffects.TailWhip)) {
-				armorDef -= kGAMECLASS.monster.statusEffectv1(StatusEffects.TailWhip);
+			if (CoC.instance.monster.hasStatusEffect(StatusEffects.TailWhip)) {
+				armorDef -= CoC.instance.monster.statusEffectv1(StatusEffects.TailWhip);
 				if(armorDef < 0) armorDef = 0;
 			}
 			if (hasStatusEffect(StatusEffects.Lustzerking)) {
@@ -815,11 +815,11 @@ use namespace kGAMECLASS;
 			//Opponents can critical too!
 			var crit:Boolean = false;
 			var critChanceMonster:int = 5;
-			if (kGAMECLASS.monster.findPerk(PerkLib.Tactician) >= 0 && kGAMECLASS.monster.inte >= 50) {
-				if (kGAMECLASS.monster.inte <= 100) critChanceMonster += (kGAMECLASS.monster.inte - 50) / 5;
-				if (kGAMECLASS.monster.inte > 100) critChanceMonster += 10;
+			if (CoC.instance.monster.findPerk(PerkLib.Tactician) >= 0 && CoC.instance.monster.inte >= 50) {
+				if (CoC.instance.monster.inte <= 100) critChanceMonster += (CoC.instance.monster.inte - 50) / 5;
+				if (CoC.instance.monster.inte > 100) critChanceMonster += 10;
 			}
-			if (kGAMECLASS.monster.findPerk(PerkLib.VitalShot) >= 0 && kGAMECLASS.monster.inte >= 50) critChanceMonster += 10;
+			if (CoC.instance.monster.findPerk(PerkLib.VitalShot) >= 0 && CoC.instance.monster.inte >= 50) critChanceMonster += 10;
 			if (rand(100) < critChanceMonster) {
 				crit = true;
 				damage *= 1.75;
@@ -847,11 +847,11 @@ use namespace kGAMECLASS;
 			//Opponents can critical too!
 			var crit:Boolean = false;
 			var critChanceMonster:int = 5;
-			/*if (kGAMECLASS.monster.findPerk(PerkLib.Tactician) >= 0 && kGAMECLASS.monster.inte >= 50) {
-				if (kGAMECLASS.monster.inte <= 100) critChanceMonster += (kGAMECLASS.monster.inte - 50) / 5;
-				if (kGAMECLASS.monster.inte > 100) critChanceMonster += 10;
+			/*if (CoC.instance.monster.findPerk(PerkLib.Tactician) >= 0 && CoC.instance.monster.inte >= 50) {
+				if (CoC.instance.monster.inte <= 100) critChanceMonster += (CoC.instance.monster.inte - 50) / 5;
+				if (CoC.instance.monster.inte > 100) critChanceMonster += 10;
 			}
-			if (kGAMECLASS.monster.findPerk(PerkLib.VitalShot) >= 0 && kGAMECLASS.monster.inte >= 50) critChanceMonster += 10;
+			if (CoC.instance.monster.findPerk(PerkLib.VitalShot) >= 0 && CoC.instance.monster.inte >= 50) critChanceMonster += 10;
 			*/if (rand(100) < critChanceMonster) {
 				crit = true;
 				damage *= 1.75;
@@ -4171,7 +4171,7 @@ use namespace kGAMECLASS;
 					modThickness(100, weightChange);
 					hunger = maxHunger();
 				}
-				if (hunger > oldHunger && flags[kFLAGS.USE_OLD_INTERFACE] == 0) kGAMECLASS.mainView.statsView.showStatUp('hunger');
+				if (hunger > oldHunger && flags[kFLAGS.USE_OLD_INTERFACE] == 0) CoC.instance.mainView.statsView.showStatUp('hunger');
 				//game.dynStats("lus", 0, "scale", false);
 				if (nl) outputText("\n");
 				//Messages
@@ -4185,7 +4185,7 @@ use namespace kGAMECLASS;
 				EngineCore.awardAchievement("Tastes Like Chicken ", kACHIEVEMENTS.REALISTIC_TASTES_LIKE_CHICKEN);
 				if (oldHunger < 1 && hunger >= 100) EngineCore.awardAchievement("Champion Needs Food Badly ", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD);
 				if (oldHunger >= 90) EngineCore.awardAchievement("Glutton ", kACHIEVEMENTS.REALISTIC_GLUTTON);
-				if (hunger > oldHunger) kGAMECLASS.mainView.statsView.showStatUp("hunger");
+				if (hunger > oldHunger) CoC.instance.mainView.statsView.showStatUp("hunger");
 				dynStats("lus", 0, "scale", false);
 				EngineCore.statScreenRefresh();
 			}
@@ -4199,7 +4199,7 @@ use namespace kGAMECLASS;
 			var oldHunger:Number = hunger;
 			hunger -= amnt;
 			if (hunger < 0) hunger = 0;
-			if (hunger < oldHunger && flags[kFLAGS.USE_OLD_INTERFACE] == 0) kGAMECLASS.mainView.statsView.showStatDown('hunger');
+			if (hunger < oldHunger && flags[kFLAGS.USE_OLD_INTERFACE] == 0) CoC.instance.mainView.statsView.showStatDown('hunger');
 			dynStats("lus", 0, "scale", false);
 		}
 		
@@ -5697,9 +5697,9 @@ use namespace kGAMECLASS;
 			{
 				str += statusEffectv2(StatusEffects.DriderIncubusVenom);
 				removeStatusEffect(StatusEffects.DriderIncubusVenom);
-				kGAMECLASS.mainView.statsView.showStatUp('str');
+				CoC.instance.mainView.statsView.showStatUp('str');
 			}
-			if(kGAMECLASS.monster.hasStatusEffect(StatusEffects.Sandstorm)) kGAMECLASS.monster.removeStatusEffect(StatusEffects.Sandstorm);
+			if(CoC.instance.monster.hasStatusEffect(StatusEffects.Sandstorm)) CoC.instance.monster.removeStatusEffect(StatusEffects.Sandstorm);
 			if(hasStatusEffect(StatusEffects.DwarfRage)) {
 				dynStats("str", -statusEffectv1(StatusEffects.DwarfRage),"tou", -statusEffectv2(StatusEffects.DwarfRage),"spe", -statusEffectv2(StatusEffects.DwarfRage));
 				removeStatusEffect(StatusEffects.DwarfRage);
@@ -5710,17 +5710,17 @@ use namespace kGAMECLASS;
 			if(hasStatusEffect(StatusEffects.Lustzerking)) {
 				removeStatusEffect(StatusEffects.Lustzerking);
 			}
-			if(kGAMECLASS.monster.hasStatusEffect(StatusEffects.TailWhip)) {
-				kGAMECLASS.monster.removeStatusEffect(StatusEffects.TailWhip);
+			if(CoC.instance.monster.hasStatusEffect(StatusEffects.TailWhip)) {
+				CoC.instance.monster.removeStatusEffect(StatusEffects.TailWhip);
 			}
-			if(kGAMECLASS.monster.hasStatusEffect(StatusEffects.TwuWuv)) {
-				inte += kGAMECLASS.monster.statusEffectv1(StatusEffects.TwuWuv);
+			if(CoC.instance.monster.hasStatusEffect(StatusEffects.TwuWuv)) {
+				inte += CoC.instance.monster.statusEffectv1(StatusEffects.TwuWuv);
 				EngineCore.statScreenRefresh();
-				kGAMECLASS.mainView.statsView.showStatUp( 'inte' );
+				CoC.instance.mainView.statsView.showStatUp( 'inte' );
 			}
 			if(hasStatusEffect(StatusEffects.NagaVenom)) {
 				spe += statusEffectv1(StatusEffects.NagaVenom);
-				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
+				CoC.instance.mainView.statsView.showStatUp( 'spe' );
 				removeStatusEffect(StatusEffects.NagaVenom);
 			}
 			if(hasStatusEffect(StatusEffects.MedusaVenom)) {
@@ -5728,15 +5728,15 @@ use namespace kGAMECLASS;
 				tou += statusEffectv2(StatusEffects.MedusaVenom);
 				spe += statusEffectv3(StatusEffects.MedusaVenom);
 				inte += statusEffectv4(StatusEffects.MedusaVenom);
-				kGAMECLASS.mainView.statsView.showStatUp( 'str' );
-				kGAMECLASS.mainView.statsView.showStatUp( 'tou' );
-				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
-				kGAMECLASS.mainView.statsView.showStatUp( 'inte' );
+				CoC.instance.mainView.statsView.showStatUp( 'str' );
+				CoC.instance.mainView.statsView.showStatUp( 'tou' );
+				CoC.instance.mainView.statsView.showStatUp( 'spe' );
+				CoC.instance.mainView.statsView.showStatUp( 'inte' );
 				removeStatusEffect(StatusEffects.MedusaVenom);
 			}
 			if(hasStatusEffect(StatusEffects.Frostbite)) {
 				str += statusEffectv1(StatusEffects.Frostbite);
-				kGAMECLASS.mainView.statsView.showStatUp( 'str' );
+				CoC.instance.mainView.statsView.showStatUp( 'str' );
 				removeStatusEffect(StatusEffects.Frostbite);
 			}
 			if(hasStatusEffect(StatusEffects.Flying)) {
@@ -6228,17 +6228,17 @@ use namespace kGAMECLASS;
 		{
 			switch (type) {
 					// Start with that, whats easy
-				case 'Vaginal': //if (kGAMECLASS.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_VAGINAL] < 10) flags[kFLAGS.TIMES_ORGASM_VAGINAL]++;
+				case 'Vaginal': //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_VAGINAL] < 10) flags[kFLAGS.TIMES_ORGASM_VAGINAL]++;
 					break;
-				case 'Anal':    //if (kGAMECLASS.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_ANAL]    < 10) flags[kFLAGS.TIMES_ORGASM_ANAL]++;
+				case 'Anal':    //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_ANAL]    < 10) flags[kFLAGS.TIMES_ORGASM_ANAL]++;
 					break;
-				case 'Dick':    //if (kGAMECLASS.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_DICK]    < 10) flags[kFLAGS.TIMES_ORGASM_DICK]++;
+				case 'Dick':    //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_DICK]    < 10) flags[kFLAGS.TIMES_ORGASM_DICK]++;
 					break;
-				case 'Lips':    //if (kGAMECLASS.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_LIPS]    < 10) flags[kFLAGS.TIMES_ORGASM_LIPS]++;
+				case 'Lips':    //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_LIPS]    < 10) flags[kFLAGS.TIMES_ORGASM_LIPS]++;
 					break;
-				case 'Tits':    //if (kGAMECLASS.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_TITS]    < 10) flags[kFLAGS.TIMES_ORGASM_TITS]++;
+				case 'Tits':    //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_TITS]    < 10) flags[kFLAGS.TIMES_ORGASM_TITS]++;
 					break;
-				case 'Nipples': //if (kGAMECLASS.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_NIPPLES] < 10) flags[kFLAGS.TIMES_ORGASM_NIPPLES]++;
+				case 'Nipples': //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_NIPPLES] < 10) flags[kFLAGS.TIMES_ORGASM_NIPPLES]++;
 					break;
 				case 'Ovi':     break;
 
@@ -6276,7 +6276,7 @@ use namespace kGAMECLASS;
 				EngineCore.outputText("\n\nAs you finish masturbating you feel a jolt in your genitals, as if for a small moment the raiju discharge was brought back, increasing the intensity of the pleasure and your desire to touch yourself. Electricity starts coursing through your body again by intermittence as something in you begins to change.");
 				game.player.addStatusValue(StatusEffects.RaijuLightningStatus,1,6);
 				dynStats("lus", (60 + rand(20)), "sca", false);
-				game.mutations.voltageTopaz(false,kGAMECLASS.player);
+				game.mutations.voltageTopaz(false,CoC.instance.player);
 			}
 			else {
 				EngineCore.outputText("\n\nAfter this electrifying orgasm your lust only raise sky high above. You will need a partner to fuck with in order to discharge your ramping up desire and electricity.");

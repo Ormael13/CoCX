@@ -19,7 +19,7 @@
 
 Try to keep the actual effects in this class, _especially_ **value1-4** semantics. In the scenes, interactions with class-specific methods are preferred over manipulating game state directly. 
 
-`game` is a shortcut for `kGAMECLASS`. `host` is the creature (monster or player) the effect is attached to. `playerHost` is `host as Player`, so you can use it for code completion, and also in conditions like 
+`game` is a shortcut for `CoC.instance`. `host` is the creature (monster or player) the effect is attached to. `playerHost` is `host as Player`, so you can use it for code completion, and also in conditions like 
 ```
 if (playerHost) game.outputText(...)
 ```
@@ -82,7 +82,7 @@ The following methods are pulled from `Player` up to `Creature` so that the `hos
 
 ### dynStats
 
-1. Moved to `Creature` from `kGAMECLASS`.
+1. Moved to `Creature` from `CoC.instance`.
 
 1. Returns an Object of `(newStat-oldStat)` values with keys **str**, **tou**, **spe**, **int**, **lib**, **sen**, **lus**, **cor **.
 

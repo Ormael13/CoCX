@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.Areas.Forest{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.SceneLib;
 
 public class TamainsDaughtersScene extends BaseContent implements TimeAwareInterface {
@@ -357,7 +357,7 @@ private function fuckYoDaughtersHomie():void {
 	if (tamaniPresent) SceneLib.forest.tamaniScene.tamaniKnockUp(); //If she wasn't pregnant she will be now
 	knockUpDaughters();
 	player.cumMultiplier += .3;
-    if (kGAMECLASS.inCombat) cleanupAfterCombat();
+    if (CoC.instance.inCombat) cleanupAfterCombat();
     else doNext(camp.returnToCampUseFourHours);
 }
 
@@ -710,7 +710,7 @@ private function legTamanisDaughtersRAEPYou():void {
 	dynStats("str", -.5,"int", -.5, "lib", 1, "cor", 1);
 	if (tamaniPresent) SceneLib.forest.tamaniScene.tamaniKnockUp(); //If she wasn't pregnant she will be now
 	knockUpDaughters();
-    if (kGAMECLASS.inCombat) cleanupAfterCombat();
+    if (CoC.instance.inCombat) cleanupAfterCombat();
     else doNext(camp.returnToCampUseFourHours);
 }
 
@@ -1023,7 +1023,7 @@ private function loseToDaughtersWithTamaniThere():void {
 	//daughter countdown reset. 
 	player.orgasm();
 	dynStats("str", -.5,"int", -.5, "lib", 1, "sen", 1, "cor", 1);
-    if (kGAMECLASS.inCombat) cleanupAfterCombat();
+    if (CoC.instance.inCombat) cleanupAfterCombat();
     else doNext(camp.returnToCampUseOneHour);
 }
 

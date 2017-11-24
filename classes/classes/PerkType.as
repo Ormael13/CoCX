@@ -5,7 +5,7 @@ package classes
 {
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 
 import flash.utils.Dictionary;
 
@@ -253,7 +253,7 @@ public class PerkType extends BaseContent
 		public function requireHungerEnabled():PerkType {
 			requirements.push({
 				fn  : function(player:Player):Boolean {
-					return kGAMECLASS.flags[kFLAGS.HUNGER_ENABLED] > 0;
+					return CoC.instance.flags[kFLAGS.HUNGER_ENABLED] > 0;
 				},
 				text: "Hunger enabled",
 				type: "hungerflag"
@@ -274,7 +274,7 @@ public class PerkType extends BaseContent
 		public function requireMinSens(value:int):PerkType {
 			requirements.push({
 				fn  : function(player:Player):Boolean {
-					return kGAMECLASS.player.minSens() >= value;
+					return CoC.instance.player.minSens() >= value;
 				},
 				text: "Min. Sensitivity "+value,
 				type: "minsensitivity",

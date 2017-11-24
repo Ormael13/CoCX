@@ -1,6 +1,6 @@
 package classes
 {
-	import classes.GlobalFlags.kGAMECLASS;
+	import classes.CoC;
 	import flash.system.System;
 	
 	public class PregnancyStore extends Object
@@ -121,13 +121,13 @@ package classes
 			}
 		}
 	
-		public function get type():int { return (_pregnancyTypeFlag == 0 ? 0 : kGAMECLASS.flags[_pregnancyTypeFlag] & PREG_TYPE_MASK); }
+		public function get type():int { return (_pregnancyTypeFlag == 0 ? 0 : CoC.instance.flags[_pregnancyTypeFlag] & PREG_TYPE_MASK); }
 
-		public function get incubation():int { return (_pregnancyIncubationFlag == 0 ? 0 : kGAMECLASS.flags[_pregnancyIncubationFlag]); }
+		public function get incubation():int { return (_pregnancyIncubationFlag == 0 ? 0 : CoC.instance.flags[_pregnancyIncubationFlag]); }
 
-		public function get buttType():int { return (_buttPregnancyTypeFlag == 0 ? 0 : kGAMECLASS.flags[_buttPregnancyTypeFlag] & PREG_TYPE_MASK); }
+		public function get buttType():int { return (_buttPregnancyTypeFlag == 0 ? 0 : CoC.instance.flags[_buttPregnancyTypeFlag] & PREG_TYPE_MASK); }
 
-		public function get buttIncubation():int { return (_buttPregnancyIncubationFlag == 0 ? 0 : kGAMECLASS.flags[_buttPregnancyIncubationFlag]); }
+		public function get buttIncubation():int { return (_buttPregnancyIncubationFlag == 0 ? 0 : CoC.instance.flags[_buttPregnancyIncubationFlag]); }
 		
 		public function get isPregnant():Boolean { return type != 0; } //At birth the incubation can be zero so a check vs. type is safer
 
@@ -164,10 +164,10 @@ package classes
 		public function knockUpForce(newPregType:int = 0, newPregIncubation:int = 0):void
 		{
 			if (_pregnancyTypeFlag == 0 || _pregnancyIncubationFlag == 0) return; //Check that these variables were provided by the containing class
-			if (newPregType != 0) newPregType = (kGAMECLASS.flags[_pregnancyTypeFlag] & PREG_NOTICE_MASK) + newPregType;
+			if (newPregType != 0) newPregType = (CoC.instance.flags[_pregnancyTypeFlag] & PREG_NOTICE_MASK) + newPregType;
 				//If a pregnancy 'continues' an existing pregnancy then do not change the value for last noticed stage
-			kGAMECLASS.flags[_pregnancyTypeFlag] = newPregType;
-			kGAMECLASS.flags[_pregnancyIncubationFlag] = (newPregType == 0 ? 0 : newPregIncubation); //Won't allow incubation time without pregnancy type
+			CoC.instance.flags[_pregnancyTypeFlag] = newPregType;
+			CoC.instance.flags[_pregnancyIncubationFlag] = (newPregType == 0 ? 0 : newPregIncubation); //Won't allow incubation time without pregnancy type
 		}
 	
 		public function buttKnockUp(newPregType:int = 0, newPregIncubation:int = 0):void
@@ -178,22 +178,22 @@ package classes
 		public function buttKnockUpForce(newPregType:int = 0, newPregIncubation:int = 0):void
 		{
 			if (_buttPregnancyTypeFlag == 0 || _buttPregnancyIncubationFlag == 0) return; //Check that these variables were provided by the containing class
-			if (newPregType != 0) newPregType = (kGAMECLASS.flags[_buttPregnancyTypeFlag] & PREG_NOTICE_MASK) + newPregType;
+			if (newPregType != 0) newPregType = (CoC.instance.flags[_buttPregnancyTypeFlag] & PREG_NOTICE_MASK) + newPregType;
 				//If a pregnancy 'continues' an existing pregnancy then do not change the value for last noticed stage
-			kGAMECLASS.flags[_buttPregnancyTypeFlag] = newPregType;
-			kGAMECLASS.flags[_buttPregnancyIncubationFlag] = (newPregType == 0 ? 0 : newPregIncubation); //Won't allow incubation time without pregnancy type
+			CoC.instance.flags[_buttPregnancyTypeFlag] = newPregType;
+			CoC.instance.flags[_buttPregnancyIncubationFlag] = (newPregType == 0 ? 0 : newPregIncubation); //Won't allow incubation time without pregnancy type
 		}
 
 		//The containing class is responsible for calling pregnancyAdvance, usually once per timeChange()
 		public function pregnancyAdvance():void //Separate function so it can be called more often than timeChange if neccessary
 		{
 			if (incubation != 0) {
-				kGAMECLASS.flags[_pregnancyIncubationFlag]--;
-				if (kGAMECLASS.flags[_pregnancyIncubationFlag] < 0) kGAMECLASS.flags[_pregnancyIncubationFlag] = 0;
+				CoC.instance.flags[_pregnancyIncubationFlag]--;
+				if (CoC.instance.flags[_pregnancyIncubationFlag] < 0) CoC.instance.flags[_pregnancyIncubationFlag] = 0;
 			}
 			if (buttIncubation != 0) {
-				kGAMECLASS.flags[_buttPregnancyIncubationFlag]--;
-				if (kGAMECLASS.flags[_buttPregnancyIncubationFlag] < 0) kGAMECLASS.flags[_buttPregnancyIncubationFlag] = 0;
+				CoC.instance.flags[_buttPregnancyIncubationFlag]--;
+				if (CoC.instance.flags[_buttPregnancyIncubationFlag] < 0) CoC.instance.flags[_buttPregnancyIncubationFlag] = 0;
 			}
 		}
 
@@ -240,9 +240,9 @@ package classes
 		public function eventTriggered():int
 		{
 			var currentStage:int = event;
-			var lastNoticed:int = kGAMECLASS.flags[_pregnancyTypeFlag] & PREG_NOTICE_MASK;
+			var lastNoticed:int = CoC.instance.flags[_pregnancyTypeFlag] & PREG_NOTICE_MASK;
 			if (currentStage * 65536 == lastNoticed) return 0; //Player has already noticed this stage
-			kGAMECLASS.flags[_pregnancyTypeFlag] = (kGAMECLASS.flags[_pregnancyTypeFlag] & PREG_TYPE_MASK) + (currentStage * 65536);
+			CoC.instance.flags[_pregnancyTypeFlag] = (CoC.instance.flags[_pregnancyTypeFlag] & PREG_TYPE_MASK) + (currentStage * 65536);
 				//Strip off the old noticed value by ANDing with PREG_TYPE_MASK
 			return currentStage;
 		}
@@ -251,9 +251,9 @@ package classes
 		public function buttEventTriggered():int
 		{
 			var currentStage:int = buttEvent;
-			var lastNoticed:int = kGAMECLASS.flags[_buttPregnancyTypeFlag] & PREG_NOTICE_MASK;
+			var lastNoticed:int = CoC.instance.flags[_buttPregnancyTypeFlag] & PREG_NOTICE_MASK;
 			if (currentStage * 65536 == lastNoticed) return 0; //Player has already noticed this stage
-			kGAMECLASS.flags[_buttPregnancyTypeFlag] = (kGAMECLASS.flags[_buttPregnancyTypeFlag] & PREG_TYPE_MASK) + (currentStage * 65536);
+			CoC.instance.flags[_buttPregnancyTypeFlag] = (CoC.instance.flags[_buttPregnancyTypeFlag] & PREG_TYPE_MASK) + (currentStage * 65536);
 				//Strip off the old noticed value by ANDing with PREG_TYPE_MASK
 			return currentStage;
 		}

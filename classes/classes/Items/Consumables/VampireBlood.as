@@ -1,6 +1,6 @@
 package classes.Items.Consumables {
 import classes.AppearanceDefs;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Items.Consumable;
 
 import coc.xxc.BoundStory;
@@ -31,7 +31,7 @@ public class VampireBlood extends Consumable {
     }
     override public function useItem():Boolean{
         clearOutput();
-        var story:BoundStory = kGAMECLASS.rootStory.locate("diva/item").bind(kGAMECLASS.context);
+        var story:BoundStory = CoC.instance.rootStory.locate("diva/item").bind(CoC.instance.context);
         if(first){
             story.display("useText/first");
             first = false;

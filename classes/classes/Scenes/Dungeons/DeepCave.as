@@ -3,13 +3,13 @@ package classes.Scenes.Dungeons
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.Dungeons.DeepCave.*;
 import classes.Scenes.NPCs.ShouldraFollower;
 import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
-use namespace kGAMECLASS;
+use namespace CoC;
 	
 	public class DeepCave extends DungeonAbstractContent
 	{

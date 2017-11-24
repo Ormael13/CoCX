@@ -4,7 +4,7 @@ import classes.BaseContent;
 import classes.EventParser;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Items.WeaponLib;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
@@ -58,7 +58,7 @@ public class LethiceScenes extends BaseContent
 			}
 			
 			// Found a free file, throw it at the base save code by abusing the fuck out of Slot
-            kGAMECLASS.saves.saveGameObject(currFileName, false);
+            CoC.instance.saves.saveGameObject(currFileName, false);
             // Now would be a good time to pray this shit works.
 			
 			clearOutput();
@@ -88,7 +88,7 @@ public class LethiceScenes extends BaseContent
 		
 		private function quitToMenu():void {
 			player.str = 0;
-            kGAMECLASS.mainMenu.mainMenu();
+            CoC.instance.mainMenu.mainMenu();
         }
 
 		public function LethiceScenes()

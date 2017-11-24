@@ -7,7 +7,7 @@ import classes.BodyParts.Skin;
 import classes.CoC;
 import classes.CockTypesEnum;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 
 import coc.xlogic.ExecContext;
 
@@ -21,7 +21,7 @@ public class StoryContext extends ExecContext{
 				Appearance:Appearance,
 				CockTypesEnum:CockTypesEnum,
 				kFLAGS:kFLAGS,
-				kGAMECLASS:kGAMECLASS,
+				kGAMECLASS:CoC.instance,
 				Math:Math,
 				Skin:Skin
 			}

@@ -7,7 +7,7 @@ import classes.EngineCore;
 import classes.EventParser;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.ItemType;
 import classes.Items.ConsumableLib;
 import classes.PerkLib;
@@ -21,16 +21,16 @@ public class Holidays {
     public function Holidays() {
     }
     private static function get player():Player{
-        return kGAMECLASS.player;
+        return CoC.instance.player;
     }
     private static function get flags():DefaultDict{
-        return kGAMECLASS.flags;
+        return CoC.instance.flags;
     }
     private static function get date():Date{
-        return kGAMECLASS.date;
+        return CoC.instance.date;
     }
     private static function get consumables():ConsumableLib{
-        return kGAMECLASS.consumables;
+        return CoC.instance.consumables;
     }
     public static function pumpkinFuckEncounter():void {
         EngineCore.awardAchievement("Pump-kin-kin-kin", kACHIEVEMENTS.HOLIDAY_HALLOWEEN_I);
@@ -732,7 +732,7 @@ public class Holidays {
         function reallyCheckout():void {
             //You just got TROLLED!
             EngineCore.clearOutput();
-            EngineCore.outputText(kGAMECLASS.images.showImage("monster-troll"));
+            EngineCore.outputText(CoC.instance.images.showImage("monster-troll"));
             EngineCore.outputText("APRIL FOOLS! The game will ALWAYS be entirely free to play. :)");
             flags[kFLAGS.DLC_APRIL_FOOLS] = 1;
             EngineCore.doNext(EventParser.playerMenu);
@@ -1876,7 +1876,7 @@ public class Holidays {
 
     public static function xmasBitchEncounter():void {
         EngineCore.clearOutput();
-        kGAMECLASS.spriteSelect(9);
+        CoC.instance.spriteSelect(9);
         EngineCore.outputText("Your sleep is disturbed by something repeatedly smacking into your side.  Groggily at first, you grumble and throw back your blanket.  Then you remember where you are, and snap to full wakefulness.  You launch onto your feet, bring up your fists, and stare bewildered at the sight in front of you.\n\n"
                 +"Standing there, innocent as can be, ");
         if (flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] == 0) EngineCore.outputText("is an elf.  She can't be more than four and a half feet tall, and though she has fairly womanly hips, her chest is nothing to speak of.  Her clothing is strange – a red two piece lined with some kind of white fur.  She has typically pointed ears, blond hair, and a red fur-lined cap topped with a white puffball. She's holding a large box in front of her and looking at you expectantly as you stare, dumbfounded.\n\n");
@@ -1920,7 +1920,7 @@ public class Holidays {
 
         //[Decline]
         function declineXmasPresent():void {
-            kGAMECLASS.spriteSelect(9);
+            CoC.instance.spriteSelect(9);
             EngineCore.clearOutput();
             EngineCore.outputText("You shake your head 'no', and inform the elf that you'll have nothing to do with her 'gifts' or 'surprises'.  She looks on the verge of tears as she whines, \"<i>I'm going to get reamed for this!</i>\"\n\n"
                     +"Before you can react, she sprints off into the darkness.");
@@ -1930,7 +1930,7 @@ public class Holidays {
 
         //[Open Present]
         function openXmasPresent():void {
-            kGAMECLASS.spriteSelect(9);
+            CoC.instance.spriteSelect(9);
             EngineCore.clearOutput();
             EngineCore.outputText("You easily rip through the ribbons holding the box together and pull off the top.   You gasp in ");
             if (player.cor >= 90 || JojoScene.monk >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || SceneLib.amilyScene.amilyCorrupt() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
@@ -1945,8 +1945,8 @@ public class Holidays {
                 //Great present!
                 EngineCore.outputText("surprise at the box's contents - there's a careful arranged set of equipment here, made from woven spider-silk!  Somebody must think you're pretty good.\n\n");
                 if (Utils.rand(2) == 0) {
-                    SceneLib.inventory.takeItem(kGAMECLASS.armors.SS_ROBE, EventParser.playerMenu);
-                } else SceneLib.inventory.takeItem(kGAMECLASS.armors.SSARMOR, EventParser.playerMenu);
+                    SceneLib.inventory.takeItem(CoC.instance.armors.SS_ROBE, EventParser.playerMenu);
+                } else SceneLib.inventory.takeItem(CoC.instance.armors.SSARMOR, EventParser.playerMenu);
                 flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
             }
             else if (player.cor < 60) {
@@ -1965,7 +1965,7 @@ public class Holidays {
 
         //[Unwrap the elf]
         function unwrapElfyPresent():void {
-            kGAMECLASS.spriteSelect(9);
+            CoC.instance.spriteSelect(9);
             EngineCore.clearOutput();
             EngineCore.outputText("The elf tosses the present to the side and saunters up to you, her hips swaying sensually.  She ");
             if (player.tallness > 60) EngineCore.outputText("reaches up and presses herself against you seductively, caressing your body.");
@@ -2083,7 +2083,7 @@ public class Holidays {
             //(+20 sens unless it would bring you over 80 sens, then +5 sens)
             if (player.sens + 20 > 80) player.dynStats("sen", 5);
             else player.dynStats("sen", 15);
-            kGAMECLASS.temp = 1001;
+            CoC.instance.temp = 1001;
             flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
         }
 
@@ -2103,13 +2103,13 @@ public class Holidays {
             //(+20 sens unless it would bring you over 80 sens, then +5 sens)
             if (player.sens + 20 > 80) player.dynStats("sen", 5);
             else player.dynStats("sen", 15);
-            kGAMECLASS.temp = 2002;
+            CoC.instance.temp = 2002;
             flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
         }
 
         function xmasPerkM():void {
             if (player.findPerk(PerkLib.ElvenBounty) < 0) {
-                if (kGAMECLASS.temp == 1001) player.createPerk(PerkLib.ElvenBounty, 250, 0, 0, 0);
+                if (CoC.instance.temp == 1001) player.createPerk(PerkLib.ElvenBounty, 250, 0, 0, 0);
                 else player.createPerk(PerkLib.ElvenBounty, 0, 15, 0, 0);
                 EngineCore.clearOutput();
                 EngineCore.outputText("<b>New Perk Acquired - Elven Bounty!</b>");
@@ -2117,7 +2117,7 @@ public class Holidays {
             else {
                 EngineCore.clearOutput();
                 EngineCore.outputText("<b>Perk Enhanced - Elven Bounty!</b>");
-                if (kGAMECLASS.temp == 1001) {
+                if (CoC.instance.temp == 1001) {
                     player.addPerkValue(PerkLib.ElvenBounty, 1, 250);
                     EngineCore.outputText("<b> - +250mL cum production!</b>");
                 }
@@ -3051,7 +3051,7 @@ public class Holidays {
             EngineCore.outputText("."
                     +"\n\nSitting down on your bedroll, you open your arms, inviting Amily over.  The mouse promptly approaches");
             if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0) EngineCore.outputText(", her own " + SceneLib.amilyScene.amilyCock() + " jutting out in anticipation");
-            EngineCore.outputText(", wriggling into your arms and angling her pussy over your " + player.cockDescript(kGAMECLASS.x) + ".  With the ease of long practice, she slides smoothly down its length, her warm, wet depths greedily inhaling your masculinity.  \"<i>Ah, nothing like a nice hard cock in your cunt to make you feel warmer,</i>\" she coos."
+            EngineCore.outputText(", wriggling into your arms and angling her pussy over your " + player.cockDescript(CoC.instance.x) + ".  With the ease of long practice, she slides smoothly down its length, her warm, wet depths greedily inhaling your masculinity.  \"<i>Ah, nothing like a nice hard cock in your cunt to make you feel warmer,</i>\" she coos."
                     +"\n\nYou simply grin and begin bucking your hips against her, suppressing your moans by kissing her, hugging her tightly against you, holding your bodies flush together.  The mouse hugs you as tightly as she can, smothering you with kisses as her hands roam nimbly across your back, slinking down to squeeze your ass with an obvious hunger to molest you."
                     +"\n\nYou guide your hands down her sides, towards her behind, taking it into your hands and helping her rise and fall on your shaft.  She breaks the kiss with a loud exclamation.  \"<i>Oh, this feels so good, [name]!  And it's certainly warming... why, I think I'm starting to break a sweat... and I think you are too,</i>\" she grins."
                     +"\n\nYou ask her to tell you how much she wants this... how much she wants your seed... how much she wants you?  \"<i>I want you!  I want you with everything I have, I want everything you have to give!</i>\" she cries out.  Then she can have all of you... with one last thrust, you bury your shaft deeply into her quivering cunny and blast your liquid lust straight into her waiting womb.  She moans loudly, making no effort to hide her delight at your treatment, and shudders violently in your grip as orgasm rocks her body, flooding your crotch with her rodent fem-cum");
@@ -3189,7 +3189,7 @@ public class Holidays {
         EngineCore.menu();
         EngineCore.addButton(0, "Investigate", investigateCandyCaneBun);
         EngineCore.addButton(4, "Leave", leaveBeforeMeetingCandyCaneBun);
-        trace("FUNC SETUP LENGTH: " + kGAMECLASS.funcs.length);
+        trace("FUNC SETUP LENGTH: " + CoC.instance.funcs.length);
 
         //LEAVE
         function leaveBeforeMeetingCandyCaneBun():void {
@@ -3582,7 +3582,7 @@ public class Holidays {
         EngineCore.statScreenRefresh();
         EngineCore.outputText("You opt for a slice of the tasty treat - you've only got until the festivities wade away, so you might as well take one now!  Do you eat the treat or save it for later?\n\n");
         EngineCore.menu();
-        EngineCore.addButton(0, "Eat", kGAMECLASS.mutations.winterPudding, player, true, null, "Eat the delicious Winter Pudding.");
+        EngineCore.addButton(0, "Eat", CoC.instance.mutations.winterPudding, player, true, null, "Eat the delicious Winter Pudding.");
         EngineCore.addButton(1, "Take", SceneLib.inventory.takeItem, consumables.W_PDDNG, SceneLib.telAdre.bakeryScene.bakeryuuuuuu, null, "Bring the pudding with you.");
         //doNext(telAdre.bakeryScene.bakeryuuuuuu);
     }
@@ -3854,35 +3854,35 @@ public class Holidays {
 
     public static function nieveCampDescs():void {
         //6:00
-        if (kGAMECLASS.model.time.hours == 6) EngineCore.outputText("Nieve is sitting cross-legged in the snowdrift, munching on what looks to be icicles.  As you watch, " + nieveMF("he", "she") + " reaches down into the glittering powder surrounding " + nieveMF("him", "her") + " and produces another one.");
+        if (CoC.instance.model.time.hours == 6) EngineCore.outputText("Nieve is sitting cross-legged in the snowdrift, munching on what looks to be icicles.  As you watch, " + nieveMF("he", "she") + " reaches down into the glittering powder surrounding " + nieveMF("him", "her") + " and produces another one.");
         //7:00
-        else if (kGAMECLASS.model.time.hours == 7) EngineCore.outputText("Nieve is giggling and laughing as a fresh flurry flutters down on " + nieveMF("him", "her") + ".  You wonder idly if " + nieveMF("he", "she") + "'s causing it to happen.");
+        else if (CoC.instance.model.time.hours == 7) EngineCore.outputText("Nieve is giggling and laughing as a fresh flurry flutters down on " + nieveMF("him", "her") + ".  You wonder idly if " + nieveMF("he", "she") + "'s causing it to happen.");
         //8:00
-        else if (kGAMECLASS.model.time.hours == 8) EngineCore.outputText("Nieve is sitting in the white wintery wonderland, carefully constructing a snowman.  It strikes you as strange, and almost masturbatory in a way.  " + nieveMF("He", "She") + " spots you and gives you a wave and a smile.  For a moment, you think the snowman has too, but you eventually conclude it's your imagination.");
+        else if (CoC.instance.model.time.hours == 8) EngineCore.outputText("Nieve is sitting in the white wintery wonderland, carefully constructing a snowman.  It strikes you as strange, and almost masturbatory in a way.  " + nieveMF("He", "She") + " spots you and gives you a wave and a smile.  For a moment, you think the snowman has too, but you eventually conclude it's your imagination.");
         //9:00
-        else if (kGAMECLASS.model.time.hours == 9) EngineCore.outputText("Nieve is sprawled out in the icy field, creating a series of snow angels without a care in the world.  When " + nieveMF("he", "she") + " catches sight of you, she gives a friendly wave, then dives back into the snow.");
+        else if (CoC.instance.model.time.hours == 9) EngineCore.outputText("Nieve is sprawled out in the icy field, creating a series of snow angels without a care in the world.  When " + nieveMF("he", "she") + " catches sight of you, she gives a friendly wave, then dives back into the snow.");
         //10:00
-        else if (kGAMECLASS.model.time.hours == 10) EngineCore.outputText("Nieve, the ice spirit, sits quietly at the edge of the snowdrift, looking out at the landscape beyond.  When " + nieveMF("he", "she") + " sees you looking, " + nieveMF("he", "she") + " gives a somber wave.");
+        else if (CoC.instance.model.time.hours == 10) EngineCore.outputText("Nieve, the ice spirit, sits quietly at the edge of the snowdrift, looking out at the landscape beyond.  When " + nieveMF("he", "she") + " sees you looking, " + nieveMF("he", "she") + " gives a somber wave.");
         //11:00
-        else if (kGAMECLASS.model.time.hours == 11) EngineCore.outputText("Nieve is in your camp, poking around your supplies and water barrels. You notice " + nieveMF("he", "she") + " seems a little uncomfortable to be away from " + nieveMF("his", "her") + " snowdrift.");
+        else if (CoC.instance.model.time.hours == 11) EngineCore.outputText("Nieve is in your camp, poking around your supplies and water barrels. You notice " + nieveMF("he", "she") + " seems a little uncomfortable to be away from " + nieveMF("his", "her") + " snowdrift.");
         //12:00
-        else if (kGAMECLASS.model.time.hours == 12) EngineCore.outputText("Nieve is carefully compressing snowballs in " + nieveMF("his", "her") + " little camp.  To your surprise, " + nieveMF("he", "she") + " picks one up and begins eating it like you would an apple.  When " + nieveMF("he", "she") + " catches you looking mid-bite, " + nieveMF("he", "she") + " gives you a grin with her mouth full, " + nieveMF("his", "her") + " cheeks puffed out.");
+        else if (CoC.instance.model.time.hours == 12) EngineCore.outputText("Nieve is carefully compressing snowballs in " + nieveMF("his", "her") + " little camp.  To your surprise, " + nieveMF("he", "she") + " picks one up and begins eating it like you would an apple.  When " + nieveMF("he", "she") + " catches you looking mid-bite, " + nieveMF("he", "she") + " gives you a grin with her mouth full, " + nieveMF("his", "her") + " cheeks puffed out.");
         //13:00
-        else if (kGAMECLASS.model.time.hours == 13) EngineCore.outputText("Nieve is sitting cross-legged, in the middle of what appears to be an argument with a snowman " + nieveMF("he", "she") + "'s just made.");
+        else if (CoC.instance.model.time.hours == 13) EngineCore.outputText("Nieve is sitting cross-legged, in the middle of what appears to be an argument with a snowman " + nieveMF("he", "she") + "'s just made.");
         //14:00
-        else if (kGAMECLASS.model.time.hours == 14) EngineCore.outputText("Nieve is in " + nieveMF("his", "her") + " usual spot, seemingly deep in concentration.  Around " + nieveMF("him", "her") + " snow begins to fall slowly, then quicker and quicker, whipping " + nieveMF("his", "her") + " hair around wildly.  Although strangely, the air is still where you are.");
+        else if (CoC.instance.model.time.hours == 14) EngineCore.outputText("Nieve is in " + nieveMF("his", "her") + " usual spot, seemingly deep in concentration.  Around " + nieveMF("him", "her") + " snow begins to fall slowly, then quicker and quicker, whipping " + nieveMF("his", "her") + " hair around wildly.  Although strangely, the air is still where you are.");
         //15:00
-        else if (kGAMECLASS.model.time.hours == 15) EngineCore.outputText("\n\nNieve the ice spirit is whirling around " + nieveMF("his", "her") + " area, practicing with what appears to be a translucent blue spear.  " + nieveMF("He", "She") + " jabs and thrusts, spins and swipes.  " + nieveMF("He", "She") + " may be new to Mareth, but you've got to hand it to " + nieveMF("him", "her") + ", it looks like " + nieveMF("he", "she") + " could take care of " + nieveMF("him", "her") + "self.");
+        else if (CoC.instance.model.time.hours == 15) EngineCore.outputText("\n\nNieve the ice spirit is whirling around " + nieveMF("his", "her") + " area, practicing with what appears to be a translucent blue spear.  " + nieveMF("He", "She") + " jabs and thrusts, spins and swipes.  " + nieveMF("He", "She") + " may be new to Mareth, but you've got to hand it to " + nieveMF("him", "her") + ", it looks like " + nieveMF("he", "she") + " could take care of " + nieveMF("him", "her") + "self.");
         //16:00
-        else if (kGAMECLASS.model.time.hours == 16) EngineCore.outputText("\n\nNieve is at first nowhere to be seen.  Then you see " + nieveMF("his", "her") + " head pop out of a snowdrift.  " + nieveMF("He", "She") + " looks around quickly, then leaps into the air, diving head first into another pile of the powdery stuff.");
+        else if (CoC.instance.model.time.hours == 16) EngineCore.outputText("\n\nNieve is at first nowhere to be seen.  Then you see " + nieveMF("his", "her") + " head pop out of a snowdrift.  " + nieveMF("He", "She") + " looks around quickly, then leaps into the air, diving head first into another pile of the powdery stuff.");
         //17:00
-        else if (kGAMECLASS.model.time.hours == 17) EngineCore.outputText("\n\nNieve appears to have constructed a firepit constructed from translucent blue logs and rocks.  A vivid blue flame roars in the pit, over which Nieve appears to be roasting... marshmallows?  As you watch " + nieveMF("he", "she") + " peels the burnt black skin off a marshmallow, gobbles it down, and begins roasting the rest.");
+        else if (CoC.instance.model.time.hours == 17) EngineCore.outputText("\n\nNieve appears to have constructed a firepit constructed from translucent blue logs and rocks.  A vivid blue flame roars in the pit, over which Nieve appears to be roasting... marshmallows?  As you watch " + nieveMF("he", "she") + " peels the burnt black skin off a marshmallow, gobbles it down, and begins roasting the rest.");
         //18:00
-        else if (kGAMECLASS.model.time.hours == 18) EngineCore.outputText("\n\nNieve seems to be working on a spear, sharpening it with a jagged piece of ice.  When " + nieveMF("he", "she") + " catches sight of you " + nieveMF("he", "she") + " waves and gives a friendly smile.");
+        else if (CoC.instance.model.time.hours == 18) EngineCore.outputText("\n\nNieve seems to be working on a spear, sharpening it with a jagged piece of ice.  When " + nieveMF("he", "she") + " catches sight of you " + nieveMF("he", "she") + " waves and gives a friendly smile.");
         //19:00
-        else if (kGAMECLASS.model.time.hours == 19) EngineCore.outputText("\n\nNieve is sitting at the edge of " + nieveMF("his", "her") + " icy expanse, staring off at the distant mountains.  You wonder if " + nieveMF("he", "she") + "'s looking for home.");
+        else if (CoC.instance.model.time.hours == 19) EngineCore.outputText("\n\nNieve is sitting at the edge of " + nieveMF("his", "her") + " icy expanse, staring off at the distant mountains.  You wonder if " + nieveMF("he", "she") + "'s looking for home.");
         //20:00
-        else if (kGAMECLASS.model.time.hours == 20) EngineCore.outputText("\n\nNieve is, surprisingly, outside of " + nieveMF("his", "her") + " cold camp.  " + nieveMF("He", "She") + "'s dancing along the battered, parched ground, calling down snow.  Wherever a flake hits, it's immediately devoured by the thirsty earth.  Is Nieve perhaps trying to... water the ground?");
+        else if (CoC.instance.model.time.hours == 20) EngineCore.outputText("\n\nNieve is, surprisingly, outside of " + nieveMF("his", "her") + " cold camp.  " + nieveMF("He", "She") + "'s dancing along the battered, parched ground, calling down snow.  Wherever a flake hits, it's immediately devoured by the thirsty earth.  Is Nieve perhaps trying to... water the ground?");
         //21:00
         else EngineCore.outputText("\n\nYou can hear Nieve sleeping soundly from within a small ice-fort.");
     }

@@ -3,7 +3,7 @@ package classes.Scenes.Dungeons
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.Areas.Desert.CumWitch;
 import classes.Scenes.Dungeons.DesertCave.*;
 import classes.Scenes.NPCs.JojoScene;
@@ -1103,7 +1103,7 @@ public class DesertCave extends DungeonAbstractContent
 			//Female Victory Sex
 			if(player.hasVagina()) addButton(3,"Ladysex",ladyVictorySex).hint("Ride the Cum Witch's cock until she cums!");
 
-if (kGAMECLASS.inCombat) {
+if (CoC.instance.inCombat) {
                 if(monster.HP >= 1) addButton(14,"Leave",declineSandWitch);
 				else addButton(14,"Leave",cleanupAfterCombat);
 			}
@@ -1114,7 +1114,7 @@ if (kGAMECLASS.inCombat) {
 		public function declineSandWitch():void {
 			clearOutput();
 			outputText("Dusting yourself off, you lower your [weapon] and leave the cum witch to recover from the humiliation of losing to you.  The haunted, hungry look in her eyes leaves little doubt that she'll challenge you again or that she still wants to fuck you.  For now, she slips down into her own puddled cum, idly touching herself.");
-            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+            if (CoC.instance.inCombat) cleanupAfterCombat();
             else doNext(playerMenu);
 		}
 
@@ -1207,12 +1207,12 @@ if (kGAMECLASS.inCombat) {
 				player.orgasm();
 			}
 			if(inDungeon) {
-                if (kGAMECLASS.inCombat) cleanupAfterCombat();
+                if (CoC.instance.inCombat) cleanupAfterCombat();
                 else doNext(playerMenu);
 			}
 			else {
 
-if (kGAMECLASS.inCombat) cleanupAfterCombat();
+if (CoC.instance.inCombat) cleanupAfterCombat();
                 else doNext(camp.returnToCampUseOneHour);
 			}
 		}
@@ -1251,12 +1251,12 @@ if (kGAMECLASS.inCombat) cleanupAfterCombat();
 			outputText("\n\nExhausted at last, you pat your " + cockDescript(x) + " affectionately.  You'd wipe it off on the witch's hair, if it wasn't messier than the [skin] you plan to clean.  She begins to lick her fingers and clean the stuff off her face.  You just laugh, and get dressed.  There's still much to do.");
 			player.orgasm();
 			if(inDungeon) {
-                if (kGAMECLASS.inCombat) cleanupAfterCombat();
+                if (CoC.instance.inCombat) cleanupAfterCombat();
                 else doNext(playerMenu);
 			}
 			else {
 
-if (kGAMECLASS.inCombat) cleanupAfterCombat();
+if (CoC.instance.inCombat) cleanupAfterCombat();
                 else doNext(camp.returnToCampUseOneHour);
 			}
 		}
@@ -1291,12 +1291,12 @@ if (kGAMECLASS.inCombat) cleanupAfterCombat();
 			player.knockUp(PregnancyStore.PREGNANCY_SAND_WITCH, PregnancyStore.INCUBATION_SAND_WITCH, 90);
 			player.orgasm();
 			if(inDungeon) {
-                if (kGAMECLASS.inCombat) cleanupAfterCombat();
+                if (CoC.instance.inCombat) cleanupAfterCombat();
                 else doNext(playerMenu);
 			}
 			else {
 
-if (kGAMECLASS.inCombat) cleanupAfterCombat();
+if (CoC.instance.inCombat) cleanupAfterCombat();
                 else doNext(camp.returnToCampUseOneHour);
 			}
 		}
@@ -1332,12 +1332,12 @@ if (kGAMECLASS.inCombat) cleanupAfterCombat();
 			
 			player.orgasm();
 			if(inDungeon) {
-                if (kGAMECLASS.inCombat) cleanupAfterCombat();
+                if (CoC.instance.inCombat) cleanupAfterCombat();
                 else doNext(playerMenu);
 			}
 			else {
 
-if (kGAMECLASS.inCombat) cleanupAfterCombat();
+if (CoC.instance.inCombat) cleanupAfterCombat();
                 else doNext(camp.returnToCampUseOneHour);
 			}
 		}
@@ -2272,7 +2272,7 @@ if (kGAMECLASS.inCombat) cleanupAfterCombat();
 				outputText("The Sand Mother slightly inclines her head in your direction as you enter her throne room.  She is every bit as imposing as you recall, or at least as imposing as a woman with four watermelon-sized jugs on her chest can be.  \"<i>You have returned to us, far traveler.  Is there something you desire from the coven of the sands?  Simply ask for what you need, and we shall aid you against the demon Queen.</i>\"  The lactation-obsessed arch-enchantress idly pushes a whitish-blonde curl out of her eyes as she awaits your reply.");
 				//Display Friendly Choices
 				sandWitchMotherFriendlyMenu();
-				return;
+
 			}
 			//*Encounter Repeat: Cowed
 			else if(flags[kFLAGS.SAND_MOTHER_DEFEATED] > 0) {
@@ -2440,7 +2440,7 @@ if (kGAMECLASS.inCombat) cleanupAfterCombat();
 			flags[kFLAGS.TIMES_TENTACLED_SAND_MOTHER]++;
 			player.orgasm();
 			dynStats("cor", 1);
-            if (!kGAMECLASS.inCombat) doNext(playerMenu);
+            if (!CoC.instance.inCombat) doNext(playerMenu);
             else cleanupAfterCombat();
 		}
 		//*Fuck Her Cunt
@@ -2448,7 +2448,7 @@ if (kGAMECLASS.inCombat) cleanupAfterCombat();
 		public function fuckTheSandMothersCunt():void {
 			clearOutput();
 			startCombat(new SandMother(), true);
-            kGAMECLASS.inCombat = false;
+            CoC.instance.inCombat = false;
             var x:int = player.cockThatFits(monster.vaginalCapacity());
 			var y:int = player.cockThatFits2(monster.vaginalCapacity());
 			outputText("You admire your prize for a moment, reveling triumphantly in your victory as you hastily disrobe.  The Sand Mother, defeated and weak, declares, \"<i>Fine then, do as you will.  You won't break me.</i>\"  The venom in her voice takes you off-guard - she still thinks you're a demonic agent!  You shrug and roll her over, pulling her up onto her hands and knees.  She can think what she wants, but you're going to tap her super-curvy body regardless.  You smack the weakened Queen through her sheer robes and admire the ripple that moves from one side of her well-endowed tush to the other.");
@@ -2515,7 +2515,7 @@ if (kGAMECLASS.inCombat) cleanupAfterCombat();
 			else outputText("\n\nThey may not think much of you, but turning the Sand Witch Queen into a mewling slut never gets old.");
 			player.orgasm();
 			dynStats("cor", 1);
-            if (!kGAMECLASS.inCombat) doNext(playerMenu);
+            if (!CoC.instance.inCombat) doNext(playerMenu);
             else cleanupAfterCombat();
 		}
 
@@ -2565,7 +2565,7 @@ if (kGAMECLASS.inCombat) cleanupAfterCombat();
 			else outputText("\n\nThey may not think much of you, but turning the Sand Witch Queen into a mewling slut never gets old.");
 			player.orgasm();
 			dynStats("cor", 1);
-            if (!kGAMECLASS.inCombat) doNext(playerMenu);
+            if (!CoC.instance.inCombat) doNext(playerMenu);
             else cleanupAfterCombat();
 		}
 			
@@ -2786,7 +2786,7 @@ if (kGAMECLASS.inCombat) cleanupAfterCombat();
 		public function friendlySandMotherFuck():void {
 			clearOutput();
 			startCombat(new SandMother(), true);
-            kGAMECLASS.inCombat = false;
+            CoC.instance.inCombat = false;
             var x:int = player.cockThatFits(monster.vaginalCapacity());
 			var y:int = player.cockThatFits2(monster.vaginalCapacity());
 			//First Time:

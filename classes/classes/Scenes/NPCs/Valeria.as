@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Items.Armor;
 import classes.Scenes.Areas.Lake.GooGirl;
 
@@ -407,7 +407,7 @@ public function valeriaSexDominated(offCamp:Boolean = false):void {
 	feedValeria(Math.sqrt(player.cumQ()) + 5 + (player.averageVaginalWetness() * 5));
 	player.orgasm();
 	dynStats("sen", 1);
-    if (offCamp || !kGAMECLASS.inCombat)
+    if (offCamp || !CoC.instance.inCombat)
         doNext(camp.returnToCampUseOneHour);
 	else cleanupAfterCombat();
 }

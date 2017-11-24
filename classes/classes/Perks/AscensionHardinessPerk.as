@@ -6,14 +6,14 @@ package classes.Perks
 {
 	import classes.PerkClass;
 	import classes.PerkType;
-	import classes.GlobalFlags.kGAMECLASS;
+	import classes.CoC;
 	
 	public class AscensionHardinessPerk extends PerkType
 	{
 		
 		override public function desc(params:PerkClass = null):String
 		{
-			return "(Rank: " + params.value1 + "/" + kGAMECLASS.charCreation.MAX_HARDINESS_LEVEL + ") Increases maximum HP by " + params.value1 * 100 + ".";
+			return "(Rank: " + params.value1 + "/" + CoC.instance.charCreation.MAX_HARDINESS_LEVEL + ") Increases maximum HP by " + params.value1 * 100 + ".";
 		}
 		
 		public function AscensionHardinessPerk() 

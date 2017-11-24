@@ -1,6 +1,7 @@
 package classes.Perks 
 {
-	import classes.PerkClass;
+import classes.CoC;
+import classes.PerkClass;
 	import classes.PerkType;
 	import classes.GlobalFlags.*;
 
@@ -9,7 +10,7 @@ package classes.Perks
 		
 		override public function desc(params:PerkClass = null):String
 		{
-			if (kGAMECLASS.flags[kFLAGS.HUNGER_ENABLED] > 0 && kGAMECLASS.player.hunger < 25) return "<b>DISABLED</b> - You are too hungry!";
+			if (CoC.instance.flags[kFLAGS.HUNGER_ENABLED] > 0 && CoC.instance.player.hunger < 25) return "<b>DISABLED</b> - You are too hungry!";
 			else return super.desc(params);
 		}
 		

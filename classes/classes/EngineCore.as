@@ -1,6 +1,6 @@
 package classes {
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
@@ -20,23 +20,23 @@ public class EngineCore {
     }
 
     public static function maxHP():Number {
-        return kGAMECLASS.player.maxHP();
+        return CoC.instance.player.maxHP();
     }
 
     public static function maxSoulforce():Number {
-        return kGAMECLASS.player.maxSoulforce();
+        return CoC.instance.player.maxSoulforce();
     }
 
     public static function maxWrath():Number {
-        return kGAMECLASS.player.maxWrath();
+        return CoC.instance.player.maxWrath();
     }
 
     public static function maxMana():Number {
-        return kGAMECLASS.player.maxMana();
+        return CoC.instance.player.maxMana();
     }
 
     public static function silly():Boolean {
-        return kGAMECLASS.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] == 1;
+        return CoC.instance.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] == 1;
     }
 
     /**
@@ -46,57 +46,57 @@ public class EngineCore {
      * @return  effective delta
      */
     public static function HPChange(changeNum:Number, display:Boolean):Number {
-        var before:Number = kGAMECLASS.player.HP;
+        var before:Number = CoC.instance.player.HP;
         if (changeNum == 0) return 0;
         if (changeNum > 0) {
             //Increase by 20%!
-            if (kGAMECLASS.player.findPerk(PerkLib.HistoryHealer) >= 0 || kGAMECLASS.player.findPerk(PerkLib.PastLifeHealer) >= 0) changeNum *= 1.2;
-            if (kGAMECLASS.player.HP + int(changeNum) > maxHP()) {
-                if (kGAMECLASS.player.HP >= maxHP()) {
+            if (CoC.instance.player.findPerk(PerkLib.HistoryHealer) >= 0 || CoC.instance.player.findPerk(PerkLib.PastLifeHealer) >= 0) changeNum *= 1.2;
+            if (CoC.instance.player.HP + int(changeNum) > maxHP()) {
+                if (CoC.instance.player.HP >= maxHP()) {
                     if (display) HPChangeNotify(changeNum);
-                    return kGAMECLASS.player.HP - before;
+                    return CoC.instance.player.HP - before;
                 }
                 if (display) HPChangeNotify(changeNum);
-                kGAMECLASS.player.HP = maxHP();
+                CoC.instance.player.HP = maxHP();
             }
             else {
                 if (display) HPChangeNotify(changeNum);
-                kGAMECLASS.player.HP += int(changeNum);
-                kGAMECLASS.mainView.statsView.showStatUp('hp');
+                CoC.instance.player.HP += int(changeNum);
+                CoC.instance.mainView.statsView.showStatUp('hp');
                 // hpUp.visible = true;
             }
         }
         //Negative HP
         else {
-            if (kGAMECLASS.player.HP + changeNum <= 0) {
+            if (CoC.instance.player.HP + changeNum <= 0) {
                 if (display) HPChangeNotify(changeNum);
-                kGAMECLASS.player.HP = 0;
-                kGAMECLASS.mainView.statsView.showStatDown('hp');
+                CoC.instance.player.HP = 0;
+                CoC.instance.mainView.statsView.showStatDown('hp');
             }
             else {
                 if (display) HPChangeNotify(changeNum);
-                kGAMECLASS.player.HP += changeNum;
-                kGAMECLASS.mainView.statsView.showStatDown('hp');
+                CoC.instance.player.HP += changeNum;
+                CoC.instance.mainView.statsView.showStatDown('hp');
             }
         }
-        kGAMECLASS.player.dynStats("lust", 0, "scale", false); //Workaround to showing the arrow.
+        CoC.instance.player.dynStats("lust", 0, "scale", false); //Workaround to showing the arrow.
         statScreenRefresh();
-        return kGAMECLASS.player.HP - before;
+        return CoC.instance.player.HP - before;
     }
 
     public static function HPChangeNotify(changeNum:Number):void {
         if (changeNum == 0) {
-            if (kGAMECLASS.player.HP >= maxHP())
+            if (CoC.instance.player.HP >= maxHP())
                 outputText("You're as healthy as you can be.\n");
         }
         else if (changeNum > 0) {
-            if (kGAMECLASS.player.HP >= maxHP())
+            if (CoC.instance.player.HP >= maxHP())
                 outputText("Your HP maxes out at " + maxHP() + ".\n");
             else
                 outputText("You gain <b><font color=\"#008000\">" + int(changeNum) + "</font></b> HP.\n");
         }
         else {
-            if (kGAMECLASS.player.HP <= 0)
+            if (CoC.instance.player.HP <= 0)
                 outputText("You take <b><font color=\"#800000\">" + int(changeNum * -1) + "</font></b> damage, dropping your HP to 0.\n");
             else
                 outputText("You take <b><font color=\"#800000\">" + int(changeNum * -1) + "</font></b> damage.\n");
@@ -104,120 +104,120 @@ public class EngineCore {
     }
 
     public static function SoulforceChange(changeNum:Number, display:Boolean):Number {
-        var before:Number = kGAMECLASS.player.soulforce;
+        var before:Number = CoC.instance.player.soulforce;
         if (changeNum == 0) return 0;
         if (changeNum > 0) {
-            if (kGAMECLASS.player.soulforce + int(changeNum) > maxSoulforce()) {
-                //	if(kGAMECLASS.player.HP >= maxHP()) {
+            if (CoC.instance.player.soulforce + int(changeNum) > maxSoulforce()) {
+                //	if(CoC.instance.player.HP >= maxHP()) {
                 //	if (display) HPChangeNotify(changeNum);
-                //		return kGAMECLASS.player.HP - before;
+                //		return CoC.instance.player.HP - before;
                 //	}
                 //	if (display) HPChangeNotify(changeNum);
-                kGAMECLASS.player.soulforce = maxSoulforce();
+                CoC.instance.player.soulforce = maxSoulforce();
             }
             else {
                 //	if (display) HPChangeNotify(changeNum);
-                kGAMECLASS.player.soulforce += int(changeNum);
-                //	kGAMECLASS.mainView.statsView.showStatUp( 'hp' );
+                CoC.instance.player.soulforce += int(changeNum);
+                //	CoC.instance.mainView.statsView.showStatUp( 'hp' );
                 // hpUp.visible = true;
             }
         }
         //Negative Soulforce
         /*	else
             {
-                if(kGAMECLASS.player.HP + changeNum <= 0) {
+                if(CoC.instance.player.HP + changeNum <= 0) {
                     if (display) HPChangeNotify(changeNum);
-                    kGAMECLASS.player.HP = 0;
-                    kGAMECLASS.mainView.statsView.showStatDown( 'hp' );
+                    CoC.instance.player.HP = 0;
+                    CoC.instance.mainView.statsView.showStatDown( 'hp' );
                 }
                 else {
                     if (display) HPChangeNotify(changeNum);
-                    kGAMECLASS.player.HP += changeNum;
-                    kGAMECLASS.mainView.statsView.showStatDown( 'hp' );
+                    CoC.instance.player.HP += changeNum;
+                    CoC.instance.mainView.statsView.showStatDown( 'hp' );
                 }
             }
             dynStats("lust", 0, "scale", false) //Workaround to showing the arrow.
         */
         statScreenRefresh();
-        return kGAMECLASS.player.soulforce - before;
+        return CoC.instance.player.soulforce - before;
     }
 
     public static function ManaChange(changeNum:Number, display:Boolean):Number {
-        var before:Number = kGAMECLASS.player.mana;
+        var before:Number = CoC.instance.player.mana;
         if (changeNum == 0) return 0;
         if (changeNum > 0) {
-            if (kGAMECLASS.player.mana + int(changeNum) > maxMana()) {
-                //	if(kGAMECLASS.player.HP >= maxHP()) {
+            if (CoC.instance.player.mana + int(changeNum) > maxMana()) {
+                //	if(CoC.instance.player.HP >= maxHP()) {
                 //	if (display) HPChangeNotify(changeNum);
-                //		return kGAMECLASS.player.HP - before;
+                //		return CoC.instance.player.HP - before;
                 //	}
                 //	if (display) HPChangeNotify(changeNum);
-                kGAMECLASS.player.mana = maxMana();
+                CoC.instance.player.mana = maxMana();
             }
             else {
                 //	if (display) HPChangeNotify(changeNum);
-                kGAMECLASS.player.mana += int(changeNum);
-                //	kGAMECLASS.mainView.statsView.showStatUp( 'hp' );
+                CoC.instance.player.mana += int(changeNum);
+                //	CoC.instance.mainView.statsView.showStatUp( 'hp' );
                 // hpUp.visible = true;
             }
         }
         //Negative Mana
         /*	else
             {
-                if(kGAMECLASS.player.HP + changeNum <= 0) {
+                if(CoC.instance.player.HP + changeNum <= 0) {
                     if (display) HPChangeNotify(changeNum);
-                    kGAMECLASS.player.HP = 0;
-                    kGAMECLASS.mainView.statsView.showStatDown( 'hp' );
+                    CoC.instance.player.HP = 0;
+                    CoC.instance.mainView.statsView.showStatDown( 'hp' );
                 }
                 else {
                     if (display) HPChangeNotify(changeNum);
-                    kGAMECLASS.player.HP += changeNum;
-                    kGAMECLASS.mainView.statsView.showStatDown( 'hp' );
+                    CoC.instance.player.HP += changeNum;
+                    CoC.instance.mainView.statsView.showStatDown( 'hp' );
                 }
             }
             dynStats("lust", 0, "scale", false) //Workaround to showing the arrow.
         */
         statScreenRefresh();
-        return kGAMECLASS.player.mana - before;
+        return CoC.instance.player.mana - before;
     }
 
     public static function WrathChange(changeNum:Number, display:Boolean):Number {
-        var before:Number = kGAMECLASS.player.wrath;
+        var before:Number = CoC.instance.player.wrath;
         if (changeNum == 0) return 0;
         if (changeNum > 0) {
-            if (kGAMECLASS.player.wrath + int(changeNum) > maxWrath()) {
-                //	if(kGAMECLASS.player.HP >= maxHP()) {
+            if (CoC.instance.player.wrath + int(changeNum) > maxWrath()) {
+                //	if(CoC.instance.player.HP >= maxHP()) {
                 //	if (display) HPChangeNotify(changeNum);
-                //		return kGAMECLASS.player.HP - before;
+                //		return CoC.instance.player.HP - before;
                 //	}
                 //	if (display) HPChangeNotify(changeNum);
-                kGAMECLASS.player.wrath = maxWrath();
+                CoC.instance.player.wrath = maxWrath();
             }
             else {
                 //	if (display) HPChangeNotify(changeNum);
-                kGAMECLASS.player.wrath += int(changeNum);
-                //	kGAMECLASS.mainView.statsView.showStatUp( 'hp' );
+                CoC.instance.player.wrath += int(changeNum);
+                //	CoC.instance.mainView.statsView.showStatUp( 'hp' );
                 // hpUp.visible = true;
             }
         }
         //Negative Wrath
         /*	else
             {
-                if(kGAMECLASS.player.HP + changeNum <= 0) {
+                if(CoC.instance.player.HP + changeNum <= 0) {
                     if (display) HPChangeNotify(changeNum);
-                    kGAMECLASS.player.HP = 0;
-                    kGAMECLASS.mainView.statsView.showStatDown( 'hp' );
+                    CoC.instance.player.HP = 0;
+                    CoC.instance.mainView.statsView.showStatDown( 'hp' );
                 }
                 else {
                     if (display) HPChangeNotify(changeNum);
-                    kGAMECLASS.player.HP += changeNum;
-                    kGAMECLASS.mainView.statsView.showStatDown( 'hp' );
+                    CoC.instance.player.HP += changeNum;
+                    CoC.instance.mainView.statsView.showStatDown( 'hp' );
                 }
             }
             dynStats("lust", 0, "scale", false) //Workaround to showing the arrow.
         */
         statScreenRefresh();
-        return kGAMECLASS.player.wrath - before;
+        return CoC.instance.player.wrath - before;
     }
 
     public static function clone(source:Object):* {
@@ -228,25 +228,25 @@ public class EngineCore {
     }
 
     public static function clearOutputTextOnly(forget:Boolean = false):void {
-        if (!forget && kGAMECLASS.currentText.length > 0) {
-            kGAMECLASS.textHistory.push(kGAMECLASS.currentText);
-            while (kGAMECLASS.textHistory.length > 20) kGAMECLASS.textHistory.shift();
+        if (!forget && CoC.instance.currentText.length > 0) {
+            CoC.instance.textHistory.push(CoC.instance.currentText);
+            while (CoC.instance.textHistory.length > 20) CoC.instance.textHistory.shift();
         }
-        kGAMECLASS.currentText = "";
-        kGAMECLASS.mainView.clearOutputText();
+        CoC.instance.currentText = "";
+        CoC.instance.mainView.clearOutputText();
     }
 
     /**
      * Clear the text on screen.
      */
     public static function clearOutput():void {
-        kGAMECLASS.forceUpdate();
+        CoC.instance.forceUpdate();
         clearOutputTextOnly();
-        if (kGAMECLASS.gameState != 3) kGAMECLASS.mainView.hideMenuButton(MainView.MENU_DATA);
-        kGAMECLASS.mainView.hideMenuButton(MainView.MENU_APPEARANCE);
-        kGAMECLASS.mainView.hideMenuButton(MainView.MENU_LEVEL);
-        kGAMECLASS.mainView.hideMenuButton(MainView.MENU_PERKS);
-        kGAMECLASS.mainView.hideMenuButton(MainView.MENU_STATS);
+        if (CoC.instance.gameState != 3) CoC.instance.mainView.hideMenuButton(MainView.MENU_DATA);
+        CoC.instance.mainView.hideMenuButton(MainView.MENU_APPEARANCE);
+        CoC.instance.mainView.hideMenuButton(MainView.MENU_LEVEL);
+        CoC.instance.mainView.hideMenuButton(MainView.MENU_PERKS);
+        CoC.instance.mainView.hideMenuButton(MainView.MENU_STATS);
     }
 
     /**
@@ -261,14 +261,14 @@ public class EngineCore {
             //if(!debug) mainText.htmlText = output;
             //trace("Purging and writing Text", output);
             clearOutput();
-            kGAMECLASS.currentText = output;
-            kGAMECLASS.mainView.setOutputText(output);
+            CoC.instance.currentText = output;
+            CoC.instance.mainView.setOutputText(output);
             // mainText.htmlText = output;
         }
         else {
             //trace("Adding Text");
-            kGAMECLASS.currentText += output;
-            kGAMECLASS.mainView.appendOutputText(output);
+            CoC.instance.currentText += output;
+            CoC.instance.mainView.appendOutputText(output);
             // mainText.htmlText += output;
         }
         // trace(getCurrentStackTrace())
@@ -289,17 +289,17 @@ public class EngineCore {
 
         // This is cleaup in case someone hits the Data or new-game button when the event-test window is shown.
         // It's needed since those buttons are available even when in the event-tester
-        kGAMECLASS.mainView.hideTestInputPanel();
+        CoC.instance.mainView.hideTestInputPanel();
 
 
-        output = kGAMECLASS.parser.recursiveParser(output, false);
+        output = CoC.instance.parser.recursiveParser(output, false);
 
         //OUTPUT!
-        kGAMECLASS.currentText += output;
-        //if(!debug) mainText.htmlText = kGAMECLASS.currentText;
+        CoC.instance.currentText += output;
+        //if(!debug) mainText.htmlText = CoC.instance.currentText;
         /*if(debug)
         {
-            kGAMECLASS.mainView.setOutputText( kGAMECLASS.currentText );
+            CoC.instance.mainView.setOutputText( CoC.instance.currentText );
         }*/
 
     }
@@ -564,7 +564,7 @@ public class EngineCore {
             }
         */
         //Removes sex-related button in SFW mode.
-        if (kGAMECLASS.flags[kFLAGS.SFW_MODE] > 0) {
+        if (CoC.instance.flags[kFLAGS.SFW_MODE] > 0) {
             if (text.indexOf("Sex") != -1 || text.indexOf("Threesome") != -1 || text.indexOf("Foursome") != -1 || text == "Watersports" || text == "Make Love" || text == "Use Penis" || text == "Use Vagina" || text.indexOf("Fuck") != -1 || text.indexOf("Ride") != -1 || (text.indexOf("Mount") != -1 && text.indexOf("Mountain") == -1) || text.indexOf("Vagina") != -1) {
                 trace("Button removed due to SFW mode.");
                 return btn.hide();
@@ -575,15 +575,15 @@ public class EngineCore {
         if (toolTipText == "") toolTipText = getButtonToolTipText(text);
         if (toolTipHeader == "") toolTipHeader = getButtonToolTipHeader(text);
         btn.show(text, callback, toolTipText, toolTipHeader);
-        //kGAMECLASS.mainView.setOutputText( kGAMECLASS.currentText );
-        kGAMECLASS.flushOutputTextToGUI();
+        //CoC.instance.mainView.setOutputText( CoC.instance.currentText );
+        CoC.instance.flushOutputTextToGUI();
         return btn;
     }
 
     public static function addButtonDisabled(pos:int, text:String = "", toolTipText:String = "", toolTipHeader:String = ""):CoCButton {
         var btn:CoCButton = button(pos);
         //Removes sex-related button in SFW mode.
-        if (kGAMECLASS.flags[kFLAGS.SFW_MODE] > 0) {
+        if (CoC.instance.flags[kFLAGS.SFW_MODE] > 0) {
             if (text.indexOf("Sex") != -1 || text.indexOf("Threesome") != -1 || text.indexOf("Foursome") != -1 || text == "Watersports" || text == "Make Love" || text == "Use Penis" || text == "Use Vagina" || text.indexOf("Fuck") != -1 || text.indexOf("Ride") != -1 || (text.indexOf("Mount") != -1 && text.indexOf("Mountain") == -1) || text.indexOf("Vagina") != -1) {
                 trace("Button removed due to SFW mode.");
                 return btn.hide();
@@ -593,12 +593,12 @@ public class EngineCore {
         if (toolTipText == "") toolTipText = getButtonToolTipText(text);
         if (toolTipHeader == "") toolTipHeader = getButtonToolTipHeader(text);
         btn.showDisabled(text, toolTipText, toolTipHeader);
-        kGAMECLASS.flushOutputTextToGUI();
+        CoC.instance.flushOutputTextToGUI();
         return btn;
     }
 
     public static function button(pos:int):CoCButton {
-        return kGAMECLASS.mainView.bottomButtons[pos];
+        return CoC.instance.mainView.bottomButtons[pos];
     }
 
     public static function setButtonTooltip(index:int, toolTipHeader:String = "", toolTipText:String = ""):void {
@@ -607,7 +607,7 @@ public class EngineCore {
 
     public static function hasButton(arg:*):Boolean {
         if (arg is String)
-            return kGAMECLASS.mainView.hasButton(arg as String);
+            return CoC.instance.mainView.hasButton(arg as String);
         else
             return false;
     }
@@ -619,13 +619,13 @@ public class EngineCore {
     public static function removeButton(arg:*):void {
         var buttonToRemove:int = 0;
         if (arg is String) {
-            buttonToRemove = kGAMECLASS.mainView.indexOfButtonWithLabel(arg as String);
+            buttonToRemove = CoC.instance.mainView.indexOfButtonWithLabel(arg as String);
         }
         if (arg is Number) {
             if (arg < 0 || arg > 14) return;
             buttonToRemove = int(arg);
         }
-        kGAMECLASS.mainView.hideBottomButton(buttonToRemove);
+        CoC.instance.mainView.hideBottomButton(buttonToRemove);
     }
 
     /**
@@ -633,9 +633,9 @@ public class EngineCore {
      */
     public static function menu():void { //The newer, simpler menu - blanks all buttons so addButton can be used
         for (var i:int = 0; i <= 14; i++) {
-            kGAMECLASS.mainView.hideBottomButton(i);
+            CoC.instance.mainView.hideBottomButton(i);
         }
-        kGAMECLASS.flushOutputTextToGUI();
+        CoC.instance.flushOutputTextToGUI();
     }
 
     /**
@@ -824,7 +824,7 @@ public class EngineCore {
      */
     public static function doNext(event:Function):void { //Now typesafe
         //Prevent new events in combat from automatically overwriting a game over.
-        if (kGAMECLASS.mainView.getButtonText(0).indexOf("Game Over") != -1) {
+        if (CoC.instance.mainView.getButtonText(0).indexOf("Game Over") != -1) {
             trace("Do next setup cancelled by game over");
             return;
         }
@@ -836,7 +836,7 @@ public class EngineCore {
     }
 
     public static function invertGo():void {
-        kGAMECLASS.mainView.invert();
+        CoC.instance.mainView.invert();
     }
 
     /**
@@ -844,8 +844,8 @@ public class EngineCore {
      */
     public static function statScreenRefresh():void {
         Utils.Begin("engineCore", "statScreenRefresh");
-        kGAMECLASS.mainView.statsView.show(); // show() method refreshes.
-        kGAMECLASS.mainViewManager.refreshStats();
+        CoC.instance.mainView.statsView.show(); // show() method refreshes.
+        CoC.instance.mainViewManager.refreshStats();
         Utils.End("engineCore", "statScreenRefresh");
     }
 
@@ -853,47 +853,47 @@ public class EngineCore {
      * Show the stats pane. (Name, stats and attributes)
      */
     public static function showStats():void {
-        kGAMECLASS.mainView.statsView.show();
-        kGAMECLASS.mainViewManager.refreshStats();
-        kGAMECLASS.mainViewManager.tweenInStats();
+        CoC.instance.mainView.statsView.show();
+        CoC.instance.mainViewManager.refreshStats();
+        CoC.instance.mainViewManager.tweenInStats();
     }
 
     /**
      * Hide the stats pane. (Name, stats and attributes)
      */
     public static function hideStats():void {
-        if (!kGAMECLASS.mainViewManager.buttonsTweened) kGAMECLASS.mainView.statsView.hide();
-        kGAMECLASS.mainViewManager.tweenOutStats();
+        if (!CoC.instance.mainViewManager.buttonsTweened) CoC.instance.mainView.statsView.hide();
+        CoC.instance.mainViewManager.tweenOutStats();
     }
 
     /**
      * Hide the top buttons.
      */
     public static function hideMenus():void {
-        kGAMECLASS.mainView.hideAllMenuButtons();
+        CoC.instance.mainView.hideAllMenuButtons();
     }
 
     /**
      * Hides the up/down arrow on stats pane.
      */
     public static function hideUpDown():void {
-        kGAMECLASS.mainView.statsView.hideUpDown();
+        CoC.instance.mainView.statsView.hideUpDown();
         //Clear storage values so up/down arrows can be properly displayed
-        kGAMECLASS.oldStats.oldStr = 0;
-        kGAMECLASS.oldStats.oldTou = 0;
-        kGAMECLASS.oldStats.oldSpe = 0;
-        kGAMECLASS.oldStats.oldInte = 0;
-        kGAMECLASS.oldStats.oldWis = 0;
-        kGAMECLASS.oldStats.oldLib = 0;
-        kGAMECLASS.oldStats.oldSens = 0;
-        kGAMECLASS.oldStats.oldCor = 0;
-        kGAMECLASS.oldStats.oldHP = 0;
-        kGAMECLASS.oldStats.oldLust = 0;
-        kGAMECLASS.oldStats.oldWrath = 0;
-        kGAMECLASS.oldStats.oldFatigue = 0;
-        kGAMECLASS.oldStats.oldMana = 0;
-        kGAMECLASS.oldStats.oldSoulforce = 0;
-        kGAMECLASS.oldStats.oldHunger = 0;
+        CoC.instance.oldStats.oldStr = 0;
+        CoC.instance.oldStats.oldTou = 0;
+        CoC.instance.oldStats.oldSpe = 0;
+        CoC.instance.oldStats.oldInte = 0;
+        CoC.instance.oldStats.oldWis = 0;
+        CoC.instance.oldStats.oldLib = 0;
+        CoC.instance.oldStats.oldSens = 0;
+        CoC.instance.oldStats.oldCor = 0;
+        CoC.instance.oldStats.oldHP = 0;
+        CoC.instance.oldStats.oldLust = 0;
+        CoC.instance.oldStats.oldWrath = 0;
+        CoC.instance.oldStats.oldFatigue = 0;
+        CoC.instance.oldStats.oldMana = 0;
+        CoC.instance.oldStats.oldSoulforce = 0;
+        CoC.instance.oldStats.oldHunger = 0;
     }
 
     public static function fatigue(mod:Number, type:Number = 0):void {
@@ -905,7 +905,7 @@ public class EngineCore {
     }
 
     public static function minLust():Number {
-        return kGAMECLASS.player.minLust();
+        return CoC.instance.player.minLust();
     }
 
     public static function openURL(url:String):void {
@@ -921,20 +921,20 @@ public class EngineCore {
      * @param    nl2 Inserts a new line after the achievement text.
      */
     public static function awardAchievement(title:String, achievement:*, display:Boolean = true, nl:Boolean = false, nl2:Boolean = true):void {
-        if (kGAMECLASS.achievements[achievement] != null) {
-            if (kGAMECLASS.achievements[achievement] <= 0) {
-                kGAMECLASS.achievements[achievement] = 1;
+        if (CoC.instance.achievements[achievement] != null) {
+            if (CoC.instance.achievements[achievement] <= 0) {
+                CoC.instance.achievements[achievement] = 1;
                 if (nl && display) outputText("\n");
                 if (display) outputText("<b><font color=\"#000080\">Achievement unlocked: " + title + "</font></b>");
                 if (nl2 && display) outputText("\n");
-                kGAMECLASS.saves.savePermObject(false); //Only save if the achievement hasn't been previously awarded.
+                CoC.instance.saves.savePermObject(false); //Only save if the achievement hasn't been previously awarded.
             }
         }
         else outputText("\n<b>ERROR: Invalid achievement!</b>");
     }
 
     public static function lustPercent():Number {
-        return kGAMECLASS.player.lustPercent();
+        return CoC.instance.player.lustPercent();
     }
 
     public static function applyOperator(old:Number, op:String, val:Number):Number {
@@ -957,10 +957,10 @@ public class EngineCore {
 
     public static function testDynStatsEvent():void {
         clearOutput();
-        outputText("Old: " + kGAMECLASS.player.str + " " + kGAMECLASS.player.tou + " " + kGAMECLASS.player.spe + " " + kGAMECLASS.player.inte + " " + kGAMECLASS.player.lib + " " + kGAMECLASS.player.sens + " " + kGAMECLASS.player.lust + "\n");
-        kGAMECLASS.player.dynStats("tou", 1, "spe+", 2, "int-", 3, "lib*", 2, "sen=", 25, "lust/", 2);
+        outputText("Old: " + CoC.instance.player.str + " " + CoC.instance.player.tou + " " + CoC.instance.player.spe + " " + CoC.instance.player.inte + " " + CoC.instance.player.lib + " " + CoC.instance.player.sens + " " + CoC.instance.player.lust + "\n");
+        CoC.instance.player.dynStats("tou", 1, "spe+", 2, "int-", 3, "lib*", 2, "sen=", 25, "lust/", 2);
         outputText("Mod: 0 1 +2 -3 *2 =25 /2\n");
-        outputText("New: " + kGAMECLASS.player.str + " " + kGAMECLASS.player.tou + " " + kGAMECLASS.player.spe + " " + kGAMECLASS.player.inte + " " + kGAMECLASS.player.lib + " " + kGAMECLASS.player.sens + " " + kGAMECLASS.player.lust + "\n");
+        outputText("New: " + CoC.instance.player.str + " " + CoC.instance.player.tou + " " + CoC.instance.player.spe + " " + CoC.instance.player.inte + " " + CoC.instance.player.lib + " " + CoC.instance.player.sens + " " + CoC.instance.player.lust + "\n");
         doNext(EventParser.playerMenu);
     }
 
@@ -975,18 +975,18 @@ public class EngineCore {
                 oldStatName:String,
                 allStats:Array;
 
-//	kGAMECLASS.mainView.statsView.upDownsContainer.visible = true;
+//	CoC.instance.mainView.statsView.upDownsContainer.visible = true;
 
         allStats = ["str", "tou", "spe", "inte", "wis", "lib", "sens", "cor", "HP", "lust", "wrath", "fatigue", "mana", "soulforce", "hunger"];
 
         for each(statName in allStats) {
             oldStatName = _oldStatNameFor(statName);
 
-            if (kGAMECLASS.player[statName] > kGAMECLASS.oldStats[oldStatName]) {
-                kGAMECLASS.mainView.statsView.showStatUp(statName);
+            if (CoC.instance.player[statName] > CoC.instance.oldStats[oldStatName]) {
+                CoC.instance.mainView.statsView.showStatUp(statName);
             }
-            if (kGAMECLASS.player[statName] < kGAMECLASS.oldStats[oldStatName]) {
-                kGAMECLASS.mainView.statsView.showStatDown(statName);
+            if (CoC.instance.player[statName] < CoC.instance.oldStats[oldStatName]) {
+                CoC.instance.mainView.statsView.showStatDown(statName);
             }
         }
         Utils.End("engineCore", "showUpDown");
@@ -1001,36 +1001,36 @@ public class EngineCore {
 
     public static function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):void {
         //Virginity check
-        if (kGAMECLASS.player.vaginas[vIndex].virgin) {
-            if (display) outputText("\nYour " + Appearance.vaginaDescript(kGAMECLASS.player,vIndex) + " loses its virginity!");
-            kGAMECLASS.player.vaginas[vIndex].virgin = false;
+        if (CoC.instance.player.vaginas[vIndex].virgin) {
+            if (display) outputText("\nYour " + Appearance.vaginaDescript(CoC.instance.player,vIndex) + " loses its virginity!");
+            CoC.instance.player.vaginas[vIndex].virgin = false;
         }
         //If cock is bigger than unmodified vagina can hold - 100% stretch!
-        if (kGAMECLASS.player.vaginas[vIndex].capacity() <= kGAMECLASS.monster.cocks[cIndex].cArea()) {
-            if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness < 5) {
+        if (CoC.instance.player.vaginas[vIndex].capacity() <= CoC.instance.monster.cocks[cIndex].cArea()) {
+            if (CoC.instance.player.vaginas[vIndex].vaginalLooseness < 5) {
                 trace("CUNT STRETCHED: By cock larger than it's total capacity.");
                 if (display) {
-                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + Appearance.vaginaDescript(kGAMECLASS.player,0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ");
-                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + Appearance.vaginaDescript(kGAMECLASS.player,0) + " painfully stretches, gaping wide-open.</b>  ");
-                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + Appearance.vaginaDescript(kGAMECLASS.player,0) + " is now very loose.</b>  ");
-                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + Appearance.vaginaDescript(kGAMECLASS.player,0) + " is now loose.</b>  ");
-                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + Appearance.vaginaDescript(kGAMECLASS.player,0) + " loses its virgin-like tightness.</b>  ");
+                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ");
+                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " painfully stretches, gaping wide-open.</b>  ");
+                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " is now very loose.</b>  ");
+                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " is now loose.</b>  ");
+                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " loses its virgin-like tightness.</b>  ");
                 }
-                kGAMECLASS.player.vaginas[vIndex].vaginalLooseness++;
+                CoC.instance.player.vaginas[vIndex].vaginalLooseness++;
             }
         }
         //If cock is within 75% of max, streeeeetch 33% of the time
-        if (kGAMECLASS.player.vaginas[vIndex].capacity() * .75 <= kGAMECLASS.monster.cocks[cIndex].cArea()) {
-            if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness < 5) {
+        if (CoC.instance.player.vaginas[vIndex].capacity() * .75 <= CoC.instance.monster.cocks[cIndex].cArea()) {
+            if (CoC.instance.player.vaginas[vIndex].vaginalLooseness < 5) {
                 trace("CUNT STRETCHED: By cock @ 75% of capacity.");
                 if (display) {
-                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + Appearance.vaginaDescript(kGAMECLASS.player,0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ");
-                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + Appearance.vaginaDescript(kGAMECLASS.player,0) + " painfully stretches, gaping wide-open.</b>  ");
-                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + Appearance.vaginaDescript(kGAMECLASS.player,0) + " is now very loose.</b>  ");
-                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + Appearance.vaginaDescript(kGAMECLASS.player,0) + " is now loose.</b>  ");
-                    if (kGAMECLASS.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + Appearance.vaginaDescript(kGAMECLASS.player,0) + " loses its virgin-like tightness.</b>  ");
+                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ");
+                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " painfully stretches, gaping wide-open.</b>  ");
+                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " is now very loose.</b>  ");
+                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " is now loose.</b>  ");
+                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " loses its virgin-like tightness.</b>  ");
                 }
-                kGAMECLASS.player.vaginas[vIndex].vaginalLooseness++;
+                CoC.instance.player.vaginas[vIndex].vaginalLooseness++;
             }
         }
     }
@@ -1040,10 +1040,10 @@ public class EngineCore {
      */
     public static function doSFWloss():Boolean {
         clearOutput();
-        if (kGAMECLASS.flags[kFLAGS.SFW_MODE] > 0) {
-            if (kGAMECLASS.player.HP <= 0) outputText("You collapse from your injuries.");
+        if (CoC.instance.flags[kFLAGS.SFW_MODE] > 0) {
+            if (CoC.instance.player.HP <= 0) outputText("You collapse from your injuries.");
             else outputText("You collapse from your overwhelming desires.");
-            if (kGAMECLASS.inCombat) SceneLib.combat.cleanupAfterCombatImpl();
+            if (CoC.instance.inCombat) SceneLib.combat.cleanupAfterCombatImpl();
             else doNext(SceneLib.camp.returnToCampUseOneHour);
             return true;
         }

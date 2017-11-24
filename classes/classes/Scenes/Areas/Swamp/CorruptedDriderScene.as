@@ -5,10 +5,10 @@ package classes.Scenes.Areas.Swamp
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Items.Armors.LustyMaidensArmor;
 
-use namespace kGAMECLASS;
+use namespace CoC;
 
 	public class CorruptedDriderScene extends BaseContent
 	{

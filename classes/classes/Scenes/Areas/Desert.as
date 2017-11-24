@@ -5,7 +5,7 @@ package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
@@ -15,7 +15,7 @@ import classes.Scenes.SceneLib;
 import coc.xxc.BoundStory;
 import coc.xxc.stmts.ZoneStmt;
 
-use namespace kGAMECLASS;
+use namespace CoC;
 
 	public class Desert extends BaseContent
 	{
@@ -36,7 +36,7 @@ use namespace kGAMECLASS;
 			return _desertEncounter;
 		}
 		private function init():void {
-            const game:CoC = kGAMECLASS;
+            const game:CoC = CoC.instance;
             const fn:FnHelpers = Encounters.fn;
 			_desertEncounter = Encounters.group("desert",
 					//game.commonEncounters,

@@ -19,7 +19,7 @@ public class GameSettings extends BaseContent {
 		return flags[kFLAGS.CHARVIEWER_ENABLED];
 	}
 	public function settingsScreenMain():void {
-        kGAMECLASS.saves.savePermObject(false);
+        CoC.instance.saves.savePermObject(false);
         mainView.showMenuButton(MainView.MENU_NEW_MAIN);
 		mainView.showMenuButton(MainView.MENU_DATA);
 		clearOutput();
@@ -31,7 +31,7 @@ public class GameSettings extends BaseContent {
 		addButton(3, "Font Size", fontSettingsMenu);
 		addButton(4, "Controls", displayControls);
 
-addButton(14, "Back", kGAMECLASS.mainMenu.mainMenu);
+addButton(14, "Back", CoC.instance.mainMenu.mainMenu);
         if (flags[kFLAGS.HARDCORE_MODE] > 0) {
 			debug                               = false;
 			flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
@@ -526,9 +526,9 @@ addButton(14, "Back", kGAMECLASS.mainMenu.mainMenu);
 	}
 
 	public function cycleQuality():void {
-        if (kGAMECLASS.stage.quality == StageQuality.LOW) kGAMECLASS.stage.quality = StageQuality.MEDIUM;
-        else if (kGAMECLASS.stage.quality == StageQuality.MEDIUM) kGAMECLASS.stage.quality = StageQuality.HIGH;
-        else if (kGAMECLASS.stage.quality == StageQuality.HIGH) kGAMECLASS.stage.quality = StageQuality.LOW;
+        if (CoC.instance.stage.quality == StageQuality.LOW) CoC.instance.stage.quality = StageQuality.MEDIUM;
+        else if (CoC.instance.stage.quality == StageQuality.MEDIUM) CoC.instance.stage.quality = StageQuality.HIGH;
+        else if (CoC.instance.stage.quality == StageQuality.HIGH) CoC.instance.stage.quality = StageQuality.LOW;
         settingsScreenInterfaceSettings();
 	}
 
@@ -611,7 +611,7 @@ addButton(14, "Back", kGAMECLASS.mainMenu.mainMenu);
     private function displayControls():void
     {
         mainView.hideAllMenuButtons();
-        kGAMECLASS.inputManager.DisplayBindingPane();
+        CoC.instance.inputManager.DisplayBindingPane();
         EngineCore.menu();
         EngineCore.addButton(0, "Reset Ctrls", resetControls);
         EngineCore.addButton(1, "Clear Ctrls", clearControls);
@@ -620,13 +620,13 @@ addButton(14, "Back", kGAMECLASS.mainMenu.mainMenu);
 
     private function hideControls():void
     {
-        kGAMECLASS.inputManager.HideBindingPane();
-        kGAMECLASS.gameSettings.settingsScreenMain();
+        CoC.instance.inputManager.HideBindingPane();
+        CoC.instance.gameSettings.settingsScreenMain();
     }
 
     private function resetControls():void
     {
-        kGAMECLASS.inputManager.HideBindingPane();
+        CoC.instance.inputManager.HideBindingPane();
         EngineCore.clearOutput();
         EngineCore.outputText("Are you sure you want to reset all of the currently bound controls to their defaults?");
 
@@ -635,7 +635,7 @@ addButton(14, "Back", kGAMECLASS.mainMenu.mainMenu);
 
     private function resetControlsYes():void
     {
-        kGAMECLASS.inputManager.ResetToDefaults();
+        CoC.instance.inputManager.ResetToDefaults();
         EngineCore.clearOutput();
         EngineCore.outputText("Controls have been reset to defaults!\n\n");
 
@@ -644,7 +644,7 @@ addButton(14, "Back", kGAMECLASS.mainMenu.mainMenu);
 
     private function clearControls():void
     {
-        kGAMECLASS.inputManager.HideBindingPane();
+        CoC.instance.inputManager.HideBindingPane();
         EngineCore.clearOutput();
         EngineCore.outputText("Are you sure you want to clear all of the currently bound controls?");
 
@@ -653,7 +653,7 @@ addButton(14, "Back", kGAMECLASS.mainMenu.mainMenu);
 
     private function clearControlsYes():void
     {
-        kGAMECLASS.inputManager.ClearAllBinds();
+        CoC.instance.inputManager.ClearAllBinds();
         EngineCore.clearOutput();
         EngineCore.outputText("Controls have been cleared!");
 

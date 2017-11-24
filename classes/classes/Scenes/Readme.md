@@ -278,7 +278,7 @@ All scenes should be put it BaseContent subclasses. How many classes per event i
 An instance of this scene class should be available from `CoC` (declared as field and instantiated in the declaration),
 but not necessarily directly. It is preferable that location-specific scenes should be fields of corresponding location
 scenes. In code referencing a "foreign" scene to call an event could be something like
-`doNext(kGAMECLASS.telAdre.bakeryScene.bakeryuuuuuu);` . For such location-specific scenes it is good to subclass them
+`doNext(CoC.instance.telAdre.bakeryScene.bakeryuuuuuu);` . For such location-specific scenes it is good to subclass them
 from common superclass containing handy methods to access instance of their parent and other helpy stuff (see
 _Scenes/Places/TelAdre/TelAdreAbstractContent.as_ )
 

@@ -3114,7 +3114,7 @@ private function pureJojoSexMenu():void {
 	else capacity += 30; //Caps at 70.
 	//Call for the purpose of cock size.
 	startCombat(new Jojo());
-	kGAMECLASS.inCombat = false;
+	CoC.instance.inCombat = false;
 	//Begin
 	jojoSprite();
 	clearOutput();

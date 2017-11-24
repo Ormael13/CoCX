@@ -5,9 +5,9 @@
 package classes.Scenes 
 {
 import classes.*;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 
-use namespace kGAMECLASS;
+use namespace CoC;
 	
 	public class Metamorph extends BaseContent
 	{

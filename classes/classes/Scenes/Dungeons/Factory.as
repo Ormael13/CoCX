@@ -3,10 +3,10 @@ package classes.Scenes.Dungeons
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.Dungeons.Factory.*;
 
-use namespace kGAMECLASS;
+use namespace CoC;
 	
 	public class Factory extends DungeonAbstractContent
 	{

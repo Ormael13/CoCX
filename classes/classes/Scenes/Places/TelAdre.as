@@ -147,7 +147,7 @@ public function telAdreMenu():void {
 					katherine.ambushByVagrantKittyKats();
 				else katherine.repeatAmbushKatherineRecruitMent();
 				return;
-			}
+			} break;
 		case  1: //In alley behind Oswald's
 		case  2: //You are training her
 		case  3: //You and Urta are training her
@@ -156,7 +156,7 @@ public function telAdreMenu():void {
 			if (!katherine.isAt(Katherine.KLOC_KATHS_APT) && flags[kFLAGS.KATHERINE_TRAINING] >= 100) {
 				katherineEmployment.katherineGetsEmployed();
 				return;
-			}
+			} break;
 		default: //Has given you a spare key to her apartment
 			if (model.time.hours < 10 && rand(12) == 0) { //If employed or housed she can sometimes be encountered while on duty
 				katherine.katherineOnDuty();
@@ -316,7 +316,6 @@ private function oswaldPawnMenu():void { //Moved here from Inventory.as
 		case 2: addButton(10, "Kath's Alley", katherine.visitKatherine); break;
 		case 3: addButton(10, "Safehouse", katherineEmployment.katherineTrainingWithUrta); break;
 		case 4: addButton(10, "Kath's Alley", katherineEmployment.postTrainingAlleyDescription); //Appears until Kath gives you her housekeys
-		default:
 	}
 	addButton(14, "Back", telAdreMenu);
 }
@@ -451,7 +450,7 @@ public function barTelAdre():void {
 	//trace("HEL FOLLOWER LEVEL: " + flags[kFLAGS.HEL_FOLLOWER_LEVEL] + " HEL FUCKBUDDY: " + flags[kFLAGS.HEL_FUCKBUDDY] + " HARPY QUEEN DEFEATED: " + flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED]);
 	//trace("REDUCED ENCOUNTER RATE (DISPLINED): " + flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE]);
 	//HELIA
-//	if(player.gender > 0 && model.time.hours >= 14 && rand(2) == 0 && model.time.hours < 20 && (flags[kFLAGS.HEL_FUCKBUDDY] != 0 || kGAMECLASS.helFollower.followerHel()) && !(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 1 && flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED]== 0)) {
+//	if(player.gender > 0 && model.time.hours >= 14 && rand(2) == 0 && model.time.hours < 20 && (flags[kFLAGS.HEL_FUCKBUDDY] != 0 || CoC.instance.helFollower.followerHel()) && !(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 1 && flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED]== 0)) {
 	if (edryn.edrynHeliaThreesomePossible()) {
 		edryn.helAppearance();
 		button = anotherButton(button,"Helia",edryn.approachHelAtZeBitch);

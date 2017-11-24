@@ -10,7 +10,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Dungeons.Factory;
 import classes.Scenes.UniqueSexScenes;
 
-//use namespace kGAMECLASS;
+//use namespace CoC;
 	
 	public class DemonScene extends BaseContent
 	{

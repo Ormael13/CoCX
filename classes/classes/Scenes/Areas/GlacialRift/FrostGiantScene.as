@@ -2,7 +2,7 @@ package classes.Scenes.Areas.GlacialRift
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+	import classes.CoC;
 	import classes.GlobalFlags.kACHIEVEMENTS;
 	
 	public class FrostGiantScene extends BaseContent

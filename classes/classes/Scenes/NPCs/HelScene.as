@@ -1,7 +1,7 @@
 package classes.Scenes.NPCs{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
 
@@ -37,7 +37,7 @@ public class HelScene extends NPCAwareContent implements TimeAwareInterface {
 	
 		public function timeChangeLarge():Boolean {
 			//Helia's morning surprise!
-            if (kGAMECLASS.model.time.hours == 23 && helFollower.followerHel() && flags[kFLAGS.HEL_BONUS_POINTS] >= 150 && flags[kFLAGS.HELIA_KIDS_CHAT] == 0) {
+            if (CoC.instance.model.time.hours == 23 && helFollower.followerHel() && flags[kFLAGS.HEL_BONUS_POINTS] >= 150 && flags[kFLAGS.HELIA_KIDS_CHAT] == 0) {
                 helSpawnScene.heliaBonusPointsAward();
 				return true;
 			}
@@ -437,12 +437,12 @@ private function declineHelSexings():void {
 	clearOutput();
 	outputText("You thank her for the offer, but politely decline.\n\n");
 
-if (kGAMECLASS.inCombat) outputText("\"<i>Aw, hell.  You're no fun,</i>\" she pouts, picking up her sword and sheathing it.  \"<i>Well, at least take this,</i>\" she adds, tossing a few gems your way.  You thank her for the gems as she starts walking over the hill towards wherever it is she's going.  ");
+if (CoC.instance.inCombat) outputText("\"<i>Aw, hell.  You're no fun,</i>\" she pouts, picking up her sword and sheathing it.  \"<i>Well, at least take this,</i>\" she adds, tossing a few gems your way.  You thank her for the gems as she starts walking over the hill towards wherever it is she's going.  ");
     outputText("\"<i>Catch you next time, friend – and maybe we can have some fun, then!</i>\" she calls over her shoulder with a wave.\n\n");
 
 	outputText("You nod, and return the wave before heading back to your camp.");
 	helFollower.helAffection(1);
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
@@ -473,7 +473,7 @@ internal function beatUpHelAndStealHerWalletFromHerVagina():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
@@ -510,7 +510,7 @@ internal function fuckHelsAss():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
@@ -540,7 +540,7 @@ internal function helBlowsYou():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
@@ -575,7 +575,7 @@ internal function dpHel():void {
 	flags[kFLAGS.TIMES_HELIA_DOUBLE_DONGED]++;
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
@@ -605,7 +605,7 @@ internal function getLickedByHel():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
@@ -635,7 +635,7 @@ internal function helTailWanksYourDickBecauseSheLovesYouDesuDesuHoraHora():void 
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
@@ -674,7 +674,7 @@ internal function helTailPegging(loss:Boolean = false):void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
@@ -717,7 +717,7 @@ private function nagaCoilsUpHel():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
@@ -749,7 +749,7 @@ private function nagaCoilsUpAnalNaga():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
@@ -799,7 +799,7 @@ private function mountHel():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
@@ -852,7 +852,7 @@ private function helVaginaTaur69():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
@@ -910,7 +910,7 @@ private function helPossessionShitPoopCock():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
@@ -948,7 +948,7 @@ private function rapingHelsAssMeansYourCorruptCauseAnalIsEvil():void {
 	flags[kFLAGS.HEL_AFFECTION]--;
 	//Bump down follower tracking affection too
 	helFollower.helAffection(-15);
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
@@ -978,7 +978,7 @@ private function receiveCorruptRimjobsFromHel():void {
 	flags[kFLAGS.HEL_AFFECTION]--;
 	//Bump up follower tracking affection too
 	helFollower.helAffection(-15);
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
@@ -1910,7 +1910,7 @@ public function helSexualAmbush():void {
 
 	// TODO Fix this?
 	// Why is this the only place in the whole game where buttonEvents is directly written to?
-//Got rid of this, now handled by passing true:	kGAMECLASS.buttonEvents[9] = pussyOutOfHelSexAmbush;
+//Got rid of this, now handled by passing true:	CoC.instance.buttonEvents[9] = pussyOutOfHelSexAmbush;
 	helFuckMenu(true);
 }
 

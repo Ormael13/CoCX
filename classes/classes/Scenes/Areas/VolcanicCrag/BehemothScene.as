@@ -3,7 +3,7 @@ package classes.Scenes.Areas.VolcanicCrag
 import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.SceneLib;
 import classes.Scenes.UniqueSexScenes;
 
@@ -207,7 +207,7 @@ public class BehemothScene extends BaseContent
 			flags[kFLAGS.BEHEMOTH_GEMS] += gemsLost;
 			player.gems -= gemsLost;
 			statScreenRefresh();
-			kGAMECLASS.inCombat = false;
+			CoC.instance.inCombat = false;
 			if (doSFWloss()) {
 				outputText("\n\n\"<i>I win and you know what that means? I'll take some of your gems,</i>\" he says and he takes " + gemsLost + " gems from your pouch, \"<i>I'll take care of you while you're recovering.</i>\" You black out...");
 				HPChange(player.maxHP() / 2, false);
@@ -270,7 +270,7 @@ public class BehemothScene extends BaseContent
 				else addButtonDisabled(5, "Watersports", "Have sex with the behemoth enough times to unlock this!");
 			}
 			if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER) addButton(6, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
-			if (!kGAMECLASS.inCombat) addButton(14, "Nevermind", camp.returnToCampUseOneHour);
+			if (!CoC.instance.inCombat) addButton(14, "Nevermind", camp.returnToCampUseOneHour);
 			else addButton(14, "Nevermind", cleanupAfterCombat);
 		}
 		
@@ -294,7 +294,7 @@ public class BehemothScene extends BaseContent
 			outputText("\n\nYou give him a kiss on one of his cheeks and let him know that you'll be going. \"<i>See you later,</i>\" the behemoth says with a smile on his face. You redress and leave back to your camp.");
 			player.orgasm();
 			flags[kFLAGS.BEHEMOTH_ANAL_PITCH]++;
-			if (kGAMECLASS.inCombat) cleanupAfterCombat();
+			if (CoC.instance.inCombat) cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -351,7 +351,7 @@ public class BehemothScene extends BaseContent
 			flags[kFLAGS.BEHEMOTH_ANAL_CATCH]++;
 			dynStats("str", 0.5, "tou", 0.5);
 			HPChange(50 + (player.maxHP() / 5), false);
-			if (kGAMECLASS.inCombat) cleanupAfterCombat();
+			if (CoC.instance.inCombat) cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -380,7 +380,7 @@ public class BehemothScene extends BaseContent
 			flags[kFLAGS.BEHEMOTH_VAGINAL_CATCH]++;
 			dynStats("str", 0.5, "tou", 0.5);
 			HPChange(50 + (player.maxHP() / 5), false);
-			if (kGAMECLASS.inCombat) cleanupAfterCombat();
+			if (CoC.instance.inCombat) cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -406,7 +406,7 @@ public class BehemothScene extends BaseContent
 			outputText("\n\nYou lay next to him and rest for an hour before you say your goodbyes to the behemoth and walk back to your camp.");
 			flags[kFLAGS.BEHEMOTH_COCK_SUCKED]++;
 			dynStats("str", 0.5, "tou", 0.5, "lus", 30);
-			if (kGAMECLASS.inCombat) cleanupAfterCombat();
+			if (CoC.instance.inCombat) cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -441,7 +441,7 @@ public class BehemothScene extends BaseContent
 			if (player.armor == armors.GOOARMR) SceneLib.valeria.feedValeria(100);
 			dynStats("str", 0.5, "tou", 0.5, "lus", 30);
 			player.slimeFeed();
-			if (kGAMECLASS.inCombat) cleanupAfterCombat();
+			if (CoC.instance.inCombat) cleanupAfterCombat();
 			else doNext(camp.returnToCampUseTwoHours);
 		}
 		
@@ -495,14 +495,14 @@ public class BehemothScene extends BaseContent
 				outputText("\n\n\"<i>Don't go yet!</i>\" he chuckles. You watch as the bucket is being filled nearly to the brim with urine. Fortunately, the urine stream does get thinner and stops as the behemoth finishes peeing. He sets the urine-filled bucket down, walks over to you and gives your [chest] a good caress.");
 				outputText("\n\nThe behemoth gives you a lingering kiss on your " + (timesSexed() >= 5 ? "lips": "cheeks") + " before you make your way back to camp.");
 			}
-			if (kGAMECLASS.inCombat) cleanupAfterCombat();
+			if (CoC.instance.inCombat) cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 		
 		private function watersportsShower():void {
 			clearOutput();
 			outputText("PLACEHOLDER");
-			if (kGAMECLASS.inCombat) cleanupAfterCombat();
+			if (CoC.instance.inCombat) cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 		

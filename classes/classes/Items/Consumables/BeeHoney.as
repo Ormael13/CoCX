@@ -6,6 +6,7 @@ package classes.Items.Consumables
 import classes.Appearance;
 import classes.AppearanceDefs;
 import classes.BodyParts.Skin;
+import classes.CoC;
 import classes.CockTypesEnum;
 import classes.GlobalFlags.*;
 import classes.Items.Consumable;
@@ -35,7 +36,7 @@ public class BeeHoney extends Consumable
         }
 		
 		override public function canUse():Boolean {
-            if (value == SPECIAL_HONEY_VALUE && kGAMECLASS.player.statusEffectv1(StatusEffects.Exgartuan) == 1) { //Exgartuan doesn't like the special honey
+            if (value == SPECIAL_HONEY_VALUE && CoC.instance.player.statusEffectv1(StatusEffects.Exgartuan) == 1) { //Exgartuan doesn't like the special honey
                 outputText("You uncork the bottle only to hear Exgartuan suddenly speak up.  <i>“Hey kid, this beautiful cock here doesn’t need any of that special bee shit.  Cork that bottle up right now or I’m going to make it so that you can’t drink anything but me.”</i>  You give an exasperated sigh and put the cork back in the bottle.");
 				return false;
 			}
@@ -43,7 +44,7 @@ public class BeeHoney extends Consumable
 		}
 		
 		override public function useItem():Boolean {
-            var player:Player = kGAMECLASS.player;
+            var player:Player = CoC.instance.player;
             var pure:Boolean = (value == PURE_HONEY_VALUE);
 			var special:Boolean = (value == SPECIAL_HONEY_VALUE);
 			var changes:Number = 0;
@@ -66,16 +67,16 @@ public class BeeHoney extends Consumable
 			}
 			player.refillHunger(15);
 			if ((pure || special) && player.pregnancyType == PregnancyStore.PREGNANCY_FAERIE) { //Pure or special honey can reduce the corruption of a phouka baby
-                if (kGAMECLASS.flags[kFLAGS.PREGNANCY_CORRUPTION] > 1) { //Child is phouka, hates pure honey
+                if (CoC.instance.flags[kFLAGS.PREGNANCY_CORRUPTION] > 1) { //Child is phouka, hates pure honey
                     outputText("\n\nYou feel queasy and want to throw up.  There's a pain in your belly and you realize the baby you're carrying didn't like that at all.  Then again, maybe pure honey is good for it.");
 				}
-                else if (kGAMECLASS.flags[kFLAGS.PREGNANCY_CORRUPTION] < 1) { //Child is faerie, loves pure honey
+                else if (CoC.instance.flags[kFLAGS.PREGNANCY_CORRUPTION] < 1) { //Child is faerie, loves pure honey
                     outputText("\n\nA warm sensation starts in your belly and runs all through your body.  It's almost as if you're feeling music and you guess your passenger enjoyed the meal.");
 				}
 				else { //Child is on the line, will become a faerie with this drink
 					outputText("\n\nAt first you feel your baby struggle against the honey, then it seems to grow content and enjoy it.");
 				}
-                kGAMECLASS.flags[kFLAGS.PREGNANCY_CORRUPTION]--;
+                CoC.instance.flags[kFLAGS.PREGNANCY_CORRUPTION]--;
                 if (pure) return(false); //No transformative effects for the player because the pure honey was absorbed by the baby - Special honey will keep on giving
 			}
 			//Corruption reduction
@@ -130,7 +131,7 @@ public class BeeHoney extends Consumable
 				changes++;
 			}
 			//-Remove extra breast rows
-            if (changes < changeLimit && player.bRows() > 2 && Utils.rand(3) == 0 && !kGAMECLASS.flags[kFLAGS.HYPER_HAPPY]) {
+            if (changes < changeLimit && player.bRows() > 2 && Utils.rand(3) == 0 && !CoC.instance.flags[kFLAGS.HYPER_HAPPY]) {
                 changes++;
 				outputText("\n\nYou stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + player.breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
 				if (player.bRows() >= 3) outputText("abdomen");

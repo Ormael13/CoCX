@@ -5,10 +5,10 @@
 		// results of the corresponding anonymous function, in this case: function():* {return player.armorName;}
 		// tags not present in the singleArgConverters object return an error message.
 		//
-		//Calls are now made through kGAMECLASS rather than thisPtr. This allows the compiler to detect if/when a function is inaccessible.
+		//Calls are now made through CoC.instance rather than thisPtr. This allows the compiler to detect if/when a function is inaccessible.
         import classes.Appearance;
         import classes.GlobalFlags.kFLAGS;
-        import classes.GlobalFlags.kGAMECLASS;
+        import classes.CoC;
         import classes.Measurements;
 
         public var singleArgConverters:Object =
@@ -20,116 +20,116 @@
 				// Note: all key strings MUST be ENTIRELY lowercase.
 
 				"agility"					: function(thisPtr:*):* { return "[Agility]"; },
-				"allbreasts"				: function(thisPtr:*):* { return kGAMECLASS.player.allBreastsDescript(); },
-				"alltits"				    : function(thisPtr:*):* { return kGAMECLASS.player.allBreastsDescript(); },
-				"armor"						: function(thisPtr:*):* { return kGAMECLASS.player.armorName;},
-				"armorname"					: function(thisPtr:*):* { return kGAMECLASS.player.armorName;},
-				"ass"						: function(thisPtr:*):* { return kGAMECLASS.player.buttDescript();},
-				"asshole"					: function(thisPtr:*):* { return kGAMECLASS.player.assholeDescript(); },
-				"balls"						: function(thisPtr:*):* { return kGAMECLASS.player.ballsDescriptLight(); },
-				"bodytype"					: function(thisPtr:*):* { return kGAMECLASS.player.bodyType(); },
-				"boyfriend"					: function(thisPtr:*):* { return kGAMECLASS.player.mf("boyfriend", "girlfriend"); },
-				"breasts"					: function(thisPtr:*):* { return kGAMECLASS.player.breastDescript(0); },
-				"butt"						: function(thisPtr:*):* { return kGAMECLASS.player.buttDescript();},
-				"butthole"					: function(thisPtr:*):* { return kGAMECLASS.player.assholeDescript();},
-				"chest"						: function(thisPtr:*):* { return kGAMECLASS.player.chestDesc(); },
-				"claws"						: function(thisPtr:*):* { return kGAMECLASS.player.claws(); },
-				"clit"						: function(thisPtr:*):* { return kGAMECLASS.player.clitDescript(); },
-				"cock"						: function(thisPtr:*):* { return kGAMECLASS.player.cockDescript(0);},
-				"cockhead"					: function(thisPtr:*):* { return kGAMECLASS.player.cockHead(0);},
-				"cocks"						: function(thisPtr:*):* { return kGAMECLASS.player.multiCockDescriptLight(); },
-				"cunt"						: function(thisPtr:*):* { return kGAMECLASS.player.vaginaDescript(); },
-				"eachcock"					: function(thisPtr:*):* { return kGAMECLASS.player.sMultiCockDesc();},
+				"allbreasts"				: function(thisPtr:*):* { return CoC.instance.player.allBreastsDescript(); },
+				"alltits"				    : function(thisPtr:*):* { return CoC.instance.player.allBreastsDescript(); },
+				"armor"						: function(thisPtr:*):* { return CoC.instance.player.armorName;},
+				"armorname"					: function(thisPtr:*):* { return CoC.instance.player.armorName;},
+				"ass"						: function(thisPtr:*):* { return CoC.instance.player.buttDescript();},
+				"asshole"					: function(thisPtr:*):* { return CoC.instance.player.assholeDescript(); },
+				"balls"						: function(thisPtr:*):* { return CoC.instance.player.ballsDescriptLight(); },
+				"bodytype"					: function(thisPtr:*):* { return CoC.instance.player.bodyType(); },
+				"boyfriend"					: function(thisPtr:*):* { return CoC.instance.player.mf("boyfriend", "girlfriend"); },
+				"breasts"					: function(thisPtr:*):* { return CoC.instance.player.breastDescript(0); },
+				"butt"						: function(thisPtr:*):* { return CoC.instance.player.buttDescript();},
+				"butthole"					: function(thisPtr:*):* { return CoC.instance.player.assholeDescript();},
+				"chest"						: function(thisPtr:*):* { return CoC.instance.player.chestDesc(); },
+				"claws"						: function(thisPtr:*):* { return CoC.instance.player.claws(); },
+				"clit"						: function(thisPtr:*):* { return CoC.instance.player.clitDescript(); },
+				"cock"						: function(thisPtr:*):* { return CoC.instance.player.cockDescript(0);},
+				"cockhead"					: function(thisPtr:*):* { return CoC.instance.player.cockHead(0);},
+				"cocks"						: function(thisPtr:*):* { return CoC.instance.player.multiCockDescriptLight(); },
+				"cunt"						: function(thisPtr:*):* { return CoC.instance.player.vaginaDescript(); },
+				"eachcock"					: function(thisPtr:*):* { return CoC.instance.player.sMultiCockDesc();},
 				"evade"						: function(thisPtr:*):* { return "[Evade]"; },
-				"eyes"						: function(thisPtr:*):* { return kGAMECLASS.player.eyesDescript();},
-				"eyecolor"					: function(thisPtr:*):* { return kGAMECLASS.player.eyeColor;},
-				"face"						: function(thisPtr:*):* { return kGAMECLASS.player.face(); },
-				"feet"						: function(thisPtr:*):* { return kGAMECLASS.player.feet(); },
-				"foot"						: function(thisPtr:*):* { return kGAMECLASS.player.foot(); },
-				"fullchest"					: function(thisPtr:*):* { return kGAMECLASS.player.allChestDesc(); },
-				"hair"						: function(thisPtr:*):* { return kGAMECLASS.player.hairDescript(); },
-				"haircolor"					: function(thisPtr:*):* { return kGAMECLASS.player.hairColor; },
-				"hairorfur"					: function(thisPtr:*):* { return kGAMECLASS.player.hairOrFur(); },
-				"he"						: function(thisPtr:*):* { return kGAMECLASS.player.mf("he", "she"); },
-				"he2"						: function(thisPtr:*):* { return kGAMECLASS.player2.mf("he", "she"); },
-				"him"						: function(thisPtr:*):* { return kGAMECLASS.player.mf("him", "her"); },
-				"him2"						: function(thisPtr:*):* { return kGAMECLASS.player2.mf("him", "her"); },
-				"himher"					: function(thisPtr:*):* { return kGAMECLASS.player.mf("him", "her"); },
-				"himself"					: function(thisPtr:*):* { return kGAMECLASS.player.mf("himself", "herself"); },
-				"herself"					: function(thisPtr:*):* { return kGAMECLASS.player.mf("himself", "herself"); },
-				"hips"						: function(thisPtr:*):* { return kGAMECLASS.player.hipDescript();},
-				"his"						: function(thisPtr:*):* { return kGAMECLASS.player.mf("his", "her"); },
-				"hisher"					: function(thisPtr:*):* { return kGAMECLASS.player.mf("his", "her"); },
-				"his2"						: function(thisPtr:*):* { return kGAMECLASS.player2.mf("his", "her"); },
-				"horns"						: function(thisPtr:*):* { return kGAMECLASS.player.hornDescript(); },
-				"leg"						: function(thisPtr:*):* { return kGAMECLASS.player.leg(); },
-				"legs"						: function(thisPtr:*):* { return kGAMECLASS.player.legs(); },
-				"lowergarment"				: function(thisPtr:*):* { return kGAMECLASS.player.lowerGarmentName; },
-				"man"						: function(thisPtr:*):* { return kGAMECLASS.player.mf("man", "woman"); },
-				"men"						: function(thisPtr:*):* { return kGAMECLASS.player.mf("men", "women"); },
-				"malefemaleherm"			: function(thisPtr:*):* { return kGAMECLASS.player.maleFemaleHerm(); },
-				"master"					: function(thisPtr:*):* { return kGAMECLASS.player.mf("master","mistress"); },
+				"eyes"						: function(thisPtr:*):* { return CoC.instance.player.eyesDescript();},
+				"eyecolor"					: function(thisPtr:*):* { return CoC.instance.player.eyeColor;},
+				"face"						: function(thisPtr:*):* { return CoC.instance.player.face(); },
+				"feet"						: function(thisPtr:*):* { return CoC.instance.player.feet(); },
+				"foot"						: function(thisPtr:*):* { return CoC.instance.player.foot(); },
+				"fullchest"					: function(thisPtr:*):* { return CoC.instance.player.allChestDesc(); },
+				"hair"						: function(thisPtr:*):* { return CoC.instance.player.hairDescript(); },
+				"haircolor"					: function(thisPtr:*):* { return CoC.instance.player.hairColor; },
+				"hairorfur"					: function(thisPtr:*):* { return CoC.instance.player.hairOrFur(); },
+				"he"						: function(thisPtr:*):* { return CoC.instance.player.mf("he", "she"); },
+				"he2"						: function(thisPtr:*):* { return CoC.instance.player2.mf("he", "she"); },
+				"him"						: function(thisPtr:*):* { return CoC.instance.player.mf("him", "her"); },
+				"him2"						: function(thisPtr:*):* { return CoC.instance.player2.mf("him", "her"); },
+				"himher"					: function(thisPtr:*):* { return CoC.instance.player.mf("him", "her"); },
+				"himself"					: function(thisPtr:*):* { return CoC.instance.player.mf("himself", "herself"); },
+				"herself"					: function(thisPtr:*):* { return CoC.instance.player.mf("himself", "herself"); },
+				"hips"						: function(thisPtr:*):* { return CoC.instance.player.hipDescript();},
+				"his"						: function(thisPtr:*):* { return CoC.instance.player.mf("his", "her"); },
+				"hisher"					: function(thisPtr:*):* { return CoC.instance.player.mf("his", "her"); },
+				"his2"						: function(thisPtr:*):* { return CoC.instance.player2.mf("his", "her"); },
+				"horns"						: function(thisPtr:*):* { return CoC.instance.player.hornDescript(); },
+				"leg"						: function(thisPtr:*):* { return CoC.instance.player.leg(); },
+				"legs"						: function(thisPtr:*):* { return CoC.instance.player.legs(); },
+				"lowergarment"				: function(thisPtr:*):* { return CoC.instance.player.lowerGarmentName; },
+				"man"						: function(thisPtr:*):* { return CoC.instance.player.mf("man", "woman"); },
+				"men"						: function(thisPtr:*):* { return CoC.instance.player.mf("men", "women"); },
+				"malefemaleherm"			: function(thisPtr:*):* { return CoC.instance.player.maleFemaleHerm(); },
+				"master"					: function(thisPtr:*):* { return CoC.instance.player.mf("master","mistress"); },
 				"misdirection"				: function(thisPtr:*):* { return "[Misdirection]"; },
-				"multicock"					: function(thisPtr:*):* { return kGAMECLASS.player.multiCockDescriptLight(); },
-				"multicockdescriptlight"	: function(thisPtr:*):* { return kGAMECLASS.player.multiCockDescriptLight(); },
-				"name"						: function(thisPtr:*):* { return kGAMECLASS.player.short;},
-				"nipple"					: function(thisPtr:*):* { return kGAMECLASS.player.nippleDescript(0);},
-				"nipples"					: function(thisPtr:*):* { return kGAMECLASS.player.nippleDescript(0) + "s";},
-				"onecock"					: function(thisPtr:*):* { return kGAMECLASS.player.oMultiCockDesc();},
+				"multicock"					: function(thisPtr:*):* { return CoC.instance.player.multiCockDescriptLight(); },
+				"multicockdescriptlight"	: function(thisPtr:*):* { return CoC.instance.player.multiCockDescriptLight(); },
+				"name"						: function(thisPtr:*):* { return CoC.instance.player.short;},
+				"nipple"					: function(thisPtr:*):* { return CoC.instance.player.nippleDescript(0);},
+				"nipples"					: function(thisPtr:*):* { return CoC.instance.player.nippleDescript(0) + "s";},
+				"onecock"					: function(thisPtr:*):* { return CoC.instance.player.oMultiCockDesc();},
 				"pg"						: function(thisPtr:*):* { return "\n\n";},
-				"pussy"						: function(thisPtr:*):* { return kGAMECLASS.player.vaginaDescript(); },
-				"race"						: function(thisPtr:*):* { return kGAMECLASS.player.race(); },
-				"sack"						: function(thisPtr:*):* { return Appearance.sackDescript(kGAMECLASS.player); },
-				"sheath"					: function(thisPtr:*):* { return kGAMECLASS.player.sheathDescription(); },
-				"shield"					: function(thisPtr:*):* { return kGAMECLASS.player.shieldName; },
+				"pussy"						: function(thisPtr:*):* { return CoC.instance.player.vaginaDescript(); },
+				"race"						: function(thisPtr:*):* { return CoC.instance.player.race(); },
+				"sack"						: function(thisPtr:*):* { return Appearance.sackDescript(CoC.instance.player); },
+				"sheath"					: function(thisPtr:*):* { return CoC.instance.player.sheathDescription(); },
+				"shield"					: function(thisPtr:*):* { return CoC.instance.player.shieldName; },
 				"skin"						: function(thisPtr:*):* {
-					return kGAMECLASS.player.skin.describe('skin',false,false);
+					return CoC.instance.player.skin.describe('skin',false,false);
 				},
 				"skin.noadj": function(thisPtr:*):* {
-					return kGAMECLASS.player.skin.describe('skin',true,false);
+					return CoC.instance.player.skin.describe('skin',true,false);
 				},
 				"skin.notone": function(thisPtr:*):* {
-					return kGAMECLASS.player.skin.describe('skin',false,true);
+					return CoC.instance.player.skin.describe('skin',false,true);
 				},
 				"skin.type": function(thisPtr:*):* {
-					return kGAMECLASS.player.skin.describe('skin',true,true);
+					return CoC.instance.player.skin.describe('skin',true,true);
 				},
 				"skin.color": function (thisPtr:*, aspect:*):* {
-					return kGAMECLASS.player.skin.tone;
+					return CoC.instance.player.skin.tone;
 				},
 				"skin.isare": function (thisPtr:*, aspect:*):* {
-					return kGAMECLASS.player.skin.isAre();
+					return CoC.instance.player.skin.isAre();
 				},
 				"skin.vs": function (thisPtr:*, aspect:*):* {
-					return kGAMECLASS.player.skin.isAre("s","");
+					return CoC.instance.player.skin.isAre("s","");
 				},
 				"skinfurscales"				: function(thisPtr:*):* {
-					return kGAMECLASS.player.skin.describe('coat');
+					return CoC.instance.player.skin.describe('coat');
 				},
 				"skintone"					: function(thisPtr:*):* {
-					return kGAMECLASS.player.skinTone;
+					return CoC.instance.player.skinTone;
 				},
-				"tallness"					: function(thisPtr:*):* { return Measurements.footInchOrMetres(kGAMECLASS.player.tallness); },
+				"tallness"					: function(thisPtr:*):* { return Measurements.footInchOrMetres(CoC.instance.player.tallness); },
 				"teasetext"					: function(thisPtr:*):* { return SceneLib.combat.teaseText(); },
-				"tongue"					: function(thisPtr:*):* { return Appearance.tongueDescription(kGAMECLASS.player); },
-				"uppergarment"				: function(thisPtr:*):* { return kGAMECLASS.player.upperGarmentName; },
-				"vag"						: function(thisPtr:*):* { return kGAMECLASS.player.vaginaDescript(); },
-				"vagina"					: function(thisPtr:*):* { return kGAMECLASS.player.vaginaDescript(); },
-				"vagorass"					: function(thisPtr:*):* { return (kGAMECLASS.player.hasVagina() ? kGAMECLASS.player.vaginaDescript() : kGAMECLASS.player.assholeDescript()); },
-				"weapon"					: function(thisPtr:*):* { return kGAMECLASS.player.weaponName;},
-				"weaponname"				: function(thisPtr:*):* { return kGAMECLASS.player.weaponName; },
-				"weaponrangename"			: function(thisPtr:*):* { return kGAMECLASS.player.weaponRangeName; },
-				"latexyname"				: function(thisPtr:*):* { return kGAMECLASS.flags[kFLAGS.GOO_NAME]; },
-				"bathgirlname"				: function(thisPtr:*):* { return kGAMECLASS.flags[kFLAGS.MILK_NAME]; },
-				"cockplural"				: function(thisPtr:*):* { return (kGAMECLASS.player.cocks.length == 1) ? "cock" : "cocks"; },
-				"dickplural"				: function(thisPtr:*):* { return (kGAMECLASS.player.cocks.length == 1) ? "dick" : "dicks"; },
-				"headplural"				: function(thisPtr:*):* { return (kGAMECLASS.player.cocks.length == 1) ? "head" : "heads"; },
-				"prickplural"				: function(thisPtr:*):* { return (kGAMECLASS.player.cocks.length == 1) ? "prick" : "pricks"; },
-				"boy"						: function(thisPtr:*):* { return kGAMECLASS.player.mf("boy", "girl"); },
-				"guy"						: function(thisPtr:*):* { return kGAMECLASS.player.mf("guy", "girl"); },
-				"wings"						: function(thisPtr:*):* { return kGAMECLASS.player.wingsDescript(); },
-				"tail"						: function(thisPtr:*):* { return kGAMECLASS.player.tailDescript(); },
-				"onetail"					: function(thisPtr:*):* { return kGAMECLASS.player.oneTailDescript(); },
+				"tongue"					: function(thisPtr:*):* { return Appearance.tongueDescription(CoC.instance.player); },
+				"uppergarment"				: function(thisPtr:*):* { return CoC.instance.player.upperGarmentName; },
+				"vag"						: function(thisPtr:*):* { return CoC.instance.player.vaginaDescript(); },
+				"vagina"					: function(thisPtr:*):* { return CoC.instance.player.vaginaDescript(); },
+				"vagorass"					: function(thisPtr:*):* { return (CoC.instance.player.hasVagina() ? CoC.instance.player.vaginaDescript() : CoC.instance.player.assholeDescript()); },
+				"weapon"					: function(thisPtr:*):* { return CoC.instance.player.weaponName;},
+				"weaponname"				: function(thisPtr:*):* { return CoC.instance.player.weaponName; },
+				"weaponrangename"			: function(thisPtr:*):* { return CoC.instance.player.weaponRangeName; },
+				"latexyname"				: function(thisPtr:*):* { return CoC.instance.flags[kFLAGS.GOO_NAME]; },
+				"bathgirlname"				: function(thisPtr:*):* { return CoC.instance.flags[kFLAGS.MILK_NAME]; },
+				"cockplural"				: function(thisPtr:*):* { return (CoC.instance.player.cocks.length == 1) ? "cock" : "cocks"; },
+				"dickplural"				: function(thisPtr:*):* { return (CoC.instance.player.cocks.length == 1) ? "dick" : "dicks"; },
+				"headplural"				: function(thisPtr:*):* { return (CoC.instance.player.cocks.length == 1) ? "head" : "heads"; },
+				"prickplural"				: function(thisPtr:*):* { return (CoC.instance.player.cocks.length == 1) ? "prick" : "pricks"; },
+				"boy"						: function(thisPtr:*):* { return CoC.instance.player.mf("boy", "girl"); },
+				"guy"						: function(thisPtr:*):* { return CoC.instance.player.mf("guy", "girl"); },
+				"wings"						: function(thisPtr:*):* { return CoC.instance.player.wingsDescript(); },
+				"tail"						: function(thisPtr:*):* { return CoC.instance.player.tailDescript(); },
+				"onetail"					: function(thisPtr:*):* { return CoC.instance.player.oneTailDescript(); },
 
 				//Prisoner
 				"captortitle"				: function(thisPtr:*):* { return SceneLib.prison.prisonCaptor.captorTitle; },

@@ -5,7 +5,7 @@ package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
@@ -19,7 +19,7 @@ import classes.Scenes.SceneLib;
 import coc.xxc.BoundStory;
 import coc.xxc.stmts.ZoneStmt;
 
-use namespace kGAMECLASS;
+use namespace CoC;
 
 	public class Forest extends BaseContent
 	{
@@ -83,7 +83,7 @@ use namespace kGAMECLASS;
 		private var forestStory:BoundStory;
 		private var deepwoodsStory:BoundStory;
 		private function init():void {
-            const game:CoC = kGAMECLASS;
+            const game:CoC = CoC.instance;
             const fn:FnHelpers = Encounters.fn;
 			_forestEncounter = Encounters.group("forest", {
 						//General Golems, Goblin and Imp Encounters
@@ -230,7 +230,7 @@ use namespace kGAMECLASS;
 						chance: 0.10
 					}
 					*/
-			_deepwoodsEncounter = Encounters.group("deepwoods", /*kGAMECLASS.commonEncounters,*/ {
+			_deepwoodsEncounter = Encounters.group("deepwoods", /*CoC.instance.commonEncounters,*/ {
 				name: "shrine",
 				when: function():Boolean {
 					return flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] < 1;

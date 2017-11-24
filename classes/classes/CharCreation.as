@@ -3,7 +3,7 @@
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kCOUNTERS;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Items.*;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.NPCs.JojoScene;
@@ -117,7 +117,7 @@ import coc.view.MainView;
 			for (var t:int = 0; t < specialCharacters.customs.length; t++) preList.push( { label: specialCharacters.customs[t][0], data:specialCharacters.customs[t] } );
 
 			if (showSpecialNames) {
-				kGAMECLASS.showComboBox(preList,"Pre-defined characters",selectName);
+				CoC.instance.showComboBox(preList,"Pre-defined characters",selectName);
 				mainView.placeComboBox(mainView.nameBox.x + mainView.nameBox.width + 10,mainView.nameBox.y);
 			}
 
@@ -238,13 +238,13 @@ import coc.view.MainView;
 			}
 			//PLOTZ
 			JojoScene.monk                               = 0;
-			kGAMECLASS.whitney                           = 0;
-			kGAMECLASS.sand                              = 0;
-		//Replaced by flag	kGAMECLASS.beeProgress = 0;
-			kGAMECLASS.giacomo                           = 0;
+			CoC.instance.whitney                           = 0;
+			CoC.instance.sand                              = 0;
+		//Replaced by flag	CoC.instance.beeProgress = 0;
+			CoC.instance.giacomo                           = 0;
 			SceneLib.isabellaScene.isabellaOffspringData = []; //CLEAR!
 			//Lets get this bitch started
-			kGAMECLASS.inCombat = false;
+			CoC.instance.inCombat = false;
 			DungeonAbstractContent.inDungeon = false;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				//Clothes clear
@@ -346,11 +346,11 @@ import coc.view.MainView;
 				var hardcoreSlot:String = flags[kFLAGS.HARDCORE_SLOT];
 			}
 			//Clear plot storage array!
-			kGAMECLASS.flags = new DefaultDict();
+			CoC.instance.flags = new DefaultDict();
 			var countersStorage:CountersStorage = kCOUNTERS.create();
 			kCOUNTERS.initialize(countersStorage);
-			kGAMECLASS.counters = new RootCounters(countersStorage);
-			kGAMECLASS.saves.loadPermObject();
+			CoC.instance.counters = new RootCounters(countersStorage);
+			CoC.instance.saves.loadPermObject();
 			//Carry over data if new game plus.
 			if (newGamePlusLevel > 0) {
 				flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = newGamePlusLevel;
@@ -368,7 +368,7 @@ import coc.view.MainView;
 		}
 		
 		private function chooseName():void {
-			if (kGAMECLASS.testingBlockExiting) {
+			if (CoC.instance.testingBlockExiting) {
 				// We're running under the testing script.
 				// Stuff a name in the box and go go go
 				mainView.nameBox.text = "Derpy";
@@ -896,7 +896,7 @@ import coc.view.MainView;
 		//-----------------
 		private function setHeight():void {
 			clearOutput();
-			if (kGAMECLASS.testingBlockExiting)
+			if (CoC.instance.testingBlockExiting)
 			{
 				// We're running under the testing script.
 				// Stuff a number in the box and go go go
@@ -1513,10 +1513,10 @@ import coc.view.MainView;
 			player.startingRace = player.race();
 			if (flags[kFLAGS.HARDCORE_MODE] > 0) {
 				trace("Hardcore save file " + flags[kFLAGS.HARDCORE_SLOT] + " created.");
-                kGAMECLASS.saves.saveGame(flags[kFLAGS.HARDCORE_SLOT])
+                CoC.instance.saves.saveGame(flags[kFLAGS.HARDCORE_SLOT])
             }
-			kGAMECLASS.saves.loadPermObject();
-			flags[kFLAGS.MOD_SAVE_VERSION] = kGAMECLASS.modSaveVersion;
+			CoC.instance.saves.loadPermObject();
+			flags[kFLAGS.MOD_SAVE_VERSION] = CoC.instance.modSaveVersion;
 			statScreenRefresh();
 			chooseToPlay();
 			return;

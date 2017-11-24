@@ -4,7 +4,7 @@
 package classes.Scenes.Explore
 {
 	import classes.BaseContent;
-	import classes.GlobalFlags.kGAMECLASS;
+	import classes.CoC;
 	import classes.Monster;
 	import classes.Scenes.Areas.BlightRidge.*;
 	import classes.Scenes.Areas.Bog.*;
@@ -145,22 +145,22 @@ package classes.Scenes.Explore
 				var m:Monster = allMonsters[monsterIdx]();
 				m.onDefeated = function (hpVictory:Boolean):void
 				{
-                    kGAMECLASS.inCombat = false;
-                    kGAMECLASS.player.clearStatuses(false);
+                    CoC.instance.inCombat = false;
+                    CoC.instance.player.clearStatuses(false);
                     statScreenRefresh();
 					exploreDebugMonsters(monsterIdx + 1);
 				};
 				m.onWon = function (hpVictory:Boolean, pcCameWorms:Boolean):void
 				{
-                    kGAMECLASS.inCombat = false;
-                    kGAMECLASS.player.clearStatuses(false);
+                    CoC.instance.inCombat = false;
+                    CoC.instance.player.clearStatuses(false);
                     statScreenRefresh();
 					exploreDebugMonsters(monsterIdx + 1);
 				};
 				m.onPcRunAttempt = function ():void
 				{
-                    kGAMECLASS.inCombat = false;
-                    kGAMECLASS.player.clearStatuses(false);
+                    CoC.instance.inCombat = false;
+                    CoC.instance.player.clearStatuses(false);
                     statScreenRefresh();
 					exploreDebugMonsters(monsterIdx + 1);
 				};

@@ -1,7 +1,7 @@
 ﻿package classes {
 import classes.BodyParts.Skin;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.NPCs.JojoScene;
 
 import coc.xxc.BoundStory;
@@ -15,10 +15,10 @@ public class PlayerAppearance extends BaseContent {
 	}
 	private var story:BoundStory;
 	private function init():void {
-        story = new Story("story", kGAMECLASS.rootStory, "appearance").bind(kGAMECLASS.context);
+        story = new Story("story", CoC.instance.rootStory, "appearance").bind(CoC.instance.context);
     }
 	public function appearance():void {
-        if (kGAMECLASS.gameSettings.charviewEnabled) mainViewManager.showPlayerDoll(debug);
+        if (CoC.instance.gameSettings.charviewEnabled) mainViewManager.showPlayerDoll(debug);
         //Temp vars
 		var temp:Number  = 0;
 		var rando:Number = 0;

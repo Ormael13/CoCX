@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.SceneLib;
 
 public class IsabellaScene extends NPCAwareContent implements TimeAwareInterface {
@@ -1393,7 +1393,7 @@ public function victoryAgainstIzzzzzySixtyNine():void {
 	if(!isabellaFollower()) isabellaFollowerScene.isabellaAffection(9);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] = 0;
 	player.slimeFeed();
-    if (kGAMECLASS.inCombat) cleanupAfterCombat();
+    if (CoC.instance.inCombat) cleanupAfterCombat();
     else doNext(camp.returnToCampUseOneHour);
 }
 

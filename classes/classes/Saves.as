@@ -3,7 +3,7 @@
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kCOUNTERS;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Items.*;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.NPCs.JojoScene;
@@ -377,7 +377,7 @@ public function saveLoad(e:MouseEvent = null):void
 		return;
 	}
 	if (!player) {
-		addButton(14, "Back", kGAMECLASS.mainMenu.mainMenu);
+		addButton(14, "Back", CoC.instance.mainMenu.mainMenu);
 		return;
 	}
 	if (inDungeon) {
@@ -388,7 +388,7 @@ public function saveLoad(e:MouseEvent = null):void
 		addButton(0, "Save", saveScreen);
 		addButton(5, "Save to File", saveToFile);
 		addButton(3, "AutoSave: " + autoSaveSuffix, autosaveToggle);
-		addButton(14, "Back", kGAMECLASS.mainMenu.mainMenu);
+		addButton(14, "Back", CoC.instance.mainMenu.mainMenu);
 	}
 	else
 	{
@@ -644,8 +644,8 @@ public function savePermObject(isFile:Boolean):void {
 				saveFile.data.achievements[i] = achievements[i];
 			}
 		}
-        if (kGAMECLASS.permObjVersionID != 0)
-            saveFile.data.permObjVersionID = kGAMECLASS.permObjVersionID;
+        if (CoC.instance.permObjVersionID != 0)
+            saveFile.data.permObjVersionID = CoC.instance.permObjVersionID;
     }
 	catch (error:Error)
 	{
@@ -694,19 +694,19 @@ public function loadPermObject():void {
 		}
 
 		if (saveFile.data.permObjVersionID != undefined) {
-            kGAMECLASS.permObjVersionID = saveFile.data.permObjVersionID;
-            trace("Found internal permObjVersionID:", kGAMECLASS.permObjVersionID);
+            CoC.instance.permObjVersionID = saveFile.data.permObjVersionID;
+            trace("Found internal permObjVersionID:", CoC.instance.permObjVersionID);
         }
 
-if (kGAMECLASS.permObjVersionID < 1039900) {
+if (CoC.instance.permObjVersionID < 1039900) {
             // apply fix for issue #337 (Wrong IDs in kACHIEVEMENTS conflicting with other achievements)
 			achievements[kACHIEVEMENTS.ZONE_EXPLORER] = 0;
 			achievements[kACHIEVEMENTS.ZONE_SIGHTSEER] = 0;
 			achievements[kACHIEVEMENTS.GENERAL_PORTAL_DEFENDER] = 0;
 			achievements[kACHIEVEMENTS.GENERAL_BAD_ENDER] = 0;
-            kGAMECLASS.permObjVersionID = 1039900;
+            CoC.instance.permObjVersionID = 1039900;
             savePermObject(false);
-            trace("PermObj internal versionID updated:", kGAMECLASS.permObjVersionID);
+            trace("PermObj internal versionID updated:", CoC.instance.permObjVersionID);
         }
 	}
 }
@@ -725,7 +725,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		
 	var backupAborted:Boolean = false;
 
-	saveAllAwareClasses(kGAMECLASS); //Informs each saveAwareClass that it must save its values in the flags array
+	saveAllAwareClasses(CoC.instance); //Informs each saveAwareClass that it must save its values in the flags array
     var counter:Number = player.cocks.length;
 	//Initialize the save file
 	var saveFile:*;
@@ -1103,10 +1103,10 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.autoSave = player.autoSave;
 		
 		//PLOTZ
-        saveFile.data.whitney = kGAMECLASS.whitney;
+        saveFile.data.whitney = CoC.instance.whitney;
         saveFile.data.monk = JojoScene.monk;
-        saveFile.data.sand = kGAMECLASS.sand;
-        saveFile.data.giacomo = kGAMECLASS.giacomo;
+        saveFile.data.sand = CoC.instance.sand;
+        saveFile.data.giacomo = CoC.instance.giacomo;
         saveFile.data.beeProgress = 0; //Now saved in a flag. getGame().beeProgress;
 
 		saveFile.data.isabellaOffspringData = [];
@@ -1167,7 +1167,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 
 		
 		// Keybinds
-        saveFile.data.controls = kGAMECLASS.inputManager.SaveBindsToObj();
+        saveFile.data.controls = CoC.instance.inputManager.SaveBindsToObj();
         // TODO @Oxdeception recheck
 		saveFile.data.world = [];
 		saveFile.data.world.x = [];
@@ -1190,7 +1190,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 	// Something to do in the future
 	if (isFile && !processingError)
 	{
-		if (!(kGAMECLASS.monkey.run))
+		if (!(CoC.instance.monkey.run))
 		{
 			//outputText(serializeToString(saveFile.data), true);
 			var bytes:ByteArray = new ByteArray();
@@ -1311,7 +1311,7 @@ public function openSave():void
 {
 
 	// Block when running the chaos monkey
-	if (!(kGAMECLASS.monkey.run))
+	if (!(CoC.instance.monkey.run))
 	{
 		CONFIG::AIR
 		{
@@ -1436,7 +1436,7 @@ private function unFuckSaveDataBeforeLoading(data:Object):void {
 }
 public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 {
-    var game:CoC = kGAMECLASS;
+    var game:CoC = CoC.instance;
     DungeonAbstractContent.dungeonLoc = 0;
 	//Not needed, dungeonLoc = 0 does this:	game.inDungeon = false;
 	DungeonAbstractContent.inDungeon = false; //Needed AGAIN because fuck includes folder. If it ain't broke, don't fix it!
@@ -2326,7 +2326,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				saveFile.data.itemSlot10.quantity);
 		}
 
-		loadAllAwareClasses(kGAMECLASS); //Informs each saveAwareClass that it must load its values from the flags array
+		loadAllAwareClasses(CoC.instance); //Informs each saveAwareClass that it must load its values from the flags array
         unFuckSave();
 		
 		// Control Bindings

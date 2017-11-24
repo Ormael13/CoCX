@@ -2,7 +2,7 @@ package classes.Scenes.NPCs
 {
 import classes.BaseContent;
 import classes.CoC;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 
 import coc.xxc.BoundStory;
 
@@ -44,13 +44,13 @@ import coc.xxc.BoundStory;
 		public function XXCNPC(storyName:String)
 		{
 			_storyName = storyName;
-			if(!kGAMECLASS||kGAMECLASS.rootStory == null){
+			if(!CoC.instance||CoC.instance.rootStory == null){
 				CoC.onGameInit(init);
 			}
 			else {init();}
 		}
 		private function init():void{
-			story = kGAMECLASS.rootStory.locate(_storyName).bind(kGAMECLASS.context);
+			story = CoC.instance.rootStory.locate(_storyName).bind(CoC.instance.context);
 		}
 		public function display(toDisplay:String,locals:*=null):void
 		{
