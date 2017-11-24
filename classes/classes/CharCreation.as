@@ -124,12 +124,7 @@ import fl.controls.ComboBox;
 				kGAMECLASS.showComboBox(preList,"Pre-defined characters",selectName);
 				mainView.placeComboBox(mainView.nameBox.x + mainView.nameBox.width + 10,mainView.nameBox.y);
 			}
-			
-			//Reset autosave
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
-				player.slotName = "VOID";
-				player.autoSave = false;
-			}
+
 			//RESET DUNGEON
 			kGAMECLASS.inDungeon = false;
 			kGAMECLASS.dungeonLoc = 0;
@@ -139,6 +134,13 @@ import fl.controls.ComboBox;
 			var oldPlayer:Player = player;
 			//Reset all standard stats
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) player = new Player();
+
+            //Reset autosave
+            if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
+                player.slotName = "VOID";
+                player.autoSave = false;
+            }
+
 			model.player = player;
 			player.str = 15;
 			player.tou = 15;
