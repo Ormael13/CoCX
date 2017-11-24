@@ -2502,7 +2502,7 @@ package classes
 		public function canSwimUnderwater():Boolean
 		{
 			if (gillType != GILLS_NONE)
-				return true;	//dodać jeszcze trzeba bdzie tu efekt of itemów i inne opcje dające oddych. pod wodą
+				return true;	//dodać jeszcze trzeba bedzie tu efekt of itemów i inne opcje dające oddych. pod wodą
 			return false;
 		}
 
@@ -2517,7 +2517,7 @@ package classes
 		//Wrath Weapons
 		public function isLowGradeWrathWeapon():Boolean
 		{
-			if (game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.NPHBLDE || game.player.weapon == game.weapons.EBNYBLD || game.player.weapon == game.weapons.OTETSU || game.player.weapon == game.weapons.CNTWHIP)
+			if (game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.NPHBLDE || game.player.weapon == game.weapons.EBNYBLD || game.player.weapon == game.weapons.OTETSU || game.player.weapon == game.weapons.POCDEST || game.player.weapon == game.weapons.DOCDEST || game.player.weapon == game.weapons.CNTWHIP)
 				return true;
 			return false;
 		}
@@ -2539,8 +2539,9 @@ package classes
 		//Weapons for Whirlwind
 		public function isWeaponForWhirlwind():Boolean
 		{
-			if (game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.CLAYMOR || game.player.weapon == game.weapons.URTAHLB || game.player.weapon == game.weapons.KIHAAXE || game.player.weapon == game.weapons.L__AXE || game.player.weapon == game.weapons.L_HAMMR || game.player.weapon == game.weapons.TRASAXE || game.player.weapon == game.weapons.WARHAMR
-			 || game.player.weapon == game.weapons.OTETSU || game.player.weapon == game.weapons.NODACHI || game.player.weapon == game.weapons.WGSWORD || game.player.weapon == game.weapons.DBFSWO || game.player.weapon == game.weapons.D_WHAM_ || game.player.weapon == game.weapons.DL_AXE_ || game.player.weapon == game.weapons.DSWORD_)// || game.player.weapon == game.weapons.
+			if (game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.NPHBLDE || game.player.weapon == game.weapons.EBNYBLD || game.player.weapon == game.weapons.CLAYMOR || game.player.weapon == game.weapons.URTAHLB || game.player.weapon == game.weapons.KIHAAXE || game.player.weapon == game.weapons.L__AXE
+			 || game.player.weapon == game.weapons.L_HAMMR || game.player.weapon == game.weapons.TRASAXE || game.player.weapon == game.weapons.WARHAMR || game.player.weapon == game.weapons.OTETSU || game.player.weapon == game.weapons.NODACHI || game.player.weapon == game.weapons.WGSWORD || game.player.weapon == game.weapons.DBFSWO
+			 || game.player.weapon == game.weapons.D_WHAM_ || game.player.weapon == game.weapons.DL_AXE_ || game.player.weapon == game.weapons.DSWORD_)// || game.player.weapon == game.weapons.
 				return true;
 			return false;
 		}

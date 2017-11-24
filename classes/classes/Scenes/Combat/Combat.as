@@ -476,9 +476,9 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 		if (player.hasPerk(PerkLib.JobDefender)) {
 			buttons.add("Defend", defendpose).hint("Take no offensive action for this round.  Why would you do this?  Maybe because you will assume defensive pose?");
 		}
-	//	if (player.hasPerk(PerkLib.SecondWind)) {
-	//		buttons.add("Second Wind", seconwindGo).hint("");
-	//	}
+		if (player.hasPerk(PerkLib.SecondWind) && !player.hasStatusEffect(StatusEffects.CooldownSecondWind)) {
+			buttons.add("Second Wind", seconwindGo).hint("Enter your second wind, recovering from your wound and fatigue once per battle.");
+		}
 		if (!player.isFlying() && monster.isFlying()) {
 			if (player.canFly()) {
 				buttons.add("Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
@@ -2320,8 +2320,10 @@ public function defendpose():void {
 }
 public function seconwindGo():void {
 	clearOutput();
-	outputText("\n\n");
-	player.createStatusEffect(StatusEffects.SecondWindRegen, 5, 0, 0, 0);
+	outputText("You enter your second wind, recovering your energy.\n\n");
+	fatigue((player.maxFatigue() - player.fatigue) / 2);
+	player.createStatusEffect(StatusEffects.SecondWindRegen, 10, 0, 0, 0);
+	player.createStatusEffect(StatusEffects.CooldownSecondWind, 0, 0, 0, 0);
 	wrathregeneration();
 	fatigueRecovery();
 	manaregeneration();
@@ -2659,14 +2661,14 @@ public function attack():void {
 		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 2;
 		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 5;
 	}
-	if (player.weapon == weapons.NPHBLDE || player.weapon == weapons.MASAMUN) {
+	if (player.weapon == weapons.NPHBLDE || player.weapon == weapons.MASAMUN || player.weapon == weapons.SESPEAR) {
 		if (monster.cor < 33) damage = Math.round(damage * 1.0);
 		else if (monster.cor < 50) damage = Math.round(damage * 1.1);
 		else if (monster.cor < 75) damage = Math.round(damage * 1.2);
 		else if (monster.cor < 90) damage = Math.round(damage * 1.3);
 		else damage = Math.round(damage * 1.4);
 	}
-	if (player.weapon == weapons.EBNYBLD || player.weapon == weapons.BLETTER) {
+	if (player.weapon == weapons.EBNYBLD || player.weapon == weapons.BLETTER || player.weapon == weapons.DSSPEAR) {
 		if (monster.cor >= 66) damage = Math.round(damage * 1.0);
 		else if (monster.cor >= 50) damage = Math.round(damage * 1.1);
 		else if (monster.cor >= 25) damage = Math.round(damage * 1.2);
@@ -2894,6 +2896,11 @@ public function attack():void {
 			outputText("\n" + monster.capitalA + monster.short + " reels from the brutal blow, stunned.");
 			if (!monster.hasStatusEffect(StatusEffects.Stunned)) monster.createStatusEffect(StatusEffects.Stunned,rand(2),0,0,0);
 		}
+		//15% Stun Chance
+		if ((player.weapon == weapons.POCDEST || player.weapon == weapons.DOCDEST) && rand(100) < 15 && monster.findPerk(PerkLib.Resolute) < 0) {
+			outputText("\n" + monster.capitalA + monster.short + " reels from the brutal blow, stunned.");
+			if (!monster.hasStatusEffect(StatusEffects.Stunned)) monster.createStatusEffect(StatusEffects.Stunned,rand(2),0,0,0);
+		}
 		//20% Stun chance
 		if (player.isFistOrFistWeapon() && player.findPerk(PerkLib.MightyFist) >= 0 && rand(5) == 0 && monster.findPerk(PerkLib.Resolute) < 0) {
 			outputText("\n" + monster.capitalA + monster.short + " reels from the brutal blow, stunned.");
@@ -2916,6 +2923,18 @@ public function attack():void {
 				else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your [weapon] leave behind.");
 			}
 		}
+	}
+	if (player.weapon == weapons.DSSPEAR) {
+	monster.str -= 2;
+	monster.spe -= 2;
+	if(monster.str < 1) monster.str = 1;
+	if(monster.spe < 1) monster.spe = 1;
+	if(monster.hasStatusEffect(StatusEffects.NagaVenom))
+	{
+		monster.addStatusValue(StatusEffects.NagaVenom,2,2);
+		monster.addStatusValue(StatusEffects.NagaVenom,1,2);
+	}
+	else monster.createStatusEffect(StatusEffects.NagaVenom, 2, 2, 0, 0);
 	}
 	
 	if (monster is JeanClaude && !player.hasStatusEffect(StatusEffects.FirstAttack))
@@ -4520,6 +4539,7 @@ public function regeneration(combat:Boolean = true):void {
 		}
 		if (player.armor == armors.NURSECL) healingPercent += 0.5;
 		if (player.armor == armors.GOOARMR) healingPercent += (kGAMECLASS.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 25 : 2) : 2);
+		if (player.weapon == weapons.SESPEAR) healingPercent += 2;
 		if (player.findPerk(PerkLib.LustyRegeneration) >= 0) healingPercent += 0.5;
 		if (player.findPerk(PerkLib.LizanRegeneration) >= 0) healingPercent += 1.5;
 		if (player.findPerk(PerkLib.LizanMarrow) >= 0) healingPercent += 0.5;
@@ -4551,6 +4571,7 @@ public function regeneration(combat:Boolean = true):void {
 		if (player.armorName == "skimpy nurse's outfit") healingPercent += 1;
 		if (player.armor == armors.NURSECL) healingPercent += 1;
 		if (player.armor == armors.GOOARMR) healingPercent += (kGAMECLASS.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 16 : 3) : 3);
+		if (player.weapon == weapons.SESPEAR) healingPercent += 4;
 		if (player.findPerk(PerkLib.LustyRegeneration) >= 0) healingPercent += 1;
 		if (player.findPerk(PerkLib.LizanRegeneration) >= 0) healingPercent += 3;
 		if (player.findPerk(PerkLib.LizanMarrow) >= 0) healingPercent += 1;

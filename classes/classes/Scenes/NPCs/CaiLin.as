@@ -5,8 +5,8 @@
 package classes.Scenes.NPCs 
 {
 	import classes.*;
-import classes.BodyParts.Skin;
-import classes.internals.*;
+	import classes.BodyParts.Skin;
+	import classes.internals.*;
 	import classes.GlobalFlags.kFLAGS;
 	
 	public class CaiLin extends Monster

@@ -86,7 +86,7 @@ package classes.Scenes.Camp
 			outputText("What helper would you like to make?\n\n");
 			outputText("Stored golem cores for future reuse when making new golems: " + flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] + " / " + maxReusableGolemCoresBagSize() + "\n");
 			if (player.findPerk(PerkLib.JobGolemancer) >= 0) outputText("Temporal Golems Bag: " + flags[kFLAGS.TEMPORAL_GOLEMS_BAG] + " / " + maxTemporalGolemsBagSize() + " golems\n");
-			if (player.findPerk(PerkLib.MasterGolemMaker) >= 0) outputText("Pernament Golems Bag: " + flags[kFLAGS.PERNAMENT_GOLEMS_BAG] + " / " + maxPernamentGolemsBagSize() + " golems\n");
+			if (player.findPerk(PerkLib.MasterGolemMaker) >= 0) outputText("Permanent Golems Bag: " + flags[kFLAGS.PERNAMENT_GOLEMS_BAG] + " / " + maxPernamentGolemsBagSize() + " golems\n");
 			menu();
 			if (player.findPerk(PerkLib.JobGolemancer) >= 0) addButton(0, "T.S.Golem", makeTemporalStoneGolem).hint("Make most simply golem made of pile of stones.  <b>It will cruble after one attack!</b>\n\nCost: 1 Golem Core, " + temporalGolemMakingCost() + " Mana");
 			if (player.findPerk(PerkLib.MasterGolemMaker) >= 0) addButton(1, "P.S.Golem", makePernamentStoneGolem).hint("Make simply stone golem.</b>\n\nCost: 1 Golem Core, 10 Stones, " + pernamentGolemMakingCost() + " Mana");

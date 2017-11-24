@@ -6,7 +6,7 @@ package classes.Items.Weapons
 	public class Spear extends Weapon {
 		
 		public function Spear() {
-			super("Spear", "Spear", "deadly spear", "a deadly spear", "piercing stab", 8, 320, "A staff with a sharp blade at the tip designed to pierce through the toughest armor.  This would ignore most armors.  Req. 75+ speed to unleash full attack power.");
+			super("Spear", "Spear", "deadly spear", "a deadly spear", "piercing stab", 10, 400, "A staff with a sharp blade at the tip designed to pierce through the toughest armor.  This would ignore most armors.  Req. 75+ speed to unleash full attack power.");
 		}
 		
 		override public function get attack():Number {

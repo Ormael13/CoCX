@@ -1,3 +1,4 @@
+//Side Dungeon: Hidden Cave (aka Elemental Cave)
 /**
  * ...
  * @author Ormael
