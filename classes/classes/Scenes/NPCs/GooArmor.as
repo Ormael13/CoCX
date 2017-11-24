@@ -48,11 +48,6 @@ public class GooArmor extends GooGirl
 				outputText("You try and get out of the goo's grasp, but every bit of goop you pull off you seems to be replaced by twice as much!");
 				//(If fail 5 times, go to defeat scene)
 				player.addStatusValue(StatusEffects.GooArmorBind,1,1);
-				if(player.statusEffectv1(StatusEffects.GooArmorBind) >= 5) {
-					if(hasStatusEffect(StatusEffects.Spar)) SceneLib.valeria.pcWinsValeriaSparDefeat();
-					else SceneLib.dungeons.heltower.gooArmorBeatsUpPC();
-					return;
-				}
 			}
 			//If succeed: 
 			else {

@@ -2735,7 +2735,7 @@ public class MagicSpecials extends BaseCombatContent {
 		else {
 			outputText("With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself into the opponent's frame. Unfortunately, it seems they were more mentally prepared than you hoped, and you're summarily thrown out of their body before you're even able to have fun with them. Darn, you muse. Gotta get smarter.\n\n");
 		}
-		if(!combatRoundOver()) enemyAI();
+		if(!combatIsOver()) enemyAI();
 	}
 
 //Eclipsing shadow

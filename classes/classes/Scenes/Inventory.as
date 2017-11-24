@@ -532,22 +532,13 @@ if (!kGAMECLASS.inCombat && inDungeon == false && inRoomedDungeon == false && fl
 				outputText("You cannot use " + player.itemSlots[slotNum].itype.longName + "!\n\n");
 			}
 			itemGoNext(); //Normally returns to the inventory menu. In combat it goes to the inventoryCombatHandler function
-/* menuLoc is no longer needed, after enemyAI game will always move to the next round			
-			else if (menuLoc == 1) {
-				menuLoc = 0;
-				if (!combatRoundOver()) {
-					outputText("\n\n");
-					enemyAI();
-				}
-			}
-*/
 		}
 		
 		private function inventoryCombatHandler():void {
-			if (!combat.combatRoundOver()) { //Check if the battle is over. If not then go to the enemy's action.
-				outputText("\n\n");
-				enemyAI();
-			}
+			//Check if the battle is over. If not then go to the enemy's action.
+			if (combat.combatIsOver()) return;
+			outputText("\n\n");
+			enemyAI();
 		}
 		private function deleteItemPrompt(item:Useable, slotNum:int):void {
 			clearOutput();

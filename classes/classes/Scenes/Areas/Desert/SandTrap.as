@@ -29,7 +29,6 @@ public class SandTrap extends Monster
 				}
 			}
 			outputText("\n\n");
-			doAI();
 		}
 
 		public function trapLevel(adjustment:Number = 0):Number {

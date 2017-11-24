@@ -23,7 +23,8 @@ public class CombatTeases extends BaseCombatContent {
 		}
 		else {
 			tease();
-			if (!combatRoundOver()) enemyAI();
+			if (combatIsOver()) return;
+			enemyAI();
 		}
 	}
 

@@ -402,7 +402,8 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 	if (newRound) combatStatusesUpdate(); //Update Combat Statuses
 	display();
 	statScreenRefresh();
-	if (combatRoundOver()) return;
+	if (newRound) combatRoundOver();
+	if (combatIsOver()) return;
 	ui.mainMenu();
 	//Modify menus.
 	if (SceneLib.urtaQuest.isUrta()) {
@@ -1012,6 +1013,7 @@ public function lustAttack():void {
 }
 
 internal function wait():void {
+	var skipMonsterAction:Boolean = false; // If false, enemyAI() will be called. If true, combatRoundOver()
 	flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 1;
 	//Gain fatigue if not fighting sand tarps
 	if (!monster.hasStatusEffect(StatusEffects.Level)) {
@@ -1022,6 +1024,7 @@ internal function wait():void {
 	}
 	if (monster.hasStatusEffect(StatusEffects.PCTailTangle)) {
 		(monster as Kitsune).kitsuneWait();
+		skipMonsterAction = true;
 	}
 	else if (monster.hasStatusEffect(StatusEffects.Level)) {
 		if (monster is SandTrap) {
@@ -1035,29 +1038,28 @@ internal function wait():void {
 		clearOutput();
 		outputText("You sigh and relax in the chains, eying the well-endowed minotaur as you await whatever rough treatment he desires to give.  His musky, utterly male scent wafts your way on the wind, and you feel droplets of your lust dripping down your thighs.  You lick your lips as you watch the pre-cum drip from his balls, eager to get down there and worship them.  Why did you ever try to struggle against this fate?\n\n");
 		dynStats("lus", 30 + rand(5), "scale", false);
-		enemyAI();
 	}
 	else if (player.hasStatusEffect(StatusEffects.Whispered)) {
 		clearOutput();
 		outputText("You shake off the mental compulsions and ready yourself to fight!\n\n");
 		player.removeStatusEffect(StatusEffects.Whispered);
-		enemyAI();
 	}
 	else if (player.hasStatusEffect(StatusEffects.HarpyBind)) {
 		clearOutput();
 		outputText("The brood continues to hammer away at your defenseless self. ");
-		temp = 80 + rand(40);
-		temp = takeDamage(temp, true);
-		combatRoundOver();
+		var temp:int = 80 + rand(40);
+		takeDamage(temp, true);
+		skipMonsterAction = true;
 	}
 	else if (monster.hasStatusEffect(StatusEffects.QueenBind)) {
 		(monster as HarpyQueen).ropeStruggles(true);
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.GooBind)) {
 		clearOutput();
 		outputText("You writhe uselessly, trapped inside the goo girl's warm, seething body. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girl's pulsing body around yours.");
-		temp = takeDamage(.35 * player.maxHP(), true);
-		combatRoundOver();
+		takeDamage(.35 * player.maxHP(), true);
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.GooArmorBind)) {
 		clearOutput();
@@ -1069,7 +1071,7 @@ internal function wait():void {
 			else SceneLib.dungeons.heltower.gooArmorBeatsUpPC();
 			return;
 		}
-		combatRoundOver();
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.NagaBind)) {
 		clearOutput();
@@ -1079,23 +1081,24 @@ internal function wait():void {
 		outputText("'s grip on you tightens as you relax into the stimulating pressure.");
 		dynStats("lus", player.sens / 5 + 5);
 		takeDamage(5 + rand(5));
-		combatRoundOver();
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.ScyllaBind)) {
 		clearOutput();
 		outputText("You're being squeezed tightly by the scylla’s powerful tentacles. That's without mentioning the fact she's rubbing in your sensitive place quite a bit, giving you a knowing grin.");
 		dynStats("lus", player.sens / 4 + 20);
 		takeDamage(100 + rand(40));
-		combatRoundOver();
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.WolfHold)) {
 		clearOutput();
 		outputText("The wolf tear your body with its maw wounding you greatly as it starts to eat you alive!");
 		takeDamage(5 + rand(5));
-		combatRoundOver();
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.HolliConstrict)) {
 		(monster as Holli).waitForHolliConstrict(true);
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.TentacleBind)) {
 		clearOutput();
@@ -1105,70 +1108,75 @@ internal function wait():void {
 			outputText("The creature continues sucking your clit and now has latched two more suckers on your nipples, amplifying your growing lust. You must escape or you will become a mere toy to this thing!");
 		else outputText("The creature continues probing at your asshole and has now latched " + num2Text(player.totalNipples()) + " more suckers onto your nipples, amplifying your growing lust.  You must escape or you will become a mere toy to this thing!");
 		dynStats("lus", (8 + player.sens / 10));
-		combatRoundOver();
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) {
 		clearOutput();
 		(monster as FrostGiant).giantGrabFail(false);
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 		clearOutput();
 		(monster as FrostGiant).giantBoulderMiss();
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.IsabellaStunned)) {
 		clearOutput();
 		outputText("You wobble about for some time but manage to recover. Isabella capitalizes on your wasted time to act again.\n\n");
 		player.removeStatusEffect(StatusEffects.IsabellaStunned);
-		enemyAI();
 	}
 	else if (player.hasStatusEffect(StatusEffects.Stunned)) {
 		clearOutput();
 		outputText("You wobble about, stunned for a moment.  After shaking your head, you clear the stars from your vision, but by then you've squandered your chance to act.\n\n");
 		player.removeStatusEffect(StatusEffects.Stunned);
-		enemyAI();
 	}
 	else if (player.hasStatusEffect(StatusEffects.Confusion)) {
 		clearOutput();
 		outputText("You shake your head and file your memories in the past, where they belong.  It's time to fight!\n\n");
 		player.removeStatusEffect(StatusEffects.Confusion);
-		enemyAI();
 	}
 	else if (monster is Doppleganger) {
 		clearOutput();
 		outputText("You decide not to take any action this round.\n\n");
 		(monster as Doppleganger).handlePlayerWait();
-		enemyAI();
 	}
 	else {
 		clearOutput();
 		outputText("You decide not to take any action this round.\n\n");
+	}
+	if (skipMonsterAction) {
+		combatRoundOver();
+	} else {
 		enemyAI();
 	}
 }
 	
 	internal function struggle():void {
+		var skipMonsterAction:Boolean = false; // If false, enemyAI() will be called. If true, combatRoundOver()
 	if (monster.hasStatusEffect(StatusEffects.MinotaurEntangled)) {
 		clearOutput();
 		if (player.str / 9 + rand(20) + 1 >= 15) {
 			outputText("Utilizing every ounce of your strength and cunning, you squirm wildly, shrugging through weak spots in the chain's grip to free yourself!  Success!\n\n");
 			monster.removeStatusEffect(StatusEffects.MinotaurEntangled);
 			if (flags[kFLAGS.URTA_QUEST_STATUS] == 0.75) outputText("\"<i>No!  You fool!  You let her get away!  Hurry up and finish her up!  I need my serving!</i>\"  The succubus spits out angrily.\n\n");
-			combatRoundOver();
+			skipMonsterAction = true;
 		}
 		//Struggle Free Fail*
 		else {
 			outputText("You wiggle and struggle with all your might, but the chains remain stubbornly tight, binding you in place.  Damnit!  You can't lose like this!\n\n");
-			enemyAI();
 		}
 	}
 	else if (monster.hasStatusEffect(StatusEffects.PCTailTangle)) {
 		(monster as Kitsune).kitsuneStruggle();
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.HolliConstrict)) {
 		(monster as Holli).struggleOutOfHolli();
+		skipMonsterAction = true;
 	}
 	else if (monster.hasStatusEffect(StatusEffects.QueenBind)) {
 		(monster as HarpyQueen).ropeStruggles();
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.GooBind)) {
 		clearOutput();
@@ -1182,19 +1190,25 @@ internal function wait():void {
 			outputText("You writhe uselessly, trapped inside the goo girl's warm, seething body. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girl's pulsing body around yours. ");
 			temp = takeDamage(.15 * player.maxHP(), true);
 		}
-		combatRoundOver();
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.HarpyBind)) {
 		(monster as HarpyMob).harpyHordeGangBangStruggle();
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.GooArmorBind)) {
 		(monster as GooArmor).struggleAtGooBind();
+		if(player.statusEffectv1(StatusEffects.GooArmorBind) >= 5) {
+			if(monster.hasStatusEffect(StatusEffects.Spar)) SceneLib.valeria.pcWinsValeriaSparDefeat();
+			else SceneLib.dungeons.heltower.gooArmorBeatsUpPC();
+			return;
+		}
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.UBERWEB)) {
 		clearOutput();
 		outputText("You claw your way out of the webbing while Kiha does her best to handle the spiders single-handedly!\n\n");
 		player.removeStatusEffect(StatusEffects.UBERWEB);
-		enemyAI();
 	}
 	else if (player.hasStatusEffect(StatusEffects.NagaBind)) {
 		clearOutput();
@@ -1212,7 +1226,7 @@ internal function wait():void {
 			if (monster is CaiLin) takeDamage(10 + rand(8));
 			if(monster is Diva){(monster as Diva).moveBite();}
 		}
-		combatRoundOver();
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.ScyllaBind)) {
 		clearOutput();
@@ -1226,7 +1240,7 @@ internal function wait():void {
 			dynStats("lus", player.sens / 5 + 5);
 			takeDamage(100 + rand(80));
 		}
-		combatRoundOver();
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.WolfHold)) {
 		clearOutput();
@@ -1238,11 +1252,11 @@ internal function wait():void {
 			outputText("The wolf tear your body with its maw wounding you greatly as it starts to eat you alive!");
 			takeDamage(7 + rand(5));
 		}
-		combatRoundOver();
+		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) {
 		(monster as FrostGiant).giantGrabStruggle();
-		combatRoundOver(); // TODO @aimozg other cases
+		skipMonsterAction = true;
 	}
 	else {
 		clearOutput();
@@ -1252,7 +1266,6 @@ internal function wait():void {
 			outputText("As the creature attempts to adjust your position in its grip, you free one of your [legs] and hit the beast in its beak, causing it to let out an inhuman cry and drop you to the ground smartly.\n\n");
 			player.removeStatusEffect(StatusEffects.TentacleBind);
 			monster.createStatusEffect(StatusEffects.TentacleCoolDown, 3, 0, 0, 0);
-			enemyAI();
 		}
 		//Fail to break free
 		else {
@@ -1264,9 +1277,14 @@ internal function wait():void {
 				outputText("The creature continues sucking your clit and now has latched two more suckers on your nipples, amplifying your growing lust. You must escape or you will become a mere toy to this thing!");
 			else outputText("The creature continues probing at your asshole and has now latched " + num2Text(player.totalNipples()) + " more suckers onto your nipples, amplifying your growing lust.  You must escape or you will become a mere toy to this thing!");
 			dynStats("lus", (3 + player.sens / 10 + player.lib / 20));
-			combatRoundOver();
+			skipMonsterAction = true;
 		}
 	}
+		if (skipMonsterAction) {
+			combatRoundOver();
+		} else {
+			enemyAI();
+		}
 }
 
 public function arrowsAccuracy():Number {
@@ -4972,7 +4990,7 @@ public function showMonsterLust():void {
 		if (monster.spe < 1) monster.spe = 1;
 		if (monster.str < 1) monster.str = 1;
 		if (monster.statusEffectv3(StatusEffects.NagaVenom) >= 1) monster.lust += monster.statusEffectv3(StatusEffects.NagaVenom);
-		if (monster.lust > monster.maxLust()) combatRoundOver();
+		if (combatIsOver()) return;
 	}
 	if(monster.short == "harpy") {
 		//(Enemy slightly aroused) 
@@ -5110,10 +5128,15 @@ public function teaseXP(XP:Number = 0):void {
 }
 
 //VICTORY OR DEATH?
-public function combatRoundOver():Boolean { //Called after the monster's action
+	// Called after the monster's action. Increments round counter. Setups doNext to win/loss/combat menu
+public function combatRoundOver():void {
 	combatRound++;
 	statScreenRefresh();
 	flags[kFLAGS.ENEMY_CRITICAL] = 0;
+	combatIsOver();
+}
+	// Returns true if combat is over. Setups doNext to win/loss/combat menu
+	public function combatIsOver():Boolean {
 	if (!inCombat) return false;
 	if(monster.HP < 1) {
 		doNext(endHpVictory);

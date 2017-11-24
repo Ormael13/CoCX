@@ -19,9 +19,13 @@ public class BaseCombatContent extends BaseContent {
 	protected function combatMenu(newRound:Boolean = true):void {
 		combat.combatMenu(newRound);
 	}
-	protected function combatRoundOver():Boolean
+	// Returns true if combat is over. Setups doNext to win/loss/combat menu
+	protected function combatIsOver():Boolean {
+		return combat.combatIsOver();
+	}
+	protected function combatRoundOver():void
 	{
-		return combat.combatRoundOver();
+		combat.combatRoundOver();
 	}
 	protected function endHpVictory():void {
 		combat.endHpVictory();

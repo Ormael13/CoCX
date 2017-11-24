@@ -1080,7 +1080,6 @@ import flash.utils.getQualifiedClassName;
 				attacks--;
 			}
 			removeStatusEffect(StatusEffects.Attacks);
-//			if (!SceneLib.combat.combatRoundOverImpl()) game.doNext(1);
 		}
 
 		/**
