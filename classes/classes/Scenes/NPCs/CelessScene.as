@@ -280,29 +280,22 @@ import flash.utils.getQualifiedClassName;
 		
 		
 		public function itemImproveMenu(item:Useable = null, from:Useable = null ):void{
-			/*
-			 * Of the items in this array, the following are complete:
-			 * Q_GUARD - Queen's Guard Rapier
-			 * B_WIDOW - Black Widow Rapier
+			/* Of the items in this array, the following are complete:
 			 * CTPALAD - Centuar Paladin Armor
 			 * CTBGUAR - Centuar Blackguard Armor
-			 * SANCTYN - Sanctuary unenchanted
-			 * SANCTYL - Sanctuary pure enchant
-			 * SANCTYD - Sanctuary dark aegis
-			 * 
-			 * The rest need either damage effects, perks, or both
-			 * I have used the sanctuary perk as a placeholder on some of these items.
 			 */
 			var improvableItems:Array = [
 					[weapons.BFSWORD,		weapons.NPHBLDE,		weapons.EBNYBLD],
 					[weapons.KATANA,		weapons.MASAMUN,		weapons.BLETTER],
 				//	[weapons.W_STAFF,		weapons.U_STAFF,		weapons.N_STAFF],
-					[shields.SANCTYN,		shields.SANCTYL,		shields.SANCTYD],
 				//	[weapons.DEMSCYT,		weapons.LHSCYTH,		null],
-				//	[weaponsrange.BOWLONG,	weaponsrange.ARTEMIS,	weaponsrange.WILDHUN],
-				//	[weapons.KIHAAXE,		weapons.WG_GAXE,		weapons.DE_GAXE],
+					[weapons.L__AXE,		weapons.WG_GAXE,		weapons.DE_GAXE],
 					[weapons.SPEAR,			weapons.SESPEAR,		weapons.DSSPEAR],
-					[weapons.JRAPIER,		weapons.Q_GUARD,		weapons.B_WIDOW]//,
+					[weapons.JRAPIER,		weapons.Q_GUARD,		weapons.B_WIDOW],
+					[weapons.OTETSU,		weapons.POCDEST,		weapons.DOCDEST],
+					[weaponsrange.BOWLONG,	weaponsrange.ARTEMIS,	weaponsrange.WILDHUN],
+					[weaponsrange.SHUNHAR,	weaponsrange.KSLHARP,	weaponsrange.LEVHARP],
+					[shields.SANCTYN,		shields.SANCTYL,		shields.SANCTYD]//,
 				//	[armors.CTPALAD,		null,					armors.CTBGUAR]
 				];
 			var selectfrom:int = 1;

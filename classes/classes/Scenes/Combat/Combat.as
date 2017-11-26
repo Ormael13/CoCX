@@ -1657,7 +1657,8 @@ public function multiArrowsStrike():void {
 				}
 				else damage *= 2;
 			}
-		}	
+		}
+		if (player.weaponRangeName == "Wild Hunt" && player.level > monster.level) damage *= 1.2;
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) {
 			damage += player.inte * 0.2;
 			if (player.inte >= 50) damage += player.inte * 0.1;
@@ -1703,6 +1704,10 @@ public function multiArrowsStrike():void {
 			return;
 		}
 		else {
+			if (rand(100) < 15 && player.weaponRangeName == "Artemis" && !monster.hasStatusEffect(StatusEffects.Blind)) {
+				monster.createStatusEffect(StatusEffects.Blind, 3, 0, 0, 0);
+				outputText(",  your radiant shots blinded [monster he]");
+			}
 			outputText(".  It's clearly very painful. <b>(<font color=\"#800000\">" + String(damage) + "</font>)</b>");
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		}
@@ -1933,7 +1938,7 @@ public function throwWeapon():void {
 	var accRange:Number = 0;
 	accRange += (arrowsAccuracy() / 2);
 	if (flags[kFLAGS.ARROWS_ACCURACY] > 0) accRange -= flags[kFLAGS.ARROWS_ACCURACY];
-	if (player.weaponRange != weaponsrange.SHUNHAR) player.ammo--;
+	if (player.weaponRange != weaponsrange.SHUNHAR || player.weaponRange != weaponsrange.KSLHARP || player.weaponRange != weaponsrange.LEVHARP) player.ammo--;
 	fatigue(fc);
 	if (rand(100) < accRange) {
 		var damage:Number = 0;
@@ -1947,6 +1952,20 @@ public function throwWeapon():void {
 		else if (player.weaponRangeAttack >= 101 && player.weaponRangeAttack < 151) damage *= (3.75 + ((player.weaponRangeAttack - 100) * 0.02));
 		else if (player.weaponRangeAttack >= 151 && player.weaponRangeAttack < 201) damage *= (4.75 + ((player.weaponRangeAttack - 150) * 0.015));
 		else damage *= (5.5 + ((player.weaponRangeAttack - 200) * 0.01));
+		if (player.weaponRange == weaponsrange.KSLHARP) {
+			if (monster.cor < 33) damage = Math.round(damage * 1.0);
+			else if (monster.cor < 50) damage = Math.round(damage * 1.1);
+			else if (monster.cor < 75) damage = Math.round(damage * 1.2);
+			else if (monster.cor < 90) damage = Math.round(damage * 1.3);
+			else damage = Math.round(damage * 1.4);
+		}
+		if (player.weaponRange == weaponsrange.LEVHARP) {
+			if (monster.cor >= 66) damage = Math.round(damage * 1.0);
+			else if (monster.cor >= 50) damage = Math.round(damage * 1.1);
+			else if (monster.cor >= 25) damage = Math.round(damage * 1.2);
+			else if (monster.cor >= 10) damage = Math.round(damage * 1.3);
+			else damage = Math.round(damage * 1.4);
+		}
 		if (damage == 0) {
 			if (monster.inte > 0) {
 				outputText(monster.capitalA + monster.short + " shrugs as the [weaponrangename] bounces off them harmlessly.\n\n");
@@ -2670,14 +2689,14 @@ public function attack():void {
 		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 2;
 		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 5;
 	}
-	if (player.weapon == weapons.NPHBLDE || player.weapon == weapons.MASAMUN || player.weapon == weapons.SESPEAR) {
+	if (player.weapon == weapons.NPHBLDE || player.weapon == weapons.MASAMUN || player.weapon == weapons.SESPEAR || player.weapon == weapons.WG_GAXE) {
 		if (monster.cor < 33) damage = Math.round(damage * 1.0);
 		else if (monster.cor < 50) damage = Math.round(damage * 1.1);
 		else if (monster.cor < 75) damage = Math.round(damage * 1.2);
 		else if (monster.cor < 90) damage = Math.round(damage * 1.3);
 		else damage = Math.round(damage * 1.4);
 	}
-	if (player.weapon == weapons.EBNYBLD || player.weapon == weapons.BLETTER || player.weapon == weapons.DSSPEAR) {
+	if (player.weapon == weapons.EBNYBLD || player.weapon == weapons.BLETTER || player.weapon == weapons.DSSPEAR || player.weapon == weapons.DE_GAXE) {
 		if (monster.cor >= 66) damage = Math.round(damage * 1.0);
 		else if (monster.cor >= 50) damage = Math.round(damage * 1.1);
 		else if (monster.cor >= 25) damage = Math.round(damage * 1.2);
@@ -2687,6 +2706,7 @@ public function attack():void {
 	//Determine if critical hit!
 	var crit:Boolean = false;
 	var critChance:int = 5;
+	var critDamage:Number = 1.75;
 	if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
 		if (player.inte <= 100) critChance += (player.inte - 50) / 5;
 		if (player.inte > 100) critChance += 10;
@@ -2695,12 +2715,13 @@ public function attack():void {
 	if (player.findPerk(PerkLib.WeaponMastery) >= 0 && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
 	if (player.findPerk(PerkLib.WeaponGrandMastery) >= 0 && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
 	if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
-	if (player.weapon == weapons.MASAMUN) critChance += 10;
+	if (player.weapon == weapons.MASAMUN || (player.weapon == weapons.WG_GAXE && monster.cor > 66) || (player.weapon == weapons.DE_GAXE && monster.cor < 33)) critChance += 10;
 	if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 	if (rand(100) < critChance) {
 		crit = true;
-		if (player.findPerk(PerkLib.Impale) >= 0 && (player.findPerk(PerkLib.DoubleAttack) < 0 || (player.findPerk(PerkLib.DoubleAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)) && player.spe >= 100 && (player.weaponName == "deadly spear" || player.weaponName == "deadly lance" || player.weaponName == "deadly trident")) damage *= 2.5;
-		else damage *= 1.75;
+		if (player.findPerk(PerkLib.Impale) >= 0 && (player.findPerk(PerkLib.DoubleAttack) < 0 || (player.findPerk(PerkLib.DoubleAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)) && player.spe >= 100 && (player.weaponName == "deadly spear" || player.weaponName == "deadly lance" || player.weaponName == "deadly trident")) critDamage += 0.75;
+		if ((player.weapon == weapons.WG_GAXE && monster.cor > 66) || (player.weapon == weapons.DE_GAXE && monster.cor < 33)) critDamage += 0.1;
+		damage *= critDamage;
 	}
 	//Apply AND DONE!
 	damage *= (monster.damagePercent(false, true) / 100);
@@ -4768,7 +4789,7 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 	if (player.weaponRangeName == "training javelins") player.ammo = 10;
 	if (player.weaponRangeName == "flintlock pistol") player.ammo = 4;
 	if (player.weaponRangeName == "blunderbuss") player.ammo = 2;
-	if (player.weaponRange == weaponsrange.SHUNHAR) player.ammo = 1;
+	if (player.weaponRange == weaponsrange.SHUNHAR || player.weaponRange == weaponsrange.KSLHARP || player.weaponRange == weaponsrange.LEVHARP) player.ammo = 1;
 	if (prison.inPrison && prison.prisonCombatAutoLose) {
 		dynStats("lus", player.maxLust(), "scale", false);
 		doNext(endLustLoss);

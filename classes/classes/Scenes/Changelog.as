@@ -83,13 +83,36 @@ package classes.Scenes
 			outputText("-New melee weapon (by Liadri): Black Widow - obtainable by giving Jeweled Rapier to Corrupted Celess to corrupt. Base atk inc to 20 and additionaly scale on corruption and feminity gaining up to 5 atk from both (that makes max atk caps at 30). Bonus from rapier training apply as usual too.\n");
 			outputText("-New melee weapon (by Liadri): Purified Oni Chieftain Destroyer - obtainable by giving Oni Tetsubo to Pure Celess to purify. Base atk up to 40 and additional atk scaling on purity (in total up to 60 atk) plus increased to 15% stun chance. Req. 210+ str for full atk value.\n");
 			outputText("-New melee weapon (by Liadri): Defiled Oni Chieftain Destroyer - obtainable by giving Oni Tetsubo to Corrupted Celess to corrupt. Base atk up to 40 and additional atk scaling on corruption (in total up to 60 atk) plus increased to 15% stun chance. Req. 210+ str for full atk value.\n");
+			outputText("-New melee weapon (by Liadri): Winged Greataxe - obtainable by giving Large Axe to Pure Celess to purify. Atk 28 with last 10 pts scaling on purity, when below 100 str atk drops by 9. Dmg is scaling with enemy corruption (the higher the higher dmg and increased critical chance and critical damage by 10%).\n");
+			outputText("-New melee weapon (by Liadri): Demonic Greataxe - obtainable by giving Large Axe to Corrupted Celess to corrupt. Atk 28 with last 10 pts scaling on corruption, when below 100 str atk drops by 9. Dmg is scaling with enemy corruption (the lower the higher dmg and increased critical chance and critical damage by 10%).\n");
+			outputText("-New melee weapon (by Liadri): Unicorn staff - obtainable by giving Wizard staff to Pure Celess to purify. Atk 6 and +90-190% to the spell power modifier but scales with purity, healing spells cost 50% less.\n");// and recharge 1 turns earlier
+			outputText("-New melee weapon (by Liadri): Nocturnus staff - obtainable by giving Wizard staff to Corrupted Celess to corrupt. Atk 6 and +140-240% to the spell power modifier but scales with corruption, increase all spells costs by 200%.\n");
 		//	outputText("-New melee weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
 		//	outputText("-New melee weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
+			outputText("-New range weapon (by Liadri): Artemis - obtainable by giving Longbow to Pure Celess to purify. Atk inc to 25 and last 5 pts scale with purity. Dmg is scaling with enemy corruption (the higher the higher dmg) and each arrow can cause blidness (15% chance).\n");
+			outputText("-New range weapon (by Liadri): Wild Hunt - obtainable by giving Longbow to Corrupted Celess to corrupt. Atk inc to 25 and last 5 pts scale with corruption. Dmg is scaling with enemy corruption (the lower the higher dmg) and deal 20% more dmg to enemy below PC level.\n");
+			outputText("-New range weapon (by Liadri): Kraken Slayer Harpoons - obtainable by giving Sea Huntress Harpoons to Pure Celess to purify. (item properties desc).\n");
+			outputText("-New range weapon (by Liadri): Leviathan Harpoons - obtainable by giving Sea Huntress Harpoons to Corrupted Celess to corrupt. (item properties desc).\n");
 		//	outputText("-New range weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
 		//	outputText("-New range weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
 			outputText("-New shield (by Liadri): Sanctuary - obtainable form encounter in forest/deepword with guardian adter picking option to take shield instead of become mother for Celess. Block chance 20, no other properties.\n");
 			outputText("-New shield (by Liadri): Sanctuary - obtainable by giving Sanctuary to Pure Celess to purify. Block chance fully scalling on purity and adding regeneration effect also scalling on purity (on averange it's ~1%).\n");
 			outputText("-New shield (by Liadri): Dark Aegis - obtainable by giving Sanctuary to Corrupted Celess to corrupt. Block chance fully scalling on corruption and adding regeneration effect also scalling on corruption (on averange it's ~1%).\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -106,33 +129,10 @@ package classes.Scenes
 			outputText("-Fixed bugs: lib refunding stat points incorrectly when leveling\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Bat, Vampire, 
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -149,14 +149,14 @@ package classes.Scenes
 			outputText("\n");full stats bonuses not added yet to: Dragonne, Echidna, Ferret-morph, Kitshoo-morph, Mouse-morph, Pig-morph, Scorpion-morph
 			outputText("\n");New tier 0 lvl-up perk: Tracheal System (Evolved) (req. mantis score >= 4 and having Tracheal System perk; effect: )
 			outputText("\n");
-			outputText("\n");dodać potem dodatkową kategorie w Moga menu z itemami co nie są stricte racial TF ale też dają efekty TF jak: ImpFood, PrFruit, Rizza Root
 			outputText("\n");wolf pepper - nieużywany item chyba co można go by w wolf TF zmienić: dodaje special coś na kształt likantropii ^^
 			outputText("\n");
 			outputText("<b>Version 0.8i:</b>\n\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("<b>Version 0.8j:</b>\n\n");
 			outputText("<b>Version 0.8k:</b>\n\n");
 			outputText("\n");
-			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
+			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bedą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
 			outputText("\n");cel na 0.8(/9): dodać siren TF
 			outputText("\n");cel na 0.8(/9): dodać w mieście kultywatorów arene/ring na którym sie można pojedynkować z niektórymi przedstawicielami ras bedącymi soul cultivators (opcje ras do walki: goblinka, salamander, male(/lub female jeśli kanon nie pozwala na male) kitsune, scylla)

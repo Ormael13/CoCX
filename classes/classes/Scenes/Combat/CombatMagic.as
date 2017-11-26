@@ -72,6 +72,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.WizardsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
 		if (player.jewelryName == "fox hairpin") costPercent -= 20;
 		if (player.weaponName == "Ascensus") costPercent -= 15;
+		if (player.weaponName == "nocturnus staff") costPercent += 200;
 		//Limiting it and multiplicative mods
 		if(player.hasPerk(PerkLib.BloodMage) && costPercent < 50) costPercent = 50;
 		mod *= costPercent/100;
@@ -94,6 +95,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.WizardsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
 		if (player.jewelryName == "fox hairpin") costPercent -= 20;
 		if (player.weaponName == "Puritas" || player.weaponName == "Ascensus") costPercent -= 15;
+		if (player.weaponName == "nocturnus staff") costPercent += 200;
 		//Limiting it and multiplicative mods
 		if(player.hasPerk(PerkLib.BloodMage) && costPercent < 50) costPercent = 50;
 		mod *= costPercent/100;
@@ -116,6 +118,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.WizardsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
 		if (player.jewelryName == "fox hairpin") costPercent -= 20;
 		if (player.weaponName == "Depravatio" || player.weaponName == "Ascensus") costPercent -= 15;
+		if (player.weaponName == "nocturnus staff") costPercent += 200;
 		//Limiting it and multiplicative mods
 		if(player.hasPerk(PerkLib.BloodMage) && costPercent < 50) costPercent = 50;
 		mod *= costPercent/100;
@@ -549,12 +552,21 @@ public class CombatMagic extends BaseCombatContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsHeal)) {
+			if (player.weapon == weapons.U_STAFF) {
+			bd = buttons.add("Heal", spellHeal)
+						.hint("Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  " +
+							  "\n\nMana Cost: " + spellCostBlack(15) + "");
+			}
+			else {
 			bd = buttons.add("Heal", spellHeal)
 						.hint("Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  " +
 							  "\n\nMana Cost: " + spellCostBlack(30) + "");
+			}
 			if (badLustForBlack) {
 				bd.disable("You aren't turned on enough to use any black magics.");
-			} else if(/*!player.hasPerk(PerkLib.BloodMage) && */player.mana < spellCostWhite(30)) {
+			} else if(player.weapon != weapons.U_STAFF && player.mana < spellCostBlack(30)) {
+				bd.disable("Your mana is too low to cast this spell.");
+			} else if(player.weapon == weapons.U_STAFF && player.mana < spellCostBlack(15)) {
 				bd.disable("Your mana is too low to cast this spell.");
 			}
 		}
@@ -742,7 +754,8 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellHeal():void {
 		clearOutput();
 		doNext(combatMenu);
-		useMana(30, 8);
+		if (player.weapon == weapons.U_STAFF) useMana(15, 8);
+		else useMana(30, 8);
 		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();
