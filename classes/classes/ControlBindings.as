@@ -34,7 +34,7 @@ internal class ControlBindings {
                     }
                 });
 
-        for (var i:int = 1; i < 5; i++) {
+
             inputManager.AddBindableControl(
                     "Quicksave 1",
                     "Quicksave the current game to slot 1",
@@ -605,7 +605,7 @@ internal class ControlBindings {
 
             inputManager.RegisterDefaults();
 
-        }
+
     }
 }
 }
