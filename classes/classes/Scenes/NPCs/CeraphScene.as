@@ -969,7 +969,7 @@ public class CeraphScene extends NPCAwareContent
 
 			outputText("You mention the deal and she glares back at you in irritation.  Her beautiful features curl with anger, a hand coming out of nowhere to slap you squarely on the side of the temple.  \"<i>Don't interrupt me, pet.</i>\"  Ears ringing, you stagger back, clutching at your head in surprise.  By the time you glare back at her, she's walking away.  You briefly consider giving her payback, but you realize your head feels clearer, more normal.  The artificial fetishes are gone!  While you catalogue lewd acts in your head and marvel at how little they affect you, Ceraph makes good on her escape.");
 			player.consumeItem(consumables.BIMBOLQ);
-			player.takeDamage(4);
+			player.takePhysDamage(4);
 			flags[kFLAGS.PC_FETISH] = 0;
 			dynStats("lus", -20);
 			doNext(camp.returnToCampUseOneHour);

@@ -845,7 +845,7 @@ public function level3MaraeEncounter():void {
 private function grabHerBoob():void {
 	clearOutput();
 	outputText("You reach forward to cop a feel. The goddess' eyes go wide with fury as a massive branch swings down, catching you in the sternum. It hits you hard enough that you land in your boat and float back a few feet into the water. Nothing to do but leave and hope for another chance at her breasts...");
-	player.takeDamage(player.HP - 1);
+	player.takePhysDamage(player.HP - 1);
 	doNext(camp.returnToCampUseOneHour);
 }
 

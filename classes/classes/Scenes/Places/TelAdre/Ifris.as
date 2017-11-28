@@ -137,7 +137,7 @@ private function showOffForIfris():void {
 		outputText("Humiliated, you stand and leave, nursing your sore body and ego.");
 		//Reset 'shown off for ifris'
 		flags[kFLAGS.IFRIS_SHOWED_OFF] = 0;
-		player.takeDamage(10);
+		player.takePhysDamage(10);
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}	

@@ -47,7 +47,7 @@ public class Ember extends Monster
 				if(damage <= 0) outputText("Ember's claws scrape noisily but harmlessly off your [armor].");
 				else {
 					outputText("Ember's claws rip into you, leaving stinging wounds. ");
-					damage = player.takeDamage(damage, true);
+					damage = player.takePhysDamage(damage, true);
 				}
 			}
 		}
@@ -100,7 +100,7 @@ public class Ember extends Monster
 				damage3 += ((str + weaponAttack + 100) - rand(player.tou) - player.armorDef);
 				if (flags[kFLAGS.EMBER_LVL_UP] >= 1) damage3 *= (1 + (flags[kFLAGS.EMBER_LVL_UP] * 0.1));
 				outputText("  The tail slams into you with bone-cracking force, knocking you heavily to the ground even as the spines jab you wickedly.  You gasp for breath in pain and shock, but manage to struggle to your feet again. ");
-				damage3 = player.takeDamage(damage3, true);
+				damage3 = player.takePhysDamage(damage3, true);
 			}
 		}
 				
@@ -120,7 +120,7 @@ public class Ember extends Monster
 				}
 				createStatusEffect(StatusEffects.StunCooldown,2,0,0,0);
 				var damage4:Number = 10 + rand(10);
-				damage4 = player.takeDamage(damage4, true);
+				damage4 = player.takePhysDamage(damage4, true);
 			}
 		}
 		

@@ -141,7 +141,7 @@ package classes.Scenes.NPCs
 			outputText(" draws close and suddenly wraps herself around you, binding you in place! You can't help but feel strangely aroused by the sensation of her scales rubbing against your body. All you can do is struggle as she begins to squeeze tighter!");
 			player.createStatusEffect(StatusEffects.NagaBind,0,0,0,0); 
 			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
-				player.takeDamage(3+rand(6));
+				player.takePhysDamage(3+rand(6));
 			}
 		}
 		
@@ -167,7 +167,7 @@ package classes.Scenes.NPCs
 				var damage:Number = str;
 				if(player.armorDef < 100) damage += 100 - player.armorDef;
 				damage += rand(30);
-				damage = player.takeDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
 			}
 		}
 		

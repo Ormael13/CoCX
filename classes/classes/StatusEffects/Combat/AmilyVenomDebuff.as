@@ -17,7 +17,7 @@ public class AmilyVenomDebuff extends CombatBuff {
 		//If PC is reduced to 0 Speed and Strength, normal defeat by HP plays.
 		if (host.spe <= 2 && host.str <= 2) {
 			if (playerHost) EngineCore.outputText("  You've become so weakened that you can't even make an attempt to defend yourself, and Amily rains blow after blow down upon your helpless form.");
-			host.takeDamage(8999);
+			host.takePhysDamage(8999);
 		}
 	}
 }

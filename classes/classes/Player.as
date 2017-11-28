@@ -941,7 +941,7 @@ use namespace kGAMECLASS;
 			return lust;
 		}
 
-		public override function takeDamage(damage:Number, display:Boolean = false):Number{
+		public override function takePhysDamage(damage:Number, display:Boolean = false):Number{
 			//Round
 			damage = Math.round(damage);
 			// we return "1 damage received" if it is in (0..1) but deduce no HP

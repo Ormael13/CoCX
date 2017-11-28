@@ -900,7 +900,7 @@ private function loseToShouldraWithWorms():void {
 	
 	outputText("The ghost-girl responds by meeting your eyes and staring daggers at them, and before you can stop her, she leaps towards you, spins, and cracks a kick against the side of your neck. You go tumbling to the ground and unsteadily raise your head to watch her stomp away, grumbling about worms and freaky fetishists. The pavement rushes up to meet you, and the world fades away as you slip into unconsciousness.");
 	flags[kFLAGS.SHOULDRA_WORM_SCENE_COUNTER]++;
-	player.takeDamage(10000);
+	player.takePhysDamage(10000);
 	cleanupAfterCombat();
 }
 

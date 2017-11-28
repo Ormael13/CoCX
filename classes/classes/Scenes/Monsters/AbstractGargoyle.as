@@ -25,7 +25,7 @@ public class AbstractGargoyle extends Monster
 			damage *= 1.75;
 		}
 		damage = Math.round(damage);
-		player.takeDamage(damage, true);
+		player.takePhysDamage(damage, true);
 		outputText(capitalA + short + " slash you with sharp stone claw dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!");
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
@@ -48,7 +48,7 @@ public class AbstractGargoyle extends Monster
 			damage *= 1.75;
 		}
 		damage = Math.round(damage);
-		player.takeDamage(damage, true);
+		player.takePhysDamage(damage, true);
 		outputText(" It hurt a lot, but you hold your ground wincing against the blow. <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 		if (player.findPerk(PerkLib.Resolute) < 0) {
 			outputText(" You recoil, stunned by the massive impact and take <b><font color=\"#800000\">" + damage + "</font></b> damage!");
@@ -74,7 +74,7 @@ public class AbstractGargoyle extends Monster
 			damage *= 1.75;
 		}
 		damage = Math.round(damage);
-		player.takeDamage(damage, true);
+		player.takePhysDamage(damage, true);
 		createStatusEffect(StatusEffects.AbilityCooldown1, 5, 0, 0, 0);
 		outputText(capitalA + short + " swipe the field with it axe-bladed tail, slicing you");
 		//if () outputText("r team");jak PC ma 4+ pomocników
@@ -97,7 +97,7 @@ public class AbstractGargoyle extends Monster
 			damage *= 1.75;
 		}
 		damage = Math.round(damage);
-		player.takeDamage(damage, true);
+		player.takePhysDamage(damage, true);
 		createStatusEffect(StatusEffects.AbilityCooldown2, 4, 0, 0, 0);
 		outputText(capitalA + short + " flaps " + pronoun1 + " massive stone wings at you trying to knock you down. You’re thrown to the ground. <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");

@@ -162,7 +162,7 @@ public class ImpHorde extends Monster
 					damage = 20 - rand(player.tou/10);
 					if (damage <= 0) damage = 1;
 					outputText(" ");
-					damage = player.takeDamage(damage, true);
+					damage = player.takePhysDamage(damage, true);
 					outputText("\n");
 				}
 				hits--;

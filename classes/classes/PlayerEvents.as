@@ -587,7 +587,7 @@ if (kGAMECLASS.model.time.hours > 23) { //Once per day
 					else {
 						//Lose HP and makes fatigue go up. Lose body weight and muscles.
 						if (player.thickness < 25) {
-							player.takeDamage(player.maxHP() / 25);//użyć to jako strat hp jak PC nie ma hunger enabled i ma perki z chimerycznej natury jak lizan marrow, etc.
+							player.takePhysDamage(player.maxHP() / 25);//użyć to jako strat hp jak PC nie ma hunger enabled i ma perki z chimerycznej natury jak lizan marrow, etc.
 							fatigue(2);
 							dynStats("str", -0.5, "tou", -0.5);
 						}

@@ -877,7 +877,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//[Player Speed less than 50]
 			if(player.spe < 50 || player.findPerk(PerkLib.Evade) < 0) {
 				//{Player takes minor HP damage}
-				player.takeDamage(5);
+				player.takePhysDamage(5);
 				outputText("You scramble backwards, but it still cuts a nasty gash into your flesh.  Amily looks poised to strike again, but stops when she sees that it's you. She looks apologetic – well, somewhat. \"<i>Are you all right? I'm sorry, but that was honestly the stupidest thing I've ever seen someone do!</i>\" She approaches you and makes sure that you aren't seriously hurt. \"<i>You'll live,</i>\" she says rather quickly.\n\n");
 			}
 			//[Player Speed is 50 or higher]
@@ -1203,7 +1203,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("Grinning with mischief, you carefully sneak up behind her. Suddenly grabbing her shoulders, you shout, \"<i>Gotcha!</i>\" She jolts with a panicked squeal and whirls around, bringing along a scything slash from her dagger!\n\n");
 			//[Player Speed less than 50]
 			if(player.spe < 50) {
-				player.takeDamage(-5);
+				player.takePhysDamage(-5);
 				//{Player takes minor HP damage}
 				outputText("You scramble backwards, but it still cuts a nasty gash into your flesh. Amily looks poised to strike again, but stops when she sees that it's you.\n\n");
 				//[Low Affection]
@@ -1274,7 +1274,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("Grinning with mischief, you carefully sneak up behind her. Suddenly grabbing her shoulders, you shout, \"<i>Gotcha!</i>\" She jolts with a panicked squeal and whirls around, bringing along a scything slash from her dagger!\n\n");
 			//[Player Speed less than 50]
 			if(player.spe < 50) {
-				player.takeDamage(5);
+				player.takePhysDamage(5);
 				outputText("You scramble backwards, but it still cuts a nasty gash into your flesh. Amily looks poised to strike again, but stops when she sees that it's you. She looks apologetic – well, somewhat. \"<i>Are you all right? I'm sorry, but that was honestly the stupidest thing I've ever seen someone do!</i>\" She approaches you and makes sure that you aren't seriously hurt.\n\n");
 				outputText("\"<i>You'll live,</i>\" Amily declares quickly, though there is an honest sound of relief in her voice. \"<i>Ah... do you have the time to talk? There's something I want to get off my chest,</i>\" she asks, clearly nervous and maybe a little embarrassed.\n\n");
 			}

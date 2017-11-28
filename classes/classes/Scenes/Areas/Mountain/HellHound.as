@@ -16,7 +16,7 @@ public class HellHound extends Monster
 			/*if(player.hasStatusEffect(StatusEffects.Web_dash_Silence) >= 0) {
 				outputText("You reach inside yourself to breathe flames, but as you ready to release a torrent of fire, it backs up in your throat, blocked by the webbing across your mouth.  It causes you to cry out as the sudden, heated force explodes in your own throat.\n");
 				changeFatigue(10);
-				takeDamage(10+rand(20));
+				takeMagicDamage(10+rand(20));
 				enemyAI();
 				return;
 			}*/

@@ -11,6 +11,8 @@ import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.HeXinDao;
 
 import coc.view.MainView;
+import coc.view.ButtonData;
+import coc.view.ButtonDataList;
 
 use namespace kGAMECLASS;
 
@@ -962,6 +964,7 @@ public function slavesCount():Number {
 public function loversCount():Number {
 	var counter:Number = 0;
 	if (arianScene.arianFollower()) counter++;
+	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) counter++;
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
 	if (followerHel()) counter++;
 	//Izma!
@@ -983,6 +986,7 @@ public function loversHotBathCount():Number {
 	if (emberScene.followerEmber()) counter++;
 	if (sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
 	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) counter++;
+	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) counter++;
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
 	if (followerHel()) counter++;
 	if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
@@ -1001,6 +1005,7 @@ public function sparableCampMembersCount():Number {
 	if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1) counter++;
 	if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
 	if (helspawnFollower()) counter++;
+	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) counter++;
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
 	if (followerHel()) counter++;
 	if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
@@ -1050,12 +1055,17 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 	}
 	//Cai'Lin
 //	addButtonDisabled(2, "???", "Look into my eyes and answer me: Am I beautiful?");
-	//Diva - button 3
+	//Chi Chi
+	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) {
+		outputText("You can see Chi Chi not so far from Jojo. She’s busy practicing her many combos on a dummy. Said dummy will more than likely have to be replaced within twenty four hours.");
+		addButton(3, "Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu);
+	}
+	//Diva - button 4
 	//Etna
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) {
 		outputText("Etna is resting lazily on a rug in a very cat-like manner. She’s looking at you always with this adorable expression of hers, her tail wagging expectantly at your approach.\n\n");
 		if (player.statusEffectv4(StatusEffects.CampSparingNpcsTimers1) > 0) addButtonDisabled(4, "Etna", "Training.");
-		else addButton(4, "Etna", SceneLib.etnaScene.etnaCampMenu);
+		else addButton(5, "Etna", SceneLib.etnaScene.etnaCampMenu);
 	}
 	//Helia
 	if(SceneLib.helScene.followerHel()) {
@@ -1078,7 +1088,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 				outputText("<b>You see the salamander Helia pacing around camp, anxiously awaiting your departure to the harpy roost. Seeing you looking her way, she perks up, obviously ready to get underway.</b>\n\n");
 			}
 		}
-		addButton(5, "Helia", helFollower.heliaFollowerMenu);
+		addButton(6, "Helia", helFollower.heliaFollowerMenu);
 	}
 	//Isabella
 	if(isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) {
@@ -1150,7 +1160,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		}
 		outputText("\n\n");
 		if (player.statusEffectv2(StatusEffects.CampSparingNpcsTimers1) > 0) addButtonDisabled(6, "Isabella", "Training.");
-		else addButton(6, "Isabella", isabellaFollowerScene.callForFollowerIsabella);
+		else addButton(7, "Isabella", isabellaFollowerScene.callForFollowerIsabella);
 	}
 	//Izma
 	if(izmaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) {
@@ -1162,7 +1172,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 			else if (model.time.hours <= 22) outputText("Izmael has built a fire and is flopped down next to it. You can’t help but notice that he’s used several of his books for kindling. His eyes are locked on the flames, mesmerized by the dancing light and heat.");
 			else outputText("Izmael is currently on his bedroll, sleeping for the night.");
 			outputText("\n\n");
-			addButton(7, "Izmael", izmaScene.izmaelScene.izmaelMenu);
+			addButton(8, "Izmael", izmaScene.izmaelScene.izmaelMenu);
 		}
 		else {
 			outputText("Neatly laid near the base of your own is a worn bedroll belonging to Izma, your tigershark lover. It's a snug fit for her toned body, though it has some noticeable cuts and tears in the fabric. Close to her bed is her old trunk, almost as if she wants to have it at arms length if anyone tries to rob her in her sleep.\n\n");
@@ -1172,7 +1182,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 				case 2: outputText("Izma is lying on her back near her bedroll. You wonder at first just why she isn't using her bed, but as you look closer you notice all the water pooled beneath her and the few droplets running down her arm, evidence that she's just returned from the stream."); break;
 			}
 			outputText("\n\n");
-			addButton(7, "Izma", izmaScene.izmaFollowerMenu);
+			addButton(8, "Izma", izmaScene.izmaFollowerMenu);
 		}
 	}
 	//Kiha!
@@ -1199,7 +1209,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 			}
 		}
 		if (player.statusEffectv3(StatusEffects.CampSparingNpcsTimers1) > 0) addButtonDisabled(8, "Kiha", "Training.");
-		else addButton(8, "Kiha", kihaScene.encounterKiha);
+		else addButton(9, "Kiha", kihaScene.encounterKiha);
 	}
 	//MARBLE
 	if(player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) {
@@ -1267,7 +1277,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		//Out getting family
 		//else outputText("Marble is out in the wilderness right now, searching for a relative.");
 		outputText("\n\n");
-		if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 4) addButton(9, "Marble", marbleScene.interactWithMarbleAtCamp).hint("Go to Marble the cowgirl for talk and companionship.");
+		if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 4) addButton(10, "Marble", marbleScene.interactWithMarbleAtCamp).hint("Go to Marble the cowgirl for talk and companionship.");
 	}
 	//Phylla
 	if (flags[kFLAGS.ANT_WAIFU] > 0) {
@@ -1278,14 +1288,14 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		else if(flags[kFLAGS.ANT_KIDS] > 1000) outputText(" some of your children exit the anthill using main or one of the additionally entrances to unload some dirt. Some of them instead of unloading dirt coming out to fulfill some other task that their mother gave them.  You feel a little nostalgic seeing how this former small colony grown to such a magnificent size.");
 		else outputText(" Phylla appear out of the anthill to unload some dirt.  She looks over to your campsite and gives you an excited wave before heading back into the colony.  It makes you feel good to know she's so close.");
 		outputText("\n\n");
-        addButton(10, "Phylla", SceneLib.desert.antsScene.introductionToPhyllaFollower);
+        addButton(11, "Phylla", SceneLib.desert.antsScene.introductionToPhyllaFollower);
     }
-	addButtonDisabled(11, "???", "We have been entangled since the beginning.");//Samirah
+	addButtonDisabled(12, "???", "We have been entangled since the beginning.");//Samirah
 	//Nieve (jako, ze jest sezonowym camp member powinna byc na koncu listy...chyba, ze zrobie cos w stylu utworzenia mini lodowej jaskini dla niej)
 	if(flags[kFLAGS.NIEVE_STAGE] == 5) {
 		Holidays.nieveCampDescs();
 		outputText("\n\n");
-        addButton(12, "Nieve", Holidays.approachNieve);
+        addButton(13, "Nieve", Holidays.approachNieve);
     }
     for each(var npc:XXCNPC in _campFollowers){
         npc.campDescription(XXCNPC.LOVER,descOnly);

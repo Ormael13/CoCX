@@ -983,7 +983,7 @@ import classes.Items.*;
 				outputText("\n\nWith a smile, you rub her between her ears, redress yourself, thank her for trying and leave.");
 				outputText("\n\nShe hugs you from behind and says, \"<i>Don't, like, be discouraged [name]. It really is meant to hurt, but if you, like, withstand the pain, you'll get tougher I promise.</i>\"");
 				outputText("\n\nYou promise her you'll keep that in mind.");
-				player.takeDamage(30);
+				player.takePhysDamage(30);
 			}
 			else if (player.tou <= 66) {
 				outputText("\n\nYou have to struggle to bite back a yell, but you manage to avoid bucking and thrashing around. It hurts, you can't deny it hurts, but you refuse to give in. Eventually, though, the pain is too much and you beg Joy to stop.");
@@ -994,7 +994,7 @@ import classes.Items.*;
 				if (player.cor > 66) outputText(", and privately feeling somewhat ripped off");
 				outputText(", you thank her, redress yourself and start heading back to your part of the camp.");
 				outputText("\n\nJoy hugs you from behind and says, \"<i>I'm, like, really proud of you [name]. If you keep trying you'll, like, be able to withstand the pain and become even tougher.</i>\" Then she releases you and sashays away.");
-				player.takeDamage(20);
+				player.takePhysDamage(20);
 			}
 			else {
 				outputText("\n\nYou grunt softly, but the pain is minimal, incapable of seriously phasing your developed muscles. Quietly you sit there, shrugging off the pinpricks as Joy works your body over.");

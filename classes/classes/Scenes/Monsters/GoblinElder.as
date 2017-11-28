@@ -116,7 +116,7 @@ public class GoblinElder extends Goblin
 				var damage:int = str + weaponAttack + rand(40);
 				damage = player.reduceDamage(damage);
 				if (damage < 10) damage = 10;
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 		}
 		
@@ -135,7 +135,7 @@ public class GoblinElder extends Goblin
 				var damage:int = str + rand(10);
 				damage = player.reduceDamage(damage);
 				if (damage < 10) damage = 10;
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 		}
 		

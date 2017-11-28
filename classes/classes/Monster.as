@@ -1032,7 +1032,7 @@ import flash.utils.getQualifiedClassName;
 		{
 			//Determine damage - str modified by enemy toughness!
 			var damage:int = calcDamage();
-			if (damage > 0) damage = player.takeDamage(damage);
+			if (damage > 0) damage = player.takePhysDamage(damage);
 			return damage;
 		}
 
@@ -1705,7 +1705,7 @@ import flash.utils.getQualifiedClassName;
 					}
 					else {
 						outputText("<b>The grainy mess cuts at any exposed flesh and gets into every crack and crevice of your armor. ");
-						var temp:Number = player.takeDamage(1 + rand(2), true);
+						var temp:Number = player.takePhysDamage(1 + rand(2), true);
 						outputText("</b>\n\n");
 					}
 				}
@@ -1788,6 +1788,11 @@ import flash.utils.getQualifiedClassName;
 			}
 			if (hasStatusEffect(StatusEffects.Bloodlust)) {
 				if (this is UnderwaterSharkGirl || this is UnderwaterTigersharkGirl) outputText("As blood flows through the water the shark girl grows increasingly vicious. ");
+			}
+			if(hasStatusEffect(StatusEffects.MonsterRegen)) {
+				if(statusEffectv1(StatusEffects.MonsterRegen) <= 0)
+					removeStatusEffect(StatusEffects.MonsterRegen);
+				addStatusValue(StatusEffects.MonsterRegen,1,-1);
 			}
 			if(hasStatusEffect(StatusEffects.Timer)) {
 				if(statusEffectv1(StatusEffects.Timer) <= 0)
@@ -1919,7 +1924,7 @@ import flash.utils.getQualifiedClassName;
 			}
 			//regeneration perks for monsters
 			if ((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.LizanMarrowEvolved) >= 0 || findPerk(PerkLib.EnemyPlantType) >= 0 || findPerk(PerkLib.EnemyGodType) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0
-			|| findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.MonsterRegeneration) >= 0 || findPerk(PerkLib.Lifeline) >= 0) && (this.HP < maxHP()) && (this.HP > 0)) {
+			|| findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.MonsterRegeneration) >= 0 || findPerk(PerkLib.Lifeline) >= 0 || hasStatusEffect(StatusEffects.MonsterRegen)) && (this.HP < maxHP()) && (this.HP > 0)) {
 				var healingPercent:Number = 0;
 				var temp2:Number = 0;
 				if (findPerk(PerkLib.Regeneration) >= 0) healingPercent += (0.5 * (1 + newGamePlusMod()));
@@ -1932,9 +1937,10 @@ import flash.utils.getQualifiedClassName;
 				if (findPerk(PerkLib.EnemyPlantType) >= 0) healingPercent += 1;
 				if (findPerk(PerkLib.EnemyGodType) >= 0) healingPercent += 5;
 				if (findPerk(PerkLib.MonsterRegeneration) >= 0) healingPercent += perkv1(PerkLib.MonsterRegeneration);
+				if (hasStatusEffect(StatusEffects.MonsterRegen)) healingPercent += statusEffectv2(StatusEffects.MonsterRegen);
 				temp2 = Math.round(maxHP() * healingPercent / 100);
 				if (findPerk(PerkLib.Lifeline) >= 0) temp2 += (50 * (1 + newGamePlusMod()));
-				if (this is ChiChi) {
+				if (this is ChiChi && (flags[kFLAGS.CHI_CHI_SAM_TRAINING] < 2 || hasStatusEffect(StatusEffects.MonsterRegen))) {
 					outputText("To your surprise, Chi Chi’s wounds start closing! <b>(<font color=\"#008000\">+" + temp2 + "</font>)</b>.\n\n");
 				}
 				else {

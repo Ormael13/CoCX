@@ -489,7 +489,7 @@ import flash.errors.IllegalOperationError;
 		public function lustPercent():Number {
 			return 100;
 		}
-		public function takeDamage(damage:Number, display:Boolean = false):Number {
+		public function takePhysDamage(damage:Number, display:Boolean = false):Number {
 			HP = boundFloat(0,HP-Math.round(damage),HP);
 			return (damage > 0 && damage < 1) ? 1 : damage;
 		}

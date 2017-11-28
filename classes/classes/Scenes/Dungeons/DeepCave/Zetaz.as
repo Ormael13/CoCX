@@ -80,7 +80,7 @@ public class Zetaz extends Monster
 					else {
 						var dmg:Number = 1 + rand(6);
 						outputText("wounding you slightly ");
-						dmg = player.takeDamage(dmg, true);
+						dmg = player.takePhysDamage(dmg, true);
 					}
 					outputText(" while the dust gets into your eyes, temporarily blinding you!");
 					player.createStatusEffect(StatusEffects.Blind,1,0,0,0);

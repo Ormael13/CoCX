@@ -80,7 +80,7 @@ import classes.Scenes.SceneLib;
 			}
 			else outputText("laugh as her blades scape uselessly at your armor-clad back");
 			outputText(" before breaking her embrace and leaping away. ");
-			player.takeDamage(damage, true);
+			player.takePhysDamage(damage, true);
 		}
 		private function IzmaSpecials3():void {
 			outputText("Rather than move to attack you, Izma grins at you and grabs her breasts, massaging them as she caresses her long penis with one knee. Her tail thrashes and thumps the sand heavily behind her as she simulates an orgasm, moaning loudly into the air. The whole display leaves you more aroused than before.");

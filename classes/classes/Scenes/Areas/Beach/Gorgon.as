@@ -77,9 +77,9 @@ public class Gorgon extends Monster
 				}
 				else {
 					player.createStatusEffect(StatusEffects.NagaVenom,0,0,0,0);
-					player.takeDamage(15+rand(15));
+					player.takePhysDamage(15+rand(15));
 				}
-				player.takeDamage(15+rand(15));
+				player.takePhysDamage(15+rand(15));
 			}
 			else {
 				outputText("The venom's effects intensify as your vision begins to blur and it becomes increasingly harder to stand.");
@@ -91,8 +91,8 @@ public class Gorgon extends Monster
 					// speDown.visible = true;
 					player.addStatusValue(StatusEffects.NagaVenom,1,4);
 				}
-				else player.takeDamage(15+rand(15));
-				player.takeDamage(15+rand(15));
+				else player.takePhysDamage(15+rand(15));
+				player.takePhysDamage(15+rand(15));
 			}
 		}
 		
@@ -100,7 +100,7 @@ public class Gorgon extends Monster
 			outputText("The " + this.short + " draws close and suddenly wraps herself around you, binding you in place! You can't help but feel strangely aroused by the sensation of her scales rubbing against your body. All you can do is struggle as she begins to squeeze tighter!");
 			player.createStatusEffect(StatusEffects.NagaBind,0,0,0,0); 
 			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
-				player.takeDamage(4+rand(8));
+				player.takePhysDamage(4+rand(8));
 			}
 		}
 		
@@ -121,7 +121,7 @@ public class Gorgon extends Monster
 				var damage:Number = str;
 				if(player.armorDef < 50) damage += 50 - player.armorDef;
 				damage += rand(25);
-				damage = player.takeDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
 			}
 		}
 		

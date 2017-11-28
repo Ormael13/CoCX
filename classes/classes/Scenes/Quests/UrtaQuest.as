@@ -1010,7 +1010,7 @@ private function berzerk():void {
 
 private function urtaMetabolize():void {
 	clearOutput();
-	var damage:int = player.takeDamage(Math.round(player.maxHP()/10));
+	var damage:int = player.takePhysDamage(Math.round(player.maxHP()/10));
 	outputText("You work your body as hard as you can, restoring your fatigue at the cost of health. (" + damage + ")\nRestored 20 fatigue!\n\n");
 	fatigue(-20);
     SceneLib.combat.enemyAIImpl();

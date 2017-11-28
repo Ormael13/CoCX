@@ -936,7 +936,7 @@ public function nagaPlayerConstrict():void {
 	else {
 		//Failure (-10 HPs) -
 		outputText("You launch yourself at your opponent and attempt to wrap yourself around " + monster.pronoun2 + ". Before you can even get close enough, " +monster.a + monster.short + " jumps out of the way, causing you to fall flat on your face. You quickly pick yourself up and jump back. ");
-		player.takeDamage(5, true);
+		player.takePhysDamage(5, true);
 		if(player.HP <= 0) {
 			doNext(SceneLib.combat.endHpLoss);
 			return;

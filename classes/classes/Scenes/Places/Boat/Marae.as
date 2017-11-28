@@ -25,7 +25,7 @@ public class Marae extends Monster
 				var damage:int = ((str + 100) + rand(50));
 				player.dynStats("lust", rand(5) + 5);
 				damage = player.reduceDamage(damage);
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 		}
 		

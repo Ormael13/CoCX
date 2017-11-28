@@ -55,7 +55,7 @@ public class HeXinDao extends BaseContent
         //addButton(6, "", ); jakies miejsce aby zdobywac gems lub/i EXP - moze jakies zadania tu zlecane czy cos w tym stylu?
         addButton(7, "Arena", soularena);
         addButton(8, "Restaurant", restaurantShiraOfTheEast);
-        if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 20 && flags[kFLAGS.CHI_CHI_FOLLOWER] < 3) addButton(13, "Chi Chi", chichiScene.MeetingChiChiInHeXinDao);
+        if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 20 && flags[kFLAGS.CHI_CHI_FOLLOWER] < 2) addButton(13, "Chi Chi", chichiScene.MeetingChiChiInHeXinDao);
         addButton(14, "Leave", camp.returnToCampUseOneHour);
     }
     public function golemmerchant():void {

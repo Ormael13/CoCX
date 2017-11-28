@@ -401,7 +401,7 @@ use namespace kGAMECLASS;
 		}
 		public function tripOnARoot():void {
 			forestStory.display("strings/trip");
-			player.takeDamage(10);
+			player.takePhysDamage(10);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function findTruffle():void {

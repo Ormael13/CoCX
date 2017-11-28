@@ -77,7 +77,7 @@ public class GooGirl extends Monster
 					lust += 5 * lustVuln;
 				}
 			}
-			if (damage > 0) player.takeDamage(damage, true);
+			if (damage > 0) player.takePhysDamage(damage, true);
 			statScreenRefresh();
 			outputText("\n");
 		}
@@ -94,7 +94,7 @@ public class GooGirl extends Monster
 		{
 			outputText("The girl reaches into her torso, pulls a large clump of goo out, and chucks it at you like a child throwing mud. The slime splatters on your chest and creeps under your [armor], tickling your skin like fingers dancing across your body. ");
 			var damage:Number = 1;
-			player.takeDamage(damage, true);
+			player.takePhysDamage(damage, true);
 			player.dynStats("lus", 5 + rand(3) + player.sens / 10);
 		}
 

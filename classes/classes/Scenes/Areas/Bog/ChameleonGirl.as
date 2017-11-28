@@ -34,7 +34,7 @@ public class ChameleonGirl extends Monster
 				if (damage > 0) {
 					
 					outputText("The chameleon swings her arm at you, catching you with her claws.  You wince as they scratch your skin, leaving thin cuts in their wake. ");
-					damage = player.takeDamage(damage, true);
+					damage = player.takePhysDamage(damage, true);
 				}
 				else outputText("The chameleon swings her arm at you, catching you with her claws.  You defend against the razor sharp attack.");
 			}
@@ -60,7 +60,7 @@ public class ChameleonGirl extends Monster
 				if (damage > 0) {
 					
 					outputText("The chameleon leaps in your direction, rolls, and kicks you square in the shoulder as she ascends, sending you reeling.  You grunt in pain as a set of sharp claws rake across your chest. ");
-					damage = player.takeDamage(damage, true);
+					damage = player.takePhysDamage(damage, true);
 				}
 				else outputText("The chameleon rolls in your direction and kicks up at your chest, but you knock her aside without taking any damage..");
 			}

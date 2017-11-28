@@ -1898,7 +1898,7 @@ private function stayToPlay():void {
 		outputText("\n\nYou finish eating and get up to take your dish to kitchen, when Lianna stops you from doing so.  \"<i>I got this,</i>\"  She states, taking your dish from your hands and proceeding to do the same for everyone else.  You thank Urta for the invitation, kissing her before telling her you should be going.  \"<i>Thank you, lover.</i>\"");
 		//Token 1 HP damage? Due to failed cooking?
 		fatigue(-10);
-		player.takeDamage(10);
+		player.takePhysDamage(10);
 		//Recover some fatigue due to excellent food, by Lianna.
 		doNext(camp.returnToCampUseOneHour);
 	}
@@ -1912,7 +1912,7 @@ private function stayToPlay():void {
 		outputText("\n\nAfter you're done, Lianna begins collecting the dishes.  Satisfied with your newly filled belly, you kiss Urta and head towards Tel'Adre's streets.  Urta gives you an embarrassed smile and pats your back, then lets you go.");
 		//Token 1 HP damage? Due to failed cooking?
 		fatigue(-10);
-		player.takeDamage(10);
+		player.takePhysDamage(10);
 		//Recover some fatigue due to excellent food, by Lianna.
 		doNext(camp.returnToCampUseOneHour);
 	}

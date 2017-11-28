@@ -49,7 +49,7 @@ public class HeroslayerOmnibus extends Monster
 				//Determine damage - str modified by enemy toughness!
 				damage = int((eBaseDamage() * 1.5) - Math.random() * (player.tou + player.armorDef));
 				if (damage > 0) {
-					damage = player.takeDamage(damage);
+					damage = player.takePhysDamage(damage);
 				}
 				if (damage <= 0) {
 					damage = 0;

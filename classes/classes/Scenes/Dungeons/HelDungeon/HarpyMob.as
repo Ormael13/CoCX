@@ -35,7 +35,7 @@ public class HarpyMob extends Monster
 			if(rand(10) > 0 && player.str/5 + rand(20) < 23) {
 				var damage:Number = 80 + rand(40);
 				outputText("You struggle in the harpies' grasp, but can't quite get free.  The brood continues to hammer away at your defenseless self. ");
-				damage = player.takeDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
 			}
 			//Success: 
 			else {

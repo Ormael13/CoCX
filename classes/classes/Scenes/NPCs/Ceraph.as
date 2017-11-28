@@ -166,7 +166,7 @@ public class Ceraph extends Monster
 			else {
 				damage = int((eBaseDamage()) - Math.random() * (player.tou + player.armorDef));
 				if (damage > 0) {
-					damage = player.takeDamage(damage);
+					damage = player.takePhysDamage(damage);
 				}
 				if (damage <= 0) {
 					damage = 0;
@@ -213,7 +213,7 @@ public class Ceraph extends Monster
 				//Determine damage - str modified by enemy toughness!
 				damage = int((eBaseDamage()) - Math.random() * (player.tou + player.armorDef));
 				if (damage > 0) {
-					damage = player.takeDamage(damage);
+					damage = player.takePhysDamage(damage);
 				}
 				if (damage <= 0) {
 					damage = 0;

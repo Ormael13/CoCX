@@ -47,7 +47,7 @@ public class Isabella extends Monster
 				}
 				else {
 					outputText("She's coming too fast to dodge, and you're forced to try to stop her.  It doesn't work.  Isabella's shield hits you hard enough to ring your ears and knock you onto your back with bruising force. ");
-					damage = player.takeDamage(damage, true);
+					damage = player.takePhysDamage(damage, true);
 					outputText("\n");
 				}
 			}
@@ -91,7 +91,7 @@ public class Isabella extends Monster
 				}
 				else {
 					outputText("You try to avoid it, but her steely attack connects, rocking you back.  You stagger about while trying to get your bearings, but it's all you can do to stay on your feet.  <b>Isabella has stunned you!</b> ");
-					damage = player.takeDamage(damage, true);
+					damage = player.takePhysDamage(damage, true);
 					outputText("\n");
 					player.createStatusEffect(StatusEffects.IsabellaStunned,0,0,0,0);
 				}
@@ -133,7 +133,7 @@ public class Isabella extends Monster
 				}
 				else {
 					outputText("You try your best to stop the onrushing fist, but it hits you square in the throat, nearly collapsing your windpipe entirely.  Gasping and sputtering, you try to breathe, and while it's difficult, you manage enough to prevent suffocation. <b>It will be impossible to focus to cast a spell in this state!</b> ");
-					damage = player.takeDamage(damage, true);
+					damage = player.takePhysDamage(damage, true);
 					outputText("\n");
 					player.createStatusEffect(StatusEffects.ThroatPunch,2,0,0,0);
 				}

@@ -32,7 +32,7 @@ public class GooArmor extends GooGirl
 				outputText("The goo-armor rushes forward and swings her sword in a mighty arc.  You aren't quite quick enough to dodge her blow, and the goopy sword slams into you, throwing you back and leaving a nasty welt. ");
 				var damage:Number = Math.round((str + weaponAttack) - rand(player.tou) - player.armorDef);
 				if(damage <= 0) damage = 1;
-				damage = player.takeDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
 			}
 		}
 		//ATTACK TWO: Goo Consume

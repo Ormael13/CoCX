@@ -27,7 +27,7 @@ use namespace kGAMECLASS;
 			else {
 				var damage:Number = 0;
 				damage += this.weaponRangeAttack * 20;
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 			outputText("\n\n");
 		}
@@ -42,7 +42,7 @@ use namespace kGAMECLASS;
 				this.weaponRangeAttack = 36 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				var damage:Number = 0;
 				damage += this.weaponRangeAttack * 20;
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 				this.weaponRangeName = "ayotech pistol";
 				this.weaponRangeAttack = 12 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			}

@@ -229,7 +229,7 @@ this.HP = this.maxHP();
 				
 				player.addStatusValue(StatusEffects.Tentagrappled, 1, 1);
 				if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
-					player.takeDamage(0.75*this.str + rand(15));
+					player.takePhysDamage(0.75*this.str + rand(15));
 				}
 				player.dynStats("lus+", 3 + rand(3));
 				if (flags[kFLAGS.PC_FETISH] >= 2) player.dynStats("lus+", 5);
@@ -256,7 +256,7 @@ this.HP = this.maxHP();
 	
 			player.addStatusValue(StatusEffects.Tentagrappled, 1, 1);
 			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
-				player.takeDamage(.75*this.str + rand(15));
+				player.takePhysDamage(.75*this.str + rand(15));
 			}
 			player.dynStats("lus+", 3 + rand(3));
 		}

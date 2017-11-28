@@ -47,7 +47,7 @@ public class Sheila extends Monster
 				}
 				damage = int((str + weaponAttack) - rand(player.tou) - player.armorDef);
 				if(damage < 1) damage = 2;
-				damage = player.takeDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
 			}
 			spe += 30;
 		}
@@ -74,7 +74,7 @@ public class Sheila extends Monster
 				}
 				damage = int((str + 50 + weaponAttack) - rand(player.tou) - player.armorDef);
 				if(damage < 1) damage = 2;
-				damage = player.takeDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
 				EngineCore.fatigue(10+rand(6));
 			}
 			spe += 60;

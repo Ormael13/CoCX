@@ -24,7 +24,7 @@ public class Brigid extends Monster
 			outputText("The harpy feints at you with her poker; you dodge the blow, but you leave yourself vulnerable as she spins around and slams her heavy shield into you, knocking you off balance. ");
 			//(Effect: Stagger/Stun)
 			var damage:Number = 5;
-			damage = player.takeDamage(damage, true);
+			damage = player.takePhysDamage(damage, true);
 			if(player.findPerk(PerkLib.Resolute) >= 0) outputText("  Of course, your resolute posture prevents her from accomplishing much.");
 			else player.createStatusEffect(StatusEffects.Stunned,0,0,0,0);
 		}

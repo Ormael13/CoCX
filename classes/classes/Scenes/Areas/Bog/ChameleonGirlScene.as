@@ -80,7 +80,7 @@ package classes.Scenes.Areas.Bog
 			else if (player.hasVagina()) loseToChamChamWithPCCunt();
 			else {
 				outputText("\n\nThe Chameleon Girl gives you a once-over, but finding no genitals, she sighs and slaps you hard enough to have you black out.");
-				player.takeDamage(20);
+				player.takePhysDamage(20);
 				cleanupAfterCombat();
 			}
 		}

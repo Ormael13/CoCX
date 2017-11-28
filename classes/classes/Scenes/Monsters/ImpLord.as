@@ -36,7 +36,7 @@ public class ImpLord extends Imp
 			else if (damage <= 0) outputText(" but the attack proves ineffectual.");
 			else {
 				outputText("leaving a large gash. The attack leaves you slightly stunned, but you recover. ");
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 		}
 
@@ -53,7 +53,7 @@ public class ImpLord extends Imp
 		{
 			outputText("Reaching into his satchel the devilish creature pulls out a leather riding crop.  He quickly rushes forward, but somehow manages to get behind you.  Before you can react the imp lashes out, striking your [butt] twice with the riding crop.  The strikes leave a slight burning feeling, as well as a strange sense of arousal. ");
 			var damage:int = 3 + rand(10);
-			player.takeDamage(damage, true);
+			player.takePhysDamage(damage, true);
 			//[-HP(minor) // +Lust]
 			player.dynStats("lus", 5 + player.sens / 4 + player.cor / 10);
 		}

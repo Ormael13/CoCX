@@ -20,7 +20,7 @@ public class SpiderMorphMob extends Monster
 				outputText("A number of spiders rush at you, trying to claw and bite you.  You manage to knock most of them away, but a few nasty hits manage to punch through your [armorName].  ");
 				//Determine damage - str modified by enemy toughness!
 				var damage:int = int((str + weaponAttack) - rand(player.tou) - player.armorDef) + 20;
-				if(damage > 0) damage = player.takeDamage(damage);
+				if(damage > 0) damage = player.takePhysDamage(damage);
 				if(damage <= 0) {
 					damage = 0;
 					if(rand(player.armorDef + player.tou) < player.armorDef) outputText("You absorb and deflect every " + weaponVerb + " with your [armor].");

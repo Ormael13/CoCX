@@ -20,7 +20,7 @@ public class LoliBatGolem extends Monster
 			else
 			{
 				outputText(" It strikes you in the chest. ");
-				damage = player.takeDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
 			}
 		}
 		

@@ -48,7 +48,7 @@ private function calledShot():void {
 		outputText("\nOne of her arrows smacks right into your [leg], nearly bowling you over.  God DAMN that hurt! You're going to be limping for a while! ");
 		var sec:CalledShotDebuff = player.createOrFindStatusEffect(StatusEffects.CalledShot) as CalledShotDebuff;
 		sec.increase();
-		damage = player.takeDamage(damage, true);
+		damage = player.takePhysDamage(damage, true);
 	}
 }
 
@@ -70,7 +70,7 @@ private function calledShot():void {
 			if(damage <= 0 || player.getEvasionRoll()) outputText("\nYou evade the strike.");
 			else {
 				outputText("\nHer shield catches you right in the face, sending you tumbling to the ground and leaving you open to attack! ");
-				damage = player.takeDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
 				if(rand(2) == 0 && !player.hasStatusEffect(StatusEffects.Stunned)) {
 					player.createStatusEffect(StatusEffects.Stunned,0,0,0,0);
 					outputText(" <b>The hit stuns you.</b>");

@@ -94,7 +94,7 @@ import classes.StatusEffects;
 			
 			//Light magic-type damage!
 			var damage:Number = (150 * ((inte/player.inte) / 4));
-			damage = player.takeDamage(damage, true);
+			damage = player.takePhysDamage(damage, true);
 		}
 		
 		private function dirtKick():void
@@ -131,7 +131,7 @@ import classes.StatusEffects;
 					player.createStatusEffect(StatusEffects.KnockedBack, 0, 0, 0, 0);
 					this.createStatusEffect(StatusEffects.KnockedBack, 0, 0, 0, 0); // Applying to mob as a "used ability" marker
 				}
-				damage = player.takeDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
 			}
 		}
 		
@@ -146,7 +146,7 @@ import classes.StatusEffects;
 			{
 				//Hit
 				outputText(" The concussive strike impacts you with bonecrushing force. ");
-				damage = player.takeDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
 			}
 		}
 		
@@ -181,7 +181,7 @@ import classes.StatusEffects;
 			{
 				//Hit
 				outputText(" You're squarely struck by the spinning hammer. ");
-				damage = player.takeDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
 			}
 		}
 		

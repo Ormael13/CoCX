@@ -85,7 +85,7 @@ import classes.internals.*;
 						outputText("The gnoll waves her club threateningly, but it's her foot that snaps up from the dusty plain to connect with your gut.");
 					}
 					outputText(" ");
-					player.takeDamage(damage, true);
+					player.takePhysDamage(damage, true);
 				}
 				EngineCore.statScreenRefresh();
 			}
@@ -198,7 +198,7 @@ import classes.internals.*;
 						outputText("The gnoll waves her club threateningly, but it's her foot that snaps up from the dusty plain to connect with your gut.");
 					}
 					outputText(" ");
-					player.takeDamage(damage, true);
+					player.takePhysDamage(damage, true);
 				}
 				EngineCore.statScreenRefresh();
 			}
@@ -318,7 +318,7 @@ import classes.internals.*;
 							outputText("The gnoll waves her club threateningly, but it's her foot that snaps up from the dusty plain to connect with your gut.");
 						}
 						outputText(" ");
-						player.takeDamage(damage);
+						player.takePhysDamage(damage);
 					}
 					EngineCore.statScreenRefresh();
 				}

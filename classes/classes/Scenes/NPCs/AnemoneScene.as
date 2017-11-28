@@ -444,7 +444,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 				else outputText("You smirk, amused by the turnabout, until ");
 				outputText("the anemone lashes out with a slap that knocks the expression off your face and makes your eardrums sing.  <i>\"Dumb!\"</i> she shouts, turning sharply; her tentacles lash past you as she about-faces.  She dives down below the surface and kicks water into your face spitefully as she swims away.  You sputter and rub your jaw a bit, then stand up and walk dizzily back to camp.");
 				//(1 hour pass, lose 1/10th of max hp from current hp, lose 20 lust)
-				player.takeDamage(10);
+				player.takePhysDamage(10);
 				dynStats("lus", -20);
 				cleanupAfterCombat();
 				return;

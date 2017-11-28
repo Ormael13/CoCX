@@ -96,7 +96,7 @@ import classes.internals.*;
 				}
 			}
 			outputText(" ");
-			if(damage > 0) damage = player.takeDamage(damage, true);
+			if(damage > 0) damage = player.takePhysDamage(damage, true);
 			statScreenRefresh();
 			outputText("\n");
 		}
@@ -141,13 +141,13 @@ import classes.internals.*;
 			else if(rand(3) >= 1) {
 				outputText("The gnoll pulls a long, black javelin from over her shoulder.  Her spotted arm strikes forward, launching the missile through the air.  You attempt to dive to the side, but are too late.  The powerful shaft slams, hard, into your back.  Pain radiates from the powerful impact.  Instead of piercing you, however, the tip seems to explode into a sticky goo that instantly bonds with your [armor].  The four foot, heavy shaft pulls down on you awkwardly, catching at things and throwing your balance off.  You try to tug the javelin off of you but find that it has glued itself to you.  It will take time and effort to remove; making it impossible to do while a dominant hyena stalks you. ");
 				player.addCombatBuff('spe',-15);
-				damage = player.takeDamage(25+rand(20), true);
+				damage = player.takePhysDamage(25+rand(20), true);
 			}
 			//<Hyena Attack 2 – Javelin – Successful – Player Not Entangled>
 			else {
 				
 				outputText("The gnoll pulls a long, dark wooden javelin from over her shoulder.  Her spotted arm strikes forward, launching the missile through the air.  The javelin flashes through the intervening distance, slamming into your chest.  The blunted tip doesn't skewer you, but pain radiates from the bruising impact. ");
-				damage = player.takeDamage(25+rand(20), true);
+				damage = player.takePhysDamage(25+rand(20), true);
 			}
 		}
 		
@@ -189,7 +189,7 @@ import classes.internals.*;
 					if(player.biggestTitSize() >= 1) outputText(", sending a wave of pain through the sensitive flesh");
 					outputText(".  A small, traitorous part of you can't help but notice a flash of long, dark flesh beneath her loincloth even as you stagger back from the impact. ");
 					player.dynStats("lus", 2);
-					player.takeDamage(damage, true);
+					player.takePhysDamage(damage, true);
 				}
 			}
 		}
@@ -295,7 +295,7 @@ import classes.internals.*;
 				}
 			}
 			outputText(" ");
-			if (damage > 0) damage = player.takeDamage(damage, true);
+			if (damage > 0) damage = player.takePhysDamage(damage, true);
 			statScreenRefresh();
 			outputText("\n");
 		}

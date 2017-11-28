@@ -20,11 +20,11 @@ public class Phoenix extends Monster
 				//Get hit
 				var damage:int = str + weaponAttack + rand(80);
 				damage = player.reduceDamage(damage);
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 				//Get hit again
 				damage = str + weaponAttack + rand(80);
 				damage = player.reduceDamage(damage);
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 		}
 		

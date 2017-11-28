@@ -169,7 +169,7 @@ public class Izumi extends Monster
 				else outputText(" stand");
 				outputText(" and dust yourself off. ");
 				
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 		}
 
@@ -236,7 +236,7 @@ public class Izumi extends Monster
 				else outputText(" impressive"); 
 				outputText(" strength, in an attempt to free yourself from her crushing embrace, without success.");
 				
-				player.takeDamage(75 + rand(15), true);
+				player.takePhysDamage(75 + rand(15), true);
 				doAI();
 			}
 		}
@@ -247,7 +247,7 @@ public class Izumi extends Monster
 			clearOutput();
 			
 			outputText("Your feet dangle uselessly in the air as Izumi holds you aloft.  Why bother resisting?  She's just so <i>strong</i>, her fingers wrapped so completely around your neck...");
-			player.takeDamage(75 + rand(15), true);
+			player.takePhysDamage(75 + rand(15), true);
 			
 			if (flags[kFLAGS.PC_FETISH] >= 2)
 			{
@@ -269,7 +269,7 @@ public class Izumi extends Monster
 			outputText("The hit is extreme enough to leave you dazed for a moment, splayed out across the floor.  When you rouse yourself back to full consciousness a few seconds later, the cave is still echoing with the sound of the impact, a testament to the strength of the Oni - and your resilience.");
 			
 			var damage:int = int ((str + 225) - rand(player.tou) - player.armorDef);
-			player.takeDamage(damage, true);
+			player.takePhysDamage(damage, true);
 		}
 		
 		// Player escapes from the chokeslam attack

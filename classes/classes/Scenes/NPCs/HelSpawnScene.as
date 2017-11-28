@@ -1357,7 +1357,7 @@ private function umYum():void {
 		{
 			//Player vomits. Poor player. Damages hunger by 15-25.
 			outputText("\n\nGasp! You feel like you're going to throw up. You get up and rush behind the bushes. You suddenly bend over and spew the contents of your stomach from your mouth onto the ground. It takes a while but you eventually recover and you get up. ");
-			player.takeDamage(player.maxHP() / 4);
+			player.takePhysDamage(player.maxHP() / 4);
 			player.damageHunger(rand(10) + 15);
 			dynStats("lib", -10);
 			dynStats("lust", -100, "scale", false);

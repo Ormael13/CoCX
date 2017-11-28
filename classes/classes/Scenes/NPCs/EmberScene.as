@@ -750,10 +750,10 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				outputText(", but nothing does.  How disappointing.");
 				flags[kFLAGS.EMBER_INTERNAL_DICK] = 0;
 			}
-			player.takeDamage(1);
+			player.takePhysDamage(1);
 			flags[kFLAGS.EMBER_ROUNDFACE] = 1;
 			//(Token HP Loss, can't drop below 1 HP.)
-			player.takeDamage(10);
+			player.takePhysDamage(10);
 			flags[kFLAGS.EMBER_EGG_FLUID_COUNT]++;
 			doNext(playerMenu);
 		}

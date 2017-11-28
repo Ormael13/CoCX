@@ -160,7 +160,7 @@ public class MinotaurKing extends Monster
 			}
 			else
 			{
-				damage = player.takeDamage(damage);
+				damage = player.takePhysDamage(damage);
 				outputText(" Damn, that hurts! (" + damage +")");
 			}
 		}
@@ -186,7 +186,7 @@ public class MinotaurKing extends Monster
 			else
 			{
 				_lastRoundStun = true;
-				damage = player.takeDamage(damage);
+				damage = player.takePhysDamage(damage);
 				outputText(" He impacts with stunning force, leaving you reeling! (" + damage +")");
 				//{Stun for one turn, minor HP damage}
 				if (player.findPerk(PerkLib.Resolute) < 0)
@@ -222,7 +222,7 @@ public class MinotaurKing extends Monster
 			}
 			else
 			{
-				damage = player.takeDamage(damage);
+				damage = player.takePhysDamage(damage);
 				outputText(". By the time you notice, it’s too late. ("+damage+")");
 			}
 		}

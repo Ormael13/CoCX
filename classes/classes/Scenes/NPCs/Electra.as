@@ -37,7 +37,7 @@ use namespace kGAMECLASS;
 				var damageLust:Number = 0;
 				damageLust += Math.round(this.lib / 20);
 				outputText(" You are slashed for ");
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 				player.dynStats("lus", damageLust, "scale", false);
 				outputText(" damage. The lingering electricity on her claws leaves you aroused. <b>(<font color=\"#ff00ff\">" + damageLust + "</font>)</b> lust damage.");
 			}

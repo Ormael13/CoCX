@@ -20,13 +20,13 @@ public class FrostGiant extends Monster
 					damage = ((str + 150) + rand(100));
 					damage = player.reduceDamage(damage);
 					if (damage < 40) damage = 40;
-					player.takeDamage(damage, true);
+					player.takePhysDamage(damage, true);
 				}
 				else {
 					outputText("You nearly avoid the giant's fist, stumbling as you regain your footing. The giant's growl is a deep bass as he bellows, \"<i>Bah! Luck!</i>\" ");
 					damage = 50 + rand(str);
 					damage = player.reduceDamage(damage);
-					player.takeDamage(damage, true);
+					player.takePhysDamage(damage, true);
 				}
 			}
 		}
@@ -71,13 +71,13 @@ public class FrostGiant extends Monster
 				else if (player.str >= 20 && player.str < 40) {
 					outputText("The giant's grip nearly crushes you to bits right there; sheer force of will allows you to struggle and resist, though it proves futile. ");
 					if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {damage = 10 + rand(str * 0.5);
-					player.takeDamage(damage, true);
+					player.takePhysDamage(damage, true);
 					}
 				}
 				else if (player.str < 20) {
 					outputText("The giant squeezes you mercilessly, the pressure on your body reaching critical levels. The giant doesn't seem to want to murder you, fortunately, so he lessens his grip slightly. No dice escaping it though. ");
 					if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {damage = 20 + rand(str * 0.75);
-					player.takeDamage(damage, true);
+					player.takePhysDamage(damage, true);
 					}
 				}
 				if (flags[kFLAGS.PC_FETISH] >= 2) {
@@ -101,7 +101,7 @@ public class FrostGiant extends Monster
 					player.removeStatusEffect(StatusEffects.GiantGrabbed);
 					damage = 50 + rand(str * 0.4);
 					damage = player.reduceDamage(damage);
-					player.takeDamage(damage, true);
+					player.takePhysDamage(damage, true);
 					break;
 				case 3:
 				case 4: //Ground Pound
@@ -110,7 +110,7 @@ public class FrostGiant extends Monster
 					player.removeStatusEffect(StatusEffects.GiantGrabbed);
 					damage = 180 + rand(str * 1.2);
 					damage = player.reduceDamage(damage);
-					player.takeDamage(damage, true);
+					player.takePhysDamage(damage, true);
 					break;
 				case 5: //Throw
 					outputText("\"<i>Oh, little [race] wants to be let go? Ha! Then GO!</i>\" He rears back and chucks you as hard as he can against the nearest rock face. Fortunately, his aim is off and he throws you into a patch of snow. The snow helps cushion the impact, but you're still very disoriented. ");
@@ -119,7 +119,7 @@ public class FrostGiant extends Monster
 					damage = 50 + rand(str * 0.8);
 					damage = player.reduceDamage(damage);
 					if (damage < 50) damage = 50;
-					player.takeDamage(damage, true);
+					player.takePhysDamage(damage, true);
 					break;
 				default:
 			}
@@ -169,7 +169,7 @@ public class FrostGiant extends Monster
 			var damage:int = (str * 2) + 200 + rand(100);
 			damage = player.reduceDamage(damage);
 			if (damage < 200) damage = 200;
-			player.takeDamage(damage, true);
+			player.takePhysDamage(damage, true);
 			outputText("\n\n");
 		}
 		public function giantBoulderMiss():void {
@@ -178,7 +178,7 @@ public class FrostGiant extends Monster
 			if (player.hasStatusEffect(StatusEffects.GiantBoulder)) player.removeStatusEffect(StatusEffects.GiantBoulder);
 			var damage:int = 10 + rand(str / 2);
 			damage = player.reduceDamage(damage);
-			player.takeDamage(damage, true);
+			player.takePhysDamage(damage, true);
 			outputText("\n\n");
 		}
 		

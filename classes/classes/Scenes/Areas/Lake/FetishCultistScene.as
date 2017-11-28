@@ -659,7 +659,7 @@ public class FetishCultistScene extends AbstractLakeContent
 			if (player.inte < 33) {
 				outputText("but nothing happens. You even try to open the door of the cabin but it's locked. You poke around, when a brilliant idea comes to you. You place your hand in your mouth and bite down hard. The intense pain brings you back to reality.  ");
 				//(Minus 5hp)
-				player.takeDamage(5);
+				player.takePhysDamage(5);
 			}
 			//[Med Int]
 			else if (player.inte < 66) {

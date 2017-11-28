@@ -45,7 +45,7 @@ public class SandWitchMob extends Monster
 			//Hit
 			else {
 				outputText("\nShe hits you square in the face, bloodying your face and sending you stumbling back in agony. ");
-				damage = player.takeDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
 			}
 		}
 

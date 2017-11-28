@@ -25,7 +25,7 @@ public class Minerva extends Monster
 			//[if attack lands]
 			else {
 				outputText("  Her teeth dig right into your arm!  It's a bit of a struggle, but you're able to free yourself.  The damage doesn't look too serious. ");
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 		}
 
@@ -44,7 +44,7 @@ public class Minerva extends Monster
 			//[if attack lands]
 			else {
 				outputText("  She hits you square in the chest, knocking you to the ground as her entire weight lands on you.  The bombshell of a woman jumps off your chest, ready to keep fighting. ");
-				damage = player.takeDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
 			}
 			spe += 70;
 		}
@@ -63,7 +63,7 @@ public class Minerva extends Monster
 				outputText("  Her shark tail whacks you, knocking you to the ground.  You quickly struggle back into position");
 				if (player.armorDef > 0) outputText(", but your defense has been reduced");
 				outputText("! ");
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 				if (hasStatusEffect(StatusEffects.TailWhip)) addStatusValue(StatusEffects.TailWhip, 1, 10);
 				else createStatusEffect(StatusEffects.TailWhip, 10, 0, 0, 0);
 			}
@@ -83,7 +83,7 @@ public class Minerva extends Monster
 			//[if attack lands]
 			else {
 				outputText("  She pierces you right in the shoulder!  You wince in pain and step back, out of her reach again.");
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 		}
 
@@ -101,7 +101,7 @@ public class Minerva extends Monster
 			//[if attack lands]
 			else {
 				outputText("  You don't have time to avoid the downward chop and the axe head lands right in your shoulder blade!  You cry out in pain, but you can still move your arm despite the brutal blow.");
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 		}
 

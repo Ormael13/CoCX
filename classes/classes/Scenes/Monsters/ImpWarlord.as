@@ -18,7 +18,7 @@ public class ImpWarlord extends Imp
 				var damage:int = rand(50) + str + weaponAttack;
 				damage = player.reduceDamage(damage);
 				if (damage < 20) damage = 20;
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 		}
 
@@ -40,7 +40,7 @@ public class ImpWarlord extends Imp
 				else {
 					outputText("Thankfully the wounds aren't that serious. ");
 				}
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 		}
 

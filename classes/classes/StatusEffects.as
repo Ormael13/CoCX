@@ -126,6 +126,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const KnowsOverlimit:StatusEffectType                 = mk("Knows Overlimit");
 		public static const KnowsPunishingKick:StatusEffectType	            = mk("Knows Punishing Kick");
 		public static const KnowsSidewinder:StatusEffectType                = mk("Knows Sidewinder");
+		public static const KnowsSoulBlast:StatusEffectType                 = mk("Knows Soul Blast");
 		public static const KnowsTripleThrust:StatusEffectType              = mk("Knows Triple Thrust");
 		public static const KnowsVioletPupilTransformation:StatusEffectType = mk("Knows Violet Pupil Transformation");
 		public static const KnowsWereBeast:StatusEffectType                 = mk("Knows Were-Beast");
@@ -245,6 +246,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Yara:StatusEffectType                = mk("Yara");
 
 		// monster
+		public static const AbilityChanneled:StatusEffectType   = mk("Ability Channeled");
 		public static const AbilityCooldown1:StatusEffectType   = mk("Ability Cooldown 1");
 		public static const AbilityCooldown2:StatusEffectType   = mk("Ability Cooldown 2");
 		public static const AbilityCooldown3:StatusEffectType   = mk("Ability Cooldown 3");
@@ -288,6 +290,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const MinoMilk:StatusEffectType           = mk("Mino Milk");
 		public static const MinotaurEntangled:StatusEffectType  = mk("Minotaur Entangled");
 		public static const MissFirstRound:StatusEffectType     = mk("miss first round");
+		public static const MonsterRegen:StatusEffectType       = mk("Monster Regeneration");
 		public static const NoLoot:StatusEffectType             = mk("No Loot");
 		public static const PCTailTangle:StatusEffectType       = mk("PCTailTangle");
 		public static const PeachLootLoss:StatusEffectType      = mk("Peach Loot Loss");

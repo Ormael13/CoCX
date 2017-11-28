@@ -75,7 +75,7 @@ public class DivaScene extends XXCNPC{
             } else {
                 display("camp/campDescript/day");
             }
-            addButton(3,"Diva",campInteraction);
+            addButton(4,"Diva",campInteraction);
             return descOnly;
         }
         return false;

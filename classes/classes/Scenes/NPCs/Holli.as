@@ -32,7 +32,7 @@ public class Holli extends Monster
 			outputText("try to escape, but " + short + " wraps one of her writhing roots around your [leg], slamming you to the ground and tying you up with several more!  \"<i>And just where do you think you're going, my little meat?</i>\" she hisses.  Her bark splits open, exposing her body, and a green shaft snakes out of her crotch, sprouting thorns and blooming into a rose at the tip.  She holds the drooling blossom over your [face] as she forces your mouth open with her roots! ");
 			//hp loss, begin lust constrict next round
 			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {var damage:int = 15;
-			damage = player.takeDamage(damage, true);
+			damage = player.takePhysDamage(damage, true);
 			}
 			outputText("\n\n");
 			player.createStatusEffect(StatusEffects.HolliConstrict, 0, 0, 0, 0);
@@ -121,7 +121,7 @@ public class Holli extends Monster
 				EngineCore.fatigue(10);
 				player.dynStats("lus", 25);
 				var damage:Number = 20 + rand(10);
-				damage = player.takeDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
 			}
 		}
 
@@ -143,7 +143,7 @@ public class Holli extends Monster
 				//plus med HP damage on turn one, plus med-heavy lust damage every turn while constricted
 				//sap rose shitposting
 				var damage:int = 10 + rand(5);
-				damage = player.takeDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
 				player.dynStats("lus", 15);
 				player.createStatusEffect(StatusEffects.HolliConstrict, 0, 0, 0, 0);
 			}

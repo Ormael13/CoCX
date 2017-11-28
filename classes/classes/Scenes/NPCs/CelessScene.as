@@ -287,7 +287,7 @@ import flash.utils.getQualifiedClassName;
 			var improvableItems:Array = [
 					[weapons.BFSWORD,		weapons.NPHBLDE,		weapons.EBNYBLD],
 					[weapons.KATANA,		weapons.MASAMUN,		weapons.BLETTER],
-				//	[weapons.W_STAFF,		weapons.U_STAFF,		weapons.N_STAFF],
+					[weapons.W_STAFF,		weapons.U_STAFF,		weapons.N_STAFF],
 				//	[weapons.DEMSCYT,		weapons.LHSCYTH,		null],
 					[weapons.L__AXE,		weapons.WG_GAXE,		weapons.DE_GAXE],
 					[weapons.SPEAR,			weapons.SESPEAR,		weapons.DSSPEAR],
@@ -296,7 +296,8 @@ import flash.utils.getQualifiedClassName;
 					[weaponsrange.BOWLONG,	weaponsrange.ARTEMIS,	weaponsrange.WILDHUN],
 					[weaponsrange.SHUNHAR,	weaponsrange.KSLHARP,	weaponsrange.LEVHARP],
 					[shields.SANCTYN,		shields.SANCTYL,		shields.SANCTYD]//,
-				//	[armors.CTPALAD,		null,					armors.CTBGUAR]
+				//	[armors.CTPALAD,		null,					armors.CTBGUAR],
+				//	[armors.LMARMOR,		armors.,			armors.]
 				];
 			var selectfrom:int = 1;
 			clearOutput();

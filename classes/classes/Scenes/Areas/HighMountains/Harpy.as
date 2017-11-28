@@ -28,12 +28,12 @@ public class Harpy extends Monster
 				if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 0) {
 					outputText("The harpy lets out a terrible cry and drops, reaching an almost impossible speed as she dives down at you.  Her eyes are narrowed like a true bird of prey.  You were too busy with your own attack to avoid it!  Her claws surge down and pierce your [armor] like paper, driving hard into the flesh beneath and making you cry out in pain.  The harpy dumps you onto the ground, your wounds bleeding profusely. ");
 					var damage:Number = (160 + rand(20)) * (1 + (player.newGamePlusMod() / 2));
-					player.takeDamage(damage, true);					
+					player.takePhysDamage(damage, true);					
 					removeStatusEffect(StatusEffects.Uber);
 				}
 				else {
 					outputText("You stand firm and ready yourself as the crazed harpy hovers above you. Letting out an ear-splitting cry she dives at you with her claws extended, reaching an incredible speed before she levels out.  The harpy is heading right for you!  Thanks to your ready position, you manage to dive aside just as the harpy reaches you.  She clips you slightly, spinning you as you dive for the ground.  You hit the ground hard, but look up in time to see her make a rough, graceless landing.  Her body rolls until it reached a standstill.  The enraged harpy drags herself up and takes flight once more!  ");
-					player.takeDamage(10 + rand(10), true);
+					player.takePhysDamage(10 + rand(10), true);
 					removeStatusEffect(StatusEffects.Uber);
 					HP -= 20;
 				}

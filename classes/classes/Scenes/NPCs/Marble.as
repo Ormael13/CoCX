@@ -34,7 +34,7 @@ public class Marble extends Monster
 			}
 			if(damage > 0) {
 				outputText("You are struck by a two-handed overhead swing from the enraged cow-girl.  ");
-				damage = player.takeDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
 			}
 			statScreenRefresh();
 		}
@@ -59,7 +59,7 @@ public class Marble extends Monster
 				outputText("You easily deflect and block the damage from Marble's wide swing.");
 			}
 			outputText("Marble easily hits you with a wide, difficult to avoid swing.  ");
-			if(damage > 0) player.takeDamage(damage, true);
+			if(damage > 0) player.takePhysDamage(damage, true);
 			statScreenRefresh();
 		}
 

@@ -23,16 +23,23 @@ use namespace kGAMECLASS;
 			SimpleStrike();
 			SimpleStrike();
 			SimpleStrike();
-			if (player.findPerk(PerkLib.Resolute) < 0) {
+			if (player.findPerk(PerkLib.Resolute) < 0 && flags[kFLAGS.CHI_CHI_SAM_TRAINING] < 2) {
 				outputText(" You stagger under the violence of the consecutive impacts, unable to recover your balance.");
 				player.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
 			}
+			if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] == 2) outputText(" Thankfully your training with her helped you learn how to counter most of these attacks and you manage to weaken her normally overwhelming blows.");
 			outputText("\n\n");
 		}
 		public function SimpleStrike():void {
 			var damage:Number = 0;
-			damage += rand(this.str) * 0.5;
-			damage += eBaseDamage() * 0.5;
+			if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] < 2 || flags[kFLAGS.CHI_CHI_FOLLOWER] >= 1) {
+				damage += rand(this.str) * 0.5;
+				damage += eBaseDamage() * 0.5;
+			}
+			if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] == 2) {
+				damage += rand(this.str) * 0.3;
+				damage += eBaseDamage() * 0.3;
+			}
 			if (player.hasStatusEffect(StatusEffects.Stunned)) damage *= 1.5;
 			var crit:Boolean = false;
 			var critChance:int = 5;
@@ -43,7 +50,7 @@ use namespace kGAMECLASS;
 				damage *= 1.75;
 			}
 			damage = Math.round(damage);
-			player.takeDamage(damage, true);
+			player.takePhysDamage(damage, true);
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 			outputText(" ");
 		}
@@ -53,22 +60,58 @@ use namespace kGAMECLASS;
 			outputText("<b>There is an obsessed fury about it, like she is determined to defeat you at all cost. Perhaps you should surrender?</b>");
 			createStatusEffect(StatusEffects.DefendMonsterVer, 50, 0.9, 0, 0);
 		}
-
+		
+		public function Regeneration():void {
+			outputText("To your surprise, Chi Chi’s wounds start closing!");
+			createStatusEffect(StatusEffects.MonsterRegen, 5, 2, 0, 0);
+		}
+		
+		public function SoulBlast():void {
+			if (hasStatusEffect(StatusEffects.AbilityChanneled)) {
+				if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) {
+					outputText("When Chi Chi unleashes a torrent of soulforce energy at you, you’ve already dodged out of the way, predicting her move. The attack leaves a massive hole where you stood earlier. You are glad you moved out of the way!");
+				}
+				else {
+					outputText("Chi Chi palms fills with a massive sphere of red energy which suddenly explodes in a devastating beam of concentrated soul force. You see the devastating torrent a mere fraction of a second before it hits you. Your defences are shattered, utterly unable to stop it as the energy overwhelms you. The blast barely leaves you intact.");
+					player.takePhysDamage(5000000);
+					player.takeMagicDamage(5000000);
+				}
+			}
+			else {
+				outputText("You see Chi Chi assuming a stance and waving soul art signs characteristic of a deadly attack you don’t recognise - its obviously a dangerous technique. The best option would be to dodge it.");
+				createStatusEffect(StatusEffects.AbilityChanneled, 0, 0, 0, 0);
+			}
+		}
+		
 		override protected function performCombatAction():void {
-			if (this.HPRatio() < 0.5 && !hasStatusEffect(StatusEffects.DefendMonsterVer)) DefensiveStance();
-			else PentaStrike();
+			if (flags[kFLAGS.CHI_CHI_AFFECTION] < 20) {
+				if (this.HPRatio() < 0.5 && !hasStatusEffect(StatusEffects.DefendMonsterVer)) DefensiveStance();
+				else PentaStrike();
+			}
+			else {
+				if (hasStatusEffect(StatusEffects.AbilityChanneled)) SoulBlast();
+				else {
+					var choice:Number = rand(5);
+					if (choice < 3) PentaStrike();
+					if (choice == 3) {
+						if (hasStatusEffect(StatusEffects.MonsterRegen)) PentaStrike();
+						else Regeneration();
+					}
+					if (choice == 4) SoulBlast();
+				}
+			}
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			/*if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] == 2) chichiScene
-			else */chichiScene.WonFirstFight();
+			if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] == 2) chichiScene.WonSecondFight();
+			else chichiScene.WonFirstFight();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			/*if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] == 2) chichiScene
-			else */chichiScene.LostFirstFight();
+			if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] == 2) chichiScene.LostSecondFight();
+			else chichiScene.LostFirstFight();
 		}
 
 		override public function get long():String {
@@ -109,7 +152,8 @@ use namespace kGAMECLASS;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 50;
 			this.gems = 45 + rand(40);
-			this.drop = new ChainedDrop().add(consumables.MOUSECO, 0.2);//do zmiany potem
+			if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 2) this.drop = new ChainedDrop().add(weapons.MASTGLO, 1);
+			else this.drop = new ChainedDrop().add(consumables.MOUSECO, 0.2);//do zmiany potem
 			//this.armType = ARM_TYPE_LION;
 			//this.lowerBody = LOWER_BODY_TYPE_LION;
 			//this.tailType = TAIL_TYPE_MANTICORE_PUSSYTAIL;

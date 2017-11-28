@@ -27,7 +27,7 @@ public class Kelt extends Monster
 			else {
 				outputText("You can't get out of the way in time, and you're knocked down!  Kelt tramples overtop of you!  ");
 			}
-			if(damage > 0) damage = player.takeDamage(damage, true);
+			if(damage > 0) damage = player.takePhysDamage(damage, true);
 		}
 
 		//Arrow Attack
@@ -56,7 +56,7 @@ public class Kelt extends Monster
 			//Hit:
 			
 			outputText("The arrow bites into you before you can react. ");
-			damage = player.takeDamage(damage, true);
+			damage = player.takePhysDamage(damage, true);
 		}
 
 		//Aura Arouse
