@@ -43,7 +43,6 @@ public function WonFirstFight():void {
 	outputText("The entire crowd fall silent as the mouse morph hit the sandy arena ground a small kid starting to cry in background. The medics run to her in a hurry, but scream something about her having died from fatal self inflicted injuries. You don’t really care however and just pick up her glove on the ground as a prize for your victory. Surprisingly no one cheer for you this time not even the announcer who is normally so talkative.\n\n");
 	flags[kFLAGS.CHI_CHI_FOLLOWER] = 2;
 	cleanupAfterCombat();
-	return;
 }
 
 public function LostFirstFight():void {
@@ -79,7 +78,6 @@ public function WonSecondFightNo():void {
 	outputText("You are somewhat shocked to learn that Chi Chi died, did she go all out in this battle to the point it cost her life? You head back to camp trying to figure how such a tragic incident happened in a training session.\n\n");
 	flags[kFLAGS.CHI_CHI_FOLLOWER] = 2;
 	inventory.takeItem(consumables.SOBLMAN, cleanupAfterCombat);
-	return;
 }
 public function WonSecondFightYes():void {
 	outputText("Regardless of how harsh she was with you, or the fact she put you in a similar state not so long ago, you decide to help and nurse her out of respect for the teachings and time she gave you.\n\n");
@@ -100,7 +98,7 @@ public function WonSecondFightYes():void {
 		outputText("Of course you would. You had made up your mind the moment you started nursing her and won’t go back on your choice. Chi Chi sighs in relief as you slowly insert your [cock] into her waiting pussy. She hugs you tight as you gently start to piston in and out of her. Chi Chi seems to enjoy herself and makes it obvious as she kisses you and draw her tongue in. The sex is calm and soothing unlike most of that you have experienced so far with Mareth denizens, ");
 		outputText("who tend to prefer different trends or wilder kinks, making this slow and vanilla experience something you cherish. Right now, you take great care not to hurt her, as she has not yet fully recovered from her battle wounds, Chi Chi only breaks the kiss in order to whisper a sweet nothing to you.\n\n");
 		outputText("\"<i>When I’m close to you, I feel safe and warm... like a relaxing bath in the hotsprings of my homeland. I hope we can stay like this for a while.</i>\"\n\n");
-		outputText("You slowly keep working her hole, the mouse moaning every now and then, panting as her body prepares for climax. You are not so far from yours either as you feel your cock twitching and soon you cum in Chi Chi’s pussy, the mouse reaching her peak at about the same time with a delighted squeak. The two of you bask in the afterglow for a moment and you stay locked with Chi Chi kissing and whispering sweet nothings to you for several minutes.Eventually time runs out and you prepare to leave, but Chi Chi weakly holds your arm.\n\n");
+		outputText("You slowly keep working her hole, the mouse moaning every now and then, panting as her body prepares for climax. You are not so far from yours either as you feel your cock twitching and soon you cum in Chi Chi’s pussy, the mouse reaching her peak at about the same time with a delighted squeak. The two of you bask in the afterglow for a moment and you stay locked with Chi Chi kissing and whispering sweet nothings to you for several minutes. Eventually time runs out and you prepare to leave, but Chi Chi weakly holds your arm.\n\n");
 	}
 	else {
 		outputText("You give her a good view of your [breasts] and [pussy] as you lie down next to her. The mouse weakly moves her arms to hug you, wincing in the act, pushing her breast against yours as she begins to kiss you and seek your tongue. You play with hers for a few minutes, savoring the cinnamony taste of her lips before slowly moving your hand to her breast in order to massage her. Chi Chi gasps through her clenched teeth at first as she clearly hasn’t fully recovered yet, but when you attempt to remove your hand, she stops you right away, her glare enough to make you pause.\n\n");
@@ -113,10 +111,10 @@ public function WonSecondFightYes():void {
 	outputText("\"<i>Please take care of my fragile body and heart [name]. I’m not as tough as I look on the inside.</i>\"\n\n");
 	outputText("Chi Chi rests her head on your shoulder. You think she is smiling in happiness but it would be difficult for you to see without removing the pair of arms weakly hugging you.\n\n");
 	outputText("(<b>Chi Chi has been added to the Lovers menu!</b>)\n\n");
+	flags[kFLAGS.CHI_CHI_SAM_TRAINING] = 3;
 	flags[kFLAGS.CHI_CHI_FOLLOWER] = 3;
 	player.orgasm();
 	cleanupAfterCombat();
-	return;
 }
 
 public function LostSecondFight():void {
@@ -126,6 +124,30 @@ public function LostSecondFight():void {
 	outputText("You see her leaving, but can’t do much to chase her in your current state. The villagers patch you up and just as you're about to leave for your camp, you find a small scroll on the ground.\n\n");
 	flags[kFLAGS.CHI_CHI_FOLLOWER] = 2;
 	inventory.takeItem(consumables.SOBLMAN, cleanupAfterCombat);
+	return;
+}
+
+public function WonSparringFight():void {
+	clearOutput();
+	outputText("Chi Chi bows down, admitting defeat.\n\n");
+	outputText("\"<i>Good fight. You aren’t losing your edge, which is good. You will need it to defeat ");
+	if (flags[kFLAGS.LETHICE_DEFEATED] < 1) outputText("Lethice");
+	else outputText("the remaining greater demons");
+	outputText(".</i>\"\n\nYou nod, saying that she did good to. Chi Chi blushes and babbles something akin to a thank you.\n\n");
+	if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 4) {
+		outputText(" She then realises what she is doing and vehemently shakes her head.\n\n");
+		outputText("\"<i>It's not like I wanted to be praised! Yeah, as if! Even after all this time, your stance is still shaky.. BAAAKA!”</i>\"\n\n");
+		outputText("Chi Chi kicks a rock away in anger and heads back to her training ground.\n\n");
+	}
+	cleanupAfterCombat();
+}
+
+public function LostSparringFight():void {
+	clearOutput();
+	outputText("Chi Chi helps you up as you kneel in defeat.\n\n");
+	outputText("\"<i>[name] are you ok!? Oh, I knew I shouldn’t have used that move...</i>\"\n\n");
+	outputText("You will be all right though you need some rest and more practice.\n\n");
+	cleanupAfterCombat();
 	return;
 }
 
@@ -209,6 +231,8 @@ public function TrainingSoulArtsWithChiChi():void {
 				flags[kFLAGS.CHI_CHI_AFFECTION] += 30;
 			}
 			outputText("\n\n");
+			flags[kFLAGS.CHI_CHI_DAILY_TRAINING] = 1;
+			doNext(camp.returnToCampUseFourHours);
 		}
 		else {
 			outputText("You're ready to begin your training and tell her as such.\n\n");
@@ -232,9 +256,9 @@ public function TrainingSoulArtsWithChiChi():void {
 				flags[kFLAGS.CHI_CHI_AFFECTION] += 30;
 			}
 			outputText("\n\n");
+			flags[kFLAGS.CHI_CHI_DAILY_TRAINING] = 1;
+			doNext(camp.returnToCampUseFourHours);
 		}
-		flags[kFLAGS.CHI_CHI_DAILY_TRAINING] = 1;
-		doNext(camp.returnToCampUseFourHours);
 	}
 	else {
 		outputText("Chi Chi respond by the negative.\n\n");
@@ -387,9 +411,9 @@ public function ChiChiCampMainMenu():void {
 	else outputText("\"<i>Oh, how are you doing [name]? I just finished a new set of kicks and punches, but I’m always game for a different kind of battle.</i>\" She winks in a very suggestive manner. You wonder if she just fakes vulnerability in bed because she secretly likes to be treated like a fragile thing.");
 	menu();
 	addButton(0, "Appearance", chichiAppearance).hint("Examine Chi Chi's detailed appearance.");
-	//addButton(1, "Talk", );
+	//addButton(1, "Talk", chichiTalks);
 	addButton(2, "Shop", SoulskilsManualsShop);
-	//addButton(3, "Spar", );
+	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(3, "Spar", chichiSparring);
 	//addButton(4, "Sex", );
 	addButton(14, "Back", camp.campLoversMenu);
 }
@@ -414,6 +438,21 @@ public function chichiAppearance():void {
 	}
 	menu();
 	addButton(14, "Back", ChiChiCampMainMenu);
+}
+
+public function chichiTalks():void {
+	clearOutput();
+	
+}
+
+public function chichiSparring():void {
+	clearOutput();
+	outputText("You ask Chi Chi if she would like a friendly spar");
+	if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 4) outputText(" now that she has recovered a little");
+	outputText(".\n\n\"<i>Well I don’t see why not. It would be nice to have a battle where I won’t put my life on the line for once.</i>\"");
+	outputText("The both of you head to the ring and Chi Chi takes on her fighting pose.\n\n");
+	outputText("\"<i>Don’t worry about me, I won’t need to go all out this time.</i>\"");
+	startCombat(new ChiChi());
 }
 
 	}

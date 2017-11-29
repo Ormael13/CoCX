@@ -27,18 +27,18 @@ use namespace kGAMECLASS;
 				outputText(" You stagger under the violence of the consecutive impacts, unable to recover your balance.");
 				player.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
 			}
-			if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] == 2) outputText(" Thankfully your training with her helped you learn how to counter most of these attacks and you manage to weaken her normally overwhelming blows.");
+			if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] >= 2) outputText(" Thankfully your training with her helped you learn how to counter most of these attacks and you manage to weaken her normally overwhelming blows.");
 			outputText("\n\n");
 		}
 		public function SimpleStrike():void {
 			var damage:Number = 0;
-			if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] < 2 || flags[kFLAGS.CHI_CHI_FOLLOWER] >= 1) {
-				damage += rand(this.str) * 0.5;
-				damage += eBaseDamage() * 0.5;
+			if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] < 2 || flags[kFLAGS.CHI_CHI_SAM_TRAINING] == 3) {
+				damage += rand(this.str);
+				damage += eBaseDamage();
 			}
 			if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] == 2) {
-				damage += rand(this.str) * 0.3;
-				damage += eBaseDamage() * 0.3;
+				damage += rand(this.str) * 0.6;
+				damage += eBaseDamage() * 0.6;
 			}
 			if (player.hasStatusEffect(StatusEffects.Stunned)) damage *= 1.5;
 			var crit:Boolean = false;
@@ -104,13 +104,15 @@ use namespace kGAMECLASS;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] == 2) chichiScene.WonSecondFight();
+			if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] == 3) chichiScene.WonSparringFight();
+			else if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] == 2) chichiScene.WonSecondFight();
 			else chichiScene.WonFirstFight();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] == 2) chichiScene.LostSecondFight();
+			if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] == 3) chichiScene.LostSparringFight();
+			else if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] == 2) chichiScene.LostSecondFight();
 			else chichiScene.LostFirstFight();
 		}
 

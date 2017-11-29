@@ -543,10 +543,10 @@ public function soularena():void {
             outputText("You aren’t hungry at the time maybe you will eat later.");
             doNext(riverislandVillageStuff);
             return;
-        } else if (flags[kFLAGS.SPIRIT_STONES] >= 1){
+        } else if (flags[kFLAGS.SPIRIT_STONES] < 1){
             outputText("You would like to eat but you don’t have enough spirit stones to afford the food.");
             doNext(riverislandVillageStuff);
-            return
+            return;
         }
         clearOutput();
         outputText("You take a seat and look at the menu. ");

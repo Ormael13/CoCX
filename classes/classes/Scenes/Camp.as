@@ -635,7 +635,6 @@ kGAMECLASS.saves.saveGame(player.slotName);
 	if(flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 0 || flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 1) outputText("In the middle of the distance between portal and camp edge is set place where you will store piles of wood or stones used for constructions. ");
 	if(flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) outputText("In the middle of the distance between portal and camp edge is a medium sized wood platform, which you use to store wood and next to it is place for storing stones. ");
 	if(flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) outputText("In the middle of the distance between portal and camp edge is a long and wide wood platform with protective barriers at the three sided of it. Inside of it you could safely store large amounts of wood and stone. ");
-	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] < 1) outputText("\n\n");
 	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 1) outputText("There's a half finished warehouse construction near the east edge of your campsite.\n\n");
 	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2) outputText("There's warehouse located in the east section of your campsite.\n\n");
 	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 3) outputText("There's warehouse and connected to it half finished granary construction located in the east section of your campsite.\n\n");
@@ -1055,11 +1054,12 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 	}
 	//Cai'Lin
 //	addButtonDisabled(2, "???", "Look into my eyes and answer me: Am I beautiful?");
-	//Chi Chi
+	//Chi Chi potem zmienic na 3
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) {
 		outputText("You can see Chi Chi not so far from Jojo. She’s busy practicing her many combos on a dummy. Said dummy will more than likely have to be replaced within twenty four hours.");
-		addButton(3, "Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu);
+		addButton(2, "Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu);
 	}
+	addButtonDisabled(3, "???", "Let me heal you.");//Diana
 	//Diva - button 4
 	//Etna
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) {
@@ -2836,11 +2836,14 @@ private function ascendForReal():void {
 	var performancePoints:int = 0;
 	//Companions
 	performancePoints += companionsCount();
+	if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 2) performancePoints++;
 	//Dungeons
 	if (SceneLib.dungeons.checkFactoryClear()) performancePoints++;
 	if (SceneLib.dungeons.checkDeepCaveClear()) performancePoints++;
 	if (SceneLib.dungeons.checkLethiceStrongholdClear()) performancePoints++;
 	if (SceneLib.dungeons.checkSandCaveClear()) performancePoints++;
+	if (SceneLib.dungeons.checkHiddenCaveClear()) performancePoints++;
+	if (SceneLib.dungeons.checkDenOfDesireClear()) performancePoints++;
 	if (SceneLib.dungeons.checkPhoenixTowerClear()) performancePoints += 2;
 	//Quests
 	if (flags[kFLAGS.MARBLE_PURIFIED] > 0) performancePoints += 2;
