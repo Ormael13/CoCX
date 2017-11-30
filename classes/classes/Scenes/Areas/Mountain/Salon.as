@@ -36,6 +36,9 @@ public function hairDresser():void {
 	outputText("While exploring the mountain, you find a cleverly concealed doorway.  From inside you can hear the sound of blades being sharpened.  Do you enter the doorway?");
 	doYesNo(salonGreeting,camp.returnToCampUseOneHour);
 }
+	public function isDiscovered():Boolean {
+		return player.hasStatusEffect(StatusEffects.HairdresserMeeting);
+	}
 public function salonGreeting():void{
 	if (player.hasStatusEffect(StatusEffects.HairdresserMeeting))
 	{
