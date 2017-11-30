@@ -848,7 +848,7 @@ public class EngineCore {
         CoC.instance.mainViewManager.refreshStats();
         if (CoC.instance.inCombat) {
             CoC.instance.mainView.monsterStatsView.show();
-            CoC.instance.mainView.monsterStatsView.refreshStats(kGAMECLASS);
+            CoC.instance.mainView.monsterStatsView.refreshStats(CoC.instance);
         } else {
             CoC.instance.mainView.monsterStatsView.hide();
         }
