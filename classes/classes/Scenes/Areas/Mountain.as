@@ -174,7 +174,7 @@ public class Mountain extends BaseContent
 						when: function():Boolean {
 							return flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && DivaScene.getInstance().status >= 0;
 						},
-						call: DivaScene.getInstance().encounter
+						call: DivaScene.encounter
 					},{
 						name:"darkelf",
 						call:darkelfScene.introDarkELfScout
@@ -201,7 +201,7 @@ public class Mountain extends BaseContent
 			) SceneLib.ceraphScene.friendlyNeighborhoodSpiderManCeraph();
 			else SceneLib.ceraphScene.encounterCeraph();
 		}
-		
+
 		public function minotaurChance():Number {
 			if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0) return 3;
 			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0) return 2;
@@ -260,9 +260,9 @@ public class Mountain extends BaseContent
 						outputText(", aching to be filled");
 						if (player.hasCock()) outputText(", while [eachCock] rises to attention, straining at your [armor]");
 						outputText(".");
-						
+
 						outputText("\n\nYou can barely see it from your vantage point, but you can imagine it: the semi-transparent pre-cum dribbling from the minotaur's cumslit, oozing down onto your tongue.  Your entire body shivers at the thought, whether from disgust or desire you aren't sure.  You imagine your lips wrapping around that large equine cock, milking it for all of its delicious cum.  Your body burns hot like the noonday sun at the thought, hot with need, with envy at the cow-girl, but most of all with arousal.");
-						
+
 						outputText("\n\nSnapping out of your imaginative reverie, you turn your attention back to the show. You wonder if you could make your way over there and join them, or if you should simply remain here and watch, as you have in the past.");
 						menu();
 						//[Join] [Watch]

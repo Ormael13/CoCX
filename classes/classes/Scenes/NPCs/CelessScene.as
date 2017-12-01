@@ -1,9 +1,12 @@
 package classes.Scenes.NPCs 
 {
 import classes.EventParser;
-import classes.Items.Useable;
+import classes.ItemType;
+import classes.PregnancyStore;
 import classes.Scenes.Camp;
 import classes.TimeAwareInterface;
+
+import coc.view.ButtonDataList;
 
 import flash.utils.getQualifiedClassName;
 
@@ -71,8 +74,8 @@ import flash.utils.getQualifiedClassName;
 			}
 		}
 		public override function checkCampEvent():Boolean{
-			if (shouldDoBirth()){
-				birthScene();
+            if (_age == -2) {
+                birthScene();
 				hideMenus();
 				return true;
 			}
@@ -111,9 +114,6 @@ import flash.utils.getQualifiedClassName;
 		public function get isAdult():Boolean{
 			return _age == -1;
 		}
-		public function shouldDoBirth():Boolean{
-			return _age == -2;
-		}
 		
 		public function get armorFound():Boolean 
 		{
@@ -136,24 +136,32 @@ import flash.utils.getQualifiedClassName;
 		public override function campInteraction():void{
 			clearOutput();
 			doNext(camp.returnToCampUseOneHour);
-			story.display("strings/campInteraction", {$name:_name});
-			addButton(0, "Appearance", appearance);
+			display("strings/campInteraction", {$name:_name});
+			addButton(0, "Appearance", scene,"strings/appearance",{$name:_name},campInteraction);
 			if (isAdult){
-				addButton(1, "Incest", incestMenu);
+				if(isCorrupt || player.cor >= 20){addButton(1, "Incest", incestMenu);}
 				addButton(2, "Items", itemImproveMenu);
 			}
 			else{
-				addButton(1, "Play Time", playtimeScene);
+				addButton(1, "Play Time", scene,"strings/playTime", {$name:_name, $dangerousPlants:(player.hasKeyItem("Dangerous Plants") >= 0)});
 			}
 			addButton(14, "Back", camp.campFollowers);
 			flushOutputTextToGUI();
+
+            function incestMenu():void{
+                if (isCorrupt){
+                    clearOutput();
+                    var menu:ButtonDataList = new ButtonDataList();
+					display("strings/incest/corruptMenu",{$name:_name});
+                    menu.add("Suck her off", curry(incestScene, "suckHerOff"));
+					menu.add("Fuck Her", curry(incestScene, "fuckHer")).disableIf(!player.isMaleOrHerm());
+					menu.add("Get Fucked", curry(incestScene, "getFucked")).disableIf(!player.isFemaleOrHerm());
+					submenu(menu,campInteraction);
+                }
+                else{incestScene("pureIncest")}
+            }
 		}
-		public function appearance():void{
-			clearOutput();
-			doNext(camp.returnToCampUseOneHour);
-			story.display("strings/appearance",{$name:_name});
-			addButton(0, "Back", campInteraction);
-		}
+
 		public function birthScene():void{
 			if (_age == 0){
 				_age =-2;
@@ -161,125 +169,69 @@ import flash.utils.getQualifiedClassName;
 			else{
 				clearOutput();
 				doNext(nameScene);
-				story.display("strings/birth/intro");
+				display("strings/birth/intro");
 				mainView.nameBox.text = "";
 				flushOutputTextToGUI();
 			}
-			
-		}
-		public function nameScene():void{
-			if (mainView.nameBox.text == ""){
-				clearOutput();
-				outputText("<b>You must name her.</b>");
-				mainView.nameBox.text = "Celess";
-				mainView.nameBox.visible = true;
-				mainView.nameBox.width = 165;
-				menu();
-				mainView.nameBox.x = mainView.mainText.x + 5;
-				mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
-				addButton(0, "Next", nameScene);
-				return;
-			}
-			_age = 1;
-			_name = mainView.nameBox.text;
-			_corruption = 0;
-			if (player.cor > ((100 + player.corruptionTolerance()) / 2)){_corruption = 30;}
+            function nameScene():void{
+                if (mainView.nameBox.text == ""){
+                    clearOutput();
+                    outputText("<b>You must name her.</b>");
+                    mainView.nameBox.text = "Celess";
+                    mainView.nameBox.visible = true;
+                    mainView.nameBox.width = 165;
+                    menu();
+                    mainView.nameBox.x = mainView.mainText.x + 5;
+                    mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
+                    addButton(0, "Next", nameScene);
+                    return;
+                }
+                _age = 1;
+                _name = mainView.nameBox.text;
+                _corruption = 0;
+                if (player.cor > ((100 + player.corruptionTolerance()) / 2)){_corruption = 30;}
 
-			mainView.nameBox.visible = false;
-			clearOutput();
-			doNext(camp.returnToCampUseFourHours);
-			story.display("strings/birth/nameScene",{$name:_name});
-			flushOutputTextToGUI();
-			
+                mainView.nameBox.visible = false;
+                clearOutput();
+                doNext(camp.returnToCampUseFourHours);
+                display("strings/birth/nameScene",{$name:_name});
+                flushOutputTextToGUI();
+
+            }
 		}
-		public function playtimeScene():void{
+
+		private function growUpScene():void{
 			clearOutput();
 			doNext(camp.returnToCampUseOneHour);
-			story.display("strings/playTime", {$name:_name, $dangerousPlants:(player.hasKeyItem("Dangerous Plants") >= 0)});
-			flushOutputTextToGUI();
-		}
-		public function growUpScene():void{
-			clearOutput();
-			doNext(camp.returnToCampUseOneHour);
-			story.display("strings/growUp", {$name:_name});
+			display("strings/growUp", {$name:_name});
 			if (isCorrupt){
-				doHeatOrRut();
-				addButton(0, "Masturbate Her", incestScene, 5);
+				addButton(0, "Masturbate Her", incestScene, "masturbateHer");
 				if (player.isMaleOrHerm()){
-					addButton(1, "Fuck Her", incestScene, 0);
-				}
-				else{addButtonDisabled(1, "Fuck Her"); }	
-				if (player.hasKeyItem("Fake Mare") + player.hasKeyItem("Centaur Pole") >= 0){addButton(2, "Centuar Toys", incestScene, 4); }
-				else{addButtonDisabled(2, "Centaur Toys");}
+					addButton(1, "Fuck Her", incestScene, "fuckHer");
+				} else { addButtonDisabled(1, "Fuck Her"); }
+				if (player.hasKeyItem("Fake Mare") + player.hasKeyItem("Centaur Pole") >= 0){
+					addButton(2, "Centuar Toys", incestScene, "centaurToys");
+				} else { addButtonDisabled(2, "Centaur Toys");}
 			}
 			flushOutputTextToGUI();
 		}
-		public function incestMenu():void{
-			if (isCorrupt){
-				clearOutput();
-				story.display("strings/incest/corruptMenu",{$name:_name});
-				addButton(0, "Suck her off", incestScene, 1);
-				if (player.isMaleOrHerm()){
-					addButton(1, "Fuck Her", incestScene, 0);
+
+		private function incestScene(sceneName:String):void{
+			var toDisplay:String = "strings/incest/"+sceneName;
+            scene(toDisplay,{$name:_name});
+			if(sceneName == "pureIncest" && player.cor > 80){
+				_corruption++;
+				if (isCorrupt){
+					addButton(0, "Next", incestScene, "pureCorruption");
 				}
-				else{addButtonDisabled(1, "Fuck Her"); }
-				if (player.isFemaleOrHerm()){
-					addButton(1, "Get Fucked", incestScene, 2);
+				else{
+					display("strings/incest/addCorruption", {$name:_name});
+					doNext(camp.returnToCampUseOneHour);
 				}
-				else{addButtonDisabled(1, "Get Fucked"); }
-				addButton(5, "Back", campInteraction);
-				flushOutputTextToGUI();
 			}
-			else{incestScene(3)}
 		}
-		public function incestScene(scene:int):void{
-			clearOutput();
-			doNext(camp.returnToCampUseOneHour);
-			switch(scene){
-				case 0:
-					story.display("strings/incest/fuckHer",{$name:_name});
-					break;
-				case 1:
-					story.display("strings/incest/suckHerOff",{$name:_name});
-					doHeatOrRut();
-					break;
-				case 2:
-					story.display("strings/incest/getFucked",{$name:_name});
-					doHeatOrRut();
-					break;
-				case 3:
-					story.display("strings/incest/pureIncest",{$name:_name});
-					doHeatOrRut();
-					if (player.cor > 80){
-						_corruption++;
-						if (isCorrupt){
-							addButton(0, "Next", incestScene, 6);
-						}
-						else{
-							story.display("strings/incest/addCorruption", {$name:_name});
-							dynStats("cor", -1);
-						}
-					}
-					break;
-				case 4:
-					story.display("strings/incest/centaurToys",{$name:_name});
-					break;
-				case 5:
-					story.display("strings/incest/masturbateHer",{$name:_name});
-					break;
-				case 6:
-					story.display("strings/incest/pureCorruption",{$name:_name});
-					doHeatOrRut()
-			}
-			flushOutputTextToGUI();
-		}
-		public function doHeatOrRut():void{
-			story.display("strings/incest/doHeatOrRut",{$name:_name});
-			if (!player.goIntoHeat(true, 10)){player.goIntoRut(true, 10); }	
-		}
-		
-		
-		public function itemImproveMenu(item:Useable = null, from:Useable = null ):void{
+
+		public function itemImproveMenu():void{
 			/* Of the items in this array, the following are complete:
 			 * CTPALAD - Centuar Paladin Armor
 			 * CTBGUAR - Centuar Blackguard Armor
@@ -299,27 +251,71 @@ import flash.utils.getQualifiedClassName;
 				//	[armors.CTPALAD,		null,					armors.CTBGUAR],
 				//	[armors.LMARMOR,		armors.,			armors.]
 				];
-			var selectfrom:int = 1;
 			clearOutput();
-			doNext(camp.returnToCampUseOneHour);
-			outputText("<b>Not curruntly implemented</B>");
-			if (item != null){
-				story.display("strings/itemImprove/improveThatItem", {$name:_name});
-				player.destroyItems(from, 1);
-				inventory.takeItem(item, camp.returnToCampUseOneHour);
-				return;
-			}
-			if (isCorrupt){selectfrom = 2; }
+			outputText("<b>Not curruntly implemented</b>");
+
+            var selectfrom:int = isCorrupt ? 2 : 1;
+			var selectMenu:ButtonDataList = new ButtonDataList();
 			for (var i:int = 0; i < improvableItems.length; i++){
 				if(improvableItems[i][selectfrom] == null){/*do nothing*/}
-				else if (player.hasItem(improvableItems[i][0], 1)){
-					addButton(i, (improvableItems[i][selectfrom])/*.id*/, itemImproveMenu,(improvableItems[i][selectfrom]),improvableItems[i][0]);
-				}
 				else{
-					addButtonDisabled(i, (improvableItems[i][selectfrom]).id);
+					var item = improvableItems[i][selectfrom];
+					var from = improvableItems[i][0];
+					selectMenu.add(item.id,curry(improveItem,item,from)).disableIf(!player.hasItem(item));
 				}
 			}
-			addButton(14, "Back", campInteraction);
+			submenu(selectMenu,campInteraction);
+
+			function improveItem(item:ItemType, from:ItemType):void{
+                scene("strings/itemImprove/improveThatItem", {$name:_name});
+                player.destroyItems(from, 1);
+                inventory.takeItem(item, camp.returnToCampUseOneHour);
+			}
 		}
+		//Fixme @Oxdeception
+		public static function celessUnicornIntro():void{instance._celessUnicornIntro();}
+        private function _celessUnicornIntro(stage:int = 0, wasMale:Boolean = false ):void{
+            switch(stage){
+                case 0:
+                    scene("strings/forest-unicorn/intro");
+                    addButton(0, "Okay", _celessUnicornIntro, (player.isMale() || player.isGenderless())?2:3);
+                    if(player.hasCock()){addButton(1, "Fuck Her", _celessUnicornIntro, 4);}
+                    addButton(5, "NoWay", _celessUnicornIntro, 1);
+                    break;
+                case 1:
+                    scene("strings/forest-unicorn/noway");
+                    doNext(camp.returnToCampUseOneHour);
+                    break;
+                case 2:
+                    if (player.bRows() == 0){
+                        player.createBreastRow();
+                    }
+                    player.growTits(3, 1, false, 1);
+                    scene("strings/forest-unicorn/okay-male");
+                    while (player.hasCock()){
+                        player.removeCock(0, 1);
+                    }
+                    player.createVagina();
+                    addButton(0, "Next", _celessUnicornIntro, 3,true);
+                    break;
+                case 3:
+                    scene("strings/forest-unicorn/okay-female", {$wasMale:wasMale, $isTaur:player.isTaur()});
+                    player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);
+                    inventory.takeItem(shields.SANCTYN, camp.returnToCampUseOneHour);
+                    break;
+                case 4:
+                    scene("strings/forest-unicorn/fuck-her");
+                    findArmor();
+                    inventory.takeItem(shields.SANCTYN, camp.returnToCampUseOneHour);
+                    break;
+            }
+        }
+		//Fixme @Oxdeception
+		public static function celessArmor():void{instance._celessArmor();}
+        private function _celessArmor():void{
+            scene("strings/forest-unicorn/armorScene");
+            findArmor();
+            inventory.takeItem(armors.CTPALAD, camp.returnToCampUseOneHour);
+        }
     }
 }

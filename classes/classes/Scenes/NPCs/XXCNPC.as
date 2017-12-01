@@ -93,5 +93,11 @@ import coc.xxc.BoundStory;
 		public function unload():void{
 			throw new Error("Must be overloaded by child class");
 		}
+		public function scene(ref:String,locals:*=null,next:Function=null):void{
+			clearOutput();
+			display(ref,locals);
+			menu();
+			doNext(next!=null?next:camp.returnToCampUseOneHour);
+		}
     }
 }

@@ -81,26 +81,20 @@ public class DivaScene extends XXCNPC{
         return false;
     }
     override public function campInteraction():void{
-        clearOutput();
-        menu();
         if(time.hours > 20){
-            display("camp/campInteraction/dusk");
+            scene("camp/campInteraction/dusk");
         } else {
-            display("camp/campInteraction/night");
+            scene("camp/campInteraction/night");
         }
-
         addButton(0,"Talk",talkMenu);
         addButton(1,"Sex",sexMenu);
         addButton(14,"Back",camp.campLoversMenu);
-
-        flushOutputTextToGUI();
         function talkMenu():void
         {
             clearOutput();
             display("camp/talkMenu/menu");
             setupTalkMenu();
             submenu(_talkMenu,campInteraction);
-            flushOutputTextToGUI();
         }
         function sexMenu():void
         {
@@ -108,7 +102,6 @@ public class DivaScene extends XXCNPC{
             display("camp/sexMenu/menu");
             setupSexMenu();
             submenu(_sexMenu,campInteraction);
-            flushOutputTextToGUI();
         }
         function setupTalkMenu():void{
             _talkMenu.clear();
@@ -138,61 +131,54 @@ public class DivaScene extends XXCNPC{
     }
 
     public function moonlightSonata(fromCombat:Boolean=false):void{
+        var baseRef:String = "camp/sexMenu/moonlightSonata/";
         if(status == 0){status = 1;}
         clearOutput();
         if(fromCombat){
-            display("camp/sexMenu/moonlightSonata/intro/combat");
+            display(baseRef + "intro/combat");
         } else {
-            display("camp/sexMenu/moonlightSonata/intro/camp");
+            display(baseRef + "intro/camp");
         }
 
         if( player.biggestCockLength() > 24) {
-            display("camp/sexMenu/moonlightSonata/male/tooBig");
+            display(baseRef + "male/tooBig");
             player.cocks[player.biggestCockIndex()].cockLength = 18;
             if(timesReduced < 5){timesReduced++;}
         }
         if(player.batScore() >= 6 || player.vampireScore() >= 6){
-            if(player.isFemale()){display("camp/sexMenu/moonlightSonata/female/bat");}
+            if(player.isFemale()){display(baseRef + "female/bat");}
             else if(player.isMaleOrHerm()){
-                display("camp/sexMenu/moonlightSonata/female/bat");
-                display("camp/sexMenu/moonlightSonata/male/regular",{$combat:fromCombat})
+                display(baseRef + "female/bat");
+                display(baseRef + "male/regular",{$combat:fromCombat})
             }
         } else if(player.isMaleOrHerm()){
-            display("camp/sexMenu/moonlightSonata/male/regular",{$combat:fromCombat});
+            display(baseRef + "male/regular",{$combat:fromCombat});
         } else {
-            display("camp/sexMenu/moonlightSonata/female/regular",{$combat:fromCombat});
+            display(baseRef + "female/regular",{$combat:fromCombat});
         }
         if(fromCombat){
             if(firstLoss){
-                display("camp/sexMenu/moonlightSonata/outro/combat/initial");
+                display(baseRef + "outro/combat/initial");
             } else {
-                display("camp/sexMenu/moonlightSonata/outro/combat/regular");
+                display(baseRef + "outro/combat/regular");
             }
             firstLoss=false;
         } else{
-            display("camp/sexMenu/moonlightSonata/outro/camp");
+            display(baseRef + "outro/camp");
         }
         if(!fromCombat){
             doNext(camp.returnToCampUseOneHour);
-            flushOutputTextToGUI();
         }
     }
-    public function encounter():void{
-        if(status == 2){
-            scene("combat/scenes/intro/final");
-            startCombat(new Diva(true));
+    public static function encounter():void{
+        if(instance.status == 2){
+            instance.scene("combat/scenes/intro/final");
+            instance.startCombat(new Diva(true));
         } else {
-            if(status == 0){scene("combat/scenes/intro/first");}
-            else{scene("combat/scenes/intro/second");}
-
-            startCombat(new Diva);
+            if(instance.status == 0){instance.scene("combat/scenes/intro/first");}
+            else{instance.scene("combat/scenes/intro/second");}
+            instance.startCombat(new Diva);
         }
-    }
-    internal function scene(ref:String,next:Function=null):void{
-        clearOutput();
-        doNext(next==null?camp.returnToCampUseOneHour:next);
-        display(ref);
-        flushOutputTextToGUI();
     }
 }
 }

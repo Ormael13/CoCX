@@ -89,7 +89,7 @@
 				Your little girl seems to have matured to adulthood.
 				
 				<i>“Mom… I feel so energised, and hot... please... help me get that throbbing thing to calm down.”</i>
-				
+				<display ref="incest/doHeatOrRut"/>
 				<else>
 					<i>“Oww! It hurts!...Mom… don’t look!”</i>
 					
@@ -159,11 +159,13 @@
 				
 				<output>$name</output> whines as she finally orgasms, her sweet cum flooding your throat. 
 				It tastes like cake icing, making it an exercise on willpower to keep from desperately trying to get more. 
-				As her erection finally dies down, you feel something change in you as the cum reaches your stomach. 
+				As her erection finally dies down, you feel something change in you as the cum reaches your stomach.
+				<display ref="../doHeatOrRut"/>
 			</text>
 			<text name="addCorruption">
 				Just as you're about to go, however, you catch a glimpse of <output>$name</output>’s horse dong as it resumes acting up, just as you wanted. 
 				You’ll need to keep her constantly aroused to educate her properly and set her on the path to depravity if she's to become a proper daughter of yours.
+				<dynStats cor="-1"/>
 			</text>
 			<text name="pureCorruption">
 				<output>$name</output> suddenly starts moaning as she holds her horn with both hands.
@@ -222,6 +224,7 @@
 				As expected, nothing spills out of her pussy, even after the both of you lay down in the grass to rest. 
 				
 				You snuggle for a time with <output>$name</output> then head back to your daily routine.
+				<display ref="../doHeatOrRut"/>
 			</text>
 			<text name="suckHerOff">
 				It's been a while since you last had a taste of her, thus you decide to give your daughter a sweet, loving blowjob! <output>$name</output> coos, delighted at the proposal.
@@ -233,7 +236,8 @@
 				Satisfied with it you then proceed to put the thing in your mouth proper. <output>$name</output> moans as her horse dong throbs in appreciation for the attention you’re giving it. 
 				You suck on her cock until she finally orgasms, the sweet cum flooding your throat.
 				
-				Weirdly enough, you feel something change in you as the corrupted cum reaches your stomach. 
+				Weirdly enough, you feel something change in you as the corrupted cum reaches your stomach.
+				<display ref="../doHeatOrRut"/>
 			</text>
 			<text name="getFucked">
 				You could really use some of that horse meat down there and if <output>$name</output>’s raging erection is anything to go by, she’s in line with your thinking.
@@ -257,12 +261,15 @@
 					Checking on your privates, you’re not surprised to discover you did, indeed, keep your virginity in spite of the crazy ride the young centauress gave you.
 					By now you already figured this is a common thing among unicorns.
 				</if>
-				You feel something change in you as the corrupted cum reaches your womb. 
-				
+				You feel something change in you as the corrupted cum reaches your womb.
+				<display ref="../doHeatOrRut"/>
 			</text>
 			<text name="doHeatOrRut">
 				Lewd images of cocks <if test="player.isMaleOrHerm()">and vaginas</if> of all sizes and shapes fill your mind, making you drool in anticipation.
 				It seems your daughter’s condition is spreading over to you.
+				<if test="player.goIntoHeat(true,10)">
+					<elseif test="player.goIntoRut(true,10)"/>
+				</if>
 			</text>
 		</lib>
 		<text name="campInteraction">
@@ -329,5 +336,228 @@
 				</if>
 			</text>
 		</lib>
-	</lib>	
+		<lib name="forest-unicorn">
+			<lib name="intro">
+				<text name="intro">
+					As you wander the woods, you stumble upon a large clearing.
+					The place is pure - so pure that the rest of Mareth looks like a corrupted wasteland in comparison, which given the current state of things, isn’t that far from the truth.
+					In the center of this natural masterpiece sits a large stone altar, upon which rests a magnificent white shield ornamented with gold filigree.
+					As you approach the shield, a powerful wall of force stops you a few feet away from the item.
+
+					<i>“None shall take this sacred relic from this place without my consent!”</i>
+
+					You turn over just in time to see a massive horse-like figure charging at you, barely managing to move out of the way in time to avoid being trampled.
+					Your assailant is now standing between you and the altar, letting you get a good view at the grove’s ostensible guardian:
+
+					The woman has silvery white hair flowing around her perfect visage; and her sizable E cup would make most women back in Ingnam green with envy, then again, most things even somewhat female here in Mareth would cause the same reaction.
+					The comparison to a human, however, ends there.
+					Below her waist is the large lower-body of an immaculate white horse.
+					Her ears are covered with silvery white fur and while at first you mistook her for just a centaur warrior, the spear-like spiraling horn on her forehead warns you that there might be more to her.
+
+					<i>“Just leave and I won’t have to attack you. I swear on my honor that I won’t give chase should you leave peacefully. This is for your own good.”</i>
+				</text>
+				<text name="virgin">
+					She suddenly sniffs something in the air and her expression changes to one of baffled disbelief.
+
+					<i>“How is this even still possible in this lost corrupted land? A chaste person on Mareth?!”</i>
+
+					She approaches to examine you thoroughly now. Once satisfied, she declares, <i>“Well I have no idea how you managed it, but you stayed a virgin and pure despite the mess around here.”</i>
+
+					You understand the reason for her surprise, chastity in Mareth is as rare as rain nowadays.
+					Your virginity is a testament to your strength, you have fought tooth and nail to protect it, partly due to the values you were taught, mostly due to knowing what most inhabitants of Mareth would do to you once you were defenseless.
+					You tell her as much, causing her surprise to turn into respect.
+					Having answered her question, you ask one in turn, namely, what is she doing here, exactly?
+					You can already see she is some sort of guardian, probably of that shield over there, but you would like to know the specifics.
+
+					<i>“I was tasked with guarding the divine shield, Sanctuary, from dark influence.
+						Demons cannot enter this grove and the impure reels at the mere thought of setting a single foot into this area.
+						This armament needs a champion to wield it and take the fight to the fiends;
+						however, due to Mareth’s purity being compromised, people who match this description have almost all been destroyed by transformations or defiled by the many demonic inhabitants of the land.
+						Only a pure maiden such as you can hope to get past the ward.”</i>
+
+					Interested in the magnificent shield on the altar, you ask what you would need to do to get access to this shield, since you already fulfill the requirements for entering here.
+
+					<i>“Simple, since only one carrying my essence can pass the ward, I just need to share my essence with you.”</i>
+
+					You raise an eyebrow at that, you’ve been in Mareth long enough to know an innuendo when you hear one, but surely such a pure individual must have meant something far more innocent.
+					Still, you do glance at her lower half to make sure.
+					Aaaand of course she has a horsecock, already at half-mast, too.
+					You bite down a sigh, you’re in fucking Mareth, of <i>course</i> she has one.
+					Your first guess was right, at least.
+					That meager consolation does little to numb the disappointment.
+				</text>
+				<text name="noVirgin">
+					You ask her why she is defending this relic and what it would take for you to gain access to it.
+					She eyes you as if trying to figure out your intentions then sigh.
+
+					<i>“Only the pure of heart and body may be allowed to pick up this shield, Marae herself tasked me with guarding it.
+						If you truly wish to prove your worthiness then I will ask of you that you perform a task for me.”</i>
+
+					What task?
+
+					<i>“In the darkest reaches of the forest lurks a terrifying creature of great corruption known as a nightmare.
+						It is anathema to purity and must be disposed of. Slay the nightmare and I will grant you access to the shield.”</i>
+
+					On those word you leave, better seek out this creature as fast as possible.
+				</text>
+			</lib>
+			<text name="noway">
+				You give her the same answer you gave all others, a flat “No” that leaves no room for negotiation
+				<if test="silly()">followed by singing <i>“nope, nope, nope, fuck this shit, I’m out!” </i></if>
+				as you turn around and leave. You fought hard to keep your virginity, no amount of loot is going to tempt you.
+			</text>
+			<text name="okay-male">
+				You look at her cock, then your rear, then back to her cock.
+				<if test="player.inte gt 70">
+					You don’t need to be a genius, which you are, to tell that that won’t fit without either injury or magic.
+					And since the only ones you know of that have any kind of magic that fits the bill are the Demons, you have your doubts about the later option.
+					<else>
+						You might not be a genius, but even you know that that won’t fit without injury on your end.
+					</else>
+				</if>
+				You tell her as much.
+
+				<i>“You forget I’m no ordinary centaur. First and foremost please bend over…”</i>
+
+				Well, if that’s what it takes to obtain that unique and likely very powerful shield you guess you will have to. You get on all fours as the looming shadow of the centauress moves right above you. You feel her huge horse cock right up your ass cheek.
+				<if test="player.isNaked() eq false">
+					Wait didn’t you have your clothes still on? How come she is already at your pucker entrance without removing anything!
+					<if test="player.inte gt 70">
+						Is she seriously using spatial magic of all things just to avoid the bother of undressing you?
+					</if>
+				</if>
+
+				<i>“A unicorn ‘horn’ can pierce through anything, just relax it will be easier for you.”</i>
+				<if test="silly() and playre.inte gt 70">
+					Part of you is mildly surprised, and grateful, no Demon has realized this potential application of spatial magic, otherwise they would have pushed to develop it until they learnt how to open portals to other realms by ramming a dick against space-time until they fucked it into submission.
+				</if>
+
+				Without warning she suddenly shoves her huge horsecock inside, stretching your ass wide!
+				As expected it hurts a fair bit, but eventually pain recedes as you acclimate to it.
+				Or are you truly? The pain is slowly turning to pleasure as you start moaning, your [if(isMale)cock|crotch] becoming extremely sensitive.
+				[if(isMale)You cum once then twice as it starts to shrink,|Your body starts to change,]
+				your moans becoming progressively less and less masculine until they sound just like those of a girl. Wait a girl?
+
+				<i>“Ahhhn I can’t hold myself! Take it all”</i>
+
+				As she cums into your ass you feel
+				[if(isMale)what’s left of your cock and balls continue shrinking inside of you until all that’s left is a slit|
+				yourself becoming increasingly feminine up to the point a slit appear where used to be nothing up your crotch].
+				While you were concerned about your [if (isMale) cock|new feminine assets] you didn’t notice your chest had changed too, now you're sporting a pair of [breasts]!
+
+				Wait... what the hell!? Did she just change you into a girl?! This wasn’t part of the agreement!
+
+				<i>“We ain’t done yet… here comes part two.”</i>
+
+				You see her looming shadow above your crouched female form, her horse length already hard again. Well, shit.
+			</text>
+			<text name="okay-female">
+				<lib name="str">
+					<text name="taurIntro">
+						Well now that she mention it you must admit you indeed have been eyeing her fat horsemeat for a fair while now.
+						Being a centaur makes it difficult for you to find relief especially since you decided not to relinquish your virginity.
+						You smirk seductively giving her a fair view of your virgin equine pussy as you tell the unicorn that for your first time, you might as well take a stallion.
+						Your pussy lips are already wet in anticipation of her maleness.\n
+					</text>
+					<text name="intro"><i>“Well, since you agreed, I will let you in on a little secret. I won’t need to take your virginity. Rather, my ‘horn’ will pierce right through it.”\n\n</i></text>
+					<text name="taurSex">
+						She trots to you, her massive horsemeat hardening as she prepares to mount your [pussy]. She take a whiff of your [pussy] going so far as to give it a lick or two just so she can taste it. Satisfied, she gets on you and you can feel the tip of her flare making contact with your vaginal lips.
+
+						<i>“Mmmmmm what a nice mare pussy. I can only imagine how it will feel to fuck that. Well, here I go!” </i>
+
+						You neigh in surprise as she suddenly slides her entire length inside your pussy.
+						Weirdly, it doesn’t hurt… you’d expect her massive cock to pierce your hymen yet you don't feel any pain, only the pressure of her large member working your pussy with masterful effectiveness.
+						You moan and neigh in delight as she fucks you for several minutes, her horsecock filling your equine pussy like no other.
+						Your eyes roll back as her cock drives your [pussy] completely crazy hitting every single sensitive spot in your massive horsecunt.
+						The unicorn is not faring any better, drooling as she fucks your [pussy] silly.
+						You can only guess that she doesn't get to fuck a mare this often.\n
+					</text>
+					<text name="sex">
+						It’s too late to say no now and you decide to bend over <if test="$wasMale">again</if> for the centauress. Soon you feel her huge horse meat making contact with your walls entrance
+						<if test="player.isNaked() eq false and $wasMale ne true">which is weird because you were quite sure you still had your clothes on.
+
+						</if>
+
+						<i>“Here I go!”</i>
+
+						She’s suddenly inside your pussy before you even had the time to shout a silent scream.
+						<if test="$wasMale">
+							As with your ass just a moment ago, she doesn’t cause you any pain due to her size, nor does she break your hymen. You do feel the pressure of her large member working your pussy with masterful effectiveness though.
+							<else>
+								Weirdly, it doesn’t hurt… you’d expect her massive cock to pierce your hymen yet you don't feel any pain, only the pressure of her large member working your pussy with masterful effectiveness.
+							</else>
+						</if>
+						You moan in delight as she fucks you up to the cervix for several minutes, your belly bulging due to the sheer size of her cock. Your eyes roll back as her cock drives your pussy completely crazy\n
+					</text>
+					<text name="outro">
+						<i>“Ahhhh! I can’t hold it anymore!”</i>
+
+						A huge volume of cum shoots into you, filling your womb until it’s full enough to make <if test="$isTaur">your lower body<else>you</else></if> look pregnant already.
+						You feel her removing her cock from your pussy as you <if test="$isTaur">
+						lie down on the ground to rest exhausted by the experience.
+						<else>
+							pass out on the grass exhausted by the experience.
+						</else>
+					</if>
+
+						When you wake up you are no longer in the grove.
+						It would seem that the unicorn moved you to the forest’s edge.
+						She did keep her word, however, since the fabled shield is resting on your lap… seemingly protecting your inflated<if test="$isTaur">horse</if> belly.
+						<if test="$isTaur">
+							You feel that all of her cum is still inside of you, somehow kept from leaking out and sloshing as you move.
+							<else>
+								Checking on your privates, you’re surprised to discover that your virginity is indeed intact despite the crazy ride the centauress gave you.
+								Heck, all of her cum is still inside of you, somehow kept from leaking out and sloshing as you move.
+							</else>
+						</if>
+
+						You head back to camp, still confused with this experience.\n\n
+					</text>
+				</lib>
+				<if test="$isTaur and $wasMale ne true">
+					<display ref="str/taurIntro"/>
+				</if>
+				<display ref="str/intro"/>
+				<if test="$isTaur and $wasMale ne true">
+					<display ref="str/taurSex"/>
+					<else>
+						<display ref="str/sex"/>
+					</else>
+				</if>
+				<display ref="str/outro"/>
+
+			</text>
+			<text name="fuck-her">
+				It’s not everyday you get to see a centauress with such a fine pussy<if test="player.hasStatusEffect(StatusEffects.TelAdre) eq true">beside Edryn's of course</if>.
+				You ask the unicorn about it.
+
+				<i>“Umph... I guess that can work too, but I'm only doing it because you are a virgin, unicorns don’t mate with anything else.”</i>
+
+				That being all the encouragement you need, you position yourself behind her to insert your [cock] into her warm, gaping cunt.
+				She moans in delight as you push as much of your cock as you can inside, still looking for the perfect angle.
+				The unicorn taunts you all the while.
+
+				<i>“Pah! You should be grateful I’m even allowing you! With the demonic plague, the unicorn population has been decreasing dramatically.
+					As such, it’s  my responsibility to increase it, so you better not waste my virginity, you sinner.”</i>
+
+				Sinner, eh? We'll see about sins later. Her pussy is quite large, so you have to work double time to make her feel anything at all.
+				You proceed to wildly fuck the unicorn’s hole with aggressive thrusts in order to, at the very least, make her moan.
+				You eventually reach your limit and flood her cunt with your cum, making her whine.
+				You check the results, but to your surprise not only nothing spills out of her cunt, but her hymen is actually still intact!
+
+				<i>“I guess that will have to do… you can have the shield. Now get out of here, I have a pregnancy to manage.”\n\n</i>
+			</text>
+			<text name="armorScene">
+				You stumble upon the forest grove where the shield used to be.
+				The unicorn has long left but you spot a shine on the ground deeper in.
+				It looks like a set of untarnished silvery armor, likely an ancient treasure she left.
+				Upon unearthing the piece, you discover this full plate armor was clearly not made for a human but a centaur.
+
+				The breastplate is ornamented with what you assume is a holy symbol, namely a blossoming oak tree <if test="flags[kFLAGS.MET_MARAE] gt 0">obviously Marae’s</if>.
+				It has plated barding and a skirt fit for a horse  body, it even comes with matching horseshoes.
+				While clearly made like a full plate, it is surprisingly flexible, allowing for maneuverability similar to that of light armor, which is rather unusual.
+
+			</text>
+		</lib>
+	</lib>
 </story>
