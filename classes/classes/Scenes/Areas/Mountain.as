@@ -48,7 +48,7 @@ public class Mountain extends BaseContent
 			}
 			//Diva
 			if(flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && DivaScene.getInstance().status >= 0 && rand(5) == 0){
-				DivaScene.getInstance().encounter();
+				DivaScene.encounter();
 				return;
 			}
 			//Discover 'high mountain' at level 5 or 40 explores of mountain
