@@ -414,7 +414,7 @@ import flash.errors.IllegalOperationError;
 		 * where nameOp is ( stat_name + [operator] ) and value is operator argument<br/>
 		 * valid operators are "=" (set), "+", "-", "*", "/", add is default.<br/>
 		 * valid stat_names are "str", "tou", "spe", "int", "wis", "lib", "sen", "lus", "cor" or their full names;
-		 * also "scaled"/"sca" (default true: apply resistances, perks; false - force values)
+		 * also "scaled"/"scale"/"sca" (default true: apply resistances, perks; false - force values)
 		 *
 		 * @return Object of (newStat-oldStat) with keys str, tou, spe, inte, wis, lib, sens, lust, cor
 		 * */
@@ -3919,6 +3919,7 @@ import flash.errors.IllegalOperationError;
 				"lust": "lus",
 				"corruption": "cor",
 				"sca": "scale",
+				"scaled": "scale",
 				"res": "scale",
 				"resisted": "scale",
 				"wisdom": "wis"

@@ -5747,9 +5747,9 @@ use namespace kGAMECLASS;
 				}
 			}
 			if(hasStatusEffect(StatusEffects.Might)) {
-				if (hasStatusEffect(StatusEffects.FortressOfIntellect)) dynStats("int", -statusEffectv1(StatusEffects.Might));
-				else dynStats("str", -statusEffectv1(StatusEffects.Might));
-				dynStats("tou", -statusEffectv2(StatusEffects.Might));
+				if (hasStatusEffect(StatusEffects.FortressOfIntellect)) dynStats("int", -statusEffectv1(StatusEffects.Might), "scale", false);
+				else dynStats("str", -statusEffectv1(StatusEffects.Might), "scale", false);
+				dynStats("tou", -statusEffectv2(StatusEffects.Might), "scale", false);
 				removeStatusEffect(StatusEffects.Might);
 			}
 			if(hasStatusEffect(StatusEffects.Blink)) {
