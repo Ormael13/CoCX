@@ -4,6 +4,7 @@
 ```relax-ng
 [noun]
 ```
+A list of available tags can be found in [ParserTags](ParserTags.as)
 
 ##Conditional Statements
 
@@ -18,13 +19,25 @@
 ```
 Note - Implicit else indicated by presence of the `|`
 
+###Conditions
+```
+(arg1 [conditional] arg2)
+```
+`arg1` and `arg2` can be either numbers, or any of the strings in `conditionalOptions` in [ParserTags](ParserTags.as).
+Numbers are converted to a Number typeprior to comparison.
+
+|    |    |    |
+|----|----|----|
+|`=` | `==` | Both are Equals or equivalent-to operators|
+|`<` | `<=` | Less than, and less than or equal         |
+|`>` | `>=` | Greater than, and greater than or equal   |
+|`!=`|     | Not equal                                 |
+
 ###Object aspect descriptions
 ```relax-ng
 [object aspect]
 ```
-gets the description of aspect "aspect" of object/NPC/PC "object"
-Eventually, I want this to be able to use introspection to access class attributes directly
-Maybe even manipulate them, though I haven't thought that out much at the moment.
+gets the description of aspect `aspect` of object/NPC/PC `object`
 
 ##Gender Pronoun Weirdness
 The parser uses Elverson/Spivak Pronouns specifically to allow characters to be written with non-specific genders.
