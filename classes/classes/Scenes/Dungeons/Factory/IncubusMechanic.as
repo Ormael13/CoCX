@@ -107,7 +107,7 @@ public class IncubusMechanic extends Monster {
 					outputText("  Disgusted, you pull away from the purplish monstrosity, the act made easier by your well-slimed [legs].");
 					player.dynStats("lus", 5 + player.cor / 20);
 				}
-				SceneLib.combat.takeDamage(5);
+				SceneLib.combat.takePhysDamage(5);
 			}
 			outputText("\nThe incubus gives an overconfident smile as his cock retracts away from you, returning to its normal size.");
 		}

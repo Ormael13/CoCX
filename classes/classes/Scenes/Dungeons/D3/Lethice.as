@@ -241,7 +241,7 @@ public class Lethice extends Monster
 			{
 				outputText(" The cloying smoke gets in your eyes and your mouth, making you cough and sputter. Worst of all, you can’t see anything!");
 				player.createStatusEffect(StatusEffects.Blind, 2, 0, 0, 0);
-				player.takeDamage(1);
+				player.takePhysDamage(1);
 				outputText(" (1)");
 			}
 		}
@@ -270,7 +270,7 @@ public class Lethice extends Monster
 			}
 			else
 			{
-				damage = player.takeDamage(damage);
+				damage = player.takePhysDamage(damage);
 				if (damage <= 5)
 				{
 					outputText(" She barely scratches you. She’ll need stronger weapons than that to take you down. (" + damage + ")");
@@ -421,7 +421,7 @@ public class Lethice extends Monster
 			else
 			{
 				var damage:Number = 70 - rand(player.tou);
-				damage = player.takeDamage(damage);
+				damage = player.takePhysDamage(damage);
 				outputText(" Several of the big, stout horns slam into you, given all the more force thanks to the crushing waves of demons pushing them forward. You yelp in pain as they score your flesh! (" + damage + ")");
 			}
 		}
@@ -436,7 +436,7 @@ public class Lethice extends Monster
 			else
 			{
 				var damage:Number = 70 - rand(player.tou);
-				damage = player.takeDamage(damage);
+				damage = player.takePhysDamage(damage);
 
 				outputText(" You squirm out of their crushing embrace, trying to crawl away on the ground, but if they can't squeeze you down the demons seem happy to trample you! You scream in alarm and pain as dozens of feet, hooves, claws, and other appendages come crushing down on you! (" + damage + ")");
 			}
@@ -693,7 +693,7 @@ public class Lethice extends Monster
 				player.dynStats("lus", l);
 				
 				var damage:Number = str + weaponAttack - rand(player.tou);
-				damage = player.takeDamage(damage);
+				damage = player.takePhysDamage(damage);
 
 				outputText(" You can’t avoid them all! One clips you on its way past, ripping into your [skin] and leaving you feeling... flushed and hot in its wake.");
 				if (player.hasCock())
@@ -799,7 +799,7 @@ public class Lethice extends Monster
 				outputText("\n\n<b>You are effectively silenced!</b>");
 
 				var damage:Number = weaponAttack + 25 - rand(player.tou);
-				damage = player.takeDamage(damage);
+				damage = player.takePhysDamage(damage);
 
 				player.createStatusEffect(StatusEffects.WhipSilence, 3, 0, 0, 0);
 

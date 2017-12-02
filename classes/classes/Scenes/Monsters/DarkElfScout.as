@@ -58,7 +58,7 @@ public class DarkElfScout extends Monster
 				else damage *= (5.5 + ((this.weaponRangeAttack - 200) * 0.01));
 				damage = Math.round(damage);
 				outputText("An arrow hit you for ");
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 				outputText(" damage. It was poisoned you feel your strength failing you!\n\n");
 				player.addCombatBuff('spe', -3);
 			}
@@ -89,7 +89,7 @@ public class DarkElfScout extends Monster
 				else if (this.weaponRangeAttack >= 151 && this.weaponRangeAttack < 201) damage *= (4.75 + ((this.weaponRangeAttack - 150) * 0.015));
 				else damage *= (5.5 + ((this.weaponRangeAttack - 200) * 0.01));
 				damage = Math.round(damage);
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 				outputText("\n\n");
 			}
 		}

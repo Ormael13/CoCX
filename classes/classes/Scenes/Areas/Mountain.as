@@ -4,7 +4,12 @@
 package classes.Scenes.Areas
 {
 import classes.*;
+import classes.AppearanceDefs;
 import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.API.Encounters;
+import classes.Scenes.API.FnHelpers;
+import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Mountain.*;
 import classes.Scenes.Holidays;
 import classes.Scenes.Monsters.DarkElfScene;
@@ -23,115 +28,192 @@ public class Mountain extends BaseContent
 		
 		public function Mountain()
 		{
+			onGameInit(init);
+		}
+		private var explorationEncounter:GroupEncounter = null;
+		private function init():void {
+			const game:CoC     = kGAMECLASS;
+			const fn:FnHelpers = Encounters.fn;
+			explorationEncounter =
+					Encounters.group(/*game.commonEncounters.withImpGob,*/{
+						//General Golems, Goblin and Imp Encounters
+						name: "common",
+						call: SceneLib.exploration.genericGolGobImpEncounters
+					}, {
+						//Helia monogamy fucks
+						name  : "helcommon",
+						call  : SceneLib.helScene.helSexualAmbush,
+						chance: 0.2,
+						when  : SceneLib.helScene.helSexualAmbushCondition
+					}, {
+						name  : "etna",
+						when  : function():Boolean {
+							return flags[kFLAGS.ETNA_FOLLOWER] < 1
+								   && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2;
+						},
+						call  : SceneLib.etnaScene.repeatYandereEnc
+					}, {
+						name: "salon",
+						when: fn.not(salon.isDiscovered),
+						call: salon.hairDresser
+					},{
+						/* [INTERMOD: Revamp]
+						name: "mimic",
+						when: fn.ifLevelMin(3),
+						call: curry(game.mimicScene.mimicTentacleStart,2)
+					},{
+						*/
+						name: "highmountains",
+						when: function ():Boolean {
+							return !SceneLib.highMountains.isDiscovered()
+								   && (player.level >= 5 || player.exploredMountain >= 40)
+						},
+						call: SceneLib.highMountains.discover
+					},{
+						name: "snowangel",
+						when: function():Boolean {
+							return isHolidays()
+								   && player.gender > 0
+								   && flags[kFLAGS.GATS_ANGEL_DISABLED] == 0
+								   && flags[kFLAGS.GATS_ANGEL_GOOD_ENDED] == 0
+								   && (flags[kFLAGS.GATS_ANGEL_QUEST_BEGAN] > 0
+								   && player.hasKeyItem("North Star Key") < 0)
+						},
+						call: Holidays.gatsSpectacularRouter
+					},{
+						name:"jackfrost",
+						when: function ():Boolean {
+							return isHolidays() && flags[kFLAGS.JACK_FROST_YEAR] < date.fullYear && silly();
+						},
+						call: Holidays.meetJackFrostInTheMountains
+					},{
+						name:"hellhound",
+						call:hellHoundScene.hellhoundEncounter,
+						mods:[SceneLib.exploration.furriteMod]
+					},{
+						name:"infhhound",
+						when: function():Boolean {
+							return player.hasStatusEffect(StatusEffects.WormsOn);
+						},
+						chance:function ():Number {
+							return player.hasStatusEffect(StatusEffects.WormsHalf) ? 0.25 : 0.5;
+						},
+						call:infestedHellhoundScene.infestedHellhoundEncounter,
+						mods:[SceneLib.exploration.furriteMod]
+					},{
+						name:"worms1",
+						when: function():Boolean {
+							return !player.hasStatusEffect(StatusEffects.WormsOn)
+								   && !player.hasStatusEffect(StatusEffects.WormsOff);
+						},
+						call: wormsScene.wormToggle
+					},{
+						name:"worms2",
+						chance: function ():Number {
+							return player.hasStatusEffect(StatusEffects.WormsHalf) ? 0.5 : 1;
+						},
+						when: function ():Boolean {
+							return player.hasStatusEffect(StatusEffects.WormsOn)
+								   && (!player.hasStatusEffect(StatusEffects.Infested) ||
+									   !player.hasStatusEffect(StatusEffects.MetWorms))
+						},
+						call: wormsScene.wormEncounter
+					},{
+						name:"minotaur",
+						chance:minotaurChance,
+						call:minotaurRouter,
+						mods:[SceneLib.exploration.furriteMod]
+					},{
+						name:"factory",
+						when:function():Boolean {
+							return flags[kFLAGS.MARAE_QUEST_START] >= 1 && flags[kFLAGS.FACTORY_FOUND] <= 0;
+						},
+						call: SceneLib.dungeons.enterFactory
+					},{
+						name:"ceraph",
+						chance:0.3,
+						when:function ():Boolean {
+							return !SceneLib.ceraphFollowerScene.ceraphIsFollower()
+									/* [INTERMOD:8chan]
+									&& flags[kFLAGS.CERAPH_KILLED] == 0
+									 */
+									/*&& game.fetishManager.compare(FetishManager.FETISH_EXHIBITION)*/;
+						},
+						call:ceraphFn,
+						mods:[fn.ifLevelMin(2)]
+					},{
+						name:"hhound_master",
+						chance:2,
+						when:function():Boolean {
+							//Requires canine face, [either two dog dicks, or a vag and pregnant with a hellhound], at least two other hellhound features (black fur, dog legs, dog tail), and corruption >=60.
+							var check1:Boolean = player.faceType == AppearanceDefs.FACE_DOG && player.cor >= 60;
+							var check2:Boolean = player.dogCocks() >= 2
+												 || (player.hasVagina() && player.pregnancyType == PregnancyStore.PREGNANCY_HELL_HOUND);
+							var check3:int = (player.tail.type == AppearanceDefs.TAIL_TYPE_DOG ? 1 : 0) +
+											 (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_DOG ? 1 : 0) +
+											 (player.hairColor == "midnight black" ? 1 : 0);
+							var check4a:Boolean = flags[kFLAGS.HELLHOUND_MASTER_PROGRESS] == 0;
+							var check4b:Boolean = flags[kFLAGS.HELLHOUND_MASTER_PROGRESS] == 1
+												  && player.hasKeyItem("Marae's Lethicite") >= 0
+												  && player.keyItemv2("Marae's Lethicite") < 3;
+							return flags[kFLAGS.HELLHOUND_MASTER_PROGRESS] < 3
+								   && check1 && check2 && check3 && (check4a || check4b);
+						},
+						call:hellHoundScene.HellHoundMasterEncounter
+					}, {
+						name: "electra",
+						when: function ():Boolean {
+							return flags[kFLAGS.ELECTRA_FOLLOWER] < 1 && player.level >= 15;
+						},
+						call: function ():void {
+							if (flags[kFLAGS.ELECTRA_AFFECTION] < 2) SceneLib.electraScene.firstEnc();
+							else SceneLib.electraScene.repeatMountainEnc();
+						}
+					}, {
+						name: "diva",
+						when: function():Boolean {
+							return flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && DivaScene.getInstance().status >= 0;
+						},
+						call: DivaScene.encounter
+					},{
+						name:"darkelf",
+						call:darkelfScene.introDarkELfScout
+					},{
+						name:"hike",
+						chance:0.2,
+						call:hike
+					})
+			;
 		}
 		//Explore Mountain
-		//fixme @Oxdeception convert to encounters API
-		public function exploreMountain():void
-		{
+		public function exploreMountain():void {
 			player.exploredMountain++;
-			var chooser:Number = rand(5);
-			//Helia monogamy fucks
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel()) {
-				SceneLib.helScene.helSexualAmbush();
-				return;
-			}
-			//Etna
-			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && rand(5) == 0) {
-				SceneLib.etnaScene.repeatYandereEnc();
-				return;
-			}
-			//Electra
-			if (flags[kFLAGS.ELECTRA_FOLLOWER] < 1 && player.level >= 15 && rand(5) == 0) {
-				if (flags[kFLAGS.ELECTRA_AFFECTION] < 2) SceneLib.electraScene.firstEnc();
-				else SceneLib.electraScene.repeatMountainEnc();
-				return;
-			}
-			//Diva
-			if(flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && DivaScene.getInstance().status >= 0 && rand(5) == 0){
-				DivaScene.getInstance().encounter();
-				return;
-			}
-			//Discover 'high mountain' at level 5 or 40 explores of mountain
-			if ((player.level >= 5 || player.exploredMountain >= 40) && flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] == 0) {
-				clearOutput();
-				outputText("While exploring the mountain, you come across a relatively safe way to get at its higher reaches.  You judge that with this route you'll be able to get about two thirds of the way up the mountain.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>High Mountain exploration location unlocked!</b>)");
-				flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN]++;
-				doNext(camp.returnToCampUseOneHour);
-				return;
-			}
-			if (isHolidays()) {
-				//Gats xmas adventure!
-				if (rand(5) == 0 && player.gender > 0 && isHolidays() && flags[kFLAGS.GATS_ANGEL_DISABLED] == 0 && flags[kFLAGS.GATS_ANGEL_GOOD_ENDED] == 0 && (flags[kFLAGS.GATS_ANGEL_QUEST_BEGAN] > 0 && player.hasKeyItem("North Star Key") < 0)) {
-					Holidays.gatsSpectacularRouter();
-					return;
-				}
-				if (rand(6) == 0 && flags[kFLAGS.JACK_FROST_YEAR] < date.fullYear && silly()) {
-					Holidays.meetJackFrostInTheMountains();
-					return;
-				}
-			}
-			//8% chance of hellhoundsplosions if appropriate
-			if (rand(100) <= 77) {
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00141] < 3) {
-					trace("CHANCE AT HELLHOUND GAO");
-					//Requires canine face, [either two dog dicks, or a vag and pregnant with a hellhound], at least two other hellhound features (black fur, dog legs, dog tail), and corruption >=60.
-					if (player.faceType == AppearanceDefs.FACE_DOG && (player.dogCocks() >= 2 || (player.hasVagina() && player.pregnancyType == PregnancyStore.PREGNANCY_HELL_HOUND)) && player.cor >= 60 && player.tailType == AppearanceDefs.TAIL_TYPE_DOG && (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_DOG || player.hairColor == "midnight black")) {
-						trace("PASS BODYCHECK");
-						if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00141] == 0) {
-							hellHoundScene.HellHoundMasterEncounter();
-							return;
-						}
-						//Level 2 requires lethecite
-						else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00141] == 1 && player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemv2("Marae's Lethicite") < 3) {
-							hellHoundScene.HellHoundMasterEncounter();
-							return;
-						}
-					}
-				}
-			}
+			explorationEncounter.execEncounter();
+		}
+		public function ceraphFn():void {
 			//Rarer 'nice' Ceraph encounter
 			//Overlaps half the old encounters once pierced.
-			if (!SceneLib.ceraphFollowerScene.ceraphIsFollower() && player.level > 2 && (player.exploredMountain % 30 == 0) && flags[kFLAGS.PC_FETISH] > 0) {
-				SceneLib.ceraphScene.friendlyNeighborhoodSpiderManCeraph();
-				return;
-			}
-			//15% chance of Ceraph
-			if (!SceneLib.ceraphFollowerScene.ceraphIsFollower() && player.level > 2 && (player.exploredMountain % 15 == 0) && flags[kFLAGS.PC_FETISH] != 1) {
-				SceneLib.ceraphScene.encounterCeraph();
-				return;
-			}
-			//10% chance of hairdresser encounter if not found yet
-			if (rand(10) == 0 && !player.hasStatusEffect(StatusEffects.HairdresserMeeting)) chooser = 5;
-			if ((rand(8) == 0 && flags[kFLAGS.MARAE_QUEST_START] >= 1) && flags[kFLAGS.FACTORY_FOUND] <= 0) {
-				trace("Dungeon start!");
-				SceneLib.dungeons.enterFactory();
-				return;
-			}
-			//Boosts mino and hellhound rates!
-			if (player.findPerk(PerkLib.PiercedFurrite) >= 0 && rand(3) == 0) {
-				if (rand(2) == 0) chooser = 1;
-				else chooser = 3;
-			}
-			//10% chance to mino encounter rate if addicted
-			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0 && rand(10) == 0) {
-				chooser = 1;
-			}
-			//10% MORE chance for minos if uber-addicted
-			if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0 && rand(10) == 0) {
-				chooser = 1;
-			}
+			if (rand(3) == 0
+				/* [INTERMOD:8chan]
+				&& kGAMECLASS.fetishManager.compare(FetishManager.FETISH_EXHIBITION)
+				else */
+				&& flags[kFLAGS.PC_FETISH] > 0 /**/
+			) SceneLib.ceraphScene.friendlyNeighborhoodSpiderManCeraph();
+			else SceneLib.ceraphScene.encounterCeraph();
+		}
+
+		public function minotaurChance():Number {
+			if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0) return 3;
+			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0) return 2;
+			return 1;
+		}
+		public function minotaurRouter():void {
 			//Every 15 explorations chance at mino bad-end!
-			if (player.exploredMountain % 16 == 0 && player.findPerk(PerkLib.MinotaurCumAddict) >= 0 && rand(3) == 0) {
+			if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0 && rand(16) == 0) {
 				spriteSelect(44);
 				minotaurScene.minoAddictionBadEndEncounter();
 				return;
-			}
-			if (chooser == 0) {
-				//Generic Goblin/Imp encounter
-				SceneLib.exploration.genericGolGobImpEncounters();
-			}
-			//Minotauuuuur
-			if (chooser == 1) {
+			} else {
 				spriteSelect(44);
 				if (!player.hasStatusEffect(StatusEffects.TF2) && player.level <= 1 && player.str <= 40) {
 					if (silly()) {
@@ -211,7 +293,7 @@ public class Mountain extends BaseContent
 				}
 				//Cum addictus interruptus!  LOL HARRY POTTERFAG
 				//Withdrawl auto-fuck!
-				if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3 && rand(2) == 0 && player.inte/10 + rand(20) < 15) {
+				if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3 && rand(2) == 0 && player.inte / 10 + rand(20) < 15) {
 					minotaurScene.minoAddictionFuck();
 					return;
 				}
@@ -225,74 +307,18 @@ public class Mountain extends BaseContent
 				minotaurScene.getRapedByMinotaur(true);
 				spriteSelect(44);
 			}
-			//Worms
-			if (chooser == 2) {
-				//If worms are on and not infested.
-				if (player.hasStatusEffect(StatusEffects.WormsOn) && !player.hasStatusEffect(StatusEffects.Infested)) {
-					if (player.hasStatusEffect(StatusEffects.WormsHalf) && rand(2) == 0) {
-						clearOutput();
-						if (player.cor < 90) {
-							outputText("Your hike in the mountains, while fruitless, reveals pleasant vistas and provides you with good exercise and relaxation.");
-							dynStats("tou", .25, "spe", .5, "lus", player.lib / 10 - 15);
-						}
-						else {
-							outputText("During your hike into the mountains, your depraved mind keeps replaying your most obcenely warped sexual encounters, always imagining new perverse ways of causing pleasure.\n\nIt is a miracle no predator picked up on the strong sexual scent you are emitting.");
-							dynStats("tou", .25, "spe", .5, "lib", .25, "lus", player.lib / 10);
-						}
-						doNext(camp.returnToCampUseOneHour);
-						return;
-					}
-					wormsScene.wormEncounter();
-				}
-				else {
-					//If worms are off or the PC is infested, no worms.
-					if (player.hasStatusEffect(StatusEffects.WormsOff) || player.hasStatusEffect(StatusEffects.Infested) || (rand(2) == 0 && player.hasStatusEffect(StatusEffects.WormsHalf))) {
-						if (player.hasStatusEffect(StatusEffects.WormsOff) && !player.hasStatusEffect(StatusEffects.MetWorms)) {
-							wormsScene.wormEncounter(); //You can only encounter the worms once.
-							return;
-						}
-						clearOutput();
-						if (player.cor < 90) {
-							outputText("Your hike in the mountains, while fruitless, reveals pleasant vistas and provides you with good exercise and relaxation.");
-							dynStats("tou", .25, "spe", .5, "lus", player.lib / 10 - 15);
-						}
-						else {
-							outputText("During your hike into the mountains, your depraved mind keeps replaying your most obcenely warped sexual encounters, always imagining new perverse ways of causing pleasure.\n\nIt is a miracle no predator picked up on the strong sexual scent you are emitting.");
-							dynStats("tou", .25, "spe", .5, "lib", .25, "lus", player.lib / 10);
-						}
-						doNext(camp.returnToCampUseOneHour);
-					}
-					else {
-						wormsScene.wormToggle();
-					}
-				}
+		}
+		private function hike():void {
+			clearOutput();
+			if (player.cor < 90) {
+				outputText("Your hike in the mountains, while fruitless, reveals pleasant vistas and provides you with good exercise and relaxation.");
+				dynStats("tou", .25, "spe", .5, "lus", player.lib / 10 - 15);
 			}
-			//Hellhound
-			if (chooser == 3) {
-				spriteSelect(27);
-				if (player.hasStatusEffect(StatusEffects.WormsOn) && rand(2) == 0) {
-					//If lowered encounter rate, 25% chance, otherwise 50%.
-					if (player.hasStatusEffect(StatusEffects.WormsHalf) && rand(2) == 0) {
-						hellHoundScene.hellhoundEncounter();
-						return;
-					}
-					infestedHellhoundScene.infestedHellhoundEncounter();
-					return;
-				}
-				hellHoundScene.hellhoundEncounter();
+			else {
+				outputText("During your hike into the mountains, your depraved mind keeps replaying your most obcenely warped sexual encounters, always imagining new perverse ways of causing pleasure.\n\nIt is a miracle no predator picked up on the strong sexual scent you are emitting.");
+				dynStats("tou", .25, "spe", .5, "lib", .25, "lus", player.lib / 10);
 			}
-			//Dark Elf Scout
-			if (chooser == 4) {
-				if (rand(2) == 0) {
-					darkelfScene.introDarkELfScout();
-					return;
-				}
-				hellHoundScene.hellhoundEncounter();
-			}
-			//Hairdresser
-			if (chooser == 5) {
-				salon.hairDresser();
-			}
+			doNext(camp.returnToCampUseOneHour);
 		}
 		private function joinBeingAMinoCumSlut():void
 		{

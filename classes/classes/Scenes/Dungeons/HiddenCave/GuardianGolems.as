@@ -19,7 +19,7 @@ public class GuardianGolems extends Monster
 			else
 			{
 				outputText(" They hits you square in the chest from a few different angles. ");
-				damage = player.takeDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
 			}
 		}
 		

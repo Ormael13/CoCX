@@ -15,7 +15,7 @@ public class OutputStmt extends Statement{
 	}
 
 	override public function execute(context:ExecContext):void {
-		var value:* = content.vcall(context.scopes);
+		var value:String = ""+content.vcall(context.scopes);
 		context.debug(this,'value = "'+Eval.escapeString(value)+'"');
 		EngineCore.outputText(""+ value);
 	}

@@ -22,7 +22,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			else
 			{
 				outputText(" They hits you square in the chest from a few different angles. ");
-				damage = player.takeDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
 			}
 		}
 		
@@ -37,7 +37,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			else
 			{
 				outputText(" The concussive strikes impacts you with a bonecrushing force. ");
-				damage = player.takeDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
 			}
 		}
 		

@@ -14,7 +14,7 @@ public class Kraken extends Monster
 			outputText("The " + this.short + "’s tentacles grab you all at once and start to squeeze you!");
 			player.createStatusEffect(StatusEffects.ScyllaBind,0,0,0,0); 
 			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
-				player.takeDamage(4+rand(6));
+				player.takePhysDamage(4+rand(6));
 			}
 		}
 		
@@ -29,12 +29,12 @@ public class Kraken extends Monster
 			var damage:Number = 0;
 			damage += eBaseStrengthDamage() * 2;
 			outputText("The kraken slaps you with her tentacles, dealing ");
-			player.takeDamage(damage, true);
-			player.takeDamage(damage, true);
-			player.takeDamage(damage, true);
-			player.takeDamage(damage, true);
-			player.takeDamage(damage, true);
-			player.takeDamage(damage, true);
+			player.takePhysDamage(damage, true);
+			player.takePhysDamage(damage, true);
+			player.takePhysDamage(damage, true);
+			player.takePhysDamage(damage, true);
+			player.takePhysDamage(damage, true);
+			player.takePhysDamage(damage, true);
 			outputText(" damage!");
 		}
 		public function krakenTentacleSlap2():void {
@@ -42,8 +42,8 @@ public class Kraken extends Monster
 			var damage:Number = 0;
 			damage += eBaseStrengthDamage() * 2;
 			outputText("The kraken slaps you with her tentacles, dealing ");
-			player.takeDamage(damage, true);
-			player.takeDamage(damage, true);
+			player.takePhysDamage(damage, true);
+			player.takePhysDamage(damage, true);
 			outputText(" damage!");
 		}
 		

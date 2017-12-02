@@ -90,7 +90,7 @@ public class Alraune extends Monster
 				var lustDmg:int = rand(player.lib / 25) + rand(this.lib / 15) + 5;
 				lustDmg = Math.round(lustDmg);
 				outputText("You are hit by a pumpkin for " + damage + " damage! " + lustDmg + " lust damage!");
-				damage = player.takeDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
 				player.dynStats("lus", lustDmg);
 				outputText("\n");
 			}

@@ -40,7 +40,7 @@ public class Valkyrie extends Monster
 					damage = player.reduceDamage(damage);
 					attacks--
 				}
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 		}
 		
@@ -78,7 +78,7 @@ public class Valkyrie extends Monster
 				else outputText("backwards. ");
 				var damage:int = ((str + 50) + rand(50));
 				damage = player.reduceDamage(damage);
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 		}
 		
@@ -110,7 +110,7 @@ public class Valkyrie extends Monster
 				outputText("Before you can react, she launches into the air, propelling the two of you upwards with her powerful wings.  You struggle, but it’s no use -- until she lets go.  You cry out in terror as you fall back to the earth, crashing painfully into a convenient snowbank, while your opponent lands gracefully a few feet away. ");
 				var damage:int = ((str + 200) + rand(100));
 				damage = player.reduceDamage(damage);
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 		}
 		

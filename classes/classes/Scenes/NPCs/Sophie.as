@@ -169,7 +169,7 @@ import classes.internals.*;
 			damage = int((str + weaponAttack) - Math.random()*(player.tou) - player.armorDef);
 			if(damage < 0) damage = 0;
 			damage += 40;
-			damage = player.takeDamage(damage);
+			damage = player.takePhysDamage(damage);
 			outputText("(" + damage + ")\n");
 			
 		}
@@ -183,22 +183,22 @@ import classes.internals.*;
 			//Determine damage - str modified by enemy toughness!
 			damage = int((str) - Math.random()*(player.tou) - player.armorDef);
 			if(damage < 0) damage = 0;
-			damage = player.takeDamage(damage);
+			damage = player.takePhysDamage(damage);
 			outputText("Her left primary wing batters your head! (" + damage + ")\n");
 			//Determine damage - str modified by enemy toughness!
 			damage = int((str) - Math.random()*(player.tou) - player.armorDef);
 			if(damage < 0) damage = 0;
-			damage = player.takeDamage(damage);
+			damage = player.takePhysDamage(damage);
 			outputText("Her right, wing-like arm slaps at your torso! (" + damage + ")\n");
 			//Determine damage - str modified by enemy toughness!
 			damage = int((str) - Math.random()*(player.tou) - player.armorDef);
 			if(damage < 0) damage = 0;
-			damage = player.takeDamage(damage);
+			damage = player.takePhysDamage(damage);
 			outputText("Her other feathery arm punches at your shoulder! (" + damage + ")\n");
 			//Determine damage - str modified by enemy toughness!
 			damage = int((str) - Math.random()*(player.tou) - player.armorDef);
 			if(damage < 0) damage = 0;
-			damage = player.takeDamage(damage);
+			damage = player.takePhysDamage(damage);
 			outputText("Her right wing slams into the other side of your head! (" + damage + ")\n");
 		}
 

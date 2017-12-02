@@ -4,10 +4,10 @@
 package coc.xxc {
 import classes.Appearance;
 import classes.BodyParts.Skin;
-import classes.CoC;
 import classes.CockTypesEnum;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
+import classes.Scenes.SceneLib;
 
 import coc.xlogic.ExecContext;
 
@@ -23,6 +23,7 @@ public class StoryContext extends ExecContext{
 				kFLAGS:kFLAGS,
 				kGAMECLASS:CoC.instance,
 				Math:Math,
+				SceneLib:SceneLib,
 				Skin:Skin
 			}
 		]);

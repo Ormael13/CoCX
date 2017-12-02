@@ -20,7 +20,7 @@ package classes.Scenes.Monsters
 			else
 			{
 				outputText(" It hits you square in the chest. ");
-				damage = player.takeDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
 			}
 		}
 		
@@ -32,7 +32,7 @@ package classes.Scenes.Monsters
 			else
 			{
 				outputText(" The concussive strike impacts you with bonecrushing force. ");
-				damage = player.takeDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
 			}
 		}
 		

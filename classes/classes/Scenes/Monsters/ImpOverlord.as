@@ -122,7 +122,7 @@ public class ImpOverlord extends Imp
 		{
 			outputText("Reaching into his satchel the devilish creature pulls out a leather riding crop.  He quickly rushes forward, but somehow manages to get behind you.  Before you can react the imp lashes out, striking your [butt] twice with the riding crop.  The strikes leave a slight burning feeling, as well as a strange sense of arousal. ");
 			var damage:int = 12 + rand(25);
-			player.takeDamage(damage, true);
+			player.takePhysDamage(damage, true);
 			//[-HP(minor) // +Lust]
 			player.dynStats("lus", 25 + player.sens / 4 + player.cor / 10);
 		}
@@ -159,7 +159,7 @@ public class ImpOverlord extends Imp
 				var damage:int = rand(50) + str + weaponAttack;
 				damage = player.reduceDamage(damage);
 				if (damage < 20) damage = 20;
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 		}
 
@@ -181,7 +181,7 @@ public class ImpOverlord extends Imp
 				else {
 					outputText("Thankfully the wounds aren't that serious. ");
 				}
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 		}
 		

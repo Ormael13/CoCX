@@ -28,7 +28,7 @@ public class Syth extends Monster
 			damage += eBaseStrengthDamage();
 			damage *= 2;
 			outputText(capitalA + short + " lift it weapon with all his strenght and smash it on your head. ");
-			if(damage > 0) damage = player.takeDamage(damage, true);
+			if(damage > 0) damage = player.takePhysDamage(damage, true);
 			statScreenRefresh();
 			outputText("\n");
 		}

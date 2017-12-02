@@ -548,7 +548,7 @@ private function bodyRitual():void {
 	
 	outputText("\n\nOver your ragged, pained breathing, you can just hear " + flags[kFLAGS.GAR_NAME] + " chanting: \"<i>With pain comes purity... CRACK!  With agony comes enlightenment... CRACK!  Through torment comes holiness... CRACK!</i>\"  The last crack of the whip leaves you groaning, breathless, sagging in your bonds. Somehow, though, you do feel... cleaner?  Like a weight was just lifted from your heart.  And you know you're going to be thicker-skinned after that!  Quietly, reservedly, " + flags[kFLAGS.GAR_NAME] + " releases you from your bonds, and you stagger into her waiting arms.  She helps you over to the altar and lays you down, letting you rest after your ordeal.  She stands over you, watching you pant and gasp.  You suppose you could get some vengeance for her brutality – or you could be kind.  What do you do?");
 	dynStats("lib", -.5, "sen", -2);
-	player.takeDamage(Math.round(player.maxHP()/2));
+	player.takePhysDamage(Math.round(player.maxHP()/2));
 	//(Display options: [Nothing] [Revenge] and [Cuddle])
 	menu();
 	addButton(0,"Nothing",noReactionToBodyRitual);
@@ -594,7 +594,7 @@ private function mindGargoyleRitual():void {
 	
 	outputText("\n\nYou do so, taking a long draught of the holy water.  By the time you've set the bowl down, you feel light-headed, as if a fog has receded from your mind.  You gasp happily, able to think more clearly than you have in days.  You thank " + flags[kFLAGS.GAR_NAME] + ", give her a pat on the head, and head back to camp with a skip in your step.");
 	dynStats("lus", -10, "cor", -.5);
-	//player.takeDamage(Math.round(player.maxHP()/2));
+	//player.takePhysDamage(Math.round(player.maxHP()/2));
 	fatigue(50);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -636,7 +636,7 @@ private function banishmentGargoyleRitual():void {
 	outputText("\n\nStill panting and gasping from your ordeal, you notice " + flags[kFLAGS.GAR_NAME] + " looming over you, smiling.  You could be a dick for all that pain she caused you, or thank her for helping you.");
 	if(player.hasStatusEffect(StatusEffects.Exgartuan)) player.removeStatusEffect(StatusEffects.Exgartuan);
 	else player.removeStatusEffect(StatusEffects.Infested);
-	player.takeDamage(Math.round(player.maxHP()/3));
+	player.takePhysDamage(Math.round(player.maxHP()/3));
 	fatigue(10);
 	//(Display options: [Nothing] [Revenge] and [Cuddle])
 	addButton(0,"Nothing",dontFreakOutAfterBanishment);
@@ -724,7 +724,7 @@ private function kinkyBodyRitual():void {
 	outputText("\n\nYou spend a few minutes cuddling with " + flags[kFLAGS.GAR_NAME] + ", but sadly, you know you can't leave your camp unattended for too long.  Giving her a pat on the head and a kiss on the brow, you gather up your clothes and head on back to camp.");
 	dynStats("tou", .5, "lib", -.5, "sen", -2);
 	gargoyleConfidence(2);
-	player.takeDamage(Math.round(player.maxHP()/2));
+	player.takePhysDamage(Math.round(player.maxHP()/2));
 	doNext(camp.returnToCampUseOneHour);
 }
 	
@@ -800,7 +800,7 @@ private function banishPervRitual():void {
 	//(Return PC to camp, advance time 1 hour)
 	if(player.hasStatusEffect(StatusEffects.Exgartuan)) player.removeStatusEffect(StatusEffects.Exgartuan);
 	else player.removeStatusEffect(StatusEffects.Infested);
-	player.takeDamage(Math.round(player.maxHP()/3));
+	player.takePhysDamage(Math.round(player.maxHP()/3));
 	fatigue(10);
 	gargoyleConfidence(2);
 	doNext(camp.returnToCampUseOneHour);

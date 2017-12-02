@@ -70,8 +70,10 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
 		if (player.hasPerk(PerkLib.WizardsAndDaoistsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
 		if (player.hasPerk(PerkLib.WizardsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
-		if (player.jewelryName == "fox hairpin") costPercent -= 20;
-		if (player.weaponName == "Ascensus") costPercent -= 15;
+		if (player.jewelry == jewelries.FOXHAIR) costPercent -= 20;
+		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
+		if (player.weapon == weapons.N_STAFF) costPercent += 200;
+		if (spellModImpl() > 1) costPercent += Math.round(spellModImpl() - 1);
 		//Limiting it and multiplicative mods
 		if(player.hasPerk(PerkLib.BloodMage) && costPercent < 50) costPercent = 50;
 		mod *= costPercent/100;
@@ -92,8 +94,10 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
 		if (player.hasPerk(PerkLib.WizardsAndDaoistsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
 		if (player.hasPerk(PerkLib.WizardsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
-		if (player.jewelryName == "fox hairpin") costPercent -= 20;
-		if (player.weaponName == "Puritas" || player.weaponName == "Ascensus") costPercent -= 15;
+		if (player.jewelry == jewelries.FOXHAIR) costPercent -= 20;
+		if (player.weapon == weapons.PURITAS || player.weapon == weapons.ASCENSU) costPercent -= 15;
+		if (player.weapon == weapons.N_STAFF) costPercent += 200;
+		if (spellModWhiteImpl() > 1) costPercent += Math.round(spellModWhiteImpl() - 1);
 		//Limiting it and multiplicative mods
 		if(player.hasPerk(PerkLib.BloodMage) && costPercent < 50) costPercent = 50;
 		mod *= costPercent/100;
@@ -114,8 +118,10 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
 		if (player.hasPerk(PerkLib.WizardsAndDaoistsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
 		if (player.hasPerk(PerkLib.WizardsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
-		if (player.jewelryName == "fox hairpin") costPercent -= 20;
-		if (player.weaponName == "Depravatio" || player.weaponName == "Ascensus") costPercent -= 15;
+		if (player.jewelry == jewelries.FOXHAIR) costPercent -= 20;
+		if (player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU) costPercent -= 15;
+		if (player.weapon == weapons.N_STAFF) costPercent += 200;
+		if (spellModBlackImpl() > 1) costPercent += Math.round(spellModBlackImpl() - 1);
 		//Limiting it and multiplicative mods
 		if(player.hasPerk(PerkLib.BloodMage) && costPercent < 50) costPercent = 50;
 		mod *= costPercent/100;
@@ -164,8 +170,10 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
-		if (player.shieldName == "spirit focus") mod += .2;
-		if (player.shieldName == "mana bracer") mod += .5;
+		if (player.shield == shields.SPI_FOC) mod += .2;
+		if (player.shield == shields.MABRACE) mod += .5;
+		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
+		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
 		if (player.weapon == weapons.ASCENSU) mod += .15;
 		if (player.hasStatusEffect(StatusEffects.Maleficium)) mod += 1;
 		return mod;
@@ -206,8 +214,10 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
-		if (player.shieldName == "spirit focus") mod += .2;
-		if (player.shieldName == "mana bracer") mod += .5;
+		if (player.shield == shields.SPI_FOC) mod += .2;
+		if (player.shield == shields.MABRACE) mod += .5;
+		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
+		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
 		if (player.weapon == weapons.PURITAS || player.weapon == weapons.ASCENSU) mod += .15;
 		if (player.hasStatusEffect(StatusEffects.Maleficium)) mod += 1;
 		return mod;
@@ -245,8 +255,10 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
-		if (player.shieldName == "spirit focus") mod += .2;
-		if (player.shieldName == "mana bracer") mod += .5;
+		if (player.shield == shields.SPI_FOC) mod += .2;
+		if (player.shield == shields.MABRACE) mod += .5;
+		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
+		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
 		if (player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU) mod += .15;
 		if (player.hasStatusEffect(StatusEffects.Maleficium)) mod += 1;
 		return mod;
@@ -554,7 +566,7 @@ public class CombatMagic extends BaseCombatContent {
 							  "\n\nMana Cost: " + spellCostBlack(30) + "");
 			if (badLustForBlack) {
 				bd.disable("You aren't turned on enough to use any black magics.");
-			} else if(/*!player.hasPerk(PerkLib.BloodMage) && */player.mana < spellCostWhite(30)) {
+			} else if(player.mana < spellCostBlack(30)) {
 				bd.disable("Your mana is too low to cast this spell.");
 			}
 		}
@@ -784,6 +796,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.unicornScore() >= 5) temp *= ((player.unicornScore() - 4) * 0.5);
 		if (player.alicornScore() >= 6) temp *= ((player.alicornScore() - 5) * 0.5);
 		if (player.armorName == "skimpy nurse's outfit") temp *= 1.2;
+		if (player.weaponName == "unicorn staff") temp *= 1.5;
 		//Determine if critical heal!
 		var crit:Boolean = false;
 		var critHeal:int = 5;

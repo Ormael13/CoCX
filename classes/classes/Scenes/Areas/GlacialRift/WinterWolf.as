@@ -85,13 +85,13 @@ public class WinterWolf extends Monster
 			outputText("The wolf suddenly grab you crushing you under its paw as it start tearing you apart with its maw.");
 			player.createStatusEffect(StatusEffects.WolfHold,0,0,0,0); 
 			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
-				player.takeDamage(8+rand(10));
+				player.takePhysDamage(8+rand(10));
 			}
 		}
 		
 		public function paw():void {
 			outputText("The wolf smash you with its enormous paw you rail at the impact as it sends you flying across the field.");
-			player.takeDamage(str);
+			player.takePhysDamage(str);
 			player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 			createStatusEffect(StatusEffects.AbilityCooldown1, 3, 0, 0, 0);
 			if (player.hasStatusEffect(StatusEffects.WolfHold)) player.removeStatusEffect(StatusEffects.WolfHold);

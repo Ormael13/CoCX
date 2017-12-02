@@ -1576,7 +1576,7 @@ use namespace CoC;
 			else if(player.hasCock() && flags[kFLAGS.SFW_MODE] <= 0) loseToImpLord();
 			else {
 				outputText("Taking a look at your defeated form, the " + monster.short + " snarls, \"<i>Useless,</i>\" before kicking you in the head, knocking you out cold.");
-				player.takeDamage(9999);
+				player.takePhysDamage(9999);
 				cleanupAfterCombat();
 			}
 		}
@@ -2010,7 +2010,7 @@ use namespace CoC;
 			else if(player.hasCock() && flags[kFLAGS.SFW_MODE] <= 0) loseToImpOverlord();
 			else {
 				outputText("Taking a look at your defeated form, the " + monster.short + " snarls, \"<i>Useless,</i>\" before kicking you in the head, knocking you out cold.");
-				player.takeDamage(9999);
+				player.takePhysDamage(9999);
 				cleanupAfterCombat();
 			}
 		}

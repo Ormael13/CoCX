@@ -48,7 +48,7 @@ public class Naga extends Monster
 			outputText("The " + this.short + " draws close and suddenly wraps herself around you, binding you in place! You can't help but feel strangely aroused by the sensation of her scales rubbing against your body. All you can do is struggle as she begins to squeeze tighter!");
 			player.createStatusEffect(StatusEffects.NagaBind,0,0,0,0); 
 			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
-				player.takeDamage(2+rand(4));
+				player.takePhysDamage(2+rand(4));
 			}
 		}
 		
@@ -71,7 +71,7 @@ public class Naga extends Monster
 				var damage:Number = str;
 				if(player.armorDef < 20) damage += 20 - player.armorDef;
 				damage += rand(10);
-				damage = player.takeDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
 			}
 		}
 		

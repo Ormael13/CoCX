@@ -202,13 +202,13 @@ use namespace CoC;
 						chance: bigJunkChance
 					},{
 						name: "celess-unicorn",
-						call: celessUnicornIntro,
+						call: CelessScene.celessUnicornIntro,
 						when: function():Boolean{
-							return (player.hasVirginVagina() || ((player.isMale()||player.isGenderless()) && player.ass.analLooseness == 0)) && (player.level > 20) && !player.isPregnant() && !CelessScene.getInstance().armorFound;
+							return (player.hasVirginVagina() || ((player.isMale()||player.isGenderless()) && player.ass.analLooseness == 0)) && (player.level > 20) && !player.isPregnant() && !CelessScene.getInstance().armorFound && ! CelessScene.getInstance().isCompanion();
 						}
 					}, {
 						name: "celess-armor",
-						call: celessArmor,
+						call: CelessScene.celessArmor,
 						when: function():Boolean{
 							return CelessScene.getInstance().isCompanion() && !CelessScene.getInstance().armorFound;
 						}
@@ -355,53 +355,10 @@ use namespace CoC;
 		public function exploreDeepwoods():void {
 			deepwoodsStory.execute();
 		}
-		public function celessUnicornIntro(stage:int = 0, wasMale:Boolean = false ):void{
-			clearOutput();
-			doNext(camp.returnToCampUseOneHour);
-			switch(stage){
-				case 0:
-					forestStory.display("strings/celess-unicorn/intro");
-					addButton(0, "Okay", celessUnicornIntro, (player.isMale() || player.isGenderless())?2:3);
-					if(player.hasCock()){addButton(1, "Fuck Her", celessUnicornIntro, 4);}
-					addButton(5, "NoWay", celessUnicornIntro, 1);
-					break;
-				case 1:
-					forestStory.display("strings/celess-unicorn/noway");
-					doNext(camp.returnToCampUseOneHour);
-					break;
-				case 2:
-					if (player.bRows() == 0){
-						player.createBreastRow();
-					}
-					player.growTits(3, 1, false, 1);
-					forestStory.display("strings/celess-unicorn/okay-male");
-					while (player.hasCock()){
-						player.removeCock(0, 1);
-					}
-					player.createVagina();
-					addButton(0, "Next", celessUnicornIntro, 3,true);
-					break;
-				case 3:
-					forestStory.display("strings/celess-unicorn/okay-female", {$wasMale:wasMale, $isTaur:player.isTaur()});
-					player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);
-					inventory.takeItem(shields.SANCTYN, camp.returnToCampUseOneHour);
-					break;
-				case 4:
-					forestStory.display("strings/celess-unicorn/fuck-her");
-					CelessScene.getInstance().findArmor();
-					inventory.takeItem(shields.SANCTYN, camp.returnToCampUseOneHour);
-					break;
-			}
-			flushOutputTextToGUI();
-		}
-		public function celessArmor():void{
-			forestStory.display("strings/celess-unicorn/armorScene");
-			CelessScene.getInstance().findArmor();
-			inventory.takeItem(armors.CTPALAD, camp.returnToCampUseOneHour);
-		}
+
 		public function tripOnARoot():void {
 			forestStory.display("strings/trip");
-			player.takeDamage(10);
+			player.takePhysDamage(10);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function findTruffle():void {

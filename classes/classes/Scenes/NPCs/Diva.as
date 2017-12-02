@@ -92,12 +92,12 @@ public class Diva extends Monster {
         if (player.isGargoyle()) {
 			display("moves/biteGargoyle");
 			var dam1:int = 10;
-			takeDamage(dam1);
+			takePhysDamage(dam1);
 		}
 		else if (player.isAlraune()) {
 			display("moves/bitePlant");
 			var dam2:int = 10;
-			takeDamage(dam2);
+			takePhysDamage(dam2);
 		}
 		else{*/
 			addHP(maxHP()* .2);
@@ -107,7 +107,7 @@ public class Diva extends Monster {
 			}
 			_biteCounter++;
 			display("moves/bite");
-			player.takeDamage(dam);
+			player.takePhysDamage(dam);
 			player.takeLustDamage(rand(5));
 		//}
     }
@@ -115,7 +115,7 @@ public class Diva extends Monster {
         display("moves/swoopToss");
         var dam:int = 20;
         dam += rand((100 - player.tallness) * .25);
-        player.takeDamage(dam);
+        player.takePhysDamage(dam);
     }
     private function moveDarkness():void{
         display("moves/darkness",{$final:finalFight});

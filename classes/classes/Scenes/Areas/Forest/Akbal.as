@@ -50,7 +50,7 @@ public class Akbal extends Monster
 				}
 				else {
 					outputText("Akbal rushes at you, his claws like lightning as they leave four red-hot lines of pain across your stomach.");
-					player.takeDamage(damage);
+					player.takePhysDamage(damage);
 				}
 			} else { //*Normal Attack B
 				//(high HP damage)
@@ -62,7 +62,7 @@ public class Akbal extends Monster
 				}
 				else {
 					outputText("Akbal snarls as he flies towards you, snapping his ivory teeth on your arm. You scream out in pain as you throw him off.");
-					player.takeDamage(damage);
+					player.takePhysDamage(damage);
 				}
 			}
 		}

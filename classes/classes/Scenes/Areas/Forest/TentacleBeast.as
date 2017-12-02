@@ -22,7 +22,7 @@ public class TentacleBeast extends Monster
 			//Hit
 			else {
 				outputText("The tentacles crash upon your body mercilessly. ");
-				player.takeDamage(temp, true);
+				player.takePhysDamage(temp, true);
 			}
 		}
 		private function tentacleEntwine():void {

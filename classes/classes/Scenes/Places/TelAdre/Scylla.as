@@ -661,7 +661,7 @@ private function scyllaPtVTakeAdvantage():void {
 		outputText("Pastie finally figures out what's going on through her stupor and flies between the three of you, settling atop your " + cockDescript(x) + ", tiny stiletto heels digging into soft flesh like pins. \"<i>Don't fight, you two, this thing's gross,</i>\" she argues. Pouting, she stomps her foot down and the heel punches into your cockhead, drawing a scream from you that only makes Scylla and Abby tug all the harder.\n\n");
 		outputText("\"<i>Abylon, please,</i>\" Scylla starts, but the use of her given name infuriates the goblin girl, and she hurls the broken bottle at the nun, who ducks. It shatters on the wall, sending glass shards flying, several of them cutting your cock and giving you a half-dozen scrapes. The goblin releases your member and dives at the nun, snarling. They roll in a tangled cat fight, leather and cloth shredding under addiction-fueled claws. You swat Pastie from your dick and run out of the room, gingerly tending to your tormented groin.\n\n");
 	}
-	player.takeDamage(1);
+	player.takePhysDamage(1);
 	dynStats("lus", -99);
 	doNext(camp.returnToCampUseOneHour);
 }

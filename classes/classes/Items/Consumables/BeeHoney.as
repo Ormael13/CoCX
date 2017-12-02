@@ -181,14 +181,12 @@ public class BeeHoney extends Consumable
 			//(Arms to carapace-covered arms)
 			if (player.armType != AppearanceDefs.ARM_TYPE_BEE && player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && Utils.rand(4) == 0) {
 				outputText("\n\n");
-				if (player.armType == AppearanceDefs.ARM_TYPE_HARPY || player.armType == AppearanceDefs.ARM_TYPE_HUMAN) {
+				if (player.armType == AppearanceDefs.ARM_TYPE_SPIDER) outputText("On your upper arms slowly starting to grown yellow fuzz making them looks more like those of bee.");
+				else if (player.armType == AppearanceDefs.ARM_TYPE_MANTIS) outputText("The long scythe extending from your wrist crumbling, while chitin covering your mantis arms slowly starting to change colors, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>. Additionaly on your upper arms appear yellow fuzz.");
+				else {
 					//(Bird pretext)
 					if (player.armType == AppearanceDefs.ARM_TYPE_HARPY) outputText("The feathers covering your arms fall away, leaving them to return to a far more human appearance.  ");
 					outputText("You watch, spellbound, while your forearms gradually become shiny.  The entire outer structure of your arms tingles while it divides into segments, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>.  A moment later the pain fades and you are able to turn your gaze down to your beautiful new arms, covered in shining black chitin from the upper arm down, and downy yellow fuzz along your upper arm.");
-				}
-				else {
-					if (player.armType == AppearanceDefs.ARM_TYPE_SPIDER) outputText("On your upper arms slowly starting to grown yellow fuzz making them looks more like those of bee.");
-					if (player.armType == AppearanceDefs.ARM_TYPE_MANTIS) outputText("The long scythe extending from your wrist crumbling, while chitin covering your mantis arms slowly starting to change colors, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>. Additionaly on your upper arms appear yellow fuzz.");
 				}
 				mutations.setArmType(AppearanceDefs.ARM_TYPE_BEE);
 				changes++;

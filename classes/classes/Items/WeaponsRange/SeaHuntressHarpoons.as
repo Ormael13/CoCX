@@ -19,7 +19,5 @@ package classes.Items.WeaponsRange
 			if (game.flags[kFLAGS.CEANI_ARCHERY_TRAINING] == 5) boost += 10;
 			return (15 + boost); 
 		}
-		
 	}
-
 }

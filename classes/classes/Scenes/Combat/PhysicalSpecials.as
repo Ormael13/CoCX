@@ -1673,7 +1673,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else {
 			//Failure (-10 HPs) -
 			outputText("As you attempt to grapple your target it slips out of your reach delivering a glancing blow to your limbs. ");
-			player.takeDamage(5, true);
+			player.takePhysDamage(5, true);
 			if(player.HP <= 0) {
 				doNext(endHpLoss);
 				return;
@@ -1720,7 +1720,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else {
 			//Failure (-10 HPs) -
 			outputText("" + monster.capitalA + monster.short + " dodge at the last second stepping out of your slimy embrace and using the opening to strike you.");
-			player.takeDamage(5, true);
+			player.takePhysDamage(5, true);
 			if(player.HP <= 0) {
 				doNext(endHpLoss);
 				return;

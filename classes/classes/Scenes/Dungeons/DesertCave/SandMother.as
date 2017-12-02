@@ -91,7 +91,7 @@ public class SandMother extends Monster
 			var multiplier:Number = sizeMod / 170;
 			var damage:Number = 20;
 			damage = multiplier * damage;
-			damage = player.takeDamage(damage, true);
+			damage = player.takePhysDamage(damage, true);
 		}
 		
 		//*Lightning Bolt

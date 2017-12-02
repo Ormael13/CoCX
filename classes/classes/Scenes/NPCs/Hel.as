@@ -51,7 +51,7 @@ public class Hel extends Monster
 						lust += 5 * lustVuln;
 					}
 				}
-				if(damage > 0) damage = player.takeDamage(damage, true);
+				if(damage > 0) damage = player.takePhysDamage(damage, true);
 			}
 			
 			statScreenRefresh();

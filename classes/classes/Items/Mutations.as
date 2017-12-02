@@ -2473,6 +2473,13 @@ public final class Mutations extends MutationsHelper
 				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
 			}
 		}
+		public function soulblastmanual(player:Player):void
+		{
+			clearOutput();
+			outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Soul Blast.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+			outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Soul Blast.</b>");
+			player.createStatusEffect(StatusEffects.KnowsSoulBlast, 0, 0, 0, 0);
+		}
 
 		public function verydilutedarcaneregenconcotion(player:Player):void {
 			outputText("You grab your mana potion, pull the cork off and swiftly chug it down.\n\n(Recovered mana: 40)");
@@ -7323,7 +7330,7 @@ public final class Mutations extends MutationsHelper
 				setHairType(AppearanceDefs.HAIR_SILKEN);
 				changes++;
 			}
-			if (player.hasPlainSkinOnly() && !player.isGargoyle() && (player.skinTone != "dark" || player.skinTone != "light" || player.skinTone != "tan") && changes < changeLimit && rand(3) == 0) {
+			if (player.hasPlainSkinOnly() && !player.isGargoyle() && (player.skinTone != "dark" && player.skinTone != "light" && player.skinTone != "tan") && changes < changeLimit && rand(3) == 0) {
 				var color:String;
 				color = randomChoice("dark","light","tan");
 				player.skinTone = color;

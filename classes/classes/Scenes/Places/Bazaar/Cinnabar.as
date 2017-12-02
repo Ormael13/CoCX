@@ -331,7 +331,7 @@ private function fuckCinnabarHugerAndCorruptedEr():void {
 	//(-2 corruption!)
 	player.orgasm();
 	dynStats("sen", 3, "cor", -2);
-	player.takeDamage(25);
+	player.takePhysDamage(25);
 	doNext(camp.returnToCampUseOneHour);
 }
 

@@ -36,6 +36,29 @@ public class Exploration extends BaseContent
 		{
 		}
 
+		public function furriteMod():Number {
+			return furriteFnGen()();
+		}
+		
+		public function lethiteMod():Number {
+			return lethiteFnGen()();
+		}
+		
+		// Why? Because what if you want to alter the iftrue/iffalse?
+		// Default values: mods:[SceneLib.exploration.furriteMod]
+		// Non-default:    mods:[SceneLib.exploration.furriteFnGen(4,0)]
+
+		public function furriteFnGen(iftrue:Number = 3, iffalse:Number = 1):Function {
+			return function ():Number {
+				return player.findPerk(PerkLib.PiercedFurrite) >= 0 ? iftrue : iffalse;
+			}
+		}
+		
+		public function lethiteFnGen(iftrue:Number = 3, iffalse:Number = 1):Function {
+			return function ():Number {
+				return player.findPerk(PerkLib.PiercedLethite) >= 0 ? iftrue : iffalse;
+			}
+		}
 		//const MET_OTTERGIRL:int = 777;
 		//const HAS_SEEN_MINO_AND_COWGIRL:int = 892;
 		//const EXPLORATION_PAGE:int = 1015;

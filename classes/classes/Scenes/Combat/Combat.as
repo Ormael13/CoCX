@@ -983,7 +983,7 @@ public function packAttack():void {
 			else if (temp <= 20)
 				outputText(monster.capitalA + monster.short + " stagger you with the force of [monster his] " + monster.weaponVerb + "s! ");
 			else outputText(monster.capitalA + monster.short + " <b>mutilates</b> you with powerful fists and " + monster.weaponVerb + "s! ");
-			takeDamage(temp, true);
+			takePhysDamage(temp, true);
 		}
 		statScreenRefresh();
 		outputText("\n");
@@ -1048,7 +1048,7 @@ internal function wait():void {
 		clearOutput();
 		outputText("The brood continues to hammer away at your defenseless self. ");
 		var temp:int = 80 + rand(40);
-		takeDamage(temp, true);
+		takePhysDamage(temp, true);
 		skipMonsterAction = true;
 	}
 	else if (monster.hasStatusEffect(StatusEffects.QueenBind)) {
@@ -1058,7 +1058,7 @@ internal function wait():void {
 	else if (player.hasStatusEffect(StatusEffects.GooBind)) {
 		clearOutput();
 		outputText("You writhe uselessly, trapped inside the goo girl's warm, seething body. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girl's pulsing body around yours.");
-		takeDamage(.35 * player.maxHP(), true);
+		takePhysDamage(.35 * player.maxHP(), true);
 		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.GooArmorBind)) {
@@ -1080,20 +1080,20 @@ internal function wait():void {
 		else outputText("The [monster name]");
 		outputText("'s grip on you tightens as you relax into the stimulating pressure.");
 		dynStats("lus", player.sens / 5 + 5);
-		takeDamage(5 + rand(5));
+		takePhysDamage(5 + rand(5));
 		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.ScyllaBind)) {
 		clearOutput();
 		outputText("You're being squeezed tightly by the scylla’s powerful tentacles. That's without mentioning the fact she's rubbing in your sensitive place quite a bit, giving you a knowing grin.");
 		dynStats("lus", player.sens / 4 + 20);
-		takeDamage(100 + rand(40));
+		takePhysDamage(100 + rand(40));
 		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.WolfHold)) {
 		clearOutput();
 		outputText("The wolf tear your body with its maw wounding you greatly as it starts to eat you alive!");
-		takeDamage(5 + rand(5));
+		takePhysDamage(5 + rand(5));
 		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.HolliConstrict)) {
@@ -1188,7 +1188,7 @@ internal function wait():void {
 		//Failed struggle
 		else {
 			outputText("You writhe uselessly, trapped inside the goo girl's warm, seething body. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girl's pulsing body around yours. ");
-			temp = takeDamage(.15 * player.maxHP(), true);
+			temp = takePhysDamage(.15 * player.maxHP(), true);
 		}
 		skipMonsterAction = true;
 	}
@@ -1221,9 +1221,9 @@ internal function wait():void {
 			else outputText("The [monster name]");
 			outputText("'s grip on you tightens as you struggle to break free from the stimulating pressure.");
 			dynStats("lus", player.sens / 10 + 2);
-			if (monster is Naga) takeDamage(7 + rand(5));
-			if (monster is Gorgon) takeDamage(17 + rand(15));
-			if (monster is CaiLin) takeDamage(10 + rand(8));
+			if (monster is Naga) takePhysDamage(7 + rand(5));
+			if (monster is Gorgon) takePhysDamage(17 + rand(15));
+			if (monster is CaiLin) takePhysDamage(10 + rand(8));
 			if(monster is Diva){(monster as Diva).moveBite();}
 		}
 		skipMonsterAction = true;
@@ -1238,7 +1238,7 @@ internal function wait():void {
 		else {
 			outputText("Despite all of your struggle she manage to maintain her hold on you.");
 			dynStats("lus", player.sens / 5 + 5);
-			takeDamage(100 + rand(80));
+			takePhysDamage(100 + rand(80));
 		}
 		skipMonsterAction = true;
 	}
@@ -1250,7 +1250,7 @@ internal function wait():void {
 		}
 		else {
 			outputText("The wolf tear your body with its maw wounding you greatly as it starts to eat you alive!");
-			takeDamage(7 + rand(5));
+			takePhysDamage(7 + rand(5));
 		}
 		skipMonsterAction = true;
 	}
@@ -1270,7 +1270,7 @@ internal function wait():void {
 		//Fail to break free
 		else {
 			outputText("Despite trying to escape, the creature only tightens its grip, making it difficult to breathe.\n\n");
-			takeDamage(5);
+			takePhysDamage(5);
 			if (player.cocks.length > 0)
 				outputText("The creature continues spiraling around your cock, sending shivers up and down your body. You must escape or this creature will overwhelm you!");
 			else if (player.hasVagina())
@@ -1657,7 +1657,8 @@ public function multiArrowsStrike():void {
 				}
 				else damage *= 2;
 			}
-		}	
+		}
+		if (player.weaponRangeName == "Wild Hunt" && player.level > monster.level) damage *= 1.2;
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) {
 			damage += player.inte * 0.2;
 			if (player.inte >= 50) damage += player.inte * 0.1;
@@ -1703,6 +1704,10 @@ public function multiArrowsStrike():void {
 			return;
 		}
 		else {
+			if (rand(100) < 15 && player.weaponRangeName == "Artemis" && !monster.hasStatusEffect(StatusEffects.Blind)) {
+				monster.createStatusEffect(StatusEffects.Blind, 3, 0, 0, 0);
+				outputText(",  your radiant shots blinded [monster he]");
+			}
 			outputText(".  It's clearly very painful. <b>(<font color=\"#800000\">" + String(damage) + "</font>)</b>");
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		}
@@ -1933,7 +1938,7 @@ public function throwWeapon():void {
 	var accRange:Number = 0;
 	accRange += (arrowsAccuracy() / 2);
 	if (flags[kFLAGS.ARROWS_ACCURACY] > 0) accRange -= flags[kFLAGS.ARROWS_ACCURACY];
-	if (player.weaponRange != weaponsrange.SHUNHAR) player.ammo--;
+	if (player.weaponRange != weaponsrange.SHUNHAR || player.weaponRange != weaponsrange.KSLHARP || player.weaponRange != weaponsrange.LEVHARP) player.ammo--;
 	fatigue(fc);
 	if (rand(100) < accRange) {
 		var damage:Number = 0;
@@ -1947,6 +1952,20 @@ public function throwWeapon():void {
 		else if (player.weaponRangeAttack >= 101 && player.weaponRangeAttack < 151) damage *= (3.75 + ((player.weaponRangeAttack - 100) * 0.02));
 		else if (player.weaponRangeAttack >= 151 && player.weaponRangeAttack < 201) damage *= (4.75 + ((player.weaponRangeAttack - 150) * 0.015));
 		else damage *= (5.5 + ((player.weaponRangeAttack - 200) * 0.01));
+		if (player.weaponRange == weaponsrange.KSLHARP) {
+			if (monster.cor < 33) damage = Math.round(damage * 1.0);
+			else if (monster.cor < 50) damage = Math.round(damage * 1.1);
+			else if (monster.cor < 75) damage = Math.round(damage * 1.2);
+			else if (monster.cor < 90) damage = Math.round(damage * 1.3);
+			else damage = Math.round(damage * 1.4);
+		}
+		if (player.weaponRange == weaponsrange.LEVHARP) {
+			if (monster.cor >= 66) damage = Math.round(damage * 1.0);
+			else if (monster.cor >= 50) damage = Math.round(damage * 1.1);
+			else if (monster.cor >= 25) damage = Math.round(damage * 1.2);
+			else if (monster.cor >= 10) damage = Math.round(damage * 1.3);
+			else damage = Math.round(damage * 1.4);
+		}
 		if (damage == 0) {
 			if (monster.inte > 0) {
 				outputText(monster.capitalA + monster.short + " shrugs as the [weaponrangename] bounces off them harmlessly.\n\n");
@@ -2670,14 +2689,14 @@ public function attack():void {
 		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 2;
 		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 5;
 	}
-	if (player.weapon == weapons.NPHBLDE || player.weapon == weapons.MASAMUN || player.weapon == weapons.SESPEAR) {
+	if (player.weapon == weapons.NPHBLDE || player.weapon == weapons.MASAMUN || player.weapon == weapons.SESPEAR || player.weapon == weapons.WG_GAXE) {
 		if (monster.cor < 33) damage = Math.round(damage * 1.0);
 		else if (monster.cor < 50) damage = Math.round(damage * 1.1);
 		else if (monster.cor < 75) damage = Math.round(damage * 1.2);
 		else if (monster.cor < 90) damage = Math.round(damage * 1.3);
 		else damage = Math.round(damage * 1.4);
 	}
-	if (player.weapon == weapons.EBNYBLD || player.weapon == weapons.BLETTER || player.weapon == weapons.DSSPEAR) {
+	if (player.weapon == weapons.EBNYBLD || player.weapon == weapons.BLETTER || player.weapon == weapons.DSSPEAR || player.weapon == weapons.DE_GAXE) {
 		if (monster.cor >= 66) damage = Math.round(damage * 1.0);
 		else if (monster.cor >= 50) damage = Math.round(damage * 1.1);
 		else if (monster.cor >= 25) damage = Math.round(damage * 1.2);
@@ -2687,6 +2706,7 @@ public function attack():void {
 	//Determine if critical hit!
 	var crit:Boolean = false;
 	var critChance:int = 5;
+	var critDamage:Number = 1.75;
 	if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
 		if (player.inte <= 100) critChance += (player.inte - 50) / 5;
 		if (player.inte > 100) critChance += 10;
@@ -2695,12 +2715,13 @@ public function attack():void {
 	if (player.findPerk(PerkLib.WeaponMastery) >= 0 && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
 	if (player.findPerk(PerkLib.WeaponGrandMastery) >= 0 && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
 	if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
-	if (player.weapon == weapons.MASAMUN) critChance += 10;
+	if (player.weapon == weapons.MASAMUN || (player.weapon == weapons.WG_GAXE && monster.cor > 66) || (player.weapon == weapons.DE_GAXE && monster.cor < 33)) critChance += 10;
 	if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 	if (rand(100) < critChance) {
 		crit = true;
-		if (player.findPerk(PerkLib.Impale) >= 0 && (player.findPerk(PerkLib.DoubleAttack) < 0 || (player.findPerk(PerkLib.DoubleAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)) && player.spe >= 100 && (player.weaponName == "deadly spear" || player.weaponName == "deadly lance" || player.weaponName == "deadly trident")) damage *= 2.5;
-		else damage *= 1.75;
+		if (player.findPerk(PerkLib.Impale) >= 0 && (player.findPerk(PerkLib.DoubleAttack) < 0 || (player.findPerk(PerkLib.DoubleAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)) && player.spe >= 100 && (player.weaponName == "deadly spear" || player.weaponName == "deadly lance" || player.weaponName == "deadly trident")) critDamage += 0.75;
+		if ((player.weapon == weapons.WG_GAXE && monster.cor > 66) || (player.weapon == weapons.DE_GAXE && monster.cor < 33)) critDamage += 0.1;
+		damage *= critDamage;
 	}
 	//Apply AND DONE!
 	damage *= (monster.damagePercent(false, true) / 100);
@@ -3152,7 +3173,7 @@ public function meleeattackdamage():void {
 
 public function WrathWeaponsProc():void {
 	if (player.weapon == weapons.BLETTER) {
-		takeDamage(player.maxHP() * 0.02);
+		takePhysDamage(player.maxHP() * 0.02);
 		if (player.HP < 1) {
 			doNext(endHpLoss);
 			return;
@@ -3161,7 +3182,7 @@ public function WrathWeaponsProc():void {
 	if (player.isLowGradeWrathWeapon()) {
 		if (player.findPerk(PerkLib.PrestigeJobBerserker) >= 0 && player.wrath >= 10) player.wrath -= 10;
 		else {
-			takeDamage(100);
+			takePhysDamage(100);
 			if (player.HP < 1) {
 				doNext(endHpLoss);
 				return;
@@ -3171,7 +3192,7 @@ public function WrathWeaponsProc():void {
 	if (player.isDualLowGradeWrathWeapon()) {
 		if (player.findPerk(PerkLib.PrestigeJobBerserker) >= 0 && player.wrath >= 20) player.wrath -= 20;
 		else {
-			takeDamage(200);
+			takePhysDamage(200);
 			if (player.HP < 1) {
 				doNext(endHpLoss);
 				return;
@@ -3184,7 +3205,7 @@ public function HeroBaneProc():void {
 	if (player.hasStatusEffect(StatusEffects.HeroBane)) {
 		if (player.statusEffectv2(StatusEffects.HeroBane) > 0) {
 			outputText("\nYou feel [monster a] [monster name] wounds as well as your owns as the link mirrors the pain back to you for " + player.statusEffectv2(StatusEffects.HeroBane) + " damage!\n");
-			takeDamage(player.statusEffectv2(StatusEffects.HeroBane));
+			takePhysDamage(player.statusEffectv2(StatusEffects.HeroBane));
 		}
 		if (player.HP < 1) {
 			doNext(endHpLoss);
@@ -3296,8 +3317,11 @@ public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = 
 	return damage;
 }
 
-public function takeDamage(damage:Number, display:Boolean = false):Number {
-	return player.takeDamage(damage, display);
+public function takePhysDamage(damage:Number, display:Boolean = false):Number {
+	return player.takePhysDamage(damage, display);
+}
+public function takeMagicDamage(damage:Number, display:Boolean = false):Number {
+	return player.takeMagicDamage(damage, display);
 }
 	public static const USEMANA_NORMAL:int = 0;
 	public static const USEMANA_MAGIC:int = 1;
@@ -3328,7 +3352,7 @@ public function takeDamage(damage:Number, display:Boolean = false):Number {
 		//Blood mages use HP for spells
 		if (player.hasPerk(PerkLib.BloodMage)
 			&& (type == USEMANA_MAGIC || type == USEMANA_WHITE || type == USEMANA_BLACK)) {
-			combat.takeDamage(mod);
+			combat.takePhysDamage(mod);
 			statScreenRefresh();
 			return;
 		}
@@ -3390,7 +3414,7 @@ public function fatigueImpl(mod:Number,type:Number  = USEFATG_NORMAL):void {
 	if (type === USEFATG_MAGIC || type === USEFATG_WHITE || type === USEFATG_BLACK) {
 		//Blood mages use HP for spells
 		if (player.hasPerk(PerkLib.BloodMage)) {
-			combat.takeDamage(mod);
+			combat.takePhysDamage(mod);
 			statScreenRefresh();
 			return;
 		}
@@ -3847,7 +3871,7 @@ private function combatStatusesUpdate():void {
 		else {
 			var bleed:Number = (4 + rand(7))/100;
 			bleed *= player.HP;
-			bleed = takeDamage(bleed);
+			bleed = takePhysDamage(bleed);
 			outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds. (<font color=\"#800000\">" + bleed + "</font>)</b>\n\n");
 		}
 	}
@@ -3861,14 +3885,14 @@ private function combatStatusesUpdate():void {
 		else {
 			var hemorrhage:Number = 0;
 			hemorrhage += player.maxHP() * player.statusEffectv2(StatusEffects.Hemorrhage);
-			hemorrhage = takeDamage(hemorrhage);
+			hemorrhage = takePhysDamage(hemorrhage);
 			outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds. (<font color=\"#800000\">" + bleed + "</font>)</b>\n\n");
 		}
 	}
 	if(player.hasStatusEffect(StatusEffects.UnderwaterOutOfAir)) {
 		var deoxigen:Number = 0;
 		deoxigen += (player.maxHP() * 0.05);
-		deoxigen = takeDamage(deoxigen);
+		deoxigen = takePhysDamage(deoxigen);
 		outputText("<b>You are running out of oxygen you need to finish this fight and fast before you lose consciousness. <b>(<font color=\"#800000\">" + deoxigen + "</font>)</b></b>\n\n");
 	}
 	if(player.hasStatusEffect(StatusEffects.HeroBane)) {
@@ -4000,7 +4024,7 @@ private function combatStatusesUpdate():void {
 		//Effect 
 		outputText("Your lips burn with an unexpected flash of heat.  They sting and burn with unholy energies as a puff of ectoplasmic gas escapes your lips.  That puff must be a part of your soul!  It darts through the air to the succubus, who slurps it down like a delicious snack.  You feel feverishly hot and exhausted...\n\n");
 		dynStats("lus", 5);
-		takeDamage(15);		
+		takePhysDamage(15);		
 	}
 	if(player.hasStatusEffect(StatusEffects.DemonSeed)) {
 		outputText("You feel something shift inside you, making you feel warm.  Finding the desire to fight this... hunk gets harder and harder.\n\n");
@@ -4032,9 +4056,9 @@ private function combatStatusesUpdate():void {
 			player.addStatusValue(StatusEffects.NagaVenom,1,2);
 			player.spe -= 2;
 		}
-		else takeDamage(5);
+		else takePhysDamage(5);
 		outputText("You wince in pain and try to collect yourself, [monster a] [monster name]'s venom still plaguing you.\n\n");
-		takeDamage(2);
+		takePhysDamage(2);
 	}
 	if(player.hasStatusEffect(StatusEffects.MedusaVenom)) {
 		//Chance to cleanse!
@@ -4050,7 +4074,7 @@ private function combatStatusesUpdate():void {
 			mainView.statsView.showStatUp( 'inte' );
 			player.removeStatusEffect(StatusEffects.MedusaVenom);
 		}
-		else if (player.str <= 5 && player.tou <= 5 && player.spe <= 5 && player.inte <= 5) takeDamage(5);
+		else if (player.str <= 5 && player.tou <= 5 && player.spe <= 5 && player.inte <= 5) takePhysDamage(5);
 		else {
 			if(player.str > 5) {
 			player.addStatusValue(StatusEffects.MedusaVenom,1,1);
@@ -4070,7 +4094,7 @@ private function combatStatusesUpdate():void {
 			}
 		}
 		outputText("You wince in pain and try to collect yourself, [monster a] [monster name]'s venom still plaguing you.\n\n");
-		takeDamage(2);
+		takePhysDamage(2);
 	}
 	else if(player.hasStatusEffect(StatusEffects.TemporaryHeat)) {
 		//Chance to cleanse!
@@ -4101,7 +4125,7 @@ private function combatStatusesUpdate():void {
 		}
 		else {
 			outputText("The poison continues to work on your body, wracking you with pain!\n\n");
-			takeDamage(8+rand(player.maxHP()/20) * player.statusEffectv2(StatusEffects.Poison));
+			takePhysDamage(8+rand(player.maxHP()/20) * player.statusEffectv2(StatusEffects.Poison));
 		}
 	}
 	//Bondage straps + bondage fetish
@@ -4277,12 +4301,12 @@ private function combatStatusesUpdate():void {
 	if (player.hasStatusEffect(StatusEffects.EzekielCurse)) {
 		if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 2 && player.findPerk(PerkLib.EzekielBlessing) >= 0) {
 			outputText("<b>You feel familiar feeling of your own lifeforce been slowly extinquished.  Maybe you should finish this fight as soon as possible to start healing this aligment?</b>\n\n");
-			takeDamage(500);
+			takePhysDamage(500);
 		}
 		else if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 2) {
 			outputText("<b>You suddenly feel like you very own lifeforce are been at steady pace extinquished the longer you keep fighting.  You better finsh this fight fast or find way to cure your current situation as otherwise...</b>\n\n");
-			if (player.maxHP() < 1000) takeDamage(player.maxHP() * 0.1);
-			else takeDamage(100);
+			if (player.maxHP() < 1000) takePhysDamage(player.maxHP() * 0.1);
+			else takePhysDamage(100);
 		}
 	}
 	//Flying
@@ -4768,7 +4792,7 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 	if (player.weaponRangeName == "training javelins") player.ammo = 10;
 	if (player.weaponRangeName == "flintlock pistol") player.ammo = 4;
 	if (player.weaponRangeName == "blunderbuss") player.ammo = 2;
-	if (player.weaponRange == weaponsrange.SHUNHAR) player.ammo = 1;
+	if (player.weaponRange == weaponsrange.SHUNHAR || player.weaponRange == weaponsrange.KSLHARP || player.weaponRange == weaponsrange.LEVHARP) player.ammo = 1;
 	if (prison.inPrison && prison.prisonCombatAutoLose) {
 		dynStats("lus", player.maxLust(), "scale", false);
 		doNext(endLustLoss);

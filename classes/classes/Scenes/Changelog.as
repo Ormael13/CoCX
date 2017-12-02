@@ -29,12 +29,27 @@ package classes.Scenes
 			outputText("-Pregnancy last 30 days and at PC current corruption at the birth momrnt will decide if Celess would be pure or corrupted. She would alo need to be named even if player decide to name her Celess.\n");
 			outputText("-After another 30 ays she will be considered an young adult (18+) and unlock all interactions like: purify/corrupt specific items or sex scenes.\n");
 			outputText("-Incest sex scenes with her req. to have 30+ corruption. For pure PC's it's only posisble to access yuri scene.\n");
+			outputText("-Chi Chi final training added allowing to face her again. TIP: better save game before it as it would affect Chi Chi storyline.\n");
+			outputText("-Chi Chi can finaly visit PC camp...for longer. (for now have only app screen and shop working)\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Camp NPC's that can spar with PC can now slowly over time lvl-up. It's need to first toggle it in Camp Actions menu by chaning those npc's 'mode' from relax to 'training'. At any time it can be switch back to 'relax' as otherwise NPC's will lvl-up till reaching current max lvl they can attain. Some may be worried about it but some of you will gladly welcome those super high lvl sparing partners. ");
 			outputText("Each lvl-up will rise their lvl by 6 (in normal case as some npc's wil have their own lvl-ing pace - vide Evangeline that for a longer time had slight different lvl-up pattern). To cause each NPC to go training PC need beat them in sparring enough times (at start it's only around 3-5 times). But after each lvl-up amount of won fight for their lvl-up's will incease by 1. Also time they training ");
 			outputText("will extend each time starting from around 6-8 hours. IN time NPC are busy training they will be unable to be itneracted so...yeah that mean for some time NPC will be ignoring PC and just training. Thta part aside fact of prevent NPC keep lvl-ing till limit was reason I put toggle on train/relax mode for them. As long NPC not reached req. defeats to trigger training start it won't gon into \n");
 			outputText("'leave me alon I'm training' mood. And later on lvl-up training may take even... days for them. So it may be worth to decide when go between training/relax mode. Maybe in future I will put some ways to shorted training time or maybe not.  Future looks bright with few more npc that can spar joining camp so downtime of some of them shouldn't hurt so much.\n");
 			outputText("-Camp NPC's that can lvl-up: Ember, Isabella, Kiha, Kindra, Etna.\n");
-			outputText("-Current max lvl camp npc's can attain after reaching end of training are: Ember (lvl 62), Isabella (lvl 62), Kiha (lvl 63), Kindra (lvl 63), Etna (lvl 72)\n");
+			outputText("-Current max lvl camp npc's can attain after reaching end of training are: Ember (lvl 62), Isabella (lvl 62), Kiha (lvl 63), Kindra (lvl 63), Etna (lvl 66)\n");
 			outputText("-Enemy monsters now would be able to make use of gathered wrath. Any monster when using base attack and having 100 or more wrath would use power attack version that would deal 2x more dmg. There will be no diff in text of attack aside enemy wrath dropping by 100. If some enemy would have perk Job: Warrior it will then use either 2x or 3x power attack using 50 or 100 wrath.\n");
 			outputText("-Any PC can now use in limited form Power Attack. Namely just like monsters PC that not have perk Job: Warrior will be still able to use 100 wrath to make 2x stronger melee attack.\n");
 			outputText("-Perk Lifeline will now scale with NG tiers with amount of HP restored (it peak bonus will be reached in NG5+). Perks Bigger Golem Bag 1-6 would now increase pernament golems storage space by 1 when PC get perk Master Golem Maker.\n");
@@ -83,14 +98,22 @@ package classes.Scenes
 			outputText("-New melee weapon (by Liadri): Black Widow - obtainable by giving Jeweled Rapier to Corrupted Celess to corrupt. Base atk inc to 20 and additionaly scale on corruption and feminity gaining up to 5 atk from both (that makes max atk caps at 30). Bonus from rapier training apply as usual too.\n");
 			outputText("-New melee weapon (by Liadri): Purified Oni Chieftain Destroyer - obtainable by giving Oni Tetsubo to Pure Celess to purify. Base atk up to 40 and additional atk scaling on purity (in total up to 60 atk) plus increased to 15% stun chance. Req. 210+ str for full atk value.\n");
 			outputText("-New melee weapon (by Liadri): Defiled Oni Chieftain Destroyer - obtainable by giving Oni Tetsubo to Corrupted Celess to corrupt. Base atk up to 40 and additional atk scaling on corruption (in total up to 60 atk) plus increased to 15% stun chance. Req. 210+ str for full atk value.\n");
+			outputText("-New melee weapon (by Liadri): Winged Greataxe - obtainable by giving Large Axe to Pure Celess to purify. Atk 28 with last 10 pts scaling on purity, when below 100 str atk drops by 9. Dmg is scaling with enemy corruption (the higher the higher dmg and increased critical chance and critical damage by 10%).\n");
+			outputText("-New melee weapon (by Liadri): Demonic Greataxe - obtainable by giving Large Axe to Corrupted Celess to corrupt. Atk 28 with last 10 pts scaling on corruption, when below 100 str atk drops by 9. Dmg is scaling with enemy corruption (the lower the higher dmg and increased critical chance and critical damage by 10%).\n");
+			outputText("-New melee weapon (by Liadri): Unicorn staff - obtainable by giving Wizard staff to Pure Celess to purify. Atk 6 and +90-190% to the spell power modifier but scales with purity, healing spells effect 50% stronger.\n");// and recharge 1 turns earlier
+			outputText("-New melee weapon (by Liadri): Nocturnus staff - obtainable by giving Wizard staff to Corrupted Celess to corrupt. Atk 6 and +140-240% to the spell power modifier but scales with corruption, increase all spells costs by 200%.\n");
 		//	outputText("-New melee weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
 		//	outputText("-New melee weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
+			outputText("-New range weapon (by Liadri): Artemis - obtainable by giving Longbow to Pure Celess to purify. Atk inc to 25 and last 5 pts scale with purity. Dmg is scaling with enemy corruption (the higher the higher dmg) and each arrow can cause blidness (15% chance).\n");
+			outputText("-New range weapon (by Liadri): Wild Hunt - obtainable by giving Longbow to Corrupted Celess to corrupt. Atk inc to 25 and last 5 pts scale with corruption. Dmg is scaling with enemy corruption (the lower the higher dmg) and deal 20% more dmg to enemy below PC level.\n");
+			outputText("-New range weapon (by Liadri): Kraken Slayer Harpoons - obtainable by giving Sea Huntress Harpoons to Pure Celess to purify. (item properties desc).\n");
+			outputText("-New range weapon (by Liadri): Leviathan Harpoons - obtainable by giving Sea Huntress Harpoons to Corrupted Celess to corrupt. (item properties desc).\n");
 		//	outputText("-New range weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
 		//	outputText("-New range weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
 			outputText("-New shield (by Liadri): Sanctuary - obtainable form encounter in forest/deepword with guardian adter picking option to take shield instead of become mother for Celess. Block chance 20, no other properties.\n");
 			outputText("-New shield (by Liadri): Sanctuary - obtainable by giving Sanctuary to Pure Celess to purify. Block chance fully scalling on purity and adding regeneration effect also scalling on purity (on averange it's ~1%).\n");
 			outputText("-New shield (by Liadri): Dark Aegis - obtainable by giving Sanctuary to Corrupted Celess to corrupt. Block chance fully scalling on corruption and adding regeneration effect also scalling on corruption (on averange it's ~1%).\n");
-			outputText("-\n");
+			outputText("-All spells costs now would slowly increase when PC spell power increase.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -106,33 +129,10 @@ package classes.Scenes
 			outputText("-Fixed bugs: lib refunding stat points incorrectly when leveling\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Bat, Vampire, 
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -149,14 +149,14 @@ package classes.Scenes
 			outputText("\n");full stats bonuses not added yet to: Dragonne, Echidna, Ferret-morph, Kitshoo-morph, Mouse-morph, Pig-morph, Scorpion-morph
 			outputText("\n");New tier 0 lvl-up perk: Tracheal System (Evolved) (req. mantis score >= 4 and having Tracheal System perk; effect: )
 			outputText("\n");
-			outputText("\n");dodać potem dodatkową kategorie w Moga menu z itemami co nie są stricte racial TF ale też dają efekty TF jak: ImpFood, PrFruit, Rizza Root
 			outputText("\n");wolf pepper - nieużywany item chyba co można go by w wolf TF zmienić: dodaje special coś na kształt likantropii ^^
 			outputText("\n");
 			outputText("<b>Version 0.8i:</b>\n\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("<b>Version 0.8j:</b>\n\n");
 			outputText("<b>Version 0.8k:</b>\n\n");
 			outputText("\n");
-			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
+			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bedą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
 			outputText("\n");cel na 0.8(/9): dodać siren TF
 			outputText("\n");cel na 0.8(/9): dodać w mieście kultywatorów arene/ring na którym sie można pojedynkować z niektórymi przedstawicielami ras bedącymi soul cultivators (opcje ras do walki: goblinka, salamander, male(/lub female jeśli kanon nie pozwala na male) kitsune, scylla)

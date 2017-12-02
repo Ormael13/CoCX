@@ -199,7 +199,7 @@ this.HP -= (this.maxHP() * 0.08);
 			}
 			else
 			{
-				player.takeDamage(damage);
+				player.takePhysDamage(damage);
 				outputText(" The weapon bites deep. (" + damage +")");
 			}
 		}
@@ -297,7 +297,7 @@ this.HP -= (this.maxHP() * 0.08);
 				
 				if (damage > 0)
 				{
-					damage = player.takeDamage(damage);
+					damage = player.takePhysDamage(damage);
 					//Hit
 					outputText(" You go flying back into a pair of oiled-up slavegirls. They gasp in surprise as you tear your way back to the fight. Too late, they attempt to caress you, barely touching your [leg] before you’re back in the fight. (" + damage +")");
 				}
@@ -332,7 +332,7 @@ this.HP -= (this.maxHP() * 0.08);
 				
 				if (damage > 0)
 				{
-					damage = player.takeDamage(damage);
+					damage = player.takePhysDamage(damage);
 					//Hit
 					outputText(" You don’t feel the impact, but you do hear the crack of wood striking");
 					// 9999
@@ -378,7 +378,7 @@ this.HP -= (this.maxHP() * 0.08);
 			}
 			else
 			{
-				player.takeDamage(damage);
+				player.takePhysDamage(damage);
 				outputText(" The weapon bites deep. (" + damage +")");
 			}
 		}

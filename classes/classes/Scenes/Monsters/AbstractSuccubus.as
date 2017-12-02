@@ -113,7 +113,7 @@ package classes.Scenes.Monsters
 					damage = 24;
 				}
 				outputText("! ");
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 			else {
 				outputText("The ");

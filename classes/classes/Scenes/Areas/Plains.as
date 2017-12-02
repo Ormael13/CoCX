@@ -6,6 +6,9 @@ package classes.Scenes.Areas
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
+import classes.Scenes.API.Encounters;
+import classes.Scenes.API.FnHelpers;
+import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Plains.*;
 import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
@@ -21,102 +24,163 @@ use namespace CoC;
 
 		public function Plains()
 		{
+			onGameInit(init);
 		}
-		public function explorePlains():void
-		{
+		public function isDiscovered():Boolean {
+			return flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0;
+		}
+		public function discover():void {
+			flags[kFLAGS.TIMES_EXPLORED_PLAINS] = 1;
+			outputText(images.showImage("area-plain"));
+			outputText("You find yourself standing in knee-high grass, surrounded by flat plains on all sides.  Though the mountain, forest, and lake are all visible from here, they seem quite distant.\n\n<b>You've discovered the plains!</b>");
+			doNext(camp.returnToCampUseOneHour);
+		}
+
+		private var explorationEncounter:GroupEncounter = null;
+
+		private function init():void {
+			const game:CoC     = CoC.instance;
+			const fn:FnHelpers = Encounters.fn;
+			explorationEncounter = Encounters.group(/*SceneLib.commonEncounters,*/ {
+				//General Golems, Goblin and Imp Encounters
+				name: "common",
+				call: SceneLib.exploration.genericGolGobImpEncounters
+			}, {
+				//Helia monogamy fucks
+				name  : "helcommon",
+				call  : SceneLib.helScene.helSexualAmbush,
+				chance: 0.2,
+				when  : SceneLib.helScene.helSexualAmbushCondition
+			}, {
+				name: "etna",
+				when: function ():Boolean {
+					return flags[kFLAGS.ETNA_FOLLOWER] < 1
+						   && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2;
+				},
+				call: SceneLib.etnaScene.repeatYandereEnc
+			}, {
+				name: "electra",
+				when: function():Boolean {
+					return flags[kFLAGS.ELECTRA_FOLLOWER] < 1 && flags[kFLAGS.ELECTRA_AFFECTION] >= 2;
+				},
+				call: SceneLib.electraScene.repeatPlainsEnc
+			}, {
+				//Dem Kangasluts!  Force Sheila relationship phase!
+				name  : "sheila_xp3",
+				chance: Encounters.ALWAYS,
+				when  : function ():Boolean {
+					return flags[kFLAGS.SHEILA_DEMON] == 0
+						   && flags[kFLAGS.SHEILA_XP] == 3
+						   && model.time.hours == 20
+						   && flags[kFLAGS.SHEILA_CLOCK] >= 0;
+				},
+				call  : SceneLib.sheilaScene.sheilaXPThreeSexyTime
+			}, {
+				//Add some holiday cheer
+				name: "candy_cane",
+				when: function ():Boolean {
+					return isHolidays() && date.fullYear > flags[kFLAGS.CANDY_CANE_YEAR_MET];
+				},
+				call: Holidays.candyCaneTrapDiscovery
+			}, {
+				name: "polar_pete",
+				when: function ():Boolean {
+					return isHolidays() && date.fullYear > flags[kFLAGS.POLAR_PETE_YEAR_MET];
+				},
+				call: Holidays.polarPete
+			}, {
+				//Find Niamh
+				name: "niamh",
+				when: function ():Boolean {
+					return flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] == 1
+				},
+				call: SceneLib.telAdre.niamh.niamhPostTelAdreMoveOut
+			}, {
+				name  : "owca",
+				chance: 0.3,
+				when  : function ():Boolean {
+					return flags[kFLAGS.OWCA_UNLOCKED] == 0;
+				},
+				mods  : [fn.ifLevelMin(24)],
+				call  : SceneLib.owca.gangbangVillageStuff
+			}, {
+				name: "bazaar",
+				when: function ():Boolean {
+					return flags[kFLAGS.BAZAAR_ENTERED] == 0;
+				},
+				call: SceneLib.bazaar.findBazaar
+			}, {
+				name  : "helXizzy",
+				chance: 0.2,
+				when  : function ():Boolean {
+					return flags[kFLAGS.ISABELLA_CAMP_APPROACHED] != 0
+						   && flags[kFLAGS.ISABELLA_MET] != 0
+						   && flags[kFLAGS.HEL_FUCKBUDDY] == 1
+						   && flags[kFLAGS.ISABELLA_ANGRY_AT_PC_COUNTER] == 0
+						   && !SceneLib.isabellaFollowerScene.isabellaFollower()
+						   && (player.tallness <= 78 || flags[kFLAGS.ISABELLA_OKAY_WITH_TALL_FOLKS])
+				},
+				call  : SceneLib.helScene.helXIzzy
+			}, {
+				name  : "ovielix",
+				call  : findOviElix,
+				chance: 0.5
+			}, {
+				name  : "kangaft",
+				call  : findKangaFruit,
+				chance: 0.5
+			}, {
+				name  : "gnoll",
+				chance: 0.5,
+				call  : gnollSpearThrowerScene.gnoll2Encounter
+			}, {
+				name  : "gnoll2",
+				chance: 0.5,
+				call  : gnollScene.gnollEncounter
+			}, {
+				name: "bunny",
+				call: bunnyGirl.bunnbunbunMeet
+			}, {
+				name: "isabella",
+				when: function ():Boolean {
+					return flags[kFLAGS.ISABELLA_PLAINS_DISABLED] == 0
+				},
+				call: SceneLib.isabellaScene.isabellaGreeting
+			}, {
+				name  : "helia",
+				chance: function ():Number {
+					return flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] ? 0.75 : 1.5;
+				},
+				when  : function ():Boolean {
+					return !SceneLib.helScene.followerHel();
+				},
+				call  : SceneLib.helScene.encounterAJerkInThePlains
+			}, {
+				name: "satyr",
+				call: satyrScene.satyrEncounter
+			}, {
+				name: "sheila",
+				when: function ():Boolean {
+					return flags[kFLAGS.SHEILA_DISABLED] == 0 && flags[kFLAGS.SHEILA_CLOCK] >= 0
+				},
+				call: SceneLib.sheilaScene.sheilaEncounterRouter
+			});
+		}
+		public function explorePlains():void {
 			clearOutput();
 			flags[kFLAGS.TIMES_EXPLORED_PLAINS]++;
-			//Dem Kangasluts!  Force Sheila relationship phase!
-			if (flags[kFLAGS.SHEILA_DEMON] == 0 && flags[kFLAGS.SHEILA_XP] == 3 && model.time.hours == 20 && flags[kFLAGS.SHEILA_CLOCK] >= 0) {
-				SceneLib.sheilaScene.sheilaXPThreeSexyTime();
-				return;
-			}
-			//Add some holiday cheer
-			if (isHolidays() && date.fullYear > flags[kFLAGS.CANDY_CANE_YEAR_MET] && rand(5) == 0) {
-				Holidays.candyCaneTrapDiscovery();
-				return;
-			}
-			if (isHolidays() && date.fullYear > flags[kFLAGS.POLAR_PETE_YEAR_MET] && rand(4) == 0 && silly()) {
-				Holidays.polarPete();
-				flags[kFLAGS.POLAR_PETE_YEAR_MET] = date.fullYear;
-				return;
-			}
-			//Helia monogamy fucks
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel()) {
-				SceneLib.helScene.helSexualAmbush();
-				return;
-			}
-			//Etna
-			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && rand(5) == 0) {
-				SceneLib.etnaScene.repeatYandereEnc();
-				return;
-			}
-			//Electra
-			if (flags[kFLAGS.ELECTRA_FOLLOWER] < 1 && flags[kFLAGS.ELECTRA_AFFECTION] >= 2 && rand(5) == 0) {
-				SceneLib.electraScene.repeatPlainsEnc();
-				return;
-			}
-			//Find Niamh
-			if (flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] == 1) {
-				SceneLib.telAdre.niamh.niamhPostTelAdreMoveOut();
-				return;
-			}
-			//Find Owca
-			if ((player.level >= 24 || flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 50) && flags[kFLAGS.TIMES_EXPLORED_PLAINS] % 25 == 0 && flags[kFLAGS.OWCA_UNLOCKED] == 0) {
-				SceneLib.owca.gangbangVillageStuff();
-				return;
-			}
-			//Bazaar!
-			if (flags[kFLAGS.TIMES_EXPLORED_PLAINS] % 10 == 0 && flags[kFLAGS.BAZAAR_ENTERED] == 0) {
-				SceneLib.bazaar.findBazaar();
-				return;
-			}
-			//Chance of threesomes!
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00256] != 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00257] != 0 && flags[kFLAGS.HEL_FUCKBUDDY] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] == 0 && !SceneLib.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.TIMES_EXPLORED_PLAINS] % 21 == 0 && !(player.tallness > 78 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00258] == 0)) {
-				//Hell/Izzy threesome intro
-				if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 0) {
-					SceneLib.helScene.salamanderXIsabellaPlainsIntro();
-					return;
-				}
-				//Propah threesomes here!
-				else if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 1) {
-					SceneLib.helScene.isabellaXHelThreeSomePlainsStart();
-					return;
-				}
-			}
-
-			var choices:Array = [plainsLoot, plainsLoot,
-				gnollSpearThrowerScene.gnoll2Encounter,
-				gnollScene.gnollEncounter,
-				bunnyGirl.bunnbunbunMeet, bunnyGirl.bunnbunbunMeet];
-
-			if (flags[kFLAGS.ISABELLA_PLAINS_DISABLED] == 0) {
-				choices[choices.length] = SceneLib.isabellaScene.isabellaGreeting;
-				choices[choices.length] = SceneLib.isabellaScene.isabellaGreeting;
-			}
-			if (!SceneLib.helScene.followerHel() && (flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] == 0 || rand(2) == 0)) {
-				choices[choices.length] = SceneLib.helScene.encounterAJerkInThePlains;
-				choices[choices.length] = SceneLib.helScene.encounterAJerkInThePlains;
-			}
-			choices[choices.length] = satyrScene.satyrEncounter;
-			choices[choices.length] = satyrScene.satyrEncounter;
-			if (flags[kFLAGS.SHEILA_DISABLED] == 0 && flags[kFLAGS.SHEILA_CLOCK] >= 0) { //Aparently Sheila was supposed to be disabled after certain events - now fixed
-				choices[choices.length] = SceneLib.sheilaScene.sheilaEncounterRouter;
-				choices[choices.length] = SceneLib.sheilaScene.sheilaEncounterRouter;
-			}
-			//Pick one
-			choices[rand(choices.length)]();
+			explorationEncounter.execEncounter();
 		}
-		
-		private function plainsLoot():void {
-			if (rand(2) == 0) { //OVI
-				outputText("While exploring the plains you nearly trip over a discarded, hexagonal bottle.  ");
-				inventory.takeItem(consumables.OVIELIX, camp.returnToCampUseOneHour);
-			}
-			else { //FIND KANGAAA
-				outputText("While exploring the plains you come across a strange-looking plant.  As you peer at it, you realize it has some fruit you can get at.  ");
-				inventory.takeItem(consumables.KANGAFT, camp.returnToCampUseOneHour);
-			}
+		private function findKangaFruit():void {
+			outputText(images.showImage("item-kFruit"));
+			outputText("While exploring the plains you come across a strange-looking plant.  As you peer at it, you realize it has some fruit you can get at.  ");
+			inventory.takeItem(consumables.KANGAFT, camp.returnToCampUseOneHour);
+		}
+
+		private function findOviElix():void {
+			outputText(images.showImage("item-oElixir"));
+			outputText("While exploring the plains you nearly trip over a discarded, hexagonal bottle.  ");
+			inventory.takeItem(consumables.OVIELIX, camp.returnToCampUseOneHour);
 		}
 	}
 }

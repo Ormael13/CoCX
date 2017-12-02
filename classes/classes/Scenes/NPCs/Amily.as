@@ -71,7 +71,7 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 			//Got hit!
 			else {
 				outputText("Amily dashes at you and swipes her knife, cutting you. ");
-				damage = player.takeDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
 			}
 			if(damage > 0) {
 				if(lustVuln > 0 && player.armorName == "barely-decent bondage straps") {
@@ -126,7 +126,7 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 					if(dodged > 0) outputText("Amily dashes at you and quickly slashes you twice; you manage to avoid the first blow, but the second one hits home, cutting you");
 					else outputText("Amily dashes at you and slashes at you twice in the time it would take most to throw a single blow");
 					outputText("! ");
-					damage = player.takeDamage(damage, true);
+					damage = player.takePhysDamage(damage, true);
 				}
 			}
 			//Dodge all!

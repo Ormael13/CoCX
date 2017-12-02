@@ -941,7 +941,7 @@ use namespace CoC;
 			return lust;
 		}
 
-		public override function takeDamage(damage:Number, display:Boolean = false):Number{
+		public override function takePhysDamage(damage:Number, display:Boolean = false):Number{
 			//Round
 			damage = Math.round(damage);
 			// we return "1 damage received" if it is in (0..1) but deduce no HP
@@ -5747,9 +5747,9 @@ use namespace CoC;
 				}
 			}
 			if(hasStatusEffect(StatusEffects.Might)) {
-				if (hasStatusEffect(StatusEffects.FortressOfIntellect)) dynStats("int", -statusEffectv1(StatusEffects.Might));
-				else dynStats("str", -statusEffectv1(StatusEffects.Might));
-				dynStats("tou", -statusEffectv2(StatusEffects.Might));
+				if (hasStatusEffect(StatusEffects.FortressOfIntellect)) dynStats("int", -statusEffectv1(StatusEffects.Might), "scale", false);
+				else dynStats("str", -statusEffectv1(StatusEffects.Might), "scale", false);
+				dynStats("tou", -statusEffectv2(StatusEffects.Might), "scale", false);
 				removeStatusEffect(StatusEffects.Might);
 			}
 			if(hasStatusEffect(StatusEffects.Blink)) {

@@ -48,7 +48,7 @@ import classes.internals.*;
 				else if(choice == 1) outputText("The girl feints a charge, leans back, and snaps a kick against your " + Appearance.hipDescription(player) + ". You stagger, correct your posture, and plunge back into combat. ");
 				//(regular attack 3)
 				else if(choice == 2) outputText("You momentarily drop your guard as the girl appears to stumble. She rights herself as you step forward and lands a one-two combination against your torso. ");
-				damage = player.takeDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
 			}
 			if(damage > 0) {
 				if(lustVuln > 0 && player.armorName == "barely-decent bondage straps") {

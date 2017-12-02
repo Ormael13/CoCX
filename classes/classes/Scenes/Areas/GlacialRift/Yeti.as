@@ -28,7 +28,7 @@ public class Yeti extends Monster
 				outputText("Like a white blur the yeti charges you, striking at you with his claws and slashing over your [armor] before a fist collides with your side, sending you sliding over the icy floor. ");
 				var damage:Number = str + 25 + rand(50);
 				damage = player.reduceDamage(damage);
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 		}
 		public function yetiTackleTumble():void {
@@ -44,7 +44,7 @@ public class Yeti extends Monster
 				outputText("The beast’s hind claws dig into the ice before his giant furred body launches at you and he collides with you in a brutal tackle. The pair of you are sent rolling around on the floor as you trade blows with the furred beast, and then he lifts you up and tosses you aside, your body hitting the ice walls with a groan. You shakily get to your feet. ");
 				var damage:Number = str + 50 + rand(150);
 				damage = player.reduceDamage(damage);
-				player.takeDamage(damage, true);				
+				player.takePhysDamage(damage, true);				
 			}
 		}
 		public function yetiSnowball():void {

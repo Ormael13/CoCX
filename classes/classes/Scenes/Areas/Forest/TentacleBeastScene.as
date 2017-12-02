@@ -715,7 +715,7 @@ private function centaurGenderlessRetardation():void {
 
 		outputText("\"<i>Q.E.D., MOTHERFUCKER!</i>\" it shouts, gesticulating in the air wildly with its tentacles as it turns and clumps back into the dense brush.");
 	}
-	player.takeDamage(5);
+	player.takePhysDamage(5);
     if (CoC.instance.inCombat) cleanupAfterCombat();
     else doNext(camp.returnToCampUseOneHour);
 }
@@ -735,7 +735,7 @@ private function genderlessHilarityForNagaKenDolls():void {
 	outputText("Sensing an opportunity to get out of this situation, you respond with your own series of hisses and hand gestures as if to say you have no idea what the beast wants.  It responds with a sigh and you're released from its grip, landing on the ground in a bit of a heap.\n\n");
 
 	outputText("\"<i>Fucking tourists.</i>\"  It slams its tentacles down in a brutal blow, knocking you out.");
-	player.takeDamage(15);
+	player.takePhysDamage(15);
     if (CoC.instance.inCombat) cleanupAfterCombat();
     else doNext(camp.returnToCampUseOneHour);
 }

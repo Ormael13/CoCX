@@ -17,7 +17,7 @@ public class GoblinWarrior extends Goblin
 				//Get hit
 				var damage:int = str + weaponAttack + rand(40);
 				damage = player.reduceDamage(damage);
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 		}
 		
@@ -35,7 +35,7 @@ public class GoblinWarrior extends Goblin
 				}
 				var damage:int = str + rand(10);
 				damage = player.reduceDamage(damage);
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 		}
 		

@@ -56,7 +56,7 @@ package classes.Scenes.NPCs
 			}
 			else outputText("laugh as her blades scape uselessly at your armor-clad back");
 			outputText(" before breaking her embrace and leaping away. ");
-			player.takeDamage(damage, true);
+			player.takePhysDamage(damage, true);
 		}
 		
 		public function Jeniffer() 

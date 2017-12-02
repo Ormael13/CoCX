@@ -379,7 +379,7 @@ public class CoC extends MovieClip
 
         //Register the classes we need to be able to serialize and reconstitute so
         // they'll get reconstituted into the correct class when deserialized
-        /*registerClassAlias("AssClass", AssClass);
+        registerClassAlias("AssClass", AssClass);
         registerClassAlias("Character", Character);
         registerClassAlias("Cock", Cock);
         registerClassAlias("CockTypesEnum", CockTypesEnum);
@@ -390,7 +390,7 @@ public class CoC extends MovieClip
         registerClassAlias("Monster", Monster);
         registerClassAlias("Player", Player);
         registerClassAlias("StatusEffectClass", StatusEffectClass);
-        registerClassAlias("VaginaClass", VaginaClass);*/
+        registerClassAlias("VaginaClass", VaginaClass);
         //registerClassAlias("Enum", Enum);
 
         //Hide sprites

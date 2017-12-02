@@ -301,7 +301,7 @@ internal function kihaLossIntro():void {
 	//If not horny, get a beating!
 	else {
 		outputText("Kiha pulls her axe back in a two handed grip, and you're sure the moment of your death is upon you.  A moment later, the flat of the blade slams into your head, knocking you unconscious.");
-		player.takeDamage(1000);
+		player.takePhysDamage(1000);
 		cleanupAfterCombat();
 	}
 }
@@ -352,7 +352,7 @@ private function kihaMilkTitHumiliation():void {
 private function kihaGenderlessBeating():void {
 	spriteSelect(72);
 	outputText("\"<i>What a pussy!</i>\" she yells at you, noticing your lack of any gender upon denuding you.  \"<i>What's the problem, runt? Too scared that evil imps and goblins will abuse you?</i>\"  She hits the ground with her tail in frustration and grabs her axe. \"<i>What a waste of time. You're useless both in battle and out of it.</i>\"  She begins kicking you, eventually hitting you hard enough to knock you unconscious.");
-	player.takeDamage(1000);
+	player.takePhysDamage(1000);
 	cleanupAfterCombat();
 }
 

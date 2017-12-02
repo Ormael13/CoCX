@@ -29,7 +29,7 @@ use namespace CoC;
 				outputText("You easily deflect and block the damage from dragon boy wide swing.");//Ted's
 			}
 			else outputText("Dragon boy easily hits you with a wide, difficult to avoid swing.  ");
-			if(damage > 0) player.takeDamage(damage, true);
+			if(damage > 0) player.takePhysDamage(damage, true);
 			statScreenRefresh();
 		}
 		private function tedSpecialAttackTwo():void {
@@ -53,7 +53,7 @@ use namespace CoC;
 			}
 			if (damage > 0) {
 				outputText("You are struck by a two-handed overhead swing from the enraged dragon-boy.  ");
-				damage = player.takeDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
 			}
 			statScreenRefresh();
 		}//poniżej ataki jakie bedzie używać w dodatku do 2 powyżej w czasie spotkań po Hidden Cave

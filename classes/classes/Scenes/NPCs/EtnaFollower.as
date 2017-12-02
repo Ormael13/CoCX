@@ -405,13 +405,13 @@ public function etnaRapeIntro2():void
 			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 60);
 			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ETNA_LVL_UP] = 6;
-		}
+		}/*
 		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.ETNA_LVL_UP] == 6) {
 			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, 66);
 			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 66);
 			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ETNA_LVL_UP] = 7;
-		}
+		}*/
 	}
 	menu();
 	if (player.lust >= 33 && player.hasCock()) addButton(0, "Yes (M)", etnaRapeYesM);

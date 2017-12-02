@@ -25,7 +25,7 @@ public class Phouka extends Monster
 				else if (damage <= 0)
 					outputText("\nYou block his attack by moving your shoulder in close, absorbing the energy of the kick harmlessly.");
 				else {
-					player.takeDamage(damage);
+					player.takePhysDamage(damage);
 					outputText("\nThe kick connects and leaves you reeling.");
 				}
 			}
@@ -37,7 +37,7 @@ public class Phouka extends Monster
 				else if (damage <= 0)
 					outputText("\nYou manage to smack the goat morph in the side of the head.  The horns pass you by harmlessly.");
 				else {
-					player.takeDamage(damage);
+					player.takePhysDamage(damage);
 					outputText("\nIts head and horns crash into you, leaving you winded and bruised.");
 				}
 			}
@@ -47,7 +47,7 @@ public class Phouka extends Monster
 				if (player.getEvasionRoll() || (damage <= 0))
 					outputText("\nAs the stallion passes you twist in place and manage to stay clear of its legs.");
 				else {
-					player.takeDamage(damage);
+					player.takePhysDamage(damage);
 					outputText("\nYou get clipped by the stallion's legs and hooves as he charges. As he comes around for another pass you check over your body, amazed none of your bones are broken after that.");
 				}
 			}

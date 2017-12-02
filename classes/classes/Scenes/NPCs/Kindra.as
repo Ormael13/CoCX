@@ -80,7 +80,7 @@ use namespace CoC;
 				else if (this.weaponRangeAttack >= 101 && this.weaponRangeAttack < 151) damage *= (3.75 + ((this.weaponRangeAttack - 100) * 0.02));
 				else if (this.weaponRangeAttack >= 151 && this.weaponRangeAttack < 201) damage *= (4.75 + ((this.weaponRangeAttack - 150) * 0.015));
 				else damage *= (5.5 + ((this.weaponRangeAttack - 200) * 0.01));
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 			outputText("\n\n");
 			fatigue += bowShooting();

@@ -1232,6 +1232,16 @@ private function leaveHelAfterMinoThreeSomeChat():void {
 //THREESOMES AHOY!
 //===================
 
+	public function helXIzzy():void {
+		//Hell/Izzy threesome intro
+		if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 0) {
+			SceneLib.helScene.salamanderXIsabellaPlainsIntro();
+		}
+		//Propah threesomes here!
+		else if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 1) {
+			SceneLib.helScene.isabellaXHelThreeSomePlainsStart();
+		}
+	}
 //Isabella x salamander Threesome – Plains Version Intro (edited)
 //(Requirements:
 //-Player has achieved Fuck Buddy status with the salamander.
@@ -1275,7 +1285,7 @@ private function salamanderXIsabellaDiplomacy():void {
 
 		outputText("To your relief, after a few seconds you hear \"<i>[name]!</i>\" from both Isabella and Hel.  The two women momentarily stop their squabbling to help you; your head is soon resting upon Isabella's sizable cleavage while Hel ties a long length of plains grass over a cut in your sternum.\n\n");
 	}
-	player.takeDamage(10);
+	player.takePhysDamage(10);
 	statScreenRefresh();
 	//(Diplomacy Continued)
 	doNext(salamanderXIsabellaDiplomacy2);

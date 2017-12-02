@@ -43,7 +43,7 @@ public class LizanRogue extends Monster
 			else {
 				outputText("The lizan zips to the side and as you move to follow you feel something sharp cut across your body. He must have thrown something. ");
 				var damage:int = this.spe/3 + rand(60);
-				player.takeDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 		}
 				

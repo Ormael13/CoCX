@@ -19,7 +19,7 @@ public class WormMass extends Monster
 			}
 			var temp:int = int((str + weaponAttack) - Math.random()*(player.tou+player.armorDef));
 			if(temp <= 0) temp = 1;
-			if(temp > 0) player.takeDamage(temp);
+			if(temp > 0) player.takePhysDamage(temp);
 			outputText("The worm colony strikes at you with its makeshift limbs. It strikes you for ");
 			outputText(String(temp));
 			outputText(" damage and the limb splatters, dispersing the worms comprising the false arm.");

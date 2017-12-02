@@ -164,7 +164,7 @@ private function get philters():Boolean {
 	return player.gems >= 100;
 }
 private function get reductos():Boolean {
-	return player.hasStatusEffect(StatusEffects.CampRathazul) && player.statusEffectv2(StatusEffects.MetRathazul) >= 4;
+	return player.hasStatusEffect(StatusEffects.CampRathazul) && player.statusEffectv2(StatusEffects.MetRathazul) >= 4 && ((flags[kFLAGS.AMILY_MET_RATHAZUL] >= 2 && player.gems >= 50) || player.gems >= 100);
 }
 private function get dyes():Boolean {
 	return player.gems >= 50;
@@ -1159,8 +1159,8 @@ private function rathazulShopMenu():void {
 		addButton(4, "GroPlus", buyGroPlus);
 	}
 	else {
-		addButtonDisabled(3, "Reducto", "Rathazul isn't currently producing this item.");
-		addButtonDisabled(4, "GroPlus", "Rathazul isn't currently producing this item.");
+		addButtonDisabled(3, "Reducto", "Rathazul isn't currently producing this item or you can't afford to buy it.");
+		addButtonDisabled(4, "GroPlus", "Rathazul isn't currently producing this item or you can't afford to buy it.");
 	}
 	//Philters
 	if (philters) {

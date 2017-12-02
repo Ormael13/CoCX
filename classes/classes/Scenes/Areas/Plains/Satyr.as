@@ -22,7 +22,7 @@ public class Satyr extends Monster
 				var damage:Number = int((str + weaponAttack) - rand(player.tou));
 				if(damage > 0) {
 					outputText("It feels like you just got hit with a wooden club! ");
-					damage = player.takeDamage(damage, true);
+					damage = player.takePhysDamage(damage, true);
 				}
 				else outputText("You successfully block it.");
 			}
@@ -67,7 +67,7 @@ public class Satyr extends Monster
 							player.createStatusEffect(StatusEffects.Stunned,0,0,0,0);
 						}
 						outputText(" ");
-						damage = player.takeDamage(damage, true);
+						damage = player.takePhysDamage(damage, true);
 						//stun PC + hp damage if hit, hp damage dependent on str if miss
 					}
 					else outputText("He charges at you, but you successfully deflect it at the last second.");
