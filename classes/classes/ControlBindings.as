@@ -34,7 +34,6 @@ internal class ControlBindings {
                     }
                 });
 
-        for (var i:int = 1; i < 5; i++) {
             inputManager.AddBindableControl(
                     "Quicksave 1",
                     "Quicksave the current game to slot 1",
@@ -547,7 +546,7 @@ internal class ControlBindings {
                         }
                         else if (kGAMECLASS.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 4) {
                             if (keyCode == 71) {
-                                if (kGAMECLASS.player.str > 0 && kGAMECLASS.mainView.getButtonText(0).indexOf("Game Over") == -1 && (kGAMECLASS.debug && kGAMECLASS.flags[kFLAGS.HARDCORE_MODE] <= 0 || CoC_Settings.debugBuild)) {
+                                if (kGAMECLASS.player && kGAMECLASS.player.str > 0 && kGAMECLASS.mainView.getButtonText(0).indexOf("Game Over") == -1 && (kGAMECLASS.debug && kGAMECLASS.flags[kFLAGS.HARDCORE_MODE] <= 0 || CoC_Settings.debugBuild)) {
                                     SceneLib.debugMenu.accessDebugMenu();
                                 }
                             }
@@ -605,7 +604,7 @@ internal class ControlBindings {
 
             inputManager.RegisterDefaults();
 
-        }
+
     }
 }
 }

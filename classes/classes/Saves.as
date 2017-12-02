@@ -367,7 +367,7 @@ public function saveLoad(e:MouseEvent = null):void
 	addButton(1, "Load", loadScreen);
 	addButton(2, "Delete", deleteScreen);
 	//addButton(5, "Save to File", saveToFile);
-	addButton(6, "Load File", loadFromFile);
+	addButton(6, "Load File", openSave);
 	//addButton(8, "AutoSave: " + autoSaveSuffix, autosaveToggle);
 	addButton(14, "Back", EventParser.gameOver, true);
 	
@@ -404,12 +404,6 @@ public function saveLoad(e:MouseEvent = null):void
 
 private function saveToFile():void {
 	saveGameObject(null, true);
-}
-
-private function loadFromFile():void {
-	openSave();
-	showStats();
-	statScreenRefresh();
 }
 
 private function autosaveToggle():void {
@@ -1400,6 +1394,7 @@ public function onDataLoaded(evt:Event):void
 		}
 		loadGameObject(tmpObj);
 		outputText("Loaded Save");
+        statScreenRefresh();
 	}
 	catch (rangeError:RangeError)
 	{
@@ -1415,7 +1410,6 @@ public function onDataLoaded(evt:Event):void
 
 		doNext(returnToSaveMenu);
 	}
-	statScreenRefresh();
 	//playerMenu();
 }
 
