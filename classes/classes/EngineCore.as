@@ -1,6 +1,7 @@
 package classes {
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
+import classes.Parser.Parser;
 import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
@@ -292,7 +293,7 @@ public class EngineCore {
         CoC.instance.mainView.hideTestInputPanel();
 
 
-        output = CoC.instance.parser.recursiveParser(output, false);
+        output = Parser.recursiveParser(output, false);
 
         //OUTPUT!
         CoC.instance.currentText += output;

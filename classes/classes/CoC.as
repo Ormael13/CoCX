@@ -126,8 +126,6 @@ public class CoC extends MovieClip
 
     public var model :GameModel;
 
-    public var parser:Parser;
-
     // ALL THE VARIABLES:
     // Declare the various global variables as class variables.
     // Note that they're set up in the constructor, not here.
@@ -213,8 +211,6 @@ public class CoC extends MovieClip
 
         // Used for stopping chaos monkey on syntax errors. Separate flag so we can make stopping optional
         CoC_Settings.haltOnErrors = false;
-
-        this.parser = new Parser(this, CoC_Settings);
 
         this.model = new GameModel();
         this.mainView = new MainView(/*this.model*/);

@@ -1,7 +1,7 @@
 package classes.display{
 import classes.BaseContent;
 
-
+[Deprecated]
 internal class EventTest extends BaseContent{
 	private var debugPane:Function;
 	public function EventTest(pane:Function){

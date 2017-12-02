@@ -7,6 +7,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Items.Consumable;
 import classes.Items.ConsumableLib;
+import classes.Parser.Parser;
 import classes.Scenes.NPCs.JojoScene;
 
 import coc.view.Color;
@@ -525,7 +526,7 @@ public class DebugMenu extends BaseContent
 		private function generateTagDemos(...tags:Array):String {
 			return tags.map(function(tag:String,index:int,array:Array):String {
 				return "\\["+tag+"\\] = " +
-                        CoC.instance.parser.recursiveParser("[" + tag + "]").replace(' ', '\xA0')
+                        Parser.recursiveParser("[" + tag + "]").replace(' ', '\xA0')
             }).join(",\t");
 		}
 		private function showChangeOptions(backFn:Function, page:int, constants:Array, functionPageIndex:Function):void {
