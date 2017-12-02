@@ -1,25 +1,25 @@
-#Parser Syntax
+# Parser Syntax
 
-##Querying simple PC stat nouns
+## Querying simple PC stat nouns
 ```relax-ng
 [noun]
 ```
 A list of available tags can be found in [ParserTags](ParserTags.as)
 
-##Conditional Statements
+## Conditional Statements
 
-###Simple if statement
+### Simple if statement
 ```relax-ng
 [if (condition) OUTPUT_IF_TRUE]
 ```
 
-###If-Else statement
+### If-Else statement
 ```relax-ng
 [if (condition) OUTPUT_IF_TRUE | OUTPUT_IF_FALSE]
 ```
 Note - Implicit else indicated by presence of the `|`
 
-###Conditions
+### Conditions
 ```
 (arg1 [conditional] arg2)
 ```
@@ -33,13 +33,13 @@ Numbers are converted to a Number typeprior to comparison.
 |`>` | `>=` | Greater than, and greater than or equal   |
 |`!=`|     | Not equal                                 |
 
-###Object aspect descriptions
+### Object aspect descriptions
 ```relax-ng
 [object aspect]
 ```
 gets the description of aspect `aspect` of object/NPC/PC `object`
 
-##Gender Pronoun Weirdness
+## Gender Pronoun Weirdness
 The parser uses Elverson/Spivak Pronouns specifically to allow characters to be written with non-specific genders.
 http://en.wikipedia.org/wiki/Spivak_pronoun
 
