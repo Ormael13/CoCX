@@ -59,7 +59,7 @@
                 part CDATA #REQUIRED>
         ]>
 <!--suppress EqualityComparisonWithCoercionJS, CheckTagEmptyBody -->
-<model name="demo" dir="./res/charview/" width="250" height="250" scale="1" originX="-25" originY="-25">
+<model name="demo" dir="./res/charview/" width="180" height="220" scale="1" originX="5" originY="10">
     <palette>
         <!--Colors common for skin/hair/fur/scales/... go here. Can be overriden later-->
         <common>

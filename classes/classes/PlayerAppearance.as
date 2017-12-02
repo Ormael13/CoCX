@@ -4,6 +4,10 @@ import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Scenes.NPCs.JojoScene;
 
+import coc.view.BoundClip;
+
+import coc.view.CharView;
+
 import coc.xxc.BoundStory;
 import coc.xxc.Story;
 
@@ -18,7 +22,6 @@ public class PlayerAppearance extends BaseContent {
         story = new Story("story", kGAMECLASS.rootStory, "appearance").bind(kGAMECLASS.context);
     }
 	public function appearance():void {
-        if (kGAMECLASS.gameSettings.charviewEnabled) mainViewManager.showPlayerDoll(debug);
         //Temp vars
 		var temp:Number  = 0;
 		var rando:Number = 0;
@@ -26,6 +29,12 @@ public class PlayerAppearance extends BaseContent {
 
 		clearOutput();
 		outputText("<font size=\"36\" face=\"Georgia\"><u>Appearance</u></font>\n");
+		if (kGAMECLASS.gameSettings.charviewEnabled) {
+			mainViewManager.showPlayerDoll(debug);
+			var content:CharView  = mainView.charView;
+			BoundClip.nextContent = content;
+			outputText("<img src='coc.view::BoundClip' align='left' id='charview'/>");
+		}
 		describeRace();
 		describeGear();
 		describeFaceShape();
