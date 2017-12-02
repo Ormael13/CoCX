@@ -113,6 +113,7 @@ public function WonSecondFightYes():void {
 	outputText("(<b>Chi Chi has been added to the Lovers menu!</b>)\n\n");
 	flags[kFLAGS.CHI_CHI_SAM_TRAINING] = 3;
 	flags[kFLAGS.CHI_CHI_FOLLOWER] = 3;
+	flags[kFLAGS.CHI_CHI_LVL_UP] = 1;
 	player.orgasm();
 	cleanupAfterCombat();
 }
@@ -139,6 +140,7 @@ public function WonSparringFight():void {
 		outputText("\"<i>It's not like I wanted to be praised! Yeah, as if! Even after all this time, your stance is still shaky.. BAAAKA!”</i>\"\n\n");
 		outputText("Chi Chi kicks a rock away in anger and heads back to her training ground.\n\n");
 	}
+	
 	cleanupAfterCombat();
 }
 
@@ -411,7 +413,7 @@ public function ChiChiCampMainMenu():void {
 	else outputText("\"<i>Oh, how are you doing [name]? I just finished a new set of kicks and punches, but I’m always game for a different kind of battle.</i>\" She winks in a very suggestive manner. You wonder if she just fakes vulnerability in bed because she secretly likes to be treated like a fragile thing.");
 	menu();
 	addButton(0, "Appearance", chichiAppearance).hint("Examine Chi Chi's detailed appearance.");
-	//addButton(1, "Talk", chichiTalks);
+	addButton(1, "Talk", chichiTalksMenu);
 	addButton(2, "Shop", SoulskilsManualsShop);
 	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(3, "Spar", chichiSparring);
 	//addButton(4, "Sex", );
@@ -440,9 +442,55 @@ public function chichiAppearance():void {
 	addButton(14, "Back", ChiChiCampMainMenu);
 }
 
-public function chichiTalks():void {
+public function chichiTalksMenu():void {
 	clearOutput();
+	outputText("\"<i>What did you want to talk about? I need to keep training to maintain shape.</i>\"\n\n");
+	menu();
+	addButton(0, "M. Arts", chichiTalksMartialArts);
+	addButton(1, "F. Students", chichiTalksFormerStudents);
+	addButton(14, "Back", ChiChiCampMainMenu);
 	
+}
+public function chichiTalksMartialArts():void {
+	clearOutput();
+	outputText("Where and how did she learn to fight?\n\n");
+	outputText("\"<i>Ah, that was a long time ago. I was from the very eastern lands from beyond the mountains. Most of what I learned was from a... old creature I met in a cave, hidden behind a waterfall. He had scales green as emeralds yet a body like that of a snake. His eyes were full of wisdom and wisdom he was willing to share, even to a little girl like me... he told me... he told me that one day perhaps the future of Mareth might depend on my ability to teach what he would impart to me. After ten years under his tutelage I founded my own martial arts school and began teaching promising students what he had imparted on me. You were the first pupil I had in ages...</i>\"\n\n");
+	if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 4) {
+		outputText("She is looking at you with dreamy eyes for a second before shaking her head and resuming punching the nearest dummy.\n\n");
+		outputText("\"<i>Gah, do you know how long my best pupils took to learn even half of what you did?! He did it in one day and...</i>\"\n\n");
+		outputText("And how does she explain her defeat then?\n\n");
+		outputText("\"<i>I let you win! It was just a test of your willpower, you hear me?! ... BAKA!</i>\"\n\n");
+		outputText("She resumes furiously kicking at the dummy, her cheeks are bright red in anger. Or perhaps it's something else? You decide not to pry to avoid getting kicked in the face. Truth be told however it’s also to prevent her from harming herself as she still needs to recover from her wounds.\n\n");
+	}
+	doNext(chichiTalksMenu);
+	cheatTime(1/4);
+}
+public function chichiTalksFormerStudents():void {
+	clearOutput();
+	outputText("She said she had former students before. What happened to them?\n\n");
+	outputText("Chi Chi hands suddenly tremble and shake... as if she was containing her fury.\n\n");
+	outputText("\"<i>Dead... all dead by my hands.</i>\"\n\n");
+	outputText("She slams the back of her first into a nearby dummy, which explodes into hundreds of small ash fragments.");
+	if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 4) outputText(" Her hand is bleeding but she pays it no attention, the wounds slowly closing.");
+	outputText("\n\n\"<i>I used to be a teacher in a school... those were more peaceful days. I can still remember the blossoming cherry trees and my five students faces. They all worked very hard to learn the techniques... all but one.</i>\"\n\n");
+	outputText("A shadow falls on her face and you can feel her anger rising as she gets to the less agreeable part.\n\n");
+	outputText("\"<i>A few weeks away from graduation, the demons came in and stormed the village, taking down everyone they could find. But I held strong, fighting in the eye of the storm and slaying the fiends as they came. Unable to reach me, the demons went for my students, corrupting them in order to grow their number... I can still remember their plea as they begged me to save them. But I lost them one by one, too far away to reach them in time... I still hear their screams, this squirrel girl who perished in the fire, that monkey boy who I blew to smithereens to release him from his suffering. ");
+	outputText("Each of my own beloved students I had to put down for their own sakes... all of this mess wouldn’t have happened if an idiot I shall not name hadn't opened the town gates to the demons, betraying us all so he could gain power. I fought him and would've killed him if not for the fact the demons covered his escape.</i>\"\n\n");
+	outputText("Is she still haunted by the people she killed?\n\n");
+	outputText("\"<i>Sometimes... the regret weighs heavily on me. I had been searching for a way to properly end my life. Probably at the hands of a warrior strong enough to kill me, even if by accident. For several years I wandered the roads of Mareth challenging pretending heroes to duels and destroying demons and never finding the defeat I so craved. When you lost to me in the arena, I saw an opportunity and trained you. ");
+	outputText("In the end, I was ready to finally die by your hands but you showed mercy on me, denying me death, healing my wounds and my heart when I needed it the most. You showed me that there was still something left in the world for me to accomplish, just as my sensei foretold. For this alone I am in your debt, [name].</i>\"\n\n");
+	if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 4) {
+		outputText("She suddenly realizes she’s about to kiss you and stops, before suddenly turning around to kick a dummy in what could have been your crotch.\n\n");
+		outputText("\"<i>Baka! I swear, I'd have won if I had tried harder from the start. Also, since you almost shattered all my bones to pieces, you will have to take care of me, ok? And only of me, because I have seen you around the other girls and I’m seriously beginning to think you are a shameless pervert.</i>\"\n\n");
+		outputText("Isn’t that because she is jealous of what you could do with the other girls that she is angry?");
+		if (player.cor > 33) outputText(" If she wasn’t such a blockhead, you might even show her in for a three way.");
+		outputText("\n\n\"<i>You’re being silly. As if I would ever be interested in a...</i>\"\n\n");
+		outputText("Like that night the two of you shared after she regained consciousness perhaps?\n\n");
+		outputText("\"<i>That does not count! Arghhh be gone, I got training to do!</i>\"\n\n");
+		outputText("She resumes furiously smashing the target, though you wonder if the red on her cheeks is because she is angry or something else altogether. You decide to give her a break before she actually opens her injuries by striking the other dummies or your face with such strength that they also explode.\n\n");
+	}
+	doNext(chichiTalksMenu);
+	cheatTime(1/4);
 }
 
 public function chichiSparring():void {

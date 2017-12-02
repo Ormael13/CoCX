@@ -41,7 +41,7 @@ package classes.Items
 		public const EXCALIB:Weapon = new Excalibur();
 		public const FLAIL  :Weapon = new Weapon("Flail  ","Flail","flail","a flail","smash",10,400,"This is a flail, a weapon consisting of a metal spiked ball attached to a stick by chain. Be careful with this as you might end up injuring yourself.");
 		public const URTAHLB:Weapon = new Weapon("UrtaHlb","UrtaHlb","halberd","a halberd","slash",30,1200,"Urta's halberd. How did you manage to get this?","Large");
-		public const H_GAUNT:Weapon = new Weapon("H.Gaunt", "H.Gaunt", "hooked gauntlets", "a set of hooked gauntlets", "clawing punch", 4, 1600, "These metal gauntlets are covered in nasty looking hooks that are sure to tear at your foes flesh and cause them harm.");
+		public const H_GAUNT:Weapon = new Weapon("H.Gaunt", "H.Gaunt", "hooked gauntlets", "a set of hooked gauntlets", "clawing punch", 0, 400, "These metal gauntlets are covered in nasty looking hooks that are sure to tear at your foes flesh and cause them harm.");
 		public const HNTCANE:HuntsmansCane = new HuntsmansCane();
 		public const JRAPIER:JeweledRapier = new JeweledRapier();
 		public const KATANA :Weapon = new Weapon("Katana ","Katana","katana","a katana","keen cut",10,400,"A curved bladed weapon that cuts through flesh with the greatest of ease.");
@@ -73,7 +73,7 @@ package classes.Items
 		public const RRAPIER:RaphaelsRapier = new RaphaelsRapier();
 		public const RCLAYMO:RubyClaymore = new RubyClaymore();
 		public const S_BLADE:Spellblade = new Spellblade();
-		public const S_GAUNT:Weapon = new Weapon("S.Gaunt","S.Gauntlet","spiked gauntlet","a spiked gauntlet","spiked punch",1,200,"This single metal gauntlet has the knuckles tipped with metal spikes.  Though it lacks the damaging potential of other weapons, the sheer pain of its wounds has a chance of stunning your opponent.");
+		public const S_GAUNT:Weapon = new Weapon("S.Gaunt","S.Gauntlet","spiked gauntlet","a spiked gauntlet","spiked punch",0,200,"This single metal gauntlet has the knuckles tipped with metal spikes.  Though it lacks the damaging potential of other weapons, the sheer pain of its wounds has a chance of stunning your opponent.");
 		public const SCARBLD:Weapon = new ScarredBlade();
 		public const SCLAYMO:SapphireClaymore = new SapphireClaymore();
 		public const SCIMITR:Weapon = new Weapon("Scimitr", "Scimitar", "scimitar", "a scimitar", "slash", 15, 600, "This curved sword is made for slashing.  No doubt it'll easily cut through flesh.");

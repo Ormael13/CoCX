@@ -259,8 +259,8 @@ import flash.utils.getQualifiedClassName;
 			for (var i:int = 0; i < improvableItems.length; i++){
 				if(improvableItems[i][selectfrom] == null){/*do nothing*/}
 				else{
-					var item = improvableItems[i][selectfrom];
-					var from = improvableItems[i][0];
+					var item:ItemType = improvableItems[i][selectfrom];
+					var from:ItemType = improvableItems[i][0];
 					selectMenu.add(item.id,curry(improveItem,item,from)).disableIf(!player.hasItem(item));
 				}
 			}

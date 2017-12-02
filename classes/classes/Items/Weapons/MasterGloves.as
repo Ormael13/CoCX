@@ -13,7 +13,7 @@ package classes.Items.Weapons
 		
 		public function MasterGloves() 
 		{
-			super("MastGlo", "MasterGloves", "Master Gloves", "a Master Gloves", "punch", 1, 400, "These gloves belonged to Chi Chi. They seem to naturally strengthen the soulforce techniques of the user.", "Body Cultivator's Focus", PerkLib.BodyCultivatorsFocus, 0.4, 0, 0, 0);
+			super("MastGlo", "MasterGloves", "Master Gloves", "a Master Gloves", "punch", 0, 400, "These gloves belonged to Chi Chi. They seem to naturally strengthen the soulforce techniques of the user.", "Body Cultivator's Focus", PerkLib.BodyCultivatorsFocus, 0.4, 0, 0, 0);
 		}
 		
 		override public function get description():String {
