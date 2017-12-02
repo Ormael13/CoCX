@@ -3652,6 +3652,7 @@ public class Holidays {
             //Receive \"<i>Peppermint White</i>\"
             SceneLib.inventory.takeItem(consumables.PEPPWHT, SceneLib.camp.returnToCampUseOneHour);
         }
+        flags[kFLAGS.POLAR_PETE_YEAR_MET] = date.fullYear;
     }
 
     public static function nieveHoliday():Boolean {

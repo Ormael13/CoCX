@@ -146,7 +146,7 @@ public static const RAPHAEL_RAPIER_TRANING:int                                  
 public static const RAPHAEL_INTELLIGENCE_TRAINING:int                               =  138; // Raphael Intelligence Training
 public static const RAPHAEL_DISGUSTED_BY_PC_APPEARANCE:int                          =  139; // Raphael Disgusted by PC appearance
 public static const RAPHAEL_SECOND_DATE:int                                         =  140; // Raphael 2nd Date Happen?
-public static const UNKNOWN_FLAG_NUMBER_00141:int                                   =  141; // Hellhound Progression
+public static const HELLHOUND_MASTER_PROGRESS:int                                   =  141; // Hellhound Progression
 public static const UNKNOWN_FLAG_NUMBER_00142:int                                   =  142; // Can buy minotaur cum from goblins?
 public static const UNKNOWN_FLAG_NUMBER_00143:int                                   =  143; // How Many Times Have You Caught Urta + Scylla?
 public static const UNKNOWN_FLAG_NUMBER_00144:int                                   =  144; // Multitake Scylla meeting take advantage ever done?
@@ -261,11 +261,11 @@ public static const IZMA_CHILDREN_TIGERSHARKS:int                               
 public static const IZMA_TIME_TILL_NEW_BOOK_AVAILABLE:int                           =  253; // Izma Nu Book Countdown
 public static const UNKNOWN_FLAG_NUMBER_00254:int                                   =  254; // Weapon Rack owned? (1 = yes) (NO LONGER USED)
 public static const UNKNOWN_FLAG_NUMBER_00255:int                                   =  255; // Armor Rack owned? (2 = yes) (NO LONGER USED)
-public static const UNKNOWN_FLAG_NUMBER_00256:int                                   =  256; // PC decided to approach Isabella's camp yet? 1
-public static const UNKNOWN_FLAG_NUMBER_00257:int                                   =  257; // Met Isabella?
-public static const UNKNOWN_FLAG_NUMBER_00258:int                                   =  258; // Is Isabella okay with tall folks?
+public static const ISABELLA_CAMP_APPROACHED:int                                    =  256; // PC decided to approach Isabella's camp yet? 1
+public static const ISABELLA_MET:int                                                =  257; // Met Isabella?
+public static const ISABELLA_OKAY_WITH_TALL_FOLKS:int                                   =  258; // Is Isabella okay with tall folks?
 public static const UNKNOWN_FLAG_NUMBER_00259:int                                   =  259; // Has Isabella ever met the PC while PC is short?
-public static const UNKNOWN_FLAG_NUMBER_00260:int                                   =  260; // Isabella angry counter
+public static const ISABELLA_ANGRY_AT_PC_COUNTER:int                                =  260; // Isabella angry counter
 public static const UNKNOWN_FLAG_NUMBER_00261:int                                   =  261; // Isabella Sleep rape counter
 public static const UNKNOWN_FLAG_NUMBER_00262:int                                   =  262; // TImes talked with Isabella
 public static const UNKNOWN_FLAG_NUMBER_00263:int                                   =  263; // Met nancy
