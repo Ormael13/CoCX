@@ -118,8 +118,17 @@ var spred;
                     q.push(...l.then);
             }
             else if (l instanceof LogicShow) {
-                //o[l.partExpr.split('/')[0]] = l.partExpr;
                 o.push(l.partExpr);
+            }
+            else if (l instanceof LogicHide) {
+                let m;
+                let part = l.partExpr;
+                if ((m = part.match(/^([^*]+)\*$/))) {
+                    o = o.filter(e => !e.startsWith(m[1]));
+                }
+                else {
+                    o = o.filter(e => e != part);
+                }
             }
             else if (l instanceof LogicSwitch) {
                 let i = randint(l.cases.length + 1) - 1;
@@ -485,6 +494,8 @@ var spred;
                     return lswitch;
                 case 'show':
                     return new LogicShow(x.getAttribute('part'));
+                case 'hide':
+                    return new LogicHide(x.getAttribute('part'));
                 case 'if':
                     let lif = new LogicIf(x.getAttribute("test"));
                     lif.then = LogicStmt.parseBlock($(x));
@@ -520,6 +531,13 @@ var spred;
         }
     }
     spred.LogicShow = LogicShow;
+    class LogicHide extends LogicStmt {
+        constructor(partExpr) {
+            super();
+            this.partExpr = partExpr;
+        }
+    }
+    spred.LogicHide = LogicHide;
     class LogicIf extends LogicStmt {
         constructor(testExpr) {
             super();

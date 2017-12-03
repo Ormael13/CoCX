@@ -327,10 +327,10 @@ public class MainView extends Block {
 		this.scaleY = 1;
 		charView         = new CharView();
 		charView.name    = "charview";
-		this.charView.x       = TEXTZONE_X + TEXTZONE_W + GAP;
-		this.charView.y       = TEXTZONE_Y;
+//		this.charView.x       = TEXTZONE_X + TEXTZONE_W + GAP;
+//		this.charView.y       = TEXTZONE_Y;
 		charView.visible = false;
-		addElement(charView);
+//		addElement(charView);
 	}
 
 	/*override public function get width():Number {
