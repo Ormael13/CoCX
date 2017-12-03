@@ -1727,12 +1727,24 @@ public function izmaFollowerMenu():void {
 	else addButtonDisabled(6, "Remove Dick", "You cannot remove Izma's penis as she has Futa Form perk.");
 	addButton(7, flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 1 ? "NoKidsPlease" : "Have Kids?", childToggle).hint(flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 1 ? "Tell Izma that she should start taking the herbal contraceptives." : "Tell Izma to stop taking contraceptives to allow for reproduction.", flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 1 ? "No Kids Please" : "Have Kids?");
 	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) {
-		if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0 && !pregnancy.isPregnant) addButton(8, "Farm Work", sendToFarm);
+		if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0 && flags[kFLAGS.FOLLOWER_AT_FISHERY_IZMA] != 1 && !pregnancy.isPregnant) addButton(8, "Farm Work", sendToFarm);
 		if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] != 0) addButton(8, "Go Camp", backToCamp);
 	}
 	if (player.hasItem(consumables.BROBREW) && flags[kFLAGS.IZMA_BROFIED] == 0) addButton(9, "Brotize", izmaelScene.brotizeIzma);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] != 1 && flags[kFLAGS.FOLLOWER_AT_FISHERY_IZMA] != 1) addButton(10, "Fishery", sendToFishery);
 	addButton(14, "Back", camp.campLoversMenu);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) addButton(14, "Back", SceneLib.farm.farmCorruption.rootScene);
+}
+
+private function sendToFishery():void
+{
+	clearOutput();
+	izmaSprite();
+	outputText("You ask Izma if she wouldn’t mind working at the newly made fishery to bring back some food to camp.");
+	outputText("\n\n“<i>Sure anything for you Alpha. I will fill barrels worth of food.</i>”");
+	outputText("\n\n<b>Izma will now start bringing fish back to camp.</b>");
+	flags[kFLAGS.FOLLOWER_AT_FISHERY_IZMA] = 1;
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function sendToFarm():void

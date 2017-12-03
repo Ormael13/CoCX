@@ -533,6 +533,11 @@ if (kGAMECLASS.model.time.hours > 23) { //Once per day
 				if (flags[kFLAGS.CHI_CHI_DAILY_TRAINING] > 0) flags[kFLAGS.CHI_CHI_DAILY_TRAINING] = 0;
 				//Reset Diva Red Vial daiy limit
 				DivaScene.getInstance().tookVialToday = false;
+				//Daily Fishery production
+				if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) {
+					if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) flags[kFLAGS.FISHES_STORED_AT_FISHERY] += 5;
+					if (flags[kFLAGS.CEANI_FOLLOWER] > 0) flags[kFLAGS.FISHES_STORED_AT_FISHERY] -= 5;
+				}
 				//Daily regeneration of soulforce for non soul cultivators
 				if (player.findPerk(PerkLib.JobSoulCultivator) < 0 && (player.soulforce < player.maxSoulforce())) {
 					player.soulforce += 50;

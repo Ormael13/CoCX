@@ -37,12 +37,12 @@ use namespace kGAMECLASS;
 				damage += eBaseDamage();
 			}
 			if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] == 2 || (flags[kFLAGS.CHI_CHI_LVL_UP] >= 2 && flags[kFLAGS.CHI_CHI_LVL_UP] < 7)) {
-				damage += ((this.str * 0.5) + rand(this.str * 0.5)) * 0.6;
-				damage += eBaseDamage() * 0.6;
+				damage += ((this.str * 0.5) + rand(this.str * 0.5)) * 0.7;
+				damage += eBaseDamage() * 0.7;
 			}
 			if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 3 && flags[kFLAGS.CHI_CHI_LVL_UP] < 2) {
-				damage += ((this.str * 0.5) + rand(this.str * 0.5)) * 0.2;
-				damage += eBaseDamage() * 0.2;
+				damage += ((this.str * 0.5) + rand(this.str * 0.5)) * 0.4;
+				damage += eBaseDamage() * 0.4;
 			}
 			if (player.hasStatusEffect(StatusEffects.Stunned)) damage *= 1.5;
 			var crit:Boolean = false;

@@ -643,6 +643,8 @@ kGAMECLASS.saves.saveGame(player.slotName);
 	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 6) outputText("There's two warehouses and granary connecting them located in the east section of your campsite.\n\n");
 	if(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) outputText("Some of your friends are currently sparring in the rings at the side of your camp.\n\n");
 	if(flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 1) outputText("A large arcane circle is written at the edge of your camp. Its runes regularly glow with impulse of power.\n\n");
+	if(flags[kFLAGS.CAMP_UPGRADES_DAM] == 1) outputText("A small dam help increase the width of the nearby stream slowing the passage of water.\n\n");
+	if(flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 1) outputText("Not so far from it is your fishery. You can see several barrel possibly full of freshly caught fish next to it.\n\n");
 	//Nursery
 	if(flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] == 100 && player.hasStatusEffect(StatusEffects.CampMarble)) {
 		outputText("Marble has built a fairly secure nursery amongst the rocks to house your ");
@@ -964,6 +966,7 @@ public function loversCount():Number {
 	var counter:Number = 0;
 	if (arianScene.arianFollower()) counter++;
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) counter++;
+	if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
 	if (followerHel()) counter++;
 	//Izma!
@@ -986,6 +989,7 @@ public function loversHotBathCount():Number {
 	if (sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
 	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) counter++;
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) counter++;
+	if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
 	if (followerHel()) counter++;
 	if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
@@ -1005,6 +1009,7 @@ public function sparableCampMembersCount():Number {
 	if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
 	if (helspawnFollower()) counter++;
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) counter++;
+	if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
 	if (followerHel()) counter++;
 	if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
@@ -1054,12 +1059,18 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 	}
 	//Cai'Lin
 //	addButtonDisabled(2, "???", "Look into my eyes and answer me: Am I beautiful?");
+	//Ceani
+	if (flags[kFLAGS.CEANI_FOLLOWER] > 0) {
+		outputText("Ceani is lazily sunbathing at the other side of the camp.\n\n");
+		addButton(2, "Ceani", SceneLib.ceaniScene.ceaniCampMainMenu);
+	}
 	//Chi Chi potem zmienic na 3
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) {
-		outputText("You can see Chi Chi not so far from Jojo. She’s busy practicing her many combos on a dummy. Said dummy will more than likely have to be replaced within twenty four hours.");
-		addButton(2, "Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu);
+		outputText("You can see Chi Chi not so far from Jojo. She’s busy practicing her many combos on a dummy. Said dummy will more than likely have to be replaced within twenty four hours.\n\n");
+		addButton(3, "Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu);
 	}
-	addButtonDisabled(3, "???", "Let me heal you.");//Diana
+	//Diana
+	//addButtonDisabled(3, "???", "Let me heal you.");
 	//Diva - button 4
 	//Etna
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) {
@@ -1298,7 +1309,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
         addButton(13, "Nieve", Holidays.approachNieve);
     }
     for each(var npc:XXCNPC in _campFollowers){
-        npc.campDescription(XXCNPC.LOVER,descOnly);
+		npc.campDescription(XXCNPC.LOVER,descOnly);
     }
 	addButton(14, "Back", playerMenu);
 }
@@ -1538,6 +1549,7 @@ private function campActions():void {
 	else addButtonDisabled(6, "Winions", "You need to be able to make some minions that fight for you to use this option like elementals or golems...");
 	if (player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(7, "Heal", spellHealcamp).hint("Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  \n\nMana Cost: 30");
 	//addButton(8, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
+	if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 4) addButton(8, "Fishery", VisitFishery).hint("Visit Fishery.");
 	addButton(9, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
 	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2) addButton(10, "Ward", MagicWardMenu).hint("Activate or Deactivate Magic Ward around camp.");
 	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) addButton(11, "Kitsune Shrine", campScenes.KitsuneShrine).hint("Meditate at camp Kitsune Shrine.");
@@ -1603,10 +1615,34 @@ private function NPCsRelax():void {
 	doNext(SparrableNPCsMenu);
 }
 
+private function VisitFishery():void {
+	outputText("\n\nYou go check at the barrels for food.");
+	if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] > 0) outputText(" There is currently " + flags[kFLAGS.FISHES_STORED_AT_FISHERY] + " fish in the barrel.");
+	menu();
+	//if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] > 0) addButton(0, "Retrieve", Retrieve);
+	//if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] > 0) addButton(1, "Retrieve Stack", RetrieveStack);
+	addButton(14, "Back", campActions);
+}
+private function Retrieve():void {
+	outputText("\n\nYou pick up a fish and add it to your inventory.");
+	flags[kFLAGS.FISHES_STORED_AT_FISHERY]--;
+	inventory.takeItem(consumables.FISHFIL, VisitFishery);
+}
+private function RetrieveStack():void {
+	if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] >= 10) {
+		outputText("\n\nYou pick up and bag a stack of fish and add them to your inventory.");
+		flags[kFLAGS.FISHES_STORED_AT_FISHERY] -= 10;
+		inventory.takeItem(consumables.FISHFIL, VisitFishery);
+	}
+	else {
+		outputText("\n\nYou need more fish to bag out a bundle.");
+		doNext(VisitFishery);
+	}
+}
+
 public function spellHealcamp():void {
-	//if(/*player.findPerk(PerkLib.BloodMage) < 0 && */player.fatigue + spellCost(30) > player.maxFatigue()) {
 	clearOutput();
-	if(/*player.findPerk(PerkLib.BloodMage) < 0 && */player.mana < 30) {
+	if(player.mana < 30) {
 		outputText("Your mana is too low to cast this spell.");
 		doNext(campActions);
 		return;
@@ -2864,6 +2900,8 @@ private function ascendForReal():void {
 	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) performancePoints += 2;
 	if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > 0) performancePoints += flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE];
 	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] > 1) performancePoints += 2;
+	if (flags[kFLAGS.CAMP_UPGRADES_DAM] > 0) performancePoints += flags[kFLAGS.CAMP_UPGRADES_DAM];
+	if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) performancePoints += flags[kFLAGS.CAMP_UPGRADES_FISHERY];
 	//Children
 	var childPerformance:int = 0;
 	childPerformance += (flags[kFLAGS.MINERVA_CHILDREN] + flags[kFLAGS.BEHEMOTH_CHILDREN] + flags[kFLAGS.MARBLE_KIDS] + (flags[kFLAGS.SHEILA_JOEYS] + flags[kFLAGS.SHEILA_IMPS]) + izmaScene.totalIzmaChildren() + isabellaScene.totalIsabellaChildren() + kihaFollower.totalKihaChildren() + emberScene.emberChildren() + urtaPregs.urtaKids() + sophieBimbo.sophieChildren());
