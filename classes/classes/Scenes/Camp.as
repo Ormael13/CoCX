@@ -1021,6 +1021,7 @@ public function sparableCampMembersCount():Number {
 //-- COMPANIONS 
 //-----------------
 public function campLoversMenu(descOnly:Boolean = false):void {
+	var buttons:ButtonDataList = new ButtonDataList();
 	if (!descOnly) {
 		hideMenus();
 		spriteSelect(-1);
@@ -1046,7 +1047,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		else if(temp == 4) outputText("and she flops down on her nest to have a rest");
 		else outputText("peeling the last strips of flesh off of an imp's skull and putting it on a particularly flat, sun-lit rock to bleach as a trophy");
 		outputText(".\n\n");
-		addButton(0, "Amily", amilyScene.amilyFollowerEncounter);
+		buttons.add("Amily", amilyScene.amilyFollowerEncounter);
 	}
 	//Amily out freaking Urta?
 	else if(flags[kFLAGS.AMILY_VISITING_URTA] == 1 || flags[kFLAGS.AMILY_VISITING_URTA] == 2) {
@@ -1055,28 +1056,26 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 	//Arian
 	if (arianScene.arianFollower()) {
 		outputText("Arian's tent is here, if you'd like to go inside.\n\n");
-		addButton(1, "Arian", arianScene.visitAriansHouse);
+		buttons.add( "Arian", arianScene.visitAriansHouse);
 	}
 	//Cai'Lin
-//	addButtonDisabled(2, "???", "Look into my eyes and answer me: Am I beautiful?");
+//	buttons.add("???").disable("Look into my eyes and answer me: Am I beautiful?");
 	//Ceani
 	if (flags[kFLAGS.CEANI_FOLLOWER] > 0) {
 		outputText("Ceani is lazily sunbathing at the other side of the camp.\n\n");
-		addButton(2, "Ceani", SceneLib.ceaniScene.ceaniCampMainMenu);
+		buttons.add("Ceani", SceneLib.ceaniScene.ceaniCampMainMenu);
 	}
 	//Chi Chi potem zmienic na 3
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) {
 		outputText("You can see Chi Chi not so far from Jojo. She’s busy practicing her many combos on a dummy. Said dummy will more than likely have to be replaced within twenty four hours.\n\n");
-		addButton(3, "Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu);
+		buttons.add( "Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu);
 	}
 	//Diana
-	//addButtonDisabled(3, "???", "Let me heal you.");
-	//Diva - button 4
+	//buttons.add("???").disable("Let me heal you.");
 	//Etna
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) {
 		outputText("Etna is resting lazily on a rug in a very cat-like manner. She’s looking at you always with this adorable expression of hers, her tail wagging expectantly at your approach.\n\n");
-		if (player.statusEffectv4(StatusEffects.CampSparingNpcsTimers1) > 0) addButtonDisabled(4, "Etna", "Training.");
-		else addButton(5, "Etna", SceneLib.etnaScene.etnaCampMenu);
+		buttons.add( "Etna", SceneLib.etnaScene.etnaCampMenu).disableIf(player.statusEffectv4(StatusEffects.CampSparingNpcsTimers1) > 0,"Training.");
 	}
 	//Helia
 	if(SceneLib.helScene.followerHel()) {
@@ -1099,7 +1098,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 				outputText("<b>You see the salamander Helia pacing around camp, anxiously awaiting your departure to the harpy roost. Seeing you looking her way, she perks up, obviously ready to get underway.</b>\n\n");
 			}
 		}
-		addButton(6, "Helia", helFollower.heliaFollowerMenu);
+		buttons.add( "Helia", helFollower.heliaFollowerMenu);
 	}
 	//Isabella
 	if(isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) {
@@ -1170,8 +1169,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 			outputText("You have " + formatStringArray(babiesList) + " with her, all living here; unlike native Marethians, they will need years and years of care before they can go out into the world on their own.");
 		}
 		outputText("\n\n");
-		if (player.statusEffectv2(StatusEffects.CampSparingNpcsTimers1) > 0) addButtonDisabled(6, "Isabella", "Training.");
-		else addButton(7, "Isabella", isabellaFollowerScene.callForFollowerIsabella);
+		buttons.add( "Isabella", isabellaFollowerScene.callForFollowerIsabella).disableIf(player.statusEffectv2(StatusEffects.CampSparingNpcsTimers1) > 0,"Training.");
 	}
 	//Izma
 	if(izmaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) {
@@ -1183,7 +1181,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 			else if (model.time.hours <= 22) outputText("Izmael has built a fire and is flopped down next to it. You can’t help but notice that he’s used several of his books for kindling. His eyes are locked on the flames, mesmerized by the dancing light and heat.");
 			else outputText("Izmael is currently on his bedroll, sleeping for the night.");
 			outputText("\n\n");
-			addButton(8, "Izmael", izmaScene.izmaelScene.izmaelMenu);
+			buttons.add( "Izmael", izmaScene.izmaelScene.izmaelMenu);
 		}
 		else {
 			outputText("Neatly laid near the base of your own is a worn bedroll belonging to Izma, your tigershark lover. It's a snug fit for her toned body, though it has some noticeable cuts and tears in the fabric. Close to her bed is her old trunk, almost as if she wants to have it at arms length if anyone tries to rob her in her sleep.\n\n");
@@ -1193,7 +1191,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 				case 2: outputText("Izma is lying on her back near her bedroll. You wonder at first just why she isn't using her bed, but as you look closer you notice all the water pooled beneath her and the few droplets running down her arm, evidence that she's just returned from the stream."); break;
 			}
 			outputText("\n\n");
-			addButton(8, "Izma", izmaScene.izmaFollowerMenu);
+			buttons.add( "Izma", izmaScene.izmaFollowerMenu);
 		}
 	}
 	//Kiha!
@@ -1219,8 +1217,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 				outputText("Most of them are on fire.\n\n");
 			}
 		}
-		if (player.statusEffectv3(StatusEffects.CampSparingNpcsTimers1) > 0) addButtonDisabled(8, "Kiha", "Training.");
-		else addButton(9, "Kiha", kihaScene.encounterKiha);
+		buttons.add( "Kiha", kihaScene.encounterKiha).disableIf(player.statusEffectv3(StatusEffects.CampSparingNpcsTimers1) > 0,"Training.");
 	}
 	//MARBLE
 	if(player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) {
@@ -1288,7 +1285,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		//Out getting family
 		//else outputText("Marble is out in the wilderness right now, searching for a relative.");
 		outputText("\n\n");
-		if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 4) addButton(10, "Marble", marbleScene.interactWithMarbleAtCamp).hint("Go to Marble the cowgirl for talk and companionship.");
+		if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 4) buttons.add( "Marble", marbleScene.interactWithMarbleAtCamp).hint("Go to Marble the cowgirl for talk and companionship.");
 	}
 	//Phylla
 	if (flags[kFLAGS.ANT_WAIFU] > 0) {
@@ -1299,22 +1296,22 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		else if(flags[kFLAGS.ANT_KIDS] > 1000) outputText(" some of your children exit the anthill using main or one of the additionally entrances to unload some dirt. Some of them instead of unloading dirt coming out to fulfill some other task that their mother gave them.  You feel a little nostalgic seeing how this former small colony grown to such a magnificent size.");
 		else outputText(" Phylla appear out of the anthill to unload some dirt.  She looks over to your campsite and gives you an excited wave before heading back into the colony.  It makes you feel good to know she's so close.");
 		outputText("\n\n");
-        addButton(11, "Phylla", SceneLib.desert.antsScene.introductionToPhyllaFollower);
+        buttons.add( "Phylla", SceneLib.desert.antsScene.introductionToPhyllaFollower);
     }
-	addButtonDisabled(12, "???", "We have been entangled since the beginning.");//Samirah
 	//Nieve (jako, ze jest sezonowym camp member powinna byc na koncu listy...chyba, ze zrobie cos w stylu utworzenia mini lodowej jaskini dla niej)
 	if(flags[kFLAGS.NIEVE_STAGE] == 5) {
 		Holidays.nieveCampDescs();
 		outputText("\n\n");
-        addButton(13, "Nieve", Holidays.approachNieve);
+        buttons.add( "Nieve", Holidays.approachNieve);
     }
     for each(var npc:XXCNPC in _campFollowers){
-		npc.campDescription(XXCNPC.LOVER,descOnly);
+		npc.campDescription(buttons,XXCNPC.LOVER);
     }
-	addButton(14, "Back", playerMenu);
+	if(!descOnly){submenu(buttons,playerMenu)}
 }
 
 public function campSlavesMenu(descOnly:Boolean = false):void {
+	var buttons:ButtonDataList = new ButtonDataList();
 	if (!descOnly) {
 		hideMenus();
 		spriteSelect(-1);
@@ -1328,45 +1325,46 @@ public function campSlavesMenu(descOnly:Boolean = false):void {
 	}
 	if(latexGooFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 0) {
 		outputText(flags[kFLAGS.GOO_NAME] + " lurks in a secluded section of rocks, only venturing out when called for or when she needs to gather water from the stream.\n\n");
-		addButton(0, flags[kFLAGS.GOO_NAME], latexGirl.approachLatexy);
+		buttons.add( flags[kFLAGS.GOO_NAME], latexGirl.approachLatexy);
 	}
 	if(milkSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) {
 		outputText("Your well-endowed, dark-skinned milk-girl is here.  She flicks hopeful eyes towards you whenever she thinks she has your attention.\n\n");
-		addButton(1, flags[kFLAGS.MILK_NAME], milkWaifu.milkyMenu);
+		buttons.add( flags[kFLAGS.MILK_NAME], milkWaifu.milkyMenu);
 	}
 	//Ceraph
 	if (ceraphIsFollower()) {
-		addButton(5, "Ceraph", ceraphFollowerScene.ceraphFollowerEncounter);
+		buttons.add( "Ceraph", ceraphFollowerScene.ceraphFollowerEncounter);
 	}
 	//Vapula
 	if(vapulaSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) {
 		vapula.vapulaSlaveFlavorText();
 		outputText("\n\n");
-		addButton(6, "Vapula", vapula.callSlaveVapula);
+		buttons.add( "Vapula", vapula.callSlaveVapula);
 	}
 	//Modified Camp/Follower List Description:
 	if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0 && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) {
 		outputText("Sometimes you hear a faint moan from not too far away. No doubt the result of your slutty toy mouse playing with herself.\n\n");
-		addButton(10, "Amily", amilyScene.amilyFollowerEncounter);
+		buttons.add( "Amily", amilyScene.amilyFollowerEncounter);
 	}
 	//JOJO
 	//If Jojo is corrupted, add him to the masturbate menu.
 	if (campCorruptJojo() && flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 0) {
 		outputText("From time to time you can hear movement from around your camp, and you routinely find thick puddles of mouse semen.  You are sure Jojo is here if you ever need to sate yourself.\n\n");
-		addButton(11, "Jojo", jojoScene.corruptCampJojo).hint("Call your corrupted pet into camp in order to relieve your desires in a variety of sexual positions?  He's ever so willing after your last encounter with him.");
+		buttons.add( "Jojo", jojoScene.corruptCampJojo).hint("Call your corrupted pet into camp in order to relieve your desires in a variety of sexual positions?  He's ever so willing after your last encounter with him.");
 	}
 	//Bimbo Sophie
 	if(bimboSophie() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
 		sophieBimbo.sophieCampLines();
-		addButton(12, "Sophie", sophieBimbo.approachBimboSophieInCamp);
+		buttons.add( "Sophie", sophieBimbo.approachBimboSophieInCamp);
 	}
     for each(var npc:XXCNPC in _campFollowers){
-        npc.campDescription(XXCNPC.SLAVE,descOnly);
+        npc.campDescription(buttons,XXCNPC.SLAVE);
     }
-	addButton(14, "Back", playerMenu);
+    if(!descOnly){submenu(buttons,playerMenu);}
 }
 
 public function campFollowers(descOnly:Boolean = false):void {
+	var buttons:ButtonDataList = new ButtonDataList();
 	if (!descOnly) {
 		hideMenus();
 		spriteSelect(-1);
@@ -1378,8 +1376,11 @@ public function campFollowers(descOnly:Boolean = false):void {
 	//Ember
 	if(emberScene.followerEmber()) {
 		emberScene.emberCampDesc();
-		if (player.statusEffectv1(StatusEffects.CampSparingNpcsTimers1) > 0) addButtonDisabled(0, "Ember", "Training.");
-		else addButton(0, "Ember", emberScene.emberCampMenu).hint("Check up on Ember the dragon-" + (flags[kFLAGS.EMBER_ROUNDFACE] == 0 ? "morph" : flags[kFLAGS.EMBER_GENDER] == 1 ? "boy" : "girl" ) + "");
+		buttons.add(
+				"Ember",
+				emberScene.emberCampMenu
+		).hint("Check up on Ember the dragon-" + (flags[kFLAGS.EMBER_ROUNDFACE] == 0 ? "morph" : flags[kFLAGS.EMBER_GENDER] == 1 ? "boy" : "girl" ) + ""
+		).disableIf(player.statusEffectv1(StatusEffects.CampSparingNpcsTimers1) > 0,"Training.");
 	}
 	//Sophie
 	if(sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
@@ -1402,7 +1403,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 			else outputText("them");
 			outputText(" about hunting and gathering techniques.  Considering their unusual upbringing, it can't be as easy for them...\n\n");
 		}
-		addButton(1, "Sophie", sophieFollowerScene.followerSophieMainScreen).hint("Check up on Sophie the harpy.");
+		buttons.add( "Sophie", sophieFollowerScene.followerSophieMainScreen).hint("Check up on Sophie the harpy.");
 	}
 	//Pure Jojo
 	if (player.hasStatusEffect(StatusEffects.PureCampJojo)) {
@@ -1411,14 +1412,14 @@ public function campFollowers(descOnly:Boolean = false):void {
 			if (flags[kFLAGS.JOJO_LITTERS] > 0 && model.time.hours >= 16 && model.time.hours < 19) outputText("You spot the little mice you had with Joy playing about close to her tent.");
 			else outputText("Joy herself is nowhere to be found, she's probably out frolicking about or sitting atop the boulder.");
 			outputText("\n\n");
-			addButton(2, "Joy", joyScene.approachCampJoy).hint("Go find Joy around the edges of your camp and meditate with her or have sex with her.");
+			buttons.add( "Joy", joyScene.approachCampJoy).hint("Go find Joy around the edges of your camp and meditate with her or have sex with her.");
 		}
 		else {
 			outputText("There is a small bedroll for Jojo near your own");
 			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText(" cabin");
 			if (!(model.time.hours > 4 && model.time.hours < 23)) outputText(" and the mouse is sleeping on it right now.\n\n");
 			else outputText(", though the mouse is probably hanging around the camp's perimeter.\n\n");
-			addButton(2, "Jojo", jojoScene.jojoCamp).hint("Go find Jojo around the edges of your camp and meditate with him or talk about watch duty.");
+			buttons.add( "Jojo", jojoScene.jojoCamp).hint("Go find Jojo around the edges of your camp and meditate with him or talk about watch duty.");
 		}
 	}
 	//Celess - button 3
@@ -1428,7 +1429,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 		if (!(model.time.hours > 4 && model.time.hours < 23)) outputText(" and she's sleeping on it right now.");
 		else outputText(", though she probably wander somewhere near camp looking for more ingredients to make her potions.");
 		outputText(" Next to it stands a small chest with her personal stuff.\n\n");
-		addButton(5, "Evangeline", EvangelineF.meetEvangeline).hint("Visit Evangeline.");
+		buttons.add( "Evangeline", EvangelineF.meetEvangeline).hint("Visit Evangeline.");
 	}
 	else if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1 && flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] >= 1) {
 		/*if (flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] >= 1)*/ outputText("Evangeline isn't in the camp as she went to buy some items. She should be out no longer than a few hours.\n\n");
@@ -1437,15 +1438,15 @@ public function campFollowers(descOnly:Boolean = false):void {
 	//Kindra
 	if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) {
 		outputText("You can see a set of finely crafted traps around your camp. Kindra must be hunting nearby.\n\n");
-		addButton(6, "Kindra", SceneLib.kindraFollower.meet2Kindra).hint("Visit Kindra the sheep-morph.");
+		buttons.add( "Kindra", SceneLib.kindraFollower.meet2Kindra).hint("Visit Kindra the sheep-morph.");
 	}
 	//Helspawn
 	if (helspawnFollower()) {
-		addButton(7, flags[kFLAGS.HELSPAWN_NAME], helSpawnScene.helspawnsMainMenu);
+		buttons.add( flags[kFLAGS.HELSPAWN_NAME], helSpawnScene.helspawnsMainMenu);
 	}
 	//Valaria
 	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1 && flags[kFLAGS.TOOK_GOO_ARMOR] == 1) {
-		addButton(8, "Valeria", valeria.valeriaFollower).hint("Visit Valeria the goo-girl. You can even take and wear her as goo armor if you like.");
+		buttons.add( "Valeria", valeria.valeriaFollower).hint("Visit Valeria the goo-girl. You can even take and wear her as goo armor if you like.");
 	}
 	//RATHAZUL
 	//if rathazul has joined the camp
@@ -1461,7 +1462,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 			outputText("\n\n");
 		}
 		else outputText("Tucked into a shaded corner of the rocks is a bevy of alchemical devices and equipment.  The alchemist Rathazul looks to be hard at work on the silken equipment you've commissioned him to craft.\n\n");
-		addButton(10, "Rathazul", SceneLib.rathazul.returnToRathazulMenu).hint("Visit with Rathazul to see what alchemical supplies and services he has available at the moment.");
+		buttons.add( "Rathazul", SceneLib.rathazul.returnToRathazulMenu).hint("Visit with Rathazul to see what alchemical supplies and services he has available at the moment.");
 	}
 	else
 	{
@@ -1503,24 +1504,24 @@ public function campFollowers(descOnly:Boolean = false):void {
 	}
 	//Shouldra
 	if (followerShouldra()) {
-		addButton(11, "Shouldra", shouldraFollower.shouldraFollowerScreen).hint("Talk to Shouldra. She is currently residing in your body.");
+		buttons.add( "Shouldra", shouldraFollower.shouldraFollowerScreen).hint("Talk to Shouldra. She is currently residing in your body.");
 	}
 	//Ayane
 	if (flags[kFLAGS.AYANE_FOLLOWER] == 2) {
 		outputText("Ayane is tiddying your items to make sure everything is clean and well organised.\n\n");
-		addButton(12, "Ayane", SceneLib.ayaneFollower.ayaneCampMenu).hint("Visit Ayane a kitsune priestess of Taoth.");
+		buttons.add( "Ayane", SceneLib.ayaneFollower.ayaneCampMenu).hint("Visit Ayane a kitsune priestess of Taoth.");
 	}
 	//Pure/Corrupted Holli
 	if (flags[kFLAGS.FUCK_FLOWER_LEVEL] == 4) {
-		addButton(13, "Holli", holliScene.treeMenu).hint("Holli is in her tree at the edges of your camp.  You could go visit her if you want.");
+		buttons.add( "Holli", holliScene.treeMenu).hint("Holli is in her tree at the edges of your camp.  You could go visit her if you want.");
 	}
 	if (flags[kFLAGS.FLOWER_LEVEL] == 4) {
-		addButton(13, "Holli", HolliPure.treeMenu).hint("Holli is in her tree at the edges of your camp.  You could go visit her if you want.");
+		buttons.add( "Holli", HolliPure.treeMenu).hint("Holli is in her tree at the edges of your camp.  You could go visit her if you want.");
 	}
     for each(var npc:XXCNPC in _campFollowers){
-        npc.campDescription(XXCNPC.FOLLOWER,descOnly);
+        npc.campDescription(buttons,XXCNPC.FOLLOWER);
     }
-	addButton(14,"Back",playerMenu);
+    if(!descOnly){submenu(buttons,playerMenu);}
 }
 
 //-----------------
