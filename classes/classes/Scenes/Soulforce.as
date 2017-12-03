@@ -194,7 +194,7 @@ use namespace kGAMECLASS;
 			addButton(9, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
 			if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 0) addButton(10, "AyaneFix", AyaneWrongSettingUpFollowerFlagFix).hint("Fixing Ayane no proper set up falg for recruitment.");
 			if (player.eyeColor != "brown") addButton(11, "Eye Color", eyesColorSelection).hint("Set eye color to default one so saves will not go crazy over it.");
-			//addButton(11, "<<< 11 >>>", kGAMECLASS.doNothing);
+			addButton(11, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
 			//addButton(12, "<<< 12 >>>", kGAMECLASS.doNothing);
 			addButton(12, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
 			if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] == 3) addButton(13, "DenBossesReset", resetHeroslayerOmnibusFlag).hint("Reseting Den of Desire bosses fight.");

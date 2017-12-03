@@ -4,6 +4,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 
 import coc.view.BitmapDataSprite;
+import coc.view.BoundClip;
 import coc.view.MainView;
 import coc.view.StatsView;
 
@@ -93,6 +94,8 @@ public class MainViewManager extends BaseContent {
 		mainView.charView.setCharacter(player);
 		mainView.charView.redraw();
 		mainView.charView.visible = true;
+		BoundClip.nextContent = mainView.charView;
+		outputText("<img src='coc.view::BoundClip' align='left' id='charview'/>");
 	}
 	public function hidePlayerDoll():void {
 		mainView.charView.visible = false;

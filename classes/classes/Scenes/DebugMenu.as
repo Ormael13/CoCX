@@ -673,7 +673,7 @@ public class DebugMenu extends BaseContent
 											  .replace(/,"/g, ', "') + "\n");
 			outputText("player.facePart = " + JSON.stringify(player.facePart.saveToObject()).replace(/,/g, ", ") + "\n");
 	*/	}
-		private function bodyPartEditorRoot():void {
+		public function bodyPartEditorRoot():void {
 			menu();
 			dumpPlayerData();
 			addButton(0,"Head",bodyPartEditorHead);
@@ -705,45 +705,65 @@ public class DebugMenu extends BaseContent
 				addButton(5, "Select Base",changeCurrentLayer);
 			}
 			addButton(6,bpeSkinLayer+" Color2",curry(changeLayerColor2,editBase));
-			addButton(7,bpeSkinLayer+" Pattern",curry(changeLayerPattern,editBase));
+			addButton(7,bpeSkinLayer+" Pattern",changeLayerPattern);
 			addButton(10,"HairType",changeHairType);
 			addButton(11,"HairColor",changeHairColor);
 			addButton(12,"HairLength",changeHairLength);
 //			addButton(12,"HairStyle",);
 			addButton(14, "Back", bodyPartEditorRoot);
 		}
+		private static const COLOR_CONSTANTS:Array = [
+			"albino", "aqua", "ashen", "auburn", "black", "blond", "blonde", "blue", "bronzed", "brown", "caramel",
+			"cerulean", "chocolate", "crimson", "crystal", "dark", "dusky", "ebony", "emerald", "fair",
+			"golden", "gray", "green", "indigo", "light", "mahogany", "metallic", "midnight", "olive", "orange",
+			"peach", "pink", "purple", "red", "russet", "sable", "sanguine", "silky", "silver",
+			"tan", "tawny", "turquoise", "white", "yellow",
+			"aphotic blue-black", "ashen grayish-blue", "creamy-white", "crimson platinum",
+			"dark blue", "dark gray", "dark green", "deep blue", "deep red",
+			"ghostly pale", "glacial white", "golden blonde", "grayish-blue", "iridescent gray",
+			"leaf green", "light blonde", "light blue", "light gray", "light green", "light grey", "light purple", "lime green",
+			"mediterranean-toned", "metallic golden", "metallic silver", "midnight black", "milky white",
+			"pale white", "pale yellow", "platinum blonde", "platinum crimson", "platinum-blonde", "purplish-black",
+			"quartz white", "reddish-orange", "rough gray",
+			"sandy blonde", "sandy brown", "sandy-blonde", "shiny black", "silver blonde", "silver-white", "snow white",
+			"yellowish-green", "black and yellow", "white and black"
+		];
+		
 		private static const SKIN_BASE_TYPES:Array = [
-			[AppearanceDefs.SKIN_BASE_PLAIN,"(0) PLAIN"],
-			[AppearanceDefs.SKIN_BASE_GOO,"(3) GOO"],
-			[AppearanceDefs.SKIN_BASE_STONE,"(7) STONE"]
+			[AppearanceDefs.SKIN_BASE_PLAIN,"0 PLAIN"],
+			[AppearanceDefs.SKIN_BASE_GOO,"3 GOO"],
+			[AppearanceDefs.SKIN_BASE_STONE,"7 STONE"],
+			[AppearanceDefs.SKIN_BASE_AQUA_RUBBER_LIKE,"7 AQUA_RUBBER_LIKE"],
 		];
 		private static const SKIN_COAT_TYPES:Array = [
-			[AppearanceDefs.SKIN_COAT_FUR,"(1) FUR"],
-			[AppearanceDefs.SKIN_COAT_SCALES,"(2) SCALES"],
-			[AppearanceDefs.SKIN_COAT_CHITIN,"(5) CHITIN"],
-			[AppearanceDefs.SKIN_COAT_BARK,"(6) BARK"],
-			[AppearanceDefs.SKIN_COAT_STONE,"(7) STONE"],
-			[AppearanceDefs.SKIN_COAT_AQUA_SCALES,"(9) AQUA_SCALES"],
-			[AppearanceDefs.SKIN_COAT_DRAGON_SCALES,"(10) DRAGON_SCALES"],
-			[AppearanceDefs.SKIN_COAT_MOSS,"(11) MOSS"]
+			[AppearanceDefs.SKIN_COAT_FUR,"1 FUR"],
+			[AppearanceDefs.SKIN_COAT_SCALES,"2 SCALES"],
+			[AppearanceDefs.SKIN_COAT_CHITIN,"5 CHITIN"],
+			[AppearanceDefs.SKIN_COAT_BARK,"6 BARK"],
+			[AppearanceDefs.SKIN_COAT_STONE,"7 STONE"],
+			[AppearanceDefs.SKIN_COAT_AQUA_SCALES,"9 AQUA_SCALES"],
+			[AppearanceDefs.SKIN_COAT_DRAGON_SCALES,"10 DRAGON_SCALES"],
+			[AppearanceDefs.SKIN_COAT_MOSS,"11 MOSS"]
 		];
 		private static const PATTERN_BASE_TYPES:Array = [
-			[AppearanceDefs.PATTERN_NONE,"(0) NONE"],
-			[AppearanceDefs.PATTERN_MAGICAL_TATTOO,"(1) MAGICAL_TATTOO"],
-			[AppearanceDefs.PATTERN_ORCA_UNDERBODY,"(2) ORCA_UNDERBODY"],
-			[AppearanceDefs.PATTERN_BATTLE_TATTOO,"(5) BATTLE_TATTOO"],
-			[AppearanceDefs.PATTERN_LIGHTNING_SHAPED_TATTOO,"(7) LIGHTNING_SHAPED_TATTOO"],
+			[AppearanceDefs.PATTERN_NONE,"0 NONE"],
+			[AppearanceDefs.PATTERN_MAGICAL_TATTOO,"1 MAGICAL_TATTOO"],
+			[AppearanceDefs.PATTERN_ORCA_UNDERBODY,"2 ORCA_UNDERBODY"],
+			[AppearanceDefs.PATTERN_BATTLE_TATTOO,"5 BATTLE_TATTOO"],
+			[AppearanceDefs.PATTERN_LIGHTNING_SHAPED_TATTOO,"7 LIGHTNING_SHAPED_TATTOO"],
 		];
 		private static const PATTERN_COAT_TYPES:Array = [
-			[AppearanceDefs.PATTERN_NONE,"(0) NONE"],
-			[AppearanceDefs.PATTERN_BEE_STRIPES,"(3) BEE_STRIPES"],
-			[AppearanceDefs.PATTERN_TIGER_STRIPES,"(4) TIGER_STRIPES"],
+			[AppearanceDefs.PATTERN_NONE,"0 NONE"],
+			[AppearanceDefs.PATTERN_BEE_STRIPES,"3 BEE_STRIPES"],
+			[AppearanceDefs.PATTERN_TIGER_STRIPES,"4 TIGER_STRIPES"],
 		];
+		/*
 		private static const SKIN_TONE_CONSTANTS:Array = [
 			"pale", "light", "dark", "green", "gray",
 			"blue", "black", "white", "red", "yellow",
 			"dark blue", "pink",
 		];
+		*/
 		private static const SKIN_ADJ_CONSTANTS:Array = [
 			"(none)", "tough", "smooth", "rough", "sexy",
 			"freckled", "glistering", "shiny", "slimy","goopey",
@@ -762,22 +782,26 @@ public class DebugMenu extends BaseContent
 				[Skin.COVERAGE_COMPLETE, "COMPLETE (4, full+face)"]
 		];
 		private static const HAIR_TYPE_CONSTANTS:Array = [
-			[AppearanceDefs.HAIR_NORMAL,"(0) NORMAL"],
-			[AppearanceDefs.HAIR_FEATHER,"(1) FEATHER"],
-			[AppearanceDefs.HAIR_GHOST,"(2) GHOST"],
-			[AppearanceDefs.HAIR_GOO,"(3) GOO"],
-			[AppearanceDefs.HAIR_ANEMONE,"(4) ANEMONE"],
-			[AppearanceDefs.HAIR_QUILL,"(5) QUILL"],
-			[AppearanceDefs.HAIR_GORGON,"(6) GORGON"],
-			[AppearanceDefs.HAIR_LEAF,"(7) LEAF"],
-			[AppearanceDefs.HAIR_FLUFFY,"(8) FLUFFY"],
-			[AppearanceDefs.HAIR_GRASS,"(9) GRASS"],
+			[AppearanceDefs.HAIR_NORMAL,"0 NORMAL"],
+			[AppearanceDefs.HAIR_FEATHER,"1 FEATHER"],
+			[AppearanceDefs.HAIR_GHOST,"2 GHOST"],
+			[AppearanceDefs.HAIR_GOO,"3 GOO"],
+			[AppearanceDefs.HAIR_ANEMONE,"4 ANEMONE"],
+			[AppearanceDefs.HAIR_QUILL,"5 QUILL"],
+			[AppearanceDefs.HAIR_GORGON,"6 GORGON"],
+			[AppearanceDefs.HAIR_LEAF,"7 LEAF"],
+			[AppearanceDefs.HAIR_FLUFFY,"8 FLUFFY"],
+			[AppearanceDefs.HAIR_GRASS,"9 GRASS"],
+			[AppearanceDefs.HAIR_SILKEN,"10 SILKEN"],
+			[AppearanceDefs.HAIR_STORM,"11 STORM"],
 		];
+		/*
 		private static const HAIR_COLOR_CONSTANTS:Array = [
 			"blond", "brown", "black", "red", "white",
 			"silver blonde","sandy-blonde", "platinum blonde", "midnight black", "golden blonde",
 			"rainbow", "seven-colored",
 		];
+		*/
 		private static const HAIR_LENGTH_CONSTANTS:Array = [
 			0,0.5,1,2,4,
 			8,12,24,32,40,
@@ -816,18 +840,18 @@ public class DebugMenu extends BaseContent
 			showChangeOptions(bodyPartEditorSkin, page, editBase?PATTERN_BASE_TYPES:PATTERN_COAT_TYPES, changeLayerPattern);
 		}
 		private function changeLayerColor(editBase:Boolean,page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) (editBase?player.skin.base:player.skin.coat).color = SKIN_TONE_CONSTANTS[setIdx];
+			if (setIdx>=0) (editBase?player.skin.base:player.skin.coat).color = COLOR_CONSTANTS[setIdx];
 			menu();
 			dumpPlayerData();
 			tagDemosSkin();
-			showChangeOptions(bodyPartEditorSkin, page, SKIN_TONE_CONSTANTS, curry(changeLayerColor,editBase));
+			showChangeOptions(bodyPartEditorSkin, page, COLOR_CONSTANTS, curry(changeLayerColor,editBase));
 		}
 		private function changeLayerColor2(editBase:Boolean,page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) (editBase?player.skin.base:player.skin.coat).color2 = SKIN_TONE_CONSTANTS[setIdx];
+			if (setIdx>=0) (editBase?player.skin.base:player.skin.coat).color2 = COLOR_CONSTANTS[setIdx];
 			menu();
 			dumpPlayerData();
 			tagDemosSkin();
-			showChangeOptions(bodyPartEditorSkin, page, SKIN_TONE_CONSTANTS, curry(changeLayerColor2,editBase));
+			showChangeOptions(bodyPartEditorSkin, page, COLOR_CONSTANTS, curry(changeLayerColor2,editBase));
 		}
 		private function changeLayerAdj(editBase:Boolean,page:int=0,setIdx:int=-1):void {
 			var tgt:SkinLayer = (editBase?player.skin.base:player.skin.coat);
@@ -861,10 +885,10 @@ public class DebugMenu extends BaseContent
 			showChangeOptions(bodyPartEditorSkin, page, HAIR_TYPE_CONSTANTS, changeHairType);
 		}
 		private function changeHairColor(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.hairColor = HAIR_COLOR_CONSTANTS[setIdx];
+			if (setIdx>=0) player.hairColor = COLOR_CONSTANTS[setIdx];
 			menu();
 			dumpPlayerData();
-			showChangeOptions(bodyPartEditorSkin, page, HAIR_COLOR_CONSTANTS, changeHairColor);
+			showChangeOptions(bodyPartEditorSkin, page, COLOR_CONSTANTS, changeHairColor);
 		}
 		private function changeHairLength(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.hairLength = HAIR_LENGTH_CONSTANTS[setIdx];
@@ -878,115 +902,126 @@ public class DebugMenu extends BaseContent
 			addButton(0,"FaceType",changeFaceType);
 			addButton(1,"TongueType",changeTongueType);
 			addButton(2,"EyeType",changeEyeType);
-			addButton(3,"EarType",changeEarType);
-			addButton(4,"AntennaeType",changeAntennaeType);
-			addButton(5,"HornType",changeHornType);
-			addButton(6,"HornCount",changeHornCount);
-			addButton(7,"GillType",changeGillType);
-			addButton(8,"BeardStyle",changeBeardStyle);
-			addButton(9,"BeardLength",changeBeardLength);
-			/*addButton(,"FaceDecoType",changeFaceDecoType);
-			addButton(,"FaceDecoAdj",changeFaceDecoAdj);*/
+			addButton(3,"EyeColor",changeEyeColor);
+			addButton(4,"EarType",changeEarType);
+			addButton(5,"AntennaeType",changeAntennaeType);
+			addButton(6,"HornType",changeHornType);
+			addButton(7,"HornCount",changeHornCount);
+			addButton(8,"GillType",changeGillType);
+			addButton(9,"BeardStyle",changeBeardStyle);
+			addButton(10,"BeardLength",changeBeardLength);
 			addButton(14, "Back", bodyPartEditorRoot);
 		}
 		private static const FACE_TYPE_CONSTANTS:Array = [
-			[AppearanceDefs.FACE_HUMAN,"(0) HUMAN"],
-			[AppearanceDefs.FACE_HORSE,"(1) HORSE"],
-			[AppearanceDefs.FACE_DOG,"(2) DOG"],
-			[AppearanceDefs.FACE_COW_MINOTAUR,"(3) COW_MINOTAUR"],
-			[AppearanceDefs.FACE_SHARK_TEETH,"(4) SHARK_TEETH"],
-			[AppearanceDefs.FACE_SNAKE_FANGS,"(5) SNAKE_FANGS"],
-			[AppearanceDefs.FACE_CAT,"(6) CAT"],
-			[AppearanceDefs.FACE_LIZARD,"(7) LIZARD"],
-			[AppearanceDefs.FACE_BUNNY,"(8) BUNNY"],
-			[AppearanceDefs.FACE_KANGAROO,"(9) KANGAROO"],
-			[AppearanceDefs.FACE_SPIDER_FANGS,"(10) SPIDER_FANGS"],
-			[AppearanceDefs.FACE_FOX,"(11) FOX"],
-			[AppearanceDefs.FACE_DRAGON,"(12) DRAGON"],
-			[AppearanceDefs.FACE_RACCOON_MASK,"(13) RACCOON_MASK"],
-			[AppearanceDefs.FACE_RACCOON,"(14) RACCOON"],
-			[AppearanceDefs.FACE_BUCKTEETH,"(15) BUCKTEETH"],
-			[AppearanceDefs.FACE_MOUSE,"(16) MOUSE"],
-			[AppearanceDefs.FACE_FERRET_MASK,"(17) FERRET_MASK"],
-			[AppearanceDefs.FACE_FERRET,"(18) FERRET"],
-			[AppearanceDefs.FACE_PIG,"(19) PIG"],
-			[AppearanceDefs.FACE_BOAR,"(20) BOAR"],
-			[AppearanceDefs.FACE_RHINO,"(21) RHINO"],
-			[AppearanceDefs.FACE_ECHIDNA,"(22) ECHIDNA"],
-			[AppearanceDefs.FACE_DEER,"(23) DEER"],
-			[AppearanceDefs.FACE_WOLF,"(24) WOLF"],
-			[AppearanceDefs.FACE_MANTICORE,"(25) MANTICORE"],
-			[AppearanceDefs.FACE_SALAMANDER_FANGS,"(26) SALAMANDER_FANGS"],
-			[AppearanceDefs.FACE_YETI_FANGS,"(27) YETI_FANGS"],
-			[AppearanceDefs.FACE_ORCA,"(28) ORCA"],
-			[AppearanceDefs.FACE_PLANT_DRAGON,"(29) PLANT_DRAGON"],
-			[AppearanceDefs.FACE_DRAGON_FANGS,"(30) DRAGON_FANGS"],
-			[AppearanceDefs.FACE_DEVIL_FANGS,"(31) DEVIL_FANGS"],
+			[AppearanceDefs.FACE_HUMAN,"0 HUMAN"],
+			[AppearanceDefs.FACE_HORSE,"1 HORSE"],
+			[AppearanceDefs.FACE_DOG,"2 DOG"],
+			[AppearanceDefs.FACE_COW_MINOTAUR,"3 COW_MINOTAUR"],
+			[AppearanceDefs.FACE_SHARK_TEETH,"4 SHARK_TEETH"],
+			[AppearanceDefs.FACE_SNAKE_FANGS,"5 SNAKE_FANGS"],
+			[AppearanceDefs.FACE_CAT,"6 CAT"],
+			[AppearanceDefs.FACE_LIZARD,"7 LIZARD"],
+			[AppearanceDefs.FACE_BUNNY,"8 BUNNY"],
+			[AppearanceDefs.FACE_KANGAROO,"9 KANGAROO"],
+			[AppearanceDefs.FACE_SPIDER_FANGS,"10 SPIDER_FANGS"],
+			[AppearanceDefs.FACE_FOX,"11 FOX"],
+			[AppearanceDefs.FACE_DRAGON,"12 DRAGON"],
+			[AppearanceDefs.FACE_RACCOON_MASK,"13 RACCOON_MASK"],
+			[AppearanceDefs.FACE_RACCOON,"14 RACCOON"],
+			[AppearanceDefs.FACE_BUCKTEETH,"15 BUCKTEETH"],
+			[AppearanceDefs.FACE_MOUSE,"16 MOUSE"],
+			[AppearanceDefs.FACE_FERRET_MASK,"17 FERRET_MASK"],
+			[AppearanceDefs.FACE_FERRET,"18 FERRET"],
+			[AppearanceDefs.FACE_PIG,"19 PIG"],
+			[AppearanceDefs.FACE_BOAR,"20 BOAR"],
+			[AppearanceDefs.FACE_RHINO,"21 RHINO"],
+			[AppearanceDefs.FACE_ECHIDNA,"22 ECHIDNA"],
+			[AppearanceDefs.FACE_DEER,"23 DEER"],
+			[AppearanceDefs.FACE_WOLF,"24 WOLF"],
+			[AppearanceDefs.FACE_MANTICORE,"25 MANTICORE"],
+			[AppearanceDefs.FACE_SALAMANDER_FANGS,"26 SALAMANDER_FANGS"],
+			[AppearanceDefs.FACE_YETI_FANGS,"27 YETI_FANGS"],
+			[AppearanceDefs.FACE_ORCA,"28 ORCA"],
+			[AppearanceDefs.FACE_PLANT_DRAGON,"29 PLANT_DRAGON"],
+			[AppearanceDefs.FACE_DRAGON_FANGS,"30 DRAGON_FANGS"],
+			[AppearanceDefs.FACE_DEVIL_FANGS,"31 DEVIL_FANGS"],
+			[AppearanceDefs.FACE_ONI_TEETH,"32 ONI_TEETH"],
+			[AppearanceDefs.FACE_RAIJU_FANGS,"33 RAIJU_FANGS"],
+			[AppearanceDefs.FACE_VAMPIRE,"34 VAMPIRE"],
 		];
 		private static const TONGUE_TYPE_CONSTANTS:Array = [
-			[AppearanceDefs.TONGUE_HUMAN, "(0) HUMAN"],
-			[AppearanceDefs.TONGUE_SNAKE, "(1) SNAKE"],
-			[AppearanceDefs.TONGUE_DEMONIC, "(2) DEMONIC"],
-			[AppearanceDefs.TONGUE_DRACONIC, "(3) DRACONIC"],
-			[AppearanceDefs.TONGUE_ECHIDNA, "(4) ECHIDNA"],
-			[AppearanceDefs.TONGUE_CAT, "(5) CAT"],
-			[AppearanceDefs.TONGUE_ELF, "(6) ELF"],
+			[AppearanceDefs.TONGUE_HUMAN, "0 HUMAN"],
+			[AppearanceDefs.TONGUE_SNAKE, "1 SNAKE"],
+			[AppearanceDefs.TONGUE_DEMONIC, "2 DEMONIC"],
+			[AppearanceDefs.TONGUE_DRACONIC, "3 DRACONIC"],
+			[AppearanceDefs.TONGUE_ECHIDNA, "4 ECHIDNA"],
+			[AppearanceDefs.TONGUE_CAT, "5 CAT"],
+			[AppearanceDefs.TONGUE_ELF, "6 ELF"],
 		];
 		private static const EYE_TYPE_CONSTANTS:Array = [
-			[AppearanceDefs.EYES_HUMAN, "(0) HUMAN"],
-			[AppearanceDefs.EYES_FOUR_SPIDER_EYES, "(1) FOUR_SPIDER_EYES"],
-			[AppearanceDefs.EYES_BLACK_EYES_SAND_TRAP, "(2) BLACK_EYES_SAND_TRAP"],
-			[AppearanceDefs.EYES_CAT_SLITS, "(3) CAT_SLITS"],
-			[AppearanceDefs.EYES_GORGON, "(4) GORGON"],
-			[AppearanceDefs.EYES_FENRIR, "(5) FENRIR"],
-			[AppearanceDefs.EYES_MANTICORE, "(6) MANTICORE"],
-			[AppearanceDefs.EYES_FOX, "(7) FOX"],
-			[AppearanceDefs.EYES_REPTILIAN, "(8) REPTILIAN"],
-			[AppearanceDefs.EYES_SNAKE, "(9) SNAKE"],
-			[AppearanceDefs.EYES_DRAGON, "(10) DRAGON"],
-			[AppearanceDefs.EYES_DEVIL, "(11) DEVIL"],
+			[AppearanceDefs.EYES_HUMAN, "0 HUMAN"],
+			[AppearanceDefs.EYES_FOUR_SPIDER_EYES, "1 FOUR_SPIDER_EYES"],
+			[AppearanceDefs.EYES_BLACK_EYES_SAND_TRAP, "2 BLACK_EYES_SAND_TRAP"],
+			[AppearanceDefs.EYES_CAT_SLITS, "3 CAT_SLITS"],
+			[AppearanceDefs.EYES_GORGON, "4 GORGON"],
+			[AppearanceDefs.EYES_FENRIR, "5 FENRIR"],
+			[AppearanceDefs.EYES_MANTICORE, "6 MANTICORE"],
+			[AppearanceDefs.EYES_FOX, "7 FOX"],
+			[AppearanceDefs.EYES_REPTILIAN, "8 REPTILIAN"],
+			[AppearanceDefs.EYES_SNAKE, "9 SNAKE"],
+			[AppearanceDefs.EYES_DRAGON, "10 DRAGON"],
+			[AppearanceDefs.EYES_DEVIL, "11 DEVIL"],
+			[AppearanceDefs.EYES_ONI, "12 ONI"],
+			[AppearanceDefs.EYES_ELF, "13 ELF"],
+			[AppearanceDefs.EYES_RAIJU, "14 RAIJU"],
+			[AppearanceDefs.EYES_VAMPIRE, "15 VAMPIRE"],
 		];
 		private static const EAR_TYPE_CONSTANTS:Array    = [
-			[AppearanceDefs.EARS_HUMAN, "(0) HUMAN"],
-			[AppearanceDefs.EARS_HORSE, "(1) HORSE"],
-			[AppearanceDefs.EARS_DOG, "(2) DOG"],
-			[AppearanceDefs.EARS_COW, "(3) COW"],
-			[AppearanceDefs.EARS_ELFIN, "(4) ELFIN"],
-			[AppearanceDefs.EARS_CAT, "(5) CAT"],
-			[AppearanceDefs.EARS_LIZARD, "(6) LIZARD"],
-			[AppearanceDefs.EARS_BUNNY, "(7) BUNNY"],
-			[AppearanceDefs.EARS_KANGAROO, "(8) KANGAROO"],
-			[AppearanceDefs.EARS_FOX, "(9) FOX"],
-			[AppearanceDefs.EARS_DRAGON, "(10) DRAGON"],
-			[AppearanceDefs.EARS_RACCOON, "(11) RACCOON"],
-			[AppearanceDefs.EARS_MOUSE, "(12) MOUSE"],
-			[AppearanceDefs.EARS_FERRET, "(13) FERRET"],
-			[AppearanceDefs.EARS_PIG, "(14) PIG"],
-			[AppearanceDefs.EARS_RHINO, "(15) RHINO"],
-			[AppearanceDefs.EARS_ECHIDNA, "(16) ECHIDNA"],
-			[AppearanceDefs.EARS_DEER, "(17) DEER"],
-			[AppearanceDefs.EARS_WOLF, "(18) WOLF"],
-			[AppearanceDefs.EARS_LION, "(19) LION"],
-			[AppearanceDefs.EARS_YETI, "(20) YETI"],
-			[AppearanceDefs.EARS_ORCA, "(21) ORCA"],
-			[AppearanceDefs.EARS_SNAKE, "(22) SNAKE"],
-			[AppearanceDefs.EARS_GOAT, "(23) GOAT"],
+			[AppearanceDefs.EARS_HUMAN, "0 HUMAN"],
+			[AppearanceDefs.EARS_HORSE, "1 HORSE"],
+			[AppearanceDefs.EARS_DOG, "2 DOG"],
+			[AppearanceDefs.EARS_COW, "3 COW"],
+			[AppearanceDefs.EARS_ELFIN, "4 ELFIN"],
+			[AppearanceDefs.EARS_CAT, "5 CAT"],
+			[AppearanceDefs.EARS_LIZARD, "6 LIZARD"],
+			[AppearanceDefs.EARS_BUNNY, "7 BUNNY"],
+			[AppearanceDefs.EARS_KANGAROO, "8 KANGAROO"],
+			[AppearanceDefs.EARS_FOX, "9 FOX"],
+			[AppearanceDefs.EARS_DRAGON, "10 DRAGON"],
+			[AppearanceDefs.EARS_RACCOON, "11 RACCOON"],
+			[AppearanceDefs.EARS_MOUSE, "12 MOUSE"],
+			[AppearanceDefs.EARS_FERRET, "13 FERRET"],
+			[AppearanceDefs.EARS_PIG, "14 PIG"],
+			[AppearanceDefs.EARS_RHINO, "15 RHINO"],
+			[AppearanceDefs.EARS_ECHIDNA, "16 ECHIDNA"],
+			[AppearanceDefs.EARS_DEER, "17 DEER"],
+			[AppearanceDefs.EARS_WOLF, "18 WOLF"],
+			[AppearanceDefs.EARS_LION, "19 LION"],
+			[AppearanceDefs.EARS_YETI, "20 YETI"],
+			[AppearanceDefs.EARS_ORCA, "21 ORCA"],
+			[AppearanceDefs.EARS_SNAKE, "22 SNAKE"],
+			[AppearanceDefs.EARS_GOAT, "23 GOAT"],
+			[AppearanceDefs.EARS_ONI, "24 ONI"],
+			[AppearanceDefs.EARS_ELVEN, "25 ELVEN"],
+			[AppearanceDefs.EARS_WEASEL, "26 WEASEL"],
+			[AppearanceDefs.EARS_BAT, "27 BAT"],
+			[AppearanceDefs.EARS_VAMPIRE, "28 VAMPIRE"],
 		];
 		private static const HORN_TYPE_CONSTANTS:Array    = [
-			[AppearanceDefs.HORNS_NONE, "(0) NONE"],
-			[AppearanceDefs.HORNS_DEMON, "(1) DEMON"],
-			[AppearanceDefs.HORNS_COW_MINOTAUR, "(2) COW_MINOTAUR"],
-			[AppearanceDefs.HORNS_DRACONIC_X2, "(3) DRACONIC_X2"],
-			[AppearanceDefs.HORNS_DRACONIC_X4_12_INCH_LONG, "(4) DRACONIC_X4_12_INCH_LONG"],
-			[AppearanceDefs.HORNS_ANTLERS, "(5) ANTLERS"],
-			[AppearanceDefs.HORNS_GOAT, "(6) GOAT"],
-			[AppearanceDefs.HORNS_UNICORN, "(7) UNICORN"],
-			[AppearanceDefs.HORNS_RHINO, "(8) RHINO"],
-			[AppearanceDefs.HORNS_OAK, "(9) OAK"],
-			[AppearanceDefs.HORNS_GARGOYLE, "(10) GARGOYLE"],
-			[AppearanceDefs.HORNS_ORCHID, "(11) ORCHID"],
-			[AppearanceDefs.HORNS_ONI_X2, "(12) ONI_X2"],
-			[AppearanceDefs.HORNS_ONI, "(13) ONI"],
+			[AppearanceDefs.HORNS_NONE, "0 NONE"],
+			[AppearanceDefs.HORNS_DEMON, "1 DEMON"],
+			[AppearanceDefs.HORNS_COW_MINOTAUR, "2 COW_MINOTAUR"],
+			[AppearanceDefs.HORNS_DRACONIC_X2, "3 DRACONIC_X2"],
+			[AppearanceDefs.HORNS_DRACONIC_X4_12_INCH_LONG, "4 DRACONIC_X4_12_INCH_LONG"],
+			[AppearanceDefs.HORNS_ANTLERS, "5 ANTLERS"],
+			[AppearanceDefs.HORNS_GOAT, "6 GOAT"],
+			[AppearanceDefs.HORNS_UNICORN, "7 UNICORN"],
+			[AppearanceDefs.HORNS_RHINO, "8 RHINO"],
+			[AppearanceDefs.HORNS_OAK, "9 OAK"],
+			[AppearanceDefs.HORNS_GARGOYLE, "10 GARGOYLE"],
+			[AppearanceDefs.HORNS_ORCHID, "11 ORCHID"],
+			[AppearanceDefs.HORNS_ONI_X2, "12 ONI_X2"],
+			[AppearanceDefs.HORNS_ONI, "13 ONI"],
 		];
 		private static const HORN_COUNT_CONSTANTS:Array = [
 				0,1,2,3,4,
@@ -994,21 +1029,21 @@ public class DebugMenu extends BaseContent
 				16,20
 		];
 		private static const ANTENNA_TYPE_CONSTANTS:Array = [
-			[AppearanceDefs.ANTENNAE_NONE, "(0) NONE"],
-			[AppearanceDefs.ANTENNAE_MANTIS, "(1) MANTIS"],
-			[AppearanceDefs.ANTENNAE_BEE, "(2) BEE"],
+			[AppearanceDefs.ANTENNAE_NONE, "0 NONE"],
+			[AppearanceDefs.ANTENNAE_MANTIS, "1 MANTIS"],
+			[AppearanceDefs.ANTENNAE_BEE, "2 BEE"],
 		];
 		private static const GILLS_TYPE_CONSTANTS:Array   = [
-			[AppearanceDefs.GILLS_NONE, "(0) NONE"],
-			[AppearanceDefs.GILLS_ANEMONE, "(1) ANEMONE"],
-			[AppearanceDefs.GILLS_FISH, "(2) FISH"],
-			[AppearanceDefs.GILLS_IN_TENTACLE_LEGS, "(3) IN_TENTACLE_LEGS"],
+			[AppearanceDefs.GILLS_NONE, "0 NONE"],
+			[AppearanceDefs.GILLS_ANEMONE, "1 ANEMONE"],
+			[AppearanceDefs.GILLS_FISH, "2 FISH"],
+			[AppearanceDefs.GILLS_IN_TENTACLE_LEGS, "3 IN_TENTACLE_LEGS"],
 		];
 		private static const BEARD_STYLE_CONSTANTS:Array = [
-			[AppearanceDefs.BEARD_NORMAL,"(0) NORMAL"],
-			[AppearanceDefs.BEARD_GOATEE,"(1) GOATEE"],
-			[AppearanceDefs.BEARD_CLEANCUT,"(2) CLEANCUT"],
-			[AppearanceDefs.BEARD_MOUNTAINMAN,"(3) MOUNTAINMAN"],
+			[AppearanceDefs.BEARD_NORMAL,"0 NORMAL"],
+			[AppearanceDefs.BEARD_GOATEE,"1 GOATEE"],
+			[AppearanceDefs.BEARD_CLEANCUT,"2 CLEANCUT"],
+			[AppearanceDefs.BEARD_MOUNTAINMAN,"3 MOUNTAINMAN"],
 		];
 		private static const BEARD_LENGTH_CONSTANTS:Array = [
 			0,0.1,0.3,2,4,
@@ -1031,6 +1066,12 @@ public class DebugMenu extends BaseContent
 			menu();
 			dumpPlayerData();
 			showChangeOptions(bodyPartEditorHead, page, EYE_TYPE_CONSTANTS, changeEyeType);
+		}
+		private function changeEyeColor(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.eyeColor = COLOR_CONSTANTS[setIdx];
+			menu();
+			dumpPlayerData();
+			showChangeOptions(bodyPartEditorHead, page, COLOR_CONSTANTS, changeEyeType);
 		}
 		private function changeEarType(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.earType = setIdx;
@@ -1092,71 +1133,71 @@ public class DebugMenu extends BaseContent
 			addButton(14, "Back", bodyPartEditorRoot);
 		}
 		private static const ARM_TYPE_CONSTANTS:Array   = [
-			[AppearanceDefs.ARM_TYPE_HUMAN, "(0) HUMAN"],
-			[AppearanceDefs.ARM_TYPE_HARPY, "(1) HARPY"],
-			[AppearanceDefs.ARM_TYPE_SPIDER, "(2) SPIDER"],
-			[AppearanceDefs.ARM_TYPE_MANTIS, "(3) MANTIS"],
-			[AppearanceDefs.ARM_TYPE_BEE, "(4) BEE"],
-			[AppearanceDefs.ARM_TYPE_SALAMANDER, "(5) SALAMANDER"],
-			[AppearanceDefs.ARM_TYPE_PHOENIX, "(6) PHOENIX"],
-			[AppearanceDefs.ARM_TYPE_PLANT, "(7) PLANT"],
-			[AppearanceDefs.ARM_TYPE_SHARK, "(8) SHARK"],
-			[AppearanceDefs.ARM_TYPE_GARGOYLE, "(9) GARGOYLE"],
-			[AppearanceDefs.ARM_TYPE_WOLF, "(10) WOLF"],
-			[AppearanceDefs.ARM_TYPE_LION, "(11) LION"],
-			[AppearanceDefs.ARM_TYPE_KITSUNE, "(12) KITSUNE"],
-			[AppearanceDefs.ARM_TYPE_FOX, "(13) FOX"],
-			[AppearanceDefs.ARM_TYPE_LIZARD, "(14) LIZARD"],
-			[AppearanceDefs.ARM_TYPE_DRAGON, "(15) DRAGON"],
-			[AppearanceDefs.ARM_TYPE_YETI, "(16) YETI"],
-			[AppearanceDefs.ARM_TYPE_ORCA, "(17) ORCA"],
-			[AppearanceDefs.ARM_TYPE_PLANT2, "(18) PLANT2"],
-			[AppearanceDefs.ARM_TYPE_DEVIL, "(19) DEVIL"],
+			[AppearanceDefs.ARM_TYPE_HUMAN, "0 HUMAN"],
+			[AppearanceDefs.ARM_TYPE_HARPY, "1 HARPY"],
+			[AppearanceDefs.ARM_TYPE_SPIDER, "2 SPIDER"],
+			[AppearanceDefs.ARM_TYPE_MANTIS, "3 MANTIS"],
+			[AppearanceDefs.ARM_TYPE_BEE, "4 BEE"],
+			[AppearanceDefs.ARM_TYPE_SALAMANDER, "5 SALAMANDER"],
+			[AppearanceDefs.ARM_TYPE_PHOENIX, "6 PHOENIX"],
+			[AppearanceDefs.ARM_TYPE_PLANT, "7 PLANT"],
+			[AppearanceDefs.ARM_TYPE_SHARK, "8 SHARK"],
+			[AppearanceDefs.ARM_TYPE_GARGOYLE, "9 GARGOYLE"],
+			[AppearanceDefs.ARM_TYPE_WOLF, "10 WOLF"],
+			[AppearanceDefs.ARM_TYPE_LION, "11 LION"],
+			[AppearanceDefs.ARM_TYPE_KITSUNE, "12 KITSUNE"],
+			[AppearanceDefs.ARM_TYPE_FOX, "13 FOX"],
+			[AppearanceDefs.ARM_TYPE_LIZARD, "14 LIZARD"],
+			[AppearanceDefs.ARM_TYPE_DRAGON, "15 DRAGON"],
+			[AppearanceDefs.ARM_TYPE_YETI, "16 YETI"],
+			[AppearanceDefs.ARM_TYPE_ORCA, "17 ORCA"],
+			[AppearanceDefs.ARM_TYPE_PLANT2, "18 PLANT2"],
+			[AppearanceDefs.ARM_TYPE_DEVIL, "19 DEVIL"],
 		];
 		private static const CLAW_TYPE_CONSTANTS:Array = [
-			[AppearanceDefs.CLAW_TYPE_NORMAL,"(0) NORMAL"],
-			[AppearanceDefs.CLAW_TYPE_LIZARD,"(1) LIZARD"],
-			[AppearanceDefs.CLAW_TYPE_DRAGON,"(2) DRAGON"],
-			[AppearanceDefs.CLAW_TYPE_SALAMANDER,"(3) SALAMANDER"],
-			[AppearanceDefs.CLAW_TYPE_CAT,"(4) CAT"],
-			[AppearanceDefs.CLAW_TYPE_DOG,"(5) DOG"],
-			[AppearanceDefs.CLAW_TYPE_RAPTOR,"(6) RAPTOR"],
-			[AppearanceDefs.CLAW_TYPE_MANTIS,"(7) MANTIS"],
+			[AppearanceDefs.CLAW_TYPE_NORMAL,"0 NORMAL"],
+			[AppearanceDefs.CLAW_TYPE_LIZARD,"1 LIZARD"],
+			[AppearanceDefs.CLAW_TYPE_DRAGON,"2 DRAGON"],
+			[AppearanceDefs.CLAW_TYPE_SALAMANDER,"3 SALAMANDER"],
+			[AppearanceDefs.CLAW_TYPE_CAT,"4 CAT"],
+			[AppearanceDefs.CLAW_TYPE_DOG,"5 DOG"],
+			[AppearanceDefs.CLAW_TYPE_RAPTOR,"6 RAPTOR"],
+			[AppearanceDefs.CLAW_TYPE_MANTIS,"7 MANTIS"],
 		];
 		private static const TAIL_TYPE_CONSTANTS:Array  = [
-			[AppearanceDefs.TAIL_TYPE_NONE, "(0) NONE"],
-			[AppearanceDefs.TAIL_TYPE_HORSE, "(1) HORSE"],
-			[AppearanceDefs.TAIL_TYPE_DOG, "(2) DOG"],
-			[AppearanceDefs.TAIL_TYPE_DEMONIC, "(3) DEMONIC"],
-			[AppearanceDefs.TAIL_TYPE_COW, "(4) COW"],
-			[AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN, "(5) SPIDER_ADBOMEN"],
-			[AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN, "(6) BEE_ABDOMEN"],
-			[AppearanceDefs.TAIL_TYPE_SHARK, "(7) SHARK"],
-			[AppearanceDefs.TAIL_TYPE_CAT, "(8) CAT"],
-			[AppearanceDefs.TAIL_TYPE_LIZARD, "(9) LIZARD"],
-			[AppearanceDefs.TAIL_TYPE_RABBIT, "(10) RABBIT"],
-			[AppearanceDefs.TAIL_TYPE_HARPY, "(11) HARPY"],
-			[AppearanceDefs.TAIL_TYPE_KANGAROO, "(12) KANGAROO"],
-			[AppearanceDefs.TAIL_TYPE_FOX, "(13) FOX"],
-			[AppearanceDefs.TAIL_TYPE_DRACONIC, "(14) DRACONIC"],
-			[AppearanceDefs.TAIL_TYPE_RACCOON, "(15) RACCOON"],
-			[AppearanceDefs.TAIL_TYPE_MOUSE, "(16) MOUSE"],
-			[AppearanceDefs.TAIL_TYPE_FERRET, "(17) FERRET"],
-			[AppearanceDefs.TAIL_TYPE_BEHEMOTH, "(18) BEHEMOTH"],
-			[AppearanceDefs.TAIL_TYPE_PIG, "(19) PIG"],
-			[AppearanceDefs.TAIL_TYPE_SCORPION, "(20) SCORPION"],
-			[AppearanceDefs.TAIL_TYPE_GOAT, "(21) GOAT"],
-			[AppearanceDefs.TAIL_TYPE_RHINO, "(22) RHINO"],
-			[AppearanceDefs.TAIL_TYPE_ECHIDNA, "(23) ECHIDNA"],
-			[AppearanceDefs.TAIL_TYPE_DEER, "(24) DEER"],
-			[AppearanceDefs.TAIL_TYPE_SALAMANDER, "(25) SALAMANDER"],
-			[AppearanceDefs.TAIL_TYPE_KITSHOO, "(26) KITSHOO"],
-			[AppearanceDefs.TAIL_TYPE_MANTIS_ABDOMEN, "(27) MANTIS_ABDOMEN"],
-			[AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL, "(28) MANTICORE_PUSSYTAIL"],
-			[AppearanceDefs.TAIL_TYPE_WOLF, "(29) WOLF"],
-			[AppearanceDefs.TAIL_TYPE_GARGOYLE, "(30) GARGOYLE"],
-			[AppearanceDefs.TAIL_TYPE_ORCA, "(31) ORCA"],
-			[AppearanceDefs.TAIL_TYPE_YGGDRASIL, "(32) YGGDRASIL"],
+			[AppearanceDefs.TAIL_TYPE_NONE, "0 NONE"],
+			[AppearanceDefs.TAIL_TYPE_HORSE, "1 HORSE"],
+			[AppearanceDefs.TAIL_TYPE_DOG, "2 DOG"],
+			[AppearanceDefs.TAIL_TYPE_DEMONIC, "3 DEMONIC"],
+			[AppearanceDefs.TAIL_TYPE_COW, "4 COW"],
+			[AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN, "5 SPIDER_ADBOMEN"],
+			[AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN, "6 BEE_ABDOMEN"],
+			[AppearanceDefs.TAIL_TYPE_SHARK, "7 SHARK"],
+			[AppearanceDefs.TAIL_TYPE_CAT, "8 CAT"],
+			[AppearanceDefs.TAIL_TYPE_LIZARD, "9 LIZARD"],
+			[AppearanceDefs.TAIL_TYPE_RABBIT, "10 RABBIT"],
+			[AppearanceDefs.TAIL_TYPE_HARPY, "11 HARPY"],
+			[AppearanceDefs.TAIL_TYPE_KANGAROO, "12 KANGAROO"],
+			[AppearanceDefs.TAIL_TYPE_FOX, "13 FOX"],
+			[AppearanceDefs.TAIL_TYPE_DRACONIC, "14 DRACONIC"],
+			[AppearanceDefs.TAIL_TYPE_RACCOON, "15 RACCOON"],
+			[AppearanceDefs.TAIL_TYPE_MOUSE, "16 MOUSE"],
+			[AppearanceDefs.TAIL_TYPE_FERRET, "17 FERRET"],
+			[AppearanceDefs.TAIL_TYPE_BEHEMOTH, "18 BEHEMOTH"],
+			[AppearanceDefs.TAIL_TYPE_PIG, "19 PIG"],
+			[AppearanceDefs.TAIL_TYPE_SCORPION, "20 SCORPION"],
+			[AppearanceDefs.TAIL_TYPE_GOAT, "21 GOAT"],
+			[AppearanceDefs.TAIL_TYPE_RHINO, "22 RHINO"],
+			[AppearanceDefs.TAIL_TYPE_ECHIDNA, "23 ECHIDNA"],
+			[AppearanceDefs.TAIL_TYPE_DEER, "24 DEER"],
+			[AppearanceDefs.TAIL_TYPE_SALAMANDER, "25 SALAMANDER"],
+			[AppearanceDefs.TAIL_TYPE_KITSHOO, "26 KITSHOO"],
+			[AppearanceDefs.TAIL_TYPE_MANTIS_ABDOMEN, "27 MANTIS_ABDOMEN"],
+			[AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL, "28 MANTICORE_PUSSYTAIL"],
+			[AppearanceDefs.TAIL_TYPE_WOLF, "29 WOLF"],
+			[AppearanceDefs.TAIL_TYPE_GARGOYLE, "30 GARGOYLE"],
+			[AppearanceDefs.TAIL_TYPE_ORCA, "31 ORCA"],
+			[AppearanceDefs.TAIL_TYPE_YGGDRASIL, "32 YGGDRASIL"],
 		];
 		private static const TAIL_COUNT_CONSTANTS:Array = [
 			[0,"0"],1,2,3,4,
@@ -1164,29 +1205,29 @@ public class DebugMenu extends BaseContent
 			10,16
 		];
 		private static const WING_TYPE_CONSTANTS:Array  = [
-			[AppearanceDefs.WING_TYPE_NONE, "(0) NONE"],
-			[AppearanceDefs.WING_TYPE_BEE_LIKE_SMALL, "(1) BEE_LIKE_SMALL"],
-			[AppearanceDefs.WING_TYPE_BEE_LIKE_LARGE, "(2) BEE_LIKE_LARGE"],
-			[AppearanceDefs.WING_TYPE_HARPY, "(4) HARPY"],
-			[AppearanceDefs.WING_TYPE_IMP, "(5) IMP"],
-			[AppearanceDefs.WING_TYPE_BAT_LIKE_TINY, "(6) BAT_LIKE_TINY"],
-			[AppearanceDefs.WING_TYPE_BAT_LIKE_LARGE, "(7) BAT_LIKE_LARGE"],
-			[AppearanceDefs.WING_TYPE_SHARK_FIN, "(8) SHARK_FIN"],
-			[AppearanceDefs.WING_TYPE_FEATHERED_LARGE, "(9) FEATHERED_LARGE"],
-			[AppearanceDefs.WING_TYPE_DRACONIC_SMALL, "(10) DRACONIC_SMALL"],
-			[AppearanceDefs.WING_TYPE_DRACONIC_LARGE, "(11) DRACONIC_LARGE"],
-			[AppearanceDefs.WING_TYPE_GIANT_DRAGONFLY, "(12) GIANT_DRAGONFLY"],
-			[AppearanceDefs.WING_TYPE_BAT_LIKE_LARGE_2, "(13) BAT_LIKE_LARGE_2"],
-			[AppearanceDefs.WING_TYPE_DRACONIC_HUGE, "(14) DRACONIC_HUGE"],
-			[AppearanceDefs.WING_TYPE_FEATHERED_PHOENIX, "(15) FEATHERED_PHOENIX"],
-			[AppearanceDefs.WING_TYPE_FEATHERED_ALICORN, "(16) FEATHERED_ALICORN"],
-			[AppearanceDefs.WING_TYPE_MANTIS_LIKE_SMALL, "(17) MANTIS_LIKE_SMALL"],
-			[AppearanceDefs.WING_TYPE_MANTIS_LIKE_LARGE, "(18) MANTIS_LIKE_LARGE"],
-			[AppearanceDefs.WING_TYPE_MANTIS_LIKE_LARGE_2, "(19) MANTIS_LIKE_LARGE_2"],
-			[AppearanceDefs.WING_TYPE_GARGOYLE_LIKE_LARGE, "(20) GARGOYLE_LIKE_LARGE"],
-			[AppearanceDefs.WING_TYPE_PLANT, "(21) PLANT"],
-			[AppearanceDefs.WING_TYPE_MANTICORE_LIKE_SMALL, "(22) MANTICORE_LIKE_SMALL"],
-			[AppearanceDefs.WING_TYPE_MANTICORE_LIKE_LARGE, "(23) MANTICORE_LIKE_LARGE"],
+			[AppearanceDefs.WING_TYPE_NONE, "0 NONE"],
+			[AppearanceDefs.WING_TYPE_BEE_LIKE_SMALL, "1 BEE_LIKE_SMALL"],
+			[AppearanceDefs.WING_TYPE_BEE_LIKE_LARGE, "2 BEE_LIKE_LARGE"],
+			[AppearanceDefs.WING_TYPE_HARPY, "4 HARPY"],
+			[AppearanceDefs.WING_TYPE_IMP, "5 IMP"],
+			[AppearanceDefs.WING_TYPE_BAT_LIKE_TINY, "6 BAT_LIKE_TINY"],
+			[AppearanceDefs.WING_TYPE_BAT_LIKE_LARGE, "7 BAT_LIKE_LARGE"],
+			[AppearanceDefs.WING_TYPE_SHARK_FIN, "8 SHARK_FIN"],
+			[AppearanceDefs.WING_TYPE_FEATHERED_LARGE, "9 FEATHERED_LARGE"],
+			[AppearanceDefs.WING_TYPE_DRACONIC_SMALL, "10 DRACONIC_SMALL"],
+			[AppearanceDefs.WING_TYPE_DRACONIC_LARGE, "11 DRACONIC_LARGE"],
+			[AppearanceDefs.WING_TYPE_GIANT_DRAGONFLY, "12 GIANT_DRAGONFLY"],
+			[AppearanceDefs.WING_TYPE_BAT_LIKE_LARGE_2, "13 BAT_LIKE_LARGE_2"],
+			[AppearanceDefs.WING_TYPE_DRACONIC_HUGE, "14 DRACONIC_HUGE"],
+			[AppearanceDefs.WING_TYPE_FEATHERED_PHOENIX, "15 FEATHERED_PHOENIX"],
+			[AppearanceDefs.WING_TYPE_FEATHERED_ALICORN, "16 FEATHERED_ALICORN"],
+			[AppearanceDefs.WING_TYPE_MANTIS_LIKE_SMALL, "17 MANTIS_LIKE_SMALL"],
+			[AppearanceDefs.WING_TYPE_MANTIS_LIKE_LARGE, "18 MANTIS_LIKE_LARGE"],
+			[AppearanceDefs.WING_TYPE_MANTIS_LIKE_LARGE_2, "19 MANTIS_LIKE_LARGE_2"],
+			[AppearanceDefs.WING_TYPE_GARGOYLE_LIKE_LARGE, "20 GARGOYLE_LIKE_LARGE"],
+			[AppearanceDefs.WING_TYPE_PLANT, "21 PLANT"],
+			[AppearanceDefs.WING_TYPE_MANTICORE_LIKE_SMALL, "22 MANTICORE_LIKE_SMALL"],
+			[AppearanceDefs.WING_TYPE_MANTICORE_LIKE_LARGE, "23 MANTICORE_LIKE_LARGE"],
 		];
 		private static const WING_DESC_CONSTANTS:Array = [
 			"(none)","non-existant","tiny hidden","huge","small",
@@ -1199,55 +1240,55 @@ public class DebugMenu extends BaseContent
 			"large mantis-like","small mantis-like",
 		];
 		private static const LOWER_TYPE_CONSTANTS:Array = [
-			[AppearanceDefs.LOWER_BODY_TYPE_HUMAN, "(0) HUMAN"],
-			[AppearanceDefs.LOWER_BODY_TYPE_HOOFED, "(1) HOOFED"],
-			[AppearanceDefs.LOWER_BODY_TYPE_DOG, "(2) DOG"],
-			[AppearanceDefs.LOWER_BODY_TYPE_NAGA, "(3) NAGA"],
-			[AppearanceDefs.LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS, "(5) DEMONIC_HIGH_HEELS"],
-			[AppearanceDefs.LOWER_BODY_TYPE_DEMONIC_CLAWS, "(6) DEMONIC_CLAWS"],
-			[AppearanceDefs.LOWER_BODY_TYPE_BEE, "(7) BEE"],
-			[AppearanceDefs.LOWER_BODY_TYPE_GOO, "(8) GOO"],
-			[AppearanceDefs.LOWER_BODY_TYPE_CAT, "(9) CAT"],
-			[AppearanceDefs.LOWER_BODY_TYPE_LIZARD, "(10) LIZARD"],
-			[AppearanceDefs.LOWER_BODY_TYPE_PONY, "(11) PONY"],
-			[AppearanceDefs.LOWER_BODY_TYPE_BUNNY, "(12) BUNNY"],
-			[AppearanceDefs.LOWER_BODY_TYPE_HARPY, "(13) HARPY"],
-			[AppearanceDefs.LOWER_BODY_TYPE_KANGAROO, "(14) KANGAROO"],
-			[AppearanceDefs.LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS, "(15) CHITINOUS_SPIDER_LEGS"],
-			[AppearanceDefs.LOWER_BODY_TYPE_DRIDER_LOWER_BODY, "(16) DRIDER_LOWER_BODY"],
-			[AppearanceDefs.LOWER_BODY_TYPE_FOX, "(17) FOX"],
-			[AppearanceDefs.LOWER_BODY_TYPE_DRAGON, "(18) DRAGON"],
-			[AppearanceDefs.LOWER_BODY_TYPE_RACCOON, "(19) RACCOON"],
-			[AppearanceDefs.LOWER_BODY_TYPE_FERRET, "(20) FERRET"],
-			[AppearanceDefs.LOWER_BODY_TYPE_CLOVEN_HOOFED, "(21) CLOVEN_HOOFED"],
-			[AppearanceDefs.LOWER_BODY_TYPE_ECHIDNA, "(23) ECHIDNA"],
-			[AppearanceDefs.LOWER_BODY_TYPE_SALAMANDER, "(25) SALAMANDER"],
-			[AppearanceDefs.LOWER_BODY_TYPE_SCYLLA, "(26) SCYLLA"],
-			[AppearanceDefs.LOWER_BODY_TYPE_MANTIS, "(27) MANTIS"],
-			[AppearanceDefs.LOWER_BODY_TYPE_SHARK, "(29) SHARK"],
-			[AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE, "(30) GARGOYLE"],
-			[AppearanceDefs.LOWER_BODY_TYPE_PLANT_HIGH_HEELS, "(31) PLANT_HIGH_HEELS"],
-			[AppearanceDefs.LOWER_BODY_TYPE_PLANT_ROOT_CLAWS, "(32) PLANT_ROOT_CLAWS"],
-			[AppearanceDefs.LOWER_BODY_TYPE_WOLF, "(33) WOLF"],
-			[AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER, "(34) PLANT_FLOWER"],
-			[AppearanceDefs.LOWER_BODY_TYPE_LION, "(35) LION"],
-			[AppearanceDefs.LOWER_BODY_TYPE_YETI, "(36) YETI"],
-			[AppearanceDefs.LOWER_BODY_TYPE_ORCA, "(37) ORCA"],
-			[AppearanceDefs.LOWER_BODY_TYPE_YGG_ROOT_CLAWS, "(38) YGG_ROOT_CLAWS"],
+			[AppearanceDefs.LOWER_BODY_TYPE_HUMAN, "0 HUMAN"],
+			[AppearanceDefs.LOWER_BODY_TYPE_HOOFED, "1 HOOFED"],
+			[AppearanceDefs.LOWER_BODY_TYPE_DOG, "2 DOG"],
+			[AppearanceDefs.LOWER_BODY_TYPE_NAGA, "3 NAGA"],
+			[AppearanceDefs.LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS, "5 DEMONIC_HIGH_HEELS"],
+			[AppearanceDefs.LOWER_BODY_TYPE_DEMONIC_CLAWS, "6 DEMONIC_CLAWS"],
+			[AppearanceDefs.LOWER_BODY_TYPE_BEE, "7 BEE"],
+			[AppearanceDefs.LOWER_BODY_TYPE_GOO, "8 GOO"],
+			[AppearanceDefs.LOWER_BODY_TYPE_CAT, "9 CAT"],
+			[AppearanceDefs.LOWER_BODY_TYPE_LIZARD, "10 LIZARD"],
+			[AppearanceDefs.LOWER_BODY_TYPE_PONY, "11 PONY"],
+			[AppearanceDefs.LOWER_BODY_TYPE_BUNNY, "12 BUNNY"],
+			[AppearanceDefs.LOWER_BODY_TYPE_HARPY, "13 HARPY"],
+			[AppearanceDefs.LOWER_BODY_TYPE_KANGAROO, "14 KANGAROO"],
+			[AppearanceDefs.LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS, "15 CHITINOUS_SPIDER_LEGS"],
+			[AppearanceDefs.LOWER_BODY_TYPE_DRIDER_LOWER_BODY, "16 DRIDER_LOWER_BODY"],
+			[AppearanceDefs.LOWER_BODY_TYPE_FOX, "17 FOX"],
+			[AppearanceDefs.LOWER_BODY_TYPE_DRAGON, "18 DRAGON"],
+			[AppearanceDefs.LOWER_BODY_TYPE_RACCOON, "19 RACCOON"],
+			[AppearanceDefs.LOWER_BODY_TYPE_FERRET, "20 FERRET"],
+			[AppearanceDefs.LOWER_BODY_TYPE_CLOVEN_HOOFED, "21 CLOVEN_HOOFED"],
+			[AppearanceDefs.LOWER_BODY_TYPE_ECHIDNA, "23 ECHIDNA"],
+			[AppearanceDefs.LOWER_BODY_TYPE_SALAMANDER, "25 SALAMANDER"],
+			[AppearanceDefs.LOWER_BODY_TYPE_SCYLLA, "26 SCYLLA"],
+			[AppearanceDefs.LOWER_BODY_TYPE_MANTIS, "27 MANTIS"],
+			[AppearanceDefs.LOWER_BODY_TYPE_SHARK, "29 SHARK"],
+			[AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE, "30 GARGOYLE"],
+			[AppearanceDefs.LOWER_BODY_TYPE_PLANT_HIGH_HEELS, "31 PLANT_HIGH_HEELS"],
+			[AppearanceDefs.LOWER_BODY_TYPE_PLANT_ROOT_CLAWS, "32 PLANT_ROOT_CLAWS"],
+			[AppearanceDefs.LOWER_BODY_TYPE_WOLF, "33 WOLF"],
+			[AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER, "34 PLANT_FLOWER"],
+			[AppearanceDefs.LOWER_BODY_TYPE_LION, "35 LION"],
+			[AppearanceDefs.LOWER_BODY_TYPE_YETI, "36 YETI"],
+			[AppearanceDefs.LOWER_BODY_TYPE_ORCA, "37 ORCA"],
+			[AppearanceDefs.LOWER_BODY_TYPE_YGG_ROOT_CLAWS, "38 YGG_ROOT_CLAWS"],
 		];
 		private static const LEG_COUNT_CONSTANTS:Array = [
 			1,2,4,6,8,
 			10,12,16
 		];
 		private static const REAR_TYPE_CONSTANTS:Array  = [
-			[AppearanceDefs.REAR_BODY_NONE, "(0) NONE"],
-			[AppearanceDefs.REAR_BODY_DRACONIC_MANE, "(1) DRACONIC_MANE"],
-			[AppearanceDefs.REAR_BODY_DRACONIC_SPIKES, "(2) DRACONIC_SPIKES"],
-			[AppearanceDefs.REAR_BODY_FENRIR_ICE_SPIKES, "(3) FENRIR_ICE_SPIKES"],
-			[AppearanceDefs.REAR_BODY_LION_MANE, "(4) LION_MANE"],
-			[AppearanceDefs.REAR_BODY_BEHEMOTH, "(5) BEHEMOTH"],
-			[AppearanceDefs.REAR_BODY_SHARK_FIN, "(6) SHARK_FIN"],
-			[AppearanceDefs.REAR_BODY_ORCA_BLOWHOLE, "(7) ORCA_BLOWHOLE"],
+			[AppearanceDefs.REAR_BODY_NONE, "0 NONE"],
+			[AppearanceDefs.REAR_BODY_DRACONIC_MANE, "1 DRACONIC_MANE"],
+			[AppearanceDefs.REAR_BODY_DRACONIC_SPIKES, "2 DRACONIC_SPIKES"],
+			[AppearanceDefs.REAR_BODY_FENRIR_ICE_SPIKES, "3 FENRIR_ICE_SPIKES"],
+			[AppearanceDefs.REAR_BODY_LION_MANE, "4 LION_MANE"],
+			[AppearanceDefs.REAR_BODY_BEHEMOTH, "5 BEHEMOTH"],
+			[AppearanceDefs.REAR_BODY_SHARK_FIN, "6 SHARK_FIN"],
+			[AppearanceDefs.REAR_BODY_ORCA_BLOWHOLE, "7 ORCA_BLOWHOLE"],
 		];
 		private function changeArmType(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.armType = setIdx;
@@ -1262,10 +1303,10 @@ public class DebugMenu extends BaseContent
 			showChangeOptions(bodyPartEditorTorso, page, CLAW_TYPE_CONSTANTS, changeClawType);
 		}
 		private function changeClawTone(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.clawTone = SKIN_TONE_CONSTANTS[setIdx];
+			if (setIdx>=0) player.clawTone = COLOR_CONSTANTS[setIdx];
 			menu();
 			dumpPlayerData();
-			showChangeOptions(bodyPartEditorTorso, page, SKIN_TONE_CONSTANTS, changeClawTone);
+			showChangeOptions(bodyPartEditorTorso, page, COLOR_CONSTANTS, changeClawTone);
 		}
 		private function changeTailType(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.tailType = setIdx;
