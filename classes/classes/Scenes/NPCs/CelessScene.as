@@ -22,7 +22,14 @@ import flash.utils.getQualifiedClassName;
 		private var _name:String = "Celess";
 		private var _armorFound:Boolean = false;
 
-		public function CelessScene() 
+        private static const _ageIsAdult:int = -1;
+        private static const _ageShouldDoBirth:int = -2;
+        private static const _ageCanMeetNightmare:int = -3;
+
+        private static function canMeetNightmare():Boolean{
+            return instance._age == _ageCanMeetNightmare;
+        }
+		public function CelessScene()
 		{
 			if (!_instance){
 				super("celess");
@@ -73,18 +80,17 @@ import flash.utils.getQualifiedClassName;
 				_armorFound = loadfrom.celess.armorFound;
 			}
 		}
-		public override function checkCampEvent():Boolean{
-            if (_age == -2) {
+        public override function checkCampEvent():Boolean{
+            if (_age == _ageShouldDoBirth) {
                 birthScene();
 				hideMenus();
 				return true;
 			}
 			return false;
 		}
-		
-		/* INTERFACE classes.TimeAwareInterface */
-		
-		public function timeChange():Boolean 
+
+        //region INTERFACE classes.TimeAwareInterface
+        public function timeChange():Boolean
 		{
 			if (_age > 0){_age++; }
 			return false;
@@ -94,25 +100,26 @@ import flash.utils.getQualifiedClassName;
 		{
 			if (_age > 720){
 				growUpScene();
-				_age = -1;
+				_age = _ageIsAdult;
+				EventParser.timeAwareClassRemove(instance);
 				return true;
 			}
 			return false;
 		}
-		// End Interface implementation
+        //endregion
 		
 		override public function get Name():String{
 			return _name;
 		}
 		override public function isCompanion(type:int = -1):Boolean{
-			if(type == COMPANION || type == FOLLOWER) return _age != 0;
+			if(type == COMPANION || type == FOLLOWER) return _age > 0 || _age == _ageIsAdult;
 			return false;
 		}
 		public function get isCorrupt():Boolean{
 			return _corruption >30;
 		}
-		public function get isAdult():Boolean{
-			return _age == -1;
+        public function get isAdult():Boolean{
+			return _age == _ageIsAdult;
 		}
 		
 		public function get armorFound():Boolean 
@@ -124,14 +131,12 @@ import flash.utils.getQualifiedClassName;
 			_armorFound = true;
 		}
 		
-		override public function campDescription(menuType:int=-1, descOnly:Boolean=false):Boolean
+		override public function campDescription(buttons:ButtonDataList, menuType:int = -1):void
 		{
 			if (isCompanion(menuType)){
 				outputText(Name+" is currently resting on all four in the nearby grassland area.\n\n");
-                addButton(3, Name, campInteraction);
-				return descOnly;
+                buttons.add(Name, campInteraction);
 			}
-			return false;
 		}
 		public override function campInteraction():void{
 			clearOutput();
@@ -277,10 +282,18 @@ import flash.utils.getQualifiedClassName;
         private function _celessUnicornIntro(stage:int = 0, wasMale:Boolean = false ):void{
             switch(stage){
                 case 0:
-                    scene("strings/forest-unicorn/intro");
-                    addButton(0, "Okay", _celessUnicornIntro, (player.isMale() || player.isGenderless())?2:3);
-                    if(player.hasCock()){addButton(1, "Fuck Her", _celessUnicornIntro, 4);}
-                    addButton(5, "NoWay", _celessUnicornIntro, 1);
+					scene("strings/forest-unicorn/intro/intro");
+					if(player.hasVirginVagina()){
+						display("strings/forest-unicorn/intro/virgin");
+						menu();
+                        addButton(0, "Okay", _celessUnicornIntro, (player.isMale() || player.isGenderless())?2:3);
+                        if(player.hasCock()){addButton(1, "Fuck Her", _celessUnicornIntro, 4);}
+                        addButton(5, "NoWay", _celessUnicornIntro, 1);
+					} else {
+						display("strings/forest-unicorn/intro/noVirgin");
+						_age = _ageCanMeetNightmare;
+						doNext(camp.returnToCampUseOneHour);
+					}
                     break;
                 case 1:
                     scene("strings/forest-unicorn/noway");

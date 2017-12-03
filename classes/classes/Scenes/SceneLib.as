@@ -89,6 +89,8 @@ public class SceneLib {
 
     public static var chichiScene:ChiChiFollower = new ChiChiFollower();
 
+    public static var ceaniScene:CeaniScene = new CeaniScene();
+
     public static var electraScene:ElectraFollower = new ElectraFollower();
 
     public static var emberScene:EmberScene = new EmberScene();

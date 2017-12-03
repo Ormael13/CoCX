@@ -66,7 +66,7 @@ public class DivaScene extends XXCNPC{
         if(type == LOVER || type == COMPANION)return status == -1;
         return false;
     }
-    override public function campDescription(menuType:int = -1, descOnly:Boolean = false):Boolean {
+    override public function campDescription(buttons:ButtonDataList, menuType:int = -1):void {
         if(isCompanion(menuType)){
             if(time.hours > 20){
                 display("camp/campDescript/evening");
@@ -75,10 +75,8 @@ public class DivaScene extends XXCNPC{
             } else {
                 display("camp/campDescript/day");
             }
-            addButton(4,"Diva",campInteraction);
-            return descOnly;
+            buttons.add("Diva",campInteraction);
         }
-        return false;
     }
     override public function campInteraction():void{
         if(time.hours > 20){
