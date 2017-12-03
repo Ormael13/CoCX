@@ -6,7 +6,7 @@ package classes.Scenes.Camp
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+	import classes.CoC;
 	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.BaseContent;
 	
@@ -126,7 +126,7 @@ public function materialgatheringstorageupgrade():void {
 		}
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) { 
 			startStoneStorage();
-			return; 
+			return;
 		}
 	}
 	else
@@ -297,7 +297,7 @@ public function warehousegranary():void {
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 5) { 
 			start2ndWarehouse2();
-			return; 
+			return;
 		}
 	}
 	else
@@ -730,7 +730,7 @@ public function kitsuneshrine():void {
 	}
 	if (player.fatigue <= player.maxFatigue() - 200 && flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 2) { 
 		buildAltair();
-		return; 
+		return;
 	}
 	else
 	{	
@@ -891,7 +891,7 @@ public function hotspring():void {
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 3) { 
 			addAWoodenWalls();
-			return; 
+			return;
 		}
 	}
 	else
@@ -1034,7 +1034,7 @@ public function sparringRing():void {
 	{
 		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 1) { 
 			buildSmallRing();
-			return; 
+			return;
 		}/*
 		if (flags[kFLAGS.] == 2) { 
 			digApool() 
@@ -1083,12 +1083,12 @@ public function arcaneCircle():void {
 	if (player.fatigue <= player.maxFatigue() - 50)
 	{
 		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] < 1) { 
-			buildFirstArcaneCircle() 
+			buildFirstArcaneCircle()
 			return; 
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 1) { 
 			if (player.findPerk(PerkLib.ElementalContractRank4) >= 0) {
-				buildSecondArcaneCircle() 
+				buildSecondArcaneCircle()
 				return; 
 			}
 			else {
@@ -1098,8 +1098,8 @@ public function arcaneCircle():void {
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 2) { 
 			if (player.findPerk(PerkLib.ElementalContractRank8) >= 0) {
-				buildThirdArcaneCircle() 
-				return; 
+				buildThirdArcaneCircle()
+				return;
 			}
 			else {
 				outputText("You lack the proper knowledge and skill to work on this new ritual circle yet!");

@@ -3,7 +3,7 @@ package classes.Scenes.NPCs
 import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.SceneLib;
 
 public class HelFollower extends NPCAwareContent
@@ -1074,7 +1074,7 @@ private function heliaRoughSex(output:Boolean = true):void {
 		}
 	}
 	if (player.lust < 33) outputText("\n\n<b>You aren't turned on enough for sex right now.</b>");
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         addButton(14, "Leave", cleanupAfterCombat);
 	else addButton(14, "Back", heliaFollowerMenu);
 }
@@ -1174,7 +1174,7 @@ private function possessIzma():void {
 	
 	player.orgasm();
 	dynStats("sen", -1);
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
@@ -1215,7 +1215,7 @@ private function inCampHelNagaLuv():void {
 	
 	player.orgasm();
 	dynStats("sen", -1);
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }	
@@ -1246,7 +1246,7 @@ private function nagaCoilForHelCampWithGirls():void {
 	
 	player.orgasm();
 	dynStats("sen", -1);
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }	
@@ -1289,7 +1289,7 @@ private function centaurMountsCampHel():void {
 	
 	player.orgasm();
 	dynStats("sen", -1);
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }	
@@ -1323,7 +1323,7 @@ private function femtaurPlusCampHel():void {
 	outputText("\n\nBreathing heavily, you pat her on the cheek and stumble off to get cleaned up.");
 	player.orgasm();
 	dynStats("sen", -1);
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
@@ -1349,7 +1349,7 @@ private function heliaFollowerTentafuck():void {
 	outputText("\n\nYou roll your eyes and go to get cleaned up.");
 	player.orgasm();
 	dynStats("sen", -1);
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }

@@ -6,11 +6,11 @@ package classes.Scenes.Areas.BlightRidge
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.Monsters.AbstractSuccubus;
 import classes.internals.*;
 
-use namespace kGAMECLASS;
+use namespace CoC;
 	
 	public class Omnibus extends AbstractSuccubus
 	{

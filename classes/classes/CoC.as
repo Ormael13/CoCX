@@ -14,7 +14,7 @@ package classes
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kCOUNTERS;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Items.*;
 import classes.Parser.Parser;
 import classes.Scenes.*;
@@ -64,7 +64,10 @@ public class CoC extends MovieClip
 
         CoC.setUpLogging();
     }
-
+    private static var _instance:CoC;
+    public static function get instance():CoC{
+        return _instance;
+    }
     //System time
     public var date:Date = new Date();
 
@@ -93,7 +96,7 @@ public class CoC extends MovieClip
     public var undergarments:UndergarmentLib = new UndergarmentLib();
     public var jewelries:JewelryLib = new JewelryLib();
     public var shields:ShieldLib = new ShieldLib();
-    public var miscItems:MiscItemLib = new MiscItemLib();
+
 
     // Force updates in Pepper Flash ahuehue
     private var _updateHack:Sprite = new Sprite();
@@ -122,8 +125,6 @@ public class CoC extends MovieClip
     public var mainView :MainView;
 
     public var model :GameModel;
-
-    public var parser:Parser;
 
     // ALL THE VARIABLES:
     // Declare the various global variables as class variables.
@@ -193,7 +194,7 @@ public class CoC extends MovieClip
     public function CoC()
     {
         // Cheatmode.
-        kGAMECLASS = this;
+        _instance = this;
         context = new StoryContext(this);
 
         useables = new UseableLib();
@@ -210,8 +211,6 @@ public class CoC extends MovieClip
 
         // Used for stopping chaos monkey on syntax errors. Separate flag so we can make stopping optional
         CoC_Settings.haltOnErrors = false;
-
-        this.parser = new Parser(this, CoC_Settings);
 
         this.model = new GameModel();
         this.mainView = new MainView(/*this.model*/);

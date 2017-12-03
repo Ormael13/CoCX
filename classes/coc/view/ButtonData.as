@@ -3,7 +3,7 @@
  */
 package coc.view {
 import classes.BaseContent;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.PerkLib;
 
 public class ButtonData {
@@ -60,7 +60,7 @@ public class ButtonData {
 	 */
 	public function requireSoulforce(cost:Number):ButtonData {
 		toolTipText += "\nSoulforce cost: "+cost;
-		if (kGAMECLASS.player.soulforce < cost) {
+		if (CoC.instance.player.soulforce < cost) {
 			disable();
 			toolTipText += " <b>You are too tired to use this ability.</b>";
 		}
@@ -73,7 +73,7 @@ public class ButtonData {
 	 */
 	public function requireLust(cost:Number):ButtonData {
 		toolTipText += "\nLust cost: "+cost;
-		if (kGAMECLASS.player.lust < cost) {
+		if (CoC.instance.player.lust < cost) {
 			disable();
 			toolTipText += " <b>You are not horny enough to use this ability.</b>";
 		}
@@ -86,7 +86,7 @@ public class ButtonData {
 	 */
 	public function requireWrath(cost:Number):ButtonData {
 		toolTipText += "\nLust cost: "+cost;
-		if (kGAMECLASS.player.wrath < cost) {
+		if (CoC.instance.player.wrath < cost) {
 			disable();
 			toolTipText += " <b>Your wrath is too low to use this ability!</b>";
 		}
@@ -100,8 +100,8 @@ public class ButtonData {
 	 */
 	public function requireMana(cost:Number, allowBloodMage:Boolean = false):ButtonData {
 		toolTipText += "\nMana cost: "+cost;
-		if (!(allowBloodMage && kGAMECLASS.player.hasPerk(PerkLib.BloodMage))
-			&& kGAMECLASS.player.mana < cost) {
+		if (!(allowBloodMage && CoC.instance.player.hasPerk(PerkLib.BloodMage))
+			&& CoC.instance.player.mana < cost) {
 			disable();
 			toolTipText += " <b>Your mana is too low to cast this.</b>";
 		}
@@ -115,8 +115,8 @@ public class ButtonData {
 	 */
 	public function requireFatigue(cost:Number, allowBloodMage:Boolean = false):ButtonData {
 		toolTipText += "\nFatigue cost: "+cost;
-		if (!(allowBloodMage && kGAMECLASS.player.hasPerk(PerkLib.BloodMage))
-			&& kGAMECLASS.player.fatigueLeft() < cost) {
+		if (!(allowBloodMage && CoC.instance.player.hasPerk(PerkLib.BloodMage))
+			&& CoC.instance.player.fatigueLeft() < cost) {
 			disable();
 			toolTipText += " <b>You are too tired to use this ability.</b>";
 		}

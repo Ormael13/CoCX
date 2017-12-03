@@ -1,7 +1,7 @@
 ﻿package classes
 {
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Items.ArmorLib;
 import classes.Items.ConsumableLib;
 import classes.Items.JewelryLib;
@@ -50,7 +50,7 @@ import flash.utils.getQualifiedClassName;
 			SceneLib.combat.cleanupAfterCombatImpl();
 		}
 		protected static function showStatDown(a:String):void{
-			kGAMECLASS.mainView.statsView.showStatDown(a);
+			CoC.instance.mainView.statsView.showStatDown(a);
 		}
 		protected final function statScreenRefresh():void {
 			EngineCore.statScreenRefresh();

@@ -9,7 +9,7 @@ package classes.Scenes.Places {
 
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.Scenes.Areas.Forest.TentacleBeast;
 import classes.Scenes.Places.HeXinDao.*;

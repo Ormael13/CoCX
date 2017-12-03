@@ -5,7 +5,7 @@ package classes.Scenes.Monsters
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.NPCs.JojoScene;
 
 import coc.xxc.BoundStory;
@@ -19,7 +19,7 @@ public class GoblinScene extends BaseContent
 		}
 		private var story:BoundStory;
 		private function init():void {
-            story = new Story("story", kGAMECLASS.rootStory.locate("monsters"), "goblin").bind(kGAMECLASS.context);
+            story = new Story("story", CoC.instance.rootStory.locate("monsters"), "goblin").bind(CoC.instance.context);
         }
 
 		/*Goblins

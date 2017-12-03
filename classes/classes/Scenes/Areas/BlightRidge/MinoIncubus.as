@@ -6,11 +6,11 @@ package classes.Scenes.Areas.BlightRidge
 {
 	import classes.*;
 	import classes.internals.*;
-	import classes.GlobalFlags.kGAMECLASS;
+	import classes.CoC;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Areas.BlightRidge.DemonScene;
 	
-	use namespace kGAMECLASS;
+	use namespace CoC;
 	
 	public class MinoIncubus extends Monster
 	{

@@ -5,7 +5,7 @@ package classes.Scenes.Areas.Bog
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 
 public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 
@@ -26,7 +26,7 @@ public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 			if (player.statusEffectv1(StatusEffects.PhoukaWhiskeyAffect) > 0) {
 				player.addStatusValue(StatusEffects.PhoukaWhiskeyAffect, 1, -1); //Count down hours until player is not drunk
 				if (player.statusEffectv1(StatusEffects.PhoukaWhiskeyAffect) <= 0) {
-					kGAMECLASS.consumables.P_WHSKY.phoukaWhiskeyExpires(player);
+					CoC.instance.consumables.P_WHSKY.phoukaWhiskeyExpires(player);
 					return true;
 				}
 			}

@@ -4,7 +4,7 @@ import classes.*;
 import classes.BodyParts.Skin;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Items.Consumables.EmberTF;
 import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.SceneLib;
@@ -328,7 +328,7 @@ public final class Mutations extends MutationsHelper
 				else outputText("  Slick fluids soak your thighs as your body reacts to this new stimulus.");
 			}
 			//(Minotaur fantasy)
-			if (!kGAMECLASS.inCombat && rand(10) == 1 && (!purified && (player.findPerk(PerkLib.MinotaurCumResistance) < 0) || player.findPerk(PerkLib.ManticoreCumAddict) < 0)) {
+			if (!CoC.instance.inCombat && rand(10) == 1 && (!purified && (player.findPerk(PerkLib.MinotaurCumResistance) < 0) || player.findPerk(PerkLib.ManticoreCumAddict) < 0)) {
 				outputText("\n\nYour eyes flutter closed for a second as a fantasy violates your mind.  You're on your knees, prostrate before a minotaur.  Its narcotic scent fills the air around you, and you're swaying back and forth with your belly already sloshing and full of spunk.  Its equine-like member is rubbing over your face, and you submit to the beast, stretching your jaw wide to take its sweaty, glistening girth inside you.  Your tongue quivers happily as you begin sucking and slurping, swallowing each drop of pre-cum you entice from the beastly erection.  Gurgling happily, you give yourself to your inhuman master for a chance to swallow into unthinking bliss.");
 				dynStats("lib", 1, "lus", rand(5) + player.cor / 20 + flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] / 5);
 			}
@@ -3145,7 +3145,7 @@ public final class Mutations extends MutationsHelper
 				player.goIntoRut(true);
 			}
 			//ORGAZMO
-			if (player.lust >= player.maxLust() && !kGAMECLASS.inCombat) {
+			if (player.lust >= player.maxLust() && !CoC.instance.inCombat) {
 				outputText("\n\nThe arousal from the potion overwhelms your senses and causes you to spontaneously orgasm.  You rip off your [armor] and look down as your ");
 				if (player.cocks.length > 0) {
 					outputText(multiCockDescriptLight() + " erupts in front of you, liberally spraying the ground around you");
@@ -3695,7 +3695,7 @@ public final class Mutations extends MutationsHelper
 			//b) Description while used
 			outputText("Pinching your nose, you quickly uncork the vial and bring it to your mouth, determined to see what effects it might have on your body. Pouring in as much as you can take, you painfully swallow before going for another shot, emptying the bottle.");
 			//(if outside combat)
-			if (!kGAMECLASS.inCombat) outputText("  Minutes pass as you start wishing you had water with you, to get rid of the aftertaste.");
+			if (!CoC.instance.inCombat) outputText("  Minutes pass as you start wishing you had water with you, to get rid of the aftertaste.");
 			//+ speed to 70!
 			if (player.spe < 70 && rand(2) == 0) {
 				dynStats("spe", (2 - (player.spe / 10 / 5)));
@@ -8533,7 +8533,7 @@ public final class Mutations extends MutationsHelper
 		public function fishFillet(player:Player):void
 		{
 			clearOutput();
-            if (!kGAMECLASS.inCombat) outputText("You sit down and unwrap your fish fillet. It's perfectly flaky, allowing you to break it off in bite-sized chunks.  The salty meal disappears quickly, and your stomach gives an appreciative gurgle.");
+            if (!CoC.instance.inCombat) outputText("You sit down and unwrap your fish fillet. It's perfectly flaky, allowing you to break it off in bite-sized chunks.  The salty meal disappears quickly, and your stomach gives an appreciative gurgle.");
             //(In combat?)
 			else outputText("You produce the fish fillet from your bag.  Rather than unwrap it and savor the taste as you normally would, you take a large bite out of it, leaf wrapping and all.  In no time your salty meal is gone, your stomach giving an appreciative gurgle.  ");
 

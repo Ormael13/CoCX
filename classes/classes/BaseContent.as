@@ -1,6 +1,6 @@
 ﻿package classes 
 {
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Items.*;
 import classes.Scenes.Camp;
 import classes.Scenes.Combat.Combat;
@@ -43,11 +43,11 @@ import coc.xxc.StoryContext;
 		}
 		/*protected function incrementDay(time:Number):void
 		{
-			kGAMECLASS.incrementDay(time);
+			CoC.instance.incrementDay(time);
 		}*/
 		protected function get timeQ():Number
 		{
-			return kGAMECLASS.timeQ;
+			return CoC.instance.timeQ;
 		}
 
 		/*protected function get measurements():Class
@@ -113,13 +113,13 @@ import coc.xxc.StoryContext;
 		
 		protected function get date():Date
 		{
-			return kGAMECLASS.date;
+			return CoC.instance.date;
 		}
 
 /*
 		protected function inCombat():Boolean
 		{
-			return kGAMECLASS.inCombat();
+			return CoC.instance.inCombat();
 		}
 */
 		//Curse you, CoC updates!
@@ -130,7 +130,7 @@ import coc.xxc.StoryContext;
 /* inDungeon is now read only
 		protected function set inDungeon(v:Boolean):void
 		{
-			kGAMECLASS.inDungeon = v;
+			CoC.instance.inDungeon = v;
 		}
 */
 		
@@ -155,11 +155,11 @@ import coc.xxc.StoryContext;
 /*
 		protected function get itemSubMenu():Boolean
 		{
-			return kGAMECLASS.itemSubMenu;
+			return CoC.instance.itemSubMenu;
 		}
 		protected function set itemSubMenu(value:Boolean):void
 		{
-			kGAMECLASS.itemSubMenu = value;
+			CoC.instance.itemSubMenu = value;
 		}
 */
 		
@@ -194,7 +194,7 @@ import coc.xxc.StoryContext;
 
 		protected function spriteSelect(choice:Object = 0):void
 		{
-			kGAMECLASS.spriteSelect(choice);
+			CoC.instance.spriteSelect(choice);
 		}
 
 		protected function hideStats():void
@@ -274,7 +274,7 @@ import coc.xxc.StoryContext;
 		}
 		
 		protected function flushOutputTextToGUI():void {
-			kGAMECLASS.flushOutputTextToGUI();
+			CoC.instance.flushOutputTextToGUI();
 		}
 
 		protected function doNext(eventNo:Function):void //Now typesafe
@@ -360,15 +360,15 @@ import coc.xxc.StoryContext;
 
 /* Replaced by Utils.formatStringArray, which does almost the same thing in one function
 		protected function clearList():void{
-			kGAMECLASS.clearList();
+			CoC.instance.clearList();
 		}
 
 		protected function addToList(arg:*):void{
-			kGAMECLASS.addToList(arg);
+			CoC.instance.addToList(arg);
 		}
 
 		protected function outputList():String{
-			return kGAMECLASS.outputList();
+			return CoC.instance.outputList();
 		}
 */
 		
@@ -390,13 +390,13 @@ import coc.xxc.StoryContext;
 /* Was only used in Scylla's code. Replaced with conditionals
 		protected function balls(balls:*, noBalls:*):String
 		{
-			return kGAMECLASS.balls(balls, noBalls);
+			return CoC.instance.balls(balls, noBalls);
 		}
 */
 		
 		protected function sheathDesc():String
 		{
-			return kGAMECLASS.player.sheathDescription();
+			return CoC.instance.player.sheathDescription();
 		}
 		
 		protected function chestDesc():String
@@ -417,22 +417,22 @@ import coc.xxc.StoryContext;
 		
 		protected function sMultiCockDesc():String
 		{
-			return kGAMECLASS.player.sMultiCockDesc();
+			return CoC.instance.player.sMultiCockDesc();
 		}
 		
 		protected function SMultiCockDesc():String
 		{
-			return kGAMECLASS.player.SMultiCockDesc();
+			return CoC.instance.player.SMultiCockDesc();
 		}
 		
 		protected function oMultiCockDesc():String
 		{
-			return kGAMECLASS.player.oMultiCockDesc();
+			return CoC.instance.player.oMultiCockDesc();
 		}
 		
 		protected function OMultiCockDesc():String
 		{
-			return kGAMECLASS.player.OMultiCockDesc();
+			return CoC.instance.player.OMultiCockDesc();
 		}
 		
 		protected function tongueDescript():String
@@ -450,13 +450,13 @@ import coc.xxc.StoryContext;
 
 		/* All calls changed to monster.ballsDescriptLight
 		protected function eBallsDescriptLight():String {
-			return kGAMECLASS.eBallsDescriptLight();
+			return CoC.instance.eBallsDescriptLight();
 		}
 		*/
 		
 		/* Was never called
 		protected function eBallsDescript():String {
-			return kGAMECLASS.eBallsDescript();
+			return CoC.instance.eBallsDescript();
 		}
 		*/
 
@@ -494,7 +494,7 @@ import coc.xxc.StoryContext;
 
 /* Replaced by calls to Appearance.breastDescript
 		protected function npcBreastDescript(size:Number):String {
-			return kGAMECLASS.npcBreastDescript(size);
+			return CoC.instance.npcBreastDescript(size);
 		}
 */
 /* Was never used
@@ -505,20 +505,20 @@ import coc.xxc.StoryContext;
 /* Now in Utils.as
 		protected function num2TextBest(number:int, capitalised:Boolean = false, positional:Boolean = false):String
 		{
-			return kGAMECLASS.num2TextBest(number, capitalised, positional);
+			return CoC.instance.num2TextBest(number, capitalised, positional);
 		}
 		
 		protected function num2Text(number:int):String
 		{
-			return kGAMECLASS.num2Text(number);
+			return CoC.instance.num2Text(number);
 		}
 		protected function Num2Text(number:int):String
 		{
-			return kGAMECLASS.Num2Text(number);
+			return CoC.instance.Num2Text(number);
 		}
 		protected  function num2Text2(number:int):String
 		{
-			return kGAMECLASS.num2Text2(number);
+			return CoC.instance.num2Text2(number);
 		}
 */
 		
@@ -529,40 +529,40 @@ import coc.xxc.StoryContext;
 		
 		protected function cockDescript(cockNum:int = 0):String
 		{
-			return kGAMECLASS.player.cockDescript(cockNum);
+			return CoC.instance.player.cockDescript(cockNum);
 		}
 		
 /*
 		protected function cockAdjective(cockNum:Number = -1):String
 		{
-			return kGAMECLASS.cockAdjective(cockNum);
+			return CoC.instance.cockAdjective(cockNum);
 		}
 */
 		
 		protected function multiCockDescript():String
 		{
-			return kGAMECLASS.player.multiCockDescript();
+			return CoC.instance.player.multiCockDescript();
 		}
 		
 		protected function multiCockDescriptLight():String
 		{
-			return kGAMECLASS.player.multiCockDescriptLight();
+			return CoC.instance.player.multiCockDescriptLight();
 		}
 		
 /*
 		protected function eMultiCockDescriptLight():String
 		{
-			return kGAMECLASS.eMultiCockDescriptLight();
+			return CoC.instance.eMultiCockDescriptLight();
 		}
 		
 		protected function eCockHead(cockNum:Number = 0):String
 		{
-			return kGAMECLASS.eCockHead(cockNum);
+			return CoC.instance.eCockHead(cockNum);
 		}
 		
 		protected function eCockDescript(cockIndex:Number = 0):String
 		{
-			return kGAMECLASS.eCockDescript(cockIndex);
+			return CoC.instance.eCockDescript(cockIndex);
 		}
 */
 		
@@ -574,7 +574,7 @@ import coc.xxc.StoryContext;
 /*
 		protected function cockHead(cockNum:Number = 0):String
 		{
-			return kGAMECLASS.cockHead(cockNum);
+			return CoC.instance.cockHead(cockNum);
 		}
 */
 		
@@ -632,7 +632,7 @@ import coc.xxc.StoryContext;
 /* Replaced with calls to Appearance.cockDescription
 		protected function NPCCockDescript(cockType:*,cockLength:Number=0,lust:Number=50):String
 		{
-			return kGAMECLASS.NPCCockDescript(cockType,cockLength,lust);
+			return CoC.instance.NPCCockDescript(cockType,cockLength,lust);
 		}
 */
 		
@@ -690,7 +690,7 @@ import coc.xxc.StoryContext;
 /*
 		protected function get eventParser():Function
 		{
-			return kGAMECLASS.eventParser;
+			return CoC.instance.eventParser;
 		}
 */
 		
@@ -698,87 +698,87 @@ import coc.xxc.StoryContext;
 		
 		protected function get player():Player
 		{
-			return kGAMECLASS.player;
+			return CoC.instance.player;
 		}
 		
 		protected function set player(val:Player):void
 		{
-			kGAMECLASS.player = val;
+			CoC.instance.player = val;
 		}
 		
 		protected function get player2():Player
 		{
-			return kGAMECLASS.player2;
+			return CoC.instance.player2;
 		}
 		
 		protected function set player2(val:Player):void
 		{
-			kGAMECLASS.player2 = val;
+			CoC.instance.player2 = val;
 		}
 		
 		protected function get debug():Boolean
 		{
-			return kGAMECLASS.debug;
+			return CoC.instance.debug;
 		}
 		
 		protected function set debug(val:Boolean):void
 		{
-			kGAMECLASS.debug = val;
+			CoC.instance.debug = val;
 		}
 		
 		protected function get ver():String
 		{
-			return kGAMECLASS.ver;
+			return CoC.instance.ver;
 		}
 		
 		protected function set ver(val:String):void
 		{
-			kGAMECLASS.ver = val;
+			CoC.instance.ver = val;
 		}
 		
 		protected function get images():ImageManager
 		{
-			return kGAMECLASS.images;
+			return CoC.instance.images;
 		}
 		
 		protected function set images(val:ImageManager):void
 		{
-			kGAMECLASS.images = val;
+			CoC.instance.images = val;
 		}
 		
 		protected function get monster():Monster
 		{
-			return kGAMECLASS.monster;
+			return CoC.instance.monster;
 		}
 		
 		protected function set monster(val:Monster):void
 		{
-			kGAMECLASS.monster = val;
+			CoC.instance.monster = val;
 		}
 
 		protected function get consumables():ConsumableLib{
-			return kGAMECLASS.consumables;
+			return CoC.instance.consumables;
 		}
 		protected function get useables():UseableLib{
-			return kGAMECLASS.useables;
+			return CoC.instance.useables;
 		}
 		protected function get weapons():WeaponLib{
-			return kGAMECLASS.weapons;
+			return CoC.instance.weapons;
 		}
 		protected function get weaponsrange():WeaponRangeLib{
-			return kGAMECLASS.weaponsrange;
+			return CoC.instance.weaponsrange;
 		}
 		protected function get armors():ArmorLib{
-			return kGAMECLASS.armors;
+			return CoC.instance.armors;
 		}
 		protected function get jewelries():JewelryLib{
-			return kGAMECLASS.jewelries;
+			return CoC.instance.jewelries;
 		}
 		protected function get shields():ShieldLib{
-			return kGAMECLASS.shields;
+			return CoC.instance.shields;
 		}
 		protected function get undergarments():UndergarmentLib{
-			return kGAMECLASS.undergarments;
+			return CoC.instance.undergarments;
 		}
 		protected function get inventory():Inventory{
 			return SceneLib.inventory;
@@ -787,148 +787,148 @@ import coc.xxc.StoryContext;
 /* No longer used
 		protected function get itemSwapping():Boolean
 		{
-			return kGAMECLASS.itemSwapping;
+			return CoC.instance.itemSwapping;
 		}
 		
 		protected function set itemSwapping(val:Boolean):void
 		{
-			kGAMECLASS.itemSwapping = val;
+			CoC.instance.itemSwapping = val;
 		}
 */
 		
 		protected function get time():TimeModel
 		{
-			return kGAMECLASS.time;
+			return CoC.instance.time;
 		}
 		
 		protected function set time(val:TimeModel):void
 		{
-			kGAMECLASS.time = val;
+			CoC.instance.time = val;
 		}
 		
 /* Finally got rid of this var
 		protected function get menuLoc():Number
 		{
-			return kGAMECLASS.menuLoc;
+			return CoC.instance.menuLoc;
 		}
 		
 		protected function set menuLoc(val:Number):void
 		{
-			kGAMECLASS.menuLoc = val;
+			CoC.instance.menuLoc = val;
 		}
 */
 		
 /*
 		protected function get itemSlots():Array
 		{
-			return kGAMECLASS.player.itemSlots;
+			return CoC.instance.player.itemSlots;
 		}
 */
 		
 /*
 		protected function get itemStorage():Array
 		{
-			return kGAMECLASS.itemStorage;
+			return CoC.instance.itemStorage;
 		}
 
 		protected function set itemStorage(val:Array):void
 		{
-			kGAMECLASS.itemStorage = val;
+			CoC.instance.itemStorage = val;
 		}
 		
 		protected function get gearStorage():Array
 		{
-			return kGAMECLASS.gearStorage;
+			return CoC.instance.gearStorage;
 		}
 		
 		protected function set gearStorage(val:Array):void
 		{
-			kGAMECLASS.gearStorage = val;
+			CoC.instance.gearStorage = val;
 		}
 */
 		
 		protected function get temp():int
 		{
-			return kGAMECLASS.temp;
+			return CoC.instance.temp;
 		}
 		
 		protected function set temp(val:int):void
 		{
-			kGAMECLASS.temp = val;
+			CoC.instance.temp = val;
 		}
 		
 		protected function get args():Array
 		{
-			return kGAMECLASS.args;
+			return CoC.instance.args;
 		}
 		
 		protected function set args(val:Array):void
 		{
-			kGAMECLASS.args = val;
+			CoC.instance.args = val;
 		}
 		
 		protected function get funcs():Array
 		{
-			return kGAMECLASS.funcs;
+			return CoC.instance.funcs;
 		}
 		
 		protected function set funcs(val:Array):void
 		{
-			kGAMECLASS.funcs = val;
+			CoC.instance.funcs = val;
 		}
 		
 		protected function get mainView():MainView
 		{
-			return kGAMECLASS.mainView;
+			return CoC.instance.mainView;
 		}
 
 		protected function get mainViewManager():MainViewManager
 		{
-			return kGAMECLASS.mainViewManager;
+			return CoC.instance.mainViewManager;
 		}
 		
 		protected function get model():GameModel
 		{
-			return kGAMECLASS.model;
+			return CoC.instance.model;
 		}
 		
 		protected function set model(val:GameModel):void
 		{
-			kGAMECLASS.model = val;
+			CoC.instance.model = val;
 		}
 		
 		protected function get flags():DefaultDict
 		{
-			return kGAMECLASS.flags;
+			return CoC.instance.flags;
 		}
 
 		protected function get counters():RootCounters {
-			return kGAMECLASS.counters;
+			return CoC.instance.counters;
 		}
 
 		protected function set flags(val:DefaultDict):void
 		{
-			kGAMECLASS.flags = val;
+			CoC.instance.flags = val;
 		}
 		
 		protected function get achievements():DefaultDict
 		{
-			return kGAMECLASS.achievements;
+			return CoC.instance.achievements;
 		}
 		
 		protected function set achievements(val:DefaultDict):void
 		{
-			kGAMECLASS.achievements = val;
+			CoC.instance.achievements = val;
 		}
 		
 		protected function showStatDown(arg:String):void
 		{
-			kGAMECLASS.mainView.statsView.showStatDown(arg);
+			CoC.instance.mainView.statsView.showStatDown(arg);
 		}
 		
 		protected function showStatUp(arg:String):void
 		{
-			kGAMECLASS.mainView.statsView.showStatUp(arg);
+			CoC.instance.mainView.statsView.showStatUp(arg);
 		}
 		
 		protected function buttonTextIsOneOf(index:int, possibleLabels:Array):Boolean {
@@ -944,13 +944,13 @@ import coc.xxc.StoryContext;
 		}
 				
 		protected function darkTheme():Boolean {
-			return kGAMECLASS.mainViewManager.darkThemeImpl();
+			return CoC.instance.mainViewManager.darkThemeImpl();
 		}
 		protected static function onGameInit(f:Function):void {
 			CoC.onGameInit(f);
 		}
 		protected function get context():StoryContext {
-			return kGAMECLASS.context;
+			return CoC.instance.context;
 		}
 		protected function submenu(buttons:ButtonDataList,back:Function=null,page:int=0):void {
 			var list:/*ButtonData*/Array = buttons.list.filter(function(e:ButtonData, i:int, a:Array):Boolean{

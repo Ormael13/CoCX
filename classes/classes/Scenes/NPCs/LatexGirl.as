@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.SceneLib;
 
 public class LatexGirl extends NPCAwareContent
@@ -130,7 +130,7 @@ private function gooTitSize():Number {
 
 //TF Scene:
 public function meanGooGirlRecruitment():void {
-    kGAMECLASS.inCombat = false;
+    CoC.instance.inCombat = false;
     clearOutput();
 	flags[kFLAGS.GOO_TFED_MEAN] = 1;
 	flags[kFLAGS.GOO_EYES] = monster.skinTone;
@@ -216,7 +216,7 @@ private function PCCarriedGooBackHomeII():void {
 }
 private function nameZeLatexGoo():void 
 {
-	if (kGAMECLASS.testingBlockExiting)
+	if (CoC.instance.testingBlockExiting)
 	{
 		// We're running under the testing script.
 		// Stuff a name in the box and go go go
@@ -327,7 +327,7 @@ private function encounterLeftBehindGooSlaveII():void {
 
 //Pure Characters Intro(F):
 public function pureGooRecruitmentStart():void {
-    kGAMECLASS.inCombat = false;
+    CoC.instance.inCombat = false;
     clearOutput();
 	flags[kFLAGS.GOO_TFED_NICE] = 1;
 	flags[kFLAGS.GOO_EYES] = monster.skinTone;

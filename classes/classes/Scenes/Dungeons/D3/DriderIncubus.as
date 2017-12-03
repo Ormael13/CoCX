@@ -3,7 +3,7 @@ package classes.Scenes.Dungeons.D3
 import classes.AppearanceDefs;
 import classes.CockTypesEnum;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.PerkLib;
 import classes.Scenes.Areas.Swamp.AbstractSpiderMorph;
 import classes.Scenes.SceneLib;

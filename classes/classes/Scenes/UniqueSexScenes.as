@@ -6,7 +6,6 @@ package classes.Scenes
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
 	
 	public class UniqueSexScenes extends BaseContent
 	{

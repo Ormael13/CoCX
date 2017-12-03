@@ -6,7 +6,7 @@ package classes.Scenes.Areas.Forest
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+	import classes.CoC;
 	import classes.Scenes.Areas.GlacialRift.SnowLily;
 	import classes.Scenes.Areas.VolcanicCrag.Cinderbloom;
 import classes.display.SpriteDb;

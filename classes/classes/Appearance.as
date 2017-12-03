@@ -1,7 +1,7 @@
 ﻿package classes
 {
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.internals.Utils;
 
 public class Appearance extends Utils
@@ -1633,7 +1633,7 @@ public class Appearance extends Utils
 			if (description != "")
 				description += " ";
 				
-			if (kGAMECLASS.flags[kFLAGS.SFW_MODE] > 0) { //Removes something that might offend sensitive people.
+			if (CoC.instance.flags[kFLAGS.SFW_MODE] > 0) { //Removes something that might offend sensitive people.
 				options = ["vagina",
 				"pussy",
 				"cooter",
@@ -1749,7 +1749,7 @@ public class Appearance extends Utils
 				"clit",
 				"clit",
 				"button"];
-			if (kGAMECLASS.flags[kFLAGS.SFW_MODE] > 0) {
+			if (CoC.instance.flags[kFLAGS.SFW_MODE] > 0) {
 				options = ["bump", "button"];
 			}
 			description += randomChoice(options);
@@ -2177,7 +2177,7 @@ public class Appearance extends Utils
 			}
 			
 			//asshole descriptor
-			if (kGAMECLASS.flags[kFLAGS.SFW_MODE] > 0) {
+			if (CoC.instance.flags[kFLAGS.SFW_MODE] > 0) {
 			description += randomChoice("rear end",
 					"backdoor");
 			} 

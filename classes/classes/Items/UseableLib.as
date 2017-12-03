@@ -4,12 +4,12 @@
 package classes.Items
 {
 import classes.BaseContent;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Items.Other.DebugWand;
 import classes.Items.Other.SimpleUseable;
 import classes.Scenes.SceneLib;
 
-use namespace kGAMECLASS;
+use namespace CoC;
 
 	public final class UseableLib extends BaseContent
 	{

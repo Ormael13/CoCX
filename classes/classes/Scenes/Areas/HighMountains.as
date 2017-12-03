@@ -5,13 +5,13 @@ package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.Areas.HighMountains.*;
 import classes.Scenes.Holidays;
 import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.SceneLib;
 
-use namespace kGAMECLASS;
+use namespace CoC;
 
 	public class HighMountains extends BaseContent
 	{

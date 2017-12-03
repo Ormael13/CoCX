@@ -4,7 +4,7 @@
 package classes.Scenes.API {
 import classes.BaseContent;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 
 public class FnHelpers extends BaseContent {
 	public static const FN:FnHelpers = new FnHelpers();
@@ -89,7 +89,7 @@ public class FnHelpers extends BaseContent {
 	 * @return Function returning `true` if player is at least `minLevel` or at least `daysPerLevel`*`minLevel` days have passed
 	 */
 	public static function isLevelMin(minLevel:int, daysPerLevel:int = 6):Boolean {
-		return (kGAMECLASS.player.level>=minLevel || kGAMECLASS.time.days>=minLevel*daysPerLevel);
+		return (CoC.instance.player.level>=minLevel || CoC.instance.time.days>=minLevel*daysPerLevel);
 	}
 	/**
 	 * @return Function returning Number, linearly dependent on player level:

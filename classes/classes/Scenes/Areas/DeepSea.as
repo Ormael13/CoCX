@@ -8,10 +8,10 @@ package classes.Scenes.Areas
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+	import classes.CoC;
 	import classes.Scenes.Areas.DeepSea.*;
 	
-	use namespace kGAMECLASS;
+	use namespace CoC;
 	
 	public class DeepSea extends BaseContent
 	{
@@ -34,10 +34,10 @@ package classes.Scenes.Areas
 			select = choice[rand(choice.length)];
 			switch(select) {
 			/*	case 0:
-					kGAMECLASS.exploration.genericImpEncounters2();
+					CoC.instance.exploration.genericImpEncounters2();
 					break;
 				case 1:
-					kGAMECLASS.exploration.genericDemonsEncounters1();
+					CoC.instance.exploration.genericDemonsEncounters1();
 					break;
 			*/	default:
 					clearOutput();

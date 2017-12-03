@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.Quests{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.Areas.Plains.GnollSpearThrower;
 import classes.Scenes.NPCs.NPCAwareContent;
 import classes.Scenes.Quests.UrtaQuest.*;
@@ -930,7 +930,7 @@ private function loseToGoblinsPartIVAsUrta():void {
 private function urtaGameOver():void {
 	clearOutput();
 	outputText("<b>Urta has been lost to her fate...  Meanwhile, back at camp...</b>");
-    kGAMECLASS.inCombat = false;
+    CoC.instance.inCombat = false;
     flags[kFLAGS.URTA_QUEST_STATUS] = -1;
 	model.time.days++;
 	resetToPC();
@@ -965,7 +965,7 @@ private function urtaGameOver():void {
 
 public function urtaSpecials():void {
 //Gone	menuLoc = 3;
-    if (kGAMECLASS.inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 5) {
+    if (CoC.instance.inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 5) {
         clearOutput();
 		outputText("You try to ready a special attack, but wind up stumbling dizzily instead.  <b>Your ability to use physical special attacks was sealed, and now you've wasted a chance to attack!</b>\n\n");
         SceneLib.combat.enemyAIImpl();
@@ -982,7 +982,7 @@ public function urtaSpecials():void {
 }
 
 public function urtaMSpecials():void {
-    if (kGAMECLASS.inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 6) {
+    if (CoC.instance.inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 6) {
         clearOutput();
 		outputText("You try to ready a special ability, but wind up stumbling dizzily instead.  <b>Your ability to use magical special attacks was sealed, and now you've wasted a chance to attack!</b>\n\n");
 		enemyAI();
@@ -1477,7 +1477,7 @@ public function nagaPleaseNagaStoleMyDick():void {
 	outputText("\n\n\"<i>Sirius.  But I'm already with someone, quite happy with " + player2.mf("him","her") + ", and not looking for anyone else.  Besides, I'm only passing through and I have places to go yet,</i>\" you say, trying to be polite but firm; you'd be less than flattered by the attention even if you didn't have a painful history of guys asking you out, then changing their minds upon seeing your stallion-king-sized manhood.");
 	outputText("\n\n\"<i>You invade my territory... ssstep on my tail... and have the gall to tell me you're not going to make up for it!</i>\"  He hisses ominously.  \"<i>Hey, it was an acci-</i>\"  \"<i>Worthlesss female!  You are mine!</i>\"  He charges at you!");
 	outputText("\n\n<b>It's a fight!</b>");
-    kGAMECLASS.player.clearStatuses(false);
+    CoC.instance.player.clearStatuses(false);
     startCombat(new Sirius());
 }
 
@@ -1621,7 +1621,7 @@ private function gnollAlphaBitchIntro():void {
 	outputText("\n\nThe terrain gives way to flat dirt with tall grasses, a vast savanna stretching away as far as your eyes can see.  You move through it heedlessly, drunk on the idea that you can find the temple on the same day that you set out!");
 	outputText("\n\nHow wrong you are.  A spear smacks into the ground, the tip exploding into some sticky, restraining substance by your foot.  A high pitched war-cry chases the missile, barely giving you the warning you need to avoid the onrushing gnoll!  This one doesn't quite look like what you'd expect from their race, but she's moving too fast to really dwell on it.");
 	outputText("\n\n<b>It's a fight!</b>");
-    kGAMECLASS.player.clearStatuses(false);
+    CoC.instance.player.clearStatuses(false);
     startCombat(new GnollSpearThrower());
 	monster.str += 20 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 	monster.tou += 25 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
@@ -1931,7 +1931,7 @@ private function introSuccubiAndMinotaur():void {
 	outputText("\n\n\"<i>Sic 'em, boy!</i>\" she screeches, dropping the chain.");
 	outputText("\n\nThe minotaur lord thunders towards you, picking up the loose chain to use a weapon.  It's a fight!");
 	//{start fight}
-    kGAMECLASS.player.clearStatuses(false);
+    CoC.instance.player.clearStatuses(false);
     startCombat(new MinotaurLord());
 }
 
@@ -2119,7 +2119,7 @@ public function beatMinoLordOnToSuccubi():void {
 	}
 	outputText("\n\n\"<i>We'll see how your tune changes when you're licking my heels and begging for a drop of my milk!</i>\"  She snaps her whip angrily.");
 	outputText("\n\n<b>It's a fight!</b>");
-    kGAMECLASS.player.clearStatuses(false);
+    CoC.instance.player.clearStatuses(false);
     player.setWeapon(weapons.URTAHLB);
 	//player.weapon = weapons.URTAHLB;
 	startCombat(new MilkySuccubus(),true);
@@ -2390,7 +2390,7 @@ private function preggedUrtaWithGodChildEpilogue():void {
 	outputText("\n\nThe fox-girl drags you into a huge hug, kissing you passionately.  She whispers, \"<i>Thank you so much for getting me started on this road, " + player2.short + ".  I'm so exhausted now, but come see me at the Wet Bitch later, and maybe... maybe we could see about starting a family.  I mean, maybe there's hope after all?  A dead god was reincarnated!</i>\"");
 	outputText("\n\nYou help her leave the tower, arm in arm, saying goodbye to her only after she's tucked tightly into her bed at home, to rest.  Urta gives you a teary kiss before you leave with a little swagger in your step.  You wonder if Taoth will help the Covenant, or if they've bitten off more than they can chew?  Either way, it seems there's a potent new ally on the field.");
 	flags[kFLAGS.URTA_QUEST_STATUS] = 1;
-    kGAMECLASS.inCombat = false;
+    CoC.instance.inCombat = false;
     doNext(camp.returnToCampUseOneHour);
 }
 
@@ -2537,7 +2537,7 @@ private function getKnockedUpByUrtaEpilogueII():void {
 	outputText("\n\nThe fox-girl drags you into a huge hug, kissing you passionately.  She whispers, \"<i>Thank you so much for getting me started on this road, [name].  I bet you're exhausted now, but come see me at the Wet Bitch later, and maybe... maybe we could see about starting a family.  I mean, maybe there's hope after all?  A dead god was reincarnated!</i>\"");
 	outputText("\n\nShe helps leave the tower, arm in arm, saying her goodbye only after she's tucked you in to take a rest.  Urta gives you a teary kiss and trots back towards the city with a swagger in her step.  You wonder if Taoth will help the Covenant, or if they've bitten off more than they can chew?  Either way, it seems there's a potent new ally on the field.");
 	flags[kFLAGS.URTA_QUEST_STATUS] = 1;
-    kGAMECLASS.inCombat = false;
+    CoC.instance.inCombat = false;
     doNext(camp.returnToCampUseOneHour);
 }
 
@@ -2549,7 +2549,7 @@ private function urtaAndEdrynGodChild():void {
 	flags[kFLAGS.URTA_FERTILE]        = telAdre.edryn.pregnancy.type;       //Use these two flags to store the pregnancy that Taoth is overriding.
 	flags[kFLAGS.URTA_PREG_EVERYBODY] = telAdre.edryn.pregnancy.incubation; //Since they can't be in use prior to Taoth being born this is fine.
 	telAdre.edryn.pregnancy.knockUpForce(PregnancyStore.PREGNANCY_TAOTH, 24);
-    kGAMECLASS.inCombat = false;
+    CoC.instance.inCombat = false;
     doNext(camp.returnToCampUseOneHour);
 }
 
@@ -2592,7 +2592,7 @@ private function urtaAndEdrynGodChildEpilogueII():void {
 	outputText("\n\nYou leave the tower arm in arm, saying your goodbye when Urta stops at her place to rest.  She gives you a teary kiss and sends you on your way with a swagger in your step.  You wonder if Taoth will help the Covenant, or if they've bitten off more than they can chew?  Either way, it seems there's a potent new ally on the field.");
 	//set completed tags!
 	flags[kFLAGS.URTA_QUEST_STATUS] = 1;
-    kGAMECLASS.inCombat = false;
+    CoC.instance.inCombat = false;
     doNext(camp.returnToCampUseOneHour);
 }
 }

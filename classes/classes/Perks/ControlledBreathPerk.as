@@ -2,14 +2,14 @@ package classes.Perks
 {
 	import classes.PerkClass;
 	import classes.PerkType;
-	import classes.GlobalFlags.kGAMECLASS;
+	import classes.CoC;
 
 	public class ControlledBreathPerk extends PerkType
 	{
 
 		override public function desc(params:PerkClass = null):String
 		{
-			if (kGAMECLASS.player.cor >= (30 + kGAMECLASS.player.corruptionTolerance())) return "<b>DISABLED</b> - Corruption too high!";
+			if (CoC.instance.player.cor >= (30 + CoC.instance.player.corruptionTolerance())) return "<b>DISABLED</b> - Corruption too high!";
 			else return super.desc(params);
 		}
 

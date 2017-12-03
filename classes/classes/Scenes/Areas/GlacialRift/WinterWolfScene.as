@@ -6,7 +6,7 @@ package classes.Scenes.Areas.GlacialRift
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+	import classes.CoC;
 	
 	public class WinterWolfScene extends BaseContent 
 	{

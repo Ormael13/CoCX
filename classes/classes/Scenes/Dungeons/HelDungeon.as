@@ -4,13 +4,13 @@ package classes.Scenes.Dungeons
 import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Items.Armor;
 import classes.Scenes.Dungeons.HelDungeon.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.SceneLib;
 
-use namespace kGAMECLASS;
+use namespace CoC;
 	
 	public class HelDungeon extends DungeonAbstractContent
 	{

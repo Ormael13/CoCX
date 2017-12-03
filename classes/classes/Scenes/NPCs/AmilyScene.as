@@ -5,7 +5,7 @@ package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.SceneLib;
 
 public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
@@ -2637,7 +2637,6 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						}
 						break;
 				case 8: outputText("Amily's bulge frequently wriggles and squirms, though this doesn't seem to bother her. " + (flags[kFLAGS.AMILY_FOLLOWER] == 1 ? "T" : "She smiles with glee, t") + "he children mustn't have too much longer until they are born.\n\n");
-				default:
 			}
 			amilyMenu(true);
 		}
@@ -6297,7 +6296,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("; the very idea of a mousy slut eager for cum distills into one massive load of cum, and you dump it all in her mouth.\n\nYou sigh, sated for now and leave her to clean herself up.");
 			player.orgasm();
 			dynStats("lib", -2, "cor", 5);
-            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+            if (CoC.instance.inCombat) cleanupAfterCombat();
             else doNext(camp.returnToCampUseOneHour);
 		}
 		//[Female]
@@ -6335,7 +6334,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("Finally done, you let go of her and get up; she proceeds to slump down and give a small burp of satisfaction, then drift off into sleep. You untie her and proceed to get dressed; you give her a light pat on the thigh and return to your camp. You'll have to do this again sometime later...");
 			player.orgasm();
 			dynStats("lib", -2, "cor", 5);
-            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+            if (CoC.instance.inCombat) cleanupAfterCombat();
             else doNext(camp.returnToCampUseOneHour);
 		}
 

@@ -4,7 +4,7 @@ import classes.CoC_Settings;
 import classes.CockTypesEnum;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.PerkLib;
 import classes.PregnancyStore;
 import classes.Scenes.NPCs.CelessScene;
@@ -320,7 +320,7 @@ public class Pregnancy extends NPCAwareContent {
                 }
                 if(player.pregnancyIncubation == 785) {
                     //outputText("\n<b>An unexpected change occurs, no doubt brought on by the bunny's eggs inside you!</b>");
-                    kGAMECLASS.mutations.neonPinkEgg(true,player);
+                    CoC.instance.mutations.neonPinkEgg(true,player);
                     EngineCore.outputText("\n");
                     displayedUpdate = true;
                 }
@@ -330,7 +330,7 @@ public class Pregnancy extends NPCAwareContent {
                 }
                 if(player.pregnancyIncubation == 765) {
                     //outputText("\n<b>An unexpected change occurs, no doubt brought on by the bunny's eggs inside you!</b>");
-                    kGAMECLASS.mutations.neonPinkEgg(true,player);
+                    CoC.instance.mutations.neonPinkEgg(true,player);
                     EngineCore.outputText("\n");
                     displayedUpdate = true;
                 }
@@ -1410,7 +1410,7 @@ public class Pregnancy extends NPCAwareContent {
                     displayedUpdate = true;
                 }
                 if(player.buttPregnancyIncubation == 785) {
-                    kGAMECLASS.mutations.neonPinkEgg(true,player);
+                    CoC.instance.mutations.neonPinkEgg(true,player);
                     EngineCore.outputText("\n");
                     displayedUpdate = true;
                 }
@@ -1419,7 +1419,7 @@ public class Pregnancy extends NPCAwareContent {
                     displayedUpdate = true;
                 }
                 if(player.buttPregnancyIncubation == 765) {
-                    kGAMECLASS.mutations.neonPinkEgg(true,player);
+                    CoC.instance.mutations.neonPinkEgg(true,player);
                     EngineCore.outputText("\n");
                     displayedUpdate = true;
                 }

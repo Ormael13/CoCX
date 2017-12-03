@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.Areas.Mountain {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Scenes.SceneLib;
 import classes.Scenes.UniqueSexScenes;
@@ -600,7 +600,7 @@ public function getRapedByMinotaur(autoRape:Boolean = false):void {
 	
 	}
 
-if (doSFWloss() && kGAMECLASS.inCombat) { //No rape in SFW mode.
+if (doSFWloss() && CoC.instance.inCombat) { //No rape in SFW mode.
         cleanupAfterCombat();
 		return;
 	}
@@ -664,7 +664,7 @@ if (doSFWloss() && kGAMECLASS.inCombat) { //No rape in SFW mode.
 	outputText("The bull-man relaxes for a moment, then shoves you off of him and to the cold ground. You pass out as a strange sense of euphoria washes over you while copious quantities of monstrous cum escape your distended ");
 	if(player.hasVagina()) outputText("pussy.");
 	else outputText("asshole.");
-    if (kGAMECLASS.inCombat) cleanupAfterCombat();
+    if (CoC.instance.inCombat) cleanupAfterCombat();
     else doNext(camp.returnToCampUseFourHours);
 }
 
@@ -702,7 +702,7 @@ private function getOralRapedByMinotaur():void {
 	player.orgasm();
 	dynStats("sen", 1);
 	minoCumAddiction(10);
-    if (kGAMECLASS.inCombat) cleanupAfterCombat();
+    if (CoC.instance.inCombat) cleanupAfterCombat();
     else doNext(camp.returnToCampUseFourHours);
 }
 

@@ -1,10 +1,10 @@
 package classes.Scenes.Places.TelAdre {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.SceneLib;
 
-use namespace kGAMECLASS;
+use namespace CoC;
 
 	public class Lottie extends TelAdreAbstractContent {
 public function Lottie(){

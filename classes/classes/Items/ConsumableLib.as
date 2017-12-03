@@ -8,7 +8,7 @@ import classes.EngineCore;
 import classes.Items.Consumables.*;
 import classes.Player;
 import classes.Scenes.SceneLib;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 
 public final class ConsumableLib extends BaseContent
 	{

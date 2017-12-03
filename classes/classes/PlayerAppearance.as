@@ -1,7 +1,7 @@
 ﻿package classes {
 import classes.BodyParts.Skin;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.NPCs.JojoScene;
 
 import coc.view.BoundClip;
@@ -19,7 +19,7 @@ public class PlayerAppearance extends BaseContent {
 	}
 	private var story:BoundStory;
 	private function init():void {
-        story = new Story("story", kGAMECLASS.rootStory, "appearance").bind(kGAMECLASS.context);
+        story = new Story("story", CoC.instance.rootStory, "appearance").bind(CoC.instance.context);
     }
 	public function appearance():void {
         //Temp vars
@@ -29,7 +29,7 @@ public class PlayerAppearance extends BaseContent {
 
 		clearOutput();
 		outputText("<font size=\"36\" face=\"Georgia\"><u>Appearance</u></font>\n");
-		if (kGAMECLASS.gameSettings.charviewEnabled) {
+		if (CoC.instance.gameSettings.charviewEnabled) {
 			mainViewManager.showPlayerDoll(debug);
 		}
 		describeRace();

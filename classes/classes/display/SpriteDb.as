@@ -3,14 +3,14 @@
  */
 package classes.display {
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 
 import flash.display.Bitmap;
 import flash.display.BitmapData;
 
 public class SpriteDb {
 	private static function get is8bit():Boolean {
-		return kGAMECLASS.flags[kFLAGS.SPRITE_STYLE] === 1;
+		return CoC.instance.flags[kFLAGS.SPRITE_STYLE] === 1;
 	}
 
 	[Embed(source="../../../res/sprites/akbal.png")]

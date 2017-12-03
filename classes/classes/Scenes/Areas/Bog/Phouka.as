@@ -118,7 +118,6 @@ public class Phouka extends Monster
 					case 0: phoukaTransformToBunny(); break;
 					case 1: phoukaTransformToGoat(); break;
 					case 2: phoukaTransformToHorse();
-					default:
 				}
 				if (PhoukaScene.phoukaForm == PhoukaScene.PHOUKA_FORM_FAERIE)
 					phoukaFightLustAttack(); //Can only get here if the phouka isn’t blind

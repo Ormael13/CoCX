@@ -18,7 +18,7 @@ flags[kFLAGS.MARBLE_PURIFICATION_STAGE] : 5 = QUEST COMPLETE
 package classes.Scenes.NPCs {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.SceneLib;
 
 public class MarblePurification extends NPCAwareContent{
@@ -1351,7 +1351,7 @@ public class MarblePurification extends NPCAwareContent{
 		flags[kFLAGS.MARBLE_PURIFICATION_STAGE] = 5;
 		flags[kFLAGS.MARBLE_PURIFIED] = 1;
 		player.changeStatusValue(StatusEffects.Marble,4,10);
-        kGAMECLASS.inCombat = false;
+        CoC.instance.inCombat = false;
         player.clearStatuses(false);
 		//Marble's breast size is set to 0 (integer, 0=DD cups, 1=G cups, 2=HH, 3=J)
 		//advance time of day by 4 hours
@@ -1591,7 +1591,7 @@ public class MarblePurification extends NPCAwareContent{
 		else
 		{
 			//if (time of day <= 7 OR >= 20)
-			if(kGAMECLASS.time.hours <= 7 || kGAMECLASS.time.hours >= 20) outputText("Clara is laying sprawled out on the ground of her cage, snoring loudly.");
+			if(CoC.instance.time.hours <= 7 || CoC.instance.time.hours >= 20) outputText("Clara is laying sprawled out on the ground of her cage, snoring loudly.");
 			else
 			{
 				temp = rand(4);

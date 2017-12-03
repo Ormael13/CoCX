@@ -118,7 +118,6 @@ internal function urtaPregAppearance():void {
 				break;
 		case 8:
 		case 9: outputText("Urta's pregnancy has caused her to outgrow the stall; she's moved herself to an entirely new position in a quiet, out of the way part of the bar.  Looking at the sheer size of her, she's doubtlessly going to pop any day now.");
-		default:
 	}
 }
 
@@ -196,7 +195,6 @@ internal function urtaPreggoApproached():void {
 				break;
 		case 9: 
 				goVisitUrtaBirfs(true);
-		default:
 	}
 }
 	

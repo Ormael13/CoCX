@@ -1193,12 +1193,12 @@ public class Prison extends BaseContent implements TimeAwareInterface
 						outputText("<b>extremely filthy</b>.");
 				}
 			}
-			if(kGAMECLASS.timeQ > 0)
+			if(CoC.instance.timeQ > 0)
 			{
-				/*if(!kGAMECLASS.campQ)
+				/*if(!CoC.instance.campQ)
 				{
 					outputText("More time passes...\n", true);
-					goNext(kGAMECLASS.timeQ, false);
+					goNext(CoC.instance.timeQ, false);
 					return;
 				}*/
 				if(model.time.hours < 6 || model.time.hours > 20)
@@ -1290,7 +1290,7 @@ public class Prison extends BaseContent implements TimeAwareInterface
 			mainView.showMenuButton( MainView.MENU_STATS );
 			mainView.showMenuButton( MainView.MENU_PERKS );
 			mainView.showMenuButton( MainView.MENU_APPEARANCE );
-			mainView.setMenuButton( MainView.MENU_NEW_MAIN, "Main Menu", kGAMECLASS.mainMenu.mainMenu );
+			mainView.setMenuButton( MainView.MENU_NEW_MAIN, "Main Menu", CoC.instance.mainMenu.mainMenu );
 			mainView.newGameButton.toolTipText = "Return to main menu.";
 			mainView.newGameButton.toolTipHeader = "Main Menu";
 			//Level up

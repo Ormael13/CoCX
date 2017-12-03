@@ -1,7 +1,7 @@
 package coc.view {
 import classes.CoC;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Player;
 import classes.Scenes.SceneLib;
 import classes.internals.Utils;
@@ -343,7 +343,7 @@ public class StatsView extends Block {
 		} else {
 			advancementText.htmlText = "<b>Advancement</b>";
 			levelBar.value           = player.level;
-			if (player.level < kGAMECLASS.levelCap) {
+			if (player.level < CoC.instance.levelCap) {
 				xpBar.maxValue = player.requiredXP();
 				xpBar.value    = player.XP;
 			} else {

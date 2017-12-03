@@ -1,5 +1,5 @@
 package classes.Scenes {
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.Areas.*;
 import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.Combat.Combat;
@@ -21,7 +21,7 @@ public class SceneLib {
 
     public static var followerInteractions:FollowerInteractions = new FollowerInteractions();
 
-    public static var inventory:Inventory = new Inventory(kGAMECLASS.saves);
+    public static var inventory:Inventory = new Inventory(CoC.instance.saves);
 
     public static var masturbation:Masturbation = new Masturbation();
 

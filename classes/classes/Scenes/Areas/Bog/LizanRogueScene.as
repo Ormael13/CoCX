@@ -183,7 +183,7 @@ public class LizanRogueScene extends BaseContent
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
-            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+            if (CoC.instance.inCombat) cleanupAfterCombat();
         }
 		
 		public function consensualGetFucked():void {
@@ -237,7 +237,7 @@ public class LizanRogueScene extends BaseContent
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
-            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+            if (CoC.instance.inCombat) cleanupAfterCombat();
         }
 		
 		public function consensualGetButtFucked():void {
@@ -287,7 +287,7 @@ public class LizanRogueScene extends BaseContent
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
-            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+            if (CoC.instance.inCombat) cleanupAfterCombat();
         }
 		
 		public function consensualDoublePenetration():void {
@@ -348,7 +348,7 @@ public class LizanRogueScene extends BaseContent
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
-            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+            if (CoC.instance.inCombat) cleanupAfterCombat();
         }
 		
 		public function consensualWatersports():void { //Yay watersports!
@@ -381,7 +381,7 @@ public class LizanRogueScene extends BaseContent
 			outputText(" You cuddle with the lizan for a moment before you have to part ways" + player.clothedOrNaked(" and redress yourself in your [armor]", "") + ".");
 			outputText("\n\n\"<i>I hope you come back later,</i>\" the lizan says with a smile. You give him a kiss before you return to your camp.");
 			doNext(camp.returnToCampUseOneHour);
-            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+            if (CoC.instance.inCombat) cleanupAfterCombat();
         }
 		
 		public function rapeLizanInTheAss():void {

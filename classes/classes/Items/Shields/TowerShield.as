@@ -1,7 +1,7 @@
 package classes.Items.Shields 
 {
 	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+	import classes.CoC;
 	import classes.Items.Shield;
 	import classes.Player;
 	

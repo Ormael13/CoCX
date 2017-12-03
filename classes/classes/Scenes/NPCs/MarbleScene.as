@@ -414,7 +414,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 					//Marble is still available at farm
 					if (!player.hasStatusEffect(StatusEffects.NoMoreMarble)) {
 						postAddictionFarmMornings();
-						kGAMECLASS.timeQ++; //We can get rid of this: threshhold--;
+						CoC.instance.timeQ++; //We can get rid of this: threshhold--;
 					}
 				}
 				doNext(playerMenu);
@@ -3206,7 +3206,6 @@ public function marbleNightSleepFlavor():Boolean {
 		case 5: outputText("<b>Marble's pregnancy has advanced further still, though the structure of her body keeps it from slowing her down.</b>\n\n"); //18 days in
 				break;
 		case 6: outputText("<b>Marble is probably getting close to giving birth, as her belly has gotten very large.</b>\n\n"); //24 days in
-		default:
 	}
 	//Both under 30 - no sex
 	//Player 60+ & marble 20+ - sex
@@ -3858,7 +3857,6 @@ private function marbleAppearance():void {
 		case 5: outputText("Her belly is very swollen; she is very pregnant.\n\n"); //18 to 24 days in
 				break;
 		case 6: outputText("Her belly is extremely swollen and occasionally quivers when whatever she is pregnant with moves around.\n\n"); //24+ days in
-		default:
 	}
 	
 	if( (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] < 5 && flags[kFLAGS.MARBLE_LUST] >= 20) || (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] >= 5 && flags[kFLAGS.MARBLE_TIME_SINCE_NURSED_IN_HOURS] >= 4) )

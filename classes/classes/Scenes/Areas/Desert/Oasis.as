@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.Areas.Desert {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 
 public class Oasis extends BaseContent{
 
@@ -162,7 +162,7 @@ internal function oasisSexing():void {
 		outputText("You do your best to keep a vague mental catalogue of what has been in where, but eventually it becomes impossible to remember the type or number of demonic dicks that have filled you with their cum. The sand below your ass is wet with seed that has spilled out of your overflowing " + vaginaDescript(0) + " and there is every indication of more to come.\n\n");
 	}
 	//If you got here by winning combat!
-    if ((monster.HP < 1 || monster.lust >= monster.maxLust()) && kGAMECLASS.inCombat) {
+    if ((monster.HP < 1 || monster.lust >= monster.maxLust()) && CoC.instance.inCombat) {
         outputText("You fuck and fuck until not a single demon is capable of servicing your needs. They lie moaning and panting at the edge of the oasis, unable to move. You survey the fallen fiends with just a touch of pride and a whole lot of satisfaction, your body feeling stronger for the endurance exercise.");
 		cleanupAfterCombat();
 		player.orgasm();
@@ -170,7 +170,7 @@ internal function oasisSexing():void {
 		return;
 	}
 	//If you got here by losing combat!
-    else if ((player.HP < 1 || player.lust >= player.maxLust()) && kGAMECLASS.inCombat) {
+    else if ((player.HP < 1 || player.lust >= player.maxLust()) && CoC.instance.inCombat) {
         //►Oasis Demons Defeat PC as part of antm
 		//Antmorph stuff
 		if(monster.hasStatusEffect(StatusEffects.phyllafight)) {
@@ -191,7 +191,7 @@ internal function oasisSexing():void {
 	outputText("You fuck for hours; 'feasting' with the demons. Pain, pleasure and exhaustion intermingle and no matter how hard you try to cling to consciousness you are in no state to concentrate. You dangle over the edge for what seems like eternity before another orgasm, stronger than any other, hits you like a solid wall and you black out. For a little while you drift in and out of conscious reality to find your body still the object of demonic attentions until eventually you wake to find that the seemingly endless string of orgasms has stopped. Looking around you see what demons remain awake engaged solely in fucking each other. Tender and sore from the abuse and still finding it hard to concentrate you gather your clothes and steal away, leaving them to the tail end of their orgy. In the aftermath you feel like you've just run an endurance race, but the rubbed raw sensitivity of your brutally fucked body tells another tale.");
 	player.orgasm();
 	dynStats("tou", .5, "sen", .5, "cor", 4);
-    if (kGAMECLASS.inCombat) cleanupAfterCombat();
+    if (CoC.instance.inCombat) cleanupAfterCombat();
     else doNext(playerMenu);
 }
 

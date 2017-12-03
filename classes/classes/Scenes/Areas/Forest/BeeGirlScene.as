@@ -5,7 +5,7 @@ package classes.Scenes.Areas.Forest
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.SceneLib;
 
 public class BeeGirlScene extends BaseContent
@@ -509,7 +509,7 @@ public class BeeGirlScene extends BaseContent
 					else if (player.gender == 3) outputText("Your inability to reach your engorged [cocks] quickly becomes a problem as the pleasure from the bee maiden's scent courses through you. It aches to be tended to, gushing out pre. Your " + clitDescript() + " quivers, desperate for contact as your vagina starts reflexively rippling, trying to milk the cock it isn't going to get.");
 					//[With breasts: 
 					if (player.biggestTitSize() > 1) {
-						outputText("  You begin pounding away at your " + kGAMECLASS.player.allBreastsDescript() + " in an attempt to alleviate the pressure in your inaccessible groin.");
+						outputText("  You begin pounding away at your " + CoC.instance.player.allBreastsDescript() + " in an attempt to alleviate the pressure in your inaccessible groin.");
 						//[Fuckable breasts:
 						if (player.hasFuckableNipples()) outputText("  Your fingers slip in and out of them, sending femcum flying everywhere. But the effects of the bee's honey appear to prevent you from getting off.");
 						//[Other:

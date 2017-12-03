@@ -5,7 +5,7 @@ package classes.Scenes.Areas.Swamp
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.SceneLib;
 
 public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInterface
@@ -128,7 +128,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 		{
 			startCombat(new FemaleSpiderMorph());
 			spriteSelect(73);
-            kGAMECLASS.inCombat = false;
+            CoC.instance.inCombat = false;
             loseToFemaleSpiderMorph();
 		}
 
@@ -148,7 +148,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			clearOutput();
 			spriteSelect(73);
 			//(Noncombat Intro)
-            if (!kGAMECLASS.inCombat) {
+            if (!CoC.instance.inCombat) {
                 outputText("You agree to have sex with the poor, pent-up arachnid maid, and ");
 				if (player.cor < 33) outputText("nervously");
 				else if (player.cor < 66) outputText("playfully");
@@ -266,7 +266,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			//[end]
 			player.orgasm();
 			dynStats("lib", 2, "sen", 1);
-            if (!kGAMECLASS.inCombat)
+            if (!CoC.instance.inCombat)
                 doNext(camp.returnToCampUseOneHour);
 			else cleanupAfterCombat();
 		}
@@ -281,7 +281,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			if (x < 0) x = 0;
 			//(Noncombat Intro:) 
 
-            if (!kGAMECLASS.inCombat) {
+            if (!CoC.instance.inCombat) {
                 outputText("You shuck your [armor] and toss it aside, feeling " + sMultiCockDesc() + " ");
 				if (player.lust < 70) outputText("twitch and begin to stiffen in anticipation of sex with the beautiful spider-maid.");
 				else outputText("twitch, already hard and aching for the touch of the beautiful spider-maid.");
@@ -289,7 +289,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			}
 			//(All:) 
 
-            if (!kGAMECLASS.inCombat) outputText("You shrug and step back to lay down in the soft moss,");
+            if (!CoC.instance.inCombat) outputText("You shrug and step back to lay down in the soft moss,");
             else if (player.HP < 1) outputText("You collapse into the soft moss,");
 			else outputText("You collapse into the soft moss and begin to masturbate,");
 			outputText(" sinking slightly into it while you watch the arachnid woman turn around and begin to shake her cute backside at you.  It sways entrancingly, the hefty weight of her large abdomen bobbing past with each shake to momentarily obstruct your view.  As you watch, a number of protuberances on the abdomen twist and writhe for a half-second before spraying out a huge quantity of sticky webbing.  It hits you like a hammer, knocking you completely flat and plastering your naked form to the dirt.");
@@ -297,7 +297,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			outputText("  Once it finishes, you find that your head, chest, and crotch were all left uncovered by the sticky strands.  She unleashes another burst of pearlescent webbing to coat the first, and you're left completely, utterly restrained.\n\n");
 
 			outputText("\"<i>Perfect, now that you're nice and comfortable, we can have sex!</i>\" decrees the ");
-            if (kGAMECLASS.inCombat) outputText("victorious arachnid.");
+            if (CoC.instance.inCombat) outputText("victorious arachnid.");
             else outputText("arachnid with a dangerous gleam in her eyes.  Why did you agree to this?");
 			outputText("\n\n");
 
@@ -373,7 +373,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 
 			player.orgasm();
 			dynStats("lib", 2, "sen", 1);
-            if (!kGAMECLASS.inCombat)
+            if (!CoC.instance.inCombat)
                 doNext(camp.returnToCampUseOneHour);
 			else cleanupAfterCombat();
 		}
@@ -387,7 +387,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			if (x < 0) x = 0;
 			//(Consensual)
-            if (!kGAMECLASS.inCombat) {
+            if (!CoC.instance.inCombat) {
                 outputText("You hastily remove your [armor] and toss it aside, glad to be able to let " + sMultiCockDesc() + " flop out and breathe.  The spider-girl's eyes widen as she takes in ALL of your ");
 				if (player.lust < 70) outputText("expanding");
 				else outputText("hard");
@@ -449,14 +449,14 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			outputText("  You sigh and fall into a fitful slumber, barely registering the spider-girl cutting your restraints.");
 			player.orgasm();
 			dynStats("lib", 2, "sen", 1);
-            if (!kGAMECLASS.inCombat)
+            if (!CoC.instance.inCombat)
                 doNext(camp.returnToCampUseOneHour);
 			else cleanupAfterCombat();
 		}
 
 		public function loseToFemaleSpiderMorph():void
 		{
-            if (flags[kFLAGS.SFW_MODE] > 0 && kGAMECLASS.inCombat) { //No rape in SFW mode.
+            if (flags[kFLAGS.SFW_MODE] > 0 && CoC.instance.inCombat) { //No rape in SFW mode.
                 clearOutput();
 				cleanupAfterCombat();
 				return;
@@ -553,7 +553,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			else if (player.cor < 66) outputText("You feel a little guilty, and before you go, you untie the bindings around her hands so that she'll be able to free herself.");
 			else outputText("You leave her there with her hands and feet completely restrained.  Sucks to be her.");
 			player.orgasm();
-            if (!kGAMECLASS.inCombat)
+            if (!CoC.instance.inCombat)
                 doNext(camp.returnToCampUseOneHour);
 			else cleanupAfterCombat();
 		}
@@ -620,7 +620,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 
 			player.orgasm();
 			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SPIDER - 200); //Spiders carry for half as long as the player does for some reason
-            if (!kGAMECLASS.inCombat)
+            if (!CoC.instance.inCombat)
                 doNext(camp.returnToCampUseOneHour);
 			else cleanupAfterCombat();
 		}
@@ -689,7 +689,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			outputText(" of seed rushes out of her gaped anus, pooling on the swamp floor as she slowly loses consciousness.  You give her ass an affectionate slap and get dressed, feeling sated and ready to resume your adventures.");
 			if (y != 1) pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SPIDER - 200); //Spiders carry for half as long as the player does for some reason
 			player.orgasm();
-            if (!kGAMECLASS.inCombat)
+            if (!CoC.instance.inCombat)
                 doNext(camp.returnToCampUseOneHour);
 			else cleanupAfterCombat();
 		}

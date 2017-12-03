@@ -2,7 +2,7 @@ package classes.Scenes
 {
 import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 
 public class Achievements extends BaseContent
 	{
@@ -243,7 +243,7 @@ public class Achievements extends BaseContent
 			addButton(10, "" + achievementsEarned + " of " + achievementsTotal + "", EngineCore.doNothing);
 			addButton(11, "achievements", EngineCore.doNothing);
 			addButton(12, "unlocked", EngineCore.doNothing);
-			addButton(14, "Back", kGAMECLASS.mainMenu.mainMenu);
+			addButton(14, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 		
 	}

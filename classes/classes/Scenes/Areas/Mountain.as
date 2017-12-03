@@ -6,7 +6,6 @@ package classes.Scenes.Areas
 import classes.*;
 import classes.AppearanceDefs;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
@@ -32,7 +31,7 @@ public class Mountain extends BaseContent
 		}
 		private var explorationEncounter:GroupEncounter = null;
 		private function init():void {
-			const game:CoC     = kGAMECLASS;
+			const game:CoC     = CoC.instance;
 			const fn:FnHelpers = Encounters.fn;
 			explorationEncounter =
 					Encounters.group(/*game.commonEncounters.withImpGob,*/{

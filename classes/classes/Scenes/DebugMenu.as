@@ -4,9 +4,10 @@ import classes.*;
 import classes.BodyParts.Skin;
 import classes.BodyParts.SkinLayer;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Items.Consumable;
 import classes.Items.ConsumableLib;
+import classes.Parser.Parser;
 import classes.Scenes.NPCs.JojoScene;
 
 import coc.view.Color;
@@ -43,7 +44,7 @@ public class DebugMenu extends BaseContent
 		public function accessDebugMenu():void {
 			LogProfilingReport();
 			//buildArray();
-            if (!kGAMECLASS.inCombat) {
+            if (!CoC.instance.inCombat) {
                 hideMenus();
 				mainView.nameBox.visible = false;
 				mainView.nameBox.text = "";
@@ -64,7 +65,7 @@ public class DebugMenu extends BaseContent
 				addButton(7, "HACK STUFFZ", styleHackMenu).hint("H4X0RZ");
 				addButton(14, "Exit", playerMenu);
 			}
-            if (kGAMECLASS.inCombat) {
+            if (CoC.instance.inCombat) {
                 clearOutput();
 				outputText("You raise the wand and give it a twirl but nothing happens. Seems like it only works when you're not in the middle of a battle.");
 				doNext(playerMenu);
@@ -525,7 +526,7 @@ public class DebugMenu extends BaseContent
 		private function generateTagDemos(...tags:Array):String {
 			return tags.map(function(tag:String,index:int,array:Array):String {
 				return "\\["+tag+"\\] = " +
-                        kGAMECLASS.parser.recursiveParser("[" + tag + "]").replace(' ', '\xA0')
+                        Parser.recursiveParser("[" + tag + "]").replace(' ', '\xA0')
             }).join(",\t");
 		}
 		private function showChangeOptions(backFn:Function, page:int, constants:Array, functionPageIndex:Function):void {
@@ -583,7 +584,7 @@ public class DebugMenu extends BaseContent
 			}
 			palette.sortOn('label');
 
-			kGAMECLASS.showComboBox(palette,"Known colors",function(item:Object):void {
+			CoC.instance.showComboBox(palette,"Known colors",function(item:Object):void {
 				oldColor = item.data.name;
 				colorPickerSet(item.data.h,item.data.s,item.data.l);
 			});
@@ -652,7 +653,7 @@ public class DebugMenu extends BaseContent
 		private function dumpPlayerData():void {
 			clearOutput();
 			mainViewManager.showPlayerDoll(true);
-            var pa:PlayerAppearance = kGAMECLASS.playerAppearance;
+            var pa:PlayerAppearance = CoC.instance.playerAppearance;
             pa.describeRace();
 			pa.describeFaceShape();
 			outputText("  It has " + player.faceDesc() + "."); //M/F stuff!
@@ -1434,9 +1435,9 @@ public class DebugMenu extends BaseContent
 		private function eventTriggerMenu():void {
 			menu();
 			addButton(0, "Anemone", SceneLib.anemoneScene.anemoneKidBirthPtII);
-			//addButton(0, "Marae Purify", kGAMECLASS.highMountains.minervaScene.minervaPurification.purificationByMarae);
-			//addButton(1, "Jojo Purify", kGAMECLASS.highMountains.minervaScene.minervaPurification.purificationByJojoPart1);
-			//addButton(2, "Rathazul Purify", kGAMECLASS.highMountains.minervaScene.minervaPurification.purificationByRathazul);
+			//addButton(0, "Marae Purify", CoC.instance.highMountains.minervaScene.minervaPurification.purificationByMarae);
+			//addButton(1, "Jojo Purify", CoC.instance.highMountains.minervaScene.minervaPurification.purificationByJojoPart1);
+			//addButton(2, "Rathazul Purify", CoC.instance.highMountains.minervaScene.minervaPurification.purificationByRathazul);
 			
 			addButton(14, "Back", accessDebugMenu);
 		}

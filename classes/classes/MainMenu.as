@@ -16,20 +16,20 @@ public class MainMenu extends BaseContent {
 	//------------
 	//MainMenu - kicks player out to the main menu
 	public function mainMenu():void {
-        kGAMECLASS.stage.focus = (mainView as MainView).mainText;
+        CoC.instance.stage.focus = (mainView as MainView).mainText;
         CoC_Settings.debugBuild = CONFIG::debug;
 
 		mainView.hideComboBox();
-        kGAMECLASS.mainViewManager.registerShiftKeys();
+        CoC.instance.mainViewManager.registerShiftKeys();
         mainView.eventTestInput.x = -10207.5;
 		mainView.eventTestInput.y = -1055.1;
 		hideStats();
-        kGAMECLASS.mainViewManager.startUpButtons();
-        kGAMECLASS.saves.loadPermObject();
-        if (kGAMECLASS.gameSettings.charviewEnabled) mainView.charView.reload();
-        kGAMECLASS.mainViewManager.setTheme();
+        CoC.instance.mainViewManager.startUpButtons();
+        CoC.instance.saves.loadPermObject();
+        if (CoC.instance.gameSettings.charviewEnabled) mainView.charView.reload();
+        CoC.instance.mainViewManager.setTheme();
         //Reset newgame buttons
-        mainView.setMenuButton(MainView.MENU_NEW_MAIN, "New Game", kGAMECLASS.charCreation.newGameFromScratch);
+        mainView.setMenuButton(MainView.MENU_NEW_MAIN, "New Game", CoC.instance.charCreation.newGameFromScratch);
         mainView.hideAllMenuButtons();
 		mainView.showMenuButton(MainView.MENU_NEW_MAIN);
 		mainView.showMenuButton(MainView.MENU_DATA);
@@ -45,10 +45,10 @@ public class MainMenu extends BaseContent {
 		mainView.appearanceButton.toolTipText   = "View your appearance.";
 		mainView.appearanceButton.toolTipHeader = "Appearance";
 		//Sets game state to 3, used for determining back functionality of save/load menu.
-        kGAMECLASS.resetGameState();
+        CoC.instance.resetGameState();
         clearOutput();
 		//outputText("<img src=\"logo\" id=\"coc-logo\" height=\"300\" width=\"400\" />\n");
-        outputText("<b>Corruption of Champions (" + kGAMECLASS.version + ")</b>");
+        outputText("<b>Corruption of Champions (" + CoC.instance.version + ")</b>");
         if (CoC_Settings.debugBuild)
 			outputText(" Debug Build");
 		else
@@ -71,7 +71,7 @@ public class MainMenu extends BaseContent {
 		menu();
 		if (resume != null) addButton(0, "Resume", resume).hint("Get back to gameplay?");
 		else addButtonDisabled(0, "Resume", "Please start or load a game first.");
-        addButton(1, "Settings", kGAMECLASS.gameSettings.settingsScreenMain).hint("Configure game settings and enable cheats.");
+        addButton(1, "Settings", CoC.instance.gameSettings.settingsScreenMain).hint("Configure game settings and enable cheats.");
         addButton(2, "Instructions", howToPlay).hint("How to play.  Starting tips.  And hotkeys for easy left-handed play...");
 		addButton(3, "Achievements", achievements.achievementsScreen).hint("View all achievements you have unlocked so far.");
 		//addButton(4, "Mod Thread", openURL, "http://fenoxo.com/forum/index.php?/topic/5-coc-revamp-mod", null, null, "Check the official mod thread on Fenoxo's forum.");
@@ -79,7 +79,7 @@ public class MainMenu extends BaseContent {
 		addButton(5, "Credits", creditsScreen).hint("See a list of all the cool people who have contributed to content for this game!");
 		addButton(6, "Image Credits", imageCreditsScreen).hint("Check out who contributed to the image pack.");
 		addButton(7, "Changelog", changelog.accessChangelogMenu).hint("View full changelog for each version of Xianxia since v0.1 <i>Warning: It have many pages already.</i>");
-        if (CoC_Settings.debugBuild) addButton(8, "Debug Info", kGAMECLASS.debugInfoMenu.debugPane).hint("View debug information.");
+        if (CoC_Settings.debugBuild) addButton(8, "Debug Info", CoC.instance.debugInfoMenu.debugPane).hint("View debug information.");
     }
 
 	public function startupScreenBody():void {

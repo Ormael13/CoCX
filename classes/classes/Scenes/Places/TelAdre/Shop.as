@@ -1,5 +1,5 @@
 package classes.Scenes.Places.TelAdre {
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.ItemType;
 
 import coc.xxc.BoundStory;
@@ -11,7 +11,7 @@ public class Shop extends TelAdreAbstractContent {
     private static var _baseStory:BoundStory;
     protected function get baseStory():BoundStory{
         if(!_baseStory){
-            _baseStory = kGAMECLASS.rootStory.locate("teladreshops").bind(kGAMECLASS.context);
+            _baseStory = CoC.instance.rootStory.locate("teladreshops").bind(CoC.instance.context);
         }
         return _baseStory;
     }

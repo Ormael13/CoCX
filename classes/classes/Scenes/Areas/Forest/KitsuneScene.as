@@ -6,7 +6,7 @@ package classes.Scenes.Areas.Forest
 	import classes.*;
 	import classes.BodyParts.SkinLayer;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+	import classes.CoC;
 	import classes.Items.Armors.LustyMaidensArmor;
 	import classes.Scenes.Monsters.Imp;
 	import classes.Scenes.SceneLib;
@@ -142,7 +142,7 @@ package classes.Scenes.Areas.Forest
 			clearOutput();
 			outputText("There's no way you're going to go gallivanting off into the woods after some flame.  You shake your head to clear your thoughts, and warily turn away to head back toward camp.  You could almost swear for a moment the flame looked disappointed, and you chuckle lightly at such a silly thought.");
 			//Advance time 1 hour, return to camp.
-            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+            if (CoC.instance.inCombat) cleanupAfterCombat();
             doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -176,7 +176,7 @@ package classes.Scenes.Areas.Forest
 				outputText("How did she get behind you so quickly?  You were staring at her the entire time!  Glancing quickly over your shoulder, you confirm that this is not a case of twins, but when you turn to face her, she has disappeared once again!\n\n");
 				outputText("\"<i>Over here, silly~</i>\" she calls to you with a mischievous tone, beckoning to you as you whip around to face her voice.  \"<i>Don't be shy, I don't bite...  often...</i>\"\n\n");
 				outputText("Her tone is innocuous enough, but her mannerisms are a little disconcerting, somehow.  What are you going to do?");
-                if (!kGAMECLASS.inCombat) simpleChoices("Fight", fightSomeKitsunes, "Talk", talkAfterResistingKitsunellusion, "", null, "", null, "", null);
+                if (!CoC.instance.inCombat) simpleChoices("Fight", fightSomeKitsunes, "Talk", talkAfterResistingKitsunellusion, "", null, "", null, "", null);
                 else simpleChoices("Fight", fightSomeKitsunes, "Talk", talkAfterResistingKitsunellusion, "", null, "", null, "", null);
 			}
 		}
@@ -228,7 +228,7 @@ package classes.Scenes.Areas.Forest
 
 			outputText("She holds out a small white package tied with string, grinning eagerly.  You hesitate, wondering whether it would be wise to take a gift from this strange woman, but before you can protest, she shoves the package into your hands.  When you look up from the featureless wrapping, there is no sign of her save for the echo of a mischievous giggle through the trees.\n\n");
 			outputText("<b>You have received a Kitsune's Gift!</b>\n");
-            if (kGAMECLASS.inCombat) {
+            if (CoC.instance.inCombat) {
                 flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.KITGIFT.id;
 				cleanupAfterCombat();
 			}
@@ -670,7 +670,7 @@ package classes.Scenes.Areas.Forest
 				}
 				model.time.hours = 6;
 				model.time.days++;
-                if (!kGAMECLASS.inCombat)
+                if (!CoC.instance.inCombat)
                     doNext(camp.returnToCampUseOneHour);
 				else cleanupAfterCombat();
 			}

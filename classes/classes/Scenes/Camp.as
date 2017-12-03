@@ -2,7 +2,7 @@
 import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Items.*;
 import classes.Scenes.Areas.HighMountains.TempleOfTheDivine;
 import classes.Scenes.Camp.*;
@@ -14,13 +14,13 @@ import coc.view.MainView;
 import coc.view.ButtonData;
 import coc.view.ButtonDataList;
 
-use namespace kGAMECLASS;
+use namespace CoC;
 
 	public class Camp extends NPCAwareContent{
 
 		protected function set timeQ(value:Number):void
 		{
-			kGAMECLASS.timeQ = value;
+			CoC.instance.timeQ = value;
 		}
 		private var campQ:Boolean = false;
 
@@ -31,11 +31,11 @@ use namespace kGAMECLASS;
 /*
 		protected function hasItemsInStorage():Boolean
 		{
-			return kGAMECLASS.inventory.hasItemsInStorage();
+			return CoC.instance.inventory.hasItemsInStorage();
 		}
 		protected function hasItemsInRacks(armor:Boolean = false):Boolean
 		{
-			return kGAMECLASS.inventory.hasItemsInRacks(type);
+			return CoC.instance.inventory.hasItemsInRacks(type);
 		}
 */
 
@@ -73,7 +73,7 @@ use namespace kGAMECLASS;
 		}
 /* Replaced with calls to playerMenu
 		public function campMenu():void {
-			kGAMECLASS.playerMenu();
+			CoC.instance.playerMenu();
 		}
 */
 		
@@ -82,7 +82,7 @@ use namespace kGAMECLASS;
 			if (timeUsed == 1)
 				outputText("An hour passes...\n");
 			else outputText(Num2Text(timeUsed) + " hours pass...\n");
-            if (!kGAMECLASS.inCombat) spriteSelect(-1);
+            if (!CoC.instance.inCombat) spriteSelect(-1);
             hideMenus();
 			timeQ = timeUsed;
 			goNext(timeUsed, false);
@@ -111,7 +111,7 @@ public function EzekielCurseQuickFix():void
 	statScreenRefresh();
 	dynStats("str", 5, "tou", 5, "spe", 5, "inte", 5, "lib", 5);
 	doCamp();
-	return;
+
 }
 
 private function doCamp():void { //Only called by playerMenu
@@ -120,9 +120,9 @@ private function doCamp():void { //Only called by playerMenu
 	{
 		trace("Autosaving to slot: " + player.slotName);
 
-kGAMECLASS.saves.saveGame(player.slotName);
+CoC.instance.saves.saveGame(player.slotName);
     }
-    kGAMECLASS.inCombat = false;
+    CoC.instance.inCombat = false;
     if (ingnam.inIngnam) { //Ingnam
 		SceneLib.ingnam.menuIngnam();
 		return;
@@ -143,10 +143,10 @@ kGAMECLASS.saves.saveGame(player.slotName);
 		player.removeStatusEffect(StatusEffects.PostAnemoneBeatdown);
 	}
 /* Can't happen - playerMenu will call dungeon appropriate menu instead of doCamp while inDungeon is true
-	if (kGAMECLASS.inDungeon) {
+	if (CoC.instance.inDungeon) {
 		mainView.showMenuButton( MainView.MENU_DATA );
 		mainView.showMenuButton( MainView.MENU_APPEARANCE );
-		kGAMECLASS.playerMenu();
+		CoC.instance.playerMenu();
 		return;
 	}
 */
@@ -156,7 +156,7 @@ kGAMECLASS.saves.saveGame(player.slotName);
 	if (flags[kFLAGS.HISTORY_PERK_SELECTED] == 0) {
 		flags[kFLAGS.HISTORY_PERK_SELECTED] = 2;
 		hideMenus();
-        kGAMECLASS.charCreation.chooseHistory();
+        CoC.instance.charCreation.chooseHistory();
 //		fixHistory();
 		return;
 	}
@@ -594,7 +594,7 @@ kGAMECLASS.saves.saveGame(player.slotName);
 	mainView.showMenuButton( MainView.MENU_DATA );
 	showStats();
 	//Change settings of new game buttons to go to main menu
-	mainView.setMenuButton( MainView.MENU_NEW_MAIN, "Main Menu", kGAMECLASS.mainMenu.mainMenu );
+	mainView.setMenuButton( MainView.MENU_NEW_MAIN, "Main Menu", CoC.instance.mainMenu.mainMenu );
 	mainView.newGameButton.toolTipText = "Return to main menu.";
 	mainView.newGameButton.toolTipHeader = "Main Menu";
 	//clear up/down arrows
@@ -829,7 +829,7 @@ kGAMECLASS.saves.saveGame(player.slotName);
 		{
 			flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] = 1;
 			outputText("\n\n<b>Congratulations! You have unlocked hermaphrodite option on character creation, accessible from New Game Plus!</b>");
-			kGAMECLASS.saves.savePermObject(false);
+			CoC.instance.saves.savePermObject(false);
 		}
 	}
 	//Unlock hot spring.
@@ -890,7 +890,7 @@ kGAMECLASS.saves.saveGame(player.slotName);
 		inventory.takeItem(weapons.HNTCANE, doCamp);
 		return;
 	}
-	if (flags[kFLAGS.MOD_SAVE_VERSION] < kGAMECLASS.modSaveVersion) {
+	if (flags[kFLAGS.MOD_SAVE_VERSION] < CoC.instance.modSaveVersion) {
 		promptSaveUpdate();
 		return;
 	}
@@ -1026,7 +1026,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		hideMenus();
 		spriteSelect(-1);
 		clearOutput();
-        kGAMECLASS.inCombat = false;
+        CoC.instance.inCombat = false;
         menu();
 	}
 	if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0 && !descOnly) {
@@ -1316,7 +1316,7 @@ public function campSlavesMenu(descOnly:Boolean = false):void {
 		hideMenus();
 		spriteSelect(-1);
 		clearOutput();
-        kGAMECLASS.inCombat = false;
+        CoC.instance.inCombat = false;
         menu();
 	}
 	if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0 && !descOnly) {
@@ -1369,7 +1369,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 		hideMenus();
 		spriteSelect(-1);
 		clearOutput();
-        kGAMECLASS.inCombat = false;
+        CoC.instance.inCombat = false;
         //ADD MENU FLAGS/INDIVIDUAL FOLLOWER TEXTS
 		menu();
 	}
@@ -2126,7 +2126,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 		{
 			trace("Autosaving to slot: " + player.slotName);
 
-kGAMECLASS.saves.saveGame(player.slotName);
+CoC.instance.saves.saveGame(player.slotName);
         }
 		//Clear screen
 		if (clrScreen) clearOutput();
@@ -2512,7 +2512,7 @@ private function placesPage2():void {
 	if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(6, "Oasis Tower", SceneLib.highMountains.minervaScene.encounterMinerva).hint("Visit the ruined tower in the high mountains where Minerva resides.");
 	if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] > 0) addButton(7, "Temple", templeofdivine.repeatvisitintro).hint("Visit the temple in the high mountains where Sapphire resides.");
 	
-//	if (flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) addButton(12, "Prison", kGAMECLASS.prison.prisonIntro, false, null, null, "Return to the prison and continue your life as Elly's slave.");
+//	if (flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) addButton(12, "Prison", CoC.instance.prison.prisonIntro, false, null, null, "Return to the prison and continue your life as Elly's slave.");
 	if (debug) addButton(13, "Ingnam", SceneLib.ingnam.returnToIngnam).hint("Return to Ingnam for debugging purposes. Night-time event weirdness might occur. You have been warned!");
 	addButton(4, "Previous", placesToPage1);
 	addButton(14, "Back", playerMenu);
@@ -2589,7 +2589,7 @@ public function wakeFromBadEnd():void {
 	DungeonAbstractContent.inDungeon = false;
 	inRoomedDungeon = false;
 	inRoomedDungeonResume = null;
-    kGAMECLASS.inCombat = false;
+    CoC.instance.inCombat = false;
     //Restore stats
 	player.HP = player.maxHP();
 	player.fatigue = 0;
@@ -2922,11 +2922,11 @@ private function ascendForReal():void {
 	outputText("\n\nYou begin to glow; you can already feel yourself leaving your body and you announce your departure.");
 	if (marbleFollower()) outputText("\n\n\"<i>Sweetie, I'm going to miss you. See you in the next playthrough,</i>\" Marble says, tears leaking from her eyes.");
 	outputText("\n\nThe world around you slowly fades to black and stars dot the endless void. <b>You have ascended.</b>");
-	doNext(kGAMECLASS.charCreation.ascensionMenu);
+	doNext(CoC.instance.charCreation.ascensionMenu);
 }
 
 public function setLevelButton(allowAutoLevelTransition:Boolean):Boolean {
-	var levelup:Boolean = player.XP >= player.requiredXP() && player.level < kGAMECLASS.levelCap;
+	var levelup:Boolean = player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap;
 	if (levelup || player.perkPoints > 0 || player.statPoints > 0) {
 		if (!levelup) {
 			if (player.statPoints > 0) {
@@ -2964,14 +2964,14 @@ public function setLevelButton(allowAutoLevelTransition:Boolean):Boolean {
 			if (player.findPerk(PerkLib.UnlockId2ndStage) >= 0) wrath += 1;
 			mainView.levelButton.toolTipText = "Level up to increase your maximum HP by " + hp + ", maximum Fatigue by " + fatigue + ", maximum Mana by " + mana + ", maximum Soulforce by " + soulforce + ", maximum Wrath by " + wrath + " and maximum Lust by " + lust + "; gain 5 attribute points and 1 perk points.";
 			if (flags[kFLAGS.AUTO_LEVEL] > 0 && allowAutoLevelTransition) {
-                kGAMECLASS.playerInfo.levelUpGo();
+                CoC.instance.playerInfo.levelUpGo();
                 return true; //True indicates that you should be routed to level-up.
 			}
 			
 		}
 		mainView.showMenuButton( MainView.MENU_LEVEL );
 		mainView.statsView.showLevelUp();
-		if (player.str >= player.getMaxStats("str") && player.tou >= player.getMaxStats("tou") && player.inte >= player.getMaxStats("int") && player.spe >= player.getMaxStats("spe") && (player.perkPoints <= 0 || PerkTree.availablePerks(kGAMECLASS.player).length <= 0) && (player.XP < player.requiredXP() || player.level >= kGAMECLASS.levelCap)) {
+		if (player.str >= player.getMaxStats("str") && player.tou >= player.getMaxStats("tou") && player.inte >= player.getMaxStats("int") && player.spe >= player.getMaxStats("spe") && (player.perkPoints <= 0 || PerkTree.availablePerks(CoC.instance.player).length <= 0) && (player.XP < player.requiredXP() || player.level >= CoC.instance.levelCap)) {
 			mainView.statsView.hideLevelUp();
 		}
 	}
@@ -3099,7 +3099,7 @@ private function promptSaveUpdate():void {
 		flags[kFLAGS.GIACOMO_NOTICES_WORMS] = 0;
 		flags[kFLAGS.PHOENIX_ENCOUNTERED] = 0;
 		flags[kFLAGS.PHOENIX_WANKED_COUNTER] = 0;
-		if (kGAMECLASS.giacomo > 0) flags[kFLAGS.GIACOMO_MET] = 1;
+		if (CoC.instance.giacomo > 0) flags[kFLAGS.GIACOMO_MET] = 1;
 		flags[kFLAGS.MOD_SAVE_VERSION] = 4;
 		doCamp();
 		return;
@@ -3457,7 +3457,7 @@ private function chooseEyesColorSaveUpdate(color:String):void {
 
 //Updates save. Done to ensure your save doesn't get screwed up.
 private function updateSaveFlags():void {
-	flags[kFLAGS.MOD_SAVE_VERSION] = kGAMECLASS.modSaveVersion;
+	flags[kFLAGS.MOD_SAVE_VERSION] = CoC.instance.modSaveVersion;
 	var startOldIds:int = 1195;
 	var startNewIds:int = 2001;
 	var current:int = 0;
@@ -3573,7 +3573,7 @@ private function updateAchievements():void {
 	if (SceneLib.dungeons.checkPhoenixTowerClear()) {
 		awardAchievement("Fall of the Phoenix", kACHIEVEMENTS.DUNGEON_PHOENIX_FALL);
 		dungeonsCleared++;
-		if (flags[kFLAGS.TIMES_ORGASMED] <= 0 && flags[kFLAGS.MOD_SAVE_VERSION] == kGAMECLASS.modSaveVersion) awardAchievement("Extremely Chaste Delver", kACHIEVEMENTS.DUNGEON_EXTREMELY_CHASTE_DELVER);
+		if (flags[kFLAGS.TIMES_ORGASMED] <= 0 && flags[kFLAGS.MOD_SAVE_VERSION] == CoC.instance.modSaveVersion) awardAchievement("Extremely Chaste Delver", kACHIEVEMENTS.DUNGEON_EXTREMELY_CHASTE_DELVER);
 	}
 	if (SceneLib.dungeons.checkLethiceStrongholdClear()) {
 		awardAchievement("End of Reign", kACHIEVEMENTS.DUNGEON_END_OF_REIGN);

@@ -1,6 +1,6 @@
 ﻿package classes
 {
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.internals.Utils;
 
 public class StatusEffectClass extends Utils
@@ -89,7 +89,7 @@ public class StatusEffectClass extends Utils
 		return new StatusEffectType(id,statusEffectClass || StatusEffectClass,arity);
 	}
 	protected static function get game():CoC {
-		return kGAMECLASS;
+		return CoC.instance;
 	}
 }
 }

@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.Explore{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.SceneLib;
 
 public class Gargoyle extends BaseContent{
@@ -115,7 +115,7 @@ private function breakZeChains():void {
 }
 
 private function nameZeGargoyle():void {
-	if (kGAMECLASS.testingBlockExiting)
+	if (CoC.instance.testingBlockExiting)
 	{
 		// We're running under the testing script.
 		// Stuff a name in the box and go go go

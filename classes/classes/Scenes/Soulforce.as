@@ -6,7 +6,7 @@ package classes.Scenes
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.Areas.DeepSea.Kraken;
 import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.Forest.TamainsDaughtersScene;
@@ -24,7 +24,7 @@ import classes.Scenes.NPCs.RyuBiDragon;
 import classes.Scenes.NPCs.Sonya;
 import classes.Scenes.Places.Boat.Marae;
 
-use namespace kGAMECLASS;
+use namespace CoC;
 	
 	public class Soulforce extends BaseContent
 	{
@@ -195,10 +195,10 @@ use namespace kGAMECLASS;
 			if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 0) addButton(10, "AyaneFix", AyaneWrongSettingUpFollowerFlagFix).hint("Fixing Ayane no proper set up falg for recruitment.");
 			if (player.eyeColor != "brown") addButton(11, "Eye Color", eyesColorSelection).hint("Set eye color to default one so saves will not go crazy over it.");
 			addButton(11, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
-			//addButton(12, "<<< 12 >>>", kGAMECLASS.doNothing);
+			//addButton(12, "<<< 12 >>>", CoC.instance.doNothing);
 			addButton(12, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
 			if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] == 3) addButton(13, "DenBossesReset", resetHeroslayerOmnibusFlag).hint("Reseting Den of Desire bosses fight.");
-			//addButton(13, "<<< 13 >>>", kGAMECLASS.doNothing);
+			//addButton(13, "<<< 13 >>>", CoC.instance.doNothing);
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 private function eyesColorSelection():void {
@@ -1963,8 +1963,8 @@ private function resetHeroslayerOmnibusFlag():void {
 			outputText("Use some of your soulforce to slowly conver it into mana or some mana in soulforce. The higher your cultivation is the more you could convert without hurting yourself.\n\n");
 			outputText("So what amount of your soulforce/mana do you want to convert?");
 			menu();
-		//	if (kGAMECLASS.inCombat) {
-		//		addButton(14, "Back", kGAMECLASS.combatMenu);
+		//	if (CoC.instance.inCombat) {
+		//		addButton(14, "Back", CoC.instance.combatMenu);
 		//	}You sit down and focus your spiritual power to recover some of your physical stamina, within moments, you feel rested and refreshed. - może do wykorzystania potem gdzieś?
 		//	else {
 				addButton(0, "100", Covert100Soulforce).hint("Convert 100 soulforce to 100 mana.");

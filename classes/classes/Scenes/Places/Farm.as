@@ -1,13 +1,13 @@
 ﻿package classes.Scenes.Places{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.MarbleScene;
 import classes.Scenes.Places.Farm.*;
 import classes.Scenes.SceneLib;
 
-use namespace kGAMECLASS;
+use namespace CoC;
 
 	public class Farm extends BaseContent{
 	public var keltScene:KeltScene = new KeltScene();

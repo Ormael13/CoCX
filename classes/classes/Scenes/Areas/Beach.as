@@ -8,14 +8,14 @@ package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.Areas.Beach.*;
 import classes.Scenes.NPCs.CeaniScene;
 import classes.Scenes.SceneLib;
 
 //import classes.Scenes.NPCs.CaiLin;
 
-	use namespace kGAMECLASS;
+	use namespace CoC;
 	
 	public class Beach extends BaseContent 
 	{

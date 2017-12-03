@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.Areas.HighMountains.Harpy;
 import classes.Scenes.SceneLib;
 
@@ -56,7 +56,6 @@ public class SophieScene extends BaseContent implements TimeAwareInterface {
 							case 200:
 							case 325: sophiesDaughterDescript(); //At these three times we need to output a message about her daughters
 									needNext = true;
-							default:
 						}
 					}
 				}
@@ -487,7 +486,7 @@ private function cramANippleInIt():void {
 	player.boostLactation(.01);
 	clearOutput();
 	//Not a combat win
-    if (!kGAMECLASS.inCombat) outputText("Sophie steps back and drops onto her knees, balancing herself with her wings.   You pull your [armor] open with deliberate slowness, exposing your [allbreasts] one at a time.  Sophie licks her lips as she patiently awaits the sharing of your bounty.\n\n");
+    if (!CoC.instance.inCombat) outputText("Sophie steps back and drops onto her knees, balancing herself with her wings.   You pull your [armor] open with deliberate slowness, exposing your [allbreasts] one at a time.  Sophie licks her lips as she patiently awaits the sharing of your bounty.\n\n");
     //COMBAT
 	else {
 		//(Lust Win)
@@ -544,7 +543,7 @@ private function cramANippleInIt():void {
 	else if(player.biggestLactation() >= 2) outputText("a satisfied burp.");
 	else outputText("a satisfied 'ahhh'.");
 	outputText("  She wipes a bit of milk from her lips and says, \"<i>");
-    if (kGAMECLASS.inCombat) {
+    if (CoC.instance.inCombat) {
         //(Fought HP won:
 		if(monster.HP < 1) outputText("You know you don't have to beat me up to get me to drink your milk right? It's too delicious to turn down!</i>\"\n\n");
 		//(Fought Lust won:
@@ -581,7 +580,7 @@ private function cramANippleInIt():void {
 	dynStats("lus", -50);
 	//increment times bfed.
 	flags[kFLAGS.BREASTFEAD_SOPHIE_COUNTER]++;
-    if (kGAMECLASS.inCombat)
+    if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 	//You've now been milked, reset the timer for that
@@ -602,7 +601,7 @@ private function consensualHotSophieDickings():void {
 		CoC_Settings.error("");
 		outputText("ERROR: No cock found that fits, yet 'fits' scene was called.");
 		doNext(playerMenu);
-        kGAMECLASS.inCombat = false;
+        CoC.instance.inCombat = false;
         return;
 	}
 	else if(x > player.cocks.length-1) 
@@ -610,7 +609,7 @@ private function consensualHotSophieDickings():void {
 		CoC_Settings.error("");
 		outputText("ERROR: Cock above max cocks selected for Sophie sex.  Please report bug on fen's bug report forum.");
 		doNext(playerMenu);
-        kGAMECLASS.inCombat = false;
+        CoC.instance.inCombat = false;
         return;
 	}
 

@@ -5,7 +5,7 @@ package classes.Scenes
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Items.Armor;
 import classes.Items.ArmorLib;
 import classes.Items.Consumable;
@@ -23,7 +23,7 @@ import classes.Items.WeaponRangeLib;
 import classes.Scenes.Camp.UniqueCampScenes;
 import classes.Scenes.NPCs.HolliPureScene;
 
-use namespace kGAMECLASS;
+use namespace CoC;
 
 	public class Inventory extends BaseContent {
 		private static const inventorySlotName:Array = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth"];
@@ -65,7 +65,7 @@ use namespace kGAMECLASS;
 		public function inventoryMenu():void {
 			var x:int;
 			var foundItem:Boolean = false;
-            if (kGAMECLASS.inCombat) {
+            if (CoC.instance.inCombat) {
                 callNext = inventoryCombatHandler; //Player will return to combat after item use
 			}
 			else {
@@ -96,7 +96,7 @@ use namespace kGAMECLASS;
 				}
 			}
 
-if (!kGAMECLASS.inCombat && inDungeon == false && inRoomedDungeon == false && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0) {
+if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0) {
                 var miscNieve:Boolean = Holidays.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5;
                 var miscHolli:Boolean         = flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4 || flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4);
 				if (miscNieve
@@ -123,7 +123,7 @@ if (!kGAMECLASS.inCombat && inDungeon == false && inRoomedDungeon == false && fl
 					addButton(13, "Misc.", miscitemsMenu);
 				}
 			}
-            if (!kGAMECLASS.inCombat) {
+            if (!CoC.instance.inCombat) {
                 addButton(10, "Unequip", manageEquipment);
 				if (player.hasKeyItem("Bag of Cosmos") >= 0) {
 					addButton(11, "Bag of Cosmos", BagOfCosmosMenu);
@@ -133,7 +133,7 @@ if (!kGAMECLASS.inCombat && inDungeon == false && inRoomedDungeon == false && fl
 				}
 			}
 			if (foundItem) {
-                if (kGAMECLASS.inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv1(StatusEffects.Sealed) == 3) {
+                if (CoC.instance.inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv1(StatusEffects.Sealed) == 3) {
                     outputText("\nYou reach for your items, but you just can't get your pouches open.  <b>Your ability to use items was sealed, and now you've wasted a chance to attack!</b>\n\n");
                     SceneLib.combat.enemyAIImpl();
                     return;
@@ -141,7 +141,7 @@ if (!kGAMECLASS.inCombat && inDungeon == false && inRoomedDungeon == false && fl
 				outputText("\nWhich item will you use? (To discard unwanted items, hold Shift then click the item.)");
 			}
 			outputText("\n<b>Capacity:</b> " + getOccupiedSlots() + " / " + getMaxSlots());
-            if (kGAMECLASS.inCombat)
+            if (CoC.instance.inCombat)
                 addButton(14, "Back", SceneLib.combat.combatMenu, false); //Player returns to the combat menu on cancel
 			else addButton(14, "Back", playerMenu);
 //Gone			menuLoc = 1;
@@ -167,7 +167,7 @@ if (!kGAMECLASS.inCombat && inDungeon == false && inRoomedDungeon == false && fl
 					foundItem = true;
 				}
 				if (flags[kFLAGS.ANEMONE_KID] > 0) {
-					//kGAMECLASS.anemoneScene.anemoneBarrelDescription();
+					//CoC.instance.anemoneScene.anemoneBarrelDescription();
 					if (model.time.hours >= 6) addButton(4, "Anemone", SceneLib.anemoneScene.approachAnemoneBarrel);
 				}
 				if (flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
@@ -384,7 +384,7 @@ if (!kGAMECLASS.inCombat && inDungeon == false && inRoomedDungeon == false && fl
 					currentItemSlot.setItemAndQty(item, 1);
 				}
 			}
-            if (kGAMECLASS.inCombat) {
+            if (CoC.instance.inCombat) {
                 enemyAI();
 				return;
 			}

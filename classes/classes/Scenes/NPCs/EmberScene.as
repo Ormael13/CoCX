@@ -4397,10 +4397,10 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 		//Sleep with Ember!
 		public function sleepWithEmber():void {
 			//Set timeQ
-			if (model.time.hours >= 21) kGAMECLASS.timeQ = 24 - model.time.hours;
-			else kGAMECLASS.timeQ = 0;
-			kGAMECLASS.timeQ += 6;
-			if (flags[kFLAGS.BENOIT_CLOCK_ALARM] > 0) kGAMECLASS.timeQ += (flags[kFLAGS.BENOIT_CLOCK_ALARM] - 6);
+			if (model.time.hours >= 21) CoC.instance.timeQ = 24 - model.time.hours;
+			else CoC.instance.timeQ = 0;
+			CoC.instance.timeQ += 6;
+			if (flags[kFLAGS.BENOIT_CLOCK_ALARM] > 0) CoC.instance.timeQ += (flags[kFLAGS.BENOIT_CLOCK_ALARM] - 6);
 			//GO!
 			var chooser:int = rand(3);
 			clearOutput();

@@ -2,14 +2,14 @@ package classes.Perks
 {
 	import classes.PerkClass;
 	import classes.PerkType;
-	import classes.GlobalFlags.kGAMECLASS;
+	import classes.CoC;
 	
 	public class AscensionEndurancePerk extends PerkType
 	{
 		
 		override public function desc(params:PerkClass = null):String
 		{
-			return "(Rank: " + params.value1 + "/" + kGAMECLASS.charCreation.MAX_ENDURANCE_LEVEL + ") Increases maximum fatigue by " + params.value1 * 30 + ".";
+			return "(Rank: " + params.value1 + "/" + CoC.instance.charCreation.MAX_ENDURANCE_LEVEL + ") Increases maximum fatigue by " + params.value1 * 30 + ".";
 		}
 		
 		public function AscensionEndurancePerk() 

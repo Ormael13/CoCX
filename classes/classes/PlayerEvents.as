@@ -147,7 +147,7 @@ import classes.StatusEffects.VampireThirstEffect;
 					player.addStatusValue(StatusEffects.Feeder, 2, 1); //Increase 'time since breastfed'
 					//trace("Feeder status: " + player.statusEffectv2(StatusEffects.Feeder) + " (modded " + ((player.statusEffectv2(StatusEffects.Feeder)) - 70) + ")");
 					//After 3 days without feeding someone sensitivity jumps.
-                    if (player.statusEffectv2(StatusEffects.Feeder) >= 72 && kGAMECLASS.model.time.hours == 14) {
+                    if (player.statusEffectv2(StatusEffects.Feeder) >= 72 && CoC.instance.model.time.hours == 14) {
                         outputText("\n<b>After having gone so long without feeding your milk to someone, you're starting to feel strange.  Every inch of your skin practically thrums with sensitivity, particularly your sore, dripping nipples.</b>\n");
 						player.dynStats("sen", 2 + (((player.statusEffectv2(StatusEffects.Feeder)) - 70) / 20));
 						needNext = true;
@@ -288,7 +288,7 @@ import classes.StatusEffects.VampireThirstEffect;
 			}
 			if (player.findPerk(PerkLib.SlimeCore) >= 0) { //Lose slime core perk
 				if (player.vaginalCapacity() < 9000 || player.skinAdj != "slimy" || player.skinDesc != "skin" || player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_GOO) {
-                    outputText("\nYour form ripples, as if uncertain at the changes your body is undergoing.  The goo of your flesh cools, its sensitive, responsive membrane thickening into [skin] while bones and muscles knit themselves into a cohesive torso, chest and hips gaining definition.  Translucent ooze clouds and the gushing puddle at your feet melts together, splitting into solid trunks as you regain your legs.  Before long, you can no longer see through your own body and, with an unsteady shiver, you pat yourself down, readjusting to solidity.  A lurching heat in your chest suddenly reminds you of the slime core that used to float inside you.  Gingerly touching your " + kGAMECLASS.player.chestDesc() + ", you can feel a small, second heartbeat under your ribs that gradually seems to be sinking, past your belly. A lurching wave of warmth sparks through you, knocking you off your fresh legs and onto your " + Appearance.buttDescription(player) + ".  A delicious pressure pulses in your abdomen and you loosen your [armor] as sweat beads down your neck.  You clench your eyes, tongue lolling in your mouth, and the pressure builds and builds until, in ecstatic release, your body arches in an orgasmic release.\n\n");
+                    outputText("\nYour form ripples, as if uncertain at the changes your body is undergoing.  The goo of your flesh cools, its sensitive, responsive membrane thickening into [skin] while bones and muscles knit themselves into a cohesive torso, chest and hips gaining definition.  Translucent ooze clouds and the gushing puddle at your feet melts together, splitting into solid trunks as you regain your legs.  Before long, you can no longer see through your own body and, with an unsteady shiver, you pat yourself down, readjusting to solidity.  A lurching heat in your chest suddenly reminds you of the slime core that used to float inside you.  Gingerly touching your " + CoC.instance.player.chestDesc() + ", you can feel a small, second heartbeat under your ribs that gradually seems to be sinking, past your belly. A lurching wave of warmth sparks through you, knocking you off your fresh legs and onto your " + Appearance.buttDescription(player) + ".  A delicious pressure pulses in your abdomen and you loosen your [armor] as sweat beads down your neck.  You clench your eyes, tongue lolling in your mouth, and the pressure builds and builds until, in ecstatic release, your body arches in an orgasmic release.\n\n");
                     outputText("\nPanting, you open your eyes and see that, for once, the source of your climax wasn't your loins.  Feeling a warm, wetness on your abs, you investigate and find the small, heart-shaped nucleus that used to be inside your body has somehow managed to pass through your belly button. Exposed to the open air, the crimson organ slowly crystallizes, shrinking and hardening into a tiny ruby.  Rubbing the stone with your thumb, you're surprised to find that you can still feel a pulse within its glittering facets.  You stow the ruby heart, in case you need it again.\n");
 					player.createKeyItem("Ruby Heart", 0, 0, 0, 0); //[Add 'Ruby Heart' to key items. Player regains slime core if returning to goo body]
 					player.removePerk(PerkLib.SlimeCore);
@@ -401,7 +401,7 @@ import classes.StatusEffects.VampireThirstEffect;
 					needNext = true;
 				}
 			}
-            if (kGAMECLASS.model.time.hours == 6 && player.armorName == "bimbo skirt" && rand(10) == 0 && player.biggestTitSize() < 12) {
+            if (CoC.instance.model.time.hours == 6 && player.armorName == "bimbo skirt" && rand(10) == 0 && player.biggestTitSize() < 12) {
                 outputText("\n<b>As you wake up, you feel a strange tingling starting in your nipples that extends down into your breasts.  After a minute, the tingling dissipates in a soothing wave.  As you cup your tits, you realize they've gotten larger!</b>");
 				player.growTits(1, player.bRows(), false, 2);
 				player.dynStats("lus", 10);
@@ -409,7 +409,7 @@ import classes.StatusEffects.VampireThirstEffect;
 			}
 			if (flags[kFLAGS.BIKINI_ARMOR_BONUS] > 0) {
 				if (player.armorName == "lusty maiden's armor") {
-                    if (kGAMECLASS.model.time.hours == 0) flags[kFLAGS.BIKINI_ARMOR_BONUS]--; //Adjust for inflation
+                    if (CoC.instance.model.time.hours == 0) flags[kFLAGS.BIKINI_ARMOR_BONUS]--; //Adjust for inflation
                     if (flags[kFLAGS.BIKINI_ARMOR_BONUS] < 0) flags[kFLAGS.BIKINI_ARMOR_BONUS] = 0; //Keep in bounds.
 					if (flags[kFLAGS.BIKINI_ARMOR_BONUS] > 8) flags[kFLAGS.BIKINI_ARMOR_BONUS] = 8;
 				}
@@ -420,7 +420,7 @@ import classes.StatusEffects.VampireThirstEffect;
 			if (flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC] > 0) flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC]--; //Vala post-rape countdown
 			if (flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] > 0 && flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] < 500) flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY]++;
 
-if (kGAMECLASS.model.time.hours > 23) { //Once per day
+if (CoC.instance.model.time.hours > 23) { //Once per day
                 if (flags[kFLAGS.STAT_GAIN_MODE] == CoC.STAT_GAIN_DAILY) {
 					if (player.level > player.statPoints) {
 						if (player.level < 6) player.statPoints = 15;
@@ -432,7 +432,7 @@ if (kGAMECLASS.model.time.hours > 23) { //Once per day
 					}
 				}
 				flags[kFLAGS.BROOKE_MET_TODAY] = 0;
-                if (kGAMECLASS.model.time.days % 2 == 0 && flags[kFLAGS.KAIJU_BAD_END_COUNTER] > 0) {
+                if (CoC.instance.model.time.days % 2 == 0 && flags[kFLAGS.KAIJU_BAD_END_COUNTER] > 0) {
                     flags[kFLAGS.KAIJU_BAD_END_COUNTER]--;
 					if (flags[kFLAGS.KAIJU_BAD_END_COUNTER] < 0) flags[kFLAGS.KAIJU_BAD_END_COUNTER] = 0;
 				}
@@ -456,7 +456,7 @@ if (kGAMECLASS.model.time.hours > 23) { //Once per day
 					flags[kFLAGS.WEEKLY_FAIRY_ORGY_COUNTDOWN]--;
 					if (flags[kFLAGS.WEEKLY_FAIRY_ORGY_COUNTDOWN] < 0) flags[kFLAGS.WEEKLY_FAIRY_ORGY_COUNTDOWN] = 0;
 				}
-                if (kGAMECLASS.model.time.days % 7 == 0) flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] = 0; //Clear Whitney's Weekly limit
+                if (CoC.instance.model.time.days % 7 == 0) flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] = 0; //Clear Whitney's Weekly limit
                 if (flags[kFLAGS.USED_MILKER_TODAY] > 0) flags[kFLAGS.USED_MILKER_TODAY] = 0; //Clear 'has fucked milker today'
                 if (SceneLib.latexGirl.latexGooFollower()) { //Latex goo follower daily updates
                     SceneLib.latexGirl.gooFluid(-2, false);
@@ -486,7 +486,6 @@ if (kGAMECLASS.model.time.hours > 23) { //Once per day
 						case 3:
 							if (!needNext) needNext = EventParser.growHair(1.1);
 							else EventParser.growHair(1.1);
-						default:
 					}
 					flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING]--;
 					//reset hair growth multiplier and timer when
@@ -549,7 +548,7 @@ if (kGAMECLASS.model.time.hours > 23) { //Once per day
 					if (player.mana > player.maxMana()) player.mana = player.maxMana();
 				}
 			}
-			if (kGAMECLASS.model.time.hours == 6) {
+			if (CoC.instance.model.time.hours == 6) {
 				var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
 				if (vthirst != null) {
 					vthirst.modSatiety(-1);
@@ -1023,10 +1022,10 @@ if (kGAMECLASS.model.time.hours > 23) { //Once per day
 					if (prevEggs < 10) {
 						player.addEggs(2);
 					}
-                    else if (prevEggs < 20 && kGAMECLASS.model.time.hours % 2 == 0) {
+                    else if (prevEggs < 20 && CoC.instance.model.time.hours % 2 == 0) {
                         player.addEggs(1);
 					}
-                    else if (kGAMECLASS.model.time.hours % 4 == 0) {
+                    else if (CoC.instance.model.time.hours % 4 == 0) {
                         player.addEggs(1);
 					}
 					if (prevEggs < 10 && player.eggs() >= 10) { //Stage 1 egg message
@@ -1078,8 +1077,8 @@ if (kGAMECLASS.model.time.hours > 23) { //Once per day
 					player.removePerk(PerkLib.BunnyEggs);
 					needNext = true;
 				}
-                else if (player.pregnancyIncubation < 1 && player.hasVagina() && kGAMECLASS.model.time.hours == 1) { //Otherwise pregger check, once every morning
-                    if ((player.totalFertility() > 50 && kGAMECLASS.model.time.days % 15 == 0) || kGAMECLASS.model.time.days % 30 == 0) { //every 15 days if high fertility get egg preg
+                else if (player.pregnancyIncubation < 1 && player.hasVagina() && CoC.instance.model.time.hours == 1) { //Otherwise pregger check, once every morning
+                    if ((player.totalFertility() > 50 && CoC.instance.model.time.days % 15 == 0) || CoC.instance.model.time.days % 30 == 0) { //every 15 days if high fertility get egg preg
                         outputText("\n<b>Somehow you know that eggs have begun to form inside you.  You wonder how long it will be before they start to show?</b>\n");
 						player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS, 1, 1);
 						player.createStatusEffect(StatusEffects.Eggs, rand(6), rand(2), (5 + rand(3)), 0); //v1 is type, v2 is size (1 == large) and v3 is quantity
@@ -1178,7 +1177,7 @@ if (kGAMECLASS.model.time.hours > 23) { //Once per day
             if (SceneLib.mountain.minotaurScene.minoCumUpdate()) {
                 needNext = true;
 			}
-            else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 2 && kGAMECLASS.model.time.hours % 13 == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00330] == 0) { //Repeated warnings!
+            else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 2 && CoC.instance.model.time.hours % 13 == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00330] == 0) { //Repeated warnings!
                 if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2)
 					outputText("\n<b>You shiver, feeling a little cold.  Maybe you ought to get some more minotaur cum?  You just don't feel right without that pleasant buzz in the back of your mind.</b>\n");
 				else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3)
@@ -1300,20 +1299,20 @@ if (kGAMECLASS.model.time.hours > 23) { //Once per day
 		}
 
 		public function timeChangeLarge():Boolean {
-            if (rand(4) == 0 && Holidays.isHolidays() && player.gender > 0 && kGAMECLASS.model.time.hours == 6 && flags[kFLAGS.XMAS_CHICKEN_YEAR] < kGAMECLASS.date.fullYear) {
+            if (rand(4) == 0 && Holidays.isHolidays() && player.gender > 0 && CoC.instance.model.time.hours == 6 && flags[kFLAGS.XMAS_CHICKEN_YEAR] < CoC.instance.date.fullYear) {
                 Holidays.getAChristmasChicken();
                 return true;
 			}
-            if (kGAMECLASS.model.time.hours == 1 && Holidays.isHolidays() && kGAMECLASS.date.fullYear > flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE]) { //XMAS ELF
+            if (CoC.instance.model.time.hours == 1 && Holidays.isHolidays() && CoC.instance.date.fullYear > flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE]) { //XMAS ELF
                 Holidays.xmasBitchEncounter(); //Set it to remember the last year encountered
                 return true;
 			}
-            if (checkedTurkey++ == 0 && (rand(5) == 0 && (kGAMECLASS.model.time.hours == 18 || kGAMECLASS.model.time.hours == 19)) && (kGAMECLASS.date.fullYear > flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] || flags[kFLAGS.MORE_TURKEY] > 0) && Holidays.isThanksgiving() && player.gender > 0 && flags[kFLAGS.IN_INGNAM] <= 0) {
+            if (checkedTurkey++ == 0 && (rand(5) == 0 && (CoC.instance.model.time.hours == 18 || CoC.instance.model.time.hours == 19)) && (CoC.instance.date.fullYear > flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] || flags[kFLAGS.MORE_TURKEY] > 0) && Holidays.isThanksgiving() && player.gender > 0 && flags[kFLAGS.IN_INGNAM] <= 0) {
                 Holidays.datTurkeyRumpMeeting(); //TURKEY SURPRISE
                 return true;
 			}
-            if (checkedDream++ == 0 && kGAMECLASS.model.time.hours == 3) { //You can only have one dream each night
-                if (player.gender > 0 && kGAMECLASS.model.time.days == 10) { //Day 10 dream - since this can happen only once it takes priority over all other dreams
+            if (checkedDream++ == 0 && CoC.instance.model.time.hours == 3) { //You can only have one dream each night
+                if (player.gender > 0 && CoC.instance.model.time.days == 10) { //Day 10 dream - since this can happen only once it takes priority over all other dreams
                     dreams.dayTenDreams();
 					return true;
 				}
@@ -1386,7 +1385,7 @@ if (kGAMECLASS.model.time.hours > 23) { //Once per day
 					case  4: ceraph =  4; break;
 					default: ceraph =  3;
 				}
-                if (ceraph > 0 && kGAMECLASS.model.time.days % ceraph == 0) {
+                if (ceraph > 0 && CoC.instance.model.time.days % ceraph == 0) {
                     SceneLib.ceraphScene.ceraphBodyPartDreams();
                     return true;
 				}

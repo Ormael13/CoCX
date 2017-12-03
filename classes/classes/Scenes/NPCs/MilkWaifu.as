@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.NPCs {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.SceneLib;
 
 public class MilkWaifu extends NPCAwareContent{
@@ -40,7 +40,7 @@ public function arriveWithLacticWaifuAtCamp():void {
 
 private function nameZeMilkBath():void 
 {
-	if (kGAMECLASS.testingBlockExiting)
+	if (CoC.instance.testingBlockExiting)
 	{
 		// We're running under the testing script.
 		// Stuff a name in the box and go go go
@@ -100,7 +100,7 @@ private function nameZeMilkBath():void
 		
 		//[Next time Rath's at camp and PC accesses Milky's meny, play the Arrival w/ Rath scene, sans first sentence]
 	}
-	//Set before this function is called:	kGAMECLASS.inDungeon = false;
+	//Set before this function is called:	CoC.instance.inDungeon = false;
 	doNext(camp.returnToCampUseOneHour);
 }
 

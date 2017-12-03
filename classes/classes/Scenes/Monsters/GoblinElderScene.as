@@ -2,7 +2,7 @@ package classes.Scenes.Monsters
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.NPCs.JojoScene;
 
 public class GoblinElderScene extends BaseContent
@@ -665,7 +665,7 @@ public class GoblinElderScene extends BaseContent
 			var x:Number = player.cockThatFits(monster.analCapacity());
 			if (x < 0) x = player.smallestCockIndex();
 			outputText(images.showImage("goblinelder-win-male-goblinboners"));
-			if (kGAMECLASS.inCombat) {
+			if (CoC.instance.inCombat) {
 				outputText("The goblin lies strewn across the ground upon her stomach, exhausted from the battle. Her plump legs are unintentionally spread open while her ass pokes up into the air, giving you a clear view of her wet pussy as she tries to get herself off.  It seems as if the green-skinned slut has already forgotten about you - too many fruitless encounters might've caused her to give up hope on finding a virile specimen to pump her full of cum.\n\n");
 
 				outputText("Luckily for her, you have every intention of changing that.\n\n");

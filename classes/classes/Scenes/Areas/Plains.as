@@ -5,7 +5,7 @@ package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
@@ -13,7 +13,7 @@ import classes.Scenes.Areas.Plains.*;
 import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
 
-use namespace kGAMECLASS;
+use namespace CoC;
 
 	public class Plains extends BaseContent
 	{
@@ -35,11 +35,11 @@ use namespace kGAMECLASS;
 			outputText("You find yourself standing in knee-high grass, surrounded by flat plains on all sides.  Though the mountain, forest, and lake are all visible from here, they seem quite distant.\n\n<b>You've discovered the plains!</b>");
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		private var explorationEncounter:GroupEncounter = null;
-		
+
 		private function init():void {
-			const game:CoC     = kGAMECLASS;
+			const game:CoC     = CoC.instance;
 			const fn:FnHelpers = Encounters.fn;
 			explorationEncounter = Encounters.group(/*SceneLib.commonEncounters,*/ {
 				//General Golems, Goblin and Imp Encounters
@@ -176,7 +176,7 @@ use namespace kGAMECLASS;
 			outputText("While exploring the plains you come across a strange-looking plant.  As you peer at it, you realize it has some fruit you can get at.  ");
 			inventory.takeItem(consumables.KANGAFT, camp.returnToCampUseOneHour);
 		}
-		
+
 		private function findOviElix():void {
 			outputText(images.showImage("item-oElixir"));
 			outputText("While exploring the plains you nearly trip over a discarded, hexagonal bottle.  ");

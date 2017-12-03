@@ -9,7 +9,7 @@ package classes.Scenes.NPCs {
 	import classes.Scenes.Camp;
 	import classes.Scenes.NPCs.Kindra;
 	
-	use namespace kGAMECLASS;
+	use namespace CoC;
 	
 	public class KindraFollower extends NPCAwareContent {
 	//implements TimeAwareInterface {

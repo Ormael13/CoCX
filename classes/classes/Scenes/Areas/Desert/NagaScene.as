@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.Areas.Desert {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.SceneLib;
 
 public class NagaScene extends BaseContent{

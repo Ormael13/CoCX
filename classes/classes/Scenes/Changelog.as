@@ -6,9 +6,9 @@ package classes.Scenes
 {
 	import classes.*
 	import classes.BaseContent;
-	import classes.GlobalFlags.kGAMECLASS;
+	import classes.CoC;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+	import classes.CoC;
 	
 	public class Changelog extends BaseContent
 	{
@@ -195,7 +195,7 @@ package classes.Scenes
 			outputText("-Few more perks and achievements.\n");
 			outputText("-Make use of Metamorph perk (ofc all TF would be powered by soulforce ^^)\n");
 			addButton(0, "Next", Changelog17);
-			addButton(1, "Back", kGAMECLASS.mainMenu.mainMenu);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 		private function Changelog17():void {
 			clearOutput();
@@ -271,7 +271,7 @@ package classes.Scenes
 			outputText("-Using Vampiric Bite on Construct type or Plant type enemies will cause it to fail, ends Embrace and allow enemy to slight damage PC.\n");
 			outputText("-Fixed bugs: Unable to use range weapons without flying, Satyr scene parser bug");
 			addButton(0, "Next", Changelog16);
-			addButton(1, "Back", kGAMECLASS.mainMenu.mainMenu);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 		private function Changelog16():void {
 			clearOutput();
@@ -406,7 +406,7 @@ package classes.Scenes
 			outputText("-New tier 12 intelligence lvl-up perk: Epic Spirituality. Req. Half-step-to Epic Spirituality perk, 390+ int and 260+ wis. Effect: Inrease max Mana by 6750\n");
 			outputText("-New tier 12 libido lvl-up perk: Epic Self-Control. Req. Half-step-to Epic Self-Control perk, 390+ lib and 260+ int. Effect: Inrease max Lust by 2250\n");
 			addButton(0, "Next", Changelog15);
-			addButton(1, "Back", kGAMECLASS.mainMenu.mainMenu);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 		private function Changelog15():void {
 			clearOutput();
@@ -488,7 +488,7 @@ package classes.Scenes
 			outputText("-Game will now keep track on PC eyes color. At save update player will be able to pick it. And during creation stage it will be another step that would allow picking it. Some races getting points now for having specific eye color.\n");
 			outputText("-Fixed bugs: Blank screen when working on farm in Ignam, waiting in Alraune fights lowering fatigue instead of rising, missing buffs effect clearing in some cases leading to cumulative bonuses");
 			addButton(0, "Next", Changelog14);
-			addButton(1, "Back", kGAMECLASS.mainMenu.mainMenu);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 		
 		private function Changelog14():void {
@@ -550,7 +550,7 @@ package classes.Scenes
 			outputText("-Fixed bugs: Throwing weapons not working with mutli range attacks, Usable Fox Fire to burn corupted glades when below 7 fox tails");
 			menu();
 			addButton(0, "Next", Changelog13);
-			addButton(1, "Back", kGAMECLASS.mainMenu.mainMenu);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 		private function Changelog13():void {
 			clearOutput();
@@ -639,7 +639,7 @@ package classes.Scenes
 			outputText("-Fixed bugs: Naming bug for demons, Too high normally Goo score, Corrupted Marae fight.");
 			menu();
 			addButton(0, "Next", Changelog12);
-			addButton(1, "Back", kGAMECLASS.mainMenu.mainMenu);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 		
 		private function Changelog12():void {
@@ -739,7 +739,7 @@ package classes.Scenes
 			outputText("-Fixed bugs: Fox Fire one, wrong weapon meantioned in some of range weapons tooltips during combat, auto unequiping sheild when PC have Titan Grip perk.");
 			menu();
 			addButton(0, "Next", Changelog11);
-			addButton(1, "Back", kGAMECLASS.mainMenu.mainMenu);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 		
 		private function Changelog11():void {
@@ -804,7 +804,7 @@ package classes.Scenes
 			outputText("-Bugfixing and glitches patching.");
 			menu();
 			addButton(0, "Next", Changelog10);
-			addButton(1, "Back", kGAMECLASS.mainMenu.mainMenu);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 		private function Changelog10():void {
 			clearOutput();
@@ -844,7 +844,7 @@ package classes.Scenes
 			outputText("-Many small changes and minor QoL upgrades to the code.");
 			menu();
 			addButton(0, "Next", Changelog9);
-			addButton(1, "Back", kGAMECLASS.mainMenu.mainMenu);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 		private function Changelog9():void {
 			clearOutput();
@@ -903,7 +903,7 @@ package classes.Scenes
 			outputText("-Few other minor changes.");
 			menu();
 			addButton(0, "Next", Changelog8);
-			addButton(1, "Back", kGAMECLASS.mainMenu.mainMenu);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 		private function Changelog8():void {
 			clearOutput();
@@ -959,7 +959,7 @@ package classes.Scenes
 			outputText("-Few other minor changes.");
 			menu();
 			addButton(0, "Next", Changelog7);
-			addButton(1, "Back", kGAMECLASS.mainMenu.mainMenu);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 		private function Changelog7():void {
 			clearOutput();
@@ -1022,7 +1022,7 @@ package classes.Scenes
 			outputText("-Urta Quest will be unaccesable till I properly deal with bug in it. So that mean at least 2-3 version of it been out of loop.");
 			menu();
 			addButton(0, "Next", Changelog6);
-			addButton(1, "Back", kGAMECLASS.mainMenu.mainMenu);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 		private function Changelog6():void {
 			clearOutput();
@@ -1074,7 +1074,7 @@ package classes.Scenes
 			outputText("-Fixed bug that caused all PC with perk Cultivation having in many cases meditation scene instead normal masturbation one after picking Masturbate at camp menu.");
 			menu();
 			addButton(0, "Next", Changelog5);
-			addButton(1, "Back", kGAMECLASS.mainMenu.mainMenu);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 		private function Changelog5():void {
 			clearOutput();
@@ -1114,7 +1114,7 @@ package classes.Scenes
 			outputText("-Found and fixed simple typo in Salamander Firewater that was preventing PC from getting any TF effect aside 4 stats changes (aka how one single symbol in wrong place screwing up whole cool TF that many probably wanted get their hands on -_-').");
 			menu();
 			addButton(0, "Next", Changelog4);
-			addButton(1, "Back", kGAMECLASS.mainMenu.mainMenu);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 		private function Changelog4():void {
 			clearOutput();
@@ -1172,7 +1172,7 @@ package classes.Scenes
 			outputText("-A few minor under the hood changes to make game goes more smooth, some bug fixed (aka missing pure fem/genderless PC loose scene for succubus in BR).");
 			menu();
 			addButton(0, "Next", Changelog3);
-			addButton(1, "Back", kGAMECLASS.mainMenu.mainMenu);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 		private function Changelog3():void {
 			clearOutput();
@@ -1210,7 +1210,7 @@ package classes.Scenes
 			outputText("-Arrows counter increase everytime PC deal dmg to enemy (earlier due to my derpness ony those shoots that was dealing dmg and finishing off at the same time enemy counted making bow shooting reducing cost grind quite hard and too much time consuming).");
 			menu();
 			addButton(0, "Next", Changelog2);
-			addButton(1, "Back", kGAMECLASS.mainMenu.mainMenu);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 		private function Changelog2():void {
 			clearOutput();
@@ -1251,7 +1251,7 @@ package classes.Scenes
 			outputText("-Added pack of imps enemy (yup group enemy eq with newest monster-exclusive perk ^^) and for current version test needs put them in VC (later would go to their destinated area ^^).");
 			menu();
 			addButton(0, "Next", Changelog1);
-			addButton(1, "Back", kGAMECLASS.mainMenu.mainMenu);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 		private function Changelog1():void {
 			clearOutput();
@@ -1300,7 +1300,7 @@ package classes.Scenes
 			outputText("-Added in stats page counted for nails, wood, stones.\n");
 			outputText("-Few more under the hood changes I'm atm forgeting -_-'");
 			menu();
-			addButton(1, "Back", kGAMECLASS.mainMenu.mainMenu);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 	}
 }

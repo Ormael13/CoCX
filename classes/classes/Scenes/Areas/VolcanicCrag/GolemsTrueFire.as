@@ -6,7 +6,7 @@ package classes.Scenes.Areas.VolcanicCrag
 {
 	import classes.*;
 	import classes.internals.*;
-	import classes.GlobalFlags.kGAMECLASS;
+	import classes.CoC;
 	import classes.GlobalFlags.kFLAGS;
 	
 	public class GolemsTrueFire extends Monster

@@ -1,6 +1,6 @@
 package classes{
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Scenes.SceneLib;
 
 import coc.view.MainView;
@@ -13,15 +13,15 @@ internal class ControlBindings {
 
     }
     public function executeButtonClick(button:int = 0):void {
-        kGAMECLASS.mainView.clickButton( button );
+        CoC.instance.mainView.clickButton( button );
     }
     internal function run(inputManager:InputManager):void {
         inputManager.AddBindableControl(
                 "Show Stats",
                 "Show the stats pane when available",
                 function ():void {
-                    if (kGAMECLASS.mainView.menuButtonIsVisible(MainView.MENU_STATS) && kGAMECLASS.player.str > 0) {
-                        kGAMECLASS.playerInfo.displayStats();
+                    if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_STATS) && CoC.instance.player.str > 0) {
+                        CoC.instance.playerInfo.displayStats();
                     }
                 });
 
@@ -29,8 +29,8 @@ internal class ControlBindings {
                 "Level Up",
                 "Show the level up page when available",
                 function ():void {
-                    if (kGAMECLASS.mainView.menuButtonIsVisible(MainView.MENU_LEVEL) && kGAMECLASS.player.str > 0) {
-                        kGAMECLASS.playerInfo.levelUpGo();
+                    if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_LEVEL) && CoC.instance.player.str > 0) {
+                        CoC.instance.playerInfo.levelUpGo();
                     }
                 });
 
@@ -38,9 +38,9 @@ internal class ControlBindings {
                     "Quicksave 1",
                     "Quicksave the current game to slot 1",
                     function ():void {
-                        if (kGAMECLASS.mainView.menuButtonIsVisible(MainView.MENU_DATA) && kGAMECLASS.player.str > 0) {
-                            kGAMECLASS.mainView.nameBox.text = "";
-                            kGAMECLASS.saves.saveGame("CoC_1");
+                        if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_DATA) && CoC.instance.player.str > 0) {
+                            CoC.instance.mainView.nameBox.text = "";
+                            CoC.instance.saves.saveGame("CoC_1");
                             EngineCore.clearOutput();
                             EngineCore.outputText("Game saved to slot 1!");
                             EngineCore.doNext(EventParser.playerMenu);
@@ -51,9 +51,9 @@ internal class ControlBindings {
                     "Quicksave 2",
                     "Quicksave the current game to slot 2",
                     function ():void {
-                        if (kGAMECLASS.mainView.menuButtonIsVisible(MainView.MENU_DATA) && kGAMECLASS.player.str > 0) {
-                            kGAMECLASS.mainView.nameBox.text = "";
-                            kGAMECLASS.saves.saveGame("CoC_2");
+                        if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_DATA) && CoC.instance.player.str > 0) {
+                            CoC.instance.mainView.nameBox.text = "";
+                            CoC.instance.saves.saveGame("CoC_2");
                             EngineCore.clearOutput();
                             EngineCore.outputText("Game saved to slot 2!");
                             EngineCore.doNext(EventParser.playerMenu);
@@ -64,9 +64,9 @@ internal class ControlBindings {
                     "Quicksave 3",
                     "Quicksave the current game to slot 2",
                     function ():void {
-                        if (kGAMECLASS.mainView.menuButtonIsVisible(MainView.MENU_DATA) && kGAMECLASS.player.str > 0) {
-                            kGAMECLASS.mainView.nameBox.text = "";
-                            kGAMECLASS.saves.saveGame("CoC_3");
+                        if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_DATA) && CoC.instance.player.str > 0) {
+                            CoC.instance.mainView.nameBox.text = "";
+                            CoC.instance.saves.saveGame("CoC_3");
                             EngineCore.clearOutput();
                             EngineCore.outputText("Game saved to slot 3!");
                             EngineCore.doNext(EventParser.playerMenu);
@@ -77,9 +77,9 @@ internal class ControlBindings {
                     "Quicksave 4",
                     "Quicksave the current game to slot 4",
                     function ():void {
-                        if (kGAMECLASS.mainView.menuButtonIsVisible(MainView.MENU_DATA) && kGAMECLASS.player.str > 0) {
-                            kGAMECLASS.mainView.nameBox.text = "";
-                            kGAMECLASS.saves.saveGame("CoC_4");
+                        if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_DATA) && CoC.instance.player.str > 0) {
+                            CoC.instance.mainView.nameBox.text = "";
+                            CoC.instance.saves.saveGame("CoC_4");
                             EngineCore.clearOutput();
                             EngineCore.outputText("Game saved to slot 4!");
                             EngineCore.doNext(EventParser.playerMenu);
@@ -90,9 +90,9 @@ internal class ControlBindings {
                     "Quicksave 5",
                     "Quicksave the current game to slot 5",
                     function ():void {
-                        if (kGAMECLASS.mainView.menuButtonIsVisible(MainView.MENU_DATA) && kGAMECLASS.player.str > 0) {
-                            kGAMECLASS.mainView.nameBox.text = "";
-                            kGAMECLASS.saves.saveGame("CoC_5");
+                        if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_DATA) && CoC.instance.player.str > 0) {
+                            CoC.instance.mainView.nameBox.text = "";
+                            CoC.instance.saves.saveGame("CoC_5");
                             EngineCore.clearOutput();
                             EngineCore.outputText("Game saved to slot 5!");
                             EngineCore.doNext(EventParser.playerMenu);
@@ -103,10 +103,10 @@ internal class ControlBindings {
                     "Quickload 1",
                     "Quickload the current game from slot 1",
                     function ():void {
-                        if (kGAMECLASS.mainView.menuButtonIsVisible(MainView.MENU_DATA)) {
+                        if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_DATA)) {
                             var saveFile:* = SharedObject.getLocal("CoC_1", "/");
                             if (saveFile.data.exists) {
-                                if (kGAMECLASS.saves.loadGame("CoC_1")) {
+                                if (CoC.instance.saves.loadGame("CoC_1")) {
                                     EngineCore.showStats();
                                     EngineCore.statScreenRefresh();
                                     EngineCore.clearOutput();
@@ -121,10 +121,10 @@ internal class ControlBindings {
                     "Quickload 2",
                     "Quickload the current game from slot 2",
                     function ():void {
-                        if (kGAMECLASS.mainView.menuButtonIsVisible(MainView.MENU_DATA)) {
+                        if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_DATA)) {
                             var saveFile:* = SharedObject.getLocal("CoC_2", "/");
                             if (saveFile.data.exists) {
-                                if (kGAMECLASS.saves.loadGame("CoC_2")) {
+                                if (CoC.instance.saves.loadGame("CoC_2")) {
                                     EngineCore.showStats();
                                     EngineCore.statScreenRefresh();
                                     EngineCore.clearOutput();
@@ -139,10 +139,10 @@ internal class ControlBindings {
                     "Quickload 3",
                     "Quickload the current game from slot 3",
                     function ():void {
-                        if (kGAMECLASS.mainView.menuButtonIsVisible(MainView.MENU_DATA)) {
+                        if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_DATA)) {
                             var saveFile:* = SharedObject.getLocal("CoC_3", "/");
                             if (saveFile.data.exists) {
-                                if (kGAMECLASS.saves.loadGame("CoC_3")) {
+                                if (CoC.instance.saves.loadGame("CoC_3")) {
                                     EngineCore.showStats();
                                     EngineCore.statScreenRefresh();
                                     EngineCore.clearOutput();
@@ -157,10 +157,10 @@ internal class ControlBindings {
                     "Quickload 4",
                     "Quickload the current game from slot 4",
                     function ():void {
-                        if (kGAMECLASS.mainView.menuButtonIsVisible(MainView.MENU_DATA)) {
+                        if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_DATA)) {
                             var saveFile:* = SharedObject.getLocal("CoC_4", "/");
                             if (saveFile.data.exists) {
-                                if (kGAMECLASS.saves.loadGame("CoC_4")) {
+                                if (CoC.instance.saves.loadGame("CoC_4")) {
                                     EngineCore.showStats();
                                     EngineCore.statScreenRefresh();
                                     EngineCore.clearOutput();
@@ -175,10 +175,10 @@ internal class ControlBindings {
                     "Quickload 5",
                     "Quickload the current game from slot 5",
                     function ():void {
-                        if (kGAMECLASS.mainView.menuButtonIsVisible(MainView.MENU_DATA)) {
+                        if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_DATA)) {
                             var saveFile:* = SharedObject.getLocal("CoC_5", "/");
                             if (saveFile.data.exists) {
-                                if (kGAMECLASS.saves.loadGame("CoC_5")) {
+                                if (CoC.instance.saves.loadGame("CoC_5")) {
                                     EngineCore.showStats();
                                     EngineCore.statScreenRefresh();
                                     EngineCore.clearOutput();
@@ -193,8 +193,8 @@ internal class ControlBindings {
                     "Show Menu",
                     "Show the main menu",
                     function ():void {
-                        if (kGAMECLASS.mainView.menuButtonIsVisible(MainView.MENU_NEW_MAIN) && kGAMECLASS.mainView.menuButtonHasLabel(MainView.MENU_NEW_MAIN, "Main Menu")) {
-                            kGAMECLASS.mainMenu.mainMenu();
+                        if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_NEW_MAIN) && CoC.instance.mainView.menuButtonHasLabel(MainView.MENU_NEW_MAIN, "Main Menu")) {
+                            CoC.instance.mainMenu.mainMenu();
                         }
                     });
 
@@ -202,8 +202,8 @@ internal class ControlBindings {
                     "Data Menu",
                     "Show the save/load menu",
                     function ():void {
-                        if (kGAMECLASS.mainView.menuButtonIsVisible(MainView.MENU_DATA)) {
-                            kGAMECLASS.saves.saveLoad(undefined);
+                        if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_DATA)) {
+                            CoC.instance.saves.saveLoad(undefined);
                         }
                     });
 
@@ -211,8 +211,8 @@ internal class ControlBindings {
                     "Appearance Page",
                     "Show the appearance page",
                     function ():void {
-                        if (kGAMECLASS.mainView.menuButtonIsVisible(MainView.MENU_APPEARANCE)) {
-                            kGAMECLASS.playerAppearance.appearance();
+                        if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_APPEARANCE)) {
+                            CoC.instance.playerAppearance.appearance();
                         }
                     });
 
@@ -220,7 +220,7 @@ internal class ControlBindings {
                     "No",
                     "Respond no to any available prompt",
                     function ():void {
-                        if (kGAMECLASS.mainView.getButtonText(1) == "No" && kGAMECLASS.mainView.buttonIsVisible(1)) {
+                        if (CoC.instance.mainView.getButtonText(1) == "No" && CoC.instance.mainView.buttonIsVisible(1)) {
                             executeButtonClick(1);
                         }
                     });
@@ -229,7 +229,7 @@ internal class ControlBindings {
                     "Yes",
                     "Respond yes to any available prompt",
                     function ():void {
-                        if (kGAMECLASS.mainView.getButtonText(0) == "Yes" && kGAMECLASS.mainView.buttonIsVisible(0)) {
+                        if (CoC.instance.mainView.getButtonText(0) == "Yes" && CoC.instance.mainView.buttonIsVisible(0)) {
                             executeButtonClick(0);
                         }
                     });
@@ -238,8 +238,8 @@ internal class ControlBindings {
                     "Show Perks",
                     "Show the perks page",
                     function ():void {
-                        if (kGAMECLASS.mainView.menuButtonIsVisible(MainView.MENU_PERKS)) {
-                            kGAMECLASS.perkMenu.displayPerks(null);
+                        if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_PERKS)) {
+                            CoC.instance.perkMenu.displayPerks(null);
                         }
                     });
 
@@ -248,49 +248,49 @@ internal class ControlBindings {
                     "Respond to continue",
                     function ():void {
                         // Button 9
-                        if (kGAMECLASS.mainView.buttonIsVisible(9) && kGAMECLASS.mainView.buttonTextIsOneOf(9, ["Nevermind", "Abandon", "Next", "Return", "Back", "Leave", "Resume"])) {
+                        if (CoC.instance.mainView.buttonIsVisible(9) && CoC.instance.mainView.buttonTextIsOneOf(9, ["Nevermind", "Abandon", "Next", "Return", "Back", "Leave", "Resume"])) {
                             //trace( "keyboard(): processing space bar for button 9",
-                            //	kGAMECLASS.mainView.buttonIsVisible( 9 ) ? "(visible)" : "(hidden)",
-                            //	kGAMECLASS.mainView.getButtonText( 9 ) );
-                            kGAMECLASS.mainView.toolTipView.hide();
+                            //	CoC.instance.mainView.buttonIsVisible( 9 ) ? "(visible)" : "(hidden)",
+                            //	CoC.instance.mainView.getButtonText( 9 ) );
+                            CoC.instance.mainView.toolTipView.hide();
                             executeButtonClick(9);
                             return;
                         }
                         // Button 14
                         if (EngineCore.buttonIsVisible(14) && EngineCore.buttonTextIsOneOf(14, ["Nevermind", "Abandon", "Next", "Return", "Back", "Leave", "Resume"])) {
                             //trace( "keyboard(): processing space bar for button 9",
-                            //	kGAMECLASS.mainView.buttonIsVisible( 9 ) ? "(visible)" : "(hidden)",
-                            //	kGAMECLASS.mainView.getButtonText( 9 ) );
-                            kGAMECLASS.mainView.toolTipView.hide();
+                            //	CoC.instance.mainView.buttonIsVisible( 9 ) ? "(visible)" : "(hidden)",
+                            //	CoC.instance.mainView.getButtonText( 9 ) );
+                            CoC.instance.mainView.toolTipView.hide();
                             executeButtonClick(14);
                             return;
                         }
                         // Button 0
-                        if (kGAMECLASS.mainView.buttonIsVisible(0) && kGAMECLASS.mainView.buttonTextIsOneOf(0, ["Next", "Return", "Back"])) {
+                        if (CoC.instance.mainView.buttonIsVisible(0) && CoC.instance.mainView.buttonTextIsOneOf(0, ["Next", "Return", "Back"])) {
                             //trace( "keyboard(): processing space bar for button 0",
-                            //	kGAMECLASS.mainView.buttonIsVisible( 0 ) ? "(visible)" : "(hidden)",
-                            //	kGAMECLASS.mainView.getButtonText( 0 ) );
-                            kGAMECLASS.mainView.toolTipView.hide();
+                            //	CoC.instance.mainView.buttonIsVisible( 0 ) ? "(visible)" : "(hidden)",
+                            //	CoC.instance.mainView.getButtonText( 0 ) );
+                            CoC.instance.mainView.toolTipView.hide();
                             executeButtonClick(0);
                             return;
                         }
 
                         // Button 4
-                        if (kGAMECLASS.mainView.buttonIsVisible(4) && kGAMECLASS.mainView.buttonTextIsOneOf(4, ["Nevermind", "Next", "Return", "Back", "Leave"])) {
+                        if (CoC.instance.mainView.buttonIsVisible(4) && CoC.instance.mainView.buttonTextIsOneOf(4, ["Nevermind", "Next", "Return", "Back", "Leave"])) {
                             //trace( "keyboard(): processing space bar for button 4",
-                            //	kGAMECLASS.mainView.buttonIsVisible( 4 ) ? "(visible)" : "(hidden)",
-                            //	kGAMECLASS.mainView.getButtonText( 4 ) );
-                            kGAMECLASS.mainView.toolTipView.hide();
+                            //	CoC.instance.mainView.buttonIsVisible( 4 ) ? "(visible)" : "(hidden)",
+                            //	CoC.instance.mainView.getButtonText( 4 ) );
+                            CoC.instance.mainView.toolTipView.hide();
                             executeButtonClick(4);
                             return;
                         }
 
                         // Button 5
-                        if (kGAMECLASS.mainView.buttonIsVisible(5) && kGAMECLASS.mainView.buttonTextIsOneOf(5, ["Next", "Return", "Back"])) {
+                        if (CoC.instance.mainView.buttonIsVisible(5) && CoC.instance.mainView.buttonTextIsOneOf(5, ["Next", "Return", "Back"])) {
                             //trace( "keyboard(): processing space bar for button 5",
-                            //	kGAMECLASS.mainView.buttonIsVisible( 5 ) ? "(visible)" : "(hidden)",
-                            //	kGAMECLASS.mainView.getButtonText( 5 ) );
-                            kGAMECLASS.mainView.toolTipView.hide();
+                            //	CoC.instance.mainView.buttonIsVisible( 5 ) ? "(visible)" : "(hidden)",
+                            //	CoC.instance.mainView.getButtonText( 5 ) );
+                            CoC.instance.mainView.toolTipView.hide();
                             executeButtonClick(5);
                             //return;
                         }
@@ -300,15 +300,15 @@ internal class ControlBindings {
                     "Cycle Background",
                     "Cycle the background fill of the text display area",
                     function ():void {
-                        if (!kGAMECLASS.mainView.textBGWhite.visible) {
-                            kGAMECLASS.mainView.textBGWhite.visible = true;
+                        if (!CoC.instance.mainView.textBGWhite.visible) {
+                            CoC.instance.mainView.textBGWhite.visible = true;
                         }
-                        else if (!kGAMECLASS.mainView.textBGTan.visible) {
-                            kGAMECLASS.mainView.textBGTan.visible = true;
+                        else if (!CoC.instance.mainView.textBGTan.visible) {
+                            CoC.instance.mainView.textBGTan.visible = true;
                         }
                         else {
-                            kGAMECLASS.mainView.textBGWhite.visible = false;
-                            kGAMECLASS.mainView.textBGTan.visible = false;
+                            CoC.instance.mainView.textBGWhite.visible = false;
+                            CoC.instance.mainView.textBGTan.visible = false;
                         }
 
                     });
@@ -317,8 +317,8 @@ internal class ControlBindings {
                     "Button 1",
                     "Activate button 1",
                     function ():void {
-                        if (kGAMECLASS.mainView.buttonIsVisible(0)) {
-                            kGAMECLASS.mainView.toolTipView.hide();
+                        if (CoC.instance.mainView.buttonIsVisible(0)) {
+                            CoC.instance.mainView.toolTipView.hide();
                             executeButtonClick(0);
                         }
                     });
@@ -327,8 +327,8 @@ internal class ControlBindings {
                     "Button 2",
                     "Activate button 2",
                     function ():void {
-                        if (kGAMECLASS.mainView.buttonIsVisible(1)) {
-                            kGAMECLASS.mainView.toolTipView.hide();
+                        if (CoC.instance.mainView.buttonIsVisible(1)) {
+                            CoC.instance.mainView.toolTipView.hide();
                             executeButtonClick(1);
                         }
                     });
@@ -337,8 +337,8 @@ internal class ControlBindings {
                     "Button 3",
                     "Activate button 3",
                     function ():void {
-                        if (kGAMECLASS.mainView.buttonIsVisible(2)) {
-                            kGAMECLASS.mainView.toolTipView.hide();
+                        if (CoC.instance.mainView.buttonIsVisible(2)) {
+                            CoC.instance.mainView.toolTipView.hide();
                             executeButtonClick(2);
                         }
                     });
@@ -347,8 +347,8 @@ internal class ControlBindings {
                     "Button 4",
                     "Activate button 4",
                     function ():void {
-                        if (kGAMECLASS.mainView.buttonIsVisible(3)) {
-                            kGAMECLASS.mainView.toolTipView.hide();
+                        if (CoC.instance.mainView.buttonIsVisible(3)) {
+                            CoC.instance.mainView.toolTipView.hide();
                             executeButtonClick(3);
                         }
                     });
@@ -357,8 +357,8 @@ internal class ControlBindings {
                     "Button 5",
                     "Activate button 5",
                     function ():void {
-                        if (kGAMECLASS.mainView.buttonIsVisible(4)) {
-                            kGAMECLASS.mainView.toolTipView.hide();
+                        if (CoC.instance.mainView.buttonIsVisible(4)) {
+                            CoC.instance.mainView.toolTipView.hide();
                             executeButtonClick(4);
                         }
                     });
@@ -367,8 +367,8 @@ internal class ControlBindings {
                     "Button 6",
                     "Activate button 6",
                     function ():void {
-                        if (kGAMECLASS.mainView.buttonIsVisible(5)) {
-                            kGAMECLASS.mainView.toolTipView.hide();
+                        if (CoC.instance.mainView.buttonIsVisible(5)) {
+                            CoC.instance.mainView.toolTipView.hide();
                             executeButtonClick(5);
                         }
                     });
@@ -377,8 +377,8 @@ internal class ControlBindings {
                     "Button 7",
                     "Activate button 7",
                     function ():void {
-                        if (kGAMECLASS.mainView.buttonIsVisible(6)) {
-                            kGAMECLASS.mainView.toolTipView.hide();
+                        if (CoC.instance.mainView.buttonIsVisible(6)) {
+                            CoC.instance.mainView.toolTipView.hide();
                             executeButtonClick(6);
                         }
                     });
@@ -387,8 +387,8 @@ internal class ControlBindings {
                     "Button 8",
                     "Activate button 8",
                     function ():void {
-                        if (kGAMECLASS.mainView.buttonIsVisible(7)) {
-                            kGAMECLASS.mainView.toolTipView.hide();
+                        if (CoC.instance.mainView.buttonIsVisible(7)) {
+                            CoC.instance.mainView.toolTipView.hide();
                             executeButtonClick(7);
                         }
                     });
@@ -397,8 +397,8 @@ internal class ControlBindings {
                     "Button 9",
                     "Activate button 9",
                     function ():void {
-                        if (kGAMECLASS.mainView.buttonIsVisible(8)) {
-                            kGAMECLASS.mainView.toolTipView.hide();
+                        if (CoC.instance.mainView.buttonIsVisible(8)) {
+                            CoC.instance.mainView.toolTipView.hide();
                             executeButtonClick(8);
                         }
                     });
@@ -407,8 +407,8 @@ internal class ControlBindings {
                     "Button 10",
                     "Activate button 10",
                     function ():void {
-                        if (kGAMECLASS.mainView.buttonIsVisible(9)) {
-                            kGAMECLASS.mainView.toolTipView.hide();
+                        if (CoC.instance.mainView.buttonIsVisible(9)) {
+                            CoC.instance.mainView.toolTipView.hide();
                             executeButtonClick(9);
                         }
                     });
@@ -419,7 +419,7 @@ internal class ControlBindings {
                     "Activate button 11",
                     function ():void {
                         if (EngineCore.buttonIsVisible(10)) {
-                            kGAMECLASS.mainView.toolTipView.hide();
+                            CoC.instance.mainView.toolTipView.hide();
                             executeButtonClick(10);
                         }
                     });
@@ -428,7 +428,7 @@ internal class ControlBindings {
                     "Activate button 12",
                     function ():void {
                         if (EngineCore.buttonIsVisible(11)) {
-                            kGAMECLASS.mainView.toolTipView.hide();
+                            CoC.instance.mainView.toolTipView.hide();
                             executeButtonClick(11);
                         }
                     });
@@ -437,7 +437,7 @@ internal class ControlBindings {
                     "Activate button 13",
                     function ():void {
                         if (EngineCore.buttonIsVisible(12)) {
-                            kGAMECLASS.mainView.toolTipView.hide();
+                            CoC.instance.mainView.toolTipView.hide();
                             executeButtonClick(12);
                         }
                     });
@@ -446,7 +446,7 @@ internal class ControlBindings {
                     "Activate button 14",
                     function ():void {
                         if (EngineCore.buttonIsVisible(13)) {
-                            kGAMECLASS.mainView.toolTipView.hide();
+                            CoC.instance.mainView.toolTipView.hide();
                             executeButtonClick(13);
                         }
                     });
@@ -455,7 +455,7 @@ internal class ControlBindings {
                     "Activate button 15",
                     function ():void {
                         if (EngineCore.buttonIsVisible(14)) {
-                            kGAMECLASS.mainView.toolTipView.hide();
+                            CoC.instance.mainView.toolTipView.hide();
                             executeButtonClick(14);
                         }
                     });
@@ -463,46 +463,46 @@ internal class ControlBindings {
                     "History",
                     "Show text history",
                     function ():void {
-                        trace(kGAMECLASS.mainViewManager.traceSelf());
-                        kGAMECLASS.outputHistory();
+                        trace(CoC.instance.mainViewManager.traceSelf());
+                        CoC.instance.outputHistory();
                     }
             );
             inputManager.AddBindableControl(
                     "Cheat! Give Hummus",
                     "Cheat code to get free hummus",
                     function (keyCode:int):void {
-                        if (kGAMECLASS.flags[kFLAGS.CHEAT_ENTERING_COUNTER] == 0) {
+                        if (CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER] == 0) {
                             if (keyCode == 38) {
-                                kGAMECLASS.flags[kFLAGS.CHEAT_ENTERING_COUNTER]++;
+                                CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER]++;
                             }
                             else {
-                                kGAMECLASS.flags[kFLAGS.CHEAT_ENTERING_COUNTER] = 0;
+                                CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER] = 0;
                             }
                         }
-                        else if (kGAMECLASS.flags[kFLAGS.CHEAT_ENTERING_COUNTER] == 1) {
+                        else if (CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER] == 1) {
                             if (keyCode == 40) {
-                                kGAMECLASS.flags[kFLAGS.CHEAT_ENTERING_COUNTER]++;
+                                CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER]++;
                             }
                             else {
-                                kGAMECLASS.flags[kFLAGS.CHEAT_ENTERING_COUNTER] = 0;
+                                CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER] = 0;
                             }
                         }
-                        else if (kGAMECLASS.flags[kFLAGS.CHEAT_ENTERING_COUNTER] == 2) {
+                        else if (CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER] == 2) {
                             if (keyCode == 37) {
-                                kGAMECLASS.flags[kFLAGS.CHEAT_ENTERING_COUNTER]++;
+                                CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER]++;
                             }
                             else {
-                                kGAMECLASS.flags[kFLAGS.CHEAT_ENTERING_COUNTER] = 0;
+                                CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER] = 0;
                             }
                         }
-                        else if (kGAMECLASS.flags[kFLAGS.CHEAT_ENTERING_COUNTER] == 3) {
+                        else if (CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER] == 3) {
                             if (keyCode == 39) {
-                                if (kGAMECLASS.player.str > 0 && kGAMECLASS.mainView.getButtonText(0).indexOf("Game Over") == -1) {
+                                if (CoC.instance.player.str > 0 && CoC.instance.mainView.getButtonText(0).indexOf("Game Over") == -1) {
                                     SceneLib.inventory.giveHumanizer();
                                 }
                             }
                             else {
-                                kGAMECLASS.flags[kFLAGS.CHEAT_ENTERING_COUNTER] = 0;
+                                CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER] = 0;
                             }
                         }
                     },
@@ -512,46 +512,46 @@ internal class ControlBindings {
                     "Cheat! Access debug menu",
                     "Cheat code to access debug menu and spawn ANY items or change stats.",
                     function (keyCode:int):void {
-                        if (kGAMECLASS.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 0) {
+                        if (CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 0) {
                             if (keyCode == 68) {
-                                kGAMECLASS.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2]++;
+                                CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2]++;
                             }
                             else {
-                                kGAMECLASS.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] = 0;
+                                CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] = 0;
                             }
                         }
-                        else if (kGAMECLASS.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 1) {
+                        else if (CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 1) {
                             if (keyCode == 69) {
-                                kGAMECLASS.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2]++;
+                                CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2]++;
                             }
                             else {
-                                kGAMECLASS.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] = 0;
+                                CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] = 0;
                             }
                         }
-                        else if (kGAMECLASS.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 2) {
+                        else if (CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 2) {
                             if (keyCode == 66) {
-                                kGAMECLASS.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2]++;
+                                CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2]++;
                             }
                             else {
-                                kGAMECLASS.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] = 0;
+                                CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] = 0;
                             }
                         }
-                        else if (kGAMECLASS.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 3) {
+                        else if (CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 3) {
                             if (keyCode == 85) {
-                                kGAMECLASS.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2]++;
+                                CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2]++;
                             }
                             else {
-                                kGAMECLASS.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] = 0;
+                                CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] = 0;
                             }
                         }
-                        else if (kGAMECLASS.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 4) {
+                        else if (CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 4) {
                             if (keyCode == 71) {
-                                if (kGAMECLASS.player && kGAMECLASS.player.str > 0 && kGAMECLASS.mainView.getButtonText(0).indexOf("Game Over") == -1 && (kGAMECLASS.debug && kGAMECLASS.flags[kFLAGS.HARDCORE_MODE] <= 0 || CoC_Settings.debugBuild)) {
+                                if (CoC.instance.player && CoC.instance.player.str > 0 && CoC.instance.mainView.getButtonText(0).indexOf("Game Over") == -1 && (CoC.instance.debug && CoC.instance.flags[kFLAGS.HARDCORE_MODE] <= 0 || CoC_Settings.debugBuild)) {
                                     SceneLib.debugMenu.accessDebugMenu();
                                 }
                             }
                             else {
-                                kGAMECLASS.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] = 0;
+                                CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] = 0;
                             }
                         }
                     },

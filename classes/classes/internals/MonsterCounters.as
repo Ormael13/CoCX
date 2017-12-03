@@ -3,7 +3,7 @@
  */
 package classes.internals {
 import classes.GlobalFlags.kCOUNTERS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 
 public class MonsterCounters extends kCOUNTERS{
 	public function get encountered():int { return storage[index][_MONSTER_ENCOUNTERED]||0}
@@ -67,7 +67,7 @@ public class MonsterCounters extends kCOUNTERS{
 		if (group != null) group.modValue(subindex,delta);
 	}
 	private function get storage():CountersStorage {
-		return kGAMECLASS.counters._storage;
+		return CoC.instance.counters._storage;
 	}
 	public function get group():MonsterCounters {
 		if (_group_index<0) return null;

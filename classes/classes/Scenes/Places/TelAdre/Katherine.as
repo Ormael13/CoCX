@@ -121,7 +121,6 @@ public class Katherine extends TelAdreAbstractContent implements TimeAwareInterf
 					case 16:	if (milkOption(KBIT_MILK_SHARE_WITH_FRIENDS | KBIT_MILK_SHARE_WITH_OLD_GANG | KBIT_MILK_SHARE_WITH_HELENA) && model.time.days % 3 == 0) breasts.milked();
 								break;
 					case 17:	if (milkOption(KBIT_MILK_SHARE_WITH_FRIENDS | KBIT_MILK_SHARE_WITH_VALA) && model.time.days % 5 == 2) breasts.milked();
-					default:
 				}
 			}
 			breasts.advanceTime();
@@ -2818,7 +2817,6 @@ private function giveKatTheGiftOFMilk():void {
 			case BreastStore.LACTATION_STRONG:		if (breasts.preventLactationIncrease == BreastStore.LACTATION_STRONG) breasts.preventLactationIncrease = 0;
 													break;
 			case BreastStore.LACTATION_HEAVY:		if (breasts.preventLactationIncrease == BreastStore.LACTATION_HEAVY) breasts.preventLactationIncrease = 0;
-			default:
 		}
 		breasts.lactationLevel++;
 		player.consumeItem(consumables.LACTAID);

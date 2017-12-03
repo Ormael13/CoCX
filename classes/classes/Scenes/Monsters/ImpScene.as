@@ -5,12 +5,12 @@ package classes.Scenes.Monsters
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
+import classes.CoC;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Scenes.Camp.ImpGang;
 import classes.Scenes.UniqueSexScenes;
 
-use namespace kGAMECLASS;
+use namespace CoC;
 
 	public class ImpScene extends BaseContent
 	{
@@ -1280,7 +1280,7 @@ use namespace kGAMECLASS;
 					}
 				}
 			}
-            if (kGAMECLASS.inCombat) cleanupAfterCombat();
+            if (CoC.instance.inCombat) cleanupAfterCombat();
             else doNext(playerMenu);
 		}
 		

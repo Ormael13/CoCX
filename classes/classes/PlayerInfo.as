@@ -29,7 +29,7 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Resistance (Physical Damage):</b> " + (100 - Math.round(player.damagePercent(true))) + "-" + (100 - Math.round(player.damagePercent(true) - player.damageToughnessModifier(true))) + "% (Higher is better.)\n";
 
 		combatStats += "<b>Resistance (Magic Damage):</b> " + (100 - Math.round(player.damageMagicalPercent(true))) + "-" + (100 - Math.round(player.damageMagicalPercent(true) - player.damageIntelligenceModifier(true) - player.damageWisdomModifier(true))) + "% (Higher is better.)\n";
-		combatStats += "<b>Resistance (Lust):</b> " + (100 - Math.round(kGAMECLASS.player.lustPercent())) + "% (Higher is better.)\n";
+		combatStats += "<b>Resistance (Lust):</b> " + (100 - Math.round(CoC.instance.player.lustPercent())) + "% (Higher is better.)\n";
 
 		combatStats += "<b>Spell Effect Multiplier:</b> " + Math.round(100 * combat.spellMod()) + "%\n";
 		combatStats += "<b>Spell Cost:</b> " + combat.spellCost(100) + "%\n";
@@ -687,7 +687,7 @@ if (SceneLib.valeria.valeriaFluidsEnabled()) {
 		hideMenus();
 		mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
 		//Level up
-        if (player.XP >= player.requiredXP() && player.level < kGAMECLASS.levelCap) {
+        if (player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap) {
             player.XP -= player.requiredXP();
 			player.level++;
 			player.perkPoints++;
@@ -935,7 +935,7 @@ if (SceneLib.valeria.valeriaFluidsEnabled()) {
 			doNext(playerMenu);
 			return;
 		}
-        if (kGAMECLASS.testingBlockExiting) {
+        if (CoC.instance.testingBlockExiting) {
             menu();
 			addButton(0, "Next", perkSelect, perks[rand(perks.length)]);
 		} else {
@@ -946,7 +946,7 @@ if (SceneLib.valeria.valeriaFluidsEnabled()) {
 						perk.defaultValue1, perk.defaultValue2, perk.defaultValue3, perk.defaultValue4);
 				perkList.push({label: p.perkName, perk: p});
 			}
-            kGAMECLASS.showComboBox(perkList, "Choose a perk", perkCbChangeHandler);
+            CoC.instance.showComboBox(perkList, "Choose a perk", perkCbChangeHandler);
             if (player.perkPoints>1) outputText("You have "+numberOfThings(player.perkPoints,"perk point","perk points")+".");
 			mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
 			menu();
@@ -970,8 +970,8 @@ if (SceneLib.valeria.valeriaFluidsEnabled()) {
 		var selected:PerkClass = selectedItem.perk;
 		outputText("You have selected the following perk:\n");
 		outputText("<b>" + selected.perkName + ":</b> " + selected.perkLongDesc);
-        kGAMECLASS.placeComboBoxAfterText();
-        var unlocks:Array = kGAMECLASS.perkTree.listUnlocks(selected.ptype);
+        CoC.instance.placeComboBoxAfterText();
+        var unlocks:Array = CoC.instance.perkTree.listUnlocks(selected.ptype);
         if (unlocks.length > 0) {
 			outputText("<b>Unlocks:</b> <ul>");
 			for each (var pt:PerkType in unlocks) outputText("<li>" + pt.name + " (" + pt.longDesc + ")</li>");

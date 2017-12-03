@@ -29,7 +29,7 @@ public class Ingnam extends BaseContent
 			{
 				trace("Autosaving to slot: " + player.slotName);
 
-kGAMECLASS.saves.saveGame(player.slotName);
+CoC.instance.saves.saveGame(player.slotName);
             }
 			//Banished to Mareth.
 			if (model.time.days >= 0 && flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] <= 0) {
@@ -47,7 +47,7 @@ kGAMECLASS.saves.saveGame(player.slotName);
 			mainView.showMenuButton( MainView.MENU_PERKS );
 			mainView.showMenuButton( MainView.MENU_APPEARANCE );
 			showStats();
-			mainView.setMenuButton( MainView.MENU_NEW_MAIN, "Main Menu", kGAMECLASS.mainMenu.mainMenu );
+			mainView.setMenuButton( MainView.MENU_NEW_MAIN, "Main Menu", CoC.instance.mainMenu.mainMenu );
 			mainView.newGameButton.toolTipText = "Return to main menu.";
 			mainView.newGameButton.toolTipHeader = "Main Menu";
 			if (camp.setLevelButton(true)) return;
@@ -114,7 +114,7 @@ kGAMECLASS.saves.saveGame(player.slotName);
 			}
 			flags[kFLAGS.IN_INGNAM] = 0;
 			flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] = 1;
-			doNext(kGAMECLASS.charCreation.arrival);
+			doNext(CoC.instance.charCreation.arrival);
 		}
 		
 		public function returnToMareth():void {

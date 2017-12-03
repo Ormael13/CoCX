@@ -84,7 +84,6 @@ public class BreastStore extends Utils implements SaveAwareInterface
 					return descript + "boobs";
 				case 9:
 					if (size > 6) return descript + "tits";
-				default:
 			}
 			return descript + "breasts";
 		}
