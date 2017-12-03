@@ -31,9 +31,6 @@ public class PlayerAppearance extends BaseContent {
 		outputText("<font size=\"36\" face=\"Georgia\"><u>Appearance</u></font>\n");
 		if (kGAMECLASS.gameSettings.charviewEnabled) {
 			mainViewManager.showPlayerDoll(debug);
-			var content:CharView  = mainView.charView;
-			BoundClip.nextContent = content;
-			outputText("<img src='coc.view::BoundClip' align='left' id='charview'/>");
 		}
 		describeRace();
 		describeGear();

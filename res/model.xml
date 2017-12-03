@@ -532,7 +532,7 @@
             <case values="Ears.DOG,Ears.WOLF">
                 <show part="ears/wolf"/>
             </case>
-            <case values="Ears.ELFIN,Ears.ELVEN">
+            <case values="Ears.ELFIN,Ears.ELVEN,Ears.ONI,Ears.VAMPIRE">
                 <show part="ears/elfin"/>
                 <show part="ears_bg/elfin"/>
             </case>
@@ -543,7 +543,7 @@
             <case values="Ears.BUNNY"><!--TODO BUNNY-->
                 <show part="ears/wolf"/>
             </case>
-            <case value="Ears.FOX">
+            <case values="Ears.FOX,Ears.BAT">
                 <show part="ears/foxL"/>
                 <show part="ears/foxR"/>
                 <show part="ears_bg/foxL"/>
@@ -569,7 +569,7 @@
             <case values="Ears.GOAT">
                 <show part="ears/goat"/>
             </case>
-            <default> <!-- TODO ONI, WEASEL, BAT, VAMPIRE -->
+            <default> <!-- TODO WEASEL -->
                 <show part="ears_bg/human"/>
             </default>
         </switch>
@@ -590,8 +590,8 @@
             <case value="Eyes.MANTICORE">
                 <show part="eyes/manticore"/>
             </case>
-            <case values="Eyes.GORGON,Eyes.FENRIR,Eyes.FOX,Eyes.REPTILIAN,Eyes.SNAKE,Eyes.DRAGON">
-                <show part="eyes/cat"/><!--TODO-->
+            <case values="Eyes.GORGON,Eyes.FENRIR,Eyes.FOX,Eyes.REPTILIAN,Eyes.SNAKE,Eyes.DRAGON,Eyes.ONI,Eyes.ELF,Eyes.RAIJU,Eyes.VAMPIRE">
+                <show part="eyes/cat"/>
             </case>
             <case value="Eyes.MANTICORE">
                 <show part="eyes/manticore"/>
@@ -599,7 +599,7 @@
             <case value="Eyes.DEVIL">
                 <show part="eyes/devil"/>
             </case>
-            <default><!-- TODO ONI,ELF,RAIJU,VAMPIRE -->
+            <default>
                 <show part="eyes/human"/>
             </default>
         </switch>
@@ -614,7 +614,7 @@
                     <show part="hair/gorgon"/>
                     <show part="hair_bg/gorgon"/>
                 </case>
-                <default> <!-- covers Hair.NORMAL, Hair.GHOST, Hair.GOO, Hair.ANEMONE, Hair.QUILL, Hair.LEAF, Hair.FLUFFY, Hair.GRASS, Hair.SILKEN, Hair.STORM --> <!-- TODO -->
+                <default> <!-- covers Hair.NORMAL, Hair.GHOST, Hair.GOO, Hair.ANEMONE, Hair.QUILL, Hair.LEAF, Hair.FLUFFY, Hair.GRASS, Hair.SILKEN, Hair.STORM --> <!-- TODO  -->
                     <switch>
                         <case test="hairLength lt 6">
                             <show part="hair/0"/>
@@ -744,7 +744,7 @@
             <case value="Face.FERRET_MASK"><!--TODO -->
                 <show part="face/human"/>
             </case>
-            <case values="Face.MANTICORE,Face.SALAMANDER_FANGS,Face.YETI_FANGS,Face.PLANT_DRAGON,Face.DRAGON_FANGS,Face.DEVIL_FANGS"><!--TODO -->
+            <case values="Face.MANTICORE,Face.SALAMANDER_FANGS,Face.DEVIL_FANGS,Face.ONI_TEETH,Face.RAIJU_FANGS,Face.VAMPIRE">
                 <show part="face/human_fang"/>
             </case>
             <case value="Face.ORCA">
@@ -753,7 +753,7 @@
             <case value="'never'"><!--TODO-->
                 <show part="face/insect"/>
             </case>
-            <default><!-- TODO ONI_TEETH, RAIJU_FANGS, VAMPIRE-->
+            <default><!-- TODO Face.YETI_FANGS,Face.PLANT_DRAGON,Face.DRAGON_FANGS -->
                 <show part="face/human"/>
             </default>
         </switch>
@@ -796,7 +796,7 @@
         </if>
 
         <switch value="armType">
-            <case values="Arms.HUMAN,Arms.KITSUNE">
+            <case values="Arms.HUMAN,Arms.KITSUNE,Arms.ONI,Arms.ELF,Arms.RAIJU">
                 <!--see switch[value=skin.coverage]-->
             </case>
             <case values="Arms.HARPY,Arms.PHOENIX">
@@ -889,7 +889,7 @@
                 <show part="arms/kraken"/>
                 <show part="arms_bg/kraken"/>
             </case>
-            <default> <!-- TODO ONI, ELF, RAIJU -->
+            <default>
                 <!--see switch[value=skinType]-->
             </default>
         </switch>
