@@ -2,7 +2,9 @@ package classes.Scenes.NPCs
 {
 import classes.Scenes.Camp;
 
-	public class SamirahScene extends XXCNPC
+import coc.view.ButtonDataList;
+
+public class SamirahScene extends XXCNPC
 	{
 		private static var _instance:SamirahScene;
         private var _status:int = 0;
@@ -29,12 +31,11 @@ import classes.Scenes.Camp;
 			return _instance;
 		}
 
-        override public function campDescription(menuType:int = -1, descOnly:Boolean = false):Boolean {
+        override public function campDescription(buttons:ButtonDataList, menuType:int = -1):void {
             if (_status == -1) {
                 display("strings/campDescription");
-                return descOnly;
             }
-            return false;
+            buttons.add("???").disable("We have been entangled since the beginning.");
         }
 
         override public function campInteraction():void {
@@ -44,9 +45,9 @@ import classes.Scenes.Camp;
             addButton(14, "Back", camp.campLoversMenu);
         }
 
-        public function sexScene(scene:String = "sexMenu"):void {
-            if (scene == "sexMenu") {
-                displaySimple("strings/sexMenu/menu");
+        public function sexScene(sceneName:String = "sexMenu"):void {
+            if (sceneName == "sexMenu") {
+                scene("strings/sexMenu/menu");
                 addButtonDisabled(0, "Fuck Her");
                 addButtonDisabled(1, "Fuck Her Wild");
                 addButtonDisabled(2, "Tongue Job");
@@ -66,12 +67,12 @@ import classes.Scenes.Camp;
                 addButton(14, "Back", campInteraction);
                 return;
             }
-            displaySimple("strings/sexMenu/" + scene);
+            scene("strings/sexMenu/" + sceneName);
         }
 
-        public function talkScene(scene:int = -1):void {
-            if (scene == -1) {
-                displaySimple("strings/talkMenu/menu");
+        public function talkScene(sceneName:int = -1):void {
+            if (sceneName == -1) {
+                scene("strings/talkMenu/menu");
                 addButton(0, "Her", talkScene, 0);
                 addButton(1, "Naga", talkScene, 1);
                 addButton(2, "Clothes", clothesMenu);
@@ -79,22 +80,22 @@ import classes.Scenes.Camp;
                 addButton(14, "Back", campInteraction);
                 return;
             }
-            if (scene === 0) {
-                displaySimple("strings/talkMenu/her");
-            } else if (scene === 1) {
-                displaySimple("strings/talkMenu/naga");
+            if (sceneName === 0) {
+                scene("strings/talkMenu/her");
+            } else if (sceneName === 1) {
+                scene("strings/talkMenu/naga");
             }
         }
 
         private function clothesMenu():void {
             if (!_clothesGiven) {
-                displaySimple("strings/talkMenu/clothes/intro");
+                scene("strings/talkMenu/clothes/intro");
                 if (player.isNaga() && player.isFemale()) {
 					selectColor();
                 }
                 return;
             }
-			displaySimple("strings/talkMenu/clothes/colorChoose");
+			scene("strings/talkMenu/clothes/colorChoose");
 			addButtonDisabled(0,"Yes","You probably should have the dress in your inventory.");
 			if (player.hasItem(armors.NAGASLK)){
 				addButton(0,"Yes",selectColor);
@@ -121,7 +122,7 @@ import classes.Scenes.Camp;
             function takeClothes(color:String):void {
                 armors.NAGASLK.setColor(color.toLowerCase());
 				if(_clothesGiven){
-					displaySimple("strings/talkMenu/clothes/colorChange");
+					scene("strings/talkMenu/clothes/colorChange");
 				}
 				else{
                     display("strings/talkMenu/clothes/clothesGet");
@@ -144,20 +145,20 @@ import classes.Scenes.Camp;
 
         private function hypnosisTraining():void {
             if (_hypnosisStage === 0) {
-                displaySimple("strings/talkMenu/hypnosis/intro");
+                scene("strings/talkMenu/hypnosis/intro");
                 if (player.isNaga()) _hypnosisStage++;
                 return;
             }
             if (_lastLearned == model.time.days) {
-                displaySimple("strings/talkMenu/hypnosis/calmDown");
+                scene("strings/talkMenu/hypnosis/calmDown");
                 return;
             }
             if (_hypnosisStage === 1 || _hypnosisStage === 2) {
-                displaySimple("strings/talkMenu/hyponsis/training");
+                scene("strings/talkMenu/hyponsis/training");
                 _hypnosisStage++;
                 _lastLearned = model.time.days;
             } else if (_hypnosisStage === 3) {
-                displaySimple("strings/talkMenu/hypnosis/trainingDone");
+                scene("strings/talkMenu/hypnosis/trainingDone");
                 _hypnosisStage = -1;
                 // TODO add hypnosis perk to player
             }

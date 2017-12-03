@@ -4,6 +4,8 @@ import classes.BaseContent;
 import classes.CoC;
 import classes.GlobalFlags.kGAMECLASS;
 
+import coc.view.ButtonDataList;
+
 import coc.xxc.BoundStory;
 
 /**
@@ -56,12 +58,6 @@ import coc.xxc.BoundStory;
 		{
 			story.display(toDisplay,locals);
 		}
-		protected function displaySimple(path:String):void{
-			clearOutput();
-			display(path);
-			menu();
-			doNext(camp.returnToCampUseOneHour);
-		}
 		public function save(saveto:*):void{
 
 		}
@@ -71,9 +67,8 @@ import coc.xxc.BoundStory;
 		public function campInteraction():void{
 
 		}
-		public function campDescription(menuType:int = -1, descOnly:Boolean = false ):Boolean
-		{
-			return false;
+		public function campDescription(buttons:ButtonDataList,menuType:int = -1):void {
+
 		}
 		public function checkCampEvent():Boolean{
 			return false;
@@ -96,7 +91,6 @@ import coc.xxc.BoundStory;
 		public function scene(ref:String,locals:*=null,next:Function=null):void{
 			clearOutput();
 			display(ref,locals);
-			menu();
 			doNext(next!=null?next:camp.returnToCampUseOneHour);
 		}
     }
