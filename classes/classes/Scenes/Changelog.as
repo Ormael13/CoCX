@@ -31,6 +31,8 @@ package classes.Scenes
 			outputText("-Incest sex scenes with her req. to have 30+ corruption. For pure PC's it's only posisble to access yuri scene.\n");
 			outputText("-Chi Chi final training added allowing to face her again. TIP: better save game before it as it would affect Chi Chi storyline.\n");
 			outputText("-Chi Chi can finaly visit PC camp...for longer. (for now have only app screen and shop working)\n");
+			outputText("-Reaching 100% affection with Ceani would unlock option to ask her for comming to camp. It req. PC having enough fish supply.\n");
+			outputText("-When in camp Ceani (tbc)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -40,10 +42,8 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New camp structure: Dam. No prereq. structure, 300 wood, 200 nails. PC building small wood dam on steam next to camp.\n");
+			outputText("-New camp structure: Fishery. Req. Dam, 300 wood, 200 nails. PC building fishery, at which some of the camp npc's can work (currently only Izma). When npc working at it it would generate 5 fishes per day. But when Ceani is in camp she will eat 5 fishes per day.\n");
 			outputText("-Camp NPC's that can spar with PC can now slowly over time lvl-up. It's need to first toggle it in Camp Actions menu by chaning those npc's 'mode' from relax to 'training'. At any time it can be switch back to 'relax' as otherwise NPC's will lvl-up till reaching current max lvl they can attain. Some may be worried about it but some of you will gladly welcome those super high lvl sparing partners. ");
 			outputText("Each lvl-up will rise their lvl by 6 (in normal case as some npc's wil have their own lvl-ing pace - vide Evangeline that for a longer time had slight different lvl-up pattern). To cause each NPC to go training PC need beat them in sparring enough times (at start it's only around 3-5 times). But after each lvl-up amount of won fight for their lvl-up's will incease by 1. Also time they training ");
 			outputText("will extend each time starting from around 6-8 hours. IN time NPC are busy training they will be unable to be itneracted so...yeah that mean for some time NPC will be ignoring PC and just training. Thta part aside fact of prevent NPC keep lvl-ing till limit was reason I put toggle on train/relax mode for them. As long NPC not reached req. defeats to trigger training start it won't gon into \n");
@@ -57,10 +57,14 @@ package classes.Scenes
 			outputText(" Mana cost reduction for perks Stronger Elemental Bond and Strongest Elemental Bond reduced to 20 and 40 from 30 and 90. Amount of mana used by attacking elementals increased by 25%.\n");
 			outputText("-Pearl gained by beating enemy in Hidden Cave will be giving Elemental Conjurer Mind and Body Dedication perk instead of Elemental Conjurer Mind and Body Resolve. For all PC's that used it already it will just replace perks and for those that still need to use this item will be granting new perk.\n");
 			outputText("-New event related perk: Elemental Conjurer Mind and Body Dedication. Req.: Using Five-colored Elemental Pearl, which can be found after beating 2nd boss of Hidden Cave dungeon. Effect: It'll neutralize negative effects on max Str/Tou/Spe due to picking Elemental Conjurer Dedication perk.\n");
+			outputText("-New tier 3 misc lvl-up perk: Speedy Recuperation. Req. Speedy Recovery perk. Effect: Regain fatigue +100% out of combat / +200% in combat faster\n");
+			outputText("-New tier 3 misc lvl-up perk: Recuperation Sleep. Req. Speedy Recovery perk. Effect: Gain +100% boost to health and fatigue recovery during sleep\n");
 			outputText("-New tier 4 wisdom lvl-up perk: First Attack: Elementals. Req. Strong Elemental Bond and Elemental Contract Rank 4 perks. Effect: Opens new possible options for elementals help - attacking alongside PC instead of replacing his/her melee attack. They will also attack first and PC would be able to pick which of current summoned elementals will attack\n");
 			outputText("-New tier 4 misc lvl-up perk: Master Golem Maker. Req. Expert Golem Maker perk, 100+ int and 100+ wis. Effect: allow to make pernament golems using golem core and stones (those stones that PC using for constructing structures). Allows to store 1 pernament golem. Lower chance of shattering core after using temporal golem by another 4%\n");
 			outputText("-New tier 4 misc lvl-up perk: First Attack: Golems. Req. Master Golem Maker perk. Effect: Allow to attack with pernament golem(s) before PC will take any actions him/herself\n");
 			outputText("-New tier 5 misc lvl-up perk: Golem Army Lieutenant. Req. Master Golem Maker perk, 110+ int and 110+ wis. Effect: allow to store 1 more pernament/temporal golem and increase by 10% of base value all golems atk power\n");
+			outputText("-New tier 5 misc lvl-up perk: Speedy Rejuvenation. Req. Speedy Recuperation perk. Effect: Regain fatigue +200% out of combat / +400% in combat faster\n");
+			outputText("-New tier 5 misc lvl-up perk: Rejuvenation Sleep. Req. Recuperation Sleep perk. Effect: Gain +200% boost to health and fatigue recovery during sleep\n");
 			outputText("-New tier 6 misc lvl-up perk: Grand-Master Golem Maker. Req. Master Golem Maker perk, 125+ int and 125+ wis. Effect: allow to make pernament golems capable to attack flying enemies too and increase pernament golems atk power by 10% of base value but each pernament golem attack will now use a little bit of mana. PC can store additional pernament golem\n");
 			outputText("-New tier 7 misc lvl-up perk: Golem Army Captain. Req. Grand-Master Golem Maker perk, Golem Army Lieutenant perk, 135+ int and 135+ wis. Effect: allow to store 2 more pernament/temporal golems and increase by 10% of base value all golems atk power\n");
 			outputText("-New tier 8 wisdom lvl-up perk: Elemental Contract Rank 9. Req. perk Elemental Contract Rank 8, perk Elemental Conjurer Sacrifice and 225+ wis. Effect: Increase limit of summoned elementals by 2 and unlock rank-up for elementals to 2nd elder rank\n");
@@ -84,7 +88,7 @@ package classes.Scenes
 			outputText("-New perk for monsters: True Demon-type enemy. It would amke them not have any soulforce (since true demons not have soul to gather soulforce so why they need to have it, right? xD).\n");
 			outputText("-Manticore bonuses increased (req. 6/12 pts now) to : +50/100 max spe, +25/50 max int, +30/60 max lib, +15/30 min sens, +0/50 max HP. ALso having cat tongue and not having cock will count as point to manticore score.\n");
 			outputText("-New type of resistance added: Magic Resistance. Some of enemy attacks that use non physical attacks/specials will req. this resistance to reduce recived damage. Rising intelligence and wisdom will let PC rise it to 25%. Other ways to increase it higher would be having specific status effects or perks.\n");
-			outputText("-Perk Naked Truth will now provide magical resistance like physical one it have now -10% dmg (to both physical and magical).\n");
+			outputText("-Perk Naked Truth will now provide magical resistance like physical one it have now -10% dmg (to both physical and magical). Perk Speedy Recovery will no longer require perk Evade and 60+ speed becoming re-classified as misc perk form formely speed perk (it also now boost fatigue recovery rate during wait/rest/sleep by 100%).\n");
 			outputText("-New way to count physical/magical resistance with cap that would rise each new game tier. Now each 10 pts in tou/int/wis would add 1% ot phys (tou) or mag (int/wis) resistance with each stopping when phys or magical resistance reach 25% (+5% for each ascension).\n");
 			outputText("-New Physical Special: Tornado Strike. Req. to be Vouivre and flying at the moment. It will deal damage and stun enemies that aren't resistant to stun for 3 turns. Cooldown for again use is 8 turns.\n");
 			outputText("-Cat race bonuses adjusted for Half Cat-morph/Cat-morph (4+/8+ points in cat score): +40/60 to max spe, +25/60 to max Lib\n");
@@ -118,11 +122,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-When PC reach lvl 24 and higher base value of HP and Fatigue recovery during Rest, Sleep (or Wait for Fatigue) will be increased by 50%. When PC would reach lvl 42 and higher +50% bonus to base value will change into +100% bonus.\n");
 			outputText("-Replaced texts for Jewel Shop with those written by Starglider (aka much better than sort of placeholder-ish texts that was there before).\n");
 			outputText("-Oxdeception cleaning-up of code for Tel'Adre and He'Xin'Dao (nothing that typical player will notce but generaly code is slight less messy due to hard Ox work ^^).\n");
 			outputText("-Changes in code on how monsters stats grown after each PC anscesion. Also each monster now have wisdom stat value added.\n");

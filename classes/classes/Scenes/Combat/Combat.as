@@ -3441,7 +3441,9 @@ public function fatigueImpl(mod:Number,type:Number  = USEFATG_NORMAL):void {
 		var multi:Number = 1;
 		if (player.findPerk(PerkLib.HistorySlacker) >= 0 || player.findPerk(PerkLib.PastLifeSlacker) >= 0) multi += 0.2;
 		if (player.findPerk(PerkLib.ControlledBreath) >= 0 && player.cor < (30 + player.corruptionTolerance())) multi += 0.2;
-		if (player.findPerk(PerkLib.SpeedyRecovery) >= 0) multi += 0.5;
+		if (player.findPerk(PerkLib.SpeedyRecovery) >= 0) multi += 1;
+		if (player.findPerk(PerkLib.SpeedyRecuperation) >= 0) multi += 2;
+		if (player.findPerk(PerkLib.SpeedyRejuvenation) >= 0) multi += 4;
 		if (player.findPerk(PerkLib.NaturesSpringI) >= 0) multi += 0.05;
 		if (player.findPerk(PerkLib.NaturesSpringII) >= 0) multi += 0.05;
 		if (player.findPerk(PerkLib.NaturesSpringIII) >= 0) multi += 0.05;

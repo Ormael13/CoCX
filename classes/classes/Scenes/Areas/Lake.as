@@ -273,7 +273,7 @@ use namespace CoC;
 				SceneLib.exploration.genericGolGobImpEncounters();
 			}
 			else {
-				outputText("OH SHIT! LAKE EXPLORE BE BROKED.  SELECT: " + select + ".  You should probably go to fenoxo.com and click the link to report a bug and tell Fen (or Kitteh6660 since he makes the mod) about it.");
+				outputText("OH SHIT! LAKE EXPLORE BE BROKED.  SELECT: " + select + ".  You should probably go to fenoxo.com and click the mod threat link to report a bug and tell Ormael/Aimozg/Oxdeception (since they making the mod) about it or come to CoC Mods discord and tell them.");
 			}
 		}
 		

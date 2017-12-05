@@ -1550,7 +1550,7 @@ private function campActions():void {
 	else addButtonDisabled(6, "Winions", "You need to be able to make some minions that fight for you to use this option like elementals or golems...");
 	if (player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(7, "Heal", spellHealcamp).hint("Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  \n\nMana Cost: 30");
 	//addButton(8, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
-	if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 4) addButton(8, "Fishery", VisitFishery).hint("Visit Fishery.");
+	if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) addButton(8, "Fishery", VisitFishery).hint("Visit Fishery.");
 	addButton(9, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
 	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2) addButton(10, "Ward", MagicWardMenu).hint("Activate or Deactivate Magic Ward around camp.");
 	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) addButton(11, "Kitsune Shrine", campScenes.KitsuneShrine).hint("Meditate at camp Kitsune Shrine.");
@@ -1957,7 +1957,7 @@ private function watchStars():void {
 			outputText("\n\nAh, the familiar Big Dipper. Wait a minute... you remember that constellation back in Ingnam. You swear the star arrangements are nearly the same.");
 			break;
 		default:
-			outputText("\n\nSomehow, one of them spells out \"ERROR\". Maybe you should let Kitteh6660 know?");
+			outputText("\n\nSomehow, one of them spells out \"ERROR\". Maybe you should let Ormael/Aimozg/Oxdeception know?");
 	}
 	outputText("\n\nYou let your mind wander and relax.");
 	dynStats("lus", -15, "scale", false);
@@ -1974,12 +1974,21 @@ public function rest():void {
 	var multiplier:Number = 1.0;
 	var fatRecovery:Number = 4;
 	var hpRecovery:Number = 10;
-	
+	if (player.level >= 24) {
+		fatRecovery += 2;
+		hpRecovery += 5;
+	}
+	if (player.level >= 42) {
+		fatRecovery += 2;
+		hpRecovery += 5;
+	}
 	if (player.findPerk(PerkLib.Medicine) >= 0) hpRecovery *= 1.5;
-	
-	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) fatRecovery *= 2;
+	if (player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatRecovery += 2;
+	if (player.findPerk(PerkLib.SpeedyRecuperation) >= 0) fatRecovery += 4;
+	if (player.findPerk(PerkLib.SpeedyRejuvenation) >= 0) fatRecovery += 8;
+	if (player.findPerk(PerkLib.ControlledBreath) >= 0) fatRecovery *= 1.1;
 	if (player.hasStatusEffect(StatusEffects.BathedInHotSpring)) fatRecovery *= 1.2;
-	
+	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) fatRecovery *= 2;
 	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && !prison.inPrison && !ingnam.inIngnam)
 		multiplier += 0.5;
 	//Marble withdrawal
@@ -1988,7 +1997,6 @@ public function rest():void {
 	//Hungry
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 25)
 		multiplier /= 2;
-	
 	if (timeQ == 0) {
 		var hpBefore:int = player.HP;
 		if (flags[kFLAGS.SHIFT_KEY_DOWN] > 0) { //Rest until fully healed, midnight or hunger wake.
@@ -2064,8 +2072,13 @@ public function doWait():void {
 	clearOutput();
 	//Fatigue recovery
 	var fatRecovery:Number = 2;
-	if (player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatRecovery *= 1.5;
+	if (player.level >= 24) fatRecovery += 1;
+	if (player.level >= 42) fatRecovery += 1;
+	if (player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatRecovery += 1;
+	if (player.findPerk(PerkLib.SpeedyRecuperation) >= 0) fatRecovery += 2;
+	if (player.findPerk(PerkLib.SpeedyRejuvenation) >= 0) fatRecovery += 4;
 	if (player.findPerk(PerkLib.ControlledBreath) >= 0) fatRecovery *= 1.1;
+	if (player.hasStatusEffect(StatusEffects.BathedInHotSpring)) fatRecovery *= 1.2;
 	if (timeQ == 0) {
 		timeQ = 4;
 		if (flags[kFLAGS.SHIFT_KEY_DOWN] > 0) timeQ = 21 - model.time.hours;
@@ -2271,12 +2284,26 @@ public function sleepRecovery(display:Boolean = false):void {
 	var multiplier:Number = 1.0;
 	var fatRecovery:Number = 20;
 	var hpRecovery:Number = 20;
+	if (player.level >= 24) {
+		fatRecovery += 10;
+		hpRecovery += 10;
+	}
+	if (player.level >= 42) {
+		fatRecovery += 10;
+		hpRecovery += 10;
+	}
 	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "" || flags[kFLAGS.SLEEP_WITH] == "Marble"))
 	{
 		multiplier += 0.5;
 	}
-	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) fatRecovery *= 2;
+	if (player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatRecovery += 5;
+	if (player.findPerk(PerkLib.SpeedyRecuperation) >= 0) fatRecovery += 10;
+	if (player.findPerk(PerkLib.SpeedyRejuvenation) >= 0) fatRecovery += 20;
+	if (player.findPerk(PerkLib.ControlledBreath) >= 0) fatRecovery *= 1.1;
 	if (player.hasStatusEffect(StatusEffects.BathedInHotSpring)) fatRecovery *= 1.2;
+	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) fatRecovery *= 2;
+	if (player.findPerk(PerkLib.RecuperationSleep) >= 0) multiplier += 1;
+	if (player.findPerk(PerkLib.RejuvenationSleep) >= 0) multiplier += 2;
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0)
 	{
 		if (player.hunger < 25)
@@ -3485,7 +3512,7 @@ private function updateSaveFlags():void {
 		}
 	}
 	//flags[kFLAGS.SHIFT_KEY_DOWN] = 0; //Moved to unFuckSave().
-	outputText("Don't worry. Just save the game and you're good to go. I, Kitteh6660, will work out the bugs from time to time, while also bringing in cool new stuff!");
+	outputText("Don't worry. Just save the game and you're good to go. We, Ormael/Aimozg/Oxdeception, will work out the bugs from time to time, while also bringing in cool new stuff!");
 	doNext(doCamp);
 }
 

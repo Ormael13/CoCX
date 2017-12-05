@@ -357,7 +357,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 					}
 					break;
 				default:
-					outputText("<b>Please report this error to Kitteh6660.</b>\n\n");
+					outputText("<b>Please report this error to Ormael/Aimozg/Oxdeception.</b>\n\n");
 			}
 			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] == 0) outputText("That's one glade eliminated! With effort and dedication, you will be able to cleanse the forest of foul glades.");
 			else outputText("Once again, the forest is cleansed of a tainted glade.");

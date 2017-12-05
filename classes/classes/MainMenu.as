@@ -74,7 +74,7 @@ public class MainMenu extends BaseContent {
         addButton(1, "Settings", CoC.instance.gameSettings.settingsScreenMain).hint("Configure game settings and enable cheats.");
         addButton(2, "Instructions", howToPlay).hint("How to play.  Starting tips.  And hotkeys for easy left-handed play...");
 		addButton(3, "Achievements", achievements.achievementsScreen).hint("View all achievements you have unlocked so far.");
-		//addButton(4, "Mod Thread", openURL, "http://fenoxo.com/forum/index.php?/topic/5-coc-revamp-mod", null, null, "Check the official mod thread on Fenoxo's forum.");
+		addButton(4, "Mod Thread", openURL, "https://forum.fenoxo.com/threads/coc-xianxia-mod-0-8g2-for-coc-1-0-2.2346", null, null, "Check the official mod thread on Fenoxo's forum.");
 
 		addButton(5, "Credits", creditsScreen).hint("See a list of all the cool people who have contributed to content for this game!");
 		addButton(6, "Image Credits", imageCreditsScreen).hint("Check out who contributed to the image pack.");
@@ -147,6 +147,8 @@ public class MainMenu extends BaseContent {
 		outputText("</ul>");
 		outputText("<b>Game Mod Angels:</b>\n");
 		outputText("<ul>");
+		outputText("<li> Aimong</li>\n");
+		outputText("<li> Oxdeception</li>\n");
 		outputText("<li> Liadri</li>");
 		outputText("<li> Zavos/Zevos</li>");
 		outputText("<li> Xana</li>\n");
@@ -272,7 +274,7 @@ public class MainMenu extends BaseContent {
 		outputText("<li> Gats, Shamblesworth, Symphonie, and Fenoxo (Corrupted Drider)</li>");
 		outputText("<li> Bagpuss (Female Thanksgiving Event, Harpy Scissoring, Drider Bondage Fuck)</li>");
 		outputText("<li> Frogapus (The Wild Hunt)</li>");
-		outputText("<li> Liadri (Etna, Manticore Venom (TF item), Black Ink - female scylla TF item, female scylla exclusive masturbation scene, texts and name for Mantis TF - Blade Grass, Kindra (writing part and some of ideas for few secenes), Archery Overhaul (main designer for it), Yeti Cum (yeti TF), Ceani the Orca girl)</li>");
+		outputText("<li> Liadri (Etna, Manticore Venom (TF item), Black Ink - female scylla TF item, female scylla exclusive masturbation scene, texts and name for Mantis TF - Blade Grass, Kindra (writing part and some of ideas for few secenes), Archery Overhaul (main designer for it), various TF's: Yeti, Orca, Raiju, manticore; Ceani the Orca girl, Electra the Raiju, Chi Chi the fire mouse)</li>");
 		outputText("<li> Zevos (Spider-silk shirt, Dragonscale vest, Eldritch Ribbon, Ascensus, Depravation, Puritas items, Ebonbloom crafting material and all items made from it, Ignis)</li>");
 		outputText("<li> Coalsack (Arian App desc, option to change his/her scales color)</li>");
 		outputText("<li> Fenoxo (Everything Else)</li>");

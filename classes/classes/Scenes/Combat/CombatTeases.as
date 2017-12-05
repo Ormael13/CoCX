@@ -1179,7 +1179,7 @@ public class CombatTeases extends BaseCombatContent {
 						damage += 3;
 						break;
 					default:
-						outputText("Whoops, something derped! Please let Kitteh6660 know! Anyways, you put on a tease show.");
+						outputText("Whoops, something derped! Please let Ormael/Aimozg/Oxdeception know! Anyways, you put on a tease show.");
 				}
 				break;
 				//alraune teases

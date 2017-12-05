@@ -118,7 +118,7 @@ public function ElectraSeXYes():void
 	clearOutput();
 	if (flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 3) outputText("Electra");
 	else outputText("The raiju");
-	outputText(" surprises you by jumping on top of you before you can even finish her sentence.\n\n");
+	outputText(" surprises you by jumping on top of you before you can even finish your sentence.\n\n");
 	outputText("\"<i>Lets not waste any time then!</i>\"");
 	outputText("She swiftly takes a hold of your clothes and start methodically stripping you. If you weren't any wiser you would think she is actually turning the table on you but actually she is just so excited to finally get laid that she no longer holds any of her inhibitions on.\n\n");
 	if (player.hasCock()) ElectraSeXYesM();
@@ -150,7 +150,7 @@ public function ElectraSeXYesM():void
 	else player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
 	electraAffection(10);
 	player.orgasm();
-	cleanupAfterCombat();
+	inventory.takeItem(consumables.VOLTTOP, cleanupAfterCombat);
 }
 public function ElectraSeXYesF():void
 {
@@ -168,7 +168,7 @@ public function ElectraSeXYesF():void
 	else player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
 	electraAffection(10);
 	player.orgasm();
-	cleanupAfterCombat();
+	inventory.takeItem(consumables.VOLTTOP, cleanupAfterCombat);
 }
 public function ElectraSeXNo():void
 {

@@ -362,7 +362,7 @@ import classes.GlobalFlags.*;
 					dynStats("lus", (player.lib / 5) + (player.cor / 10));
 					break;
 				default:
-					outputText("\n\n<b>Something wrong has happened. Let me play you the song of my people. Actually, you should let Kitteh6660 know.</b>");
+					outputText("\n\n<b>Something wrong has happened. Let me play you the song of my people. Actually, you should let Ormael/Aimozg/Oxdeception know.</b>");
 			}
 			player.gems -= 5;
 			statScreenRefresh();

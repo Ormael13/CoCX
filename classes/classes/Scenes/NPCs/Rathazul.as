@@ -732,7 +732,7 @@ private function collectRathazulArmor():void {
 			itype = armors.INDESSR;
 			break;
 		default:
-			outputText("Something bugged! Please report this bug to Kitteh6660.");
+			outputText("Something bugged! Please report this bug to Ormael/Aimozg/Oxdeception.");
 			itype = armors.SS_ROBE;
 	}
 	//Reset counters
@@ -932,7 +932,7 @@ private function craftDragonscaleArmorForReal(type:int = 0):void {
 			itype = armors.INDEDSR;
 			break;
 		default:
-			outputText("Something bugged! Please report this bug to Kitteh6660.");
+			outputText("Something bugged! Please report this bug to Ormael/Aimozg/Oxdeception.");
 			itype = armors.DSCLARM;
 			break;
 	}

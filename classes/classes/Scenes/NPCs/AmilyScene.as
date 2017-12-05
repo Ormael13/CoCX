@@ -263,7 +263,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						player.createKeyItem("Equipment Rack - Shields",0,0,0,0);
 						break;
 					default:
-						outputText("  <b>Please let Kitteh6660 know about this bug.</b>");
+						outputText("  <b>Please let Ormael/Aimozg/Oxdeception know about this bug.</b>");
 				}
 				doNext(camp.returnToCampUseOneHour);
 				return;

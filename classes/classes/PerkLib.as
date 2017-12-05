@@ -1253,6 +1253,12 @@ public class PerkLib
 		public static const RagingInferno:PerkType = mk("Raging Inferno", "Raging Inferno",
 				"Cumulative 20% damage increase for every subsequent fire spell without interruption.",
 				"You choose the 'Raging Inferno' perk. Cumulative 20% damage increase for every subsequent fire spell without interruption.");
+		public static const RecuperationSleep:PerkType = mk("Recuperation Sleep", "Recuperation Sleep",
+				"Gain +100% boost to health and fatigue recovery during sleep.",
+				"You choose the 'Recuperation Sleep' perk, boosting your health and fatigue recovery rate while sleeping!");
+		public static const RejuvenationSleep:PerkType = mk("Rejuvenation Sleep", "Rejuvenation Sleep",
+				"Gain +200% boost to health and fatigue recovery during sleep.",
+				"You choose the 'Rejuvenation Sleep' perk, boosting your health and fatigue recovery rate while sleeping!");
 		public static const RefinedBodyI:PerkType = mk("Refined Body I", "Refined Body I",
 				"Raises max HP by 50.",
 				"You choose the 'Refined Body I' perk, giving you an additional 50 HP!");
@@ -1401,8 +1407,14 @@ public class PerkLib
 				"Allow reaching 3rd stage of soul cultivation.",
 				"You choose the 'Soul Warrior' perk, reaching 3rd stage of soul cultivation!");
 		public static const SpeedyRecovery:PerkType = mk("Speedy Recovery", "Speedy Recovery",
-				"Regain fatigue 50% faster.",
+				"Regain fatigue +50% out of combat / +100% in combat faster.",
 				"You choose the 'Speedy Recovery' perk, boosting your fatigue recovery rate!");
+		public static const SpeedyRecuperation:PerkType = mk("Speedy Recuperation", "Speedy Recuperation",
+				"Regain fatigue +100% out of combat / +200% in combat faster.",
+				"You choose the 'Speedy Recuperation' perk, boosting your fatigue recovery rate!");
+		public static const SpeedyRejuvenation:PerkType = mk("Speedy Rejuvenation", "Speedy Rejuvenation",
+				"Regain fatigue +200% out of combat / +400% in combat faster.",
+				"You choose the 'Speedy Rejuvenation' perk, boosting your fatigue recovery rate!");
 		public static const Spellarmor:PerkType = mk("Spellarmor", "Spellarmor",
 				"Start every battle with Charge Armor enabled, if you meet White Magic requirements before it starts.",
 				"You choose the 'Spellarmor' perk. You start every battle with Charge Armor effect, as long as your Lust is not preventing you from casting it before battle.");
@@ -2368,10 +2380,6 @@ public class PerkLib
                     .requireLevel(4)
                     .requireNGPlus(2);
             //Tier 1 Speed Perks
-            //Speedy Recovery - Regain Fatigue 50% faster speed.
-            SpeedyRecovery.requirePerk(Evade)
-                    .requireSpe(60)
-                    .requireLevel(6);
             //Agility - A small portion of your speed is applied to your defense rating when wearing light armors.
             Agility.requireSpe(75)
                     .requirePerk(Runner)
@@ -3354,6 +3362,8 @@ public class PerkLib
                     .requireLevel(4)
                     .requireNGPlus(2);
             //Tier 1
+            //Speedy Recovery - Regain Fatigue 50% faster.
+            SpeedyRecovery.requireLevel(6);
             ResistanceI.requireLevel(6);
             Heroism.requireLevel(6);
             DualWield.requireLevel(6);
@@ -3542,6 +3552,10 @@ return player.catScore() >= 8;
                     .requireTou(65)
                     .requireSpe(65)
                     .requireLevel(18);
+            SpeedyRecuperation.requirePerk(SpeedyRecovery)
+							  .requireLevel(18);
+            RecuperationSleep.requirePerk(SpeedyRecovery)
+							 .requireLevel(18);
             //Tier 4
             JobAllRounder.requireLevel(24)
                     .requirePerk(JobGuardian)
@@ -3629,6 +3643,10 @@ return player.catScore() >= 8;
                     .requireInt(110)
                     .requireWis(110)
                     .requirePerk(MasterGolemMaker);
+            SpeedyRejuvenation.requirePerk(SpeedyRecuperation)
+							  .requireLevel(30);
+            RejuvenationSleep.requirePerk(RecuperationSleep)
+							 .requireLevel(30);
             //Tier 6
             CycloneStage4.requireLevel(36)
                     .requireStr(120)

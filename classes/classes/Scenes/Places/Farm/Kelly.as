@@ -1844,7 +1844,7 @@ private function dyeKellysBitchAssHair(color:ItemType):void {
 		flags[kFLAGS.KELLY_HAIR_COLOR] = "chestnut brown";
 		player.consumeItem(consumables.BROWN_D);
 	}
-	else outputText("\n\nYO dog, " + color + " is definitely not working right. Please report this to fenoxo using the report a bug link on the site.");
+	else outputText("\n\nYO dog, " + color + " is definitely not working right. Please report this to Ormael/Aimozg/Oxdeception using the link to mod thread on the fenoxo forum.");
 	menu();
 	addButton(0,"Next",approachKelly);
 }

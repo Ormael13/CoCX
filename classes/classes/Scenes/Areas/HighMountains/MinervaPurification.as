@@ -631,7 +631,7 @@ public class MinervaPurification extends BaseContent
 					statScreenRefresh();
 					break;
 				default:
-					outputText("<b>This text should not happen. Please let Kitteh6660 know so he can fix it.</b>");
+					outputText("<b>This text should not happen. Please let Ormael/Aimozg/Oxdeception know so he can fix it.</b>");
 			}
 		}
 		

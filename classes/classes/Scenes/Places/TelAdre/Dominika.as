@@ -199,7 +199,7 @@ private function acceptDominikasKnowledge():void {
 				player.createStatusEffect(StatusEffects.KnowsDarknessShard,0,0,0,0);
 				outputText("\n\n<b>New White Magic Spell Learned: Darkness Shard</b>");
 			}
-			else outputText("==SOMETHING FUCKED UP.  TELL FEN VIA EMAIL (fenoxo@gmail.com) OR POST ON THE BUG FORUMS==");
+			else outputText("==SOMETHING FUCKED UP.  TELL ORMAEL VIA DISCORD (link to it in Fenoxo forum mod thread first post)==");
 			dynStats("int", 2);
 		}
 		//[If player knows no spells]
@@ -250,7 +250,7 @@ private function acceptDominikasKnowledge():void {
 				player.createStatusEffect(StatusEffects.KnowsIceSpike,0,0,0,0);
 				outputText("\n\n<b>New White Magic Spell Learned: Ice Rain</b>");
 			}
-			else outputText("==SOMETHING FUCKED UP.  TELL FEN VIA EMAIL (fenoxo@gmail.com) OR POST ON THE BUG FORUMS==");
+			else outputText("==SOMETHING FUCKED UP.  TELL FEN VIA DICORD (link to it in first post of fen forum mod thread)==");
 			dynStats("int", 2);
 		}
 	}
