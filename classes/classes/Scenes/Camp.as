@@ -59,6 +59,7 @@ use namespace CoC;
 		public var dungeonH:HelDungeon = new HelDungeon();
 		public var dungeonHC:HiddenCave = new HiddenCave();
 		public var dungeonDD:DenOfDesire = new DenOfDesire();
+		public var dungeonAP:AnzuPalace = new AnzuPalace();
 		public var EvangelineF:EvangelineFollower = new EvangelineFollower();
 		public var HolliPure:HolliPureScene = new HolliPureScene();
 		public var templeofdivine:TempleOfTheDivine = new TempleOfTheDivine();
@@ -1065,13 +1066,13 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		outputText("Ceani is lazily sunbathing at the other side of the camp.\n\n");
 		buttons.add("Ceani", SceneLib.ceaniScene.ceaniCampMainMenu);
 	}
-	//Chi Chi potem zmienic na 3
+	//Chi Chi
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) {
 		outputText("You can see Chi Chi not so far from Jojo. She’s busy practicing her many combos on a dummy. Said dummy will more than likely have to be replaced within twenty four hours.\n\n");
 		buttons.add( "Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu);
 	}
 	//Diana
-	//buttons.add("???").disable("Let me heal you.");
+	buttons.add("???").disable("Let me heal you.");
 	//Etna
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) {
 		outputText("Etna is resting lazily on a rug in a very cat-like manner. She’s looking at you always with this adorable expression of hers, her tail wagging expectantly at your approach.\n\n");
@@ -2563,6 +2564,7 @@ private function dungeons():void {
 	if (SceneLib.dungeons.checkPhoenixTowerClear()) addButton(6, "Phoenix Tower", dungeonH.returnToHeliaDungeon).hint("Re-visit the tower you went there as part of Helia's quest." + (SceneLib.dungeons.checkPhoenixTowerClear() ? "\n\nYou've helped Helia in the quest and resolved the problems. \n\nCLEARED!" : ""));
 	if (flags[kFLAGS.HIDDEN_CAVE_FOUND] > 0) addButton(10, "Hidden Cave", dungeonHC.enterDungeon).hint("Visit the hidden cave in the hills.");
 	if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 0) addButton(11, "Den of Desire", dungeonDD.enterDungeon).hint("Visit the den in blight ridge.");
+	if (flags[kFLAGS.ANZU_PALACE_UNLOCKED] > 0) addButton(13, "Anzu's Palace", dungeonAP.enterDungeon).hint("Visit the palace in the Glacial Rift where Anzu the avian deity resides.");
 	addButton(14, "Back", places);
 }
 
