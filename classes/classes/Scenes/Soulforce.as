@@ -203,9 +203,9 @@ use namespace CoC;
 			//addButton(13, "<<< 13 >>>", CoC.instance.doNothing);
 			addButton(14, "Back", accessSoulforceMenu);
 		}
-private function celessIntroForced():void {
+public function celessIntroForced():void {
 	clearOutput();
-	SceneLib.celesscene.celessUnicornIntro();
+	SceneLib.celesscene.celessForcedIntroForTesting();
 }
 private function eyesColorSelection():void {
 	clearOutput();

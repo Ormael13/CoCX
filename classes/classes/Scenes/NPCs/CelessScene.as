@@ -277,6 +277,10 @@ import flash.utils.getQualifiedClassName;
                 inventory.takeItem(item, camp.returnToCampUseOneHour);
 			}
 		}
+		//For tesing - delete later
+		public function celessForcedIntroForTesting():void {
+			celessUnicornIntro();
+		}
 		//Fixme @Oxdeception
 		public static function celessUnicornIntro():void{instance._celessUnicornIntro();}
         private function _celessUnicornIntro(stage:int = 0, wasMale:Boolean = false ):void{
