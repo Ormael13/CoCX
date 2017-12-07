@@ -69,6 +69,11 @@ use namespace CoC;
 				SceneLib.etnaScene.repeatYandereEnc();
 				return;
 			}
+			//Anzu
+			if (flags[kFLAGS.ANZU_PALACE_UNLOCKED] < 1 && rand(5) == 0) {
+				SceneLib.anzu.initialPalaceEncounter();
+				return;
+			}
 			select = choice[rand(choice.length)];
 			switch(select) {
 				case 0: //Valkyrie

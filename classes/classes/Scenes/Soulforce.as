@@ -23,6 +23,7 @@ import classes.Scenes.NPCs.Electra;
 import classes.Scenes.NPCs.RyuBiDragon;
 import classes.Scenes.NPCs.Sonya;
 import classes.Scenes.Places.Boat.Marae;
+import classes.Scenes.SceneLib;
 
 use namespace CoC;
 	
@@ -197,10 +198,15 @@ use namespace CoC;
 			addButton(11, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
 			//addButton(12, "<<< 12 >>>", CoC.instance.doNothing);
 			addButton(12, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
-			if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] == 3) addButton(13, "DenBossesReset", resetHeroslayerOmnibusFlag).hint("Reseting Den of Desire bosses fight.");
+			addButton(13, "Celess", celessIntroForced).hint("Due to hard time getting her intro here it's - WARNING: Not have way to fix bugs caused by picking it again if PC already get pass Celess intro scene and is pregnant with Celess.");
+			//if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] == 3) addButton(13, "DenBossesReset", resetHeroslayerOmnibusFlag).hint("Reseting Den of Desire bosses fight.");
 			//addButton(13, "<<< 13 >>>", CoC.instance.doNothing);
 			addButton(14, "Back", accessSoulforceMenu);
 		}
+private function celessIntroForced():void {
+	clearOutput();
+	SceneLib.celesscene.celessUnicornIntro();
+}
 private function eyesColorSelection():void {
 	clearOutput();
 	player.eyeColor = "brown";

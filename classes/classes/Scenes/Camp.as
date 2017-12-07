@@ -1423,7 +1423,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 			buttons.add( "Jojo", jojoScene.jojoCamp).hint("Go find Jojo around the edges of your camp and meditate with him or talk about watch duty.");
 		}
 	}
-	//Celess - button 3
+	//Celess
 	//Evangeline
 	if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1 && flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] <= 0) {
 		outputText("There is a small bedroll for Evangeline near the camp edge");
