@@ -83,6 +83,44 @@ public class DungeonEngine extends BaseContent
 		private static const DUNGEON_DEN_OF_DESIRE_LABORATORY:int  			= 66;
 		private static const DUNGEON_DEN_OF_DESIRE_HERO_SLAYER_OMNIBUS:int  = 67;
 		
+		private static const DUNGEON_RIVER_FLOOR_01_ROOM_01:int  = 68;
+		private static const DUNGEON_RIVER_FLOOR_01_ROOM_02:int  = 69;
+		private static const DUNGEON_RIVER_FLOOR_01_ROOM_03:int  = 70;
+		private static const DUNGEON_RIVER_FLOOR_01_ROOM_04:int  = 71;
+		private static const DUNGEON_RIVER_FLOOR_01_ROOM_05:int  = 72;
+		private static const DUNGEON_RIVER_FLOOR_01_ROOM_06:int  = 73;
+		private static const DUNGEON_RIVER_FLOOR_01_ROOM_07:int  = 74;
+		private static const DUNGEON_RIVER_FLOOR_01_ROOM_08:int  = 75;
+		private static const DUNGEON_RIVER_FLOOR_01_ROOM_09:int  = 76;
+		private static const DUNGEON_RIVER_FLOOR_01_ROOM_10:int  = 77;
+		private static const DUNGEON_RIVER_FLOOR_01_ROOM_11:int  = 78;
+		private static const DUNGEON_RIVER_FLOOR_01_ROOM_12:int  = 79;
+		private static const DUNGEON_RIVER_FLOOR_01_ROOM_13:int  = 80;
+		private static const DUNGEON_RIVER_FLOOR_01_ROOM_14:int  = 81;
+		private static const DUNGEON_RIVER_FLOOR_01_ROOM_15:int  = 82;
+		private static const DUNGEON_RIVER_FLOOR_01_ROOM_16:int  = 83;
+		private static const DUNGEON_RIVER_FLOOR_01_ROOM_17:int  = 84;
+		private static const DUNGEON_RIVER_FLOOR_01_ROOM_18:int  = 85;
+		private static const DUNGEON_RIVER_FLOOR_01_ROOM_19:int  = 86;
+		private static const DUNGEON_RIVER_FLOOR_01_ROOM_20:int  = 87;
+		
+		private static const DUNGEON_ANZU_OUTSIDE:int			= 88;
+		private static const DUNGEON_ANZU_HALL_FLOOR1:int 		= 89;
+		private static const DUNGEON_ANZU_LIVING_ROOM:int 		= 90;
+		private static const DUNGEON_ANZU_BATHROOM:int 			= 91;
+		private static const DUNGEON_ANZU_DINING_ROOM:int 		= 92;
+		private static const DUNGEON_ANZU_KITCHEN:int 			= 93;
+		private static const DUNGEON_ANZU_HALL_FLOOR2:int		= 94;
+		private static const DUNGEON_ANZU_BEDROOM:int 			= 95;
+		private static const DUNGEON_ANZU_LIBRARY:int 			= 96;
+		private static const DUNGEON_ANZU_MULTIUSE_ROOM:int 	= 97;
+		private static const DUNGEON_ANZU_HALL_FLOOR3:int 		= 98;
+		private static const DUNGEON_ANZU_PALACE_VAULTS:int 	= 99;
+		private static const DUNGEON_ANZU_ALCHEMY_ROOM:int 		= 100;
+		private static const DUNGEON_ANZU_ROOF:int 				= 101;
+		private static const DUNGEON_ANZU_BASEMENT:int 			= 102;
+		private static const DUNGEON_ANZU_ARMORY:int 			= 103;
+		
 		//Register dungeons
 		public var factory:Factory = new Factory;
 		public var deepcave:DeepCave = new DeepCave;
@@ -91,6 +129,7 @@ public class DungeonEngine extends BaseContent
 		public var cabin:YourCabin = new YourCabin;
 		public var hiddencave:HiddenCave = new HiddenCave();
 		public var denofdesire:DenOfDesire = new DenOfDesire();
+		public var anzupalace:AnzuPalace = new AnzuPalace();
 		
 		public var map:DungeonMap = new DungeonMap;
 		
@@ -174,6 +213,23 @@ public class DungeonEngine extends BaseContent
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_DEN_OF_DESIRE_GREAT_HALL_AREA) denofdesire.roomGreatHallArea();
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_DEN_OF_DESIRE_LABORATORY) denofdesire.roomLaboratory();
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_DEN_OF_DESIRE_HERO_SLAYER_OMNIBUS) denofdesire.roomHeroSlayerOmnibusRoom();
+			//Anzu's Palace
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_ANZU_OUTSIDE) anzupalace.roomEntrance();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_ANZU_HALL_FLOOR1) anzupalace.roomFoyer();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_ANZU_LIVING_ROOM) anzupalace.roomLivingRoom();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_ANZU_BATHROOM) anzupalace.roomBathroom();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_ANZU_DINING_ROOM) anzupalace.roomDiningRoom();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_ANZU_KITCHEN) anzupalace.roomKitchen();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_ANZU_HALL_FLOOR2) anzupalace.roomHallFloor2();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_ANZU_BEDROOM) anzupalace.roomBedroom();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_ANZU_LIBRARY) anzupalace.roomLibrary();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_ANZU_MULTIUSE_ROOM) anzupalace.roomMultiuse();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_ANZU_HALL_FLOOR3) anzupalace.roomHallFloor3();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_ANZU_PALACE_VAULTS) anzupalace.roomVault();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_ANZU_ALCHEMY_ROOM) anzupalace.roomAlchemyRoom();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_ANZU_ROOF) anzupalace.roomRoof();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_ANZU_BASEMENT) anzupalace.roomBasement();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_ANZU_ARMORY) anzupalace.roomArmory();
 		}
 		
 		public function checkFactoryClear():Boolean {

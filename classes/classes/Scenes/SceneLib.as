@@ -3,6 +3,7 @@ import classes.CoC;
 import classes.Scenes.Areas.*;
 import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.Combat.Combat;
+import classes.Scenes.Dungeons.AnzuPalace.AnzuScene;
 import classes.Scenes.Dungeons.D3.D3;
 import classes.Scenes.Dungeons.DungeonEngine;
 import classes.Scenes.Dungeons.HelDungeon.BrigidScene;
@@ -180,6 +181,8 @@ public class SceneLib {
     public static var hexindao:HeXinDao = new HeXinDao();
 
     public static var kitsuneScene:KitsuneScene = new KitsuneScene();
+	
+	public static var anzu:AnzuScene = new AnzuScene();
 
     public static var urtaQuest:UrtaQuest = new UrtaQuest();
 
