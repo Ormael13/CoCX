@@ -92,8 +92,6 @@ public class SceneLib {
 
     public static var ceaniScene:CeaniScene = new CeaniScene();
 
-    public static var celesscene:CelessScene = new CelessScene();
-
     public static var electraScene:ElectraFollower = new ElectraFollower();
 
     public static var emberScene:EmberScene = new EmberScene();
