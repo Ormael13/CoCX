@@ -171,7 +171,7 @@ public class Mountain extends BaseContent
 					}, {
 						name: "diva",
 						when: function():Boolean {
-							return flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && DivaScene.getInstance().status >= 0;
+							return flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && DivaScene.instance.status >= 0;
 						},
 						call: DivaScene.encounter
 					},{

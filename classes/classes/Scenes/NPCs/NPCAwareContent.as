@@ -55,7 +55,7 @@ import classes.Scenes.SceneLib;
 		// Celess
 		protected function get celessScene():CelessScene
 		{
-			return CelessScene.getInstance();
+			return CelessScene.instance;
 		}
 		// Ceraph
 		protected function get ceraphScene():CeraphScene

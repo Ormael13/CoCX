@@ -1695,7 +1695,7 @@ public class Pregnancy extends NPCAwareContent {
         //Give birth to Celess
         if (player.pregnancyType == PregnancyStore.PREGNANCY_CELESS && player.pregnancyIncubation == 1){
             player.knockUpForce(); //Clear Pregnancy
-            CelessScene.getInstance().birthScene();
+            CelessScene.instance.birthScene();
             return false;
         }
         //Give birth if it's time (to an imp!)

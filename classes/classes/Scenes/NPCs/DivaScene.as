@@ -23,17 +23,14 @@ public class DivaScene extends XXCNPC{
             Camp.addFollower(this);
             addSavedNPC(this);
         } else {
-            throw new Error("Singleton class. Use getInstance() to access");
+            throw new Error("Singleton class. Use instance to access");
         }
-    }
-    public static function getInstance():DivaScene{
-        if(!_instance){
-            new DivaScene();
-        }
-        return _instance;
     }
     public static function get instance():DivaScene{
-        return getInstance();
+	    if(!_instance){
+		    new DivaScene();
+	    }
+	    return _instance;
     }
     public override function unload():void{
         Camp.removeFollower(_instance);

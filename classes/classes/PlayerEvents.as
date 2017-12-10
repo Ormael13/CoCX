@@ -531,7 +531,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				//Reset Chi Chi Training daiy limit
 				if (flags[kFLAGS.CHI_CHI_DAILY_TRAINING] > 0) flags[kFLAGS.CHI_CHI_DAILY_TRAINING] = 0;
 				//Reset Diva Red Vial daiy limit
-				DivaScene.getInstance().tookVialToday = false;
+				DivaScene.instance.tookVialToday = false;
 				//Daily Fishery production
 				if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) {
 					if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) flags[kFLAGS.FISHES_STORED_AT_FISHERY] += 5;
