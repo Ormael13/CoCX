@@ -1,13 +1,13 @@
 package classes {
 
-import classes.GlobalFlags.*;
-import classes.Scenes.NPCs.IsabellaScene;
 import classes.StatusEffects.VampireThirstEffect;
 import classes.GlobalFlags.*;
 import classes.Scenes.NPCs.IsabellaScene;
 import classes.Scenes.SceneLib;
 
 import coc.view.MainView;
+
+import flash.events.TextEvent;
 
 /**
  * The new home of Stats and Perks
@@ -945,26 +945,35 @@ if (SceneLib.valeria.valeriaFluidsEnabled()) {
 			addButton(0, "Next", perkSelect, perks[rand(perks.length)]);
 		} else {
 			outputText("Please select a perk from the drop-down list, then click 'Okay'.  You can press 'Skip' to save your perk point for later.\n");
-			var perkList:Array = [];
-			for each(var perk:PerkType in perks) {
-				var p:PerkClass = new PerkClass(perk,
-						perk.defaultValue1, perk.defaultValue2, perk.defaultValue3, perk.defaultValue4);
-				perkList.push({label: p.perkName, perk: p});
-			}
-            CoC.instance.showComboBox(perkList, "Choose a perk", perkCbChangeHandler);
-            if (player.perkPoints>1) outputText("You have "+numberOfThings(player.perkPoints,"perk point","perk points")+".");
+            //CoC.instance.showComboBox(perkList, "Choose a perk", perkCbChangeHandler);
+            if (player.perkPoints>1) outputText("You have "+numberOfThings(player.perkPoints,"perk point","perk points")+".\n\n");
+	        mainView.mainText.addEventListener(TextEvent.LINK, linkhandler);
+	        perkList = [];
+	        for each(var perk:PerkType in perks) {
+		        var p:PerkClass = new PerkClass(perk,
+				        perk.defaultValue1, perk.defaultValue2, perk.defaultValue3, perk.defaultValue4);
+		        var lab:* = {label: p.perkName, perk: p};
+		        perkList.push(lab);
+		        outputText("<u><a href=\"event:"+perkList.indexOf(lab)+"\">"+p.perkName+"</a></u>\n");
+	        }
 			mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
 			menu();
 			addButton(1, "Skip", perkSkip);
 		}
 	}
-
+	private var perkList:Array = [];
+	private function linkhandler(e:TextEvent):void{
+		trace(e.text);
+		perkCbChangeHandler(perkList[e.text]);
+	}
 	private function perkSelect(selected:PerkClass):void {
+		mainView.mainText.removeEventListener(TextEvent.LINK, linkhandler);
 		mainView.hideComboBox();
 		applyPerk(selected);
 	}
 
 	private function perkSkip():void {
+		mainView.mainText.removeEventListener(TextEvent.LINK, linkhandler);
 		mainView.hideComboBox();
 		playerMenu();
 	}
@@ -983,7 +992,10 @@ if (SceneLib.valeria.valeriaFluidsEnabled()) {
 			outputText("</ul>");
 		}
 		outputText("If you would like to select this perk, click <b>Okay</b>.  Otherwise, select a new perk, or press <b>Skip</b> to make a decision later.");
-		if (player.perkPoints>1) outputText("\n\nYou have "+numberOfThings(player.perkPoints,"perk point","perk points")+".");
+		if (player.perkPoints>1) outputText("\n\nYou have "+numberOfThings(player.perkPoints,"perk point","perk points")+".\n\n");
+		for each(var p:* in perkList){
+			outputText("<u><a href=\"event:"+perkList.indexOf(p)+"\">"+p.perk.perkName+"</a></u>\n");
+		}
 		menu();
 		addButton(0, "Okay", perkSelect, selected);
 		addButton(1, "Skip", perkSkip);
