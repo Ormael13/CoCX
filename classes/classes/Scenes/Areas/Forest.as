@@ -14,6 +14,7 @@ import classes.Scenes.Holidays;
 import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.JojoScene;
+import classes.Scenes.NPCs.PatchouliScene;
 import classes.Scenes.SceneLib;
 
 import coc.xxc.BoundStory;
@@ -212,6 +213,13 @@ use namespace CoC;
 						when: function():Boolean{
 							return CelessScene.getInstance().isCompanion() && !CelessScene.getInstance().armorFound;
 						}
+					}, {
+						name  : "patchouli",
+						call  : SceneLib.patchouliScene.meetThePatchouli,
+						when  : function():Boolean {
+							return flags[kFLAGS.PATCHOULI_FOLLOWER] < 2;
+						},
+						chance: 0.8
 					});
 					/*
 					{

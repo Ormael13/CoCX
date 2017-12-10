@@ -2569,10 +2569,10 @@ public static const IN_COMBAT_PLAYER_GOLEM_ATTACKED:int	                        
 public static const IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED:int                         = 2561;
 public static const FOLLOWER_AT_FISHERY_IZMA:int                         			= 2562;
 public static const FISHES_STORED_AT_FISHERY:int                         			= 2563;
-public static const IN_COMBAT_PLAYER_COMPANION_1_ACTION:int                         = 2564;
-public static const UNKNOWN_FLAG_NUMBER_02565:int                                   = 2565;
-public static const UNKNOWN_FLAG_NUMBER_02566:int                                   = 2566;
-public static const UNKNOWN_FLAG_NUMBER_02567:int                                   = 2567;
+public static const PATCHOULI_FOLLOWER:int                         					= 2564;
+public static const PATCHOULI_GIRL_OR_MORPH:int                                   	= 2565;
+public static const PATCHOULI_CUP_SIZE:int                                   		= 2566;
+public static const PATCHOULI_COCK:int                                   			= 2567;
 public static const UNKNOWN_FLAG_NUMBER_02568:int                                   = 2568;
 public static const UNKNOWN_FLAG_NUMBER_02569:int                                   = 2569;
 public static const UNKNOWN_FLAG_NUMBER_02570:int                                   = 2570;
@@ -2595,7 +2595,7 @@ public static const UNKNOWN_FLAG_NUMBER_02586:int                               
 public static const UNKNOWN_FLAG_NUMBER_02587:int                                   = 2587;
 public static const UNKNOWN_FLAG_NUMBER_02588:int                                   = 2588;
 public static const UNKNOWN_FLAG_NUMBER_02589:int                                   = 2589;
-public static const UNKNOWN_FLAG_NUMBER_02590:int                                   = 2590;
+public static const IN_COMBAT_PLAYER_COMPANION_1_ACTION:int                         = 2590;
 public static const UNKNOWN_FLAG_NUMBER_02591:int                                   = 2591;
 public static const UNKNOWN_FLAG_NUMBER_02592:int                                   = 2592;
 public static const UNKNOWN_FLAG_NUMBER_02593:int                                   = 2593;

@@ -7,6 +7,7 @@ package classes.Scenes.Areas.Ocean
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.internals.*;
+import classes.Scenes.SceneLib;
 
 public class UnderwaterTigersharkGirl extends Monster
 	{
@@ -27,7 +28,7 @@ public class UnderwaterTigersharkGirl extends Monster
 		}
 		private function sharkBiteAttack():void {
 			game.spriteSelect(70);
-			outputText("Your opponent take a turn and charge at you at high speed jaw open as she goes in for the kill, viciously biting you. You start to bleed in abundance the water around you turning red. ");
+			outputText("Your opponent takes a turn and charges at you at high speed, jaw open as she goes in for the kill, viciously biting you. You start to bleed in abundance the water around you turning red. ");
 			var damage:Number = 0;
 			damage += eBaseDamage();
 			player.takePhysDamage(damage, true);
@@ -37,7 +38,7 @@ public class UnderwaterTigersharkGirl extends Monster
 		/*
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.boat.sharkGirlScene.sharkWinChoices();
+			SceneLib.sharkgirlScene.oceanSharkWinChoices();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -55,7 +56,7 @@ public class UnderwaterTigersharkGirl extends Monster
 			this.a = "the ";
 			this.short = "shark-girl";
 			this.imageName = "izma";
-			this.long = "The tiger shark girl is menacingly circling you off waiting for the opportunity to strike. These creatures clearly look way more deadly in the water then out of it!";
+			this.long = "The tiger shark girl is menacingly circling you, waiting for the opportunity to strike. These creatures clearly look way more deadly in the water then out of it!";
 			// this.plural = false;
 			this.createCock(15,2.2);
 			this.balls = 4;

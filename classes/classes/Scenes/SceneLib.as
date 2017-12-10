@@ -11,6 +11,7 @@ import classes.Scenes.Explore.*;
 import classes.Scenes.Monsters.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.*;
+import classes.Scenes.Places.Boat.SharkGirlScene;
 import classes.Scenes.Quests.UrtaQuest;
 
 public class SceneLib {
@@ -134,6 +135,8 @@ public class SceneLib {
 
     public static var milkWaifu:MilkWaifu = new MilkWaifu();
 
+    public static var patchouliScene:PatchouliScene = new PatchouliScene();
+
     public static var raphael:Raphael = new Raphael();
 
     public static var rathazul:Rathazul = new Rathazul();
@@ -161,6 +164,8 @@ public class SceneLib {
     public static var valeria:Valeria = new Valeria();
 
     public static var vapula:Vapula = new Vapula();
+
+    public static var sharkgirlScene:SharkGirlScene = new SharkGirlScene();
 
     public static var bazaar:Bazaar = new Bazaar();
 

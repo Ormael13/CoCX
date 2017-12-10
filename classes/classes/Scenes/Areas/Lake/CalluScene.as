@@ -272,8 +272,8 @@ package classes.Scenes.Areas.Lake
 		private function getDatFishingPole():void
 		{
 			clearOutput();
-			outputText("You mention to Calu that you would like to fish to but you have no idea of were to find a fishing pole.");
-			outputText("\"<i>So you want to start fishing to eh? Thats a humble pleasure of life. Don’t worry about finfing one, I got an extra if you can pay it to me. For 50 gems its yours.</i>\"");
+			outputText("You mention to Calu that you would like to fish to but you have no idea of where to find a fishing pole.");
+			outputText("\"<i>So you want to start fishing to eh? That's a humble pleasure of life. Don’t worry about finding one, I got an extra if you can pay it to me. For 50 gems it's yours.</i>\"");
 			menu();
 			if (player.gems >= 50) addButton(0, "Buy it", yesMissIHaveGems);
 			else addButtonDisabled(0, "Buy it", "You not have enough gems.");

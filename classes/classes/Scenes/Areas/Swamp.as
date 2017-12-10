@@ -86,7 +86,7 @@ use namespace CoC;
 					else SceneLib.kihaScene.encounterKiha();
 					break;
 				default:
-					outputText("New explore code fucked up.  YOU BONED (TELL FEN)");
+					outputText("New explore code fucked up.  YOU BONED (TELL ORMAEL/AIMOZG/OXODECEPTION)");
 					doNext(playerMenu);
 					break;
 			}

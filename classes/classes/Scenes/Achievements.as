@@ -116,8 +116,10 @@ public class Achievements extends BaseContent
 			
 			titleAchievementSection("Dungeons"); //12 achievements
 			addAchievement("Delver", kACHIEVEMENTS.DUNGEON_DELVER, "Clear any dungeon.");
-			addAchievement("Delver Apprentice", kACHIEVEMENTS.DUNGEON_DELVER, "Clear 3 dungeons.");
-			addAchievement("Delver Master", kACHIEVEMENTS.DUNGEON_DELVER_MASTER, "Clear every dungeon in the game.");
+			addAchievement("Delver Apprentice", kACHIEVEMENTS.DUNGEON_DELVER, "Clear 2 dungeons.");
+			addAchievement("Delver Expert", kACHIEVEMENTS.DUNGEON_DELVER_MASTER, "Clear 4 dungeons.");
+			addAchievement("Delver Master", kACHIEVEMENTS.DUNGEON_DELVER_EXPERT, "Clear 8 dungeons.");
+			addAchievement("Delver Grand Master", kACHIEVEMENTS.DUNGEON_DELVER_GRAND_MASTER, "Clear 16 dungeons.");
 			addAchievement("Shut Down Everything", kACHIEVEMENTS.DUNGEON_SHUT_DOWN_EVERYTHING, "Clear the Factory.");
 			addAchievement("You're in Deep", kACHIEVEMENTS.DUNGEON_YOURE_IN_DEEP, "Fully clear the Deep Cave.");
 			addAchievement("End of Reign", kACHIEVEMENTS.DUNGEON_END_OF_REIGN, "Fully clear the Lethice Stronghold.");
@@ -184,7 +186,10 @@ public class Achievements extends BaseContent
 			
 			titleAchievementSection("General"); //10 achievements
 			addAchievement("Portal Defender", kACHIEVEMENTS.GENERAL_PORTAL_DEFENDER, "Defeat 25 demons and sleep 10 times.");
-			addAchievement("Bad Ender", kACHIEVEMENTS.GENERAL_BAD_ENDER, "Cause or witness 3 Bad Ends to various NPCs.");
+			addAchievement("Bad Ender", kACHIEVEMENTS.GENERAL_BAD_ENDER, "Cause or witness 2 Bad Ends to various NPCs.");
+			addAchievement("Bad Ender 2: Electric Boogaloo", kACHIEVEMENTS.GENERAL_BAD_ENDER_2, "Cause or witness 4 Bad Ends to various NPCs.");
+			addAchievement("Bad Ender 3: Serious Serial Slayer", kACHIEVEMENTS.GENERAL_BAD_ENDER_3, "Cause or witness 8 Bad Ends to various NPCs.");
+			addAchievement("Bad Ender 4: The Prequel", kACHIEVEMENTS.GENERAL_BAD_ENDER_4, "Cause or witness 16 Bad Ends to various NPCs.");
 			addAchievement("Game Over!", kACHIEVEMENTS.GENERAL_GAME_OVER, "Get a Bad End.");
 			addAchievement("Urine Trouble", kACHIEVEMENTS.GENERAL_URINE_TROUBLE, "Urinate at least once in the realm of Mareth.");
 			addAchievement("Smashed", kACHIEVEMENTS.GENERAL_SMASHED, "Get so drunk that you end up urinating.", "", true);
@@ -209,17 +214,18 @@ public class Achievements extends BaseContent
 			addAchievement("Freeloader", kACHIEVEMENTS.GENERAL_FREELOADER, "Visit the Kitsune's mansion 3 times.");
 			addAchievement("Schizophrenic", kACHIEVEMENTS.GENERAL_SCHIZO, "Go between pure and corrupt 4 times. (Threshold of 20 and 80 corruption)");
 			addAchievement("Clean Slate", kACHIEVEMENTS.GENERAL_CLEAN_SLATE, "Go from 100 corruption to zero for the first time.");
-			addAchievement("Perky", kACHIEVEMENTS.GENERAL_PERKY, "Have at least 20 perks.");
-			addAchievement("Super Perky", kACHIEVEMENTS.GENERAL_SUPER_PERKY, "Have at least 35 perks.");
-			addAchievement("Mega Perky", kACHIEVEMENTS.GENERAL_MEGA_PERKY, "Have at least 50 perks.");
-			addAchievement("Ultra Perky", kACHIEVEMENTS.GENERAL_ULTRA_PERKY, "Have at least 75 perks.", "", true);
-			addAchievement("Hyper Perky", kACHIEVEMENTS.GENERAL_HYPER_PERKY, "Have at least 100 perks.", "", true);
-			addAchievement("Jack of All Trades", kACHIEVEMENTS.GENERAL_STATS_50, "Have at least 50 of each stat. (Libido, sensitivity, corruption optional)");
-			addAchievement("Incredible Stats", kACHIEVEMENTS.GENERAL_STATS_100, "Have at least 100 of each stat. (Libido, sensitivity, corruption optional)");
-			addAchievement("Inhuman Stats", kACHIEVEMENTS.GENERAL_STATS_150, "Have at least 150 of each stat. (Libido, sensitivity, corruption optional)");
-			//addAchievement("Incredible Stats", kACHIEVEMENTS.GENERAL_STATS_200, "Have at least 200 of each stat. (Libido, sensitivity, corruption optional)");
-			//addAchievement("Incredible Stats", kACHIEVEMENTS.GENERAL_STATS_250, "Have at least 250 of each stat. (Libido, sensitivity, corruption optional)");
-			//addAchievement("Incredible Stats", kACHIEVEMENTS.GENERAL_STATS_300, "Have at least 300 of each stat. (Libido, sensitivity, corruption optional)");
+			addAchievement("Perky", kACHIEVEMENTS.GENERAL_PERKY, "Have at least 25 perks.");
+			addAchievement("Super Perky", kACHIEVEMENTS.GENERAL_SUPER_PERKY, "Have at least 50 perks.");
+			addAchievement("Mega Perky", kACHIEVEMENTS.GENERAL_MEGA_PERKY, "Have at least 75 perks.");
+			addAchievement("Ultra Perky", kACHIEVEMENTS.GENERAL_ULTRA_PERKY, "Have at least 100 perks.", "", true);
+			addAchievement("Hyper Perky", kACHIEVEMENTS.GENERAL_HYPER_PERKY, "Have at least 200 perks.", "", true);
+			addAchievement("Umber Perky", kACHIEVEMENTS.GENERAL_UMBER_PERKY, "Have at least 300 perks.", "", true);
+			addAchievement("Jack of All Trades", kACHIEVEMENTS.GENERAL_STATS_50, "Have at least 50 of each stat. (Corruption optional)");
+			addAchievement("Incredible Stats", kACHIEVEMENTS.GENERAL_STATS_100, "Have at least 100 of each stat. (Corruption optional)");
+			addAchievement("Amazing Stats", kACHIEVEMENTS.GENERAL_STATS_150, "Have at least 150 of each stat. (Corruption optional)");
+			addAchievement("Superhuman Stats", kACHIEVEMENTS.GENERAL_STATS_200, "Have at least 200 of each stat. (Corruption optional)");
+			addAchievement("Inhuman Stats", kACHIEVEMENTS.GENERAL_STATS_300, "Have at least 300 of each stat. (Corruption optional)");
+			//addAchievement("Incredible Stats", kACHIEVEMENTS.GENERAL_STATS_500, "Have at least 500 of each stat. (Corruption optional)");
 			addAchievement("Like Chuck Norris", kACHIEVEMENTS.GENERAL_LIKE_CHUCK_NORRIS, "Defeat the Frost Giant without any equipment.", "Defeat the Frost Giant without any equipment. Way to be a badass!");
 			addAchievement("Tentacle Beast Slayer", kACHIEVEMENTS.GENERAL_TENTACLE_BEAST_SLAYER, "Slay your first Tentacle Beast.");
 			addAchievement("Hammer Time", kACHIEVEMENTS.GENERAL_HAMMER_TIME, "Buy a total of 300 nails.");

@@ -41,7 +41,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
+			outputText("-^ new archievments and few old ones slight adjusted. SOme of new are not yet reachable but will be...in future builds.\n");
 			outputText("-New camp structure: Dam. No prereq. structure, 300 wood, 200 nails. PC building small wood dam on steam next to camp.\n");
 			outputText("-New camp structure: Fishery. Req. Dam, 300 wood, 200 nails. PC building fishery, at which some of the camp npc's can work (currently only Izma). When npc working at it it would generate 5 fishes per day. But when Ceani is in camp she will eat 5 fishes per day.\n");
 			outputText("-Camp NPC's that can spar with PC can now slowly over time lvl-up. It's need to first toggle it in Camp Actions menu by chaning those npc's 'mode' from relax to 'training'. At any time it can be switch back to 'relax' as otherwise NPC's will lvl-up till reaching current max lvl they can attain. Some may be worried about it but some of you will gladly welcome those super high lvl sparing partners. ");

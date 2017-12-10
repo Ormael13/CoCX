@@ -137,7 +137,7 @@ package classes.GlobalFlags
 		
 		//General Achievements (110+)
 		public static const GENERAL_PORTAL_DEFENDER:int			= 110; //Defeat 25 demons and sleep 10 times.
-		public static const GENERAL_BAD_ENDER:int				= 111; //Cause 3 bad ends to various NPCs.
+		public static const GENERAL_BAD_ENDER:int				= 111; //Cause 2 bad ends to various NPCs.
 		public static const GENERAL_GAME_OVER:int				= 112; //Get a Bad End.
 		public static const GENERAL_URINE_TROUBLE:int			= 113; //Urinate once in the realm of Mareth.
 		public static const GENERAL_WHATS_HAPPENING_TO_ME:int	= 114; //Transform for the first time. 
@@ -185,7 +185,7 @@ package classes.GlobalFlags
 		public static const GENERAL_HAMMER_TIME:int				= 156;
 		public static const GENERAL_NAIL_SCAVENGER:int			= 157;
 		public static const GENERAL_FREE_ALL_THE_SLAVES:int		= 158;
-		public static const GENERAL_YIN_YANG:int				= 159;
+		public static const GENERAL_YIN_YANG:int				= 159; //UNUSED ACHIEV
 		public static const GENERAL_MY_TENT_NOT_BETTER:int		= 160;
 		public static const GENERAL_MINERVA_PURIFICATION:int	= 161; //Shadow achievement
 		public static const GENERAL_FENCER:int					= 162; //Shadow achievement
@@ -204,7 +204,7 @@ package classes.GlobalFlags
 		public static const COMBAT_GANDALF:int					= 175;
 		public static const COMBAT_SAURON:int					= 176;
 		public static const COMBAT_ARROW_TO_THE_KNEE:int		= 177; //First use of bow
-		public static const UNKNOWN_ACHIEVEMENT_178:int			= 178;
+		public static const GENERAL_UMBER_PERKY:int				= 178;
 		public static const TIME_QUARTER:int					= 179; //90 days
 		
 		
@@ -221,27 +221,37 @@ package classes.GlobalFlags
 		public static const UNKNOWN_ACHIEVEMENT_189:int			= 189;
 		
 		
-		public static const COMBAT_REITERPALLASCH:int			= 190;
-		public static const COMBAT_UNCANNY_REITERPALLASCH:int	= 191;
-		public static const COMBAT_UNCANNY_BLOOD_LETTER:int		= 192;
-		public static const COMBAT_MEAT_PASTY:int				= 193;
-		public static const COMBAT_PULVERIZE:int				= 194;
-		public static const COMBAT_ERASE:int					= 195;
-		public static const GENERAL_STATS_150:int				= 196;
-		public static const GENERAL_STATS_200:int				= 197;
-		public static const GENERAL_STATS_250:int				= 198;
-		public static const GENERAL_STATS_300:int				= 199;
-		public static const ZONE_DIVER:int						= 200; //Explore Deep Sea 100 times.
-		public static const UNKNOWN_ACHIEVEMENT_201:int			= 201; //Explore Battlefield 100 times.
+		public static const COMBAT_REITERPALLASCH:int				= 190;
+		public static const COMBAT_UNCANNY_REITERPALLASCH:int		= 191;
+		public static const COMBAT_UNCANNY_BLOOD_LETTER:int			= 192;
+		public static const COMBAT_MEAT_PASTY:int					= 193;
+		public static const COMBAT_PULVERIZE:int					= 194;
+		public static const COMBAT_ERASE:int						= 195;
+		public static const GENERAL_STATS_150:int					= 196;
+		public static const GENERAL_STATS_200:int					= 197;
+		public static const GENERAL_STATS_300:int					= 198;
+		public static const GENERAL_STATS_500:int					= 199;
+		public static const ZONE_DIVER:int							= 200; //Explore Deep Sea 100 times.
+		public static const UNKNOWN_ACHIEVEMENT_201:int				= 201; //Explore Outer Battlefield 100 times.
 		public static const DUNGEON_TIGER_STALKING_THE_DRAGON:int	= 202;
-		public static const DUNGEON_SLAIN_THE_HEROSLAYER:int	= 203;
-		public static const UNKNOWN_ACHIEVEMENT_204:int			= 204;
-		public static const UNKNOWN_ACHIEVEMENT_205:int			= 205;
-		public static const UNKNOWN_ACHIEVEMENT_206:int			= 206;
-		public static const UNKNOWN_ACHIEVEMENT_207:int			= 207;
-		public static const UNKNOWN_ACHIEVEMENT_208:int			= 208;
-		public static const UNKNOWN_ACHIEVEMENT_209:int			= 209;
+		public static const DUNGEON_SLAIN_THE_HEROSLAYER:int		= 203;
+		public static const GENERAL_BAD_ENDER_2:int					= 204; //Cause 4 bad ends to various NPCs.
+		public static const GENERAL_BAD_ENDER_3:int					= 205; //Cause 8 bad ends to various NPCs.
+		public static const GENERAL_BAD_ENDER_4:int					= 206; //Cause 16 bad ends to various NPCs.
+		public static const DUNGEON_DELVER_EXPERT:int				= 207;
+		public static const DUNGEON_DELVER_GRAND_MASTER:int			= 208;
+		public static const UNKNOWN_ACHIEVEMENT_209:int				= 209; //Explore Outer Battlefield 100 times.
 		public static const UNKNOWN_ACHIEVEMENT_210:int			= 210;
+		public static const UNKNOWN_ACHIEVEMENT_211:int			= 211;
+		public static const UNKNOWN_ACHIEVEMENT_212:int			= 212;
+		public static const UNKNOWN_ACHIEVEMENT_213:int			= 213;
+		public static const UNKNOWN_ACHIEVEMENT_214:int			= 214;
+		public static const UNKNOWN_ACHIEVEMENT_215:int			= 215;
+		public static const UNKNOWN_ACHIEVEMENT_216:int			= 216;
+		public static const UNKNOWN_ACHIEVEMENT_217:int			= 217;
+		public static const UNKNOWN_ACHIEVEMENT_218:int			= 218;
+		public static const UNKNOWN_ACHIEVEMENT_219:int			= 219;
+		public static const UNKNOWN_ACHIEVEMENT_220:int			= 220;
 		
 	}
 

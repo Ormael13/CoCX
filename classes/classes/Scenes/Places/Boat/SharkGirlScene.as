@@ -75,7 +75,7 @@ public function sharkGirlEncounter(exploreLoc:Number = 0):void {
 public function oceanSharkGirlEncounter():void {
 	clearOutput();
 	spriteSelect(70);
-	outputText("Your boat is hit from the side and violently rocked, throwing you right into the water! As you look for your opponent you see an indistinct shape doing circle in the distance and closing on you at high speed until its shape becomes clear, jaw wide with a toothy grin.\n\n");
+	outputText("Your boat is hit from the side and violently rocked, throwing you right into the water! As you look for your opponent you see an indistinct shape doing circle in the distance and closing in on you at high speed until its shape becomes clear, jaw wide with a toothy grin.\n\n");
 	if (flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] <= 0) {
 		flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] = 1;
 		outputText("<b>New codex entry unlocked: Shark-girls & Tigershark-girls!</b>\n\n")
@@ -125,6 +125,20 @@ internal function sharkWinChoices():void {
 		}
 	}
 	else cleanupAfterCombat();
+}
+public function oceanSharkWinChoices():void {
+	spriteSelect(70);
+	//HP Win
+	clearOutput();
+	if(monster.HP < 1) {
+		outputText("The shark-girl falls, clearly defeated.");
+	}
+	//Lust win
+	else {
+		outputText("The shark-girl begins masturbating, giving up on dominating you.  The sight is truly entrancing.");
+		dynStats("lus", 15);
+	}
+	
 }
 
 //Male and Herm: 
