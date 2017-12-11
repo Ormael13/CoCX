@@ -40,19 +40,18 @@ import coc.xxc.BoundStory;
 				npc.unload();
 			}
 		}
-		protected var story:BoundStory;
+		protected var _story:BoundStory;
 		protected var _storyName:String;
+		protected function get story():BoundStory{
+			if(!_story){
+				_story = CoC.instance.rootStory.locate(_storyName).bind(CoC.instance.context);
+			}
+			return _story
+		}
 
 		public function XXCNPC(storyName:String)
 		{
 			_storyName = storyName;
-			if(!CoC.instance||CoC.instance.rootStory == null){
-				CoC.onGameInit(init);
-			}
-			else {init();}
-		}
-		private function init():void{
-			story = CoC.instance.rootStory.locate(_storyName).bind(CoC.instance.context);
 		}
 		public function display(toDisplay:String,locals:*=null):void
 		{

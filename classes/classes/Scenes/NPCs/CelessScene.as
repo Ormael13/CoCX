@@ -40,18 +40,14 @@ import flash.utils.getQualifiedClassName;
 			}
 			else
 			{
-				throw new Error("Singleton. Use getInstance();");
+				throw new Error("Singleton. Use instance to access");
 			}
-		}
-		public static function getInstance():CelessScene
-		{
-			if (!_instance){
-				new CelessScene();
-			}
-			return _instance;
 		}
         public static function get instance():CelessScene {
-            return getInstance();
+	        if (!_instance){
+		        new CelessScene();
+	        }
+	        return _instance;
         }
 		public override function unload():void{
 			EventParser.timeAwareClassRemove(_instance);
@@ -281,18 +277,16 @@ import flash.utils.getQualifiedClassName;
         public function celessForcedIntroForTesting():void {
             celessUnicornIntro();
         }
-		//Fixme @Oxdeception
-		public static function celessUnicornIntro():void{instance._celessUnicornIntro();}
-        private function _celessUnicornIntro(stage:int = 0, wasMale:Boolean = false ):void{
+        public function celessUnicornIntro(stage:int = 0, wasMale:Boolean = false ):void{
             switch(stage){
                 case 0:
 					scene("strings/forest-unicorn/intro/intro");
 					if(player.hasVirginVagina()){
 						display("strings/forest-unicorn/intro/virgin");
 						menu();
-                        addButton(0, "Okay", _celessUnicornIntro, (player.isMale() || player.isGenderless())?2:3);
-                        if(player.hasCock()){addButton(1, "Fuck Her", _celessUnicornIntro, 4);}
-                        addButton(5, "NoWay", _celessUnicornIntro, 1);
+                        addButton(0, "Okay", celessUnicornIntro, (player.isMale() || player.isGenderless())?2:3);
+                        if(player.hasCock()){addButton(1, "Fuck Her", celessUnicornIntro, 4);}
+                        addButton(5, "NoWay", celessUnicornIntro, 1);
 					} else {
 						display("strings/forest-unicorn/intro/noVirgin");
 						_age = _ageCanMeetNightmare;
@@ -313,7 +307,7 @@ import flash.utils.getQualifiedClassName;
                         player.removeCock(0, 1);
                     }
                     player.createVagina();
-                    addButton(0, "Next", _celessUnicornIntro, 3,true);
+                    addButton(0, "Next", celessUnicornIntro, 3,true);
                     break;
                 case 3:
                     scene("strings/forest-unicorn/okay-female", {$wasMale:wasMale, $isTaur:player.isTaur()});
@@ -327,9 +321,7 @@ import flash.utils.getQualifiedClassName;
                     break;
             }
         }
-		//Fixme @Oxdeception
-		public static function celessArmor():void{instance._celessArmor();}
-        private function _celessArmor():void{
+        public function celessArmor():void{
             scene("strings/forest-unicorn/armorScene");
             findArmor();
             inventory.takeItem(armors.CTPALAD, camp.returnToCampUseOneHour);

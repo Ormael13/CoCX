@@ -130,7 +130,7 @@ public class Diva extends Monster {
 
     //region scenes
     override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void {
-        DivaScene.getInstance().moonlightSonata(true);
+        DivaScene.instance.moonlightSonata(true);
         cleanupAfterCombat();
     }
     override public function defeated(hpVictory:Boolean):void{
@@ -147,7 +147,7 @@ public class Diva extends Monster {
 			}
 			else{*/
 				display("scenes/defeated/normal");
-				DivaScene.getInstance().status++;
+				DivaScene.instance.status++;
 				cleanupAfterCombat();
 			//}
         }
@@ -155,14 +155,14 @@ public class Diva extends Monster {
         function finalChoice(choice:int):void{
             EngineCore.clearOutput();
             if(choice == 0){
-                DivaScene.getInstance().status = -1;
+                DivaScene.instance.status = -1;
                 display("scenes/defeated/final/yesChoice");
             }
             else if(choice == 1){
                 display("scenes/defeated/final/noChoice");
             }
             else{
-                DivaScene.getInstance().status = -2;
+                DivaScene.instance.status = -2;
                 display("scenes/defeated/final/neverChoice");
             }
             cleanupAfterCombat();

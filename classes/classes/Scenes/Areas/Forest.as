@@ -203,15 +203,15 @@ use namespace CoC;
 						chance: bigJunkChance
 					},{
 						name: "celess-unicorn",
-						call: CelessScene.celessUnicornIntro,
+						call: CelessScene.instance.celessUnicornIntro,
 						when: function():Boolean{
-							return (player.hasVirginVagina() || ((player.isMale()||player.isGenderless()) && player.ass.analLooseness == 0)) && (player.level > 20) && !player.isPregnant() && !CelessScene.getInstance().armorFound && ! CelessScene.getInstance().isCompanion();
+							return (player.hasVirginVagina() || ((player.isMale()||player.isGenderless()) && player.ass.analLooseness == 0)) && (player.level > 20) && !player.isPregnant() && !CelessScene.instance.armorFound && ! CelessScene.instance.isCompanion();
 						}
 					}, {
 						name: "celess-armor",
-						call: CelessScene.celessArmor,
+						call: CelessScene.instance.celessArmor,
 						when: function():Boolean{
-							return CelessScene.getInstance().isCompanion() && !CelessScene.getInstance().armorFound;
+							return CelessScene.instance.isCompanion() && !CelessScene.instance.armorFound;
 						}
 					}, {
 						name  : "patchouli",

@@ -22,8 +22,7 @@ public class SamirahScene extends XXCNPC
                 throw new Error("Singleton class. Use getInstance()");
             }
         }
-
-        static public function getInstance():SamirahScene
+        static public function get instance():SamirahScene
 		{
 			if (_instance == null){
 				new SamirahScene();
