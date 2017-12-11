@@ -223,10 +223,7 @@ public class Lethice extends Monster
 			var damage:Number = 100 + rand(25);
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
-			damage = Math.round(damage);
-			damage = player.takeMagicDamage(damage);
-
-			outputText(" (" + damage + ")");
+			player.takeMagicDamage(damage,true);
 		}
 
 		private function wingbuffet():void
@@ -273,7 +270,8 @@ public class Lethice extends Monster
 				damage = player.takePhysDamage(damage);
 				if (damage <= 5)
 				{
-					outputText(" She barely scratches you. She’ll need stronger weapons than that to take you down. (" + damage + ")");
+					outputText(" She barely scratches you. She’ll need stronger weapons than that to take you down. ");
+					if(damage > 0){outputText("(" + damage + ")");}
 				}
 				else
 				{
@@ -421,8 +419,8 @@ public class Lethice extends Monster
 			else
 			{
 				var damage:Number = 70 - rand(player.tou);
-				damage = player.takePhysDamage(damage);
-				outputText(" Several of the big, stout horns slam into you, given all the more force thanks to the crushing waves of demons pushing them forward. You yelp in pain as they score your flesh! (" + damage + ")");
+				outputText(" Several of the big, stout horns slam into you, given all the more force thanks to the crushing waves of demons pushing them forward. You yelp in pain as they score your flesh!");
+				player.takePhysDamage(damage,true);
 			}
 		}
 
@@ -436,9 +434,8 @@ public class Lethice extends Monster
 			else
 			{
 				var damage:Number = 70 - rand(player.tou);
-				damage = player.takePhysDamage(damage);
-
-				outputText(" You squirm out of their crushing embrace, trying to crawl away on the ground, but if they can't squeeze you down the demons seem happy to trample you! You scream in alarm and pain as dozens of feet, hooves, claws, and other appendages come crushing down on you! (" + damage + ")");
+				outputText(" You squirm out of their crushing embrace, trying to crawl away on the ground, but if they can't squeeze you down the demons seem happy to trample you! You scream in alarm and pain as dozens of feet, hooves, claws, and other appendages come crushing down on you!");
+				player.takePhysDamage(damage,true);
 			}
 		}
 
@@ -712,8 +709,9 @@ public class Lethice extends Monster
 					outputText(" There’s suddenly a dearth of room in the chest of your [armor]. Your [chest] are expanding, bouncing distractingly and slowing you with the extra weight!");
 					player.growTits(2, player.breastRows.length, false, 2);
 				}
-
-				outputText(" (" + damage + ")");
+				if(damage > 0){
+					outputText(" (" + damage + ")");
+				}
 			}
 		}
 
@@ -759,9 +757,7 @@ public class Lethice extends Monster
 				damage = 100 + weaponAttack + str - rand(player.tou);
 			}
 
-			damage = player.takeMagicDamage(damage);
-
-			outputText(" ("+ damage +")");
+			player.takeMagicDamage(damage, true);
 		}
 
 		private function sonicwhip():void
@@ -769,8 +765,7 @@ public class Lethice extends Monster
 			outputText("Lethice raises her sizzling, flame-spitting whip high up overhead, then snaps her arm out and back in an instant, cracking the whip so hard that it gives birth to a shockwave of flame and cacophonous thunder. There’s no avoiding the all-encompassing wave of energy. There’s not even time to brace yourself. It slams into you, rattling bones and scorching flesh.");
 
 			var damage:Number = 75 + weaponAttack + str;
-			damage = player.takeMagicDamage(damage);
-			outputText(" (" + damage +")");
+			player.takeMagicDamage(damage,true);
 		}
 
 		private function whipchoke():void
@@ -799,11 +794,9 @@ public class Lethice extends Monster
 				outputText("\n\n<b>You are effectively silenced!</b>");
 
 				var damage:Number = weaponAttack + 25 - rand(player.tou);
-				damage = player.takePhysDamage(damage);
+				player.takePhysDamage(damage,true);
 
 				player.createStatusEffect(StatusEffects.WhipSilence, 3, 0, 0, 0);
-
-				outputText(" (" + damage +")");
 			}
 		}
 	
