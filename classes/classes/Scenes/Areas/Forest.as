@@ -100,7 +100,7 @@ use namespace CoC;
 						name  : "deepwoods",
 						call  : discoverDeepwoods,
 						when  : function ():Boolean {
-							return (player.exploredForest >= 20) && !deepwoodsDiscovered();
+							return (player.level >= 7) && !deepwoodsDiscovered();
 						},
 						chance: Encounters.ALWAYS
 					},  {

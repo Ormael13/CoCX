@@ -8,8 +8,11 @@ package classes.Scenes.NPCs
 	import classes.GlobalFlags.kFLAGS;
 	import classes.CoC;
 	import classes.Scenes.SceneLib;
+	import classes.Scenes.Areas.Beach.DemonPackBeach;
 	import classes.Scenes.Areas.Bog.LizanRogue;
 	import classes.Scenes.Areas.Forest.AkbalScene;
+	import classes.Scenes.Areas.GlacialRift.FrostGiant;
+	import classes.Scenes.Areas.HighMountains.Phoenix;
 	import classes.Scenes.Areas.Mountain.Minotaur;
 	import classes.Scenes.Areas.Swamp.CorruptedDrider;
 	import classes.Scenes.NPCs.Etna;
@@ -26,7 +29,7 @@ package classes.Scenes.NPCs
 		PATCHOULI_FOLLOWER: 1 - Meet and not taken offer, 2 - Meet and taken offer, 3 - Bad Ended, 4 - Meet / taken offer / forgiven, 5 - Tied up in camp, 6/7 - Bimbofied
 		*/
 		private function visitedAllAreas():Boolean {
-			if (player.exploredMountain >= 1 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0 && flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0 && flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0 && flags[kFLAGS.BOG_EXPLORED] > 0 && player.hasStatusEffect(StatusEffects.ExploredDeepwoods))
+			if (player.exploredMountain >= 1 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0 && flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0 && flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0 && flags[kFLAGS.BOG_EXPLORED] > 0 && player.hasStatusEffect(StatusEffects.ExploredDeepwoods))
 				return true;
 			return false;
 		}
@@ -70,20 +73,22 @@ package classes.Scenes.NPCs
 		
 		public function patchouliExploreLuckyWheel():void {
 			if (flags[kFLAGS.PATCHOULI_FOLLOWER] < 2) flags[kFLAGS.PATCHOULI_FOLLOWER] = 2;
-			if (player.exploredMountain <= 0) patchouliExploreMountains();
-			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] < 1) patchouliExploreHighMoutains();
-			else if (flags[kFLAGS.TIMES_EXPLORED_PLAINS] < 1) patchouliExplorePlains();
-			//Glacial Rift
-			//Vulcanic Crag
-			else if (flags[kFLAGS.TIMES_EXPLORED_SWAMP] < 1) patchouliExploreSwamp();
-			if (flags[kFLAGS.BOG_EXPLORED] < 1) patchouliExploreBog();
-			else if (!player.hasStatusEffect(StatusEffects.ExploredDeepwoods)) patchouliExploreDeepWood();
-			else doNext(camp.returnToCampUseOneHour);//until I properly add wonderland scene
+			if (player.exploredMountain <= 0) patchouliExploreMountains();//5
+			else if (!player.hasStatusEffect(StatusEffects.ExploredDeepwoods)) patchouliExploreDeepWood();//7
+			else if (flags[kFLAGS.TIMES_EXPLORED_PLAINS] < 1) patchouliExplorePlains();//9
+			else if (flags[kFLAGS.TIMES_EXPLORED_SWAMP] < 1) patchouliExploreSwamp();//13
+			else if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] < 1) patchouliExploreHighMoutains();//15
+			//blight ridge 21
+			else if (flags[kFLAGS.BOG_EXPLORED] < 1) patchouliExploreBog();//23
+			else if (flags[kFLAGS.DISCOVERED_BEACH] < 1) patchouliExploreBeachOceanDeepSea();//25
+			else if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] < 1) patchouliExploreGlacialRit();//25
+			else if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] < 1) patchouliExploreVulcanic();//25
+			else patchouliExploreWonderland();
 		}
 		public function patchouliExploreMountains():void {
 			clearOutput();
 			outputText("The cat jumps down from the tree and walks ahead of you, showing you the way. Strangely, the landscape seems to change absurdly fast around you as you follow him until you end up in a somewhat mountainy area.\n\n");
-			outputText("<b>You've discovered the Mountain!</b>\n\n");
+			outputText("<b>Discovered Mountain!</b>\n\n");
 			player.explored++;
 			player.exploredMountain = 1;
 			outputText("As you turn a corner you end up looking at the back of a somewhat tall man with the features of a bull. You’re about to sneak away when Patchouli shouts.\n\n");
@@ -112,13 +117,26 @@ package classes.Scenes.NPCs
 		}
 		public function patchouliExploreGlacialRit():void {
 			clearOutput();
-			
-			//startCombat(new ...);
+			outputText("The cat jumps down from the tree and walks ahead of you, showing you the way. Strangely, the landscape seems to change absurdly fast around you as you follow him until the temperature drops drastically. You see snow falling all around you and realise that you are now in some kind of inhospitable icy wasteland.\n\n");
+			outputText("<b>Discovered glacial rift!</b>\n\n");
+			flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] = 1;
+			player.explored++;
+			outputText("You decide that you’ve had enough and prepare to tell your guide that you're leaving, when Patchouli yells into the far distance.\n\n");
+			outputText("\"<i>Hey, big idiot! There’s a puny bug for you to squish right here! ");
+			if (player.hasCock()) outputText("He");
+			else outputText("She");
+			outputText(" said that your momma is ugly and that you were born a defect!</i>\"\n\n");
+			outputText("The cat turns over to you, grinning wide as you hear the ground quake - something is coming, and it's huge! Before you have any time to punish the cat, he vanishes, still laughing as the frame of a man the size of a building breaks out of the blizzard, looking straight at you with furious eyes.");
+			startCombat(new FrostGiant());
 		}
 		public function patchouliExploreVulcanic():void {
 			clearOutput();
-			
-			//startCombat(new ...);
+			outputText("The cat jumps down from the tree and walks ahead of you, showing you the way. Strangely, the landscape seems to change absurdly fast around you as you follow him until you end up in a somewhat hot area. You can see lava rivers every now and then across the ashen land.\n\n");
+			outputText("<b>Discovered Volcanic area!</b>\n\n");
+			flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] = 1;
+			player.explored++;
+			outputText("Just as you consider leaving this unfriendly land, the cat shouts something and what looks to be a harpy mixed up with a fiery lizard flies from a cliff toward the both of you. You see the damned cat disappearing, just before the battle starts.\n\n");
+			startCombat(new Phoenix());
 		}
 		public function patchouliExploreSwamp():void {
 			clearOutput();
@@ -149,12 +167,33 @@ package classes.Scenes.NPCs
 			outputText("You see a large panther surge out of a bush, and the way it looks at you is anything but friendly!");
 			akbalScene.supahAkabalEdition();
 		}
+		public function patchouliExploreBeachOceanDeepSea():void {
+			clearOutput();
+			outputText("The cat jumps down from the tree and walks ahead of you, showing you the way. Strangely, the landscape seems to change absurdly fast around you as you follow him until you end up on sand, hearing seagulls all around you. There's even crashing waves of water nearby.\n\n");
+			outputText("<b>Discovered Beach, Ocean and Deep Sea!</b>\n\n");
+			flags[kFLAGS.DISCOVERED_BEACH] = 1;
+			outputText("The moment your gaze turn back to your guide you realise Patchoul");
+			if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= 6) outputText("e");
+			else outputText("i");
+			outputText(" is no longer there. Instead your gaze go eye to eye with that of a demon dressed like a pirate.\n\n");
+			outputText("\"<i>Yarr we found some nice piece of ass here matey!! Lets claim that booty!</i>\"\n\n");
+			outputText("You can hear the cat chuckle in the distance as you engage with a full crew of demonic pirates!");
+			startCombat(new DemonPackBeach());
+		}
 		public function patchouliExploreWonderland():void {
 			clearOutput();
-			
-			//startCombat(new ...);
+		/*	if (flags[kFLAGS.PATCHOULI_AND_WONDERLAND] == 1) {
+				
+			}
+			else {
+		*/		outputText("The cat jumps down from the tree and walks ahead of you, showing you the way. Strangely, the landscape seems to change absurdly fast around you as you follow him until you end up in an exceedingly colorful version of the forest. Things here look weirder than usual, but not in a sexual way, rather it’s like the painting of a mad artist.\n\n");
+				outputText("\"<i>Well wow, out of all locations I didn’t expect us to end up in here... just... just pick up a fruit or two and I will escort you out.</i>\"\n\n");
+				outputText("The cat seems uneasy, but you don’t care. You spot a weird set of whisker fruits in a nearby tree and proceed to pack them up before leaving this strange place. You had the weird feeling something was watching you while you were leaving, but this must be your imagination.");
+				inventory.takeItem(consumables.W_FRUIT, camp.returnToCampUseOneHour);//potem zmienić na wonderfruit
+		//		flags[kFLAGS.PATCHOULI_AND_WONDERLAND] = 1;
+		//	}
 		}
-		
+			//startCombat(new ...);
 		public function patchouliForgiveHim():void {
 			clearOutput();
 			outputText("You sigh and decide to forgive the cat for what he has done.\n\n");

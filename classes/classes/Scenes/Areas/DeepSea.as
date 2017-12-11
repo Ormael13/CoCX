@@ -27,17 +27,26 @@ package classes.Scenes.Areas
 			var select:int;
 			
 			//Build choice list!
-			choice[choice.length] = 0;	//Scylla
-			choice[choice.length] = 1;	//Kraken
+		//	choice[choice.length] = 0;	//Kraken
+			choice[choice.length] = 0;	//Shark Girls Pack
+			choice[choice.length] = 1;	//Tiger Shark Girls Pack
 			if (rand(4) == 0) choice[choice.length] = 2;	 //Find nothing! The rand will be removed from this once the Deep Sea is populated with more encounters.
 			
 			select = choice[rand(choice.length)];
 			switch(select) {
 			/*	case 0:
-					CoC.instance.exploration.genericImpEncounters2();
+					CoC.instance.exploration.genericDemonsEncounters1();
+					break;
+				case 01:
+					flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] = 1;
+					sharkGirlScene.oceanSharkGirlEncounter();
 					break;
 				case 1:
-					CoC.instance.exploration.genericDemonsEncounters1();
+					flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] = 2;
+					sharkGirlScene.oceanTigersharkGirlEncounter();
+					break;
+				case 3:
+					CoC.instance.exploration.genericImpEncounters2();
 					break;
 			*/	default:
 					clearOutput();

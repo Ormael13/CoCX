@@ -54,18 +54,18 @@ public class DemonPackBeach extends Monster
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
-			initStrTouSpeInte(110, 150, 40, 20);
-			initWisLibSensCor(20, 100, 70, 100);
+			initStrTouSpeInte(170, 190, 80, 40);
+			initWisLibSensCor(40, 150, 80, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 44;
+			this.weaponAttack = 69;
 			this.armorName = "demonic skin";
-			this.armorDef = 40;
+			this.armorDef = 55;
 			this.bonusHP = 200;
 			this.bonusLust = 200;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 30;
+			this.level = 45;
 			this.gems = rand(60)+20;
 			this.drop = new WeightedDrop().addMany(1,
 							consumables.SUCMILK,

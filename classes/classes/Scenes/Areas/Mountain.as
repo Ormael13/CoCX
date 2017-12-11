@@ -65,7 +65,7 @@ public class Mountain extends BaseContent
 						name: "highmountains",
 						when: function ():Boolean {
 							return !SceneLib.highMountains.isDiscovered()
-								   && (player.level >= 5 || player.exploredMountain >= 40)
+								   && (player.level >= 15)
 						},
 						call: SceneLib.highMountains.discover
 					},{

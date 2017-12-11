@@ -35,22 +35,16 @@ public class UnderwaterSharkGirl extends Monster
 			if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
 			else player.createStatusEffect(StatusEffects.Hemorrhage,3,0.05,0,0);
 		}
-		/*
+		
 		override public function defeated(hpVictory:Boolean):void
 		{
 			SceneLib.sharkgirlScene.oceanSharkWinChoices();
 		}
-
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (pcCameWorms){
-				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
-				doNext(SceneLib.combat.endLustLoss);
-			} else {
-				game.boat.sharkGirlScene.sharkLossRape();
-			}
+			SceneLib.sharkgirlScene.sharkLossOceanRape();
 		}
-		*/
+		
 		public function UnderwaterSharkGirl() 
 		{
 			this.a = "the ";
@@ -82,7 +76,7 @@ public class UnderwaterSharkGirl extends Monster
 			this.lust = 40;
 			this.lustVuln = .9;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 54;
+			this.level = 52;
 			this.gems = rand(30) + 25;
 			this.drop = new WeightedDrop().
 					add(consumables.L_DRAFT,3).

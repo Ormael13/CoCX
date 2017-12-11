@@ -56,9 +56,11 @@ use namespace CoC;
 					scyllaScene.oceanScyllaEncounter();
 					break;
 				case 2:
+					flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] = 1;
 					sharkGirlScene.oceanSharkGirlEncounter();
 					break;
 				case 3:
+					flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] = 2;
 					sharkGirlScene.oceanTigersharkGirlEncounter();
 					break;
 				case 4:
