@@ -108,7 +108,7 @@ public class Boat extends AbstractLakeContent
 				case 5:
 					outputText("This is a calm day at the lake, you managed to hold your boat in place and, while you found nothing of note, couldn’t help yourself but to enjoy a few hour using your newly acquired fishing pole. You even spotted Calu in the distance doing the same thing from her usual sitting spot.\n\n");
 					outputText("<b>You got a fish!</b>");
-					inventory.takeItem(consumables.FISHFIL, camp.returnToCampUseOneHour);
+					inventory.takeItem(consumables.FREFISH, camp.returnToCampUseOneHour);
 					return;
 				case 6:
 					flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] = 1;

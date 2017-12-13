@@ -273,11 +273,7 @@ import flash.utils.getQualifiedClassName;
                 inventory.takeItem(item, camp.returnToCampUseOneHour);
 			}
 		}
-		//For tesing - delete later
-        public function celessForcedIntroForTesting():void {
-            celessUnicornIntro();
-        }
-        public function celessUnicornIntro(stage:int = 0, wasMale:Boolean = false ):void{
+		public function celessUnicornIntro(stage:int = 0, wasMale:Boolean = false ):void{
             switch(stage){
                 case 0:
 					scene("strings/forest-unicorn/intro/intro");

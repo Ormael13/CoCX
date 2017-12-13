@@ -1187,6 +1187,15 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 			//Decrement mino withdrawal symptoms display cooldown
 			//flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00330] prevents PC getting two of the same notices overnite
 			else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00330] > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00330]--;
+			//Konstantin buffs to equipment
+			if (player.hasStatusEffect(StatusEffects.KonstantinArmorPolishing)) {
+				if (player.statusEffectv1(StatusEffects.KonstantinArmorPolishing) <= 0) player.removeStatusEffect(StatusEffects.KonstantinArmorPolishing);
+				else player.addStatusValue(StatusEffects.KonstantinArmorPolishing, 1, -1);
+			}
+			if (player.hasStatusEffect(StatusEffects.KonstantinWeaponSharpening)) {
+				if (player.statusEffectv1(StatusEffects.KonstantinWeaponSharpening) <= 0) player.removeStatusEffect(StatusEffects.KonstantinWeaponSharpening);
+				else player.addStatusValue(StatusEffects.KonstantinWeaponSharpening, 1, -1);
+			}
 			if (player.findPerk(PerkLib.FutaForm) >= 0) { //Futa checks
 				if (!player.hasCock()) { //(Dick regrowth)
 					player.createCock();

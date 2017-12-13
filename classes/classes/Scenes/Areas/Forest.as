@@ -217,7 +217,14 @@ use namespace CoC;
 						name  : "patchouli",
 						call  : SceneLib.patchouliScene.meetThePatchouli,
 						when  : function():Boolean {
-							return flags[kFLAGS.PATCHOULI_FOLLOWER] < 2;
+							return (flags[kFLAGS.PATCHOULI_FOLLOWER] < 3 || flags[kFLAGS.PATCHOULI_FOLLOWER] == 4);
+						},
+						chance: 0.8
+					}, {
+						name  : "konstantin",
+						call  : SceneLib.konstantin.meetKonstantinAtForest,
+						when  : function():Boolean {
+							return (flags[kFLAGS.KONSTANTIN_FOLLOWER] < 2);
 						},
 						chance: 0.8
 					});

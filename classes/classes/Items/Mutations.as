@@ -8529,14 +8529,13 @@ public final class Mutations extends MutationsHelper
 			}
 		}
 */
-//Fish Fillet
+		//Fish Fillet
 		public function fishFillet(player:Player):void
 		{
 			clearOutput();
             if (!CoC.instance.inCombat) outputText("You sit down and unwrap your fish fillet. It's perfectly flaky, allowing you to break it off in bite-sized chunks.  The salty meal disappears quickly, and your stomach gives an appreciative gurgle.");
             //(In combat?)
 			else outputText("You produce the fish fillet from your bag.  Rather than unwrap it and savor the taste as you normally would, you take a large bite out of it, leaf wrapping and all.  In no time your salty meal is gone, your stomach giving an appreciative gurgle.  ");
-
 			//Increase HP by quite a bit!)
 			//(Slight chance at increasing Toughness?)
 			//(If lake has been tainted, +1 Corruption?)
@@ -8565,6 +8564,17 @@ public final class Mutations extends MutationsHelper
 			HPChange(Math.round(player.maxHP() * .25), true);
 			player.slimeFeed();
 			player.refillHunger(25);
+		}
+		//Fresh Fish
+		public function freshFish(player:Player):void
+		{
+			clearOutput();
+            if (!CoC.instance.inCombat) outputText("You sit down and unwrap your fish fillet. It's perfectly flaky, allowing you to break it off in bite-sized chunks.  The salty meal disappears quickly, and your stomach gives an appreciative gurgle.");
+            //(In combat?)
+			else outputText("You produce the fish fillet from your bag.  Rather than unwrap it and savor the taste as you normally would, you take a large bite out of it, leaf wrapping and all.  In no time your salty meal is gone, your stomach giving an appreciative gurgle.  ");
+			//Increase HP by quite a bit!)
+			HPChange(Math.round(player.maxHP() * .2), true);
+			player.refillHunger(30);
 		}
 //Trap Oil
 //Flavour Description: A round, opaque glass vial filled with a clear, viscous fluid.  It has a symbol inscribed on it, a circle with a cross and arrow pointing out of it in opposite directions.  It looks and smells entirely innocuous.

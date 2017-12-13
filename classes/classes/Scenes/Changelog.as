@@ -40,10 +40,10 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-^ new archievments and few old ones slight adjusted. SOme of new are not yet reachable but will be...in future builds.\n");
+			outputText("-Rathazul will be recruitable to camp after 2 not 3 times PC used his services.\n");
+			outputText("-6 new archievments and few old ones slight adjusted. Some of new are not yet reachable but will be...in future builds.\n");
 			outputText("-New camp structure: Dam. No prereq. structure, 300 wood, 200 nails. PC building small wood dam on steam next to camp.\n");
-			outputText("-New camp structure: Fishery. Req. Dam, 300 wood, 200 nails. PC building fishery, at which some of the camp npc's can work (currently only Izma). When npc working at it it would generate 5 fishes per day. But when Ceani is in camp she will eat 5 fishes per day.\n");
+			outputText("-New camp structure: Fishery. Req. Dam, 300 wood, 200 nails. PC building fishery, at which some of the camp npc's can work (currently only Izma). When npc working at it it would generate 5 fishes per day. But when Ceani is in camp she will eat 5 fishes per day. PC can pick 1 or stack of 10 fresh fishes if there is enough of them in fishery (left after Ceani feeding).\n");
 			outputText("-Camp NPC's that can spar with PC can now slowly over time lvl-up. It's need to first toggle it in Camp Actions menu by chaning those npc's 'mode' from relax to 'training'. At any time it can be switch back to 'relax' as otherwise NPC's will lvl-up till reaching current max lvl they can attain. Some may be worried about it but some of you will gladly welcome those super high lvl sparing partners. ");
 			outputText("Each lvl-up will rise their lvl by 6 (in normal case as some npc's wil have their own lvl-ing pace - vide Evangeline that for a longer time had slight different lvl-up pattern). To cause each NPC to go training PC need beat them in sparring enough times (at start it's only around 3-5 times). But after each lvl-up amount of won fight for their lvl-up's will incease by 1. Also time they training ");
 			outputText("will extend each time starting from around 6-8 hours. IN time NPC are busy training they will be unable to be itneracted so...yeah that mean for some time NPC will be ignoring PC and just training. Thta part aside fact of prevent NPC keep lvl-ing till limit was reason I put toggle on train/relax mode for them. As long NPC not reached req. defeats to trigger training start it won't gon into \n");

@@ -131,6 +131,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const KnowsVioletPupilTransformation:StatusEffectType = mk("Knows Violet Pupil Transformation");
 		public static const KnowsWereBeast:StatusEffectType                 = mk("Knows Were-Beast");
 		public static const KnowsWhitefire:StatusEffectType                 = mk("Knows Whitefire");
+		public static const KonstantinArmorPolishing:StatusEffectType       = mk("Konstantin Armor Polishing");
+		public static const KonstantinWeaponSharpening:StatusEffectType     = mk("Konstantin Weapon Sharpening");
 		public static const LactationEndurance:StatusEffectType             = mk("Lactation Endurance");
 		public static const LactationReduction:StatusEffectType             = mk("Lactation Reduction");
 		public static const LactationReduc0:StatusEffectType                = mk("Lactation Reduc0");

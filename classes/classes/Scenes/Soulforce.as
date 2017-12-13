@@ -190,11 +190,11 @@ use namespace CoC;
 			addButton(4, "Materials", MaterialMenu).hint("For creting various materials for tests.");
 			addButton(5, "Enemies", EnemiesMenu).hint("For spawning various enemies to test fight them.");
 			addButton(6, "Ascension", AscensionMenu).hint("Submenu for Ascension related stuff.");
-			addButton(7, "TonsOfPerks", GiveTonsOfPermablePerks).hint("Give All unowned permable perks (for perm glitch test at ascension)");
-			addButton(8, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
-			addButton(9, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
-			if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 0) addButton(10, "AyaneFix", AyaneWrongSettingUpFollowerFlagFix).hint("Fixing Ayane no proper set up falg for recruitment.");
-			if (player.eyeColor != "brown") addButton(11, "Eye Color", eyesColorSelection).hint("Set eye color to default one so saves will not go crazy over it.");
+			//addButton(7, "TonsOfPerks", GiveTonsOfPermablePerks).hint("Give All unowned permable perks (for perm glitch test at ascension)");
+			addButton(7, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
+			addButton(8, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
+			if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 0) addButton(9, "AyaneFix", AyaneWrongSettingUpFollowerFlagFix).hint("Fixing Ayane no proper set up falg for recruitment.");
+			if (player.eyeColor != "brown") addButton(10, "Eye Color", eyesColorSelection).hint("Set eye color to default one so saves will not go crazy over it.");
 			addButton(11, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
 			//addButton(12, "<<< 12 >>>", CoC.instance.doNothing);
 			addButton(12, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
@@ -205,7 +205,7 @@ use namespace CoC;
 		}
 public function celessIntroForced():void {
 	clearOutput();
-	CelessScene.instance.celessForcedIntroForTesting();
+	CelessScene.instance.birthScene();
 }
 private function eyesColorSelection():void {
 	clearOutput();
@@ -714,6 +714,9 @@ private function resetHeroslayerOmnibusFlag():void {
 			addButton(3, "SpiderSilk", AddSpiderSilk).hint("Add 1 Spider Silk.");
 			addButton(4, "Ebonbloom", AddEbonbloom).hint("Add 1 Ebonbloom.");
 			addButton(5, "WorldTreeB.", AddWorldTreeBranch).hint("Add 1 World Tree Branch.");
+			addButton(6, "ChitinShard", AddBeeChitin).hint("Add 1 Chitin shard.");
+			addButton(7, "GreenGel", AddGreenGel).hint("Add 1 Green Gel.");
+			addButton(8, "DragonScale", AddDragonscale).hint("Add 1 Dragonscale.");
 			addButton(14, "Back", SoulforceCheats);
 		}
 		public function EnemiesMenu():void {
@@ -754,6 +757,18 @@ private function resetHeroslayerOmnibusFlag():void {
 		public function AddSpiderSilk():void {
 			outputText("\n\n<b>(Gained 1 Spider Silk!)</b>\n\n");
 			inventory.takeItem(useables.T_SSILK, MaterialMenu);
+		}
+		public function AddBeeChitin():void {
+			outputText("\n\n<b>(Gained 1 Chitin Shard!)</b>\n\n");
+			inventory.takeItem(useables.B_CHITN, MaterialMenu);
+		}
+		public function AddGreenGel():void {
+			outputText("\n\n<b>(Gained 1 Green Gel!)</b>\n\n");
+			inventory.takeItem(useables.GREENGL, MaterialMenu);
+		}
+		public function AddDragonscale():void {
+			outputText("\n\n<b>(Gained 1 Dragonscale!)</b>\n\n");
+			inventory.takeItem(useables.D_SCALE, MaterialMenu);
 		}
 		public function AddFish():void {
 			outputText("\n\n<b>(Gained 1 Fish!)</b>\n\n");

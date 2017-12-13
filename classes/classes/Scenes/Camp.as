@@ -941,6 +941,7 @@ public function followersCount():Number {
 	if (flags[kFLAGS.ANEMONE_KID] > 0) counter++;
 	if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4) counter++;
 	if (flags[kFLAGS.FLOWER_LEVEL] >= 4) counter++;
+	if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) counter++;
     for each (var npc:XXCNPC in _campFollowers){
         if(npc.isCompanion(XXCNPC.FOLLOWER)){counter++;}
     }
@@ -996,6 +997,7 @@ public function loversHotBathCount():Number {
 	if (followerHel()) counter++;
 	if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
 	if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
+	if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
 	if (player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) counter++;
 	if (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) counter++;
 	if (followerKiha()) counter++;
@@ -1508,6 +1510,21 @@ public function campFollowers(descOnly:Boolean = false):void {
 			outputText(". -Rathazul</i>\".\n\n");
 		}
 	}
+	//Konstantin
+	if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) {
+		if (model.time.hours >= 6 && model.time.hours <= 8) outputText("Konstantin has dragged out of his camp a mat, and is doing some flexing postures under the early morning light. He’s not particularly good at it, so most of times he ends up in awkward positions.");
+		else if (model.time.hours <= 12) outputText("You ursine smith is currently at work, sharpening and polishing blades.");
+		else if (model.time.hours <= 15) outputText("Konstantin has stopped his work to have a meal, and quite an abundant one. From where you are, you can smell the cooked meat and spice from his plate.");
+		else if (model.time.hours <= 18) outputText("The sound of metal on metal is heard, and you easily find the source. The bear smith is currently shaping some plates, polishing them each now and then and putting them aside once he satisfied with how they look.");
+		else if (model.time.hours <= 20) outputText("Your local smith, Konstantine isn’t not working right now. He has gone to his tent to rest and relax for awhile.");
+		else {
+			outputText("Konstantin is lying on a patch of grass, peacefully looking at the ");
+			outputText("red sky.");
+			if (flags[kFLAGS.LETHICE_DEFEATED] > 0) outputText("the starry night above you.");
+		}
+		outputText("\n\n");
+		buttons.add( "Rathazul", SceneLib.konstantin.KonstantinMainCampMenu);
+	}
 	//Shouldra
 	if (followerShouldra()) {
 		buttons.add( "Shouldra", shouldraFollower.shouldraFollowerScreen).hint("Talk to Shouldra. She is currently residing in your body.");
@@ -1626,20 +1643,20 @@ private function VisitFishery():void {
 	outputText("\n\nYou go check at the barrels for food.");
 	if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] > 0) outputText(" There is currently " + flags[kFLAGS.FISHES_STORED_AT_FISHERY] + " fish in the barrel.");
 	menu();
-	//if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] > 0) addButton(0, "Retrieve", Retrieve);
-	//if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] > 0) addButton(1, "Retrieve Stack", RetrieveStack);
+	if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] > 0) addButton(0, "Retrieve", Retrieve);
+	if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] > 0) addButton(1, "Retrieve Stack", RetrieveStack);
 	addButton(14, "Back", campActions);
 }
 private function Retrieve():void {
 	outputText("\n\nYou pick up a fish and add it to your inventory.");
 	flags[kFLAGS.FISHES_STORED_AT_FISHERY]--;
-	inventory.takeItem(consumables.FISHFIL, VisitFishery);
+	inventory.takeItem(consumables.FREFISH, VisitFishery);
 }
 private function RetrieveStack():void {
 	if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] >= 10) {
 		outputText("\n\nYou pick up and bag a stack of fish and add them to your inventory.");
 		flags[kFLAGS.FISHES_STORED_AT_FISHERY] -= 10;
-		inventory.takeItem(consumables.FISHFIL, VisitFishery);
+		inventory.takeItem(useables.STAFISH, VisitFishery);
 	}
 	else {
 		outputText("\n\nYou need more fish to bag out a bundle.");

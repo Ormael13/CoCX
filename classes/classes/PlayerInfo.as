@@ -670,6 +670,12 @@ if (SceneLib.valeria.valeriaFluidsEnabled()) {
 			statEffects += "\n";
 		}
 
+		if (player.statusEffectv1(StatusEffects.KonstantinArmorPolishing) > 0)
+			statEffects += "Armor Polishing - " + player.statusEffectv1(StatusEffects.KonstantinArmorPolishing) + " hours remaining. (+" + player.statusEffectv2(StatusEffects.KonstantinArmorPolishing) + "% to armor)\n";
+
+		if (player.statusEffectv1(StatusEffects.KonstantinWeaponSharpening) > 0)
+			statEffects += "Weapon Sharpening - " + player.statusEffectv1(StatusEffects.KonstantinWeaponSharpening) + " hours remaining. (+" + player.statusEffectv2(StatusEffects.KonstantinWeaponSharpening) + "% to melee weapon atk)\n";
+
 		if (player.statusEffectv1(StatusEffects.Dysfunction) > 0)
 			statEffects += "Dysfunction - " + player.statusEffectv1(StatusEffects.Dysfunction) + " hours remaining. (Disables masturbation)\n";
 

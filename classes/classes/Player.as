@@ -307,6 +307,11 @@ use namespace CoC;
 				armorDef = Math.round(armorDef * 1.1);
 				armorDef += 1;
 			}
+			//Konstantine buff
+			if (hasStatusEffect(StatusEffects.KonstantinArmorPolishing)) {
+				armorDef = Math.round(armorDef * (1 + (statusEffectv2(StatusEffects.KonstantinArmorPolishing) / 100)));
+				armorDef += 1;
+			}
 			//Skin armor perk
 			if (findPerk(PerkLib.ThickSkin) >= 0) {
 				armorDef += (2 * newGamePlusMod);
@@ -493,6 +498,10 @@ use namespace CoC;
 			}
 			if (armType == AppearanceDefs.ARM_TYPE_YETI && weaponName == "fists") {
 				attack += (5 * newGamePlusMod);
+			}
+			//Konstantine buff
+			if (hasStatusEffect(StatusEffects.KonstantinWeaponSharpening) && weaponName != "fists") {
+				attack *= 1 + (statusEffectv2(StatusEffects.KonstantinWeaponSharpening) / 100);
 			}
 			if (hasStatusEffect(StatusEffects.Berzerking)) attack += (15 + (15 * newGamePlusMod));
 			if (hasStatusEffect(StatusEffects.Lustzerking)) attack += (15 + (15 * newGamePlusMod));

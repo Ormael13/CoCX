@@ -127,6 +127,8 @@ public class SceneLib {
 
     public static var kindraFollower:KindraFollower = new KindraFollower();
 
+    public static var konstantin:Konstantin = new Konstantin();
+
     public static var latexGirl:LatexGirl = new LatexGirl();
 
     public static var marbleScene:MarbleScene = new MarbleScene();

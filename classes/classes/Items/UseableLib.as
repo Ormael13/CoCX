@@ -73,6 +73,9 @@ use namespace CoC;
 		public const VIALRAI:SimpleUseable = new SimpleUseable("VialRai", "V.Rainbow", "a rainbow vial", 1, 
 			"A rainbow vial used to dye scales.",
 			"You look at rainbow vial.  It would help Arian change scales color.");
+		public const STAFISH:SimpleUseable = new SimpleUseable("StaFish", "StackFish", "a stack of fishes", 60, 
+			"A stack of fresh fish. It’s smelly but it can be sold at the pawn shop for gems.",
+			"You look at stack of fresh fish.  Too many to eat them all at once you can sold them at the pawn shop for gems.");
 		public const GLDSTAT:SimpleUseable = new SimpleUseable("GldStat", "GldStat", "a golden statue", 2000,
 			"An intricate golden idol of an androgynous humanoid figure with nine long tails.  It probably had some spiritual significance to its owner.",
 			"", SceneLib.forest.kitsuneScene.kitsuneStatue);

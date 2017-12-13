@@ -2430,8 +2430,8 @@ public static const ETNA_TALKED_ABOUT_HER:int                              	    
 public static const ETNA_FEMALE_WIN_PUSSYTAIL_PLAY:int                              = 2422;
 public static const ETNA_LVL_UP:int                             			        = 2423;
 public static const ETNA_DAILY_VENOM_VIAL:int                   	                = 2424;
-public static const NPC4_02425:int                                   = 2425;
-public static const NPC4_02426:int                                   = 2426;
+public static const KONSTANTIN_FOLLOWER:int                                   		= 2425;
+public static const KONSTANTIN_SERVICES:int                                   		= 2426;
 public static const NPC4_02427:int                                   = 2427;
 public static const RANGIKU_AFFECTION:int                                   		= 2428;
 public static const RANGIKU_FOLLOWER:int                                   			= 2429;
