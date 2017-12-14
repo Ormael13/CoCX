@@ -263,7 +263,7 @@ package classes.Scenes.NPCs
 				outputText("\"<i>Hello again... felt like visiting your prisoner for a chat? You know I could do soooo many things If I was not tied up to the tree.</i>\"\n\n");
 				menu();
 				if (player.hasItem(consumables.BIMBOLQ)) addButton(0, "Bimbo Liquer", patchouleBimbofication);
-				else addButtonDisabled(0, "You need Bimbo Liquer for this.");
+				else addButtonDisabled(0, "???").hint("You need Bimbo Liquer for this option.");
 				addButton(1, "Talk", patchouleTalkMenu);
 				addButton(14, "Back", camp.campSlavesMenu);
 			}
@@ -285,6 +285,7 @@ package classes.Scenes.NPCs
 		
 		public function patchouleBimbofication():void {
 			clearOutput();
+			player.destroyItems(consumables.BIMBOLQ, 1);
 			outputText("You tell your prisoner he will soon be free to go so long as he drinks the weird bottle you are holding.\n\n");
 			outputText("Patchouli eyes you, then the bottle, then just shrugs and opens his cute little mouth as if to say ‘get to it’. The poor bastard has absolutely no idea of what is in that concoction, does he? Well it'll only be twice as fun once he realises it.\n\n");
 			outputText("You pour the bottle in his mouth, making sure he drinks it all and wait patiently in order to watch the result.\n\n");

@@ -956,7 +956,7 @@ public function slavesCount():Number {
 	if (amilyScene.amilyFollower() && amilyScene.amilyCorrupt() && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) counter++;
 	//Bimbo sophie
 	if (bimboSophie() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
-	if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= 6) counter++;
+	if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= 5) counter++;
 	if (ceraphIsFollower()) counter++;
 	if (milkSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) counter++;
     for each (var npc:XXCNPC in _campFollowers){
@@ -1523,7 +1523,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 			if (flags[kFLAGS.LETHICE_DEFEATED] > 0) outputText("the starry night above you.");
 		}
 		outputText("\n\n");
-		buttons.add( "Rathazul", SceneLib.konstantin.KonstantinMainCampMenu);
+		buttons.add( "Konstantin", SceneLib.konstantin.KonstantinMainCampMenu);
 	}
 	//Shouldra
 	if (followerShouldra()) {

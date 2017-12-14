@@ -67,7 +67,10 @@ package classes.Scenes.NPCs
 				if (player.hasStatusEffect(StatusEffects.KonstantinArmorPolishing)) player.removeStatusEffect(StatusEffects.KonstantinArmorPolishing);
 				player.createStatusEffect(StatusEffects.KonstantinArmorPolishing, 73, 10, 0, 0);
 				if (flags[kFLAGS.KONSTANTIN_SERVICES] < 2) flags[kFLAGS.KONSTANTIN_SERVICES]++;
-				if (flags[kFLAGS.KONSTANTIN_SERVICES] == 2) meetKonstantinAtForest2();
+				if (flags[kFLAGS.KONSTANTIN_SERVICES] == 2) {
+					meetKonstantinAtForest2();
+					return;
+				}
 				else outputText(" Thanking him for services, you take the armor and bid farewell to the smiling bear.\n\n\n\n");
 			}
 			else outputText("\"<i>It’s okay, " + player.mf("man","girl") + ". Gems can be tough to get sometimes. If you feel like using my services, you can find me in this clearing.</i>\"\n\n");
@@ -83,7 +86,10 @@ package classes.Scenes.NPCs
 				if (player.hasStatusEffect(StatusEffects.KonstantinWeaponSharpening)) player.removeStatusEffect(StatusEffects.KonstantinWeaponSharpening);
 				player.createStatusEffect(StatusEffects.KonstantinWeaponSharpening, 73, 10, 0, 0);
 				if (flags[kFLAGS.KONSTANTIN_SERVICES] < 2) flags[kFLAGS.KONSTANTIN_SERVICES]++;
-				if (flags[kFLAGS.KONSTANTIN_SERVICES] == 2) meetKonstantinAtForest2();
+				if (flags[kFLAGS.KONSTANTIN_SERVICES] == 2) {
+					meetKonstantinAtForest2();
+					return;
+				}
 				else outputText(" After giving thanks to the friendly ursine, you return to your camp.\n\n");
 			}
 			else outputText("\"<i>It’s okay, " + player.mf("man","girl") + ". Gems can be tough to get sometimes. If you feel like using my services, you can find me in this clearing.</i>\"\n\n");
@@ -126,13 +132,13 @@ package classes.Scenes.NPCs
 			clearOutput();
 			outputText("Arriving on the barren land surrounding your camp, you easily spot the purple glow of the portal from afar, and point it to Konstantine. He hurries up to catch you, and soon, you’re next to your tent, helping him to unpack his stuff.  With him are several boxes, enormous even for his size, that have his working tools, as well as the tent he has and probably other personal stuff.\n\n");
 			outputText("\"<i>So, this is the place?</i>\" he asks, panting from the exertion of having to carry most of the stuff.\n\n");
-			outputText("\"<i>Yes, it is.</i>\"\n\n you reply, also tired, even while you had much less to carry.\n\n");
+			outputText("\"<i>Yes, it is.</i>\" you reply, also tired, even while you had much less to carry.\n\n");
 			outputText("\"<i>Good</i>\" he says, nodding approvingly \"<i>A bit far from everything, but given this land’s average company, that’s quite a good thing.</i>\"\n\n");
 			outputText("After recovering your breath, you offer to help him get his tent and smithing tools on their place, so he points you to the largest box. With a bit of difficulty, you put the frame and main cloth of the tent on a side of the camp.\n\n");
 			outputText("Seems like he thought ahead, and brought a large tent, thrice as wide as yours, and twice as big, no doubt to fit his large frame with ease. The outsides are covered in furs and pelts, held by sturdy pieces of wood Since you’re helping him to set it, you manage to see its insides. While it contains no luxuries, it’s well furnished and has a homey feel, having a large bed wrapped in red linen, a small kitchen where a teapot fumes, and lacquered boxes with tools, books and clothing. Some small statues carved in wood ornate the area, some serving as lamps.\n\n");
 			outputText("Once the tent is done, you rush to a secluded side of the camp, where the smoke of the ovens won’t bother anyone, and close enough to the stream. There, Konstantin handily re-assembles his oven and puts his anvil on place, as well as the rest of the working stuff.\n\n");
 			outputText("(<b>Konstantin has been added to the Followers menu!</b>)\n\n");
-			flags[kFLAGS.KONSTANTIN_FOLLOWER] = 1;
+			flags[kFLAGS.KONSTANTIN_FOLLOWER] = 2;
 			doNext(camp.returnToCampUseTwoHours);
 		}
 		
@@ -232,22 +238,24 @@ package classes.Scenes.NPCs
 		public function KonstantinCraftingMenu():void {
 			clearOutput();
 			outputText("Seeing how Konstantin is working with armor and plating pieces, you happen to ask him if he could assemble some of the materials that you’ve found during your travels in Mareth into something useful to wear and protect yourself.\n\n");
-			if (player.hasItem(useables.GREENGL)) {
-				outputText("He looks over you bag’s contents, noticing a glimpse of the gel-like substance on it.\n\n");
-				outputText("\"<i>Hmm, seems like you’ve got a sample of those strange goo creatures that dwell around the lake these days. While they’re not in my exact area of expertise, I’ve found that those goo remains can become solid is exposed to the right chemicals under a particular temperature, probably due some innate property of the creatures that it comes from. Solid enough to make up for a pretty resilient armor, and flexible enough to deflect blows. If you wish, I can turn them into a protective armor for you, though I’ll require a larger amount, something like, five samples.</i>\"\n\n");
+			if (player.hasItem(useables.GREENGL) || player.hasItem(useables.B_CHITN) || player.hasItem(useables.T_SSILK)) {
+				if (player.hasItem(useables.GREENGL)) {
+					outputText("He looks over you bag’s contents, noticing a glimpse of the gel-like substance on it.\n\n");
+					outputText("\"<i>Hmm, seems like you’ve got a sample of those strange goo creatures that dwell around the lake these days. While they’re not in my exact area of expertise, I’ve found that those goo remains can become solid is exposed to the right chemicals under a particular temperature, probably due some innate property of the creatures that it comes from. Solid enough to make up for a pretty resilient armor, and flexible enough to deflect blows. If you wish, I can turn them into a protective armor for you, though I’ll require a larger amount, something like, five samples.</i>\"\n\n");
+				}
+				if (player.hasItem(useables.B_CHITN)) {
+					outputText("Catching a glimpse of the piece of black chitin among your stuff, Konstantin remarks: ");
+					outputText("\"<i>That’s some carapace that probably fell off from those creepy bee creatures from the forest. Strong, flexible and durable, it won’t be hard for me to make a decent armor from those things. If you’re interested, ring me five, and I’ll make you one.</i>\"\n\n");
+				}
+				if (player.hasItem(useables.T_SSILK)) {
+					outputText("\"<i>How in the demon’s name you managed to get a piece of this silk? So far, it’s only produced by those disgusting, spider-like creatures from a mucky swamp quite far from there. That means, that either you beat the crap out of one of those fuckers, or you found a lost strand of this thing somewhere. Either way congratulations, as this is a very rare material. In fact, I can make a great piece of armor with it, but since i’ll have to buy some chemicals to make the thing sturdy without losing its flexible and soft properties, the price is gonna be a little higher this time.</i>\"\n\n");
+					outputText("\"<i>Taking a different approach, I could give it some basic plating, and then weaving the silk thread into a set of magical robes. but this would require some aid from a tailor and a caster, which also is gonna increase the price. In both cases, I’ll require 500 gems, and a total of 5 pieces of silk to make enough thread.</i>\"\n\n");
+				}/*
+				if (player.hasItem(useables.D_SCALE)) {
+					outputText("\"<i>So all in all, I think that this is a great places.</i>\"\n\n");
+					outputText("Seeing how Konstantin is working with armor and plating pieces.\n\n");
+				}*///EBONBLO		WT_BRAN		TBAPLAT		DBAPLAT
 			}
-			else if (player.hasItem(useables.B_CHITN)) {
-				outputText("Catching a glimpse of the piece of black chitin among your stuff, Konstantin remarks: ");
-				outputText("\"<i>That’s some carapace that probably fell off from those creepy bee creatures from the forest. Strong, flexible and durable, it won’t be hard for me to make a decent armor from those things. If you’re interested, ring me five, and I’ll make you one.</i>\"\n\n");
-			}
-			else if (player.hasItem(useables.T_SSILK)) {
-				outputText("\"<i>How in the demon’s name you managed to get a piece of this silk? So far, it’s only produced by those disgusting, spider-like creatures from a mucky swamp quite far from there. That means, that either you beat the crap out of one of those fuckers, or you found a lost strand of this thing somewhere. Either way congratulations, as this is a very rare material. In fact, I can make a great piece of armor with it, but since i’ll have to buy some chemicals to make the thing sturdy without losing its flexible and soft properties, the price is gonna be a little higher this time.</i>\"\n\n");
-				outputText("\"<i>Taking a different approach, I could give it some basic plating, and then weaving the silk thread into a set of magical robes. but this would require some aid from a tailor and a caster, which also is gonna increase the price. In both cases, I’ll require 500 gems, and a total of 5 pieces of silk to make enough thread.</i>\"\n\n");
-			}/*
-			else if (player.hasItem(useables.D_SCALE)) {
-				outputText("\"<i>So all in all, I think that this is a great places.</i>\"\n\n");
-				outputText("Seeing how Konstantin is working with armor and plating pieces.\n\n");
-			}*///EBONBLO		WT_BRAN		TBAPLAT		DBAPLAT
 			else {
 				outputText("With a sigh, Konstantin tells you that nothing of you’ve brought him is useful to make a durable outfit, as they either lack the composition or the properties to be properly crafted.\n\n");
 				outputText("A bit disappointed, you retrieve you pack, guessing which items you should get this time.\n\n");
