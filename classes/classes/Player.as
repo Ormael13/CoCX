@@ -4248,7 +4248,7 @@ use namespace CoC;
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228] += 3 + rand(3);
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] = 1;
 			}
-
+			//użyć dla minotaur blood path of gargoyle tf?
 		}
 
 		public function minoCumAddiction(raw:Number = 10):void {

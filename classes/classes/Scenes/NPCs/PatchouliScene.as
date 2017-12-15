@@ -262,9 +262,10 @@ package classes.Scenes.NPCs
 				outputText("You approach the tied up cat wary of possible hidden tricks.\n\n");
 				outputText("\"<i>Hello again... felt like visiting your prisoner for a chat? You know I could do soooo many things If I was not tied up to the tree.</i>\"\n\n");
 				menu();
-				if (player.hasItem(consumables.BIMBOLQ)) addButton(0, "Bimbo Liquer", patchouleBimbofication);
-				else addButtonDisabled(0, "???").hint("You need Bimbo Liquer for this option.");
+				addButton(0, "Appearance", patchouleAppearance);
 				addButton(1, "Talk", patchouleTalkMenu);
+				if (player.hasItem(consumables.BIMBOLQ)) addButton(2, "Bimbo Liquer", patchouleBimbofication);
+				else addButtonDisabled(2, "???").hint("You need Bimbo Liquer for this option.");
 				addButton(14, "Back", camp.campSlavesMenu);
 			}
 			if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= 6) {
@@ -274,10 +275,10 @@ package classes.Scenes.NPCs
 				else outputText("a new place");
 				outputText(".</i>\"\n\n");
 				menu();
-				//addButton(0, "Appearance", patchouleAppearance);
+				addButton(0, "Appearance", patchouleAppearance);
 				addButton(1, "Talk", patchouleTalkMenu);
-				addButton(2, "Sex Her", patchouleSexHer);
-				addButton(3, "Give Item", patchouleGiveItem);
+				addButton(2, "Give Item", patchouleGiveItem);
+				addButton(3, "Sex Her", patchouleSexHer);
 				if (!visitedAllAreas()) addButton(5, "Yes", patchouliExploreLuckyWheel).hint("Let her lead you to new places.");
 				addButton(14, "Back", camp.campSlavesMenu);
 			}
@@ -301,13 +302,38 @@ package classes.Scenes.NPCs
 			flags[kFLAGS.PATCHOULI_FOLLOWER] = 6;
 			flags[kFLAGS.PATCHOULI_GIRL_OR_MORPH] = 0;
 			flags[kFLAGS.PATCHOULI_CUP_SIZE] = 5;
+			flags[kFLAGS.PATCHOULI_HAIR_COLOR] = 1;
 			flags[kFLAGS.PATCHOULI_COCK] = 0;
+			flags[kFLAGS.PATCHOULI_COCK_TYPE] = 1;
 			if (player.hasVagina()) patchouleGirlOnGirl();
 			else patchouleVaginal();
 		}
 		
 		public function patchouleAppearance():void {
 			clearOutput();
+			if (flags[kFLAGS.PATCHOULI_FOLLOWER] == 5) {
+				outputText("Patchouli looks like your typical cat morph. However, the color of his fur is clearly unnatural. Striped black on a background of purple, Patchouli’s fur clearly does not belong on any normal cat. His fur is hardly the only thing ‘unnatural’ about him, as he almost smiles constantly, not just once in awhile, with the most unsettling grin he can muster. You would believe him to be up to some crazy mischief ");
+				outputText("if somehow tying him up to a tree did not hold him from teleporting away. Go figure, why doesn’t he? It's likely some fucked up rule of his world. His green cat eyes have been observing you the whole time with interest, his tail twitching every now and then with the infinite patience of someone up to no good.\n\n");
+				outputText("\"<i>Nya, having a good view [name]? Feel free to admire me all you like I love being looked at.</i>\"\n\n");
+				outputText("You move your gaze away before it gets any more awkward than it already is.\n\n");
+			}
+			else {
+				outputText("Patchoulie ");
+				if (flags[kFLAGS.PATCHOULI_GIRL_OR_MORPH] == 1) outputText("used to look like the typical cat morph but uses of transformatives allowed you to alter her into the perfect figure of a cat girl, with a human face and only a partially covered body. Regardless of her demi human look, Patchoulie’s tongue, eyes and abnormally long canine clearly still belong on a cat. The transformatives so far sparred her paws, ears and tail, not that you would ever get rid of them anyway");
+				else outputText("look like your typical cat morph");
+				outputText(". However the color of her fur is clearly unnatural. Striped black on a background of purple, Patchoulie’s fur clearly does not belong on any normal cat. Her hair which used to be of the same messed up color as her fur are now divided between strands of platinum blonde and ");
+				if (flags[kFLAGS.PATCHOULI_HAIR_COLOR] == 1) outputText("purple");
+				outputText(", like someone whos head would feature on a deck of cards. Her fur is hardly the only thing ‘unnatural’ about her as she almosts smile constantly, not just once in awhile, with the most unsettlingly lewd grin she can muster. Patchoulie’s latest joy of late is to make you as emotionally uncomfortable and guilty as she can before sex. She’s currently laid back on a tree branch, her green cat eyes observing you with interest, her tail twitching every now and then with the infinite patience of someone up to no good.\n\n");
+				outputText("\"<i>Nya, having a good view [name]? Feel free to admire me all you like I reaaaaally love being looked at. Especially when it's by you. Oh you are such an irredeemable pervert.</i>\"\n\n");
+				outputText("Gosh the worst is she’s bloody right. You indeed have been having short glances at her " + Appearance.breastCup(flags[kFLAGS.PATCHOULI_CUP_SIZE]) + " breast and constantly dripping pussy");
+				if (flags[kFLAGS.PATCHOULI_COCK] > 0) {
+					outputText(", what of her " + flags[kFLAGS.PATCHOULI_COCK] + " inch ");
+					if (flags[kFLAGS.PATCHOULI_COCK_TYPE] == 1) outputText("human");
+					else outputText("feline");
+					outputText(" cock");
+				}
+				outputText("!\n\nKnowing fully what your thinking about, she offers you her most lecherous grin and you move your gaze away in response before it gets any more awkward than it already is.\n\n");
+			}
 			doNext(patchouleMainCampMenu);
 		}
 		
@@ -374,7 +400,7 @@ package classes.Scenes.NPCs
 			menu();
 			if (player.hasVagina()) {
 				addButton(0, "Girl On Girl", patchouleGirlOnGirl);
-				//if () addButton(1, "TakeVaginal", );
+				//if (flags[kFLAGS.PATCHOULI_COCK] > 0) addButton(1, "TakeVaginal", patchouleTakeVaginal);
 			}
 			if (player.hasCock()) {
 				addButton(2, "Vaginal", patchouleVaginal);
@@ -432,15 +458,40 @@ package classes.Scenes.NPCs
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
+		public function patchouleTakeVaginal():void {
+			
+			player.orgasm();
+			doNext(camp.returnToCampUseOneHour);
+		}
+		
 		public function patchouleGiveItem():void {
 			menu();
-			//if (player.hasItem(consumables.P_DRAFT)) addButton(0, "P. I. Draft", );
+			if (player.hasItem(consumables.P_DRAFT) && flags[kFLAGS.PATCHOULI_COCK] < 20) addButton(0, "P. I. Draft", patchouleGivePurifiedIncubusDraft);
 			//if (player.hasItem(consumables.W_FRUIT)) addButton(1, "Whisker Fruit", );
 			if (player.hasItem(consumables.P_S_MLK) && flags[kFLAGS.PATCHOULI_CUP_SIZE] < 29) addButton(2, "P. Succ. Milk", patchouleGivePurifiedSuccubusMilk);
-			//if (player.hasItem(consumables.PINKEGG)) addButton(3, "Pink Egg", );
-			//if (player.hasItem(consumables.REDUCTO)) addButton(4, "Reducto", );
+			if (player.hasItem(consumables.PINKEGG) && flags[kFLAGS.PATCHOULI_COCK] > 0) addButton(3, "Pink Egg", patchouleGivePinkEgg);
+			if (player.hasItem(consumables.REDUCTO) && (flags[kFLAGS.PATCHOULI_CUP_SIZE] > 5 || flags[kFLAGS.PATCHOULI_COCK] > 6)) addButton(4, "Reducto", patchouleGiveReducto);
+			//hair dye
 			addButton(14, "Back", patchouleMainCampMenu);
 		}
+		public function patchouleGivePurifiedIncubusDraft():void {
+			clearOutput();
+			outputText("You consider Patchoulie and decide she could use a shaving. You show her the bottle and ask her to drink it.\n\n");
+			outputText("\"<i>Nyaaaa, yea sure why not. It smells good anyway.</i>\"\n\n");
+			outputText("You smile wide as the bimbo cheshire drinks the bottle. The effects are immediate and visible as she moans a loud mewl");
+			if (flags[kFLAGS.PATCHOULI_COCK] < 6) {
+				flags[kFLAGS.PATCHOULI_COCK] = 6;
+				outputText(" a small bulge forms at the base of her crotch. Patchoulie grows a brand new cock");
+			}
+			else {
+				flags[kFLAGS.PATCHOULI_COCK] += 2;
+				outputText(". Her shaft pulses with pleasure until it reaches a nice " + flags[kFLAGS.PATCHOULI_COCK] + " inch");
+			}
+			outputText(". She grabs it and start to fiercely masturbate as she turn over smiling wide and then pounces on you to make her intentions clear.\n\n");
+			outputText("\"<i>Nyaa well what you looking at, you lecher? Lets fuck already!</i>\"\n\n");
+			patchouleSexHer();
+		}
+		//public function patchouleGiveWhiskerFruit():void
 		public function patchouleGivePurifiedSuccubusMilk():void {
 			clearOutput();
 			if (flags[kFLAGS.PATCHOULI_GIRL_OR_MORPH] == 1) {
@@ -459,5 +510,32 @@ package classes.Scenes.NPCs
 			}
 			patchouleSexHer();
 		}
+		public function patchouleGivePinkEgg():void {
+			clearOutput();
+			outputText("You consider Patchoulie and decide she no longer needs a cock. You show her the egg and ask her to eat it.\n\n");
+			outputText("\"<i>Nyaaaa yea sure why not. It smells good anyway.</i>\"\n\n");
+			outputText("You smile wide as the bimbo cheshire eat the egg. The effects are immediate and visible as she moans a loud mewl, her cock spontaneously orgasming and spewing cum everywhere as it shrinks inch by inch into nothingness until she has none. Patchoulie can’t help herself and starts fingering her wet pussy trying to prolong her orgasm then pounces on you making her intentions clear.\n\n");
+			outputText("\"<i>Nyaa well what you looking at, you lecher? Lets fuck!</i>\"\n\n");
+			flags[kFLAGS.PATCHOULI_COCK] = 0;
+			patchouleSexHer();
+		}
+		public function patchouleGiveReducto():void {
+			clearOutput();
+			outputText("What body part would you like to shrink?\n\n");
+			menu();
+			if (flags[kFLAGS.PATCHOULI_COCK] > 6) addButton(0, "Cock", patchouleGiveReductoCock);
+			if (flags[kFLAGS.PATCHOULI_CUP_SIZE] > 5) addButton(1, "Boobs", patchouleGiveReductoBoobs);
+		}
+		public function patchouleGiveReductoCock():void {
+			flags[kFLAGS.PATCHOULI_COCK] -= 2;
+			outputText("You apply the paste and Patchoulie mewl as her cock shrink by 2 inches, spewing a fountain of cum in the process.\n\n");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function patchouleGiveReductoBoobs():void {
+			flags[kFLAGS.PATCHOULI_CUP_SIZE] -= 2;
+			outputText("You apply the paste and Patchoulie mewl as her breast shrink to " + Appearance.breastCup(flags[kFLAGS.PATCHOULI_CUP_SIZE]) + " size, spewing a fountain of milk in the process.\n\n");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		//public function patchouleGiveHairDye():void
 	}
 }
