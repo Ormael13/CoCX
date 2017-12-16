@@ -5710,7 +5710,7 @@ use namespace CoC;
 			}
 			if(CoC.instance.monster.hasStatusEffect(StatusEffects.Sandstorm)) CoC.instance.monster.removeStatusEffect(StatusEffects.Sandstorm);
 			if(hasStatusEffect(StatusEffects.DwarfRage)) {
-				dynStats("str", -statusEffectv1(StatusEffects.DwarfRage),"tou", -statusEffectv2(StatusEffects.DwarfRage),"spe", -statusEffectv2(StatusEffects.DwarfRage));
+				dynStats("str", -statusEffectv1(StatusEffects.DwarfRage),"tou", -statusEffectv2(StatusEffects.DwarfRage),"spe", -statusEffectv2(StatusEffects.DwarfRage), "scale", false);
 				removeStatusEffect(StatusEffects.DwarfRage);
 			}
 			if(hasStatusEffect(StatusEffects.Berzerking)) {
@@ -5762,26 +5762,26 @@ use namespace CoC;
 				removeStatusEffect(StatusEffects.Might);
 			}
 			if(hasStatusEffect(StatusEffects.Blink)) {
-				dynStats("spe", -statusEffectv1(StatusEffects.Blink));
+				dynStats("spe", -statusEffectv1(StatusEffects.Blink), "scale", false);
 				removeStatusEffect(StatusEffects.Blink);
 			}
 			if(hasStatusEffect(StatusEffects.BeatOfWar)) {
-				dynStats("str", -statusEffectv1(StatusEffects.BeatOfWar));
+				dynStats("str", -statusEffectv1(StatusEffects.BeatOfWar), "scale", false);
 				removeStatusEffect(StatusEffects.BeatOfWar);
 			}
 			if(hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
-				dynStats("str", -statusEffectv1(StatusEffects.UnderwaterCombatBoost),"spe", -statusEffectv2(StatusEffects.UnderwaterCombatBoost));
+				dynStats("str", -statusEffectv1(StatusEffects.UnderwaterCombatBoost),"spe", -statusEffectv2(StatusEffects.UnderwaterCombatBoost), "scale", false);
 				removeStatusEffect(StatusEffects.UnderwaterCombatBoost);
 			}
 			if(hasStatusEffect(StatusEffects.TranceTransformation)) {
-				dynStats("str", -statusEffectv1(StatusEffects.TranceTransformation));
-				dynStats("tou", -statusEffectv1(StatusEffects.TranceTransformation));
+				dynStats("str", -statusEffectv1(StatusEffects.TranceTransformation), "scale", false);
+				dynStats("tou", -statusEffectv1(StatusEffects.TranceTransformation), "scale", false);
 				removeStatusEffect(StatusEffects.TranceTransformation);
 			}
 			if(hasStatusEffect(StatusEffects.CrinosShape)) {
-				dynStats("str", -statusEffectv1(StatusEffects.CrinosShape));
-				dynStats("tou", -statusEffectv2(StatusEffects.CrinosShape));
-				dynStats("spe", -statusEffectv3(StatusEffects.CrinosShape));
+				dynStats("str", -statusEffectv1(StatusEffects.CrinosShape), "scale", false);
+				dynStats("tou", -statusEffectv2(StatusEffects.CrinosShape), "scale", false);
+				dynStats("spe", -statusEffectv3(StatusEffects.CrinosShape), "scale", false);
 				removeStatusEffect(StatusEffects.CrinosShape);
 			}
 			if(hasStatusEffect(StatusEffects.EzekielCurse) && flags[kFLAGS.EVANGELINE_AFFECTION] >= 3 && findPerk(PerkLib.EzekielBlessing) >= 0) {

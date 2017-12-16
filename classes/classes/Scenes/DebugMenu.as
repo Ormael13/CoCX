@@ -12,7 +12,11 @@ import classes.Scenes.NPCs.JojoScene;
 
 import coc.view.Color;
 
+import flash.events.TextEvent;
+
 import flash.utils.describeType;
+
+import mx.controls.Text;
 
 public class DebugMenu extends BaseContent
 	{
@@ -63,6 +67,7 @@ public class DebugMenu extends BaseContent
 				if (player.isPregnant()) addButton(4, "Abort Preg", abortPregnancy);
 				addButton(5, "DumpEffects", dumpEffectsMenu).hint("Display your status effects");
 				addButton(7, "HACK STUFFZ", styleHackMenu).hint("H4X0RZ");
+	            addButton(8, "Test Scene", testScene);
 				addButton(14, "Exit", playerMenu);
 			}
             if (CoC.instance.inCombat) {
@@ -78,7 +83,52 @@ public class DebugMenu extends BaseContent
 			}
 			doNext(playerMenu);
 		}
-
+		
+		private var selectedScene:*;
+		private function testScene(selected:*=null):void{
+			clearOutput();
+			if(!selected){selected = SceneLib;}
+			selectedScene = selected;
+			mainView.mainText.addEventListener(TextEvent.LINK, linkhandler);
+			getFun("variable",selected);
+			getFun("method",selected);
+			menu();
+			addButton(0,"Back",linkhandler,new TextEvent(TextEvent.LINK,false,false,"-1"));
+			
+			function getFun(type:String, scene:*):void{
+				var funsxml:XML = describeType(scene);
+				var funs:Array = [];
+				for each(var item:XML in funsxml[type]){
+					funs.push(item);
+				}
+				funs.sortOn("@name");
+				if(funs.length > 0){outputText("<b><u>"+type.toUpperCase()+"</u></b>\n");}
+				for each (var fun:* in funs){
+					outputText("<u><a href=\"event:"+fun.@name+"\">"+fun.@name+"</a></u>\n")
+				}
+			}
+			function linkhandler(e:TextEvent):void{
+				mainView.mainText.removeEventListener(TextEvent.LINK, linkhandler);
+				if(e.text == "-1"){
+					mainView.mainText.removeEventListener(TextEvent.LINK, linkhandler);
+					if(selectedScene != SceneLib){testScene();}
+					else{accessDebugMenu();}
+					return;
+				}
+				if(selectedScene[e.text] is Function){
+					clearOutput();
+					doNext(accessDebugMenu);
+					var selected:Function = selectedScene[e.text];
+					selectedScene = null;
+					selected();
+				}
+				else{
+					selectedScene = selectedScene[e.text];
+					testScene(selectedScene);
+				}
+				
+			}
+		}
 		//Spawn items menu
 		private function itemSpawnMenu():void {
 			setItemArrays();
