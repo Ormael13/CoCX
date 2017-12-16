@@ -15,6 +15,7 @@ package classes.Scenes.NPCs
 	import classes.Scenes.Areas.HighMountains.Phoenix;
 	import classes.Scenes.Areas.Mountain.Minotaur;
 	import classes.Scenes.Areas.Swamp.CorruptedDrider;
+	import classes.Scenes.Camp.Jabberwocky;
 	import classes.Scenes.NPCs.Etna;
 	import classes.Scenes.NPCs.Hel;
 
@@ -182,18 +183,48 @@ package classes.Scenes.NPCs
 		}
 		public function patchouliExploreWonderland():void {
 			clearOutput();
-		/*	if (flags[kFLAGS.PATCHOULI_AND_WONDERLAND] == 1) {
-				
+			if (flags[kFLAGS.PATCHOULI_AND_WONDERLAND] < 1 || flags[kFLAGS.PATCHOULI_AND_WONDERLAND] > 1) {
+				outputText("The cat jumps down from the tree and walks ahead of you, showing you the way. Strangely, the landscape seems to change absurdly fast around you as you follow him until you end up in an exceedingly colorful version of the forest. Things here look weirder than usual, but not in a sexual way, rather it’s like the painting of a mad artist.\n\n");
+				outputText("\"<i>Well wow, out of all locations I didn’t expect us to end up in here... just... just pick up a fruit or two and I will escort you out.</i>\"\n\n");
+				outputText("The cat seems uneasy, but you don’t care. You spot a weird set of whisker fruits in a nearby tree and proceed to pack them up before leaving this strange place. You had the weird feeling something was watching you while you were leaving, but this must be your imagination.\n\n");
+				inventory.takeItem(consumables.W_FRUIT, camp.returnToCampUseOneHour);//potem zmienić na wonderfruit
+				if (flags[kFLAGS.PATCHOULI_AND_WONDERLAND] < 1) flags[kFLAGS.PATCHOULI_AND_WONDERLAND] = 1;
 			}
 			else {
-		*/		outputText("The cat jumps down from the tree and walks ahead of you, showing you the way. Strangely, the landscape seems to change absurdly fast around you as you follow him until you end up in an exceedingly colorful version of the forest. Things here look weirder than usual, but not in a sexual way, rather it’s like the painting of a mad artist.\n\n");
-				outputText("\"<i>Well wow, out of all locations I didn’t expect us to end up in here... just... just pick up a fruit or two and I will escort you out.</i>\"\n\n");
-				outputText("The cat seems uneasy, but you don’t care. You spot a weird set of whisker fruits in a nearby tree and proceed to pack them up before leaving this strange place. You had the weird feeling something was watching you while you were leaving, but this must be your imagination.");
-				inventory.takeItem(consumables.W_FRUIT, camp.returnToCampUseOneHour);//potem zmienić na wonderfruit
-		//		flags[kFLAGS.PATCHOULI_AND_WONDERLAND] = 1;
-		//	}
+				outputText("The cat jumps down from the tree and walks ahead of you, showing you the way. Strangely the landscape seems to change absurdly fast around you as you follow him until you end up in an exceedingly colorful version of the forest again. Patchouli is positively terrified, and begs you to leave.\n\n");
+				outputText("\"<i>We need to leave this place in a hurry, it could be here any minute!</i>\"\n\n");
+				menu();
+				addButton(0, "Leave", patchouliExploreWonderlandLeave);
+				addButton(1, "Stay", patchouliExploreWonderlandStay);
+			}
 		}
-			//startCombat(new ...);
+		public function patchouliExploreWonderlandLeave():void {
+			outputText("The cat jumps down from the tree and walks ahead of you, showing you the way. Strangely the landscape seems to change absurdly fast around you as you follow him until you end up in an exceedingly colorful version of the forest again. Patchouli is positively terrified, and begs you to leave.\n\n");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function patchouliExploreWonderlandStay():void {
+			outputText("You decide to stay regardless of the cat’s thoughts on the matter and hear a roar somewhere in the forest. Patchouli whimpers in terror and tries to hide.\n\n");
+			outputText("\"<i>It’s too late, were both dead. Jabberwocky is here!!!</i>\"\n\n");
+			outputText("Just as he says this, a massive shape splits the nearby trees wide to pass. It looks like a dragon with pink scales, bat wings and funnily enough two large buck teeth, similar to a rabbit. The overgrown dragon-rabbit thing suddenly speaks.\n\n");
+			outputText("\"<i>You were told never to come back, cat! You will pay for your insolence, along with this outsider.</i>\"\n\n");
+			outputText("The rabbit dragon breathes a stream of fire to the sky and charges.\n\n");
+			startCombat(new Jabberwocky());
+		}
+		public function patchouliExploreWonderlandJabberwockyLost():void {
+			clearOutput();
+			outputText("The last thing you see is the jabberwocky’s open maw, before the rabbit-dragon devours you alive. What a tragic ending to your adventures.\n\n");
+			EventParser.gameOver();
+		}
+		public function patchouliExploreWonderlandJabberwockyLust():void {
+			clearOutput();
+			outputText("The jabberwock falls to the ground, unable to fight further as it begins to masturbate fiercely. You pick up a few items you found in the area, and hurry to get the hell out before the seemingly indestructible beast is back up and ready to fight.\n\n");
+			cleanupAfterCombat();
+		}
+		public function patchouliExploreWonderlandJabberwockyHP():void {
+			clearOutput();
+			outputText("The last thing you see is the jabberwocky’s open maw, before the rabbit-dragon devours you alive. What a tragic ending to your adventures.\n\n");
+			inventory.takeItem(weapons.VBLADE, cleanupAfterCombat);
+		}
 		public function patchouliForgiveHim():void {
 			clearOutput();
 			outputText("You sigh and decide to forgive the cat for what he has done.\n\n");
@@ -228,7 +259,7 @@ package classes.Scenes.NPCs
 			outputText("You force the catboy on his back and yank his shorts away, revealing his girly ass and his cute pucker. Patchouli gulps as your [cock] hardens, already aware of what is about to happen.\n\n");
 			outputText("\"<i>Uh I’m sure we can sort that out in a different way! I can lead you to treasure, riches, a minotaur... wait, forget I ever said anything about the minotaur!</i>\"\n\n");
 			outputText("You don’t give him the chance to teleport away as you grab him by the neck and force your [cock] in.\n\n");
-			if (player.cocks[x].cockLength >= 22) {
+			if (player.cocks[x].cockLength >= 20) {
 				outputText("\"<i>Eeeeep you're tearing me apart! Please stop, I’m telling you that you're tearing my ass apart!</i>\"\n\n");
 				outputText("What a liar, you're all too aware that this jerk’s ability to play with dimensional travel allows him to send most of your cock into some other dimension. As a matter of fact, his stomach isn't even bulging from your insertion, but his pucker sure looks like it's stretched to its limit. ");
 			}
@@ -400,11 +431,11 @@ package classes.Scenes.NPCs
 			menu();
 			if (player.hasVagina()) {
 				addButton(0, "Girl On Girl", patchouleGirlOnGirl);
-				//if (flags[kFLAGS.PATCHOULI_COCK] > 0) addButton(1, "TakeVaginal", patchouleTakeVaginal);
+				if (flags[kFLAGS.PATCHOULI_COCK] > 0) addButton(1, "TakeVaginal", patchouleTakeVaginal);
 			}
 			if (player.hasCock()) {
 				addButton(2, "Vaginal", patchouleVaginal);
-				//addButton(3, "Anal", );
+				addButton(3, "Anal", patchouleAnal);
 			}
 			//addButton(14, "Back", patchouleMainCampMenu);
 		}
@@ -459,7 +490,52 @@ package classes.Scenes.NPCs
 		}
 		
 		public function patchouleTakeVaginal():void {
-			
+			outputText("You got plans for the cat today. You really need to use her to relieve your cunt, and her ");
+			if (flags[kFLAGS.PATCHOULI_COCK_TYPE] == 2) outputText("feline");
+			else outputText("human");
+			outputText(" cock is exactly what you need right now. You push her on her back, revealing her ");
+			if (flags[kFLAGS.PATCHOULI_COCK_TYPE] == 2) outputText("feline");
+			else outputText("human");
+			outputText(" cock.\n\n");
+			outputText("\"<i>Nyaa~ want to breed already? Yea sure use me however you want!</i>\"\n\n");
+			outputText("You got exactly what you want right here! You don’t give her the chance to give another snide reply as you grab her by the breast and take hold of her cock with your other hand. Patchouli starts to mewl with delighted pleasure as you stroke her ");
+			if (flags[kFLAGS.PATCHOULI_COCK_TYPE] == 2) outputText("feline");
+			else outputText("human");
+			outputText(" cock with your hand. You always suspected her to be a complete sub that loves getting punished for her mischief, guess you were right. ");
+			outputText(" You spit on her ");
+			if (flags[kFLAGS.PATCHOULI_COCK_TYPE] == 2) outputText("feline");
+			else outputText("human");
+			outputText(" cock and lube it properly before aligning your [pussy] with it. Patchouli screams out a loud \"<i>NYYAAAAA!!!!!</i>\" when you swiftly impale yourself on her dick and begin to pump for her herm milk.");
+			if (flags[kFLAGS.PATCHOULI_COCK_TYPE] == 2) outputText(" Her barbs caress your walls in just the perfect way.");
+			outputText("\n\n\"<i>Please.. Nyaaaaa!!! Rougher... Faster!</i>\"\n\n");
+			outputText("She's obviously liking it, which only bolsters your lust. Soon, you find yourself on the verge of orgasm. Patchoulie finally loses control of her cock as it twitches, filling you with kitty jizz and causing your own orgasm shortly after.\n\n");
+			outputText("Unsated, you keep milking the prankster for a few hours until you both pass out.\n\n");
+			player.orgasm();
+			doNext(camp.returnToCampUseOneHour);
+		}
+		
+		public function patchouleAnal():void {
+			var x:int = player.cockThatFits(36, "length");
+			outputText("You force the cat on her back and yank her shorts away, revealing her fuck ready ass and cute pussy. Patchoulie purrs as your [cock] hardens, already aware of what is about to happen.\n\n");
+			outputText("\"<i>Nyaaaa~, c'mon [name] stop teasing me. You already know I want it, so please put it in!</i>\"\n\n");
+			outputText("Well you sure are going to give her what she wants as you grab her by the thigh and force your [cock] in.\n\n");
+			if (player.cocks[x].cockLength >= 20) {
+				outputText("\"<i>Nyaaaaaa oooooooh my!!!! It's soooo huuuge I’m going to break!!!</i>\"\n\n");
+				outputText("What a liar, you're all too aware that this sluts ability to play with dimensional travel allows her to send most of your cock into some other dimension. As a matter of fact, her stomach isn't even bulging from your insertion, but her pucker sure looks like it's stretched to its limit and the best of it all is that she clearly enjoy it. ");
+			}
+			outputText("You begin to fuck her butt thoroughly in order to teach the little slut a lesson her ass won’t forget. Her anus begins to contract and pulse around your dick like a vagina and who knows, maybe she somehow connected it to a cunt somewhere across the multiverse. Heck it might even be hers! Before long the sensation of Patchoulie’s asscunt proves too much for you and you fill it full of your jizz. Patchoulie seems to get off from her tormented ass, her pussy");
+			if (flags[kFLAGS.PATCHOULI_COCK] > 0) {
+				outputText(" and ");
+				if (flags[kFLAGS.PATCHOULI_COCK_TYPE] == 2) outputText("feline");
+				else outputText("human");
+				outputText(" cock");
+			}
+			outputText(" pulsing as she reaches orgasm, splattering the grass below her with cum. Seems she did connect your cock to her cunt, what a greedy girl. She sighs in relief as you pull your [cock] out of her ass, her cunt still dripping semen, then teases you.\n\n");
+			outputText("\"<i>Nya.. ya know... you're quite a dirty ");
+			if (player.hasVagina()) outputText("herm");
+			else outputText("boy");
+			outputText(". However I don’t mind it, It's exactly how I want my mate to be, completely perverted.</i>\"\n\n");
+			outputText("Well considering the cum still dripping from her cunt you guess the word mate applies as no matter how you sex her, she manages to get your dick in the right spot anyway.\n\n");
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -467,15 +543,16 @@ package classes.Scenes.NPCs
 		public function patchouleGiveItem():void {
 			menu();
 			if (player.hasItem(consumables.P_DRAFT) && flags[kFLAGS.PATCHOULI_COCK] < 20) addButton(0, "P. I. Draft", patchouleGivePurifiedIncubusDraft);
-			//if (player.hasItem(consumables.W_FRUIT)) addButton(1, "Whisker Fruit", );
+			if (player.hasItem(consumables.W_FRUIT)) addButton(1, "Whisker Fruit", patchouleGiveWhiskerFruit);
 			if (player.hasItem(consumables.P_S_MLK) && flags[kFLAGS.PATCHOULI_CUP_SIZE] < 29) addButton(2, "P. Succ. Milk", patchouleGivePurifiedSuccubusMilk);
 			if (player.hasItem(consumables.PINKEGG) && flags[kFLAGS.PATCHOULI_COCK] > 0) addButton(3, "Pink Egg", patchouleGivePinkEgg);
 			if (player.hasItem(consumables.REDUCTO) && (flags[kFLAGS.PATCHOULI_CUP_SIZE] > 5 || flags[kFLAGS.PATCHOULI_COCK] > 6)) addButton(4, "Reducto", patchouleGiveReducto);
-			//hair dye
+			addButton(5, "Hair Dye", patchouleGiveHairDye);
 			addButton(14, "Back", patchouleMainCampMenu);
 		}
 		public function patchouleGivePurifiedIncubusDraft():void {
 			clearOutput();
+			player.destroyItems(consumables.P_DRAFT, 1);
 			outputText("You consider Patchoulie and decide she could use a shaving. You show her the bottle and ask her to drink it.\n\n");
 			outputText("\"<i>Nyaaaa, yea sure why not. It smells good anyway.</i>\"\n\n");
 			outputText("You smile wide as the bimbo cheshire drinks the bottle. The effects are immediate and visible as she moans a loud mewl");
@@ -491,9 +568,19 @@ package classes.Scenes.NPCs
 			outputText("\"<i>Nyaa well what you looking at, you lecher? Lets fuck already!</i>\"\n\n");
 			patchouleSexHer();
 		}
-		//public function patchouleGiveWhiskerFruit():void
+		public function patchouleGiveWhiskerFruit():void {
+			clearOutput();
+			player.destroyItems(consumables.W_FRUIT, 1);
+			outputText("You consider Patchoulie and decide her cock really would be better if it was a cat cock instead of a human one. You show her the fruit and ask her to eat it.\n\n");
+			outputText("\"<i>Nyaaaa, yea sure why not. It smells good anyway.</i>\"\n\n");
+			outputText("You smile wide as the bimbo cheshire eats the fruit. The effects are immediate and visible as she moans a loud mewl. Her cock bulges and changes shape as it covers with barbs, turning into a cat cock. She grabs it and start to fiercely masturbate as she turn over smiling wide and then pounces on you to make her intentions clear.\n\n");
+			outputText("\"<i>Nyaa well what you looking at, you lecher? Lets fuck already!</i>\"\n\n");
+			flags[kFLAGS.PATCHOULI_COCK_TYPE] = 2;
+			patchouleSexHer();
+		}
 		public function patchouleGivePurifiedSuccubusMilk():void {
 			clearOutput();
+			player.destroyItems(consumables.P_S_MLK, 1);
 			if (flags[kFLAGS.PATCHOULI_GIRL_OR_MORPH] == 1) {
 				outputText("You consider Patchoulie and decide she could use a bigger pair of breasts. You show her the bottle and ask her to drink it.\n\n");
 				outputText("\"<i>Nyaaaa yea sure why not. It smells good anyway and I love milk.</i>\"\n\n");
@@ -512,15 +599,18 @@ package classes.Scenes.NPCs
 		}
 		public function patchouleGivePinkEgg():void {
 			clearOutput();
+			player.destroyItems(consumables.PINKEGG, 1);
 			outputText("You consider Patchoulie and decide she no longer needs a cock. You show her the egg and ask her to eat it.\n\n");
 			outputText("\"<i>Nyaaaa yea sure why not. It smells good anyway.</i>\"\n\n");
 			outputText("You smile wide as the bimbo cheshire eat the egg. The effects are immediate and visible as she moans a loud mewl, her cock spontaneously orgasming and spewing cum everywhere as it shrinks inch by inch into nothingness until she has none. Patchoulie can’t help herself and starts fingering her wet pussy trying to prolong her orgasm then pounces on you making her intentions clear.\n\n");
 			outputText("\"<i>Nyaa well what you looking at, you lecher? Lets fuck!</i>\"\n\n");
 			flags[kFLAGS.PATCHOULI_COCK] = 0;
+			flags[kFLAGS.PATCHOULI_COCK_TYPE] = 1;
 			patchouleSexHer();
 		}
 		public function patchouleGiveReducto():void {
 			clearOutput();
+			player.destroyItems(consumables.REDUCTO, 1);
 			outputText("What body part would you like to shrink?\n\n");
 			menu();
 			if (flags[kFLAGS.PATCHOULI_COCK] > 6) addButton(0, "Cock", patchouleGiveReductoCock);
@@ -536,6 +626,9 @@ package classes.Scenes.NPCs
 			outputText("You apply the paste and Patchoulie mewl as her breast shrink to " + Appearance.breastCup(flags[kFLAGS.PATCHOULI_CUP_SIZE]) + " size, spewing a fountain of milk in the process.\n\n");
 			doNext(camp.returnToCampUseOneHour);
 		}
-		//public function patchouleGiveHairDye():void
+		public function patchouleGiveHairDye():void {
+			menu();
+			addButton(14, "Back", patchouleGiveItem);
+		}
 	}
 }

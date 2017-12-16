@@ -1250,6 +1250,21 @@ use namespace CoC;
 					}
 				}
 			}
+			if (jabberwockyScore() >= 4)
+			{
+				if (jabberwockyScore() >= 20) {
+					if (isTaur()) race = " greater jabberwocky-taur";
+					else race = "greater jabberwocky";
+				}
+				else if (jabberwockyScore() >= 10) {
+					if (isTaur()) race = "jabberwocky-taur";
+					else race = "jabberwocky";
+				}
+				else {
+					if (isTaur()) race = "half-jabberwocky-taur";
+					else race = "half-jabberwocky";
+				}
+			}
 			if (raccoonScore() >= 4)
 			{
 				race = "raccoon-morph";
@@ -1895,6 +1910,8 @@ use namespace CoC;
 				chimeraCounter++;
 			if (vampireScore() >= 6)
 				chimeraCounter++;
+			if (jabberwockyScore() >= 4)
+				chimeraCounter++;
 			if (gargoyleScore() >= 6)
 				chimeraCounter++;
 			if (gooScore() >= 4)
@@ -2009,6 +2026,8 @@ use namespace CoC;
 			if (batScore() >= 10)
 				grandchimeraCounter++;
 			if (vampireScore() >= 10)
+				grandchimeraCounter++;
+			if (jabberwockyScore() >= 10)
 				grandchimeraCounter++;
 //			if (gargoyleScore() >= 6)
 //				grandchimeraCounter++;
@@ -2795,6 +2814,59 @@ use namespace CoC;
 			
 			End("Player","racialScore");
 			return dragonCounter;
+		}
+		
+		//Determine Jabberwocky Rating
+		public function jabberwockyScore():Number {
+			Begin("Player","racialScore","dragon");
+			var jabberwockyCounter:Number = 0;
+			if (faceType == AppearanceDefs.FACE_JABBERWOCKY || faceType == AppearanceDefs.FACE_BUCKTOOTH)
+				jabberwockyCounter++;
+			if (eyeType == AppearanceDefs.EYES_DRAGON)
+				jabberwockyCounter++;
+			if (earType == AppearanceDefs.EARS_DRAGON)
+				jabberwockyCounter++;
+			if (tailType == AppearanceDefs.TAIL_TYPE_DRACONIC)
+				jabberwockyCounter++;
+			if (tongueType == AppearanceDefs.TONGUE_DRACONIC)
+				jabberwockyCounter++;
+			if (wingType == AppearanceDefs.WING_TYPE_FEY_DRAGON_WINGS)
+				jabberwockyCounter += 4;
+			if (lowerBody == AppearanceDefs.LOWER_BODY_TYPE_DRAGON)
+				jabberwockyCounter++;
+			if (armType == AppearanceDefs.ARM_TYPE_DRAGON)
+				jabberwockyCounter++;
+			if (tallness > 120 && jabberwockyCounter >= 10)
+				jabberwockyCounter++;
+			if (skinType == AppearanceDefs.SKIN_COAT_DRAGON_SCALES)// FIXME: what about SKIN_TYPE_PARTIAL_DRAGON_SCALES?
+				jabberwockyCounter++;
+			if (hornType == AppearanceDefs.HORNS_DRACONIC_X4_12_INCH_LONG)
+				jabberwockyCounter += 2;
+			if (hornType == AppearanceDefs.HORNS_DRACONIC_X2)
+				jabberwockyCounter++;
+		//	if (dragonCocks() > 0)
+		//		dragonCounter++;
+			if (findPerk(PerkLib.DragonFireBreath) >= 0 && jabberwockyCounter >= 4)
+				jabberwockyCounter++;
+			if (findPerk(PerkLib.DragonIceBreath) >= 0 && jabberwockyCounter >= 4)
+				jabberwockyCounter++;
+			if (findPerk(PerkLib.DragonLightningBreath) >= 0 && jabberwockyCounter >= 4)
+				jabberwockyCounter++;
+			if (findPerk(PerkLib.DragonDarknessBreath) >= 0 && jabberwockyCounter >= 4)
+				jabberwockyCounter++;
+			if (findPerk(PerkLib.DraconicLungs) >= 0)
+				jabberwockyCounter++;
+			if (findPerk(PerkLib.DraconicLungsEvolved) >= 0)
+				jabberwockyCounter++;
+		//	if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
+		//		dragonCounter += 10;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && jabberwockyCounter >= 4)
+				jabberwockyCounter += 1;
+			if (findPerk(PerkLib.DraconicLungs) >= 0 && findPerk(PerkLib.ChimericalBodyAdvancedStage) >= 0)
+				jabberwockyCounter++;
+			
+			End("Player","racialScore");
+			return jabberwockyCounter;
 		}
 
 		//Goblin score
@@ -5302,6 +5374,31 @@ use namespace CoC;
 				maxSpe += mod * newGamePlusMod;
 				maxInt += mod * newGamePlusMod;
 				maxLib += (10 + mod) * newGamePlusMod;
+			}
+			if (dragonScore() >= 4) {
+				if (dragonScore() >= 20) {
+				maxStr += (95 * newGamePlusMod);
+				maxTou += (95 * newGamePlusMod);
+				maxSpe += (100 * newGamePlusMod);
+				maxInt += (40 * newGamePlusMod);
+				maxWis -= (50 * newGamePlusMod);
+				maxLib += (10 * newGamePlusMod);
+				}
+				else if (dragonScore() >= 10 && dragonScore() < 20) {
+				maxStr += (50 * newGamePlusMod);
+				maxTou += (40 * newGamePlusMod);
+				maxSpe += (50 * newGamePlusMod);
+				maxInt += (20 * newGamePlusMod);
+				maxWis -= (20 * newGamePlusMod);
+				maxLib += (10 * newGamePlusMod);
+				}
+				else {
+				maxStr += (15 * newGamePlusMod);
+				maxTou += (15 * newGamePlusMod);
+				maxSpe += (30 * newGamePlusMod);
+				maxInt += (15 * newGamePlusMod);
+				maxWis -= (15 * newGamePlusMod);
+				}
 			}
 			if (humanScore() == 25) {
 				maxStr += (40 * newGamePlusMod);

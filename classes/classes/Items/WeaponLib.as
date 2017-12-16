@@ -44,6 +44,7 @@ package classes.Items
 		public const H_GAUNT:Weapon = new Weapon("H.Gaunt", "H.Gaunt", "hooked gauntlets", "a set of hooked gauntlets", "clawing punch", 0, 400, "These metal gauntlets are covered in nasty looking hooks that are sure to tear at your foes flesh and cause them harm.");
 		public const HNTCANE:HuntsmansCane = new HuntsmansCane();
 		public const JRAPIER:JeweledRapier = new JeweledRapier();
+		public const KARMTOU:KarmicTouch = new KarmicTouch();
 		public const KATANA :Weapon = new Weapon("Katana ","Katana","katana","a katana","keen cut",10,400,"A curved bladed weapon that cuts through flesh with the greatest of ease.");
 		public const KIHAAXE:Weapon = new Weapon("KihaAxe","Greataxe","fiery double-bladed axe","a fiery double-bladed axe","fiery cleave",22,880,"This large, double-bladed axe matches Kiha's axe. It's constantly flaming.", "Large");
 		public const L__AXE :LargeAxe = new LargeAxe();
@@ -83,6 +84,7 @@ package classes.Items
 		public const TRASAXE:Weapon = new Weapon("TraSAxe","Train.S.Axe", "training soul axe", "a training soul axe", "cleave", 1, 80, "This axe was specialy forged and enhanted to help novice soul cultivatiors to train their soulforce.  Still if situation calls for it it could be used as a normal weapon.");
 		public const TRIDENT:Trident = new Trident();
 		public const U_STAFF:UnicornStaff = new UnicornStaff();
+		public const VBLADE :Weapon = new Weapon("V.Blade","V.Blade", "V.Blade", "a V.Blade", "slash", 28, 2240, "Lia forgot to put desc... again. Not suprising isn't it?");
 		public const W_STAFF:WizardsStaff = new WizardsStaff();
 		public const WARHAMR:HugeWarhammer = new HugeWarhammer();
 		public const WHIP   :Whip = new Whip();
@@ -90,6 +92,7 @@ package classes.Items
 		public const WDBLADE:Wardensblade = new Wardensblade();
 		public const WDSTAFF:Wardensstaff = new Wardensstaff();
 		public const WGSWORD:Wardensgreatsword = new Wardensgreatsword();
+		public const YAMARG :YamaRajaGrasp = new YamaRajaGrasp();
 		
 		/*
 		private static function mk(id:String,shortName:String,name:String,longName:String,verb:String,attack:Number,value:Number,description:String,perk:String=""):Weapon {

@@ -366,6 +366,7 @@ import classes.BodyParts.Skin;
 	private const METAMORPH_FACES:Object = createMapFromPairs([
 		[AppearanceDefs.FACE_BOAR, null],
 		[AppearanceDefs.FACE_BUCKTEETH, null],
+		[AppearanceDefs.FACE_BUCKTOOTH, null],
 		[AppearanceDefs.FACE_BUNNY, null],
 		[AppearanceDefs.FACE_CAT, null],
 		[AppearanceDefs.FACE_COW_MINOTAUR, StatusEffects.UnlockedCowMinotaurFace],
@@ -380,6 +381,7 @@ import classes.BodyParts.Skin;
 		[AppearanceDefs.FACE_FOX, null],
 		[AppearanceDefs.FACE_HORSE, null],
 		[AppearanceDefs.FACE_HUMAN, null],
+		[AppearanceDefs.FACE_JABBERWOCKY, null],
 		[AppearanceDefs.FACE_KANGAROO, null],
 		[AppearanceDefs.FACE_LIZARD, StatusEffects.UnlockedLizardFace],
 		[AppearanceDefs.FACE_MANTICORE, null],
@@ -607,6 +609,7 @@ import classes.BodyParts.Skin;
 		[AppearanceDefs.WING_TYPE_FEATHERED_ALICORN, null],
 		[AppearanceDefs.WING_TYPE_FEATHERED_LARGE, StatusEffects.UnlockedHarpyWings],
 		[AppearanceDefs.WING_TYPE_FEATHERED_PHOENIX, StatusEffects.UnlockedPhoenixWings],
+		[AppearanceDefs.WING_TYPE_FEY_DRAGON_WINGS, null],
 		[AppearanceDefs.WING_TYPE_GARGOYLE_LIKE_LARGE, null],
 		[AppearanceDefs.WING_TYPE_GIANT_DRAGONFLY, null],
 		[AppearanceDefs.WING_TYPE_HARPY, null],

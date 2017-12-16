@@ -33,10 +33,10 @@ package classes.Scenes
 			outputText("-Chi Chi can finaly visit PC camp...for longer. (for now have only app screen and shop working)\n");
 			outputText("-Reaching 100% affection with Ceani would unlock option to ask her for comming to camp. It req. PC having enough fish supply.\n");
 			outputText("-When in camp Ceani (tbc)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Areas beside forest, lake and desert req. now min. lvl to be found or...meeting cretain cat in forest that can lead PC there.\n");
+			outputText("-Patchouli that lead PC to new areas can be meet in forest and after first time PC will have...few option how to react on enxt meeting as long PC decided to visit new place before and it wasn't wonderland. One of this options lead to brining tied up cat to camp where PC can talk with him, look at him or... feed him specific item.\n");
+			outputText("-Patchouli after his change would become full fledged camp npc under Slaves tab (he is there also right after been brought to camp). PC can still look at her, talk, give some items to change her, have sex or... still explore places or/and wonderland.\n");
+			outputText("-On second and laters visits to wonderland PC will be facing choice of staying or leaving. Staying will lead to one time fight with lvl 60 boss Jabberwocky. He's tough, highly armored and adorable rabbit-dragon. Sadly still he can be hurt by magic or ice attack. Loosing will lead to Bad End but winning will give jabberwocky scale and... weapon if PC won by beating him physicaly.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -106,8 +106,8 @@ package classes.Scenes
 			outputText("-New melee weapon (by Liadri): Demonic Greataxe - obtainable by giving Large Axe to Corrupted Celess to corrupt. Atk 28 with last 10 pts scaling on corruption, when below 100 str atk drops by 9. Dmg is scaling with enemy corruption (the lower the higher dmg and increased critical chance and critical damage by 10%).\n");
 			outputText("-New melee weapon (by Liadri): Unicorn staff - obtainable by giving Wizard staff to Pure Celess to purify. Atk 6 and +90-190% to the spell power modifier but scales with purity, healing spells effect 50% stronger.\n");// and recharge 1 turns earlier
 			outputText("-New melee weapon (by Liadri): Nocturnus staff - obtainable by giving Wizard staff to Corrupted Celess to corrupt. Atk 6 and +140-240% to the spell power modifier but scales with corruption, increase all spells costs by 200%.\n");
-		//	outputText("-New melee weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
-		//	outputText("-New melee weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
+			outputText("-New melee weapon (by Liadri): Karmic Touch - obtainable by giving Master Gloves to Pure Celess to purify. Fist damage deals increased damage against the corrupt, have a 5% increased stun chance and scale with purity. These gloves also increase physical soul force ability by 50%.\n");
+			outputText("-New melee weapon (by Liadri): Yama Raja Grasp - obtainable by giving Master Gloves to Corrupted Celess to corrupt. Fist damage deals increased damage against the pure and have a 10% increased critical chance, scale with corruption. These gloves also increase physical soul force ability by 50%.\n");
 			outputText("-New range weapon (by Liadri): Artemis - obtainable by giving Longbow to Pure Celess to purify. Atk inc to 25 and last 5 pts scale with purity. Dmg is scaling with enemy corruption (the higher the higher dmg) and each arrow can cause blidness (15% chance).\n");
 			outputText("-New range weapon (by Liadri): Wild Hunt - obtainable by giving Longbow to Corrupted Celess to corrupt. Atk inc to 25 and last 5 pts scale with corruption. Dmg is scaling with enemy corruption (the lower the higher dmg) and deal 20% more dmg to enemy below PC level.\n");
 			outputText("-New range weapon (by Liadri): Kraken Slayer Harpoons - obtainable by giving Sea Huntress Harpoons to Pure Celess to purify. (item properties desc).\n");
@@ -117,7 +117,17 @@ package classes.Scenes
 			outputText("-New shield (by Liadri): Sanctuary - obtainable form encounter in forest/deepword with guardian adter picking option to take shield instead of become mother for Celess. Block chance 20, no other properties.\n");
 			outputText("-New shield (by Liadri): Sanctuary - obtainable by giving Sanctuary to Pure Celess to purify. Block chance fully scalling on purity and adding regeneration effect also scalling on purity (on averange it's ~1%).\n");
 			outputText("-New shield (by Liadri): Dark Aegis - obtainable by giving Sanctuary to Corrupted Celess to corrupt. Block chance fully scalling on corruption and adding regeneration effect also scalling on corruption (on averange it's ~1%).\n");
+			outputText("-New melee weapon (by Liadri): V. Blade - obtainable by winning against Jabberwocky by taking it HP down to 0. 28 atk, and with each attack have 1% chance to trigger penta damage.\n");
+			outputText("-New item with TF effects (by Liadri): Jabberwocky scale. When eaten by any PC that have dragon score high enough will trigger 2 tf effects that will give Jabberwocky buck tooths/Jabberwocky face and Fey Dragon wings.\n");
+			outputText("-Succesfull using Jabberwocky scale will replace dragon race bonuses with jabberwocky race bonuses. Half Jabberwocky/Jabberwocky/Greater Jabberwocky: +15/50/95 strength, +15/40/95 toughness, +30/50/100 speed, +15/20/40 intelligence, -15/20/50 wisdom, +0/10/20 libido\n");
+			outputText("-New body part - face: Jabberwocky buck tooths Req. Dragon Fangs and dragon score > 9\n");
+			outputText("-New body part - face: Jabberwocky face Req. Dragon Face and dragon score > 9\n");
+			outputText("-New body part - face: Fey Dragon Wings Req. any of three Dragon wing (small, large, huge) and dragon score > 9\n");
 			outputText("-All spells costs now would slowly increase when PC spell power increase.\n");
+			outputText("-WHen Ayane is in camp speed of recovery fatigue when sleeping will be increased by 300% not 200%,\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -168,6 +178,10 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): dodać yuki-onna TF
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

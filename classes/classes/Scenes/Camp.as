@@ -2011,7 +2011,7 @@ public function rest():void {
 	if (player.findPerk(PerkLib.SpeedyRejuvenation) >= 0) fatRecovery += 8;
 	if (player.findPerk(PerkLib.ControlledBreath) >= 0) fatRecovery *= 1.1;
 	if (player.hasStatusEffect(StatusEffects.BathedInHotSpring)) fatRecovery *= 1.2;
-	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) fatRecovery *= 2;
+	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) fatRecovery *= 3;
 	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && !prison.inPrison && !ingnam.inIngnam)
 		multiplier += 0.5;
 	//Marble withdrawal
@@ -2324,7 +2324,7 @@ public function sleepRecovery(display:Boolean = false):void {
 	if (player.findPerk(PerkLib.SpeedyRejuvenation) >= 0) fatRecovery += 20;
 	if (player.findPerk(PerkLib.ControlledBreath) >= 0) fatRecovery *= 1.1;
 	if (player.hasStatusEffect(StatusEffects.BathedInHotSpring)) fatRecovery *= 1.2;
-	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) fatRecovery *= 2;
+	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) fatRecovery *= 3;
 	if (player.findPerk(PerkLib.RecuperationSleep) >= 0) multiplier += 1;
 	if (player.findPerk(PerkLib.RejuvenationSleep) >= 0) multiplier += 2;
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0)

@@ -11080,6 +11080,43 @@ public final class Mutations extends MutationsHelper
 			if (player.femininity > 30) player.modFem(30, rand(3));
 		}
 		
+		public function jabberwockyScale(player:Player):void
+		{
+			player.slimeFeed();
+			clearOutput();
+			var changes:Number = 0;
+			var changeLimit:Number = 0;
+			clearOutput();
+			player.refillHunger(10);
+			if (player.dragonScore() > 9 || player.dragonneScore() > 9) {
+				outputText("You eat the scale expecting some kind of spectacular change and for a moment pretty much nothing happen. You begin to feel weird… like very weird. For some reason your situation as a whole is so funny you can’t help but laugh. Are you seriously eating some otherworldly dragon scale just so you can turn into a messed up rabbit dragon yourself? Aha yes you are and that's way to funny.");
+				changeLimit += 2;
+			}
+			else {
+				outputText("You eat the scale expecting some kind of spectacular change strangely nothing happened. Maybe you should stop eating everything you find.");
+			}
+			//-Jabberwocky face/bucktooth
+			if ((player.faceType == AppearanceDefs.FACE_DRAGON || player.faceType == AppearanceDefs.FACE_DRAGON_FANGS) && changes < changeLimit) {
+				outputText("\n\nWhile you are busy laughing at the ridicule of this situation your bucktooth begin to pulse in accordance with your laughter growing almost to rabbit like size. You now have ");
+				if (player.faceType == AppearanceDefs.FACE_DRAGON_FANGS) {
+					outputText("<b>Jabberwocky buck tooths!</b>");
+					setFaceType(AppearanceDefs.FACE_BUCKTOOTH);
+				}
+				else {
+					outputText("<b>a Jabberwocky face.</b>");
+					setFaceType(AppearanceDefs.FACE_JABBERWOCKY);
+				}
+				changes++;
+			}
+			//-Fea Dragon Wings
+			if ((player.wingType == AppearanceDefs.WING_TYPE_DRACONIC_SMALL || player.wingType == AppearanceDefs.WING_TYPE_DRACONIC_LARGE || player.wingType == AppearanceDefs.WING_TYPE_DRACONIC_HUGE) && changes < changeLimit) {
+				outputText("\n\nYou ain't even noticing as something messed up happen in your wings. They shrivel and change taking on a delicate almost fairy like appearance and you flap them in awe as they not only feel strong but also agile. You now have a set of <b>fey dragon wings.</b>");
+				setWingType(AppearanceDefs.WING_TYPE_FEY_DRAGON_WINGS, "large majestic fey draconic");
+				changes++;
+			}
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+		}
+		
 		public function hardBiscuits(player:Player):void {
 			outputText("You eat the flavorless biscuits. It satisfies your hunger a bit, but not much else.");
 			player.refillHunger(15);

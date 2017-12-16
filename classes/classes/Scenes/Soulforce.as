@@ -193,13 +193,12 @@ use namespace CoC;
 			//addButton(7, "TonsOfPerks", GiveTonsOfPermablePerks).hint("Give All unowned permable perks (for perm glitch test at ascension)");
 			addButton(7, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
 			addButton(8, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
-			if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 0) addButton(9, "AyaneFix", AyaneWrongSettingUpFollowerFlagFix).hint("Fixing Ayane no proper set up falg for recruitment.");
+			if (flags[kFLAGS.PATCHOULI_AND_WONDERLAND] > 1) addButton(9, "JabberwockyReset", resetJabberwockyFlag).hint("Reseting Jabberwocky boss fight.");
 			if (player.eyeColor != "brown") addButton(10, "Eye Color", eyesColorSelection).hint("Set eye color to default one so saves will not go crazy over it.");
 			addButton(11, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
 			//addButton(12, "<<< 12 >>>", CoC.instance.doNothing);
 			addButton(12, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
 			addButton(13, "Celess", celessIntroForced).hint("Due to hard time getting her intro here it's.");
-			//if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] == 3) addButton(13, "DenBossesReset", resetHeroslayerOmnibusFlag).hint("Reseting Den of Desire bosses fight.");
 			//addButton(13, "<<< 13 >>>", CoC.instance.doNothing);
 			addButton(14, "Back", accessSoulforceMenu);
 		}
@@ -213,19 +212,11 @@ private function eyesColorSelection():void {
 	outputText("You now have brown eyes.");
 	doNext(SoulforceCheats);
 }
-private function resetObsydianGargoyleFlag():void {
+private function resetJabberwockyFlag():void {
 	clearOutput();
-	outputText("You can now go fight Obsydian Gargoyle again.... for test!!!");
-	if (player.hasKeyItem("Black Soul Gem") >= 0 && flags[kFLAGS.ONYX_NAME] != 0) player.removeKeyItem("Black Soul Gem");
-	flags[kFLAGS.DEN_OF_DESIRE_BOSSES] = 1;
+	outputText("You can now go fight Jabberwocky again.... for test!!!");
+	flags[kFLAGS.PATCHOULI_AND_WONDERLAND] = 1;
 	doNext(SoulforceCheats);
-}
-private function resetHeroslayerOmnibusFlag():void {
-	clearOutput();
-	outputText("You can now go fight Heroslayer Omnibus again.... for test!!!");
-	player.removeKeyItem("Gargoyle demonic researches");
-	flags[kFLAGS.DEN_OF_DESIRE_BOSSES] = 2;
-	doNext(resetObsydianGargoyleFlag);
 }
 		public function StatsMenu():void {
 			menu();
@@ -629,11 +620,6 @@ private function resetHeroslayerOmnibusFlag():void {
 			flags[kFLAGS.ETNA_LVL_UP]--;
 			outputText("\n\n<b>Etna been De-LvL'd!!!</b>");
 			doNext(FasterOrInstantCampNPCRecruitment);
-		}
-		public function AyaneWrongSettingUpFollowerFlagFix():void {
-			flags[kFLAGS.AYANE_FOLLOWER] = 0;
-			outputText("\n\n<b>Ayane trigger for showing up with join offer should be fixed with this.</b>");
-			doNext(SoulforceCheats);
 		}
 		public function TribulationPerks():void {
 			if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) < 0) {

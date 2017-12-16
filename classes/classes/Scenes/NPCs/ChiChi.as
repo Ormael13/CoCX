@@ -24,7 +24,7 @@ use namespace CoC;
 			SimpleStrike();
 			SimpleStrike();
 			if (player.findPerk(PerkLib.Resolute) < 0 && flags[kFLAGS.CHI_CHI_SAM_TRAINING] < 2) {
-				outputText(" You stagger under the violence of the consecutive impacts, unable to recover your balance.");
+				outputText(" You stagger under the violent force of the consecutive impacts, unable to recover your balance.");
 				player.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] >= 2) outputText(" Thankfully your training with her helped you learn how to counter most of these attacks and you manage to weaken her normally overwhelming blows.");
@@ -60,8 +60,9 @@ use namespace CoC;
 		}
 		
 		public function DefensiveStance():void {
-			outputText("The mouse looks to be in a rough shape. However, instead of dropping down and admitting defeat like most of your foes, she resumes standing and howls with rage, her fire increasing in size as she goes berserk. To your surprise, Chi Chi’s movement suddenly shifts as she begins to parry, dodge and block your every move with vexing efficiency. However she looks to be suffering. ");
-			outputText("<b>There is an obsessed fury about it, like she is determined to defeat you at all cost. Perhaps you should surrender?</b>");
+			outputText("The mouse seems to be in rough shape. However, instead of dropping down and admitting defeat like most of your foes, she resumes standing and howls with rage; Her fire increasing in size as she goes berserk her body glowing with a halo the color of blood. However... she clearly looks to be suffering. Her gaze meet yours with a death stare that leaves you shaken.\n\n");
+			outputText("\"<i>Come at me ‘champion’ of Ingnam!!!</i>\"\n\n");
+			outputText("She slam her left foot in the ground with such terrifying strength it creates a 1 feet deep crater before rushing toward you, this is going to hurt! <b>There is an obsessed fury about her, like she is determined to defeat you at all costs. Perhaps you should surrender before someone gets killed?</b>");
 			createStatusEffect(StatusEffects.DefendMonsterVer, 50, 0.9, 0, 0);
 		}
 		
@@ -72,7 +73,7 @@ use namespace CoC;
 		
 		public function SoulBlast():void {
 			if (!hasStatusEffect(StatusEffects.AbilityChanneled)) {
-				outputText("You see Chi Chi assuming a stance and waving soul art signs characteristic of a deadly attack you don’t recognise - its obviously a dangerous technique. The best option would be to dodge it.");
+				outputText("You see Chi Chi assuming a stance and waving soul art signs, - characteristic of a deadly attack you don’t recognise - its obviously a dangerous technique. The best option would be to dodge it.");
 				createStatusEffect(StatusEffects.AbilityChanneled, 0, 0, 0, 0);
 			}
 			else {
@@ -81,7 +82,7 @@ use namespace CoC;
 					outputText("When Chi Chi unleashes a torrent of soulforce energy at you, you’ve already dodged out of the way, predicting her move. The attack leaves a massive hole where you stood earlier. You are glad you moved out of the way!");
 				}
 				else {
-					outputText("Chi Chi palms fills with a massive sphere of red energy which suddenly explodes in a devastating beam of concentrated soul force. You see the devastating torrent a mere fraction of a second before it hits you. Your defences are shattered, utterly unable to stop it as the energy overwhelms you. The blast barely leaves you intact.");
+					outputText("Chi Chi’s palms fill with a massive sphere of red energy which suddenly explodes in a devastating beam of concentrated soul force. You see the devastating torrent a mere fraction of a second before it hits you. Your defences are shattered, utterly unable to stop it as the energy overwhelms you. The blast barely leaves you intact.");
 					player.takePhysDamage(5000000);
 					player.takeMagicDamage(5000000);
 				}
@@ -90,7 +91,7 @@ use namespace CoC;
 		
 		override protected function performCombatAction():void {
 			if (flags[kFLAGS.CHI_CHI_AFFECTION] < 20) {
-				if (this.HPRatio() < 0.5 && !hasStatusEffect(StatusEffects.DefendMonsterVer)) DefensiveStance();
+				if ((this.HPRatio() < 0.5 || this.lust > this.maxLust() * 0.5) && !hasStatusEffect(StatusEffects.DefendMonsterVer)) DefensiveStance();
 				else PentaStrike();
 			}
 			else {
@@ -133,8 +134,8 @@ use namespace CoC;
 
 		override public function get long():String {
 			var str:String = "";
-			str += "Chi Chi is a mouse morph albeit a strange one because her fist, tail and even legs are on fire. She has pink fur and bright red hairs which always seems as if about to catch fire. She wears a pair of gauntlet and a qipao characteristic of her homeland.";
-			if (hasStatusEffect(StatusEffects.DefendMonsterVer)) str += " Chi Chi looks in great pain but keep fighting on with little regards for her wounds. <b>It would be smart to surrender so she doesn’t go so far as to kill herself for an arena match!</b>";
+			str += "Chi Chi is a mouse morph, albeit a strange one. Her fists, tail, and even legs are on fire! She has pink fur and bright red hair which always seems on the verge of  catching fire. She wears a pair of gauntlets and a qipao, characteristic of her homeland.";
+			if (hasStatusEffect(StatusEffects.DefendMonsterVer)) str += " Chi Chi appears to be in great pain but keeps fighting on with little regards for her wounds. It would be smart to surrender so she doesn’t go so far as to kill herself for an arena match!</b>";
 			return str;
 		}
 		

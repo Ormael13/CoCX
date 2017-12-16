@@ -115,6 +115,8 @@ public class AppearanceDefs {
     public static const FACE_ONI_TEETH:int	                                            =   32;
     public static const FACE_RAIJU_FANGS:int                                            =   33;
     public static const FACE_VAMPIRE:int                                                =   34;
+    public static const FACE_BUCKTOOTH:int                                            	=   35;
+    public static const FACE_JABBERWOCKY:int                                            =   36;
 
 // tongueType
     public static const TONGUE_HUMAN:int                                                =   0;
@@ -298,6 +300,7 @@ public class AppearanceDefs {
     public static const WING_TYPE_MANTICORE_LIKE_LARGE:int                              =  23;
     public static const WING_TYPE_BAT_ARM:int                                           =  24;
     public static const WING_TYPE_VAMPIRE:int                                           =  25;
+    public static const WING_TYPE_FEY_DRAGON_WINGS:int                                  =  26;
 
 // lowerBody
     public static const LOWER_BODY_TYPE_HUMAN:int                                       =   0;

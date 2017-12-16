@@ -2460,6 +2460,7 @@ import flash.errors.IllegalOperationError;
 			AppearanceDefs.WING_TYPE_GARGOYLE_LIKE_LARGE,
             AppearanceDefs.WING_TYPE_BAT_ARM,
             AppearanceDefs.WING_TYPE_VAMPIRE,
+            AppearanceDefs.WING_TYPE_FEY_DRAGON_WINGS,
 			//WING_TYPE_IMP_LARGE,
 		];
 
@@ -2502,7 +2503,7 @@ import flash.errors.IllegalOperationError;
 		//Fists and fist weapons
 		public function isFistOrFistWeapon():Boolean
 		{
-			return game.player.weaponName == "fists" || game.player.weapon == game.weapons.S_GAUNT || game.player.weapon == game.weapons.H_GAUNT || game.player.weapon == game.weapons.MASTGLO;
+			return game.player.weaponName == "fists" || game.player.weapon == game.weapons.S_GAUNT || game.player.weapon == game.weapons.H_GAUNT || game.player.weapon == game.weapons.MASTGLO || game.player.weapon == game.weapons.KARMTOU || game.player.weapon == game.weapons.YAMARG;
 
 		}
 

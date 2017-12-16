@@ -21,13 +21,13 @@ use namespace CoC;
 
 public function EnterOfTheChiChi():void {
 	clearOutput();
-	outputText("You step into the arena once more, but this time your opponent is slightly different. While of small stature like other mice you’ve met in He’Xin’Dao, this mouse morph has pinkish red hair and oriental clothes. She wears a pair of spiked gloves, her fists are clenched slightly at her sides, and she clearly sports a pair of C cup breasts under her clothes. The announcer screams out the participant names as usual, their enthusiastic introductions something you’ve grown used to.\n\n");
+	outputText("You step into the arena once more, but this time your opponent is slightly different. While of small stature like other mice you’ve met in He’Xin’Dao, this mouse morph has pinkish red hair and oriental clothes. She wears a pair of spiked gloves, her fists are clenched slightly at her sides, and she clearly sports a pair of C cup breasts under her clothes. The announcer screams out the participant's names as usual, their enthusiastic introductions is something you’ve grown used to.\n\n");
 	outputText("\"<i>In the left corner, coming from another world, [name], Champion of Ingnam! And in the right corner, from a land far away to the east, the martial arts master, Chi Chi of the four winds!</i>\"\n\n");
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 0) {
-		outputText("Hey that's the waitress of the exotic food restaurant. Chi Chi adopt a battle stance as she catch fire and turn into a living inferno.\n\n");
-		outputText("\"<i>Get ready because this one dishes will be EXTRA spicy! You prefer inferno or Hell? I’m going to leave you with fifth level burns!!!</i>\"");
+		outputText("Hey that's the waitress of the exotic food restaurant. Chi Chi adopts a battle stance as she catches fire, turning into a living inferno.\n\n");
+		outputText("\"<i>Get ready for this one dishes will be EXTRA spicy! You prefer inferno or Hell? Because I’m about to leave you with fifth-degree burns!!!</i>\"");
 	}
-	else outputText("Chi Chi, as it’s obviously her name, adopts a battle stance. Her fists, tail and legs suddenly light aflame!");
+	else outputText("Chi Chi, as it’s obviously her name, adopts a battle stance. Her fists, tail and legs suddenly light aflame! Gosh a fire mouse? Something tells you this is going to hurt.");
 	flags[kFLAGS.CHI_CHI_AFFECTION] = 0;
 	flags[kFLAGS.CHI_CHI_LVL_UP] = 1;
 	startCombat(new ChiChi());
@@ -40,7 +40,7 @@ public function WonFirstFight():void {
 	outputText("\"<i>Is this... my blood... it is... beautiful. I never thought I would see the day when I...</i>\"\n\n");
 	outputText("She smiles as she stand a final time, trying to run toward you to deliver one last punch. But midway, she falls to the ground, still smiling, with an obvious trail of blood on the corner of her mouth. Muttering two last words as her eyes lose their light.\n\n");
 	outputText("\"<i>Thank you...</i>\"\n\n");
-	outputText("The entire crowd fall silent as the mouse morph hit the sandy arena ground a small kid starting to cry in background. The medics run to her in a hurry, but scream something about her having died from fatal self inflicted injuries. You don’t really care however and just pick up her glove on the ground as a prize for your victory. Surprisingly no one cheer for you this time not even the announcer who is normally so talkative.\n\n");
+	outputText("The entire crowd falls silent as the mouse morph hits the sandy arena ground, a small kid starts to cry in background. The medics run to her in a hurry, but scream something about her having died from fatal self inflicted injuries. You don’t really care however and just pick up her gloves on the ground as a prize for your victory. Surprisingly no-one cheers for you this time, not even the announcer who is normally so talkative. (I sincerely advise that you reload your game without saving unless you are fine with losing access to a lot of important key content.)\n\n");
 	flags[kFLAGS.CHI_CHI_FOLLOWER] = 2;
 	cleanupAfterCombat();
 }
@@ -48,12 +48,12 @@ public function WonFirstFight():void {
 public function LostFirstFight():void {
 	clearOutput();
 	if (player.HP < 1) {
-		outputText("\"<i>Is that all you’ve got? How dare you even call yourself a champion? You barely know how to fight! You tried well, albeit, not well enough. If you intend to actually call yourself a warrior, perhaps someday you should seek me out in town, I could teach you...  if you have knowledge of the basics that is. I don’t teach my skill to just anyone.</i>\"\n\n");
+		outputText("\"<i>Is that all you’ve got? How dare you even call yourself a champion? You barely know how to fight! You tried well, albeit, not well enough. If you intend to actually call yourself a warrior, perhaps someday you should seek me out in town, I could teach you...  if you have knowledge of the basics that is, I don’t teach my skill to just anyone.</i>\"\n\n");
 		outputText("The mouse girl leaves you half conscious on the arena sand as the medics come to your rescue.\n\n");
 	}
 	else {
 		outputText("Declared the winner, the burning mouse approaches you. She looks angry and it's likely because you forfeited.\n\n");
-		outputText("\"<i>I’m disappointed. You pretend to be a champion, yet you seem to consider battles a kid’s game. Do you have any idea what would have happened in a real fight? You tried well, albeit, not well enough because obviously you cowered down. I’m interested in you however so perhaps someday you should seek me out in town. I could teach you how to fight better than that...  if you have knowledge of the basics that is. I don’t teach my skill to just anyone.</i>\"\n\n");
+		outputText("\"<i>I’m disappointed. You pretend to be a champion, yet you seem to consider battles a kid’s game. Do you have any idea what would have happened in a real fight? You tried well, albeit, not well enough because obviously you cowered down. I’m interested in you however, so perhaps someday you should seek me out in town. I could teach you how to fight better than that...  if you have knowledge of the basics that is, I don’t teach my skill to just anyone.</i>\"\n\n");
 		outputText("The fiery mouse girl leaves you there as she heads out of the ring.\n\n");
 	}
 	flags[kFLAGS.CHI_CHI_AFFECTION] = 20;

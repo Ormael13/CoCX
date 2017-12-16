@@ -2689,14 +2689,14 @@ public function attack():void {
 		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 2;
 		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 5;
 	}
-	if (player.weapon == weapons.NPHBLDE || player.weapon == weapons.MASAMUN || player.weapon == weapons.SESPEAR || player.weapon == weapons.WG_GAXE) {
+	if (player.weapon == weapons.NPHBLDE || player.weapon == weapons.MASAMUN || player.weapon == weapons.SESPEAR || player.weapon == weapons.WG_GAXE || player.weapon == weapons.KARMTOU) {
 		if (monster.cor < 33) damage = Math.round(damage * 1.0);
 		else if (monster.cor < 50) damage = Math.round(damage * 1.1);
 		else if (monster.cor < 75) damage = Math.round(damage * 1.2);
 		else if (monster.cor < 90) damage = Math.round(damage * 1.3);
 		else damage = Math.round(damage * 1.4);
 	}
-	if (player.weapon == weapons.EBNYBLD || player.weapon == weapons.BLETTER || player.weapon == weapons.DSSPEAR || player.weapon == weapons.DE_GAXE) {
+	if (player.weapon == weapons.EBNYBLD || player.weapon == weapons.BLETTER || player.weapon == weapons.DSSPEAR || player.weapon == weapons.DE_GAXE || player.weapon == weapons.YAMARG) {
 		if (monster.cor >= 66) damage = Math.round(damage * 1.0);
 		else if (monster.cor >= 50) damage = Math.round(damage * 1.1);
 		else if (monster.cor >= 25) damage = Math.round(damage * 1.2);
@@ -2715,7 +2715,7 @@ public function attack():void {
 	if (player.findPerk(PerkLib.WeaponMastery) >= 0 && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
 	if (player.findPerk(PerkLib.WeaponGrandMastery) >= 0 && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
 	if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
-	if (player.weapon == weapons.MASAMUN || (player.weapon == weapons.WG_GAXE && monster.cor > 66) || (player.weapon == weapons.DE_GAXE && monster.cor < 33)) critChance += 10;
+	if (player.weapon == weapons.MASAMUN || (player.weapon == weapons.WG_GAXE && monster.cor > 66) || ((player.weapon == weapons.DE_GAXE || player.weapon == weapons.YAMARG) && monster.cor < 33)) critChance += 10;
 	if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 	if (rand(100) < critChance) {
 		crit = true;
@@ -2803,7 +2803,6 @@ public function attack():void {
 			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
 			if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 			if (damage > 0) damage = doDamage(damage, false);
-		
 			(monster as Doppleganger).mirrorAttack(damage);
 			return;
 		}
@@ -2824,9 +2823,15 @@ public function attack():void {
 		}
 	}
 	if(damage > 0) {
+		var vbladeeffect:Boolean = false;
+		var vbladeeffectChance:int = 1;
 		if (player.findPerk(PerkLib.HistoryFighter) >= 0 || player.findPerk(PerkLib.PastLifeFighter) >= 0) damage *= 1.1;
 		if (player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
+		if (rand(100) < vbladeeffectChance) {
+			vbladeeffect = true;
+			damage *= 5;
+		}
 		damage = doDamage(damage);
 	}
 	if(damage <= 0) {
@@ -2834,7 +2839,8 @@ public function attack():void {
 		outputText("Your attacks are deflected or blocked by [monster a] [monster name].");
 	}
 	else {
-		outputText("You hit [monster a] [monster name]! ");
+		if (vbladeeffect == true) outputText("As you strike, the sword shine with a red glow as somehow you aim straight for [monster a] [monster name] throat. ");
+		else outputText("You hit [monster a] [monster name]! ");
 		if (crit == true) {
 			outputText("<b>Critical! </b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -2932,7 +2938,12 @@ public function attack():void {
 			if (!monster.hasStatusEffect(StatusEffects.Stunned)) monster.createStatusEffect(StatusEffects.Stunned,rand(2),0,0,0);
 		}
 		//20% Stun chance
-		if (player.isFistOrFistWeapon() && player.findPerk(PerkLib.MightyFist) >= 0 && rand(5) == 0 && monster.findPerk(PerkLib.Resolute) < 0) {
+		if (player.isFistOrFistWeapon() && player.weapon != weapons.KARMTOU && player.findPerk(PerkLib.MightyFist) >= 0 && rand(5) == 0 && monster.findPerk(PerkLib.Resolute) < 0) {
+			outputText("\n" + monster.capitalA + monster.short + " reels from the brutal blow, stunned.");
+			if (!monster.hasStatusEffect(StatusEffects.Stunned)) monster.createStatusEffect(StatusEffects.Stunned,rand(2),0,0,0);
+		}
+		//25% Stun chance
+		if (player.weapon != weapons.KARMTOU && player.findPerk(PerkLib.MightyFist) >= 0 && rand(4) == 0 && monster.findPerk(PerkLib.Resolute) < 0) {
 			outputText("\n" + monster.capitalA + monster.short + " reels from the brutal blow, stunned.");
 			if (!monster.hasStatusEffect(StatusEffects.Stunned)) monster.createStatusEffect(StatusEffects.Stunned,rand(2),0,0,0);
 		}

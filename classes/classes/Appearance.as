@@ -2448,7 +2448,9 @@ public class Appearance extends Utils
 					[AppearanceDefs.FACE_PLANT_DRAGON, "plant dragon"],
 					[AppearanceDefs.FACE_DRAGON_FANGS, "dragon fangs"],
 					[AppearanceDefs.FACE_DEVIL_FANGS, "devil fangs"],
-					[AppearanceDefs.FACE_RAIJU_FANGS, "raiju"]
+					[AppearanceDefs.FACE_RAIJU_FANGS, "raiju"],
+					[AppearanceDefs.FACE_BUCKTOOTH, "jabberwocky buck tooths"],
+					[AppearanceDefs.FACE_JABBERWOCKY, "jabberwocky"]
 				]
 		);
 		public static const DEFAULT_TONGUE_NAMES:Object = createMapFromPairs(
@@ -2625,7 +2627,10 @@ public class Appearance extends Utils
 					[AppearanceDefs.WING_TYPE_GARGOYLE_LIKE_LARGE, "large stony"],
 					[AppearanceDefs.WING_TYPE_PLANT, "three pairs of cockvines"],
 					[AppearanceDefs.WING_TYPE_MANTICORE_LIKE_SMALL, "small manticore-like"],
-					[AppearanceDefs.WING_TYPE_MANTICORE_LIKE_LARGE, "large manticore-like"]
+					[AppearanceDefs.WING_TYPE_MANTICORE_LIKE_LARGE, "large manticore-like"],
+					[AppearanceDefs.WING_TYPE_BAT_ARM, "large manticore-like"],
+					[AppearanceDefs.WING_TYPE_VAMPIRE, "large manticore-like"],
+					[AppearanceDefs.WING_TYPE_FEY_DRAGON_WINGS, "large majestic fey draconic"]
 				]
 		);
 		public static const DEFAULT_WING_DESCS:Object = createMapFromPairs(
@@ -2652,7 +2657,8 @@ public class Appearance extends Utils
 					[AppearanceDefs.WING_TYPE_GARGOYLE_LIKE_LARGE, "large stony"],
 					[AppearanceDefs.WING_TYPE_PLANT, "three pairs of cockvines"],
 					[AppearanceDefs.WING_TYPE_MANTICORE_LIKE_SMALL, "small manticore-like"],
-					[AppearanceDefs.WING_TYPE_MANTICORE_LIKE_LARGE, "large manticore-like"]
+					[AppearanceDefs.WING_TYPE_MANTICORE_LIKE_LARGE, "large manticore-like"],
+					[AppearanceDefs.WING_TYPE_FEY_DRAGON_WINGS, "large majestic fey draconic"]
 				]
 		);
 		public static const DEFAULT_LOWER_BODY_NAMES:Object = createMapFromPairs(

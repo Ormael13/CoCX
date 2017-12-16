@@ -1243,7 +1243,9 @@ public class PlayerAppearance extends BaseContent {
 		if (wingType == AppearanceDefs.WING_TYPE_VAMPIRE){
 			outputText("   Between your shoulder blades rest a pair of large, ominous black wings reminiscent of a bat’s. They can unfurl up to twice your arm’s length, allowing you to gracefully dance in the night sky.");
 		}
-
+		if (wingType == AppearanceDefs.WING_TYPE_DRACONIC_HUGE){
+			outputText("  Magnificent huge wings sprout from your shoulders.  When unfurled they stretch over twice further than your arm span, and a single beat of them is all you need to set out toward the sky.  They look a bit like bat's wings, but the membranes are covered in fine, delicate scales and a wicked talon juts from the end of each bone.  While draconic in appearance the delicate frame of your fey like dragon wings allows for even better speed and maneuverability.");
+		}
 	}
 	public function describeHorns():void {
 //Horns
@@ -1780,6 +1782,12 @@ public class PlayerAppearance extends BaseContent {
 		if (faceType == AppearanceDefs.FACE_DRAGON_FANGS) {
 			outputText("  Your mouth is somewhat human save for your draconic fangs giving you a menacing smile.  It's decorated by [skin coat].");
 		}
+		if (faceType == AppearanceDefs.FACE_JABBERWOCKY) {
+			outputText("  Your face is a narrow, reptilian muzzle.  It looks like a predatory lizard's, at first glance, but with an unusual array of spikes along the under-jaw.  It gives you a regal but fierce visage.  Opening your mouth reveals two buck tooth, which are abnormally large.  Like a rabbit or rather a Jabberwocky.  The fearsome visage is decorated by [skin coat].");
+		}
+		if (faceType == AppearanceDefs.FACE_BUCKTOOTH) {
+			outputText("  Your mouth is somewhat human save for your two buck tooth, which are abnormally large.  Like a rabbit or rather a Jabberwocky.  It's decorated by [skin coat].");
+		}
 		if (faceType == AppearanceDefs.FACE_PLANT_DRAGON) {
 			outputText("  Your face is a narrow, reptilian and regal, reminiscent of a dragon.  A [skin coat] decorates your visage.");
 		}
@@ -2036,6 +2044,23 @@ public function RacialScores():void {
 		outputText("\n<font color=\"#0000a0\">INTERNAL CHIMERICAL DISPOSITION: " + player.internalChimeraScore() + " (+" + (5 * player.internalChimeraScore() * (1 + player.newGamePlusMod())) + " max Str / Tou / Spe / Int / Wis / Lib)</font>");
 	}
 	else if (player.internalChimeraScore() < 1) outputText("\nINTERNAL CHIMERICAL DISPOSITION: 0</font>");
+	if (player.jabberwockyScore() >= 20) {
+		outputText("\n<font color=\"#0000a0\">Greater Jabberwocky: " + player.jabberwockyScore() + " (+" + (95 * (1 + player.newGamePlusMod())) + " max Str, +");
+		if (player.findPerk(PerkLib.DraconicLungsEvolved) >= 0) outputText((100 * (1 + player.newGamePlusMod())) + " max Tou, +" + (110 * (1 + player.newGamePlusMod())));
+		else if (player.findPerk(PerkLib.DraconicLungs) >= 0) outputText((95 * (1 + player.newGamePlusMod())) + " max Tou, +" + (105 * (1 + player.newGamePlusMod())));
+		else outputText((95 * (1 + player.newGamePlusMod())) + " max Tou, +" + (100 * (1 + player.newGamePlusMod())));
+		outputText(" max Spe, +" + (40 * (1 + player.newGamePlusMod())) + " max Int, -" + (50 * (1 + player.newGamePlusMod())) + " max Wis, +" + (20 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+	}
+	else if (player.jabberwockyScore() >= 10 && player.jabberwockyScore() < 20) {
+		outputText("\n<font color=\"#0000a0\">Jabberwocky: " + player.jabberwockyScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Str, +");
+		if (player.findPerk(PerkLib.DraconicLungsEvolved) >= 0) outputText((45 * (1 + player.newGamePlusMod())) + " max Tou, +" + (60 * (1 + player.newGamePlusMod())));
+		else if (player.findPerk(PerkLib.DraconicLungs) >= 0) outputText((40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (55 * (1 + player.newGamePlusMod())));
+		else outputText((40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (50 * (1 + player.newGamePlusMod())));
+		outputText(" max Spe, +" + (20 * (1 + player.newGamePlusMod())) + " max Int, -" + (20 * (1 + player.newGamePlusMod())) + " max Wis, +" + (10 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+	}
+	else if (player.jabberwockyScore() >= 4 && player.jabberwockyScore() < 10) outputText("\n<font color=\"#0000a0\">Half-Jabberwocky: " + player.jabberwockyScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Str, +" + (15 * (1 + player.newGamePlusMod())) + " max Tou, +" + (30 * (1 + player.newGamePlusMod())) + " max Spe, +" + (15 * (1 + player.newGamePlusMod())) + " max Int, -" + (15 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
+	else if (player.jabberwockyScore() >= 1 && player.jabberwockyScore() < 4) outputText("\n<font color=\"#008000\">Half-Jabberwocky: " + player.jabberwockyScore() + "</font>");
+	else if (player.jabberwockyScore() < 1) outputText("\n<font color=\"#ff0000\">Half-Jabberwocky: 0</font>");
 	if (player.kangaScore() >= 4) outputText("\n<font color=\"#0000a0\">Kangaroo-morph: " + player.kangaScore() + " (+" + (5 * (1 + player.newGamePlusMod())) + " max Tou, +" + (15 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
 	else if (player.kangaScore() >= 1 && player.kangaScore() < 4) outputText("\n<font color=\"#008000\">Kangaroo-morph: " + player.kangaScore() + "</font>");
 	else if (player.kangaScore() < 1) outputText("\n<font color=\"#ff0000\">Kangaroo-morph: 0</font>");
