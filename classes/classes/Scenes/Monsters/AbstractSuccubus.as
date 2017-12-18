@@ -75,7 +75,6 @@ package classes.Scenes.Monsters
 								outputText("! Of course, it would have been worse if you didn't wear groin protection");
 								damage = int(damage / (groinProtection + 1));
 							}
-							damage = player.reduceDamage(damage);
 							if (damage < 20) damage = 10;
 							player.dynStats("lus", -15);
 						}
@@ -91,7 +90,6 @@ package classes.Scenes.Monsters
 								outputText("! Of course, it would have been worse if you didn't wear groin protection");
 								damage = int(damage / (groinProtection + 1));
 							}
-							damage = player.reduceDamage(damage);
 							if (damage < 30) damage = 30;
 							player.dynStats("lus", -20);
 						}

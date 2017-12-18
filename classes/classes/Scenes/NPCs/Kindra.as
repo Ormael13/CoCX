@@ -72,7 +72,6 @@ use namespace CoC;
 			else {
 				var damage:Number = 0;
 				damage += eBaseSpeedDamage() * 0.2;
-				damage = player.reduceDamage(damage);
 				if (damage < 10) damage = 10;
 				//weapon bonus
 				if (this.weaponRangeAttack < 51) damage *= (1 + (this.weaponRangeAttack * 0.03));

@@ -16,6 +16,7 @@ package classes.Items
 
 		public static const FISTS:Fists = new Fists();
 
+		public const ACLAYMO:AmphystClaymore = new AmphystClaymore();
 		public const ASCENSU:Ascensus = new Ascensus();
 		public const B_SWORD:Weapon = new BeautifulSword();
 		public const BFSWORD:Weapon = new BFSword();
@@ -40,7 +41,7 @@ package classes.Items
 		public const ERIBBON:EldritchRibbon = new EldritchRibbon();
 		public const EXCALIB:Weapon = new Excalibur();
 		public const FLAIL  :Weapon = new Weapon("Flail  ","Flail","flail","a flail","smash",10,400,"This is a flail, a weapon consisting of a metal spiked ball attached to a stick by chain. Be careful with this as you might end up injuring yourself.");
-		public const URTAHLB:Weapon = new Weapon("UrtaHlb","UrtaHlb","halberd","a halberd","slash",30,1200,"Urta's halberd. How did you manage to get this?","Large");
+		public const FRTAXE :Weapon = new Weapon("Fr.T.Axe","Fr.T.Axe", "Francisca throwing axe", "a Francisca throwing axe", "cleave", 25, 2000, "Wielded by the bravest warriors of a foreign land, this axe is made in polished steel, and decorated with hunting reliefs in silver and platinum. It’s unusually light for its size, so you may be able to throw it at a flying foe to bring it down. Some runes engraved on the handle assure that it will return to you once it has hit your opponent.", "Large");
 		public const H_GAUNT:Weapon = new Weapon("H.Gaunt", "H.Gaunt", "hooked gauntlets", "a set of hooked gauntlets", "clawing punch", 0, 400, "These metal gauntlets are covered in nasty looking hooks that are sure to tear at your foes flesh and cause them harm.");
 		public const HNTCANE:HuntsmansCane = new HuntsmansCane();
 		public const JRAPIER:JeweledRapier = new JeweledRapier();
@@ -81,10 +82,12 @@ package classes.Items
 		public const SESPEAR:SeraphicSpear = new SeraphicSpear();
 		public const SPEAR  :Spear = new Spear();
 		public const SUCWHIP:SuccubiWhip = new SuccubiWhip();
+		public const TCLAYMO:TopazClaymore = new TopazClaymore();
 		public const TRASAXE:Weapon = new Weapon("TraSAxe","Train.S.Axe", "training soul axe", "a training soul axe", "cleave", 1, 80, "This axe was specialy forged and enhanted to help novice soul cultivatiors to train their soulforce.  Still if situation calls for it it could be used as a normal weapon.");
 		public const TRIDENT:Trident = new Trident();
 		public const U_STAFF:UnicornStaff = new UnicornStaff();
-		public const VBLADE :Weapon = new Weapon("V.Blade","V.Blade", "V.Blade", "a V.Blade", "slash", 28, 2240, "Lia forgot to put desc... again. Not suprising isn't it?");
+		public const URTAHLB:Weapon = new Weapon("UrtaHlb","UrtaHlb","halberd","a halberd","slash",30,1200,"Urta's halberd. How did you manage to get this?","Large");
+		public const VBLADE :Weapon = new Weapon("V.Blade","V.Blade", "V.Blade", "a V.Blade", "slash", 28, 2240, "A peculiar sword. The letter V is engraved into the blade perhaps its former owner name.");
 		public const W_STAFF:WizardsStaff = new WizardsStaff();
 		public const WARHAMR:HugeWarhammer = new HugeWarhammer();
 		public const WHIP   :Whip = new Whip();
@@ -93,6 +96,7 @@ package classes.Items
 		public const WDSTAFF:Wardensstaff = new Wardensstaff();
 		public const WGSWORD:Wardensgreatsword = new Wardensgreatsword();
 		public const YAMARG :YamaRajaGrasp = new YamaRajaGrasp();
+		public const ZWNDER :Zweihander = new Zweihander();
 		
 		/*
 		private static function mk(id:String,shortName:String,name:String,longName:String,verb:String,attack:Number,value:Number,description:String,perk:String=""):Weapon {

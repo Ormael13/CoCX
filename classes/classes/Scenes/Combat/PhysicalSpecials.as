@@ -623,6 +623,18 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (monster.hasPerk(PerkLib.IceVulnerability)) powerfistspowervalue *= 2;
 			if (monster.hasPerk(PerkLib.FireNature)) powerfistspowervalue *= 5;
 		}
+			if (player.weapon == weapons.TCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			if (monster.findPerk(PerkLib.DarknessNature) >= 0) powerfistspowervalue *= 5;
+			if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) powerfistspowervalue *= 2;
+			if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) powerfistspowervalue *= 0.5;
+			if (monster.findPerk(PerkLib.LightningNature) >= 0) powerfistspowervalue *= 0.2;
+		}
+		if (player.weapon == weapons.ACLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			if (monster.findPerk(PerkLib.DarknessNature) >= 0) powerfistspowervalue *= 0.2;
+			if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) powerfistspowervalue *= 0.5;
+			if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) powerfistspowervalue *= 2;
+			if (monster.findPerk(PerkLib.LightningNature) >= 0) powerfistspowervalue *= 5;
+		}
 		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) powerfistspowervalue *= 1.1;
 		if (player.hasPerk(PerkLib.JobWarrior)) powerfistspowervalue *= 1.05;
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) powerfistspowervalue *= 2;

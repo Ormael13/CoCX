@@ -114,7 +114,6 @@ public class GoblinElder extends Goblin
 				outputText("Her strike connects with you! ");
 				//Get hit
 				var damage:int = str + weaponAttack + rand(40);
-				damage = player.reduceDamage(damage);
 				if (damage < 10) damage = 10;
 				player.takePhysDamage(damage, true);
 			}
@@ -133,7 +132,6 @@ public class GoblinElder extends Goblin
 					player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 				}
 				var damage:int = str + rand(10);
-				damage = player.reduceDamage(damage);
 				if (damage < 10) damage = 10;
 				player.takePhysDamage(damage, true);
 			}

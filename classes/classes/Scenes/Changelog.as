@@ -118,20 +118,22 @@ package classes.Scenes
 			outputText("-New shield (by Liadri): Sanctuary - obtainable by giving Sanctuary to Pure Celess to purify. Block chance fully scalling on purity and adding regeneration effect also scalling on purity (on averange it's ~1%).\n");
 			outputText("-New shield (by Liadri): Dark Aegis - obtainable by giving Sanctuary to Corrupted Celess to corrupt. Block chance fully scalling on corruption and adding regeneration effect also scalling on corruption (on averange it's ~1%).\n");
 			outputText("-New melee weapon (by Liadri): V. Blade - obtainable by winning against Jabberwocky by taking it HP down to 0. 28 atk, and with each attack have 1% chance to trigger penta damage.\n");
+			outputText("-New melee weapon (by Coalsack): Zweihander - buyable in Benoit shop at 100% affection. 31 atk (below 105 str atk drops to 20), costs 2000 gems, 30% chance to stun enemy for 3 rounds, large type weapon.\n");
+			outputText("-New melee weapon (by Coalsack): Francisca throwing axe - buyable at He'Xin'Dao shop with melee weapons. 25 atk, costs 2000 gems, increase dmg to flying enemies by 50%, can be used to attack flying enemies when PC itself not flying, large type weapon.\n");
+			outputText("-New range weapon (by Coalsack): Ivory inlaid arquebus - buyable at He'Xin'Dao shop with range weapons. 28 atk, costs 1400 gems, 10 bullets, increase accuracy by 20%.\n");
+			outputText("-New melee weapon (by Zavos): Amphyst Claymore - buyable in weapons shop in He'Xin'Dao. 15 atk (below 40 str atk drops to 7), costs 1200 gems, when under charge weapon spell will gain darkness affinity, large type weapon.\n");
+			outputText("-New melee weapon (by Zavos): Topaz Claymore - buyable in weapons shop in He'Xin'Dao. 15 atk (below 40 str atk drops to 7), costs 1200 gems, when under charge weapon spell will gain lightning affinity, large type weapon.\n");
 			outputText("-New item with TF effects (by Liadri): Jabberwocky scale. When eaten by any PC that have dragon score high enough will trigger 2 tf effects that will give Jabberwocky buck tooths/Jabberwocky face and Fey Dragon wings.\n");
 			outputText("-Succesfull using Jabberwocky scale will replace dragon race bonuses with jabberwocky race bonuses. Half Jabberwocky/Jabberwocky/Greater Jabberwocky: +15/50/95 strength, +15/40/95 toughness, +30/50/100 speed, +15/20/40 intelligence, -15/20/50 wisdom, +0/10/20 libido\n");
 			outputText("-New body part - face: Jabberwocky buck tooths Req. Dragon Fangs and dragon score > 9\n");
 			outputText("-New body part - face: Jabberwocky face Req. Dragon Face and dragon score > 9\n");
 			outputText("-New body part - face: Fey Dragon Wings Req. any of three Dragon wing (small, large, huge) and dragon score > 9\n");
 			outputText("-All spells costs now would slowly increase when PC spell power increase.\n");
-			outputText("-WHen Ayane is in camp speed of recovery fatigue when sleeping will be increased by 300% not 200%,\n");
+			outputText("-When Ayane is in camp speed of recovery fatigue when sleeping will be increased by 300% not 200%,\n");
+			outputText("-Flitlock Pistol and Blunderbuss rifle ammo increased from 4 to 6 and 2 to 9 respectively.\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Marae combat stats buffed slightly and she will make better use of her stats for specials in both possible forms (pure and corrupt).\n");
 			outputText("-When PC reach lvl 24 and higher base value of HP and Fatigue recovery during Rest, Sleep (or Wait for Fatigue) will be increased by 50%. When PC would reach lvl 42 and higher +50% bonus to base value will change into +100% bonus.\n");
 			outputText("-Replaced texts for Jewel Shop with those written by Starglider (aka much better than sort of placeholder-ish texts that was there before).\n");
 			outputText("-Oxdeception cleaning-up of code for Tel'Adre and He'Xin'Dao (nothing that typical player will notce but generaly code is slight less messy due to hard Ox work ^^).\n");
@@ -139,10 +141,13 @@ package classes.Scenes
 			outputText("-Fixed bugs: lib refunding stat points incorrectly when leveling\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Bat, Vampire, 
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -178,10 +183,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): dodać yuki-onna TF
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

@@ -18,14 +18,12 @@ public class FrostGiant extends Monster
 				if (rand(player.spe + 40) < spe) {
 					outputText("You take the full force of his grand slam, sending you flying a good 40 feet, plunging through a snowdrift. As you right yourself, his laugh shakes the ground, \"<i>Puny! Haaaa!</i>\" ");
 					damage = ((str + 150) + rand(100));
-					damage = player.reduceDamage(damage);
 					if (damage < 40) damage = 40;
 					player.takePhysDamage(damage, true);
 				}
 				else {
 					outputText("You nearly avoid the giant's fist, stumbling as you regain your footing. The giant's growl is a deep bass as he bellows, \"<i>Bah! Luck!</i>\" ");
 					damage = 50 + rand(str);
-					damage = player.reduceDamage(damage);
 					player.takePhysDamage(damage, true);
 				}
 			}
@@ -100,7 +98,6 @@ public class FrostGiant extends Monster
 					outputText("\"<i>Ha, ha, ha! Puny little [race]! You cannot escape my grasp!</i>\" He flicks your head, nearly snapping your neck, and you see stars for a moment. ");
 					player.removeStatusEffect(StatusEffects.GiantGrabbed);
 					damage = 50 + rand(str * 0.4);
-					damage = player.reduceDamage(damage);
 					player.takePhysDamage(damage, true);
 					break;
 				case 3:
@@ -109,7 +106,6 @@ public class FrostGiant extends Monster
 					outputText("The force of the punch leaves you reeling for a time; you come to your senses before he tries to do anything else. ");
 					player.removeStatusEffect(StatusEffects.GiantGrabbed);
 					damage = 180 + rand(str * 1.2);
-					damage = player.reduceDamage(damage);
 					player.takePhysDamage(damage, true);
 					break;
 				case 5: //Throw
@@ -117,7 +113,6 @@ public class FrostGiant extends Monster
 					player.removeStatusEffect(StatusEffects.GiantGrabbed);
 					player.createStatusEffect(StatusEffects.Stunned, 1 + rand(3), 0, 0, 0);
 					damage = 50 + rand(str * 0.8);
-					damage = player.reduceDamage(damage);
 					if (damage < 50) damage = 50;
 					player.takePhysDamage(damage, true);
 					break;
@@ -167,7 +162,6 @@ public class FrostGiant extends Monster
 			else outputText("You begin to cast, focusing intently on summoning your magic. Too focused, though, as the giant propels the boulder in an arc to you. You notice the boulder just in time to not be crushed by it, though it still hits you and you fly several dozen yards before hitting a nice, jagged rock face. ");
 			if (player.hasStatusEffect(StatusEffects.GiantBoulder)) player.removeStatusEffect(StatusEffects.GiantBoulder);
 			var damage:int = (str * 2) + 200 + rand(100);
-			damage = player.reduceDamage(damage);
 			if (damage < 200) damage = 200;
 			player.takePhysDamage(damage, true);
 			outputText("\n\n");
@@ -177,7 +171,6 @@ public class FrostGiant extends Monster
 			outputText("His aim was perfect, if you had stood still. Watching him throw it at you gave you all the time you needed to avoid the large rock, though the debris from the impact might leave some bruises. ");
 			if (player.hasStatusEffect(StatusEffects.GiantBoulder)) player.removeStatusEffect(StatusEffects.GiantBoulder);
 			var damage:int = 10 + rand(str / 2);
-			damage = player.reduceDamage(damage);
 			player.takePhysDamage(damage, true);
 			outputText("\n\n");
 		}

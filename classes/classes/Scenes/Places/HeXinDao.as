@@ -340,6 +340,9 @@ public class HeXinDao extends BaseContent
         addButton(4, weapons.SCLAYMO.shortName, weaponBuy, weapons.SCLAYMO);
         addButton(5, weapons.RIBBON.shortName, weaponBuy, weapons.RIBBON);
         addButton(6, weapons.S_GAUNT.shortName, weaponBuy, weapons.S_GAUNT);
+        addButton(7, weapons.FRTAXE.shortName, weaponBuy, weapons.FRTAXE);
+        addButton(8, weapons.TCLAYMO.shortName, weaponBuy, weapons.TCLAYMO);
+        addButton(9, weapons.ACLAYMO.shortName, weaponBuy, weapons.ACLAYMO);
         addButton(10, weapons.WHIP.shortName, weaponBuy, weapons.WHIP);
         addButton(11, weapons.PWHIP.shortName, weaponBuy, weapons.PWHIP);
         addButton(14, "Back", soulequipmentmerchant);
@@ -388,9 +391,11 @@ public class HeXinDao extends BaseContent
         addButton(7, weaponsrange.HEXBOW_.shortName, weaponrangeBuy, weaponsrange.HEXBOW_);
         addButton(10, weaponsrange.FLINTLK.shortName, weaponrangeBuy, weaponsrange.FLINTLK);
         addButton(11, weaponsrange.BLUNDER.shortName, weaponrangeBuy, weaponsrange.BLUNDER);
-        //addButton(7, weapons.MACE.shortName, weaponBuy, weapons.MACE);//awl - wymagać bedzie możliwość lewitacji czy coś od PC aby to używać
-        //addButton(8, weapons.MACE.shortName, weaponBuy, weapons.MACE);//bow made for soul cultivator xD
-        //addButton(12, "Talk", ).hint("Tak with .");
+        addButton(12, weaponsrange.IVIARG_.shortName, weaponrangeBuy, weaponsrange.IVIARG_);
+		//addButton(4, weapons.MACE.shortName, weaponBuy, weapons.MACE);
+        //addButton(8, weapons.MACE.shortName, weaponBuy, weapons.MACE);//awl - wymagać bedzie możliwość lewitacji czy coś od PC aby to używać
+        //addButton(9, weapons.MACE.shortName, weaponBuy, weapons.MACE);//bow made for soul cultivator xD
+        //addButton(13, "Talk", ).hint("Tak with .");
         addButton(14, "Back", riverislandVillageStuff);
         statScreenRefresh();
     }

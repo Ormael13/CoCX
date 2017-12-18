@@ -49,7 +49,6 @@ public class DarkElfScout extends Monster
 			else {
 				var damage:Number = 0;
 				damage += eBaseSpeedDamage() * 0.2;
-				damage = player.reduceDamage(damage);
 				if (damage < 10) damage = 10;
 				if (this.weaponRangeAttack < 51) damage *= (1 + (this.weaponRangeAttack * 0.03));
 				else if (this.weaponRangeAttack >= 51 && this.weaponRangeAttack < 101) damage *= (2.5 + ((this.weaponRangeAttack - 50) * 0.025));

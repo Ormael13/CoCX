@@ -239,6 +239,7 @@ import flash.utils.getQualifiedClassName;
 			 */
 			var improvableItems:Array = [
 					[weapons.BFSWORD,		weapons.NPHBLDE,		weapons.EBNYBLD],
+					[weapons.MASTGLO,		weapons.KARMTOU,		weapons.YAMARG],
 					[weapons.KATANA,		weapons.MASAMUN,		weapons.BLETTER],
 					[weapons.W_STAFF,		weapons.U_STAFF,		weapons.N_STAFF],
 				//	[weapons.DEMSCYT,		weapons.LHSCYTH,		null],

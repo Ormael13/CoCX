@@ -164,6 +164,7 @@ public class Mountain extends BaseContent
 						when: function ():Boolean {
 							return flags[kFLAGS.ELECTRA_FOLLOWER] < 1 && player.level >= 15;
 						},
+						chance:0.5,
 						call: function ():void {
 							if (flags[kFLAGS.ELECTRA_AFFECTION] < 2) SceneLib.electraScene.firstEnc();
 							else SceneLib.electraScene.repeatMountainEnc();

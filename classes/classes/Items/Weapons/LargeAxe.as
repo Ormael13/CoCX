@@ -1,8 +1,4 @@
 /**
- * ...
- * @author Ormael
- */
-/**
  * Created by aimozg on 10.01.14.
  */
 package classes.Items.Weapons 

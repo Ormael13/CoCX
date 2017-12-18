@@ -44,7 +44,6 @@ import classes.internals.*;
 			{
 				outputText("but you get hit instead! ");
 				var damage:int = int(str + weaponAttack + 100);
-				damage = player.reduceDamage(damage);
 				player.takePhysDamage(damage, true);
 			}
 		}
@@ -63,7 +62,6 @@ import classes.internals.*;
 			else {
 				outputText("The gatekeeper slashes you brutally! You are in a lot of pain. ");
 				var damage:int = int(str + weaponAttack + 250);
-				damage = player.reduceDamage(damage);
 				player.takePhysDamage(damage, true);
 			}
 			removeStatusEffect(StatusEffects.Uber);

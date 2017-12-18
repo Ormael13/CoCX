@@ -15,7 +15,6 @@ public class Behemoth extends Monster
 			else {
 				outputText("You weren't aware of that and his tail hits you!  <b>Your defense has been reduced!</b>  ");
 				var damage:int = str + level;
-				damage = player.reduceDamage(damage);
 				player.takePhysDamage(damage, true);
 			}
 			if (hasStatusEffect(StatusEffects.TailWhip)) addStatusValue(StatusEffects.TailWhip, 1, 5);

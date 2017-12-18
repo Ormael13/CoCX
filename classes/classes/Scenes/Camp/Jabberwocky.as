@@ -22,8 +22,7 @@ package classes.Scenes.Camp
 		}
 		public function ClawSwipeDmg():void {
 			var damage:Number = 0;
-			damage += eBaseStrengthDamage() * 0.75;
-			damage = player.reduceDamage(damage);
+			damage += eBaseStrengthDamage();
 			if (damage < 10) damage = 10;
 			if (this.weaponAttack < 51) damage *= (1 + (this.weaponAttack * 0.03));
 			else if (this.weaponAttack >= 51 && this.weaponAttack < 101) damage *= (2.5 + ((this.weaponAttack - 50) * 0.025));
@@ -35,7 +34,6 @@ package classes.Scenes.Camp
 		}
 		
 		public function HyperFang():void {
-			game.spriteSelect(70);
 			outputText("The jabberwocky bites you with it’s massive incisors, causing a deep wound. You start to bleed. ");
 			var damage:Number = 0;
 			damage += eBaseDamage();
@@ -44,15 +42,40 @@ package classes.Scenes.Camp
 			player.createStatusEffect(StatusEffects.Hemorrhage,10,0.1,0,0);
 		}
 		
-		private function Flying():void {
-			
+		private function TakeFlight():void {
+			outputText("The jabberwocky takes flight, likely intending to torch you from afar. ");
+			createStatusEffect(StatusEffects.Flying,7,0,0,0);
+		}
+		
+		private function FireBreath():void {
+			outputText("The jabberwock inhales and breathes a massive cone of fire in your direction. ");
+			var damage:Number = 0;
+			damage += eBaseIntelligenceDamage();
+			damage += eBaseWisdomDamage();
+			if (player.hasStatusEffect(StatusEffects.Blizzard)) {
+				player.addStatusValue(StatusEffects.Blizzard, 1, -1);
+				damage *= 0.2;
+			}
+			player.takeMagicDamage(damage, true);
+			outputText(" damage. ");
 		}
 		
 		override protected function performCombatAction():void {
-			var choice:Number = rand(5);
-			if (choice < 3) ClawSwipe();
-			if (choice == 3) HyperFang();
-			if (choice == 4) ClawSwipe();//flying + using fire breath when flying instead this one option
+			if (statusEffectv1(StatusEffects.Flying) == 1) {
+				outputText("The jabberwocky flies down and lands.\n\n");
+				removeStatusEffect(StatusEffects.Flying);
+			}
+			var choice:Number = rand(6);
+			if (hasStatusEffect(StatusEffects.Flying)) {
+				if (choice < 3) ClawSwipe();
+				if (choice == 3) HyperFang();
+				if (choice == 4 || choice == 5) FireBreath();
+			}
+			else {
+				if (choice < 4) ClawSwipe();
+				if (choice == 4) HyperFang();
+				if (choice == 5) TakeFlight();
+			}
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
@@ -84,18 +107,19 @@ package classes.Scenes.Camp
 			this.additionalXP = 500;
 			this.weaponName = "claws";
 			this.weaponVerb = "slash";
-			this.weaponAttack = 40;
+			this.weaponAttack = 50;
 			this.armorName = "dragon scales";
-			this.armorDef = 800;
+			this.armorDef = 2000;
 			this.bonusLust = 30;
-			this.lustVuln = .5;
+			this.lustVuln = .6;
 			this.lust = 50;
 			this.level = 60;
 			this.drop = new ChainedDrop()
 					.add(consumables.JABBERS, 1);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.FireNature, 0, 0, 0, 0);
-			this.createPerk(PerkLib.SuperiorSelfControl, 0, 0, 0, 0);
+			this.createPerk(PerkLib.PeerlessSelfControl, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			checkMonster();
 		}	

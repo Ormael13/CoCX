@@ -612,6 +612,80 @@ import flash.utils.getQualifiedClassName;
 			return damage;
 		}
 
+		public function eBaseIntelligenceDamage():Number {
+			var damage:Number = 0;
+			damage += inte;
+			if (inte >= 21) damage += (inte - 20);
+			if (inte >= 41) damage += (inte - 40);
+			if (inte >= 61) damage += (inte - 60);
+			if (inte >= 81) damage += (inte - 80);
+			if (inte >= 101) damage += (inte - 100);
+			if (inte >= 151) damage += (inte - 150);
+			if (inte >= 201) damage += (inte - 200);
+			if (inte >= 251) damage += (inte - 250);
+			if (inte >= 301) damage += (inte - 300);
+			if (inte >= 351) damage += (inte - 350);
+			if (inte >= 401) damage += (inte - 400);
+			if (inte >= 451) damage += (inte - 450);
+			if (inte >= 501) damage += (inte - 500);
+			if (inte >= 551) damage += (inte - 550);
+			if (inte >= 601) damage += (inte - 600);
+			if (inte >= 651) damage += (inte - 650);
+			if (inte >= 701) damage += (inte - 700);
+			if (inte >= 751) damage += (inte - 750);
+			if (inte >= 801) damage += (inte - 800);
+			if (inte >= 851) damage += (inte - 850);
+			if (inte >= 901) damage += (inte - 900);
+			if (inte >= 951) damage += (inte - 950);
+			if (inte >= 1001) damage += (inte - 1000);
+			if (inte >= 1051) damage += (inte - 1050);
+			if (inte >= 1101) damage += (inte - 1100);
+			if (inte >= 1151) damage += (inte - 1150);
+			if (inte >= 1201) damage += (inte - 1200);
+			//monster exclusive perks bonus
+			if (findPerk(PerkLib.EnemyBossType) >= 0) damage *= 2;
+			if (findPerk(PerkLib.EnemyGigantType) >= 0) damage *= 3;
+			damage = Math.round(damage);
+			return damage;
+		}
+
+		public function eBaseWisdomDamage():Number {
+			var damage:Number = 0;
+			damage += wis;
+			if (wis >= 21) damage += (wis - 20);
+			if (wis >= 41) damage += (wis - 40);
+			if (wis >= 61) damage += (wis - 60);
+			if (wis >= 81) damage += (wis - 80);
+			if (wis >= 101) damage += (wis - 100);
+			if (wis >= 151) damage += (wis - 150);
+			if (wis >= 201) damage += (wis - 200);
+			if (wis >= 251) damage += (wis - 250);
+			if (wis >= 301) damage += (wis - 300);
+			if (wis >= 351) damage += (wis - 350);
+			if (wis >= 401) damage += (wis - 400);
+			if (wis >= 451) damage += (wis - 450);
+			if (wis >= 501) damage += (wis - 500);
+			if (wis >= 551) damage += (wis - 550);
+			if (wis >= 601) damage += (wis - 600);
+			if (wis >= 651) damage += (wis - 650);
+			if (wis >= 701) damage += (wis - 700);
+			if (wis >= 751) damage += (wis - 750);
+			if (wis >= 801) damage += (wis - 800);
+			if (wis >= 851) damage += (wis - 850);
+			if (wis >= 901) damage += (wis - 900);
+			if (wis >= 951) damage += (wis - 950);
+			if (wis >= 1001) damage += (wis - 1000);
+			if (wis >= 1051) damage += (wis - 1050);
+			if (wis >= 1101) damage += (wis - 1100);
+			if (wis >= 1151) damage += (wis - 1150);
+			if (wis >= 1201) damage += (wis - 1200);
+			//monster exclusive perks bonus
+			if (findPerk(PerkLib.EnemyBossType) >= 0) damage *= 2;
+			if (findPerk(PerkLib.EnemyGigantType) >= 0) damage *= 3;
+			damage = Math.round(damage);
+			return damage;
+		}
+
 		/**
 		 * @return randomized damage reduced by player stats
 		 */

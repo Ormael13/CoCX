@@ -8,6 +8,7 @@ package classes.Scenes.NPCs
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.WeaponRangeLib;
 	import classes.Items.UndergarmentLib;
+	import classes.Scenes.NPCs.Ceani;
 	import classes.display.SpriteDb;
 
 public class CeaniScene extends NPCAwareContent
@@ -200,7 +201,7 @@ public function ceaniCampMainMenu():void {
 	addButton(0, "Appearance", ceaniAppearance).hint("Examine Ceani detailed appearance.");
 	//addButton(1, "Talk", );
 	addButton(2, "Date and Fuck", campInteractionsDateAndFuck);
-	//addButton(3, "Spar", );
+	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(3, "Spar", sparringWithCeani);
 	if (flags[kFLAGS.CEANI_DAILY_TRAINING] < 1) addButton(4, "Fishing Contest", fishingContestWithCeani);
 	addButton(14, "Back", camp.campLoversMenu);
 }
@@ -571,6 +572,27 @@ public function fishingContestWithCeani():void
 	player.refillHunger(100);
 	flags[kFLAGS.CEANI_DAILY_TRAINING] = 1;
 	doNext(camp.returnToCampUseOneHour);
+}
+
+public function sparringWithCeani():void
+{
+	clearOutput();
+	outputText("You ask the Orca morph if she would mind sparring with you.\n\n");
+	outputText("\"<i>I don’t want to hurt you and…</i>\"\n\n");
+	outputText("You tell her that you'll be using sparring weapons of course no need for you two to wound each others more than necessary.\n\n");
+	outputText("\"<i>Well ok fine [name], but you were warned. I may look like a gentle girl but I can actually pack a punch.</i>\"\n\n");
+	outputText("The two of you head to the ring and Ceani readies her wooden sparring harpoon taking on a menacing stance. Now that you think of it was it really such a good idea?\n\n");
+	startCombat(new Ceani());
+}
+public function sparringWithCeaniWon():void
+{
+	clearOutput();
+	
+}
+public function sparringWithCeaniLost():void
+{
+	clearOutput();
+	
 }
 
 	}

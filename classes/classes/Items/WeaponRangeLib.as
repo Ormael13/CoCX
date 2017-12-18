@@ -15,7 +15,7 @@ package classes.Items
 		public static const NOTHING:WeaponRange = new Nothing();//orginalne wart atk f. pistol = 14 i b. rifle = 16
 //Blunderbuss ma 12 nie 4 naboje i też wymaga przeładowania
 		public const ARTEMIS:Artemis = new Artemis();
-		public const BLUNDER:WeaponRange = new WeaponRange("Blunder", "Blunderbuss", "blunderbuss rifle", "a blunderbuss rifle", "shot", 6, 300, "This is a blunderbuss rifle. It's effective at short range but poor at long range.", "Rifle");
+		public const BLUNDER:WeaponRange = new WeaponRange("Blunder", "Blunderbuss", "blunderbuss rifle", "a blunderbuss rifle", "shot", 16, 800, "This is a blunderbuss rifle. It's effective at short range but poor at long range.", "Rifle");
 		public const BOWGUID:WeaponRange = new WeaponRange("BowGuid", "BowGuided", "Guided bow", "a Guided bow", "shot", 1, 400, "A bow ornemented with a small carving representing a target. It seems to never miss no mather how poorly you aim.", "Bow");
 		public const BOWHUNT:WeaponRange = new WeaponRange("BowHunt", "BowHunt", "hunter bow", "a hunter bow", "shot", 10, 500, "This is a hunter bow. It allow to attain better accuracy of shooted arrows than long bow at the cost of slight lower damage.", "Bow");
 		public const BOWKELT:WeaponRangeWithPerk = new WeaponRangeWithPerk("BowTain", "BowTain", "tainted bow", "a tainted bow", "shot", 30, 1500, "This bow is tainted by corruption in the past. It's quite effective at both short and long range. It balance helps uset to increase shooting accuracy quite a bit compared to other bows.", "Bow",
@@ -28,13 +28,15 @@ package classes.Items
 				PerkLib.Accuracy2,50,0,0,0);
 		public const EVELYN_:WeaponRangeWithPerk = new WeaponRangeWithPerk("Evelyn", "Evelyn", "Evelyn", "Evelyn", "shot", 40, 2000, "This is a blunderbuss rifle. It's effective at short range but poor at long range.", "Crossbow",
 				PerkLib.Accuracy1,60,0,0,0);
-		public const FLINTLK:WeaponRange = new WeaponRange("Flintlk", "Flintlock", "flintlock pistol", "a flintlock pistol", "shot", 4, 200, "A flintlock pistol. Pew pew pew. Can fire four times before a reload is required.", "Pistol");
+		public const FLINTLK:WeaponRange = new WeaponRange("Flintlk", "Flintlock", "flintlock pistol", "a flintlock pistol", "shot", 14, 700, "A flintlock pistol. Pew pew pew. Can fire six times before a reload is required.", "Pistol");
 		public const GTHRAXE:WeaponRange = new WeaponRange("GThrAxe", "GThrowAxes", "gnoll throwing axes", "a gnoll throwing axes", "shot", 25, 1250, "A set of throwing axes made and used by the gnoll barbarian, they are actually heavier than standard throwing weapon but all the more effective. You can carry up to 10 on you and need to retrieve them after battles.", "Throwing");
 		public const GTHRSPE:WeaponRange = new WeaponRange("GThrSpe", "GThrowSpear", "gnoll throwing spear", "a gnoll throwing spear", "shot", 18, 900, "A standard javelin for ranged combat made by the gnolls. You can carry up to 20 on you and need to retrieve them after battles.", "Throwing");
 		public const HEXBOW_:WeaponRangeWithPerk = new WeaponRangeWithPerk("HeXbow", "HeavyXbow", "heavy crossbow", "a heavy crossbow", "shot", 25, 1250, "This is a heavy crossbow. High penetrative power and good accuracy.", "Crossbow",
 				PerkLib.Accuracy1,40,0,0,0);
 		public const HUXBOW_:WeaponRangeWithPerk = new WeaponRangeWithPerk("HuXbow", "HuntXbow", "hunter crossbow", "a hunter crossbow", "shot", 15, 750, "This is a hunter crossbow. Slight better one with better accuracy and bolts penetrative power than light crossbow.", "Crossbow",
 				PerkLib.Accuracy1,20,0,0,0);
+		public const IVIARG_:WeaponRangeWithPerk = new WeaponRangeWithPerk("IvIArq", "Iv.I.Arq", "Ivory inlaid arquebus", "a Ivory inlaid arquebus", "shot", 28, 1400, "Gifted with a great range and accuracy, this arquebus is probably one of the best firearms than you can find on this land. It’s butt and stock have a gold trim and inlaid ivory in a pattern of wreath leaves. A layer of gold and ivory also runs through the barrel, giving the rifle a majestic look without compromising its functionality.", "Rifle",
+				PerkLib.Accuracy1,40,0,0,0);
 		public const KSLHARP:KrakenSlayerHarpoons = new KrakenSlayerHarpoons();
 		public const LCROSBW:WeaponRangeWithPerk = new WeaponRangeWithPerk("LCrosbw", "LCrossbow", "light crossbow", "a light crossbow", "shot", 5, 250, "This is a light crossbow. A most basic one that fires bolts at your enemies.", "Crossbow",
 				PerkLib.Accuracy1,10,0,0,0);

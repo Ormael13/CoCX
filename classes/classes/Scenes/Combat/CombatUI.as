@@ -63,10 +63,10 @@ public class CombatUI extends BaseCombatContent {
 			btnMelee.show("E.Attack", combat.baseelementalattacks, "Command your elemental to attack the enemy.  Damage it will deal is affcted by your wisdom and intelligence.");
 		} else {
 			btnMelee.show("Attack", combat.basemeleeattacks, "Attempt to attack the enemy with your "+player.weaponName+".  Damage done is determined by your strength and weapon.");
-			if (!player.isFlying() && monster.isFlying()) {
+			if (!player.isFlying() && monster.isFlying() && player.weapon != weapons.FRTAXE) {
 				btnMelee.disable("No way you could reach enemy in air with melee attacks.");
 			} else if (player.isFlying()) {
-				if (player.weapon != weapons.SPEAR && player.weapon != weapons.LANCE) {
+				if (player.weapon != weapons.SPEAR && player.weapon != weapons.LANCE && player.weapon != weapons.FRTAXE) {
 					btnMelee.disable("No way you could reach enemy with melee attacks while flying.");
 				}
 				else if (player.wingType == AppearanceDefs.WING_TYPE_BAT_ARM) {

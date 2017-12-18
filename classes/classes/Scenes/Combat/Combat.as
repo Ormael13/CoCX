@@ -293,8 +293,9 @@ public function approachAfterKnockback1():void
 	clearOutput();
 	outputText("You close the distance between you and [monster a] [monster name] as quickly as possible.\n\n");
 	player.removeStatusEffect(StatusEffects.KnockedBack);
-	if (player.weaponRangeName == "flintlock pistol") player.ammo = 4;
-	if (player.weaponRangeName == "blunderbuss rifle") player.ammo = 2;
+	if (player.weaponRangeName == "Ivory inlaid arquebus") player.ammo = 12;
+	if (player.weaponRangeName == "blunderbuss rifle") player.ammo = 9;
+	if (player.weaponRangeName == "flintlock pistol") player.ammo = 6;
 	outputText("At the same time, you open the magazine of your ");
 	if (player.weaponRangePerk == "Pistol") outputText("pistol");
 	if (player.weaponRangePerk == "Rifle") outputText("rifle");
@@ -2254,8 +2255,9 @@ public function shootWeapon():void {
 }
 
 public function reloadWeapon():void {
-	if (player.weaponRangeName == "flintlock pistol") player.ammo = 4;
-	if (player.weaponRangeName == "blunderbuss rifle") player.ammo = 2;
+	if (player.weaponRangeName == "Ivory inlaid arquebus") player.ammo = 12;
+	if (player.weaponRangeName == "blunderbuss rifle") player.ammo = 9;
+	if (player.weaponRangeName == "flintlock pistol") player.ammo = 6;
 	outputText("You open the magazine of your ");
 	if (player.weaponRangeName == "flintlock pistol") outputText("pistol");
 	if (player.weaponRangeName == "blunderbuss rifle") outputText("rifle");
@@ -2689,6 +2691,18 @@ public function attack():void {
 		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 2;
 		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 5;
 	}
+	if (player.weapon == weapons.TCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+		if (monster.findPerk(PerkLib.DarknessNature) >= 0) damage *= 5;
+		if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) damage *= 2;
+		if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) damage *= 0.5;
+		if (monster.findPerk(PerkLib.LightningNature) >= 0) damage *= 0.2;
+	}
+	if (player.weapon == weapons.ACLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+		if (monster.findPerk(PerkLib.DarknessNature) >= 0) damage *= 0.2;
+		if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) damage *= 0.5;
+		if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) damage *= 2;
+		if (monster.findPerk(PerkLib.LightningNature) >= 0) damage *= 5;
+	}
 	if (player.weapon == weapons.NPHBLDE || player.weapon == weapons.MASAMUN || player.weapon == weapons.SESPEAR || player.weapon == weapons.WG_GAXE || player.weapon == weapons.KARMTOU) {
 		if (monster.cor < 33) damage = Math.round(damage * 1.0);
 		else if (monster.cor < 50) damage = Math.round(damage * 1.1);
@@ -2703,6 +2717,7 @@ public function attack():void {
 		else if (monster.cor >= 10) damage = Math.round(damage * 1.3);
 		else damage = Math.round(damage * 1.4);
 	}
+	if (player.weapon == weapons.FRTAXE && monster.isFlying()) damage *= 1.5;
 	//Determine if critical hit!
 	var crit:Boolean = false;
 	var critChance:int = 5;
@@ -2946,6 +2961,11 @@ public function attack():void {
 		if (player.weapon != weapons.KARMTOU && player.findPerk(PerkLib.MightyFist) >= 0 && rand(4) == 0 && monster.findPerk(PerkLib.Resolute) < 0) {
 			outputText("\n" + monster.capitalA + monster.short + " reels from the brutal blow, stunned.");
 			if (!monster.hasStatusEffect(StatusEffects.Stunned)) monster.createStatusEffect(StatusEffects.Stunned,rand(2),0,0,0);
+		}
+		//30% Stun chance
+		if (player.weapon == weapons.ZWNDER && !monster.hasStatusEffect(StatusEffects.Stunned) && rand(10) <= 2 && monster.findPerk(PerkLib.Resolute) < 0) {
+			outputText("\n" + monster.capitalA + monster.short + " reels from the brutal blow, stunned.");
+			if (!monster.hasStatusEffect(StatusEffects.Stunned)) monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
 		}
 		//50% Bleed chance
 		if ((player.weapon == weapons.H_GAUNT || player.weapon == weapons.CNTWHIP) && rand(2) == 0 && monster.armorDef < 10 && !monster.hasStatusEffect(StatusEffects.IzmaBleed))
@@ -4803,8 +4823,9 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 	if (player.weaponRangeName == "gnoll throwing spear") player.ammo = 20;
 	if (player.weaponRangeName == "gnoll throwing axes") player.ammo = 10;
 	if (player.weaponRangeName == "training javelins") player.ammo = 10;
-	if (player.weaponRangeName == "flintlock pistol") player.ammo = 4;
-	if (player.weaponRangeName == "blunderbuss") player.ammo = 2;
+	if (player.weaponRangeName == "Ivory inlaid arquebus") player.ammo = 12;
+	if (player.weaponRangeName == "blunderbuss") player.ammo = 9;
+	if (player.weaponRangeName == "flintlock pistol") player.ammo = 6;
 	if (player.weaponRange == weaponsrange.SHUNHAR || player.weaponRange == weaponsrange.KSLHARP || player.weaponRange == weaponsrange.LEVHARP) player.ammo = 1;
 	if (prison.inPrison && prison.prisonCombatAutoLose) {
 		dynStats("lus", player.maxLust(), "scale", false);

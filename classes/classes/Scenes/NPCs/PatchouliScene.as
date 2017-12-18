@@ -333,7 +333,7 @@ package classes.Scenes.NPCs
 			flags[kFLAGS.PATCHOULI_FOLLOWER] = 6;
 			flags[kFLAGS.PATCHOULI_GIRL_OR_MORPH] = 0;
 			flags[kFLAGS.PATCHOULI_CUP_SIZE] = 5;
-			flags[kFLAGS.PATCHOULI_HAIR_COLOR] = 1;
+			flags[kFLAGS.PATCHOULI_HAIR_COLOR] = "blonde";
 			flags[kFLAGS.PATCHOULI_COCK] = 0;
 			flags[kFLAGS.PATCHOULI_COCK_TYPE] = 1;
 			if (player.hasVagina()) patchouleGirlOnGirl();
@@ -352,9 +352,8 @@ package classes.Scenes.NPCs
 				outputText("Patchoulie ");
 				if (flags[kFLAGS.PATCHOULI_GIRL_OR_MORPH] == 1) outputText("used to look like the typical cat morph but uses of transformatives allowed you to alter her into the perfect figure of a cat girl, with a human face and only a partially covered body. Regardless of her demi human look, Patchoulie’s tongue, eyes and abnormally long canine clearly still belong on a cat. The transformatives so far sparred her paws, ears and tail, not that you would ever get rid of them anyway");
 				else outputText("look like your typical cat morph");
-				outputText(". However the color of her fur is clearly unnatural. Striped black on a background of purple, Patchoulie’s fur clearly does not belong on any normal cat. Her hair which used to be of the same messed up color as her fur are now divided between strands of platinum blonde and ");
-				if (flags[kFLAGS.PATCHOULI_HAIR_COLOR] == 1) outputText("purple");
-				outputText(", like someone whos head would feature on a deck of cards. Her fur is hardly the only thing ‘unnatural’ about her as she almosts smile constantly, not just once in awhile, with the most unsettlingly lewd grin she can muster. Patchoulie’s latest joy of late is to make you as emotionally uncomfortable and guilty as she can before sex. She’s currently laid back on a tree branch, her green cat eyes observing you with interest, her tail twitching every now and then with the infinite patience of someone up to no good.\n\n");
+				outputText(". However the color of her fur is clearly unnatural. Striped black on a background of purple, Patchoulie’s fur clearly does not belong on any normal cat. Her hair which used to be of the same messed up color as her fur are now divided between strands of platinum " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + " and purple, like someone whos head would feature on a deck of cards. ");
+				outputText("Her fur is hardly the only thing ‘unnatural’ about her as she almosts smile constantly, not just once in awhile, with the most unsettlingly lewd grin she can muster. Patchoulie’s latest joy of late is to make you as emotionally uncomfortable and guilty as she can before sex. She’s currently laid back on a tree branch, her green cat eyes observing you with interest, her tail twitching every now and then with the infinite patience of someone up to no good.\n\n");
 				outputText("\"<i>Nya, having a good view [name]? Feel free to admire me all you like I reaaaaally love being looked at. Especially when it's by you. Oh you are such an irredeemable pervert.</i>\"\n\n");
 				outputText("Gosh the worst is she’s bloody right. You indeed have been having short glances at her " + Appearance.breastCup(flags[kFLAGS.PATCHOULI_CUP_SIZE]) + " breast and constantly dripping pussy");
 				if (flags[kFLAGS.PATCHOULI_COCK] > 0) {
@@ -507,6 +506,7 @@ package classes.Scenes.NPCs
 			else outputText("human");
 			outputText(" cock and lube it properly before aligning your [pussy] with it. Patchouli screams out a loud \"<i>NYYAAAAA!!!!!</i>\" when you swiftly impale yourself on her dick and begin to pump for her herm milk.");
 			if (flags[kFLAGS.PATCHOULI_COCK_TYPE] == 2) outputText(" Her barbs caress your walls in just the perfect way.");
+			player.cuntChange(flags[kFLAGS.PATCHOULI_COCK],true,true,false);
 			outputText("\n\n\"<i>Please.. Nyaaaaa!!! Rougher... Faster!</i>\"\n\n");
 			outputText("She's obviously liking it, which only bolsters your lust. Soon, you find yourself on the verge of orgasm. Patchoulie finally loses control of her cock as it twitches, filling you with kitty jizz and causing your own orgasm shortly after.\n\n");
 			outputText("Unsated, you keep milking the prankster for a few hours until you both pass out.\n\n");
@@ -628,7 +628,103 @@ package classes.Scenes.NPCs
 		}
 		public function patchouleGiveHairDye():void {
 			menu();
+			if (player.hasItem(consumables.AUBURND) && flags[kFLAGS.PATCHOULI_HAIR_COLOR] != "auburn") addButton(0, "Auburn", patchouleGiveHairDyeAuburn);
+			if (player.hasItem(consumables.BLACK_D) && flags[kFLAGS.PATCHOULI_HAIR_COLOR] != "black") addButton(1, "Black", patchouleGiveHairDyeBlack);
+			if (player.hasItem(consumables.BLOND_D) && flags[kFLAGS.PATCHOULI_HAIR_COLOR] != "blonde") addButton(2, "Blonde", patchouleGiveHairDyeBlonde);
+			if (player.hasItem(consumables.BROWN_D) && flags[kFLAGS.PATCHOULI_HAIR_COLOR] != "brown") addButton(3, "Brown", patchouleGiveHairDyeBrown);
+			if (player.hasItem(consumables.RED_DYE) && flags[kFLAGS.PATCHOULI_HAIR_COLOR] != "red") addButton(4, "Red", patchouleGiveHairDyeRed);
+			if (player.hasItem(consumables.WHITEDY) && flags[kFLAGS.PATCHOULI_HAIR_COLOR] != "white") addButton(5, "White", patchouleGiveHairDyeWhite);
+			if (player.hasItem(consumables.GRAYDYE) && flags[kFLAGS.PATCHOULI_HAIR_COLOR] != "grey") addButton(6, "Grey", patchouleGiveHairDyeGrey);
+			if (player.hasItem(consumables.BLUEDYE) && flags[kFLAGS.PATCHOULI_HAIR_COLOR] != "blue") addButton(7, "Blue", patchouleGiveHairDyeBlue);
+			if (player.hasItem(consumables.GREEN_D) && flags[kFLAGS.PATCHOULI_HAIR_COLOR] != "green") addButton(8, "Green", patchouleGiveHairDyeGreen);
+			if (player.hasItem(consumables.ORANGDY) && flags[kFLAGS.PATCHOULI_HAIR_COLOR] != "orange") addButton(9, "Orange", patchouleGiveHairDyeOrange);
+			if (player.hasItem(consumables.PINKDYE) && flags[kFLAGS.PATCHOULI_HAIR_COLOR] != "pink") addButton(10, "Pink", patchouleGiveHairDyePink);
+			if (player.hasItem(consumables.RAINDYE) && flags[kFLAGS.PATCHOULI_HAIR_COLOR] != "rainbow") addButton(11, "Rainbow", patchouleGiveHairDyeRainbow);
 			addButton(14, "Back", patchouleGiveItem);
+		}
+		public function patchouleGiveHairDyeAuburn():void {
+			clearOutput();
+			player.destroyItems(consumables.AUBURND, 1);
+			flags[kFLAGS.PATCHOULI_HAIR_COLOR] = "auburn";
+			outputText("You ask Patchoulie to coat her hair with the bottle and she comply. Her hairs turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function patchouleGiveHairDyeBlack():void {
+			clearOutput();
+			player.destroyItems(consumables.BLACK_D, 1);
+			flags[kFLAGS.PATCHOULI_HAIR_COLOR] = "black";
+			outputText("You ask Patchoulie to coat her hair with the bottle and she comply. Her hairs turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".  You admit you missed her original color, black fits her best.\n\n");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function patchouleGiveHairDyeBlonde():void {
+			clearOutput();
+			player.destroyItems(consumables.BLOND_D, 1);
+			flags[kFLAGS.PATCHOULI_HAIR_COLOR] = "blonde";
+			outputText("You ask Patchoulie to coat her hair with the bottle and she comply. Her hairs turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function patchouleGiveHairDyeBrown():void {
+			clearOutput();
+			player.destroyItems(consumables.BROWN_D, 1);
+			flags[kFLAGS.PATCHOULI_HAIR_COLOR] = "brown";
+			outputText("You ask Patchoulie to coat her hair with the bottle and she comply. Her hairs turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function patchouleGiveHairDyeRed():void {
+			clearOutput();
+			player.destroyItems(consumables.RED_DYE, 1);
+			flags[kFLAGS.PATCHOULI_HAIR_COLOR] = "red";
+			outputText("You ask Patchoulie to coat her hair with the bottle and she comply. Her hairs turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function patchouleGiveHairDyeWhite():void {
+			clearOutput();
+			player.destroyItems(consumables.WHITEDY, 1);
+			flags[kFLAGS.PATCHOULI_HAIR_COLOR] = "white";
+			outputText("You ask Patchoulie to coat her hair with the bottle and she comply. Her hairs turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function patchouleGiveHairDyeGrey():void {
+			clearOutput();
+			player.destroyItems(consumables.GRAYDYE, 1);
+			flags[kFLAGS.PATCHOULI_HAIR_COLOR] = "grey";
+			outputText("You ask Patchoulie to coat her hair with the bottle and she comply. Her hairs turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function patchouleGiveHairDyeBlue():void {
+			clearOutput();
+			player.destroyItems(consumables.BLUEDYE, 1);
+			flags[kFLAGS.PATCHOULI_HAIR_COLOR] = "blue";
+			outputText("You ask Patchoulie to coat her hair with the bottle and she comply. Her hairs turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function patchouleGiveHairDyeGreen():void {
+			clearOutput();
+			player.destroyItems(consumables.GREEN_D, 1);
+			flags[kFLAGS.PATCHOULI_HAIR_COLOR] = "green";
+			outputText("You ask Patchoulie to coat her hair with the bottle and she comply. Her hairs turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function patchouleGiveHairDyeOrange():void {
+			clearOutput();
+			player.destroyItems(consumables.ORANGDY, 1);
+			flags[kFLAGS.PATCHOULI_HAIR_COLOR] = "orange";
+			outputText("You ask Patchoulie to coat her hair with the bottle and she comply. Her hairs turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function patchouleGiveHairDyePink():void {
+			clearOutput();
+			player.destroyItems(consumables.PINKDYE, 1);
+			flags[kFLAGS.PATCHOULI_HAIR_COLOR] = "pink";
+			outputText("You ask Patchoulie to coat her hair with the bottle and she comply. Her hairs turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function patchouleGiveHairDyeRainbow():void {
+			clearOutput();
+			player.destroyItems(consumables.RED_DYE, 1);
+			flags[kFLAGS.PATCHOULI_HAIR_COLOR] = "rainbow";
+			outputText("You ask Patchoulie to coat her hair with the bottle and she comply. Her hairs turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 }

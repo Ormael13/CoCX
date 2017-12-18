@@ -19,11 +19,9 @@ public class Phoenix extends Monster
 				outputText("Seeing an opening, the phoenix forces her way through your guard with a quick pair of powerful strikes. ");
 				//Get hit
 				var damage:int = str + weaponAttack + rand(80);
-				damage = player.reduceDamage(damage);
 				player.takePhysDamage(damage, true);
 				//Get hit again
 				damage = str + weaponAttack + rand(80);
-				damage = player.reduceDamage(damage);
 				player.takePhysDamage(damage, true);
 			}
 		}
@@ -42,7 +40,6 @@ public class Phoenix extends Monster
 					var damage:int = str + weaponAttack + 300 + rand(250);
 					if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 					if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
-					damage = Math.round(damage);
 					if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 						player.addStatusValue(StatusEffects.Blizzard, 1, -1);
 						outputText("As she zooms over you a great gout of flame erupts from the phoenix’s mouth! You dive out of the way, but all too late. The wall of fire rolls over covering you blizzard you as you leap through it, the brief contact with the inferno searing both you and your [armor] slightly due to still swirling around you ice shards. ");
@@ -52,7 +49,6 @@ public class Phoenix extends Monster
 						outputText("As she zooms over you a great gout of flame erupts from the phoenix’s mouth! You dive out of the way, but all too late. The wall of fire rolls over you as you leap through it, the brief contact with the inferno searing both you and your [armor] badly. ");
 					}
 					damage = Math.round(damage);
-					damage = player.reduceMagicDamage(damage);
 					player.takeMagicDamage(damage, true);
 				}
 				removeStatusEffect(StatusEffects.Uber);

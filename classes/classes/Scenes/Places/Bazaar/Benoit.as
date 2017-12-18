@@ -334,6 +334,7 @@ public function benoitsBuyMenu():void {
 			"", null, "", null);
 	if (player.keyItemv1("Backpack") < 5) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
 	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] <= 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] > 0) addButton(6, "Alarm Clock", buyAlarmClock).hint("This mechanical clock looks like it was originally constructed by the Goblins before the corruption spreaded throughout Mareth.");
+	if (flags[kFLAGS.BENOIT_PISTOL_BOUGHT] < 2 && flags[kFLAGS.BENOIT_AFFECTION] == 100) addButton(7, "Zweihander", buyZweihander);
 	addButton(14, "Back", benoitIntro);
 }
 
@@ -624,6 +625,28 @@ private function buyBackpackConfirmation(size:int = 1, sizeDesc:String = "Small"
 	doNext(benoitsBuyMenu);
 }
 
+private function buyZweihander():void {
+	clearOutput();
+	outputText("You look around the things that " + benoitMF("Benoit", "Benoite") + " has to sell and a strange axe catches your attention. It’s big, and it’s head has a very unusual shape. Odd runes cover its handle. Curious, you pick it up, and take it to " + benoitMF("Benoit", "Benoite") + ".");
+	outputText("\n\n" + benoitMF("He", "She") + " examines it for a bit, mumbling something about harpies.");
+	outputText("\n\n\"<i>Huh, zis is a very old ax. Still in good shape, but I’m not using zat kind of stuff anytime soon. You can have it for, let me zink, 2000 gems.</i>\" " + benoitMF("Benoit", "Benoite") + " says.");
+	menu();
+	addButton(0, "Yes", buyZweihanderConfirmation);
+	addButton(1, "No", benoitsBuyMenu);
+}
+private function buyZweihanderConfirmation():void {
+	clearOutput();
+	if (player.gems < 2480) {
+		outputText("You count out your gems and realize it's beyond your price range.");
+		doNext(benoitsBuyMenu);
+		return;
+	}
+	outputText("" + benoitMF("He", "She") + " gives you the axe, and you pack it with the rest of your stuff.");
+	player.gems -= 2480;
+	flags[kFLAGS.BENOIT_PISTOL_BOUGHT] = 2;
+	statScreenRefresh();
+	inventory.takeItem(weapons.ZWNDER, benoitsBuyMenu);
+}
 
 //Talk
 private function talkToBenoit():void {

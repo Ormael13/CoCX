@@ -2577,7 +2577,7 @@ public static const PATCHOULI_AND_WONDERLAND:int                                
 public static const SHARK_OR_TIGERSHARK_GIRL:int                                   	= 2569;
 public static const PATCHOULI_HAIR_COLOR:int                                   		= 2570;
 public static const PATCHOULI_COCK_TYPE:int                                   		= 2571;
-public static const UNKNOWN_FLAG_NUMBER_02572:int                                   = 2572;
+public static const GOO_GIRLS_AND_GREEN_SLIMES:int                                  = 2572;
 public static const UNKNOWN_FLAG_NUMBER_02573:int                                   = 2573;
 public static const UNKNOWN_FLAG_NUMBER_02574:int                                   = 2574;
 public static const UNKNOWN_FLAG_NUMBER_02575:int                                   = 2575;

@@ -1009,7 +1009,7 @@ use namespace CoC;
 					dynStats("lus", 0); //Force display arrow.
 				}
 				else {
-					damage = reduceDamage(damage);
+					damage = reduceMagicDamage(damage);
 					//Wrath
 					var gainedWrath:Number = 0;
 					gainedWrath += damage / 10;

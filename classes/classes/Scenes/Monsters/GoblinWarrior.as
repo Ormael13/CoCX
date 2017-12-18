@@ -16,7 +16,6 @@ public class GoblinWarrior extends Goblin
 				outputText("You fail to dodge and you get hit. ");
 				//Get hit
 				var damage:int = str + weaponAttack + rand(40);
-				damage = player.reduceDamage(damage);
 				player.takePhysDamage(damage, true);
 			}
 		}
@@ -34,7 +33,6 @@ public class GoblinWarrior extends Goblin
 					player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 				}
 				var damage:int = str + rand(10);
-				damage = player.reduceDamage(damage);
 				player.takePhysDamage(damage, true);
 			}
 		}

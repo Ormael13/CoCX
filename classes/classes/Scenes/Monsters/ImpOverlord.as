@@ -157,7 +157,6 @@ public class ImpOverlord extends Imp
 			else {
 				outputText("The imp manages to swipe you! You let out a cry in pain. ");
 				var damage:int = rand(50) + str + weaponAttack;
-				damage = player.reduceDamage(damage);
 				if (damage < 20) damage = 20;
 				player.takePhysDamage(damage, true);
 			}
@@ -172,7 +171,6 @@ public class ImpOverlord extends Imp
 			else {
 				outputText("The imp manages to slash you with his scimitar and his deadly claws!");
 				var damage:int = rand(100) + (str * 1.5) + weaponAttack;
-				damage = player.reduceDamage(damage);
 				if (damage < 30) damage = 30; //Min-cap damage.
 				if (damage >= 50) {
 					outputText("You let out a cry in pain and you swear you could see your wounds bleeding. ");
