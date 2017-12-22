@@ -547,6 +547,11 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 					player.mana += 100;
 					if (player.mana > player.maxMana()) player.mana = player.maxMana();
 				}
+				//Chi Chi healing progress
+				if (flags[kFLAGS.CHI_CHI_LVL_UP] < 5 && flags[kFLAGS.CHI_CHI_DAILY_TRAINING] < 1) {
+					if (flags[kFLAGS.CHI_CHI_LVL_UP] < 2) flags[kFLAGS.CHI_CHI_LVL_UP] = 2;
+					else flags[kFLAGS.CHI_CHI_LVL_UP]++;
+				}
 			}
 			if (CoC.instance.model.time.hours == 6) {
 				var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;

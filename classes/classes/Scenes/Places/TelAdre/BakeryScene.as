@@ -115,6 +115,7 @@ private function displayIngredients():void {
 	outputText("Fox Berry - 5 gems.\n");
 	outputText("Ringtail Fig - 5 gems.\n");
 	outputText("Mouse Cocoa - 10 gems.\n");
+	outputText("Red River Root - 14 gems.\n");
 	outputText("Ferret Fruit - 20 gems.\n");
 }
 
@@ -124,8 +125,9 @@ public function ingredientsMenu():void {
 	menu();
 	addButton(0,"Fox Berry",buyFoxBerry);
 	addButton(1,"Ringtail Fig",buyFig);
-	addButton(2,"Mouse Cocoa",buyCocoa);
-	addButton(3,"Ferret Fruit",buyFerretFruit);
+	addButton(2, "Mouse Cocoa", buyCocoa);
+	addButton(3,"R.Rvr Root",buyRoot);
+	addButton(4,"Ferret Fruit",buyFerretFruit);
 	addButton(14,"Back",checkBakeryMenu);
 }
 
@@ -149,7 +151,8 @@ private function talkToBaker():void {
 	addButton(4,"Pound Cake",talkToBakerAboutPoundCake);
 	addButton(5,"Fox Berry",talkAboutFoxBerry);
 	addButton(6,"Ringtail Fig",talkAFig);
-	addButton(7,"Mouse Cocoa",talkAboutMouseCocoa);
+	addButton(7,"Mouse Cocoa", talkAboutMouseCocoa);
+	addButton(8,"R.Rvr Root",talkAboutRoot);
 	addButton(14,"Nevermind", talkBakeryMenu);
 }
 
@@ -235,6 +238,19 @@ private function talkAFig():void {
 	addButton(1,"No",talkToBaker);
 }
 
+//[Bakery - Talk - Baker - Ringtail Fig]
+private function talkAboutRoot():void {
+	clearOutput();
+	outputText("\"<i>Red River root is a root, but not red. Little merchants bring them from a river far away, that they call ‘Civappu’. Good for making beer, but too spicy if left aging. Used for food, then. If eaten raw will make you dizzy, and make you red and fluffy. From far lands, so a bit more expensive.</i>\"");
+	menu();
+	addButton(0, "Yes", buyRoot);
+	addButton(1, "No", talkToBaker);
+	if (flags[kFLAGS.MINO_CHEF_TALKED_RED_RIVER_ROOT] < 0) {
+		flags[kFLAGS.MINO_CHEF_TALKED_RED_RIVER_ROOT] = 0;
+	}
+	flags[kFLAGS.MINO_CHEF_TALKED_RED_RIVER_ROOT]++;
+}
+
 //[Bakery - Talk - Baker - Mouse Cocoa]
 private function talkAboutMouseCocoa():void {
 	clearOutput();
@@ -286,6 +302,24 @@ private function buyFig():void {
 	player.gems -= 5;
 	statScreenRefresh();
 	inventory.takeItem(consumables.RINGFIG, ingredientsMenu);
+}
+
+private function buyRoot():void {
+	clearOutput();
+	if (player.gems < 14) {
+		outputText("You can't afford one of those!");
+		menu();
+		addButton(0, "Next", ingredientsMenu);
+		return;
+	}
+	outputText("You pay fourteen gems for the root.  ");
+	player.gems -= 14;
+	statScreenRefresh();
+	if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
+		consumables.RDRROOT.useItem();
+		doNext(ingredientsMenu);
+	}
+	else inventory.takeItem(consumables.RDRROOT, ingredientsMenu);
 }
 
 

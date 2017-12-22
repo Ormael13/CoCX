@@ -1710,6 +1710,23 @@ use namespace CoC;
 				else
 					race = "half manticore";
 			}
+			if (redpandaScore() >= 4)
+			{
+				if (redpandaScore() >= 8) {
+					race = "red-panda-morph";
+					if (faceType == AppearanceDefs.FACE_HUMAN)
+						race = "red-panda-" + mf("boy", "girl");
+					if (isTaur())
+						race = "red-panda-taur";
+				}
+				else {
+					race = "half red-panda-morph";
+					if (faceType == AppearanceDefs.FACE_HUMAN)
+						race = "half red-panda-" + mf("boy", "girl");
+					if (isTaur())
+						race = "half red-panda-taur";
+				}
+			}
 			if (sirenScore() >= 10)
 			{
 				if (isTaur()) race = "siren-taur";
@@ -1902,6 +1919,8 @@ use namespace CoC;
 				chimeraCounter++;
 			if (manticoreScore() >= 6)
 				chimeraCounter++;
+			if (redpandaScore() >= 4)
+				chimeraCounter++;
 			if (sirenScore() >= 10)
 				chimeraCounter++;
 			if (yetiScore() >= 6)
@@ -2019,6 +2038,8 @@ use namespace CoC;
 				grandchimeraCounter++;
 */			if (manticoreScore() >= 12)
 				grandchimeraCounter += 2;
+			if (redpandaScore() >= 8)
+				grandchimeraCounter++;
 			if (sirenScore() >= 10)
 				grandchimeraCounter++;
 			if (yetiScore() >= 12)
@@ -4083,6 +4104,30 @@ use namespace CoC;
 			return manticoreCounter;
 		}
 		
+		//Manticore
+		public function redpandaScore():Number {
+			Begin("Player","racialScore","redpanda");
+			var redpandaCounter:Number = 0;
+			if (faceType == AppearanceDefs.FACE_RED_PANDA)
+				redpandaCounter += 2;
+			if (earType == AppearanceDefs.EARS_RED_PANDA)
+				redpandaCounter++;
+			if (tailType == AppearanceDefs.TAIL_TYPE_RED_PANDA)
+				redpandaCounter++;
+			if (armType == AppearanceDefs.ARM_TYPE_RED_PANDA)
+				redpandaCounter++;
+			if (lowerBody == AppearanceDefs.LOWER_BODY_TYPE_RED_PANDA)
+				redpandaCounter++;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && redpandaCounter >= 3)
+				redpandaCounter += 1;
+			if (redpandaCounter >= 2 && skin.base.pattern == AppearanceDefs.PATTERN_RED_PANDA_UNDERBODY)
+				redpandaCounter++;
+			if (redpandaCounter >= 2 && skinType == AppearanceDefs.SKIN_TYPE_FUR)
+				redpandaCounter++;
+			End("Player","racialScore");
+			return redpandaCounter;
+		}
+		
 		//Gargoyle
 		public function gargoyleScore():Number {
 			Begin("Player","racialScore","gargoyle");
@@ -5195,6 +5240,17 @@ use namespace CoC;
 					maxLib += (30 * newGamePlusMod);
 				}
 			}//+60/50-60
+			if (redpandaScore() >= 4) {
+				if (redpandaScore() >= 8) {
+					maxStr += (15 * newGamePlusMod);
+					maxSpe += (75 * newGamePlusMod);
+					maxInt += (30 * newGamePlusMod);
+				}
+				else {
+					maxSpe += (45 * newGamePlusMod);
+					maxInt += (15 * newGamePlusMod);
+				}
+			}
 			if (mantisScore() >= 6) {
 				if (mantisScore() >= 12) {
 					maxStr -= (40 * newGamePlusMod);

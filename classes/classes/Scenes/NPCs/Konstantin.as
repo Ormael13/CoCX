@@ -61,7 +61,7 @@ package classes.Scenes.NPCs
 			clearOutput();
 			if (player.gems >= 25) {
 				player.gems -= 25;
-				outputText("You take the [armor] and hand it to Konstantine. He starts working on it, idly whistling while you patiently sit on the nearby tree stump.\n\n");
+				outputText("You take the [armor] and hand it to Konstantin. He starts working on it, idly whistling while you patiently sit on the nearby tree stump.\n\n");
 				outputText("Applying the best of his smithing skills to the [armor], he starts tossing away the parts of it that are too damaged due to the blows that it has received or too weakened for the continued use, replacing them with brand new pieces of the same material. He also strengthens the inner structure of each piece and fixes them so they don’t leave a bit of your body unprotected.\n\n");
 				outputText("Once he’s finished, your [armor] looks clean, beautiful and as good as if it was brand new.");
 				if (player.hasStatusEffect(StatusEffects.KonstantinArmorPolishing)) player.removeStatusEffect(StatusEffects.KonstantinArmorPolishing);
@@ -80,7 +80,7 @@ package classes.Scenes.NPCs
 			clearOutput();
 			if (player.gems >= 25) {
 				player.gems -= 25;
-				outputText("Handing the [weapon] to the bear smith, you hop on the tree stump while he gets to work. Konstantine goes to his anvil, where he examines your weapon and figures how he is going to work with it.\n\n");
+				outputText("Handing the [weapon] to the bear smith, you hop on the tree stump while he gets to work. Konstantin goes to his anvil, where he examines your weapon and figures how he is going to work with it.\n\n");
 				outputText("Later, you start hearing the sound of metal on metal caused by the bear’s tool, accompanied by a song that he’s humming to pass the time. Once he’s done with the anvil, he turns to sharpening and polishing your [weapon].\n\n");
 				outputText("A short time later, he finally returns it to you. The [weapon] looks gleaming and brand new, and sharp enough that you think that it could cut rock.");
 				if (player.hasStatusEffect(StatusEffects.KonstantinWeaponSharpening)) player.removeStatusEffect(StatusEffects.KonstantinWeaponSharpening);
@@ -130,7 +130,7 @@ package classes.Scenes.NPCs
 		}
 		public function meetKonstantinAtForest2YesPart2():void {
 			clearOutput();
-			outputText("Arriving on the barren land surrounding your camp, you easily spot the purple glow of the portal from afar, and point it to Konstantine. He hurries up to catch you, and soon, you’re next to your tent, helping him to unpack his stuff.  With him are several boxes, enormous even for his size, that have his working tools, as well as the tent he has and probably other personal stuff.\n\n");
+			outputText("Arriving on the barren land surrounding your camp, you easily spot the purple glow of the portal from afar, and point it to Konstantin. He hurries up to catch you, and soon, you’re next to your tent, helping him to unpack his stuff.  With him are several boxes, enormous even for his size, that have his working tools, as well as the tent he has and probably other personal stuff.\n\n");
 			outputText("\"<i>So, this is the place?</i>\" he asks, panting from the exertion of having to carry most of the stuff.\n\n");
 			outputText("\"<i>Yes, it is.</i>\" you reply, also tired, even while you had much less to carry.\n\n");
 			outputText("\"<i>Good</i>\" he says, nodding approvingly \"<i>A bit far from everything, but given this land’s average company, that’s quite a good thing.</i>\"\n\n");
@@ -159,7 +159,7 @@ package classes.Scenes.NPCs
 			outputText("Strong muscles lie beneath his chest, still, he has a bit of a belly, due his ursine nature, but not enough to be too noticeable under his fluffy fur. Being in such a good physical condition, it’s no wonder how strong he looks. His hips, albeit boyish, are a bit thicker due to his frame. A small, stubby and furred tail rest over his buttcheecks. He has paw like-legs that are covered in a coat of caramel fur, his feet end in black soles with paw pads. The claws at the end of his toes aren’t a nuisance to find good footwear, thankfully.\n\n");
 			outputText("He has a strong, manly chest, with a small, pink nipple on each one of his pecs.\n\n");
 			outputText("You’ve noticed that he usually wears a set of white, cotton undies, underneath what is a massive 22 inches package, ready to wreck anyone brave enough to try it out. It has an humanoid shape, albeit black in color and lying in a protective furred sheath instead of a foreskin. Just below, a duo of 5 inches wide nuts hang freely, bouncing as he walks when not covered by his undies.\n\n");
-			outputText("Between his nice derriere, Konstantine has a tight-looking anus, right where it belongs.");
+			outputText("Between his nice derriere, Konstantin has a tight-looking anus, right where it belongs.");
 			doNext(KonstantinMainCampMenu);
 		}
 		
@@ -250,17 +250,23 @@ package classes.Scenes.NPCs
 				if (player.hasItem(useables.T_SSILK)) {
 					outputText("\"<i>How in the demon’s name you managed to get a piece of this silk? So far, it’s only produced by those disgusting, spider-like creatures from a mucky swamp quite far from there. That means, that either you beat the crap out of one of those fuckers, or you found a lost strand of this thing somewhere. Either way congratulations, as this is a very rare material. In fact, I can make a great piece of armor with it, but since i’ll have to buy some chemicals to make the thing sturdy without losing its flexible and soft properties, the price is gonna be a little higher this time.</i>\"\n\n");
 					outputText("\"<i>Taking a different approach, I could give it some basic plating, and then weaving the silk thread into a set of magical robes. but this would require some aid from a tailor and a caster, which also is gonna increase the price. In both cases, I’ll require 500 gems, and a total of 5 pieces of silk to make enough thread.</i>\"\n\n");
+					if (flags[kFLAGS.KONSTANTIN_SERVICES] >= 5) outputText("\"<i>Alternatively, if you want, an undergarment, I could made cloth for a shirt, a bra, a loincloth and even a set of panties. The material necessary for any of them would be less, only 2 strands of silk, but, since the chemical process is the same, I’ll still require the 500 gems.</i>\"\n\n");
 				}
 				if (player.hasItem(useables.D_SCALE)) {
-					outputText("Konstantine carefully examines the dragonscale that you are storing on your pack. \"<i>Dragons in Mareth are a virtually extinct race");
+					outputText("Konstantin carefully examines the dragonscale that you are storing on your pack. \"<i>Dragons in Mareth are a virtually extinct race");
 					if (emberScene.followerEmber()) outputText(", well, except for the one with us, so the chances of find one of those are pretty slim");
 					outputText(".</i>\"\n\n\"<i>Those things are quite tough, and with enough of them I could make an armor with exceptional defensive properties, and much less heavy than your standard platemail. If you’re not feeling on the mood of using a plate armor, I could get my hands on some magically enhanced linen cloth, and use the scales as reinforcement and decoration, thus creating a strong and comfortable set of robes. Since plate requires a lot of material, and I’d like to buy the cloth for the robes selling the remainder scales, I’ll have to ask you for 5 pieces of dragonscale in both cases.</i>\"\n\n");
+					if (flags[kFLAGS.KONSTANTIN_SERVICES] >= 5) outputText("\"<i>If you happened to like a smaller piece, I could assemble and undergarment for you, say, a bra, or a vest for your upper body, and a thong or a loincloth for your lower parts. Since we’re speaking of less cloth, I could do it with only 2 pieces of dragon scale.</i>\"\n\n");
 				}
 				if (player.hasItem(useables.EBONBLO)) {
 					outputText("You bear friend seems genuinely surprised by the strange, black bloom that you plucked not long ago.\n\n");
-					outputText("\"<i>Ebonbloom? If memory doesn’t fail me, it’s a flower with metal-like properties that grows in very remote sections of Mareth mountainous system, often found in crevices resting near almost vertical cliffs, or volcanic craters. No surprise that few people have seen one, and even less have gotten them on hand. I’m not an expert, so most of this stuff properties are mystery for me too. The one thing I know for sure is that it’s quite durable, and very reactive to the right chemicals.</i>\"\n\n");
-					outputText("\"<i>Now that you have one sample, I could follow a process of metal casting, and bond the flower petals with a magically enhanced metal. From I’ve studied, the metal that comes from those strange things has an oily texture, but it’s extremely durable. Another good thing about them Ebonblooms is that they’re quite malleable, so, with sufficient materialI I could grab the petals and laminate them together into a proper cloth, in case of that you’d opted by a robe or something similar.</i>\"\n\n");
+					outputText("\"<i>Ebonbloom? If memory doesn’t fail me, it’s a flower with metal-like properties that grows in very remote sections of Mareth mountainous system, often found in crevices resting near almost vertical cliffs, or volcanic craters. No surprise that few people have seen one, and even less have gotten them on hand. I’m not an expert, so most of this stuff's properties are mystery for me too. The one thing I know for sure is that it’s quite durable, and very reactive to the right chemicals.</i>\"\n\n");
+					outputText("\"<i>Now that you have one sample, I could follow a process of metal casting, and bond the flower petals with a magically enhanced metal. From what I’ve studied, the metal that comes from those strange things has an oily texture, but it’s extremely durable. Another good thing about them Ebonblooms is that they’re quite malleable, so, with sufficient materialI I could grab the petals and laminate them together into a proper cloth, in case of that you’d opted by a robe or something similar.</i>\"\n\n");
 					outputText("\"<i>In both cases I would need a good amount of them, say, 8 pieces.</i>\"\n\n");
+					if (flags[kFLAGS.KONSTANTIN_SERVICES] >= 5) {
+						outputText("\"<i>Now, if you happen to like an undergarment, I could make one for you, say, a vest or a corset for your upper body and a thong or a jock for your lower parts. I can even enhance the properties of the latter ones.</i>\"\n\n");
+						outputText("\"<i>This would require a bit less Ebonbloom, maybe 3 pieces for each undergarment.</i>\"\n\n");
+					}
 				}//WT_BRAN		TBAPLAT		DBAPLAT
 			}
 			else {
@@ -276,9 +282,24 @@ package classes.Scenes.NPCs
 			addButton(14, "Back", KonstantinMainCampMenu);
 		}//usunąć fragmenty " && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 1" jak sie całkiem przeniesie crafting z Ratha do Kona
 		
-		private function KonstantinCraftingNotEnoughMaterials():void {
+		private function KonstantinCraftingNotEnoughMaterials1():void {
 			clearOutput();
 			outputText("\"<i>Nah, " + player.mf("man", "girl") + ". I’ll need more of that stuff to start doing something. Five pieces, as I’ve said. If you happen to gather them somehow, look for me and we’ll work something.</i>\"\n\n");
+			doNext(KonstantinMainCampMenu);
+		}
+		private function KonstantinCraftingNotEnoughMaterials2():void {
+			clearOutput();
+			outputText("\"<i>Nah, " + player.mf("man", "girl") + ". I’ll need more of that stuff to start doing something. Two pieces, as I’ve said. If you happen to gather them somehow, look for me and we’ll work something.</i>\"\n\n");
+			doNext(KonstantinMainCampMenu);
+		}
+		private function KonstantinCraftingNotEnoughMaterials3():void {
+			clearOutput();
+			outputText("\"<i>Nah, " + player.mf("man", "girl") + ". I’ll need more of that stuff to start doing something. Eight pieces, as I’ve said. If you happen to gather them somehow, look for me and we’ll work something.</i>\"\n\n");
+			doNext(KonstantinMainCampMenu);
+		}
+		private function KonstantinCraftingNotEnoughMaterials4():void {
+			clearOutput();
+			outputText("\"<i>Nah, " + player.mf("man", "girl") + ". I’ll need more of that stuff to start doing something. Three pieces, as I’ve said. If you happen to gather them somehow, look for me and we’ll work something.</i>\"\n\n");
 			doNext(KonstantinMainCampMenu);
 		}
 		private function KonstantinCraftingGelArmor():void {
@@ -288,21 +309,21 @@ package classes.Scenes.NPCs
 				outputText("After a couple of minutes, during which Konstantin has been busy taking your measurements, the bear-smith takes the pot out of the furnace and after cooling with clean water, he pours the hot fluid into several molds placed on one of his workbenches. The substance solidifies quickly, and once it has become air-temperature, he smoothen the blemishes and turns them into beautiful emerald plates.\n\n");
 				outputText("Grabbing a mannequin that he has nearby for armor making purposes, he assembles a chest piece, a set of arm guards, shoulder and leg protections and even a couple of ornaments from the emerald plates. Once he’s finished your bear friend presents to you the brand new set of glistening gel armor.\n\n");
 				player.destroyItems(useables.GREENGL, 5);
-				//if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
+				if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
 				inventory.takeItem(armors.GELARMR, KonstantinMainCampMenu);
 			}
-			else KonstantinCraftingNotEnoughMaterials();
+			else KonstantinCraftingNotEnoughMaterials1();
 		}
 		private function KonstantinCraftingChitinItems():void {
 			if (player.hasItem(useables.B_CHITN, 5)) {
 				clearOutput();
-				outputText("The bear takes the chitin plates and gets to work on them on one of his bench, tools getting busy cutting smoothing and polishing each piece into a proper plate able to belong to a protective armor. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantine calls you so you can examine the finished piece.\n\n");
+				outputText("The bear takes the chitin plates and gets to work on them on one of his bench, tools getting busy cutting smoothing and polishing each piece into a proper plate able to belong to a protective armor. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
 				outputText("The plates shine and shimmer like black steel.  He has used the yellow chitin to add accents and embroidery to the plates with a level of detail and craftsmanship rarely seen back home. A yellow fur neck lining has been fashioned from hairs found on the pieces.  The armor includes a breastplate, shoulder guards, full arm guards, and knee high boots, as well a pair of cuisses and graves.\n\n");
 				player.destroyItems(useables.B_CHITN, 5);
-				//if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
+				if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
 				inventory.takeItem(armors.BEEARMR, KonstantinMainCampMenu);
 			}
-			else KonstantinCraftingNotEnoughMaterials();
+			else KonstantinCraftingNotEnoughMaterials1();
 		}
 		private function KonstantinCraftingSpiderSilkItems():void {
 			if (player.gems < 500) {
@@ -313,6 +334,13 @@ package classes.Scenes.NPCs
 			menu();
 			addButton(0, "Armor", KonstantinCraftingSpiderSilkItems2, 1, null, null, armors.SSARMOR.description);
 			addButton(1, "Robes", KonstantinCraftingSpiderSilkItems2, 2, null, null, armors.SS_ROBE.description);
+			addButton(2, "Indec.R.", KonstantinCraftingSpiderSilkItems2, 3, null, null, armors.INDESSR.description);
+			if (flags[kFLAGS.KONSTANTIN_SERVICES] >= 5) {
+				addButton(5, "Bra", KonstantinCraftingSpiderSilkItems2, 4, null, null, undergarments.SS_BRA.description);
+				addButton(6, "Shirt", KonstantinCraftingSpiderSilkItems2, 5, null, null, undergarments.SSSHIRT.description);
+				addButton(7, "Panties", KonstantinCraftingSpiderSilkItems2, 6, null, null, undergarments.SSPANTY.description);
+				addButton(8, "Loincloth", KonstantinCraftingSpiderSilkItems2, 7, null, null, undergarments.SS_LOIN.description);
+			}
 		}
 		private function KonstantinCraftingSpiderSilkItems2(spidersilkType:int):void {
 			if (spidersilkType == 1 || spidersilkType == 2 || spidersilkType == 3) { //Armor or robes
@@ -321,7 +349,7 @@ package classes.Scenes.NPCs
 					player.destroyItems(useables.T_SSILK, 5);
 					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = spidersilkType;
 				}
-				else KonstantinCraftingNotEnoughMaterials();
+				else KonstantinCraftingNotEnoughMaterials1();
 			}
 			else { //Undergarments
 				if (player.hasItem(useables.T_SSILK, 2)) {
@@ -329,7 +357,7 @@ package classes.Scenes.NPCs
 					player.destroyItems(useables.T_SSILK, 2);
 					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = spidersilkType;
 				}
-				else KonstantinCraftingNotEnoughMaterials();
+				else KonstantinCraftingNotEnoughMaterials2();
 			}
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] > 0) {
 				player.gems -= 500;
@@ -345,15 +373,46 @@ package classes.Scenes.NPCs
 				case 2: //Robes
 				//	outputText(images.showImage("rathazul-craft-silkrobes"));
 					outputText("Hanging from a small rack is a long, flowing robe. It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric, the pure while of it’s cloth complimented majestically by the golden embroidery.  You run your fingers over the silken garment, feeling the soft material give at your touch.  There's a hood with a golden border embroidered around the edge.  For now, it hangs limply down the back, but it would be easy to pull up in order to shield the wearer's eyes from harsh sunlight or rainy drizzle.  ");
-					outputText("The sleeves match the cowl, circled with intricate threads made in gold and laid out in arcane patterns.\n\nKonstantine smiles as you delight yourself looking at the marvelously crafted garment. Once you’re done carefully takes it and hands it to you.\n\n");
+					outputText("The sleeves match the cowl, circled with intricate threads made in gold and laid out in arcane patterns.\n\nKonstantin smiles as you delight yourself looking at the marvelously crafted garment. Once you’re done carefully takes it and hands it to you.\n\n");
 					outputText("\"<i>" + player.mf("Man", "Girl") + ", this is quite a piece, isn’t? I struck a good deal with the weaver so I got extra gold embroidery. The cloth is soft, but don't let it fool you. This thing is almost as strong as any armor that I could’ve made, and the magical properties of the weaving will come on handy whenever you’re using spells.</i>\"\n\n");
 					itype = armors.SS_ROBE;
+					break;
+				case 3: //Indec.Robes
+				//	outputText(images.showImage("rathazul-craft-silkindecentrobes"));
+					outputText("Hanging from a small rack is a long, flowing robe. It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric. Upon closer inspection, you realize that the robe is more of a longcoat, meant to display your chest and groin. You run your fingers over the silken garment, feeling the soft material give at your touch.  There’s a hood around the edge, for now, it hangs limply down the back, but it would be easy to pull up in order to shield the wearer’s eyes from harsh sunlight or rainy drizzle.\n\n");
+					outputText("Moving your hands through it, you find a layer of spider silk straps lining the inside, likely to keep the front of the robe open and preventing this from disrupting the balance of the wearer. The straps are so subtle that you doubt you will notice them while wearing the robe.\n\n");
+					outputText("Konstantin gingerly takes down the garment and hands it to you. \"<i>This robe can look and feel soft, but I assure you, this thing is made of one of the most durable clothes in Mareth. The strands of silk made it stronger than many armors, and the properties of the material can be useful to aid your spell-casting as well.</i>\"\n\n");
+					itype = armors.INDESSR;
+					break;
+				case 4: //Bra
+				//	outputText(images.showImage("rathazul-craft-silkbra"));
+					outputText("On a table is a pair of white bra.  It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric.  You run your fingers over the silken garment, feeling the soft material give at your touch.\n\n");
+					outputText("Konstantin gingerly takes the garment and hands it to you. \"<i>This bra can look and feel soft, but I assure you, this thing is made of one of the most durable clothes in Mareth. The strands of silk made it quite comfortable as well.</i>\"\n\n");
+					itype = undergarments.SS_BRA;
+					break;
+				case 5: //Shirt
+				//	outputText(images.showImage("rathazul-craft-silkshirt"));
+					outputText("On a table is a pair of white shirt.  It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric.  You run your fingers over the silken garment, feeling the soft material give at your touch.\n\n");
+					outputText("Konstantin gingerly takes the garment and hands it to you. \"<i>This shirt can look and feel soft, but I assure you, this thing is made of one of the most durable clothes in Mareth. The strands of silk made it quite comfortable as well.</i>\"\n\n");
+					itype = undergarments.SSSHIRT;
+					break;
+				case 6: //Panties
+				//	outputText(images.showImage("rathazul-craft-silkpanties"));
+					outputText("On a table is a pair of white panties.  It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric.  You run your fingers over the silken garment, feeling the soft material give at your touch.\n\n");
+					outputText("Konstantin gingerly takes the garment and hands it to you. \"<i>Those panties can look and feel soft, but I assure you, this thing is made of one of the most durable clothes in Mareth. The strands of silk made it quite comfortable as well.</i>\"\n\n");
+					itype = undergarments.SSPANTY;
+					break;
+				case 7: //Loincloth
+				//	outputText(images.showImage("rathazul-craft-silkloincloth"));
+					outputText("On a table is a white loincloth. It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric.  You run your fingers over the silken garment, feeling the soft material give at your touch.\n\n");
+					outputText("Konstantin gingerly takes the garment and hands it to you. \"<i>This loincloth can look and feel soft, but I assure you, this thing is made of one of the most durable clothes in Mareth. The strands of silk made it quite comfortable as well.</i>\"\n\n");
+					itype = undergarments.SS_LOIN;
 					break;
 				default:
 					outputText("Something bugged! Please report this bug to Ormael/Aimozg/Oxdeception.");
 					itype = armors.SS_ROBE;
 				}
-				//if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
+				if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;
 				inventory.takeItem(itype, KonstantinMainCampMenu);
 			}
@@ -362,6 +421,13 @@ package classes.Scenes.NPCs
 			menu();
 			addButton(0, "Armor", KonstantinCraftingDragonscaleItems2, 1, null, null, armors.DSCLARM.description);
 			addButton(1, "Robes", KonstantinCraftingDragonscaleItems2, 2, null, null, armors.DSCLROB.description);
+			addButton(2, "Indec.R.", KonstantinCraftingDragonscaleItems2, 3, null, null, armors.INDEDSR.description);
+			if (flags[kFLAGS.KONSTANTIN_SERVICES] >= 5) {
+				addButton(5, "Bra", KonstantinCraftingDragonscaleItems2, 4, null, null, undergarments.DS_BRA.description);
+				addButton(6, "Vest", KonstantinCraftingDragonscaleItems2, 5, null, null, undergarments.DS_VEST.description);
+				addButton(7, "Thong", KonstantinCraftingDragonscaleItems2, 6, null, null, undergarments.DSTHONG.description);
+				addButton(8, "Loincloth", KonstantinCraftingDragonscaleItems2, 7, null, null, undergarments.DS_LOIN.description);
+			}
 		}
 		private function KonstantinCraftingDragonscaleItems2(dragonscaleType:int):void {
 			if (dragonscaleType == 1 || dragonscaleType == 2 || dragonscaleType == 3) { //Armor or robes
@@ -370,7 +436,7 @@ package classes.Scenes.NPCs
 					player.destroyItems(useables.D_SCALE, 5);
 					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = dragonscaleType;
 				}
-				else KonstantinCraftingNotEnoughMaterials();
+				else KonstantinCraftingNotEnoughMaterials1();
 			}
 			else { //Undergarments
 				if (player.hasItem(useables.D_SCALE, 2)) {
@@ -378,7 +444,7 @@ package classes.Scenes.NPCs
 					player.destroyItems(useables.D_SCALE, 2);
 					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = dragonscaleType;
 				}
-				else KonstantinCraftingNotEnoughMaterials();
+				else KonstantinCraftingNotEnoughMaterials2();
 			}
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] > 0) {
 				statScreenRefresh();
@@ -386,7 +452,7 @@ package classes.Scenes.NPCs
 				switch(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275]) {
 				case 1: //Armor
 				//	outputText(images.showImage("rathazul-craft-silkarmor"));
-					outputText("The bear takes the dragon scales and sets up on his workbench for an hour while you wait. You can hear his tools cutting, smoothing and polishing each piece into a proper plate able to belong to a protective armor. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantine calls you over, so you can examine the finished piece.\n\n");
+					outputText("The bear takes the dragon scales and sets up on his workbench for an hour while you wait. You can hear his tools cutting, smoothing and polishing each piece into a proper plate able to belong to a protective armor. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you over, so you can examine the finished piece.\n\n");
 					outputText("\"<i>Finished," + player.mf("man", "girl") + "</i>\" he says, smiling warmly. \"<i>Turned out awesome, modesty aside. Come on, take a look.</i>\"\n\n");
 					outputText("Once you come to see it, you get the sight of a magnificently crafted plate armor resting over one of the mannequins. It’s made of a set of plates forming a cuirass, a back piece, shoulder and arm protections, as well as a pair of cuisses and greaves. The copper-like coloration of the scales visible among the plates, combined with their characteristic shape, and the gold and brass trim that your bear friend has smithen them with give this set of armor a truly imposing look.\n\n");
 					outputText("Testing it, you find that it's much lighter than any other similar plated armor that you’ve used before. This surely come in handy when you require of a bit more of mobility and speed in the heat of the battle. You thank Konstantin, and collect your new armor.\n\n");
@@ -394,16 +460,51 @@ package classes.Scenes.NPCs
 					break;
 				case 2: //Robes
 				//	outputText(images.showImage("rathazul-craft-silkrobes"));
-					outputText("The bear takes the dragon scales and sets up on his workbench for an hour while you wait. You can hear his tools cutting, smoothing and polishing each piece into a proper plate able to belong to a protective outfit. Every now and then you manage to hear cloth being cut and a hissing sound, like boiling water poured over a cold surface. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantine calls you over, so you can examine the finished piece.\n\n");
+					outputText("The bear takes the dragon scales and sets up on his workbench for an hour while you wait. You can hear his tools cutting, smoothing and polishing each piece into a proper plate able to belong to a protective outfit. Every now and then you manage to hear cloth being cut and a hissing sound, like boiling water poured over a cold surface. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you over, so you can examine the finished piece.\n\n");
 					outputText("\"<i>Finished," + player.mf("man", "girl") + "</i>\" he says, smiling warmly. \"<i>Turned out awesome, modesty aside. Come on, take a look.</i>\"\n\n");
 					outputText("Once you come to see it, you get the sight of a magnificently crafted set of robes resting over one of the mannequins. They’re made of copper-colored scales as cover, with a brass and gold trim, and a inner cloth made of crimson linen. The scales are and flexible enough to flow with the linen without issue. Runic marks in embroidered gold are placed along the cloth of the neck and back.\n\n");
 					itype = armors.DSCLROB;
+					break;
+				case 3: //Indec.Robes
+				//	outputText(images.showImage("rathazul-craft-silkrobes"));
+					outputText("The bear takes the scales and works on his bench for an hour while you wait, polishing and sewing the material. Once he has finished, Konstantin calls you over, \"<i>Hey, " + player.mf("man", "girl") + " your piece if finished. I’m sure that you’ll be happy with how it turned. Take a look.</i>\"\n\n");
+					outputText("As you retrieve the piece from him, you notice how the robe is red and appears to be textured with scales.  You touch it and feel the particular texture, but on the inside of the cloth, what seems and feels like velvet has taken over the scaly sensation.\n\n");
+					outputText("\"<i>The dragon scales gave it a nice texture.</i>\" Konstantin says \"<i>I added some cloth on the inside so it won’t be too rough at touch. Overall, it should be quite comfortable and protective.</i>\"\n\n");
+					itype = armors.INDEDSR;
+					break;
+				case 4: //Bra
+				//	outputText(images.showImage("rathazul-craft-dragonscalebra"));
+					outputText("The bear takes the scales and works on his bench for an hour while you wait, polishing and sewing the material. Once he has finished, Konstantin calls you over, \"<i>Hey, " + player.mf("man", "girl") + " your piece if finished. I’m sure that you’ll be happy with how it turned. Take a look.</i>\"\n\n");
+					outputText("As you retrieve the piece from him, you notice how the bra is copper-colored, and appears to be textured with scales.  You touch it and feel the particular texture, but on the inside of the cloth, what seems and feels like velvet has taken over the scaly sensation.\n\n");
+					outputText("\"<i>The dragon scales gave it a nice texture, and I’ve used leathers straps to maintain the flexibility.</i>\" Konstantin says \"<i>I added some cloth on the inside too, so it won’t be too rough at touch. Overall, it should be quite comfortable and protective.</i>\"\n\n");
+					itype = undergarments.DS_BRA;
+					break;
+				case 5: //Vest
+				//	outputText(images.showImage("rathazul-craft-dragonscalevest"));
+					outputText("The bear takes the scales and works on his bench for an hour while you wait, polishing and sewing the material. Once he has finished, Konstantin calls you over, \"<i>Hey, " + player.mf("man", "girl") + " your piece if finished. I’m sure that you’ll be happy with how it turned. Take a look.</i>\"\n\n");
+					outputText("As you retrieve the piece from him, you notice how the vest is copper-colored, and appears to be textured with scales.  You touch it and feel the particular texture, but on the inside of the cloth, what seems and feels like velvet has taken over the scaly sensation.\n\n");
+					outputText("\"<i>The dragon scales gave it a nice texture, and I’ve used leathers straps to maintain the flexibility.</i>\" Konstantin says \"<i>I added some cloth on the inside too, so it won’t be too rough at touch. Overall, it should be quite comfortable and protective.</i>\"\n\n");
+					itype = undergarments.DS_VEST;
+					break;
+				case 6: //Thong
+				//	outputText(images.showImage("rathazul-craft-dragonscalethong"));
+					outputText("The bear takes the scales and works on his bench for an hour while you wait, polishing and sewing the material. Once he has finished, Konstantin calls you over, \"<i>Hey, " + player.mf("man", "girl") + " your piece if finished. I’m sure that you’ll be happy with how it turned. Take a look.</i>\"\n\n");
+					outputText("As you retrieve the piece from him, you notice how the thong is copper-colored, and appears to be textured with scales.  You touch it and feel the particular texture, but on the inside of the cloth, what seems and feels like velvet has taken over the scaly sensation.\n\n");
+					outputText("\"<i>The dragon scales gave it a nice texture, and I’ve used leathers straps to maintain the flexibility.</i>\" Konstantin says \"<i>I added some cloth on the inside too, so it won’t be too rough at touch. Overall, it should be quite comfortable and protective.</i>\"\n\n");
+					itype = undergarments.DSTHONG;
+					break;
+				case 7: //Loincloth
+				//	outputText(images.showImage("rathazul-craft-dragonscaleloincloth"));
+					outputText("The bear takes the scales and works on his bench for an hour while you wait, polishing and sewing the material. Once he has finished, Konstantin calls you over, \"<i>Hey, " + player.mf("man", "girl") + " your piece if finished. I’m sure that you’ll be happy with how it turned. Take a look.</i>\"\n\n");
+					outputText("As you retrieve the piece from him, you notice how the loincloth is copper-colored, and appears to be textured with scales.  You touch it and feel the particular texture, but on the inside of the cloth, what seems and feels like velvet has taken over the scaly sensation.\n\n");
+					outputText("\"<i>The dragon scales gave it a nice texture, and I’ve used leathers straps to maintain the flexibility.</i>\" Konstantin says \"<i>I added some cloth on the inside too, so it won’t be too rough at touch. Overall, it should be quite comfortable and protective.</i>\"\n\n");
+					itype = undergarments.DS_LOIN;
 					break;
 				default:
 					outputText("Something bugged! Please report this bug to Ormael/Aimozg/Oxdeception.");
 					itype = armors.DSCLROB;
 				}
-				//if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
+				if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;
 				inventory.takeItem(itype, KonstantinMainCampMenu);
 			}
@@ -413,6 +514,16 @@ package classes.Scenes.NPCs
 			addButton(0, "Platemail", KonstantinCraftingEbonbloomItems2, 1, null, null, armors.EWPLTMA.description);
 			addButton(1, "Jacket", KonstantinCraftingEbonbloomItems2, 2, null, null, armors.EWJACK_.description);
 			addButton(2, "Robes", KonstantinCraftingEbonbloomItems2, 3, null, null, armors.EWROBE_.description);
+		//	addButton(3, "Indec.R.", KonstantinCraftingEbonbloomItems2, 4, null, null, armors.INDEEWR.description);
+		//	if (player.hasItem(useables.EBONBLO, 10) && player.hasItem(armors.H_GARB_, 1) && player.hasKeyItem("Dark Mage’s Grimoire") >= 0) addButton(4, "H. Garb", KonstantinCraftingEbonbloomItems2, 5, null, null, armors.EHGARB_.description);
+			if (flags[kFLAGS.KONSTANTIN_SERVICES] >= 5) {
+				addButton(5, "Jock", KonstantinCraftingEbonbloomItems2, 6, null, null, undergarments.EW_JOCK.description);
+				addButton(6, "Thong", KonstantinCraftingEbonbloomItems2, 7, null, null, undergarments.EWTHONG.description);
+				addButton(7, "Vest", KonstantinCraftingEbonbloomItems2, 8, null, null, undergarments.EWTHONG.description);
+				addButton(8, "Corset", KonstantinCraftingEbonbloomItems2, 9, null, null, undergarments.EW_VEST.description);
+				addButton(10, "R.Jock", KonstantinCraftingEbonbloomItems2, 10, null, null, undergarments.R_JOCK.description);
+				addButton(11, "R.Thong", KonstantinCraftingEbonbloomItems2, 11, null, null, undergarments.R_THONG.description);
+			}
 		}
 		private function KonstantinCraftingEbonbloomItems2(ebonbloomType:int):void {
 			if (ebonbloomType == 1 || ebonbloomType == 2 || ebonbloomType == 3) { //Armor or robes
@@ -421,7 +532,7 @@ package classes.Scenes.NPCs
 					player.destroyItems(useables.EBONBLO, 8);
 					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = ebonbloomType;
 				}
-				else KonstantinCraftingNotEnoughMaterials();//zmienić na mówienie o 8 nie 5
+				else KonstantinCraftingNotEnoughMaterials3();
 			}
 			else { //Undergarments
 				if (player.hasItem(useables.EBONBLO, 3)) {
@@ -429,41 +540,81 @@ package classes.Scenes.NPCs
 					player.destroyItems(useables.EBONBLO, 3);
 					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = ebonbloomType;
 				}
-				else KonstantinCraftingNotEnoughMaterials();//zmienić na mówienie o 3 nie 5
+				else KonstantinCraftingNotEnoughMaterials4();
 			}
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] > 0) {
 				statScreenRefresh();
 				var itype:ItemType;
 				switch(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275]) {
 				case 1: //Platemail
-				//	outputText(images.showImage("rathazul-craft-silkarmor"));
-					outputText("The bear takes the ebonbloom flowers and sets up on his workbench for an hour while you wait. You can hear his tools cutting, smoothing and polishing each piece into a proper plate able to belong to a protective armor. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantine calls you so you can examine the finished piece.\n\n");
+				//	outputText(images.showImage("rathazul-craft-ebonweaveheavyarmor"));
+					outputText("The bear takes the ebonbloom flowers and sets up on his workbench for an hour while you wait. You can hear his tools cutting, smoothing and polishing each piece into a proper plate able to belong to a protective armor. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
 					outputText("\"<i>I think you'll be pleased with how the thing turned out.</i>\" The bear says, patting you on the shoulder. \"<i>Go ahead and take a look, " + player.mf("man", "girl") + ".</i>\"\n\n");
 					outputText("Laid out on a workbench is a set of platemail. The plates barely reflecting the light. As you approach the workbench, you notice that the surface of the black metal appears to have an oily texture. A sliver trim decorated the edges of each plate. The armor is laid out in two layers: a lower layer made of smooth yet resilient ebonweave cloth, covered by ebonweave plating.  Picking up one of the pieces of platemail, you notice that the plate is thin and the armor itself vary light.\n\n");
 					outputText("You spot a discarded knife nearby, probably one of Konstantin less used smithing tools, so you take it and experimentally try to damage the breastplate.  After a few whacks, the knife is blunted but the plate shows no damage.  Not even a dent. It appears that the bear-smith wasn’t exaggerating when he told you about the properties ebonbloom could take. Assembling the full set as if to start putting it on, you realize that as light as the armor is, the armor will restrict your range of movement as much as any normal set of platemail would. You thank Konstantin, and collect your new armor.\n\n");
 					itype = armors.EWPLTMA;
 					break;
 				case 2: //Jacket
-				//	outputText(images.showImage("rathazul-craft-silkrobes"));
-					outputText("The bear takes the ebonbloom flowers and sets up on his workbench for an hour while you wait. You can hear his tools cutting, smoothing and polishing each piece into a proper plate able to belong to a protective armor. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantine calls you so you can examine the finished piece.\n\n");
+				//	outputText(images.showImage("rathazul-craft-ebonweavearmor"));
+					outputText("The bear takes the ebonbloom flowers and sets up on his workbench for an hour while you wait. You can hear his tools cutting, smoothing and polishing each piece into a proper plate able to belong to a protective armor. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
 					outputText("\"<i>I think you'll be pleased with how the thing turned out.</i>\" The bear says, patting you on the shoulder. \"<i>Go ahead and take a look, " + player.mf("man", "girl") + ".</i>\"\n\n");
 					outputText("Laid out beside Konstantin’s workbench is a longcoat next to a breastplate. Both items are a greasy dark gray. Nearby, there is a similarly colored shirt and a pair of pants on a small rack. You approach the workbench and notice that the surface of the leather has an oily texture. The long coat has a much more natural texture to it than the breastplate. It’s made of leather-- that much, you’re certain, and yet it doesn’t seem like it should be. Perhaps Konstantin bonded the Ebonbloom into a normal jacket, altering the leather’s properties. ");
 					outputText("The breastplate is even stranger. It feels like metal, yet is spongy. It bends slightly under your fingers and fills up when you remove your hand. You spot a knife nearby and take it, experimentally try to cut the breastplate. Nothing happens. Even after a few increasingly vigorous attempts, the plate has no marks. You think this armor will work very well. You thank Konstantin and collect your new armor.\n\n");
 					itype = armors.EWJACK_;
 					break;
 				case 3: //Robes
-				//	outputText(images.showImage("rathazul-craft-silkrobes"));
-					outputText("The bear takes the ebonbloom flowers and sets up on his workbench for an hour while you wait. You can hear his tools cutting, smoothing and polishing each piece into a proper plate able to belong to a protective armor. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantine calls you so you can examine the finished piece.\n\n");
+				//	outputText(images.showImage("rathazul-craft-ebonweaverobes"));
+					outputText("The bear takes the ebonbloom flowers and sets up on his workbench for an hour while you wait. You can hear his tools cutting, smoothing and polishing each piece into a proper plate able to belong to a protective armor. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
 					outputText("\"<i>I think you'll be pleased with how the thing turned out.</i>\" The bear says, patting you on the shoulder. \"<i>Go ahead and take a look, " + player.mf("man", "girl") + ".</i>\"\n\n");
 					outputText("Hanging on the rack is a long, flowing robe. The black cloth ripples in the wind, but strangely it shines in the light as metal would. You run your fingers over the dark grey garment, feeling the soft (yet slightly slick) material give at your touch. There’s a hood around the edge. For now, it hangs limply down the back, but it would be easy to pull up in order to shield the wearer’s eyes from harsh sunlight or rainy drizzle. ");
 					outputText("Beyond the physical, you can feel magical power flow through this robe. This untapped power should be quite helpful when casting magic. You thank Konstantin and collect your new robe.\n\n");
 					itype = armors.EWROBE_;
 					break;
+				case 6: //Jock
+				//	outputText(images.showImage("rathazul-craft-ebonweavejock"));
+					outputText("The bear takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Konstantin is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging in one of  Konstantin’s racks is a jock. As you inspect it, you notice the black cloth has an oily sheen. ");
+					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingram’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the jock is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new jock.");
+					itype = undergarments.EW_JOCK;
+					break;
+				case 7: //Thong
+				//	outputText(images.showImage("rathazul-craft-ebonweavethong"));
+					outputText("The bear takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Konstantin is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging in one of  Konstantin’s racks is a thong. As you inspect it, you notice the black cloth has an oily sheen. ");
+					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingram’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the thong is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new thong.");
+					itype = undergarments.EWTHONG;
+					break;
+				case 8: //Vest
+				//	outputText(images.showImage("rathazul-craft-ebonweavevest"));
+					outputText("The bear takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Konstantin is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging in one of  Konstantin’s racks is a vest. As you inspect it, you notice the black cloth has an oily sheen. ");
+					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingram’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the vest is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new vest.");
+					itype = undergarments.EW_VEST;
+					break;
+				case 9: //Corset
+				//	outputText(images.showImage("rathazul-craft-ebonweavecorset"));
+					outputText("The bear takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Konstantin is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging in one of  Konstantin’s racks is a corset. As you inspect it, you notice the black cloth has an oily sheen. ");
+					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingram’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the corset is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new corset.");
+					itype = undergarments.EW_CORS;
+					break;
+				case 10: //Rune Jock
+				//	outputText(images.showImage("rathazul-craft-ebonweaverunejock"));
+					outputText("The bear takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Konstantin is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging in one of  Konstantin’s racks is a jock. As you inspect it, you notice the black cloth has an oily sheen. ");
+					outputText("Adorning the cup is a rune seething with black magic.  ");
+					if (player.hasStatusEffect(StatusEffects.KnowsArouse)) outputText("You blush, recognizing the rune to represent lust.  ");
+					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingram’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the jock is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new jock.");
+					itype = undergarments.R_JOCK;
+					break;
+				case 11: //Rune Thongs
+				//	outputText(images.showImage("rathazul-craft-ebonweaverunethong"));
+					outputText("The bear takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Konstantin is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging in one of  Konstantin’s racks is a thong. As you inspect it, you notice the black cloth has an oily sheen. ");
+					outputText("Adorning the front is a rune seething with black magic.  ");
+					if (player.hasStatusEffect(StatusEffects.KnowsArouse)) outputText("You blush, recognizing the rune to represent lust.  ");
+					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingram’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the thong is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new thong.");
+					itype = undergarments.R_THONG;
+					break;
 				default:
 					outputText("Something bugged! Please report this bug to Ormael/Aimozg/Oxdeception.");
 					itype = armors.EWJACK_;
 				}
-				//if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
+				if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;
 				inventory.takeItem(itype, KonstantinMainCampMenu);
 			}

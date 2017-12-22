@@ -63,6 +63,7 @@ public class OnikiriSake extends Consumable {
 			}
 			changes++;
 		}
+		if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 		//Sexual changed
 		if ((player.gender == 1 || player.gender == 3) && player.cocks.length > 0 && changes < changeLimit && rand(3) == 0) {
 			var selectedCock:int = -1;

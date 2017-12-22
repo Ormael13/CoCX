@@ -365,6 +365,10 @@ public class PlayerAppearance extends BaseContent {
 		if (cock.cockType == CockTypesEnum.ECHIDNA) {
 			outputText("  It is quite a sight to behold, coming well-equiped with four heads.");
 		}
+		//Red Panda flavor
+		if (cock.cockType == CockTypesEnum.ECHIDNA) {
+			outputText("  It lies protected in a soft, fuzzy sheath.");
+		}
 		//Worm flavor
 		if(player.hasStatusEffect(StatusEffects.Infested))
 			outputText("  Every now and again a slimy worm coated in spunk slips partway out of your [cock], tasting the air like a snake's tongue.");
@@ -747,6 +751,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 		outputText(", arms, hands and fingers.");
 		if (player.skin.base.pattern == AppearanceDefs.PATTERN_ORCA_UNDERBODY) outputText(" However your skin is [skin color] with a [skin color2] underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of an orca.");
+		if (player.skin.base.pattern == AppearanceDefs.PATTERN_RED_PANDA_UNDERBODY) outputText(" However your skin is [skin color] with a [skin color2] underbelly that runs on the underside of your limbs, similar to that of a red panda.");
 	}
 	public function describeGear():void {
 		// story.display("gear");
@@ -980,7 +985,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your " + num2Text(player.legCount) + " digitigrade ");
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("marble");
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("alabaster");
-			outputText(" legs ends up with stone sharp clawed feet. There are three long toes on the front, and a small hind claw on the back.");
+			outputText(" legs end in sharp-clawed stone feet. There are three long toes on the front, and a small hind claw on the back.");
 		}
 		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PLANT_HIGH_HEELS)
 			outputText("  Your " + num2Text(player.legCount) + " perfect lissome legs end in human feet, apart from delicate vines covered in spade-like leaves crawling around them on the whole length.");
@@ -1002,6 +1007,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your " + num2Text(player.legCount) + " perfect lissom legs end in delicate, but agile elven feet allowing you to move gracefully and swiftly.");
 		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_RAIJU)
 			outputText("  You have " + num2Text(player.legCount) + " fluffy, furred legs that look vaguely like kneehigh socks. Your pawed feet end in four thick toes, which serve as your main source of balance. You can walk on them as normally as your old plantigrade legs. A thick strand of darkly colored fur breaks out from your ankles, emulating a bolt of lighting in appearance.");
+		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_RED_PANDA)
+			outputText("  Your " + num2Text(player.legCount) + " legs are equally covered in [skin coat.color] fur, ending on red-panda paws with short claws. They have a nimble and strong build, in case you need to escape from something.");
 		if (player.findPerk(PerkLib.Incorporeality) >= 0)
 			outputText("  Of course, your [legs] are partially transparent due to their ghostly nature."); // isn't goo transparent anyway?
 	}
@@ -1110,7 +1117,10 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  A bushy [skin coat.color] wolf tail sprouts just above your " + assDescript() + ", wagging to and fro whenever you are happy.");
 		}
 		else if (player.tailType == AppearanceDefs.TAIL_TYPE_GARGOYLE) {
-			outputText("  A long spiked tail hang down from just above your " + assDescript() + ". It sways back and forth assisting in keeping your balance.");
+			outputText("  A long spiked tail hangs down from just above your " + assDescript() + ". It sways back and forth assisting in keeping your balance.");
+		}
+		else if (player.tailType == AppearanceDefs.TAIL_TYPE_GARGOYLE_2) {
+			outputText("  A long tail ending with an axe blade on both sides hangs down from just above your " + assDescript() + ". It sways back and forth assisting in keeping your balance.");
 		}
 		else if (player.tailType == AppearanceDefs.TAIL_TYPE_ORCA) {
 			outputText("  A long, powerful Orca tail trails down from your backside, swaying to and fro, always ready to propulse you through the water or smack an opponent on the head. It has a huge fin at the end and a smaller one not so far from your ass.");
@@ -1120,6 +1130,9 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if (player.tailType == AppearanceDefs.TAIL_TYPE_RAIJU) {
 			outputText("  Your silky tail extends out from just above your " + assDescript() + ". Its fur is lovely to the touch and almost glows at the tip, letting others know of your lightning based motif.");
+		}
+		else if (player.tailType == AppearanceDefs.TAIL_TYPE_RED_PANDA) {
+			outputText("  Sprouting from your [ass], you have a long, bushy tail. It has a beautiful pattern of rings in [skin coat.color] fluffy fur. It waves playfully as you walk giving to your step a mesmerizing touch.");
 		}
 	}
 	public function describeArms():void {
@@ -1147,7 +1160,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your ");
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("marble");
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("alabaster");
-			outputText(" arms end up with a pair of stone sharp clawed hand.");
+			outputText(" arms end in stone sharp clawed hands.");
 		}
 		else if (armType == AppearanceDefs.ARM_TYPE_WOLF || armType == AppearanceDefs.ARM_TYPE_FOX)
 			outputText("  Your arms are covered in thick fur ending up with clawed hands with animal like paw pads.");
@@ -1169,6 +1182,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your delicate elven hands are almost supernaturally dexterous allowing you to manipulate objects or cast spells with inhuman agility.");
 		else if (armType == AppearanceDefs.ARM_TYPE_RAIJU)
 			outputText("  Your arms and hands are practically human save for the sharp white claws that have replaced your normal nails.");
+		else if (armType == AppearanceDefs.ARM_TYPE_RED_PANDA)
+			outputText("  Soft, black-brown fluff cover your arms. Your paws have cute, pink paw pads and short claws.");
 		if (player.wingType == AppearanceDefs.WING_TYPE_BAT_ARM ){
 			outputText("  Your arm bones are thin and light in order to allow flight. You have grown a few extra fingers, which allow you to hold various items even with your abnormal hands, albeit at the cost of preventing flight while doing so.");
 		}
@@ -1229,10 +1244,10 @@ public class PlayerAppearance extends BaseContent {
 		else if (wingType == AppearanceDefs.WING_TYPE_GIANT_DRAGONFLY)
 			outputText("  Giant dragonfly wings hang from your shoulders.  At a whim, you could twist them into a whirring rhythm fast enough to lift you off the ground and allow you to fly.");
 		else if (wingType == AppearanceDefs.WING_TYPE_GARGOYLE_LIKE_LARGE) {
-			outputText("  Large stony wings sprout from your shoulders. When unfurled they stretch longer than your arm span, and a single beat of them is all you need to set out toward the sky. They look a bit like ");
+			outputText("  Large stony wings sprout from your shoulders. When unfurled they stretch wider than your arm span, and a single beat of them is all you need to set out toward the sky. They look a bit like ");
 			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] == 1) outputText("bird");
-			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] == 2) outputText("bat’s");
-			outputText(" wings and although they are clearly made of stone they allow you to fly around with excellent aerial agility.");
+			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] == 2) outputText("bat");
+			outputText(" wings and, although they are clearly made of stone, they allow you to fly around with excellent aerial agility.");
 		}
 		else if (wingType == AppearanceDefs.WING_TYPE_PLANT) {
 			outputText("  Three pairs of oily, prehensile phalluses sprout from your shoulders and back. From afar, they may look like innocent vines, but up close, each tentacle contain a bulbous head with a leaking cum-slit, perfect for mass breeding.");
@@ -1472,7 +1487,10 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  A pair of bat ears sit atop your head, always perked up to catch any stray sound.");
 			}
 			if (earType == AppearanceDefs.EARS_VAMPIRE){
-				outputText("  A pair of pointed elfin ears powerful enough to catch even the heartbeat of those around you stick out from your skull");
+				outputText("  A pair of pointed elfin ears powerful enough to catch even the heartbeat of those around you stick out from your skull.");
+			}
+			if (earType == AppearanceDefs.EARS_RED_PANDA){
+				outputText("  Big, white furred, red-panda ears lie atop your head, keeping you well aware to your surroundings.");
 			}
 			//</mod>
 			if (player.gillType == AppearanceDefs.GILLS_FISH)
@@ -1551,6 +1569,9 @@ public class PlayerAppearance extends BaseContent {
 			}
 			if (earType == AppearanceDefs.EARS_VAMPIRE){
 				outputText("  The [hair] on your head is  parted by pointed elfin ears powerful enough to catch even the heartbeat of those around you.")
+			}
+			if (earType == AppearanceDefs.EARS_RED_PANDA) {
+				outputText("  Big, white furred, red-panda ears lie atop your head, keeping you well aware to your surroundings.")
 			}
 			//</mod>
 			if(player.antennae == AppearanceDefs.ANTENNAE_MANTIS)
@@ -1879,6 +1900,10 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  It's covered in [skin coat], making your face looks more unusual.");
 			}
 		}
+		if (faceType == AppearanceDefs.FACE_RED_PANDA) {
+			outputText("  Your face has a distinctive animalistic muzzle, proper from a red-panda, complete with a cute pink nose.");
+			if (player.hasFullCoatOfType(AppearanceDefs.SKIN_COAT_FUR)) outputText("   A coat of soft, [skin coat] colored fur covers your head, with patches of white on your muzzle, cheeks and eyebrows.")
+		}
 		//</mod>
 	}
 public function RacialScores():void {
@@ -2199,6 +2224,10 @@ public function RacialScores():void {
 	}
 	else if (player.raijuScore() >= 1 && player.raijuScore() < 5) outputText("\n<font color=\"#008000\">Half Raiju: " + player.raijuScore() + "</font>");
 	else if (player.raijuScore() < 1) outputText("\n<font color=\"#ff0000\">Half Raiju: 0</font>");
+	if (player.redpandaScore() >= 8) outputText("\n<font color=\"#0000a0\">Red Panda-morph: " + player.redpandaScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Str, +" + (75 * (1 + player.newGamePlusMod())) + " max Spe, -" + (30 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+	else if (player.redpandaScore() >= 4 && player.redpandaScore() < 8) outputText("\n<font color=\"#0000a0\">Half Red Panda-morph: " + player.redpandaScore() + " (+" + (45 * (1 + player.newGamePlusMod())) + " max Spe, +" + (15 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+	else if (player.redpandaScore() >= 1 && player.redpandaScore() < 4) outputText("\n<font color=\"#008000\">Half Red Panda-morph: " + player.redpandaScore() + "</font>");
+	else if (player.redpandaScore() < 1) outputText("\n<font color=\"#ff0000\">Half Red Panda-morph: 0</font>");
 	if (player.rhinoScore() >= 4) outputText("\n<font color=\"#0000a0\">Rhino-morph: " + player.rhinoScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Str, +" + (15 * (1 + player.newGamePlusMod())) + " max Tou, -" + (10 * (1 + player.newGamePlusMod())) + " max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max HP)</font>");
 	else if (player.rhinoScore() >= 1 && player.rhinoScore() < 4) outputText("\n<font color=\"#008000\">Rhino-morph: " + player.rhinoScore() + "</font>");
 	else if (player.rhinoScore() < 1) outputText("\n<font color=\"#ff0000\">Rhino-morph: 0</font>");

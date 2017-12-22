@@ -1019,6 +1019,30 @@ use namespace CoC;
 			}
 		}
 		
+		public function strangeBookOfGolems():void {
+			clearOutput();
+			outputText("This book seems to explain the process of crafting a Gargoyle in length. It seems to imply your friend up there may have been made out from the soul of a willing sacrifice or a long dead person. Will you read it?");
+			menu();
+			addButton(0, "Read", readStrangeBookOfGolems);
+			addButton(1, "Back", templeBasement);
+		}
+		public function readStrangeBookOfGolems():void {
+			clearOutput();
+			outputText("You read the book with keen interest, perhaps you can learn something useful from it.\n\n");
+			outputText("GOLEMANCY THE ART OF SOULCRAFT\n\n");
+			outputText("By Aerin Fowl priest of Marae\n\n");
+			outputText("Golemancy is the art of creating an artificial being from the combination of a statue and a soul. While any soul can give life to a golem, for the purpose of giving it at least minimal intelligence and autonomy, it is recommended to use the soul of a living or deceased humanoid. The most suiting and moral soul for such a purpose is generally the soul of a person near death’s door or a willing sacrifice. ");
+			outputText("Most of the Gargoyle crafted in this way are infused with the soul of pious priests and nun willing to protect the church of Marae for all eternity. Golems knows no hunger or pain but can be destroyed thus freeing their soul back. To prevent such a thing most golem are given the ability to recover by eating raw stone in order to repair themselves magically. To create a golem start by sculpting a suitable vessel for the soul. ");
+			outputText("Once this is done, place the body of the sacrifice or the captured soul of the being you wish to infuse your golem with on a sacred altar. Have the statue, still on its pedestal, carried over to face the altar but at a safe distance in case it accidentally lashes out at you in confusion upon awakening. It is often the case for already dead sacrifices, who are often snatched from the afterlife or have lounged in anguish for months inside the soul gem before being prepared.\n\n");
+			outputText("Finally, bind the golem by making a magic circle with the enchantments you wish to place in order to limit its freedom to whatever purpose you want. Make a second and final magic circle below the pedestal in order to bind the soul to the vessel, but keep in mind blood is needed to craft such a circle. Any blood will do as it is essentially a symbol of life. Keep in mind using anything but blood will ruin the ritual entirely. ");
+			outputText("You will need several additional ingredients: a drake heart flower, some pure honey, powdered coal mixed in the blood and finally a soul gem, ready to be filled with the soul of the sacrifice, if any, with them already touching the golem in a way or another. In the case where the sacrifice is already in the gem make sure the gem touches the statue. Once this is all done you're finally ready to transfer the soul to the golem. ");
+			outputText("Should the sacrifice still be alive, it’s physical body will likely die as its soul is sucked into your creation. There is no turning back once it's done, so make sure the subject is ready physically and psychologically to welcome the change. Stand facing the statue but on the opposite side of the central altar and recite the following arcane word in order to proceed to the transfer.\n\n");
+			outputText("Shira Khrim Almisry Ohm Ak Tar Marae Kann Tharr Shul Elysro An Siryr Ahn Ekatyr Evenar Sethe Omaris.\n\n");
+			outputText("You think you could use this information to perhaps turn yourself into a living weapon in order to defeat the demons with relative ease. The question you should ask yourself however is... is this really what you want?");
+			if (flags[kFLAGS.GARGOYLE_QUEST] == 1) flags[kFLAGS.GARGOYLE_QUEST]++;
+			doNext(templeBasement);
+		}
+		
 		public function makingNewGargoyle():void {
 			if (flags[kFLAGS.ONYX_GENDER] >= 1) makingNewGargoylePart4();
 			else makingNewGargoylePart1();
@@ -1545,9 +1569,11 @@ use namespace CoC;
 				}
 				else {
 					outputText("You think you’ve gathered all you need and proceed to move the statue up from the basement to the cathedral center next to the altar where it ought to be. You ask Sapphire to help you carry it, to which she complies, albeit she throws you several worried looks.");
-					outputText("\n\nAre you sure about this? There's no turning back past this point.");
+					outputText("\n\n<b>Are you sure about this? There's no turning back past this point.</b>");
 					menu();
 					addButton(0, "No", becomingGargoyleNo);
+					//addButton(1, "Yes", becomingGargoyleYes);
+					
 				}
 			}
 			else {
@@ -1566,33 +1592,76 @@ use namespace CoC;
 			clearOutput();
 			outputText("You proceed according to the ritual as described in the book, however a question poses itself. What kind of blood will you use?");
 			menu();
-			addButton(0, "OwnBlood", becomingGargoyleNo);
-			if (player.hasItem(consumables.MINOBLO, 1)) addButton(1, "Minotaur", becomingGargoyleNo);
+			addButton(0, "OwnBlood", becomingGargoyleYesOwnBlood).hint("Your body would need regular intake of raw soulforce.");
+			if (player.hasItem(consumables.MINOBLO, 1)) addButton(1, "Minotaur", becomingGargoyleYesMinotaurBlood).hint("Your body would need regular intake of sexual fluids.");
 			else addButtonDisabled(1, "Minotaur", "Need Minotaur Blood vial for this option");
 		}
 		
-		public function strangeBookOfGolems():void {
+		private function becomingGargoyleYesOwnBlood():void {
 			clearOutput();
-			outputText("This book seems to explain the process of crafting a Gargoyle in length. It seems to imply your friend up there may have been made out from the soul of a willing sacrifice or a long dead person. Will you read it?");
-			menu();
-			addButton(0, "Read", readStrangeBookOfGolems);
-			addButton(1, "Back", templeBasement);
+			player.createPerk(PerkLib.GargoylePure, 0, 0, 0, 0);
+			becomingGargoyleYes2();
 		}
-		public function readStrangeBookOfGolems():void {
+		private function becomingGargoyleYesMinotaurBlood():void {
 			clearOutput();
-			outputText("You read the book with keen interest, perhaps you can learn something useful from it.\n\n");
-			outputText("GOLEMANCY THE ART OF SOULCRAFT\n\n");
-			outputText("By Aerin Fowl priest of Marae\n\n");
-			outputText("Golemancy is the art of creating an artificial being from the combination of a statue and a soul. While any soul can give life to a golem, for the purpose of giving it at least minimal intelligence and autonomy, it is recommended to use the soul of a living or deceased humanoid. The most suiting and moral soul for such a purpose is generally the soul of a person near death’s door or a willing sacrifice. ");
-			outputText("Most of the Gargoyle crafted in this way are infused with the soul of pious priests and nun willing to protect the church of Marae for all eternity. Golems knows no hunger or pain but can be destroyed thus freeing their soul back. To prevent such a thing most golem are given the ability to recover by eating raw stone in order to repair themselves magically. To create a golem start by sculpting a suitable vessel for the soul. ");
-			outputText("Once this is done, place the body of the sacrifice or the captured soul of the being you wish to infuse your golem with on a sacred altar. Have the statue, still on its pedestal, carried over to face the altar but at a safe distance in case it accidentally lashes out at you in confusion upon awakening. It is often the case for already dead sacrifices, who are often snatched from the afterlife or have lounged in anguish for months inside the soul gem before being prepared.\n\n");
-			outputText("Finally, bind the golem by making a magic circle with the enchantments you wish to place in order to limit its freedom to whatever purpose you want. Make a second and final magic circle below the pedestal in order to bind the soul to the vessel, but keep in mind blood is needed to craft such a circle. Any blood will do as it is essentially a symbol of life. Keep in mind using anything but blood will ruin the ritual entirely. ");
-			outputText("You will need several additional ingredients: a drake heart flower, some pure honey, powdered coal mixed in the blood and finally a soul gem, ready to be filled with the soul of the sacrifice, if any, with them already touching the golem in a way or another. In the case where the sacrifice is already in the gem make sure the gem touches the statue. Once this is all done you're finally ready to transfer the soul to the golem. ");
-			outputText("Should the sacrifice still be alive, it’s physical body will likely die as its soul is sucked into your creation. There is no turning back once it's done, so make sure the subject is ready physically and psychologically to welcome the change. Stand facing the statue but on the opposite side of the central altar and recite the following arcane word in order to proceed to the transfer.\n\n");
-			outputText("Shira Khrim Almisry Ohm Ak Tar Marae Kann Tharr Shul Elysro An Siryr Ahn Ekatyr Evenar Sethe Omaris.\n\n");
-			outputText("You think you could use this information to perhaps turn yourself into a living weapon in order to defeat the demons with relative ease. The question you should ask yourself however is... is this really what you want?");
-			if (flags[kFLAGS.GARGOYLE_QUEST] == 1) flags[kFLAGS.GARGOYLE_QUEST]++;
-			doNext(templeBasement);
+			player.createPerk(PerkLib.GargoyleCorrupted, 0, 0, 0, 0);
+			becomingGargoyleYes2();
+		}
+		private function becomingGargoyleYes2():void {
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) {
+				player.skinTone = "light grey";
+				player.hairColor = "light grey";
+			}
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) {
+				player.skinTone = "quartz white";
+				player.hairColor = "quartz white";
+			}
+			player.skin.setBaseOnly({type:AppearanceDefs.SKIN_TYPE_STONE});
+			player.hairType = AppearanceDefs.HAIR_NORMAL;
+			player.faceType = AppearanceDefs.FACE_HUMAN;
+			player.hornType = AppearanceDefs.HORNS_GARGOYLE;
+			player.horns = 12 + rand(4); 
+			//player.armType = AppearanceDefs.ARM_TYPE_GARGOYLE;
+			//player.tailType = AppearanceDefs.TAIL_TYPE_GARGOYLE;
+			//player.tailRecharge = 0;
+			//player.wingType = AppearanceDefs.WING_TYPE_GARGOYLE_LIKE_LARGE;
+			//player.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE;
+			//player.legCount = 2;
+			player.eyeType = AppearanceDefs.EYES_GEMSTONES;
+			player.antennae = AppearanceDefs.ANTENNAE_NONE;
+			player.tongueType = AppearanceDefs.TONGUE_HUMAN;
+			player.earType = AppearanceDefs.EARS_ELFIN;
+			player.gillType = AppearanceDefs.GILLS_NONE;
+			player.rearBody = AppearanceDefs.REAR_BODY_NONE;
+			if (player.hasStatusEffect(StatusEffects.BlackNipples)) player.removeStatusEffect(StatusEffects.BlackNipples);
+			if (player.averageNipplesPerBreast() > 1) player.breastRows[0].nipplesPerBreast = 1;
+			//reducing breast rows to 1 and setting bust cup (if needed)
+			if (player.hasStatusEffect(StatusEffects.Feeder)) {
+				player.removeStatusEffect(StatusEffects.Feeder);
+				player.removePerk(PerkLib.Feeder);
+			}
+			//setting up cock size & balls (if needed)
+			becomingGargoyleYes3();
+		}
+		private function becomingGargoyleYes3():void {
+			outputText("You mix the blood with powdered coal, honey and drakeheart, creating the mixture required to paint the arcanic circles. You draw them around the statue under the worried gaze of Sapphire. Once done, you lay down on the altar, touching the statue with the soul gem and ask Sapphire to recite the words written in the book for you.\n\n");
+			outputText("Sapphire protests for a few seconds, clearly upset by this \"<i>You can't be serious! You're planning to insert your own soul inside a gargoyle? Are you actually attempting suicide? This isn't something one should do so lightly!</i>\"\n\n");
+			outputText("You reply that you will do whatever is needed to defeat the demons and if that means becoming an immortal artificial being, then so be it. Defeated by your determination, Sapphire finally complies as she chants \"<i>Shira Khrim Almisry Ohm Ak Tar Marae Kann Tharr Shul Elysro An Siryr Ahn Ekatyr Evenar Sethe Omaris!</i>\"\n\n");
+			outputText("As she practically screams the last word, your vision fade to black and you lose consciousness.\n\n");
+			outputText("You come to several seconds later and, as you open your eyes, it seems you're sitting on a pedestal, your pedestal. It looks like your previous body turned to ashes on the altar and is no more, so it will be extremely difficult going back to being human, if such a thing is even possible. You flex your arms for a few seconds admiring your perfectly defined form, majestic wings and ");
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("marble");
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("alabaster");
+			outputText(" stone body, strong enough to shatter rocks and solid enough that the sharpest sword will leave you damageless as you’re suddenly rocked over by a terrifying hunger.\n\n");
+			if (player.hasPerk(PerkLib.GargoylePure)) {
+				outputText("Energy! You need energy to stay alive now. As you are masterless, while food used to be your main source of power, you are now a magical construct and Soulforce is what powers you now!\n\n");
+				outputText("<b>Gain perk: Gargoyle - Need to gain sustenance from soulforce to stay alive.</b>\n\n");
+			}
+			else {
+				outputText("Something went really wrong in the ritual. You're starting to crave fluids… any fluids and particularly cum and milk! Without an input of these, you feel you're gonna lose strength and eventually run out of energy, turning into an immobile ordinary statue! Worse yet, lust seems to creep up your mind like an uncontrollable wave. You need sex and you need it now!\n\n");
+				outputText("<b>Gain perk: Corrupted Gargoyle - You need constant intakes of sexual fluids to stay alive.</b>\n\n");
+			}
+			player.createPerk(PerkLib.TransformationImmunity,0,0,0,0);
+			outputText("After the weird feelings subside, you pick up what is your actual pedestal and move it to your camp.\n\n");
 		}
 	}
 }

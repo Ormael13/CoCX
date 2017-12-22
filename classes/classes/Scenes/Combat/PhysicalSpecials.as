@@ -137,7 +137,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd.disable("You do not have enough webbing to shoot right now!");
 			}
 		}
-		if (player.tail.isAny(AppearanceDefs.TAIL_TYPE_SHARK, AppearanceDefs.TAIL_TYPE_LIZARD, AppearanceDefs.TAIL_TYPE_KANGAROO, AppearanceDefs.TAIL_TYPE_DRACONIC, AppearanceDefs.TAIL_TYPE_RACCOON)) {
+		if (player.tail.isAny(AppearanceDefs.TAIL_TYPE_SHARK, AppearanceDefs.TAIL_TYPE_LIZARD, AppearanceDefs.TAIL_TYPE_KANGAROO, AppearanceDefs.TAIL_TYPE_DRACONIC, AppearanceDefs.TAIL_TYPE_RACCOON, AppearanceDefs.TAIL_TYPE_RED_PANDA)) {
 			buttons.add("Tail Whip", tailWhipAttack).hint("Whip your foe with your tail to enrage them and lower their defense!");
 		}
 		if (player.tailType == AppearanceDefs.TAIL_TYPE_SALAMANDER) {

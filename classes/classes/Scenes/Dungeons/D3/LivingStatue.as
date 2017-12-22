@@ -160,7 +160,7 @@ import classes.StatusEffects;
 			else
 			{
 				outputText(" Your equipment flies off into the bushes! You'll have to fight another way. ");
-				player.createStatusEffect(StatusEffects.Disarmed, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.Disarmed, 50, 0, 0, 0);
 				this.createStatusEffect(StatusEffects.Disarmed, 0, 0, 0, 0);
 				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
 				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ATTACK] = player.weaponAttack;

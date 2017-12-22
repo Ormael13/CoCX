@@ -1405,6 +1405,7 @@ import classes.GlobalFlags.*;
 					dynStats("lib", 1);
 				}
 			}
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			if (rand(3) == 0 && changes < changeLimit && player.cocks[player.smallestCockIndex()].length < 12) {
 				outputText("\n\nHeat funnels into your cock as the alcohol flushes through you. Reaching down to inspect it, you find it has grown longer.");
 				player.cocks[player.smallestCockIndex()].length++;

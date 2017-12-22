@@ -169,7 +169,7 @@ public class AbstractSpiderMorph extends Monster
 				player.setWeapon(WeaponLib.FISTS);
 //No longer appears to be used				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ATTACK] = player.weaponAttack;
 //				player.weapon.unequip(player,false,true);
-				player.createStatusEffect(StatusEffects.Disarmed, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.Disarmed, 50, 0, 0, 0);
 			}
 		}
 

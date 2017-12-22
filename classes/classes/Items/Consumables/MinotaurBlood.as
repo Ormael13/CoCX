@@ -96,6 +96,7 @@ public class MinotaurBlood extends Consumable {
 			}
 			changes++;
 		}
+		if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 		//SEXUAL
 		//Boosts ball size MORE than equinum :D:D:D:D:D:D:
 		if (changes < changeLimit && rand(2) == 0 && player.ballSize <= 5 && player.horseCocks() > 0) {

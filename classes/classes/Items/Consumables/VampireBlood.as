@@ -2,6 +2,7 @@ package classes.Items.Consumables {
 import classes.AppearanceDefs;
 import classes.CoC;
 import classes.Items.Consumable;
+import classes.PerkLib;
 
 import coc.xxc.BoundStory;
 
@@ -81,7 +82,8 @@ public class VampireBlood extends Consumable {
         }
         changeLimit = 1;
         changes = 0;
-        for each (var tf:Object in tfArr) {
+        if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
+		for each (var tf:Object in tfArr) {
             if (changes >= changeLimit) break;
             if (rand(tf.Chance? tf.Chance : 3) == 0) {
                 if (tf.ChangeTo != -1 && player[tf.BodyPart] != tf.ChangeTo) {

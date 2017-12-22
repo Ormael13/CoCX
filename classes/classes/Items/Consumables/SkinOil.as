@@ -4,6 +4,7 @@ import classes.EngineCore;
 import classes.Items.Consumable;
 import classes.Items.ConsumableLib;
 import classes.Scenes.SceneLib;
+import classes.PerkLib;
 
 /**
 	 * Skin oils, courtesy of Foxxling.
@@ -24,7 +25,7 @@ import classes.Scenes.SceneLib;
 		}
 		
 		override public function useItem():Boolean {
-			if (game.player.skinTone == _color) {
+			if (game.player.skinTone == _color || player.hasPerk(PerkLib.TransformationImmunity)) {
 				outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the bottle of oil and rubbing", "uncork the bottle of oil and rub") + " the smooth liquid across your body. Once you’ve finished you feel rejuvenated.");
 				EngineCore.fatigue(-10);
 			}

@@ -140,7 +140,21 @@ public function WonSparringFight():void {
 		outputText("\"<i>It's not like I wanted to be praised! Yeah, as if! Even after all this time, your stance is still shaky.. BAAAKA!”</i>\"\n\n");
 		outputText("Chi Chi kicks a rock away in anger and heads back to her training ground.\n\n");
 	}
-	
+	if (flags[kFLAGS.CHI_CHI_LVL_UP] < 5) {
+		flags[kFLAGS.CHI_CHI_DAILY_TRAINING] = 1;
+		if (flags[kFLAGS.CHI_CHI_LVL_UP] < 2) flags[kFLAGS.CHI_CHI_LVL_UP] = 2;
+		else flags[kFLAGS.CHI_CHI_LVL_UP]++;
+	}
+	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2 && flags[kFLAGS.CHI_CHI_LVL_UP] >= 5) {
+		if (flags[kFLAGS.CHI_CHI_DEFEATS_COUNTER] >= 1) flags[kFLAGS.CHI_CHI_DEFEATS_COUNTER]++;
+		else flags[kFLAGS.CHI_CHI_DEFEATS_COUNTER] = 1;
+		if (flags[kFLAGS.CHI_CHI_DEFEATS_COUNTER] == 9 && flags[kFLAGS.CHI_CHI_LVL_UP] == 5) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 2, 54);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 54, 0, 0);
+			flags[kFLAGS.CHI_CHI_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.CHI_CHI_LVL_UP] = 6;
+		}
+	}
 	cleanupAfterCombat();
 }
 
@@ -415,7 +429,7 @@ public function ChiChiCampMainMenu():void {
 	addButton(0, "Appearance", chichiAppearance).hint("Examine Chi Chi's detailed appearance.");
 	addButton(1, "Talk", chichiTalksMenu);
 	addButton(2, "Shop", SoulskilsManualsShop);
-	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(3, "Spar", chichiSparring);
+	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2 && flags[kFLAGS.CHI_CHI_DAILY_TRAINING] < 1) addButton(3, "Spar", chichiSparring);
 	//addButton(4, "Sex", );
 	addButton(14, "Back", camp.campLoversMenu);
 }

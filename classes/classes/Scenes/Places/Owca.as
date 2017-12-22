@@ -238,7 +238,7 @@ private function fightZeDemons(sacrifice:Boolean = true):void {
 	startCombat(new LustyDemons());
 	if (sacrifice) {
 		//Remove weapon
-		player.createStatusEffect(StatusEffects.Disarmed, 0, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.Disarmed, 50, 0, 0, 0);
 		flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
 		player.setWeapon(WeaponLib.FISTS);
 		monster.createStatusEffect(StatusEffects.BowDisabled, 0, 0, 0, 0);

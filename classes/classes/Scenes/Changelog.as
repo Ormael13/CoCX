@@ -30,9 +30,12 @@ package classes.Scenes
 			outputText("-After another 30 ays she will be considered an young adult (18+) and unlock all interactions like: purify/corrupt specific items or sex scenes.\n");
 			outputText("-Incest sex scenes with her req. to have 30+ corruption. For pure PC's it's only posisble to access yuri scene.\n");
 			outputText("-Chi Chi final training added allowing to face her again. TIP: better save game before it as it would affect Chi Chi storyline.\n");
-			outputText("-Chi Chi can finaly visit PC camp...for longer. (for now have only app screen and shop working)\n");
+			outputText("-Chi Chi can finaly visit PC camp...for longer. After finishing all training sessions she will give PC option to fight again with option to agree or decline (which would make PC able to accept it in future when ready). In this second fight when PC win with her (she would use slight different moves and would be slight easier to fight enemy) would be given two options. ");
+			outputText("Leaving her would lead to her death and reciving Master Gloves. Nursing her would lead to...recruitment path that will bring her for good to the camp.\n");
+			outputText("-When in camp her interactions inclused: checking her appearance, talking with her, learning soul skills (if not yet all are learned), sparring (due to her recovery she will only be able spar once a day before she recover to similar power level as during 2nd fight (lvl 58)).\n");
+			outputText("-Whenever PC spar with her each day or not she would be gradula healing back to full health each day. Approximatly time needed to her full recovery is four days. After recovery if option for npc's been in train mode she would have chance to lvl up to lvl 64.\n");
 			outputText("-Reaching 100% affection with Ceani would unlock option to ask her for comming to camp. It req. PC having enough fish supply.\n");
-			outputText("-When in camp Ceani (tbc)\n");
+			outputText("-When in camp Ceani have Appearance, Date and Fuck, Spar (if sparring ring built) and Fishing Contest activities.\n");
 			outputText("-Areas beside forest, lake and desert req. now min. lvl to be found or...meeting cretain cat in forest that can lead PC there.\n");
 			outputText("-Patchouli that lead PC to new areas can be meet in forest and after first time PC will have...few option how to react on enxt meeting as long PC decided to visit new place before and it wasn't wonderland. One of this options lead to brining tied up cat to camp where PC can talk with him, look at him or... feed him specific item.\n");
 			outputText("-Patchouli after his change would become full fledged camp npc under Slaves tab (he is there also right after been brought to camp). PC can still look at her, talk, give some items to change her, have sex or... still explore places or/and wonderland.\n");
@@ -46,10 +49,10 @@ package classes.Scenes
 			outputText("-New camp structure: Fishery. Req. Dam, 300 wood, 200 nails. PC building fishery, at which some of the camp npc's can work (currently only Izma). When npc working at it it would generate 5 fishes per day. But when Ceani is in camp she will eat 5 fishes per day. PC can pick 1 or stack of 10 fresh fishes if there is enough of them in fishery (left after Ceani feeding).\n");
 			outputText("-Camp NPC's that can spar with PC can now slowly over time lvl-up. It's need to first toggle it in Camp Actions menu by chaning those npc's 'mode' from relax to 'training'. At any time it can be switch back to 'relax' as otherwise NPC's will lvl-up till reaching current max lvl they can attain. Some may be worried about it but some of you will gladly welcome those super high lvl sparing partners. ");
 			outputText("Each lvl-up will rise their lvl by 6 (in normal case as some npc's wil have their own lvl-ing pace - vide Evangeline that for a longer time had slight different lvl-up pattern). To cause each NPC to go training PC need beat them in sparring enough times (at start it's only around 3-5 times). But after each lvl-up amount of won fight for their lvl-up's will incease by 1. Also time they training ");
-			outputText("will extend each time starting from around 6-8 hours. IN time NPC are busy training they will be unable to be itneracted so...yeah that mean for some time NPC will be ignoring PC and just training. Thta part aside fact of prevent NPC keep lvl-ing till limit was reason I put toggle on train/relax mode for them. As long NPC not reached req. defeats to trigger training start it won't gon into \n");
-			outputText("'leave me alon I'm training' mood. And later on lvl-up training may take even... days for them. So it may be worth to decide when go between training/relax mode. Maybe in future I will put some ways to shorted training time or maybe not.  Future looks bright with few more npc that can spar joining camp so downtime of some of them shouldn't hurt so much.\n");
-			outputText("-Camp NPC's that can lvl-up: Ember, Isabella, Kiha, Kindra, Etna.\n");
-			outputText("-Current max lvl camp npc's can attain after reaching end of training are: Ember (lvl 62), Isabella (lvl 62), Kiha (lvl 63), Kindra (lvl 63), Etna (lvl 66)\n");
+			outputText("will extend each time starting from around 6-8 hours. During time NPC's are busy training they would be unable to be interacted so...yeah that mean for some time NPC will be ignoring PC and just training. Thta part aside fact of prevent NPC keep lvl-ing till limit was reason I put toggle on train/relax mode for them. As long NPC not reached req. defeats to trigger training start it won't gon into \n");
+			outputText("'leave me alone I'm training' mood. And later on lvl-up training may take even... days for them. So it may be worth to decide when go between training/relax mode. Maybe in future I will put some ways to shorted training time or maybe not.  Future looks bright with few more npc that can spar joining camp so downtime of some of them shouldn't hurt so much.\n");
+			outputText("-Camp NPC's that can lvl-up after joining camp: Ceani, Ember, Isabella, Kiha, Kindra, Chi Chi, Etna.\n");
+			outputText("-Current max lvl camp npc's can attain after reaching end of training are: Ceani (lvl 62), Ember (lvl 62), Isabella (lvl 62), Kiha (lvl 63), Kindra (lvl 63), Chi Chi (lvl 64), Etna (lvl 66)\n");
 			outputText("-Enemy monsters now would be able to make use of gathered wrath. Any monster when using base attack and having 100 or more wrath would use power attack version that would deal 2x more dmg. There will be no diff in text of attack aside enemy wrath dropping by 100. If some enemy would have perk Job: Warrior it will then use either 2x or 3x power attack using 50 or 100 wrath.\n");
 			outputText("-Any PC can now use in limited form Power Attack. Namely just like monsters PC that not have perk Job: Warrior will be still able to use 100 wrath to make 2x stronger melee attack.\n");
 			outputText("-Perk Lifeline will now scale with NG tiers with amount of HP restored (it peak bonus will be reached in NG5+). Perks Bigger Golem Bag 1-6 would now increase pernament golems storage space by 1 when PC get perk Master Golem Maker.\n");
@@ -131,6 +134,12 @@ package classes.Scenes
 			outputText("-All spells costs now would slowly increase when PC spell power increase.\n");
 			outputText("-When Ayane is in camp speed of recovery fatigue when sleeping will be increased by 300% not 200%,\n");
 			outputText("-Flitlock Pistol and Blunderbuss rifle ammo increased from 4 to 6 and 2 to 9 respectively.\n");
+			outputText("-New TF: Red River Root (red panda TF) buyable in Tel'Adre Bakery for 14 gems. Bonuses for (Half) Red-Panda-morph would be for (4)8 pts in racial score: +(0)15 to max Str, +(45)75 to max Spe and +(15)30 to max Int.\n");
+			outputText("-New body part: Red Panda Ears. No prereq.\n");
+			outputText("-New body part: Red Panda Face. Req. Red Panda Ears.\n");
+			outputText("-New body part: Red Panda Arms. Req. Red Panda Tail.\n");
+			outputText("-New body part: Red Panda Legs. Req. Red Panda Arms.\n");
+			outputText("-New body part: Red Panda Tail. No prereq. Having tail will give access to P. Special Tail Whip.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Marae combat stats buffed slightly and she will make better use of her stats for specials in both possible forms (pure and corrupt).\n");
@@ -139,14 +148,21 @@ package classes.Scenes
 			outputText("-Oxdeception cleaning-up of code for Tel'Adre and He'Xin'Dao (nothing that typical player will notce but generaly code is slight less messy due to hard Ox work ^^).\n");
 			outputText("-Changes in code on how monsters stats grown after each PC anscesion. Also each monster now have wisdom stat value added.\n");
 			outputText("-Fixed bugs: lib refunding stat points incorrectly when leveling\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-New event perk: Gargoyle. Gained in ritual to become gargoyle by picking own blood. Effects: \n");
+			outputText("-New event perk: Corrupted Gargoyle. Gained in ritual to become gargoyle by picking minotaur blood. Effects: \n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Bat, Vampire, 
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -183,6 +199,8 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): dodać yuki-onna TF
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

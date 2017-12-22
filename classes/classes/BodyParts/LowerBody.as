@@ -32,6 +32,7 @@ public class LowerBody extends SaveableBodyPart {
 			case AppearanceDefs.LOWER_BODY_TYPE_KANGAROO:
 			case AppearanceDefs.LOWER_BODY_TYPE_LIZARD:
 			case AppearanceDefs.LOWER_BODY_TYPE_RACCOON:
+			case AppearanceDefs.LOWER_BODY_TYPE_RED_PANDA:
 			case AppearanceDefs.LOWER_BODY_TYPE_SALAMANDER:
 				legCount = 2;
 				break;

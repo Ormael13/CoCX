@@ -2450,7 +2450,8 @@ public class Appearance extends Utils
 					[AppearanceDefs.FACE_DEVIL_FANGS, "devil fangs"],
 					[AppearanceDefs.FACE_RAIJU_FANGS, "raiju"],
 					[AppearanceDefs.FACE_BUCKTOOTH, "jabberwocky buck tooths"],
-					[AppearanceDefs.FACE_JABBERWOCKY, "jabberwocky"]
+					[AppearanceDefs.FACE_JABBERWOCKY, "jabberwocky"],
+					[AppearanceDefs.FACE_RED_PANDA, "red-panda"]
 				]
 		);
 		public static const DEFAULT_TONGUE_NAMES:Object = createMapFromPairs(
@@ -2511,7 +2512,8 @@ public class Appearance extends Utils
 					[AppearanceDefs.EARS_GOAT, "goat"],
 					[AppearanceDefs.EARS_ONI, "oni"],
 					[AppearanceDefs.EARS_ELVEN, "elven"],
-					[AppearanceDefs.EARS_WEASEL, "weasel"]
+					[AppearanceDefs.EARS_WEASEL, "weasel"],
+					[AppearanceDefs.EARS_RED_PANDA, "red-panda"]
 				]
 		);
 		public static const DEFAULT_HORNS_NAMES:Object = createMapFromPairs(
@@ -2563,7 +2565,8 @@ public class Appearance extends Utils
 					[AppearanceDefs.ARM_TYPE_DEVIL, "devil"],
 					[AppearanceDefs.ARM_TYPE_ONI, "oni"],
 					[AppearanceDefs.ARM_TYPE_ELF, "elf"],
-					[AppearanceDefs.ARM_TYPE_RAIJU, "raiju"]
+					[AppearanceDefs.ARM_TYPE_RAIJU, "raiju"],
+					[AppearanceDefs.ARM_TYPE_RED_PANDA, "red-panda"]
 				]
 		);
 		public static const DEFAULT_TAIL_NAMES:Object = createMapFromPairs(
@@ -2596,11 +2599,13 @@ public class Appearance extends Utils
 					[AppearanceDefs.TAIL_TYPE_KITSHOO, "kitshoo"],
 					[AppearanceDefs.TAIL_TYPE_MANTIS_ABDOMEN, "mantis abdomen"],
 					[AppearanceDefs.TAIL_TYPE_WOLF, "wolf"],
-					[AppearanceDefs.TAIL_TYPE_GARGOYLE, "gargoyle"],
+					[AppearanceDefs.TAIL_TYPE_GARGOYLE, "mace-shaped gargoyle"],
 					[AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL, "manticore pussytail"],
 					[AppearanceDefs.TAIL_TYPE_ORCA, "orca"],
 					[AppearanceDefs.TAIL_TYPE_YGGDRASIL, "yggdrasil"],
-					[AppearanceDefs.TAIL_TYPE_RAIJU, "raiju"]
+					[AppearanceDefs.TAIL_TYPE_RAIJU, "raiju"],
+					[AppearanceDefs.TAIL_TYPE_RED_PANDA, "red-panda"],
+					[AppearanceDefs.TAIL_TYPE_GARGOYLE_2, "axe-shaped gargoyle"]
 				]
 		);
 		public static const DEFAULT_WING_NAMES:Object = createMapFromPairs(
@@ -2702,7 +2707,8 @@ public class Appearance extends Utils
 					[AppearanceDefs.LOWER_BODY_TYPE_YGG_ROOT_CLAWS, "root feet"],
 					[AppearanceDefs.LOWER_BODY_TYPE_ONI, "oni"],
 					[AppearanceDefs.LOWER_BODY_TYPE_ELF, "elf"],
-					[AppearanceDefs.LOWER_BODY_TYPE_RAIJU, "raiju"]
+					[AppearanceDefs.LOWER_BODY_TYPE_RAIJU, "raiju"],
+					[AppearanceDefs.LOWER_BODY_TYPE_RED_PANDA, "red-panda"]
 				]
 		);
 		// <mod name="Dragon patch" author="Stadler76">

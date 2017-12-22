@@ -201,8 +201,8 @@ public function ceaniCampMainMenu():void {
 	addButton(0, "Appearance", ceaniAppearance).hint("Examine Ceani detailed appearance.");
 	//addButton(1, "Talk", );
 	addButton(2, "Date and Fuck", campInteractionsDateAndFuck);
-	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(3, "Spar", sparringWithCeani);
-	if (flags[kFLAGS.CEANI_DAILY_TRAINING] < 1) addButton(4, "Fishing Contest", fishingContestWithCeani);
+	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2 && (flags[kFLAGS.CEANI_DAILY_TRAINING] == 0 || flags[kFLAGS.CEANI_DAILY_TRAINING] == 1)) addButton(3, "Spar", sparringWithCeani);
+	if (flags[kFLAGS.CEANI_DAILY_TRAINING] < 2) addButton(4, "Fishing Contest", fishingContestWithCeani);
 	addButton(14, "Back", camp.campLoversMenu);
 }
 
@@ -570,7 +570,8 @@ public function fishingContestWithCeani():void
 	outputText(". You feel energised by the activity as if you had a full session of training definitively improving your speed.\n\n");
 	player.dynStats("spe", 2);
 	player.refillHunger(100);
-	flags[kFLAGS.CEANI_DAILY_TRAINING] = 1;
+	if (flags[kFLAGS.CEANI_DAILY_TRAINING] < 1) flags[kFLAGS.CEANI_DAILY_TRAINING] = 2;
+	if (flags[kFLAGS.CEANI_DAILY_TRAINING] == 1) flags[kFLAGS.CEANI_DAILY_TRAINING] = 3;
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -578,7 +579,7 @@ public function sparringWithCeani():void
 {
 	clearOutput();
 	outputText("You ask the Orca morph if she would mind sparring with you.\n\n");
-	outputText("\"<i>I don’t want to hurt you and…</i>\"\n\n");
+	outputText("\"<i>I don’t want to hurt you and...</i>\"\n\n");
 	outputText("You tell her that you'll be using sparring weapons of course no need for you two to wound each others more than necessary.\n\n");
 	outputText("\"<i>Well ok fine [name], but you were warned. I may look like a gentle girl but I can actually pack a punch.</i>\"\n\n");
 	outputText("The two of you head to the ring and Ceani readies her wooden sparring harpoon taking on a menacing stance. Now that you think of it was it really such a good idea?\n\n");
@@ -587,12 +588,31 @@ public function sparringWithCeani():void
 public function sparringWithCeaniWon():void
 {
 	clearOutput();
-	
+	outputText("Ceani kneels to the ground to admit defeat.\n\n");
+	outputText("\"<i>Wow [name] your way stronger then you look! Had I been any less tough or smaller you could have broke some of my bones. I'll have to be more careful next time. Care to help me back to my bedroll? I think I will need a nap...</i>\"\n\n");
+	outputText("You help her back up and walk her off to her bedroll. She thanks you and lays down to rest for the day. Its unlikely the two of you will be able to spar again before tomorrow anyway.\n\n");
+	if (flags[kFLAGS.CEANI_DAILY_TRAINING] < 1) flags[kFLAGS.CEANI_DAILY_TRAINING] = 1;
+	if (flags[kFLAGS.CEANI_DAILY_TRAINING] == 2) flags[kFLAGS.CEANI_DAILY_TRAINING] = 3;
+	if (flags[kFLAGS.CEANI_LVL_UP] < 3) flags[kFLAGS.CEANI_LVL_UP]++;/*		zmienić potem na < 4 zamiast < 3
+	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2 && flags[kFLAGS.CEANI_LVL_UP] >= 4) {
+		if (flags[kFLAGS.CEANI_DEFEATS_COUNTER] >= 1) flags[kFLAGS.CEANI_DEFEATS_COUNTER]++;
+		else flags[kFLAGS.CEANI_DEFEATS_COUNTER] = 1;
+		if (flags[kFLAGS.CEANI_DEFEATS_COUNTER] == 11 && flags[kFLAGS.CHI_CHI_LVL_UP] == 4) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 3, 66);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 66, 0);
+			flags[kFLAGS.CEANI_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.CEANI_LVL_UP] = 5;
+		}
+	}*/
 }
 public function sparringWithCeaniLost():void
 {
 	clearOutput();
-	
+	outputText("You put a kneel down in defeat. Wow she's way tougher than she looks.\n\n");
+	outputText("\"<i>Oh my gosh! Wow, I’m so sorry! Are you hurt [name]! Gah I knew I should have held back!!!</i>\"\n\n");
+	outputText("It’s all ok what's the most hurt right now is your pride. It'll heal with time. Ceani still takes it upon herself to carry you back all the way to her sleeping bag in order to bandage any wounds you may have. Oh well, she might be a fierce warrior but she sure is a caring girlfriend.\n\n");
+	HPChange(player.maxHP() * 0.5, false);
+	doNext(camp.returnToCampUseFourHours);
 }
 
 	}

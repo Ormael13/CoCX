@@ -1808,6 +1808,8 @@ public class PerkLib
 				"Grants a 5 point damage bonus to dick-based tease attacks.");
 		public static const Cornucopia:PerkType = mk("Cornucopia", "Cornucopia",
 				"Vaginal and Anal capacities increased by 30.");
+		public static const DemonicLethicite:PerkType = mk("Demonic Lethicite", "Demonic Lethicite",
+				"Improves soulforce and makes you more demonic.");//Effects: maxSoulforce += lib; +1 demonscore; 10 min corruption
 		public static const ElvenBounty:ElvenBountyPerk = new ElvenBountyPerk();
 		public static const FerasBoonAlpha:PerkType = mk("Fera's Boon - Alpha", "Fera's Boon - Alpha",
 				"Increases the rate your cum builds up and cum production in general.");
@@ -1821,6 +1823,10 @@ public class PerkLib
 				"Keeps your pussy permanently gaped and increases pregnancy speed.");
 		public static const FireLord:PerkType = mk("Fire Lord", "Fire Lord",
 				"Akbal's blessings grant the ability to breathe burning green flames.");
+		public static const GargoyleCorrupted:PerkType = mk("Corrupted Gargoyle", "Corrupted Gargoyle",
+				"You need constant intakes of sexual fluids to stay alive.");
+		public static const GargoylePure:PerkType = mk("Gargoyle", "Gargoyle",
+				"Need to gain sustenance from soulforce to stay alive.");
 		public static const GclassHeavenTribulationSurvivor:PerkType = mk("G class Heaven Tribulation Survivor", "G class Heaven Tribulation Survivor",
 				"You have survived second trial on cultivation path: G class Heaven Tribulation.");
 		public static const HclassHeavenTribulationSurvivor:PerkType = mk("H class Heaven Tribulation Survivor", "H class Heaven Tribulation Survivor",
@@ -1849,19 +1855,19 @@ public class PerkLib
 				"Grants additional evasion chances while wearing Raphael's red bodysuit.");
 		public static const OmnibusGift:PerkType = mk("Omnibus' Gift", "Omnibus' Gift",
 				"Increases minimum lust but provides some lust resistance.");
-		public static const DemonicLethicite:PerkType = mk("Demonic Lethicite", "Demonic Lethicite",
-				"Improves soulforce and makes you more demonic.");//Effects: maxSoulforce += lib; +1 demonscore; 10 min corruption
-		public static const ProductivityDrugs:PerkType = new ProductivityDrugsPerk();
 		public static const OneTrackMind:PerkType = mk("One Track Mind", "One Track Mind",
 				"Your constant desire for sex causes your sexual organs to be able to take larger insertions and disgorge greater amounts of fluid.");
 		public static const PilgrimsBounty:PerkType = mk("Pilgrim's Bounty", "Pilgrim's Bounty",
 				"Causes you to always cum as hard as if you had max lust.");
+		public static const ProductivityDrugs:PerkType = new ProductivityDrugsPerk();
 		public static const PureAndLoving:PerkType = mk("Pure and Loving", "Pure and Loving",
 				"Your caring attitude towards love and romance makes you slightly more resistant to lust and corruption.");
 		public static const SensualLover:PerkType = mk("Sensual Lover", "Sensual Lover",
 				"Your sensual attitude towards love and romance makes your tease ability slightly more effective.");
 		public static const SoulSense:PerkType = mk("Soul Sense", "Soul Sense",
 				"Your strong affinity toward soullforce helped to denvelop another sense called 'Soul Sense' by a fellow soul cultivators.");
+		public static const TransformationImmunity:PerkType = mk("Transformation immunity", "Transformation immunity",
+				"As a magical construct you are immune to all effects that change the body of living beings, including most transformatives on Mareth (work as the regular transformative resistance except it reduce the odds of getting a body part tfed to 0 although score increasers do still works).");
 		public static const Whispered:PerkType = mk("Whispered", "Whispered",
 				"Akbal's blessings grant limited telepathy that can induce fear.");
 				

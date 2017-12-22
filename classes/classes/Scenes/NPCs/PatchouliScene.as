@@ -355,7 +355,7 @@ package classes.Scenes.NPCs
 				outputText(". However the color of her fur is clearly unnatural. Striped black on a background of purple, Patchoulie’s fur clearly does not belong on any normal cat. Her hair which used to be of the same messed up color as her fur are now divided between strands of platinum " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + " and purple, like someone whos head would feature on a deck of cards. ");
 				outputText("Her fur is hardly the only thing ‘unnatural’ about her as she almosts smile constantly, not just once in awhile, with the most unsettlingly lewd grin she can muster. Patchoulie’s latest joy of late is to make you as emotionally uncomfortable and guilty as she can before sex. She’s currently laid back on a tree branch, her green cat eyes observing you with interest, her tail twitching every now and then with the infinite patience of someone up to no good.\n\n");
 				outputText("\"<i>Nya, having a good view [name]? Feel free to admire me all you like I reaaaaally love being looked at. Especially when it's by you. Oh you are such an irredeemable pervert.</i>\"\n\n");
-				outputText("Gosh the worst is she’s bloody right. You indeed have been having short glances at her " + Appearance.breastCup(flags[kFLAGS.PATCHOULI_CUP_SIZE]) + " breast and constantly dripping pussy");
+				outputText("Gosh the worst is she’s bloody right. You indeed have been having short glances at her " + Appearance.breastCup(flags[kFLAGS.PATCHOULI_CUP_SIZE]) + " breasts and constantly dripping pussy");
 				if (flags[kFLAGS.PATCHOULI_COCK] > 0) {
 					outputText(", what of her " + flags[kFLAGS.PATCHOULI_COCK] + " inch ");
 					if (flags[kFLAGS.PATCHOULI_COCK_TYPE] == 1) outputText("human");
@@ -721,7 +721,7 @@ package classes.Scenes.NPCs
 		}
 		public function patchouleGiveHairDyeRainbow():void {
 			clearOutput();
-			player.destroyItems(consumables.RED_DYE, 1);
+			player.destroyItems(consumables.RAINDYE, 1);
 			flags[kFLAGS.PATCHOULI_HAIR_COLOR] = "rainbow";
 			outputText("You ask Patchoulie to coat her hair with the bottle and she comply. Her hairs turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
 			doNext(camp.returnToCampUseOneHour);

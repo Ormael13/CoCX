@@ -58,6 +58,7 @@ public class AppearanceDefs {
     public static const PATTERN_BATTLE_TATTOO:int                                      =     5;
     public static const PATTERN_SPOTTED:int                                            =     6;
     public static const PATTERN_LIGHTNING_SHAPED_TATTOO:int                            =     7;
+    public static const PATTERN_RED_PANDA_UNDERBODY:int                                =     8;
 
 // hairType
     public static const HAIR_NORMAL:int                                                =     0;
@@ -117,6 +118,7 @@ public class AppearanceDefs {
     public static const FACE_VAMPIRE:int                                                =   34;
     public static const FACE_BUCKTOOTH:int                                            	=   35;
     public static const FACE_JABBERWOCKY:int                                            =   36;
+    public static const FACE_RED_PANDA:int                                            	=   37;
 
 // tongueType
     public static const TONGUE_HUMAN:int                                                =   0;
@@ -144,6 +146,7 @@ public class AppearanceDefs {
     public static const EYES_ELF:int	                          	                    =  13;
     public static const EYES_RAIJU:int	                          	                    =  14;
     public static const EYES_VAMPIRE:int                                                =  15;
+    public static const EYES_GEMSTONES:int                                              =  16;
 
 // earType
     public static const EARS_HUMAN:int                                                  =   0;
@@ -175,6 +178,7 @@ public class AppearanceDefs {
     public static const EARS_WEASEL:int                                                 =  26;
     public static const EARS_BAT:int                                                    =  27;
     public static const EARS_VAMPIRE:int                                                =  28;
+    public static const EARS_RED_PANDA:int                                              =  29;
 
 // hornType
     public static const HORNS_NONE:int                                                  =   0;
@@ -196,6 +200,7 @@ public class AppearanceDefs {
     public static const ANTENNAE_NONE:int                                               =   0;
     public static const ANTENNAE_MANTIS:int												=	1;
     public static const ANTENNAE_BEE:int                                                =   2;
+    public static const ANTENNAE_COCKATRICE:int                                         =   3;
 
 // gillType
     public static const GILLS_NONE:int                                                  =   0;
@@ -227,6 +232,7 @@ public class AppearanceDefs {
     public static const ARM_TYPE_ONI:int												=  20;
     public static const ARM_TYPE_ELF:int												=  21;
     public static const ARM_TYPE_RAIJU:int												=  22;
+    public static const ARM_TYPE_RED_PANDA:int											=  23;
 
 // clawType
     public static const CLAW_TYPE_NORMAL:int                                            =   0;
@@ -273,6 +279,8 @@ public class AppearanceDefs {
     public static const TAIL_TYPE_ORCA:int                                  	  		=  31;
     public static const TAIL_TYPE_YGGDRASIL:int                                  	  	=  32;
     public static const TAIL_TYPE_RAIJU:int                                  	  		=  33;
+    public static const TAIL_TYPE_RED_PANDA:int                                  	  	=  34;
+    public static const TAIL_TYPE_GARGOYLE_2:int                                    	=  35;
 
 // wingType
     public static const WING_TYPE_NONE:int                                              =   0;
@@ -345,6 +353,7 @@ public class AppearanceDefs {
     public static const LOWER_BODY_TYPE_ONI:int											=  39;
     public static const LOWER_BODY_TYPE_ELF:int											=  40;
     public static const LOWER_BODY_TYPE_RAIJU:int										=  41;
+    public static const LOWER_BODY_TYPE_RED_PANDA:int									=  42;
 
 // rearBody
     public static const REAR_BODY_NONE:int                                              =   0;

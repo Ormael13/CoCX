@@ -1948,7 +1948,7 @@ public static const UNKNOWN_FLAG_NUMBER_01939:int                               
 public static const UNKNOWN_FLAG_NUMBER_01940:int                                   = 1940;
 public static const UNKNOWN_FLAG_NUMBER_01941:int                                   = 1941;
 public static const UNKNOWN_FLAG_NUMBER_01942:int                                   = 1942;
-public static const UNKNOWN_FLAG_NUMBER_01943:int                                   = 1943;
+public static const CHI_CHI_DEFEATS_COUNTER:int                                   	= 1943;
 public static const ISABELLA_DEFEATS_COUNTER:int                                   	= 1944;
 public static const ISABELLA_LVL_UP:int                                   			= 1945;
 public static const KIHA_DEFEATS_COUNTER:int                                   		= 1946;
@@ -2432,7 +2432,7 @@ public static const ETNA_LVL_UP:int                             			        = 242
 public static const ETNA_DAILY_VENOM_VIAL:int                   	                = 2424;
 public static const KONSTANTIN_FOLLOWER:int                                   		= 2425;
 public static const KONSTANTIN_SERVICES:int                                   		= 2426;
-public static const NPC4_02427:int                                   = 2427;
+public static const KONSTANTIN_02427:int                                   = 2427;
 public static const RANGIKU_AFFECTION:int                                   		= 2428;
 public static const RANGIKU_FOLLOWER:int                                   			= 2429;
 public static const RANGIKU_LVL_UP:int                                   			= 2430;
@@ -2578,7 +2578,7 @@ public static const SHARK_OR_TIGERSHARK_GIRL:int                                
 public static const PATCHOULI_HAIR_COLOR:int                                   		= 2570;
 public static const PATCHOULI_COCK_TYPE:int                                   		= 2571;
 public static const GOO_GIRLS_AND_GREEN_SLIMES:int                                  = 2572;
-public static const UNKNOWN_FLAG_NUMBER_02573:int                                   = 2573;
+public static const MINO_CHEF_TALKED_RED_RIVER_ROOT:int                             = 2573;
 public static const UNKNOWN_FLAG_NUMBER_02574:int                                   = 2574;
 public static const UNKNOWN_FLAG_NUMBER_02575:int                                   = 2575;
 public static const UNKNOWN_FLAG_NUMBER_02576:int                                   = 2576;

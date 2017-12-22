@@ -1176,33 +1176,48 @@ private function rathazulShopMenu():void {
 	addButton(14, "Back", returnToRathazulMenu);
 }
 //Hair dyes
-private function buyDyes():void {
-	spriteSelect(49);
+private function buyDyes(fromPage2:Boolean = false):void {
 	clearOutput();
-	outputText("Rathazul smiles and pulls forth several vials of colored fluids.  Which type of dye would you like?");
-	outputText("\n\n<b>(-50 Gems)</b>");
-	player.gems -= 50;
-	statScreenRefresh();
+	if (!fromPage2) {
+		spriteSelect(49);
+		outputText("Rathazul smiles and pulls forth several vials of colored fluids.  Which type of dye would you like?");
+		outputText("\n\n<b>(-50 Gems)</b>");
+		player.gems -= 50;
+		statScreenRefresh();
+	}
 	menu();
 	addButton(0, "Auburn", buyDye, consumables.AUBURND);
 	addButton(1, "Black", buyDye, consumables.BLACK_D);
 	addButton(2, "Blond", buyDye, consumables.BLOND_D);
 	addButton(3, "Brown", buyDye, consumables.BROWN_D);
-	addButton(4, "Red", buyDye, consumables.RED_DYE);
-	addButton(5, "White", buyDye, consumables.WHITEDY);
-	addButton(6, "Gray", buyDye, consumables.GRAYDYE);
+	addButton(5, "Red", buyDye, consumables.RED_DYE);
+	addButton(6, "White", buyDye, consumables.WHITEDY);
+	addButton(7, "Gray", buyDye, consumables.GRAYDYE);
 	if (player.statusEffectv2(StatusEffects.MetRathazul) >= 8) {
-		addButton(7, "Blue", buyDye, consumables.BLUEDYE);
-		addButton(8, "Green", buyDye, consumables.GREEN_D);
-		addButton(9, "Orange", buyDye, consumables.ORANGDY);
-		addButton(10, "Purple", buyDye, consumables.PURPDYE);
-		addButton(11, "Pink", buyDye, consumables.PINKDYE);
-	}
-	if (player.statusEffectv2(StatusEffects.MetRathazul) >= 12) {
-		addButton(12, "Rainbow", buyDye, consumables.RAINDYE);
+		addButton(4, "Next", buyDyesPage2);
+		addButton(8, "Blue", buyDye, consumables.BLUEDYE);
+		addButton(10, "Green", buyDye, consumables.GREEN_D);
+		addButton(11, "Orange", buyDye, consumables.ORANGDY);
+		addButton(12, "Purple", buyDye, consumables.PURPDYE);
+		addButton(13, "Pink", buyDye, consumables.PINKDYE);
 	}
 	addButton(14, "Nevermind", buyDyeNevermind);
 }
+private function buyDyesPage2():void {
+	clearOutput();
+	if (player.statusEffectv2(StatusEffects.MetRathazul) < 8) { // Failsafe, should probably never happen (Stadler76)
+		buyDyes(true);
+		return;
+	}
+	spriteSelect(49);
+	menu();
+	addButton(0, "Russet", buyDye, consumables.RUSSDYE);
+	if (player.statusEffectv2(StatusEffects.MetRathazul) >= 12) {
+		addButton(1, "Rainbow", buyDye, consumables.RAINDYE);
+	}
+	addButton(4, "Previous", buyDyes, true);
+	addButton(14, "Nevermind", buyDyeNevermind);
+ }
 
 private function buyDye(dye:ItemType):void {
 	spriteSelect(49);

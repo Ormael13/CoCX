@@ -44,6 +44,7 @@ public class ManticoreVenom extends Consumable {
 			dynStats("cor", 1);
 			changes++;
 		}
+		if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 		//Sexual changed
 		if (player.gender == 2 || (player.gender == 3 && player.mf("m", "f") == "f")) {
 			var boobsGrew:Boolean = false;

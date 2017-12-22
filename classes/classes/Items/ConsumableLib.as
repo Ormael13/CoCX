@@ -41,6 +41,7 @@ public final class ConsumableLib extends BaseContent
 		public const RAINDYE:HairDye = new HairDye("RainDye", "Rainbow", 100);
 		public const RED_DYE:HairDye = new HairDye("Red Dye", "Red",	DEFAULT_VALUE);
 		public const WHITEDY:HairDye = new HairDye("WhiteDy", "White",	DEFAULT_VALUE);
+		public const RUSSDYE:HairDye = new HairDye("RussetD", "Russet",	DEFAULT_VALUE);
 
 		//SKIN OILS & BODY LOTIONS
 		public const DARK_OL:SkinOil = new SkinOil("DarkOil", "Dark");
@@ -241,6 +242,7 @@ public final class ConsumableLib extends BaseContent
 		public const PRFRUIT:SimpleConsumable = mk("PrFruit", "PrFruit", "a purple fruit", 6, "This sweet-smelling produce looks like an eggplant, but feels almost squishy, and rubbery to the touch. Holding it to your ear, you think you can hear some fluid sloshing around inside.", m.purpleFruitEssrayle);
 		public const PROBOVA:SimpleConsumable = mk("ProBova", "ProBova", "a bottle containing a misty fluid labeled \"ProBova\"", 6, "This cloudy potion has been enhanced by the alchemist Lumi to imbue its drinker with cow-like attributes.", curry(m.laBova, true, true));
 		public const PURHONY:BeeHoney			= new BeeHoney(true, false);
+		public const RDRROOT:SimpleConsumable = mk("RdRRoot", "R.R.Root", "a red river root", 14, "A long, odd shaped root. It smells spicy but surprisingly tasty. Eating it would supposedly alter your body in unknown ways.", m.redRiverRoot);
 		public const REDVIAL:VampireBlood = new VampireBlood();
 		public const REPTLUM:SimpleConsumable = mk("Reptlum", "Reptilum", "a vial of Reptilum", 6, "This is a rounded bottle with a small label that reads, \"<i>Reptilum</i>\".  It is likely this potion is tied to reptiles in some way.", m.reptilum);
 		public const RINGFIG:SimpleConsumable = mk("RingFig", "RingFig", "a ringtail fig", 6, "A dried fig with two lobes and thin dark rings just below its stem.  The skin is wrinkly and it looks vaguely like a bulging scrotum.", m.ringtailFig);

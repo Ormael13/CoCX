@@ -108,6 +108,7 @@ public final class Mutations extends MutationsHelper
 			if (player.cor > 33 && player.cor <= 66) outputText("reminding you of something you just can't place.");
 			if (player.cor > 66) outputText("deliciously sinful in all the right ways.");
 			if (player.cor >= 90) outputText("  You're sure it must be distilled from the cum of an incubus.");
+			if (player.findPerk(PerkLib.TransformationImmunity) < 0) {
 			//Lowlevel changes
 			if (rando < 50) {
 				if (player.cocks.length == 1) {
@@ -258,6 +259,7 @@ public final class Mutations extends MutationsHelper
 			}
 			//Demonic changes - higher chance with higher corruption.
 			if (rand(40) + player.cor / 3 > 35 && tainted) demonChanges(player);
+			}
 			if (rand(4) == 0 && tainted) outputText(player.modFem(5, 2));
 			if (rand(4) == 0 && tainted) outputText(player.modThickness(30, 2));
 			player.refillHunger(10);
@@ -404,6 +406,7 @@ public final class Mutations extends MutationsHelper
 			}
 			if (tainted) dynStats("spe", 1, "lus", 3, "cor", 1);
 			else dynStats("spe", 1, "lus", 3);
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//Breast growth (maybe cock reduction!)
 			if (rando <= 75) {
 				//Temp stores the level of growth...
@@ -607,6 +610,7 @@ public final class Mutations extends MutationsHelper
 				outputText("\n\nYou feel dumber.");
 				changes++;
 			}
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//Male Stuff
 			if (player.cocks.length > 0 && rand(2) == 0 && changes < changeLimit) {
 				var selectedCockValue:int = -1; //Changed as selectedCock and i caused duplicate var warnings
@@ -1042,6 +1046,7 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//if(type != 2 && type != 4 && type != 5) outputText("\n");
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//Double Pepper!
 			//Xforms/grows dicks to make you have two dogcocks
 			if (type == 2) {
@@ -1716,6 +1721,7 @@ public final class Mutations extends MutationsHelper
 				else dynStats("cor", 0);
 				changes++;
 			}
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//Makes your balls biggah! (Or cummultiplier higher if futa!)
 			if (rand(1.5) == 0 && changes < changeLimit && player.balls > 0) {
 				player.ballSize++;
@@ -1803,6 +1809,7 @@ public final class Mutations extends MutationsHelper
 				dynStats("cor", temp + 2);
 				changes++;
 			}
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//NEW BALLZ
 			if (player.balls < 4) {
 				if (player.balls > 0) {
@@ -2619,6 +2626,7 @@ public final class Mutations extends MutationsHelper
 				if (temp < 0) temp = 0;
 				dynStats("cor", temp / 10);
 			}
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//Sex bits - Duderiffic
 			if (player.cocks.length > 0 && rand(2) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
 				//If the player has at least one dick, decrease the size of each slightly,
@@ -3198,6 +3206,7 @@ public final class Mutations extends MutationsHelper
 				if (player.tou > 70) dynStats("tou", -1);
 				if (player.tou > 90) dynStats("tou", -2);
 			}
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//antianemone corollary:
 			if (changes < changeLimit && player.hairType == 4 && rand(2) == 0) {
 				//-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
@@ -3703,6 +3712,7 @@ public final class Mutations extends MutationsHelper
 				if (player.spe < 40) outputText("  Of course, you're nowhere near as fast as that.");
 				changes++;
 			}
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//Removes wings
 			if (!InCollection(player.wingType, AppearanceDefs.WING_TYPE_NONE, AppearanceDefs.WING_TYPE_GARGOYLE_LIKE_LARGE) && rand(3) == 0 && changes < changeLimit) {
 				removeWings();
@@ -3836,6 +3846,7 @@ public final class Mutations extends MutationsHelper
 				outputText("\n\nYour body and skin both thicken noticeably.  You pinch your [skin.type] experimentally and marvel at how much tougher it has gotten.");
 				changes++;
 			}
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//Snake tounge
 			if (changes == 0 && player.tongueType != AppearanceDefs.TONGUE_SNAKE && player.wingType != AppearanceDefs.WING_TYPE_GARGOYLE_LIKE_LARGE && rand(3) == 0 && changes < changeLimit) {
 				if (player.tongueType == AppearanceDefs.TONGUE_HUMAN) outputText("\n\nYour taste-buds start aching as they swell to an uncomfortably large size. Trying to understand what in the world could have provoked such a reaction, you bring your hands up to your mouth, your tongue feeling like it's trying to push its way past your lips. The soreness stops and you stick out your tongue to try and see what would have made it feel the way it did. As soon as you stick your tongue out you realize that it sticks out much further than it did before, and now appears to have split at the end, creating a forked tip. The scents in the air are much more noticeable to you with your snake-like tongue.");
@@ -4258,6 +4269,7 @@ public final class Mutations extends MutationsHelper
 			clearOutput();
 			outputText("You shovel the stuff into your face, not sure WHY you're eating it, but once you start, you just can't stop.  It tastes incredibly bland, and with a slight hint of cheese.");
 			player.refillHunger(20);
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			if (player.humanScore() > 6) {
 				outputText("\n\nYou blink and the world twists around you.  You feel more like yourself than you have in a while, but exactly how isn't immediately apparent.  Maybe you should take a look at yourself?");
 			}
@@ -4631,6 +4643,7 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//Sexual changes would go here if I wasn't a tard.
 			//Heat
 			if (rand(4) == 0 && changes < changeLimit)
@@ -4920,6 +4933,7 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//Sexual Changes:
 			//-Lizard dick - first one
 			if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
@@ -5285,6 +5299,7 @@ public final class Mutations extends MutationsHelper
 				dynStats("str", 1);
 				changes++;
 			}
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//Sexual Changes:
 			//-Lizard dick - first one
 			if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
@@ -5535,6 +5550,7 @@ public final class Mutations extends MutationsHelper
 				outputText("\n\nYou feel a little weaker, but maybe it's just the liqueur.");
 			}
 
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//Sexual Changes:
 			//-Lizard dick - first one
 			if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
@@ -5929,6 +5945,7 @@ public final class Mutations extends MutationsHelper
 				}
 			}
 
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//De-wettification of cunt (down to 3?)!
 			if (player.wetness() > 3 && changes < changeLimit && rand(3) == 0) {
 				//Just to be safe
@@ -6160,6 +6177,7 @@ public final class Mutations extends MutationsHelper
 				else outputText("\n\nYou feel somewhat lighter, but consequently more fragile.  Perhaps your bones have changed to be more harpy-like in structure?");
 				dynStats("tou", -1);
 			}
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//antianemone corollary:
 			if (changes < changeLimit && player.hairType == 4 && rand(2) == 0) {
 				//-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
@@ -6513,6 +6531,7 @@ public final class Mutations extends MutationsHelper
 				else outputText("\n\nYou lose track of everything as you eat, staring at the bugs crawling across the ground.  After a while you notice the dull taste of saliva in your mouth and realize you've been sitting there, chewing the same mouthful for five minutes.  You vacantly swallow and take another bite, then go back to staring at the ground.  Was there anything else to do today?");
 				dynStats("int", -1);
 			}
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//****************
 			//Appearance Effects:
 			//****************
@@ -6747,6 +6766,7 @@ public final class Mutations extends MutationsHelper
 				dynStats("str", -1);
 				changes++;
 			}
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//****************
 			//Sexual Changes
 			//****************
@@ -7184,6 +7204,7 @@ public final class Mutations extends MutationsHelper
 				if (player.lib < 50) dynStats("lib", 1);
 				changes++;
 			}
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//Effect script a:  (human wang)
 			if (player.hasCock() && changes < changeLimit) {
 				if (rand(3) == 0 && player.cocks[0].cockType != CockTypesEnum.HUMAN) {
@@ -7256,6 +7277,7 @@ public final class Mutations extends MutationsHelper
 				if (player.sens < 40) dynStats("sen", 2);
 				changes++;
 			}
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//Sexual
 			if (player.cockTotal() > 0 && player.biggestCockArea() > 6 && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYour " + player.cockDescript(0) + " begins to tingle as it shrinks to a smaller size.");
@@ -7384,6 +7406,7 @@ public final class Mutations extends MutationsHelper
 				if (player.sens < 40) dynStats("sen", 1);
 				changes++;
 			}
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//Sexual
 			if (player.vaginas.length > 0 && player.breastRows[0].breastRating < 7 && changes < changeLimit && rand(3) == 0) {
 				player.growTits(1 + rand(2), 1, false, 3);
@@ -7533,6 +7556,7 @@ public final class Mutations extends MutationsHelper
 			//-always increases lust by a function of sensitivity
 			//"The tingling of the tentacle
 
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//physical changes:
 			//- may randomly remove bee abdomen, if present; always checks and does so when any changes to hair might happen
 			if (rand(4) == 0 && changes < changeLimit && player.tailType == AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN) {
@@ -9891,6 +9915,7 @@ public final class Mutations extends MutationsHelper
 				outputText(player.modFem(0, 3 + rand(5)));
 			}
 			
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//Sexual Changes:
 			//FEMALE
 			if (player.gender == 2 || player.gender == 3) {
@@ -10269,6 +10294,7 @@ public final class Mutations extends MutationsHelper
 			clearOutput();
 			outputText("The ink taste salty and slimy, you really think you could use a full glass of fresh water to wash your aching throat.");
 			
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			
 		}
 	*/
@@ -10320,6 +10346,7 @@ public final class Mutations extends MutationsHelper
 				dynStats("lib", 1);
 				changes++;
 			}
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//Maleness
 			if (player.hasCock() && rand(3) == 0 && player.cocks.length > 0) {
 				if (player.cocks.length == 1) {
@@ -10468,6 +10495,7 @@ public final class Mutations extends MutationsHelper
 			clearOutput();
 			outputText("You eat the weird kelp seed and feel suddenly like singing. Seems your talent for music are skyrocketing as you embrace the changes within you.");
 			
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//FAILSAFE CHANGE
 			if (changes == 0) outputText("\n\nRemarkably, the seed has no effect.  Maybe next time?");
 			player.refillHunger(10);
@@ -10502,6 +10530,7 @@ public final class Mutations extends MutationsHelper
 				changes++;
 				outputText("\n\nShivering without warning, you nearly trip over yourself as you walk.  A few tries later you realize your muscles have become faster.");
 			}
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//skin
 			if ((player.skinAdj != "glossy" || !player.hasPlainSkinOnly()) && player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE && rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\n");
@@ -10623,6 +10652,7 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//Sexual Changes:
 			//-Remove extra breast rows
 			if (changes < changeLimit && player.bRows() > 1 && rand(3) == 0) {
@@ -10836,6 +10866,7 @@ public final class Mutations extends MutationsHelper
 				dynStats("int", 1);
 				changes++;
 			}
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//sexual changes
 			//female
 			if (player.gender > 1) {
@@ -11095,6 +11126,7 @@ public final class Mutations extends MutationsHelper
 			else {
 				outputText("You eat the scale expecting some kind of spectacular change strangely nothing happened. Maybe you should stop eating everything you find.");
 			}
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//-Jabberwocky face/bucktooth
 			if ((player.faceType == AppearanceDefs.FACE_DRAGON || player.faceType == AppearanceDefs.FACE_DRAGON_FANGS) && changes < changeLimit) {
 				outputText("\n\nWhile you are busy laughing at the ridicule of this situation your bucktooth begin to pulse in accordance with your laughter growing almost to rabbit like size. You now have ");
@@ -11114,6 +11146,329 @@ public final class Mutations extends MutationsHelper
 				setWingType(AppearanceDefs.WING_TYPE_FEY_DRAGON_WINGS, "large majestic fey draconic");
 				changes++;
 			}
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+		}
+		
+		public function redRiverRoot(player:Player):void
+		{
+			player.slimeFeed();
+			//init variables
+			var changes:Number = 0;
+			var changeLimit:Number = 1;
+			var x:int = 0;
+			//Temporary storage
+			//var temp2:Number = 0;
+			//var temp3:Number = 0;
+			//Randomly choose affects limit
+			if (rand(2) == 0) changeLimit++;
+			if (rand(2) == 0) changeLimit++;
+			if (rand(4) == 0) changeLimit++;
+			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+			clearOutput();
+			outputText("Having bought that odd-looking root on the bakery, you give it a try, only to face the mildly spicy taste of the transformative. Still, it has a rich flavour and texture, but soon that becomes secondary, as you realize that the foreign rhizome is changing your body!");
+			
+			//spe change
+			if (player.spe < 100 && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nAfter a momentaneous dizziness, you recover your stance, and find your muscles becoming more nimble and prompt to run.");
+				//+3 spe if less than 50
+				if (player.spe < 50) dynStats("spe", 1);
+				//+2 spe if less than 75
+				if (player.spe < 75) dynStats("spe", 1);
+				//+1 if above 75.
+				dynStats("spe", 1);
+				changes++;
+			}
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
+			//sexual changes
+			//-If the PC has quad nipples:
+			if(player.averageNipplesPerBreast() > 1 && rand(4) == 0 && changes < changeLimit)
+			{
+				outputText("\n\nA tightness arises in your nipples as three out of four on each breast recede completely, the leftover nipples migrating to the middle of your breasts.  <b>You are left with only one nipple on each breast.</b>");
+				for(x = 0; x < player.bRows(); x++)
+				{
+					player.breastRows[x].nipplesPerBreast = 1;
+				}
+				changes++;
+			}
+			//-Remove extra breast rows
+			if (changes < changeLimit && player.bRows() > 1 && rand(3) == 0) {
+				changes++;
+				outputText("\n\nYou stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
+				if (player.bRows() >= 3) outputText("abdomen");
+				else outputText("chest");
+				outputText(". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
+				if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
+				else outputText(player.skinTone + " " + player.skinDesc);
+				outputText(" remains. <b>You've lost a row of breasts!</b>");
+				dynStats("sen", -5);
+				player.removeBreastRow(player.breastRows.length - 1, 1);
+			}
+			if (player.buttRating > 5) {
+				player.buttRating -= 2;
+				outputText("\n\nA feeling of tightness starts in your [butt], increasing gradually. The sensation grows and grows, but as it does your center of balance shifts. You reach back to feel yourself, and sure enough your [butt] is shrinking into a more manageable size.");
+			}
+			if (player.isFemaleOrHerm()) {
+				if (player.biggestTitSize() <= 2 && changes < changeLimit && rand(3) == 0) {
+					player.growTits(1 + rand(2), 1, false, 3);
+					outputText("\n\nYour breasts feel constrained and painful against your top as they grow larger by the moment, finally stopping as they reach [breastcup] size. You rub the tender orbs as you get used to your larger breast flesh.");
+					changes++;
+					dynStats("lib", 1);
+				}
+				if (changes < changeLimit && rand(3) == 0 && player.biggestTitSize() > 4)
+				{
+					player.shrinkTits();
+					changes++;
+				}
+				if (player.hipRating > 12) {
+					outputText("\n\nYou stumble a bit as the bones in your pelvis rearrange themselves painfully. Your hips have narrowed.");
+					player.hipRating -= 1 + rand(3);
+					changes++;
+				}
+				if (player.hipRating < 6) {
+					outputText("\n\nYou stumble as you feel the bones in your hips grinding, expanding your hips noticeably.");
+					player.hipRating += 1 + rand(3);
+					changes++;
+				}
+				if (player.nippleLength > 1 && player.biggestTitSize() > 0) {
+					outputText("\n\nWith a sudden pinch your [nipples] get smaller and smaller, stopping when they are roughly half their previous size");
+					player.nippleLength /= 2;
+				}
+				if (player.hasVagina() && player.vaginas[0].vaginalWetness < 3 && changes < changeLimit && rand(2) == 0) {
+					outputText("\n\nYour [cunt]'s internal walls feel a tingly wave of strange tightness which then transitions into a long stretching sensation, like you were made of putty. Experimentally, you slip a couple of fingers inside to find you've become looser and more pliable, ready to take those monster cocks.");
+					player.vaginas[0].vaginalWetness++;
+					changes++;
+				}
+				if (player.tone < 65 && rand(3) == 0) {
+					outputText(player.modTone(65, 2));
+				}
+				if (player.thickness > 35 && rand(3) == 0) {
+					outputText(player.modThickness(35, 5));
+				}
+			}
+			if (player.isMale()) {
+				if (changes < changeLimit && rand(3) == 0 && player.biggestTitSize() > 2)
+				{
+					player.shrinkTits();
+					changes++;
+				}
+				if (player.nippleLength > 1 && changes < changeLimit && rand(3) == 0) {
+					outputText("\n\nWith a sudden pinch your [nipples] get smaller and smaller, stopping when they are roughly half their previous size");
+					player.nippleLength /= 2;
+				}
+				if (player.hipRating > 10 && changes < changeLimit && rand(3) == 0) {
+					outputText("\n\nYou stumble a bit as the bones in your pelvis rearrange themselves painfully. Your hips have narrowed.");
+					player.hipRating -= 1 + rand(3);
+					changes++;
+				}
+				if (player.hipRating < 2 && changes < changeLimit && rand(3) == 0) {
+					outputText("\n\nYou stumble as you feel the bones in your hips grinding, expanding your hips noticeably.");
+					player.hipRating += 1 + rand(3);
+					changes++;
+				}
+				if (player.tone < 70 && rand(3) === 0) {
+					outputText(player.modTone(65, 2));
+				}
+				if (player.thickness > 35 && rand(3) === 0) {
+					outputText(player.modThickness(35, 5));
+				}
+			}
+			if (player.isMaleOrHerm()) {
+				if (player.hasCock() && player.cocks[0].cockType != CockTypesEnum.RED_PANDA && rand(3) == 0 && changes < changeLimit) {
+					outputText("\n\nThe skin surrounding your penis folds, encapsulating it and turning itself into a protective sheath. <b>You now have a red-panda cock!</b>");
+					player.cocks[0].cockType = CockTypesEnum.RED_PANDA;
+					changes++;
+				}
+				if (player.shortestCockLength() < 6 && rand(3) == 0 && changes < changeLimit) {
+					var increment:Number = player.increaseCock(player.shortestCockIndex(), 1 + rand(2));
+					outputText("Your [if (cocks > 1)shortest] cock fills to its normal size, but doesn’t just stop there. Your cock feels incredibly tight as a few more inches of length seem to pour out from your crotch. Your cock has gained "+ increment + " inches.");
+					changes++;
+				}
+				if (player.biggestCockLength() > 16 && rand(3) == 0 && changes < changeLimit) {
+					var idx:int = player.biggestCockIndex();
+						outputText("\n\nYou feel a tightness in your groin like someone tugging on your shaft from behind you. Once the sensation"
+						          +" fades you check [if (hasLowerGarment)inside your [lowergarment]|your [multicock]] and see that your"
+						          +" [if (cocks > 1)largest] [cock] has shrunk to a slightly shorter length.");
+					player.cocks[idx].cockLength -= (rand(10) + 5) / 10;
+					if (player.cocks[idx].cockThickness > 3) {
+						outputText(" Your " + player.cockDescript(idx) + " definitely got a bit thinner as well.");
+						player.cocks[idx].cockThickness -= (rand(4) + 1) / 10;
+					}
+					changes++;
+				}
+				if (player.smallestCockArea() < 10 && rand(3) == 0 && changes < changeLimit) {
+					outputText("[if (cocks > 1) One of your cocks|Your cock] feels swollen and heavy. With a firm, but gentle, squeeze, you confirm your suspicions. It is definitely thicker.");
+					player.cocks[player.thinnestCockIndex()].thickenCock(1.5);
+					changes++;
+				}
+			}
+
+			//Remove additional cocks
+			if (player.cocks.length > 1 && rand(3) == 0 && changes < changeLimit) {
+				player.removeCock(1, 1);
+				outputText("\n\nYou have a strange feeling as your crotch tingles.  Opening your [armor], <b>you realize that one of your cocks have vanished completely!</b>");
+				changes++;
+			}
+			//Remove additional balls/remove uniball
+			if ((player.balls > 0 || player.hasStatusEffect(StatusEffects.Uniball)) && rand(3) == 0 && changes < changeLimit) {
+				if (player.ballSize > 2) {
+					if (player.ballSize > 5) player.ballSize -= 1 + rand(3);
+					player.ballSize -= 1;
+					outputText("\n\nYour scrotum slowly shrinks, settling down at a smaller size. <b>Your " + player.ballsDescriptLight() + " ");
+					if (player.balls == 1 || player.hasStatusEffect(StatusEffects.Uniball)) outputText("is smaller now.</b>");
+					else outputText("are smaller now.</b>");
+					changes++;
+				}
+				else if (player.balls > 2) {
+					player.balls = 2;
+					//I have no idea if Uniball status effect sets balls to 1 or not so here's a just in case.
+					if (player.hasStatusEffect(StatusEffects.Uniball)) player.removeStatusEffect(StatusEffects.Uniball);
+					outputText("\n\nYour scrotum slowly shrinks until they seem to have reached a normal size. <b>You can feel as if your extra balls fused together, leaving you with a pair of balls.</b>");
+					changes++;
+				}
+				else if (player.balls == 1 || player.hasStatusEffect(StatusEffects.Uniball)) {
+					player.balls = 2;
+					if (player.hasStatusEffect(StatusEffects.Uniball)) player.removeStatusEffect(StatusEffects.Uniball);
+					outputText("\n\nYour scrotum slowly shrinks, and you feel a great pressure release in your groin. <b>Your uniball has split apart, leaving you with a pair of balls.</b>");
+					changes++;
+				}
+			}
+			//physical changes
+			//Ears
+			if (rand(3) == 0 && changes < changeLimit && player.earType != AppearanceDefs.EARS_RED_PANDA) {
+				outputText("\n\n");
+				if (flags[kFLAGS.MINO_CHEF_TALKED_RED_RIVER_ROOT] > 0) outputText("The warned dizziness");
+				else outputText("A sudden dizziness");
+				outputText(" seems to overcome your head. Your ears tingle, and you’re sure you can feel the flesh on them shifting, as you gradually have trouble hearing. A couple of minutes later the feeling stops. Curious of what has changed you go to check yourself on the stream, only to find that they’ve changed into cute, triangular ears, covered with white fur. <b>You’ve got red-panda ears!</b>");
+				setEarType(AppearanceDefs.EARS_RED_PANDA);
+				changes++;
+			}
+			//Removes antennae
+			if (player.antennae > AppearanceDefs.ANTENNAE_NONE && player.antennae != AppearanceDefs.ANTENNAE_COCKATRICE && rand(3) == 0 && changes < changeLimit) {
+				outputText("\n\nThe pair of antennae atop your head start losing the ability of ‘feel’ your surroundings as the root takes effect on them. Soon they recede on your head, and in a matter of seconds, it looks like they never were there.");
+				player.antennae = AppearanceDefs.ANTENNAE_NONE;
+				changes++;
+			}
+			//Remove odd eyes
+			if (changes < changeLimit && rand(4) == 0 && player.eyeType > AppearanceDefs.EYES_HUMAN) {
+				humanizeEyes();
+				changes++;
+			}
+			//Hair
+			// store current states first
+/*			var hasPandaHairColor:Boolean = ColorLists.redPandaHairColors.indexOf(player.hair.color) !== -1;
+			var hasNormalHair:Boolean = player.hair.type === Hair.NORMAL;
+			var oldHairType:Number = player.hair.type;
+			if ((!hasNormalHair || player.hair.length === 0 || !hasPandaHairColor) && changes < changeLimit && rand(3) === 0) {
+			player.hair.type = Hair.NORMAL;
+			if (!hasPandaHairColor)
+				player.hair.color = randomChoice(ColorLists.redPandaHairColors);
+			if (player.hair.length === 0) { // player is bald
+				player.hair.length = 1;
+				outputText("\n\nThe familiar sensation of hair returns to your head. After looking yourself on the stream, you confirm that your"
+				          +" once bald head now has normal, short [hairColor] hair.");
+			} else if (hasNormalHair && !hasPandaHairColor) { // 'wrong' hair color
+				outputText("\n\nA mild tingling on your scalp makes your check yourself on the stream. Seems like the root is changing"
+				          +" your hair this time, turning it into [hair].");
+			} else { // player.hair.type !== Hair.NORMAL
+				switch (oldHairType) {
+					case Hair.FEATHER:
+						outputText("\n\nShortly after their taste fades, the roots seem to have effect. Your scalp itches and as you scratch you"
+						          +" see your feathered hair begin to shed, downy feathers falling from your head until you are bald."
+						          +" Alarmed by this sudden change you quickly go to examine yourself in the nearby river, relief soon washing"
+						          +" over you as new [hairColor] hair begins to rapidly grow. <b>You now have [hair]</b>!");
+						break;
+					case Hair.GORGON:
+						player.hair.length = 1;
+						outputText("\n\nAs you finish the root, the scaled critters on your head shake wildly in displeasure. Then, a sudden heat"
+						          +" envelopes your scalp. The transformative effects of your spicy meal make themselves notorious, as the"
+						          +" writhing mess of snakes start hissing uncontrollably. Many of them go rigid, any kind of life that they"
+						          +" could had taken away by the root effects. Soon all the snakes that made your hair are limp and lifeless.");
+						outputText("\n\nTheir dead bodies are separated from you head by a scorching sensation, and start falling to the ground,"
+						          +" turning to dust in a matter of seconds. Examining your head on the stream, you realize that you have"
+						          +" a normal, healthy scalp, though devoid of any kind of hair.");
+						outputText("\n\nThe effects don’t end here, though as the familiar sensation of hair returns to your head a moment later."
+						          +" After looking yourself on the stream again, you confirm that"
+						          +" <b>your once bald head now has normal, short [hairColor] hair</b>.");
+						break;
+					case Hair.GOO:
+						player.hair.length = 1;
+						outputText("\n\nAfter having consumed the root, a lock of gooey hair falls over your forehead. When you try to"
+						          +" examine it, the bunch of goo falls to the ground and evaporates. As you tilt your head to see what happened,"
+						          +" more and more patches of goo start falling from your head, disappearing on the ground with the same speed."
+						          +" Soon, your scalp is devoid of any kind of goo, albeit entirely bald.");
+						outputText("\n\nNot for long, it seems, as the familiar sensation of hair returns to your head a moment later."
+						          +" After looking yourself on the stream, you confirm that"
+						          +" <b>your once bald head now has normal, short [hairColor] hair</b>.");
+						break;
+					default:
+						outputText("\n\nA mild tingling on your scalp makes your check yourself on the stream. Seems like the root is changing"
+						          +" your hair this time, <b>turning it into [hair]</b>.");
+					}
+				}
+				flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
+				changes++;
+			}
+*/			//Face
+			if (rand(3) == 0 && changes < changeLimit && player.faceType != AppearanceDefs.FACE_RED_PANDA && player.earType == AppearanceDefs.EARS_RED_PANDA) {
+				outputText("\n\nNumbness comes to your cheekbones and jaw, while the rest of your head is overwhelmed by a tingling sensation. Every muscle on your face tenses and shifts, while the bones and tissue rearrange, radically changing the shape of your head. You have troubles breathing as the changes reach your nose, but you manage to see as it changes into an animalistic muzzle. You jaw joins it and your teeth sharpen a little, not to the point of being true menacing, but gaining unequivocally the shape of those belonging on a little carnivore.");
+				outputText("\n\nOnce you’re face and jaw has reshaped, fur covers the whole of your head. The soft sensation is quite pleasant. It has a russet-red coloration, that turns to white on your muzzle and cheeks. Small, rounded patches of white cover the area where your eyebrows were. <b>You now have a red-panda head!</b>");
+				setFaceType(AppearanceDefs.FACE_RED_PANDA);
+				changes++;
+			}
+			//Arms
+			if (rand(3) == 0 && changes < changeLimit && player.armType != AppearanceDefs.ARM_TYPE_RED_PANDA && player.tailType == AppearanceDefs.TAIL_TYPE_RED_PANDA) {
+				outputText("\n\nWeakness overcomes your arms, and no matter what you do, you can’t muster the strength to raise or move them. Sighing you attribute this to the consumption of that strange root. Sitting on the ground, you wait for the limpness to end. As you do so, you realize that the bones at your hands are changing, as well as the muscles on your arms. They’re soon covered, from the shoulders to the tip of your digits, on a layer of soft, fluffy black-brown fur. Your hands gain pink, padded paws where your palms were once, and your nails become short claws, not sharp enough to tear flesh, but nimble enough to make climbing and exploring much easier. <b>Your arms have become like those of a red-panda!</b>");
+				setArmType(AppearanceDefs.ARM_TYPE_RED_PANDA);
+				changes++;
+			}
+			//Legs
+			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_RED_PANDA && player.armType == AppearanceDefs.ARM_TYPE_RED_PANDA) {
+				if (player.isTaur()) {
+					outputText("\n\nYou legs tremble, forcing you to lie on the ground, as they don't seems to answer you anymore. A burning sensation in them is the last thing you remember before briefly blacking out. When it subsides and you finally awaken, you look at them again, only to see that you’ve left with a single set of digitigrade legs, and a much more humanoid backside. Soon enough, the feeling returns to your reformed legs, only to come with an itching sensation. A thick black-brown coat of fur sprouts from them. It’s soft and fluffy to the touch. Cute pink paw pads complete the transformation. Seems like <b>you’ve gained a set of red-panda paws!</b>");
+				}
+				if (player.isNaga()) {
+					outputText("\n\nA strange feeling in your tail makes you have to lay on the ground. Then, the feeling becomes stronger, as you feel an increasing pain in the middle of your coils. You gaze at them for a second, only to realize that they’re dividing! In a matter of seconds, they’ve reformed into a more traditional set of legs, with the peculiarity being that they’re fully digitigrade in shape. Soon, every scale on them falls off to leave soft [skin] behind. That doesn’t last long, because soon a thick coat of black-brown fur covers them. It feels soft and fluffy to the touch. Cute pink paw pads complete the transformation. Seems like <b>you’ve gained a set of red-panda paws!</b>");
+				}
+				if (player.isGoo()) {
+					outputText("\n\nThe blob that forms your lower body becomes suddenly rigid under the rhizome effects, forcing you to stay still until the transformation ends. Amazingly, what was once goo turns into flesh and skill in mere seconds, thus leaving you with a very human-like set of legs and feet.");
+					outputText("\n\nIt doesn’t stop here as a feeling of unease forces you to sit on a nearby rock, as you feel something within your newly regained feet is changing. Numbness overcomes them, as muscles and bones change, softly shifting, melding and rearranging themselves. For a second you feel that they’re becoming goo again, but after a couple of minutes, they leave you with a set of digitigrade legs with pink pawpads, ending in short black claws and covered in a thick layer of black-brown fur. It feels quite soft and fluffy. <b>You’ve gained a set of red-panda paws!</b>");
+				}
+				else {
+					outputText("\n\nA feeling of unease forces your to sit on a nearby rock, as you feel something within your [feet] is changing. Numbness overcomes them, as muscles and bones change, softly shifting, melding and rearranging themselves. After a couple of minutes, they leave you with a set of digitigrade legs with pink pawpads, ending in short black claws and covered in a thick layer of black-brown fur. It feels quite soft and fluffy. <b>You’ve gained a set of red-panda paws!</b>");
+				}
+				setLowerBody(AppearanceDefs.LOWER_BODY_TYPE_RED_PANDA);
+				player.legCount = 2;
+				changes++;
+			}
+			//Tail
+			if (rand(3) == 0 && changes < changeLimit && player.tailType != AppearanceDefs.TAIL_TYPE_RED_PANDA) {
+				outputText("\n\n");
+				if (player.tailCount > 1) {
+					outputText("Your tails seem to move on their own, tangling together in a single mass. Before you can ever feel it happening, you realize that they’re merging! An increased sensation of heat, not unlike the flavor of the roots, rushes through your body, and once that it fades, you realize that you now have a single tail.");
+					outputText("\n\nThe process doesn’t stop here though, as the feel of that spicy root returns, but now the heat is felt only in your tail, as it shakes wildly while it elongates and becomes more bushy. Soon it has become almost as long as you. A very thick mass of soft, fluffy furs covers it in a matter of seconds. It acquires a lovely ringed pattern of red-russet and copperish-orange.");
+					outputText("\n\nWhen the effects finally subside, you decide to test the tail, making it coil around your body, realizing soon that you can control its movements with ease, and that its fur feels wonderful to the touch. Anyways, <b>you now have a long, bushy, red-panda tail!</b>");
+				}
+				else if (player.tailType == AppearanceDefs.TAIL_TYPE_NONE) {
+					outputText("Feeling an uncomfortable sensation on your butt, you stretch yourself, attributing it to having sat on a rough surface. A burning sensation runs through your body, similar to the one that you had after eating the root. When it migrates to your back, your attention goes to a mass of fluff that has erupted from your backside. Before you can check it properly, it seems to move on its own, following the heated sensation that now pulsates through your body, and when the heated pulses  seem to have stopped, it has become a long, fluffy tube");
+					outputText("\n\nShortly after, the feel of that spicy root returns, but now the heat is felt only in your tail, which shakes wildly while it elongates and becomes more bushy. Soon it has become almost as long as you. A very thick mass of soft, fluffy furs covers it in a matter of seconds. It acquires a lovely ringed pattern of red-russet and copperish-orange.");
+					outputText("\n\nWhen the effects finally subside, you decide to test the tail, making it coil around your body, realizing soon that you can control its movements with ease, and that its fur feels wonderful at the touch. Anyways, <b>you now have a long, bushy, red-panda tail!</b>");
+				}
+				else if (player.tailType == AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN || player.tailType == AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN || player.tailType == AppearanceDefs.TAIL_TYPE_MANTIS_ABDOMEN) {
+					outputText("Your insectile backside seems affected by the root properties, as your venom production suddenly stops. The flesh within the abdomen retracts into your backside, the chiting covering falling, leaving exposed a layer of soft, bare skin. When the abdomen disappears, your left with a comically sized butt, that soon reverts to its usual size.");
+					outputText("\n\nThe root keeps doing its thing, as you feel an uncomfortable sensation on your butt. A burning sensation runs through your body, similar to the one that you had after eating the root. When it migrates to your back, your attention goes to a mass of fluff that has erupted from your backside. Before you can check it properly, it seems to move on its own, following the heated sensation that now pulsates through your body, and when the heated pulses  seem to have stopped, it has become a long, fluffy tube, quite different from your former abdomen.");
+					outputText("\n\nShortly after, the feel of that spicy root returns, but now the heat is felt only in your tail, which shakes wildly while it elongates and becomes more bushy. Soon it has become almost as long as you. A very thick mass of soft, fluffy furs covers it in a matter of seconds. It acquires a lovely ringed pattern of red-russet and copperish-orange.");
+					outputText("\n\nWhen the effects finally subside, you decide to test the tail, making it coil around your body, realizing soon that you can control its movements with ease, and that its fur feels wonderful at the touch. Anyways, <b>you now have a long, bushy, red-panda tail!</b>");
+				}
+				else {
+					outputText("The feel of that spicy root returns, but now the heat is felt on your tail, that shakes wildly while it elongates and becomes more bushy. Soon it has become almost as long as you. A very thick mass of soft, fluffy furs covers it in a matter of seconds. It acquires a lovely ringed pattern of red-russet and copperish-orange.");
+					outputText("\n\nWhen the effects finally subside, you decide to test the tail, making it coil around your body, realizing soon that you can control their moves with easy, and that its fur feels wonderful at the touch. Anyways, <b>you now have a long, bushy, red-panda tail!</b>");
+				}
+				setTailType(AppearanceDefs.TAIL_TYPE_RED_PANDA);
+				changes++;
+			}
+			player.refillHunger(20);
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 		

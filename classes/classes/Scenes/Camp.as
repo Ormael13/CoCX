@@ -1516,7 +1516,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 		else if (model.time.hours <= 12) outputText("You ursine smith is currently at work, sharpening and polishing blades.");
 		else if (model.time.hours <= 15) outputText("Konstantin has stopped his work to have a meal, and quite an abundant one. From where you are, you can smell the cooked meat and spice from his plate.");
 		else if (model.time.hours <= 18) outputText("The sound of metal on metal is heard, and you easily find the source. The bear smith is currently shaping some plates, polishing them each now and then and putting them aside once he satisfied with how they look.");
-		else if (model.time.hours <= 20) outputText("Your local smith, Konstantine isn’t not working right now. He has gone to his tent to rest and relax for awhile.");
+		else if (model.time.hours <= 20) outputText("Your local smith, Konstantin isn’t not working right now. He has gone to his tent to rest and relax for awhile.");
 		else {
 			outputText("Konstantin is lying on a patch of grass, peacefully looking at the ");
 			outputText("red sky.");

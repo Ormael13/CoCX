@@ -10,6 +10,7 @@ import classes.ItemType;
 import classes.Items.JewelryLib;
 import classes.Items.ShieldLib;
 import classes.Items.WeaponLib;
+import classes.Items.Weapon;
 import classes.Monster;
 import classes.PerkLib;
 import classes.Scenes.Areas.Beach.Gorgon;
@@ -2843,7 +2844,7 @@ public function attack():void {
 		if (player.findPerk(PerkLib.HistoryFighter) >= 0 || player.findPerk(PerkLib.PastLifeFighter) >= 0) damage *= 1.1;
 		if (player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
-		if (rand(100) < vbladeeffectChance) {
+		if (player.weapon == weapons.VBLADE && (rand(100) < vbladeeffectChance)) {
 			vbladeeffect = true;
 			damage *= 5;
 		}
@@ -3920,6 +3921,19 @@ private function combatStatusesUpdate():void {
 			hemorrhage += player.maxHP() * player.statusEffectv2(StatusEffects.Hemorrhage);
 			hemorrhage = takePhysDamage(hemorrhage);
 			outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds. (<font color=\"#800000\">" + bleed + "</font>)</b>\n\n");
+		}
+	}
+	if (player.hasStatusEffect(StatusEffects.Disarmed)) {
+		player.addStatusValue(StatusEffects.Disarmed,1,-1);
+		if (player.statusEffectv1(StatusEffects.Hemorrhage) <= 0) {
+			player.removeStatusEffect(StatusEffects.Disarmed);
+			if (player.weapon == WeaponLib.FISTS) {
+				player.setWeapon(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon);
+			}
+			else {
+				flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID];
+			}
+			outputText("You manage to grab your weapon back!\n\n");
 		}
 	}
 	if(player.hasStatusEffect(StatusEffects.UnderwaterOutOfAir)) {
