@@ -1558,6 +1558,7 @@ private function resetJabberwockyFlag():void {
 			outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
 			outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
 			outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(20);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function SoulforceRegeneration2():void {
@@ -1605,6 +1606,7 @@ private function resetJabberwockyFlag():void {
 			outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
 			outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
 			outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(40);
 			doNext(camp.returnToCampUseTwoHours);
 		}
 		public function SoulforceRegeneration3():void {
@@ -1652,6 +1654,7 @@ private function resetJabberwockyFlag():void {
 			outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
 			outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
 			outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(80);
 			doNext(camp.returnToCampUseFourHours);
 		}
 		public function SoulforceRegeneration4():void {
@@ -1699,6 +1702,7 @@ private function resetJabberwockyFlag():void {
 			outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
 			outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
 			outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(120);
 			doNext(camp.returnToCampUseSixHours);
 		}
 		public function SoulforceRegeneration5():void {
@@ -1746,6 +1750,7 @@ private function resetJabberwockyFlag():void {
 			outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
 			outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
 			outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(160);
 			doNext(camp.returnToCampUseEightHours);
 		}
 		public function SoulforceGainedFromCultivation():void {

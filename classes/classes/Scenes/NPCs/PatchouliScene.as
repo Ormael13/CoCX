@@ -618,12 +618,12 @@ package classes.Scenes.NPCs
 		}
 		public function patchouleGiveReductoCock():void {
 			flags[kFLAGS.PATCHOULI_COCK] -= 2;
-			outputText("You apply the paste and Patchoulie mewl as her cock shrink by 2 inches, spewing a fountain of cum in the process.\n\n");
+			outputText("You apply the paste and Patchoulie mewls as her cock shrink by 2 inches, spewing a fountain of cum in the process.\n\n");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function patchouleGiveReductoBoobs():void {
 			flags[kFLAGS.PATCHOULI_CUP_SIZE] -= 2;
-			outputText("You apply the paste and Patchoulie mewl as her breast shrink to " + Appearance.breastCup(flags[kFLAGS.PATCHOULI_CUP_SIZE]) + " size, spewing a fountain of milk in the process.\n\n");
+			outputText("You apply the paste and Patchoulie mewls as her breast shrink to " + Appearance.breastCup(flags[kFLAGS.PATCHOULI_CUP_SIZE]) + " size, spewing a fountain of milk in the process.\n\n");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function patchouleGiveHairDye():void {
@@ -646,84 +646,84 @@ package classes.Scenes.NPCs
 			clearOutput();
 			player.destroyItems(consumables.AUBURND, 1);
 			flags[kFLAGS.PATCHOULI_HAIR_COLOR] = "auburn";
-			outputText("You ask Patchoulie to coat her hair with the bottle and she comply. Her hairs turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
+			outputText("You ask Patchoulie to coat her hair with the bottle and she complies. Her hair turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function patchouleGiveHairDyeBlack():void {
 			clearOutput();
 			player.destroyItems(consumables.BLACK_D, 1);
 			flags[kFLAGS.PATCHOULI_HAIR_COLOR] = "black";
-			outputText("You ask Patchoulie to coat her hair with the bottle and she comply. Her hairs turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".  You admit you missed her original color, black fits her best.\n\n");
+			outputText("You ask Patchoulie to coat her hair with the bottle and she complies. Her hair turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".  You admit you missed her original color, but black fits her best.\n\n");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function patchouleGiveHairDyeBlonde():void {
 			clearOutput();
 			player.destroyItems(consumables.BLOND_D, 1);
 			flags[kFLAGS.PATCHOULI_HAIR_COLOR] = "blonde";
-			outputText("You ask Patchoulie to coat her hair with the bottle and she comply. Her hairs turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
+			outputText("You ask Patchoulie to coat her hair with the bottle and she complies. Her hair turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function patchouleGiveHairDyeBrown():void {
 			clearOutput();
 			player.destroyItems(consumables.BROWN_D, 1);
 			flags[kFLAGS.PATCHOULI_HAIR_COLOR] = "brown";
-			outputText("You ask Patchoulie to coat her hair with the bottle and she comply. Her hairs turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
+			outputText("You ask Patchoulie to coat her hair with the bottle and she complies. Her hair turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function patchouleGiveHairDyeRed():void {
 			clearOutput();
 			player.destroyItems(consumables.RED_DYE, 1);
 			flags[kFLAGS.PATCHOULI_HAIR_COLOR] = "red";
-			outputText("You ask Patchoulie to coat her hair with the bottle and she comply. Her hairs turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
+			outputText("You ask Patchoulie to coat her hair with the bottle and she complies. Her hair turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function patchouleGiveHairDyeWhite():void {
 			clearOutput();
 			player.destroyItems(consumables.WHITEDY, 1);
 			flags[kFLAGS.PATCHOULI_HAIR_COLOR] = "white";
-			outputText("You ask Patchoulie to coat her hair with the bottle and she comply. Her hairs turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
+			outputText("You ask Patchoulie to coat her hair with the bottle and she complies. Her hair turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function patchouleGiveHairDyeGrey():void {
 			clearOutput();
 			player.destroyItems(consumables.GRAYDYE, 1);
 			flags[kFLAGS.PATCHOULI_HAIR_COLOR] = "grey";
-			outputText("You ask Patchoulie to coat her hair with the bottle and she comply. Her hairs turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
+			outputText("You ask Patchoulie to coat her hair with the bottle and she complies. Her hair turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function patchouleGiveHairDyeBlue():void {
 			clearOutput();
 			player.destroyItems(consumables.BLUEDYE, 1);
 			flags[kFLAGS.PATCHOULI_HAIR_COLOR] = "blue";
-			outputText("You ask Patchoulie to coat her hair with the bottle and she comply. Her hairs turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
+			outputText("You ask Patchoulie to coat her hair with the bottle and she complies. Her hair turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function patchouleGiveHairDyeGreen():void {
 			clearOutput();
 			player.destroyItems(consumables.GREEN_D, 1);
 			flags[kFLAGS.PATCHOULI_HAIR_COLOR] = "green";
-			outputText("You ask Patchoulie to coat her hair with the bottle and she comply. Her hairs turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
+			outputText("You ask Patchoulie to coat her hair with the bottle and she complies. Her hair turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function patchouleGiveHairDyeOrange():void {
 			clearOutput();
 			player.destroyItems(consumables.ORANGDY, 1);
 			flags[kFLAGS.PATCHOULI_HAIR_COLOR] = "orange";
-			outputText("You ask Patchoulie to coat her hair with the bottle and she comply. Her hairs turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
+			outputText("You ask Patchoulie to coat her hair with the bottle and she complies. Her hair turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function patchouleGiveHairDyePink():void {
 			clearOutput();
 			player.destroyItems(consumables.PINKDYE, 1);
 			flags[kFLAGS.PATCHOULI_HAIR_COLOR] = "pink";
-			outputText("You ask Patchoulie to coat her hair with the bottle and she comply. Her hairs turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
+			outputText("You ask Patchoulie to coat her hair with the bottle and she complies. Her hair turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function patchouleGiveHairDyeRainbow():void {
 			clearOutput();
 			player.destroyItems(consumables.RAINDYE, 1);
 			flags[kFLAGS.PATCHOULI_HAIR_COLOR] = "rainbow";
-			outputText("You ask Patchoulie to coat her hair with the bottle and she comply. Her hairs turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
+			outputText("You ask Patchoulie to coat her hair with the bottle and she complies. Her hair turning to " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + ".\n\n");
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}

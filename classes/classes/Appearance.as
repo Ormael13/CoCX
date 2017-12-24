@@ -2481,7 +2481,8 @@ public class Appearance extends Utils
 					[AppearanceDefs.EYES_DEVIL, "devil"],
 					[AppearanceDefs.EYES_ONI, "oni"],
 					[AppearanceDefs.EYES_ELF, "elf"],
-					[AppearanceDefs.EYES_RAIJU, "raiju"]
+					[AppearanceDefs.EYES_RAIJU, "raiju"],
+					[AppearanceDefs.EYES_GEMSTONES, "gemstones"]
 				]
 		);
 		public static const DEFAULT_EARS_NAMES:Object = createMapFromPairs(
@@ -2553,6 +2554,7 @@ public class Appearance extends Utils
 					[AppearanceDefs.ARM_TYPE_PLANT, "vine-covered"],
 					[AppearanceDefs.ARM_TYPE_SHARK, "shark"],
 					[AppearanceDefs.ARM_TYPE_GARGOYLE, "gargoyle"],
+					[AppearanceDefs.ARM_TYPE_GARGOYLE_2, "gargoyle"],
 					[AppearanceDefs.ARM_TYPE_WOLF, "wolf"],
 					[AppearanceDefs.ARM_TYPE_LION, "lion"],
 					[AppearanceDefs.ARM_TYPE_KITSUNE, "kitsune"],
@@ -2698,6 +2700,7 @@ public class Appearance extends Utils
 					//[LOWER_BODY_TYPE_MANTIS, "mantis"],
 					[AppearanceDefs.LOWER_BODY_TYPE_SHARK, "shark"],
 					[AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE, "gargoyle"],
+					[AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE_2, "gargoyle"],
 					[AppearanceDefs.LOWER_BODY_TYPE_PLANT_HIGH_HEELS, "vine-covered"],
 					[AppearanceDefs.LOWER_BODY_TYPE_PLANT_ROOT_CLAWS, "root feet"],
 					[AppearanceDefs.LOWER_BODY_TYPE_WOLF, "wolf"],

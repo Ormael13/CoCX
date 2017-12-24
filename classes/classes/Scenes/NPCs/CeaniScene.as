@@ -604,6 +604,7 @@ public function sparringWithCeaniWon():void
 			flags[kFLAGS.CEANI_LVL_UP] = 5;
 		}
 	}*/
+	cleanupAfterCombat();
 }
 public function sparringWithCeaniLost():void
 {
@@ -612,7 +613,8 @@ public function sparringWithCeaniLost():void
 	outputText("\"<i>Oh my gosh! Wow, I’m so sorry! Are you hurt [name]! Gah I knew I should have held back!!!</i>\"\n\n");
 	outputText("It’s all ok what's the most hurt right now is your pride. It'll heal with time. Ceani still takes it upon herself to carry you back all the way to her sleeping bag in order to bandage any wounds you may have. Oh well, she might be a fierce warrior but she sure is a caring girlfriend.\n\n");
 	HPChange(player.maxHP() * 0.5, false);
-	doNext(camp.returnToCampUseFourHours);
+	cleanupAfterCombat();
+	return;
 }
 
 	}

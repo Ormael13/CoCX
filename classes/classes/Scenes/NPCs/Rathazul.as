@@ -558,26 +558,11 @@ public function rathazulArmorMenu():void {
 	clearOutput();
 	outputText("Which armor or weapon project would you like to pursue with Rathazul?");
 	menu();
-	if (player.hasItem(useables.GREENGL, 5)) {
-		addButton(0, "GelArmor", craftOozeArmor);
-	}
-	if (player.hasItem(useables.B_CHITN, 5)) {
-		addButton(1, "BeeArmor", craftCarapace);
-	}
 	if (player.hasItem(useables.T_SSILK) && flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 0) {
 		addButton(2, "SpiderSilk", craftSilkArmor);
 	}
-	if (player.hasItem(useables.D_SCALE, 2)) {
-		addButton(3, "Dragonscale", craftDragonscaleArmor);
-	}
 	if (player.hasItem(useables.EBONBLO, 3)) {
 		addButton(4, "Ebonbloom", craftEbonbloomArmor);
-	}
-	if (player.hasItem(useables.TBAPLAT)) {
-		addButton(5, "T.Bark Armor", craftMaraeArmor, false);
-	}
-	if (player.hasItem(useables.DBAPLAT)) {
-		addButton(6, "D.Bark Armor", craftMaraeArmor, true);
 	}
 	if (player.hasItem(useables.TBAPLAT) && player.hasItem(weapons.W_STAFF)) {
 		addButton(7, "Depravatio", chooseStaffWeapon, 11, null, null, weapons.DEPRAVA.description);
@@ -835,212 +820,22 @@ private function collectRathazulWeapon():void {
 	inventory.takeItem(itype, returnToRathazulMenu);
 }
 
-private function craftOozeArmor():void {
-	spriteSelect(49);
-	clearOutput();
-	outputText(images.showImage("rathazul-craft-gelarmor"));
-	outputText("Rathazul takes the green gel from you and drops it into an empty cauldron.  With speed well beyond what you'd expect from such an elderly creature, he nimbly unstops a number of vials and pours them into the cauldron.  He lets the mixture come to a boil, readying a simple humanoid-shaped mold from what you had thought was piles of junk material.  In no time at all, he has cast the boiling liquid into the mold, and after a few more minutes he cracks it open, revealing a suit of glistening armor.\n\n");
-	player.destroyItems(useables.GREENGL, 5);
-	player.addStatusValue(StatusEffects.MetRathazul,2,1);
-	inventory.takeItem(armors.GELARMR, returnToRathazulMenu);
-	if(!player.hasStatusEffect(StatusEffects.RathazulArmor)) player.createStatusEffect(StatusEffects.RathazulArmor,0,0,0,0);
-}
-
-private function craftCarapace():void {
-	spriteSelect(49);
-	clearOutput();
-	outputText(images.showImage("rathazul-craft-chitinarmor"));
-	outputText("The rat takes the scales and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHe hands you the armor.  ");
-	outputText("The plates shine and shimmer like black steel.  He has used the yellow chitin to add accents and embroidery to the plates with a level of detail and craftsmanship rarely seen back home. A yellow fur neck lining has been fashioned from hairs found on the pieces.  The armor includes a breastplate, shoulder guards, full arm guards, and knee high boots.  You notice there are no pants.  As you turn to ask him where the pants are, you see him scratching his head and hastily rustling in drawers.  He mutters under his breath, \"<i>I'm sorry, I'm sorry, I got so focused on working on the pauldrons that I forgot to make any leg coverings!  Here, this should look good with it, and it won't restrict your movements.</i>\"  He hands you a silken loincloth");
-	if (player.mf("m", "f") == "f") outputText(" with stockings and garters");
-	outputText(".  He still manages to look somewhat pleased with himself in spite of the blunder, even bragging a little bit, \"<i>Let me show you the different lengths of string I used.</i>\"\n\n");
-	if(player.cockTotal() > 0 && player.biggestCockArea() >= 40) outputText("The silken material does little to hide the bulge of your groin, if anything it looks a little lewd.  Rathazul mumbles and looks away, shaking his head.\n\n");
-	if(player.biggestTitSize() >= 8) outputText("Your " + biggestBreastSizeDescript() + " barely fit into the breastplate, leaving you displaying a large amount of jiggling cleavage.\n\n");
-	player.destroyItems(useables.B_CHITN, 5);
-	player.addStatusValue(StatusEffects.MetRathazul,2,1);
-	inventory.takeItem(armors.BEEARMR, returnToRathazulMenu);
-}
-
-private function craftDragonscaleArmor():void {
-	spriteSelect(49);
-	clearOutput();
-	outputText("The rat looks at the sheets of dragon scales you're carrying and says, \"<i>I could work these into armor. Or if you want, undergarments. I have the necessary supplies.</i>\"");
-	menu();
-	if (player.hasItem(useables.D_SCALE, 5)) {
-		addButton(0, "Armor", craftDragonscaleArmorForReal, 0, null, null, armors.DSCLARM.description);
-		addButton(1, "Robe", craftDragonscaleArmorForReal, 1, null, null, armors.DSCLROB.description);
-		addButton(9, "Indec.R.", craftDragonscaleArmorForReal, 6, null, null, armors.INDEDSR.description);
-	}
-	else outputText("\n\nYou realize you're still a bit short on dragonscales for the armor but you can have undergarments made instead.");
-	addButton(5, "Bra", craftDragonscaleArmorForReal, 2, null, null, undergarments.DS_BRA.description);
-	addButton(6, "Vest", craftDragonscaleArmorForReal, 3, null, null, undergarments.DS_VEST.description);
-	addButton(7, "Thong", craftDragonscaleArmorForReal, 4, null, null, undergarments.DSTHONG.description);
-	addButton(8, "Loincloth", craftDragonscaleArmorForReal, 5, null, null, undergarments.DS_LOIN.description);
-	addButton(14, "Nevermind", rathazulArmorMenu);
-}
-private function craftDragonscaleArmorForReal(type:int = 0):void {
-	spriteSelect(49);
-	if (type == 0 || type == 1 || type == 6) { //Armor or robes
-		player.destroyItems(useables.D_SCALE, 5);
-	}
-	else { //Undergarments
-		player.destroyItems(useables.D_SCALE, 2);
-	}
-	clearOutput();
-	var itype:ItemType;
-	switch(type) {
-		case 0: //Armor
-			outputText(images.showImage("rathazul-craft-dragonscalearmor"));
-			outputText("The rat takes the scales and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHe hands you the armor.  ");
-			outputText("The armor is red and the breastplate has nicely decorated pauldrons to give an imposing looks. You touch the armor and feel the scaly texture. \"<i>It's quite flexible and should offer very good protection,</i>\" Rathazul says.");
-			itype = armors.DSCLARM;
-			break;
-		case 1: //Robes
-			outputText(images.showImage("rathazul-craft-dragonscalerobes"));
-			outputText("The rat takes the scales and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHe hands you the robes.  ");
-			outputText("The robe is red and appears to be textured with scales.  You touch the robes and feel the scaly texture. \"<i>It's quite flexible and should offer very good protection,</i>\" Rathazul says.");
-			itype = armors.DSCLROB;
-			break;
-		case 2: //Bra
-			outputText(images.showImage("rathazul-craft-dragonscalebra"));
-			outputText("The rat takes the scales and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHe hands you the bra.  ");
-			outputText("It's nicely textured with dragon scales. \"<i>I've used leather straps to maintain the flexibility. It should be comfortable and protective,</i>\" Rathazul says.");
-			itype = undergarments.DS_BRA;
-			break;
-		case 3: //Vest
-			outputText(images.showImage("rathazul-craft-dragonscalevest"));
-			outputText("The rat takes the scales and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHe hands you the vest.  ");
-			outputText("It's nicely textured with dragon scales. \"<i>I've used leather straps to maintain the flexibility. It should be comfortable and protective,</i>\" Rathazul says.");
-			itype = undergarments.DS_VEST;
-			break;
-		case 4: //Thong
-			outputText(images.showImage("rathazul-craft-dragonscalethong"));
-			outputText("The rat takes the scales and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHe hands you the thong.  ");
-			outputText("It's nicely textured with dragon scales. \"<i>I've used leather straps to maintain the flexibility. It should be comfortable and protective,</i>\" Rathazul says.");
-			itype = undergarments.DSTHONG;
-			break;
-		case 5: //Loincloth
-			outputText(images.showImage("rathazul-craft-dragonscaleloincloth"));
-			outputText("The rat takes the scales and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHe hands you the loincloth.  ");
-			outputText("It's nicely textured with dragon scales. \"<i>I've used leather straps to maintain the flexibility. It should be comfortable and protective,</i>\" Rathazul says.");
-			itype = undergarments.DS_LOIN;
-			break;
-		case 6: //Indec.Robes
-			outputText(images.showImage("rathazul-craft-dragonscaleindecentrobes"));
-			outputText("The rat takes the scales and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHe hands you the robes.  ");
-			outputText("The robe is red and appears to be textured with scales.  You touch the robes and feel the scaly texture. \"<i>It's quite flexible and should offer very good protection,</i>\" Rathazul says.");
-			itype = armors.INDEDSR;
-			break;
-		default:
-			outputText("Something bugged! Please report this bug to Ormael/Aimozg/Oxdeception.");
-			itype = armors.DSCLARM;
-			break;
-	}
-	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
-	inventory.takeItem(itype, returnToRathazulMenu);
-}
-
 private function craftEbonbloomArmor():void {
 	spriteSelect(49);
 	clearOutput();
 	outputText("You show the metal flower to Rathazul. Does he think this could be useful, can it be made into anything? He takes the flower and examines it: \"<i>I havn’t seen one of these in years. Maybe a decade? This is a ebonbloom flower, these grow in the deepest, darkest caves that run below the land. Nobody knows how they grow, as they are made of metal, but they have interesting properties. Lots of unusual traits i could make use of.</i>\" Rathazul hands the flower back to you. \"<i>Tell you what, bring me eight blooms, and i can make you some armor. Or a robe. Bring me three blooms, and i can make you a undergarment as soft as silk and as tough as steel. I also have a few odd ideas...</i>\" ");
 	outputText("The rat blushes beneath his fur. \"<i>Some black magic infused in underwear could theoretically generate enough lust to work black magic, without putting you at risk. Maybe... Do you want me to make something for you?</i>\"");
 	menu();
-	if (player.hasItem(useables.EBONBLO, 8)) {
-		addButton(0, "Platemail", craftEbonbloomArmorForReal, 16, null, null, armors.EWPLTMA.description);
-		addButton(1, "Jacket", craftEbonbloomArmorForReal, 17, null, null, armors.EWJACK_.description);
-		addButton(2, "Robe", craftEbonbloomArmorForReal, 18, null, null, armors.EWROBE_.description);
-		addButton(3, "Indec.R.", craftEbonbloomArmorForReal, 19, null, null, armors.INDEEWR.description);
-	}
-	else outputText("\n\nYou realize you're still a bit short on ebonbloom flowers for the armor but you can have undergarments made instead.");
-	addButton(5, "Jock", craftEbonbloomArmorForReal, 14, null, null, undergarments.EW_JOCK.description);
-	addButton(6, "R.Jock", craftEbonbloomArmorForReal, 10, null, null, undergarments.R_JOCK.description);
-	addButton(7, "Thong", craftEbonbloomArmorForReal, 15, null, null, undergarments.EWTHONG.description);
-	addButton(8, "R.Thong", craftEbonbloomArmorForReal, 11, null, null, undergarments.R_THONG.description);
-	addButton(10, "Vest", craftEbonbloomArmorForReal, 13, null, null, undergarments.EW_VEST.description);
-	addButton(11, "Corset", craftEbonbloomArmorForReal, 12, null, null, undergarments.EW_CORS.description);
 	if (player.hasItem(useables.EBONBLO, 10) && player.hasItem(armors.H_GARB_, 1) && player.hasKeyItem("Dark Mage’s Grimoire") >= 0) addButton(12, "H. Garb", craftEbonbloomArmorForReal, 20, null, null, armors.EHGARB_.description);
 	addButton(14, "Nevermind", rathazulArmorMenu);
 }
 private function craftEbonbloomArmorForReal(type:int = 0):void {
 	spriteSelect(49);
-	if (type == 16 || type == 17 || type == 18 || type == 19 || type == 20) { //Armor or robes
-		if (type == 20) {
-			player.destroyItems(armors.H_GARB_, 1);
-			player.destroyItems(useables.EBONBLO, 10);
-		}
-		else player.destroyItems(useables.EBONBLO, 8);
-	}
-	else { //Undergarments
-		player.destroyItems(useables.EBONBLO, 3);
-	}
+	player.destroyItems(armors.H_GARB_, 1);
+	player.destroyItems(useables.EBONBLO, 10);
 	clearOutput();
 	var itype:ItemType;
 	switch(type) {
-		case 10: //Rune Jock
-			outputText(images.showImage("rathazul-craft-ebonweaverunejock"));
-			outputText("The rat takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging on the rack is a jock.  As you inspect it, you notice the dark grey cloth has an oily sheen.  ");
-			outputText("Adorning the cup is a rune seething with black magic.  ");
-			if (player.hasStatusEffect(StatusEffects.KnowsArouse)) outputText("You blush, recognizing the rune to represent lust. In the context of acting upon it...  ");
-			outputText("Rubbing your hand through the garment, you can see that the fabric is smoother than Ingram’s finest cloth, yet has a strange slickness to it not reminiscent of any fabric you know of. You also note the jock is also elastic, allowing it to fit your form regardless of how large your “assets” are. You thank the rat and collect your new jock.");
-			itype = undergarments.R_JOCK;
-			break;
-		case 11: //Rune Thong
-			outputText(images.showImage("rathazul-craft-ebonweaverunethong"));
-			outputText("The rat takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging on the rack is a thong.  As you inspect it, you notice the dark grey cloth has an oily sheen.  ");
-			outputText("Adorning the front is a rune seething with black magic.  ");
-			if (player.hasStatusEffect(StatusEffects.KnowsArouse)) outputText("You blush, recognizing the rune to represent lust. In the context of acting upon it...  ");
-			outputText("Rubbing your hand through the garment, you can see that the fabric is smoother than Ingram’s finest cloth, yet has a strange slickness to it not reminiscent of any fabric you know of. You also note the thong is also elastic, allowing it to fit your form regardless of how large your “assets” are. You thank the rat and collect your new thong.");
-			itype = undergarments.R_THONG;
-			break;
-		case 12: //Corset
-			outputText(images.showImage("rathazul-craft-ebonweavecorset"));
-			outputText("The rat takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging on the rack is a corset.  As you inspect it, you notice the dark grey cloth has an oily sheen.  ");
-			outputText("Rubbing your hand through the garment, you can see that the fabric is smoother than Ingram’s finest cloth, yet has a strange slickness to it not reminiscent of any fabric you know of. You also note the corset is also elastic, allowing it to fit your form regardless of how large your “assets” are. You thank the rat and collect your new corset.");
-			itype = undergarments.EW_CORS;
-			break;
-		case 13: //Vest
-			outputText(images.showImage("rathazul-craft-ebonweavevest"));
-			outputText("The rat takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging on the rack is a vest.  As you inspect it, you notice the dark grey cloth has an oily sheen.  ");
-			outputText("Rubbing your hand through the garment, you can see that the fabric is smoother than Ingram’s finest cloth, yet has a strange slickness to it not reminiscent of any fabric you know of. You also note the vest is also elastic, allowing it to fit your form regardless of how large your “assets” are. You thank the rat and collect your new vest.");
-			itype = undergarments.EW_VEST;
-			break;
-		case 14: //Jock
-			outputText(images.showImage("rathazul-craft-ebonweavejock"));
-			outputText("The rat takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging on the rack is a jock.  As you inspect it, you notice the dark grey cloth has an oily sheen.  ");
-			outputText("Rubbing your hand through the garment, you can see that the fabric is smoother than Ingram’s finest cloth, yet has a strange slickness to it not reminiscent of any fabric you know of. You also note the jock is also elastic, allowing it to fit your form regardless of how large your “assets” are. You thank the rat and collect your new jock.");
-			itype = undergarments.EW_JOCK;
-			break;
-		case 15: //Thong
-			outputText(images.showImage("rathazul-craft-ebonweavethong"));
-			outputText("The rat takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging on the rack is a thong.  As you inspect it, you notice the dark grey cloth has an oily sheen.  ");
-			outputText("Rubbing your hand through the garment, you can see that the fabric is smoother than Ingram’s finest cloth, yet has a strange slickness to it not reminiscent of any fabric you know of. You also note the thong is also elastic, allowing it to fit your form regardless of how large your “assets” are. You thank the rat and collect your new thong.");
-			itype = undergarments.EWTHONG;
-			break;
-		case 16: //Heavy Armor
-			outputText(images.showImage("rathazul-craft-ebonweaveheavyarmor"));
-			outputText("The rat takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nLaid out on a workbench is a set of platemail. The plates barely reflecting the light. As you approach the workbench, you notice that the surface of the grey metal appears to have an oily texture. The armor is laid out in two layers: a lower layer made of smooth yet resilient ebonweave cloth, covered by ebonweave plating.  Picking up one of the pieces of platemail, you notice that the plate is thin and the armor itself vary light.  ");
-			outputText("You spot a knife nearby, amongst Rathazul’s tools and oddities dotting his workbench, you take it and experimentally try to damage the breastplate.  After a few whacks, the knife is blunted but the plate shows no damage.  Not even a dent. It appears Rathazul wasn’t exaggerating when he told you about the properties ebonbloom could take… Assembling the full set as if to start putting it on, you realize that as light as the armor is, the armor will restrict your range of movement as much as any normal set of platemail would. You thank the rat, and collect your new armor.");
-			itype = armors.EWPLTMA;
-			break;
-		case 17: //Armor
-			outputText(images.showImage("rathazul-craft-ebonweavearmor"));
-			outputText("The rat takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nLaid out on a workbench is a longcoat next to a breastplate. Both items are a greasy, dark grey color. Nearby there is a similarly colored shirt and a pair of pants on a small rack. As you approach the workbench, you notice that the surface of the  leather appears to have an oily texture. The longcoat on your left has a much more natural texture to it than the breastplate on your right.  It is leather, that much your are certain, and yet it shouldn’t be.  ");
-			outputText("Perhaps Rathazul bonded the ebonbloom onto a normal jacket, altering the leather’s properties?  The item on your right is much stranger. It feels like metal, yet is spongy and bends slightly under your fingers, only to fill back up when your remove your hand. You spot a knife nearby, amongst Rathazul’s tools and oddities dotting his workbench, you take it and experimentally try to cut the breastplate. Unexpectedly, you cannot seem to do any damage, after a few increasingly vigorous attempts you see no damage done to the plate. Yes, this will do. Examining the clothes on the rack, you notice the cloth has the same ebony color and oily texture as the other articles. You thank the rat and collect your new armor.");
-			itype = armors.EWJACK_;
-			break;
-		case 18: //Robes
-			outputText(images.showImage("rathazul-craft-ebonweaverobes"));
-			outputText("The rat takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging on the rack is a long, flowing robe. The dark grey cloth ripples in the wind, but strangely it shines in the light as metal would. You run your fingers over the dark grey garment, feeling the soft (yet slightly slick) material give at your touch. There’s a hood around the edge.  ");
-			outputText("For now, it hangs limply down the back, but it would be easy to pull up in order to shield the wearer’s eyes from harsh sunlight or rainy drizzle. Beyond the physical, you can feel magical power flow through this robe. This untapped power should be quite helpful when casting magic.   You thank the rat and collect your new robe.");
-			itype = armors.EWROBE_;
-			break;
-		case 19: //Indec.Robes
-			outputText(images.showImage("rathazul-craft-ebonweaveindecentrobes"));
-			outputText("The rat takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging on the rack is a long, flowing robe. The dark grey cloth ripples in the wind, but strangely it shines in the light as metal would. Upon closer inspection, you realize that the robe is more of a longcoat, meant to display your chest and groin. You run your fingers over the dark grey garment, feeling the soft (yet slightly slick) material give at your touch. There’s a hood around the edge. For now, it hangs limply down the back, but it would be easy to pull up in order to shield the wearer’s eyes from harsh sunlight or rainy drizzle.  ");
-			outputText("Moving your hands through it, you find a layer of ebonweave straps lining the inside, likely to keep the front of the robe open and preventing this from disrupting the balance of the wearer. The straps are so subtle that you doubt you will notice them while wearing the robe. Beyond the physical, you can feel magical power flow through this robe. This untapped power should be quite helpful when casting magic.  You thank the rat and collect your new robe.");
-			itype = armors.INDEEWR;
-			break;
 		case 20: //Heretic‘s Garb
 			outputText(images.showImage("rathazul-craft-ebonweavehereticsgarb"));
 			outputText("The rat takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nLaid out on a workbench is a duster next to a breastplate. Both items are a greasy, dark grey color. Nearby there is a similarly colored hat, shirt and a pair of pants on a small rack. As you approach the workbench, you notice that the surface of the  leather appears to have an oily texture. The duster on your left has a much more natural texture to it than the breastplate on your right.  It is leather, that much your are certain, and yet it shouldn’t be.  ");
@@ -1055,35 +850,6 @@ private function craftEbonbloomArmorForReal(type:int = 0):void {
 	}
 	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 	inventory.takeItem(itype, returnToRathazulMenu);
-}
-
-private function craftMaraeArmor(divine:Boolean = false):void {
-	clearOutput();
-	if (!divine) {
-		outputText(images.showImage("rathazul-craft-barkarmor-corrupt"));
-		outputText("You show him the pieces of thick bark with tentacles attached. \n\n \"<i>My, my. That's definitely the strangest thing I've ever seen. But as you've requested, I'll make armor for you,</i>\" the old rat says. He takes the pile of bark, taking care to avoid touching the still-alive tentacles. He works on his bench for an hour while you wait. \n\n");
-		outputText("Once he has finished, Ratzhul is beaming with both pride and shame, \"<i>I think you'll be pleased. Go ahead and take a look. I'm not working on this type of armor again. I nearly got surprised by tentacles.</i>\"\n\nHe hands you the armor. \n\n");
-		outputText("The plates are white like snow. Green tentacles grow from the shoulderpads. The armor includes a breastplate, pauldrons, full arm guards, and knee-high boots. You realize the armor is missing pants. \n\n");
-		outputText("\"<i>Something wrong? Nothing to protect your modesty? Surprise!</i>\"  He hands you a silken loincloth");
-		if(player.mf("m", "f") == "f") outputText(" with stockings and garters");
-		outputText(". You thank him for the armor.\n\n");
-		if(player.cockTotal() > 0 && player.biggestCockArea() >= 40) outputText("The silken material does little to hide the bulge of your groin, if anything it looks a little lewd.  Rathazul mumbles and looks away, shaking his head.\n\n");
-		if(player.biggestTitSize() >= 8) outputText("Your " + biggestBreastSizeDescript() + " barely fit into the breastplate, leaving you displaying a large amount of jiggling cleavage.\n\n");
-		player.destroyItems(useables.TBAPLAT, 1);
-		inventory.takeItem(armors.TBARMOR, returnToRathazulMenu);
-	}
-	else {
-		outputText(images.showImage("rathazul-craft-barkarmor-pure"));
-		outputText("You show him the pieces of glowing white thick bark attached. \n\n \"<i>My, my. I heard a voice from Marae instructing me to make the armor for you,</i>\" the old rat says. He takes the pile of bark and works on his bench for an hour while you wait. \n\n");
-		outputText("Once he has finished, Ratzhul is beaming with both pride and shame, \"<i>I think you'll be pleased. Go ahead and take a look. I'm not working on this type of armor again. It took me many attempts to bend the bark plates to get them right.</i>\"\n\nHe hands you the armor. \n\n");
-		outputText("The plates are white like snow. The armor includes a breastplate, pauldrons, full arm guards, and knee-high boots. You notice there are no pants.  As you turn to ask him where the pants are, you see him scratching his head and hastily rustling in drawers.  He mutters under his breath, \"<i>I'm sorry, I'm sorry, I got so focused on working on the pauldrons that I forgot to make any leg coverings!  Here, this should look good with it, and it won't restrict your movements.</i>\"  He hands you a silken loincloth");
-		if (player.mf("m", "f") == "f") outputText(" with stockings and garters");
-		outputText(".  He still manages to look somewhat pleased with himself in spite of the blunder, even bragging a little bit, \"<i>Let me show you the different lengths of string I used.</i>\"\n\n");
-		if(player.cockTotal() > 0 && player.biggestCockArea() >= 40) outputText("The silken material does little to hide the bulge of your groin, if anything it looks a little lewd.  Rathazul mumbles and looks away, shaking his head.\n\n");
-		if(player.biggestTitSize() >= 8) outputText("Your " + biggestBreastSizeDescript() + " barely fit into the breastplate, leaving you displaying a large amount of jiggling cleavage.\n\n");
-		player.destroyItems(useables.DBAPLAT, 1);
-		inventory.takeItem(armors.DBARMOR, returnToRathazulMenu);
-	}
 }
 
 private function craftWorldTreeWeapon():void {

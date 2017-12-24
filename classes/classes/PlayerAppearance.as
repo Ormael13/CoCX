@@ -751,7 +751,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 		outputText(", arms, hands and fingers.");
 		if (player.skin.base.pattern == AppearanceDefs.PATTERN_ORCA_UNDERBODY) outputText(" However your skin is [skin color] with a [skin color2] underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of an orca.");
-		if (player.skin.base.pattern == AppearanceDefs.PATTERN_RED_PANDA_UNDERBODY) outputText(" However your skin is [skin color] with a [skin color2] underbelly that runs on the underside of your limbs, similar to that of a red panda.");
+		if (player.skin.base.pattern == AppearanceDefs.PATTERN_RED_PANDA_UNDERBODY) outputText(" Your body is covered from head to toe in [skin color] with a [skin color2] underbelly, giving to your nimble frame a red-panda appearance.");
 	}
 	public function describeGear():void {
 		// story.display("gear");
@@ -987,6 +987,12 @@ public class PlayerAppearance extends BaseContent {
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("alabaster");
 			outputText(" legs end in sharp-clawed stone feet. There are three long toes on the front, and a small hind claw on the back.");
 		}
+		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE_2) {
+			outputText("  Your " + num2Text(player.legCount) + " ");
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("marble");
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("alabaster");
+			outputText(" legs aside of their stone structure look pretty much human.");
+		}
 		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PLANT_HIGH_HEELS)
 			outputText("  Your " + num2Text(player.legCount) + " perfect lissome legs end in human feet, apart from delicate vines covered in spade-like leaves crawling around them on the whole length.");
 		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PLANT_ROOT_CLAWS)
@@ -1161,6 +1167,12 @@ public class PlayerAppearance extends BaseContent {
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("marble");
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("alabaster");
 			outputText(" arms end in stone sharp clawed hands.");
+		}
+		else if (armType == AppearanceDefs.ARM_TYPE_GARGOYLE_2) {
+			outputText("  Your ");
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("marble");
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("alabaster");
+			outputText(" arms end in normal human like hands.");
 		}
 		else if (armType == AppearanceDefs.ARM_TYPE_WOLF || armType == AppearanceDefs.ARM_TYPE_FOX)
 			outputText("  Your arms are covered in thick fur ending up with clawed hands with animal like paw pads.");
@@ -1414,6 +1426,9 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your eyes are of an electric [eyecolor] hue that constantly glows with voltage power. They have slitted pupils like those of a beast.");
 		else if(eyeType == AppearanceDefs.EYES_VAMPIRE){
 			outputText("  Your eyes looks somewhat normal, but their blood-red irises seem to have the tendency of drawing in people’s gaze, like moths to a flame.");
+		}
+		else if(eyeType == AppearanceDefs.EYES_GEMSTONES){
+			outputText("  Instead of regular eyes you see through a pair of gemstones that change hue based on your mood.");
 		}
 		else outputText("  Your eyes are [eyecolor].");
 	}
@@ -2032,7 +2047,26 @@ public function RacialScores():void {
 	else if (player.foxScore() >= 4 && player.foxScore() < 7) outputText("\n<font color=\"#0000a0\">Half Fox: " + player.foxScore() + " (-" + (5 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (25 * (1 + player.newGamePlusMod())) + " max Int)</font>");
 	else if (player.foxScore() >= 1 && player.foxScore() < 4) outputText("\n<font color=\"#008000\">Half Fox: " + player.foxScore() + "</font>");
 	else if (player.foxScore() < 1) outputText("\n<font color=\"#ff0000\">Half Fox: 0</font>");
-	outputText("\nGARGOYLE: " + player.gargoyleScore());
+	if (player.gargoyleScore() >= 21 && player.hasPerk(PerkLib.GargoylePure)) {
+		outputText("\n<font color=\"#0000a0\">PURE GARGOYLE: " + player.gargoyleScore() + " (+");
+		if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText((90 * (1 + player.newGamePlusMod())) + " max Str, +" + (100 * (1 + player.newGamePlusMod())) + " max Tou, +" + (70 * (1 + player.newGamePlusMod())));
+		if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText((70 * (1 + player.newGamePlusMod())) + " max Str, +" + (100 * (1 + player.newGamePlusMod())) + " max Tou, +" + (90 * (1 + player.newGamePlusMod())));
+		outputText(" max Int, +" + (80 * (1 + player.newGamePlusMod())) + " max Wis, -" + (10 * (1 + player.newGamePlusMod())) + " max Lib, -" + (10 * (1 + player.newGamePlusMod())) + " max Sens, +");
+		if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText((24 * (1 + player.newGamePlusMod())) + " Armor");
+		if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText((15 * (1 + player.newGamePlusMod())) + " Armor, +" + (45 + (5 * player.newGamePlusMod())) + " spell resistance");
+		outputText(")</font>");
+	}
+	else if (player.gargoyleScore() >= 21 && player.hasPerk(PerkLib.GargoyleCorrupted)) {
+		outputText("\n<font color=\"#0000a0\">CORRUPTED GARGOYLE: " + player.gargoyleScore() + " (+");
+		if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText((90 * (1 + player.newGamePlusMod())) + " max Str, +" + (100 * (1 + player.newGamePlusMod())) + " max Tou, +" + (70 * (1 + player.newGamePlusMod())));
+		if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText((70 * (1 + player.newGamePlusMod())) + " max Str, +" + (100 * (1 + player.newGamePlusMod())) + " max Tou, +" + (90 * (1 + player.newGamePlusMod())));
+		outputText(" max Int, +" + (10 * (1 + player.newGamePlusMod())) + " max Wis, +" + (80 * (1 + player.newGamePlusMod())) + " max Lib, +15 min Sens, +");
+		if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText((24 * (1 + player.newGamePlusMod())) + " Armor");
+		if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText((15 * (1 + player.newGamePlusMod())) + " Armor, +" + (45 + (5 * player.newGamePlusMod())) + " spell resistance");
+		outputText(")</font>");
+	}
+	else if (player.gargoyleScore() >= 1 && player.gargoyleScore() < 21) ("\n<font color=\"#008000\">GARGOYLE: " + player.gargoyleScore() + "</font>");
+	else if (player.gargoyleScore() < 1) outputText("\n<font color=\"#ff0000\">GARGOYLE: 0</font>");
 	if (player.goblinScore() >= 4) outputText("\n<font color=\"#0000a0\">Goblin: " + player.goblinScore() + " (+" + (20 * (1 + player.newGamePlusMod())) + " max Int)</font>");
 	else if (player.goblinScore() >= 1 && player.goblinScore() < 4) outputText("\n<font color=\"#008000\">Goblin: " + player.goblinScore() + "</font>");
 	else if (player.goblinScore() < 1) outputText("\n<font color=\"#ff0000\">Goblin: 0</font>");

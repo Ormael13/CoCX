@@ -337,7 +337,7 @@ import classes.Scenes.SceneLib;
 		 * Edit Status: 95%
 		 */
 		public static const MASSAGE_RELAXATION:int = 3;
-		public static const MASSAGE_RELAXATION_BONUS:Number = 0.9;	// Multiplicative bonus to damage taken -- these seem a little op with current values
+		public static const MASSAGE_RELAXATION_BONUS:Number = 0.1;	// Multiplicative bonus to damage taken -- these seem a little op with current values
 		private static const MASSAGE_RELAXATION_BONUS_TEXT:String = "<b>(10% Reduction to all Damage taken whilst active!)</b>";
 		public function massageRelaxation(): void
 		{

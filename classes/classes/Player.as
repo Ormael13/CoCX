@@ -343,14 +343,17 @@ use namespace CoC;
 			if (armType == AppearanceDefs.ARM_TYPE_YETI) armorDef += (1 * newGamePlusMod);
 			if (armType == AppearanceDefs.ARM_TYPE_SPIDER || armType == AppearanceDefs.ARM_TYPE_MANTIS || armType == AppearanceDefs.ARM_TYPE_BEE || armType == AppearanceDefs.ARM_TYPE_SALAMANDER) armorDef += (2 * newGamePlusMod);
 			if (armType == AppearanceDefs.ARM_TYPE_GARGOYLE) armorDef += (8 * newGamePlusMod);
+			if (armType == AppearanceDefs.ARM_TYPE_GARGOYLE_2) armorDef += (5 * newGamePlusMod);
 			if (tailType == AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN || tailType == AppearanceDefs.TAIL_TYPE_MANTIS_ABDOMEN || tailType == AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN) armorDef += (2 * newGamePlusMod);
 			if (tailType == AppearanceDefs.TAIL_TYPE_GARGOYLE) armorDef += (8 * newGamePlusMod);
+			if (tailType == AppearanceDefs.TAIL_TYPE_GARGOYLE_2) armorDef += (5 * newGamePlusMod);
 			if (wingType == AppearanceDefs.WING_TYPE_GARGOYLE_LIKE_LARGE) armorDef += (8 * newGamePlusMod);
 			if (lowerBody == AppearanceDefs.LOWER_BODY_TYPE_YETI) armorDef += (1 * newGamePlusMod);
 			if (lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS || lowerBody == AppearanceDefs.LOWER_BODY_TYPE_BEE || lowerBody == AppearanceDefs.LOWER_BODY_TYPE_MANTIS || lowerBody == AppearanceDefs.LOWER_BODY_TYPE_SALAMANDER) armorDef += (2 * newGamePlusMod);
 			if (lowerBody == AppearanceDefs.LOWER_BODY_TYPE_DRAGON) armorDef += (3 * newGamePlusMod);
 			if (lowerBody == AppearanceDefs.LOWER_BODY_TYPE_DRIDER_LOWER_BODY) armorDef += (4 * newGamePlusMod);
 			if (lowerBody == AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE) armorDef += (8 * newGamePlusMod);
+			if (lowerBody == AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE_2) armorDef += (5 * newGamePlusMod);
 			//Soul Cultivators bonuses
 			if (findPerk(PerkLib.BodyCultivator) >= 0) {
 				armorDef += (1 * newGamePlusMod);
@@ -1732,9 +1735,10 @@ use namespace CoC;
 				if (isTaur()) race = "siren-taur";
 				else race = "siren";
 			}
-			if (gargoyleScore() >= 6)
+			if (gargoyleScore() >= 21)
 			{
-				race = "gargoyle";
+				if (hasPerk(PerkLib.GargoyleCorrupted)) race = "corrupted gargoyle";
+				else race = "gargoyle";
 			}
 			if (batScore() >= 6){
 				race = batScore() >= 10? "bat":"half bat";
@@ -1931,7 +1935,7 @@ use namespace CoC;
 				chimeraCounter++;
 			if (jabberwockyScore() >= 4)
 				chimeraCounter++;
-			if (gargoyleScore() >= 6)
+			if (gargoyleScore() >= 21)
 				chimeraCounter++;
 			if (gooScore() >= 4)
 				chimeraCounter++;
@@ -2050,8 +2054,8 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (jabberwockyScore() >= 10)
 				grandchimeraCounter++;
-//			if (gargoyleScore() >= 6)
-//				grandchimeraCounter++;
+			if (gargoyleScore() >= 21)
+				grandchimeraCounter++;
 			if (gooScore() >= 8)
 				grandchimeraCounter++;
 			
@@ -4132,18 +4136,36 @@ use namespace CoC;
 		public function gargoyleScore():Number {
 			Begin("Player","racialScore","gargoyle");
 			var gargoyleCounter:Number = 0;
+			if (hairColor == "light grey" || hairColor == "quartz white")
+				gargoyleCounter++;
+			if (skinTone == "light grey" || skinTone == "quartz white")
+				gargoyleCounter++;
+			if (hairType == AppearanceDefs.HAIR_NORMAL)
+				gargoyleCounter++;
 			if (skinType == AppearanceDefs.SKIN_TYPE_STONE)
 				gargoyleCounter++;
 			if (hornType == AppearanceDefs.HORNS_GARGOYLE)
 				gargoyleCounter++;
-			if (armType == AppearanceDefs.ARM_TYPE_GARGOYLE)
+			if (eyeType == AppearanceDefs.EYES_GEMSTONES)
 				gargoyleCounter++;
-			if (tailType == AppearanceDefs.TAIL_TYPE_GARGOYLE)
+			if (earType == AppearanceDefs.EARS_ELFIN)
 				gargoyleCounter++;
+			if (faceType == AppearanceDefs.FACE_DEVIL_FANGS)
+				gargoyleCounter++;
+			if (tongueType == AppearanceDefs.TONGUE_DEMONIC)
+				gargoyleCounter++;
+			if (armType == AppearanceDefs.ARM_TYPE_GARGOYLE || armType == AppearanceDefs.ARM_TYPE_GARGOYLE_2)
+				gargoyleCounter++;
+			if (tailType == AppearanceDefs.TAIL_TYPE_GARGOYLE || tailType == AppearanceDefs.TAIL_TYPE_GARGOYLE_2)
+				gargoyleCounter++;
+			if (lowerBody == AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE || lowerBody == AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE_2)
+				gargoyleCounter++;
+			if (hasPerk(PerkLib.GargoylePure) || hasPerk(PerkLib.GargoyleCorrupted))
+				gargoyleCounter++;
+			if (hasPerk(PerkLib.TransformationImmunity))
+				gargoyleCounter += 4;
 			if (wingType == AppearanceDefs.WING_TYPE_GARGOYLE_LIKE_LARGE)
-				gargoyleCounter++;
-			if (lowerBody == AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE)
-				gargoyleCounter++;
+				gargoyleCounter += 4;
 			
 			End("Player","racialScore");
 			return gargoyleCounter;
@@ -4281,7 +4303,7 @@ use namespace CoC;
 		 * @param	nl
 		 */
 		public function refillHunger(amnt:Number = 0, nl:Boolean = true):void {
-			if (flags[kFLAGS.HUNGER_ENABLED] > 0 || flags[kFLAGS.IN_PRISON] > 0)
+			if ((flags[kFLAGS.HUNGER_ENABLED] > 0 || flags[kFLAGS.IN_PRISON] > 0) && !isGargoyle())
 			{
 				
 				var oldHunger:Number = hunger;
@@ -4301,12 +4323,12 @@ use namespace CoC;
 				//game.dynStats("lus", 0, "scale", false);
 				if (nl) outputText("\n");
 				//Messages
-				if (hunger < 10) outputText("<b>You still need to eat more. </b>");
-				else if (hunger >= 10 && hunger < 25) outputText("<b>You are no longer starving but you still need to eat more. </b>");
-				else if (hunger >= 25 && hunger < 50) outputText("<b>The growling sound in your stomach seems to quiet down. </b>");
-				else if (hunger >= 50 && hunger < 75) outputText("<b>Your stomach no longer growls. </b>");
-				else if (hunger >= 75 && hunger < 90) outputText("<b>You feel so satisfied. </b>");
-				else if (hunger >= 90) outputText("<b>Your stomach feels so full. </b>");
+				if (hunger < maxHunger() * 0.1) outputText("<b>You still need to eat more. </b>");
+				else if (hunger >= maxHunger() * 0.1 && hunger < maxHunger() * 0.25) outputText("<b>You are no longer starving but you still need to eat more. </b>");
+				else if (hunger >= maxHunger() * 0.25 && hunger < maxHunger() * 0.5) outputText("<b>The growling sound in your stomach seems to quiet down. </b>");
+				else if (hunger >= maxHunger() * 0.5 && hunger < maxHunger() * 0.75) outputText("<b>Your stomach no longer growls. </b>");
+				else if (hunger >= maxHunger() * 0.75 && hunger < maxHunger() * 0.9) outputText("<b>You feel so satisfied. </b>");
+				else if (hunger >= maxHunger() * 0.9) outputText("<b>Your stomach feels so full. </b>");
 				if (weightChange > 0) outputText("<b>You feel like you've put on some weight. </b>");
 				EngineCore.awardAchievement("Tastes Like Chicken ", kACHIEVEMENTS.REALISTIC_TASTES_LIKE_CHICKEN);
 				if (oldHunger < 1 && hunger >= 100) EngineCore.awardAchievement("Champion Needs Food Badly ", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD);
@@ -4315,6 +4337,17 @@ use namespace CoC;
 				dynStats("lus", 0, "scale", false);
 				EngineCore.statScreenRefresh();
 			}
+		}
+		public function refillGargoyleHunger(amnt:Number = 0, nl:Boolean = true):void {
+			var oldHunger:Number = hunger;
+			hunger += amnt;
+			if (hunger > maxHunger()) hunger = maxHunger();
+			if (hunger > oldHunger && flags[kFLAGS.USE_OLD_INTERFACE] == 0) CoC.instance.mainView.statsView.showStatUp('hunger');
+			//game.dynStats("lus", 0, "scale", false);
+			if (nl) outputText("\n");
+			if (hunger > oldHunger) CoC.instance.mainView.statsView.showStatUp("hunger");
+			dynStats("lus", 0, "scale", false);
+			EngineCore.statScreenRefresh();
 		}
 		
 		/**
@@ -4353,7 +4386,7 @@ use namespace CoC;
 		}
 
 		public function slimeFeed():void{
-			if(hasStatusEffect(StatusEffects.SlimeCraving)) {
+			if (hasStatusEffect(StatusEffects.SlimeCraving)) {
 				//Reset craving value
 				changeStatusValue(StatusEffects.SlimeCraving,1,0);
 				//Flag to display feed update and restore stats in event parser
@@ -4361,11 +4394,11 @@ use namespace CoC;
 					createStatusEffect(StatusEffects.SlimeCravingFeed,0,0,0,0);
 				}
 			}
-			if(findPerk(PerkLib.Diapause) >= 0) {
+			if (findPerk(PerkLib.Diapause) >= 0) {
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228] += 3 + rand(3);
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] = 1;
 			}
-			//użyć dla minotaur blood path of gargoyle tf?
+			if (isGargoyle() && hasPerk(PerkLib.GargoyleCorrupted)) refillGargoyleHunger(30);
 		}
 
 		public function minoCumAddiction(raw:Number = 10):void {
@@ -4692,10 +4725,10 @@ use namespace CoC;
 			if (this.gender > 0) minLib = 15;
 			else minLib = 10;
 	
-			if (this.armorName == "lusty maiden's armor") {
+			if (this.armorName == "lusty maiden's armor" && this.findPerk(PerkLib.GargoylePure) >= 0) {
 				if (minLib < 50) minLib = 50;
 			}
-			if (minLib < (minLust() * 2 / 3))
+			if (minLib < (minLust() * 2 / 3) && this.findPerk(PerkLib.GargoylePure) >= 0)
 			{
 				minLib = (minLust() * 2 / 3);
 			}
@@ -4708,6 +4741,13 @@ use namespace CoC;
 			}
 			if (this.findPerk(PerkLib.HistoryReligious) >= 0 || this.findPerk(PerkLib.PastLifeReligious) >= 0) {
 				minLib -= 2;
+			}
+			if (this.findPerk(PerkLib.GargoylePure) >= 0) {
+				minLib = 5;
+				minSen = 5;
+			}
+			if (this.findPerk(PerkLib.GargoyleCorrupted) >= 0) {
+				minSen += 15;
 			}
 			//Factory Perks
 			if(this.hasPerk(PerkLib.DemonicLethicite)) {minCor+=10;minLib+=10;}
@@ -5407,14 +5447,16 @@ use namespace CoC;
 			if (isScylla()) {
 				maxStr += (30 * newGamePlusMod);
 			}
-			if (gargoyleScore() >= 6) {
+			if (gargoyleScore() >= 21) {
 				if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) {
-					maxStr += (80 * newGamePlusMod);
-					maxTou += (80 * newGamePlusMod);
+					maxStr += (90 * newGamePlusMod);
+					maxTou += (100 * newGamePlusMod);
+					maxInt += (70 * newGamePlusMod);
 				}
 				if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) {
-					maxTou += (80 * newGamePlusMod);
-					maxInt += (80 * newGamePlusMod);
+					maxTou += (70 * newGamePlusMod);
+					maxInt += (100 * newGamePlusMod);
+					maxInt += (90 * newGamePlusMod);
 				}
 			}
 			if (batScore() >= 6){
@@ -5580,6 +5622,15 @@ use namespace CoC;
 			/*if (findPerk(PerkLib.CatlikeNimblenessEvolved) >= 0) {
 				maxSpe += (10 * newGamePlusMod);
 			}*/
+			if (findPerk(PerkLib.GargoylePure) > 0) {
+				maxWis += (80 * newGamePlusMod);
+				maxLib -= (10 * newGamePlusMod);
+				maxSen -= (10 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.GargoyleCorrupted) > 0) {
+				maxWis -= (10 * newGamePlusMod);
+				maxLib += (80 * newGamePlusMod);
+			}
 			if (findPerk(PerkLib.EzekielBlessing) > 0) {
 				maxStr += (5 * newGamePlusMod);
 				maxTou += (5 * newGamePlusMod);

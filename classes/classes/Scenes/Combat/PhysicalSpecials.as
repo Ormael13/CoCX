@@ -249,14 +249,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.tailType == AppearanceDefs.TAIL_TYPE_GARGOYLE) {
-			bd = buttons.add("Tail Slam", TailSlamAttack).hint("Slam your mace like tail on your foes head dealing severe damage crushing its defence and stunning it.  \n\nWould go into cooldown after use for: 5 rounds");
+			bd = buttons.add("Tail Slam", TailSlamAttack).hint("Slam your mace-like tail on your foe's head, dealing severe damage, crushing its defences, and stunning it.  \n\nWould go into cooldown after use for: 5 rounds");
 			bd.requireFatigue(physicalCost(30));
 			if (player.hasStatusEffect(StatusEffects.CooldownTailSlam)) {
 				bd.disable("<b>You need more time before you can perform Tail Slam again.</b>\n\n");
 			}
 		}
 		if (player.wingType == AppearanceDefs.WING_TYPE_GARGOYLE_LIKE_LARGE) {
-			bd = buttons.add("Wing Buffet", WingBuffetAttack).hint("Buffet your foe using your two massive stone wings staggering your foe.  \n\nWould go into cooldown after use for: 5 rounds");
+			bd = buttons.add("Wing Buffet", WingBuffetAttack).hint("Buffet your foe using your two massive stone wings, staggering them.  \n\nWould go into cooldown after use for: 5 rounds");
 			bd.requireFatigue(physicalCost(30));
 			if (player.hasStatusEffect(StatusEffects.CooldownWingBuffet)) {
 				bd.disable("<b>You need more time before you can perform Wing Buffet again.</b>\n\n");
@@ -1481,7 +1481,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage = doDamage(damage);
 		if (!monster.hasStatusEffect(StatusEffects.TailSlamWhip)) monster.createStatusEffect(StatusEffects.TailSlamWhip,monster.armorDef,5,0,0);
 		//monster.armorDef == 0;
-		outputText("You slam your mace like tail on your foe dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!");
+		outputText("You slam your mace-like tail on your foe, dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!");
 		if (!monster.hasPerk(PerkLib.Resolute)) {
 			outputText(" The attack is so devastating your target is stunned by the crushing blow!");
 			monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
@@ -1535,7 +1535,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		damage = Math.round(damage);
 		damage = doDamage(damage);
-		outputText("You buffet your foe with your massive wings dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!");
+		outputText("You buffet your foe with your massive wings, dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!");
 		if (crit == true) {
 			outputText(" <b>*Critical Hit!*</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);

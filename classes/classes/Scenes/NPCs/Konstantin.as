@@ -44,7 +44,7 @@ package classes.Scenes.NPCs
 				if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) outputText(" The only ones that you know are in Tel’Adre, and albeit decent, their products aren’t exactly outstanding.");
 				outputText("\n\n\"<i>Oh, right, " + player.mf("man","girl") + ", forgot my manners. Name’s Konstantin, and what’s yours?</i>\" extending his hand to you.\n\n");
 				outputText("Accepting his handshake, you tell him your name, and vaguely tell what you are and how you happened to stumble on the clearing.\n\n");
-				outputText("\"<i>So, you’re one of those brave and mighty explorers wanting to cleanse every bit of demon ichor of Mareth?</i>\" he says, a bit amused. \"<i>You’re quite a rare sight these days. anyways friend, I have my furnace working, and if you’re what you’re saying, you may require my services.</i>\"\n\n");
+				outputText("\"<i>So, you’re one of those brave and mighty explorers wanting to cleanse every bit of demon ichor of Mareth?</i>\" he says, a bit amused. \"<i>You’re quite a rare sight these days. Anyways friend, I have my furnace working, and if you’re what you’re saying, you may require my services.</i>\"\n\n");
 				outputText("Interesting. Having a smith checking your equipment periodically doesn’t sounds bad. You question him about  kind of things he can do.\n\n");
 				outputText("\"<i>For starters, I can polish your armor and fix any weakened or broken pieces. If you happen to have several pieces of a solid item that can be assembled into a protective armor, I can do it for you. Lastly, I can sharpen your weapons to make sure that they cut and pierce through almost everything.</i>\"\n\n");
 				outputText("\"<i>The price for any of those services is the same. Say, 25 gems?</i>\"\n\n");
@@ -149,6 +149,7 @@ package classes.Scenes.NPCs
 			addButton(0, "Appearance", KonstantinAppearance);
 			addButton(1, "Talk", KonstantinTalkMenu);
 			addButton(2, "Crafting", KonstantinCraftingMenu);
+			//addButton(3, "Sex", KonstantinSexMenu);
 			addButton(14, "Leave", camp.campFollowers);
 		}
 		
@@ -267,7 +268,19 @@ package classes.Scenes.NPCs
 						outputText("\"<i>Now, if you happen to like an undergarment, I could make one for you, say, a vest or a corset for your upper body and a thong or a jock for your lower parts. I can even enhance the properties of the latter ones.</i>\"\n\n");
 						outputText("\"<i>This would require a bit less Ebonbloom, maybe 3 pieces for each undergarment.</i>\"\n\n");
 					}
-				}//WT_BRAN		TBAPLAT		DBAPLAT
+				}//WT_BRAN
+				if (player.hasItem(useables.DBAPLAT)) {
+					outputText("You show him the pieces of glowing-white, thick bark.\n\n");
+					outputText("\"<i>Funny thing.</i>\" Konstantin retorts. \"<i>I heard a feminine voice on my head asking me to craft a thing out of this. Voice said that she was Marae, and that she gave it as a reward to a brave warrior or so.</i>\"\n\n");
+					outputText("Really?\n\n");
+					outputText("\"<i>Yeah. Listen, I usually don’t buy the deities nonsense, but If you’d like, I could do as the voice asked and try to carve an armour out of this thing. It seems sturdy and flexible enough for most battlefields.</i>\"\n\n");
+				}
+				if (player.hasItem(useables.TBAPLAT)) {
+					outputText("You show him the pieces of thick bark with tentacles attached.\n\n");
+					outputText("\"<i>The fuck is that?</i>\" Konstantin retorts, a bit creeped out by how some of the tentacles are still moving and wiggling. \"<i>I’ve worked on strange materials before, but that thing seems almost alive on their own. Are you sure that this is safe to be used on an armor?</i>\"\n\n");
+					outputText("You proceed to explain him how you managed to get your hand on those bark pieces, and after you clarify a couple of doubts of his about the material’s nature, he takes the bark from you and nods.\n\n");
+					outputText("\"<i>Well, I think that I can work with that.</i>\" he answers, giving the lying bark a glance.\n\n");
+				}
 			}
 			else {
 				outputText("With a sigh, Konstantin tells you that nothing of you’ve brought him is useful to make a durable outfit, as they either lack the composition or the properties to be properly crafted.\n\n");
@@ -279,6 +292,11 @@ package classes.Scenes.NPCs
 			if (player.hasItem(useables.T_SSILK) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 1) addButton(2, "SpiderSilk", KonstantinCraftingSpiderSilkItems);
 			if (player.hasItem(useables.D_SCALE) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 1) addButton(3, "Dragonscale", KonstantinCraftingDragonscaleItems);
 			if (player.hasItem(useables.EBONBLO) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 1) addButton(4, "Ebonbloom", KonstantinCraftingEbonbloomItems);
+			if (player.hasItem(useables.DBAPLAT)) addButton(8, "T.Bark Armor", KonstantinCraftingDivineBarkArmor);
+			if (player.hasItem(useables.TBAPLAT)) addButton(9, "D.Bark Armor", KonstantinCraftingTentacledBarkArmor);
+			//if (player.hasItem(useables.TBAPLAT) && player.hasItem(weapons.W_STAFF)) addButton(10, "Puritas", );
+			//if (player.hasItem(useables.DBAPLAT) && player.hasItem(weapons.W_STAFF)) addButton(11, "Depravatio", );
+			//if ((player.hasItem(useables.TBAPLAT) && player.hasItem(weapons.PURITAS)) || (player.hasItem(useables.DBAPLAT) && player.hasItem(weapons.DEPRAVA))) addButton(12, "Ascensus", );
 			addButton(14, "Back", KonstantinMainCampMenu);
 		}//usunąć fragmenty " && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 1" jak sie całkiem przeniesie crafting z Ratha do Kona
 		
@@ -506,7 +524,7 @@ package classes.Scenes.NPCs
 				}
 				if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;
-				inventory.takeItem(itype, KonstantinMainCampMenu);
+				inventory.takeItem(itype, camp.returnToCampUseOneHour);
 			}
 		}
 		private function KonstantinCraftingEbonbloomItems():void {
@@ -514,7 +532,7 @@ package classes.Scenes.NPCs
 			addButton(0, "Platemail", KonstantinCraftingEbonbloomItems2, 1, null, null, armors.EWPLTMA.description);
 			addButton(1, "Jacket", KonstantinCraftingEbonbloomItems2, 2, null, null, armors.EWJACK_.description);
 			addButton(2, "Robes", KonstantinCraftingEbonbloomItems2, 3, null, null, armors.EWROBE_.description);
-		//	addButton(3, "Indec.R.", KonstantinCraftingEbonbloomItems2, 4, null, null, armors.INDEEWR.description);
+			addButton(3, "Indec.R.", KonstantinCraftingEbonbloomItems2, 4, null, null, armors.INDEEWR.description);
 		//	if (player.hasItem(useables.EBONBLO, 10) && player.hasItem(armors.H_GARB_, 1) && player.hasKeyItem("Dark Mage’s Grimoire") >= 0) addButton(4, "H. Garb", KonstantinCraftingEbonbloomItems2, 5, null, null, armors.EHGARB_.description);
 			if (flags[kFLAGS.KONSTANTIN_SERVICES] >= 5) {
 				addButton(5, "Jock", KonstantinCraftingEbonbloomItems2, 6, null, null, undergarments.EW_JOCK.description);
@@ -570,6 +588,14 @@ package classes.Scenes.NPCs
 					outputText("Beyond the physical, you can feel magical power flow through this robe. This untapped power should be quite helpful when casting magic. You thank Konstantin and collect your new robe.\n\n");
 					itype = armors.EWROBE_;
 					break;
+				case 4: //Indec.Robes
+				//	outputText(images.showImage("rathazul-craft-ebonweaveindecentrobes"));
+					outputText("The bear takes the ebonbloom flowers and sets up on his workbench for an hour while you wait. You can hear his tools cutting, smoothing and polishing each piece into a proper plate able to belong to a protective armor. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
+					outputText("\"<i>I think you'll be pleased with how the thing turned out.</i>\" The bear says, patting you on the shoulder. \"<i>Go ahead and take a look, " + player.mf("man", "girl") + ".</i>\"\n\n");
+					outputText("Hanging on the rack is a long, flowing robe. The black cloth ripples in the wind, but strangely it shines in the light as metal would. You run your fingers over the dark grey garment, feeling the soft (yet slightly slick) material give at your touch. There’s a hood around the edge. For now, it hangs limply down the back, but it would be easy to pull up in order to shield the wearer’s eyes from harsh sunlight or rainy drizzle. ");
+					outputText("Beyond the physical, you can feel magical power flow through this robe. This untapped power should be quite helpful when casting magic. You thank Konstantin and collect your new robe.\n\n");
+					itype = armors.INDEEWR;
+					break;
 				case 6: //Jock
 				//	outputText(images.showImage("rathazul-craft-ebonweavejock"));
 					outputText("The bear takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Konstantin is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging in one of  Konstantin’s racks is a jock. As you inspect it, you notice the black cloth has an oily sheen. ");
@@ -616,8 +642,64 @@ package classes.Scenes.NPCs
 				}
 				if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;
-				inventory.takeItem(itype, KonstantinMainCampMenu);
+				inventory.takeItem(itype, camp.returnToCampUseOneHour);
 			}
+		}
+		private function KonstantinCraftingDivineBarkArmor():void {
+			clearOutput();
+			outputText("Taking the pile of bark, he goes to his workbench, and starts turning the odd material into plates and armor pieces. Chemicals bathe the bark as he cuts and sews the softer pieces. From time to time you hear Konstantin curses as he has some troubles cutting the largest pieces into plates. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
+			outputText("The plates are white like snow. Gold ornates the plates and gives the set a holy and magical appearance. The armor includes a breastplate, pauldrons, full arm guards, and knee-high boots, as well as a set of cuisses and greves. A solid, but easily removable codpiece, covers the place where your nethers go.\n\n");
+			outputText("The codpiece bulges a little at the weight of your groin, and, if anything it looks a little lewd.  Konstantin smiles and gives you an half-embarrassed shug.");
+			if (player.biggestTitSize() >= 8) outputText(" Your " + biggestBreastSizeDescript() + " barely fit into the breastplate, leaving you displaying a large amount of jiggling cleavage.");
+			outputText("\n\nYou thank Konstantin for the armor, especially since it was hard to work with, and return to your duties.");
+			player.destroyItems(useables.DBAPLAT, 1);
+			if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
+			inventory.takeItem(armors.DBARMOR, camp.returnToCampUseOneHour);
+		}
+		private function KonstantinCraftingTentacledBarkArmor():void {
+			clearOutput();
+			outputText("Taking the pile of bark, he goes to his workbench, and starts turning the odd material into plates and armor pieces. Chemicals bathe the bark as he cuts and sews the softer pieces. The occasional grabby tentacle is quickly put down by a well placed hammer hit. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
+			outputText("The plates are white like snow. Green tentacles grow from the shoulderpads. The armor includes a breastplate, pauldrons, full arm guards, and knee-high boots, as well as a set of cuisses and greves. You realize the armor is missing a solid codpiece, a white piece of embroidered silk covering the place where your nethers go.\n\n");
+			outputText("\"<i>Huh, that?</i>\" Konstantin say knowingly. \"<i>The tentacles didn’t let me put something solid there no matter how much I smashed them, so I had to settle with that. Hope that you don’t mind.</i>\"\n\n");
+			outputText("The silken material does little to hide the bulge of your groin, if anything it looks a little lewd.  Konstantin smiles and gives you an half-embarrassed shug.");
+			if (player.biggestTitSize() >= 8) outputText(" Your " + biggestBreastSizeDescript() + " barely fit into the breastplate, leaving you displaying a large amount of jiggling cleavage.");
+			outputText("\n\nYou thank Konstantin for the armor, especially since it was hard to work with, and return to your duties.");
+			player.destroyItems(useables.TBAPLAT, 1);
+			if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
+			inventory.takeItem(armors.TBARMOR, camp.returnToCampUseOneHour);
+		}
+		
+		public function KonstantinSexMenu():void {
+			clearOutput();
+			if (flags[kFLAGS.KONSTANTIN_SEX_MENU] == 1) {
+				outputText("Konstantin has nothing but a smile when he sees you coming to his place with the prospect of more fun in mind. With a mischievous wink, he strips of his undies, the only pieces of cloth covering his body, so you can ogle at the sight of his naked body, and lies on the bed, rubbing his towering manhood, as if enticing you to come in and choke on it.\n\n");
+				outputText("Truly speaking, the mere sight of the flesh mammoth sliding between his fingers, as well as his huge nuts bouncing below make your body ache in need. Not wanting to leave him wanting, you strip off your clothes, and hop to his side on the bed. You make out for a while, enjoying his kisses, caresses and gropes, until none of you can’t stand it anymore, your bodies melting under the carnal desire.\n\n");
+				outputText("Now that both of you are hot and ready, the question is, what do you want to do?\n\n");
+				dynStats("lus", 33);
+			}
+			else {
+				outputText("While wandering around the camp, you look out for Konstantin. Oddly, seems like he’s not around, as his working place is alone. You’re about to leave when you manage to hear a soft humming from his tent.\n\n");
+				outputText("Peeking inside, you manage to see the well hung bear lazily relaxing on his bed. Not working for the moment, he is currently reading. Since he is in the supposedly private space of his own tent, he has forego most clothing, wearing now only a set of undies that does little to hide the bulge between his legs. You almost gasp in surprise as he takes them off too and starts rubbing his meat.\n\n");
+				outputText("Then, a familiar voice startles you.\n\n");
+				outputText("\"<i>Hey, [name] you aren’t going to say hello?</i>\"\n\n");
+				outputText("Frozen in place, you face to look Konstantin, that smiles to you warmly, cock still on hand, not bothered a bit by your intrusion on his tent. Awkwardly, you try to explain yourself, but the stops you.\n\n");
+				outputText("\"<i>Don't worry, my friend. Having your company is always nice. Mind seating with me?</i>\" he offers,\n\n");
+				outputText("As you’re about to sit, your ursine friend points to you.\n\n");
+				outputText("\"<i>Hey, [name]. Better take out those.</i>\" he suggests \"<i>Well feel more fresh that way, and I don’t think that anyone is gonna come in and see us.</i>\"\n\n");
+				outputText("Nodding, you remove you clothing and leave it next to his bed, then you hop in and sit beside the naked bear, feeling the warm embrace of his fur on your [skin].\n\n");
+				outputText("\"<i>“So, you came here only to hand around naked with me?</i>\" he jokingly remarks.\n\n");
+				outputText("Blushing, you admit that you’d like to do what you were seeking, spend a good time with him, if he catches what you mean. He nods and smiles, enveloping you in one of his bear-hugs.\n\n");
+				outputText("\"<i>It’s okay, " + player.mf("man", "girl") + ". We always have those urges sooner or later. And, on those times is much more sooner than later. And, with you, I’d be more than happy.</i>\" he assures you. \"<i>So, what’s on your mind?</i>\"\n\n");
+				flags[kFLAGS.KONSTANTIN_SEX_MENU] = 1;
+				dynStats("lus", 33);
+			}
+			menu();
+			addButton(0, "Give BJ", KonstantinTalkHim);
+			addButton(1, "Recive BJ", KonstantinTalkHisWork);
+			addButton(2, "69", KonstantinTalkTheCamp);
+			addButton(3, "Recive Anal", KonstantinTalkTheCamp);
+			addButton(4, "Hot Spring Fuck", KonstantinTalkTheCamp);
+			addButton(14, "Back", KonstantinMainCampMenu);
 		}
 	}
 }

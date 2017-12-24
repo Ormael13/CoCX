@@ -1226,13 +1226,13 @@ use namespace CoC;
 			else addButtonDisabled(5, "Hair", "You already sculpted the Hair.");
 			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) < 1) addButton(6, "Chest", SculptChest);
 			else addButtonDisabled(6, "Chest", "You already sculpted the Chest.");
-			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) < 1) addButton(7, "Pussy", SculptPussy);
+			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3) || player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker3) < 1) addButton(7, "Pussy", SculptPussy);
 			else addButtonDisabled(7, "Pussy", "You already sculpted the Pussy Area.");
 			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) < 1) addButton(8, "Cock", SculptCock);
 			else addButtonDisabled(8, "Cock", "You already sculpted the Cock Area.");
-			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) < 1) addButton(9, "Balls", SculptBalls);
+			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3) || player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) < 1) addButton(9, "Balls", SculptBalls);
 			else addButtonDisabled(9, "Balls", "You already sculpted the Balls Area.");
-			if (flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] >= 11 && flags[kFLAGS.GARGOYLE_QUEST] >= 3) addButton(13, "Ritual", becomingGargoyle);
+			if (flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] >= 11 && flags[kFLAGS.GARGOYLE_QUEST] >= 3 && !player.isGargoyle()) addButton(13, "Ritual", becomingGargoyle);
 			addButton(14, "Back", BackToSapphire);
 		}
 		public function BackToSapphire():void {
@@ -1572,7 +1572,7 @@ use namespace CoC;
 					outputText("\n\n<b>Are you sure about this? There's no turning back past this point.</b>");
 					menu();
 					addButton(0, "No", becomingGargoyleNo);
-					//addButton(1, "Yes", becomingGargoyleYes);
+					addButton(1, "Yes", becomingGargoyleYes);
 					
 				}
 			}
@@ -1587,7 +1587,7 @@ use namespace CoC;
 			clearOutput();
 			outputText("This is something that is gonna change your entire life and while you're ready to do anything to stop the demons, you're not sure this is what you want yet. You resolve to come back and do the ritual once you truly are ready for it.");
 			doNext(templeBasement);
-		}//look at CharCreation.as line 958 for setitng thicknes based on picked length
+		}
 		public function becomingGargoyleYes():void {
 			clearOutput();
 			outputText("You proceed according to the ritual as described in the book, however a question poses itself. What kind of blood will you use?");
@@ -1618,15 +1618,31 @@ use namespace CoC;
 			}
 			player.skin.setBaseOnly({type:AppearanceDefs.SKIN_TYPE_STONE});
 			player.hairType = AppearanceDefs.HAIR_NORMAL;
-			player.faceType = AppearanceDefs.FACE_HUMAN;
+			player.faceType = AppearanceDefs.FACE_DEVIL_FANGS;
+			player.tongueType = AppearanceDefs.TONGUE_DEMONIC;
 			player.hornType = AppearanceDefs.HORNS_GARGOYLE;
-			player.horns = 12 + rand(4); 
-			//player.armType = AppearanceDefs.ARM_TYPE_GARGOYLE;
-			//player.tailType = AppearanceDefs.TAIL_TYPE_GARGOYLE;
-			//player.tailRecharge = 0;
-			//player.wingType = AppearanceDefs.WING_TYPE_GARGOYLE_LIKE_LARGE;
-			//player.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE;
-			//player.legCount = 2;
+			player.horns = 12 + rand(4);
+			player.beardLength = 0;
+			player.beardStyle = 0;
+			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 1) player.femininity = 100;
+			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 2) player.femininity = 0;
+			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 3) {
+				player.femininity = 50;
+				if (player.findPerk(PerkLib.Androgyny) < 0) player.createPerk(PerkLib.Androgyny,0,0,0,0);
+			}
+			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker2) == 1) player.hairLength = 0;
+			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker2) == 2) player.hairLength = 2;
+			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker2) == 3) player.hairLength = 8;
+			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker2) == 4) player.hairLength = 14;
+			if (player.statusEffectv4(StatusEffects.GargoyleTFSettingTracker1) == 1) player.armType = AppearanceDefs.ARM_TYPE_GARGOYLE;
+			if (player.statusEffectv4(StatusEffects.GargoyleTFSettingTracker1) == 2) player.armType = AppearanceDefs.ARM_TYPE_GARGOYLE_2;
+			if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker1) == 1) player.tailType = AppearanceDefs.TAIL_TYPE_GARGOYLE;
+			if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker1) == 2) player.tailType = AppearanceDefs.TAIL_TYPE_GARGOYLE_2;
+			player.tailRecharge = 0;
+			player.wingType = AppearanceDefs.WING_TYPE_GARGOYLE_LIKE_LARGE;
+			if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker1) == 1) player.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE;
+			if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker1) == 2) player.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE_2;
+			player.legCount = 2;
 			player.eyeType = AppearanceDefs.EYES_GEMSTONES;
 			player.antennae = AppearanceDefs.ANTENNAE_NONE;
 			player.tongueType = AppearanceDefs.TONGUE_HUMAN;
@@ -1635,12 +1651,38 @@ use namespace CoC;
 			player.rearBody = AppearanceDefs.REAR_BODY_NONE;
 			if (player.hasStatusEffect(StatusEffects.BlackNipples)) player.removeStatusEffect(StatusEffects.BlackNipples);
 			if (player.averageNipplesPerBreast() > 1) player.breastRows[0].nipplesPerBreast = 1;
-			//reducing breast rows to 1 and setting bust cup (if needed)
+			if (player.breastRows.length > 1) player.breastRows.length = 1;
+			var size:Number = 0;
+			if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) >= 2) size += player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) - 1;
+			player.breastRows[0].breastRating = size;
 			if (player.hasStatusEffect(StatusEffects.Feeder)) {
 				player.removeStatusEffect(StatusEffects.Feeder);
 				player.removePerk(PerkLib.Feeder);
 			}
-			//setting up cock size & balls (if needed)
+			player.removeVagina(0, 1);
+			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker3) == 1) player.clitLength = 0;
+			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker3) == 2) {
+				player.createVagina();
+				player.clitLength = 0.5;
+			}
+			player.killCocks(-1);
+			if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) >= 2) {
+				player.createCock();
+				var length:Number = 3;
+				length += player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) * 0.5;
+				player.cocks[0].cockLength = length;
+				player.cocks[0].cockThickness = Math.floor(((length / 5) - 0.1) * 10) / 10;
+				player.cocks[0].cockType = CockTypesEnum.HUMAN;
+				player.cocks[0].knotMultiplier = 1;
+			}
+			if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) == 1) {
+				player.balls = 0;
+				player.ballSize = 0;
+			}
+			if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) >= 2) {
+				player.balls = 2;
+				player.ballSize = player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) - 1;
+			}
 			becomingGargoyleYes3();
 		}
 		private function becomingGargoyleYes3():void {
@@ -1659,7 +1701,9 @@ use namespace CoC;
 			else {
 				outputText("Something went really wrong in the ritual. You're starting to crave fluids… any fluids and particularly cum and milk! Without an input of these, you feel you're gonna lose strength and eventually run out of energy, turning into an immobile ordinary statue! Worse yet, lust seems to creep up your mind like an uncontrollable wave. You need sex and you need it now!\n\n");
 				outputText("<b>Gain perk: Corrupted Gargoyle - You need constant intakes of sexual fluids to stay alive.</b>\n\n");
+				player.lust = player.maxLust();
 			}
+			if (flags[kFLAGS.HUNGER_ENABLED] == 0) flags[kFLAGS.HUNGER_ENABLED] = 0.5;
 			player.createPerk(PerkLib.TransformationImmunity,0,0,0,0);
 			outputText("After the weird feelings subside, you pick up what is your actual pedestal and move it to your camp.\n\n");
 		}

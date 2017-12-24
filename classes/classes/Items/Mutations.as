@@ -2384,17 +2384,20 @@ public final class Mutations extends MutationsHelper
 			outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 25)");
 			player.soulforce += 25;
 			if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(5);
 			statScreenRefresh();
 		}
 		public function midgradesoulforcerecoverypill(player:Player):void {
 			outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 150)");
 			player.soulforce += 150;
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(25);
 			if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
 			statScreenRefresh();
 		}
 		public function highgradesoulforcerecoverypill(player:Player):void {
 			outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 900)");
 			player.soulforce += 900;
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(125);
 			if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
 			statScreenRefresh();
 		}
@@ -2402,6 +2405,7 @@ public final class Mutations extends MutationsHelper
 	//		outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 5400)");
 	//		player.soulforce += 5400;
 	//		if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+	//		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(625);
 	//		statScreenRefresh();
 	//	}
 
@@ -11467,7 +11471,20 @@ public final class Mutations extends MutationsHelper
 				}
 				setTailType(AppearanceDefs.TAIL_TYPE_RED_PANDA);
 				changes++;
-			}
+			}/*
+			if (rand(3) == 0 && changes < changeLimit && !player.hasFur()) {
+				if (!player.hasCoat()) {
+					outputText("\n\nYou start to scratch your [skin], as an uncomfortable itching overcomes you. It’s quite annoying, like the aftermath of being bitten by a bug, only that it’s all over at the same time.");
+				}
+				else if (player.hasScales()) {
+					outputText("\n\nThe layer of scales covering your body feels weird for a second, almost looking like they’re moving on they own, and that is when you realize that they changing!");
+					outputText("\n\nThe feeling is quite odd, a bit of an itching from the place where they join your skin, that quickly becomes more intense as their transformation advances. Then a bunch of scales fall from your arm. Soon all the scales on your arm fall off, leaving behind a layer of healthy, normal skin. The process continues overs the rest of your body, and before long you are covered in a layer of " + player.skinTone + " skin.");
+					outputText("\n\nNot for long though, as an uncomfortable itching overcomes you. It’s quite annoying, like the aftermath of being bitten for a bug, only all over your body at the same time.");
+				}
+				outputText("\n\nSoon you realize that the sensation is coming from <i>under</i> your skin. After rubbing one of your arms in annoyance, you feel something different, and when you lay your eyes on it, you realize that a patch of fur is growing over your skin. Then you spot similar patches over your legs, chest and back. Fur grows over your body, patches joining and closing over your skin, and in a matter of seconds, your entire body is covered with a lovely coat of thick fur. The soft and fluffy sensation is quite pleasant to the touch.  <b>Seems like you’re now covered from head to toe with russet-red fur with black fur on your underside!</b>");
+				player.skin.growCoat({AppearanceDefs.SKIN_COAT_FUR,color:player.hairColor,pattern:AppearanceDefs.PATTERN_RED_PANDA_UNDERBODY,color:"russet-red",color2:"black"});
+				changes++;
+			}*/
 			player.refillHunger(20);
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}

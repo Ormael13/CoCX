@@ -714,6 +714,19 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				player.removePerk(PerkLib.DarkCharm);
 				needNext = true;
 			}
+			//Jungle’s Wanderer
+			if (player.redpandaScore() >= 6) {
+				if (player.findPerk(PerkLib.JunglesWanderer) < 0) {
+					//outputText("\nWhile stretching, you notice that you're much more flexible than you were before.  \n\n(<b>Gained Perk: Jungle’s Wanderer</b>)\n");
+					player.createPerk(PerkLib.JunglesWanderer, 0, 0, 0, 0);
+					//needNext = true;
+				}
+			}
+			else if (player.findPerk(PerkLib.JunglesWanderer) >= 0 && player.redpandaScore() < 6) {
+				//outputText("\nYou notice that you aren't as flexible as you were when you had a more feline body.  \n\n(<b>Lost Perk: Jungle’s Wanderer</b>)\n");
+				player.removePerk(PerkLib.JunglesWanderer);
+				//needNext = true;
+			}
 			//Freezing Breath
 			if (player.faceType == AppearanceDefs.FACE_WOLF && player.findPerk(PerkLib.FreezingBreath) < 0 && player.hasKeyItem("Fenrir Collar") >= 0) {
 				outputText("\nYou suddenly feel something raging in you wanting to be unleashed as it slowly climbs out of your chest. It rushes through your throat and you scream a titanic primordial roar as the air in front of you ondulate with a massive drop of temperature and everything covers with a thick layer of solid ice. You massage your throat for a moment noticing as thin volume of condensation constantly escape from your maw.\n\n(<b>Gained Perk: Freezing Breath</b>)\n");

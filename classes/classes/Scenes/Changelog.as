@@ -60,6 +60,7 @@ package classes.Scenes
 			outputText(" Mana cost reduction for perks Stronger Elemental Bond and Strongest Elemental Bond reduced to 20 and 40 from 30 and 90. Amount of mana used by attacking elementals increased by 25%.\n");
 			outputText("-Pearl gained by beating enemy in Hidden Cave will be giving Elemental Conjurer Mind and Body Dedication perk instead of Elemental Conjurer Mind and Body Resolve. For all PC's that used it already it will just replace perks and for those that still need to use this item will be granting new perk.\n");
 			outputText("-New event related perk: Elemental Conjurer Mind and Body Dedication. Req.: Using Five-colored Elemental Pearl, which can be found after beating 2nd boss of Hidden Cave dungeon. Effect: It'll neutralize negative effects on max Str/Tou/Spe due to picking Elemental Conjurer Dedication perk.\n");
+			outputText("-New event related perk: Jungle’s Wanderer. Req.: having 6 or more points in Red Panda race score. Effect: +35 to the Evasion percentage.\n");
 			outputText("-New tier 3 misc lvl-up perk: Speedy Recuperation. Req. Speedy Recovery perk. Effect: Regain fatigue +100% out of combat / +200% in combat faster\n");
 			outputText("-New tier 3 misc lvl-up perk: Recuperation Sleep. Req. Speedy Recovery perk. Effect: Gain +100% boost to health and fatigue recovery during sleep\n");
 			outputText("-New tier 4 wisdom lvl-up perk: First Attack: Elementals. Req. Strong Elemental Bond and Elemental Contract Rank 4 perks. Effect: Opens new possible options for elementals help - attacking alongside PC instead of replacing his/her melee attack. They will also attack first and PC would be able to pick which of current summoned elementals will attack\n");
@@ -92,7 +93,8 @@ package classes.Scenes
 			outputText("-Manticore bonuses increased (req. 6/12 pts now) to : +50/100 max spe, +25/50 max int, +30/60 max lib, +15/30 min sens, +0/50 max HP. ALso having cat tongue and not having cock will count as point to manticore score.\n");
 			outputText("-New type of resistance added: Magic Resistance. Some of enemy attacks that use non physical attacks/specials will req. this resistance to reduce recived damage. Rising intelligence and wisdom will let PC rise it to 25%. Other ways to increase it higher would be having specific status effects or perks.\n");
 			outputText("-Perk Naked Truth will now provide magical resistance like physical one it have now -10% dmg (to both physical and magical). Perk Speedy Recovery will no longer require perk Evade and 60+ speed becoming re-classified as misc perk form formely speed perk (it also now boost fatigue recovery rate during wait/rest/sleep by 100%).\n");
-			outputText("-New way to count physical/magical resistance with cap that would rise each new game tier. Now each 10 pts in tou/int/wis would add 1% ot phys (tou) or mag (int/wis) resistance with each stopping when phys or magical resistance reach 25% (+5% for each ascension).\n");
+			outputText("-New way to count physical/magical resistance with cap that would rise each new game tier. Now each 20 pts in tou/int/wis would add 1% ot phys (tou) or mag (int/wis) resistance with each stopping when phys or magical resistance reach 20% (+5% for each ascension).\n");
+			outputText("-Small changes how woudl perks/effects increase phys/mag def value. Also without using defend move max red will be 80% not 95.\n");
 			outputText("-New Physical Special: Tornado Strike. Req. to be Vouivre and flying at the moment. It will deal damage and stun enemies that aren't resistant to stun for 3 turns. Cooldown for again use is 8 turns.\n");
 			outputText("-Cat race bonuses adjusted for Half Cat-morph/Cat-morph (4+/8+ points in cat score): +40/60 to max spe, +25/60 to max Lib\n");
 			outputText("-New melee weapon (by Liadri): Nephilim Blade - obtainable by giving B.F.Sword to Pure Celess to purify. Increased by 6 base dmg, added scaling based on purity, deal bonus dmg to corrupted enemies and each attack will slowly purify user.\n");
@@ -142,6 +144,9 @@ package classes.Scenes
 			outputText("-New body part: Red Panda Tail. No prereq. Having tail will give access to P. Special Tail Whip.\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Marae combat stats buffed slightly and she will make better use of her stats for specials in both possible forms (pure and corrupt).\n");
 			outputText("-When PC reach lvl 24 and higher base value of HP and Fatigue recovery during Rest, Sleep (or Wait for Fatigue) will be increased by 50%. When PC would reach lvl 42 and higher +50% bonus to base value will change into +100% bonus.\n");
 			outputText("-Replaced texts for Jewel Shop with those written by Starglider (aka much better than sort of placeholder-ish texts that was there before).\n");
@@ -155,6 +160,10 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -162,6 +171,8 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Bat, Vampire, 
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -199,7 +210,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): dodać yuki-onna TF
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

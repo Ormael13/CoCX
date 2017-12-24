@@ -958,7 +958,7 @@ public function packAttack():void {
 		outputText("You duck, weave, and dodge.  Despite their best efforts, the throng of demons only hit the air and each other.");
 	}
 	//Determine if evaded
-	else if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
+	else if ((player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) || (player.findPerk(PerkLib.JunglesWanderer) >= 0 && rand(100) < 35)) {
 		outputText("Using your skills at evading attacks, you anticipate and sidestep [monster a] [monster name]' attacks.");
 	}
 	//("Misdirection"

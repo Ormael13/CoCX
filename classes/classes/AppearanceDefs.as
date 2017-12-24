@@ -233,6 +233,7 @@ public class AppearanceDefs {
     public static const ARM_TYPE_ELF:int												=  21;
     public static const ARM_TYPE_RAIJU:int												=  22;
     public static const ARM_TYPE_RED_PANDA:int											=  23;
+    public static const ARM_TYPE_GARGOYLE_2:int											=  24;
 
 // clawType
     public static const CLAW_TYPE_NORMAL:int                                            =   0;
@@ -354,6 +355,7 @@ public class AppearanceDefs {
     public static const LOWER_BODY_TYPE_ELF:int											=  40;
     public static const LOWER_BODY_TYPE_RAIJU:int										=  41;
     public static const LOWER_BODY_TYPE_RED_PANDA:int									=  42;
+    public static const LOWER_BODY_TYPE_GARGOYLE_2:int									=  43;
 
 // rearBody
     public static const REAR_BODY_NONE:int                                              =   0;

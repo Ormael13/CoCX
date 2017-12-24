@@ -3660,24 +3660,24 @@ import flash.errors.IllegalOperationError;
 
 		public function damageToughnessModifier(displayMode:Boolean = false):Number {
 			var temp:Number = 0;
-			temp += tou / 10;
-			if (temp > (25 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]))) temp = 25 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			temp += tou / 20;
+			if (temp > (20 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]))) temp = 20 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			//displayMode is for stats screen.
 			if (displayMode) return temp;
 			else return rand(temp);
 		}
 		public function damageIntelligenceModifier(displayMode:Boolean = false):Number {
 			var temp:Number = 0;
-			temp += inte / 10;
-			if (temp > (12.5 + (2.5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]))) temp = 12.5 + (2.5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			temp += inte / 20;
+			if (temp > (10 + (2.5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]))) temp = 10 + (2.5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			//displayMode is for stats screen.
 			if (displayMode) return temp;
 			else return rand(temp);
 		}
 		public function damageWisdomModifier(displayMode:Boolean = false):Number {
 			var temp:Number = 0;
-			temp += wis / 10;
-			if (temp > (12.5 + (2.5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]))) temp = 12.5 + (2.5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			temp += wis / 20;
+			if (temp > (10 + (2.5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]))) temp = 10 + (2.5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			//displayMode is for stats screen.
 			if (displayMode) return temp;
 			else return rand(temp);
@@ -3690,7 +3690,7 @@ import flash.errors.IllegalOperationError;
 			//Toughness modifier.
 			if (!displayMode) {
 				mult -= damageToughnessModifier();
-				if (mult < 75) mult = 75;
+				if (mult < 70) mult = 70;
 			}
 			//Modify armor rating based on weapons.
 			if (applyModifiers) {
@@ -3704,62 +3704,60 @@ import flash.errors.IllegalOperationError;
 			//--PERKS--
 			//Take damage you masochist!
 			if (findPerk(PerkLib.Masochist) >= 0 && lib >= 60) {
-				mult *= 0.8;
+				mult -= 0.2;
 				if (short == game.player.short && !displayMode) game.player.dynStats("lus", (2 * (1 + game.player.newGamePlusMod())));
 			}
 			if (findPerk(PerkLib.FenrirSpikedCollar) >= 0) {
-				mult *= 0.85;
+				mult -= 0.15;
 			}
 			if (findPerk(PerkLib.Juggernaut) >= 0 && tou >= 100 && armorPerk == "Heavy") {
-				mult *= 0.9;
+				mult -= 0.1;
 			}
 			if (findPerk(PerkLib.ImmovableObject) >= 0 && tou >= 75) {
-				mult *= 0.9;
+				mult -= 0.1;
 			}
 			if (findPerk(PerkLib.AyoArmorProficiency) >= 0 && tou >= 75 && armorPerk == "Ayo") {
-				mult *= 0.9;
+				mult -= 0.1;
 			}
 			if (findPerk(PerkLib.HeavyArmorProficiency) >= 0 && tou >= 75 && armorPerk == "Heavy") {
-				mult *= 0.9;
+				mult -= 0.1;
 			}
 			if (findPerk(PerkLib.ShieldHarmony) >= 0 && tou >= 100 && shieldName != "nothing" && !hasStatusEffect(StatusEffects.Stunned)) {
-				mult *= 0.9;
+				mult -= 0.1;
 			}
 			if (findPerk(PerkLib.NakedTruth) >= 0 && spe >= 75 && lib >= 60 && (armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "nothing")) {
-				mult *= 0.9;
+				mult -= 0.1;
 			}
 			//--STATUS AFFECTS--
 			//Black cat beer = 25% reduction!
 			if (statusEffectv1(StatusEffects.BlackCatBeer) > 0) {
-				mult *= 0.75;
+				mult -= 0.25;
 			}
 			if (statusEffectv1(StatusEffects.OniRampage) > 0) {
-				mult *= 0.8;
+				mult -= 0.2;
 			}
 			if (statusEffectv1(StatusEffects.EarthStance) > 0) {
-				mult *= 0.7;
+				mult -= 0.3;
 			}
-			//Defend = 50-(99)% reduction
+			//Defend = 35-95% reduction
 			if (hasStatusEffect(StatusEffects.Defend)) {
 				if (findPerk(PerkLib.DefenceStance) >= 0 && tou >= 80) {
 					if (findPerk(PerkLib.MasteredDefenceStance) >= 0 && tou >= 120) {
-						if (findPerk(PerkLib.PerfectDefenceStance) >= 0 && tou >= 160) mult *= 0.05;
-						else mult *= 0.25;
+						if (findPerk(PerkLib.PerfectDefenceStance) >= 0 && tou >= 160) mult -= 0.95;
+						else mult -= 0.7;
 					}
-					else mult *= 0.4;
+					else mult -= 0.5;
 				}
-				else mult *= 0.5;
+				else mult -= 0.35;
 			}
 			// Uma's Massage bonuses
 			var sac:StatusEffectClass = statusEffectByType(StatusEffects.UmasMassage);
 			if (sac && sac.value1 == UmasShop.MASSAGE_RELAXATION) {
-				mult *= sac.value2;
+				mult -= sac.value2;
 			}
-			//Round things off.
-			mult = Math.round(mult);
-			//Caps damage reduction at 95/99%.
+			//Caps damage reduction at 80/99%.
 			if (hasStatusEffect(StatusEffects.Defend) && findPerk(PerkLib.PerfectDefenceStance) >= 0 && tou >= 160 && mult < 1) mult = 1;
-			if (!hasStatusEffect(StatusEffects.Defend) && mult < 5) mult = 5;
+			if (!hasStatusEffect(StatusEffects.Defend) && mult < 20) mult = 20;
 			return mult;
 		}
 		public function damageMagicalPercent(displayMode:Boolean = false, applyModifiers:Boolean = false):Number {
@@ -3769,34 +3767,33 @@ import flash.errors.IllegalOperationError;
 			if (!displayMode) {
 				mult -= damageIntelligenceModifier();
 				mult -= damageWisdomModifier();
-				if (mult < 75) mult = 75;
+				if (mult < 70) mult = 70;
 			}
+			if (findPerk(PerkLib.NakedTruth) >= 0) mult -= 0.45 + (5 * game.player.newGamePlusMod());
 			//--PERKS--
 			if (findPerk(PerkLib.NakedTruth) >= 0 && spe >= 75 && lib >= 60 && (armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "nothing")) {
-				mult *= 0.9;
+				mult -= 0.1;
 			}
 			//--STATUS AFFECTS--
-			//Defend = 50-(99)% reduction
+			//Defend = 35-95% reduction
 			if (hasStatusEffect(StatusEffects.Defend)) {
 				if (findPerk(PerkLib.DefenceStance) >= 0 && tou >= 80) {
 					if (findPerk(PerkLib.MasteredDefenceStance) >= 0 && tou >= 120) {
-						if (findPerk(PerkLib.PerfectDefenceStance) >= 0 && tou >= 160) mult *= 0.05;
-						else mult *= 0.25;
+						if (findPerk(PerkLib.PerfectDefenceStance) >= 0 && tou >= 160) mult -= 0.95;
+						else mult -= 0.7;
 					}
-					else mult *= 0.4;
+					else mult -= 0.5;
 				}
-				else mult *= 0.5;
+				else mult -= 0.35;
 			}
 			// Uma's Massage bonuses
 			var sac:StatusEffectClass = statusEffectByType(StatusEffects.UmasMassage);
 			if (sac && sac.value1 == UmasShop.MASSAGE_RELAXATION) {
-				mult *= sac.value2;
+				mult -= sac.value2;
 			}
-			//Round things off.
-			mult = Math.round(mult);
-			//Caps damage reduction at 95/99%.
+			//Caps damage reduction at 80/99%.
 			if (hasStatusEffect(StatusEffects.Defend) && findPerk(PerkLib.PerfectDefenceStance) >= 0 && tou >= 160 && mult < 1) mult = 1;
-			if (!hasStatusEffect(StatusEffects.Defend) && mult < 5) mult = 5;
+			if (!hasStatusEffect(StatusEffects.Defend) && mult < 20) mult = 20;
 			return mult;
 		}
 
@@ -3810,6 +3807,7 @@ import flash.errors.IllegalOperationError;
 			if (findPerk(PerkLib.Flexibility) >= 0) chance += 6;
 			if (findPerk(PerkLib.Misdirection) >= 0 && armorName == "red, high-society bodysuit") chance += 10;
 			if (findPerk(PerkLib.Unhindered) >= 0 && (armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "nothing")) chance += 10;
+			if (findPerk(PerkLib.JunglesWanderer) >= 0) chance += 35;
 			if (hasStatusEffect(StatusEffects.Illusion)) chance += 10;
 			if (hasStatusEffect(StatusEffects.Flying)) chance += 20;
 			if (hasStatusEffect(StatusEffects.HurricaneDance)) chance += 25;
@@ -3822,6 +3820,7 @@ import flash.errors.IllegalOperationError;
 		public const EVASION_FLEXIBILITY:String = "Flexibility";
 		public const EVASION_MISDIRECTION:String = "Misdirection";
 		public const EVASION_UNHINDERED:String = "Unhindered";
+		public const EVASION_JUNGLESWANDERER:String = "Jungle's Wanderer";
 		public const EVASION_ILLUSION:String = "Illusion";
 		public const EVASION_FLYING:String = "Flying";
 
@@ -3842,11 +3841,11 @@ import flash.errors.IllegalOperationError;
 			var roll:Number = rand(100);
 
 			// perks
-			if (findPerk(PerkLib.Evade) >= 0 && (roll < 10))
-			return "Evade";
+			if (findPerk(PerkLib.Evade) >= 0 && (roll < 10)) return "Evade";
 			if (findPerk(PerkLib.Flexibility) >= 0 && (roll < 6)) return "Flexibility";
 			if (findPerk(PerkLib.Misdirection) >= 0 && armorName == "red, high-society bodysuit" && (roll < 10)) return "Misdirection";
 			if (findPerk(PerkLib.Unhindered) >= 0 && (armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "nothing") && (roll < 10)) return "Unhindered";
+			if (findPerk(PerkLib.JunglesWanderer) >= 0 && (roll < 35)) return "Jungle's Wanderer";
 			if (hasStatusEffect(StatusEffects.Illusion) && (roll < 10)) return "Illusion";
 			if (hasStatusEffect(StatusEffects.Flying) && (roll < 20)) return "Flying";
 			if (hasStatusEffect(StatusEffects.HurricaneDance) && (roll < 25)) return "Hurricane Dance";

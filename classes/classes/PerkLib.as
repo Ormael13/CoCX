@@ -1765,6 +1765,8 @@ public class PerkLib
 				"Allows you to fade into a ghost-like state and temporarily possess others.");
 		public static const InkSpray:PerkType = mk("Ink Spray", "Ink Spray",
 				"Allows you to shoot blinding and probably slightly arousing ink out of your genitalia similar like octopus.");
+		public static const JunglesWanderer:PerkType = mk("Jungle’s Wanderer", "Jungle’s Wanderer",
+				"Your nimble body has adapted to moving through jungles and forests, evading enemy attacks with ease and making yourself harder to catch. (+35 to the Evasion percentage)");
 		public static const LightningAffinity:PerkType = mk("Lightning Affinity", "Lightning Affinity",
 				"Increase all damage dealt with lightning spells by 100% and reduce lightning damage taken by 50%.");
 		public static const LizanRegeneration:PerkType = mk("Lizan Regeneration", "Lizan Regeneration",

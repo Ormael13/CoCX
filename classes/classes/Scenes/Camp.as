@@ -1347,6 +1347,8 @@ public function campSlavesMenu(descOnly:Boolean = false):void {
 	}
 	//Patchouli
 	if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= 5) {
+		if (flags[kFLAGS.PATCHOULI_FOLLOWER] == 5) outputText("Patchouli is still tied to a tree. Even incapacitated in this way, he keeps grinning at you, as if taunting you.\n\n");
+		if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= 6) outputText("Patchoulie is lazily resting on a branch in the nearby tree. When she looks at you, she always has that unsettling smile of hers, as if taunting you.\n\n");
 		buttons.add( "Patchoule", SceneLib.patchouliScene.patchouleMainCampMenu);
 	}
 	//Modified Camp/Follower List Description:
@@ -2048,6 +2050,11 @@ public function rest():void {
 			if (timeQ != 1) outputText("You lie down in your pitcher, closing off your petals as you get comfortable for " + num2Text(timeQ) + " hours.\n");
 			else outputText("You lie down in your pitcher, closing off your petals as you get comfortable for an hour.\n");
 		}
+		else if (player.isGargoyle())
+		{
+			if (timeQ != 1) outputText("You sit on your pedestal, your body hardening like stone as you briefly slumber for " + num2Text(timeQ) + " hours.\n");
+			else outputText("You sit on your pedestal, your body hardening like stone as you briefly slumber for an hour.\n");
+		}
 		else 
 		{
 			if (timeQ != 1) outputText("You lie down to rest for " + num2Text(timeQ) + " hours.\n");
@@ -2204,7 +2211,13 @@ CoC.instance.saves.saveGame(player.slotName);
 		/******************************************************************/
 		/*       SLEEP WITH SYSTEM GOOOO                                  */
 		/******************************************************************/
-		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "" || flags[kFLAGS.SLEEP_WITH] == "Marble"))
+		if (player.isGargoyle()) {
+			outputText("You sit on your pedestal, your body hardening like stone as you sleep for " + num2Text(timeQ) + " ");
+			if(timeQ == 1) outputText("hour.\n");
+			else outputText("hours.\n");
+			return;
+		}
+		else (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "" || flags[kFLAGS.SLEEP_WITH] == "Marble"))
 		{
 			outputText("You enter your cabin to turn yourself in for the night. ")
 		}
@@ -2232,7 +2245,7 @@ CoC.instance.saves.saveGame(player.slotName);
 			joyScene.hornyJoyIsPregnant();
 			return;
 		}
-		else if(flags[kFLAGS.SLEEP_WITH] == "Sophie" && (bimboSophie() || sophieFollower()) && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
+		else if (flags[kFLAGS.SLEEP_WITH] == "Sophie" && (bimboSophie() || sophieFollower()) && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
 			//Night Time Snuggle Alerts!*
 			//(1) 
 			if(rand(4) == 0) {

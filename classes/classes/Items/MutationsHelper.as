@@ -271,6 +271,7 @@ import classes.BodyParts.Skin;
 	}
 	private const METAMORPH_ANTENNAE:Object = createMapFromPairs([
 		[AppearanceDefs.ANTENNAE_BEE, StatusEffects.UnlockedBeeAntennae],
+		[AppearanceDefs.ANTENNAE_COCKATRICE, null],
 		[AppearanceDefs.ANTENNAE_MANTIS, StatusEffects.UnlockedMantisAntennae],
 	]);
 	public function setArmType(armType:int):Boolean {
@@ -283,6 +284,7 @@ import classes.BodyParts.Skin;
 		[AppearanceDefs.ARM_TYPE_ELF, StatusEffects.UnlockedElfArms],
 		[AppearanceDefs.ARM_TYPE_FOX, StatusEffects.UnlockedFoxArms],
 		[AppearanceDefs.ARM_TYPE_GARGOYLE, null],
+		[AppearanceDefs.ARM_TYPE_GARGOYLE_2, null],
 		[AppearanceDefs.ARM_TYPE_HARPY, StatusEffects.UnlockedHarpyArms],
 		[AppearanceDefs.ARM_TYPE_HUMAN, null],
 		[AppearanceDefs.ARM_TYPE_KITSUNE, StatusEffects.UnlockedKitsuneArms],
@@ -481,6 +483,7 @@ import classes.BodyParts.Skin;
 		[AppearanceDefs.LOWER_BODY_TYPE_FERRET, null],
 		[AppearanceDefs.LOWER_BODY_TYPE_FOX, StatusEffects.UnlockedFoxLowerBody],
 		[AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE, null],
+		[AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE_2, null],
 		[AppearanceDefs.LOWER_BODY_TYPE_GOO, null],
 		[AppearanceDefs.LOWER_BODY_TYPE_HARPY, StatusEffects.UnlockedHarpyLegs],
 		[AppearanceDefs.LOWER_BODY_TYPE_HOOFED, StatusEffects.UnlockedHoofedLegs],
