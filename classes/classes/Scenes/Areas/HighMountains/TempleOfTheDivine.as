@@ -1595,19 +1595,20 @@ use namespace CoC;
 			addButton(0, "OwnBlood", becomingGargoyleYesOwnBlood).hint("Your body would need regular intake of raw soulforce.");
 			if (player.hasItem(consumables.MINOBLO, 1)) addButton(1, "Minotaur", becomingGargoyleYesMinotaurBlood).hint("Your body would need regular intake of sexual fluids.");
 			else addButtonDisabled(1, "Minotaur", "Need Minotaur Blood vial for this option");
+			addButton(2, "Back", templeBasement)
 		}
 		
-		private function becomingGargoyleYesOwnBlood():void {
+		public function becomingGargoyleYesOwnBlood():void {
 			clearOutput();
 			player.createPerk(PerkLib.GargoylePure, 0, 0, 0, 0);
 			becomingGargoyleYes2();
 		}
-		private function becomingGargoyleYesMinotaurBlood():void {
+		public function becomingGargoyleYesMinotaurBlood():void {
 			clearOutput();
 			player.createPerk(PerkLib.GargoyleCorrupted, 0, 0, 0, 0);
 			becomingGargoyleYes2();
 		}
-		private function becomingGargoyleYes2():void {
+		public function becomingGargoyleYes2():void {
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) {
 				player.skinTone = "light grey";
 				player.hairColor = "light grey";
@@ -1685,7 +1686,7 @@ use namespace CoC;
 			}
 			becomingGargoyleYes3();
 		}
-		private function becomingGargoyleYes3():void {
+		public function becomingGargoyleYes3():void {
 			outputText("You mix the blood with powdered coal, honey and drakeheart, creating the mixture required to paint the arcanic circles. You draw them around the statue under the worried gaze of Sapphire. Once done, you lay down on the altar, touching the statue with the soul gem and ask Sapphire to recite the words written in the book for you.\n\n");
 			outputText("Sapphire protests for a few seconds, clearly upset by this \"<i>You can't be serious! You're planning to insert your own soul inside a gargoyle? Are you actually attempting suicide? This isn't something one should do so lightly!</i>\"\n\n");
 			outputText("You reply that you will do whatever is needed to defeat the demons and if that means becoming an immortal artificial being, then so be it. Defeated by your determination, Sapphire finally complies as she chants \"<i>Shira Khrim Almisry Ohm Ak Tar Marae Kann Tharr Shul Elysro An Siryr Ahn Ekatyr Evenar Sethe Omaris!</i>\"\n\n");
@@ -1706,6 +1707,7 @@ use namespace CoC;
 			if (flags[kFLAGS.HUNGER_ENABLED] == 0) flags[kFLAGS.HUNGER_ENABLED] = 0.5;
 			player.createPerk(PerkLib.TransformationImmunity,0,0,0,0);
 			outputText("After the weird feelings subside, you pick up what is your actual pedestal and move it to your camp.\n\n");
+			doNext(camp.returnToCampUseFourHours);
 		}
 	}
 }

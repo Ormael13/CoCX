@@ -2579,9 +2579,9 @@ public static const PATCHOULI_HAIR_COLOR:int                                   	
 public static const PATCHOULI_COCK_TYPE:int                                   		= 2571;
 public static const GOO_GIRLS_AND_GREEN_SLIMES:int                                  = 2572;
 public static const MINO_CHEF_TALKED_RED_RIVER_ROOT:int                             = 2573;
-public static const UNKNOWN_FLAG_NUMBER_02574:int                                   = 2574;
-public static const UNKNOWN_FLAG_NUMBER_02575:int                                   = 2575;
-public static const UNKNOWN_FLAG_NUMBER_02576:int                                   = 2576;
+public static const AIKO_AFFECTION:int                                   			= 2574;
+public static const AIKO_CORRUPTION:int                                   			= 2575;
+public static const AIKO_QUEST:int                                   				= 2576;
 public static const UNKNOWN_FLAG_NUMBER_02577:int                                   = 2577;
 public static const UNKNOWN_FLAG_NUMBER_02578:int                                   = 2578;
 public static const UNKNOWN_FLAG_NUMBER_02579:int                                   = 2579;

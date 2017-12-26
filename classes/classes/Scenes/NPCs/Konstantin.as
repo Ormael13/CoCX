@@ -148,7 +148,7 @@ package classes.Scenes.NPCs
 			menu();
 			addButton(0, "Appearance", KonstantinAppearance);
 			addButton(1, "Talk", KonstantinTalkMenu);
-			addButton(2, "Crafting", KonstantinCraftingMenu);
+			addButton(2, "Blacksmithing", KonstantinCraftingMenu);
 			//addButton(3, "Sex", KonstantinSexMenu);
 			addButton(14, "Leave", camp.campFollowers);
 		}
