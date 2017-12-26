@@ -52,7 +52,6 @@ import flash.utils.getQualifiedClassName;
 		public override function unload():void{
 			EventParser.timeAwareClassRemove(_instance);
 			Camp.removeFollower(_instance);
-			removeSavedNPC(_instance);
 			_instance = null;
 		}
 		
