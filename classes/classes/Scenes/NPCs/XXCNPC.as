@@ -28,10 +28,6 @@ import coc.xxc.BoundStory;
         protected static function addSavedNPC(toAdd:XXCNPC):void{
             _savedNPCs.push(toAdd);
         }
-		protected static function removeSavedNPC(toRemove:XXCNPC):void{
-			var i:int = _savedNPCs.indexOf(toRemove);
-			if(i>=0){_savedNPCs.splice(i,1);}
-		}
         public static function get SavedNPCs():Vector.<XXCNPC>{
             return _savedNPCs;
         }
@@ -39,6 +35,7 @@ import coc.xxc.BoundStory;
 			for each(var npc:XXCNPC in _savedNPCs){
 				npc.unload();
 			}
+			_savedNPCs = new Vector.<XXCNPC>();
 		}
 		protected var _story:BoundStory;
 		protected var _storyName:String;

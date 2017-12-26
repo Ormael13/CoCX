@@ -34,7 +34,6 @@ public class DivaScene extends XXCNPC{
     }
     public override function unload():void{
         Camp.removeFollower(_instance);
-        removeSavedNPC(_instance);
         _instance = null;
     }
     public override function save(saveto:*):void{
