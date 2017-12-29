@@ -40,10 +40,10 @@ package classes.Scenes
 			outputText("-Patchouli that lead PC to new areas can be meet in forest and after first time PC will have...few option how to react on enxt meeting as long PC decided to visit new place before and it wasn't wonderland. One of this options lead to brining tied up cat to camp where PC can talk with him, look at him or... feed him specific item.\n");
 			outputText("-Patchouli after his change would become full fledged camp npc under Slaves tab (he is there also right after been brought to camp). PC can still look at her, talk, give some items to change her, have sex or... still explore places or/and wonderland.\n");
 			outputText("-On second and laters visits to wonderland PC will be facing choice of staying or leaving. Staying will lead to one time fight with lvl 60 boss Jabberwocky. He's tough, highly armored and adorable rabbit-dragon. Sadly still he can be hurt by magic or ice attack. Loosing will lead to Bad End but winning will give jabberwocky scale and... weapon if PC won by beating him physicaly.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-While wandering in forest PC can meet bear smith named Konstantin. He would offer services that can temporaly buff melee weapon or armor costing 25 gems. After 2nd time PC used those services he will have option to invite him to camp.\n");
+			outputText("-After been invited to camp Konstantin would have all crafting armors/weapons option that Rathazul have (and yes that mean Rathazul would loose those options now), talk with him, check his appearance, ask for temporal buff to melee weapon/armor and sex scenes.\n");
 			outputText("-Rathazul will be recruitable to camp after 2 not 3 times PC used his services.\n");
+			outputText("-\n");
 			outputText("-6 new archievments and few old ones slight adjusted. Some of new are not yet reachable but will be...in future builds.\n");
 			outputText("-New camp structure: Dam. No prereq. structure, 300 wood, 200 nails. PC building small wood dam on steam next to camp.\n");
 			outputText("-New camp structure: Fishery. Req. Dam, 300 wood, 200 nails. PC building fishery, at which some of the camp npc's can work (currently only Izma). When npc working at it it would generate 5 fishes per day. But when Ceani is in camp she will eat 5 fishes per day. PC can pick 1 or stack of 10 fresh fishes if there is enough of them in fishery (left after Ceani feeding).\n");
@@ -136,12 +136,15 @@ package classes.Scenes
 			outputText("-All spells costs now would slowly increase when PC spell power increase.\n");
 			outputText("-When Ayane is in camp speed of recovery fatigue when sleeping will be increased by 300% not 200%,\n");
 			outputText("-Flitlock Pistol and Blunderbuss rifle ammo increased from 4 to 6 and 2 to 9 respectively.\n");
-			outputText("-New TF: Red River Root (red panda TF) buyable in Tel'Adre Bakery for 14 gems. Bonuses for (Half) Red-Panda-morph would be for (4)8 pts in racial score: +(0)15 to max Str, +(45)75 to max Spe and +(15)30 to max Int.\n");
+			outputText("-New TF item: Red River Root (red panda TF) buyable in Tel'Adre Bakery for 14 gems. Bonuses for (Half) Red-Panda-morph would be for (4)8 pts in racial score: +(0)15 to max Str, +(45)75 to max Spe and +(15)30 to max Int.\n");
 			outputText("-New body part: Red Panda Ears. No prereq.\n");
 			outputText("-New body part: Red Panda Face. Req. Red Panda Ears.\n");
 			outputText("-New body part: Red Panda Arms. Req. Red Panda Tail.\n");
 			outputText("-New body part: Red Panda Legs. Req. Red Panda Arms.\n");
 			outputText("-New body part: Red Panda Tail. No prereq. Having tail will give access to P. Special Tail Whip.\n");
+			outputText("-New TF item: Wonderfruit (cheshire cat TF) gained after visiting Wonderland with Patchouli. Aside few additional effects it works like normal cat TF giving the same effects. When cheshire racial score reach 11 pts PC will gain bonuses: +95 to max Spe, +70 to Int.\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -161,8 +164,6 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -171,7 +172,6 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Bat, Vampire, 
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

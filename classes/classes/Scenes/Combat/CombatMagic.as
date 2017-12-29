@@ -27,6 +27,7 @@ public class CombatMagic extends BaseCombatContent {
 	public function CombatMagic() {
 	}
 	internal function applyAutocast():void {
+		outputText("\n\n");
 		if (player.hasPerk(PerkLib.Spellsword) && player.lust < getWhiteMagicLustCap() && player.mana >= (spellCostWhite(30) * spellChargeWeaponCostMultiplier()) && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] == 0 && player.weaponName != "fists") {
 			spellChargeWeapon(true);
 			useMana((30 * spellChargeWeaponCostMultiplier()),5);

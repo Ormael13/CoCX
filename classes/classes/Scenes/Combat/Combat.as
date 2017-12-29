@@ -165,7 +165,7 @@ public function endLustLoss():void
 
 public function spellPerkUnlock():void {
 		if(flags[kFLAGS.SPELLS_CAST] >= 10 && player.findPerk(PerkLib.SpellcastingAffinity) < 0) {
-			outputText("<b>You've become more comfortable with your spells, unlocking the Spellcasting Affinity perk and reducing fatigue cost of spells by 10%!</b>\n\n");
+			outputText("<b>You've become more comfortable with your spells, unlocking the Spellcasting Affinity perk and reducing mana cost of spells by 10%!</b>\n\n");
 			player.createPerk(PerkLib.SpellcastingAffinity,10,0,0,0);
 		}
 		if(flags[kFLAGS.SPELLS_CAST] >= 30 && player.perkv1(PerkLib.SpellcastingAffinity) < 20) {

@@ -252,7 +252,7 @@ public function startUrtaQuest():void {
 	player.tou = 110;
 	player.spe = 120;
 	player.inte = 60;
-	player.wis = 15;
+	player.wis = 50;
 	player.lib = 90;
 	player.sens = 50;
 	player.cor = 30;
@@ -263,12 +263,12 @@ public function startUrtaQuest():void {
 	player.gems = 183;
 	player.level = 26;
 	player.teaseLevel = 5;
-	player.str += (player.newGamePlusMod() * 20);
-	player.tou += (player.newGamePlusMod() * 22);
-	player.spe += (player.newGamePlusMod() * 24);
-	player.inte += (player.newGamePlusMod() * 12);
-	player.wis += (player.newGamePlusMod() * 3);
-	player.lib += (player.newGamePlusMod() * 18);
+	player.str += (player.newGamePlusMod() * 30);
+	player.tou += (player.newGamePlusMod() * 33);
+	player.spe += (player.newGamePlusMod() * 36);
+	player.inte += (player.newGamePlusMod() * 18);
+	player.wis += (player.newGamePlusMod() * 15);
+	player.lib += (player.newGamePlusMod() * 27);
 
 	//PERKS
 	player.createPerk(PerkLib.Agility,0,0,0,0);
@@ -296,26 +296,31 @@ public function startUrtaQuest():void {
 	if (player.newGamePlusMod() >= 2) player.createPerk(PerkLib.ResistanceIII,0,0,0,0);
 	if (player.newGamePlusMod() >= 3) player.createPerk(PerkLib.ResistanceIV,0,0,0,0);
 	if (player.newGamePlusMod() >= 4) player.createPerk(PerkLib.ResistanceV,0,0,0,0);
+	if (player.newGamePlusMod() >= 5) player.createPerk(PerkLib.ResistanceVI,0,0,0,0);
 	player.createPerk(PerkLib.InhumanDesireI,0,0,0,0);
 	if (player.newGamePlusMod() >= 1) player.createPerk(PerkLib.InhumanDesireII,0,0,0,0);
 	if (player.newGamePlusMod() >= 2) player.createPerk(PerkLib.InhumanDesireIII,0,0,0,0);
 	if (player.newGamePlusMod() >= 3) player.createPerk(PerkLib.InhumanDesireIV,0,0,0,0);
-	if (player.newGamePlusMod() >= 3) player.createPerk(PerkLib.InhumanDesireV,0,0,0,0);
+	if (player.newGamePlusMod() >= 4) player.createPerk(PerkLib.InhumanDesireV,0,0,0,0);
+	if (player.newGamePlusMod() >= 5) player.createPerk(PerkLib.InhumanDesireVI,0,0,0,0);
 	player.createPerk(PerkLib.RefinedBodyI,0,0,0,0);
 	if (player.newGamePlusMod() >= 1) player.createPerk(PerkLib.RefinedBodyII,0,0,0,0);
 	if (player.newGamePlusMod() >= 2) player.createPerk(PerkLib.RefinedBodyIII,0,0,0,0);
 	if (player.newGamePlusMod() >= 3) player.createPerk(PerkLib.RefinedBodyIV,0,0,0,0);
 	if (player.newGamePlusMod() >= 4) player.createPerk(PerkLib.RefinedBodyV,0,0,0,0);
+	if (player.newGamePlusMod() >= 5) player.createPerk(PerkLib.RefinedBodyVI,0,0,0,0);
 	player.createPerk(PerkLib.TankI,0,0,0,0);
 	if (player.newGamePlusMod() >= 1) player.createPerk(PerkLib.TankII,0,0,0,0);
 	if (player.newGamePlusMod() >= 2) player.createPerk(PerkLib.TankIII,0,0,0,0);
 	if (player.newGamePlusMod() >= 3) player.createPerk(PerkLib.TankIV,0,0,0,0);
 	if (player.newGamePlusMod() >= 4) player.createPerk(PerkLib.TankV,0,0,0,0);
+	if (player.newGamePlusMod() >= 5) player.createPerk(PerkLib.TankVI,0,0,0,0);
 	player.createPerk(PerkLib.DancersVitalityI,0,0,0,0);
 	if (player.newGamePlusMod() >= 1) player.createPerk(PerkLib.DancersVitalityII,0,0,0,0);
 	if (player.newGamePlusMod() >= 2) player.createPerk(PerkLib.DancersVitalityIII,0,0,0,0);
 	if (player.newGamePlusMod() >= 3) player.createPerk(PerkLib.DancersVitalityIV,0,0,0,0);
-	if (player.newGamePlusMod() >= 3) player.createPerk(PerkLib.DancersVitalityV,0,0,0,0);
+	if (player.newGamePlusMod() >= 4) player.createPerk(PerkLib.DancersVitalityV,0,0,0,0);
+	if (player.newGamePlusMod() >= 5) player.createPerk(PerkLib.DancersVitalityVI,0,0,0,0);
 
 	//GEAR!
 	player.setWeapon(weapons.URTAHLB);

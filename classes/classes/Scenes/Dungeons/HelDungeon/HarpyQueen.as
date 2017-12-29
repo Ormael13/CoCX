@@ -18,7 +18,7 @@ public class HarpyQueen extends Monster
 		public function eldritchRopes():void {
 			outputText("The Harpy Queen flicks her left wrist at you. Before you can blink, ropes of white-hot magic hurtle toward you. You manage to duck and dodge a few of them, but a pair still grab your wrists, pulling painfully at your arms.");
 			//(Effect: Grab + Physical Damage)
-			var damage:int = 25 + rand(10);
+			var damage:int = 25 + rand(this.inte / 5);
 			damage = player.takeMagicDamage(damage, true);
 			createStatusEffect(StatusEffects.QueenBind,0,0,0,0);
 		}
@@ -42,14 +42,14 @@ public class HarpyQueen extends Monster
 		public function lustSpikeAttack():void {
 			outputText("The Harpy Queen draws a strange arcane circle in the air, lines of magic remaining wherever the tip of her staff goes.  You try to rush her, but the circle seems to have created some kind of barrier around her.  You can only try to force it open - but too late!  A great pink bolt shoots out of the circle, slamming into your chest.  You suddenly feel light-headed and so very, very horny...");
 			//(Effect: Heavy Lust Damage)
-			player.dynStats("lus", 40);
+			player.dynStats("lus", (50 + rand(this.lib / 4)));
 		}
 
 		//ATTACK THREE: Wind Slam!
 		public function windSlamAttack():void {
 			outputText("The queen swings her arm at you and, despite being a few feet away, you feel a kinetic wall slam into you, and you go flying - right into the harpy brood!  You feel claws, teeth and talons dig into you, but you're saved by a familiar pair of scaled arms.  \"<i>Get back in there!</i>\" Helia shouts, throwing you back into the battle!");
 			//(Effect; Heavy Damage)
-			var damage:Number = 100 + rand(50);
+			var damage:Number = 100 + rand(this.wis);
 			damage = player.takeMagicDamage(damage, true);
 		}
 		
@@ -120,13 +120,13 @@ public class HarpyQueen extends Monster
 			this.skinDesc = "feathers";
 			this.hairColor = "black";
 			this.hairLength = 15;
-			initStrTouSpeInte(100, 90, 160, 80);
-			initWisLibSensCor(80, 80, 45, 50);
+			initStrTouSpeInte(100, 90, 170, 100);
+			initWisLibSensCor(100, 80, 45, 50);
 			this.weaponName = "eldritch staff";
 			this.weaponVerb="thwack";
-			this.weaponAttack = 27;
+			this.weaponAttack = 31;
 			this.armorName = "armor";
-			this.armorDef = 26;
+			this.armorDef = 29;
 			this.bonusHP = 1000;
 			this.bonusLust = 30;
 			this.fatigue = 0;

@@ -374,6 +374,7 @@ import classes.BodyParts.Skin;
 		[AppearanceDefs.FACE_BUCKTOOTH, null],
 		[AppearanceDefs.FACE_BUNNY, null],
 		[AppearanceDefs.FACE_CAT, null],
+		[AppearanceDefs.FACE_CAT_CANINES, null],
 		[AppearanceDefs.FACE_COW_MINOTAUR, StatusEffects.UnlockedCowMinotaurFace],
 		[AppearanceDefs.FACE_DEER, null],
 		[AppearanceDefs.FACE_DOG, null],

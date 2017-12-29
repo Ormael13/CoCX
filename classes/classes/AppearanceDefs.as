@@ -119,6 +119,7 @@ public class AppearanceDefs {
     public static const FACE_BUCKTOOTH:int                                            	=   35;
     public static const FACE_JABBERWOCKY:int                                            =   36;
     public static const FACE_RED_PANDA:int                                            	=   37;
+    public static const FACE_CAT_CANINES:int                                            =   38;
 
 // tongueType
     public static const TONGUE_HUMAN:int                                                =   0;

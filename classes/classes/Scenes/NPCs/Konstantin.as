@@ -61,8 +61,10 @@ package classes.Scenes.NPCs
 			clearOutput();
 			if (player.gems >= 25) {
 				player.gems -= 25;
-				outputText("You take the [armor] and hand it to Konstantin. He starts working on it, idly whistling while you patiently sit on the nearby tree stump.\n\n");
-				outputText("Applying the best of his smithing skills to the [armor], he starts tossing away the parts of it that are too damaged due to the blows that it has received or too weakened for the continued use, replacing them with brand new pieces of the same material. He also strengthens the inner structure of each piece and fixes them so they don’t leave a bit of your body unprotected.\n\n");
+				outputText("You take the [armor] and hand it to Konstantin. He starts working on it, idly whistling while you patiently sit on the nearby ");
+				if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) outputText("tree stump");
+				else outputText("couch");
+				outputText(".\n\nApplying the best of his smithing skills to the [armor], he starts tossing away the parts of it that are too damaged due to the blows that it has received or too weakened for the continued use, replacing them with brand new pieces of the same material. He also strengthens the inner structure of each piece and fixes them so they don’t leave a bit of your body unprotected.\n\n");
 				outputText("Once he’s finished, your [armor] looks clean, beautiful and as good as if it was brand new.");
 				if (player.hasStatusEffect(StatusEffects.KonstantinArmorPolishing)) player.removeStatusEffect(StatusEffects.KonstantinArmorPolishing);
 				player.createStatusEffect(StatusEffects.KonstantinArmorPolishing, 73, 10, 0, 0);
@@ -71,7 +73,11 @@ package classes.Scenes.NPCs
 					meetKonstantinAtForest2();
 					return;
 				}
-				else outputText(" Thanking him for services, you take the armor and bid farewell to the smiling bear.\n\n\n\n");
+				else {
+					outputText(" Thanking him for services, you take the armor and bid farewell to the smiling bear");
+					if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) outputText(", and return to your daily tasks");
+					outputText(".\n\n");
+				}
 			}
 			else outputText("\"<i>It’s okay, " + player.mf("man","girl") + ". Gems can be tough to get sometimes. If you feel like using my services, you can find me in this clearing.</i>\"\n\n");
 			doNext(camp.returnToCampUseOneHour);
@@ -80,7 +86,10 @@ package classes.Scenes.NPCs
 			clearOutput();
 			if (player.gems >= 25) {
 				player.gems -= 25;
-				outputText("Handing the [weapon] to the bear smith, you hop on the tree stump while he gets to work. Konstantin goes to his anvil, where he examines your weapon and figures how he is going to work with it.\n\n");
+				outputText("Handing the [weapon] to the bear smith, you hop on ");
+				if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) outputText("one of his couches");
+				else outputText("the tree stump");
+				outputText(" while he gets to work. Konstantin goes to his anvil, where he examines your weapon and figures how he is going to work with it.\n\n");
 				outputText("Later, you start hearing the sound of metal on metal caused by the bear’s tool, accompanied by a song that he’s humming to pass the time. Once he’s done with the anvil, he turns to sharpening and polishing your [weapon].\n\n");
 				outputText("A short time later, he finally returns it to you. The [weapon] looks gleaming and brand new, and sharp enough that you think that it could cut rock.");
 				if (player.hasStatusEffect(StatusEffects.KonstantinWeaponSharpening)) player.removeStatusEffect(StatusEffects.KonstantinWeaponSharpening);
@@ -98,8 +107,17 @@ package classes.Scenes.NPCs
 		public function meetKonstantinAtForestNothing():void {
 			clearOutput();
 			outputText("Not having needed anything from his services at the moment, you thank the bear for his offer.\n\n");
-			outputText("\"<i>Okay, " + player.mf("man","girl") + ". Was a pleasure to meet you, still, stop by again soon if you happen to need a good smith.</i>\"\n\n");
-			outputText("Assuring him that you’ll do so, you bid him farewell and proceed to return to your camp.\n\n");
+			outputText("\"<i>Okay, " + player.mf("man","girl") + ". ");
+			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) outputText("Stop by again soon if you happen to need help with your stuff");
+			else outputText("Was a pleasure to meet you, still, stop by again soon if you happen to need a good smith");
+			outputText(".</i>\"\n\n");
+			outputText("Assuring him that you’ll do so, you bid him farewell and proceed to return to your ");
+			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) {
+				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) outputText("cabin");
+				else outputText("bedroll");
+			}
+			else outputText("camp");
+			outputText(".\n\n");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function meetKonstantinAtForest2():void {
@@ -144,12 +162,13 @@ package classes.Scenes.NPCs
 		
 		public function KonstantinMainCampMenu():void {
 			clearOutput();
-			outputText("It's possible Coalsack will wirte some short text for this menu.\n\n");
+			outputText("It's possible Coalsack will write some short text for this menu.\n\n");
 			menu();
 			addButton(0, "Appearance", KonstantinAppearance);
 			addButton(1, "Talk", KonstantinTalkMenu);
-			addButton(2, "Blacksmithing", KonstantinCraftingMenu);
-			//addButton(3, "Sex", KonstantinSexMenu);
+			addButton(2, "Smithing", KonstantinSmithingMenu);
+			addButton(3, "Tinkering", KonstantinTinkeringMenu).hint("Add some temporary boosts to you weapons or armor.");
+			addButton(4, "Sex", KonstantinSexMenu);
 			addButton(14, "Leave", camp.campFollowers);
 		}
 		
@@ -236,7 +255,7 @@ package classes.Scenes.NPCs
 			doNext(KonstantinTalkMenu);
 		}
 		
-		public function KonstantinCraftingMenu():void {
+		public function KonstantinSmithingMenu():void {
 			clearOutput();
 			outputText("Seeing how Konstantin is working with armor and plating pieces, you happen to ask him if he could assemble some of the materials that you’ve found during your travels in Mareth into something useful to wear and protect yourself.\n\n");
 			if (player.hasItem(useables.GREENGL) || player.hasItem(useables.B_CHITN) || player.hasItem(useables.T_SSILK)) {
@@ -268,7 +287,16 @@ package classes.Scenes.NPCs
 						outputText("\"<i>Now, if you happen to like an undergarment, I could make one for you, say, a vest or a corset for your upper body and a thong or a jock for your lower parts. I can even enhance the properties of the latter ones.</i>\"\n\n");
 						outputText("\"<i>This would require a bit less Ebonbloom, maybe 3 pieces for each undergarment.</i>\"\n\n");
 					}
-				}//WT_BRAN
+				}
+				if (player.hasItem(useables.WT_BRAN)) {
+					outputText("You show Konstantin the branch from Yggdrasil and ask for his opinion. He gives you a slightly amused look. The bear takes the branch from you and examines it carefully, muttering thing about it’s texture and material, once he’s satisfied, he returns it to you.\n\n");
+					outputText("\"<i>Odd stuff. I think that with the right treatment, I could make a regal looking show piece, but in case of that you want me to make a weapon from this thing, I’ll need something more...something like a branch from those mageboon trents.</i>\"\n\n");
+					outputText("You assure him that the wood is suitable. When you see his doubt, you give him a quick explanation on where the wood comes from. That Yggdrasil’s wood is every bit as suitable as mageboon wood. When mention that the branch has soulforce, you get his full attention at once.\n\n");
+					outputText("\"<i>" + player.mf("Man","Girl") + ", you should’ve say that from the start! There are few materials that possess natural soulforce, since it usually dissipates once the user has expired, and needs to be artificially infused. And natural soulforce in wood? Why that is simply unheard of. I have a few ideas for how to use this. I’ll require a lot of work, tho.</i>\"\n\n");
+					outputText("You grimace at his words as the giant bear runs his hands over the wood.\n\n");
+					outputText("\"<i>Hey, [name], don’t give me that look! I mean real, weaponizing treatments. With those we can turn this into a conduit for your own soulforce. I could even mold this into a sword, if you want me to.</i>\"\n\n");
+					outputText("Well, damn. Looks like you have plenty of options to choose from. Decisions, decisions...\n\n");
+				}
 				if (player.hasItem(useables.DBAPLAT)) {
 					outputText("You show him the pieces of glowing-white, thick bark.\n\n");
 					outputText("\"<i>Funny thing.</i>\" Konstantin retorts. \"<i>I heard a feminine voice on my head asking me to craft a thing out of this. Voice said that she was Marae, and that she gave it as a reward to a brave warrior or so.</i>\"\n\n");
@@ -281,6 +309,34 @@ package classes.Scenes.NPCs
 					outputText("You proceed to explain him how you managed to get your hand on those bark pieces, and after you clarify a couple of doubts of his about the material’s nature, he takes the bark from you and nods.\n\n");
 					outputText("\"<i>Well, I think that I can work with that.</i>\" he answers, giving the lying bark a glance.\n\n");
 				}
+				if (player.hasItem(useables.DBAPLAT) && player.hasItem(weapons.W_STAFF)) {
+					outputText("Among all your stuff, you find the pure white bark, still glowing slightly. Checking it a bit, you hand the pieces to Konstantin, that after taking it, examines the texture, marveling on its snow-white color and gold accents.\n\n");
+					outputText("\"<i>So, you want me to work with this stuff. Looks sturdy, and without a doubt it's magic in nature, so it could made into a...</i>\"\n\n");
+					outputText("Before he can continue, you produce the wizard staff that you were carrying and ask him if he can infuse the wood into the staff. You’ve heard that the run of the mill wizard’s staves are made from sacred wood; perhaps you could combine Marae’s power with... this?\n\n");
+					outputText("Konstantin looks at the bark doubtfully: \"<i>Maybe. I’ll require a couple of hours, for binding the materials together, you know. And I keep hearing the voice of the so-called goddess Marae asking me to craft it for you.</i>\" he adds, contemplating the soft glow of the bark.\n\n");
+				}
+				if (player.hasItem(useables.TBAPLAT) && player.hasItem(weapons.W_STAFF)) {
+					outputText("Among all your stuff, you find the tentacled white bark. Checking it a bit, you hand the pieces to Konstantin, that after taking it, examines the texture and prods the greenish appendages with no little amusement.\n\n");
+					outputText("\"<i>So, you want me to work with this stuff. Looks sturdy, and without a doubt it's magic in nature, so it could made into a...</i>\"\n\n");
+					outputText("Before he can continue, you produce the wizard staff that you were carrying and ask him if he can infuse the wood into the staff. You’ve heard that the run of the mill wizard’s staves are made from sacred wood; perhaps you could combine Marae’s power with... this?\n\n");
+					outputText("Konstantin looks at the bark doubtfully: \"<i>Maybe. I’ll require a couple of hours, for binding the materials together, you know. I’ll have to keep my eyes open, else I’ll have a surprise prostate massage.</i>\" he adds, half-joking.\n\n");
+				}
+				if (player.hasItem(useables.TBAPLAT) && player.hasItem(weapons.PURITAS)) {
+					outputText("Among all your stuff, you find the tentacled white bark. Checking it a bit, you hand the pieces to Konstantin, that after taking it, examines the texture and prods the greenish appendages with no little amusement.\n\n");
+					outputText("\"<i>So, you want me to work with this stuff. Looks sturdy, and without a doubt it's magic in nature, so it could made into a...</i>\"\n\n");
+					outputText("Before he can continue, you produce the wizard staff that you were carrying and ask him if he can infuse the wood into the staff. You’ve heard that the run of the mill wizard’s staves are made from sacred wood; perhaps you could combine Marae’s power with... this?\n\n");
+					outputText("Konstantin looks at the bark doubtfully: \"<i>Maybe. I’ll require a couple of hours, for binding the materials together, you know. I’ll have to keep my eyes open, else I’ll have a surprise prostate massage.</i>\" he adds, half-joking.\n\n");
+					outputText("Then, you produce Puritas and tell Konstantin that you instead want him to infuse the wood into the staff. The bear-smith examines the staff, confusion growing as he proceeds. \"<i>Where the hell did you get this?  It appears like someone already infused it with bark, and it looks quite a bit like my own crafting work, except...</i>\" You tell him that the staff is infused with Marae’s power, and the bark is as well.  Infusing the bark into the staff would improve the staff, and balance the powers within it.\n\n");
+					outputText("\"<i>Well, I dunno what effects would have this kind of bark on a thing like that, since they seem to have an opposite nature. But I’m a bit intrigued about what’s gonna happen, and the voice of the so-called goddess already told me to help you, so I’ll trust your judgment.</i>\"\n\n");
+				}
+				if (player.hasItem(useables.DBAPLAT) && player.hasItem(weapons.DEPRAVA)) {
+					outputText("Among all your stuff, you find the pure white bark, still glowing slightly. Checking it a bit, you hand the pieces to Konstantin, that after taking it, examines the texture, marveling on its snow-white color and gold accents.\n\n");
+					outputText("\"<i>So, you want me to work with this stuff. Looks sturdy, and without a doubt it's magic in nature, so it could made into a...</i>\"\n\n");
+					outputText("Before he can continue, you produce the wizard staff that you were carrying and ask him if he can infuse the wood into the staff. You’ve heard that the run of the mill wizard’s staves are made from sacred wood; perhaps you could combine Marae’s power with... this?\n\n");
+					outputText("Konstantin looks at the bark doubtfully: \"<i>Maybe. I’ll require a couple of hours, for binding the materials together, you know. And I keep hearing the voice of the so-called goddess Marae asking me to craft it for you.</i>\" he adds, contemplating the soft glow of the bark.\n\n");
+					outputText("Then, you produce Depravito and tell Konstantin that you instead want him to infuse the wood into the staff. The bear-smith examines the staff, confusion growing as he proceeds. \"<i>Where the hell did you get this?  It appears like someone already infused it with bark, and it looks quite a bit like my own crafting work, except...</i>\" You tell him that the staff is infused with Marae’s power, and the bark is as well.  Infusing the bark into the staff would improve the staff, and balance the powers within it.\n\n");
+					outputText("\"<i>Well, I dunno what effects would have this kind of bark on a thing like that, since they seem to have an opposite nature. But I’m a bit intrigued about what’s gonna happen, and the voice of the so-called goddess already told me to help you, so I’ll trust your judgment.</i>\"\n\n");
+				}
 			}
 			else {
 				outputText("With a sigh, Konstantin tells you that nothing of you’ve brought him is useful to make a durable outfit, as they either lack the composition or the properties to be properly crafted.\n\n");
@@ -292,11 +348,13 @@ package classes.Scenes.NPCs
 			if (player.hasItem(useables.T_SSILK) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 1) addButton(2, "SpiderSilk", KonstantinCraftingSpiderSilkItems);
 			if (player.hasItem(useables.D_SCALE) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 1) addButton(3, "Dragonscale", KonstantinCraftingDragonscaleItems);
 			if (player.hasItem(useables.EBONBLO) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 1) addButton(4, "Ebonbloom", KonstantinCraftingEbonbloomItems);
+			if (player.hasItem(useables.WT_BRAN)) addButton(5, "W.T.Branch", KonstantinCraftingYggdrasilItems);
 			if (player.hasItem(useables.DBAPLAT)) addButton(8, "T.Bark Armor", KonstantinCraftingDivineBarkArmor);
 			if (player.hasItem(useables.TBAPLAT)) addButton(9, "D.Bark Armor", KonstantinCraftingTentacledBarkArmor);
-			//if (player.hasItem(useables.TBAPLAT) && player.hasItem(weapons.W_STAFF)) addButton(10, "Puritas", );
-			//if (player.hasItem(useables.DBAPLAT) && player.hasItem(weapons.W_STAFF)) addButton(11, "Depravatio", );
-			//if ((player.hasItem(useables.TBAPLAT) && player.hasItem(weapons.PURITAS)) || (player.hasItem(useables.DBAPLAT) && player.hasItem(weapons.DEPRAVA))) addButton(12, "Ascensus", );
+			if (player.hasItem(useables.DBAPLAT) && player.hasItem(weapons.W_STAFF)) addButton(10, "Puritas", KonstantinCraftingPuritas);
+			if (player.hasItem(useables.TBAPLAT) && player.hasItem(weapons.W_STAFF)) addButton(11, "Depravatio", KonstantinCraftingDepravito);
+			if (player.hasItem(useables.TBAPLAT) && player.hasItem(weapons.PURITAS)) addButton(12, "Ascensus", KonstantinCraftingPuritasAscensus);
+			if (player.hasItem(useables.DBAPLAT) && player.hasItem(weapons.DEPRAVA)) addButton(12, "Ascensus", KonstantinCraftingDepravitoAscensus);
 			addButton(14, "Back", KonstantinMainCampMenu);
 		}//usunąć fragmenty " && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 1" jak sie całkiem przeniesie crafting z Ratha do Kona
 		
@@ -645,6 +703,61 @@ package classes.Scenes.NPCs
 				inventory.takeItem(itype, camp.returnToCampUseOneHour);
 			}
 		}
+		private function KonstantinCraftingYggdrasilItems():void {
+			menu();
+			addButton(0, "G.Sword", KonstantinCraftingYggdrasilItems2, 1, null, null, weapons.WGSWORD.description);
+			addButton(1, "Sword", KonstantinCraftingYggdrasilItems2, 2, null, null, weapons.WDBLADE.description);
+			addButton(2, "Bow", KonstantinCraftingYggdrasilItems2, 3, null, null, weaponsrange.WARDBOW.description);
+			addButton(3, "Staff", KonstantinCraftingYggdrasilItems2, 4, null, null, weapons.WDSTAFF.description);
+		}
+		private function KonstantinCraftingYggdrasilItems2(yggdrasilType:int):void {
+			player.destroyItems(useables.WT_BRAN, 1);
+			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = yggdrasilType;
+			statScreenRefresh();
+			outputText(images.showImage("konstantin-craft-worldtreeweapon"));
+			outputText("\"<i>Of course, of course, leave it to me. I’ll have your new weapon ready soon, just wait a bit, okay?</i>\"\n\nThe ursine smith rushes back to his workbench and begins to work at a feverish pace, quite a sight given his usually calm demeanor. Who would have thought something as simple as soulforce imbued wood would excite him so much?\n\n");
+			outputText("<b>BOOM</b>\n\n");
+			outputText("Yup, Kon just caused something to explode. You hope he doesn't damage your weapon to be too much...\n\n");
+			var itype:ItemType;
+			switch(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275]) {
+			case 1: //G.Sword
+				outputText("Konstantine looks very pleased as he beckons you over to one of his small benches, procuring a sword. \"<i>It’s done. This thing should do the job pretty well</i>\"  He hands you the sword and you take a moment to appraise it.\n\n");
+				outputText("It's...  made of wood.  Will this truly stand up to the heat of battle?\n\n");
+				outputText("\"<i>I can bet my job that it will!</i>\" The bear assures. \"<i>Not only is it flame resistant, but it also has regenerative properties. With all the treatments it's been through, it will be stronger and more resilient than most metals.</i>\"\n\n");
+				outputText("Your new greatsword is leaf shaped, perfectly balanced, and bears a soulmetal hilt. The grip looks like carved wood, but when you touch it, it feels slightly spongy. Overall, it looks unimpressive, but appearances can be deceiving.\n\n");
+				outputText("Beyond the somewhat simple, yet obscure appearance, you can feel Yggdrasil’s song resonate within the blade.  Perhaps you can use it to your advantage? Anyways, you’ve acquired a Warden greatsword.");
+				itype = weapons.WGSWORD;
+				break;
+			case 2: //Sword
+				outputText("Konstantine looks very pleased as he beckons you over to one of his small benches, procuring a sword. \"<i>It’s done. This thing should do the job pretty well</i>\"  He hands you the sword and you take a moment to appraise it.\n\n");
+				outputText("It's...  made of wood.  Will this truly stand up to the heat of battle?\n\n");
+				outputText("\"<i>I can bet my job that it will!</i>\" The bear assures. \"<i>Not only is it flame resistant, but it also has regenerative properties. With all the treatments it's been through, it will be stronger and more resilient than most metals.</i>\"\n\n");
+				outputText("Your new sword is leaf shaped, perfectly balanced, and bears a soulmetal hilt. The grip looks like carved wood, but when you touch it, it feels slightly spongy. Overall, it looks unimpressive, but appearances can be deceiving.\n\n");
+				outputText("Beyond the somewhat simple, yet obscure appearance, you can feel Yggdrasil’s song resonate within the blade.  Perhaps you can use it to your advantage? Anyways, you’ve acquired a Warden blade.");
+				itype = weapons.WDBLADE;
+				break;
+			case 3: //Bow
+				outputText("Konstantine looks very pleased as he beckons you over to one of his small benches, procuring a bow. \"<i>It’s done. This thing should do the job pretty well</i>\"  He hands you the bow and you take a moment to appraise it.\n\n");
+				outputText("You identify this weapon as a recurve bow, which tend to be more powerful than normal bows of their size. It dawns on you that the recurves seem...  exaggerated.\n\n");
+				outputText("\"<i>Don’t worry about the recurves.</i>\" Konstantin states. \"<i>The bow, for lack of a better explanation, seems to shift to comply with your desires.</i>\" He hands you a bowstring. \"<i>I’ve got some treated spider silk for it, the highest quality!</i>\" and you string the bow, noting that it is indeed far easier than the recurve would suggest. Under your fingers, you can feel the wood shift to its previous state, becoming sturdy enough to provide considerable power for every shot.\n\n");
+				outputText("Beyond the somewhat simple, yet obscure appearance, you can feel Yggdrasil’s song resonate within the bow.  Perhaps you can use it to your advantage? Anyways, you’ve acquired a Warden bow.");
+				itype = weaponsrange.WARDBOW;
+				break;
+			case 4: //Staff
+				outputText("Konstantine looks very pleased as he beckons you over to one of his small benches, procuring a staff. \"<i>It’s done. This thing should do the job pretty well</i>\"  He hands you the staff and you take a moment to appraise it.\n\n");
+				outputText("The staff is straight, though somewhat gnarled and generally ordinary looking up until the tip. There is a clear crystal at the top, encased in rootlike tendrils that seem to have grown out of the staff’s body. It pulses softly, the gem glowing with a soft prismatic light.\n\n");
+				outputText("\"<i>Most staves are good for either magic or soul channeling, you should take the demons by surprise when you wield both side by side.</i>\" Konstantin explains.\n\n");
+				outputText("Beyond the somewhat simple, yet obscure appearance, you can feel Yggdrasil’s song resonate within the staff.  Perhaps you can use it to your advantage? Anyways, you’ve acquired a Warden staff.");
+				itype = weapons.WDSTAFF;
+				break;
+			default:
+				outputText("Something bugged! Please report this bug to Ormael/Aimozg/Oxdeception.");
+				itype = weapons.WGSWORD;
+			}
+			if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
+			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;
+			inventory.takeItem(itype, camp.returnToCampUseOneHour);
+		}
 		private function KonstantinCraftingDivineBarkArmor():void {
 			clearOutput();
 			outputText("Taking the pile of bark, he goes to his workbench, and starts turning the odd material into plates and armor pieces. Chemicals bathe the bark as he cuts and sews the softer pieces. From time to time you hear Konstantin curses as he has some troubles cutting the largest pieces into plates. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
@@ -667,6 +780,62 @@ package classes.Scenes.NPCs
 			player.destroyItems(useables.TBAPLAT, 1);
 			if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
 			inventory.takeItem(armors.TBARMOR, camp.returnToCampUseOneHour);
+		}
+		private function KonstantinCraftingPuritas():void {
+			clearOutput();
+			player.destroyItems(useables.DBAPLAT, 1);
+			player.destroyItems(weapons.W_STAFF, 1);
+			outputText("Taking the pile of bark, he goes to his workbench, the magic staff in his other paw. Chemicals bathe the bark as he cuts it into smaller pieces, much more easier to manage. You can hear the bark melding with the staff, as the small plates of bark gradually envelope their wooden core. He takes each piece and wraps them in a careful pattern around the wooden staff, so not even a single bit of bark is wasted. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
+			outputText("\"<i>I’m not a magic expert, but I’m pretty sure that whatever arcane energy bound on that bark really meant serious business. I’m not sure if I want to try to do one of those things again. They’re fucking tedious to work with.  Anyway, here it is.</i>\"\n\n");
+			outputText("He pulls a cloth off his work table, revealing the staff. The glowing white bark has been melded into the staff’s surface, while emerald vines growing out of the bark adorn the length of the staff. The zigzag on the top of the staff has been adorned with several white crystals. Beyond the physical appearance you can feel the mild purity resonating in the staff. The bear-smith nods as you pick up the staff.\n\n");
+			outputText("\"<i>I hope that you find this thing useful, [name]. All this magic will surely give you a bit of edge on any battlefield.</i>\"\n\n");
+			if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
+			inventory.takeItem(weapons.PURITAS, camp.returnToCampUseOneHour);
+		}
+		private function KonstantinCraftingDepravito():void {
+			clearOutput();
+			player.destroyItems(useables.TBAPLAT, 1);
+			player.destroyItems(weapons.W_STAFF, 1);
+			outputText("Taking the pile of bark, he goes to his workbench, the magic staff in his other paw. Chemicals bathe the bark as he cuts it into smaller pieces, much more easier to manage. The occasional grabby tentacle is quickly put down by a well placed hammer hit. You can hear the bark melding with the staff, as the small plates of bark gradually envelope their wooden core. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
+			outputText("\"<i>I’m not a magic expert, but I’m pretty sure that whatever arcane energy bound on that bark really meant serious business. I’m not sure if I want to try to do one of those things again. They’re fucking tedious to work with.  Anyway, here it is.</i>\"\n\n");
+			outputText("He pulls a cloth off his work table, revealing the staff. The white bark has been melded into the staff’s surface, while the tentacles growing out of the bark adorn the length of the staff. The zigzag on the top of the staff has been adorned with several white crystals. Beyond the physical appearance you can feel the mild corruption resonating in the staff. The bear-smith nods as you pick up the staff.\n\n");
+			outputText("\"<i>I hope that you find this thing useful, [name]. But be wary of those.</i>\" Konstantin says, pointing the tentacles. \"<i>As you’ve realized, they’re a bit too playful.</i>\"\n\n");
+			if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
+			inventory.takeItem(weapons.DEPRAVA, camp.returnToCampUseOneHour);
+		}
+		private function KonstantinCraftingPuritasAscensus():void {
+			clearOutput();
+			player.destroyItems(useables.TBAPLAT, 1);
+			player.destroyItems(weapons.PURITAS, 1);
+			outputText("Taking the pile of bark, he goes to his workbench, the magic staff in his other paw. Chemicals bathe the bark as he cuts it into smaller pieces, much more easier to manage. The occasional grabby tentacle is quickly put down by a well placed hammer hit. You can hear the bark melding with the staff, as the small plates of bark gradually envelope their wooden core. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
+			outputText("He pulls the cloth off the workbench, revealing the staff.  The white bark now covers the entire surface of the staff, the brown of mageboon wood completely hidden by the radiant bark.  Vines and tentacles run the length of the staff, grown from the staff itself.  You also notice that the entire staff is glowing softly.  The crystals in the zigzag at the top are larger, and have a soft light at their centers.\n\n");
+			outputText("\"<i>Well, I’m no magician, but I can tell you that whatever energy within the staff appears to have balanced out. The previous form of this staff has great power, but this power could only be used for a single type of magic. This restriction no longer exists.  Beyond that, the raw magical power in the staff has exceeded any other I’ve seen or worked with. I have no doubt it will be invaluable to your crusade.</i>\"\n\n");
+			outputText("You take the staff. From the first touch you feel the immense arcane power within the wood.\n\n");
+			if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
+			inventory.takeItem(weapons.ASCENSU, camp.returnToCampUseFourHours);
+		}
+		private function KonstantinCraftingDepravitoAscensus():void {
+			clearOutput();
+			player.destroyItems(useables.DBAPLAT, 1);
+			player.destroyItems(weapons.DEPRAVA, 1);
+			outputText("Taking the pile of bark, he goes to his workbench, the magic staff in his other paw. Chemicals bathe the bark as he cuts it into smaller pieces, much more easier to manage. You can hear the bark melding with the staff, as the small plates of bark gradually envelope their wooden core. He takes each piece and wraps them in a careful pattern around the wooden staff, so not even a single bit of bark is wasted. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
+			outputText("He pulls the cloth off the workbench, revealing the staff.  The white bark now covers the entire surface of the staff, the brown of mageboon wood completely hidden by the radiant bark.  Vines and tentacles run the length of the staff, grown from the staff itself.  You also notice that the entire staff is glowing softly.  The crystals in the zigzag at the top are larger, and have a soft light at their centers.\n\n");
+			outputText("\"<i>Well, I’m no magician, but I can tell you that whatever energy within the staff appears to have balanced out. The previous form of this staff has great power, but this power could only be used for a single type of magic. This restriction no longer exists.  Beyond that, the raw magical power in the staff has exceeded any other I’ve seen or worked with. I have no doubt it will be invaluable to your crusade.</i>\"\n\n");
+			outputText("You take the staff. From the first touch you feel the immense arcane power within the wood.\n\n");
+			if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
+			inventory.takeItem(weapons.ASCENSU, camp.returnToCampUseFourHours);
+		}
+		
+		public function KonstantinTinkeringMenu():void {
+			clearOutput();
+			outputText("You pay another visit to Konstantine, and find him working on his furnace near his tent. He smiles warmly and greets you, after what you ask him if he can help you with your stuff.\n\n");
+			outputText("\"<i>Sure, [name], As always, I can polish your armor and fix any weakened or broken pieces. If you happen to have several pieces of a solid item that can be assembled into a protective armor, I can do it for you. Lastly, I can sharpen your weapons to make sure that they cut and pierce through almost everything.</i>\"\n\n");
+			outputText("\"<i>The price for any of those services remains the same, 25 gems.</i>\"\n\n");
+			outputText("Sounds like a good offer. What will you do?\n\n");
+			menu();
+			addButton(0, "Armor", meetKonstantinAtForestArmor);
+			addButton(1, "Weapons", meetKonstantinAtForestWeapon);
+			addButton(2, "Nothing", meetKonstantinAtForestNothing);
 		}
 		
 		public function KonstantinSexMenu():void {
@@ -694,12 +863,60 @@ package classes.Scenes.NPCs
 				dynStats("lus", 33);
 			}
 			menu();
-			addButton(0, "Give BJ", KonstantinTalkHim);
-			addButton(1, "Recive BJ", KonstantinTalkHisWork);
-			addButton(2, "69", KonstantinTalkTheCamp);
-			addButton(3, "Recive Anal", KonstantinTalkTheCamp);
-			addButton(4, "Hot Spring Fuck", KonstantinTalkTheCamp);
+			addButton(0, "Give BJ", KonstantinSexMenuGiveBJ);
+			//addButton(1, "Recive BJ", KonstantinSexMenuReciveBJ);
+			//addButton(2, "69", KonstantinSexMenu69);
+			//addButton(3, "Recive Anal", KonstantinSexMenuReciveAnal);
+			//addButton(4, "Hot Spring Fuck", KonstantinSexMenuHotSpringFuck);
 			addButton(14, "Back", KonstantinMainCampMenu);
+		}
+		public function KonstantinSexMenuGiveBJ():void {
+			clearOutput();
+			outputText("More relaxed now, and with the thick slab on your meat dangling on front of your eyes, you ask him if he’d like to receive some oral pleasure of you. The bear answers with a playful wink, and sits on the back of the bed, opening his legs wide, so he gives you a full view of the 22 inch monster and the huge nuts below.\n\n");
+			outputText("\"<i>I’ll take that as a yes</i>\" you tell him.\n\n");
+			outputText("Wasting no time, you get closer until his cock is almost on your ");
+			if (player.hasMuzzle()) outputText("muzzle");
+			else outputText("nose");
+			outputText(", the ursine’s rod stands proudly in front of your eyes. Compelled by the idea of having that monster bulging your throat you open your ");
+			if (player.hasMuzzle()) outputText("muzzle");
+			else outputText("nose");
+			outputText(" as wide as you can, and start sucking.\n\n");
+			outputText("To you surprise, even engulfing the mushroom shaped head is quite a task. Most of your mouth envelopes Konstantin’s cockhead,  a steady flow of salty pre flows from his cumslit encouraging  you to keep sucking. Inch by inch, you keep advancing, until you realize that you’ve got at least eight inches of dick on your mouth, and you aren’t even halfway! Pleased groans from Konstantin, couple with caresses to your cheeks and head motivate you to keep going.\n\n");
+			outputText("With a bit of difficulty, you’re able to push his dick down your throat, getting almost all of it in. Seeing as that is all you can do by now, he grabs you by the shoulders and gently pushes you front and back, so you can relax and enjoy the feeling of his manhood in you.\n\n");
+			outputText("Not much later, Konstantin gasps and the way that his penis throbs inside you tell you that he’s close to coming. You slide his cock out, so only the head remains inside you, and play with his nuts, enticing them into flooding your mouth with his thick cream. You’re not left waiting too long, as his cumslit opens like a dam breaking, and a torrent of bear cum invades your mouth. Sealing your ");
+			if (player.hasMuzzle()) outputText("muzzle");
+			else outputText("lips");
+			outputText(" around the pillar of flesh, you try to drink as much of it as you can. As wave after wave of the cum deluge pours down your throat, you watch amused as your belly inflates thanks to your cummy continuous meal.");
+			if (player.tailType > 0) outputText(" At your backside, your [tail] twitches happily at the meal that you’re getting, and your [anus] feels needy and eager to have a big cock to fill it.");
+			outputText("\n\nWhen you can’t hold more seed inside, you let his cock flop free, bathing your face and body with the remaining jets of seed. Konstantin, a bit tired, reaches out to you, and licks most of his cum from your [skin], ticking you with his tongue as he does.\n\n");
+			outputText("Both of you quite satisfied, in more than one sense, you cuddle together and sleep on his bed.\n\n");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function KonstantinSexMenuReciveBJ():void {
+			clearOutput();
+			outputText("Then, a familiar voice startles you.\n\n");
+			outputText("\"<i>Hey, [name] you aren’t going to say hello?</i>\"\n\n");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function KonstantinSexMenu69():void {
+			clearOutput();
+			outputText("Then, a familiar voice startles you.\n\n");
+			outputText("\"<i>Hey, [name] you aren’t going to say hello?</i>\"\n\n");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function KonstantinSexMenuReciveAnal():void {
+			clearOutput();
+			outputText("Feeling a bit bold, and enticed by the idea of being split by that tower of meat of his, you ask Konstantin if he’d like to fuck your ass this time. The bear smiles at you proposal, and before you can say anything else, you find yourself locked on his embrace.\n\n");
+			outputText("\"<i>So, you feel frisky today, [name]?</i>\" He says, while kissing your neck, his big tongue tickling your [skin]. Gasping at his touch, you nod.\n\n");
+			outputText("He takes you on his arms and puts you gently on the back of the bed, your arms and legs spread, and before you can say anything you feel your {mouth/snout/beak/muzzle} locked with his {muzzle/own} in a passionate kiss.\n\n");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function KonstantinSexMenuHotSpringFuck():void {
+			clearOutput();
+			outputText("\"<i>Hey, [name] you aren’t going to say hello?</i>\"\n\n");
+			outputText("Then, a familiar voice startles you.\n\n");
+			outputText("\"<i>Hey, [name] you aren’t going to say hello?</i>\"\n\n");
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 }

@@ -98,8 +98,8 @@ use namespace CoC;
 			}
 			else {
 				outputText("You attempt a prayer to a god of Mareth. Sadly, if this place ever housed the god’s divine power, its ruined state no longer can contain it. It seems you will get no benefit from praying here until you repair the altars, with the god simply unable to contact you while the building is in this sinful state.\n\n");
+				doNext(camp.returnToCampUseOneHour);
 			}
-			doNext(camp.returnToCampUseOneHour);
 		}
 		private function anyOfAltairsRepaired():Boolean {
 			return flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] == 1;
@@ -244,15 +244,15 @@ use namespace CoC;
 				SceneLib.camp.cabinProgress.checkMaterials();
 				menu();
 				addButton(0, "Altars", rebuildGodsAltairs).hint("Repair the altar.");
-				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 4 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1) {
+				if ((flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] == 3 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] == 4) && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1) {
 					if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 150) addButton(1, "Statue of Marae", rebuildStatueOfMarae).hint("Repair the statue.");
 					else addButtonDisabled(1, "Statue of Marae", "You not have enough stones.");
 				}
-				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 4 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 7) {
+				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 6 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 8) {
 					if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 500) addButton(2, "Repairing the gargoyles on the walls", repairGargoylesOnTheWalls).hint("Repair some of the decorative gargoyles.");
 					else addButtonDisabled(2, "Repairing the gargoyles on the walls", "You not have enough stones.");
 				}
-				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 7 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 17) {
+				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 8 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 18) {
 					if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 50 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 10) addButton(3, "Prayer Bench", makeNewPrayerBenches).hint("Repair some of the temple banches.");
 					else addButtonDisabled(3, "Prayer Bench", "You not have enough wood or/and nails.");
 				}
@@ -341,7 +341,7 @@ use namespace CoC;
 		public function makeNewPrayerBenches():void {
 			clearOutput();
 			outputText("You work for the entire day carving wood and hammering nails. By the time you're done the temple now has a set of brand new prayer bench.");
-			if (player.hasStatusEffect(StatusEffects.TempleOfTheDivineTracker)) player.changeStatusValue(StatusEffects.TempleOfTheDivineTracker,1,2);
+			if (player.hasStatusEffect(StatusEffects.TempleOfTheDivineTracker)) player.addStatusValue(StatusEffects.TempleOfTheDivineTracker,1,2);
 			else player.createStatusEffect(StatusEffects.TempleOfTheDivineTracker, 2, 0, 0, 0);
 			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 50;
 			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 10;
@@ -392,21 +392,21 @@ use namespace CoC;
 				outputText("Pulling out the Beautiful Sword, you notice the weapon is now shining with a dim white light. Curious, you place the weapon on the altar, and watch as the sword surges with power, the light seeming to be absorbed into the blade. The altar feels way more potent with the sword resting upon it. However, it occurs to you, such a weapon likely is a powerful artifact, and that as such, it could be useful in your battles against the demons.");
 				if (player.weapon == weapons.B_SWORD) player.setWeapon(WeaponLib.FISTS);
 				else player.destroyItems(weapons.B_SWORD, 1);
-				if (player.hasStatusEffect(StatusEffects.TempleOfTheDivineTracker)) player.changeStatusValue(StatusEffects.TempleOfTheDivineTracker,2,2);
+				if (player.hasStatusEffect(StatusEffects.TempleOfTheDivineTracker)) player.addStatusValue(StatusEffects.TempleOfTheDivineTracker,2,2);
 				else player.createStatusEffect(StatusEffects.TempleOfTheDivineTracker, 0, 2, 0, 0);
 			}
 			else {
 				outputText("The altar radiates with increased potency as the sword is put back on display.");
 				if (player.weapon == weapons.EXCALIB) player.setWeapon(WeaponLib.FISTS);
 				else player.destroyItems(weapons.EXCALIB, 1);
-				player.changeStatusValue(StatusEffects.TempleOfTheDivineTracker,2,1);
+				player.addStatusValue(StatusEffects.TempleOfTheDivineTracker,2,1);
 			}
 			doNext(templemainmenu);
 		}
 		public function takingExcaliburFromAltair():void {
 			clearOutput();
 			outputText("You feel the power of the altar diminishing, however the weapon is stronger than ever and likely ready for its primary use, demon slaying.\n\n");
-			player.changeStatusValue(StatusEffects.TempleOfTheDivineTracker,2,-1);
+			player.addStatusValue(StatusEffects.TempleOfTheDivineTracker,2,-1);
 			inventory.takeItem(weapons.EXCALIB, templemainmenu);
 		}
 		private function havingOrUsingBSwordOrExcalibur():Boolean {
@@ -423,7 +423,7 @@ use namespace CoC;
 		public function puttingPurePearlOnAltairYes():void {
 			outputText("\n\nAs you place the pearl on the altar, you feel the holy power radiating from the temple increase a step further. The place practically radiates purity now. A horde of imps, attracted by the aura emanating from the temple, attempts to enter the building with the intention to put out the offending light. You prepare yourself for a fight, but end up watching in stunned silence as the corrupt beings catch fire and are reduced to ashes as soon as they fly inside the temple’s boundaries. It would seem the temple divine protections have increased.");
 			player.destroyItems(consumables.P_PEARL, 1);
-			if (player.hasStatusEffect(StatusEffects.TempleOfTheDivineTracker)) player.changeStatusValue(StatusEffects.TempleOfTheDivineTracker,3,2);
+			if (player.hasStatusEffect(StatusEffects.TempleOfTheDivineTracker)) player.addStatusValue(StatusEffects.TempleOfTheDivineTracker,3,2);
 			else player.createStatusEffect(StatusEffects.TempleOfTheDivineTracker, 0, 0, 2, 0);
 			doNext(templemainmenu);
 		}
@@ -434,6 +434,7 @@ use namespace CoC;
 		public function takingPurePearlFromAltair():void {
 			clearOutput();
 			outputText("You recover the pearl from the Altar the temple power dimming slightly.");
+			player.addStatusValue(StatusEffects.TempleOfTheDivineTracker,3,-2);
 			inventory.takeItem(consumables.P_PEARL, templemainmenu);
 		}
 		

@@ -1207,6 +1207,14 @@ use namespace CoC;
 					}
 				}
 			}
+			if (nekomataScore() >= 11)
+			{
+				race = "Nekomanta";
+			}
+			if (cheshireScore() >= 11)
+			{
+				race = "Cheshire cat";
+			}
 			if (lizardScore() >= 4)
 			{
 				if (lizardScore() >= 8) {
@@ -1950,6 +1958,10 @@ use namespace CoC;
 			var grandchimeraCounter:Number = 0;
 			if (catScore() >= 8)
 				grandchimeraCounter++;
+			if (nekomataScore() >= 11)
+				grandchimeraCounter++;
+			if (cheshireScore() >= 11)
+				grandchimeraCounter++;
 			if (lizardScore() >= 8)
 				grandchimeraCounter++;
 			if (dragonScore() >= 10)
@@ -2510,7 +2522,7 @@ use namespace CoC;
 		public function catScore():Number {
 			Begin("Player","racialScore","cat");
 			var catCounter:Number = 0;
-			if (faceType == AppearanceDefs.FACE_CAT)
+			if (faceType == AppearanceDefs.FACE_CAT || faceType == AppearanceDefs.FACE_CAT_CANINES)
 				catCounter++;
 			if (eyeType == AppearanceDefs.EYES_CAT_SLITS)
 				catCounter++;
@@ -2556,7 +2568,7 @@ use namespace CoC;
 		public function nekomataScore():Number {
 			Begin("Player","racialScore","nekomata");
 			var nekomataCounter:Number = 0;
-			if (faceType == AppearanceDefs.FACE_CAT)
+			if (faceType == AppearanceDefs.FACE_CAT || faceType == AppearanceDefs.FACE_CAT_CANINES)
 				nekomataCounter++;
 			if (eyeType == AppearanceDefs.EYES_CAT_SLITS)
 				nekomataCounter++;
@@ -2586,7 +2598,7 @@ use namespace CoC;
 		public function cheshireScore():Number {
 			Begin("Player","racialScore","cheshire");
 			var cheshireCounter:Number = 0;
-			if (faceType == AppearanceDefs.FACE_CAT)
+			if (faceType == AppearanceDefs.FACE_CAT || faceType == AppearanceDefs.FACE_CAT_CANINES)
 				cheshireCounter++;
 			if (eyeType == AppearanceDefs.EYES_CAT_SLITS)
 				cheshireCounter++;
@@ -2600,6 +2612,8 @@ use namespace CoC;
 				cheshireCounter++;
 			if (hasFur() || hasPartialCoat(AppearanceDefs.SKIN_COAT_FUR))
 				cheshireCounter++;
+			if (hairColor == "lilac and white striped" && coatColor == "lilac and white striped")
+				cheshireCounter += 2;
 			if (findPerk(PerkLib.Flexibility) > 0)
 				cheshireCounter++;
 			if (findPerk(PerkLib.CatlikeNimbleness) > 0)
@@ -4986,6 +5000,31 @@ use namespace CoC;
 				maxWis += (15 * newGamePlusMod);
 				}
 			}//+60/50-60
+			if (jabberwockyScore() >= 4) {
+				if (jabberwockyScore() >= 20) {
+				maxStr += (95 * newGamePlusMod);
+				maxTou += (95 * newGamePlusMod);
+				maxSpe += (100 * newGamePlusMod);
+				maxInt += (40 * newGamePlusMod);
+				maxWis -= (50 * newGamePlusMod);
+				maxLib += (20 * newGamePlusMod);
+				}
+				else if (jabberwockyScore() >= 10 && jabberwockyScore() < 20) {
+				maxStr += (50 * newGamePlusMod);
+				maxTou += (40 * newGamePlusMod);
+				maxSpe += (50 * newGamePlusMod);
+				maxInt += (20 * newGamePlusMod);
+				maxWis -= (20 * newGamePlusMod);
+				maxLib += (10 * newGamePlusMod);
+				}
+				else {
+				maxStr += (15 * newGamePlusMod);
+				maxTou += (15 * newGamePlusMod);
+				maxSpe += (30 * newGamePlusMod);
+				maxInt += (15 * newGamePlusMod);
+				maxWis -= (15 * newGamePlusMod);
+				}
+			}
 			if (dogScore() >= 4) {
 				maxSpe += (15 * newGamePlusMod);
 				maxInt -= (5 * newGamePlusMod);
@@ -5039,7 +5078,18 @@ use namespace CoC;
 					maxLib += (20 * newGamePlusMod);
 				}
 
-			}//+10/10-20
+			}//+10 / 10 - 20
+			if (nekomataScore() >= 11) {
+				if (findPerk(PerkLib.Flexibility) > 0) maxSpe += (50 * newGamePlusMod);
+				else maxSpe += (40 * newGamePlusMod);
+				maxInt += (40 * newGamePlusMod);
+				maxWis += (85 * newGamePlusMod);
+			}
+			if (cheshireScore() >= 11) {
+				if (findPerk(PerkLib.Flexibility) > 0) maxSpe += (105 * newGamePlusMod);
+				else maxSpe += (95 * newGamePlusMod);
+				maxInt += (70 * newGamePlusMod);
+			}
 			if (bunnyScore() >= 4) {
 				maxSpe += (10 * newGamePlusMod);
 			}//+10/10-20

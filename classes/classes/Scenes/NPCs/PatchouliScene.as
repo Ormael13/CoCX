@@ -73,7 +73,7 @@ package classes.Scenes.NPCs
 		}
 		
 		public function patchouliExploreLuckyWheel():void {
-			if (flags[kFLAGS.PATCHOULI_FOLLOWER] < 2) flags[kFLAGS.PATCHOULI_FOLLOWER] = 2;
+			if (flags[kFLAGS.PATCHOULI_FOLLOWER] < 2 || flags[kFLAGS.PATCHOULI_FOLLOWER] == 4) flags[kFLAGS.PATCHOULI_FOLLOWER] = 2;
 			if (player.exploredMountain <= 0) patchouliExploreMountains();//5
 			else if (!player.hasStatusEffect(StatusEffects.ExploredDeepwoods)) patchouliExploreDeepWood();//7
 			else if (flags[kFLAGS.TIMES_EXPLORED_PLAINS] < 1) patchouliExplorePlains();//9
@@ -187,7 +187,7 @@ package classes.Scenes.NPCs
 				outputText("The cat jumps down from the tree and walks ahead of you, showing you the way. Strangely, the landscape seems to change absurdly fast around you as you follow him until you end up in an exceedingly colorful version of the forest. Things here look weirder than usual, but not in a sexual way, rather it’s like the painting of a mad artist.\n\n");
 				outputText("\"<i>Well wow, out of all locations I didn’t expect us to end up in here... just... just pick up a fruit or two and I will escort you out.</i>\"\n\n");
 				outputText("The cat seems uneasy, but you don’t care. You spot a weird set of whisker fruits in a nearby tree and proceed to pack them up before leaving this strange place. You had the weird feeling something was watching you while you were leaving, but this must be your imagination.\n\n");
-				inventory.takeItem(consumables.W_FRUIT, camp.returnToCampUseOneHour);//potem zmienić na wonderfruit
+				inventory.takeItem(consumables.WOFRUIT, camp.returnToCampUseOneHour);
 				if (flags[kFLAGS.PATCHOULI_AND_WONDERLAND] < 1) flags[kFLAGS.PATCHOULI_AND_WONDERLAND] = 1;
 			}
 			else {

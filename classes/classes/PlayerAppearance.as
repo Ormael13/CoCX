@@ -1774,7 +1774,7 @@ public class PlayerAppearance extends BaseContent {
 				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("  Cold blue mist seems to periodically escape from your mouth.");
 			}
 		}
-		//cat-face
+		//cat-faces
 		if (faceType == AppearanceDefs.FACE_CAT) {
 			if (!player.hasCoat()) {
 				outputText("  You have a cat-like face, complete with a cute, moist nose and whiskers.  The [skin] that is revealed by your lack of fur looks quite unusual on so feline a face");
@@ -1787,6 +1787,9 @@ public class PlayerAppearance extends BaseContent {
 			} else {
 				outputText("  Your facial structure blends humanoid features with those of a cat.  A moist nose and whiskers are included, but overlaid with glittering [skin coat].");
 			}
+		}
+		if (faceType == AppearanceDefs.FACE_CAT_CANINES) {
+			outputText("  Your face is human in shape and structure with [skin coat]. Your mouth is somewhat human save for your cat-like canines.");
 		}
 		//Minotaaaauuuur-face
 		if (faceType == AppearanceDefs.FACE_COW_MINOTAUR) {
@@ -1828,7 +1831,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your face is a narrow, reptilian and regal, reminiscent of a dragon.  A [skin coat] decorates your visage.");
 		}
 		if (faceType == AppearanceDefs.FACE_DEVIL_FANGS) {
-			outputText("  Your mouth is somewhat human save for your mouth filled with fiendish canines.  It's decorated by [skin coat].");
+			outputText("  Your mouth is somewhat human save for your fiendish canines.  It's decorated by [skin coat].");
 		}
 		if (faceType == AppearanceDefs.FACE_ONI_TEETH) {
 			outputText("  Your face is human in shape and structure with [skin coat]. Your mouth could pass for human if not for your two large ogre like canines.");
@@ -1950,19 +1953,27 @@ public function RacialScores():void {
 		outputText("\n<font color=\"#0000a0\">Cat-girl/Cat-boy/Cat Morph: " + player.catScore() + " (");
 		if (player.findPerk(PerkLib.Flexibility) > 0) outputText("+" + (70 * (1 + player.newGamePlusMod())) + " ");
 		else outputText("+" + (60 * (1 + player.newGamePlusMod())) + " ");
-		outputText("max Spe +" + (60 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		outputText("max Spe, +" + (60 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
 	}
 	else if (player.catScore() >= 4 && player.catScore() < 7) {
 		outputText("\n<font color=\"#0000a0\">Half Cat-morph: " + player.catScore() + " (");
 		if (player.findPerk(PerkLib.Flexibility) > 0) outputText("+" + (50 * (1 + player.newGamePlusMod())) + " ");
 		else outputText("+" + (40 * (1 + player.newGamePlusMod())) + " ");
-		outputText("max Spe +" + (20 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		outputText("max Spe, +" + (20 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
 	}
 	else if (player.catScore() >= 1 && player.catScore() < 4) outputText("\n<font color=\"#008000\">Half Cat-morph: " + player.catScore() + "</font>");
 	else if (player.catScore() < 1) outputText("\n<font color=\"#ff0000\">Half Cat-morph: 0</font>");
 	if (player.centaurScore() >= 8) outputText("\n<font color=\"#0000a0\">Centaur: " + player.centaurScore() + " (+" + (40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (80 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max HP)</font>");
 	else if (player.centaurScore() >= 1 && player.centaurScore() < 8) outputText("\n<font color=\"#008000\">Centaur: " + player.centaurScore() + "</font>");
 	else if (player.centaurScore() < 1) outputText("\n<font color=\"#ff0000\">Centaur: 0</font>");
+	if (player.cheshireScore() >= 11) {
+		outputText("\n<font color=\"#0000a0\">Cheshire cat: " + player.cheshireScore() + " (");
+		if (player.findPerk(PerkLib.Flexibility) > 0) outputText("+" + (105 * (1 + player.newGamePlusMod())) + " ");
+		else outputText("+" + (95 * (1 + player.newGamePlusMod())) + " ");
+		outputText("max Spe, +" + (70 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+	}
+	else if (player.cheshireScore() >= 1 && player.cheshireScore() < 11) outputText("\n<font color=\"#008000\">Cheshire cat: " + player.cheshireScore() + "</font>");
+	else if (player.cheshireScore() < 1) outputText("\n<font color=\"#ff0000\">Cheshire cat: 0</font>");
 	outputText("\nCHIMERA: " + player.chimeraScore());
 	if (player.couatlScore() >= 11) {
 		outputText("\n<font color=\"#0000a0\">Couatl: " + player.couatlScore() + " (");
@@ -2229,6 +2240,14 @@ public function RacialScores():void {
 	}
 	else if (player.nagaScore() >= 1 && player.nagaScore() < 4) outputText("\n<font color=\"#008000\">Half-Naga: " + player.nagaScore() + "</font>");
 	else if (player.nagaScore() < 1) outputText("\n<font color=\"#ff0000\">Half-Naga: 0</font>");
+	if (player.nekomataScore() >= 11) {
+		outputText("\n<font color=\"#0000a0\">Nekomanta: " + player.nekomataScore() + " (");
+		if (player.findPerk(PerkLib.Flexibility) > 0) outputText("+" + (50 * (1 + player.newGamePlusMod())) + " ");
+		else outputText("+" + (40 * (1 + player.newGamePlusMod())) + " ");
+		outputText("max Spe, +" + (40 * (1 + player.newGamePlusMod())) + " max Int, +" + (85 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+	}
+	else if (player.nekomataScore() >= 1 && player.nekomataScore() < 11) outputText("\n<font color=\"#008000\">Nekomanta: " + player.nekomataScore() + "</font>");
+	else if (player.nekomataScore() < 1) outputText("\n<font color=\"#ff0000\">Nekomanta: 0</font>");
 	if (player.oniScore() >= 12) outputText("\n<font color=\"#0000a0\">Oni: " + player.oniScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Str, +" + (60 * (1 + player.newGamePlusMod())) + " max Tou, -" + (20 * (1 + player.newGamePlusMod())) + " max Int, +" + (40 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
 	else if (player.oniScore() >= 6 && player.oniScore() < 12) outputText("\n<font color=\"#0000a0\">Half Oni: " + player.oniScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, -" + (10 * (1 + player.newGamePlusMod())) + " max Int, +" + (20 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
 	else if (player.oniScore() >= 1 && player.oniScore() < 6) outputText("\n<font color=\"#008000\">Half Oni: " + player.oniScore() + "</font>");

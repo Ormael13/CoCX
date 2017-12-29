@@ -2215,7 +2215,6 @@ CoC.instance.saves.saveGame(player.slotName);
 			outputText("You sit on your pedestal, your body hardening like stone as you sleep for " + num2Text(timeQ) + " ");
 			if(timeQ == 1) outputText("hour.\n");
 			else outputText("hours.\n");
-			return;
 		}
 		else (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "" || flags[kFLAGS.SLEEP_WITH] == "Marble"))
 		{

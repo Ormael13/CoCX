@@ -3821,7 +3821,7 @@ public final class Mutations extends MutationsHelper
 
 		public function evolvedNagaOil(type:Number,player:Player):void
 		{
-			//'type' refers to the variety of ink.
+			//'type' refers to the variety of oil.
 			//0 == gorgon oil
 			//1 == vouivre oil
 			//2 == couatl oil
@@ -4552,8 +4552,12 @@ public final class Mutations extends MutationsHelper
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
-		public function catTransformation(player:Player):void
+		public function catTransformation(type:Number,player:Player):void
 		{
+			//'type' refers to the variety of cat TF's.
+			//0 == normal cat
+			//1 == nekomanta
+			//2 == cheshire
 			var changes:Number = 0;
 			var changeLimit:Number = 1;
 			var temp2:Number = 0;
@@ -4566,7 +4570,9 @@ public final class Mutations extends MutationsHelper
 			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//Text go!
 			clearOutput();
-			outputText("You take a bite of the fruit and gulp it down. It's thick and juicy and has an almost overpowering sweetness. Nevertheless, it is delicious and you certainly could use a meal.  You devour the fruit, stopping only when the hard, nubby pit is left; which you toss aside.");
+			if (type == 0) outputText("You take a bite of the fruit and gulp it down. It's thick and juicy and has an almost overpowering sweetness. Nevertheless, it is delicious and you certainly could use a meal.  You devour the fruit, stopping only when the hard, nubby pit is left; which you toss aside.");
+			if (type == 1) outputText("I know you expected text here but *cough* someone said she will write it...eventualy so till then there is nice placeholder text here.");
+			if (type == 2) outputText("I know you expected text here but *cough* someone said she will write it...eventualy so till then there is nice placeholder text here.");
 			//Speed raises up to 75
 			if (player.spe < 75 && rand(3) == 0 && changes < changeLimit) {
 				//low speed
@@ -4606,7 +4612,7 @@ public final class Mutations extends MutationsHelper
 				dynStats("tou", -2);
 			}
 			//Intelliloss
-			if (rand(4) == 0 && changes < changeLimit) {
+			if (type == 0 && rand(4) == 0 && changes < changeLimit) {
 				//low intelligence
 				if (player.inte < 15) outputText("\n\nYou feel like something is slipping away from you but can't figure out exactly what's happening.  You scrunch up your [face], trying to understand the situation.  Before you can reach any kind of conclusion, something glitters in the distance, distracting your feeble mind long enough for you to forget the problem entirely.");
 				//medium intelligence
@@ -4627,8 +4633,13 @@ public final class Mutations extends MutationsHelper
 				dynStats("int", -1);
 				changes++;
 			}
+			if ((type == 1 || type == 2) && player.inte < 80 && rand(4) == 0 && changes < changeLimit) {
+				outputText("\n\nYou suddenly feel more cunning and by far way smarter.");
+				dynStats("int", 2);
+				changes++;
+			}
 			//Libido gain
-			if (player.lib < 80 && changes < changeLimit && rand(4) == 0) {
+			if (type == 0 && player.lib < 80 && changes < changeLimit && rand(4) == 0) {
 				//Cat dicked folks
 				if (player.catCocks() > 0) {
 					temp = player.findFirstCockType(CockTypesEnum.CAT);
@@ -4822,13 +4833,30 @@ public final class Mutations extends MutationsHelper
 				outputText("You reach down to scratch your arm absent-mindedly and pull your fingers away to find strands of [skin coat.color] fur. Wait, fur?  What just happened?! You spend a moment examining yourself and discover that <b>you are now covered in glossy, soft fur.</b>");
 				changes++;
 			}
+			if (type == 2 && rand(4) == 0 && changes < changeLimit && player.hasCoatOfType(AppearanceDefs.SKIN_COAT_FUR)) {
+				outputText("\n\nYour fur and hair color are suddenly changing as lilac fur covered with white stripe begins to cover every area you have fur on. Your hair also changed color to match it turning to lilac strands separated by white strands every now and then. This change makes you feel like smiling at the absurdity of it all.");
+				player.hairColor = "lilac and white striped";
+				player.coatColor = "lilac and white striped";
+				changes++;
+			}
 			//CAT-FACE!  FULL ON FURRY!  RAGE AWAY NEKOZ
 			if (player.tailType == AppearanceDefs.TAIL_TYPE_CAT && player.earType == AppearanceDefs.EARS_CAT && rand(5) == 0 && changes < changeLimit && player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CAT && (player.hasFur() || player.hasScales() && player.dragonneScore() >= 4) && player.faceType != AppearanceDefs.FACE_CAT) {
-				//Gain cat face, replace old face
 				temp = rand(3);
 				if (temp == 0) outputText("\n\nYour face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something... different. You find a puddle to view your reflection and discover <b>your face is now a cross between human and feline features.</b>");
 				else if (temp == 1) outputText("\n\nMind-numbing pain courses through you as you feel your facial bones rearranging.  You clutch at your face in agony as your skin crawls and shifts, your visage reshaping to replace your facial characteristics with those of a feline. <b>You now have an anthropomorphic cat-face.</b>");
 				else outputText("\n\nYour face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something else. <b>Your facial features rearrange to take on many feline aspects.</b>");
+				setFaceType(AppearanceDefs.FACE_CAT);
+				changes++;
+			}
+			if (player.tailType == AppearanceDefs.TAIL_TYPE_CAT && player.earType == AppearanceDefs.EARS_CAT && rand(5) == 0 && changes < changeLimit && player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CAT && (player.hasFur() || player.hasScales() && player.dragonneScore() >= 4) && player.faceType != AppearanceDefs.FACE_CAT_CANINES) {
+				outputText("\n\n");
+				if (player.faceType != AppearanceDefs.FACE_HUMAN) outputText("Your face suddenly mold back into its former human shape. However you feel your canine changing elongating into sharp dagger-like teeth capable of causing severe injuries. ");
+				outputText("You feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. You purr at the change it gives you a cute look. <b>Your mouth is now filled with Cat-like canines.</b>");
+				setFaceType(AppearanceDefs.FACE_CAT_CANINES);
+				changes++;
+			}
+			if (type == 2 && rand(3) == 0 && changes < changeLimit && (player.faceType == AppearanceDefs.FACE_CAT || player.faceType == AppearanceDefs.FACE_CAT_CANINES)) {
+				outputText("\n\nYou suddenly feel like smiling. Why actually look so serious? Everything is easier if you take it with a smile and a laughter. Perhaps it's just you taking on that mentality or it's that weird wonderfruit you took but now you feel you could smile forever showing that wide grin of yours. <b>You now have a cheshire smile.</b>");
 				setFaceType(AppearanceDefs.FACE_CAT);
 				changes++;
 			}
@@ -11471,7 +11499,7 @@ public final class Mutations extends MutationsHelper
 				}
 				setTailType(AppearanceDefs.TAIL_TYPE_RED_PANDA);
 				changes++;
-			}/*
+			}
 			if (rand(3) == 0 && changes < changeLimit && !player.hasFur()) {
 				if (!player.hasCoat()) {
 					outputText("\n\nYou start to scratch your [skin], as an uncomfortable itching overcomes you. It’s quite annoying, like the aftermath of being bitten by a bug, only that it’s all over at the same time.");
@@ -11482,9 +11510,13 @@ public final class Mutations extends MutationsHelper
 					outputText("\n\nNot for long though, as an uncomfortable itching overcomes you. It’s quite annoying, like the aftermath of being bitten for a bug, only all over your body at the same time.");
 				}
 				outputText("\n\nSoon you realize that the sensation is coming from <i>under</i> your skin. After rubbing one of your arms in annoyance, you feel something different, and when you lay your eyes on it, you realize that a patch of fur is growing over your skin. Then you spot similar patches over your legs, chest and back. Fur grows over your body, patches joining and closing over your skin, and in a matter of seconds, your entire body is covered with a lovely coat of thick fur. The soft and fluffy sensation is quite pleasant to the touch.  <b>Seems like you’re now covered from head to toe with russet-red fur with black fur on your underside!</b>");
-				player.skin.growCoat({AppearanceDefs.SKIN_COAT_FUR,color:player.hairColor,pattern:AppearanceDefs.PATTERN_RED_PANDA_UNDERBODY,color:"russet-red",color2:"black"});
+				player.skin.growCoat(AppearanceDefs.SKIN_COAT_FUR,{
+					color:"russet-red",
+					color2:"black",
+					pattern:AppearanceDefs.PATTERN_RED_PANDA_UNDERBODY
+				});
 				changes++;
-			}*/
+			}
 			player.refillHunger(20);
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
