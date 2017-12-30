@@ -4,19 +4,15 @@
 	 */
 	package classes.Scenes.Dungeons.AnzuPalace 
 {
-import classes.AppearanceDefs;
-import classes.BaseContent;
-	import classes.BodyParts.*;
+import classes.BodyParts.Tongue;
+import classes.CoC;
+import classes.GlobalFlags.*;
+import classes.Items.*;
+import classes.PerkLib;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
-import classes.TimeAwareInterface;
-	import classes.GlobalFlags.*;
-	import classes.CoC;
-	import classes.PerkLib;
-	import classes.StatusEffects;
-	import classes.Scenes.Dungeons.DungeonEngine;
-	import classes.Items.*;
+import classes.StatusEffects;
 
-	use namespace CoC;
+use namespace CoC;
 
 	public class AnzuScene extends DungeonAbstractContent// implements TimeAwareInterface
 	{
@@ -813,7 +809,7 @@ import classes.TimeAwareInterface;
 			}
 			outputText("\n\nYou tell him to relax, while you take care of him. Soon, your efforts start to give result,  when his huge cock arises. After a little more stimulation, pre starts to leak copiously from his avian maleness. Taking some in your hands, you start smearing it on his asshole" + (player.isTaur() ? "" : ", and then on your [cock]") + ".");
 			outputText("\n\nYou decide to tease him for a bit, hotdogging your cock between his buttcheeks, moistening his butt feathers with your pre.");
-			outputText("\n\nThen your cock meet the entrance of his rosebud, then, you start to penetrating him, slowly at the start, inch by inch, and then you increase your pace, until half of you cock is buried inside. A moan of delight escapes from Anzu’s mouth while you thrust inside him. If the hardness of his cock proof anything, he must be really enjoying this.")
+			outputText("\n\nThen your cock meet the entrance of his rosebud, then, you start to penetrating him, slowly at the start, inch by inch, and then you increase your pace, until half of you cock is buried inside. A moan of delight escapes from Anzu’s mouth while you thrust inside him. If the hardness of his cock proof anything, he must be really enjoying this.");
 			outputText("\n\nSeeing how you’ve had enough foreplay, you shove the rest of your cock at once. With the amount of pre covering, it slip inside easily. Anzu gasps at the sudden intrusion, but quickly relaxes at the feeling of you cock sliding inside and outside his anus.");
 			outputText("\n\nYou increase the rhythm of your thrusts until you’re close to climax. Your avian companion, close too, tries to jerk off, but he is too overstimulated to do that. After a few attempts, he lets you take enterally the charge of the situation, letting his tongue roll outside his beak, while enjoying the feeling of your cock in his anus.");
 			if (player.cumQ() < 1000) {
@@ -1290,7 +1286,7 @@ import classes.TimeAwareInterface;
 			outputText("\n\nDistracted as you were from your task of going down to eat something, and a bit horny for the close contact and avian musk from you are subject, you come up with an idea. Why not get off the bird while you get a snack at the same time?");
 			outputText("\n\nWith this thought on mind, your start to take away his underwear, slow enough to not awake him, you reveal the prize under it: his gigantic manhood. This will do it nicely, you think to yourself, and, in the end,... isn’t like he won’t enjoy it, right? You’re pretty sure that he’ll have pleasant dreams tonight, if the happy rumbles coming from his beak as you touch him were proof of anything.");
 			outputText("\n\nTaking his meat on hand, your realize that, aroused by his naughty dream, the avian’s penis is hard and throbbing, some pre leaking from it and wetting its tip. You rub your [nose/snout/beak] along its length, enjoying the arousing scent of avian musk. Not wanting to waste any time, you proceed to lick the pre pouring from his cumslit, tasting again his exciting and sinful essence.");
-			outputText("\n\nOnce all his pre has been licked from the hard rod, you proceed to give slobbery licks along all its surface with your " + (player.tongueType == AppearanceDefs.TONGUE_SNAKE ? "forked" : player.hasLongTongue() ? "long" : "") + " tongue, the salty taste of his exhilarating your body, your " + (player.hasCock() ? "hard [cock] leaking over his lower belly" : player.hasVagina() ? "pussy leaking over his lower belly" : "featureless crotch tingling with sensation") + ".");
+			outputText("\n\nOnce all his pre has been licked from the hard rod, you proceed to give slobbery licks along all its surface with your " + (player.tongueType == Tongue.SNAKE ? "forked" : player.hasLongTongue() ? "long" : "") + " tongue, the salty taste of his exhilarating your body, your " + (player.hasCock() ? "hard [cock] leaking over his lower belly" : player.hasVagina() ? "pussy leaking over his lower belly" : "featureless crotch tingling with sensation") + ".");
 			outputText("\n\nSeems like the big bird liked your attentions, as his pants and moans, and more exactly, his rocking hard erection says. Back to business, you take the tip of his huge penis on your " + (9999 == 0 ? "[beak] having care to not apply to much pressure, as that would wake him" : "[lips] having care to not wake him") + ".");
 			outputText("\n\nBit by bit you engulf more and more inches of bird meat on your " + player.face() + ", " + (player.tallness >= 120 ? "and despite having some problems with the final inches, manage to get most of it on your " + player.face() + " on your throat" : player.tallness >= 60 ? "and having troubles past fifteen inches, as its tip touches the back of your throat, you decide to stop at this point" : "the tip itself being a mouthful, you struggle to get past a few inches though your throat") + ". Nevertheless, you try to make the most of it and take as much of his dick as you can.");
 			outputText("\n\nWith the monster penis deep throat on you, you start sucking, pumping with your hands the  of his penis that was left out of your mouth. After a few pump and some vigorous sucks, the aroused moans from the sleeping avian are clear signals about that he’s gonna cum soon. Not waiting to want a second more, you increase the pace of your deepthroating, and your efforts are quickly rewarded");

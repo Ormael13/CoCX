@@ -4,6 +4,7 @@
 package classes.Scenes.Areas.HighMountains
 {
 import classes.*;
+import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 
@@ -635,7 +636,7 @@ public class BasiliskScene extends BaseContent
 			spriteSelect(75);
 			clearOutput();
 			outputText("Completely destroyed, the basilisk lays face down on the ground, struggling pathetically to get up.  You giggle at the attempt as you ");
-			if(player.wingType == AppearanceDefs.WING_TYPE_BEE_LIKE_SMALL || player.wingType == AppearanceDefs.WING_TYPE_BEE_LIKE_LARGE ) outputText("buzz lightly over to the basilisk's writhing body");
+			if(player.wingType == Wings.BEE_LIKE_SMALL || player.wingType == Wings.BEE_LIKE_LARGE ) outputText("buzz lightly over to the basilisk's writhing body");
 			else outputText("saunter arrogantly over to the basilisk's crumpled up figure");
 			outputText(" and lightly nudge him in his ribs with your [foot].  His eyes are closed from to the ");
 			if(monster.HP < 1) outputText("pain");

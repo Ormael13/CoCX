@@ -4,7 +4,8 @@
 package classes.Scenes.Quests.UrtaQuest
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
 import classes.Scenes.Monsters.Goblin;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
@@ -34,15 +35,15 @@ public class GoblinBroodmother extends Goblin
 			this.imageName = "goblin";
 			this.long = "Thanks to their corruption, it's almost impossible to discern a goblin's age by their appearance, but it's quite obvious that this one is no horny young slut looking for her first dozen or so studs.  Standing before you is an obvious veteran breeder, a proud motherwhore who doubtlessly has a sizable tribe of slutty daughters somewhere not too far away.  Maybe three and a half feet tall, she has vibrant yellow skin - a rare shade, for goblins - and a wild mane of flamboyant neon pink and neon blue striped hair that falls down her back, her long, pointed ears barely visible amongst it.  Her many pregnancies have rendered her absurdly voluptuous. I-cup tits wobble absurdly in the air before her, their jiggling expanse so big that it's a wonder she can reach out to her blatant, teat-like purple nipples. Broodmother hips flare out from her waist, making her sashay from side to side with every step. A gloriously round and luscious bubble-butt, big enough to be DD-cup tits if it were on somebody's chest, jiggles enticingly with every motion.  Lewd leather straps fight to contain her exaggerated boobs and ass, serving more to house clinking pouches and bottles than to provide any protection of her modesty.  Piercings stud her lips, nose, eyebrows, ears, nipples and clit, and her fiery red eyes smoulder as she seductively licks her lips at you.\n\nYour treacherous horse-cock aches to bury itself into this ripe, ready slut, but you have to be strong - you rather doubt she'll let you go with a single fuck, even if you are incapable of giving her the babies she craves...";
 			// this.plural = false;
-			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DROOLING, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = 35 + rand(4);
-			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
-			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
+			this.hipRating = Hips.RATING_AMPLE+2;
+			this.buttRating = Butt.RATING_LARGE;
 			this.skinTone = "dark green";
 			this.hairColor = "purple";
 			this.hairLength = 4;

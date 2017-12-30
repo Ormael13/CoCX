@@ -1,7 +1,8 @@
 package classes.Scenes.Places.Ingnam 
 {
 import classes.*;
-import classes.GlobalFlags.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -23,11 +24,11 @@ public class Thief extends Monster
 			// this.plural = false;
 			this.createCock();
 			createBreastRow(Appearance.breastCupInverse("flat"));
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_NORMAL;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 5*12 + 5 + rand(4);
-			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
-			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			this.hipRating = Hips.RATING_BOYISH;
+			this.buttRating = Butt.RATING_TIGHT;
 			this.skinTone = "light";
 			this.hairColor = "brown";
 			this.hairLength = 4;

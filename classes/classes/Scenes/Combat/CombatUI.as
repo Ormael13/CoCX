@@ -2,7 +2,8 @@
  * Coded by aimozg on 27.09.2017.
  */
 package classes.Scenes.Combat {
-import classes.AppearanceDefs;
+import classes.BodyParts.Face;
+import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
 import classes.Scenes.Areas.Desert.SandTrap;
@@ -69,7 +70,7 @@ public class CombatUI extends BaseCombatContent {
 				if (player.weapon != weapons.SPEAR && player.weapon != weapons.LANCE && player.weapon != weapons.FRTAXE) {
 					btnMelee.disable("No way you could reach enemy with melee attacks while flying.");
 				}
-				else if (player.wingType == AppearanceDefs.WING_TYPE_BAT_ARM) {
+				else if (player.wingType == Wings.BAT_ARM) {
 					btnMelee.disable("No way you could use your melee weapon with those arms while flying.");
 				}
 			} else if (player.hasStatusEffect(StatusEffects.KnockedBack)) {
@@ -97,7 +98,7 @@ public class CombatUI extends BaseCombatContent {
 			default:
 				btnRanged.showDisabled("Shoot");
 		}
-		if(player.isFlying() && player.wingType == AppearanceDefs.WING_TYPE_BAT_ARM){btnRanged.disable("It would be rather difficult to aim while flapping your arms.");}
+		if(player.isFlying() && player.wingType == Wings.BAT_ARM){btnRanged.disable("It would be rather difficult to aim while flapping your arms.");}
 		btnItems.show("Items", inventory.inventoryMenu, "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
 		
 		// Submenus
@@ -172,7 +173,7 @@ public class CombatUI extends BaseCombatContent {
 			addButton(4, "Release", combat.GooLeggoMyEggo);
 		} else if (monster.hasStatusEffect(StatusEffects.EmbraceVampire)) {
 			menu();
-			if (player.faceType == AppearanceDefs.FACE_VAMPIRE) {
+			if (player.faceType == Face.VAMPIRE) {
 				addButton(0, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
 				if (player.fatigueLeft() <= combat.physicalCost(20)) {
 					button(0).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");

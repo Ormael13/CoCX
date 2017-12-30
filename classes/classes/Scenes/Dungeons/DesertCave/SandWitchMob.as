@@ -1,7 +1,8 @@
 package classes.Scenes.Dungeons.DesertCave
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
 import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
@@ -156,14 +157,14 @@ public class SandWitchMob extends Monster
 			this.pronoun1 = "they";
 			this.pronoun2 = "them";
 			this.pronoun3 = "their";
-			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_WET, AppearanceDefs.VAGINA_LOOSENESS_LOOSE);
+			this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_LOOSE);
 			this.createBreastRow(Appearance.breastCupInverse("DD"));
 			this.createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = rand(12) + 55;
-			this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
-			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
+			this.hipRating = Hips.RATING_CURVY;
+			this.buttRating = Butt.RATING_LARGE;
 			this.skinTone = "bronzed";
 			this.hairColor = "sandy-blonde";
 			this.hairLength = 15;

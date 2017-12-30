@@ -3,6 +3,8 @@
  */
 package classes
 {
+import classes.BodyParts.Face;
+import classes.BodyParts.Tail;
 import classes.Perks.*;
 
 public class PerkLib
@@ -2500,8 +2502,8 @@ public class PerkLib
             EnvenomedBolt.requireLevel(18)
                     .requirePerk(JobHunter)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.tail.isAny(AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN, AppearanceDefs.TAIL_TYPE_SCORPION, AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL)
-                                || player.facePart.isAny(AppearanceDefs.FACE_SNAKE_FANGS, AppearanceDefs.FACE_SPIDER_FANGS);
+                        return player.tail.isAny(Tail.BEE_ABDOMEN, Tail.SCORPION, Tail.MANTICORE_PUSSYTAIL)
+                                || player.facePart.isAny(Face.SNAKE_FANGS, Face.SPIDER_FANGS);
                     }, "Venom-producing tail, abdomen, or fangs");
             DancersVitalityIV.requirePerk(DancersVitalityIII)
                     .requireSpe(105)
@@ -3321,7 +3323,7 @@ public class PerkLib
                 return player.lizardScore() >= 4;
             }, "Lizan race");
             ManticoreMetabolism.requireCustomFunction(function (player:Player):Boolean {
-                return player.manticoreScore() >= 6 && player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL;
+                return player.manticoreScore() >= 6 && player.tailType == Tail.MANTICORE_PUSSYTAIL;
             }, "Manticore race and tail");
             MantislikeAgility.requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
                 return player.mantisScore() >= 6;

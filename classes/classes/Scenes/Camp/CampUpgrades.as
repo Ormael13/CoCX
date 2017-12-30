@@ -1083,12 +1083,12 @@ public function arcaneCircle():void {
 	if (player.fatigue <= player.maxFatigue() - 50)
 	{
 		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] < 1) { 
-			buildFirstArcaneCircle()
+			buildFirstArcaneCircle();
 			return; 
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 1) { 
 			if (player.findPerk(PerkLib.ElementalContractRank4) >= 0) {
-				buildSecondArcaneCircle()
+				buildSecondArcaneCircle();
 				return; 
 			}
 			else {
@@ -1098,7 +1098,7 @@ public function arcaneCircle():void {
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 2) { 
 			if (player.findPerk(PerkLib.ElementalContractRank8) >= 0) {
-				buildThirdArcaneCircle()
+				buildThirdArcaneCircle();
 				return;
 			}
 			else {

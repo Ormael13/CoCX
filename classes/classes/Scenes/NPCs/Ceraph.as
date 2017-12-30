@@ -1,6 +1,9 @@
 ﻿package classes.Scenes.NPCs
 {
 import classes.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 
@@ -292,16 +295,16 @@ public class Ceraph extends Monster
 			this.long = "Ceraph the Omnibus is totally nude and reveling in it.  Her large yet perky breasts jiggle heavily against her chest as she moves.  The flawless purple skin of her twin mounds glistens with a thin sheen of sweat, inviting you to touch and rub your fingers along their slippery surface.  Her eyes are solid black, but convey a mix of amusement and desire, in spite of their alien appearance.  The demon's crotch is a combination of both genders – a drooling cunt topped with a thick demonic shaft, sprouting from where a clit should be.";
 			// this.plural = false;
 			this.createCock(10,2,CockTypesEnum.DEMON);
-			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_GAPING);
+			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_GAPING);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 20, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,15,0,0,0);
 			this.tallness = 5*12+6;
-			this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
-			this.buttRating = AppearanceDefs.BUTT_RATING_NOTICEABLE;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
+			this.hipRating = Hips.RATING_CURVY;
+			this.buttRating = Butt.RATING_NOTICEABLE;
+			this.lowerBody = LowerBody.DEMONIC_HIGH_HEELS;
 			this.skinTone = "purple";
 			this.hairColor = "black";
 			this.hairLength = 20;

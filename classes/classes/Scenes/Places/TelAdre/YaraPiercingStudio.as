@@ -1,4 +1,5 @@
 package classes.Scenes.Places.TelAdre {
+import classes.BodyParts.Piercing;
 import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
 import classes.StatusEffects;
@@ -58,11 +59,6 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
     //11. Furrite (Attracts Furries)
     //12. Crimstone - + min lust
     //13. Icestone (-Min Lust)
-    public const TYPE_STUD:int   = 1;
-    public const TYPE_RING:int   = 2;
-    public const TYPE_LADDER:int = 3;
-    public const TYPE_HOOP:int   = 4;
-    public const TYPE_CHAIN:int  = 5;
 
     //}endregion
     public function YaraPiercingStudio() {
@@ -195,11 +191,11 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
                 break;
         }
         var typeChoices:ButtonDataList = new ButtonDataList();
-        typeChoices.add("Stud", curry(chooseMaterials, loc, TYPE_STUD));
-        typeChoices.add("Ring", curry(chooseMaterials, loc, TYPE_RING)).visible     = (loc != LOC_TONGUE);
-        typeChoices.add("Ladder", curry(chooseMaterials, loc, TYPE_LADDER)).visible = (loc == LOC_DICK);
-        typeChoices.add("Hoop", curry(chooseMaterials, loc, TYPE_HOOP)).visible     = (loc == LOC_EARS);
-        typeChoices.add("Chain", curry(chooseMaterials, loc, TYPE_CHAIN)).visible   = (loc == LOC_NIPPLES);
+        typeChoices.add("Stud", curry(chooseMaterials, loc, Piercing.STUD));
+        typeChoices.add("Ring", curry(chooseMaterials, loc, Piercing.RING)).visible     = (loc != LOC_TONGUE);
+        typeChoices.add("Ladder", curry(chooseMaterials, loc, Piercing.LADDER)).visible = (loc == LOC_DICK);
+        typeChoices.add("Hoop", curry(chooseMaterials, loc, Piercing.HOOP)).visible     = (loc == LOC_EARS);
+        typeChoices.add("Chain", curry(chooseMaterials, loc, Piercing.CHAIN)).visible   = (loc == LOC_NIPPLES);
         submenu(typeChoices, pierceMenu);
     }
 
@@ -424,7 +420,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
         }
         switch (type) {
                 //studs
-            case TYPE_STUD:
+            case Piercing.STUD:
                 //multiples
                 if (loc == 2 || loc == 5 || loc == 8) {
                     shortP += "studs";
@@ -436,7 +432,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
                 }
                 break;
                 //2. Ring (Called prince albert on dick)
-            case TYPE_RING:
+            case Piercing.RING:
                 //multiples
                 if (loc == 2 || loc == 5 || loc == 8) {
                     shortP += "rings";
@@ -448,12 +444,12 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
                 }
                 break;
                 //3. Jacobs Ladder (dick only)
-            case TYPE_LADDER:
+            case Piercing.LADDER:
                 shortP += "jacob's ladder";
                 longP += "jacob's ladder";
                 break;
                 //4. Hoop (ears/nipples/clit)
-            case TYPE_HOOP:
+            case Piercing.HOOP:
                 //multiples
                 if (loc == 2 || loc == 5 || loc == 8) {
                     shortP += "hoops";
@@ -465,7 +461,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
                 }
                 break;
                 //5. Chain (nipples only)
-            case TYPE_CHAIN:
+            case Piercing.CHAIN:
                 shortP += "chain";
                 longP += "chain";
                 break;

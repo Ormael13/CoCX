@@ -1,9 +1,9 @@
 package classes.Scenes.NPCs
 {
 import classes.*;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.SceneLib;
 
 public class HelFollower extends NPCAwareContent
@@ -932,7 +932,7 @@ private function hugASmokeyTail():void {
 		outputText("As the sun sets over the camp, you see Helia standing over her hammock, stretching and yawning, ready to turn in for the night.  You approach her, sliding your arms around her supple waist and burying your face in her soft crimson locks, holding your lover close.  Hel giggles girlishly as you give her a long hug, nuzzling into the nape of her neck.");
 		outputText("\n\nWith a bit of effort, Hel turns around in your embrace and starts to fiddle with your [armor], slowly pulling it off, leaving your bare flesh pressed against her own.  You breathe in the woodsmoke scent of her hair; rub your " + player.skinFurScales() + " along her smooth flesh; gasp lightly as her long tail wraps lovingly around your [legs], drawing you even closer, letting your face rest against her yielding chest.");
 		outputText("\n\nKissing and nipping along your arm and neck, Hel gently pulls you into the hammock, leaving you resting atop the salamander, your limbs and tail");
-		if(player.tailType > AppearanceDefs.TAIL_TYPE_NONE) outputText("s");
+		if(player.tailType > Tail.NONE) outputText("s");
 		outputText(" intertwined.  <i>\"Oh, this is nice,\"</i> Hel laughs, running her long, scaled fingers through your hair.  <i>\"So, you wanna stay with me tonight, lover mine?  I'd appreciate the company....\"</i>");
 
 		outputText("\n\nBefore you can give an answer, Hel presses her lips to yours, her breath coming hot against your face as her hands run across your back and [butt].");

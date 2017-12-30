@@ -5,6 +5,8 @@
 package classes.Scenes.NPCs 
 {
 import classes.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
 import classes.GlobalFlags.kFLAGS;
 
 public class Evangeline2 extends Monster
@@ -312,8 +314,8 @@ public class Evangeline2 extends Monster
 				this.tallness = 90;
 				this.hairColor = "platinum blonde";
 				this.skin.setBaseOnly({color:"olive"});
-				this.hipRating = AppearanceDefs.HIP_RATING_CURVY+2;//hipRating = 12
-				this.buttRating = AppearanceDefs.BUTT_RATING_JIGGLY+2;//buttRating = 12
+				this.hipRating = Hips.RATING_CURVY+2;//hipRating = 12
+				this.buttRating = Butt.RATING_JIGGLY+2;//buttRating = 12
 				initStrTouSpeInte(29, 34, 45, 50);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
@@ -334,8 +336,8 @@ public class Evangeline2 extends Monster
 				this.tallness = 90;
 				this.hairColor = "platinum blonde";
 				this.skin.restore();
-				this.hipRating = AppearanceDefs.HIP_RATING_CURVY+2;
-				this.buttRating = AppearanceDefs.BUTT_RATING_JIGGLY+2;
+				this.hipRating = Hips.RATING_CURVY+2;
+				this.buttRating = Butt.RATING_JIGGLY+2;
 				initStrTouSpeInte(41, 46, 55, 50);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
@@ -357,8 +359,8 @@ public class Evangeline2 extends Monster
 				this.tallness = 90;
 				this.hairColor = "platinum crimson";
 				this.skin.setBaseOnly({});
-				this.hipRating = AppearanceDefs.HIP_RATING_CURVY+2;
-				this.buttRating = AppearanceDefs.BUTT_RATING_JIGGLY+2;
+				this.hipRating = Hips.RATING_CURVY+2;
+				this.buttRating = Butt.RATING_JIGGLY+2;
 				initStrTouSpeInte(41, 46, 55, 50);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
@@ -381,8 +383,8 @@ public class Evangeline2 extends Monster
 				this.tallness = 96;
 				this.hairColor = "crimson platinum";
 				this.skin.growFur();
-				this.hipRating = AppearanceDefs.HIP_RATING_FERTILE+3;//hipRating = 18
-				this.buttRating = AppearanceDefs.BUTT_RATING_EXPANSIVE+1;//buttRating = 14
+				this.hipRating = Hips.RATING_FERTILE+3;//hipRating = 18
+				this.buttRating = Butt.RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(41, 46, 70, 50);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
@@ -407,8 +409,8 @@ public class Evangeline2 extends Monster
 				this.tallness = 96;
 				this.hairColor = "crimson platinum";
 				this.skin.growFur();
-				this.hipRating = AppearanceDefs.HIP_RATING_FERTILE+3;//hipRating = 18
-				this.buttRating = AppearanceDefs.BUTT_RATING_EXPANSIVE+1;//buttRating = 14
+				this.hipRating = Hips.RATING_FERTILE+3;//hipRating = 18
+				this.buttRating = Butt.RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(41, 46, 80, 50);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
@@ -427,9 +429,9 @@ public class Evangeline2 extends Monster
 				this.createPerk(PerkLib.JobEnchanter, 0, 0, 0, 0);
 				this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			}
-			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DRY, AppearanceDefs.VAGINA_LOOSENESS_TIGHT);
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_VIRGIN;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
+			this.createVagina(false, VaginaClass.WETNESS_DRY, VaginaClass.LOOSENESS_TIGHT);
+			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.skinTone = "olive";
 			this.hairLength = 36;
 			initWisLibSensCor(15, 25, 35, 100);

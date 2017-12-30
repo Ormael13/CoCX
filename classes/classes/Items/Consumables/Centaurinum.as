@@ -3,13 +3,18 @@
  */
 package classes.Items.Consumables {
 import classes.Appearance;
-import classes.AppearanceDefs;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Ears;
+import classes.BodyParts.Face;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
 import classes.CoC_Settings;
 import classes.CockTypesEnum;
 import classes.EngineCore;
 import classes.Items.Consumable;
 import classes.PerkLib;
 import classes.StatusEffects;
+import classes.VaginaClass;
 
 public class Centaurinum extends Consumable{
 	public function Centaurinum() {
@@ -187,12 +192,12 @@ public class Centaurinum extends Consumable{
 		if (player.gender == 2 || player.gender == 3) {
 			//Single vag
 			if (player.vaginas.length == 1) {
-				if (player.vaginas[0].vaginalLooseness <= AppearanceDefs.VAGINA_LOOSENESS_GAPING && changes < changeLimit && rand(2) == 0) {
+				if (player.vaginas[0].vaginalLooseness <= VaginaClass.LOOSENESS_GAPING && changes < changeLimit && rand(2) == 0) {
 					outputText("\n\nYou grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize your [vagina] has grown larger, in depth AND size.");
 					player.vaginas[0].vaginalLooseness++;
 					changes++;
 				}
-				if (player.vaginas[0].vaginalWetness <= AppearanceDefs.VAGINA_WETNESS_NORMAL && changes < changeLimit && rand(2) == 0) {
+				if (player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_NORMAL && changes < changeLimit && rand(2) == 0) {
 					outputText("\n\nYour [vagina] moistens perceptably, giving off an animalistic scent.");
 					player.vaginas[0].vaginalWetness++;
 					changes++;
@@ -214,7 +219,7 @@ public class Centaurinum extends Consumable{
 						temp2 = player.vaginas[temp].vaginalWetness;
 					}
 				}
-				if (player.vaginas[temp].vaginalWetness <= AppearanceDefs.VAGINA_WETNESS_NORMAL && changes < changeLimit && rand(2) == 0) {
+				if (player.vaginas[temp].vaginalWetness <= VaginaClass.WETNESS_NORMAL && changes < changeLimit && rand(2) == 0) {
 					outputText("\n\nOne of your " + Appearance.vaginaDescript(player,temp) + " moistens perceptably, giving off an animalistic scent.");
 					player.vaginas[temp].vaginalWetness++;
 					changes++;
@@ -233,7 +238,7 @@ public class Centaurinum extends Consumable{
 						temp2 = player.vaginas[temp].vaginalLooseness;
 					}
 				}
-				if (player.vaginas[0].vaginalLooseness <= AppearanceDefs.VAGINA_LOOSENESS_GAPING && changes < changeLimit && rand(2) == 0) {
+				if (player.vaginas[0].vaginalLooseness <= VaginaClass.LOOSENESS_GAPING && changes < changeLimit && rand(2) == 0) {
 					outputText("\n\nYou grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize one of your " + Appearance.vaginaDescript(player,temp) + " has grown larger, in depth AND size.");
 					player.vaginas[temp].vaginalLooseness++;
 					changes++;
@@ -248,34 +253,34 @@ public class Centaurinum extends Consumable{
 		//Mare-gina
 
 		//classic horse-taur version
-		if (changes < changeLimit && rand(2) == 0 && player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HOOFED && player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE && !player.isTaur()) {
+		if (changes < changeLimit && rand(2) == 0 && player.lowerBody == LowerBody.HOOFED && player.lowerBody != LowerBody.GARGOYLE && !player.isTaur()) {
 			changes++;
 			outputText("\n\nImmense pain overtakes you as you feel your backbone snap.  The agony doesn't stop, blacking you out as your spine lengthens, growing with new flesh from your backside as the bones of your legs flex and twist.  Muscle groups shift and rearrange themselves as the change completes, the pain dying away as your consciousness returns.  <b>You now have the lower body of a centaur</b>.");
 			if (player.gender > 0) {
 				outputText("  After taking a moment to get used to your new body, you notice that your genitals now reside between the back legs on your centaur body.");
 			}
 			dynStats("spe", 3);
-			mutations.setLowerBody(AppearanceDefs.LOWER_BODY_TYPE_HOOFED);
+			mutations.setLowerBody(LowerBody.HOOFED);
 			player.legCount = 4;
 		}
 		//generic version
-		if (player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_HOOFED && player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE && !player.isTaur()) {
+		if (player.lowerBody != LowerBody.HOOFED && player.lowerBody != LowerBody.GARGOYLE && !player.isTaur()) {
 			if (changes < changeLimit && rand(3) == 0) {
 				changes++;
-				//else if (player.lowerBody == LOWER_BODY_TYPE_DOG) outputText("\n\nYou stagger as your paws change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
-				if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_NAGA || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_SCYLLA) {
-					if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_NAGA) {
+				//else if (player.lowerBody == DOG) outputText("\n\nYou stagger as your paws change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
+				if (player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.SCYLLA) {
+					if (player.lowerBody == LowerBody.NAGA) {
 						outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!");
 					}
-					if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_SCYLLA) {
+					if (player.lowerBody == LowerBody.SCYLLA) {
 						outputText("\n\nYou collapse as your tentacle legs starts to merge in pairs, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!");
 					}
-					mutations.setLowerBody(AppearanceDefs.LOWER_BODY_TYPE_HOOFED);
+					mutations.setLowerBody(LowerBody.HOOFED);
 				}
 				//Catch-all
 				else {
-					if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HUMAN)
-						mutations.setLowerBody(AppearanceDefs.LOWER_BODY_TYPE_HOOFED);
+					if (player.lowerBody == LowerBody.HUMAN)
+						mutations.setLowerBody(LowerBody.HOOFED);
 					outputText("\n\nImmense pain overtakes you as you feel your backbone snap.  The agony doesn't stop, blacking you out as your spine lengthens, growing with new flesh from your backside as the bones of your legs flex and twist.  Muscle groups shift and rearrange themselves as the change completes, the pain dying away as your consciousness returns.  <b>You now have the lower body of a feral beast!</b>");
 				}
 				if (player.gender > 0)
@@ -288,45 +293,45 @@ public class Centaurinum extends Consumable{
 			}
 		}
 		//Horse tail
-		if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HOOFED && player.tailType != AppearanceDefs.TAIL_TYPE_GARGOYLE && player.tailType != AppearanceDefs.TAIL_TYPE_HORSE && changes < changeLimit && rand(3) == 0) {
+		if (player.lowerBody == LowerBody.HOOFED && player.tailType != Tail.GARGOYLE && player.tailType != Tail.HORSE && changes < changeLimit && rand(3) == 0) {
 			//no tail
 			if (player.tailType == 0) {
 				outputText("\n\nThere is a sudden tickling on your ass, and you notice you have sprouted a long shiny horsetail of the same [haircolor] color as your hair.");
 			}
 			//if other animal tail
-			if (player.tailType > AppearanceDefs.TAIL_TYPE_HORSE && player.tailType <= AppearanceDefs.TAIL_TYPE_COW) {
+			if (player.tailType > Tail.HORSE && player.tailType <= Tail.COW) {
 				outputText("\n\nPain lances up your [asshole] as your tail shifts and morphs disgustingly.  With one last wave of pain, it splits into hundreds of tiny filaments, transforming into a horsetail.");
 			}
 			//if bee/mantis/scorpion/spider-butt.
-			if ((player.tailType > AppearanceDefs.TAIL_TYPE_COW && player.tailType < AppearanceDefs.TAIL_TYPE_SHARK) || player.tailType == AppearanceDefs.TAIL_TYPE_SCORPION || player.tailType == AppearanceDefs.TAIL_TYPE_MANTIS_ABDOMEN) {
+			if ((player.tailType > Tail.COW && player.tailType < Tail.SHARK) || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTIS_ABDOMEN) {
 				outputText("\n\nYour insect-like abdomen bunches up as it begins shrinking, exoskeleton flaking off like a snake sheds its skin.  It bunches up until it is as small as a tennis ball, then explodes outwards, growing into an animalistic tail shape.  Moments later, it explodes into filaments of pain, dividing into hundreds of strands and turning into a shiny horsetail.");
 			}
-			if (player.tailType >= AppearanceDefs.TAIL_TYPE_SHARK) {
+			if (player.tailType >= Tail.SHARK) {
 				outputText("\n\nPain lances up your [asshole] as your tail shifts and morphs disgustingly.  With one last wave of pain, it splits into hundreds of tiny filaments, transforming into a horsetail.");
 			}
 			outputText("  <b>You now have a horse-tail.</b>");
-			mutations.setTailType(AppearanceDefs.TAIL_TYPE_HORSE, 1);
+			mutations.setTailType(Tail.HORSE, 1);
 			player.tailVenom = 0;
 			player.tailRecharge = 0;
 			changes++;
 		}
 		//Human skin	
-		if (player.tailType == AppearanceDefs.TAIL_TYPE_HORSE && !player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0) {
+		if (player.tailType == Tail.HORSE && !player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0) {
 			mutations.humanizeSkin();
 			changes++;
 		}
 		//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-		if (changes < changeLimit && !InCollection(player.armType, AppearanceDefs.ARM_TYPE_HUMAN, AppearanceDefs.ARM_TYPE_GARGOYLE) && rand(4) == 0) {
+		if (changes < changeLimit && !InCollection(player.armType, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
 			mutations.humanizeArms();
 			changes++;
 		}
 		//Human ears
-		if (player.armType == AppearanceDefs.ARM_TYPE_HUMAN && player.earType != AppearanceDefs.EARS_HUMAN && changes < changeLimit && rand(4) == 0) {
+		if (player.armType == Arms.HUMAN && player.earType != Ears.HUMAN && changes < changeLimit && rand(4) == 0) {
 			mutations.humanizeEars();
 			changes++;
 		}
 		//Human face
-		if (player.earType == AppearanceDefs.EARS_HUMAN && player.faceType != AppearanceDefs.FACE_HUMAN && changes < changeLimit && rand(4) == 0) {
+		if (player.earType == Ears.HUMAN && player.faceType != Face.HUMAN && changes < changeLimit && rand(4) == 0) {
 			mutations.humanizeFace();
 			changes++;
 		}

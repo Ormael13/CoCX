@@ -5,8 +5,12 @@
 package classes.Scenes.Areas.BlightRidge
 {
 import classes.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.Monsters.AbstractSuccubus;
 import classes.internals.*;
 
@@ -39,15 +43,15 @@ use namespace CoC;
 			this.ballSize = 0;
 			this.cumMultiplier = 3;
 			// this.hoursSinceCum = 0;
-			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 30, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = AssClass.WETNESS_SLIME_DROOLING;
 			this.tallness = 72;
-			this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
-			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE+1;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
+			this.hipRating = Hips.RATING_CURVY;
+			this.buttRating = Butt.RATING_LARGE+1;
+			this.lowerBody = LowerBody.DEMONIC_HIGH_HEELS;
 			this.skinTone = "purple";
 			this.hairColor = "black";
 			this.hairLength = 13;
@@ -74,9 +78,9 @@ use namespace CoC;
 					add(weapons.WHIP, 2).
 					add(consumables.SUCMILK, 12).
 					add(consumables.INCUBID, 12);
-			this.wingType = AppearanceDefs.WING_TYPE_BAT_LIKE_TINY;
+			this.wingType = Wings.BAT_LIKE_TINY;
 			this.wingDesc = "tiny hidden";
-			this.tailType = AppearanceDefs.TAIL_TYPE_DEMONIC;
+			this.tailType = Tail.DEMONIC;
 			this.special1 = kissAttack;
 			this.special2 = seduceAttack;
 			this.special3 = whipAttack;

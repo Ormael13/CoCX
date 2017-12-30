@@ -1,7 +1,10 @@
 ﻿package classes.Scenes.NPCs
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
 import classes.Scenes.SceneLib;
 
 public class Clara extends Monster
@@ -136,14 +139,14 @@ public class Clara extends Monster
 			this.imageName = "marble";
 			this.long = "You are fighting Marble’s little sister Clara!  The cow-girl looks spitting mad, determined to steal you from her sister and make you into her milk slave, with her breasts hanging out for all to see.  Fortunately, she doesn’t look as big or strong as her sister, and you don’t think she’s been trained to fight like Marble has either.  Still, there is no telling what tricks she has up her sleeves, and she is holding a very angry looking heavy mace.";
 			// this.plural = false;
-			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_NORMAL, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_NORMAL);
 			createBreastRow(Appearance.breastCupInverse("F"));
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_VIRGIN;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.tallness = 6*12+4;
-			this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
-			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
+			this.hipRating = Hips.RATING_CURVY;
+			this.buttRating = Butt.RATING_LARGE;
+			this.lowerBody = LowerBody.HOOFED;
 			this.skinTone = "pale";
 			this.hairColor = "brown";
 			this.hairLength = 13;
@@ -160,7 +163,7 @@ public class Clara extends Monster
 			this.bonusLust = 20;
 			this.gems = rand(5) + 25;
 			this.drop = NO_DROP;
-			this.tailType = AppearanceDefs.TAIL_TYPE_COW;
+			this.tailType = Tail.COW;
 			//this.special1 = marbleSpecialAttackOne;
 			//this.special2 = marbleSpecialAttackTwo;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);

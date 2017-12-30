@@ -1,16 +1,20 @@
 ﻿package classes.Scenes.Combat {
-import classes.AppearanceDefs;
 import classes.BaseContent;
+import classes.BodyParts.Ears;
+import classes.BodyParts.Face;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Skin;
+import classes.BodyParts.Tail;
+import classes.CoC;
 import classes.CoC_Settings;
 import classes.EngineCore;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.ItemType;
 import classes.Items.JewelryLib;
 import classes.Items.ShieldLib;
-import classes.Items.WeaponLib;
 import classes.Items.Weapon;
+import classes.Items.WeaponLib;
 import classes.Monster;
 import classes.PerkLib;
 import classes.Scenes.Areas.Beach.Gorgon;
@@ -1742,7 +1746,7 @@ public function multiArrowsStrike():void {
 			if(monster.lustVuln == 0) {
 				outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 			}
-			if (player.tailType == AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN) {
+			if (player.tailType == Tail.BEE_ABDOMEN) {
 				outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
 				var damageB:Number = 35 + rand(player.lib/10);
 				if (player.level < 10) damageB += 20 + (player.level * 3);
@@ -1758,7 +1762,7 @@ public function multiArrowsStrike():void {
 				else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
 				player.tailVenom -= 5;
 			}
-			if (player.tailType == AppearanceDefs.TAIL_TYPE_SCORPION) {
+			if (player.tailType == Tail.SCORPION) {
 				outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
 				monster.spe -= 2;
 				if (monster.spe < 1) monster.spe = 1;
@@ -1769,7 +1773,7 @@ public function multiArrowsStrike():void {
 				else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
 				player.tailVenom -= 5;
 			}
-			if (player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL) {
+			if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
 				outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
 				var lustdamage:Number = 35 + rand(player.lib / 10);
 				if (player.level < 10) damage += 20 + (player.level * 3);
@@ -1787,7 +1791,7 @@ public function multiArrowsStrike():void {
 				else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
 				player.tailVenom -= 5;
 			}
-			if (player.faceType == AppearanceDefs.FACE_SNAKE_FANGS) {
+			if (player.faceType == Face.SNAKE_FANGS) {
 				outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
 				monster.spe -= 0.4;
 				monster.spe -= 0.4;
@@ -1801,7 +1805,7 @@ public function multiArrowsStrike():void {
 				else monster.createStatusEffect(StatusEffects.NagaVenom, 0.4, 0.4, 0, 0);
 				player.tailVenom -= 5;
 			}
-			if (player.faceType == AppearanceDefs.FACE_SPIDER_FANGS) {
+			if (player.faceType == Face.SPIDER_FANGS) {
 				outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
 				var lustDmg:int = 6 * monster.lustVuln;
 				monster.teased(lustDmg);
@@ -5378,16 +5382,16 @@ public function ScyllaTease():void {
 		damage += rand(7);
 		//partial skins bonuses
 		switch (player.coatType()) {
-			case AppearanceDefs.SKIN_COAT_FUR:
+			case Skin.FUR:
 				damage += (1 + player.newGamePlusMod());
 				break;
-			case AppearanceDefs.SKIN_COAT_SCALES:
+			case Skin.SCALES:
 				damage += (2 * (1 + player.newGamePlusMod()));
 				break;
-			case AppearanceDefs.SKIN_COAT_CHITIN:
+			case Skin.CHITIN:
 				damage += (3 * (1 + player.newGamePlusMod()));
 				break;
-			case AppearanceDefs.SKIN_COAT_BARK:
+			case Skin.BARK:
 				damage += (4 * (1 + player.newGamePlusMod()));
 				break;
 		}
@@ -5545,16 +5549,16 @@ public function GooTease():void {
 		damage += rand(7);
 		//partial skins bonuses
 		switch (player.coatType()) {
-			case AppearanceDefs.SKIN_COAT_FUR:
+			case Skin.FUR:
 				damage += (1 + player.newGamePlusMod());
 				break;
-			case AppearanceDefs.SKIN_COAT_SCALES:
+			case Skin.SCALES:
 				damage += (2 * (1 + player.newGamePlusMod()));
 				break;
-			case AppearanceDefs.SKIN_COAT_CHITIN:
+			case Skin.CHITIN:
 				damage += (3 * (1 + player.newGamePlusMod()));
 				break;
-			case AppearanceDefs.SKIN_COAT_BARK:
+			case Skin.BARK:
 				damage += (4 * (1 + player.newGamePlusMod()));
 				break;
 		}
@@ -5800,7 +5804,7 @@ public function runAway(callHook:Boolean = true):void {
 	var escapeMod:Number = 20 + monster.level * 3;
 	if(debug) escapeMod -= 300;
 	if(player.canFly()) escapeMod -= 20;
-	if(player.tailType == AppearanceDefs.TAIL_TYPE_RACCOON && player.earType == AppearanceDefs.EARS_RACCOON && player.findPerk(PerkLib.Runner) >= 0) escapeMod -= 25;
+	if(player.tailType == Tail.RACCOON && player.earType == Ears.RACCOON && player.findPerk(PerkLib.Runner) >= 0) escapeMod -= 25;
 	if(monster.hasStatusEffect(StatusEffects.Stunned)) escapeMod -= 50;
 	
 	//Big tits doesn't matter as much if ya can fly!
@@ -5910,7 +5914,7 @@ public function runAway(callHook:Boolean = true):void {
 		//Fliers flee!
 		else if(player.canFly()) outputText(monster.capitalA + monster.short + " can't catch you.");
 		//sekrit benefit: if you have coon ears, coon tail, and Runner perk, change normal Runner escape to flight-type escape
-		else if(player.tailType == AppearanceDefs.TAIL_TYPE_RACCOON && player.earType == AppearanceDefs.EARS_RACCOON && player.findPerk(PerkLib.Runner) >= 0) {
+		else if(player.tailType == Tail.RACCOON && player.earType == Ears.RACCOON && player.findPerk(PerkLib.Runner) >= 0) {
 			outputText("Using your running skill, you build up a head of steam and jump, then spread your arms and flail your tail wildly; your opponent dogs you as best [monster he] can, but stops and stares dumbly as your spastic tail slowly propels you several meters into the air!  You leave [monster him] behind with your clumsy, jerky, short-range flight.");
 		}
 		//Non-fliers flee
@@ -5946,7 +5950,7 @@ public function runAway(callHook:Boolean = true):void {
 			else outputText(monster.capitalA + monster.short + " manages to grab your [legs] and drag you back to the ground before you can fly away!");
 		}
 		//fail
-		else if(player.tailType == AppearanceDefs.TAIL_TYPE_RACCOON && player.earType == AppearanceDefs.EARS_RACCOON && player.findPerk(PerkLib.Runner) >= 0) outputText("Using your running skill, you build up a head of steam and jump, but before you can clear the ground more than a foot, your opponent latches onto you and drags you back down with a thud!");
+		else if(player.tailType == Tail.RACCOON && player.earType == Ears.RACCOON && player.findPerk(PerkLib.Runner) >= 0) outputText("Using your running skill, you build up a head of steam and jump, but before you can clear the ground more than a foot, your opponent latches onto you and drags you back down with a thud!");
 		//Nonflyer messages
 		else {
 			//Huge balls messages
@@ -6027,7 +6031,7 @@ public function greatDive():void {
 	if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
 	if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 	outputText("You focus on " + monster.capitalA + monster.short + " fold your wing and dive down using gravity to increase the impact");
-	if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HARPY) {
+	if (player.lowerBody == LowerBody.HARPY) {
 		outputText("making a bloody trail with your talons");
 		damage *= 1.5;
 	}

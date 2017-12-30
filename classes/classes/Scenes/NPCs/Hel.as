@@ -1,6 +1,9 @@
 package classes.Scenes.NPCs
 {
 import classes.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
@@ -177,15 +180,15 @@ public class Hel extends Monster
 			}
 			this.imageName = "hel";
 			this.long = "You are fighting a (literally) smoking hot salamander – a seven foot tall woman with crimson scales covering her legs, back, and forearms, with a tail swishing menacingly behind her, ablaze with a red-hot fire.  Her red hair whips wildly around her slender shoulders, occasionally flitting over her hefty E-cup breasts, only just concealed within a scale-covered bikini top.  Bright red eyes focus on you from an almost-human face as she circles you, ready to close in for the kill.  Her brutal, curved sword is raised to her side, feinting at you between genuine attacks.";
-			createVagina(true,AppearanceDefs.VAGINA_WETNESS_NORMAL,AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
+			createVagina(true,VaginaClass.WETNESS_NORMAL,VaginaClass.LOOSENESS_NORMAL);
 			createStatusEffect(StatusEffects.BonusVCapacity,85,0,0,0);
 			createBreastRow(Appearance.breastCupInverse("E+"));
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,85,0,0,0);
 			this.tallness = 90;
-			this.hipRating = AppearanceDefs.HIP_RATING_CURVY+2;
-			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE+1;
+			this.hipRating = Hips.RATING_CURVY+2;
+			this.buttRating = Butt.RATING_LARGE+1;
 			this.skinTone = "dusky";
 			this.hairColor = "red";
 			this.hairLength = 13;
@@ -209,7 +212,7 @@ public class Hel extends Monster
 					add(armors.CHBIKNI,1/20).
 					add(weapons.SCIMITR,1/20).
 					add(consumables.SALAMFW,0.7);
-			this.tailType = AppearanceDefs.TAIL_TYPE_SALAMANDER;
+			this.tailType = Tail.SALAMANDER;
 			this.tailRecharge = 0;
 			this.createStatusEffect(StatusEffects.Keen, 0, 0, 0, 0);
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);

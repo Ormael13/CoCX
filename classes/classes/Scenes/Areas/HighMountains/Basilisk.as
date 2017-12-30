@@ -1,7 +1,11 @@
 package classes.Scenes.Areas.HighMountains
 {
 import classes.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.*;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects.Combat.BasiliskSlowDebuff;
@@ -92,14 +96,14 @@ import classes.internals.ChainedDrop;
 			this.balls = 2;
 			this.ballSize = 2;
 			createBreastRow(0);
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = 6*12+2;
-			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER+1;
-			this.buttRating = AppearanceDefs.BUTT_RATING_AVERAGE;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_LIZARD;
-			this.skin.growCoat(AppearanceDefs.SKIN_COAT_SCALES,{color:"gray"},Skin.COVERAGE_COMPLETE);
+			this.hipRating = Hips.RATING_SLENDER+1;
+			this.buttRating = Butt.RATING_AVERAGE;
+			this.lowerBody = LowerBody.LIZARD;
+			this.skin.growCoat(Skin.SCALES,{color:"gray"},Skin.COVERAGE_COMPLETE);
 			this.hairColor = "none";
 			this.hairLength = 0;
 			initStrTouSpeInte(98, 107, 45, 80);
@@ -120,7 +124,7 @@ import classes.internals.ChainedDrop;
 			this.gems = rand(20) + 40;
 			this.drop = new ChainedDrop().add(useables.EBONBLO,1/20)
 					.elseDrop(consumables.REPTLUM);
-			this.tailType = AppearanceDefs.TAIL_TYPE_COW;
+			this.tailType = Tail.COW;
 			this.tailRecharge = 0;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			checkMonster();

@@ -1,7 +1,10 @@
 ﻿package classes
 {
+import classes.BodyParts.Antennae;
+import classes.BodyParts.Horns;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Items.ArmorLib;
 import classes.Items.ConsumableLib;
 import classes.Items.JewelryLib;
@@ -1607,13 +1610,13 @@ import flash.utils.getQualifiedClassName;
 					+(Appearance.DEFAULT_TONGUE_NAMES[tongueType]||("tongueType#"+tongueType))+" tongue and "
 					+(Appearance.DEFAULT_EYES_NAMES[eyeType]||("eyeType#"+eyeType))+" eyes.\n";
 			result += Hehas;
-			if (tailType == AppearanceDefs.TAIL_TYPE_NONE) result += "no tail, ";
+			if (tailType == Tail.NONE) result += "no tail, ";
 			else result+=(Appearance.DEFAULT_TAIL_NAMES[tailType]||("tailType#"+tailType))+" "+tailCount+" tails with venom="+tailVenom+" and recharge="+tailRecharge+", ";
-			if (hornType == AppearanceDefs.HORNS_NONE) result += "no horns, ";
+			if (hornType == Horns.NONE) result += "no horns, ";
 			else result += horns+" "+(Appearance.DEFAULT_HORNS_NAMES[hornType]||("hornType#"+hornType))+" horns, ";
-			if (wingType == AppearanceDefs.WING_TYPE_NONE) result += "no wings, ";
+			if (wingType == Wings.NONE) result += "no wings, ";
 			else result += wingDesc+" wings (type "+(Appearance.DEFAULT_WING_NAMES[wingType]||("wingType#"+wingType))+"), ";
-			if (antennae == AppearanceDefs.ANTENNAE_NONE) result += "no antennae.\n\n";
+			if (antennae == Antennae.NONE) result += "no antennae.\n\n";
 			else result += (Appearance.DEFAULT_ANTENNAE_NAMES[antennae]||("antennaeType#"+antennae))+" antennae.\n\n";
 
 			// GENITALS AND BREASTS
@@ -1837,7 +1840,7 @@ import flash.utils.getQualifiedClassName;
 				//Heal wounds
 				if(statusEffectv1(StatusEffects.GoreBleed) <= 0) {
 					outputText("The ");
-					if (player.hornType == AppearanceDefs.HORNS_COW_MINOTAUR) outputText("horns wounds");
+					if (player.hornType == Horns.COW_MINOTAUR) outputText("horns wounds");
 					else outputText("horn wound");
 					outputText(" you left on " + a + short + " stop bleeding so profusely.\n\n");
 					removeStatusEffect(StatusEffects.GoreBleed);
@@ -1848,13 +1851,13 @@ import flash.utils.getQualifiedClassName;
 					store5 = SceneLib.combat.doDamage(store5);
 					if (plural) {
 						outputText(capitalA + short + " bleed profusely from the jagged ");
-						if (player.hornType == AppearanceDefs.HORNS_COW_MINOTAUR) outputText("wounds your horns");
+						if (player.hornType == Horns.COW_MINOTAUR) outputText("wounds your horns");
 						else outputText("wound your horn");
 						outputText(" left behind. <b>(<font color=\"#800000\">" + store5 + "</font>)</b>\n\n");
 					}
 					else {
 						outputText(capitalA + short + " bleeds profusely from the jagged ");
-						if (player.hornType == AppearanceDefs.HORNS_COW_MINOTAUR) outputText("wounds your horns");
+						if (player.hornType == Horns.COW_MINOTAUR) outputText("wounds your horns");
 						else outputText("wound your horn");
 						outputText(" left behind. <b>(<font color=\"#800000\">" + store5 + "</font>)</b>\n\n");
 					}

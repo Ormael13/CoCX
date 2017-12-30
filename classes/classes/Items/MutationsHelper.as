@@ -1,6 +1,19 @@
 package classes.Items {
 import classes.*;
+import classes.BodyParts.Antennae;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Ears;
+import classes.BodyParts.Eyes;
+import classes.BodyParts.Face;
+import classes.BodyParts.Gills;
+import classes.BodyParts.Hair;
+import classes.BodyParts.Horns;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.RearBody;
 import classes.BodyParts.Skin;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Tongue;
+import classes.BodyParts.Wings;
 
 /**
 	 * Helper class to get rid of the copy&paste-mess in classes.Items.Mutations
@@ -25,26 +38,26 @@ import classes.BodyParts.Skin;
 				outputText("On the ground is all that is left of your flower, a single petal still intact that you proceed to put in your bag. Something tells you you will need it to become an alraune again.  <b>You have human legs again.</b>");
 			}
 			else /*if (player.isBiped()) */outputText("\n\nYou collapse as your legs shift and twist.  By the time the pain subsides, you notice that you have normal legs and normal feet.  <b>You now have normal feet!</b>");
-			player.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HUMAN;
+			player.lowerBody = LowerBody.HUMAN;
 			player.legCount  = 2;
 			changes++;
 		}
 
 		public function humanizeSkin(degargoylize:Boolean=false):void {
 			switch (player.coatType()) {
-				case AppearanceDefs.SKIN_COAT_FUR:
+				case Skin.FUR:
 					outputText("\n\nYour fur itches incessantly, so you start scratching it.  It starts coming off in big clumps before the whole mess begins sloughing off your body.  In seconds, your skin is nude.  <b>You've lost your fur!</b>");
 					break;
-				case AppearanceDefs.SKIN_COAT_SCALES:
+				case Skin.SCALES:
 					outputText("\n\nYour scales itch incessantly, so you scratch at them.  They start falling off wholesale, leaving you standing in a pile of scales after only a few moments.  <b>You've lost your scales!</b>");
 					break;
-				case AppearanceDefs.SKIN_COAT_DRAGON_SCALES:
+				case Skin.DRAGON_SCALES:
 					outputText("\n\nYour dragon scales itch incessantly, so you scratch at them.  They start falling off wholesale, leaving you standing in a pile of scales after only a few moments.  <b>You've lost your dragon scales!</b>");
 					break;
 				default:
 					outputText("\n\nYour [skin noadj] itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin.  <b>Your skin is once again normal!</b>");
 			}
-			player.skin.setBaseOnly({type: AppearanceDefs.SKIN_BASE_PLAIN});
+			player.skin.setBaseOnly({type: Skin.PLAIN});
 			changes++;
 		}
 
@@ -52,80 +65,80 @@ import classes.BodyParts.Skin;
 			if (player.hasScales()) outputText("\n\nYour [skin coat.color] scales begin to itch insufferably.  You reflexively scratch yourself, setting off an avalanche of discarded scales.  The itching intensifies as you madly scratch and tear at yourself, revealing a coat of [skin coat.type].  At last the itching stops as <b>you brush a few more loose scales from your new chitin exoskeleton.</b>");
 			else if (player.hasFur()) outputText("Your skin suddenly feels itchy as your [skin coat.type] begins falling out in clumps, <b>revealing smooth chitin</b> underneath.");
 			else outputText("\n\nAn itchy feeling springs up over every inch of your [skin.type].  As you scratch yourself madly, you feel your skin hardening until <b>you are wholy covered in chitin.</b>");
-			player.skin.growCoat(AppearanceDefs.SKIN_COAT_CHITIN,{color:color},coverage);
+			player.skin.growCoat(Skin.CHITIN,{color:color},coverage);
 			changes++;
 		}
 
 		public function humanizeEars():void {
 			outputText("\n\nOuch, your head aches! It feels like your ears are being yanked out of your head, and when you reach up to hold your aching noggin, you find they've vanished! Swooning and wobbling with little sense of balance, you nearly fall a half-dozen times before <b>a pair of normal, human ears sprout from the sides of your head.</b> You had almost forgotten what human ears felt like!");
-			player.earType = AppearanceDefs.EARS_HUMAN;
+			player.earType = Ears.HUMAN;
 			changes++;
 		}
 
 		public function humanizeFace():void {
 			outputText("\n\nSudden agony sweeps over your [face], your visage turning hideous as bones twist and your jawline shifts. The pain slowly vanishes, leaving you weeping into your fingers. When you pull your hands away you realize you've been left with a completely normal, <b>human face</b>.");
-			player.faceType = AppearanceDefs.FACE_HUMAN;
+			player.faceType = Face.HUMAN;
 			changes++;
 		}
 
 		public function humanizeEyes():void {
-			if (player.eyeType == AppearanceDefs.EYES_BLACK_EYES_SAND_TRAP) {
+			if (player.eyeType == Eyes.BLACK_EYES_SAND_TRAP) {
 				outputText("\n\nYou feel a twinge in your eyes and you blink.  It feels like black cataracts have just fallen away from you, and you know without needing to see your reflection that your eyes have gone back to looking human.");
 			}
 			else {
 				outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.");
-				if (player.eyeType == AppearanceDefs.EYES_FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>");
+				if (player.eyeType == Eyes.FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>");
 				outputText("  <b>You have normal, humanoid eyes again.</b>");
 			}
-			player.eyeType = AppearanceDefs.EYES_HUMAN;
+			player.eyeType = Eyes.HUMAN;
 			changes++;
 		}
 
 		public function humanizeArms(degargoylize:Boolean=false):void {
 			switch (player.armType) {
-				case AppearanceDefs.ARM_TYPE_HUMAN:
+				case Arms.HUMAN:
 					return;
-				case AppearanceDefs.ARM_TYPE_WOLF:
-				case AppearanceDefs.ARM_TYPE_FOX:
-				case AppearanceDefs.ARM_TYPE_LION:
-				case AppearanceDefs.ARM_TYPE_YETI:
-				case AppearanceDefs.ARM_TYPE_DEVIL:
-				case AppearanceDefs.ARM_TYPE_CAT:
+				case Arms.WOLF:
+				case Arms.FOX:
+				case Arms.LION:
+				case Arms.YETI:
+				case Arms.DEVIL:
+				case Arms.CAT:
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' [skin coat.color] fur is flaking away, leaving [skin base.type] behind.  Also the claws on your fingers reverts back into ordinary nails.");
 					break;
-				case AppearanceDefs.ARM_TYPE_ELF:
-				case AppearanceDefs.ARM_TYPE_KITSUNE:
-				case AppearanceDefs.ARM_TYPE_ONI:
-				case AppearanceDefs.ARM_TYPE_RAIJU:
+				case Arms.ELF:
+				case Arms.KITSUNE:
+				case Arms.ONI:
+				case Arms.RAIJU:
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' claws retracting back into ordinary nails. You hand looks human again.");
 					break;
-				case AppearanceDefs.ARM_TYPE_SHARK:
-				case AppearanceDefs.ARM_TYPE_ORCA:
+				case Arms.SHARK:
+				case Arms.ORCA:
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' fin suddenly fell down, leaving [skin base.type] behind.  Also webbing between your fingers slowly disappearing.");
 					break;
-				case AppearanceDefs.ARM_TYPE_PLANT:
-				case AppearanceDefs.ARM_TYPE_PLANT2:
+				case Arms.PLANT:
+				case Arms.PLANT2:
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' vines are withering.  Leaves also falling donw, leaving [skin base.type] behind.");
 					break;
-				case AppearanceDefs.ARM_TYPE_SALAMANDER:
-				case AppearanceDefs.ARM_TYPE_LIZARD:
-				case AppearanceDefs.ARM_TYPE_DRAGON:
+				case Arms.SALAMANDER:
+				case Arms.LIZARD:
+				case Arms.DRAGON:
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' scales are flaking away.  The leathery [skin coat.noadj] [skin coat.isare] soon gone, leaving [skin base.type] behind.");
 					break;
-				case AppearanceDefs.ARM_TYPE_BEE:
+				case Arms.BEE:
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering and fuzz is flaking away.  The glossy black and yellow coating is soon gone, leaving [skin base.type] behind.");
 					break;
-				case AppearanceDefs.ARM_TYPE_MANTIS:
+				case Arms.MANTIS:
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away and scythe shrinking until it vanish completly.  The glossy green coating is soon gone, leaving [skin base.type] behind.");
 					break;
-				case AppearanceDefs.ARM_TYPE_SPIDER:
+				case Arms.SPIDER:
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away.  The glossy black coating is soon gone, leaving [skin base.type] behind.");
 					break;
-				case AppearanceDefs.ARM_TYPE_HARPY:
-				case AppearanceDefs.ARM_TYPE_PHOENIX:
+				case Arms.HARPY:
+				case Arms.PHOENIX:
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your feathery arms are shedding their feathery coating.  The wing-like shape your arms once had is gone in a matter of moments, leaving [skin] behind.");
 					break;
-				case AppearanceDefs.ARM_TYPE_GARGOYLE:
+				case Arms.GARGOYLE:
 					if (!degargoylize) return;
 					outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. ");
 					break;
@@ -134,13 +147,13 @@ import classes.BodyParts.Skin;
 					break;
 			}
 			outputText("You now have <b>human arms</b>!");
-			setArmType(AppearanceDefs.ARM_TYPE_HUMAN);
+			setArmType(Arms.HUMAN);
 			changes++;
 		}
 
 		public function removeWings(degargoylize:Boolean=false):void {
-			if (player.wingType == AppearanceDefs.WING_TYPE_GARGOYLE_LIKE_LARGE && !degargoylize) return;
-			if (player.wingType == AppearanceDefs.WING_TYPE_NONE) return;
+			if (player.wingType == Wings.GARGOYLE_LIKE_LARGE && !degargoylize) return;
+			if (player.wingType == Wings.NONE) return;
 			switch(rand(2)) {
 				case 0:
 					outputText("\n\nSensation fades from your " + player.wingDesc + " wings slowly but surely, leaving them dried out husks that break off to fall on the ground. Your back closes up to conceal the loss, as smooth and unbroken as the day you entered the portal.");
@@ -149,12 +162,12 @@ import classes.BodyParts.Skin;
 					outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your shoulder-blades.  After a moment the pain passes, though your wings are gone!");
 					break;
 			}
-			player.wingType = AppearanceDefs.WING_TYPE_NONE;
+			player.wingType = Wings.NONE;
 			player.wingDesc = "non-existant";
 			changes++;
 		}
 
-		public function updateGills(newGillType:int = AppearanceDefs.GILLS_NONE):int
+		public function updateGills(newGillType:int = Gills.NONE):int
 		{
 			trace("Called updateGills(" + newGillType + ")");
 			var oldgillType:int = player.gillType;
@@ -165,8 +178,8 @@ import classes.BodyParts.Skin;
 
 			// for now, we only have anemone gills on the chest
 			switch (newGillType) {
-				case AppearanceDefs.GILLS_NONE:
-					if (oldgillType == AppearanceDefs.GILLS_ANEMONE) {
+				case Gills.NONE:
+					if (oldgillType == Gills.ANEMONE) {
 						outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your"
 						           +" skin.");
 					} else { // losing fish gills
@@ -177,8 +190,8 @@ import classes.BodyParts.Skin;
 					outputText("  <b>You no longer have gills!</b>");
 					return -1; // Gills lost
 
-				case AppearanceDefs.GILLS_ANEMONE:
-					if (oldgillType == AppearanceDefs.GILLS_FISH) {
+				case Gills.ANEMONE:
+					if (oldgillType == Gills.FISH) {
 						outputText("\n\nYou feel your gills tighten, the slits seeming to close all at once. As you let out a choked gasp your"
 						           +" gills shrink into nothingness, leaving only smooth skin behind. When you think it's over you feel something"
 						           +" emerge from under your neck, flowing down over your chest and brushing your nipples. You look in surprise as"
@@ -193,8 +206,8 @@ import classes.BodyParts.Skin;
 					outputText("\n\n<b>You now have feathery gills!</b>");
 					return 1; // Gained gills or gillType changed
 
-				case AppearanceDefs.GILLS_FISH:
-					if (oldgillType == AppearanceDefs.GILLS_ANEMONE) {
+				case Gills.FISH:
+					if (oldgillType == Gills.ANEMONE) {
 						outputText("\n\nYou feel your gills tingle, a vague numbness registering across thier feathery exterior. You watch in awe as"
 						           +" your gill's feathery folds dry out and fall off like crisp autumn leaves. The slits of your gills then"
 						           +" rearrange themselves, becoming thinner and shorter, as they shift to the sides of your neck. They now close in"
@@ -271,74 +284,74 @@ import classes.BodyParts.Skin;
 		return setBodyPartType("antennae", METAMORPH_ANTENNAE, antennae);
 	}
 	private const METAMORPH_ANTENNAE:Object = createMapFromPairs([
-		[AppearanceDefs.ANTENNAE_BEE, StatusEffects.UnlockedBeeAntennae],
-		[AppearanceDefs.ANTENNAE_COCKATRICE, null],
-		[AppearanceDefs.ANTENNAE_MANTIS, StatusEffects.UnlockedMantisAntennae],
+		[Antennae.BEE, StatusEffects.UnlockedBeeAntennae],
+		[Antennae.COCKATRICE, null],
+		[Antennae.MANTIS, StatusEffects.UnlockedMantisAntennae],
 	]);
 	public function setArmType(armType:int):Boolean {
 		return setBodyPartType("armType", METAMORPH_ARMS, armType);
 	}
 	private const METAMORPH_ARMS:Object = createMapFromPairs([
-		[AppearanceDefs.ARM_TYPE_BEE, StatusEffects.UnlockedBeeArms],
-		[AppearanceDefs.ARM_TYPE_CAT, null],
-		[AppearanceDefs.ARM_TYPE_DRAGON, StatusEffects.UnlockedDraconicArms],
-		[AppearanceDefs.ARM_TYPE_DEVIL, StatusEffects.UnlockedDevilArms],
-		[AppearanceDefs.ARM_TYPE_ELF, StatusEffects.UnlockedElfArms],
-		[AppearanceDefs.ARM_TYPE_FOX, StatusEffects.UnlockedFoxArms],
-		[AppearanceDefs.ARM_TYPE_GARGOYLE, null],
-		[AppearanceDefs.ARM_TYPE_GARGOYLE_2, null],
-		[AppearanceDefs.ARM_TYPE_HARPY, StatusEffects.UnlockedHarpyArms],
-		[AppearanceDefs.ARM_TYPE_HUMAN, null],
-		[AppearanceDefs.ARM_TYPE_KITSUNE, StatusEffects.UnlockedKitsuneArms],
-		[AppearanceDefs.ARM_TYPE_LION, null],
-		[AppearanceDefs.ARM_TYPE_LIZARD, StatusEffects.UnlockedLizardArms],
-		[AppearanceDefs.ARM_TYPE_MANTIS, StatusEffects.UnlockedMantisArms],
-		[AppearanceDefs.ARM_TYPE_ONI, StatusEffects.UnlockedOniArms],
-		[AppearanceDefs.ARM_TYPE_ORCA, StatusEffects.UnlockedOrcaArms],
-		[AppearanceDefs.ARM_TYPE_PHOENIX, StatusEffects.UnlockedPhoenixArms],
-		[AppearanceDefs.ARM_TYPE_PLANT, null],
-		[AppearanceDefs.ARM_TYPE_PLANT2, null],
-		[AppearanceDefs.ARM_TYPE_RAIJU, StatusEffects.UnlockedRaijuArms],
-		[AppearanceDefs.ARM_TYPE_RED_PANDA, null],
-		[AppearanceDefs.ARM_TYPE_SALAMANDER, StatusEffects.UnlockedSalamanderArms],
-		[AppearanceDefs.ARM_TYPE_SHARK, StatusEffects.UnlockedSharkArms],
-		[AppearanceDefs.ARM_TYPE_SPIDER, StatusEffects.UnlockedSpiderArms],
-		[AppearanceDefs.ARM_TYPE_WOLF, null],
-		[AppearanceDefs.ARM_TYPE_YETI, null],
+		[Arms.BEE, StatusEffects.UnlockedBeeArms],
+		[Arms.CAT, null],
+		[Arms.DRAGON, StatusEffects.UnlockedDraconicArms],
+		[Arms.DEVIL, StatusEffects.UnlockedDevilArms],
+		[Arms.ELF, StatusEffects.UnlockedElfArms],
+		[Arms.FOX, StatusEffects.UnlockedFoxArms],
+		[Arms.GARGOYLE, null],
+		[Arms.GARGOYLE_2, null],
+		[Arms.HARPY, StatusEffects.UnlockedHarpyArms],
+		[Arms.HUMAN, null],
+		[Arms.KITSUNE, StatusEffects.UnlockedKitsuneArms],
+		[Arms.LION, null],
+		[Arms.LIZARD, StatusEffects.UnlockedLizardArms],
+		[Arms.MANTIS, StatusEffects.UnlockedMantisArms],
+		[Arms.ONI, StatusEffects.UnlockedOniArms],
+		[Arms.ORCA, StatusEffects.UnlockedOrcaArms],
+		[Arms.PHOENIX, StatusEffects.UnlockedPhoenixArms],
+		[Arms.PLANT, null],
+		[Arms.PLANT2, null],
+		[Arms.RAIJU, StatusEffects.UnlockedRaijuArms],
+		[Arms.RED_PANDA, null],
+		[Arms.SALAMANDER, StatusEffects.UnlockedSalamanderArms],
+		[Arms.SHARK, StatusEffects.UnlockedSharkArms],
+		[Arms.SPIDER, StatusEffects.UnlockedSpiderArms],
+		[Arms.WOLF, null],
+		[Arms.YETI, null],
 	]);
 
 	public function setEarType(earType:int):Boolean {
 		return setBodyPartType("earType", METAMORPH_EARS, earType);
 	}
 	private const METAMORPH_EARS:Object = createMapFromPairs([
-		[AppearanceDefs.EARS_BUNNY, null],
-		[AppearanceDefs.EARS_CAT, null],
-		[AppearanceDefs.EARS_COW, StatusEffects.UnlockedCowEars],
-		[AppearanceDefs.EARS_DEER, null],
-		[AppearanceDefs.EARS_DOG, null],
-		[AppearanceDefs.EARS_DRAGON, StatusEffects.UnlockedDraconicEars],
-		[AppearanceDefs.EARS_ECHIDNA, null],
-		[AppearanceDefs.EARS_ELFIN, StatusEffects.UnlockedElfinEars],
-		[AppearanceDefs.EARS_ELVEN, StatusEffects.UnlockedElfEars],
-		[AppearanceDefs.EARS_FERRET, null],
-		[AppearanceDefs.EARS_FOX, StatusEffects.UnlockedFoxEars],
-		[AppearanceDefs.EARS_GOAT, StatusEffects.UnlockedGoatEars],
-		[AppearanceDefs.EARS_HORSE, null],
-		[AppearanceDefs.EARS_HUMAN, null],
-		[AppearanceDefs.EARS_KANGAROO, null],
-		[AppearanceDefs.EARS_LION, null],
-		[AppearanceDefs.EARS_LIZARD, StatusEffects.UnlockedLizardEars],
-		[AppearanceDefs.EARS_MOUSE, null],
-		[AppearanceDefs.EARS_ONI, StatusEffects.UnlockedOniEars],
-		[AppearanceDefs.EARS_ORCA, StatusEffects.UnlockedOrcaEars],
-		[AppearanceDefs.EARS_PIG, null],
-		[AppearanceDefs.EARS_RACCOON, null],
-		[AppearanceDefs.EARS_RED_PANDA, null],
-		[AppearanceDefs.EARS_RHINO, null],
-		[AppearanceDefs.EARS_SNAKE, StatusEffects.UnlockedSnakeEars],
-		[AppearanceDefs.EARS_WEASEL, StatusEffects.UnlockedRaijuEars],
-		[AppearanceDefs.EARS_WOLF, null],
-		[AppearanceDefs.EARS_YETI, null],
+		[Ears.BUNNY, null],
+		[Ears.CAT, null],
+		[Ears.COW, StatusEffects.UnlockedCowEars],
+		[Ears.DEER, null],
+		[Ears.DOG, null],
+		[Ears.DRAGON, StatusEffects.UnlockedDraconicEars],
+		[Ears.ECHIDNA, null],
+		[Ears.ELFIN, StatusEffects.UnlockedElfinEars],
+		[Ears.ELVEN, StatusEffects.UnlockedElfEars],
+		[Ears.FERRET, null],
+		[Ears.FOX, StatusEffects.UnlockedFoxEars],
+		[Ears.GOAT, StatusEffects.UnlockedGoatEars],
+		[Ears.HORSE, null],
+		[Ears.HUMAN, null],
+		[Ears.KANGAROO, null],
+		[Ears.LION, null],
+		[Ears.LIZARD, StatusEffects.UnlockedLizardEars],
+		[Ears.MOUSE, null],
+		[Ears.ONI, StatusEffects.UnlockedOniEars],
+		[Ears.ORCA, StatusEffects.UnlockedOrcaEars],
+		[Ears.PIG, null],
+		[Ears.RACCOON, null],
+		[Ears.RED_PANDA, null],
+		[Ears.RHINO, null],
+		[Ears.SNAKE, StatusEffects.UnlockedSnakeEars],
+		[Ears.WEASEL, StatusEffects.UnlockedRaijuEars],
+		[Ears.WOLF, null],
+		[Ears.YETI, null],
 	]);
 
 	public function setEyeType(eyeType:int):Boolean {
@@ -349,96 +362,96 @@ import classes.BodyParts.Skin;
 		return setBodyPartType("eyeType", METAMORPH_EYES, eyeType);
 	}
 	private const METAMORPH_EYES:Object = createMapFromPairs([
-		[AppearanceDefs.EYES_BLACK_EYES_SAND_TRAP, null],
-		[AppearanceDefs.EYES_CAT_SLITS, null],
-		[AppearanceDefs.EYES_DRAGON, StatusEffects.UnlockedDraconicEyes],
-		[AppearanceDefs.EYES_DEVIL, StatusEffects.UnlockedDevilEyes],
-		[AppearanceDefs.EYES_ELF, StatusEffects.UnlockedElfEyes],
-		[AppearanceDefs.EYES_FENRIR, null],
-		[AppearanceDefs.EYES_FOUR_SPIDER_EYES, StatusEffects.UnlockedSpiderFourEyes],
-		[AppearanceDefs.EYES_FOX, StatusEffects.UnlockedFoxEyes],
-		[AppearanceDefs.EYES_GEMSTONES, null],
-		[AppearanceDefs.EYES_GORGON, StatusEffects.UnlockedGorgonEyes],
-		[AppearanceDefs.EYES_HUMAN, null],
-		[AppearanceDefs.EYES_MANTICORE, null],
-		[AppearanceDefs.EYES_ONI, StatusEffects.UnlockedOniEyes],
-		[AppearanceDefs.EYES_RAIJU, StatusEffects.UnlockedRaijuEyes],
-		[AppearanceDefs.EYES_REPTILIAN, StatusEffects.UnlockedLizardEyes],
-		[AppearanceDefs.EYES_SNAKE, StatusEffects.UnlockedSnakeEyes],
+		[Eyes.BLACK_EYES_SAND_TRAP, null],
+		[Eyes.CAT_SLITS, null],
+		[Eyes.DRAGON, StatusEffects.UnlockedDraconicEyes],
+		[Eyes.DEVIL, StatusEffects.UnlockedDevilEyes],
+		[Eyes.ELF, StatusEffects.UnlockedElfEyes],
+		[Eyes.FENRIR, null],
+		[Eyes.FOUR_SPIDER_EYES, StatusEffects.UnlockedSpiderFourEyes],
+		[Eyes.FOX, StatusEffects.UnlockedFoxEyes],
+		[Eyes.GEMSTONES, null],
+		[Eyes.GORGON, StatusEffects.UnlockedGorgonEyes],
+		[Eyes.HUMAN, null],
+		[Eyes.MANTICORE, null],
+		[Eyes.ONI, StatusEffects.UnlockedOniEyes],
+		[Eyes.RAIJU, StatusEffects.UnlockedRaijuEyes],
+		[Eyes.REPTILIAN, StatusEffects.UnlockedLizardEyes],
+		[Eyes.SNAKE, StatusEffects.UnlockedSnakeEyes],
 	]);
 
 	public function setFaceType(faceType:int):Boolean {
 		return setBodyPartType("faceType", METAMORPH_FACES, faceType);
 	}
 	private const METAMORPH_FACES:Object = createMapFromPairs([
-		[AppearanceDefs.FACE_BOAR, null],
-		[AppearanceDefs.FACE_BUCKTEETH, null],
-		[AppearanceDefs.FACE_BUCKTOOTH, null],
-		[AppearanceDefs.FACE_BUNNY, null],
-		[AppearanceDefs.FACE_CAT, null],
-		[AppearanceDefs.FACE_CAT_CANINES, null],
-		[AppearanceDefs.FACE_CHESHIRE, null],
-		[AppearanceDefs.FACE_CHESHIRE_SMILE, null],
-		[AppearanceDefs.FACE_COW_MINOTAUR, StatusEffects.UnlockedCowMinotaurFace],
-		[AppearanceDefs.FACE_DEER, null],
-		[AppearanceDefs.FACE_DOG, null],
-		[AppearanceDefs.FACE_DRAGON, StatusEffects.UnlockedDraconicFace],
-		[AppearanceDefs.FACE_DRAGON_FANGS, StatusEffects.UnlockedDraconicFangs],
-		[AppearanceDefs.FACE_DEVIL_FANGS, StatusEffects.UnlockedDevilFangs],
-		[AppearanceDefs.FACE_ECHIDNA, null],
-		[AppearanceDefs.FACE_FERRET, null],
-		[AppearanceDefs.FACE_FERRET_MASK, null],
-		[AppearanceDefs.FACE_FOX, null],
-		[AppearanceDefs.FACE_HORSE, null],
-		[AppearanceDefs.FACE_HUMAN, null],
-		[AppearanceDefs.FACE_JABBERWOCKY, null],
-		[AppearanceDefs.FACE_KANGAROO, null],
-		[AppearanceDefs.FACE_LIZARD, StatusEffects.UnlockedLizardFace],
-		[AppearanceDefs.FACE_MANTICORE, null],
-		[AppearanceDefs.FACE_MOUSE, null],
-		[AppearanceDefs.FACE_ONI_TEETH, StatusEffects.UnlockedOniFace],
-		[AppearanceDefs.FACE_ORCA, StatusEffects.UnlockedOrcaFace],
-		[AppearanceDefs.FACE_PIG, null],
-		[AppearanceDefs.FACE_PLANT_DRAGON, null],
-		[AppearanceDefs.FACE_RACCOON, null],
-		[AppearanceDefs.FACE_RACCOON_MASK, null],
-		[AppearanceDefs.FACE_RAIJU_FANGS, StatusEffects.UnlockedRaijuFace],
-		[AppearanceDefs.FACE_RED_PANDA, null],
-		[AppearanceDefs.FACE_RHINO, null],
-		[AppearanceDefs.FACE_SALAMANDER_FANGS, StatusEffects.UnlockedSalamanderFace],
-		[AppearanceDefs.FACE_SHARK_TEETH, StatusEffects.UnlockedSharkTeeth],
-		[AppearanceDefs.FACE_SNAKE_FANGS, StatusEffects.UnlockedSnakeFangs],
-		[AppearanceDefs.FACE_SPIDER_FANGS, StatusEffects.UnlockedSpiderFangs],
-		[AppearanceDefs.FACE_WOLF, null],
-		[AppearanceDefs.FACE_YETI_FANGS, null],
+		[Face.BOAR, null],
+		[Face.BUCKTEETH, null],
+		[Face.BUCKTOOTH, null],
+		[Face.BUNNY, null],
+		[Face.CAT, null],
+		[Face.CAT_CANINES, null],
+		[Face.CHESHIRE, null],
+		[Face.CHESHIRE_SMILE,null],
+		[Face.COW_MINOTAUR, StatusEffects.UnlockedCowMinotaurFace],
+		[Face.DEER, null],
+		[Face.DOG, null],
+		[Face.DRAGON, StatusEffects.UnlockedDraconicFace],
+		[Face.DRAGON_FANGS, StatusEffects.UnlockedDraconicFangs],
+		[Face.DEVIL_FANGS, StatusEffects.UnlockedDevilFangs],
+		[Face.ECHIDNA, null],
+		[Face.FERRET, null],
+		[Face.FERRET_MASK, null],
+		[Face.FOX, null],
+		[Face.HORSE, null],
+		[Face.HUMAN, null],
+		[Face.JABBERWOCKY, null],
+		[Face.KANGAROO, null],
+		[Face.LIZARD, StatusEffects.UnlockedLizardFace],
+		[Face.MANTICORE, null],
+		[Face.MOUSE, null],
+		[Face.ONI_TEETH, StatusEffects.UnlockedOniFace],
+		[Face.ORCA, StatusEffects.UnlockedOrcaFace],
+		[Face.PIG, null],
+		[Face.PLANT_DRAGON, null],
+		[Face.RACCOON, null],
+		[Face.RACCOON_MASK, null],
+		[Face.RAIJU_FANGS, StatusEffects.UnlockedRaijuFace],
+		[Face.RED_PANDA, null],
+		[Face.RHINO, null],
+		[Face.SALAMANDER_FANGS, StatusEffects.UnlockedSalamanderFace],
+		[Face.SHARK_TEETH, StatusEffects.UnlockedSharkTeeth],
+		[Face.SNAKE_FANGS, StatusEffects.UnlockedSnakeFangs],
+		[Face.SPIDER_FANGS, StatusEffects.UnlockedSpiderFangs],
+		[Face.WOLF, null],
+		[Face.YETI_FANGS, null],
 	]);
 
 	public function setGillType(gillType:int):Boolean {
 		return setBodyPartType("gillType", METAMORPH_GILLS, gillType);
 	}
 	private const METAMORPH_GILLS:Object = createMapFromPairs([
-		[AppearanceDefs.GILLS_ANEMONE, null],
-		[AppearanceDefs.GILLS_FISH, StatusEffects.UnlockedFishGills],
-		[AppearanceDefs.GILLS_IN_TENTACLE_LEGS, null],
-		[AppearanceDefs.GILLS_NONE, null],
+		[Gills.ANEMONE, null],
+		[Gills.FISH, StatusEffects.UnlockedFishGills],
+		[Gills.GILLS_IN_TENTACLE_LEGS, null],
+		[Gills.NONE, null],
 	]);
 
 	public function setHairType(hairType:int):Boolean {
 		return setBodyPartType("hairType", METAMORPH_HAIR_TYPES, hairType);
 	}
 	private const METAMORPH_HAIR_TYPES:Object = createMapFromPairs([
-		[AppearanceDefs.HAIR_ANEMONE, null],
-		[AppearanceDefs.HAIR_FEATHER, StatusEffects.UnlockedHarpyHair],
-		[AppearanceDefs.HAIR_FLUFFY, null],
-		[AppearanceDefs.HAIR_GHOST, null],
-		[AppearanceDefs.HAIR_GOO, null],
-		[AppearanceDefs.HAIR_GORGON, StatusEffects.UnlockedGorgonHair],
-		[AppearanceDefs.HAIR_GRASS, null],
-		[AppearanceDefs.HAIR_LEAF, null],
-		[AppearanceDefs.HAIR_NORMAL, null],
-		[AppearanceDefs.HAIR_QUILL, null],
-		[AppearanceDefs.HAIR_SILKEN, StatusEffects.UnlockedElfHair],
-		[AppearanceDefs.HAIR_STORM, StatusEffects.UnlockedRaijuHair],
+		[Hair.ANEMONE, null],
+		[Hair.FEATHER, StatusEffects.UnlockedHarpyHair],
+		[Hair.FLUFFY, null],
+		[Hair.GHOST, null],
+		[Hair.GOO, null],
+		[Hair.GORGON, StatusEffects.UnlockedGorgonHair],
+		[Hair.GRASS, null],
+		[Hair.LEAF, null],
+		[Hair.NORMAL, null],
+		[Hair.QUILL, null],
+		[Hair.SILKEN, StatusEffects.UnlockedElfHair],
+		[Hair.STORM, StatusEffects.UnlockedRaijuHair],
 	]);
 
 	/**
@@ -451,83 +464,83 @@ import classes.BodyParts.Skin;
 		return a;
 	}
 	private const METAMORPH_HORNS:Object = createMapFromPairs([
-		[AppearanceDefs.HORNS_ANTLERS, null],
-		[AppearanceDefs.HORNS_COW_MINOTAUR, StatusEffects.UnlockedCowMinotaurHorns],
-		[AppearanceDefs.HORNS_DEMON, StatusEffects.UnlockedDemonHorns],
-		[AppearanceDefs.HORNS_DRACONIC_X2, StatusEffects.UnlockedDraconicX2],
-		[AppearanceDefs.HORNS_DRACONIC_X4_12_INCH_LONG, StatusEffects.UnlockedDraconicX4],
-		[AppearanceDefs.HORNS_GARGOYLE, null],
-		[AppearanceDefs.HORNS_GOAT, StatusEffects.UnlockedGoatHorns],
-		[AppearanceDefs.HORNS_NONE, null],
-		[AppearanceDefs.HORNS_OAK, null],
-		[AppearanceDefs.HORNS_ONI, StatusEffects.UnlockedOniSingleHorn],
-		[AppearanceDefs.HORNS_ONI_X2, StatusEffects.UnlockedOniTwinHorns],
-		[AppearanceDefs.HORNS_ORCHID, null],
-		[AppearanceDefs.HORNS_RHINO, null],
-		[AppearanceDefs.HORNS_UNICORN, null],
+		[Horns.ANTLERS, null],
+		[Horns.COW_MINOTAUR, StatusEffects.UnlockedCowMinotaurHorns],
+		[Horns.DEMON, StatusEffects.UnlockedDemonHorns],
+		[Horns.DRACONIC_X2, StatusEffects.UnlockedDraconicX2],
+		[Horns.DRACONIC_X4_12_INCH_LONG, StatusEffects.UnlockedDraconicX4],
+		[Horns.GARGOYLE, null],
+		[Horns.GOAT, StatusEffects.UnlockedGoatHorns],
+		[Horns.NONE, null],
+		[Horns.OAK, null],
+		[Horns.ONI, StatusEffects.UnlockedOniSingleHorn],
+		[Horns.ONI_X2, StatusEffects.UnlockedOniTwinHorns],
+		[Horns.ORCHID, null],
+		[Horns.RHINO, null],
+		[Horns.UNICORN, null],
 	]);
 
 	public function setLowerBody(lowerBody:int):Boolean {
 		return setBodyPartType("lowerBody", METAMORPH_LOWER_BODIES, lowerBody);
 	}
 	private const METAMORPH_LOWER_BODIES:Object = createMapFromPairs([
-		[AppearanceDefs.LOWER_BODY_TYPE_BEE, StatusEffects.UnlockedBeeLegs],
-		[AppearanceDefs.LOWER_BODY_TYPE_BUNNY, null],
-		[AppearanceDefs.LOWER_BODY_TYPE_CAT, null],
-		[AppearanceDefs.LOWER_BODY_TYPE_CENTAUR, null],
-		[AppearanceDefs.LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS, StatusEffects.UnlockedSpiderLegs],
-		[AppearanceDefs.LOWER_BODY_TYPE_CLOVEN_HOOFED, StatusEffects.UnlockedClovenHoofedLegs],
-		[AppearanceDefs.LOWER_BODY_TYPE_DEERTAUR, null],
-		[AppearanceDefs.LOWER_BODY_TYPE_DEMONIC_CLAWS, StatusEffects.UnlockedDemonClawedLegs],
-		[AppearanceDefs.LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS, StatusEffects.UnlockedDemonHighHeels],
-		[AppearanceDefs.LOWER_BODY_TYPE_DOG, null],
-		[AppearanceDefs.LOWER_BODY_TYPE_DRAGON, StatusEffects.UnlockedDraconicLegs],
-		[AppearanceDefs.LOWER_BODY_TYPE_DRIDER_LOWER_BODY, StatusEffects.UnlockedDriderLegs],
-		[AppearanceDefs.LOWER_BODY_TYPE_ECHIDNA, null],
-		[AppearanceDefs.LOWER_BODY_TYPE_ELF, StatusEffects.UnlockedElfLegs],
-		[AppearanceDefs.LOWER_BODY_TYPE_FERRET, null],
-		[AppearanceDefs.LOWER_BODY_TYPE_FOX, StatusEffects.UnlockedFoxLowerBody],
-		[AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE, null],
-		[AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE_2, null],
-		[AppearanceDefs.LOWER_BODY_TYPE_GOO, null],
-		[AppearanceDefs.LOWER_BODY_TYPE_HARPY, StatusEffects.UnlockedHarpyLegs],
-		[AppearanceDefs.LOWER_BODY_TYPE_HOOFED, StatusEffects.UnlockedHoofedLegs],
-		[AppearanceDefs.LOWER_BODY_TYPE_HUMAN, null],
-		[AppearanceDefs.LOWER_BODY_TYPE_KANGAROO, null],
-		[AppearanceDefs.LOWER_BODY_TYPE_LION, null],
-		[AppearanceDefs.LOWER_BODY_TYPE_LIZARD, StatusEffects.UnlockedLizardLegs],
-		[AppearanceDefs.LOWER_BODY_TYPE_MANTIS, StatusEffects.UnlockedMantisLegs],
-		[AppearanceDefs.LOWER_BODY_TYPE_NAGA, StatusEffects.UnlockedSnakeLowerBody],
-		[AppearanceDefs.LOWER_BODY_TYPE_ONI, StatusEffects.UnlockedOniLegs],
-		[AppearanceDefs.LOWER_BODY_TYPE_ORCA, StatusEffects.UnlockedOrcaLegs],
-		[AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER, null],
-		[AppearanceDefs.LOWER_BODY_TYPE_PLANT_HIGH_HEELS, null],
-		[AppearanceDefs.LOWER_BODY_TYPE_PLANT_ROOT_CLAWS, null],
-		[AppearanceDefs.LOWER_BODY_TYPE_PONY, null],
-		[AppearanceDefs.LOWER_BODY_TYPE_RACCOON, null],
-		[AppearanceDefs.LOWER_BODY_TYPE_RAIJU, StatusEffects.UnlockedRaijuLegs],
-		[AppearanceDefs.LOWER_BODY_TYPE_RED_PANDA, null],
-		[AppearanceDefs.LOWER_BODY_TYPE_SALAMANDER, StatusEffects.UnlockedSalamanderLegs],
-		[AppearanceDefs.LOWER_BODY_TYPE_SCYLLA, null],
-		[AppearanceDefs.LOWER_BODY_TYPE_SHARK, StatusEffects.UnlockedSharkLegs],
-		[AppearanceDefs.LOWER_BODY_TYPE_WOLF, null],
-		[AppearanceDefs.LOWER_BODY_TYPE_YETI, null],
-		[AppearanceDefs.LOWER_BODY_TYPE_YGG_ROOT_CLAWS, null],
+		[LowerBody.BEE, StatusEffects.UnlockedBeeLegs],
+		[LowerBody.BUNNY, null],
+		[LowerBody.CAT, null],
+		[LowerBody.CENTAUR, null],
+		[LowerBody.CHITINOUS_SPIDER_LEGS, StatusEffects.UnlockedSpiderLegs],
+		[LowerBody.CLOVEN_HOOFED, StatusEffects.UnlockedClovenHoofedLegs],
+		[LowerBody.DEERTAUR, null],
+		[LowerBody.DEMONIC_CLAWS, StatusEffects.UnlockedDemonClawedLegs],
+		[LowerBody.DEMONIC_HIGH_HEELS, StatusEffects.UnlockedDemonHighHeels],
+		[LowerBody.DOG, null],
+		[LowerBody.DRAGON, StatusEffects.UnlockedDraconicLegs],
+		[LowerBody.DRIDER, StatusEffects.UnlockedDriderLegs],
+		[LowerBody.ECHIDNA, null],
+		[LowerBody.ELF, StatusEffects.UnlockedElfLegs],
+		[LowerBody.FERRET, null],
+		[LowerBody.FOX, StatusEffects.UnlockedFoxLowerBody],
+		[LowerBody.GARGOYLE, null],
+		[LowerBody.GARGOYLE_2, null],
+		[LowerBody.GOO, null],
+		[LowerBody.HARPY, StatusEffects.UnlockedHarpyLegs],
+		[LowerBody.HOOFED, StatusEffects.UnlockedHoofedLegs],
+		[LowerBody.HUMAN, null],
+		[LowerBody.KANGAROO, null],
+		[LowerBody.LION, null],
+		[LowerBody.LIZARD, StatusEffects.UnlockedLizardLegs],
+		[LowerBody.MANTIS, StatusEffects.UnlockedMantisLegs],
+		[LowerBody.NAGA, StatusEffects.UnlockedSnakeLowerBody],
+		[LowerBody.ONI, StatusEffects.UnlockedOniLegs],
+		[LowerBody.ORCA, StatusEffects.UnlockedOrcaLegs],
+		[LowerBody.PLANT_FLOWER, null],
+		[LowerBody.PLANT_HIGH_HEELS, null],
+		[LowerBody.PLANT_ROOT_CLAWS, null],
+		[LowerBody.PONY, null],
+		[LowerBody.RACCOON, null],
+		[LowerBody.RAIJU, StatusEffects.UnlockedRaijuLegs],
+		[LowerBody.RED_PANDA, null],
+		[LowerBody.SALAMANDER, StatusEffects.UnlockedSalamanderLegs],
+		[LowerBody.SCYLLA, null],
+		[LowerBody.SHARK, StatusEffects.UnlockedSharkLegs],
+		[LowerBody.WOLF, null],
+		[LowerBody.YETI, null],
+		[LowerBody.YGG_ROOT_CLAWS, null],
 	]);
 
 	public function setRearBody(rearBody:int):Boolean {
 		return setBodyPartType("rearBody", METAMORPH_REAR_BODIES, rearBody);
 	}
 	private const METAMORPH_REAR_BODIES:Object = createMapFromPairs([
-		[AppearanceDefs.REAR_BODY_BEHEMOTH, null],
-		[AppearanceDefs.REAR_BODY_DRACONIC_MANE, null],
-		[AppearanceDefs.REAR_BODY_DRACONIC_SPIKES, null],
-		[AppearanceDefs.REAR_BODY_FENRIR_ICE_SPIKES, null],
-		[AppearanceDefs.REAR_BODY_LION_MANE, null],
-		[AppearanceDefs.REAR_BODY_NONE, null],
-		[AppearanceDefs.REAR_BODY_ORCA_BLOWHOLE, StatusEffects.UnlockedOrcaBlowhole],
-		[AppearanceDefs.REAR_BODY_RAIJU_MANE, StatusEffects.UnlockedRaijuMane],
-		[AppearanceDefs.REAR_BODY_SHARK_FIN, StatusEffects.UnlockedSharkFin],
+		[RearBody.BEHEMOTH, null],
+		[RearBody.DRACONIC_MANE, null],
+		[RearBody.DRACONIC_SPIKES, null],
+		[RearBody.FENRIR_ICE_SPIKES, null],
+		[RearBody.LION_MANE, null],
+		[RearBody.NONE, null],
+		[RearBody.ORCA_BLOWHOLE, StatusEffects.UnlockedOrcaBlowhole],
+		[RearBody.RAIJU_MANE, StatusEffects.UnlockedRaijuMane],
+		[RearBody.SHARK_FIN, StatusEffects.UnlockedSharkFin],
 	]);
 
 	public function setTongueType(tongueType:int):Boolean {
@@ -536,13 +549,13 @@ import classes.BodyParts.Skin;
 	// Here we override flavour text because it is 'tonuge' in StatusEffect id
 	// but changing that would break the saves
 	private const METAMORPH_TONGUES:Object = createMapFromPairs([
-		[AppearanceDefs.TONGUE_CAT, [null, "Cat Tongue"]],
-		[AppearanceDefs.TONGUE_DEMONIC, [StatusEffects.UnlockedDemonTonuge, "Demonic Tongue"]],
-		[AppearanceDefs.TONGUE_DRACONIC, [StatusEffects.UnlockedDraconicTongue, "Draconic Tongue"]],
-		[AppearanceDefs.TONGUE_ECHIDNA, [null, "Echidna Tongue"]],
-		[AppearanceDefs.TONGUE_HUMAN, [null, "Human Tongue"]],
-		[AppearanceDefs.TONGUE_ELF, [StatusEffects.UnlockedElfTongue, "Elf Tongue"]],
-		[AppearanceDefs.TONGUE_SNAKE, [StatusEffects.UnlockedSnakeTongue, "Snake Tongue"]],
+		[Tongue.CAT, [null, "Cat Tongue"]],
+		[Tongue.DEMONIC, [StatusEffects.UnlockedDemonTonuge, "Demonic Tongue"]],
+		[Tongue.DRACONIC, [StatusEffects.UnlockedDraconicTongue, "Draconic Tongue"]],
+		[Tongue.ECHIDNA, [null, "Echidna Tongue"]],
+		[Tongue.HUMAN, [null, "Human Tongue"]],
+		[Tongue.ELF, [StatusEffects.UnlockedElfTongue, "Elf Tongue"]],
+		[Tongue.SNAKE, [StatusEffects.UnlockedSnakeTongue, "Snake Tongue"]],
 	]);
 
 	/**
@@ -552,7 +565,7 @@ import classes.BodyParts.Skin;
 	public function setTailType(tailType:int, tailCount:int = -1):Boolean {
 		var a:Boolean = setBodyPartType("tailType", METAMORPH_TAILS, tailType);
 		if (tailCount < 0) return a;
-		if (tailType == AppearanceDefs.TAIL_TYPE_FOX) {
+		if (tailType == Tail.FOX) {
 			var b:Boolean = setBodyPartType("tailCount", METAMORPH_FOX_TAILS, tailCount);
 			return a || b;
 		} else {
@@ -561,42 +574,42 @@ import classes.BodyParts.Skin;
 		}
 	}
 	private const METAMORPH_TAILS:Object     = createMapFromPairs([
-		[AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN, StatusEffects.UnlockedBeeTail],
-		[AppearanceDefs.TAIL_TYPE_BEHEMOTH, null],
-		[AppearanceDefs.TAIL_TYPE_CAT, null],
-		[AppearanceDefs.TAIL_TYPE_COW, StatusEffects.UnlockedCowTail],
-		[AppearanceDefs.TAIL_TYPE_DEER, null],
-		[AppearanceDefs.TAIL_TYPE_DEMONIC, StatusEffects.UnlockedDemonTail],
-		[AppearanceDefs.TAIL_TYPE_DOG, null],
-		[AppearanceDefs.TAIL_TYPE_DRACONIC, StatusEffects.UnlockedDraconicTail],
-		[AppearanceDefs.TAIL_TYPE_ECHIDNA, null],
-		[AppearanceDefs.TAIL_TYPE_FERRET, null],
-		[AppearanceDefs.TAIL_TYPE_FOX, StatusEffects.UnlockedFoxTail],
-		[AppearanceDefs.TAIL_TYPE_GARGOYLE, null],
-		[AppearanceDefs.TAIL_TYPE_GARGOYLE_2, null],
-		[AppearanceDefs.TAIL_TYPE_GOAT, StatusEffects.UnlockedGoatTail],
-		[AppearanceDefs.TAIL_TYPE_HARPY, StatusEffects.UnlockedHarpyTail],
-		[AppearanceDefs.TAIL_TYPE_HORSE, null],
-		[AppearanceDefs.TAIL_TYPE_KANGAROO, null],
-		[AppearanceDefs.TAIL_TYPE_KITSHOO, null],
-		[AppearanceDefs.TAIL_TYPE_LIZARD, StatusEffects.UnlockedLizardTail],
-		[AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL, null],
-		[AppearanceDefs.TAIL_TYPE_MANTIS_ABDOMEN, StatusEffects.UnlockedMantisTail],
-		[AppearanceDefs.TAIL_TYPE_MOUSE, null],
-		[AppearanceDefs.TAIL_TYPE_NONE, null],
-		[AppearanceDefs.TAIL_TYPE_ORCA, StatusEffects.UnlockedOrcaTail],
-		[AppearanceDefs.TAIL_TYPE_PIG, null],
-		[AppearanceDefs.TAIL_TYPE_RABBIT, null],
-		[AppearanceDefs.TAIL_TYPE_RACCOON, null],
-		[AppearanceDefs.TAIL_TYPE_RAIJU, StatusEffects.UnlockedRaijuTail],
-		[AppearanceDefs.TAIL_TYPE_RED_PANDA, null],
-		[AppearanceDefs.TAIL_TYPE_RHINO, null],
-		[AppearanceDefs.TAIL_TYPE_SALAMANDER, StatusEffects.UnlockedSalamanderTail],
-		[AppearanceDefs.TAIL_TYPE_SCORPION, null],
-		[AppearanceDefs.TAIL_TYPE_SHARK, StatusEffects.UnlockedSharkTail],
-		[AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN, StatusEffects.UnlockedSpiderTail],
-		[AppearanceDefs.TAIL_TYPE_WOLF, null],
-		[AppearanceDefs.TAIL_TYPE_YGGDRASIL, null],
+		[Tail.BEE_ABDOMEN, StatusEffects.UnlockedBeeTail],
+		[Tail.BEHEMOTH, null],
+		[Tail.CAT, null],
+		[Tail.COW, StatusEffects.UnlockedCowTail],
+		[Tail.DEER, null],
+		[Tail.DEMONIC, StatusEffects.UnlockedDemonTail],
+		[Tail.DOG, null],
+		[Tail.DRACONIC, StatusEffects.UnlockedDraconicTail],
+		[Tail.ECHIDNA, null],
+		[Tail.FERRET, null],
+		[Tail.FOX, StatusEffects.UnlockedFoxTail],
+		[Tail.GARGOYLE, null],
+		[Tail.GARGOYLE_2, null],
+		[Tail.GOAT, StatusEffects.UnlockedGoatTail],
+		[Tail.HARPY, StatusEffects.UnlockedHarpyTail],
+		[Tail.HORSE, null],
+		[Tail.KANGAROO, null],
+		[Tail.KITSHOO, null],
+		[Tail.LIZARD, StatusEffects.UnlockedLizardTail],
+		[Tail.MANTICORE_PUSSYTAIL, null],
+		[Tail.MANTIS_ABDOMEN, StatusEffects.UnlockedMantisTail],
+		[Tail.MOUSE, null],
+		[Tail.NONE, null],
+		[Tail.ORCA, StatusEffects.UnlockedOrcaTail],
+		[Tail.PIG, null],
+		[Tail.RABBIT, null],
+		[Tail.RACCOON, null],
+		[Tail.RAIJU, StatusEffects.UnlockedRaijuTail],
+		[Tail.RED_PANDA, null],
+		[Tail.RHINO, null],
+		[Tail.SALAMANDER, StatusEffects.UnlockedSalamanderTail],
+		[Tail.SCORPION, null],
+		[Tail.SHARK, StatusEffects.UnlockedSharkTail],
+		[Tail.SPIDER_ADBOMEN, StatusEffects.UnlockedSpiderTail],
+		[Tail.WOLF, null],
+		[Tail.YGGDRASIL, null],
 	]);
 	private const METAMORPH_FOX_TAILS:Object = createMapFromPairs([
 		[1, StatusEffects.UnlockedFoxTail],
@@ -613,30 +626,30 @@ import classes.BodyParts.Skin;
 		return a;
 	}
 	private const METAMORPH_WINGS:Object = createMapFromPairs([
-		[AppearanceDefs.WING_TYPE_BAT_LIKE_LARGE, StatusEffects.UnlockedDemonLargeBatWings],
-		[AppearanceDefs.WING_TYPE_BAT_LIKE_LARGE_2, StatusEffects.UnlockedDemonLargeBatWings2],
-		[AppearanceDefs.WING_TYPE_BAT_LIKE_TINY, StatusEffects.UnlockedDemonTinyBatWings],
-		[AppearanceDefs.WING_TYPE_BEE_LIKE_LARGE, StatusEffects.UnlockedBeeWingsLarge],
-		[AppearanceDefs.WING_TYPE_BEE_LIKE_SMALL, StatusEffects.UnlockedBeeWingsSmall],
-		[AppearanceDefs.WING_TYPE_DRACONIC_HUGE, StatusEffects.UnlockedDraconicWingsHuge],
-		[AppearanceDefs.WING_TYPE_DRACONIC_LARGE, StatusEffects.UnlockedDraconicWingsLarge],
-		[AppearanceDefs.WING_TYPE_DRACONIC_SMALL, StatusEffects.UnlockedDraconicWingsSmall],
-		[AppearanceDefs.WING_TYPE_FEATHERED_ALICORN, null],
-		[AppearanceDefs.WING_TYPE_FEATHERED_LARGE, StatusEffects.UnlockedHarpyWings],
-		[AppearanceDefs.WING_TYPE_FEATHERED_PHOENIX, StatusEffects.UnlockedPhoenixWings],
-		[AppearanceDefs.WING_TYPE_FEY_DRAGON_WINGS, null],
-		[AppearanceDefs.WING_TYPE_GARGOYLE_LIKE_LARGE, null],
-		[AppearanceDefs.WING_TYPE_GIANT_DRAGONFLY, null],
-		[AppearanceDefs.WING_TYPE_HARPY, null],
-		[AppearanceDefs.WING_TYPE_IMP, null],
-		[AppearanceDefs.WING_TYPE_MANTICORE_LIKE_LARGE, null],
-		[AppearanceDefs.WING_TYPE_MANTICORE_LIKE_SMALL, null],
-		[AppearanceDefs.WING_TYPE_MANTIS_LIKE_LARGE, StatusEffects.UnlockedMantisWingsLarge],
-		[AppearanceDefs.WING_TYPE_MANTIS_LIKE_LARGE_2, null],
-		[AppearanceDefs.WING_TYPE_MANTIS_LIKE_SMALL, StatusEffects.UnlockedMantisWingsSmall],
-		[AppearanceDefs.WING_TYPE_NONE, null],
-		[AppearanceDefs.WING_TYPE_PLANT, null],
-		[AppearanceDefs.WING_TYPE_SHARK_FIN, null],
+		[Wings.BAT_LIKE_LARGE, StatusEffects.UnlockedDemonLargeBatWings],
+		[Wings.BAT_LIKE_LARGE_2, StatusEffects.UnlockedDemonLargeBatWings2],
+		[Wings.BAT_LIKE_TINY, StatusEffects.UnlockedDemonTinyBatWings],
+		[Wings.BEE_LIKE_LARGE, StatusEffects.UnlockedBeeWingsLarge],
+		[Wings.BEE_LIKE_SMALL, StatusEffects.UnlockedBeeWingsSmall],
+		[Wings.DRACONIC_HUGE, StatusEffects.UnlockedDraconicWingsHuge],
+		[Wings.DRACONIC_LARGE, StatusEffects.UnlockedDraconicWingsLarge],
+		[Wings.DRACONIC_SMALL, StatusEffects.UnlockedDraconicWingsSmall],
+		[Wings.FEATHERED_ALICORN, null],
+		[Wings.FEATHERED_LARGE, StatusEffects.UnlockedHarpyWings],
+		[Wings.FEATHERED_PHOENIX, StatusEffects.UnlockedPhoenixWings],
+		[Wings.FEY_DRAGON_WINGS, null],
+		[Wings.GARGOYLE_LIKE_LARGE, null],
+		[Wings.GIANT_DRAGONFLY, null],
+		[Wings.HARPY, null],
+		[Wings.IMP, null],
+		[Wings.MANTICORE_LIKE_LARGE, null],
+		[Wings.MANTICORE_LIKE_SMALL, null],
+		[Wings.MANTIS_LIKE_LARGE, StatusEffects.UnlockedMantisWingsLarge],
+		[Wings.MANTIS_LIKE_LARGE_2, null],
+		[Wings.MANTIS_LIKE_SMALL, StatusEffects.UnlockedMantisWingsSmall],
+		[Wings.NONE, null],
+		[Wings.PLANT, null],
+		[Wings.SHARK_FIN, null],
 	]);
 
 	/**

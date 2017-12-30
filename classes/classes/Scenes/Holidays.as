@@ -1,13 +1,15 @@
 package classes.Scenes {
 import classes.Appearance;
-import classes.AppearanceDefs;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Tongue;
+import classes.CoC;
 import classes.CockTypesEnum;
 import classes.DefaultDict;
 import classes.EngineCore;
 import classes.EventParser;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.ItemType;
 import classes.Items.ConsumableLib;
 import classes.PerkLib;
@@ -15,6 +17,7 @@ import classes.Player;
 import classes.PregnancyStore;
 import classes.Scenes.NPCs.JojoScene;
 import classes.StatusEffects;
+import classes.VaginaClass;
 import classes.internals.Utils;
 
 public class Holidays {
@@ -473,9 +476,9 @@ public class Holidays {
             EngineCore.outputText("Fera smiles as you announce your choice.  \"<i>I thought you might say that, little champion.  Now, you simply relax and enjoy the pleasure that only my normal weak-willed prey are allowed to experience.  You will be the first to taste it and be allowed free.  How wonderful!</i>\"  She pets your forehead."
                     +"\n\nMeanwhile, you hear a squelching, slithering sound down below as Fera pulls away, kneeling down beside you so that her lips are at your ear, washing her hot breath across it and occasionally letting her soft, pillow-like mouth press against your aural opening.  \"<i>Relllaaaax,</i>\" she commands, and you do.  Your body sags bonelessly into its organic cradle as a writhing mass of tentacle-like stamen contort just shy of your mons, their squirming shapes dripping almost as eagerly as you."
                     +"\n\nThe mass of tendrils does not delay. It lurches forward as one unified column of hole-fucking power, plowing straight into your [vagina]");
-            if (player.vaginas[0].vaginalLooseness >= AppearanceDefs.VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) EngineCore.outputText(", spreading its well-widened lips as wide as they've ever been");
-            else if (player.vaginas[0].vaginalLooseness >= AppearanceDefs.VAGINA_LOOSENESS_GAPING) EngineCore.outputText(", spreading your lips well beyond the widest they've ever been and still farther.");
-            else if (player.vaginas[0].vaginalLooseness >= AppearanceDefs.VAGINA_LOOSENESS_LOOSE) EngineCore.outputText(", meeting a bit of token resistance at your unprepared entryway and slithering stamen after stamen inside, the forerunners widening you until the entirety of the column can pass inside, gaping you almost inhumanly wide.");
+            if (player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_LEVEL_CLOWN_CAR) EngineCore.outputText(", spreading its well-widened lips as wide as they've ever been");
+            else if (player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_GAPING) EngineCore.outputText(", spreading your lips well beyond the widest they've ever been and still farther.");
+            else if (player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_LOOSE) EngineCore.outputText(", meeting a bit of token resistance at your unprepared entryway and slithering stamen after stamen inside, the forerunners widening you until the entirety of the column can pass inside, gaping you almost inhumanly wide.");
             else EngineCore.outputText(", meeting more than a little resistant at your unstretched entry and finding a way in anyhow. First one tentacle slithers in, then a second, then a fourth, and so on. One after another, they spread you wider and wider, opening you until the entire wiggling column is buried deep, pulling your lips ridiculously wide.");
             EngineCore.outputText("\n\nYou do not feel an ounce of pain from the extreme insertion. You don't even feel a whiff of discomfort. All you can feel is a sense of delicious, twat-stuffing fullness, filling and expanding you all while flooding you with more of that heavenly, brain-deadening slime. Your crotch quickly overflows. There simply isn't room for all the nectar they're leaking inside. The excess is painting you with a glossy coat of nectar and girl-honey, spraying over your [legs] around the impaling members.");
             //STEAL VIRGINITY!
@@ -484,8 +487,8 @@ public class Holidays {
             EngineCore.outputText("\n\nFera's voice whispers with a voice that has as much heat as the crackling coals of a long-burning bonfire, \"<i>Feel the pleasure of being filled, my servant.  Feel the bliss of stuffing yourself so full, so very full.  Only the biggest, strongest, most well-hung of mates will ever come close to filling you like this, and you will seek them out.  Your twat will hunger for huge cocks.  It will </i>thirst<i> for the cum that's lurking in those big, meaty balls.  Your womb will ache for impregnation, and you will seek it, won't you?  Answer me, my pet champion.</i>\""
                     +"\n\nYour lips mouth, exhaling your answer in a barely audible, \"<i>yessss....</i>\""
                     +"\n\nThe sap-oozing tendrils respond by pulling back and thrusting in, scraping your tightly-stretched walls, rubbing over every sensitive place. Your lips, your clit, your g-spot - they're all caressed by slick heat, forced to accept the hip-stretching insertion with nothing short of incredible excitement.  Your body shudders from head to ");
-            if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HUMAN) EngineCore.outputText("toe");
-            else if (player.tailType > AppearanceDefs.TAIL_TYPE_NONE) EngineCore.outputText("tail");
+            if (player.lowerBody == LowerBody.HUMAN) EngineCore.outputText("toe");
+            else if (player.tailType > Tail.NONE) EngineCore.outputText("tail");
             else EngineCore.outputText("[foot]");
             EngineCore.outputText(" as you climax, arching your back and making guttural, beast-like sounds of pleasure.  Your eyelids hang low, lazily obscuring some of those wonderful colors from your view as the pleasure and plant-sap work on you.  Shuddering, you gush girlcum harder than ever, spraying a thick wave of lady-spunk across the tentacles, shining them with your juices");
             if (player.wetness() < 4) EngineCore.outputText(" even though you're not a squirter");
@@ -505,8 +508,8 @@ public class Holidays {
             player.fertility += 20;
             if (player.fertility > 50) player.fertility = 50;
             //Raise wetness to at least 3.
-            if (player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_SLICK) player.vaginas[0].vaginalWetness = AppearanceDefs.VAGINA_WETNESS_SLICK;
-            if (player.vaginas[0].vaginalLooseness < AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE) player.vaginas[0].vaginalLooseness = AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE;
+            if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLICK) player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_SLICK;
+            if (player.vaginas[0].vaginalLooseness < VaginaClass.LOOSENESS_GAPING_WIDE) player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_GAPING_WIDE;
             //Add five corruption.
             player.orgasm();
             player.dynStats("cor", 3);
@@ -544,9 +547,9 @@ public class Holidays {
                     +"\n\nYou groan in unrestrained lust, forced by her command to relax in spite of the lava-hot need drooling out from your [vagina] and at the same time enjoy it as fully as possible, focusing on every tingle of pleasure from the vine's slow, slick shifting about your body.  Some more black goo splatters across your mons, and you nearly cream to the feeling of that warm, corruptive ooze sliding between your lips and tainting you with Fera's inescapable love.  Your lips spread on their own, displaying the interior of your nectar-stained pussy to the horny tendril, practically begging for it to take you and spear you over and over until your pussy is stuffed to the brim with its pussy-tightening fuck-slime."
                     +"\n\nTouching against the pliant, slippery vulva that girds your entrance, the tendril rubs its rounded head against you in a surprisingly gentle way, teasing your exterior until you're aching to buck back against it, but you can't, Fera told you to relax.  Disobedience is a concept your poor, addled psyche won't remember for some time.  You hang there, mewling like a cat in heat, pussy splayed and being touched but not penetrated.  Breathily, you repeatedly make pathetic little begging noises, and turn your slow-to-respond eyes towards Fera's face questioningly, begging the goddess with your moans."
                     +"\n\nShe smiles, and the tentacle finally pushes forward");
-            if (player.vaginas[0].vaginalLooseness >= AppearanceDefs.VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) EngineCore.outputText(", slipping past your capacitive entrance with ease");
-            else if (player.vaginas[0].vaginalLooseness >= AppearanceDefs.VAGINA_LOOSENESS_GAPING) EngineCore.outputText(", sliding into your welcoming entrance fairly easily");
-            else if (player.vaginas[0].vaginalLooseness >= AppearanceDefs.VAGINA_LOOSENESS_LOOSE) EngineCore.outputText(", slowly working its way into your decently unstretched entrance");
+            if (player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_LEVEL_CLOWN_CAR) EngineCore.outputText(", slipping past your capacitive entrance with ease");
+            else if (player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_GAPING) EngineCore.outputText(", sliding into your welcoming entrance fairly easily");
+            else if (player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_LOOSE) EngineCore.outputText(", slowly working its way into your decently unstretched entrance");
             else EngineCore.outputText(", slowly burrowing past your tight, restrictive entrance");
             EngineCore.outputText(" and leaving a trail of slick, black corruption in its wake.  The tendril pushes the whole way up to your cervix, gently butting up against your womb's portal before dragging back out, sputtering more inky cum all the way.  When it pops out, the head catches the tip of your [clit], causing your [vagina] to spasm and contract, squeezing down on the foreign fluid with such strength that a geyser of sable spunk erupts from your quivering quim.");
             player.cuntChange(1, true, true, false);
@@ -560,12 +563,12 @@ public class Holidays {
             if (player.findPerk(PerkLib.FerasBoonMilkingTwat) < 0) {
                 player.createPerk(PerkLib.FerasBoonMilkingTwat, 0, 0, 0, 0);
             }
-            if (player.vaginas[0].vaginalLooseness > AppearanceDefs.VAGINA_LOOSENESS_LOOSE) player.vaginas[0].vaginalLooseness = AppearanceDefs.VAGINA_LOOSENESS_LOOSE;
+            if (player.vaginas[0].vaginalLooseness > VaginaClass.LOOSENESS_LOOSE) player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_LOOSE;
             //Boost fertility a little
             player.fertility += 10;
             if (player.fertility < 50) player.fertility = 50;
             //Raise wetness to at least 3.
-            if (player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_SLICK) player.vaginas[0].vaginalWetness = AppearanceDefs.VAGINA_WETNESS_SLICK;
+            if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLICK) player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_SLICK;
 
             //[Next]
             EngineCore.menu();
@@ -588,7 +591,7 @@ public class Holidays {
                     +"\n\nA juicy-sounding 'schluck' sounds from below your [butt] when she finishes her proclamation, and a tendril far different from its flowery brethren rises up above your [legs], angling down towards your groin with an unflinching, almost robotic attention.  The tip is clearly hollow and lined with thousands of tiny, wiggling cilia, all slick and slimy with some kind of clear ooze, but that isn't what catches your eye.  No, there is something far more menacing protruding from the stalk's opening - a needle-like spike at least four inches long, though only an inch sticks past the lips of the cup-like tendril."
                     +"\n\nFera crouches down next to your ear, planting her puffy, ruby kissers up against the lobe of your ear.  \"<i>It won't hurt, my pet champion. It won't hurt at all.  You've far too much of my sap inside you to feel pain by this point.  Instead, the only thing you'll experience is the erotic pleasure of allowing my voice to guide your thoughts and shape your mind, making you hotter, wetter, and more eager for a huge, throbbing cock.</i>\"  She purrs an indecipherable sound of pleasure.  \"<i>Get ready to feel so very good, [name]....</i>\""
                     +"\n\nAs soon as Fera trails off, the exotic vine begins to lower itself down, carefully positioning itself squarely above your mons, perhaps an inch above your [clit].  It holds steady there, making minute adjustments this way and that, jerking with each slight change in aim to track your less-than-stationary, suspended form.  There is a moment of complete silence and breathless anticipation, and then, it scythes downwards, slamming into you with sufficient force to rock you down in your organic harness");
-            if (player.tailType > AppearanceDefs.TAIL_TYPE_NONE) EngineCore.outputText(" and press your tail to the ground");
+            if (player.tailType > Tail.NONE) EngineCore.outputText(" and press your tail to the ground");
             EngineCore.outputText(".  You feel the wetness of the hollow tube as it presses against you along with a lance of pure desire and heat in the very center, undoubtedly caused by the tainted needle as it slips through your unprotected flesh.  The thing is compressed so tightly against you that it looks like the entire injector was able to bury itself in your body."
                     +"\n\nYour whole body shudders in surprise before Fera soothes you back into stillness, and then, it begins, not with pain but with a whimper of bliss. You feel that heat grow into a fiery knot before blossoming into a molton-hot ball of tight, aching need. That part of your body feels so... so compressed, almost crushed into place by the flesh around. You shudder and thrust your hips, crying out in eagerness and ecstasy, tears streaming from your empty, dilated eyes as you hump the tentacle in accordance with the drives you can't understand, only obey. The tightness increases until it feels like that spot is about to be crushed by the rest of you, yet you drip hot ladyspunk all over the organic 'floor,' loving every second of it."
                     +"\n\nPulling back, the tentacle's cup-like tip stretches away from your body a few inches, its base still sealed tight to your " + player.skinFurScales() + ", tugging and pulling with gentle suction.  There's a moment of insistent, tremendous pressure, upwelling like a long-dormant volcano, and suddenly, the pressure is gone, and gods, it's so fucking hot and good and sensitive and you start to cum, nearly throwing your back out as you scream out in pleasure for your goddess to hear.  There's more of you that feels pleasure than ever and it's so hot, full, and just... twitching with bliss that you can barely stop moaning long enough to breathe."
@@ -625,7 +628,7 @@ public class Holidays {
 
     public static function poniesYN():Boolean {
         // Encounter Chance 1 out of 40 and only if you're a centaur
-        if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HOOFED && player.isTaur() && date.date == 1 && date.month == 3 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00118] == 0) {
+        if (player.lowerBody == LowerBody.HOOFED && player.isTaur() && date.date == 1 && date.month == 3 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00118] == 0) {
             EngineCore.clearOutput();
             EngineCore.outputText("While walking around the lake, you hear the sound of feminine voices laughing and talking, accompanied by the distinctive clip-clop of hooves. Stepping lightly through the overgrowth you stumble across a group of small brightly colored ponies. The strange part about them isn't so much their size, but rather the shape of their bodies.  They almost look cartoonish in nature, a few even sport fluttery, feathery looking wings.\n\n");
             //(option: Approach? Leave them Be?)
@@ -681,7 +684,7 @@ public class Holidays {
             EngineCore.outputText("You watch in amazement as the flying horses string up banners, while the purple one sets a table with snacks and drinks using glowy powers coming from the horn on her head.  Whilst they set up, you discuss your home village with the orange one who compares it with working on an apple farm and you try to ignore  the white one as she primps and fusses around you, obviously unwilling to let you stay in, to quote her own words, \"<i>Hideous attire, lacking any grace or style.</i>\"\n\n"
                     +"Time passed, and the rest of the day was a blur, mostly caused by, you assume, the large quantity of Pony Punch you drank.  As you shakily attempt to get up, snippets of the evening's events flash through your mind: a funny joke told by the pink one; the yellow one coming out of hiding to orchestrate an impromptu concerto sung by a choir of songbirds; losing a race to the blue one, (flying is definitely cheating): a derpy looking grey one who was knocking over everything in a two meter radius around her.  Your mind slowly returns to the present and as it does you take a look at yourself.  A first glance at your attire shows the magical 'improvements' the white one made are already fading away, crumbling into a cloud of pink dust that blows away, leaving you back in your [armor].  Watching your clothes change was rather distracting, but now that you are up, and ooh what a headache THAT caused, you see your clothes weren't the only thing that changed!!\n\n"
                     +"Your strong lower body has shrunk, the firm musculature replaced by an oddly cartoonish looking form.  In fact, from the waist down you look just like one of the ponies!  Everything looks to still be in the same general place, and a quick test of your new lower body proves it still functions somewhat the same. The new shape of your hooves takes a little while to get used to, but other than that you get used to your new lower body almost with no effort\n\n(<i>*Note:You should really check the character viewer</i>)");
-            player.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_PONY;
+            player.lowerBody = LowerBody.PONY;
             player.legCount = 4;
             EngineCore.doNext(SceneLib.camp.returnToCampUseEightHours);
         }
@@ -1191,7 +1194,7 @@ public class Holidays {
                     +"\n\nThe afflicted areas on her generous rump turn rosy red, which is hard to notice on her otherwise pink skin. You grin; apparently nobody had the decency to give this sausage slut a good rump-roasting. You bring both of your open palms down at the same time, both giant tushy cheeks undulating sexily as you leave fingerprint marks on her juicy booty. You experimentally put pressure on one of her fat orbs of flushing-red posterior, smiling in delight as your fingers practically sink into the round flesh."
                     +"\n\n\"<i>Oink...</i>\" she moans, lustily as you manhandle her backside. The dirty little slut! She likes it! Well, you're not one to deprive a sexy strumpet of her pleasure."
                     +"\n\nYou begin to rapid-fire spank her ass, alternating your strikes between her two cheeks. ");
-            if (player.tailType > AppearanceDefs.TAIL_TYPE_NONE) EngineCore.outputText("You even bring your tail from behind your back to join in, the unfamiliar texture causing the sausage slut to let out surprised, high-pitched squeaks. ");
+            if (player.tailType > Tail.NONE) EngineCore.outputText("You even bring your tail from behind your back to join in, the unfamiliar texture causing the sausage slut to let out surprised, high-pitched squeaks. ");
             EngineCore.outputText("You notice the pigslut moving backwards, her ass being pushed into the air as she attempts to feel the full power of your spanking, her pussy spraying juices onto the soaked sheets."
                     +"\n\nYour hands are a blur as they play some unknown rhythm on her bouncing booty, as if they were acting on their own. The piggy slut has her hands clenching down on a nearby pillow, teeth gritted as you have your way with her colossal ass. Tears streak down onto the pillow, staining the fabric wet. The sight of her weeping sex is all you need to know to continue; the desperately oinking whore turns out to be a bit of a masochist..."
                     +"\n\nYou look around the room for a more fitting tool to use on this pain-loving slut, even as you turn the whore's jiggling butt cheeks into a pair of booty bongos.");
@@ -1639,7 +1642,7 @@ public class Holidays {
                     +"\n\nHer pussy gives way and drips onto your [face] and in your mouth richly, and she makes constant mewling sounds.  \"<i>C-come on!  Stop teasing me god damn it!  Are you an iii-aahhh-diot?  I'm go-oh-ohna kick ya out, ya know!?</i>\"  You don't intend to desist, and you flick her clit with your fingers again, causing her to push her bottom right into your face.  That gives you an idea, as you run your tongue from her pussy, and then, over her crack and soft buttocks, pleasuring her other hole when you're at it.  She starts panting and moaning.  \"<i>G-goblins don't use that hole!  We don't!  Don't get any crazy ideas you dumb f-fuck!</i>\" she says when you run your tongue back all the way to where it came, teasing both of her holes.  You massage her soft rump while you're at it, and by now, you're pretty sure she's rather sensitive all over, especially where her curves are developing..."
                     +"\n\nAfter a while of doing this, you're pretty sure Abylon starts approaching her second orgasm, and you intent to fill her as much as you can for the occasion.");
             //([Naga tongue]
-            if (player.tongueType == AppearanceDefs.TONGUE_SNAKE) EngineCore.outputText("  Your fingers make it into her pussy alongside your tongue, and the prehensile thing, longer and more flexible than a human's, ravages the insides of her pussy, tasting everywhere as Abby shakes in her orgasm.  Her pussy eagerly tries to milk both your fingers and your tongue, clenching and gripping at them as it drips her pussy juices all over your face.  Abby screams out in a loud, uninhibited orgasm at last, expressing her ecstasy.");
+            if (player.tongueType == Tongue.SNAKE) EngineCore.outputText("  Your fingers make it into her pussy alongside your tongue, and the prehensile thing, longer and more flexible than a human's, ravages the insides of her pussy, tasting everywhere as Abby shakes in her orgasm.  Her pussy eagerly tries to milk both your fingers and your tongue, clenching and gripping at them as it drips her pussy juices all over your face.  Abby screams out in a loud, uninhibited orgasm at last, expressing her ecstasy.");
             //([Demon/Dragon Tongue]
             else if (player.hasLongTongue()) EngineCore.outputText("  Abylon shakes in excitement, pleasure, and fear as you extend your inhuman tongue to reach deep into the recesses of her pussy.  She cannot hold out a moment longer, her cunt gripping your inhuman muscle tightly, the hole and muscles inside quivering as you can taster her orgasmic juices with every single point of your tongue.  She screams, shudders and moans, tongue lolling out from the intense pleasure as you force your own tongue to roll around inside her and stretch her in multiple ways. Only you holding her stops Abylon from slumping forward, it seems...");
             //([Human tongue]
@@ -2056,8 +2059,8 @@ public class Holidays {
                     +"The elf giggles, \"<i>Merry Christmas,</i>\" as she starts rocking against you.  The dildo slides through your passage, massaging your inner walls and bumping against your " + Appearance.clitDescription(player) + "'s underside with each stroke.   She's got such great muscle control that she's clamped down on the double-sided dildo and started using it as a cock to fuck you!  She smirks and pounds your vulnerable " + Appearance.vaginaDescript(player, 0) + ", raping it with increasingly forceful strokes.  You grunt and moan as each stroke loudly smacks into your hips.  You feel yourself closing in on an orgasm, but the elf-girl relaxes her grip and simply grinds against you, taking the stimulation down a notch.\n\n"
                     +"Determined to get off, you wiggle against her, mashing your " + Appearance.clitDescription(player) + " into her own.  She squirms and cries out, actually getting off before you!  You muse that elves must have extraordinarily sensitive clitorises, but before you can act on it, you feel a sudden stirring in your loins.   The dildo is starting to spin!  You prop yourself up and watch, unbelieving as the elf's orgasmic contractions visibly contort her belly, moving more and more quickly as the spinning speeds up.  In seconds the twirling assault has placed you back on the edge of orgasm, and you're groaning and rubbing against your insensate lover for more.\n\n"
                     +"You cum, ");
-            if (player.vaginas[0].vaginalWetness == AppearanceDefs.VAGINA_WETNESS_SLAVERING) EngineCore.outputText("gushing fluids");
-            else if (player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_SLICK) EngineCore.outputText("dripping fluids");
+            if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) EngineCore.outputText("gushing fluids");
+            else if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_SLICK) EngineCore.outputText("dripping fluids");
             else EngineCore.outputText("squishing wetly");
             EngineCore.outputText(" as your " + Appearance.vaginaDescript(player, 0) + " is drilled by the elf's double-ended dong.   It feels beyond good, like having a cock inside you that rubs against each part of your pussy over and over and over without the barest hint of mercy.  Your gasp and pant, glancing back up at the elf.  She's already recovered from her orgasm, though she has an intense look of concentration on her face while she focuses on twisting the dildo inside you.\n\n"
 

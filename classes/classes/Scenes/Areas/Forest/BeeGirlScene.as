@@ -4,8 +4,11 @@
 package classes.Scenes.Areas.Forest
 {
 import classes.*;
+import classes.BodyParts.Face;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tongue;
+import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.SceneLib;
 
 public class BeeGirlScene extends BaseContent
@@ -69,7 +72,7 @@ public class BeeGirlScene extends BaseContent
 			if (clearScreen) clearOutput();
 			spriteSelect(6);
 			outputText("That's when she comes into view.  A great woman, yellow and black, a Bee-like handmaiden would be the best comparison.  She sits atop a great flower while humming her tune, happily picking the petals off of another flower.  Her body is thin, save her abdomen.  Her head is more humanoid than bee, with black eyes, antennae, and luscious black lips that glimmer wetly");
-			if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER) {
+			if (player.lowerBody == LowerBody.PLANT_FLOWER) {
 				AlrauneAndBee();
 				return;
 			}
@@ -191,7 +194,7 @@ public class BeeGirlScene extends BaseContent
 					outputText("You wrap your arms around your insectoid lover from the shock of the stimulation as each of the knots bumps against your " + clitDescript() + " and then run against the inner walls of your " + vaginaDescript(0) + ".");
 					player.cuntChange(25, true);
 					outputText("  Your unearthly partner proceeds to use one hand to massage and tweek your " + clitDescript() + ", while the other moves to play with your " + chestDesc() + ".  Not wanting to be left behind, you bring your own ministrations into the mix on the bee girl’s own chest, and her currently neglected honeypot.  In moments, she gasps from the multitude of different sensations, and grabs onto your body in the same way you just were holding onto hers.\n\n");
-					outputText("You rub your abdomen, feeling her ovipositor deep inside you.  You smile, it’s time to pick up the pace and lift up your body, then drop it back down, impaling yourself on the intruder.  You love every second of it, but the sensations aren’t as overwhelming as the handmaiden seems to be finding them.  All she can do at this point is hold onto you as tightly as she can, unable to to do anything else at this point as she pants, moans, and screams from the sensation overload from her ovipositor.  Suddenly there is a sharp stinging feeling in your " + nippleDescript(0) + " as the bee girl bites down in orgasm, causing you to be pushed over the edge as well.  " + (player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_WET ? "This leads to you liberally drenching your lower body and hers with" : "This brings out a small spray of") + " girl fluids from your " + vaginaDescript(0) + ".  A few minutes later, the bee girl finally recovers.  It seems that she is looking forward to the next meeting between you two as well.  Leaving you with <i>“Next time, we’re putting that to itzzz proper uzzze!”</i> and a happy wave.");
+					outputText("You rub your abdomen, feeling her ovipositor deep inside you.  You smile, it’s time to pick up the pace and lift up your body, then drop it back down, impaling yourself on the intruder.  You love every second of it, but the sensations aren’t as overwhelming as the handmaiden seems to be finding them.  All she can do at this point is hold onto you as tightly as she can, unable to to do anything else at this point as she pants, moans, and screams from the sensation overload from her ovipositor.  Suddenly there is a sharp stinging feeling in your " + nippleDescript(0) + " as the bee girl bites down in orgasm, causing you to be pushed over the edge as well.  " + (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_WET ? "This leads to you liberally drenching your lower body and hers with" : "This brings out a small spray of") + " girl fluids from your " + vaginaDescript(0) + ".  A few minutes later, the bee girl finally recovers.  It seems that she is looking forward to the next meeting between you two as well.  Leaving you with <i>“Next time, we’re putting that to itzzz proper uzzze!”</i> and a happy wave.");
 			}
 			else {
 				outputText("You brush her long hair out of her eyes and point out that you can’t actually have sex with her, since you don’t have any genitals.  She gently shushes you with a finger to your lips and says, <i>“That izzz for the bezzzt.  Thizzz way you don’t get dizzztracted by lezzzer partzzz.”</i>  She gently runs her fingers over your body, " + (player.beeScore() > 0 ? "paying special attention to your bee like alterations.  She seems to really like them, and you wonder if maybe she’ll do something special for you if you get more?" : "teasing every sensitive spot of your body that she can find.") + "  Your own fingers carefully explore her body.  It’s a unique sensation, the feel of her fine downy fuzz, and the slightly moist but almost rubbery texture of her exoskeleton.\n\n");
@@ -224,7 +227,7 @@ public class BeeGirlScene extends BaseContent
 			outputText("The bee girl pulls back from you after a few minutes and pulls her abdomen between her fuzzy legs, letting it rest wedged between them.  With a delicate hand, she gently rubs her finger along a differently textured part of her carapace close to the base of the stinger.  In a moment, a knotted appendage emerges from it, her ovipositor.  She lies down on her back, and indicates that you should mount her lubricated organ with your " + assholeDescript() + ".  You take another steadying breath and gently lower yourself onto the organ.  As you feel each knot pass inside you, your partner gives a gentle buzz of pleasure.\n\n");
 			if (player.analCapacity() < 25) {
 				outputText("Inserting the organ into your body is a slow but sure process.  The lubrication makes it much easier to get the organ inside you, but you can definitely feel it stretching your rear entrance out.  ");
-				if (player.ass.analLooseness == AppearanceDefs.ANAL_LOOSENESS_VIRGIN)
+				if (player.ass.analLooseness == AssClass.LOOSENESS_VIRGIN)
 					outputText("<b>Well, at least you’re losing your anal virginity willingly.  That’s something to be said in this world.</b>");
 				else outputText("<b>Your " + assholeDescript() + " has become looser thanks to the knotted appendage penetrating you.</b>");
 				player.buttChange(25, true);
@@ -626,9 +629,9 @@ public class BeeGirlScene extends BaseContent
 				}
 				//Coochie talk!
 				else {
-					if (player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_WET)outputText("centering around your now puffy vulva.  ");
-					if (player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_WET && player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_DROOLING)outputText("growing more potent around your " + vaginaDescript(0) + " as it begins to leak with the honey of your desire.  ");
-					if (player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_DROOLING) outputText("inflaming your " + vaginaDescript(0) + " with need, and allowing a river of your wetness to gush from between your puffy vulva.  ");
+					if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_WET)outputText("centering around your now puffy vulva.  ");
+					if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_WET && player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_DROOLING)outputText("growing more potent around your " + vaginaDescript(0) + " as it begins to leak with the honey of your desire.  ");
+					if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_DROOLING) outputText("inflaming your " + vaginaDescript(0) + " with need, and allowing a river of your wetness to gush from between your puffy vulva.  ");
 				}
 				//Boobies!
 				if (player.biggestTitSize() > 1) {
@@ -746,15 +749,15 @@ public class BeeGirlScene extends BaseContent
 			outputText("Her face breaks into a wide knowing smile.  <i>“Hello again, my fine cocked friend,”</i> she says rising and gently hovering over to you.  <i>“You know, the queen izzz eagerly waiting to meet you.  Zzzhe will be able to take care of you much better than I ever could, but I think we can zzztill zzzpend zzzome time together if you’re up for it.”</i>\n\n");
 			outputText("You look at her a bit confused, unsure exactly what she is telling you.  <i>“Zzzzilly boy, I’ve been telling the queen about our meetingzzz, and zzzhe is eager to aczzzzept you into the hive!”</i>  She moves forward and pulls your [armor] from your body and gently rubs your [cock].  <i>“I told you that only a queen bee could help you with zzzomething thizzz big, and you’ll be able to fill her with it and fertilize all her eggzzz.  Thizzz izzz the releazzze you’ve been craving all thizzz time, come on!”</i>\n\n");
 			outputText("Her offer intrigues you incredibly, and you can’t imagine turning her down, not now.  Once, you might have been able to turn away from it, but now that you’ve got this bee prick and have felt the release that bee’s honey gives you, there's just no way.  You nod eagerly to the bee girl and \n\n");
-			if (player.wingType == AppearanceDefs.WING_TYPE_BEE_LIKE_LARGE) {
+			if (player.wingType == Wings.BEE_LIKE_LARGE) {
 				outputText("spread your wings.  She takes your hand and before rising up into the air and leading you home.\n\n");
 			}
 			else {
 				outputText("accept the bottle of special honey that she hands you which you down in an instant.  ");
-				if (player.wingType == AppearanceDefs.WING_TYPE_NONE) {
+				if (player.wingType == Wings.NONE) {
 					outputText("At once your back starts to tingle, and a pair of bee wings erupt behind you, they quickly grow large and with a few experimental flaps you find that they can carry your weight.");
 				}
-				else if (player.wingType == AppearanceDefs.WING_TYPE_BEE_LIKE_SMALL) {
+				else if (player.wingType == Wings.BEE_LIKE_SMALL) {
 					outputText("Your wings tingle before suddenly growing much larger.  You test them for a moment finding that they are now big enough to allow you to fly!");
 				}
 				else {
@@ -910,9 +913,9 @@ public class BeeGirlScene extends BaseContent
 			else outputText("You barely keep yourself from jumping her in your excitement, but you manage to stay where you are so she can make the first move.");
 			if (player.hasVagina()) {
 				outputText("  <i>“Repeat after me.”</i>  She intones before giving a soft buzzing giggle and slips one of her hands into her honey pot and liberally covers it in her private sweetness.  You follow suit slipping your fingers to your " + vaginaDescript(0) + " and ");
-				if (player.wetness() <= AppearanceDefs.VAGINA_WETNESS_NORMAL)
+				if (player.wetness() <= VaginaClass.WETNESS_NORMAL)
 					outputText("barely");
-				else if (player.wetness() <= AppearanceDefs.VAGINA_WETNESS_SLICK)
+				else if (player.wetness() <= VaginaClass.WETNESS_SLICK)
 					outputText("easily");
 				else outputText("liberally");
 				outputText(" cover them with your own fluids.\n\n");
@@ -1364,7 +1367,7 @@ public class BeeGirlScene extends BaseContent
 			var herm:Function =null;
 			var gentleman:Function =null;
 			var eggs:Function =null;
-			if (player.canOvipositSpider() && (player.faceType == AppearanceDefs.FACE_SNAKE_FANGS || player.faceType == AppearanceDefs.FACE_SPIDER_FANGS)) {
+			if (player.canOvipositSpider() && (player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS)) {
 				eggs = layEggsInABeeSpiderLike;
 				outputText("(You could dose her with venom and lay YOUR eggs in her.)\n");
 			}
@@ -1384,11 +1387,11 @@ public class BeeGirlScene extends BaseContent
 				outputText("(You could try to please both your 'male' and 'female' halves on the bee.)\n");
 				herm = futaRapesBeeGirl;
 			}
-			if (player.isNaga() && player.faceType == AppearanceDefs.FACE_SNAKE_FANGS) {
+			if (player.isNaga() && player.faceType == Face.SNAKE_FANGS) {
 				outputText("(You could focus on your snakelike, 'naga' attributes.)\n");
 				naga = corruptNagaBitchesRapeABee;
 			}
-			if (player.cor >= 75 && player.str >= 60 && (player.tongueType == AppearanceDefs.TONGUE_SNAKE || player.hasCock() || player.hasVagina() || player.biggestTitSize() >= 4)) {
+			if (player.cor >= 75 && player.str >= 60 && (player.tongueType == Tongue.SNAKE || player.hasCock() || player.hasVagina() || player.biggestTitSize() >= 4)) {
 				outputText("(You could play with her a bit and try to make her lay eggs into herself.)\n");
 				gentleman = beeGirlRapeForTheDistinguishedGentleman;
 			}
@@ -1643,9 +1646,9 @@ public class BeeGirlScene extends BaseContent
 				}
 				//new PG
 				else outputText("\n\n");
-				if (player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_SLICK) outputText("Thankfully her tongue keeps up its assault, curling 'round your clit and probing your depths in equal measure, keeping you slick and writhing in pleasure.  ");
-				if (player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_SLICK && player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_SLAVERING) outputText("Your hips wiggle and writhe on the length of her tongue as it dives into your slippery depths and curls tightly around your clit, jacking it up and down like a cock.  Your girl-cum soaks her chin, drooling happily as she pleasures you.  ");
-				if (player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_SLAVERING) outputText("Your hips quiver and grind against her face as her unusually long tongue simultaneously probes your depths and works your clit, wrapping around it and jerking it like a cock.   You squirt and drool constantly from her skilled assault, soaking her face and hair with your girl-cum.  ");
+				if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLICK) outputText("Thankfully her tongue keeps up its assault, curling 'round your clit and probing your depths in equal measure, keeping you slick and writhing in pleasure.  ");
+				if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_SLICK && player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLAVERING) outputText("Your hips wiggle and writhe on the length of her tongue as it dives into your slippery depths and curls tightly around your clit, jacking it up and down like a cock.  Your girl-cum soaks her chin, drooling happily as she pleasures you.  ");
+				if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_SLAVERING) outputText("Your hips quiver and grind against her face as her unusually long tongue simultaneously probes your depths and works your clit, wrapping around it and jerking it like a cock.   You squirt and drool constantly from her skilled assault, soaking her face and hair with your girl-cum.  ");
 				if (player.clitLength > 3 && player.clitLength < 5) outputText("Your hips piston your huge clit into her mouth with no warning, forcing her to give your clit a blowjob.  Her slick black lips wrap around it immediately, sucking and licking, filling your body with lust and pleasure.  ");
 				if (player.clitLength >= 5) outputText("Your hips shove your massive clit into her mouth without warning, stretching her slicked lips wide around your very un-womanly appendage.   She reacts immediately, sucking it into her mouth and throat.  Her tongue curls around it and begins to caress it sensually as she lets you hammer it in and out of her open throat.  Instinctively you mash your face into her sweetened cunt, losing all control of your lower body as it face-fucks her with reckless abandon.  ");
 				//New PG - orgasm
@@ -1666,9 +1669,9 @@ public class BeeGirlScene extends BaseContent
 			if (player.isTaur()) outputText("as you idly fondle your [allbreasts] as you feel your blood-gorged [cocks] swaying under your belly.  ");
 			else outputText("as you disrobe, revealing your [allbreasts], " + vaginaDescript(0) + ", and [cocks].  ");
 			outputText("You step forwards, straddling her and rubbing your outer lips in preparation.  ");
-			if (player.vaginas[0].vaginalWetness <= AppearanceDefs.VAGINA_WETNESS_NORMAL) outputText("Your " + vaginaDescript(0) + " becomes puffy and moist with excitement, ready for what you have planned.");
-			if (player.vaginas[0].vaginalWetness > AppearanceDefs.VAGINA_WETNESS_NORMAL && player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_DROOLING) outputText("Your " + vaginaDescript(0) + " squicks wetly from your gentle ministrations as your vulva become sensitive and engorged.");
-			if (player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_DROOLING) outputText("Your " + vaginaDescript(0) + " gushes in response, dripping steadily over your victim's face, covering it with a spattering of girl-cum.");
+			if (player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_NORMAL) outputText("Your " + vaginaDescript(0) + " becomes puffy and moist with excitement, ready for what you have planned.");
+			if (player.vaginas[0].vaginalWetness > VaginaClass.WETNESS_NORMAL && player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_DROOLING) outputText("Your " + vaginaDescript(0) + " squicks wetly from your gentle ministrations as your vulva become sensitive and engorged.");
+			if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_DROOLING) outputText("Your " + vaginaDescript(0) + " gushes in response, dripping steadily over your victim's face, covering it with a spattering of girl-cum.");
 			//New PG
 			outputText("\n\nWithout warning, you plant your crotch onto her face, gyrating over her mouth as the defeated bee-maiden struggles against you.  ");
 			//BALLZ
@@ -1755,7 +1758,7 @@ public class BeeGirlScene extends BaseContent
 
 			//[random effects: roll for one
 			var choices:Array = [];
-			if (player.tongueType == AppearanceDefs.TONGUE_SNAKE) choices[choices.length] = 0;
+			if (player.tongueType == Tongue.SNAKE) choices[choices.length] = 0;
 			if (player.hasCock()) choices[choices.length] = 1;
 			if (player.hasVagina()) choices[choices.length] = 2;
 			if (player.biggestTitSize() >= 4) choices[choices.length] = 3;
@@ -1937,9 +1940,9 @@ public class BeeGirlScene extends BaseContent
 			}
 			//[Player is female]
 			else if (player.gender == 2 || (player.gender == 3 && rand(2) == 0)) {
-				if (player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_WET) outputText("Damp");
-				else if (player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_DROOLING) outputText("Wet");
-				else if (player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_SLAVERING) outputText("Dripping");
+				if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_WET) outputText("Damp");
+				else if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_DROOLING) outputText("Wet");
+				else if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLAVERING) outputText("Dripping");
 				else outputText("Soaking");
 				outputText(" with lubrication, you demand to be satisfied. With one hand you point to your " + vaginaDescript(0) + ", and you snap your fingers with the other. Your prey saunters up to you with a vacant, distant look in her eyes and begins to remove your [armor] obediently. You tenderly caress her cheek as she finishes, and watch a rosy glow infuse her skin. Your captive handmaiden runs her hands tenderly up your body, smoothing the flesh of your " + biggestBreastSizeDescript() + " and making you pant. You allow yourself to enjoy the sensation for a brief while, and just before you can snap your fingers again, she goes down on her own.\n\n");
 
@@ -1951,9 +1954,9 @@ public class BeeGirlScene extends BaseContent
 				outputText("You cry out when her tongue finds your G-spot, barely maintaining focus. Sensing your approval, she begins probing the same area until she has you crying out again, and begins hammering at the spongy tissue.\n\n");
 
 				outputText("A feeling like the urge to pee overwhelms you, and lost inside to your pleasure, you give in.  ");
-				if (player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_SLICK) outputText("A few drops ");
-				else if (player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_DROOLING) outputText("A gush ");
-				else if (player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_SLAVERING) outputText("Wave after wave ");
+				if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLICK) outputText("A few drops ");
+				else if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_DROOLING) outputText("A gush ");
+				else if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLAVERING) outputText("Wave after wave ");
 				else outputText("Buckets ");
 				outputText("of female ejaculate sluice down her cheeks and she coos happily. She retracts her tongue and presses her face into your tender flesh, pantomiming affection but still looking up at you blankly.\n\n");
 
@@ -2071,7 +2074,7 @@ public class BeeGirlScene extends BaseContent
 		{
 			clearOutput();
 			outputText("You stand over the defeated bee, sizing up your latest catch.  She watches you fearfully as your gaze slides down her prone form, taking in every inch of her body.  Your eyes stop over her abdomen as you notice the girl's dripping, barely concealed ovipositor.  A wide");
-			if (player.faceType == AppearanceDefs.FACE_SNAKE_FANGS || player.faceType == AppearanceDefs.FACE_SPIDER_FANGS) outputText(", fanged");
+			if (player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS) outputText(", fanged");
 			outputText("smile breaks across your face, and your captive quivers in response.  Her eyes flick from your mouth to your spider half, and she shivers again.");
 
 			outputText("\n\nYou lower your torso toward her, leaning in close enough that she can feel each breath on her skin.  She's frozen in place now, every muscle clenched tight with terror, and you savor her fear as you run your tongue up her neck.  Picking the insect-girl up by her shoulders, you release a contented \"<i>Mmmm</i>\" into her ear before flipping her over and dropping her, leaving the  bee face down in the dirt.");

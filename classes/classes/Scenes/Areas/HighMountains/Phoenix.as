@@ -1,6 +1,12 @@
 package classes.Scenes.Areas.HighMountains 
 {
 import classes.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Skin;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
@@ -120,18 +126,18 @@ public class Phoenix extends Monster
 			this.long = "The figure facing you is one of the dangerous hybrids of the Salamander and Harpy races; a Phoenix created by the self proclaimed harpy \"Queen\". Her appearance is close to a normal, crimson-feathered harpy, save for a few noticeable additions. Wings larger than a normal harpy’s sprout from her back, probably to make up for the fact that the usual harpy armwings fade into scaled forearms, an obvious marker of her Salamander parentage. Her lower body is much the same, feather-covered hips and thighs merging with scales around the knee and ending in a clawed lizard foot; not to mention the long, fiery tail that swishes to and from behind her as she circles you. \n\nStanding perhaps six and a half feet tall, her large breasts strain against the tarnished metal of her vest, just as her ample hips threaten to burst free from her tight loincloth. A half-erect lizard cock pokes out pushing the cloth to one side and allowing for a clear view of her slick, puffy pussy just below it. Her scimitar cuts great swaths through the air as she darts through the air above you, taking full advantage of the open space you find yourselves in.";
 			// this.plural = false;
 			this.createCock(8, 1.2, CockTypesEnum.LIZARD);
-			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLICK, AppearanceDefs.VAGINA_LOOSENESS_LOOSE);
+			this.createVagina(false, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_LOOSE);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("D"));
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_MOIST;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_MOIST;
 			this.createStatusEffect(StatusEffects.BonusACapacity,20,0,0,0);
 			this.tallness = 6 * 12 + 6;
-			this.tailType = AppearanceDefs.TAIL_TYPE_SALAMANDER;
-			this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
-			this.buttRating = AppearanceDefs.BUTT_RATING_JIGGLY;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_SALAMANDER;
-			this.skin.growCoat(AppearanceDefs.SKIN_COAT_SCALES,{color:"crimson"});
+			this.tailType = Tail.SALAMANDER;
+			this.hipRating = Hips.RATING_CURVY;
+			this.buttRating = Butt.RATING_JIGGLY;
+			this.lowerBody = LowerBody.SALAMANDER;
+			this.skin.growCoat(Skin.SCALES,{color:"crimson"});
 			this.skin.base.color = "light";
 			this.hairColor = "red";
 			this.hairLength = 16;
@@ -152,7 +158,7 @@ public class Phoenix extends Monster
 			this.drop = new ChainedDrop().add(useables.EBONBLO,1/20)
 					.add(weapons.SCIMITR,1/20)
 					.elseDrop(consumables.NOCELIQ);
-			this.wingType = AppearanceDefs.WING_TYPE_FEATHERED_PHOENIX;
+			this.wingType = Wings.FEATHERED_PHOENIX;
 			this.special1 = doubleSlash;
 			this.special2 = phoenixFireBreath;
 			this.special3 = lustBang;

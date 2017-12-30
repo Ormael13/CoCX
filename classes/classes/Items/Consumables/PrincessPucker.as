@@ -1,6 +1,6 @@
 package classes.Items.Consumables 
 {
-import classes.AppearanceDefs;
+import classes.BodyParts.LowerBody;
 import classes.Items.Consumable;
 import classes.Items.ConsumableLib;
 
@@ -28,7 +28,7 @@ public class PrincessPucker extends Consumable
 				dynStats("lus-", 20, "sen-", 2);
 			}
 
-			if (player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE && player.hairColor != "pink")
+			if (player.lowerBody != LowerBody.GARGOYLE && player.hairColor != "pink")
 			{
 				if (rand(5) == 0)
 				{

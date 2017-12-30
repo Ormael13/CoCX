@@ -1,12 +1,20 @@
 ﻿package classes {
+import classes.BodyParts.Antennae;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Beard;
+import classes.BodyParts.Ears;
+import classes.BodyParts.Eyes;
+import classes.BodyParts.Face;
+import classes.BodyParts.Gills;
+import classes.BodyParts.Horns;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.RearBody;
 import classes.BodyParts.Skin;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Tongue;
+import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.NPCs.JojoScene;
-
-import coc.view.BoundClip;
-
-import coc.view.CharView;
 
 import coc.xxc.BoundStory;
 import coc.xxc.Story;
@@ -193,7 +201,7 @@ public class PlayerAppearance extends BaseContent {
 		outputText("\n");
 	}
 	outputText("\n");
-	if(player.gillType == AppearanceDefs.GILLS_ANEMONE)
+	if(player.gillType == Gills.ANEMONE)
 		outputText("A pair of feathery gills are growing out just below your neck, spreading out horizontally and draping down your chest.  They allow you to stay in the water for quite a long time.  ");
 	//Chesticles..I mean bewbz.
 	if(player.breastRows.length == 1)
@@ -243,7 +251,7 @@ public class PlayerAppearance extends BaseContent {
 		outputText("\n");
 	}
 	//Crotchial stuff - mention snake
-	if(player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_NAGA && player.gender > 0)
+	if(player.lowerBody == LowerBody.NAGA && player.gender > 0)
 	{
 		outputText("\nYour sex");
 		if(player.gender == 3 || player.cockTotal() > 1)
@@ -252,7 +260,7 @@ public class PlayerAppearance extends BaseContent {
 		outputText("concealed within a cavity in your tail when not in use, though when the need arises, you can part your concealing slit and reveal your true self.\n");
 	}
 	//Crotchial stuff - mention scylla
-	if(player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_SCYLLA)
+	if(player.lowerBody == LowerBody.SCYLLA)
 	{
 		if(player.gender == 1)
 		{
@@ -550,9 +558,9 @@ public class PlayerAppearance extends BaseContent {
 	{
 		if(player.hasStatusEffect(StatusEffects.Uniball))
 		{
-			if(player.skinType != AppearanceDefs.SKIN_TYPE_GOO)
+			if(player.skinType != Skin.GOO)
 				outputText("Your [sack] clings tightly to your groin, holding [balls] snugly against you.");
-			else if(player.skinType == AppearanceDefs.SKIN_TYPE_GOO)
+			else if(player.skinType == Skin.GOO)
 				outputText("Your [sack] clings tightly to your groin, dripping and holding [balls] snugly against you.");
 		}
 		else {
@@ -576,13 +584,13 @@ public class PlayerAppearance extends BaseContent {
 				outputText("A [sack]" + sdesc + " with [balls] swings heavily" + swingsWhere);
 			else if (player.hasFur())
 				outputText("A fuzzy [sack] filled with [balls] swings low" + swingsWhere);
-			else if (player.hasCoatOfType(AppearanceDefs.SKIN_COAT_CHITIN))
+			else if (player.hasCoatOfType(Skin.CHITIN))
 				outputText("A chitin [sack] hugs your [balls] tightly against your body.");
 			else if (player.hasScales())
 				outputText("A scaley [sack] hugs your [balls] tightly against your body.");
-			else if (player.skinType == AppearanceDefs.SKIN_TYPE_STONE)
+			else if (player.skinType == Skin.STONE)
 				outputText("A stone-solid sack with [balls] swings heavily" + swingsWhere);
-			else if (player.skinType == AppearanceDefs.SKIN_TYPE_GOO)
+			else if (player.skinType == Skin.GOO)
 				outputText("An oozing, semi-solid sack with [balls] swings heavily" + swingsWhere);
 		}
 		outputText("  You estimate each of them to be about " + num2Text(Math.round(player.ballSize)) + " ");
@@ -612,21 +620,21 @@ public class PlayerAppearance extends BaseContent {
 
 		{
 			//Wetness
-			if(player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_WET && player.vaginas[0].vaginalWetness< AppearanceDefs.VAGINA_WETNESS_DROOLING)
+			if(player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_WET && player.vaginas[0].vaginalWetness< VaginaClass.WETNESS_DROOLING)
 				outputText("Moisture gleams in ");
-			if(player.vaginas[0].vaginalWetness>= AppearanceDefs.VAGINA_WETNESS_DROOLING)
+			if(player.vaginas[0].vaginalWetness>= VaginaClass.WETNESS_DROOLING)
 			{
 				outputText("Occasional beads of ");
 				outputText("lubricant drip from ");
 			}
 			//Different description based on vag looseness
-			if(player.vaginas[0].vaginalWetness>= AppearanceDefs.VAGINA_WETNESS_WET)
+			if(player.vaginas[0].vaginalWetness>= VaginaClass.WETNESS_WET)
 			{
-				if(player.vaginas[0].vaginalLooseness< AppearanceDefs.VAGINA_LOOSENESS_LOOSE)
+				if(player.vaginas[0].vaginalLooseness< VaginaClass.LOOSENESS_LOOSE)
 					outputText("your " + vaginaDescript(0) + ". ");
-				if(player.vaginas[0].vaginalLooseness>= AppearanceDefs.VAGINA_LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness< AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE)
+				if(player.vaginas[0].vaginalLooseness>= VaginaClass.LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness< VaginaClass.LOOSENESS_GAPING_WIDE)
 					outputText("your " + vaginaDescript(0) + ", its lips slightly parted. ");
-				if(player.vaginas[0].vaginalLooseness>= AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE)
+				if(player.vaginas[0].vaginalLooseness>= VaginaClass.LOOSENESS_GAPING_WIDE)
 					outputText("the massive hole that is your " + vaginaDescript(0) + ".  ");
 			}
 		}
@@ -634,54 +642,54 @@ public class PlayerAppearance extends BaseContent {
 
 		{
 			//Wetness
-			if(player.vaginas[0].vaginalWetness< AppearanceDefs.VAGINA_WETNESS_WET)
+			if(player.vaginas[0].vaginalWetness< VaginaClass.WETNESS_WET)
 				outputText("Moisture gleams in ");
-			if(player.vaginas[0].vaginalWetness>= AppearanceDefs.VAGINA_WETNESS_WET && player.vaginas[0].vaginalWetness< AppearanceDefs.VAGINA_WETNESS_DROOLING)
+			if(player.vaginas[0].vaginalWetness>= VaginaClass.WETNESS_WET && player.vaginas[0].vaginalWetness< VaginaClass.WETNESS_DROOLING)
 			{
 				outputText("Occasional beads of ");
 				outputText("lubricant drip from ");
 			}
-			if(player.vaginas[0].vaginalWetness>= AppearanceDefs.VAGINA_WETNESS_DROOLING)
+			if(player.vaginas[0].vaginalWetness>= VaginaClass.WETNESS_DROOLING)
 			{
 				outputText("Thin streams of ");
 				outputText("lubricant occasionally dribble from ");
 			}
 			//Different description based on vag looseness
-			if(player.vaginas[0].vaginalLooseness< AppearanceDefs.VAGINA_LOOSENESS_LOOSE)
+			if(player.vaginas[0].vaginalLooseness< VaginaClass.LOOSENESS_LOOSE)
 				outputText("your " + vaginaDescript(0) + ". ");
-			if(player.vaginas[0].vaginalLooseness>= AppearanceDefs.VAGINA_LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness< AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE)
+			if(player.vaginas[0].vaginalLooseness>= VaginaClass.LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness< VaginaClass.LOOSENESS_GAPING_WIDE)
 				outputText("your " + vaginaDescript(0) + ", its lips slightly parted. ");
-			if(player.vaginas[0].vaginalLooseness>= AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE)
+			if(player.vaginas[0].vaginalLooseness>= VaginaClass.LOOSENESS_GAPING_WIDE)
 				outputText("the massive hole that is your " + vaginaDescript(0) + ".  ");
 		}
 		if((player.lib> 80 || player.lust > 80)) //WTF horny!
 
 		{
 			//Wetness
-			if(player.vaginas[0].vaginalWetness< AppearanceDefs.VAGINA_WETNESS_WET)
+			if(player.vaginas[0].vaginalWetness< VaginaClass.WETNESS_WET)
 
 			{
 				outputText("Occasional beads of ");
 				outputText("lubricant drip from ");
 			}
-			if(player.vaginas[0].vaginalWetness>= AppearanceDefs.VAGINA_WETNESS_WET && player.vaginas[0].vaginalWetness< AppearanceDefs.VAGINA_WETNESS_DROOLING)
+			if(player.vaginas[0].vaginalWetness>= VaginaClass.WETNESS_WET && player.vaginas[0].vaginalWetness< VaginaClass.WETNESS_DROOLING)
 
 			{
 				outputText("Thin streams of ");
 				outputText("lubricant occasionally dribble from ");
 			}
-			if(player.vaginas[0].vaginalWetness>= AppearanceDefs.VAGINA_WETNESS_DROOLING)
+			if(player.vaginas[0].vaginalWetness>= VaginaClass.WETNESS_DROOLING)
 
 			{
 				outputText("Thick streams of ");
 				outputText("lubricant drool constantly from ");
 			}
 			//Different description based on vag looseness
-			if(player.vaginas[0].vaginalLooseness< AppearanceDefs.VAGINA_LOOSENESS_LOOSE)
+			if(player.vaginas[0].vaginalLooseness< VaginaClass.LOOSENESS_LOOSE)
 				outputText("your " + vaginaDescript(0) + ". ");
-			if(player.vaginas[0].vaginalLooseness>= AppearanceDefs.VAGINA_LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness< AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE)
+			if(player.vaginas[0].vaginalLooseness>= VaginaClass.LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness< VaginaClass.LOOSENESS_GAPING_WIDE)
 				outputText("your " + vaginaDescript(0) + ", its lips slightly parted. ");
-			if(player.vaginas[0].vaginalLooseness>= AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE)
+			if(player.vaginas[0].vaginalLooseness>= VaginaClass.LOOSENESS_GAPING_WIDE)
 				outputText("the massive hole that is your cunt.  ");
 		}
 		//Line Drop for next descript!
@@ -750,8 +758,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText(" covered with [skin coat]");
 		}
 		outputText(", arms, hands and fingers.");
-		if (player.skin.base.pattern == AppearanceDefs.PATTERN_ORCA_UNDERBODY) outputText(" However your skin is [skin color] with a [skin color2] underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of an orca.");
-		if (player.skin.base.pattern == AppearanceDefs.PATTERN_RED_PANDA_UNDERBODY) outputText(" Your body is covered from head to toe in [skin color] with a [skin color2] underbelly, giving to your nimble frame a red-panda appearance.");
+		if (player.skin.base.pattern == Skin.PATTERN_ORCA_UNDERBODY) outputText(" However your skin is [skin color] with a [skin color2] underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of an orca.");
+		if (player.skin.base.pattern == Skin.PATTERN_RED_PANDA_UNDERBODY) outputText(" Your body is covered from head to toe in [skin color] with a [skin color2] underbelly, giving to your nimble frame a red-panda appearance.");
 	}
 	public function describeGear():void {
 		// story.display("gear");
@@ -778,22 +786,22 @@ public class PlayerAppearance extends BaseContent {
 		outputText(" tall [malefemaleherm] [race], with [bodytype].");
 	}
 	public function describeLowerBody():void {
-		if (player.isTaur() || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_DRIDER_LOWER_BODY || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_SCYLLA || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER) {
-			if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HOOFED)
+		if (player.isTaur() || player.lowerBody == LowerBody.DRIDER || player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.PLANT_FLOWER) {
+			if (player.lowerBody == LowerBody.HOOFED)
 				outputText("  From the waist down you have the body of a horse, with all " + num2Text(player.legCount) + " legs capped by hooves.");
-			else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PONY)
+			else if (player.lowerBody == LowerBody.PONY)
 				outputText("  From the waist down you have an incredibly cute and cartoonish parody of a horse's body, with all " + num2Text(player.legCount) + " legs ending in flat, rounded feet.");
-			else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_DRIDER_LOWER_BODY)
+			else if (player.lowerBody == LowerBody.DRIDER)
 				outputText("  Where your legs would normally start you have grown the body of a spider, with " + num2Text(player.legCount) + " spindly legs that sprout from its sides.");
-			else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_SCYLLA)
+			else if (player.lowerBody == LowerBody.SCYLLA)
 				outputText("  Where your legs would normally start you have grown the body of an octopus, with " + num2Text(player.legCount) + " tentacle legs that sprout from your [hips].");
-			else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER)
+			else if (player.lowerBody == LowerBody.PLANT_FLOWER)
 				outputText("  Around your waist, the petals of a large pink orchid expand, big enough to engulf you entirely on their own, coupled with a pitcher-like structure in the centre, which is filled with syrupy nectar straight from your loins. When you wish to rest, these petals draw up around you, encapsulating you in a beautiful bud.  While you don't technically have legs anymore, you can still move around on your " + num2Text(player.legCount) + " vine-like stamens.");
 			else
 				outputText("  Where your legs would normally start you have grown the body of a feral animal, with all " + num2Text(player.legCount) + " legs.");
 		}
 		//Hip info only displays if you aren't a centaur.
-		if (player.isBiped() || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_NAGA) {
+		if (player.isBiped() || player.lowerBody == LowerBody.NAGA) {
 			if (player.thickness > 70) {
 				outputText("  You have " + hipDescript());
 				if (player.hipRating < 6) {
@@ -896,7 +904,7 @@ public class PlayerAppearance extends BaseContent {
 			}
 		}
 		//Non-horse PCs
-		else if (player.isBiped() || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_NAGA) {
+		else if (player.isBiped() || player.lowerBody == LowerBody.NAGA) {
 			//TUBBY ASS
 			if (player.tone < 60) {
 				outputText(" your " + buttDescript());
@@ -934,102 +942,102 @@ public class PlayerAppearance extends BaseContent {
 		describeTail();
 		//</mod>
 		//LOWERBODY SPECIAL
-		if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HUMAN)
+		if (player.lowerBody == LowerBody.HUMAN)
 			outputText("  " + Num2Text(player.legCount) + " normal human legs grow down from your waist, ending in normal human feet.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_FERRET)
+		else if (player.lowerBody == LowerBody.FERRET)
 			outputText("  " + Num2Text(player.legCount) + " furry, digitigrade legs form below your [hips].  The fur is thinner on the feet, and your toes are tipped with claws.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HOOFED)
+		else if (player.lowerBody == LowerBody.HOOFED)
 			outputText("  Your " + num2Text(player.legCount) + " legs are muscled and jointed oddly, covered in [skin coat.color] fur, and end in a bestial hooves.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_DOG)
+		else if (player.lowerBody == LowerBody.DOG)
 			outputText("  " + Num2Text(player.legCount) + " digitigrade legs grow downwards from your waist, ending in dog-like hind-paws.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_WOLF)
+		else if (player.lowerBody == LowerBody.WOLF)
 			outputText("  " + Num2Text(player.legCount) + " digitigrade legs grow downwards from your waist, ending in clawed wolf-like hind-paws.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_NAGA)
+		else if (player.lowerBody == LowerBody.NAGA)
 			outputText("  Below your waist your flesh is fused together into a very long snake-like tail.");
 		//Horse body is placed higher for readability purposes
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS)
+		else if (player.lowerBody == LowerBody.DEMONIC_HIGH_HEELS)
 			outputText("  Your " + num2Text(player.legCount) + " perfect lissome legs end in mostly human feet, apart from the horn protruding straight down from the heel that forces you to walk with a sexy, swaying gait.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_DEMONIC_CLAWS)
+		else if (player.lowerBody == LowerBody.DEMONIC_CLAWS)
 			outputText("  Your " + num2Text(player.legCount) + " lithe legs are capped with flexible clawed feet.  Sharp black nails grow where once you had toe-nails, giving you fantastic grip.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_BEE)
+		else if (player.lowerBody == LowerBody.BEE)
 			outputText("  Your " + num2Text(player.legCount) + " legs are covered in a shimmering insectile carapace up to mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.  A bit of downy yellow and black fur fuzzes your upper thighs, just like a bee.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_GOO)
+		else if (player.lowerBody == LowerBody.GOO)
 			outputText("  In place of legs you have a shifting amorphous blob.  Thankfully it's quite easy to propel yourself around on.  The lowest portions of your [armor] float around inside you, bringing you no discomfort.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CAT)
+		else if (player.lowerBody == LowerBody.CAT)
 			outputText("  " + Num2Text(player.legCount) + " digitigrade legs grow downwards from your waist, ending in soft, padded cat-paws.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_LIZARD)
+		else if (player.lowerBody == LowerBody.LIZARD)
 			outputText("  " + Num2Text(player.legCount) + " digitigrade legs grow down from your " + hipDescript() + ", ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_SALAMANDER)
+		else if (player.lowerBody == LowerBody.SALAMANDER)
 			outputText("  " + Num2Text(player.legCount) + " digitigrade legs covered in thick, leathery red scales up to the mid-thigh grow down from your " + hipDescript() + ", ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_BUNNY)
+		else if (player.lowerBody == LowerBody.BUNNY)
 			outputText("  Your " + num2Text(player.legCount) + " legs thicken below the waist as they turn into soft-furred rabbit-like legs.  You even have large bunny feet that make hopping around a little easier than walking.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HARPY)
+		else if (player.lowerBody == LowerBody.HARPY)
 			outputText("  Your " + num2Text(player.legCount) + " legs are covered with [haircolor] plumage.  Thankfully the thick, powerful thighs are perfect for launching you into the air, and your feet remain mostly human, even if they are two-toed and tipped with talons.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_KANGAROO)
+		else if (player.lowerBody == LowerBody.KANGAROO)
 			outputText("  Your " + num2Text(player.legCount) + " furry legs have short thighs and long calves, with even longer feet ending in prominently-nailed toes.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS)
+		else if (player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS)
 			outputText("  Your " + num2Text(player.legCount) + " legs are covered in a reflective black, insectile carapace up to your mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_FOX)
+		else if (player.lowerBody == LowerBody.FOX)
 			outputText("  Your " + num2Text(player.legCount) + " legs are crooked into high knees with hocks and long feet, like those of a fox; cute bulbous toes decorate the ends.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_DRAGON)
+		else if (player.lowerBody == LowerBody.DRAGON)
 			outputText("  " + Num2Text(player.legCount) + " human-like legs grow down from your " + hipDescript() + ", sheathed in scales and ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_RACCOON)
+		else if (player.lowerBody == LowerBody.RACCOON)
 			outputText("  Your " + num2Text(player.legCount) + " legs, though covered in fur, are humanlike.  Long feet on the ends bear equally long toes, and the pads on the bottoms are quite sensitive to the touch.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CLOVEN_HOOFED)
+		else if (player.lowerBody == LowerBody.CLOVEN_HOOFED)
 			outputText("  " + Num2Text(player.legCount) + " digitigrade legs form below your [hips], ending in cloven hooves.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_MANTIS)
+		else if (player.lowerBody == LowerBody.MANTIS)
 			outputText("  Your " + num2Text(player.legCount) + " legs are covered in a shimmering green, insectile carapace up to mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_SHARK)
+		else if (player.lowerBody == LowerBody.SHARK)
 			outputText("  Your " + num2Text(player.legCount) + " legs are mostly human save for the webing between your toes.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE) {
+		else if (player.lowerBody == LowerBody.GARGOYLE) {
 			outputText("  Your " + num2Text(player.legCount) + " digitigrade ");
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("marble");
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("alabaster");
 			outputText(" legs end in sharp-clawed stone feet. There are three long toes on the front, and a small hind claw on the back.");
 		}
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE_2) {
+		else if (player.lowerBody == LowerBody.GARGOYLE_2) {
 			outputText("  Your " + num2Text(player.legCount) + " ");
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("marble");
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("alabaster");
 			outputText(" legs aside of their stone structure look pretty much human.");
 		}
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PLANT_HIGH_HEELS)
+		else if (player.lowerBody == LowerBody.PLANT_HIGH_HEELS)
 			outputText("  Your " + num2Text(player.legCount) + " perfect lissome legs end in human feet, apart from delicate vines covered in spade-like leaves crawling around them on the whole length.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PLANT_ROOT_CLAWS)
+		else if (player.lowerBody == LowerBody.PLANT_ROOT_CLAWS)
 			outputText("  Your " + num2Text(player.legCount) + " legs looks quite normal aside feet.  They turned literally into roots only vaguely retaining the shape of the feet.");
-//	else if(player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER)
+//	else if(player.lowerBody == PLANT_FLOWER)
 //		outputText("  Around your waist just under your nectar coated pussy expends the petals of a large orchid big enough to engulf you entirely. While you don't technically have legs you can walk around on your " + num2Text(player.legCount)+ " vines which pretty much look like tentacle cocks.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_LION)
+		else if (player.lowerBody == LowerBody.LION)
 			outputText("  Your " + num2Text(player.legCount) + " legs are covered in [skin coat.color] fur up to the thigh where it fades to white. They end with digitigrade lion paws. You can dash on all fours as gracefully as you would on two legs.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_YETI)
+		else if (player.lowerBody == LowerBody.YETI)
 			outputText("  Your " + num2Text(player.legCount) + " fur covered legs end with a pair of very large yeti feet, leaving large tracks and granting you easy mobility in the snow.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_ORCA)
+		else if (player.lowerBody == LowerBody.ORCA)
 			outputText("  Your " + num2Text(player.legCount) + " legs are mostly human save for the webbing between your toes that assists you in swimming.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_YGG_ROOT_CLAWS)
+		else if (player.lowerBody == LowerBody.YGG_ROOT_CLAWS)
 			outputText("  Your " + num2Text(player.legCount) + " legs looks quite normal until your feet. Your roots have condensed into a self-contained shape of three clawed toes on the front, and a small hind-claw in the back. You doubt they can gather moisture very well like this, but at least you have an excellent grip.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_ONI)
+		else if (player.lowerBody == LowerBody.ONI)
 			outputText("  Your " + num2Text(player.legCount) + " legs are covered with a set of warlike tattoo and your feet end with sharp black nails.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_ELF)
+		else if (player.lowerBody == LowerBody.ELF)
 			outputText("  Your " + num2Text(player.legCount) + " perfect lissom legs end in delicate, but agile elven feet allowing you to move gracefully and swiftly.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_RAIJU)
+		else if (player.lowerBody == LowerBody.RAIJU)
 			outputText("  You have " + num2Text(player.legCount) + " fluffy, furred legs that look vaguely like kneehigh socks. Your pawed feet end in four thick toes, which serve as your main source of balance. You can walk on them as normally as your old plantigrade legs. A thick strand of darkly colored fur breaks out from your ankles, emulating a bolt of lighting in appearance.");
-		else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_RED_PANDA)
+		else if (player.lowerBody == LowerBody.RED_PANDA)
 			outputText("  Your " + num2Text(player.legCount) + " legs are equally covered in [skin coat.color] fur, ending on red-panda paws with short claws. They have a nimble and strong build, in case you need to escape from something.");
 		if (player.findPerk(PerkLib.Incorporeality) >= 0)
 			outputText("  Of course, your [legs] are partially transparent due to their ghostly nature."); // isn't goo transparent anyway?
 	}
 	public function describeTail():void {
-		if (player.tailType == AppearanceDefs.TAIL_TYPE_HORSE)
+		if (player.tailType == Tail.HORSE)
 			outputText("  A long [skin coat.color] horsetail hangs from your " + buttDescript() + ", smooth and shiny.");
-		if (player.tailType == AppearanceDefs.TAIL_TYPE_FERRET)
+		if (player.tailType == Tail.FERRET)
 			outputText("  A long ferret tail sprouts from above your [butt].  It is thin, tapered, and covered in shaggy [skin coat.color] fur.");
-		if (player.tailType == AppearanceDefs.TAIL_TYPE_DOG)
+		if (player.tailType == Tail.DOG)
 			outputText("  A fuzzy [skin coat.color] dogtail sprouts just above your " + buttDescript() + ", wagging to and fro whenever you are happy.");
-		if (player.tailType == AppearanceDefs.TAIL_TYPE_DEMONIC)
+		if (player.tailType == Tail.DEMONIC)
 			outputText("  A narrow tail ending in a spaded tip curls down from your " + buttDescript() + ", wrapping around your [leg] sensually at every opportunity.");
-		if (player.tailType == AppearanceDefs.TAIL_TYPE_COW)
+		if (player.tailType == Tail.COW)
 			outputText("  A long cowtail with a puffy tip swishes back and forth as if swatting at flies.");
-		if (player.tailType == AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN) {
+		if (player.tailType == Tail.SPIDER_ADBOMEN) {
 			outputText("  A large, spherical spider-abdomen has grown out from your backside, covered in shiny black chitin.  Though it's heavy and bobs with every motion, it doesn't seem to slow you down.");
 			if (player.tailVenom > 50 && player.tailVenom < 80)
 				outputText("  Your bulging arachnid posterior feels fairly full of webbing.");
@@ -1038,7 +1046,7 @@ public class PlayerAppearance extends BaseContent {
 			if (player.tailVenom == 100)
 				outputText("  Your swollen spider-butt is distended with the sheer amount of webbing it's holding.");
 		}
-		if (player.tailType == AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN) {
+		if (player.tailType == Tail.BEE_ABDOMEN) {
 			outputText("  A large insectile bee-abdomen dangles from just above your backside, bobbing with its own weight as you shift.  It is covered in hard chitin with black and yellow stripes, and tipped with a dagger-like stinger.");
 			if (player.tailVenom > 50 && player.tailVenom < 80)
 				outputText("  A single drop of poison hangs from your exposed stinger.");
@@ -1047,7 +1055,7 @@ public class PlayerAppearance extends BaseContent {
 			if (player.tailVenom == 100)
 				outputText("  Venom drips from your poisoned stinger regularly.");
 		}
-		if (player.tailType == AppearanceDefs.TAIL_TYPE_SCORPION) {
+		if (player.tailType == Tail.SCORPION) {
 			outputText("  A large insectile scorpion-like tail dangles from just above your backside, bobbing with its own weight as you shift.  It is covered in hard chitin and tipped with a stinger.");
 			if (player.tailVenom > 75 && player.tailVenom < 120)
 				outputText("  A single drop of poison hangs from your exposed stinger.");
@@ -1056,230 +1064,230 @@ public class PlayerAppearance extends BaseContent {
 			if (player.tailVenom == 150)
 				outputText("  Venom drips from your poisoned stinger regularly.");
 		}
-		if (player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL) {
+		if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
 			outputText("  Your tail is covered in armored chitin from the base to the tip, it ends in a flower-like bulb. You can open and close your tail tip at will and its pussy-like interior can be used to milk male organs. ");
 			outputText("The deadly set of spikes covering the tip regularly drips with your potent venom. When impaling your tail spikes in a prey isn’t enough you can fling them at a target on a whim like the most talented archer.");
 		}
-		if (player.tailType == AppearanceDefs.TAIL_TYPE_MANTIS_ABDOMEN)
+		if (player.tailType == Tail.MANTIS_ABDOMEN)
 			outputText("  A large insectile mantis-abdomen dangles from just above your backside, bobbing with its own weight as you shift.  It is covered in hard greenish chitinous material.");
-		if (player.tailType == AppearanceDefs.TAIL_TYPE_SHARK) {
+		if (player.tailType == Tail.SHARK) {
 			outputText("  A long shark-tail trails down from your backside, swaying to and fro while giving you a dangerous air.");
 		}
-		if (player.tailType == AppearanceDefs.TAIL_TYPE_CAT) {
+		if (player.tailType == Tail.CAT) {
 			outputText("  A soft [skin coat.color] cat-tail sprouts just above your " + buttDescript() + ", curling and twisting with every step to maintain perfect balance.");
 		}
-		if (player.tailType == AppearanceDefs.TAIL_TYPE_LIZARD) {
+		if (player.tailType == Tail.LIZARD) {
 			outputText("  A tapered tail hangs down from just above your " + assDescript() + ".  It sways back and forth, assisting you with keeping your balance.");
 		}
-		if (player.tailType == AppearanceDefs.TAIL_TYPE_SALAMANDER) {
+		if (player.tailType == Tail.SALAMANDER) {
 			outputText("  A tapered, covered in red scales tail hangs down from just above your " + assDescript() + ".  It sways back and forth, assisting you with keeping your balance. When you are in battle or when you want could set ablaze whole tail in red-hot fire.");
 		}
-		if (player.tailType == AppearanceDefs.TAIL_TYPE_RABBIT)
+		if (player.tailType == Tail.RABBIT)
 			outputText("  A short, soft bunny tail sprouts just above your " + assDescript() + ", twitching constantly whenever you don't think about it.");
-		else if (player.tailType == AppearanceDefs.TAIL_TYPE_HARPY)
+		else if (player.tailType == Tail.HARPY)
 			outputText("  A tail of feathers fans out from just above your " + assDescript() + ", twitching instinctively to help guide you if you were to take flight.");
-		else if (player.tailType == AppearanceDefs.TAIL_TYPE_KANGAROO) {
+		else if (player.tailType == Tail.KANGAROO) {
 			outputText("  A conical, ");
 			if (player.hasFur()) outputText("furry, " + player.coatColor);
 			else outputText("gooey, " + player.skinTone);
 			outputText(", tail extends from your " + assDescript() + ", bouncing up and down as you move and helping to counterbalance you.");
 		}
-		else if (player.tailType == AppearanceDefs.TAIL_TYPE_FOX) {
+		else if (player.tailType == Tail.FOX) {
 			if (player.tailCount <= 1)
 				outputText("  A swishing [skin coat.color] fox's brush extends from your " + assDescript() + ", curling around your body - the soft fur feels lovely.");
 			else outputText("  " + Num2Text(player.tailCount) + " swishing [skin coat.color] fox's tails extend from your " + assDescript() + ", curling around your body - the soft fur feels lovely.");
 		}
-		else if (player.tailType == AppearanceDefs.TAIL_TYPE_DRACONIC) {
+		else if (player.tailType == Tail.DRACONIC) {
 			outputText("  A thin, scaly, prehensile reptilian tail, almost as long as you are tall, swings behind you like a living bullwhip.  Its tip menaces with spikes of bone, meant to deliver painful blows.");
 		}
 		//appearance
-		else if (player.tailType == AppearanceDefs.TAIL_TYPE_RACCOON) {
+		else if (player.tailType == Tail.RACCOON) {
 			outputText("  A black-and-[skin coat.color]-ringed raccoon tail waves behind you.");
 		}
-		else if (player.tailType == AppearanceDefs.TAIL_TYPE_MOUSE) {
+		else if (player.tailType == Tail.MOUSE) {
 			//appearance
 			outputText("  A naked, " + player.skinTone + " mouse tail pokes from your butt, dragging on the ground and twitching occasionally.");
 		}
 		//<mod>
-		else if (player.tailType == AppearanceDefs.TAIL_TYPE_BEHEMOTH) {
+		else if (player.tailType == Tail.BEHEMOTH) {
 			outputText("  A long seemingly-tapering tail pokes from your butt, ending in spikes just like behemoth's.");
 		}
-		else if (player.tailType == AppearanceDefs.TAIL_TYPE_PIG) {
+		else if (player.tailType == Tail.PIG) {
 			outputText("  A short, curly pig tail sprouts from just above your butt.");
 		}
-		else if (player.tailType == AppearanceDefs.TAIL_TYPE_GOAT) {
+		else if (player.tailType == Tail.GOAT) {
 			outputText("  A very short, stubby goat tail sprouts from just above your butt.");
 		}
-		else if (player.tailType == AppearanceDefs.TAIL_TYPE_RHINO) {
+		else if (player.tailType == Tail.RHINO) {
 			outputText("  A ropey rhino tail sprouts from just above your butt, swishing from time to time.");
 		}
-		else if (player.tailType == AppearanceDefs.TAIL_TYPE_ECHIDNA) {
+		else if (player.tailType == Tail.ECHIDNA) {
 			outputText("  A stumpy echidna tail forms just about your [ass].");
 		}
-		else if (player.tailType == AppearanceDefs.TAIL_TYPE_DEER) {
+		else if (player.tailType == Tail.DEER) {
 			outputText("  A very short, stubby deer tail sprouts from just above your butt.");
 		}
-		else if (player.tailType == AppearanceDefs.TAIL_TYPE_WOLF) {
+		else if (player.tailType == Tail.WOLF) {
 			outputText("  A bushy [skin coat.color] wolf tail sprouts just above your " + assDescript() + ", wagging to and fro whenever you are happy.");
 		}
-		else if (player.tailType == AppearanceDefs.TAIL_TYPE_GARGOYLE) {
+		else if (player.tailType == Tail.GARGOYLE) {
 			outputText("  A long spiked tail hangs down from just above your " + assDescript() + ". It sways back and forth assisting in keeping your balance.");
 		}
-		else if (player.tailType == AppearanceDefs.TAIL_TYPE_GARGOYLE_2) {
+		else if (player.tailType == Tail.GARGOYLE_2) {
 			outputText("  A long tail ending with an axe blade on both sides hangs down from just above your " + assDescript() + ". It sways back and forth assisting in keeping your balance.");
 		}
-		else if (player.tailType == AppearanceDefs.TAIL_TYPE_ORCA) {
+		else if (player.tailType == Tail.ORCA) {
 			outputText("  A long, powerful Orca tail trails down from your backside, swaying to and fro, always ready to propulse you through the water or smack an opponent on the head. It has a huge fin at the end and a smaller one not so far from your ass.");
 		}
-		else if (player.tailType == AppearanceDefs.TAIL_TYPE_YGGDRASIL) {
+		else if (player.tailType == Tail.YGGDRASIL) {
 			outputText("  A thin prehensile reptilian tail swings behind, covered by [skin coat]. Adorning the tip of your tail is a leaf, bobbing with each of your tail’s movements.");
 		}
-		else if (player.tailType == AppearanceDefs.TAIL_TYPE_RAIJU) {
+		else if (player.tailType == Tail.RAIJU) {
 			outputText("  Your silky tail extends out from just above your " + assDescript() + ". Its fur is lovely to the touch and almost glows at the tip, letting others know of your lightning based motif.");
 		}
-		else if (player.tailType == AppearanceDefs.TAIL_TYPE_RED_PANDA) {
+		else if (player.tailType == Tail.RED_PANDA) {
 			outputText("  Sprouting from your [ass], you have a long, bushy tail. It has a beautiful pattern of rings in [skin coat.color] fluffy fur. It waves playfully as you walk giving to your step a mesmerizing touch.");
 		}
 	}
 	public function describeArms():void {
 //Wing arms
 		var armType:Number = player.armType;
-		if (armType == AppearanceDefs.ARM_TYPE_HARPY)
+		if (armType == Arms.HARPY)
 			outputText("  Feathers hang off your arms from shoulder to wrist, giving them a slightly wing-like look.");
-		if (armType == AppearanceDefs.ARM_TYPE_PHOENIX)
+		if (armType == Arms.PHOENIX)
 			outputText("  Crimson feathers hang off your arms from shoulder to wrist, giving them a slightly wing-like look.");
-		else if (armType == AppearanceDefs.ARM_TYPE_SPIDER)
+		else if (armType == Arms.SPIDER)
 			outputText("  Shining black exoskeleton covers your arms from the biceps down, resembling a pair of long black gloves from a distance.");
-		else if (armType == AppearanceDefs.ARM_TYPE_MANTIS)
+		else if (armType == Arms.MANTIS)
 			outputText("  Shining green exoskeleton covers your arms from the biceps down with a long and sharp scythes extending from the wrists.");
-		else if (armType == AppearanceDefs.ARM_TYPE_BEE)
+		else if (armType == Arms.BEE)
 			outputText("  Shining black exoskeleton covers your arms from the biceps down, resembling a pair of long black gloves ended with a yellow fuzz from a distance.");
-		else if (armType == AppearanceDefs.ARM_TYPE_SALAMANDER)
+		else if (armType == Arms.SALAMANDER)
 			outputText("  Shining thick, leathery red scales covers your arms from the biceps down and your fingernails are now a short curved claws.");
-		else if (armType == AppearanceDefs.ARM_TYPE_PLANT)
+		else if (armType == Arms.PLANT)
 			outputText("  Delicate vines crawl down from the upper parts of your arms to your wrists covered in spade-like leaves, that bob whenever you move.");
-		else if (armType == AppearanceDefs.ARM_TYPE_PLANT2)
+		else if (armType == Arms.PLANT2)
 			outputText("  Vines crawl down from your shoulders to your wrists, tipped with slits that drool precum. They look like innocent decorations from a distance.");
-		else if (armType == AppearanceDefs.ARM_TYPE_SHARK)
+		else if (armType == Arms.SHARK)
 			outputText("  A middle sized shark-like fin has sprouted on each of your forearms near the elbow.  Additionaly skin between your fingers forming a small webbings helpful when swimming.");
-		else if (armType == AppearanceDefs.ARM_TYPE_GARGOYLE) {
+		else if (armType == Arms.GARGOYLE) {
 			outputText("  Your ");
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("marble");
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("alabaster");
 			outputText(" arms end in stone sharp clawed hands.");
 		}
-		else if (armType == AppearanceDefs.ARM_TYPE_GARGOYLE_2) {
+		else if (armType == Arms.GARGOYLE_2) {
 			outputText("  Your ");
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("marble");
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("alabaster");
 			outputText(" arms end in normal human like hands.");
 		}
-		else if (armType == AppearanceDefs.ARM_TYPE_WOLF || armType == AppearanceDefs.ARM_TYPE_FOX)
+		else if (armType == Arms.WOLF || armType == Arms.FOX)
 			outputText("  Your arms are covered in thick fur ending up with clawed hands with animal like paw pads.");
-		else if (armType == AppearanceDefs.ARM_TYPE_LION)
+		else if (armType == Arms.LION)
 			outputText("  Your arms are covered in [skin coat.color] up to your shoulder where it turns to white. They end with a pair of five-toed lion paws armed with lethal claws.");
-		else if (armType == AppearanceDefs.ARM_TYPE_KITSUNE)
+		else if (armType == Arms.KITSUNE)
 			outputText("  Your arms are somewhat human save for your sharp nails.");
-		else if (armType == AppearanceDefs.ARM_TYPE_LIZARD || armType == AppearanceDefs.ARM_TYPE_DRAGON)
+		else if (armType == Arms.LIZARD || armType == Arms.DRAGON)
 			outputText("  Shining thick, leathery scales covers your arms from the biceps down and your fingernails are now a short curved claws.");
-		else if (armType == AppearanceDefs.ARM_TYPE_YETI)
+		else if (armType == Arms.YETI)
 			outputText("  Your two arms covered with thick fur end with large, powerful yeti hands. You can use them to smash or punch things when you're angry.");
-		else if (armType == AppearanceDefs.ARM_TYPE_ORCA)
+		else if (armType == Arms.ORCA)
 			outputText("  A middle sized orca-like fin has sprouted on each of your forearms near the elbow. Additionally, the skin between your fingers forms a small webbing that is helpful when swimming.");
-		else if (armType == AppearanceDefs.ARM_TYPE_DEVIL)
+		else if (armType == Arms.DEVIL)
 			outputText("  Your forearms are covered with fur and end with four finger paws like hands, but armed with claws. Despite their weird shape you have more then enough manual dexterity to draw even the most complex magical designs when spellcasting.");
-		else if (armType == AppearanceDefs.ARM_TYPE_ONI)
+		else if (armType == Arms.ONI)
 			outputText("  Your arms are mostly human, although covered in warlike tattoos. You have human hands with sharp black nails.");
-		else if (armType == AppearanceDefs.ARM_TYPE_ELF)
+		else if (armType == Arms.ELF)
 			outputText("  Your delicate elven hands are almost supernaturally dexterous allowing you to manipulate objects or cast spells with inhuman agility.");
-		else if (armType == AppearanceDefs.ARM_TYPE_RAIJU)
+		else if (armType == Arms.RAIJU)
 			outputText("  Your arms and hands are practically human save for the sharp white claws that have replaced your normal nails.");
-		else if (armType == AppearanceDefs.ARM_TYPE_RED_PANDA)
+		else if (armType == Arms.RED_PANDA)
 			outputText("  Soft, black-brown fluff cover your arms. Your paws have cute, pink paw pads and short claws.");
-		else if (armType == AppearanceDefs.ARM_TYPE_CAT)
+		else if (armType == Arms.CAT)
 			outputText("  Your arms are covered in [skin coat.color] up to your shoulder. They end with a pair of five-toed cat paws armed with lethal claws.");
-		if (player.wingType == AppearanceDefs.WING_TYPE_BAT_ARM ){
+		if (player.wingType == Wings.BAT_ARM ){
 			outputText("  Your arm bones are thin and light in order to allow flight. You have grown a few extra fingers, which allow you to hold various items even with your abnormal hands, albeit at the cost of preventing flight while doing so.");
 		}
 	}
 	public function describeRearBody():void {
-		if (player.rearBody == AppearanceDefs.REAR_BODY_FENRIR_ICE_SPIKES) {
+		if (player.rearBody == RearBody.FENRIR_ICE_SPIKES) {
 			outputText("  Jagged ice shards grows out of your back providing both excellent defence and giving you a menacing look.");
 		}
-		else if (player.rearBody == AppearanceDefs.REAR_BODY_LION_MANE) {
+		else if (player.rearBody == RearBody.LION_MANE) {
 			outputText("  Around your neck there is a thick mane of fur. It looks great on you.");
 		}
-		else if (player.rearBody == AppearanceDefs.REAR_BODY_SHARK_FIN) {
+		else if (player.rearBody == RearBody.SHARK_FIN) {
 			outputText("  A large shark-like fin has sprouted between your shoulder blades.  With it you have far more control over swimming underwater.");
 		}
-		else if (player.rearBody == AppearanceDefs.REAR_BODY_ORCA_BLOWHOLE) {
+		else if (player.rearBody == RearBody.ORCA_BLOWHOLE) {
 			outputText("  Between your shoulder blades is a blowhole that allows to breath in air from your back while swimming, just like an orca.");
 		}
-		else if (player.rearBody == AppearanceDefs.REAR_BODY_RAIJU_MANE) {
+		else if (player.rearBody == RearBody.RAIJU_MANE) {
 			outputText("  A thick collar of fur grows around your neck. Multiple strands of fur are colored in a dark shade, making it look like a lightning bolt runs along the center of your fur collar.");
 		}
-		if (player.rearBody == AppearanceDefs.REAR_BODY_BAT_COLLAR){
+		if (player.rearBody == RearBody.BAT_COLLAR){
 			outputText("  Around your neck is a thick collar of fur reminiscent of a bat's.");
 		}
 	}
 	public function describeWings():void {
 //WINGS!
 		var wingType:Number = player.wingType;
-		if (wingType == AppearanceDefs.WING_TYPE_BEE_LIKE_SMALL)
+		if (wingType == Wings.BEE_LIKE_SMALL)
 			outputText("  A pair of tiny-yet-beautiful bee-wings sprout from your back, too small to allow you to fly.");
-		if (wingType == AppearanceDefs.WING_TYPE_BEE_LIKE_LARGE)
+		if (wingType == Wings.BEE_LIKE_LARGE)
 			outputText("  A pair of large bee-wings sprout from your back, reflecting the light through their clear membranes beautifully.  They flap quickly, allowing you to easily hover in place or fly.");
-		if (wingType == AppearanceDefs.WING_TYPE_MANTIS_LIKE_SMALL)
+		if (wingType == Wings.MANTIS_LIKE_SMALL)
 			outputText("  A pair of tiny mantis-wings sprout from your back, too small to allow you to fly.");
-		if (wingType == AppearanceDefs.WING_TYPE_MANTIS_LIKE_LARGE)
+		if (wingType == Wings.MANTIS_LIKE_LARGE)
 			outputText("  A pair of large mantis-wings sprout from your back, reflecting the light through their clear membranes beautifully.  They flap quickly, allowing you to easily hover in place or fly.");
-		if (wingType == AppearanceDefs.WING_TYPE_BAT_LIKE_TINY)
+		if (wingType == Wings.BAT_LIKE_TINY)
 			outputText("  A pair of tiny bat-like demon-wings sprout from your back, flapping cutely, but otherwise being of little use.");
-		if (wingType == AppearanceDefs.WING_TYPE_BAT_LIKE_LARGE)
+		if (wingType == Wings.BAT_LIKE_LARGE)
 			outputText("  A pair of large bat-like demon-wings fold behind your shoulders.  With a muscle-twitch, you can extend them, and use them to soar gracefully through the air.");
-		if (wingType == AppearanceDefs.WING_TYPE_BAT_LIKE_LARGE_2)
+		if (wingType == Wings.BAT_LIKE_LARGE_2)
 			outputText("  Two pairs of large bat-like demon-wings fold behind your shoulders.  With a muscle-twitch, you can extend them, and use them to soar gracefully through the air.");
-		if (wingType == AppearanceDefs.WING_TYPE_MANTICORE_LIKE_SMALL)
+		if (wingType == Wings.MANTICORE_LIKE_SMALL)
 			outputText("  A pair of small leathery wings covered with [skin coat.color] fur rest on your back. Despite being too small to allow flight they at least look cute on you.");
-		if (wingType == AppearanceDefs.WING_TYPE_MANTICORE_LIKE_LARGE)
+		if (wingType == Wings.MANTICORE_LIKE_LARGE)
 			outputText("  A pair of large ominous leathery wings covered with [skin coat.color] fur expand from your back. You can open them wide to soar high in search of your next prey.");
-		if (wingType == AppearanceDefs.WING_TYPE_FEATHERED_LARGE)
+		if (wingType == Wings.FEATHERED_LARGE)
 			outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the [haircolor]-colored wings folded close, they can unfurl to allow you to soar as gracefully as a harpy.");
-		if (wingType == AppearanceDefs.WING_TYPE_FEATHERED_ALICORN)
+		if (wingType == Wings.FEATHERED_ALICORN)
 			outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the [haircolor]-colored wings folded close, they can unfurl to allow you to soar as gracefully as an alicorn.");
-		if (wingType == AppearanceDefs.WING_TYPE_FEATHERED_PHOENIX)
+		if (wingType == Wings.FEATHERED_PHOENIX)
 			outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the crimson-colored wings folded close, they can unfurl to allow you to soar as gracefully as a phoenix.");
-		if (wingType == AppearanceDefs.WING_TYPE_DRACONIC_SMALL)
+		if (wingType == Wings.DRACONIC_SMALL)
 			outputText("  Small, vestigial wings sprout from your shoulders.  They might look like bat's wings, but the membranes are covered in fine, delicate scales.");
-		else if (wingType == AppearanceDefs.WING_TYPE_DRACONIC_LARGE)
+		else if (wingType == Wings.DRACONIC_LARGE)
 			outputText("  Large wings sprout from your shoulders.  When unfurled they stretch further than your arm span, and a single beat of them is all you need to set out toward the sky.  They look a bit like bat's wings, but the membranes are covered in fine, delicate scales and a wicked talon juts from the end of each bone.");
-		else if (wingType == AppearanceDefs.WING_TYPE_DRACONIC_HUGE)
+		else if (wingType == Wings.DRACONIC_HUGE)
 			outputText("  Magnificent huge wings sprout from your shoulders.  When unfurled they stretch over twice further than your arm span, and a single beat of them is all you need to set out toward the sky.  They look a bit like bat's wings, but the membranes are covered in fine, delicate scales and a wicked talon juts from the end of each bone.");
-		else if (wingType == AppearanceDefs.WING_TYPE_GIANT_DRAGONFLY)
+		else if (wingType == Wings.GIANT_DRAGONFLY)
 			outputText("  Giant dragonfly wings hang from your shoulders.  At a whim, you could twist them into a whirring rhythm fast enough to lift you off the ground and allow you to fly.");
-		else if (wingType == AppearanceDefs.WING_TYPE_GARGOYLE_LIKE_LARGE) {
+		else if (wingType == Wings.GARGOYLE_LIKE_LARGE) {
 			outputText("  Large stony wings sprout from your shoulders. When unfurled they stretch wider than your arm span, and a single beat of them is all you need to set out toward the sky. They look a bit like ");
 			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] == 1) outputText("bird");
 			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] == 2) outputText("bat");
 			outputText(" wings and, although they are clearly made of stone, they allow you to fly around with excellent aerial agility.");
 		}
-		else if (wingType == AppearanceDefs.WING_TYPE_PLANT) {
+		else if (wingType == Wings.PLANT) {
 			outputText("  Three pairs of oily, prehensile phalluses sprout from your shoulders and back. From afar, they may look like innocent vines, but up close, each tentacle contain a bulbous head with a leaking cum-slit, perfect for mass breeding.");
 		}
-		if (wingType == AppearanceDefs.WING_TYPE_BAT_ARM){
+		if (wingType == Wings.BAT_ARM){
 			outputText("  Your large winged arms allow you to fly in a similar fashion to the bats they resemble. You sometimes wrap them around you like a cape when you walk around, so as to keep them from encumbering you. That being said, you far prefer using them for their intended purpose, traveling by flight whenever you can.");
 		}
-		if (wingType == AppearanceDefs.WING_TYPE_VAMPIRE){
+		if (wingType == Wings.VAMPIRE){
 			outputText("   Between your shoulder blades rest a pair of large, ominous black wings reminiscent of a bat’s. They can unfurl up to twice your arm’s length, allowing you to gracefully dance in the night sky.");
 		}
-		if (wingType == AppearanceDefs.WING_TYPE_DRACONIC_HUGE){
+		if (wingType == Wings.DRACONIC_HUGE){
 			outputText("  Magnificent huge wings sprout from your shoulders.  When unfurled they stretch over twice further than your arm span, and a single beat of them is all you need to set out toward the sky.  They look a bit like bat's wings, but the membranes are covered in fine, delicate scales and a wicked talon juts from the end of each bone.  While draconic in appearance the delicate frame of your fey like dragon wings allows for even better speed and maneuverability.");
 		}
 	}
 	public function describeHorns():void {
 //Horns
 		//Demonic horns
-		if (player.hornType == AppearanceDefs.HORNS_DEMON) {
+		if (player.hornType == Horns.DEMON) {
 			if (player.horns == 2)
 				outputText("  A small pair of pointed horns has broken through the [skin.type] on your forehead, proclaiming some demonic taint to any who see them.");
 			if (player.horns == 4)
@@ -1290,7 +1298,7 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  A large number of thick demonic horns sprout through your [skin.type], each pair sprouting behind the ones before.  The front jut forwards nearly ten inches while the rest curve back over your head, some of the points ending just below your ears.  You estimate you have a total of " + num2Text(player.horns) + " horns.");
 		}
 		//Minotaur horns
-		if (player.hornType == AppearanceDefs.HORNS_COW_MINOTAUR) {
+		if (player.hornType == Horns.COW_MINOTAUR) {
 			if (player.horns < 3)
 				outputText("  Two tiny horn-like nubs protrude from your forehead, resembling the horns of the young livestock kept by your village.");
 			if (player.horns >= 3 && player.horns < 6)
@@ -1303,26 +1311,26 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  Two huge horns erupt from your forehead, curving outward at first, then forwards.  The weight of them is heavy, and they end in dangerous looking points.");
 		}
 		//Lizard horns
-		if (player.hornType == AppearanceDefs.HORNS_DRACONIC_X2) {
+		if (player.hornType == Horns.DRACONIC_X2) {
 			outputText("  A pair of " + Measurements.inchesOrCentimetres(int(player.horns)) + " horns grow from the sides of your head, sweeping backwards and adding to your imposing visage.");
 		}
 		//Super lizard horns
-		if (player.hornType == AppearanceDefs.HORNS_DRACONIC_X4_12_INCH_LONG)
+		if (player.hornType == Horns.DRACONIC_X4_12_INCH_LONG)
 			outputText("  Two pairs of horns, roughly a foot long, sprout from the sides of your head.  They sweep back and give you a fearsome look, almost like the dragons from your village's legends.");
 		//Antlers!
-		if (player.hornType == AppearanceDefs.HORNS_ANTLERS) {
+		if (player.hornType == Horns.ANTLERS) {
 			if (player.horns > 0)
 				outputText("  Two antlers, forking into " + num2Text(player.horns) + " points, have sprouted from the top of your head, forming a spiky, regal crown of bone.");
 		}
-		if (player.hornType == AppearanceDefs.HORNS_GOAT) {
+		if (player.hornType == Horns.GOAT) {
 			if (player.horns == 1)
 				outputText("  A pair of stubby goat horns sprout from the sides of your head.");
 			else
 				outputText("  A pair of tall-standing goat horns sprout from the sides of your head.  They are curved and patterned with ridges.");
 		}
-		if (player.hornType == AppearanceDefs.HORNS_RHINO) {
+		if (player.hornType == Horns.RHINO) {
 			if (player.horns >= 2) {
-				if (player.faceType == AppearanceDefs.FACE_RHINO)
+				if (player.faceType == Face.RHINO)
 					outputText("  A second horn sprouts from your forehead just above the horn on your nose.");
 				else
 					outputText("  A single horn sprouts from your forehead.  It is conical and resembles a rhino's horn.");
@@ -1333,7 +1341,7 @@ public class PlayerAppearance extends BaseContent {
 			}
 
 		}
-		if (player.hornType == AppearanceDefs.HORNS_UNICORN) {
+		if (player.hornType == Horns.UNICORN) {
 			if (player.horns < 3)
 				outputText("  Tiny horn-like nub protrude from your forehead, resembling the horn of the young unicorn.");
 			if (player.horns >= 3 && player.horns < 6)
@@ -1345,47 +1353,47 @@ public class PlayerAppearance extends BaseContent {
 			if (player.horns >= 20)
 				outputText("  One huge and long spiraling horn erupt from your forehead, pointing forward.  The weight of it is heavy and ends with dangerous and sharp looking tip.");
 		}
-		if (player.hornType == AppearanceDefs.HORNS_OAK) {
+		if (player.hornType == Horns.OAK) {
 			if (player.horns > 0)
 				outputText("  Two branches, forking into " + num2Text(player.horns) + " points, have sprouted from the top of your head, forming a spiky, regal crown made of oak wood.");
 		}
-		if (player.hornType == AppearanceDefs.HORNS_GARGOYLE) {
+		if (player.hornType == Horns.GARGOYLE) {
 			if (player.horns > 0)
 				outputText("  A large pair of thick demonic looking horns sprout through the side of your head giving you a fiendish appearance.");
 		}
-		if (player.hornType == AppearanceDefs.HORNS_ORCHID) {
+		if (player.hornType == Horns.ORCHID) {
 			if (player.horns > 0)
 				outputText("  A huge pair of orchids grows on each side of your head, their big long petals flopping gaily when you move.");
 		}
-		if (player.hornType == AppearanceDefs.HORNS_ONI_X2) {
+		if (player.hornType == Horns.ONI_X2) {
 			if (player.horns > 0)
 				outputText("  You have a pair of horns on your head warning anyone who looks that you are an oni and do mean serious business.");
 		}
-		if (player.hornType == AppearanceDefs.HORNS_ONI) {
+		if (player.hornType == Horns.ONI) {
 			if (player.horns > 0)
 				outputText("  You have a single horn on your head warning anyone who looks that you are an oni and do mean serious business.");
 		}
 	}
 	public function describeTongue():void {
 //Tongue
-		if (player.tongueType == AppearanceDefs.TONGUE_SNAKE)
+		if (player.tongueType == Tongue.SNAKE)
 			outputText("  A snake-like tongue occasionally flits between your lips, tasting the air.");
-		else if (player.tongueType == AppearanceDefs.TONGUE_DEMONIC)
+		else if (player.tongueType == Tongue.DEMONIC)
 			outputText("  A slowly undulating tongue occasionally slips from between your lips.  It hangs nearly two feet long when you let the whole thing slide out, though you can retract it to appear normal.");
-		else if (player.tongueType == AppearanceDefs.TONGUE_DRACONIC)
+		else if (player.tongueType == Tongue.DRACONIC)
 			outputText("  Your mouth contains a thick, fleshy tongue that, if you so desire, can telescope to a distance of about four feet.  It has sufficient manual dexterity that you can use it almost like a third arm.");
-		else if (player.tongueType == AppearanceDefs.TONGUE_ECHIDNA)
+		else if (player.tongueType == Tongue.ECHIDNA)
 			outputText("  A thin echidna tongue, at least a foot long, occasionally flits out from between your lips.");
-		else if (player.tongueType == AppearanceDefs.TONGUE_CAT)
+		else if (player.tongueType == Tongue.CAT)
 			outputText("  Your tongue is rough like that of a cat. You sometimes groom yourself with it.");
-		else if (player.tongueType == AppearanceDefs.TONGUE_ELF)
+		else if (player.tongueType == Tongue.ELF)
 			outputText("  One could mistake you for a human but your voice is unnaturally beautiful and melodious giving you away as something else.");
 	}
 	public function describeBeard():void {
 //Beards!
 		if (player.beardLength > 0) {
 			outputText("  You have a " + beardDescript() + " ");
-			if (player.beardStyle != AppearanceDefs.BEARD_GOATEE) {
+			if (player.beardStyle != Beard.GOATEE) {
 				outputText("covering your ");
 				if (rand(2) == 0) outputText("jaw");
 				else outputText("chin and cheeks")
@@ -1398,38 +1406,38 @@ public class PlayerAppearance extends BaseContent {
 	}
 	public function describeEyes():void {
 		var eyeType:Number = player.eyeType;
-		if(eyeType == AppearanceDefs.EYES_FOUR_SPIDER_EYES)
+		if(eyeType == Eyes.FOUR_SPIDER_EYES)
 			outputText("  In addition to your primary two [eyecolor] eyes, you have a second, smaller pair on your forehead.");
-		else if(eyeType == AppearanceDefs.EYES_BLACK_EYES_SAND_TRAP)
+		else if(eyeType == Eyes.BLACK_EYES_SAND_TRAP)
 			outputText("  Your eyes are solid spheres of inky, alien darkness.");
-		else if(eyeType == AppearanceDefs.EYES_CAT_SLITS)
+		else if(eyeType == Eyes.CAT_SLITS)
 			outputText("  Your [eyecolor] eyes have vertically slit like those of cat.");
-		else if(eyeType == AppearanceDefs.EYES_GORGON)
+		else if(eyeType == Eyes.GORGON)
 			outputText("  Your [eyecolor] eyes are similar to those of snake-like gorgons with ability to temporally petrify.");
-		else if(eyeType == AppearanceDefs.EYES_FENRIR)
+		else if(eyeType == Eyes.FENRIR)
 			outputText("  Your eyes glows with a freezing blue light icy smoke rising in the air around it.");
-		else if(eyeType == AppearanceDefs.EYES_MANTICORE)
+		else if(eyeType == Eyes.MANTICORE)
 			outputText("  Your eyes are similar to those of a cat, with slit pupil. However, their [eyecolor] iris dismiss any links to the regular felines in favor of something way more ominous.");
-		else if(eyeType == AppearanceDefs.EYES_FOX)
+		else if(eyeType == Eyes.FOX)
 			outputText("  Your [eyecolor] eyes looks like those of a fox with a slit in the middle.");
-		else if(eyeType == AppearanceDefs.EYES_REPTILIAN)
+		else if(eyeType == Eyes.REPTILIAN)
 			outputText("  Your eyes looks like those of a reptile with [eyecolor] irises and a slit.");
-		else if(eyeType == AppearanceDefs.EYES_SNAKE)
+		else if(eyeType == Eyes.SNAKE)
 			outputText("  Your [eyecolor] eyes have slitted pupils like that of a snake.");
-		else if(eyeType == AppearanceDefs.EYES_DRAGON)
+		else if(eyeType == Eyes.DRAGON)
 			outputText("  Your [eyecolor] eyes have slitted pupils like that of a dragon.");
-		else if(player.eyeType == AppearanceDefs.EYES_DEVIL)
+		else if(player.eyeType == Eyes.DEVIL)
 			outputText("  Your eyes look fiendish with their black sclera and glowing [eyecolor] irises.");
-		else if(eyeType == AppearanceDefs.EYES_ONI)
+		else if(eyeType == Eyes.ONI)
 			outputText("  Your eyes look normal enough save for their fiendish [eyecolor] iris and slitted pupils.");
-		else if(eyeType == AppearanceDefs.EYES_ELF)
+		else if(eyeType == Eyes.ELF)
 			outputText("  Your [eyecolor] elven eyes looks somewhat human, save for their cat-like vertical slit which draws light right in, allowing you to see with perfect precision both at day and night time.");
-		else if(eyeType == AppearanceDefs.EYES_RAIJU)
+		else if(eyeType == Eyes.RAIJU)
 			outputText("  Your eyes are of an electric [eyecolor] hue that constantly glows with voltage power. They have slitted pupils like those of a beast.");
-		else if(eyeType == AppearanceDefs.EYES_VAMPIRE){
+		else if(eyeType == Eyes.VAMPIRE){
 			outputText("  Your eyes looks somewhat normal, but their blood-red irises seem to have the tendency of drawing in people’s gaze, like moths to a flame.");
 		}
-		else if(eyeType == AppearanceDefs.EYES_GEMSTONES){
+		else if(eyeType == Eyes.GEMSTONES){
 			outputText("  Instead of regular eyes you see through a pair of gemstones that change hue based on your mood.");
 		}
 		else outputText("  Your eyes are [eyecolor].");
@@ -1439,7 +1447,7 @@ public class PlayerAppearance extends BaseContent {
 		var earType:Number = player.earType;
 		if(player.hairLength == 0)
 		{
-			if(player.skinType == AppearanceDefs.SKIN_TYPE_FUR)
+			if(player.skinType == Skin.FUR)
 				outputText("  You have no hair, only a thin layer of fur atop of your head.  ");
 			else {
 				outputText("  You are totally bald, showing only shiny " + player.skinTone + " [skin.type]");
@@ -1448,158 +1456,158 @@ public class PlayerAppearance extends BaseContent {
 				else if(player.skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
 				outputText(" where your hair should be.");
 			}
-			if(earType == AppearanceDefs.EARS_HORSE)
+			if(earType == Ears.HORSE)
 				outputText("  A pair of horse-like ears rise up from the top of your head.");
-			else if(earType == AppearanceDefs.EARS_FERRET)
+			else if(earType == Ears.FERRET)
 				outputText("  A pair of small, rounded ferret ears sit on top of your head.");
-			else if(earType == AppearanceDefs.EARS_DOG)
+			else if(earType == Ears.DOG)
 				outputText("  A pair of dog ears protrude from your skull, flopping down adorably.");
-			else if(earType == AppearanceDefs.EARS_COW)
+			else if(earType == Ears.COW)
 				outputText("  A pair of round, floppy cow ears protrude from the sides of your skull.");
-			else if(earType == AppearanceDefs.EARS_ELFIN)
+			else if(earType == Ears.ELFIN)
 				outputText("  A pair of large pointy ears stick out from your skull.");
-			else if(earType == AppearanceDefs.EARS_CAT)
+			else if(earType == Ears.CAT)
 				outputText("  A pair of cute, fuzzy cat ears have sprouted from the top of your head.");
-			else if(earType == AppearanceDefs.EARS_PIG)
+			else if(earType == Ears.PIG)
 				outputText("  A pair of pointy, floppy pig ears have sprouted from the top of your head.");
-			else if(earType == AppearanceDefs.EARS_LIZARD)
+			else if(earType == Ears.LIZARD)
 				outputText("  A pair of rounded protrusions with small holes on the sides of your head serve as your ears.");
-			else if(earType == AppearanceDefs.EARS_BUNNY)
+			else if(earType == Ears.BUNNY)
 				outputText("  A pair of floppy rabbit ears stick up from the top of your head, flopping around as you walk.");
-			else if(earType == AppearanceDefs.EARS_FOX)
+			else if(earType == Ears.FOX)
 				outputText("  A pair of large, adept fox ears sit high on your head, always listening.");
-			else if(earType == AppearanceDefs.EARS_DRAGON)
+			else if(earType == Ears.DRAGON)
 				outputText("  A pair of rounded protrusions with small holes on the sides of your head serve as your ears.  Bony fins sprout behind them.");
-			else if(earType == AppearanceDefs.EARS_RACCOON)
+			else if(earType == Ears.RACCOON)
 				outputText("  A pair of vaguely egg-shaped, furry raccoon ears adorns your head.");
-			else if(earType == AppearanceDefs.EARS_MOUSE)
+			else if(earType == Ears.MOUSE)
 				outputText("  A pair of large, dish-shaped mouse ears tops your head.");
-			else if (earType == AppearanceDefs.EARS_PIG)
+			else if (earType == Ears.PIG)
 				outputText("  A pair of pointy, floppy pig ears have sprouted from the top of your head.");
-			else if (earType == AppearanceDefs.EARS_RHINO)
+			else if (earType == Ears.RHINO)
 				outputText("  A pair of open tubular rhino ears protrude from your head.");
-			else if (earType == AppearanceDefs.EARS_ECHIDNA)
+			else if (earType == Ears.ECHIDNA)
 				outputText("  A pair of small rounded openings appear on your head that are your ears.");
-			else if (earType == AppearanceDefs.EARS_DEER)
+			else if (earType == Ears.DEER)
 				outputText("  A pair of deer-like ears rise up from the top of your head.");
-			else if(earType == AppearanceDefs.EARS_WOLF)
+			else if(earType == Ears.WOLF)
 				outputText("  A pair of pointed wolf ears rise up from the top of your head.");
-			else if(earType == AppearanceDefs.EARS_LION)
+			else if(earType == Ears.LION)
 				outputText("  A pair of lion ears have sprouted from the top of your head.");
-			else if(earType == AppearanceDefs.EARS_YETI)
+			else if(earType == Ears.YETI)
 				outputText("  A pair of yeti ears, bigger than your old human ones have sprouted from the top of your head.");
-			else if(earType == AppearanceDefs.EARS_ORCA)
+			else if(earType == Ears.ORCA)
 				outputText("  A pair of very large fin at least twice as large as your head which help you orient yourself underwater have sprouted from the top of your head. Their underside is white while the top is black.");
-			else if(earType == AppearanceDefs.EARS_SNAKE)
+			else if(earType == Ears.SNAKE)
 				outputText("  A pair of large pointy ears covered in small scales stick out from your skull.");
-			else if(earType == AppearanceDefs.EARS_GOAT)
+			else if(earType == Ears.GOAT)
 				outputText("  A pair or ears looking similar to those of a goat flapping from time to time in response to sounds.");
-			else if(earType == AppearanceDefs.EARS_ONI)
+			else if(earType == Ears.ONI)
 				outputText("  A pair of pointed elf-like oni ears stick out from your skull.");
-			else if(earType == AppearanceDefs.EARS_ELVEN)
+			else if(earType == Ears.ELVEN)
 				outputText("  A pair of cute, long, elven, pointy ears, bigger than your old human ones and alert to every sound stick out from your skull.");
-			else if(earType == AppearanceDefs.EARS_WEASEL)
+			else if(earType == Ears.WEASEL)
 				outputText("  A pair of sideways leaning weasel ears that flick toward every slight sound stick out from your skull.");
-			if (earType == AppearanceDefs.EARS_BAT){
+			if (earType == Ears.BAT){
 				outputText("  A pair of bat ears sit atop your head, always perked up to catch any stray sound.");
 			}
-			if (earType == AppearanceDefs.EARS_VAMPIRE){
+			if (earType == Ears.VAMPIRE){
 				outputText("  A pair of pointed elfin ears powerful enough to catch even the heartbeat of those around you stick out from your skull.");
 			}
-			if (earType == AppearanceDefs.EARS_RED_PANDA){
+			if (earType == Ears.RED_PANDA){
 				outputText("  Big, white furred, red-panda ears lie atop your head, keeping you well aware to your surroundings.");
 			}
 			//</mod>
-			if (player.gillType == AppearanceDefs.GILLS_FISH)
+			if (player.gillType == Gills.FISH)
 			{
 				outputText("  A set of fish like gills reside on your neck, several small slits that can close flat against your skin."
 						   +" They allow you to stay in the water for quite a long time.");
 			}
-			// GILLS_ANEMONE are handled below
-			if(player.antennae == AppearanceDefs.ANTENNAE_MANTIS)
+			// ANEMONE are handled below
+			if(player.antennae == Antennae.MANTIS)
 				outputText("  Long prehensile antennae also appear on your skull, bouncing and swaying in the breeze.");
-			if(player.antennae == AppearanceDefs.ANTENNAE_BEE)
+			if(player.antennae == Antennae.BEE)
 				outputText("  Floppy antennae also appear on your skull, bouncing and swaying in the breeze.");
 		}
 		//not bald
 		else
 		{
-			if(earType == AppearanceDefs.EARS_HUMAN)
+			if(earType == Ears.HUMAN)
 				outputText("  Your [hair] looks good on you, accentuating your features well.");
-			else if(earType == AppearanceDefs.EARS_FERRET)
+			else if(earType == Ears.FERRET)
 				outputText("  A pair of small, rounded ferret ears burst through the top of your [hair].");
-			else if(earType == AppearanceDefs.EARS_HORSE)
+			else if(earType == Ears.HORSE)
 				outputText("  The [hair] on your head parts around a pair of very horse-like ears that grow up from your head.");
-			else if(earType == AppearanceDefs.EARS_DOG)
+			else if(earType == Ears.DOG)
 				outputText("  The [hair] on your head is overlapped by a pair of pointed dog ears.");
-			else if(earType == AppearanceDefs.EARS_COW)
+			else if(earType == Ears.COW)
 				outputText("  The [hair] on your head is parted by a pair of rounded cow ears that stick out sideways.");
-			else if(earType == AppearanceDefs.EARS_ELFIN)
+			else if(earType == Ears.ELFIN)
 				outputText("  The [hair] on your head is parted by a pair of cute pointed ears, bigger than your old human ones.");
-			else if(earType == AppearanceDefs.EARS_CAT)
+			else if(earType == Ears.CAT)
 				outputText("  The [hair] on your head is parted by a pair of cute, fuzzy cat ears, sprouting from atop your head and pivoting towards any sudden noises.");
-			else if(earType == AppearanceDefs.EARS_LIZARD)
+			else if(earType == Ears.LIZARD)
 				outputText("  The [hair] atop your head makes it nigh-impossible to notice the two small rounded openings that are your ears.");
-			else if(earType == AppearanceDefs.EARS_BUNNY)
+			else if(earType == Ears.BUNNY)
 				outputText("  A pair of floppy rabbit ears stick up out of your [hair], bouncing around as you walk.");
-			else if(earType == AppearanceDefs.EARS_KANGAROO)
+			else if(earType == Ears.KANGAROO)
 				outputText("  The [hair] atop your head is parted by a pair of long, furred kangaroo ears that stick out at an angle.");
-			else if(earType == AppearanceDefs.EARS_FOX)
+			else if(earType == Ears.FOX)
 				outputText("  The [hair] atop your head is parted by a pair of large, adept fox ears that always seem to be listening.");
-			else if(earType == AppearanceDefs.EARS_DRAGON)
+			else if(earType == Ears.DRAGON)
 				outputText("  The [hair] atop your head is parted by a pair of rounded protrusions with small holes on the sides of your head serve as your ears.  Bony fins sprout behind them.");
-			else if(earType == AppearanceDefs.EARS_RACCOON)
+			else if(earType == Ears.RACCOON)
 				outputText("  The [hair] on your head parts around a pair of egg-shaped, furry raccoon ears.");
-			else if(earType == AppearanceDefs.EARS_MOUSE)
+			else if(earType == Ears.MOUSE)
 				outputText("  The [hair] atop your head is funneled between and around a pair of large, dish-shaped mouse ears that stick up prominently.");
-			else if(earType == AppearanceDefs.EARS_PIG)
+			else if(earType == Ears.PIG)
 				outputText("  The [hair] on your head is parted by a pair of pointy, floppy pig ears. They often flick about when you’re not thinking about it.");
-			else if(earType == AppearanceDefs.EARS_RHINO)
+			else if(earType == Ears.RHINO)
 				outputText("  The [hair] on your head is parted by a pair of tubular rhino ears.");
-			else if(earType == AppearanceDefs.EARS_ECHIDNA)
+			else if(earType == Ears.ECHIDNA)
 				outputText("  Your [hair] makes it near-impossible to see the small, rounded openings that are your ears.");
-			else if(earType == AppearanceDefs.EARS_DEER)
+			else if(earType == Ears.DEER)
 				outputText("  The [hair] on your head parts around a pair of deer-like ears that grow up from your head.");
-			else if(earType == AppearanceDefs.EARS_WOLF)
+			else if(earType == Ears.WOLF)
 				outputText("  The [hair] on your head is overlapped by a pair of pointed wolf ears.");
-			else if(earType == AppearanceDefs.EARS_LION)
+			else if(earType == Ears.LION)
 				outputText("  The [hair] is parted by a pair of lion ears that listen to every sound.");
-			else if(earType == AppearanceDefs.EARS_YETI)
+			else if(earType == Ears.YETI)
 				outputText("  The [hair] is parted by a pair of yeti ears, bigger than your old human ones.");
-			else if(earType == AppearanceDefs.EARS_ORCA)
+			else if(earType == Ears.ORCA)
 				outputText("  The [hair] on your head is parted by a pair of very large fin at least twice as large as your head which help you orient yourself underwater. Their underside is white while the top is black.");
-			else if(earType == AppearanceDefs.EARS_SNAKE)
+			else if(earType == Ears.SNAKE)
 				outputText("  The [hair] on your head is parted by a pair of cute pointed ears covered in small scales, bigger than your old human ones.");
-			else if(earType == AppearanceDefs.EARS_GOAT)
+			else if(earType == Ears.GOAT)
 				outputText("  The [hair] on your head is parted by a pair or ears looking similar to those of a goat flapping from time to time in response to sounds.");
-			else if(earType == AppearanceDefs.EARS_ONI)
+			else if(earType == Ears.ONI)
 				outputText("  The [hair] on your head is parted by a pair of pointed elf-like oni ears.");
-			else if(earType == AppearanceDefs.EARS_ELVEN) {
+			else if(earType == Ears.ELVEN) {
 				outputText("  The [hair] is parted by a pair of cute, long, elven, pointy ears, bigger than your old human ones and alert to every sound");
-				//if (player.hairType == HAIR_SILKEN) outputText(" .");
+				//if (player.hairType == SILKEN) outputText(" .");
 				outputText(".");
 			}
-			else if(earType == AppearanceDefs.EARS_WEASEL)
+			else if(earType == Ears.WEASEL)
 				outputText("  Your [hair] is parted by two sideways leaning weasel ears that flick toward every slight sound.");
-			if (earType == AppearanceDefs.EARS_BAT){
+			if (earType == Ears.BAT){
 				outputText("  The [hair] on your head is parted by large bat ears atop your head, always perked up to catch any stray sound.");
 			}
-			if (earType == AppearanceDefs.EARS_VAMPIRE){
+			if (earType == Ears.VAMPIRE){
 				outputText("  The [hair] on your head is  parted by pointed elfin ears powerful enough to catch even the heartbeat of those around you.")
 			}
-			if (earType == AppearanceDefs.EARS_RED_PANDA) {
+			if (earType == Ears.RED_PANDA) {
 				outputText("  Big, white furred, red-panda ears lie atop your head, keeping you well aware to your surroundings.")
 			}
 			//</mod>
-			if(player.antennae == AppearanceDefs.ANTENNAE_MANTIS)
+			if(player.antennae == Antennae.MANTIS)
 			{
-				if(earType == AppearanceDefs.EARS_BUNNY)
+				if(earType == Ears.BUNNY)
 					outputText("  Long prehensile antennae also grow from just behind your hairline, waving and swaying in the breeze with your ears.");
 				else outputText("  Long prehensile antennae also grow from just behind your hairline, bouncing and swaying in the breeze.");
 			}
-			if(player.antennae == AppearanceDefs.ANTENNAE_BEE)
+			if(player.antennae == Antennae.BEE)
 			{
-				if(earType == AppearanceDefs.EARS_BUNNY)
+				if(earType == Ears.BUNNY)
 					outputText("  Limp antennae also grow from just behind your hairline, waving and swaying in the breeze with your ears.");
 				else outputText("  Floppy antennae also grow from just behind your hairline, bouncing and swaying in the breeze.");
 			}
@@ -1612,7 +1620,7 @@ public class PlayerAppearance extends BaseContent {
 		if (player.facePart.isHumanShaped()) {
 			var odd:int = 0;
 			var skinAndSomething:String = "";
-			if (player.facePart.type == AppearanceDefs.FACE_BUCKTEETH) {
+			if (player.facePart.type == Face.BUCKTEETH) {
 				skinAndSomething = " and mousey buckteeth";
 				odd++;
 			}
@@ -1635,7 +1643,7 @@ public class PlayerAppearance extends BaseContent {
 					outputText("  On your cheek you have [skin coat]");
 					odd++;
 				}
-			} else if (skin.hasCoatOfType(AppearanceDefs.SKIN_TYPE_FUR)) {
+			} else if (skin.hasCoatOfType(Skin.FUR)) {
 				odd++;
 				outputText("  Under your [skin coat] you have a human-shaped head with [skin base]"+skinAndSomething);
 			} else if (skin.hasCoat() && !skinAndSomething) {
@@ -1644,44 +1652,44 @@ public class PlayerAppearance extends BaseContent {
 			} else outputText("  Your face is human in shape and structure, with [skin full]"+skinAndSomething);
 			outputText(".");
 
-			if (faceType == AppearanceDefs.FACE_SHARK_TEETH)
+			if (faceType == Face.SHARK_TEETH)
 				outputText("  A set of razor-sharp, retractable shark-teeth fill your mouth and gives your visage a slightly angular appearance.");
-			else if (faceType == AppearanceDefs.FACE_BUNNY)
+			else if (faceType == Face.BUNNY)
 				outputText("  The constant twitches of your nose and the length of your incisors gives your visage a hint of bunny-like cuteness.");
-			else if (faceType == AppearanceDefs.FACE_SPIDER_FANGS)
+			else if (faceType == Face.SPIDER_FANGS)
 				outputText("  A set of retractable, needle-like fangs sit in place of your canines and are ready to dispense their venom.");
-			else if (faceType == AppearanceDefs.FACE_FERRET_MASK)
+			else if (faceType == Face.FERRET_MASK)
 				outputText("  The [skinFurScales] around your eyes is significantly darker than the rest of your face, giving you a cute little ferret mask.");
-			else if (faceType == AppearanceDefs.FACE_MANTICORE)
+			else if (faceType == Face.MANTICORE)
 				outputText("  You have a set of sharp cat-like teeth in your mouth.");
-			else if (faceType == AppearanceDefs.FACE_SNAKE_FANGS) {
+			else if (faceType == Face.SNAKE_FANGS) {
 				if (odd==0) {
 					outputText("  The only oddity is your pair of dripping fangs which often hang over your lower lip.");
 				} else {
 					outputText("  In addition, a pair of fangs hang over your lower lip, dripping with venom.");
 				}
-			} else if (faceType == AppearanceDefs.FACE_SALAMANDER_FANGS) {
+			} else if (faceType == Face.SALAMANDER_FANGS) {
 				if (odd == 0) {
 					outputText(".  The only oddity is your salamander fangs giving you a menacing smile.");
 				} else {
 					outputText("  In addition, a pair of salamander fangs grows out of your mouth giving you a menacing smile.");
 				}
-			} else if (faceType == AppearanceDefs.FACE_YETI_FANGS) {
+			} else if (faceType == Face.YETI_FANGS) {
 				if (odd == 0){
 					outputText(".  Your mouth, while human looking, has sharp yeti fangs not unlike those of a monkey.");
 				} else {
 					outputText("  In addition, your mouth, while human looking, has sharp yeti fangs not unlike those of a monkey.");
 				}
 			}
-			if(faceType == AppearanceDefs.FACE_VAMPIRE){
+			if(faceType == Face.VAMPIRE){
 				outputText("  Your mouth could pass for human if not for the pair of long and pointy canines you use to tear into your victims to get at their blood.");
 			}
-		} else if (faceType == AppearanceDefs.FACE_FERRET) {
-			if (player.hasFullCoatOfType(AppearanceDefs.SKIN_TYPE_FUR)) outputText("  Your face is coated in [skin coat] with [skin base] underneath, an adorable cross between human and ferret features.  It is complete with a wet nose and whiskers.");
+		} else if (faceType == Face.FERRET) {
+			if (player.hasFullCoatOfType(Skin.FUR)) outputText("  Your face is coated in [skin coat] with [skin base] underneath, an adorable cross between human and ferret features.  It is complete with a wet nose and whiskers.");
 			else if (player.hasCoat()) outputText("  Your face is an adorable cross between human and ferret features, complete with a wet nose and whiskers.  The only oddity is [skin base] covered with [skin coat].");
 			else outputText("  Your face is an adorable cross between human and ferret features, complete with a wet nose and whiskers.  The only oddity is your lack of fur, leaving only [skin] visible on your ferret-like face.");
 		}
-		else if (faceType == AppearanceDefs.FACE_RACCOON_MASK) {
+		else if (faceType == Face.RACCOON_MASK) {
 			if (!player.hasCoat()) { //appearance for skinheads
 				outputText("  Your face is human in shape and structure, with [skin bases");
 				if (InCollection(skin.base.color, "ebony", "black"))
@@ -1698,7 +1706,7 @@ public class PlayerAppearance extends BaseContent {
 				outputText(" you have a human-shaped head with [skin base].");
 			}
 		}
-		else if (faceType == AppearanceDefs.FACE_RACCOON) {
+		else if (faceType == Face.RACCOON) {
 			outputText("  You have a triangular raccoon face, replete with sensitive whiskers and a little black nose; a mask shades the space around your eyes, set apart from your [skin coat] by a band of white.");
 			//(if skin)
 			if (player.hasPlainSkinOnly()) {
@@ -1715,7 +1723,7 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  The presence of said chitin gives your visage an eerie look, more insect than mammal.");
 			}
 		}
-		else if (faceType == AppearanceDefs.FACE_FOX) {
+		else if (faceType == Face.FOX) {
 			outputText("  You have a tapered, shrewd-looking vulpine face with a speckling of downward-curved whiskers just behind the nose.");
 			if (!player.hasCoat()) {
 				outputText("  Oddly enough, there's no fur on your animalistic muzzle, just [skin coat].");
@@ -1725,40 +1733,40 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  Oddly enough, there's no fur on your animalistic muzzle, just [skin coat] covered with battle tattoo.");
 			} else if (skin.hasLightningShapedTattoo()) {
 				outputText("  Oddly enough, there's no fur on your animalistic muzzle, just [skin coat] covered with a few glowing lightning tattoos.");
-			} else if (player.hasFullCoatOfType(AppearanceDefs.SKIN_COAT_FUR)) {
+			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  A coat of [skin coat] decorates your muzzle.");
 			} else if (skin.isCoverLowMid()) {
 				outputText("  Strangely, [skin coat] adorn your animalistic visage.");
 			} else {
 				outputText("  Strangely, [skin coat] adorn every inch of your animalistic visage.");
 			}
-		} else if (faceType == AppearanceDefs.FACE_MOUSE) {
+		} else if (faceType == Face.MOUSE) {
 			//appearance
 			outputText("  You have a snubby, tapered mouse's face, with whiskers, a little pink nose, and [skin full]");
 			outputText(".  Two large incisors complete it.");
 		}
 		//horse-face
-		if (faceType == AppearanceDefs.FACE_HORSE) {
+		if (faceType == Face.HORSE) {
 			if (!player.hasCoat()) {
 				outputText("  Your face is equine in shape and structure.  The odd visage is hairless and covered with [skin base].");
-			} else if (player.hasFullCoatOfType(AppearanceDefs.SKIN_COAT_FUR)) {
+			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  Your face is almost entirely equine in appearance, even having [skin coat].  Underneath the fur, you believe you have [skin base].");
 			} else {
 				outputText("  You have the face and head structure of a horse, overlaid with glittering [skin coat].");
 			}
 		}
 		//dog-face
-		if (faceType == AppearanceDefs.FACE_DOG) {
+		if (faceType == Face.DOG) {
 			if (!player.hasCoat()) {
 				outputText("  You have a dog-like face, complete with a wet nose.  The odd visage is hairless and covered with [skin base].");
-			} else if (player.hasFullCoatOfType(AppearanceDefs.SKIN_COAT_FUR)) {
+			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  You have a dog's face, complete with wet nose and panting tongue.  You've got [skin coat], hiding your [skin base] underneath your furry visage.");
 			} else {
 				outputText("  You have the facial structure of a dog, wet nose and all, but overlaid with glittering [skin coat]");
 			}
 		}
 		//wolf-face
-		if (faceType == AppearanceDefs.FACE_WOLF) {
+		if (faceType == Face.WOLF) {
 			if (!player.hasCoat()) {
 				outputText("  You have a wolf-like face, complete with a wet nose.  ");
 				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("Cold blue mist seems to periodically escape from your mouth.   ");
@@ -1767,7 +1775,7 @@ public class PlayerAppearance extends BaseContent {
 				else if(skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
 				else if(skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
 				outputText(".");
-			} else if (player.hasFullCoatOfType(AppearanceDefs.SKIN_COAT_FUR)) {
+			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  You have a wolf’s face, complete with wet nose a panting tongue and threatening teeth.  ");
 				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("Cold blue mist seems to periodically escape from your mouth.   ");
 				outputText("You've got [skin coat], hiding your [skin noadj] underneath your furry visage.");
@@ -1777,29 +1785,29 @@ public class PlayerAppearance extends BaseContent {
 			}
 		}
 		//cat-faces
-		if (faceType == AppearanceDefs.FACE_CAT || faceType == AppearanceDefs.FACE_CHESHIRE) {
+		if (faceType == Face.CAT || faceType == Face.CHESHIRE) {
 			if (!player.hasCoat()) {
 				outputText("  You have a cat-like face, complete with a cute, moist nose and whiskers.  The [skin] that is revealed by your lack of fur looks quite unusual on so feline a face");
 				if (skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
 				else if(skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
 				else if(skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
 				outputText(".");
-			} else if (player.hasFullCoatOfType(AppearanceDefs.SKIN_COAT_FUR)) {
+			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  You have a cat-like face, complete with moist nose and whiskers.  Your [skin coat.nocolor] is [skin coat.color], hiding your [skin base] underneath.");
 			} else {
 				outputText("  Your facial structure blends humanoid features with those of a cat.  A moist nose and whiskers are included, but overlaid with glittering [skin coat].");
 			}
-			if (faceType == AppearanceDefs.FACE_CHESHIRE) outputText(" For some reason your facial expression is that of an everlasting yet somewhat unsettling grin.");
+			if (faceType == Face.CHESHIRE) outputText(" For some reason your facial expression is that of an everlasting yet somewhat unsettling grin.");
 		}
-		if (faceType == AppearanceDefs.FACE_CAT_CANINES || faceType == AppearanceDefs.FACE_CHESHIRE_SMILE) {
+		if (faceType == Face.CAT_CANINES || faceType == Face.CHESHIRE_SMILE) {
 			outputText("  Your face is human in shape and structure with [skin coat]. Your mouth is somewhat human save for your cat-like canines.");
-			if (faceType == AppearanceDefs.FACE_CHESHIRE_SMILE) outputText(" For some reason your facial expression is that of an everlasting yet somewhat unsettling grin.");
+			if (faceType == Face.CHESHIRE_SMILE) outputText(" For some reason your facial expression is that of an everlasting yet somewhat unsettling grin.");
 		}
 		//Minotaaaauuuur-face
-		if (faceType == AppearanceDefs.FACE_COW_MINOTAUR) {
+		if (faceType == Face.COW_MINOTAUR) {
 			if (!player.hasCoat()) {
 				outputText("  You have a face resembling that of a minotaur, with cow-like features, particularly a squared off wet nose.  Despite your lack of fur elsewhere, your visage does have a short layer of [haircolor] fuzz.");
-			} else if (player.hasFullCoatOfType(AppearanceDefs.SKIN_COAT_FUR)) {
+			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  You have a face resembling that of a minotaur, with cow-like features, particularly a squared off wet nose.  Your [skin coat] thickens noticeably on your head, looking shaggy and more than a little monstrous once laid over your visage.");
 			} else if (player.hasFullCoat()) {
 				outputText("  Your face resembles a minotaur's, though strangely it is covered in shimmering [skin coat], right up to the flat cow-like nose that protrudes from your face.");
@@ -1808,10 +1816,10 @@ public class PlayerAppearance extends BaseContent {
 			}
 		}
 		//Lizard-face
-		if (faceType == AppearanceDefs.FACE_LIZARD) {
+		if (faceType == Face.LIZARD) {
 			if (!player.hasCoat()) {
 				outputText("  You have a face resembling that of a lizard, and with your toothy maw, you have quite a fearsome visage.  The reptilian visage does look a little odd with just [skin].");
-			} else if (player.hasFullCoatOfType(AppearanceDefs.SKIN_COAT_FUR)) {
+			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  You have a face resembling that of a lizard.  Between the toothy maw, pointed snout, and the layer of [skin coat] covering your face, you have quite the fearsome visage.");
 			} else if (player.hasFullCoat()) {
 				outputText("  Your face is that of a lizard, complete with a toothy maw and pointed snout.  Reflective [skin coat] complete the look, making you look quite fearsome.");
@@ -1819,35 +1827,35 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  You have a face resembling that of a lizard, and with your toothy maw, you have quite a fearsome visage.  The reptilian visage does look a little odd with just [skin coat].");
 			}
 		}
-		if (faceType == AppearanceDefs.FACE_DRAGON) {
+		if (faceType == Face.DRAGON) {
 			outputText("  Your face is a narrow, reptilian muzzle.  It looks like a predatory lizard's, at first glance, but with an unusual array of spikes along the under-jaw.  It gives you a regal but fierce visage.  Opening your mouth reveals several rows of dagger-like sharp teeth.  The fearsome visage is decorated by [skin coat].");
 		}
-		if (faceType == AppearanceDefs.FACE_DRAGON_FANGS) {
+		if (faceType == Face.DRAGON_FANGS) {
 			outputText("  Your mouth is somewhat human save for your draconic fangs giving you a menacing smile.  It's decorated by [skin coat].");
 		}
-		if (faceType == AppearanceDefs.FACE_JABBERWOCKY) {
+		if (faceType == Face.JABBERWOCKY) {
 			outputText("  Your face is a narrow, reptilian muzzle.  It looks like a predatory lizard's, at first glance, but with an unusual array of spikes along the under-jaw.  It gives you a regal but fierce visage.  Opening your mouth reveals two buck tooth, which are abnormally large.  Like a rabbit or rather a Jabberwocky.  The fearsome visage is decorated by [skin coat].");
 		}
-		if (faceType == AppearanceDefs.FACE_BUCKTOOTH) {
+		if (faceType == Face.BUCKTOOTH) {
 			outputText("  Your mouth is somewhat human save for your two buck tooth, which are abnormally large.  Like a rabbit or rather a Jabberwocky.  It's decorated by [skin coat].");
 		}
-		if (faceType == AppearanceDefs.FACE_PLANT_DRAGON) {
+		if (faceType == Face.PLANT_DRAGON) {
 			outputText("  Your face is a narrow, reptilian and regal, reminiscent of a dragon.  A [skin coat] decorates your visage.");
 		}
-		if (faceType == AppearanceDefs.FACE_DEVIL_FANGS) {
+		if (faceType == Face.DEVIL_FANGS) {
 			outputText("  Your mouth is somewhat human save for your fiendish canines.  It's decorated by [skin coat].");
 		}
-		if (faceType == AppearanceDefs.FACE_ONI_TEETH) {
+		if (faceType == Face.ONI_TEETH) {
 			outputText("  Your face is human in shape and structure with [skin coat]. Your mouth could pass for human if not for your two large ogre like canines.");
 		}
-		if (faceType == AppearanceDefs.FACE_RAIJU_FANGS) {
+		if (faceType == Face.RAIJU_FANGS) {
 			outputText("  Your face is human in shape and structure with [skin coat]. Your mouth could pass for human if not for your two sharp weasel canines.");
 		}
-		if (faceType == AppearanceDefs.FACE_ORCA) {
+		if (faceType == Face.ORCA) {
 			if (skin.hasPlainSkinOnly() && player.skinAdj == "glossy" && player.skinTone == "white and black")
 				outputText("  Your face is fairly human in shape save for a wider yet adorable nose. Your skin is pitch black with a white underbelly. From your neck up to your mouth and lower cheeks your face is white with two extra white circles right under and above your eyes. While at first one could mistake it for human skin, it has a glossy shine only found on sea animals.");
 			else if (!player.hasFullCoat()) {
-				if (skin.hasCoatOfType(AppearanceDefs.SKIN_COAT_SCALES, AppearanceDefs.SKIN_COAT_FUR)) {
+				if (skin.hasCoatOfType(Skin.SCALES, Skin.FUR)) {
 					outputText("  You have a fairly normal face, with [skin base]. On your cheek you have [skin coat]");
 				} else {
 					outputText("  You have a fairly normal face, with [skin base]");
@@ -1856,13 +1864,13 @@ public class PlayerAppearance extends BaseContent {
 					else if(skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
 				}
 				outputText(".  In addition you have a wide nose similar to that of an orca, which goes well with your sharp toothed mouth, giving you a cute look.");
-			} else if (player.hasFullCoatOfType(AppearanceDefs.SKIN_COAT_FUR)) {
+			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  Under your [skin coat] you have a human-shaped head with [skin base].  In addition you have a wide nose similar to that of an orca, which goes well with your sharp toothed mouth, giving you a cute look.");
 			} else {
 				outputText("  Your face is fairly human in shape, but is covered in [skin coat].  In addition you have a wide nose similar to that of an orca, which goes well with your sharp toothed mouth, giving you a cute look.");
 			}
 		}
-		if (faceType == AppearanceDefs.FACE_KANGAROO) {
+		if (faceType == Face.KANGAROO) {
 			outputText("  Your face is ");
 			if (!player.hasCoat()) {
 				outputText("bald");
@@ -1873,16 +1881,16 @@ public class PlayerAppearance extends BaseContent {
 			outputText(" and shaped like that of a kangaroo, somewhat rabbit-like except for the extreme length of your odd visage.");
 		}
 		//<mod>
-		if (faceType == AppearanceDefs.FACE_PIG) {
+		if (faceType == Face.PIG) {
 			outputText("  Your face is like that of a pig, with " + player.skinTone + " skin, complete with a snout that is always wiggling.");
 		}
-		if (faceType == AppearanceDefs.FACE_BOAR) {
+		if (faceType == Face.BOAR) {
 			outputText("  Your face is like that of a boar, ");
-			if (player.skinType == AppearanceDefs.SKIN_TYPE_FUR)
+			if (player.skinType == Skin.FUR)
 				outputText("with " + player.skinTone + " skin underneath your [skin coat.color] fur");
 			outputText(", complete with tusks and a snout that is always wiggling.");
 		}
-		if (faceType == AppearanceDefs.FACE_RHINO) {
+		if (faceType == Face.RHINO) {
 			outputText("  Your face is like that of a rhino");
 			if (!player.hasCoat()) {
 				outputText(", with [skin], complete with a long muzzle and a horn on your nose");
@@ -1894,7 +1902,7 @@ public class PlayerAppearance extends BaseContent {
 			else
 				outputText(" with a long muzzle and a horn on your nose.  Oddly, your face is also covered in [skin coat].");
 		}
-		if (faceType == AppearanceDefs.FACE_ECHIDNA) {
+		if (faceType == Face.ECHIDNA) {
 			outputText("  Your odd visage consists of a long, thin echidna snout.");
 			if (!player.hasCoat()) {
 				outputText("  The [skin base]");
@@ -1902,13 +1910,13 @@ public class PlayerAppearance extends BaseContent {
 				else if(skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
 				else if(skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
 				outputText(" that is revealed by your lack of fur looks quite unusual.");
-			} else if (player.hasFullCoatOfType(AppearanceDefs.SKIN_COAT_FUR)) {
+			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  It's covered in [skin coat].");
 			} else {
 				outputText("  It's covered in [skin coat], making your face even more unusual.");
 			}
 		}
-		if (faceType == AppearanceDefs.FACE_DEER) {
+		if (faceType == Face.DEER) {
 			outputText("  Your face is like that of a deer, with a nose at the end of your muzzle.");
 			if (!player.hasCoat()) {
 				outputText("  The [skin]");
@@ -1916,15 +1924,15 @@ public class PlayerAppearance extends BaseContent {
 				else if (skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
 				else if (skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
 				outputText(" that is revealed by your lack of fur looks quite unusual.");
-			} else if (player.hasFullCoatOfType(AppearanceDefs.SKIN_COAT_FUR)) {
+			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  It's covered in [skin coat] that covers your " + player.skinTone + " skin underneath.");
 			} else {
 				outputText("  It's covered in [skin coat], making your face looks more unusual.");
 			}
 		}
-		if (faceType == AppearanceDefs.FACE_RED_PANDA) {
+		if (faceType == Face.RED_PANDA) {
 			outputText("  Your face has a distinctive animalistic muzzle, proper from a red-panda, complete with a cute pink nose.");
-			if (player.hasFullCoatOfType(AppearanceDefs.SKIN_COAT_FUR)) outputText("   A coat of soft, [skin coat] colored fur covers your head, with patches of white on your muzzle, cheeks and eyebrows.")
+			if (player.hasFullCoatOfType(Skin.FUR)) outputText("   A coat of soft, [skin coat] colored fur covers your head, with patches of white on your muzzle, cheeks and eyebrows.")
 		}
 		//</mod>
 	}
@@ -2185,16 +2193,16 @@ public function RacialScores():void {
 	if (player.mantisScore() >= 12) {
 		outputText("\n<font color=\"#0000a0\">Mantis-morph: " + player.mantisScore() + " (-" + (40 * (1 + player.newGamePlusMod())) + " max Str, +" + (60 * (1 + player.newGamePlusMod())) + " max Tou, +");
 		if (player.findPerk(PerkLib.MantislikeAgilityEvolved) >= 0) {
-			if (player.hasCoatOfType(AppearanceDefs.SKIN_COAT_CHITIN) && player.findPerk(PerkLib.ThickSkin) >= 0) outputText("" + (180 * (1 + player.newGamePlusMod())));
-			else if ((player.skinType == AppearanceDefs.SKIN_TYPE_SCALES && player.findPerk(PerkLib.ThickSkin) >= 0) || player.hasCoatOfType(AppearanceDefs.SKIN_COAT_CHITIN)) outputText("" + (170 * (1 + player.newGamePlusMod())));
-			else if (player.skinType == AppearanceDefs.SKIN_TYPE_SCALES) outputText("" + (160 * (1 + player.newGamePlusMod())));
+			if (player.hasCoatOfType(Skin.CHITIN) && player.findPerk(PerkLib.ThickSkin) >= 0) outputText("" + (180 * (1 + player.newGamePlusMod())));
+			else if ((player.skinType == Skin.SCALES && player.findPerk(PerkLib.ThickSkin) >= 0) || player.hasCoatOfType(Skin.CHITIN)) outputText("" + (170 * (1 + player.newGamePlusMod())));
+			else if (player.skinType == Skin.SCALES) outputText("" + (160 * (1 + player.newGamePlusMod())));
 			else if (player.findPerk(PerkLib.ThickSkin) >= 0) outputText("" + (150 * (1 + player.newGamePlusMod())));
 			else outputText("" + (140 * (1 + player.newGamePlusMod())) + " ");
 		}
 		else if (player.findPerk(PerkLib.MantislikeAgility) >= 0) {
-			if (player.hasCoatOfType(AppearanceDefs.SKIN_COAT_CHITIN) && player.findPerk(PerkLib.ThickSkin) >= 0) outputText("" + (160 * (1 + player.newGamePlusMod())));
-			else if ((player.skinType == AppearanceDefs.SKIN_TYPE_SCALES && player.findPerk(PerkLib.ThickSkin) >= 0) || player.hasCoatOfType(AppearanceDefs.SKIN_COAT_CHITIN)) outputText("" + (155 * (1 + player.newGamePlusMod())));
-			else if (player.skinType == AppearanceDefs.SKIN_TYPE_SCALES) outputText("" + (150 * (1 + player.newGamePlusMod())));
+			if (player.hasCoatOfType(Skin.CHITIN) && player.findPerk(PerkLib.ThickSkin) >= 0) outputText("" + (160 * (1 + player.newGamePlusMod())));
+			else if ((player.skinType == Skin.SCALES && player.findPerk(PerkLib.ThickSkin) >= 0) || player.hasCoatOfType(Skin.CHITIN)) outputText("" + (155 * (1 + player.newGamePlusMod())));
+			else if (player.skinType == Skin.SCALES) outputText("" + (150 * (1 + player.newGamePlusMod())));
 			else if (player.findPerk(PerkLib.ThickSkin) >= 0) outputText("" + (175 * (1 + player.newGamePlusMod())));
 			else outputText("" + (140 * (1 + player.newGamePlusMod())));
 		}
@@ -2204,16 +2212,16 @@ public function RacialScores():void {
 	else if (player.mantisScore() >= 6 && player.mantisScore() < 12) {
 		outputText("\n<font color=\"#0000a0\">Half Mantis-morph: " + player.mantisScore() + " (-" + (20 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, +");
 		if (player.findPerk(PerkLib.MantislikeAgilityEvolved) >= 0) {
-			if (player.hasCoatOfType(AppearanceDefs.SKIN_COAT_CHITIN) && player.findPerk(PerkLib.ThickSkin) >= 0) outputText("" + (110 * (1 + player.newGamePlusMod())));
-			else if ((player.skinType == AppearanceDefs.SKIN_TYPE_SCALES && player.findPerk(PerkLib.ThickSkin) >= 0) || player.hasCoatOfType(AppearanceDefs.SKIN_COAT_CHITIN)) outputText("" + (100 * (1 + player.newGamePlusMod())));
-			else if (player.skinType == AppearanceDefs.SKIN_TYPE_SCALES) outputText("" + (90 * (1 + player.newGamePlusMod())));
+			if (player.hasCoatOfType(Skin.CHITIN) && player.findPerk(PerkLib.ThickSkin) >= 0) outputText("" + (110 * (1 + player.newGamePlusMod())));
+			else if ((player.skinType == Skin.SCALES && player.findPerk(PerkLib.ThickSkin) >= 0) || player.hasCoatOfType(Skin.CHITIN)) outputText("" + (100 * (1 + player.newGamePlusMod())));
+			else if (player.skinType == Skin.SCALES) outputText("" + (90 * (1 + player.newGamePlusMod())));
 			else if (player.findPerk(PerkLib.ThickSkin) >= 0) outputText("" + (80 * (1 + player.newGamePlusMod())));
 			else outputText("" + (70 * (1 + player.newGamePlusMod())) + " ");
 		}
 		else if (player.findPerk(PerkLib.MantislikeAgility) >= 0) {
-			if (player.hasCoatOfType(AppearanceDefs.SKIN_COAT_CHITIN) && player.findPerk(PerkLib.ThickSkin) >= 0) outputText("" + (90 * (1 + player.newGamePlusMod())));
-			else if ((player.skinType == AppearanceDefs.SKIN_TYPE_SCALES && player.findPerk(PerkLib.ThickSkin) >= 0) || player.hasCoatOfType(AppearanceDefs.SKIN_COAT_CHITIN)) outputText("" + (85 * (1 + player.newGamePlusMod())));
-			else if (player.skinType == AppearanceDefs.SKIN_TYPE_SCALES) outputText("" + (80 * (1 + player.newGamePlusMod())));
+			if (player.hasCoatOfType(Skin.CHITIN) && player.findPerk(PerkLib.ThickSkin) >= 0) outputText("" + (90 * (1 + player.newGamePlusMod())));
+			else if ((player.skinType == Skin.SCALES && player.findPerk(PerkLib.ThickSkin) >= 0) || player.hasCoatOfType(Skin.CHITIN)) outputText("" + (85 * (1 + player.newGamePlusMod())));
+			else if (player.skinType == Skin.SCALES) outputText("" + (80 * (1 + player.newGamePlusMod())));
 			else if (player.findPerk(PerkLib.ThickSkin) >= 0) outputText("" + (75 * (1 + player.newGamePlusMod())));
 			else outputText("" + (70 * (1 + player.newGamePlusMod())));
 		}

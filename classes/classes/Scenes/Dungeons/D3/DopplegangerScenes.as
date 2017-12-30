@@ -1,7 +1,8 @@
 ﻿package classes.Scenes.Dungeons.D3 
 {
-import classes.AppearanceDefs;
 import classes.BaseContent;
+import classes.BodyParts.Skin;
+import classes.BodyParts.Tail;
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
@@ -74,7 +75,7 @@ import classes.PerkLib;
 				outputText("\n\nYou turn the mirror demon’s wild stare and ragged breath away from you, laying a comforting but firm hand upon [his] shoulder as, grinning, you lower your eyes to [his] [butt]. Nice.");
 				if (player.isNaga()) outputText("  You sigh at the smooth, pleasurable feeling of your scales rubbing over each other as you sensuously wind yourself around [his] tail until you are tightly bound together. Twin lithe snake boys wound around each other- all you really need is a paying audience. Or a stick and a hospital. You laugh with a similar tinge of madness that your partner did a short while ago and [he] groans raggedly in response.");
 				else if (player.isDrider()) outputText("  The tangle of spindly legs in front of you initially puts you off, but then your arachnid instincts take over and you find yourself eagerly clambering onto [his] bulging back before you know it, your hardening dick pressing against the human softness which rises above the gleaming chitin as your monstrous body presses heavily down onto its mirror counterpart, making [him] groan raggedly.");
-				else if (!player.hasFur() && player.tailType != AppearanceDefs.TAIL_TYPE_NONE) outputText("  You clamber on top of [him], the rough mingling of your fur sparking deep urges within you, your animal half dreaming of frenzied, bestial mating in the wild. Your hardening dick presses against [his] [tail] and [he] groans raggedly in response.");
+				else if (!player.hasFur() && player.tailType != Tail.NONE) outputText("  You clamber on top of [him], the rough mingling of your fur sparking deep urges within you, your animal half dreaming of frenzied, bestial mating in the wild. Your hardening dick presses against [his] [tail] and [he] groans raggedly in response.");
 				else outputText("  You clamber on top of [him], enjoying the give and take of [his] "+ (player.isGoo() ? "gooey" : "smooth") +" flesh as you lock your [hips] around their mirror counterparts, making [him] groan raggedly in response.");
 
 				outputText("\n\n“<i>I cannot believe you are doing this. There- there are demons who wouldn’t do this. What kind of sick bastard even are you?</i>“");
@@ -151,7 +152,7 @@ import classes.PerkLib;
 				outputText("\n\nYour gaze drops from the mirror demon’s wild stare, down to her [chest]. Nice. You lay a comforting but firm hand upon her shoulder as you sit yourself down in front of your clone, your own [chest] pushing into hers as, almost mockingly, you cuddle her.");
 				if (player.isNaga()) outputText("  You sigh at the smooth, pleasurable feeling of scales rubbing over each other as you sensuously wind yourself around her tail until you are tightly bound together. Twin lithe snake girls wound around each other- all you really need is a paying audience. Or a stick and a hospital. You laugh with a similar tinge of madness that your partner did a short while ago and she groans raggedly in response.");
 				else if (player.isDrider()) outputText("  You are momentarily thrown by your sixteen spindly legs tangling together, a creepy twitching maze devolving across the floor- but this is definitely the way to do it. Face-to-face. You want to drink in your mirror image’s every reaction. Your [vagina] presses against the human softness which rises above her gleaming chitin as your body presses heavily into its mirror counterpart, eliciting a ragged groan.");
-				else if (player.hasFullCoatOfType(AppearanceDefs.SKIN_COAT_FUR)) outputText("  You clamber on top of her, the rough mingling of your fur sparking deep urges within you, your animal half dreaming of frenzied, bestial mating in the wild. Your [vagina] presses into her digitigrade thigh and she groans raggedly in response.");
+				else if (player.hasFullCoatOfType(Skin.FUR)) outputText("  You clamber on top of her, the rough mingling of your fur sparking deep urges within you, your animal half dreaming of frenzied, bestial mating in the wild. Your [vagina] presses into her digitigrade thigh and she groans raggedly in response.");
 				else outputText("  You clamber on top of her, enjoying the give and take of her "+ (player.isGoo() ? "gooey" : "smooth") + " flesh as you lock your [hips] around their mirror counterparts, making her groan raggedly in response.");
 
 				outputText("\n\n“<i>I cannot believe you are doing this. There- there are demons who wouldn’t do this. What kind of sick bitch are you?</i>”");

@@ -4,12 +4,16 @@
  */
 package classes.Scenes.NPCs 
 {
-	import classes.*;
-	import classes.BodyParts.Skin;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
-	
-	public class CaiLin extends Monster
+import classes.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Face;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Skin;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.*;
+
+public class CaiLin extends Monster
 	{
 		override protected function performCombatAction():void
 		{
@@ -250,7 +254,7 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.CAILIN_LVL_UP] == 0) {
 				if (game.flags[kFLAGS.CAILIN_AFFECTION] >= 10) this.long = "You are fighting Cai'Lin. Despite that she not looking exactly the same as other gorgon due to huge parts of her skin not covered in seven-colored scales, striped in a pattern reminiscent of the dunes around you. Scaleless areas includes most of her face, front torso and abdomen. Instead of bifurcating into legs, her hips elongate into a snake's body which stretches far out behind her, leaving a long and curving trail in the sand.  She's wearing only make-shift bra over her A-cup breasts and simple loincloth. In her mouth you can see a pair of sharp, venomous fangs and a long forked tongue moving rapidly as she hisses at you.";
 				else this.long = "You are fighting a gorgon. Despite that she not looking exactly the same as other gorgon due to huge parts of her skin not covered in seven-colored scales, striped in a pattern reminiscent of the dunes around you. Scaleless areas includes most of her face, front torso and abdomen. Instead of bifurcating into legs, her hips elongate into a snake's body which stretches far out behind her, leaving a long and curving trail in the sand.  She's wearing only make-shift bra over her A-cup breasts and simple loincloth. In her mouth you can see a pair of sharp, venomous fangs and a long forked tongue moving rapidly as she hisses at you.";
-				this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_WET, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
+				this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_NORMAL);
 				this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 				createBreastRow(Appearance.breastCupInverse("A"));
 				this.tallness = 5*12+10;
@@ -265,7 +269,7 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.CAILIN_LVL_UP] == 1) {
 				this.long = "You are fighting Cai'Lin. Despite that she not looking exactly the same as other gorgon due to huge parts of her skin not covered in seven-colored scales, striped in a pattern reminiscent of the dunes around you. Scaleless areas includes most of her face, front torso and abdomen. Instead of bifurcating into legs, her hips elongate into a snake's body which stretches far out behind her, leaving a long and curving trail in the sand.  She's wearing only make-shift bra over her A-cup breasts and simple loincloth. In her mouth you can see a pair of sharp, venomous fangs and a long forked tongue moving rapidly as she hisses at you.";
-				this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_WET, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);//każde 2 lvl up podwyższają wetness
+				this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_NORMAL);//każde 2 lvl up podwyższają wetness
 				this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);//zwieksza sie czy tez nie?
 				createBreastRow(Appearance.breastCupInverse("B"));//wpierw wzrost do B na 1,2 lvl-up potem do C na 3,4 i do D na 5,6 a dodtkowe urośnicie jak użyje jakiś TF
 				this.tallness = 6*12;//potem z każdą zmianą dodawać jej 2 wzrostu tak aby ostatecznie osiągneła coś koło 6*12+10
@@ -280,13 +284,13 @@ package classes.Scenes.NPCs
 				this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			}
 			// this.plural = false;
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
-			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE;//hip size - ostatecznie size 15 (używać eggs jak Amily)
-			this.buttRating = AppearanceDefs.BUTT_RATING_NOTICEABLE;//butt size -  ostatecznie size 12 (używać eggs jak Amily)
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_NAGA;
-			this.skin.growCoat(AppearanceDefs.SKIN_COAT_SCALES,{color:"seven-colored"},Skin.COVERAGE_COMPLETE);
+			this.hipRating = Hips.RATING_AMPLE;//hip size - ostatecznie size 15 (używać eggs jak Amily)
+			this.buttRating = Butt.RATING_NOTICEABLE;//butt size -  ostatecznie size 12 (używać eggs jak Amily)
+			this.lowerBody = LowerBody.NAGA;
+			this.skin.growCoat(Skin.SCALES,{color:"seven-colored"},Skin.COVERAGE_COMPLETE);
 			this.hairColor = "seven-colored";
 			this.weaponName = "claws";
 			this.weaponVerb="claw-slash";
@@ -300,7 +304,7 @@ package classes.Scenes.NPCs
 					add(null,1).
 					add(consumables.REPTLUM,5).
 					add(consumables.GORGOIL,4);
-			this.faceType = AppearanceDefs.FACE_SNAKE_FANGS;
+			this.faceType = Face.SNAKE_FANGS;
 			this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
 			checkMonster();
 		}

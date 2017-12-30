@@ -1,7 +1,10 @@
 package classes.Scenes.Dungeons.DeepCave
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Wings;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -105,11 +108,11 @@ public class Zetaz extends Monster
 				if(player.lust >= 30 && player.lust < 60 && player.cocks.length == 1) outputText(player.SMultiCockDesc() + " hardens and twitches, distracting you further.  ");
 			}
 			if(player.vaginas.length > 0) {
-				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == AppearanceDefs.VAGINA_WETNESS_NORMAL && player.vaginas.length == 1) outputText("Your [vagina] dampens perceptibly, feeling very empty.  ");
-				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == AppearanceDefs.VAGINA_WETNESS_WET && player.vaginas.length > 0) outputText("Your crotch becomes sticky with girl-lust, making it clear to " + a + short + " just how welcome your body finds the spell.  ");
-				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == AppearanceDefs.VAGINA_WETNESS_SLICK && player.vaginas.length == 1) outputText("Your [vagina] becomes sloppy and wet, dribbling with desire to be mounted and fucked.  ");
-				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == AppearanceDefs.VAGINA_WETNESS_DROOLING && player.vaginas.length > 0) outputText("Thick runners of girl-lube stream down the insides of your thighs as your crotch gives into the demonic magics.  You wonder what " + a + short + "'s cock would feel like inside you?  ");
-				if (player.lust >= 60 && player.vaginas[0].vaginalWetness == AppearanceDefs.VAGINA_WETNESS_SLAVERING && player.vaginas.length == 1) outputText("Your [vagina] instantly soaks your groin with the heady proof of your need.  You wonder just how slippery you could " + a + short + "'s dick when it's rammed inside you?  ");
+				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL && player.vaginas.length == 1) outputText("Your [vagina] dampens perceptibly, feeling very empty.  ");
+				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET && player.vaginas.length > 0) outputText("Your crotch becomes sticky with girl-lust, making it clear to " + a + short + " just how welcome your body finds the spell.  ");
+				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK && player.vaginas.length == 1) outputText("Your [vagina] becomes sloppy and wet, dribbling with desire to be mounted and fucked.  ");
+				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING && player.vaginas.length > 0) outputText("Thick runners of girl-lube stream down the insides of your thighs as your crotch gives into the demonic magics.  You wonder what " + a + short + "'s cock would feel like inside you?  ");
+				if (player.lust >= 60 && player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING && player.vaginas.length == 1) outputText("Your [vagina] instantly soaks your groin with the heady proof of your need.  You wonder just how slippery you could " + a + short + "'s dick when it's rammed inside you?  ");
 			}
 			if(player.lust >= player.maxLust()) doNext(SceneLib.combat.endLustLoss);
 		}
@@ -168,12 +171,12 @@ public class Zetaz extends Monster
 			this.cumMultiplier = 3;
 			this.hoursSinceCum = 20;
 			createBreastRow(0);
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.tallness = 4*12+1;
-			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
-			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_KANGAROO;
+			this.hipRating = Hips.RATING_BOYISH;
+			this.buttRating = Butt.RATING_TIGHT;
+			this.lowerBody = LowerBody.KANGAROO;
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 5;
@@ -193,7 +196,7 @@ public class Zetaz extends Monster
 			this.gems = rand(75) + 175;
 			this.additionalXP = 200;
 			this.drop = new WeightedDrop(consumables.BIMBOLQ, 1);
-			this.wingType = AppearanceDefs.WING_TYPE_IMP;
+			this.wingType = Wings.IMP;
 			this.wingDesc = "small";
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);

@@ -5,7 +5,9 @@
 package classes.Scenes.Areas.DeepSea 
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
 import classes.internals.*;
 
 public class Kraken extends Monster
@@ -73,15 +75,15 @@ public class Kraken extends Monster
 			this.imageName = "kraken";
 			this.long = "You are currently fighting 24 feet tall Kraken.";
 			// this.plural = false;
-			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DROOLING, AppearanceDefs.VAGINA_LOOSENESS_GAPING);
+			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_GAPING);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 300, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("C"));
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_VIRGIN;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 24*12;
-			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE;
-			this.buttRating = AppearanceDefs.BUTT_RATING_NOTICEABLE;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_SCYLLA;
+			this.hipRating = Hips.RATING_AMPLE;
+			this.buttRating = Butt.RATING_NOTICEABLE;
+			this.lowerBody = LowerBody.SCYLLA;
 			this.skin.setBaseOnly({color:"slippery"});
 			this.hairColor = "brown";
 			this.hairLength = 5;

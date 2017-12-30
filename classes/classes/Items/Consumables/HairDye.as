@@ -1,10 +1,9 @@
 package classes.Items.Consumables 
 {
 import classes.Appearance;
-import classes.AppearanceDefs;
+import classes.BodyParts.Skin;
 import classes.EngineCore;
 import classes.Items.Consumable;
-import classes.Items.ConsumableLib;
 import classes.Scenes.SceneLib;
 
 public class HairDye extends Consumable
@@ -37,7 +36,7 @@ public class HairDye extends Consumable
 				EngineCore.addButtonDisabled(0, "Hair", "You are bald!");
 			}
 			
-			if (game.player.hasCoatOfType(AppearanceDefs.SKIN_COAT_FUR)) {
+			if (game.player.hasCoatOfType(Skin.FUR)) {
 				outputText("\n\nYou have [skin coat].");
 				if (game.player.coatColor != _color) EngineCore.addButton(1, "Fur", dyeFur);
 				else EngineCore.addButtonDisabled(1, "Fur", "Your already have " + _color + " fur!");

@@ -1,7 +1,10 @@
 package classes.Scenes.Areas.Swamp
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -35,13 +38,13 @@ public class MaleSpiderMorph extends AbstractSpiderMorph
 			this.balls = 2;
 			this.ballSize = 2;
 			createBreastRow(0);
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,40,0,0,0);
 			this.tallness = 7*12+6;
-			this.hipRating = AppearanceDefs.HIP_RATING_CURVY+2;
-			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE+1;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS;
+			this.hipRating = Hips.RATING_CURVY+2;
+			this.buttRating = Butt.RATING_LARGE+1;
+			this.lowerBody = LowerBody.CHITINOUS_SPIDER_LEGS;
 			this.skinTone = "dusky";
 			this.hairColor = "red";
 			this.hairLength = 13;
@@ -64,7 +67,7 @@ public class MaleSpiderMorph extends AbstractSpiderMorph
 			this.drop = new WeightedDrop().add(consumables.S_GOSSR,5)
 					.add(useables.T_SSILK,1)
 					.add(null,4);
-			this.tailType = AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN;
+			this.tailType = Tail.SPIDER_ADBOMEN;
 			this.tailRecharge = 0;
 			checkMonster();
 		}

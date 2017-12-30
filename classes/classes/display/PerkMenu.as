@@ -2,11 +2,12 @@
  * Created by aimozg on 22.05.2017.
  */
 package classes.display {
-import classes.AppearanceDefs;
 import classes.BaseContent;
+import classes.BodyParts.Face;
+import classes.BodyParts.Tail;
+import classes.CoC;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.PerkClass;
 import classes.PerkLib;
 import classes.PerkTree;
@@ -189,11 +190,11 @@ public class PerkMenu extends BaseContent {
 		if (player.findPerk(PerkLib.EnvenomedBolt) >= 0 && flags[kFLAGS.ENVENOMED_BOLTS] != 0) addButton(12, "None", toggleflag,kFLAGS.ENVENOMED_BOLTS,false);
 		if (
 				player.findPerk(PerkLib.EnvenomedBolt) >= 0
-				&& (player.tailType == AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN
-						|| player.tailType == AppearanceDefs.TAIL_TYPE_SCORPION
-						|| player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL
-						|| player.faceType == AppearanceDefs.FACE_SNAKE_FANGS
-						|| player.faceType == AppearanceDefs.FACE_SPIDER_FANGS)
+				&& (player.tailType == Tail.BEE_ABDOMEN
+						|| player.tailType == Tail.SCORPION
+						|| player.tailType == Tail.MANTICORE_PUSSYTAIL
+						|| player.faceType == Face.SNAKE_FANGS
+						|| player.faceType == Face.SPIDER_FANGS)
 				&& flags[kFLAGS.ENVENOMED_BOLTS] != 1
 		)
 		{

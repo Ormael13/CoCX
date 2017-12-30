@@ -1,6 +1,10 @@
 package classes.Scenes.NPCs
 {
 import classes.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.Horns;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
@@ -178,7 +182,7 @@ public class Ember extends Monster
 				// this.hoursSinceCum = 0;
 			}
 			if(gender >= 2) {
-				this.createVagina(game.flags[kFLAGS.EMBER_PUSSY_FUCK_COUNT] == 0, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_LOOSE);
+				this.createVagina(game.flags[kFLAGS.EMBER_PUSSY_FUCK_COUNT] == 0, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_LOOSE);
 				createBreastRow(Appearance.breastCupInverse("F"));
 			} else {
 				createBreastRow(Appearance.breastCupInverse("flat"));
@@ -247,11 +251,11 @@ public class Ember extends Monster
 				this.bonusHP = 2000;
 				this.level = 62;
 			}
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_NORMAL;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.tallness = rand(8) + 70;
-			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
-			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
+			this.hipRating = Hips.RATING_AMPLE+2;
+			this.buttRating = Butt.RATING_LARGE;
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
@@ -262,9 +266,9 @@ public class Ember extends Monster
 			this.lust = 20;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.gems = 0;
-			this.hornType = AppearanceDefs.HORNS_DRACONIC_X4_12_INCH_LONG;
+			this.hornType = Horns.DRACONIC_X4_12_INCH_LONG;
 			this.horns = 4;
-			this.tailType = AppearanceDefs.TAIL_TYPE_DRACONIC;
+			this.tailType = Tail.DRACONIC;
 			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.2);
 			if (flags[kFLAGS.EMBER_LVL_UP] >= 1) this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			if (flags[kFLAGS.EMBER_LVL_UP] >= 2) {

@@ -1,6 +1,7 @@
 package classes.Scenes.Areas.HighMountains 
 {
 import classes.*;
+import classes.BodyParts.Horns;
 import classes.GlobalFlags.kFLAGS;
 
 /**
@@ -192,7 +193,7 @@ import classes.GlobalFlags.kFLAGS;
 				else outputText(" trying to force");
 				outputText(" your way through little Izumi’s door uninvited.  I’d tell you off, but I’ve got to admit, I don’t get many visitors of your... </i>stature.<i>");
 				
-				if (player.hornType != AppearanceDefs.HORNS_COW_MINOTAUR)
+				if (player.hornType != Horns.COW_MINOTAUR)
 				{
 					outputText("  Or at least, ones without a pair of bulls horns");
 					if (this.actsLikeACow() == true)
@@ -1009,8 +1010,8 @@ import classes.GlobalFlags.kFLAGS;
 
 				outputText("Izumi’s finger is naturally much larger than your own, so thick that it feels almost like an actual cock, rather than just a probing digit... but the way it flexes and bends within you, slowly worming its way in deeper to gently probe at your most sensitive spots, is distinctly different.");
 
-				if (player.looseness() <= AppearanceDefs.VAGINA_LOOSENESS_NORMAL) outputText("  She takes it slowly, pushing into you with agonizing care so as not to cause you any distress.  Inch by inch, centimeter by centimeter, she slides her finger into your pussy, finally bottoming out down to the knuckle.  You let out a little gasp of surprise and alarm as she gives her finger a sudden quick, tickling twitch, as though tickling a pet under its chin, then grins savagely at your reaction.\n\n");
-				else if (player.looseness() >= AppearanceDefs.VAGINA_LOOSENESS_GAPING) outputText("  Izumi’s finger slips between your cavernous walls with ease, quickly bottoming out inside you.  She lets out an amused grunt of surprise at the ease with which she’s able to fit her finger inside you.\n\n");
+				if (player.looseness() <= VaginaClass.LOOSENESS_NORMAL) outputText("  She takes it slowly, pushing into you with agonizing care so as not to cause you any distress.  Inch by inch, centimeter by centimeter, she slides her finger into your pussy, finally bottoming out down to the knuckle.  You let out a little gasp of surprise and alarm as she gives her finger a sudden quick, tickling twitch, as though tickling a pet under its chin, then grins savagely at your reaction.\n\n");
+				else if (player.looseness() >= VaginaClass.LOOSENESS_GAPING) outputText("  Izumi’s finger slips between your cavernous walls with ease, quickly bottoming out inside you.  She lets out an amused grunt of surprise at the ease with which she’s able to fit her finger inside you.\n\n");
 
 				outputText("“<i>I guess someone’s been busy, huh? And here was me thinking you were a nice girl.</i>”  Izumi teases.  “<i>Well, I guess we can skip the foreplay then....</i>”\n\n");
 

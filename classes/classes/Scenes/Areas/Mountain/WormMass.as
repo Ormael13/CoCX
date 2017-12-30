@@ -1,7 +1,8 @@
 ﻿package classes.Scenes.Areas.Mountain
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
 import classes.Scenes.SceneLib;
 
 public class WormMass extends Monster
@@ -88,11 +89,11 @@ public class WormMass extends Monster
 			this.pronoun2 = "them";
 			this.pronoun3 = "their";
 			this.createBreastRow(0,0);
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_VIRGIN;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.tallness = 1;
-			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
-			this.buttRating = AppearanceDefs.BUTT_RATING_BUTTLESS;
+			this.hipRating = Hips.RATING_SLENDER;
+			this.buttRating = Butt.RATING_BUTTLESS;
 			this.skinTone = "white";
 			initStrTouSpeInte(40, 10, 10, 1);
 			initWisLibSensCor(1, 90, 60, 90);

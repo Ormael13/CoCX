@@ -2,59 +2,105 @@
  * Created by aimozg on 25.04.2017.
  */
 package classes.BodyParts {
-import classes.AppearanceDefs;
 import classes.Creature;
 
 public class LowerBody extends SaveableBodyPart {
 	public var legCount:int = 2;
-
+	
+	public static const HUMAN:int                 = 0;
+	public static const HOOFED:int                = 1;
+	public static const DOG:int                   = 2;
+	public static const NAGA:int                  = 3;
+	[Deprecated]
+	/** use HOOFED and legCount = 4 */
+	public static const CENTAUR:int               = 4;
+	public static const DEMONIC_HIGH_HEELS:int    = 5;
+	public static const DEMONIC_CLAWS:int         = 6;
+	public static const BEE:int                   = 7;
+	public static const GOO:int                   = 8;
+	public static const CAT:int                   = 9;
+	public static const LIZARD:int                = 10;
+	public static const PONY:int                  = 11;
+	public static const BUNNY:int                 = 12;
+	public static const HARPY:int                 = 13;
+	public static const KANGAROO:int              = 14;
+	public static const CHITINOUS_SPIDER_LEGS:int = 15;
+	public static const DRIDER:int                = 16;
+	public static const FOX:int                   = 17;
+	public static const DRAGON:int                = 18;
+	public static const RACCOON:int               = 19;
+	public static const FERRET:int                = 20;
+	public static const CLOVEN_HOOFED:int         = 21;
+	public static const ECHIDNA:int               = 23;
+	[Deprecated]
+	/** use CLOVEN_HOOFED and legCount = 4 */
+	public static const DEERTAUR:int              = 24;
+	public static const SALAMANDER:int            = 25;
+	public static const SCYLLA:int                = 26;
+	public static const MANTIS:int                = 27;
+	public static const SHARK:int                 = 29;
+	public static const GARGOYLE:int              = 30;
+	public static const PLANT_HIGH_HEELS:int      = 31;
+	public static const PLANT_ROOT_CLAWS:int      = 32;
+	public static const WOLF:int                  = 33;
+	public static const PLANT_FLOWER:int          = 34;
+	public static const LION:int                  = 35;
+	public static const YETI:int                  = 36;
+	public static const ORCA:int                  = 37;
+	public static const YGG_ROOT_CLAWS:int        = 38;
+	public static const ONI:int                   = 39;
+	public static const ELF:int                   = 40;
+	public static const RAIJU:int                 = 41;
+	public static const RED_PANDA:int             = 42;
+	public static const GARGOYLE_2:int            = 43;
+	
 	override public function set type(value:int):void {
 		super.type = value;
 		// Reset leg count
 		switch (value) {
-			case AppearanceDefs.LOWER_BODY_TYPE_GOO:
-			case AppearanceDefs.LOWER_BODY_TYPE_NAGA:
+			case GOO:
+			case NAGA:
 				legCount = 1;
 				break;
-			case AppearanceDefs.LOWER_BODY_TYPE_BEE:
-			case AppearanceDefs.LOWER_BODY_TYPE_BUNNY:
-			case AppearanceDefs.LOWER_BODY_TYPE_CAT:
-			case AppearanceDefs.LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS:
-			case AppearanceDefs.LOWER_BODY_TYPE_DEMONIC_CLAWS:
-			case AppearanceDefs.LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS:
-			case AppearanceDefs.LOWER_BODY_TYPE_DOG:
-			case AppearanceDefs.LOWER_BODY_TYPE_DRAGON:
-			case AppearanceDefs.LOWER_BODY_TYPE_ECHIDNA:
-			case AppearanceDefs.LOWER_BODY_TYPE_FERRET:
-			case AppearanceDefs.LOWER_BODY_TYPE_FOX:
-			case AppearanceDefs.LOWER_BODY_TYPE_HARPY:
-			case AppearanceDefs.LOWER_BODY_TYPE_HUMAN:
-			case AppearanceDefs.LOWER_BODY_TYPE_KANGAROO:
-			case AppearanceDefs.LOWER_BODY_TYPE_LIZARD:
-			case AppearanceDefs.LOWER_BODY_TYPE_RACCOON:
-			case AppearanceDefs.LOWER_BODY_TYPE_RED_PANDA:
-			case AppearanceDefs.LOWER_BODY_TYPE_SALAMANDER:
+			case BEE:
+			case BUNNY:
+			case CAT:
+			case CHITINOUS_SPIDER_LEGS:
+			case DEMONIC_CLAWS:
+			case DEMONIC_HIGH_HEELS:
+			case DOG:
+			case DRAGON:
+			case ECHIDNA:
+			case FERRET:
+			case FOX:
+			case HARPY:
+			case HUMAN:
+			case KANGAROO:
+			case LIZARD:
+			case RACCOON:
+			case RED_PANDA:
+			case SALAMANDER:
 				legCount = 2;
 				break;
-			case AppearanceDefs.LOWER_BODY_TYPE_CLOVEN_HOOFED:
-			case AppearanceDefs.LOWER_BODY_TYPE_HOOFED:
+			case CLOVEN_HOOFED:
+			case HOOFED:
 				if (legCount != 4) legCount = 2;
 				break;
-			case AppearanceDefs.LOWER_BODY_TYPE_PONY:
+			case PONY:
 				legCount = 4;
 				break;
-			case AppearanceDefs.LOWER_BODY_TYPE_CENTAUR: // deprecated value
+			case CENTAUR: // deprecated value
 				legCount = 4;
-				type     = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
+				type     = HOOFED;
 				break;
-			case AppearanceDefs.LOWER_BODY_TYPE_DEERTAUR:
+			case DEERTAUR:
 				legCount = 4;
-				type     = AppearanceDefs.LOWER_BODY_TYPE_CLOVEN_HOOFED;
+				type     = CLOVEN_HOOFED;
 				break;
-			case AppearanceDefs.LOWER_BODY_TYPE_DRIDER_LOWER_BODY:
+			case DRIDER:
 				legCount = 8;
 				break;
-			case AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER:
+			case PLANT_FLOWER:
 				legCount = 12;
 				break;
 		}
@@ -67,322 +113,223 @@ public class LowerBody extends SaveableBodyPart {
 		super.restore(keepColor);
 		legCount = 2;
 	}
-	public function leg():String {
-		var select:Number = 0;
-		//type:
-		//0 - normal
-		if (type == 0)
-			return "leg";
-		//1 - hooves
-		if (type == 1)
-			return "leg";
-		//2 - paws
-		if (type == 2)
-			return "leg";
-		//3 - snakelike body
-		if (type == 3)
-			return "snake-tail";
-		//4 - centaur!
-		if (type == 4)
-			return "equine leg";
-		//8 - goo shit
-		if (type == 8)
-			return "mound of goo";
-		//PONY
-		if (type == 11)
-			return "cartoonish pony-leg";
-		//BUNNAH
-		if (type == 12) {
-			select = Math.random() * (5);
-			if (select == 0)
-				return "fuzzy, bunny leg";
-			else if (select == 1)
-				return "fur-covered leg";
-			else if (select == 2)
-				return "furry leg";
-			else
-				return "leg";
-		}
-		if (type == 13) {
-			select = Math.floor(Math.random() * (5));
-			if (select == 0)
-				return "bird-like leg";
-			else if (select == 1)
-				return "feathered leg";
-			else
-				return "leg";
-		}
-		if (type == 17) {
-			select = Math.floor(Math.random() * (4));
-			if (select == 0)
-				return "fox-like leg";
-			else if (select == 1)
-				return "leg";
-			else if (select == 2)
-				return "leg";
-			else
-				return "vulpine leg";
-		}
-		if (type == 19) {
-			select = Math.floor(Math.random() * (4));
-			if (select == 0)
-				return "raccoon-like leg";
-			else
-				return "leg";
-		}
-		return "leg";
-	}
-
-	public function feet():String {
-		var select:Number = 0;
-		//type:
-		//0 - normal
-		if (type == 0)
-			return "feet";
-		//1 - hooves
-		if (type == 1)
-			return "hooves";
-		//2 - paws
-		if (type == 2)
-			return "paws";
-		//3 - snakelike body
-		if (type == 3)
-			return "coils";
-		//4 - centaur!
-		if (type == 4)
-			return "hooves";
-		//5 - demonic heels
-		if (type == 5)
-			return "demonic high-heels";
-		//6 - demonic claws
-		if (type == 6)
-			return "demonic foot-claws";
-		//8 - goo shit
-		if (type == 8)
-			return "slimey cillia";
-		if (type == 11)
-			return "flat pony-feet";
-		//BUNNAH
-		if (type == 12) {
-			select = rand(5);
-			if (select == 0)
-				return "large bunny feet";
-			else if (select == 1)
-				return "rabbit feet";
-			else if (select == 2)
-				return "large feet";
-			else
-				return "feet";
-		}
-		if (type == 13) {
-			select = Math.floor(Math.random() * (5));
-			if (select == 0)
-				return "taloned feet";
-			else
-				return "feet";
-		}
-		if (type == 14)
-			return "foot-paws";
-		if (type == 17) {
-			select = rand(4);
-			if (select == 0)
-				return "paws";
-			else if (select == 1)
-				return "soft, padded paws";
-			else if (select == 2)
-				return "fox-like feet";
-			else
-				return "paws";
-		}
-		if (type == 19) {
-			select = Math.floor(Math.random() * (3));
-			if (select == 0)
-				return "raccoon-like feet";
-			else if (select == 1)
-				return "long-toed paws";
-			else if (select == 2)
-				return "feet";
-			else
-				return "paws";
-		}
-		return "feet";
-	}
-
-	public function foot():String {
-		var select:Number = 0;
-		//type:
-		//0 - normal
-		if (type == 0)
-			return "foot";
-		//1 - hooves
-		if (type == 1)
-			return "hoof";
-		//2 - paws
-		if (type == 2)
-			return "paw";
-		//3 - snakelike body
-		if (type == 3)
-			return "coiled tail";
-		//4 - centaur!
-		if (type == 4)
-			return "hoof";
-		//8 - goo shit
-		if (type == 8)
-			return "slimey undercarriage";
-		//PONY
-		if (type == 11)
-			return "flat pony-foot";
-		//BUNNAH
-		if (type == 12) {
-			select = Math.random() * (5);
-			if (select == 0)
-				return "large bunny foot";
-			else if (select == 1)
-				return "rabbit foot";
-			else if (select == 2)
-				return "large foot";
-			else
-				return "foot";
-		}
-		if (type == 13) {
-			select = Math.floor(Math.random() * (5));
-			if (select == 0)
-				return "taloned foot";
-			else
-				return "foot";
-		}
-		if (type == 17) {
-			select = Math.floor(Math.random() * (4));
-			if (select == 0)
-				return "paw";
-			else if (select == 1)
-				return "soft, padded paw";
-			else if (select == 2)
-				return "fox-like foot";
-			else
-				return "paw";
-		}
-		if (type == 14)
-			return "foot-paw";
-		if (type == 19) {
-			select = Math.floor(Math.random() * (3));
-			if (select == 0)
-				return "raccoon-like foot";
-			else if (select == 1)
-				return "long-toed paw";
-			else if (select == 2)
-				return "foot";
-			else
-				return "paw";
-		}
-		return "foot";
-	}
-	public function isDrider():Boolean {
-		return (type == AppearanceDefs.LOWER_BODY_TYPE_DRIDER_LOWER_BODY);
-	}
-	public function isGoo():Boolean {
-		return type == AppearanceDefs.LOWER_BODY_TYPE_GOO;
-	}
-	public function isBiped():Boolean {
-		return legCount == 2;
-	}
-	public function isNaga():Boolean {
-		return type == AppearanceDefs.LOWER_BODY_TYPE_NAGA;
-	}
-
-	public function isTaur():Boolean {
-		// driders have genitals on their human part, inlike usual taurs... this is actually bad way to check, but too many places to fix just now
-		return legCount == 4 && type != AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER;
-	}
-	public function isScylla():Boolean {
-		return type == AppearanceDefs.LOWER_BODY_TYPE_SCYLLA;
-	}
-	public function isAlraune():Boolean {
-		return type == AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER;
-	}
+	
 	public function legs():String {
-		var select:Number = 0;
-		//lowerBody:
-		//4 legs - centaur!
-		if (isDrider())
-			return num2Text(legCount) + " spider legs";
 		if (isTaur())
 			return num2Text(legCount) + " legs";
-		if (isAlraune())
-			return num2Text(legCount) + " vine-like tentacle stamens";
-
+		
 		switch (type) {
-			case AppearanceDefs.LOWER_BODY_TYPE_HUMAN:
-				return "legs";
-			case AppearanceDefs.LOWER_BODY_TYPE_HOOFED:
-				return "legs";
-			case AppearanceDefs.LOWER_BODY_TYPE_DOG:
-				return "legs";
-			case AppearanceDefs.LOWER_BODY_TYPE_NAGA:
-				return "snake-like coils";
-			case AppearanceDefs.LOWER_BODY_TYPE_GOO:
-				return "mounds of goo";
-			case AppearanceDefs.LOWER_BODY_TYPE_PONY:
-				return "cute pony-legs";
-			case AppearanceDefs.LOWER_BODY_TYPE_BUNNY: {
-				select = Math.floor(Math.random() * (5));
-				if (select == 0)
-					return "fuzzy, bunny legs";
-				else if (select == 1)
-					return "fur-covered legs";
-				else if (select == 2)
-					return "furry legs";
-				else
-					return "legs";
+			case DRIDER: return num2Text(legCount) + " spider legs";
+			case PLANT_FLOWER: return num2Text(legCount) + " vine-like tentacle stamens";
+			case HUMAN: return "legs";
+			case HOOFED: return "legs";
+			case DOG:  return "legs";
+			case NAGA: return "snake-like coils";
+			case GOO:  return "mounds of goo";
+			case PONY: return "cute pony-legs";
+			case BUNNY: {
+				switch(Math.floor(Math.random() * (5))) {
+					case 0 : return "fuzzy, bunny legs";
+					case 1 : return "fur-covered legs";
+					case 2 : return "furry legs";
+					default: return "legs";
+				}
 			}
-			case AppearanceDefs.LOWER_BODY_TYPE_HARPY: {
-				select = Math.floor(Math.random() * (5));
-				if (select == 0)
-					return "bird-like legs";
-				else if (select == 1)
-					return "feathered legs";
-				else
-					return "legs";
+			case HARPY: {
+				switch(Math.floor(Math.random() * (5))) {
+					case 0 : return "bird-like legs";
+					case 1 : return "feathered legs";
+					default: return "legs";
+				}
 			}
-			case AppearanceDefs.LOWER_BODY_TYPE_FOX: {
-				select = Math.floor(Math.random() * (4));
-				if (select == 0)
-					return "fox-like legs";
-				else if (select == 1)
-					return "legs";
-				else if (select == 2)
-					return "legs";
-				else
-					return "vulpine legs";
+			case FOX: {
+				switch(Math.floor(Math.random() * (4))) {
+					case 0 : return "fox-like legs";
+					case 1 : return "legs";
+					case 2 : return "legs";
+					default: return "vulpine legs";
+				}
 			}
-			case AppearanceDefs.LOWER_BODY_TYPE_RACCOON: {
-				select = Math.floor(Math.random() * (4));
-				if (select == 0)
-					return "raccoon-like legs";
-				else
-					return "legs";
+			case RACCOON: {
+				switch(Math.floor(Math.random() * (4))) {
+					case 0 : return "raccoon-like legs";
+					default: return "legs";
+				}
 			}
-			case AppearanceDefs.LOWER_BODY_TYPE_CLOVEN_HOOFED: {
-				select = Math.floor(Math.random() * (4));
-				if (select == 0)
-					return "pig-like legs";
-				else if (select == 1)
-					return "legs";
-				else if (select == 2)
-					return "legs";
-				else
-					return "swine legs";
+			case CLOVEN_HOOFED: {
+				switch(Math.floor(Math.random() * (4))) {
+					case 0 : return "pig-like legs";
+					case 1 : return "legs";
+					case 2 : return "legs";
+					default: return "swine legs";
+				}
 			}
 			default:
 				return "legs";
 		}
 	}
+	
+	public function leg():String {
+		switch(type){
+			case HUMAN:
+			case HOOFED:
+			case DOG:
+				return "leg";
+			case NAGA:
+				return "snake-tail";
+			case CENTAUR:
+				return "equine leg";
+			case GOO:
+				return "mound of goo";
+			case PONY:
+				return "cartoonish pony-leg";
+			case BUNNY:
+				switch(Math.random()*5){
+					case 0 : return "fuzzy, bunny leg";
+					case 1 : return "fur-covered leg";
+					case 2 : return "furry leg";
+					default: return "leg";
+				}
+			case HARPY:
+				switch(Math.floor(Math.random() * 5)){
+					case 0 : return "bird-like leg";
+					case 1 : return "feathered leg";
+					default: return "leg";
+				}
+			case FOX:
+				switch(Math.floor(Math.random() * 4)){
+					case 0 : return "fox-like leg";
+					case 1 : return "vulpine leg";
+					default: return "leg";
+				}
+			case RACCOON:
+				switch(Math.floor(Math.random() * 4)){
+					case 0 : return "raccoon-like leg";
+					default: return "leg";
+				}
+			default:
+				return "leg";
+		}
+	}
+
+	public function feet():String {
+		switch(type){
+			case HUMAN: return "feet";
+			case HOOFED: return "hooves";
+			case DOG: return "paws";
+			case NAGA: return "coils";
+			case CENTAUR: return "hooves";
+			case DEMONIC_HIGH_HEELS: return "demonic high-heels";
+			case DEMONIC_CLAWS: return "demonic foot-claws";
+			case GOO: return "slimey cillia";
+			case PONY: return "flat pony-feet";
+			case BUNNY: {
+				switch(rand(5)){
+					case 0 : return "large bunny feet";
+					case 1 : return "rabbit feet";
+					case 2 : return "large feet";
+					default: return "feet";
+				}
+			}
+			case HARPY: {
+				switch(Math.floor(Math.random() * 5)){
+					case 0 : return "taloned feet";
+					default: return "feet";
+				}
+			}
+			case KANGAROO: return "foot-paws";
+			case FOX: {
+				switch(rand(4)){
+					case 0 : return "soft, padded paws";
+					case 1 : return "fox-like feet";
+					default: return "paws";
+				}
+			}
+			case RACCOON: {
+				switch (Math.floor(Math.random() * 3)){
+					case 0 : return "raccoon-like feet";
+					case 1 : return "long-toed paws";
+					case 2 : return "feet";
+					default: return "paws";
+				}
+			}
+			default: return "feet";
+		}
+	}
+
+	public function foot():String {
+		switch(type){
+			case HUMAN: return "foot";
+			case HOOFED: return "hoof";
+			case DOG: return "paw";
+			case NAGA: return "coiled tail";
+			case CENTAUR: return "hoof";
+			case GOO: return "slimey undercarriage";
+			case PONY: return "flat pony-foot";
+			case BUNNY: {
+				switch(Math.random() * (5)) {
+					case 0 : return "large bunny foot";
+					case 1 : return "rabbit foot";
+					case 2 : return "large foot";
+					default: return "foot";
+				}
+			}
+			case HARPY: {
+				switch(Math.floor(Math.random() * (5))) {
+					case 0 : return "taloned foot";
+					default: return "foot";
+				}
+			}
+			case FOX: {
+				switch(Math.floor(Math.random() * (4))) {
+					case 0 : return "paw";
+					case 1 : return "soft, padded paw";
+					case 2 : return "fox-like foot";
+					default: return "paw";
+				}
+			}
+			case KANGAROO: return "foot-paw";
+			case RACCOON: {
+				switch(Math.floor(Math.random() * (3))) {
+					case 0 : return "raccoon-like foot";
+					case 1 : return "long-toed paw";
+					case 2 : return "foot";
+					default: return "paw";
+				}
+			}
+			default: return "foot";
+		}
+	}
+	public function isDrider():Boolean {
+		return (type == DRIDER);
+	}
+	public function isGoo():Boolean {
+		return type == GOO;
+	}
+	public function isBiped():Boolean {
+		return legCount == 2;
+	}
+	public function isNaga():Boolean {
+		return type == NAGA;
+	}
+
+	public function isTaur():Boolean {
+		// driders have genitals on their human part, inlike usual taurs... this is actually bad way to check, but too many places to fix just now
+		return legCount == 4 && type != PLANT_FLOWER;
+	}
+	public function isScylla():Boolean {
+		return type == SCYLLA;
+	}
+	public function isAlraune():Boolean {
+		return type == PLANT_FLOWER;
+	}
+	
 	override protected function loadFromOldSave(savedata:Object):void {
-		type = intOr(savedata.lowerBody,AppearanceDefs.LOWER_BODY_TYPE_HUMAN);
-		if (type === AppearanceDefs.LOWER_BODY_TYPE_CENTAUR) {
-			type = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
-		} else if (type === AppearanceDefs.LOWER_BODY_TYPE_DEERTAUR) {
-			type = AppearanceDefs.LOWER_BODY_TYPE_CLOVEN_HOOFED;
+		type = intOr(savedata.lowerBody, HUMAN);
+		if (type === CENTAUR) {
+			type = HOOFED;
+		} else if (type === DEERTAUR) {
+			type = CLOVEN_HOOFED;
 		}
 		legCount = intOr(savedata.legCount,2);
 	}

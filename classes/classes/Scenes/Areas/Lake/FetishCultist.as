@@ -1,6 +1,8 @@
 ﻿package classes.Scenes.Areas.Lake
 {
 import classes.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
 import classes.GlobalFlags.*;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
@@ -161,13 +163,13 @@ public class FetishCultist extends Monster
 			this.imageName = "fetishcultist";
 			this.long = "The woman across from you has her eyes closed, her hands joined, and seems to be chanting under her breath. She is wearing a religious outfit that closely hugs her curvacious shape, with a skirt so short that you can clearly see her pussy's lips.\n\nShe has clealy lost her grasp on sanity, and filled the void with pure perversion.";
 			// this.plural = false;
-			this.createVagina(false, AppearanceDefs.VAGINA_LOOSENESS_GAPING, AppearanceDefs.VAGINA_WETNESS_WET);
+			this.createVagina(false, VaginaClass.LOOSENESS_GAPING, VaginaClass.WETNESS_WET);
 			createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_NORMAL;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 5*12+7;
-			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE;
-			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
+			this.hipRating = Hips.RATING_AMPLE;
+			this.buttRating = Butt.RATING_LARGE;
 			this.skinTone = "pale";
 			this.hairColor = "black";
 			this.hairLength = 15;

@@ -5,8 +5,9 @@
 package classes.Scenes.NPCs 
 {
 import classes.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 
 use namespace CoC;
 	
@@ -65,14 +66,14 @@ use namespace CoC;
 			this.long = "You're currently fighting an ayotech maniac.";//change Jinx to Minx???
 			this.plural = false;
 			createBreastRow(Appearance.breastCupInverse("A"));
-			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DRY, AppearanceDefs.VAGINA_LOOSENESS_TIGHT);
+			this.createVagina(false, VaginaClass.WETNESS_DRY, VaginaClass.LOOSENESS_TIGHT);
 			this.createStatusEffect(StatusEffects.BonusVCapacity,10,0,0,0);
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_VIRGIN;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = 120;
-			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
-			this.buttRating = AppearanceDefs.BUTT_RATING_BUTTLESS;
+			this.hipRating = Hips.RATING_BOYISH;
+			this.buttRating = Butt.RATING_BUTTLESS;
 			this.skin.setBaseOnly({color:"olive"});//zmienić?
 			this.hairColor = "blue";//eyes: red
 			this.hairLength = 20;

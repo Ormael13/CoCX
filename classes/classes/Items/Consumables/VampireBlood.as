@@ -1,5 +1,9 @@
 package classes.Items.Consumables {
-import classes.AppearanceDefs;
+import classes.BodyParts.Ears;
+import classes.BodyParts.Eyes;
+import classes.BodyParts.Face;
+import classes.BodyParts.RearBody;
+import classes.BodyParts.Wings;
 import classes.CoC;
 import classes.Items.Consumable;
 import classes.PerkLib;
@@ -47,20 +51,20 @@ public class VampireBlood extends Consumable {
         var tfArr:Array = [
             {
                 BodyPart: 'wingType',
-                ChangeTo: pure ? AppearanceDefs.WING_TYPE_VAMPIRE : AppearanceDefs.WING_TYPE_BAT_ARM,
+                ChangeTo: pure ? Wings.VAMPIRE : Wings.BAT_ARM,
                 Check   : player.hasGooSkin(),
                 Override: mutations.humanizeSkin
             }, {
                 BodyPart: 'earType',
-                ChangeTo: pure ? AppearanceDefs.EARS_VAMPIRE : AppearanceDefs.EARS_BAT,
-                Check   : pure ? player.earType != AppearanceDefs.EARS_HUMAN : false,
+                ChangeTo: pure ? Ears.VAMPIRE : Ears.BAT,
+                Check   : pure ? player.earType != Ears.HUMAN : false,
                 Override: pure ? mutations.humanizeEars : null
             }, {
                 BodyPart: 'eyeType',
-                ChangeTo: AppearanceDefs.EYES_VAMPIRE
+                ChangeTo: Eyes.EYES_VAMPIRE
             }, {
                 BodyPart: 'faceType',
-                ChangeTo: AppearanceDefs.FACE_VAMPIRE
+                ChangeTo: Face.VAMPIRE
             }
         ];
         if(pure){
@@ -77,7 +81,7 @@ public class VampireBlood extends Consumable {
         } else {
             tfArr.push({
                 BodyPart: 'rearBody',
-                ChangeTo: AppearanceDefs.REAR_BODY_BAT_COLLAR
+                ChangeTo: RearBody.BAT_COLLAR
             });
         }
         changeLimit = 1;

@@ -1,15 +1,15 @@
 package classes.Scenes {
-import classes.AppearanceDefs;
+import classes.CoC;
 import classes.CoC_Settings;
 import classes.CockTypesEnum;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.PerkLib;
 import classes.PregnancyStore;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.NPCAwareContent;
 import classes.StatusEffects;
+import classes.VaginaClass;
 
 public class Pregnancy extends NPCAwareContent {
     public function Pregnancy() {
@@ -1668,8 +1668,8 @@ public class Pregnancy extends NPCAwareContent {
                 //[(dick1 exists)
                 if(player.cockTotal() > 1) EngineCore.outputText(", followed in short order by white squirts from [eachcock] remaining");
                 EngineCore.outputText(".  Your " + vaginaDescript(0) + " quivers and pulses as well, adding ");
-                if(player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_SLICK) EngineCore.outputText("a trickle");
-                else if(player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_SLAVERING) EngineCore.outputText("a squirt");
+                if(player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLICK) EngineCore.outputText("a trickle");
+                else if(player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLAVERING) EngineCore.outputText("a squirt");
                 else EngineCore.outputText("nearly a cupful of fluid");
                 EngineCore.outputText(" from your female orgasm to the puddle on the ground below your ass.\n\n");
                 //(gain 1 nemo-dick, reduce lust to min)]
@@ -1713,9 +1713,9 @@ public class Pregnancy extends NPCAwareContent {
             EngineCore.outputText("The pain begins to subside as your delivery continues... replaced with a building sensation of pleasure.  Arousal spikes through you as the contractions intensify, and as you feel something pass you have a tiny orgasm.\n\nYet you feel more within you, and the contractions spike again, pushing you to orgasm as you pass something else.  It repeats, over and over, nearly a dozen times you birth and orgasm.  After an eternity of procreation and pleasure, you sense your ordeal is over and collapse, unconscious.");
 
 
-            if(player.vaginas[0].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_TIGHT) player.vaginas[0].vaginalLooseness++;
+            if(player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_TIGHT) player.vaginas[0].vaginalLooseness++;
             //50% chance
-            if(player.vaginas[0].vaginalLooseness < AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE && rand(2) == 0) {
+            if(player.vaginas[0].vaginalLooseness < VaginaClass.LOOSENESS_GAPING_WIDE && rand(2) == 0) {
                 player.vaginas[0].vaginalLooseness++;
                 EngineCore.outputText("\n\n<b>Your cunt is painfully stretched from the ordeal, permanently enlarged.</b>");
             }
@@ -1742,7 +1742,7 @@ public class Pregnancy extends NPCAwareContent {
                 EngineCore.outputText("  <b>Your breasts have grown to B-cups!</b>");
                 player.growTits(1, 1, false, 3);
             }
-            if(player.vaginas[0].vaginalWetness == AppearanceDefs.VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
+            if(player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY) player.vaginas[0].vaginalWetness++;
             player.orgasm();
             player.dynStats("tou", -2, "spe", 2, "lib", 1, "sen", .5, "cor", 7);
             if(player.buttRating < 10 && rand(2) == 0) {
@@ -1846,7 +1846,7 @@ public class Pregnancy extends NPCAwareContent {
                 player.boostLactation(1);
             }
             player.cuntChange(120, true,true,false);
-            if(player.vaginas[0].vaginalWetness == AppearanceDefs.VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
+            if(player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY) player.vaginas[0].vaginalWetness++;
             player.orgasm();
             player.dynStats("str", -1,"tou", -2, "spe", 3, "lib", 1, "sen", .5);
             displayedUpdate = true;
@@ -1893,7 +1893,7 @@ public class Pregnancy extends NPCAwareContent {
             //FUCKING BIRTH SHIT HERE.
             amilyScene.pcBirthsAmilysKidsQuestVersion();
             player.cuntChange(60, true, true, false);
-            if(player.vaginas[0].vaginalWetness == AppearanceDefs.VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
+            if(player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY) player.vaginas[0].vaginalWetness++;
             player.orgasm();
             player.dynStats("str", -1,"tou", -2, "spe", 3, "lib", 1, "sen", .5);
             displayedUpdate = true;
@@ -1927,7 +1927,7 @@ public class Pregnancy extends NPCAwareContent {
                 player.boostLactation(.5);
             }
             player.cuntChange(60, true,true,false);
-            if(player.vaginas[0].vaginalWetness == AppearanceDefs.VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
+            if(player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY) player.vaginas[0].vaginalWetness++;
             player.orgasm();
             player.dynStats("str", -1,"tou", -2, "spe", 3, "lib", 1, "sen", .5);
             displayedUpdate = true;
@@ -1966,7 +1966,7 @@ public class Pregnancy extends NPCAwareContent {
             }
             EngineCore.outputText("  ");
             player.cuntChange(100, true);
-            if(player.vaginas[0].vaginalWetness == AppearanceDefs.VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
+            if(player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY) player.vaginas[0].vaginalWetness++;
             player.orgasm();
             player.dynStats("str", -1,"tou", -4, "spe", 2, "lib", 1, "sen", .5);
             displayedUpdate = true;
@@ -2003,7 +2003,7 @@ public class Pregnancy extends NPCAwareContent {
                 player.boostLactation(.5);
             }
             player.cuntChange(60, true);
-            if(player.vaginas[0].vaginalWetness == AppearanceDefs.VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
+            if(player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY) player.vaginas[0].vaginalWetness++;
             player.orgasm();
             player.dynStats("str", -1,"tou", -1, "spe", 2, "lib", 1, "sen", .5);
             displayedUpdate = true;
@@ -2110,9 +2110,9 @@ public class Pregnancy extends NPCAwareContent {
                 //Large egg scene
                 else {
                     EngineCore.outputText("A sudden shift in the weight of your pregnant belly staggers you, dropping you to your knees.  You realize something is about to be birthed, and you shed your [armor] before it can be ruined by what's coming.  A contraction pushes violently through your midsection, ");
-                    if(player.vaginas[0].vaginalLooseness < AppearanceDefs.VAGINA_LOOSENESS_LOOSE) EngineCore.outputText("stretching your tight cunt painfully, the lips opening wide ");
-                    if(player.vaginas[0].vaginalLooseness >= AppearanceDefs.VAGINA_LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness <= AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE) EngineCore.outputText("temporarily stretching your cunt-lips wide-open ");
-                    if(player.vaginas[0].vaginalLooseness > AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE) EngineCore.outputText("parting your already gaping lips wide ");
+                    if(player.vaginas[0].vaginalLooseness < VaginaClass.LOOSENESS_LOOSE) EngineCore.outputText("stretching your tight cunt painfully, the lips opening wide ");
+                    if(player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness <= VaginaClass.LOOSENESS_GAPING_WIDE) EngineCore.outputText("temporarily stretching your cunt-lips wide-open ");
+                    if(player.vaginas[0].vaginalLooseness > VaginaClass.LOOSENESS_GAPING_WIDE) EngineCore.outputText("parting your already gaping lips wide ");
                     EngineCore.outputText("as something begins sliding down your passage.  A burst of green slime soaks the ground below as the birthing begins in earnest, and the rounded surface of a strangely colored egg peaks between your lips.  You push hard and the large egg pops free at last, making you sigh with relief as it drops into the pool of slime.  The experience definitely turns you on, and you feel your clit growing free of its hood as another big egg starts working its way down your birth canal, rubbing your sensitive vaginal walls pleasurably.   You pant and moan as the contractions stretch you tightly around the next, slowly forcing it out between your nether-lips.  The sound of a gasp startles you as it pops free, until you realize it was your own voice responding to the sudden pressure and pleasure.  Aroused beyond reasonable measure, you begin to masturbate ");
                     if(player.clitLength > 5) EngineCore.outputText("your massive cock-like clit, jacking it off with the slimy birthing fluids as lube.   It pulses and twitches in time with your heartbeats, its sensitive surface overloading your fragile mind with pleasure.  ");
                     if(player.clitLength > 2 && player.clitLength <= 5) EngineCore.outputText("your large clit like a tiny cock, stroking it up and down between your slime-lubed thumb and fore-finger.  It twitches and pulses with your heartbeats, the incredible sensitivity of it overloading your fragile mind with waves of pleasure.  ");

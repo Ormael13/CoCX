@@ -4,7 +4,10 @@
 package classes.Scenes.Areas
 {
 import classes.*;
-import classes.AppearanceDefs;
+import classes.BodyParts.Face;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
@@ -146,11 +149,11 @@ public class Mountain extends BaseContent
 						chance:2,
 						when:function():Boolean {
 							//Requires canine face, [either two dog dicks, or a vag and pregnant with a hellhound], at least two other hellhound features (black fur, dog legs, dog tail), and corruption >=60.
-							var check1:Boolean = player.faceType == AppearanceDefs.FACE_DOG && player.cor >= 60;
+							var check1:Boolean = player.faceType == Face.DOG && player.cor >= 60;
 							var check2:Boolean = player.dogCocks() >= 2
 												 || (player.hasVagina() && player.pregnancyType == PregnancyStore.PREGNANCY_HELL_HOUND);
-							var check3:int = (player.tail.type == AppearanceDefs.TAIL_TYPE_DOG ? 1 : 0) +
-											 (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_DOG ? 1 : 0) +
+							var check3:int = (player.tail.type == Tail.DOG ? 1 : 0) +
+											 (player.lowerBody == LowerBody.DOG ? 1 : 0) +
 											 (player.hairColor == "midnight black" ? 1 : 0);
 							var check4a:Boolean = flags[kFLAGS.HELLHOUND_MASTER_PROGRESS] == 0;
 							var check4b:Boolean = flags[kFLAGS.HELLHOUND_MASTER_PROGRESS] == 1
@@ -384,9 +387,9 @@ public class Mountain extends BaseContent
 			outputText("\n\nA giggle comes from your side, as you see the cow-girl is back up onto her knees, having recovered from her exalted orgasm.  She crawls forward, kneeling just over your head and leaning in to kiss her minotaur lover.  The two whisper sweet nothings to each other, too vague and indistinct to hear, but it doesn't matter.  All you can focus on is the dick lodged firmly inside of you... that, and the soaking cunt of the cow-girl just inches from your face.  Alabaster droplets drip down her legs, one even landing on your lips.  Before you can stop yourself, you lick them clean, savoring the taste of the second-hand cum.");
 
 			outputText("\n\nSome part of your mind voices a complaint at what comes next, a voice that's quickly squelched inside the addiction-fueled haze of your brain.  You pull your head upwards and extend your tongue, slurping a large glob of cum from the cow-girl's snatch.  There's a surprised yelp from above you, followed by a coo of pleasure.  To your surprise, the cow-girl actually lowers her cunt down onto your face, giggling madly, filling your nostrils with the scent of her muff, with the scent of recent sex.  Not letting this opportunity go to waste, you repay her actions from earlier, slipping your ");
-			if (player.tongueType == AppearanceDefs.TONGUE_SNAKE) outputText("serpentine ");
-			else if (player.tongueType == AppearanceDefs.TONGUE_DEMONIC) outputText("demonic ");
-			else if (player.tongueType == AppearanceDefs.TONGUE_DRACONIC) outputText("draconic ");
+			if (player.tongueType == Tongue.SNAKE) outputText("serpentine ");
+			else if (player.tongueType == Tongue.DEMONIC) outputText("demonic ");
+			else if (player.tongueType == Tongue.DRACONIC) outputText("draconic ");
 			else if(player.hasLongTongue()) outputText("inhumanly long ");
 			outputText("tongue inside her, eagerly licking out and guzzling down the remnants of the minotaur's present.");
 

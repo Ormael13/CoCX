@@ -1,9 +1,9 @@
 package classes.Scenes.Dungeons.D3 
 {
 import classes.Appearance;
-import classes.AppearanceDefs;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
 import classes.CockTypesEnum;
-import classes.GlobalFlags.kFLAGS;
 import classes.Monster;
 import classes.PerkLib;
 import classes.Scenes.SceneLib;
@@ -29,8 +29,8 @@ import classes.Scenes.SceneLib;
 			this.createVagina(false, 4, 5); 
 			this.balls = 2;
 			this.ballSize = 3;
-			this.hipRating = AppearanceDefs.HIP_RATING_FERTILE;
-			this.buttRating = AppearanceDefs.BUTT_RATING_EXPANSIVE;
+			this.hipRating = Hips.RATING_FERTILE;
+			this.buttRating = Butt.RATING_EXPANSIVE;
 			initStrTouSpeInte(210, 210, 120, 120);
 			initWisLibSensCor(120, 140, 40, 100);
 			this.weaponName = "fists";

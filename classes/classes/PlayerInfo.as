@@ -1,9 +1,11 @@
 package classes {
 
-import classes.StatusEffects.VampireThirstEffect;
+import classes.BodyParts.Face;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.*;
 import classes.Scenes.NPCs.IsabellaScene;
 import classes.Scenes.SceneLib;
+import classes.StatusEffects.VampireThirstEffect;
 
 import coc.view.MainView;
 
@@ -228,12 +230,12 @@ public class PlayerInfo extends BaseContent {
 			bodyStats += ")\n";
 		}
 		bodyStats += "<b>Times Transformed:</b> " + flags[kFLAGS.TIMES_TRANSFORMED] + "\n";
-		if (player.tailType == AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN || player.tailType == AppearanceDefs.TAIL_TYPE_SCORPION || player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL || player.tailType == AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN || player.faceType == AppearanceDefs.FACE_SNAKE_FANGS || player.faceType == AppearanceDefs.FACE_SPIDER_FANGS) {
-			if (player.tailType == AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN && player.faceType != AppearanceDefs.FACE_SNAKE_FANGS && player.faceType != AppearanceDefs.FACE_SPIDER_FANGS)
+		if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.tailType == Tail.SPIDER_ADBOMEN || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS) {
+			if (player.tailType == Tail.SPIDER_ADBOMEN && player.faceType != Face.SNAKE_FANGS && player.faceType != Face.SPIDER_FANGS)
 				bodyStats += "<b>Web:</b> " + player.tailVenom + "/" + player.maxVenom() + "\n";
-			else if (player.tailType == AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN && (player.faceType == AppearanceDefs.FACE_SNAKE_FANGS || player.faceType == AppearanceDefs.FACE_SPIDER_FANGS))
+			else if (player.tailType == Tail.SPIDER_ADBOMEN && (player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS))
 				bodyStats += "<b>Venom/Web:</b> " + player.tailVenom + "/" + player.maxVenom() + "\n";
-			else if (player.tailType != AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN)
+			else if (player.tailType != Tail.SPIDER_ADBOMEN)
 				bodyStats += "<b>Venom:</b> " + player.tailVenom + "/" + player.maxVenom() + "\n";
 		}
 

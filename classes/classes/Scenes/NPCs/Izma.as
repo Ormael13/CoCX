@@ -1,7 +1,8 @@
 package classes.Scenes.NPCs
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
 import classes.Scenes.SceneLib;
 
 /**
@@ -148,15 +149,15 @@ import classes.Scenes.SceneLib;
 			this.createCock(15,2.2);
 			this.balls = 4;
 			this.ballSize = 3;
-			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLICK, AppearanceDefs.VAGINA_LOOSENESS_LOOSE);
+			this.createVagina(false, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_LOOSE);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 45, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_NORMAL;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = 5*12+5;
-			this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
-			this.buttRating = AppearanceDefs.BUTT_RATING_NOTICEABLE;
+			this.hipRating = Hips.RATING_CURVY;
+			this.buttRating = Butt.RATING_NOTICEABLE;
 			this.skinTone = "striped orange";
 			this.hairColor = "silver";
 			this.hairLength = 20;

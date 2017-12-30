@@ -1,7 +1,9 @@
 ﻿package classes.Scenes.Areas.Forest
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.Tail;
 import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
@@ -183,11 +185,11 @@ public class Akbal extends Monster
 			createBreastRow();
 			createBreastRow();
 			createBreastRow();
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 4*12;
-			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
-			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			this.hipRating = Hips.RATING_SLENDER;
+			this.buttRating = Butt.RATING_TIGHT;
 			this.skin.growFur({color:"spotted"});
 			this.hairColor = "black";
 			this.hairLength = 5;
@@ -213,7 +215,7 @@ public class Akbal extends Monster
 			this.special1 = akbalLustAttack;
 			this.special2 = akbalSpecial;
 			this.special3 = akbalHeal;
-			this.tailType = AppearanceDefs.TAIL_TYPE_DOG;
+			this.tailType = Tail.DOG;
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);

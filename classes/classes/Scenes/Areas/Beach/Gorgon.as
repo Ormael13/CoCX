@@ -5,7 +5,11 @@
 package classes.Scenes.Areas.Beach 
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Face;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Skin;
 import classes.Scenes.Areas.Desert.NagaScene;
 import classes.internals.*;
 
@@ -139,17 +143,17 @@ public class Gorgon extends Monster
 			this.imageName = "gorgon";
 			this.long = "You are fighting a gorgon. She resembles a slender woman from the waist up, with green scale covered hair hanging down to her neck. Her whole body is covered with shiny green scales, striped in a pattern reminiscent of the dunes around you. Instead of bifurcating into legs, her hips elongate into a snake's body which stretches far out behind her, leaving a long and curving trail in the sand.  She's completely naked, with her round D-cup breasts showing in plain sight. In her mouth you can see a pair of sharp, venomous fangs and a long forked tongue moving rapidly as she hisses at you.";
 			// this.plural = false;
-			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 60, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("D"));
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = 6*12+2;
-			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
-			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_NAGA;
-			this.skin.growCoat(AppearanceDefs.SKIN_COAT_SCALES,{color:"green"});
+			this.hipRating = Hips.RATING_AMPLE+2;
+			this.buttRating = Butt.RATING_LARGE;
+			this.lowerBody = LowerBody.NAGA;
+			this.skin.growCoat(Skin.SCALES,{color:"green"});
 			this.hairColor = "green";
 			this.hairLength = 16;
 			initStrTouSpeInte(91, 125, 110, 75);
@@ -169,7 +173,7 @@ public class Gorgon extends Monster
 					add(null,1).
 					add(consumables.REPTLUM,5).
 					add(consumables.GORGOIL,4);
-			this.faceType = AppearanceDefs.FACE_SNAKE_FANGS;
+			this.faceType = Face.SNAKE_FANGS;
 			checkMonster();
 		}
 		

@@ -5,8 +5,13 @@
 package classes.Scenes.NPCs 
 {
 import classes.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Ears;
+import classes.BodyParts.Face;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.internals.*;
 
 use namespace CoC;
@@ -41,15 +46,15 @@ use namespace CoC;
 				this.short = "glacial bull";
 				this.long = "The glacial bull is twelve feet tall, much taller and muscular than any other bull you've seen before. Additionaly it seems to be heavy corrupted havins much less human traits than other minotaurs you meet. Weirdly he seems to have his chest covered by piece of cloth too in addition to typicaly used by his brothers loincloth, but that not distracts you from the pair of large hammers it wields.";
 			}
-			createVagina(true,AppearanceDefs.VAGINA_WETNESS_NORMAL,AppearanceDefs.VAGINA_LOOSENESS_TIGHT);
+			createVagina(true,VaginaClass.WETNESS_NORMAL,VaginaClass.LOOSENESS_TIGHT);
 			this.createStatusEffect(StatusEffects.BonusVCapacity,60,0,0,0);
 			createBreastRow(Appearance.breastCupInverse("flat"));
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = 144;
-			this.hipRating = AppearanceDefs.HIP_RATING_CURVY+2;
-			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE+1;
+			this.hipRating = Hips.RATING_CURVY+2;
+			this.buttRating = Butt.RATING_LARGE+1;
 			this.skinTone = "light";
 			this.hairColor = "red";
 			this.hairLength = 1;
@@ -71,10 +76,10 @@ use namespace CoC;
 				//	add(armors.S_SWMWR,1/12).
 				//	add(consumables.L_DRAFT,1/4).
 					add(consumables.LABOVA_,0.7);
-			this.earType = AppearanceDefs.EARS_COW;
-			this.faceType = AppearanceDefs.FACE_COW_MINOTAUR;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
-			this.tailType = AppearanceDefs.TAIL_TYPE_COW;
+			this.earType = Ears.COW;
+			this.faceType = Face.COW_MINOTAUR;
+			this.lowerBody = LowerBody.HOOFED;
+			this.tailType = Tail.COW;
 			this.tailRecharge = 0;
 			//this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			//this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);

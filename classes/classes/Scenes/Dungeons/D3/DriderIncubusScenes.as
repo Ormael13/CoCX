@@ -1,7 +1,7 @@
 package classes.Scenes.Dungeons.D3
 {
-import classes.AppearanceDefs;
 import classes.BaseContent;
+import classes.BodyParts.LowerBody;
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.WeaponLib;
@@ -624,7 +624,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 
 			outputText("You push the goblin aside and");
 			if (player.isNaga()) outputText(" slither");
-			else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HOOFED) outputText(" clop");
+			else if (player.lowerBody == LowerBody.HOOFED) outputText(" clop");
 			else outputText(" stride");
 			outputText(" victoriously toward your prize, still hard and jutting, polished to a mirror sheen by the goblin’s vigorous, mid-fight fucking. Trickles of pearlescent pre-cum spill from the tip the moment your eyes fix upon it. The mere sight is enough to conjure the taste to your tongue, and the needy whines from the fallen goblin whore beside you spur you forward.");
 			if (player.cor <= 33) outputText(" You feel a little guilty, about to copulate with a demon to better slay another. You’re supposed to be a force of purity, not stuffing a hot, throbbing, demonic dick inside yourself in Lethice’s throneroom, but you can’t see any better way to ensure you’re fully sated before the next confrontation.");

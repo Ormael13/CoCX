@@ -1,6 +1,8 @@
 package classes.Scenes.Areas.Beach 
 {
 import classes.*;
+import classes.BodyParts.Face;
+import classes.BodyParts.LowerBody;
 
 public class GorgonScene extends BaseContent
 	{
@@ -14,7 +16,7 @@ public function gorgonEncounter():void {
 	//Create status if needed
 	if(!player.hasStatusEffect(StatusEffects.Naga)) player.createStatusEffect(StatusEffects.Naga,0,0,0,0);
 	clearOutput();
-	if(player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_NAGA) {
+	if(player.lowerBody == LowerBody.NAGA) {
 		//Set 'last fuck as naga'
 		player.changeStatusValue(StatusEffects.Naga,1,1);
 		//Not met as naga before
@@ -39,7 +41,7 @@ public function gorgonEncounter():void {
 		}
 		outputText("She lets out a soft moan and leans her head forward, pressing her lips against yours. You squeeze her body even more firmly against yours in response, the tips of your tails wrapping around one another. You open your mouth slightly and press your tongue against her lips. She offers no resistance and you begin caressing the inside of her mouth with your tongue, circling her fangs as she uses her own tongue to gently stroke ");
 		//[If player has fangs]
-		if(player.faceType == AppearanceDefs.FACE_SNAKE_FANGS) outputText("your own.");
+		if(player.faceType == Face.SNAKE_FANGS) outputText("your own.");
 		//[player has no fangs]
 		else outputText("the inside of your mouth.");
 		outputText("\n\n");
@@ -94,7 +96,7 @@ public function gorgonEncounter():void {
 		else if(player.hasVagina()) {
 			outputText("The kiss continues and you can feel your " + breastDescript(0) + " pressing against her own. You kiss her harder, pressing your body as close to her as you can, enjoying the feeling of your two bodies entwined together. You wrap your tail around hers, trying to make every part of your body touch every part of hers.  The feeling of her scaled tail rubbing against your body sends shivers of ecstasy down your spine. You pull away from her mouth and move your head to kiss at her neck, ");
 			//(if player has fangs)
-			if(player.faceType == AppearanceDefs.FACE_SNAKE_FANGS) outputText("carefully nibbling at it so as to not break the skin.  ");
+			if(player.faceType == Face.SNAKE_FANGS) outputText("carefully nibbling at it so as to not break the skin.  ");
 			else outputText("nibbling gently at it.  ");
 			outputText("Traveling down, you pause at her collarbone, letting go of her hips to bring your hands up to her perfectly rounded breasts. A moan escapes the gorgon's lips as you massage her erect nipples. Your mouth continues its trek down the gorgon's supple body and you make sure to pause on each breast, circling inward and stopping on each nipple to suck gently on them.\n\n");
  			outputText("Once more your hands move down the gorgon's body, making their way across her sides as your mouth simultaneously kisses at the smooth flesh of her exposed belly. Goose pimples slowly begin to appear, denoting how much she enjoys it. You pause at her hips, hovering over the slit at her crotch. One of your hands slide down to the slit and you start to stroke at it gently as you kiss at the area around it. Your partner shudders a bit, overcome by the sensations. Slowly you slide a finger into her, hearing a gasp of pleasure as you move it around inside her.  ");

@@ -1,6 +1,7 @@
 package classes.Scenes.NPCs
 {
 import classes.*;
+import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 
@@ -1025,16 +1026,16 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 				outputText("\n\n\"<i>It has given me a valuable insight into cruelty, certainly,</i>\" Vapula growls.  She is having trouble concentrating, her lips instinctively reaching for your dildo's crown.  \"<i>It amazes me you still have a soul.</i>\"");
 				outputText("\n\n\"<i>That's not a very nice thing to say,</i>\" you purr, stopping your ministrations for a moment and pulling away slightly.  A look of anguish appears on Vapula's face.  \"<i>What would you do for me now, just to get your fix?</i>\"");
 				//[Hooves:
-				if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HOOFED || player.isTaur()) outputText("\"<i>I would worship your feet, mistress.  I would clean your hooves with my tongue to a shine, tease out every scrap of dirt from every crevice.  And I would thank you for the privilege.</i>\"");
+				if (player.lowerBody == LowerBody.HOOFED || player.isTaur()) outputText("\"<i>I would worship your feet, mistress.  I would clean your hooves with my tongue to a shine, tease out every scrap of dirt from every crevice.  And I would thank you for the privilege.</i>\"");
 				//[Naga:
 				else if (player.isNaga()) outputText("\n\n\"<i>I would worship your scales, mistress.  I would buff every single one with my tongue so it shone, lick every inch of your tail, deep throat you all the way down into my belly.  And I would thank you for the privilege.</i>\"");
 				//[Drider:
 				else if (player.isDrider()) outputText("\n\n\"<i>I would be your egg dump, mistress.  I would take your dripping ovipositor in every hole, my cunt, my ass, my mouth, then clean it with my tongue afterwards.  I would find and feed you ovi-potions just so you could keep me stuffed with your essence constantly.  And I would thank you for the privilege.</i>\"");
 				//[Goo:
 				else if (player.isGoo()) outputText("\n\n\"<i>I would let you engulf me, mistress.  I would let you push yourself into my every hole and crevice, drown me in your essence, fuck me so completely I wouldn't know where I started and you began.  And I would thank you for the privilege.</i>\"");
-				else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_DOG || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CAT || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_LIZARD || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_KANGAROO || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_FOX) outputText("\n\n\"<i>I would worship your feet, mistress.  I would lick every inch of your claws, massage your soft undersides with my tongue.  I would pare all of your claws to needle sharpness and then let you test them on my backside.  And I would thank you for the privilege.</i>\"");
+				else if (player.lowerBody == LowerBody.DOG || player.lowerBody == LowerBody.CAT || player.lowerBody == LowerBody.LIZARD || player.lowerBody == LowerBody.KANGAROO || player.lowerBody == LowerBody.FOX) outputText("\n\n\"<i>I would worship your feet, mistress.  I would lick every inch of your claws, massage your soft undersides with my tongue.  I would pare all of your claws to needle sharpness and then let you test them on my backside.  And I would thank you for the privilege.</i>\"");
 				//[Insect:
-				else if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_BEE || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS) outputText("\n\n\"<i>I would worship your feet, mistress.  I would lick every inch of your boots, clean your soles with my tongue.  I wouldn't stop until they shone. And I would thank you for the privilege.</i>\"");
+				else if (player.lowerBody == LowerBody.BEE || player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS) outputText("\n\n\"<i>I would worship your feet, mistress.  I would lick every inch of your boots, clean your soles with my tongue.  I wouldn't stop until they shone. And I would thank you for the privilege.</i>\"");
 				//[Human/demonic feet:
 				else outputText("\n\n\"<i>I would worship your feet, mistress.  I would lick every inch of them, clean your soles with my tongue, between your toes, lavish each of your pinkies with attention as if they were ten cocks belonging to you.  And I would thank you for the privilege.</i>\"");
 

@@ -5,7 +5,6 @@
 package classes.Scenes.Dungeons.DenOfDesire 
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Monsters.AbstractGargoyle;
 import classes.Scenes.SceneLib;
 
@@ -130,11 +129,11 @@ public class ObsidianGargoyle extends AbstractGargoyle
 			this.createCock(18,3,CockTypesEnum.UNDEFINED);
 			this.balls = 2;
 			this.ballSize = 1;
-			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_GAPING);
+			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_GAPING);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 20, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.tallness = 120;
 			initStrTouSpeInte(150, 120, 90, 10);
 			initWisLibSensCor(10, 10, 10, 50);

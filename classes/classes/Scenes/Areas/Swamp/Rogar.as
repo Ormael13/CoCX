@@ -1,5 +1,6 @@
 ﻿package classes.Scenes.Areas.Swamp{
 import classes.*;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Places.TelAdre;
 import classes.Scenes.SceneLib;
@@ -59,7 +60,7 @@ public function encounterRogarSwamp():void {
 		//((Corruption 70 or more))
 		else {
 			outputText("You smile sweetly through the sludge on your face, leaning closer to him.  The orc gives you a confused look as he follows your line of sight.  You couldn't help but notice the equally formidable bulge stretching his ragged shorts obscenely.  It's easy to tell he's still only flaccid yet, as the thick shaft curves over the dark shadow of a cum-swollen sack beneath the damp cloth.  Ro'gar rubs the back of his neck uncomfortably and, despite the awkward exchange, the outline in his shorts begins to lengthen and thicken as he speaks.  \"<i>Listen... yer mighty dirty, an' I reckon I could get you something to clean yerself off with if'n you wait here.</i>\"  Ro'gar's finger points at the ground where you stand.  \"<i>I'll be right back.  You jus' wait.</i>\"  He turns, making his exit quickly.");
-			if(player.isNaga() || player.tailType > AppearanceDefs.TAIL_TYPE_NONE) outputText("  Your tail flicks about happily.");
+			if(player.isNaga() || player.tailType > Tail.NONE) outputText("  Your tail flicks about happily.");
 			outputText("  Should you really wait for him?");
 		}
 		doYesNo(waitForChunkyOrcLoe,dontWaitForRogar);

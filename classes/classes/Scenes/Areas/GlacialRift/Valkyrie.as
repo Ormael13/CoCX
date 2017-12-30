@@ -1,7 +1,9 @@
 package classes.Scenes.Areas.GlacialRift 
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.Wings;
 import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
@@ -130,11 +132,11 @@ public class Valkyrie extends Monster
 			// this.plural = false;
 			this.createVagina(false, 1, 1);
 			createBreastRow(Appearance.breastCupInverse("C"));
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 7*12;
-			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
-			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			this.hipRating = Hips.RATING_SLENDER;
+			this.buttRating = Butt.RATING_TIGHT;
 			this.skin.setBaseOnly({color:"light"});
 			this.hairColor = "white";
 			this.hairLength = 12;
@@ -157,7 +159,7 @@ public class Valkyrie extends Monster
 					.add(shields.GREATSH, 3)
 					.add(consumables.G__BOOK, 5)					
 					.add(null, 15);
-			this.wingType = AppearanceDefs.WING_TYPE_HARPY;
+			this.wingType = Wings.HARPY;
 			this.wingDesc = "fluffy feathery";
 			this.special1 = spearAttack;
 			this.special2 = shieldBash;

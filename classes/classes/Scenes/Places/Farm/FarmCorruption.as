@@ -1,6 +1,8 @@
 package classes.Scenes.Places.Farm
 {
-import classes.AppearanceDefs;
+import classes.BodyParts.Eyes;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tongue;
 import classes.EngineCore;
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
@@ -3274,7 +3276,7 @@ import classes.StatusEffects;
 
 			outputText("\n\nOnce she’s done tying you down the dog woman gets off the bed with a spring and disappears from your limited sightline, rummaging around her bedroom with ominous-sounding intent. Is she shifting particularly heavy things about just to torment you? You crane your neck to get a glimpse at what she’s holding as she returns to your side - and then cry out in shock as a black curtain falls down on the world.");
 
-			outputText("\n\n“<i>Stop fussing now, sweetheart,</i>” Whitney croons, adjusting the black, elastic blindfold so it is firmly secured over your eyes." + ((player.eyeType == AppearanceDefs.EYES_FOUR_SPIDER_EYES) ? " Once she’s finished with that she places another blindfold over your second pair of eyes. You can only groan with laughter at the sheer level of preparation the dog woman is capable of." : "") + " “<i>Wouldn’t want you to see what’s coming, would we? That’d ruin half the fun.</i>” ");
+			outputText("\n\n“<i>Stop fussing now, sweetheart,</i>” Whitney croons, adjusting the black, elastic blindfold so it is firmly secured over your eyes." + ((player.eyeType == Eyes.EYES_FOUR_SPIDER_EYES) ? " Once she’s finished with that she places another blindfold over your second pair of eyes. You can only groan with laughter at the sheer level of preparation the dog woman is capable of." : "") + " “<i>Wouldn’t want you to see what’s coming, would we? That’d ruin half the fun.</i>” ");
 
 			outputText("\n\nShe crawls down to your lower body, taking her time now as she slides her hands across your abdomen and [hips] and sits herself down in front of [eachCock]" + ((player.balls > 0) ? ", making you twitch as she momentarily cups your [balls]" : "") + ". She teases you with slow, deliberate movements of her smooth digits, fully aware that all you can do now in your black space is lie there, feeling and listening to what she’s doing to you.");
 
@@ -6333,7 +6335,7 @@ import classes.StatusEffects;
 			if (player.isBiped())
 			{
 				outputText("\n\nShe spends a short time with your calves before encapsulating a [foot] in her oily hands.");
-				if (!(player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HOOFED || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_NAGA || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_GOO || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PONY))
+				if (!(player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.GOO || player.lowerBody == LowerBody.PONY))
 				{
 					outputText(" Your mouth opens as a twinge of pure pleasure veins up your [leg] as she massages the soft arch of the sole, making your");
 					if (player.hasCock()) outputText(" cock thicken");
@@ -6342,7 +6344,7 @@ import classes.StatusEffects;
 					outputText(".");
 
 					outputText(" There must be a direct nerve link leading right from the bottom of your body up to your groin because my word, that really shouldn’t feel as good as it does. She swirls her thumbs across the rougher pads of your feet, dipping her warm fingers in and around the valleys of your");
-					if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_DEMONIC_CLAWS || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_LIZARD || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HARPY || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_DRAGON) outputText(" claws");
+					if (player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.LIZARD || player.lowerBody == LowerBody.HARPY || player.lowerBody == LowerBody.DRAGON) outputText(" claws");
 					else outputText(" toes");
 					outputText(", before returning deliberately to stroke at your arch, indulging that nervous link until you are deep in the unexpected bliss of it... before slowly releasing, leaving you to wallow delightfully in the knowledge that that same slow, delicious attention is about to be lavished on your other [foot].")
 				}
@@ -6375,7 +6377,7 @@ import classes.StatusEffects;
 				outputText("\n\n“<i>It’s just from watching you, [master],</i>” she replies quietly, as relaxing sensation inundates your lower half. “<i>When you sl- move around, you can see where the stress lands and builds. You may not have any hinges down here, but that don’t mean you don’t have the same needs as animals that do.</i>”");
 
 				outputText("\n\n“<i>You watch me a lot, then?</i>” Silence from behind you as the questing, rubbing oil moves down almost to your tip.");
-				if (player.tongueType == AppearanceDefs.TONGUE_SNAKE) outputText(" You grin, flicking your forked tongue out to smell her arousal.");
+				if (player.tongueType == Tongue.SNAKE) outputText(" You grin, flicking your forked tongue out to smell her arousal.");
 				outputText(" “<i>I imagine watching your [master] move around is almost a masochistic experience for you. Something so alien and unnerving now linked forever with pleasure and obedience. Is that how it is? You can’t stop staring at my beautiful, deadly form because it’s almost like a slutty punishment for you?</i>”");
 
 				outputText("\n\n“<i>S-something like that,</i>” Whitney whispers, shakily. You smile serenely as a warm, oily hand grasps your reptilian tip, moving up and down in an almost masturbatory rhythm. It took almost as long again for her to rub oil into your coils as she spent on the rest of her body, but it was well worth it.");

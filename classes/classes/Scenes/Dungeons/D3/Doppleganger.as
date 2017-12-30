@@ -1,10 +1,9 @@
 package classes.Scenes.Dungeons.D3 
 {
 import classes.Appearance;
-import classes.AppearanceDefs;
+import classes.BodyParts.Ears;
 import classes.BreastRowClass;
 import classes.Cock;
-import classes.GlobalFlags.kFLAGS;
 import classes.Monster;
 import classes.PerkLib;
 import classes.Scenes.SceneLib;
@@ -295,38 +294,38 @@ import classes.VaginaClass;
 			
 			switch(player.earType)
 			{
-				case AppearanceDefs.EARS_HORSE:
+				case Ears.HORSE:
 					str += " a pair of horse-like ears";
 					break;
-				case AppearanceDefs.EARS_FERRET:
+				case Ears.FERRET:
 					str += " a small pair of rounded ferret ears";
 					break;
-				case AppearanceDefs.EARS_DOG:
+				case Ears.DOG:
 					str += " a pair of dog ears";
 					break;
-				case AppearanceDefs.EARS_COW:
+				case Ears.COW:
 					str += " a pair of round, floppy cow ears";
 					break;
-				case AppearanceDefs.EARS_ELFIN:
+				case Ears.ELFIN:
 					str += " a large pair of pointy ears";
 					break;
-				case AppearanceDefs.EARS_CAT:
+				case Ears.CAT:
 					str += " a pair of cute, fuzzy cat ears";
 					break;
-				case AppearanceDefs.EARS_LIZARD:
-				case AppearanceDefs.EARS_DRAGON:
+				case Ears.LIZARD:
+				case Ears.DRAGON:
 					str += " a pair of rounded protrusions with small holes";
 					break;
-				case AppearanceDefs.EARS_BUNNY:
+				case Ears.BUNNY:
 					str += " a pair of floppy rabbit ears";
 					break;
-				case AppearanceDefs.EARS_FOX:
+				case Ears.FOX:
 					str += " a pair of large, adept fox ears";
 					break;
-				case AppearanceDefs.EARS_RACCOON:
+				case Ears.RACCOON:
 					str += " a pair of vaugely egg-shaped, furry racoon ears";
 					break;
-				case AppearanceDefs.EARS_MOUSE:
+				case Ears.MOUSE:
 					str += " a pair of large, dish-shaped mouse ears";
 					break;
 				default:

@@ -6,6 +6,20 @@ import classes.internals.Utils;
 	public class AssClass implements IOrifice
 	{
 		//constructor
+		public static const WETNESS_DRY:int            = 0;
+		public static const WETNESS_NORMAL:int         = 1;
+		public static const WETNESS_MOIST:int          = 2;
+		public static const WETNESS_SLIMY:int          = 3;
+		public static const WETNESS_DROOLING:int       = 4;
+		public static const WETNESS_SLIME_DROOLING:int = 5;
+		
+		public static const LOOSENESS_VIRGIN:int    = 0;
+		public static const LOOSENESS_TIGHT:int     = 1;
+		public static const LOOSENESS_NORMAL:int    = 2;
+		public static const LOOSENESS_LOOSE:int     = 3;
+		public static const LOOSENESS_STRETCHED:int = 4;
+		public static const LOOSENESS_GAPING:int    = 5;
+		
 		public function AssClass()
 		{
 		}

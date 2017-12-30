@@ -1,7 +1,9 @@
 ﻿package classes.Scenes.Dungeons.DeepCave
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.Wings;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -204,12 +206,12 @@ public class ImpHorde extends Monster
 			this.balls = 2;
 			this.ballSize = 1;
 			createBreastRow(0);
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = 36;
-			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
-			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			this.hipRating = Hips.RATING_SLENDER;
+			this.buttRating = Butt.RATING_TIGHT;
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 1;
@@ -229,7 +231,7 @@ public class ImpHorde extends Monster
 			this.gems = 30 + rand(30);
 			this.additionalXP = 100;
 			this.drop = new WeightedDrop(armors.NURSECL, 1);
-			this.wingType = AppearanceDefs.WING_TYPE_IMP;
+			this.wingType = Wings.IMP;
 			this.wingDesc = "imp wings";
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);

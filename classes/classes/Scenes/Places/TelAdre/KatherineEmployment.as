@@ -1,5 +1,6 @@
 package classes.Scenes.Places.TelAdre{
 import classes.*;
+import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.*;
 import classes.Scenes.NPCs.Urta;
 import classes.Scenes.SceneLib;
@@ -121,7 +122,7 @@ public class KatherineEmployment extends TelAdreAbstractContent {
 			outputText("You smile and thank the centauress for her help.  “<i>It was nothing,</i>” she replies, looking quite pleased at your thanks all the same.\n\n");
 			flags[kFLAGS.KATHERINE_TRAINING] |= KBIT_TRAINING_TALK_EDRYN; //Using a mask so it doesn’t matter what order you talk to Edryn and Urta in
 			var cockFitIndex:int = player.cockThatFits(300);
-			if ((cockFitIndex >= 0 && player.cockArea(cockFitIndex) >= 24) && (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HOOFED || player.horseCocks() > 0 || player.cor > 50 || player.statusEffectv1(StatusEffects.Edryn) > 0)) {
+			if ((cockFitIndex >= 0 && player.cockArea(cockFitIndex) >= 24) && (player.lowerBody == LowerBody.HOOFED || player.horseCocks() > 0 || player.cor > 50 || player.statusEffectv1(StatusEffects.Edryn) > 0)) {
 				outputText("“<i>So... I don’t suppose there’s anything else you might have on your mind...?</i>”  She gives you a coy look and fiddles with a nipple through her shirt.");
 				doYesNo((edryn.pregnancy.isPregnant ? pregnantEdrynSexSelector : edryn.edrynSexSelecter), telAdre.barTelAdre);
 			}

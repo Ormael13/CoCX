@@ -83,7 +83,7 @@
         </text>
         <text name="RapeFemNaga">
             You slither over to the helpless goblin, who watches you half in fear, half in curiosity.
-            <if test="player.faceType == FACE_SNAKE_FANGS">
+            <if test="player.faceType == SNAKE_FANGS">
                 You bare your fangs at her and the curiosity disappears. She turns to run, but your tail is faster than she is.
                 <else>
                     You smile at her and the fear disappears. She's still wary though, and you make sure to grab her with your tail before she changes her mind about you.
@@ -133,13 +133,13 @@
 
             By the third bottle she's given up on struggling and is instead trying to grind her cunt into your knee.  Her mouth is open wide and her entire face is flushed reddish-purple with desire.  You finish force-feeding her the remaining bottles and shove her, catching her ankles to hold her over your leg with her ass in the air.  The scent of her arousal and the vapors from all the drugs and aphrodisiacs give you a bit of a 'contact high', at least in the sense that your [vagina]
             <switch value="player.vaginas[0].vaginalWetness">
-                <case lt="VAGINA_WETNESS_WET">
+                <case lt="WETNESS_WET">
                     grows puffy and moist.
                 </case>
-                <case lt="VAGINA_WETNESS_DROOLING">
+                <case lt="WETNESS_DROOLING">
                     drips with feminine moisture.
                 </case>
-                <case lt="VAGINA_WETNESS_SLAVERING">
+                <case lt="WETNESS_SLAVERING">
                     slowly begins to soak your thighs.
                 </case>
                 <default>
@@ -158,13 +158,13 @@
 
             You cum on the drugged green bitch,
             <switch value="player.vaginas[0].vaginalWetness">
-                <case gt="VAGINA_WETNESS_SLAVERING">
+                <case gt="WETNESS_SLAVERING">
                     splattering her with your fluids.
                 </case>
-                <case gt="VAGINA_WETNESS_SLICK">
+                <case gt="WETNESS_SLICK">
                     coating her face with the proof of your pleasure.
                 </case>
-                <case gt="VAGINA_WETNESS_WET">
+                <case gt="WETNESS_WET">
                     leaving her sticky with your nether-juices.
                 </case>
                 <default>
@@ -233,8 +233,8 @@
             However,
             <if test="player.hasVagina()"> while your [vagina]
                 <switch value="player.vaginas[0].vaginalWetness">
-                    <case lte="VAGINA_WETNESS_SLICK"> juices </case>
-                    <case lte="VAGINA_WETNESS_DROOLING"> floods </case>
+                    <case lte="WETNESS_SLICK"> juices </case>
+                    <case lte="WETNESS_DROOLING"> floods </case>
                     <default> explodes </default>
                 </switch>
                 <elseif test="player.cockTotal() gt 1">

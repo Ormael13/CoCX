@@ -1,5 +1,6 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
+import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 
@@ -534,7 +535,7 @@ private function shouldraTongueLicksPCs():void {
 	//if event occurrence == 0
 	if(flags[kFLAGS.SHOULDRA_TONGUE_LICKS_TIMES] == 0) {
 		outputText("\n\n\"<i>Aah, but it's all the same anyways</i>,\" Shouldra sighs, rolling the long phallic objects over each other in your palm.  \"<i>Where's the excitement in going back to the same old thing?</i>\" she laments, suddenly quite sad about the whole situation despite her earlier eagerness.  Sensing your displeasure, she snaps back, \"<i>Hey, I told you my deal already.  How am I supposed to feel when I've seen it all before?</i>\"  Trying to hurry her along, you ask if there's <b>anything </b> new that she might try.  \"<i>Well what else am I gonna play with on you?</i>\" She breaks out into your own voice.  \"<i>You've got tits, an ass and a cunt, just like the rest of 'em! What am I mi-...</i>\"  She cuts herself off.  Shouldra closes one of your eyes and sticks ");
-		if(player.tongueType > AppearanceDefs.TONGUE_HUMAN) outputText("some of ");
+		if(player.tongueType > Tongue.HUMAN) outputText("some of ");
 		outputText("your tongue out, examining it.  Already, you think you've got a pretty good idea of where she's going to take this.");
 		outputText("\n\n\"<i>I suppose none of my hosts have actually quite been able to reach themselves with a tongue yet... can you, Champ?</i>\"");
 	}

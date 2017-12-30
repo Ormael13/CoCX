@@ -4,8 +4,9 @@
 package classes.Scenes.Monsters
 {
 import classes.*;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Scenes.Camp.ImpGang;
 import classes.Scenes.UniqueSexScenes;
@@ -69,9 +70,9 @@ use namespace CoC;
 			if (canBikiniTits) addButton(4, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 			if (maleRape == rapeImpWithDick && player.hasItem(useables.CONDOM)) addButton(5, "Use Condom", rapeImpWithDick, 1);
 			addButton(6, "Kill Him", killImp);
-			if (player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(7, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
+			if (player.tailType == Tail.MANTICORE_PUSSYTAIL) addButton(7, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
 			if (player.canOvipositBee()) addButton(8, "Oviposit", putBeeEggsInAnImpYouMonster);
-			if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER) addButton(9, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
+			if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(9, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
 			addButton(14, "Leave", cleanupAfterCombat);
 			
 		}
@@ -426,7 +427,7 @@ use namespace CoC;
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 			outputText("As the imp lays beaten its hands stroke its " + monster.cockDescriptShort(0) + " as its eyes look over you in the hope that you might abuse it in some manner.  You lick your lips as you stare at the large member and you turn around to display your " + vaginaDescript(0) + ".  ");
 			//Not gaping?
-			if(player.vaginas[0].vaginalLooseness <= AppearanceDefs.VAGINA_LOOSENESS_GAPING) {
+			if(player.vaginas[0].vaginalLooseness <= VaginaClass.LOOSENESS_GAPING) {
 				//Penetration for non-gape cases
 				outputText("With a lascivious grin the imp hops forward, gripping your flanks as it drives its member forward into your " + vaginaDescript(0) + ".  ");
 				//<<If Pussy Virgin>> 
@@ -1558,7 +1559,7 @@ use namespace CoC;
 					cleanupAfterCombat();
 					return;
 				}
-				if (player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(1, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
+				if (player.tailType == Tail.MANTICORE_PUSSYTAIL) addButton(1, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
 				addButton(4, "Leave", cleanupAfterCombat);
 			}
 			else {
@@ -1566,7 +1567,7 @@ use namespace CoC;
 				//Leave // Rape]
 				menu();
 				if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) addButton(0, "Sex", sexAnImpLord);
-				if (player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(1, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
+				if (player.tailType == Tail.MANTICORE_PUSSYTAIL) addButton(1, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
 				addButton(4,"Leave",cleanupAfterCombat);
 			}
 		}
@@ -1598,7 +1599,7 @@ use namespace CoC;
 				if(player.hasVagina()) addButton(2,"Ride Cock",femaleVagRape);
 				if(player.findPerk(PerkLib.Feeder) >= 0 && monster.short != "imp overlord" && monster.short != "imp warlord") addButton(3,"Breastfeed",feederBreastfeedRape);
 				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) addButton(4, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
-				if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER) addButton(5, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
+				if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(5, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
 			}
 			addButton(14,"Leave",cleanupAfterCombat);
 		}
@@ -2159,7 +2160,7 @@ use namespace CoC;
 		public function impPackGetsRapedByFemale():void {
 			clearOutput();
 			outputText("You walk around to one of the demons and push him onto his back.  Your [armor] falls to the ground around you as you disrobe, looking over your tiny conquest.  A quick ripping motion disposes of his tiny loincloth, leaving his thick demon-tool totally unprotected. You grab and squat down towards it, rubbing the corrupted tool between your legs ");
-			if(player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_SLICK) outputText("and coating it with feminine drool ");
+			if(player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_SLICK) outputText("and coating it with feminine drool ");
 			outputText("as you become more and more aroused.  It parts your lips and slowly slides in.  The ring of tainted nodules tickles you just right as you take the oddly textured member further and further into your willing depths.");
 			player.cuntChange(15,true,true,false);
 			outputText("\n\n");
@@ -2169,7 +2170,7 @@ use namespace CoC;
 			outputText("You begin riding the tiny demon, lifting up, and then dropping down, feeling each of the nodes gliding along your sex-lubed walls.   As time passes and your pleasure mounts, you pick up the pace, until you're bouncing happily atop your living demon-dildo.\n\n");
 	
 			outputText("The two of you cum together, though the demon's pleasure starts first.  A blast of his tainted seed pushes you over the edge.  You sink the whole way down, feeling him bump your cervix and twitch inside you, the bumps on his dick swelling in a pulsating wave in time with each explosion of fluid.  ");
-			if(player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_SLAVERING) outputText("Cunt juices splatter him as you squirt explosively, leaving a puddle underneath him.  ");
+			if(player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_SLAVERING) outputText("Cunt juices splatter him as you squirt explosively, leaving a puddle underneath him.  ");
 			else outputText("Cunt juices drip down his shaft, oozing off his balls to puddle underneath him.  ");
 			outputText("The two of you lie together, trembling happily as you're filled to the brim with tainted fluids.\n\n");
 			

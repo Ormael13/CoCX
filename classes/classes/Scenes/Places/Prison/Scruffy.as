@@ -1,7 +1,9 @@
 package classes.Scenes.Places.Prison 
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.Wings;
 import classes.Scenes.Monsters.Imp;
 import classes.Scenes.SceneLib;
 
@@ -28,11 +30,11 @@ public class Scruffy extends Imp
 			this.balls = 2;
 			this.ballSize = 1;
 			createBreastRow(0);
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 40;
-			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
-			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			this.hipRating = Hips.RATING_BOYISH;
+			this.buttRating = Butt.RATING_TIGHT;
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 5;
@@ -50,7 +52,7 @@ public class Scruffy extends Imp
 			this.gems = rand(5) + 25;
 			this.drop = NO_DROP;
 			this.special1 = lustMagicAttack;
-			this.wingType = AppearanceDefs.WING_TYPE_IMP;
+			this.wingType = Wings.IMP;
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}

@@ -1,6 +1,7 @@
 package classes
 {
 import classes.internals.Utils;
+import classes.lists.BreastCup;
 
 public class BreastStore extends Utils implements SaveAwareInterface
 	{
@@ -91,8 +92,8 @@ public class BreastStore extends Utils implements SaveAwareInterface
 		public function get cupSize():int { return _cupSize; }
 
 		public function set cupSize(value:int):void {
-			if (value < AppearanceDefs.BREAST_CUP_FLAT) value = AppearanceDefs.BREAST_CUP_FLAT;
-			if (value > AppearanceDefs.BREAST_CUP_ZZZ_LARGE) value = AppearanceDefs.BREAST_CUP_ZZZ_LARGE;
+			if (value < BreastCup.FLAT) value = BreastCup.FLAT;
+			if (value > BreastCup.ZZZ_LARGE) value = BreastCup.ZZZ_LARGE;
 			_cupSize = value;
 		}
 
@@ -125,62 +126,62 @@ public class BreastStore extends Utils implements SaveAwareInterface
 
 		public function adj():String {
 			switch (_cupSize) {
-				case AppearanceDefs.BREAST_CUP_FLAT:		return "non-existent";
-				case AppearanceDefs.BREAST_CUP_A:			return "small";
-				case AppearanceDefs.BREAST_CUP_B:
-				case AppearanceDefs.BREAST_CUP_C:			return "palmable";
-				case AppearanceDefs.BREAST_CUP_D:
-				case AppearanceDefs.BREAST_CUP_DD:
-				case AppearanceDefs.BREAST_CUP_DD_BIG:		return "sizeable";
-				case AppearanceDefs.BREAST_CUP_E:
-				case AppearanceDefs.BREAST_CUP_E_BIG:
-				case AppearanceDefs.BREAST_CUP_EE:
-				case AppearanceDefs.BREAST_CUP_EE_BIG:
-				case AppearanceDefs.BREAST_CUP_F:
-				case AppearanceDefs.BREAST_CUP_F_BIG:
-				case AppearanceDefs.BREAST_CUP_FF:
-				case AppearanceDefs.BREAST_CUP_FF_BIG:		return "huge";
-				case AppearanceDefs.BREAST_CUP_G:
-				case AppearanceDefs.BREAST_CUP_G_BIG:
-				case AppearanceDefs.BREAST_CUP_GG:
-				case AppearanceDefs.BREAST_CUP_GG_BIG:
-				case AppearanceDefs.BREAST_CUP_H:
-				case AppearanceDefs.BREAST_CUP_H_BIG:
-				case AppearanceDefs.BREAST_CUP_HH:
-				case AppearanceDefs.BREAST_CUP_HH_BIG:
-				case AppearanceDefs.BREAST_CUP_I:
-				case AppearanceDefs.BREAST_CUP_I_BIG:
-				case AppearanceDefs.BREAST_CUP_II:
-				case AppearanceDefs.BREAST_CUP_II_BIG:		return "gigantic";
-				case AppearanceDefs.BREAST_CUP_J:
-				case AppearanceDefs.BREAST_CUP_J_BIG:
-				case AppearanceDefs.BREAST_CUP_JJ:
-				case AppearanceDefs.BREAST_CUP_JJ_BIG:
-				case AppearanceDefs.BREAST_CUP_K:
-				case AppearanceDefs.BREAST_CUP_K_BIG:
-				case AppearanceDefs.BREAST_CUP_KK:
-				case AppearanceDefs.BREAST_CUP_KK_BIG:
-				case AppearanceDefs.BREAST_CUP_L:
-				case AppearanceDefs.BREAST_CUP_L_BIG:
-				case AppearanceDefs.BREAST_CUP_LL:
-				case AppearanceDefs.BREAST_CUP_LL_BIG:
-				case AppearanceDefs.BREAST_CUP_M:
-				case AppearanceDefs.BREAST_CUP_M_BIG:
-				case AppearanceDefs.BREAST_CUP_MM:
-				case AppearanceDefs.BREAST_CUP_MM_BIG:
-				case AppearanceDefs.BREAST_CUP_MMM:
-				case AppearanceDefs.BREAST_CUP_MMM_LARGE:	return "mammoth";
+				case BreastCup.FLAT:		return "non-existent";
+				case BreastCup.A:			return "small";
+				case BreastCup.B:
+				case BreastCup.C:			return "palmable";
+				case BreastCup.D:
+				case BreastCup.DD:
+				case BreastCup.DD_BIG:		return "sizeable";
+				case BreastCup.E:
+				case BreastCup.E_BIG:
+				case BreastCup.EE:
+				case BreastCup.EE_BIG:
+				case BreastCup.F:
+				case BreastCup.F_BIG:
+				case BreastCup.FF:
+				case BreastCup.FF_BIG:		return "huge";
+				case BreastCup.G:
+				case BreastCup.G_BIG:
+				case BreastCup.GG:
+				case BreastCup.GG_BIG:
+				case BreastCup.H:
+				case BreastCup.H_BIG:
+				case BreastCup.HH:
+				case BreastCup.HH_BIG:
+				case BreastCup.I:
+				case BreastCup.I_BIG:
+				case BreastCup.II:
+				case BreastCup.II_BIG:		return "gigantic";
+				case BreastCup.J:
+				case BreastCup.J_BIG:
+				case BreastCup.JJ:
+				case BreastCup.JJ_BIG:
+				case BreastCup.K:
+				case BreastCup.K_BIG:
+				case BreastCup.KK:
+				case BreastCup.KK_BIG:
+				case BreastCup.L:
+				case BreastCup.L_BIG:
+				case BreastCup.LL:
+				case BreastCup.LL_BIG:
+				case BreastCup.M:
+				case BreastCup.M_BIG:
+				case BreastCup.MM:
+				case BreastCup.MM_BIG:
+				case BreastCup.MMM:
+				case BreastCup.MMM_LARGE:	return "mammoth";
 				default:
 			}
 			return("titanic");
 		}
 
-		public function canTitFuck():Boolean { return _cupSize >= AppearanceDefs.BREAST_CUP_C; }
+		public function canTitFuck():Boolean { return _cupSize >= BreastCup.C; }
 
 		public function cup():String { return Appearance.breastCup(_cupSize); } //The cup size alone
 
 		public function description(useAdj:Boolean = false, isMale:Boolean = false):String {
-			if (_cupSize == AppearanceDefs.BREAST_CUP_FLAT) return "flat" + (isMale ? " manly," : "") + " chest";
+			if (_cupSize == BreastCup.FLAT) return "flat" + (isMale ? " manly," : "") + " chest";
 			return (useAdj ? adj() + " " : "") + cup() + " breasts";
 		}
 
@@ -188,7 +189,7 @@ public class BreastStore extends Utils implements SaveAwareInterface
 			return breastDescript(cupSize, 0.5 * lactationLevel);
 		}
 
-		public function hasBreasts():Boolean { return _cupSize != AppearanceDefs.BREAST_CUP_FLAT; }
+		public function hasBreasts():Boolean { return _cupSize != BreastCup.FLAT; }
 
 		public function lactating():Boolean { return _lactation >= LACTATION_LIGHT; }
 

@@ -1,6 +1,10 @@
 package classes.Scenes.Monsters 
 {
 import classes.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
@@ -71,12 +75,12 @@ public class ImpWarlord extends Imp
 			this.cumMultiplier = 3;
 			this.hoursSinceCum = 20;
 			createBreastRow(0);
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = rand(14) + 40;
-			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
-			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
+			this.hipRating = Hips.RATING_BOYISH;
+			this.buttRating = Butt.RATING_TIGHT;
+			this.lowerBody = LowerBody.HOOFED;
 			this.skinTone = "red";
 			initStrTouSpeInte(80, 71, 75, 56);
 			initWisLibSensCor(56, 71, 35, 100);
@@ -98,7 +102,7 @@ public class ImpWarlord extends Imp
 					add(consumables.INCUBID,12).
 					add(consumables.SUCMILK,12).
 					add(jewelries.POWRRNG,1);
-			this.wingType = AppearanceDefs.WING_TYPE_IMP;
+			this.wingType = Wings.IMP;
 			this.special1 = lustMagicAttack;
 			this.special2 = clawAttack;
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
