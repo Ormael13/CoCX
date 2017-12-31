@@ -11388,61 +11388,36 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//Hair
-			// store current states first
-/*			var hasPandaHairColor:Boolean = ColorLists.redPandaHairColors.indexOf(player.hair.color) !== -1;
-			var hasNormalHair:Boolean = player.hair.type === Hair.NORMAL;
-			var oldHairType:Number = player.hair.type;
-			if ((!hasNormalHair || player.hair.length === 0 || !hasPandaHairColor) && changes < changeLimit && rand(3) === 0) {
-			player.hair.type = Hair.NORMAL;
-			if (!hasPandaHairColor)
-				player.hair.color = randomChoice(ColorLists.redPandaHairColors);
-			if (player.hair.length === 0) { // player is bald
-				player.hair.length = 1;
-				outputText("\n\nThe familiar sensation of hair returns to your head. After looking yourself on the stream, you confirm that your"
-				          +" once bald head now has normal, short [hairColor] hair.");
-			} else if (hasNormalHair && !hasPandaHairColor) { // 'wrong' hair color
-				outputText("\n\nA mild tingling on your scalp makes your check yourself on the stream. Seems like the root is changing"
-				          +" your hair this time, turning it into [hair].");
-			} else { // player.hair.type !== Hair.NORMAL
-				switch (oldHairType) {
-					case Hair.FEATHER:
-						outputText("\n\nShortly after their taste fades, the roots seem to have effect. Your scalp itches and as you scratch you"
-						          +" see your feathered hair begin to shed, downy feathers falling from your head until you are bald."
-						          +" Alarmed by this sudden change you quickly go to examine yourself in the nearby river, relief soon washing"
-						          +" over you as new [hairColor] hair begins to rapidly grow. <b>You now have [hair]</b>!");
-						break;
-					case Hair.GORGON:
-						player.hair.length = 1;
-						outputText("\n\nAs you finish the root, the scaled critters on your head shake wildly in displeasure. Then, a sudden heat"
-						          +" envelopes your scalp. The transformative effects of your spicy meal make themselves notorious, as the"
-						          +" writhing mess of snakes start hissing uncontrollably. Many of them go rigid, any kind of life that they"
-						          +" could had taken away by the root effects. Soon all the snakes that made your hair are limp and lifeless.");
-						outputText("\n\nTheir dead bodies are separated from you head by a scorching sensation, and start falling to the ground,"
-						          +" turning to dust in a matter of seconds. Examining your head on the stream, you realize that you have"
-						          +" a normal, healthy scalp, though devoid of any kind of hair.");
-						outputText("\n\nThe effects don’t end here, though as the familiar sensation of hair returns to your head a moment later."
-						          +" After looking yourself on the stream again, you confirm that"
-						          +" <b>your once bald head now has normal, short [hairColor] hair</b>.");
-						break;
-					case Hair.GOO:
-						player.hair.length = 1;
-						outputText("\n\nAfter having consumed the root, a lock of gooey hair falls over your forehead. When you try to"
-						          +" examine it, the bunch of goo falls to the ground and evaporates. As you tilt your head to see what happened,"
-						          +" more and more patches of goo start falling from your head, disappearing on the ground with the same speed."
-						          +" Soon, your scalp is devoid of any kind of goo, albeit entirely bald.");
-						outputText("\n\nNot for long, it seems, as the familiar sensation of hair returns to your head a moment later."
-						          +" After looking yourself on the stream, you confirm that"
-						          +" <b>your once bald head now has normal, short [hairColor] hair</b>.");
-						break;
-					default:
-						outputText("\n\nA mild tingling on your scalp makes your check yourself on the stream. Seems like the root is changing"
-						          +" your hair this time, <b>turning it into [hair]</b>.");
+			var panda_hair:Array = ["white", "auburn", "red", "russet"];
+			if ((!InCollection(player.hairColor, panda_hair) || player.hairType != 0) && changes < changeLimit && rand(3) == 0) {
+				if (!InCollection(player.hairColor, panda_hair)) {
+					player.hairColor = randomChoice(panda_hair);
+					outputText("\n\nA mild tingling on your scalp makes your check yourself on the stream. Seems like the root is changing your hair this time, turning it into [hair].");
+				}
+				if (player.hairLength == 0) {
+					player.hairLength = 1;
+					outputText("\n\nThe familiar sensation of hair returns to your head. After looking yourself on the stream, you confirm that your once bald head now has normal, short [haircolor] hair.");
+				}
+				if (player.hairType != 0) {
+					if (player.hairType == AppearanceDefs.HAIR_FEATHER) outputText("\n\nShortly after their taste fades, the roots seem to have effect. Your scalp itches and as you scratch you see your feathered hair begin to shed, downy feathers falling from your head until you are bald. Alarmed by this sudden change you quickly go to examine yourself in the nearby river, relief soon washing over you as new [haircolor] hair begins to rapidly grow. <b>You now have [hair]</b>!");
+					else if (player.hairType == AppearanceDefs.HAIR_GORGON) {
+						player.hairLength = 1;
+						outputText("\n\nAs you finish the root, the scaled critters on your head shake wildly in displeasure. Then, a sudden heat envelopes your scalp. The transformative effects of your spicy meal make themselves notorious, as the writhing mess of snakes start hissing uncontrollably. Many of them go rigid, any kind of life that they could had taken away by the root effects. Soon all the snakes that made your hair are limp and lifeless.");
+						outputText("\n\nTheir dead bodies are separated from you head by a scorching sensation, and start falling to the ground, turning to dust in a matter of seconds. Examining your head on the stream, you realize that you have a normal, healthy scalp, though devoid of any kind of hair.");
+						outputText("\n\nThe effects don’t end here, though as the familiar sensation of hair returns to your head a moment later. After looking yourself on the stream again, you confirm that <b>your once bald head now has normal, short [haircolor] hair</b>.");
 					}
+					else if (player.hairType == AppearanceDefs.HAIR_GOO) {
+						player.hairLength = 1;
+						outputText("\n\nAfter having consumed the root, a lock of gooey hair falls over your forehead. When you try to examine it, the bunch of goo falls to the ground and evaporates. As you tilt your head to see what happened, more and more patches of goo start falling from your head, disappearing on the ground with the same speed. Soon, your scalp is devoid of any kind of goo, albeit entirely bald.");
+						outputText("\n\nNot for long, it seems, as the familiar sensation of hair returns to your head a moment later. After looking yourself on the stream, you confirm that <b>your once bald head now has normal, short [haircolor] hair</b>.");
+					}
+					else outputText("\n\nA mild tingling on your scalp makes your check yourself on the stream. Seems like the root is changing your hair this time, <b>turning it into [hair]</b>.");
+					setHairType(AppearanceDefs.HAIR_NORMAL);
 				}
 				flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
 				changes++;
 			}
-*/			//Face
+			//Face
 			if (rand(3) == 0 && changes < changeLimit && player.faceType != AppearanceDefs.FACE_RED_PANDA && player.earType == AppearanceDefs.EARS_RED_PANDA) {
 				outputText("\n\nNumbness comes to your cheekbones and jaw, while the rest of your head is overwhelmed by a tingling sensation. Every muscle on your face tenses and shifts, while the bones and tissue rearrange, radically changing the shape of your head. You have troubles breathing as the changes reach your nose, but you manage to see as it changes into an animalistic muzzle. You jaw joins it and your teeth sharpen a little, not to the point of being true menacing, but gaining unequivocally the shape of those belonging on a little carnivore.");
 				outputText("\n\nOnce you’re face and jaw has reshaped, fur covers the whole of your head. The soft sensation is quite pleasant. It has a russet-red coloration, that turns to white on your muzzle and cheeks. Small, rounded patches of white cover the area where your eyebrows were. <b>You now have a red-panda head!</b>");

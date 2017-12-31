@@ -1543,6 +1543,8 @@ public function campFollowers(descOnly:Boolean = false):void {
 	if (flags[kFLAGS.FLOWER_LEVEL] == 4) {
 		buttons.add( "Holli", HolliPure.treeMenu).hint("Holli is in her tree at the edges of your camp.  You could go visit her if you want.");
 	}
+	//Michiko
+	buttons.add("???").disable("Knowledge is Power.");
     for each(var npc:XXCNPC in _campFollowers){
         npc.campDescription(buttons,XXCNPC.FOLLOWER);
     }

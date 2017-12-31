@@ -120,6 +120,8 @@ public class AppearanceDefs {
     public static const FACE_JABBERWOCKY:int                                            =   36;
     public static const FACE_RED_PANDA:int                                            	=   37;
     public static const FACE_CAT_CANINES:int                                            =   38;
+    public static const FACE_CHESHIRE:int                                            	=   39;
+    public static const FACE_CHESHIRE_SMILE:int                                         =   40;
 
 // tongueType
     public static const TONGUE_HUMAN:int                                                =   0;
@@ -235,6 +237,7 @@ public class AppearanceDefs {
     public static const ARM_TYPE_RAIJU:int												=  22;
     public static const ARM_TYPE_RED_PANDA:int											=  23;
     public static const ARM_TYPE_GARGOYLE_2:int											=  24;
+    public static const ARM_TYPE_CAT:int												=  25;
 
 // clawType
     public static const CLAW_TYPE_NORMAL:int                                            =   0;

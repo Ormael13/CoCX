@@ -82,7 +82,7 @@ public class BossGolems extends AbstractGargoyle
 			initWisLibSensCor(20, 10, 10, 50);
 			this.tallness = 72;
 			this.drop = new ChainedDrop()
-					.add(consumables.E_PEARL, 1);
+					.add(consumables.E3PEARL, 1);
 			this.level = 9;
 			this.bonusHP = 100;
 			this.weaponName = "stone fists";

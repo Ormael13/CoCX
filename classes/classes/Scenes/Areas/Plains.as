@@ -57,12 +57,14 @@ use namespace CoC;
 					return flags[kFLAGS.ETNA_FOLLOWER] < 1
 						   && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2;
 				},
+				chance: 0.5,
 				call: SceneLib.etnaScene.repeatYandereEnc
 			}, {
 				name: "electra",
 				when: function():Boolean {
 					return flags[kFLAGS.ELECTRA_FOLLOWER] < 1 && flags[kFLAGS.ELECTRA_AFFECTION] >= 2;
 				},
+				chance: 0.5,
 				call: SceneLib.electraScene.repeatPlainsEnc
 			}, {
 				//Dem Kangasluts!  Force Sheila relationship phase!

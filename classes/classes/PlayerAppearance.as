@@ -1196,6 +1196,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your arms and hands are practically human save for the sharp white claws that have replaced your normal nails.");
 		else if (armType == AppearanceDefs.ARM_TYPE_RED_PANDA)
 			outputText("  Soft, black-brown fluff cover your arms. Your paws have cute, pink paw pads and short claws.");
+		else if (armType == AppearanceDefs.ARM_TYPE_CAT)
+			outputText("  Soft, black-brown fluff cover your arms. Your paws have cute, pink paw pads and short claws.");
 		if (player.wingType == AppearanceDefs.WING_TYPE_BAT_ARM ){
 			outputText("  Your arm bones are thin and light in order to allow flight. You have grown a few extra fingers, which allow you to hold various items even with your abnormal hands, albeit at the cost of preventing flight while doing so.");
 		}

@@ -270,6 +270,7 @@ use namespace CoC;
 					return flags[kFLAGS.ELECTRA_FOLLOWER] < 1
 						   && flags[kFLAGS.ELECTRA_AFFECTION] >= 2;
 				},
+				chance: 0.5,
 				call  : SceneLib.electraScene.repeatDeepwoodsEnc
 			}, {
 				name: "kitsune",

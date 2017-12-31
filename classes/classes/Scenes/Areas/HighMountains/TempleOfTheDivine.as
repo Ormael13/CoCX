@@ -1573,7 +1573,7 @@ use namespace CoC;
 					outputText("\n\n<b>Are you sure about this? There's no turning back past this point.</b>");
 					menu();
 					addButton(0, "No", becomingGargoyleNo);
-					addButton(1, "Yes", becomingGargoyleYes);
+				//	addButton(1, "Yes", becomingGargoyleYes);
 					
 				}
 			}

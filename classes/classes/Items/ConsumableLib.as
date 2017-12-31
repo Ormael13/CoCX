@@ -146,8 +146,8 @@ public final class ConsumableLib extends BaseContent
 		public const HUMMUS2:SimpleConsumable = mk("Hummus2", "S.Hummus", "a blob of cheesy-looking super hummus", 6, "This pile of hummus doesn't look that clean, and you really don't remember where you got it from.  It looks bland.  So bland that you feel blander just by looking at it.", m.superHummus);
 		public const P_PEARL:SimpleConsumable = mk("P.Pearl", "P.Pearl", "a pure pearl", 1000, "Marae gave you this pure pearl as a reward for shutting down the demonic factory.", m.purePearl);
 		public const EZEKFRU:SimpleConsumable = mk("EzekFru", "EzekielFruit", "a simple looking fruit", 300, "Evangeline gave you this fruit as means of showing her gratitude.", m.ezekielfruit);
-		public const E3PEARL:SimpleConsumable = mk("E.Pearl", "Elemental3CPearl", "a simple looking three-colored pearl", 200, "Pearl formed after defeating . It's surrounded by faint aura of elements.", m.lowgradeelementalPearl);
-		public const E_PEARL:SimpleConsumable = mk("E.Pearl", "Elemental5CPearl", "a simple looking five-colored pearl", 400, "Pearl formed after defeating group of golems. It's surrounded by weak aura of elements.", m.middlegradeelementalPearl);
+		public const E3PEARL:SimpleConsumable = mk("E.Pearl", "Elemental3CPearl", "a simple looking three-colored pearl", 200, "Pearl formed after defeating group of golems. It's surrounded by faint aura of elements.", m.lowgradeelementalPearl);
+		public const E_PEARL:SimpleConsumable = mk("E.Pearl", "Elemental5CPearl", "a simple looking five-colored pearl", 400, "Pearl formed after defeating . It's surrounded by weak aura of elements.", m.middlegradeelementalPearl);
 		public const E7PEARL:SimpleConsumable = mk("E.Pearl", "Elemental7CPearl", "a simple looking seven-colored pearl", 800, "Pearl formed after defeating . It's surrounded by aura of elements.", m.highgradeelementalPearl);
 
 		//NON-TRANSFORMATIVE ITEMS
