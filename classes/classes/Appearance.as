@@ -2452,7 +2452,9 @@ public class Appearance extends Utils
 					[AppearanceDefs.FACE_BUCKTOOTH, "jabberwocky buck tooths"],
 					[AppearanceDefs.FACE_JABBERWOCKY, "jabberwocky"],
 					[AppearanceDefs.FACE_RED_PANDA, "red-panda"],
-					[AppearanceDefs.FACE_CAT_CANINES, "cat canines"]
+					[AppearanceDefs.FACE_CAT_CANINES, "cat canines"],
+					[AppearanceDefs.FACE_CHESHIRE, "cheshire"],
+					[AppearanceDefs.FACE_CHESHIRE_SMILE, "cheshire"]
 				]
 		);
 		public static const DEFAULT_TONGUE_NAMES:Object = createMapFromPairs(
@@ -2569,7 +2571,8 @@ public class Appearance extends Utils
 					[AppearanceDefs.ARM_TYPE_ONI, "oni"],
 					[AppearanceDefs.ARM_TYPE_ELF, "elf"],
 					[AppearanceDefs.ARM_TYPE_RAIJU, "raiju"],
-					[AppearanceDefs.ARM_TYPE_RED_PANDA, "red-panda"]
+					[AppearanceDefs.ARM_TYPE_RED_PANDA, "red-panda"],
+					[AppearanceDefs.ARM_TYPE_CAT, "cat"]
 				]
 		);
 		public static const DEFAULT_TAIL_NAMES:Object = createMapFromPairs(

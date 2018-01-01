@@ -777,7 +777,7 @@ import classes.Items.JewelryLib;
 		
 		public override function maxWrath():Number
 		{
-			var max:Number = 100;
+			var max:Number = 250;
 			if (findPerk(PerkLib.DoubleAttack) >= 0) max += 10;
 			if (findPerk(PerkLib.TripleAttack) >= 0) max += 10;
 			if (findPerk(PerkLib.QuadrupleAttack) >= 0) max += 10;
@@ -822,7 +822,7 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.AscensionFury) >= 0) max += perkv1(PerkLib.AscensionFury) * 20;
 			if (findPerk(PerkLib.UnlockId2ndStage) >= 0) max += level;
 			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 2;
-			if (max > 20599) max = 20599;//obecnie max to 20520
+			if (max > 20699) max = 20699;//obecnie max to 20670
 			return max;
 		}
 		

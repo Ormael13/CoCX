@@ -253,8 +253,8 @@ public class CoC extends MovieClip
         //model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8h";
-			version = ver + " (<b>Project 8 (Part 1: Celess, Chi Chi, Ceani, Patchouli, Konstantin), Metamorph (part 5), Red Panda TF, Anzu Palace ported, many new items and perks, 6 new achievments</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8h2";
+			version = ver + " (<b></b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

@@ -48,7 +48,7 @@ public class UnderwaterTigersharkGirl extends Monster
 		public function UnderwaterTigersharkGirl() 
 		{
 			this.a = "the ";
-			this.short = "shark-girl";
+			this.short = "tiger shark-girl";
 			this.imageName = "izma";
 			this.long = "The tiger shark girl is menacingly circling you, waiting for the opportunity to strike. These creatures clearly look way more deadly in the water then out of it!";
 			// this.plural = false;

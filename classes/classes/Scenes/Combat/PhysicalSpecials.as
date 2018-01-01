@@ -282,34 +282,34 @@ public class PhysicalSpecials extends BaseCombatContent {
 	
 	public function powerAttackMenu():void {
 		menu();
-		if (player.hasPerk(PerkLib.JobWarrior)) {
-			addButton(0, "2x", powerAttack2x).disableIf(player.wrath < 50,"You are too calm to use this special.");
+		if (player.hasPerk(PerkLib.JobWarrior) || player.hasPerk(PerkLib.JobBeastWarrior)) {
+			addButton(0, "2x", powerAttack2x).disableIf(player.wrath < 50,"You are too calm to use this special. Req. 50+ wrath");
 			if (player.level >= 6) {
-				addButton(1, "3x", powerAttack3x).disableIf(player.wrath < 100,"You are too calm to use this special.");
+				addButton(1, "3x", powerAttack3x).disableIf(player.wrath < 100,"You are too calm to use this special. Req. 100+ wrath");
 			} else addButtonDisabled(1, "???");
 			if (player.level >= 12) {
-				addButton(2, "4x", powerAttack4x).disableIf(player.wrath < 200,"You are too calm to use this special.");
+				addButton(2, "4x", powerAttack4x).disableIf(player.wrath < 200,"You are too calm to use this special. Req. 200+ wrath");
 			} else addButtonDisabled(2, "???");
 			if (player.level >= 18) {
-				addButton(3, "5x", powerAttack5x).disableIf(player.wrath < 300,"You are too calm to use this special.");
+				addButton(3, "5x", powerAttack5x).disableIf(player.wrath < 300,"You are too calm to use this special. Req. 300+ wrath");
 			} else addButtonDisabled(3, "???");
 			if (player.level >= 24) {
-				addButton(4, "6x", powerAttack6x).disableIf(player.wrath < 400,"You are too calm to use this special.");
+				addButton(4, "6x", powerAttack6x).disableIf(player.wrath < 400,"You are too calm to use this special. Req. 400+ wrath");
 			} else addButtonDisabled(4, "???");
 			if (player.level >= 30) {
-				addButton(5, "7x", powerAttack7x).disableIf(player.wrath < 500,"You are too calm to use this special.");
+				addButton(5, "7x", powerAttack7x).disableIf(player.wrath < 500,"You are too calm to use this special. Req. 500+ wrath");
 			} else addButtonDisabled(5, "???");
 			if (player.level >= 36) {
-				addButton(6, "8x", powerAttack8x).disableIf(player.wrath < 600,"You are too calm to use this special.");
+				addButton(6, "8x", powerAttack8x).disableIf(player.wrath < 600,"You are too calm to use this special. Req. 600+ wrath");
 			} else addButtonDisabled(6, "???");
 		}
-		else addButton(0, "2x", powerAttack2x).disableIf(player.wrath < 100,"You are too calm to use this special.");
+		else addButton(0, "2x", powerAttack2x).disableIf(player.wrath < 200,"You are too calm to use this special. Req. 200+ wrath");
 		addButton(14, "Back", combat.ui.submenuPhySpecials);
 	}
 	public function powerAttack2x():void {
 		clearOutput();
-		if (player.hasPerk(PerkLib.JobWarrior)) player.wrath -= 50;
-		else player.wrath -= 100;
+		if (player.hasPerk(PerkLib.JobWarrior) || player.hasPerk(PerkLib.JobBeastWarrior)) player.wrath -= 50;
+		else player.wrath -= 200;
 		outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		damage += powerfistspoweeeeer();

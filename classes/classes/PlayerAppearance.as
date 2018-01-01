@@ -1197,7 +1197,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (armType == AppearanceDefs.ARM_TYPE_RED_PANDA)
 			outputText("  Soft, black-brown fluff cover your arms. Your paws have cute, pink paw pads and short claws.");
 		else if (armType == AppearanceDefs.ARM_TYPE_CAT)
-			outputText("  Soft, black-brown fluff cover your arms. Your paws have cute, pink paw pads and short claws.");
+			outputText("  Your arms are covered in [skin coat.color] up to your shoulder. They end with a pair of five-toed cat paws armed with lethal claws.");
 		if (player.wingType == AppearanceDefs.WING_TYPE_BAT_ARM ){
 			outputText("  Your arm bones are thin and light in order to allow flight. You have grown a few extra fingers, which allow you to hold various items even with your abnormal hands, albeit at the cost of preventing flight while doing so.");
 		}
@@ -1777,7 +1777,7 @@ public class PlayerAppearance extends BaseContent {
 			}
 		}
 		//cat-faces
-		if (faceType == AppearanceDefs.FACE_CAT) {
+		if (faceType == AppearanceDefs.FACE_CAT || faceType == AppearanceDefs.FACE_CHESHIRE) {
 			if (!player.hasCoat()) {
 				outputText("  You have a cat-like face, complete with a cute, moist nose and whiskers.  The [skin] that is revealed by your lack of fur looks quite unusual on so feline a face");
 				if (skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
@@ -1789,9 +1789,11 @@ public class PlayerAppearance extends BaseContent {
 			} else {
 				outputText("  Your facial structure blends humanoid features with those of a cat.  A moist nose and whiskers are included, but overlaid with glittering [skin coat].");
 			}
+			if (faceType == AppearanceDefs.FACE_CHESHIRE) outputText(" For some reason your facial expression is that of an everlasting yet somewhat unsettling grin.");
 		}
-		if (faceType == AppearanceDefs.FACE_CAT_CANINES) {
+		if (faceType == AppearanceDefs.FACE_CAT_CANINES || faceType == AppearanceDefs.FACE_CHESHIRE_SMILE) {
 			outputText("  Your face is human in shape and structure with [skin coat]. Your mouth is somewhat human save for your cat-like canines.");
+			if (faceType == AppearanceDefs.FACE_CHESHIRE_SMILE) outputText(" For some reason your facial expression is that of an everlasting yet somewhat unsettling grin.");
 		}
 		//Minotaaaauuuur-face
 		if (faceType == AppearanceDefs.FACE_COW_MINOTAUR) {
@@ -1959,7 +1961,10 @@ public function RacialScores():void {
 	}
 	else if (player.catScore() >= 4 && player.catScore() < 7) {
 		outputText("\n<font color=\"#0000a0\">Half Cat-morph: " + player.catScore() + " (");
-		if (player.findPerk(PerkLib.Flexibility) > 0) outputText("+" + (50 * (1 + player.newGamePlusMod())) + " ");
+		if (player.findPerk(PerkLib.Flexibility) > 0) {
+			if (player.findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) outputText("+" + (60 * (1 + player.newGamePlusMod())) + " ");
+			else outputText("+" + (50 * (1 + player.newGamePlusMod())) + " ");
+		}
 		else outputText("+" + (40 * (1 + player.newGamePlusMod())) + " ");
 		outputText("max Spe, +" + (20 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
 	}
@@ -1970,7 +1975,10 @@ public function RacialScores():void {
 	else if (player.centaurScore() < 1) outputText("\n<font color=\"#ff0000\">Centaur: 0</font>");
 	if (player.cheshireScore() >= 11) {
 		outputText("\n<font color=\"#0000a0\">Cheshire cat: " + player.cheshireScore() + " (");
-		if (player.findPerk(PerkLib.Flexibility) > 0) outputText("+" + (105 * (1 + player.newGamePlusMod())) + " ");
+		if (player.findPerk(PerkLib.Flexibility) > 0) {
+			if (player.findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) outputText("+" + (115 * (1 + player.newGamePlusMod())) + " ");
+			else outputText("+" + (105 * (1 + player.newGamePlusMod())) + " ");
+		}
 		else outputText("+" + (95 * (1 + player.newGamePlusMod())) + " ");
 		outputText("max Spe, +" + (70 * (1 + player.newGamePlusMod())) + " max Int)</font>");
 	}
@@ -2244,7 +2252,10 @@ public function RacialScores():void {
 	else if (player.nagaScore() < 1) outputText("\n<font color=\"#ff0000\">Half-Naga: 0</font>");
 	if (player.nekomataScore() >= 11) {
 		outputText("\n<font color=\"#0000a0\">Nekomanta: " + player.nekomataScore() + " (");
-		if (player.findPerk(PerkLib.Flexibility) > 0) outputText("+" + (50 * (1 + player.newGamePlusMod())) + " ");
+		if (player.findPerk(PerkLib.Flexibility) > 0) {
+			if (player.findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) outputText("+" + (60 * (1 + player.newGamePlusMod())) + " ");
+			else outputText("+" + (50 * (1 + player.newGamePlusMod())) + " ");
+		}
 		else outputText("+" + (40 * (1 + player.newGamePlusMod())) + " ");
 		outputText("max Spe, +" + (40 * (1 + player.newGamePlusMod())) + " max Int, +" + (85 * (1 + player.newGamePlusMod())) + " max Int)</font>");
 	}
@@ -2287,9 +2298,10 @@ public function RacialScores():void {
 	else if (player.rhinoScore() >= 1 && player.rhinoScore() < 4) outputText("\n<font color=\"#008000\">Rhino-morph: " + player.rhinoScore() + "</font>");
 	else if (player.rhinoScore() < 1) outputText("\n<font color=\"#ff0000\">Rhino-morph: 0</font>");
 	if (player.salamanderScore() >= 7) {
-		outputText("\n<font color=\"#0000a0\">Salamander: " + player.salamanderScore() + " (+" + (25 * (1 + player.newGamePlusMod())) + " max Str, ");
-		if (player.findPerk(PerkLib.SalamanderAdrenalGlands) > 0) outputText("+" + (30 * (1 + player.newGamePlusMod())) + " max Tou, +" + (45 * (1 + player.newGamePlusMod())) + " ");
-		else outputText("+" + (25 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + " ");
+		outputText("\n<font color=\"#0000a0\">Salamander: " + player.salamanderScore() + " (+");
+		if (player.findPerk(PerkLib.SalamanderAdrenalGlands) > 0 && player.findPerk(PerkLib.SalamanderAdrenalGlandsEvolved) > 0) outputText("" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (35 * (1 + player.newGamePlusMod())) + " max Tou, +" + (5 * (1 + player.newGamePlusMod())) + " max Spe, +" + (50 * (1 + player.newGamePlusMod())) + " ");
+		else if (player.findPerk(PerkLib.SalamanderAdrenalGlands) > 0) outputText("" + (25 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, +" + (45 * (1 + player.newGamePlusMod())) + " ");
+		else outputText("" + (25 * (1 + player.newGamePlusMod())) + " max Str, +" + (25 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + " ");
 		outputText("max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
 	}
 	else if (player.salamanderScore() >= 4 && player.salamanderScore() < 7) {

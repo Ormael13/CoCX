@@ -85,7 +85,7 @@ public class ButtonData {
 	 * DOES NOT decrease wrath if clicked
 	 */
 	public function requireWrath(cost:Number):ButtonData {
-		toolTipText += "\nLust cost: "+cost;
+		toolTipText += "\nWrath cost: "+cost;
 		if (CoC.instance.player.wrath < cost) {
 			disable();
 			toolTipText += " <b>Your wrath is too low to use this ability!</b>";

@@ -99,7 +99,12 @@ package classes.Scenes.NPCs
 					meetKonstantinAtForest2();
 					return;
 				}
-				else outputText(" After giving thanks to the friendly ursine, you return to your camp.\n\n");
+				else {
+					outputText(" After giving thanks to the friendly ursine, you return to ");
+					if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) outputText("daily tasks");
+					else outputText("camp");
+					outputText(".\n\n");
+				}
 			}
 			else outputText("\"<i>It’s okay, " + player.mf("man","girl") + ". Gems can be tough to get sometimes. If you feel like using my services, you can find me in this clearing.</i>\"\n\n");
 			doNext(camp.returnToCampUseOneHour);

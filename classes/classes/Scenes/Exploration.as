@@ -94,7 +94,7 @@ public class Exploration extends BaseContent
 			if (flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0) addButton(8, "Swamp", SceneLib.swamp.exploreSwamp).hint("Visit the wet swamplands. \n\nRecommended level: 18" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_SWAMP] : ""));
 			
 			if (flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0) addButton(10, "Blight Ridge", blightridge.exploreBlightRidge).hint("Visit the corrupted blight ridge. \n\nRecommended level: 26" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] : ""));
-			if (flags[kFLAGS.DISCOVERED_BEACH] > 0) addButton(11, "Beach", beach.exploreBeach).hint("Visit the sunny beach. \n\nRecommended level: 15" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_BEACH] : ""));
+			if (flags[kFLAGS.DISCOVERED_BEACH] > 0) addButton(11, "Beach", beach.exploreBeach).hint("Visit the sunny beach. \n\nRecommended level: 30" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_BEACH] : ""));
 			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(12, "Glacial Rift", SceneLib.glacialRift.exploreGlacialRift).hint("Visit the chilly glacial rift. \n\nRecommended level: 30" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] : ""));
 			if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0) addButton(13, "Volcanic Crag", SceneLib.volcanicCrag.exploreVolcanicCrag).hint("Visit the infernal volcanic crag. \n\nRecommended level: 30" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] : ""));
 			

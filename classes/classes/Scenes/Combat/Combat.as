@@ -3920,7 +3920,7 @@ private function combatStatusesUpdate():void {
 			var hemorrhage:Number = 0;
 			hemorrhage += player.maxHP() * player.statusEffectv2(StatusEffects.Hemorrhage);
 			hemorrhage = takePhysDamage(hemorrhage);
-			outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds. (<font color=\"#800000\">" + bleed + "</font>)</b>\n\n");
+			outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds. (<font color=\"#800000\">" + hemorrhage + "</font>)</b>\n\n");
 		}
 	}
 	if (player.hasStatusEffect(StatusEffects.Disarmed)) {

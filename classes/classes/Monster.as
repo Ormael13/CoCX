@@ -343,7 +343,7 @@ import flash.utils.getQualifiedClassName;
 		public override function maxWrath():Number
 		{
 			//Base wrath
-			var temp:Number = 100;
+			var temp:Number = 250;
 			if (findPerk(PerkLib.DoubleAttack) >= 0) temp += 10;
 			if (findPerk(PerkLib.TripleAttack) >= 0) temp += 10;
 			if (findPerk(PerkLib.QuadrupleAttack) >= 0) temp += 10;
@@ -480,11 +480,11 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.EnemyGigantType) >= 0) damage *= 3;
 			//other
 			if (hasStatusEffect(StatusEffects.Bloodlust)) damage *= (1 + (0.1 * statusEffectv2(StatusEffects.Bloodlust)));
-			if (findPerk(PerkLib.JobWarrior) < 0 && wrath >= 100) {
-				wrath -= 100;
+			if (findPerk(PerkLib.JobWarrior) < 0 && findPerk(PerkLib.JobBeastWarrior) < 0 && wrath >= 200) {
+				wrath -= 200;
 				damage *= 2;
 			}
-			if (findPerk(PerkLib.JobWarrior) >= 0 && wrath >= 100) {
+			if (findPerk(PerkLib.JobWarrior) >= 0 && findPerk(PerkLib.JobBeastWarrior) >= 0 && wrath >= 100) {
 				if (rand(2) == 0) {
 					wrath -= 100;
 					damage *= 3;

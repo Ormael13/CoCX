@@ -499,7 +499,7 @@ use namespace CoC;
 			if (armType == AppearanceDefs.ARM_TYPE_MANTIS && weaponName == "fists") {
 				attack += (15 * newGamePlusMod);
 			}
-			if (armType == AppearanceDefs.ARM_TYPE_YETI && weaponName == "fists") {
+			if ((armType == AppearanceDefs.ARM_TYPE_YETI || armType == AppearanceDefs.ARM_TYPE_CAT) && weaponName == "fists") {
 				attack += (5 * newGamePlusMod);
 			}
 			//Konstantine buff
@@ -2532,6 +2532,8 @@ use namespace CoC;
 				catCounter++;
 			if (tailType == AppearanceDefs.TAIL_TYPE_CAT)
 				catCounter++;
+			if (armType == AppearanceDefs.ARM_TYPE_CAT)
+				catCounter++;
 			if (lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CAT)
 				catCounter++;
 			if (catCocks() > 0)
@@ -2545,9 +2547,9 @@ use namespace CoC;
 			if (hasFur() || hasPartialCoat(AppearanceDefs.SKIN_COAT_FUR))
 				catCounter++;
 			if (hornType == AppearanceDefs.HORNS_DEMON || hornType == AppearanceDefs.HORNS_DRACONIC_X2 || hornType == AppearanceDefs.HORNS_DRACONIC_X4_12_INCH_LONG)
-					catCounter -= 2;
+				catCounter -= 2;
 			if (wingType == AppearanceDefs.WING_TYPE_BAT_LIKE_TINY || wingType == AppearanceDefs.WING_TYPE_DRACONIC_SMALL || wingType == AppearanceDefs.WING_TYPE_BAT_LIKE_LARGE || wingType == AppearanceDefs.WING_TYPE_DRACONIC_LARGE || AppearanceDefs.WING_TYPE_BAT_LIKE_LARGE_2 || AppearanceDefs.WING_TYPE_DRACONIC_HUGE)
-					catCounter -= 2;
+				catCounter -= 2;
 			if (findPerk(PerkLib.Flexibility) > 0)
 				catCounter++;
 			if (findPerk(PerkLib.CatlikeNimbleness) > 0)
@@ -2578,6 +2580,8 @@ use namespace CoC;
 				nekomataCounter++;
 			if (tailType == AppearanceDefs.TAIL_TYPE_CAT)
 				nekomataCounter++;
+			if (armType == AppearanceDefs.ARM_TYPE_CAT)
+				nekomataCounter++;
 			if (lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CAT)
 				nekomataCounter++;
 			if (hasFur() || hasPartialCoat(AppearanceDefs.SKIN_COAT_FUR))
@@ -2598,8 +2602,8 @@ use namespace CoC;
 		public function cheshireScore():Number {
 			Begin("Player","racialScore","cheshire");
 			var cheshireCounter:Number = 0;
-			if (faceType == AppearanceDefs.FACE_CAT || faceType == AppearanceDefs.FACE_CAT_CANINES)
-				cheshireCounter++;
+			if (faceType == AppearanceDefs.FACE_CHESHIRE || faceType == AppearanceDefs.FACE_CHESHIRE_SMILE)
+				cheshireCounter += 2;
 			if (eyeType == AppearanceDefs.EYES_CAT_SLITS)
 				cheshireCounter++;
 			if (earType == AppearanceDefs.EARS_CAT)
@@ -2607,6 +2611,8 @@ use namespace CoC;
 			if (tongueType == AppearanceDefs.TONGUE_CAT)
 				cheshireCounter++;
 			if (tailType == AppearanceDefs.TAIL_TYPE_CAT)
+				cheshireCounter++;
+			if (armType == AppearanceDefs.ARM_TYPE_CAT)
 				cheshireCounter++;
 			if (lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CAT)
 				cheshireCounter++;
@@ -2804,6 +2810,8 @@ use namespace CoC;
 			var dragonCounter:Number = 0;
 			if (faceType == AppearanceDefs.FACE_DRAGON || faceType == AppearanceDefs.FACE_DRAGON_FANGS)
 				dragonCounter++;
+			if (faceType == AppearanceDefs.FACE_JABBERWOCKY || faceType == AppearanceDefs.FACE_BUCKTOOTH)
+				dragonCounter -= 10;
 			if (eyeType == AppearanceDefs.EYES_DRAGON)
 				dragonCounter++;
 			if (earType == AppearanceDefs.EARS_DRAGON)
@@ -2818,6 +2826,8 @@ use namespace CoC;
 				dragonCounter += 2;
 			if (wingType == AppearanceDefs.WING_TYPE_DRACONIC_HUGE)
 				dragonCounter += 4;
+			if (wingType == AppearanceDefs.WING_TYPE_FEY_DRAGON_WINGS)
+				dragonCounter -= 10;
 			if (lowerBody == AppearanceDefs.LOWER_BODY_TYPE_DRAGON)
 				dragonCounter++;
 			if (armType == AppearanceDefs.ARM_TYPE_DRAGON)
@@ -5669,9 +5679,9 @@ use namespace CoC;
 				maxSpe += (5 * newGamePlusMod);
 				maxWis += (5 * newGamePlusMod);
 			}
-			/*if (findPerk(PerkLib.CatlikeNimblenessEvolved) >= 0) {
+			if (findPerk(PerkLib.CatlikeNimblenessEvolved) >= 0) {
 				maxSpe += (10 * newGamePlusMod);
-			}*/
+			}
 			if (findPerk(PerkLib.GargoylePure) > 0) {
 				maxWis += (80 * newGamePlusMod);
 				maxLib -= (10 * newGamePlusMod);

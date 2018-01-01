@@ -141,14 +141,15 @@ public function beachInteractionsAfterArcheryTraining():void
 			doNext(camp.returnToCampUseTwoHours);
 		}	
 	}
-	if (player.hasItem(consumables.FISHFIL)) {
+	if (player.hasItem(consumables.FISHFIL) || player.hasItem(consumables.FREFISH)) {
 		outputText("You find Ceani lazily resting on the beach and head out to say hello.\n\n");
 		outputText("\"<i>Hey it’s you [name] nice to see you. I was wondering how you were. How is your demon hunting going?</i>\"\n\n");
 		outputText("You tell her your latest accomplishment as she smiles widely. However her belly rumbles. You realise she must be getting hungry and pull a fish out of your bags. Ceani eyes sparkles as she see the fish.\n\n");
 		outputText("\"<i>Fresh from the lake?! Really?! For me?!</i>\"\n\n");
 		outputText("Ceani pick up the fish from your hands and sniffs it before taking a bite and starting to cry.\n\n");
 		outputText("\"<i>I just can’t swim in the lake with all those crazed shark girls but the fish there are so tasty! Thank you so much!</i>\"\n\n");
-		player.destroyItems(consumables.FISHFIL, 1);
+		if (player.hasItem(consumables.FISHFIL)) player.destroyItems(consumables.FISHFIL, 1);
+		if (player.hasItem(consumables.FREFISH)) player.destroyItems(consumables.FREFISH, 1);
 		var x:int = player.cockThatFits(36, "length");
 		menu();
 		addButton(0, "Talk", beachInteractionsTalk);
@@ -169,12 +170,13 @@ public function oceanInteractionsAfterArcheryTraining():void
 	clearOutput();
 	outputText("You find move around the ocean when you spot Ceani swimming nearby.\n\n");
 	outputText("\"<i>Hey it’s you [name] nice to see you. I was wondering how you were. How is your demon hunting going?</i>\"\n\n");
-	if (player.hasItem(consumables.FISHFIL)) {
+	if (player.hasItem(consumables.FISHFIL) || player.hasItem(consumables.FREFISH)) {
 		outputText("You tell her your latest accomplishment as she smiles widely. However her belly rumbles. You realise she must be getting hungry and pull a fish out of your bags. Ceani eyes sparkles as she see the fish.\n\n");
 		outputText("\"<i>Fresh from the lake?! Really?! For me?!</i>\"\n\n");
 		outputText("Ceani pick up the fish from your hands and sniffs it before taking a bite and starting to cry.\n\n");
 		outputText("\"<i>I just can’t swim in the lake with all those crazed shark girls but the fish there are so tasty! Thank you so much!</i>\"\n\n");
-		player.destroyItems(consumables.FISHFIL, 1);
+		if (player.hasItem(consumables.FISHFIL)) player.destroyItems(consumables.FISHFIL, 1);
+		if (player.hasItem(consumables.FREFISH)) player.destroyItems(consumables.FREFISH, 1);
 		var x:int = player.cockThatFits(36, "length");
 		menu();
 		addButton(0, "Talk", beachInteractionsTalk);

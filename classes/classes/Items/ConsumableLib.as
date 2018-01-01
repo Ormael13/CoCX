@@ -146,9 +146,9 @@ public final class ConsumableLib extends BaseContent
 		public const HUMMUS2:SimpleConsumable = mk("Hummus2", "S.Hummus", "a blob of cheesy-looking super hummus", 6, "This pile of hummus doesn't look that clean, and you really don't remember where you got it from.  It looks bland.  So bland that you feel blander just by looking at it.", m.superHummus);
 		public const P_PEARL:SimpleConsumable = mk("P.Pearl", "P.Pearl", "a pure pearl", 1000, "Marae gave you this pure pearl as a reward for shutting down the demonic factory.", m.purePearl);
 		public const EZEKFRU:SimpleConsumable = mk("EzekFru", "EzekielFruit", "a simple looking fruit", 300, "Evangeline gave you this fruit as means of showing her gratitude.", m.ezekielfruit);
-		public const E3PEARL:SimpleConsumable = mk("E.Pearl", "Elemental3CPearl", "a simple looking three-colored pearl", 200, "Pearl formed after defeating group of golems. It's surrounded by faint aura of elements.", m.lowgradeelementalPearl);
-		public const E_PEARL:SimpleConsumable = mk("E.Pearl", "Elemental5CPearl", "a simple looking five-colored pearl", 400, "Pearl formed after defeating . It's surrounded by weak aura of elements.", m.middlegradeelementalPearl);
-		public const E7PEARL:SimpleConsumable = mk("E.Pearl", "Elemental7CPearl", "a simple looking seven-colored pearl", 800, "Pearl formed after defeating . It's surrounded by aura of elements.", m.highgradeelementalPearl);
+		public const E3PEARL:SimpleConsumable = mk("E3Pearl", "Elemen3CPearl", "a simple looking three-colored pearl", 200, "Pearl formed after defeating group of golems. It's surrounded by faint aura of elements.", m.lowgradeelementalPearl);
+		public const E_PEARL:SimpleConsumable = mk("E5Pearl", "Elemen5CPearl", "a simple looking five-colored pearl", 400, "Pearl formed after defeating . It's surrounded by weak aura of elements.", m.middlegradeelementalPearl);
+		public const E7PEARL:SimpleConsumable = mk("E7Pearl", "Elemen7CPearl", "a simple looking seven-colored pearl", 800, "Pearl formed after defeating . It's surrounded by aura of elements.", m.highgradeelementalPearl);
 
 		//NON-TRANSFORMATIVE ITEMS
 		public const AGILI_E:SimpleConsumable = mk("Agil.E.", "Agility E.", "an agility elixir", 6, "This greenish elixir is supposed to increase the user’s natural swiftness and agility.", m.agilityElixir);
@@ -263,8 +263,8 @@ public final class ConsumableLib extends BaseContent
 		public const VOLTTOP:SimpleConsumable = mk("VoltTop", "VoltTopaz", "a Voltage topaz", 6, "This glittering jewel sparkles with a wondrous light. With such beauty, it would probably fetch a fair amount of gems in various markets. A faint static tingle warms your [hands] as a light flush travels up your arms...", curry(m.voltageTopaz, true));
 		public const VOUIOIL:SimpleConsumable = mk("VouiOil", "VouivreOil", "a vial of vouivre oil", 70, "A vial the size of your fist made of light green glass. It contains what appears to be an oily, purple liquid. The odor is strange.", curry(m.evolvedNagaOil, 1));
 		public const W_FRUIT:SimpleConsumable = mk("W.Fruit", "W.Fruit", "a piece of whisker-fruit", 6, "This small, peach-sized fruit has tiny whisker-like protrusions growing from the sides.", curry(m.catTransformation, 0));
-		public const WOFRUIT:SimpleConsumable = mk("WoFruit", "WonderFruit", "Lia will write smth", 6, "I know you expected text here but *cough* someone said she will write it...eventualy.", curry(m.catTransformation, 2));
-	//	public const W_FRUIT:SimpleConsumable = mk("W.Fruit", "W.Fruit", "a piece of whisker-fruit", 6, "Nekomanta TF item", curry(m.catTransformation, 1));
+		public const WOFRUIT:SimpleConsumable = mk("WoFruit", "WonderFruit", "a Wonder fruit", 10, "A strange whisker fruit from what appears to be a different dimension. Its skin is dyed with all the color of the rainbow.", curry(m.catTransformation, 2));
+	//	public const W_FRUIT:SimpleConsumable = mk("W.Fruit", "W.Fruit", "a piece of whisker-fruit", 10, "Nekomanta TF item", curry(m.catTransformation, 1));
 		public const WETCLTH:SimpleConsumable = mk("WetClth", "WetCloth", "a wet cloth dripping with slippery slime", 6, "Dripping with a viscous slime, you've no doubt rubbing this cloth on your body would have some kind of strange effect.", m.gooGasmic);
 		public const WHITEIN:SimpleConsumable = mk("WhiteIn", "WhiteInk", "a vial of white ink", 50, "Pearly white ink normaly used for writing consuming this doesnt seem like the best idea.", curry(m.scyllaInk, 2));
 		//Wolf Pepper chyba jest nieużywanym itemem ale jesli jednak gdzie byl uzyty zostawie go nie wycietego a w przyszłosci zrobic z niego prawdziwy wolf TF ^^

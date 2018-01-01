@@ -90,6 +90,7 @@ import classes.BodyParts.Skin;
 				case AppearanceDefs.ARM_TYPE_LION:
 				case AppearanceDefs.ARM_TYPE_YETI:
 				case AppearanceDefs.ARM_TYPE_DEVIL:
+				case AppearanceDefs.ARM_TYPE_CAT:
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' [skin coat.color] fur is flaking away, leaving [skin base.type] behind.  Also the claws on your fingers reverts back into ordinary nails.");
 					break;
 				case AppearanceDefs.ARM_TYPE_ELF:
@@ -279,6 +280,7 @@ import classes.BodyParts.Skin;
 	}
 	private const METAMORPH_ARMS:Object = createMapFromPairs([
 		[AppearanceDefs.ARM_TYPE_BEE, StatusEffects.UnlockedBeeArms],
+		[AppearanceDefs.ARM_TYPE_CAT, null],
 		[AppearanceDefs.ARM_TYPE_DRAGON, StatusEffects.UnlockedDraconicArms],
 		[AppearanceDefs.ARM_TYPE_DEVIL, StatusEffects.UnlockedDevilArms],
 		[AppearanceDefs.ARM_TYPE_ELF, StatusEffects.UnlockedElfArms],
@@ -375,6 +377,8 @@ import classes.BodyParts.Skin;
 		[AppearanceDefs.FACE_BUNNY, null],
 		[AppearanceDefs.FACE_CAT, null],
 		[AppearanceDefs.FACE_CAT_CANINES, null],
+		[AppearanceDefs.FACE_CHESHIRE, null],
+		[AppearanceDefs.FACE_CHESHIRE_SMILE, null],
 		[AppearanceDefs.FACE_COW_MINOTAUR, StatusEffects.UnlockedCowMinotaurFace],
 		[AppearanceDefs.FACE_DEER, null],
 		[AppearanceDefs.FACE_DOG, null],

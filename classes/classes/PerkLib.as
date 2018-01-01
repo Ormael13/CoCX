@@ -2819,12 +2819,12 @@ public class PerkLib
                     .requirePerk(HalfStepToSuperiorSpirituality)
                     .requireLevel(36);
             //Tier 7 Intelligence perks
-            PrestigeJobSeer.requirePrestigeJobSlot()
+        /*    PrestigeJobSeer.requirePrestigeJobSlot()
                     .requirePerk(GreyArchmage)
                     .requirePerk(SoulElder)
                     .requireInt(200)
                     .requireLevel(42);
-            HalfStepToPeerlessSpirituality.requireWis(160)
+        */    HalfStepToPeerlessSpirituality.requireWis(160)
                     .requireInt(240)
                     .requirePerk(SuperiorSpirituality)
                     .requireLevel(42);
@@ -3303,8 +3303,8 @@ public class PerkLib
                 return player.demonScore() >= 6;
             }, "Demon race");
             CatlikeNimbleness.requirePerk(Flexibility).requireCustomFunction(function (player:Player):Boolean {
-                return player.catScore() >= 4;
-            }, "Cat race");
+                return player.catScore() >= 4 || player.nekomataScore() >= 4 || player.cheshireScore() >= 4;
+            }, "Any cat race");
             DraconicLungs.requirePerk(DragonFireBreath)
                     .requirePerk(DragonIceBreath)
                     .requirePerk(DragonLightningBreath)
@@ -3460,9 +3460,11 @@ public class PerkLib
                     .requirePerk(JobBarbarian);
             Whipping.requireLevel(12)
                     .requirePerk(JobEromancer);
-            /*CatlikeNimblenessEvolved.requirePerk(CatlikeNimbleness).requireCustomFunction(function (player:Player):Boolean {
-return player.catScore() >= 8;
-}, "Cat race");*/
+            CatlikeNimblenessEvolved.requireLevel(12)
+					.requirePerk(CatlikeNimbleness)
+					.requireCustomFunction(function (player:Player):Boolean {
+						return player.catScore() >= 8 || player.nekomataScore() >= 8 || player.cheshireScore() >= 8;
+					}, "Any cat race");
             DraconicLungsEvolved.requireLevel(12)
                     .requirePerk(DraconicLungs)
                     .requireCustomFunction(function (player:Player):Boolean {

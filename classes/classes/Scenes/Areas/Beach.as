@@ -1,6 +1,6 @@
 /**
  * @author Stadler (mostly) and Ormael (choice of enemies encounters and other events)
- * Area with lvl 15-25 enemies.
+ * Area with lvl 30-45 enemies.
  * Currently a Work in Progress.
  */
 

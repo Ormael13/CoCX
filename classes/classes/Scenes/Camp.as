@@ -2598,8 +2598,8 @@ private function dungeons():void {
 	//Side dungeons
 	if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(5, "Desert Cave", dungeonS.enterDungeon).hint("Visit the cave you've found in the desert." + (flags[kFLAGS.SAND_WITCHES_COWED] + flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0 ? "\n\nFrom what you've known, this is the source of the Sand Witches." : "") + (SceneLib.dungeons.checkSandCaveClear() ? "\n\nCLEARED!" : ""));
 	if (SceneLib.dungeons.checkPhoenixTowerClear()) addButton(6, "Phoenix Tower", dungeonH.returnToHeliaDungeon).hint("Re-visit the tower you went there as part of Helia's quest." + (SceneLib.dungeons.checkPhoenixTowerClear() ? "\n\nYou've helped Helia in the quest and resolved the problems. \n\nCLEARED!" : ""));
-	if (flags[kFLAGS.HIDDEN_CAVE_FOUND] > 0) addButton(10, "Hidden Cave", dungeonHC.enterDungeon).hint("Visit the hidden cave in the hills.");
-	if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 0) addButton(11, "Den of Desire", dungeonDD.enterDungeon).hint("Visit the den in blight ridge.");
+	if (flags[kFLAGS.HIDDEN_CAVE_FOUND] > 0) addButton(10, "Hidden Cave", dungeonHC.enterDungeon).hint("Visit the hidden cave in the hills." + (SceneLib.dungeons.checkHiddenCaveClear() ? "\n\nCLEARED!" : ""));
+	if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 0) addButton(11, "Den of Desire", dungeonDD.enterDungeon).hint("Visit the den in blight ridge." + (SceneLib.dungeons.checkDenOfDesireClear() ? "\n\nCLEARED!" : ""));
 	if (flags[kFLAGS.ANZU_PALACE_UNLOCKED] > 0) addButton(13, "Anzu's Palace", dungeonAP.enterDungeon).hint("Visit the palace in the Glacial Rift where Anzu the avian deity resides.");
 	addButton(14, "Back", places);
 }
@@ -2846,38 +2846,38 @@ private function promptHangImpSkull():void {
 		doNext(doCamp);
 		return;
 	}
-	else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 21 && flags[kFLAGS.CAMP_WALL_PROGRESS] == 30) {
-		outputText("There is no room; you have already hung a total of 21 imp skulls! To add more you need to build next segment of the wall.");
+	else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 22 && flags[kFLAGS.CAMP_WALL_PROGRESS] == 30) {
+		outputText("There is no room; you have already hung a total of 22 imp skulls! To add more you need to build next segment of the wall.");
 		doNext(doCamp);
 		return;
 	}
-	else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 28 && flags[kFLAGS.CAMP_WALL_PROGRESS] == 40) {
-		outputText("There is no room; you have already hung a total of 28 imp skulls! To add more you need to build next segment of the wall.");
+	else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 30 && flags[kFLAGS.CAMP_WALL_PROGRESS] == 40) {
+		outputText("There is no room; you have already hung a total of 30 imp skulls! To add more you need to build next segment of the wall.");
 		doNext(doCamp);
 		return;
 	}
-	else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 35 && flags[kFLAGS.CAMP_WALL_PROGRESS] == 50) {
-		outputText("There is no room; you have already hung a total of 35 imp skulls! To add more you need to build next segment of the wall.");
+	else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 39 && flags[kFLAGS.CAMP_WALL_PROGRESS] == 50) {
+		outputText("There is no room; you have already hung a total of 39 imp skulls! To add more you need to build next segment of the wall.");
 		doNext(doCamp);
 		return;
 	}
-	else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 45 && flags[kFLAGS.CAMP_WALL_PROGRESS] == 60) {
-		outputText("There is no room; you have already hung a total of 45 imp skulls! To add more you need to build next segment of the wall.");
+	else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 50 && flags[kFLAGS.CAMP_WALL_PROGRESS] == 60) {
+		outputText("There is no room; you have already hung a total of 50 imp skulls! To add more you need to build next segment of the wall.");
 		doNext(doCamp);
 		return;
 	}
-	else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 55 && flags[kFLAGS.CAMP_WALL_PROGRESS] == 70) {
-		outputText("There is no room; you have already hung a total of 55 imp skulls! To add more you need to build next segment of the wall.");
+	else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 62 && flags[kFLAGS.CAMP_WALL_PROGRESS] == 70) {
+		outputText("There is no room; you have already hung a total of 62 imp skulls! To add more you need to build next segment of the wall.");
 		doNext(doCamp);
 		return;
 	}
-	else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 65 && flags[kFLAGS.CAMP_WALL_PROGRESS] == 80) {
-		outputText("There is no room; you have already hung a total of 65 imp skulls! To add more you need to build next segment of the wall.");
+	else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 74 && flags[kFLAGS.CAMP_WALL_PROGRESS] == 80) {
+		outputText("There is no room; you have already hung a total of 74 imp skulls! To add more you need to build next segment of the wall.");
 		doNext(doCamp);
 		return;
 	}
-	else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 75 && flags[kFLAGS.CAMP_WALL_PROGRESS] == 90) {
-		outputText("There is no room; you have already hung a total of 75 imp skulls! To add more you need to build next segment of the wall.");
+	else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 86 && flags[kFLAGS.CAMP_WALL_PROGRESS] == 90) {
+		outputText("There is no room; you have already hung a total of 86 imp skulls! To add more you need to build next segment of the wall.");
 		doNext(doCamp);
 		return;
 	}
@@ -2897,7 +2897,7 @@ private function hangImpSkull():void {
 	player.consumeItem(useables.IMPSKLL, 1);
 	flags[kFLAGS.CAMP_WALL_SKULLS]++;
 	outputText("There " + (flags[kFLAGS.CAMP_WALL_SKULLS] == 1 ? "is" : "are") + " currently " + num2Text(flags[kFLAGS.CAMP_WALL_SKULLS]) + " imp skull" + (flags[kFLAGS.CAMP_WALL_SKULLS] == 1 ? "" : "s") + " hung on the wall, serving to deter any imps who might try to rape you.");
-	doNext(doCamp);
+	doNext(campBuildingSim);
 }
 
 public function homeDesc():String {

@@ -1,14 +1,9 @@
 /**
- * Created by Kitteh6660. Glacial Rift is a new endgame area with level 23-27 encounters, guaranteed to help you grind to level 38.
+ * Created by Kitteh6660. Glacial Rift is a new area with level 30-40 encounters
  * Currently a Work in Progress.
  * 
  * Please see this project. (This is not mine.) http://forum.fenoxo.com/thread-10719.html
  */
-
-/*
- * TODO
- * 
- */ 
 package classes.Scenes.Areas 
 {
 import classes.*;

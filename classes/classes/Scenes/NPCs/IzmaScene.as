@@ -1731,7 +1731,7 @@ public function izmaFollowerMenu():void {
 		if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] != 0) addButton(8, "Go Camp", backToCamp);
 	}
 	if (player.hasItem(consumables.BROBREW) && flags[kFLAGS.IZMA_BROFIED] == 0) addButton(9, "Brotize", izmaelScene.brotizeIzma);
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] != 1 && flags[kFLAGS.FOLLOWER_AT_FISHERY_IZMA] != 1) addButton(10, "Fishery", sendToFishery);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] != 1 && flags[kFLAGS.FOLLOWER_AT_FISHERY_IZMA] != 1 && flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) addButton(10, "Fishery", sendToFishery);
 	addButton(14, "Back", camp.campLoversMenu);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) addButton(14, "Back", SceneLib.farm.farmCorruption.rootScene);
 }

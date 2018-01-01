@@ -22,20 +22,25 @@ package classes.Scenes
 		
 		private function Changelog20():void {
 			clearOutput();
-			menu();/*ostatni punkt changelogu
+			menu();
+			outputText("<b>Version 0.8h2:</b>\n\n");
+			outputText("-Max starting wrath for both monsters and PC rised from 100 to 250. PC will need 200 wrath for 2x power attack (monsters would also need 200) unless Job: Warrior perk is present.\n");
+			outputText("-Aside perk Job: Warrior also perk Job: Beast Warrior can unlock stronger than 2x Power Attacks\n");
+			outputText("-Hanging on Imp Skull will not throw PC back to main camp menu but back to menu where it can hang next one skull.\n");
+			outputText("-New body part - face: Cheshire Req. Cat Face\n");
+			outputText("-New body part - face: Cheshire Smile Req. Cat Canines\n");
+			outputText("-New body part - arms: Cat arms Req. Cat Legs\n");
+			outputText("-Cat face/canines tf effect would req. instead cat ears cat arms. Other req. for cat face tf unchanged.\n");
+			outputText("-New tier 2 misc lvl-up perk: Cat-like Nimbleness (Evolved). Req. Cat-like Nimbleness perk and any cat race (cat, nekomanta, cheshire) score 8+. Effect: +10 to max speed and toughness (scalable)\n");
+			outputText("-Perk Prestige Job: Seer would be till author rework this perk tree disabled (those PC's that picked it already will retain it).\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-Fixed bugs: Wrath specials correctly list needed resource, option to send Izma to fishery before it's built\n\n\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("<b>Version 0.8i:</b>\n\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("-Fixed bugs: \n");
 			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
 			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-New event perk: Gargoyle. Gained in ritual to become gargoyle by picking own blood. Effects: \n");
 			outputText("-New event perk: Corrupted Gargoyle. Gained in ritual to become gargoyle by picking minotaur blood. Effects: \n");
 			outputText("-\n");
@@ -48,6 +53,7 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Bat, Vampire, 
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -68,9 +74,8 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");wolf pepper - nieużywany item chyba co można go by w wolf TF zmienić: dodaje special coś na kształt likantropii ^^
 			outputText("\n");
-			outputText("<b>Version 0.8i:</b>\n\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("<b>Version 0.8j:</b>\n\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("<b>Version 0.8k:</b>\n\n");
 			outputText("\n");
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bedą one wcześniej już za czesto wypadać
@@ -85,10 +90,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): dodać yuki-onna TF
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -176,7 +177,7 @@ package classes.Scenes
 			outputText("-Replaced texts for Jewel Shop with those written by Starglider (aka much better than sort of placeholder-ish texts that was there before).\n");
 			outputText("-Oxdeception cleaning-up of code for Tel'Adre and He'Xin'Dao (nothing that typical player will notce but generaly code is slight less messy due to hard Ox work ^^).\n");
 			outputText("-Changes in code on how monsters stats grown after each PC anscesion. Also each monster now have wisdom stat value added.\n");
-			outputText("-Fixed bugs: lib refunding stat points incorrectly when leveling\n\n\n\n\n\n\n");
+			outputText("-Fixed bugs: lib refunding stat points incorrectly when leveling, unescapabe binds for Ceraph and few other enemies");
 			addButton(0, "Next", Changelog18);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}

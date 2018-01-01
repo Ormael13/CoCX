@@ -361,7 +361,7 @@ import flash.errors.IllegalOperationError;
 			return 100;
 		}
 		public function maxWrath():Number {
-			return 100;
+			return 250;
 		}
 		public function maxSoulforce():Number {
 			return 0;

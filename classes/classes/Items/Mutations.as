@@ -4572,7 +4572,7 @@ public final class Mutations extends MutationsHelper
 			clearOutput();
 			if (type == 0) outputText("You take a bite of the fruit and gulp it down. It's thick and juicy and has an almost overpowering sweetness. Nevertheless, it is delicious and you certainly could use a meal.  You devour the fruit, stopping only when the hard, nubby pit is left; which you toss aside.");
 			if (type == 1) outputText("I know you expected text here but *cough* someone said she will write it...eventualy so till then there is nice placeholder text here.");
-			if (type == 2) outputText("I know you expected text here but *cough* someone said she will write it...eventualy so till then there is nice placeholder text here.");
+			if (type == 2) outputText("You take a bite of the weird fruit and gulp it down. It’s thick and juicy and has an almost overpowering sweetness. You can’t help but smile in happiness as you savor the taste. Nevertheless, it is delicious and you certainly could use a meal. You devour the fruit, stopping only when the hard, nubby pit is left; which you toss aside.");
 			//Speed raises up to 75
 			if (player.spe < 75 && rand(3) == 0 && changes < changeLimit) {
 				//low speed
@@ -4783,7 +4783,7 @@ public final class Mutations extends MutationsHelper
 			}
 			//Body type changes.  Teh rarest of the rare.
 			//DA EARZ
-			if (player.earType != AppearanceDefs.EARS_CAT && player.tailType != AppearanceDefs.TAIL_TYPE_GARGOYLE && rand(5) == 0 && changes < changeLimit) {
+			if (player.earType != AppearanceDefs.EARS_CAT && player.tailType != AppearanceDefs.TAIL_TYPE_GARGOYLE && rand(4) == 0 && changes < changeLimit) {
 				//human to cat:
 				if (player.earType == AppearanceDefs.EARS_HUMAN) {
 					if (rand(2) == 0) outputText("\n\nThe skin on the sides of your face stretches painfully as your ears migrate upwards, towards the top of your head. They shift and elongate a little, fur growing on them as they become feline in nature. <b>You now have cat ears.</b>");
@@ -4798,7 +4798,7 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//DA TAIL (IF ALREADY HAZ URZ)
-			if (player.tailType != AppearanceDefs.TAIL_TYPE_CAT && player.earType == AppearanceDefs.EARS_CAT && rand(5) == 0 && changes < changeLimit) {
+			if (player.tailType != AppearanceDefs.TAIL_TYPE_CAT && player.earType == AppearanceDefs.EARS_CAT && rand(4) == 0 && changes < changeLimit) {
 				if (player.tailType == AppearanceDefs.TAIL_TYPE_NONE) {
 					temp = rand(3);
 					if (temp == 0) outputText("\n\nA pressure builds in your backside. You feel under your [armor] and discover an odd bump that seems to be growing larger by the moment. In seconds it passes between your fingers, bursts out the back of your clothes and grows most of the way to the ground. A thick coat of fur springs up to cover your new tail. You instinctively keep adjusting it to improve your balance. <b>You now have a cat-tail.</b>");
@@ -4810,7 +4810,7 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//Da paws (if already haz ears & tail)
-			if (player.tailType == AppearanceDefs.TAIL_TYPE_CAT && player.earType == AppearanceDefs.EARS_CAT && rand(5) == 0 && changes < changeLimit && player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_CAT) {
+			if (player.tailType == AppearanceDefs.TAIL_TYPE_CAT && player.earType == AppearanceDefs.EARS_CAT && rand(4) == 0 && changes < changeLimit && player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_CAT) {
 				//hoof to cat:
 				if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HOOFED) {
 					outputText("\n\nYou feel your hooves suddenly splinter, growing into five unique digits. Their flesh softens as your hooves reshape into furred cat paws. <b>You now have cat paws.</b>");
@@ -4826,8 +4826,18 @@ public final class Mutations extends MutationsHelper
 				player.legCount = 2;
 				changes++;
 			}
+			if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CAT && rand(4) == 0 && changes < changeLimit && player.armType != AppearanceDefs.ARM_TYPE_CAT) {
+				if (player.armType != AppearanceDefs.ARM_TYPE_HUMAN) {
+					humanizeArms();
+					outputText(" ");
+				}
+				else outputText("\n\n");
+				outputText("Your hands suddenly start to hurt as your arms grows a thick coat of [skin coat.color] fur up to your shoulders. You watch enthralled as your nails fall off your fingers, feline claws taking their place on your now five-fingered paw-like hands. <b>You now have cat paw hands.</b>");
+				setArmType(AppearanceDefs.ARM_TYPE_CAT);
+				changes++;
+			}
 			//TURN INTO A FURRAH!  OH SHIT
-			if (player.tailType == AppearanceDefs.TAIL_TYPE_CAT && player.earType == AppearanceDefs.EARS_CAT && rand(5) == 0 && changes < changeLimit && player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CAT && !player.hasCoatOfType(AppearanceDefs.SKIN_COAT_FUR,AppearanceDefs.SKIN_COAT_SCALES)) {
+			if (player.tailType == AppearanceDefs.TAIL_TYPE_CAT && player.earType == AppearanceDefs.EARS_CAT && rand(4) == 0 && changes < changeLimit && player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CAT && !player.hasCoatOfType(AppearanceDefs.SKIN_COAT_FUR,AppearanceDefs.SKIN_COAT_SCALES)) {
 				outputText("\n\nYour [skin.type] begins to tingle, then itch. ");
 				player.skin.growCoat(AppearanceDefs.SKIN_COAT_FUR,{color:randomChoice(["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"])});
 				outputText("You reach down to scratch your arm absent-mindedly and pull your fingers away to find strands of [skin coat.color] fur. Wait, fur?  What just happened?! You spend a moment examining yourself and discover that <b>you are now covered in glossy, soft fur.</b>");
@@ -4839,20 +4849,27 @@ public final class Mutations extends MutationsHelper
 				player.coatColor = "lilac and white striped";
 				changes++;
 			}
-			//CAT-FACE!  FULL ON FURRY!  RAGE AWAY NEKOZ
-			if (player.tailType == AppearanceDefs.TAIL_TYPE_CAT && player.earType == AppearanceDefs.EARS_CAT && rand(5) == 0 && changes < changeLimit && player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CAT && (player.hasFur() || player.hasScales() && player.dragonneScore() >= 4) && player.faceType != AppearanceDefs.FACE_CAT) {
-				temp = rand(3);
-				if (temp == 0) outputText("\n\nYour face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something... different. You find a puddle to view your reflection and discover <b>your face is now a cross between human and feline features.</b>");
-				else if (temp == 1) outputText("\n\nMind-numbing pain courses through you as you feel your facial bones rearranging.  You clutch at your face in agony as your skin crawls and shifts, your visage reshaping to replace your facial characteristics with those of a feline. <b>You now have an anthropomorphic cat-face.</b>");
-				else outputText("\n\nYour face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something else. <b>Your facial features rearrange to take on many feline aspects.</b>");
-				setFaceType(AppearanceDefs.FACE_CAT);
+			if ((player.faceType == AppearanceDefs.FACE_CAT || player.faceType == AppearanceDefs.FACE_CAT_CANINES) && type == 2 && rand(3) == 0 && changes < changeLimit && player.faceType != AppearanceDefs.FACE_CHESHIRE && player.faceType != AppearanceDefs.FACE_CHESHIRE_SMILE) {
+				outputText("\n\nYou suddenly feel like smiling. Why actually look so serious? Everything is easier if you take it with a smile and a laughter. Perhaps it's just you taking on that mentality or it's that weird wonderfruit you took but now you feel you could smile forever showing that wide grin of yours. <b>You now have a cheshire smile.</b>");
+				if (player.faceType == AppearanceDefs.FACE_CAT) setFaceType(AppearanceDefs.FACE_CHESHIRE);
+				if (player.faceType == AppearanceDefs.FACE_CAT_CANINES) setFaceType(AppearanceDefs.FACE_CHESHIRE_SMILE);
 				changes++;
 			}
-			if (player.tailType == AppearanceDefs.TAIL_TYPE_CAT && player.earType == AppearanceDefs.EARS_CAT && rand(5) == 0 && changes < changeLimit && player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CAT && (player.hasFur() || player.hasScales() && player.dragonneScore() >= 4) && player.faceType != AppearanceDefs.FACE_CAT_CANINES) {
-				outputText("\n\n");
-				if (player.faceType != AppearanceDefs.FACE_HUMAN) outputText("Your face suddenly mold back into its former human shape. However you feel your canine changing elongating into sharp dagger-like teeth capable of causing severe injuries. ");
-				outputText("You feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. You purr at the change it gives you a cute look. <b>Your mouth is now filled with Cat-like canines.</b>");
-				setFaceType(AppearanceDefs.FACE_CAT_CANINES);
+			//CAT-FACE!  FULL ON FURRY!  RAGE AWAY NEKOZ
+			if (player.tailType == AppearanceDefs.TAIL_TYPE_CAT && rand(4) == 0 && changes < changeLimit && player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CAT && player.armType == AppearanceDefs.ARM_TYPE_CAT && (player.faceType != AppearanceDefs.FACE_CAT || player.faceType != AppearanceDefs.FACE_CAT_CANINES || player.faceType != AppearanceDefs.FACE_CHESHIRE || player.faceType != AppearanceDefs.FACE_CHESHIRE_SMILE)) {
+				if (rand(2) == 0 && player.faceType != AppearanceDefs.FACE_CAT) {
+					temp = rand(3);
+					if (temp == 0) outputText("\n\nYour face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something... different. You find a puddle to view your reflection and discover <b>your face is now a cross between human and feline features.</b>");
+					else if (temp == 1) outputText("\n\nMind-numbing pain courses through you as you feel your facial bones rearranging.  You clutch at your face in agony as your skin crawls and shifts, your visage reshaping to replace your facial characteristics with those of a feline. <b>You now have an anthropomorphic cat-face.</b>");
+					else outputText("\n\nYour face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something else. <b>Your facial features rearrange to take on many feline aspects.</b>");
+					setFaceType(AppearanceDefs.FACE_CAT);
+				}
+				else {
+					outputText("\n\n");
+					if (player.faceType != AppearanceDefs.FACE_HUMAN) outputText("Your face suddenly mold back into its former human shape. However you feel your canine changing elongating into sharp dagger-like teeth capable of causing severe injuries. ");
+					outputText("You feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. You purr at the change it gives you a cute look. <b>Your mouth is now filled with Cat-like canines.</b>");
+					setFaceType(AppearanceDefs.FACE_CAT_CANINES);
+				}
 				changes++;
 			}
 			if (type == 2 && rand(3) == 0 && changes < changeLimit && (player.faceType == AppearanceDefs.FACE_CAT || player.faceType == AppearanceDefs.FACE_CAT_CANINES)) {
@@ -4868,7 +4885,7 @@ public final class Mutations extends MutationsHelper
 			}
 
 			//DAT EYES
-			if (player.tailType == AppearanceDefs.TAIL_TYPE_CAT && player.earType == AppearanceDefs.EARS_CAT && rand(5) == 0 && changes < changeLimit && player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CAT && (player.hasFur() || (player.hasCoatOfType(AppearanceDefs.SKIN_COAT_SCALES) && player.dragonneScore() >= 4)) && player.faceType == AppearanceDefs.FACE_CAT && player.eyeType != AppearanceDefs.EYES_CAT_SLITS) {
+			if (player.tailType == AppearanceDefs.TAIL_TYPE_CAT && player.earType == AppearanceDefs.EARS_CAT && rand(4) == 0 && changes < changeLimit && player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CAT && (player.hasFur() || (player.hasCoatOfType(AppearanceDefs.SKIN_COAT_SCALES) && player.dragonneScore() >= 4)) && player.faceType == AppearanceDefs.FACE_CAT && player.eyeType != AppearanceDefs.EYES_CAT_SLITS) {
 				//Gain cat-like eyes
 				outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.  <b>Your eyes has turned into those of cat with vertical slit</b>.");
 				setEyeType(AppearanceDefs.EYES_CAT_SLITS);
