@@ -472,12 +472,12 @@ public class AbstractEquinum extends Consumable {
 			}
 		}
 		//Remove odd eyes
-		if (changes < changeLimit && rand(5) == 0 && player.eyeType > Eyes.EYES_HUMAN) {
+		if (changes < changeLimit && rand(5) == 0 && player.eyeType > Eyes.HUMAN) {
 			mutations.humanizeEyes();
 			changes++;
 		}
 		if ((type == 1 || type == 2) && changes < changeLimit && rand(3) == 0 && player.eyeColor != "blue" && player.eyeColor != "red") {
-			mutations.setEyeTypeAndColor(Eyes.EYES_HUMAN, "blue");
+			mutations.setEyeTypeAndColor(Eyes.HUMAN, "blue");
 			outputText("\n\n<b>You have [eyecolor] eyes!</b>");
 			changes++;
 		}

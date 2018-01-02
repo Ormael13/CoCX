@@ -748,11 +748,11 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				needNext = true;
 			}
 			//Fenrir Eyes
-			if (player.eyeType != Eyes.EYES_FENRIR && player.hasKeyItem("Fenrir Collar") >= 0) {
+			if (player.eyeType != Eyes.FENRIR && player.hasKeyItem("Fenrir Collar") >= 0) {
 				outputText("\nThe bone chilling voice of Fenrir ring in the back of your mind.");
 				outputText("\n\n\"<i>How dare you throw away my gifts...</i>\"");
 				outputText("\n\nThe collar power suddenly forcefully surge through your body transforming you back. \"<b>You now have glowing icy eyes.</b>\"\n");
-				player.eyeType = Eyes.EYES_FENRIR;
+				player.eyeType = Eyes.FENRIR;
 				needNext = true;
 			}
 			//Fenrir Back Ice Shards

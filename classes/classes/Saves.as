@@ -34,6 +34,9 @@ import flash.utils.getDefinitionByName;
 
 CONFIG::AIR
 {
+	import flash.filesystem.File;
+	import flash.filesystem.FileMode;
+	import flash.filesystem.FileStream;
 }
 
 public class Saves extends BaseContent {
@@ -1727,7 +1730,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.femininity = saveFile.data.femininity;
 		//EYES
 		if (saveFile.data.eyeType == undefined)
-			player.eyeType = Eyes.EYES_HUMAN;
+			player.eyeType = Eyes.HUMAN;
 		else
 			player.eyeType = saveFile.data.eyeType;
 		if (saveFile.data.eyeColor == undefined)

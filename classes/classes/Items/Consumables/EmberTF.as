@@ -122,8 +122,8 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 		changes++;
 	}
 	//Gain Dragon Eyes
-	if (player.earType == Ears.DRAGON && player.eyeType != Eyes.EYES_DRAGON && rand(3) == 0 && changes < changeLimit) {
-        CoC.instance.mutations.setEyeType(Eyes.EYES_DRAGON);
+	if (player.earType == Ears.DRAGON && player.eyeType != Eyes.DRAGON && rand(3) == 0 && changes < changeLimit) {
+        CoC.instance.mutations.setEyeType(Eyes.DRAGON);
         outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a dragon.  <b>You now have dragon eyes!</b>.");
 		changes++;
 	}

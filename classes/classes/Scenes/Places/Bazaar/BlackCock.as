@@ -1867,9 +1867,9 @@ import classes.lists.Gender;
 				changes++;
 			}
 			
-			if (rand(3) == 0 && changes < changeLimit && player.eyeType == Eyes.EYES_FOUR_SPIDER_EYES) {
+			if (rand(3) == 0 && changes < changeLimit && player.eyeType == Eyes.FOUR_SPIDER_EYES) {
 				outputText("\n\nYour two forehead eyes start throbbing painfully, your sight in them eventually going dark. You touch your forehead to inspect your eyes, only to find out that they have disappeared. <b>You only have two eyes now!</b>");
-				player.eyeType = Eyes.EYES_HUMAN;
+				player.eyeType = Eyes.HUMAN;
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.averageNipplesPerBreast() > 4) {

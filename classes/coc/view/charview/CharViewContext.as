@@ -2,7 +2,6 @@
  * Coded by aimozg on 27.08.2017.
  */
 package coc.view.charview {
-import classes.AppearanceDefs;
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Beard;
@@ -33,7 +32,6 @@ public class CharViewContext extends ExecContext {
 	public function CharViewContext(charview:CharView, character:*) {
 		super([
 			character,
-			AppearanceDefs,
 			{ // Revamp compatibility layer
 				Antennae : Antennae,
 				Arms     : Arms,
@@ -174,22 +172,22 @@ class Ears {
 	public static const VAMPIRE:int  = classes.BodyParts.Ears.VAMPIRE;
 }
 class Eyes {
-	public static const HUMAN:int                = classes.BodyParts.Eyes.EYES_HUMAN;
-	public static const FOUR_SPIDER_EYES:int     = classes.BodyParts.Eyes.EYES_FOUR_SPIDER_EYES;
-	public static const BLACK_EYES_SAND_TRAP:int = classes.BodyParts.Eyes.EYES_BLACK_EYES_SAND_TRAP;
-	public static const CAT_SLITS:int            = classes.BodyParts.Eyes.EYES_CAT_SLITS;
-	public static const GORGON:int               = classes.BodyParts.Eyes.EYES_GORGON;
-	public static const FENRIR:int               = classes.BodyParts.Eyes.EYES_FENRIR;
-	public static const MANTICORE:int            = classes.BodyParts.Eyes.EYES_MANTICORE;
-	public static const FOX:int                  = classes.BodyParts.Eyes.EYES_FOX;
-	public static const REPTILIAN:int            = classes.BodyParts.Eyes.EYES_REPTILIAN;
-	public static const SNAKE:int                = classes.BodyParts.Eyes.EYES_SNAKE;
-	public static const DRAGON:int               = classes.BodyParts.Eyes.EYES_DRAGON;
-	public static const DEVIL:int                = classes.BodyParts.Eyes.EYES_DEVIL;
-	public static const ONI:int                  = classes.BodyParts.Eyes.EYES_ONI;
-	public static const ELF:int                  = classes.BodyParts.Eyes.EYES_ELF;
-	public static const RAIJU:int                = classes.BodyParts.Eyes.EYES_RAIJU;
-	public static const VAMPIRE:int              = classes.BodyParts.Eyes.EYES_VAMPIRE;
+	public static const HUMAN:int                = classes.BodyParts.Eyes.HUMAN;
+	public static const FOUR_SPIDER_EYES:int     = classes.BodyParts.Eyes.FOUR_SPIDER_EYES;
+	public static const BLACK_EYES_SAND_TRAP:int = classes.BodyParts.Eyes.BLACK_EYES_SAND_TRAP;
+	public static const CAT_SLITS:int            = classes.BodyParts.Eyes.CAT_SLITS;
+	public static const GORGON:int               = classes.BodyParts.Eyes.GORGON;
+	public static const FENRIR:int               = classes.BodyParts.Eyes.FENRIR;
+	public static const MANTICORE:int            = classes.BodyParts.Eyes.MANTICORE;
+	public static const FOX:int                  = classes.BodyParts.Eyes.FOX;
+	public static const REPTILIAN:int            = classes.BodyParts.Eyes.REPTILIAN;
+	public static const SNAKE:int                = classes.BodyParts.Eyes.SNAKE;
+	public static const DRAGON:int               = classes.BodyParts.Eyes.DRAGON;
+	public static const DEVIL:int                = classes.BodyParts.Eyes.DEVIL;
+	public static const ONI:int                  = classes.BodyParts.Eyes.ONI;
+	public static const ELF:int                  = classes.BodyParts.Eyes.ELF;
+	public static const RAIJU:int                = classes.BodyParts.Eyes.RAIJU;
+	public static const VAMPIRE:int              = classes.BodyParts.Eyes.VAMPIRE;
 }
 class Face {
 	public static const HUMAN:int            = classes.BodyParts.Face.HUMAN;

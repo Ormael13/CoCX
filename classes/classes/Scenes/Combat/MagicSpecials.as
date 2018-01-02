@@ -267,7 +267,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You already rampaging!");
 			}
 		}
-		if (player.eyeType == Eyes.EYES_GORGON && player.hairType == Hair.GORGON || player.hasPerk(PerkLib.GorgonsEyes)) {
+		if (player.eyeType == Eyes.GORGON && player.hairType == Hair.GORGON || player.hasPerk(PerkLib.GorgonsEyes)) {
 			bd = buttons.add("Petrify", petrify).hint("Use your gaze to temporally turn your enemy into a stone. \n");
 			bd.requireFatigue(spellCost(100),true);
 			if (monster is LivingStatue) {

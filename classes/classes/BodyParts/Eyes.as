@@ -2,7 +2,7 @@ package classes.BodyParts {
 import classes.Creature;
 
 public class Eyes extends BodyPart {
-	var count:int;
+	public var count:int;
 	public static const HUMAN:int                = 0;
 	public static const FOUR_SPIDER_EYES:int     = 1;
 	public static const BLACK_EYES_SAND_TRAP:int = 2;

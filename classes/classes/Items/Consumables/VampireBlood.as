@@ -61,7 +61,7 @@ public class VampireBlood extends Consumable {
                 Override: pure ? mutations.humanizeEars : null
             }, {
                 BodyPart: 'eyeType',
-                ChangeTo: Eyes.EYES_VAMPIRE
+                ChangeTo: Eyes.VAMPIRE
             }, {
                 BodyPart: 'faceType',
                 ChangeTo: Face.VAMPIRE

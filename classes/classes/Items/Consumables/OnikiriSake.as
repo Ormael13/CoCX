@@ -146,20 +146,20 @@ public class OnikiriSake extends Consumable {
 		}
 		//Eyes
 		if ((player.hornType == Horns.ONI_X2 || player.hornType == Horns.ONI)
-			&& (player.eyeType != Eyes.EYES_ONI || !InCollection(player.eyeColor, Mutations.oniEyeColors))&& changes < changeLimit && rand(3) == 0) {
+			&& (player.eyeType != Eyes.ONI || !InCollection(player.eyeColor, Mutations.oniEyeColors))&& changes < changeLimit && rand(3) == 0) {
 			var colorEyes:String;
 			colorEyes = randomChoice(Mutations.oniEyeColors);
-			mutations.setEyeTypeAndColor(Eyes.EYES_ONI,colorEyes);
+			mutations.setEyeTypeAndColor(Eyes.ONI,colorEyes);
 			outputText("\n\nYou feel something fundamental change in your sight when you go check yourself in a puddle you notice your iris now are <b>[eyecolor] just like that of an Oni with a slit at the center giving them a fiendish outlook.</b>");
 			changes++;
 		}
 		//Ears
-		if (player.eyeType == Eyes.EYES_ONI && player.earType == Ears.HUMAN && player.earType != Ears.ONI && changes < changeLimit && rand(3) == 0) {
+		if (player.eyeType == Eyes.ONI && player.earType == Ears.HUMAN && player.earType != Ears.ONI && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nYour ears tingle slightly as their shape sharpen to a point not unlike those of some kind of demonic fiend. Still you know all too well those are <b>Oni ears.</b>");
 			mutations.setEarType(Ears.ONI);
 			changes++;
 		}
-		if (player.eyeType == Eyes.EYES_ONI && player.earType != Ears.HUMAN && player.earType != Ears.ONI && changes < changeLimit && rand(3) == 0) {
+		if (player.eyeType == Eyes.ONI && player.earType != Ears.HUMAN && player.earType != Ears.ONI && changes < changeLimit && rand(3) == 0) {
 			mutations.humanizeEars();
 			changes++;
 		}

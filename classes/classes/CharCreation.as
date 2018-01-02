@@ -2063,7 +2063,7 @@ import coc.view.MainView;
 			player.hornType = Horns.NONE;
 			player.antennae = Antennae.NONE;
 			player.earType = Ears.HUMAN;
-			player.eyeType = Eyes.EYES_HUMAN;
+			player.eyeType = Eyes.HUMAN;
 			player.tongueType = Tongue.HUMAN;
 			player.gillType = Gills.NONE;
 			player.armType = Arms.HUMAN;

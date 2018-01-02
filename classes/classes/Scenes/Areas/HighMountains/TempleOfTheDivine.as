@@ -1658,7 +1658,7 @@ use namespace CoC;
 			if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker1) == 1) player.lowerBody = LowerBody.GARGOYLE;
 			if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker1) == 2) player.lowerBody = LowerBody.GARGOYLE_2;
 			player.legCount = 2;
-			player.eyeType = Eyes.EYES_GEMSTONES;
+			player.eyeType = Eyes.GEMSTONES;
 			player.antennae = Antennae.NONE;
 			player.tongueType = Tongue.HUMAN;
 			player.earType = Ears.ELFIN;
