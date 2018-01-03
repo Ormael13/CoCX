@@ -2907,169 +2907,25 @@ public function attack():void {
 	meleeattackdamage();
 }
 public function meleeattackdamage():void {
-	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 1) {
-		WrathWeaponsProc();
-		HeroBaneProc();
-		if(monster.HP >= 1 && monster.lust <= monster.maxLust()) {
-			if(player.hasStatusEffect(StatusEffects.FirstAttack)) {
-				attack();
-				return;
-			}
-			outputText("\n");
-			wrathregeneration();
-			fatigueRecovery();
-			manaregeneration();
-			soulforceregeneration();
-			enemyAI();
-		}
-		else {
-			if(monster.HP <= 0) doNext(endHpVictory);
-			else doNext(endLustVictory);
-		}
+	WrathWeaponsProc();
+	HeroBaneProc();
+	if(monster.HP <= 0){doNext(endHpVictory); return;}
+	if(monster.lust >= monster.maxLust()){doNext(endLustVictory); return;}
+	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] >= 2){
+		flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]--;
+		attack();
+		return;
 	}
-	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) {
-		WrathWeaponsProc();
-		HeroBaneProc();
-		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
-			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
-		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
-			attack();
-		}
-		else {
-			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
-		}
+	if(player.hasStatusEffect(StatusEffects.FirstAttack)) {
+		attack();
+		return;
 	}
-	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) {
-		WrathWeaponsProc();
-		HeroBaneProc();
-		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
-			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
-		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
-			attack();
-		}
-		else {
-			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
-		}
-	}
-	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 4) {
-		WrathWeaponsProc();
-		HeroBaneProc();
-		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
-			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
-		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
-			attack();
-		}
-		else {
-			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
-		}
-	}
-	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 5) {
-		WrathWeaponsProc();
-		HeroBaneProc();
-		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
-			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
-		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
-			attack();
-		}
-		else {
-			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
-		}
-	}
-	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 6) {
-		WrathWeaponsProc();
-		HeroBaneProc();
-		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
-			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
-		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
-			attack();
-		}
-		else {
-			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
-		}
-	}
-	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 7) {
-		WrathWeaponsProc();
-		HeroBaneProc();
-		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
-			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
-		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
-			attack();
-		}
-		else {
-			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
-		}
-	}
-	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 8) {
-		WrathWeaponsProc();
-		HeroBaneProc();
-		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
-			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
-		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
-			attack();
-		}
-		else {
-			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
-		}
-	}
-	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 9) {
-		WrathWeaponsProc();
-		HeroBaneProc();
-		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
-			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
-		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
-			attack();
-		}
-		else {
-			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
-		}
-	}
-	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 10) {
-		WrathWeaponsProc();
-		HeroBaneProc();
-		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
-			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
-		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
-			attack();
-		}
-		else {
-			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
-		}
-	}
-	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 11) {
-		WrathWeaponsProc();
-		HeroBaneProc();
-		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
-			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
-		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
-			attack();
-		}
-		else {
-			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
-		}
-	}
-	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 12) {
-		WrathWeaponsProc();
-		HeroBaneProc();
-		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
-			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
-		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
-			attack();
-		}
-		else {
-			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
-		}
-	}
+	outputText("\n");
+	wrathregeneration();
+	fatigueRecovery();
+	manaregeneration();
+	soulforceregeneration();
+	enemyAI();
 }
 
 public function WrathWeaponsProc():void {
