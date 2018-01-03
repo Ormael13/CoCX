@@ -1,7 +1,9 @@
 package classes.Scenes.Areas.Swamp
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.Tail;
 import classes.Scenes.SceneLib;
 
 public class SpiderMorphMob extends Monster
@@ -107,13 +109,13 @@ public class SpiderMorphMob extends Monster
 			this.ballSize = 1;
 			this.cumMultiplier = 3;
 			// this.hoursSinceCum = 0;
-			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLICK, AppearanceDefs.VAGINA_LOOSENESS_LOOSE);
+			this.createVagina(false, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_LOOSE);
 			createBreastRow(0);
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = AssClass.WETNESS_SLIME_DROOLING;
 			this.tallness = rand(8) + 70;
-			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
-			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
+			this.hipRating = Hips.RATING_AMPLE+2;
+			this.buttRating = Butt.RATING_LARGE;
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
@@ -132,7 +134,7 @@ public class SpiderMorphMob extends Monster
 			this.gems = rand(50)+100;
 			this.special1 = SceneLib.combat.packAttack;
 			this.special2 = SceneLib.combat.lustAttack;
-			this.tailType = AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN;
+			this.tailType = Tail.SPIDER_ADBOMEN;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			checkMonster();

@@ -1,9 +1,23 @@
 ﻿package classes 
 {
+import classes.BodyParts.Antennae;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Ears;
+import classes.BodyParts.Eyes;
+import classes.BodyParts.Face;
+import classes.BodyParts.Gills;
+import classes.BodyParts.Hair;
+import classes.BodyParts.Hips;
+import classes.BodyParts.Horns;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.RearBody;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Tongue;
+import classes.BodyParts.Wings;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kCOUNTERS;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Items.*;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.NPCs.JojoScene;
@@ -11,6 +25,8 @@ import classes.Scenes.NPCs.XXCNPC;
 import classes.Scenes.SceneLib;
 import classes.internals.CountersStorage;
 import classes.internals.RootCounters;
+import classes.lists.BreastCup;
+import classes.lists.Gender;
 
 import coc.view.MainView;
 
@@ -162,9 +178,9 @@ import coc.view.MainView;
 			}
 			player.hairLength = 5;
 			player.skin.restore();
-			player.faceType = AppearanceDefs.FACE_HUMAN;
-			player.tailType = AppearanceDefs.TAIL_TYPE_NONE;
-			player.tongueType = AppearanceDefs.TONGUE_HUMAN;
+			player.faceType = Face.HUMAN;
+			player.tailType = Tail.NONE;
+			player.tongueType = Tongue.HUMAN;
 			player.femininity = 50;
 			player.beardLength = 0;
 			player.beardStyle = 0;
@@ -188,14 +204,14 @@ import coc.view.MainView;
 			player.tailCount = 0;
 			player.tailVenom = 0;
 			player.tailRecharge = 0;
-			player.gillType = AppearanceDefs.GILLS_NONE;
-			player.rearBody = AppearanceDefs.REAR_BODY_NONE;
-			player.wingType = AppearanceDefs.WING_TYPE_NONE;
+			player.gillType = Gills.NONE;
+			player.rearBody = RearBody.NONE;
+			player.wingType = Wings.NONE;
 			player.wingDesc = "non-existant";
 			//Default
 			player.skinTone = "light";
 			player.hairColor = "brown";
-			player.hairType = AppearanceDefs.HAIR_NORMAL;
+			player.hairType = Hair.NORMAL;
 			player.beardLength = 0;
 			player.beardStyle = 0;
 			//Exploration
@@ -602,9 +618,9 @@ import coc.view.MainView;
 			player.thickness = 30;
 			player.tone += 5;
 			
-			player.breastRows[0].breastRating = AppearanceDefs.BREAST_CUP_FLAT;
-			player.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
-			player.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
+			player.breastRows[0].breastRating = BreastCup.FLAT;
+			player.buttRating = Butt.RATING_TIGHT;
+			player.hipRating = Hips.RATING_SLENDER;
 			chooseComplexion();
 		}
 
@@ -616,9 +632,9 @@ import coc.view.MainView;
 			player.thickness = 30;
 			player.tone += 5;
 			
-			player.breastRows[0].breastRating = AppearanceDefs.BREAST_CUP_B;
-			player.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
-			player.hipRating = AppearanceDefs.HIP_RATING_AMPLE;
+			player.breastRows[0].breastRating = BreastCup.B;
+			player.buttRating = Butt.RATING_TIGHT;
+			player.hipRating = Hips.RATING_AMPLE;
 			chooseComplexion();
 		}
 
@@ -626,9 +642,9 @@ import coc.view.MainView;
 			player.femininity = 30;
 			player.thickness = 50;
 			
-			player.breastRows[0].breastRating = AppearanceDefs.BREAST_CUP_FLAT;
-			player.buttRating = AppearanceDefs.BUTT_RATING_AVERAGE;
-			player.hipRating = AppearanceDefs.HIP_RATING_AVERAGE;
+			player.breastRows[0].breastRating = BreastCup.FLAT;
+			player.buttRating = Butt.RATING_AVERAGE;
+			player.hipRating = Hips.RATING_AVERAGE;
 			chooseComplexion();
 		}
 
@@ -636,9 +652,9 @@ import coc.view.MainView;
 			player.femininity = 70;
 			player.thickness = 50;
 			
-			player.breastRows[0].breastRating = AppearanceDefs.BREAST_CUP_C;
-			player.buttRating = AppearanceDefs.BUTT_RATING_NOTICEABLE;
-			player.hipRating = AppearanceDefs.HIP_RATING_AMPLE;
+			player.breastRows[0].breastRating = BreastCup.C;
+			player.buttRating = Butt.RATING_NOTICEABLE;
+			player.hipRating = Hips.RATING_AMPLE;
 			chooseComplexion();
 		}
 
@@ -651,9 +667,9 @@ import coc.view.MainView;
 			player.thickness = 70;
 			player.tone -= 5;
 			
-			player.breastRows[0].breastRating = AppearanceDefs.BREAST_CUP_FLAT;
-			player.buttRating = AppearanceDefs.BUTT_RATING_NOTICEABLE;
-			player.hipRating = AppearanceDefs.HIP_RATING_AVERAGE;
+			player.breastRows[0].breastRating = BreastCup.FLAT;
+			player.buttRating = Butt.RATING_NOTICEABLE;
+			player.hipRating = Hips.RATING_AVERAGE;
 			chooseComplexion();
 		}
 
@@ -665,9 +681,9 @@ import coc.view.MainView;
 			player.femininity = 71;
 			player.thickness = 70;
 			
-			player.breastRows[0].breastRating = AppearanceDefs.BREAST_CUP_D;
-			player.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
-			player.hipRating = AppearanceDefs.HIP_RATING_CURVY;
+			player.breastRows[0].breastRating = BreastCup.D;
+			player.buttRating = Butt.RATING_LARGE;
+			player.hipRating = Hips.RATING_CURVY;
 			chooseComplexion();
 		}
 
@@ -679,9 +695,9 @@ import coc.view.MainView;
 			player.thickness = 50;
 			player.tone = 26;
 			
-			player.breastRows[0].breastRating = AppearanceDefs.BREAST_CUP_A;
-			player.buttRating = AppearanceDefs.BUTT_RATING_NOTICEABLE;
-			player.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
+			player.breastRows[0].breastRating = BreastCup.A;
+			player.buttRating = Butt.RATING_NOTICEABLE;
+			player.hipRating = Hips.RATING_SLENDER;
 			chooseComplexion();
 		}
 
@@ -693,9 +709,9 @@ import coc.view.MainView;
 			player.thickness = 50;
 			player.tone = 50;
 			
-			player.breastRows[0].breastRating = AppearanceDefs.BREAST_CUP_A;
-			player.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
-			player.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
+			player.breastRows[0].breastRating = BreastCup.A;
+			player.buttRating = Butt.RATING_TIGHT;
+			player.hipRating = Hips.RATING_SLENDER;
 			chooseComplexion();
 		}
 
@@ -1046,7 +1062,7 @@ import coc.view.MainView;
 				addButton(9, "Fertile", confirmEndowmentFertile);
 				addButton(10, "Wet Vagina", confirmEndowmentWetVagina);
 			}
-			if (player.gender == AppearanceDefs.GENDER_HERM)
+			if (player.gender == Gender.GENDER_HERM)
 			{
 				addButton(7, "Big Cock", confirmEndowmentBigCock);
 				addButton(8, "Lots of Jizz", confirmEndowmentMessyOrgasms);
@@ -1252,7 +1268,7 @@ import coc.view.MainView;
 		
 		private function setEndowmentWetVagina():void {
 			player.femininity += 7;
-			player.vaginas[0].vaginalWetness = AppearanceDefs.VAGINA_WETNESS_WET;
+			player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_WET;
 			if (player.findPerk(PerkLib.WetPussy) < 0) player.createPerk(PerkLib.WetPussy, 2, 0, 0, 0);
 			chooseHistory();
 		}
@@ -1343,7 +1359,7 @@ import coc.view.MainView;
 			if (choice == PerkLib.HistorySlut || choice == PerkLib.HistoryWhore || player.findPerk(PerkLib.PastLifeSlut) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) {
 				if (player.hasVagina()) {
 					player.vaginas[0].virgin = false;
-					player.vaginas[0].vaginalLooseness = AppearanceDefs.VAGINA_LOOSENESS_LOOSE;
+					player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_LOOSE;
 				}
 				player.ass.analLooseness = 1;
 			}
@@ -1384,7 +1400,7 @@ import coc.view.MainView;
 			outputText("The walk to the tainted cave is long and silent.  Elder Nomur does not speak.  There is nothing left to say.  The two of you journey in companionable silence.  Slowly the black rock of Mount Ilgast looms closer and closer, and the temperature of the air drops.   You shiver and glance at the Elder, noticing he doesn't betray any sign of the cold.  Despite his age of nearly 80, he maintains the vigor of a man half his age.  You're glad for his strength, as assisting him across this distance would be draining, and you must save your energy for the trials ahead.\n\n");
 			outputText("The entrance of the cave gapes open, sharp stalactites hanging over the entrance, giving it the appearance of a monstrous mouth.  Elder Nomur stops and nods to you, gesturing for you to proceed alone.\n\n");
 			outputText("The cave is unusually warm and damp, ");
-			if (player.gender == AppearanceDefs.GENDER_FEMALE)
+			if (player.gender == Gender.GENDER_FEMALE)
 				outputText("and your body seems to feel the same way, flushing as you feel a warmth and dampness between your thighs. ");
 			else outputText("and your body reacts with a sense of growing warmth focusing in your groin, your manhood hardening for no apparent reason. ");
 			outputText("You were warned of this and press forward, ignoring your body's growing needs.  A glowing purple-pink portal swirls and flares with demonic light along the back wall.  Cringing, you press forward, keenly aware that your body seems to be anticipating coming in contact with the tainted magical construct.  Closing your eyes, you gather your resolve and leap forwards.  Vertigo overwhelms you and you black out...");
@@ -1399,7 +1415,7 @@ import coc.view.MainView;
 			dynStats("lus", 40, "cor", 2);
 			model.time.hours = 18;
 			outputText("You wake with a splitting headache and a body full of burning desire.  A shadow darkens your view momentarily and your training kicks in.  You roll to the side across the bare ground and leap to your feet.  A surprised looking imp stands a few feet away, holding an empty vial.  He's completely naked, an improbably sized pulsing red cock hanging between his spindly legs.  You flush with desire as a wave of lust washes over you, your mind reeling as you fight ");
-			if (player.gender == AppearanceDefs.GENDER_FEMALE)
+			if (player.gender == Gender.GENDER_FEMALE)
 				outputText("the urge to chase down his rod and impale yourself on it.\n\n");
 			else
 				outputText("the urge to ram your cock down his throat.  The strangeness of the thought surprises you.\n\n");
@@ -2044,19 +2060,19 @@ import coc.view.MainView;
 			player.cocks = [];
 			player.vaginas = new <VaginaClass>[];
 			player.horns = 0;
-			player.hornType = AppearanceDefs.HORNS_NONE;
-			player.antennae = AppearanceDefs.ANTENNAE_NONE;
-			player.earType = AppearanceDefs.EARS_HUMAN;
-			player.eyeType = AppearanceDefs.EYES_HUMAN;
-			player.tongueType = AppearanceDefs.TONGUE_HUMAN;
-			player.gillType = AppearanceDefs.GILLS_NONE;
-			player.armType = AppearanceDefs.ARM_TYPE_HUMAN;
-			player.wingType = AppearanceDefs.WING_TYPE_NONE;
+			player.hornType = Horns.NONE;
+			player.antennae = Antennae.NONE;
+			player.earType = Ears.HUMAN;
+			player.eyeType = Eyes.HUMAN;
+			player.tongueType = Tongue.HUMAN;
+			player.gillType = Gills.NONE;
+			player.armType = Arms.HUMAN;
+			player.wingType = Wings.NONE;
 			player.wingDesc = "non-existant";
-			player.rearBody = AppearanceDefs.REAR_BODY_NONE;
-			player.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HUMAN;
+			player.rearBody = RearBody.NONE;
+			player.lowerBody = LowerBody.HUMAN;
 			player.legCount = 2;
-			player.tailType = AppearanceDefs.TAIL_TYPE_NONE;
+			player.tailType = Tail.NONE;
 			player.tailRecharge = 0;
 			player.level = 1;
 			player.teaseLevel = 0;

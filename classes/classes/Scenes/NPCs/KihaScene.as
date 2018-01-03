@@ -1,5 +1,7 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
 
 public class KihaScene extends NPCAwareContent {
@@ -368,7 +370,7 @@ private function kihaRapesMen():void {
 	outputText("With a swift kick to your collarbone, Kiha knocks you on your back and stands over you, her vulva swollen with excitement despite her frosty insults.  She opens your [armor] with her long, clenching talons just enough to expose " + sMultiCockDesc() + ".  The dragoness curls her tail between her legs, the warm, scaled surface of the dexterous limb rubbing your tender flesh impatiently, tip flicking " + oMultiCockDesc() + " before coiling around the crest of your cockhead.  The narrow point of her backside pokes at your urethra, parting the narrow slit and tickling the sensitive, silken interior to draw a weak gasp from you.  \"<i>Yeah, I bet you'd love to get penetrated,</i>\" she scoffs, wrapping her hands around the thick girth of tail poking between her thighs like a massive, scale-textured cock.  She strokes the fat plates and thumbs the ridge-like nobs lining its underside with a hip-swaying motion that sends her chest wobbling.  \"<i>But,</i>\" she continues, her tail lifting off of your [cocks] and curling upwards, \"<i>this isn't about what you want.</i>\"\n\n");
 
 	outputText("Kiha's haunches clench, and the wriggling rudder between her legs snakes upward, pressing firmly against her inflamed nethers - the plush, dusky lips of her pussy pliant to the touch of her scarlet extremity.  The tip that teased your cock a moment ago instead wraps itself around her clitoral hood, pulling her foreskin-like sheath back to expose the button-stiff joybuzzer.  In tightening circles, the dragon girl stimulates herself over you, her lips curled into a crooked grin as she rests her hands on her hips.  ");
-	if(player.isNaga() || player.tailType == AppearanceDefs.TAIL_TYPE_LIZARD) outputText("\"<i>Heh, if you had half as much dexterity as you do impudence, I'd let you do this for me.  Fat chance of that,</i>\" she remarks off-handedly.  ");
+	if(player.isNaga() || player.tailType == Tail.LIZARD) outputText("\"<i>Heh, if you had half as much dexterity as you do impudence, I'd let you do this for me.  Fat chance of that,</i>\" she remarks off-handedly.  ");
 	outputText("Before long, her cunny practically drools, but you're not sure what she's getting off on more, the tail teasing her clit or your dick stiffening uncontrollably at her feet.  She grins, more to show her teeth than in pleasure, and begins to feed her tail into her snatch, the girl's folds parting eagerly to the rough limb, her honeypot polishing her scales to a liquid gleam almost immediately.  As she pumps long, slow thrusts inside herself, Kiha shifts to one leg, bringing her adept foot to your " + cockDescript(x) + " once more");
 	if(player.balls > 0) outputText(", resting the heel of her foot against the swell of your [balls] and applying just enough pressure to feel the cum churning within");
 	outputText(".  \"<i>Ah! J- just stay ri- ri- right there!</i>\" she commands, as her tail picks up the pace.  \"<i>I'll attend to y-y-you in a m-m... Aaah! Minute,</i>\" she coos, pumping herself to the verge of climax.  Clenching her eyes and balling her hands into fists, the dragoness impales herself on the pistoning appendage, and chokes back a shuddering moan as she bottoms out and creams a crystal polish of girl cum across it, which wicks down and coats her scaled posterior with a shimmering veneer. \"<i>Ahhhaaa...</i>\" she shudders.  \"<i>Now then, at least I'll have cum once today if you prove to be as worthless at fucking as you were at fighting.</i>\"\n\n");
@@ -379,7 +381,7 @@ private function kihaRapesMen():void {
 
 	outputText("With a rumbling growl, the dragoness impales herself on your " + cockDescript(x) + " hard enough to knock the wind from your lungs. She clamps down and begins rolling her ass back and forth over your groin, stroking you off with only the rippling contractions from the toned walls of her rectum.  Your orgasm moments away, you helplessly clench your fingers in the earth");
 	//[Lizard/naga tail: 
-	if(player.isNaga() || player.tailType == AppearanceDefs.TAIL_TYPE_LIZARD) outputText(" while your tail curls around to find your own asshole.  The grip of the dragon's nethers so intense, you barely feel the pressure of your own tail, pushing in easily to soothingly stroke your overtaxed prostate");
+	if(player.isNaga() || player.tailType == Tail.LIZARD) outputText(" while your tail curls around to find your own asshole.  The grip of the dragon's nethers so intense, you barely feel the pressure of your own tail, pushing in easily to soothingly stroke your overtaxed prostate");
 	outputText(".  The tail in your mouth begins to pump deeper into your throat, wrenching your jaw open as the slick, textured scales thrust past your tongue and uvula to snake into your esophagus, forcing the girl's honey into every crevasse of your maw.  The sight of you being face-fucked by her phallic appendage is enough to bring her to a second, screaming climax, Kiha's ass finally loosening enough for the orgasm seething in your loins to burst free");
 	if(player.balls > 0) outputText(", your [balls] practically leaping in over-burdened joy as their heavy load rushes through your flesh");
 	outputText(".  A geyser of hot spunk sprays from your " + cockDescript(x) + ", flooding her innards with the excruciatingly hefty torrent of seed all her teasing and abuse built within you.");
@@ -591,7 +593,7 @@ private function victoryDickKiha():void {
 				break;
 			}
 		}
-		if(player.isNaga() || player.tailType == AppearanceDefs.TAIL_TYPE_LIZARD || z >= 0) {
+		if(player.isNaga() || player.tailType == Tail.LIZARD || z >= 0) {
 			outputText("Spitefully, your ");
 			if(z == -1) outputText("tail");
 			else outputText("idle tentacle");
@@ -601,7 +603,7 @@ private function victoryDickKiha():void {
 		}
 
 		outputText("Dully, you realize " + sMultiCockDesc() + " are twitching, her powerful clenching holes combining with your frenzied strokes too much for you to endure.  Heat boils out from your [balls] as your orgasm approaches, threatening to burst from your loins even as blackness eats at the edges of your vision.  Screw it - if she's choking you out, you're at least going to get to cum first.  You grab both her nipples as you hilt yourself and twist, HARD.  Jizm spurts from your cocks, glazing Kiha's hot, juicy puss,");
-		if(player.isNaga() || player.tailType == AppearanceDefs.TAIL_TYPE_LIZARD || z >= 0) outputText(" gasping mouth,");
+		if(player.isNaga() || player.tailType == Tail.LIZARD || z >= 0) outputText(" gasping mouth,");
 		outputText(" and tight anus with waves of white.");
 		if(player.cumQ() >= 500) outputText("  Her belly distends before long, stuffed by the heavy loads of cream you push out.");
 		if(player.cockTotal() > 2) {
@@ -650,7 +652,7 @@ private function kihaRapesLittleGirlsISawItOnTheNews():void {
 	outputText("Despite the pleasure of your crumbling restraint, the pleading shudders of your cumming body makes her even more aggressive than before.  \"<i>Yes!  Beg for mercy!  You don't deserve a minute of my time! How could someone like me ever be interested in a pig like you?</i>\"  To punctuate the game she's playing with your honeypot, Kiha pinches your " + clitDescript() + " between her fingers, the narrow nails of her claws squeezing your sensitive nub so tightly your jaw drops in a soundless scream of bliss.\n\n");
 
 	outputText("\"<i>Here's how this is going to go,</i>\" she murmurs when you've finally stopped gasping for breath.  \"<i>You will lick me until I tell you to stop, and every time you displease me I'm going to take it out on your sensitive little fuck hole.</i>\"  She swings around and sits on your face, smashing her wet cunt on your [face].  \"<i>Be grateful that I'm letting you do this,</i>\" she gurgles, pinching your clit again for emphasis.  Doing as you're told, you lick deeply into the warm velvet of the dragon's folds.");
-	if(player.tongueType == AppearanceDefs.TONGUE_SNAKE) outputText("  You are grateful for your forked tongue, which allows you to cover more of her pussy at once.");
+	if(player.tongueType == Tongue.SNAKE) outputText("  You are grateful for your forked tongue, which allows you to cover more of her pussy at once.");
 	else if(player.hasLongTongue()) outputText("  Your inhumanly long, prehensile tongue is a blessing here; you can reach into her deepest recesses, slurp your way into every nook and cranny, and generally provide a tongue-fuck that no human ever could.");
 	outputText("\n\n");
 

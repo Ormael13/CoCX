@@ -4,6 +4,7 @@
 package classes.Scenes.Areas.HighMountains
 {
 import classes.*;
+import classes.BodyParts.Face;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 
@@ -43,7 +44,7 @@ public class HarpyScene extends BaseContent
 					else addButton(3, "Scissor", harpyScissorSurprise).hint("Get into some girl-on-girl activity with the harpy.");
 					if (player.clitLength >= 3.5) addButton(4, "Clit Fuck", clitFuckAHarpy).hint("Fuck the harpy with your big clit.");
 				}
-				if (player.canOvipositSpider() && (player.faceType == AppearanceDefs.FACE_SNAKE_FANGS || player.faceType == AppearanceDefs.FACE_SPIDER_FANGS)) addButton(5, "Lay Eggs", spoidahsLegEggsInHarpeis).hint("Use your ovipositor to lay the eggs into harpy.");
+				if (player.canOvipositSpider() && (player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS)) addButton(5, "Lay Eggs", spoidahsLegEggsInHarpeis).hint("Use your ovipositor to lay the eggs into harpy.");
 				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			//Not horny?  Iz over

@@ -1,6 +1,9 @@
 ﻿package classes.Scenes.Areas.Forest
 {
 import classes.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Places.HeXinDao;
@@ -122,11 +125,11 @@ public class TentacleBeast extends Monster
 			this.pronoun2 = "it";
 			this.pronoun3 = "its";
 			this.createBreastRow(0,0);
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_SLIME_DROOLING;
 			this.tallness = rand(9) + 70;
-			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
-			this.buttRating = AppearanceDefs.BUTT_RATING_BUTTLESS;
+			this.hipRating = Hips.RATING_BOYISH;
+			this.buttRating = Butt.RATING_BUTTLESS;
 			this.skin.setBaseOnly({color:"green"});
 			this.skinDesc = "bark";
 			this.hairColor = "green";
@@ -149,7 +152,7 @@ public class TentacleBeast extends Monster
 			this.special1 = tentaclePhysicalAttack;
 			this.special2 = tentacleEntwine;
 			this.special3 = tentaclePhysicalAttack;
-			this.tailType = AppearanceDefs.TAIL_TYPE_DEMONIC;
+			this.tailType = Tail.DEMONIC;
 			checkMonster();
 		}
 

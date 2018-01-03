@@ -1,7 +1,10 @@
 ﻿package classes.Scenes.Areas.Mountain
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -159,12 +162,12 @@ public class HellHound extends Monster
 			this.createBreastRow();
 			this.createBreastRow();
 			this.createBreastRow();
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_NORMAL;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 47;
-			this.hipRating = AppearanceDefs.HIP_RATING_AVERAGE;
-			this.buttRating = AppearanceDefs.BUTT_RATING_AVERAGE+1;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_DOG;
+			this.hipRating = Hips.RATING_AVERAGE;
+			this.buttRating = Butt.RATING_AVERAGE+1;
+			this.lowerBody = LowerBody.DOG;
 			this.skin.growFur({color:"black"});
 			this.hairColor = "red";
 			this.hairLength = 3;
@@ -186,7 +189,7 @@ public class HellHound extends Monster
 							consumables.BLACKPP,
 							consumables.DBLPEPP,
 							consumables.LARGEPP);
-			this.tailType = AppearanceDefs.TAIL_TYPE_DOG;
+			this.tailType = Tail.DOG;
 			this.special1 = hellhoundFire;
 			this.special2 = hellhoundScent;
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);

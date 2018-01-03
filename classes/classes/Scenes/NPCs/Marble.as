@@ -1,7 +1,10 @@
 ﻿package classes.Scenes.NPCs
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -81,14 +84,14 @@ public class Marble extends Monster
 			this.imageName = "marble";
 			this.long = "Before you stands a female humanoid with numerous cow features, such as medium-sized cow horns, cow ears, and a cow tail.  She is very well endowed, with wide hips and a wide ass.  She stands over 6 feet tall.  She is using a large two handed hammer with practiced ease, making it clear she is much stronger than she may appear to be.";
 			// this.plural = false;
-			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_NORMAL, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_NORMAL);
 			createBreastRow(Appearance.breastCupInverse("F"));
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_VIRGIN;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.tallness = 6*12+4;
-			this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
-			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
+			this.hipRating = Hips.RATING_CURVY;
+			this.buttRating = Butt.RATING_LARGE;
+			this.lowerBody = LowerBody.HOOFED;
 			this.skinTone = "pale";
 			this.hairColor = "brown";
 			this.hairLength = 13;
@@ -104,7 +107,7 @@ public class Marble extends Monster
 			this.level = 14;
 			this.gems = rand(15) + 50;
 			this.drop = new WeightedDrop(weapons.L_HAMMR, 1);
-			this.tailType = AppearanceDefs.TAIL_TYPE_COW;
+			this.tailType = Tail.COW;
 			this.special1 = marbleSpecialAttackOne;
 			this.special2 = marbleSpecialAttackTwo;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);

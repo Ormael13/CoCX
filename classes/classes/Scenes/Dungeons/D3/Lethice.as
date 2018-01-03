@@ -1,6 +1,7 @@
 package classes.Scenes.Dungeons.D3
 {
-import classes.AppearanceDefs;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.Monster;
@@ -21,8 +22,8 @@ public class Lethice extends Monster
 			this.createBreastRow(8);
 			this.balls = 2;
 			this.ballSize = 4;
-			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
-			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			this.hipRating = Hips.RATING_SLENDER;
+			this.buttRating = Butt.RATING_TIGHT;
 			initStrTouSpeInte(320, 320, 150, 150);
 			initWisLibSensCor(150, 180, 50, 100);
 			this.weaponName = "whip";

@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
+import classes.BodyParts.Skin;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Items.Armor;
 import classes.Scenes.Areas.Lake.GooGirl;
 
@@ -700,7 +700,7 @@ public function birthOutDatGooSlut():void {
 	outputText("\n<b>Something odd happens...</b>\nA sudden, violent lurch in your gut nearly knocks you off your [feet]! You lower yourself to the ground before the quaking in your middle can upend you and cradle your slime-bloated belly, wondering if you're finally going to get relief from walking around with a gutful of goo.");
 	if(player.statusEffectv4(StatusEffects.GooStuffed) > 0) outputText(" Your tits are even wobbling around wildly, shaking and jiggling obscenely inside your [armor] in a way that makes you your [nipples] more than a little leaky.");
 	outputText("\n\nYou get your answer when your [asshole] opens up to expose the goo-girl's slick core, forcing you to shudder with ecstasy as it gradually slips through your stretching anus and unleashes a torrent of slime. You bend down onto your hands, letting it pass, cumming unexpectedly at the way it caresses you as it exits your body and moaning like a some ");
-	if(player.skinType == AppearanceDefs.SKIN_TYPE_FUR) outputText("furry ");
+	if(player.skinType == Skin.FUR) outputText("furry ");
 	outputText("bitch in heat. Gods, there's so much!");
 	if(player.statusEffectv4(StatusEffects.GooStuffed) > 0) {
 		outputText("\n\n");

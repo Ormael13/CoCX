@@ -1,8 +1,12 @@
 package classes.Scenes.Quests.UrtaQuest
 {
 import classes.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Face;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Items.WeaponLib;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
@@ -172,18 +176,18 @@ use namespace CoC;
 			this.cumMultiplier = 1.5;
 			this.hoursSinceCum = this.ballSize * 10;
 			createBreastRow(0);
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.createStatusEffect(StatusEffects.BonusACapacity,50,0,0,0);
 			this.tallness = 132;
-			this.hipRating = AppearanceDefs.HIP_RATING_AVERAGE;
-			this.buttRating = AppearanceDefs.BUTT_RATING_AVERAGE+1;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
+			this.hipRating = Hips.RATING_AVERAGE;
+			this.buttRating = Butt.RATING_AVERAGE+1;
+			this.lowerBody = LowerBody.HOOFED;
 			this.skin.growFur({color:"red"});
 			this.skinDesc = "shaggy fur";
 			this.hairColor = randomChoice("black","brown");
 			this.hairLength = 3;
-			this.faceType = AppearanceDefs.FACE_COW_MINOTAUR;
+			this.faceType = Face.COW_MINOTAUR;
 			initStrTouSpeInte(200, 140, 80, 50);
 			initWisLibSensCor(50, 70, 25, 85);
 			this.weaponName = "chain";
@@ -205,7 +209,7 @@ use namespace CoC;
 						.elseDrop(null);
 			}
 			else this.drop = NO_DROP;
-			this.tailType = AppearanceDefs.TAIL_TYPE_COW;
+			this.tailType = Tail.COW;
 			this.special1 = SceneLib.mountain.minotaurScene.minoPheromones;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			checkMonster();

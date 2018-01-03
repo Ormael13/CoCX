@@ -5,8 +5,14 @@
 package classes.Scenes.NPCs 
 {
 import classes.*;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.RearBody;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -208,15 +214,15 @@ use namespace CoC;
 				this.bonusHP = 250;
 				this.level = 72;
 			}
-			createVagina(true,AppearanceDefs.VAGINA_WETNESS_NORMAL,AppearanceDefs.VAGINA_LOOSENESS_TIGHT);
+			createVagina(true,VaginaClass.WETNESS_NORMAL,VaginaClass.LOOSENESS_TIGHT);
 			this.createStatusEffect(StatusEffects.BonusVCapacity,60,0,0,0);
 			createBreastRow(Appearance.breastCupInverse("E"));
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,20,0,0,0);
 			this.tallness = 72;
-			this.hipRating = AppearanceDefs.HIP_RATING_CURVY+2;
-			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE+1;
+			this.hipRating = Hips.RATING_CURVY+2;
+			this.buttRating = Butt.RATING_LARGE+1;
 			this.skinTone = "light";
 			this.hairColor = "red";
 			this.hairLength = 13;
@@ -232,11 +238,11 @@ use namespace CoC;
 					add(armors.S_SWMWR,1/12).
 					add(consumables.L_DRAFT,1/4).
 					add(consumables.MANTICV,0.7);
-			this.wingType = AppearanceDefs.WING_TYPE_MANTICORE_LIKE_LARGE;
-			this.rearBody = AppearanceDefs.REAR_BODY_LION_MANE;
-			this.armType = AppearanceDefs.ARM_TYPE_LION;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_LION;
-			this.tailType = AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL;
+			this.wingType = Wings.MANTICORE_LIKE_LARGE;
+			this.rearBody = RearBody.LION_MANE;
+			this.armType = Arms.LION;
+			this.lowerBody = LowerBody.LION;
+			this.tailType = Tail.MANTICORE_PUSSYTAIL;
 			this.tailRecharge = 0;
 			if (flags[kFLAGS.ETNA_FOLLOWER] > 1 || flags[kFLAGS.ETNA_TALKED_ABOUT_HER] > 1) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);

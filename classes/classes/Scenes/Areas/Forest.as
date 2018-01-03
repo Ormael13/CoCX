@@ -5,7 +5,6 @@ package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
@@ -14,7 +13,6 @@ import classes.Scenes.Holidays;
 import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.JojoScene;
-import classes.Scenes.NPCs.PatchouliScene;
 import classes.Scenes.SceneLib;
 
 import coc.xxc.BoundStory;
@@ -453,7 +451,7 @@ use namespace CoC;
 				if (player.vaginas.length >= 1) {
 					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + buttDescript() + " above.");
 					//IF CHARACTER HAS A DROOLING PUSSY ADD SENTENCE
-					if (player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_DROOLING) {
+					if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_DROOLING) {
 						outputText("  Juices stream from your womanhood and begin pooling on the dirt and twigs beneath you.  ");
 						if (lake) outputText("The drooling fem-spunk only makes the ground more muddy.");
 						else outputText("The sticky fem-spunk immediately soaks down into the rich soil.");
@@ -478,7 +476,7 @@ use namespace CoC;
 				if (player.vaginas.length >= 1) {
 					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + buttDescript() + " above.");
 					//IF CHARACTER HAS A DROOLING PUSSY ADD SENTENCE
-					if (player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_DROOLING) {
+					if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_DROOLING) {
 						if (lake) outputText("  A leaf falls from a tree and lands on the wet lips of your cunt, its light touch teasing your sensitive skin.  Like a mare or cow in heat, your juices stream from your womanhood and pool in the mud beneath you.  The sloppy fem-spunk only makes the ground more muddy.");
 						else outputText("  A leaf falls from a tree and lands on the wet lips of your cunt, its light touch teasing your sensitive skin.  Like a mare or cow in heat, your juices stream from your womanhood and pool in the dirt and twigs beneath you.");
 					}

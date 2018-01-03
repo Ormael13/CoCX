@@ -5,7 +5,9 @@
 package classes.Scenes.Areas.Forest 
 {
 import classes.*;
-import classes.GlobalFlags.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
 import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
@@ -156,14 +158,14 @@ public class Alraune extends Monster
 				this.hairColor = "dark green";
 			}
 			this.imageName = "alraune";
-			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_GAPING);
+			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_GAPING);
 			createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = rand(14) + 59;
-			this.hipRating = AppearanceDefs.HIP_RATING_CURVY+3;
-			this.buttRating = AppearanceDefs.BUTT_RATING_EXPANSIVE;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER;
+			this.hipRating = Hips.RATING_CURVY+3;
+			this.buttRating = Butt.RATING_EXPANSIVE;
+			this.lowerBody = LowerBody.PLANT_FLOWER;
 			this.hairLength = 6;
 			initStrTouSpeInte(10, 100, 10, 60);
 			initWisLibSensCor(60, 100, 50, 0);

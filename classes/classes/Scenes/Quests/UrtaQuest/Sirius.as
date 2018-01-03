@@ -1,7 +1,9 @@
 package classes.Scenes.Quests.UrtaQuest
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
 import classes.Scenes.Areas.Desert.Naga;
 import classes.Scenes.SceneLib;
 
@@ -103,13 +105,13 @@ public class Sirius extends Naga
 			this.plural = false;
 			this.createCock(14,2);
 			createBreastRow(0);
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = 5*12+10;
-			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
-			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_NAGA;
+			this.hipRating = Hips.RATING_AMPLE+2;
+			this.buttRating = Butt.RATING_LARGE;
+			this.lowerBody = LowerBody.NAGA;
 			this.skinTone = "mediterranean-toned";
 			this.hairColor = "orange";
 			this.hairLength = 16;

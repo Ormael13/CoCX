@@ -5,6 +5,11 @@
 package classes.Scenes.NPCs 
 {
 import classes.*;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.internals.*;
 
@@ -90,15 +95,15 @@ public class Rangiku extends Monster
 			this.short = "salamander";
 			this.imageName = "rangiku";
 			this.long = "";
-			createVagina(true,AppearanceDefs.VAGINA_WETNESS_NORMAL,AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
+			createVagina(true,VaginaClass.WETNESS_NORMAL,VaginaClass.LOOSENESS_NORMAL);
 			createStatusEffect(StatusEffects.BonusVCapacity,120,0,0,0);
 			createBreastRow(Appearance.breastCupInverse("G"));
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = 93;
-			this.hipRating = AppearanceDefs.HIP_RATING_CURVY+3;
-			this.buttRating = AppearanceDefs.BUTT_RATING_JIGGLY;
+			this.hipRating = Hips.RATING_CURVY+3;
+			this.buttRating = Butt.RATING_JIGGLY;
 			this.skinTone = "light";
 			this.hairColor = "strawberry blonde";
 			this.hairLength = 39;
@@ -166,9 +171,9 @@ public class Rangiku extends Monster
 					//add(armors.CHBIKNI,1/20).
 					//add(weapons.SCIMITR,1/20).
 					add(consumables.SALAMFW,0.7);
-			this.armType = AppearanceDefs.ARM_TYPE_SALAMANDER;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_SALAMANDER;
-			this.tailType = AppearanceDefs.TAIL_TYPE_SALAMANDER;
+			this.armType = Arms.SALAMANDER;
+			this.lowerBody = LowerBody.SALAMANDER;
+			this.tailType = Tail.SALAMANDER;
 			this.tailRecharge = 0;
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);

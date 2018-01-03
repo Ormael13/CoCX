@@ -1,5 +1,9 @@
 ﻿package classes.Scenes.Areas.Desert {
 import classes.*;
+import classes.BodyParts.Eyes;
+import classes.BodyParts.Face;
+import classes.BodyParts.Skin;
+import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
 
@@ -22,7 +26,7 @@ public class SandTrapScene extends BaseContent{
 public function encounterASandTarp():void {
 	clearOutput();
 	spriteSelect(97);
-	if(flags[kFLAGS.SANDTRAP_LOSS_REPEATS] >= 2 && player.eyeType == AppearanceDefs.EYES_BLACK_EYES_SAND_TRAP && player.wingType == AppearanceDefs.WING_TYPE_GIANT_DRAGONFLY) {
+	if(flags[kFLAGS.SANDTRAP_LOSS_REPEATS] >= 2 && player.eyeType == Eyes.BLACK_EYES_SAND_TRAP && player.wingType == Wings.GIANT_DRAGONFLY) {
 		sandTrapBadEnd();
 		return;
 	}
@@ -130,7 +134,7 @@ public function sandtrapmentLoss(clear:Boolean = false):void {
 		cleanupAfterCombat();
 		return;
 	}
-	if(flags[kFLAGS.SANDTRAP_LOSS_REPEATS] >= 2 && player.eyeType == AppearanceDefs.EYES_BLACK_EYES_SAND_TRAP && player.wingType == AppearanceDefs.WING_TYPE_GIANT_DRAGONFLY) {
+	if(flags[kFLAGS.SANDTRAP_LOSS_REPEATS] >= 2 && player.eyeType == Eyes.BLACK_EYES_SAND_TRAP && player.wingType == Wings.GIANT_DRAGONFLY) {
 		loseLastFightWithSandTrap();
 		return;
 	}
@@ -163,7 +167,7 @@ internal function pcBeatsATrap():void {
 	var bikiniTits:Function = null;
 	if(player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster);
 	//Requirements: Player is naga with tail and fangs, has met desert naga as naga at least once
-	if(player.isNaga() && player.hasStatusEffect(StatusEffects.Naga) && player.gender > 0 && player.faceType == AppearanceDefs.FACE_SNAKE_FANGS) nagaThreeSome = nagaThreesomeWithSandTrap;
+	if(player.isNaga() && player.hasStatusEffect(StatusEffects.Naga) && player.gender > 0 && player.faceType == Face.SNAKE_FANGS) nagaThreeSome = nagaThreesomeWithSandTrap;
 	
 	//Requires: Penis and str requirement
 	if(player.hasCock() && player.str >= 60) putYourDickInIt = stickWangInSandgina;
@@ -565,7 +569,7 @@ private function nagaThreesomeWithSandTrap():void {
 		//14 inches or more: 
 		else {
 			outputText("\n\nYour [cock] is bigger than what the sandtrap's mouth can accommodate, and it isn't long before you are beginning to push into the creature's tight throat.  It lavishes its oil and saliva onto your straining cock, lying its head back and opening its mouth as wide as it can to aid you in your task, and soon you are ");
-			if(player.skinType == AppearanceDefs.SKIN_TYPE_PLAIN) outputText("beading sweat, ");
+			if(player.skinType == Skin.PLAIN) outputText("beading sweat, ");
 			outputText("pistoning into its submissive opening with fervor, ");
 			if(player.balls > 0) outputText("your [balls] swinging heavily in front of the sandtrap's nose, ");
 			outputText("pushing as much of your lubricated dick down the creature's gullet as you can.");

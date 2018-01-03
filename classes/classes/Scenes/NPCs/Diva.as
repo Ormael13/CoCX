@@ -1,11 +1,14 @@
 package classes.Scenes.NPCs {
 import classes.Appearance;
-import classes.AppearanceDefs;
-import classes.EngineCore;
-import classes.GlobalFlags.kFLAGS;
+import classes.AssClass;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.Wings;
 import classes.CoC;
+import classes.EngineCore;
 import classes.Monster;
 import classes.StatusEffects;
+import classes.VaginaClass;
 import classes.internals.ChainedDrop;
 
 import coc.xxc.BoundStory;
@@ -21,13 +24,13 @@ public class Diva extends Monster {
         this.a = "";
         this.short = "Diva";
         this.long = "";
-        this.createVagina(false,AppearanceDefs.VAGINA_WETNESS_NORMAL,AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
+        this.createVagina(false,VaginaClass.WETNESS_NORMAL,VaginaClass.LOOSENESS_NORMAL);
         createBreastRow(Appearance.breastCupInverse("DD"));
-        this.ass.analLooseness= AppearanceDefs.ANAL_LOOSENESS_NORMAL;
-        this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
+        this.ass.analLooseness= AssClass.LOOSENESS_NORMAL;
+        this.ass.analWetness = AssClass.WETNESS_DRY;
         this.tallness = (5*12)+6;
-        this.hipRating = AppearanceDefs.HIP_RATING_CURVY;
-        this.buttRating = AppearanceDefs.BUTT_RATING_NOTICEABLE;
+        this.hipRating = Hips.RATING_CURVY;
+        this.buttRating = Butt.RATING_NOTICEABLE;
         this.skinTone = "pale";
         this.hairColor = "blonde";
         this.hairLength = 16;
@@ -37,7 +40,7 @@ public class Diva extends Monster {
         this.weaponVerb = "swoop";
         this.armorName = "dress";
         this.armorDef = levelBonus;
-        this.wingType = AppearanceDefs.WING_TYPE_BAT_LIKE_LARGE;
+        this.wingType = Wings.BAT_LIKE_LARGE;
         this.bonusHP = levelBonus * 1000;
         this.bonusLust = 50;
         this.lustVuln = 1;

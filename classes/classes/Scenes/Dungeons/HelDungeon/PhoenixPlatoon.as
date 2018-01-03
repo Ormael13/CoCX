@@ -1,7 +1,12 @@
 package classes.Scenes.Dungeons.HelDungeon
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.Horns;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Wings;
 import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
@@ -84,14 +89,14 @@ public class PhoenixPlatoon extends Monster
 			this.balls = 2;
 			this.ballSize = 1;
 			this.cumMultiplier = 3;
-			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_LOOSE);
+			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_LOOSE);
 			createBreastRow(Appearance.breastCupInverse("D"));
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.tallness = rand(8) + 70;
-			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
-			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_SALAMANDER;
+			this.hipRating = Hips.RATING_AMPLE+2;
+			this.buttRating = Butt.RATING_LARGE;
+			this.lowerBody = LowerBody.SALAMANDER;
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
@@ -110,10 +115,10 @@ public class PhoenixPlatoon extends Monster
 			this.level = 30;
 			this.gems = rand(40)+300;
 			this.additionalXP = 100;
-			this.hornType = AppearanceDefs.HORNS_DRACONIC_X2;
+			this.hornType = Horns.DRACONIC_X2;
 			this.horns = 2;
-			this.tailType = AppearanceDefs.TAIL_TYPE_SALAMANDER;
-			this.wingType = AppearanceDefs.WING_TYPE_FEATHERED_PHOENIX;
+			this.tailType = Tail.SALAMANDER;
+			this.wingType = Wings.FEATHERED_PHOENIX;
 			this.drop = new WeightedDrop(consumables.NOCELIQ, 1);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);

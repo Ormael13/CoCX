@@ -1,6 +1,7 @@
 package classes.Scenes.Dungeons.D3
 {
-import classes.AppearanceDefs;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
 import classes.CockTypesEnum;
 import classes.GlobalFlags.kFLAGS;
 import classes.Monster;
@@ -22,8 +23,8 @@ public class MinotaurKing extends Monster
 			this.balls = 2;
 			this.ballSize = 4;
 			this.hoursSinceCum = 9999;
-			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
-			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			this.hipRating = Hips.RATING_SLENDER;
+			this.buttRating = Butt.RATING_TIGHT;
 			initStrTouSpeInte(290, 290, 100, 70);
 			initWisLibSensCor(60, 220, 10, 100);
 			this.weaponName = "axe";

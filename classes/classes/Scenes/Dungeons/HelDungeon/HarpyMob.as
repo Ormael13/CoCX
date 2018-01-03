@@ -1,7 +1,10 @@
 package classes.Scenes.Dungeons.HelDungeon
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
 import classes.Scenes.SceneLib;
 
 public class HarpyMob extends Monster
@@ -82,14 +85,14 @@ public class HarpyMob extends Monster
 			this.pronoun1 = "they";
 			this.pronoun2 = "them";
 			this.pronoun3 = "their";
-			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE);
+			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_GAPING_WIDE);
 			createBreastRow(Appearance.breastCupInverse("B"));
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = AssClass.WETNESS_SLIME_DROOLING;
 			this.tallness = rand(8) + 70;
-			this.hipRating = AppearanceDefs.HIP_RATING_CURVY+2;
-			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HARPY;
+			this.hipRating = Hips.RATING_CURVY+2;
+			this.buttRating = Butt.RATING_LARGE;
+			this.lowerBody = LowerBody.HARPY;
 			this.skin.setBaseOnly({color:"red"});
 			this.skinDesc = "feathers";
 			this.hairColor = "black";
@@ -109,7 +112,7 @@ public class HarpyMob extends Monster
 			this.level = 28;
 			this.gems = rand(25)+140;
 			this.additionalXP = 50;
-			this.tailType = AppearanceDefs.TAIL_TYPE_HARPY;
+			this.tailType = Tail.HARPY;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			checkMonster();

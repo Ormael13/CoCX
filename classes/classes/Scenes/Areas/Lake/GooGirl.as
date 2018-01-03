@@ -1,7 +1,10 @@
 package classes.Scenes.Areas.Lake
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Skin;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -150,18 +153,18 @@ public class GooGirl extends Monster
 			this.imageName = "googirl";
 			this.long = "The goo-girl has a curious expression on her youthful, shimmering face. Her body is slender and globs of slime regularly drip from her limbs, splattering into the goo puddle pooling beneath her hips. A small, heart-shaped nucleus pulses in her chest with a red glow." + (playerHasBigBoobs ? ("  She has apparently made herself a bit more like you, as her chest appears to be a perfect copy of your [chest].") : "");
 			// this.long = false;
-			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 9001, 0, 0, 0);
 			this.createBreastRow(playerHasBigBoobs ? player.biggestTitSize() : 3);
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_SLIME_DROOLING;
 			this.createStatusEffect(StatusEffects.BonusACapacity,9001,0,0,0);
 			this.tallness = rand(8) + 70;
-			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE;
-			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_GOO;
+			this.hipRating = Hips.RATING_AMPLE;
+			this.buttRating = Butt.RATING_LARGE;
+			this.lowerBody = LowerBody.GOO;
 			var tone:String = randomChoice("blue", "purple", "crystal");
-			this.skin.setBaseOnly({color:tone,type:AppearanceDefs.SKIN_BASE_GOO});
+			this.skin.setBaseOnly({color:tone,type:Skin.GOO});
 			this.hairColor = tone;
 			this.hairLength = 12 + rand(10);
 			initStrTouSpeInte(32, 40, 20, 30);

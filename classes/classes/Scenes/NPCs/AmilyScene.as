@@ -4,9 +4,11 @@
 package classes.Scenes.NPCs
 {
 import classes.*;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.SceneLib;
+import classes.lists.BreastCup;
 
 public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 	{
@@ -2492,7 +2494,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("She pulls your head in, your lips locking in a passionate display, her hands tracing a line down to your chest until she's gently fondling your cock.  ");
 			//(If player has a tail)
-			if(player.tailType > AppearanceDefs.TAIL_TYPE_NONE) outputText("You even feel Amily wrap her mousy tail around your own, making you chuckle softly into your lovers mouth.  ");
+			if(player.tailType > Tail.NONE) outputText("You even feel Amily wrap her mousy tail around your own, making you chuckle softly into your lovers mouth.  ");
 			else outputText("A tickling sensation hits your body, making you snort and giggle, realising that Amily's tail is fondling your thigh.  ");
 			outputText("Your eyes catch sight of Amily's swollen breasts, seeing a few drops of milk on her stiff nipples. You smirk and fondle her breasts, breaking the kiss every few moments to get a taste of her milk. Amily moans in response, tightening her grip on you every time your lips return to her own.\n\n");
 
@@ -3515,7 +3517,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			var maxSizeHypr:Number = 23;
 
 			//(If PC has 2 feet that are not hooves)
-			if(player.isBiped() && player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_HOOFED) {
+			if(player.isBiped() && player.lowerBody != LowerBody.HOOFED) {
 				outputText("You're not satisfied; it needs to be bigger. You put your [foot] on her cock and begin stroking it, drawing more pleasured moans from the slutty corrupt futa-mouse. You stroke her into an orgasm, milky white fluid flows out of her dick to hit her in the chest and in the face, but you don't stop. Her cock throbs and spills pre-cum, making your movements easier. You keep stroking her cock with your [foot] vigorously, willing it to grow more and more; each time her cock throbs and orgasms it grows a bit more.\n\n");
 
 				outputText("Amily is already covered in her own cum, her juices pooling under her, but you never stop. You keep stroking until she comes again, her cock growing more and more. Finally, when one last orgasm brings it to just about 15 inches long and three thick, you press on her cockhead with your [foot] and she comes one last time, coating your [foot] with spooge. \"<i>Clean this up,</i>\" you order her, presenting her with your messy [foot]. She obediently begins licking at the mess, tasting herself in the process. After it's clean you tell her you will call her when she you need her services again, and that she is to practice with her new tool until you do so. \"<i>Yes... " + player.mf("Master","Mistress") + ",</i>\" she answers tiredly, panting.\n\n");
@@ -4058,12 +4060,12 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//--LACTATION--
 			if (flags[kFLAGS.AMILY_LACTATION_RATE] == 0) { //Not lactating
 				//Less than C-cup
-				if (flags[kFLAGS.AMILY_CUP_SIZE] < AppearanceDefs.BREAST_CUP_C) {
+				if (flags[kFLAGS.AMILY_CUP_SIZE] < BreastCup.C) {
 					outputText("\n\nIt's quite obvious when the lactaid kicks in; her " + Appearance.breastCup(flags[kFLAGS.AMILY_CUP_SIZE]) + " breasts suddenly puff out, swelling into proud C-cup breasts, milk flowing freely from her nipples, leaving her shirt both severely strained and soaked in milk.  She squeaks in dismay, and races away, clearly going to try and clean herself up.");
-					flags[kFLAGS.AMILY_CUP_SIZE] = AppearanceDefs.BREAST_CUP_C;
+					flags[kFLAGS.AMILY_CUP_SIZE] = BreastCup.C;
 				}
 				//C-cup or greater
-				else if (flags[kFLAGS.AMILY_CUP_SIZE] >= AppearanceDefs.BREAST_CUP_C) {
+				else if (flags[kFLAGS.AMILY_CUP_SIZE] >= BreastCup.C) {
 					outputText("\n\n\"<i>So...  when is this supposed to start - yeek</i>!\" She suddenly squeaks in shock as she realizes her shirt is growing damp.  She hastily pulls her top open, grabbing at her dripping breasts.  \"<i>I, I just gotta go take care of this.</i>\" She explains, blushing and then scampering away.");
 				}
 			}
@@ -6650,7 +6652,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("Her words please you, and you ");
 			if(player.isNaga()) outputText("coil your serpentine tail around her head.");
-			else if(player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_GOO) outputText("engulf her maw in slime.");
+			else if(player.lowerBody == LowerBody.GOO) outputText("engulf her maw in slime.");
 			else outputText("put a [foot] on her head.");
 			outputText(" She falls silent and you say. \"<i>Very well. From now on I am your one and only " + player.mf("master","mistress") + ".  You will address me as such, always. My word is law, and you shall do whatever I tell you to, whenever I tell you to. Rise, it's time to break you into your new role as my cum-dumpster.</i>\"\n\n");
 
@@ -6729,7 +6731,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("Her words please you, and you ");
 			if(player.isNaga()) outputText("coil your serpentine tail around her head.");
-			else if(player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_GOO) outputText("engulf her maw in slime.");
+			else if(player.lowerBody == LowerBody.GOO) outputText("engulf her maw in slime.");
 			else outputText("put a [foot] on her head.");
 			outputText("  She falls silent and you say, \"<i>Very well. From now on I am your one and only mistress. You will address me as such, always. My word is law, and you shall do whatever I tell you to, whenever I tell you to. Rise, it's time to break you into your new role as my cum-dumpster.</i>\"\n\n");
 
@@ -7343,7 +7345,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			}
 			//(Merge):
 			outputText("Working delicately, she carefully coats her shaft in a generous layer of the green ointment, until her cock glistens with an odd greenish sheen.  You take your position on the ground, lowering yourself down onto your knees and elbows, resting your chin on top of your hands and raising your " + buttDescript() + " into the air");
-			if(player.tailType > AppearanceDefs.TAIL_TYPE_NONE) outputText(", moving your tail out of the way");
+			if(player.tailType > Tail.NONE) outputText(", moving your tail out of the way");
 			outputText(".\n\n");
 
 			outputText("Amily ");

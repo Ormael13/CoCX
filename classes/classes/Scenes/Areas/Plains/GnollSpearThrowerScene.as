@@ -4,6 +4,8 @@
 package classes.Scenes.Areas.Plains
 {
 import classes.*;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 
@@ -113,7 +115,7 @@ public class GnollSpearThrowerScene extends BaseContent
 
 			outputText("Sharp talons press against your back, leaving eight lines of sensation as they trace down your body and along your " + hipDescript() + ".  You feel the heat of her breath just above your ear.  \"<i>The queens of the savanna demand submission.  You are only welcome in these lands so long as you pay tribute to us in the most primal of ways.</i>\"  ");
 			//<For characters with non-naga tails>
-			if (player.tailType > AppearanceDefs.TAIL_TYPE_NONE) outputText("One furred paw wraps around your tail before pulling up sharply, exposing your " + assholeDescript() + " to the hot, savanna air.  Sharp fangs clamp onto the tail, holding it up to rob you of any remaining modesty.");
+			if (player.tailType > Tail.NONE) outputText("One furred paw wraps around your tail before pulling up sharply, exposing your " + assholeDescript() + " to the hot, savanna air.  Sharp fangs clamp onto the tail, holding it up to rob you of any remaining modesty.");
 			//<For characters without tails>
 			else outputText("One furred paw disappears before a single claw presses roughly against your " + assholeDescript() + " until she hears your breath catch in your throat.");
 			outputText("  A soft whimper escapes your lips when something hard and damp slides firmly along your rump.  You can hear lust-filled panting from the hyena as she grinds her massive clit against your trapped form, letting you feel the warmth of her body.\n\n");
@@ -147,7 +149,7 @@ public class GnollSpearThrowerScene extends BaseContent
 			else outputText("letting you fall hard into the grass.");
 			outputText("  As you slowly fade into unconsciousness from the orgasm, you see the hyena draw a finger along the tip of her cunt until the spotted fingers glisten with moisture.  Those fingers roughly rub the thick, potent fluid against your face, coating it with her scent and the knowledge of her victory.");
 			//<For Slimes> 
-			if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_GOO) outputText("  Even as your eyes slide closed, you see the hyena kicking open the circle of dust.");
+			if (player.lowerBody == LowerBody.GOO) outputText("  Even as your eyes slide closed, you see the hyena kicking open the circle of dust.");
 			outputText("  The last thing you hear before blackness overtakes you is the barking laugh of the hyena as she leaves her newest conquest to sleep in the fields of grass.");
 			player.orgasm();
 			dynStats("sen", 2);

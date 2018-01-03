@@ -1,6 +1,12 @@
 ﻿package classes.Scenes.Areas.Forest
 {
 import classes.*;
+import classes.BodyParts.Antennae;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Wings;
 import classes.GlobalFlags.*;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects.Combat.ParalyzeVenomDebuff;
@@ -107,14 +113,14 @@ public class BeeGirl extends Monster {
 			this.short = "bee-girl";
 			this.imageName = "beegirl";
 			this.long = "A bee-girl buzzes around you, filling the air with intoxicatingly sweet scents and a buzz that gets inside your head.  She has a humanoid face with small antennae, black chitin on her arms and legs that looks like shiny gloves and boots, sizable breasts, and a swollen abdomen tipped with a gleaming stinger.";
-			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_SLAVERING, AppearanceDefs.VAGINA_LOOSENESS_GAPING);
+			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_GAPING);
 			createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = rand(14) + 59;
-			this.hipRating = AppearanceDefs.HIP_RATING_CURVY+3;
-			this.buttRating = AppearanceDefs.BUTT_RATING_EXPANSIVE;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_BEE;
+			this.hipRating = Hips.RATING_CURVY+3;
+			this.buttRating = Butt.RATING_EXPANSIVE;
+			this.lowerBody = LowerBody.BEE;
 			this.skinTone = "yellow";
 			this.hairColor = randomChoice("black","black and yellow");
 			this.hairLength = 6;
@@ -136,9 +142,9 @@ public class BeeGirl extends Monster {
 					.add(consumables.W__BOOK, 1 / 4)
 					.add(consumables.BEEHONY, 1 / 2)
 					.elseDrop(useables.B_CHITN);
-			this.antennae = AppearanceDefs.ANTENNAE_BEE;
-			this.wingType = AppearanceDefs.WING_TYPE_BEE_LIKE_SMALL;
-			this.tailType = AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN;
+			this.antennae = Antennae.BEE;
+			this.wingType = Wings.BEE_LIKE_SMALL;
+			this.tailType = Tail.BEE_ABDOMEN;
 			this.tailVenom = 100;
 			this.special1 = beeStingAttack;
 			checkMonster();

@@ -4,7 +4,12 @@
 package classes.Scenes.Areas.Bog
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Ears;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Wings;
 import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
@@ -271,17 +276,17 @@ public class Phouka extends Monster
 			this.cumMultiplier = 5;
 			this.hoursSinceCum = 20;
 			createBreastRow(0);
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 5;
-			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
-			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HUMAN;
-			this.armType = AppearanceDefs.ARM_TYPE_HUMAN;
+			this.hipRating = Hips.RATING_SLENDER;
+			this.buttRating = Butt.RATING_TIGHT;
+			this.lowerBody = LowerBody.HUMAN;
+			this.armType = Arms.HUMAN;
 			this.skinTone = "black";
 			this.hairColor = "black";
 			this.hairLength = 1;
-			this.earType = AppearanceDefs.EARS_ELFIN;
+			this.earType = Ears.ELFIN;
 			initStrTouSpeInte(90, 70, 140, 40);
 			initWisLibSensCor(40, 90, 35, 100);
 			this.weaponName = "claws";
@@ -301,7 +306,7 @@ public class Phouka extends Monster
 				.add(consumables.SDELITE, 13)
 				.add(consumables.P_WHSKY, 35)
 				.add(null, 20);
-			this.wingType = AppearanceDefs.WING_TYPE_GIANT_DRAGONFLY; //Maybe later, if the PC can get them, make a Faerie wing type.
+			this.wingType = Wings.GIANT_DRAGONFLY; //Maybe later, if the PC can get them, make a Faerie wing type.
 			this.wingDesc = "small black faerie wings";
 			checkMonster();
 		}

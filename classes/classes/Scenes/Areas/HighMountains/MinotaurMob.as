@@ -1,6 +1,11 @@
 package classes.Scenes.Areas.HighMountains
 {
 import classes.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Face;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 
@@ -159,18 +164,18 @@ import classes.Scenes.SceneLib;
 			this.cumMultiplier = 1.5;
 			this.hoursSinceCum = ballSize * 10;
 			createBreastRow(0);
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = rand(37) + 84;
-			this.hipRating = AppearanceDefs.HIP_RATING_AVERAGE;
-			this.buttRating = AppearanceDefs.BUTT_RATING_AVERAGE+1;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HOOFED;
+			this.hipRating = Hips.RATING_AVERAGE;
+			this.buttRating = Butt.RATING_AVERAGE+1;
+			this.lowerBody = LowerBody.HOOFED;
 			this.skin.growFur({color:"red"});
 			this.skinDesc = "shaggy fur";
 			this.hairColor = randomChoice("black","brown");
 			this.hairLength = 3;
-			this.faceType = AppearanceDefs.FACE_COW_MINOTAUR;
+			this.faceType = Face.COW_MINOTAUR;
 			initStrTouSpeInte(80, 110, 30, 20);
 			initWisLibSensCor(20, 100, 15, 35);
 			this.weaponName = "fists";
@@ -191,7 +196,7 @@ import classes.Scenes.SceneLib;
 			if(level > 29) level = 29;
 			this.level = level;
 			this.gems = rand(50) + 100;
-			this.tailType = AppearanceDefs.TAIL_TYPE_COW;
+			this.tailType = Tail.COW;
 			this.special1 = SceneLib.mountain.minotaurScene.minoPheromones;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);

@@ -1,0 +1,28 @@
+package classes.BodyParts {
+import classes.Creature;
+
+public class Eyes extends BodyPart {
+	public var count:int;
+	public static const HUMAN:int                = 0;
+	public static const FOUR_SPIDER_EYES:int     = 1;
+	public static const BLACK_EYES_SAND_TRAP:int = 2;
+	public static const CAT_SLITS:int            = 3;
+	public static const GORGON:int               = 4;
+	public static const FENRIR:int               = 5;
+	public static const MANTICORE:int            = 6;
+	public static const FOX:int                  = 7;
+	public static const REPTILIAN:int            = 8;
+	public static const SNAKE:int                = 9;
+	public static const DRAGON:int               = 10;
+	public static const DEVIL:int                = 11;
+	public static const ONI:int                  = 12;
+	public static const ELF:int                  = 13;
+	public static const RAIJU:int                = 14;
+	public static const VAMPIRE:int              = 15;
+	public static const GEMSTONES:int            = 16;
+	
+	public function Eyes(creature:Creature, publicPrimitives:Array) {
+		super(creature, publicPrimitives);
+	}
+}
+}

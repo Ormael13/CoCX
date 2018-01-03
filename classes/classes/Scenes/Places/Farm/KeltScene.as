@@ -1,5 +1,8 @@
 ﻿package classes.Scenes.Places.Farm {
 import classes.*;
+import classes.BodyParts.Face;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
 
 public class KeltScene extends AbstractFarmContent{
@@ -918,7 +921,7 @@ private function keltResistance():void {
 	spriteSelect(35);
 	clearOutput();
 	outputText("You close your eyes, ");
-	if(player.faceType == AppearanceDefs.FACE_HORSE || player.faceType == AppearanceDefs.FACE_DOG) outputText("a low growl building in the back of your throat");
+	if(player.faceType == Face.HORSE || player.faceType == Face.DOG) outputText("a low growl building in the back of your throat");
 	else outputText("fighting anger-fueled muscle-spasms");
 	outputText(" as Kelt's insults go too far.  You've had just about enough of his disingenuous assertions!\r\r");
 	outputText("An idea on how to put him in his place slowly forms in the back of your mind, though you're sure pulling it off would humiliate the puffed-up centaur into never his showing his face around the farm again.  Do you do it?");
@@ -937,7 +940,7 @@ private function fuckKeltsShitUp():void {
 	spriteSelect(35);
 	clearOutput();
 	//If naga folks
-	if (player.faceType == AppearanceDefs.FACE_SNAKE_FANGS && player.tongueType == AppearanceDefs.TONGUE_SNAKE && player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_NAGA) {
+	if (player.faceType == Face.SNAKE_FANGS && player.tongueType == Tongue.SNAKE && player.lowerBody == LowerBody.NAGA) {
 		outputText(images.showImage("kelt-farm-naga-subkelt"));
 		outputText("Feigning a coy smile, you lick your lips with your forked tongue and beckon Kelt towards you.  The foolish stud trots over to you saying \"<i>That's more like it, worm.  Maybe when I'm done with your mouth, I'll let you have my dick in your ass, too.</i>\"  His sheath ripples and swells as his thick member begins to slowly droop out from the folded skin, hanging towards the ground.  It continues growing as he comes closer and closer, until it finally begins to grow rigid and arc towards your face.  You feel a moment of self-doubt as you breathe in his wonderful scent - wouldn't it be better, safer to just give in?  No, says a cold, reptile voice in your head.  You are the predator here and he, arrogant prey, has stepped into your trap.  Make him pay.  Make him know where his place in the world is.\r\r");
 
@@ -1042,7 +1045,7 @@ private function fuckKeltsShitUp():void {
 		}
 		else if(player.hasVagina() && (player.cockTotal() == 0 || rand(2) == 0)) {
 			outputText("You spread your [legs] and expose your " + vaginaDescript(0) + ".  \"<i>Lick it, bitch,</i>\" you command.  When he doesn't, you give the rope a pull, and his hooves paw at the dirt in pain.  \"<i>I said LICK!</i>\" you scream, and this time he does.  His tongue slips between your puffy folds ");
-			if(player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_SLICK) outputText("tasting them experimentally.  ");
+			if(player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLICK) outputText("tasting them experimentally.  ");
 			else outputText("immediately becoming slick with your fuck-me-juices.  ");
 			outputText("\"<i>Deeper,</i>\" you sigh, and he complies, no longer capable of resistance.  You make him tonguefuck you until you come to a shuddering, cunt-clenching orgasm.");
 			if(player.cockTotal() > 0) outputText("Your [cock] splatters cock-cream into his hair, further humiliating him.");

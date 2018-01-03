@@ -1,6 +1,9 @@
 ﻿package classes.Scenes.Areas.Lake
 {
 import classes.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
@@ -67,12 +70,12 @@ public class GreenSlime extends Monster
 			this.pronoun2 = "it";
 			this.pronoun3 = "its";
 			createBreastRow(0);
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = AssClass.WETNESS_SLIME_DROOLING;
 			this.tallness = rand(8) + 80;
-			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE;
-			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_GOO;
+			this.hipRating = Hips.RATING_AMPLE;
+			this.buttRating = Butt.RATING_LARGE;
+			this.lowerBody = LowerBody.GOO;
 			this.skinTone = "green";
 			initStrTouSpeInte(25, 30, 10, 5);
 			initWisLibSensCor(5, 50, 60, 20);

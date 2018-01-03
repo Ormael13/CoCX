@@ -1,6 +1,10 @@
 package classes.Scenes.NPCs
 {
 import classes.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
@@ -284,16 +288,16 @@ public class Sheila extends Monster
 			}
 			
 			// this.plural = false;
-			this.createVagina(game.flags[kFLAGS.SHEILA_XP] <= 3 && !sheilaDemon, AppearanceDefs.VAGINA_WETNESS_SLICK, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(game.flags[kFLAGS.SHEILA_XP] <= 3 && !sheilaDemon, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 30, 0, 0, 0);
 			this.createBreastRow(game.flags[kFLAGS.SHEILA_CORRUPTION]/10);
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,20,0,0,0);
 			this.tallness = 6*12;
-			this.hipRating = AppearanceDefs.HIP_RATING_AVERAGE;
-			this.buttRating = AppearanceDefs.BUTT_RATING_AVERAGE+1;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_KANGAROO;
+			this.hipRating = Hips.RATING_AVERAGE;
+			this.buttRating = Butt.RATING_AVERAGE+1;
+			this.lowerBody = LowerBody.KANGAROO;
 			this.skinTone = "tan";
 			this.hairColor = "auburn";
 			this.hairLength = 11;
@@ -339,7 +343,7 @@ public class Sheila extends Monster
 						add(consumables.SUCMILK,1/3).
 						add(consumables.INCUBID,1/2);
 			}
-			this.tailType = AppearanceDefs.TAIL_TYPE_KANGAROO;
+			this.tailType = Tail.KANGAROO;
 			checkMonster();
 		}
 

@@ -1,13 +1,22 @@
 package classes {
 
-	import classes.GlobalFlags.*;
-	import classes.Items.*;
-	import classes.Scenes.Dreams;
-	import classes.Scenes.Holidays;
-	import classes.Scenes.SceneLib;
-	import classes.Scenes.NPCs.DivaScene;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Ears;
+import classes.BodyParts.Eyes;
+import classes.BodyParts.Face;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.RearBody;
+import classes.BodyParts.Skin;
+import classes.BodyParts.Tail;
+import classes.GlobalFlags.*;
+import classes.Items.*;
+import classes.Scenes.Dreams;
+import classes.Scenes.Holidays;
+import classes.Scenes.NPCs.DivaScene;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects.VampireThirstEffect;
-	public class PlayerEvents extends BaseContent implements TimeAwareInterface {
+
+public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//Handles all timeChange events for the player. Needed because player is not unique.
 		
 		public function PlayerEvents():void {
@@ -232,26 +241,26 @@ import classes.StatusEffects.VampireThirstEffect;
 				player.addStatusValue(StatusEffects.CuntStretched, 1, 1);
 				if (player.vaginas.length > 0) {
 					if (player.findPerk(PerkLib.FerasBoonWideOpen) < 0) {
-						if (player.vaginas[0].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_LOOSE && player.statusEffectv1(StatusEffects.CuntStretched) >= 200) {
+						if (player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_LOOSE && player.statusEffectv1(StatusEffects.CuntStretched) >= 200) {
 							outputText("\nYour " + Appearance.vaginaDescript(player,0) + " recovers from your ordeals, tightening up a bit.\n");
 							player.vaginas[0].vaginalLooseness--;
 							player.changeStatusValue(StatusEffects.CuntStretched, 1, 0);
 							needNext = true;
 						}
-						if (player.vaginas[0].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_GAPING && player.statusEffectv1(StatusEffects.CuntStretched) >= 100) {
+						if (player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING && player.statusEffectv1(StatusEffects.CuntStretched) >= 100) {
 							outputText("\nYour " + Appearance.vaginaDescript(player,0) + " recovers from your ordeals, tightening up a bit.\n");
 							player.vaginas[0].vaginalLooseness--;
 							player.changeStatusValue(StatusEffects.CuntStretched, 1, 0);
 							needNext = true;
 						}
-						if (player.vaginas[0].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE && player.statusEffectv1(StatusEffects.CuntStretched) >= 70) {
+						if (player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE && player.statusEffectv1(StatusEffects.CuntStretched) >= 70) {
 							outputText("\nYour " + Appearance.vaginaDescript(player,0) + " recovers from your ordeals and becomes tighter.\n");
 							player.vaginas[0].vaginalLooseness--;
 							player.changeStatusValue(StatusEffects.CuntStretched, 1, 0);
 							needNext = true;
 						}
 					}
-					if (player.vaginas[0].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_LEVEL_CLOWN_CAR && player.statusEffectv1(StatusEffects.CuntStretched) >= 50) {
+					if (player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_LEVEL_CLOWN_CAR && player.statusEffectv1(StatusEffects.CuntStretched) >= 50) {
 						outputText("\nYour " + Appearance.vaginaDescript(player,0) + " recovers from the brutal stretching it has received and tightens up a little bit, but not much.\n");
 						player.vaginas[0].vaginalLooseness--;
 						player.changeStatusValue(StatusEffects.CuntStretched, 1, 0);
@@ -287,7 +296,7 @@ import classes.StatusEffects.VampireThirstEffect;
 				}
 			}
 			if (player.findPerk(PerkLib.SlimeCore) >= 0) { //Lose slime core perk
-				if (player.vaginalCapacity() < 9000 || player.skinAdj != "slimy" || player.skinDesc != "skin" || player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_GOO) {
+				if (player.vaginalCapacity() < 9000 || player.skinAdj != "slimy" || player.skinDesc != "skin" || player.lowerBody != LowerBody.GOO) {
                     outputText("\nYour form ripples, as if uncertain at the changes your body is undergoing.  The goo of your flesh cools, its sensitive, responsive membrane thickening into [skin] while bones and muscles knit themselves into a cohesive torso, chest and hips gaining definition.  Translucent ooze clouds and the gushing puddle at your feet melts together, splitting into solid trunks as you regain your legs.  Before long, you can no longer see through your own body and, with an unsteady shiver, you pat yourself down, readjusting to solidity.  A lurching heat in your chest suddenly reminds you of the slime core that used to float inside you.  Gingerly touching your " + CoC.instance.player.chestDesc() + ", you can feel a small, second heartbeat under your ribs that gradually seems to be sinking, past your belly. A lurching wave of warmth sparks through you, knocking you off your fresh legs and onto your " + Appearance.buttDescription(player) + ".  A delicious pressure pulses in your abdomen and you loosen your [armor] as sweat beads down your neck.  You clench your eyes, tongue lolling in your mouth, and the pressure builds and builds until, in ecstatic release, your body arches in an orgasmic release.\n\n");
                     outputText("\nPanting, you open your eyes and see that, for once, the source of your climax wasn't your loins.  Feeling a warm, wetness on your abs, you investigate and find the small, heart-shaped nucleus that used to be inside your body has somehow managed to pass through your belly button. Exposed to the open air, the crimson organ slowly crystallizes, shrinking and hardening into a tiny ruby.  Rubbing the stone with your thumb, you're surprised to find that you can still feel a pulse within its glittering facets.  You stow the ruby heart, in case you need it again.\n");
 					player.createKeyItem("Ruby Heart", 0, 0, 0, 0); //[Add 'Ruby Heart' to key items. Player regains slime core if returning to goo body]
@@ -296,7 +305,7 @@ import classes.StatusEffects.VampireThirstEffect;
 				}
 			}
 			if (player.hasKeyItem("Ruby Heart") >= 0) { //Regain slime core
-				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && player.findPerk(PerkLib.SlimeCore) < 0 && player.isGoo() && player.gooScore() >= 4 && player.vaginalCapacity() >= 9000 && player.skinAdj == "slimy" && player.skinDesc == "skin" && player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_GOO) {
+				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && player.findPerk(PerkLib.SlimeCore) < 0 && player.isGoo() && player.gooScore() >= 4 && player.vaginalCapacity() >= 9000 && player.skinAdj == "slimy" && player.skinDesc == "skin" && player.lowerBody == LowerBody.GOO) {
 					outputText("\nAs you adjust to your new, goo-like body, you remember the ruby heart you expelled so long ago.  As you reach to pick it up, it quivers and pulses with a warm, cheerful light.  Your fingers close on it and the nucleus slides through your palm, into your body!\n\n");
 					
 					outputText("There is a momentary pressure in your chest and a few memories that are not your own flicker before your eyes.  The dizzying sight passes and the slime core settles within your body, imprinted with your personality and experiences.  There is a comforting calmness from your new nucleus and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n");
@@ -308,7 +317,7 @@ import classes.StatusEffects.VampireThirstEffect;
 				}
 			}
 			if (player.hasStatusEffect(StatusEffects.SlimeCraving)) { //Slime craving stuff
-				if (player.vaginalCapacity() < 9000 || player.skinAdj != "slimy" || player.skinDesc != "skin" || player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_GOO) {
+				if (player.vaginalCapacity() < 9000 || player.skinAdj != "slimy" || player.skinDesc != "skin" || player.lowerBody != LowerBody.GOO) {
 					outputText("\n<b>You realize you no longer crave fluids like you once did.</b>\n");
 					player.removeStatusEffect(StatusEffects.SlimeCraving);
 					player.removeStatusEffect(StatusEffects.SlimeCravingFeed);
@@ -638,7 +647,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 		private function hourlyCheckRacialPerks():Boolean {
 			var needNext:Boolean = false;
 			//Recharge tail
-			if (player.tailType == AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN || player.tailType == AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN || player.tailType == AppearanceDefs.TAIL_TYPE_SCORPION || player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL || player.faceType == AppearanceDefs.FACE_SNAKE_FANGS || player.faceType == AppearanceDefs.FACE_SPIDER_FANGS) { //Spider, Bee, Scorpion, Manticore and Naga Venom Recharge
+			if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS) { //Spider, Bee, Scorpion, Manticore and Naga Venom Recharge
 				if (player.tailRecharge < 5) player.tailRecharge = 5;
 				player.tailVenom += player.tailRecharge;
 				if (player.findPerk(PerkLib.ImprovedVenomGland) >= 0) player.tailVenom += 10;
@@ -650,7 +659,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				player.createPerk(PerkLib.ImprovedVenomGland, 0, 0, 0, 0);
 			}
 			//Flexibility perk
-			if (player.tailType == AppearanceDefs.TAIL_TYPE_CAT && player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_CAT && player.earType == AppearanceDefs.EARS_CAT) { //Check for gain of cat agility - requires legs, tail, and ears
+			if (player.tailType == Tail.CAT && player.lowerBody == LowerBody.CAT && player.earType == Ears.CAT) { //Check for gain of cat agility - requires legs, tail, and ears
 				if (player.findPerk(PerkLib.Flexibility) < 0) {
 					outputText("\nWhile stretching, you notice that you're much more flexible than you were before.  Perhaps this will make it a bit easier to dodge attacks in battle?\n\n(<b>Gained Perk: Flexibility</b>)\n");
 					player.createPerk(PerkLib.Flexibility, 0, 0, 0, 0);
@@ -663,7 +672,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				needNext = true;
 			}
 			//Lustzerker perk
-			if ((player.tailType == AppearanceDefs.TAIL_TYPE_SALAMANDER && player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_SALAMANDER && player.armType == AppearanceDefs.ARM_TYPE_SALAMANDER) || (player.findPerk(PerkLib.Lustzerker) < 0 && player.findPerk(PerkLib.SalamanderAdrenalGlands) >= 0)) { //Check for gain of lustzerker - requires legs, arms and tail
+			if ((player.tailType == Tail.SALAMANDER && player.lowerBody == LowerBody.SALAMANDER && player.armType == Arms.SALAMANDER) || (player.findPerk(PerkLib.Lustzerker) < 0 && player.findPerk(PerkLib.SalamanderAdrenalGlands) >= 0)) { //Check for gain of lustzerker - requires legs, arms and tail
 				if (player.findPerk(PerkLib.Lustzerker) < 0) {
 					outputText("\nAfter drinking the last drop another hip flask of firewater you starts to feel a weird, maybe slightly unpleasant feeling inside your body.  Like many tiny flames cursing inside your veins making you ponder whats just happening with your body.  Remembering about salamanders natural talent to enter a berserk-like state you quess that should be it.\n\n(<b>Gained Perk: Lustzerker</b>)");
 					player.createPerk(PerkLib.Lustzerker, 0, 0, 0, 0);
@@ -676,7 +685,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				needNext = true;
 			}
 			//Lizan Regeneration perk
-			if ((player.tailType == AppearanceDefs.TAIL_TYPE_LIZARD && player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_LIZARD && player.earType == AppearanceDefs.EARS_LIZARD) || (player.findPerk(PerkLib.LizanRegeneration) < 0 && player.findPerk(PerkLib.LizanMarrow) >= 0)) { //Check for gain of lustzerker - requires legs, arms and tail
+			if ((player.tailType == Tail.LIZARD && player.lowerBody == LowerBody.LIZARD && player.earType == Ears.LIZARD) || (player.findPerk(PerkLib.LizanRegeneration) < 0 && player.findPerk(PerkLib.LizanMarrow) >= 0)) { //Check for gain of lustzerker - requires legs, arms and tail
 				if (player.findPerk(PerkLib.LizanRegeneration) < 0) {
 					outputText("\nAfter drinking the last drop of reptilium you starts to feel unusual feeling somewhere inside your body.  Like many tiny waves moving inside your veins making you feel so much more refreshed than moment ago.  Remembering about fact that lizans are so much similar to lizards and those usualy posses natural talent to regenerate from even sever injuries you quessing it's could be that.\n\n(<b>Gained Perk: Lizan Regeneration</b>)");
 					player.createPerk(PerkLib.LizanRegeneration, 0, 0, 0, 0);
@@ -728,30 +737,30 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				//needNext = true;
 			}
 			//Freezing Breath
-			if (player.faceType == AppearanceDefs.FACE_WOLF && player.findPerk(PerkLib.FreezingBreath) < 0 && player.hasKeyItem("Fenrir Collar") >= 0) {
+			if (player.faceType == Face.WOLF && player.findPerk(PerkLib.FreezingBreath) < 0 && player.hasKeyItem("Fenrir Collar") >= 0) {
 				outputText("\nYou suddenly feel something raging in you wanting to be unleashed as it slowly climbs out of your chest. It rushes through your throat and you scream a titanic primordial roar as the air in front of you ondulate with a massive drop of temperature and everything covers with a thick layer of solid ice. You massage your throat for a moment noticing as thin volume of condensation constantly escape from your maw.\n\n(<b>Gained Perk: Freezing Breath</b>)\n");
 				player.createPerk(PerkLib.FreezingBreath, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if (player.faceType != AppearanceDefs.FACE_WOLF && player.findPerk(PerkLib.FreezingBreath) >= 0 && player.hasKeyItem("Fenrir Collar") >= 0) {
+			else if (player.faceType != Face.WOLF && player.findPerk(PerkLib.FreezingBreath) >= 0 && player.hasKeyItem("Fenrir Collar") >= 0) {
 				outputText("\nAs you no longer are wolf like enough to maintain the form of a full Fenrir your breath no longer freeze the ambient air.\n\n<b>(Lost Perk: Freezing Breath)</b>\n");
 				player.removePerk(PerkLib.FreezingBreath);
 				needNext = true;
 			}
 			//Fenrir Eyes
-			if (player.eyeType != AppearanceDefs.EYES_FENRIR && player.hasKeyItem("Fenrir Collar") >= 0) {
+			if (player.eyeType != Eyes.FENRIR && player.hasKeyItem("Fenrir Collar") >= 0) {
 				outputText("\nThe bone chilling voice of Fenrir ring in the back of your mind.");
 				outputText("\n\n\"<i>How dare you throw away my gifts...</i>\"");
 				outputText("\n\nThe collar power suddenly forcefully surge through your body transforming you back. \"<b>You now have glowing icy eyes.</b>\"\n");
-				player.eyeType = AppearanceDefs.EYES_FENRIR;
+				player.eyeType = Eyes.FENRIR;
 				needNext = true;
 			}
 			//Fenrir Back Ice Shards
-			if (player.rearBody != AppearanceDefs.REAR_BODY_FENRIR_ICE_SPIKES && player.hasKeyItem("Fenrir Collar") >= 0) {
+			if (player.rearBody != RearBody.FENRIR_ICE_SPIKES && player.hasKeyItem("Fenrir Collar") >= 0) {
 				outputText("\nThe bone chilling voice of Fenrir ring in the back of your mind.");
 				outputText("\n\n\"<i>How dare you throw away my gift...</i>\"");
 				outputText("\n\nThe collar power suddenly forcefully surge through your body transforming you back.\"<b>Your back is now covered with sharp ice spike constantly cooling the air around you. (Gained Frozen Waste and Cold Mastery perks)</b>\"\n");
-				player.rearBody = AppearanceDefs.REAR_BODY_FENRIR_ICE_SPIKES;
+				player.rearBody = RearBody.FENRIR_ICE_SPIKES;
 				needNext = true;
 			}
 			//Cold Affinity
@@ -779,16 +788,16 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				needNext = true;
 			}
 			//Aquatic Affinity
-			if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_ORCA && player.armType == AppearanceDefs.ARM_TYPE_ORCA && player.tailType == AppearanceDefs.TAIL_TYPE_ORCA && player.earType == AppearanceDefs.EARS_ORCA && player.findPerk(PerkLib.AquaticAffinity) < 0) {
+			if (player.lowerBody == LowerBody.ORCA && player.armType == Arms.ORCA && player.tailType == Tail.ORCA && player.earType == Ears.ORCA && player.findPerk(PerkLib.AquaticAffinity) < 0) {
 				outputText("\nYou suddenly feel an urge to jump into the nearest pool of water as your breath becomes ragged and messy. You swiftly run up to the stream and scream in release as you fill your aching respiratory systems with water. Wait water? You realise you just gained the ability to breath underwater but to make sure you can still breath normal air you go back to the surface. It soon appears you can still breath fresh air. Reassured on your condition you head back to camp.\n");
-				if (player.rearBody == AppearanceDefs.REAR_BODY_ORCA_BLOWHOLE) outputText("\nIt dawns on you that you didn't breath for a full hour. When you realise this you relax your blowhole and take in some air. Well wow it seems you can now hold in your oxigen for very lengthy period. This will be perfect for underwater explorations.\n");
+				if (player.rearBody == RearBody.ORCA_BLOWHOLE) outputText("\nIt dawns on you that you didn't breath for a full hour. When you realise this you relax your blowhole and take in some air. Well wow it seems you can now hold in your oxigen for very lengthy period. This will be perfect for underwater explorations.\n");
 				outputText("\n(<b>Gained Perk: Aquatic Affinity</b>)\n");
 				player.createPerk(PerkLib.AquaticAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if ((player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_ORCA || player.armType != AppearanceDefs.ARM_TYPE_ORCA || player.tailType != AppearanceDefs.TAIL_TYPE_ORCA || player.earType != AppearanceDefs.EARS_ORCA) && player.findPerk(PerkLib.AquaticAffinity) >= 0) {
+			else if ((player.lowerBody != LowerBody.ORCA || player.armType != Arms.ORCA || player.tailType != Tail.ORCA || player.earType != Ears.ORCA) && player.findPerk(PerkLib.AquaticAffinity) >= 0) {
 				outputText("\nAs you lose the respiratory organ to breath underwater it also becomes obvious that you will drown if attempting to breath water in. You will need to get items or transform to breath underwater again.\n");
-				if (player.rearBody == AppearanceDefs.REAR_BODY_ORCA_BLOWHOLE) outputText("\nYou take a deep breath in then out. It seems you can no longer hold your breath like the whales do. It will take some using to.</b>\n");
+				if (player.rearBody == RearBody.ORCA_BLOWHOLE) outputText("\nYou take a deep breath in then out. It seems you can no longer hold your breath like the whales do. It will take some using to.</b>\n");
 				outputText("\n<b>(Lost Perk: Aquatic Affinity)</b>\n");
 				player.removePerk(PerkLib.AquaticAffinity);
 				needNext = true;
@@ -841,36 +850,36 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				needNext = true;
 			}
 			//Tail Hunger
-			if (player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL && player.findPerk(PerkLib.ManticoreCumAddict) < 0) {
+			if (player.tailType == Tail.MANTICORE_PUSSYTAIL && player.findPerk(PerkLib.ManticoreCumAddict) < 0) {
 				outputText("\nYou suddenly feel a desire to eat, or rather, drink. It's like you have been thirsty for months, yet the thirst does not originate from your throat. Your tail pussy is dying for a mans meat and you feel that as long as you don't sate it, you will only be getting hornier! Cum... You need cum, a lot of it. It’s obvious now why manticores are this crazy for sex as you feel the urge to pounce and feed on every single male in Mareth you can find!\n");
 				flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] = 50;
 				player.createPerk(PerkLib.ManticoreCumAddict, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if (player.tailType != AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL && player.findPerk(PerkLib.ManticoreCumAddict) >= 0) {
+			if (player.tailType != Tail.MANTICORE_PUSSYTAIL && player.findPerk(PerkLib.ManticoreCumAddict) >= 0) {
 				outputText("\nYou suddently feel like your mind is clear of the constant haze of lust and hunger for the first time since you had that tail. Losing it was perhaps for the best.\n");
 				player.removePerk(PerkLib.ManticoreCumAddict);
 				needNext = true;
 			}
 			//Vampire Thirst
-			if (player.faceType == AppearanceDefs.FACE_VAMPIRE && !player.hasStatusEffect(StatusEffects.VampireThirst)) {
+			if (player.faceType == Face.VAMPIRE && !player.hasStatusEffect(StatusEffects.VampireThirst)) {
 				outputText("\nAn ominous thirst settle in your throat as you begin to hallucinate glasses of blood… how delicious it would feel on your palates. You realise you are salivating and do your best to control yourself. Still you now are clearly dependant on blood.\n");
 				player.createStatusEffect(StatusEffects.VampireThirst, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if (player.faceType != AppearanceDefs.FACE_VAMPIRE && player.hasStatusEffect(StatusEffects.VampireThirst)) {
+			if (player.faceType != Face.VAMPIRE && player.hasStatusEffect(StatusEffects.VampireThirst)) {
 				outputText("\nAs your fang disappear so do your vampiric urges. You become disgusted with yourself as you realise how much blood you drank.\n");
 				player.removeStatusEffect(StatusEffects.VampireThirst);
 				needNext = true;
 			}
 			//Reset bad end warning
 			if (flags[kFLAGS.FOX_BAD_END_WARNING] == 1) {
-				if (player.faceType != AppearanceDefs.FACE_FOX || player.tailType != AppearanceDefs.TAIL_TYPE_FOX || player.earType != AppearanceDefs.EARS_FOX || player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_FOX || player.skinType != AppearanceDefs.SKIN_TYPE_FUR) {
+				if (player.faceType != Face.FOX || player.tailType != Tail.FOX || player.earType != Ears.FOX || player.lowerBody != LowerBody.FOX || player.skinType != Skin.FUR) {
 					flags[kFLAGS.FOX_BAD_END_WARNING] = 0;
 				}
 			}
 			/*if (flags[kFLAGS.PIG_BAD_END_WARNING] == 1) {
-			 if (player.faceType != FACE_PIG || player.tailType != TAIL_TYPE_PIG || player.earType != EARS_PIG || player.lowerBody != LOWER_BODY_TYPE_CLOVEN_HOOFED) {
+			 if (player.faceType != PIG || player.tailType != PIG || player.earType != PIG || player.lowerBody != CLOVEN_HOOFED) {
 			 flags[kFLAGS.PIG_BAD_END_WARNING] = 0;
 			 }
 			 }*/
@@ -887,26 +896,26 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				outputText("\nYou feel a strange tingling sensation. It seems as if you've finally adapted to the transformative properties of the food in Mareth and your body has finally built up enough resistance! You suspect that you can still transform but at somewhat diminished rate. \n\n(<b>Gained Perk: Transformation Resistance - Transformative items now have less chance to transform you. In addition, any Bad Ends related to overdose of certain transformative items are now disabled.</b>)\n");
 				player.createPerk(PerkLib.TransformationResistance, 0, 0, 0, 0);
 			}
-			if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 && player.perkv4(PerkLib.EnlightenedNinetails) == 0 && (player.tailType != AppearanceDefs.TAIL_TYPE_FOX || player.tailCount < 9)) { //Check ninetails perks!
+			if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 && player.perkv4(PerkLib.EnlightenedNinetails) == 0 && (player.tailType != Tail.FOX || player.tailCount < 9)) { //Check ninetails perks!
 				outputText("\n<b>Without your tails, the magic power they once granted withers and dies, vanishing completely.</b>\n");
 				player.removePerk(PerkLib.EnlightenedNinetails);
 				needNext = true;
 			}
-			if (player.findPerk(PerkLib.CorruptedNinetails) >= 0 && player.perkv4(PerkLib.CorruptedNinetails) == 0 && (player.tailType != AppearanceDefs.TAIL_TYPE_FOX || player.tailCount < 9)) { //Check ninetails perks!
+			if (player.findPerk(PerkLib.CorruptedNinetails) >= 0 && player.perkv4(PerkLib.CorruptedNinetails) == 0 && (player.tailType != Tail.FOX || player.tailCount < 9)) { //Check ninetails perks!
 				outputText("\n<b>Without your tails, the magic power they once granted withers and dies, vanishing completely.</b>\n");
 				player.removePerk(PerkLib.CorruptedNinetails);
 				needNext = true;
 			}
-			if (!player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.hasPerk(PerkLib.EnlightenedNinetails) && player.perkv4(PerkLib.EnlightenedNinetails) > 0 && player.hasPerk(PerkLib.CorruptedNinetails) && player.perkv4(PerkLib.CorruptedNinetails) > 0 && player.tailType == AppearanceDefs.TAIL_TYPE_FOX && player.tailCount == 9) {
+			if (!player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.hasPerk(PerkLib.EnlightenedNinetails) && player.perkv4(PerkLib.EnlightenedNinetails) > 0 && player.hasPerk(PerkLib.CorruptedNinetails) && player.perkv4(PerkLib.CorruptedNinetails) > 0 && player.tailType == Tail.FOX && player.tailCount == 9) {
 				outputText("\n<b>With your nine tails you suddenly feel something beyond merely two paths of corruption and true enlightenment. A third way, the way of treading a fragile path of balance between other two paths. \n\n(Gained Perk: Nine-tails Kitsune of Balance)</b>\n");
 				player.createPerk(PerkLib.NinetailsKitsuneOfBalance, 0, 0, 0, 0);
 			}
-			if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) == 0 && (player.tailType != AppearanceDefs.TAIL_TYPE_FOX || player.tailCount < 9)) {
+			if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) == 0 && (player.tailType != Tail.FOX || player.tailCount < 9)) {
 				outputText("\n<b>Without your tails, the balance is disturbed and you loose your insights into the third path.</b>\n");
 				player.removePerk(PerkLib.NinetailsKitsuneOfBalance);
 				needNext = true;
 			}
-			if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HARPY && player.tailType == AppearanceDefs.TAIL_TYPE_HARPY && player.findPerk(PerkLib.HarpyWomb) >= 0) { //Make eggs big if harpied!
+			if (player.lowerBody == LowerBody.HARPY && player.tailType == Tail.HARPY && player.findPerk(PerkLib.HarpyWomb) >= 0) { //Make eggs big if harpied!
 				if (player.hasStatusEffect(StatusEffects.Eggs) && player.statusEffectv2(StatusEffects.Eggs) == 0) {
 					player.changeStatusValue(StatusEffects.Eggs, 2, 1);
 					outputText("\n<b>A familiar, motherly rumble lets you know that your harpy-like womb is growing your eggs nice and large.</b>\n");
@@ -936,17 +945,17 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				player.removePerk(PerkLib.Diapause);
 				needNext = true;
 			}
-			if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_NAGA) {
-				if (player.tailType > AppearanceDefs.TAIL_TYPE_NONE) {
+			if (player.lowerBody == LowerBody.NAGA) {
+				if (player.tailType > Tail.NONE) {
 					outputText("\nYour tail squirms, wriggling against your larger naga tail as the scales part around it, absorbing it.  <b>Your form is completely scaly and smooth from the waist down.</b>\n");
-					player.tailType = AppearanceDefs.TAIL_TYPE_NONE;
+					player.tailType = Tail.NONE;
 					needNext = true;
 				}
 			}
 			if (player.findPerk(PerkLib.WetPussy) >= 0 && player.hasVagina()) {
-				if (player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_WET) {
+				if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_WET) {
 					outputText("\n<b>Your " + player.vaginaDescript(0) + " returns to its normal, wet state.</b>\n");
-					player.vaginas[0].vaginalWetness = AppearanceDefs.VAGINA_WETNESS_WET;
+					player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_WET;
 					needNext = true;
 				}
 			}
@@ -1020,17 +1029,17 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				}
 			}
 			if (player.findPerk(PerkLib.SpiderOvipositor) >= 0 || player.findPerk(PerkLib.BeeOvipositor) >= 0 || player.findPerk(PerkLib.MantisOvipositor) >= 0) { //Spider, Bee and Mantis ovipositor updates
-				if (player.findPerk(PerkLib.SpiderOvipositor) >= 0 && (!player.isDrider() || player.tailType != AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN)) { //Remove dat shit!
+				if (player.findPerk(PerkLib.SpiderOvipositor) >= 0 && (!player.isDrider() || player.tailType != Tail.SPIDER_ADBOMEN)) { //Remove dat shit!
 					outputText("\n<b>Your ovipositor (and eggs) vanish since your body has become less spider-like.</b>\n");
 					player.removePerk(PerkLib.SpiderOvipositor);
 					needNext = true;
 				}
-				else if (player.findPerk(PerkLib.BeeOvipositor) >= 0 && player.tailType != AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN) { //Remove dat shit!
+				else if (player.findPerk(PerkLib.BeeOvipositor) >= 0 && player.tailType != Tail.BEE_ABDOMEN) { //Remove dat shit!
 					outputText("\n<b>Your ovipositor (and eggs) vanish since your body has become less bee-like.</b>\n");
 					player.removePerk(PerkLib.BeeOvipositor);
 					needNext = true;
 				}
-				else if (player.findPerk(PerkLib.MantisOvipositor) >= 0 && player.tailType != AppearanceDefs.TAIL_TYPE_MANTIS_ABDOMEN) { //Remove dat shit!
+				else if (player.findPerk(PerkLib.MantisOvipositor) >= 0 && player.tailType != Tail.MANTIS_ABDOMEN) { //Remove dat shit!
 					outputText("\n<b>Your ovipositor (and eggs) vanish since your body has become less mantis-like.</b>\n");
 					player.removePerk(PerkLib.MantisOvipositor);
 					needNext = true;

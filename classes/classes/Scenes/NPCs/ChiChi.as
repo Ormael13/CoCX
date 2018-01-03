@@ -5,8 +5,9 @@
 package classes.Scenes.NPCs 
 {
 import classes.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -193,15 +194,15 @@ use namespace CoC;
 			this.a = "";
 			this.short = "Master Chi Chi of the four winds";
 			this.long = "";
-			createVagina(true,AppearanceDefs.VAGINA_WETNESS_NORMAL,AppearanceDefs.VAGINA_LOOSENESS_TIGHT);
+			createVagina(true,VaginaClass.WETNESS_NORMAL,VaginaClass.LOOSENESS_TIGHT);
 			this.createStatusEffect(StatusEffects.BonusVCapacity,60,0,0,0);
 			createBreastRow(Appearance.breastCupInverse("C"));
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,20,0,0,0);
 			this.tallness = 72;
-			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
-			this.buttRating = AppearanceDefs.BUTT_RATING_NOTICEABLE+1;
+			this.hipRating = Hips.RATING_AMPLE+2;
+			this.buttRating = Butt.RATING_NOTICEABLE+1;
 			this.skinTone = "light";
 			this.hairColor = "pinkish red";
 			this.hairLength = 13;
@@ -217,9 +218,9 @@ use namespace CoC;
 			this.gems = 45 + rand(40);
 			if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 2) this.drop = new ChainedDrop().add(weapons.MASTGLO, 1);
 			else this.drop = new ChainedDrop().add(consumables.MOUSECO, 0.2);//do zmiany potem
-			//this.armType = ARM_TYPE_LION;
-			//this.lowerBody = LOWER_BODY_TYPE_LION;
-			//this.tailType = TAIL_TYPE_MANTICORE_PUSSYTAIL;
+			//this.armType = LION;
+			//this.lowerBody = LION;
+			//this.tailType = MANTICORE_PUSSYTAIL;
 			//this.tailRecharge = 0;
 			if (flags[kFLAGS.CHI_CHI_AFFECTION] < 20) this.createPerk(PerkLib.MonsterRegeneration, 5, 0, 0, 0);
 			this.createPerk(PerkLib.FireNature, 0, 0, 0, 0);

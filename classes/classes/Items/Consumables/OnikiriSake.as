@@ -2,7 +2,13 @@
  * @author Liadri
  */
 package classes.Items.Consumables {
-import classes.AppearanceDefs;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Ears;
+import classes.BodyParts.Eyes;
+import classes.BodyParts.Face;
+import classes.BodyParts.Horns;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Skin;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumable;
 import classes.Items.Mutations;
@@ -97,72 +103,72 @@ public class OnikiriSake extends Consumable {
 		}
 		//Physical changes
 		//Legs
-		if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_HUMAN && changes < changeLimit && rand(4) == 0) {
+		if (player.lowerBody == LowerBody.HUMAN && changes < changeLimit && rand(4) == 0) {
 			outputText("\n\nNot again! Now it's the skin on your legs that is burning as a whole set of intricate warlike tattoos covers them. Furthermore, your toenails become increasingly pointed turning black just like a set of claws. Well it seems you will have get used to your");
 			outputText(" <b>war tattooed legs and feet topped with sharp nails.</b>");
-			mutations.setLowerBody(AppearanceDefs.LOWER_BODY_TYPE_ONI);
+			mutations.setLowerBody(LowerBody.ONI);
 			changes++;
 		}
-		if (player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_ONI && player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_HUMAN && player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
+		if (player.lowerBody != LowerBody.ONI && player.lowerBody != LowerBody.HUMAN && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
 			mutations.humanizeLowerBody();
 		}
 		//Arms
-		if (player.armType != AppearanceDefs.ARM_TYPE_ONI && player.armType != AppearanceDefs.ARM_TYPE_GARGOYLE && player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_ONI && changes < changeLimit && rand(3) == 0) {
+		if (player.armType != Arms.ONI && player.armType != Arms.GARGOYLE && player.lowerBody == LowerBody.ONI && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
-			if (player.armType != AppearanceDefs.ARM_TYPE_HUMAN) outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. ");
+			if (player.armType != Arms.HUMAN) outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. ");
 			outputText("The skin on your arms feels like it’s burning as a whole set of intricate warlike tattoos covers them. Furthermore your nails become increasingly pointed turning black just like a set of claws. Well it seems you will have issues hiding your <b>war tattooed arms with sharp nails.</b>");
-			mutations.setArmType(AppearanceDefs.ARM_TYPE_ONI);
+			mutations.setArmType(Arms.ONI);
 			changes++;
 		}
 		//Horn
-		if (rand(3) == 0 && changes < changeLimit && (player.hornType != AppearanceDefs.HORNS_ONI_X2 || player.hornType != AppearanceDefs.HORNS_ONI) && player.armType == AppearanceDefs.ARM_TYPE_ONI) {
+		if (rand(3) == 0 && changes < changeLimit && (player.hornType != Horns.ONI_X2 || player.hornType != Horns.ONI) && player.armType == Arms.ONI) {
 			if (rand(2) == 0) {
-				if (player.hornType == AppearanceDefs.HORNS_NONE) outputText("You moan in pleasure as a pair of bony horns push forward out of your forehead,");
+				if (player.hornType == Horns.NONE) outputText("You moan in pleasure as a pair of bony horns push forward out of your forehead,");
 				else outputText("You begin to feel an odd itching sensation as you feel your horns repositioning,");
 				outputText(" the things are actually surprisingly sensitive and you reach orgasm just from them reaching full size,");
 				if (player.gender == 1 || player.gender == 3) outputText(" your [cock] splatering cum on the ground");
 				if (player.gender == 3) outputText(" and");
 				if (player.gender == 2 || player.gender == 3) outputText(" your pussy gushing with a copious amount of juice");
 				outputText(". You would rather your opponent not know you have a G spot at the tip of your forehead and so you keep this information to yourself. <b>You now have a pair of horns just like an oni.</b>");
-				mutations.setHornType(AppearanceDefs.HORNS_ONI_X2, 1);
+				mutations.setHornType(Horns.ONI_X2, 1);
 			}
 			else {
-				if (player.hornType == AppearanceDefs.HORNS_NONE) outputText("You moan in pleasure as a single bony horn push forward out of your forehead,");
+				if (player.hornType == Horns.NONE) outputText("You moan in pleasure as a single bony horn push forward out of your forehead,");
 				else outputText("You begin to feel an odd itching sensation as you feel your horns repositioning and merging into one,");
 				outputText(" the thing is actually surprisingly sensitive and you reach orgasm just from it reaching full size,");
 				if (player.gender == 1 || player.gender == 3) outputText(" your [cock] splatering cum on the ground");
 				if (player.gender == 3) outputText(" and");
 				if (player.gender == 2 || player.gender == 3) outputText(" your pussy gushing with a copious amount of juice");
 				outputText(". You would rather your opponent not know you have a G spot at the tip of your forehead and so you keep this information to yourself. <b>You now have a horn just like an oni.</b>");
-				mutations.setHornType(AppearanceDefs.HORNS_ONI, 1);
+				mutations.setHornType(Horns.ONI, 1);
 			}
 			changes++;
 		}
 		//Eyes
-		if ((player.hornType == AppearanceDefs.HORNS_ONI_X2 || player.hornType == AppearanceDefs.HORNS_ONI)
-			&& (player.eyeType != AppearanceDefs.EYES_ONI || !InCollection(player.eyeColor, Mutations.oniEyeColors))&& changes < changeLimit && rand(3) == 0) {
+		if ((player.hornType == Horns.ONI_X2 || player.hornType == Horns.ONI)
+			&& (player.eyeType != Eyes.ONI || !InCollection(player.eyeColor, Mutations.oniEyeColors))&& changes < changeLimit && rand(3) == 0) {
 			var colorEyes:String;
 			colorEyes = randomChoice(Mutations.oniEyeColors);
-			mutations.setEyeTypeAndColor(AppearanceDefs.EYES_ONI,colorEyes);
+			mutations.setEyeTypeAndColor(Eyes.ONI,colorEyes);
 			outputText("\n\nYou feel something fundamental change in your sight when you go check yourself in a puddle you notice your iris now are <b>[eyecolor] just like that of an Oni with a slit at the center giving them a fiendish outlook.</b>");
 			changes++;
 		}
 		//Ears
-		if (player.eyeType == AppearanceDefs.EYES_ONI && player.earType == AppearanceDefs.EARS_HUMAN && player.earType != AppearanceDefs.EARS_ONI && changes < changeLimit && rand(3) == 0) {
+		if (player.eyeType == Eyes.ONI && player.earType == Ears.HUMAN && player.earType != Ears.ONI && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nYour ears tingle slightly as their shape sharpen to a point not unlike those of some kind of demonic fiend. Still you know all too well those are <b>Oni ears.</b>");
-			mutations.setEarType(AppearanceDefs.EARS_ONI);
+			mutations.setEarType(Ears.ONI);
 			changes++;
 		}
-		if (player.eyeType == AppearanceDefs.EYES_ONI && player.earType != AppearanceDefs.EARS_HUMAN && player.earType != AppearanceDefs.EARS_ONI && changes < changeLimit && rand(3) == 0) {
+		if (player.eyeType == Eyes.ONI && player.earType != Ears.HUMAN && player.earType != Ears.ONI && changes < changeLimit && rand(3) == 0) {
 			mutations.humanizeEars();
 			changes++;
 		}
 		//Face
-		if (player.earType == AppearanceDefs.EARS_ONI && player.faceType != AppearanceDefs.FACE_ONI_TEETH && changes < changeLimit && rand(3) == 0) {
+		if (player.earType == Ears.ONI && player.faceType != Face.ONI_TEETH && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nY");
-			if (player.faceType != AppearanceDefs.FACE_HUMAN) outputText("our face suddenly mold back into it’s former human shape. However y");
+			if (player.faceType != Face.HUMAN) outputText("our face suddenly mold back into it’s former human shape. However y");
 			outputText("ou feel your canines changing, growing bigger and slightly sharper. Hey you could pretend to be some kind of demon with that kind of mouth. <b>You now have oni canines.</b>");
-			mutations.setFaceType(AppearanceDefs.FACE_ONI_TEETH);
+			mutations.setFaceType(Face.ONI_TEETH);
 			changes++;
 		}
 		//Skin
@@ -176,19 +182,19 @@ public class OnikiriSake extends Consumable {
 			else outputText(player.skinDesc);
 			outputText(" changed to  " + player.skinTone + ". Wait, it really did!");
 		}
-		//mutationStep(player.skin.base.type == SKIN_TYPE_PLAIN && !player.skin.hasBattleTattoo(), 3, function(): void {
-		if (player.skin.base.type == AppearanceDefs.SKIN_TYPE_PLAIN && !player.skin.hasBattleTattoo() && rand(3) == 0 && changes < changeLimit) {
+		//mutationStep(player.skin.base.type == PLAIN && !player.skin.hasBattleTattoo(), 3, function(): void {
+		if (player.skin.base.type == Skin.PLAIN && !player.skin.hasBattleTattoo() && rand(3) == 0 && changes < changeLimit) {
 			outputText("\n\nAs you thought your skin couldn't handle more tattoo a few localised skin burns reveal a new set drawing along your skin, some decorating your chest. Well you might as well proudly display your <b>Oni tattooed skin.</b>");
 		//	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedTattoed)) {
 		//		outputText("\n\n<b>Genetic Memory: Tattoed Skin - Memorized!</b>\n\n");
 		//		player.createStatusEffect(StatusEffects.UnlockedTattoed, 0, 0, 0, 0);
 		//	}
-			player.skin.base.pattern = AppearanceDefs.PATTERN_BATTLE_TATTOO;
+			player.skin.base.pattern = Skin.PATTERN_BATTLE_TATTOO;
 			player.skin.base.adj = "battle tattooed";
 			changes++;
 		}
 		//});
-		if (!player.skin.hasBattleTattoo() && !player.hasPlainSkinOnly() && player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+		if (!player.skin.hasBattleTattoo() && !player.hasPlainSkinOnly() && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
 			mutations.humanizeSkin();
 		}
 		//Taller

@@ -19,7 +19,7 @@ package classes.Scenes.Areas
 		}
 		
 		public function exploreOuterBattlefield():void {
-			flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD]++
+			flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD]++;
 			
 			var choice:Array = [];
 			var select:int;

@@ -2,10 +2,11 @@
 package classes.Scenes.Areas.HighMountains 
 {
 import classes.*;
+import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.SceneLib;
+import classes.lists.Gender;
 
 public class MinervaPurification extends BaseContent
 	{
@@ -22,19 +23,19 @@ public class MinervaPurification extends BaseContent
 		
 		private function playerParentDesc(caps:Boolean = false):String {
 			switch(player.gender) {
-				case AppearanceDefs.GENDER_NONE:
+				case Gender.GENDER_NONE:
 					if (caps) return player.mf("Mommy", "Daddy");
 					else return player.mf("mommy", "daddy");
 					break;
-				case AppearanceDefs.GENDER_MALE:
+				case Gender.GENDER_MALE:
 					if (caps) return "Daddy";
 					else return "daddy";
 					break;
-				case AppearanceDefs.GENDER_FEMALE:
+				case Gender.GENDER_FEMALE:
 					if (caps) return "Mommy";
 					else return "mommy";
 					break;
-				case AppearanceDefs.GENDER_HERM: //A bit wonky. I should consider the maleherms.
+				case Gender.GENDER_HERM: //A bit wonky. I should consider the maleherms.
 					if (caps) return "Mommy-Daddy";
 					else return "mommy-daddy";
 					break;
@@ -1390,7 +1391,7 @@ public class MinervaPurification extends BaseContent
 			
 			outputText("\n\nThe intense sexual crescendo leaves her panting and sweaty as she struggles to stay up, her entire body shaking like jelly. \"<i>Oh... oh, [name], that was amazing. Gods... I came so hard, from both my dick and cunt... You're amazing, you know that, hun? Look at all that seed you made me waste,</i>\" she says, looking back at you with a playful grin. Minerva loosens the hold her tail has on you, giving you the chance to pull back from her juicy nethers");
 			//if demonic tongue:
-			if(player.tongueType == AppearanceDefs.TONGUE_DEMONIC) outputText(", your perversely prehensile tongue slowly retracting from her quivering quim, rubbing and teasing as it comes out and nearly sending the overly sensitive herm into another climax");
+			if(player.tongueType == Tongue.DEMONIC) outputText(", your perversely prehensile tongue slowly retracting from her quivering quim, rubbing and teasing as it comes out and nearly sending the overly sensitive herm into another climax");
 			outputText(".");
 			
 			outputText("\n\nWith you now released from her grasp, Minerva lets out a sigh and slumps to her side, narrowly missing the thick pool of white splooge on the ground. Her chest rising and falling as she pants, a big smile on her face showing how pleased she is, you can't help but feel a sense of pride at seeing how you were able to satisfy your lover. Even as tired as she is, Minerva keeps a playful grin on her lips, her surprisingly dexterous shark tail being used to yank you down on top of her.");

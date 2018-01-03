@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.Areas.Forest{
 import classes.*;
+import classes.BodyParts.Skin;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 
 public class TamaniScene extends BaseContent implements TimeAwareInterface {
 
@@ -753,7 +753,7 @@ internal function getRapedByTamaniYouHypnoSlut():void {
 		outputText("  She visibly orgasms, shaking and trembling from head to toe as her pussy milks your " + cockDescript(primary) + ".  It only lasts a few seconds, though they feel like heaven, before her body goes nerveless.\n\n");
 		
 		outputText("Taking that as an opportunity, you pick up the pace, plunging yourself in and out of her with a renewed, almost vicious vigor.  The wet slaps of your juice-");
-		if(player.skinType == AppearanceDefs.SKIN_TYPE_FUR) outputText("matted");
+		if(player.skinType == Skin.FUR) outputText("matted");
 		else outputText("slicked");
 		outputText(" [skin.type] impacting her ass fill the air.  You fuck your wife harder and faster with every stroke, knowing you won't last more than a few more thrusts before you're painting her womb white.  Your wife is too cummed out to care or respond, ");
 		if(cocks == 1) outputText("her tongue hanging out as she pants nonsensical pleasure-noises.");

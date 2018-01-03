@@ -1,5 +1,7 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 
@@ -309,7 +311,7 @@ private function RaphaelDressPtII():void {
 	
 	outputText("All over your body where the gossamer isn't reinforced with jacket or corset, the density of the delicate velvet web varies. Although the silk hugs across your " + vaginaDescript(0) + " and through the crack of your ass as a triple layer that guards against prying eyes, the surface of your hips and legs is clearly seen through the transparent motif of flowers swirling across the lace. The cheeks of your " + buttDescript() + " feel equally exposed despite the presence of four sweeping rosebranches stitched across them, but at least the jacket trails past your lower back and partly covers your buttocks with its parted tailflaps.");
 	//({If player has tail}
-	if(player.tailType > AppearanceDefs.TAIL_TYPE_NONE) outputText("  Your tail peeks out through the cut.");
+	if(player.tailType > Tail.NONE) outputText("  Your tail peeks out through the cut.");
 	outputText("  You still can't help but feel that anyone standing behind you is given a generous glimpse of your ornate ass, however. The same goes for your " + breastDescript(0) + "; cupped, lifted and presented as they are to the outside world by grasping silk. Their ample curve and tender flesh are clearly visible through the red lace. The only thing saving their modesty is the tactical application of a sea of organic patterns across the lower half, with the curl of two roses covering your " + nippleDescript(0) + "s. The ensemble comes with a pair of red stiletto high heels, but you're not sure you're ready for them. Wearing them would only perk up your noticeable posterior even more. That your " + breastDescript(0) + " contrast above a slender waist is enough for now. Maybe on special occasions.\n\n");
 	
 	outputText("You blush as the wind breezes by, and with the exception of the upper jacket, feel like you're wearing nothing at all. This sensation is only aggravated when you can't help but slip a finger across your inner thigh and feel it glide up effortlessly across the textile. It's like you've only become more sensitive for wearing it. Much to your amazement, the triple layer across your " + vaginaDescript(0) + " doesn't provide quite as much protection as you assumed earlier; at least not so much against roving fingers. You find the fabric across your womanhood has a hidden opening to it. Rubbing through it is enough to part the velvet folds and set your finger upon your own. It's not apparent, but anyone aware of this shameful split would have easy access to your depths without even disrobing you. You feel nude.\n\n");
@@ -366,7 +368,7 @@ private function RaphaelEncounterIIDressFollowup():void {
 		outputText("\"<i>What terrible tragedy! The land has taken its toll on the once so beautiful.</i>\" He looks down on you.\n\n");
 
 		//({If player has no legs, or a centaur body.}
-		if(player.isNaga() || player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_GOO || player.isTaur() || player.isDrider())
+		if(player.isNaga() || player.lowerBody == LowerBody.GOO || player.isTaur() || player.isDrider())
 			outputText("\"<i>You're missing half your body!</i>\" He refers to your morphed legs.\n\n");
 		//({If player has above E cup breasts} 
 		if(player.biggestTitSize() >= 7) outputText("\"<i>Your female curves... replaced with such... udders!</i>\" He looks at your bosom. \"<i>No woman could be elegant with such monstrosities up front!</i>\"\n\n");

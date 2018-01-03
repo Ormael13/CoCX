@@ -5,7 +5,11 @@
 package classes.Scenes.NPCs 
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Wings;
 import classes.internals.*;
 
 public class Syth extends Monster
@@ -157,12 +161,12 @@ public class Syth extends Monster
 			this.cumMultiplier = 3;
 			// this.hoursSinceCum = 0;
 			createBreastRow(0);
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 8*12;
-			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
-			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_SALAMANDER;
+			this.hipRating = Hips.RATING_SLENDER;
+			this.buttRating = Butt.RATING_TIGHT;
+			this.lowerBody = LowerBody.SALAMANDER;
 			this.hairColor = "white";
 			this.hairLength = 1;
 			initStrTouSpeInte(160, 120, 70, 60);
@@ -184,8 +188,8 @@ public class Syth extends Monster
 					add(weapons.DBFSWO,1/50).
 					add(armors.LEATHRA,1/20).
 					add(consumables.SALAMFW,0.7);
-			this.wingType = AppearanceDefs.WING_TYPE_BAT_LIKE_LARGE_2;
-			this.tailType = AppearanceDefs.TAIL_TYPE_SALAMANDER;
+			this.wingType = Wings.BAT_LIKE_LARGE_2;
+			this.tailType = Tail.SALAMANDER;
 			this.tailRecharge = 0;
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);

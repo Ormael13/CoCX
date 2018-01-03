@@ -936,7 +936,7 @@
                 <hide part="legs/*"/>
                 <show part="legs/chitin2"/>
             </case>
-            <case value="LowerBody.DRIDER_LOWER_BODY">
+            <case value="LowerBody.DRIDER">
                 <hide part="legs/*"/>
                 <show part="legs_bg/drider"/>
             </case>

@@ -1,7 +1,13 @@
 package classes.Scenes.Areas.VolcanicCrag 
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Ears;
+import classes.BodyParts.Face;
+import classes.BodyParts.Hips;
+import classes.BodyParts.Horns;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
 import classes.Scenes.SceneLib;
 
 public class Behemoth extends Monster
@@ -51,21 +57,21 @@ public class Behemoth extends Monster
 			this.ballSize = 3;
 			this.cumMultiplier = 25;
 			createBreastRow(Appearance.breastCupInverse("flat"));
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 9*12;
-			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
-			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			this.hipRating = Hips.RATING_BOYISH;
+			this.buttRating = Butt.RATING_TIGHT;
 			this.skin.base.color = "purple";
 			this.skin.growFur({color:"purple"});
 			this.hairColor = "black";
 			this.hairLength = 8;
-			this.earType = AppearanceDefs.EARS_ELFIN;
-			this.faceType = AppearanceDefs.FACE_CAT;
+			this.earType = Ears.ELFIN;
+			this.faceType = Face.CAT;
 			this.horns = 7;
-			this.hornType = AppearanceDefs.HORNS_DRACONIC_X2;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_CAT;
-			this.tailType = AppearanceDefs.TAIL_TYPE_BEHEMOTH;
+			this.hornType = Horns.DRACONIC_X2;
+			this.lowerBody = LowerBody.CAT;
+			this.tailType = Tail.BEHEMOTH;
 			initStrTouSpeInte(180, 130, 100, 115);
 			initWisLibSensCor(100, 35, 15, 15);
 			this.weaponName = "claws";

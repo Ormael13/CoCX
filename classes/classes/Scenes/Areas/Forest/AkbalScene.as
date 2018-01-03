@@ -4,6 +4,8 @@
 package classes.Scenes.Areas.Forest
 {
 import classes.*;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
 
@@ -143,7 +145,7 @@ public class AkbalScene extends BaseContent
 				primary = 0;
 			clearOutput();
 			//Naga RAPPUUUUUU
-			if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_NAGA)
+			if (player.lowerBody == LowerBody.NAGA)
 			{
 				outputText("You slither around the demon cat's form, wrapping him up until a scared whimper rises from his chest.  You continue to tighten your coils around Akbal until he's gasping for breath.  You ask him if he's going to be a good little demon for you.  He nods.\n\n");
 
@@ -808,7 +810,7 @@ public class AkbalScene extends BaseContent
 			}
 			clearOutput();
 			//Naga variant goez here
-			if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_NAGA)
+			if (player.lowerBody == LowerBody.NAGA)
 			{
 				outputText(images.showImage("akbal-deepwoods-naga-sumbitanal"));
 				outputText("After a few moments of thinking you nod to Akbal and the masculine voice in your head commands you to disrobe. You take off your [armor], setting it aside moments before the demon is upon you.\n\n");
@@ -878,7 +880,7 @@ public class AkbalScene extends BaseContent
 				outputText("You watch with fascination as Akbal rises onto his hind legs, his body melting into a more humanoid form.  His long, demonic cat-dick is already rock-hard and jutting out of his sheath.  He walks past your top half, moving around your body while sliding his hand across your haunch.  His hands are oddly warm.");
 
 				//(if centaur player has a tail)
-				if (player.tailType > AppearanceDefs.TAIL_TYPE_NONE)
+				if (player.tailType > Tail.NONE)
 					outputText("  As he makes his way to your hind quarters he grabs you by the tail, pulling it up and out the way with a feral, jaguar grin.  His free hand slides a finger across your " + assholeDescript() + " making you paw the ground with your hooves.");
 
 				//(No tail)

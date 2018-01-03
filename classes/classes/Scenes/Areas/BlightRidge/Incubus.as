@@ -5,8 +5,12 @@
 package classes.Scenes.Areas.BlightRidge
 {
 import classes.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -143,12 +147,12 @@ use namespace CoC;
 			this.cumMultiplier = 3;
 			// this.hoursSinceCum = 0;
 			createBreastRow(0);
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = AssClass.WETNESS_SLIME_DROOLING;
 			this.tallness = rand(9) + 70;
-			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE;
-			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_DEMONIC_CLAWS;
+			this.hipRating = Hips.RATING_AMPLE;
+			this.buttRating = Butt.RATING_TIGHT;
+			this.lowerBody = LowerBody.DEMONIC_CLAWS;
 			this.skinTone = "light purple";
 			this.hairColor = "black";
 			this.hairLength = 12;
@@ -174,8 +178,8 @@ use namespace CoC;
 			this.additionalXP = 50;
 			this.special1 = cockTripAttack2;
 			this.special2 = spoogeAttack2;
-			this.tailType = AppearanceDefs.TAIL_TYPE_DEMONIC;
-			this.wingType = AppearanceDefs.WING_TYPE_BAT_LIKE_TINY;
+			this.tailType = Tail.DEMONIC;
+			this.wingType = Wings.BAT_LIKE_TINY;
 			this.wingDesc = "tiny hidden";
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);

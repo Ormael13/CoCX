@@ -3,7 +3,6 @@
  */
 package classes.Items.Armors
 {
-import classes.AppearanceDefs;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armor;
@@ -13,6 +12,7 @@ import classes.Player;
 import classes.Scenes.Areas.HighMountains.MinotaurMob;
 import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.SceneLib;
+import classes.lists.BreastCup;
 
 public final class LustyMaidensArmor extends Armor {
 		
@@ -29,11 +29,11 @@ public final class LustyMaidensArmor extends Armor {
 			if (!super.canUse()) {
 				return false;
 			}
-			if (game.player.biggestTitSize() < AppearanceDefs.BREAST_CUP_A) { //{No titties}
+			if (game.player.biggestTitSize() < BreastCup.A) { //{No titties}
 				outputText("You slide the bikini top over your chest and buckle it into place, but the material hangs almost comically across your flat chest.  The cold chain dangles away from you, swaying around ridiculously before smacking, cold and hard into your [nipples].  This simply won't do - it doesn't fit you, and you switch back to your old armor.\n\n");
 				return false;
 			}
-			if (game.player.biggestTitSize() < AppearanceDefs.BREAST_CUP_D) { //{Too small titties}
+			if (game.player.biggestTitSize() < BreastCup.D) { //{Too small titties}
 				outputText("You slide the bikini top over your chest, shivering when the cold chains catch on your nipples, stiffening them nicely. The material nicely accentuates your chest, but there's a definite problem.  Your [chest] aren't big enough!  Sure, they look nice done up in glittering silver and gold trim.  If only the metal wasn't hanging loosely around your underbust, flopping around whenever you move.  It doesn't even look that sexy on you!  You'll need a bigger chest to truly make use of this armor.  For now, you switch back to your old equipment.\n\n");
 				return false;
 			}

@@ -119,7 +119,7 @@ public class Marae extends Monster
 			this.imageName = "marae";
 			if (game.flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
 				this.long = "This being is known as the goddess of Mareth. She is corrupted due to the aftermath of the factory valves being blown up. She's white all over and textured with bark. The \"flower\" below her belly button resembles more of a vagina than a flower. Her G-cup sized breasts jiggle with every motion.";
-				this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DROOLING, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
+				this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_NORMAL);
 				createBreastRow(Appearance.breastCupInverse("G"));
 				initStrTouSpeInte(300, 300, 170, 180);
 				initWisLibSensCor(180, 150, 25, 100);
@@ -135,7 +135,7 @@ public class Marae extends Monster
 			}
 			else {
 				this.long = "This being is known as the goddess of Mareth. She is no longer corrupted thanks to your actions at the factory. She's white all over and textured with bark. Her breasts are modestly sized.";
-				this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_WET, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
+				this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_NORMAL);
 				createBreastRow(Appearance.breastCupInverse("DD"));
 				initStrTouSpeInte(380, 380, 220, 260);
 				initWisLibSensCor(260, 30, 25, 0);

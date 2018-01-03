@@ -1,6 +1,5 @@
 package classes {
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Parser.Parser;
 import classes.Scenes.SceneLib;
 import classes.internals.Utils;
@@ -1012,11 +1011,11 @@ public class EngineCore {
             if (CoC.instance.player.vaginas[vIndex].vaginalLooseness < 5) {
                 trace("CUNT STRETCHED: By cock larger than it's total capacity.");
                 if (display) {
-                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ");
-                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " painfully stretches, gaping wide-open.</b>  ");
-                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " is now very loose.</b>  ");
-                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " is now loose.</b>  ");
-                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " loses its virgin-like tightness.</b>  ");
+                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ");
+                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == VaginaClass.LOOSENESS_GAPING) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " painfully stretches, gaping wide-open.</b>  ");
+                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == VaginaClass.LOOSENESS_LOOSE) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " is now very loose.</b>  ");
+                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == VaginaClass.LOOSENESS_NORMAL) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " is now loose.</b>  ");
+                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == VaginaClass.LOOSENESS_TIGHT) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " loses its virgin-like tightness.</b>  ");
                 }
                 CoC.instance.player.vaginas[vIndex].vaginalLooseness++;
             }
@@ -1026,11 +1025,11 @@ public class EngineCore {
             if (CoC.instance.player.vaginas[vIndex].vaginalLooseness < 5) {
                 trace("CUNT STRETCHED: By cock @ 75% of capacity.");
                 if (display) {
-                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ");
-                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " painfully stretches, gaping wide-open.</b>  ");
-                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " is now very loose.</b>  ");
-                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " is now loose.</b>  ");
-                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == AppearanceDefs.VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " loses its virgin-like tightness.</b>  ");
+                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ");
+                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == VaginaClass.LOOSENESS_GAPING) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " painfully stretches, gaping wide-open.</b>  ");
+                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == VaginaClass.LOOSENESS_LOOSE) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " is now very loose.</b>  ");
+                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == VaginaClass.LOOSENESS_NORMAL) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " is now loose.</b>  ");
+                    if (CoC.instance.player.vaginas[vIndex].vaginalLooseness == VaginaClass.LOOSENESS_TIGHT) outputText("<b>Your " + Appearance.vaginaDescript(CoC.instance.player,0) + " loses its virgin-like tightness.</b>  ");
                 }
                 CoC.instance.player.vaginas[vIndex].vaginalLooseness++;
             }

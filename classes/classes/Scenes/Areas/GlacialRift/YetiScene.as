@@ -2,6 +2,8 @@
 package classes.Scenes.Areas.GlacialRift 
 {
 import classes.*;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.UniqueSexScenes;
 
@@ -77,8 +79,8 @@ public class YetiScene extends BaseContent
 					addButton(1, "RideHisCock", rideYetisCock);
 				}
 			}
-			if (player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(2, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
-			if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER) addButton(3, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
+			if (player.tailType == Tail.MANTICORE_PUSSYTAIL) addButton(2, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
+			if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(3, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
 			addButton(4, "Leave", cleanupAfterCombat);
 		}
 		

@@ -5,8 +5,21 @@
 package classes.Scenes 
 {
 import classes.*;
+import classes.BodyParts.Antennae;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Ears;
+import classes.BodyParts.Eyes;
+import classes.BodyParts.Face;
+import classes.BodyParts.Gills;
+import classes.BodyParts.Hair;
+import classes.BodyParts.Horns;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.RearBody;
+import classes.BodyParts.Skin;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Tongue;
+import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.Areas.DeepSea.Kraken;
 import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.Forest.TamainsDaughtersScene;
@@ -19,10 +32,10 @@ import classes.Scenes.Monsters.DarkElfRanger;
 import classes.Scenes.Monsters.DarkElfScout;
 import classes.Scenes.Monsters.DarkElfSlaver;
 import classes.Scenes.Monsters.DarkElfSniper;
+import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.Electra;
 import classes.Scenes.NPCs.RyuBiDragon;
 import classes.Scenes.NPCs.Sonya;
-import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.Places.Boat.Marae;
 
 use namespace CoC;
@@ -1432,19 +1445,19 @@ private function resetJabberwockyFlag():void {
 		}
 		public function BackToHumanForm():void {
 			flags[kFLAGS.GARGOYLE_BODY_MATERIAL] = 0;
-			player.armType = AppearanceDefs.ARM_TYPE_HUMAN;
-			player.eyeType = AppearanceDefs.EYES_HUMAN;
-			player.antennae = AppearanceDefs.ANTENNAE_NONE;
-			player.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_HUMAN;
+			player.armType = Arms.HUMAN;
+			player.eyeType = Eyes.HUMAN;
+			player.antennae = Antennae.NONE;
+			player.lowerBody = LowerBody.HUMAN;
 			player.legCount = 2;
-			player.wingType = AppearanceDefs.WING_TYPE_NONE;
+			player.wingType = Wings.NONE;
 			player.wingDesc = "non-existant";
-			player.tongueType = AppearanceDefs.TONGUE_HUMAN;
-			player.tailType = AppearanceDefs.TAIL_TYPE_NONE;
+			player.tongueType = Tongue.HUMAN;
+			player.tailType = Tail.NONE;
 			player.tailRecharge = 0;
 			player.horns = 0;
-			player.hornType = AppearanceDefs.HORNS_NONE;
-			player.earType = AppearanceDefs.EARS_HUMAN;
+			player.hornType = Horns.NONE;
+			player.earType = Ears.HUMAN;
 			player.skin.restore();
 			clearOutput();
 			outputText("You have become fully human again.");
@@ -1480,23 +1493,23 @@ private function resetJabberwockyFlag():void {
 			doNext(GargoyleBodyChanges);
 		}
 		public function GargoyleBodyChanges():void {
-			player.skin.setBaseOnly({type:AppearanceDefs.SKIN_TYPE_STONE});
-			player.hairType = AppearanceDefs.HAIR_NORMAL;
-			player.faceType = AppearanceDefs.FACE_HUMAN;
-			player.hornType = AppearanceDefs.HORNS_GARGOYLE;
+			player.skin.setBaseOnly({type:Skin.STONE});
+			player.hairType = Hair.NORMAL;
+			player.faceType = Face.HUMAN;
+			player.hornType = Horns.GARGOYLE;
 			player.horns = 12 + rand(4); 
-			player.armType = AppearanceDefs.ARM_TYPE_GARGOYLE;
-			player.tailType = AppearanceDefs.TAIL_TYPE_GARGOYLE;
+			player.armType = Arms.GARGOYLE;
+			player.tailType = Tail.GARGOYLE;
 			player.tailRecharge = 0;
-			player.wingType = AppearanceDefs.WING_TYPE_GARGOYLE_LIKE_LARGE;
-			player.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_GARGOYLE;
+			player.wingType = Wings.GARGOYLE_LIKE_LARGE;
+			player.lowerBody = LowerBody.GARGOYLE;
 			player.legCount = 2;
-			player.eyeType = AppearanceDefs.EYES_HUMAN;
-			player.antennae = AppearanceDefs.ANTENNAE_NONE;
-			player.tongueType = AppearanceDefs.TONGUE_HUMAN;
-			player.earType = AppearanceDefs.EARS_HUMAN;
-			player.gillType = AppearanceDefs.GILLS_NONE;
-			player.rearBody = AppearanceDefs.REAR_BODY_NONE;
+			player.eyeType = Eyes.HUMAN;
+			player.antennae = Antennae.NONE;
+			player.tongueType = Tongue.HUMAN;
+			player.earType = Ears.HUMAN;
+			player.gillType = Gills.NONE;
+			player.rearBody = RearBody.NONE;
 			if (player.hasStatusEffect(StatusEffects.BlackNipples)) player.removeStatusEffect(StatusEffects.BlackNipples);
 		//	if (player.averageNipplesPerBreast() > 1) player.breastRows[x].nipplesPerBreast = 1;
 			if (player.hasStatusEffect(StatusEffects.Feeder)) {

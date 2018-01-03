@@ -1,7 +1,7 @@
 package classes {
+import classes.BodyParts.Hair;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Items.ArmorLib;
 import classes.Items.ShieldLib;
 import classes.Items.UndergarmentLib;
@@ -630,7 +630,7 @@ public class EventParser {
             EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
-        else if (player.hairType == AppearanceDefs.HAIR_GORGON && player.hairLength >= 6 && CoC.instance.temp < 6) {
+        else if (player.hairType == Hair.GORGON && player.hairLength >= 6 && CoC.instance.temp < 6) {
             EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
@@ -638,7 +638,7 @@ public class EventParser {
             EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
-        else if (player.hairType == AppearanceDefs.HAIR_GORGON && player.hairLength >= 10 && CoC.instance.temp < 10) {
+        else if (player.hairType == Hair.GORGON && player.hairLength >= 10 && CoC.instance.temp < 10) {
             EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
@@ -646,7 +646,7 @@ public class EventParser {
             EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
-        else if (player.hairType == AppearanceDefs.HAIR_GORGON && player.hairLength >= 16 && CoC.instance.temp < 16) {
+        else if (player.hairType == Hair.GORGON && player.hairLength >= 16 && CoC.instance.temp < 16) {
             EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
@@ -654,7 +654,7 @@ public class EventParser {
             EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
-        else if (player.hairType == AppearanceDefs.HAIR_GORGON && player.hairLength >= 26 && CoC.instance.temp < 26) {
+        else if (player.hairType == Hair.GORGON && player.hairLength >= 26 && CoC.instance.temp < 26) {
             EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
@@ -662,7 +662,7 @@ public class EventParser {
             EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
-        else if (player.hairType == AppearanceDefs.HAIR_GORGON && player.hairLength >= 40 && CoC.instance.temp < 40) {
+        else if (player.hairType == Hair.GORGON && player.hairLength >= 40 && CoC.instance.temp < 40) {
             EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
@@ -670,7 +670,7 @@ public class EventParser {
             EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
-        else if (player.hairType == AppearanceDefs.HAIR_GORGON && player.hairLength >= 40 && player.hairLength >= player.tallness && CoC.instance.temp < player.tallness) {
+        else if (player.hairType == Hair.GORGON && player.hairLength >= 40 && player.hairLength >= player.tallness && CoC.instance.temp < player.tallness) {
             EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }

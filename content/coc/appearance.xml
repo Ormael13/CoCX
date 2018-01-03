@@ -39,7 +39,7 @@
                 <set var="$faceSkinAndSomething"> covered with magical tattoo</set>
                 <set var="$odd" value="true"/>
             </if>
-            <if test="player.facePart.type eq FACE_BUCKTEETH">
+            <if test="player.facePart.type eq BUCKTEETH">
                 <set var="$faceSkinAndSomething" op="append"> and mousey buckteeth</set>
                 <set var="$odd" value="true"/>
             </if>
@@ -51,7 +51,7 @@
                         <set var="$odd" value="false"/>
                     </if>
                 </case>
-                <case test="player.skin.hasCoatOfType(SKIN_TYPE_FUR)">
+                <case test="player.skin.hasCoatOfType(FUR)">
                     Under your [skin coat] you have a human-shaped head with [skin base]<output>$faceSkinAndSomething</output>.
                     <set var="$odd" value="false"/>
                 </case>
@@ -65,33 +65,33 @@
             </switch>
         </macro>
         <switch value="player.faceType">
-            <case value="FACE_HUMAN">
+            <case value="HUMAN">
                 <display ref="humanlike"/>
             </case>
-            <case value="FACE_BUCKTEETH">
+            <case value="BUCKTEETH">
                 <display ref="humanlike"/>
             </case>
-            <case value="FACE_SHARK_TEETH">
+            <case value="SHARK_TEETH">
                 <display ref="humanlike"/>
                 A set of razor-sharp, retractable shark-teeth fill your mouth and gives your visage a slightly angular appearance.
             </case>
-            <case value="FACE_BUNNY">
+            <case value="BUNNY">
                 <display ref="humanlike"/>
                 The constant twitches of your nose and the length of your incisors gives your visage a hint of bunny-like cuteness.
             </case>
-            <case value="FACE_SPIDER_FANGS">
+            <case value="SPIDER_FANGS">
                 <display ref="humanlike"/>
                 A set of retractable, needle-like fangs sit in place of your canines and are ready to dispense their venom.
             </case>
-            <case value="FACE_FERRET_MASK">
+            <case value="FERRET_MASK">
                 <display ref="humanlike"/>
                 The [skinFurScales] around your eyes is significantly darker than the rest of your face, giving you a cute little ferret mask.
             </case>
-            <case value="FACE_MANTICORE">
+            <case value="MANTICORE">
                 <display ref="humanlike"/>
                 You have a set of sharp cat-like teeth in your mouth.
             </case>
-            <case value="FACE_SNAKE_FANGS">
+            <case value="SNAKE_FANGS">
                 <if test="$odd">
                     In addition, a pair of fangs hang over your lower lip, dripping with venom.
                     <else>
@@ -99,7 +99,7 @@
                     </else>
                 </if>
             </case>
-            <case value="FACE_SALAMANDER_FANGS">
+            <case value="SALAMANDER_FANGS">
                 <if test="$odd">
                     In addition, a pair of salamander fangs grows out of your mouth giving you a menacing smile.
                     <else>
@@ -107,7 +107,7 @@
                     </else>
                 </if>
             </case>
-            <case value="FACE_YETI_FANGS">
+            <case value="YETI_FANGS">
                 <if test="$odd">
                     In addition, your mouth, while human looking, has sharp yeti fangs not unlike those of a monkey.
                     <else>
@@ -115,9 +115,9 @@
                     </else>
                 </if>
             </case>
-            <case value="FACE_FERRET">
+            <case value="FERRET">
                 <switch>
-                    <case test="player.hasFullCoatOfType(SKIN_TYPE_FUR)">
+                    <case test="player.hasFullCoatOfType(FUR)">
                         Your face is coated in [skin coat] with [skin base] underneath, an adorable cross between human and ferret features.  It is complete with a wet nose and whiskers.
                     </case>
                     <case test="player.hasCoat()">
@@ -128,7 +128,7 @@
                     </default>
                 </switch>
             </case>
-            <case value="FACE_RACCOON_MASK">
+            <case value="RACCOON_MASK">
                 <set var="$darkSkin" value="['black','midnight black','ebony'].indexOf(player.skin.base.color) ge 0"/>
                 <switch>
                     <case test="player.hasCoat() and $darkSkin">
@@ -148,7 +148,7 @@
                     </default>
                 </switch>
             </case>
-            <case value="FACE_RACCOON">
+            <case value="RACCOON">
                 You have a triangular raccoon face, replete with sensitive whiskers and a little black nose; a mask shades the space around your eyes, set apart from your [skin coat] by a band of white.
                 <switch>
                     <case test="player.hasPlainSkinOnly()">
@@ -165,13 +165,13 @@
                     </case>
                 </switch>
             </case>
-            <case value="FACE_FOX">
+            <case value="FOX">
                 You have a tapered, shrewd-looking vulpine face with a speckling of downward-curved whiskers just behind the nose.
                 <switch>
                     <case test="player.hasCoat() eq false">
                         Oddly enough, there's no fur on your animalistic muzzle, just [skin base]<if test="player.skin.hasMagicalTattoo()"> covered with magical tattoo</if>.
                     </case>
-                    <case test="player.hasFullCoatOfType(SKIN_COAT_FUR)">
+                    <case test="player.hasFullCoatOfType(FUR)">
                         A coat of [skin coat] decorates your muzzle.
                     </case>
                     <case test="player.skin.isCoverLowMid()">

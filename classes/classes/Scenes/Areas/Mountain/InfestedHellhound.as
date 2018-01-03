@@ -1,7 +1,9 @@
 ﻿package classes.Scenes.Areas.Mountain
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.Tail;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -110,11 +112,11 @@ import classes.internals.*;
 			this.createBreastRow();
 			this.createBreastRow();
 			this.createBreastRow();
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_NORMAL;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 47;
-			this.hipRating = AppearanceDefs.HIP_RATING_AVERAGE;
-			this.buttRating = AppearanceDefs.BUTT_RATING_AVERAGE + 1;
+			this.hipRating = Hips.RATING_AVERAGE;
+			this.buttRating = Butt.RATING_AVERAGE + 1;
 			this.skin.growFur({color:"black"});
 			this.hairColor = "red";
 			this.hairLength = 3;
@@ -140,7 +142,7 @@ import classes.internals.*;
 			this.special1 = hellhoundFire;
 			this.special2 = hellhoundScent;
 			this.special3 = hellHoundWormCannon;
-			this.tailType = AppearanceDefs.TAIL_TYPE_DOG;
+			this.tailType = Tail.DOG;
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			checkMonster();

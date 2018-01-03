@@ -1,5 +1,7 @@
 ﻿package classes 
 {
+import classes.BodyParts.Face;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.JewelryLib;
 
@@ -908,12 +910,12 @@ import classes.Items.JewelryLib;
 		public function maxVenom():Number
 		{
 			var maxven:Number = 0;
-			if (game.player.faceType == AppearanceDefs.FACE_SNAKE_FANGS) maxven += 100;
-			if (game.player.faceType == AppearanceDefs.FACE_SPIDER_FANGS) maxven += 100;
-			if (game.player.tailType == AppearanceDefs.TAIL_TYPE_BEE_ABDOMEN) maxven += 150;
-			if (game.player.tailType == AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN) maxven += 150;
-			if (game.player.tailType == AppearanceDefs.TAIL_TYPE_SCORPION) maxven += 150;
-			if (game.player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL) maxven += 200;
+			if (game.player.faceType == Face.SNAKE_FANGS) maxven += 100;
+			if (game.player.faceType == Face.SPIDER_FANGS) maxven += 100;
+			if (game.player.tailType == Tail.BEE_ABDOMEN) maxven += 150;
+			if (game.player.tailType == Tail.SPIDER_ADBOMEN) maxven += 150;
+			if (game.player.tailType == Tail.SCORPION) maxven += 150;
+			if (game.player.tailType == Tail.MANTICORE_PUSSYTAIL) maxven += 200;
 			if (findPerk(PerkLib.JobSoulCultivator) >= 0) {
 				var multimaxven:Number = 1;
 				if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) multimaxven += 0.1;

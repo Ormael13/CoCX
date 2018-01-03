@@ -1,6 +1,8 @@
 package classes.Scenes.Monsters
 {
 import classes.*;
+import classes.BodyParts.Face;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.NPCs.JojoScene;
 
@@ -219,7 +221,7 @@ public class GoblinWarriorScene extends BaseContent
 				//Buttsex toggle
 				if (player.cockThatFits(monster.analCapacity()) >= 0 && player.cor > 70 - player.corruptionTolerance()) buttseks = gobboButtSecks;
 				//Spidercondom
-				if (player.tailType == AppearanceDefs.TAIL_TYPE_SPIDER_ADBOMEN && player.cockThatFits(monster.vaginalCapacity()) >= 0)
+				if (player.tailType == Tail.SPIDER_ADBOMEN && player.cockThatFits(monster.vaginalCapacity()) >= 0)
 					spiderCondom = goblinCondomed;
 			}
 			//Breastfeed adds an option
@@ -318,7 +320,7 @@ public class GoblinWarriorScene extends BaseContent
 				outputText(images.showImage("goblin-win-female-naga-rapedfem"));
 				outputText("You slither over to the helpless goblin, who watches you half in fear, half in curiosity. ");
 				//[Has fangs:
-				if (player.faceType == AppearanceDefs.FACE_SNAKE_FANGS) outputText("You bare your fangs at her and the curiosity disappears. She turns to run, but your tail is faster than she is.");
+				if (player.faceType == Face.SNAKE_FANGS) outputText("You bare your fangs at her and the curiosity disappears. She turns to run, but your tail is faster than she is.");
 				//[No fangs: 
 				else outputText("You smile at her and the fear disappears. She's still wary though, and you make sure to grab her with your tail before she changes her mind about you.");
 				outputText("\n\n");
@@ -365,9 +367,9 @@ public class GoblinWarriorScene extends BaseContent
 				outputText("You pick up the goblin, sitting her onto your knee and restraining both her arms behind her back with your left hand.  You tear a piece of supple leather off of her slutty garments and use it to bind her arms there.  She looks up at you, her eyes wide and frightened at the thought of being at the mercy of a larger creature.  In spite of it all, she seems more than a little turned on, if the juices staining your knee are any indication.  You look down at her and remark, \"<i>So the little skank has a submissive streak huh?</i>\"\n\n");
 				outputText("She blushes red and the flow of feminine fluid thickens as she nods.  You know she'll probably enjoy whatever sexual act you could perform with her, so you may as well surprise her.  A cruel idea forms in the back of your mind – getting revenge for her attempts to drug you.  You easily rip the pouches from her belt and pull out a few random bottles.  The goblin, understanding your intent, begins struggling to free herself, but you easily restrain the smaller woman and force the drugs into her mouth, one after the another.  When she tries to spit them out, you massage her throat, triggering her instinct to swallow.\n\n");
 				outputText("By the third bottle she's given up on struggling and is instead trying to grind her cunt into your knee.  Her mouth is open wide and her entire face is flushed reddish-purple with desire.  You finish force-feeding her the remaining bottles and shove her, catching her ankles to hold her over your leg with her ass in the air.  The scent of her arousal and the vapors from all the drugs and aphrodisiacs give you a bit of a 'contact high', at least in the sense that your " + vaginaDescript(0) + " ");
-				if (player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_WET) outputText("grows puffy and moist");
-				else if (player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_DROOLING) outputText("drips with feminine moisture");
-				else if (player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_SLAVERING) outputText("slowly begins to soak your thighs");
+				if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_WET) outputText("grows puffy and moist");
+				else if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_DROOLING) outputText("drips with feminine moisture");
+				else if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLAVERING) outputText("slowly begins to soak your thighs");
 				else outputText("drools with need, puddling under you");
 				outputText(".  Your arousal can wait.  This slut needs to be punished.\n\n");
 				outputText("*<b>THWACK</b>!* Your hand smacks her nicely rounded ass.  You pull back, feeling drops of wetness thanks to her prominent pussy-lips.  The little bitch's cunt is so inflamed with need that she's practically squirting from a simple spank.  You swat her again, watching her entire body tense and feeling her fluids splatter you.\n\n");
@@ -375,9 +377,9 @@ public class GoblinWarriorScene extends BaseContent
 				outputText("The goblin squeals, though in delight or pain you can't be sure.  You start spanking her harder and harder, turning her ass from green to red with the repeated abuse.  Her entire body begins convulsing and squirting, splattering your arm with her honey.  She got off on it!  Well, after that kind of show, she's going to get you off too - or else!\n\n");
 				outputText("You pull her off your leg and shove her face into your " + vaginaDescript(0) + ".  She thrashes against you, too lost to her own plessure to realize what's going on.   Forcefully you put her plump little lips on your box and grind, letting her tongue slip into your folds.  Her eyes are little white slits, her pupils rolled up out of view, but there's enough of something in there that her tongue recognizes the taste and starts licking.  You tremble; it feels WAY better than it should.  Perhaps some of her potions have left a residue on her lips and tongue, but you don't care.\n\n");
 				outputText("You cum on the drugged green bitch, ");
-				if (player.vaginas[0].vaginalWetness > AppearanceDefs.VAGINA_WETNESS_DROOLING) outputText("splattering her with your fluids");
-				else if (player.vaginas[0].vaginalWetness > AppearanceDefs.VAGINA_WETNESS_SLICK) outputText("coating her face with the proof of your pleasure");
-				else if (player.vaginas[0].vaginalWetness > AppearanceDefs.VAGINA_WETNESS_WET) outputText("leaving her sticky with your nether-juices");
+				if (player.vaginas[0].vaginalWetness > VaginaClass.WETNESS_DROOLING) outputText("splattering her with your fluids");
+				else if (player.vaginas[0].vaginalWetness > VaginaClass.WETNESS_SLICK) outputText("coating her face with the proof of your pleasure");
+				else if (player.vaginas[0].vaginalWetness > VaginaClass.WETNESS_WET) outputText("leaving her sticky with your nether-juices");
 				else outputText("leaving the taste of pussy on her tongue");
 				outputText(".  ");
 				if (player.biggestLactation() >= 3.5) outputText("Milk explodes from your nipples, soaking the petite slut.  ");
@@ -444,8 +446,8 @@ public class GoblinWarriorScene extends BaseContent
 			outputText("\"<i>Alright, whore. You wanted my babies? Here. They. CUM!</i>\" you yell. However, ");
 			if (player.hasVagina()) {
 				outputText("while your " + vaginaDescript(0) + " ");
-				if (player.vaginas[0].vaginalWetness <= AppearanceDefs.VAGINA_WETNESS_SLICK) outputText("juices ");
-				else if (player.vaginas[0].vaginalWetness <= AppearanceDefs.VAGINA_WETNESS_DROOLING) outputText("floods ");
+				if (player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_SLICK) outputText("juices ");
+				else if (player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_DROOLING) outputText("floods ");
 				else outputText("explodes ");
 				if (player.cockTotal() > 1) outputText("and the rest of your [cocks] drench her, ");
 			}

@@ -6,7 +6,8 @@ package classes.Scenes.Dungeons.HiddenCave
 {
 
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -48,16 +49,16 @@ public class LoliBatGolem extends Monster
 			this.imageName = "loli bat golem";
 			this.long = "You're currently fighting loli bat golem. It's four feet tall bat that looks like twelves years old girl, her stone body is smooth and polished and she's using bare stone claws to fight. In the middle of her forehead there is tatto'd a big letter A.";
 			this.plural = false;
-			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_NORMAL, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 100, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("A"));
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,100,0,0,0);
 			initStrTouSpeInte(30, 30, 50, 10);
 			initWisLibSensCor(10, 10, 10, 50);
-			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
-			this.buttRating = AppearanceDefs.BUTT_RATING_LARGE;
+			this.hipRating = Hips.RATING_AMPLE+2;
+			this.buttRating = Butt.RATING_LARGE;
 			this.skinTone = "light grey";
 			this.lustVuln = .2;
 			this.tallness = 48;

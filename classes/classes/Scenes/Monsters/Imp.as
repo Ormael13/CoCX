@@ -1,6 +1,9 @@
 ﻿package classes.Scenes.Monsters
 {
 import classes.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.SceneLib;
@@ -60,19 +63,19 @@ public class Imp extends Monster
 			}
 			if (player.lust >= (player.maxLust() * 0.6) && player.hasVagina()) {
 				switch (player.vaginas[0].vaginalWetness) {
-					case AppearanceDefs.VAGINA_WETNESS_NORMAL:
+					case VaginaClass.WETNESS_NORMAL:
 						outputText("Your " + allVaginaDescript() + " dampen" + (player.vaginas.length > 1 ? "" : "s") + " perceptibly.");
 						break;
-					case AppearanceDefs.VAGINA_WETNESS_WET:
+					case VaginaClass.WETNESS_WET:
 						outputText("Your crotch becomes sticky with girl-lust.");
 						break;
-					case AppearanceDefs.VAGINA_WETNESS_SLICK:
+					case VaginaClass.WETNESS_SLICK:
 						outputText("Your " + allVaginaDescript() + " become" + (player.vaginas.length > 1 ? "" : "s") + " sloppy and wet.");
 						break;
-					case AppearanceDefs.VAGINA_WETNESS_DROOLING:
+					case VaginaClass.WETNESS_DROOLING:
 						outputText("Thick runners of girl-lube stream down the insides of your thighs.");
 						break;
-					case AppearanceDefs.VAGINA_WETNESS_SLAVERING:
+					case VaginaClass.WETNESS_SLAVERING:
 						outputText("Your " + allVaginaDescript() + " instantly soak" + (player.vaginas.length > 1 ? "" : "s") + " your groin.");
 					default: //Dry vaginas are unaffected
 						
@@ -101,19 +104,19 @@ public class Imp extends Monster
 			}
 			if (player.lust >= (player.maxLust() * 0.6) && player.hasVagina()) {
 				switch (player.vaginas[0].vaginalWetness) {
-					case AppearanceDefs.VAGINA_WETNESS_NORMAL:
+					case VaginaClass.WETNESS_NORMAL:
 						outputText("Your " + allVaginaDescript() + " dampen" + (player.vaginas.length > 1 ? "" : "s") + " perceptibly.");
 						break;
-					case AppearanceDefs.VAGINA_WETNESS_WET:
+					case VaginaClass.WETNESS_WET:
 						outputText("Your crotch becomes sticky with girl-lust.");
 						break;
-					case AppearanceDefs.VAGINA_WETNESS_SLICK:
+					case VaginaClass.WETNESS_SLICK:
 						outputText("Your " + allVaginaDescript() + " become" + (player.vaginas.length > 1 ? "" : "s") + " sloppy and wet.");
 						break;
-					case AppearanceDefs.VAGINA_WETNESS_DROOLING:
+					case VaginaClass.WETNESS_DROOLING:
 						outputText("Thick runners of girl-lube stream down the insides of your thighs.");
 						break;
-					case AppearanceDefs.VAGINA_WETNESS_SLAVERING:
+					case VaginaClass.WETNESS_SLAVERING:
 						outputText("Your " + allVaginaDescript() + " instantly soak" + (player.vaginas.length > 1 ? "" : "s") + " your groin.");
 					default: //Dry vaginas are unaffected
 						
@@ -145,11 +148,11 @@ public class Imp extends Monster
 			this.balls = 2;
 			this.ballSize = 1;
 			createBreastRow(0);
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = rand(24) + 25;
-			this.hipRating = AppearanceDefs.HIP_RATING_BOYISH;
-			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			this.hipRating = Hips.RATING_BOYISH;
+			this.buttRating = Butt.RATING_TIGHT;
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 5;
@@ -170,7 +173,7 @@ public class Imp extends Monster
 					add(consumables.INCUBID,3).
 					add(consumables.IMPFOOD,4);
 			this.special1 = lustMagicAttack1;
-			this.wingType = AppearanceDefs.WING_TYPE_IMP;
+			this.wingType = Wings.IMP;
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}

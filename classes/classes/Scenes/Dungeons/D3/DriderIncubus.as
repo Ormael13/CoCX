@@ -1,9 +1,8 @@
 package classes.Scenes.Dungeons.D3
 {
-import classes.AppearanceDefs;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
 import classes.CockTypesEnum;
-import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.PerkLib;
 import classes.Scenes.Areas.Swamp.AbstractSpiderMorph;
 import classes.Scenes.SceneLib;
@@ -22,8 +21,8 @@ public class DriderIncubus extends AbstractSpiderMorph
 			this.balls = 2;
 			this.ballSize = 4;
 			this.hoursSinceCum = 9999;
-			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
-			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			this.hipRating = Hips.RATING_SLENDER;
+			this.buttRating = Butt.RATING_TIGHT;
 			initStrTouSpeInte(140, 300, 140, 90);
 			initWisLibSensCor(80, 160, 40, 100);
 			this.weaponName = "spear";

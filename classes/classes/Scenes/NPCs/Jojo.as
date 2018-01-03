@@ -1,6 +1,8 @@
 ﻿package classes.Scenes.NPCs
 {
 import classes.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 
@@ -71,11 +73,11 @@ public class Jojo extends Monster
 			this.cumMultiplier = 1;
 			this.hoursSinceCum = 1000;
 			createBreastRow(0);
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 4*12;
-			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
-			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			this.hipRating = Hips.RATING_SLENDER;
+			this.buttRating = Butt.RATING_TIGHT;
 			this.skin.growFur({color:"white"});
 			this.skinDesc = "fur";
 			this.hairColor = "white";

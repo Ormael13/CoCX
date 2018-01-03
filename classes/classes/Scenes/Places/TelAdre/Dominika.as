@@ -1,5 +1,6 @@
 ﻿package classes.Scenes.Places.TelAdre {
 import classes.*;
+import classes.BodyParts.Face;
 import classes.GlobalFlags.kFLAGS;
 
 public class Dominika extends TelAdreAbstractContent {
@@ -32,7 +33,7 @@ public function fellatrixBarApproach():void {
 		return;
 	}
 	//[First encounter, player is minotaur (If you lose minotaur characteristics and come back, Dominika will not recognize you and do a regular first encounter)]
-	if(player.minotaurScore() >= 3 && player.faceType == AppearanceDefs.FACE_COW_MINOTAUR && player.gender == 1) {
+	if(player.minotaurScore() >= 3 && player.faceType == Face.COW_MINOTAUR && player.gender == 1) {
 		outputText("You approach the woman, delivering what you consider a polite greeting. Icily she turns to you, raises an eyebrow, and in a low husky voice snarls \"<i>Don't bother. I'm not interested in being your bimbo.</i>\" She turns away from you, and ignores any further attempts to start a conversation.\n\n");
 
 		outputText("A tavern maid with shaggy dreadlocks and a long tongue she can barely fit in her mouth waves you over. \"<i>Don't wowwy 'bout Dominika,</i>\" she says through her lisp, \"<i>The's a liddle wacist against, you know, your type. Thays you're only interethted in wape. Motht of uth aren't like dat.</i>\"\n\n");
@@ -921,7 +922,7 @@ private function dominikaBlowjobs2():void {
 public function dominikaSpellblade():void {
 	clearOutput();
 	//[Approach Dominika post-D2 in bar, on Dominika's \"<i>I'm a racist bitch</i>\" list]
-	if((player.minotaurScore() >= 3 && player.faceType == AppearanceDefs.FACE_COW_MINOTAUR && player.gender == 1) || !player.isBiped()) {
+	if((player.minotaurScore() >= 3 && player.faceType == Face.COW_MINOTAUR && player.gender == 1) || !player.isBiped()) {
 		outputText("You greet Dominika and make small talk, but as usual she seems distracted and the conversation is strained at best.  Drumming her fingers on the table and glancing outside her attention is constantly drawn away from you, and eventually she outright cuts the conversation off.  \"<i>I need to go, I'm afraid,</i>\" she says quickly, and half-heartedly adds, \"<i>It was nice talking to you.</i>\"\n\n");
 
 		outputText("She exits, leaving you at the table alone.  You shrug a little and finish your drink, before noticing that she left something behind.  It looks like a wrapped sword and, while you don't know why she'd have such a thing, you figure you might as well give it back to her.  Hell, maybe she'll actually be worth a goddamn conversation afterwards.\n\n");

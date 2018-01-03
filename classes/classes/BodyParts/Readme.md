@@ -39,15 +39,15 @@ player.skin.setProps({
 or put that into a single line:
 
 ```as3
-player.skin.setProps({type: SKIN_TYPE_DRAGON_SCALES, adj: "tough", desc: "shield-shaped dragon scales"});
+player.skin.setProps({type: DRAGON_SCALES, adj: "tough", desc: "shield-shaped dragon scales"});
 ```
 
 Another example for BodyParts with a `skin` property:
 ```as3
 player.rearBody.setProps({
-    type: REAR_BODY_DRACONIC_MANE,
+    type: DRACONIC_MANE,
     skin: {
-        type: SKIN_TYPE_DRAGON_SCALES,
+        type: DRAGON_SCALES,
         tone: player.skin.tone,
         desc: "shield-shaped dragon scales",
         adj: "test!"
@@ -65,7 +65,7 @@ BodyParts
 #### Property table
 | Property   | Old (aliased)<br>Property | Access example          | Description / Examples                                                                                                   |
 |------------|---------------------------|-------------------------|--------------------------------------------------------------------------------------------------------------------------|
-| `type`     | `skinType`                | `player.skin.type`      | **The type**<br>`player.skin.type = SKIN_TYPE_FUR;`                                                                      |
+| `type`     | `skinType`                | `player.skin.type`      | **The type**<br>`player.skin.type = FUR;`                                                                      |
 | `tone`     | `skinTone`                | `player.skin.tone`      | **The color**<br>`player.skin.tone = "green-yellow";`<br> → "You have **green-yellow** skin."                            |
 | `desc`     | `skinDesc`                | `player.skin.desc`      | **The description**<br>`player.skin.desc = "dragon scales";`<br> → "You have red **dragon scales**."                     |
 | `adj`      | `skinAdj`                 | `player.skin.adj`       | **The adjective** (changed with body lotions)<br>`player.skin.adj = "smooth";`<br> → "You have **smooth**, green scales" |
@@ -102,14 +102,14 @@ outputText("You have [skinFurScales]!");
 // both return: "You have soft, orange fur!"
 ```
 Assuming that:
-- `type` is set to `SKIN_TYPE_FUR`
+- `type` is set to `FUR`
 - `adj` is set to "soft"
 - `furColor` is set to "orange"
 - `desc` is set to "fur"
 
 ##### public function hasFur():Boolean
 Moved from and aliased to `Creature.hasFur()`<br>
-Returns true if the player has fur (aka `player.skin.type == SKIN_TYPE_FUR`). Nuff said.
+Returns true if the player has fur (aka `player.skin.type == FUR`). Nuff said.
 
 #### Note
 I've added the optional param `keepTone` to the methods `restore()` and `setAllProps()` which defaults to true.

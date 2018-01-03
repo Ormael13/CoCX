@@ -2,8 +2,10 @@
 package classes.Scenes.Dungeons 
 {
 import classes.*;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.Dungeons.DeepCave.*;
 import classes.Scenes.NPCs.ShouldraFollower;
 import classes.Scenes.SceneLib;
@@ -372,7 +374,7 @@ use namespace CoC;
 		public function impGangGetsRapedByFemale():void {
 			clearOutput();
 			outputText("You walk around to one of the demons and push him onto his back.  Your [armor] falls to the ground around you as you disrobe, looking over your tiny conquest.  A quick ripping motion disposes of his tiny loincloth, leaving his thick demon-tool totally unprotected. You grab and squat down towards it, rubbing the corrupted tool between your legs ");
-			if(player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_SLICK) outputText("and coating it with feminine drool ");
+			if(player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_SLICK) outputText("and coating it with feminine drool ");
 			outputText("as you become more and more aroused.  It parts your lips and slowly slides in.  The ring of tainted nodules tickles you just right as you take the oddly textured member further and further into your willing depths.");
 			player.cuntChange(15,true,true,false);
 			outputText("\n\n");
@@ -382,7 +384,7 @@ use namespace CoC;
 			outputText("You begin riding the tiny demon, lifting up, and then dropping down, feeling each of the nodes gliding along your sex-lubed walls.   As time passes and your pleasure mounts, you pick up the pace, until you're bouncing happily atop your living demon-dildo.\n\n");
 			
 			outputText("The two of you cum together, though the demon's pleasure starts first.  A blast of his tainted seed pushes you over the edge.  You sink the whole way down, feeling him bump your cervix and twitch inside you, the bumps on his dick swelling in a pulsating wave in time with each explosion of fluid.  ");
-			if(player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_SLAVERING) outputText("Cunt juices splatter him as you squirt explosively, leaving a puddle underneath him.  ");
+			if(player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_SLAVERING) outputText("Cunt juices splatter him as you squirt explosively, leaving a puddle underneath him.  ");
 			else outputText("Cunt juices drip down his shaft, oozing off his balls to puddle underneath him.  ");
 			outputText("The two of you lie together, trembling happily as you're filled to the brim with tainted fluids.\n\n");
 			
@@ -679,7 +681,7 @@ use namespace CoC;
 			outputText(" you as you're thrown atop one of the tables.   You grunt as leather straps are produced and laid over your form to restrain you.  In the span of a minute you're completely immobilized from the neck down, and your [legs] are kept spread to allow easy access to your " + vaginaDescript(0) + ".\n\n");
 			
 			outputText("Shuffling as they remove their garments, the entire gang of imps, as well as Zetaz, are completely nude.  They've all grown full and hard from the sight of your nubile, restrained body, and in spite of yourself you get ");
-			if(player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_DROOLING) outputText("even more wet ");
+			if(player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_DROOLING) outputText("even more wet ");
 			else outputText("a little wet ");
 			outputText("from the masculine scent the aroused penises are producing.  ");
 			if(player.cor < 33) outputText("How could you be turned on by such a repulsive situation?  You're going to be raped, brainwashed, and either kept as a pet or tossed in a milking tube for the rest of your life and your body is acting like some horny slut!");
@@ -697,8 +699,8 @@ use namespace CoC;
 			outputText("  Warm slipperiness slides over your lips again, feeling nearly as good as it would on your lower lips, and you pull your rebellious tongue back into your mouth with a gasp of pleasure.\n\n");
 			
 			outputText("This must be what Zetaz was waiting for, and the imp carefully injects the next chemical cocktail into the other side of your neck while you're distracted by orally masturbating your new mouth.  Your " + vaginaDescript(0) + " ");
-			if(player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_DROOLING) outputText("gushes fresh fluids into a puddle on the table");
-			else if(player.vaginas[0].vaginalWetness >= AppearanceDefs.VAGINA_WETNESS_WET) outputText("drools a heavy flow of liquid arousal onto the hardwood table");
+			if(player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_DROOLING) outputText("gushes fresh fluids into a puddle on the table");
+			else if(player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_WET) outputText("drools a heavy flow of liquid arousal onto the hardwood table");
 			else outputText("begins to dribble a steady flow of liquid on to the table's girl-slicked boards");
 			outputText(".  ");
 			if(player.inHeat) outputText("D");
@@ -766,7 +768,7 @@ use namespace CoC;
 			outputText("The sounds of numerous footfalls and clinking glass signal that the mob of imps has returned, bringing what sounds like hundreds of vials worth of their foul concoctions.  Zetaz releases your tumescent member and reaches over for something, then returns to your view bearing a ring gag.  Even turned on, defeated, and immobilized on a table, you try your best to fight him, but all that gets you is slapped.  The imp's palm smacks you hard enough to stun you and leave your ears ringing, and when you blink the stars from your eyes, your mouth is forced open with your tongue hanging out lewdly.\n\n");
 			
 			outputText("Another of Zetaz's brothers, or perhaps sons, hands him a tube with a funnel, and he easily threads the funnel's tube through the ring gag.  Foul remnants of whatever it was used for last leave a sour taste on your tongue, but worse yet is the knowledge that you're going to be force-fed tainted, body-altering, mind-melting drugs.  A drop of pre-cum hits your belly and your thighs grow ");
-			if(player.vaginas[0].vaginalWetness < AppearanceDefs.VAGINA_WETNESS_DROOLING) outputText("sticky");
+			if(player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_DROOLING) outputText("sticky");
 			else outputText("soaked");
 			outputText(" from the thoughts.  ");
 			if(player.cor < 33) outputText("Are you really being turned on by such lewd, debased thoughts?");
@@ -786,8 +788,8 @@ use namespace CoC;
 			if(player.horns > 0) outputText(" and adding to your existing pair");
 			else outputText(" and giving you an exotic, tainted appearance");
 			outputText(".  ");
-			if(player.lowerBody != AppearanceDefs.LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS) outputText("Your [feet] have been changing throughout the ordeal, but you didn't notice your [legs] becoming such lissom, lengthy legs, or your heels growing long, high-heel-like spikes.  ");
-			if(player.tailType != AppearanceDefs.TAIL_TYPE_DEMONIC) outputText("A tail snakes around your leg and begins to caress your " + vaginaDescript(0) + ", then plunges in to fuck the squirting orifice while you drink.  ");
+			if(player.lowerBody != LowerBody.DEMONIC_HIGH_HEELS) outputText("Your [feet] have been changing throughout the ordeal, but you didn't notice your [legs] becoming such lissom, lengthy legs, or your heels growing long, high-heel-like spikes.  ");
+			if(player.tailType != Tail.DEMONIC) outputText("A tail snakes around your leg and begins to caress your " + vaginaDescript(0) + ", then plunges in to fuck the squirting orifice while you drink.  ");
 			else outputText("Your tail snakes around your leg and begins to caress your " + vaginaDescript(0) + ", then plunges in to fuck the squirting orifice while you drink.  ");
 			outputText("The imps start hooting and cat-calling, laughing and prodding your body with their twisted demonic members as your mind starts to come apart in the seething oven of unnatural lust.\n\n");
 			//NEXT
@@ -1014,7 +1016,7 @@ use namespace CoC;
 			else if(player.gender == 3) {
 				//[Epilogue]
 				outputText("The champion was fucked and brainwashed repeatedly for a few more days until Zetaz was sure she understood her place in the world.  Once rendered completely obedient, they released her from her bindings.  It was time she was turned over to Lethice.  ");
-				if(player.wingType != AppearanceDefs.WING_TYPE_BAT_LIKE_TINY || player.wingType != AppearanceDefs.WING_TYPE_BAT_LIKE_LARGE) outputText("Zetaz gave her one of the weaker imps to penetrate and taught her to fly with her new, demonic wings.  ");
+				if(player.wingType != Wings.BAT_LIKE_TINY || player.wingType != Wings.BAT_LIKE_LARGE) outputText("Zetaz gave her one of the weaker imps to penetrate and taught her to fly with her new, demonic wings.  ");
 				else outputText("Zetaz gave her one of the weaker imps to penetrate during the journey.  ");
 				outputText("With preparations complete, Zetaz, the champion, and a few dozen imps flew to the mountain peak.\n\n");
 				

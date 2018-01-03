@@ -1,5 +1,6 @@
 ﻿package classes.Scenes.Areas.Forest{
 import classes.*;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 
 public class Essrayle extends BaseContent{
@@ -150,7 +151,7 @@ private function plantsForMe2(BE:int = 0):void {
 	outputText(" and pulls you close, forcing your [legs] against her bulb.  They sink in slightly as you go down, reluctantly relinquishing her nipple from your mouth.  As it springs free, a thick glob of sap splatters over your lips and nose.  Essy giggles softly as she wipes them off with a hand.");
 	
 	outputText("\n\n\"<i>I'm glad you enjoy me, sweetie, I really want to enjoy more with you, but I need it so bad right now!</i>\" Essy whines, her shivering, fat breasts jiggling about as she does.  A multitude of vine-like tentacles burst from her back flower and arc about her, coiling about your arms, waist, ");
-	if(player.tailType > AppearanceDefs.TAIL_TYPE_NONE) outputText("tail, ");
+	if(player.tailType > Tail.NONE) outputText("tail, ");
 	outputText("and [legs], ");
 	if(!player.isTaur()) outputText("lifting you slowly into the air");
 	else outputText("forcing you to rear up");

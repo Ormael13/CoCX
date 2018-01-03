@@ -4,8 +4,9 @@
 package classes.Scenes.Areas.Swamp
 {
 import classes.*;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Scenes.UniqueSexScenes;
 
@@ -91,8 +92,8 @@ public class MaleSpiderMorphScene extends BaseContent
 				if (player.biggestCockArea() > monster.analCapacity()) addButton(2, "Frot", victoryFrotTheSpoidah);
 			}
 			addButton(3, "B.Titfuck", bikiniTits);
-			if (player.tailType == AppearanceDefs.TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(5, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
-			if (player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_PLANT_FLOWER) addButton(6, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
+			if (player.tailType == Tail.MANTICORE_PUSSYTAIL) addButton(5, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
+			if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(6, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
 			addButton(9, "Leave", cleanupAfterCombat);
 		}
 

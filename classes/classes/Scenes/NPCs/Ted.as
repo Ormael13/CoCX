@@ -5,8 +5,8 @@
 package classes.Scenes.NPCs 
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
 import classes.Scenes.SceneLib;
 
 use namespace CoC;
@@ -105,11 +105,11 @@ use namespace CoC;
 			this.cumMultiplier = 1;
 			this.hoursSinceCum = 50;
 			createBreastRow(0);
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 78;
-			this.hipRating = AppearanceDefs.HIP_RATING_SLENDER;
-			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
+			this.hipRating = Hips.RATING_SLENDER;
+			this.buttRating = Butt.RATING_TIGHT;
 			this.skin.setBaseOnly({color:"white"});
 			this.skinDesc = "skin";
 			this.hairColor = "brown";

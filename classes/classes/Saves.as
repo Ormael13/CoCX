@@ -1,9 +1,17 @@
 ﻿package classes
 {
+import classes.BodyParts.Antennae;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Ears;
+import classes.BodyParts.Eyes;
+import classes.BodyParts.Gills;
+import classes.BodyParts.Horns;
+import classes.BodyParts.RearBody;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kCOUNTERS;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Items.*;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.NPCs.JojoScene;
@@ -11,6 +19,7 @@ import classes.Scenes.NPCs.XXCNPC;
 import classes.Scenes.SceneLib;
 import classes.internals.CountersStorage;
 import classes.internals.RootCounters;
+import classes.lists.BreastCup;
 
 import flash.events.Event;
 import flash.events.IOErrorEvent;
@@ -25,9 +34,9 @@ import flash.utils.getDefinitionByName;
 
 CONFIG::AIR
 {
-    import flash.filesystem.File;
-    import flash.filesystem.FileMode;
-    import flash.filesystem.FileStream;
+	import flash.filesystem.File;
+	import flash.filesystem.FileMode;
+	import flash.filesystem.FileStream;
 }
 
 public class Saves extends BaseContent {
@@ -1419,7 +1428,7 @@ public function onDataLoaded(evt:Event):void
  */
 private function unFuckSaveDataBeforeLoading(data:Object):void {
 	if (data.tail === undefined) {
-		var venomAsCount:Boolean = data.tailType == AppearanceDefs.TAIL_TYPE_FOX;
+		var venomAsCount:Boolean = data.tailType == Tail.FOX;
 		data.tail = {
 			type    : data.tailType,
 			venom   : venomAsCount ? 0 : data.tailVenum,
@@ -1721,7 +1730,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.femininity = saveFile.data.femininity;
 		//EYES
 		if (saveFile.data.eyeType == undefined)
-			player.eyeType = AppearanceDefs.EYES_HUMAN;
+			player.eyeType = Eyes.HUMAN;
 		else
 			player.eyeType = saveFile.data.eyeType;
 		if (saveFile.data.eyeColor == undefined)
@@ -1756,11 +1765,11 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		if (saveFile.data.gillType != undefined)
 			player.gillType = saveFile.data.gillType;
 		else if (saveFile.data.gills == undefined)
-			player.gillType = AppearanceDefs.GILLS_NONE;
+			player.gillType = Gills.NONE;
 		else
-			player.gillType = saveFile.data.gills ? AppearanceDefs.GILLS_ANEMONE : AppearanceDefs.GILLS_NONE;
+			player.gillType = saveFile.data.gills ? Gills.ANEMONE : Gills.NONE;
 		if (saveFile.data.armType == undefined)
-			player.armType = AppearanceDefs.ARM_TYPE_HUMAN;
+			player.armType = Arms.HUMAN;
 		else
 			player.armType = saveFile.data.armType;
 		player.hairLength = saveFile.data.hairLength;
@@ -1770,11 +1779,11 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.facePart.loadFromSaveData(data);
 		player.tail.loadFromSaveData(data);
 		if (saveFile.data.tongueType == undefined)
-			player.tongueType = AppearanceDefs.TONGUE_HUMAN;
+			player.tongueType = Tongue.HUMAN;
 		else
 			player.tongueType = saveFile.data.tongueType;
 		if (saveFile.data.earType == undefined)
-			player.earType = AppearanceDefs.EARS_HUMAN;
+			player.earType = Ears.HUMAN;
 		else
 			player.earType = saveFile.data.earType;
 		if (saveFile.data.earValue == undefined)
@@ -1782,19 +1791,19 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		else
 			player.earValue = saveFile.data.earValue;
 		if (saveFile.data.antennae == undefined)
-			player.antennae = AppearanceDefs.ANTENNAE_NONE;
+			player.antennae = Antennae.NONE;
 		else
 			player.antennae = saveFile.data.antennae;
 		player.horns = saveFile.data.horns;
 		if (saveFile.data.hornType == undefined)
-			player.hornType = AppearanceDefs.HORNS_NONE;
+			player.hornType = Horns.NONE;
 		else
 			player.hornType = saveFile.data.hornType;
 
 		// <mod name="Dragon patch" author="Stadler76">
 		if (saveFile.data.rearBodyType != undefined)
 			saveFile.data.rearBody = saveFile.data.rearBodyType;
-		player.rearBody = (saveFile.data.rearBody == undefined) ? AppearanceDefs.REAR_BODY_NONE : saveFile.data.rearBody;
+		player.rearBody = (saveFile.data.rearBody == undefined) ? RearBody.NONE : saveFile.data.rearBody;
 
 		player.wingDesc = saveFile.data.wingDesc;
 		player.wingType = saveFile.data.wingType;
@@ -2530,7 +2539,7 @@ public function unFuckSave():void
 		//If dick length zero then player has never met Kath, no need to set flags. If her breast size is zero then set values for flags introduced with the employment expansion
 		if (flags[kFLAGS.KATHERINE_BREAST_SIZE] != 0) return; //Must be a new format save
 		if (flags[kFLAGS.KATHERINE_DICK_LENGTH] != 0) { 
-			flags[kFLAGS.KATHERINE_BREAST_SIZE]		= AppearanceDefs.BREAST_CUP_B;
+			flags[kFLAGS.KATHERINE_BREAST_SIZE]		= BreastCup.B;
 			flags[kFLAGS.KATHERINE_BALL_SIZE]		= 1;
 			flags[kFLAGS.KATHERINE_HAIR_COLOR]		= "neon pink";
 			flags[kFLAGS.KATHERINE_HOURS_SINCE_CUM] = 200; //Give her maxed out cum for that first time

@@ -1,7 +1,11 @@
 package classes.Scenes.Dungeons.Factory
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Wings;
 import classes.Scenes.Dungeons.Factory;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
@@ -77,14 +81,14 @@ public class OmnibusOverseer extends Monster
 			this.ballSize = 0;
 			this.cumMultiplier = 3;
 			// this.hoursSinceCum = 0;
-			this.createVagina(false, AppearanceDefs.VAGINA_WETNESS_DROOLING, AppearanceDefs.VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_NORMAL);
 			createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = AppearanceDefs.ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = AppearanceDefs.ANAL_WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_SLIME_DROOLING;
 			this.tallness = rand(9) + 70;
-			this.hipRating = AppearanceDefs.HIP_RATING_AMPLE+2;
-			this.buttRating = AppearanceDefs.BUTT_RATING_TIGHT;
-			this.lowerBody = AppearanceDefs.LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
+			this.hipRating = Hips.RATING_AMPLE+2;
+			this.buttRating = Butt.RATING_TIGHT;
+			this.lowerBody = LowerBody.DEMONIC_HIGH_HEELS;
 			this.skinTone = "light purple";
 			this.hairColor = "purple";
 			this.hairLength = 42;
@@ -108,9 +112,9 @@ public class OmnibusOverseer extends Monster
 			this.drop = new WeightedDrop(null, 1);
 			this.special1 = lustAura;
 			this.special2 = milkAttack;
-			this.wingType = AppearanceDefs.WING_TYPE_BAT_LIKE_TINY;
+			this.wingType = Wings.BAT_LIKE_TINY;
 			this.wingDesc = "tiny hidden";
-			this.tailType = AppearanceDefs.TAIL_TYPE_DEMONIC;
+			this.tailType = Tail.DEMONIC;
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
