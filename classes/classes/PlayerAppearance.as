@@ -1976,11 +1976,11 @@ public function RacialScores():void {
 	if (player.cheshireScore() >= 11) {
 		outputText("\n<font color=\"#0000a0\">Cheshire cat: " + player.cheshireScore() + " (");
 		if (player.findPerk(PerkLib.Flexibility) > 0) {
-			if (player.findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) outputText("+" + (115 * (1 + player.newGamePlusMod())) + " ");
-			else outputText("+" + (105 * (1 + player.newGamePlusMod())) + " ");
+			if (player.findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) outputText("+" + (80 * (1 + player.newGamePlusMod())) + " ");
+			else outputText("+" + (70 * (1 + player.newGamePlusMod())) + " ");
 		}
-		else outputText("+" + (95 * (1 + player.newGamePlusMod())) + " ");
-		outputText("max Spe, +" + (70 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else outputText("+" + (60 * (1 + player.newGamePlusMod())) + " ");
+		outputText("max Spe, +" + (80 * (1 + player.newGamePlusMod())) + " max Int, +" + (25 * (1 + player.newGamePlusMod())) + " max Sens)</font>");
 	}
 	else if (player.cheshireScore() >= 1 && player.cheshireScore() < 11) outputText("\n<font color=\"#008000\">Cheshire cat: " + player.cheshireScore() + "</font>");
 	else if (player.cheshireScore() < 1) outputText("\n<font color=\"#ff0000\">Cheshire cat: 0</font>");
@@ -2115,11 +2115,11 @@ public function RacialScores():void {
 	else if (player.horseScore() >= 4 && player.horseScore() < 7) outputText("\n<font color=\"#0000a0\">Half Horse-morph: " + player.horseScore() + " (+" + (20 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (35 * (1 + player.newGamePlusMod())) + " max HP)</font>");
 	else if (player.horseScore() >= 1 && player.horseScore() < 4) outputText("\n<font color=\"#008000\">Half Horse-morph: " + player.horseScore() + "</font>");
 	else if (player.horseScore() < 1) outputText("\n<font color=\"#ff0000\">Half Horse-morph: 0</font>");
-	if (player.humanScore() == 25) outputText("\n<font color=\"#0000a0\">HUMANITY: 25 (+" + (40 * (1 + player.newGamePlusMod())) + " max Str / Tou / Spe / Int / Wis / Lib / Sen)</font>");
-	else if (player.humanScore() == 24) outputText("\n<font color=\"#0000a0\">HUMANITY: 24 (+" + (30 * (1 + player.newGamePlusMod())) + " max Str / Tou / Spe / Int / Wis / Lib / Sen)</font>");
-	else if (player.humanScore() == 23) outputText("\n<font color=\"#0000a0\">HUMANITY: 23 (+" + (20 * (1 + player.newGamePlusMod())) + " max Str / Tou / Spe / Int / Wis / Lib / Sen)</font>");
-	else if (player.humanScore() == 22) outputText("\n<font color=\"#0000a0\">HUMANITY: 22 (+" + (10 * (1 + player.newGamePlusMod())) + " max Str / Tou / Spe / Int / Wis / Lib / Sen)</font>");
-	else if (player.humanScore() < 22) outputText("\n<font color=\"#008000\">HUMANITY: " + player.humanScore() + "</font>");
+	if (player.humanScore() == 30) outputText("\n<font color=\"#0000a0\">HUMANITY: 30 (+" + (40 * (1 + player.newGamePlusMod())) + " max Str / Tou / Spe / Int / Wis / Lib / Sen)</font>");
+	else if (player.humanScore() == 29) outputText("\n<font color=\"#0000a0\">HUMANITY: 29 (+" + (30 * (1 + player.newGamePlusMod())) + " max Str / Tou / Spe / Int / Wis / Lib / Sen)</font>");
+	else if (player.humanScore() == 28) outputText("\n<font color=\"#0000a0\">HUMANITY: 28 (+" + (20 * (1 + player.newGamePlusMod())) + " max Str / Tou / Spe / Int / Wis / Lib / Sen)</font>");
+	else if (player.humanScore() == 27) outputText("\n<font color=\"#0000a0\">HUMANITY: 27 (+" + (10 * (1 + player.newGamePlusMod())) + " max Str / Tou / Spe / Int / Wis / Lib / Sen)</font>");
+	else if (player.humanScore() < 27) outputText("\n<font color=\"#008000\">HUMANITY: " + player.humanScore() + "</font>");
 	if (player.internalChimeraScore() >= 1) {
 		outputText("\n<font color=\"#0000a0\">INTERNAL CHIMERICAL DISPOSITION: " + player.internalChimeraScore() + " (+" + (5 * player.internalChimeraScore() * (1 + player.newGamePlusMod())) + " max Str / Tou / Spe / Int / Wis / Lib)</font>");
 	}

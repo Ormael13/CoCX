@@ -31,11 +31,14 @@ package classes.Scenes
 			outputText("-New body part - face: Cheshire Smile Req. Cat Canines\n");
 			outputText("-New body part - arms: Cat arms Req. Cat Legs\n");
 			outputText("-Cat face/canines tf effect would req. instead cat ears cat arms. Other req. for cat face tf unchanged.\n");
+			outputText("-Cheshire racial bonuses changed to +60 max Spe, +80 max Int, +25 max Sens (all scalable), bonus 30% to evasion chance\n");
+			outputText("-Cheshire cat PC could use new m. special: Everywhere and nowhere. It rise evasion by 50% for 6 turns and have 10 turns cd.\n");
 			outputText("-New tier 2 misc lvl-up perk: Cat-like Nimbleness (Evolved). Req. Cat-like Nimbleness perk and any cat race (cat, nekomanta, cheshire) score 8+. Effect: +10 to max speed and toughness (scalable)\n");
 			outputText("-Perk Prestige Job: Seer would be till author rework this perk tree disabled (those PC's that picked it already will retain it).\n");
+			outputText("-Jabberwocky body parts would act as negative points to dragon score to avoid overlapping of both races bonuses.\n");
+			outputText("-Kindra archery training would progress 2x faster.\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-Fixed bugs: Wrath specials correctly list needed resource, option to send Izma to fishery before it's built\n\n\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Wrath specials correctly list needed resource, option to send Izma to fishery before it's built, many other small fixes\n\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("<b>Version 0.8i:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-Fixed bugs: \n");
@@ -47,12 +50,15 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Bat, Vampire, 
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -90,6 +96,11 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): dodać yuki-onna TF
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

@@ -4344,6 +4344,14 @@ private function combatStatusesUpdate():void {
 	//		outputText("<b>As your soulforce is drained you can feel Violet Pupil Transformation regenerative power spreading in your body.</b>\n\n");
 	//	}
 	}
+	//Everywhere and nowhere
+	if (player.hasStatusEffect(StatusEffects.EverywhereAndNowhere)) {
+		if (player.statusEffectv3(StatusEffects.EverywhereAndNowhere) <= 0) {
+			player.removeStatusEffect(StatusEffects.EverywhereAndNowhere);
+			outputText("<b>Everywhere and nowhere effect ended!</b>\n\n");
+		}
+		else player.addStatusValue(StatusEffects.EverywhereAndNowhere,1,-1);
+	}
 	//Ezekiel Curse
 	if (player.hasStatusEffect(StatusEffects.EzekielCurse)) {
 		if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 2 && player.findPerk(PerkLib.EzekielBlessing) >= 0) {
@@ -4372,6 +4380,15 @@ private function combatStatusesUpdate():void {
 		}
 		else {
 			player.addStatusValue(StatusEffects.CooldownInkSpray,1,-1);
+		}
+	}
+	//Everywhere And Nowhere
+	if (player.hasStatusEffect(StatusEffects.CooldownEveryAndNowhere)) {
+		if (player.statusEffectv1(StatusEffects.CooldownEveryAndNowhere) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownEveryAndNowhere);
+		}
+		else {
+			player.addStatusValue(StatusEffects.CooldownEveryAndNowhere,1,-1);
 		}
 	}
 	//Tail Smack

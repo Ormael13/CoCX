@@ -5202,7 +5202,7 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//Arms
-			if (!InCollection(AppearanceDefs.ARM_TYPE_GARGOYLE, AppearanceDefs.ARM_TYPE_LIZARD) && player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(3) == 0) {
+			if (player.armType != AppearanceDefs.ARM_TYPE_LIZARD && player.lowerBody == AppearanceDefs.LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of lizard one with leathery scales and short claws replacing your fingernails.  <b>You now have lizard arms.</b>");
 				setArmType(AppearanceDefs.ARM_TYPE_LIZARD);
 				changes++;

@@ -38,11 +38,11 @@ public class UnderwaterTigersharkGirl extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.sharkgirlScene.oceanSharkWinChoices();
+			SceneLib.sharkgirlScene.oceanTigerSharkWinChoices();
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.sharkgirlScene.sharkLossOceanRape();
+			SceneLib.sharkgirlScene.tigersharksharkLossOceanRape();
 		}
 		
 		public function UnderwaterTigersharkGirl() 

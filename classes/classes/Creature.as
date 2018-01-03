@@ -3695,7 +3695,7 @@ import flash.errors.IllegalOperationError;
 			//Modify armor rating based on weapons.
 			if (applyModifiers) {
 				if (game.player.weapon == game.weapons.JRAPIER || game.player.weapon == game.weapons.Q_GUARD || game.player.weapon == game.weapons.B_WIDOW || game.player.weapon == game.weapons.SPEAR || game.player.weapon == game.weapons.SESPEAR || game.player.weapon == game.weapons.DSSPEAR || game.player.weapon == game.weapons.LANCE
-				 || game.player.weaponRange == game.weaponsrange.SHUNHAR || game.player.weaponRange == game.weaponsrange.KSLHARP || game.player.weaponRange == game.weaponsrange.LEVHARP || game.player.weaponName.indexOf("staff") != -1 && game.player.findPerk(PerkLib.StaffChanneling) >= 0) armorMod = 0;
+				 || game.player.weaponRange == game.weaponsrange.SHUNHAR || game.player.weaponRange == game.weaponsrange.KSLHARP || game.player.weaponRange == game.weaponsrange.LEVHARP || (game.player.weaponName.indexOf("staff") != -1 && game.player.findPerk(PerkLib.StaffChanneling) >= 0)) armorMod = 0;
 				if (game.player.weapon == game.weapons.KATANA) armorMod -= 5;
 				if (game.player.findPerk(PerkLib.LungingAttacks) >= 0) armorMod /= 2;
 				if (armorMod < 0) armorMod = 0;
@@ -3812,6 +3812,10 @@ import flash.errors.IllegalOperationError;
 			if (hasStatusEffect(StatusEffects.Flying)) chance += 20;
 			if (hasStatusEffect(StatusEffects.HurricaneDance)) chance += 25;
 			if (hasStatusEffect(StatusEffects.BladeDance)) chance += 30;
+			if (game.player.cheshireScore() >= 11) {
+				if (hasStatusEffect(StatusEffects.EverywhereAndNowhere)) chance += 80;
+				else chance += 30;
+			}
 			return chance;
 		}
 
@@ -3823,6 +3827,7 @@ import flash.errors.IllegalOperationError;
 		public const EVASION_JUNGLESWANDERER:String = "Jungle's Wanderer";
 		public const EVASION_ILLUSION:String = "Illusion";
 		public const EVASION_FLYING:String = "Flying";
+		public const EVASION_CHESHIRE_PHASING:String = "Phasing";
 
 		/**
 	    * Try to avoid and @return a reason if successfull or null if failed to evade.
@@ -3850,6 +3855,7 @@ import flash.errors.IllegalOperationError;
 			if (hasStatusEffect(StatusEffects.Flying) && (roll < 20)) return "Flying";
 			if (hasStatusEffect(StatusEffects.HurricaneDance) && (roll < 25)) return "Hurricane Dance";
 			if (hasStatusEffect(StatusEffects.BladeDance) && (roll < 30)) return "Blade Dance";
+			if (game.player.cheshireScore() >= 11 && ((!hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 80)))) return "Phasing";
 			return null;
 		}
 
