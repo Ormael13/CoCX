@@ -253,7 +253,7 @@ import flash.utils.getQualifiedClassName;
 				//	[armors.LMARMOR,		armors.,			armors.]
 				];
 			clearOutput();
-			outputText("<b>Not curruntly implemented</b>");
+			outputText("<b>Placeholder Text Here</b>");
 
             var selectfrom:int = isCorrupt ? 2 : 1;
 			var selectMenu:ButtonDataList = new ButtonDataList();
@@ -262,7 +262,7 @@ import flash.utils.getQualifiedClassName;
 				else{
 					var item:ItemType = improvableItems[i][selectfrom];
 					var from:ItemType = improvableItems[i][0];
-					selectMenu.add(item.id,curry(improveItem,item,from)).disableIf(!player.hasItem(item));
+					selectMenu.add(item.id,curry(improveItem,item,from)).disableIf(!player.hasItem(from));
 				}
 			}
 			submenu(selectMenu,campInteraction);
