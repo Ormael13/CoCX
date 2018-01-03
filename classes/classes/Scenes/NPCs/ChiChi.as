@@ -74,7 +74,7 @@ use namespace CoC;
 		
 		public function SoulBlast():void {
 			if (!hasStatusEffect(StatusEffects.AbilityChanneled)) {
-				outputText("You see Chi Chi assuming a stance and waving soul art signs, - characteristic of a deadly attack you don’t recognise - its obviously a dangerous technique. The best option would be to dodge it.");
+				outputText("You see Chi Chi assuming a stance and waving soul art signs, - characteristic of a deadly attack you don’t recognise - it's obviously a dangerous technique. The best option would be to dodge it.");
 				createStatusEffect(StatusEffects.AbilityChanneled, 0, 0, 0, 0);
 			}
 			else {

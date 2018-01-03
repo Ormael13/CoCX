@@ -287,6 +287,13 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You already empowered with corrupt power!");
 			}
 		}
+		if (player.cheshireScore() >= 11) {
+			bd = buttons.add("Ever&Nowhere", EverywhereAndNowhere).hint("Periodically phase out of reality increasing your invasion as well as granting you the ability to surprise your opponent denying their defences.  \n\nWould go into cooldown after use for: 10 rounds");
+			bd.requireFatigue(physicalCost(30));
+			if (player.hasStatusEffect(StatusEffects.CooldownEveryAndNowhere)) {
+				bd.disable("<b>You need more time before you can use Everywhere and nowhere again.</b>\n\n");
+			}
+		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) {
 			bd = buttons.add("Air E.Asp", ElementalAspectAir);
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectAir)) {
@@ -1798,6 +1805,15 @@ public class MagicSpecials extends BaseCombatContent {
 		player.dynStats("tou", -player.statusEffectv2(StatusEffects.CrinosShape));
 		player.dynStats("spe", -player.statusEffectv3(StatusEffects.CrinosShape));
 		player.removeStatusEffect(StatusEffects.CrinosShape);
+		enemyAI();
+	}
+
+	public function EverywhereAndNowhere():void {
+		clearOutput();
+		fatigue(30, USEFATG_PHYSICAL);
+		outputText("You smirk as you start to phase in and out of existence. Good luck to whoever going to try and hit you because they will have to try extra hard.\n\n");
+		player.createStatusEffect(StatusEffects.EverywhereAndNowhere,6,0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownEveryAndNowhere,10,0,0,0);
 		enemyAI();
 	}
 	

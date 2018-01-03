@@ -69,12 +69,12 @@ package classes.Scenes.NPCs
 				if (player.hasStatusEffect(StatusEffects.KonstantinArmorPolishing)) player.removeStatusEffect(StatusEffects.KonstantinArmorPolishing);
 				player.createStatusEffect(StatusEffects.KonstantinArmorPolishing, 73, 10, 0, 0);
 				if (flags[kFLAGS.KONSTANTIN_SERVICES] < 2) flags[kFLAGS.KONSTANTIN_SERVICES]++;
-				if (flags[kFLAGS.KONSTANTIN_SERVICES] == 2) {
+				if (flags[kFLAGS.KONSTANTIN_SERVICES] == 2 && flags[kFLAGS.KONSTANTIN_FOLLOWER] < 2) {
 					meetKonstantinAtForest2();
 					return;
 				}
 				else {
-					outputText(" Thanking him for services, you take the armor and bid farewell to the smiling bear");
+					outputText(" Thanking him for services, you take the armor, thank the bear-morph");
 					if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) outputText(", and return to your daily tasks");
 					outputText(".\n\n");
 				}
@@ -95,13 +95,16 @@ package classes.Scenes.NPCs
 				if (player.hasStatusEffect(StatusEffects.KonstantinWeaponSharpening)) player.removeStatusEffect(StatusEffects.KonstantinWeaponSharpening);
 				player.createStatusEffect(StatusEffects.KonstantinWeaponSharpening, 73, 10, 0, 0);
 				if (flags[kFLAGS.KONSTANTIN_SERVICES] < 2) flags[kFLAGS.KONSTANTIN_SERVICES]++;
-				if (flags[kFLAGS.KONSTANTIN_SERVICES] == 2) {
+				if (flags[kFLAGS.KONSTANTIN_SERVICES] == 2 && flags[kFLAGS.KONSTANTIN_FOLLOWER] < 2) {
 					meetKonstantinAtForest2();
 					return;
 				}
 				else {
-					outputText(" After giving thanks to the friendly ursine, you return to ");
-					if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) outputText("daily tasks");
+					outputText(" After giving thanks to the friendly ursine, you return to your ");
+					if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) {
+						if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) outputText("cabin");
+						else outputText("bedroll");
+					}
 					else outputText("camp");
 					outputText(".\n\n");
 				}
@@ -896,8 +899,8 @@ package classes.Scenes.NPCs
 				addButton(1, "Recive BJ", KonstantinSexMenuReciveBJ);
 				addButton(2, "69", KonstantinSexMenu69);
 			}
-			//addButton(3, "Recive Anal", KonstantinSexMenuReciveAnal);
-			//addButton(4, "Hot Spring Fuck", KonstantinSexMenuHotSpringFuck);
+			addButton(3, "Recive Anal", KonstantinSexMenuReciveAnal);
+			if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(4, "Hot Spring Fuck", KonstantinSexMenuHotSpringFuck);
 			addButton(14, "Back", KonstantinMainCampMenu);
 		}
 		public function KonstantinSexMenuGiveBJ():void {
@@ -965,7 +968,7 @@ package classes.Scenes.NPCs
 		public function KonstantinSexMenu69():void {
 			clearOutput();
 			var x:int = player.cockThatFits(50, "length");
-			outputText("Locked under Konstantin soft embrace, you can see how your {pc.penis} twitches in arousal at the sight of his body, especially as you feel his strong muscles touching your {pc.skinFurScales}. Still unsure about how you’d like him to ravage you this time, you ask the bear aout what is on his mind.\n\n");
+			outputText("Locked under Konstantin soft embrace, you can see how your [cock] twitches in arousal at the sight of his body, especially as you feel his strong muscles touching your [skin]. Still unsure about how you’d like him to ravage you this time, you ask the bear aout what is on his mind.\n\n");
 			outputText("\"<i>Not gonna lie, I’d like to have a bit of fun with this little thing.</i>\" he answers, fingering your asshole teasingly. \"<i>But I’d also want to feel that ");
 			if (player.hasMuzzle()) outputText("muzzle");
 			else outputText("mouth");
@@ -984,11 +987,12 @@ package classes.Scenes.NPCs
 			outputText(" cock. ");
 			if (player.balls > 0) outputText("You feel his huge set of fuzzy nuts rubbing against your own");
 			else outputText("You feel his huge set of fuzzy nuts rubbing against your taint");
-			outputText(", sending shivers of excitement through you body, feeling only enhanced by the deep kissing in which your tongues are interlocked, the warm puff of his breath tickling your [skin] from time to time. {If wings} Your {pc.wings} flap?/flutter?/quiver? softly, as you’re being subjected to the bear rough oral affections.");
-			outputText("\n\nKonstantin breaks the kiss with a slobbery lick on your cheek, and, with you still dazzled with the remainders of your make-out, he proceeds to grab your cock");
+			outputText(", sending shivers of excitement through you body, feeling only enhanced by the deep kissing in which your tongues are interlocked, the warm puff of his breath tickling your [skin] from time to time");
+			if (player.wingType > 0) outputText(". Your [wings] flap softly, as you’re being subjected to the bear rough oral affections.");
+			outputText(".\n\nKonstantin breaks the kiss with a slobbery lick on your cheek, and, with you still dazzled with the remainders of your make-out, he proceeds to grab your cock");
 			if (player.cockTotal() > 1) outputText("s");
 			outputText(" with his bear-like paw");
-			if (player.cocks[x].cockThickness >= 4) outputText(", {if pc.cockwidth>4} albeit with some difficulty due the sheer girth of your combined erections");
+			if (player.cocks[x].cockThickness >= 4) outputText(", albeit with some difficulty due the sheer girth of your combined erections");
 			outputText(". The feeling of his paw pads on your cock soon becomes slick, as the pre starts pouring from both of your penises.\n\n");
 			outputText("His handjob starts with a slow place, simply rubbing your [cock] against his own manhood, the sounds of flesh-hitting-flesh becoming increasingly wet as pre soaks your nethers. As he increases his rhythm, so does the fire within your loins, since Konstantine leaves no spot free. One second you have a large finger spreading your pucker and playing with your vulnerable prostate,  the other you have his other hand grabbing your cockhead and teasing your cumslit. During all this, his pillar of meat is continuously rubbing your own penis. You feel pretty close, and b the look on his face, seems like your ursine lover is feeling the same.\n\n");
 			outputText("Then, before you can have your orgasm, Konstantine suddenly stops. Looking at him confused, he gives you a soft laugh,\n\n");
@@ -1030,23 +1034,94 @@ package classes.Scenes.NPCs
 			outputText("He takes you on his arms and puts you gently on the back of the bed, your arms and legs spread, and before you can say anything you feel your ");
 			if (player.hasMuzzle()) outputText("muzzle");
 			else outputText("mouth");
-			outputText(" locked with his muzzle in a passionate kiss.\n\n");
+			outputText(" locked with his muzzle in a passionate kiss. Konstantin’s ursine frame towers over your body, his big hands caressing your [skin] tenderly. Down there, ");
+			if (player.hasCock()) {
+				outputText("your erections are rubbing each other teasingly, his 22 inch mammoth ");
+				if (player.biggestCockLength() >= 20) outputText("matching");
+				else if (player.biggestCockLength() >= 12 && player.biggestCockLength() < 20) outputText("surpassing");
+				else outputText("dwarfing yours with ease");
+				outputText(", while his copious pre soaks your nethers");
+			}
+			if (player.hasVagina() && !player.hasCock()) outputText("his gigantic member is teasingly rubbing your aching lips, as Konstantin’s copious pre soaks your nethers");
+			if (player.gender == 0) outputText(" you can feel his erection rubbing your nethers, Konstantin’s copious pre soaking your [skin]");
+			outputText(".\n\nTaking you by surprise, a big finger finds its way to your butthole, gently prodding your [asshole]. ");
+			if (player.ass.analLooseness > 3) outputText("Your experienced backside has nothing but pleasure at feeling that familiar sensation of fullness, and Konstantin has no trouble in slipping a second one, earning a lusty moan from you, as the bear fingers and plays with your pucker.");
+			else outputText("You tight asshole has a bit of trouble accommodating the large finger, so Konstantin goes easy at first, loosening it carefully, until you feel comfortable. Once he thinks that your backdoor is roomy enough, he slips a second finger, earning a lusty moan from you, as the bear fingers and plays with your pucker.");
+			outputText(".\n\n\"<i>Please</i>\" you say, ");
+			if (player.hasVagina() && player.hasCock()) outputText("your [cock] leaking pre in excitement and your cunt aching from the arousal");
+			else if (player.hasVagina()) outputText("your cunt aching fom the arousal ");
+			else outputText("your [cock] leaking pre in excitement ");
+			outputText(". \"<i>I need it in!</i>\"\n\n");
+			outputText("\"<i>Relax, " + player.mf("man", "girl") + "</i>\" Konstantin says, breaking the kiss to give you a reassuring smile. \"<i>You’ll have it real soon.</i>\"\n\n");
+			outputText("He takes some of the pre leaking of his hulking member, and proceeds to coat it from head to base, until it has a slick sheen. Shortly after you feel the wetness announcing its presence at you pucker. Grabbing Konstantin by his shoulders, you beg him again to give it to you now. This time his only answer is a soft nod and a grunt, after which you feel something massive forcing its way inside you. ");
+			outputText("The cock made lube helps a lot, but you have to brace yourself to endure the anal assault that you’re having. Inch after inch, Konstantin's cock disappears inside you backdoor, your belly positively bulging with its outline, that moves further up as you take more of his meat. Panting, he keeps going, until, after a couple of vigorous thrusts, he slides in the last inches.\n\n");
+			outputText("Almost out of breath, you feel overwhelmed by the meaty spear on your insides, having to rely on Konstantin arms to support yourself. Then, between pants, you hear him saying:\n\n");
+			outputText("\"<i>Liked it " + player.mf("man", "girl") + "?</i>\" Lacking energy to give a proper answer, you nod weakly. \"<i>Good...because now the real stuff starts.</i>\"\n\n");
+			outputText("Wait, what?\n\n");
+			outputText("Before you can inquire about what he mean, the warm mammoth of flesh inside you retreats slowly, leaving you with a suddenly awful emptiness. But Konstantin hasn’t came yet, as you only feel his pre leaking. You realize that his head is still lodged in you pucker.\n\n");
+			outputText("\"<i>One</i>\"\n\n");
+			outputText("That only means that he is going to...\n\n");
+			outputText("\"<i>Two, and...</i>\"\n\n");
+			outputText("Oh no.\n\n");
+			outputText("\"<i>Three!</i>\"\n\n");
+			player.buttChange(22, true, true, false);
+			outputText("With that, he rams his whole cock inside. What little air that you have in your lungs is pushed out by the rough intrusion. Thankfully, this time is much easier, your hole pretty well lubed by the copious pre leaking from the bear’s cock.");
+			if (player.tailType > 0) outputText(" Your [tail] goes limp at the sudden intrusion.");
+			outputText("\n\nYour respite doesn’t last long, as this time Konstantin is giving you a rough and vigorous series of thrusts, reducing you to a moaning cocksleeve, his cock sliding in and out in a mess of leaking pre, your butts locked together, and his heavy nuts bouncing against your ");
+			if (player.balls > 0) outputText("own");
+			else outputText("taint");
+			outputText(". Your ");
+			if (player.hasVagina() && player.hasCock()) {
+				outputText("poor prostate is smashed by the gigantic penis violating your backside, and your own [cock], having endured enough, erupts into a messy orgasm, covering your [skin] ");
+				if (player.cumQ () > 1000) outputText(" and [face]");
+				outputText(" in cum, while your neglected pussy wets itself, girlcum soaking your thighs");
+			}
+			else if (player.hasVagina()) outputText("neglected pussy, having endured enough, wets itself, girlcum soaking your thighs");
+			else {
+				outputText("poor prostate is smashed by the gigantic penis violating your backside, and your own [cock], having endured enough, erupts into a messy orgasm, covering your [skin] ");
+				if (player.cumQ () > 1000) outputText(" and [face] in cum");
+			}
+			outputText(". Above, your ursine stud seems close too.\n\n");
+			outputText("\"<i>Fuck, [name] here it goes</i>\" Konstantin grunts.\n\n");
+			outputText("With that, he comes. A torrent of bear cum is released from his cumslit, and your swear that you can hear how the cum on his balls sloshes and flows to your butt, forced even wider by the sheer volume of the cream deluge that it’s experiencing. The delicious feeling of the cream flooding your innards feels even better than your own orgasm. The outline of his cock on your belly quickly disappears as the cream fills your belly. When he has finished, several loads later, you look positively pregnant, the cum that you didn’t manage to hold splashing onto your butt");
+			if (player.tailType > 0) outputText(" and [tail]");
+			outputText(". Konstantin then retreats his penis from you, letting some of his excess cum leak on the bed.\n\n");
+			outputText("\"<i>Damn, " + player.mf("boy", "girl") + ". That was quite a fuck</i>\" He laughs, still recovering from his orgasm.\n\n");
+			outputText("You tell him that indeed, it was, and try to move, but you're unable to do so, after such an exertion.\n\n");
+			outputText("\"<i>Whew, I did a number on you, didn’t I?</i>\" Konstantin adds, looking at your gaping asshole. \"<i>Here, let me help you.</i>\"\n\n");
+			outputText("Accepting his help you take his and and try to get up, to no avail, your cum-laden belly forcing you down. Instead, you opt to lie together in bed, relaxing and recovering of your intense lovemaking, while Konstantin gives you tender kisses, caressing your belly from time to time. After a while, you  remind yourself of your duties, and since you’re recovered enough, you grudgingly disentangle from his furred embrace, giving him a last hug before returning to your tasks.\n\n");
+			player.orgasm();
+			player.slimeFeed();
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function KonstantinSexMenuHotSpringFuck():void {
 			clearOutput();
 			outputText("With the desire of breaking routine a bit, you suggest Konstantin if he’d like to have a private bath with you on the hot spring. Enticed by the idea of a bath, the bear eagerly takes his things, while you do the same. When you’re starting to re-dress, he stops you again, saying.\n\n");
-			outputText("\"<i>Huh, " + player.mf("man", "girl") + ", I don’t think that we need to.</i>\" he says, his clothes packed aside his naked form. \"<i>{is camp population is =2} There is no one here besides us.{else} We’re among friends, and I’m pretty sure that they’ll take no mind if we stroll naked. Is not if we haven’t seen each other naked before.</i>\"\n\n");
-			outputText("{if not exhibitionist} Albeit a bit reluctantly");
-			outputText("{else} Eagerly");
+			outputText("\"<i>Huh, " + player.mf("man", "girl") + ", I don’t think that we need to.</i>\" he says, his clothes packed aside his naked form. \"<i>");
+			if (camp.getCampPopulation() >= 3) outputText("We’re among friends, and I’m pretty sure that they’ll take no mind if we stroll naked. Is not if we haven’t seen each other naked before");
+			else outputText("There is no one here besides us");
+			outputText(".</i>\"\n\n");
+			if (flags[kFLAGS.PC_FETISH] >= 1) outputText("Eagerly");
+			else outputText("Albeit a bit reluctantly");
 			outputText(", you agree with the bear, and pack a clean set of clothes with you. Your walk towards the peaceful and relaxing hot spring");
 			if (camp.getCampPopulation() >= 3) outputText(" quite tranquil and pleasant. The few of your companions that you meet out either give you a mischievous wink or simply give you a friendly wave. Having the soft, fresh winds of Mareth hitting your bodies only adds to the relaxing walk");
 			else outputText(", chatting with Konstantin all the while, the soft winds of Mareth caress  your naked bodies pleasantly");
 			outputText(".\n\nOnce you arrive, you clean yourself with a little  water, and then hop in the calm warm water. The steamy feel of the place and the relaxing bath drive away your worries and make you feel better about what the days ahead will have in store for you. While you’re musing on your thought, you remember about what you came here for when a large shape surrounds you and starts spooning you.\n\n");
 			outputText("\"<i>A nice place to relax, [name]</i>\" says the bear with a grin, while he caresses your back. \"<i>And for a couple of more interesting things.</i>\"\n\n");
-		//	outputText("Then, a familiar voice startles you.\n\n");
-		//	outputText("\"<i>Hey, [name] you aren’t going to say hello?</i>\"\n\n");
-		//	outputText("Then, a familiar voice startles you.\n\n");
+			outputText("Returning the smile, you enjoy each other company for a while, his hands caressing and rubbing your back and shoulders, while you peacefully rest on his chest, his wet fur tickling you. All that rubbing of your bodies eventually stirs up your lust, and then you have something big and throbbing resting over your buttcheeks.\n\n");
+			outputText("\"Damn, this is too hot, [name]</i>\" Konstantin muttes, obviously affected by your continuous contact. \"<i>Mind if I...,well?</i>\"\n\n");
+			outputText("Nodding, you tell him to go on, and soon feel the delicious sensation of his manhood spearing your [asshole]. The first bit that you feel is his cockhead, that is already spurting copiuous amounts of pre to ease its way up you bum. Being surrounded by strong arms and steamy water, your body and muscles are quite relaxed, and Konstantin has little trouble packing you with more and more of his meat.\n\n");
+			player.buttChange(22, true, true, false);
+			outputText("Before you realize it, almost twenty inches of thick, bear cock are inside you, but because you’re so lost in the bliss of having them slide out and in, you only notice it when seeing the vague outline of his cock in your belly every now and then. Then, a gasp coming from the bear’s mouth alerts you.\n\n");
+			outputText("\"<i>Fuck, I’m so...close, " + player.mf("man", "girl") + ". Brace, yourself.</i>\" Konstantin manages to mutter, albeit a with a bit of difficulty.\n\n");
+			outputText("And with then, you feel your gut being flooded with that delicious stream of bear milk, the warmness of Konstantin cream inside you being as good, if not better than the steamy, relaxing water around you. ");
+			if (player.hasVagina() && player.hasCock()) outputText("Your own arousal gets a spike from this, your [cock] exploding in a cummy mess that covers your nethers and chest and your [vagina] soaking itself in girlcum");
+			else if (player.hasVagina()) outputText("Your own arousal gets a spike from this, your [vagina] soaking itself in girlcum");
+			else outputText("Your own arousal gets a spike from this, your [cock] exploding in a cummy mess that covers your nethers and chest");
+			outputText(".\n\nMeanwhile, the bear’s release keeps pouring from his cumlist in a semen deluge, your belly inflating as he keeps packing you with his seed. After a long while, his flow subsides, leaving you with a pregnant-like belly. Done with your orgasms, both of you relax for a while, his now limp cock still resting in your [asshole].\n\n");
+			outputText("Later, you disentangle of each other and wash again before you leave, his seed pouring from your anus as you walk. Laughing, he helps you clean yourself and  the excess cum out of your body. Then you dry yourselves and get dressed, and, after a strong hug and a loving kiss, you part ways with a satisfied smile on your faces.\n\n");
+			player.orgasm();
+			player.slimeFeed();
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}

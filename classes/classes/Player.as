@@ -1840,19 +1840,29 @@ use namespace CoC;
 				humanCounter++;
 			if (findPerk(PerkLib.CatlikeNimbleness) < 0)
 				humanCounter++;
+			if (findPerk(PerkLib.CatlikeNimblenessEvolved) < 0)
+				humanCounter++;
 			if (findPerk(PerkLib.DraconicLungs) < 0)
+				humanCounter++;
+			if (findPerk(PerkLib.DraconicLungsEvolved) < 0)
 				humanCounter++;
 			if (findPerk(PerkLib.GorgonsEyes) < 0)
 				humanCounter++;
 			if (findPerk(PerkLib.KitsuneThyroidGland) < 0)
 				humanCounter++;
+			if (findPerk(PerkLib.KitsuneThyroidGlandEvolved) < 0)
+				humanCounter++;
 			if (findPerk(PerkLib.LizanMarrow) < 0)
+				humanCounter++;
+			if (findPerk(PerkLib.LizanMarrowEvolved) < 0)
 				humanCounter++;
 			if (findPerk(PerkLib.ManticoreMetabolism) < 0)
 				humanCounter++;
 			if (findPerk(PerkLib.MantislikeAgility) < 0)
 				humanCounter++;
 			if (findPerk(PerkLib.SalamanderAdrenalGlands) < 0)
+				humanCounter++;
+			if (findPerk(PerkLib.SalamanderAdrenalGlandsEvolved) < 0)
 				humanCounter++;
 			if (findPerk(PerkLib.ScyllaInkGlands) < 0)
 				humanCounter++;
@@ -2885,6 +2895,8 @@ use namespace CoC;
 			var jabberwockyCounter:Number = 0;
 			if (faceType == Face.JABBERWOCKY || faceType == Face.BUCKTOOTH)
 				jabberwockyCounter++;
+      if (faceType == Face.DRAGON || faceType == Face.DRAGON_FANGS)
+				jabberwockyCounter -= 10;
 			if (eyeType == Eyes.DRAGON)
 				jabberwockyCounter++;
 			if (earType == Ears.DRAGON)
@@ -2895,6 +2907,8 @@ use namespace CoC;
 				jabberwockyCounter++;
 			if (wingType == Wings.FEY_DRAGON_WINGS)
 				jabberwockyCounter += 4;
+			if (wingType == Wings.DRACONIC_SMALL || wingType == Wings.DRACONIC_LARGE || wingType == Wings.DRACONIC_HUGE)
+				jabberwockyCounter -= 10;
 			if (lowerBody == LowerBody.DRAGON)
 				jabberwockyCounter++;
 			if (armType == Arms.DRAGON)
@@ -5110,9 +5124,10 @@ use namespace CoC;
 				maxWis += (85 * newGamePlusMod);
 			}
 			if (cheshireScore() >= 11) {
-				if (findPerk(PerkLib.Flexibility) > 0) maxSpe += (105 * newGamePlusMod);
-				else maxSpe += (95 * newGamePlusMod);
-				maxInt += (70 * newGamePlusMod);
+				if (findPerk(PerkLib.Flexibility) > 0) maxSpe += (70 * newGamePlusMod);
+				else maxSpe += (60 * newGamePlusMod);
+				maxInt += (80 * newGamePlusMod);
+				maxSen += (25 * newGamePlusMod)
 			}
 			if (bunnyScore() >= 4) {
 				maxSpe += (10 * newGamePlusMod);
@@ -5572,7 +5587,7 @@ use namespace CoC;
 				maxWis -= (15 * newGamePlusMod);
 				}
 			}
-			if (humanScore() == 25) {
+			if (humanScore() == 30) {
 				maxStr += (40 * newGamePlusMod);
 				maxTou += (40 * newGamePlusMod);
 				maxSpe += (40 * newGamePlusMod);
@@ -5581,7 +5596,7 @@ use namespace CoC;
 				maxLib += (40 * newGamePlusMod);
 				maxSen += (40 * newGamePlusMod);
 			}
-			if (humanScore() == 24) {
+			if (humanScore() == 29) {
 				maxStr += (30 * newGamePlusMod);
 				maxTou += (30 * newGamePlusMod);
 				maxSpe += (30 * newGamePlusMod);
@@ -5590,7 +5605,7 @@ use namespace CoC;
 				maxLib += (30 * newGamePlusMod);
 				maxSen += (30 * newGamePlusMod);
 			}
-			if (humanScore() == 23) {
+			if (humanScore() == 28) {
 				maxStr += (20 * newGamePlusMod);
 				maxTou += (20 * newGamePlusMod);
 				maxSpe += (20 * newGamePlusMod);
@@ -5599,7 +5614,7 @@ use namespace CoC;
 				maxLib += (20 * newGamePlusMod);
 				maxSen += (20 * newGamePlusMod);
 			}
-			if (humanScore() == 22) {
+			if (humanScore() == 27) {
 				maxStr += (10 * newGamePlusMod);
 				maxTou += (10 * newGamePlusMod);
 				maxSpe += (10 * newGamePlusMod);
@@ -5996,6 +6011,9 @@ use namespace CoC;
 			}
 			if(hasStatusEffect(StatusEffects.Lustzerking)) {
 				removeStatusEffect(StatusEffects.Lustzerking);
+			}
+			if(hasStatusEffect(StatusEffects.EverywhereAndNowhere)) {
+				removeStatusEffect(StatusEffects.EverywhereAndNowhere);
 			}
 			if(CoC.instance.monster.hasStatusEffect(StatusEffects.TailWhip)) {
 				CoC.instance.monster.removeStatusEffect(StatusEffects.TailWhip);

@@ -461,7 +461,7 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.ELECTRA_AFFECTION] > 0)
 			interpersonStats += "<b>Electra Affection:</b> " + Math.round(flags[kFLAGS.ELECTRA_AFFECTION]) + "%\n";
 
-if (SceneLib.emberScene.emberAffection() > 0) {
+		if (SceneLib.emberScene.emberAffection() > 0) {
             interpersonStats += "<b>Ember Affection:</b> " + Math.round(SceneLib.emberScene.emberAffection()) + "%\n";
             if (flags[kFLAGS.EMBER_LVL_UP] == 7) interpersonStats += "<b>Ember lvl:</b> 62\n";
 			if (flags[kFLAGS.EMBER_LVL_UP] == 6) interpersonStats += "<b>Ember lvl:</b> 56\n";
@@ -473,7 +473,7 @@ if (SceneLib.emberScene.emberAffection() > 0) {
 			if (flags[kFLAGS.EMBER_LVL_UP] < 1) interpersonStats += "<b>Ember lvl:</b> 20\n";
 		}
 
-if (SceneLib.helFollower.helAffection() > 0)
+		if (SceneLib.helFollower.helAffection() > 0)
             interpersonStats += "<b>Helia Affection:</b> " + Math.round(SceneLib.helFollower.helAffection()) + "%\n";
         if (SceneLib.helFollower.helAffection() >= 100)
             interpersonStats += "<b>Helia Bonus Points:</b> " + Math.round(flags[kFLAGS.HEL_BONUS_POINTS]) + "\n";

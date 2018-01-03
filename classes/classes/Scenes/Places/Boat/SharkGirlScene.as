@@ -82,7 +82,7 @@ public function oceanSharkGirlEncounter():void {
 	}
 	outputText("You are under attack by a shark girl!");
 	startCombat(new UnderwaterSharkGirl());
-	//spriteSelect(70);
+	spriteSelect(70);
 }
 public function oceanTigersharkGirlEncounter():void {
 	clearOutput();
@@ -94,7 +94,7 @@ public function oceanTigersharkGirlEncounter():void {
 	}
 	outputText("You are under attack by a tiger shark girl!");
 	startCombat(new UnderwaterTigersharkGirl());
-	//spriteSelect(32);
+	spriteSelect(32);
 }
 
 //Victory Sex. Herms should get a choice between the two scenes:
@@ -129,14 +129,23 @@ internal function sharkWinChoices():void {
 public function oceanSharkWinChoices():void {
 	spriteSelect(70);
 	clearOutput();
-	outputText("The ");
-	if (flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] == 2) outputText("tiger ");
-	outputText("shark girl unable to fight further as she slowly lets the currents carry her. Well, you could have fun with her but are you in the mood to begin with?");
+	outputText("The shark girl unable to fight further as she slowly lets the currents carry her. Well, you could have fun with her but are you in the mood to begin with?");
 	menu();
-	addButton(0, "Leave", camp.returnToCampUseOneHour);
+	addButton(0, "Leave", cleanupAfterCombat);
 	if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
-		if (player.hasCock()) addButton(1, "Fuck Her", sharkgirlOceanDickFuck);
-		if (player.hasVagina()) addButton(2, "Sixty nine", sharkgirlOceanSixtyNine);
+		if (player.hasCock()) addButton(1, "Fuck Her", sharkgirlOceanDickFuck1);
+		if (player.hasVagina()) addButton(2, "Sixty nine", sharkgirlOceanSixtyNine1);
+	}
+}
+public function oceanTigerSharkWinChoices():void {
+	spriteSelect(32);
+	clearOutput();
+	outputText("The tiger shark girl unable to fight further as she slowly lets the currents carry her. Well, you could have fun with her but are you in the mood to begin with?");
+	menu();
+	addButton(0, "Leave", cleanupAfterCombat);
+	if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
+		if (player.hasCock()) addButton(1, "Fuck Her", sharkgirlOceanDickFuck2);
+		if (player.hasVagina()) addButton(2, "Sixty nine", sharkgirlOceanSixtyNine2);
 	}
 }
 
@@ -171,9 +180,17 @@ private function sharkgirlDickFuck():void {
 	dynStats("sen", -1);
 	if(player.cor < 33) dynStats("cor", 1);
 }
-private function sharkgirlOceanDickFuck():void {
+private function sharkgirlOceanDickFuck1():void {
 	clearOutput();
 	spriteSelect(70);
+	
+}
+private function sharkgirlOceanDickFuck2():void {
+	clearOutput();
+	spriteSelect(32);
+	sharkgirlOceanDickFuck();
+}
+private function sharkgirlOceanDickFuck():void {
 	outputText("You sneer at the defeated ");
 	if (flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] == 2) outputText("tiger ");
 	outputText("shark girl, making up your mind to have your way with her. You grab her by the tail, swim back to your boat and forcefully pull her out of the water dropping her flat on the wood floor.\n\n");
@@ -229,9 +246,17 @@ private function sharkgirlSixtyNine():void {
 	dynStats("sen", -1);
 	if(player.cor < 33) dynStats("cor", 1);
 }
-private function sharkgirlOceanSixtyNine():void {
+private function sharkgirlOceanSixtyNine1():void {
 	clearOutput();
 	spriteSelect(70);
+	sharkgirlOceanSixtyNine();
+}
+private function sharkgirlOceanSixtyNine2():void {
+	clearOutput();
+	spriteSelect(32);
+	sharkgirlOceanSixtyNine();
+}
+private function sharkgirlOceanSixtyNine():void {
 	outputText("Making up your mind to rape the ");
 	if (flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] == 2) outputText("tiger ");
 	outputText("shark girl, you remove your [armor] and approach the slut before taking a firm grip on her silver hair. \"<i>You know what to do, bitch,</i>\" you sneer, pulling her head into your damp cunt. The ");
@@ -410,6 +435,19 @@ public function sharkLossOceanRape():void {
 	}
 	clearOutput();
 	spriteSelect(70);
+	sharkLossOceanRape2();
+}
+public function tigersharksharkLossOceanRape():void {
+	if (flags[kFLAGS.SFW_MODE] > 0) {
+		doSFWloss();
+		cleanupAfterCombat();
+		return;
+	}
+	clearOutput();
+	spriteSelect(32);
+	sharkLossOceanRape2();
+}
+public function sharkLossOceanRape2():void {	
 	outputText("Defeated, you pathetically try to swim back to the boat but the ");
 	if (flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] == 2) outputText("tiger ");
 	if (!player.canSwimUnderwater()) outputText(", forcefully feeding you a strange kelp in the process. Somehow thanks to the aquatic plant you manage to breath underwater");
