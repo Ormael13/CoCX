@@ -140,7 +140,7 @@ addButton(14, "Back", CoC.instance.mainMenu.mainMenu);
 
 		menu();
 		addButton(0, "Toggle Debug", toggleDebug).hint("Turn on debug mode. Debug mode is intended for testing purposes but can be thought of as a cheat mode.  Items are infinite and combat is easy to escape from.  Weirdness and bugs are to be expected.");
-		if (player.str > 0) addButton(1, "Difficulty", difficultySelectionMenu).hint("Adjust the game difficulty to make it easier or harder.");
+		if (player) addButton(1, "Difficulty", difficultySelectionMenu).hint("Adjust the game difficulty to make it easier or harder.");
 		//addButton(1, "Easy Mode", toggleEasyModeFlag).hint("Toggles easy mode.  Enemy damage is halved and bad-ends can be ignored.");
 		addButton(2, "Silly Toggle", toggleSillyFlag).hint("Toggles silly mode. Funny, crazy and nonsensical scenes may occur if enabled.");
 		addButton(3, "Low Standards", toggleStandards);
@@ -149,8 +149,8 @@ addButton(14, "Back", CoC.instance.mainMenu.mainMenu);
 		addButton(5, "SFW Toggle", toggleSFW).hint("Toggles SFW Mode. If enabled, sex scenes are hidden and all adult materials are censored. \n\nCurrently under development, only disables most sex scenes. Soon, it'll disable rape scenes."); //Softcore Mode
 		addButton(6, "Auto level", toggleAutoLevel).hint("Toggles automatic leveling when you accumulate sufficient experience.");
 		addButton(7, "Stat Pts", toggleStatGain).hint("Toggles stat gain mode");
-		if (player.str > 0) addButton(8, "Enable Surv", enableSurvivalPrompt).hint("Enable Survival mode. This will enable hunger. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off!</font>");
-		if (player.str > 0) addButton(9, "Enable Real", enableRealisticPrompt).hint("Enable Realistic mode. This will make the game a bit realistic. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off! Do not turn this on if you have hyper endowments.</font>");
+		if (player) addButton(8, "Enable Surv", enableSurvivalPrompt).hint("Enable Survival mode. This will enable hunger. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off!</font>");
+		if (player) addButton(9, "Enable Real", enableRealisticPrompt).hint("Enable Realistic mode. This will make the game a bit realistic. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off! Do not turn this on if you have hyper endowments.</font>");
 		
 		addButton(10, "Eternal Holiday", toggleEternalHoliday).hint("Toggles etenral holiday mode. All holiday events like Eastern/X-mas and etc. would happen at any day of the year.");
 		addButton(11, "Fetishes", fetishSubMenu).hint("Toggle some of the weird fetishes such as watersports and worms.");

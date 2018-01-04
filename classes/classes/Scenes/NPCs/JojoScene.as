@@ -47,10 +47,6 @@ public class JojoScene extends NPCAwareContent implements TimeAwareInterface {
 		}
 		//End of Interface Implementation
 
-	protected function set monk(value:Number):void{
-		monk = value;
-	}
-
 //const TIMES_AMILY_AND_JOJO_PLAYED_TIMES:int = 434;
 //const AMILY_X_JOJO_COOLDOWN:int = 435;
 //const JOJO_MOVE_IN_DISABLED:int = 550;
