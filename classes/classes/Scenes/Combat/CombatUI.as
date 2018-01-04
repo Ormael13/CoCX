@@ -206,8 +206,8 @@ public class CombatUI extends BaseCombatContent {
 		if (monster is SandTrap) {
 			btnSpecial1.show("Climb", (monster as SandTrap).sandTrapWait, "Climb the sand to move away from the sand trap.");
 		} else if (monster is Alraune) {
-			btnSpecial1.show("Struggle", (monster as Alraune).alrauneWait, "Struggle to forcefully pull yourself a good distance away from plant woman.");
 			if (player.fatigueLeft() < 50) btnSpecial1.disable("You're too tired to struggle.");
+			else btnSpecial1.show("Struggle", (monster as Alraune).alrauneWait, "Struggle to forcefully pull yourself a good distance away from plant woman.");
 		} else if (monster is DriderIncubus) {
 			var drider:DriderIncubus = monster as DriderIncubus;
 			if (!drider.goblinFree) btnSpecial1.show("Free Goblin", drider.freeGoblin);
@@ -250,7 +250,7 @@ public class CombatUI extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles) && player.statusEffectv3(StatusEffects.LethicesRapeTentacles) == 1) {
 			outputText("\n<b>Lethice's tentacles have a firm grip of your limbs!</b>");
 			addButton(0, "Struggle", (monster as Lethice).grappleStruggle);
-			addButton(5, "Wait", (monster as Lethice).grappleWait);
+			addButton(1, "Wait", (monster as Lethice).grappleWait);
 			
 			var whitefireLustCap:int = player.maxLust() * 0.75;
 			if (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < (10 + player.corruptionTolerance())) whitefireLustCap += (player.maxLust() * 0.1);
@@ -259,7 +259,7 @@ public class CombatUI extends BaseCombatContent {
 			if (player.findPerk(PerkLib.GreyMage) >= 0 && player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < (10 + player.corruptionTolerance())) whitefireLustCap = (player.maxLust() - 15);
 			var gotEnergy:Boolean = player.findPerk(PerkLib.BloodMage) < 0 && player.mana >= 30;
 			if (player.lust < whitefireLustCap && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && gotEnergy) {
-				addButton(1, "Dispell", (monster as Lethice).dispellRapetacles);
+				addButton(2, "Dispell", (monster as Lethice).dispellRapetacles);
 			}
 		}
 	}

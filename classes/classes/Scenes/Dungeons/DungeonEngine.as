@@ -251,7 +251,7 @@ public class DungeonEngine extends BaseContent
 			return (flags[kFLAGS.HIDDEN_CAVE_BOSSES] > 1 && flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] > 4 && flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] > 7);
 		}
 		public function checkDenOfDesireClear():Boolean {
-			return (flags[kFLAGS.DEN_OF_DESIRE_QUEST] > 1 && flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 2);
+			return (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 2);
 		}
 		
 		public function enterFactory():void {

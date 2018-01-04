@@ -173,8 +173,7 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 				
 				if (this.lustVuln <= 0.3) outputText(" Whatever is in that healing nectar must be weakening her self-control.");
 			}
-			
-this.HP = this.maxHP();
+			this.HP = this.maxHP();
 			this.lustVuln += 0.3;
 			this.fatigue += 5;
 			if (fatigue >= this.maxFatigue()) { //Exhausted!
@@ -206,20 +205,15 @@ this.HP = this.maxHP();
 		public function grappleStruggle():void
 		{
 			clearOutput();
-			
 			var numRounds:int = player.statusEffectv1(StatusEffects.Tentagrappled);
-			
 			if (rand(player.str) > this.str / (1 + (numRounds / 2)))
 			{
 				outputText("You scrabble desperately against the tentacles enveloping your body, pulling against the cast-iron grip around your limbs. You tug against them again and again, and with one final mighty heave, you slip free of their grasp!");
-				
 				player.removeStatusEffect(StatusEffects.Tentagrappled);
-				
 			}
 			else
 			{
 				outputText("You scrabble desperately against the tentacles enveloping your body, pulling against the cast-iron grip around your limbs. You tug against them again and again");
-				
 				if (rand(2) == 0)
 				{
 					outputText(", but the vines encircling you squeeze you tighter, twisting and sliding across your [skinFurScales] as they press more tightly around you. It gets hard to breathe, but at the same time, some of them are inside your [armor], gliding across your most sensitive places with oiled ease that's made all the more arousing by the force behind it.");	
@@ -228,7 +222,6 @@ this.HP = this.maxHP();
 				{
 					outputText(". You're intimately aware of the vegetative masses pressing down on you from every angle, lavishing you with attentions so forceful that they threaten to squeeze the very breathe from your body. It's impossible to ignore. You do your best to breathe and ignore the undulated affections, but even you can't deny the way that it makes your heart beat faster.");
 				}
-				
 				player.addStatusValue(StatusEffects.Tentagrappled, 1, 1);
 				if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
 					player.takePhysDamage(0.75*this.str + rand(15));
@@ -236,12 +229,14 @@ this.HP = this.maxHP();
 				player.dynStats("lus+", 3 + rand(3));
 				if (flags[kFLAGS.PC_FETISH] >= 2) player.dynStats("lus+", 5);
 			}
+			SceneLib.combat.enemyAIImpl();
 		}
 		
 		public function grappleWait():void
 		{
 			clearOutput();
 			squeeze();
+			SceneLib.combat.enemyAIImpl();
 		}
 		
 		private function squeeze():void
@@ -254,7 +249,6 @@ this.HP = this.maxHP();
 			{
 				outputText("You're intimately aware of the vegetative masses pressing down on you from every angle, lavishing you with attentions so forceful that they threaten to squeeze the very breathe from your body. It's impossible to ignore. You do your best to breathe and ignore the undulated affections, but even you can't deny the way that it makes your heart beat faster.");
 			}
-	
 			player.addStatusValue(StatusEffects.Tentagrappled, 1, 1);
 			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
 				player.takePhysDamage(.75*this.str + rand(15));

@@ -143,7 +143,6 @@ public class Izumi extends Monster
 		public function cleanup():void
 		{
 			if (combatDebug) trace("Cleaning up lingering effects...");
-			
 			cleanupChokeslam();
 			cleanupGroundpound();
 			cleanupTitsmother();
@@ -154,7 +153,6 @@ public class Izumi extends Monster
 		public function straightJab():void
 		{
 			outputText("Quick as a flash, Izumi lashes out with her free hand, aiming for your head.");
-
 			var damage:int = int((str + 175) - rand(player.tou) - player.armorDef);
 			if (player.getEvasionRoll())
 			{
@@ -217,18 +215,14 @@ public class Izumi extends Monster
 		public function chokeSlamStruggle():void
 		{	
 			clearOutput();
-			
 			var brokeFree:Boolean;
-			
 			if (rand(player.str) > this.str / 2)
 			{
 				brokeFree = true;
 			}
-			
 			if (brokeFree)
 			{
 				if (combatDebug) trace("Escaped from Chokeslam grapple");
-				
 				chokeSlamEscape();
 			}
 			else
@@ -239,16 +233,15 @@ public class Izumi extends Monster
 				outputText(" strength, in an attempt to free yourself from her crushing embrace, without success.");
 				player.takePhysDamage(75 + rand(15), true);
 			}
+			SceneLib.combat.enemyAIImpl();
 		}
 		
 		// OH HEY ITS A THING
 		public function chokeSlamWait():void
 		{
 			clearOutput();
-			
 			outputText("Your feet dangle uselessly in the air as Izumi holds you aloft.  Why bother resisting?  She's just so <i>strong</i>, her fingers wrapped so completely around your neck...");
 			player.takePhysDamage(75 + rand(15), true);
-			
 			if (flags[kFLAGS.PC_FETISH] >= 2)
 			{
 				outputText(" and to be honest, the grip isn't an entirely unplesent experience, either.  If only Izumi would stop playing around and just <i>take you</i> already.");
@@ -258,6 +251,7 @@ public class Izumi extends Monster
 			{
 				outputText(".");
 			}
+			SceneLib.combat.enemyAIImpl();
 		}
 		
 		// Player fails to escape from the chokeslam, and after 3 rounds gets nailed to the fuckin floor
@@ -370,18 +364,14 @@ public class Izumi extends Monster
 		public function titSmotherStruggle():void
 		{
 			if (combatDebug) trace("Titsmother Struggle");
-			
 			var brokeFree:Boolean;
-			
 			if (rand(player.str) > this.str / 4)
 			{
 				brokeFree = true;
 			}
-			
 			if (brokeFree)
 			{
 				if (combatDebug) trace("Broke free of Titsmother!");
-				
 				titSmotherEscape();
 			}
 			else
@@ -416,6 +406,7 @@ public class Izumi extends Monster
 				}
 				player.dynStats("lus", player.lib / 15 + 5 + rand(5));
 			}
+			SceneLib.combat.enemyAIImpl();
 		}
 		
 		// Player breaks free of tiSmother and applies damage to Izumi
@@ -423,7 +414,6 @@ public class Izumi extends Monster
 		{
 			if (combatDebug) trace("Escaping TitSmother!");
 			clearOutput();
-			
 			if (player.str < 90)
 			{
 				outputText("Straining with all your might, you still can’t quite manage to break Izumi’s grip, but you do manage to somehow slide upwards through the valley of her bust.  Izumi’s face looms into view, the enormous woman gritting her teeth as she attempts to crush the fight out of you.  In an act of desperation, you rear back and then knife forwards in a brutal headbutt.\n\n");
@@ -432,17 +422,13 @@ public class Izumi extends Monster
 			else
 			{
 				outputText("Locking your arms against Izumi’s shoulders, you heave with all your might against the musclebound Oni girl’s choke hold.  You can feel her arm straining to hold you, struggling to resist, giving ground....");
-				
 				if (player.isBiped()) 
 				{
 					outputText("  As soon as you can, you hike up your legs and place your feet firmly on Izumi’s stomach, adding your leg muscles to the effort.");
 				}
-				
 				outputText("  Izumi grits her teeth and growls as she pulls with all her might, trying to force your limbs to give way, but to no avail - with a final thrust, Izumi lets out a yelp as you knock her arm aside and leap away.  Izumi rolls her arm around a little, massaging her shoulder as she regards you, thoughtfully.  Then she reaches up and fans at her face with one hand, grinning that suggestive grin.\n\n");
 			}
-
 			outputText("“Oh my,” she purrs, lasciviously. “Aren’t you the impressive one?  Keep surprising me like that and I might just forget about this handicap...” ");
-
 			cleanupTitsmother();
 			var damage:Number = (15 + rand(player.str));
 			this.HP -= damage;
@@ -453,13 +439,9 @@ public class Izumi extends Monster
 		public function titSmotherWait():void
 		{
 			clearOutput();
-			
 			if (combatDebug) trace("Waiting during TitSmother");
-			
 			outputText("With your face crushed into the Oni's cleavage, you can't help but wonder; why bother resisting?  She's just so <i>strong</i>, and her breasts feel so lushious against your [face]...");
-			
-			player.dynStats("lus", player.lib / 10 + 5 + rand(5));
-			
+			player.dynStats("lus", player.lib / 10 + 5 + rand(5));	
 			if (flags[kFLAGS.PC_FETISH] >= 2)
 			{
 				outputText(" and to be honest, her grip isn't an entirely unplesent experience, either.  If only Izumi would stop playing around and just <i>take you</i> already.");
@@ -469,7 +451,7 @@ public class Izumi extends Monster
 			{
 				outputText(".");
 			}
+			SceneLib.combat.enemyAIImpl();
 		}
 	}
-
 }

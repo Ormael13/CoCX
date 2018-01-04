@@ -11,9 +11,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const HOOFED:int                = 1;
 	public static const DOG:int                   = 2;
 	public static const NAGA:int                  = 3;
-	[Deprecated]
-	/** use HOOFED and legCount = 4 */
-	public static const CENTAUR:int               = 4;
+	public static const CENTAUR:int               = 4;//[Deprecated] use HOOFED and legCount = 4
 	public static const DEMONIC_HIGH_HEELS:int    = 5;
 	public static const DEMONIC_CLAWS:int         = 6;
 	public static const BEE:int                   = 7;
@@ -32,9 +30,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const FERRET:int                = 20;
 	public static const CLOVEN_HOOFED:int         = 21;
 	public static const ECHIDNA:int               = 23;
-	[Deprecated]
-	/** use CLOVEN_HOOFED and legCount = 4 */
-	public static const DEERTAUR:int              = 24;
+	public static const DEERTAUR:int              = 24;//[Deprecated] use CLOVEN_HOOFED and legCount = 4
 	public static const SALAMANDER:int            = 25;
 	public static const SCYLLA:int                = 26;
 	public static const MANTIS:int                = 27;

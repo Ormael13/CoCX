@@ -591,7 +591,9 @@ public class CombatSoulskills extends BaseCombatContent {
 		var soulforcecost:int = 100 * soulskillCost() * soulskillcostmulti();
 		player.soulforce -= soulforcecost;
 		var damage:Number = 0;
+		damage += strenghtscalingbonus();
 		damage += inteligencescalingbonus();
+		damage += wisdomscalingbonus();
 		if (damage < 10) damage = 10;
 		damage *= spellMod();
 		//soulskill mod effect

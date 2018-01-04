@@ -104,7 +104,7 @@ public class Diva extends Monster {
 		}
 		else{*/
 			addHP(maxHP() * .2);
-			var dam:int = 100;//this.str * 5
+			var dam:int = this.str * 2;
 			for(var i:int = 0; i < _biteCounter;i++){
 				dam += dam * .50;
 			}
@@ -117,7 +117,7 @@ public class Diva extends Monster {
     }
     private function moveSwoopToss():void{
         display("moves/swoopToss");
-        var dam:int = 20;
+        var dam:int = 50;
 		dam += this.str;
         dam += rand((140 - player.tallness) * .25);
         player.takePhysDamage(dam);

@@ -93,7 +93,7 @@ public class Ceraph extends Monster
 				}
 				outputText("!");
 				player.removeStatusEffect(StatusEffects.Bound);
-				return;
+				//return;
 			}
 			else {
 				outputText("Despite your frantic struggling, all you manage to do is chafe against her impressively taut leather whip.");
@@ -108,6 +108,7 @@ public class Ceraph extends Monster
 				}
 			}
 			outputText("\n\n");
+			SceneLib.combat.enemyAIImpl();
 		}
 
 //(Wait)
@@ -121,8 +122,8 @@ public class Ceraph extends Monster
 			}
 			player.dynStats("lus", player.lib / 20 + 5 + rand(5));
 			outputText("\n\n");
+			SceneLib.combat.enemyAIImpl();
 		}
-
 
 //[Double-Attack]
 		private function ceraphSpecial3():void

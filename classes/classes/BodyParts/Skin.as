@@ -29,8 +29,7 @@ public class Skin extends SaveableBodyPart {
 	public static const FUR:int                   = 1;
 	public static const SCALES:int                = 2;
 	public static const GOO:int                   = 3;
-	[Deprecated] //Silently discarded upon loading save
-	public static const UNDEFINED:int             = 4;
+	public static const UNDEFINED:int             = 4;//[Deprecated] Silently discarded upon loading save
 	public static const CHITIN:int                = 5;
 	public static const BARK:int                  = 6;
 	public static const STONE:int                 = 7;

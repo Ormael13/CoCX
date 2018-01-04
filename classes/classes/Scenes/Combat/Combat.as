@@ -2913,6 +2913,7 @@ public function meleeattackdamage():void {
 	if(monster.lust >= monster.maxLust()){doNext(endLustVictory); return;}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] >= 2){
 		flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]--;
+	//	flags[kFLAGS.ATTACKS_ACCURACY] += 5;
 		attack();
 		return;
 	}

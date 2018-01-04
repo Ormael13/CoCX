@@ -103,7 +103,7 @@ use namespace CoC;
 						chance: Encounters.ALWAYS
 					},  {
 						name  : "Tamani",
-						chance: 0.1,
+						chance: 0.6,
 						call  : function ():void {
 							if (flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0
 								&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 24) {
@@ -153,7 +153,7 @@ use namespace CoC;
 					},{
 						name  : "beegirl",
 						call  : beeGirlScene.beeEncounter,
-						chance: 0.50
+						chance: 0.40
 					}, {
 						name  : "truffle",
 						call  : findTruffle,
@@ -217,7 +217,7 @@ use namespace CoC;
 						when  : function():Boolean {
 							return (flags[kFLAGS.PATCHOULI_FOLLOWER] < 3 || flags[kFLAGS.PATCHOULI_FOLLOWER] == 4);
 						},
-						chance: 0.8
+						chance: 0.7
 					}, {
 						name  : "konstantin",
 						call  : SceneLib.konstantin.meetKonstantinAtForest,
@@ -284,7 +284,7 @@ use namespace CoC;
 				call: akbalScene.supahAkabalEdition
 			}, {
 				name  : "Tamani",
-				chance: 0.1,
+				chance: 0.6,
 				call  : function ():void {
 					if (flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0
 						&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 24) {

@@ -2488,6 +2488,7 @@ private function dungeonFound():Boolean { //Returns true as soon as any known du
 	if (SceneLib.dungeons.checkPhoenixTowerClear()) return true;
 	if (flags[kFLAGS.HIDDEN_CAVE_FOUND] > 0) return true;
 	if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 0) return true;
+	if (flags[kFLAGS.ANZU_PALACE_UNLOCKED] > 0)  return true;
 	return false;
 }
 

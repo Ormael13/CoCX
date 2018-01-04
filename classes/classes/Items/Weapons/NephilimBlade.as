@@ -10,7 +10,7 @@ package classes.Items.Weapons
 		{
 			super(
 				"NPHMBlade","Nephilim Blade","nephilim blade","a nephilim blade","slash",62,2480,
-				"Once upon a time on Mareth, a demigod of great purity named Nephilim is said to have existed. His duty was to shape the land at the demand of the gods, which he did. His task finished, he disappeared never to be found again. This sword is rumored to have belonged to him. While you don’t know for sure if the story is true, one thing is certain, this blade seeks and destroys corruption wherever it might find it, and will periodically wash its user of any impurity.",
+				"Once upon a time on Mareth, a demigod of great purity named Nephilim is said to have existed. This sword is rumored to have belonged to him. While you don’t know for sure if this story is true, one thing is certain, this blade seeks and destroys corruption wherever it might find it, and will periodically wash its user of any impurity.",
 				"Large"
 			);
 		}
