@@ -61,6 +61,14 @@ public class CombatSoulskills extends BaseCombatContent {
 				bd.disable("Your current soulforce is too low.");
 			}
 		}
+		if (player.hasStatusEffect(StatusEffects.KnowsSoulBlast)) {
+			buttons.add("Soul Blast", SoulBlast).hint("Take in your reserve of soul force to unleash a torrent of devastating energy and obliterate your opponent.  \n\nWould go into cooldown after use for: 15 rounds  \n\nSoulforce cost: " + 100 * soulskillCost() * soulskillcostmulti());
+			if (player.hasStatusEffect(StatusEffects.CooldownSoulBlast)) {
+				bd.disable("You need more time before you can use Soul Blast again.");
+			} else if (player.soulforce < 100 * soulskillCost() * soulskillcostmulti()) {
+				bd.disable("Your current soulforce is too low.");
+			}
+		}
 		if (player.hasStatusEffect(StatusEffects.KnowsOverlimit)) {
 			if (player.hasStatusEffect(StatusEffects.Overlimit)) {
 				buttons.add("Overlimit(Off)", deactivaterOverlimit).hint("Deactivate Overlimit.");
@@ -567,6 +575,53 @@ public class CombatSoulskills extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.CooldownPunishingKick, 10, 0, 0, 0);
 		outputText("You lash out with a devastating kick, knocking your opponent back and disorienting it. " + monster.capitalA + monster.short + " will have a hard time recovering its balance for a while. <b><font color=\"#800000\">" + damage + "</font></b> damage!");
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		checkAchievementDamage(damage);
+		outputText("\n\n");
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
+			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
+			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
+		}
+		combat.HeroBaneProc();
+		enemyAI();
+	}
+
+	public function SoulBlast():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		var soulforcecost:int = 100 * soulskillCost() * soulskillcostmulti();
+		player.soulforce -= soulforcecost;
+		var damage:Number = 0;
+		damage += inteligencescalingbonus();
+		if (damage < 10) damage = 10;
+		damage *= spellMod();
+		//soulskill mod effect
+		damage *= combat.soulskillMagicalMod();
+		//other bonuses
+		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
+			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
+			if (player.inte > 100) critChance += 10;
+		}
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			temp *= 1.75;
+		}
+		//final touches
+		damage *= (monster.damagePercent() / 100);
+		damage = doDamage(damage);
+		player.createStatusEffect(StatusEffects.CooldownSoulBlast, 15, 0, 0, 0);
+		outputText("You wave the sign of the gate, tiger and serpent as you unlock all of your soulforce for an attack. " + monster.capitalA + monster.short + " can’t figure out what you are doing until a small sphere of energy explodes at the end of your fist in a massive beam of condensed soulforce. <b><font color=\"#800000\">" + damage + "</font></b> damage!");
+		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
+		else {
+			outputText("  <b>" + monster.pronoun1 + " ");
+			if(!monster.plural) outputText("is ");
+			else outputText("are");
+			outputText("too resolute to be stunned by your attack.</b>");
+		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
 		if (player.hasStatusEffect(StatusEffects.HeroBane)) {

@@ -148,8 +148,14 @@ public function beachInteractionsAfterArcheryTraining():void
 		outputText("\"<i>Fresh from the lake?! Really?! For me?!</i>\"\n\n");
 		outputText("Ceani pick up the fish from your hands and sniffs it before taking a bite and starting to cry.\n\n");
 		outputText("\"<i>I just can’t swim in the lake with all those crazed shark girls but the fish there are so tasty! Thank you so much!</i>\"\n\n");
-		if (player.hasItem(consumables.FISHFIL)) player.destroyItems(consumables.FISHFIL, 1);
-		if (player.hasItem(consumables.FREFISH)) player.destroyItems(consumables.FREFISH, 1);
+		if (player.hasItem(consumables.FISHFIL) && player.hasItem(consumables.FREFISH)) {
+			if (rand(2) == 0) player.destroyItems(consumables.FISHFIL, 1);
+			else player.destroyItems(consumables.FREFISH, 1);
+		}
+		else {
+			if (player.hasItem(consumables.FISHFIL)) player.destroyItems(consumables.FISHFIL, 1);
+			if (player.hasItem(consumables.FREFISH)) player.destroyItems(consumables.FREFISH, 1);
+		}
 		var x:int = player.cockThatFits(36, "length");
 		menu();
 		addButton(0, "Talk", beachInteractionsTalk);
@@ -175,8 +181,14 @@ public function oceanInteractionsAfterArcheryTraining():void
 		outputText("\"<i>Fresh from the lake?! Really?! For me?!</i>\"\n\n");
 		outputText("Ceani pick up the fish from your hands and sniffs it before taking a bite and starting to cry.\n\n");
 		outputText("\"<i>I just can’t swim in the lake with all those crazed shark girls but the fish there are so tasty! Thank you so much!</i>\"\n\n");
-		if (player.hasItem(consumables.FISHFIL)) player.destroyItems(consumables.FISHFIL, 1);
-		if (player.hasItem(consumables.FREFISH)) player.destroyItems(consumables.FREFISH, 1);
+		if (player.hasItem(consumables.FISHFIL) && player.hasItem(consumables.FREFISH)) {
+			if (rand(2) == 0) player.destroyItems(consumables.FISHFIL, 1);
+			else player.destroyItems(consumables.FREFISH, 1);
+		}
+		else {
+			if (player.hasItem(consumables.FISHFIL)) player.destroyItems(consumables.FISHFIL, 1);
+			if (player.hasItem(consumables.FREFISH)) player.destroyItems(consumables.FREFISH, 1);
+		}
 		var x:int = player.cockThatFits(36, "length");
 		menu();
 		addButton(0, "Talk", beachInteractionsTalk);

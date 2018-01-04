@@ -2963,7 +2963,7 @@ public class PerkLib
             ElementalContractRank9.requirePerk(ElementalContractRank8)
                     .requirePerk(ElementalConjurerSacrifice)
                     .requireWis(225)
-                    .requireLevel(42);
+                    .requireLevel(48);
             ElementalConjurerSacrifice.requirePerk(ElementalConjurerDedication)
                     .requireWis(220)
                     .requireLevel(48);

@@ -2895,7 +2895,7 @@ use namespace CoC;
 			var jabberwockyCounter:Number = 0;
 			if (faceType == Face.JABBERWOCKY || faceType == Face.BUCKTOOTH)
 				jabberwockyCounter++;
-      if (faceType == Face.DRAGON || faceType == Face.DRAGON_FANGS)
+			if (faceType == Face.DRAGON || faceType == Face.DRAGON_FANGS)
 				jabberwockyCounter -= 10;
 			if (eyeType == Eyes.DRAGON)
 				jabberwockyCounter++;

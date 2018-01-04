@@ -1112,7 +1112,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 
 		public function jojoRape(postCombat:Boolean = false):void {
 			trace("jojoRape called");
-			
+			if (monk < 1) monk = 1;
 			jojoSprite();
 			player.slimeFeed();
 			//Track Jojo rapeage

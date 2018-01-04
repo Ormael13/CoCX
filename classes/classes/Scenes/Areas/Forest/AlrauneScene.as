@@ -9,7 +9,7 @@ package classes.Scenes.Areas.Forest
 	import classes.CoC;
 	import classes.Scenes.Areas.GlacialRift.SnowLily;
 	import classes.Scenes.Areas.VolcanicCrag.Cinderbloom;
-import classes.display.SpriteDb;
+	import classes.display.SpriteDb;
 
 public class AlrauneScene extends BaseContent
 	{

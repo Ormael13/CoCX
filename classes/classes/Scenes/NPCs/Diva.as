@@ -34,14 +34,14 @@ public class Diva extends Monster {
         this.skinTone = "pale";
         this.hairColor = "blonde";
         this.hairLength = 16;
-        initWisLibSensCor(4*levelBonus,40,50,50);
-        initStrTouSpeInte(levelBonus,2.5*levelBonus,3.5*levelBonus,4*levelBonus);
+        initWisLibSensCor(4.5*levelBonus,40,50,50);
+        initStrTouSpeInte(1.5*levelBonus,3*levelBonus,4*levelBonus,4.5*levelBonus);
         this.weaponName = "dive";
         this.weaponVerb = "swoop";
         this.armorName = "dress";
         this.armorDef = levelBonus;
         this.wingType = Wings.BAT_LIKE_LARGE;
-        this.bonusHP = levelBonus * 1000;
+        this.bonusHP = levelBonus * 500;
         this.bonusLust = 50;
         this.lustVuln = 1;
         this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
@@ -103,21 +103,23 @@ public class Diva extends Monster {
 			takePhysDamage(dam2);
 		}
 		else{*/
-			addHP(maxHP()* .2);
-			var dam:int = 10;
+			addHP(maxHP() * .2);
+			var dam:int = 100;//this.str * 5
 			for(var i:int = 0; i < _biteCounter;i++){
-				dam += dam*.10;
+				dam += dam * .50;
 			}
 			_biteCounter++;
 			display("moves/bite");
+			dam = Math.round(dam);
 			player.takePhysDamage(dam);
-			player.takeLustDamage(rand(5));
+			player.takeLustDamage(2 + rand(4));
 		//}
     }
     private function moveSwoopToss():void{
         display("moves/swoopToss");
         var dam:int = 20;
-        dam += rand((100 - player.tallness) * .25);
+		dam += this.str;
+        dam += rand((140 - player.tallness) * .25);
         player.takePhysDamage(dam);
     }
     private function moveDarkness():void{

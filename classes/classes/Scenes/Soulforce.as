@@ -689,7 +689,7 @@ private function resetJabberwockyFlag():void {
 		public function NonEquipmentMenu():void {
 			menu();
 			addButton(0, "Fox Jewel", AddFoxJewel).hint("Add 1 Fox Jewel.");
-			addButton(1, "Fish", AddFish).hint("Add 1 Fish.");
+			addButton(1, "F.Fish", AddFreshFish).hint("Add 1 Fresh Fish.");
 			addButton(2, "BehemothCum", AddBehemothCum).hint("Add 1 bottle of Behemoth Cum.");
 			addButton(3, "VoltageTopaz", AddVoltageTopaz).hint("Add 1 Voltage Topaz.");
 			addButton(4, "Red Blood", AddRedBlood).hint("Add 1 vial of Red Blood (Bat TF).");
@@ -697,8 +697,10 @@ private function resetJabberwockyFlag():void {
 			addButton(5, "Gorgon Oil", AddGorgonOil).hint("Add 1 vial of Gorgon Oil.");
 			addButton(6, "Vouivre Oil", AddVouivreOil).hint("Add 1 vial of Vouivre Oil.");
 			addButton(7, "Couatl Oil", AddCouatlOil).hint("Add 1 vial of Couatl Oil.");
-			addButton(8, "V.D.ARC", AddVeryDilutedArcaneRegenConcotion).hint("Add 1 very diluted Arcane Regen Concotion.");
-			addButton(9, "D.ARC", AddDilutedArcaneRegenConcotion).hint("Add 1 diluted Arcane Regen Concotion.");
+			//addButton(8, "V.D.ARC", AddVeryDilutedArcaneRegenConcotion).hint("Add 1 very diluted Arcane Regen Concotion.");
+			//addButton(9, "D.ARC", AddDilutedArcaneRegenConcotion).hint("Add 1 diluted Arcane Regen Concotion.");
+			addButton(8, "WoFruit", AddWonderFruit).hint("Add 1 Wonder Fruit.");
+			addButton(9, "SBMan", AddSoulBlastManual).hint("Add 1 Soul Blast manual.");
 			addButton(10, "White B.", AddWhiteBook).hint("Add 1 White Book.");
 			addButton(11, "Black B.", AddBlackBook).hint("Add 1 Black Book.");
 			addButton(12, "Grey B.", AddGreyBook).hint("Add 1 Grey Book.");
@@ -769,9 +771,9 @@ private function resetJabberwockyFlag():void {
 			outputText("\n\n<b>(Gained 1 Dragonscale!)</b>\n\n");
 			inventory.takeItem(useables.D_SCALE, MaterialMenu);
 		}
-		public function AddFish():void {
-			outputText("\n\n<b>(Gained 1 Fish!)</b>\n\n");
-			inventory.takeItem(consumables.FISHFIL, NonEquipmentMenu);
+		public function AddFreshFish():void {
+			outputText("\n\n<b>(Gained 1 Fresh Fish!)</b>\n\n");
+			inventory.takeItem(consumables.FREFISH, NonEquipmentMenu);
 		}
 		public function AddFoxJewel():void {
 			outputText("\n\n<b>(Gained 1 Fox Jewel!)</b>\n\n");
@@ -804,6 +806,14 @@ private function resetJabberwockyFlag():void {
 		public function AddDilutedArcaneRegenConcotion():void {
 			outputText("\n\n<b>(Gained 1 diluted Arcane Regen Concotion!)</b>\n\n");
 			inventory.takeItem(consumables.D_ARCON, NonEquipmentMenu);
+		}
+		public function AddSoulBlastManual():void {
+			outputText("\n\n<b>(Gained 1 Soul Blast Manual!)</b>\n\n");
+			inventory.takeItem(consumables.SOBLMAN, NonEquipmentMenu);
+		}
+		public function AddWonderFruit():void {
+			outputText("\n\n<b>(Gained 1 Wonder Fruit!)</b>\n\n");
+			inventory.takeItem(consumables.WOFRUIT, NonEquipmentMenu);
 		}
 		public function AddBehemothCum():void {
 			outputText("\n\n<b>(Gained 1 vial of Behemoth Cum!)</b>\n\n");

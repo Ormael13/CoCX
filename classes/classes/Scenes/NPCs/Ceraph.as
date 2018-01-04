@@ -108,7 +108,6 @@ public class Ceraph extends Monster
 				}
 			}
 			outputText("\n\n");
-			SceneLib.combat.enemyAIImpl();
 		}
 
 //(Wait)
@@ -122,7 +121,6 @@ public class Ceraph extends Monster
 			}
 			player.dynStats("lus", player.lib / 20 + 5 + rand(5));
 			outputText("\n\n");
-			SceneLib.combat.enemyAIImpl();
 		}
 
 

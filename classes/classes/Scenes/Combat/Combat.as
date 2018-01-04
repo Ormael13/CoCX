@@ -1230,7 +1230,7 @@ internal function wait():void {
 			if (monster is Naga) takePhysDamage(7 + rand(5));
 			if (monster is Gorgon) takePhysDamage(17 + rand(15));
 			if (monster is CaiLin) takePhysDamage(10 + rand(8));
-			if(monster is Diva){(monster as Diva).moveBite();}
+			if (monster is Diva){(monster as Diva).moveBite();}
 		}
 		skipMonsterAction = true;
 	}
@@ -4615,6 +4615,15 @@ private function combatStatusesUpdate():void {
 			outputText("<b></b>\n\n");
 		}
 		else player.addStatusValue(StatusEffects.SecondWindRegen,2,-1);
+	}
+	//Soul Blast
+	if (player.hasStatusEffect(StatusEffects.CooldownSoulBlast)) {
+		if (player.statusEffectv1(StatusEffects.CooldownSoulBlast) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownSoulBlast);
+		}
+		else {
+			player.addStatusValue(StatusEffects.CooldownSoulBlast,1,-1);
+		}
 	}
 	if (player.hasStatusEffect(StatusEffects.BladeDance)) player.removeStatusEffect(StatusEffects.BladeDance);
 	if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) player.removeStatusEffect(StatusEffects.ResonanceVolley);

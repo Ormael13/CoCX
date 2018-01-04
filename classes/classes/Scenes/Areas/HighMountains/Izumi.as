@@ -237,9 +237,7 @@ public class Izumi extends Monster
 				if (player.str < 90) outputText(" immense");
 				else outputText(" impressive"); 
 				outputText(" strength, in an attempt to free yourself from her crushing embrace, without success.");
-				
 				player.takePhysDamage(75 + rand(15), true);
-				SceneLib.combat.enemyAIImpl();
 			}
 		}
 		
@@ -260,7 +258,6 @@ public class Izumi extends Monster
 			{
 				outputText(".");
 			}
-			SceneLib.combat.enemyAIImpl();
 		}
 		
 		// Player fails to escape from the chokeslam, and after 3 rounds gets nailed to the fuckin floor
@@ -417,9 +414,7 @@ public class Izumi extends Monster
 						outputText("Izumi’s bust encloses you on all sides, leaving you feeling like you’re trapped in some kind of breast sarcophagus.  The heat radiating from the soft flesh combines with the scent of whatever strange drug Izumi had been smoking, now hanging around her like some heady perfume.");
 					}
 				}
-				
 				player.dynStats("lus", player.lib / 15 + 5 + rand(5));
-				SceneLib.combat.enemyAIImpl();
 			}
 		}
 		
@@ -474,7 +469,6 @@ public class Izumi extends Monster
 			{
 				outputText(".");
 			}
-			SceneLib.combat.enemyAIImpl();
 		}
 	}
 

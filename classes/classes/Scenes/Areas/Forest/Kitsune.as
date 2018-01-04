@@ -34,7 +34,6 @@ public class Kitsune extends Monster
 			if (rand(20) + player.str / 20 + statusEffectv1(StatusEffects.PCTailTangle) >= 12) {
 				outputText("  Summoning up reserves of strength you didn't know you had, you wrench yourself free of her tails, pushing her away.\n\n");
 				removeStatusEffect(StatusEffects.PCTailTangle);
-				doAI();
 			}
 			//Failure - +5-10 LUST
 			else {

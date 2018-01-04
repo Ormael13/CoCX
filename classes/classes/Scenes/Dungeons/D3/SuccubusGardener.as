@@ -236,15 +236,12 @@ this.HP = this.maxHP();
 				player.dynStats("lus+", 3 + rand(3));
 				if (flags[kFLAGS.PC_FETISH] >= 2) player.dynStats("lus+", 5);
 			}
-            SceneLib.combat.enemyAIImpl();
 		}
 		
 		public function grappleWait():void
 		{
 			clearOutput();
-			
 			squeeze();
-            SceneLib.combat.enemyAIImpl();
 		}
 		
 		private function squeeze():void

@@ -11,6 +11,7 @@ import classes.BodyParts.LowerBody;
 import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
+import classes.display.SpriteDb;
 
 public class Alraune extends Monster
 	{
@@ -26,6 +27,7 @@ public class Alraune extends Monster
 		
 		public function alrauneWait():void {
 			clearOutput();
+			game.spriteSelect(SpriteDb.s_alraune);
 			outputText("You struggle against ");
 			if (Holidays.isHalloween()) outputText("Jack-O-Raune");
 			else outputText("the alraune");
