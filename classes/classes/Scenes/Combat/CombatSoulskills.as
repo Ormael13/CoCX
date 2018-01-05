@@ -235,7 +235,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
 		}
 		combat.HeroBaneProc();
-		if(monster.HP < 1) doNext(endHpVictory);
+		if (monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
 	}
 
@@ -305,7 +305,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
 		}
 		combat.HeroBaneProc();
-		if(monster.HP < 1) doNext(endHpVictory);
+		if (monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
 	}
 
@@ -361,7 +361,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
 		}
 		combat.HeroBaneProc();
-		if(monster.HP < 1) doNext(endHpVictory);
+		if (monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
 	}
 
@@ -412,7 +412,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
 		}
 		combat.HeroBaneProc();
-		if(monster.HP < 1) doNext(endHpVictory);
+		if (monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
 	}
 	
@@ -469,7 +469,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 		else {
-			outputText("  <b>" + monster.pronoun1 + " ");
+			outputText("  <b>" + monster.capitalA + monster.short + " ");
 			if(!monster.plural) outputText("is ");
 			else outputText("are");
 			outputText("too resolute to be frozen by your attack.</b>");
@@ -481,7 +481,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		combat.HeroBaneProc();
 		outputText("\n\n");
-		enemyAI();
+		if (monster.HP < 1) doNext(endHpVictory);
+		else enemyAI();
 	}
 
 	public function FirePunch():void {
@@ -521,7 +522,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		combat.HeroBaneProc();
 		outputText("\n\n");
-		enemyAI();
+		if (monster.HP < 1) doNext(endHpVictory);
+		else enemyAI();
 	}
 
 	public function HurricaneDance():void {
@@ -582,7 +584,8 @@ public class CombatSoulskills extends BaseCombatContent {
 			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
 		}
 		combat.HeroBaneProc();
-		enemyAI();
+		if (monster.HP < 1) doNext(endHpVictory);
+		else enemyAI();
 	}
 
 	public function SoulBlast():void {
@@ -591,9 +594,12 @@ public class CombatSoulskills extends BaseCombatContent {
 		var soulforcecost:int = 100 * soulskillCost() * soulskillcostmulti();
 		player.soulforce -= soulforcecost;
 		var damage:Number = 0;
-		damage += strenghtscalingbonus();
-		damage += inteligencescalingbonus();
-		damage += wisdomscalingbonus();
+		damage += player.str;
+		damage += strenghtscalingbonus() * 1.8;
+		damage += player.inte;
+		damage += inteligencescalingbonus() * 1.8;
+		damage += player.wis;
+		damage += wisdomscalingbonus() * 1.8;
 		if (damage < 10) damage = 10;
 		damage *= spellMod();
 		//soulskill mod effect
@@ -619,9 +625,9 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
 		else {
-			outputText("  <b>" + monster.pronoun1 + " ");
+			outputText("  <b>" + monster.capitalA + monster.short + " ");
 			if(!monster.plural) outputText("is ");
-			else outputText("are");
+			else outputText("are ");
 			outputText("too resolute to be stunned by your attack.</b>");
 		}
 		checkAchievementDamage(damage);
@@ -631,7 +637,8 @@ public class CombatSoulskills extends BaseCombatContent {
 			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
 		}
 		combat.HeroBaneProc();
-		enemyAI();
+		if (monster.HP < 1) doNext(endHpVictory);
+		else enemyAI();
 	}
 
 	public function activaterOverlimit():void {
@@ -972,7 +979,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	 outputText("Your [weapon] hits thrice against " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
 	 checkAchievementDamage(damage);
 	 outputText("\n\n");
-	 if(monster.HP < 1) doNext(endHpVictory);
+	 if (monster.HP < 1) doNext(endHpVictory);
 	 else enemyAI();
 	 }*/
 }

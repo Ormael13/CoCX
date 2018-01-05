@@ -1967,7 +1967,7 @@ public function RacialScores():void {
 		else outputText("+" + (60 * (1 + player.newGamePlusMod())) + " ");
 		outputText("max Spe, +" + (60 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
 	}
-	else if (player.catScore() >= 4 && player.catScore() < 7) {
+	else if (player.catScore() >= 4 && player.catScore() < 8) {
 		outputText("\n<font color=\"#0000a0\">Half Cat-morph: " + player.catScore() + " (");
 		if (player.findPerk(PerkLib.Flexibility) > 0) {
 			if (player.findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) outputText("+" + (60 * (1 + player.newGamePlusMod())) + " ");

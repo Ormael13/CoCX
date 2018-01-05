@@ -37,8 +37,8 @@ package classes.Scenes
 			outputText("-Perk Prestige Job: Seer would be till author rework this perk tree disabled (those PC's that picked it already will retain it).\n");
 			outputText("-Jabberwocky body parts would act as negative points to dragon score to avoid overlapping of both races bonuses.\n");
 			outputText("-Kindra archery training would progress 2x faster.\n");
-			outputText("-Manual that Chi Chi drops after beating PC in second fight unlock Soul Blast soulskill (15 turns CD, chance to stun for 3 turns and high dmg output)\n");
-			outputText("-Fixed bugs: Wrath specials correctly list needed resource, option to send Izma to fishery before it's built, many other small fixes\n\n\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-Manual that Chi Chi drops after beating PC in second fight unlock Soul Blast soulskill (15 turns CD, chance to stun for 3 turns and dmg scale with PC current str, int and wis)\n");
+			outputText("-Fixed bugs: Softlocks on few enemy bind specials (like Izumi or Ceraph), Wrath specials correctly list needed resource, option to send Izma to fishery before it's built, many other small fixes\n\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("<b>Version 0.8i:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-\n");

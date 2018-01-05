@@ -2548,6 +2548,8 @@ use namespace CoC;
 			var catCounter:Number = 0;
 			if (faceType == Face.CAT || faceType == Face.CAT_CANINES)
 				catCounter++;
+			if (faceType == Face.CHESHIRE || faceType == Face.CHESHIRE_SMILE)
+				catCounter -= 7;
 			if (eyeType == Eyes.CAT_SLITS)
 				catCounter++;
 			if (earType == Ears.CAT)
@@ -2570,6 +2572,8 @@ use namespace CoC;
 				catCounter -= 2;
 			if (hasFur() || hasPartialCoat(Skin.FUR))
 				catCounter++;
+			if (hairColor == "lilac and white striped" && coatColor == "lilac and white striped")
+				catCounter -= 7;
 			if (hornType == Horns.DEMON || hornType == Horns.DRACONIC_X2 || hornType == Horns.DRACONIC_X4_12_INCH_LONG)
 				catCounter -= 2;
 			if (wingType == Wings.BAT_LIKE_TINY || wingType == Wings.DRACONIC_SMALL || wingType == Wings.BAT_LIKE_LARGE || wingType == Wings.DRACONIC_LARGE || Wings.BAT_LIKE_LARGE_2 || Wings.DRACONIC_HUGE)

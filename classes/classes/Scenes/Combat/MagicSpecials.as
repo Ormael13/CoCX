@@ -291,7 +291,7 @@ public class MagicSpecials extends BaseCombatContent {
 			bd = buttons.add("Ever&Nowhere", EverywhereAndNowhere).hint("Periodically phase out of reality increasing your invasion as well as granting you the ability to surprise your opponent denying their defences.  \n\nWould go into cooldown after use for: 10 rounds");
 			bd.requireFatigue(physicalCost(30));
 			if (player.hasStatusEffect(StatusEffects.CooldownEveryAndNowhere)) {
-				bd.disable("<b>You need more time before you can use Everywhere and nowhere again.</b>\n\n");
+				bd.disable("You need more time before you can use Everywhere and nowhere again.\n\n");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) {

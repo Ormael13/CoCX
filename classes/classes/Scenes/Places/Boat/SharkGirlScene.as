@@ -183,7 +183,7 @@ private function sharkgirlDickFuck():void {
 private function sharkgirlOceanDickFuck1():void {
 	clearOutput();
 	spriteSelect(70);
-	
+	sharkgirlOceanDickFuck();
 }
 private function sharkgirlOceanDickFuck2():void {
 	clearOutput();

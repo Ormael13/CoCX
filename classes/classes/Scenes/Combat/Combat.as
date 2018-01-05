@@ -4073,7 +4073,7 @@ private function combatStatusesUpdate():void {
 	}
 	//Everywhere and nowhere
 	if (player.hasStatusEffect(StatusEffects.EverywhereAndNowhere)) {
-		if (player.statusEffectv3(StatusEffects.EverywhereAndNowhere) <= 0) {
+		if (player.statusEffectv1(StatusEffects.EverywhereAndNowhere) <= 0) {
 			player.removeStatusEffect(StatusEffects.EverywhereAndNowhere);
 			outputText("<b>Everywhere and nowhere effect ended!</b>\n\n");
 		}
@@ -4331,14 +4331,6 @@ private function combatStatusesUpdate():void {
 			player.addStatusValue(StatusEffects.CooldownTornadoStrike,1,-1);
 		}
 	}
-	//Second Wind Regen
-	if (player.hasStatusEffect(StatusEffects.SecondWindRegen)) {
-		if (player.statusEffectv2(StatusEffects.SecondWindRegen) <= 0) {
-			player.removeStatusEffect(StatusEffects.SecondWindRegen);
-			outputText("<b></b>\n\n");
-		}
-		else player.addStatusValue(StatusEffects.SecondWindRegen,2,-1);
-	}
 	//Soul Blast
 	if (player.hasStatusEffect(StatusEffects.CooldownSoulBlast)) {
 		if (player.statusEffectv1(StatusEffects.CooldownSoulBlast) <= 0) {
@@ -4347,6 +4339,14 @@ private function combatStatusesUpdate():void {
 		else {
 			player.addStatusValue(StatusEffects.CooldownSoulBlast,1,-1);
 		}
+	}
+	//Second Wind Regen
+	if (player.hasStatusEffect(StatusEffects.SecondWindRegen)) {
+		if (player.statusEffectv2(StatusEffects.SecondWindRegen) <= 0) {
+			player.removeStatusEffect(StatusEffects.SecondWindRegen);
+			outputText("<b></b>\n\n");
+		}
+		else player.addStatusValue(StatusEffects.SecondWindRegen,2,-1);
 	}
 	if (player.hasStatusEffect(StatusEffects.BladeDance)) player.removeStatusEffect(StatusEffects.BladeDance);
 	if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) player.removeStatusEffect(StatusEffects.ResonanceVolley);
