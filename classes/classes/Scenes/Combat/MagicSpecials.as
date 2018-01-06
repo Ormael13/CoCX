@@ -465,7 +465,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("You manage to block your own ice wave with your [shield]!");
 			}
 			else {
-				damage = takeMagicDamage(damage);
+				damage = player.takeMagicDamage(damage);
 				outputText("Your own ice wave smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
@@ -486,11 +486,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 		{
 			outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
@@ -571,7 +567,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("You manage to block your own ice wave with your [shield]!");
 			}
 			else {
-				damage = takeMagicDamage(damage);
+				damage = player.takeMagicDamage(damage);
 				outputText("Your own ice wave smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
@@ -595,11 +591,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 		{
 			outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
@@ -859,7 +851,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("You manage to block your own fire with your [shield]!");
 			}
 			else {
-				damage = takeMagicDamage(damage);
+				damage = player.takeMagicDamage(damage);
 				outputText("Your own fire smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
@@ -888,11 +880,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		if (monster is Holli && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
 		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 		{
@@ -991,7 +979,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("You manage to block your own fire with your [shield]!");
 			}
 			else {
-				damage = takeMagicDamage(damage);
+				damage = player.takeMagicDamage(damage);
 				outputText("Your own fire smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
@@ -1021,11 +1009,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		if (monster is Holli && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
 		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 		{
@@ -1095,7 +1079,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("You manage to block your own ice with your [shield]!");
 			}
 			else {
-				damage = takeMagicDamage(damage);
+				damage = player.takeMagicDamage(damage);
 				outputText("Your own ice smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
@@ -1116,11 +1100,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 		{
 			outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
@@ -1190,7 +1170,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("You manage to block your own lightning with your [shield]!");
 			}
 			else {
-				damage = takeMagicDamage(damage);
+				damage = player.takeMagicDamage(damage);
 				outputText("Your own lightning smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
@@ -1211,11 +1191,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 		{
 			outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
@@ -1284,7 +1260,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("You manage to block your own darkness with your [shield]!");
 			}
 			else {
-				damage = takeMagicDamage(damage);
+				damage = player.takeMagicDamage(damage);
 				outputText("Your own darkness smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
@@ -1305,11 +1281,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 		{
 			outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
@@ -1331,7 +1303,7 @@ public class MagicSpecials extends BaseCombatContent {
 			else if(player.hasStatusEffect(StatusEffects.GooArmorSilence)) outputText("You reach for the terrestrial fire but as you ready the torrent, it erupts prematurely, causing you to cry out as the sudden heated force explodes in your own throat.  The slime covering your mouth bubbles and pops, boiling away where the escaping flame opens small rents in it.  That wasn't as effective as you'd hoped, but you can at least speak now. ");
 			else outputText("You reach for the terrestrial fire, but as you ready to release a torrent of flame, the fire inside erupts prematurely, causing you to cry out as the sudden heated force explodes in your own throat. ");
 			fatigue(10);
-			takeMagicDamage(10 + rand(20), true);
+			player.takeMagicDamage(10 + rand(20), true);
 			outputText("\n\n");
 			enemyAI();
 			return;
@@ -1408,7 +1380,7 @@ public class MagicSpecials extends BaseCombatContent {
 					return;
 				}
 				outputText("Your own fire smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-				takeMagicDamage(damage);
+				player.takeMagicDamage(damage);
 			}
 			outputText("\n\n");
 		}
@@ -1446,11 +1418,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
 		}
 		checkAchievementDamage(damage);
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		if(monster.HP < 1) {
 			doNext(endHpVictory);
 		}
@@ -1563,11 +1531,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		outputText("\n");
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
 		if(monster.HP < 1) {
 			doNext(endHpVictory);
@@ -1600,43 +1564,42 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("You narrow your eyes, focusing your mind with deadly intent.  ");
 		if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") outputText("You point your staff and shots magic bolt toward " + monster.a + monster.short + "!\n\n");
 		else outputText("You point your hand toward " + monster.a + monster.short + " and shots magic bolt!\n\n");
-		temp = 0;
-		temp += player.inte;
-		if (player.inte >= 21) temp += ((player.inte - 20) * 0.25);
-		if (player.inte >= 41) temp += ((player.inte - 40) * 0.25);
-		if (player.inte >= 61) temp += ((player.inte - 60) * 0.25);
-		if (player.inte >= 81) temp += ((player.inte - 80) * 0.25);
-		if (player.inte >= 101) temp += ((player.inte - 100) * 0.25);
-		if (player.inte >= 151) temp += ((player.inte - 150) * 0.25);
-		if (player.inte >= 201) temp += ((player.inte - 200) * 0.25);
-		if (player.inte >= 251) temp += ((player.inte - 250) * 0.25);
-		if (player.inte >= 301) temp += ((player.inte - 300) * 0.25);
-		if (player.inte >= 351) temp += ((player.inte - 350) * 0.25);
-		if (player.inte >= 401) temp += ((player.inte - 400) * 0.25);
-		if (player.inte >= 451) temp += ((player.inte - 450) * 0.25);
-		if (player.inte >= 501) temp += ((player.inte - 500) * 0.25);
-		if (player.inte >= 551) temp += ((player.inte - 550) * 0.25);
-		if (player.inte >= 601) temp += ((player.inte - 600) * 0.25);
-		if (player.inte >= 651) temp += ((player.inte - 650) * 0.25);
-		if (player.inte >= 701) temp += ((player.inte - 700) * 0.25);
-		if (player.inte >= 751) temp += ((player.inte - 750) * 0.25);
-		if (player.inte >= 801) temp += ((player.inte - 800) * 0.25);
-		if (player.inte >= 851) temp += ((player.inte - 850) * 0.25);
-		if (player.inte >= 901) temp += ((player.inte - 900) * 0.25);
-		if (player.inte >= 951) temp += ((player.inte - 950) * 0.25);
-		if (player.inte >= 1001) temp += ((player.inte - 1000) * 0.25);
-		if (player.inte >= 1051) temp += ((player.inte - 1050) * 0.25);
-		if (player.inte >= 1101) temp += ((player.inte - 1100) * 0.25);
-		if (player.inte >= 1151) temp += ((player.inte - 1150) * 0.25);
-		if (player.inte >= 1201) temp += ((player.inte - 1200) * 0.25);
-		if (temp < 10) temp = 10;
+		var damage:Number = player.inte;
+		if (player.inte >= 21) damage += ((player.inte - 20) * 0.25);
+		if (player.inte >= 41) damage += ((player.inte - 40) * 0.25);
+		if (player.inte >= 61) damage += ((player.inte - 60) * 0.25);
+		if (player.inte >= 81) damage += ((player.inte - 80) * 0.25);
+		if (player.inte >= 101) damage += ((player.inte - 100) * 0.25);
+		if (player.inte >= 151) damage += ((player.inte - 150) * 0.25);
+		if (player.inte >= 201) damage += ((player.inte - 200) * 0.25);
+		if (player.inte >= 251) damage += ((player.inte - 250) * 0.25);
+		if (player.inte >= 301) damage += ((player.inte - 300) * 0.25);
+		if (player.inte >= 351) damage += ((player.inte - 350) * 0.25);
+		if (player.inte >= 401) damage += ((player.inte - 400) * 0.25);
+		if (player.inte >= 451) damage += ((player.inte - 450) * 0.25);
+		if (player.inte >= 501) damage += ((player.inte - 500) * 0.25);
+		if (player.inte >= 551) damage += ((player.inte - 550) * 0.25);
+		if (player.inte >= 601) damage += ((player.inte - 600) * 0.25);
+		if (player.inte >= 651) damage += ((player.inte - 650) * 0.25);
+		if (player.inte >= 701) damage += ((player.inte - 700) * 0.25);
+		if (player.inte >= 751) damage += ((player.inte - 750) * 0.25);
+		if (player.inte >= 801) damage += ((player.inte - 800) * 0.25);
+		if (player.inte >= 851) damage += ((player.inte - 850) * 0.25);
+		if (player.inte >= 901) damage += ((player.inte - 900) * 0.25);
+		if (player.inte >= 951) damage += ((player.inte - 950) * 0.25);
+		if (player.inte >= 1001) damage += ((player.inte - 1000) * 0.25);
+		if (player.inte >= 1051) damage += ((player.inte - 1050) * 0.25);
+		if (player.inte >= 1101) damage += ((player.inte - 1100) * 0.25);
+		if (player.inte >= 1151) damage += ((player.inte - 1150) * 0.25);
+		if (player.inte >= 1201) damage += ((player.inte - 1200) * 0.25);
+		if (damage < 10) damage = 10;
 		//weapon bonus
 		if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") {
-			if (player.weaponAttack < 51) temp *= (1 + (player.weaponAttack * 0.04));
-			else if (player.weaponAttack >= 51 && player.weaponAttack < 101) temp *= (3 + ((player.weaponAttack - 50) * 0.035));
-			else if (player.weaponAttack >= 101 && player.weaponAttack < 151) temp *= (4.75 + ((player.weaponAttack - 100) * 0.03));
-			else if (player.weaponAttack >= 151 && player.weaponAttack < 201) temp *= (6.25 + ((player.weaponAttack - 150) * 0.025));
-			else temp *= (7.5 + ((player.weaponAttack - 200) * 0.02));
+			if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.04));
+			else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (3 + ((player.weaponAttack - 50) * 0.035));
+			else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (4.75 + ((player.weaponAttack - 100) * 0.03));
+			else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (6.25 + ((player.weaponAttack - 150) * 0.025));
+			else damage *= (7.5 + ((player.weaponAttack - 200) * 0.02));
 		}
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -1648,19 +1611,15 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
-		temp = Math.round(temp);
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.");
+		damage = Math.round(damage);
+		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + damage + "</font></b> damage.");
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
-		checkAchievementDamage(temp);
-		monster.HP -= temp;
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
-		}
-		combat.HeroBaneProc();
+		checkAchievementDamage(damage);
+		monster.HP -= damage;
+		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if (monster.HP < 1)
 		{
@@ -1847,9 +1806,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		clearOutput();
 		outputText("You grin malevolently and wave an arcane sign, causing infernal fire to surges from below and scorching your opponent \n");
-		temp = 0;
-		temp += inteligencescalingbonus() * 0.8;
-		temp *= spellMod();
+		var damage:Number = (inteligencescalingbonus() * 0.8) * spellMod();
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1860,24 +1817,24 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
-		if (monster.cor >= 66) temp = Math.round(temp * 1.0);
-		else if (monster.cor >= 50) temp = Math.round(temp * 1.1);
-		else if (monster.cor >= 25) temp = Math.round(temp * 1.2);
-		else if (monster.cor >= 10) temp = Math.round(temp * 1.3);
-		else temp = Math.round(temp * 1.4);
+		if (monster.cor >= 66) damage = Math.round(damage * 1.0);
+		else if (monster.cor >= 50) damage = Math.round(damage * 1.1);
+		else if (monster.cor >= 25) damage = Math.round(damage * 1.2);
+		else if (monster.cor >= 10) damage = Math.round(damage * 1.3);
+		else damage = Math.round(damage * 1.4);
 		//High damage to goes.
-		temp = calcInfernoMod(temp);
-		if (monster.short == "goo-girl") temp = Math.round(temp * 1.5);
-		if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2);
-		if (monster.hasPerk(PerkLib.IceNature)) temp *= 5;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) temp *= 2;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) temp *= 0.5;
-		if (monster.hasPerk(PerkLib.FireNature)) temp *= 0.2;
-		if (player.hasPerk(PerkLib.FireAffinity)) temp *= 2;
-		temp = Math.round(temp);
-		outputText("for <b><font color=\"#800000\">" + temp + "</font></b> damage.");
+		damage = calcInfernoMod(damage);
+		if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
+		if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
+		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
+		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
+		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
+		if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
+		if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+		damage = Math.round(damage);
+		outputText("for <b><font color=\"#800000\">" + damage + "</font></b> damage.");
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		//Using fire attacks on the goo]
 		if(monster.short == "goo-girl") {
@@ -1886,16 +1843,12 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
 		outputText("\n\n");
-		checkAchievementDamage(temp);
+		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 	//	if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 	//	spellPerkUnlock();
-		monster.HP -= temp;
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
-		}
-		combat.HeroBaneProc();
+		monster.HP -= damage;
+		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if (monster.HP < 1)
 		{
@@ -2065,9 +2018,7 @@ public class MagicSpecials extends BaseCombatContent {
 		fatigue((100 * kitsuneskillCost()),USEFATG_MAGIC);
 		//Deals direct damage and lust regardless of enemy defenses.  Especially effective against non-corrupted targets.
 		outputText("Holding out your palm, you conjure corrupted purple flame that dances across your fingertips.  You launch it at " + monster.a + monster.short + " with a ferocious throw, and it bursts on impact, showering dazzling lavender sparks everywhere.  ");
-		var dmg:Number = 0;
-		dmg += inteligencescalingbonus() * 0.5;
-		dmg += wisdomscalingbonus() * 0.5;
+		var damage:Number = (wisdomscalingbonus() * 0.5) + (inteligencescalingbonus() * 0.5);
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -2078,11 +2029,11 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			dmg *= 1.75;
+			damage *= 1.75;
 		}
-		dmg = calcInfernoMod(dmg);
-		dmg *= 0.125;
-		if (player.hasPerk(PerkLib.CorruptedNinetails) && player.tailType == Tail.FOX && player.tailCount == 9) dmg *= 0.5;
+		damage = calcInfernoMod(damage);
+		damage *= 0.125;
+		if (player.hasPerk(PerkLib.CorruptedNinetails) && player.tailType == Tail.FOX && player.tailCount == 9) damage *= 0.5;
 		var corruptedfoxfiredmgmulti:Number = 1;
 		corruptedfoxfiredmgmulti += spellMod() - 1;
 		corruptedfoxfiredmgmulti += soulskillMod() - 1;
@@ -2091,29 +2042,29 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.jewelryName == "fox hairpin") corruptedfoxfiredmgmulti += .2;
 		if (player.hasPerk(PerkLib.StarSphereMastery)) corruptedfoxfiredmgmulti += player.perkv1(PerkLib.StarSphereMastery) * 0.05;
 		if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) corruptedfoxfiredmgmulti += .25;
-		//Hosohi No Tama bonus dmg
+		//Hosohi No Tama bonus damage
 		if (player.hasPerk(PerkLib.KitsuneThyroidGlandEvolved)) corruptedfoxfiredmgmulti += .5;
-		dmg *= corruptedfoxfiredmgmulti;
-		if (monster.cor >= 66) dmg = Math.round(dmg * 1.0);
-		else if (monster.cor >= 50) dmg = Math.round(dmg * 1.1);
-		else if (monster.cor >= 25) dmg = Math.round(dmg * 1.2);
-		else if (monster.cor >= 10) dmg = Math.round(dmg * 1.3);
-		else dmg = Math.round(dmg * 1.4);
+		damage *= corruptedfoxfiredmgmulti;
+		if (monster.cor >= 66) damage = Math.round(damage * 1.0);
+		else if (monster.cor >= 50) damage = Math.round(damage * 1.1);
+		else if (monster.cor >= 25) damage = Math.round(damage * 1.2);
+		else if (monster.cor >= 10) damage = Math.round(damage * 1.3);
+		else damage = Math.round(damage * 1.4);
 		//High damage to goes.
-		if(monster.short == "goo-girl") dmg = Math.round(dmg * 1.5);
+		if(monster.short == "goo-girl") damage = Math.round(damage * 1.5);
 		//Using fire attacks on the goo]
 		if(monster.short == "goo-girl") {
 			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ");
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
-		if (monster.hasPerk(PerkLib.IceNature)) dmg *= 5;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) dmg *= 2;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) dmg *= 0.5;
-		if (monster.hasPerk(PerkLib.FireNature)) dmg *= 0.2;
-		if (player.hasPerk(PerkLib.FireAffinity)) dmg *= 2;
-		if (player.jewelryName == "fox hairpin") dmg *= 1.2;
-		dmg = Math.round(dmg);
-		dmg = doDamage(dmg);
+		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
+		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
+		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
+		if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
+		if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+		if (player.jewelryName == "fox hairpin") damage *= 1.2;
+		damage = Math.round(damage);
+		damage = doDamage(damage);
 		if (monster.lustVuln == 0) {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
@@ -2157,18 +2108,14 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.jewelryName == "fox hairpin") lustDmg *= 1.2;
 		lustDmg = Math.round(lustDmg);
 		monster.teased(lustDmg);
-		outputText("  <b>(<font color=\"#800000\">" + dmg + "</font>)</b>\n\n");
+		outputText("  <b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, dmg);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else {
 			if(monster.HP <= 0) doNext(endHpVictory);
@@ -2191,9 +2138,7 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		outputText("Holding out your palms, you conjure an ethereal blue on one palm and corrupted purple flame on other which dances across your fingertips.  After well practised move of fusing them both into one of mixed colors ball of fire you launch it at " + monster.a + monster.short + " with a ferocious throw, and it bursts on impact, showering dazzling azure and lavender sparks everywhere.  ");
-		var dmg:Number = 0;
-		dmg += inteligencescalingbonus() * 0.5;
-		dmg += wisdomscalingbonus() * 0.5;
+		var damage:Number = (wisdomscalingbonus() * 0.5) + (inteligencescalingbonus() * 0.5);
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -2204,11 +2149,11 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			dmg *= 1.75;
+			damage *= 1.75;
 		}
-		dmg = calcInfernoMod(dmg);
-		dmg *= 0.5;
-		if (player.tailType == Tail.FOX && player.tailCount == 9) dmg *= 2;
+		damage = calcInfernoMod(damage);
+		damage *= 0.5;
+		if (player.tailType == Tail.FOX && player.tailCount == 9) damage *= 2;
 		var fusedfoxfiredmgmulti:Number = 1;
 		fusedfoxfiredmgmulti += spellMod() - 1;
 		fusedfoxfiredmgmulti += soulskillMod() - 1;
@@ -2217,23 +2162,23 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.jewelryName == "fox hairpin") fusedfoxfiredmgmulti += .2;
 		if (player.hasPerk(PerkLib.StarSphereMastery)) fusedfoxfiredmgmulti += player.perkv1(PerkLib.StarSphereMastery) * 0.05;
 		if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) fusedfoxfiredmgmulti += .5;
-		//Hosohi No Tama and Fusion bonus dmg
+		//Hosohi No Tama and Fusion bonus damage
 		if (player.hasPerk(PerkLib.KitsuneThyroidGlandEvolved)) fusedfoxfiredmgmulti += 1;
-		dmg *= fusedfoxfiredmgmulti;
+		damage *= fusedfoxfiredmgmulti;
 		//High damage to goes.
-		if(monster.short == "goo-girl") dmg = Math.round(dmg * 1.5);
+		if(monster.short == "goo-girl") damage = Math.round(damage * 1.5);
 		//Using fire attacks on the goo]
 		if(monster.short == "goo-girl") {
 			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ");
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
-		if (monster.hasPerk(PerkLib.IceNature)) dmg *= 5;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) dmg *= 2;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) dmg *= 0.5;
-		if (monster.hasPerk(PerkLib.FireNature)) dmg *= 0.2;
-		if (player.hasPerk(PerkLib.FireAffinity)) dmg *= 2;
-		dmg = Math.round(dmg);
-		dmg = doDamage(dmg);
+		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
+		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
+		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
+		if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
+		if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+		damage = Math.round(damage);
+		damage = doDamage(damage);
 		if (monster.lustVuln == 0) {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
@@ -2276,18 +2221,14 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.jewelryName == "fox hairpin") lustDmg *= 1.2;
 		lustDmg = Math.round(lustDmg);
 		monster.teased(lustDmg);
-		outputText("  <b>(<font color=\"#800000\">" + dmg + "</font>)</b>\n\n");
+		outputText("  <b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, dmg);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else {
 			if(monster.HP <= 0) doNext(endHpVictory);
@@ -2310,9 +2251,7 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		outputText("Holding out your palm, you conjure an ethereal blue flame that dances across your fingertips.  You launch it at " + monster.a + monster.short + " with a ferocious throw, and it bursts on impact, showering dazzling azure sparks everywhere.  ");
-		var dmg:Number = 0;
-		dmg += inteligencescalingbonus() * 0.5;
-		dmg += wisdomscalingbonus() * 0.5;
+		var damage:Number = (inteligencescalingbonus() * 0.5) + (wisdomscalingbonus() * 0.5);
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -2323,11 +2262,11 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			dmg *= 1.75;
+			damage *= 1.75;
 		}
-		dmg = calcInfernoMod(dmg);
-		dmg *= 0.5;
-		if (player.hasPerk(PerkLib.EnlightenedNinetails) && player.tailType == Tail.FOX && player.tailCount == 9) dmg *= 2;
+		damage = calcInfernoMod(damage);
+		damage *= 0.5;
+		if (player.hasPerk(PerkLib.EnlightenedNinetails) && player.tailType == Tail.FOX && player.tailCount == 9) damage *= 2;
 		var purefoxfiredmgmulti:Number = 1;
 		purefoxfiredmgmulti += spellMod() - 1;
 		purefoxfiredmgmulti += soulskillMod() - 1;
@@ -2336,28 +2275,28 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.jewelryName == "fox hairpin") purefoxfiredmgmulti += .2;
 		if (player.hasPerk(PerkLib.StarSphereMastery)) purefoxfiredmgmulti += player.perkv1(PerkLib.StarSphereMastery) * 0.05;
 		if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) purefoxfiredmgmulti += .25;
-		//Hosohi No Tama bonus dmg
+		//Hosohi No Tama bonus damage
 		if (player.hasPerk(PerkLib.KitsuneThyroidGlandEvolved)) purefoxfiredmgmulti += .5;
-		dmg *= purefoxfiredmgmulti;
-		if (monster.cor < 33) dmg = Math.round(dmg * 1.0);
-		else if (monster.cor < 50) dmg = Math.round(dmg * 1.1);
-		else if (monster.cor < 75) dmg = Math.round(dmg * 1.2);
-		else if (monster.cor < 90) dmg = Math.round(dmg * 1.3);
-		else dmg = Math.round(dmg * 1.4); //30% more damage against very high corruption.
+		damage *= purefoxfiredmgmulti;
+		if (monster.cor < 33) damage = Math.round(damage * 1.0);
+		else if (monster.cor < 50) damage = Math.round(damage * 1.1);
+		else if (monster.cor < 75) damage = Math.round(damage * 1.2);
+		else if (monster.cor < 90) damage = Math.round(damage * 1.3);
+		else damage = Math.round(damage * 1.4); //30% more damage against very high corruption.
 		//High damage to goes.
-		if(monster.short == "goo-girl") dmg = Math.round(dmg * 1.5);
+		if(monster.short == "goo-girl") damage = Math.round(damage * 1.5);
 		//Using fire attacks on the goo]
 		if(monster.short == "goo-girl") {
 			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ");
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
-		if (monster.hasPerk(PerkLib.IceNature)) dmg *= 5;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) dmg *= 2;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) dmg *= 0.5;
-		if (monster.hasPerk(PerkLib.FireNature)) dmg *= 0.2;
-		if (player.hasPerk(PerkLib.FireAffinity)) dmg *= 2;
-		dmg = Math.round(dmg);
-		dmg = doDamage(dmg);
+		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
+		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
+		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
+		if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
+		if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+		damage = Math.round(damage);
+		damage = doDamage(damage);
 		if (monster.lustVuln == 0) {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
@@ -2401,18 +2340,14 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.jewelryName == "fox hairpin") lustDmg *= 1.2;
 		lustDmg = Math.round(lustDmg);
 		monster.teased(lustDmg);
-		outputText("  <b>(<font color=\"#800000\">" + dmg + "</font>)</b>\n\n");
+		outputText("  <b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, dmg);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else {
 			if(monster.HP <= 0) doNext(endHpVictory);
@@ -2792,11 +2727,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		doNext(playerMenu);
 		if (monster.HP <= 0) doNext(endHpVictory);
 		else enemyAI();
@@ -3289,24 +3220,20 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		outputText("You gather energy in your Talisman and unleash the spell contained within.  A wave of burning flames gathers around " + monster.a + monster.short + ", slowly burning " + monster.pronoun2 + ".");
-		var temp:int = int(100+(player.inte/2 + rand(player.inte)) * spellMod());
-		temp = calcInfernoMod(temp);
-		if (monster.hasPerk(PerkLib.IceNature)) temp *= 5;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) temp *= 2;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) temp *= 0.5;
-		if (monster.hasPerk(PerkLib.FireNature)) temp *= 0.2;
-//	if (player.hasPerk(PerkLib.FireAffinity)) temp *= 2;
-		temp = Math.round(temp);
-		temp = doDamage(temp);
-		outputText(" <b>(<font color=\"#800000\">" + temp + "</font>)</b>\n\n");
+		var damage:int = int(100+(player.inte/2 + rand(player.inte)) * spellMod());
+		damage = calcInfernoMod(damage);
+		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
+		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
+		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
+		if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
+//	if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+		damage = Math.round(damage);
+		damage = doDamage(damage);
+		outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");
 		player.removeStatusEffect(StatusEffects.ImmolationSpell);
 		SceneLib.arianScene.clearTalisman();
 		monster.createStatusEffect(StatusEffects.ImmolationDoT,3,0,0,0);
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		enemyAI();
 	}
 
@@ -3323,25 +3250,21 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		outputText("You gather energy in your Talisman and unleash the spell contained within.  A wave of cold air gathers around " + monster.a + monster.short + ", slowly freezing " + monster.pronoun2 + ".");
-		var temp:int = int(100+(player.inte/2 + rand(player.inte)) * spellMod());
-		temp = calcGlacialMod(temp);
-		if (monster.hasPerk(PerkLib.IceNature)) temp *= 0.2;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) temp *= 0.5;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) temp *= 2;
-		if (monster.hasPerk(PerkLib.FireNature)) temp *= 5;
-//	if (player.hasPerk(PerkLib.ColdMastery)) temp *= 2;
-//	if (player.hasPerk(PerkLib.ColdAffinity)) temp *= 2;
-		temp = Math.round(temp);
-		temp = doDamage(temp);
-		outputText(" <b>(<font color=\"#800000\">" + temp + "</font>)</b>\n\n");
+		var damage:int = int(100+(player.inte/2 + rand(player.inte)) * spellMod());
+		damage = calcGlacialMod(damage);
+		if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
+		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.5;
+		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;
+		if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
+//	if (player.hasPerk(PerkLib.ColdMastery)) damage *= 2;
+//	if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
+		damage = Math.round(damage);
+		damage = doDamage(damage);
+		outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");
 		player.removeStatusEffect(StatusEffects.IcePrisonSpell);
 		SceneLib.arianScene.clearTalisman();
 		monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		enemyAI();
 	}
 

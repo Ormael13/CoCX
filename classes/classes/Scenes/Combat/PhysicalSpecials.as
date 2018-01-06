@@ -346,11 +346,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		outputText("\n\n");
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		enemyAI();
 	}
 	public function powerAttack3x():void {
@@ -387,11 +383,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		outputText("\n\n");
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		enemyAI();
 	}
 	public function powerAttack4x():void {
@@ -428,11 +420,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		outputText("\n\n");
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		enemyAI();
 	}
 	public function powerAttack5x():void {
@@ -469,11 +457,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		outputText("\n\n");
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		enemyAI();
 	}
 	public function powerAttack6x():void {
@@ -510,11 +494,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		outputText("\n\n");
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		enemyAI();
 	}
 	public function powerAttack7x():void {
@@ -551,11 +531,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		outputText("\n\n");
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		enemyAI();
 	}
 	public function powerAttack8x():void {
@@ -592,11 +568,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		outputText("\n\n");
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		enemyAI();
 	}
 	public function powerfistspoweeeeer():Number {
@@ -731,11 +703,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		enemyAI();
 	}
 
@@ -826,11 +794,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		enemyAI();
 	}
 
@@ -941,11 +905,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			checkAchievementDamage(damage);
 		}
 		outputText("\n\n");
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		enemyAI();
 	}
 
@@ -1017,11 +977,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 		outputText("\n\n");
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		enemyAI();
 	}
 	
@@ -1044,11 +1000,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 		outputText("\n\n");
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		enemyAI();
 	}
 
@@ -1430,11 +1382,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		enemyAI();
 	}
 
@@ -1501,11 +1449,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		enemyAI();
 	}
 
@@ -1552,11 +1496,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 		checkAchievementDamage(damage);
 		outputText("\n\n");
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		enemyAI();
 	}
 	
@@ -1594,11 +1534,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
 		checkAchievementDamage(damage);
 		outputText("\n\n");
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		enemyAI();
 	}
 
@@ -2011,20 +1947,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n");
 		checkAchievementDamage(damage);
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] == 0) {
-			outputText("\n");
-			combat.HeroBaneProc();
-			enemyAI();
-		}
+		combat.heroBaneProc(damage);
 		if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] >= 1) {
-			combat.HeroBaneProc();
 			flags[kFLAGS.MULTIPLE_ATTACK_STYLE] -= 1;
 			mantisMultipleAttacks();
+			return;
 		}
+		outputText("\n");
+		enemyAI();
 	}
 //Gore Attack - uses 15 fatigue!
 	public function goreAttack():void {
@@ -2154,11 +2084,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//New line before monster attack
 		outputText("\n\n");
 		checkAchievementDamage(damage);
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		//Victory ORRRRR enemy turn.
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else {
@@ -2243,11 +2169,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//New line before monster attack
 		outputText("\n\n");
 		checkAchievementDamage(damage);
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		//Victory ORRRRR enemy turn.
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else {
@@ -2398,11 +2320,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Use tail mp
 		player.tailVenom -= 25;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		//Kick back to main if no damage occured!
 		if(player.hasStatusEffect(StatusEffects.FirstAttack)) player.removeStatusEffect(StatusEffects.FirstAttack);
 		else {
@@ -2593,11 +2511,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText(" " + monster.capitalA + monster.short + " bleeds profusely from the many bloody bite marks you leave behind.");
 		outputText("\n\n");
 		checkAchievementDamage(damage);
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		//Kick back to main if no damage occured!
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) {
 			enemyAI();
@@ -2740,11 +2654,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		if (!combatIsOver())enemyAI();
 	}
 
@@ -2777,11 +2687,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		fatigue(20, USEFATG_PHYSICAL);
 		outputText("\n\n");
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		enemyAI();
 	}
 	public function archerSidewinder():void {
@@ -2859,11 +2765,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.ARROWS_SHOT]++;
 		bowPerkUnlock();
 		checkAchievementDamage(damage);
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		enemyAI();
 	}
 
@@ -2935,11 +2837,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.ARROWS_SHOT] += 12;
 		bowPerkUnlock();
 		checkAchievementDamage(damage);
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		enemyAI();
 	}
 

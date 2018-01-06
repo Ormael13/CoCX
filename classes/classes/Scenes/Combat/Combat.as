@@ -49,7 +49,18 @@ public class Combat extends BaseContent {
 	public var teases:CombatTeases         = new CombatTeases();
 	public var soulskills:CombatSoulskills = new CombatSoulskills();
 	public var ui:CombatUI                 = new CombatUI();
-
+	
+	public static const AIR:int       = 1;
+	public static const EARTH:int     = 2;
+	public static const FIRE:int      = 3;
+	public static const WATER:int     = 4;
+	public static const ICE:int       = 5;
+	public static const LIGHTNING:int = 6;
+	public static const DARKNESS:int  = 7;
+	public static const WOOD:int      = 8;
+	public static const METAL:int     = 9;
+	public static const ETHER:int     = 10;
+	
 	public function get inCombat():Boolean {
         return CoC.instance.inCombat;
     }
@@ -59,14 +70,14 @@ public class Combat extends BaseContent {
 
 	public function physicalCost(mod:Number):Number {
 		var costPercent:Number = 100;
-		if(player.findPerk(PerkLib.IronMan) >= 0) costPercent -= 50;
+		if(player.hasPerk(PerkLib.IronMan)) costPercent -= 50;
 		mod *= costPercent/100;
 		return mod;
 	}
 	public function bowCost(mod:Number):Number {
 		var costPercent:Number = 100;
-		if(player.findPerk(PerkLib.BowShooting) >= 0) costPercent -= player.perkv1(PerkLib.BowShooting);
-		//if(player.findPerk(PerkLib.) >= 0) costPercent -= x0; ((tu umieścić perk dający zmniejszenie % kosztu użycia łuku jak IronMan dla fiz specjali ^^))
+		if(player.hasPerk(PerkLib.BowShooting)) costPercent -= player.perkv1(PerkLib.BowShooting);
+		//if(player.hasPerk(PerkLib.)) costPercent -= x0; ((tu umieścić perk dający zmniejszenie % kosztu użycia łuku jak IronMan dla fiz specjali ^^))
 		mod *= costPercent/100;
 		return mod;
 	}
@@ -457,10 +468,10 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 	internal function buildOtherActions(buttons:ButtonDataList):void {
 		var bd:ButtonData;
 		buttons.add("Surrender",combat.surrender,"Fantasize about your opponent in a sexual way so much it would fill up your lust you'll end up getting raped.");
-		if (player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0) {
+		if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.Combo)) {
 			buttons.add("Melee Opt",CoC.instance.perkMenu.doubleAttackOptions,"You can adjust your melee attack settings.");
 		}
-		if (player.findPerk(PerkLib.DoubleStrike) >= 0 || player.findPerk(PerkLib.ElementalArrows) >= 0 || player.findPerk(PerkLib.Cupid) >= 0) {
+		if (player.hasPerk(PerkLib.DoubleStrike) || player.hasPerk(PerkLib.ElementalArrows) || player.hasPerk(PerkLib.Cupid)) {
 			buttons.add("Range Opt",CoC.instance.perkMenu.doubleStrikeOptions,"You can adjust your range strike settings.");
 		}
 		if (player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) {
@@ -501,36 +512,36 @@ public function stopChanneledSpecial():void {
 
 public function unarmedAttack():Number {
 	var unarmed:Number = 0;
-	if (player.findPerk(PerkLib.JobMonk) >= 0 && player.wis >= 60) unarmed += 10 * (1 + player.newGamePlusMod());
-	if (player.findPerk(PerkLib.PrestigeJobSoulArtMaster) >= 0 && player.wis >= 200) unarmed += 10 * (1 + player.newGamePlusMod());
-	if (player.findPerk(PerkLib.BodyCultivator) >= 0) unarmed += 2 * (1 + player.newGamePlusMod());
-	if (player.findPerk(PerkLib.FleshBodyApprenticeStage) >= 0) {
-		if (player.findPerk(PerkLib.SoulApprentice) >= 0) unarmed += 4 * (1 + player.newGamePlusMod());
-		if (player.findPerk(PerkLib.SoulPersonage) >= 0) unarmed += 4 * (1 + player.newGamePlusMod());
-		if (player.findPerk(PerkLib.SoulWarrior) >= 0) unarmed += 4 * (1 + player.newGamePlusMod());
+	if (player.hasPerk(PerkLib.JobMonk) && player.wis >= 60) unarmed += 10 * (1 + player.newGamePlusMod());
+	if (player.hasPerk(PerkLib.PrestigeJobSoulArtMaster) && player.wis >= 200) unarmed += 10 * (1 + player.newGamePlusMod());
+	if (player.hasPerk(PerkLib.BodyCultivator)) unarmed += 2 * (1 + player.newGamePlusMod());
+	if (player.hasPerk(PerkLib.FleshBodyApprenticeStage)) {
+		if (player.hasPerk(PerkLib.SoulApprentice)) unarmed += 4 * (1 + player.newGamePlusMod());
+		if (player.hasPerk(PerkLib.SoulPersonage)) unarmed += 4 * (1 + player.newGamePlusMod());
+		if (player.hasPerk(PerkLib.SoulWarrior)) unarmed += 4 * (1 + player.newGamePlusMod());
 	}
-	if (player.findPerk(PerkLib.FleshBodyWarriorStage) >= 0) {
-		if (player.findPerk(PerkLib.SoulSprite) >= 0) unarmed += 6 * (1 + player.newGamePlusMod());
-		if (player.findPerk(PerkLib.SoulScholar) >= 0) unarmed += 6 * (1 + player.newGamePlusMod());
-		if (player.findPerk(PerkLib.SoulElder) >= 0) unarmed += 6 * (1 + player.newGamePlusMod());
+	if (player.hasPerk(PerkLib.FleshBodyWarriorStage)) {
+		if (player.hasPerk(PerkLib.SoulSprite)) unarmed += 6 * (1 + player.newGamePlusMod());
+		if (player.hasPerk(PerkLib.SoulScholar)) unarmed += 6 * (1 + player.newGamePlusMod());
+		if (player.hasPerk(PerkLib.SoulElder)) unarmed += 6 * (1 + player.newGamePlusMod());
 	}
-	if (player.findPerk(PerkLib.FleshBodyElderStage) >= 0) {
-		if (player.findPerk(PerkLib.SoulExalt) >= 0) unarmed += 8 * (1 + player.newGamePlusMod());
-		if (player.findPerk(PerkLib.SoulOverlord) >= 0) unarmed += 8 * (1 + player.newGamePlusMod());
-		if (player.findPerk(PerkLib.SoulTyrant) >= 0) unarmed += 8 * (1 + player.newGamePlusMod());
+	if (player.hasPerk(PerkLib.FleshBodyElderStage)) {
+		if (player.hasPerk(PerkLib.SoulExalt)) unarmed += 8 * (1 + player.newGamePlusMod());
+		if (player.hasPerk(PerkLib.SoulOverlord)) unarmed += 8 * (1 + player.newGamePlusMod());
+		if (player.hasPerk(PerkLib.SoulTyrant)) unarmed += 8 * (1 + player.newGamePlusMod());
 	}
-	if (player.findPerk(PerkLib.FleshBodyOverlordStage) >= 0) {
-		if (player.findPerk(PerkLib.SoulKing) >= 0) unarmed += 10 * (1 + player.newGamePlusMod());
-		if (player.findPerk(PerkLib.SoulEmperor) >= 0) unarmed += 10 * (1 + player.newGamePlusMod());
-		if (player.findPerk(PerkLib.SoulAncestor) >= 0) unarmed += 10 * (1 + player.newGamePlusMod());
+	if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) {
+		if (player.hasPerk(PerkLib.SoulKing)) unarmed += 10 * (1 + player.newGamePlusMod());
+		if (player.hasPerk(PerkLib.SoulEmperor)) unarmed += 10 * (1 + player.newGamePlusMod());
+		if (player.hasPerk(PerkLib.SoulAncestor)) unarmed += 10 * (1 + player.newGamePlusMod());
 	}
-	if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) unarmed += 12 * (1 + player.newGamePlusMod());
-	if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) unarmed += 18 * (1 + player.newGamePlusMod());
+	if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) unarmed += 12 * (1 + player.newGamePlusMod());
+	if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) unarmed += 18 * (1 + player.newGamePlusMod());
 	if (player.hasStatusEffect(StatusEffects.MetalSkin)) {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 6) unarmed += 4 * player.statusEffectv2(StatusEffects.SummonedElementalsMetal) * (1 + player.newGamePlusMod());
 		else unarmed += 2 * player.statusEffectv2(StatusEffects.SummonedElementalsMetal) * (1 + player.newGamePlusMod());
 	}
-	if (player.hasStatusEffect(StatusEffects.CrinosShape) && player.findPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons) >= 0) unarmed *= 1.1;
+	if (player.hasStatusEffect(StatusEffects.CrinosShape) && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) unarmed *= 1.1;
 //	if (player.jewelryName == "fox hairpin") unarmed += .2;
 	unarmed = Math.round(unarmed);
 	return unarmed;
@@ -564,14 +575,14 @@ public function basemeleeattacks():void {
 				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 4;
 			}
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 2) {
-				if (player.findPerk(PerkLib.TripleAttack) >= 0) {
+				if (player.hasPerk(PerkLib.TripleAttack)) {
 					if (player.hasStatusEffect(StatusEffects.BladeDance) || player.weaponPerk == "Dual") flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 6;
 					else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
 				}
 				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 			}
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 1) {
-				if (player.findPerk(PerkLib.DoubleAttack) >= 0) {
+				if (player.hasPerk(PerkLib.DoubleAttack)) {
 					if (player.hasStatusEffect(StatusEffects.BladeDance) || player.weaponPerk == "Dual") flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 4;
 					else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
 				}
@@ -629,14 +640,14 @@ public function basemeleeattacks():void {
 				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
 			}
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 2) {
-				if (player.findPerk(PerkLib.TripleAttackLarge) >= 0) {
+				if (player.hasPerk(PerkLib.TripleAttackLarge)) {
 					if (player.weaponPerk == "Dual Large") flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 6;
 					else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
 				}
 				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 			}
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 1) {
-				if (player.findPerk(PerkLib.DoubleAttackLarge) >= 0) {
+				if (player.hasPerk(PerkLib.DoubleAttackLarge)) {
 					if (player.weaponPerk == "Dual Large") flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 4;
 					else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
 				}
@@ -682,11 +693,11 @@ public function basemeleeattacks():void {
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 4) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 3) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 2) {
-				if (player.findPerk(PerkLib.ComboMaster) >= 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
+				if (player.hasPerk(PerkLib.ComboMaster)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
 				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 			}
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 1) {
-				if (player.findPerk(PerkLib.Combo) >= 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
+				if (player.hasPerk(PerkLib.Combo)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
 				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 			}
 			else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
@@ -716,16 +727,33 @@ public function basemeleeattacks():void {
 	attack();
 }
 
-public function baseelementalattacks(elementType:int,summonedElementals:int):void {
-	flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = elementType;
+public function baseelementalattacks(elementType:int = -1):void {
+	if(elementType == -1){
+		elementType = flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE];
+	} else {
+		flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = elementType;
+	}
+	var summonedElementals:int;
+	switch(elementType){
+		case AIR        : summonedElementals = player.statusEffectv2(StatusEffects.SummonedElementalsAir); break;
+		case EARTH      : summonedElementals = player.statusEffectv2(StatusEffects.SummonedElementalsEarth); break;
+		case FIRE       : summonedElementals = player.statusEffectv2(StatusEffects.SummonedElementalsFire); break;
+		case WATER      : summonedElementals = player.statusEffectv2(StatusEffects.SummonedElementalsWater); break;
+		case ICE        : summonedElementals = player.statusEffectv2(StatusEffects.SummonedElementalsIce); break;
+		case LIGHTNING  : summonedElementals = player.statusEffectv2(StatusEffects.SummonedElementalsLightning); break;
+		case DARKNESS   : summonedElementals = player.statusEffectv2(StatusEffects.SummonedElementalsDarkness); break;
+		case WOOD       : summonedElementals = player.statusEffectv2(StatusEffects.SummonedElementalsWood); break;
+		case METAL      : summonedElementals = player.statusEffectv2(StatusEffects.SummonedElementalsMetal); break;
+		case ETHER      : summonedElementals = player.statusEffectv2(StatusEffects.SummonedElementalsEther); break;
+	}
 	clearOutput();
 	var manaCost:Number = 1;
 	manaCost += player.inte / 8;
 	manaCost += player.wis / 8;
 	manaCost = Math.round(manaCost);
-	if (summonedElementals >= 4 && player.findPerk(PerkLib.StrongElementalBond) >= 0) manaCost -= 10;
-	if (summonedElementals >= 6 && manaCost > 25 && player.findPerk(PerkLib.StrongerElementalBond) >= 0) manaCost -= 20;
-	if (summonedElementals >= 8 && manaCost > 45 && player.findPerk(PerkLib.StrongestElementalBond) >= 0) manaCost -= 40;
+	if (summonedElementals >= 4 && player.hasPerk(PerkLib.StrongElementalBond)) manaCost -= 10;
+	if (summonedElementals >= 6 && manaCost > 25 && player.hasPerk(PerkLib.StrongerElementalBond)) manaCost -= 20;
+	if (summonedElementals >= 8 && manaCost > 45 && player.hasPerk(PerkLib.StrongestElementalBond)) manaCost -= 40;
 	if (player.mana < manaCost) {
 		outputText("Your mana is too low to fuel your elemental attack!\n\n");
 		doNext(combatMenu);
@@ -750,59 +778,71 @@ public function elementalattacks(elementType:int, summonedElementals:int):void {
 	if (elementalDamage < 10) elementalDamage = 10;
 	
 	var elementalamplification:Number = 1;
-	if (player.findPerk(PerkLib.ElementalConjurerResolve) >= 0) elementalamplification += 0.1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-	if (player.findPerk(PerkLib.ElementalConjurerDedication) >= 0) elementalamplification += 0.2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-	if (player.findPerk(PerkLib.ElementalConjurerSacrifice) >= 0) elementalamplification += 0.3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+	if (player.hasPerk(PerkLib.ElementalConjurerResolve)) elementalamplification += 0.1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+	if (player.hasPerk(PerkLib.ElementalConjurerDedication)) elementalamplification += 0.2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+	if (player.hasPerk(PerkLib.ElementalConjurerSacrifice)) elementalamplification += 0.3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 	elementalDamage *= elementalamplification;
 	//Determine if critical hit!
 	var crit:Boolean = false;
 	var critChance:int = 5;
-	if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
+	if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
 		if (player.inte <= 100) critChance += (player.inte - 50) / 5;
 		if (player.inte > 100) critChance += 10;
 	}
-	if (elementType == 1 || elementType == 4 || elementType == 9 || elementType == 10) critChance += 10;
+	if (elementType == AIR || elementType == WATER || elementType == METAL || elementType == ETHER) critChance += 10;
 	if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 	if (rand(100) < critChance) {
 		crit = true;
-		if (elementType == 10) elementalDamage *= 2;
-		if (elementType == 1 || elementType == 9) elementalDamage *= 1.75;
-		else elementalDamage *= 1.5;
+		switch(elementType){
+			case ETHER: elementalDamage *= 2; break;
+			case AIR:
+			case METAL: elementalDamage *= 1.75; break;
+			default: elementalDamage *= 1.5; break;
+		}
 	}
-	if (elementType == 2 || elementType == 8) elementalDamage *= 2.5;
-	if (elementType == 9) elementalDamage *= 1.5;
-	if (elementType == 3) {
-		if (monster.findPerk(PerkLib.IceNature) >= 0) elementalDamage *= 5;
-		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) elementalDamage *= 2;
-		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) elementalDamage *= 0.5;
-		if (monster.findPerk(PerkLib.FireNature) >= 0) elementalDamage *= 0.2;
+	switch(elementType){
+		case EARTH:
+		case WOOD:
+			elementalDamage *= 2.5;
+			break;
+		case METAL:
+			elementalDamage *= 1.5;
+			break;
+		case FIRE:
+			if (monster.hasPerk(PerkLib.IceNature)) elementalDamage *= 5;
+			if (monster.hasPerk(PerkLib.FireVulnerability)) elementalDamage *= 2;
+			if (monster.hasPerk(PerkLib.IceVulnerability)) elementalDamage *= 0.5;
+			if (monster.hasPerk(PerkLib.FireNature)) elementalDamage *= 0.2;
+			break;
+		case WATER:
+		case ICE:
+			if (monster.hasPerk(PerkLib.IceNature)) elementalDamage *= 0.2;
+			if (monster.hasPerk(PerkLib.FireVulnerability)) elementalDamage *= 0.5;
+			if (monster.hasPerk(PerkLib.IceVulnerability)) elementalDamage *= 2;
+			if (monster.hasPerk(PerkLib.FireNature)) elementalDamage *= 5;
+			break;
+		case LIGHTNING:
+			if (monster.hasPerk(PerkLib.DarknessNature)) elementalDamage *= 5;
+			if (monster.hasPerk(PerkLib.LightningVulnerability)) elementalDamage *= 2;
+			if (monster.hasPerk(PerkLib.DarknessVulnerability)) elementalDamage *= 0.5;
+			if (monster.hasPerk(PerkLib.LightningNature)) elementalDamage *= 0.2;
+			break;
+		case DARKNESS:
+			if (monster.hasPerk(PerkLib.DarknessNature)) elementalDamage *= 0.2;
+			if (monster.hasPerk(PerkLib.LightningVulnerability)) elementalDamage *= 0.5;
+			if (monster.hasPerk(PerkLib.DarknessVulnerability)) elementalDamage *= 2;
+			if (monster.hasPerk(PerkLib.LightningNature)) elementalDamage *= 5;
+			break;
+		default: break;
 	}
-	if (elementType == 4 || elementType == 5) {
-		if (monster.findPerk(PerkLib.IceNature) >= 0) elementalDamage *= 0.2;
-		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) elementalDamage *= 0.5;
-		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) elementalDamage *= 2;
-		if (monster.findPerk(PerkLib.FireNature) >= 0) elementalDamage *= 5;
-	}
-	if (elementType == 6) {
-		if (monster.findPerk(PerkLib.DarknessNature) >= 0) elementalDamage *= 5;
-		if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) elementalDamage *= 2;
-		if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) elementalDamage *= 0.5;
-		if (monster.findPerk(PerkLib.LightningNature) >= 0) elementalDamage *= 0.2;
-	}
-	if (elementType == 7) {
-		if (monster.findPerk(PerkLib.DarknessNature) >= 0) elementalDamage *= 0.2;
-		if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) elementalDamage *= 0.5;
-		if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) elementalDamage *= 2;
-		if (monster.findPerk(PerkLib.LightningNature) >= 0) elementalDamage *= 5;
-	}
-	if (elementType != 1 || elementType != 10) elementalDamage *= (monster.damagePercent(false, true) / 100);
+	if (elementType != AIR && elementType != ETHER) elementalDamage *= (monster.damagePercent(false, true) / 100);
 	elementalDamage = Math.round(elementalDamage);
 	outputText("Your elemental hit [monster a] [monster name]! ");
 	if (crit == true) {
 		outputText("<b>Critical! </b>");
 	}
-	elementalDamage = doDamage(elementalDamage);
-	outputText("<b>(<font color=\"#800000\">" + elementalDamage + "</font>)</b>\n\n");
+	doDamage(elementalDamage,true,true);
+	outputText("\n\n");
 	//checkMinionsAchievementDamage(elementalDamage);
 	if (monster.HP >= 1 && monster.lust <= monster.maxLust()) {
 		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3) {
@@ -830,15 +870,15 @@ public function packAttack():void {
 		outputText("You duck, weave, and dodge.  Despite their best efforts, the throng of demons only hit the air and each other.");
 	}
 	//Determine if evaded
-	else if ((player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) || (player.findPerk(PerkLib.JunglesWanderer) >= 0 && rand(100) < 35)) {
+	else if ((player.hasPerk(PerkLib.Evade) && rand(100) < 10) || (player.hasPerk(PerkLib.JunglesWanderer) && rand(100) < 35)) {
 		outputText("Using your skills at evading attacks, you anticipate and sidestep [monster a] [monster name]' attacks.");
 	}
 	//("Misdirection"
-	else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 15 && player.armorName == "red, high-society bodysuit") {
+	else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 15 && player.armorName == "red, high-society bodysuit") {
 		outputText("Using Raphael's teachings, you anticipate and sidestep [monster a] [monster name]' attacks.");
 	}
 	//Determine if cat'ed
-	else if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
+	else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
 		outputText("With your incredible flexibility, you squeeze out of the way of [monster a] [monster name]' attacks.");
 	}
 	else {
@@ -856,7 +896,7 @@ public function packAttack():void {
 			else if (damage <= 20)
 				outputText(monster.capitalA + monster.short + " stagger you with the force of [monster his] " + monster.weaponVerb + "s! ");
 			else outputText(monster.capitalA + monster.short + " <b>mutilates</b> you with powerful fists and " + monster.weaponVerb + "s! ");
-			takePhysDamage(damage, true);
+			player.takePhysDamage(damage, true);
 		}
 		statScreenRefresh();
 		outputText("\n");
@@ -921,7 +961,7 @@ internal function wait():void {
 		clearOutput();
 		outputText("The brood continues to hammer away at your defenseless self. ");
 		var damage:int = 80 + rand(40);
-		takePhysDamage(damage, true);
+		player.takePhysDamage(damage, true);
 		skipMonsterAction = true;
 	}
 	else if (monster.hasStatusEffect(StatusEffects.QueenBind)) {
@@ -931,7 +971,7 @@ internal function wait():void {
 	else if (player.hasStatusEffect(StatusEffects.GooBind)) {
 		clearOutput();
 		outputText("You writhe uselessly, trapped inside the goo girl's warm, seething body. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girl's pulsing body around yours.");
-		takePhysDamage(.35 * player.maxHP(), true);
+		player.takePhysDamage(.35 * player.maxHP(), true);
 		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.GooArmorBind)) {
@@ -953,20 +993,20 @@ internal function wait():void {
 		else outputText("The [monster name]");
 		outputText("'s grip on you tightens as you relax into the stimulating pressure.");
 		dynStats("lus", player.sens / 5 + 5);
-		takePhysDamage(5 + rand(5));
+		player.takePhysDamage(5 + rand(5));
 		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.ScyllaBind)) {
 		clearOutput();
 		outputText("You're being squeezed tightly by the scylla’s powerful tentacles. That's without mentioning the fact she's rubbing in your sensitive place quite a bit, giving you a knowing grin.");
 		dynStats("lus", player.sens / 4 + 20);
-		takePhysDamage(100 + rand(40));
+		player.takePhysDamage(100 + rand(40));
 		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.WolfHold)) {
 		clearOutput();
 		outputText("The wolf tear your body with its maw wounding you greatly as it starts to eat you alive!");
-		takePhysDamage(5 + rand(5));
+		player.takePhysDamage(5 + rand(5));
 		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.HolliConstrict)) {
@@ -1061,7 +1101,7 @@ internal function wait():void {
 		//Failed struggle
 		else {
 			outputText("You writhe uselessly, trapped inside the goo girl's warm, seething body. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girl's pulsing body around yours. ");
-			takePhysDamage(.15 * player.maxHP(), true);
+			player.takePhysDamage(.15 * player.maxHP(), true);
 		}
 		skipMonsterAction = true;
 	}
@@ -1094,9 +1134,9 @@ internal function wait():void {
 			else outputText("The [monster name]");
 			outputText("'s grip on you tightens as you struggle to break free from the stimulating pressure.");
 			dynStats("lus", player.sens / 10 + 2);
-			if (monster is Naga) takePhysDamage(7 + rand(5));
-			if (monster is Gorgon) takePhysDamage(17 + rand(15));
-			if (monster is CaiLin) takePhysDamage(10 + rand(8));
+			if (monster is Naga) player.takePhysDamage(7 + rand(5));
+			if (monster is Gorgon) player.takePhysDamage(17 + rand(15));
+			if (monster is CaiLin) player.takePhysDamage(10 + rand(8));
 			if (monster is Diva){(monster as Diva).moveBite();}
 		}
 		skipMonsterAction = true;
@@ -1111,7 +1151,7 @@ internal function wait():void {
 		else {
 			outputText("Despite all of your struggle she manage to maintain her hold on you.");
 			dynStats("lus", player.sens / 5 + 5);
-			takePhysDamage(100 + rand(80));
+			player.takePhysDamage(100 + rand(80));
 		}
 		skipMonsterAction = true;
 	}
@@ -1123,7 +1163,7 @@ internal function wait():void {
 		}
 		else {
 			outputText("The wolf tear your body with its maw wounding you greatly as it starts to eat you alive!");
-			takePhysDamage(7 + rand(5));
+			player.takePhysDamage(7 + rand(5));
 		}
 		skipMonsterAction = true;
 	}
@@ -1143,7 +1183,7 @@ internal function wait():void {
 		//Fail to break free
 		else {
 			outputText("Despite trying to escape, the creature only tightens its grip, making it difficult to breathe.\n\n");
-			takePhysDamage(5);
+			player.takePhysDamage(5);
 			if (player.cocks.length > 0)
 				outputText("The creature continues spiraling around your cock, sending shivers up and down your body. You must escape or this creature will overwhelm you!");
 			else if (player.hasVagina())
@@ -1162,11 +1202,11 @@ internal function wait():void {
 
 public function arrowsAccuracy():Number {
 	var accmod:Number = 60;
-	if (player.findPerk(PerkLib.HistoryScout) >= 0 || player.findPerk(PerkLib.PastLifeScout) >= 0) accmod += 40;
-	if (player.findPerk(PerkLib.Accuracy1) >= 0) {
+	if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) accmod += 40;
+	if (player.hasPerk(PerkLib.Accuracy1)) {
 		accmod += player.perkv1(PerkLib.Accuracy1);
 	}
-	if (player.findPerk(PerkLib.Accuracy2) >= 0) {
+	if (player.hasPerk(PerkLib.Accuracy2)) {
 		accmod -= player.perkv1(PerkLib.Accuracy2);
 	}
 	if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
@@ -1177,18 +1217,18 @@ public function arrowsAccuracy():Number {
 		if (player.statusEffectv1(StatusEffects.Kindra) <= 150) accmod += player.statusEffectv1(StatusEffects.Kindra);
 		else accmod += 150;
 	}
-	if (player.inte > 50 && player.findPerk(PerkLib.JobHunter) >= 0) {
+	if (player.inte > 50 && player.hasPerk(PerkLib.JobHunter)) {
 		if (player.inte <= 150) accmod += (player.inte - 50);
 		else accmod += 100;
 	}
-	if (player.findPerk(PerkLib.CarefulButRecklessAimAndShooting) >= 0) accmod += 60;
+	if (player.hasPerk(PerkLib.CarefulButRecklessAimAndShooting)) accmod += 60;
 	if (player.isFlying()) accmod -= 100;
-//	if(player.findPerk(PerkLib.GreyMage) >= 0 && player.inte >= 125) mod += .7;
-//	if(player.findPerk(PerkLib.Mage) >= 0 && player.inte >= 50) mod += .2;
-//	if (player.findPerk(PerkLib.ChiReflowMagic) >= 0) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
+//	if(player.hasPerk(PerkLib.GreyMage) && player.inte >= 125) mod += .7;
+//	if(player.hasPerk(PerkLib.Mage) && player.inte >= 50) mod += .2;
+//	if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
 //	if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 //	if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
-//	if (player.findPerk(PerkLib.AscensionMysticality) >= 0) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
+//	if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 	return accmod;
 }
 
@@ -1199,7 +1239,7 @@ public function oneArrowTotalCost():Number {
 	if (flags[kFLAGS.CUPID_ARROWS] == 1) onearrowcost += 5;
 	if (flags[kFLAGS.ENVENOMED_BOLTS] == 1) onearrowcost += 5;
 	//Bow Shooting perk cost reduction
-	if (player.findPerk(PerkLib.BowShooting) >= 0) onearrowcost *= (1 - ((player.perkv1(PerkLib.BowShooting)) / 100));
+	if (player.hasPerk(PerkLib.BowShooting)) onearrowcost *= (1 - ((player.perkv1(PerkLib.BowShooting)) / 100));
 	return onearrowcost;
 }
 public function oneThrowTotalCost():Number {
@@ -1209,7 +1249,7 @@ public function oneThrowTotalCost():Number {
 //	if (flags[kFLAGS.CUPID_ARROWS] == 1) onearrowcost += 5;
 //	if (flags[kFLAGS.ENVENOMED_BOLTS] == 1) onearrowcost += 5;
 	//Bow Shooting perk cost reduction
-//	if (player.findPerk(PerkLib.BowShooting) >= 0) onearrowcost *= (1 - ((player.perkv1(PerkLib.BowShooting)) / 100));
+//	if (player.hasPerk(PerkLib.BowShooting)) onearrowcost *= (1 - ((player.perkv1(PerkLib.BowShooting)) / 100));
 	return onearrowcost;
 }
 
@@ -1418,14 +1458,20 @@ public function multiArrowsStrike():void {
 	if (flags[kFLAGS.ARROWS_ACCURACY] > 0) accRange -= flags[kFLAGS.ARROWS_ACCURACY];
 	if (player.weaponRangeName == "Guided bow") accRange = 100;
 	fatigue(oneArrowTotalCost());
+	var weaponRangePerk:String = player.weaponRangePerk;
+	var ammoWord:String;
+	switch(weaponRangePerk){
+		case "Bow": ammoWord = "arrow"; break;
+		case "Crossbow" : ammoWord = "bolt"; break;
+	}
 	if (rand(100) < accRange) {
 		var damage:Number = 0;
-		if (player.weaponRangePerk == "Bow") {
+		if (weaponRangePerk == "Bow") {
 			damage += player.spe;
 			damage += speedscalingbonus() * 0.2;
 			if (damage < 10) damage = 10;
 		}
-		if (player.weaponRangePerk == "Crossbow") damage += player.weaponRangeAttack * 10;
+		if (weaponRangePerk == "Crossbow") damage += player.weaponRangeAttack * 10;
 		if (player.findPerk(PerkLib.DeadlyAim) < 0) damage *= (monster.damagePercent() / 100);//jak ten perk o ignorowaniu armora bedzie czy coś to tu dać jak nie ma tego perku to sie dolicza
 		//Weapon addition!
 		if (player.weaponRangeAttack < 51) damage *= (1 + (player.weaponRangeAttack * 0.03));
@@ -1435,92 +1481,59 @@ public function multiArrowsStrike():void {
 		else damage *= (5.5 + ((player.weaponRangeAttack - 200) * 0.01));
 		if (damage == 0) {
 			if (monster.inte > 0) {
-				outputText(monster.capitalA + monster.short + " shrugs as the ");
-				if (player.weaponRangePerk == "Bow") outputText("arrow");
-				if (player.weaponRangePerk == "Crossbow") outputText("bolt");
-				outputText(" bounces off them harmlessly.\n\n");
+				outputText(monster.capitalA + monster.short + " shrugs as the " + ammoWord + " bounces off them harmlessly.\n\n");
 			}
 			else {
-				outputText("The ");
-				if (player.weaponRangePerk == "Bow") outputText("arrow");
-				if (player.weaponRangePerk == "Crossbow") outputText("bolt");
-				outputText(" bounces harmlessly off [monster a] [monster name].\n\n");
+				outputText("The " + ammoWord + " bounces harmlessly off [monster a] [monster name].\n\n");
 			}
 			flags[kFLAGS.ARROWS_SHOT]++;
 			bowPerkUnlock();
 		}
 		if (monster.short == "pod") {
-			outputText("The ");
-			if (player.weaponRangePerk == "Bow") outputText("arrow");
-			if (player.weaponRangePerk == "Crossbow") outputText("bolt");
-			outputText(" lodges deep into the pod's fleshy wall");
+			outputText("The " + ammoWord + " lodges deep into the pod's fleshy wall");
 		}
 		else if (monster.plural) {
 			var textChooser1:int = rand(12);
 			if (textChooser1 >= 9) {
-				outputText(monster.capitalA + monster.short + " look down at the ");
-				if (player.weaponRangePerk == "Bow") outputText("arrow");
-				if (player.weaponRangePerk == "Crossbow") outputText("bolt");
-				outputText(" that now protrudes from one of [monster his] bodies");
+				outputText(monster.capitalA + monster.short + " look down at the " + ammoWord + " that now protrudes from one of [monster his] bodies");
 			}
 			else if (textChooser1 >= 6 && textChooser1 < 9) {
-				outputText("You pull an ");
-				if (player.weaponRangePerk == "Bow") outputText("arrow");
-				if (player.weaponRangePerk == "Crossbow") outputText("bolt");
-				outputText(" and fire it at one of [monster a] [monster name]");
+				outputText("You pull an " + ammoWord + " and fire it at one of [monster a] [monster name]");
 			}
 			else if (textChooser1 >= 3 && textChooser1 < 6) {
-				outputText("With one smooth motion you draw, nock, and fire your deadly ");
-				if (player.weaponRangePerk == "Bow") outputText("arrow");
-				if (player.weaponRangePerk == "Crossbow") outputText("bolt");
-				outputText(" at one of your opponents");
+				outputText("With one smooth motion you draw, nock, and fire your deadly " + ammoWord + " at one of your opponents");
 			}
 			else {
-				outputText("You casually fire an ");
-				if (player.weaponRangePerk == "Bow") outputText("arrow");
-				if (player.weaponRangePerk == "Crossbow") outputText("bolt");
-				outputText(" at one of [monster a] [monster name] with supreme skill");
+				outputText("You casually fire an " + ammoWord + " at one of [monster a] [monster name] with supreme skill");
 			}
 		}
 		else {
 			var textChooser2:int = rand(12);
 			if (textChooser2 >= 9) {
-				outputText(monster.capitalA + monster.short + " looks down at the ");
-				if (player.weaponRangePerk == "Bow") outputText("arrow");
-				if (player.weaponRangePerk == "Crossbow") outputText("bolt");
-				outputText(" that now protrudes from [monster his] body");
+				outputText(monster.capitalA + monster.short + " looks down at the " + ammoWord + " that now protrudes from [monster his] body");
 			} else if (textChooser2 >= 6) {
-				outputText("You pull an ");
-				if (player.weaponRangePerk == "Bow") outputText("arrow");
-				if (player.weaponRangePerk == "Crossbow") outputText("bolt");
-				outputText(" and fire it at [monster a] [monster name]");
+				outputText("You pull an " + ammoWord + " and fire it at [monster a] [monster name]");
 			} else if (textChooser2 >= 3) {
-				outputText("With one smooth motion you draw, nock, and fire your deadly ");
-				if (player.weaponRangePerk == "Bow") outputText("arrow");
-				if (player.weaponRangePerk == "Crossbow") outputText("bolt");
-				outputText(" at your opponent");
+				outputText("With one smooth motion you draw, nock, and fire your deadly " + ammoWord + " at your opponent");
 			} else {
-				outputText("You casually fire an ");
-				if (player.weaponRangePerk == "Bow") outputText("arrow");
-				if (player.weaponRangePerk == "Crossbow") outputText("bolt");
-				outputText(" at [monster a] [monster name] with supreme skill");
+				outputText("You casually fire an " + ammoWord + " at [monster a] [monster name] with supreme skill");
 			}
 		}
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
-		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
+		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
 			if (player.inte <= 100) critChance += (player.inte - 50) / 5;
 			if (player.inte > 100) critChance += 10;
 		}
-		if (player.findPerk(PerkLib.VitalShot) >= 0 && player.inte >= 50) critChance += 10;
+		if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			damage *= 1.75;
 		}
-		if (player.findPerk(PerkLib.HistoryScout) >= 0 || player.findPerk(PerkLib.PastLifeScout) >= 0) damage *= 1.1;
-		if (player.findPerk(PerkLib.JobRanger) >= 0) damage *= 1.05;
+		if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= 1.1;
+		if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
 		if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
 			if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
 			else {
@@ -1538,10 +1551,10 @@ public function multiArrowsStrike():void {
 			if (player.inte >= 100) damage += player.inte * 0.1;
 			if (player.inte >= 150) damage += player.inte * 0.1;
 			if (player.inte >= 200) damage += player.inte * 0.1;
-			if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 5;
-			if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 2;
-			if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 0.5;
-			if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 0.2;
+			if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
+			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
+			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
+			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
 		}
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) {
 			damage += player.inte * 0.2;
@@ -1549,18 +1562,14 @@ public function multiArrowsStrike():void {
 			if (player.inte >= 100) damage += player.inte * 0.1;
 			if (player.inte >= 150) damage += player.inte * 0.1;
 			if (player.inte >= 200) damage += player.inte * 0.1;
-			if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 0.5;
-			if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 0.2;
-			if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 5;
-			if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 2;
+			if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.5;
+			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.2;
+			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 5;
+			if (monster.hasPerk(PerkLib.FireNature)) damage *= 2;
 		}
 		damage = Math.round(damage);
 		damage = doDamage(damage);
 		if (flags[kFLAGS.ARROWS_SHOT] >= 1) EngineCore.awardAchievement("Arrow to the Knee", kACHIEVEMENTS.COMBAT_ARROW_TO_THE_KNEE);
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
 		if (monster.HP <= 0) {
 			if (monster.short == "pod")
 				outputText(". ");
@@ -1583,6 +1592,7 @@ public function multiArrowsStrike():void {
 			}
 			outputText(".  It's clearly very painful. <b>(<font color=\"#800000\">" + String(damage) + "</font>)</b>");
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+			heroBaneProc(damage);
 		}
 		if (flags[kFLAGS.CUPID_ARROWS] == 1) {
 			outputText("  ");
@@ -1692,98 +1702,32 @@ public function multiArrowsStrike():void {
 			outputText("\n");
 		}
 		if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom < 10) {
-			outputText("  You do not have enough venom to apply on the ");
-			if (player.weaponRangePerk == "Bow") outputText("arrow");
-			if (player.weaponRangePerk == "Crossbow") outputText("bolt");
-			outputText(" tip!");
+			outputText("  You do not have enough venom to apply on the " + ammoWord + " tip!");
 		}
 		outputText("\n");
 		flags[kFLAGS.ARROWS_SHOT]++;
 		bowPerkUnlock();
 	}
 	else {
-		outputText("The ");
-		if (player.weaponRangePerk == "Bow") outputText("arrow");
-		if (player.weaponRangePerk == "Crossbow") outputText("bolt");
-		outputText(" goes wide, disappearing behind your foe");
+		outputText("The " + ammoWord + " goes wide, disappearing behind your foe");
 		if (monster.plural) outputText("s");
 		outputText(".\n\n");
 	}
 	if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 1) {
 		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 		{
-			outputText("\n\n<i>“Ouch. Such a cowardly weapon,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your pathetic ");
-			if (player.weaponRangePerk == "Bow") outputText("arrow");
-			if (player.weaponRangePerk == "Crossbow") outputText("bolt");
-			outputText("s?”</i>\n\n");
+			outputText("\n\n<i>“Ouch. Such a cowardly weapon,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your pathetic " + ammoWord + "s?”</i>\n\n");
 			monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 		}
 		enemyAI();
 	}
-	if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 2) {
-		HeroBaneProc();
-		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
-			flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
-			if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) flags[kFLAGS.ARROWS_ACCURACY] += 5;
-			else flags[kFLAGS.ARROWS_ACCURACY] += 15;
-			multiArrowsStrike();
-		}
-		else {
-			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
-		}
-	}
-	if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 3) {
-		HeroBaneProc();
-		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
-			flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
-			if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) flags[kFLAGS.ARROWS_ACCURACY] += 5;
-			else flags[kFLAGS.ARROWS_ACCURACY] += 15;
-			multiArrowsStrike();
-		}
-		else {
-			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
-		}
-	}
-	if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 4) {
-		HeroBaneProc();
-		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
-			flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
-			if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) flags[kFLAGS.ARROWS_ACCURACY] += 5;
-			else flags[kFLAGS.ARROWS_ACCURACY] += 15;
-			multiArrowsStrike();
-		}
-		else {
-			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
-		}
-	}
-	if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 5) {
-		HeroBaneProc();
-		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
-			flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
-			if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) flags[kFLAGS.ARROWS_ACCURACY] += 5;
-			else flags[kFLAGS.ARROWS_ACCURACY] += 15;
-			multiArrowsStrike();
-		}
-		else {
-			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
-		}
-	}
-	if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 6) {
-		HeroBaneProc();
-		if (monster.HP > 0 && monster.lust < monster.maxLust()) {
-			flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
-			if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) flags[kFLAGS.ARROWS_ACCURACY] += 5;
-			else flags[kFLAGS.ARROWS_ACCURACY] += 15;
-			multiArrowsStrike();
-		}
-		else {
-			if(monster.HP <= 0) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
-		}
+	if(monster.HP <= 0){ doNext(endHpVictory); return;}
+	if(monster.lust >= monster.maxLust()){ doNext(endLustVictory); return;}
+	if(flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2){
+		flags[kFLAGS.MULTIPLE_ARROWS_STYLE]--;
+		if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) flags[kFLAGS.ARROWS_ACCURACY] += 5;
+		else flags[kFLAGS.ARROWS_ACCURACY] += 15;
+		multiArrowsStrike();
 	}
 }
 
@@ -1818,7 +1762,7 @@ public function throwWeapon():void {
 		damage += player.str;
 		damage += strenghtscalingbonus() * 0.2;
 		if (damage < 10) damage = 10;
-		if (player.findPerk(PerkLib.DeadlyThrow) >= 0) damage += player.spe;
+		if (player.hasPerk(PerkLib.DeadlyThrow)) damage += player.spe;
 		//Weapon addition!
 		if (player.weaponRangeAttack < 51) damage *= (1 + (player.weaponRangeAttack * 0.03));
 		else if (player.weaponRangeAttack >= 51 && player.weaponRangeAttack < 101) damage *= (2.5 + ((player.weaponRangeAttack - 50) * 0.025));
@@ -1884,18 +1828,18 @@ public function throwWeapon():void {
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		if (player.weaponRangeName == "gnoll throwing axes") critChance += 10;
-		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
+		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
 			if (player.inte <= 100) critChance += (player.inte - 50) / 5;
 			if (player.inte > 100) critChance += 10;
 		}
-		if (player.findPerk(PerkLib.VitalShot) >= 0 && player.inte >= 50) critChance += 10;
+		if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			damage *= 1.75;
 		}
-		if (player.findPerk(PerkLib.HistoryScout) >= 0 || player.findPerk(PerkLib.PastLifeScout) >= 0) damage *= 1.1;
-		if (player.findPerk(PerkLib.JobRanger) >= 0) damage *= 1.05;
+		if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= 1.1;
+		if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 		if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
@@ -1914,10 +1858,10 @@ public function throwWeapon():void {
 			if (player.inte >= 100) damage += player.inte * 0.1;
 			if (player.inte >= 150) damage += player.inte * 0.1;
 			if (player.inte >= 200) damage += player.inte * 0.1;
-			if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 5;
-			if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 2;
-			if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 0.5;
-			if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 0.2;
+			if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
+			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
+			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
+			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
 		}
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) {
 			damage += player.inte * 0.2;
@@ -1925,17 +1869,13 @@ public function throwWeapon():void {
 			if (player.inte >= 100) damage += player.inte * 0.1;
 			if (player.inte >= 150) damage += player.inte * 0.1;
 			if (player.inte >= 200) damage += player.inte * 0.1;
-			if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 0.5;
-			if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 0.2;
-			if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 5;
-			if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 2;
+			if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.5;
+			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.2;
+			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 5;
+			if (monster.hasPerk(PerkLib.FireNature)) damage *= 2;
 		}zachowane jeśli potem dodam elemental dmg do ataków innych broni dystansowych też
 */		damage = Math.round(damage);
 		damage = doDamage(damage);
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
 		if (monster.HP <= 0) {
 			if (monster.short == "pod")
 				outputText(". ");
@@ -1950,11 +1890,10 @@ public function throwWeapon():void {
 			return;
 		}
 		else {
-		outputText(".  It's clearly very painful. <b>(<font color=\"#800000\">" + String(damage) + "</font>)</b>");
-		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
-	//	if (flaga dla efektu arouse arrow) outputText(" tekst dla arouse arrow effect.");
-	//	if (flaga dla efektu poison arrow) outputText(" tekst dla poison arrow effect.");
-		outputText("\n\n");
+			outputText(".  It's clearly very painful. <b>(<font color=\"#800000\">" + String(damage) + "</font>)</b>");
+			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+			outputText("\n\n");
+			heroBaneProc(damage);
 		}
 		checkAchievementDamage(damage);
 	}
@@ -1973,11 +1912,9 @@ public function throwWeapon():void {
 			monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 		}
 		if (player.ammo == 0) outputText("\n\n<b>You're out of weapons to throw in this fight.</b>\n\n");
-		HeroBaneProc();
 		enemyAI();
 	}
 	else if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) {
-		HeroBaneProc();
 		flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
 		flags[kFLAGS.ARROWS_ACCURACY] += 15;
 		throwWeapon();
@@ -2041,18 +1978,18 @@ public function shootWeapon():void {
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
-		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
+		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
 			if (player.inte <= 100) critChance += (player.inte - 50) / 5;
 			if (player.inte > 100) critChance += 10;
 		}
-		if (player.findPerk(PerkLib.VitalShot) >= 0 && player.inte >= 50) critChance += 10;
+		if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			damage *= 1.75;
 		}
-		if (player.findPerk(PerkLib.HistoryScout) >= 0 || player.findPerk(PerkLib.PastLifeScout) >= 0) damage *= 1.1;
-		if (player.findPerk(PerkLib.JobRanger) >= 0) damage *= 1.05;
+		if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= 1.1;
+		if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
 		if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
 			if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
 			else {
@@ -2069,10 +2006,10 @@ public function shootWeapon():void {
 			if (player.inte >= 100) damage += player.inte * 0.1;
 			if (player.inte >= 150) damage += player.inte * 0.1;
 			if (player.inte >= 200) damage += player.inte * 0.1;
-			if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 5;
-			if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 2;
-			if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 0.5;
-			if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 0.2;
+			if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
+			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
+			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
+			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
 		}
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) {
 			damage += player.inte * 0.2;
@@ -2080,17 +2017,14 @@ public function shootWeapon():void {
 			if (player.inte >= 100) damage += player.inte * 0.1;
 			if (player.inte >= 150) damage += player.inte * 0.1;
 			if (player.inte >= 200) damage += player.inte * 0.1;
-			if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 0.5;
-			if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 0.2;
-			if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 5;
-			if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 2;
+			if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.5;
+			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.2;
+			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 5;
+			if (monster.hasPerk(PerkLib.FireNature)) damage *= 2;
 		}zachowane jeśli potem dodam elemental dmg do ataków innych broni dystansowych też
 */		damage = Math.round(damage);
 		damage = doDamage(damage);
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
+
 		if (monster.HP <= 0) {
 			if (monster.short == "pod")
 				outputText(". ");
@@ -2110,6 +2044,7 @@ public function shootWeapon():void {
 	//	if (flaga dla efektu arouse arrow) outputText(" tekst dla arouse arrow effect.");
 	//	if (flaga dla efektu poison arrow) outputText(" tekst dla poison arrow effect.");
 		outputText("\n\n");
+			heroBaneProc(damage);
 		}
 		checkAchievementDamage(damage);
 	}
@@ -2212,7 +2147,7 @@ public function defendpose():void {
 	clearOutput();
 	outputText("You decide not to take any offensive action this round preparing for [monster a] [monster name] attack assuming defensive pose.\n\n");
 	player.createStatusEffect(StatusEffects.Defend, 0, 0, 0, 0);
-	if (player.findPerk(PerkLib.DefenceStance) >= 0) {
+	if (player.hasPerk(PerkLib.DefenceStance)) {
 		wrathregeneration();
 		fatigueRecovery();
 		manaregeneration();
@@ -2243,33 +2178,33 @@ public function surrender():void {
 
 public function fatigueRecovery():void {
 	var fatiguecombatrecovery:Number = 0;
-	if (player.findPerk(PerkLib.StarSphereMastery) >= 0) fatiguecombatrecovery += (player.perkv1(PerkLib.StarSphereMastery) * 2);
-	if (player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0) fatiguecombatrecovery += 3;
-	if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0) fatiguecombatrecovery += 2;
-	if (player.findPerk(PerkLib.CorruptedNinetails) >= 0) fatiguecombatrecovery += 2;
-	if (player.findPerk(PerkLib.EnlightenedKitsune) >= 0) fatiguecombatrecovery += 1;
-	if (player.findPerk(PerkLib.CorruptedKitsune) >= 0) fatiguecombatrecovery += 1;
-	if (player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) fatiguecombatrecovery += 1;
-	if (player.findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0) fatiguecombatrecovery += 1;
-	if (player.findPerk(PerkLib.MasteredDefenceStance) >= 0) fatiguecombatrecovery += 1;
-	if (player.findPerk(PerkLib.PerfectDefenceStance) >= 0) fatiguecombatrecovery += 1;
+	if (player.hasPerk(PerkLib.StarSphereMastery)) fatiguecombatrecovery += (player.perkv1(PerkLib.StarSphereMastery) * 2);
+	if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) fatiguecombatrecovery += 3;
+	if (player.hasPerk(PerkLib.EnlightenedNinetails)) fatiguecombatrecovery += 2;
+	if (player.hasPerk(PerkLib.CorruptedNinetails)) fatiguecombatrecovery += 2;
+	if (player.hasPerk(PerkLib.EnlightenedKitsune)) fatiguecombatrecovery += 1;
+	if (player.hasPerk(PerkLib.CorruptedKitsune)) fatiguecombatrecovery += 1;
+	if (player.hasPerk(PerkLib.KitsuneThyroidGland)) fatiguecombatrecovery += 1;
+	if (player.hasPerk(PerkLib.KitsuneThyroidGlandEvolved)) fatiguecombatrecovery += 1;
+	if (player.hasPerk(PerkLib.MasteredDefenceStance)) fatiguecombatrecovery += 1;
+	if (player.hasPerk(PerkLib.PerfectDefenceStance)) fatiguecombatrecovery += 1;
 	fatigue(-(1 + fatiguecombatrecovery));
 }
 
 public function attacksAccuracy():Number {
 	var atkmod:Number = 100;
-/*	if (player.findPerk(PerkLib.HistoryScout) >= 0 || player.findPerk(PerkLib.PastLifeScout) >= 0) accmod += 40;
-	if (player.findPerk(PerkLib.Accuracy1) >= 0) {
+/*	if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) accmod += 40;
+	if (player.hasPerk(PerkLib.Accuracy1)) {
 		accmod += player.perkv1(PerkLib.Accuracy1);
 	}
-	if (player.findPerk(PerkLib.Accuracy2) >= 0) {
+	if (player.hasPerk(PerkLib.Accuracy2)) {
 		accmod -= player.perkv1(PerkLib.Accuracy2);
 	}
-	if (player.inte > 50 && player.findPerk(PerkLib.JobHunter) >= 0) {
+	if (player.inte > 50 && player.hasPerk(PerkLib.JobHunter)) {
 		if (player.inte <= 150) atkmod += (player.inte - 50);
 		else atkmod += 100;
 	}
-	if (player.findPerk(PerkLib.CarefulButRecklessAimAndShooting) >= 0) atkmod += 60;
+	if (player.hasPerk(PerkLib.CarefulButRecklessAimAndShooting)) atkmod += 60;
 */	return atkmod;
 }
 
@@ -2408,7 +2343,7 @@ public function attack():void {
 			(monster as Alraune).trapLevel(-6);
 		}
 	}
-	/*if(player.findPerk(PerkLib.DoubleAttack) >= 0 && player.spe >= 50 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] < 2) {
+	/*if(player.hasPerk(PerkLib.DoubleAttack) && player.spe >= 50 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] < 2) {
 		if(player.hasStatusEffect(StatusEffects.FirstAttack)) player.removeStatusEffect(StatusEffects.FirstAttack);
 		else {
 			//Always!
@@ -2526,7 +2461,7 @@ public function attack():void {
 	
 	damage += player.str;
 	damage += strenghtscalingbonus() * 0.25;
-	if (player.findPerk(PerkLib.HoldWithBothHands) >= 0 && player.weapon != WeaponLib.FISTS && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
+	if (player.hasPerk(PerkLib.HoldWithBothHands) && player.weapon != WeaponLib.FISTS && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
 	if (damage < 10) damage = 10;
 	if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 1 && flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] >= 2) damage *= 0.95;
 	if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 2 && flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] >= 3) damage *= 0.9;
@@ -2544,34 +2479,34 @@ public function attack():void {
 	if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);
 	//All special weapon effects like...fire/ice
 	if (player.weapon == weapons.L_WHIP) {
-		if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 5;
-		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 2;
-		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 0.5;
-		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 0.2;
+		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
+		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
+		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
+		if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
 	}
 	if (player.weapon == weapons.RCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
-		if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 5;
-		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 2;
-		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 0.5;
-		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 0.2;
+		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
+		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
+		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
+		if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
 	}
 	if (player.weapon == weapons.SCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
-		if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 0.2;
-		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 0.5;
-		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 2;
-		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 5;
+		if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
+		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.5;
+		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;
+		if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
 	}
 	if (player.weapon == weapons.TCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
-		if (monster.findPerk(PerkLib.DarknessNature) >= 0) damage *= 5;
-		if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) damage *= 2;
-		if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) damage *= 0.5;
-		if (monster.findPerk(PerkLib.LightningNature) >= 0) damage *= 0.2;
+		if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 5;
+		if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 2;
+		if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 0.5;
+		if (monster.hasPerk(PerkLib.LightningNature)) damage *= 0.2;
 	}
 	if (player.weapon == weapons.ACLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
-		if (monster.findPerk(PerkLib.DarknessNature) >= 0) damage *= 0.2;
-		if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) damage *= 0.5;
-		if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) damage *= 2;
-		if (monster.findPerk(PerkLib.LightningNature) >= 0) damage *= 5;
+		if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 0.2;
+		if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 0.5;
+		if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 2;
+		if (monster.hasPerk(PerkLib.LightningNature)) damage *= 5;
 	}
 	if (player.weapon == weapons.NPHBLDE || player.weapon == weapons.MASAMUN || player.weapon == weapons.SESPEAR || player.weapon == weapons.WG_GAXE || player.weapon == weapons.KARMTOU) {
 		if (monster.cor < 33) damage = Math.round(damage * 1.0);
@@ -2592,19 +2527,19 @@ public function attack():void {
 	var crit:Boolean = false;
 	var critChance:int = 5;
 	var critDamage:Number = 1.75;
-	if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
+	if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
 		if (player.inte <= 100) critChance += (player.inte - 50) / 5;
 		if (player.inte > 100) critChance += 10;
 	}
-	if (player.findPerk(PerkLib.JobDervish) >= 0 && (player.weaponPerk != "Large" || player.weaponPerk != "Staff")) critChance += 10;
-	if (player.findPerk(PerkLib.WeaponMastery) >= 0 && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
-	if (player.findPerk(PerkLib.WeaponGrandMastery) >= 0 && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
+	if (player.hasPerk(PerkLib.JobDervish) && (player.weaponPerk != "Large" || player.weaponPerk != "Staff")) critChance += 10;
+	if (player.hasPerk(PerkLib.WeaponMastery) && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
+	if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
 	if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
 	if (player.weapon == weapons.MASAMUN || (player.weapon == weapons.WG_GAXE && monster.cor > 66) || ((player.weapon == weapons.DE_GAXE || player.weapon == weapons.YAMARG) && monster.cor < 33)) critChance += 10;
 	if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 	if (rand(100) < critChance) {
 		crit = true;
-		if (player.findPerk(PerkLib.Impale) >= 0 && (player.findPerk(PerkLib.DoubleAttack) < 0 || (player.findPerk(PerkLib.DoubleAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)) && player.spe >= 100 && (player.weaponName == "deadly spear" || player.weaponName == "deadly lance" || player.weaponName == "deadly trident")) critDamage += 0.75;
+		if (player.hasPerk(PerkLib.Impale) && (player.findPerk(PerkLib.DoubleAttack) < 0 || (player.hasPerk(PerkLib.DoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)) && player.spe >= 100 && (player.weaponName == "deadly spear" || player.weaponName == "deadly lance" || player.weaponName == "deadly trident")) critDamage += 0.75;
 		if ((player.weapon == weapons.WG_GAXE && monster.cor > 66) || (player.weapon == weapons.DE_GAXE && monster.cor < 33)) critDamage += 0.1;
 		damage *= critDamage;
 	}
@@ -2612,11 +2547,11 @@ public function attack():void {
 	damage *= (monster.damagePercent(false, true) / 100);
 	//Damage post processing!
 	//Thunderous Strikes
-	if(player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80)
+	if(player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80)
 		damage *= 1.2;
 		
-	if (player.findPerk(PerkLib.ChiReflowMagic) >= 0) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
-	if (player.findPerk(PerkLib.ChiReflowAttack) >= 0) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
+	if (player.hasPerk(PerkLib.ChiReflowMagic)) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
+	if (player.hasPerk(PerkLib.ChiReflowAttack)) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
 	if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 	if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 	if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
@@ -2681,9 +2616,9 @@ public function attack():void {
 	{
 		if (!monster.hasStatusEffect(StatusEffects.Stunned))
 		{
-			if (damage > 0 && player.findPerk(PerkLib.HistoryFighter) >= 0 || player.findPerk(PerkLib.PastLifeFighter) >= 0) damage *= 1.1;
-			if (damage > 0 && player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
-			if (damage > 0 && player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
+			if (damage > 0 && player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= 1.1;
+			if (damage > 0 && player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
+			if (damage > 0 && player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
 			if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
 			if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
@@ -2710,9 +2645,9 @@ public function attack():void {
 	if(damage > 0) {
 		var vbladeeffect:Boolean = false;
 		var vbladeeffectChance:int = 1;
-		if (player.findPerk(PerkLib.HistoryFighter) >= 0 || player.findPerk(PerkLib.PastLifeFighter) >= 0) damage *= 1.1;
-		if (player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
-		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
+		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= 1.1;
+		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
+		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
 		if (player.weapon == weapons.VBLADE && (rand(100) < vbladeeffectChance)) {
 			vbladeeffect = true;
 			damage *= 5;
@@ -2730,13 +2665,13 @@ public function attack():void {
 			outputText("<b>Critical! </b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
 		}
-		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+		if (crit == false && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
 			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 	}
-	if (player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
+	if (player.hasPerk(PerkLib.BrutalBlows) && player.str > 75) {
 		if (monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage [monster a] [monster name]'s defenses!");
 		if (monster.armorDef - 5 > 0) monster.armorDef -= 5;
 		else monster.armorDef = 0;
@@ -2823,12 +2758,12 @@ public function attack():void {
 			if (!monster.hasStatusEffect(StatusEffects.Stunned)) monster.createStatusEffect(StatusEffects.Stunned,rand(2),0,0,0);
 		}
 		//20% Stun chance
-		if (player.isFistOrFistWeapon() && player.weapon != weapons.KARMTOU && player.findPerk(PerkLib.MightyFist) >= 0 && rand(5) == 0 && monster.findPerk(PerkLib.Resolute) < 0) {
+		if (player.isFistOrFistWeapon() && player.weapon != weapons.KARMTOU && player.hasPerk(PerkLib.MightyFist) && rand(5) == 0 && monster.findPerk(PerkLib.Resolute) < 0) {
 			outputText("\n" + monster.capitalA + monster.short + " reels from the brutal blow, stunned.");
 			if (!monster.hasStatusEffect(StatusEffects.Stunned)) monster.createStatusEffect(StatusEffects.Stunned,rand(2),0,0,0);
 		}
 		//25% Stun chance
-		if (player.weapon != weapons.KARMTOU && player.findPerk(PerkLib.MightyFist) >= 0 && rand(4) == 0 && monster.findPerk(PerkLib.Resolute) < 0) {
+		if (player.weapon != weapons.KARMTOU && player.hasPerk(PerkLib.MightyFist) && rand(4) == 0 && monster.findPerk(PerkLib.Resolute) < 0) {
 			outputText("\n" + monster.capitalA + monster.short + " reels from the brutal blow, stunned.");
 			if (!monster.hasStatusEffect(StatusEffects.Stunned)) monster.createStatusEffect(StatusEffects.Stunned,rand(2),0,0,0);
 		}
@@ -2840,7 +2775,7 @@ public function attack():void {
 		//50% Bleed chance
 		if ((player.weapon == weapons.H_GAUNT || player.weapon == weapons.CNTWHIP) && rand(2) == 0 && monster.armorDef < 10 && !monster.hasStatusEffect(StatusEffects.IzmaBleed))
 		{
-			if (monster.findPerk(PerkLib.EnemyConstructType) >= 0) {
+			if (monster.hasPerk(PerkLib.EnemyConstructType)) {
 				if (monster is LivingStatue)
 				{
 					outputText("Despite the rents you've torn in its stony exterior, the statue does not bleed.");
@@ -2900,20 +2835,13 @@ public function attack():void {
 	
 	outputText("\n");
 	checkAchievementDamage(damage);
-	if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-		if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-		player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-	}
-	meleeattackdamage();
-}
-public function meleeattackdamage():void {
 	WrathWeaponsProc();
-	HeroBaneProc();
+	heroBaneProc(damage);
 	if(monster.HP <= 0){doNext(endHpVictory); return;}
 	if(monster.lust >= monster.maxLust()){doNext(endLustVictory); return;}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] >= 2){
 		flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]--;
-	//	flags[kFLAGS.ATTACKS_ACCURACY] += 5;
+		//	flags[kFLAGS.ATTACKS_ACCURACY] += 5;
 		attack();
 		return;
 	}
@@ -2931,16 +2859,16 @@ public function meleeattackdamage():void {
 
 public function WrathWeaponsProc():void {
 	if (player.weapon == weapons.BLETTER) {
-		takePhysDamage(player.maxHP() * 0.02);
+		player.takePhysDamage(player.maxHP() * 0.02);
 		if (player.HP < 1) {
 			doNext(endHpLoss);
 			return;
 		}
 	}
 	if (player.isLowGradeWrathWeapon()) {
-		if (player.findPerk(PerkLib.PrestigeJobBerserker) >= 0 && player.wrath >= 10) player.wrath -= 10;
+		if (player.hasPerk(PerkLib.PrestigeJobBerserker) && player.wrath >= 10) player.wrath -= 10;
 		else {
-			takePhysDamage(100);
+			player.takePhysDamage(100);
 			if (player.HP < 1) {
 				doNext(endHpLoss);
 				return;
@@ -2948,9 +2876,9 @@ public function WrathWeaponsProc():void {
 		}
 	}
 	if (player.isDualLowGradeWrathWeapon()) {
-		if (player.findPerk(PerkLib.PrestigeJobBerserker) >= 0 && player.wrath >= 20) player.wrath -= 20;
+		if (player.hasPerk(PerkLib.PrestigeJobBerserker) && player.wrath >= 20) player.wrath -= 20;
 		else {
-			takePhysDamage(200);
+			player.takePhysDamage(200);
 			if (player.HP < 1) {
 				doNext(endHpLoss);
 				return;
@@ -2959,15 +2887,14 @@ public function WrathWeaponsProc():void {
 	}
 }
 
-public function HeroBaneProc():void {
+public function heroBaneProc(damage:int = 0):void {
 	if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-		if (player.statusEffectv2(StatusEffects.HeroBane) > 0) {
-			outputText("\nYou feel [monster a] [monster name] wounds as well as your owns as the link mirrors the pain back to you for " + player.statusEffectv2(StatusEffects.HeroBane) + " damage!\n");
-			takePhysDamage(player.statusEffectv2(StatusEffects.HeroBane));
+		if(damage > 0){
+			outputText("\nYou feel [monster a] [monster name] wounds as well as your owns as the link mirrors the pain back to you for " + damage + " damage!\n");
+			player.takePhysDamage(damage);
 		}
 		if (player.HP < 1) {
 			doNext(endHpLoss);
-			return;
 		}
 	}
 }
@@ -2977,32 +2904,32 @@ public function combatMiss():Boolean {
 }
 public function combatParry():Boolean {
 	var parryChance:int = 0;
-	if (player.findPerk(PerkLib.Parry) >= 0 && player.spe >= 50 && player.str >= 50 && player.weapon != WeaponLib.FISTS) {
+	if (player.hasPerk(PerkLib.Parry) && player.spe >= 50 && player.str >= 50 && player.weapon != WeaponLib.FISTS) {
 		if (player.spe <= 100) parryChance += (player.spe - 50) / 5;
 		else parryChance += 10;
 	}
-	if (player.findPerk(PerkLib.CatchTheBlade) >= 0 && player.spe >= 50 && player.shieldName == "nothing" && player.isFistOrFistWeapon()) parryChance += 15;
+	if (player.hasPerk(PerkLib.CatchTheBlade) && player.spe >= 50 && player.shieldName == "nothing" && player.isFistOrFistWeapon()) parryChance += 15;
 	return rand(100) <= parryChance;
 //	trace("Parried!");
 }
 public function combatCritical():Boolean {
 	var critChance:int = 4;
-	if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
+	if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
 		if (player.inte <= 100) critChance += (player.inte - 50) / 50;
 		if (player.inte > 100) critChance += 1;
 	}
-	if (player.findPerk(PerkLib.Blademaster) >= 0 && (player.weaponVerb == "slash" || player.weaponVerb == "cleave" || player.weaponVerb == "keen cut")) critChance += 5;
+	if (player.hasPerk(PerkLib.Blademaster) && (player.weaponVerb == "slash" || player.weaponVerb == "cleave" || player.weaponVerb == "keen cut")) critChance += 5;
 	return rand(100) <= critChance;
 }
 
 public function combatBlock(doFatigue:Boolean = false):Boolean {
 	//Set chance
 	var blockChance:int = 20 + player.shieldBlock + Math.floor((player.str - monster.str) / 5);
-	if (player.findPerk(PerkLib.ShieldMastery) >= 0 && player.tou >= 50) {
+	if (player.hasPerk(PerkLib.ShieldMastery) && player.tou >= 50) {
 		if (player.tou < 100) blockChance += (player.tou - 50) / 5;
 		else blockChance += 10;
 	}
-	if (player.findPerk(PerkLib.ShieldGrandmastery) >= 0 && player.tou >= 100) {
+	if (player.hasPerk(PerkLib.ShieldGrandmastery) && player.tou >= 100) {
 		if (player.tou < 150) blockChance += (player.tou - 100) / 5;
 		else blockChance += 10;
 	}
@@ -3011,7 +2938,7 @@ public function combatBlock(doFatigue:Boolean = false):Boolean {
 	var fatigueLimit:int = player.maxFatigue() - physicalCost(10);
 	if (blockChance >= (rand(100) + 1) && player.fatigue <= fatigueLimit && player.shieldName != "nothing") {
 		if (doFatigue) {
-			if (player.findPerk(PerkLib.ShieldGrandmastery) >= 0 && player.tou >= 100) fatigue(5);
+			if (player.hasPerk(PerkLib.ShieldGrandmastery) && player.tou >= 100) fatigue(5);
 			else fatigue(10);
 		}
 		return true;
@@ -3019,16 +2946,16 @@ public function combatBlock(doFatigue:Boolean = false):Boolean {
 	else return false;
 }
 public function isWieldingRangedWeapon():Boolean {
-	return player.weaponName.indexOf("staff") != -1 && player.findPerk(PerkLib.StaffChanneling) >= 0;
+	return player.weaponName.indexOf("staff") != -1 && player.hasPerk(PerkLib.StaffChanneling);
 }
 
 //DEAL DAMAGE
 public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
-	if (player.findPerk(PerkLib.Sadist) >= 0) {
+	if (player.hasPerk(PerkLib.Sadist)) {
 		damage *= 1.2;
 		dynStats("lus", 3);
 	}
-	if (player.findPerk(PerkLib.Anger) >= 0 && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+	if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
 		var bonusDamageFromMissingHP:Number = 1;
 		if (PlayerHPRatio() < 1) bonusDamageFromMissingHP += 1 - PlayerHPRatio();
 		damage *= bonusDamageFromMissingHP;
@@ -3036,7 +2963,7 @@ public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = 
 	if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
 	if (monster.HP - damage <= 0) {
 		/* No monsters use this perk, so it's been removed for now
-		if(monster.findPerk(PerkLib.LastStrike) >= 0) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
+		if(monster.hasPerk(PerkLib.LastStrike)) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
 		else doNext(endHpVictory);
 		*/
 		doNext(endHpVictory);
@@ -3074,13 +3001,7 @@ public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = 
 	if (monster.HP < 0) monster.HP = 0;
 	return damage;
 }
-
-public function takePhysDamage(damage:Number, display:Boolean = false):Number {
-	return player.takePhysDamage(damage, display);
-}
-public function takeMagicDamage(damage:Number, display:Boolean = false):Number {
-	return player.takeMagicDamage(damage, display);
-}
+	
 	public static const USEMANA_NORMAL:int = 0;
 	public static const USEMANA_MAGIC:int = 1;
 	public static const USEMANA_PHYSICAL:int = 2;
@@ -3110,7 +3031,7 @@ public function takeMagicDamage(damage:Number, display:Boolean = false):Number {
 		//Blood mages use HP for spells
 		if (player.hasPerk(PerkLib.BloodMage)
 			&& (type == USEMANA_MAGIC || type == USEMANA_WHITE || type == USEMANA_BLACK)) {
-			combat.takePhysDamage(mod);
+			player.takePhysDamage(mod);
 			statScreenRefresh();
 			return;
 		}
@@ -3129,15 +3050,15 @@ public function takeMagicDamage(damage:Number, display:Boolean = false):Number {
 	}
 	public function manaRecoveryMultiplier():Number {
 		var multi:Number = 1;
-		if (player.findPerk(PerkLib.ControlledBreath) >= 0 && player.cor < (30 + player.corruptionTolerance())) multi += 0.3;
-		if (player.findPerk(PerkLib.GreyMage) >= 0) multi += 1;
-		if (player.findPerk(PerkLib.GreyArchmage) >= 0) multi += 3;
-		if (player.findPerk(PerkLib.ManaAffinityI) >= 0) multi += 0.2;
-		if (player.findPerk(PerkLib.ManaAffinityII) >= 0) multi += 0.2;
-		if (player.findPerk(PerkLib.ManaAffinityIII) >= 0) multi += 0.2;
-		if (player.findPerk(PerkLib.ManaAffinityIV) >= 0) multi += 0.2;
-		if (player.findPerk(PerkLib.ManaAffinityV) >= 0) multi += 0.2;
-		if (player.findPerk(PerkLib.ManaAffinityVI) >= 0) multi += 0.2;
+		if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance())) multi += 0.3;
+		if (player.hasPerk(PerkLib.GreyMage)) multi += 1;
+		if (player.hasPerk(PerkLib.GreyArchmage)) multi += 3;
+		if (player.hasPerk(PerkLib.ManaAffinityI)) multi += 0.2;
+		if (player.hasPerk(PerkLib.ManaAffinityII)) multi += 0.2;
+		if (player.hasPerk(PerkLib.ManaAffinityIII)) multi += 0.2;
+		if (player.hasPerk(PerkLib.ManaAffinityIV)) multi += 0.2;
+		if (player.hasPerk(PerkLib.ManaAffinityV)) multi += 0.2;
+		if (player.hasPerk(PerkLib.ManaAffinityVI)) multi += 0.2;
 		if (player.alicornScore() >= 6) multi += 0.1;
 		if (player.kitsuneScore() >= 5) {
 			if (player.kitsuneScore() >= 10) multi += 1;
@@ -3172,7 +3093,7 @@ public function fatigueImpl(mod:Number,type:Number  = USEFATG_NORMAL):void {
 	if (type === USEFATG_MAGIC || type === USEFATG_WHITE || type === USEFATG_BLACK) {
 		//Blood mages use HP for spells
 		if (player.hasPerk(PerkLib.BloodMage)) {
-			combat.takePhysDamage(mod);
+			player.takePhysDamage(mod);
 			statScreenRefresh();
 			return;
 		}
@@ -3197,17 +3118,17 @@ public function fatigueImpl(mod:Number,type:Number  = USEFATG_NORMAL):void {
 }
 	public function fatigueRecoveryMultiplier():Number {
 		var multi:Number = 1;
-		if (player.findPerk(PerkLib.HistorySlacker) >= 0 || player.findPerk(PerkLib.PastLifeSlacker) >= 0) multi += 0.2;
-		if (player.findPerk(PerkLib.ControlledBreath) >= 0 && player.cor < (30 + player.corruptionTolerance())) multi += 0.2;
-		if (player.findPerk(PerkLib.SpeedyRecovery) >= 0) multi += 1;
-		if (player.findPerk(PerkLib.SpeedyRecuperation) >= 0) multi += 2;
-		if (player.findPerk(PerkLib.SpeedyRejuvenation) >= 0) multi += 4;
-		if (player.findPerk(PerkLib.NaturesSpringI) >= 0) multi += 0.05;
-		if (player.findPerk(PerkLib.NaturesSpringII) >= 0) multi += 0.05;
-		if (player.findPerk(PerkLib.NaturesSpringIII) >= 0) multi += 0.05;
-		if (player.findPerk(PerkLib.NaturesSpringIV) >= 0) multi += 0.05;
-		if (player.findPerk(PerkLib.NaturesSpringV) >= 0) multi += 0.05;
-		if (player.findPerk(PerkLib.NaturesSpringVI) >= 0) multi += 0.05;
+		if (player.hasPerk(PerkLib.HistorySlacker) || player.hasPerk(PerkLib.PastLifeSlacker)) multi += 0.2;
+		if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance())) multi += 0.2;
+		if (player.hasPerk(PerkLib.SpeedyRecovery)) multi += 1;
+		if (player.hasPerk(PerkLib.SpeedyRecuperation)) multi += 2;
+		if (player.hasPerk(PerkLib.SpeedyRejuvenation)) multi += 4;
+		if (player.hasPerk(PerkLib.NaturesSpringI)) multi += 0.05;
+		if (player.hasPerk(PerkLib.NaturesSpringII)) multi += 0.05;
+		if (player.hasPerk(PerkLib.NaturesSpringIII)) multi += 0.05;
+		if (player.hasPerk(PerkLib.NaturesSpringIV)) multi += 0.05;
+		if (player.hasPerk(PerkLib.NaturesSpringV)) multi += 0.05;
+		if (player.hasPerk(PerkLib.NaturesSpringVI)) multi += 0.05;
 		return multi;
 	}
 //ENEMYAI!
@@ -3300,7 +3221,7 @@ public function dropItem(monster:Monster, nextFunc:Function = null):void {
 	}
 	if(monster is Harpy || monster is Sophie) {
 		if(rand(10) == 0) itype = armors.W_ROBES;
-		else if(rand(3) == 0 && player.findPerk(PerkLib.LuststickAdapted) >= 0) itype = consumables.LUSTSTK;
+		else if(rand(3) == 0 && player.hasPerk(PerkLib.LuststickAdapted)) itype = consumables.LUSTSTK;
 		else itype = consumables.GLDSEED;
 	}
 	//Chance of armor if at level 1 pierce fetish
@@ -3351,15 +3272,15 @@ public function awardPlayer(nextFunc:Function = null):void
 		monster.gems += bonusGems;
 		//trace( "to: " + monster.gems )
 	}
-	if (player.findPerk(PerkLib.HistoryFortune) >= 0 || player.findPerk(PerkLib.PastLifeFortune) >= 0) {
+	if (player.hasPerk(PerkLib.HistoryFortune) || player.hasPerk(PerkLib.PastLifeFortune)) {
 		var bonusGems2:int = monster.gems * 0.15;
 		monster.gems += bonusGems2;
 	}
-	if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) {
+	if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) {
 		var bonusGems3:int = (monster.gems * 0.04) * player.teaseLevel;
 		if (monster.lust >= monster.maxLust()) monster.gems += bonusGems3;
 	}
-	if (player.findPerk(PerkLib.AscensionFortune) >= 0) {
+	if (player.hasPerk(PerkLib.AscensionFortune)) {
 		monster.gems *= 1 + (player.perkv1(PerkLib.AscensionFortune) * 0.1);
 		monster.gems = Math.round(monster.gems);
 	}
@@ -3507,7 +3428,7 @@ private function combatStatusesUpdate():void {
 		{
 			outputText("The tentacles grab at you again!");
 			if (player.canFly()) outputText(" No matter how they strain, they can’t reach you.\n\n");
-			else if (combatMiss() || player.findPerk(PerkLib.Evade) >= 0 || player.findPerk(PerkLib.Flexibility) >= 0) outputText(" You twist out of their slick, bizarrely sensuous grasp for now.\n\n");
+			else if (combatMiss() || player.hasPerk(PerkLib.Evade) || player.hasPerk(PerkLib.Flexibility)) outputText(" You twist out of their slick, bizarrely sensuous grasp for now.\n\n");
 			else
 			{
 				outputText(" Damn, they got you! They yank your arms and [legs] taut, holding you helpless in the air for their brothers to further violate. You can already feel a few oily tendrils sneaking under your [armor].\n\n");
@@ -3632,7 +3553,7 @@ private function combatStatusesUpdate():void {
 		else {
 			var bleed:Number = (4 + rand(7))/100;
 			bleed *= player.HP;
-			bleed = takePhysDamage(bleed);
+			bleed = player.takePhysDamage(bleed);
 			outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds. (<font color=\"#800000\">" + bleed + "</font>)</b>\n\n");
 		}
 	}
@@ -3646,7 +3567,7 @@ private function combatStatusesUpdate():void {
 		else {
 			var hemorrhage:Number = 0;
 			hemorrhage += player.maxHP() * player.statusEffectv2(StatusEffects.Hemorrhage);
-			hemorrhage = takePhysDamage(hemorrhage);
+			hemorrhage = player.takePhysDamage(hemorrhage);
 			outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds. (<font color=\"#800000\">" + hemorrhage + "</font>)</b>\n\n");
 		}
 	}
@@ -3666,7 +3587,7 @@ private function combatStatusesUpdate():void {
 	if(player.hasStatusEffect(StatusEffects.UnderwaterOutOfAir)) {
 		var deoxigen:Number = 0;
 		deoxigen += (player.maxHP() * 0.05);
-		deoxigen = takePhysDamage(deoxigen);
+		deoxigen = player.takePhysDamage(deoxigen);
 		outputText("<b>You are running out of oxygen you need to finish this fight and fast before you lose consciousness. <b>(<font color=\"#800000\">" + deoxigen + "</font>)</b></b>\n\n");
 	}
 	if(player.hasStatusEffect(StatusEffects.HeroBane)) {
@@ -3680,7 +3601,7 @@ private function combatStatusesUpdate():void {
 		var slap:Number = 3 + (player.maxHP() * 0.02);
 		outputText("<b>Your muscles twitch in agony as the acid keeps burning you. <b>(<font color=\"#800000\">" + slap + "</font>)</b></b>\n\n");
 	}
-	if(player.findPerk(PerkLib.ArousingAura) >= 0 && monster.lustVuln > 0 && player.cor >= 70) {
+	if(player.hasPerk(PerkLib.ArousingAura) && monster.lustVuln > 0 && player.cor >= 70) {
 		if(monster.lust < (monster.maxLust() * 0.5)) outputText("Your aura seeps into [monster a] [monster name] but does not have any visible effects just yet.\n\n");
 		else if(monster.lust < (monster.maxLust() * 0.6)) {
 			if(!monster.plural) outputText(monster.capitalA + monster.short + " starts to squirm a little from your unholy presence.\n\n");
@@ -3695,7 +3616,7 @@ private function combatStatusesUpdate():void {
 			if(!monster.plural) outputText("The effects of your aura are quite pronounced on [monster a] [monster name] as [monster he] begins to shake and steal glances at your body.\n\n");
 			else outputText("The effects of your aura are quite pronounced on [monster a] [monster name] as [monster he] begin to shake and steal glances at your body.\n\n");
 		}
-		if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && player.findPerk(PerkLib.EnemyGroupType) >= 0) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
+		if (player.hasPerk(PerkLib.ArouseTheAudience) && player.hasPerk(PerkLib.EnemyGroupType)) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
 		else monster.lust += monster.lustVuln * (2 + rand(4));
 	}
 	if(player.hasStatusEffect(StatusEffects.AlraunePollen) && monster.lustVuln > 0) {
@@ -3713,7 +3634,7 @@ private function combatStatusesUpdate():void {
 			if(!monster.plural) outputText("The effects of your pollen are quite pronounced on [monster a] [monster name] as [monster he] begins to shake and steal glances at your body.\n\n");
 			else outputText("The effects of your pollen are quite pronounced on [monster a] [monster name] as [monster he] begin to shake and steal glances at your body.\n\n");
 		}
-		if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && player.findPerk(PerkLib.EnemyGroupType) >= 0) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
+		if (player.hasPerk(PerkLib.ArouseTheAudience) && player.hasPerk(PerkLib.EnemyGroupType)) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
 		else monster.lust += monster.lustVuln * (2 + rand(4));
 	}
 	if(player.hasStatusEffect(StatusEffects.Bound) && flags[kFLAGS.PC_FETISH] >= 2) {
@@ -3768,7 +3689,7 @@ private function combatStatusesUpdate():void {
 	//Harpy lip gloss
 	if(player.hasCock() && player.hasStatusEffect(StatusEffects.Luststick) && (monster.short == "harpy" || monster.short == "Sophie")) {
 		//Chance to cleanse!
-		if(player.findPerk(PerkLib.Medicine) >= 0 && rand(100) <= 14) {
+		if(player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) {
 			outputText("You manage to cleanse the harpy lip-gloss from your system with your knowledge of medicine!\n\n");
 			player.removeStatusEffect(StatusEffects.Luststick);
 		}		
@@ -3798,7 +3719,7 @@ private function combatStatusesUpdate():void {
 		//Effect 
 		outputText("Your lips burn with an unexpected flash of heat.  They sting and burn with unholy energies as a puff of ectoplasmic gas escapes your lips.  That puff must be a part of your soul!  It darts through the air to the succubus, who slurps it down like a delicious snack.  You feel feverishly hot and exhausted...\n\n");
 		dynStats("lus", 5);
-		takePhysDamage(15);		
+		player.takePhysDamage(15);
 	}
 	if(player.hasStatusEffect(StatusEffects.DemonSeed)) {
 		outputText("You feel something shift inside you, making you feel warm.  Finding the desire to fight this... hunk gets harder and harder.\n\n");
@@ -3818,7 +3739,7 @@ private function combatStatusesUpdate():void {
 	}
 	if(player.hasStatusEffect(StatusEffects.NagaVenom)) {
 		//Chance to cleanse!
-		if(player.findPerk(PerkLib.Medicine) >= 0 && rand(100) <= 14) {
+		if(player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) {
 			outputText("You manage to cleanse [monster a] [monster name] venom from your system with your knowledge of medicine!\n\n");
 			player.spe += player.statusEffectv1(StatusEffects.NagaVenom);
 			mainView.statsView.showStatUp( 'spe' );
@@ -3830,13 +3751,13 @@ private function combatStatusesUpdate():void {
 			player.addStatusValue(StatusEffects.NagaVenom,1,2);
 			player.spe -= 2;
 		}
-		else takePhysDamage(5);
+		else player.takePhysDamage(5);
 		outputText("You wince in pain and try to collect yourself, [monster a] [monster name]'s venom still plaguing you.\n\n");
-		takePhysDamage(2);
+		player.takePhysDamage(2);
 	}
 	if(player.hasStatusEffect(StatusEffects.MedusaVenom)) {
 		//Chance to cleanse!
-		if(player.findPerk(PerkLib.Medicine) >= 0 && rand(100) <= 14) {
+		if(player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) {
 			outputText("You manage to cleanse [monster a] [monster name] venom from your system with your knowledge of medicine!\n\n");
 			player.str += player.statusEffectv1(StatusEffects.MedusaVenom);
 			player.tou += player.statusEffectv2(StatusEffects.MedusaVenom);
@@ -3848,7 +3769,7 @@ private function combatStatusesUpdate():void {
 			mainView.statsView.showStatUp( 'inte' );
 			player.removeStatusEffect(StatusEffects.MedusaVenom);
 		}
-		else if (player.str <= 5 && player.tou <= 5 && player.spe <= 5 && player.inte <= 5) takePhysDamage(5);
+		else if (player.str <= 5 && player.tou <= 5 && player.spe <= 5 && player.inte <= 5) player.takePhysDamage(5);
 		else {
 			if(player.str > 5) {
 			player.addStatusValue(StatusEffects.MedusaVenom,1,1);
@@ -3868,11 +3789,11 @@ private function combatStatusesUpdate():void {
 			}
 		}
 		outputText("You wince in pain and try to collect yourself, [monster a] [monster name]'s venom still plaguing you.\n\n");
-		takePhysDamage(2);
+		player.takePhysDamage(2);
 	}
 	else if(player.hasStatusEffect(StatusEffects.TemporaryHeat)) {
 		//Chance to cleanse!
-		if(player.findPerk(PerkLib.Medicine) >= 0 && rand(100) <= 14) {
+		if(player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) {
 			outputText("You manage to cleanse the heat and rut drug from your system with your knowledge of medicine!\n\n");
 			player.removeStatusEffect(StatusEffects.TemporaryHeat);
 		}
@@ -3893,13 +3814,13 @@ private function combatStatusesUpdate():void {
 	//Poison
 	if(player.hasStatusEffect(StatusEffects.Poison)) {
 		//Chance to cleanse!
-		if(player.findPerk(PerkLib.Medicine) >= 0 && rand(100) <= 14) {
+		if(player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) {
 			outputText("You manage to cleanse the poison from your system with your knowledge of medicine!\n\n");
 			player.removeStatusEffect(StatusEffects.Poison);
 		}
 		else {
 			outputText("The poison continues to work on your body, wracking you with pain!\n\n");
-			takePhysDamage(8+rand(player.maxHP()/20) * player.statusEffectv2(StatusEffects.Poison));
+			player.takePhysDamage(8+rand(player.maxHP()/20) * player.statusEffectv2(StatusEffects.Poison));
 		}
 	}
 	//Bondage straps + bondage fetish
@@ -3910,7 +3831,7 @@ private function combatStatusesUpdate():void {
 	// Drider incubus venom
 	if (player.hasStatusEffect(StatusEffects.DriderIncubusVenom))
 	{
-		if (player.findPerk(PerkLib.Medicine) >= 0 && rand(100) <= 41) {
+		if (player.hasPerk(PerkLib.Medicine) && rand(100) <= 41) {
 			outputText("You negate the effects of the drider incubus’ venom with your knowledge of medicine!\n\n");
 			
 			player.str += player.statusEffectv2(StatusEffects.DriderIncubusVenom);
@@ -4081,14 +4002,14 @@ private function combatStatusesUpdate():void {
 	}
 	//Ezekiel Curse
 	if (player.hasStatusEffect(StatusEffects.EzekielCurse)) {
-		if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 2 && player.findPerk(PerkLib.EzekielBlessing) >= 0) {
+		if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 2 && player.hasPerk(PerkLib.EzekielBlessing)) {
 			outputText("<b>You feel familiar feeling of your own lifeforce been slowly extinquished.  Maybe you should finish this fight as soon as possible to start healing this aligment?</b>\n\n");
-			takePhysDamage(500);
+			player.takePhysDamage(500);
 		}
 		else if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 2) {
 			outputText("<b>You suddenly feel like you very own lifeforce are been at steady pace extinquished the longer you keep fighting.  You better finsh this fight fast or find way to cure your current situation as otherwise...</b>\n\n");
-			if (player.maxHP() < 1000) takePhysDamage(player.maxHP() * 0.1);
-			else takePhysDamage(100);
+			if (player.maxHP() < 1000) player.takePhysDamage(player.maxHP() * 0.1);
+			else player.takePhysDamage(100);
 		}
 	}
 	//Flying
@@ -4363,24 +4284,24 @@ public function regeneration(combat:Boolean = true):void {
 		healingPercent = 0;
 		if (player.hunger >= 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)
 		{
-			if (player.findPerk(PerkLib.Regeneration) >= 0) healingPercent += 0.5;
-			if (player.findPerk(PerkLib.Regeneration2) >= 0) healingPercent += 0.5;
-			if (player.findPerk(PerkLib.Regeneration3) >= 0) healingPercent += 0.5;
-			if (player.findPerk(PerkLib.Regeneration4) >= 0) healingPercent += 0.5;
-			if (player.findPerk(PerkLib.Regeneration5) >= 0) healingPercent += 0.5;
-			if (player.findPerk(PerkLib.Regeneration6) >= 0) healingPercent += 0.5;
+			if (player.hasPerk(PerkLib.Regeneration)) healingPercent += 0.5;
+			if (player.hasPerk(PerkLib.Regeneration2)) healingPercent += 0.5;
+			if (player.hasPerk(PerkLib.Regeneration3)) healingPercent += 0.5;
+			if (player.hasPerk(PerkLib.Regeneration4)) healingPercent += 0.5;
+			if (player.hasPerk(PerkLib.Regeneration5)) healingPercent += 0.5;
+			if (player.hasPerk(PerkLib.Regeneration6)) healingPercent += 0.5;
 		}
 		if (player.armor == armors.NURSECL) healingPercent += 0.5;
 		if (player.armor == armors.GOOARMR) healingPercent += (SceneLib.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 25 : 2) : 2);
 		if (player.weapon == weapons.SESPEAR) healingPercent += 2;
-		if (player.findPerk(PerkLib.LustyRegeneration) >= 0) healingPercent += 0.5;
-		if (player.findPerk(PerkLib.LizanRegeneration) >= 0) healingPercent += 1.5;
-		if (player.findPerk(PerkLib.LizanMarrow) >= 0) healingPercent += 0.5;
-		if (player.findPerk(PerkLib.LizanMarrowEvolved) >= 0) healingPercent += 0.5;
-		if (player.findPerk(PerkLib.BodyCultivator) >= 0) healingPercent += 0.5;
-		if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;
-		if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;
-		if (player.hasStatusEffect(StatusEffects.CrinosShape) && player.findPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator) >= 0) healingPercent += 2;
+		if (player.hasPerk(PerkLib.LustyRegeneration)) healingPercent += 0.5;
+		if (player.hasPerk(PerkLib.LizanRegeneration)) healingPercent += 1.5;
+		if (player.hasPerk(PerkLib.LizanMarrow)) healingPercent += 0.5;
+		if (player.hasPerk(PerkLib.LizanMarrowEvolved)) healingPercent += 0.5;
+		if (player.hasPerk(PerkLib.BodyCultivator)) healingPercent += 0.5;
+		if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) healingPercent += 0.5;
+		if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) healingPercent += 0.5;
+		if (player.hasStatusEffect(StatusEffects.CrinosShape) && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator)) healingPercent += 2;
 		if (player.perkv1(PerkLib.Sanctuary) == 1) healingPercent += ((player.corruptionTolerance() - player.cor) / (100 + player.corruptionTolerance()));
 		if (player.perkv1(PerkLib.Sanctuary) == 2) healingPercent += player.cor / (100 + player.corruptionTolerance());
 		if ((player.internalChimeraRating() >= 1 && player.hunger < 1 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.internalChimeraRating() >= 1 && flags[kFLAGS.HUNGER_ENABLED] <= 0)) healingPercent -= (0.5 * player.internalChimeraRating());
@@ -4394,24 +4315,24 @@ public function regeneration(combat:Boolean = true):void {
 		healingPercent = 0;
 		if (player.hunger >= 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)
 		{
-			if (player.findPerk(PerkLib.Regeneration) >= 0) healingPercent += 1;
-			if (player.findPerk(PerkLib.Regeneration2) >= 0) healingPercent += 1;
-			if (player.findPerk(PerkLib.Regeneration3) >= 0) healingPercent += 1;
-			if (player.findPerk(PerkLib.Regeneration4) >= 0) healingPercent += 1;
-			if (player.findPerk(PerkLib.Regeneration5) >= 0) healingPercent += 1;
-			if (player.findPerk(PerkLib.Regeneration6) >= 0) healingPercent += 1;
+			if (player.hasPerk(PerkLib.Regeneration)) healingPercent += 1;
+			if (player.hasPerk(PerkLib.Regeneration2)) healingPercent += 1;
+			if (player.hasPerk(PerkLib.Regeneration3)) healingPercent += 1;
+			if (player.hasPerk(PerkLib.Regeneration4)) healingPercent += 1;
+			if (player.hasPerk(PerkLib.Regeneration5)) healingPercent += 1;
+			if (player.hasPerk(PerkLib.Regeneration6)) healingPercent += 1;
 		}
 		if (player.armorName == "skimpy nurse's outfit") healingPercent += 1;
 		if (player.armor == armors.NURSECL) healingPercent += 1;
 		if (player.armor == armors.GOOARMR) healingPercent += (SceneLib.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 16 : 3) : 3);
 		if (player.weapon == weapons.SESPEAR) healingPercent += 4;
-		if (player.findPerk(PerkLib.LustyRegeneration) >= 0) healingPercent += 1;
-		if (player.findPerk(PerkLib.LizanRegeneration) >= 0) healingPercent += 3;
-		if (player.findPerk(PerkLib.LizanMarrow) >= 0) healingPercent += 1;
-		if (player.findPerk(PerkLib.LizanMarrowEvolved) >= 0) healingPercent += 1;
-		if (player.findPerk(PerkLib.BodyCultivator) >= 0) healingPercent += 1;
-		if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) healingPercent += 1;
-		if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) healingPercent += 1;
+		if (player.hasPerk(PerkLib.LustyRegeneration)) healingPercent += 1;
+		if (player.hasPerk(PerkLib.LizanRegeneration)) healingPercent += 3;
+		if (player.hasPerk(PerkLib.LizanMarrow)) healingPercent += 1;
+		if (player.hasPerk(PerkLib.LizanMarrowEvolved)) healingPercent += 1;
+		if (player.hasPerk(PerkLib.BodyCultivator)) healingPercent += 1;
+		if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) healingPercent += 1;
+		if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) healingPercent += 1;
 		if ((player.internalChimeraRating() >= 1 && player.hunger < 1 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.internalChimeraRating() >= 1 && flags[kFLAGS.HUNGER_ENABLED] <= 0)) healingPercent -= player.internalChimeraRating();
 		if (healingPercent > (maximumRegeneration() * 2)) healingPercent = (maximumRegeneration() * 2);
 		HPChange(Math.round((player.maxHP() * healingPercent / 100) + (nonPercentBasedRegeneration() * 2)), false);
@@ -4421,40 +4342,40 @@ public function regeneration(combat:Boolean = true):void {
 public function soulforceregeneration(combat:Boolean = true):void {
 	var gainedsoulforce:Number = 0;
 	if (combat) {
-		if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) gainedsoulforce += 4;
-		if (player.findPerk(PerkLib.DaoistCultivator) >= 0) gainedsoulforce += 4;
-		if (player.findPerk(PerkLib.SoulApprentice) >= 0) gainedsoulforce += 2;
-		if (player.findPerk(PerkLib.SoulPersonage) >= 0) gainedsoulforce += 2;
-		if (player.findPerk(PerkLib.SoulWarrior) >= 0) gainedsoulforce += 2;
-		if (player.findPerk(PerkLib.SoulSprite) >= 0) gainedsoulforce += 2;
-		if (player.findPerk(PerkLib.SoulScholar) >= 0) gainedsoulforce += 2;
-		if (player.findPerk(PerkLib.SoulElder) >= 0) gainedsoulforce += 2;
-		if (player.findPerk(PerkLib.SoulExalt) >= 0) gainedsoulforce += 2;
-		if (player.findPerk(PerkLib.SoulOverlord) >= 0) gainedsoulforce += 2;
-		if (player.findPerk(PerkLib.SoulTyrant) >= 0) gainedsoulforce += 2;
-		if (player.findPerk(PerkLib.SoulKing) >= 0) gainedsoulforce += 2;
-		if (player.findPerk(PerkLib.SoulEmperor) >= 0) gainedsoulforce += 2;
-		if (player.findPerk(PerkLib.SoulAncestor) >= 0) gainedsoulforce += 2;
-		if (player.hasStatusEffect(StatusEffects.Defend) && player.findPerk(PerkLib.MasteredDefenceStance) >= 0) gainedsoulforce += 2;
-		if (player.hasStatusEffect(StatusEffects.Defend) && player.findPerk(PerkLib.PerfectDefenceStance) >= 0) gainedsoulforce += 2;
+		if (player.hasPerk(PerkLib.JobSoulCultivator)) gainedsoulforce += 4;
+		if (player.hasPerk(PerkLib.DaoistCultivator)) gainedsoulforce += 4;
+		if (player.hasPerk(PerkLib.SoulApprentice)) gainedsoulforce += 2;
+		if (player.hasPerk(PerkLib.SoulPersonage)) gainedsoulforce += 2;
+		if (player.hasPerk(PerkLib.SoulWarrior)) gainedsoulforce += 2;
+		if (player.hasPerk(PerkLib.SoulSprite)) gainedsoulforce += 2;
+		if (player.hasPerk(PerkLib.SoulScholar)) gainedsoulforce += 2;
+		if (player.hasPerk(PerkLib.SoulElder)) gainedsoulforce += 2;
+		if (player.hasPerk(PerkLib.SoulExalt)) gainedsoulforce += 2;
+		if (player.hasPerk(PerkLib.SoulOverlord)) gainedsoulforce += 2;
+		if (player.hasPerk(PerkLib.SoulTyrant)) gainedsoulforce += 2;
+		if (player.hasPerk(PerkLib.SoulKing)) gainedsoulforce += 2;
+		if (player.hasPerk(PerkLib.SoulEmperor)) gainedsoulforce += 2;
+		if (player.hasPerk(PerkLib.SoulAncestor)) gainedsoulforce += 2;
+		if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.MasteredDefenceStance)) gainedsoulforce += 2;
+		if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.PerfectDefenceStance)) gainedsoulforce += 2;
 		if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) gainedsoulforce *= 2;
 		EngineCore.SoulforceChange(gainedsoulforce, false);
 	}
 	else {
-		if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) gainedsoulforce += 8;
-		if (player.findPerk(PerkLib.DaoistCultivator) >= 0) gainedsoulforce += 8;
-		if (player.findPerk(PerkLib.SoulApprentice) >= 0) gainedsoulforce += 4;
-		if (player.findPerk(PerkLib.SoulPersonage) >= 0) gainedsoulforce += 4;
-		if (player.findPerk(PerkLib.SoulWarrior) >= 0) gainedsoulforce += 4;
-		if (player.findPerk(PerkLib.SoulSprite) >= 0) gainedsoulforce += 4;
-		if (player.findPerk(PerkLib.SoulScholar) >= 0) gainedsoulforce += 4;
-		if (player.findPerk(PerkLib.SoulElder) >= 0) gainedsoulforce += 4;
-		if (player.findPerk(PerkLib.SoulExalt) >= 0) gainedsoulforce += 4;
-		if (player.findPerk(PerkLib.SoulOverlord) >= 0) gainedsoulforce += 4;
-		if (player.findPerk(PerkLib.SoulTyrant) >= 0) gainedsoulforce += 4;
-		if (player.findPerk(PerkLib.SoulKing) >= 0) gainedsoulforce += 4;
-		if (player.findPerk(PerkLib.SoulEmperor) >= 0) gainedsoulforce += 4;
-		if (player.findPerk(PerkLib.SoulAncestor) >= 0) gainedsoulforce += 4;
+		if (player.hasPerk(PerkLib.JobSoulCultivator)) gainedsoulforce += 8;
+		if (player.hasPerk(PerkLib.DaoistCultivator)) gainedsoulforce += 8;
+		if (player.hasPerk(PerkLib.SoulApprentice)) gainedsoulforce += 4;
+		if (player.hasPerk(PerkLib.SoulPersonage)) gainedsoulforce += 4;
+		if (player.hasPerk(PerkLib.SoulWarrior)) gainedsoulforce += 4;
+		if (player.hasPerk(PerkLib.SoulSprite)) gainedsoulforce += 4;
+		if (player.hasPerk(PerkLib.SoulScholar)) gainedsoulforce += 4;
+		if (player.hasPerk(PerkLib.SoulElder)) gainedsoulforce += 4;
+		if (player.hasPerk(PerkLib.SoulExalt)) gainedsoulforce += 4;
+		if (player.hasPerk(PerkLib.SoulOverlord)) gainedsoulforce += 4;
+		if (player.hasPerk(PerkLib.SoulTyrant)) gainedsoulforce += 4;
+		if (player.hasPerk(PerkLib.SoulKing)) gainedsoulforce += 4;
+		if (player.hasPerk(PerkLib.SoulEmperor)) gainedsoulforce += 4;
+		if (player.hasPerk(PerkLib.SoulAncestor)) gainedsoulforce += 4;
 		EngineCore.SoulforceChange(gainedsoulforce, false);
 	}
 }
@@ -4462,23 +4383,23 @@ public function soulforceregeneration(combat:Boolean = true):void {
 public function manaregeneration(combat:Boolean = true):void {
 	var gainedmana:Number = 0;
 	if (combat) {
-		if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedmana += 10;
-		if (player.findPerk(PerkLib.ArcaneRegenerationMinor) >= 0) gainedmana += 5;
-		if (player.findPerk(PerkLib.ArcaneRegenerationMajor) >= 0) gainedmana += 10;
-		if (player.findPerk(PerkLib.ArcaneRegenerationEpic) >= 0) gainedmana += 15;
-		if (player.findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0) gainedmana += 20;
-		if (player.hasStatusEffect(StatusEffects.Defend) && player.findPerk(PerkLib.MasteredDefenceStance) >= 0) gainedmana += 10;
-		if (player.hasStatusEffect(StatusEffects.Defend) && player.findPerk(PerkLib.PerfectDefenceStance) >= 0) gainedmana += 10;
+		if (player.hasPerk(PerkLib.JobSorcerer)) gainedmana += 10;
+		if (player.hasPerk(PerkLib.ArcaneRegenerationMinor)) gainedmana += 5;
+		if (player.hasPerk(PerkLib.ArcaneRegenerationMajor)) gainedmana += 10;
+		if (player.hasPerk(PerkLib.ArcaneRegenerationEpic)) gainedmana += 15;
+		if (player.hasPerk(PerkLib.ArcaneRegenerationLegendary)) gainedmana += 20;
+		if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.MasteredDefenceStance)) gainedmana += 10;
+		if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.PerfectDefenceStance)) gainedmana += 10;
 		gainedmana *= manaRecoveryMultiplier();
 		if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) gainedmana *= 2;
 		EngineCore.ManaChange(gainedmana, false);
 	}
 	else {
-		if (player.findPerk(PerkLib.JobSorcerer) >= 0) gainedmana += 20;
-		if (player.findPerk(PerkLib.ArcaneRegenerationMinor) >= 0) gainedmana += 10;
-		if (player.findPerk(PerkLib.ArcaneRegenerationMajor) >= 0) gainedmana += 20;
-		if (player.findPerk(PerkLib.ArcaneRegenerationEpic) >= 0) gainedmana += 30;
-		if (player.findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0) gainedmana += 40;
+		if (player.hasPerk(PerkLib.JobSorcerer)) gainedmana += 20;
+		if (player.hasPerk(PerkLib.ArcaneRegenerationMinor)) gainedmana += 10;
+		if (player.hasPerk(PerkLib.ArcaneRegenerationMajor)) gainedmana += 20;
+		if (player.hasPerk(PerkLib.ArcaneRegenerationEpic)) gainedmana += 30;
+		if (player.hasPerk(PerkLib.ArcaneRegenerationLegendary)) gainedmana += 40;
 		gainedmana *= manaRecoveryMultiplier();
 		EngineCore.ManaChange(gainedmana, false);
 	}
@@ -4487,41 +4408,41 @@ public function manaregeneration(combat:Boolean = true):void {
 public function wrathregeneration(combat:Boolean = true):void {
 	var gainedwrath:Number = 0;
 	if (combat) {
-		if (player.findPerk(PerkLib.JobBeastWarrior) >= 0) gainedwrath += 2;
-		if (player.findPerk(PerkLib.PrimalFuryI) >= 0) gainedwrath += 2;
-		if (player.findPerk(PerkLib.PrimalFuryII) >= 0) gainedwrath += 2;
-		if (player.findPerk(PerkLib.PrimalFuryIII) >= 0) gainedwrath += 2;
-		if (player.findPerk(PerkLib.PrimalFuryIV) >= 0) gainedwrath += 2;
-		if (player.findPerk(PerkLib.PrimalFuryV) >= 0) gainedwrath += 2;
-		if (player.findPerk(PerkLib.PrimalFuryVI) >= 0) gainedwrath += 2;
-		if (player.findPerk(PerkLib.Berzerker) >= 0) gainedwrath += 2;
-		if (player.findPerk(PerkLib.Lustzerker) >= 0) gainedwrath += 2;
-		if (player.findPerk(PerkLib.Rage) >= 0) gainedwrath += 2;
-		if (player.findPerk(PerkLib.Anger) >= 0) gainedwrath += 2;
+		if (player.hasPerk(PerkLib.JobBeastWarrior)) gainedwrath += 2;
+		if (player.hasPerk(PerkLib.PrimalFuryI)) gainedwrath += 2;
+		if (player.hasPerk(PerkLib.PrimalFuryII)) gainedwrath += 2;
+		if (player.hasPerk(PerkLib.PrimalFuryIII)) gainedwrath += 2;
+		if (player.hasPerk(PerkLib.PrimalFuryIV)) gainedwrath += 2;
+		if (player.hasPerk(PerkLib.PrimalFuryV)) gainedwrath += 2;
+		if (player.hasPerk(PerkLib.PrimalFuryVI)) gainedwrath += 2;
+		if (player.hasPerk(PerkLib.Berzerker)) gainedwrath += 2;
+		if (player.hasPerk(PerkLib.Lustzerker)) gainedwrath += 2;
+		if (player.hasPerk(PerkLib.Rage)) gainedwrath += 2;
+		if (player.hasPerk(PerkLib.Anger)) gainedwrath += 2;
 		if (player.hasStatusEffect(StatusEffects.Berzerking)) gainedwrath += 3;
 		if (player.hasStatusEffect(StatusEffects.Lustzerking)) gainedwrath += 3;
 		if (player.hasStatusEffect(StatusEffects.Rage)) gainedwrath += 3;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) gainedwrath += 6;
 		if (player.hasStatusEffect(StatusEffects.CrinosShape)) {
 			gainedwrath += 1;
-			if (player.findPerk(PerkLib.ImprovedCrinosShape) >= 0) gainedwrath += 2;
-			if (player.findPerk(PerkLib.GreaterCrinosShape) >= 0) gainedwrath += 3;
-			if (player.findPerk(PerkLib.MasterCrinosShape) >= 0) gainedwrath += 4;
+			if (player.hasPerk(PerkLib.ImprovedCrinosShape)) gainedwrath += 2;
+			if (player.hasPerk(PerkLib.GreaterCrinosShape)) gainedwrath += 3;
+			if (player.hasPerk(PerkLib.MasterCrinosShape)) gainedwrath += 4;
 		}
 		EngineCore.WrathChange(gainedwrath, false);
 	}
 	else {
-		if (player.findPerk(PerkLib.JobBeastWarrior) >= 0) gainedwrath += 1;
-		if (player.findPerk(PerkLib.PrimalFuryI) >= 0) gainedwrath += 1;
-		if (player.findPerk(PerkLib.PrimalFuryII) >= 0) gainedwrath += 1;
-		if (player.findPerk(PerkLib.PrimalFuryIII) >= 0) gainedwrath += 1;
-		if (player.findPerk(PerkLib.PrimalFuryIV) >= 0) gainedwrath += 1;
-		if (player.findPerk(PerkLib.PrimalFuryV) >= 0) gainedwrath += 1;
-		if (player.findPerk(PerkLib.PrimalFuryVI) >= 0) gainedwrath += 1;
-		if (player.findPerk(PerkLib.Berzerker) >= 0) gainedwrath += 1;
-		if (player.findPerk(PerkLib.Lustzerker) >= 0) gainedwrath += 1;
-		if (player.findPerk(PerkLib.Rage) >= 0) gainedwrath += 1;
-		if (player.findPerk(PerkLib.Anger) >= 0) gainedwrath += 1;
+		if (player.hasPerk(PerkLib.JobBeastWarrior)) gainedwrath += 1;
+		if (player.hasPerk(PerkLib.PrimalFuryI)) gainedwrath += 1;
+		if (player.hasPerk(PerkLib.PrimalFuryII)) gainedwrath += 1;
+		if (player.hasPerk(PerkLib.PrimalFuryIII)) gainedwrath += 1;
+		if (player.hasPerk(PerkLib.PrimalFuryIV)) gainedwrath += 1;
+		if (player.hasPerk(PerkLib.PrimalFuryV)) gainedwrath += 1;
+		if (player.hasPerk(PerkLib.PrimalFuryVI)) gainedwrath += 1;
+		if (player.hasPerk(PerkLib.Berzerker)) gainedwrath += 1;
+		if (player.hasPerk(PerkLib.Lustzerker)) gainedwrath += 1;
+		if (player.hasPerk(PerkLib.Rage)) gainedwrath += 1;
+		if (player.hasPerk(PerkLib.Anger)) gainedwrath += 1;
 		EngineCore.WrathChange(gainedwrath, false);
 	}
 }
@@ -4533,19 +4454,19 @@ public function maximumRegeneration():Number {
 	if (player.newGamePlusMod() >= 3) maxRegen += 1;
 	if (player.newGamePlusMod() >= 4) maxRegen += 1;
 	if (player.newGamePlusMod() >= 5) maxRegen += 1;
-	if (player.findPerk(PerkLib.LizanRegeneration) >= 0) maxRegen += 1.5;
-	if (player.findPerk(PerkLib.LizanMarrow) >= 0) maxRegen += 0.5;
-	if (player.findPerk(PerkLib.LizanMarrowEvolved) >= 0) maxRegen += 0.5;
-	if (player.hasStatusEffect(StatusEffects.CrinosShape) && player.findPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator) >= 0) maxRegen += 2;
-	if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) maxRegen += 0.5;
-	if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) maxRegen += 0.5;
+	if (player.hasPerk(PerkLib.LizanRegeneration)) maxRegen += 1.5;
+	if (player.hasPerk(PerkLib.LizanMarrow)) maxRegen += 0.5;
+	if (player.hasPerk(PerkLib.LizanMarrowEvolved)) maxRegen += 0.5;
+	if (player.hasStatusEffect(StatusEffects.CrinosShape) && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator)) maxRegen += 2;
+	if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) maxRegen += 0.5;
+	if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) maxRegen += 0.5;
 	return maxRegen;
 }
 
 public function nonPercentBasedRegeneration():Number {
 	var maxNonPercentRegen:Number = 0;
-	if (player.findPerk(PerkLib.Lifeline) >= 0) maxNonPercentRegen += 50 * (1 + player.newGamePlusMod());
-	if (player.findPerk(PerkLib.Lifeline) >= 0 && flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) maxNonPercentRegen += 50 * (1 + player.newGamePlusMod());
+	if (player.hasPerk(PerkLib.Lifeline)) maxNonPercentRegen += 50 * (1 + player.newGamePlusMod());
+	if (player.hasPerk(PerkLib.Lifeline) && flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) maxNonPercentRegen += 50 * (1 + player.newGamePlusMod());
 	return maxNonPercentRegen;
 }
 
@@ -4569,12 +4490,12 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 		monster.pronoun3 = SceneLib.emberScene.emberMF("his","her");
 	}
 	//Reduce enemy def if player has precision!
-	if(player.findPerk(PerkLib.Precision) >= 0 && player.inte >= 25) {
+	if(player.hasPerk(PerkLib.Precision) && player.inte >= 25) {
 		if(monster.armorDef <= 10) monster.armorDef = 0;
 		else monster.armorDef -= 10;
 	}
-	if (player.findPerk(PerkLib.WellspringOfLust) >= 0) {
-		if (player.findPerk(PerkLib.GreyMage) >= 0 && player.lust < 30) player.lust = 30;
+	if (player.hasPerk(PerkLib.WellspringOfLust)) {
+		if (player.hasPerk(PerkLib.GreyMage) && player.lust < 30) player.lust = 30;
 		if (player.findPerk(PerkLib.GreyMage) < 0 && player.lust < 50) player.lust = 50;
 	}
 	magic.applyAutocast();
@@ -4617,7 +4538,7 @@ public function startCombatImmediateImpl(monster_:Monster, _plotFight:Boolean):v
 		monster.pronoun3 = SceneLib.emberScene.emberMF("his","her");
 	}
 	//Reduce enemy def if player has precision!
-	if(player.findPerk(PerkLib.Precision) >= 0 && player.inte >= 25) {
+	if(player.hasPerk(PerkLib.Precision) && player.inte >= 25) {
 		if(monster.armorDef <= 10) monster.armorDef = 0;
 		else monster.armorDef -= 10;
 	}
@@ -4748,30 +4669,30 @@ public function display():void {
 		}
 		var generalTypes:/*String*/Array = [];
 		var elementalTypes:/*String*/Array = [];
-		if (player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && player.sens >= 25) {
+		if (player.hasPerk(PerkLib.EyesOfTheHunterNovice) && player.sens >= 25) {
 			if (monster.hasPerk(PerkLib.EnemyBeastOrAnimalMorphType)) generalTypes.push("Beast or Animal-morph");
 			if (monster.hasPerk(PerkLib.EnemyConstructType)) generalTypes.push("Construct");
 			if (monster.hasPerk(PerkLib.EnemyGigantType)) generalTypes.push("Gigant");
 			if (monster.hasPerk(PerkLib.EnemyGroupType)) generalTypes.push("Group");
 			if (monster.hasPerk(PerkLib.EnemyPlantType)) generalTypes.push("Plant");
 		}
-		if (player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && player.sens >= 50) {
+		if (player.hasPerk(PerkLib.EyesOfTheHunterAdept) && player.sens >= 50) {
 			if (monster.hasPerk(PerkLib.EnemyBossType)) generalTypes.push("Boss");
 			if (monster.hasPerk(PerkLib.EnemyGodType)) generalTypes.push("God");
 		}
-		if (player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && player.sens >= 50) {
+		if (player.hasPerk(PerkLib.EyesOfTheHunterAdept) && player.sens >= 50) {
 			if (monster.hasPerk(PerkLib.DarknessNature)) elementalTypes.push("Darkness Nature");
 			if (monster.hasPerk(PerkLib.FireNature)) elementalTypes.push("Fire Nature");
 			if (monster.hasPerk(PerkLib.IceNature)) elementalTypes.push("Ice Nature");
 			if (monster.hasPerk(PerkLib.LightningNature)) elementalTypes.push("Lightning Nature");
 		}
-		if (player.findPerk(PerkLib.EyesOfTheHunterMaster) >= 0 && player.sens >= 75) {
+		if (player.hasPerk(PerkLib.EyesOfTheHunterMaster) && player.sens >= 75) {
 			if (monster.hasPerk(PerkLib.DarknessVulnerability)) elementalTypes.push("Darkness Vulnerability");
 			if (monster.hasPerk(PerkLib.FireVulnerability)) elementalTypes.push("Fire Vulnerability");
 			if (monster.hasPerk(PerkLib.IceVulnerability)) elementalTypes.push("Ice Vulnerability");
 			if (monster.hasPerk(PerkLib.LightningVulnerability)) elementalTypes.push("Lightning Vulnerability");
-			//if (monster.findPerk(PerkLib) >= 0) outputText("");
-			//if (monster.findPerk(PerkLib) >= 0) outputText("");
+			//if (monster.hasPerk(PerkLib)) outputText("");
+			//if (monster.hasPerk(PerkLib)) outputText("");
 		}
 		mainView.monsterStatsView.setMonsterTypes(generalTypes,elementalTypes);
 	}
@@ -5090,37 +5011,37 @@ public function ScyllaTease():void {
 		//5% chance for each tease level.
 		chance += player.teaseLevel * 5;
 		//10% for seduction perk
-		if(player.findPerk(PerkLib.Seduction) >= 0) chance += 10;
+		if(player.hasPerk(PerkLib.Seduction)) chance += 10;
 		//10% for sexy armor types
-		if(player.findPerk(PerkLib.SluttySeduction) >= 0 || player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) chance += 10;
+		if(player.hasPerk(PerkLib.SluttySeduction) || player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) chance += 10;
 		//10% for bimbo shits
-		if(player.findPerk(PerkLib.BimboBody) >= 0) {
+		if(player.hasPerk(PerkLib.BimboBody)) {
 			chance += 10;
 			bimbo = true;
 		}
-		if(player.findPerk(PerkLib.BroBody) >= 0) {
+		if(player.hasPerk(PerkLib.BroBody)) {
 			chance += 10;
 			bro = true;
 		}
-		if(player.findPerk(PerkLib.FutaForm) >= 0) {
+		if(player.hasPerk(PerkLib.FutaForm)) {
 			chance += 10;
 			futa = true;
 		}
 		//2 & 2 for seductive valentines!
-		if(player.findPerk(PerkLib.SensualLover) >= 0) {
+		if(player.hasPerk(PerkLib.SensualLover)) {
 			chance += 2;
 		}
 		//==============================
 		//Determine basic damage.
 		//==============================
 		damage = 6 + rand(3);
-		if(player.findPerk(PerkLib.SensualLover) >= 0) {
+		if(player.hasPerk(PerkLib.SensualLover)) {
 			damage += 2;
 		}
-		if(player.findPerk(PerkLib.Seduction) >= 0) damage += 5;
+		if(player.hasPerk(PerkLib.Seduction)) damage += 5;
 		//+ slutty armor bonus
-		if(player.findPerk(PerkLib.SluttySeduction) >= 0) damage += player.perkv1(PerkLib.SluttySeduction);
-		if(player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) damage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+		if(player.hasPerk(PerkLib.SluttySeduction)) damage += player.perkv1(PerkLib.SluttySeduction);
+		if(player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) damage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
 		//10% for bimbo shits
 		if(bimbo || bro || futa) {
 			damage += 5;
@@ -5171,14 +5092,14 @@ public function ScyllaTease():void {
 		if(rand(100) <= chance) {
 			//NERF TEASE DAMAGE
 			damage *= .9;
-			if(player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) {
+			if(player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) {
 				damage *= 1.15;
 			}
-			if (player.findPerk(PerkLib.DazzlingDisplay) >= 0 && rand(100) < 10) damage *= 1.2;
+			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damage *= 1.2;
 			//Determine if critical tease!
 			var crit:Boolean = false;
 			var critChance:int = 5;
-			if (player.findPerk(PerkLib.CriticalPerformance) >= 0) {
+			if (player.hasPerk(PerkLib.CriticalPerformance)) {
 				if (player.lib <= 100) critChance += player.lib / 5;
 				if (player.lib > 100) critChance += 20;
 			}
@@ -5257,37 +5178,37 @@ public function GooTease():void {
 		//5% chance for each tease level.
 		chance += player.teaseLevel * 5;
 		//10% for seduction perk
-		if(player.findPerk(PerkLib.Seduction) >= 0) chance += 10;
+		if(player.hasPerk(PerkLib.Seduction)) chance += 10;
 		//10% for sexy armor types
-		if(player.findPerk(PerkLib.SluttySeduction) >= 0 || player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) chance += 10;
+		if(player.hasPerk(PerkLib.SluttySeduction) || player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) chance += 10;
 		//10% for bimbo shits
-		if(player.findPerk(PerkLib.BimboBody) >= 0) {
+		if(player.hasPerk(PerkLib.BimboBody)) {
 			chance += 10;
 			bimbo = true;
 		}
-		if(player.findPerk(PerkLib.BroBody) >= 0) {
+		if(player.hasPerk(PerkLib.BroBody)) {
 			chance += 10;
 			bro = true;
 		}
-		if(player.findPerk(PerkLib.FutaForm) >= 0) {
+		if(player.hasPerk(PerkLib.FutaForm)) {
 			chance += 10;
 			futa = true;
 		}
 		//2 & 2 for seductive valentines!
-		if(player.findPerk(PerkLib.SensualLover) >= 0) {
+		if(player.hasPerk(PerkLib.SensualLover)) {
 			chance += 2;
 		}
 		//==============================
 		//Determine basic damage.
 		//==============================
 		damage = 6 + rand(3);
-		if(player.findPerk(PerkLib.SensualLover) >= 0) {
+		if(player.hasPerk(PerkLib.SensualLover)) {
 			damage += 2;
 		}
-		if(player.findPerk(PerkLib.Seduction) >= 0) damage += 5;
+		if(player.hasPerk(PerkLib.Seduction)) damage += 5;
 		//+ slutty armor bonus
-		if(player.findPerk(PerkLib.SluttySeduction) >= 0) damage += player.perkv1(PerkLib.SluttySeduction);
-		if(player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) damage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+		if(player.hasPerk(PerkLib.SluttySeduction)) damage += player.perkv1(PerkLib.SluttySeduction);
+		if(player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) damage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
 		//10% for bimbo shits
 		if(bimbo || bro || futa) {
 			damage += 5;
@@ -5332,14 +5253,14 @@ public function GooTease():void {
 			damage += libidoscalingbonus();
 			damage *= 0.25;
 			damage = Math.round(damage);
-			if(player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) {
+			if(player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) {
 				damage *= 1.15;
 			}
-			if (player.findPerk(PerkLib.DazzlingDisplay) >= 0 && rand(100) < 10) damage *= 1.2;
+			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damage *= 1.2;
 			//Determine if critical tease!
 			var crit:Boolean = false;
 			var critChance:int = 5;
-			if (player.findPerk(PerkLib.CriticalPerformance) >= 0) {
+			if (player.hasPerk(PerkLib.CriticalPerformance)) {
 				if (player.lib <= 100) critChance += player.lib / 5;
 				if (player.lib > 100) critChance += 20;
 			}
@@ -5553,7 +5474,7 @@ public function runAway(callHook:Boolean = true):void {
 	var escapeMod:Number = 20 + monster.level * 3;
 	if(debug) escapeMod -= 300;
 	if(player.canFly()) escapeMod -= 20;
-	if(player.tailType == Tail.RACCOON && player.earType == Ears.RACCOON && player.findPerk(PerkLib.Runner) >= 0) escapeMod -= 25;
+	if(player.tailType == Tail.RACCOON && player.earType == Ears.RACCOON && player.hasPerk(PerkLib.Runner)) escapeMod -= 25;
 	if(monster.hasStatusEffect(StatusEffects.Stunned)) escapeMod -= 50;
 	
 	//Big tits doesn't matter as much if ya can fly!
@@ -5633,8 +5554,8 @@ public function runAway(callHook:Boolean = true):void {
 	//Ember is SPUCIAL
 	if(monster.short == "Ember") {
 		//GET AWAY
-		if(player.spe > rand(monster.spe + escapeMod) || (player.findPerk(PerkLib.Runner) >= 0 && rand(100) < 50)) {
-			if(player.findPerk(PerkLib.Runner) >= 0) outputText("Using your skill at running, y");
+		if(player.spe > rand(monster.spe + escapeMod) || (player.hasPerk(PerkLib.Runner) && rand(100) < 50)) {
+			if(player.hasPerk(PerkLib.Runner)) outputText("Using your skill at running, y");
 			else outputText("Y");
 			outputText("ou easily outpace the dragon, who begins hurling imprecations at you.  \"What the hell, [name], you weenie; are you so scared that you can't even stick out your punishment?\"");
 			outputText("\n\nNot to be outdone, you call back, \"Sucks to you!  If even the mighty Last Ember of Hope can't catch me, why do I need to train?  Later, little bird!\"");
@@ -5663,7 +5584,7 @@ public function runAway(callHook:Boolean = true):void {
 		//Fliers flee!
 		else if(player.canFly()) outputText(monster.capitalA + monster.short + " can't catch you.");
 		//sekrit benefit: if you have coon ears, coon tail, and Runner perk, change normal Runner escape to flight-type escape
-		else if(player.tailType == Tail.RACCOON && player.earType == Ears.RACCOON && player.findPerk(PerkLib.Runner) >= 0) {
+		else if(player.tailType == Tail.RACCOON && player.earType == Ears.RACCOON && player.hasPerk(PerkLib.Runner)) {
 			outputText("Using your running skill, you build up a head of steam and jump, then spread your arms and flail your tail wildly; your opponent dogs you as best [monster he] can, but stops and stares dumbly as your spastic tail slowly propels you several meters into the air!  You leave [monster him] behind with your clumsy, jerky, short-range flight.");
 		}
 		//Non-fliers flee
@@ -5677,7 +5598,7 @@ public function runAway(callHook:Boolean = true):void {
 		return;
 	}
 	//Runner perk chance
-	else if(player.findPerk(PerkLib.Runner) >= 0 && rand(100) < 50) {
+	else if(player.hasPerk(PerkLib.Runner) && rand(100) < 50) {
 		inCombat = false;
 		outputText("Thanks to your talent for running, you manage to escape.");
 		if(monster.short == "Izma") {
@@ -5699,7 +5620,7 @@ public function runAway(callHook:Boolean = true):void {
 			else outputText(monster.capitalA + monster.short + " manages to grab your [legs] and drag you back to the ground before you can fly away!");
 		}
 		//fail
-		else if(player.tailType == Tail.RACCOON && player.earType == Ears.RACCOON && player.findPerk(PerkLib.Runner) >= 0) outputText("Using your running skill, you build up a head of steam and jump, but before you can clear the ground more than a foot, your opponent latches onto you and drags you back down with a thud!");
+		else if(player.tailType == Tail.RACCOON && player.earType == Ears.RACCOON && player.hasPerk(PerkLib.Runner)) outputText("Using your running skill, you build up a head of steam and jump, but before you can clear the ground more than a foot, your opponent latches onto you and drags you back down with a thud!");
 		//Nonflyer messages
 		else {
 			//Huge balls messages
@@ -5831,76 +5752,76 @@ public function toughnessscalingbonus():Number {
 
 public function soulskillMod():Number {
 	var modss:Number = 1;
-	if (player.findPerk(PerkLib.DaoistCultivator) >= 0 && player.wis >= 20) modss += .1;
-	if (player.findPerk(PerkLib.DaoistApprenticeStage) >= 0) {
-		if (player.findPerk(PerkLib.SoulApprentice) >= 0 && player.wis >= 30) modss += .2;
-		if (player.findPerk(PerkLib.SoulPersonage) >= 0 && player.wis >= 40) modss += .2;
-		if (player.findPerk(PerkLib.SoulWarrior) >= 0 && player.wis >= 50) modss += .2;
+	if (player.hasPerk(PerkLib.DaoistCultivator) && player.wis >= 20) modss += .1;
+	if (player.hasPerk(PerkLib.DaoistApprenticeStage)) {
+		if (player.hasPerk(PerkLib.SoulApprentice) && player.wis >= 30) modss += .2;
+		if (player.hasPerk(PerkLib.SoulPersonage) && player.wis >= 40) modss += .2;
+		if (player.hasPerk(PerkLib.SoulWarrior) && player.wis >= 50) modss += .2;
 	}
-	if (player.findPerk(PerkLib.DaoistWarriorStage) >= 0) {
-		if (player.findPerk(PerkLib.SoulSprite) >= 0 && player.wis >= 60) modss += .3;
-		if (player.findPerk(PerkLib.SoulScholar) >= 0 && player.wis >= 70) modss += .3;
-		if (player.findPerk(PerkLib.SoulElder) >= 0 && player.wis >= 80) modss += .3;
+	if (player.hasPerk(PerkLib.DaoistWarriorStage)) {
+		if (player.hasPerk(PerkLib.SoulSprite) && player.wis >= 60) modss += .3;
+		if (player.hasPerk(PerkLib.SoulScholar) && player.wis >= 70) modss += .3;
+		if (player.hasPerk(PerkLib.SoulElder) && player.wis >= 80) modss += .3;
 	}
-	if (player.findPerk(PerkLib.DaoistElderStage) >= 0) {
-		if (player.findPerk(PerkLib.SoulExalt) >= 0 && player.wis >= 90) modss += .4;
-		if (player.findPerk(PerkLib.SoulOverlord) >= 0 && player.wis >= 100) modss += .4;
-		if (player.findPerk(PerkLib.SoulTyrant) >= 0 && player.wis >= 110) modss += .4;
+	if (player.hasPerk(PerkLib.DaoistElderStage)) {
+		if (player.hasPerk(PerkLib.SoulExalt) && player.wis >= 90) modss += .4;
+		if (player.hasPerk(PerkLib.SoulOverlord) && player.wis >= 100) modss += .4;
+		if (player.hasPerk(PerkLib.SoulTyrant) && player.wis >= 110) modss += .4;
 	}
-	if (player.findPerk(PerkLib.DaoistOverlordStage) >= 0) {
-		if (player.findPerk(PerkLib.SoulKing) >= 0 && player.wis >= 120) modss += .5;
-		if (player.findPerk(PerkLib.SoulEmperor) >= 0 && player.wis >= 130) modss += .5;
-		if (player.findPerk(PerkLib.SoulAncestor) >= 0 && player.wis >= 140) modss += .5;
+	if (player.hasPerk(PerkLib.DaoistOverlordStage)) {
+		if (player.hasPerk(PerkLib.SoulKing) && player.wis >= 120) modss += .5;
+		if (player.hasPerk(PerkLib.SoulEmperor) && player.wis >= 130) modss += .5;
+		if (player.hasPerk(PerkLib.SoulAncestor) && player.wis >= 140) modss += .5;
 	}
-	if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) modss += .3;
-	if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) modss += .4;
-//	if (player.findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) modss += .5;
-	if (player.findPerk(PerkLib.DaoistsFocus) >= 0) modss += player.perkv1(PerkLib.DaoistsFocus);
-	if (player.findPerk(PerkLib.WizardsAndDaoistsFocus) >= 0) modss += player.perkv2(PerkLib.WizardsAndDaoistsFocus);
-	if (player.findPerk(PerkLib.SeersInsight) >= 0) modss += player.perkv1(PerkLib.SeersInsight);
-	if (player.findPerk(PerkLib.AscensionSpiritualEnlightenment) >= 0) modss *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
+	if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) modss += .3;
+	if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) modss += .4;
+//	if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) modss += .5;
+	if (player.hasPerk(PerkLib.DaoistsFocus)) modss += player.perkv1(PerkLib.DaoistsFocus);
+	if (player.hasPerk(PerkLib.WizardsAndDaoistsFocus)) modss += player.perkv2(PerkLib.WizardsAndDaoistsFocus);
+	if (player.hasPerk(PerkLib.SeersInsight)) modss += player.perkv1(PerkLib.SeersInsight);
+	if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modss *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
 	if (player.shieldName == "spirit focus") modss += .2;
 	return modss;
 }
 public function soulskillPhysicalMod():Number {
 	var modssp:Number = 1;
-	if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) modssp += .3;
-	if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) modssp += .4;
-//	if (player.findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) modssp += .5;
-	if (player.findPerk(PerkLib.BodyCultivatorsFocus) >= 0) modssp += player.perkv1(PerkLib.BodyCultivatorsFocus);
-	if (player.findPerk(PerkLib.AscensionSpiritualEnlightenment) >= 0) modssp *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
+	if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) modssp += .3;
+	if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) modssp += .4;
+//	if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) modssp += .5;
+	if (player.hasPerk(PerkLib.BodyCultivatorsFocus)) modssp += player.perkv1(PerkLib.BodyCultivatorsFocus);
+	if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssp *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
 	return modssp;
 }
 public function soulskillMagicalMod():Number {
 	var modssm:Number = 1;
-	if (player.findPerk(PerkLib.DaoistCultivator) >= 0 && player.wis >= 20) modssm += .1;
-	if (player.findPerk(PerkLib.DaoistApprenticeStage) >= 0) {
-		if (player.findPerk(PerkLib.SoulApprentice) >= 0 && player.wis >= 30) modssm += .2;
-		if (player.findPerk(PerkLib.SoulPersonage) >= 0 && player.wis >= 40) modssm += .2;
-		if (player.findPerk(PerkLib.SoulWarrior) >= 0 && player.wis >= 50) modssm += .2;
+	if (player.hasPerk(PerkLib.DaoistCultivator) && player.wis >= 20) modssm += .1;
+	if (player.hasPerk(PerkLib.DaoistApprenticeStage)) {
+		if (player.hasPerk(PerkLib.SoulApprentice) && player.wis >= 30) modssm += .2;
+		if (player.hasPerk(PerkLib.SoulPersonage) && player.wis >= 40) modssm += .2;
+		if (player.hasPerk(PerkLib.SoulWarrior) && player.wis >= 50) modssm += .2;
 	}
-	if (player.findPerk(PerkLib.DaoistWarriorStage) >= 0) {
-		if (player.findPerk(PerkLib.SoulSprite) >= 0 && player.wis >= 60) modssm += .3;
-		if (player.findPerk(PerkLib.SoulScholar) >= 0 && player.wis >= 70) modssm += .3;
-		if (player.findPerk(PerkLib.SoulElder) >= 0 && player.wis >= 80) modssm += .3;
+	if (player.hasPerk(PerkLib.DaoistWarriorStage)) {
+		if (player.hasPerk(PerkLib.SoulSprite) && player.wis >= 60) modssm += .3;
+		if (player.hasPerk(PerkLib.SoulScholar) && player.wis >= 70) modssm += .3;
+		if (player.hasPerk(PerkLib.SoulElder) && player.wis >= 80) modssm += .3;
 	}
-	if (player.findPerk(PerkLib.DaoistElderStage) >= 0) {
-		if (player.findPerk(PerkLib.SoulExalt) >= 0 && player.wis >= 90) modssm += .4;
-		if (player.findPerk(PerkLib.SoulOverlord) >= 0 && player.wis >= 100) modssm += .4;
-		if (player.findPerk(PerkLib.SoulTyrant) >= 0 && player.wis >= 110) modssm += .4;
+	if (player.hasPerk(PerkLib.DaoistElderStage)) {
+		if (player.hasPerk(PerkLib.SoulExalt) && player.wis >= 90) modssm += .4;
+		if (player.hasPerk(PerkLib.SoulOverlord) && player.wis >= 100) modssm += .4;
+		if (player.hasPerk(PerkLib.SoulTyrant) && player.wis >= 110) modssm += .4;
 	}
-	if (player.findPerk(PerkLib.DaoistOverlordStage) >= 0) {
-		if (player.findPerk(PerkLib.SoulKing) >= 0 && player.wis >= 120) modssm += .5;
-		if (player.findPerk(PerkLib.SoulEmperor) >= 0 && player.wis >= 130) modssm += .5;
-		if (player.findPerk(PerkLib.SoulAncestor) >= 0 && player.wis >= 140) modssm += .5;
+	if (player.hasPerk(PerkLib.DaoistOverlordStage)) {
+		if (player.hasPerk(PerkLib.SoulKing) && player.wis >= 120) modssm += .5;
+		if (player.hasPerk(PerkLib.SoulEmperor) && player.wis >= 130) modssm += .5;
+		if (player.hasPerk(PerkLib.SoulAncestor) && player.wis >= 140) modssm += .5;
 	}
-	if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) modssm += .3;
-	if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) modssm += .4;
-//	if (player.findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) modssm += .5;
-	if (player.findPerk(PerkLib.DaoistsFocus) >= 0) modssm += player.perkv1(PerkLib.DaoistsFocus);
-	if (player.findPerk(PerkLib.WizardsAndDaoistsFocus) >= 0) modssm += player.perkv2(PerkLib.WizardsAndDaoistsFocus);
-	if (player.findPerk(PerkLib.SeersInsight) >= 0) modssm += player.perkv1(PerkLib.SeersInsight);
-	if (player.findPerk(PerkLib.AscensionSpiritualEnlightenment) >= 0) modssm *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
+	if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) modssm += .3;
+	if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) modssm += .4;
+//	if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) modssm += .5;
+	if (player.hasPerk(PerkLib.DaoistsFocus)) modssm += player.perkv1(PerkLib.DaoistsFocus);
+	if (player.hasPerk(PerkLib.WizardsAndDaoistsFocus)) modssm += player.perkv2(PerkLib.WizardsAndDaoistsFocus);
+	if (player.hasPerk(PerkLib.SeersInsight)) modssm += player.perkv1(PerkLib.SeersInsight);
+	if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssm *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
 	if (player.shieldName == "spirit focus") modssm += .2;
 	return modssm;
 }
@@ -5908,17 +5829,17 @@ public function soulskillMagicalMod():Number {
 public function soulskillcostmulti():Number {
 	var multiss:Number = 1;
 	if (soulskillMod() > 1) multiss += Math.round(soulskillMod() - 1);/*
-	if (player.findPerk(PerkLib.SoulPersonage) >= 0) multiss += 1;
-	if (player.findPerk(PerkLib.SoulWarrior) >= 0) multiss += 1;
-	if (player.findPerk(PerkLib.SoulSprite) >= 0) multiss += 1;
-	if (player.findPerk(PerkLib.SoulScholar) >= 0) multiss += 1;
-	if (player.findPerk(PerkLib.SoulElder) >= 0) multiss += 1;
-	if (player.findPerk(PerkLib.SoulExalt) >= 0) multiss += 1;
-	if (player.findPerk(PerkLib.SoulOverlord) >= 0) multiss += 1;
-	if (player.findPerk(PerkLib.SoulTyrant) >= 0) multiss += 1;
-	if (player.findPerk(PerkLib.SoulKing) >= 0) multiss += 1;
-	if (player.findPerk(PerkLib.SoulEmperor) >= 0) multiss += 1;
-	if (player.findPerk(PerkLib.SoulAncestor) >= 0) multiss += 1;*/
+	if (player.hasPerk(PerkLib.SoulPersonage)) multiss += 1;
+	if (player.hasPerk(PerkLib.SoulWarrior)) multiss += 1;
+	if (player.hasPerk(PerkLib.SoulSprite)) multiss += 1;
+	if (player.hasPerk(PerkLib.SoulScholar)) multiss += 1;
+	if (player.hasPerk(PerkLib.SoulElder)) multiss += 1;
+	if (player.hasPerk(PerkLib.SoulExalt)) multiss += 1;
+	if (player.hasPerk(PerkLib.SoulOverlord)) multiss += 1;
+	if (player.hasPerk(PerkLib.SoulTyrant)) multiss += 1;
+	if (player.hasPerk(PerkLib.SoulKing)) multiss += 1;
+	if (player.hasPerk(PerkLib.SoulEmperor)) multiss += 1;
+	if (player.hasPerk(PerkLib.SoulAncestor)) multiss += 1;*/
 	if (player.level >= 24 && player.wis >= 80) multiss += 1;//początek używania Dao of Elements
 	if (player.level >= 42 && player.wis >= 140) multiss += 1;//początek zdolności latania
 	if (player.level >= 60 && player.wis >= 200) multiss += 1;//początek czegoś tam 1
@@ -5928,9 +5849,9 @@ public function soulskillcostmulti():Number {
 
 public function soulskillCost():Number {
 	var modssc:Number = 1;
-	if (player.findPerk(PerkLib.DaoistCultivator) >= 0) modssc -= .1;
-	if (player.findPerk(PerkLib.WizardsAndDaoistsEndurance) >= 0) modssc -= (0.01 * player.perkv2(PerkLib.WizardsAndDaoistsEndurance));
-	if (player.findPerk(PerkLib.SeersInsight) >= 0) modssc -= player.perkv1(PerkLib.SeersInsight);
+	if (player.hasPerk(PerkLib.DaoistCultivator)) modssc -= .1;
+	if (player.hasPerk(PerkLib.WizardsAndDaoistsEndurance)) modssc -= (0.01 * player.perkv2(PerkLib.WizardsAndDaoistsEndurance));
+	if (player.hasPerk(PerkLib.SeersInsight)) modssc -= player.perkv1(PerkLib.SeersInsight);
 	if (player.jewelryName == "fox hairpin") modssc -= .2;
 	if (modssc < 0.1) modssc = 0.1;
 	return modssc;

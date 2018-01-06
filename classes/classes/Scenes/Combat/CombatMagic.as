@@ -791,13 +791,11 @@ public class CombatMagic extends BaseCombatContent {
 	}
 
 	public function spellHealEffect():void {
-		temp = 0;
-		temp += inteligencescalingbonus();
-		temp *= spellModBlack();
-		if (player.unicornScore() >= 5) temp *= ((player.unicornScore() - 4) * 0.5);
-		if (player.alicornScore() >= 6) temp *= ((player.alicornScore() - 5) * 0.5);
-		if (player.armorName == "skimpy nurse's outfit") temp *= 1.2;
-		if (player.weaponName == "unicorn staff") temp *= 1.5;
+		var damage:Number = inteligencescalingbonus() * spellModBlack();
+		if (player.unicornScore() >= 5) damage *= ((player.unicornScore() - 4) * 0.5);
+		if (player.alicornScore() >= 6) damage *= ((player.alicornScore() - 5) * 0.5);
+		if (player.armorName == "skimpy nurse's outfit") damage *= 1.2;
+		if (player.weaponName == "unicorn staff") damage *= 1.5;
 		//Determine if critical heal!
 		var crit:Boolean = false;
 		var critHeal:int = 5;
@@ -807,12 +805,12 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		if (rand(100) < critHeal) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
-		temp = Math.round(temp);
-		outputText("You flush with success as your wounds begin to knit <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
+		damage = Math.round(damage);
+		outputText("You flush with success as your wounds begin to knit <b>(<font color=\"#008000\">+" + damage + "</font>)</b>.");
 		if (crit == true) outputText(" <b>*Critical Heal!*</b>");
-		HPChange(temp,false);
+		HPChange(damage,false);
 	}
 	/**
 	 * Generates from (x1,x2,x3,y1,y2) log-scale parameters (a,b,c) that will return:
@@ -1073,9 +1071,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		clearOutput();
 		outputText("You narrow your eyes, focusing your own lust with deadly intent.  At the palm of your hand form ice spike that shots toward " + monster.a + monster.short + " !\n");
-		temp = 0;
-		temp += inteligencescalingbonus();
-		temp *= spellModBlack();
+		var damage:Number = inteligencescalingbonus() * spellModBlack();
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1086,20 +1082,20 @@ public class CombatMagic extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
 		//High damage to goes.
-		temp = calcGlacialMod(temp);
-		if (monster.hasPerk(PerkLib.IceNature)) temp *= 0.2;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) temp *= 0.5;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) temp *= 2;
-		if (monster.hasPerk(PerkLib.FireNature)) temp *= 5;
-		if (player.hasPerk(PerkLib.ColdMastery)) temp *= 2;
-		if (player.hasPerk(PerkLib.ColdAffinity)) temp *= 2;
-		temp = Math.round(temp);
-		//if (monster.short == "goo-girl") temp = Math.round(temp * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
-		//if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.");
+		damage = calcGlacialMod(damage);
+		if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
+		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.5;
+		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;
+		if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
+		if (player.hasPerk(PerkLib.ColdMastery)) damage *= 2;
+		if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
+		damage = Math.round(damage);
+		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
+		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
+		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + damage + "</font></b> damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
 		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
@@ -1108,16 +1104,12 @@ public class CombatMagic extends BaseCombatContent {
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		checkAchievementDamage(temp);
+		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		monster.HP -= temp;
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
-		}
-		combat.HeroBaneProc();
+		monster.HP -= damage;
+		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if(monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
@@ -1146,9 +1138,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		clearOutput();
 		outputText("You narrow your eyes, focusing your own lust with deadly intent.  At the palm of your hand form a shard from pure darkness that shots toward " + monster.a + monster.short + " !\n");
-		temp = 0;
-		temp += inteligencescalingbonus();
-		temp *= spellModBlack();
+		var damage:Number = inteligencescalingbonus() * spellModBlack();
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1159,20 +1149,20 @@ public class CombatMagic extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
 		//High damage to goes.
-		temp = calcEclypseMod(temp);
-		if (monster.hasPerk(PerkLib.DarknessNature)) temp *= 0.2;
-		if (monster.hasPerk(PerkLib.LightningVulnerability)) temp *= 0.5;
-		if (monster.hasPerk(PerkLib.DarknessVulnerability)) temp *= 2;
-		if (monster.hasPerk(PerkLib.LightningNature)) temp *= 5;
-//	if (player.hasPerk(PerkLib.ColdMastery)) temp *= 2;
-//	if (player.hasPerk(PerkLib.ColdAffinity)) temp *= 2;
-		temp = Math.round(temp);
-		//if (monster.short == "goo-girl") temp = Math.round(temp * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
-		//if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.");
+		damage = calcEclypseMod(damage);
+		if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 0.2;
+		if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 0.5;
+		if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 2;
+		if (monster.hasPerk(PerkLib.LightningNature)) damage *= 5;
+//	if (player.hasPerk(PerkLib.ColdMastery)) damage *= 2;
+//	if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
+		damage = Math.round(damage);
+		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
+		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
+		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + damage + "</font></b> damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
 		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
@@ -1181,16 +1171,12 @@ public class CombatMagic extends BaseCombatContent {
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		checkAchievementDamage(temp);
+		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		monster.HP -= temp;
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
-		}
-		combat.HeroBaneProc();
+		monster.HP -= damage;
+		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if(monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
@@ -1220,9 +1206,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		clearOutput();
 		outputText("You narrow your eyes, focusing your own lust and willpower with a deadly intent.  Above you starting to form small darn cloud that soon becoming quite wide and long.  Then almost endless rain of ice shards start to downpour on " + monster.a + monster.short + " and the rest of your surrounding!\n");
-		temp = 0;
-		temp += inteligencescalingbonus();
-		temp *= spellMod();
+		var damage:Number = inteligencescalingbonus() * spellMod();
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1233,22 +1217,22 @@ public class CombatMagic extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
 		//High damage to goes.
-		temp = calcGlacialMod(temp);
-		if (monster.hasPerk(PerkLib.IceNature)) temp *= 0.2;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) temp *= 0.5;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) temp *= 2;
-		if (monster.hasPerk(PerkLib.FireNature)) temp *= 5;
-		if (player.hasPerk(PerkLib.ColdMastery)) temp *= 2;
-		if (player.hasPerk(PerkLib.ColdAffinity)) temp *= 2;
-		temp = Math.round(temp);
-		//if (monster.short == "goo-girl") temp = Math.round(temp * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
-		//if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2); - tak samo przemyśleć czy bdą dodatkowo ranione
-		if (monster.plural == true) temp *= 5;
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">(" + temp + ")");
-		if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) outputText(" (" + temp + ") ");
+		damage = calcGlacialMod(damage);
+		if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
+		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.5;
+		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;
+		if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
+		if (player.hasPerk(PerkLib.ColdMastery)) damage *= 2;
+		if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
+		damage = Math.round(damage);
+		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
+		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bdą dodatkowo ranione
+		if (monster.plural == true) damage *= 5;
+		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">(" + damage + ")");
+		if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) outputText(" (" + damage + ") ");
 		outputText("</font></b> damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
@@ -1258,17 +1242,13 @@ public class CombatMagic extends BaseCombatContent {
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) temp *= 2;
-		checkAchievementDamage(temp);
+		if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 2;
+		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		monster.HP -= temp;
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
-		}
-		combat.HeroBaneProc();
+		monster.HP -= damage;
+		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if(monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
@@ -1298,9 +1278,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		clearOutput();
 		outputText("You narrow your eyes, focusing your own lust and willpower with a deadly intent.  Around you starting to form small vortex of flames that soon becoming quite wide.  Then with a single thought you sends all that fire like a unstoppable storm toward " + monster.a + monster.short + " and the rest of your surrounding!\n");
-		temp = 0;
-		temp += inteligencescalingbonus();
-		temp *= spellMod();
+		var damage:Number = inteligencescalingbonus() * spellMod();
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1311,21 +1289,21 @@ public class CombatMagic extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
 		//High damage to goes.
-		temp = calcInfernoMod(temp);
-		if (monster.short == "goo-girl") temp = Math.round(temp * 1.5);
-		if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2);
-		if (monster.plural == true) temp *= 5;
-		if (monster.hasPerk(PerkLib.IceNature)) temp *= 5;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) temp *= 2;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) temp *= 0.5;
-		if (monster.hasPerk(PerkLib.FireNature)) temp *= 0.2;
-		if (player.hasPerk(PerkLib.FireAffinity)) temp *= 2;
-		temp = Math.round(temp);
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">(" + temp + ")");
-		if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) outputText(" (" + temp + ") ");
+		damage = calcInfernoMod(damage);
+		if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
+		if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
+		if (monster.plural == true) damage *= 5;
+		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
+		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
+		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
+		if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
+		if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+		damage = Math.round(damage);
+		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">(" + damage + ")");
+		if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) outputText(" (" + damage + ") ");
 		outputText("</font></b> damage.");
 		//Using fire attacks on the goo]
 		if(monster.short == "goo-girl") {
@@ -1335,17 +1313,13 @@ public class CombatMagic extends BaseCombatContent {
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) temp *= 2;
-		checkAchievementDamage(temp);
+		if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 2;
+		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		monster.HP -= temp;
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
-		}
-		combat.HeroBaneProc();
+		monster.HP -= damage;
+		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if(monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
@@ -1620,6 +1594,7 @@ public class CombatMagic extends BaseCombatContent {
 	}
 	//(30) Whitefire – burns the enemy for 10 + int/3 + rand(int/2) * spellMod.
 	public function spellWhitefire():void {
+		var damage:Number;
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		doNext(combatMenu);
@@ -1644,9 +1619,7 @@ public class CombatMagic extends BaseCombatContent {
 			//Attack gains burn DoT for 2-3 turns.
 			outputText("You let loose a roiling cone of flames that wash over the horde of demons like a tidal wave, scorching at their tainted flesh with vigor unlike anything you've seen before. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!");
 			monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
-			temp = 0;
-			temp += inteligencescalingbonus();
-			temp *= spellModWhite();
+			damage = inteligencescalingbonus() *spellModWhite();
 			//Determine if critical hit!
 			var crit:Boolean = false;
 			var critChance:int = 5;
@@ -1657,10 +1630,10 @@ public class CombatMagic extends BaseCombatContent {
 			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 			if (rand(100) < critChance) {
 				crit = true;
-				temp *= 1.75;
+				damage *= 1.75;
 			}
-			temp *= 1.75;
-			outputText(" (" + temp + ")");
+			damage *= 1.75;
+			outputText(" (" + damage + ")");
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		}
 		else
@@ -1668,9 +1641,7 @@ public class CombatMagic extends BaseCombatContent {
 			clearOutput();
 			outputText("You narrow your eyes, focusing your mind with deadly intent.  You snap your fingers and " + monster.a + monster.short + " is enveloped in a flash of white flames!\n");
 			if(monster is Diva){(monster as Diva).handlePlayerSpell("whitefire");}
-			temp = 0;
-			temp += inteligencescalingbonus();
-			temp *= spellModWhite();
+			damage = inteligencescalingbonus() * spellModWhite();
 			//Determine if critical hit!
 			var crit2:Boolean = false;
 			var critChance2:int = 5;
@@ -1680,19 +1651,19 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			if (rand(100) < critChance2) {
 				crit = true;
-				temp *= 1.75;
+				damage *= 1.75;
 			}
 			//High damage to goes.
-			temp = calcInfernoMod(temp);
-			if (monster.short == "goo-girl") temp = Math.round(temp * 1.5);
-			if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2);
-			if (monster.hasPerk(PerkLib.IceNature)) temp *= 5;
-			if (monster.hasPerk(PerkLib.FireVulnerability)) temp *= 2;
-			if (monster.hasPerk(PerkLib.IceVulnerability)) temp *= 0.5;
-			if (monster.hasPerk(PerkLib.FireNature)) temp *= 0.2;
-			if (player.hasPerk(PerkLib.FireAffinity)) temp *= 2;
-			temp = Math.round(temp);
-			outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.");
+			damage = calcInfernoMod(damage);
+			if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
+			if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
+			if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
+			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
+			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
+			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
+			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+			damage = Math.round(damage);
+			outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + damage + "</font></b> damage.");
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 			//Using fire attacks on the goo]
 			if(monster.short == "goo-girl") {
@@ -1703,16 +1674,12 @@ public class CombatMagic extends BaseCombatContent {
 		if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		checkAchievementDamage(temp);
+		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		monster.HP -= temp;
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
-		}
-		combat.HeroBaneProc();
+		monster.HP -= damage;
+		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if (monster.HP < 1)
 		{
@@ -1752,9 +1719,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		clearOutput();
 		outputText("You charge out energy in your hand and fire it out in the form of a powerful bolt of lightning at " + monster.a + monster.short + " !\n");
-		temp = 0;
-		temp += inteligencescalingbonus();
-		temp *= spellModWhite();
+		var damage:Number = inteligencescalingbonus() * spellModWhite();
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1765,20 +1730,20 @@ public class CombatMagic extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
 		//High damage to goes.
-		temp = calcVoltageMod(temp);
-		if (monster.hasPerk(PerkLib.DarknessNature)) temp *= 5;
-		if (monster.hasPerk(PerkLib.LightningVulnerability)) temp *= 2;
-		if (monster.hasPerk(PerkLib.DarknessVulnerability)) temp *= 0.5;
-		if (monster.hasPerk(PerkLib.LightningNature)) temp *= 0.2;
-		if (player.hasPerk(PerkLib.LightningAffinity)) temp *= 2;
-		if (player.hasPerk(PerkLib.ElectrifiedDesire)) temp *= (1 + player.lust100);
-		temp = Math.round(temp);
-		//if (monster.short == "goo-girl") temp = Math.round(temp * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
-		//if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.");
+		damage = calcVoltageMod(damage);
+		if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 5;
+		if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 2;
+		if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 0.5;
+		if (monster.hasPerk(PerkLib.LightningNature)) damage *= 0.2;
+		if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 2;
+		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + player.lust100);
+		damage = Math.round(damage);
+		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
+		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
+		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + damage + "</font></b> damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
 		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
@@ -1787,16 +1752,12 @@ public class CombatMagic extends BaseCombatContent {
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		checkAchievementDamage(temp);
+		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		monster.HP -= temp;
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
-		}
-		combat.HeroBaneProc();
+		monster.HP -= damage;
+		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if(monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
@@ -1868,10 +1829,10 @@ public class CombatMagic extends BaseCombatContent {
 			corruptionMulti += ((monster.cor - 57.5) / 100); //The increase to multiplier is diminished.
 		}
 
-		//temp = int((player.inte / 4 + rand(player.inte / 3)) * (spellMod() * corruptionMulti));
-		temp = int(10+(player.inte/3 + rand(player.inte/2)) * (spellMod() * corruptionMulti));
+		//damage = int((player.inte / 4 + rand(player.inte / 3)) * (spellMod() * corruptionMulti));
+		var damage:Number = int(10+(player.inte/3 + rand(player.inte/2)) * (spellMod() * corruptionMulti));
 
-		if (temp > 0)
+		if (damage > 0)
 		{
 			outputText("You thrust your palm forward, causing a blast of pure energy to slam against " + monster.a + monster.short + ", tossing");
 			if ((monster as Monster).plural == true) outputText(" them");
@@ -1888,26 +1849,22 @@ public class CombatMagic extends BaseCombatContent {
 			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 			if (rand(100) < critChance) {
 				crit = true;
-				temp *= 1.75;
+				damage *= 1.75;
 			}
-			outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.\n\n");
+			outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + damage + "</font></b> damage.\n\n");
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		}
 		else
 		{
-			temp = 0;
+			damage = 0;
 			outputText("You thrust your palm forward, causing a blast of pure energy to slam against " + monster.a + monster.short + ", which they ignore. It is probably best you don’t use this technique against the pure.\n\n");
 		}
 
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		monster.HP -= temp;
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
-		}
-		combat.HeroBaneProc();
+		monster.HP -= damage;
+		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if(monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();

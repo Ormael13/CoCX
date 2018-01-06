@@ -119,7 +119,7 @@ public class Tamani extends Goblin
 				else SceneLib.forest.tamaniScene.tamaniSexLetHer();
 				} else {
 					outputText("You give into your lusts and masturbate, but Tamani doesn't seem to care.  She kicks and punches you over and over, screaming, \"<i>You dummy, why'd you get rid of the fun parts?</i>\"", true);
-					SceneLib.combat.takePhysDamage(10000);
+					player.takePhysDamage(10000);
 					SceneLib.combat.cleanupAfterCombatImpl();
 				}
 			}
