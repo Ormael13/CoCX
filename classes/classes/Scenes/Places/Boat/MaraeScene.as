@@ -142,7 +142,7 @@ public function encounterMarae():void {
 					addButton(1, "Lethicite", maraeStealLethicite);
 					addButton(2, "Accept", maraeBadEnd);
 					addButton(3, "Prank", maraeStealLethicite, true, null, null, "Play a practical joke on the corrupted goddess and pretend to steal her Lethicite. Why would you do this?", "Practical Joke");
-					addButton(4, "FIGHT!", promptFightMarae1, encounterMarae);
+					addButton(4, "FIGHT!", promptFightMarae1);
 
 			}
 			//Repeat corrupt meeting

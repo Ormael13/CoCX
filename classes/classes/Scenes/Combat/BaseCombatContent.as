@@ -45,12 +45,6 @@ public class BaseCombatContent extends BaseContent {
 	protected function doDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
 		return combat.doDamage(damage, apply, display);
 	}
-	protected function takePhysDamage(damage:Number, display:Boolean = false):Number {
-		return combat.takePhysDamage(damage, display);
-	}
-	protected function takeMagicDamage(damage:Number, display:Boolean = false):Number {
-		return combat.takeMagicDamage(damage, display);
-	}
 	protected function combatMiss():Boolean {
 		return combat.combatMiss();
 	}
