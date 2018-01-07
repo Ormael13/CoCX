@@ -188,7 +188,7 @@ use namespace CoC;
 			//addButton(5, "Upgrade", UpgradeItems).hint("."); //ulepszanie itemów
 			if (player.findPerk(PerkLib.Metamorph) >= 0) addButton(6, "Metamorf", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold freely your body.");//używanie metamorfowania z użyciem soulforce
 			if (player.findPerk(PerkLib.SoulSense) >= 0) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounter."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
-			//addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
+			addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
 			addButton(14, "Back", playerMenu);
 		}//w lini 28 w oOnLoadVariables zmian wprowadzić i w lini conditionalConverters w folderze parser zmian dot. wraith wprowadzić, zablokować perki soul tyrant i dual wield w momencie robienia release version
 		public function SoulforceCheats():void {
@@ -203,33 +203,18 @@ use namespace CoC;
 			addButton(4, "Materials", MaterialMenu).hint("For creting various materials for tests.");
 			addButton(5, "Enemies", EnemiesMenu).hint("For spawning various enemies to test fight them.");
 			addButton(6, "Ascension", AscensionMenu).hint("Submenu for Ascension related stuff.");
-			//addButton(7, "TonsOfPerks", GiveTonsOfPermablePerks).hint("Give All unowned permable perks (for perm glitch test at ascension)");
 			addButton(7, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
 			addButton(8, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
-			if (flags[kFLAGS.PATCHOULI_AND_WONDERLAND] > 1) addButton(9, "JabberwockyReset", resetJabberwockyFlag).hint("Reseting Jabberwocky boss fight.");
-			if (player.eyeColor != "brown") addButton(10, "Eye Color", eyesColorSelection).hint("Set eye color to default one so saves will not go crazy over it.");
+			addButton(9, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
+			addButton(10, "Celess", celessIntroForced).hint("Due to hard time getting her intro here it's.");
 			addButton(11, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
-			//addButton(12, "<<< 12 >>>", CoC.instance.doNothing);
-			addButton(12, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
-			addButton(13, "Celess", celessIntroForced).hint("Due to hard time getting her intro here it's.");
-			//addButton(13, "<<< 13 >>>", CoC.instance.doNothing);
+			//addButton(12, "12", );
+			//addButton(13, "13", );
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 public function celessIntroForced():void {
 	clearOutput();
 	CelessScene.instance.birthScene();
-}
-private function eyesColorSelection():void {
-	clearOutput();
-	player.eyeColor = "brown";
-	outputText("You now have brown eyes.");
-	doNext(SoulforceCheats);
-}
-private function resetJabberwockyFlag():void {
-	clearOutput();
-	outputText("You can now go fight Jabberwocky again.... for test!!!");
-	flags[kFLAGS.PATCHOULI_AND_WONDERLAND] = 1;
-	doNext(SoulforceCheats);
 }
 		public function StatsMenu():void {
 			menu();
@@ -1326,121 +1311,6 @@ private function resetJabberwockyFlag():void {
 			outputText("\n\n<b>Evangeline get weaker! (cheat stop working when she reach lvl 12)</b>");
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] > 6) flags[kFLAGS.EVANGELINE_LVL_UP]--;
 			doNext(EnemiesMenu);
-		}
-		public function GiveTonsOfPermablePerks():void {
-			if (player.findPerk(PerkLib.CorruptedKitsune) < 0) {
-				player.createPerk(PerkLib.CorruptedKitsune, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Corrupted Kitsune!)</b>");
-			}
-			if (player.findPerk(PerkLib.CorruptedNinetails) < 0) {
-				player.createPerk(PerkLib.CorruptedNinetails, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Corrupted Ninetails!)</b>");
-			}
-			if (player.findPerk(PerkLib.DarkCharm) < 0) {
-				player.createPerk(PerkLib.DarkCharm, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Dark Charm!)</b>");
-			}
-			if (player.findPerk(PerkLib.DragonFireBreath) < 0) {
-				player.createPerk(PerkLib.DragonFireBreath, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Dragon Fire Breath!)</b>");
-			}
-			if (player.findPerk(PerkLib.DragonIceBreath) < 0) {
-				player.createPerk(PerkLib.DragonIceBreath, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Dragon Ice Breath!)</b>");
-			}
-			if (player.findPerk(PerkLib.EnlightenedKitsune) < 0) {
-				player.createPerk(PerkLib.EnlightenedKitsune, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Enlightened Kitsune!)</b>");
-			}
-			if (player.findPerk(PerkLib.EnlightenedNinetails) < 0) {
-				player.createPerk(PerkLib.EnlightenedNinetails, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Enlightened Ninetails!)</b>");
-			}
-			if (player.findPerk(PerkLib.FerasBoonAlpha) < 0) {
-				player.createPerk(PerkLib.FerasBoonAlpha, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Feras Boon Alpha!)</b>");
-			}
-			if (player.findPerk(PerkLib.FerasBoonBreedingBitch) < 0) {
-				player.createPerk(PerkLib.FerasBoonBreedingBitch, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Feras Boon Breeding Bitch!)</b>");
-			}
-			if (player.findPerk(PerkLib.FerasBoonMilkingTwat) < 0) {
-				player.createPerk(PerkLib.FerasBoonMilkingTwat, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Feras Boon Milking Twat!)</b>");
-			}
-			if (player.findPerk(PerkLib.FerasBoonSeeder) < 0) {
-				player.createPerk(PerkLib.FerasBoonSeeder, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Feras Boon Seeder!)</b>");
-			}
-			if (player.findPerk(PerkLib.FireLord) < 0) {
-				player.createPerk(PerkLib.FireLord, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Fire Lord!)</b>");
-			}
-			if (player.findPerk(PerkLib.Flexibility) < 0) {
-				player.createPerk(PerkLib.Flexibility, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Flexibility!)</b>");
-			}
-			if (player.findPerk(PerkLib.Hellfire) < 0) {
-				player.createPerk(PerkLib.Hellfire, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Hellfire!)</b>");
-			}
-			if (player.findPerk(PerkLib.InkSpray) < 0) {
-				player.createPerk(PerkLib.InkSpray, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Ink Spray!)</b>");
-			}
-			if (player.findPerk(PerkLib.LizanRegeneration) < 0) {
-				player.createPerk(PerkLib.LizanRegeneration, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Lizan Regeneration!)</b>");
-			}
-			if (player.findPerk(PerkLib.Lustzerker) < 0) {
-				player.createPerk(PerkLib.Lustzerker, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Lustzerker!)</b>");
-			}
-			if (player.findPerk(PerkLib.MagicalFertility) < 0) {
-				player.createPerk(PerkLib.MagicalFertility, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Magical Fertility!)</b>");
-			}
-			if (player.findPerk(PerkLib.MagicalVirility) < 0) {
-				player.createPerk(PerkLib.MagicalVirility, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Magical Virility!)</b>");
-			}
-			if (player.findPerk(PerkLib.MaraesGiftButtslut) < 0) {
-				player.createPerk(PerkLib.MaraesGiftButtslut, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Maraes Gift Buttslut!)</b>");
-			}
-			if (player.findPerk(PerkLib.MaraesGiftFertility) < 0) {
-				player.createPerk(PerkLib.MaraesGiftFertility, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Maraes Gift Fertility!)</b>");
-			}
-			if (player.findPerk(PerkLib.MaraesGiftProfractory) < 0) {
-				player.createPerk(PerkLib.MaraesGiftProfractory, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Maraes Gift Profractory!)</b>");
-			}
-			if (player.findPerk(PerkLib.MaraesGiftStud) < 0) {
-				player.createPerk(PerkLib.MaraesGiftStud, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Maraes Gift Stud!)</b>");
-			}
-			if (player.findPerk(PerkLib.MilkMaid) < 0) {
-				player.createPerk(PerkLib.MilkMaid, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: MilkMaid!)</b>");
-			}
-			if (player.findPerk(PerkLib.OneTrackMind) < 0) {
-				player.createPerk(PerkLib.OneTrackMind, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: One Track Mind!)</b>");
-			}
-			if (player.findPerk(PerkLib.PureAndLoving) < 0) {
-				player.createPerk(PerkLib.PureAndLoving, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Pure And Loving!)</b>");
-			}
-			if (player.findPerk(PerkLib.PurityBlessing) < 0) {
-				outputText("\n\n<b>(Gained Perk: Purity Blessing!)</b>");
-				player.createPerk(PerkLib.PurityBlessing, 0, 0, 0, 0);
-			}
-			if (player.findPerk(PerkLib.SensualLover) < 0) {
-				player.createPerk(PerkLib.SensualLover, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Sensual Lover!)</b>");
-			}
-			doNext(SoulforceCheats);
 		}
 		public function RevertCabinProgress():void {
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 2;

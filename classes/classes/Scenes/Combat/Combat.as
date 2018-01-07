@@ -93,6 +93,11 @@ public class Combat extends BaseContent {
 		else if (player.hasPerk(PerkLib.Combo)) return 2;
 		else return 1;
 	}
+	public function maxClawsAttacks():int {
+		if (player.hasPerk(PerkLib.ExtraClawAttack)) return 3;
+		else if (player.hasPerk(PerkLib.ClawTraining)) return 2;
+		else return 1;
+	}
 	public function maxLargeAttacks():int {
 		if (player.hasPerk(PerkLib.TripleAttackLarge)) return 3;
 		else if (player.hasPerk(PerkLib.DoubleAttackLarge)) return 2;
@@ -110,6 +115,7 @@ public class Combat extends BaseContent {
 		if (player.weaponPerk == "Dual Large" || player.weaponPerk == "Dual" || player.weaponPerk == "Staff") return 1;
 		else if (player.weaponPerk == "Large") return maxLargeAttacks();
 		else if (player.isFistOrFistWeapon()) return maxFistAttacks();
+		else if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) return maxClawsAttacks();
 		else return maxCommonAttacks();
 	}
 	public function maxBowAttacks():int {
@@ -682,27 +688,34 @@ public function basemeleeattacks():void {
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 4) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 3) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 2) {
-				if (player.findPerk(PerkLib.ComboMaster) >= 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
+				if (player.findPerk(PerkLib.ComboMaster) >= 0 || (player.findPerk(PerkLib.ExtraClawAttack) >= 0 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()))) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
 				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 			}
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 1) {
-				if (player.findPerk(PerkLib.Combo) >= 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
+				if (player.findPerk(PerkLib.Combo) >= 0 || (player.findPerk(PerkLib.ClawTraining) >= 0 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()))) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
 				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 			}
 			else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 			var mutlimeleefistattacksCost:Number = 0;
-			//multiple melee large attacks costs
+			//multiple melee unarmed attacks costs
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 6) mutlimeleefistattacksCost += 40;
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 5) mutlimeleefistattacksCost += 28;
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 4) mutlimeleefistattacksCost += 18;
 			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) mutlimeleefistattacksCost += 10;
 			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) mutlimeleefistattacksCost += 4;
 			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1) {
+				if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) mutlimeleefistattacksCost *= 0.5;
 				if (player.fatigue + mutlimeleefistattacksCost <= player.maxFatigue()) {
-					if (player.soulforce < mutlimeleefistattacksCost * 5) {
-						outputText("Your current soulforce is too low to attack more than once in this turn!\n\n");
-						flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-					}
+					if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) fatigue(mutlimeleefistattacksCost);
 					else {
-						fatigue(mutlimeleefistattacksCost);
-						player.soulforce -= mutlimeleefistattacksCost * 5;
+						if (player.soulforce < mutlimeleefistattacksCost * 5) {
+							outputText("Your current soulforce is too low to attack more than once in this turn!\n\n");
+							flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+						}
+						else {
+							fatigue(mutlimeleefistattacksCost);
+							player.soulforce -= mutlimeleefistattacksCost * 5;
+						}
 					}
 				}
 				else {
@@ -2654,7 +2667,7 @@ public function attack():void {
 		//hit successful:
 		//special event, block (no more than 10-20% of turns, also fails if PC has >75 corruption):
 		if(rand(10) <= 1) {
-			outputText("Seeing your [weapon] raised, the anemone looks down at the water, angles her eyes up at you, and puts out a trembling lip.  ");
+			outputText("Seeing your [weapon] raised, the anemone looks down at the ocean, angles her eyes up at you, and puts out a trembling lip.  ");
 			if(player.cor < 75) {
 				outputText("You stare into her hangdog expression and lose most of the killing intensity you had summoned up for your attack, stopping a few feet short of hitting her.\n");
 				damage = 0;
@@ -2724,7 +2737,8 @@ public function attack():void {
 		outputText("Your attacks are deflected or blocked by [monster a] [monster name].");
 	}
 	else {
-		if (vbladeeffect == true) outputText("As you strike, the sword shine with a red glow as somehow you aim straight for [monster a] [monster name] throat. ");
+		if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) outputText("You growl and savagely rend [monster a] [monster name] with your claws. ");
+		else if (vbladeeffect == true) outputText("As you strike, the sword shine with a red glow as somehow you aim straight for [monster a] [monster name] throat. ");
 		else outputText("You hit [monster a] [monster name]! ");
 		if (crit == true) {
 			outputText("<b>Critical! </b>");
@@ -2837,8 +2851,25 @@ public function attack():void {
 			outputText("\n" + monster.capitalA + monster.short + " reels from the brutal blow, stunned.");
 			if (!monster.hasStatusEffect(StatusEffects.Stunned)) monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
 		}
-		//50% Bleed chance
-		if ((player.weapon == weapons.H_GAUNT || player.weapon == weapons.CNTWHIP) && rand(2) == 0 && monster.armorDef < 10 && !monster.hasStatusEffect(StatusEffects.IzmaBleed))
+		//10% Bleed chance
+		if (player.weapon == weapons.CLAWS && rand(10) == 0 && !monster.hasStatusEffect(StatusEffects.IzmaBleed))
+		{
+			if (monster.findPerk(PerkLib.EnemyConstructType) >= 0) {
+				if (monster is LivingStatue)
+				{
+					outputText("Despite the rents you've torn in its stony exterior, the statue does not bleed.");
+				}
+				else outputText("Despite the rents you've torn in its exterior, [monster a] [monster name] does not bleed.");
+			}
+			else
+			{
+				monster.createStatusEffect(StatusEffects.IzmaBleed,3,0,0,0);
+				if(monster.plural) outputText("\n" + monster.capitalA + monster.short + " bleed profusely from the many bloody gashes your [weapon] leave behind.");
+				else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your [weapon] leave behind.");
+			}
+		}
+		//25% Bleed chance
+		if ((player.weapon == weapons.H_GAUNT || player.weapon == weapons.CNTWHIP) && rand(4) == 0 && !monster.hasStatusEffect(StatusEffects.IzmaBleed))
 		{
 			if (monster.findPerk(PerkLib.EnemyConstructType) >= 0) {
 				if (monster is LivingStatue)

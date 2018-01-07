@@ -335,8 +335,8 @@ use namespace CoC;
 			if (skin.hasFur()) armorDef += (p?1:2)*newGamePlusMod;
 			if (skin.hasChitin()) armorDef += (p?2:4)*newGamePlusMod;
 			if (skin.hasScales()) armorDef += (p?3:6)*newGamePlusMod; //bee-morph (), mantis-morph (), scorpion-morph (wpisane), spider-morph (wpisane)
-			if (skin.hasBark() || skin.hasDragonScales()) armorDef += (p?4:8)*newGamePlusMod; //może do 10 podnieść jak doda sie scales dla smoków?
-			if (skin.hasBaseOnly(Skin.STONE)) armorDef += (10 * newGamePlusMod);//może do 10 podnieść jak doda sie scales dla smoków?
+			if (skin.hasBark() || skin.hasDragonScales()) armorDef += (p?4:8)*newGamePlusMod;
+			if (skin.hasBaseOnly(Skin.STONE)) armorDef += (10 * newGamePlusMod);
 			//'Thick' dermis descriptor adds 1!
 			if (skinAdj == "smooth") armorDef += (1 * newGamePlusMod);
 			//Plant score bonuses
@@ -408,6 +408,12 @@ use namespace CoC;
 				if (armorPerk == "Heavy") speedBonus += Math.round(spe / 50);
 			}
 			armorDef += speedBonus;
+			//Feral armor boosts armor ratings!
+			var toughnessBonus:int = 0;
+			if (findPerk(PerkLib.FeralArmor) >= 0 && haveNaturalArmor() && meetUnhinderedReq()) {
+				toughnessBonus += Math.round(tou / 20);
+			}
+			armorDef += toughnessBonus;
 			if (findPerk(PerkLib.PrestigeJobSentinel) >= 0 && armorPerk == "Heavy") armorDef += _armor.def;
 			if (findPerk(PerkLib.ShieldExpertise) >= 0 && shieldName != "nothing") {
 				if (shieldBlock >= 4) armorDef += Math.round(shieldBlock);
@@ -416,6 +422,8 @@ use namespace CoC;
 			//Acupuncture effect
 			if (findPerk(PerkLib.ChiReflowDefense) >= 0) armorDef *= UmasShop.NEEDLEWORK_DEFENSE_DEFENSE_MULTI;
 			if (findPerk(PerkLib.ChiReflowAttack) >= 0) armorDef *= UmasShop.NEEDLEWORK_ATTACK_DEFENSE_MULTI;
+			//Other bonuses
+			if (findPerk(PerkLib.ToughHide) >= 0 && haveNaturalArmor()) armorDef += (2 * newGamePlusMod);
 			armorDef = Math.round(armorDef);
 			//Berzerking removes armor
 			if (hasStatusEffect(StatusEffects.Berzerking) && findPerk(PerkLib.ColdFury) < 1) {
