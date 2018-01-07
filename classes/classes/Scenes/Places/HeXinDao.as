@@ -340,11 +340,12 @@ public class HeXinDao extends BaseContent
         addButton(4, weapons.SCLAYMO.shortName, weaponBuy, weapons.SCLAYMO);
         addButton(5, weapons.RIBBON.shortName, weaponBuy, weapons.RIBBON);
         addButton(6, weapons.S_GAUNT.shortName, weaponBuy, weapons.S_GAUNT);
-        addButton(7, weapons.FRTAXE.shortName, weaponBuy, weapons.FRTAXE);
+        addButton(7, weapons.CLAWS.shortName, weaponBuy, weapons.CLAWS);
         addButton(8, weapons.TCLAYMO.shortName, weaponBuy, weapons.TCLAYMO);
         addButton(9, weapons.ACLAYMO.shortName, weaponBuy, weapons.ACLAYMO);
         addButton(10, weapons.WHIP.shortName, weaponBuy, weapons.WHIP);
         addButton(11, weapons.PWHIP.shortName, weaponBuy, weapons.PWHIP);
+        addButton(12, weapons.FRTAXE.shortName, weaponBuy, weapons.FRTAXE);
         addButton(14, "Back", soulequipmentmerchant);
     }
     public function soulequipmentshelf3():void {
@@ -474,7 +475,7 @@ public function soularena():void {
         outputText("Picking the one in the middle prepared for challanges you enter there and looking around checking who if there is currently anyone up for a challange.");
         menu();
         addButton(0, "Gaunlet 1", gaunletchallange1fight1).hint("Fight 3 diff enemies one after another.");
-        //if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] == 1) addButton(1, "Gaunlet 2", gaunletchallange2).hint("Fight 4 diff enemies one after another.");
+        //if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] == 1) addButton(1, "Gaunlet 2", gaunletchallange2fight1).hint("Fight 4 diff enemies one after another.");
         //addButton(2, "Gaunlet 3", gaunletchallange3).hint("Fight 5 diff enemies one after another.");
         //addButton(3, "Gaunlet 4", gaunletchallange4).hint("Fight 6 diff enemies one after another.");
         //addButton(4, "Gaunlet 5", gaunletchallange5).hint("Fight 7 diff enemies one after another.");
@@ -534,6 +535,42 @@ public function soularena():void {
             inventory.takeItem(weaponsrange.BOWGUID, cleanupAfterCombat);
         }
     }
+	public function gaunletchallange2fight1():void {
+		clearOutput();
+		outputText("Placeholder.");
+        player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
+        if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
+        //startCombat(new GolemsDummy());
+	}
+	public function gaunletchallange2fight2():void {
+		clearOutput();
+		outputText("Placeholder.");
+        //startCombat(new GolemsDummy());
+	}
+	public function gaunletchallange2fight3():void {
+		clearOutput();
+		outputText("Placeholder.");
+        //startCombat(new GolemsDummy());
+	}
+	public function gaunletchallange2fight4():void {
+		clearOutput();
+		outputText("Placeholder.");
+        //startCombat(new GolemsDummy());
+	}
+	public function gaunletchallange2postfight():void {
+		clearOutput();
+		outputText("Placeholder.");
+        if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] >= 2) {
+			outputText("Placeholder.");
+			flags[kFLAGS.SPIRIT_STONES] += 20;
+            cleanupAfterCombat();
+		}
+		else {
+			outputText("Placeholder.");
+			flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] = 2;
+            inventory.takeItem(weaponsrange.BOWGUID, cleanupAfterCombat);
+		}
+	}
     public function restaurantShiraOfTheEast():void {
         clearOutput();
         outputText("You enter the exotic food restaurant ‘Shira of the east’ and check up the menu. Would you like to eat there?");

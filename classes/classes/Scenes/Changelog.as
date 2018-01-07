@@ -23,7 +23,7 @@ package classes.Scenes
 		private function Changelog20():void {
 			clearOutput();
 			menu();
-			outputText("<b>Version 0.8h2:</b>\n\n");
+			outputText("<b>Version 0.8h2 (Bugfixing):</b>\n\n");
 			outputText("-Max starting wrath for both monsters and PC rised from 100 to 250. PC will need 200 wrath for 2x power attack (monsters would also need 200) unless Job: Warrior perk is present.\n");
 			outputText("-Aside perk Job: Warrior also perk Job: Beast Warrior can unlock stronger than 2x Power Attacks\n");
 			outputText("-Hanging on Imp Skull will not throw PC back to main camp menu but back to menu where it can hang next one skull.\n");
@@ -38,14 +38,22 @@ package classes.Scenes
 			outputText("-Jabberwocky body parts would act as negative points to dragon score to avoid overlapping of both races bonuses.\n");
 			outputText("-Kindra archery training would progress 2x faster.\n");
 			outputText("-Manual that Chi Chi drops after beating PC in second fight unlock Soul Blast soulskill (15 turns CD, chance to stun for 3 turns and dmg scale with PC current str, int and wis)\n");
-			outputText("-Fixed bugs: Softlocks on few enemy bind specials (like Izumi or Ceraph), Wrath specials correctly list needed resource, option to send Izma to fishery before it's built, many other small fixes\n\n\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Softlocks on few enemy bind specials (like Izumi or Ceraph), Wrath specials correctly list needed resource, option to send Izma to fishery before it's built, many other small fixes\n\n");
 			outputText("<b>Version 0.8i:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("-New tier 0 misc lvl-up perk: Tough Hide. Req. Job: Beast Warrior perk and 30+ tou. Effect: Increase natural armor by 2 so long as PC have scale chitin fur or other natural armor.\n");
+			outputText("-New tier 1 misc lvl-up perk: Feral Armor. Req. Tough Hide perk and 60+ tou. Effect: Gain extra armor based on PC toughness so long as PC is naked. (Similar to agility but PC must be naked and have natural armor)\n");
+			outputText("-New tier 1 misc lvl-up perk: Claw training. Req. Any claws (form racial tf or weapon that grants claws). Effect: Gain 1 extra natural attack with your claws\n");
+			outputText("-New tier 2 misc lvl-up perk: Extra claw attack. Req. Claw training perk and Any claws (form racial tf or weapon that grants claws). Effect: When attacking with your claws, add an additional attack striking up to 3 times\n");
+			outputText("-New tier   lvl-up perk: . Req. . Effect: \n");
+			outputText("-Having natural claws add toggle in combat menu to switch between normal or feral combat style. Only when PC not use any weapon (after few special exceptions) can benefit from feral combat style - when PC can attack more than once a turn fatigue costs will be halfed.\n");
+			outputText("-New melee weapon: Claws - obtainable by buying in weapon shop in He'Xin'Dao. 0 atk, 10% to cause bleed, 100 gems, is one of special exception weapons, which could be used without loosing benefits from using feral combat style.\n");
+			outputText("-All bleed effects not req. to lower enemy armor below 10. Also previous 50% chance for bleed effect was lowered to 25% for hooked gaunlets.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-Fixed bugs: \n");
+			outputText("-Fixed bugs: \n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
 			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
 			outputText("-New event perk: Gargoyle. Gained in ritual to become gargoyle by picking own blood. Effects: \n");
@@ -54,18 +62,22 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Bat, Vampire, 
+			outputText("-\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Bat, Vampire, Cat, Cheshire cat
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("-New event related perk: Elemental Conjurer Mind and Body Dedication. Req.: Using Five-colored Elemental Pearl, which can be found after beating 2nd boss of Hidden Cave dungeon. Effect: It'll neutralize negative effects on max Str/Tou/Spe due to picking Elemental Conjurer Dedication perk.\n");
 			outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			outputText("-New event related perk: Elemental Conjurer Mind and Body Sacrifice. Req.: Using xxx, which can be found xxx. Effect: It'll neutralize negative effects on max Str/Tou/Spe due to picking Elemental Conjurer Sacrifice perk.\n");
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
@@ -96,6 +108,14 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): dodać yuki-onna TF
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -229,8 +249,6 @@ package classes.Scenes
 			outputText("-Perk Lifeline will now scale with NG tiers with amount of HP restored (it peak bonus will be reached in NG5+). Perks Bigger Golem Bag 1-6 would now increase pernament golems storage space by 1 when PC get perk Master Golem Maker.\n");
 			outputText("-Elemental Conjurer Dedication perk was moved from tier 1 to tier 4 increasing wisdom req. for it to 120. Perk Elemental Contract Rank 2 no longer req. this perk and it was moved as one of req. perks to perk Elemental Contract Rank 5. Elemental Conjurer Sacrifice perk was moved from tier 4 to tier 6 increasing wisdom req. for it to 220.");
 			outputText(" Mana cost reduction for perks Stronger Elemental Bond and Strongest Elemental Bond reduced to 20 and 40 from 30 and 90. Amount of mana used by attacking elementals increased by 25%.\n");
-			outputText("-Pearl gained by beating enemy in Hidden Cave will be giving Elemental Conjurer Mind and Body Dedication perk instead of Elemental Conjurer Mind and Body Resolve. For all PC's that used it already it will just replace perks and for those that still need to use this item will be granting new perk.\n");
-			outputText("-New event related perk: Elemental Conjurer Mind and Body Dedication. Req.: Using Five-colored Elemental Pearl, which can be found after beating 2nd boss of Hidden Cave dungeon. Effect: It'll neutralize negative effects on max Str/Tou/Spe due to picking Elemental Conjurer Dedication perk.\n");
 			outputText("-New event related perk: Jungle’s Wanderer. Req.: having 6 or more points in Red Panda race score. Effect: +35 to the Evasion percentage.\n");
 			outputText("-New tier 3 misc lvl-up perk: Speedy Recuperation. Req. Speedy Recovery perk. Effect: Regain fatigue +100% out of combat / +200% in combat faster\n");
 			outputText("-New tier 3 misc lvl-up perk: Recuperation Sleep. Req. Speedy Recovery perk. Effect: Gain +100% boost to health and fatigue recovery during sleep\n");

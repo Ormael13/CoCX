@@ -374,12 +374,18 @@ public class PerkLib
 		public static const ChimericalBodyPerfectStage:PerkType = mk("Chimerical Body: Perfect Stage", "Chimerical Body: Perfect Stage",
 				".",
 				"You choose the 'Chimerical Body: Perfect Stage' perk.  Coś coś!");	
+		public static const ChimericalBodySemiPerfectStage:PerkType = mk("Chimerical Body: Semi-Perfect Stage", "Chimerical Body: Semi-Perfect Stage",
+				"prless lub completed stage.",
+				"You choose the 'Chimerical Body: Semi-Perfect Stage' perk.  Coś coś!");	
 		public static const ChimericalBodyUltimateStage:PerkType = mk("Chimerical Body: Ultimate Stage", "Chimerical Body: Ultimate Stage",
 				".",
 				"You choose the 'Chimerical Body: Ultimate Stage' perk.  Coś coś!");	
 		public static const ChimericalBodyStage:PerkType = mk("Chimerical Body:  Stage", "Chimerical Body:  Stage",
 				"prless lub completed stage.",
 				"You choose the 'Chimerical Body:  Stage' perk.  Coś coś!");	
+		public static const ClawTraining:PerkType = mk("Claw training", "Claw training",
+				"Gain 1 extra natural attack with your claws.",
+				"You choose the 'Claw training' perk, gain 1 extra natural attack with your claws!");
 		public static const ColdBlooded:PerkType = mk("Cold Blooded", "Cold Blooded",
 				"Reduces minimum lust by up to 20, down to min of 20. Caps min lust at 80.",
 				"You choose the 'Cold Blooded' perk.  Thanks to increased control over your desires, your minimum lust is reduced! (Caps minimum lust at 80. Won't reduce minimum lust below 20 though.)");
@@ -611,6 +617,9 @@ public class PerkLib
 		public static const ExpertGolemMaker:PerkType = mk("Expert Golem Maker", "Expert Golem Maker",
 				"Your proficiency in making golems allows them to attack even flying enemies, lower by 5% chance of core shattering and storing more golems.",
 				"You choose 'Expert Golem Maker' perk, increasing your proficiency in making golems.");
+		public static const ExtraClawAttack:PerkType = mk("Extra claw attack", "Extra claw attack",
+				"When attacking with your claws, add an additional attack striking up to 3 times.",
+				"You choose the 'Extra claw attack' perk, gaining an additional attack with your claws!");
 		public static const EyesOfTheHunterAdept:PerkType = mk("Eyes of the Hunter (Adept)", "Eyes of the Hunter (Adept)",
 				"Allow see another few infomations about enemy (as long it apply to current viewed enemy) (req. 50+ sensitivity).",
 				"You choose the 'Eyes of the Hunter (Adept)' perk, allowing you to gain wider than before range of information about enemy you fight.");
@@ -620,6 +629,9 @@ public class PerkLib
 		public static const EyesOfTheHunterNovice:PerkType = mk("Eyes of the Hunter (Novice)", "Eyes of the Hunter (Novice)",
 				"Allow see few more than usual infomations about enemy (req. 25+ sensitivity).",
 				"You choose the 'Eyes of the Hunter (Novice)' perk, allowing you to gain more information about enemy you fight.");
+		public static const FeralArmor:PerkType = mk("Feral Armor", "Feral Armor",
+				"Gain extra armor based on your toughness so long as you’re naked and have any form of natural armor.",
+				"You choose the 'Feral Armor' perk, gaining extra armor as long you have any natural armor and are naked!");
 		public static const FertilityMinus:PerkType = mk("Fertility-", "Fertility-",
 				"Decreases fertility rating by 15 and cum volume by up to 30%. (Req's libido of less than 25.)",
 				"You choose the 'Fertility-' perk, making it harder to get pregnant.  It also decreases your cum volume by up to 30% (if appropriate)!");
@@ -1509,6 +1521,9 @@ public class PerkLib
 		public static const Tornado:PerkType = mk("Tornado", "Tornado",
 				"Increasing damage of aoe like whirlwind by 100% of base value.",
 				"You choose the 'Tornado' perk, increasing damage by aoe specials like whirlwind.");
+		public static const ToughHide:PerkType = mk("Tough Hide", "Tough Hide",
+				"Increase your natural armor by 2 so long as you have scale chitin fur or other natural armor.",
+				"You choose the 'Tough Hide' perk, increase your natural armor as long you have any natural armor!");
 		public static const TrachealSystem:PerkType = mk("Tracheal System", "Tracheal System",
 				"Your body posses rudimentary respiratory system of the insects.",
 				"You choose the 'Tracheal System' perk, by becoming much more insect-like your body started to denvelop crude version of insects breathing system.");
@@ -3362,15 +3377,17 @@ public class PerkLib
             //	JobArtificer.requireInt(25)
             //				.requireWis(25);
             JobBeastWarrior.requireStr(20)
-                    .requireTou(20)
-                    .requireSpe(20);
+					.requireTou(20)
+					.requireSpe(20);
             PrimalFuryI.requirePerk(JobBeastWarrior);
             PrimalFuryII.requirePerk(PrimalFuryI)
-                    .requireLevel(2)
-                    .requireNGPlus(1);
+					.requireLevel(2)
+					.requireNGPlus(1);
             PrimalFuryIII.requirePerk(PrimalFuryII)
-                    .requireLevel(4)
-                    .requireNGPlus(2);
+					.requireLevel(4)
+					.requireNGPlus(2);
+			ToughHide.requirePerk(JobBeastWarrior)
+					.requireTou(30);
             //Tier 1
             //Speedy Recovery - Regain Fatigue 50% faster.
             SpeedyRecovery.requireLevel(6);
@@ -3440,6 +3457,14 @@ public class PerkLib
             PrimalFuryVI.requirePerk(PrimalFuryV)
                     .requireLevel(10)
                     .requireNGPlus(5);
+            FeralArmor.requirePerk(ToughHide)
+					.requireLevel(6)
+					.requireTou(60);
+            ClawTraining.requirePerk(JobBeastWarrior)
+					.requireLevel(6)
+					.requireCustomFunction(function (player:Player):Boolean {
+					return player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon();
+					}, "Any claws");
             //Tier 2
             Survivalist2.requireLevel(12)
                     .requireHungerEnabled()
@@ -3529,6 +3554,11 @@ public class PerkLib
                     .requireTou(50)
                     .requireSpe(50)
                     .requireLevel(12);
+            ExtraClawAttack.requireLevel(12)
+                    .requirePerk(ClawTraining)
+					.requireCustomFunction(function (player:Player):Boolean {
+					return player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon();
+					}, "Any claws");
             //Tier 3
             ChimericalBodyAdvancedStage.requirePerk(ChimericalBodyBasicStage)
                     .requireLevel(18)
@@ -3584,7 +3614,7 @@ public class PerkLib
                     .requireLib(45)
                     .requireSen(45);
             //	if(player.internalChimeraScore() >= 10 && requirePerk(ChimericalBodyAdvancedStage)) {
-            //		ChimericalBodyPerfectStage;
+            //		ChimericalBodySemiPerfectStage;
             //	}
             Tornado.requireLevel(24)
                     .requireStr(75)
@@ -3614,8 +3644,8 @@ public class PerkLib
             //				 .requirePerk(MasterGolemMaker);
             //Tier 5
             //	if (requireMinLevel(30)) {
-            //		if (player.internalChimeraScore() >= 15 && requirePerk(ChimericalBodyPerfectStage)) {
-            //			ChimericalBodyUltimateStage;
+            //		if (player.internalChimeraScore() >= 15 && requirePerk(ChimericalBodySemiPerfectStage)) {
+            //			ChimericalBodyPerfectStage;
             //		}
             /*		DeityJobMunchkin.requirePerk(JobWarlord)
                                             .requirePerk(JobMonk)
@@ -3673,6 +3703,10 @@ public class PerkLib
                     .requireInt(125)
                     .requireWis(125)
                     .requirePerk(MasterGolemMaker);
+            //	if (requireMinLevel(36)) {
+            //		if (player.internalChimeraScore() >= 31 && requirePerk(ChimericalBodyPerfectStage)) {
+            //			ChimericalBodyUltimateStage;
+            //		}
             //Tier 7
             CycloneStage5.requireLevel(42)
                     .requireStr(160)

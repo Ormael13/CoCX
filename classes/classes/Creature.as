@@ -2516,7 +2516,7 @@ public class Creature extends Utils
 		//Fists and fist weapons
 		public function isFistOrFistWeapon():Boolean
 		{
-			return game.player.weaponName == "fists" || game.player.weapon == game.weapons.S_GAUNT || game.player.weapon == game.weapons.H_GAUNT || game.player.weapon == game.weapons.MASTGLO || game.player.weapon == game.weapons.KARMTOU || game.player.weapon == game.weapons.YAMARG;
+			return game.player.weaponName == "fists" || game.player.weapon == game.weapons.S_GAUNT || game.player.weapon == game.weapons.H_GAUNT || game.player.weapon == game.weapons.MASTGLO || game.player.weapon == game.weapons.KARMTOU || game.player.weapon == game.weapons.YAMARG || game.player.weapon == game.weapons.CLAWS;
 
 		}
 
@@ -2571,10 +2571,30 @@ public class Creature extends Utils
 
 		}
 
+		//Unhindered related acceptable armor types
+		public function meetUnhinderedReq():Boolean
+		{
+			return game.player.armorName == "arcane bangles" || game.player.armorName == "practically indecent steel armor" || game.player.armorName == "revealing chainmail bikini" || game.player.armorName == "slutty swimwear" || game.player.armorName == "barely-decent bondage straps" || game.player.armorName == "nothing";
+
+		}
+
 		//Natural Armor (need at least to partialy covering whole body)
 		public function haveNaturalArmor():Boolean
 		{
 			return game.player.findPerk(PerkLib.ThickSkin) >= 0 || game.player.skin.hasFur() || game.player.skin.hasChitin() || game.player.skin.hasScales() || game.player.skin.hasBark() || game.player.skin.hasDragonScales() || game.player.skin.hasBaseOnly(Skin.STONE);
+
+		}
+
+		//Natural Claws (arm types and weapons that can substitude them)
+		public function haveNaturalClaws():Boolean
+		{
+			return game.player.armType == Arms.CAT || game.player.armType == Arms.DEVIL || game.player.armType == Arms.DRAGON || game.player.armType == Arms.FOX || game.player.armType == Arms.GARGOYLE || game.player.armType == Arms.LION || game.player.armType == Arms.LIZARD || game.player.armType == Arms.RAIJU
+			 || game.player.armType == Arms.RED_PANDA || game.player.armType == Arms.SALAMANDER || game.player.armType == Arms.WOLF;
+
+		}
+		public function haveNaturalClawsTypeWeapon():Boolean
+		{
+			return game.player.weapon == game.weapons.CLAWS;
 
 		}
 
@@ -3819,7 +3839,7 @@ public class Creature extends Utils
 			if (findPerk(PerkLib.Evade) >= 0) chance += 10;
 			if (findPerk(PerkLib.Flexibility) >= 0) chance += 6;
 			if (findPerk(PerkLib.Misdirection) >= 0 && armorName == "red, high-society bodysuit") chance += 10;
-			if (findPerk(PerkLib.Unhindered) >= 0 && (armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "nothing")) chance += 10;
+			if (findPerk(PerkLib.Unhindered) >= 0 && meetUnhinderedReq()) chance += 10;
 			if (findPerk(PerkLib.JunglesWanderer) >= 0) chance += 35;
 			if (hasStatusEffect(StatusEffects.Illusion)) chance += 10;
 			if (hasStatusEffect(StatusEffects.Flying)) chance += 20;
@@ -3862,7 +3882,7 @@ public class Creature extends Utils
 			if (findPerk(PerkLib.Evade) >= 0 && (roll < 10)) return "Evade";
 			if (findPerk(PerkLib.Flexibility) >= 0 && (roll < 6)) return "Flexibility";
 			if (findPerk(PerkLib.Misdirection) >= 0 && armorName == "red, high-society bodysuit" && (roll < 10)) return "Misdirection";
-			if (findPerk(PerkLib.Unhindered) >= 0 && (armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "nothing") && (roll < 10)) return "Unhindered";
+			if (findPerk(PerkLib.Unhindered) >= 0 && meetUnhinderedReq() && (roll < 10)) return "Unhindered";
 			if (findPerk(PerkLib.JunglesWanderer) >= 0 && (roll < 35)) return "Jungle's Wanderer";
 			if (hasStatusEffect(StatusEffects.Illusion) && (roll < 10)) return "Illusion";
 			if (hasStatusEffect(StatusEffects.Flying) && (roll < 20)) return "Flying";

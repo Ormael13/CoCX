@@ -38,7 +38,7 @@ public class PerkMenu extends BaseContent {
 			addButton(button++, "Perk Up", CoC.instance.playerInfo.perkBuyMenu);
 		}
 		addButton(4, "Database", perkDatabase);
-		if (player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0) {
+		if (player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0 || (player.findPerk(PerkLib.JobBeastWarrior) >= 0 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()))) {
 			outputText("\n<b>You can adjust your melee attack settings.</b>");
 			addButton(5, "Melee Opt",doubleAttackOptions);
 		}
@@ -63,6 +63,7 @@ public class PerkMenu extends BaseContent {
 	}
 
 	public function doubleAttackOptions():void {
+		var toggleflag:Function = curry(toggleFlag,doubleAttackOptions);
 		clearOutput();
 		menu();
 		outputText("You will always attack ");
@@ -82,9 +83,14 @@ public class PerkMenu extends BaseContent {
 		if (doubleAttackVal == 1) outputText(" using 95% of your current strength");
 		outputText(".");
 		outputText("\n\nYou can change it to different amount of attacks.");
+		if (player.findPerk(PerkLib.JobBeastWarrior) >= 0 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) {
+			outputText("\n\nYou can choose between fighting feral or normaly with your fists.");
+			if (flags[kFLAGS.FERAL_COMBAT_MODE] == 0) outputText("\n\nFighting Style: <b>Normal</b>");
+			if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1) outputText("\n\nFighting Style: <b>Feral</b>");
+		}
 
         var maxCurrentAttacks:int = combat.maxCurrentAttacks();
-		var maxAttacks:int = Math.max(combat.maxFistAttacks(),combat.maxLargeAttacks(),combat.maxCommonAttacks());
+		var maxAttacks:int = Math.max(combat.maxFistAttacks(),combat.maxClawsAttacks(),combat.maxLargeAttacks(),combat.maxCommonAttacks());
 
 		if (doubleAttackVal != 0) addButton(0, "All Single", doubleAttackStyle,0);
 		if (maxAttacks >= 2 && doubleAttackVal != 1) {
@@ -107,6 +113,8 @@ public class PerkMenu extends BaseContent {
 			if (maxCurrentAttacks < 6) addButtonDisabled(11, "All Hexe", "You current melee weapon not allow to use this option");
 			else addButton(11, "All Hexa", doubleAttackStyle,5);
 		}
+		if (player.findPerk(PerkLib.JobBeastWarrior) >= 0 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()) && flags[kFLAGS.FERAL_COMBAT_MODE] != 0) addButton(4, "Normal", toggleflag, kFLAGS.FERAL_COMBAT_MODE, false);
+		if (player.findPerk(PerkLib.JobBeastWarrior) >= 0 && flags[kFLAGS.FERAL_COMBAT_MODE] != 1) addButton(9, "Feral", toggleflag ,kFLAGS.FERAL_COMBAT_MODE, true);
 
 		if (CoC.instance.inCombat) addButton(14, "Back", combat.combatMenu);
         else addButton(14, "Back", displayPerks);
