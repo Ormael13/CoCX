@@ -194,7 +194,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	}
 
 	public function findArmor():void {
-		_armorFound = true;
+		instance._armorFound = true;
 	}
 
 	public function birthScene():void {
