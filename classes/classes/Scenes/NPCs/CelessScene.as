@@ -1,5 +1,6 @@
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
+import classes.CoC;
 import classes.EventParser;
 import classes.ItemType;
 import classes.PregnancyStore;
@@ -25,7 +26,26 @@ import flash.utils.getQualifiedClassName;
         private static const _ageIsAdult:int = -1;
         private static const _ageShouldDoBirth:int = -2;
         private static const _ageCanMeetNightmare:int = -3;
+		private static const _ageDidPregnancy:int = -4;
 
+		public static function canMeetUnicorn():Boolean{
+			return (
+					playerIsVirgin()
+					&& CoC.instance.player.level >= 20
+					&& !CoC.instance.player.isPregnant()
+					&& !instance.armorFound
+					&& instance._age == 0
+			);
+		}
+
+		private static function playerIsVirgin():Boolean {
+			return CoC.instance.player.hasVirginVagina() ||
+			       ((CoC.instance.player.isMale() || CoC.instance.player.isGenderless()) &&
+			        CoC.instance.player.ass.analLooseness == 0);
+		}
+		public static function canGetArmour():Boolean{
+			return instance.isCompanion() && !instance.armorFound;
+		}
         private static function canMeetNightmare():Boolean{
             return instance._age == _ageCanMeetNightmare;
         }
@@ -54,7 +74,7 @@ import flash.utils.getQualifiedClassName;
 			Camp.removeFollower(_instance);
 			_instance = null;
 		}
-		
+
 		public override function save(saveto:*):void{
 			saveto.celess = {
 				myClass:getQualifiedClassName(this),
@@ -90,8 +110,8 @@ import flash.utils.getQualifiedClassName;
 			if (_age > 0){_age++; }
 			return false;
 		}
-		
-		public function timeChangeLarge():Boolean 
+
+		public function timeChangeLarge():Boolean
 		{
 			if (_age > 720){
 				growUpScene();
@@ -102,7 +122,7 @@ import flash.utils.getQualifiedClassName;
 			return false;
 		}
         //endregion
-		
+
 		override public function get Name():String{
 			return _name;
 		}
@@ -116,16 +136,16 @@ import flash.utils.getQualifiedClassName;
         public function get isAdult():Boolean{
 			return _age == _ageIsAdult;
 		}
-		
-		public function get armorFound():Boolean 
+
+		public function get armorFound():Boolean
 		{
 			return _armorFound;
 		}
-		public function findArmor():void 
+		public function findArmor():void
 		{
 			_armorFound = true;
 		}
-		
+
 		override public function campDescription(buttons:ButtonDataList, menuType:int = -1):void
 		{
 			if (isCompanion(menuType)){
@@ -163,15 +183,12 @@ import flash.utils.getQualifiedClassName;
 		}
 
 		public function birthScene():void{
-			if (_age == 0){
-				_age =-2;
+			if (_age == _ageDidPregnancy){
+				_age = _ageShouldDoBirth;
 			}
 			else{
-				clearOutput();
-				doNext(nameScene);
-				display("strings/birth/intro");
 				mainView.nameBox.text = "";
-				flushOutputTextToGUI();
+				scene("strings/birth/intro",null,nameScene);
 			}
             function nameScene():void{
                 if (mainView.nameBox.text == ""){
@@ -180,10 +197,9 @@ import flash.utils.getQualifiedClassName;
                     mainView.nameBox.text = "Celess";
                     mainView.nameBox.visible = true;
                     mainView.nameBox.width = 165;
-                    menu();
                     mainView.nameBox.x = mainView.mainText.x + 5;
                     mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
-                    addButton(0, "Next", nameScene);
+                    doNext(nameScene);
                     return;
                 }
                 _age = 1;
@@ -192,18 +208,12 @@ import flash.utils.getQualifiedClassName;
                 if (player.cor > ((100 + player.corruptionTolerance()) / 2)){_corruption = 30;}
 
                 mainView.nameBox.visible = false;
-                clearOutput();
-                doNext(camp.returnToCampUseFourHours);
-                display("strings/birth/nameScene",{$name:_name});
-                flushOutputTextToGUI();
-
+                scene("strings/birth/nameScene",{$name:_name},camp.returnToCampUseFourHours);
             }
 		}
 
 		private function growUpScene():void{
-			clearOutput();
-			doNext(camp.returnToCampUseOneHour);
-			display("strings/growUp", {$name:_name});
+			scene("strings/growUp", {$name:_name});
 			if (isCorrupt){
 				addButton(0, "Masturbate Her", incestScene, "masturbateHer");
 				if (player.isMaleOrHerm()){
@@ -213,7 +223,6 @@ import flash.utils.getQualifiedClassName;
 					addButton(2, "Centuar Toys", incestScene, "centaurToys");
 				} else { addButtonDisabled(2, "Centaur Toys");}
 			}
-			flushOutputTextToGUI();
 		}
 
 		private function incestScene(sceneName:String):void{
@@ -232,10 +241,6 @@ import flash.utils.getQualifiedClassName;
 		}
 
 		public function itemImproveMenu():void{
-			/* Of the items in this array, the following are complete:
-			 * CTPALAD - Centuar Paladin Armor
-			 * CTBGUAR - Centuar Blackguard Armor
-			 */
 			var improvableItems:Array = [
 					[weapons.BFSWORD,		weapons.NPHBLDE,		weapons.EBNYBLD],
 					[weapons.MASTGLO,		weapons.KARMTOU,		weapons.YAMARG],
@@ -277,7 +282,7 @@ import flash.utils.getQualifiedClassName;
             switch(stage){
                 case 0:
 					scene("strings/forest-unicorn/intro/intro");
-					if(player.hasVirginVagina()){
+					if(playerIsVirgin()){
 						display("strings/forest-unicorn/intro/virgin");
 						menu();
                         addButton(0, "Okay", celessUnicornIntro, (player.isMale() || player.isGenderless())?2:3);
@@ -309,6 +314,7 @@ import flash.utils.getQualifiedClassName;
                     scene("strings/forest-unicorn/okay-female", {$wasMale:wasMale, $isTaur:player.isTaur()});
                     player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);
                     inventory.takeItem(shields.SANCTYN, camp.returnToCampUseOneHour);
+	                _age = _ageDidPregnancy;
                     break;
                 case 4:
                     scene("strings/forest-unicorn/fuck-her");
