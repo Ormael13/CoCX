@@ -221,7 +221,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			bd.requireFatigue(physicalCost(20));
 		}
 		if (player.weaponRangePerk == "Bow" && player.hasStatusEffect(StatusEffects.KnowsSidewinder)) {
-			buttons.add("Sidewinder", archerSidewinder).hint("The pinacle art of the hunter. Once per day draw on your fatigue to shoot a single heavily infused arrow at a beast or animal morph. This attack never miss.");
+			bd = buttons.add("Sidewinder", archerSidewinder).hint("The pinacle art of the hunter. Once per day draw on your fatigue to shoot a single heavily infused arrow at a beast or animal morph. This attack never miss.");
+			if (player.hasStatusEffect(StatusEffects.CooldownSideWinder)) bd.disable("<b>You already used Sidewinder today.</b>\n\n");
 		}
 		if (monster.plural) {
 			// Whipping
@@ -2698,6 +2699,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
+		player.createStatusEffect(StatusEffects.CooldownSideWinder,0,0,0,0);
 		outputText("You draw but a single arrow infusing a massive amount of magical energy in the bolt which begin to emit a ");
 		if (player.cor > 50) outputText("red");
 		else if (player.cor < 50) outputText("white");
@@ -2777,7 +2779,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		outputText("You ready your [weapon] and prepare to spin it around trying to hit as many " + monster.a + monster.short + " as possible.  ");
+		outputText("You grab six arrows and display them like a fan on your bow as a swift motion.  ");
 		fatigue(300, USEFATG_BOW);
 		var damage:Number = 0;
 		damage += player.spe;
@@ -2831,7 +2833,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		damage = Math.round(damage);
 		damage = doDamage(damage);
-		outputText("You grab six arrows and display them like a fan on your bow as a swift motion. Holding your weapon horizontally you shoot them all spraying " + monster.a + monster.short + " with projectile then do it a second time showering them with an extra volley of arrows. (<b><font color=\"#800000\">" + damage + "</font></b>) ");
+		outputText("Holding your weapon horizontally you shoot them all spraying " + monster.a + monster.short + " with projectile then do it a second time showering them with an extra volley of arrows. (<b><font color=\"#800000\">" + damage + "</font></b>) ");
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		flags[kFLAGS.ARROWS_SHOT] += 12;

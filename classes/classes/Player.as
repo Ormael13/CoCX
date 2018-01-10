@@ -2206,10 +2206,12 @@ use namespace CoC;
 				internalChimeraRatingCounter -= 3;
 			if (findPerk(PerkLib.ChimericalBodyAdvancedStage) >= 0)
 				internalChimeraRatingCounter -= 4;
-			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
+			if (findPerk(PerkLib.ChimericalBodySemiPerfectStage) >= 0)
 				internalChimeraRatingCounter -= 5;
-			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				internalChimeraRatingCounter -= 6;
+			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+				internalChimeraRatingCounter -= 7;
 			End("Player","racialScore");
 			return internalChimeraRatingCounter;
 		}

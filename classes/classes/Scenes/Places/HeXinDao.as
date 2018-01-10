@@ -540,22 +540,22 @@ public function soularena():void {
 		outputText("Placeholder.");
         player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
         if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
-        //startCombat(new GolemsDummy());
+        //startCombat(new ()); L6 Solo
 	}
 	public function gaunletchallange2fight2():void {
 		clearOutput();
 		outputText("Placeholder.");
-        //startCombat(new GolemsDummy());
+        //startCombat(new ()); L9 Solo
 	}
 	public function gaunletchallange2fight3():void {
 		clearOutput();
 		outputText("Placeholder.");
-        //startCombat(new GolemsDummy());
+        //startCombat(new ()); L12 Solo
 	}
 	public function gaunletchallange2fight4():void {
 		clearOutput();
 		outputText("Placeholder.");
-        //startCombat(new GolemsDummy());
+        //startCombat(new ()); L15 Gr Boss Golems z hidden Cave z podniesionymi statami ^^
 	}
 	public function gaunletchallange2postfight():void {
 		clearOutput();

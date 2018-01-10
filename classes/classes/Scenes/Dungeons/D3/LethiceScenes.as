@@ -730,7 +730,7 @@ public class LethiceScenes extends BaseContent
 			
 			outputText("\n\n<i>“So powerful, so self-righteous... and here you are, kneeling before me like so many before you. Still, I have to give you credit, Champion. You got so much further than most: I almost broke a sweat breaking you.");
 			if (monster.lust < 50 && monster.HP > (monster.maxHP() * 0.5)) outputText(" Almost.");
-			outputText("”</i> She licks her lips, and gives your chin a sharp release. <i>“I think you deserve a special... reward... for your efforts, Champion. Oh, except that’s not what you are anymore, is it? A Champion doesn’t bow down, hoping a pretty little demon doesn’t rip [hisHer] soul out, does [heShe]? No, that’s something I’d expect my dog to do. Is that what you are: a dog?”</i>");
+			outputText("”</i> She licks her lips, and gives your chin a sharp release. <i>“I think you deserve a special... reward... for your efforts, Champion. Oh, except that’s not what you are anymore, is it? A Champion doesn’t bow down, hoping a pretty little demon doesn’t rip [hisHer] soul out, does [he]? No, that’s something I’d expect my dog to do. Is that what you are: a dog?”</i>");
 			
 			outputText("\n\nYou look away from Lethice, trying");
 			if (hpVictory) outputText(" to hide just how turned on she’s left you... how close you are to orgasm, just in need of her lurid touch");

@@ -664,6 +664,7 @@ public function celessIntroForced():void {
 			addButton(6, "Ascensus", AddTheStaffs).hint("Add set of items for Ascensus.");
 			addButton(7, "DualLAxes", AddDualMinoAxes).hint("Add 1 pair of Large Axes.");
 			addButton(8, "NineTailWhip", AddNineTailWhip).hint("Add 1 Nine Tail Whip.");
+			addButton(9, "Hodr's Bow", AddHodrsBow).hint("Add 1 Hodr's Bow.");
 		//	addButton(9, "L Ayo Arm", AddLightAyoArmor).hint("Add 1 Light Ayo Armor for testing purposes.");
 			addButton(10, "SeerHairpin", AddTheSeerHairpin).hint("Add 1 Seer's Hairpin.");
 			addButton(11, "D.Scythe", AddTheDemonicScythe).hint("Add 1 Demonic Scythe.");
@@ -839,6 +840,10 @@ public function celessIntroForced():void {
 		public function AddGnollThrowingAxes():void {
 			outputText("\n\n<b>(Gained 1 Gnoll Throwing Axes!)</b>\n\n");
 			inventory.takeItem(weaponsrange.GTHRAXE, EquipmentMenu);
+		}
+		public function AddHodrsBow():void {
+			outputText("\n\n<b>(Gained 1 Hodr's Bow!)</b>\n\n");
+			inventory.takeItem(weaponsrange.BOWHODR, EquipmentMenu);
 		}
 		public function AddTheSeerHairpin():void {
 			outputText("\n\n<b>(Gained 1 Seer's Hairpin!)</b>\n\n");

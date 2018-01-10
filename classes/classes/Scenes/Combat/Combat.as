@@ -125,8 +125,8 @@ public class Combat extends BaseContent {
 	public function maxCurrentAttacks():int {
 		if (player.weaponPerk == "Dual Large" || player.weaponPerk == "Dual" || player.weaponPerk == "Staff") return 1;
 		else if (player.weaponPerk == "Large") return maxLargeAttacks();
-		else if (player.isFistOrFistWeapon()) return maxFistAttacks();
-		else if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) return maxClawsAttacks();
+		else if (flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && player.isFistOrFistWeapon()) return maxFistAttacks();
+		else if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.weaponName == "fists" && player.haveNaturalClaws()) || player.haveNaturalClawsTypeWeapon())) return maxClawsAttacks();
 		else return maxCommonAttacks();
 	}
 	public function maxBowAttacks():int {
@@ -474,7 +474,7 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 	internal function buildOtherActions(buttons:ButtonDataList):void {
 		var bd:ButtonData;
 		buttons.add("Surrender",combat.surrender,"Fantasize about your opponent in a sexual way so much it would fill up your lust you'll end up getting raped.");
-		if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.Combo)) {
+		if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.Combo) || (player.hasPerk(PerkLib.JobBeastWarrior) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()))) {
 			buttons.add("Melee Opt",CoC.instance.perkMenu.doubleAttackOptions,"You can adjust your melee attack settings.");
 		}
 		if (player.hasPerk(PerkLib.DoubleStrike) || player.hasPerk(PerkLib.ElementalArrows) || player.hasPerk(PerkLib.Cupid)) {
@@ -699,11 +699,11 @@ public function basemeleeattacks():void {
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 4) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 3) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 2) {
-				if (player.hasPerk(PerkLib.ComboMaster) || (player.hasPerk(PerkLib.ExtraClawAttack) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()))) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
+				if (player.hasPerk(PerkLib.ComboMaster) || (player.hasPerk(PerkLib.ExtraClawAttack) && flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()))) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
 				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 			}
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 1) {
-				if (player.hasPerk(PerkLib.Combo) || (player.hasPerk(PerkLib.ClawTraining) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()))) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
+				if (player.hasPerk(PerkLib.Combo) || (player.hasPerk(PerkLib.ClawTraining) && flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()))) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
 				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 			}
 			else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
@@ -1717,6 +1717,7 @@ public function multiArrowsStrike():void {
 		if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom < 10) {
 			outputText("  You do not have enough venom to apply on the " + ammoWord + " tip!");
 		}
+		if (player.weaponRangeName == "Hodr's bow" && !monster.hasStatusEffect(StatusEffects.Blind)) monster.createStatusEffect(StatusEffects.Blind,1,0,0,0);
 		outputText("\n");
 		flags[kFLAGS.ARROWS_SHOT]++;
 		bowPerkUnlock();

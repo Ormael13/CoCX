@@ -4884,11 +4884,6 @@ public final class Mutations extends MutationsHelper
 				}
 				changes++;
 			}
-			if (type == 2 && rand(3) == 0 && changes < changeLimit && (player.faceType == Face.CAT || player.faceType == Face.CAT_CANINES)) {
-				outputText("\n\nYou suddenly feel like smiling. Why actually look so serious? Everything is easier if you take it with a smile and a laughter. Perhaps it's just you taking on that mentality or it's that weird wonderfruit you took but now you feel you could smile forever showing that wide grin of yours. <b>You now have a cheshire smile.</b>");
-				setFaceType(Face.CAT);
-				changes++;
-			}
 			//CAT TOUNGE CUZ WHY NOT?
 			if (player.faceType == Face.CAT && player.tongueType != Tongue.CAT && rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\nYour tongue suddenly feel weird. You try to stick it out to see what’s going on and discover it changed to look similar to the tongue of a cat. At least you will be able to groom yourself properly with <b>your new cat tongue.</b>");

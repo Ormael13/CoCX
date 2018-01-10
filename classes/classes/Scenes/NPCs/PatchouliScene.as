@@ -310,7 +310,7 @@ package classes.Scenes.NPCs
 				addButton(1, "Talk", patchouleTalkMenu);
 				addButton(2, "Give Item", patchouleGiveItem);
 				addButton(3, "Sex Her", patchouleSexHer);
-				if (!visitedAllAreas()) addButton(5, "Yes", patchouliExploreLuckyWheel).hint("Let her lead you to new places.");
+				addButton(5, "Yes", patchouliExploreLuckyWheel).hint("Let her lead you to new places.");
 				addButton(14, "Back", camp.campSlavesMenu);
 			}
 		}

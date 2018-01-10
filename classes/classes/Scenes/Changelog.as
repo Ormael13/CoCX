@@ -49,11 +49,11 @@ package classes.Scenes
 			outputText("-Having natural claws add toggle in combat menu to switch between normal or feral combat style. Only when PC not use any weapon (after few special exceptions) can benefit from feral combat style - when PC can attack more than once a turn fatigue costs will be halfed.\n");
 			outputText("-New melee weapon: Claws - obtainable by buying in weapon shop in He'Xin'Dao. 0 atk, 10% to cause bleed, 100 gems, is one of special exception weapons, which could be used without loosing benefits from using feral combat style.\n");
 			outputText("-All bleed effects not req. to lower enemy armor below 10. Also previous 50% chance for bleed effect was lowered to 25% for hooked gaunlets.\n");
+			outputText("-New range weapon: Hodr's Bow - obtained by . 22 atk, costing 2200 gems, -5% accuracy, Artifact Bow, each arrow can apply blind debuff on enemy.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-Fixed bugs: \n\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Patchouli not leading PC to Wonderland from camp, Sidewinder not having daily cooldown counter\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
 			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
 			outputText("-New event perk: Gargoyle. Gained in ritual to become gargoyle by picking own blood. Effects: \n");

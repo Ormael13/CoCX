@@ -2498,7 +2498,7 @@ public class Creature extends Utils
 		//Artifacts Bows
 		public function isArtifactBow():Boolean
 		{
-			return game.player.weaponRange == game.weaponsrange.BOWGUID;
+			return game.player.weaponRange == game.weaponsrange.BOWGUID || game.player.weaponRange == game.weaponsrange.BOWHODR;
 
 		}
 
