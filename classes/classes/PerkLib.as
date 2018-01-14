@@ -987,6 +987,9 @@ public class PerkLib
 		public static const JobHunter:PerkType = mk("Job: Hunter", "Job: Hunter",
 				"You've trained in hunter combat.",
 				"You choose 'Job: Hunter' perk, training yourself to became Hunter.");
+		public static const JobHealer:PerkType = mk("Job: Healer", "Job: Healer",
+				"You've trained in using more effectively heal spells and effects.",
+				"You choose 'Job: Healer' perk, training yourself to became Healer.");
 		public static const JobKnight:PerkType = mk("Job: Knight", "Job: Knight",
 				"You've trained in combat using shields and heaviest armors.",
 				"You choose 'Job: Knight' perk, training yourself to became Knight.");
@@ -1119,6 +1122,18 @@ public class PerkLib
 		public static const Medicine:PerkType = mk("Medicine", "Medicine",
 				"Grants 15% chance per round of cleansing poisons/drugs from your body. Increases HP restoration on rest.",
 				"You choose the 'Medicine' perk, giving you a chance to remove debilitating poisons automatically! Also, increases HP restoration on rest.");
+		public static const NaturalHealingEpic:PerkType = mk("Natural healing (Epic)", "Natural healing (Epic)",
+				"Incease healing power by 60% and lower healing spells mana costs by 25%.",
+				"You choose the 'Natural healing (Epic)' perk, increasing healing spells effectivnes and lowering their costs.");
+		public static const NaturalHealingLegendary:PerkType = mk("Natural healing (Legendary)", "Natural healing (Legendary)",
+				"Incease healing power by 50% and lower healing spells mana costs by 20%.",
+				"You choose the 'Natural healing (Legendary)' perk, increasing healing spells effectivnes and lowering their costs.");
+		public static const NaturalHealingMajor:PerkType = mk("Natural healing (Major)", "Natural healing (Major)",
+				"Incease healing power by 40% and lower healing spells mana costs by 15%.",
+				"You choose the 'Natural healing (Major)' perk, increasing healing spells effectivnes and lowering their costs.");
+		public static const NaturalHealingMinor:PerkType = mk("Natural healing (Minor)", "Natural healing (Minor)",
+				"Incease healing power by 30% and lower healing spells mana costs by 10%.",
+				"You choose the 'Natural healing (Minor)' perk, increasing healing spells effectivnes and lowering their costs.");
 		public static const Metamorph:PerkType = mk("Metamorph", "Metamorph",
 				"Mold your own body using genetic memory and soulforce.",
 				"You choose the 'Metamorph' perk, giving you a chance to mold your own body.");
@@ -1439,6 +1454,13 @@ public class PerkLib
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
 				"You choose the 'Spellpower' perk.  Thanks to your sizeable intellect and willpower, you are able to more effectively use magic, boosting base spell effects by 10% and mana pool by 15.");
+		public static const SpellpowerHealing:PerkType = mk("Spellpower: Healing", "Spellpower: Healing",
+				"[if (player.wis>=50)" +
+						"Increases base spell strength by 20% and mana pool by 30." +
+						"|" +
+						"<b>You are too dumb to gain benefit from this perk.</b>" +
+						"]",
+				"You choose the 'Spellpower: Healing' perk.  Thanks to your sizeable intellect and willpower, you are able to more effectively use magic, boosting base healing spell effects by 20% and mana pool by 30.");
 		public static const Spellsword:PerkType = mk("Spellsword", "Spellsword",
 				"Start every battle with Charge Weapon enabled, if you meet White Magic requirements before it starts.",
 				"You choose the 'Spellsword' perk. You start every battle with Charge Weapon effect, as long as your Lust is not preventing you from casting it before battle.");
@@ -1613,9 +1635,15 @@ public class PerkLib
 		public static const Whirlwind:PerkType = mk("Whirlwind", "Whirlwind",
 				"Whirlwind special deal increased damage based on current strength.",
 				"You choose the 'Whirlwind' perk, making your Whirlwind special stronger.");
+		public static const WhirlwindFeral:PerkType = mk("Feral Whirlwind", "Feral Whirlwind",
+				"Feral Whirlwind special deal increased damage based on current strength and unarmed bonus.",
+				"You choose the 'Feral Whirlwind' perk, making your Feral Whirlwind special stronger.");
 		public static const WildQuiver:PerkType = mk("Wild Quiver", "Wild Quiver",
 				"You grab and shoot arrows at blinding speed, gaining an extra shot.",
 				"You choose the 'Wild Quiver' perk, you combine it with triple attack and manyshot to shoot up to 5 times.");
+		public static const WisenedHealer:PerkType = mk("Wisened Healer", "Wisened Healer",
+				"Adds wisdom based scaling to healing spells at cost of doubling spells costs.",
+				"You choose the 'Wisened Healer' perk. Increasing healing spells effects based on current wisdom.");
 		public static const JobSoulArcher:PerkType = mk("Job: Soul Archer", "Job: Soul Archer",
 				"You've trained in art of combining soulforce and arrows.",
 				"You choose 'Job: Soul Archer' perk, training yourself to became Soul Archer.");
@@ -1914,6 +1942,7 @@ public class PerkLib
 		public static const LightningNature:PerkType = mk("Lightning Nature", "Lightning Nature", "");
 		public static const LightningVulnerability:PerkType = mk("Lightning Vulnerability", "Lightning Vulnerability", "");
 		public static const MonsterRegeneration:PerkType = mk("Monster Regeneration", "Monster Regeneration", "");
+		public static const NoGemsLost:PerkType = mk("No Gems Lost", "No Gems Lost", "");
 		public static const ShieldWielder:PerkType = mk("Shield wielder", "Shield wielder", "");
 		public static const TeaseResistance:PerkType = mk("Tease Resistance", "Tease Resistance", "");
 		//public static const EnemyGooType:PerkType = mk("", "", "");
@@ -2589,7 +2618,7 @@ public class PerkLib
             Spellpower.requirePerk(JobSorcerer)
                     .requireInt(50);
             UnlockMind.requireInt(20);
-            ManaAffinityI.requirePerk(JobSorcerer)
+            ManaAffinityI.requireAnyPerk(JobSorcerer, JobHealer)
                     .requireInt(25);
             ManaAffinityII.requirePerk(ManaAffinityI)
                     .requireInt(45)
@@ -3465,6 +3494,15 @@ public class PerkLib
 					.requireCustomFunction(function (player:Player):Boolean {
 					return player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon();
 					}, "Any claws");
+            JobHealer.requireLevel(6)
+                    .requireInt(30)
+                    .requireWis(30);
+            SpellpowerHealing.requireLevel(6)
+                    .requirePerk(JobHealer)
+                    .requireWis(50);
+            WisenedHealer.requireLevel(6)
+                    .requirePerk(JobHealer)
+                    .requireWis(50);
             //Tier 2
             Survivalist2.requireLevel(12)
                     .requireHungerEnabled()
@@ -3487,6 +3525,8 @@ public class PerkLib
                     .requirePerk(JobBarbarian);
             Whipping.requireLevel(12)
                     .requirePerk(JobEromancer);
+            WhirlwindFeral.requireLevel(12)
+                    .requirePerk(JobBeastWarrior);
             CatlikeNimblenessEvolved.requireLevel(12)
 					.requirePerk(CatlikeNimbleness)
 					.requireCustomFunction(function (player:Player):Boolean {
@@ -3559,13 +3599,17 @@ public class PerkLib
 					.requireCustomFunction(function (player:Player):Boolean {
 					return player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon();
 					}, "Any claws");
+            NaturalHealingMinor.requireLevel(12)
+                    .requirePerk(WisenedHealer)
+                    .requireInt(15)
+                    .requireWis(60);
             //Tier 3
             ChimericalBodyAdvancedStage.requirePerk(ChimericalBodyBasicStage)
                     .requireLevel(18)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 6;
                     }, "Six racial perks");
-            JobWarlord.requireAnyPerk(Whirlwind, Whipping)
+            JobWarlord.requireAnyPerk(Whirlwind, Whipping, WhirlwindFeral)
                     .requireLevel(18);
             PowerSweep.requireLevel(18)
                     .requireStr(60)
@@ -3598,6 +3642,10 @@ public class PerkLib
 							  .requireLevel(18);
             RecuperationSleep.requirePerk(SpeedyRecovery)
 							 .requireLevel(18);
+            NaturalHealingMajor.requireLevel(18)
+                    .requirePerk(NaturalHealingMinor)
+                    .requireInt(20)
+                    .requireWis(80);
             //Tier 4
             JobAllRounder.requireLevel(24)
                     .requirePerk(JobGuardian)
@@ -3642,6 +3690,10 @@ public class PerkLib
                     .requirePerk(MasterGolemMaker);
             //.requireLevel(24)
             //				 .requirePerk(MasterGolemMaker);
+            NaturalHealingEpic.requireLevel(24)
+                    .requirePerk(NaturalHealingMajor)
+                    .requireInt(25)
+                    .requireWis(100);
             //Tier 5
             //	if (requireMinLevel(30)) {
             //		if (player.internalChimeraScore() >= 15 && requirePerk(ChimericalBodySemiPerfectStage)) {
@@ -3689,6 +3741,10 @@ public class PerkLib
 							  .requireLevel(30);
             RejuvenationSleep.requirePerk(RecuperationSleep)
 							 .requireLevel(30);
+            NaturalHealingLegendary.requireLevel(30)
+                    .requirePerk(NaturalHealingEpic)
+                    .requireInt(30)
+                    .requireWis(120);
             //Tier 6
             CycloneStage4.requireLevel(36)
                     .requireStr(120)

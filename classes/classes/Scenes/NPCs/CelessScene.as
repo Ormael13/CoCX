@@ -248,7 +248,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			//	[armors.LMARMOR,		armors.,			armors.]
 		];
 		clearOutput();
-		outputText("<b>Placeholder Text Here</b>");
+		outputText("<b>Celess can empower items using materials gems and her innate magic to bless/corrupt gear. Would you like her to create a legendary item and in that case which?</b>");
 
 		var selectfrom:int = isCorrupt ? 2 : 1;
 		var selectMenu:ButtonDataList = new ButtonDataList();

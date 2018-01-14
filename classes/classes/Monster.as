@@ -355,6 +355,9 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.DoubleAttackLarge) >= 0) temp += 20;
 			if (findPerk(PerkLib.TripleAttackLarge) >= 0) temp += 20;
 			if (findPerk(PerkLib.PrimalFuryI) >= 0) temp += (10 * (1 + newGamePlusMod()));
+			if (findPerk(PerkLib.FeralArmor) >= 0) temp += 20;
+			if (findPerk(PerkLib.ClawTraining) >= 0) temp += 20;
+			if (findPerk(PerkLib.ExtraClawAttack) >= 0) temp += 30;
 			if (findPerk(PerkLib.BasicTranquilness) >= 0) temp += 15;
 			if (findPerk(PerkLib.HalfStepToImprovedTranquilness) >= 0) temp += 25;
 			if (findPerk(PerkLib.ImprovedTranquilness) >= 0) temp += 40;
@@ -381,8 +384,8 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.Berzerker) >= 0) temp += 100;
 			if (findPerk(PerkLib.Lustzerker) >= 0) temp += 100;
 			if (findPerk(PerkLib.PrestigeJobBerserker) >= 0) temp += 200;
-			if (findPerk(PerkLib.Rage) >= 0) temp += 250;
-			if (findPerk(PerkLib.Anger) >= 0) temp += 300;
+			if (findPerk(PerkLib.Rage) >= 0) temp += 300;
+			if (findPerk(PerkLib.Anger) >= 0) temp += 400;
 			return temp;
 		}
 		
@@ -419,6 +422,8 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.Mage) >= 0 && inte >= 50) temp += 30;
 			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) temp += 15;
 			if (findPerk(PerkLib.JobSorcerer) >= 0) temp += 15;
+			if (findPerk(PerkLib.JobHealer) >= 0) temp += 30;
+			if (findPerk(PerkLib.SpellpowerHealing) >= 0 && wis >= 50) temp += 30;
 			if (findPerk(PerkLib.ArcaneRegenerationMinor) >= 0) {
 				var tempmulti:Number = 1;
 				tempmulti += 0.1;
@@ -2112,6 +2117,10 @@ import flash.utils.getQualifiedClassName;
 				wis += (5 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.JobGuardian)) tou += (5 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.JobHealer)) {
+				inte += (5 * (1 + newGamePlusMod()));
+				wis += (5 * (1 + newGamePlusMod()));
+			}
 			if (hasPerk(PerkLib.JobHunter)) {
 				spe += (10 * (1 + newGamePlusMod()));
 				inte += (5 * (1 + newGamePlusMod()));

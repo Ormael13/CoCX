@@ -132,6 +132,15 @@ public class BaseCombatContent extends BaseContent {
 	protected function spellCostBlack(mod:Number):Number {
 		return combat.magic.spellCostBlackImpl(mod);
 	}
+	protected function healCost(mod:Number):Number {
+		return combat.magic.healCostImpl(mod);
+	}
+	protected function healCostWhite(mod:Number):Number {
+		return combat.magic.healCostWhiteImpl(mod);
+	}
+	protected function healCostBlack(mod:Number):Number {
+		return combat.magic.healCostBlackImpl(mod);
+	}
 	protected function spellMod():Number {
 		return combat.magic.spellModImpl();
 	}
@@ -140,6 +149,15 @@ public class BaseCombatContent extends BaseContent {
 	}
 	protected function spellModWhite():Number {
 		return combat.magic.spellModWhiteImpl();
+	}
+	protected function healMod():Number {
+		return combat.magic.healModImpl();
+	}
+	protected function healModBlack():Number {
+		return combat.magic.healModBlackImpl();
+	}
+	protected function healModWhite():Number {
+		return combat.magic.healModWhiteImpl();
 	}
 	protected function calcInfernoMod(damage:Number):int {
 		return combat.magic.calcInfernoModImpl(damage);

@@ -86,6 +86,27 @@ public class CombatMagic extends BaseCombatContent {
 		mod = Math.round(mod * 100)/100;
 		return mod;
 	}
+	internal function healCostImpl(mod:Number):Number {
+		var costPercent:Number = 100;
+		if (player.hasPerk(PerkLib.SeersInsight)) costPercent -= (100 * player.perkv1(PerkLib.SeersInsight));
+		if (player.hasPerk(PerkLib.SpellcastingAffinity)) costPercent -= player.perkv1(PerkLib.SpellcastingAffinity);
+		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
+		if (player.hasPerk(PerkLib.WizardsAndDaoistsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
+		if (player.hasPerk(PerkLib.WizardsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
+		if (player.hasPerk(PerkLib.WisenedHealer)) costPercent += 100;
+		if (player.hasPerk(PerkLib.NaturalHealingMinor)) costPercent -= 10;
+		if (player.hasPerk(PerkLib.NaturalHealingMajor)) costPercent -= 15;
+		if (player.hasPerk(PerkLib.NaturalHealingEpic)) costPercent -= 20;
+		if (player.hasPerk(PerkLib.NaturalHealingLegendary)) costPercent -= 25;
+		if (player.jewelry == jewelries.FOXHAIR) costPercent -= 20;
+		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
+		if (player.weapon == weapons.N_STAFF) costPercent += 200;
+		if (healModImpl() > 1) costPercent += Math.round(healModImpl() - 1);
+		mod *= costPercent/100;
+		if (mod < 5) mod = 5;
+		mod = Math.round(mod * 100)/100;
+		return mod;
+	}
 	internal function spellCostWhiteImpl(mod:Number):Number {
 		//Addiditive mods
 		var costPercent:Number = 100;
@@ -110,6 +131,28 @@ public class CombatMagic extends BaseCombatContent {
 		mod = Math.round(mod * 100)/100;
 		return mod;
 	}
+	internal function healCostWhiteImpl(mod:Number):Number {
+		var costPercent:Number = 100;
+		if (player.hasPerk(PerkLib.Ambition)) costPercent -= (100 * player.perkv2(PerkLib.Ambition));
+		if (player.hasPerk(PerkLib.SeersInsight)) costPercent -= (100 * player.perkv1(PerkLib.SeersInsight));
+		if (player.hasPerk(PerkLib.SpellcastingAffinity)) costPercent -= player.perkv1(PerkLib.SpellcastingAffinity);
+		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
+		if (player.hasPerk(PerkLib.WizardsAndDaoistsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
+		if (player.hasPerk(PerkLib.WizardsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
+		if (player.hasPerk(PerkLib.WisenedHealer)) costPercent += 100;
+		if (player.hasPerk(PerkLib.NaturalHealingMinor)) costPercent -= 10;
+		if (player.hasPerk(PerkLib.NaturalHealingMajor)) costPercent -= 15;
+		if (player.hasPerk(PerkLib.NaturalHealingEpic)) costPercent -= 20;
+		if (player.hasPerk(PerkLib.NaturalHealingLegendary)) costPercent -= 25;
+		if (player.jewelry == jewelries.FOXHAIR) costPercent -= 20;
+		if (player.weapon == weapons.PURITAS || player.weapon == weapons.ASCENSU) costPercent -= 15;
+		if (player.weapon == weapons.N_STAFF) costPercent += 200;
+		if (healModWhiteImpl() > 1) costPercent += Math.round(healModWhiteImpl() - 1);
+		mod *= costPercent/100;
+		if (mod < 5) mod = 5;
+		mod = Math.round(mod * 100)/100;
+		return mod;
+	}
 	internal function spellCostBlackImpl(mod:Number):Number {
 		//Addiditive mods
 		var costPercent:Number = 100;
@@ -131,6 +174,28 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.BloodMage) && mod < 5) mod = 5;
 		else if(mod < 2) mod = 2;
+		mod = Math.round(mod * 100)/100;
+		return mod;
+	}
+	internal function healCostBlackImpl(mod:Number):Number {
+		var costPercent:Number = 100;
+		if (player.hasPerk(PerkLib.Obsession)) costPercent -= (100 * player.perkv2(PerkLib.Obsession));
+		if (player.hasPerk(PerkLib.SeersInsight)) costPercent -= (100 * player.perkv1(PerkLib.SeersInsight));
+		if (player.hasPerk(PerkLib.SpellcastingAffinity)) costPercent -= player.perkv1(PerkLib.SpellcastingAffinity);
+		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
+		if (player.hasPerk(PerkLib.WizardsAndDaoistsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
+		if (player.hasPerk(PerkLib.WizardsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
+		if (player.hasPerk(PerkLib.WisenedHealer)) costPercent += 100;
+		if (player.hasPerk(PerkLib.NaturalHealingMinor)) costPercent -= 10;
+		if (player.hasPerk(PerkLib.NaturalHealingMajor)) costPercent -= 15;
+		if (player.hasPerk(PerkLib.NaturalHealingEpic)) costPercent -= 20;
+		if (player.hasPerk(PerkLib.NaturalHealingLegendary)) costPercent -= 25;
+		if (player.jewelry == jewelries.FOXHAIR) costPercent -= 20;
+		if (player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU) costPercent -= 15;
+		if (player.weapon == weapons.N_STAFF) costPercent += 200;
+		if (healModBlackImpl() > 1) costPercent += Math.round(healModBlackImpl() - 1);
+		mod *= costPercent/100;
+		if (mod < 5) mod = 5;
 		mod = Math.round(mod * 100)/100;
 		return mod;
 	}
@@ -179,6 +244,39 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.Maleficium)) mod += 1;
 		return mod;
 	}
+	internal function healModImpl():Number {
+		var mod:Number = 1;
+		if(player.hasPerk(PerkLib.SpellpowerHealing) && player.wis >= 50) mod += .2;
+		if(player.hasPerk(PerkLib.NaturalHealingMinor)) mod += .3;
+		if(player.hasPerk(PerkLib.NaturalHealingMajor)) mod += .4;
+		if(player.hasPerk(PerkLib.NaturalHealingEpic)) mod += .5;
+		if(player.hasPerk(PerkLib.NaturalHealingLegendary)) mod += .6;
+		if(player.hasPerk(PerkLib.Obsession)) {
+			mod += player.perkv1(PerkLib.Obsession);
+		}
+		if(player.hasPerk(PerkLib.Ambition)) {
+			mod += player.perkv1(PerkLib.Ambition);
+		}
+		if(player.hasPerk(PerkLib.WizardsFocus)) {
+			mod += player.perkv1(PerkLib.WizardsFocus);
+		}
+		if(player.hasPerk(PerkLib.WizardsAndDaoistsFocus)) {
+			mod += player.perkv1(PerkLib.WizardsAndDaoistsFocus);
+		}
+		if(player.hasPerk(PerkLib.SagesKnowledge)) {
+			mod += player.perkv1(PerkLib.SagesKnowledge);
+		}
+		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
+		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
+		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
+		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
+		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
+		if (player.shield == shields.MABRACE) mod += .5;
+		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
+		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
+		if (player.weapon == weapons.ASCENSU) mod += .15;
+		return mod;
+	}
 	internal function spellModWhiteImpl():Number {
 		var mod:Number = 1;
 		if(player.hasPerk(PerkLib.Archmage) && player.inte >= 75) mod += .3;
@@ -223,6 +321,39 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.Maleficium)) mod += 1;
 		return mod;
 	}
+	internal function healModWhiteImpl():Number {
+		var mod:Number = 1;
+		if(player.hasPerk(PerkLib.SpellpowerHealing) && player.wis >= 50) mod += .2;
+		if(player.hasPerk(PerkLib.NaturalHealingMinor)) mod += .3;
+		if(player.hasPerk(PerkLib.NaturalHealingMajor)) mod += .4;
+		if(player.hasPerk(PerkLib.NaturalHealingEpic)) mod += .5;
+		if(player.hasPerk(PerkLib.NaturalHealingLegendary)) mod += .6;
+		if(player.hasPerk(PerkLib.Ambition)) {
+			mod += player.perkv2(PerkLib.Ambition);
+		}
+		if(player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) {
+			mod += player.statusEffectv2(StatusEffects.BlessingOfDivineMarae);
+		}
+		if(player.hasPerk(PerkLib.WizardsFocus)) {
+			mod += player.perkv1(PerkLib.WizardsFocus);
+		}
+		if(player.hasPerk(PerkLib.WizardsAndDaoistsFocus)) {
+			mod += player.perkv1(PerkLib.WizardsAndDaoistsFocus);
+		}
+		if(player.hasPerk(PerkLib.SagesKnowledge)) {
+			mod += player.perkv1(PerkLib.SagesKnowledge);
+		}
+		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
+		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
+		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
+		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
+		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
+		if (player.shield == shields.MABRACE) mod += .5;
+		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
+		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
+		if (player.weapon == weapons.PURITAS || player.weapon == weapons.ASCENSU) mod += .15;
+		return mod;
+	}
 	internal function spellModBlackImpl():Number {
 		var mod:Number = 1;
 		if(player.hasPerk(PerkLib.Archmage) && player.inte >= 75) mod += .3;
@@ -262,6 +393,36 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
 		if (player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU) mod += .15;
 		if (player.hasStatusEffect(StatusEffects.Maleficium)) mod += 1;
+		return mod;
+	}
+	internal function healModBlackImpl():Number {
+		var mod:Number = 1;
+		if(player.hasPerk(PerkLib.SpellpowerHealing) && player.wis >= 50) mod += .2;
+		if(player.hasPerk(PerkLib.NaturalHealingMinor)) mod += .3;
+		if(player.hasPerk(PerkLib.NaturalHealingMajor)) mod += .4;
+		if(player.hasPerk(PerkLib.NaturalHealingEpic)) mod += .5;
+		if(player.hasPerk(PerkLib.NaturalHealingLegendary)) mod += .6;
+		if(player.hasPerk(PerkLib.Obsession)) {
+			mod += player.perkv2(PerkLib.Obsession);
+		}
+		if(player.hasPerk(PerkLib.WizardsFocus)) {
+			mod += player.perkv1(PerkLib.WizardsFocus);
+		}
+		if(player.hasPerk(PerkLib.WizardsAndDaoistsFocus)) {
+			mod += player.perkv1(PerkLib.WizardsAndDaoistsFocus);
+		}
+		if(player.hasPerk(PerkLib.SagesKnowledge)) {
+			mod += player.perkv1(PerkLib.SagesKnowledge);
+		}
+		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
+		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
+		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
+		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
+		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
+		if (player.shield == shields.MABRACE) mod += .5;
+		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
+		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
+		if (player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU) mod += .15;
 		return mod;
 	}
 	
@@ -533,6 +694,16 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			}
 		}
+		if (player.hasStatusEffect(StatusEffects.KnowsHeal)) {
+			bd = buttons.add("Heal", spellHeal)
+						.hint("Heal will attempt to use white magic to instnatly close your wounds and restore your body.  " +
+							  "\n\nMana Cost: " + healCostWhite(30) + "");
+			if (badLustForWhite) {
+				bd.disable("You are far too aroused to focus on white magic.");
+			} else if(player.mana < healCostWhite(30)) {
+				bd.disable("Your mana is too low to cast this spell.");
+			}
+		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
 			bd = buttons.add("Blizzard", spellBlizzard)
 						.hint("Blizzard is a potent ice based defense spell that will reduce power of any fire based attack used against the user.  " +
@@ -561,13 +732,15 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsHeal)) {
-			bd = buttons.add("Heal", spellHeal)
-						.hint("Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  " +
-							  "\n\nMana Cost: " + spellCostBlack(30) + "");
+		if (player.hasStatusEffect(StatusEffects.KnowsRegenerate)) {
+			bd = buttons.add("Regenerate", spellRegenerate)
+						.hint("Regenerate will attempt to trigger health recovery over time, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  " +
+							  "\n\nMana Cost: " + healCostBlack(50) + "");
 			if (badLustForBlack) {
 				bd.disable("You aren't turned on enough to use any black magics.");
-			} else if(player.mana < spellCostBlack(30)) {
+			} else if (player.hasStatusEffect(StatusEffects.PlayerRegenerate)) {
+				bd.disable("You are already under the effects of Regenerate and cannot cast it again.");
+			} else if(player.mana < healCostBlack(50)) {
 				bd.disable("Your mana is too low to cast this spell.");
 			}
 		}
@@ -625,7 +798,16 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		
 		// GRAY MAGIC
-		//	if (player.hasStatusEffect(StatusEffects.Knows)) buttons.add("	1st spell (non-fire or non-ice based) goes here
+		if (player.hasStatusEffect(StatusEffects.KnowsNosferatu)) {
+			bd = buttons.add("Nosferatu", spellNosferatu)
+						.hint("Nosferatu will deals damage and heals the user for 100% of damage done.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  " +
+							  "\n\nMana Cost: " + healCost(50) + "");
+			if (badLustForGrey) {
+				bd.disable("You can't use any grey magics.");
+			} else if(player.mana < healCost(50)) {
+				bd.disable("Your mana is too low to cast this spell.");
+			}
+		}
 		if (player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
 			if (player.hasStatusEffect(StatusEffects.ManaShield)) {
 				buttons.add("Deactiv MS", DeactivateManaShield).hint("Deactivate Mana Shield.\n");
@@ -638,6 +820,7 @@ public class CombatMagic extends BaseCombatContent {
 			}
 		}
 		//	if (player.hasStatusEffect(StatusEffects.KnowsWereBeast)) buttons.add("Were-beast",	were-beast spell goes here
+		//	if (player.hasStatusEffect(StatusEffects.Knows)) buttons.add("	next spell (non-fire or non-ice based) goes here
 		if (player.hasStatusEffect(StatusEffects.KnowsFireStorm)) {
 			bd = buttons.add("Fire Storm", spellFireStorm).hint("Drawning your own lust and force of the willpower to fuel radical change in the surrounding you can call forth an Fire Storm that will attack enemies in a wide area.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  \n\n<b>AoE Spell.</b>  \n\nMana Cost: " + spellCost(200) + "");
 			if (badLustForGrey) {
@@ -752,10 +935,10 @@ public class CombatMagic extends BaseCombatContent {
 		if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		else enemyAI();
 	}
-	public function spellHeal():void {
+	public function spellRegenerate():void {
 		clearOutput();
 		doNext(combatMenu);
-		useMana(30, 8);
+		useMana(50, 11);
 		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();
@@ -779,7 +962,10 @@ public class CombatMagic extends BaseCombatContent {
 			if(player.gender == 3) outputText(vaginaDescript(0) + " and [cocks] overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
 			dynStats("lib", .25, "lus", 15);
 		}
-		else spellHealEffect();
+		else {
+			player.createStatusEffect(StatusEffects.PlayerRegenerate,7,0,0,0);
+			outputText(" This should hold up for about seven rounds.");
+		}
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		statScreenRefresh();
@@ -788,29 +974,6 @@ public class CombatMagic extends BaseCombatContent {
 		spellPerkUnlock();
 		if(player.lust >= player.maxLust()) doNext(endLustLoss);
 		else enemyAI();
-	}
-
-	public function spellHealEffect():void {
-		var damage:Number = inteligencescalingbonus() * spellModBlack();
-		if (player.unicornScore() >= 5) damage *= ((player.unicornScore() - 4) * 0.5);
-		if (player.alicornScore() >= 6) damage *= ((player.alicornScore() - 5) * 0.5);
-		if (player.armorName == "skimpy nurse's outfit") damage *= 1.2;
-		if (player.weaponName == "unicorn staff") damage *= 1.5;
-		//Determine if critical heal!
-		var crit:Boolean = false;
-		var critHeal:int = 5;
-		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-			if (player.inte <= 100) critHeal += (player.inte - 50) / 50;
-			if (player.inte > 100) critHeal += 10;
-		}
-		if (rand(100) < critHeal) {
-			crit = true;
-			damage *= 1.75;
-		}
-		damage = Math.round(damage);
-		outputText("You flush with success as your wounds begin to knit <b>(<font color=\"#008000\">+" + damage + "</font>)</b>.");
-		if (crit == true) outputText(" <b>*Critical Heal!*</b>");
-		HPChange(damage,false);
 	}
 	/**
 	 * Generates from (x1,x2,x3,y1,y2) log-scale parameters (a,b,c) that will return:
@@ -1339,6 +1502,54 @@ public class CombatMagic extends BaseCombatContent {
 		player.removeStatusEffect(StatusEffects.ManaShield);
 		enemyAI();
 	}
+	
+	public function spellNosferatu():void {
+		clearOutput();
+		doNext(combatMenu);
+		useMana(50, 9);
+		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			(monster as FrostGiant).giantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		outputText("You focus on your magic, trying to draw on it without enhancing your own arousal.\n");
+		//30% backfire!
+		var backfire:int = 30;
+		if (player.hasPerk(PerkLib.FocusedMind)) backfire = 20;
+		backfire -= (player.inte * 0.15);
+		if (backfire < 15) backfire = 15;
+		else if (backfire < 5 && player.hasPerk(PerkLib.FocusedMind)) backfire = 5;
+		if(rand(100) < backfire) {
+			outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ");
+			if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.");
+			if(player.gender == 1) {
+				if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.");
+				else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.");
+			}
+			if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.");
+			if(player.gender == 3) outputText(vaginaDescript(0) + " and [cocks] overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
+			dynStats("lib", .25, "lus", 15);
+		}
+		else {
+			var nosferatu:Number = 0;
+			nosferatu += player.inte;
+			if (player.hasPerk(PerkLib.WisenedHealer)) nosferatu += player.wis;
+			outputText(" You chant as your shadow suddenly takes on a life of its own, sprouting a multitude of mouths and tentacles which seek and tear into " + monster.a + monster.short + " shadow");
+			if (monster.plural == true) outputText("s");
+			outputText(", gorging on its owner’s life force to replenish your own. Soon enough the spell is over and your shadow returns to you, leaving you better for the wear.");
+			outputText(" <b><font color=\"#800000\">(" + nosferatu + ")");
+			monster.HP -= nosferatu;
+			HPChange(nosferatu,false);
+		}
+		outputText("\n\n");
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		statScreenRefresh();
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		if(player.lust >= player.maxLust()) doNext(endLustLoss);
+		else enemyAI();
+	}
 
 	/**
 	 * Generates from (x1,x2,x3,y1,y2) log-scale parameters (a,b,c) that will return:
@@ -1492,6 +1703,50 @@ public class CombatMagic extends BaseCombatContent {
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		enemyAI();
+	}
+	public function spellHeal():void {
+		clearOutput();
+		doNext(combatMenu);
+		useMana(30, 10);
+		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			(monster as FrostGiant).giantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		spellHealEffect();
+		outputText("\n\n");
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		statScreenRefresh();
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		if(player.lust >= player.maxLust()) doNext(endLustLoss);
+		else enemyAI();
+	}
+	public function spellHealEffect():void {
+		var heal:Number = 0;
+		heal += inteligencescalingbonus();
+		if (player.hasPerk(PerkLib.WisenedHealer)) heal += wisdomscalingbonus();
+		heal *= healModWhite();
+		if (player.unicornScore() >= 5) heal *= ((player.unicornScore() - 4) * 0.5);
+		if (player.alicornScore() >= 6) heal *= ((player.alicornScore() - 5) * 0.5);
+		if (player.armorName == "skimpy nurse's outfit") heal *= 1.2;
+		if (player.weaponName == "unicorn staff") heal *= 1.5;
+		//Determine if critical heal!
+		var crit:Boolean = false;
+		var critHeal:int = 5;
+		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
+			if (player.inte <= 100) critHeal += (player.inte - 50) / 50;
+			if (player.inte > 100) critHeal += 10;
+		}
+		if (rand(100) < critHeal) {
+			crit = true;
+			heal *= 1.75;
+		}
+		heal = Math.round(heal);
+		outputText("You chant a magical song of healing and recovery and your wounds start knitting themselves shut in response. <b>(<font color=\"#008000\">+" + heal + "</font>)</b>.");
+		if (crit == true) outputText(" <b>*Critical Heal!*</b>");
+		HPChange(heal,false);
 	}
 //(20) Blind – reduces your opponent's accuracy, giving an additional 50% miss chance to physical attacks.
 	public function spellBlind():void {

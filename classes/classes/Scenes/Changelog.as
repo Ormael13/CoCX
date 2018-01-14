@@ -42,18 +42,35 @@ package classes.Scenes
 			outputText("<b>Version 0.8i:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-New tier 0 misc lvl-up perk: Tough Hide. Req. Job: Beast Warrior perk and 30+ tou. Effect: Increase natural armor by 2 so long as PC have scale chitin fur or other natural armor.\n");
-			outputText("-New tier 1 misc lvl-up perk: Feral Armor. Req. Tough Hide perk and 60+ tou. Effect: Gain extra armor based on PC toughness so long as PC is naked. (Similar to agility but PC must be naked and have natural armor)\n");
-			outputText("-New tier 1 misc lvl-up perk: Claw training. Req. Any claws (form racial tf or weapon that grants claws). Effect: Gain 1 extra natural attack with your claws\n");
-			outputText("-New tier 2 misc lvl-up perk: Extra claw attack. Req. Claw training perk and Any claws (form racial tf or weapon that grants claws). Effect: When attacking with your claws, add an additional attack striking up to 3 times\n");
-			outputText("-New tier   lvl-up perk: . Req. . Effect: \n");
+			outputText("-New tier 1 misc lvl-up perk: Feral Armor. Req. Tough Hide perk and 60+ tou. Effect: Gain extra armor based on PC toughness so long as PC is naked, +20 to max wrath. (Similar to agility but PC must be naked and have natural armor)\n");
+			outputText("-New tier 1 misc lvl-up perk: Job: Healer. Req. 30+ int and 30+ wis. Effect: +5 to max Int and Wis (scalable), +30 to max Mana, +10% to spellpower when using healing spells\n");
+			outputText("-New tier 1 misc lvl-up perk: Spellpower: Healing. Req. Job: Healer perk and 50+ wis. Effect: Increase max manay by 30 and increase all healing spells power by 20% as long PC wisdom is 50+\n");
+			outputText("-New tier 1 misc lvl-up perk: Wisened Healer. Req. Job: Healer perk and 50+ wis. Effect: Add wisdom scaling to healing spells at cost of 2x higher casting costs\n");
+			outputText("-New tier 1 misc lvl-up perk: Claw training. Req. Any claws (form racial tf or weapon that grants claws). Effect: Gain 1 extra natural attack with your claws, +20 to max wrath\n");
+			outputText("-New tier 2 misc lvl-up perk: Extra claw attack. Req. Claw training perk and Any claws (form racial tf or weapon that grants claws). Effect: When attacking with your claws, add an additional attack striking up to 3 times, +30 to max wrath\n");
+			outputText("-New tier 2 misc lvl-up perk: Feral Whirlwind. Req. Job: Beast Warrior perk. Effect: Increase by 50% base dmg of F. Whirlwind special\n");
+			outputText("-New tier 2 misc lvl-up perk: Natural healing (Minor). Req. 60+ wis, 15+ int and Wisened Healer perk. Effect: +30% healing power and -10% healing spells costs\n");
+			outputText("-New tier 3 misc lvl-up perk: Natural healing (Major). Req. 80+ wis, 20+ int and Natural healing (Minor) perk. Effect: +40% healing power and -15% healing spells costs\n");
+			outputText("-New tier 4 misc lvl-up perk: Natural healing (Epic). Req. 100+ wis, 25+ int and Natural healing (Major) perk. Effect: +50% healing power and -20% healing spells costs\n");
+			outputText("-New tier 5 misc lvl-up perk: Natural healing (Legendary). Req. 120+ wis, 30+ int and Natural healing (Epic) perk. Effect: +60% healing power and -25% healing spells costs\n");
 			outputText("-Having natural claws add toggle in combat menu to switch between normal or feral combat style. Only when PC not use any weapon (after few special exceptions) can benefit from feral combat style - when PC can attack more than once a turn fatigue costs will be halfed.\n");
 			outputText("-New melee weapon: Claws - obtainable by buying in weapon shop in He'Xin'Dao. 0 atk, 10% to cause bleed, 100 gems, is one of special exception weapons, which could be used without loosing benefits from using feral combat style.\n");
 			outputText("-All bleed effects not req. to lower enemy armor below 10. Also previous 50% chance for bleed effect was lowered to 25% for hooked gaunlets.\n");
 			outputText("-New range weapon: Hodr's Bow - obtained by . 22 atk, costing 2200 gems, -5% accuracy, Artifact Bow, each arrow can apply blind debuff on enemy.\n");
+			outputText("-First gaunlet repeatable reward was lowered to 15 spirit stones to keep in theme of 5 SS for each enemy defeated in gaunlet challanges.\n");
+			outputText("-Perk Rage give 50 more to max wrath and perk Anger 100 more to max wrath. To perk Job: Warlord req. was added option to use perk Feral Whirlwind instead of Whirlwind or Whipping. Other req. stay the same.\n");
+			outputText("-Beast Warrior PC's can use their own version of Whirlwind that req. only to have natural claws or weapons that can substitude natural claws. Almost all rest is similar to Whirlwind performed with any non-large/large weapon.\n");
+			outputText("-Healing spells will have it own spellpower and cost reduction meter. Items like Mana Bracer, Nocturnal/Unicorn Staff or all 3 Marae Bark enhanced wizard staffs, rings, perks on weapons or armors or ascension one perk would boost heal power meter too in addition to normal spellpower. Similary perks on equipment + spell affinity perk would lower costs of heal spells.\n");
+			outputText("-Perk Mana Affinity I req. changed now to 25+ int and one of two perks: Job: Sorcerer or Job: Healer\n");
+			outputText("-Black Magic spell Heal digievolv... en becoming White Magic spell with all the same effect and costs (but without chance to backfire at PC ^^). I was all the time feeling it should be white magic with some other spell taking healing-type spell among black magic spells.\n");
+			outputText("-New Black Magic spell: Regenerate. When casted succesfully will give 7 turns regeneration effect on PC.\n");
+			outputText("-New Grey Magic spell: Nosferatu. It deals damage to enemy at same time healing PC by the same amount.\n");
+			outputText("-New tier   lvl-up perk: . Req. . Effect: \n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-Fixed bugs: Patchouli not leading PC to Wonderland from camp, Sidewinder not having daily cooldown counter\n\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-\n");
+			outputText("-Fixed bugs: Patchouli not leading PC to Wonderland from camp, Sidewinder not having daily cooldown counter, Anzu missing from his palace, Chi Chi not dropping M.Gloves after first/second fight on soul arena\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
 			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
 			outputText("-New event perk: Gargoyle. Gained in ritual to become gargoyle by picking own blood. Effects: \n");
@@ -61,17 +78,11 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Bat, Vampire, Cat, Cheshire cat
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -108,17 +119,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): dodać yuki-onna TF
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

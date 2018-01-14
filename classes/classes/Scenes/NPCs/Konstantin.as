@@ -170,7 +170,8 @@ package classes.Scenes.NPCs
 		
 		public function KonstantinMainCampMenu():void {
 			clearOutput();
-			outputText("It's possible Coalsack will write some short text for this menu.\n\n");
+			outputText("Wanting to chat with the large bear-morph, you reach around where he is. Konstantin waves at you and beckons you to sit near him.\n\n");
+			outputText("\"<i>Hello, [name]! How have you been?</i>\"\n\n");
 			menu();
 			addButton(0, "Appearance", KonstantinAppearance);
 			addButton(1, "Talk", KonstantinTalkMenu);
@@ -193,6 +194,8 @@ package classes.Scenes.NPCs
 		
 		public function KonstantinTalkMenu():void {
 			clearOutput();
+			outputText("You sit at his side, and tell him that you want to chat with him a bit. He stops what he’s doing and sits to your side.\n\n");
+			outputText("\"<i>Sure, " + player.mf("man","girl") + ". I’ll always enjoy talking with you. What’s on your mind?</i>\"\n\n");
 			menu();
 			addButton(0, "Him", KonstantinTalkHim);
 			addButton(1, "His Work", KonstantinTalkHisWork);
@@ -273,7 +276,7 @@ package classes.Scenes.NPCs
 				}
 				if (player.hasItem(useables.B_CHITN)) {
 					outputText("Catching a glimpse of the piece of black chitin among your stuff, Konstantin remarks: ");
-					outputText("\"<i>That’s some carapace that probably fell off from those creepy bee creatures from the forest. Strong, flexible and durable, it won’t be hard for me to make a decent armor from those things. If you’re interested, ring me five, and I’ll make you one.</i>\"\n\n");
+					outputText("\"<i>That’s some carapace that probably fell off from those creepy bee creatures from the forest. Strong, flexible and durable, it won’t be hard for me to make a decent armor from those things. If you’re interested, bring me five, and I’ll make you one.</i>\"\n\n");
 				}
 				if (player.hasItem(useables.T_SSILK)) {
 					outputText("\"<i>How in the demon’s name you managed to get a piece of this silk? So far, it’s only produced by those disgusting, spider-like creatures from a mucky swamp quite far from there. That means, that either you beat the crap out of one of those fuckers, or you found a lost strand of this thing somewhere. Either way congratulations, as this is a very rare material. In fact, I can make a great piece of armor with it, but since i’ll have to buy some chemicals to make the thing sturdy without losing its flexible and soft properties, the price is gonna be a little higher this time.</i>\"\n\n");

@@ -12,6 +12,9 @@ import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.Scenes.Areas.Forest.TentacleBeast;
+import classes.Scenes.Areas.Mountain.HellHound;
+import classes.Scenes.Areas.Swamp.CorruptedDrider;
+import classes.Scenes.Dungeons.HiddenCave.BossGolems;
 import classes.Scenes.Places.HeXinDao.*;
 import classes.Scenes.Monsters.*;
 import classes.Scenes.NPCs.Jeniffer;
@@ -491,6 +494,7 @@ public function soularena():void {
         addButton(14, "Back", soularena);
     }
     private function arenaSelection(mon:Class):void{
+        player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
         if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
         startCombat(new mon());
         monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
@@ -504,6 +508,7 @@ public function soularena():void {
         outputText("\"<i>We start with an old timer everyone know about yet even if it is only the warm up do beware... the Dummy golems!!!</i>\"\n\n");
         outputText("A set of walking stone statues enter the arena, ready for battle. It seems you are to fight these first.\n\n");
         player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
+        player.createStatusEffect(StatusEffects.SoulArenaGaunlet, 0, 0, 0, 0);
         if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
         startCombat(new GolemsDummy());
     }
@@ -525,8 +530,8 @@ public function soularena():void {
         clearOutput();
         outputText("You exit the arena, victorious, basking in the cheering of the crowd and go to the prize counter for your reward. A woman greets you.\n\n");
         if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] >= 1) {
-            outputText("\"<i>Good show, champion. As a reward for your performance, please accept these 20 spirit stones. Please do come back again and maybe next time you could even try the harder challenge.</i>\"\n\n");
-            flags[kFLAGS.SPIRIT_STONES] += 20;
+            outputText("\"<i>Good show, champion. As a reward for your performance, please accept these 15 spirit stones. Please do come back again and maybe next time you could even try the harder challenge.</i>\"\n\n");
+            flags[kFLAGS.SPIRIT_STONES] += 15;
             cleanupAfterCombat();
         }
         else {
@@ -539,29 +544,30 @@ public function soularena():void {
 		clearOutput();
 		outputText("Placeholder.");
         player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
+        player.createStatusEffect(StatusEffects.SoulArenaGaunlet, 0, 0, 0, 0);
         if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
-        //startCombat(new ()); L6 Solo
+        startCombat(new GoblinAssassin());
 	}
 	public function gaunletchallange2fight2():void {
 		clearOutput();
 		outputText("Placeholder.");
-        //startCombat(new ()); L9 Solo
+        startCombat(new HellHound());
 	}
 	public function gaunletchallange2fight3():void {
 		clearOutput();
 		outputText("Placeholder.");
-        //startCombat(new ()); L12 Solo
+        startCombat(new CorruptedDrider());
 	}
 	public function gaunletchallange2fight4():void {
 		clearOutput();
 		outputText("Placeholder.");
-        //startCombat(new ()); L15 Gr Boss Golems z hidden Cave z podniesionymi statami ^^
+        startCombat(new BossGolems());
 	}
 	public function gaunletchallange2postfight():void {
 		clearOutput();
-		outputText("Placeholder.");
+		outputText("Placeholder...");
         if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] >= 2) {
-			outputText("Placeholder.");
+			 outputText("\"<i>Good show, champion. As a reward for your performance, please accept these 20 spirit stones. Please do come back again and maybe next time you could even try the harder challenge.</i>\"\n\n");
 			flags[kFLAGS.SPIRIT_STONES] += 20;
             cleanupAfterCombat();
 		}

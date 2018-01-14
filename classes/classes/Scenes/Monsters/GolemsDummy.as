@@ -16,7 +16,7 @@ public class GolemsDummy extends AbstractGolem
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.SoulArena)) {
+			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) {
 				golems.gaunletchallange1fight2();
 			}
 			else SceneLib.combat.finishCombat();

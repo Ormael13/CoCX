@@ -5782,6 +5782,10 @@ use namespace CoC;
 				maxWis += (5 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.JobGuardian) >= 0) maxTou += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.JobHealer) >= 0) {
+				maxInt += (5 * newGamePlusMod);
+				maxWis += (5 * newGamePlusMod);
+			}
 			if (findPerk(PerkLib.JobHunter) >= 0) {
 				maxSpe += (10 * newGamePlusMod);
 				maxInt += (5 * newGamePlusMod);
@@ -6114,6 +6118,9 @@ use namespace CoC;
 			}
 			if(hasStatusEffect(StatusEffects.HeroBane)) {
 				removeStatusEffect(StatusEffects.HeroBane);
+			}
+			if(hasStatusEffect(StatusEffects.PlayerRegenerate)) {
+				removeStatusEffect(StatusEffects.PlayerRegenerate);
 			}
 			if(hasStatusEffect(StatusEffects.Disarmed)) {
 				removeStatusEffect(StatusEffects.Disarmed);

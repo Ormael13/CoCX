@@ -40,6 +40,13 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Black Spell Effect Multiplier:</b> " + Math.round(100 * combat.spellModBlack()) + "%\n";
 		combatStats += "<b>Black Spell Cost:</b> " + combat.spellCostBlack(100) + "%\n";
 
+		combatStats += "<b>Heals Effect Multiplier:</b> " + Math.round(100 * combat.healMod()) + "%\n";
+		combatStats += "<b>Heals Cost:</b> " + combat.healCost(100) + "%\n";
+		combatStats += "<b>White Heals Effect Multiplier:</b> " + Math.round(100 * combat.healModWhite()) + "%\n";
+		combatStats += "<b>White Heals Cost:</b> " + combat.healCostWhite(100) + "%\n";
+		combatStats += "<b>Black Heals Effect Multiplier:</b> " + Math.round(100 * combat.healModBlack()) + "%\n";
+		combatStats += "<b>Black Heals Cost:</b> " + combat.healCostBlack(100) + "%\n";
+
 		if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
 			if (player.statusEffectv1(StatusEffects.Kindra) < 1)
 				combatStats += "<b>Bow Skill:</b> " + Math.round(player.statusEffectv1(StatusEffects.Kelt)) + " / 100\n";

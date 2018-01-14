@@ -1578,7 +1578,7 @@ private function campActions():void {
 	addButton(5, "Build", campBuildingSim).hint("Check your camp build options.");
 	if (player.hasPerk(PerkLib.JobElementalConjurer) >= 0 || player.hasPerk(PerkLib.JobGolemancer) >= 0) addButton(6, "Winions", campWinionsArmySim).hint("Check your options for making some Winions.");
 	else addButtonDisabled(6, "Winions", "You need to be able to make some minions that fight for you to use this option like elementals or golems...");
-	if (player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(7, "Heal", spellHealcamp).hint("Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  \n\nMana Cost: 30");
+	if (player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(7, "Heal", spellHealcamp).hint("Heal will attempt to use white magic to instantly close your wounds and restore your body.  \n\nMana Cost: 30");
 	//addButton(8, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
 	if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) addButton(8, "Fishery", VisitFishery).hint("Visit Fishery.");
 	addButton(9, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
@@ -1678,67 +1678,25 @@ public function spellHealcamp():void {
 		doNext(campActions);
 		return;
 	}
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 	useMana(30);
-	outputText("You focus on your body and its desire to end pain, trying to draw on your arousal without enhancing it.\n");
-	//30% backfire!
-	var backfire:int = 30;
-	if (player.findPerk(PerkLib.FocusedMind) >= 0) backfire = 20;
-	backfire -= (player.inte * 0.15);
-	if (backfire < 15) backfire = 15;
-	else if (backfire < 5 && player.findPerk(PerkLib.FocusedMind) >= 0) backfire = 5;
-	if(rand(100) < backfire) {
-		outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ");
-		if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.");
-		if(player.gender == 1) {
-			if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.");
-			else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.");
-		}
-		if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.");
-		if(player.gender == 3) outputText(vaginaDescript(0) + " and [cocks] overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
-		dynStats("lib", .25, "lus", 15);
+	temp = 0;
+	temp += combat.inteligencescalingbonus();
+	//temp *= spellMod();
+	if (player.unicornScore() >= 5) temp *= ((player.unicornScore() - 4) * 0.5);
+	if (player.alicornScore() >= 6) temp *= ((player.alicornScore() - 5) * 0.5);
+	if (player.armorName == "skimpy nurse's outfit") temp *= 1.2;
+	//Determine if critical heal!
+	var crit:Boolean = false;
+	var critHeal:int = 5;
+	if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) critHeal += (player.inte - 50) / 5;
+	if (rand(100) < critHeal) {
+		crit = true;
+		temp *= 1.75;
 	}
-	else {
-		temp = 0;
-		if (player.inte >= 21 && player.inte < 41) temp += (player.inte / 2 + rand((player.inte * 3) / 4));
-		if (player.inte >= 41 && player.inte < 61) temp += ((player.inte * 2) / 3 + rand(player.inte));
-		if (player.inte >= 61 && player.inte < 81) temp += ((player.inte * 5) / 6 + rand(player.inte * 1.25));
-		if (player.inte >= 81 && player.inte < 101) temp += (player.inte + rand(player.inte * 1.5));
-		if (player.inte >= 101 && player.inte < 151) temp += ((player.inte * 1.25) + rand(player.inte * 1.75));
-		if (player.inte >= 151 && player.inte < 201) temp += ((player.inte * 1.5) + rand(player.inte * 2));
-		if (player.inte >= 201 && player.inte < 251) temp += ((player.inte * 1.75) + rand(player.inte * 2.25));
-		if (player.inte >= 251 && player.inte < 301) temp += ((player.inte * 2) + rand(player.inte * 2.5));
-		if (player.inte >= 301 && player.inte < 351) temp += ((player.inte * 2.25) + rand(player.inte * 2.75));
-		if (player.inte >= 351 && player.inte < 401) temp += ((player.inte * 2.5) + rand(player.inte * 3));
-		if (player.inte >= 401 && player.inte < 451) temp += ((player.inte * 2.75) + rand(player.inte * 3.25));
-		if (player.inte >= 451 && player.inte < 501) temp += ((player.inte * 3) + rand(player.inte * 3.5));
-		if (player.inte >= 501 && player.inte < 551) temp += ((player.inte * 3.25) + rand(player.inte * 3.75));
-		if (player.inte >= 551 && player.inte < 601) temp += ((player.inte * 3.5) + rand(player.inte * 4));
-		if (player.inte >= 601 && player.inte < 651) temp += ((player.inte * 3.75) + rand(player.inte * 4.25));
-		if (player.inte >= 651 && player.inte < 701) temp += ((player.inte * 4) + rand(player.inte * 4.5));
-		if (player.inte >= 701 && player.inte < 751) temp += ((player.inte * 4.25) + rand(player.inte * 4.75));
-		if (player.inte >= 751 && player.inte < 801) temp += ((player.inte * 4.5) + rand(player.inte * 5));
-		if (player.inte >= 801 && player.inte < 851) temp += ((player.inte * 4.75) + rand(player.inte * 5.25));
-		if (player.inte >= 851 && player.inte < 901) temp += ((player.inte * 5) + rand(player.inte * 5.5));
-		if (player.inte >= 901 && player.inte < 951) temp += ((player.inte * 5.25) + rand(player.inte * 5.75));
-		if (player.inte >= 951) temp += ((player.inte * 5.5) + rand(player.inte * 6));
-		else temp += (player.inte/3 + rand(player.inte/2));
-		//temp *= spellMod();
-		if (player.unicornScore() >= 5) temp *= ((player.unicornScore() - 4) * 0.5);
-		if (player.alicornScore() >= 6) temp *= ((player.alicornScore() - 5) * 0.5);
-		if (player.armorName == "skimpy nurse's outfit") temp *= 1.2;
-		//Determine if critical heal!
-		//var crit:Boolean = false;
-		//var critHeal:int = 5;
-		//if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) critHeal += (player.inte - 50) / 5;
-		//if (rand(100) < critHeal) {
-			//crit = true;
-			//temp *= 1.75;
-		//}
-		temp = Math.round(temp);
-		outputText("You flush with success as your wounds begin to knit <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
-		HPChange(temp,false);
-	}
+	temp = Math.round(temp);
+	outputText("You chant a magical song of healing and recovery and your wounds start knitting themselves shut in response. <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
+	if (crit == true) outputText(" <b>*Critical Heal!*</b>");
+	HPChange(temp,false);
 	outputText("\n\n");
 	statScreenRefresh();
 	flags[kFLAGS.SPELLS_CAST]++;

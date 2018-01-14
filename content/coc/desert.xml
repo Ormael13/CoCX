@@ -12,7 +12,7 @@
                 You decide to bring it back to your campsite.
             </text>
             <text name="b">
-                <b>You now have <output>num2Text(inventory.itemStorageDirectGet().length)</output> storage item slots at camp.</b>
+                <b>You now have six storage item slots at camp.</b>
             </text>
         </lib>
         <lib name="nails">

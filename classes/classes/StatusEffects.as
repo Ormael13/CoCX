@@ -123,8 +123,10 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const KnowsManyBirds:StatusEffectType                 = mk("Knows Many Birds");
 		public static const KnowsManaShield:StatusEffectType                = mk("Knows Mana Shield");
 		public static const KnowsMight:StatusEffectType                     = mk("Knows Might");
+		public static const KnowsNosferatu:StatusEffectType                 = mk("Knows Nosferatu");
 		public static const KnowsOverlimit:StatusEffectType                 = mk("Knows Overlimit");
 		public static const KnowsPunishingKick:StatusEffectType	            = mk("Knows Punishing Kick");
+		public static const KnowsRegenerate:StatusEffectType                = mk("Knows Regenerate");
 		public static const KnowsSidewinder:StatusEffectType                = mk("Knows Sidewinder");
 		public static const KnowsSoulBlast:StatusEffectType                 = mk("Knows Soul Blast");
 		public static const KnowsTripleThrust:StatusEffectType              = mk("Knows Triple Thrust");
@@ -556,6 +558,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Overlimit:StatusEffectType                 = mkCombat("Overlimit");
 		public static const ParalyzeVenom:StatusEffectType             = ParalyzeVenomDebuff.TYPE;
 		public static const PhysicalDisabled:StatusEffectType          = mkCombat("Physical Disabled");
+		public static const PlayerRegenerate:StatusEffectType		   = mkCombat("Player Regenerate");
 		public static const Poison:StatusEffectType                    = mkCombat("Poison");
 		public static const PunishingKick:StatusEffectType	           = mkCombat("Punishing Kick");
 		public static const Rage:StatusEffectType                      = mkCombat("Rage");
@@ -647,6 +650,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const WhipSilence:StatusEffectType           = mkCombat("Whip Silence");
 		public static const PigbysHands:StatusEffectType           = mkCombat("Pigbys Hands");
 		public static const SoulArena:StatusEffectType             = mkCombat("Soul Arena");
+		public static const SoulArenaGaunlet:StatusEffectType      = mkCombat("Soul Arena Gaunlet");
 
 		/**
 		 * Creates status affect

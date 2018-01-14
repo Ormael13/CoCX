@@ -31,7 +31,6 @@ public function EnterOfTheChiChi():void {
 	flags[kFLAGS.CHI_CHI_AFFECTION] = 0;
 	flags[kFLAGS.CHI_CHI_LVL_UP] = 1;
 	startCombat(new ChiChi());
-	doNext(playerMenu);
 }
 
 public function WonFirstFight():void {
@@ -292,7 +291,6 @@ public function VeryReadyForTheFinalTraining():void {
 	outputText("She slams the ground with her closed fist creating a crater the size of a small arena. People go to the border of the makeshift ring, eager to see the pair of you duel. Chi Chi adopts her deadly elemental stance right away.\n\n");
 	outputText("\"<i>Prepare yourself!...</i>\"\n\n");
 	startCombat(new ChiChi());
-	doNext(playerMenu);
 }
 
 public function SoulskilsManualsShop():void {

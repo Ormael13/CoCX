@@ -793,6 +793,9 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.PrimalFuryIV) >= 0) max += 10;
 			if (findPerk(PerkLib.PrimalFuryV) >= 0) max += 10;
 			if (findPerk(PerkLib.PrimalFuryVI) >= 0) max += 10;
+			if (findPerk(PerkLib.FeralArmor) >= 0) max += 20;
+			if (findPerk(PerkLib.ClawTraining) >= 0) max += 20;
+			if (findPerk(PerkLib.ExtraClawAttack) >= 0) max += 30;
 			if (findPerk(PerkLib.BasicTranquilness) >= 0) max += 15;
 			if (findPerk(PerkLib.HalfStepToImprovedTranquilness) >= 0) max += 25;
 			if (findPerk(PerkLib.ImprovedTranquilness) >= 0) max += 40;
@@ -819,12 +822,12 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.Berzerker) >= 0) max += 100;
 			if (findPerk(PerkLib.Lustzerker) >= 0) max += 100;
 			if (findPerk(PerkLib.PrestigeJobBerserker) >= 0) max += 200;
-			if (findPerk(PerkLib.Rage) >= 0) max += 250;
-			if (findPerk(PerkLib.Anger) >= 0) max += 300;
+			if (findPerk(PerkLib.Rage) >= 0) max += 300;
+			if (findPerk(PerkLib.Anger) >= 0) max += 400;
 			if (findPerk(PerkLib.AscensionFury) >= 0) max += perkv1(PerkLib.AscensionFury) * 20;
 			if (findPerk(PerkLib.UnlockId2ndStage) >= 0) max += level;
 			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 2;
-			if (max > 20699) max = 20699;//obecnie max to 20670
+			if (max > 20899) max = 20899;//obecnie max to 20890
 			return max;
 		}
 		
@@ -890,6 +893,8 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.Mage) >= 0 && inte >= 50) max += 30;
 			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) max += 15;
 			if (findPerk(PerkLib.JobSorcerer) >= 0) max += 15;
+			if (findPerk(PerkLib.JobHealer) >= 0) max += 30;
+			if (findPerk(PerkLib.SpellpowerHealing) >= 0 && wis >= 50) max += 30;
 			if (findPerk(PerkLib.ArcaneRegenerationMinor) >= 0 && inte >= 50) {
 				var multimax:Number = 1;
 				multimax += 0.1;

@@ -150,6 +150,7 @@ public function ElectraSeXYesM():void
 	else player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
 	electraAffection(10);
 	player.orgasm();
+	monster.createPerk(PerkLib.NoGemsLost, 0, 0, 0, 0);
 	inventory.takeItem(consumables.VOLTTOP, cleanupAfterCombat);
 }
 public function ElectraSeXYesF():void
@@ -168,6 +169,7 @@ public function ElectraSeXYesF():void
 	else player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
 	electraAffection(10);
 	player.orgasm();
+	monster.createPerk(PerkLib.NoGemsLost, 0, 0, 0, 0);
 	inventory.takeItem(consumables.VOLTTOP, cleanupAfterCombat);
 }
 public function ElectraSeXNo():void

@@ -229,6 +229,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.isWeaponsForWhipping()) buttons.add("Whipping", whipping).hint("Attack multiple opponent with your held weapon.  \n\n<b>AoE attack.</b>");
 			// Whirlwind
 			if ((player.isWeaponForWhirlwind() && !player.hasPerk(PerkLib.PowerSweep)) || ((player.isWeaponForWhirlwind() || player.isOneHandedWeapons()) && player.hasPerk(PerkLib.PowerSweep))) buttons.add("Whirlwind", whirlwind).hint("Spin your weapon around to attack multiple enemies at once.  \n\n<b>AoE attack.</b>");
+			// Whirlwind (Beast Warrior)
+			if (player.findPerk(PerkLib.JobBeastWarrior) >= 0 && ((player.weaponName == "fists" && player.haveNaturalClaws()) || player.haveNaturalClawsTypeWeapon())) buttons.add("F. Whirlwind", whirlwindClaws).hint("Spin yourself around to slash multiple enemies with your claws at once.  \n\n<b>AoE attack.</b>");
 			// Barrage
 			if (player.weaponRangePerk == "Bow" && player.hasStatusEffect(StatusEffects.KnowsBarrage)) {
 				buttons.add("Barrage", archerBarrage).hint("Draw multiple arrow and shoot them all at the same time to hit several target.  \n\n<b>AoE attack.</b>");
@@ -785,6 +787,83 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= (monster.damagePercent() / 100);
 		damage = doDamage(damage);
 		outputText("Your [weapon] whipped few of " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
+		if (crit == true) {
+			outputText(" <b>*Critical Hit!*</b>");
+			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
+		}
+		if (crit == false && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
+			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
+		}
+		checkAchievementDamage(damage);
+		outputText("\n\n");
+		combat.heroBaneProc(damage);
+		enemyAI();
+	}
+
+	public function whirlwindClaws():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		clearOutput();
+		if (player.fatigue + physicalCost(50) > player.maxFatigue()) {
+			outputText("You are too tired to attack " + monster.a + " " + monster.short + ".");
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		outputText("You ready your claws and prepare to spin it around trying to hit as many " + monster.a + monster.short + " as possible.  ");
+		if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
+			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
+			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
+			if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
+			enemyAI();
+			return;
+		}
+		fatigue(50, USEFATG_PHYSICAL);
+		var damage:Number = 0;
+		damage += (strenghtscalingbonus() * 0.2) + player.str + unarmedAttack();
+		if (player.hasPerk(PerkLib.WhirlwindFeral)) damage += (strenghtscalingbonus() * 0.1)  + ((player.str + unarmedAttack()) * 0.5);
+		if (damage < 10) damage = 10;
+		//weapon bonus
+		if (player.weaponAttack < 101) damage *= (1 + (player.weaponAttack * 0.02));
+		else if (player.weaponAttack >= 101 && player.weaponAttack < 201) damage *= (2 + ((player.weaponAttack - 100) * 0.015));
+		else damage *= (3.5 + ((player.weaponAttack - 200) * 0.01));
+		//other bonuses
+		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= 1.1;
+		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
+		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
+		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+		//crit
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
+			if (player.inte <= 100) critChance += (player.inte - 50) / 5;
+			if (player.inte > 100) critChance += 10;
+		}
+		if (player.hasPerk(PerkLib.CycloneStage1)) critChance += 10;
+		if (player.hasPerk(PerkLib.CycloneStage2)) critChance += 15;
+		if (player.hasPerk(PerkLib.CycloneStage3)) critChance += 20;
+		if (player.hasPerk(PerkLib.CycloneStage4)) critChance += 20;
+		if (player.hasPerk(PerkLib.CycloneStage5)) critChance += 25;
+		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		//add bonus for using aoe special
+		var bonusmultiplier:Number = 5;
+		if (player.hasPerk(PerkLib.WhirlwindFeral)) bonusmultiplier += 1;
+		if (player.hasPerk(PerkLib.JobWarlord)) bonusmultiplier += 1;
+		if (player.hasPerk(PerkLib.Tornado)) bonusmultiplier += 1;
+		if (player.hasPerk(PerkLib.CycloneStage4)) bonusmultiplier += 0.5;
+		if (player.hasPerk(PerkLib.CycloneStage5)) bonusmultiplier += 1.5;
+		damage *= bonusmultiplier;
+		//final touches
+		damage = Math.round(damage);
+		damage *= (monster.damagePercent() / 100);
+		damage = doDamage(damage);
+		outputText("Your claws hits few of " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
 		if (crit == true) {
 			outputText(" <b>*Critical Hit!*</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);

@@ -18,7 +18,7 @@ public class DarkElfScout extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.SoulArena)) {
+			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) {
 				golems.gaunletchallange1postfight();
 			}
 			else darkelf.wonWithDarkElf();

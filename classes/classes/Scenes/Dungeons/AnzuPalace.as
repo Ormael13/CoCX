@@ -95,7 +95,7 @@ use namespace CoC;
 		}
 		
 		internal function setAnzuButton():void {
-			if (dungeonLoc == anzuLocationTimes[model.time.hours] && dungeonLoc >= 39 && dungeonLoc < 55) {
+			if (dungeonLoc == anzuLocationTimes[model.time.hours] && dungeonLoc >= 88 && dungeonLoc < 104) {
 				addButton(0, "Anzu", anzuScene.anzuMenus).hint("Interact with Anzu the avian deity.");
 			}
 		}

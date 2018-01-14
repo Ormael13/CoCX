@@ -433,9 +433,13 @@ import classes.room;
 			
 			outputText("You are back in the southern end of the Magpie Hall.  Without the bustle of activity below it is a gapingly empty and quiet place, the only sound the murmur of activity from elsewhere. There is a vast amount of collected junk below but it would take, well, an army of basilisks to sort through it to find anything worthwhile. You could check out the massive pile of eggs, though.");
 			
-			if (eggsAvailable() >= 0 && flags[kFLAGS.D3_DEMONIC_SCYTHE] == 0)
+			if (eggsAvailable() >= 0)
 			{
 				addButton(2, "Eggs", goToEggPile);
+			}
+			if (flags[kFLAGS.D3_DEMONIC_SCYTHE] == 0)
+			{
+				addButton(3, "Scythe", goToEggPile);
 			}
 			
 			return false;
@@ -468,7 +472,7 @@ import classes.room;
 		{
 			clearOutput();
 			outputText("You head down the stairs into the hall proper to inspect the ramble hoard of eggs the basilisks collected. They’re mostly unfertilised harpy ovum, but you quickly pick out a number of differently coloured transformative eggs stolen from Gods know who.");
-			if (flags[kFLAGS.D3_DEMONIC_SCYTHE] == 0) outputText(" When searching you even finds something that looks like scythe. WHere does it come frome among all those eggs?");
+			if (flags[kFLAGS.D3_DEMONIC_SCYTHE] == 0) outputText(" When searching you even finds something that looks like scythe. Where does it come frome among all those eggs?");
 			menu();
 			
 			var flagNum:int = flags[kFLAGS.D3_EGGS_AVAILABLE];
@@ -544,9 +548,13 @@ import classes.room;
 			
 			outputText("You are back in the northern end of the Magpie Hall. Without the bustle of activity below it is a gapingly empty and quiet place, the only sound the murmur of activity from elsewhere. There is a vast amount of collected junk below but it would take, well, an army of basilisks to sort through it to find anything worthwhile. You could check out the massive pile of eggs, though.");
 			
-			if (eggsAvailable() >= 0 && flags[kFLAGS.D3_DEMONIC_SCYTHE] == 0)
+			if (eggsAvailable() >= 0)
 			{
 				addButton(2, "Eggs", goToEggPile);
+			}
+			if (flags[kFLAGS.D3_DEMONIC_SCYTHE] == 0)
+			{
+				addButton(3, "Scythe", goToEggPile);
 			}
 			
 			return false;

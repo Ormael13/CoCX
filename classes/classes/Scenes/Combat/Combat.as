@@ -90,6 +90,15 @@ public class Combat extends BaseContent {
 	public function spellCostBlack(mod:Number):Number {
 		return magic.spellCostBlackImpl(mod);
 	}
+	public function healCost(mod:Number):Number {
+		return magic.healCostImpl(mod);
+	}
+	public function healCostWhite(mod:Number):Number {
+		return magic.healCostWhiteImpl(mod);
+	}
+	public function healCostBlack(mod:Number):Number {
+		return magic.healCostBlackImpl(mod);
+	}
 	public function spellMod():Number {
 		return magic.spellModImpl();
 	}
@@ -98,6 +107,15 @@ public class Combat extends BaseContent {
 	}
 	public function spellModBlack():Number {
 		return magic.spellModBlackImpl();
+	}
+	public function healMod():Number {
+		return magic.healModImpl();
+	}
+	public function healModWhite():Number {
+		return magic.healModWhiteImpl();
+	}
+	public function healModBlack():Number {
+		return magic.healModBlackImpl();
 	}
 	public function maxFistAttacks():int {
 		if (player.hasPerk(PerkLib.ComboMaster)) return 3;
@@ -252,11 +270,15 @@ public function cleanupAfterCombatImpl(nextFunc:Function = null):void {
 			gemsLost *= 1 + (player.newGamePlusMod() * 0.5);
 			//Round gems.
 			gemsLost = Math.round(gemsLost);
+			if (player.hasStatusEffect(StatusEffects.SoulArena) || monster.hasPerk(PerkLib.NoGemsLost)) gemsLost = 0;
 			//Keep gems from going below zero.
 			if (gemsLost > player.gems) gemsLost = player.gems;
 			var timePasses:int = monster.handleCombatLossText(inDungeon, gemsLost); //Allows monsters to customize the loss text and the amount of time lost
+			if (player.hasStatusEffect(StatusEffects.SoulArena)) timePasses = 1;
 			player.gems -= gemsLost;
 			inCombat = false;
+			if (player.hasStatusEffect(StatusEffects.SoulArena)) player.removeStatusEffect(StatusEffects.SoulArena);
+			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) player.removeStatusEffect(StatusEffects.SoulArenaGaunlet);
 			if (prison.inPrison == false && flags[kFLAGS.PRISON_CAPTURE_CHANCE] > 0 && rand(100) < flags[kFLAGS.PRISON_CAPTURE_CHANCE] && (prison.trainingFeed.prisonCaptorFeedingQuestTrainingIsTimeUp() || !prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists()) && (monster.short == "goblin" || monster.short == "goblin assassin" || monster.short == "imp" || monster.short == "imp lord" || monster.short == "imp warlord" || monster.short == "hellhound" || monster.short == "minotaur" || monster.short == "satyr" || monster.short == "gnoll" || monster.short == "gnoll spear-thrower" || monster.short == "basilisk")) {
 				outputText("  You feel yourself being dragged and carried just before you black out.");
 				doNext(prison.prisonIntro);
@@ -3043,6 +3065,9 @@ public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = 
 	public static const USEMANA_BLACK:int = 6;
 	public static const USEMANA_WHITE_NOBM:int = 7;
 	public static const USEMANA_BLACK_NOBM:int = 8;
+	public static const USEMANA_MAGIC_HEAL:int = 9;
+	public static const USEMANA_WHITE_HEAL:int = 10;
+	public static const USEMANA_BLACK_HEAL:int = 11;
 	//Modify mana (mod>0 - subtract, mod<0 - regen)
 	public function useManaImpl(mod:Number,type:int=USEMANA_NORMAL):void {
 		//Spell reductions
@@ -3058,6 +3083,15 @@ public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = 
 			case USEMANA_BLACK:
 			case USEMANA_BLACK_NOBM:
 				mod = spellCostBlack(mod);
+				break;
+			case USEMANA_MAGIC_HEAL:
+				mod = healCost(mod);
+				break;
+			case USEMANA_WHITE_HEAL:
+				mod = healCostWhite(mod);
+				break;
+			case USEMANA_BLACK_HEAL:
+				mod = healCostBlack(mod);
 				break;
 		}
 		//Blood mages use HP for spells
@@ -3181,13 +3215,26 @@ public function enemyAIImpl():void {
 		{*/
 			var soulforcecost:int = 100;
 			player.soulforce -= soulforcecost;
-			var hpChange:int = 200;
-			if (player.unicornScore() >= 5) hpChange += ((player.unicornScore() - 4) * 25);
-			if (player.alicornScore() >= 6) hpChange += ((player.alicornScore() - 5) * 25);
+			var hpChange1:int = 200;
+			if (player.unicornScore() >= 5) hpChange1 += ((player.unicornScore() - 4) * 25);
+			if (player.alicornScore() >= 6) hpChange1 += ((player.alicornScore() - 5) * 25);
 			//player.HP += 200;
 			//if (player.HP >= player.maxHP()) player.HP = player.maxHP
-			HPChange(hpChange,false);
+			HPChange(hpChange1,false);
 		//}
+	}
+	//Regenerate
+	if (player.hasStatusEffect(StatusEffects.PlayerRegenerate)) {
+		var hpChange2:int = player.inte;
+		if (player.hasPerk(PerkLib.WisenedHealer)) hpChange2 += player.wis;
+		hpChange2 *= healModBlack();
+		if (player.unicornScore() >= 5) hpChange2 *= ((player.unicornScore() - 4) * 0.5);
+		if (player.alicornScore() >= 6) hpChange2 *= ((player.alicornScore() - 5) * 0.5);
+		if (player.armorName == "skimpy nurse's outfit") hpChange2 *= 1.2;
+		if (player.weaponName == "unicorn staff") hpChange2 *= 1.5;
+		//player.HP += 200;
+		//if (player.HP >= player.maxHP()) player.HP = player.maxHP
+		HPChange(hpChange2,false);
 	}
 	if (player.hasStatusEffect(StatusEffects.TranceTransformation)) player.soulforce -= 50;
 	if (player.hasStatusEffect(StatusEffects.CrinosShape)) player.wrath -= mspecials.crinosshapeCost();
@@ -3998,6 +4045,14 @@ private function combatStatusesUpdate():void {
 		else {
 			outputText("<b>As your soulforce is drained you can feel Violet Pupil Transformation regenerative power spreading in your body.</b>\n\n");
 		}
+	}
+	//Regenerate
+	if (player.hasStatusEffect(StatusEffects.PlayerRegenerate)) {
+		if (player.statusEffectv3(StatusEffects.PlayerRegenerate) <= 0) {
+			player.removeStatusEffect(StatusEffects.PlayerRegenerate);
+			outputText("<b>Regenerate effect wore off!</b>\n\n");
+		}
+		else player.addStatusValue(StatusEffects.PlayerRegenerate,1,-1);
 	}
 	//Trance Transformation
 	if (player.hasStatusEffect(StatusEffects.TranceTransformation)) {
