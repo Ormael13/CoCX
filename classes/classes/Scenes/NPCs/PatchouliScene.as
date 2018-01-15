@@ -437,7 +437,9 @@ public class PatchouliScene extends NPCAwareContent {
 			addButton(2, "Vaginal", patchouleVaginal);
 			addButton(3, "Anal", patchouleAnal);
 		}
-		//addButton(14, "Back", patchouleMainCampMenu);
+		if(player.isGenderless()){
+			addButton(14, "Back", patchouleMainCampMenu);
+		}
 	}
 
 	private function patchouleGirlOnGirl():void {
