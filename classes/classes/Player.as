@@ -304,6 +304,16 @@ use namespace CoC;
 		public function isWearingArmor():Boolean {
 			return armor != ArmorLib.COMFORTABLE_UNDERCLOTHES && armor != ArmorLib.NOTHING;
 		}
+		//Natural Armor (need at least to partialy covering whole body)
+		public function haveNaturalArmor():Boolean
+		{
+			return findPerk(PerkLib.ThickSkin) >= 0 || skin.hasFur() || skin.hasChitin() || skin.hasScales() || skin.hasBark() || skin.hasDragonScales() || skin.hasBaseOnly(Skin.STONE);
+		}
+		//Unhindered related acceptable armor types
+		public function meetUnhinderedReq():Boolean
+		{
+			return armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armor == ArmorLib.NOTHING;
+		}
 		//override public function get armors
 		override public function get armorName():String {
 			if (_modArmorName.length > 0) return modArmorName;
@@ -456,6 +466,16 @@ use namespace CoC;
 		}
 		override public function get armorValue():Number {
 			return _armor.value;
+		}
+		//Natural Claws (arm types and weapons that can substitude them)
+		public function haveNaturalClaws():Boolean
+		{
+			return armType == Arms.CAT || armType == Arms.DEVIL || armType == Arms.DRAGON || armType == Arms.FOX || armType == Arms.GARGOYLE || armType == Arms.LION || armType == Arms.LIZARD || armType == Arms.RAIJU
+			 || armType == Arms.RED_PANDA || armType == Arms.SALAMANDER || armType == Arms.WOLF;
+		}
+		public function haveNaturalClawsTypeWeapon():Boolean
+		{
+			return weaponName == "gauntlet with claws";
 		}
 		//override public function get weapons
 		override public function get weaponName():String {

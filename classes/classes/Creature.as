@@ -2484,7 +2484,6 @@ public class Creature extends Utils
 			if (hasStatusEffect(StatusEffects.Web))
 				return false;
 			return canFlyWings.indexOf(_wingType) != -1;
-
 		}
 
 		//PC can swim underwater?
@@ -2499,7 +2498,6 @@ public class Creature extends Utils
 		public function isArtifactBow():Boolean
 		{
 			return game.player.weaponRange == game.weaponsrange.BOWGUID || game.player.weaponRange == game.weaponsrange.BOWHODR;
-
 		}
 
 		//Wrath Weapons
@@ -2510,14 +2508,12 @@ public class Creature extends Utils
 		public function isDualLowGradeWrathWeapon():Boolean
 		{
 			return game.player.weapon == game.weapons.DBFSWO;
-
 		}
 
 		//Fists and fist weapons
 		public function isFistOrFistWeapon():Boolean
 		{
 			return game.player.weaponName == "fists" || game.player.weapon == game.weapons.S_GAUNT || game.player.weapon == game.weapons.H_GAUNT || game.player.weapon == game.weapons.MASTGLO || game.player.weapon == game.weapons.KARMTOU || game.player.weapon == game.weapons.YAMARG || game.player.weapon == game.weapons.CLAWS;
-
 		}
 
 		//Weapons for Whirlwind
@@ -2533,14 +2529,12 @@ public class Creature extends Utils
 		{
 			return game.player.weapon == game.weapons.FLAIL || game.player.weapon == game.weapons.L_WHIP || game.player.weapon == game.weapons.SUCWHIP || game.player.weapon == game.weapons.PSWHIP || game.player.weapon == game.weapons.WHIP || game.player.weapon == game.weapons.PWHIP || game.player.weapon == game.weapons.NTWHIP || game.player.weapon == game.weapons.CNTWHIP
              || game.player.weapon == game.weapons.RIBBON || game.player.weapon == game.weapons.ERIBBON;
-
 		}
 
 		//Using Tome
 		public function isUsingTome():Boolean
 		{
 			return game.player.weaponRangeName == "nothing" || game.player.weaponRangeName == "Inquisitor’s Tome" || game.player.weaponRangeName == "Sage’s Sketchbook";
-
 		}
 
 		//Natural Jouster perks req check
@@ -2548,54 +2542,23 @@ public class Creature extends Utils
 		{
 			return (((game.player.isTaur() || game.player.isDrider()) && game.player.spe >= 60) && game.player.findPerk(PerkLib.Naturaljouster) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && CoC.instance.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
              || (game.player.spe >= 150 && game.player.findPerk(PerkLib.Naturaljouster) >= 0 && game.player.findPerk(PerkLib.DoubleAttack) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && CoC.instance.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)));
-
 		}
 		public function isMeetingNaturalJousterMasterGradeReq():Boolean
 		{
 			return (((game.player.isTaur() || game.player.isDrider()) && game.player.spe >= 180) && game.player.findPerk(PerkLib.NaturaljousterMastergrade) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && CoC.instance.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
              || (game.player.spe >= 450 && game.player.findPerk(PerkLib.NaturaljousterMastergrade) >= 0 && game.player.findPerk(PerkLib.DoubleAttack) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && CoC.instance.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)));
-
 		}
 
 		//1H Weapons
 		public function isOneHandedWeapons():Boolean
 		{
 			return game.player.weaponPerk != "Dual Large" && game.player.weaponPerk != "Dual" && game.player.weaponPerk != "Staff" && game.player.weaponPerk != "Large";
-
 		}
 
 		//Naked
 		public function isNaked():Boolean
 		{
 			return game.player.armorName == "nothing" && game.player.upperGarmentName == "nothing" && game.player.lowerGarmentName == "nothing";
-
-		}
-
-		//Unhindered related acceptable armor types
-		public function meetUnhinderedReq():Boolean
-		{
-			return game.player.armorName == "arcane bangles" || game.player.armorName == "practically indecent steel armor" || game.player.armorName == "revealing chainmail bikini" || game.player.armorName == "slutty swimwear" || game.player.armorName == "barely-decent bondage straps" || game.player.armorName == "nothing";
-
-		}
-
-		//Natural Armor (need at least to partialy covering whole body)
-		public function haveNaturalArmor():Boolean
-		{
-			return game.player.findPerk(PerkLib.ThickSkin) >= 0 || game.player.skin.hasFur() || game.player.skin.hasChitin() || game.player.skin.hasScales() || game.player.skin.hasBark() || game.player.skin.hasDragonScales() || game.player.skin.hasBaseOnly(Skin.STONE);
-
-		}
-
-		//Natural Claws (arm types and weapons that can substitude them)
-		public function haveNaturalClaws():Boolean
-		{
-			return game.player.armType == Arms.CAT || game.player.armType == Arms.DEVIL || game.player.armType == Arms.DRAGON || game.player.armType == Arms.FOX || game.player.armType == Arms.GARGOYLE || game.player.armType == Arms.LION || game.player.armType == Arms.LIZARD || game.player.armType == Arms.RAIJU
-			 || game.player.armType == Arms.RED_PANDA || game.player.armType == Arms.SALAMANDER || game.player.armType == Arms.WOLF;
-
-		}
-		public function haveNaturalClawsTypeWeapon():Boolean
-		{
-			return game.player.weapon == game.weapons.CLAWS;
-
 		}
 
 		//Crit immunity
@@ -2612,19 +2575,16 @@ public class Creature extends Utils
 			return (game.player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && game.player.sens >= 25 && (game.monster.findPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0 || game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyGigantType) >= 0 || game.monster.findPerk(PerkLib.EnemyGroupType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0))
                     || (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.EnemyGodType) >= 0 || game.monster.findPerk(PerkLib.EnemyBossType) >= 0 || game.monster.findPerk(PerkLib.DarknessNature) >= 0 || game.monster.findPerk(PerkLib.FireNature) >= 0 || game.monster.findPerk(PerkLib.IceNature) >= 0 || game.monster.findPerk(PerkLib.LightningNature) >= 0))
                     || (game.player.findPerk(PerkLib.EyesOfTheHunterMaster) >= 0 && game.player.sens >= 75 && (game.monster.findPerk(PerkLib.DarknessVulnerability) >= 0 || game.monster.findPerk(PerkLib.FireVulnerability) >= 0 || game.monster.findPerk(PerkLib.IceVulnerability) >= 0 || game.monster.findPerk(PerkLib.LightningVulnerability) >= 0));
-
 		}
 		public function whenGeneralEnemyPerksDisplayed():Boolean
 		{
 			return (game.player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && game.player.sens >= 25 && (game.monster.findPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0 || game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyGigantType) >= 0 || game.monster.findPerk(PerkLib.EnemyGroupType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0))
                     || (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.EnemyGodType) >= 0 || game.monster.findPerk(PerkLib.EnemyBossType) >= 0));
-
 		}
 		public function whenElementalEnemyPerksDisplayed():Boolean
 		{
 			return (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.DarknessNature) >= 0 || game.monster.findPerk(PerkLib.FireNature) >= 0 || game.monster.findPerk(PerkLib.IceNature) >= 0 || game.monster.findPerk(PerkLib.LightningNature) >= 0))
                     || (game.player.findPerk(PerkLib.EyesOfTheHunterMaster) >= 0 && game.player.sens >= 75 && (game.monster.findPerk(PerkLib.DarknessVulnerability) >= 0 || game.monster.findPerk(PerkLib.FireVulnerability) >= 0 || game.monster.findPerk(PerkLib.IceVulnerability) >= 0 || game.monster.findPerk(PerkLib.LightningVulnerability) >= 0));
-
 		}
 
 		//check for vagoo
@@ -3839,7 +3799,8 @@ public class Creature extends Utils
 			if (findPerk(PerkLib.Evade) >= 0) chance += 10;
 			if (findPerk(PerkLib.Flexibility) >= 0) chance += 6;
 			if (findPerk(PerkLib.Misdirection) >= 0 && armorName == "red, high-society bodysuit") chance += 10;
-			if (findPerk(PerkLib.Unhindered) >= 0 && meetUnhinderedReq()) chance += 10;
+			//if (findPerk(PerkLib.Unhindered) >= 0 && meetUnhinderedReq()) chance += 10;
+			if (findPerk(PerkLib.Unhindered) >= 0 && (game.player.armorName == "arcane bangles" || game.player.armorName == "practically indecent steel armor" || game.player.armorName == "revealing chainmail bikini" || game.player.armorName == "slutty swimwear" || game.player.armorName == "barely-decent bondage straps" || game.player.armorName == "nothing")) chance += 10;
 			if (findPerk(PerkLib.JunglesWanderer) >= 0) chance += 35;
 			if (hasStatusEffect(StatusEffects.Illusion)) chance += 10;
 			if (hasStatusEffect(StatusEffects.Flying)) chance += 20;
@@ -3882,7 +3843,8 @@ public class Creature extends Utils
 			if (findPerk(PerkLib.Evade) >= 0 && (roll < 10)) return "Evade";
 			if (findPerk(PerkLib.Flexibility) >= 0 && (roll < 6)) return "Flexibility";
 			if (findPerk(PerkLib.Misdirection) >= 0 && armorName == "red, high-society bodysuit" && (roll < 10)) return "Misdirection";
-			if (findPerk(PerkLib.Unhindered) >= 0 && meetUnhinderedReq() && (roll < 10)) return "Unhindered";
+			//if (findPerk(PerkLib.Unhindered) >= 0 && meetUnhinderedReq() && (roll < 10)) return "Unhindered";
+			if (findPerk(PerkLib.Unhindered) >= 0 && (game.player.armorName == "arcane bangles" || game.player.armorName == "practically indecent steel armor" || game.player.armorName == "revealing chainmail bikini" || game.player.armorName == "slutty swimwear" || game.player.armorName == "barely-decent bondage straps" || game.player.armorName == "nothing") && (roll < 10)) return "Unhindered";
 			if (findPerk(PerkLib.JunglesWanderer) >= 0 && (roll < 35)) return "Jungle's Wanderer";
 			if (hasStatusEffect(StatusEffects.Illusion) && (roll < 10)) return "Illusion";
 			if (hasStatusEffect(StatusEffects.Flying) && (roll < 20)) return "Flying";

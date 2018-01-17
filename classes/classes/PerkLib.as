@@ -383,6 +383,9 @@ public class PerkLib
 		public static const ChimericalBodyStage:PerkType = mk("Chimerical Body:  Stage", "Chimerical Body:  Stage",
 				"prless lub completed stage.",
 				"You choose the 'Chimerical Body:  Stage' perk.  Coś coś!");	
+		public static const ClawingFlurry:PerkType = mk("Clawing flurry", "Clawing flurry",
+				"When attacking with your claws, add an additional attack striking up to 5 times.",
+				"You choose the 'Clawing flurry' perk, gaining an additional attack with your claws!");
 		public static const ClawTraining:PerkType = mk("Claw training", "Claw training",
 				"Gain 1 extra natural attack with your claws.",
 				"You choose the 'Claw training' perk, gain 1 extra natural attack with your claws!");
@@ -1155,6 +1158,9 @@ public class PerkLib
 		public static const MindOverBodyVI:PerkType = mk("Mind over Body VI", "Mind over Body VI",
 				"+2 extra mana per point of intelligence.",
 				"You choose the 'Mind over Body VI' perk, granting +2 extra maximum mana for each point of intelligence.");
+		public static const MultiClawAttack:PerkType = mk("Multi Claw Attack", "Multi Claw Attack",
+				"When attacking with your claws, add an additional attack striking up to 4 times.",
+				"You choose the 'Multi Claw Attack' perk, gaining an additional attack with your claws!");
 		public static const Multishot:PerkType = mk("Multishot", "Multishot",
 				"Allows you to perform additional range attack per round.",
 				"You choose the 'Multishot' perk, This allows you to make additional range attack.");
@@ -3646,6 +3652,11 @@ public class PerkLib
                     .requirePerk(NaturalHealingMinor)
                     .requireInt(20)
                     .requireWis(80);
+            MultiClawAttack.requireLevel(18)
+                    .requirePerk(ExtraClawAttack)
+					.requireCustomFunction(function (player:Player):Boolean {
+					return player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon();
+					}, "Any claws");
             //Tier 4
             JobAllRounder.requireLevel(24)
                     .requirePerk(JobGuardian)
@@ -3694,6 +3705,11 @@ public class PerkLib
                     .requirePerk(NaturalHealingMajor)
                     .requireInt(25)
                     .requireWis(100);
+            ClawingFlurry.requireLevel(24)
+                    .requirePerk(MultiClawAttack)
+					.requireCustomFunction(function (player:Player):Boolean {
+					return player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon();
+					}, "Any claws");
             //Tier 5
             //	if (requireMinLevel(30)) {
             //		if (player.internalChimeraScore() >= 15 && requirePerk(ChimericalBodySemiPerfectStage)) {

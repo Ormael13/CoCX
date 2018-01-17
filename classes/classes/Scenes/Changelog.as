@@ -51,6 +51,8 @@ package classes.Scenes
 			outputText("-New tier 2 misc lvl-up perk: Feral Whirlwind. Req. Job: Beast Warrior perk. Effect: Increase by 50% base dmg of F. Whirlwind special\n");
 			outputText("-New tier 2 misc lvl-up perk: Natural healing (Minor). Req. 60+ wis, 15+ int and Wisened Healer perk. Effect: +30% healing power and -10% healing spells costs\n");
 			outputText("-New tier 3 misc lvl-up perk: Natural healing (Major). Req. 80+ wis, 20+ int and Natural healing (Minor) perk. Effect: +40% healing power and -15% healing spells costs\n");
+			outputText("-New tier 3 misc lvl-up perk: Multi Claw Attack. Req. Extra claw attack perk and Any claws (form racial tf or weapon that grants claws). Effect: When attacking with your claws, add an additional attack striking up to 4 times, +40 to max wrath\n");
+			outputText("-New tier 4 misc lvl-up perk: Clawing flurry. Req. Multi Claw Attack perk and Any claws (form racial tf or weapon that grants claws). Effect: When attacking with your claws, add an additional attack striking up to 5 times, +50 to max wrath\n");
 			outputText("-New tier 4 misc lvl-up perk: Natural healing (Epic). Req. 100+ wis, 25+ int and Natural healing (Major) perk. Effect: +50% healing power and -20% healing spells costs\n");
 			outputText("-New tier 5 misc lvl-up perk: Natural healing (Legendary). Req. 120+ wis, 30+ int and Natural healing (Epic) perk. Effect: +60% healing power and -25% healing spells costs\n");
 			outputText("-Having natural claws add toggle in combat menu to switch between normal or feral combat style. Only when PC not use any weapon (after few special exceptions) can benefit from feral combat style - when PC can attack more than once a turn fatigue costs will be halfed.\n");
@@ -78,11 +80,14 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Bat, Vampire, Cat, Cheshire cat
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -119,6 +124,9 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): dodać yuki-onna TF
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

@@ -216,7 +216,7 @@ use namespace CoC;
 			this.lustVuln = .8;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = 45 + rand(40);
-			if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 2) this.drop = new ChainedDrop().add(weapons.MASTGLO, 1);
+			if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 2) this.drop = NO_DROP;
 			else this.drop = new ChainedDrop().add(consumables.MOUSECO, 0.2);//do zmiany potem
 			//this.armType = LION;
 			//this.lowerBody = LION;

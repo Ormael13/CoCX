@@ -796,6 +796,8 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.FeralArmor) >= 0) max += 20;
 			if (findPerk(PerkLib.ClawTraining) >= 0) max += 20;
 			if (findPerk(PerkLib.ExtraClawAttack) >= 0) max += 30;
+			if (findPerk(PerkLib.MultiClawAttack) >= 0) max += 40;
+			if (findPerk(PerkLib.ClawingFlurry) >= 0) max += 50;
 			if (findPerk(PerkLib.BasicTranquilness) >= 0) max += 15;
 			if (findPerk(PerkLib.HalfStepToImprovedTranquilness) >= 0) max += 25;
 			if (findPerk(PerkLib.ImprovedTranquilness) >= 0) max += 40;

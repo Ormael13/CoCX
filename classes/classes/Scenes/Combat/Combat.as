@@ -123,7 +123,9 @@ public class Combat extends BaseContent {
 		else return 1;
 	}
 	public function maxClawsAttacks():int {
-		if (player.hasPerk(PerkLib.ExtraClawAttack)) return 3;
+		if (player.hasPerk(PerkLib.ClawingFlurry)) return 5;
+		else if (player.hasPerk(PerkLib.MultiClawAttack)) return 4;
+		else if (player.hasPerk(PerkLib.ExtraClawAttack)) return 3;
 		else if (player.hasPerk(PerkLib.ClawTraining)) return 2;
 		else return 1;
 	}
@@ -718,8 +720,14 @@ public function basemeleeattacks():void {
 	if (player.isFistOrFistWeapon()) {
 		if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) {
 			if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 5) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
-			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 4) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
-			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 3) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
+			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 4) {
+				if (player.hasPerk(PerkLib.ClawingFlurry) && flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 5;
+				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+			}
+			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 3) {
+				if (player.hasPerk(PerkLib.MultiClawAttack) && flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 4;
+				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+			}
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 2) {
 				if (player.hasPerk(PerkLib.ComboMaster) || (player.hasPerk(PerkLib.ExtraClawAttack) && flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()))) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
 				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
@@ -3204,38 +3212,6 @@ public function enemyAIImpl():void {
 		return;
 	}
 	monster.doAI();
-	//Violet Pupil Transformation
-	if (player.hasStatusEffect(StatusEffects.VioletPupilTransformation)) {
-		/*if (player.soulforce < 100)
-		{
-			player.removeStatusEffect(StatusEffects.VioletPupilTransformation);
-			outputText("<b>Your soulforce is too low to continue using Violet Pupil Transformation so soul skill deactivated itself!  As long you can recover some soulforce before end of the fight you could then reactivate this skill.</b>\n\n");
-		}
-		else
-		{*/
-			var soulforcecost:int = 100;
-			player.soulforce -= soulforcecost;
-			var hpChange1:int = 200;
-			if (player.unicornScore() >= 5) hpChange1 += ((player.unicornScore() - 4) * 25);
-			if (player.alicornScore() >= 6) hpChange1 += ((player.alicornScore() - 5) * 25);
-			//player.HP += 200;
-			//if (player.HP >= player.maxHP()) player.HP = player.maxHP
-			HPChange(hpChange1,false);
-		//}
-	}
-	//Regenerate
-	if (player.hasStatusEffect(StatusEffects.PlayerRegenerate)) {
-		var hpChange2:int = player.inte;
-		if (player.hasPerk(PerkLib.WisenedHealer)) hpChange2 += player.wis;
-		hpChange2 *= healModBlack();
-		if (player.unicornScore() >= 5) hpChange2 *= ((player.unicornScore() - 4) * 0.5);
-		if (player.alicornScore() >= 6) hpChange2 *= ((player.alicornScore() - 5) * 0.5);
-		if (player.armorName == "skimpy nurse's outfit") hpChange2 *= 1.2;
-		if (player.weaponName == "unicorn staff") hpChange2 *= 1.5;
-		//player.HP += 200;
-		//if (player.HP >= player.maxHP()) player.HP = player.maxHP
-		HPChange(hpChange2,false);
-	}
 	if (player.hasStatusEffect(StatusEffects.TranceTransformation)) player.soulforce -= 50;
 	if (player.hasStatusEffect(StatusEffects.CrinosShape)) player.wrath -= mspecials.crinosshapeCost();
 	combatRoundOver();
@@ -4043,16 +4019,33 @@ private function combatStatusesUpdate():void {
 			outputText("<b>Your soulforce is too low to continue using Violet Pupil Transformation so soul skill deactivated itself!  As long you can recover some soulforce before end of the fight you could then reactivate this skill.</b>\n\n");
 		}
 		else {
-			outputText("<b>As your soulforce is drained you can feel Violet Pupil Transformation regenerative power spreading in your body.</b>\n\n");
+			var soulforcecost:int = 100;
+			player.soulforce -= soulforcecost;
+			var hpChange1:int = 200;
+			if (player.unicornScore() >= 5) hpChange1 += ((player.unicornScore() - 4) * 25);
+			if (player.alicornScore() >= 6) hpChange1 += ((player.alicornScore() - 5) * 25);
+			outputText("<b>As your soulforce is drained you can feel Violet Pupil Transformation regenerative power spreading in your body. (<font color=\"#008000\">+" + hpChange1 + "</font>)</b>\n\n");
+			HPChange(hpChange1,false);
 		}
 	}
 	//Regenerate
 	if (player.hasStatusEffect(StatusEffects.PlayerRegenerate)) {
-		if (player.statusEffectv3(StatusEffects.PlayerRegenerate) <= 0) {
+		if (player.statusEffectv1(StatusEffects.PlayerRegenerate) <= 0) {
 			player.removeStatusEffect(StatusEffects.PlayerRegenerate);
 			outputText("<b>Regenerate effect wore off!</b>\n\n");
 		}
-		else player.addStatusValue(StatusEffects.PlayerRegenerate,1,-1);
+		else {
+			player.addStatusValue(StatusEffects.PlayerRegenerate, 1, -1);
+			var hpChange2:int = player.inte;
+			if (player.hasPerk(PerkLib.WisenedHealer)) hpChange2 += player.wis;
+			hpChange2 *= healModBlack();
+			if (player.unicornScore() >= 5) hpChange2 *= ((player.unicornScore() - 4) * 0.5);
+			if (player.alicornScore() >= 6) hpChange2 *= ((player.alicornScore() - 5) * 0.5);
+			if (player.armorName == "skimpy nurse's outfit") hpChange2 *= 1.2;
+			if (player.weaponName == "unicorn staff") hpChange2 *= 1.5;
+			outputText("<b>Regenerate healing power spreading in your body. (<font color=\"#008000\">+" + hpChange2 + "</font>)</b>\n\n");
+			HPChange(hpChange2,false);
+		}
 	}
 	//Trance Transformation
 	if (player.hasStatusEffect(StatusEffects.TranceTransformation)) {

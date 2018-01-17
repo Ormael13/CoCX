@@ -17,7 +17,7 @@ package classes.Scenes.Camp
 public function manageuyourgarden():void
 {
 	clearOutput();
-	outputText("Once again this is maig garden menu so it's up to Liadri to decide if we gonna get some text here or not.\n\n");
+	outputText("Your daughters are busy bickering about whose the most beautiful flower of them all.\n\n");
 	menu();
 	if (flags[kFLAGS.ALRAUNE_GROWING] > 14) addButton(0, "Play", playwithyourplantdaughters);
 	if (flags[kFLAGS.ALRAUNE_DAILY_WATERING] < 1) addButton(9, "Water", wateryourgarden);

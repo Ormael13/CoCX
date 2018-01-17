@@ -1537,7 +1537,7 @@ public class CombatMagic extends BaseCombatContent {
 			outputText(" You chant as your shadow suddenly takes on a life of its own, sprouting a multitude of mouths and tentacles which seek and tear into " + monster.a + monster.short + " shadow");
 			if (monster.plural == true) outputText("s");
 			outputText(", gorging on its owner’s life force to replenish your own. Soon enough the spell is over and your shadow returns to you, leaving you better for the wear.");
-			outputText(" <b><font color=\"#800000\">(" + nosferatu + ")");
+			outputText(" <b>(<font color=\"#800000\">" + nosferatu + "</font>)</b>");
 			monster.HP -= nosferatu;
 			HPChange(nosferatu,false);
 		}
