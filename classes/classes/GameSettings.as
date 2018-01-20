@@ -390,6 +390,12 @@ addButton(14, "Back", CoC.instance.mainMenu.mainMenu);
 		outputText("Char Viewer: ");
 		if (flags[kFLAGS.CHARVIEWER_ENABLED] == 1) outputText("<font color=\"#008000\"><b>ON</b></font>\n Player visualiser is available under \\[Appearance\\].");
 		else outputText("<font color=\"#800000\"><b>OFF</b></font>\n Player visualiser is disabled.");
+		outputText("\nChar View Style: ");
+		if (flags[kFLAGS.CHARVIEW_STYLE] < 1){
+			outputText("<font color=\"#008000\"><b>NEW</b></font>\n Viewer is inline with text");
+		} else {
+			outputText("<font color=\"#800000\"><b>OLD</b></font>\n Viewer is separate from text");
+		}
 		outputText("\n\n");
 
 		if (flags[kFLAGS.IMAGEPACK_OFF] == 0) {
@@ -437,6 +443,7 @@ addButton(14, "Back", CoC.instance.mainMenu.mainMenu);
 		addButton(6, "Time Format", toggleTimeFormat).hint("Toggles between 12-hour and 24-hour format.");
 		addButton(7, "Measurements", toggleMeasurements).hint("Switch between imperial and metric measurements.  \n\nNOTE: Only applies to your appearance screen.");
 		addButton(8, "Toggle CharView", toggleCharViewer).hint("Turn PC visualizer on/off.");
+		addButton(9, "Charview Style",toggleCharViewer,kFLAGS.CHARVIEW_STYLE).hint("Change between in text and sidebar display");
 		addButton(14, "Back", settingsScreenMain);
 	}
 	public function menuMainBackground():void {
@@ -468,11 +475,13 @@ addButton(14, "Back", CoC.instance.mainMenu.mainMenu);
 		addButton(14, "Back", settingsScreenInterfaceSettings);
 	}
 
-	public function toggleCharViewer():void {
-		if (flags[kFLAGS.CHARVIEWER_ENABLED] < 1) {
-			flags[kFLAGS.CHARVIEWER_ENABLED] = 1;
+	public function toggleCharViewer(flag:int = kFLAGS.CHARVIEWER_ENABLED):void {
+		if (flags[flag] < 1) {
+			flags[flag] = 1;
 			mainView.charView.reload();
-		} else flags[kFLAGS.CHARVIEWER_ENABLED] = 0;
+		} else {
+			flags[flag] = 0;
+		}
 		settingsScreenInterfaceSettings();
 	}
 
