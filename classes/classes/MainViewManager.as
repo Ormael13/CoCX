@@ -94,8 +94,16 @@ public class MainViewManager extends BaseContent {
 		mainView.charView.setCharacter(player);
 		mainView.charView.redraw();
 		mainView.charView.visible = true;
-		BoundClip.nextContent = mainView.charView;
-		outputText("<img src='coc.view::BoundClip' align='left' id='charview'/>");
+		if(flags[kFLAGS.CHARVIEW_STYLE] < 1){
+			mainView.charView.x = 0;
+			mainView.charView.y = 0;
+			BoundClip.nextContent = mainView.charView;
+			outputText("<img src='coc.view::BoundClip' align='left' id='charview'/>");
+		} else {
+			mainView.charView.x = 208 + 796 + 4; //TEXTZONE_X + TEXTZONE_W + GAP
+			mainView.charView.y = 52; // TEXTZONE_Y;
+			mainView.addElement(mainView.charView);
+		}
 	}
 	public function hidePlayerDoll():void {
 		mainView.charView.visible = false;
