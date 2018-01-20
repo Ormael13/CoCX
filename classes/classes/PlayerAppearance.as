@@ -1023,6 +1023,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  You have " + num2Text(player.legCount) + " fluffy, furred legs that look vaguely like kneehigh socks. Your pawed feet end in four thick toes, which serve as your main source of balance. You can walk on them as normally as your old plantigrade legs. A thick strand of darkly colored fur breaks out from your ankles, emulating a bolt of lighting in appearance.");
 		else if (player.lowerBody == LowerBody.RED_PANDA)
 			outputText("  Your " + num2Text(player.legCount) + " legs are equally covered in [skin coat.color] fur, ending on red-panda paws with short claws. They have a nimble and strong build, in case you need to escape from something.");
+		else if (player.lowerBody == LowerBody.AVIAN)
+			outputText("  You have strong thighs perfect for launching you into the air which end in slender, bird-like legs, covered with a [skin coat.color] plumage down to your knees and slightly rough, [skin] skin below. You have digitigrade feet, with toes that end in sharp talons.");
 		if (player.findPerk(PerkLib.Incorporeality) >= 0)
 			outputText("  Of course, your [legs] are partially transparent due to their ghostly nature."); // isn't goo transparent anyway?
 	}
@@ -1148,6 +1150,9 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.tailType == Tail.RED_PANDA) {
 			outputText("  Sprouting from your [ass], you have a long, bushy tail. It has a beautiful pattern of rings in [skin coat.color] fluffy fur. It waves playfully as you walk giving to your step a mesmerizing touch.");
 		}
+		else if (player.tailType == Tail.AVIAN) {
+			outputText("  A tail shaped like a fan of long, [skin coat.color] feathers rests above your " + assDescript() + ", twitching instinctively to help guide you if you were to take flight.");
+		}
 	}
 	public function describeArms():void {
 //Wing arms
@@ -1206,6 +1211,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Soft, black-brown fluff cover your arms. Your paws have cute, pink paw pads and short claws.");
 		else if (armType == Arms.CAT)
 			outputText("  Your arms are covered in [skin coat.color] up to your shoulder. They end with a pair of five-toed cat paws armed with lethal claws.");
+		else if (armType == Arms.AVIAN)
+			outputText("  Your arms are covered with [skin coat.color] colored feathers just a bit past your elbow. Your humanoid hands have " + player.skinTone + ", slightly rough skin and end in short claws.");
 		if (player.wingType == Wings.BAT_ARM ){
 			outputText("  Your arm bones are thin and light in order to allow flight. You have grown a few extra fingers, which allow you to hold various items even with your abnormal hands, albeit at the cost of preventing flight while doing so.");
 		}
@@ -1280,8 +1287,11 @@ public class PlayerAppearance extends BaseContent {
 		if (wingType == Wings.VAMPIRE){
 			outputText("   Between your shoulder blades rest a pair of large, ominous black wings reminiscent of a bat’s. They can unfurl up to twice your arm’s length, allowing you to gracefully dance in the night sky.");
 		}
-		if (wingType == Wings.DRACONIC_HUGE){
+		if (wingType == Wings.FEY_DRAGON_WINGS){
 			outputText("  Magnificent huge wings sprout from your shoulders.  When unfurled they stretch over twice further than your arm span, and a single beat of them is all you need to set out toward the sky.  They look a bit like bat's wings, but the membranes are covered in fine, delicate scales and a wicked talon juts from the end of each bone.  While draconic in appearance the delicate frame of your fey like dragon wings allows for even better speed and maneuverability.");
+		}
+		if (wingType == Wings.FEATHERED_AVIAN){
+			outputText("  A pair of large, feathery wings sprout from your back. Though you usually keep the [skin coat.color] wings folded close, they can unfurl to allow you to soar as gracefully as a bird.");
 		}
 	}
 	public function describeHorns():void {
@@ -1517,6 +1527,9 @@ public class PlayerAppearance extends BaseContent {
 			if (earType == Ears.RED_PANDA){
 				outputText("  Big, white furred, red-panda ears lie atop your head, keeping you well aware to your surroundings.");
 			}
+			if (earType == Ears.AVIAN){
+				outputText("  Two small holes at each side of your head serve you as ears. Hidden by tufts of feathers, they’re almost unnoticeable.");
+			}
 			//</mod>
 			if (player.gillType == Gills.FISH)
 			{
@@ -1597,6 +1610,9 @@ public class PlayerAppearance extends BaseContent {
 			}
 			if (earType == Ears.RED_PANDA) {
 				outputText("  Big, white furred, red-panda ears lie atop your head, keeping you well aware to your surroundings.")
+			}
+			if (earType == Ears.AVIAN){
+				outputText("  The [hair] at the sides of your head, two small holes covered by almost unnoticeable tufts of feathers make up for your ears.");
 			}
 			//</mod>
 			if(player.antennae == Antennae.MANTIS)
@@ -1934,6 +1950,10 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your face has a distinctive animalistic muzzle, proper from a red-panda, complete with a cute pink nose.");
 			if (player.hasFullCoatOfType(Skin.FUR)) outputText("   A coat of soft, [skin coat] colored fur covers your head, with patches of white on your muzzle, cheeks and eyebrows.")
 		}
+		if (faceType == Face.AVIAN) {
+			outputText("  Your visage has a bird-like appearance, complete with an avian beak. Thankfully, it’s sides aren’t sharp as you thought. A couple of small holes on it makes up for your nostrils, while a long, nimble tongue is hidden inside.");
+			if (player.hasFullCoatOfType(Skin.FUR)) outputText("   The rest of your face is decorated with a coat of [skin coat] feathers.")
+		}
 		//</mod>
 	}
 public function RacialScores():void {
@@ -1950,6 +1970,10 @@ public function RacialScores():void {
 	if (player.alrauneScore() >= 10) outputText("\n<font color=\"#0000a0\">Alraune: " + player.alrauneScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Tou, -" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
 	else if (player.alrauneScore() >= 1 && player.alrauneScore() < 10) outputText("\n<font color=\"#008000\">Alraune: " + player.alrauneScore() + "</font>");
 	else if (player.alrauneScore() < 1) outputText("\n<font color=\"#ff0000\">Alraune: 0</font>");
+	if (player.avianScore() >= 8) outputText("\n<font color=\"#0000a0\">Avian-morph: " + player.avianScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (60 * (1 + player.newGamePlusMod())) + " max Spe, +" + (30 * (1 + player.newGamePlusMod())) + " max Intb)</font>");
+	else if (player.avianScore() >= 4 && player.avianScore() < 8) outputText("\n<font color=\"#0000a0\">Half Avian-morph: " + player.avianScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Spe, +" + (15 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+	else if (player.avianScore() >= 1 && player.avianScore() < 4) outputText("\n<font color=\"#008000\">Half Avian-morph: " + player.avianScore() + "</font>");
+	else if (player.avianScore() < 1) outputText("\n<font color=\"#ff0000\">Half Avian-morph: 0</font>");
 	if (player.batScore() >= 10) outputText("\n<font color=\"#0000a0\">Batgirl/Batboy: " + player.batScore() + " (+" + (35 * (1 + player.newGamePlusMod())) + " max Str, +" + (35 * (1 + player.newGamePlusMod())) + " max Spe, +" + (35 * (1 + player.newGamePlusMod())) + " max Int, +" + (45 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
 	else if (player.batScore() >= 6 && player.batScore() < 10) outputText("\n<font color=\"#0000a0\">Half Batgirl/Batboy: " + player.batScore() + " (+" + (20 * (1 + player.newGamePlusMod())) + " max Str, +" + (20 * (1 + player.newGamePlusMod())) + " max Spe, +" + (20 * (1 + player.newGamePlusMod())) + " max Int, +" + (30 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
 	else if (player.batScore() >= 1 && player.batScore() < 6) outputText("\n<font color=\"#008000\">Half Batgirl/Batboy: " + player.batScore() + "</font>");

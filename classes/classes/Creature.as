@@ -2322,6 +2322,10 @@ public class Creature extends Utils
 			return countCocksOfType(CockTypesEnum.STAMEN);
 		}
 
+		public function avianCocks():int { //How many aviancocks?
+			return countCocksOfType(CockTypesEnum.AVIAN);
+		}
+
 		public function findFirstCockType(ctype:CockTypesEnum):Number
 		{
 			var index:Number = 0;
@@ -2474,6 +2478,7 @@ public class Creature extends Utils
 			Wings.BAT_ARM,
 			Wings.VAMPIRE,
 			Wings.FEY_DRAGON_WINGS,
+			Wings.FEATHERED_AVIAN,
 			//WING_TYPE_IMP_LARGE,
 		];
 

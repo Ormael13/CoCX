@@ -28,6 +28,7 @@ public class Wings extends BodyPart {
 	public static const BAT_ARM:int              = 24;
 	public static const VAMPIRE:int              = 25;
 	public static const FEY_DRAGON_WINGS:int     = 26;
+	public static const FEATHERED_AVIAN:int      = 27;
 	
 	public function Wings(creature:Creature, publicPrimitives:Array) {
 		super(creature, publicPrimitives);

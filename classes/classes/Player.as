@@ -1797,14 +1797,19 @@ use namespace CoC;
 			if (vampireScore() >= 6){
 				race = vampireScore() >= 10 ? "vampire" : "dhampir"
 			}
+			if (avianScore() >= 4)
+			{
+				if (avianScore() >= 8)
+					race = "avian-morph";
+				else
+					race = "half avian-morph";
+			}
 			//</mod>
 			if (lowerBody == LowerBody.HOOFED && isTaur() && wingType == Wings.FEATHERED_LARGE) {
 				race = "pegataur";
 			}
-			
 			if (lowerBody == LowerBody.PONY)
 				race = "pony-kin";
-
 			if (gooScore() >= 4)
 			{
 				if (gooScore() >= 8) {
@@ -1995,6 +2000,8 @@ use namespace CoC;
 				chimeraCounter++;
 			if (jabberwockyScore() >= 4)
 				chimeraCounter++;
+			if (avianScore() >= 4)
+				chimeraCounter++;
 			if (gargoyleScore() >= 21)
 				chimeraCounter++;
 			if (gooScore() >= 4)
@@ -2117,6 +2124,8 @@ use namespace CoC;
 			if (vampireScore() >= 10)
 				grandchimeraCounter++;
 			if (jabberwockyScore() >= 10)
+				grandchimeraCounter++;	
+			if (avianScore() >= 8)
 				grandchimeraCounter++;
 			if (gargoyleScore() >= 21)
 				grandchimeraCounter++;
@@ -4218,6 +4227,38 @@ use namespace CoC;
 			return redpandaCounter;
 		}
 		
+		//Determine Horse Rating
+		public function avianScore():Number {
+			Begin("Player","racialScore","avian");
+			var avianCounter:Number = 0;
+			if (hairType == Hair.FEATHER)
+				avianCounter++;
+			if (faceType == Face.AVIAN)
+				avianCounter++;
+			if (earType == Ears.AVIAN)
+				avianCounter++;
+			if (tailType == Tail.AVIAN)
+				avianCounter++;
+			if (armType == Arms.AVIAN)
+				avianCounter++;
+			if (lowerBody == LowerBody.AVIAN)
+				avianCounter++;
+			if (wingType == Wings.FEATHERED_AVIAN)
+				avianCounter += 2;/*
+			if (avianCocks() > 0)
+				avianCounter++;
+			if (hasFur()) {
+				avianCounter++;
+			}*/
+			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
+				avianCounter += 10;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && avianCounter >= 3)
+				avianCounter += 1;
+			
+			End("Player","racialScore");
+			return avianCounter;
+		}
+		
 		//Gargoyle
 		public function gargoyleScore():Number {
 			Begin("Player","racialScore","gargoyle");
@@ -5556,6 +5597,18 @@ use namespace CoC;
 				maxTou += (80 * newGamePlusMod);
 				maxSpe += (40 * newGamePlusMod);
 			}//+40/30-40
+			if (avianScore() >= 4) {
+				if (avianScore() >= 8) {
+					maxStr += (30 * newGamePlusMod);
+					maxSpe += (60 * newGamePlusMod);
+					maxInt += (30 * newGamePlusMod);
+				}
+				else {
+					maxStr += (15 * newGamePlusMod);
+					maxSpe += (30 * newGamePlusMod);
+					maxInt += (15 * newGamePlusMod);
+				}
+			}
 			if (isNaga()) {
 				maxStr += (15 * newGamePlusMod);
 				maxSpe += (15 * newGamePlusMod);

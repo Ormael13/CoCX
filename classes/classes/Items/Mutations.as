@@ -6536,6 +6536,171 @@ public final class Mutations extends MutationsHelper
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
+		public function skybornSeed(type:Number,player:Player):void
+		{
+			//'type' refers to the variety of seed.
+			//0 == Avian TF
+			//1 == Gryphon TF
+			//2 == Peacock TF
+			var changes:Number = 0;
+			var changeLimit:Number = 1;
+			if (rand(2) == 0) changeLimit++;
+			if (rand(2) == 0) changeLimit++;
+			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+			//Generic eating text:
+			clearOutput();
+			if (type == 0) outputText("You crack open the seed easily, and eat the fruit inside. A bit dry, as you expected, but with a sweet and aromatic taste that leaves you wanting another one.");
+			//Stats changes
+			
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
+			//Sexual changes
+			//Legs
+			if (player.lowerBody != LowerBody.AVIAN && changes < changeLimit && type == 0 && rand(4) == 0) {
+				if (player.isGoo()) {
+					outputText("\n\nTrying to advance, you see your goo pseudopod stuck on the ground. Reaching around to look for the cause, you’re surprised to find the goo solidifying, turning into flesh and skin before your eyes.Bones occupy their places on your new legs and feet, and the excess goo evaporates, leaving you with a duo of fully functional, normal legs.");
+					outputText("\n\nBut, the changes continue as your rearranged pair of feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.");
+					outputText("\n\nThe rest of your legs change too, " + player.skin.coat.color + "-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>");
+				}
+				else if (player.isTaur()) {
+					outputText("\n\nAn strange sensation overcomes your front legs, and even before you realize it, you found them receding on your body! Standing against a rock to not fall at this change to a more bipedal posture, you contemplate how your spine rearranges itself, and soon, you’re left with the usual set of two legs and a standing spine.");
+					outputText("\n\nBut, the changes continue as your rearranged pair of feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, you realize that they are changing. Before your eyes, your hooves seem to recede, turning back into regular human feet. They don’t last long, though, as your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.");
+					outputText("\n\nThe rest of your legs change too, " + player.skin.coat.color + "-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>");
+				}
+				else if (player.isNaga()) {
+					outputText("\n\nYour tail splits in two, and eventually reshapes into the more familiar form of two legs. These are far different from the ones that you expected, however; instead of the usual human legs, these have an array of small, shiny golden scales from the knee down, with " + player.skin.coat.color + "-colored feathers taking over the area between your knees and crotch, looking not unlike a bird’s.");
+					outputText("\n\nYour toes are unusually shaped, too; four of them are in the front, and one of them is on the back of each foot. The toenails have become sharp, menacing talons, best used for snatching prey and the occasional unwilling partner. Looks like <b>you have a new set of avian legs!</b>");
+				}
+				else if (player.isScylla()) {
+					outputText("\n\nAn strange sensation overcomes your " + player.legCount + " tentacles, and even before you realize it, you found that " + (player.legCount - 2) + " of them are receding on your body! Not only that, the ones that remain normal are reshaping themselves into something resembling more an average set of legs. Standing against a rock to not fall at this change to a more bipedal posture, you contemplate how your spine rearranges itself, and soon, you’re left with the usual set of two legs and a standing spine.");
+					outputText("\n\nBut the changes continue, as your rearranged pair of feet feel strangely tired, so you sit down and let them rest, noticing that you’ve now a set of human-looking feet. They don’t last that way long, though, as your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.");
+					outputText("\n\nThe rest of your legs change too, " + player.skin.coat.color + "-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>");
+				}
+				else if (player.isAlraune()) {
+					outputText("\n\nTrying to advance, you see your floral appendage stuck on the ground. Reaching around to look for the cause, you’re surprised to find the verdant foliage decaying, leaving behind mellified shapes that turn quickly into flesh and skin before your eyes.Bones occupy their places on your new legs and feet, and the excess goo evaporates, leaving you with a duo of fully functional, normal legs.");
+					outputText("\n\nBut, the changes continue as your rearranged pair of feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.");
+					outputText("\n\nThe rest of your legs change too, " + player.skin.coat.color + "-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>");
+				}
+				else if (player.lowerBody == LowerBody.HOOFED) {
+					outputText("\n\nYour feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, you realize that they are changing. Before your eyes, your hooves seem to recede, turning back into regular human feet. They don’t last long, though, as your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.");
+					outputText("\n\nThe rest of your legs change too, " + player.skin.coat.color + "-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>");
+				}
+				else if (player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.DEMONIC_HIGH_HEELS) {
+					outputText("\n\nYour feet feel strangely tired, so you sit down and let them rest. As you shift your attention to them, you realize that they are changing. The skin below your knees grows an array of small, shiny golden scales and your demonic high-heels recede into your body. Your toes reshape, four of them remaining in the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.");
+					outputText("\n\nThe rest of your legs change too, " + player.skin.coat.color + "-colored feathers sprouting all over the area between your knees and crotch, giving them a more avian visage. Looks like <b>you have a new set of avian legs!</b>");
+				}
+				else {
+					outputText("\n\nYour [feet] feel strangely tired, so you sit down and let them rest. As you shift your attention to them, you realize that they are changing. The fur on them below your knees falls off, but is quickly replaced by an array of small, shiny golden scales. Your toes reshape, four of them remaining in the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.");
+					outputText("\n\nThe rest of your legs change too, " + player.skin.coat.color + "-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage. Looks like <b>you have a new set of avian legs!</b>");
+				}
+				setLowerBody(LowerBody.AVIAN);
+				player.legCount = 2;
+				changes++;
+			}
+			//Tail
+			if (player.tailType != Tail.AVIAN && player.lowerBody == LowerBody.AVIAN && changes < changeLimit && type == 0 && rand(4) == 0) {
+				if (player.tailType > Tail.NONE) {
+					if (player.tailCount > 1) {
+						outputText("\n\nThe nutty fruit after effects show again, this time as an odd itch down your tail. It’s kind of a familiar feeling, as when you work a muscle to strengthen it. As you’re musing on what could be the cause, something changes on your tails, as they tense and twitch, so you look back to examine what’s happening to them.");
+						outputText("\n\nWhen you lay your eyes on them, the first thing that you notice if that is they’re entwining in a mess of curls and knots, the flesh on them merging until you have a single one. Then, the lone tail left starts shortening quickly. Soon, it has reduced into a short, fleshy bump of a tail. It doesn’t keep that way long, as it lengthens and wides a little, and start sprouting large, " + player.skin.coat.color + " colored feathers, shaped as wide fan. Some of then are very long, while others, near you butt, are soft and downy.");
+					}
+					else {
+						outputText("\n\nThe nutty fruit after effects show again, this time as an odd itch down your tail. It’s kind of a familiar feeling, as when you work a muscle to strengthen it. As you’re musing on what could be the cause, something changes on your tail, as it tenses and twitches, so you look back to examine what’s happening.");
+						outputText("\n\nWhen you lay your eyes on it, the first thing that you notice if that is shortening quickly. Soon, it has reduced into a short, fleshy bump of a tail. It doesn’t keep that way long, as it lengthens and wides a little, and start sprouting large, " + player.skin.coat.color + " colored feathers, shaped as wide fan. Some of then are very long, while others, near you butt, are soft and downy.");
+					}
+				}
+				else {
+					outputText("\n\nThe nutty fruit after effects show again, this time as an odd itch down your spine. It’s kind of a familiar feeling, as when you work a muscle to strengthen it. As you’re musing on what could be the cause, something sprouts just above your butt and you take of your lower clothing so you can examine it.");
+					outputText("\n\nWhen you lay your eyes on it, you notice a short, fleshy bump of a tail. It doesn’t keep that way long, as it lengthens and wides a little, and start sprouting large, " + player.skin.coat.color + " colored feathers, shaped as wide fan. Some of then are very long, while others, near you butt, are soft and downy.");
+				}
+				outputText(" <b>In any case, you have now a full, fan-shaped avian tail above your " + buttDescript() + "!</b>");
+				setTailType(Tail.AVIAN);
+				changes++;
+			}
+			//Arms
+			if (player.armType != Arms.AVIAN && player.tailType == Tail.AVIAN && changes < changeLimit && type == 0 && rand(4) == 0) {
+				if (player.skin.hasChitin()) {
+					outputText("\n\nUghh, was that seed good for your body? You wince in pain, as some part of you is obviously not happy of being subjected to the fruit mysterious properties. As you direct your attention to your arms, you’re alarmed by their increasingly rigid feeling, and, to make things worse, the process continues, as the worrying sensation creeps up your arms until it reaches your shoulders. Soon, no matter how much you try, you aren’t able to move your arms in any way.");
+					outputText("\n\nJust when you thought that nothing could feel worse, you see how the chitin on your arms fissures, falling to the ground like pieces of a broken vase and leaving a mellified tissue beneath. To you relief, the ‘jelly’ also fall, leaving only normal skin on your arms.");
+					outputText("\n\nThen, a cloak of soft, " + player.skin.coat.color + ", colored feathers start sprouting from your armpits, covering every bare inch of skin up your elbows, stopping a few inches before your hands. When the growing stops, the skin over your hands changes too, turning into a layer of [skin], skin, albeit rougher than the usual, and made of thousands of diminutive scales. The structure of your palm and fingers remain the same, tough your fingernails turn into short talons.");
+				}
+				else if (player.hasFur()) {
+					outputText("\n\nA bit weary about the possible effects of the seed on your body, you quickly notice when the fur covering your starts thickening, some patches merging an thickening, first forming barbs, and then straight-out feathers. To your surprise, your hand and forearms become strangely numb, and, to make things worse, the process continues, as the worrying sensation creeps up your arms until it reaches your shoulders. Soon, no matter how much you try, you aren’t able to move your arms in any way.");
+					outputText("\n\nThe newly formed feathers keep growing making the excess fur fall, until you’ve gained a cloak of soft, " + player.skin.coat.color + ", colored feathers start sprouting from your armpits, covering every bare inch of skin up your elbows, stopping a few inches before your hands. Once the effects on that area end, the fur over your hands changes too, falling quickly and leaving behind soft, bare skin, that quickly turns into a layer of [skin], skin, ");
+					outputText("albeit rougher than the usual, made of thousands of diminutive scales. The structure of your palm and fingers remain the same, though your fingernails turn into short talons.");
+				}
+				else if (player.hasScales()) {
+					outputText("\n\nUndoubtedly affected by the dry fruit reactives, the layer of scales covering your arms falls like snowflakes, leaving only a soft layer of [skin] behind. To your surprise, your hand and forearms become strangely numb, and, to make things worse, the process continues, as the worrying sensation creeps up your arms until it reaches your shoulders. Soon, no matter how much you try, you aren’t able to move your arms in any way.");
+					outputText("\n\nThen, a cloak of soft, " + player.skin.coat.color + ", colored feathers start sprouting from your armpits, covering every bare inch of skin up your elbows, stopping a few inches before your hands. When the growing stops, the skin over your hands changes too, turning into a layer of [skin], skin, albeit rougher than the usual, and made of thousands of diminutive scales. The structure of your palm and fingers remain the same, though your fingernails turn into short talons.");
+				}
+				else {
+					outputText("\n\nJust after finishing the fruit, your hand and forearms become strangely numb, and, to make things worse, the process continues, as the worrying sensation creeps up your arms until it reaches your shoulders. Soon, no matter how much you try, you aren’t able to move your arms in any way.");
+					outputText("\n\nThen, a cloak of soft, " + player.skin.coat.color + ", colored feathers start sprouting from your armpits, covering every bare inch of skin up your elbows, stopping a few inches before your hands. When the growing stops, the skin over your hands changes too, turning into a layer of [skin], skin, albeit rougher than the usual, and made of thousands of diminutive scales. The structure of your palm and fingers remain the same, though your fingernails turn into short talons.");
+				}
+				outputText("\n\nLuckily, the sensation returns to your arms, and you’re able to use them with normalcy, with the difference that <b>they’re now avian looking ones!</b>.");
+				setArmType(Arms.AVIAN);
+				changes++;
+			}
+			//Wings
+			if (player.wingType != Wings.FEATHERED_AVIAN && player.armType == Arms.AVIAN && changes < changeLimit && type == 0 && rand(4) == 0) {
+				if (player.wingType == Wings.DRACONIC_SMALL || player.wingType == Wings.DRACONIC_LARGE || player.wingType == Wings.DRACONIC_HUGE || player.wingType == Wings.BAT_LIKE_TINY || player.wingType == Wings.BAT_LIKE_LARGE || player.wingType == Wings.BAT_LIKE_LARGE_2 || player.wingType == Wings.BAT_ARM || player.wingType == Wings.VAMPIRE) {
+					outputText("\n\nYour wings feel suddenly heavier, and you’re forced to sit down to keep balance. Putting attention to the things happening at your back, you realize that the scales covering them are falling!");
+					outputText("\n\nA bit alarmed, you’re surprised when, not much later, feathers started sprouting everywhere on them. t all the same, as long ones grow at the base, while shorter ones appear on the upper part of them and near your shoulders. When all the growth is finished, your wings are left with a much more bird-like appearance.");
+					outputText("\n\n<b>In the end, your pair of now avian wings will carry you to skies with ease.</b>");
+				}
+				else if (player.wingType > Wings.NONE) {
+					outputText("\n\nYour wings feel suddenly heavier, and you’re forced to sit down to keep balance. Putting attention to the things happening at your back, you realize that the delicate tissue of them is becoming skin and flesh, with bones sprouting inside and placing themselves to support the added weight.");
+					outputText("\n\nOnce the muscles and bones are correctly formed, feathers start sprouting everywhere on them. Not all the same, as long ones grow at the base, while shorter ones appear on the upper part of them and near your shoulders. When all the growth is finished, your wings are left with a much more bird-like appearance.");
+					outputText("\n\n<b>In the end, your pair of now avian wings will carry you to skies with ease.</b>");
+				}
+				else {
+					outputText("\n\nA sudden ache overcomes your back, when you’re at the middle of your daily routine. Knowing from before how hazardous is the food found on the wilds of Mareth, you curse the strange seed that you’ve just eat for this painful state.");
+					outputText("\n\nBefore you can find something to soothe the pain, a piercing sensation of something tearing its way of of your flesh and skin makes you lose the balance and fall. Instinctively, you take off the upper part of your [armor] so anything that it’s growing from back there makes they way out without any trouble.");
+					outputText("\n\nWhen everything finishes, you take a look at your backside, noticing two shapes sprouting from your upper back. They grow and grow, and when you recognize them as wings, they’ve already grown to carry with your body ease through the skies. Once the growth stops, you extend them and flex your newly gained bones and muscles. <b>Seems like you’ve gained a pair of avian wings!</b>");
+				}
+				setWingType(Wings.FEATHERED_AVIAN, "large, feathered");
+				changes++;
+			}
+			if (player.wingType != Wings.FEATHERED_LARGE && player.wingType > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+				removeWings();
+				changes++;
+			}
+			//Hair
+			if (player.hairType != 1 && player.hairLength > 0 && changes < changeLimit && type == 0 && rand(4) == 0) {
+				setHairType(Hair.FEATHER);
+				outputText("\n\nWhile you’re yet processing the taste of that odd seed, you suddenly start feeling an annoying itching coming from your scalp, without a doubt a change brought by the transformative nature of the seed.");
+				outputText("\n\nThe base of each one of your hairs thicken noticeably, and from every one of them, small hairy filament start sprouting of each side. Soon you realize that your hairs are becoming feathers, and in a question of minute, <b>you’re left with a mane of [hair]!</b>");
+				changes++;
+			}
+			//Face
+			if (player.faceType != Face.AVIAN && changes < changeLimit && type == 0 && rand(4) == 0) {
+				if (player.faceType == Face.HUMAN) {
+					outputText("\n\nWith the nutty flavor of the fruit still lingering, you gasp as your face feels weird and tingling, and aware of the transformative nature of the food on this strange land, you quickly associate it with the strange fruit that you’ve just eaten. Your mouth and nose feels numb, and you’re left a bit confused, dizzy even, so your sit until your head clears. As you do so, several feathers start sprouting on your head, those ones small and downy, and cover every bit of skin.");
+					outputText("\n\nToo busy giving attention to this, you don’t notice when something big and hard suddenly obscures your vision. Sensing it with your hands, you feel it attached to your face. Rushing to the nearest pool of water, you look up your reflection, only to realize that you have a full avian, face, covered in feathers and complete with a hooked beak.");
+					outputText("\n\nA bit worried about the new…implications of this on your sexual life, you test the borders on your beak, fearing it sharp and dangerous, only to happily discover that it's not sharpened in any way, only not as soft as an usual set of lips. If you wanted to damage someone with it, you’ll had to apply pressure, not unlike on an usual set of tooth. Even with that, kisses would be…interesting from now on, to say the least.");
+					outputText("\n\nThis isn’t the only major change, as you feel your ears twitching, and before you can realize, they recede on your body, leaving behind two holes, almost completely hidden by feathers and your [hair]. Fearing that most of your hearing range and ability was damaged or is blocked by the feathers, you test the sounds around your, and breathe on relief at the realization that your hearing is as good as always. <b>Anyways, after a lot of changes, you’re left with an avian head!</b>");
+				}
+				else {
+					outputText("\n\nWith the nutty flavor of the fruit still lingering, you gasp as your face feels weird and tingling, and aware of the transformative nature of the food on this strange land, you quickly associate it with the strange fruit that you’ve just eaten. Your [face] feels numb, and you’re left a bit confused, dizzy even, so your sit until your head clears. As you do so, several feathers start sprouting on your head, those ones small and downy, and cover every bit of skin.");
+					outputText("\n\nToo busy giving attention to this, you don’t notice when something big and hard suddenly obscures your vision. Sensing it with your hands, you feel it attached to your face. Rushing to the nearest pool of water, you look up your reflection, only to realize that you have a full avian, face, covered in feathers and complete with a hooked beak. That's quite the change, even for your [face].");
+					outputText("\n\nA bit worried about the new…implications of this on your sexual life, you test the borders on your beak, fearing it sharp and dangerous, only to happily discover that it's not sharpened in any way, only not as soft as an usual set of lips. If you wanted to damage someone with it, you’ll had to apply pressure, not unlike of an usual set of tooth. Even with that, kisses would be…interesting from now on, to say the least.");
+					outputText("\n\nThis isn’t the only major change, as you feel your [ears] twitching, and before you can realize, they recede on your body, leaving behind two holes, almost completely hidden by feathers and your [hair]. Fearing that most of your hearing range and ability was damaged or is blocked by the feathers, you test the sounds around your, and breathe on relief at the realization that your hearing is as good as always. <b>Anyways, after a lot of changes, you’re left with an avian head!</b>");
+				}
+				setFaceType(Face.AVIAN);
+				changes++;
+			}
+			//Ears
+			if (player.earType != Ears.AVIAN && changes < changeLimit && rand(4) == 0) {
+				outputText("\n\nYou feel your ears twitching, and before you can realize, they recede on your body, leaving behind two holes, almost completely hidden by feathers and your [hair]. Fearing that most of your hearing range and ability was damaged or is blocked by the feathers, you test the sounds around your, and breathe on relief at the realization that your hearing is as good as always.");
+				setEarType(Ears.AVIAN);
+				changes++;
+			}
+			if (changes == 0) outputText("\n\nIt seems like the fruit had no effect this time. Maybe it was spoiled, or kept in storage for too much time?");
+			player.refillHunger(35);
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+		}
+
 		/*
 		 General Effects:
 		 -Speed to 70

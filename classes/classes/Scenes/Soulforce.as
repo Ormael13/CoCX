@@ -677,15 +677,12 @@ public function celessIntroForced():void {
 			addButton(0, "Fox Jewel", AddFoxJewel).hint("Add 1 Fox Jewel.");
 			addButton(1, "F.Fish", AddFreshFish).hint("Add 1 Fresh Fish.");
 			addButton(2, "BehemothCum", AddBehemothCum).hint("Add 1 bottle of Behemoth Cum.");
-			addButton(3, "VoltageTopaz", AddVoltageTopaz).hint("Add 1 Voltage Topaz.");
-			addButton(4, "Red Blood", AddRedBlood).hint("Add 1 vial of Red Blood (Bat TF).");
-			//addButtonDisabled(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
-			addButton(5, "Gorgon Oil", AddGorgonOil).hint("Add 1 vial of Gorgon Oil.");
-			addButton(6, "Vouivre Oil", AddVouivreOil).hint("Add 1 vial of Vouivre Oil.");
-			addButton(7, "Couatl Oil", AddCouatlOil).hint("Add 1 vial of Couatl Oil.");
-			//addButton(8, "V.D.ARC", AddVeryDilutedArcaneRegenConcotion).hint("Add 1 very diluted Arcane Regen Concotion.");
-			//addButton(9, "D.ARC", AddDilutedArcaneRegenConcotion).hint("Add 1 diluted Arcane Regen Concotion.");
-			addButton(8, "WoFruit", AddWonderFruit).hint("Add 1 Wonder Fruit.");
+			addButton(3, "TF's Pack", AddVoltageTopaz).hint("Add 1 Voltage Topaz, 1 vial of Red Blood (Bat TF) and 1 Wonder Fruit.");
+			addButton(4, "SkybornSeed", AddSkybornSeed).hint("Add 1 Skyborn Seed.");
+			//addButton(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
+			addButton(5, "Naga Oils", AddGorgonOil).hint("Add 1 vial of Gorgon, Vouivre and Couatl Oil.");
+			//addButton(7, "V.D.ARC", AddVeryDilutedArcaneRegenConcotion).hint("Add 1 very diluted Arcane Regen Concotion.");
+			//addButton(8, "D.ARC", AddDilutedArcaneRegenConcotion).hint("Add 1 diluted Arcane Regen Concotion.");
 			addButton(9, "SBMan", AddSoulBlastManual).hint("Add 1 Soul Blast manual.");
 			addButton(10, "White B.", AddWhiteBook).hint("Add 1 White Book.");
 			addButton(11, "Black B.", AddBlackBook).hint("Add 1 Black Book.");
@@ -767,19 +764,23 @@ public function celessIntroForced():void {
 		}
 		public function AddVoltageTopaz():void {
 			outputText("\n\n<b>(Gained 1 Voltage Topaz!)</b>\n\n");
-			inventory.takeItem(consumables.VOLTTOP, SoulforceCheats);
+			inventory.takeItem(consumables.VOLTTOP, AddRedBlood);
 		}
 		public function AddRedBlood():void {
 			outputText("\n\n<b>(Gained 1 vial of red blood!)</b>\n\n");
-			inventory.takeItem(consumables.REDVIAL, NonEquipmentMenu);
+			inventory.takeItem(consumables.REDVIAL, AddWonderFruit);
+		}
+		public function AddWonderFruit():void {
+			outputText("\n\n<b>(Gained 1 Wonder Fruit!)</b>\n\n");
+			inventory.takeItem(consumables.WOFRUIT, NonEquipmentMenu);
 		}
 		public function AddGorgonOil():void {
 			outputText("\n\n<b>(Gained 1 vial of Gorgon Oil!)</b>\n\n");
-			inventory.takeItem(consumables.GORGOIL, NonEquipmentMenu);
+			inventory.takeItem(consumables.GORGOIL, AddVouivreOil);
 		}
 		public function AddVouivreOil():void {
 			outputText("\n\n<b>(Gained 1 vial of Vouivre Oil!)</b>\n\n");
-			inventory.takeItem(consumables.VOUIOIL, NonEquipmentMenu);
+			inventory.takeItem(consumables.VOUIOIL, AddCouatlOil);
 		}
 		public function AddCouatlOil():void {
 			outputText("\n\n<b>(Gained 1 vial of Couatl Oil!)</b>\n\n");
@@ -797,9 +798,9 @@ public function celessIntroForced():void {
 			outputText("\n\n<b>(Gained 1 Soul Blast Manual!)</b>\n\n");
 			inventory.takeItem(consumables.SOBLMAN, NonEquipmentMenu);
 		}
-		public function AddWonderFruit():void {
-			outputText("\n\n<b>(Gained 1 Wonder Fruit!)</b>\n\n");
-			inventory.takeItem(consumables.WOFRUIT, NonEquipmentMenu);
+		public function AddSkybornSeed():void {
+			outputText("\n\n<b>(Gained 1 Skyborn Seed!)</b>\n\n");
+			inventory.takeItem(consumables.SKYSEED, NonEquipmentMenu);
 		}
 		public function AddBehemothCum():void {
 			outputText("\n\n<b>(Gained 1 vial of Behemoth Cum!)</b>\n\n");

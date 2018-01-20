@@ -2455,7 +2455,8 @@ public class Appearance extends Utils
 					[Face.RED_PANDA, "red-panda"],
 					[Face.CAT_CANINES, "cat canines"],
 					[Face.CHESHIRE, "cheshire"],
-					[Face.CHESHIRE_SMILE, "cheshire"]
+					[Face.CHESHIRE_SMILE, "cheshire"],
+					[Face.AVIAN, "avian"]
 				]
 		);
 		public static const DEFAULT_TONGUE_NAMES:Object = createMapFromPairs(
@@ -2518,7 +2519,8 @@ public class Appearance extends Utils
 					[Ears.ONI, "oni"],
 					[Ears.ELVEN, "elven"],
 					[Ears.WEASEL, "weasel"],
-					[Ears.RED_PANDA, "red-panda"]
+					[Ears.RED_PANDA, "red-panda"],
+					[Ears.AVIAN, "avian"]
 				]
 		);
 		public static const DEFAULT_HORNS_NAMES:Object = createMapFromPairs(
@@ -2573,7 +2575,8 @@ public class Appearance extends Utils
 					[Arms.ELF, "elf"],
 					[Arms.RAIJU, "raiju"],
 					[Arms.RED_PANDA, "red-panda"],
-					[Arms.CAT, "cat"]
+					[Arms.CAT, "cat"],
+					[Arms.AVIAN, "avian"]
 				]
 		);
 		public static const DEFAULT_TAIL_NAMES:Object = createMapFromPairs(
@@ -2612,7 +2615,8 @@ public class Appearance extends Utils
 					[Tail.YGGDRASIL, "yggdrasil"],
 					[Tail.RAIJU, "raiju"],
 					[Tail.RED_PANDA, "red-panda"],
-					[Tail.GARGOYLE_2, "axe-shaped gargoyle"]
+					[Tail.GARGOYLE_2, "axe-shaped gargoyle"],
+					[Tail.AVIAN, "avian"]
 				]
 		);
 		public static const DEFAULT_WING_NAMES:Object = createMapFromPairs(
@@ -2642,7 +2646,8 @@ public class Appearance extends Utils
 					[Wings.MANTICORE_LIKE_LARGE, "large manticore-like"],
 					[Wings.BAT_ARM, "large manticore-like"],
 					[Wings.VAMPIRE, "large manticore-like"],
-					[Wings.FEY_DRAGON_WINGS, "large majestic fey draconic"]
+					[Wings.FEY_DRAGON_WINGS, "large majestic fey draconic"],
+					[Wings.FEATHERED_AVIAN, "avian"]
 				]
 		);
 		public static const DEFAULT_WING_DESCS:Object = createMapFromPairs(
@@ -2670,7 +2675,8 @@ public class Appearance extends Utils
 					[Wings.PLANT, "three pairs of cockvines"],
 					[Wings.MANTICORE_LIKE_SMALL, "small manticore-like"],
 					[Wings.MANTICORE_LIKE_LARGE, "large manticore-like"],
-					[Wings.FEY_DRAGON_WINGS, "large majestic fey draconic"]
+					[Wings.FEY_DRAGON_WINGS, "large majestic fey draconic"],
+					[Wings.FEATHERED_AVIAN, "large feathery"]
 				]
 		);
 		public static const DEFAULT_LOWER_BODY_NAMES:Object = createMapFromPairs(
@@ -2716,7 +2722,8 @@ public class Appearance extends Utils
 					[LowerBody.ONI, "oni"],
 					[LowerBody.ELF, "elf"],
 					[LowerBody.RAIJU, "raiju"],
-					[LowerBody.RED_PANDA, "red-panda"]
+					[LowerBody.RED_PANDA, "red-panda"],
+					[LowerBody.AVIAN, "avian"]
 				]
 		);
 		// <mod name="Dragon patch" author="Stadler76">

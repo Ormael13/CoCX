@@ -130,6 +130,7 @@ public class Harpy extends Monster
 			this.level = 20;
 			this.gems = 30 + rand(14);
 			this.drop = new ChainedDrop().add(armors.W_ROBES,1/10)
+					.add(consumables.SKYSEED,1/5)
 					.elseDrop(consumables.GLDSEED);
 			this.wingType = Wings.HARPY;
 			this.special1 = harpyUberCharge;

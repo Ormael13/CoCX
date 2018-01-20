@@ -49,6 +49,7 @@ public class Tail extends SaveableBodyPart {
 	public static const RAIJU:int               = 33;
 	public static const RED_PANDA:int           = 34;
 	public static const GARGOYLE_2:int          = 35;
+	public static const AVIAN:int          		= 36;
 	
 	override public function set type(value:int):void {
 		var old:int = type;

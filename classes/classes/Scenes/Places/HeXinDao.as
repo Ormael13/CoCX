@@ -211,7 +211,7 @@ public class HeXinDao extends BaseContent
             addButton(5, "LargePp", buyItem,consumables.LARGEPP,sayLine(consumables.LARGEPP,"dog"),onBuyString).hint("Buy an overly large canine pepper.");
             addButton(6, "ChillyP", buyItem,consumables.CHILLYP,sayLine(consumables.CHILLYP,"winter wolf"),onBuyString).hint("Buy a Chilly pepper.");
             addButton(7, "MaraFruit", buyItem,consumables.MARAFRU,sayLine(consumables.MARAFRU,"plant"),onBuyString).hint("Buy an apple-shaped fruit.");
-            //addButton(8, "B.Gossr", BGossr).hint("Buy .");
+            addButton(8, "SkySeed", buyItem,consumables.SKYSEED,sayLine(consumables.SKYSEED,"avian"),onBuyString).hint("Buy a skyborn seed.");
             //addButton(9, "B.Gossr", BGossr).hint("Buy .");
             addButton(14, "Back", mogahenmerchant);
             statScreenRefresh();

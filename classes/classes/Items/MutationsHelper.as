@@ -136,6 +136,7 @@ import classes.BodyParts.Wings;
 					break;
 				case Arms.HARPY:
 				case Arms.PHOENIX:
+				case Arms.AVIAN:
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your feathery arms are shedding their feathery coating.  The wing-like shape your arms once had is gone in a matter of moments, leaving [skin] behind.");
 					break;
 				case Arms.GARGOYLE:
@@ -292,6 +293,7 @@ import classes.BodyParts.Wings;
 		return setBodyPartType("armType", METAMORPH_ARMS, armType);
 	}
 	private const METAMORPH_ARMS:Object = createMapFromPairs([
+		[Arms.AVIAN, null],
 		[Arms.BEE, StatusEffects.UnlockedBeeArms],
 		[Arms.CAT, null],
 		[Arms.DRAGON, StatusEffects.UnlockedDraconicArms],
@@ -324,6 +326,7 @@ import classes.BodyParts.Wings;
 		return setBodyPartType("earType", METAMORPH_EARS, earType);
 	}
 	private const METAMORPH_EARS:Object = createMapFromPairs([
+		[Ears.AVIAN, null],
 		[Ears.BUNNY, null],
 		[Ears.CAT, null],
 		[Ears.COW, StatusEffects.UnlockedCowEars],
@@ -384,6 +387,7 @@ import classes.BodyParts.Wings;
 		return setBodyPartType("faceType", METAMORPH_FACES, faceType);
 	}
 	private const METAMORPH_FACES:Object = createMapFromPairs([
+		[Face.AVIAN, null],
 		[Face.BOAR, null],
 		[Face.BUCKTEETH, null],
 		[Face.BUCKTOOTH, null],
@@ -484,6 +488,7 @@ import classes.BodyParts.Wings;
 		return setBodyPartType("lowerBody", METAMORPH_LOWER_BODIES, lowerBody);
 	}
 	private const METAMORPH_LOWER_BODIES:Object = createMapFromPairs([
+		[LowerBody.AVIAN, null],
 		[LowerBody.BEE, StatusEffects.UnlockedBeeLegs],
 		[LowerBody.BUNNY, null],
 		[LowerBody.CAT, null],
@@ -574,6 +579,7 @@ import classes.BodyParts.Wings;
 		}
 	}
 	private const METAMORPH_TAILS:Object     = createMapFromPairs([
+		[Tail.AVIAN, null],
 		[Tail.BEE_ABDOMEN, StatusEffects.UnlockedBeeTail],
 		[Tail.BEHEMOTH, null],
 		[Tail.CAT, null],
@@ -635,6 +641,7 @@ import classes.BodyParts.Wings;
 		[Wings.DRACONIC_LARGE, StatusEffects.UnlockedDraconicWingsLarge],
 		[Wings.DRACONIC_SMALL, StatusEffects.UnlockedDraconicWingsSmall],
 		[Wings.FEATHERED_ALICORN, null],
+		[Wings.FEATHERED_AVIAN, null],
 		[Wings.FEATHERED_LARGE, StatusEffects.UnlockedHarpyWings],
 		[Wings.FEATHERED_PHOENIX, StatusEffects.UnlockedPhoenixWings],
 		[Wings.FEY_DRAGON_WINGS, null],
