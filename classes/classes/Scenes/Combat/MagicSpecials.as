@@ -1649,7 +1649,7 @@ public class MagicSpecials extends BaseCombatContent {
 		var tempTouSpe:Number = 0;
 		var dwarfrageDuration:Number = 10;
 		var DwarfRageBoost:Number = 10;
-		if (player.hasPerk(PerkLib.JobBarbarian)) DwarfRageBoost += 5;
+		if (player.hasPerk(PerkLib.JobSwordsman)) DwarfRageBoost += 5;
 		if (player.hasPerk(PerkLib.JobBrawler)) DwarfRageBoost += 5;
 		if (player.hasPerk(PerkLib.Berzerker)) DwarfRageBoost += 5;
 		if (player.hasPerk(PerkLib.Lustzerker)) DwarfRageBoost += 5;

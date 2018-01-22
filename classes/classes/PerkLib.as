@@ -1011,6 +1011,9 @@ public class PerkLib
 		public static const JobSoulCultivator:PerkType = mk("Job: Soul Cultivator", "Job: Soul Cultivator",
 				"You've cultivated powers of your soul.",
 				"You choose the 'Job: Soul Cultivator' perk, starting journey of the soul cultivation path!");
+		public static const JobSwordsman:PerkType = mk("Job: Swordsman", "Job: Swordsman",
+				"You've trained in using large weapons in fights.",
+				"You choose 'Job: Swordsman' perk, training yourself to became Swordsman.");
 		public static const JobWarlord:PerkType = mk("Job: Warlord", "Job: Warlord",
 				"You've trained in combat against group of enemies.",
 				"You choose 'Job: Warlord' perk, training yourself to became Warlord.");
@@ -1983,7 +1986,7 @@ public class PerkLib
                     .requirePerk(JobWarrior);
             JobBrawler.requireLevel(6)
                     .requireStr(60);
-            JobBarbarian.requireLevel(6)
+            JobSwordsman.requireLevel(6)
                     .requireStr(60);
             IronFistsI.requireLevel(6)
                     .requireStr(60)
@@ -2029,10 +2032,10 @@ public class PerkLib
                     .requireStr(80)
                     .requireTou(60);
             WeaponMastery.requireLevel(12)
-                    .requirePerk(JobBarbarian)
+                    .requirePerk(JobSwordsman)
                     .requireStr(100);
             DoubleAttackLarge.requireLevel(12)
-                    .requirePerk(JobBarbarian)
+                    .requirePerk(JobSwordsman)
                     .requireStr(75)
                     .requireStr(50);
             ImprovedTranquilness.requireStr(90)
@@ -2049,7 +2052,7 @@ public class PerkLib
                     .requirePerk(WeaponMastery)
                     .requireStr(100);
             HiddenMomentum.requireLevel(18)
-                    .requirePerk(JobBarbarian)
+                    .requirePerk(JobSwordsman)
                     .requireStr(75)
                     .requireSpe(50);
             HalfStepToAdvancedTranquilness.requireStr(120)
@@ -2098,7 +2101,7 @@ public class PerkLib
             //a może właśnie perk dodający do max str cap tyle ile wynosi obecnie PC tone?
             //Tier 7 Strength Perks
             PrestigeJobBerserker.requirePrestigeJobSlot()
-                    .requirePerk(JobBarbarian)
+                    .requirePerk(JobSwordsman)
                     .requirePerk(JobGuardian)
                     .requireAnyPerk(Berzerker, Lustzerker)
                     .requireStr(200)
@@ -3528,7 +3531,7 @@ public class PerkLib
                         return player.internalChimeraScore() >= 3;
                     }, "Three racial perks");
             Whirlwind.requireLevel(12)
-                    .requirePerk(JobBarbarian);
+                    .requirePerk(JobSwordsman);
             Whipping.requireLevel(12)
                     .requirePerk(JobEromancer);
             WhirlwindFeral.requireLevel(12)
@@ -3728,7 +3731,7 @@ public class PerkLib
                                             .requirePerk(JobDefender)
                                             .requirePerk(JobBrawler)
                                             .requirePerk(JobBeastWarrior)
-                                            .requirePerk(JobBarbarian)
+                                            .requirePerk(JobSwordsman)
                                             .requirePerk(JobAllRounder)
                                             .requireStr(150)
                                             .requireTou(150)

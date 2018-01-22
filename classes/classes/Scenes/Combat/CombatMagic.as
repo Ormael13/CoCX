@@ -1000,7 +1000,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 150) MightBoost += 30;
 			if (player.hasPerk(PerkLib.JobEnchanter) && player.inte >= 50) MightBoost += 5;
 			if (player.hasPerk(PerkLib.Battlemage) && player.inte >= 50) MightBoost += 15;
-			if (player.hasPerk(PerkLib.JobBarbarian)) MightBoost -= 10;
+			if (player.hasPerk(PerkLib.JobSwordsman)) MightBoost -= 10;
 			if (player.hasPerk(PerkLib.JobBrawler)) MightBoost -= 10;
 			if (player.hasPerk(PerkLib.JobDervish)) MightBoost -= 10;
 			if (player.hasPerk(PerkLib.IronFistsI)) MightBoost -= 10;
@@ -1124,7 +1124,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 150) BlinkBoost += 30;
 			if (player.hasPerk(PerkLib.JobEnchanter) && player.inte >= 50) BlinkBoost += 5;
 			if (player.hasPerk(PerkLib.Battleflash) && player.inte >= 50) BlinkBoost += 15;
-			if (player.hasPerk(PerkLib.JobBarbarian)) BlinkBoost -= 10;
+			if (player.hasPerk(PerkLib.JobSwordsman)) BlinkBoost -= 10;
 			if (player.hasPerk(PerkLib.JobBrawler)) BlinkBoost -= 10;
 			if (player.hasPerk(PerkLib.JobDervish)) BlinkBoost -= 10;
 			if (player.hasPerk(PerkLib.IronFistsI)) BlinkBoost -= 10;
@@ -1572,7 +1572,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 150) ChargeWeaponBoost += 30;
 		if (player.hasPerk(PerkLib.JobEnchanter) && player.inte >= 50) ChargeWeaponBoost += 5;
 		if (player.hasPerk(PerkLib.Spellsword) && player.inte >= 50) ChargeWeaponBoost += 15;
-		if (player.hasPerk(PerkLib.JobBarbarian)) ChargeWeaponBoost -= 10;
+		if (player.hasPerk(PerkLib.JobSwordsman)) ChargeWeaponBoost -= 10;
 		if (player.hasPerk(PerkLib.JobBrawler)) ChargeWeaponBoost -= 10;
 		if (player.hasPerk(PerkLib.JobDervish)) ChargeWeaponBoost -= 10;
 		if (player.hasPerk(PerkLib.IronFistsI)) ChargeWeaponBoost -= 10;
@@ -1648,7 +1648,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 150) ChargeArmorBoost += 30;
 		if (player.hasPerk(PerkLib.JobEnchanter) && player.inte >= 50) ChargeArmorBoost += 5;
 		if (player.hasPerk(PerkLib.Spellarmor) && player.inte >= 50) ChargeArmorBoost += 15;
-		if (player.hasPerk(PerkLib.JobBarbarian)) ChargeArmorBoost -= 10;
+		if (player.hasPerk(PerkLib.JobSwordsman)) ChargeArmorBoost -= 10;
 		if (player.hasPerk(PerkLib.JobBrawler)) ChargeArmorBoost -= 10;
 		if (player.hasPerk(PerkLib.JobDervish)) ChargeArmorBoost -= 10;
 		if (player.hasPerk(PerkLib.IronFistsI)) ChargeArmorBoost -= 10;

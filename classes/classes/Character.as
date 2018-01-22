@@ -813,7 +813,7 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.EpicTranquilness) >= 0) max += 2250;
 			if (findPerk(PerkLib.HalfStepToMythicalTranquilness) >= 0) max += 4000;
 			if (findPerk(PerkLib.MythicalTranquilness) >= 0) max += 7000;
-			if (findPerk(PerkLib.JobBarbarian) >= 0) max += 20;
+			if (findPerk(PerkLib.JobSwordsman) >= 0) max += 20;
 			if (findPerk(PerkLib.JobBeastWarrior) >= 0) max += 20;
 			if (findPerk(PerkLib.JobDervish) >= 0) max += 20;
 			if (findPerk(PerkLib.JobWarlord) >= 0) max += 20;

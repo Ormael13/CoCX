@@ -208,13 +208,18 @@ use namespace CoC;
 			addButton(9, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
 			addButton(10, "Celess", celessIntroForced).hint("Due to hard time getting her intro here it's.");
 			addButton(11, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
-			//addButton(12, "12", );
+			if (player.hasPerk(PerkLib.JobBarbarian)) addButton(12, "BarbToSword", replacingBarbsWithsSowrds).hint("Replacing Job: Barbarian with Job: Swordsman to keep integrity of test saves.");
 			//addButton(13, "13", );
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 public function celessIntroForced():void {
 	clearOutput();
 	CelessScene.instance.birthScene();
+}
+public function replacingBarbsWithsSowrds():void {
+	player.removePerk(PerkLib.JobBarbarian);
+	player.createPerk(PerkLib.JobSwordsman, 0, 0, 0, 0);
+	doNext(SoulforceCheats);
 }
 		public function StatsMenu():void {
 			menu();

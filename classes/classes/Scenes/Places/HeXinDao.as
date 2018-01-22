@@ -31,6 +31,7 @@ public class HeXinDao extends BaseContent
 
     public var ignisarenaseer:IgnisArenaSeerScene = new IgnisArenaSeerScene();
     public var chichiScene:ChiChiFollower = new ChiChiFollower();
+	public var journeytotheeast:JourneyToTheEast = new JourneyToTheEast();
     //public var TFmerch:MogaHen = new MogaHen();
 
     public function HeXinDao()
@@ -55,7 +56,7 @@ public class HeXinDao extends BaseContent
         addButton(2, "SoulEquip", soulequipmentmerchant);
         addButton(3, "SoulArrow", soularrowmerchant);
         //addButton(5, "", ); siedziba lokalnej grupy zrzeszającej soul cultivators - PC aby potem pojsc dalej bedzie musial dolaczyc tutaj (pomyslec nad wiarygodnym sposobem zmuszenia go do tego - moze jakies ciekawe itemy/inne rzeczy dla czlonkow beda a miejsce sie zwolni jak wywala tak goblinke tworzynie golemow, ktora potem oczywiscie wcisnie sie do obozu PC aby w spokoju rozwijac sie w tworzeniu golemow itp.)
-        //addButton(6, "", ); jakies miejsce aby zdobywac gems lub/i EXP - moze jakies zadania tu zlecane czy cos w tym stylu?
+        addButton(6, "JourTTEast", journeytotheeast.enteringInn);
         addButton(7, "Arena", soularena);
         addButton(8, "Restaurant", restaurantShiraOfTheEast);
         if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 20 && flags[kFLAGS.CHI_CHI_FOLLOWER] < 2) addButton(13, "Chi Chi", chichiScene.MeetingChiChiInHeXinDao);
@@ -542,7 +543,10 @@ public function soularena():void {
     }
 	public function gaunletchallange2fight1():void {
 		clearOutput();
-		outputText("Placeholder.");
+		outputText("As you enter the arena you spot your opponent at the other edge of the battlefield. It’s a goblin not unlike those you can meet in the wilderness, however she’s armed with a set of throwing knife and other gear you don’t see normally on those critters.\n\n");
+        outputText("The voice of the announcer ring into the stadium.\n\n");
+        outputText("\"<i>Ladies and gentlemans today someone challenged the second ranking gladiatorial test. Can this would be hero defeat all three opponent and earn not only a large sum of gems as well as the right to brag for a full month?! LET'S FIND OUT!</i>\"\n\n");
+        outputText("The gates open and the goblin charge at you weapon at the ready.\n\n");
         player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
         player.createStatusEffect(StatusEffects.SoulArenaGaunlet, 0, 0, 0, 0);
         if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
@@ -550,29 +554,32 @@ public function soularena():void {
 	}
 	public function gaunletchallange2fight2():void {
 		clearOutput();
-		outputText("Placeholder.");
+		outputText("As the goblin falls unconscious to the ground the crowd cheer for you.\n\n");
+        outputText("\"<i>It would seems the hero squashed that midget good but were only beginning. If I may the next contestant has been sex starved for two consecutive month and is desperate to sow his seed hence now we release... THE HOUND!!!</i>\"\n\n");
+        outputText("A massive hellhound of proportion larger than normal rush out of an opening gate. Its eye burns with lust.\n\n");
         startCombat(new HellHound());
 	}
 	public function gaunletchallange2fight3():void {
 		clearOutput();
-		outputText("Placeholder.");
+		outputText("Placeholder.\n\n");
+        outputText("Placeholder.\n\n");
         startCombat(new CorruptedDrider());
 	}
 	public function gaunletchallange2fight4():void {
 		clearOutput();
-		outputText("Placeholder.");
+		outputText("Placeholder.\n\n");
         startCombat(new BossGolems());
 	}
 	public function gaunletchallange2postfight():void {
 		clearOutput();
-		outputText("Placeholder...");
+		outputText("Placeholder.\n\n");
         if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] >= 2) {
 			 outputText("\"<i>Good show, champion. As a reward for your performance, please accept these 20 spirit stones. Please do come back again and maybe next time you could even try the harder challenge.</i>\"\n\n");
 			flags[kFLAGS.SPIRIT_STONES] += 20;
             cleanupAfterCombat();
 		}
 		else {
-			outputText("Placeholder.");
+			outputText("Placeholder.\n\n");
 			flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] = 2;
             inventory.takeItem(weaponsrange.BOWGUID, cleanupAfterCombat);
 		}

@@ -288,7 +288,7 @@ public function startUrtaQuest():void {
 	player.createPerk(PerkLib.Berzerker,0,0,0,0);
 	player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
 	player.createPerk(PerkLib.JobWarrior,0,0,0,0);
-	player.createPerk(PerkLib.JobBarbarian,0,0,0,0);
+	player.createPerk(PerkLib.JobSwordsman,0,0,0,0);
 	player.createPerk(PerkLib.JobAllRounder,0,0,0,0);
 	player.createPerk(PerkLib.HiddenMomentum,0,0,0,0);
 	player.createPerk(PerkLib.HoldWithBothHands,0,0,0,0);

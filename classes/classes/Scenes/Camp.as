@@ -3373,9 +3373,9 @@ private function promptSaveUpdate():void {
 	}
 /*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 19) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 20;
-		if (player.findPerk(PerkLib.ElementalConjurerMindAndBodyResolve) >= 0) {
-			player.removePerk(PerkLib.ElementalConjurerMindAndBodyResolve);
-			player.createPerk(PerkLib.ElementalConjurerMindAndBodyDedication, 0, 0, 0, 0);
+		if (player.findPerk(PerkLib.JobBarbarian) >= 0) {
+			player.removePerk(PerkLib.JobBarbarian);
+			player.createPerk(PerkLib.JobSwordsman, 0, 0, 0, 0);
 		}
 		clearOutput();
 		outputText("Switching one perk...if needed.");

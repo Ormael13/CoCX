@@ -375,7 +375,7 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.EpicTranquilness) >= 0) temp += 2250;
 			if (findPerk(PerkLib.HalfStepToMythicalTranquilness) >= 0) temp += 3500;
 			if (findPerk(PerkLib.MythicalTranquilness) >= 0) temp += 5000;
-			if (findPerk(PerkLib.JobBarbarian) >= 0) temp += 20;
+			if (findPerk(PerkLib.JobSwordsman) >= 0) temp += 20;
 			if (findPerk(PerkLib.JobBeastWarrior) >= 0) temp += 20;
 			if (findPerk(PerkLib.JobDervish) >= 0) temp += 20;
 			if (findPerk(PerkLib.JobWarlord) >= 0) temp += 20;

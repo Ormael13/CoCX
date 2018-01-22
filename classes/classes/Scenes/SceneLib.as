@@ -93,6 +93,8 @@ public class SceneLib {
 
     public static var ceaniScene:CeaniScene = new CeaniScene();
 
+    public static var dianaScene:DianaFollower = new DianaFollower();
+
     public static var electraScene:ElectraFollower = new ElectraFollower();
 
     public static var emberScene:EmberScene = new EmberScene();

@@ -67,15 +67,15 @@ package classes.Scenes
 			outputText("-Black Magic spell Heal digievolv... en becoming White Magic spell with all the same effect and costs (but without chance to backfire at PC ^^). I was all the time feeling it should be white magic with some other spell taking healing-type spell among black magic spells.\n");
 			outputText("-New Black Magic spell: Regenerate. When casted succesfully will give 7 turns regeneration effect on PC.\n");
 			outputText("-New Grey Magic spell: Nosferatu. It deals damage to enemy at same time healing PC by the same amount.\n");
-			outputText("-New TF item: Skyborn Seed (avian TF) buyable in He'Xin'Dao TF shop for 30 gems, droped by Hapries or radomly found in High Mountains. Bonuses for (Half) Avian-morph would be for 4(8) pts in racial score: +15(30) to max Str, +30(60) to max Spe and +15(30) to max Int.\n");
+			outputText("-New TF item: Skyborn Seed (avian TF) buyable in He'Xin'Dao TF shop for 30 gems, droped by Hapries or radomly found in High Mountains. Bonuses for (Half) Avian-morph would be for 4(9) pts in racial score: +15(30) to max Str, +30(75) to max Spe and +15(30) to max Int.\n");
 			outputText("-New body part - legs: Avain Legs. No prereq.\n");
 			outputText("-New body part - tail: Avian Tail. Req. Avian Legs\n");
 			outputText("-New body part - arms: Avain Arms. Req. Avian Tail\n");
 			outputText("-New body part - wings: Avain wings. Req. Avain Arms\n");
 			outputText("-New body part - face: Avain Face. No prereq.\n");
 			outputText("-New body part - ears: Avain Ears. No prereq.\n");
+			outputText("-New body part - skin: Feathers. No prereq.\n");
 			outputText("-New tier   lvl-up perk: . Req. . Effect: \n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

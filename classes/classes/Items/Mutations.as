@@ -6237,7 +6237,7 @@ public final class Mutations extends MutationsHelper
 			//Stats:
 			//****************
 			//-Speed increase to 100.
-			if (player.spe < 100 && rand(3) == 0) {
+			if (player.spe < 100 && rand(3) == 0 && changes < changeLimit) {
 				changes++;
 				if (player.spe >= 75) outputText("\n\nA familiar chill runs down your spine. Your muscles feel like well oiled machinery, ready to snap into action with lightning speed.");
 				else outputText("\n\nA chill runs through your spine, leaving you feeling like your reflexes are quicker and your body faster.");
@@ -6252,14 +6252,6 @@ public final class Mutations extends MutationsHelper
 				if (rand(2) == 0) outputText("\n\nA nice, slow warmth rolls from your gut out to your limbs, flowing through them before dissipating entirely. As it leaves, you note that your body feels softer and less resilient.");
 				else outputText("\n\nYou feel somewhat lighter, but consequently more fragile.  Perhaps your bones have changed to be more harpy-like in structure?");
 				dynStats("tou", -1);
-			}
-			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
-			//antianemone corollary:
-			if (changes < changeLimit && player.hairType == 4 && rand(2) == 0) {
-				//-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
-				outputText("\n\nAs you down the seed, your head begins to feel heavier.  Reaching up, you notice your tentacles becoming soft and somewhat fibrous.  Pulling one down reveals that it feels soft and fluffy, almost feathery; you watch as it dissolves into many thin, feathery strands.  <b>Your hair is now like that of a harpy!</b>");
-				setHairType(Hair.FEATHER);
-				changes++;
 			}
 			//-Strength increase to 70
 			if (player.str < 70 && rand(3) == 0 && changes < changeLimit) {
@@ -6327,6 +6319,14 @@ public final class Mutations extends MutationsHelper
 						}
 					}
 				}
+			}
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
+			//antianemone corollary:
+			if (changes < changeLimit && player.hairType == 4 && rand(2) == 0) {
+				//-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
+				outputText("\n\nAs you down the seed, your head begins to feel heavier.  Reaching up, you notice your tentacles becoming soft and somewhat fibrous.  Pulling one down reveals that it feels soft and fluffy, almost feathery; you watch as it dissolves into many thin, feathery strands.  <b>Your hair is now like that of a harpy!</b>");
+				setHairType(Hair.FEATHER);
+				changes++;
 			}
 			//****************
 			//   Sexual:
@@ -6544,6 +6544,7 @@ public final class Mutations extends MutationsHelper
 			//2 == Peacock TF
 			var changes:Number = 0;
 			var changeLimit:Number = 1;
+			var temp2:Number = 0;
 			if (rand(2) == 0) changeLimit++;
 			if (rand(2) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
@@ -6553,11 +6554,56 @@ public final class Mutations extends MutationsHelper
 			clearOutput();
 			if (type == 0) outputText("You crack open the seed easily, and eat the fruit inside. A bit dry, as you expected, but with a sweet and aromatic taste that leaves you wanting another one.");
 			//Stats changes
-			
+			//-Speed increase to 100.
+			if (player.spe < 100 && type == 0 && rand(3) == 0 && changes < changeLimit) {
+				changes++;
+				if (player.spe >= 75) outputText("\n\nA familiar chill runs down your spine. Your muscles feel like well oiled machinery, ready to snap into action with lightning speed.");
+				else outputText("\n\nA chill runs through your spine, leaving you feeling like your reflexes are quicker and your body faster.");
+				//Speed gains diminish as it rises.
+				if (player.spe < 40) dynStats("spe", .5);
+				if (player.spe < 75) dynStats("spe", .5);
+				dynStats("spe", .5);
+			}
+			//-Toughness decrease to 50
+			if (player.tou > 50 && type == 0 && rand(3) == 0 && changes < changeLimit) {
+				changes++;
+				if (rand(2) == 0) outputText("\n\nA nice, slow warmth rolls from your gut out to your limbs, flowing through them before dissipating entirely. As it leaves, you note that your body feels softer and less resilient.");
+				else outputText("\n\nYou feel somewhat lighter, but consequently more fragile.  Perhaps your bones have changed to be more avian-like in structure?");
+				dynStats("tou", -1);
+			}
+			//-Strength increase to 70
+			if (player.str < 70 && type == 0 && rand(3) == 0 && changes < changeLimit) {
+				changes++;
+				//(low str)
+				if (player.str < 40) outputText("\n\nShivering, you feel a feverish sensation that reminds you of the last time you got sick. Thankfully, it passes swiftly, leaving slightly enhanced strength in its wake.");
+				//(hi str – 50+)
+				else outputText("\n\nHeat builds in your muscles, their already-potent mass shifting slightly as they gain even more strength.");
+				//Faster until 40 str.
+				if (player.str < 40) dynStats("str", .5);
+				dynStats("str", .5);
+			}
 			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//Sexual changes
+			if (player.avianCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && type == 0 && rand(3) == 0) {
+				for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
+					if (player.cocks[temp2].cockType != CockTypesEnum.AVIAN) break;
+				}
+				outputText("\n\nA warm tingling on your nethers makes you check down if the transformative had an effect on your genitals. Giving them a thorough check, you notice that, effectively, your " + cockDescript(temp2) + " has changed.");
+				outputText("\n\nIt has acquired a reddish-pink coloration, with a smooth texture. The most notorious thing is its tapered, albeit slightly wavy shape, as well as its pointy head. All in all it has a very bird-like appearance.  <b>Seems like you’ve got an avian penis!</b>");
+				player.cocks[temp2].cockType = CockTypesEnum.AVIAN;
+				changes++;
+			}
+			if (player.cockTotal() > 1 && player.avianCocks() > 0 && player.cockTotal() > player.avianCocks() && type == 0 && rand(3) == 0 && changes < changeLimit) {
+				outputText("\n\nA warm tingling on your nethers makes you check down if the transformative had an effect on your genitals. Giving them a thorough check, you notice that, effectively, your " + cockDescript(temp2) + " has changed.");
+				for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
+					if (player.cocks[temp2].cockType != CockTypesEnum.AVIAN) break;
+				}
+				outputText("\n\nIt has acquired a reddish-pink coloration, with a smooth texture. The most notorious thing is its tapered, albeit slightly wavy shape, as well as its pointy head. All in all it has a very bird-like appearance.  <b>Seems like you’ve got an avian penis!</b>");
+				player.cocks[temp2].cockType = CockTypesEnum.AVIAN;
+				changes++;
+			}
 			//Legs
-			if (player.lowerBody != LowerBody.AVIAN && changes < changeLimit && type == 0 && rand(4) == 0) {
+			if (player.lowerBody != LowerBody.AVIAN && changes < changeLimit && type == 0 && rand(3) == 0) {
 				if (player.isGoo()) {
 					outputText("\n\nTrying to advance, you see your goo pseudopod stuck on the ground. Reaching around to look for the cause, you’re surprised to find the goo solidifying, turning into flesh and skin before your eyes.Bones occupy their places on your new legs and feet, and the excess goo evaporates, leaving you with a duo of fully functional, normal legs.");
 					outputText("\n\nBut, the changes continue as your rearranged pair of feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.");
@@ -6599,7 +6645,7 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//Tail
-			if (player.tailType != Tail.AVIAN && player.lowerBody == LowerBody.AVIAN && changes < changeLimit && type == 0 && rand(4) == 0) {
+			if (player.tailType != Tail.AVIAN && player.lowerBody == LowerBody.AVIAN && changes < changeLimit && type == 0 && rand(3) == 0) {
 				if (player.tailType > Tail.NONE) {
 					if (player.tailCount > 1) {
 						outputText("\n\nThe nutty fruit after effects show again, this time as an odd itch down your tail. It’s kind of a familiar feeling, as when you work a muscle to strengthen it. As you’re musing on what could be the cause, something changes on your tails, as they tense and twitch, so you look back to examine what’s happening to them.");
@@ -6619,7 +6665,7 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//Arms
-			if (player.armType != Arms.AVIAN && player.tailType == Tail.AVIAN && changes < changeLimit && type == 0 && rand(4) == 0) {
+			if (player.armType != Arms.AVIAN && player.tailType == Tail.AVIAN && changes < changeLimit && type == 0 && rand(3) == 0) {
 				if (player.skin.hasChitin()) {
 					outputText("\n\nUghh, was that seed good for your body? You wince in pain, as some part of you is obviously not happy of being subjected to the fruit mysterious properties. As you direct your attention to your arms, you’re alarmed by their increasingly rigid feeling, and, to make things worse, the process continues, as the worrying sensation creeps up your arms until it reaches your shoulders. Soon, no matter how much you try, you aren’t able to move your arms in any way.");
 					outputText("\n\nJust when you thought that nothing could feel worse, you see how the chitin on your arms fissures, falling to the ground like pieces of a broken vase and leaving a mellified tissue beneath. To you relief, the ‘jelly’ also fall, leaving only normal skin on your arms.");
@@ -6643,7 +6689,7 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//Wings
-			if (player.wingType != Wings.FEATHERED_AVIAN && player.armType == Arms.AVIAN && changes < changeLimit && type == 0 && rand(4) == 0) {
+			if (player.wingType != Wings.FEATHERED_AVIAN && player.armType == Arms.AVIAN && changes < changeLimit && type == 0 && rand(3) == 0) {
 				if (player.wingType == Wings.DRACONIC_SMALL || player.wingType == Wings.DRACONIC_LARGE || player.wingType == Wings.DRACONIC_HUGE || player.wingType == Wings.BAT_LIKE_TINY || player.wingType == Wings.BAT_LIKE_LARGE || player.wingType == Wings.BAT_LIKE_LARGE_2 || player.wingType == Wings.BAT_ARM || player.wingType == Wings.VAMPIRE) {
 					outputText("\n\nYour wings feel suddenly heavier, and you’re forced to sit down to keep balance. Putting attention to the things happening at your back, you realize that the scales covering them are falling!");
 					outputText("\n\nA bit alarmed, you’re surprised when, not much later, feathers started sprouting everywhere on them. t all the same, as long ones grow at the base, while shorter ones appear on the upper part of them and near your shoulders. When all the growth is finished, your wings are left with a much more bird-like appearance.");
@@ -6662,19 +6708,19 @@ public final class Mutations extends MutationsHelper
 				setWingType(Wings.FEATHERED_AVIAN, "large, feathered");
 				changes++;
 			}
-			if (player.wingType != Wings.FEATHERED_LARGE && player.wingType > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+			if (player.wingType != Wings.FEATHERED_AVIAN && player.wingType != Wings.NONE && changes < changeLimit && rand(3) == 0) {
 				removeWings();
 				changes++;
 			}
 			//Hair
-			if (player.hairType != 1 && player.hairLength > 0 && changes < changeLimit && type == 0 && rand(4) == 0) {
+			if (player.hairType != 1 && player.hairLength > 0 && changes < changeLimit && type == 0 && rand(3) == 0) {
 				setHairType(Hair.FEATHER);
 				outputText("\n\nWhile you’re yet processing the taste of that odd seed, you suddenly start feeling an annoying itching coming from your scalp, without a doubt a change brought by the transformative nature of the seed.");
 				outputText("\n\nThe base of each one of your hairs thicken noticeably, and from every one of them, small hairy filament start sprouting of each side. Soon you realize that your hairs are becoming feathers, and in a question of minute, <b>you’re left with a mane of [hair]!</b>");
 				changes++;
 			}
 			//Face
-			if (player.faceType != Face.AVIAN && changes < changeLimit && type == 0 && rand(4) == 0) {
+			if (player.faceType != Face.AVIAN && changes < changeLimit && type == 0 && rand(3) == 0) {
 				if (player.faceType == Face.HUMAN) {
 					outputText("\n\nWith the nutty flavor of the fruit still lingering, you gasp as your face feels weird and tingling, and aware of the transformative nature of the food on this strange land, you quickly associate it with the strange fruit that you’ve just eaten. Your mouth and nose feels numb, and you’re left a bit confused, dizzy even, so your sit until your head clears. As you do so, several feathers start sprouting on your head, those ones small and downy, and cover every bit of skin.");
 					outputText("\n\nToo busy giving attention to this, you don’t notice when something big and hard suddenly obscures your vision. Sensing it with your hands, you feel it attached to your face. Rushing to the nearest pool of water, you look up your reflection, only to realize that you have a full avian, face, covered in feathers and complete with a hooked beak.");
@@ -6691,13 +6737,49 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//Ears
-			if (player.earType != Ears.AVIAN && changes < changeLimit && rand(4) == 0) {
+			if (player.earType != Ears.AVIAN && changes < changeLimit && type == 0 && rand(3) == 0) {
 				outputText("\n\nYou feel your ears twitching, and before you can realize, they recede on your body, leaving behind two holes, almost completely hidden by feathers and your [hair]. Fearing that most of your hearing range and ability was damaged or is blocked by the feathers, you test the sounds around your, and breathe on relief at the realization that your hearing is as good as always.");
 				setEarType(Ears.AVIAN);
 				changes++;
 			}
-			if (changes == 0) outputText("\n\nIt seems like the fruit had no effect this time. Maybe it was spoiled, or kept in storage for too much time?");
-			player.refillHunger(35);
+			//Skin
+			if (!player.hasFeather() && changes < changeLimit && type == 0 && rand(4) == 0) {
+				if (player.hasFur()) {
+					outputText("\n\nAfter having gulp down the seed, your coat of " + player.skin.coat.color + " fur tingles unpleasantly, so you begin to scratch it, hoping to remove the itch as soon as possible. Despite your futile attempts, the itch only gets worse.");
+					outputText("\n\nA particularly strong itch diverts your attention to your left arm. The fur on seems to be falling off, except for a few tufts that start joining together. The same process begins happening all over your body, leaving your thoroughly confused.The hairs that formed into tufts slowly combine and elongate, and you’re left with thousands of quills covering your body.");
+					outputText("\n\nShortly after, barbs begin sprouting from the sides of the quills. You realize that each one of the quills formed from the remains of your fur is turning into a brand new feather!");
+					outputText("\n\nAs you ponder this, the barbs finish growing. The feathers on your chest, face, belly, and other soft spots are fluffy and short, like a kind of down feathers. They all gain color, turning into a warm coat of " + player.skin.coat.color + " colored feathers. <b>Looks like you’re about ready to take flight with your new coat of feathers!</b>");
+				}
+				else if (player.hasScales()) {
+					outputText("\n\nAfter having gulp down the seed, the scales covering your body feel weird for a second, almost like they’re moving on their own, and that is when you realize that they’re changing! The feeling is quite odd, as an slight itch from the place where they join your skin that quickly becomes more intense as their transformation advances.");
+					outputText("\n\nThey elongate until they become thin and light, and soon enough you realize that they’re becoming feathers as more and more barbs start sprouting from their sides. In a couple of minutes, most of your body is left covered in " + player.skin.coat.color + " feathers.");
+					outputText("\n\nNot all of them became long, though. The feathers on your chest and belly, and...other soft spots, became fluffy and short instead of like the feathers on your arms and legs, like some kind of down feathers. <b>Seems like you’re covered from head to toe in a feathered coat!</b>");
+				}
+				else {
+					if (player.hasChitin()) {
+						outputText("\n\nA sudden crack over your chitin-covered body scares you, fearing that the fruit could’ve had noxious effects on your body. The effect only worsened as all the chiting covering your skin starts falling like pieces of broken glass, leaving behind a thick layer of mellified tissue.");
+						outputText("\n\nThe jelly falls to the ground too, in a gross, sticky, orange rain, but to your relief, it leaves behind " + player.skin.base.color + " colored, healthy, normal skin, with no trace of your former chitin remaining on your body.");
+					}
+					else if (player.hasGooSkin()) {
+						outputText("\n\nYour usually wet and gooey skin feels suddenly a bit dry. Thinking that maybe the reason could be the dry weather on the wastelands, you rush to the stream, washing your skin on the refreshing water.");
+						outputText("\n\nThat has the opposite effect, as you realize that a layer of " + player.skin.base.color + " colored goop of goo falls from your arm. Alarmed, you try to put it back, to no avail. Soon all the goo on your arm falls, leaving behind a layer of healthy, normal, [skin] behind. ");
+						outputText("The process follows the rest of your body, and before you can call it, the goo is cleansed from your body, and your skin returns to the normalcy, as your body, normal flesh taking again over the goo, as your core is expelled from your now perfectly solid body, now covered by the usual layer of skin.");
+					}
+					else if (player.skinAdj == "rubber" || player.skinAdj == "latex") {
+						outputText("\n\nYour usually oily and rubberish skins feels suddenly a bit dry. Thinking that maybe the reason could be the dry weather on the wastelands, you rush to the stream, washing your skin on the refreshing water.");
+						outputText("\n\nThat has the opposite effect, as you realize that a layer of " + player.skin.base.color + " colored goop of rubber falls from your arm. Soon all the rubber on your arm falls, leaving behind a layer of healthy, normal, [skin] behind. The process follows the rest of your body, and before you can call it, the rubber is cleansed from your body, and your skin returns to the normalcy.");
+					}
+					outputText("\n\nAfter having gulp down the seed, you start to scratch your [skin], as an uncomfortable itching overcomes you. It’s quite annoying, like being bitten by a bug, only in many spots at the same time.");
+					outputText("\n\nSooner than later, you realize that the sensation is coming from <i>under</i> your skin. After rubbing one of your arms, feeling annoyed, you feel something different. When you lay your eyes on your skin, you realize that a long hair is growing out of it. No, that’s not a hair; it’s far harder than a hair should be, and too thick to be one either. Besides, its creamy-white color doesn’t match your hair.");
+					outputText("\n\nA bit alarmed at this, you then realize that many like it are coming from your skin, finding its way up, gently enough to not harm the soft tissues around them. In the end, you’re left with thousands of those long and thin thing protruding from your body.");
+					outputText("\n\nShortly after, what seems to be barbs start sprouting from its sides, and they branch on smaller barbs. Then you realize that each one of the things that emerged from your skin is a brand new feather!");
+					outputText("\n\nAs you ponder this, the barbs have finished growing, and the new feather on your arms, legs back and shoulder elongate a bit, while the ones on your chest, face and belly, and...another soft spots, instead of becoming like the usual feather,  becomes fluffy and short, as a kind of down feathers. They all gain color, turning into a warm coat of " + player.skin.coat.color + " colored feathers. <b>Looks like you’re about ready to take flight with your new coat of feathers!</b>");
+				}
+				player.skin.growCoat(Skin.FEATHER,{color:player.skin.coat.color});
+				changes++;
+			}
+			if (changes == 0 && type == 0) outputText("\n\nIt seems like the fruit had no effect this time. Maybe it was spoiled, or kept in storage for too much time?");
+			if (type == 0) player.refillHunger(15);
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 

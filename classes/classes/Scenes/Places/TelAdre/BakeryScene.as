@@ -125,7 +125,7 @@ public function ingredientsMenu():void {
 	menu();
 	addButton(0,"Fox Berry",buyFoxBerry);
 	addButton(1,"Ringtail Fig",buyFig);
-	addButton(2, "Mouse Cocoa", buyCocoa);
+	addButton(2,"Mouse Cocoa", buyCocoa);
 	addButton(3,"R.Rvr Root",buyRoot);
 	addButton(4,"Ferret Fruit",buyFerretFruit);
 	addButton(14,"Back",checkBakeryMenu);

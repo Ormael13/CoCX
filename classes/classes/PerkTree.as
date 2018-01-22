@@ -31,6 +31,7 @@ public class PerkTree extends BaseContent {
 				PerkLib.JobSeducer,
 				PerkLib.JobSorcerer,
 				PerkLib.JobSoulCultivator,
+				PerkLib.JobSwordsman,
 				PerkLib.JobWarlord,
 				PerkLib.JobWarrior,
 				PerkLib.PrestigeJobArcaneArcher,

@@ -42,6 +42,11 @@ use namespace CoC;
 				SceneLib.etnaScene.repeatYandereEnc();
 				return;
 			}
+			//Diana
+			if (flags[kFLAGS.DIANA_FOLLOWER] < 2 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && rand(5) == 0) {
+				SceneLib.dianaScene.repeatLakeEnc();
+				return;
+			}
 			if (player.exploredLake % 20 == 0) {
 				calluScene.ottahGirl();
 				return;

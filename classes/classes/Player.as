@@ -487,7 +487,7 @@ use namespace CoC;
 		override public function get weaponAttack():Number {
 			var newGamePlusMod:int = this.newGamePlusMod()+1;
 			var attack:Number = _weapon.attack;
-			if (findPerk(PerkLib.JobBarbarian) >= 0 && weaponPerk == "Large") {
+			if (findPerk(PerkLib.JobSwordsman) >= 0 && weaponPerk == "Large") {
 				if (findPerk(PerkLib.WeaponMastery) >= 0 && str >= 100) {
 					if (findPerk(PerkLib.WeaponGrandMastery) >= 0 && str >= 140) attack *= 2;
 					else attack *= 1.5;
@@ -1799,7 +1799,7 @@ use namespace CoC;
 			}
 			if (avianScore() >= 4)
 			{
-				if (avianScore() >= 8)
+				if (avianScore() >= 9)
 					race = "avian-morph";
 				else
 					race = "half avian-morph";
@@ -2125,7 +2125,7 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (jabberwockyScore() >= 10)
 				grandchimeraCounter++;	
-			if (avianScore() >= 8)
+			if (avianScore() >= 9)
 				grandchimeraCounter++;
 			if (gargoyleScore() >= 21)
 				grandchimeraCounter++;
@@ -4244,12 +4244,11 @@ use namespace CoC;
 			if (lowerBody == LowerBody.AVIAN)
 				avianCounter++;
 			if (wingType == Wings.FEATHERED_AVIAN)
-				avianCounter += 2;/*
+				avianCounter += 2;
+			if (hasCoatOfType(Skin.FEATHER))
+				avianCounter++;
 			if (avianCocks() > 0)
 				avianCounter++;
-			if (hasFur()) {
-				avianCounter++;
-			}*/
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				avianCounter += 10;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && avianCounter >= 3)
@@ -5598,9 +5597,9 @@ use namespace CoC;
 				maxSpe += (40 * newGamePlusMod);
 			}//+40/30-40
 			if (avianScore() >= 4) {
-				if (avianScore() >= 8) {
+				if (avianScore() >= 9) {
 					maxStr += (30 * newGamePlusMod);
-					maxSpe += (60 * newGamePlusMod);
+					maxSpe += (75 * newGamePlusMod);
 					maxInt += (30 * newGamePlusMod);
 				}
 				else {
@@ -5826,7 +5825,7 @@ use namespace CoC;
 				maxLib += (6 * newGamePlusMod);
 				maxSen += (6 * newGamePlusMod);
 			}
-			if (findPerk(PerkLib.JobBarbarian) >= 0) maxStr += (10 * newGamePlusMod);
+			if (findPerk(PerkLib.JobSwordsman) >= 0) maxStr += (10 * newGamePlusMod);
 			if (findPerk(PerkLib.JobBeastWarrior) >= 0) {
 				maxStr += (5 * newGamePlusMod);
 				maxTou += (5 * newGamePlusMod);
