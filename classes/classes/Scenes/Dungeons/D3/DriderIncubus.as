@@ -21,8 +21,8 @@ public class DriderIncubus extends AbstractSpiderMorph
 			this.balls = 2;
 			this.ballSize = 4;
 			this.hoursSinceCum = 9999;
-			this.hipRating = Hips.RATING_SLENDER;
-			this.buttRating = Butt.RATING_TIGHT;
+			this.hips.type = Hips.RATING_SLENDER;
+			this.butt.type = Butt.RATING_TIGHT;
 			initStrTouSpeInte(140, 300, 140, 90);
 			initWisLibSensCor(80, 160, 40, 100);
 			this.weaponName = "spear";

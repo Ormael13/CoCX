@@ -98,8 +98,8 @@ package classes.Scenes.NPCs
 			createBreastRow(Appearance.breastCupInverse("F"));
 			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
-			this.hipRating = Hips.RATING_CURVY;
-			this.buttRating = Butt.RATING_LARGE;
+			this.hips.type = Hips.RATING_CURVY;
+			this.butt.type = Butt.RATING_LARGE;
 			this.lowerBody = LowerBody.HOOFED;
 			this.skinTone = "pale";
 			this.hairColor = "white";

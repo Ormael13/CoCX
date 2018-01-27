@@ -63,8 +63,8 @@ public class UnderwaterTigersharkGirl extends Monster
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = 5*12+5;
-			this.hipRating = Hips.RATING_CURVY;
-			this.buttRating = Butt.RATING_NOTICEABLE;
+			this.hips.type = Hips.RATING_CURVY;
+			this.butt.type = Butt.RATING_NOTICEABLE;
 			this.skinTone = "striped orange";
 			this.hairColor = "silver";
 			this.hairLength = 20;

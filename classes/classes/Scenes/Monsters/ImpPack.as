@@ -46,7 +46,7 @@ use namespace CoC;
 			this.ballSize = 3;
 			this.tallness = 36;
 			this.tailType = Tail.DEMONIC;
-			this.wingType = Wings.IMP;
+			this.wings.type = Wings.IMP;
 			this.skinTone = "green";
 			this.long = "The imps stand anywhere from two to four feet tall, with scrawny builds and tiny demonic wings. Their red and orange skin is dirty, and their dark hair looks greasy. Some are naked, but most are dressed in ragged loincloths that do little to hide their groins. They all have a cocks as long and thick as a man's arm, far oversized for their bodies.";
 			this.pronoun1 = "they";
@@ -71,7 +71,7 @@ use namespace CoC;
 					add(consumables.LABOVA_,1).
 					add(consumables.INCUBID,6).
 					add(consumables.SUCMILK,6);
-			this.wingType = Wings.IMP;
+			this.wings.type = Wings.IMP;
 			this.special1 = lustMagicAttack;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);

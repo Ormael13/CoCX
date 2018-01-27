@@ -112,14 +112,14 @@ public class BeeGirl extends Monster {
 			this.a = "a ";
 			this.short = "bee-girl";
 			this.imageName = "beegirl";
-			this.long = "A bee-girl buzzes around you, filling the air with intoxicatingly sweet scents and a buzz that gets inside your head.  She has a humanoid face with small antennae, black chitin on her arms and legs that looks like shiny gloves and boots, sizable breasts, and a swollen abdomen tipped with a gleaming stinger.";
+			this.long = "A bee-girl buzzes around you, filling the air with intoxicatingly sweet scents and a buzz that gets inside your head.  She has a humanoid face with small antennae.type, black chitin on her arms and legs that looks like shiny gloves and boots, sizable breasts, and a swollen abdomen tipped with a gleaming stinger.";
 			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_GAPING);
 			createBreastRow(Appearance.breastCupInverse("DD"));
 			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = rand(14) + 59;
-			this.hipRating = Hips.RATING_CURVY+3;
-			this.buttRating = Butt.RATING_EXPANSIVE;
+			this.hips.type = Hips.RATING_CURVY + 3;
+			this.butt.type = Butt.RATING_EXPANSIVE;
 			this.lowerBody = LowerBody.BEE;
 			this.skinTone = "yellow";
 			this.hairColor = randomChoice("black","black and yellow");
@@ -142,8 +142,8 @@ public class BeeGirl extends Monster {
 					.add(consumables.W__BOOK, 1 / 4)
 					.add(consumables.BEEHONY, 1 / 2)
 					.elseDrop(useables.B_CHITN);
-			this.antennae = Antennae.BEE;
-			this.wingType = Wings.BEE_LIKE_SMALL;
+			this.antennae.type = Antennae.BEE;
+			this.wings.type = Wings.BEE_LIKE_SMALL;
 			this.tailType = Tail.BEE_ABDOMEN;
 			this.tailVenom = 100;
 			this.special1 = beeStingAttack;

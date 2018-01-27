@@ -1144,7 +1144,7 @@ package classes.Scenes
 			outputText("-Added Alicorn racial Score and Alicornum (alicorn TF). Soul Evolved form of Unicorn that gained wings.\n");
 			outputText("-When unicorn score is 5 or higher PC is considered unicorn and getting following bonuses to stats (scaling with NG tier ofc): +5 spe, +10 int, +50 max hp, +20 max fatigue, +50 max soulforce\n");
 			outputText("-When alicorn score is 6 or higher PC is considered alicorn and getting following bonuses to stats (scaling with NG tier ofc): +5 spe, +20 int, +30 max hp, +50 max fatigue, +150 max soulforce\n");
-			outputText("-New (or I should say earlier unused but already existing in code) possible body parts to gain: Unicorn horn (that grow similar to minotaur horns) and tied to it gore special attack when horn is long enough.\n");
+			outputText("-New (or I should say earlier unused but already existing in code) possible body parts to gain: Unicorn horns (that grow similar to minotaur horns) and tied to it gore special attack when horns is long enough.\n");
 			outputText("-New possible body part to gain: Alicorn wings\n");
 			outputText("-Having unicorn or alicorn score high enough would add bonus to healing spell effect (+50% to effect for each point of racial score over 5 and 6 respectively - also those two racial scores bonuses can add to each other giving at max uni and ali scores +550% of effect power) and Violet Pupil Transformation (instead of giving +50% effect it adds 25 hp healed per turn). Tooltip for VPT would be always updating acording to changes in both racial scores.\n");
 			outputText("-Unicornum and Alicornum can be only crafted with Evangeline help for now.\n");

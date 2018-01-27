@@ -1,5 +1,4 @@
 package classes.BodyParts {
-import classes.Creature;
 
 public class Wings extends BodyPart {
 	public static const NONE:int                 = 0;
@@ -30,8 +29,9 @@ public class Wings extends BodyPart {
 	public static const FEY_DRAGON_WINGS:int     = 26;
 	public static const FEATHERED_AVIAN:int      = 27;
 	
-	public function Wings(creature:Creature, publicPrimitives:Array) {
-		super(creature, publicPrimitives);
+	public var desc:String = "non-existant";
+	public function Wings() {
+		super(null, null);
 	}
 }
 }

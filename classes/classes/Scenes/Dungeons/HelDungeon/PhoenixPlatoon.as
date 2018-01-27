@@ -94,8 +94,8 @@ public class PhoenixPlatoon extends Monster
 			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.tallness = rand(8) + 70;
-			this.hipRating = Hips.RATING_AMPLE+2;
-			this.buttRating = Butt.RATING_LARGE;
+			this.hips.type = Hips.RATING_AMPLE + 2;
+			this.butt.type = Butt.RATING_LARGE;
 			this.lowerBody = LowerBody.SALAMANDER;
 			this.skinTone = "red";
 			this.hairColor = "black";
@@ -115,10 +115,10 @@ public class PhoenixPlatoon extends Monster
 			this.level = 30;
 			this.gems = rand(40)+300;
 			this.additionalXP = 100;
-			this.hornType = Horns.DRACONIC_X2;
-			this.horns = 2;
+			this.horns.type = Horns.DRACONIC_X2;
+			this.horns.count = 2;
 			this.tailType = Tail.SALAMANDER;
-			this.wingType = Wings.FEATHERED_PHOENIX;
+			this.wings.type = Wings.FEATHERED_PHOENIX;
 			this.drop = new WeightedDrop(consumables.NOCELIQ, 1);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);

@@ -477,7 +477,7 @@
                     You both moan in each others neck as you begin to hugfuck her.
                     Diva’s pussy is like a living creature, clenching strongly on your [cock] and pulsing as if to milk you dry.
                     You however aren’t going to simply lay back and let the devilish pussy do all the work as you begin to piston in and out of her.
-                    Diva’s wings are flapping wildly behind her <if test="player.wingType == VAMPIRE">, yours too and you try not to take flight as a the winds created by your combined flapping shake the tent</if>.
+                    Diva’s wings are flapping wildly behind her <if test="player.wings.type == VAMPIRE">, yours too and you try not to take flight as a the winds created by your combined flapping shake the tent</if>.
                     Both of you scream in ecstasy, breaking out of the bite, blood still dripping from each other chin as you cum your load in her greedy vagina
                     <if test="player.cumQ() ge 20"> the excess dripping to the ground</if>.
 
@@ -489,7 +489,7 @@
                         Blood is good but blood and sex is simply divine.
                         Your pussies are literally eating each others seeking for a cock that is not there as you feel your vagina pulse with delightful pleasure, every single nerve aflame.
                         Both of you slide against each other for several minutes, never parting away as a constant fountain of female fluids runs down your respective legs.
-                        Diva wings are flapping wildly behind her <if test="player.wingType == VAMPIRE">, yours too and you try not to take flight as a the winds created by your combined flapping shake the tent</if>.
+                        Diva wings are flapping wildly behind her <if test="player.wings.type == VAMPIRE">, yours too and you try not to take flight as a the winds created by your combined flapping shake the tent</if>.
                         The both of you scream in ecstasy breaking out of the bite, blood still dripping from each other chin as you and Diva reach your orgasm.
                         Unsatisfied the both of you keep at it for several hours. After about the sixth orgasm
                     </elseif>
@@ -589,9 +589,9 @@
             </text>
         </lib>
         <lib name="tfText">
-            <text name="wingType">
+            <text name="wings.type">
                 <if test="$pure">
-                    <if test="player.wingType eq BAT_LIKE_LARGE">
+                    <if test="player.wings.type eq BAT_LIKE_LARGE">
                         As you finish the blood, intense pain flares in your wing-arms.
                         You drop the vial, the empty reinforced glass tinkling as it bounces on the ground.
                         You cry out as your arms creak and twist, your bones breaking down and reforming in a frenzy.
@@ -651,7 +651,7 @@
                     </else>
                 </if>
             </text>
-            <text name="eyeType">
+            <text name="eyes.type">
                 Your eyes shift, causing sunlight to suddenly become annoyingly bright for you.
                 It takes several minutes for your eyes to get used to it and, once they do, you still have to keep them half closed, so as to not be blinded by the sun’s glare.
                 Upon looking at your reflection in the water, you discover your irises have taken on a blood-red shade.
@@ -662,7 +662,7 @@
                 You feel sleepy… horribly so, but you dismiss it as being the fault of the glaring light above your head.
                 <b>You guess you could use some extra sunlight with your pale skin.</b>
             </text>
-            <text name="rearBody">
+            <text name="rearBody.type">
                 You drop the vial, the glass shattering as it hits the ground, as an intense itching sets in around your neck.
                 Bringing your hands to your neck to scratch it, you find sparse, downy fuzz.
                 As you scratch away, it continues lengthening and growing in density until you have a collar of fur around your neck.

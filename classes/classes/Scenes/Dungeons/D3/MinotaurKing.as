@@ -23,8 +23,8 @@ public class MinotaurKing extends Monster
 			this.balls = 2;
 			this.ballSize = 4;
 			this.hoursSinceCum = 9999;
-			this.hipRating = Hips.RATING_SLENDER;
-			this.buttRating = Butt.RATING_TIGHT;
+			this.hips.type = Hips.RATING_SLENDER;
+			this.butt.type = Butt.RATING_TIGHT;
 			initStrTouSpeInte(290, 290, 100, 70);
 			initWisLibSensCor(60, 220, 10, 100);
 			this.weaponName = "axe";

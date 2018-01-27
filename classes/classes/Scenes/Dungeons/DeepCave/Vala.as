@@ -112,8 +112,8 @@ public class Vala extends Monster
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = 4*12;
-			this.hipRating = Hips.RATING_CURVY;
-			this.buttRating = Butt.RATING_LARGE;
+			this.hips.type = Hips.RATING_CURVY;
+			this.butt.type = Butt.RATING_LARGE;
 			this.skinTone = "fair";
 			this.hairColor = "purple";
 			this.hairLength = 22;
@@ -145,8 +145,8 @@ public class Vala extends Monster
 			var wingDesc:String = "shimmering wings";
 			if(flags[kFLAGS.TIMES_PC_DEFEATED_VALA] == 0) this.drop = new WeightedDrop(consumables.NUMBROX);
 			else this.drop = NO_DROP;
-			this.wingType = Wings.BEE_LIKE_LARGE;
-			this.wingDesc = wingDesc;
+			this.wings.type = Wings.BEE_LIKE_LARGE;
+			this.wings.desc = wingDesc;
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			checkMonster();
 		}

@@ -1578,7 +1578,7 @@ import classes.lists.Gender;
 			outputText("\n\nYou quickly close your mouth around her labia, just in time to receive a sudden serving of deliciously sweet girl-cum; you savour every drop as you drink from Joy, kissing and slurping her lower lips, as well as teasing her little hard clitty with your nose.");
 			outputText("\n\nShe wriggles and squeaks, pushing herself forward to grind her cunt against your face" + joyHasCockText(", her balls flopping into your nose at the motion") + ". \"<i>Like, ooh, yeah, that's the stuff, [name]!</i>\"");
 			outputText("\n\nYour slurping mouth curls into a smile when you see the effect you're having on the horny bimbo mouse; then you decide to step up the game by plugging your " + tongueDescript() + " as far as you can inside Joy's wanton cunt.");
-			if (player.tongueType > 0) {
+			if (player.tongue.type > 0) {
 				outputText("\n\n\"<i>Oh! Oh-oh fuck yeah!</i>\" Joy howls with horny glee, as your long undulating tongue slithers inside her warm, wet depths like a snake; licking every little crevice and bump, tasting every cranny and nook of Joy's vagina.");
 				outputText("\n\nJoy's vagina tries to grasp at your tongue, but your mobile appendage is easily able to slip and massage her insides.");
 			}
@@ -1610,7 +1610,7 @@ import classes.lists.Gender;
 			outputText("\n\nYou begin to stroke Joy's cock, painfully slowly, just waiting for an opportunity... as well as testing the limits of Joy's patience.");
 			outputText("\n\nWhich turns out to not be much. \"<i>Like... I don't want teasing; I want you to suck my cock!</i>\" She whines.");
 			outputText("\n\nThe moment a bead of pre shows up atop Joy's cock is the moment you strike.");
-			if (player.tongueType > 0) {
+			if (player.tongue.type > 0) {
 				outputText("\n\nYou extend your " + tongueDescript() + ", swiping the bead of pre, coiling your tongue around Joy's cock and entering Joy's pussy; all in one fell swoop. You don't even wait for Joy's gasp of surprise before you pull your tongue back and dive forwards to engulf Joy's " + joyCockDescript() + ".");
 			}
 			else {
@@ -2244,14 +2244,14 @@ import classes.lists.Gender;
 			outputText("\n\nUpon seeing that, you give her a hug, ruffling her hair and tell her you'll think about it.");
 			outputText("\n\nJoy smiles, leans into the hug, then wanders off, presumably to check on your kids.");
 			//Butt increase
-			if(player.buttRating < 14 && rand(2) == 0) {
-				if(player.buttRating < 10) {
-					player.buttRating++;
+			if(player.butt.type < 14 && rand(2) == 0) {
+				if(player.butt.type < 10) {
+					player.butt.type++;
 					outputText("\n\nYou notice your " + buttDescript() + " feeling larger and plumper after the ordeal.");
 				}
 				//Big butts grow slower!
-				else if(player.buttRating < 14 && rand(2) == 0) {
-					player.buttRating++;
+				else if(player.butt.type < 14 && rand(2) == 0) {
+					player.butt.type++;
 					outputText("\n\nYou notice your " + buttDescript() + " feeling larger and plumper after the ordeal.");
 				}
 			}

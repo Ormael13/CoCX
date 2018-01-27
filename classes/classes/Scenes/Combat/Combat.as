@@ -5554,15 +5554,15 @@ public function runAway(callHook:Boolean = true):void {
 	var escapeMod:Number = 20 + monster.level * 3;
 	if(debug) escapeMod -= 300;
 	if(player.canFly()) escapeMod -= 20;
-	if(player.tailType == Tail.RACCOON && player.earType == Ears.RACCOON && player.hasPerk(PerkLib.Runner)) escapeMod -= 25;
+	if(player.tailType == Tail.RACCOON && player.ears.type == Ears.RACCOON && player.hasPerk(PerkLib.Runner)) escapeMod -= 25;
 	if(monster.hasStatusEffect(StatusEffects.Stunned)) escapeMod -= 50;
 	
 	//Big tits doesn't matter as much if ya can fly!
 	else {
 		if(player.biggestTitSize() >= 35) escapeMod += 5;
 		if(player.biggestTitSize() >= 66) escapeMod += 10;
-		if(player.hipRating >= 20) escapeMod += 5;
-		if(player.buttRating >= 20) escapeMod += 5;
+		if(player.hips.type >= 20) escapeMod += 5;
+		if(player.butt.type >= 20) escapeMod += 5;
 		if(player.ballSize >= 24 && player.balls > 0) escapeMod += 5;
 		if(player.ballSize >= 48 && player.balls > 0) escapeMod += 10;
 		if(player.ballSize >= 120 && player.balls > 0) escapeMod += 10;
@@ -5664,7 +5664,7 @@ public function runAway(callHook:Boolean = true):void {
 		//Fliers flee!
 		else if(player.canFly()) outputText(monster.capitalA + monster.short + " can't catch you.");
 		//sekrit benefit: if you have coon ears, coon tail, and Runner perk, change normal Runner escape to flight-type escape
-		else if(player.tailType == Tail.RACCOON && player.earType == Ears.RACCOON && player.hasPerk(PerkLib.Runner)) {
+		else if(player.tailType == Tail.RACCOON && player.ears.type == Ears.RACCOON && player.hasPerk(PerkLib.Runner)) {
 			outputText("Using your running skill, you build up a head of steam and jump, then spread your arms and flail your tail wildly; your opponent dogs you as best [monster he] can, but stops and stares dumbly as your spastic tail slowly propels you several meters into the air!  You leave [monster him] behind with your clumsy, jerky, short-range flight.");
 		}
 		//Non-fliers flee
@@ -5700,7 +5700,7 @@ public function runAway(callHook:Boolean = true):void {
 			else outputText(monster.capitalA + monster.short + " manages to grab your [legs] and drag you back to the ground before you can fly away!");
 		}
 		//fail
-		else if(player.tailType == Tail.RACCOON && player.earType == Ears.RACCOON && player.hasPerk(PerkLib.Runner)) outputText("Using your running skill, you build up a head of steam and jump, but before you can clear the ground more than a foot, your opponent latches onto you and drags you back down with a thud!");
+		else if(player.tailType == Tail.RACCOON && player.ears.type == Ears.RACCOON && player.hasPerk(PerkLib.Runner)) outputText("Using your running skill, you build up a head of steam and jump, but before you can clear the ground more than a foot, your opponent latches onto you and drags you back down with a thud!");
 		//Nonflyer messages
 		else {
 			//Huge balls messages
@@ -5709,38 +5709,38 @@ public function runAway(callHook:Boolean = true):void {
 				else outputText("With your [balls] dragging along the ground, getting away is far harder than it should be.  ");
 			}
 			//FATASS BODY MESSAGES
-			if(player.biggestTitSize() >= 35 || player.buttRating >= 20 || player.hipRating >= 20)
+			if(player.biggestTitSize() >= 35 || player.butt.type >= 20 || player.hips.type >= 20)
 			{
 				//FOR PLAYERS WITH GIANT BREASTS
 				if(player.biggestTitSize() >= 35 && player.biggestTitSize() < 66)
 				{
-					if(player.hipRating >= 20)
+					if(player.hips.type >= 20)
 					{
 						outputText("Your " + hipDescript() + " forces your gait to lurch slightly side to side, which causes the fat of your " + player.skinTone + " ");
-						if(player.buttRating >= 20) outputText(buttDescript() + " and ");
+						if(player.butt.type >= 20) outputText(buttDescript() + " and ");
 						outputText(chestDesc() + " to wobble immensely, throwing you off balance and preventing you from moving quick enough to escape.");
 					}
-					else if(player.buttRating >= 20) outputText("Your " + player.skinTone + buttDescript() + " and " + chestDesc() + " wobble and bounce heavily, throwing you off balance and preventing you from moving quick enough to escape.");
+					else if(player.butt.type >= 20) outputText("Your " + player.skinTone + buttDescript() + " and " + chestDesc() + " wobble and bounce heavily, throwing you off balance and preventing you from moving quick enough to escape.");
 					else outputText("Your " + chestDesc() + " jiggle and wobble side to side like the " + player.skinTone + " sacks of milky fat they are, with such force as to constantly throw you off balance, preventing you from moving quick enough to escape.");
 				}
 				//FOR PLAYERS WITH MASSIVE BREASTS
 				else if(player.biggestTitSize() >= 66) {
-					if(player.hipRating >= 20) {
+					if(player.hips.type >= 20) {
 						outputText("Your " + chestDesc() + " nearly drag along the ground while your " + hipDescript() + " swing side to side ");
-						if(player.buttRating >= 20) outputText("causing the fat of your " + player.skinTone + buttDescript() + " to wobble heavily, ");
+						if(player.butt.type >= 20) outputText("causing the fat of your " + player.skinTone + buttDescript() + " to wobble heavily, ");
 						outputText("forcing your body off balance and preventing you from moving quick enough to get escape.");
 					}
-					else if(player.buttRating >= 20) outputText("Your " +chestDesc() + " nearly drag along the ground while the fat of your " + player.skinTone + buttDescript() + " wobbles heavily from side to side, forcing your body off balance and preventing you from moving quick enough to escape.");
+					else if(player.butt.type >= 20) outputText("Your " + chestDesc() + " nearly drag along the ground while the fat of your " + player.skinTone + buttDescript() + " wobbles heavily from side to side, forcing your body off balance and preventing you from moving quick enough to escape.");
 					else outputText("Your " + chestDesc() + " nearly drag along the ground, preventing you from moving quick enough to get escape.");
 				}
 				//FOR PLAYERS WITH EITHER GIANT HIPS OR BUTT BUT NOT THE BREASTS
-				else if(player.hipRating >= 20) {
+				else if(player.hips.type >= 20) {
 					outputText("Your " + hipDescript() + " swing heavily from side to side ");
-					if(player.buttRating >= 20) outputText("causing your " + player.skinTone + buttDescript() + " to wobble obscenely ");
+					if(player.butt.type >= 20) outputText("causing your " + player.skinTone + buttDescript() + " to wobble obscenely ");
 					outputText("and forcing your body into an awkward gait that slows you down, preventing you from escaping.");
 				}
 				//JUST DA BOOTAH
-				else if(player.buttRating >= 20) outputText("Your " + player.skinTone + buttDescript() + " wobbles so heavily that you're unable to move quick enough to escape.");
+				else if(player.butt.type >= 20) outputText("Your " + player.skinTone + buttDescript() + " wobbles so heavily that you're unable to move quick enough to escape.");
 			}
 			//NORMAL RUN FAIL MESSAGES
 			else if(monster.plural) outputText(monster.capitalA + monster.short + " stay hot on your heels, denying you a chance at escape!");

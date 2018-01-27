@@ -285,7 +285,7 @@ private function alraunezeMeYes0():void {
 		player.cocks[9].cockType = CockTypesEnum.STAMEN;
 	}
 	if (!player.hasStatusEffect(StatusEffects.AlrauneFlower)) player.createStatusEffect(StatusEffects.AlrauneFlower,0,0,0,0);
-	if (player.wingType == Wings.PLANT) player.wingType = Wings.NONE;
+	if (player.wings.type == Wings.PLANT) player.wings.type = Wings.NONE;
 	player.lowerBody = LowerBody.PLANT_FLOWER;
 	player.legCount = 12;
 	doNext(camp.returnToCampUseTwoHours);
@@ -593,7 +593,7 @@ private function MaraeIIStageII():void {
 		outputText("  Both are dripping and giving tiny squirts of sweet pleasure that simultaneously dull the mind and reinforce your worship of this sexually-charged deity.\n\n");
 
 		outputText("Marae grunts and pulls on ");
-		if(player.horns > 0) outputText("your horns");
+		if(player.horns.count > 0) outputText("your horns");
 		else outputText("your " + hairDescript());
 		outputText(", shoving her thick clit-cock deep inside your throat.  You reflexively swallow down the bulging fuck-meat and ");
 		if(player.cor < 33) outputText("struggle to ");

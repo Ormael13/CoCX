@@ -1,5 +1,4 @@
 package classes.BodyParts {
-import classes.Creature;
 
 public class Beard extends BodyPart {
 	public static const NORMAL:int = 0;
@@ -7,8 +6,9 @@ public class Beard extends BodyPart {
 	public static const CLEANCUT:int = 2;
 	public static const MOUNTAINMAN:int = 3;
 	
-	public function Beard(creature:Creature, publicPrimitives:Array) {
-		super(creature, publicPrimitives);
+	public var length:Number = 0;
+	public function Beard() {
+		super(null, null);
 	}
 }
 }

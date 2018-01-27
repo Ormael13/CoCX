@@ -289,57 +289,57 @@ public class WorldTree extends BaseContent
 			}
 			//Vines/tentacles arms
 			if (player.cor >= 66) {
-				if (player.armType != Arms.PLANT2 && changes < changeLimit) {
+				if (player.arms.type != Arms.PLANT2 && changes < changeLimit) {
 					outputText("You watch, spellbound, while your arms gradually change their entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.Looking over them you can see veined, vaguely phallic vines wrapping their way around your entire arm, in a manner that is decorative but oddly perverse. They remind you of the tentacle monsters in the forest...  <b>You now have tentacle-covered arms.</b>\n\n");
-					player.armType = Arms.PLANT2;
+					player.arms.type = Arms.PLANT2;
 					changes++;
 				}
 			}
 			if (player.cor >= 33 && player.cor < 66) {
 				if (rand(2) == 0) {
-					if (player.armType != Arms.PLANT2 && changes < changeLimit) {
+					if (player.arms.type != Arms.PLANT2 && changes < changeLimit) {
 						outputText("You watch, spellbound, while your arms gradually change their entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.Looking over them you can see veined, vaguely phallic vines wrapping their way around your entire arm, in a manner that is decorative but oddly perverse. They remind you of the tentacle monsters in the forest...  <b>You now have tentacle-covered arms.</b>\n\n");
-						player.armType = Arms.PLANT2;
+						player.arms.type = Arms.PLANT2;
 						changes++;
 					}
 				}
 				else {
-					if (player.armType != Arms.PLANT && changes < changeLimit) {
+					if (player.arms.type != Arms.PLANT && changes < changeLimit) {
 						outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.  Looking on them you can see a thin, delicate vines, with spade-shaped leaves unfolding from them as they curl snugly around your biceps and deltoids all the way down to your wrists. <b>You now have vine-covered arms.</b>\n\n");
-						player.armType = Arms.PLANT;
+						player.arms.type = Arms.PLANT;
 						changes++;
 					}
 				}
 			}
 			if (player.cor < 33) {
-				if (player.armType != Arms.PLANT && changes < changeLimit) {
+				if (player.arms.type != Arms.PLANT && changes < changeLimit) {
 					outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.  Looking on them you can see a thin, delicate vines, with spade-shaped leaves unfolding from them as they curl snugly around your biceps and deltoids all the way down to your wrists. <b>You now have vine-covered arms.</b>\n\n");
-					player.armType = Arms.PLANT;
+					player.arms.type = Arms.PLANT;
 					changes++;
 				}
 			}
 			//Cockvine wings
-			if ((player.armType == Arms.PLANT || player.armType == Arms.PLANT2) && player.wingType != Wings.PLANT && player.lowerBody != LowerBody.PLANT_FLOWER && changes < changeLimit && rand(3) == 0) {
-				if (player.wingType != Wings.NONE) {
+			if ((player.arms.type == Arms.PLANT || player.arms.type == Arms.PLANT2) && player.wings.type != Wings.PLANT && player.lowerBody != LowerBody.PLANT_FLOWER && changes < changeLimit && rand(3) == 0) {
+				if (player.wings.type != Wings.NONE) {
 					outputText("Your old wings are drooping leaving your back as smooth and unbroken as the day you entered the portal. But this state not last long.\n\n");
 				}
 				outputText("Pressure is building in multiple spots on your upper back. It feels more like several over-eager erections trapped in incredibly tight undies. You can’t help but groan with relief when finally the pressure peaks and many thick protrusions burst impatiently out of your [skin.type]. The hot, thick, vine-like growths thrust their way into being, feet of oily green tentacles, alarmingly energetic and prehensile, thrashing around your " + hipDescript() + ".");
 				outputText(" After a moment of concentration you cause one of these growths to rear around into your hand to take a closer look at it. It feels unmistakably dick-like - bulging, tender flesh under the fibrous skin, with quite a bit of flexible, able to bend all along its length and dart its wet, distended head in any direction you wish. <b>You now have cockvine wings.</b>\n\n");
-				player.wingType = Wings.PLANT;
+				player.wings.type = Wings.PLANT;
 				changes++;
 			}
 			//Bark claws
-		//	if (player.armType != ORCA && changes < changeLimit) {
+		//	if (player.arms.type != ORCA && changes < changeLimit) {
 		//		outputText("\n\nRemarkably, the sunscreen has no effect.  Maybe next time?");
-		//		player.armType = ORCA;
+		//		player.arms.type = ORCA;
 		//		changes++;
 		//	}
 			//Root claws
-			if (player.wingType == Wings.PLANT && player.lowerBody != LowerBody.YGG_ROOT_CLAWS && changes < changeLimit) {
+			if (player.wings.type == Wings.PLANT && player.lowerBody != LowerBody.YGG_ROOT_CLAWS && changes < changeLimit) {
 				outputText("You lose your balance and fall to the ground as your feet begin to contort. You watch as your roots rearrange into a more solid configuration. <b>Your roots have assumed the form of three-toed, clawed feet, complete with a small vestigial claw-toe on the back for added grip.</b>\n\n");
 				player.lowerBody = LowerBody.YGG_ROOT_CLAWS;
 				if (player.legCount != 2) player.legCount = 2;
-				changes++;//player.armType == ORCA && 
+				changes++;//player.arms.type == ORCA && 
 			}
 			//Plant Dragon face
 			if (player.lowerBody == LowerBody.YGG_ROOT_CLAWS && player.faceType != Face.PLANT_DRAGON && changes < changeLimit) {
@@ -374,11 +374,11 @@ public class WorldTree extends BaseContent
 				player.skin.growCoat(Skin.SCALES,{color:"mahogany",adj:"bark-like"},Skin.COVERAGE_COMPLETE);
 				changes++;	
 			}
-			if (player.earType != Ears.LIZARD && player.tailType == Tail.YGGDRASIL && player.lowerBody == LowerBody.YGG_ROOT_CLAWS && changes < changeLimit) {
+			if (player.ears.type != Ears.LIZARD && player.tailType == Tail.YGGDRASIL && player.lowerBody == LowerBody.YGG_ROOT_CLAWS && changes < changeLimit) {
 				outputText("All around you, a omnipresent buzzing is gradually becoming louder and louder.  Suddenly, you realize that it’s become painfully loud, the force of the sound making your eardrums throb painfully.  You attempt to block the sound with your ears, but your hands can’t find any ears to plug!  Suddenly, the buzzing stops, and the ringing in your ears begins to subside.  Probing the side of your head with your hands, you realize that your ears have become ");
 				if (player.hasFur() || player.hairLength > 0) outputText("discreet ");
 				outputText("earholes onthe side of your head. <b>You now have lizardlike ears.</b>\n\n");
-				player.earType = Ears.LIZARD;
+				player.ears.type = Ears.LIZARD;
 				changes++;
 			}
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;

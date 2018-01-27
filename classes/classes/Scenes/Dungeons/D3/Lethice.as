@@ -22,8 +22,8 @@ public class Lethice extends Monster
 			this.createBreastRow(8);
 			this.balls = 2;
 			this.ballSize = 4;
-			this.hipRating = Hips.RATING_SLENDER;
-			this.buttRating = Butt.RATING_TIGHT;
+			this.hips.type = Hips.RATING_SLENDER;
+			this.butt.type = Butt.RATING_TIGHT;
 			initStrTouSpeInte(320, 320, 150, 150);
 			initWisLibSensCor(150, 180, 50, 100);
 			this.weaponName = "whip";

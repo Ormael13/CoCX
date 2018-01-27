@@ -222,8 +222,8 @@ public class Minerva extends Monster
 			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.tallness = 8*12+4;
-			this.hipRating = Hips.RATING_CURVY;
-			this.buttRating = Butt.RATING_LARGE+1;
+			this.hips.type = Hips.RATING_CURVY;
+			this.butt.type = Butt.RATING_LARGE + 1;
 			this.skinTone = "blue";
 			this.hairColor = "red";
 			this.hairLength = 25;
@@ -249,8 +249,8 @@ public class Minerva extends Monster
 			this.gems = rand(40)+25;
 			this.additionalXP = 50;
 			this.drop = new WeightedDrop(consumables.PURPEAC, 1);
-			this.wingType = Wings.HARPY;
-			this.wingDesc = "fluffy feathery";
+			this.wings.type = Wings.HARPY;
+			this.wings.desc = "fluffy feathery";
 			checkMonster();
 		}
 		

@@ -108,8 +108,8 @@ public class Harpy extends Monster
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,20,0,0,0);
 			this.tallness = 6*12+6;
-			this.hipRating = Hips.RATING_INHUMANLY_WIDE;
-			this.buttRating = Butt.RATING_EXPANSIVE;
+			this.hips.type = Hips.RATING_INHUMANLY_WIDE;
+			this.butt.type = Butt.RATING_EXPANSIVE;
 			this.lowerBody = LowerBody.HARPY;
 			this.skin.setBaseOnly({color:"pink"});
 			this.skinDesc = "feathers";
@@ -132,7 +132,7 @@ public class Harpy extends Monster
 			this.drop = new ChainedDrop().add(armors.W_ROBES,1/10)
 					.add(consumables.SKYSEED,1/5)
 					.elseDrop(consumables.GLDSEED);
-			this.wingType = Wings.HARPY;
+			this.wings.type = Wings.HARPY;
 			this.special1 = harpyUberCharge;
 			this.special2 = harpyTease;
 			this.createStatusEffect(StatusEffects.Flying,50,0,0,0);

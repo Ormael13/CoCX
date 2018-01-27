@@ -171,9 +171,9 @@ public class Appearance extends Utils
 		 */
 		public static function tongueDescription(i_character:Creature):String
 		{
-			if (i_character.tongueType == 1) return "serpentine tongue";
-			else if (i_character.tongueType == 2) return "demonic tongue";
-			else if (i_character.tongueType == 3) return "draconic tongue";
+			if (i_character.tongue.type == 1) return "serpentine tongue";
+			else if (i_character.tongue.type == 2) return "demonic tongue";
+			else if (i_character.tongue.type == 3) return "draconic tongue";
 			else return "tongue";
 		}
 
@@ -388,7 +388,7 @@ public class Appearance extends Utils
 			var description:String    = "";
 			var options:Array;
 			var i_character:Character = i_creature as Character;
-			var hipRating:Number      = i_creature.hipRating;
+			var hipRating:Number      = i_creature.hips.type;
 			var thickness:Number      = i_character ? i_character.thickness : 50;
 			if (hipRating <= 1) {
 				options = ["tiny ",
@@ -1770,7 +1770,7 @@ public class Appearance extends Utils
 			var options:Array;
 			var i_character:Character = i_creature as Character;
 			var tone:Number           = i_character ? i_character.tone : 50;
-			var buttRating:Number     = i_creature.buttRating;
+			var buttRating:Number     = i_creature.butt.type;
 			if (buttRating <= 1) {
 				if (tone >= 60)
 					description += "incredibly tight, perky ";
@@ -2081,53 +2081,53 @@ public class Appearance extends Utils
 		{
 			var description:String = "";
 			var options:Array;
-			if (i_creature.buttRating <= 1) {
+			if (i_creature.butt.type <= 1) {
 				options = ["insignificant ",
 					"very small "];
 				description = randomChoice(options);
 			}
-			if (i_creature.buttRating > 1 && i_creature.buttRating < 4) {
+			if (i_creature.butt.type > 1 && i_creature.butt.type < 4) {
 				options = ["tight ",
 					"firm ",
 					"compact "];
 				description = randomChoice(options);
 			}
-			if (i_creature.buttRating >= 4 && i_creature.buttRating < 6) {
+			if (i_creature.butt.type >= 4 && i_creature.butt.type < 6) {
 				options = ["regular ",
 					"unremarkable "];
 				description = randomChoice(options);
 			}
-			if (i_creature.buttRating >= 6 && i_creature.buttRating < 8) {
+			if (i_creature.butt.type >= 6 && i_creature.butt.type < 8) {
 				if (rand(3) == 0) return "handful of ass";
 				options = ["full ",
 					"shapely "];
 				description = randomChoice(options);
 			}
-			if (i_creature.buttRating >= 8 && i_creature.buttRating < 10) {
+			if (i_creature.butt.type >= 8 && i_creature.butt.type < 10) {
 				options = ["squeezable ",
 					"large ",
 					"substantial "];
 				description = randomChoice(options);
 			}
-			if (i_creature.buttRating >= 10 && i_creature.buttRating < 13) {
+			if (i_creature.butt.type >= 10 && i_creature.butt.type < 13) {
 				options = ["jiggling ",
 					"spacious ",
 					"heavy "];
 				description = randomChoice(options);
 			}
-			if (i_creature.buttRating >= 13 && i_creature.buttRating < 16) {
+			if (i_creature.butt.type >= 13 && i_creature.butt.type < 16) {
 				if (rand(3) == 0) return "generous amount of ass";
 				options = ["expansive ",
 					"voluminous "];
 				description = randomChoice(options);
 			}
-			if (i_creature.buttRating >= 16 && i_creature.buttRating < 20) {
+			if (i_creature.butt.type >= 16 && i_creature.butt.type < 20) {
 				if (rand(3) == 2) return "jiggling expanse of ass";
 				options = ["huge ",
 					"vast "];
 				description = randomChoice(options);
 			}
-			if (i_creature.buttRating >= 20) {
+			if (i_creature.butt.type >= 20) {
 				options = ["ginormous ",
 					"colossal ",
 					"tremendous "];
@@ -2195,11 +2195,11 @@ public class Appearance extends Utils
 		
 		public static function wingsDescript(i_creature:Creature):String
 		{
-			return DEFAULT_WING_NAMES[i_creature.wingType] + " wings";
+			return DEFAULT_WING_NAMES[i_creature.wings.type] + " wings";
 		}
 		public static function eyesDescript(i_creature:Creature):String
 		{
-			return i_creature.eyeColor+ " "+DEFAULT_EYES_NAMES[i_creature.eyeType] + " eyes";
+			return i_creature.eyes.colour + " " + DEFAULT_EYES_NAMES[i_creature.eyes.type] + " eyes";
 		}
 
 /* All of these functions have been replaced with direct calls to the appropriate form of cockNoun().

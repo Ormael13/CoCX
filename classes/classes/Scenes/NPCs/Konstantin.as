@@ -971,7 +971,7 @@ package classes.Scenes.NPCs
 			if (player.balls > 0) outputText("You feel his huge set of fuzzy nuts rubbing against your own");
 			else outputText("You feel his huge set of fuzzy nuts rubbing against your taint");
 			outputText(", sending shivers of excitement through you body, feeling only enhanced by the deep kissing in which your tongues are interlocked, the warm puff of his breath tickling your [skin] from time to time");
-			if (player.wingType > 0) outputText(". Your [wings] flap softly, as you’re being subjected to the bear rough oral affections.");
+			if (player.wings.type > 0) outputText(". Your [wings] flap softly, as you’re being subjected to the bear rough oral affections.");
 			outputText(".\n\nKonstantin breaks the kiss with a slobbery lick on your cheek, and, with you still dazzled with the remainders of your make-out, he proceeds to grab your cock");
 			if (player.cockTotal() > 1) outputText("s");
 			outputText(" with his bear-like paw");

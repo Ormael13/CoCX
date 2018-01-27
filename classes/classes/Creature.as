@@ -620,16 +620,10 @@ public class Creature extends Utils
 		public function set clawType(value:int):void { this.clawsPart.type = value; }
 		// </mod>
 		public var underBody:UnderBody;
-
-		public var earType:Number = Ears.HUMAN;
-		public var earValue:Number = 0;
-		public var hornType:Number = Horns.NONE;
-		public var horns:Number = 0;
-		private var _wingType:Number = Wings.NONE;
-		public var wingDesc:String = "non-existant";
-		public function get wingType():Number { return _wingType; }
-		public function set wingType(value:Number):void { _wingType = value; }
-
+		public var ears:Ears = new Ears();
+		public var horns:Horns = new Horns();
+		public var wings:Wings = new Wings();
+		
 		/* lowerBody: see LOWER_BODY_TYPE_ */
 		public var lowerBodyPart:LowerBody;
 		public function get lowerBody():int { return lowerBodyPart.type; }
@@ -647,27 +641,9 @@ public class Creature extends Utils
 		public function set tailCount(value:Number):void { tail.count = value; }
 		public function set tailRecharge(value:Number):void { tail.recharge = value; }
 		
-		/*hipRating
-		0 - boyish
-		2 - slender
-		4 - average
-		6 - noticable/ample
-		10 - curvy//flaring
-		15 - child-bearing/fertile
-		20 - inhumanly wide*/
-		public var hipRating:Number = Hips.RATING_BOYISH;
-		
-		/*buttRating
-		0 - buttless
-		2 - tight
-		4 - average
-		6 - noticable
-		8 - large
-		10 - jiggly
-		13 - expansive
-		16 - huge
-		20 - inconceivably large/big/huge etc*/
-		public var buttRating:Number = Butt.RATING_BUTTLESS;
+
+		public var hips:Hips = new Hips();
+		public var butt:Butt = new Butt();
 		
 		//Piercings
 		//TODO: Pull this out into it's own class and enum.
@@ -691,24 +667,15 @@ public class Creature extends Utils
 		public var nosePLong:String = "";
 
 		//Head ornaments. Definitely need to convert away from hard coded types.
-		public var antennae:Number = Antennae.NONE;
-
-		//Eyetype
-		public var eyeType:Number = Eyes.HUMAN;
-		public var eyeColor:String = "brown";
-
-		//TongueType
-		public var tongueType:Number = Tongue.HUMAN;
-
-		//ArmType
-		public var armType:Number = Arms.HUMAN;
-
-		//GillType
-		public var gillType:int = Gills.NONE;
-		public function hasGills():Boolean { return gillType != Gills.NONE; }
+		public var antennae:Antennae = new Antennae();
+		public var eyes:Eyes = new Eyes();
+		public var tongue:Tongue = new Tongue();
+		public var arms:Arms = new Arms();
 		
-		//RearBody
-		public var rearBody:Number = RearBody.NONE;
+		public var gills:Gills = new Gills();
+		public function hasGills():Boolean { return gills.type != Gills.NONE; }
+		
+		public var rearBody:RearBody = new RearBody();
 
 		//Sexual Stuff		
 		//MALE STUFF
@@ -828,22 +795,22 @@ public class Creature extends Utils
 			// 2.1. non-negative Number fields
 			error += Utils.validateNonNegativeNumberFields(this,"Monster.validate",[
 				"balls", "ballSize", "cumMultiplier", "hoursSinceCum",
-				"tallness", "hipRating", "buttRating", "lowerBody", "armType",
+				"tallness", "hips.type", "butt.type", "lowerBody", "arms.type",
 				"hairLength", "hairType",
-				"faceType", "earType", "tongueType", "eyeType",
+				"faceType", "earType", "tongue.type", "eyes.type",
 				"str", "tou", "spe", "inte", "wis", "lib", "sens", "cor",
 				// Allow weaponAttack to be negative as a penalty to strength-calculated damage
 				// Same with armorDef, bonusHP, additionalXP
 				"weaponValue", "armorValue",
 				"lust", "fatigue", "soulforce", "mana", "wrath",
 				"level", "gems",
-				"tailCount", "tailVenom", "tailRecharge", "horns",
+				"tailCount", "tailVenom", "tailRecharge", "_horns",
 				"HP", "XP"
 			]);
 			// 2.2. non-empty String fields
 			error += Utils.validateNonEmptyStringFields(this,"Monster.validate",[
 				"short",
-				"skinDesc", "eyeColor",
+				"skinDesc", "eyes.colour",
 				"weaponName", "weaponVerb", "armorName"
 			]);
 			// 3. validate members
@@ -874,10 +841,10 @@ public class Creature extends Utils
 				if (tailCount != 0) error += "No tail but tailCount = "+tailCount+". ";
 			}
 			// 4.4. horns
-			if (hornType == Horns.NONE){
-				if (horns>0) error += "horns > 0 but hornType = NONE. ";
+			if (horns.type == Horns.NONE){
+				if (horns.count > 0) error += "horns > 0 but horns.type = NONE. ";
 			} else {
-				if (horns==0) error += "Has horns but their number 'horns' = 0. ";
+				if (horns.count == 0) error += "Has horns but their number 'horns' = 0. ";
 			}
 			return error;
 		}
@@ -2488,13 +2455,13 @@ public class Creature extends Utils
 			//web also makes false!
 			if (hasStatusEffect(StatusEffects.Web))
 				return false;
-			return canFlyWings.indexOf(_wingType) != -1;
+			return canFlyWings.indexOf(wings.type) != -1;
 		}
 
 		//PC can swim underwater?
 		public function canSwimUnderwater():Boolean
 		{
-			if (gillType != Gills.NONE)
+			if (gills.type != Gills.NONE)
 				return true;	//dodać jeszcze trzeba bedzie tu efekt of itemów i inne opcje dające oddych. pod wodą
 			return false;
 		}
@@ -3595,7 +3562,7 @@ public class Creature extends Utils
 		 * Echidna 1 ft long (i'd consider it barely qualifying), demonic 2 ft long, draconic 4 ft long
 		 */
 		public function hasLongTongue():Boolean {
-			return tongueType == Tongue.DEMONIC || tongueType == Tongue.DRACONIC || tongueType == Tongue.ECHIDNA;
+			return tongue.type == Tongue.DEMONIC || tongue.type == Tongue.DRACONIC || tongue.type == Tongue.ECHIDNA;
 		}
 		
 		public function hairOrFur():String
@@ -3635,7 +3602,7 @@ public class Creature extends Utils
 		
 		public function hornDescript():String
 		{
-			return Appearance.DEFAULT_HORNS_NAMES[hornType] + " horns";
+			return Appearance.DEFAULT_HORNS_NAMES[horns.type] + " _horns";
 		}
 		
 		public function tailDescript():String

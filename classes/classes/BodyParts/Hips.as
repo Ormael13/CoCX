@@ -1,5 +1,4 @@
 package classes.BodyParts {
-import classes.Creature;
 
 public class Hips extends BodyPart {
 	public static const RATING_BOYISH:int         = 0;
@@ -10,8 +9,8 @@ public class Hips extends BodyPart {
 	public static const RATING_FERTILE:int        = 15;
 	public static const RATING_INHUMANLY_WIDE:int = 20;
 	
-	public function Hips(creature:Creature, publicPrimitives:Array) {
-		super(creature, publicPrimitives);
+	public function Hips() {
+		super(null, null);
 	}
 }
 }

@@ -105,8 +105,8 @@ public class GooArmor extends GooGirl
 			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
 			this.ass.analWetness = AssClass.WETNESS_SLIME_DROOLING;
 			this.tallness = rand(8) + 70;
-			this.hipRating = Hips.RATING_AMPLE+2;
-			this.buttRating = Butt.RATING_LARGE;
+			this.hips.type = Hips.RATING_AMPLE + 2;
+			this.butt.type = Butt.RATING_LARGE;
 			this.skin.setBaseOnly({color:"blue",type:Skin.GOO});
 			this.hairColor = "black";
 			this.hairLength = 15;

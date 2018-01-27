@@ -818,10 +818,10 @@ import flash.utils.getQualifiedClassName;
 			///*OPTIONAL*/ //this.createStatusEffect(StatusEffects.BonusACapacity, bonus, 0, 0, 0);
 			//// 5. Body
 			///*REQUIRED*/ this.tallness = ;
-			///*OPTIONAL*/ //this.hipRating = HIP_RATING_; // default boyish
-			///*OPTIONAL*/ //this.buttRating = BUTT_RATING_; // default buttless
+			///*OPTIONAL*/ //this.hips.type = HIP_RATING_; // default boyish
+			///*OPTIONAL*/ //this.butt.type = BUTT_RATING_; // default buttless
 			///*OPTIONAL*/ //this.lowerBody = LOWER_BODY_; //default human
-			///*OPTIONAL*/ //this.armType = ARM_TYPE_; // default human
+			///*OPTIONAL*/ //this.arms.type = ARM_TYPE_; // default human
 
 			//// 6. Skin
 			///*OPTIONAL*/ //this.skinTone = "skinTone"; // default "albino"
@@ -837,8 +837,8 @@ import flash.utils.getQualifiedClassName;
 			//// 8. Face
 			///*OPTIONAL*/ //this.faceType = FACE_; // default HUMAN
 			///*OPTIONAL*/ //this.earType = EARS_; // default HUMAN
-			///*OPTIONAL*/ //this.tongueType = TONGUE_; // default HUMAN
-			///*OPTIONAL*/ //this.eyeType = EYES_; // default HUMAN
+			///*OPTIONAL*/ //this.tongue.type = TONGUE_; // default HUMAN
+			///*OPTIONAL*/ //this.eyes.type = EYES_; // default HUMAN
 
 			//// 9. Primary stats.
 			///*REQUIRED*/ initStrTouSpeInte(,,,);
@@ -921,15 +921,15 @@ import flash.utils.getQualifiedClassName;
 			///*OPTIONAL*/ //this.tailRecharge = ; // default 5
 
 			//// 17. Horns
-			///*OPTIONAL*/ //this.hornType = HORNS_; // default NONE
+			///*OPTIONAL*/ //this.horns.type = HORNS_; // default NONE
 			///*OPTIONAL*/ //this.horns = numberOfHorns; // default 0
 
 			//// 18. Wings
-			///*OPTIONAL*/ //this.wingType = WING_TYPE_; // default NONE
-			///*OPTIONAL*/ //this.wingDesc = ; // default Appearance.DEFAULT_WING_DESCS[wingType]
+			///*OPTIONAL*/ //this.wings.type = WING_TYPE_; // default NONE
+			///*OPTIONAL*/ //this.wings.desc = ; // default Appearance.DEFAULT_WING_DESCS[wings.type]
 
 			//// 19. Antennae
-			///*OPTIONAL*/ //this.antennae = ANTENNAE_; // default NONE
+			///*OPTIONAL*/ //this.antennae.type = ANTENNAE_; // default NONE
 
 			//// REQUIRED !!!
 			//// In debug mode will throw an error for uninitialized monster
@@ -1077,13 +1077,6 @@ import flash.utils.getQualifiedClassName;
 			initedWisLibSensCor = true;
 		}
 
-
-		override public function set wingType(value:Number):void
-		{
-			if (!_checkCalled) this.wingDesc = Appearance.DEFAULT_WING_DESCS[value];
-			super.wingType = value;
-		}
-
 		override public function validate():String
 		{
 			var error:String = "";
@@ -1103,6 +1096,9 @@ import flash.utils.getQualifiedClassName;
 		public function checkMonster():Boolean
 		{
 			_checkCalled = true;
+			if(this.wings.type != Wings.NONE && this.wings.desc == "non-existant"){
+				this.wings.desc = Appearance.DEFAULT_WING_DESCS[this.wings.type]
+			}
 			checkError = validate();
 			if (checkError.length>0) CoC_Settings.error("Monster not initialized:"+checkError);
 			return checkError.length == 0;
@@ -1590,11 +1586,11 @@ import flash.utils.getQualifiedClassName;
 					", "+Appearance.numberOfThings(vaginas.length,"vagina")+
 					" and "+Appearance.numberOfThings(breastRows.length,"breast row")+".\n\n";
 			// APPEARANCE
-			result +=Heis+Appearance.inchesAndFeetsAndInches(tallness)+" tall with "+
-					Appearance.describeByScale(hipRating,Appearance.DEFAULT_HIP_RATING_SCALES,"thinner than","wider than")+" hips and "+
-					Appearance.describeByScale(buttRating,Appearance.DEFAULT_BUTT_RATING_SCALES,"thinner than","wider than")+" butt.\n";
+			result += Heis + Appearance.inchesAndFeetsAndInches(tallness) + " tall with " +
+			          Appearance.describeByScale(hips.type,Appearance.DEFAULT_HIP_RATING_SCALES,"thinner than","wider than") + " hips and " +
+			          Appearance.describeByScale(butt.type,Appearance.DEFAULT_BUTT_RATING_SCALES,"thinner than","wider than") + " butt.\n";
 			result +=Pronoun3+" lower body is "+(Appearance.DEFAULT_LOWER_BODY_NAMES[lowerBody]||("lowerBody#"+lowerBody));
-			result += ", "+pronoun3+" arms are "+(Appearance.DEFAULT_ARM_NAMES[armType]||("armType#"+armType));
+			result += ", "+pronoun3+" arms are "+(Appearance.DEFAULT_ARM_NAMES[arms.type] || ("arms.type#" + arms.type));
 			result += ", "+pronoun1+" "+have+" "+skinTone+" "+skinAdj+" "+skinDesc+
 					  " (base "+(Appearance.DEFAULT_SKIN_NAMES[skin.baseType()]||("skinType#"+skin.baseType()))+")." +
 					  " (coat "+(Appearance.DEFAULT_SKIN_NAMES[skin.coatType()]||("skinType#"+skin.coatType()))+")." +
@@ -1612,19 +1608,19 @@ import flash.utils.getQualifiedClassName;
 				result += "no beard.\n";
 			}
 			result += Hehas
-					+(Appearance.DEFAULT_FACE_NAMES[faceType]||("faceType#"+faceType))+" face, "
-					+(Appearance.DEFAULT_EARS_NAMES[earType]||("earType#"+earType))+" ears, "
-					+(Appearance.DEFAULT_TONGUE_NAMES[tongueType]||("tongueType#"+tongueType))+" tongue and "
-					+(Appearance.DEFAULT_EYES_NAMES[eyeType]||("eyeType#"+eyeType))+" eyes.\n";
+			          + (Appearance.DEFAULT_FACE_NAMES[faceType]||("faceType#"+faceType)) + " face, "
+			          + (Appearance.DEFAULT_EARS_NAMES[ears.type] || ("earType#" + ears.type)) + " ears, "
+			          + (Appearance.DEFAULT_TONGUE_NAMES[tongue.type] || ("tongue.type#" + tongue.type)) + " tongue and "
+			          + (Appearance.DEFAULT_EYES_NAMES[eyes.type] || ("eyes.type#" + eyes.type)) + " eyes.\n";
 			result += Hehas;
 			if (tailType == Tail.NONE) result += "no tail, ";
 			else result+=(Appearance.DEFAULT_TAIL_NAMES[tailType]||("tailType#"+tailType))+" "+tailCount+" tails with venom="+tailVenom+" and recharge="+tailRecharge+", ";
-			if (hornType == Horns.NONE) result += "no horns, ";
-			else result += horns+" "+(Appearance.DEFAULT_HORNS_NAMES[hornType]||("hornType#"+hornType))+" horns, ";
-			if (wingType == Wings.NONE) result += "no wings, ";
-			else result += wingDesc+" wings (type "+(Appearance.DEFAULT_WING_NAMES[wingType]||("wingType#"+wingType))+"), ";
-			if (antennae == Antennae.NONE) result += "no antennae.\n\n";
-			else result += (Appearance.DEFAULT_ANTENNAE_NAMES[antennae]||("antennaeType#"+antennae))+" antennae.\n\n";
+			if (horns.type == Horns.NONE) result += "no horns, ";
+			else result += horns.count + " " + (Appearance.DEFAULT_HORNS_NAMES[horns.type] || ("horns.type#" + horns.type)) + " horns, ";
+			if (wings.type == Wings.NONE) result += "no wings, ";
+			else result += wings.desc + " wings (type " + (Appearance.DEFAULT_WING_NAMES[wings.type] || ("wings.type#" + wings.type)) + "), ";
+			if (antennae.type == Antennae.NONE) result += "no antennae.type.\n\n";
+			else result += (Appearance.DEFAULT_ANTENNAE_NAMES[antennae.type] || ("antennaeType#" + antennae.type)) + " antennae.type.\n\n";
 
 			// GENITALS AND BREASTS
 			for (var i:int = 0; i<cocks.length; i++){
@@ -1847,8 +1843,8 @@ import flash.utils.getQualifiedClassName;
 				//Heal wounds
 				if(statusEffectv1(StatusEffects.GoreBleed) <= 0) {
 					outputText("The ");
-					if (player.hornType == Horns.COW_MINOTAUR) outputText("horns wounds");
-					else outputText("horn wound");
+					if (player.horns.type == Horns.COW_MINOTAUR) outputText("horns wounds");
+					else outputText("horns wound");
 					outputText(" you left on " + a + short + " stop bleeding so profusely.\n\n");
 					removeStatusEffect(StatusEffects.GoreBleed);
 				}
@@ -1858,14 +1854,14 @@ import flash.utils.getQualifiedClassName;
 					store5 = SceneLib.combat.doDamage(store5);
 					if (plural) {
 						outputText(capitalA + short + " bleed profusely from the jagged ");
-						if (player.hornType == Horns.COW_MINOTAUR) outputText("wounds your horns");
-						else outputText("wound your horn");
+						if (player.horns.type == Horns.COW_MINOTAUR) outputText("wounds your horns");
+						else outputText("wound your horns");
 						outputText(" left behind. <b>(<font color=\"#800000\">" + store5 + "</font>)</b>\n\n");
 					}
 					else {
 						outputText(capitalA + short + " bleeds profusely from the jagged ");
-						if (player.hornType == Horns.COW_MINOTAUR) outputText("wounds your horns");
-						else outputText("wound your horn");
+						if (player.horns.type == Horns.COW_MINOTAUR) outputText("wounds your horns");
+						else outputText("wound your horns");
 						outputText(" left behind. <b>(<font color=\"#800000\">" + store5 + "</font>)</b>\n\n");
 					}
 				}

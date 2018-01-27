@@ -1,5 +1,4 @@
 package classes.BodyParts {
-import classes.Creature;
 
 public class RearBody extends BodyPart {
 	public static const NONE:int              = 0;
@@ -13,8 +12,8 @@ public class RearBody extends BodyPart {
 	public static const RAIJU_MANE:int        = 8;
 	public static const BAT_COLLAR:int        = 9;
 	
-	public function RearBody(creature:Creature, publicPrimitives:Array) {
-		super(creature, publicPrimitives);
+	public function RearBody() {
+		super(null, null);
 	}
 }
 }

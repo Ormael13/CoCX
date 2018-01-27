@@ -535,7 +535,7 @@ private function shouldraTongueLicksPCs():void {
 	//if event occurrence == 0
 	if(flags[kFLAGS.SHOULDRA_TONGUE_LICKS_TIMES] == 0) {
 		outputText("\n\n\"<i>Aah, but it's all the same anyways</i>,\" Shouldra sighs, rolling the long phallic objects over each other in your palm.  \"<i>Where's the excitement in going back to the same old thing?</i>\" she laments, suddenly quite sad about the whole situation despite her earlier eagerness.  Sensing your displeasure, she snaps back, \"<i>Hey, I told you my deal already.  How am I supposed to feel when I've seen it all before?</i>\"  Trying to hurry her along, you ask if there's <b>anything </b> new that she might try.  \"<i>Well what else am I gonna play with on you?</i>\" She breaks out into your own voice.  \"<i>You've got tits, an ass and a cunt, just like the rest of 'em! What am I mi-...</i>\"  She cuts herself off.  Shouldra closes one of your eyes and sticks ");
-		if(player.tongueType > Tongue.HUMAN) outputText("some of ");
+		if(player.tongue.type > Tongue.HUMAN) outputText("some of ");
 		outputText("your tongue out, examining it.  Already, you think you've got a pretty good idea of where she's going to take this.");
 		outputText("\n\n\"<i>I suppose none of my hosts have actually quite been able to reach themselves with a tongue yet... can you, Champ?</i>\"");
 	}
@@ -1053,8 +1053,8 @@ private function shouldrasButtBigginator():void {
 	clearOutput();
 	spriteSelect(67);
 	outputText("Shouldra's haunting laugh works its way out from your mouth.  \"<i>Looking for a little more jiggle in your step, Champ?  I can get BEHIND that.</i>\"  This damnable ghost won't let you roll your eyes!  Is there no end to her torment?  After a quick crack of your knuckles, Shouldra directs your hands back onto your derriere as she transitions into spellcasting.");
-	//this.player.buttRating = this.player.buttRating + 1 + rand(3)); or so
-	player.buttRating += 1 + rand(3);
+	//this.player.butt.type = this.player.butt.type + 1 + rand(3)); or so
+	player.butt.type += 1 + rand(3);
 	outputText("\n\nYour cheeks quake as the magic takes hold, warm ripples greeting the inches of new retail estate on your hind quarters.  Shouldra can't resist herself, giving your [butt] a vigorous slap.");
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1077,7 +1077,7 @@ private function shouldraReductoMenu():void {
 	var nipples:Function = null;
 	if(player.nippleLength > .25) nipples = shrinkDemNipplzForYoGhost;
 	if(player.biggestTitSize() >= 1) breasts = shouldraReductosYourTits;
-	if(player.buttRating >= 2) butt = shrinkDatBootyForYoGhost;
+	if(player.butt.type >= 2) butt = shrinkDatBootyForYoGhost;
 	if(player.balls > 0 && player.ballSize > 1) balls = shouldraReductosYourBallsUpInsideYa;
 	if(player.hasCock() && player.longestCockLength() > 4) cock = shouldraMakesCocksDisappear;
 	if(player.hasVagina() && player.clitLength > .25) clit = clittyVanishingActShouldra;
@@ -1185,17 +1185,17 @@ private function shrinkDatBootyForYoGhost():void {
 	clearOutput();
 	spriteSelect(67);
 	outputText("Your hands quickly grasp at your bare [butt].  \"<i>You... you're desecrating a national treasure here!</i>\"  The rather odd declaration gets a chuckle from you, but you remain firm in your request to dull your derriere.  The ghost girl furthers her attempts to change your mind, but without literally changing your mind, you remain steadfast.  Defeated, your hands take one last trip around your posterior before the poltergeist recites her incantation.");
-	if(player.buttRating >= 15) {
-		player.buttRating -= 3 + int(player.buttRating/3);
+	if(player.butt.type >= 15) {
+		player.butt.type -= 3 + int(player.butt.type / 3);
 		outputText("\n\nWithin seconds, your cheeks feel noticeably lighter.  You confirm with a glance that your [butt] is much smaller than before.  Shouldra confirms with a pouting sigh that she is much sadder than before.");
 	}
-	else if(player.buttRating >= 10) {
-		player.buttRating -= 3;
+	else if(player.butt.type >= 10) {
+		player.butt.type -= 3;
 		outputText("\n\nYour ass jiggles as it recedes into your body.  A few moments later and your [butt] settles into its new, compact form.  The ghost girl recedes deep back into your body with a depressing sigh.");
 	}
 	else {
-		player.buttRating -= 1 + rand(3);
-		if(player.buttRating < 1) player.buttRating = 1;
+		player.butt.type -= 1 + rand(3);
+		if(player.butt.type < 1) player.butt.type = 1;
 		outputText("\n\nIn a few brief seconds, your [butt] relaxes into its new, slightly tinier form.  Shouldra huffs and puffs inside you, not wanting to discuss your bottom any further.");
 	}
 	dynStats("lib", -2, "lus", -10);

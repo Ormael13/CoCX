@@ -189,7 +189,7 @@ public class AbstractEquinum extends Consumable {
 		}
 		if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 		//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-		if (changes < changeLimit && !InCollection(player.armType, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
+		if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
 			mutations.humanizeArms();
 			changes++;
 		}
@@ -472,17 +472,17 @@ public class AbstractEquinum extends Consumable {
 			}
 		}
 		//Remove odd eyes
-		if (changes < changeLimit && rand(5) == 0 && player.eyeType > Eyes.HUMAN) {
+		if (changes < changeLimit && rand(5) == 0 && player.eyes.type > Eyes.HUMAN) {
 			mutations.humanizeEyes();
 			changes++;
 		}
-		if ((type == 1 || type == 2) && changes < changeLimit && rand(3) == 0 && player.eyeColor != "blue" && player.eyeColor != "red") {
+		if ((type == 1 || type == 2) && changes < changeLimit && rand(3) == 0 && player.eyes.colour != "blue" && player.eyes.colour != "red") {
 			mutations.setEyeTypeAndColor(Eyes.HUMAN, "blue");
 			outputText("\n\n<b>You have [eyecolor] eyes!</b>");
 			changes++;
 		}
 		//HorseFace - Req's Fur && Ears
-		if (player.faceType != Face.HORSE && !player.isGargoyle() && player.hasFur() && changes < changeLimit && rand(5) == 0 && player.earType == Ears.HORSE) {
+		if (player.faceType != Face.HORSE && !player.isGargoyle() && player.hasFur() && changes < changeLimit && rand(5) == 0 && player.ears.type == Ears.HORSE) {
 			if (player.faceType == Face.DOG) outputText("\n\nMind-numbing pain shatters through you as you feel your facial bones rearranging.  You clutch at your face in agony as your skin crawls and shifts, your visage reshaping to replace your dog-like characteristics with those of a horse.  <b>You now have a horse's face.</b>");
 			else outputText("\n\nMind-numbing pain shatters through you as you feel your facial bones breaking and shifting.  You clutch at yourself in agony as you feel your skin crawl and elongate under your fingers.  Eventually the pain subsides, leaving you with a face that seamlessly blends human and equine features.  <b>You have a very equine-looking face.</b>");
 			changes++;
@@ -506,13 +506,12 @@ public class AbstractEquinum extends Consumable {
 			else player.skin.growCoat(Skin.FUR, {color: "white"});
 		}
 		//Ears - requires tail
-		if (player.earType != Ears.HORSE && player.tailType == Tail.HORSE && player.tailType != Tail.GARGOYLE && changes < changeLimit && rand(3) == 0) {
-			if (player.earType == -1) outputText("\n\nTwo painful lumps sprout on the top of your head, forming into tear-drop shaped ears, covered with short fur.  ");
-			if (player.earType == Ears.HUMAN) outputText("\n\nYour ears tug painfully on your face as they begin shifting, moving upwards to the top of your head and transforming into a upright animalistic ears.  ");
-			if (player.earType == Ears.DOG) outputText("\n\nYour ears change shape, morphing into from their doglike shape into equine-like ears!  ");
-			if (player.earType > Ears.DOG) outputText("\n\nYour ears change shape, morphing into teardrop-shaped horse ears!  ");
+		if (player.ears.type != Ears.HORSE && player.tailType == Tail.HORSE && player.tailType != Tail.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+			if (player.ears.type == -1) outputText("\n\nTwo painful lumps sprout on the top of your head, forming into tear-drop shaped ears, covered with short fur.  ");
+			if (player.ears.type == Ears.HUMAN) outputText("\n\nYour ears tug painfully on your face as they begin shifting, moving upwards to the top of your head and transforming into a upright animalistic ears.  ");
+			if (player.ears.type == Ears.DOG) outputText("\n\nYour ears change shape, morphing into from their doglike shape into equine-like ears!  ");
+			if (player.ears.type > Ears.DOG) outputText("\n\nYour ears change shape, morphing into teardrop-shaped horse ears!  ");
 			mutations.setEarType(Ears.HORSE);
-			player.earValue = 0;
 			outputText("<b>You now have horse ears.</b>");
 			changes++;
 		}
@@ -542,49 +541,49 @@ public class AbstractEquinum extends Consumable {
 		// Remove gills
 		if (rand(4) == 0 && player.hasGills() && changes < changeLimit) mutations.updateGills();
 
-		if ((type == 1 || type == 2) && changes < changeLimit && rand(3) == 0 && player.earType == Ears.HORSE && player.tailType != Tail.GARGOYLE && player.tailType == Tail.HORSE) {
+		if ((type == 1 || type == 2) && changes < changeLimit && rand(3) == 0 && player.ears.type == Ears.HORSE && player.tailType != Tail.GARGOYLE && player.tailType == Tail.HORSE) {
 			temp = 1;
-			//New horn or expanding unicorn/alicorn horn
-			if (player.hornType == Horns.UNICORN || player.hornType == Horns.NONE) {
-				//Get bigger if player has horn
-				if (player.hornType == Horns.UNICORN) {
+			//New horns or expanding unicorn/alicorn horns
+			if (player.horns.type == Horns.UNICORN || player.horns.type == Horns.NONE) {
+				//Get bigger if player has horns
+				if (player.horns.type == Horns.UNICORN) {
 					{
 						temp = 1 + rand(3);
-						player.horns += temp;
+						player.horns.count += temp;
 						if (temp == 0) changes--;
-						if (temp == 1) outputText("\n\nAn aching pressure builds in your temples as you feel your horn push another inch of length from your skull.  ");
-						if (temp == 2) outputText("\n\nA powerful headache momentarily doubles you over.  With painful slowness, you feel your horn push another two inches of length out from your brow, gradually thickening as it grow.  ");
-						if (temp == 3) outputText("\n\nAgony overwhelms you as a headache of terrifying intensity sweeps through your skull.  You squeeze your eyes shut from the pain, but it does little to help.  The torture intensifies before finally diminishing as you feel an inch or two of new horn force its way out of your forehead.  The headache remains despite this, and desperate for relief, you grab hold of your horn and tug, pulling another inch of new horn free.  At last the pain fades, leaving you with significantly enhanced head-spike.  ");
-						if (player.horns < 3) outputText("It is the size of tiny nub.");
-						if (player.horns >= 3 && player.horns < 6) outputText("It is similar to what you would see on a young unicorn.");
-						if (player.horns >= 6 && player.horns < 12) outputText("It look like the horn on a grown unicorn, big enough and dangerous enough to do some damage.");
-						if (player.horns >= 12 && player.horns < 20) outputText("It is large and wicked looking.");
-						if (player.horns >= 20) outputText("It is large, pointed and spiraling horn.");
+						if (temp == 1) outputText("\n\nAn aching pressure builds in your temples as you feel your horns push another inch of length from your skull.  ");
+						if (temp == 2) outputText("\n\nA powerful headache momentarily doubles you over.  With painful slowness, you feel your horns push another two inches of length out from your brow, gradually thickening as it grow.  ");
+						if (temp == 3) outputText("\n\nAgony overwhelms you as a headache of terrifying intensity sweeps through your skull.  You squeeze your eyes shut from the pain, but it does little to help.  The torture intensifies before finally diminishing as you feel an inch or two of new horns force its way out of your forehead.  The headache remains despite this, and desperate for relief, you grab hold of your horns and tug, pulling another inch of new horns free.  At last the pain fades, leaving you with significantly enhanced head-spike.  ");
+						if (player.horns.count < 3) outputText("It is the size of tiny nub.");
+						if (player.horns.count >= 3 && player.horns.count < 6) outputText("It is similar to what you would see on a young unicorn.");
+						if (player.horns.count >= 6 && player.horns.count < 12) outputText("It look like the horns on a grown unicorn, big enough and dangerous enough to do some damage.");
+						if (player.horns.count >= 12 && player.horns.count < 20) outputText("It is large and wicked looking.");
+						if (player.horns.count >= 20) outputText("It is large, pointed and spiraling horns.");
 						changes++;
 					}
 				}
 				//If no horns yet..
 				else {
-					outputText("\n\nWith painful pressure, the skin on your forehead splits around tiny nub-like horn, a little bit similar to that you would see on the cattle back in your homeland.");
+					outputText("\n\nWith painful pressure, the skin on your forehead splits around tiny nub-like horns, a little bit similar to that you would see on the cattle back in your homeland.");
 					mutations.setHornType(Horns.COW_MINOTAUR, 2);
 					changes++;
 				}
 			}
-			//Not uni/ali horn, change to uni/ali-horn
-			if (player.hornType != Horns.UNICORN && player.hornType != Horns.ORCHID) {
-				outputText("\n\nYour horns vibrate and shift as if made of clay, reforming into horn with a unicorn-like shape.");
+			//Not uni/ali horns, change to uni/ali-horns
+			if (player.horns.type != Horns.UNICORN && player.horns.type != Horns.ORCHID) {
+				outputText("\n\nYour horns vibrate and shift as if made of clay, reforming into horns with a unicorn-like shape.");
 				mutations.setHornType(Horns.UNICORN);
 				changes++;
 			}
 		}
 		//Alicorn wings
-		if (type == 2 && player.wingType == Wings.NONE && changes < changeLimit && player.hornType == Horns.UNICORN && rand(4) == 0) {
+		if (type == 2 && player.wings.type == Wings.NONE && changes < changeLimit && player.horns.type == Horns.UNICORN && rand(4) == 0) {
 			outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your [skin.type]. It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, white wings.</b>");
 			mutations.setWingType(Wings.FEATHERED_ALICORN, "large white feathered");
 			changes++;
 		}
 		//Remove old wings
-		if (type == 2 && player.wingType != Wings.FEATHERED_ALICORN && player.wingType != Wings.GARGOYLE_LIKE_LARGE && player.wingType > Wings.NONE && changes < changeLimit && rand(4) == 0) {
+		if (type == 2 && player.wings.type != Wings.FEATHERED_ALICORN && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && player.wings.type > Wings.NONE && changes < changeLimit && rand(4) == 0) {
 			mutations.removeWings();
 			changes++;
 		}

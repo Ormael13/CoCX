@@ -551,7 +551,7 @@ public function getRapedByMinotaur(autoRape:Boolean = false):void {
 			cleanupAfterCombat();
 			return;
 		}
-		if(rand(2) == 0 && player.buttRating >= 15 && player.vaginalCapacity() < monster.biggestCockArea() && player.tone < 60) {
+		if(rand(2) == 0 && player.butt.type >= 15 && player.vaginalCapacity() < monster.biggestCockArea() && player.tone < 60) {
 			getMinoHawtDawged();
 			return;
 		}

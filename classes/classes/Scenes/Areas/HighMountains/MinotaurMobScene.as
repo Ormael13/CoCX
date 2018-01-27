@@ -337,7 +337,7 @@ private function nonAddictMinotaurGangBang():void {
 	outputText("  Bouncing between them like a child's ball, your body is battered, abused, and used for nothing more than a few minute's pleasure.  Every time the throat-obstructing mass pulls from your mouth you take another deep breath, staying conscious, but becoming more aroused by the omnipresent stench of the horny beasts.\n\n");
 	
 	outputText("The minotaur occupying your mouth grabs hold of your ");
-	if(player.horns > 0) outputText("horns ");
+	if(player.horns.count > 0) outputText("horns ");
 	else outputText("head ");
 	outputText("and roughly buries his cock in your mouth, all the way to the hilt.  His pre-cum stops, and the balls on your chin begin to bounce as the beast's animalistic, three-ribbed member starts to widen inside you.  Your jaw stretches slightly, and you feel a huge wad of cum distend the urethra along the bottom of his shaft.  Working towards your belly, the mass bursts from his tip explosively, making your gut gurgle audibly as it receives its first injection of minotaur spunk.\n\n");
 	
@@ -446,7 +446,7 @@ private function loseToMinoMobVeryPregnant():void {
 	outputText("  How does that make you feel, whore?</i>\" asks the mouth-filling dick's owner.\n\n");
 	
 	outputText("You hum, \"<i>good,</i>\" though it comes out as more of a, \"<i>mpppphhhhhh.</i>\"  Your drug-addled vision is all bubbles and synaesthetic rainbows at this point.  He chuckles malevolently when another minotaur resumes slapping your ass.  The minotaur in the driver's seat grabs your ");
-	if(player.horns > 0) outputText("horns");
+	if(player.horns.count > 0) outputText("horns");
 	else outputText("hair");
 	outputText(" and pulls you back, your tongue dragging over the underside of his shaft.  Then, with an abrupt shift, he plunges back in.  Once he bottoms out, he once more reverses direction - never stopping, never slowing.  He face-fucks you hard and fast while your ass is repeatedly smacked.");
 	outputText("\n\n");
@@ -669,7 +669,7 @@ private function victoryMinotaurGangTitFuck():void {
 		outputText("getting sooo wasted on it,</i>\" you command.  Bouncing your breasts up and down, you keep the soaked flesh in constant motion around the swollen, slowly flaring shafts.  A sudden gout of wetness splashes your cheek, and as you turn to investigate, a leaking prick is pressed through your confusion-pursed lips.  Salty-sweet pre-cum tingles on your tongue, and you begin to lap at it eagerly, running your tongue over the hot, flaring tongue.  It tastes absolutely divine.  You focus on it completely, trying to block out the voice of its owner.\n\n");
 		
 		outputText("The runt of your litter, the minitaur, is whining, \"<i>I-I'm sorry Mom but I just couldn't hold b-back anymore.  Ung... your mouth is so hot.  I can't control it!</i>\"  He grabs your ");
-		if(player.horns > 0) outputText("horns");
+		if(player.horns.count > 0) outputText("horns");
 		else outputText("hair");
 		outputText(" and pulls you down, ramming the fat flare of his dick into your throat a split second before he cums.  The salty deluge fills your throat to the brim before it rolls down into your stomach, adding the already full load inside you.  You hum in happiness as you're stuffed with spunk.  The added throat vibration keeps your femmy son spurting nice and long for you.\n\n");
 		

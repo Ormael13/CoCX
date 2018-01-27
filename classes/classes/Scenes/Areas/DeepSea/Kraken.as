@@ -81,8 +81,8 @@ public class Kraken extends Monster
 			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 24*12;
-			this.hipRating = Hips.RATING_AMPLE;
-			this.buttRating = Butt.RATING_NOTICEABLE;
+			this.hips.type = Hips.RATING_AMPLE;
+			this.butt.type = Butt.RATING_NOTICEABLE;
 			this.lowerBody = LowerBody.SCYLLA;
 			this.skin.setBaseOnly({color:"slippery"});
 			this.hairColor = "brown";

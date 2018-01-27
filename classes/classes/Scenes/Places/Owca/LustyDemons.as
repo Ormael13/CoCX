@@ -70,8 +70,8 @@ public class LustyDemons extends Monster
 			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
 			this.ass.analWetness = AssClass.WETNESS_SLIME_DROOLING;
 			this.tallness = rand(8) + 70;
-			this.hipRating = Hips.RATING_AMPLE+2;
-			this.buttRating = Butt.RATING_LARGE;
+			this.hips.type = Hips.RATING_AMPLE + 2;
+			this.butt.type = Butt.RATING_LARGE;
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
@@ -93,8 +93,8 @@ public class LustyDemons extends Monster
 			this.special1 = SceneLib.combat.packAttack;
 			this.special2 = SceneLib.combat.lustAttack;
 			this.tailType = Tail.DEMONIC;
-			this.hornType = Horns.DEMON;
-			this.horns = 2;
+			this.horns.type = Horns.DEMON;
+			this.horns.count = 2;
 			this.drop = new WeightedDrop().
 					add(weapons.PSWHIP,5).
 					add(weapons.SUCWHIP,4).

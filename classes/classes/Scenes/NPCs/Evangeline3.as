@@ -214,8 +214,8 @@ public class Evangeline3 extends Monster
 				createBreastRow(Appearance.breastCupInverse("F"));//succubus milk może teoretycznie w nieskończoność zwiekszać rozmiar biustu
 				this.tallness = 96;
 				this.skin.setBaseOnly({});
-				this.hipRating = Hips.RATING_FERTILE+3;//hipRating = 18
-				this.buttRating = Butt.RATING_EXPANSIVE+1;//buttRating = 14
+				this.hips.type = Hips.RATING_FERTILE + 3;//hips.type = 18
+				this.butt.type = Butt.RATING_EXPANSIVE + 1;//butt.type = 14
 				initStrTouSpeInte(41, 46, 80, 50);
 				initWisLibSensCor(15, 45, 35, 100);
 				this.weaponName = "inscribed spellblade";
@@ -236,8 +236,8 @@ public class Evangeline3 extends Monster
 				createBreastRow(Appearance.breastCupInverse("F"));
 				this.tallness = 96;
 				this.skin.setBaseOnly({});
-				this.hipRating = Hips.RATING_FERTILE+3;//hipRating = 18
-				this.buttRating = Butt.RATING_EXPANSIVE+1;//buttRating = 14
+				this.hips.type = Hips.RATING_FERTILE + 3;//hips.type = 18
+				this.butt.type = Butt.RATING_EXPANSIVE + 1;//butt.type = 14
 				initStrTouSpeInte(46, 46, 80, 50);
 				initWisLibSensCor(15, 50, 35, 100);
 				this.weaponName = "inscribed spellblade";
@@ -259,8 +259,8 @@ public class Evangeline3 extends Monster
 				createBreastRow(Appearance.breastCupInverse("F"));
 				this.tallness = 96;
 				this.skin.setBaseOnly({});
-				this.hipRating = Hips.RATING_FERTILE+3;//hipRating = 18
-				this.buttRating = Butt.RATING_EXPANSIVE+1;//buttRating = 14
+				this.hips.type = Hips.RATING_FERTILE + 3;//hips.type = 18
+				this.butt.type = Butt.RATING_EXPANSIVE + 1;//butt.type = 14
 				initStrTouSpeInte(46, 46, 80, 50);
 				initWisLibSensCor(15, 50, 35, 100);
 				this.weaponName = "inscribed spellblade";
@@ -284,8 +284,8 @@ public class Evangeline3 extends Monster
 				createBreastRow(Appearance.breastCupInverse("F"));
 				this.tallness = 96;
 				this.skin.setBaseOnly({});
-				this.hipRating = Hips.RATING_FERTILE+3;//hipRating = 18
-				this.buttRating = Butt.RATING_EXPANSIVE+1;//buttRating = 14
+				this.hips.type = Hips.RATING_FERTILE + 3;//hips.type = 18
+				this.butt.type = Butt.RATING_EXPANSIVE + 1;//butt.type = 14
 				initStrTouSpeInte(46, 46, 80, 50);
 				initWisLibSensCor(15, 50, 35, 100);
 				this.weaponName = "inscribed spellblade";
@@ -310,8 +310,8 @@ public class Evangeline3 extends Monster
 				createBreastRow(Appearance.breastCupInverse("F"));
 				this.tallness = 96;
 				this.skin.setBaseOnly({});
-				this.hipRating = Hips.RATING_FERTILE+3;//hipRating = 18
-				this.buttRating = Butt.RATING_EXPANSIVE+1;//buttRating = 14
+				this.hips.type = Hips.RATING_FERTILE + 3;//hips.type = 18
+				this.butt.type = Butt.RATING_EXPANSIVE + 1;//butt.type = 14
 				initStrTouSpeInte(46, 46, 80, 50);
 				initWisLibSensCor(15, 50, 35, 100);
 				this.weaponName = "inscribed spellblade";
@@ -338,8 +338,8 @@ public class Evangeline3 extends Monster
 				createBreastRow(Appearance.breastCupInverse("F"));//succubus milk może teoretycznie w nieskończoność zwiekszać rozmiar biustu
 				this.tallness = 96;
 				this.skin.setBaseOnly({});
-				this.hipRating = Hips.RATING_FERTILE+3;//hipRating = 18
-				this.buttRating = Butt.RATING_EXPANSIVE+1;//buttRating = 14
+				this.hips.type = Hips.RATING_FERTILE + 3;//hips.type = 18
+				this.butt.type = Butt.RATING_EXPANSIVE + 1;//butt.type = 14
 				initStrTouSpeInte(46, 46, 80, 50);
 				initWisLibSensCor(15, 50, 35, 100);
 				this.weaponName = "inscribed spellblade";

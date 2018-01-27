@@ -78,8 +78,8 @@ public class Brigid extends Monster
 			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.tallness = rand(8) + 70;
-			this.hipRating = Hips.RATING_AMPLE+2;
-			this.buttRating = Butt.RATING_LARGE;
+			this.hips.type = Hips.RATING_AMPLE + 2;
+			this.butt.type = Butt.RATING_LARGE;
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
@@ -98,10 +98,10 @@ public class Brigid extends Monster
 			this.level = 29;
 			this.gems = rand(37)+210;
 			this.additionalXP = 150;
-			this.wingType = Wings.FEATHERED_LARGE;
+			this.wings.type = Wings.FEATHERED_LARGE;
 			this.tailType = Tail.DEMONIC;
-			this.hornType = Horns.DEMON;
-			this.horns = 2;
+			this.horns.type = Horns.DEMON;
+			this.horns.count = 2;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);
 			checkMonster();
