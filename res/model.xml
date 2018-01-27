@@ -405,7 +405,7 @@
         <cell rect="314,226,53,119" name="wings/scales_right" dx="104" dy="20"/>
     </spritemap>
     <layers>
-        <layer name="antennae.type"/>
+        <layer name="antennae"/>
         <layer name="horns"/>
         <layer name="ears"/>
         <layer name="eyes"/>
@@ -522,7 +522,7 @@
             </default>
         </switch>
 
-        <switch value="earType">
+        <switch value="ears.type">
             <case value="Ears.HUMAN">
                 <show part="ears_bg/human"/>
             </case>
