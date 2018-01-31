@@ -19,7 +19,7 @@
 				You are hardly surprised, already knowing how short most pregnancies are in Mareth.
 				<if test="player.inte gt 50">Maybe it’s due to how time and space distort in Mareth?</if>
 				Still, you had hoped this phase would have lasted at least a little bit longer.
-				<if test="isCorrupt">
+				<if test="$isCorrupt">
 					Your daughter wakes up as well, opening her beautiful crimson eyes to the world.
 					She, unlike her sire, has twilight black hair and fur.
 					<else>
@@ -37,7 +37,7 @@
 			</text>
 		</lib>
 		<text name="playTime">
-			<if test="isCorrupt">
+			<if test="$isCorrupt">
 				<output>$name</output> seems somewhat bored, and it occurs to you that being a mother comes before being the Champion.
 				You decide to bring your girl on an excursion, but the pair of you stumble upon a gang of imps.
 				You defeat them all to keep your daughter safe, but as you prepare to leave, you’re suddenly hit by a splash on your back.
@@ -79,7 +79,7 @@
 			You almost panic for a moment, before calming down and deciding to go look for her. 
 			When you finally find her by the stream, she’s holding her forehead, visibly in pain.
 			
-			<if test="isCorrupt">
+			<if test="$isCorrupt">
 				<i>“Ahhhh so good… this feels way too good!…Mom please look!”</i>
 				
 				Well, looks like it wasn’t pain, not at all. You watch spellbound as a duo of parallel horns, symbols of her corruption, push out of <output>$name</output>’s forehead. 
@@ -118,7 +118,7 @@
 			You lick the flared tip to get a taste, satisfied with it you then proceed to put the thing in your mouth proper. <output>$name</output> moans as her horse dong throbs in appreciation for the attention you’re giving it.
 			You suck on her cock until she finally orgasms, the sweet cum flooding your throat.
 			
-			<if test="isCorrupt">
+			<if test="$isCorrupt">
 				Weirdly enough, you feel something change in you as the corrupted cum reaches your stomach. 
 				<else>
 					Her cum somehow makes your mind feel clearer and sharper, purifying some of the darker thoughts plaguing you. <output>$name</output>’s horsecock finally shrinks back to its sheath, but she’s still blushing like a tomato.
@@ -279,7 +279,7 @@
 		</text>
 		<text name="appearance">
 			Your daughter <output>$name</output> is a 
-			<if test="isCorrupt">
+			<if test="$isCorrupt">
 				Bicorn with 
 				Abyssal black fur. 
 				Her red eyes shine with a glimmer of sinister mischief and depravity, you sometime ponder whether or not she is the spawn of a demon rather than you.
@@ -296,7 +296,7 @@
 			
 			<output>$name</output> inherited a massive horsecock from her father. Easily 20 inch long, this beast can apparently, if the tales are true, pierce through anything.
 			
-			<if test="isCorrupt">
+			<if test="$isCorrupt">
 				She regularly use it to fuck imps and goblins alike when she is horny.
 				
 				<else>
@@ -305,7 +305,7 @@
 				</else>
 			</if>
 			As all centauress <output>$name</output> has a horse vagina behind her hindquarter.
-			<if test="isCorrupt">
+			<if test="$isCorrupt">
 				Knowing her well she likely already took enough cock down that way to beat a succubus at the art of fucking. Your lascivious daughter is far from virgin.
 				<else>
 					You pray that she will not lose her virginity to some corrupt creature. 
@@ -320,7 +320,7 @@
 				<i>“Certainly mother! Just leave the item on the ground and let me get to work.”</i>
 				
 				<output>$name</output> trots over to the item and starts channeling power. 
-				<if test="isCorrupt">
+				<if test="$isCorrupt">
 					You see her twin horns blazing with a dark purple aura of corruption as her horse cock goes erect. 
 					She start to massage her breasts then moans, her eyes rolling out as she spontaneously orgasms, a river of black cum flooding out of her flare right unto the item.
 					You see the armament transforming as fluid corruption seeps into the material, infusing it with unholy power. 

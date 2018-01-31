@@ -142,8 +142,8 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	public override function campInteraction():void {
 		clearOutput();
 		doNext(camp.returnToCampUseOneHour);
-		display("strings/campInteraction", {$name: _name});
-		addButton(0, "Appearance", scene, "strings/appearance", {$name: _name}, campInteraction);
+		display("strings/campInteraction", myLocals);
+		addButton(0, "Appearance", scene, "strings/appearance", myLocals, campInteraction);
 		if (isAdult) {
 			if (isCorrupt || player.cor >= 20) {
 				addButton(1, "Incest", incestMenu);
@@ -163,7 +163,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			if (isCorrupt) {
 				clearOutput();
 				var menu:ButtonDataList = new ButtonDataList();
-				display("strings/incest/corruptMenu", {$name: _name});
+				display("strings/incest/corruptMenu", myLocals);
 				menu.add("Suck her off", curry(incestScene, "suckHerOff"));
 				menu.add("Fuck Her", curry(incestScene, "fuckHer")).disableIf(!player.isMaleOrHerm());
 				menu.add("Get Fucked", curry(incestScene, "getFucked")).disableIf(!player.isFemaleOrHerm());
@@ -226,7 +226,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			}
 
 			mainView.nameBox.visible = false;
-			scene("strings/birth/nameScene", {$name: _name}, camp.returnToCampUseFourHours);
+			scene("strings/birth/nameScene", myLocals, camp.returnToCampUseFourHours);
 		}
 	}
 
@@ -264,7 +264,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		submenu(selectMenu, campInteraction);
 
 		function improveItem(item:ItemType, from:ItemType):void {
-			scene("strings/itemImprove/improveThatItem", {$name: _name});
+			scene("strings/itemImprove/improveThatItem", myLocals);
 			player.destroyItems(from, 1);
 			inventory.takeItem(item, camp.returnToCampUseOneHour);
 		}
@@ -325,7 +325,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	}
 
 	private function growUpScene():void {
-		scene("strings/growUp", {$name: _name});
+		scene("strings/growUp", myLocals);
 		if (isCorrupt) {
 			addButton(0, "Masturbate Her", incestScene, "masturbateHer");
 			if (player.isMaleOrHerm()) {
@@ -343,16 +343,23 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 
 	private function incestScene(sceneName:String):void {
 		var toDisplay:String = "strings/incest/" + sceneName;
-		scene(toDisplay, {$name: _name});
+		scene(toDisplay, myLocals);
 		if (sceneName == "pureIncest" && player.cor > 80) {
 			_corruption++;
 			if (isCorrupt) {
 				addButton(0, "Next", incestScene, "pureCorruption");
 			}
 			else {
-				display("strings/incest/addCorruption", {$name: _name});
+				display("strings/incest/addCorruption", myLocals);
 				doNext(camp.returnToCampUseOneHour);
 			}
+		}
+	}
+	
+	private function get myLocals():*{
+		return {
+			$name : _name,
+			$isCorrupt : isCorrupt
 		}
 	}
 }
