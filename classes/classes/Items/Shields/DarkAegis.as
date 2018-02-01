@@ -13,7 +13,10 @@ package classes.Items.Shields
 		
 		public function DarkAegis() 
 		{
-			super("SanctD", "Dark Aegis", "dark aegis", "a dark aegis", 20, 2000, "The legendary shield is said to heal and protect a fallen knight.", "", PerkLib.Sanctuary, 2, 0, 0, 0);
+			super("SanctD", "Dark Aegis", "dark aegis", "a dark aegis", 20, 2000,
+					"Gleaming in black metal and obsidian plates, this legendary shield is said to heal and protect a fallen knight. Demonic ornaments cover most of its obsidian-carved surface.",
+					"", PerkLib.Sanctuary, 2, 0, 0, 0
+			);
 		}
 		
 		override public function get block():Number {

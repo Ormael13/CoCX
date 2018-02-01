@@ -42,11 +42,11 @@ package classes.Items
 		public const ERIBBON:EldritchRibbon = new EldritchRibbon();
 		public const EXCALIB:Weapon = new Excalibur();
 		public const FLAIL  :Weapon = new Weapon("Flail  ","Flail","flail","a flail","smash",10,400,"This is a flail, a weapon consisting of a metal spiked ball attached to a stick by chain. Be careful with this as you might end up injuring yourself.");
-		public const FRTAXE :Weapon = new Weapon("Fr.T.Axe","Fr.T.Axe", "Francisca throwing axe", "a Francisca throwing axe", "cleave", 25, 2000, "Wielded by the bravest warriors of a foreign land, this axe is made in polished steel, and decorated with hunting reliefs in silver and platinum. It’s unusually light for its size, so you may be able to throw it at a flying foe to bring it down. Some runes engraved on the handle assure that it will return to you once it has hit your opponent.", "Large");
+		public const FRTAXE :Weapon = new Weapon("Fr.T.Axe","Fr.T.Axe", "Francisca throwing axe", "a Francisca throwing axe", "cleave", 25, 2000, "A foreign axe, made in polished steel and decorated with hunting reliefs in gold and silver. It’s unusually light for its size, so you may be able to manage it with a single hand. Some runes engraved on the handle assure that it will return to you once it has hit your opponent.", "Large");
 		public const H_GAUNT:Weapon = new Weapon("H.Gaunt", "H.Gaunt", "hooked gauntlets", "a set of hooked gauntlets", "clawing punch", 0, 400, "These metal gauntlets are covered in nasty looking hooks that are sure to tear at your foes flesh and cause them harm.");
 		public const HNTCANE:HuntsmansCane = new HuntsmansCane();
 		public const JRAPIER:JeweledRapier = new JeweledRapier();
-		public const KARMTOU:KarmicTouch = new KarmicTouch();
+		public const KARMTOU:WeaponWithPerk = new WeaponWithPerk("KarmTou", "KarmicTouch", "karmic gloves", "a pair of karmic gloves", "punch", 0, 400, "A pair of gauntlets, made in shining steel and snow-white cloth. Their touch brings waste into the wicked’s flesh, punishing them in the form of blows more painful then should be.", "Body Cultivator's Focus", PerkLib.BodyCultivatorsFocus, 0.5, 0, 0, 0);
 		public const KATANA :Weapon = new Weapon("Katana ","Katana","katana","a katana","keen cut",10,400,"A curved bladed weapon that cuts through flesh with the greatest of ease.");
 		public const KIHAAXE:Weapon = new Weapon("KihaAxe","Greataxe","fiery double-bladed axe","a fiery double-bladed axe","fiery cleave",22,880,"This large, double-bladed axe matches Kiha's axe. It's constantly flaming.", "Large");
 		public const L__AXE :LargeAxe = new LargeAxe();
@@ -58,7 +58,7 @@ package classes.Items
 		public const LANCE  :Lance = new Lance();
 		public const MACE   :Weapon = new Weapon("Mace   ", "Mace", "mace", "a mace", "smash", 9, 360, "This is a mace, designed to be able to crush against various defenses.");
 		public const MASAMUN:Masamune = new Masamune();
-		public const MASTGLO:MasterGloves = new MasterGloves();
+		public const MASTGLO:WeaponWithPerk = new WeaponWithPerk("MastGlo", "MasterGloves", "Master Gloves", "a Master Gloves", "punch", 0, 400, "These gloves belonged to Chi Chi. They seem to naturally strengthen the soulforce techniques of the user.", "Body Cultivator's Focus", PerkLib.BodyCultivatorsFocus, 0.4, 0, 0, 0);
 		public const N_STAFF:NocturnusStaff = new NocturnusStaff();
 		public const NTWHIP :NineTailWhip = new NineTailWhip();
 		public const NODACHI:Weapon = new Weapon("Nodachi","Nodachi","nodachi","a nodachi","keen cut",17,680,"A curved over 1,7 m long bladed weapon that cuts through flesh with the greatest of ease.", "Large");
@@ -96,7 +96,7 @@ package classes.Items
 		public const WDBLADE:Wardensblade = new Wardensblade();
 		public const WDSTAFF:Wardensstaff = new Wardensstaff();
 		public const WGSWORD:Wardensgreatsword = new Wardensgreatsword();
-		public const YAMARG :YamaRajaGrasp = new YamaRajaGrasp();
+		public const YAMARG :WeaponWithPerk = new WeaponWithPerk("YamaRG", "YamaRajaGrasp", "Yama-Raja gloves", "a pair of Yama-Raja gloves", "punch", 0, 400, "These black gloves are made in black leather and an ebony alloy. Their corrupt touch seeks to destroy the pure and innocent. As such, it will seek the weak points of its victims when striking.", "Body Cultivator's Focus", PerkLib.BodyCultivatorsFocus, 0.5, 0, 0, 0);
 		public const ZWNDER :Zweihander = new Zweihander();
 		
 		/*

@@ -12,7 +12,7 @@ package classes.Perks
 		
 		override public function desc(params:PerkClass = null):String
 		{
-			return "Increases your physical soulskill effect modifier by " + params.value1 * 100 + "%.";
+			return "(+" + params.value1 * 100 + "% Physical Soulskills Power)";
 		}
 		
 		public function BodyCultivatorsFocusPerk() 
