@@ -297,14 +297,14 @@ package classes.Scenes.NPCs
 			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.lowerBody = LowerBody.HOOFED;
-			this.skinTone = "pale";
+			this.skinTone = "light";
 			this.hairColor = "white";
 			this.weaponName = "staff";
 			this.weaponVerb="smack";
 			this.armorName = "fur";
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.bonusLust = 20;
-			this.earType = Ears.HORSE;
+			this.ears.type = Ears.HORSE;
 			this.faceType = Face.HORSE;
 			this.tailType = Tail.HORSE;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
