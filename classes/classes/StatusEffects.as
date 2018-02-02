@@ -294,7 +294,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const MinoMilk:StatusEffectType           = mk("Mino Milk");
 		public static const MinotaurEntangled:StatusEffectType  = mk("Minotaur Entangled");
 		public static const MissFirstRound:StatusEffectType     = mk("miss first round");
-		public static const MonsterRegen:StatusEffectType       = mk("Monster Regeneration");
+		public static const MonsterRegen:StatusEffectType       = mk("Monster Regeneration");//% regen
+		public static const MonsterRegen2:StatusEffectType      = mk("Monster Regeneration2");//flat regen
 		public static const NoLoot:StatusEffectType             = mk("No Loot");
 		public static const PCTailTangle:StatusEffectType       = mk("PCTailTangle");
 		public static const PeachLootLoss:StatusEffectType      = mk("Peach Loot Loss");

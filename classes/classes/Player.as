@@ -477,6 +477,52 @@ use namespace CoC;
 		{
 			return weaponName == "gauntlet with claws";
 		}
+		//Weapons for Whirlwind
+		public function isWeaponForWhirlwind():Boolean
+		{
+			return weapon == game.weapons.BFSWORD || weapon == game.weapons.NPHBLDE || weapon == game.weapons.EBNYBLD || weapon == game.weapons.CLAYMOR || weapon == game.weapons.URTAHLB || weapon == game.weapons.KIHAAXE || weapon == game.weapons.L__AXE || weapon == game.weapons.L_HAMMR || weapon == game.weapons.TRASAXE || weapon == game.weapons.WARHAMR
+			 || weapon == game.weapons.OTETSU || weapon == game.weapons.NODACHI || weapon == game.weapons.WGSWORD || weapon == game.weapons.DBFSWO || weapon == game.weapons.D_WHAM_ || weapon == game.weapons.DL_AXE_ || weapon == game.weapons.DSWORD_ || weapon == game.weapons.HALBERD || weapon == game.weapons.GUANDAO;// || weapon == game.weapons.
+		}
+		//Weapons for Whipping
+		public function isWeaponsForWhipping():Boolean
+		{
+			return weapon == game.weapons.FLAIL || weapon == game.weapons.L_WHIP || weapon == game.weapons.SUCWHIP || weapon == game.weapons.PSWHIP || weapon == game.weapons.WHIP || weapon == game.weapons.PWHIP || weapon == game.weapons.NTWHIP || weapon == game.weapons.CNTWHIP || weapon == game.weapons.RIBBON || weapon == game.weapons.ERIBBON
+			|| weapon == game.weapons.SNAKESW;
+		}
+		//1H Weapons
+		public function isOneHandedWeapons():Boolean
+		{
+			return weaponPerk != "Dual Large" && weaponPerk != "Dual" && weaponPerk != "Staff" && weaponPerk != "Large";
+		}
+		//Wrath Weapons
+		public function isLowGradeWrathWeapon():Boolean
+		{
+			return weapon == game.weapons.BFSWORD || weapon == game.weapons.NPHBLDE || weapon == game.weapons.EBNYBLD || weapon == game.weapons.OTETSU || weapon == game.weapons.POCDEST || weapon == game.weapons.DOCDEST || weapon == game.weapons.CNTWHIP;
+		}
+		public function isDualLowGradeWrathWeapon():Boolean
+		{
+			return weapon == game.weapons.DBFSWO;
+		}
+		//Fists and fist weapons
+		public function isFistOrFistWeapon():Boolean
+		{
+			return weaponName == "fists" || weapon == game.weapons.S_GAUNT || weapon == game.weapons.H_GAUNT || weapon == game.weapons.MASTGLO || weapon == game.weapons.KARMTOU || weapon == game.weapons.YAMARG || weapon == game.weapons.CLAWS;
+		}
+		//Natural Jouster perks req check
+		public function isMeetingNaturalJousterReq():Boolean
+		{
+			return (((isTaur() || isDrider()) && spe >= 60) && hasPerk(PerkLib.Naturaljouster) && (findPerk(PerkLib.DoubleAttack) < 0 || (hasPerk(PerkLib.DoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
+             || (spe >= 150 && hasPerk(PerkLib.Naturaljouster) && hasPerk(PerkLib.DoubleAttack) && (findPerk(PerkLib.DoubleAttack) < 0 || (hasPerk(PerkLib.DoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)));
+		}
+		public function isMeetingNaturalJousterMasterGradeReq():Boolean
+		{
+			return (((isTaur() || isDrider()) && spe >= 180) && hasPerk(PerkLib.NaturaljousterMastergrade) && (findPerk(PerkLib.DoubleAttack) < 0 || (hasPerk(PerkLib.DoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
+             || (spe >= 450 && hasPerk(PerkLib.NaturaljousterMastergrade) && hasPerk(PerkLib.DoubleAttack) && (findPerk(PerkLib.DoubleAttack) < 0 || (hasPerk(PerkLib.DoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)));
+		}
+		public function haveWeaponForJouster():Boolean
+		{
+			return weaponName == "deadly spear" || weaponName == "deadly lance" || weaponName == "deadly trident" || weaponName == "seraph spear" || weaponName == "demon snake spear";
+		}
 		//override public function get weapons
 		override public function get weaponName():String {
 			return _weapon.name;
@@ -565,6 +611,16 @@ use namespace CoC;
 		}
 		override public function get weaponValue():Number {
 			return _weapon.value;
+		}
+		//Artifacts Bows
+		public function isArtifactBow():Boolean
+		{
+			return weaponRange == game.weaponsrange.BOWGUID || weaponRange == game.weaponsrange.BOWHODR;
+		}
+		//Using Tome
+		public function isUsingTome():Boolean
+		{
+			return weaponRangeName == "nothing" || weaponRangeName == "Inquisitor’s Tome" || weaponRangeName == "Sage’s Sketchbook";
 		}
 		//override public function get weapons
 		override public function get weaponRangeName():String {

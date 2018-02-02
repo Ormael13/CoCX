@@ -2446,6 +2446,7 @@ private function dungeonFound():Boolean { //Returns true as soon as any known du
 	if (SceneLib.dungeons.checkPhoenixTowerClear()) return true;
 	if (flags[kFLAGS.HIDDEN_CAVE_FOUND] > 0) return true;
 	if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 0) return true;
+	if (flags[kFLAGS.LUMI_MET] > 0)  return true;
 	if (flags[kFLAGS.ANZU_PALACE_UNLOCKED] > 0)  return true;
 	return false;
 }
@@ -2562,6 +2563,7 @@ private function dungeons():void {
 	if (SceneLib.dungeons.checkPhoenixTowerClear()) addButton(6, "Phoenix Tower", dungeonH.returnToHeliaDungeon).hint("Re-visit the tower you went there as part of Helia's quest." + (SceneLib.dungeons.checkPhoenixTowerClear() ? "\n\nYou've helped Helia in the quest and resolved the problems. \n\nCLEARED!" : ""));
 	if (flags[kFLAGS.HIDDEN_CAVE_FOUND] > 0) addButton(10, "Hidden Cave", dungeonHC.enterDungeon).hint("Visit the hidden cave in the hills." + (SceneLib.dungeons.checkHiddenCaveClear() ? "\n\nCLEARED!" : ""));
 	if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 0) addButton(11, "Den of Desire", dungeonDD.enterDungeon).hint("Visit the den in blight ridge." + (SceneLib.dungeons.checkDenOfDesireClear() ? "\n\nCLEARED!" : ""));
+	if (flags[kFLAGS.LUMI_MET] > 0) addButton(12, "Lumi's Lab", SceneLib.lumi.lumiEncounter).hint("Visit Lumi's laboratory.");
 	if (flags[kFLAGS.ANZU_PALACE_UNLOCKED] > 0) addButton(13, "Anzu's Palace", dungeonAP.enterDungeon).hint("Visit the palace in the Glacial Rift where Anzu the avian deity resides.");
 	addButton(14, "Back", places);
 }

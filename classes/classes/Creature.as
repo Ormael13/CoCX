@@ -2466,67 +2466,6 @@ public class Creature extends Utils
 			return false;
 		}
 
-		//Artifacts Bows
-		public function isArtifactBow():Boolean
-		{
-			return game.player.weaponRange == game.weaponsrange.BOWGUID || game.player.weaponRange == game.weaponsrange.BOWHODR;
-		}
-
-		//Wrath Weapons
-		public function isLowGradeWrathWeapon():Boolean
-		{
-			return game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.NPHBLDE || game.player.weapon == game.weapons.EBNYBLD || game.player.weapon == game.weapons.OTETSU || game.player.weapon == game.weapons.POCDEST || game.player.weapon == game.weapons.DOCDEST || game.player.weapon == game.weapons.CNTWHIP;
-		}
-		public function isDualLowGradeWrathWeapon():Boolean
-		{
-			return game.player.weapon == game.weapons.DBFSWO;
-		}
-
-		//Fists and fist weapons
-		public function isFistOrFistWeapon():Boolean
-		{
-			return game.player.weaponName == "fists" || game.player.weapon == game.weapons.S_GAUNT || game.player.weapon == game.weapons.H_GAUNT || game.player.weapon == game.weapons.MASTGLO || game.player.weapon == game.weapons.KARMTOU || game.player.weapon == game.weapons.YAMARG || game.player.weapon == game.weapons.CLAWS;
-		}
-
-		//Weapons for Whirlwind
-		public function isWeaponForWhirlwind():Boolean
-		{
-			return game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.NPHBLDE || game.player.weapon == game.weapons.EBNYBLD || game.player.weapon == game.weapons.CLAYMOR || game.player.weapon == game.weapons.URTAHLB || game.player.weapon == game.weapons.KIHAAXE || game.player.weapon == game.weapons.L__AXE
-			 || game.player.weapon == game.weapons.L_HAMMR || game.player.weapon == game.weapons.TRASAXE || game.player.weapon == game.weapons.WARHAMR || game.player.weapon == game.weapons.OTETSU || game.player.weapon == game.weapons.NODACHI || game.player.weapon == game.weapons.WGSWORD || game.player.weapon == game.weapons.DBFSWO
-			 || game.player.weapon == game.weapons.D_WHAM_ || game.player.weapon == game.weapons.DL_AXE_ || game.player.weapon == game.weapons.DSWORD_// || game.player.weapon == game.weapons.
-		}
-
-		//Weapons for Whipping
-		public function isWeaponsForWhipping():Boolean
-		{
-			return game.player.weapon == game.weapons.FLAIL || game.player.weapon == game.weapons.L_WHIP || game.player.weapon == game.weapons.SUCWHIP || game.player.weapon == game.weapons.PSWHIP || game.player.weapon == game.weapons.WHIP || game.player.weapon == game.weapons.PWHIP || game.player.weapon == game.weapons.NTWHIP || game.player.weapon == game.weapons.CNTWHIP
-             || game.player.weapon == game.weapons.RIBBON || game.player.weapon == game.weapons.ERIBBON;
-		}
-
-		//Using Tome
-		public function isUsingTome():Boolean
-		{
-			return game.player.weaponRangeName == "nothing" || game.player.weaponRangeName == "Inquisitor’s Tome" || game.player.weaponRangeName == "Sage’s Sketchbook";
-		}
-
-		//Natural Jouster perks req check
-		public function isMeetingNaturalJousterReq():Boolean
-		{
-			return (((game.player.isTaur() || game.player.isDrider()) && game.player.spe >= 60) && game.player.findPerk(PerkLib.Naturaljouster) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && CoC.instance.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
-             || (game.player.spe >= 150 && game.player.findPerk(PerkLib.Naturaljouster) >= 0 && game.player.findPerk(PerkLib.DoubleAttack) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && CoC.instance.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)));
-		}
-		public function isMeetingNaturalJousterMasterGradeReq():Boolean
-		{
-			return (((game.player.isTaur() || game.player.isDrider()) && game.player.spe >= 180) && game.player.findPerk(PerkLib.NaturaljousterMastergrade) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && CoC.instance.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
-             || (game.player.spe >= 450 && game.player.findPerk(PerkLib.NaturaljousterMastergrade) >= 0 && game.player.findPerk(PerkLib.DoubleAttack) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && CoC.instance.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)));
-		}
-
-		//1H Weapons
-		public function isOneHandedWeapons():Boolean
-		{
-			return game.player.weaponPerk != "Dual Large" && game.player.weaponPerk != "Dual" && game.player.weaponPerk != "Staff" && game.player.weaponPerk != "Large";
-		}
-
 		//Naked
 		public function isNaked():Boolean
 		{
@@ -3664,6 +3603,7 @@ public class Creature extends Utils
 				if (game.player.weapon == game.weapons.JRAPIER || game.player.weapon == game.weapons.Q_GUARD || game.player.weapon == game.weapons.B_WIDOW || game.player.weapon == game.weapons.SPEAR || game.player.weapon == game.weapons.SESPEAR || game.player.weapon == game.weapons.DSSPEAR || game.player.weapon == game.weapons.LANCE
 				 || game.player.weaponRange == game.weaponsrange.SHUNHAR || game.player.weaponRange == game.weaponsrange.KSLHARP || game.player.weaponRange == game.weaponsrange.LEVHARP || (game.player.weaponName.indexOf("staff") != -1 && game.player.findPerk(PerkLib.StaffChanneling) >= 0)) armorMod = 0;
 				if (game.player.weapon == game.weapons.KATANA) armorMod -= 5;
+				if (game.player.weapon == game.weapons.HALBERD || game.player.weapon == game.weapons.GUANDAO) armorMod *= 0.6;
 				if (game.player.findPerk(PerkLib.LungingAttacks) >= 0) armorMod /= 2;
 				if (armorMod < 0) armorMod = 0;
 			}

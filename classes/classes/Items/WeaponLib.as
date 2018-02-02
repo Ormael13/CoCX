@@ -42,9 +42,13 @@ package classes.Items
 		public const ERIBBON:EldritchRibbon = new EldritchRibbon();
 		public const EXCALIB:Weapon = new Excalibur();
 		public const FLAIL  :Weapon = new Weapon("Flail  ","Flail","flail","a flail","smash",10,400,"This is a flail, a weapon consisting of a metal spiked ball attached to a stick by chain. Be careful with this as you might end up injuring yourself.");
+		public const FLYWHIS:FlyWhisk = new FlyWhisk();
 		public const FRTAXE :Weapon = new Weapon("Fr.T.Axe","Fr.T.Axe", "Francisca throwing axe", "a Francisca throwing axe", "cleave", 25, 2000, "A foreign axe, made in polished steel and decorated with hunting reliefs in gold and silver. It’s unusually light for its size, so you may be able to manage it with a single hand. Some runes engraved on the handle assure that it will return to you once it has hit your opponent.", "Large");
+		public const GUANDAO:GuanDao = new GuanDao();
 		public const H_GAUNT:Weapon = new Weapon("H.Gaunt", "H.Gaunt", "hooked gauntlets", "a set of hooked gauntlets", "clawing punch", 0, 400, "These metal gauntlets are covered in nasty looking hooks that are sure to tear at your foes flesh and cause them harm.");
+		public const HALBERD:Halberd = new Halberd();
 		public const HNTCANE:HuntsmansCane = new HuntsmansCane();
+		public const HSWORDS:HookSwords = new HookSwords();
 		public const JRAPIER:JeweledRapier = new JeweledRapier();
 		public const KARMTOU:WeaponWithPerk = new WeaponWithPerk("KarmTou", "KarmicTouch", "karmic gloves", "a pair of karmic gloves", "punch", 0, 400, "A pair of gauntlets, made in shining steel and snow-white cloth. Their touch brings waste into the wicked’s flesh, punishing them in the form of blows more painful then should be.", "Body Cultivator's Focus", PerkLib.BodyCultivatorsFocus, 0.5, 0, 0, 0);
 		public const KATANA :Weapon = new Weapon("Katana ","Katana","katana","a katana","keen cut",10,400,"A curved bladed weapon that cuts through flesh with the greatest of ease.");
@@ -81,6 +85,7 @@ package classes.Items
 		public const SCLAYMO:SapphireClaymore = new SapphireClaymore();
 		public const SCIMITR:Weapon = new Weapon("Scimitr", "Scimitar", "scimitar", "a scimitar", "slash", 15, 600, "This curved sword is made for slashing.  No doubt it'll easily cut through flesh.");
 		public const SESPEAR:SeraphicSpear = new SeraphicSpear();
+		public const SNAKESW:Weapon = new Weapon("SnakeSw", "SnakeSword", "Snake Sword", "a Snake Sword", "whip-slash", 20, 800, "This unassuming double-edged sword is comprised of segmented pieces which, when swung, will lash out akin to a whip.");
 		public const SPEAR  :Spear = new Spear();
 		public const SUCWHIP:SuccubiWhip = new SuccubiWhip();
 		public const TCLAYMO:TopazClaymore = new TopazClaymore();

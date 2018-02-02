@@ -314,7 +314,7 @@ public class HeXinDao extends BaseContent
         menu();
         addButton(1, "Shelf 1", soulequipmentshelf1);
         addButton(2, "Shelf 2", soulequipmentshelf2);
-        //	addButton(3, "Shelf 3", soulequipmentshelf3);//armors
+        addButton(3, "Shelf 3", soulequipmentshelf3);//armors and consumable
         //addButton(9, weapons.ERIBBON.shortName, weaponBuy, weapons.ERIBBON);//czy bedzie tu jako do sprzedaży czy jako nagroda za quest lub drop z mobka/bossa?
         //addButton(7, weapons.MACE.shortName, weaponBuy, weapons.MACE);//awl - wymagać bedzie możliwość lewitacji czy coś od PC aby to używać
         //addButton(8, weapons.MACE.shortName, weaponBuy, weapons.MACE);//bow made for soul cultivator xD
@@ -325,13 +325,16 @@ public class HeXinDao extends BaseContent
     }
     public function soulequipmentshelf1():void {
         menu();
-        addButton(0, consumables.W_STICK.shortName, weaponBuy, consumables.W_STICK);
-        addButton(1, consumables.BANGB_M.shortName, weaponBuy, consumables.BANGB_M);
-        addButton(5, weapons.TRASAXE.shortName, weaponBuy, weapons.TRASAXE);
-        addButton(6, weaponsrange.TRSXBOW.shortName, weaponBuy, weaponsrange.TRSXBOW);
-        addButton(7, shields.TRASBUC.shortName, weaponBuy, shields.TRASBUC);
-        addButton(8, armors.TRASARM.shortName, weaponBuy, armors.TRASARM);
-        addButton(10, weapons.W_STAFF.shortName, weaponBuy, weapons.W_STAFF);
+        addButton(0, weapons.TRASAXE.shortName, weaponBuy, weapons.TRASAXE);
+        addButton(1, weaponsrange.TRSXBOW.shortName, weaponBuy, weaponsrange.TRSXBOW);
+        addButton(2, shields.TRASBUC.shortName, weaponBuy, shields.TRASBUC);
+        addButton(3, armors.TRASARM.shortName, weaponBuy, armors.TRASARM);
+        addButton(5, weapons.W_STAFF.shortName, weaponBuy, weapons.W_STAFF);
+        addButton(6, weapons.GUANDAO.shortName, weaponBuy, weapons.GUANDAO);
+        addButton(7, weapons.HSWORDS.shortName, weaponBuy, weapons.HSWORDS);
+		addButton(8, weapons.SNAKESW.shortName, weaponBuy, weapons.SNAKESW);
+		//Changdao
+        addButton(10, weapons.FLYWHIS.shortName, weaponBuy, weapons.FLYWHIS);
         addButton(11, shields.MABRACE.shortName, weaponBuy, shields.MABRACE);
         addButton(14, "Back", soulequipmentmerchant);
     }
@@ -358,6 +361,8 @@ public class HeXinDao extends BaseContent
         //addButton(2, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic light armor made of soulmetal
         //addButton(0, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic heavy armor made of soulmetal
         //addButton(1, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic armor made of soulmetal that works with unhindered perk xD czyli coś ala bikini lub ogólnie tylko underwear z fragmentami zbroi lewitującymi wokół postaci i tylko w wypadku ataku wroga przesuwające sie aby przyjąć atak
+        addButton(10, consumables.W_STICK.shortName, weaponBuy, consumables.W_STICK);
+        addButton(11, consumables.BANGB_M.shortName, weaponBuy, consumables.BANGB_M);
         addButton(14, "Back", soulequipmentmerchant);
     }
 

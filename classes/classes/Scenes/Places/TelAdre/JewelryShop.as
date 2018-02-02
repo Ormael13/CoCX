@@ -20,9 +20,10 @@ public class JewelryShop extends Shop {
         super.inside();
         addButton(0, "Normal rings", normalRings);
         addButton(1, "Special rings", specialRings);
-        addButton(2, "Enchanted rings",enchantedRings);
+        addButton(2, "Enchanted rings", enchantedRings);
         addButton(5, "Jewelry box",curry(confirmBuy, null, 500, "Equipment Storage - Jewelry Box"));
-        addButton(14, "Leave", telAdre.telAdreMenu);
+        addButton(6, useables.GLDSTAT.shortName, confirmBuy, useables.GLDSTAT);
+		addButton(14, "Leave", telAdre.telAdreMenu);
     }
     private function normalRings():void {
         clearOutput();

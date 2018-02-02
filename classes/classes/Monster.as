@@ -97,6 +97,9 @@ import flash.utils.getQualifiedClassName;
 		//For enemies
 		public var bonusHP:Number = 0;
 		public var bonusLust:Number = 0;
+		public var bonusSoulforce:Number = 0;
+		public var bonusWrath:Number = 0;
+		public var bonusMana:Number = 0;
 		public var monsterCounters:MonsterCounters = null;
 		public var bonusStr:Number = 0;
 		public var bonusTou:Number = 0;
@@ -322,7 +325,7 @@ import flash.utils.getQualifiedClassName;
 		public override function maxSoulforce():Number
 		{
 			//Base soulforce
-			var temp:Number = 50;
+			var temp:Number = 50 + this.bonusSoulforce;
 			if (findPerk(PerkLib.JobSoulCultivator) >= 0) {
 				if (this.level >= 2) temp += 25;
 				if (this.level >= 4) temp += 25;
@@ -337,6 +340,11 @@ import flash.utils.getQualifiedClassName;
 				if (this.level >= 14) temp += 40;
 				if (this.level >= 16) temp += 40;
 			}
+			if (findPerk(PerkLib.SoulWarrior) >= 0) {
+				if (this.level >= 18) temp += 50;
+				if (this.level >= 20) temp += 50;
+				if (this.level >= 22) temp += 50;
+			}
 			if (findPerk(PerkLib.InsightfulResourcesI) >= 0) temp += Math.round((this.wis*5) * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) temp *= 1.1;
 			if (hasPerk(PerkLib.EnemyTrueDemon)) temp = 0;
@@ -346,7 +354,7 @@ import flash.utils.getQualifiedClassName;
 		public override function maxWrath():Number
 		{
 			//Base wrath
-			var temp:Number = 250;
+			var temp:Number = 250 + this.bonusWrath;
 			if (findPerk(PerkLib.DoubleAttack) >= 0) temp += 10;
 			if (findPerk(PerkLib.TripleAttack) >= 0) temp += 10;
 			if (findPerk(PerkLib.QuadrupleAttack) >= 0) temp += 10;
@@ -394,7 +402,7 @@ import flash.utils.getQualifiedClassName;
 		public override function maxMana():Number
 		{
 			//Base mana
-			var temp:Number = 100 + this.level * 10;
+			var temp:Number = 100 + this.level * 10 + this.bonusMana;
 			if (findPerk(PerkLib.BasicSpirituality) >= 0) temp += 45;
 			if (findPerk(PerkLib.HalfStepToImprovedSpirituality) >= 0) temp += 75;
 			if (findPerk(PerkLib.ImprovedSpirituality) >= 0) temp += 120;
@@ -694,6 +702,72 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.EnemyGigantType) >= 0) damage *= 3;
 			damage = Math.round(damage);
 			return damage;
+		}
+
+		public function inteligencescalingbonus():Number {
+			var inteligencescalingvalue:Number = 0;
+			if (inte >= 21 && inte < 41) inteligencescalingvalue += (inte / 2 + rand((inte * 3) / 4));
+			if (inte >= 41 && inte < 61) inteligencescalingvalue += ((inte * 2) / 3 + rand(inte));
+			if (inte >= 61 && inte < 81) inteligencescalingvalue += ((inte * 5) / 6 + rand(inte * 1.25));
+			if (inte >= 81 && inte < 101) inteligencescalingvalue += (inte + rand(inte * 1.5));
+			if (inte >= 101 && inte < 151) inteligencescalingvalue += ((inte * 1.25) + rand(inte * 1.75));
+			if (inte >= 151 && inte < 201) inteligencescalingvalue += ((inte * 1.5) + rand(inte * 2));
+			if (inte >= 201 && inte < 251) inteligencescalingvalue += ((inte * 1.75) + rand(inte * 2.25));
+			if (inte >= 251 && inte < 301) inteligencescalingvalue += ((inte * 2) + rand(inte * 2.5));
+			if (inte >= 301 && inte < 351) inteligencescalingvalue += ((inte * 2.25) + rand(inte * 2.75));
+			if (inte >= 351 && inte < 401) inteligencescalingvalue += ((inte * 2.5) + rand(inte * 3));
+			if (inte >= 401 && inte < 451) inteligencescalingvalue += ((inte * 2.75) + rand(inte * 3.25));
+			if (inte >= 451 && inte < 501) inteligencescalingvalue += ((inte * 3) + rand(inte * 3.5));
+			if (inte >= 501 && inte < 551) inteligencescalingvalue += ((inte * 3.25) + rand(inte * 3.75));
+			if (inte >= 551 && inte < 601) inteligencescalingvalue += ((inte * 3.5) + rand(inte * 4));
+			if (inte >= 601 && inte < 651) inteligencescalingvalue += ((inte * 3.75) + rand(inte * 4.25));
+			if (inte >= 651 && inte < 701) inteligencescalingvalue += ((inte * 4) + rand(inte * 4.5));
+			if (inte >= 701 && inte < 751) inteligencescalingvalue += ((inte * 4.25) + rand(inte * 4.75));
+			if (inte >= 751 && inte < 801) inteligencescalingvalue += ((inte * 4.5) + rand(inte * 5));
+			if (inte >= 801 && inte < 851) inteligencescalingvalue += ((inte * 4.75) + rand(inte * 5.25));
+			if (inte >= 851 && inte < 901) inteligencescalingvalue += ((inte * 5) + rand(inte * 5.5));
+			if (inte >= 901 && inte < 951) inteligencescalingvalue += ((inte * 5.25) + rand(inte * 5.75));
+			if (inte >= 951 && inte < 1001) inteligencescalingvalue += ((inte * 5.5) + rand(inte * 6));
+			if (inte >= 1001 && inte < 1051) inteligencescalingvalue += ((inte * 5.75) + rand(inte * 6.25));
+			if (inte >= 1051 && inte < 1101) inteligencescalingvalue += ((inte * 6) + rand(inte * 6.5));
+			if (inte >= 1101 && inte < 1151) inteligencescalingvalue += ((inte * 6.25) + rand(inte * 6.75));
+			if (inte >= 1151 && inte < 1201) inteligencescalingvalue += ((inte * 6.5) + rand(inte * 7));
+			if (inte >= 1201) inteligencescalingvalue += ((inte * 6.75) + rand(inte * 7.25));
+			else inteligencescalingvalue += (inte/3 + rand(inte/2));
+			return inteligencescalingvalue;
+		}
+
+		public function wisdomscalingbonus():Number {
+			var wisdomscalingvalue:Number = 0;
+			if (wis >= 21 && wis < 41) wisdomscalingvalue += (wis / 2 + rand((wis * 3) / 4));
+			if (wis >= 41 && wis < 61) wisdomscalingvalue += ((wis * 2) / 3 + rand(wis));
+			if (wis >= 61 && wis < 81) wisdomscalingvalue += ((wis * 5) / 6 + rand(wis * 1.25));
+			if (wis >= 81 && wis < 101) wisdomscalingvalue += (wis + rand(wis * 1.5));
+			if (wis >= 101 && wis < 151) wisdomscalingvalue += ((wis * 1.25) + rand(wis * 1.75));
+			if (wis >= 151 && wis < 201) wisdomscalingvalue += ((wis * 1.5) + rand(wis * 2));
+			if (wis >= 201 && wis < 251) wisdomscalingvalue += ((wis * 1.75) + rand(wis * 2.25));
+			if (wis >= 251 && wis < 301) wisdomscalingvalue += ((wis * 2) + rand(wis * 2.5));
+			if (wis >= 301 && wis < 351) wisdomscalingvalue += ((wis * 2.25) + rand(wis * 2.75));
+			if (wis >= 351 && wis < 401) wisdomscalingvalue += ((wis * 2.5) + rand(wis * 3));
+			if (wis >= 401 && wis < 451) wisdomscalingvalue += ((wis * 2.75) + rand(wis * 3.25));
+			if (wis >= 451 && wis < 501) wisdomscalingvalue += ((wis * 3) + rand(wis * 3.5));
+			if (wis >= 501 && wis < 551) wisdomscalingvalue += ((wis * 3.25) + rand(wis * 3.75));
+			if (wis >= 551 && wis < 601) wisdomscalingvalue += ((wis * 3.5) + rand(wis * 4));
+			if (wis >= 601 && wis < 651) wisdomscalingvalue += ((wis * 3.75) + rand(wis * 4.25));
+			if (wis >= 651 && wis < 701) wisdomscalingvalue += ((wis * 4) + rand(wis * 4.5));
+			if (wis >= 701 && wis < 751) wisdomscalingvalue += ((wis * 4.25) + rand(wis * 4.75));
+			if (wis >= 751 && wis < 801) wisdomscalingvalue += ((wis * 4.5) + rand(wis * 5));
+			if (wis >= 801 && wis < 851) wisdomscalingvalue += ((wis * 4.75) + rand(wis * 5.25));
+			if (wis >= 851 && wis < 901) wisdomscalingvalue += ((wis * 5) + rand(wis * 5.5));
+			if (wis >= 901 && wis < 951) wisdomscalingvalue += ((wis * 5.25) + rand(wis * 5.75));
+			if (wis >= 951 && wis < 1001) wisdomscalingvalue += ((wis * 5.5) + rand(wis * 6));
+			if (wis >= 1001 && wis < 1051) wisdomscalingvalue += ((wis * 5.75) + rand(wis * 6.25));
+			if (wis >= 1051 && wis < 1101) wisdomscalingvalue += ((wis * 6) + rand(wis * 6.5));
+			if (wis >= 1101 && wis < 1151) wisdomscalingvalue += ((wis * 6.25) + rand(wis * 6.75));
+			if (wis >= 1151 && wis < 1201) wisdomscalingvalue += ((wis * 6.5) + rand(wis * 7));
+			if (wis >= 1201) wisdomscalingvalue += ((wis * 6.75) + rand(wis * 7.25));
+			else wisdomscalingvalue += (wis/3 + rand(wis/2));
+			return wisdomscalingvalue;
 		}
 
 		/**
@@ -1666,7 +1740,8 @@ import flash.utils.getQualifiedClassName;
 			result += Hehas + "str=" + str + ", tou=" + tou + ", spe=" + spe +", inte=" + inte +", wis=" + wis +", lib=" + lib + ", sens=" + sens + ", cor=" + cor + ".\n";
 			result += Pronoun1 + " can " + weaponVerb + " you with  " + weaponPerk + " " + weaponName+" (attack " + weaponAttack + ", value " + weaponValue+").\n";
 			result += Pronoun1 + " is guarded with " + armorPerk + " " + armorName+" (defense " + armorDef + ", value " + armorValue+").\n";
-			result += Hehas + HP + "/" + maxHP() + " HP, " + lust + "/" + maxLust() + " lust, " + fatigue + "/" + maxFatigue() + " fatigue, " + wrath + "/" + maxWrath() + " wrath, " + soulforce + "/" + maxSoulforce() + " soulforce, " + mana + "/" + maxMana() + " mana. " + Pronoun3 + " bonus HP=" + bonusHP + ", bonus lust=" + bonusLust + ", and lust vulnerability=" + lustVuln + ".\n";
+			result += Hehas + HP + "/" + maxHP() + " HP, " + lust + "/" + maxLust() + " lust, " + fatigue + "/" + maxFatigue() + " fatigue, " + wrath + "/" + maxWrath() + " wrath, " + soulforce + "/" + maxSoulforce() + " soulforce, " + mana + "/" + maxMana() + " mana. ";
+			result += Pronoun3 + " bonus HP=" + bonusHP + ", bonus lust=" + bonusLust + ", bonus wrath=" + bonusWrath + ", bonus mana=" + bonusMana + ", bonus soulforce=" + bonusSoulforce + ", and lust vulnerability=" + lustVuln + ".\n"
 			result += Heis + "level " + level + " and " + have+" " + gems + " gems. You will be awarded " + XP + " XP.\n";
 			
 			var numSpec:int = (special1 != null ? 1 : 0) + (special2 != null ? 1 : 0) + (special3 != null ? 1 : 0);
@@ -1874,6 +1949,11 @@ import flash.utils.getQualifiedClassName;
 					removeStatusEffect(StatusEffects.MonsterRegen);
 				addStatusValue(StatusEffects.MonsterRegen,1,-1);
 			}
+			if(hasStatusEffect(StatusEffects.MonsterRegen2)) {
+				if(statusEffectv1(StatusEffects.MonsterRegen2) <= 0)
+					removeStatusEffect(StatusEffects.MonsterRegen2);
+				addStatusValue(StatusEffects.MonsterRegen2,1,-1);
+			}
 			if(hasStatusEffect(StatusEffects.Timer)) {
 				if(statusEffectv1(StatusEffects.Timer) <= 0)
 					removeStatusEffect(StatusEffects.Timer);
@@ -2004,7 +2084,7 @@ import flash.utils.getQualifiedClassName;
 			}
 			//regeneration perks for monsters
 			if ((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.LizanMarrowEvolved) >= 0 || findPerk(PerkLib.EnemyPlantType) >= 0 || findPerk(PerkLib.EnemyGodType) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0
-			|| findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.MonsterRegeneration) >= 0 || findPerk(PerkLib.Lifeline) >= 0 || hasStatusEffect(StatusEffects.MonsterRegen)) && (this.HP < maxHP()) && (this.HP > 0)) {
+			|| findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.MonsterRegeneration) >= 0 || findPerk(PerkLib.Lifeline) >= 0 || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2)) && (this.HP < maxHP()) && (this.HP > 0)) {
 				var healingPercent:Number = 0;
 				var temp2:Number = 0;
 				if (findPerk(PerkLib.Regeneration) >= 0) healingPercent += (0.5 * (1 + newGamePlusMod()));
@@ -2020,6 +2100,7 @@ import flash.utils.getQualifiedClassName;
 				if (hasStatusEffect(StatusEffects.MonsterRegen)) healingPercent += statusEffectv2(StatusEffects.MonsterRegen);
 				temp2 = Math.round(maxHP() * healingPercent / 100);
 				if (findPerk(PerkLib.Lifeline) >= 0) temp2 += (50 * (1 + newGamePlusMod()));
+				if (hasStatusEffect(StatusEffects.MonsterRegen2)) temp2 += statusEffectv2(StatusEffects.MonsterRegen2);
 				if (this is ChiChi && (flags[kFLAGS.CHI_CHI_SAM_TRAINING] < 2 || hasStatusEffect(StatusEffects.MonsterRegen))) {
 					outputText("To your surprise, Chi Chi’s wounds start closing! <b>(<font color=\"#008000\">+" + temp2 + "</font>)</b>.\n\n");
 				}
