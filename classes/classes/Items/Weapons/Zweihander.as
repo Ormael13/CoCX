@@ -13,7 +13,7 @@ package classes.Items.Weapons
 		
 		public function Zweihander() 
 		{
-			super("Zwnder ","Zwnder","Zweihander","a Zweihander","slash",31,2480,"A favorite of the mercenaries of Marethian frontier, this zweihander it’s a weapon that only swordsmen of incredible physical force can wield properly. The pommel is decorated with a fierce-looking wolf, and, as well as the handguard, is made of silver with lupine motifs. The blade is a six foot monster of pure steel, some noticeable waves at each edge giving this weapon it’s distinctive appearance.","Large");
+			super("Zwnder ","Zwnder","zweihander","a zweihander","slash",31,2480,"A favorite of the mercenaries of Marethian frontier, this zweihander it’s a weapon that only swordsmen of incredible physical force can wield properly. The pommel is decorated with a fierce-looking wolf, and, as well as the handguard, is made of silver with lupine motifs. The blade is a six foot monster of pure steel, some noticeable waves at each edge giving this weapon it’s distinctive appearance.","Large");
 		}
 		
 		override public function get attack():Number {

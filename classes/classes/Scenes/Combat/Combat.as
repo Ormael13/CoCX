@@ -2528,6 +2528,10 @@ public function attack():void {
 		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
 		if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
 	}
+	if (player.haveWeaponForJouster()) {
+		if (player.isMeetingNaturalJousterReq()) damage *= 3;
+		if (player.isMeetingNaturalJousterMasterGradeReq()) damage *= 5;
+	}
 	if (player.weapon == weapons.RCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
 		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
 		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
@@ -2970,6 +2974,7 @@ public function combatParry():Boolean {
 		if (player.spe <= 100) parryChance += (player.spe - 50) / 5;
 		else parryChance += 10;
 	}
+	if (player.hasPerk(PerkLib.DexterousSwordsmanship)) parryChance += 10;
 	if (player.hasPerk(PerkLib.CatchTheBlade) && player.spe >= 50 && player.shieldName == "nothing" && player.isFistOrFistWeapon()) parryChance += 15;
 	return rand(100) <= parryChance;
 //	trace("Parried!");

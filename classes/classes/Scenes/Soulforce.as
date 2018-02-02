@@ -33,6 +33,7 @@ import classes.Scenes.Monsters.DarkElfScout;
 import classes.Scenes.Monsters.DarkElfSlaver;
 import classes.Scenes.Monsters.DarkElfSniper;
 import classes.Scenes.NPCs.CelessScene;
+import classes.Scenes.NPCs.Diana;
 import classes.Scenes.NPCs.Electra;
 import classes.Scenes.NPCs.RyuBiDragon;
 import classes.Scenes.NPCs.Sonya;
@@ -220,6 +221,16 @@ public function replacingBarbsWithsSowrds():void {
 	player.removePerk(PerkLib.JobBarbarian);
 	player.createPerk(PerkLib.JobSwordsman, 0, 0, 0, 0);
 	doNext(SoulforceCheats);
+}
+public function LvLUPDiana():void {
+	outputText("\n\n<b>Diana get stronger! (cheat stop working when she reach max possible lvl for now (atm it's lvl 12))</b>");
+	if (flags[kFLAGS.DIANA_LVL_UP] < 3) flags[kFLAGS.DIANA_LVL_UP]++;
+	doNext(EnemiesMenu);
+}
+public function DELvLDiana():void {
+	outputText("\n\n<b>Diana get weaker! (cheat stop working when she reach lvl 3)</b>");
+	if (flags[kFLAGS.DIANA_LVL_UP] > 0) flags[kFLAGS.DIANA_LVL_UP]--;
+	doNext(EnemiesMenu);
 }
 		public function StatsMenu():void {
 			menu();
@@ -673,7 +684,7 @@ public function replacingBarbsWithsSowrds():void {
 		//	addButton(9, "L Ayo Arm", AddLightAyoArmor).hint("Add 1 Light Ayo Armor for testing purposes.");
 			addButton(10, "SeerHairpin", AddTheSeerHairpin).hint("Add 1 Seer's Hairpin.");
 			addButton(11, "D.Scythe", AddTheDemonicScythe).hint("Add 1 Demonic Scythe.");
-			addButton(12, "CatONIneTWhip", AddCatONineTailWhip).hint("Add 1 Cat o' nine tail whip.");
+			addButton(12, "CatONIneTWhip", AddCatONineTailWhip).hint("Add 1 Bastet Whip.");
 			addButton(13, "InqTome", AddTheInquisitorsTome).hint("Add 1 Inquisitor's Tome.");
 			addButton(14, "Back", SoulforceCheats);
 		}
@@ -711,9 +722,10 @@ public function replacingBarbsWithsSowrds():void {
 		public function EnemiesMenu():void {
 			menu();
 			addButton(0, "FightForPearl", FightForPearl).hint("Test fight to get Sky Poison Pearl legally (aside we cheat to start fight)");
-			addButton(1, "MaraeFight", FightMarae).hint("Test fight with Marae (depending on game stage she can be buffed or unbuffed).");
-			addButton(2, "SonyaFight", FightSonya).hint("Test fight with Sonya.");
-			addButton(3, "RyuBiFight", FightRyuBi).hint("Test fight with RyuBi.");
+			addButton(1, "Marae", FightMarae).hint("Test fight with Marae (depending on game stage she can be buffed or unbuffed).");
+			addButton(2, "Sonya", FightSonya).hint("Test fight with Sonya.");
+			//addButton(3, "RyuBi", FightRyuBi).hint("Test fight with RyuBi.");
+			addButton(3, "Diana", FightDiana).hint("Test fight with Diana.");
 			addButton(4, "Alraune", FightAlraune).hint("Test fight with Alraune.");
 			addButton(5, "DE Scout", FightDarkElfScout).hint("Test fight with Dark Elf Scout. (lvl 15)");
 			addButton(6, "DE Slaver", FightDarkElfSlaver).hint("Test fight with Dark Elf Slaver. (lvl 27)");
@@ -722,8 +734,10 @@ public function replacingBarbsWithsSowrds():void {
 			addButton(9, "Electra", FightElectra).hint("Test fight with Electra.");
 			addButton(10, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
 			addButton(11, "DELvL Eva", DELvLEva).hint("DE LvL forcefully Evangeline for testing purpose down toward the lvl 12.");
-			addButton(12, "ObsidianGarg", FightObsidianGargoyle).hint("Test fight with Obsidian Gargoyle.");
-			addButton(13, "HeroslayerOmni", FightHeroslayerOmnibus).hint("Test fight with Heroslayer Omnibus.");
+			//addButton(12, "ObsidianGarg", FightObsidianGargoyle).hint("Test fight with Obsidian Gargoyle.");
+			//addButton(13, "HeroslayerOmni", FightHeroslayerOmnibus).hint("Test fight with Heroslayer Omnibus.");
+			addButton(12, "LvLUP Diana", LvLUPDiana).hint("LvL UP forcefully Diana for testing purpose up to the limit.");
+			addButton(13, "DELvL Diana", DELvLDiana).hint("DE LvL forcefully Diana for testing purpose down toward the lvl 3.");
 			addButton(14, "Back", SoulforceCheats);
 		}
 		public function AscensionMenu():void {
@@ -832,7 +846,7 @@ public function replacingBarbsWithsSowrds():void {
 			inventory.takeItem(weapons.W_STAFF, EquipmentMenu);
 		}
 		public function AddCatONineTailWhip():void {
-			outputText("\n\n<b>(Gained 1 Cat o' nine tail whip!)</b>\n\n");
+			outputText("\n\n<b>(Gained 1 Bastet Whip!)</b>\n\n");
 			inventory.takeItem(weapons.CNTWHIP, EquipmentMenu);
 		}
 		public function AddTheEvelyn():void {
@@ -1272,6 +1286,11 @@ public function replacingBarbsWithsSowrds():void {
 			clearOutput();
 			outputText("Entering battle with RyuBi! Enjoy ^^");
 			startCombat(new RyuBiDragon());
+		}
+		public function FightDiana():void {
+			clearOutput();
+			outputText("Entering battle with Diana! Enjoy ^^");
+			startCombat(new Diana());
 		}
 		public function FightAlraune():void {
 			clearOutput();
@@ -2238,11 +2257,12 @@ public function replacingBarbsWithsSowrds():void {
 			outputText("Using a tiny amount of soulforce you could try to use soul sense to locate some of people you meet of location you found before without wasting hours for that. Especialy if those people are usualy roaming around or places that constantly changing their location.");
 			outputText("\n\nAmount of soulforce used to locate them using soul sense depening of relative power of searched person or location.");
 			menu();
-			if (flags[kFLAGS.SOUL_SENSE_TAMANI] == 3) addButton(0, "Tamani", TamaniEnc);
-			if (flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] == 3) addButton(1, "Tamani D.", TamaniDaughtersEnc);
-			if (flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] == 3) addButton(2, "KitsuMansion", KitsuneMansion);
-			if (flags[kFLAGS.SOUL_SENSE_IZUMI] == 3) addButton(3, "Izumi", IzumiEnc);
-			if (flags[kFLAGS.SOUL_SENSE_WORLD_TREE] == 1) addButton(10, "WorldTree", findWorldTree);
+			if (flags[kFLAGS.SOUL_SENSE_TAMANI] >= 3) addButton(0, "Tamani", TamaniEnc);
+			if (flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] >= 3) addButton(1, "Tamani D.", TamaniDaughtersEnc);
+			if (flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] >= 3) addButton(2, "KitsuMansion", KitsuneMansion);
+			if (flags[kFLAGS.SOUL_SENSE_IZUMI] >= 3) addButton(3, "Izumi", IzumiEnc);
+			if (flags[kFLAGS.SOUL_SENSE_WORLD_TREE] >= 1) addButton(10, "WorldTree", findWorldTree);
+			if (flags[kFLAGS.SOUL_SENSE_GIACOMO] >= 3) addButton(13, "Giacomo", findGiacomo);
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 		public function TamaniEnc():void {
@@ -2294,6 +2314,17 @@ public function replacingBarbsWithsSowrds():void {
 				player.soulforce -= 100;
 				statScreenRefresh();
 				wolrdtreeScene.YggdrasilDiscovery();
+			}
+			else {
+				outputText("Your current soulforce is too low.");
+				doNext(SoulSense);
+			}
+		}
+		public function findGiacomo():void {
+			if (player.soulforce >= 100) {
+				player.soulforce -= 100;
+				statScreenRefresh();
+				SceneLib.giacomoShop.giacomoEncounter();
 			}
 			else {
 				outputText("Your current soulforce is too low.");

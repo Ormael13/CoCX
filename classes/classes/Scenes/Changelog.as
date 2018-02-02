@@ -75,11 +75,19 @@ package classes.Scenes
 			outputText("-New body part - face: Avain Face. No prereq.\n");
 			outputText("-New body part - ears: Avain Ears. No prereq.\n");
 			outputText("-New body part - skin: Feathers. No prereq.\n");
-			outputText("-New tier   lvl-up perk: . Req. . Effect: \n");
+			//outputText("-New tier   lvl-up perk: . Req. . Effect: \n");
+			outputText("-New melee weapon (by Shamanknight): Halberd - buyable in weapons shop in Tel'Adre. Cost 1200 gems. Base atk is 6 increased by 9 when PC have 50+ str and another 15 more atk when having 100+ str. Attacks ignore 40% of target armor.\n");
+			outputText("-New melee weapon (by Shamanknight): Guan Dao - buyable in weapons shop in He'Xin'Dao. Cost 100 spirit stones. Base atk is 6 increased by 8 when PC have 50+ str and another 11 more atk when having 100+ str. Attacks ignore 40% of target armor.\n");
+			outputText("-New melee weapon (by Shamanknight): Fly-Whisk - buyable in weapons shop in He'Xin'Dao. Cost 80 spirit stones. Base atk is 0, increase magical soulskills power by 20%.\n");
+			outputText("-New melee weapon (by Shamanknight): Hook Sword - buyable in weapons shop in He'Xin'Dao. Cost 160 spirit stones. Base atk is 20, are dual normal weapons, have added perk Dexterous Swordsmanship (+10% to parry chance - can add to existing parry bonuses like from perk Parry).\n");
+			outputText("-New melee weapon (by Shamanknight): Snake Sword - buyable in weapons shop in He'Xin'Dao. Cost 80 spirit stones. Base atk is 20, can be used for Whipping special.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-Fixed bugs: Patchouli not leading PC to Wonderland from camp, Sidewinder not having daily cooldown counter, Anzu missing from his palace, Chi Chi not dropping M.Gloves after first/second fight on soul arena\n\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-Giacomo was added to possible encounters in Soul Sense menu. Also Lumi Lab after first time visiting it would be moved to Dungeons submenu (since it should been like Sean shop inside one of dungeons).\n");
+			outputText("-Fixed bugs: Patchouli not leading PC to Wonderland from camp, Sidewinder not having daily cooldown counter, Anzu missing from his palace, Chi Chi not dropping M.Gloves after first/second fight on soul arena, missing option to buy Taoth statue in Jewelery shop in Tel'Adre\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
 			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
 			outputText("-New event perk: Gargoyle. Gained in ritual to become gargoyle by picking own blood. Effects: \n");
@@ -87,15 +95,11 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Bat, Vampire, Cat, Cheshire cat
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -132,10 +136,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): dodać yuki-onna TF
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

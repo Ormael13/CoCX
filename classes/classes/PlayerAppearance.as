@@ -1612,7 +1612,7 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  Big, white furred, red-panda ears lie atop your head, keeping you well aware to your surroundings.")
 			}
 			if (earType == Ears.AVIAN){
-				outputText("  The [hair] at the sides of your head, two small holes covered by almost unnoticeable tufts of feathers make up for your ears.");
+				outputText("  The [hair] atop your head compliments you quite well, and two small holes at each side of your head serve you as ears. Hidden by tufts of feathers, they’re almost unnoticeable.");
 			}
 			//</mod>
 			if(player.antennae == Antennae.MANTIS)
@@ -1951,8 +1951,8 @@ public class PlayerAppearance extends BaseContent {
 			if (player.hasFullCoatOfType(Skin.FUR)) outputText("   A coat of soft, [skin coat] colored fur covers your head, with patches of white on your muzzle, cheeks and eyebrows.")
 		}
 		if (faceType == Face.AVIAN) {
-			outputText("  Your visage has a bird-like appearance, complete with an avian beak. Thankfully, it’s sides aren’t sharp as you thought. A couple of small holes on it makes up for your nostrils, while a long, nimble tongue is hidden inside.");
-			if (player.hasFullCoatOfType(Skin.FUR)) outputText("   The rest of your face is decorated with a coat of [skin coat] feathers.")
+			outputText("  Your visage has a bird-like appearance, complete with an avian beak. A couple of small holes on it makes up for your nostrils, while a long, nimble tongue is hidden inside.");
+			if (player.hasFullCoatOfType(Skin.FEATHER)) outputText("   The rest of your face is decorated with a coat of [skin coat] feathers.")
 		}
 		//</mod>
 	}

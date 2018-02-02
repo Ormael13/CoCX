@@ -1698,6 +1698,8 @@ public class PerkLib
 
 		// Non-weapon equipment perks
 		public static const Ambition:AmbitionPerk = new AmbitionPerk();
+		public static const DexterousSwordsmanship:PerkType = mk("Dexterous swordsmanship", "Dexterous swordsmanship",
+				"Increases parry chance by 10% while wielding a weapon.",null,true);
 		public static const BloodMage:PerkType = mk("Blood Mage", "Blood Mage",
 				"Spellcasting now consumes health instead of mana!",null,true);
 		public static const LastResort:PerkType = mk("Last Resort", "Last Resort",

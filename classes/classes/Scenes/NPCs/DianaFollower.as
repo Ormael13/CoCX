@@ -25,14 +25,16 @@ public function repeatLakeEnc():void
 {
 	clearOutput();
 	outputText("As you explore the lake area, you run into a");
-	if (flags[kFLAGS.DIANA_LVL_UP] >= 4) outputText("n alicorn");
+	if (flags[kFLAGS.DIANA_LVL_UP] >= 5) outputText("n alicorn");
 	else if (flags[kFLAGS.DIANA_LVL_UP] >= 2) outputText("n unicorn");
 	else outputText(" white furred horse morph");
 	outputText(".\n\nAt first she doesn’t notice you, to busy examining a flower. You walk to her to say hi, but the sound of your feet on dry leaves immediately alerts her. She turns over with a startled  expression and grabs her staff to defend herself, lunging for a set of preemptive strikes as she begins to attack you.\n\n");
-	outputText("\"<i>Eeeeep! Go away, you fiend! I’m not handing over my virginity to you!!!!</i>\"\n\n");
-	outputText("Well seems you got a fight on your hands.\n\n");
+	outputText("\"<i>Eeeeep! Go away, you fiend! ");
+	outputText("I’m not handing over my virginity to you");
+	outputText("You stained my soul enough as It is I don’t want any more your corruption");
+	outputText("!!!!!</i>\"\n\nWell seems you got a fight on your hands.\n\n");
 	outputText("You are under attack by a");
-	if (flags[kFLAGS.DIANA_LVL_UP] >= 4) outputText("n alicorn!");
+	if (flags[kFLAGS.DIANA_LVL_UP] >= 5) outputText("n alicorn!");
 	else if (flags[kFLAGS.DIANA_LVL_UP] >= 2) outputText("n unicorn!");
 	else outputText(" horse morph!");
 	startCombat(new Diana());

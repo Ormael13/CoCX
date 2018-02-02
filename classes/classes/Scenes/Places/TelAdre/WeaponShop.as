@@ -15,16 +15,17 @@ public class WeaponShop extends Shop {
         super.inside();
         addButton(0, weapons.CLAYMOR.shortName, confirmBuy, weapons.CLAYMOR);
         addButton(1, weapons.WARHAMR.shortName, confirmBuy, weapons.WARHAMR);
-        addButton(2, weapons.D_WHAM_.shortName, confirmBuy, weapons.D_WHAM_);
+        addButton(2, weapons.BFSWORD.shortName, confirmBuy, weapons.BFSWORD);
         addButton(3, weapons.SPEAR.shortName, confirmBuy, weapons.SPEAR);
         addButton(4, weapons.LANCE.shortName, confirmBuy, weapons.LANCE);
         addButton(5, weapons.DAGGER.shortName, confirmBuy, weapons.DAGGER);
         addButton(6, weapons.SCIMITR.shortName, confirmBuy, weapons.SCIMITR);
         addButton(7, weapons.MACE.shortName, confirmBuy, weapons.MACE);
         addButton(8, weapons.FLAIL.shortName, confirmBuy, weapons.FLAIL);
-        addButton(9, weapons.DSWORD_.shortName, confirmBuy, weapons.DSWORD_);
-        addButton(10, weapons.BFSWORD.shortName, confirmBuy, weapons.BFSWORD);
+		addButton(9, weapons.HALBERD.shortName, confirmBuy, weapons.HALBERD);
+		addButton(10, weapons.DSWORD_.shortName, confirmBuy, weapons.DSWORD_);
         addButton(11, weapons.DBFSWO.shortName, confirmBuy, weapons.DBFSWO);
+        addButton(12, weapons.D_WHAM_.shortName, confirmBuy, weapons.D_WHAM_);
         if (player.hasKeyItem("Sheila's Lethicite") >= 0 || flags[kFLAGS.SHEILA_LETHICITE_FORGE_DAY] > 0) {
             addButton(13, "ScarBlade", forgeScarredBlade);
         }

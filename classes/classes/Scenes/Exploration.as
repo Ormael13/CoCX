@@ -628,12 +628,14 @@ public class Exploration extends BaseContent
 				//Chance of encountering Giacomo!
 				if (choosey == 0) {
 					player.explored++;
-					SceneLib.giacomoShop.giacomoEncounter();
+					if (flags[kFLAGS.SOUL_SENSE_GIACOMO] < 3) SceneLib.giacomoShop.giacomoEncounter();
+					else genericGolGobImpEncounters(true);
 					return;
 				}
 				else if (choosey == 1) {
 					player.explored++;
-					SceneLib.lumi.lumiEncounter();
+					if (flags[kFLAGS.LUMI_MET] == 0) SceneLib.lumi.lumiEncounter();
+					else genericGolGobImpEncounters(true);
 					return;
 				}
 				else if (choosey == 2) {

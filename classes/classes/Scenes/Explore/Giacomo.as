@@ -97,6 +97,11 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				outputText("Giacomo's grin is nothing short of creepy as he offers his wares to you. What are you interested in?");
 			}
 			//var deworm:Function = (player.hasStatusEffect(StatusEffects.WormOffer) && player.hasStatusEffect(StatusEffects.Infested) ? wormRemovalOffer : null);
+			if (player.findPerk(PerkLib.SoulSense) >= 0 && flags[kFLAGS.SOUL_SENSE_GIACOMO] < 2) flags[kFLAGS.SOUL_SENSE_GIACOMO]++;
+			if (flags[kFLAGS.SOUL_SENSE_GIACOMO] == 2) {
+				flags[kFLAGS.SOUL_SENSE_GIACOMO]++;
+				outputText("\n\n<b>You have meet him enough times to be able to find him in the future when using soul sense. (Removes Giacomo from general explore encounters pool!)</b>\n\n");
+			}
 			menu();
 			addButton(0, "Potions", potionMenu);
 			addButton(1, "Books", bookMenu);

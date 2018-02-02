@@ -2386,7 +2386,7 @@ public static const DIANA_AFFECTION:int                                  		    =
 public static const DIANA_FOLLOWER:int     			                                = 2378;
 public static const DIANA_LVL_UP:int                      			                = 2379;
 public static const DIANA_DEFEATS_COUNTER:int                                   	= 2380;
-public static const DIANA_02384:int                                   = 2381;
+public static const DIANA_SPELLS_CASTED:int                                   		= 2381;
 public static const DIANA_02385:int                                   = 2382;
 public static const CAMILLA_AFFECTION:int                                  		    = 2383;
 public static const CAMILLA_FOLLOWER:int                            		        = 2384;
@@ -2492,7 +2492,7 @@ public static const AUTO_CAST_CHARGE_ARMOR:int                           	      
 public static const AUTO_CAST_MIGHT:int                               			    = 2484;
 public static const AUTO_CAST_BLINK:int                                			    = 2485;
 public static const SOUL_SENSE_WORLD_TREE:int             	     	                = 2486;
-public static const SOUL_SENSE_2487:int                                   = 2487;
+public static const SOUL_SENSE_GIACOMO:int                                   		= 2487;
 public static const SOUL_SENSE_2488:int                                   = 2488;
 public static const SOUL_SENSE_2489:int                                   = 2489;
 public static const KITSUNE_SHRINE_UNLOCKED:int               	                    = 2490;
