@@ -55,7 +55,7 @@ public class VampireBlood extends Consumable {
                 Check   : player.hasGooSkin(),
                 Override: mutations.humanizeSkin
             }, {
-                BodyPart: 'earType',
+                BodyPart: 'ears.Type',
                 ChangeTo: pure ? Ears.VAMPIRE : Ears.BAT,
                 Check   : pure ? player.ears.type != Ears.HUMAN : false,
                 Override: pure ? mutations.humanizeEars : null
@@ -63,7 +63,7 @@ public class VampireBlood extends Consumable {
                 BodyPart: 'eyes.type',
                 ChangeTo: Eyes.VAMPIRE
             }, {
-                BodyPart: 'faceType',
+                BodyPart: 'face.Type',
                 ChangeTo: Face.VAMPIRE
             }
         ];
@@ -90,23 +90,38 @@ public class VampireBlood extends Consumable {
 		for each (var tf:Object in tfArr) {
             if (changes >= changeLimit) break;
             if (rand(tf.Chance? tf.Chance : 3) == 0) {
-                if (tf.ChangeTo != -1 && player[tf.BodyPart] != tf.ChangeTo) {
-                    if (tf.Check) {
-                        tf.Override();
-                        changes++;
-                    }
-                    outputText("\n\n");
-                    story.display(tf.BodyPart, {$pure: pure});
-                    player[tf.BodyPart] = tf.ChangeTo;
-                    for each(var extra:Object in tf.Addition){
-                        player[extra.BodyPart] = extra.ChangeTo;
-                    }
-                    changes++;
-                }
+	            doChange(tf);
+            }
+		}
+	    if(changes == 0){outputText("\n\n");story.display("noChange");}
+        return false;
+
+        function doChange(tf:Object,count:Boolean=true):void{
+            if(tf.ChangeTo != 1){
+	            if (tf.ChangeTo != -1) {
+		            var keys:Array = tf.BodyPart.split('.');
+		            var hostObj:Object = player;
+		            var bodyPart:String = tf.BodyPart;
+		            if(keys.length > 1){
+			            hostObj = player[keys[0]];
+			            bodyPart = keys[1];
+		            }
+		            if (hostObj[bodyPart] != tf.ChangeTo){
+			            if (tf.Check) {
+				            tf.Override();
+				            if(count)changes++;
+			            }
+			            outputText("\n\n");
+			            story.display(tf.BodyPart, {$pure: pure});
+			            hostObj[bodyPart] = tf.ChangeTo;
+			            for each(var extra:Object in tf.Addition){
+				            doChange(extra,false);
+			            }
+			            if(count) changes++;
+		            }
+	            }
             }
         }
-        if(changes == 0){outputText("\n\n");story.display("noChange");}
-        return false;
     }
 }
 }

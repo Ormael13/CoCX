@@ -666,9 +666,18 @@ import classes.BodyParts.Wings;
 	 * @return true if added genetic memory (displayed "genetic memory unlocked" text)
 	 */
 	private function setBodyPartType(key:String, dict:Object, tgtType:int):Boolean {
-		if (player[key] == tgtType) return false;
-		player[key] = tgtType;
+		var splitKey:Array = key.split('.');
+		if(splitKey.length > 1){
+			var part:String = splitKey[0];
+			var prop:String = splitKey[1];
+			if(player[part][prop] == tgtType) return false;
+			player[part][prop] = tgtType;
+		} else {
+			if (player[key] == tgtType) return false;
+			player[key] = tgtType;
+		}
 		if (player.findPerk(PerkLib.GeneticMemory) < 0) return false;
+
 		var o:* = dict[tgtType];
 		if (o is Array) {
 			return addGeneticMemory(o[0], o[1]);
