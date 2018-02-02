@@ -160,8 +160,8 @@ public class GooGirl extends Monster
 			this.ass.analWetness = AssClass.WETNESS_SLIME_DROOLING;
 			this.createStatusEffect(StatusEffects.BonusACapacity,9001,0,0,0);
 			this.tallness = rand(8) + 70;
-			this.hipRating = Hips.RATING_AMPLE;
-			this.buttRating = Butt.RATING_LARGE;
+			this.hips.type = Hips.RATING_AMPLE;
+			this.butt.type = Butt.RATING_LARGE;
 			this.lowerBody = LowerBody.GOO;
 			var tone:String = randomChoice("blue", "purple", "crystal");
 			this.skin.setBaseOnly({color:tone,type:Skin.GOO});

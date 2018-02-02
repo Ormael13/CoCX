@@ -949,7 +949,7 @@ use namespace CoC;
 			menu();
 			addButton(0, "Grow Breasts", chooseBreasts).hint("Grow a new pair of breasts if flat-chested or grow existing breasts. \n\nAnd receive something else.");
 			addButton(1, "Grow Dick", chooseDick).hint("Grow a new penis. Somehow, you have a feeling that the new cock you'll receive won't be a normal cock. \n\nAnd receive something else.");
-			addButton(2, "Normal Face", normalFace).hint("Normalize your face. This will also remove your horns or antennae and change your ears back to human ears! \n\nAnd receive something else.");
+			addButton(2, "Normal Face", normalFace).hint("Normalize your face. This will also remove your horns or antennae.type and change your ears back to human ears! \n\nAnd receive something else.");
 			addButton(3, "Normal Chest", normalChest).hint("Normalize your chest. This will shrink breasts larger than E-cup to a reasonable size and remove their other unusual traits, if you have it. This will also change your skin to human skin. \n\nAnd receive something else.");
 			addButton(4, "Normal Groin", normalGroin).hint("Normalize your groin, removing any extra cocks and reset remaining cock to normal, if you have any. Or grow genitalia for genderless. \n\nAnd receive something else.");
 			addButton(5, "Normal Legs", normalLegs).hint("Turn your legs back to normal. This will also remove your tail, if you have any! \n\nAnd receive something else.");
@@ -1076,22 +1076,22 @@ use namespace CoC;
 		private function normalFace():void {
 			spriteSelect(16);
 			clearOutput();
-			if(player.horns > 0 || player.antennae > Antennae.NONE) {
+			if(player.horns.count > 0 || player.antennae.type > Antennae.NONE) {
 				outputText("Your forehead itches intensely.  You cannot help but stratch madly at it.  ");
-				if(player.horns > 0 && player.hornType != Horns.ORCHID) {
+				if(player.horns.count > 0 && player.horns.type != Horns.ORCHID) {
 					outputText("Your horns fall off, landing on the floor with a heavy thud.  ");
-					player.horns = 0;
-					player.hornType = Horns.NONE;
+					player.horns.count = 0;
+					player.horns.type = Horns.NONE;
 				}
-				if(player.antennae > Antennae.NONE) {
+				if(player.antennae.type > Antennae.NONE) {
 					outputText("Antennae pop free, and float lightly down towards the floor.  ");
-					player.antennae = Antennae.NONE;
+					player.antennae.type = Antennae.NONE;
 				}
 			}
 			//EARS
-			if(player.earType != Ears.HUMAN) {
+			if(player.ears.type != Ears.HUMAN) {
 				outputText("Pain erupts from both sides of your head as your ears reform and move, returning to look like your old human ears!  ");
-				player.earType = Ears.HUMAN;
+				player.ears.type = Ears.HUMAN;
 			}
 			//Face
 			if(player.faceType != Face.HUMAN) {

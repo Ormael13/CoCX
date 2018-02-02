@@ -1,16 +1,15 @@
 package classes.Items.Weapons 
 {
-	import classes.Items.Weapon;
-	import classes.Player;
+import classes.Items.Weapon;
 
-	public class Masamune extends Weapon
+public class Masamune extends Weapon
 	{
 		
 		public function Masamune() 
 		{
 			super(
-				"masamune","Masamune","masamune","a masamune","slash",30,2400,
-				"This blessed blade is as beautiful as it is deadly. It strikes true in the hands of a pure hearted warrior as if guided by divine will.",
+				"masamune","Masamune","masamune katana","a masamune katana","slash",30,2400,
+				"This blessed katana is made in shining steel and heavily decorated with silver and blue sapphires. When used by a pure-hearted knight, the divine will within guides each strike, making it much deadlier.",
 				""
 			);
 		}

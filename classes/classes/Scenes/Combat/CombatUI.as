@@ -70,7 +70,7 @@ public class CombatUI extends BaseCombatContent {
 				if (player.weapon != weapons.SPEAR && player.weapon != weapons.LANCE && player.weapon != weapons.FRTAXE) {
 					btnMelee.disable("No way you could reach enemy with melee attacks while flying.");
 				}
-				else if (player.wingType == Wings.BAT_ARM) {
+				else if (player.wings.type == Wings.BAT_ARM) {
 					btnMelee.disable("No way you could use your melee weapon with those arms while flying.");
 				}
 			} else if (player.hasStatusEffect(StatusEffects.KnockedBack)) {
@@ -98,7 +98,7 @@ public class CombatUI extends BaseCombatContent {
 			default:
 				btnRanged.showDisabled("Shoot");
 		}
-		if(player.isFlying() && player.wingType == Wings.BAT_ARM){btnRanged.disable("It would be rather difficult to aim while flapping your arms.");}
+		if(player.isFlying() && player.wings.type == Wings.BAT_ARM){btnRanged.disable("It would be rather difficult to aim while flapping your arms.");}
 		btnItems.show("Items", inventory.inventoryMenu, "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
 		
 		// Submenus

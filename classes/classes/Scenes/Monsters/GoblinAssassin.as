@@ -143,8 +143,8 @@ public class GoblinAssassin extends Monster
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,50,0,0,0);
 			this.tallness = 35 + rand(4);
-			this.hipRating = Hips.RATING_AMPLE+2;
-			this.buttRating = Butt.RATING_LARGE;
+			this.hips.type = Hips.RATING_AMPLE + 2;
+			this.butt.type = Butt.RATING_LARGE;
 			this.skinTone = "dark green";
 			this.hairColor = "blue";
 			this.hairLength = 7;

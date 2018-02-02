@@ -72,8 +72,8 @@ use namespace CoC;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = 120;
-			this.hipRating = Hips.RATING_BOYISH;
-			this.buttRating = Butt.RATING_BUTTLESS;
+			this.hips.type = Hips.RATING_BOYISH;
+			this.butt.type = Butt.RATING_BUTTLESS;
 			this.skin.setBaseOnly({color:"olive"});//zmienić?
 			this.hairColor = "blue";//eyes: red
 			this.hairLength = 20;

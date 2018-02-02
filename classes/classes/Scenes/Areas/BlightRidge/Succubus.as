@@ -44,8 +44,8 @@ use namespace CoC;
 			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
 			this.ass.analWetness = AssClass.WETNESS_SLIME_DROOLING;
 			this.tallness = 72;
-			this.hipRating = Hips.RATING_CURVY;
-			this.buttRating = Butt.RATING_LARGE+1;
+			this.hips.type = Hips.RATING_CURVY;
+			this.butt.type = Butt.RATING_LARGE + 1;
 			this.lowerBody = LowerBody.DEMONIC_HIGH_HEELS;
 			this.skinTone = "blue";
 			this.hairColor = "black";
@@ -71,8 +71,8 @@ use namespace CoC;
 					add(consumables.BIMBOLQ, 1).
 					add(weapons.WHIP, 2).
 					add(consumables.SUCMILK,12);
-			this.wingType = Wings.BAT_LIKE_TINY;
-			this.wingDesc = "tiny hidden";
+			this.wings.type = Wings.BAT_LIKE_TINY;
+			this.wings.desc = "tiny hidden";
 			this.tailType = Tail.DEMONIC;
 			this.special1 = kissAttack;
 			this.special2 = seduceAttack;

@@ -314,8 +314,8 @@ public class Evangeline2 extends Monster
 				this.tallness = 90;
 				this.hairColor = "platinum blonde";
 				this.skin.setBaseOnly({color:"olive"});
-				this.hipRating = Hips.RATING_CURVY+2;//hipRating = 12
-				this.buttRating = Butt.RATING_JIGGLY+2;//buttRating = 12
+				this.hips.type = Hips.RATING_CURVY + 2;//hips.type = 12
+				this.butt.type = Butt.RATING_JIGGLY + 2;//butt.type = 12
 				initStrTouSpeInte(29, 34, 45, 50);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
@@ -336,8 +336,8 @@ public class Evangeline2 extends Monster
 				this.tallness = 90;
 				this.hairColor = "platinum blonde";
 				this.skin.restore();
-				this.hipRating = Hips.RATING_CURVY+2;
-				this.buttRating = Butt.RATING_JIGGLY+2;
+				this.hips.type = Hips.RATING_CURVY + 2;
+				this.butt.type = Butt.RATING_JIGGLY + 2;
 				initStrTouSpeInte(41, 46, 55, 50);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
@@ -359,8 +359,8 @@ public class Evangeline2 extends Monster
 				this.tallness = 90;
 				this.hairColor = "platinum crimson";
 				this.skin.setBaseOnly({});
-				this.hipRating = Hips.RATING_CURVY+2;
-				this.buttRating = Butt.RATING_JIGGLY+2;
+				this.hips.type = Hips.RATING_CURVY + 2;
+				this.butt.type = Butt.RATING_JIGGLY + 2;
 				initStrTouSpeInte(41, 46, 55, 50);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
@@ -383,8 +383,8 @@ public class Evangeline2 extends Monster
 				this.tallness = 96;
 				this.hairColor = "crimson platinum";
 				this.skin.growFur();
-				this.hipRating = Hips.RATING_FERTILE+3;//hipRating = 18
-				this.buttRating = Butt.RATING_EXPANSIVE+1;//buttRating = 14
+				this.hips.type = Hips.RATING_FERTILE + 3;//hips.type = 18
+				this.butt.type = Butt.RATING_EXPANSIVE + 1;//butt.type = 14
 				initStrTouSpeInte(41, 46, 70, 50);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
@@ -409,8 +409,8 @@ public class Evangeline2 extends Monster
 				this.tallness = 96;
 				this.hairColor = "crimson platinum";
 				this.skin.growFur();
-				this.hipRating = Hips.RATING_FERTILE+3;//hipRating = 18
-				this.buttRating = Butt.RATING_EXPANSIVE+1;//buttRating = 14
+				this.hips.type = Hips.RATING_FERTILE + 3;//hips.type = 18
+				this.butt.type = Butt.RATING_EXPANSIVE + 1;//butt.type = 14
 				initStrTouSpeInte(41, 46, 80, 50);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";

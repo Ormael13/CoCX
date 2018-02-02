@@ -1,27 +1,24 @@
-package classes.Items.Weapons 
+package classes.Items.Weapons
 {
 	import classes.Items.Weapon;
-	import classes.Player;
 
 	public class EbonyDestroyer extends Weapon
 	{
-		public function EbonyDestroyer() 
+		public function EbonyDestroyer()
 		{
 			super(
 				"EBNYBlade","Ebony Destroyer","ebony destroyer","an ebony destroyer","slash",62,2480,
-				"Once upon a time on Mareth, a demigod of great purity named Nephilim is said to have existed. His duty was to shape the land at the demand of the gods, which he did. His task finished, he disappeared never to be found again. This sword is rumored to have belonged to him. While you don’t know for sure if the story is true, one thing is certain, this blade seeks and destroys corruption wherever it might find it, and will periodically wash its user of any impurity.",
+				"This massive weapon, made of the darkest metal, seems to seethe with unseen malice. Its desire to destroy and damn the pure is so strong that it’s wielder must be wary, lest the blade take control of their body to fulfill its gruesome desires.",
 				"Large"
 			);
 		}
 		override public function get attack():Number {
-			var boost:int = 0;
-			if (game.player.str >= 150) boost += 23;
-			if (game.player.str >= 100) boost += 17;
-			if (game.player.str >= 50) boost += 11;
+			var strMod:int = Math.floor(Math.min(game.player.str, 150)) / 50;
+			var boost:int = (6 * strMod) + 5;
 			boost += (game.player.cor - 80 / 3);
-			return (5 + boost); 
+			return (5 + boost);
 		}
-		
+
 	}
 
 }

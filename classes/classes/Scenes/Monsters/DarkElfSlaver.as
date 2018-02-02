@@ -39,8 +39,8 @@ public class DarkElfSlaver extends DarkElfScout
 			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
 			this.ass.analWetness = AssClass.WETNESS_SLIME_DROOLING;
 			this.tallness = 72;
-			this.hipRating = Hips.RATING_CURVY;
-			this.buttRating = Butt.RATING_LARGE+1;
+			this.hips.type = Hips.RATING_CURVY;
+			this.butt.type = Butt.RATING_LARGE + 1;
 			this.lowerBody = LowerBody.ELF;
 			this.skinTone = "dark";
 			this.hairColor = "silver";

@@ -185,8 +185,8 @@ public class GoblinElder extends Goblin
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = 48;
-			this.hipRating = Hips.RATING_AMPLE+2;
-			this.buttRating = Butt.RATING_LARGE;
+			this.hips.type = Hips.RATING_AMPLE + 2;
+			this.butt.type = Butt.RATING_LARGE;
 			this.skinTone = "yellowish-green";
 			this.hairColor = "dark green";
 			this.hairLength = 4;

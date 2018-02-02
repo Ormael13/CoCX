@@ -1289,22 +1289,22 @@ public class Holidays {
                 if (player.thickness < 50) player.thickness += 5;
                 changed = true;
             }
-            if (player.buttRating < 35) {
+            if (player.butt.type < 35) {
                 EngineCore.outputText("  You notice your ass filling out, gaining more mass as it visibly grows before your eyes.");
-                if (player.buttRating < 4) player.buttRating += 3;
-                if (player.buttRating <= 10) player.buttRating += 2;
-                if (player.buttRating <= 15) player.buttRating += 1;
-                if (player.buttRating <= 20) player.buttRating += 1;
-                if (player.buttRating <= 35) player.buttRating += 1;
+                if (player.butt.type < 4) player.butt.type += 3;
+                if (player.butt.type <= 10) player.butt.type += 2;
+                if (player.butt.type <= 15) player.butt.type += 1;
+                if (player.butt.type <= 20) player.butt.type += 1;
+                if (player.butt.type <= 35) player.butt.type += 1;
                 changed = true;
             }
-            if (player.hipRating < 35) {
+            if (player.hips.type < 35) {
                 EngineCore.outputText(" Your hips grow too, widening and giving you more sexy curves.");
-                if (player.hipRating < 4) player.hipRating += 3;
-                if (player.hipRating < 10) player.hipRating += 2;
-                if (player.hipRating < 15) player.hipRating += 1;
-                if (player.hipRating < 20) player.hipRating += 1;
-                if (player.hipRating < 35) player.hipRating += 1;
+                if (player.hips.type < 4) player.hips.type += 3;
+                if (player.hips.type < 10) player.hips.type += 2;
+                if (player.hips.type < 15) player.hips.type += 1;
+                if (player.hips.type < 20) player.hips.type += 1;
+                if (player.hips.type < 35) player.hips.type += 1;
                 changed = true;
             }
             if (player.biggestTitSize() < 20) {
@@ -1642,7 +1642,7 @@ public class Holidays {
                     +"\n\nHer pussy gives way and drips onto your [face] and in your mouth richly, and she makes constant mewling sounds.  \"<i>C-come on!  Stop teasing me god damn it!  Are you an iii-aahhh-diot?  I'm go-oh-ohna kick ya out, ya know!?</i>\"  You don't intend to desist, and you flick her clit with your fingers again, causing her to push her bottom right into your face.  That gives you an idea, as you run your tongue from her pussy, and then, over her crack and soft buttocks, pleasuring her other hole when you're at it.  She starts panting and moaning.  \"<i>G-goblins don't use that hole!  We don't!  Don't get any crazy ideas you dumb f-fuck!</i>\" she says when you run your tongue back all the way to where it came, teasing both of her holes.  You massage her soft rump while you're at it, and by now, you're pretty sure she's rather sensitive all over, especially where her curves are developing..."
                     +"\n\nAfter a while of doing this, you're pretty sure Abylon starts approaching her second orgasm, and you intent to fill her as much as you can for the occasion.");
             //([Naga tongue]
-            if (player.tongueType == Tongue.SNAKE) EngineCore.outputText("  Your fingers make it into her pussy alongside your tongue, and the prehensile thing, longer and more flexible than a human's, ravages the insides of her pussy, tasting everywhere as Abby shakes in her orgasm.  Her pussy eagerly tries to milk both your fingers and your tongue, clenching and gripping at them as it drips her pussy juices all over your face.  Abby screams out in a loud, uninhibited orgasm at last, expressing her ecstasy.");
+            if (player.tongue.type == Tongue.SNAKE) EngineCore.outputText("  Your fingers make it into her pussy alongside your tongue, and the prehensile thing, longer and more flexible than a human's, ravages the insides of her pussy, tasting everywhere as Abby shakes in her orgasm.  Her pussy eagerly tries to milk both your fingers and your tongue, clenching and gripping at them as it drips her pussy juices all over your face.  Abby screams out in a loud, uninhibited orgasm at last, expressing her ecstasy.");
             //([Demon/Dragon Tongue]
             else if (player.hasLongTongue()) EngineCore.outputText("  Abylon shakes in excitement, pleasure, and fear as you extend your inhuman tongue to reach deep into the recesses of her pussy.  She cannot hold out a moment longer, her cunt gripping your inhuman muscle tightly, the hole and muscles inside quivering as you can taster her orgasmic juices with every single point of your tongue.  She screams, shudders and moans, tongue lolling out from the intense pleasure as you force your own tongue to roll around inside her and stretch her in multiple ways. Only you holding her stops Abylon from slumping forward, it seems...");
             //([Human tongue]

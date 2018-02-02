@@ -181,7 +181,7 @@
         <property name="skin2" src="skinTone" default="#ffffff">
             <color name="pale">#f2e8e3</color>
         </property>
-        <property name="iris" src="eyeColor" default="#0000ff">
+        <property name="iris" src="eyes.colour" default="#0000ff">
         </property>
     </palette>
     <colorkeys>
@@ -344,7 +344,7 @@
         <cell rect="162,109,50,62" name="legs/bee" dx="71" dy="115"/>
         <cell rect="214,191,59,45" name="tail/bee_abdomen" dx="96" dy="80"/>
         <cell rect="274,191,59,45" name="tail/spider" dx="90" dy="80"/>
-        <cell rect="164,199,43,25" name="antennae/bee" dx="68" dy="22"/>
+        <cell rect="164,199,43,25" name="antennae.type/bee" dx="68" dy="22"/>
         <cell rect="4,344,89,54" name="wings/bee" dx="50" dy="69"/>
     </spritemap>
     <spritemap file="hinezumi.png">
@@ -471,27 +471,27 @@
         Element <default> item* </default>
 
         -->
-        <switch value="antennae">
+        <switch value="antennae.type">
             <case value="Antennae.NONE"></case>
             <case value="Antennae.MANTIS">
-                <show part="antennae/bee"/>
+                <show part="antennae.type/bee"/>
             </case>
             <case value="Antennae.BEE">
-                <show part="antennae/bee"/>
+                <show part="antennae.type/bee"/>
             </case>
             <default>
-                <show part="antennae/bee"/>
+                <show part="antennae.type/bee"/>
             </default>
         </switch>
 
-        <switch value="hornType">
+        <switch value="horns.type">
             <case value="Horns.NONE"></case>
             <case value="Horns.DEMON">
                 <show part="horns/2small"/>
             </case>
             <case value="Horns.COW_MINOTAUR">
                 <switch>
-                    <case test="horns lt 3"><!--Two tiny horn-like nubs...-->
+                    <case test="horns lt 3"><!--Two tiny horns-like nubs...-->
                         <show part="horns/2small"/>
                     </case>
                     <case test="horns lt 6"><!--Two moderately sized horns...-->
@@ -522,7 +522,7 @@
             </default>
         </switch>
 
-        <switch value="earType">
+        <switch value="ears.type">
             <case value="Ears.HUMAN">
                 <show part="ears_bg/human"/>
             </case>
@@ -574,7 +574,7 @@
             </default>
         </switch>
 
-        <switch value="eyeType">
+        <switch value="eyes.type">
             <case value="Eyes.HUMAN">
                 <show part="eyes/human"/>
             </case>
@@ -795,7 +795,7 @@
             </switch>
         </if>
 
-        <switch value="armType">
+        <switch value="arms.type">
             <case values="Arms.HUMAN,Arms.KITSUNE,Arms.ONI,Arms.ELF,Arms.RAIJU">
                 <!--see switch[value=skin.coverage]-->
             </case>
@@ -960,7 +960,7 @@
             <case value="LowerBody.LION">
                 <hide part="legs/*"/>
                 <switch>
-                    <case test="armType==Arms.LION">
+                    <case test="arms.type==Arms.LION">
                         <show part="legs/manticore_sit"/>
                     </case>
                     <default>
@@ -984,7 +984,7 @@
             </default>
         </switch>
 
-        <switch value="wingType">
+        <switch value="wings.type">
             <case value="Wings.NONE"></case>
             <case values="Wings.BEE_LIKE_SMALL,Wings.BEE_LIKE_LARGE">
                 <show part="wings/bee"/>

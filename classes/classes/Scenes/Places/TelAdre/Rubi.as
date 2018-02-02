@@ -2723,7 +2723,7 @@ private function giveRubiATFItem(itype:ItemType):void {
 		}
 		//(If Rubi gets demonic heels)
 		if(flags[kFLAGS.RUBI_FEET] == 0 && rand(3) == 0 && itype == consumables.SUCMILK) {
-			outputText("\n\nRubi suddenly hops from foot to foot, breathing in sharply.  \"<i>Ow, ow, ow!</i>\" [rubi ey] exclaims, dropping down onto [rubi eir] naked butt.  [rubi Ey] lifts one foot gingerly, inspecting the heel and sole.  Rubi rocks back and forth, craddling [rubi eir] foot as a pronounced bulge appears on the heel.  Soon, it splits as a sharp black horn grows out, pointing downwards.  After a minute of this, Rubi suddenly sighs with relief as the painful growth seems to subside.  [rubi Ey] gets to [rubi eir] feet, the horn making [rubi em] stand and walk as if [rubi ey] were wearing high heels.");
+			outputText("\n\nRubi suddenly hops from foot to foot, breathing in sharply.  \"<i>Ow, ow, ow!</i>\" [rubi ey] exclaims, dropping down onto [rubi eir] naked butt.  [rubi Ey] lifts one foot gingerly, inspecting the heel and sole.  Rubi rocks back and forth, craddling [rubi eir] foot as a pronounced bulge appears on the heel.  Soon, it splits as a sharp black horns grows out, pointing downwards.  After a minute of this, Rubi suddenly sighs with relief as the painful growth seems to subside.  [rubi Ey] gets to [rubi eir] feet, the horns making [rubi em] stand and walk as if [rubi ey] were wearing high heels.");
 			flags[kFLAGS.RUBI_FEET] = 1;
 		}
 		//(If Rubi gets horns)
@@ -3665,7 +3665,7 @@ public function hypnoBimboficationForRubiSloots():void
 	outputText("\n\n\"<i>Would you like to feel like this all the time - happy and carefree?</i>\" you ask.");
 
 	outputText("\n\nRubi nods, a little more vigorously.");
-	outputText("\n\nA predatory smile spreads across your face. \"<i>That's natural. Everyone wants to be happy, and I'm going to help you become soooo happy.</i>\" Imagining your tail as some kind of psionic antennae, you channel your thoughts through it as you continue to speak and mold your hapless victim. \"<i>You feel good right now because you are aroused and empty-minded, Rubi. Your mind prevented you from experiencing this complete bliss. Even now, it's interfering, forcing me to reroute your thoughts down to your dick to give you this present.</i>\"");
+	outputText("\n\nA predatory smile spreads across your face. \"<i>That's natural. Everyone wants to be happy, and I'm going to help you become soooo happy.</i>\" Imagining your tail as some kind of psionic antennae.type, you channel your thoughts through it as you continue to speak and mold your hapless victim. \"<i>You feel good right now because you are aroused and empty-minded, Rubi. Your mind prevented you from experiencing this complete bliss. Even now, it's interfering, forcing me to reroute your thoughts down to your dick to give you this present.</i>\"");
 	outputText("\n\nYou didn't think it possible, but Rubi's face slackens further.");
 
 	outputText("\n\n\"<i>I can help you fix that, Rubi, but I need your help. I need you to want it. I need you to want to be horny, thoughtless, and happy all the time. You need to truly want to feel this good all the time, and it does feel sooo good, doesn't it?</i>\"");

@@ -146,8 +146,8 @@ public class RyuBiDragon extends Monster
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = 340;
-			this.hipRating = Hips.RATING_SLENDER;
-			this.buttRating = Butt.RATING_TIGHT;
+			this.hips.type = Hips.RATING_SLENDER;
+			this.butt.type = Butt.RATING_TIGHT;
 			this.skin.base.color = "white";
 			this.hairColor = "black";
 			this.hairLength = 1;
@@ -160,11 +160,11 @@ public class RyuBiDragon extends Monster
 			this.gems = 5 + rand(3);
 			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.2);
 			this.faceType = Face.DRAGON;
-			this.tongueType = Tongue.DRACONIC;
-			this.earType = Ears.DRAGON;
-			this.hornType = Horns.DRACONIC_X4_12_INCH_LONG;
-			this.horns = 4;
-			this.wingType = Wings.DRACONIC_HUGE;
+			this.tongue.type = Tongue.DRACONIC;
+			this.ears.type = Ears.DRAGON;
+			this.horns.type = Horns.DRACONIC_X4_12_INCH_LONG;
+			this.horns.count = 4;
+			this.wings.type = Wings.DRACONIC_HUGE;
 			this.lowerBody = LowerBody.DRAGON;
 			this.tailType = Tail.DRACONIC;
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);

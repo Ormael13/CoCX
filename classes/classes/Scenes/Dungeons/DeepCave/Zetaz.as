@@ -174,8 +174,8 @@ public class Zetaz extends Monster
 			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.tallness = 4*12+1;
-			this.hipRating = Hips.RATING_BOYISH;
-			this.buttRating = Butt.RATING_TIGHT;
+			this.hips.type = Hips.RATING_BOYISH;
+			this.butt.type = Butt.RATING_TIGHT;
 			this.lowerBody = LowerBody.KANGAROO;
 			this.skinTone = "red";
 			this.hairColor = "black";
@@ -196,8 +196,8 @@ public class Zetaz extends Monster
 			this.gems = rand(75) + 175;
 			this.additionalXP = 200;
 			this.drop = new WeightedDrop(consumables.BIMBOLQ, 1);
-			this.wingType = Wings.IMP;
-			this.wingDesc = "small";
+			this.wings.type = Wings.IMP;
+			this.wings.desc = "small";
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);

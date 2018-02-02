@@ -325,14 +325,14 @@ package classes.Scenes.Areas.Plains
 		 (increase clitLength)
 
 		 Hyena Spot Effect #2
-		 (if hipRating>0)
+		 (if hips.type>0)
 		 You cry out as your pelvis suddenly cave inward, crumpling narrower at the top of your legs to form " + hipDescript()
-		 (decrease hipRating)
+		 (decrease hips.type)
 
 		 Hyena Spot Effect #3
-		 (if buttRating>0)
+		 (if butt.type>0)
 		 You seem to bounce on your feet as you drop a few pounds in your rear.  With your new, light " + buttDescript() + ", you feel like you can fly across the plains.
-		 (decrease buttRating)
+		 (decrease butt.type)
 
 		 Hyena Spot Effect #4
 		 Your muscles seem to quiver underneath your " + skinDescript() + ", growing leaner and quicker.

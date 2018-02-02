@@ -2046,14 +2046,14 @@ import classes.Scenes.SceneLib;
 			outputText("You respond by eagerly digging your mouth even deeper into the soft folds of Uma's sex, extending your tongue to reach even deeper inside the pretty filly.  Her taste is wonderful. Familiar and yet distinct, with a spice you attribute to being the mare's personal taste.  So intent you are on eating her out, that you're almost like a horse, eager to taste the dewy grass of the morning pasture.\n\n");
 			outputText("Uma moans and groans appreciatively, one hand reaching down to rub your head ");
 
-			if (player.earType == 2 || player.earType == 9 || player.earType == 5 || player.earType == 7) outputText("between your "); 
+			if (player.ears.type == 2 || player.ears.type == 9 || player.ears.type == 5 || player.ears.type == 7) outputText("between your "); 
 			
-			if (player.earType == 2) outputText("canine ");
-			if (player.earType == 9) outputText("vulpine ");
-			if (player.earType == 5) outputText("feline ");
-			if (player.earType == 7) outputText("loporid ");
+			if (player.ears.type == 2) outputText("canine ");
+			if (player.ears.type == 9) outputText("vulpine ");
+			if (player.ears.type == 5) outputText("feline ");
+			if (player.ears.type == 7) outputText("loporid ");
 
-			if (player.earType == 2 || player.earType == 9 || player.earType == 5 || player.earType == 7) outputText("ears.  ");
+			if (player.ears.type == 2 || player.ears.type == 9 || player.ears.type == 5 || player.ears.type == 7) outputText("ears.  ");
 
 			outputText("\"<i>Mmm oh yes dear, yes, that feels good.  It's been awhile since someone would do that for me...</i>\"  She croons in her pleasure.\n\n");
 			outputText("You take your mouth off her plush netherlips to pant and regain your breath, licking around your mouth to taste more of her.  You don't take long before you plunge yourself back between her legs, licking, slurping, drinking and tasting.\n\n");

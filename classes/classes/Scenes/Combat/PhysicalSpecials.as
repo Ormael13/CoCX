@@ -72,7 +72,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			buttons.add("Engulf", gooEngulf).hint("Attempt to engulf a foe with your body.");
 		}
 		//Embrace
-		if ((player.wingType == Wings.BAT_ARM || player.wingType == Wings.VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType)) {
+		if ((player.wings.type == Wings.BAT_ARM || player.wings.type == Wings.VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType)) {
 			buttons.add("Embrace", vampireEmbrace).hint("Embrace an opponent in your wings.");
 		}
 		//Kick attackuuuu
@@ -82,15 +82,15 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd.disable("<b>You need more time before you can perform Kick again.</b>\n\n");
 			}
 		}
-		//Gore if mino horns or unicorn/alicorn horn
-		if (player.hornType == Horns.COW_MINOTAUR && player.horns >= 6) {
+		//Gore if mino horns or unicorn/alicorn horns
+		if (player.horns.type == Horns.COW_MINOTAUR && player.horns.count >= 6) {
 			buttons.add("Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horns.  This attack is stronger and easier to land with large horns.");
 		}
-		if (player.hornType == Horns.UNICORN && player.horns >= 6) {
-			buttons.add("Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horn.  This attack is stronger and easier to land with large horn.");
+		if (player.horns.type == Horns.UNICORN && player.horns.count >= 6) {
+			buttons.add("Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horns.  This attack is stronger and easier to land with large horns.");
 		}
-		//Upheaval - requires rhino horn
-		if (player.hornType == Horns.RHINO && player.horns >= 2 && player.faceType == Face.RHINO) {
+		//Upheaval - requires rhino horns
+		if (player.horns.type == Horns.RHINO && player.horns.count >= 2 && player.faceType == Face.RHINO) {
 			bd = buttons.add("Upheaval", upheavalAttack).hint("Send your foe flying with your dual nose mounted horns. \n");
 			bd.requireFatigue(physicalCost(15));
 		}
@@ -105,7 +105,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd.disable("There's no way you'd be able to find their lips while you're blind!");
 			}
 		}
-		if (player.armType == Arms.MANTIS && player.weapon == WeaponLib.FISTS) {
+		if (player.arms.type == Arms.MANTIS && player.weapon == WeaponLib.FISTS) {
 			bd = buttons.add("Multi Slash", mantisMultiSlash);
 			if (monster.plural) {
 				bd.hint("Attempt to slash your foes with your wrists scythes! \n");
@@ -249,7 +249,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			bd.requireFatigue(physicalCost(60));
 			if (monster.tallness > 120 || monster.hasPerk(PerkLib.EnemyGigantType)) bd.disable("<b>Your opponent is too tall for Strangulate to have any effect on it.</b>\n\n");
 		}
-		if (player.armType == Arms.GARGOYLE && player.shield == ShieldLib.NOTHING && player.weaponPerk != "Large") {
+		if (player.arms.type == Arms.GARGOYLE && player.shield == ShieldLib.NOTHING && player.weaponPerk != "Large") {
 			bd = buttons.add("Stone Claw", StoneClawAttack).hint("Rend your foe using your sharp stone claws (available if you have no shield, use a one handed weapon or are unarmed).  \n\nWould go into cooldown after use for: 3 rounds");
 			bd.requireFatigue(physicalCost(60));
 			if (player.hasStatusEffect(StatusEffects.CooldownStoneClaw)) {
@@ -263,7 +263,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd.disable("<b>You need more time before you can perform Tail Slam again.</b>\n\n");
 			}
 		}
-		if (player.wingType == Wings.GARGOYLE_LIKE_LARGE) {
+		if (player.wings.type == Wings.GARGOYLE_LIKE_LARGE) {
 			bd = buttons.add("Wing Buffet", WingBuffetAttack).hint("Buffet your foe using your two massive stone wings, staggering them.  \n\nWould go into cooldown after use for: 5 rounds");
 			bd.requireFatigue(physicalCost(30));
 			if (player.hasStatusEffect(StatusEffects.CooldownWingBuffet)) {
@@ -275,7 +275,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var bd:ButtonData;
 		buttons.add("Great Dive", combat.greatDive).hint("Make a Great Dive to deal TONS of damage!");
 		//Embrace
-		if ((player.wingType == Wings.BAT_ARM || player.wingType == Wings.VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType)) {
+		if ((player.wings.type == Wings.BAT_ARM || player.wings.type == Wings.VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType)) {
 			buttons.add("Embrace", vampireEmbrace).hint("Embrace an opponent in your wings.");
 		}
 		//Tornado Strike
@@ -2043,11 +2043,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		if (monster.short == "worms") {
 			outputText("Taking advantage of your new natural ");
-			if (player.hornType == Horns.COW_MINOTAUR) outputText("weapons, ");
+			if (player.horns.type == Horns.COW_MINOTAUR) outputText("weapons, ");
 			else outputText("weapon, ");
 			outputText("you quickly charge at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving your ");
-			if (player.hornType == Horns.COW_MINOTAUR) outputText("horns ");
-			else outputText("horn, ");
+			if (player.horns.type == Horns.COW_MINOTAUR) outputText("horns ");
+			else outputText("horns, ");
 			outputText("to stab only at air.\n\n");
 			enemyAI();
 			return;
@@ -2068,15 +2068,15 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		//Bigger horns = better success chance.
 		//Small horns - 60% hit
-		if(player.horns >= 6 && player.horns < 12) {
+		if(player.horns.count >= 6 && player.horns.count < 12) {
 			temp = 60;
 		}
 		//bigger horns - 75% hit
-		if(player.horns >= 12 && player.horns < 20) {
+		if(player.horns.count >= 12 && player.horns.count < 20) {
 			temp = 75;
 		}
 		//huge horns - 90% hit
-		if(player.horns >= 20) {
+		if(player.horns.count >= 20) {
 			temp = 80;
 		}
 		//Vala dodgy bitch!
@@ -2091,8 +2091,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else temp += 50;
 		//Hit & calculation
 		if(temp >= rand(100)) {
-			var horns:Number = player.horns;
-			if (player.horns > 40) player.horns = 40;
+			var horns:Number = player.horns.count;
+			if (player.horns.count > 40) player.horns.count = 40;
 			//Determine damage - str modified by enemy toughness!
 			damage = int((unarmedAttack() + player.str + player.spe + horns) * 2 * (monster.damagePercent() / 100));
 			if (!monster.hasStatusEffect(StatusEffects.GoreBleed)) monster.createStatusEffect(StatusEffects.GoreBleed,16,0,0,0);
@@ -2103,16 +2103,16 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//normal
 			if(rand(4) > 0) {
 				outputText("You lower your head and charge, skewering " + monster.a + monster.short + " on ");
-				if (player.hornType == Horns.COW_MINOTAUR) outputText("one of your bullhorns!  ");
-				else outputText("your horn!  ");
+				if (player.horns.type == Horns.COW_MINOTAUR) outputText("one of your bullhorns!  ");
+				else outputText("your horns!  ");
 			}
 			//CRIT
 			else {
-				//doubles horn bonus damage
+				//doubles horns bonus damage
 				damage *= 2;
 				outputText("You lower your head and charge, slamming into " + monster.a + monster.short + " and burying ");
-				if (player.hornType == Horns.COW_MINOTAUR) outputText("both your horns ");
-				else outputText("your horn ");
+				if (player.horns.type == Horns.COW_MINOTAUR) outputText("both your horns ");
+				else outputText("your horns ");
 				outputText("into " + monster.pronoun2 + "! <b>Critical hit!</b>  ");
 			}
 			//Bonus damage for rut!
@@ -2134,18 +2134,18 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 				damage = doDamage(damage);
 			}
-			//Different horn damage messages
+			//Different horns damage messages
 			if(damage < 20) outputText("You pull yourself free, dealing <b><font color=\"#080000\">" + damage + "</font></b> damage.");
 			if (damage >= 20 && damage < 40) {
 				outputText("You struggle to pull your ");
-				if (player.hornType == Horns.COW_MINOTAUR) outputText("horns ");
-				else outputText("horn ");
+				if (player.horns.type == Horns.COW_MINOTAUR) outputText("horns ");
+				else outputText("horns ");
 				outputText("free, dealing <b><font color=\"#080000\">" + damage + "</font></b> damage.");
 			}
 			if (damage >= 40) {
 				outputText("With great difficulty you rip your ");
-				if (player.hornType == Horns.COW_MINOTAUR) outputText("horns ");
-				else outputText("horn ");
+				if (player.horns.type == Horns.COW_MINOTAUR) outputText("horns ");
+				else outputText("horns ");
 				outputText("free, dealing <b><font color=\"#080000\">" + damage + "</font></b> damage.");
 			}
 		}
@@ -2154,8 +2154,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//Special vala changes
 			if(monster.short == "Vala") {
 				outputText("You lower your head and charge Vala, but she just flutters up higher, grabs hold of your ");
-				if (player.hornType == Horns.COW_MINOTAUR) outputText("horns ");
-				else outputText("horn ");
+				if (player.horns.type == Horns.COW_MINOTAUR) outputText("horns ");
+				else outputText("horns ");
 				outputText("as you close the distance, and smears her juicy, fragrant cunt against your nose.  The sensual smell and her excited moans stun you for a second, allowing her to continue to use you as a masturbation aid, but she quickly tires of such foreplay and flutters back with a wink.\n\n");
 				dynStats("lus", 5);
 			}
@@ -2191,15 +2191,15 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		//Bigger horns = better success chance.
 		//Small horns - 60% hit
-		if(player.horns >= 6 && player.horns < 12) {
+		if(player.horns.count >= 6 && player.horns.count < 12) {
 			temp = 60;
 		}
 		//bigger horns - 75% hit
-		if(player.horns >= 12 && player.horns < 20) {
+		if(player.horns.count >= 12 && player.horns.count < 20) {
 			temp = 75;
 		}
 		//huge horns - 90% hit
-		if(player.horns >= 20) {
+		if(player.horns.count >= 20) {
 			temp = 80;
 		}
 		//Vala dodgy bitch!
@@ -2212,9 +2212,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		temp += player.spe/2;
 		//Hit & calculation
 		if(temp >= rand(100)) {
-			var horns:Number = player.horns;
-			if (player.horns > 40) player.horns = 40;
-			damage = int(player.str + (player.tou / 2) + (player.spe / 2) + (player.level * 2) * 1.2 * (monster.damagePercent() / 100)); //As normal attack + horn length bonus
+			var horns:Number = player.horns.count;
+			if (player.horns.count > 40) player.horns.count = 40;
+			damage = int(player.str + (player.tou / 2) + (player.spe / 2) + (player.level * 2) * 1.2 * (monster.damagePercent() / 100)); //As normal attack + horns length bonus
 			if(damage < 0) damage = 5;
 			//Normal
 			outputText("You hurl yourself towards [enemy] with your head low and jerk your head upward, every muscle flexing as you send [enemy] flying. ");

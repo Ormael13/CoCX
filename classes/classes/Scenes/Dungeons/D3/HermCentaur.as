@@ -20,7 +20,7 @@ import classes.Scenes.SceneLib;
 			this.a = "the ";
 			this.short = "herm centaur";
 			this.imageName = "hermcentaur";
-			this.long = "Standing tall and proud just a few feet away is a massive demon unlike any others you've seen.  She's every bit a centaur - horse body, hooves, fur, and everything, but she's also massive in proportion - about nine feet tall and equally well endowed.  Heaving, jiggly E-cups jut proudly from her chest, unrestrained and bare to the world, thick nipples capping them like majestic, sexual crowns.  Under her belly, a thick equine cock slaps wetly against her fur with every step, heavy balls dangling behind.  A solid black horn juts from her forehead, a testament to the demonic corruption flowing through this monstrous woman's veins.  Still, without the horn, you'd never have guessed she was a demon.  Her gleaming fire-orange hair and pale, freckled skin look like something you would see on an innocent maid, not a bestial altar of corrupted decadence.";
+			this.long = "Standing tall and proud just a few feet away is a massive demon unlike any others you've seen.  She's every bit a centaur - horse body, hooves, fur, and everything, but she's also massive in proportion - about nine feet tall and equally well endowed.  Heaving, jiggly E-cups jut proudly from her chest, unrestrained and bare to the world, thick nipples capping them like majestic, sexual crowns.  Under her belly, a thick equine cock slaps wetly against her fur with every step, heavy balls dangling behind.  A solid black horns juts from her forehead, a testament to the demonic corruption flowing through this monstrous woman's veins.  Still, without the horns, you'd never have guessed she was a demon.  Her gleaming fire-orange hair and pale, freckled skin look like something you would see on an innocent maid, not a bestial altar of corrupted decadence.";
 			this.tallness = 12 * 9;
 			// THIS SHIT IS RETARDED.
 			// Rather than doing something smart, like usiing the mf() function to set the gender prounouns in checkMonster, instead, each create<x> function sets them to something. So if you createVag then createCock, you get male pronouns. Fuck off.
@@ -29,8 +29,8 @@ import classes.Scenes.SceneLib;
 			this.createVagina(false, 4, 5); 
 			this.balls = 2;
 			this.ballSize = 3;
-			this.hipRating = Hips.RATING_FERTILE;
-			this.buttRating = Butt.RATING_EXPANSIVE;
+			this.hips.type = Hips.RATING_FERTILE;
+			this.butt.type = Butt.RATING_EXPANSIVE;
 			initStrTouSpeInte(210, 210, 120, 120);
 			initWisLibSensCor(120, 140, 40, 100);
 			this.weaponName = "fists";

@@ -1199,7 +1199,7 @@ namespace spred {
 				'wings_bg/scales_left',
 			]);
 			addCompositeView([
-				'antennae/bee',
+				'antennae.type/bee',
 				'eyes/sandtrap',
 				'head/bee', 'face/insect',
 				'breasts/Dbee',

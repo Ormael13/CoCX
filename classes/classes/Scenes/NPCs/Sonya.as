@@ -53,8 +53,8 @@ use namespace CoC;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = 144;
-			this.hipRating = Hips.RATING_CURVY+2;
-			this.buttRating = Butt.RATING_LARGE+1;
+			this.hips.type = Hips.RATING_CURVY + 2;
+			this.butt.type = Butt.RATING_LARGE + 1;
 			this.skinTone = "light";
 			this.hairColor = "red";
 			this.hairLength = 1;
@@ -76,7 +76,7 @@ use namespace CoC;
 				//	add(armors.S_SWMWR,1/12).
 				//	add(consumables.L_DRAFT,1/4).
 					add(consumables.LABOVA_,0.7);
-			this.earType = Ears.COW;
+			this.ears.type = Ears.COW;
 			this.faceType = Face.COW_MINOTAUR;
 			this.lowerBody = LowerBody.HOOFED;
 			this.tailType = Tail.COW;

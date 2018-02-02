@@ -3479,7 +3479,7 @@ private function eyesColorSelection():void {
 
 private function chooseEyesColorSaveUpdate(color:String):void {
 	clearOutput();
-	player.eyeColor = color;
+	player.eyes.colour = color;
 	outputText("You now have " + color + " eyes. You will be returned to your camp now and you can continue your usual gameplay.");
 	doNext(doCamp);
 }

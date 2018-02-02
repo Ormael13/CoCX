@@ -39,8 +39,8 @@ public class PrisonLetters extends BaseContent
 				if (flags[kFLAGS.BEHEMOTH_CHILDREN] == 3) flags[kFLAGS.BEHEMOTH_CHILD_3_BIRTH_DAY] = model.time.days;
 			}
 			//Post-birthing
-			if(player.hipRating < 10) {
-				player.hipRating++;
+			if(player.hips.type < 10) {
+				player.hips.type++;
 				outputText("\n\nAfter the birth your [armor] fits a bit more snugly about your " + hipDescript() + ".");
 			}
 			player.knockUpForce(); //CLEAR!

@@ -26,7 +26,7 @@ public class SandTrapScene extends BaseContent{
 public function encounterASandTarp():void {
 	clearOutput();
 	spriteSelect(97);
-	if(flags[kFLAGS.SANDTRAP_LOSS_REPEATS] >= 2 && player.eyeType == Eyes.BLACK_EYES_SAND_TRAP && player.wingType == Wings.GIANT_DRAGONFLY) {
+	if(flags[kFLAGS.SANDTRAP_LOSS_REPEATS] >= 2 && player.eyes.type == Eyes.BLACK_EYES_SAND_TRAP && player.wings.type == Wings.GIANT_DRAGONFLY) {
 		sandTrapBadEnd();
 		return;
 	}
@@ -134,7 +134,7 @@ public function sandtrapmentLoss(clear:Boolean = false):void {
 		cleanupAfterCombat();
 		return;
 	}
-	if(flags[kFLAGS.SANDTRAP_LOSS_REPEATS] >= 2 && player.eyeType == Eyes.BLACK_EYES_SAND_TRAP && player.wingType == Wings.GIANT_DRAGONFLY) {
+	if(flags[kFLAGS.SANDTRAP_LOSS_REPEATS] >= 2 && player.eyes.type == Eyes.BLACK_EYES_SAND_TRAP && player.wings.type == Wings.GIANT_DRAGONFLY) {
 		loseLastFightWithSandTrap();
 		return;
 	}

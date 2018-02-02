@@ -207,8 +207,8 @@ public class Kiha extends Monster
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,40,0,0,0);
 			this.tallness = 6*12+1;
-			this.hipRating = Hips.RATING_AMPLE;
-			this.buttRating = Butt.RATING_AVERAGE+1;
+			this.hips.type = Hips.RATING_AMPLE;
+			this.butt.type = Butt.RATING_AVERAGE + 1;
 			this.lowerBody = LowerBody.HOOFED;
 			this.skin.coverage = Skin.COVERAGE_MEDIUM;
 			this.skin.base.color = "dark";
@@ -291,8 +291,8 @@ public class Kiha extends Monster
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.gems = rand(15) + 95;
 			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.2);
-			this.wingType = Wings.DRACONIC_LARGE;
-			this.wingDesc = "huge";
+			this.wings.type = Wings.DRACONIC_LARGE;
+			this.wings.desc = "huge";
 			this.tailType = Tail.LIZARD;
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 1) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 2) {

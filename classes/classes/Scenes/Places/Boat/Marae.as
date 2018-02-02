@@ -160,8 +160,8 @@ public class Marae extends Monster
 			this.ass.analLooseness = 1;
 			this.ass.analWetness = 1;
 			this.tallness = 10*12;
-			this.hipRating = 10;
-			this.buttRating = 8;
+			this.hips.type = 10;
+			this.butt.type = 8;
 			this.skin.base.color = "white";
 			this.hairColor = "green";
 			this.hairLength = 36;

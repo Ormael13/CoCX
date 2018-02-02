@@ -37,7 +37,7 @@ package classes.Items
 				PerkLib.Accuracy1,40,0,0,0);
 		public const HUXBOW_:WeaponRangeWithPerk = new WeaponRangeWithPerk("HuXbow", "HuntXbow", "hunter crossbow", "a hunter crossbow", "shot", 15, 750, "This is a hunter crossbow. Slight better one with better accuracy and bolts penetrative power than light crossbow.", "Crossbow",
 				PerkLib.Accuracy1,20,0,0,0);
-		public const IVIARG_:WeaponRangeWithPerk = new WeaponRangeWithPerk("IvIArq", "Iv.I.Arq", "Ivory inlaid arquebus", "a Ivory inlaid arquebus", "shot", 28, 1400, "Gifted with a great range and accuracy, this arquebus is probably one of the best firearms than you can find on this land. It’s butt and stock have a gold trim and inlaid ivory in a pattern of wreath leaves. A layer of gold and ivory also runs through the barrel, giving the rifle a majestic look without compromising its functionality.", "Rifle",
+		public const IVIARG_:WeaponRangeWithPerk = new WeaponRangeWithPerk("IvIArq", "Iv.I.Arq", "ivory inlaid arquebus", "an ivory inlaid arquebus", "shot", 28, 1400, "Gifted with a superb range and accuracy, this arquebus is truly a piece of art. Its stock has a gold trim and is inlaid with ivory in a pattern of wreath leaves. A layer of gold and ivory also runs through the barrel, giving the rifle a majestic look without compromising its functionality.", "Rifle",
 				PerkLib.Accuracy1,40,0,0,0);
 		public const KSLHARP:KrakenSlayerHarpoons = new KrakenSlayerHarpoons();
 		public const LCROSBW:WeaponRangeWithPerk = new WeaponRangeWithPerk("LCrosbw", "LCrossbow", "light crossbow", "a light crossbow", "shot", 5, 250, "This is a light crossbow. A most basic one that fires bolts at your enemies.", "Crossbow",

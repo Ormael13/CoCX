@@ -502,9 +502,9 @@ private function bunbun69():void {
 				//[Existing tail: 
 				else outputText("  Your tail jiggles and shrinks, slowly sucking back into your body until only a tiny nub remains which quickly explodes with fluff into <b>your new cuddly, twitching bunny tail!</b>");
 			}
-			if(player.earType != Ears.BUNNY) {
+			if(player.ears.type != Ears.BUNNY) {
 				outputText("  The top of your head is next, it seems.");
-				//[No antennae: 
+				//[No antennae.type: 
 				outputText("  Your eyebrows feel like they're being drawn upwards, your eyes getting larger and larger until you're almost painfully aware of every color and sound around you. You shake your head and <b>large, floppy bunny ears bounce in front of your eyes</b>. You slap the sides of your head and, sure enough, your old ears are gone.");
 			}
 			outputText("\n\n");
@@ -516,7 +516,7 @@ private function bunbun69():void {
 			outputText(", your spunk calming the egg-laying passion that had her bouncing like whipped caramel. She pulls her shrinking phallus from your mouth with a wet slurp, the taste of her rich cum sweet on your lips. She rises to a crouch and gives your new ears a playful tweak between her thumb and forefinger. \"<i>Sorry about that, I don't know what came over me! I certainly didn't expect this, though! Kind of makes me want to stick around and see if you and I could pop out more bunnies,</i>\" she winks. \"<i>But unfortunately, I've got to get going! Hope you had a happy, tasty day! Maybe I'll try to find you again, some time down the line.</i>\" She gives you a moist little kiss and hops away, still energetic after all that. You groan, still feeling fat and bloated from the 'meal.'\n\n");
 			
 			player.tailType = Tail.RABBIT;
-			player.earType = Ears.BUNNY;
+			player.ears.type = Ears.BUNNY;
 			doNext(camp.returnToCampUseOneHour);
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1);
@@ -556,9 +556,9 @@ private function bunbun69():void {
 				//Existing tail: 
 				else outputText("  Your tail jiggles and shrinks, slowly sucking back into your body until only a tiny nub remains which quickly explodes with fluff into a cuddly, twitching bunny tail!");
 			}
-			if(player.earType != Ears.BUNNY) {
+			if(player.ears.type != Ears.BUNNY) {
 				outputText("  The top of your head is next, it seems.");
-				//[No antennae:
+				//[No antennae.type:
 				outputText("  Your eyebrows feel like they're being drawn upwards, your eyes getting larger and larger until you're almost painfully aware of every color and sound around you. You shake your head and large, floppy bunny ears bounce in front of your eyes.");
 			}
 			outputText("\n\n");
@@ -568,11 +568,11 @@ private function bunbun69():void {
 			else if(player.cumQ() < 1000) outputText("a noticeable girth");
 			else outputText("bloated obscenely");
 			outputText(", your spunk calming the egg-laying passion. She pulls her shrinking phallus from your mouth with a wet slurp, the taste of her strange cum sweet on your lips. She rises to a crouch and gives your ");
-			if(player.earType != Ears.BUNNY) outputText("new ");
+			if(player.ears.type != Ears.BUNNY) outputText("new ");
 			outputText("ears a playful tweak between her thumb and forefinger. \"<i>Sorry about that, I don't know what came over me! I certainly didn't expect this, though! Kind of makes me want to stick around and see if you and I could pop out more bunnies,</i>\" she winks. \"<i>But unfortunately, I've got to get going! Maybe I'll try to find you again, some time down the line.</i>\" She gives you a moist little kiss and hops away, still energetic after all that. You groan, still recovering from the eggs.");
 			
 			player.tailType = Tail.RABBIT;
-			player.earType = Ears.BUNNY;
+			player.ears.type = Ears.BUNNY;
 			doNext(camp.returnToCampUseOneHour);
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1);
@@ -601,18 +601,18 @@ private function bunbun69():void {
 			//Existing tail: 
 			else outputText("  Your tail jiggles and shrinks, slowly sucking back into your body until only a tiny nub remains which quickly explodes with fluff into a cuddly, twitching bunny tail!");
 		}
-		if(player.earType != Ears.BUNNY) {
+		if(player.ears.type != Ears.BUNNY) {
 			outputText("  The top of your head is next, it seems.");
-			//[No antennae:
+			//[No antennae.type:
 			outputText("  Your eyebrows feel like they're being drawn upwards, your eyes getting larger and larger until you're almost painfully aware of every color and sound around you. You shake your head and large, floppy bunny ears bounce in front of your eyes.");
 		}
 		outputText("\n\n");
 		
 		outputText("With a happy sigh, the girl rubs your slick honey off of her face and gives your clit a final, pleased lick. She pulls her shrinking phallus from your mouth with a wet slurp, the taste of her cum sweetly icy on your lips. She rises to a crouch and gives your ");
-		if(player.earType != Ears.BUNNY) outputText("new ");
+		if(player.ears.type != Ears.BUNNY) outputText("new ");
 		outputText("ears a playful tweak between her thumb and forefinger. \"<i>Sorry about that, I don't know what came over me! I certainly didn't expect this, though! Kind of makes me want to stick around and see if you and I could pop out more bunnies,</i>\" she winks. \"<i>But unfortunately, I've got to get going! Maybe I'll try to find you again, some time down the line.</i>\" She gives you a moist little kiss and hops away, still energetic after all that. You groan, still recovering from the eggs.");
 		player.tailType = Tail.RABBIT;
-		player.earType = Ears.BUNNY;
+		player.ears.type = Ears.BUNNY;
 		doNext(camp.returnToCampUseOneHour);
 		player.orgasm();
 		dynStats("lib", 1, "sen", 1);

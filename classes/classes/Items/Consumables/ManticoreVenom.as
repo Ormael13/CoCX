@@ -76,15 +76,15 @@ public class ManticoreVenom extends Consumable {
 			changes++;
 		}
 		//Arms
-		if (player.lowerBody == LowerBody.LION && !InCollection(player.armType, Arms.GARGOYLE, Arms.LION) && changes < changeLimit && rand(3) == 0) {
+		if (player.lowerBody == LowerBody.LION && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.LION) && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
-			if (player.armType != Arms.HUMAN) outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. ");
+			if (player.arms.type != Arms.HUMAN) outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. ");
 			outputText("Your hands suddenly start to hurt as your arms grows a thick coat of [skin coat.color] fur up to your shoulders where it turns [haircolor]. You watch enthralled as your nails fall off your fingers, feline claws taking their place on your now five-fingered paw-like hands. <b>You now have leonine paw hands.</b>");
 			mutations.setArmType(Arms.LION);
 			changes++;
 		}
 		//Scorpion tail
-		if (player.armType == Arms.LION && changes < changeLimit && player.tailType != Tail.GARGOYLE && player.tailType != Tail.SCORPION && player.tailType != Tail.MANTICORE_PUSSYTAIL && rand(2) == 0) {
+		if (player.arms.type == Arms.LION && changes < changeLimit && player.tailType != Tail.GARGOYLE && player.tailType != Tail.SCORPION && player.tailType != Tail.MANTICORE_PUSSYTAIL && rand(2) == 0) {
 			if (player.tailType != Tail.NONE) outputText("\n\nPainful swelling just above your " + Appearance.buttDescription(player) + " doubles you over, and you hear the sound of your tail dropping off onto the ground!  Before you can consider the implications, the pain gets worse, and you feel your backside bulge outward sickeningly, cracking and popping as a segmented scorpion-like tail grows in place of your old one.  It grows large enough to be impossible to hide, and with a note of finality, your stinger slides free with an audible 'snick'.  <b>You have a scorpion tail.</b>");
 			else outputText("\n\nPainful swelling just above your " + Appearance.buttDescription(player) + " doubles you over.  It gets worse and worse as the swollen lump begins to protrude from your backside, swelling and extending with a series of pops until you have a segmented tail hanging just above your butt.  The whole thing is covered in a hard chitinous material, and large enough to be impossible to hide.  You sigh as your stinger slides into place with a 'snick', finishing the transformation.  <b>You have a scorpion tail.</b>");
 			mutations.setTailType(Tail.SCORPION);
@@ -99,14 +99,14 @@ public class ManticoreVenom extends Consumable {
 			changes++;
 		}
 		//Wings
-		if ((player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL) && player.wingType != Wings.MANTICORE_LIKE_LARGE && player.wingType != Wings.GARGOYLE_LIKE_LARGE && changes < changeLimit && rand(4) == 0) {
+		if ((player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL) && player.wings.type != Wings.MANTICORE_LIKE_LARGE && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && changes < changeLimit && rand(4) == 0) {
 			//Grow bigger manticore wings!
-			if (player.wingType == Wings.MANTICORE_LIKE_SMALL) {
+			if (player.wings.type == Wings.MANTICORE_LIKE_SMALL) {
 				outputText("\n\nYour feel your wings growing larger by the second. They keep growing until they reach three times their original size. The transformation finally stops as your wings reach a span of twice your arms length. These will be really useful should you want to fly around in search of a meal.  <b>You now have fully grown manticore wings.</b>");
 				mutations.setWingType(Wings.MANTICORE_LIKE_LARGE, "large manticore-like");
 			}
 			//Grow small manticore wings if player has none.
-			else if (player.wingType == Wings.NONE) {
+			else if (player.wings.type == Wings.NONE) {
 				outputText("\n\nYou scream something akin to a roar from the tremendous amount of pain you're suddenly experiencing as something starts to push out from your back. Your claws start digging large marks into the ground as the things stretch out and burst through your skin. Large bones covered in a thin, yet sturdy layer of skin, forming a pair of small bat-like wings slowly push out before finally staying in place. They are too small right now to allow you to take flight but they sure look good on you.  <b>You now have small manticore wings.</b>.");
 				mutations.setWingType(Wings.MANTICORE_LIKE_SMALL, "small manticore-like");
 			}
@@ -117,23 +117,23 @@ public class ManticoreVenom extends Consumable {
 			changes++;
 		}
 		//Back(Rear) body
-		if ((player.wingType == Wings.MANTICORE_LIKE_SMALL || player.wingType == Wings.MANTICORE_LIKE_LARGE) && player.rearBody != RearBody.LION_MANE && changes < changeLimit && rand(3) == 0) {
+		if ((player.wings.type == Wings.MANTICORE_LIKE_SMALL || player.wings.type == Wings.MANTICORE_LIKE_LARGE) && player.rearBody.type != RearBody.LION_MANE && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nYou suddenly feel hair growing all around your neck at a crazy pace. It soon get so thick it almost looks as if you're wearing a [haircolor] fur collar. <b>You now have a full lion mane around your neck.</b>");
 			mutations.setRearBody(RearBody.LION_MANE);
 			changes++;
 		}
 		//Ears
-		if (player.rearBody == RearBody.LION_MANE && player.earType == Ears.HUMAN && player.earType != Ears.LION && changes < changeLimit && rand(3) == 0) {
+		if (player.rearBody.type == RearBody.LION_MANE && player.ears.type == Ears.HUMAN && player.ears.type != Ears.LION && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nYour ears suddenly stretch painfully, making you scream in pain as they move toward the top of your head, growing rounder and bigger. Putting your hands to your ears you discover they are now covered with a fair amount of dark fur. <b>You now have lion ears.</b>");
 			mutations.setEarType(Ears.LION);
 			changes++;
 		}
-		if (player.rearBody == RearBody.LION_MANE && player.earType != Ears.HUMAN && player.earType != Ears.LION && changes < changeLimit && rand(3) == 0) {
+		if (player.rearBody.type == RearBody.LION_MANE && player.ears.type != Ears.HUMAN && player.ears.type != Ears.LION && changes < changeLimit && rand(3) == 0) {
 			mutations.humanizeEars();
 			changes++;
 		}
 		//Face
-		if (player.earType == Ears.LION && player.faceType != Face.MANTICORE && changes < changeLimit && rand(3) == 0) {
+		if (player.ears.type == Ears.LION && player.faceType != Face.MANTICORE && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nY");
 			if (player.faceType != Face.HUMAN) outputText("our face suddenly mold back into it’s former human shape. However you feel your canines changing, elongating into sharp, dagger-like teeth capable of causing severe injuries. Y");
 			outputText("ou feel your canines changing, elongating into sharp, dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. You feel the need to roar like a lion, to show the world how ferocious you look. <b>Your mouth is now filled with dagger-like canines.</b>");
@@ -141,13 +141,13 @@ public class ManticoreVenom extends Consumable {
 			changes++;
 		}
 		//Eyes
-		if (player.faceType == Face.MANTICORE && player.eyeType != Eyes.MANTICORE && changes < changeLimit && rand(3) == 0) {
+		if (player.faceType == Face.MANTICORE && player.eyes.type != Eyes.MANTICORE && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nFor a moment your sight shifts as the ambient light suddenly turns extremely bright, almost blinding you. You walk around disoriented for a moment until the luminosity fades back to normal. You run to a puddle of water to check your reflection and quickly notice your pupils have become cat-like. While you do see way better in the dark, your now red iris are extremely intimidating and clearly don't belong on any normal feline. <b>You now have manticore eyes.</b>");
 			mutations.setEyeTypeAndColor(Eyes.MANTICORE, "red");
 			changes++;
 		}
 		//Cat tounge
-		if (player.faceType == Face.MANTICORE && player.tongueType != Tongue.CAT && rand(3) == 0 && changes < changeLimit) {
+		if (player.faceType == Face.MANTICORE && player.tongue.type != Tongue.CAT && rand(3) == 0 && changes < changeLimit) {
 			outputText("\n\nYour tongue suddenly feels weird. You try to stick it out to see what’s going on and discover it changed to look similar to the tongue of a cat. At least you will be able to groom yourself properly with <b>your new cat tongue.</b>");
 			mutations.setTongueType(Tongue.CAT);
 			changes++;

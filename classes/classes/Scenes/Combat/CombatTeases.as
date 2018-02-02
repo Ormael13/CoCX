@@ -203,11 +203,11 @@ public class CombatTeases extends BaseCombatContent {
 			//Once chance of butt.
 			choices[choices.length] = 4;
 			//Big butts get more butt
-			if (player.buttRating >= 7) choices[choices.length] = 4;
-			if (player.buttRating >= 10) choices[choices.length] = 4;
-			if (player.buttRating >= 14) choices[choices.length] = 4;
-			if (player.buttRating >= 20) choices[choices.length] = 4;
-			if (player.buttRating >= 25) choices[choices.length] = 4;
+			if (player.butt.type >= 7) choices[choices.length] = 4;
+			if (player.butt.type >= 10) choices[choices.length] = 4;
+			if (player.butt.type >= 14) choices[choices.length] = 4;
+			if (player.butt.type >= 20) choices[choices.length] = 4;
+			if (player.butt.type >= 25) choices[choices.length] = 4;
 			//Breast jiggle!
 			if (player.biggestTitSize() >= 2) choices[choices.length] = 5;
 			if (player.biggestTitSize() >= 4) choices[choices.length] = 5;
@@ -227,7 +227,7 @@ public class CombatTeases extends BaseCombatContent {
 				if (player.vaginalCapacity() >= 75) choices[choices.length] = 6;
 			}
 			//Adj special!
-			if (player.hasVagina() && player.buttRating >= 8 && player.hipRating >= 6 && player.biggestTitSize() >= 4) {
+			if (player.hasVagina() && player.butt.type >= 8 && player.hips.type >= 6 && player.biggestTitSize() >= 4) {
 				choices[choices.length] = 7;
 				choices[choices.length] = 7;
 				choices[choices.length] = 7;
@@ -283,11 +283,11 @@ public class CombatTeases extends BaseCombatContent {
 			//Once chance of butt.
 			choices[choices.length] = 0;
 			//Big butts get more butt
-			if (player.buttRating >= 7) choices[choices.length] = 0;
-			if (player.buttRating >= 10) choices[choices.length] = 0;
-			if (player.buttRating >= 14) choices[choices.length] = 0;
-			if (player.buttRating >= 20) choices[choices.length] = 0;
-			if (player.buttRating >= 25) choices[choices.length] = 0;
+			if (player.butt.type >= 7) choices[choices.length] = 0;
+			if (player.butt.type >= 10) choices[choices.length] = 0;
+			if (player.butt.type >= 14) choices[choices.length] = 0;
+			if (player.butt.type >= 20) choices[choices.length] = 0;
+			if (player.butt.type >= 25) choices[choices.length] = 0;
 			//Breast jiggle!
 			if (player.biggestTitSize() >= 2) choices[choices.length] = 1;
 			if (player.biggestTitSize() >= 4) choices[choices.length] = 1;
@@ -626,7 +626,7 @@ public class CombatTeases extends BaseCombatContent {
 			case 0:
 				//Display
 				outputText("You slap your " + buttDescript());
-				if (player.buttRating >= 10 && player.tone < 60) outputText(", making it jiggle delightfully.");
+				if (player.butt.type >= 10 && player.tone < 60) outputText(", making it jiggle delightfully.");
 				else outputText(".");
 				//Mod success
 				ass = true;
@@ -703,7 +703,7 @@ public class CombatTeases extends BaseCombatContent {
 			case 4:
 				outputText("You turn away and bounce your " + buttDescript() + " up and down hypnotically");
 				//Big butts = extra text + higher success
-				if (player.buttRating >= 10) {
+				if (player.butt.type >= 10) {
 					outputText(", making it jiggle delightfully.  " + monster.capitalA + monster.short + " even gets a few glimpses of the " + assholeDescript() + " between your cheeks.");
 					chance += 3;
 				}
@@ -1379,43 +1379,43 @@ public class CombatTeases extends BaseCombatContent {
 				}
 			}
 			if (ass) {
-				if (player.buttRating >= 6) {
+				if (player.butt.type >= 6) {
 					bonusChance += .5;
 					bonusDamage += 1;
 				}
-				if (player.buttRating >= 10) {
+				if (player.butt.type >= 10) {
 					bonusChance += .5;
 					bonusDamage += 1;
 				}
-				if (player.buttRating >= 13) {
+				if (player.butt.type >= 13) {
 					bonusChance += .5;
 					bonusDamage += 1;
 				}
-				if (player.buttRating >= 16) {
+				if (player.butt.type >= 16) {
 					bonusChance += .5;
 					bonusDamage += 1;
 				}
-				if (player.buttRating >= 20) {
+				if (player.butt.type >= 20) {
 					bonusChance += .5;
 					bonusDamage += 1;
 				}
-				if (player.hipRating >= 6) {
+				if (player.hips.type >= 6) {
 					bonusChance += .5;
 					bonusDamage += 1;
 				}
-				if (player.hipRating >= 10) {
+				if (player.hips.type >= 10) {
 					bonusChance += .5;
 					bonusDamage += 1;
 				}
-				if (player.hipRating >= 13) {
+				if (player.hips.type >= 13) {
 					bonusChance += .5;
 					bonusDamage += 1;
 				}
-				if (player.hipRating >= 16) {
+				if (player.hips.type >= 16) {
 					bonusChance += .5;
 					bonusDamage += 1;
 				}
-				if (player.hipRating >= 20) {
+				if (player.hips.type >= 20) {
 					bonusChance += .5;
 					bonusDamage += 1;
 				}

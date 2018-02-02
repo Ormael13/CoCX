@@ -168,8 +168,8 @@ public class FetishCultist extends Monster
 			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 5*12+7;
-			this.hipRating = Hips.RATING_AMPLE;
-			this.buttRating = Butt.RATING_LARGE;
+			this.hips.type = Hips.RATING_AMPLE;
+			this.butt.type = Butt.RATING_LARGE;
 			this.skinTone = "pale";
 			this.hairColor = "black";
 			this.hairLength = 15;

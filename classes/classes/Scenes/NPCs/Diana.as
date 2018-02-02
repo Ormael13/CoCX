@@ -177,8 +177,8 @@ package classes.Scenes.NPCs
 				this.createVagina(true, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_TIGHT);
 				createBreastRow(Appearance.breastCupInverse("F"));
 				this.tallness = 6*12+6;
-				this.hipRating = Hips.RATING_CURVY;
-				this.buttRating = Butt.RATING_LARGE;
+				this.hips.type = Hips.RATING_CURVY;
+				this.butt.type = Butt.RATING_LARGE;
 				this.hairLength = 12;
 				initStrTouSpeInte(25, 25, 25, 75);
 				initWisLibSensCor(25, 50, 50, 50);
@@ -202,8 +202,8 @@ package classes.Scenes.NPCs
 				else this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_NORMAL);
 				createBreastRow(Appearance.breastCupInverse("F"));
 				this.tallness = 6*12+6;
-				this.hipRating = Hips.RATING_CURVY;
-				this.buttRating = Butt.RATING_LARGE;
+				this.hips.type = Hips.RATING_CURVY;
+				this.butt.type = Butt.RATING_LARGE;
 				this.hairLength = 12;
 				initStrTouSpeInte(25, 50, 30, 80);
 				initWisLibSensCor(30, 50, 50, 50);
@@ -227,8 +227,8 @@ package classes.Scenes.NPCs
 				else this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_NORMAL);
 				createBreastRow(Appearance.breastCupInverse("H"));
 				this.tallness = 6*12+8;
-				this.hipRating = Hips.RATING_CURVY+2;
-				this.buttRating = Butt.RATING_LARGE+1;
+				this.hips.type = Hips.RATING_CURVY+2;
+				this.butt.type = Butt.RATING_LARGE+1;
 				this.hairLength = 16;
 				initStrTouSpeInte(30, 75, 35, 80);
 				initWisLibSensCor(50, 50, 50, 50);
@@ -253,8 +253,8 @@ package classes.Scenes.NPCs
 				else this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_NORMAL);
 				createBreastRow(Appearance.breastCupInverse("H"));
 				this.tallness = 6*12+8;
-				this.hipRating = Hips.RATING_CURVY+2;
-				this.buttRating = Butt.RATING_LARGE+1;
+				this.hips.type = Hips.RATING_CURVY+2;
+				this.butt.type = Butt.RATING_LARGE+1;
 				this.hairLength = 16;
 				initStrTouSpeInte(30, 100, 40, 80);
 				initWisLibSensCor(60, 50, 50, 50);

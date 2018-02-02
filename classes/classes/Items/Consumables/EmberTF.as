@@ -62,22 +62,22 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 		player.cocks[select].knotMultiplier = 1.3;
 	}
 	//-Existing horns become draconic, max of 4, max length of 1'
-	if (player.hornType != Horns.DRACONIC_X4_12_INCH_LONG && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(5) == 0) {
+	if (player.horns.type != Horns.DRACONIC_X4_12_INCH_LONG && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(5) == 0) {
 		//No dragon horns yet.
-		if (player.hornType != Horns.DRACONIC_X2 && player.hornType != Horns.DRACONIC_X4_12_INCH_LONG && player.hornType != Horns.ORCHID) {
+		if (player.horns.type != Horns.DRACONIC_X2 && player.horns.type != Horns.DRACONIC_X4_12_INCH_LONG && player.horns.type != Horns.ORCHID) {
 			//Already have horns
-			if (player.horns > 0) {
+			if (player.horns.count > 0) {
 				//High quantity demon horns
-				if (player.hornType == Horns.DEMON && player.horns > 4) {
+				if (player.horns.type == Horns.DEMON && player.horns.count > 4) {
 					outputText("\n\nYour horns condense, twisting around each other and merging into larger, pointed protrusions.  By the time they finish you have four draconic-looking horns, each about twelve inches long.");
                     CoC.instance.mutations.setHornType(Horns.DRACONIC_X4_12_INCH_LONG, 12);
                 }
 				else {
 					outputText("\n\nYou feel your horns changing and warping, and reach back to touch them.  They have a slight curve and a gradual taper.  They must look something like the horns the dragons in your village's legends always had.");
-					player.hornType = Horns.DRACONIC_X2;
-					if (player.horns > 13) {
+					player.horns.type = Horns.DRACONIC_X2;
+					if (player.horns.count > 13) {
 						outputText("  The change seems to have shrunken the horns, they're about a foot long now.");
-						player.horns = 12;
+						player.horns.count = 12;
 					}
 				}
 				changes++;
@@ -85,29 +85,29 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 			//No horns
 			else {
 				//-If no horns, grow a pair
-				outputText("\n\nWith painful pressure, the skin on the sides of your forehead splits around two tiny nub-like horns.  They're angled back in such a way as to resemble those you saw on the dragons in your village's legends.  A few inches of horn sprout from your head before stopping.  <b>You have about four inches of dragon-like horn.</b>");
+				outputText("\n\nWith painful pressure, the skin on the sides of your forehead splits around two tiny nub-like horns.  They're angled back in such a way as to resemble those you saw on the dragons in your village's legends.  A few inches of horns sprout from your head before stopping.  <b>You have about four inches of dragon-like horns.</b>");
                 CoC.instance.mutations.setHornType(Horns.DRACONIC_X2, 4);
                 changes++;
 			}
 		}
 		//ALREADY DRAGON
 		else {
-			if (player.hornType == Horns.DRACONIC_X2) {
-				if (player.horns < 12) {
+			if (player.horns.type == Horns.DRACONIC_X2) {
+				if (player.horns.count < 12) {
 					if (rand(2) == 0) {
-						outputText("\n\nYou get a headache as an inch of fresh horn escapes from your pounding skull.");
-						player.horns += 1;
+						outputText("\n\nYou get a headache as an inch of fresh horns escapes from your pounding skull.");
+						player.horns.count += 1;
 					}
 					else {
 						outputText("\n\nYour head aches as your horns grow a few inches longer.  They get even thicker about the base, giving you a menacing appearance.");
-						player.horns += 2 + rand(4);
+						player.horns.count += 2 + rand(4);
 					}
-					if (player.horns >= 12) outputText("  <b>Your horns settle down quickly, as if they're reached their full size.</b>");
+					if (player.horns.count >= 12) outputText("  <b>Your horns settle down quickly, as if they're reached their full size.</b>");
 					changes++;
 				}
 				//maxxed out, new row
 				else {
-					//--Next horn growth adds second row and brings length up to 12\"
+					//--Next horns growth adds second row and brings length up to 12\"
 					outputText("\n\nA second row of horns erupts under the first, and though they are narrower, they grow nearly as long as your first row before they stop.  A sense of finality settles over you.  <b>You have as many horns as a lizan can grow.</b>");
                     CoC.instance.mutations.setHornType(Horns.DRACONIC_X4_12_INCH_LONG);
                     changes++;
@@ -116,19 +116,19 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 		}
 	}
 	//Gain Dragon Ears
-	if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LowerBody.GARGOYLE && player.earType != Ears.DRAGON) {
+	if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LowerBody.GARGOYLE && player.ears.type != Ears.DRAGON) {
         CoC.instance.mutations.setEarType(Ears.DRAGON);
         outputText("\n\nA prickling sensation suddenly fills your ears; unpleasant, but hardly painful.  It grows and grows until you can't stand it any more, and reach up to scratch at them.  To your surprise, you find them melting away like overheated candles.  You panic as they fade into nothingness, leaving you momentarily deaf and dazed, stumbling around in confusion.  Then, all of a sudden, hearing returns to you.  Gratefully investigating, you find you now have a pair of reptilian ear-holes, one on either side of your head.  A sudden pain strikes your temples, and you feel bony spikes bursting through the sides of your head, three on either side, which are quickly sheathed in folds of skin to resemble fins.  With a little patience, you begin to adjust these fins just like ears to aid your hearing.  <b>You now have dragon ears!</b>");
 		changes++;
 	}
 	//Gain Dragon Eyes
-	if (player.earType == Ears.DRAGON && player.eyeType != Eyes.DRAGON && rand(3) == 0 && changes < changeLimit) {
+	if (player.ears.type == Ears.DRAGON && player.eyes.type != Eyes.DRAGON && rand(3) == 0 && changes < changeLimit) {
         CoC.instance.mutations.setEyeType(Eyes.DRAGON);
         outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a dragon.  <b>You now have dragon eyes!</b>.");
 		changes++;
 	}
 	//Gain Dragon Tongue
-	if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LowerBody.GARGOYLE && player.tongueType != Tongue.DRACONIC) {
+	if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LowerBody.GARGOYLE && player.tongue.type != Tongue.DRACONIC) {
 		outputText("\n\nYour tongue suddenly falls out of your mouth and begins undulating as it grows longer.  For a moment it swings wildly, completely out of control; but then settles down and you find you can control it at will, almost like a limb.  You're able to stretch it to nearly 4 feet and retract it back into your mouth to the point it looks like a normal human tongue.  <b>You now have a draconic tongue.</b>");
         CoC.instance.mutations.setTongueType(Tongue.DRACONIC);
         changes++;
@@ -136,13 +136,13 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 	}
 	//(Pending Tongue Masturbation Variants; if we ever get around to doing that.)
 	//Gain Dragon Head
-	if (changes < changeLimit && rand(3) == 0 && player.tongueType == Tongue.DRACONIC && player.lowerBody != LowerBody.GARGOYLE && player.faceType != Face.DRAGON) {
+	if (changes < changeLimit && rand(3) == 0 && player.tongue.type == Tongue.DRACONIC && player.lowerBody != LowerBody.GARGOYLE && player.faceType != Face.DRAGON) {
 		outputText("\n\nYou scream as your face is suddenly twisted; your facial bones begin rearranging themselves under your skin, restructuring into a long, narrow muzzle.  Spikes of agony rip through your jaws as your teeth are brutally forced from your gums, giving you new rows of fangs - long, narrow and sharp.  Your jawline begins to sprout strange growths; small spikes grow along the underside of your muzzle, giving you an increasingly inhuman visage.\n\nFinally, the pain dies down, and you look for a convenient puddle to examine your changed appearance.\n\nYour head has turned into a reptilian muzzle, with small barbs on the underside of the jaw.  <b>You now have a dragon's face.</b>");
         CoC.instance.mutations.setFaceType(Face.DRAGON);
         changes++;
 	}
 	//Gain Dragon Fangs
-	if (changes < changeLimit && rand(3) == 0 && player.tongueType == Tongue.DRACONIC && player.lowerBody != LowerBody.GARGOYLE && player.faceType != Face.DRAGON_FANGS) {
+	if (changes < changeLimit && rand(3) == 0 && player.tongue.type == Tongue.DRACONIC && player.lowerBody != LowerBody.GARGOYLE && player.faceType != Face.DRAGON_FANGS) {
 		outputText("\n\nSudden agony sweeps over your [face], your visage turning hideous as bones twist and your jawline shifts. The pain slowly vanishes, leaving you weeping into your fingers. When you pull your hands away you realize you've been left with a completely normal, human face. But then your tooth's suddenly hurt as they begin to change. Your canines getting sharper and more adapted to eating meat just like those of a dragon. <b>You now have dragon fangs.</b>");
         CoC.instance.mutations.setFaceType(Face.DRAGON_FANGS);
         changes++;
@@ -199,7 +199,7 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 		changes++;
 	}
 	//Arms
-	if (player.armType != Arms.DRAGON && player.lowerBody == LowerBody.DRAGON && changes < changeLimit && rand(3) == 0) {
+	if (player.arms.type != Arms.DRAGON && player.lowerBody == LowerBody.DRAGON && changes < changeLimit && rand(3) == 0) {
 		outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of dragon one with leathery scales and short claws replacing your fingernails.  <b>You now have a dragon arms.</b>");
 	//	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedLizardArms)) {
 	//		outputText("\n\n<b>Genetic Memory: Lizard Arms - Memorized!</b>\n\n");
@@ -228,18 +228,18 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 	Miss: Unfortunately, you lose your sense of depth as you whirl, and the tip swings harmlessly through the air in front of your target.
 	*/
 	//Grow Dragon Wings
-	if (player.wingType != Wings.DRACONIC_HUGE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
-		if (player.wingType == Wings.NONE) {
+	if (player.wings.type != Wings.DRACONIC_HUGE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+		if (player.wings.type == Wings.NONE) {
 			outputText("\n\nYou double over as waves of pain suddenly fill your shoulderblades; your back feels like it's swelling, flesh and muscles ballooning.  A sudden sound of tearing brings with it relief and you straighten up.  Upon your back now sit small, leathery wings, not unlike a bat's. <b>You now have small dragon wings.  They're not big enough to fly with, but they look adorable.</b>");
             CoC.instance.mutations.setWingType(Wings.DRACONIC_SMALL, "small, draconic");
         }
 		//(If Small Dragon Wings Present)
-		else if (player.wingType == Wings.DRACONIC_SMALL) {
+		else if (player.wings.type == Wings.DRACONIC_SMALL) {
 			outputText("\n\nA not-unpleasant tingling sensation fills your wings, almost but not quite drowning out the odd, tickly feeling as they swell larger and stronger.  You spread them wide - they stretch further than your arms do - and beat them experimentally, the powerful thrusts sending gusts of wind, and almost lifting you off your feet.  <b>You now have fully-grown dragon wings, capable of winging you through the air elegantly!</b>");
             CoC.instance.mutations.setWingType(Wings.DRACONIC_LARGE, "large, draconic");
         }
 		//even larger dragon wings ^^
-		else if (player.wingType == Wings.DRACONIC_LARGE) {
+		else if (player.wings.type == Wings.DRACONIC_LARGE) {
 			outputText("\n\nA not-unpleasant tingling sensation again fills your wings, almost but not quite drowning out the odd, tickly feeling as they swell larger and stronger than before.  You spread them wide - they stretch now more than twice further than your arms do - and beat them experimentally, the powerful thrusts sending gusts of wind, and lifting you off your feet effortlesly.  <b>You now have fully-grown majestic dragon wings, capable of winging you through the air elegantly!</b>");
             CoC.instance.mutations.setWingType(Wings.DRACONIC_HUGE, "large, majestic draconic");
         }

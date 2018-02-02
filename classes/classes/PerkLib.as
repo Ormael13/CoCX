@@ -3369,7 +3369,7 @@ public class PerkLib
                 return player.dragonScore() >= 4;
             }, "Dragon race");
             GorgonsEyes.requireCustomFunction(function (player:Player):Boolean {
-                return player.gorgonScore() >= 5 && player.eyeType == 4;
+                return player.gorgonScore() >= 5 && player.eyes.type == 4;
             }, "Gorgon race and eyes");
             KitsuneThyroidGland.requireAnyPerk(EnlightenedKitsune, CorruptedKitsune).requireCustomFunction(function (player:Player):Boolean {
                 return player.kitsuneScore() >= 5;

@@ -29,8 +29,8 @@ public class Diva extends Monster {
         this.ass.analLooseness= AssClass.LOOSENESS_NORMAL;
         this.ass.analWetness = AssClass.WETNESS_DRY;
         this.tallness = (5*12)+6;
-        this.hipRating = Hips.RATING_CURVY;
-        this.buttRating = Butt.RATING_NOTICEABLE;
+        this.hips.type = Hips.RATING_CURVY;
+        this.butt.type = Butt.RATING_NOTICEABLE;
         this.skinTone = "pale";
         this.hairColor = "blonde";
         this.hairLength = 16;
@@ -40,7 +40,7 @@ public class Diva extends Monster {
         this.weaponVerb = "swoop";
         this.armorName = "dress";
         this.armorDef = levelBonus;
-        this.wingType = Wings.BAT_LIKE_LARGE;
+        this.wings.type = Wings.BAT_LIKE_LARGE;
         this.bonusHP = levelBonus * 500;
         this.bonusLust = 50;
         this.lustVuln = 1;

@@ -435,8 +435,8 @@ public class Evangeline1 extends Monster
 			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.tallness = 90;
-			this.hipRating = Hips.RATING_BOYISH;
-			this.buttRating = Butt.RATING_BUTTLESS;
+			this.hips.type = Hips.RATING_BOYISH;
+			this.butt.type = Butt.RATING_BUTTLESS;
 			this.skin.setBaseOnly({color:"olive"});
 			this.hairColor = "red";
 			this.hairLength = 6;

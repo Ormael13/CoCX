@@ -202,7 +202,7 @@ public function birthFrogEggsAnal():void {
 	outputText("\n\nThe tadgirls splash each other, playing in the water, but take notice as you wake up.  It seems that they were waiting for you - displaying a level of concern that their original mother lacked.  Maybe they got that from you?  They wave and swim away downstream, and you notice that a few of them have a few unusual splashes of color in their hair and skin, looking a bit more like you than their mother.");
 	outputText("\n\nYou nod to yourself, happy to be finished with that ordeal.  As you stand, you notice a bit of heaviness to your hips, and some added slickness to your asshole.\n");
 	//[Anal moistness +2, Hips +1]
-	player.hipRating++;
+	player.hips.type++;
 	player.ass.analWetness += 1;
 	if(player.ass.analWetness > 5) player.ass.analWetness = 5;
 	player.orgasm();
@@ -272,8 +272,8 @@ public function layFrogEggs():void {
 		player.vaginas[0].vaginalWetness++;
 		outputText("  It rapidly becomes clear that it has.  <b>Your pussy is wetter than ever.</b>");
 	}
-	if(player.hipRating < 25) {
-		player.hipRating++;
+	if(player.hips.type < 25) {
+		player.hips.type++;
 		outputText("  There's an extra thickness to your [hips] as well.");
 	}
 	player.orgasm();

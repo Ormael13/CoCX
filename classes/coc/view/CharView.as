@@ -88,7 +88,7 @@ public class CharView extends Sprite {
 		/**/
 		loadPalette(xml);
 		var compiler:CharViewCompiler = new CharViewCompiler(this);
-		this.parts = compiler.compileXMLList(xml.logic.*);
+		this.parts = compiler.compileXMLList(xml.logic.children());
 		var n:int  = 0;
 		var item:XML;
 		for each(item in xml.spritesheet) {

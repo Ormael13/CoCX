@@ -238,7 +238,7 @@ private function roxanneDrinkingContest():void {
 		outputText("  A scaled hand slaps your " + buttDescript() + " spinning you around to fall drunkenly into the pirate's soft, cushy chest.  \"<i>Don't worry, I'll be gentle,</i>\" she whispers, hooking an arm around your sagging frame.");
 		//CHOOSE SEX SCENE
 		//Chance of big booty butt loss!
-		if(player.buttRating > 12 && player.tone <= 50 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00223] > 1 && rand(2) == 0) doNext(bigBootyRoxanneContestLoss);
+		if(player.butt.type > 12 && player.tone <= 50 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00223] > 1 && rand(2) == 0) doNext(bigBootyRoxanneContestLoss);
 		//TO huge or regular anal
 		else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225] >= 200) doNext(roxanneFucksYourAssOHGODITSHUGE);
 		else doNext(roxanneReamsYouNormal);

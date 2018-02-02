@@ -37,11 +37,11 @@ public class BimboLiqueur extends Consumable {
 				//(If vagina = 2tight:
 				if (!game.player.hasVagina()) {
 					outputText("  Before you can even take a breath, an extremely peculiar sensation emanates from your crotch.  You can't see through your " + game.player.armorName + ", but you can certainly feel the vagina splitting " + (game.player.balls > 0 ? "from behind your testicles" : "your groin") + ".  Luckily, the cunt-forming doesn't yield any discomfort - on the contrary, you feel yourself falling farther into your chemically-dulled, libido-fueled rut.");
-					if (game.player.hipRating < 12 || game.player.buttRating < 12) outputText("  As if realizing the necessity of womanly proportions to attract the hard cocks your body now craves, your waist pinches slightly inward and your hips and butt swell.  You can't help but run a hand across your newly-feminized pelvis, admiring it.");
+					if (game.player.hips.type < 12 || game.player.butt.type < 12) outputText("  As if realizing the necessity of womanly proportions to attract the hard cocks your body now craves, your waist pinches slightly inward and your hips and butt swell.  You can't help but run a hand across your newly-feminized pelvis, admiring it.");
 					game.player.createVagina();
 					game.player.clitLength = 0.25;
-					if (game.player.hipRating < 12) game.player.hipRating = 12;
-					if (game.player.buttRating < 12) game.player.buttRating = 12;
+					if (game.player.hips.type < 12) game.player.hips.type = 12;
+					if (game.player.butt.type < 12) game.player.butt.type = 12;
 				}
 				outputText("\n\n");
 				outputText("A wave of numbness rolls through your features, alerting you that another change is happening.  You reach up to your feel your jaw narrowing, becoming more... feminine?  Heavy, filling lips purse in disappointment as your face takes on a very feminine cast.  You're probably pretty hot now!\n\n");
@@ -137,20 +137,20 @@ public class BimboLiqueur extends Consumable {
 
 				outputText("Though the orgasm is intense, you recover a few moments later feeling refreshed, but still hot and horny.  Maybe you could find a partner to fuck?  After all, sex is, like, better with a partner or two.  Or that number after two.  You brush a lengthy, platinum blonde strand of hair out of your eyes and lick your lips - you're ready to have some fun!\n\n");
 
-				if (game.player.hipRating < 12 || game.player.buttRating < 12) {
+				if (game.player.hips.type < 12 || game.player.butt.type < 12) {
 					outputText("As you start to walk off in search of a sexual partner, you feel your center of balance shifting.");
-					if (game.player.hipRating < 12 && game.player.buttRating < 12) {
+					if (game.player.hips.type < 12 && game.player.butt.type < 12) {
 						outputText("  Your ass and hips inflate suddenly, forcing you to adopt a slow, swaying gait.  You find that rolling your hips back and forth comes naturally to you.  You make sure to squeeze your butt-muscles and make your curvy tush jiggle as you go.");
-						game.player.buttRating = 12;
-						game.player.hipRating = 12;
+						game.player.butt.type = 12;
+						game.player.hips.type = 12;
 					}
-					else if (game.player.hipRating < 12) {
+					else if (game.player.hips.type < 12) {
 						outputText("  Your hips widen suddenly, forcing you to adopt a slow, swaying gait.  You find that rolling yours hips back and forth comes naturally to you, and your big, obscene ass seems to jiggle all on its own with every step you take.");
-						game.player.hipRating = 12;
+						game.player.hips.type = 12;
 					}
 					else {
 						outputText("  Your [butt] swells dramatically, the puffy cheeks swelling with newfound weight that jiggles along with each step.  Clenching your glutes to make the posh cheeks jiggle a little more enticingly becomes second nature to you in a few seconds.");
-						game.player.buttRating = 12;
+						game.player.butt.type = 12;
 					}
 					outputText("\n\n");
 				}

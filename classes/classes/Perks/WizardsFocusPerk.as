@@ -11,7 +11,7 @@ package classes.Perks
 
 		override public function desc(params:PerkClass = null):String
 		{
-			return "Increases your spell effect modifier by " + params.value1 * 100 + "%.";
+			return "(+" + params.value1 * 100 + "% Spell Power)";
 		}
 
 		public function WizardsFocusPerk()

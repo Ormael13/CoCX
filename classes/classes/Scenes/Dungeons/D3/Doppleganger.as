@@ -216,10 +216,10 @@ import classes.VaginaClass;
 				this.ballSize = 0;
 			}
 			this.hoursSinceCum = player.hoursSinceCum;
-			hipRating = player.hipRating;
-			if (hipRating < 1) hipRating = 1;
-			buttRating = player.buttRating;
-			if (buttRating < 1) buttRating = 1;
+			hips.type = player.hips.type;
+			if (hips.type < 1) hips.type = 1;
+			butt.type = player.butt.type;
+			if (butt.type < 1) butt.type = 1;
 			lowerBody = player.lowerBody;
 			skinDesc = player.skinDesc;
 			initStrTouSpeInte(player.str, player.tou, player.spe, player.inte);
@@ -292,7 +292,7 @@ import classes.VaginaClass;
 			
 			str += " "  + player.mf("His", "Her") + " [hair] is parted by";
 			
-			switch(player.earType)
+			switch(player.ears.type)
 			{
 				case Ears.HORSE:
 					str += " a pair of horse-like ears";

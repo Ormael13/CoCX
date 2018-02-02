@@ -192,7 +192,7 @@ public class Parser
 					if (isNaN(indice))
 					{
 						if (logErrors) trace("WARNING: Cannot use non-number as indice to Array. Arg " + inputArg + " Subject: " + subject + " Aspect: " + aspect);
-						return "<b>Cannot use non-number as indice to Array \"" + inputArg + "\"! Subject = \"" + subject + ", Aspect = " + aspect + "\</b>";
+						return "<b>Cannot use non-number as indice to Array \"" + inputArg + "\"! Subject = \"" + subject + ", Aspect = " + aspect + "\"</b>";
 					}
 					else
 						return thing[indice]
@@ -208,7 +208,7 @@ public class Parser
 					else
 					{
 						if (logErrors) trace("WARNING: Object does not have aspect as a member. Arg: " + inputArg + " Subject: " + subject + " Aspect:" + aspect + " or " + aspectLookup);
-						return "<b>Object does not have aspect as a member \"" + inputArg + "\"! Subject = \"" + subject + ", Aspect = " + aspect + " or " + aspectLookup + "\</b>";
+						return "<b>Object does not have aspect as a member \"" + inputArg + "\"! Subject = \"" + subject + ", Aspect = " + aspect + " or " + aspectLookup + "\"</b>";
 					}
 				}
 				else
@@ -221,7 +221,7 @@ public class Parser
 			}
 
 			if (lookupParserDebug || logErrors) trace("WARNING: No lookup found for", inputArg, " search result is: ", thing);
-			return "<b>!Unknown subject in two-word tag \"" + inputArg + "\"! Subject = \"" + subject + ", Aspect = " + aspect + "\</b>";
+			return "<b>!Unknown subject in two-word tag \"" + inputArg + "\"! Subject = \"" + subject + ", Aspect = " + aspect + "\"</b>";
 		}
 
 

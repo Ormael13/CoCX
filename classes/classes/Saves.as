@@ -882,20 +882,19 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.tallness = player.tallness;
 		saveFile.data.hairColor = player.hairColor;
 		saveFile.data.hairType = player.hairType;
-		saveFile.data.gillType = player.gillType;
-		saveFile.data.armType = player.armType;
+		saveFile.data.gillType = player.gills.type;
+		saveFile.data.armType = player.arms.type;
 		saveFile.data.hairLength = player.hairLength;
 		saveFile.data.beardLength = player.beardLength;
-		saveFile.data.eyeType = player.eyeType;
-		saveFile.data.eyeColor = player.eyeColor;
+		saveFile.data.eyeType = player.eyes.type;
+		saveFile.data.eyeColor = player.eyes.colour;
 		saveFile.data.beardStyle = player.beardStyle;
-		saveFile.data.tongueType = player.tongueType;
-		saveFile.data.earType = player.earType;
-		saveFile.data.earValue = player.earValue;
-		saveFile.data.antennae = player.antennae;
-		saveFile.data.horns = player.horns;
-		saveFile.data.hornType = player.hornType;
-		saveFile.data.rearBody = player.rearBody;
+		saveFile.data.tongueType = player.tongue.type;
+		saveFile.data.earType = player.ears.type;
+		saveFile.data.antennae = player.antennae.type;
+		saveFile.data.horns = player.horns.count;
+		saveFile.data.hornType = player.horns.type;
+		saveFile.data.rearBody = player.rearBody.type;
 		player.facePart.saveToSaveData(saveFile.data);
 		//player.underBody.saveToSaveData(saveFile.data);
 		player.lowerBodyPart.saveToSaveData(saveFile.data);
@@ -903,10 +902,10 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		player.tail.saveToSaveData(saveFile.data);
 		player.clawsPart.saveToSaveData(saveFile.data);
 
-		saveFile.data.wingDesc = player.wingDesc;
-		saveFile.data.wingType = player.wingType;
-		saveFile.data.hipRating = player.hipRating;
-		saveFile.data.buttRating = player.buttRating;
+		saveFile.data.wingDesc = player.wings.desc;
+		saveFile.data.wingType = player.wings.type;
+		saveFile.data.hipRating = player.hips.type;
+		saveFile.data.buttRating = player.butt.type;
 		
 		//Sexual Stuff
 		saveFile.data.balls = player.balls;
@@ -1730,13 +1729,13 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.femininity = saveFile.data.femininity;
 		//EYES
 		if (saveFile.data.eyeType == undefined)
-			player.eyeType = Eyes.HUMAN;
+			player.eyes.type = Eyes.HUMAN;
 		else
-			player.eyeType = saveFile.data.eyeType;
+			player.eyes.type = saveFile.data.eyeType;
 		if (saveFile.data.eyeColor == undefined)
-			player.eyeColor = "brown";
+			player.eyes.colour = "brown";
 		else
-			player.eyeColor = saveFile.data.eyeColor;
+			player.eyes.colour = saveFile.data.eyeColor;
 		//BEARS
 		if (saveFile.data.beardLength == undefined)
 			player.beardLength = 0;
@@ -1763,15 +1762,15 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		else
 			player.hairType = saveFile.data.hairType;
 		if (saveFile.data.gillType != undefined)
-			player.gillType = saveFile.data.gillType;
+			player.gills.type = saveFile.data.gillType;
 		else if (saveFile.data.gills == undefined)
-			player.gillType = Gills.NONE;
+			player.gills.type = Gills.NONE;
 		else
-			player.gillType = saveFile.data.gills ? Gills.ANEMONE : Gills.NONE;
+			player.gills.type = saveFile.data.gills ? Gills.ANEMONE : Gills.NONE;
 		if (saveFile.data.armType == undefined)
-			player.armType = Arms.HUMAN;
+			player.arms.type = Arms.HUMAN;
 		else
-			player.armType = saveFile.data.armType;
+			player.arms.type = saveFile.data.armType;
 		player.hairLength = saveFile.data.hairLength;
 		player.lowerBodyPart.loadFromSaveData(data);
 		player.skin.loadFromSaveData(data);
@@ -1779,36 +1778,32 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.facePart.loadFromSaveData(data);
 		player.tail.loadFromSaveData(data);
 		if (saveFile.data.tongueType == undefined)
-			player.tongueType = Tongue.HUMAN;
+			player.tongue.type = Tongue.HUMAN;
 		else
-			player.tongueType = saveFile.data.tongueType;
+			player.tongue.type = saveFile.data.tongueType;
 		if (saveFile.data.earType == undefined)
-			player.earType = Ears.HUMAN;
+			player.ears.type = Ears.HUMAN;
 		else
-			player.earType = saveFile.data.earType;
-		if (saveFile.data.earValue == undefined)
-			player.earValue = 0;
-		else
-			player.earValue = saveFile.data.earValue;
+			player.ears.type = saveFile.data.earType;
 		if (saveFile.data.antennae == undefined)
-			player.antennae = Antennae.NONE;
+			player.antennae.type = Antennae.NONE;
 		else
-			player.antennae = saveFile.data.antennae;
-		player.horns = saveFile.data.horns;
+			player.antennae.type = saveFile.data.antennae;
+		player.horns.count = saveFile.data.horns;
 		if (saveFile.data.hornType == undefined)
-			player.hornType = Horns.NONE;
+			player.horns.type = Horns.NONE;
 		else
-			player.hornType = saveFile.data.hornType;
+			player.horns.type = saveFile.data.hornType;
 
 		// <mod name="Dragon patch" author="Stadler76">
 		if (saveFile.data.rearBodyType != undefined)
 			saveFile.data.rearBody = saveFile.data.rearBodyType;
-		player.rearBody = (saveFile.data.rearBody == undefined) ? RearBody.NONE : saveFile.data.rearBody;
+		player.rearBody.type = (saveFile.data.rearBody == undefined) ? RearBody.NONE : saveFile.data.rearBody;
 
-		player.wingDesc = saveFile.data.wingDesc;
-		player.wingType = saveFile.data.wingType;
-		player.hipRating = saveFile.data.hipRating;
-		player.buttRating = saveFile.data.buttRating;
+		player.wings.desc = saveFile.data.wingDesc;
+		player.wings.type = saveFile.data.wingType;
+		player.hips.type = saveFile.data.hipRating;
+		player.butt.type = saveFile.data.buttRating;
 
 		//Sexual Stuff
 		player.balls = saveFile.data.balls;

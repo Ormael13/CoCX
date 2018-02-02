@@ -1,5 +1,4 @@
 package classes.BodyParts {
-import classes.Creature;
 
 public class Hair extends BodyPart {
 	public static const NORMAL:int  = 0;
@@ -18,8 +17,8 @@ public class Hair extends BodyPart {
 	public var color:String = "no";
 	public var length:Number = 0.0;
 	
-	public function Hair(creature:Creature, publicPrimitives:Array) {
-		super(creature, publicPrimitives);
+	public function Hair() {
+		super(null, null);
 	}
 	
 	public override function restore(keepColor:Boolean = true):void {

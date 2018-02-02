@@ -865,7 +865,7 @@ private function domUpSomeHolli():void {
 	outputText("\n\nSlapping your palm down on the other side, you look her right in her oddly gold and black eyes and tell her in no uncertain terms that she is going to serve and service you at your slightest whim.  Any choice she thinks she has is nothing more than an illusion.");
 	var domPowah:Number = player.level;
 	domPowah += player.tallness/12;
-	if(player.horns > 0) domPowah += 3;
+	if(player.horns.count > 0) domPowah += 3;
 	if(player.cor > 66) domPowah += 2;
 	//{fail} 
 	if(domPowah < 20) {
