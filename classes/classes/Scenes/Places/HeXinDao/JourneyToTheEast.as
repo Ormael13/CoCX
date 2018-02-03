@@ -13,16 +13,11 @@ package classes.Scenes.Places.HeXinDao
 		public function JourneyToTheEast() 
 		{}
 		
-		public function enteringInn():void {
+		public function enteringInn(first:Boolean = true):void {
 			clearOutput();
-			outputText("You enter the town local Inn ‘Journey to the East’ and look around. ");
-			reenteringInn2();
-		}
-		public function reenteringInn():void {
-			clearOutput();
-			reenteringInn2();
-		}
-		public function reenteringInn2():void {
+			if(first){
+				outputText("You enter the town local Inn ‘Journey to the East’ and look around. ");
+			}
 			outputText("You can see many people enjoying a meal or drink in the dining hall, a barman standing by ready to serve drinks.");
 			menu();
 			addButton(0, "Drink", drinkAlcohol);
@@ -31,7 +26,7 @@ package classes.Scenes.Places.HeXinDao
 			addButton(14, "Leave", heXinDao.riverislandVillageStuff);
 		}
 		
-		public function drinkAlcohol():void {
+		private function drinkAlcohol():void {
 			clearOutput();
 			outputText("You go sit at the counter and the barman comes over to take your order.\n\n");
 			outputText("\"<i>Good ");
@@ -39,77 +34,31 @@ package classes.Scenes.Places.HeXinDao
 			else outputText("morning");
 			outputText("" + player.mf("mister", "miss") + ", what can I get you?</i>\"\n\n");
 			menu();
-			addButton(0, "ManUp B", buyManupbeer);
-			addButton(1, "Gob.Ale", buyGobale);
-			addButton(2, "NoceLiq", buyNoceliq);
-			addButton(3, "OniSake", buyOnisake);
-			addButton(4, "SalamFW", buySalafw);
+			addButton(0, "ManUp B", buyDrink, consumables.MANUP_B);
+			addButton(1, "Gob.Ale", buyDrink, consumables.GOB_ALE);
+			addButton(2, "NoceLiq", buyDrink, consumables.NOCELIQ);
+			addButton(3, "OniSake", buyDrink, consumables.ONISAKE);
+			addButton(4, "SalamFW", buyDrink, consumables.SALAMFW);
 			addButton(14, "Back", notThirsty);
 		}
-		public function notThirsty():void {
+
+		private function notThirsty():void {
 			clearOutput();
 			outputText("In the end you realise you are not thirsty after all and wave a goodbye before leaving.\n\n");
-			doNext(reenteringInn);
+			doNext(curry(enteringInn,false));
 		}
-		public function buyManupbeer():void {
-			if (player.gems < 18) {
-				outputText("\n\nBarman shakes his head, indicating you need " + String(18 - player.gems) + " more gems to purchase this drink.");
+
+		private function buyDrink(drink:ItemType):void{
+			var cost:int = drink.value * 3;
+			if(player.gems < cost){
+				outputText("\n\nBarman shakes his head, indicating you need " + String(cost - player.gems) + " more gems to purchase this drink.");
 				doNext(drinkAlcohol);
+				return;
 			}
-			else {
-				player.gems -= 18;
-				statScreenRefresh();
-				outputText("\n\nThe barman hands over the drink you ordered.");
-				inventory.takeItem(consumables.MANUP_B, drinkAlcohol);
-			}
-		}
-		public function buyGobale():void {
-			if (player.gems < 18) {
-				outputText("\n\nBarman shakes his head, indicating you need " + String(18 - player.gems) + " more gems to purchase this drink.");
-				doNext(drinkAlcohol);
-			}
-			else {
-				player.gems -= 18;
-				statScreenRefresh();
-				outputText("\n\nThe barman hands over the drink you ordered.");
-				inventory.takeItem(consumables.GOB_ALE, drinkAlcohol);
-			}
-		}
-		public function buyNoceliq():void {
-			if (player.gems < 60) {
-				outputText("\n\nBarman shakes his head, indicating you need " + String(60 - player.gems) + " more gems to purchase this drink.");
-				doNext(drinkAlcohol);
-			}
-			else {
-				player.gems -= 60;
-				statScreenRefresh();
-				outputText("\n\nThe barman hands over the drink you ordered.");
-				inventory.takeItem(consumables.NOCELIQ, drinkAlcohol);
-			}
-		}
-		public function buyOnisake():void {
-			if (player.gems < 18) {
-				outputText("\n\nBarman shakes his head, indicating you need " + String(18 - player.gems) + " more gems to purchase this drink.");
-				doNext(drinkAlcohol);
-			}
-			else {
-				player.gems -= 18;
-				statScreenRefresh();
-				outputText("\n\nThe barman hands over the drink you ordered.");
-				inventory.takeItem(consumables.ONISAKE, drinkAlcohol);
-			}
-		}
-		public function buySalafw():void {
-			if (player.gems < 18) {
-				outputText("\n\nBarman shakes his head, indicating you need " + String(18 - player.gems) + " more gems to purchase this drink.");
-				doNext(drinkAlcohol);
-			}
-			else {
-				player.gems -= 18;
-				statScreenRefresh();
-				outputText("\n\nThe barman hands over the drink you ordered.");
-				inventory.takeItem(consumables.SALAMFW, drinkAlcohol);
-			}
+			player.gems -= cost;
+			statScreenRefresh();
+			outputText("\n\nThe barman hands over the drink you ordered.");
+			inventory.takeItem(drink, drinkAlcohol);
 		}
 		//drink list (to be expanded)
 		//MANUP_B, GOB_ALE, NOCELIQ, ONISAKE, SALAMFW, fire mouse TF, some generic nonTF beers
