@@ -1,6 +1,7 @@
 package classes.Parser {
 import classes.Appearance;
 import classes.CoC;
+import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.Measurements;
 import classes.Scenes.SceneLib;
@@ -484,6 +485,7 @@ public class ParserTags {
         "islactating"   : function ():* { return (CoC.instance.player.lactationQ() > 0); },
         "true"          : function ():* { return true; },
         "false"         : function ():* { return false; },
+	    "silly"         : function ():* { return EngineCore.silly();},
 
         //Prison
         "esteem": function ():* { return CoC.instance.player.esteem; },
