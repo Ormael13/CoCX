@@ -108,20 +108,20 @@ public class BaseCombatContent extends BaseContent {
 	protected function soulskillMod():Number {
 		return combat.soulskillMod();
 	}
-	protected function strenghtscalingbonus():Number {
-		return combat.strenghtscalingbonus();
+	protected function scalingBonusStrength():Number {
+		return combat.scalingBonusStrength();
 	}
-	protected function toughnessscalingbonus():Number {
-		return combat.toughnessscalingbonus();
+	protected function scalingBonusToughness():Number {
+		return combat.scalingBonusToughness();
 	}
-	protected function speedscalingbonus():Number {
-		return combat.speedscalingbonus();
+	protected function scalingBonusSpeed():Number {
+		return combat.scalingBonusSpeed();
 	}
-	protected function inteligencescalingbonus():Number {
-		return combat.inteligencescalingbonus();
+	protected function scalingBonusIntelligence():Number {
+		return combat.scalingBonusIntelligence();
 	}
-	protected function wisdomscalingbonus():Number {
-		return combat.wisdomscalingbonus();
+	protected function scalingBonusWisdom():Number {
+		return combat.scalingBonusWisdom();
 	}
 	protected function spellCost(mod:Number):Number {
 		return combat.magic.spellCostImpl(mod);

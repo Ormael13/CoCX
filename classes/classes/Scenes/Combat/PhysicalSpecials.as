@@ -577,7 +577,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function powerfistspoweeeeer():Number {
 		var powerfistspowervalue:Number = 0;
 		powerfistspowervalue += player.str;
-		powerfistspowervalue += strenghtscalingbonus() * 0.25;
+		powerfistspowervalue += scalingBonusStrength() * 0.25;
 		if (player.hasPerk(PerkLib.HoldWithBothHands) && player.weapon != WeaponLib.FISTS && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) powerfistspowervalue *= 1.2;
 		if (powerfistspowervalue < 10) powerfistspowervalue = 10;
 		if (player.weaponAttack < 51) powerfistspowervalue *= (1 + (player.weaponAttack * 0.03));
@@ -642,7 +642,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		fatigue(50, USEFATG_PHYSICAL);
 		var damage:Number = 0;
 		damage += player.str;
-		if (player.hasPerk(PerkLib.Whirlwind)) damage += strenghtscalingbonus() * 0.2;
+		if (player.hasPerk(PerkLib.Whirlwind)) damage += scalingBonusStrength() * 0.2;
 		if (damage < 10) damage = 10;
 		//weapon bonus
 		if (player.weaponAttack < 101) damage *= (1 + (player.weaponAttack * 0.02));
@@ -730,7 +730,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		var damage:Number = 0;
 		damage += player.str;
-		if (player.hasPerk(PerkLib.Whipping)) damage += strenghtscalingbonus() * 0.2;
+		if (player.hasPerk(PerkLib.Whipping)) damage += scalingBonusStrength() * 0.2;
 		if (damage < 10) damage = 10;
 		//weapon bonus
 		if (player.weaponAttack < 101) damage *= (1 + (player.weaponAttack * 0.02));
@@ -819,8 +819,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		fatigue(50, USEFATG_PHYSICAL);
 		var damage:Number = 0;
-		damage += (strenghtscalingbonus() * 0.2) + player.str + unarmedAttack();
-		if (player.hasPerk(PerkLib.WhirlwindFeral)) damage += (strenghtscalingbonus() * 0.1)  + ((player.str + unarmedAttack()) * 0.5);
+		damage += (scalingBonusStrength() * 0.2) + player.str + unarmedAttack();
+		if (player.hasPerk(PerkLib.WhirlwindFeral)) damage += (scalingBonusStrength() * 0.1) + ((player.str + unarmedAttack()) * 0.5);
 		if (damage < 10) damage = 10;
 		//weapon bonus
 		if (player.weaponAttack < 101) damage *= (1 + (player.weaponAttack * 0.02));
@@ -1052,7 +1052,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (monster.lustVuln > 0) {
 			outputText(" ");
 			var MilkLustDmg:Number = 0;
-			MilkLustDmg += combat.libidoscalingbonus() * 0.2;
+			MilkLustDmg += combat.scalingBonusLibido() * 0.2;
 			monster.teased(MilkLustDmg);
 		}
 		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
@@ -1075,7 +1075,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (monster.lustVuln > 0) {
 			outputText(" ");
 			var CumLustDmg:Number = 0;
-			CumLustDmg += combat.libidoscalingbonus() * 0.2;
+			CumLustDmg += combat.scalingBonusLibido() * 0.2;
 			monster.teased(CumLustDmg);
 		}
 		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
@@ -1398,7 +1398,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		fatigue(60, USEFATG_PHYSICAL);
 		var damage:Number = 0;
 		damage += player.tou;
-		damage += toughnessscalingbonus() * 0.5;
+		damage += scalingBonusToughness() * 0.5;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
 		outputText("You tighten your vines around your opponent's neck to strangle it. " + monster.capitalA + monster.short + " struggles against your natural noose, getting obvious marks on its neck and " + damage + " damage for their trouble.\n\n");
@@ -1414,10 +1414,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var damage:Number = 0;
 		//str bonuses
 		damage += player.str;
-		damage += strenghtscalingbonus() * 0.5;
+		damage += scalingBonusStrength() * 0.5;
 		//tou bonuses
 		damage += player.tou;
-		damage += toughnessscalingbonus() * 0.5;
+		damage += scalingBonusToughness() * 0.5;
 		//addictive bonuses
 		if (player.hasPerk(PerkLib.IronFistsI)) damage += 10;
 		if (player.hasPerk(PerkLib.IronFistsII)) damage += 10;
@@ -1475,10 +1475,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var damage:Number = 0;
 		//str bonuses
 		damage += player.str;
-		damage += strenghtscalingbonus() * 0.25;
+		damage += scalingBonusStrength() * 0.25;
 		//tou bonuses
 		damage += player.tou;
-		damage += toughnessscalingbonus() * 0.25;
+		damage += scalingBonusToughness() * 0.25;
 		//addictive bonuses
 		if (player.hasPerk(PerkLib.IronFistsI)) damage += 10;
 		if (player.hasPerk(PerkLib.IronFistsII)) damage += 10;
@@ -1589,7 +1589,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var damage:Number = 0;
 		//spe bonuses
 		damage += player.spe;
-		damage += speedscalingbonus();
+		damage += scalingBonusSpeed();
 		//other bonuses
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
 		//Determine if critical hit!
@@ -1985,7 +1985,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function mantisMultipleAttacks():void {
 		var damage:Number = 0;
 		damage += player.spe;
-		damage += speedscalingbonus() * 0.2;
+		damage += scalingBonusSpeed() * 0.2;
 		if (damage < 10) damage = 10;
 		//adjusting to be used 60/100% of base speed while attacking depending on insect-related perks possesed
 		if (!player.hasPerk(PerkLib.MantislikeAgility)) damage *= 0.6;
@@ -2370,7 +2370,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Phys dmg!
 		var damage:Number = unarmedAttack();
 		damage += player.spe;
-		damage += speedscalingbonus() * 0.2;
+		damage += scalingBonusSpeed() * 0.2;
 		if (damage < 10) damage = 10;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
@@ -2682,8 +2682,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Determine damage
 		//Base:
 		var damage:Number = unarmedAttack();
-		damage += strenghtscalingbonus() * 0.5;
-		damage += speedscalingbonus() * 0.5;
+		damage += scalingBonusStrength() * 0.5;
+		damage += scalingBonusSpeed() * 0.5;
 		//Leg bonus
 		//Bunny - 20, 1 hoof = 30, 2 hooves = 40, Kangaroo - 50
 		if(player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.PONY || player.lowerBody == LowerBody.CLOVEN_HOOFED)
@@ -2790,7 +2790,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		fatigue(300, USEFATG_BOW);
 		var damage:Number = 0;
 		damage += player.spe;
-		damage += speedscalingbonus() * 0.2;
+		damage += scalingBonusSpeed() * 0.2;
 		if (damage < 10) damage = 10;
 		if (!player.hasPerk(PerkLib.DeadlyAim)) damage *= (monster.damagePercent() / 100);//jak ten perk o ignorowaniu armora bedzie czy coś to tu dać jak nie ma tego perku to sie dolicza
 		//Weapon addition!
@@ -2862,7 +2862,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		fatigue(300, USEFATG_BOW);
 		var damage:Number = 0;
 		damage += player.spe;
-		damage += speedscalingbonus() * 0.2;
+		damage += scalingBonusSpeed() * 0.2;
 		if (damage < 10) damage = 10;
 		if (!player.hasPerk(PerkLib.DeadlyAim)) damage *= (monster.damagePercent() / 100);//jak ten perk o ignorowaniu armora bedzie czy coś to tu dać jak nie ma tego perku to sie dolicza
 		//Weapon addition!

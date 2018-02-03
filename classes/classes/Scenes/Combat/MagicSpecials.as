@@ -901,8 +901,8 @@ public class MagicSpecials extends BaseCombatContent {
 		fatigue(50, USEFATG_MAGIC_NOBM);
 		player.createStatusEffect(StatusEffects.DragonFireBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
-		damage += inteligencescalingbonus();// * 0.5
-		damage += wisdomscalingbonus();// * 0.5
+		damage += scalingBonusIntelligence();// * 0.5
+		damage += scalingBonusWisdom();// * 0.5
 		damage += rand(player.level + player.dragonScore());
 		damage = calcInfernoMod(damage);
 		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
@@ -1026,8 +1026,8 @@ public class MagicSpecials extends BaseCombatContent {
 		fatigue(50, USEFATG_MAGIC_NOBM);
 		player.createStatusEffect(StatusEffects.DragonIceBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
-		damage += inteligencescalingbonus();// * 0.5
-		damage += wisdomscalingbonus();// * 0.5
+		damage += scalingBonusIntelligence();// * 0.5
+		damage += scalingBonusWisdom();// * 0.5
 		damage += rand(player.level + player.dragonScore());
 		damage = calcGlacialMod(damage);
 		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
@@ -1116,8 +1116,8 @@ public class MagicSpecials extends BaseCombatContent {
 		fatigue(50, USEFATG_MAGIC_NOBM);
 		player.createStatusEffect(StatusEffects.DragonLightningBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
-		damage += inteligencescalingbonus();// * 0.5
-		damage += wisdomscalingbonus();// * 0.5
+		damage += scalingBonusIntelligence();// * 0.5
+		damage += scalingBonusWisdom();// * 0.5
 		damage += rand(player.level + player.dragonScore());
 		damage = calcVoltageMod(damage);
 		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
@@ -1207,8 +1207,8 @@ public class MagicSpecials extends BaseCombatContent {
 		fatigue(50, USEFATG_MAGIC_NOBM);
 		player.createStatusEffect(StatusEffects.DragonDarknessBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
-		damage += inteligencescalingbonus();// * 0.5
-		damage += wisdomscalingbonus();// * 0.5
+		damage += scalingBonusIntelligence();// * 0.5
+		damage += scalingBonusWisdom();// * 0.5
 		damage += rand(player.level + player.dragonScore());
 		damage = calcEclypseMod(damage);
 		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
@@ -1806,7 +1806,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		clearOutput();
 		outputText("You grin malevolently and wave an arcane sign, causing infernal fire to surges from below and scorching your opponent \n");
-		var damage:Number = (inteligencescalingbonus() * 0.8) * spellMod();
+		var damage:Number = (scalingBonusIntelligence() * 0.8) * spellMod();
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -2018,7 +2018,7 @@ public class MagicSpecials extends BaseCombatContent {
 		fatigue((100 * kitsuneskillCost()),USEFATG_MAGIC);
 		//Deals direct damage and lust regardless of enemy defenses.  Especially effective against non-corrupted targets.
 		outputText("Holding out your palm, you conjure corrupted purple flame that dances across your fingertips.  You launch it at " + monster.a + monster.short + " with a ferocious throw, and it bursts on impact, showering dazzling lavender sparks everywhere.  ");
-		var damage:Number = (wisdomscalingbonus() * 0.5) + (inteligencescalingbonus() * 0.5);
+		var damage:Number = (scalingBonusWisdom() * 0.5) + (scalingBonusIntelligence() * 0.5);
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -2138,7 +2138,7 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		outputText("Holding out your palms, you conjure an ethereal blue on one palm and corrupted purple flame on other which dances across your fingertips.  After well practised move of fusing them both into one of mixed colors ball of fire you launch it at " + monster.a + monster.short + " with a ferocious throw, and it bursts on impact, showering dazzling azure and lavender sparks everywhere.  ");
-		var damage:Number = (wisdomscalingbonus() * 0.5) + (inteligencescalingbonus() * 0.5);
+		var damage:Number = (scalingBonusWisdom() * 0.5) + (scalingBonusIntelligence() * 0.5);
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -2251,7 +2251,7 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		outputText("Holding out your palm, you conjure an ethereal blue flame that dances across your fingertips.  You launch it at " + monster.a + monster.short + " with a ferocious throw, and it bursts on impact, showering dazzling azure sparks everywhere.  ");
-		var damage:Number = (inteligencescalingbonus() * 0.5) + (wisdomscalingbonus() * 0.5);
+		var damage:Number = (scalingBonusIntelligence() * 0.5) + (scalingBonusWisdom() * 0.5);
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -2717,7 +2717,7 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		var damage:Number = 0;
-		damage += toughnessscalingbonus();
+		damage += scalingBonusToughness();
 		if (monster.hasPerk(PerkLib.EnemyGroupType)) damage *= 5;
 		damage = Math.round(damage);
 		monster.HP -= damage;
@@ -2790,35 +2790,35 @@ public class MagicSpecials extends BaseCombatContent {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 4) {
 					if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 5) {
 						if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 6) {
-							if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 7) damage += inteligencescalingbonus();
-							else damage += inteligencescalingbonus() * 0.8;
+							if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 7) damage += scalingBonusIntelligence();
+							else damage += scalingBonusIntelligence() * 0.8;
 						}
-						else damage += inteligencescalingbonus() * 0.6;
+						else damage += scalingBonusIntelligence() * 0.6;
 					}
-					else damage += inteligencescalingbonus() * 0.4;
+					else damage += scalingBonusIntelligence() * 0.4;
 				}
-				else damage += inteligencescalingbonus() * 0.3;
+				else damage += scalingBonusIntelligence() * 0.3;
 			}
-			else damage += inteligencescalingbonus() * 0.2;
+			else damage += scalingBonusIntelligence() * 0.2;
 		}
-		else damage += inteligencescalingbonus() * 0.1;
+		else damage += scalingBonusIntelligence() * 0.1;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 2) {
 			if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 3) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 4) {
 					if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 5) {
 						if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 6) {
-							if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 7) damage += wisdomscalingbonus();
-							else damage += wisdomscalingbonus() * 0.8;
+							if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 7) damage += scalingBonusWisdom();
+							else damage += scalingBonusWisdom() * 0.8;
 						}
-						else damage += wisdomscalingbonus() * 0.6;
+						else damage += scalingBonusWisdom() * 0.6;
 					}
-					else damage += wisdomscalingbonus() * 0.4;
+					else damage += scalingBonusWisdom() * 0.4;
 				}
-				else damage += wisdomscalingbonus() * 0.3;
+				else damage += scalingBonusWisdom() * 0.3;
 			}
-			else damage += wisdomscalingbonus() * 0.2;
+			else damage += scalingBonusWisdom() * 0.2;
 		}
-		else damage += wisdomscalingbonus() * 0.1;
+		else damage += scalingBonusWisdom() * 0.1;
 		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
 		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
 		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
@@ -2851,35 +2851,35 @@ public class MagicSpecials extends BaseCombatContent {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 4) {
 					if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 5) {
 						if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 6) {
-							if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 7) temp += inteligencescalingbonus();
-							else temp += inteligencescalingbonus() * 0.8;
+							if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 7) temp += scalingBonusIntelligence();
+							else temp += scalingBonusIntelligence() * 0.8;
 						}
-						else temp += inteligencescalingbonus() * 0.6;
+						else temp += scalingBonusIntelligence() * 0.6;
 					}
-					else temp += inteligencescalingbonus() * 0.4;
+					else temp += scalingBonusIntelligence() * 0.4;
 				}
-				else temp += inteligencescalingbonus() * 0.3;
+				else temp += scalingBonusIntelligence() * 0.3;
 			}
-			else temp += inteligencescalingbonus() * 0.2;
+			else temp += scalingBonusIntelligence() * 0.2;
 		}
-		else temp += inteligencescalingbonus() * 0.1;
+		else temp += scalingBonusIntelligence() * 0.1;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 2) {
 			if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 3) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 4) {
 					if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 5) {
 						if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 6) {
-							if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 7) temp += wisdomscalingbonus();
-							else temp += wisdomscalingbonus() * 0.8;
+							if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 7) temp += scalingBonusWisdom();
+							else temp += scalingBonusWisdom() * 0.8;
 						}
-						else temp += wisdomscalingbonus() * 0.6;
+						else temp += scalingBonusWisdom() * 0.6;
 					}
-					else temp += wisdomscalingbonus() * 0.4;
+					else temp += scalingBonusWisdom() * 0.4;
 				}
-				else temp += wisdomscalingbonus() * 0.3;
+				else temp += scalingBonusWisdom() * 0.3;
 			}
-			else temp += wisdomscalingbonus() * 0.2;
+			else temp += scalingBonusWisdom() * 0.2;
 		}
-		else temp += wisdomscalingbonus() * 0.1;
+		else temp += scalingBonusWisdom() * 0.1;
 		temp = Math.round(temp);
 		outputText("Your elemental encases your body within a bubble of curative spring water, slowly closing your wounds. The bubbles pop leaving you wet, but on the way to full recovery. <b>(<font color=\"#008000\">+" + temp + "</font>)</b>");
 		HPChange(temp,false);
@@ -2897,35 +2897,35 @@ public class MagicSpecials extends BaseCombatContent {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 4) {
 					if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 5) {
 						if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 6) {
-							if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 7) damage += inteligencescalingbonus();
-							else damage += inteligencescalingbonus() * 0.8;
+							if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 7) damage += scalingBonusIntelligence();
+							else damage += scalingBonusIntelligence() * 0.8;
 						}
-						else damage += inteligencescalingbonus() * 0.6;
+						else damage += scalingBonusIntelligence() * 0.6;
 					}
-					else damage += inteligencescalingbonus() * 0.4;
+					else damage += scalingBonusIntelligence() * 0.4;
 				}
-				else damage += inteligencescalingbonus() * 0.3;
+				else damage += scalingBonusIntelligence() * 0.3;
 			}
-			else damage += inteligencescalingbonus() * 0.2;
+			else damage += scalingBonusIntelligence() * 0.2;
 		}
-		else damage += inteligencescalingbonus() * 0.1;
+		else damage += scalingBonusIntelligence() * 0.1;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 2) {
 			if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 3) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 4) {
 					if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 5) {
 						if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 6) {
-							if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 7) damage += wisdomscalingbonus();
-							else damage += wisdomscalingbonus() * 0.8;
+							if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 7) damage += scalingBonusWisdom();
+							else damage += scalingBonusWisdom() * 0.8;
 						}
-						else damage += wisdomscalingbonus() * 0.6;
+						else damage += scalingBonusWisdom() * 0.6;
 					}
-					else damage += wisdomscalingbonus() * 0.4;
+					else damage += scalingBonusWisdom() * 0.4;
 				}
-				else damage += wisdomscalingbonus() * 0.3;
+				else damage += scalingBonusWisdom() * 0.3;
 			}
-			else damage += wisdomscalingbonus() * 0.2;
+			else damage += scalingBonusWisdom() * 0.2;
 		}
-		else damage += wisdomscalingbonus() * 0.1;
+		else damage += scalingBonusWisdom() * 0.1;
 		if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
 		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
 		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
@@ -2974,35 +2974,35 @@ public class MagicSpecials extends BaseCombatContent {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 4) {
 					if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 5) {
 						if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 6) {
-							if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 7) temp += inteligencescalingbonus();
-							else temp += inteligencescalingbonus() * 0.4;
+							if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 7) temp += scalingBonusIntelligence();
+							else temp += scalingBonusIntelligence() * 0.4;
 						}
-						else temp += inteligencescalingbonus() * 0.3;
+						else temp += scalingBonusIntelligence() * 0.3;
 					}
-					else temp += inteligencescalingbonus() * 0.2;
+					else temp += scalingBonusIntelligence() * 0.2;
 				}
-				else temp += inteligencescalingbonus() * 0.15;
+				else temp += scalingBonusIntelligence() * 0.15;
 			}
-			else temp += inteligencescalingbonus() * 0.1;
+			else temp += scalingBonusIntelligence() * 0.1;
 		}
-		else temp += inteligencescalingbonus() * 0.05;
+		else temp += scalingBonusIntelligence() * 0.05;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 2) {
 			if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 3) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 4) {
 					if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 5) {
 						if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 6) {
-							if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 7) temp += wisdomscalingbonus();
-							else temp += wisdomscalingbonus() * 0.4;
+							if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 7) temp += scalingBonusWisdom();
+							else temp += scalingBonusWisdom() * 0.4;
 						}
-						else temp += wisdomscalingbonus() * 0.3;
+						else temp += scalingBonusWisdom() * 0.3;
 					}
-					else temp += wisdomscalingbonus() * 0.2;
+					else temp += scalingBonusWisdom() * 0.2;
 				}
-				else temp += wisdomscalingbonus() * 0.15;
+				else temp += scalingBonusWisdom() * 0.15;
 			}
-			else temp += wisdomscalingbonus() * 0.1;
+			else temp += scalingBonusWisdom() * 0.1;
 		}
-		else temp += wisdomscalingbonus() * 0.05;
+		else temp += scalingBonusWisdom() * 0.05;
 		temp = Math.round(temp);
 		outputText("Your elemental temporarily covers your skin with bark, shielding you against strikes. This is the bark of medicinal plants and as such you recover from your injuries. <b>(<font color=\"#008000\">+" + temp + "</font>)</b>");
 		HPChange(temp,false);
@@ -3040,35 +3040,35 @@ public class MagicSpecials extends BaseCombatContent {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 4) {
 					if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 5) {
 						if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 6) {
-							if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 7) damage += inteligencescalingbonus();
-							else damage += inteligencescalingbonus() * 0.8;
+							if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 7) damage += scalingBonusIntelligence();
+							else damage += scalingBonusIntelligence() * 0.8;
 						}
-						else damage += inteligencescalingbonus() * 0.6;
+						else damage += scalingBonusIntelligence() * 0.6;
 					}
-					else damage += inteligencescalingbonus() * 0.4;
+					else damage += scalingBonusIntelligence() * 0.4;
 				}
-				else damage += inteligencescalingbonus() * 0.3;
+				else damage += scalingBonusIntelligence() * 0.3;
 			}
-			else damage += inteligencescalingbonus() * 0.2;
+			else damage += scalingBonusIntelligence() * 0.2;
 		}
-		else damage += inteligencescalingbonus() * 0.1;
+		else damage += scalingBonusIntelligence() * 0.1;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 2) {
 			if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 3) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 4) {
 					if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 5) {
 						if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 6) {
-							if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 7) damage += wisdomscalingbonus();
-							else damage += wisdomscalingbonus() * 0.8;
+							if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 7) damage += scalingBonusWisdom();
+							else damage += scalingBonusWisdom() * 0.8;
 						}
-						else damage += wisdomscalingbonus() * 0.6;
+						else damage += scalingBonusWisdom() * 0.6;
 					}
-					else damage += wisdomscalingbonus() * 0.4;
+					else damage += scalingBonusWisdom() * 0.4;
 				}
-				else damage += wisdomscalingbonus() * 0.3;
+				else damage += scalingBonusWisdom() * 0.3;
 			}
-			else damage += wisdomscalingbonus() * 0.2;
+			else damage += scalingBonusWisdom() * 0.2;
 		}
-		else damage += wisdomscalingbonus() * 0.1;
+		else damage += scalingBonusWisdom() * 0.1;
 		if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
 		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.5;
 		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;
@@ -3102,35 +3102,35 @@ public class MagicSpecials extends BaseCombatContent {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 4) {
 					if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 5) {
 						if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 6) {
-							if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 7) damage += inteligencescalingbonus();
-							else damage += inteligencescalingbonus() * 0.8;
+							if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 7) damage += scalingBonusIntelligence();
+							else damage += scalingBonusIntelligence() * 0.8;
 						}
-						else damage += inteligencescalingbonus() * 0.6;
+						else damage += scalingBonusIntelligence() * 0.6;
 					}
-					else damage += inteligencescalingbonus() * 0.4;
+					else damage += scalingBonusIntelligence() * 0.4;
 				}
-				else damage += inteligencescalingbonus() * 0.3;
+				else damage += scalingBonusIntelligence() * 0.3;
 			}
-			else damage += inteligencescalingbonus() * 0.2;
+			else damage += scalingBonusIntelligence() * 0.2;
 		}
-		else damage += inteligencescalingbonus() * 0.1;
+		else damage += scalingBonusIntelligence() * 0.1;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 2) {
 			if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 3) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 4) {
 					if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 5) {
 						if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 6) {
-							if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 7) damage += wisdomscalingbonus();
-							else damage += wisdomscalingbonus() * 0.8;
+							if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 7) damage += scalingBonusWisdom();
+							else damage += scalingBonusWisdom() * 0.8;
 						}
-						else damage += wisdomscalingbonus() * 0.6;
+						else damage += scalingBonusWisdom() * 0.6;
 					}
-					else damage += wisdomscalingbonus() * 0.4;
+					else damage += scalingBonusWisdom() * 0.4;
 				}
-				else damage += wisdomscalingbonus() * 0.3;
+				else damage += scalingBonusWisdom() * 0.3;
 			}
-			else damage += wisdomscalingbonus() * 0.2;
+			else damage += scalingBonusWisdom() * 0.2;
 		}
-		else damage += wisdomscalingbonus() * 0.1;
+		else damage += scalingBonusWisdom() * 0.1;
 		if (monster.hasPerk(PerkLib.LightningNature)) damage *= 0.2;
 		if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 0.5;
 		if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 2;
@@ -3163,35 +3163,35 @@ public class MagicSpecials extends BaseCombatContent {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 4) {
 					if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 5) {
 						if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 6) {
-							if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 7) damage += inteligencescalingbonus();
-							else damage += inteligencescalingbonus() * 0.8;
+							if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 7) damage += scalingBonusIntelligence();
+							else damage += scalingBonusIntelligence() * 0.8;
 						}
-						else damage += inteligencescalingbonus() * 0.6;
+						else damage += scalingBonusIntelligence() * 0.6;
 					}
-					else damage += inteligencescalingbonus() * 0.4;
+					else damage += scalingBonusIntelligence() * 0.4;
 				}
-				else damage += inteligencescalingbonus() * 0.3;
+				else damage += scalingBonusIntelligence() * 0.3;
 			}
-			else damage += inteligencescalingbonus() * 0.2;
+			else damage += scalingBonusIntelligence() * 0.2;
 		}
-		else damage += inteligencescalingbonus() * 0.1;
+		else damage += scalingBonusIntelligence() * 0.1;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 2) {
 			if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 3) {
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 4) {
 					if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 5) {
 						if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 6) {
-							if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 7) damage += wisdomscalingbonus();
-							else damage += wisdomscalingbonus() * 0.8;
+							if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 7) damage += scalingBonusWisdom();
+							else damage += scalingBonusWisdom() * 0.8;
 						}
-						else damage += wisdomscalingbonus() * 0.6;
+						else damage += scalingBonusWisdom() * 0.6;
 					}
-					else damage += wisdomscalingbonus() * 0.4;
+					else damage += scalingBonusWisdom() * 0.4;
 				}
-				else damage += wisdomscalingbonus() * 0.3;
+				else damage += scalingBonusWisdom() * 0.3;
 			}
-			else damage += wisdomscalingbonus() * 0.2;
+			else damage += scalingBonusWisdom() * 0.2;
 		}
-		else damage += wisdomscalingbonus() * 0.1;
+		else damage += scalingBonusWisdom() * 0.1;
 		if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 0.2;
 		if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 0.5;
 		if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 2;

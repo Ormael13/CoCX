@@ -1234,7 +1234,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		clearOutput();
 		outputText("You narrow your eyes, focusing your own lust with deadly intent.  At the palm of your hand form ice spike that shots toward " + monster.a + monster.short + " !\n");
-		var damage:Number = inteligencescalingbonus() * spellModBlack();
+		var damage:Number = scalingBonusIntelligence() * spellModBlack();
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1301,7 +1301,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		clearOutput();
 		outputText("You narrow your eyes, focusing your own lust with deadly intent.  At the palm of your hand form a shard from pure darkness that shots toward " + monster.a + monster.short + " !\n");
-		var damage:Number = inteligencescalingbonus() * spellModBlack();
+		var damage:Number = scalingBonusIntelligence() * spellModBlack();
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1369,7 +1369,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		clearOutput();
 		outputText("You narrow your eyes, focusing your own lust and willpower with a deadly intent.  Above you starting to form small darn cloud that soon becoming quite wide and long.  Then almost endless rain of ice shards start to downpour on " + monster.a + monster.short + " and the rest of your surrounding!\n");
-		var damage:Number = inteligencescalingbonus() * spellMod();
+		var damage:Number = scalingBonusIntelligence() * spellMod();
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1441,7 +1441,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		clearOutput();
 		outputText("You narrow your eyes, focusing your own lust and willpower with a deadly intent.  Around you starting to form small vortex of flames that soon becoming quite wide.  Then with a single thought you sends all that fire like a unstoppable storm toward " + monster.a + monster.short + " and the rest of your surrounding!\n");
-		var damage:Number = inteligencescalingbonus() * spellMod();
+		var damage:Number = scalingBonusIntelligence() * spellMod();
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1725,8 +1725,8 @@ public class CombatMagic extends BaseCombatContent {
 	}
 	public function spellHealEffect():void {
 		var heal:Number = 0;
-		heal += inteligencescalingbonus();
-		if (player.hasPerk(PerkLib.WisenedHealer)) heal += wisdomscalingbonus();
+		heal += scalingBonusIntelligence();
+		if (player.hasPerk(PerkLib.WisenedHealer)) heal += scalingBonusWisdom();
 		heal *= healModWhite();
 		if (player.unicornScore() >= 5) heal *= ((player.unicornScore() - 4) * 0.5);
 		if (player.alicornScore() >= 6) heal *= ((player.alicornScore() - 5) * 0.5);
@@ -1874,7 +1874,7 @@ public class CombatMagic extends BaseCombatContent {
 			//Attack gains burn DoT for 2-3 turns.
 			outputText("You let loose a roiling cone of flames that wash over the horde of demons like a tidal wave, scorching at their tainted flesh with vigor unlike anything you've seen before. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!");
 			monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
-			damage = inteligencescalingbonus() *spellModWhite();
+			damage = scalingBonusIntelligence() * spellModWhite();
 			//Determine if critical hit!
 			var crit:Boolean = false;
 			var critChance:int = 5;
@@ -1896,7 +1896,7 @@ public class CombatMagic extends BaseCombatContent {
 			clearOutput();
 			outputText("You narrow your eyes, focusing your mind with deadly intent.  You snap your fingers and " + monster.a + monster.short + " is enveloped in a flash of white flames!\n");
 			if(monster is Diva){(monster as Diva).handlePlayerSpell("whitefire");}
-			damage = inteligencescalingbonus() * spellModWhite();
+			damage = scalingBonusIntelligence() * spellModWhite();
 			//Determine if critical hit!
 			var crit2:Boolean = false;
 			var critChance2:int = 5;
@@ -1974,7 +1974,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		clearOutput();
 		outputText("You charge out energy in your hand and fire it out in the form of a powerful bolt of lightning at " + monster.a + monster.short + " !\n");
-		var damage:Number = inteligencescalingbonus() * spellModWhite();
+		var damage:Number = scalingBonusIntelligence() * spellModWhite();
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
