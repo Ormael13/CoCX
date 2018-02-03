@@ -710,7 +710,6 @@ import classes.Scenes.UniqueSexScenes;
 			else outputText(" feels hungrier than ever.  ");
 			outputText("You shove your crotch into your milk-dazed foe's white-stained visage, grinding your " + vaginaDescript(0) + " into her mouth until you cum all over her");
 			if(player.cocks.length == 0) {
-				temp = rand(3);
 				if(player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_SLAVERING) outputText(", soaking her with girl-cum.");
 				else {
 					if(player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_WET) outputText(", slicking her face with girlish cum.");

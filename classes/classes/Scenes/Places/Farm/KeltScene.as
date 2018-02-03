@@ -542,17 +542,27 @@ private function keltMainEncounter3():void {
 	//(Clothed)
 	if(!player.hasStatusEffect(StatusEffects.NakedOn)) {
 		outputText("Kelt is arrogant, crude, and all too often cruel as he mocks your attempts at archery again and again.  Despite all this, however, he obviously does know what he's doing.  You try to ignore his insults and lewd comments as best as you can and focus on the archery.  In the end, you feel you've learned a lot, though Kelt remains snide.\r\r");
-		temp = rand(4);
-		//(25% Chance: 
-		if(temp == 0) outputText("\"<i>Oh, yes.  Looks like you're shaping up to be a pretty accurate archer.  Just make sure you only fight blind giants.  You know, massive targets that have no chance to dodge.  You'll do fine.</i>\"\r\r");
-		//(25% Chance: 
-		if(temp == 1) outputText("\"<i>Ha!  You want to become an archer?  Here's a hint... stop thinking about sucking cock for two seconds and AIM.</i>\"\r\r");
-		//(25% Chance: 
-		if(temp == 2) outputText("\"<i>See the red dot, in the middle of the target?  Imagine that's your ass, and the arrow is a big, fat, minotaur cock.  That should help you hit the target.</i>\"\r\r");
-		//(25% Chance: 
-		if(temp == 3) {
-			if(player.race() != "centaur") outputText("\"<i>If you were a centaur, I'd recommend suicide.  Since you're a [race], I'd say your best option is to fuck off.</i>\"\r\r");
-			else outputText("\"<i>As a centaur, I'd recommend suicide.  Really, it's that or man the fuck up.</i>\"\r\r");
+		switch (rand(4)) {
+			case 0:
+				outputText("\"<i>Oh, yes.  Looks like you're shaping up to be a pretty accurate archer.  Just make sure you only fight blind giants.  You know, massive targets that have no chance to dodge.  You'll do fine.</i>\"\r\r");
+				break;
+
+			case 1:
+				outputText("\"<i>Ha!  You want to become an archer?  Here's a hint... stop thinking about sucking cock for two seconds and AIM.</i>\"\r\r");
+				break;
+
+			case 2:
+				outputText("\"<i>See the red dot, in the middle of the target?  Imagine that's your ass, and the arrow is a big, fat, minotaur cock.  That should help you hit the target.</i>\"\r\r");
+				break;
+
+			case 3:
+				if (player.race() != "centaur") {
+					outputText("\"<i>If you were a centaur, I'd recommend suicide.  Since you're a [race], I'd say your best option is to fuck off.</i>\"\r\r");
+				} else {
+					outputText("\"<i>As a centaur, I'd recommend suicide.  Really, it's that or man the fuck up.</i>\"\r\r");
+				}
+
+				break;
 		}
 		//player.addStatusValue(StatusEffects.Kelt,1,5+rand(4));
 		if (player.statusEffectv1(StatusEffects.Kelt) < 90) bowSkill(5 + rand(4));

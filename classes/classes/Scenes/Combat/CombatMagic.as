@@ -1155,8 +1155,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.EverLastingBuffs)) BlinkDuration += 5;
 			if (player.hasPerk(PerkLib.EternalyLastingBuffs)) BlinkDuration += 5;
 			player.createStatusEffect(StatusEffects.Blink,0,0,BlinkDuration,0);
-			temp = BlinkBoost;
-			tempSpe = temp;
+			tempSpe = BlinkBoost;
 			//if(player.spe + temp > 100) tempSpe = 100 - player.spe;
 			player.changeStatusValue(StatusEffects.Blink,1,tempSpe);
 			mainView.statsView.showStatUp('spe');

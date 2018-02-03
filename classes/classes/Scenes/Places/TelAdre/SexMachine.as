@@ -249,8 +249,7 @@ private function useTheSexMachine():void {
 	}
 	//PREG IT UP!
 	if(player.hasVagina()) {
-		temp = rand(6);
-		switch(temp) {
+		switch(rand(6)) {
 			case 0:
 				player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR);
 				break;

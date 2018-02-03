@@ -1043,16 +1043,32 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 	//AMILY
 	if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0 && !descOnly) {
 		outputText("Amily is currently strolling around your camp, ");
-		temp = rand(6);
-		if(temp == 0) {
-			outputText("dripping water and stark naked from a bath in the stream");
-			if(player.hasStatusEffect(StatusEffects.CampRathazul)) outputText(".  Rathazul glances over and immediately gets a nosebleed");
+		switch (rand(6)) {
+			case 0:
+				outputText("dripping water and stark naked from a bath in the stream");
+				if (player.hasStatusEffect(StatusEffects.CampRathazul)) outputText(".  Rathazul glances over and immediately gets a nosebleed");
+
+				break;
+
+			case 1:
+				outputText("slouching in the shade of some particularly prominent rocks, whittling twigs to create darts for her blowpipe");
+				break;
+
+			case 2:
+				outputText("dipping freshly-made darts into a jar of something that looks poisonous");
+				break;
+
+			case 3:
+				outputText("eating some of your supplies");
+				break;
+
+			case 4:
+				outputText("and she flops down on her nest to have a rest");
+				break;
+			default:
+				outputText("peeling the last strips of flesh off of an imp's skull and putting it on a particularly flat, sun-lit rock to bleach as a trophy");
+				break;
 		}
-		else if(temp == 1) outputText("slouching in the shade of some particularly prominent rocks, whittling twigs to create darts for her blowpipe");
-		else if(temp == 2) outputText("dipping freshly-made darts into a jar of something that looks poisonous");
-		else if(temp == 3) outputText("eating some of your supplies");
-		else if(temp == 4) outputText("and she flops down on her nest to have a rest");
-		else outputText("peeling the last strips of flesh off of an imp's skull and putting it on a particularly flat, sun-lit rock to bleach as a trophy");
 		outputText(".\n\n");
 		buttons.add("Amily", amilyScene.amilyFollowerEncounter);
 	}
@@ -1228,7 +1244,6 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 	}
 	//MARBLE
 	if(player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) {
-		temp = rand(5);
 		outputText("A second bedroll rests next to yours; a large two handed hammer sometimes rests against it, depending on whether or not its owner needs it at the time.  ");
 		//Normal Murbles
 		if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 4) outputText("Marble isn’t here right now; she’s still off to see her family.");
@@ -1276,19 +1291,35 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 				}
 			}
 		}
-		//(Choose one of these at random to display each hour)
-		else if(temp == 0) outputText("Marble herself has gone off to Whitney's farm to get milked right now.");
-		else if(temp == 1) outputText("Marble herself has gone off to Whitney's farm to do some chores right now.");
-		else if(temp == 2) outputText("Marble herself isn't at the camp right now; she is probably off getting supplies, though she'll be back soon enough.");
-		else if(temp == 3) {
-			outputText("Marble herself is resting on her bedroll right now.");
+		else{
+			//(Choose one of these at random to display each hour)
+			var c:int = rand(5);
+			switch (c) {
+				case 0:
+					outputText("Marble herself has gone off to Whitney's farm to get milked right now.");
+					break;
+
+				case 1:
+					outputText("Marble herself has gone off to Whitney's farm to do some chores right now.");
+					break;
+
+				case 2:
+					outputText("Marble herself isn't at the camp right now; she is probably off getting supplies, though she'll be back soon enough.");
+					break;
+
+				case 3:
+					outputText("Marble herself is resting on her bedroll right now.");
+					break;
+
+				case 4:
+					outputText("Marble herself is wandering around the camp right now.");
+					break;
+			}
+			if(c < 3) {
+				outputText("  You're sure she'd be back in moments if you needed her.");
+			}
 		}
-		else if(temp == 4) {
-			outputText("Marble herself is wandering around the camp right now.");
-		}
-		if(temp < 3) {
-			outputText("  You're sure she'd be back in moments if you needed her.");
-		}
+
 		//Out getting family
 		//else outputText("Marble is out in the wilderness right now, searching for a relative.");
 		outputText("\n\n");

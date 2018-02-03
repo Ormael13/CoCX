@@ -1012,12 +1012,11 @@ private function edrynPregChance():void {
 		preg = true;
 	}*/
 	//1% chance per 500mLs of cum, max 5%
-	temp = player.cumQ()/500;
-	if(temp > 5) temp = 5;
-	temp += player.virilityQ() * 200;
+	var score:Number = Math.min(player.cumQ()/500,5);
+	score += player.virilityQ() * 200;
 
-	trace("Edryn Preg Check Virility Score: " + temp);
-	if(player.cumQ() > 250 && temp >= rand(100)) {
+	trace("Edryn Preg Check Virility Score: " + score);
+	if(player.cumQ() > 250 && score >= rand(100)) {
 		preg = true;
 		trace("Edryn knocked up!");
 	}

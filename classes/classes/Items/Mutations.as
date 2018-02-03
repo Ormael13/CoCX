@@ -126,32 +126,33 @@ public final class Mutations extends MutationsHelper
 				if (player.cocks.length == 1) {
 					if (player.cocks[0].cockType != CockTypesEnum.DEMON) outputText("\n\nYour [cock] becomes shockingly hard.  It turns a shiny inhuman purple and spasms, dribbling hot demon-like cum as it begins to grow.");
 					else outputText("\n\nYour [cock] becomes shockingly hard.  It dribbles hot demon-like cum as it begins to grow.");
-					if (rand(4) == 0) temp = player.increaseCock(0, 3);
-					else temp = player.increaseCock(0, 1);
-					dynStats("int", 1, "lib", 2, "sen", 1, "lust", 5 + temp * 3, "cor", tainted ? 1 : 0);
-					if (temp < .5) outputText("  It stops almost as soon as it starts, growing only a tiny bit longer.");
-					if (temp >= .5 && temp < 1) outputText("  It grows slowly, stopping after roughly half an inch of growth.");
-					if (temp >= 1 && temp <= 2) outputText("  The sensation is incredible as more than an inch of lengthened dick-flesh grows in.");
-					if (temp > 2) outputText("  You smile and idly stroke your lengthening [cock] as a few more inches sprout.");
-					if (tainted) dynStats("int", 1, "lib", 2, "sen", 1, "lus", 5 + temp * 3, "cor", 1);
-					else dynStats("int", 1, "lib", 2, "sen", 1, "lus", 5 + temp * 3);
+					var selectedCock:int;
+					if (rand(4) == 0) selectedCock = player.increaseCock(0, 3);
+					else selectedCock = player.increaseCock(0, 1);
+					dynStats("int", 1, "lib", 2, "sen", 1, "lust", 5 + selectedCock * 3, "cor", tainted ? 1 : 0);
+					if (selectedCock < .5) outputText("  It stops almost as soon as it starts, growing only a tiny bit longer.");
+					if (selectedCock >= .5 && selectedCock < 1) outputText("  It grows slowly, stopping after roughly half an inch of growth.");
+					if (selectedCock >= 1 && selectedCock <= 2) outputText("  The sensation is incredible as more than an inch of lengthened dick-flesh grows in.");
+					if (selectedCock > 2) outputText("  You smile and idly stroke your lengthening [cock] as a few more inches sprout.");
+					if (tainted) dynStats("int", 1, "lib", 2, "sen", 1, "lus", 5 + selectedCock * 3, "cor", 1);
+					else dynStats("int", 1, "lib", 2, "sen", 1, "lus", 5 + selectedCock * 3);
 					if (player.cocks[0].cockType != CockTypesEnum.DEMON) outputText("  With the transformation complete, your [cock] returns to its normal coloration.");
 					else outputText("  With the transformation complete, your [cock] throbs in an almost happy way as it goes flaccid once more.");
 				}
 				if (player.cocks.length > 1) {
-					temp = player.cocks.length;
+					selectedCock = player.cocks.length;
 					temp2 = 0;
 					//Find shortest cock
-					while (temp > 0) {
-						temp--;
-						if (player.cocks[temp].cockLength <= player.cocks[temp2].cockLength) {
-							temp2 = temp;
+					while (selectedCock > 0) {
+						selectedCock--;
+						if (player.cocks[selectedCock].cockLength <= player.cocks[temp2].cockLength) {
+							temp2 = selectedCock;
 						}
 					}
 					if (int(Math.random() * 4) == 0) temp3 = player.increaseCock(temp2, 3);
 					else temp3 = player.increaseCock(temp2, 1);
-					if (tainted) dynStats("int", 1, "lib", 2, "sen", 1, "lus", 5 + temp * 3, "cor", 1);
-					else dynStats("int", 1, "lib", 2, "sen", 1, "lus", 5 + temp * 3);
+					if (tainted) dynStats("int", 1, "lib", 2, "sen", 1, "lus", 5 + selectedCock * 3, "cor", 1);
+					else dynStats("int", 1, "lib", 2, "sen", 1, "lus", 5 + selectedCock * 3);
 					//Grammar police for 2 cocks
 					if (player.cockTotal() == 2) outputText("\n\nBoth of your [cocks] become shockingly hard, swollen and twitching as they turn a shiny inhuman purple in color.  They spasm, dripping thick ropes of hot demon-like pre-cum along their lengths as your shortest " + player.cockDescript(temp2) + " begins to grow.");
 					//For more than 2
@@ -186,12 +187,12 @@ public final class Mutations extends MutationsHelper
 			if (rando >= 50 && rando < 93) {
 				if (player.cocks.length > 1) {
 					outputText("\n\nYour cocks fill to full-size... and begin growing obscenely.  ");
-					temp = player.cocks.length;
-					while (temp > 0) {
-						temp--;
-						temp2 = player.increaseCock(temp, rand(3) + 2);
-						temp3 = player.cocks[temp].thickenCock(1);
-						if (temp3 < .1) player.cocks[temp].cockThickness += .05;
+					selectedCock = player.cocks.length;
+					while (selectedCock > 0) {
+						selectedCock--;
+						temp2 = player.increaseCock(selectedCock, rand(3) + 2);
+						temp3 = player.cocks[selectedCock].thickenCock(1);
+						if (temp3 < .1) player.cocks[selectedCock].cockThickness += .05;
 					}
 					player.lengthChange(temp2, player.cocks.length);
 					//Display the degree of thickness change.
@@ -279,7 +280,7 @@ public final class Mutations extends MutationsHelper
 
 		public function growDemonCock(growCocks:Number):void
 		{
-			temp = 0;
+			var grown:int = 0;
 			while (growCocks > 0) {
 				player.createCock();
 				trace("COCK LENGTH: " + player.cocks[length - 1].cockLength);
@@ -287,16 +288,16 @@ public final class Mutations extends MutationsHelper
 				player.cocks[player.cocks.length - 1].cockThickness = .75;
 				trace("COCK LENGTH: " + player.cocks[length - 1].cockLength);
 				growCocks--;
-				temp++;
+				grown++;
 			}
 			outputText("\n\nYou shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ");
-			if (temp == 1) {
+			if (grown == 1) {
 				outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  In time it fades to a more normal coloration and human-like texture.  ");
 			}
 			else {
-				outputText("The skin bulges obscenely, darkening and splitting around " + num2Text(temp) + " of your new dicks.  For an instant they turn a demonic purple and dribble in thick spasms of scalding demon-cum.  After, they return to a more humanoid coloration.  ");
+				outputText("The skin bulges obscenely, darkening and splitting around " + num2Text(grown) + " of your new dicks.  For an instant they turn a demonic purple and dribble in thick spasms of scalding demon-cum.  After, they return to a more humanoid coloration.  ");
 			}
-			if (temp > 4) outputText("Your tender bundle of new cocks feels deliciously sensitive, and you cannot stop yourself from wrapping your hands around the slick demonic bundle and pleasuring them.\n\nNearly an hour later, you finally pull your slick body away from the puddle you left on the ground.  When you look back, you notice it has already been devoured by the hungry earth.");
+			if (grown > 4) outputText("Your tender bundle of new cocks feels deliciously sensitive, and you cannot stop yourself from wrapping your hands around the slick demonic bundle and pleasuring them.\n\nNearly an hour later, you finally pull your slick body away from the puddle you left on the ground.  When you look back, you notice it has already been devoured by the hungry earth.");
 			player.orgasm('Dick');
 		}
 
@@ -421,15 +422,14 @@ public final class Mutations extends MutationsHelper
 			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//Breast growth (maybe cock reduction!)
 			if (rando <= 75) {
-				//Temp stores the level of growth...
-				temp = 1 + rand(3);
+				var growth:int = 1 + rand(3);
 				if (player.breastRows.length > 0) {
-					if (player.breastRows[0].breastRating < 2 && rand(3) == 0) temp++;
-					if (player.breastRows[0].breastRating < 5 && rand(4) == 0) temp++;
-					if (player.breastRows[0].breastRating < 6 && rand(5) == 0) temp++;
+					if (player.breastRows[0].breastRating < 2 && rand(3) == 0) growth++;
+					if (player.breastRows[0].breastRating < 5 && rand(4) == 0) growth++;
+					if (player.breastRows[0].breastRating < 6 && rand(5) == 0) growth++;
 				}
 				outputText("\n\n");
-				player.growTits(temp, player.breastRows.length, true, 3);
+				player.growTits(growth, player.breastRows.length, true, 3);
 				if (player.breastRows.length == 0) {
 					outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
 					player.createBreastRow();
@@ -443,26 +443,26 @@ public final class Mutations extends MutationsHelper
 				{
 					// Shrink cocks if you have them.
 					if (player.cocks.length > 0) {
-						temp = 0;
+						var index:int = 0;
 						temp2 = player.cocks.length;
 						temp3 = 0;
 						//Find biggest cock
 						while (temp2 > 0) {
 							temp2--;
-							if (player.cocks[temp].cockLength <= player.cocks[temp2].cockLength) temp = temp2;
+							if (player.cocks[index].cockLength <= player.cocks[temp2].cockLength) index = temp2;
 						}
 						//Shrink said cock
-						if (player.cocks[temp].cockLength < 6 && player.cocks[temp].cockLength >= 2.9) {
-							player.cocks[temp].cockLength -= .5;
+						if (player.cocks[index].cockLength < 6 && player.cocks[index].cockLength >= 2.9) {
+							player.cocks[index].cockLength -= .5;
 							temp3 -= .5;
-							if (player.cocks[temp].cockThickness * 6 > player.cocks[temp].cockLength) player.cocks[temp].cockThickness -= .2;
-							if (player.cocks[temp].cockThickness * 8 > player.cocks[temp].cockLength) player.cocks[temp].cockThickness -= .2;
-							if (player.cocks[temp].cockThickness < .5) player.cocks[temp].cockThickness = .5;
+							if (player.cocks[index].cockThickness * 6 > player.cocks[index].cockLength) player.cocks[index].cockThickness -= .2;
+							if (player.cocks[index].cockThickness * 8 > player.cocks[index].cockLength) player.cocks[index].cockThickness -= .2;
+							if (player.cocks[index].cockThickness < .5) player.cocks[index].cockThickness = .5;
 						}
-						temp3 += player.increaseCock(temp, (rand(3) + 1) * -1);
+						temp3 += player.increaseCock(index, (rand(3) + 1) * -1);
 						outputText("\n\n");
 						player.lengthChange(temp3, 1);
-						if (player.cocks[temp].cockLength < 2) {
+						if (player.cocks[index].cockLength < 2) {
 							outputText("  ");
 							player.killCocks(1);
 						}
@@ -483,20 +483,20 @@ public final class Mutations extends MutationsHelper
 				//Shrink cawk
 				if (player.cocks.length > 0 && !flags[kFLAGS.HYPER_HAPPY]) {
 					outputText("\n\n");
-					temp = 0;
+					index = 0;
 					temp2 = player.cocks.length;
 					//Find biggest cock
 					while (temp2 > 0) {
 						temp2--;
-						if (player.cocks[temp].cockLength <= player.cocks[temp2].cockLength) temp = temp2;
+						if (player.cocks[index].cockLength <= player.cocks[temp2].cockLength) index = temp2;
 					}
 					//Shrink said cock
-					if (player.cocks[temp].cockLength < 6 && player.cocks[temp].cockLength >= 2.9) {
-						player.cocks[temp].cockLength -= .5;
+					if (player.cocks[index].cockLength < 6 && player.cocks[index].cockLength >= 2.9) {
+						player.cocks[index].cockLength -= .5;
 					}
-					temp3 = player.increaseCock(temp, -1 * (rand(3) + 1));
+					temp3 = player.increaseCock(index, -1 * (rand(3) + 1));
 					player.lengthChange(temp3, 1);
-					if (player.cocks[temp].cockLength < 3) {
+					if (player.cocks[index].cockLength < 3) {
 						outputText("  ");
 						player.killCocks(1);
 					}
@@ -530,10 +530,10 @@ public final class Mutations extends MutationsHelper
 					if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY) {
 						outputText("You feel a tingling in your crotch, but cannot identify it.");
 					}
-					temp = player.vaginas.length;
-					while (temp > 0) {
-						temp--;
-						if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLAVERING) player.vaginas[temp].vaginalWetness++;
+					index = player.vaginas.length;
+					while (index > 0) {
+						index--;
+						if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLAVERING) player.vaginas[index].vaginalWetness++;
 					}
 				}
 			}
@@ -545,7 +545,7 @@ public final class Mutations extends MutationsHelper
 						if (player.clitLength > 5 && player.findPerk(PerkLib.BigClit) >= 0) outputText("  Eventually it shrinks back down to its normal (but still HUGE) size.  You guess it can't get any bigger.");
 						if (((player.findPerk(PerkLib.BigClit) >= 0) && player.clitLength < 6)
 								|| player.clitLength < 3) {
-							temp += 2;
+							index += 2;
 							player.clitLength += (rand(4) + 2) / 10;
 						}
 						dynStats("sen", 3, "lus", 8);
@@ -560,11 +560,25 @@ public final class Mutations extends MutationsHelper
 					}
 				}
 				else {
-					temp = rand(10);
-					if (temp == 0) player.skinTone = "shiny black";
-					if (temp == 1 || temp == 2) player.skinTone = "indigo";
-					if (temp == 3 || temp == 4 || temp == 5) player.skinTone = "purple";
-					if (temp > 5) player.skinTone = "blue";
+					switch (rand(10)){
+						case 0:
+							player.skinTone = "shiny black";
+							break;
+
+						case 1:
+						case 2:
+							player.skinTone = "indigo";
+							break;
+
+						case 3:
+						case 4:
+						case 5:
+							player.skinTone = "purple";
+							break;
+
+						default:
+							player.skinTone = "blue";
+					}
 					outputText("\n\nA tingling sensation runs across your skin in waves, growing stronger as <b>your skin's tone slowly shifts, darkening to become " + player.skinTone + " in color.</b>");
 					if (tainted) dynStats("cor", 1);
 					else dynStats("cor", 0);
@@ -644,21 +658,21 @@ public final class Mutations extends MutationsHelper
 					changes++;
 				}
 				if (player.wolfCocks() > 0 && changes < changeLimit && rand(2) == 0) {
-					temp = 0;
+					var choice:int = 0;
 					//set temp2 to first wolfdick for initialization
-					while (temp < player.cocks.length) {
-						if (player.cocks[temp].cockType == CockTypesEnum.WOLF) {
-							temp2 = temp;
+					while (choice < player.cocks.length) {
+						if (player.cocks[choice].cockType == CockTypesEnum.WOLF) {
+							temp2 = choice;
 							break;
 						}
-						else temp++;
+						else choice++;
 					}
-					//Reset temp for nex tcheck
-					temp = player.cocks.length;
+					//Reset choice for nex tcheck
+					choice = player.cocks.length;
 					//Find smallest knot
-					while (temp > 0) {
-						temp--;
-						if (player.cocks[temp].cockType == CockTypesEnum.WOLF && player.cocks[temp].knotMultiplier < player.cocks[temp2].knotMultiplier) temp2 = temp;
+					while (choice > 0) {
+						choice--;
+						if (player.cocks[choice].cockType == CockTypesEnum.WOLF && player.cocks[choice].knotMultiplier < player.cocks[temp2].knotMultiplier) temp2 = choice;
 					}
 					//Have smallest knotted cock selected.
 					temp3 = (rand(2) + 1) / 40;
@@ -676,7 +690,7 @@ public final class Mutations extends MutationsHelper
 
 			//Female Stuff
 
-		//	outputText("\n\nYour " + cockDescript(temp) + " clenches painfully, becoming achingly, throbbingly erect. A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a canine-looking sheath. ");
+		//	outputText("\n\nYour " + cockDescript(choice) + " clenches painfully, becoming achingly, throbbingly erect. A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a canine-looking sheath. ");
 		//	outputText("You shudder as the crown of your prick reshapes into a point, the sensations nearly too much for you. You throw back your head as the transformation completes, your knotted wolf-cock much thicker than it ever was before.");
 		//	outputText("  <b>You now have a wolf-cock.</b>");
 
@@ -687,8 +701,8 @@ public final class Mutations extends MutationsHelper
 					//Doggies only get 3 rows of tits! FENOXO HAS SPOKEN
 					if (player.breastRows.length < 3 && rand(2) == 0 && changes < changeLimit) {
 						player.createBreastRow();
-						//Store temp to the index of the newest row
-						temp = player.breastRows.length - 1;
+						//Store choice to the index of the newest row
+						choice = player.breastRows.length - 1;
 						//Breasts are too small to grow a new row, so they get bigger first
 						//But ONLY if player has a vagina (dont want dudes weirded out)
 						if (player.vaginas.length > 0 && player.breastRows[0].breastRating <= player.breastRows.length) {
@@ -700,9 +714,9 @@ public final class Mutations extends MutationsHelper
 						//Had 1 row to start
 						if (player.breastRows.length == 2) {
 							//1 size below primary breast row!
-							player.breastRows[temp].breastRating = player.breastRows[0].breastRating - 1;
+							player.breastRows[choice].breastRating = player.breastRows[0].breastRating - 1;
 							if (player.breastRows[0].breastRating - 1 == 0) outputText("\n\nA second set of breasts forms under your current pair, stopping while they are still fairly flat and masculine looking.");
-							else outputText("\n\nA second set of breasts bulges forth under your current pair, stopping as they reach " + player.breastCup(temp) + "s.");
+							else outputText("\n\nA second set of breasts bulges forth under your current pair, stopping as they reach " + player.breastCup(choice) + "s.");
 							outputText("  A sensitive nub grows on the summit of each new tit, becoming a new nipple.");
 							dynStats("sen", 6, "lus", 5);
 							changes++;
@@ -711,13 +725,13 @@ public final class Mutations extends MutationsHelper
 						if (player.breastRows.length > 2 && player.breastRows[0].breastRating > player.breastRows.length) {
 							dynStats("sen", 6, "lus", 5);
 							//New row's size = the size of the row above -1
-							player.breastRows[temp].breastRating = player.breastRows[temp - 1].breastRating - 1;
+							player.breastRows[choice].breastRating = player.breastRows[choice - 1].breastRating - 1;
 							//If second row are super small but primary row is huge it could go negative.
 							//This corrects that problem.
-							if (player.breastRows[temp].breastRating < 0) player.breastRows[temp].breastRating = 0;
-							if (player.breastRows[temp - 1].breastRating < 0) player.breastRows[temp - 1].breastRating = 0;
-							if (player.breastRows[temp].breastRating == 0) outputText("\n\nYour abdomen tingles and twitches as a new row of breasts sprouts below the others.  Your new breasts stay flat and masculine, not growing any larger.");
-							else outputText("\n\nYour abdomen tingles and twitches as a new row of " + player.breastCup(temp) + " " + breastDescript(temp) + " sprouts below your others.");
+							if (player.breastRows[choice].breastRating < 0) player.breastRows[choice].breastRating = 0;
+							if (player.breastRows[choice - 1].breastRating < 0) player.breastRows[choice - 1].breastRating = 0;
+							if (player.breastRows[choice].breastRating == 0) outputText("\n\nYour abdomen tingles and twitches as a new row of breasts sprouts below the others.  Your new breasts stay flat and masculine, not growing any larger.");
+							else outputText("\n\nYour abdomen tingles and twitches as a new row of " + player.breastCup(choice) + " " + breastDescript(choice) + " sprouts below your others.");
 							outputText("  A sensitive nub grows on the summit of each new tit, becoming a new nipple.");
 							changes++;
 						}
@@ -736,30 +750,30 @@ public final class Mutations extends MutationsHelper
 					//If already has max doggie breasts!
 					else if (rand(2) == 0) {
 						//Check for size mismatches, and move closer to spec!
-						temp = player.breastRows.length;
+						choice = player.breastRows.length;
 						temp2 = 0;
 						var evened:Boolean = false;
 						//Check each row, and if the row above or below it is
-						while (temp > 1 && temp2 == 0) {
-							temp--;
+						while (choice > 1 && temp2 == 0) {
+							choice--;
 							//Gimme a sec
-							if (player.breastRows[temp].breastRating + 1 < player.breastRows[temp - 1].breastRating) {
+							if (player.breastRows[choice].breastRating + 1 < player.breastRows[choice - 1].breastRating) {
 								if (!evened) {
 									evened = true;
 									outputText("\n");
 								}
 								outputText("\nYour ");
-								if (temp == 0) outputText("first ");
-								if (temp == 1) outputText("second ");
-								if (temp == 2) outputText("third ");
-								if (temp == 3) outputText("fourth ");
-								if (temp == 4) outputText("fifth ");
-								if (temp > 4) outputText("");
-								outputText("row of " + breastDescript(temp) + " grows larger, as if jealous of the jiggling flesh above.");
-								temp2 = (player.breastRows[temp - 1].breastRating) - player.breastRows[temp].breastRating - 1;
+								if (choice == 0) outputText("first ");
+								if (choice == 1) outputText("second ");
+								if (choice == 2) outputText("third ");
+								if (choice == 3) outputText("fourth ");
+								if (choice == 4) outputText("fifth ");
+								if (choice > 4) outputText("");
+								outputText("row of " + breastDescript(choice) + " grows larger, as if jealous of the jiggling flesh above.");
+								temp2 = (player.breastRows[choice - 1].breastRating) - player.breastRows[choice].breastRating - 1;
 								if (temp2 > 5) temp2 = 5;
 								if (temp2 < 1) temp2 = 1;
-								player.breastRows[temp].breastRating += temp2;
+								player.breastRows[choice].breastRating += temp2;
 							}
 						}
 					}
@@ -1014,13 +1028,13 @@ public final class Mutations extends MutationsHelper
 			}
 			//OVERDOSE Bad End!
 			if (type <= 0 && crit > 1 && player.hasFullCoatOfType(Skin.FUR) && player.faceType == Face.DOG && player.ears.type == Ears.DOG && player.lowerBody == LowerBody.DOG && player.tailType == Tail.DOG && rand(2) == 0 && player.hasStatusEffect(StatusEffects.DogWarning) && player.findPerk(PerkLib.TransformationResistance) < 0) {
-				temp = rand(2);
-				if (temp == 0) {
+				var choice:int = rand(2);
+				if (choice == 0) {
 					outputText("\n\nAs you swallow the pepper, you note that the spicy hotness on your tongue seems to be spreading. Your entire body seems to tingle and burn, making you feel far warmer than normal, feverish even. Unable to stand it any longer you tear away your clothes, hoping to cool down a little. Sadly, this does nothing to aid you with your problem. On the bright side, the sudden feeling of vertigo you've developed is more than enough to take your mind off your temperature issues. You fall forward onto your hands and knees, well not really hands and knees to be honest. More like paws and knees. That can't be good, you think for a moment, before the sensation of your bones shifting into a quadrupedal configuration robs you of your concentration. After that, it is only a short time before your form is remade completely into that of a large dog, or perhaps a wolf. The distinction would mean little to you now, even if you were capable of comprehending it. ");
 					if (player.findPerk(PerkLib.MarblesMilk) >= 0) outputText("All you know is that there is a scent on the wind, it is time to hunt, and at the end of the day you need to come home for your milk.");
 					else outputText("All you know is that there is a scent on the wind, and it is time to hunt.");
 				}
-				if (temp == 1) outputText("\n\nYou devour the sweet pepper, carefully licking your fingers for all the succulent juices of the fruit, and are about to go on your way when suddenly a tightness begins to build in your chest and stomach, horrid cramps working their way first through your chest, then slowly flowing out to your extremities, the feeling soon joined by horrible, blood-curdling cracks as your bones begin to reform, twisting and shifting, your mind exploding with pain. You fall to the ground, reaching one hand forward. No... A paw, you realize in horror, as you try to push yourself back up. You watch in horror, looking down your foreleg as thicker fur erupts from your skin, a [haircolor] coat slowly creeping from your bare flesh to cover your body. Suddenly, you feel yourself slipping away, as if into a dream, your mind warping and twisting, your body finally settling into its new form. With one last crack of bone you let out a yelp, kicking free of the cloth that binds you, wresting yourself from its grasp and fleeing into the now setting sun, eager to find prey to dine on tonight.");
+				if (choice == 1) outputText("\n\nYou devour the sweet pepper, carefully licking your fingers for all the succulent juices of the fruit, and are about to go on your way when suddenly a tightness begins to build in your chest and stomach, horrid cramps working their way first through your chest, then slowly flowing out to your extremities, the feeling soon joined by horrible, blood-curdling cracks as your bones begin to reform, twisting and shifting, your mind exploding with pain. You fall to the ground, reaching one hand forward. No... A paw, you realize in horror, as you try to push yourself back up. You watch in horror, looking down your foreleg as thicker fur erupts from your skin, a [haircolor] coat slowly creeping from your bare flesh to cover your body. Suddenly, you feel yourself slipping away, as if into a dream, your mind warping and twisting, your body finally settling into its new form. With one last crack of bone you let out a yelp, kicking free of the cloth that binds you, wresting yourself from its grasp and fleeing into the now setting sun, eager to find prey to dine on tonight.");
 				EventParser.gameOver();
 				return;
 			}
@@ -1137,21 +1151,21 @@ public final class Mutations extends MutationsHelper
 				if (player.cockTotal() > 0) {
 					//biggify knots
 					if (player.dogCocks() > 0) {
-						temp = 0;
+						choice = 0;
 						//set temp2 to first dogdick for initialization
-						while (temp < player.cocks.length) {
-							if (player.cocks[temp].cockType == CockTypesEnum.DOG) {
-								temp2 = temp;
+						while (choice < player.cocks.length) {
+							if (player.cocks[choice].cockType == CockTypesEnum.DOG) {
+								temp2 = choice;
 								break;
 							}
-							else temp++;
+							else choice++;
 						}
-						//Reset temp for nex tcheck
-						temp = player.cocks.length;
+						//Reset choice for nex tcheck
+						choice = player.cocks.length;
 						//Find smallest knot
-						while (temp > 0) {
-							temp--;
-							if (player.cocks[temp].cockType == CockTypesEnum.DOG && player.cocks[temp].knotMultiplier < player.cocks[temp2].knotMultiplier) temp2 = temp;
+						while (choice > 0) {
+							choice--;
+							if (player.cocks[choice].cockType == CockTypesEnum.DOG && player.cocks[choice].knotMultiplier < player.cocks[temp2].knotMultiplier) temp2 = choice;
 						}
 						//Have smallest knotted cock selected.
 						temp3 = (rand(2) + 5) / 20 * crit;
@@ -1204,21 +1218,21 @@ public final class Mutations extends MutationsHelper
 			if (player.cocks.length > 0) {
 				//Grow knot on smallest knotted dog cock
 				if (type != 4 && player.dogCocks() > 0 && ((changes < changeLimit && rand(1.4) == 0) || type == 1)) {
-					temp = 0;
+					choice = 0;
 					//set temp2 to first dogdick for initialization
-					while (temp < player.cocks.length) {
-						if (player.cocks[temp].cockType == CockTypesEnum.DOG) {
-							temp2 = temp;
+					while (choice < player.cocks.length) {
+						if (player.cocks[choice].cockType == CockTypesEnum.DOG) {
+							temp2 = choice;
 							break;
 						}
-						else temp++;
+						else choice++;
 					}
-					//Reset temp for nex tcheck
-					temp = player.cocks.length;
+					//Reset choice for nex tcheck
+					choice = player.cocks.length;
 					//Find smallest knot
-					while (temp > 0) {
-						temp--;
-						if (player.cocks[temp].cockType == CockTypesEnum.DOG && player.cocks[temp].knotMultiplier < player.cocks[temp2].knotMultiplier) temp2 = temp;
+					while (choice > 0) {
+						choice--;
+						if (player.cocks[choice].cockType == CockTypesEnum.DOG && player.cocks[choice].knotMultiplier < player.cocks[temp2].knotMultiplier) temp2 = choice;
 					}
 					//Have smallest knotted cock selected.
 					temp3 = (rand(2) + 1) / 20 * crit;
@@ -1235,13 +1249,13 @@ public final class Mutations extends MutationsHelper
 				//Cock Xform if player has free cocks.
 				if (player.dogCocks() < player.cocks.length && ((changes < changeLimit && rand(1.6)) && type != 6 || type == 1) == 0) {
 					//Select first human cock
-					temp = player.cocks.length;
+					choice = player.cocks.length;
 					temp2 = 0;
-					while (temp > 0 && temp2 == 0) {
-						temp--;
+					while (choice > 0 && temp2 == 0) {
+						choice--;
 						//Store cock index if not a dogCock and exit loop.
-						if (player.cocks[temp].cockType != CockTypesEnum.DOG) {
-							temp3 = temp;
+						if (player.cocks[choice].cockType != CockTypesEnum.DOG) {
+							temp3 = choice;
 							//kicking out of tah loop!
 							temp2 = 1000;
 						}
@@ -1272,18 +1286,18 @@ public final class Mutations extends MutationsHelper
 						outputText("\n\nYour " + cockDescript(temp3) + " trembles, reshaping itself into a shiny red doggie-dick with a fat knot at the base.  <b>You now have a dog-cock.</b>");
 						dynStats("sen", 4, "lus", 5 * crit);
 					}
-					temp = 0;
+					choice = 0;
 					//Demon
 					if (player.cocks[temp3].cockType == CockTypesEnum.DEMON) {
 						outputText("\n\nYour " + cockDescript(temp3) + " color shifts red for a moment and begins to swell at the base, but within moments it smooths out, retaining its distinctive demonic shape, only perhaps a bit thicker.");
 						dynStats("sen", 1, "lus", 2 * crit);
-						temp = 1;
+						choice = 1;
 					}
 					//Xform it!
 					player.cocks[temp3].cockType = CockTypesEnum.DOG;
 					player.cocks[temp3].knotMultiplier = 1.1;
 					player.cocks[temp3].thickenCock(2);
-					if (temp == 1) {
+					if (choice == 1) {
 						player.cocks[temp3].cockType = CockTypesEnum.DEMON;
 					}
 					changes++;
@@ -1291,10 +1305,10 @@ public final class Mutations extends MutationsHelper
 				}
 				//Cum Multiplier Xform
 				if (player.cumMultiplier < 2 && rand(2) == 0 && changes < changeLimit && type != 6) {
-					temp = 1.5;
+					choice = 1.5;
 					//Lots of cum raises cum multiplier cap to 2 instead of 1.5
-					if (player.findPerk(PerkLib.MessyOrgasms) >= 0) temp = 2;
-					if (temp < player.cumMultiplier + .05 * crit) {
+					if (player.findPerk(PerkLib.MessyOrgasms) >= 0) choice = 2;
+					if (choice < player.cumMultiplier + .05 * crit) {
 						changes--;
 					}
 					else {
@@ -1312,33 +1326,33 @@ public final class Mutations extends MutationsHelper
 					//single cock
 					if (player.cocks.length == 1) {
 						temp2 = player.increaseCock(0, rand(4) + 3);
-						temp = 0;
+						choice = 0;
 						dynStats("sen", 1, "lus", 10);
 					}
 					//Multicock
 					else {
 						//Find smallest cock
 						//Temp2 = smallness size
-						//temp = current smallest
+						//choice = current smallest
 						temp3 = player.cocks.length;
-						temp = 0;
+						choice = 0;
 						while (temp3 > 0) {
 							temp3--;
 							//If current cock is smaller than saved, switch values.
-							if (player.cocks[temp].cockLength > player.cocks[temp3].cockLength) {
+							if (player.cocks[choice].cockLength > player.cocks[temp3].cockLength) {
 								temp2 = player.cocks[temp3].cockLength;
-								temp = temp3;
+								choice = temp3;
 							}
 						}
 						//Grow smallest cock!
 						//temp2 changes to growth amount
-						temp2 = player.increaseCock(temp, rand(4) + 3);
+						temp2 = player.increaseCock(choice, rand(4) + 3);
 						dynStats("sen", 1, "lus", 10);
-						if (player.cocks[temp].cockThickness <= 2) player.cocks[temp].thickenCock(1);
+						if (player.cocks[choice].cockThickness <= 2) player.cocks[choice].thickenCock(1);
 					}
-					if (temp2 > 2) outputText("\n\nYour " + cockDescript(temp) + " tightens painfully, inches of bulging dick-flesh pouring out from your crotch as it grows longer.  Thick pre forms at the pointed tip, drawn out from the pleasure of the change.");
-					if (temp2 > 1 && temp2 <= 2) outputText("\n\nAching pressure builds within your crotch, suddenly releasing as an inch or more of extra dick-flesh spills out.  A dollop of pre beads on the head of your enlarged " + cockDescript(temp) + " from the pleasure of the growth.");
-					if (temp2 <= 1) outputText("\n\nA slight pressure builds and releases as your " + cockDescript(temp) + " pushes a bit further out of your crotch.");
+					if (temp2 > 2) outputText("\n\nYour " + cockDescript(choice) + " tightens painfully, inches of bulging dick-flesh pouring out from your crotch as it grows longer.  Thick pre forms at the pointed tip, drawn out from the pleasure of the change.");
+					if (temp2 > 1 && temp2 <= 2) outputText("\n\nAching pressure builds within your crotch, suddenly releasing as an inch or more of extra dick-flesh spills out.  A dollop of pre beads on the head of your enlarged " + cockDescript(choice) + " from the pleasure of the growth.");
+					if (temp2 <= 1) outputText("\n\nA slight pressure builds and releases as your " + cockDescript(choice) + " pushes a bit further out of your crotch.");
 				}
 			}
 			//Female Stuff
@@ -1349,8 +1363,8 @@ public final class Mutations extends MutationsHelper
 					//Doggies only get 3 rows of tits! FENOXO HAS SPOKEN
 					if (player.breastRows.length < 3 && rand(2) == 0 && changes < changeLimit) {
 						player.createBreastRow();
-						//Store temp to the index of the newest row
-						temp = player.breastRows.length - 1;
+						//Store choice to the index of the newest row
+						choice = player.breastRows.length - 1;
 						//Breasts are too small to grow a new row, so they get bigger first
 						//But ONLY if player has a vagina (dont want dudes weirded out)
 						if (player.vaginas.length > 0 && player.breastRows[0].breastRating <= player.breastRows.length) {
@@ -1362,9 +1376,9 @@ public final class Mutations extends MutationsHelper
 						//Had 1 row to start
 						if (player.breastRows.length == 2) {
 							//1 size below primary breast row!
-							player.breastRows[temp].breastRating = player.breastRows[0].breastRating - 1;
+							player.breastRows[choice].breastRating = player.breastRows[0].breastRating - 1;
 							if (player.breastRows[0].breastRating - 1 == 0) outputText("\n\nA second set of breasts forms under your current pair, stopping while they are still fairly flat and masculine looking.");
-							else outputText("\n\nA second set of breasts bulges forth under your current pair, stopping as they reach " + player.breastCup(temp) + "s.");
+							else outputText("\n\nA second set of breasts bulges forth under your current pair, stopping as they reach " + player.breastCup(choice) + "s.");
 							outputText("  A sensitive nub grows on the summit of each new tit, becoming a new nipple.");
 							dynStats("sen", 6, "lus", 5);
 							changes++;
@@ -1373,13 +1387,13 @@ public final class Mutations extends MutationsHelper
 						if (player.breastRows.length > 2 && player.breastRows[0].breastRating > player.breastRows.length) {
 							dynStats("sen", 6, "lus", 5);
 							//New row's size = the size of the row above -1
-							player.breastRows[temp].breastRating = player.breastRows[temp - 1].breastRating - 1;
+							player.breastRows[choice].breastRating = player.breastRows[choice - 1].breastRating - 1;
 							//If second row are super small but primary row is huge it could go negative.
 							//This corrects that problem.
-							if (player.breastRows[temp].breastRating < 0) player.breastRows[temp].breastRating = 0;
-							if (player.breastRows[temp - 1].breastRating < 0) player.breastRows[temp - 1].breastRating = 0;
-							if (player.breastRows[temp].breastRating == 0) outputText("\n\nYour abdomen tingles and twitches as a new row of breasts sprouts below the others.  Your new breasts stay flat and masculine, not growing any larger.");
-							else outputText("\n\nYour abdomen tingles and twitches as a new row of " + player.breastCup(temp) + " " + breastDescript(temp) + " sprouts below your others.");
+							if (player.breastRows[choice].breastRating < 0) player.breastRows[choice].breastRating = 0;
+							if (player.breastRows[choice - 1].breastRating < 0) player.breastRows[choice - 1].breastRating = 0;
+							if (player.breastRows[choice].breastRating == 0) outputText("\n\nYour abdomen tingles and twitches as a new row of breasts sprouts below the others.  Your new breasts stay flat and masculine, not growing any larger.");
+							else outputText("\n\nYour abdomen tingles and twitches as a new row of " + player.breastCup(choice) + " " + breastDescript(choice) + " sprouts below your others.");
 							outputText("  A sensitive nub grows on the summit of each new tit, becoming a new nipple.");
 							changes++;
 						}
@@ -1398,30 +1412,30 @@ public final class Mutations extends MutationsHelper
 					//If already has max doggie breasts!
 					else if (rand(2) == 0) {
 						//Check for size mismatches, and move closer to spec!
-						temp = player.breastRows.length;
+						choice = player.breastRows.length;
 						temp2 = 0;
 						var evened:Boolean = false;
 						//Check each row, and if the row above or below it is
-						while (temp > 1 && temp2 == 0) {
-							temp--;
+						while (choice > 1 && temp2 == 0) {
+							choice--;
 							//Gimme a sec
-							if (player.breastRows[temp].breastRating + 1 < player.breastRows[temp - 1].breastRating) {
+							if (player.breastRows[choice].breastRating + 1 < player.breastRows[choice - 1].breastRating) {
 								if (!evened) {
 									evened = true;
 									outputText("\n");
 								}
 								outputText("\nYour ");
-								if (temp == 0) outputText("first ");
-								if (temp == 1) outputText("second ");
-								if (temp == 2) outputText("third ");
-								if (temp == 3) outputText("fourth ");
-								if (temp == 4) outputText("fifth ");
-								if (temp > 4) outputText("");
-								outputText("row of " + breastDescript(temp) + " grows larger, as if jealous of the jiggling flesh above.");
-								temp2 = (player.breastRows[temp - 1].breastRating) - player.breastRows[temp].breastRating - 1;
+								if (choice == 0) outputText("first ");
+								if (choice == 1) outputText("second ");
+								if (choice == 2) outputText("third ");
+								if (choice == 3) outputText("fourth ");
+								if (choice == 4) outputText("fifth ");
+								if (choice > 4) outputText("");
+								outputText("row of " + breastDescript(choice) + " grows larger, as if jealous of the jiggling flesh above.");
+								temp2 = (player.breastRows[choice - 1].breastRating) - player.breastRows[choice].breastRating - 1;
 								if (temp2 > 5) temp2 = 5;
 								if (temp2 < 1) temp2 = 1;
-								player.breastRows[temp].breastRating += temp2;
+								player.breastRows[choice].breastRating += temp2;
 							}
 						}
 					}
@@ -1651,9 +1665,9 @@ public final class Mutations extends MutationsHelper
 				outputText("The food tastes strange and corrupt - you can't really think of a better word for it, but it's unclean.");
 				player.refillHunger(20);
 				if (player.cocks[0].cockLength < 12) {
-					temp = player.increaseCock(0, rand(2) + 2);
+					var cIdx:int = player.increaseCock(0, rand(2) + 2);
 					outputText("\n\n");
-					player.lengthChange(temp, 1);
+					player.lengthChange(cIdx, 1);
 				}
 				outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n");
 				HPChange(30 + player.tou / 3, true);
@@ -1721,14 +1735,14 @@ public final class Mutations extends MutationsHelper
 			//Corruption increase
 			if ((player.cor < 50 || rand(2)) && tainted) {
 				outputText("\n\nThe drink makes you feel... dirty.");
-				temp = 1;
+				var mult:Number = 1;
 				//Corrupts the uncorrupted faster
-				if (player.cor < 50) temp++;
-				if (player.cor < 40) temp++;
-				if (player.cor < 30) temp++;
+				if (player.cor < 50) mult++;
+				if (player.cor < 40) mult++;
+				if (player.cor < 30) mult++;
 				//Corrupts the very corrupt slower
-				if (player.cor >= 90) temp = .5;
-				if (tainted) dynStats("cor", temp);
+				if (player.cor >= 90) mult = .5;
+				if (tainted) dynStats("cor", mult);
 				else dynStats("cor", 0);
 				changes++;
 			}
@@ -1756,11 +1770,10 @@ public final class Mutations extends MutationsHelper
 			//Boost cum multiplier
 			if (changes < changeLimit && rand(2) == 0 && player.cocks.length > 0) {
 				if (player.cumMultiplier < 6 && rand(2) == 0 && changes < changeLimit) {
-					//Temp is the max it can be raised to
-					temp = 3;
+					var max:int = 3;
 					//Lots of cum raises cum multiplier cap to 6 instead of 3
-					if (player.findPerk(PerkLib.MessyOrgasms) >= 0) temp = 6;
-					if (temp < player.cumMultiplier + .4 * crit) {
+					if (player.findPerk(PerkLib.MessyOrgasms) >= 0) max = 6;
+					if (max < player.cumMultiplier + .4 * crit) {
 						changes--;
 					}
 					else {
@@ -1810,14 +1823,14 @@ public final class Mutations extends MutationsHelper
 			//Corruption increase
 			if (player.cor < 50 || rand(2)) {
 				outputText("\n\nThe drink makes you feel... dirty.");
-				temp = 1;
+				var mult:Number = 1;
 				//Corrupts the uncorrupted faster
-				if (player.cor < 50) temp++;
-				if (player.cor < 40) temp++;
-				if (player.cor < 30) temp++;
+				if (player.cor < 50) mult++;
+				if (player.cor < 40) mult++;
+				if (player.cor < 30) mult++;
 				//Corrupts the very corrupt slower
-				if (player.cor >= 90) temp = .5;
-				dynStats("cor", temp + 2);
+				if (player.cor >= 90) mult = .5;
+				dynStats("cor", mult + 2);
 				changes++;
 			}
 			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
@@ -1848,10 +1861,10 @@ public final class Mutations extends MutationsHelper
 			if (changes < changeLimit && rand(2) == 0 && player.cocks.length > 0) {
 				if (player.cumMultiplier < 6 && rand(2) == 0 && changes < changeLimit) {
 					//Temp is the max it can be raised to
-					temp = 3;
+					var max:int = 3;
 					//Lots of cum raises cum multiplier cap to 6 instead of 3
-					if (player.findPerk(PerkLib.MessyOrgasms) >= 0) temp = 6;
-					if (temp < player.cumMultiplier + .4 * crit) {
+					if (player.findPerk(PerkLib.MessyOrgasms) >= 0) max = 6;
+					if (max < player.cumMultiplier + .4 * crit) {
 						changes--;
 					}
 					else {
@@ -2066,11 +2079,11 @@ public final class Mutations extends MutationsHelper
 					//Multiz
 					if (player.cocks.length > 1) {
 						outputText("\n\nYour " + multiCockDescript() + " fill to full-size... and begin growing obscenely.");
-						temp = player.cocks.length;
-						while (temp > 0) {
-							temp--;
-							temp2 = player.increaseCock(temp, rand(3) + 2);
-							temp3 = player.cocks[temp].thickenCock(1);
+						var cockCount:int = player.cocks.length;
+						while (cockCount > 0) {
+							cockCount--;
+							temp2 = player.increaseCock(cockCount, rand(3) + 2);
+							temp3 = player.cocks[cockCount].thickenCock(1);
 						}
 						player.lengthChange(temp2, player.cocks.length);
 						//Display the degree of thickness change.
@@ -2150,11 +2163,11 @@ public final class Mutations extends MutationsHelper
 					//Multiz
 					if (player.cocks.length > 1) {
 						outputText("\n\nYour " + multiCockDescript() + " fill to full-size... and begin growing obscenely.  ");
-						temp = player.cocks.length;
-						while (temp > 0) {
-							temp--;
-							temp2 = player.increaseCock(temp, rand(3) + 5);
-							temp3 = player.cocks[temp].thickenCock(1.5);
+						cockCount = player.cocks.length;
+						while (cockCount > 0) {
+							cockCount--;
+							temp2 = player.increaseCock(cockCount, rand(3) + 5);
+							temp3 = player.cocks[cockCount].thickenCock(1.5);
 						}
 						player.lengthChange(temp2, player.cocks.length);
 						//Display the degree of thickness change.
@@ -2226,12 +2239,12 @@ public final class Mutations extends MutationsHelper
 					dynStats("lus", 15);
 				}
 				//NIPPLECUNTZZZ
-				temp = player.breastRows.length;
+				var index:int = player.breastRows.length;
 				//Set nipplecunts on every row.
-				while (temp > 0) {
-					temp--;
-					if (!player.breastRows[temp].fuckable && player.nippleLength >= 2) {
-						player.breastRows[temp].fuckable = true;
+				while (index > 0) {
+					index--;
+					if (!player.breastRows[index].fuckable && player.nippleLength >= 2) {
+						player.breastRows[index].fuckable = true;
 						//Keep track of changes.
 						temp2++;
 					}
@@ -4294,6 +4307,7 @@ public final class Mutations extends MutationsHelper
 		{
 			player.slimeFeed();
 			clearOutput();
+			var heightGain:int;
 			var changes:Number = 0;
 			var changeLimit:Number = 1;
 			if (rand(2) == 0) changeLimit++;
@@ -4332,11 +4346,23 @@ public final class Mutations extends MutationsHelper
 				if (player.hasFur()) outputText("the skin under your [skin coat.color] " + player.skinDesc);
 				else outputText("your " + player.skinDesc);
 				outputText(" has changed to become ");
-				temp = rand(4);
-				if (temp == 0) player.skinTone = "tan";
-				else if (temp == 1) player.skinTone = "olive";
-				else if (temp == 2) player.skinTone = "dark";
-				else if (temp == 3) player.skinTone = "light";
+				switch (rand(4)) {
+					case 0:
+						player.skinTone = "tan";
+						break;
+
+					case 1:
+						player.skinTone = "olive";
+						break;
+
+					case 2:
+						player.skinTone = "dark";
+						break;
+
+					case 3:
+						player.skinTone = "light";
+						break;
+				}
 				outputText(player.skinTone + " colored.</b>");
 			}
 			//Change skin to normal
@@ -4455,16 +4481,16 @@ public final class Mutations extends MutationsHelper
 			}
 			//Increase height up to 5 feet.
 			if (rand(2) == 0 && changes < changeLimit && player.tallness < 60) {
-				temp = rand(5) + 3;
+				heightGain = rand(5) + 3;
 				//Slow rate of growth near ceiling
-				if (player.tallness > 90) temp = Math.floor(temp / 2);
+				if (player.tallness > 90) heightGain = Math.floor(heightGain / 2);
 				//Never 0
-				if (temp == 0) temp = 1;
+				if (heightGain == 0) heightGain = 1;
 				//Flavor texts.  Flavored like 1950's cigarettes. Yum.
-				if (temp < 5) outputText("\n\nYou shift uncomfortably as you realize you feel off balance.  Gazing down, you realize you have grown SLIGHTLY taller.");
-				if (temp >= 5 && temp < 7) outputText("\n\nYou feel dizzy and slightly off, but quickly realize it's due to a sudden increase in height.");
-				if (temp == 7) outputText("\n\nStaggering forwards, you clutch at your head dizzily.  You spend a moment getting your balance, and stand up, feeling noticeably taller.");
-				player.tallness += temp;
+				if (heightGain < 5) outputText("\n\nYou shift uncomfortably as you realize you feel off balance.  Gazing down, you realize you have grown SLIGHTLY taller.");
+				if (heightGain >= 5 && heightGain < 7) outputText("\n\nYou feel dizzy and slightly off, but quickly realize it's due to a sudden increase in height.");
+				if (heightGain == 7) outputText("\n\nStaggering forwards, you clutch at your head dizzily.  You spend a moment getting your balance, and stand up, feeling noticeably taller.");
+				player.tallness += heightGain;
 				changes++;
 			}
 			//Decrease height down to a minimum of 7 feet.
@@ -4589,6 +4615,7 @@ public final class Mutations extends MutationsHelper
 			//0 == normal cat
 			//1 == nekomanta
 			//2 == cheshire
+			var choice:int;
 			var changes:Number = 0;
 			var changeLimit:Number = 1;
 			var temp2:Number = 0;
@@ -4651,10 +4678,19 @@ public final class Mutations extends MutationsHelper
 					outputText("\n\nYour mind feels somewhat sluggish, and you wonder if you should just lie down ");
 					if (rand(2) == 0) {
 						outputText("somewhere and ");
-						temp = rand(3);
-						if (temp == 0) outputText("toss a ball around or something");
-						else if (temp == 1) outputText("play with some yarn");
-						else if (temp == 2) outputText("take a nap and stop worrying");
+						switch (rand(3)) {
+							case 0:
+								outputText("toss a ball around or something");
+								break;
+
+							case 1:
+								outputText("play with some yarn");
+								break;
+
+							case 2:
+								outputText("take a nap and stop worrying");
+								break;
+						}
 					}
 					else outputText("in the sun and let your troubles slip away");
 					outputText(".");
@@ -4673,8 +4709,8 @@ public final class Mutations extends MutationsHelper
 			if (type == 0 && player.lib < 80 && changes < changeLimit && rand(4) == 0) {
 				//Cat dicked folks
 				if (player.catCocks() > 0) {
-					temp = player.findFirstCockType(CockTypesEnum.CAT);
-					outputText("\n\nYou feel your " + cockDescript(temp) + " growing hard, the barbs becoming more sensitive. You gently run your hands down them and imagine the feeling of raking the insides of a cunt as you pull.  The fantasy continues, and after ejaculating and hearing the female yowl with pleasure, you shake your head and try to drive off the image.  ");
+					choice = player.findFirstCockType(CockTypesEnum.CAT);
+					outputText("\n\nYou feel your " + cockDescript(choice) + " growing hard, the barbs becoming more sensitive. You gently run your hands down them and imagine the feeling of raking the insides of a cunt as you pull.  The fantasy continues, and after ejaculating and hearing the female yowl with pleasure, you shake your head and try to drive off the image.  ");
 					if (player.cor < 33) outputText("You need to control yourself better.");
 					else if (player.cor < 66) outputText("You're not sure how you feel about the fantasy.");
 					else outputText("You hope to find a willing partner to make this a reality.");
@@ -4768,14 +4804,14 @@ public final class Mutations extends MutationsHelper
 			//Cat penorz shrink
 			if (player.catCocks() > 0 && rand(3) == 0 && changes < changeLimit && !flags[kFLAGS.HYPER_HAPPY]) {
 				//loop through and find a cat wang.
-				temp = 0;
+				choice = 0;
 				for (var j:Number = 0; j < (player.cockTotal()); j++) {
 					if (player.cocks[j].cockType == CockTypesEnum.CAT && player.cocks[j].cockLength > 6) {
-						temp = 1;
+						choice = 1;
 						break;
 					}
 				}
-				if (temp == 1) {
+				if (choice == 1) {
 					//lose 33% size until under 10, then lose 2" at a time
 					if (player.cocks[j].cockLength > 16) {
 						outputText("\n\nYour " + cockDescript(j) + " tingles, making your sheath feel a little less tight.  It dwindles in size, losing a full third of its length and a bit of girth before the change finally stops.");
@@ -4831,10 +4867,10 @@ public final class Mutations extends MutationsHelper
 			//DA TAIL (IF ALREADY HAZ URZ)
 			if (player.tailType != Tail.CAT && player.ears.type == Ears.CAT && rand(4) == 0 && changes < changeLimit) {
 				if (player.tailType == Tail.NONE) {
-					temp = rand(3);
-					if (temp == 0) outputText("\n\nA pressure builds in your backside. You feel under your [armor] and discover an odd bump that seems to be growing larger by the moment. In seconds it passes between your fingers, bursts out the back of your clothes and grows most of the way to the ground. A thick coat of fur springs up to cover your new tail. You instinctively keep adjusting it to improve your balance. <b>You now have a cat-tail.</b>");
-					if (temp == 1) outputText("\n\nYou feel your backside shift and change, flesh molding and displacing into a long, flexible tail! <b>You now have a cat tail.</b>");
-					if (temp == 2) outputText("\n\nYou feel an odd tingling in your spine and your tail bone starts to throb and then swell. Within a few moments it begins to grow, adding new bones to your spine. Before you know it, you have a tail. Just before you think it's over, the tail begins to sprout soft, glossy [skin coat.color] fur. <b>You now have a cat tail.</b>");
+					choice = rand(3);
+					if (choice == 0) outputText("\n\nA pressure builds in your backside. You feel under your [armor] and discover an odd bump that seems to be growing larger by the moment. In seconds it passes between your fingers, bursts out the back of your clothes and grows most of the way to the ground. A thick coat of fur springs up to cover your new tail. You instinctively keep adjusting it to improve your balance. <b>You now have a cat-tail.</b>");
+					if (choice == 1) outputText("\n\nYou feel your backside shift and change, flesh molding and displacing into a long, flexible tail! <b>You now have a cat tail.</b>");
+					if (choice == 2) outputText("\n\nYou feel an odd tingling in your spine and your tail bone starts to throb and then swell. Within a few moments it begins to grow, adding new bones to your spine. Before you know it, you have a tail. Just before you think it's over, the tail begins to sprout soft, glossy [skin coat.color] fur. <b>You now have a cat tail.</b>");
 				}
 				else outputText("\n\nYou pause and tilt your head... something feels different.  Ah, that's what it is; you turn around and look down at your tail as it starts to change shape, narrowing and sprouting glossy fur. <b>You now have a cat tail.</b>");
 				setTailType(Tail.CAT);
@@ -4889,9 +4925,9 @@ public final class Mutations extends MutationsHelper
 			//CAT-FACE!  FULL ON FURRY!  RAGE AWAY NEKOZ
 			if (player.tailType == Tail.CAT && rand(4) == 0 && changes < changeLimit && player.lowerBody == LowerBody.CAT && player.arms.type == Arms.CAT && (player.faceType != Face.CAT || player.faceType != Face.CAT_CANINES || player.faceType != Face.CHESHIRE || player.faceType != Face.CHESHIRE_SMILE)) {
 				if (rand(2) == 0 && player.faceType != Face.CAT) {
-					temp = rand(3);
-					if (temp == 0) outputText("\n\nYour face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something... different. You find a puddle to view your reflection and discover <b>your face is now a cross between human and feline features.</b>");
-					else if (temp == 1) outputText("\n\nMind-numbing pain courses through you as you feel your facial bones rearranging.  You clutch at your face in agony as your skin crawls and shifts, your visage reshaping to replace your facial characteristics with those of a feline. <b>You now have an anthropomorphic cat-face.</b>");
+					choice = rand(3);
+					if (choice == 0) outputText("\n\nYour face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something... different. You find a puddle to view your reflection and discover <b>your face is now a cross between human and feline features.</b>");
+					else if (choice == 1) outputText("\n\nMind-numbing pain courses through you as you feel your facial bones rearranging.  You clutch at your face in agony as your skin crawls and shifts, your visage reshaping to replace your facial characteristics with those of a feline. <b>You now have an anthropomorphic cat-face.</b>");
 					else outputText("\n\nYour face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something else. <b>Your facial features rearrange to take on many feline aspects.</b>");
 					setFaceType(Face.CAT);
 				}
@@ -6405,11 +6441,23 @@ public final class Mutations extends MutationsHelper
 				if (player.hasFur()) outputText("the skin under your " + player.coatColor + " " + player.skinDesc);
 				else outputText("your " + player.skinDesc);
 				outputText(" has changed to become ");
-				temp = rand(4);
-				if (temp == 0) player.skinTone = "tan";
-				else if (temp == 1) player.skinTone = "olive";
-				else if (temp == 2) player.skinTone = "dark";
-				else if (temp == 3) player.skinTone = "light";
+				switch (rand(4)) {
+					case 0:
+						player.skinTone = "tan";
+						break;
+
+					case 1:
+						player.skinTone = "olive";
+						break;
+
+					case 2:
+						player.skinTone = "dark";
+						break;
+
+					case 3:
+						player.skinTone = "light";
+						break;
+				}
 				outputText(player.skinTone + " colored.</b>");
 			}
 			//-Grow hips out if narrow.
@@ -7117,18 +7165,18 @@ public final class Mutations extends MutationsHelper
 			//[Requires penises]
 			//(Thickens all cocks to a ratio of 1\" thickness per 5.5\"
 			if (player.hasCock() && changes < changeLimit && rand(4) == 0) {
-				//Use temp to see if any dicks can be thickened
-				temp = 0;
+				//Use chosen to see if any dicks can be thickened
+				var chosen:int = 0;
 				counter = 0;
 				while (counter < player.cockTotal()) {
 					if (player.cocks[counter].cockThickness * 5.5 < player.cocks[counter].cockLength) {
 						player.cocks[counter].cockThickness += .1;
-						temp = 1;
+						chosen = 1;
 					}
 					counter++;
 				}
 				//If something got thickened
-				if (temp == 1) {
+				if (chosen == 1) {
 					outputText("\n\nYou can feel your [cocks] filling out in your [armor]. Pulling ");
 					if (player.cockTotal() == 1) outputText("it");
 					else outputText("them");
@@ -7200,8 +7248,8 @@ public final class Mutations extends MutationsHelper
 				else outputText("breast.");
 				changes++;
 				//Loop through and reset nipples
-				for (temp = 0; temp < player.breastRows.length; temp++) {
-					player.breastRows[temp].nipplesPerBreast = 1;
+				for (chosen = 0; chosen < player.breastRows.length; chosen++) {
+					player.breastRows[chosen].nipplesPerBreast = 1;
 				}
 			}
 			//Nipples Turn Black:
@@ -7609,12 +7657,12 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			if (player.vaginas.length > 0 && player.breastRows[0].breastRating < 7 && changes < changeLimit && rand(3) == 0) {
-				temp = 1 + rand(3);
+				var grown:uint = 1 + rand(3);
 				if (player.breastRows.length > 0) {
-					if (player.breastRows[0].breastRating < 4 && rand(3) == 0) temp++;
+					if (player.breastRows[0].breastRating < 4 && rand(3) == 0) grown++;
 				}
 				outputText("\n\n");
-				player.growTits(temp, player.breastRows.length, true, 3);
+				player.growTits(grown, player.breastRows.length, true, 3);
 				if (player.breastRows.length == 0) {
 					outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
 					player.createBreastRow();
@@ -7919,9 +7967,9 @@ public final class Mutations extends MutationsHelper
 			//-eat more, grow more 'hair':
 			if (player.hairType == 4 && player.hairLength < 36 &&
 					rand(2) == 0 && changes < changeLimit) {
-				temp = 5 + rand(3);
-				player.hairLength += temp;
-				outputText("\n\nAs you laboriously chew the rubbery dried anemone, your head begins to feel heavier.  Using your newfound control, you snake one of your own tentacles forward; holding it out where you can see it, the first thing you notice is that it appears quite a bit longer.  <b>Your head-tentacles are now " + num2Text(temp) + " inches longer!</b>");
+				var gain:int = 5 + rand(3);
+				player.hairLength += gain;
+				outputText("\n\nAs you laboriously chew the rubbery dried anemone, your head begins to feel heavier.  Using your newfound control, you snake one of your own tentacles forward; holding it out where you can see it, the first thing you notice is that it appears quite a bit longer.  <b>Your head-tentacles are now " + num2Text(gain) + " inches longer!</b>");
 				//(add one level of hairlength)
 				changes++;
 			}
@@ -8092,10 +8140,10 @@ public final class Mutations extends MutationsHelper
 			}
 			//Cum Multiplier Xform
 			if (player.cumQ() < 5000 && rand(3) == 0 && changes < changeLimit && player.hasCock()) {
-				temp = 2 + rand(4);
+				var mult:int = 2 + rand(4);
 				//Lots of cum raises cum multiplier cap to 2 instead of 1.5
-				if (player.findPerk(PerkLib.MessyOrgasms) >= 0) temp += rand(10);
-				player.cumMultiplier += temp;
+				if (player.findPerk(PerkLib.MessyOrgasms) >= 0) mult += rand(10);
+				player.cumMultiplier += mult;
 				//Flavor text
 				if (player.balls == 0) outputText("\n\nYou feel a churning inside your gut as something inside you changes.");
 				if (player.balls > 0) outputText("\n\nYou feel a churning in your [balls].  It quickly settles, leaving them feeling somewhat more dense.");
@@ -8991,15 +9039,15 @@ public final class Mutations extends MutationsHelper
 			//Breast Loss: (towards A cup)
 			if (player.biggestTitSize() > 1 && rand(4) == 0 && changes < changeLimit) {
 				outputText("\n\nYou gasp as you feel a compressing sensation in your chest and around your [fullChest].  The feeling quickly fades however, leaving you feeling like you have lost a considerable amount of weight from your upper body.");
-				temp = 0;
-				while (temp < player.bRows()) {
-					if (player.breastRows[temp].breastRating > 70) player.breastRows[temp].breastRating -= rand(3) + 15;
-					else if (player.breastRows[temp].breastRating > 50) player.breastRows[temp].breastRating -= rand(3) + 10;
-					else if (player.breastRows[temp].breastRating > 30) player.breastRows[temp].breastRating -= rand(3) + 7;
-					else if (player.breastRows[temp].breastRating > 15) player.breastRows[temp].breastRating -= rand(3) + 4;
-					else player.breastRows[temp].breastRating -= 2 + rand(2);
-					if (player.breastRows[temp].breastRating < 1) player.breastRows[temp].breastRating = 1;
-					temp++;
+				var index:int = 0;
+				while (index < player.bRows()) {
+					if (player.breastRows[index].breastRating > 70) player.breastRows[index].breastRating -= rand(3) + 15;
+					else if (player.breastRows[index].breastRating > 50) player.breastRows[index].breastRating -= rand(3) + 10;
+					else if (player.breastRows[index].breastRating > 30) player.breastRows[index].breastRating -= rand(3) + 7;
+					else if (player.breastRows[index].breastRating > 15) player.breastRows[index].breastRating -= rand(3) + 4;
+					else player.breastRows[index].breastRating -= 2 + rand(2);
+					if (player.breastRows[index].breastRating < 1) player.breastRows[index].breastRating = 1;
+					index++;
 				}
 				changes++;
 			}
@@ -9008,9 +9056,9 @@ public final class Mutations extends MutationsHelper
 				outputText("\n\nYou feel a vague swelling sensation in your [fullChest], and you frown downwards.  You seem to have gained a little weight on your chest.  Not enough to stand out, but- you cup yourself carefully- certainly giving you the faintest suggestion of boobs.");
 				player.breastRows[0].breastRating = 1;
 				if (player.bRows() > 1) {
-					temp = 1;
-					while (temp < player.bRows()) {
-						if (player.breastRows[temp].breastRating < 1) player.breastRows[temp].breastRating = 1;
+					index = 1;
+					while (index < player.bRows()) {
+						if (player.breastRows[index].breastRating < 1) player.breastRows[index].breastRating = 1;
 					}
 				}
 				changes++;
@@ -9029,20 +9077,20 @@ public final class Mutations extends MutationsHelper
 				if (player.cockTotal() == 1) outputText("it seems");
 				else outputText("they seem");
 				outputText(" to have become smaller.");
-				temp = 0;
-				while (temp < player.cockTotal()) {
-					if (player.cocks[temp].cockLength >= 3.5) {
+				index = 0;
+				while (index < player.cockTotal()) {
+					if (player.cocks[index].cockLength >= 3.5) {
 						//Shrink said cock
-						if (player.cocks[temp].cockLength < 6 && player.cocks[temp].cockLength >= 2.9) {
-							player.cocks[temp].cockLength -= .5;
-							if (player.cocks[temp].cockThickness * 6 > player.cocks[temp].cockLength) player.cocks[temp].cockThickness -= .2;
-							if (player.cocks[temp].cockThickness * 8 > player.cocks[temp].cockLength) player.cocks[temp].cockThickness -= .2;
-							if (player.cocks[temp].cockThickness < .5) player.cocks[temp].cockThickness = .5;
+						if (player.cocks[index].cockLength < 6 && player.cocks[index].cockLength >= 2.9) {
+							player.cocks[index].cockLength -= .5;
+							if (player.cocks[index].cockThickness * 6 > player.cocks[index].cockLength) player.cocks[index].cockThickness -= .2;
+							if (player.cocks[index].cockThickness * 8 > player.cocks[index].cockLength) player.cocks[index].cockThickness -= .2;
+							if (player.cocks[index].cockThickness < .5) player.cocks[index].cockThickness = .5;
 						}
-						player.cocks[temp].cockLength -= 0.5;
-						player.increaseCock(temp, Math.round(player.cocks[temp].cockLength * 0.33) * -1);
+						player.cocks[index].cockLength -= 0.5;
+						player.increaseCock(index, Math.round(player.cocks[index].cockLength * 0.33) * -1);
 					}
-					temp++;
+					index++;
 				}
 				changes++;
 			}
@@ -9222,10 +9270,10 @@ public final class Mutations extends MutationsHelper
 			if (player.averageNipplesPerBreast() < 4) {
 				outputText("  At first you think nothing has changed, but a second look confirms that your breasts now sport the same quartet of cow-like nipples the bovine plant-girl bears.");
 				if (player.nippleLength < 4) player.nippleLength = 4;
-				temp = player.bRows();
-				while (temp > 0) {
-					temp--;
-					player.breastRows[temp].nipplesPerBreast = 4;
+				var rows:int = player.bRows();
+				while (rows > 0) {
+					rows--;
+					player.breastRows[rows].nipplesPerBreast = 4;
 				}
 			}
 			//[Player gains quad nipples, milk production and libido way up]
@@ -9553,8 +9601,7 @@ public final class Mutations extends MutationsHelper
 			//get fur
 			if ((!player.hasFur() || (player.hasFur() && (player.coatColor != "brown" && player.coatColor != "white"))) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
 				var color:String;
-				temp = rand(10);
-				if (temp < 8) {
+				if (rand(10) < 8) {
 					color = "brown";
 				} else {
 					color = "white";
@@ -10830,7 +10877,6 @@ public final class Mutations extends MutationsHelper
 			//init variables
 			var changes:Number = 0;
 			var changeLimit:Number = 1;
-		//	var temp:Number = 0;
 		//	var temp2:Number = 0;
 		//	var temp3:Number = 0;
 			//Randomly choose affects limit
@@ -10911,14 +10957,12 @@ public final class Mutations extends MutationsHelper
 			}
 			//tallness
 			if (player.tallness < 132 && changes < changeLimit && rand(2) == 0) {
-				temp = rand(5) + 3;
-				//Never 0
-				if (temp == 0) temp = 1;
+				var heightGain:int = rand(5) + 3;
 				//Flavor texts.  Flavored like 1950's cigarettes. Yum.
-				if (temp < 5) outputText("\n\nYou shift uncomfortably as you realize you feel off balance.  Gazing down, you realize you have grown SLIGHTLY taller.");
-				if (temp >= 5 && temp < 7) outputText("\n\nYou feel dizzy and slightly off, but quickly realize it's due to a sudden increase in height.");
-				if (temp == 7) outputText("\n\nStaggering forwards, you clutch at your head dizzily.  You spend a moment getting your balance, and stand up, feeling noticeably taller.");
-				player.tallness += temp;
+				if (heightGain < 5) outputText("\n\nYou shift uncomfortably as you realize you feel off balance.  Gazing down, you realize you have grown SLIGHTLY taller.");
+				else if (heightGain >= 5 && heightGain < 7) outputText("\n\nYou feel dizzy and slightly off, but quickly realize it's due to a sudden increase in height.");
+				else if (heightGain == 7) outputText("\n\nStaggering forwards, you clutch at your head dizzily.  You spend a moment getting your balance, and stand up, feeling noticeably taller.");
+				player.tallness += heightGain;
 				changes++;
 			}
 			//FAILSAFE CHANGE
@@ -10995,16 +11039,16 @@ public final class Mutations extends MutationsHelper
 				if (player.breastRows.length == 1) {
 					//Shrink if bigger than B cups
 					if (player.breastRows[0].breastRating >= 2) {
-						temp = 1;
+						var swtch:int = 1;
 						player.breastRows[0].breastRating--;
 						//Shrink again if huuuuge
 						if (player.breastRows[0].breastRating > 10) {
-							temp++;
+							swtch++;
 							player.breastRows[0].breastRating--;
 						}
 						//Talk about shrinkage
-						if (temp == 1) outputText("\n\nYou feel a weight lifted from you, and realize your [breasts] have shrunk to " + player.breastCup(0) + "s.");
-						if (temp == 2) outputText("\n\nYou feel significantly lighter.  Looking down, you realize your breasts are MUCH smaller, down to " + player.breastCup(0) + "s.");
+						if (swtch == 1) outputText("\n\nYou feel a weight lifted from you, and realize your [breasts] have shrunk to " + player.breastCup(0) + "s.");
+						if (swtch == 2) outputText("\n\nYou feel significantly lighter.  Looking down, you realize your breasts are MUCH smaller, down to " + player.breastCup(0) + "s.");
 						changes++;
 					}
 
@@ -11013,7 +11057,7 @@ public final class Mutations extends MutationsHelper
 				else {
 					//temp2 = amount changed
 					//temp3 = counter
-					temp = 0;
+					swtch = 0;
 					temp2 = 0;
 					temp3 = 0;
 					if (player.biggestTitSize() >= 1) outputText("\n");
@@ -11053,18 +11097,18 @@ public final class Mutations extends MutationsHelper
 			}
 			//(Thickens all cocks to a ratio of 1\" thickness per 5.5\"
 			if (player.hasCock() && changes < changeLimit && rand(4) == 0) {
-				//Use temp to see if any dicks can be thickened
-				temp = 0;
+				//Use swtch to see if any dicks can be thickened
+				swtch = 0;
 				counter = 0;
 				while (counter < player.cockTotal()) {
 					if (player.cocks[counter].cockThickness * 5.5 < player.cocks[counter].cockLength) {
 						player.cocks[counter].cockThickness += .1;
-						temp = 1;
+						swtch = 1;
 					}
 					counter++;
 				}
 				//If something got thickened
-				if (temp == 1) {
+				if (swtch == 1) {
 					outputText("\n\nYou can feel your [cocks] filling out in your [armor]. Pulling ");
 					if (player.cockTotal() == 1) outputText("it");
 					else outputText("them");

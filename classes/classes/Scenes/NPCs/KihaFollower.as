@@ -1069,11 +1069,11 @@ private function boneTheShitOutofKihaHolesWithHorsecock():void {
 	var y:Number = -1;
 	//Find appropriately large horsecock
 	if(player.horseCocks() > 0) {
-		temp = player.cockTotal();
-		while(temp > 0) {
-			temp--;
-			if(player.cocks[temp].cockType == CockTypesEnum.HORSE && player.cockArea(temp) >= 40) {
-				x = temp;
+		var i:int = player.cockTotal();
+		while(i > 0) {
+			i--;
+			if(player.cocks[i].cockType == CockTypesEnum.HORSE && player.cockArea(i) >= 40) {
+				x = i;
 				y = x+1;
 				break;
 			}
@@ -1597,24 +1597,24 @@ private function fuckKihaWithATentacle():void {
 	var y:Number = -1;
 	var z:Number = -1;
 	var zz:Number = -1;
-	temp = player.cockTotal();
-	while(temp > 0) {
-		temp--;
-		if(player.cocks[temp].cockType == CockTypesEnum.TENTACLE) {
+	var i:int = player.cockTotal();
+	while(i > 0) {
+		i--;
+		if(player.cocks[i].cockType == CockTypesEnum.TENTACLE) {
 			if(x == -1) {
-				x = temp;
+				x = i;
 				x++;
 			}
 			else if(y == -1) {
-				y = temp;
+				y = i;
 				y++;
 			}
 			else if(z == -1) {
-				z = temp;
+				z = i;
 				z++;
 			}
 			else if(zz == -1) {
-				zz = temp;
+				zz = i;
 				zz++;
 			}
 			else break;

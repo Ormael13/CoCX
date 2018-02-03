@@ -1990,12 +1990,27 @@ private function metamorphScales():void {
 			else player.skinTone = "silver";
 		}
 		else {
-			temp = rand(5);
-			if (temp == 0) player.skinTone = "red";
-			else if (temp == 1) player.skinTone = "green";
-			else if (temp == 2) player.skinTone = "white";
-			else if (temp == 3) player.skinTone = "blue";
-			else player.skinTone = "black";
+			switch (rand(5)) {
+				case 0:
+					player.skinTone = "red";
+					break;
+
+				case 1:
+					player.skinTone = "green";
+					break;
+
+				case 2:
+					player.skinTone = "white";
+					break;
+
+				case 3:
+					player.skinTone = "blue";
+					break;
+
+				default:
+					player.skinTone = "black";
+					break;
+			}
 		}
 		outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] fur.  Panicked, you look down and realize that your fur is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  Underneath the fur your skin feels incredibly smooth, and as more and more of the stuff comes off, you discover a seamless layer of " + player.skinTone + " scales covering most of your body.  The rest of the fur is easy to remove.  <b>You're now covered in scales from head to toe.</b>");
 	}
@@ -2006,12 +2021,27 @@ private function metamorphScales():void {
 			else player.skinTone = "silver";
 		}
 		else {
-			temp = rand(5);
-			if (temp == 0) player.skinTone = "red";
-			else if (temp == 1) player.skinTone = "green";
-			else if (temp == 2) player.skinTone = "white";
-			else if (temp == 3) player.skinTone = "blue";
-			else player.skinTone = "black";
+			switch (rand(5)) {
+				case 0:
+					player.skinTone = "red";
+					break;
+
+				case 1:
+					player.skinTone = "green";
+					break;
+
+				case 2:
+					player.skinTone = "white";
+					break;
+
+				case 3:
+					player.skinTone = "blue";
+					break;
+
+				default:
+					player.skinTone = "black";
+					break;
+			}
 		}
 		outputText(player.skinTone + " scales.</b>");
 	}

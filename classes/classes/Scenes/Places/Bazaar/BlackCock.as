@@ -1743,12 +1743,12 @@ import classes.lists.Gender;
 				cocksAffected = 0;
 				for (i = 0; i < player.cockTotal(); i++) {
 					if (player.cocks[i].cockType == CockTypesEnum.RHINO && player.cocks[i].cockLength >= 10) continue; //Skip over if rhino cock.
-					temp = player.increaseCock(player.smallestCockIndex(), rand(2) + 1);
+					var i2:int = player.increaseCock(player.smallestCockIndex(), rand(2) + 1);
 					dynStats("lib", 0.5, "lus", 3);
 					cocksAffected++;
 				}
 				outputText("\n\n");
-				player.lengthChange(temp, cocksAffected);
+				player.lengthChange(i2, cocksAffected);
 				changes++;
 			}
 			//Increase girth of rhino cock.
@@ -1768,9 +1768,9 @@ import classes.lists.Gender;
 				cocksAffected = 0;
 				for (i = 0; i < player.cockTotal(); i++) {
 					if (player.cocks[i].cockType == CockTypesEnum.RHINO && player.cocks[i].cockLength < 18) {
-						temp = player.increaseCock(i, 1 + rand(2));
+						i2 = player.increaseCock(i, 1 + rand(2));
 						outputText("\n\n");
-						player.lengthChange(temp, 1);
+						player.lengthChange(i2, 1);
 						dynStats("lib", 0.5, "lus", 3);
 						break;
 					}
@@ -1803,17 +1803,17 @@ import classes.lists.Gender;
 			}
 			//Gain height
 			if (rand(2) == 0 && changes < changeLimit && player.tallness < 102) {
-				temp = rand(5) + 3;
+				var growth:Number = rand(5) + 3;
 				//Slow rate of growth near ceiling
-				if (player.tallness > 90) temp = Math.floor(temp / 2);
+				if (player.tallness > 90) growth = Math.floor(growth / 2);
 				//Constrain height growth
-				if (temp == 0) temp = 1; //Never 0
-				if (temp > 6) temp = 6; //Constrain growth to 6 inches
+				if (growth == 0) growth = 1; //Never 0
+				if (growth > 6) growth = 6; //Constrain growth to 6 inches
 				//Flavor texts. Flavored like 1950's cigarettes. Yum.
-				if (temp < 3) outputText("\n\nYou shift uncomfortably as you realize you feel off balance. Gazing down, you realize you have grown SLIGHTLY taller.");
-				if (temp >= 3 && temp < 6) outputText("\n\nYou feel dizzy and slightly off, but quickly realize it's due to a sudden increase in height.");
-				if (temp == 6) outputText("\n\nStaggering forwards, you clutch at your head dizzily. You spend a moment getting your balance, and stand up, feeling noticeably taller.");
-				player.tallness += temp;
+				if (growth < 3) outputText("\n\nYou shift uncomfortably as you realize you feel off balance. Gazing down, you realize you have grown SLIGHTLY taller.");
+				if (growth >= 3 && growth < 6) outputText("\n\nYou feel dizzy and slightly off, but quickly realize it's due to a sudden increase in height.");
+				if (growth == 6) outputText("\n\nStaggering forwards, you clutch at your head dizzily. You spend a moment getting your balance, and stand up, feeling noticeably taller.");
+				player.tallness += growth;
 				changes++;
 			}
 			//Gain muscle tone
@@ -2050,11 +2050,11 @@ import classes.lists.Gender;
 
 			//Sexual changes
 			if (rand(3) == 0 && changes < changeLimit && player.hasCock() && player.cumMultiplier < 25) {
-				temp = 1 + rand(4);
+				var mult:Number = 1 + rand(4);
 				//Lots of cum raises cum multiplier cap to 2 instead of 1.5
-				if (player.findPerk(PerkLib.MessyOrgasms) >= 0) temp += rand(10);
-				temp *= 0.1;
-				player.cumMultiplier += temp;
+				if (player.findPerk(PerkLib.MessyOrgasms) >= 0) mult += rand(10);
+				mult *= 0.1;
+				player.cumMultiplier += mult;
 				//Flavor text
 				if (player.balls == 0) outputText("\n\nYou feel a churning inside your gut as something inside you changes.");
 				if (player.balls > 0) outputText("\n\nYou feel a churning in your [balls]. It quickly settles, leaving them feeling somewhat more dense.");

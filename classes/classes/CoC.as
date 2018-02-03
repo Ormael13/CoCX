@@ -148,9 +148,6 @@ public class CoC extends MovieClip
     public var whitney:Number;
     public var sand:Number;
     public var giacomo:int;
-    public var temp:int;
-    public var args:Array;
-    public var funcs:Array;
     public var oldStats:*; // I *think* this is a generic object
     public var inputManager:InputManager;
     public var monkey:ChaosMonkey;
@@ -343,14 +340,6 @@ public class CoC extends MovieClip
         mainView.textBGTan.visible = false;
 
         // *************************************************************************************
-
-
-        //Fenoxo loves his temps
-        temp = 0;
-
-        //Used to set what each action buttons displays and does.
-        args = [];
-        funcs = [];
 
         //Used for stat tracking to keep up/down arrows correct.
         oldStats = {};

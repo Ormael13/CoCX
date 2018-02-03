@@ -366,38 +366,50 @@ private function isabellasAccentCoaching():void {
 	var accentChange:Number = 0;
 	//(Success/Fail texts)
 	if(result < 12) {
-		temp = rand(3);
-		if(temp == 0) outputText("You spend an hour speaking with Isabella, but ultimately, you wind up making little, if any, progress.  The cow-girl seems a bit dispirited at the failure, but she gives you a big hug anyway.");
-		//(FAIL2) 
-		else if(temp == 1) {
-			outputText("In spite of your efforts to teach the foreign cow-girl, she doesn't seem to make any progress.  The worst part is, she keeps slumping down when you correct her, which only sets her bosom to jiggling, her cleavage looking larger than ever before.  You wind up quite distracted by the time the two of you get finished.");
-			dynStats("lus", 10);
-		}
-		//(FAIL3) 
-		else {
-			outputText("No matter what you do, you can't get the normally-industrious cow-girl to focus right now.  She's obviously bored with your attempts to teach her, and she spends the entire lesson trying to tease you with her body.  It's more effective than you care to admit");
-			if(player.hasCock()) outputText(", and you leave the lesson with certain stiffness in your loins.");
-			else if(player.hasVagina()) outputText(", and you leave the lesson with wet panties.");
-			else outputText(".");
-			//(+big lust)
-			dynStats("lus", 25);
+		switch (rand(3)) {
+			case 0:
+				outputText("You spend an hour speaking with Isabella, but ultimately, you wind up making little, if any, progress.  The cow-girl seems a bit dispirited at the failure, but she gives you a big hug anyway.");
+				break;
+
+			case 1:
+				outputText("In spite of your efforts to teach the foreign cow-girl, she doesn't seem to make any progress.  The worst part is, she keeps slumping down when you correct her, which only sets her bosom to jiggling, her cleavage looking larger than ever before.  You wind up quite distracted by the time the two of you get finished.");
+				dynStats("lus", 10);
+
+				break;
+			default:
+				outputText("No matter what you do, you can't get the normally-industrious cow-girl to focus right now.  She's obviously bored with your attempts to teach her, and she spends the entire lesson trying to tease you with her body.  It's more effective than you care to admit");
+				if (player.hasCock()) {
+					outputText(", and you leave the lesson with certain stiffness in your loins.");
+				} else if (player.hasVagina()) {
+					outputText(", and you leave the lesson with wet panties.");
+				} else {
+					outputText(".");
+				}
+				//(+big lust)
+				dynStats("lus", 25);
+
+				break;
 		}
 	}
 	else if(result < 14) {
-		temp = rand(2);
-		if(temp == 0) outputText("You spend an hour going over Isabella's language and diction with her.  She seems to make a little progress with it, which makes her happy, but you feel that in the grand scheme of things, she could do better.");
+		if(rand(2) == 0) outputText("You spend an hour going over Isabella's language and diction with her.  She seems to make a little progress with it, which makes her happy, but you feel that in the grand scheme of things, she could do better.");
 		else outputText("You go over Isabella's word choice with her and try to correct her whenever she uses the wrong word or slips into her native tongue.  She seems to make a modicum of progress, yet the downward cast of her eyes shows just how much better she feels she could have done.");
 		accentChange = 4 + rand(5);
 	}
 	else if(result <= 20) {
-		temp = rand(2);
-		if(temp == 0) outputText("You spend an hour trying to teach Isabella how to speak properly.  While she is often flustered by her mistakes, she makes notable improvements from this session.  By the time you two finish, she seems quite pleased with herself.");
-		else if(temp == 1) outputText("You go over Isabella's word choice with her and try to correct her whenever she uses the wrong word or slips into her native tongue.  It takes some time, but you're happy to tell Isabella that she seems to be making significant progress.");
+		switch (rand(2)) {
+			case 0:
+				outputText("You spend an hour trying to teach Isabella how to speak properly.  While she is often flustered by her mistakes, she makes notable improvements from this session.  By the time you two finish, she seems quite pleased with herself.");
+				break;
+
+			case 1:
+				outputText("You go over Isabella's word choice with her and try to correct her whenever she uses the wrong word or slips into her native tongue.  It takes some time, but you're happy to tell Isabella that she seems to be making significant progress.");
+				break;
+		}
 		accentChange = 8 + rand(8);
 	}
 	else {
-		temp = rand(2);
-		if(temp == 0) outputText("You sit down with Isabella to work on her language once again.  She gets quite involved in the lesson, and the cow-girl makes large strides toward lessening her accent.");
+		if(rand(2) == 0) outputText("You sit down with Isabella to work on her language once again.  She gets quite involved in the lesson, and the cow-girl makes large strides toward lessening her accent.");
 		else outputText("You go over Isabella's word choice with her in an effort to reduce her accent.  In short order, the cow-girl is looking at you with rapt, attentive eyes, hanging on to your every word as you help her disguise her tongue to match those she's surrounded by.");
 		accentChange = 12 + rand(10);
 	}
@@ -665,11 +677,11 @@ private function repeatGermanBratwurstInCamp():void {
 private function izzyTentacleRapeBool():Boolean {
 	spriteSelect(31);
 	var counter:Number = 0;
-	temp = player.cockTotal();
-	while(counter < (player.tentacleCocks() + player.stamenCocks()) && temp > 0) {
-		temp--;
+	var i:int = player.cockTotal();
+	while(counter < (player.tentacleCocks() + player.stamenCocks()) && i > 0) {
+		i--;
 		//Does this dick work for it?
-		if(player.cocks[temp].cockType == CockTypesEnum.TENTACLE && player.cocks[temp].cockLength >= 24) {
+		if(player.cocks[i].cockType == CockTypesEnum.TENTACLE && player.cocks[i].cockLength >= 24) {
 			counter++;
 		}
 	}
@@ -694,23 +706,23 @@ private function tentacleBoneFollowerIzzy():void {
 	var t10:int = -1;
 	
 	var counter:Number = 0;
-	temp = player.cocks.length;
-	while(counter < (player.tentacleCocks() + player.stamenCocks()) && temp > 0) {
-		temp--;
+	var i:int = player.cocks.length;
+	while(counter < (player.tentacleCocks() + player.stamenCocks()) && i > 0) {
+		i--;
 		//Does this dick work for it?
-		if(player.cocks[temp].cockType == CockTypesEnum.TENTACLE && player.cocks[temp].cockLength >= 24) {
+		if(player.cocks[i].cockType == CockTypesEnum.TENTACLE && player.cocks[i].cockLength >= 24) {
 			counter++;
 			//Set the tentacle array up
-			if(t1 == -1) t1 = temp;
-			else if(t2 == -1) t2 = temp;
-			else if(t3 == -1) t3 = temp;
-			else if(t4 == -1) t4 = temp;
-			else if(t5 == -1) t5 = temp;
-			else if(t6 == -1) t6 = temp;
-			else if(t7 == -1) t7 = temp;
-			else if(t8 == -1) t8 = temp;
-			else if(t9 == -1) t9 = temp;
-			else if(t10 == -1) t10 = temp;
+			if(t1 == -1) t1 = i;
+			else if(t2 == -1) t2 = i;
+			else if(t3 == -1) t3 = i;
+			else if(t4 == -1) t4 = i;
+			else if(t5 == -1) t5 = i;
+			else if(t6 == -1) t6 = i;
+			else if(t7 == -1) t7 = i;
+			else if(t8 == -1) t8 = i;
+			else if(t9 == -1) t9 = i;
+			else if(t10 == -1) t10 = i;
 		}
 	}
 	clearOutput();

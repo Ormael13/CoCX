@@ -994,9 +994,9 @@ public class CeraphScene extends NPCAwareContent
 			var temp2:Number = 0;
 			//1 = wang, 2 = cunt, 3 = tits.
 			//Add dicks
-			temp = player.cockTotal();
-			while (temp > 0) {
-				temp--;
+			var i:int = player.cockTotal();
+			while (i > 0) {
+				i--;
 				choices[choices.length] = 1;
 			}
 			//Add pussy twice for kicks!
@@ -1005,11 +1005,11 @@ public class CeraphScene extends NPCAwareContent
 				if (rand(2) == 0) choices[choices.length] = 2;
 			}
 			//Add tits
-			temp = player.breastRows.length;
-			while (temp > 0) {
-				temp--;
+			i = player.breastRows.length;
+			while (i > 0) {
+				i--;
 				//She only wants tits if they're decent!
-				if (player.breastRows[temp].breastRating > 2) choices[choices.length] = 3;
+				if (player.breastRows[i].breastRating > 2) choices[choices.length] = 3;
 			}
 			//Think about it...
 			outputText("Ceraph grins lecherously and pulls her tail from her drooling snatch.  \"<i>Really?  Well this should be fun.  Let me just figure out what I want...</i>\"  Her gaze is quite piercing.\n\n");
@@ -1111,7 +1111,7 @@ public class CeraphScene extends NPCAwareContent
 				player.removeCock(x, 1);
 				//(-fetish, +cock-toy status +1)
 				flags[kFLAGS.PC_FETISH]--;
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218]++;
+				flags[kFLAGS.CERAPH_OWNED_DICKS]++;
 				dynStats("lib", -2, "sen", -2, "cor", 5);
 			}
 			//(Pussy)
@@ -1128,7 +1128,7 @@ public class CeraphScene extends NPCAwareContent
 				player.orgasm();
 				dynStats("cor", 5);
 				flags[kFLAGS.PC_FETISH]--;
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219]++;
+				flags[kFLAGS.CERAPH_OWNED_PUSSIES]++;
 			}
 			//(Tits) 
 			else {
@@ -1178,7 +1178,7 @@ public class CeraphScene extends NPCAwareContent
 				//(-1 fetish, +1 tit toy status)
 				dynStats("lus", 20, "cor", 5);
 				flags[kFLAGS.PC_FETISH]--;
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220]++;
+				flags[kFLAGS.CERAPH_OWNED_TITS]++;
 			}
 			//Fix any gender mixmatches
 			doNext(camp.returnToCampUseOneHour);
@@ -1202,20 +1202,20 @@ public class CeraphScene extends NPCAwareContent
 			var choice:Number = 0;
 			var subChoice:Number = 0;
 			//dicks
-			temp = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218];
-			while (temp > 0) {
-				temp--;
+			var i:int = flags[kFLAGS.CERAPH_OWNED_DICKS];
+			while (i > 0) {
+				i--;
 				choices[choices.length] = 1;
 			}
 			//pussies
-			temp = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219];
-			while (temp > 0) {
-				temp--;
+			i = flags[kFLAGS.CERAPH_OWNED_PUSSIES];
+			while (i > 0) {
+				i--;
 				choices[choices.length] = 2;
 			}
-			temp = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220];
-			while (temp > 0) {
-				temp--;
+			i = flags[kFLAGS.CERAPH_OWNED_TITS];
+			while (i > 0) {
+				i--;
 				choices[choices.length] = 3;
 			}
 			//Pick one!

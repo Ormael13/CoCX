@@ -2080,13 +2080,12 @@ public class Holidays {
             if (player.findPerk(PerkLib.ElvenBounty) >= 0) EngineCore.outputText(" <b>again</b>");
             EngineCore.outputText("?");
             //[Yes][No] – yes awards (+250 mls cum volume), no awards +15 intellect
-            EngineCore.doYesNo(xmasPerkM, xmasSmart);
+            EngineCore.doYesNo(Utils.curry(xmasPerkM,true), xmasSmart);
             //(-5 corruption)
             player.dynStats("cor", -5);
             //(+20 sens unless it would bring you over 80 sens, then +5 sens)
             if (player.sens + 20 > 80) player.dynStats("sen", 5);
             else player.dynStats("sen", 15);
-            CoC.instance.temp = 1001;
             flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
         }
 
@@ -2100,19 +2099,18 @@ public class Holidays {
             if (player.findPerk(PerkLib.ElvenBounty) >= 0) EngineCore.outputText(" <b>again</b>");
             EngineCore.outputText("?");
             //[Yes][No] – yes awards (+15 fertility!), no awards +15 intellect
-            EngineCore.doYesNo(xmasPerkM, xmasSmart);
+            EngineCore.doYesNo(Utils.curry(xmasPerkM,false), xmasSmart);
             //(-5 corruption)
             player.dynStats("cor", -5);
             //(+20 sens unless it would bring you over 80 sens, then +5 sens)
             if (player.sens + 20 > 80) player.dynStats("sen", 5);
             else player.dynStats("sen", 15);
-            CoC.instance.temp = 2002;
             flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
         }
 
-        function xmasPerkM():void {
+        function xmasPerkM(cumQ:Boolean):void {
             if (player.findPerk(PerkLib.ElvenBounty) < 0) {
-                if (CoC.instance.temp == 1001) player.createPerk(PerkLib.ElvenBounty, 250, 0, 0, 0);
+                if (cumQ) player.createPerk(PerkLib.ElvenBounty, 250, 0, 0, 0);
                 else player.createPerk(PerkLib.ElvenBounty, 0, 15, 0, 0);
                 EngineCore.clearOutput();
                 EngineCore.outputText("<b>New Perk Acquired - Elven Bounty!</b>");
@@ -2120,7 +2118,7 @@ public class Holidays {
             else {
                 EngineCore.clearOutput();
                 EngineCore.outputText("<b>Perk Enhanced - Elven Bounty!</b>");
-                if (CoC.instance.temp == 1001) {
+                if (cumQ) {
                     player.addPerkValue(PerkLib.ElvenBounty, 1, 250);
                     EngineCore.outputText("<b> - +250mL cum production!</b>");
                 }
@@ -3192,7 +3190,6 @@ public class Holidays {
         EngineCore.menu();
         EngineCore.addButton(0, "Investigate", investigateCandyCaneBun);
         EngineCore.addButton(4, "Leave", leaveBeforeMeetingCandyCaneBun);
-        trace("FUNC SETUP LENGTH: " + CoC.instance.funcs.length);
 
         //LEAVE
         function leaveBeforeMeetingCandyCaneBun():void {

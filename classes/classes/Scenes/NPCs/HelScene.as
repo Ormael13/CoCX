@@ -1544,15 +1544,15 @@ private function stuffIzzyAndSalamanderWithDicks():void {
 	var z:Number = -1;
 	//Iz Ass
 	var zz:Number = -1;
-	temp = player.cocks.length;
-	while(temp > 0) {
-		temp--;
-		if(player.cockArea(temp) <= 85) {
-			if(x == -1) x = temp;
-			else if(y == -1) y = temp;
-			else if(z == -1) z = temp;
+	var i:int = player.cocks.length;
+	while(i > 0) {
+		i--;
+		if(player.cockArea(i) <= 85) {
+			if(x == -1) x = i;
+			else if(y == -1) y = i;
+			else if(z == -1) z = i;
 			else if(zz == -1) {
-				zz = temp;
+				zz = i;
 				break;
 			}
 		}

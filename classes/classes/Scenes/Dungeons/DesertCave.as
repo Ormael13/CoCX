@@ -3944,10 +3944,10 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 				if(player.biggestLactation() < 1) outputText("starting to lactate");
 				else outputText("lactating more");
 				outputText("?  Your belly is even bulging a little bit more than food can explain.\n");
-				temp = player.bRows();
-				while(temp > 0) {
-					temp--;
-					if(player.breastRows[temp].breastRating < 1) player.breastRows[temp].breastRating = 1;
+				var i:int = player.bRows();
+				while(i > 0) {
+					i--;
+					if(player.breastRows[i].breastRating < 1) player.breastRows[i].breastRating = 1;
 					
 				}
 				while(player.biggestLactation() < 1.5) {
@@ -3958,11 +3958,11 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			//3:
 			if(player.pregnancyIncubation == 216) {
 				outputText("\nYour breasts have definitely grown bigger, and they occasionally trickle milk.  More importantly than that, your stomach is bulging out in a small but unquestionable pot belly.  You're definitely pregnant.\n");
-				temp = player.bRows();
-				while(temp > 0) {
-					temp--;
-					if(player.breastRows[temp].breastRating < 20) player.breastRows[temp].breastRating++;
-					else player.breastRows[temp].breastRating += 0.5;
+				i = player.bRows();
+				while(i > 0) {
+					i--;
+					if(player.breastRows[i].breastRating < 20) player.breastRows[i].breastRating++;
+					else player.breastRows[i].breastRating += 0.5;
 				}
 				while(player.biggestLactation() < 1.5) {
 					player.boostLactation(.5);

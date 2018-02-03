@@ -889,13 +889,13 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 			var n1:int = -1;
 			var n2:int = -1;
 			var n3:int = -1;
-			temp = player.cockTotal();
-			while (temp > 0) {
-				temp--;
-				if (player.cocks[temp].cockType == CockTypesEnum.TENTACLE && temp != x) {
-					if (n1 == -1) n1 = temp;
-					else if (n2 == -1) n2 = temp;
-					else if (n3 == -1) n3 = temp;
+			var i:int = player.cockTotal();
+			while (i > 0) {
+				i--;
+				if (player.cocks[i].cockType == CockTypesEnum.TENTACLE && i != x) {
+					if (n1 == -1) n1 = i;
+					else if (n2 == -1) n2 = i;
+					else if (n3 == -1) n3 = i;
 					break;
 				}
 			}

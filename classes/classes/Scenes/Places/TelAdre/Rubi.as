@@ -1508,6 +1508,7 @@ private function rubiAppearance():void {
 }
 
 //Get Dressed
+//FIXME These should be stored and saved in their own array, instead of flags
 private function playDressUp():void {
 	clearOutput();
 	rubiSprite();
@@ -1573,10 +1574,8 @@ private function playDressUp():void {
 	closet[closet.length] = "Rubi's Waitress's Uniform";
 	if(closet.length > 0) {
 		outputText("<b>Rubi's Closet Contains:</b>\n");
-		temp = 0;
-		while(temp < closet.length) {
-			outputText(closet[temp] + "\n");
-			temp++;
+		for each (var item:String in closet){
+			outputText(item+"\n");
 		}
 		outputText("\n");
 	}
@@ -1590,6 +1589,7 @@ private function playDressUp():void {
 	}
 	addButton(14,"Back",rubiAppearance);
 }
+//FIXME use a submenu instead of this second function
 private function playDressUp2():void {
 	clearOutput();
 	rubiSprite();
@@ -1653,10 +1653,8 @@ private function playDressUp2():void {
 	}
 	if(closet.length > 0) {
 		outputText("<b>Rubi's Closet Contains:</b>\n");
-		temp = 0;
-		while(temp < closet.length) {
-			outputText(closet[temp] + "\n");
-			temp++;
+		for each (var item:String in closet){
+			outputText(item+"\n");
 		}
 		outputText("\n");
 	}
@@ -3594,6 +3592,7 @@ private function pickAnItemToFeedRubi():void {
 
 
 //(Give Clothes)
+//FIXME These should be stored and saved in their own string array, instead of flags
 public function giveRubiClothes(itype:ItemType = null):void {
 	clearOutput();
 	rubiSprite();

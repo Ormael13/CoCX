@@ -156,9 +156,9 @@ internal function sandwitchRape():void {
 			}
 			if(player.averageNipplesPerBreast() < 1) {
 				outputText("A dark spot appears on each breast, rapidly forming into a sensitive nipple.  ");
-				temp = player.breastRows.length;
-				while(temp > 0) {
-					temp--;
+				var index:int = player.breastRows.length;
+				while(index > 0) {
+					index--;
 					//If that breast didnt have nipples reset length
 					if(player.breastRows[0].nipplesPerBreast < 1) player.nippleLength = .2;
 					player.breastRows[0].nipplesPerBreast = 1;

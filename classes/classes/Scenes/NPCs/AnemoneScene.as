@@ -1629,13 +1629,13 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 			else if (player.hasCock() && player.cockThatFits(60) >= 0) {
 				x = player.cockThatFits(60);
 				y = -1;
-				temp = 0;
-				while (temp < player.cockTotal()) {
-					if (temp != x) {
-						y = temp;
+				var i:int = 0;
+				while (i < player.cockTotal()) {
+					if (i != x) {
+						y = i;
 						break;
 					}
-					temp++;
+					i++;
 				}
 				outputText("\n\n");
 				outputText(images.showImage("anemone-kid-male-bj"));

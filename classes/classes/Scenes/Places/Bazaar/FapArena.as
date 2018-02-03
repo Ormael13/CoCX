@@ -288,15 +288,15 @@ private function fapResults(place:Number = 3):void {
 		outputText("You can't believe you will get to fuck a whole train's worth of anuses and cocks.  This seems so unreal...  nevertheless, the tension and the scent of cum prove too much for you, and you give in to your lust.  ");
 		//[1/2 chance of this]
 		if(rand(2) == 0) {
-			temp = 3;
+			var shown:int = 3;
 			outputText("You eagerly grab the luxurious, gelatinous butt cheeks in front of you.  You notice a pussy underneath that fine ass, freely spilling sexual juices.  If the compelling order wasn't resonating deep in your mind, you would easily lose yourself in the herm's glorious depths. Nevertheless, your " + cockDescript(x) + " remembers its job and starts pushing its way between these tender orbs, then into the herm's tight anus.\n\n");
 		}
 		else {
 			outputText("You eagerly grab the firm, muscular ass cheeks in front of you, probably belonging to some vigorous male.  You grind your " + cockDescript(x) + " against his back and it automatically starts spilling pre-cum; as soon as the seminal liquid trickles down his shapely butt, you can feel his body tensing, as if his lust reached a new level.  Nevertheless, your " + cockDescript(x) + " remembers its job and starts pushing its way between these gorgeous buttocks, then into the man's tight anus.\n\n");
-			temp = 1;
+			shown = 1;
 		}
 		outputText("It lodges here comfortably for a few seconds, and then you remember you're the one initiating the butt-fucking train; so you quickly get down to business and give your dong an almighty thrust.  As soon as you start pushing, your sodomite partner grips ");
-		if(temp == 1) outputText("his");
+		if(shown == 1) outputText("his");
 		else outputText("her");
 		outputText(" own partner's butt and thrusts too under the pressure, who does the same to the one following, etc..  The last one is actually pushed face down onto the floor, but her butt bumps against the cum-tube fucking her, making the cock's owner bump in response, and it all propagates back to your own dick; you gasp in pleasure as the ass holding your " + cockDescript(x) + " clenches all the more as it bumps against your thighs, and decide to give another thrust, and another, and another.  It is hard, laborious, and slow, but your " + cockDescript(x) + " is rewarded beyond imagination: it feels like a gentle tingle every time a butt bumps into someone's ass.  It is like a giant anal wave coming and going through people's cocks, and you're the one riding the wave.  Soon people in the fuck train let out whorish moans, often interrupted when the wave hits them, before moaning all the more loudly afterwards.  Although you are not getting your " + assholeDescript() + " pounded like everyone else, you know you won't be able to keep up with such a crazy butt-fucking pace for long.  The ass you're fucking is almost moving on its own, jerking back and forth at each thrust, nearly beyond your control.  You know you're supposed to lead the whole fuck train, but the raw feelings are too much.  Every time you try to ease yourself into fucking that ass in a more comfortable way, it grinds against your thighs, driving your " + cockDescript(x) + " crazy and crushing any attempt at coherent thought.  You decide to give up and let your " + cockDescript(x) + " do the job itself.  Pleasure rises as you pound this ass relentlessly, making its owner join the chorus of moaning sounds.\n\n");
 		tentacleFapSpecial(place);
@@ -426,10 +426,10 @@ private function fapResults(place:Number = 3):void {
 
 //[SPECIAL: if player has an extra tentacle dick more than 40 inches long OR if the player has lost and has a unique tentacle dick, add this paragraph before the PC cums]
 private function tentacleFapSpecial(place:Number):void {
-	temp = player.cocks.length;
+	var index:int = player.cocks.length;
 	var x:Number = player.longestCock();
-	while(temp > 0) {
-		temp--;
+	while(index > 0) {
+		index--;
 		if(player.cocks[x].cockLength >= 40 && player.cocks[x].cockType == CockTypesEnum.TENTACLE)
 			break;
 	}
@@ -454,10 +454,10 @@ private function tentacleFapSpecial(place:Number):void {
 }
 //[in both cases, special paragraph for cumming with tentacle dick]
 private function tentacleFapCum():Boolean {
-	temp = player.cocks.length;
+	var index:int = player.cocks.length;
 	var x:Number = player.longestCock();
-	while(temp > 0) {
-		temp--;
+	while(index > 0) {
+		index--;
 		if(player.cocks[x].cockLength >= 40 && player.cocks[x].cockType == CockTypesEnum.TENTACLE)
 			break;
 	}

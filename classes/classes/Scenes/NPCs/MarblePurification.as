@@ -1594,8 +1594,7 @@ public class MarblePurification extends NPCAwareContent{
 			if(CoC.instance.time.hours <= 7 || CoC.instance.time.hours >= 20) outputText("Clara is laying sprawled out on the ground of her cage, snoring loudly.");
 			else
 			{
-				temp = rand(4);
-				switch (temp)
+				switch (rand(4))
 				{
 					case 0:
 						outputText("Clara is currently fidgeting with her clothing, it looks like she's doing some repairs or embroidery.  It's one of the few grateful moments of quiet you get from her.");

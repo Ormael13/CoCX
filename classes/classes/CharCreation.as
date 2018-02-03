@@ -75,8 +75,6 @@ import coc.view.MainView;
 		
 		public function newGameGo():void {
 			XXCNPC.unloadSavedNPCs();
-			funcs = [];
-			args = [];
 			mainView.eventTestInput.x = -10207.5;
 			mainView.eventTestInput.y = -1055.1;
 			hideStats();

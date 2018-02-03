@@ -366,11 +366,7 @@ public function saveLoad(e:MouseEvent = null):void
 	outputText("<b>Why does the Save File and Load File option not work?</b>\n");
 	outputText("<i>Save File and Load File are limited by the security settings imposed upon CoC by Flash. These options will only work if you have downloaded the game from the website, and are running it from your HDD. Additionally, they can only correctly save files to and load files from the directory where you have the game saved.</i>");
 	//This is to clear the 'game over' block from stopping simpleChoices from working.  Loading games supercede's game over.
-	if (mainView.getButtonText( 0 ) == "Game Over")
-	{
-		temp = 777;
-		mainView.setButtonText( 0, "save/load" );
-	}
+
 	menu();
 	//addButton(0, "Save", saveScreen);
 	addButton(1, "Load", loadScreen);
@@ -379,9 +375,10 @@ public function saveLoad(e:MouseEvent = null):void
 	addButton(6, "Load File", openSave);
 	//addButton(8, "AutoSave: " + autoSaveSuffix, autosaveToggle);
 	addButton(14, "Back", EventParser.gameOver, true);
-	
-	
-	if (temp == 777) {
+
+	if (mainView.getButtonText( 0 ) == "Game Over")
+	{
+		mainView.setButtonText( 0, "save/load" );
 		addButton(14, "Back", EventParser.gameOver, true);
 		return;
 	}
@@ -574,7 +571,6 @@ public function loadGame(slot:String):void
 		loadGameObject(saveFile, slot);
 		loadPermObject();
 		outputText("Game Loaded");
-		temp = 0;
 		
 		if (player.slotName == "VOID")
 		{

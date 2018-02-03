@@ -799,19 +799,26 @@ internal function rapeOozeWithMilk():void {
 			clearOutput();
 			doNext(playerMenu);
 			if (player.gender == 2 || (player.gender == 3 && rand(2) == 0)) {
-				temp = rand(3);
-				if (temp == 0) oozeRapesYouVaginally();
-				if (temp == 1) oozeRapesYouOrally();
-				if (temp == 2) oozeButtRapesYou();
+				switch (rand(3)) {
+					case 0:
+						oozeRapesYouVaginally();
+						break;
+
+					case 1:
+						oozeRapesYouOrally();
+						break;
+
+					case 2:
+						oozeButtRapesYou();
+						break;
+				}
 			}
 			//Everybody else
 			else {
-				temp = rand(2);
-				if (temp == 0) oozeRapesYouOrally();
-				if (temp == 1) oozeButtRapesYou();
+				if (rand(2) == 0) oozeRapesYouOrally();
+				else oozeButtRapesYou();
 			}
 			cleanupAfterCombat();
-			return;
 		}
 	}
 }

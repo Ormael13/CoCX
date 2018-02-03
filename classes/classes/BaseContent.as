@@ -846,37 +846,7 @@ import coc.xxc.StoryContext;
 			CoC.instance.gearStorage = val;
 		}
 */
-		
-		protected function get temp():int
-		{
-			return CoC.instance.temp;
-		}
-		
-		protected function set temp(val:int):void
-		{
-			CoC.instance.temp = val;
-		}
-		
-		protected function get args():Array
-		{
-			return CoC.instance.args;
-		}
-		
-		protected function set args(val:Array):void
-		{
-			CoC.instance.args = val;
-		}
-		
-		protected function get funcs():Array
-		{
-			return CoC.instance.funcs;
-		}
-		
-		protected function set funcs(val:Array):void
-		{
-			CoC.instance.funcs = val;
-		}
-		
+
 		protected function get mainView():MainView
 		{
 			return CoC.instance.mainView;
