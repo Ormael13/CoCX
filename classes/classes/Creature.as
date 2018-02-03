@@ -797,14 +797,14 @@ public class Creature extends Utils
 				"balls", "ballSize", "cumMultiplier", "hoursSinceCum",
 				"tallness", "hips.type", "butt.type", "lowerBody", "arms.type",
 				"hairLength", "hairType",
-				"faceType", "earType", "tongue.type", "eyes.type",
+				"faceType", "ears.type", "tongue.type", "eyes.type",
 				"str", "tou", "spe", "inte", "wis", "lib", "sens", "cor",
 				// Allow weaponAttack to be negative as a penalty to strength-calculated damage
 				// Same with armorDef, bonusHP, additionalXP
 				"weaponValue", "armorValue",
 				"lust", "fatigue", "soulforce", "mana", "wrath",
 				"level", "gems",
-				"tailCount", "tailVenom", "tailRecharge", "_horns",
+				"tailCount", "tailVenom", "tailRecharge", "horns.type",
 				"HP", "XP"
 			]);
 			// 2.2. non-empty String fields
