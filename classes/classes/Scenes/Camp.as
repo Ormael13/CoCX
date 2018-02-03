@@ -1679,24 +1679,23 @@ public function spellHealcamp():void {
 		return;
 	}
 	useMana(30);
-	temp = 0;
-	temp += combat.inteligencescalingbonus();
-	//temp *= spellMod();
-	if (player.unicornScore() >= 5) temp *= ((player.unicornScore() - 4) * 0.5);
-	if (player.alicornScore() >= 6) temp *= ((player.alicornScore() - 5) * 0.5);
-	if (player.armorName == "skimpy nurse's outfit") temp *= 1.2;
+	var healing:int = combat.scalingBonusIntelligence();
+	//healing *= spellMod();
+	if (player.unicornScore() >= 5) healing *= ((player.unicornScore() - 4) * 0.5);
+	if (player.alicornScore() >= 6) healing *= ((player.alicornScore() - 5) * 0.5);
+	if (player.armorName == "skimpy nurse's outfit") healing *= 1.2;
 	//Determine if critical heal!
 	var crit:Boolean = false;
 	var critHeal:int = 5;
 	if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) critHeal += (player.inte - 50) / 5;
 	if (rand(100) < critHeal) {
 		crit = true;
-		temp *= 1.75;
+		healing *= 1.75;
 	}
-	temp = Math.round(temp);
-	outputText("You chant a magical song of healing and recovery and your wounds start knitting themselves shut in response. <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
+	healing = Math.round(healing);
+	outputText("You chant a magical song of healing and recovery and your wounds start knitting themselves shut in response. <b>(<font color=\"#008000\">+" + healing + "</font>)</b>.");
 	if (crit == true) outputText(" <b>*Critical Heal!*</b>");
-	HPChange(temp,false);
+	HPChange(healing,false);
 	outputText("\n\n");
 	statScreenRefresh();
 	flags[kFLAGS.SPELLS_CAST]++;

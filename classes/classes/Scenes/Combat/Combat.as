@@ -808,8 +808,8 @@ public function baseelementalattacks(elementType:int = -1):void {
 }
 public function intwisscaling():Number {
 	var intwisscalingvar:Number = 0;
-	intwisscalingvar += inteligencescalingbonus();
-	intwisscalingvar += wisdomscalingbonus();
+	intwisscalingvar += scalingBonusIntelligence();
+	intwisscalingvar += scalingBonusWisdom();
 	return intwisscalingvar;
 }
 public function elementalattacks(elementType:int, summonedElementals:int):void {
@@ -1296,38 +1296,6 @@ public function oneThrowTotalCost():Number {
 	return onearrowcost;
 }
 
-public function speedscalingbonus():Number {
-	var speedscalingvalue:Number = 0;
-	if (player.spe >= 21) speedscalingvalue += player.spe - 20;
-	if (player.spe >= 41) speedscalingvalue += player.spe - 40;
-	if (player.spe >= 61) speedscalingvalue += player.spe - 60;
-	if (player.spe >= 81) speedscalingvalue += player.spe - 80;
-	if (player.spe >= 101) speedscalingvalue += player.spe - 100;
-	if (player.spe >= 151) speedscalingvalue += player.spe - 150;
-	if (player.spe >= 201) speedscalingvalue += player.spe - 200;
-	if (player.spe >= 251) speedscalingvalue += player.spe - 250;
-	if (player.spe >= 301) speedscalingvalue += player.spe - 300;
-	if (player.spe >= 351) speedscalingvalue += player.spe - 350;
-	if (player.spe >= 401) speedscalingvalue += player.spe - 400;
-	if (player.spe >= 451) speedscalingvalue += player.spe - 450;
-	if (player.spe >= 501) speedscalingvalue += player.spe - 500;
-	if (player.spe >= 551) speedscalingvalue += player.spe - 550;
-	if (player.spe >= 601) speedscalingvalue += player.spe - 600;
-	if (player.spe >= 651) speedscalingvalue += player.spe - 650;
-	if (player.spe >= 701) speedscalingvalue += player.spe - 700;
-	if (player.spe >= 751) speedscalingvalue += player.spe - 750;
-	if (player.spe >= 801) speedscalingvalue += player.spe - 800;
-	if (player.spe >= 851) speedscalingvalue += player.spe - 850;
-	if (player.spe >= 901) speedscalingvalue += player.spe - 900;
-	if (player.spe >= 951) speedscalingvalue += player.spe - 950;
-	if (player.spe >= 1001) speedscalingvalue += player.spe - 1000;
-	if (player.spe >= 1051) speedscalingvalue += player.spe - 1050;
-	if (player.spe >= 1101) speedscalingvalue += player.spe - 1100;
-	if (player.spe >= 1151) speedscalingvalue += player.spe - 1150;
-	if (player.spe >= 1201) speedscalingvalue += player.spe - 1200;
-	return speedscalingvalue;
-}
-
 public function fireBow():void {
 	clearOutput();
 	if (monster.hasStatusEffect(StatusEffects.BowDisabled)) {
@@ -1511,7 +1479,7 @@ public function multiArrowsStrike():void {
 		var damage:Number = 0;
 		if (weaponRangePerk == "Bow") {
 			damage += player.spe;
-			damage += speedscalingbonus() * 0.2;
+			damage += scalingBonusSpeed() * 0.2;
 			if (damage < 10) damage = 10;
 		}
 		if (weaponRangePerk == "Crossbow") damage += player.weaponRangeAttack * 10;
@@ -1804,7 +1772,7 @@ public function throwWeapon():void {
 	if (rand(100) < accRange) {
 		var damage:Number = 0;
 		damage += player.str;
-		damage += strenghtscalingbonus() * 0.2;
+		damage += scalingBonusStrength() * 0.2;
 		if (damage < 10) damage = 10;
 		if (player.hasPerk(PerkLib.DeadlyThrow)) damage += player.spe;
 		//Weapon addition!
@@ -2252,102 +2220,6 @@ public function attacksAccuracy():Number {
 */	return atkmod;
 }
 
-public function strenghtscalingbonus():Number {
-	var strenghtscalingvalue:Number = 0;
-	if (player.str >= 21) strenghtscalingvalue += player.str - 20;
-	if (player.str >= 41) strenghtscalingvalue += player.str - 40;
-	if (player.str >= 61) strenghtscalingvalue += player.str - 60;
-	if (player.str >= 81) strenghtscalingvalue += player.str - 80;
-	if (player.str >= 101) strenghtscalingvalue += player.str - 100;
-	if (player.str >= 151) strenghtscalingvalue += player.str - 150;
-	if (player.str >= 201) strenghtscalingvalue += player.str - 200;
-	if (player.str >= 251) strenghtscalingvalue += player.str - 250;
-	if (player.str >= 301) strenghtscalingvalue += player.str - 300;
-	if (player.str >= 351) strenghtscalingvalue += player.str - 350;
-	if (player.str >= 401) strenghtscalingvalue += player.str - 400;
-	if (player.str >= 451) strenghtscalingvalue += player.str - 450;
-	if (player.str >= 501) strenghtscalingvalue += player.str - 500;
-	if (player.str >= 551) strenghtscalingvalue += player.str - 550;
-	if (player.str >= 601) strenghtscalingvalue += player.str - 600;
-	if (player.str >= 651) strenghtscalingvalue += player.str - 650;
-	if (player.str >= 701) strenghtscalingvalue += player.str - 700;
-	if (player.str >= 751) strenghtscalingvalue += player.str - 750;
-	if (player.str >= 801) strenghtscalingvalue += player.str - 800;
-	if (player.str >= 851) strenghtscalingvalue += player.str - 850;
-	if (player.str >= 901) strenghtscalingvalue += player.str - 900;
-	if (player.str >= 951) strenghtscalingvalue += player.str - 950;
-	if (player.str >= 1001) strenghtscalingvalue += player.str - 1000;
-	if (player.str >= 1051) strenghtscalingvalue += player.str - 1050;
-	if (player.str >= 1101) strenghtscalingvalue += player.str - 1100;
-	if (player.str >= 1151) strenghtscalingvalue += player.str - 1150;
-	if (player.str >= 1201) strenghtscalingvalue += player.str - 1200;
-	return strenghtscalingvalue;
-}
-public function inteligencescalingbonus():Number {
-		var inteligencescalingvalue:Number = 0;
-		if (player.inte >= 21 && player.inte < 41) inteligencescalingvalue += (player.inte / 2 + rand((player.inte * 3) / 4));
-		if (player.inte >= 41 && player.inte < 61) inteligencescalingvalue += ((player.inte * 2) / 3 + rand(player.inte));
-		if (player.inte >= 61 && player.inte < 81) inteligencescalingvalue += ((player.inte * 5) / 6 + rand(player.inte * 1.25));
-		if (player.inte >= 81 && player.inte < 101) inteligencescalingvalue += (player.inte + rand(player.inte * 1.5));
-		if (player.inte >= 101 && player.inte < 151) inteligencescalingvalue += ((player.inte * 1.25) + rand(player.inte * 1.75));
-		if (player.inte >= 151 && player.inte < 201) inteligencescalingvalue += ((player.inte * 1.5) + rand(player.inte * 2));
-		if (player.inte >= 201 && player.inte < 251) inteligencescalingvalue += ((player.inte * 1.75) + rand(player.inte * 2.25));
-		if (player.inte >= 251 && player.inte < 301) inteligencescalingvalue += ((player.inte * 2) + rand(player.inte * 2.5));
-		if (player.inte >= 301 && player.inte < 351) inteligencescalingvalue += ((player.inte * 2.25) + rand(player.inte * 2.75));
-		if (player.inte >= 351 && player.inte < 401) inteligencescalingvalue += ((player.inte * 2.5) + rand(player.inte * 3));
-		if (player.inte >= 401 && player.inte < 451) inteligencescalingvalue += ((player.inte * 2.75) + rand(player.inte * 3.25));
-		if (player.inte >= 451 && player.inte < 501) inteligencescalingvalue += ((player.inte * 3) + rand(player.inte * 3.5));
-		if (player.inte >= 501 && player.inte < 551) inteligencescalingvalue += ((player.inte * 3.25) + rand(player.inte * 3.75));
-		if (player.inte >= 551 && player.inte < 601) inteligencescalingvalue += ((player.inte * 3.5) + rand(player.inte * 4));
-		if (player.inte >= 601 && player.inte < 651) inteligencescalingvalue += ((player.inte * 3.75) + rand(player.inte * 4.25));
-		if (player.inte >= 651 && player.inte < 701) inteligencescalingvalue += ((player.inte * 4) + rand(player.inte * 4.5));
-		if (player.inte >= 701 && player.inte < 751) inteligencescalingvalue += ((player.inte * 4.25) + rand(player.inte * 4.75));
-		if (player.inte >= 751 && player.inte < 801) inteligencescalingvalue += ((player.inte * 4.5) + rand(player.inte * 5));
-		if (player.inte >= 801 && player.inte < 851) inteligencescalingvalue += ((player.inte * 4.75) + rand(player.inte * 5.25));
-		if (player.inte >= 851 && player.inte < 901) inteligencescalingvalue += ((player.inte * 5) + rand(player.inte * 5.5));
-		if (player.inte >= 901 && player.inte < 951) inteligencescalingvalue += ((player.inte * 5.25) + rand(player.inte * 5.75));
-		if (player.inte >= 951 && player.inte < 1001) inteligencescalingvalue += ((player.inte * 5.5) + rand(player.inte * 6));
-		if (player.inte >= 1001 && player.inte < 1051) inteligencescalingvalue += ((player.inte * 5.75) + rand(player.inte * 6.25));
-		if (player.inte >= 1051 && player.inte < 1101) inteligencescalingvalue += ((player.inte * 6) + rand(player.inte * 6.5));
-		if (player.inte >= 1101 && player.inte < 1151) inteligencescalingvalue += ((player.inte * 6.25) + rand(player.inte * 6.75));
-		if (player.inte >= 1151 && player.inte < 1201) inteligencescalingvalue += ((player.inte * 6.5) + rand(player.inte * 7));
-		if (player.inte >= 1201) inteligencescalingvalue += ((player.inte * 6.75) + rand(player.inte * 7.25));
-		else inteligencescalingvalue += (player.inte/3 + rand(player.inte/2));
-		return inteligencescalingvalue;
-}
-public function libidoscalingbonus():Number {
-		var libidoscalingvalue:Number = 0;
-		if (player.lib >= 21 && player.lib < 41) libidoscalingvalue += (player.lib / 2 + rand((player.lib * 3) / 4));
-		if (player.lib >= 41 && player.lib < 61) libidoscalingvalue += ((player.lib * 2) / 3 + rand(player.lib));
-		if (player.lib >= 61 && player.lib < 81) libidoscalingvalue += ((player.lib * 5) / 6 + rand(player.lib * 1.25));
-		if (player.lib >= 81 && player.lib < 101) libidoscalingvalue += (player.lib + rand(player.lib * 1.5));
-		if (player.lib >= 101 && player.lib < 151) libidoscalingvalue += ((player.lib * 1.25) + rand(player.lib * 1.75));
-		if (player.lib >= 151 && player.lib < 201) libidoscalingvalue += ((player.lib * 1.5) + rand(player.lib * 2));
-		if (player.lib >= 201 && player.lib < 251) libidoscalingvalue += ((player.lib * 1.75) + rand(player.lib * 2.25));
-		if (player.lib >= 251 && player.lib < 301) libidoscalingvalue += ((player.lib * 2) + rand(player.lib * 2.5));
-		if (player.lib >= 301 && player.lib < 351) libidoscalingvalue += ((player.lib * 2.25) + rand(player.lib * 2.75));
-		if (player.lib >= 351 && player.lib < 401) libidoscalingvalue += ((player.lib * 2.5) + rand(player.lib * 3));
-		if (player.lib >= 401 && player.lib < 451) libidoscalingvalue += ((player.lib * 2.75) + rand(player.lib * 3.25));
-		if (player.lib >= 451 && player.lib < 501) libidoscalingvalue += ((player.lib * 3) + rand(player.lib * 3.5));
-		if (player.lib >= 501 && player.lib < 551) libidoscalingvalue += ((player.lib * 3.25) + rand(player.lib * 3.75));
-		if (player.lib >= 551 && player.lib < 601) libidoscalingvalue += ((player.lib * 3.5) + rand(player.lib * 4));
-		if (player.lib >= 601 && player.lib < 651) libidoscalingvalue += ((player.lib * 3.75) + rand(player.lib * 4.25));
-		if (player.lib >= 651 && player.lib < 701) libidoscalingvalue += ((player.lib * 4) + rand(player.lib * 4.5));
-		if (player.lib >= 701 && player.lib < 751) libidoscalingvalue += ((player.lib * 4.25) + rand(player.lib * 4.75));
-		if (player.lib >= 751 && player.lib < 801) libidoscalingvalue += ((player.lib * 4.5) + rand(player.lib * 5));
-		if (player.lib >= 801 && player.lib < 851) libidoscalingvalue += ((player.lib * 4.75) + rand(player.lib * 5.25));
-		if (player.lib >= 851 && player.lib < 901) libidoscalingvalue += ((player.lib * 5) + rand(player.lib * 5.5));
-		if (player.lib >= 901 && player.lib < 951) libidoscalingvalue += ((player.lib * 5.25) + rand(player.lib * 5.75));
-		if (player.lib >= 951 && player.lib < 1001) libidoscalingvalue += ((player.lib * 5.5) + rand(player.lib * 6));
-		if (player.lib >= 1001 && player.lib < 1051) libidoscalingvalue += ((player.lib * 5.75) + rand(player.lib * 6.25));
-		if (player.lib >= 1051 && player.lib < 1101) libidoscalingvalue += ((player.lib * 6) + rand(player.lib * 6.5));
-		if (player.lib >= 1101 && player.lib < 1151) libidoscalingvalue += ((player.lib * 6.25) + rand(player.lib * 6.75));
-		if (player.lib >= 1151 && player.lib < 1201) libidoscalingvalue += ((player.lib * 6.5) + rand(player.lib * 7));
-		if (player.lib >= 1201) libidoscalingvalue += ((player.lib * 6.75) + rand(player.lib * 7.25));
-		else libidoscalingvalue += (player.lib / 3 + rand(player.lib / 2));
-		return libidoscalingvalue;
-}
-
 //ATTACK
 public function attack():void {
 	flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
@@ -2504,7 +2376,7 @@ public function attack():void {
 	//BASIC DAMAGE STUFF
 	
 	damage += player.str;
-	damage += strenghtscalingbonus() * 0.25;
+	damage += scalingBonusStrength() * 0.25;
 	if (player.hasPerk(PerkLib.HoldWithBothHands) && player.weapon != WeaponLib.FISTS && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
 	if (damage < 10) damage = 10;
 	if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 1 && flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] >= 2) damage *= 0.95;
@@ -5335,7 +5207,7 @@ public function GooTease():void {
 			}
 			outputText(" This feels very pleasurable to you but not as much as to your opponent who start to drool at your ministration.");
 			//NERF TEASE DAMAGE
-			damage += libidoscalingbonus();
+			damage += scalingBonusLibido();
 			damage *= 0.25;
 			damage = Math.round(damage);
 			if(player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) {
@@ -5803,37 +5675,6 @@ public function greatDive():void {
 	monster.removeStatusEffect(StatusEffects.MonsterAttacksDisabled);
 	enemyAI();
 }
-public function toughnessscalingbonus():Number {
-	var toughnessscalingvalue:Number = 0;
-	if (player.tou >= 21) toughnessscalingvalue += player.tou - 20;
-	if (player.tou >= 41) toughnessscalingvalue += player.tou - 40;
-	if (player.tou >= 61) toughnessscalingvalue += player.tou - 60;
-	if (player.tou >= 81) toughnessscalingvalue += player.tou - 80;
-	if (player.tou >= 101) toughnessscalingvalue += player.tou - 100;
-	if (player.tou >= 151) toughnessscalingvalue += player.tou - 150;
-	if (player.tou >= 201) toughnessscalingvalue += player.tou - 200;
-	if (player.tou >= 251) toughnessscalingvalue += player.tou - 250;
-	if (player.tou >= 301) toughnessscalingvalue += player.tou - 300;
-	if (player.tou >= 351) toughnessscalingvalue += player.tou - 350;
-	if (player.tou >= 401) toughnessscalingvalue += player.tou - 400;
-	if (player.tou >= 451) toughnessscalingvalue += player.tou - 450;
-	if (player.tou >= 501) toughnessscalingvalue += player.tou - 500;
-	if (player.tou >= 551) toughnessscalingvalue += player.tou - 550;
-	if (player.tou >= 601) toughnessscalingvalue += player.tou - 600;
-	if (player.tou >= 651) toughnessscalingvalue += player.tou - 650;
-	if (player.tou >= 701) toughnessscalingvalue += player.tou - 700;
-	if (player.tou >= 751) toughnessscalingvalue += player.tou - 750;
-	if (player.tou >= 801) toughnessscalingvalue += player.tou - 800;
-	if (player.tou >= 851) toughnessscalingvalue += player.tou - 850;
-	if (player.tou >= 901) toughnessscalingvalue += player.tou - 900;
-	if (player.tou >= 951) toughnessscalingvalue += player.tou - 950;
-	if (player.tou >= 1001) toughnessscalingvalue += player.tou - 1000;
-	if (player.tou >= 1051) toughnessscalingvalue += player.tou - 1050;
-	if (player.tou >= 1101) toughnessscalingvalue += player.tou - 1100;
-	if (player.tou >= 1151) toughnessscalingvalue += player.tou - 1150;
-	if (player.tou >= 1201) toughnessscalingvalue += player.tou - 1200;
-	return toughnessscalingvalue;
-}
 
 public function soulskillMod():Number {
 	var modss:Number = 1;
@@ -5942,37 +5783,53 @@ public function soulskillCost():Number {
 	return modssc;
 }
 
-public function wisdomscalingbonus():Number {
-	var wisdomscalingvalue:Number = 0;
-	if (player.wis >= 21 && player.wis < 41) wisdomscalingvalue += (player.wis / 2 + rand((player.wis * 3) / 4));
-	if (player.wis >= 41 && player.wis < 61) wisdomscalingvalue += ((player.wis * 2) / 3 + rand(player.wis));
-	if (player.wis >= 61 && player.wis < 81) wisdomscalingvalue += ((player.wis * 5) / 6 + rand(player.wis * 1.25));
-	if (player.wis >= 81 && player.wis < 101) wisdomscalingvalue += (player.wis + rand(player.wis * 1.5));
-	if (player.wis >= 101 && player.wis < 151) wisdomscalingvalue += ((player.wis * 1.25) + rand(player.wis * 1.75));
-	if (player.wis >= 151 && player.wis < 201) wisdomscalingvalue += ((player.wis * 1.5) + rand(player.wis * 2));
-	if (player.wis >= 201 && player.wis < 251) wisdomscalingvalue += ((player.wis * 1.75) + rand(player.wis * 2.25));
-	if (player.wis >= 251 && player.wis < 301) wisdomscalingvalue += ((player.wis * 2) + rand(player.wis * 2.5));
-	if (player.wis >= 301 && player.wis < 351) wisdomscalingvalue += ((player.wis * 2.25) + rand(player.wis * 2.75));
-	if (player.wis >= 351 && player.wis < 401) wisdomscalingvalue += ((player.wis * 2.5) + rand(player.wis * 3));
-	if (player.wis >= 401 && player.wis < 451) wisdomscalingvalue += ((player.wis * 2.75) + rand(player.wis * 3.25));
-	if (player.wis >= 451 && player.wis < 501) wisdomscalingvalue += ((player.wis * 3) + rand(player.wis * 3.5));
-	if (player.wis >= 501 && player.wis < 551) wisdomscalingvalue += ((player.wis * 3.25) + rand(player.wis * 3.75));
-	if (player.wis >= 551 && player.wis < 601) wisdomscalingvalue += ((player.wis * 3.5) + rand(player.wis * 4));
-	if (player.wis >= 601 && player.wis < 651) wisdomscalingvalue += ((player.wis * 3.75) + rand(player.wis * 4.25));
-	if (player.wis >= 651 && player.wis < 701) wisdomscalingvalue += ((player.wis * 4) + rand(player.wis * 4.5));
-	if (player.wis >= 701 && player.wis < 751) wisdomscalingvalue += ((player.wis * 4.25) + rand(player.wis * 4.75));
-	if (player.wis >= 751 && player.wis < 801) wisdomscalingvalue += ((player.wis * 4.5) + rand(player.wis * 5));
-	if (player.wis >= 801 && player.wis < 851) wisdomscalingvalue += ((player.wis * 4.75) + rand(player.wis * 5.25));
-	if (player.wis >= 851 && player.wis < 901) wisdomscalingvalue += ((player.wis * 5) + rand(player.wis * 5.5));
-	if (player.wis >= 901 && player.wis < 951) wisdomscalingvalue += ((player.wis * 5.25) + rand(player.wis * 5.75));
-	if (player.wis >= 951 && player.wis < 1001) wisdomscalingvalue += ((player.wis * 5.5) + rand(player.wis * 6));
-	if (player.wis >= 1001 && player.wis < 1051) wisdomscalingvalue += ((player.wis * 5.75) + rand(player.wis * 6.25));
-	if (player.wis >= 1051 && player.wis < 1101) wisdomscalingvalue += ((player.wis * 6) + rand(player.wis * 6.5));
-	if (player.wis >= 1101 && player.wis < 1151) wisdomscalingvalue += ((player.wis * 6.25) + rand(player.wis * 6.75));
-	if (player.wis >= 1151 && player.wis < 1201) wisdomscalingvalue += ((player.wis * 6.5) + rand(player.wis * 7));
-	if (player.wis >= 1201) wisdomscalingvalue += ((player.wis * 6.75) + rand(player.wis * 7.25));
-	else wisdomscalingvalue += (player.wis/3 + rand(player.wis/2));
-	return wisdomscalingvalue;
-}
+	private function touSpeStrScale(stat:int):Number{
+		var scale:Number = 0;
+		for(var i:int = 20; (i <= 80) && (i <= stat); i += 20){
+			scale += stat - i;
+		}
+		for(i = 100; (i <= 1200) && (i <= stat); i += 50){
+			scale += stat - i;
+		}
+		return scale;
+	}
+
+	public function scalingBonusToughness():Number {
+		return touSpeStrScale(player.tou);
+	}
+
+	public function scalingBonusSpeed():Number {
+		return touSpeStrScale(player.spe);
+	}
+
+	public function scalingBonusStrength():Number {
+		return touSpeStrScale(player.str);
+	}
+
+	private function inteWisLibScale(stat:int):Number{
+		var scale:Number = 6.75;
+		var changeBy:Number = 0.50;
+		if(stat <= 1200){
+			if(stat <= 100){
+				scale = (2/6) + ((int(stat/100)/20) * (1/6));
+				changeBy = 0.25;
+			} else {
+				scale = 1 + (int((stat - 100)/50) * 0.25);
+			}
+		}
+		return (stat * scale) + rand(stat * (scale + changeBy));
+	}
+
+	public function scalingBonusWisdom():Number {
+		return inteWisLibScale(player.wis);
+	}
+
+	public function scalingBonusIntelligence():Number {
+		return inteWisLibScale(player.inte);
+	}
+
+	public function scalingBonusLibido():Number {
+		return inteWisLibScale(player.lib);
+	}
 }
 }

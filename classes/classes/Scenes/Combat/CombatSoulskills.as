@@ -177,7 +177,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		var soulforcecost:int = 30 * soulskillCost() * soulskillcostmulti();
 		player.soulforce -= soulforcecost;
 		var damage:Number = player.str;
-		damage += strenghtscalingbonus() * 0.5;
+		damage += scalingBonusStrength() * 0.5;
 		if (damage < 10) damage = 10;
 		//weapon bonus
 		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.04));
@@ -248,7 +248,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		var soulforcecost:int = 50 * soulskillCost() * soulskillcostmulti();
 		player.soulforce -= soulforcecost;
 		var damage:Number = player.str;
-		damage += strenghtscalingbonus() * 0.5;
+		damage += scalingBonusStrength() * 0.5;
 		if (damage < 10) damage = 10;
 		//weapon bonus
 		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.04));
@@ -315,7 +315,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		var soulforcecost:int = 10 * soulskillCost() * soulskillcostmulti();
 		player.soulforce -= soulforcecost;
-		var damage:Number = inteligencescalingbonus();
+		var damage:Number = scalingBonusIntelligence();
 		if (damage < 10) damage = 10;
 		damage *= spellMod();
 		//soulskill mod effect
@@ -364,7 +364,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		var soulforcecost:int = 60 * soulskillCost() * soulskillcostmulti();
 		player.soulforce -= soulforcecost;
-		var damage:Number = inteligencescalingbonus();
+		var damage:Number = scalingBonusIntelligence();
 		if (damage < 10) damage = 10;
 		damage *= spellMod();
 		//soulskill mod effect
@@ -403,9 +403,9 @@ public class CombatSoulskills extends BaseCombatContent {
 		player.soulforce -= soulforcecost;
 		var damage:Number = unarmedAttack();
 		damage += player.str;
-		damage += strenghtscalingbonus();
+		damage += scalingBonusStrength();
 		damage += player.wis;
-		damage += wisdomscalingbonus();
+		damage += scalingBonusWisdom();
 		//other bonuses
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
 		var crit:Boolean = false;
@@ -467,9 +467,9 @@ public class CombatSoulskills extends BaseCombatContent {
 		player.soulforce -= soulforcecost;
 		var damage:Number = unarmedAttack();
 		damage += player.str;
-		damage += strenghtscalingbonus();
+		damage += scalingBonusStrength();
 		damage += player.wis;
-		damage += wisdomscalingbonus();
+		damage += scalingBonusWisdom();
 		//other bonuses
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
 		var crit:Boolean = false;
@@ -523,9 +523,9 @@ public class CombatSoulskills extends BaseCombatContent {
 		player.soulforce -= soulforcecost;
 		var damage:Number = unarmedAttack();
 		damage += player.str;
-		damage += strenghtscalingbonus();
+		damage += scalingBonusStrength();
 		damage += player.wis;
-		damage += wisdomscalingbonus();
+		damage += scalingBonusWisdom();
 		//other bonuses
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
 		var crit:Boolean = false;
@@ -559,11 +559,11 @@ public class CombatSoulskills extends BaseCombatContent {
 		var soulforcecost:int = 100 * soulskillCost() * soulskillcostmulti();
 		player.soulforce -= soulforcecost;
 		var damage:Number = player.str;
-		damage += strenghtscalingbonus() * 1.8;
+		damage += scalingBonusStrength() * 1.8;
 		damage += player.inte;
-		damage += inteligencescalingbonus() * 1.8;
+		damage += scalingBonusIntelligence() * 1.8;
 		damage += player.wis;
-		damage += wisdomscalingbonus() * 1.8;
+		damage += scalingBonusWisdom() * 1.8;
 		if (damage < 10) damage = 10;
 		damage *= spellMod();
 		//soulskill mod effect
