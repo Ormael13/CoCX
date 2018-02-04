@@ -1552,7 +1552,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("\n\nShe pirouettes away, practically dancing into the sky while she strokes and teases the cock you just lost.  You shudder and shake as orgasm wracks your body, your cum falling like rain thousands of feet away.  You swear, you can hear your pet laughing.");
 			player.orgasm();
 			dynStats("lib", -2, "sen", -2, "cor", 5);
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218]++;
+			flags[kFLAGS.CERAPH_OWNED_DICKS]++;
 			player.removeCock(x, 1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1570,7 +1570,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			//(-100 lust, -1 fetish, +1 vagina toy status)
 			player.orgasm();
 			dynStats("lib", -2, "sen", -2, "cor", 5);
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219]++;
+			flags[kFLAGS.CERAPH_OWNED_PUSSIES]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1623,7 +1623,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("Ceraph turns and prances off through the rocks, tweaking your nipples HARD every few moments to remind you of your choice.  She vanishes before long, leaving you to deal with the slowly dwindling sensation of her cock in your tits.\n\n");
 			//(-1 fetish, +1 tit toy status)
 			dynStats("lus", 20, "cor", 5);
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220]++;
+			flags[kFLAGS.CERAPH_OWNED_TITS]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
 

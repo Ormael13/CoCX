@@ -727,7 +727,6 @@ private function pickACockForSock():void {
 	}
 	else {
 		outputText("\n\nWhich cock would you like to put it on?");
-		temp = 0;
 		var button:int = 0;
 		menu();
 		while(button < player.cockTotal()) {
@@ -837,7 +836,6 @@ private function takeOffDatSock():void {
 	clearOutput();
 	outputText("Which cock-sock would you like to get removed?");
 	//(display list of socked cocks)
-	temp = 0;
 	var button:int = 0;
 	menu();
 	while(button < player.cockTotal()) {
@@ -862,11 +860,11 @@ private function removeTargettedSock(index:int):void {
 	var storage:String = player.cocks[index].sock;
 	var extra:Boolean = false;
 	player.cocks[index].sock = "";
-	temp = player.cockTotal();
-	while(temp > 0) {
-		temp--;
+	var i:int = player.cockTotal();
+	while(i > 0) {
+		i--;
 		//If the PC has another cock with the same effect.
-		if(player.cocks[temp].sock == storage) {
+		if(player.cocks[i].sock == storage) {
 			extra = true;
 		}
 	}

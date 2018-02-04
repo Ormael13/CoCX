@@ -171,7 +171,9 @@ import flash.display.Loader;
 		public function getLoadedImageCount():int
 		{
 			var cnt:int=0;
-			for (var s:String in _imageTable) cnt++;
+			for each (var set:Array in _imageTable){
+				cnt += set.length;
+			}
 			return cnt;
 		}
 

@@ -96,8 +96,8 @@ use namespace CoC;
 				return;
 			}
 			//Chance of dick-dragging! OLD:10% + 10% per two foot up to 30%
-			temp = 10 + (player.longestCockLength() - player.tallness) / 24 * 10;
-			if (temp > 0 && player.longestCockLength() >= player.tallness - 10 && player.totalCockThickness() >= 8)
+			var chance:Number = 10 + (player.longestCockLength() - player.tallness) / 24 * 10;
+			if (chance > 0 && player.longestCockLength() >= player.tallness - 10 && player.totalCockThickness() >= 8)
 				choice[choice.length] = 8;
 
 			//Encounter golems, goblins and imps in NG+

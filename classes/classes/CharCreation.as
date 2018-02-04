@@ -19,7 +19,8 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kCOUNTERS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
-import classes.Scenes.Dungeons.DungeonAbstractContent;
+	import classes.Scenes.Areas.Desert.SandWitchScene;
+	import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.NPCs.XXCNPC;
 import classes.Scenes.SceneLib;
@@ -75,8 +76,6 @@ import coc.view.MainView;
 		
 		public function newGameGo():void {
 			XXCNPC.unloadSavedNPCs();
-			funcs = [];
-			args = [];
 			mainView.eventTestInput.x = -10207.5;
 			mainView.eventTestInput.y = -1055.1;
 			hideStats();
@@ -269,10 +268,8 @@ import coc.view.MainView;
 
 			//PLOTZ
 			JojoScene.monk                               = 0;
-			CoC.instance.whitney                           = 0;
-			CoC.instance.sand                              = 0;
+			SandWitchScene.rapedBefore = false;
 		//Replaced by flag	CoC.instance.beeProgress = 0;
-			CoC.instance.giacomo                           = 0;
 			SceneLib.isabellaScene.isabellaOffspringData = []; //CLEAR!
 			//Lets get this bitch started
 			CoC.instance.inCombat = false;

@@ -175,13 +175,9 @@ public function knockUpUrtaChance():void { //Moved here from UrtaPregs since it 
 	if (flags[kFLAGS.URTA_FERTILE] != 1) return;
 	//10% + up to 40% @ 1000mLs of cum, with bonus virility!
 	var chance:Number = 10;
-	temp = player.cumQ() / 25;
-	if (temp > 40) temp = 40;
-	chance += temp;
+	chance += Math.min(player.cumQ() / 25,40);
 	//Bonus virility time!
-	temp = player.virilityQ() * 100;
-	if (temp > 50) temp = 50;
-	chance += temp;
+	chance += Math.min(player.virilityQ() * 100, 50);
 	//FINAL ROLL!
 	if (chance > rand(100)) {
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, 384);

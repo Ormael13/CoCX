@@ -276,8 +276,7 @@ internal function tamaniSexLetHer():void {
 		}
 		else {
 			outputText("You meekly undress and ask Tamani how she would like to take you today.  She titters and gives your ");
-			temp = rand(3);
-			switch(temp) {
+			switch(rand(3)) {
 				case 0:
 					outputText(cockDescript(0));
 					break;

@@ -89,8 +89,6 @@ public class Masturbation extends BaseContent {
 					else meditate();
 				}
 				else masturbateGo();
-				funcs = new Array();
-				args = new Array();
 				return;
 			}
 			addButton(14, "Back", playerMenu);
@@ -3188,7 +3186,7 @@ public class Masturbation extends BaseContent {
 			outputText("You attempt to reach for your sex using your hand when suddenly a crazy idea fills your mind. You don't actually need your hand to fuck yourself you got way better than that...actually eight time better!\n\n");
 			outputText("Positioning yourself so your " + vaginaDescript(0) + " point toward the sky you start to move your tentacles one by one toward your love hole.");
 			outputText(" Once comfortable you start by inserting one tentacle into your snatch pushing it as deep as you can. Since there's enough space in there for more you add a second one then a third. Before long six of your tentacle are inside of your " + vaginaDescript(0) + " filling you perfectly.");
-			outputText(" You proceed to grope your " + breastDescript(temp) + " with the two remaining tentacle squeezing them until thin squirts of milk spray from each nipple, spattering milk around. Now this is nice but this needs movement.");
+			outputText(" You proceed to grope your " + breastDescript(0) + " with the two remaining tentacle squeezing them until thin squirts of milk spray from each nipple, spattering milk around. Now this is nice but this needs movement.");
 			outputText(" You start by squirting a little ink so to lube your limbs nicely then proceed to slowly fuck yourself squirming your tentacle inside your love canal in order to stimulate your clit and drive yourself completely nuts.");
 			outputText(" Wow this is better than what any of those tentacle beast out there can do heck you know where to wriggle those tentacle just so to drive you to the edge ramming your clitty with perfect precision!");
 			outputText(" Fucking yourself with abandon your black girlcum starts to rain on the ground until everywhere around you is entirely soaked but you don't care this feels way too good to stop.");
@@ -3206,27 +3204,27 @@ public class Masturbation extends BaseContent {
 		private function tentacleSelfFuck():void {
 			var x:int = -1;
 			var y:int = -1;
-			temp = 0;
-			while (temp < player.cocks.length) {
-				if (player.cocks[temp].cockType == CockTypesEnum.TENTACLE  ||
-					player.cocks[temp].cockType == CockTypesEnum.STAMEN) {
-					if (x == -1) x = temp;
+			var index:int = 0;
+			while (index < player.cocks.length) {
+				if (player.cocks[index].cockType == CockTypesEnum.TENTACLE  ||
+					player.cocks[index].cockType == CockTypesEnum.STAMEN) {
+					if (x == -1) x = index;
 				}
-				temp++;
+				index++;
 			}
 			//Pick a second dick that isn't the first.
-			temp = 0;
-			while (temp < player.cocks.length) {
-				if (temp != x) {
+			index = 0;
+			while (index < player.cocks.length) {
+				if (index != x) {
 					if (y < 0)
-						y = temp;
+						y = index;
 					else if (rand(2) == 0 && player.cocks[y].cockType != CockTypesEnum.TENTACLE)
-						y = temp;
-					else if (player.cocks[temp].cockType == CockTypesEnum.TENTACLE ||
-							 player.cocks[temp].cockType == CockTypesEnum.STAMEN)
-						y = temp;
+						y = index;
+					else if (player.cocks[index].cockType == CockTypesEnum.TENTACLE ||
+							 player.cocks[index].cockType == CockTypesEnum.STAMEN)
+						y = index;
 				}
-				temp++;
+				index++;
 			}
 			clearOutput();
 			doStripCheck();			
@@ -3392,25 +3390,25 @@ public class Masturbation extends BaseContent {
 		private function stamenSelfFuck():void {
 			var x:int = -1;
 			var y:int = -1;
-			temp = 0;
-			while (temp < player.cocks.length) {
-				if (player.cocks[temp].cockType == CockTypesEnum.STAMEN) {
-					if (x == -1) x = temp;
+			var index:int = 0;
+			while (index < player.cocks.length) {
+				if (player.cocks[index].cockType == CockTypesEnum.STAMEN) {
+					if (x == -1) x = index;
 				}
-				temp++;
+				index++;
 			}
 			//Pick a second dick that isn't the first.
-			temp = 0;
-			while (temp < player.cocks.length) {
-				if (temp != x) {
+			index = 0;
+			while (index < player.cocks.length) {
+				if (index != x) {
 					if (y < 0)
-						y = temp;
+						y = index;
 					else if (rand(2) == 0 && player.cocks[y].cockType != CockTypesEnum.STAMEN)
-						y = temp;
-					else if (player.cocks[temp].cockType == CockTypesEnum.STAMEN)
-						y = temp;
+						y = index;
+					else if (player.cocks[index].cockType == CockTypesEnum.STAMEN)
+						y = index;
 				}
-				temp++;
+				index++;
 			}
 			clearOutput();
 			doStripCheck();			

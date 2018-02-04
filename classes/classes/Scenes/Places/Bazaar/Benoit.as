@@ -505,12 +505,26 @@ public function updateBenoitInventory():void {
 	}
 	if (rand(100) < 4) {
 		//There is a 4% chance the following items will appear in Slot 2: Bimbo Liqueur, Large Pink Egg, Large Blue Egg, Bro Brew, T. Shark Tooth.
-		temp = rand(5);
-		if(temp == 0) flags[kFLAGS.BENOIT_2] = consumables.BIMBOLQ.id;
-		else if(temp == 1) flags[kFLAGS.BENOIT_2] = consumables.L_PNKEG.id;
-		else if(temp == 2) flags[kFLAGS.BENOIT_2] = consumables.L_BLUEG.id;
-		else if(temp == 3) flags[kFLAGS.BENOIT_2] = consumables.BROBREW.id;
-		else flags[kFLAGS.BENOIT_2] = consumables.TSTOOTH.id;
+		switch (rand(5)) {
+			case 0:
+				flags[kFLAGS.BENOIT_2] = consumables.BIMBOLQ.id;
+				break;
+
+			case 1:
+				flags[kFLAGS.BENOIT_2] = consumables.L_PNKEG.id;
+				break;
+
+			case 2:
+				flags[kFLAGS.BENOIT_2] = consumables.L_BLUEG.id;
+				break;
+
+			case 3:
+				flags[kFLAGS.BENOIT_2] = consumables.BROBREW.id;
+				break;
+			default:
+				flags[kFLAGS.BENOIT_2] = consumables.TSTOOTH.id;
+				break;
+		}
 	}
 	
 	//Slot 3 Any one of the following: Maid's Clothes, Wizard Robes, Tough Silk, Slutty Swimwear, Goo Chunk, Chitin Plate
@@ -537,10 +551,19 @@ public function updateBenoitInventory():void {
 	}
 	if (rand(100) < 10) {
 		//There is a 10% chance the following items will appear in Slot 3: Bondage Straps, Nurse Outfit, Red Party Dress
-		temp = rand(3);
-		if (temp == 0) flags[kFLAGS.BENOIT_3] = armors.BONSTRP.id;
-		else if (temp == 1) flags[kFLAGS.BENOIT_3] = consumables.W_PDDNG.id;
-		else flags[kFLAGS.BENOIT_3] = armors.NURSECL.id;
+		switch (rand(3)) {
+			case 0:
+				flags[kFLAGS.BENOIT_3] = armors.BONSTRP.id;
+				break;
+
+			case 1:
+				flags[kFLAGS.BENOIT_3] = consumables.W_PDDNG.id;
+				break;
+
+			default:
+				flags[kFLAGS.BENOIT_3] = armors.NURSECL.id;
+				break;
+		}
 	}
 	//Slot 4 Herbal Contraceptive - 30 gems.  Only becomes available through PC fem path.  Reduces fertility by 90% for a week if taken.
 }

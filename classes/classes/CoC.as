@@ -145,12 +145,6 @@ public class CoC extends MovieClip
     public var time :TimeModel;
     public var textHistory:Array;
     public var currentText:String;
-    public var whitney:Number;
-    public var sand:Number;
-    public var giacomo:int;
-    public var temp:int;
-    public var args:Array;
-    public var funcs:Array;
     public var oldStats:*; // I *think* this is a generic object
     public var inputManager:InputManager;
     public var monkey:ChaosMonkey;
@@ -324,33 +318,12 @@ public class CoC extends MovieClip
         textHistory = [];
         //}endregion
 
-        /**
-         * Plot Variables
-         * Booleans and numbers about whether you've found certain places
-         */
-        //{ region PlotVariables
-
-        whitney = 0;
-        JojoScene.monk = 0;
-        sand           = 0;
-        giacomo        = 0;
-
-        //}endregion
-
 
         // These are toggled between by the [home] key.
         mainView.textBGWhite.visible = false;
         mainView.textBGTan.visible = false;
 
         // *************************************************************************************
-
-
-        //Fenoxo loves his temps
-        temp = 0;
-
-        //Used to set what each action buttons displays and does.
-        args = [];
-        funcs = [];
 
         //Used for stat tracking to keep up/down arrows correct.
         oldStats = {};

@@ -568,9 +568,9 @@ private function applyHangover():void {
 	else {
 		player.createStatusEffect(StatusEffects.Hangover,8,0,0,0);
 		//Strength minus 5
-		temp = 5;
-		while(temp > 0) {
-			temp--;
+		var index:int = 5;
+		while(index > 0) {
+			index--;
 			//If PC has strength to lose
 			if(player.str >= 2) {
 				mainView.statsView.showStatDown( 'str' );
@@ -581,9 +581,9 @@ private function applyHangover():void {
 			}
 		}
 		//speed minus 10
-		temp = 10;
-		while(temp > 0) {
-			temp--;
+		index = 10;
+		while(index > 0) {
+			index--;
 			//If PC has speed to lose
 			if(player.spe >= 2) {
 				mainView.statsView.showStatDown( 'spe' );
@@ -594,9 +594,9 @@ private function applyHangover():void {
 			}
 		}
 		//int minus 15
-		temp = 15;
-		while(temp > 0) {
-			temp--;
+		index = 15;
+		while(index > 0) {
+			index--;
 			//If PC has intelligence to lose
 			if(player.inte >= 2) {
 				mainView.statsView.showStatDown( 'inte' );

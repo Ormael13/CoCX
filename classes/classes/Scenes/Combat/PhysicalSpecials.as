@@ -904,12 +904,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//-venom capacity determined by hair length, 2-3 stings per level of length
 			//Each sting does 5-10 lust damage and 2.5-5 speed damage
 			var damage:Number = 0;
-			temp = 1 + rand(2);
-			if(player.hairLength >= 12) temp += 1 + rand(2);
-			if(player.hairLength >= 24) temp += 1 + rand(2);
-			if(player.hairLength >= 36) temp += 1;
-			while(temp > 0) {
-				temp--;
+			var hairDamage:int = 1 + rand(2);
+			if(player.hairLength >= 12) hairDamage += 1 + rand(2);
+			if(player.hairLength >= 24) hairDamage += 1 + rand(2);
+			if(player.hairLength >= 36) hairDamage += 1;
+			while(hairDamage > 0) {
+				hairDamage--;
 				damage += 5 + rand(6);
 			}
 			damage += player.level * 1.5;
@@ -940,11 +940,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if(!monster.plural) outputText("Twirling like a top, you bat your opponent with your tail.  For a moment, " + monster.pronoun1 + " looks disbelieving, as if " + monster.pronoun3 + " world turned upside down, but " + monster.pronoun1 + " soon becomes irate and redoubles " + monster.pronoun3 + " offense, leaving large holes in " + monster.pronoun3 + " guard.  If you're going to take advantage, it had better be right away; " + monster.pronoun1 + "'ll probably cool off very quickly.");
 			else outputText("Twirling like a top, you bat your opponent with your tail.  For a moment, " + monster.pronoun1 + " look disbelieving, as if " + monster.pronoun3 + " world turned upside down, but " + monster.pronoun1 + " soon become irate and redouble " + monster.pronoun3 + " offense, leaving large holes in " + monster.pronoun3 + " guard.  If you're going to take advantage, it had better be right away; " + monster.pronoun1 + "'ll probably cool off very quickly.");
 			if(!monster.hasStatusEffect(StatusEffects.CoonWhip)) monster.createStatusEffect(StatusEffects.CoonWhip,0,0,0,0);
-			temp = Math.round(monster.armorDef * .75);
-			while(temp > 0 && monster.armorDef >= 1) {
+			var armorChanges:int = Math.round(monster.armorDef * .75);
+			while(armorChanges > 0 && monster.armorDef >= 1) {
 				monster.armorDef--;
 				monster.addStatusValue(StatusEffects.CoonWhip,1,1);
-				temp--;
+				armorChanges--;
 			}
 			monster.addStatusValue(StatusEffects.CoonWhip,2,2);
 			if(player.tailType == Tail.RACCOON) monster.addStatusValue(StatusEffects.CoonWhip,2,2);
@@ -2069,28 +2069,28 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Bigger horns = better success chance.
 		//Small horns - 60% hit
 		if(player.horns.count >= 6 && player.horns.count < 12) {
-			temp = 60;
+			var chance:Number = 60;
 		}
 		//bigger horns - 75% hit
 		if(player.horns.count >= 12 && player.horns.count < 20) {
-			temp = 75;
+			chance = 75;
 		}
 		//huge horns - 90% hit
 		if(player.horns.count >= 20) {
-			temp = 80;
+			chance = 80;
 		}
 		//Vala dodgy bitch!
 		if(monster.short == "Vala") {
-			temp = 20;
+			chance = 20;
 		}
 		//Account for monster speed - up to -50%.
-		if (monster.spe <= 100) temp -= monster.spe / 2;
-		else temp -= 50;
+		if (monster.spe <= 100) chance -= monster.spe / 2;
+		else chance -= 50;
 		//Account for player speed - up to +50%
-		if (player.spe <= 100) temp += player.spe / 2;
-		else temp += 50;
+		if (player.spe <= 100) chance += player.spe / 2;
+		else chance += 50;
 		//Hit & calculation
-		if(temp >= rand(100)) {
+		if(chance >= rand(100)) {
 			var horns:Number = player.horns.count;
 			if (player.horns.count > 40) player.horns.count = 40;
 			//Determine damage - str modified by enemy toughness!
@@ -2192,26 +2192,26 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Bigger horns = better success chance.
 		//Small horns - 60% hit
 		if(player.horns.count >= 6 && player.horns.count < 12) {
-			temp = 60;
+			var chance:Number = 60;
 		}
 		//bigger horns - 75% hit
 		if(player.horns.count >= 12 && player.horns.count < 20) {
-			temp = 75;
+			chance = 75;
 		}
 		//huge horns - 90% hit
 		if(player.horns.count >= 20) {
-			temp = 80;
+			chance = 80;
 		}
 		//Vala dodgy bitch!
 		if(monster.short == "Vala") {
-			temp = 20;
+			chance = 20;
 		}
 		//Account for monster speed - up to -50%.
-		temp -= monster.spe/2;
+		chance -= monster.spe/2;
 		//Account for player speed - up to +50%
-		temp += player.spe/2;
+		chance += player.spe/2;
 		//Hit & calculation
-		if(temp >= rand(100)) {
+		if(chance >= rand(100)) {
 			var horns:Number = player.horns.count;
 			if (player.horns.count > 40) player.horns.count = 40;
 			damage = int(player.str + (player.tou / 2) + (player.spe / 2) + (player.level * 2) * 1.2 * (monster.damagePercent() / 100)); //As normal attack + horns length bonus
@@ -2649,11 +2649,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if(monster.short == "worms") {
 			//50% chance of hit (int boost)
 			if(rand(100) + player.inte/3 >= 50) {
-				temp = int(player.str / 5 - rand(5));
-				if(player.tailType == Tail.KANGAROO) temp += 3;
-				if(temp == 0) temp = 1;
-				outputText("You strike at the amalgamation, crushing countless worms into goo, dealing " + temp + " damage.\n\n");
-				monster.HP -= temp;
+				var dam:int = int(player.str / 5 - rand(5));
+				if(player.tailType == Tail.KANGAROO) dam += 3;
+				if(dam == 0) dam = 1;
+				outputText("You strike at the amalgamation, crushing countless worms into goo, dealing " + dam + " damage.\n\n");
+				monster.HP -= dam;
 				if(monster.HP <= 0) {
 					doNext(endHpVictory);
 					return;

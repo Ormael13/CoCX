@@ -13,7 +13,8 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kCOUNTERS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
-import classes.Scenes.Dungeons.DungeonAbstractContent;
+	import classes.Scenes.Areas.Desert.SandWitchScene;
+	import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.NPCs.XXCNPC;
 import classes.Scenes.SceneLib;
@@ -366,11 +367,7 @@ public function saveLoad(e:MouseEvent = null):void
 	outputText("<b>Why does the Save File and Load File option not work?</b>\n");
 	outputText("<i>Save File and Load File are limited by the security settings imposed upon CoC by Flash. These options will only work if you have downloaded the game from the website, and are running it from your HDD. Additionally, they can only correctly save files to and load files from the directory where you have the game saved.</i>");
 	//This is to clear the 'game over' block from stopping simpleChoices from working.  Loading games supercede's game over.
-	if (mainView.getButtonText( 0 ) == "Game Over")
-	{
-		temp = 777;
-		mainView.setButtonText( 0, "save/load" );
-	}
+
 	menu();
 	//addButton(0, "Save", saveScreen);
 	addButton(1, "Load", loadScreen);
@@ -379,9 +376,10 @@ public function saveLoad(e:MouseEvent = null):void
 	addButton(6, "Load File", openSave);
 	//addButton(8, "AutoSave: " + autoSaveSuffix, autosaveToggle);
 	addButton(14, "Back", EventParser.gameOver, true);
-	
-	
-	if (temp == 777) {
+
+	if (mainView.getButtonText( 0 ) == "Game Over")
+	{
+		mainView.setButtonText( 0, "save/load" );
 		addButton(14, "Back", EventParser.gameOver, true);
 		return;
 	}
@@ -574,7 +572,6 @@ public function loadGame(slot:String):void
 		loadGameObject(saveFile, slot);
 		loadPermObject();
 		outputText("Game Loaded");
-		temp = 0;
 		
 		if (player.slotName == "VOID")
 		{
@@ -1105,10 +1102,8 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.autoSave = player.autoSave;
 		
 		//PLOTZ
-        saveFile.data.whitney = CoC.instance.whitney;
         saveFile.data.monk = JojoScene.monk;
-        saveFile.data.sand = CoC.instance.sand;
-        saveFile.data.giacomo = CoC.instance.giacomo;
+        saveFile.data.sand = SandWitchScene.rapedBefore;
         saveFile.data.beeProgress = 0; //Now saved in a flag. getGame().beeProgress;
 
 		saveFile.data.isabellaOffspringData = [];
@@ -2223,13 +2218,9 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.autoSave = saveFile.data.autoSave;
 		
 		//PLOTZ
-		game.whitney   = saveFile.data.whitney;
 		JojoScene.monk = saveFile.data.monk;
-		game.sand      = saveFile.data.sand;
-		if (saveFile.data.giacomo == undefined)
-			game.giacomo = 0;
-		else
-			game.giacomo = saveFile.data.giacomo;
+		SandWitchScene.rapedBefore      = saveFile.data.sand;
+
 		if (saveFile.data.beeProgress != undefined && saveFile.data.beeProgress == 1) SceneLib.forest.beeGirlScene.setTalked(); //Bee Progress update is now in a flag
 			//The flag will be zero for any older save that still uses beeProgress and newer saves always store a zero in beeProgress, so we only need to update the flag on a value of one.
 			

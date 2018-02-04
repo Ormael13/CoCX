@@ -667,9 +667,9 @@ private function leaveWithBeerTits():void {
 private function sellYourBooze():void {
 	clearOutput();
 	player.gems += 2;
-	temp = Math.round(player.lactationQ() / 100);
-	if(temp > 40) temp = 40 + rand(3);
-	player.gems += temp;
+	var gems:Number = Math.round(player.lactationQ() / 100);
+	if(gems > 40) gems = 40 + rand(3);
+	player.gems += gems;
 	player.gems = Math.round(player.gems);
 	statScreenRefresh();
 	//If player has only two breasts.
@@ -885,8 +885,7 @@ private function barBeerOrgyTits():void {
 			outputText("  You walk slightly bow legged out of the bar.  Cum is still dripping from your snatch and will likely continue to do so for a while.");
 			//IF [player is not pregnant]
 			if(player.pregnancyType == 0) outputText("  You can't help but wonder how virile those dog morphs might have been as their cum and the cum of other customers sloshes around inside your uterus.");
-			temp = rand(6);
-			switch(temp) {
+			switch(rand(6)) {
 				case 0:
 					player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR);
 					break;

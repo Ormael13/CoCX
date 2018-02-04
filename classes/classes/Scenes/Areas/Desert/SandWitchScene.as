@@ -10,6 +10,7 @@ public class SandWitchScene extends BaseContent implements TimeAwareInterface {
 //const EGG_WITCH_COUNTER:int = 588;
 
 		public var pregnancy:PregnancyStore;
+		public static var rapedBefore:Boolean = false;
 
 		public function SandWitchScene()
 		{
@@ -99,9 +100,9 @@ public class SandWitchScene extends BaseContent implements TimeAwareInterface {
 					dynStats("lib", .5, "sen", 1, "lus", 10);
 				}
 				outputText("The sand-witch smiles and thanks you for your offering.  You notice her dress is damp in four spots on the front.  ");
-                if (CoC.instance.sand == 0)
+                if (!rapedBefore)
                     outputText("You wonder at what her robes conceal as she vanishes into the dunes.");
-                if (CoC.instance.sand == 1) {
+                else {
                     if (player.cor <= 33)
 						outputText("You are glad to avoid servicing her again as she vanishes into the dunes.");
 					else if (player.cor <= 66)
@@ -156,9 +157,9 @@ internal function sandwitchRape():void {
 			}
 			if(player.averageNipplesPerBreast() < 1) {
 				outputText("A dark spot appears on each breast, rapidly forming into a sensitive nipple.  ");
-				temp = player.breastRows.length;
-				while(temp > 0) {
-					temp--;
+				var index:int = player.breastRows.length;
+				while(index > 0) {
+					index--;
 					//If that breast didnt have nipples reset length
 					if(player.breastRows[0].nipplesPerBreast < 1) player.nippleLength = .2;
 					player.breastRows[0].nipplesPerBreast = 1;
@@ -194,7 +195,7 @@ internal function sandwitchRape():void {
 		outputText("  You hear the soft impact of her robe upon the sands and cannot resist a peek at your captor.  You turn to behold a curvy, dark-skinned beauty, whose form is dominated by a quartet of lactating breasts.  Somewhere in your lust fogged mind you register the top two as something close to double-D's, and her lower pair to be about C's.  She smiles and leans over you, pushing you to the ground violently.\n\nShe turns over you and drops down, planting her slick honey-pot firmly against your mouth.  Her scent is strong, overpowering in its intensity.  Your tongue darts out for a taste and finds a treasure trove of sticky sweetness.  Instinctively you tongue-fuck her, greedily devouring her cunny-juice, shoving your tongue in as far as possible before suckling at her clit.  Dimly you feel the milk spattering over you, splashing off you and into the warm desert sands.  Everywhere the milk touches feels silky smooth and sensitive, and your hands begin stroking your body, rubbing it in as the witch sprays more and more of it.  You lose track of time, orgasming many times, slick and sticky with sexual fluids.");
 		player.slimeFeed();
 		dynStats("lib", 1, "sen", 5);
-		if(CoC.instance.sand == 0) CoC.instance.sand = 1;
+		rapedBefore = true;
 		cleanupAfterCombat();
 	}
 	//HP DEFEAT

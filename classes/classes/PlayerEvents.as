@@ -1415,7 +1415,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 					return true;
 				}
 				var ceraph:int; //Ceraph's dreams - overlaps normal night-time dreams.
-				switch (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220]) {
+				switch (flags[kFLAGS.CERAPH_OWNED_DICKS] + flags[kFLAGS.CERAPH_OWNED_PUSSIES] + flags[kFLAGS.CERAPH_OWNED_TITS]) {
 					case  0: ceraph =  0; break; //If you've given her no body parts then Ceraph will not cause any dreams
 					case  1: ceraph = 10; break; //Once every 10 days if 1, once every 7 days if 2, once every 5 days if 3
 					case  2: ceraph =  7; break;

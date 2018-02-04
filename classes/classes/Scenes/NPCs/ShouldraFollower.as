@@ -1031,12 +1031,12 @@ private function shouldraGivesYaSomeFukkinTeats():void {
 	var temp2:Number = 0;
 	//NIPPLECUNTZZZ
 	if(!player.hasFuckableNipples() && rand(4) == 0) {
-		temp = player.breastRows.length;
+		var i:int = player.breastRows.length;
 		//Set nipplecunts on every row.
-		while(temp > 0) {
-			temp--;
-			if(!player.breastRows[temp].fuckable && player.nippleLength >= 2) {
-				player.breastRows[temp].fuckable = true;
+		while(i > 0) {
+			i--;
+			if(!player.breastRows[i].fuckable && player.nippleLength >= 2) {
+				player.breastRows[i].fuckable = true;
 				//Keep track of changes.
 				temp2++;
 			}

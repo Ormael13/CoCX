@@ -240,7 +240,6 @@ private function sheilaCorruptionUpdate():void {
 			sheilaCorruption(10);
 		}
 		else {
-			temp = 0;
 			//Small change, do as much as possible.
 			while(Math.round(player.cor) != Math.round(sheilaCorruption())) {
 				player.cor -= 1;
@@ -263,7 +262,6 @@ private function sheilaCorruptionUpdate():void {
 			sheilaCorruption(-10);
 		}
 		else {
-			temp = 0;
 			//Small change, do as much as possible.
 			while(Math.round(player.cor) != Math.round(sheilaCorruption())) {
 				player.cor += 1;

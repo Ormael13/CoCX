@@ -86,13 +86,13 @@ package classes.Scenes.Areas.Lake
 			outputText("\n\nStrange, but you oblige, stripping off your [armor] and gear and tossing them aside. Callu instructs you to lay down on the beach next to her fishing pole, which you likewise oblige.  The otter-girl straddles your stomach, facing away from you, though her thick, heavy tail is thankfully kept away from your face.");
 			var x:int;
 			var y:int = -1;
-			temp = 0;
-			while (temp < player.cockTotal()) {
-				if (player.cocks[temp].cockLength < 48) {
-					if (y < 0) y = temp;
-					else if (player.cocks[temp].cockLength > player.cocks[y].cockLength) y = temp;
+			var i:int = 0;
+			while (i < player.cockTotal()) {
+				if (player.cocks[i].cockLength < 48) {
+					if (y < 0) y = i;
+					else if (player.cocks[i].cockLength > player.cocks[y].cockLength) y = i;
 				}
-				temp++;
+				i++;
 			}
 			if (y < 0) y = player.smallestCockIndex();
 			x = y;

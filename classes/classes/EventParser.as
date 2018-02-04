@@ -505,21 +505,21 @@ public class EventParser {
         //IMP GANGBAAAAANGA
         //The more imps you create, the more often you get gangraped.
         var player:Player = CoC.instance.player;
-        CoC.instance.temp = player.statusEffectv1(StatusEffects.BirthedImps) * 2;
-        if (CoC.instance.temp > 7) CoC.instance.temp = 7;
-        if (player.findPerk(PerkLib.PiercedLethite) >= 0) CoC.instance.temp += 4;
-        if (player.inHeat) CoC.instance.temp += 2;
-        if (SceneLib.vapula.vapulaSlave()) CoC.instance.temp += 7;
+        var chance:Number = player.statusEffectv1(StatusEffects.BirthedImps) * 2;
+        if (chance > 7) chance = 7;
+        if (player.findPerk(PerkLib.PiercedLethite) >= 0) chance += 4;
+        if (player.inHeat) chance += 2;
+        if (SceneLib.vapula.vapulaSlave()) chance += 7;
         //Reduce chance
         var flags:DefaultDict = CoC.instance.flags;
-        if (flags[kFLAGS.CAMP_WALL_PROGRESS] > 0) CoC.instance.temp /= 1 + (flags[kFLAGS.CAMP_WALL_PROGRESS] / 100);
-        if (flags[kFLAGS.CAMP_WALL_GATE] > 0) CoC.instance.temp /= 2;
-        if (flags[kFLAGS.CAMP_WALL_SKULLS] > 0) CoC.instance.temp *= 1 - (flags[kFLAGS.CAMP_WALL_SKULLS] / 100);
+        if (flags[kFLAGS.CAMP_WALL_PROGRESS] > 0) chance /= 1 + (flags[kFLAGS.CAMP_WALL_PROGRESS] / 100);
+        if (flags[kFLAGS.CAMP_WALL_GATE] > 0) chance /= 2;
+        if (flags[kFLAGS.CAMP_WALL_SKULLS] > 0) chance *= 1 - (flags[kFLAGS.CAMP_WALL_SKULLS] / 100);
         if (CoC.instance.model.time.hours == 2) {
             if (CoC.instance.model.time.days % 30 == 0 && flags[kFLAGS.ANEMONE_KID] > 0 && player.hasCock() && flags[kFLAGS.ANEMONE_WATCH] > 0 && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 40) {
                 SceneLib.anemoneScene.goblinNightAnemone();
                 return 1;
-            } else if (CoC.instance.temp > Utils.rand(100) && !player.hasStatusEffect(StatusEffects.DefenseCanopy)) {
+            } else if (chance > Utils.rand(100) && !player.hasStatusEffect(StatusEffects.DefenseCanopy)) {
                 if (player.gender > 0 && (!player.hasStatusEffect(StatusEffects.JojoNightWatch) || !player.hasStatusEffect(StatusEffects.PureCampJojo)) && (flags[kFLAGS.HEL_GUARDING] == 0 || !SceneLib.helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !SceneLib.kihaFollower.followerKiha()) && !(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "")) &&
                         (flags[kFLAGS.IN_INGNAM] == 0 && flags[kFLAGS.IN_PRISON] == 0) || flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 2) {
                     SceneLib.impScene.impGangabangaEXPLOSIONS();
@@ -612,65 +612,65 @@ public class EventParser {
     public static function growHair(amount:Number = .1):Boolean {
         //Grow hair!
         var player:Player = CoC.instance.player;
-        CoC.instance.temp = player.hairLength;
+        var currentLength:Number = player.hairLength;
         player.hairLength += amount;
-        if (player.hairLength > 0 && CoC.instance.temp == 0) {
+        if (player.hairLength > 0 && currentLength == 0) {
             EngineCore.outputText("\n<b>You are no longer bald.  You now have " + Appearance.hairDescription(player) + " coating your head.\n</b>");
             return true;
         }
-        else if (player.hairLength >= 1 && CoC.instance.temp < 1) {
+        else if (player.hairLength >= 1 && currentLength < 1) {
             EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
-        else if (player.hairLength >= 3 && CoC.instance.temp < 3) {
+        else if (player.hairLength >= 3 && currentLength < 3) {
             EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
-        else if (player.hairLength >= 6 && CoC.instance.temp < 6) {
+        else if (player.hairLength >= 6 && currentLength < 6) {
             EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
-        else if (player.hairType == Hair.GORGON && player.hairLength >= 6 && CoC.instance.temp < 6) {
+        else if (player.hairType == Hair.GORGON && player.hairLength >= 6 && currentLength < 6) {
             EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
-        else if (player.hairLength >= 10 && CoC.instance.temp < 10) {
+        else if (player.hairLength >= 10 && currentLength < 10) {
             EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
-        else if (player.hairType == Hair.GORGON && player.hairLength >= 10 && CoC.instance.temp < 10) {
+        else if (player.hairType == Hair.GORGON && player.hairLength >= 10 && currentLength < 10) {
             EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
-        else if (player.hairLength >= 16 && CoC.instance.temp < 16) {
+        else if (player.hairLength >= 16 && currentLength < 16) {
             EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
-        else if (player.hairType == Hair.GORGON && player.hairLength >= 16 && CoC.instance.temp < 16) {
+        else if (player.hairType == Hair.GORGON && player.hairLength >= 16 && currentLength < 16) {
             EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
-        else if (player.hairLength >= 26 && CoC.instance.temp < 26) {
+        else if (player.hairLength >= 26 && currentLength < 26) {
             EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
-        else if (player.hairType == Hair.GORGON && player.hairLength >= 26 && CoC.instance.temp < 26) {
+        else if (player.hairType == Hair.GORGON && player.hairLength >= 26 && currentLength < 26) {
             EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
-        else if (player.hairLength >= 40 && CoC.instance.temp < 40) {
+        else if (player.hairLength >= 40 && currentLength < 40) {
             EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
-        else if (player.hairType == Hair.GORGON && player.hairLength >= 40 && CoC.instance.temp < 40) {
+        else if (player.hairType == Hair.GORGON && player.hairLength >= 40 && currentLength < 40) {
             EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
-        else if (player.hairLength >= 40 && player.hairLength >= player.tallness && CoC.instance.temp < player.tallness) {
+        else if (player.hairLength >= 40 && player.hairLength >= player.tallness && currentLength < player.tallness) {
             EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
-        else if (player.hairType == Hair.GORGON && player.hairLength >= 40 && player.hairLength >= player.tallness && CoC.instance.temp < player.tallness) {
+        else if (player.hairType == Hair.GORGON && player.hairLength >= 40 && player.hairLength >= player.tallness && currentLength < player.tallness) {
             EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }

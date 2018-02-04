@@ -121,9 +121,9 @@ use namespace CoC;
 						name  : "bigjunk",
 						chance: function ():Boolean
 						{
-							temp = 10 + (player.longestCockLength() - player.tallness) / 24 * 10;
-							if ( temp > 30){temp = 30; }
-							return (temp > rand(100) && player.longestCockLength() >= player.tallness && player.totalCockThickness() >= 12)
+							var chance:Number = 10 + (player.longestCockLength() - player.tallness) / 24 * 10;
+							if ( chance > 30){chance = 30; }
+							return (chance > rand(100) && player.longestCockLength() >= player.tallness && player.totalCockThickness() >= 12)
 						},
 						call  : SceneLib.exploration.bigJunkDesertScene
 					}, {

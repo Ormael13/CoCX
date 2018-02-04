@@ -908,9 +908,9 @@ private function feedLatexyCumIndirectly():void {
 	outputText(".");
 	if(player.cumQ() >= 1000) outputText("  Sadly, the copious jizz that puddled up has already been devoured by the dry ground.  It seems the dirt can drink faster than your latex slave.");
 	//{Boost her fluid quantity, bonus for over 250mL.}
-	temp = 20;
-	if(player.cumQ() >= 500) temp += 10;
-	gooFluid(temp);
+	var fluid:int = 20;
+	if(player.cumQ() >= 500) fluid += 10;
+	gooFluid(fluid);
 	//{Boost her happiness a tiny amount.}
 	gooHappiness(4);
 	player.orgasm();
@@ -949,12 +949,12 @@ private function feedLatexyGirlCumIndirectly():void {
 	outputText("\n\n" + flags[kFLAGS.GOO_NAME] + " dives into the bowl with gusto, greedily devouring every drop.  Her tongue hangs free, thrashing against the polished wood as more and more of her latex mouth-muscle spools free to help with the feeding.  In seconds, the bowl is emptied.");
 	if(player.wetness() >= 4) outputText("  Sadly, the copious vaginal lube that muddied the ground is already absorbed.  It seems the dirt can eat faster than your pet.");
 	//{Boost her fluid quantity, bonus for over 250mL.}
-	temp = 10;
-	if(player.wetness() >= 3) temp+=5;
-	if(player.wetness() >= 4) temp+=5;
-	if(player.wetness() >= 5) temp+=5;
+	var fluid:int = 10;
+	if(player.wetness() >= 3) fluid += 5;
+	if(player.wetness() >= 4) fluid += 5;
+	if(player.wetness() >= 5) fluid += 5;
 	player.orgasm();
-	gooFluid(temp);
+	gooFluid(fluid);
 	//{Boost her happiness a tiny amount.}
 	gooHappiness(4);
 	doNext(camp.returnToCampUseOneHour);
@@ -1088,9 +1088,9 @@ private function feedLatexyCumDirectly():void {
 		else outputText(" spatters");
 		outputText(" oily wetness onto the ground below at your affirmation, and she shudders with a submissive thrill.  You pat her on the head for a job well done and depart, secure in her obedience.");
 		//{Boost her fluid quantity, bonus for over 250mL.}
-		temp = 20;
-		if(player.cumQ() >= 500) temp += 5;
-		gooFluid(temp);
+		var fluid:int = 20;
+		if(player.cumQ() >= 500) fluid += 5;
+		gooFluid(fluid);
 		//{Boost her happiness a tiny amount.}
 		gooObedience(5);
 		player.orgasm();
@@ -1149,9 +1149,9 @@ private function maleDirectFeedLatexGooGoneWrong():void {
 private function feedCumDirectEpilogue():void {
 	clearOutput();
 	outputText("You wake with your mouth so dry that it feels like sandpaper.  Looking around, you see " + flags[kFLAGS.GOO_NAME] + " slumbering in the corner, looking rather... full and fecund, plump with weight.  You feel equally, obnoxiously empty.  Your groin is tingling painfully from the forceful draining.  Staggering away toward some water, you realize you'll have to raise her obedience if you want her to stop on command.  Letting her drink so deeply probably didn't help either.");
-	temp = 50;
-	if(player.cumQ() >= 500) temp += 30;
-	gooFluid(temp);
+	var fluid:int = 50;
+	if(player.cumQ() >= 500) fluid += 30;
+	gooFluid(fluid);
 	
 	//{Boost her happiness a tiny amount.}
 	gooHappiness(5);
@@ -1216,11 +1216,11 @@ private function feedLatexyGirlCumDirect():void {
 		else outputText(" spatters");
 		outputText(" oily wetness onto the ground below at your affirmation, and she shudders with a submissive thrill.  You pat her on the head for a job well done and depart, secure in her obedience.");
 		//{Boost her fluid quantity, bonus for over 250mL.}
-		temp = 10;
-		if(player.wetness() >= 3) temp += 5;
-		if(player.wetness() >= 4) temp += 5;
-		if(player.wetness() >= 5) temp += 5;
-		gooFluid(temp);
+		var fluid:int = 10;
+		if(player.wetness() >= 3) fluid += 5;
+		if(player.wetness() >= 4) fluid += 5;
+		if(player.wetness() >= 5) fluid += 5;
+		gooFluid(fluid);
 		
 		//{Boost her happiness a tiny amount.}
 		gooObedience(4);
@@ -1325,11 +1325,11 @@ private function tryToAssertMaleDomWhileLatexGooDrains():void {
 	else if(gooHappiness() < 66) outputText("\n\n\"<i>I'm sorry I got so forceful, [name].  I enjoy serving you... I do.</i>\"");
 	//{High happiness}
 	else outputText("\n\n" + flags[kFLAGS.GOO_NAME] + " nuzzles against you, her head coming to rest on your [chest].  \"<i>Sorry, [name]. I didn't mean to try and force you.  I love you when you're so assertive, so... dominant.</i>\"");
-	temp = 30;
+	var fluid:int = 30;
 	player.orgasm();
 	dynStats("sen", -2);
-	if(player.cumQ() >= 500) temp += 20;
-	gooFluid(temp);
+	if(player.cumQ() >= 500) fluid += 20;
+	gooFluid(fluid);
 	//{Boost her happiness a tiny amount.}
 	gooHappiness(5);
 	gooObedience(5);
@@ -1600,14 +1600,14 @@ private function malePCDomFucksLatexGoo():void {
 	outputText(".  Every now and again, her butt lifts slightly and jiggles, then lowers.  She's whimpering and twitching, riding the aftershocks of her own orgasm.  You're exhausted, but you stand triumphant.  You fucked your latex slave in all three of her holes and outlasted her to boot.");
 	outputText("\n\nAs you get dressed, you realize your [cock] is totally clean.  It appears glossy, as if shined with spit, but there is no latex residue on it.  Somehow, her asshole must have absorbed her dried girl-cum and saliva back into her.  You didn't expect to get cleaner from anal sex, but it certainly let you end on a high note.  You get dressed with a swagger in your step and head back to the center of camp.");
 	outputText("\n\nIn your absence, a tired voice sighs, \"<i>That's... three.</i>\"");
-	temp = 15;
+	var fluid:int = 15;
 	player.orgasm();
 	dynStats("sen", -2);
-	if(player.cumQ() >= 500) temp += 10;
-	if(player.cumQ() >= 1000) temp += 10;
-	if(player.cumQ() >= 1500) temp += 10;
-	if(player.cumQ() >= 2000) temp += 10;
-	gooFluid(temp);
+	if(player.cumQ() >= 500) fluid += 10;
+	if(player.cumQ() >= 1000) fluid += 10;
+	if(player.cumQ() >= 1500) fluid += 10;
+	if(player.cumQ() >= 2000) fluid += 10;
+	gooFluid(fluid);
 	fatigue(10);
 	gooObedience(4);
 	gooHappiness(2);
@@ -1659,14 +1659,14 @@ private function feedLatexySomeMilk():void {
 	player.boostLactation(.5);
 	gooHappiness(5);
 	gooObedience(3);
-	temp = 15;
-	if(player.lactationQ() >= 200) temp += 10;
-	if(player.lactationQ() >= 500) temp += 10;
-	if(player.lactationQ() >= 1000) temp += 10;
-	if(player.lactationQ() >= 2000) temp += 10;
-	if(player.lactationQ() >= 4000) temp += 10;
-	if(player.lactationQ() >= 8000) temp += 10;
-	gooFluid(temp);
+	var fluid:int = 15;
+	if(player.lactationQ() >= 200) fluid += 10;
+	if(player.lactationQ() >= 500) fluid += 10;
+	if(player.lactationQ() >= 1000) fluid += 10;
+	if(player.lactationQ() >= 2000) fluid += 10;
+	if(player.lactationQ() >= 4000) fluid += 10;
+	if(player.lactationQ() >= 8000) fluid += 10;
+	gooFluid(fluid);
 	fatigue(5);
 	player.orgasm();
 	dynStats("sen", 2);

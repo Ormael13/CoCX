@@ -585,11 +585,11 @@ private function victoryDickKiha():void {
 		flags[kFLAGS.KIHA_CHOKED_OUT_PC] = 1;
 		//[if PC has naga tail or 40</i>\"+ tentacle dick not currently in use:
 		var z:Number = -1;
-		temp = player.cocks.length;
-		while(temp > 0) {
-			temp--;
-			if(player.cocks[temp].cockType == CockTypesEnum.TENTACLE && temp != x && temp != y) {
-				z = temp;
+		var i:int = player.cocks.length;
+		while(i > 0) {
+			i--;
+			if(player.cocks[i].cockType == CockTypesEnum.TENTACLE && i != x && i != y) {
+				z = i;
 				break;
 			}
 		}

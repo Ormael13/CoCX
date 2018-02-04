@@ -208,7 +208,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
@@ -278,7 +278,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
@@ -332,7 +332,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
@@ -382,7 +382,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
@@ -417,7 +417,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
@@ -481,7 +481,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
@@ -537,7 +537,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
@@ -579,7 +579,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
@@ -669,8 +669,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		//	TranceBoost *= spellModBlack();
 			TranceBoost = FnHelpers.FN.logScale(TranceBoost,TranceABC,10);
 			TranceBoost = Math.round(TranceBoost);
-			temp = TranceBoost;
-			tempStrTou = temp;
+			tempStrTou = TranceBoost;
 			player.createStatusEffect(StatusEffects.TranceTransformation, 0, 0, 0, 0);
 			player.changeStatusValue(StatusEffects.TranceTransformation, 1, tempStrTou);
 			mainView.statsView.showStatUp('str');
@@ -708,8 +707,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (BeatOfWarBoost < 1) BeatOfWarBoost = 1;
 		BeatOfWarBoost = Math.round(BeatOfWarBoost);
 		if (!player.hasStatusEffect(StatusEffects.BeatOfWar)) player.createStatusEffect(StatusEffects.BeatOfWar,0,0,0,0);//player.addStatusValue(StatusEffects.BeatOfWar, 1, BeatOfWarBoost);
-		temp = BeatOfWarBoost;
-		tempStr = temp;
+		tempStr = BeatOfWarBoost;
 		player.addStatusValue(StatusEffects.BeatOfWar,1,tempStr);
 		mainView.statsView.showStatUp('str');
 		player.str += BeatOfWarBoost;			//player.statusEffectv1(StatusEffects.BeatOfWar);

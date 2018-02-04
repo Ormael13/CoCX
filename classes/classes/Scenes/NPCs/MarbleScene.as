@@ -1794,12 +1794,12 @@ private function marbleMilkSex(newpage:Boolean = true):void {
 		//[player has at least one of a different kind of dick]
 		else {
 			outputText("Marble gives a long hard look before pointing at your ");
-			temp = player.cocks.length;
-			while(temp > 0) {
-				temp--;
-				if(player.cocks[temp].cockType.Index > 2) {
-					outputText(cockDescript(temp));
-					temp = -1;
+			var i:int = player.cocks.length;
+			while(i > 0) {
+				i--;
+				if(player.cocks[i].cockType.Index > 2) {
+					outputText(cockDescript(i));
+					i = -1;
 				}
 			}
 			outputText(".  \"<i>Sweetie, what the heck is that?</i>\" she asks in an unsure tone. You smile at her and tell her that she should touch it.  After a moment, Marble reaches out and seems to visibly relax after feeling its texture and stiffness.  She pushes you back onto her bed before slipping free of her own garments and climbing on top of you.  She gives you a sly smile as she puts her legs on your sides.\n\n");
@@ -3105,8 +3105,7 @@ public function marblePoopsBaybees():void {
 			outputText("Once the two of you have had your fill, Marble puts the child inside the nursery.  The little girl is already starting to look like she is a few years old, and is already trotting around on her little hoofs.  Marble turns to look at you and asks \"<i>Ok, I'll name her ");
 			//Marble chooses a random name from this list, assuming that there isn't already a child with that name, in which case she'll say she can't think of a name, and ask the PC to come up with one.
 			if(flags[kFLAGS.MARBLE_KIDS] == 0) {
-				temp = rand(10);
-				switch(temp) {
+				switch(rand(10)) {
 					case 0:
 						outputText("Aura");
 						break;
