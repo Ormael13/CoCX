@@ -33,12 +33,14 @@ package classes.Scenes.NPCs
 		public function spellCostHeal():Number {
 			var cost:Number = 30;
 			cost *= spellCostMultiplier();
+			if (findPerk(PerkLib.NaturalHealingMinor) >= 0) cost -= 3;
 			if (findPerk(PerkLib.WisenedHealer) >= 0) cost *= 2;
 			return cost;
 		}
 		public function spellCostRegenerate():Number {
 			var cost:Number = 50;
 			cost *= spellCostMultiplier();
+			if (findPerk(PerkLib.NaturalHealingMinor) >= 0) cost -= 5;
 			if (findPerk(PerkLib.WisenedHealer) >= 0) cost *= 2;
 			return cost;
 		}
@@ -51,13 +53,13 @@ package classes.Scenes.NPCs
 			var mod1:Number = 1;
 			if (findPerk(PerkLib.WizardsFocus) >= 0) mod1 += .4;
 			if (findPerk(PerkLib.SpellpowerHealing) >= 0) mod1 += .2;
+			if (findPerk(PerkLib.NaturalHealingMinor) >= 0) mod1 += .3;
 			return mod1;
 		}
 		public function SpellMod():Number {
 			var mod2:Number = 1;
 			//if (findPerk(PerkLib.Channeling) >= 0) mod2 += .1;
 			//if (findPerk(PerkLib.JobSorcerer) >= 0) mod2 += .1;
-			//if (findPerk(PerkLib.Mage) >= 0) mod2 += .2;
 			if (findPerk(PerkLib.WizardsFocus) >= 0) mod2 += .4;
 			return mod2;
 		}
@@ -68,9 +70,10 @@ package classes.Scenes.NPCs
 			outputText("She pop the small pill into her mouth and swallow. <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
 			addHP(temp);
 		}
-		public function usingVDARC():void {
+		public function usingARC():void {
 			outputText("She grab mana potion, pull the cork off and swiftly chug it down.");
-			mana += 40;
+			if (flags[kFLAGS.DIANA_LVL_UP] >= 5) mana += 240;
+			else mana += 40;
 		}
 		
 		public function usingManyBirdsSoulskill():void {
@@ -101,8 +104,7 @@ package classes.Scenes.NPCs
 			temp *= HealMod();
 			temp = Math.round(temp);
 			if (flags[kFLAGS.DIANA_LVL_UP] < 2) outputText("Horse-morph");
-			else if (flags[kFLAGS.DIANA_LVL_UP] >= 2 && flags[kFLAGS.DIANA_LVL_UP] < 5) outputText("Unicorn");
-			else if (flags[kFLAGS.DIANA_LVL_UP] >= 5 && flags[kFLAGS.DIANA_LVL_UP] < 6) outputText("Alicorn");
+			else if (flags[kFLAGS.DIANA_LVL_UP] >= 2 && flags[kFLAGS.DIANA_LVL_UP] < 8) outputText("Unicorn");
 			else outputText("Diana");
 			outputText(" chant a magical song of healing and recovery and her wounds start knitting themselves shut in response. <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
 			addHP(temp);
@@ -113,6 +115,22 @@ package classes.Scenes.NPCs
 		override protected function performCombatAction():void
 		{
 			if (HPRatio() < .2 && (mana >= spellCostHeal())) usingHealSpell();
+			else if (flags[kFLAGS.DIANA_LVL_UP] >= 5) {
+				var choice3:Number = rand(6);
+				if (choice3 < 2) {
+					if ((soulforce >= soulskillCostManyBirds()) && rand(2) == 0) usingManyBirdsSoulskill();
+					else eAttack();
+				}
+				if (choice3 > 1 && choice3 < 5) {
+					if (HPRatio() < .6 && rand(2) == 0 && (mana >= spellCostHeal())) usingHealSpell();
+					else if (rand(2) == 0 && (mana < (this.maxMana() - 300))) usingARC();
+					else eAttack();
+				}
+				if (choice3 == 5) {
+					if (HPRatio() < .8) usingHealPill();
+					else eAttack();
+				}
+			}
 			else if (flags[kFLAGS.DIANA_LVL_UP] >= 2 && flags[kFLAGS.DIANA_LVL_UP] < 5) {
 				var choice2:Number = rand(6);
 				if (choice2 < 2) {
@@ -121,7 +139,7 @@ package classes.Scenes.NPCs
 				}
 				if (choice2 > 1 && choice2 < 5) {
 					if (HPRatio() < .6 && rand(2) == 0 && (mana >= spellCostHeal())) usingHealSpell();
-					else if (rand(2) == 0 && (mana < (this.maxMana() - 80))) usingVDARC();
+					else if (rand(2) == 0 && (mana < (this.maxMana() - 80))) usingARC();
 					else eAttack();
 				}
 				if (choice2 == 5) {
@@ -134,7 +152,7 @@ package classes.Scenes.NPCs
 				if (choice1 == 0) eAttack();
 				if (choice1 > 0 && choice1 < 5) {
 					if (HPRatio() < .5 && rand(2) == 0 && (mana >= spellCostHeal())) usingHealSpell();
-					else if (rand(2) == 0 && (mana < (this.maxMana() - 40))) usingVDARC();
+					else if (rand(2) == 0 && (mana < (this.maxMana() - 40))) usingARC();
 					else eAttack();
 				}
 				if (choice1 == 5) {
@@ -173,7 +191,7 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 1) {
 				initStrTouSpeInte(25, 30, 30, 80);
-				initWisLibSensCor(30, 25, 25, 50);
+				initWisLibSensCor(30, 30, 25, 50);
 				this.weaponAttack = 3;
 				this.armorDef = 6;
 				this.level = 6;
@@ -203,7 +221,7 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 3) {
 				initStrTouSpeInte(30, 50, 40, 80);
-				initWisLibSensCor(60, 50, 50, 50);
+				initWisLibSensCor(60, 55, 50, 50);
 				this.weaponAttack = 6;
 				this.armorDef = 9;
 				this.level = 12;
@@ -218,12 +236,12 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 4) {
 				initStrTouSpeInte(30, 60, 45, 80);
-				initWisLibSensCor(70, 50, 50, 50);
+				initWisLibSensCor(70, 60, 50, 50);
 				this.weaponAttack = 6;
 				this.armorDef = 9;
 				this.level = 15;
-				this.bonusHP = 520;
-				this.bonusMana = 220;
+				this.bonusHP = 725;
+				this.bonusMana = 265;
 				this.gems = rand(5) + 10;
 				this.drop = new ChainedDrop().
 					add(weapons.W_STAFF,1/10).
@@ -232,23 +250,23 @@ package classes.Scenes.NPCs
 					add(consumables.UNICORN,1/2);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 5) {
-				initStrTouSpeInte(30, 150, 50, 80);//tou down to 70?
-				initWisLibSensCor(80, 50, 50, 50);
+				initStrTouSpeInte(30, 70, 50, 80);
+				initWisLibSensCor(80, 65, 50, 50);
 				this.weaponAttack = 6;
 				this.armorDef = 9;
 				this.level = 18;
-				this.bonusHP = 220;
-				this.bonusMana = 120;
+				this.bonusHP = 725;
+				this.bonusMana = 265;
 				this.gems = rand(5) + 10;
 				this.drop = new ChainedDrop().
 					add(weapons.W_STAFF,1/10).
 					add(consumables.H_PILL,1/5).
-					add(consumables.VDARCON,1/5).
+					add(consumables.D_ARCON,1/5).
 					add(consumables.UNICORN,1/2);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 6) {
-				initStrTouSpeInte(30, 175, 55, 90);//tou down to 80?
-				initWisLibSensCor(80, 50, 50, 50);
+				initStrTouSpeInte(30, 80, 55, 90);
+				initWisLibSensCor(80, 70, 50, 50);
 				this.weaponAttack = 6;
 				this.armorDef = 9;
 				this.level = 21;
@@ -258,12 +276,12 @@ package classes.Scenes.NPCs
 				this.drop = new ChainedDrop().
 					add(weapons.W_STAFF,1/10).
 					add(consumables.H_PILL,1/5).
-					add(consumables.VDARCON,1/5).
+					add(consumables.D_ARCON,1/5).
 					add(consumables.UNICORN,1/2);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 7) {
-				initStrTouSpeInte(30, 200, 60, 90);//tou down to 90?
-				initWisLibSensCor(90, 50, 50, 50);//at unicorn bump lib and sens to 75
+				initStrTouSpeInte(30, 90, 60, 90);
+				initWisLibSensCor(90, 75, 50, 50);//at alicorn bump lib to 100 and sens to 75
 				this.weaponAttack = 6;
 				this.armorDef = 9;
 				this.level = 24;
@@ -273,7 +291,7 @@ package classes.Scenes.NPCs
 				this.drop = new ChainedDrop().
 					add(weapons.W_STAFF,1/10).
 					add(consumables.H_PILL,1/5).
-					add(consumables.VDARCON,1/5).
+					add(consumables.D_ARCON,1/5).
 					add(consumables.UNICORN,1/2);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 8) {
@@ -371,6 +389,17 @@ package classes.Scenes.NPCs
 				this.createPerk(PerkLib.WisenedHealer, 0, 0, 0, 0);
 				this.createPerk(PerkLib.MindOverBodyI, 0, 0, 0, 0);
 			}
+			if (flags[kFLAGS.DIANA_LVL_UP] >= 4) {
+				this.createPerk(PerkLib.SoulPersonage, 0, 0, 0, 0);
+				this.createPerk(PerkLib.HalfStepToImprovedSpirituality, 0, 0, 0, 0);
+				this.createPerk(PerkLib.BasicSelfControl, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.DIANA_LVL_UP] >= 5) {
+				this.createPerk(PerkLib.SoulWarrior, 0, 0, 0, 0);
+				this.createPerk(PerkLib.HalfStepToImprovedSelfControl, 0, 0, 0, 0);
+				this.createPerk(PerkLib.NaturalHealingMinor, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.DIANA_FOLLOWER] == 3 || flags[kFLAGS.DIANA_FOLLOWER] == 4) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			checkMonster();
 		}
 	}
