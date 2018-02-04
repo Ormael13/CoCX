@@ -2184,7 +2184,7 @@ private function guardMyCampKiha():void {
 			if (eggCounter > 2) outputText("\n\nThe process repeats until Kiha's belly finally flattens.");
 			outputText("\n\nYou count the eggs; there are " + num2Text(eggCounter) + " of them.");
 			outputText("\n\n\"<i>Look at that! They're beautiful. They're going to hatch real soon. Thank you, [name].</i>\" Kiha smiles and delivers a kiss to your lips.");
-			outputText("\n\nBut wait a minute! The eggs are shaking already! It's only a few minutes and already they're going to hatch.");
+			outputText("\n\nBut wait a minute! The eggs are shaking already! It's only a few minutes and they're already going to hatch.");
 			outputText("\n\nCracks form in the eggs and they're getting bigger and bigger. Eventually, the eggs burst and draconic heads poke out of the eggs. Aren't they cute? You and Kiha spend time peeling off the egg-shells and analyze the little dragon-morphs.");
 			//Initial children for variants.
 			var oldTotal:int = totalKihaChildren();
@@ -2217,7 +2217,7 @@ private function guardMyCampKiha():void {
 		}
 		
 		private function kihaBreastfeedingTime():void {
-			outputText("\nKiha is doing well with her " + (totalKihaChildren() == 1 ? "offspring" : "offsprings") + ". She appears to be breastfeeding her " + (totalKihaChildren() == 1 ? "" : "youngest ") + "offspring.");
+			outputText("\nKiha is doing well with your " + (totalKihaChildren() == 1 ? "offspring" : "offsprings") + ". She appears to be breastfeeding your " + (totalKihaChildren() == 1 ? "" : "youngest ") + "offspring.");
 		}
 		
 		public function kihaTellsChildrenStory():void {
@@ -2227,16 +2227,16 @@ private function guardMyCampKiha():void {
 				return;
 			}
 			clearOutput();
-			outputText("Kiha walks over to you and says, \"<i>Could you please sit with me please, [name]? I want to tell my " + (totalKihaChildren() == 1 ? "kid" : "kids") + " a story,</i>\" she says. You tell her that it would be a wonderful idea! Kiha escorts you to her nest.");
-			outputText("\n\nYou sit on the crudely made seat while Kiha sits on the another seat. ");
-			if (totalKihaChildren() == 1) outputText("Kiha gestures for her only child to sit on her lap. ");
-			else outputText("Kiha gestures for her children to sit in front of her, making sure you are visible to them. ");
+			outputText("Kiha walks over to you and says, \"<i>Could you sit with me please, [name]? I want to tell our " + (totalKihaChildren() == 1 ? "kid" : "kids") + " a story,</i>\" she says. You tell her that it would be a wonderful idea! Kiha escorts you to her nest.");
+			outputText("\n\nYou sit on the crudely made seat while Kiha sits on the other seat. ");
+			if (totalKihaChildren() == 1) outputText("Kiha gestures for the child to sit on her lap. ");
+			else outputText("Kiha gestures for the children to sit in front of her, making sure you are visible to them. ");
 			//Story time!
-			outputText("\n\nKiha says, \"<i>I'll tell you about my times.</i>\" You listen. Kiha explains about her past, how she was originally a lizan, how she slain her tribe's enemies by the thousands, how she was turned into a dragon-morph thanks to the demonic abduction and how she grew her hatred for the demons. She takes great care not to say something that would be inappropriate.");
-			outputText("\n\nKiha's children seem to be impressed and ask what happened next.");
+			outputText("\n\nKiha says, \"<i>I'll tell you about my times.</i>\" You listen. Kiha explains about her past, how she was originally a lizan, how she had slain her tribe's enemies by the thousands, how she was turned into a dragon-morph thanks to the demonic abduction, and how she grew her hatred for the demons. She takes great care not to say something that would be inappropriate.");
+			outputText("\n\nThe " + (totalKihaChildren() == 1 ? "child" : "children") + " seem to be impressed and ask what happened next.");
 			outputText("\n\nKiha resumes her story. She tells about how she met you for the first time and how she defended herself from the mob of spider-morphs thanks to your aid. ");
-			if (flags[kFLAGS.LETHICE_DEFEATED] > 0) outputText("\n\nYou tell about how you've defeated Lethice and put an end to the demonic threats. Kiha and her young " + (totalKihaChildren() == 1 ? "dragon-morph" : "dragon-morphs") + " look at you, amazed about your victory.");
-			else outputText("\n\nKiha tells about how she plans to get into Lethice's stronghold and defeat Lethice for once and for all.");
+			if (flags[kFLAGS.LETHICE_DEFEATED] > 0) outputText("\n\nYou tell about how you've defeated Lethice and put an end to the demonic threats. Kiha and the young " + (totalKihaChildren() == 1 ? "dragon-morph" : "dragon-morphs") + " look at you, amazed about your victory.");
+			else outputText("\n\nKiha tells about how she plans to get into Lethice's stronghold and defeat Lethice once and for all.");
 			outputText("\n\nThe " + (totalKihaChildren() == 1 ? "kid" : "kids") + " are happy to hear about the story. \"<i>Thank you for being with me and listening to my story, my Doofus,</i>\" Kiha says before giving you a peck on your cheek.");
 			dynStats("lib", -2, "cor", -2, "lus", -50, "scale", false);
 			
@@ -2267,11 +2267,11 @@ private function guardMyCampKiha():void {
 			if (flags[kFLAGS.KIHA_CHILDREN_GIRLS] > 0) availableGenders.push("female");
 			if (flags[kFLAGS.KIHA_CHILDREN_HERMS] > 0) availableGenders.push("herms");
 			var select:String = randomChoice(availableGenders);
-			outputText("You walk up to check on your draconic children. By Marae, they're all grown up! Looking down, you notice that most of them are wearing tribal loincloths, a nod to the modesty ");
+			outputText("You walk up to check on your draconic children. By Marae, they're all grown up! Looking down, you notice that most of them are wearing tribal loincloths, a nod to modesty ");
 			if (flags[kFLAGS.KIHA_UNDERGARMENTS] > 0) outputText("like Kiha");
 			else outputText("unlike Kiha who is naked");
 			outputText(" although some prefer to be completely free of clothing.");
-			outputText("\n\nKiha walks over to you and says, \"<i>They are quite the warrior now. They even slain some Minotaurs! I'm proud of them. You can knock me up all over again, my Doofus.</i>\" Kiha gives you a passionate kiss before flying off to do her usual duties.");
+			outputText("\n\nKiha walks over to you and says, \"<i>They are quite the warrior now. They've even slain some Minotaurs! I'm proud of them. You can knock me up all over again, my Doofus.</i>\" Kiha gives you a passionate kiss before flying off to do her usual duties.");
 			flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] = 0;
 		}
 	}
