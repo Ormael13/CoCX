@@ -323,7 +323,7 @@ import classes.BodyParts.Wings;
 	]);
 
 	public function setEarType(earType:int):Boolean {
-		return setBodyPartType("earType", METAMORPH_EARS, earType);
+		return setBodyPartType("ears.type", METAMORPH_EARS, earType);
 	}
 	private const METAMORPH_EARS:Object = createMapFromPairs([
 		[Ears.AVIAN, null],
@@ -568,10 +568,10 @@ import classes.BodyParts.Wings;
 	 * @param tailCount new tail count, -1 means "do not change"
 	 */
 	public function setTailType(tailType:int, tailCount:int = -1):Boolean {
-		var a:Boolean = setBodyPartType("tailType", METAMORPH_TAILS, tailType);
+		var a:Boolean = setBodyPartType("tail.type", METAMORPH_TAILS, tailType);
 		if (tailCount < 0) return a;
 		if (tailType == Tail.FOX) {
-			var b:Boolean = setBodyPartType("tailCount", METAMORPH_FOX_TAILS, tailCount);
+			var b:Boolean = setBodyPartType("tail.count", METAMORPH_FOX_TAILS, tailCount);
 			return a || b;
 		} else {
 			player.tailCount = tailCount;
