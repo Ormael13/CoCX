@@ -662,11 +662,10 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("You achieve a thundering orgasm, lightning surging out of your body as you direct it toward " + monster.a + monster.short + ", gleefully zapping " + monster.pronoun2 + " body with your accumulated lust! Your desire, however, only continue to ramp up.\n\n");
 			temp2 = 5 + rand(player.lib / 5 + player.cor / 10);
 			dynStats("lus", temp2, "scale", false);
-			var lustDmgF:Number = 0;
+			var lustDmgF:Number = 20 + rand(6);
 			var bimbo:Boolean   = false;
 			var bro:Boolean     = false;
 			var futa:Boolean    = false;
-			lustDmgF = 25 + rand(10);
 			if (player.findPerk(PerkLib.SensualLover) >= 0) {
 				lustDmgF += 2;
 			}

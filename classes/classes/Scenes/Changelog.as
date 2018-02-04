@@ -77,7 +77,7 @@ package classes.Scenes
 			outputText("-New body part - skin: Feathers. No prereq.\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: \n");
 			outputText("-New melee weapon (by Shamanknight): Halberd - buyable in weapons shop in Tel'Adre. Cost 1200 gems. Base atk is 6 increased by 9 when PC have 50+ str and another 15 more atk when having 100+ str. Attacks ignore 40% of target armor.\n");
-			outputText("-New melee weapon (by Shamanknight): Guan Dao - buyable in weapons shop in He'Xin'Dao. Cost 100 spirit stones. Base atk is 6 increased by 8 when PC have 50+ str and another 11 more atk when having 100+ str. Attacks ignore 40% of target armor.\n");
+			outputText("-New melee weapon (by Shamanknight): Guan Dao - buyable in weapons shop in He'Xin'Dao. Cost 100 spirit stones. Base atk is 6 increased by 8 when PC have 50+ str and another 11 more atk when having 100+ str. Attacks ignore 60% of target armor.\n");
 			outputText("-New melee weapon (by Shamanknight): Fly-Whisk - buyable in weapons shop in He'Xin'Dao. Cost 80 spirit stones. Base atk is 0, increase magical soulskills power by 20%.\n");
 			outputText("-New melee weapon (by Shamanknight): Hook Sword - buyable in weapons shop in He'Xin'Dao. Cost 160 spirit stones. Base atk is 20, are dual normal weapons, have added perk Dexterous Swordsmanship (+10% to parry chance - can add to existing parry bonuses like from perk Parry).\n");
 			outputText("-New melee weapon (by Shamanknight): Snake Sword - buyable in weapons shop in He'Xin'Dao. Cost 80 spirit stones. Base atk is 20, can be used for Whipping special.\n");

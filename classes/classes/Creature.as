@@ -3603,7 +3603,8 @@ public class Creature extends Utils
 				if (game.player.weapon == game.weapons.JRAPIER || game.player.weapon == game.weapons.Q_GUARD || game.player.weapon == game.weapons.B_WIDOW || game.player.weapon == game.weapons.SPEAR || game.player.weapon == game.weapons.SESPEAR || game.player.weapon == game.weapons.DSSPEAR || game.player.weapon == game.weapons.LANCE
 				 || game.player.weaponRange == game.weaponsrange.SHUNHAR || game.player.weaponRange == game.weaponsrange.KSLHARP || game.player.weaponRange == game.weaponsrange.LEVHARP || (game.player.weaponName.indexOf("staff") != -1 && game.player.findPerk(PerkLib.StaffChanneling) >= 0)) armorMod = 0;
 				if (game.player.weapon == game.weapons.KATANA) armorMod -= 5;
-				if (game.player.weapon == game.weapons.HALBERD || game.player.weapon == game.weapons.GUANDAO) armorMod *= 0.6;
+				if (game.player.weapon == game.weapons.HALBERD) armorMod *= 0.6;
+				if (game.player.weapon == game.weapons.GUANDAO) armorMod *= 0.4;
 				if (game.player.findPerk(PerkLib.LungingAttacks) >= 0) armorMod /= 2;
 				if (armorMod < 0) armorMod = 0;
 			}

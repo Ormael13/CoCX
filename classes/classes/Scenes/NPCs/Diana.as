@@ -113,15 +113,15 @@ package classes.Scenes.NPCs
 		override protected function performCombatAction():void
 		{
 			if (HPRatio() < .2 && (mana >= spellCostHeal())) usingHealSpell();
-			else if (flags[kFLAGS.DIANA_LVL_UP] >= 2) {
+			else if (flags[kFLAGS.DIANA_LVL_UP] >= 2 && flags[kFLAGS.DIANA_LVL_UP] < 5) {
 				var choice2:Number = rand(6);
-				if (choice2 == 0 || choice2 == 1) {
+				if (choice2 < 2) {
 					if ((soulforce >= soulskillCostManyBirds()) && rand(2) == 0) usingManyBirdsSoulskill();
 					else eAttack();
 				}
 				if (choice2 > 1 && choice2 < 5) {
-					if (HPRatio() < .6 && (mana >= spellCostHeal())) usingHealSpell();
-					else if (mana < (this.maxMana() - 40)) usingVDARC();
+					if (HPRatio() < .6 && rand(2) == 0 && (mana >= spellCostHeal())) usingHealSpell();
+					else if (rand(2) == 0 && (mana < (this.maxMana() - 80))) usingVDARC();
 					else eAttack();
 				}
 				if (choice2 == 5) {
@@ -133,8 +133,8 @@ package classes.Scenes.NPCs
 				var choice1:Number = rand(6);
 				if (choice1 == 0) eAttack();
 				if (choice1 > 0 && choice1 < 5) {
-					if (HPRatio() < .5 && (mana >= spellCostHeal())) usingHealSpell();
-					else if (mana < (this.maxMana() - 40)) usingVDARC();
+					if (HPRatio() < .5 && rand(2) == 0 && (mana >= spellCostHeal())) usingHealSpell();
+					else if (rand(2) == 0 && (mana < (this.maxMana() - 40))) usingVDARC();
 					else eAttack();
 				}
 				if (choice1 == 5) {
@@ -154,34 +154,11 @@ package classes.Scenes.NPCs
 			dianaScene.lostToDiana();
 		}
 		
-		override public function get long():String {
-			var str:String = "";
-			if (game.flags[kFLAGS.DIANA_LVL_UP] >= 5) {
-				str += "You are fighting a white furred 7 foot tall alicorn with long white hair and a decently toned body. Her green eyes follows your every move, looking for an exploitable opening. She’s currently in a defensive stance, ready to strike with her staff or kick your face with her hooves at the first opportunity.";
-			}
-			else if (game.flags[kFLAGS.DIANA_LVL_UP] >= 2 && game.flags[kFLAGS.DIANA_LVL_UP] < 5) {
-				str += "You are fighting a white furred 6.8 foot tall unicorn with long white hair and a decently toned body. Her green eyes follows your every move, looking for an exploitable opening. She’s currently in a defensive stance, ready to strike with her staff or kick your face with her hooves at the first opportunity.";
-			}
-			else {
-				str += "You are fighting a white furred 6.6 foot tall horse morph with long white hair and a decently toned body. Her green eyes follows your every move, looking for an exploitable opening. She’s currently in a defensive stance, ready to strike with her staff or kick your face with her hooves at the first opportunity.";
-			}
-			return str;
-		}
-		
 		public function Diana() 
 		{
 			if (flags[kFLAGS.DIANA_LVL_UP] == 0) {
-				this.a = "the ";
-				this.short = "horse morph";
-				this.imageName = "whitemare";
-				this.createVagina(true, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_TIGHT);
-				createBreastRow(Appearance.breastCupInverse("F"));
-				this.tallness = 6*12+6;
-				this.hips.type = Hips.RATING_CURVY;
-				this.butt.type = Butt.RATING_LARGE;
-				this.hairLength = 12;
 				initStrTouSpeInte(25, 25, 25, 75);
-				initWisLibSensCor(25, 50, 50, 50);
+				initWisLibSensCor(25, 25, 25, 50);
 				this.weaponAttack = 3;
 				this.armorDef = 6;
 				this.level = 3;
@@ -195,22 +172,12 @@ package classes.Scenes.NPCs
 					add(consumables.EQUINUM,1/2);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 1) {
-				this.a = "the ";
-				this.short = "horse morph";
-				this.imageName = "whitemare";
-				if (flags[kFLAGS.DIANA_FOLLOWER] == 0) this.createVagina(true, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_TIGHT);
-				else this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_NORMAL);
-				createBreastRow(Appearance.breastCupInverse("F"));
-				this.tallness = 6*12+6;
-				this.hips.type = Hips.RATING_CURVY;
-				this.butt.type = Butt.RATING_LARGE;
-				this.hairLength = 12;
-				initStrTouSpeInte(25, 50, 30, 80);
-				initWisLibSensCor(30, 50, 50, 50);
+				initStrTouSpeInte(25, 30, 30, 80);
+				initWisLibSensCor(30, 25, 25, 50);
 				this.weaponAttack = 3;
 				this.armorDef = 6;
 				this.level = 6;
-				this.bonusHP = 110;
+				this.bonusHP = 270;
 				this.bonusMana = 65;
 				this.gems = rand(5) + 5;
 				this.drop = new ChainedDrop().
@@ -220,47 +187,56 @@ package classes.Scenes.NPCs
 					add(consumables.EQUINUM,1/2);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 2) {
-				this.a = "the ";
-				this.short = "unicorn";
-				this.imageName = "unicornmare";
-				if (flags[kFLAGS.DIANA_FOLLOWER] == 0) this.createVagina(true, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_TIGHT);
-				else this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_NORMAL);
-				createBreastRow(Appearance.breastCupInverse("H"));
-				this.tallness = 6*12+8;
-				this.hips.type = Hips.RATING_CURVY+2;
-				this.butt.type = Butt.RATING_LARGE+1;
-				this.hairLength = 16;
-				initStrTouSpeInte(30, 75, 35, 80);
+				initStrTouSpeInte(30, 40, 35, 80);
 				initWisLibSensCor(50, 50, 50, 50);
 				this.weaponAttack = 6;
 				this.armorDef = 9;
 				this.level = 9;
-				this.bonusHP = 165;
-				this.bonusMana = 80;
+				this.bonusHP = 485;
+				this.bonusMana = 170;
 				this.gems = rand(5) + 10;
 				this.drop = new ChainedDrop().
 					add(weapons.W_STAFF,1/10).
 					add(consumables.H_PILL,1/5).
 					add(consumables.VDARCON,1/5).
-					add(consumables.EQUINUM,1/3).
 					add(consumables.UNICORN,1/2);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 3) {
-				this.a = "the ";
-				this.short = "unicorn";
-				this.imageName = "unicornmare";
-				if (flags[kFLAGS.DIANA_FOLLOWER] == 0) this.createVagina(true, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_TIGHT);
-				else this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_NORMAL);
-				createBreastRow(Appearance.breastCupInverse("H"));
-				this.tallness = 6*12+8;
-				this.hips.type = Hips.RATING_CURVY+2;
-				this.butt.type = Butt.RATING_LARGE+1;
-				this.hairLength = 16;
-				initStrTouSpeInte(30, 100, 40, 80);
+				initStrTouSpeInte(30, 50, 40, 80);
 				initWisLibSensCor(60, 50, 50, 50);
 				this.weaponAttack = 6;
 				this.armorDef = 9;
 				this.level = 12;
+				this.bonusHP = 520;
+				this.bonusMana = 220;
+				this.gems = rand(5) + 10;
+				this.drop = new ChainedDrop().
+					add(weapons.W_STAFF,1/10).
+					add(consumables.H_PILL,1/5).
+					add(consumables.VDARCON,1/5).
+					add(consumables.UNICORN,1/2);
+			}
+			if (flags[kFLAGS.DIANA_LVL_UP] == 4) {
+				initStrTouSpeInte(30, 60, 45, 80);
+				initWisLibSensCor(70, 50, 50, 50);
+				this.weaponAttack = 6;
+				this.armorDef = 9;
+				this.level = 15;
+				this.bonusHP = 520;
+				this.bonusMana = 220;
+				this.gems = rand(5) + 10;
+				this.drop = new ChainedDrop().
+					add(weapons.W_STAFF,1/10).
+					add(consumables.H_PILL,1/5).
+					add(consumables.VDARCON,1/5).
+					add(consumables.UNICORN,1/2);
+			}
+			if (flags[kFLAGS.DIANA_LVL_UP] == 5) {
+				initStrTouSpeInte(30, 150, 50, 80);//tou down to 70?
+				initWisLibSensCor(80, 50, 50, 50);
+				this.weaponAttack = 6;
+				this.armorDef = 9;
+				this.level = 18;
 				this.bonusHP = 220;
 				this.bonusMana = 120;
 				this.gems = rand(5) + 10;
@@ -268,31 +244,103 @@ package classes.Scenes.NPCs
 					add(weapons.W_STAFF,1/10).
 					add(consumables.H_PILL,1/5).
 					add(consumables.VDARCON,1/5).
-					add(consumables.EQUINUM,1/3).
 					add(consumables.UNICORN,1/2);
 			}
-			if (flags[kFLAGS.DIANA_LVL_UP] == 4) {
+			if (flags[kFLAGS.DIANA_LVL_UP] == 6) {
+				initStrTouSpeInte(30, 175, 55, 90);//tou down to 80?
+				initWisLibSensCor(80, 50, 50, 50);
+				this.weaponAttack = 6;
+				this.armorDef = 9;
+				this.level = 21;
+				this.bonusHP = 220;
+				this.bonusMana = 120;
+				this.gems = rand(5) + 10;
+				this.drop = new ChainedDrop().
+					add(weapons.W_STAFF,1/10).
+					add(consumables.H_PILL,1/5).
+					add(consumables.VDARCON,1/5).
+					add(consumables.UNICORN,1/2);
+			}
+			if (flags[kFLAGS.DIANA_LVL_UP] == 7) {
+				initStrTouSpeInte(30, 200, 60, 90);//tou down to 90?
+				initWisLibSensCor(90, 50, 50, 50);//at unicorn bump lib and sens to 75
+				this.weaponAttack = 6;
+				this.armorDef = 9;
+				this.level = 24;
+				this.bonusHP = 220;
+				this.bonusMana = 120;
+				this.gems = rand(5) + 10;
+				this.drop = new ChainedDrop().
+					add(weapons.W_STAFF,1/10).
+					add(consumables.H_PILL,1/5).
+					add(consumables.VDARCON,1/5).
+					add(consumables.UNICORN,1/2);
+			}
+			if (flags[kFLAGS.DIANA_LVL_UP] == 8) {
+				//lvl 27 alicorn
+			}
+			if (flags[kFLAGS.DIANA_LVL_UP] < 2 && flags[kFLAGS.DIANA_FOLLOWER] < 3) {
+				this.a = "the ";
+				this.short = "horse morph";
+				this.imageName = "whitemare";
+				this.long = "You are fighting a white furred 6.6 foot tall horse morph with long white hair and a decently toned body. Her green eyes follows your every move, looking for an exploitable opening. She’s currently in a defensive stance, ready to strike with her staff or kick your face with her hooves at the first opportunity.";
+				this.createVagina(true, VaginaClass.WETNESS_DRY, VaginaClass.LOOSENESS_TIGHT);
+				createBreastRow(Appearance.breastCupInverse("F"));
+				this.tallness = 6*12+6;
+				this.hips.type = Hips.RATING_CURVY;
+				this.butt.type = Butt.RATING_LARGE;
+				this.hairLength = 12;
+			}
+			if (flags[kFLAGS.DIANA_LVL_UP] >= 1 && flags[kFLAGS.DIANA_FOLLOWER] == 3) {
+				this.a = "the ";
+				this.short = "horse morph";
+				this.imageName = "whitemare";
+				this.long = "You are fighting a white furred 6.8 foot tall horse morph with long white hair and a decently toned body. Her green eyes follows your every move, looking for an exploitable opening. She’s currently in a defensive stance, ready to strike with her staff or kick your face with her hooves at the first opportunity.";
+				this.createVagina(false, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_NORMAL);
+				createBreastRow(Appearance.breastCupInverse("H"));
+				this.tallness = 6*12+8;
+				this.hips.type = Hips.RATING_CURVY+2;
+				this.butt.type = Butt.RATING_LARGE+1;
+				this.hairLength = 16;
+			}
+			if ((flags[kFLAGS.DIANA_LVL_UP] >= 2 && flags[kFLAGS.DIANA_LVL_UP] < 8) && flags[kFLAGS.DIANA_FOLLOWER] < 3) {
 				this.a = "the ";
 				this.short = "unicorn";
 				this.imageName = "unicornmare";
+				this.long = "You are fighting a white furred 6.8 foot tall unicorn with long white hair and a decently toned body. Her green eyes follows your every move, looking for an exploitable opening. She’s currently in a defensive stance, ready to strike with her staff or kick your face with her hooves at the first opportunity.";
+				this.createVagina(true, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_TIGHT);
+				createBreastRow(Appearance.breastCupInverse("H"));
 				this.tallness = 6*12+8;
-				//lvl 15
+				this.hips.type = Hips.RATING_CURVY+2;
+				this.butt.type = Butt.RATING_LARGE+1;
+				this.hairLength = 16;
 			}
-			if (flags[kFLAGS.DIANA_LVL_UP] == 5) {
+			if (flags[kFLAGS.DIANA_LVL_UP] >= 2 && flags[kFLAGS.DIANA_FOLLOWER] == 4) {
 				this.a = "the ";
-				this.short = "alicorn";
-				this.imageName = "diana";
-				this.tallness = 7 * 12;
-				//lvl 18
+				this.short = "unicorn";
+				this.imageName = "unicornmare";
+				this.long = "You are fighting a white furred 7 foot tall unicorn with long white hair and a decently toned body. Her green eyes follows your every move, looking for an exploitable opening. She’s currently in a defensive stance, ready to strike with her staff or kick your face with her hooves at the first opportunity.";
+				this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_NORMAL);
+				createBreastRow(Appearance.breastCupInverse("K"));
+				this.tallness = 7*12;
+				this.hips.type = Hips.RATING_FERTILE+1;
+				this.butt.type = Butt.RATING_JIGGLY+1;
+				this.hairLength = 26;
 			}
-			if (flags[kFLAGS.DIANA_LVL_UP] == 6) {
+			if (flags[kFLAGS.DIANA_LVL_UP] >= 8 && flags[kFLAGS.DIANA_FOLLOWER] < 3) {
+				//this.a = "the ";
+				//this.short = "alicorn";
 				this.a = "";
 				this.short = "Diana";
 				this.imageName = "diana";
-				this.tallness = 7 * 12;
-				//lvl 21
+				this.long = "You are fighting a white furred 7 foot tall alicorn with long white hair and a decently toned body. Her green eyes follows your every move, looking for an exploitable opening. She’s currently in a defensive stance, ready to strike with her staff or kick your face with her hooves at the first opportunity.";
+				this.createVagina(true, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_TIGHT);
+				createBreastRow(Appearance.breastCupInverse("K"));
+				this.tallness = 7*12;
+				this.hips.type = Hips.RATING_FERTILE+1;
+				this.butt.type = Butt.RATING_JIGGLY+1;
+				this.hairLength = 26;
 			}
-			this.long = "";
 			// this.plural = false;
 			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
