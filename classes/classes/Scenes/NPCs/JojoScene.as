@@ -8,7 +8,7 @@ public class JojoScene extends NPCAwareContent implements TimeAwareInterface {
 
 		public var pregnancy:PregnancyStore;
 
-    public static var monk:Number;
+    public static var monk:Number = 0;
 
     public function JojoScene()
 		{

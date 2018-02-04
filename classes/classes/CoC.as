@@ -145,9 +145,6 @@ public class CoC extends MovieClip
     public var time :TimeModel;
     public var textHistory:Array;
     public var currentText:String;
-    public var whitney:Number;
-    public var sand:Number;
-    public var giacomo:int;
     public var oldStats:*; // I *think* this is a generic object
     public var inputManager:InputManager;
     public var monkey:ChaosMonkey;
@@ -319,19 +316,6 @@ public class CoC extends MovieClip
         //The string holds all the "story" text, mainly used in engineCore
         currentText = "";
         textHistory = [];
-        //}endregion
-
-        /**
-         * Plot Variables
-         * Booleans and numbers about whether you've found certain places
-         */
-        //{ region PlotVariables
-
-        whitney = 0;
-        JojoScene.monk = 0;
-        sand           = 0;
-        giacomo        = 0;
-
         //}endregion
 
 
