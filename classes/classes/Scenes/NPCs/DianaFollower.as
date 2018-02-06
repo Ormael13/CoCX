@@ -105,16 +105,16 @@ public function wonOverDianaOralF():void
 			outputText("start squeezing her with your ");
 			if (player.isNaga()) outputText("tail");
 			else outputText("tentacles");
-			outputText(" until she can’t breath, she gasps, trying to suck hair into her crushed lungs, you tell her you loosen your grip once she starts to see");
+			outputText(" until she can’t breath, she gasps, trying to suck air into her crushed lungs, you tell her you'll loosen your grip once she starts to see");
 		}
 		outputText(" the wisdom in licking you. She starts to quickly lick your pussy, trying to please you to stop your punishment, which you do.\n\n");
 	}
-	outputText("You moan happily as her large equine tongue eats your cunt out, you move your hands up to your breasts, grabbing and squeezing them under your hands while your fingers sink into your soft flesh. You moan and you pinch your stiff nipples as she licks your pussy, you continuing to pleasure your breasts, helping the equine bring you to an orgasm, which you feel building.");
-	outputText(" Eventually it comes, and you moan loudly as you orgasm, spraying your girl juices over the the equines face, soaking it and making her have to drink them.\n\n");
+	outputText("You moan happily as her large equine tongue eats your cunt out, you move your hands up to your breasts, grabbing and squeezing them under your hands while your fingers sink into your soft flesh. You moan and pinch your stiff nipples as she licks your pussy, you continuing to pleasure your breasts, helping the equine bring you to an orgasm, which you feel building.");
+	outputText(" Eventually it comes, and you moan loudly as you orgasm, spraying your girl juices over the equines face, soaking it and making her have to drink them.\n\n");
 	if (player.isBiped() || player.isTaur()) {
 		outputText("Satisfied you climb off the equine, and look down at her at her. She is lying on the ground panting again, but this time her face is soaked by your pussy’s juices");
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 2) outputText(", which she eagerly licks off her face");
-		outputText(". Smirking, you redress and head off, finally letting the equine catch her breath.\n\n");
+		outputText(". Smirking, you redress and head off, finally leaving the equine to catch her breath.\n\n");
 	}
 	if (player.isNaga() || player.isScylla()) {
 		outputText("Satisfied, you release the equine from your ");
@@ -122,7 +122,7 @@ public function wonOverDianaOralF():void
 		else outputText("tentacles");
 		outputText(", letting her slip to the ground panting, her face soaked with your girl cum");
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 2) outputText(", which she eagerly licks off her face");
-		outputText(". Smirking you redress and heads off, finally letting the equine catch her breath.\n\n");
+		outputText(". Smirking you redress and head off, finally leaving the equine to catch her breath.\n\n");
 	}
 	if (flags[kFLAGS.DIANA_FOLLOWER] < 2) flags[kFLAGS.DIANA_FOLLOWER]++;
 	player.orgasm();
@@ -142,7 +142,7 @@ public function wonOverDianaOralM():void
 		else outputText("eager anticipation, looking at you with a come hither look.");
 		outputText("\n\nSmirking, you grab hold of your already hardening [cock] ");
 		if (player.cockTotal() > 1) outputText("from your bunch of [cocks]");
-		outputText(", before reaching down and yanking her head up by her mane, making her ");
+		outputText(", before reaching down and yanking her head up by her mane. Making her ");
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 2) outputText("squeal happily, already eager to suck your cock");
 		else outputText("whimper in pain");
 		outputText(", as you slap your [cockplural] against her cheek.\n\n");
@@ -190,12 +190,12 @@ public function wonOverDianaOralM():void
 		outputText("You don’t really even have to tell her, she’s already practically drooling. She quickly grabs your ");
 		if (player.cockTotal() > 1) outputText("largest ");
 		outputText("cock. , before lovingly running her tongue down your shaft as well as planting some loving kisses across it, showering it with her devotion. She eventually moves her mouth back up the length, reaching the head and planting another loving kiss on it.\n\n");
-		outputText("Pleased you start pushing ");
+		outputText("Pleased you start pushing your ");
 		if (player.cockTotal() > 1) outputText("largest ");
 		outputText("[cock] into her eager mouth, ");
-		if (player.cocks[x].cockLength >= 15) outputText("she happily takes every inch of your massive member as you force it into her mouth, stopping short of deepthroating her, she doesn’t even care that her mouth is being uncomfortable stretched, she just wants the rest of you cock");
+		if (player.cocks[x].cockLength >= 15) outputText("she happily takes every inch of your massive member as you force it into her mouth, stopping short of deepthroating her. She doesn’t even care that her mouth is being uncomfortable stretched, she just wants the rest of your cock");
 		else if (player.cocks[x].cockLength >= 9) outputText("she happily takes every inch of your large member as you force it into her mouth, stopping short of deepthroating her. She looks hungrily at the rest of your dick she has yet to take");
-		else if (player.cocks[x].cockLength >= 5) outputText("she happily takes all of the cock you push into mouth, which is nearly your entire length until her mouth is full of cock");
+		else if (player.cocks[x].cockLength >= 5) outputText("she happily takes all of the cock you push into her mouth, which is nearly your entire length until her mouth is full of cock");
 		else outputText("she happily takes your small member into her mouth");
 		outputText(".\n\nYou start thrusting your hips causing her to let out a happy but muffled moan, loving the feeling of having her mouth fucked by your length. ");
 		if (player.cockTotal() > 2) outputText("She reaches out and grabs hold of two more of your dicks, enthusiastically jerking them off. ");
@@ -203,8 +203,8 @@ public function wonOverDianaOralM():void
 		else outputText("She buries one of her hands into her sex, while the other plays with her breasts, trying to pleasure herself while she enthusiastically blows you. ");
 		if (player.cocks[x].cockLength >= 15) outputText("Smirking, you start pushing the rest of your massive cock into her mouth, making her moan loudly as her throat is stuffed with your cock, her neck bulging with its shape as it slips down her throat and into her stomach, both of you reveling in the pleasure, her eyes rolling back into her head in total bliss while her hands continue to work");
 		else if (player.cocks[x].cockLength >= 9) outputText("Smirking, you push the rest of your large cock into her mouth, which she eagerly accepts it, trying to move her head forward to take it in quicker. You start deepthroating her, enjoying the feeling of your length sinking in and out of her throat while she moans like a whore");
-		else if (player.cocks[x].cockLength >= 5) outputText("Smirking, you push the rest your cock into the eager equine mouth, making her moaning happily as the your cock’s head slips into her throat. You start throat fucking her, letting your cock ravage the tip of her throat while you both enjoy the feeling, the equine moaning with every thrust");
-		else outputText("As you thrust your hips, you tell her to pleasure you more, which she does, sucking as hard as she cans while her tongue licks everything it can reach, savoring the taste of your dick");
+		else if (player.cocks[x].cockLength >= 5) outputText("Smirking, you push the rest of your cock into the eager equine mouth, making her moaning happily as the head of your cock slips into her throat. You start throat fucking her, letting your cock ravage the tip of her throat while you both enjoy the feeling, the equine moaning with every thrust");
+		else outputText("As you thrust your hips, you tell her to pleasure you more, which she does, sucking as hard as she can while her tongue licks everything it can reach, savoring the taste of your dick");
 	}
 	else {
 		outputText("The equine tries to move her head away, ");
@@ -228,12 +228,12 @@ public function wonOverDianaOralM():void
 		else outputText("her mouth easily taking your small member");
 		outputText(". You savor the feeling of her hot mouth around your member.\n\n");
 		outputText("You start thrusting your hips, causing her to let out a muffled moan as her mouth is raped by your length, causing her to grab hold of your hips trying to control your thrusts, but she can’t. ");
-		if (player.cocks[x].cockLength >= 15) outputText("Smirking, you start forcing your entire length in, making her eyes bulge and water as your massive member pushes it way into her throat and all the way down into her stomach, her neck bulging with the shape of your cock. You start thrusting your hips again, fucking her entire throat and stomach while enjoying every second of it, her watering eyes rolling back as her hands fall limply to her side, unable to bear it all");
-		else if (player.cocks[x].cockLength >= 9) outputText("Smirking, you start pushing your entire length in, her eyes widening as your cock slips down her throat, not giving her enough time to gag. You begin deepthroating her, letting you length rape her near entire throat, while you enjoy the feeling of her throat as she moans and whimpers");
+		if (player.cocks[x].cockLength >= 15) outputText("Smirking, you start forcing your entire length in, making her eyes bulge and water as your massive member pushes its way into her throat and all the way down into her stomach, her neck bulging with the shape of your cock. You start thrusting your hips again, fucking her entire throat and stomach while enjoying every second of it, her watering eyes rolling back as her hands fall limply to her side, unable to bear it all");
+		else if (player.cocks[x].cockLength >= 9) outputText("Smirking, you start pushing your entire length in, her eyes widening as your cock slips down her throat, not giving her enough time to gag. You begin deepthroating her, letting your length rape nearly her entire throat, while you enjoy the feeling of her throat as she moans and whimpers");
 		else if (player.cocks[x].cockLength >= 5) outputText("Smirking, you start pushing the rest of your cock into her mouth, her eyes widen as your cock slips into her throat nearly causing her gag. You begin throat fucking her, letting your cock ravage the top of her throat while you enjoy the feeling of her tight neck around your cock head, as she lets out loud muffled moans");
 		else outputText("While you thrust your hips you order her to suck on your dick, which she does, sucking as hard as she can while you thrust into her mouth, you enjoying the feeling");
 	}
-	outputText(".\n\nYou continue to fuck her face for a good while minutes, enjoying her mouth as much as you can, before you start to feel the coming of an orgasm, making you speed up your thrusts while she moans as her face is smacked against your [hips] repeatedly, which speeds up the orgasm.");
+	outputText(".\n\nYou continue to fuck her face for a good while, enjoying her mouth as much as you can, before you start to feel the coming onslaught of an orgasm, making you speed up your thrusts while she moans as her face is smacked against your [hips] repeatedly, which speeds up the orgasm.");
 	if (flags[kFLAGS.DIANA_FOLLOWER] >= 2 && player.cockTotal() > 1) outputText(" Seeing you’re about to cum, she points your other [dickplural] at her, so you’ll cum on her.");
 	outputText("\n\n");
 	if (flags[kFLAGS.DIANA_FOLLOWER] >= 2) {

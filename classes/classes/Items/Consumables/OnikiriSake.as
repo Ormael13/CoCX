@@ -122,6 +122,7 @@ public class OnikiriSake extends Consumable {
 		}
 		//Horn
 		if (rand(3) == 0 && changes < changeLimit && (player.horns.type != Horns.ONI_X2 || player.horns.type != Horns.ONI) && player.arms.type == Arms.ONI) {
+			outputText("\n\n");
 			if (rand(2) == 0) {
 				if (player.horns.type == Horns.NONE) outputText("You moan in pleasure as a pair of bony horns push forward out of your forehead,");
 				else outputText("You begin to feel an odd itching sensation as you feel your horns repositioning,");

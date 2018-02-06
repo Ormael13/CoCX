@@ -1749,6 +1749,8 @@ public class PerkLib
 				"Enables your eggs to be properly fertilized into basilisks of both genders!");
 		public static const BeeOvipositor:PerkType = mk("Bee Ovipositor", "Bee Ovipositor",
 				"Allows you to lay eggs through a special organ on your insect abdomen, though you need at least 10 eggs to lay.");
+		public static const BicornBlessing:PerkType = mk("Bicorn Blessing", "Bicorn Blessing",
+				"Your are blessed with the unholy power of a bicorn and while above 80 corruption your black magic  is increased by 20% and lust resistance by 10%.");
 		public static const BimboBody:PerkType = mk("Bimbo Body", "Bimbo Body",
 				"Gives the body of a bimbo.  Tits will never stay below a 'DD' cup, libido is raised, lust resistance is raised, and upgrades tease.");
 		public static const BimboBrains:PerkType = mk("Bimbo Brains", "Bimbo Brains",
@@ -1926,6 +1928,8 @@ public class PerkLib
 				"Your strong affinity toward soullforce helped to denvelop another sense called 'Soul Sense' by a fellow soul cultivators.");
 		public static const TransformationImmunity:PerkType = mk("Transformation immunity", "Transformation immunity",
 				"As a magical construct you are immune to all effects that change the body of living beings, including most transformatives on Mareth (work as the regular transformative resistance except it reduce the odds of getting a body part tfed to 0 although score increasers do still works).");
+		public static const UnicornBlessing:PerkType = mk("Unicorn Blessing", "Unicorn Blessing",
+				"You are blessed with the power of a unicorn and while below 20 corruption all white magic spells are 20% stronger and lust resistance increased by 10%.");
 		public static const Whispered:PerkType = mk("Whispered", "Whispered",
 				"Akbal's blessings grant limited telepathy that can induce fear.");
 				

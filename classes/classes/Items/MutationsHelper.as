@@ -469,6 +469,7 @@ import classes.BodyParts.Wings;
 	}
 	private const METAMORPH_HORNS:Object = createMapFromPairs([
 		[Horns.ANTLERS, null],
+		[Horns.BICORN, null],
 		[Horns.COW_MINOTAUR, StatusEffects.UnlockedCowMinotaurHorns],
 		[Horns.DEMON, StatusEffects.UnlockedDemonHorns],
 		[Horns.DRACONIC_X2, StatusEffects.UnlockedDraconicX2],
@@ -654,6 +655,7 @@ import classes.BodyParts.Wings;
 		[Wings.MANTIS_LIKE_LARGE, StatusEffects.UnlockedMantisWingsLarge],
 		[Wings.MANTIS_LIKE_LARGE_2, null],
 		[Wings.MANTIS_LIKE_SMALL, StatusEffects.UnlockedMantisWingsSmall],
+		[Wings.NIGHTMARE, null],
 		[Wings.NONE, null],
 		[Wings.PLANT, null],
 		[Wings.SHARK_FIN, null],

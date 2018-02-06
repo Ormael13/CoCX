@@ -199,10 +199,14 @@ use namespace CoC;
 						name  : "bigjunk",
 						call  : bigJunkForestScene,
 						chance: bigJunkChance
-					},{
+					}, {
 						name: "celess-unicorn",
 						call: CelessScene.instance.celessUnicornIntro,
 						when: CelessScene.canMeetUnicorn
+					}, {
+						name: "celess-nightmare",
+						call: CelessScene.instance.celessUnicornIntro,
+						when: CelessScene.canMeetNightmare
 					}, {
 						name: "celess-armor",
 						call: CelessScene.instance.celessArmor,

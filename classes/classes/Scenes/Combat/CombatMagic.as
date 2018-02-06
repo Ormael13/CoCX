@@ -309,6 +309,7 @@ public class CombatMagic extends BaseCombatContent {
 			mod += player.perkv1(PerkLib.SagesKnowledge);
 		}
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
+		if (player.hasPerk(PerkLib.UnicornBlessing) && player.cor <= 20) mod += 20;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
@@ -344,6 +345,7 @@ public class CombatMagic extends BaseCombatContent {
 			mod += player.perkv1(PerkLib.SagesKnowledge);
 		}
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
+		if (player.hasPerk(PerkLib.UnicornBlessing) && player.cor <= 20) mod += 20;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
@@ -383,6 +385,7 @@ public class CombatMagic extends BaseCombatContent {
 			mod += player.perkv1(PerkLib.SagesKnowledge);
 		}
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
+		if (player.hasPerk(PerkLib.BicornBlessing) && player.cor >= 80) mod += 20;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
@@ -415,6 +418,7 @@ public class CombatMagic extends BaseCombatContent {
 			mod += player.perkv1(PerkLib.SagesKnowledge);
 		}
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
+		if (player.hasPerk(PerkLib.BicornBlessing) && player.cor >= 80) mod += 20;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);

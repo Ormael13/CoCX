@@ -38,6 +38,7 @@ import classes.Scenes.NPCs.Electra;
 import classes.Scenes.NPCs.RyuBiDragon;
 import classes.Scenes.NPCs.Sonya;
 import classes.Scenes.Places.Boat.Marae;
+import classes.Scenes.Areas.Forest.Nightmare;
 
 use namespace CoC;
 	
@@ -231,6 +232,11 @@ public function DELvLDiana():void {
 	outputText("\n\n<b>Diana get weaker! (cheat stop working when she reach lvl 3)</b>");
 	if (flags[kFLAGS.DIANA_LVL_UP] > 0) flags[kFLAGS.DIANA_LVL_UP]--;
 	doNext(EnemiesMenu);
+}
+public function FightNightmare():void {
+	clearOutput();
+	outputText("Entering battle with Nightmare! Enjoy ^^");
+	startCombat(new Nightmare());
 }
 		public function StatsMenu():void {
 			menu();
@@ -726,7 +732,8 @@ public function DELvLDiana():void {
 			addButton(2, "Sonya", FightSonya).hint("Test fight with Sonya.");
 			//addButton(3, "RyuBi", FightRyuBi).hint("Test fight with RyuBi.");
 			addButton(3, "Diana", FightDiana).hint("Test fight with Diana.");
-			addButton(4, "Alraune", FightAlraune).hint("Test fight with Alraune.");
+			addButton(4, "Nightmare", FightNightmare).hint("Test fight with Nightmare.");
+			//addButton(4, "Alraune", FightAlraune).hint("Test fight with Alraune.");
 			addButton(5, "DE Scout", FightDarkElfScout).hint("Test fight with Dark Elf Scout. (lvl 15)");
 			addButton(6, "DE Slaver", FightDarkElfSlaver).hint("Test fight with Dark Elf Slaver. (lvl 27)");
 			addButton(7, "DE Ranger", FightDarkElfRanger).hint("Test fight with Dark Elf Ranger. (lvl 39)");

@@ -2538,7 +2538,8 @@ public class Appearance extends Utils
 					[Horns.GARGOYLE, "gargoyle"],
 					[Horns.ORCHID, "orchid"],
 					[Horns.ONI, "1 oni"],
-					[Horns.ONI_X2, "2 oni"]
+					[Horns.ONI_X2, "2 oni"],
+					[Horns.BICORN, "bicorn"]
 				]
 		);
 		public static const DEFAULT_ANTENNAE_NAMES:Object = createMapFromPairs(
@@ -2647,7 +2648,8 @@ public class Appearance extends Utils
 					[Wings.BAT_ARM, "large manticore-like"],
 					[Wings.VAMPIRE, "large manticore-like"],
 					[Wings.FEY_DRAGON_WINGS, "large majestic fey draconic"],
-					[Wings.FEATHERED_AVIAN, "avian"]
+					[Wings.FEATHERED_AVIAN, "avian"],
+					[Wings.NIGHTMARE, "leathery"]
 				]
 		);
 		public static const DEFAULT_WING_DESCS:Object = createMapFromPairs(
@@ -2676,7 +2678,8 @@ public class Appearance extends Utils
 					[Wings.MANTICORE_LIKE_SMALL, "small manticore-like"],
 					[Wings.MANTICORE_LIKE_LARGE, "large manticore-like"],
 					[Wings.FEY_DRAGON_WINGS, "large majestic fey draconic"],
-					[Wings.FEATHERED_AVIAN, "large feathery"]
+					[Wings.FEATHERED_AVIAN, "large feathery"],
+					[Wings.NIGHTMARE, "large leathery"]
 				]
 		);
 		public static const DEFAULT_LOWER_BODY_NAMES:Object = createMapFromPairs(

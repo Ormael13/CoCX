@@ -15,6 +15,7 @@ public class Horns extends BodyPart {
 	public static const ORCHID:int                   = 11;
 	public static const ONI_X2:int                   = 12;
 	public static const ONI:int                      = 13;
+	public static const BICORN:int                   = 14;
 	
 	public function Horns() {
 		super(null, null);

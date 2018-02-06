@@ -999,6 +999,7 @@ use namespace CoC;
 			if(findPerk(PerkLib.ResistanceIV) >= 0) lust -= 5;
 			if(findPerk(PerkLib.ResistanceV) >= 0) lust -= 5;
 			if(findPerk(PerkLib.ResistanceVI) >= 0) lust -= 5;
+			if((findPerk(PerkLib.UnicornBlessing) >= 0 && cor <= 20) || (findPerk(PerkLib.BicornBlessing) >= 0 && cor >= 80)) lust -= 10;
 			if(findPerk(PerkLib.ChiReflowLust) >= 0) lust -= UmasShop.NEEDLEWORK_LUST_LUST_RESIST;
 			if(lust < minLustCap) lust = minLustCap;
 			if(statusEffectv1(StatusEffects.BlackCatBeer) > 0) {

@@ -1293,6 +1293,9 @@ public class PlayerAppearance extends BaseContent {
 		if (wingType == Wings.FEATHERED_AVIAN){
 			outputText("  A pair of large, feathery wings sprout from your back. Though you usually keep the [skin coat.color] wings folded close, they can unfurl to allow you to soar as gracefully as a bird.");
 		}
+		if (wingType == Wings.NIGHTMARE){
+			outputText("  A pair of large ominous black leathery wings expand from your back. You can open them wide to soar high in the sky.");
+		}
 	}
 	public function describeHorns():void {
 //Horns
@@ -1362,6 +1365,18 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  One very large and dangerous looking spiraling horns sprout from your forehead, pointing forward and over a foot long.  It have dangerous looking tip.");
 			if (player.horns.count >= 20)
 				outputText("  One huge and long spiraling horns erupt from your forehead, pointing forward.  The weight of it is heavy and ends with dangerous and sharp looking tip.");
+		}
+		if (player.horns.type == Horns.BICORN) {
+			if (player.horns.count < 3)
+				outputText("  A pair of tiny horns-like nub protrude from your forehead, resembling the horns of the young bicorns.");
+			if (player.horns.count >= 3 && player.horns.count < 6)
+				outputText("  Two moderately sized horns grow from your forehead, similar in size to those on a young bicorn.");
+			if (player.horns.count >= 6 && player.horns.count < 12)
+				outputText("  Two large horns sprout from your forehead, spiraling and pointing forwards like those of a bicorn.");
+			if (player.horns.count >= 12 && player.horns.count < 20)
+				outputText("  Two very large and dangerous looking spiraling horns sprout from your forehead, pointing forward and over a foot long.  They have dangerous looking tip.");
+			if (player.horns.count >= 20)
+				outputText("  Two huge and long spiraling horns erupt from your forehead, pointing forward.  The weight of them is heavy and ends with dangerous and sharp looking tips.");
 		}
 		if (player.horns.type == Horns.OAK) {
 			if (player.horns.count > 0)
