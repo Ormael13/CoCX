@@ -137,6 +137,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.removeStatusEffect(StatusEffects.CampSparingNpcsTimers2);
 				}
 			}
+			//Sidonie checks
+			if (flags[kFLAGS.SIDONIE_RECOLLECTION] > 0) flags[kFLAGS.SIDONIE_RECOLLECTION]--;
 			Begin("PlayerEvents","hourlyCheckRacialPerks");
 			needNext = hourlyCheckRacialPerks();
 			End("PlayerEvents","hourlyCheckRacialPerks");

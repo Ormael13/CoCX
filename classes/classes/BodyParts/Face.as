@@ -63,6 +63,11 @@ public class Face extends SaveableBodyPart {
 			WOLF
 			   ].indexOf(type) >= 0;
 	}
+	public function hasBeak():Boolean {
+		return [
+			AVIAN
+			   ].indexOf(type) >= 0;
+	}
 	public function hasBeard():Boolean {
 		return creature.beardLength > 0;
 	}

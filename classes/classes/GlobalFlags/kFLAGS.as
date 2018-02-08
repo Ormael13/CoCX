@@ -2586,9 +2586,9 @@ public static const UNKNOWN_FLAG_NUMBER_02577:int                               
 public static const UNKNOWN_FLAG_NUMBER_02578:int                                   = 2578;
 public static const UNKNOWN_FLAG_NUMBER_02579:int                                   = 2579;
 public static const FERAL_COMBAT_MODE:int                                   		= 2580;
-public static const UNKNOWN_FLAG_NUMBER_02581:int                                   = 2581;
-public static const UNKNOWN_FLAG_NUMBER_02582:int                                   = 2582;
-public static const UNKNOWN_FLAG_NUMBER_02583:int                                   = 2583;
+public static const SIDONIE_FOLLOWER:int                                   			= 2581;
+public static const SIDONIE_RECOLLECTION:int                                   		= 2582;
+public static const SIDONIE_SEX_MENU:int                                   			= 2583;
 public static const UNKNOWN_FLAG_NUMBER_02584:int                                   = 2584;
 public static const UNKNOWN_FLAG_NUMBER_02585:int                                   = 2585;
 public static const UNKNOWN_FLAG_NUMBER_02586:int                                   = 2586;

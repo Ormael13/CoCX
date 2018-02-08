@@ -151,6 +151,8 @@ public class SceneLib {
 
     public static var shouldraScene:ShouldraScene = new ShouldraScene();
 
+    public static var sidonieFollower:SidonieFollower = new SidonieFollower();
+
     public static var sophieBimbo:SophieBimbo = new SophieBimbo();
 
     public static var sophieFollowerScene:SophieFollowerScene = new SophieFollowerScene();

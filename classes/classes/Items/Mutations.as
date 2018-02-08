@@ -7722,7 +7722,7 @@ public final class Mutations extends MutationsHelper
 				setHairType(Hair.SILKEN);
 				changes++;
 			}
-			if (player.hasPlainSkinOnly() && !player.isGargoyle() && (player.skinTone != "dark" && player.skinTone != "light" && player.skinTone != "tan") && changes < changeLimit && rand(3) == 0) {
+			if (player.hasPlainSkinOnly() && !player.isGargoyle() && player.skinAdj != "flawless" && changes < changeLimit && rand(3) == 0) {
 				var color:String;
 				color = randomChoice("dark","light","tan");
 				player.skinTone = color;

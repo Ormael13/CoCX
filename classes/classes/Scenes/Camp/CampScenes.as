@@ -123,7 +123,12 @@ public function PeepingTom3():void {
 		else outputText("While she was not always a girl, Izma is womanly enough that she was still accepted in the bath.\n\n");
 	}
 //	 outputText("As a naga, Samira take a lot of space in the bath. You're glad you made it big enough to hold as many people as necessary.\n\n");//Samira
+	//Diana
+	//Michiko
 	if (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] > 0 && flags[kFLAGS.ARIAN_COCK_SIZE] == 0) outputText("Arian while formerly a male seems to get along with the other girls.\n\n");
+	if (flags[kFLAGS.SIDONIE_FOLLOWER] >= 1) {
+		outputText("Sitting on a side of the spring that is spacious enough to accommodate his larger frame, Sidonie lies relaxed, among the girls. Most of them give her not-so subtle glances, some of them at her hefty bosom, but the most directed at the thick equine member dangling from the legs. Not caring too much about their looks, she simply lies and enjoy the bath.\n\n");
+	}
 	outputText("The girls are discussing womanly topics giving you a nice display of their assets.\n\n");
 	if (emberScene.followerEmber() && (flags[kFLAGS.EMBER_GENDER] == 2 || flags[kFLAGS.EMBER_GENDER] == 3)) {
 		outputText("Something suddenly grabs you and lifts you by the leg. Turns out it’s Ember and she’s angry.\n\n");

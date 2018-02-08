@@ -234,6 +234,7 @@ import classes.Items.JewelryLib;
 	public function hasBeard():Boolean{ return facePart.hasBeard(); }
 	public function beard():String{ return facePart.beard(); }
 	public function hasMuzzle():Boolean{ return facePart.hasMuzzle(); }
+	public function hasBeak():Boolean{ return facePart.hasBeak(); }
 	public function face():String { return facePart.describe(); }
 	public function faceDesc():String { return facePart.describeMF(); }
 	public function hasLongTail():Boolean { return tail.isLong(); }

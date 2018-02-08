@@ -945,7 +945,8 @@ public function followersCount():Number {
 	if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4) counter++;
 	if (flags[kFLAGS.FLOWER_LEVEL] >= 4) counter++;
 	if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) counter++;
-    for each (var npc:XXCNPC in _campFollowers){
+    if (flags[kFLAGS.SIDONIE_FOLLOWER] >= 1) counter++;
+	for each (var npc:XXCNPC in _campFollowers){
         if(npc.isCompanion(XXCNPC.FOLLOWER)){counter++;}
     }
 	return counter;
@@ -1005,6 +1006,7 @@ public function loversHotBathCount():Number {
 	if (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) counter++;
 	if (followerKiha()) counter++;
 	if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && flags[kFLAGS.JOY_COCK_SIZE] < 1) counter++;
+	if (flags[kFLAGS.SIDONIE_FOLLOWER] >= 1) counter++;
 	return counter;
 }
 
@@ -1579,6 +1581,21 @@ public function campFollowers(descOnly:Boolean = false):void {
 	}
 	//Michiko
 	buttons.add("???").disable("Knowledge is Power.");
+	//Sidonie
+	if (flags[kFLAGS.SIDONIE_FOLLOWER] == 1) {
+		if (model.time.hours >= 6 && model.time.hours <= 8) outputText("Sidonie has taken a table out to have breakfast outside. By you can see, she’s munching a large bowl filled with oath, milk and strawberries.");
+		else if (model.time.hours <= 9) outputText("On a far part of the camp, you can distinguish Sidonie’s figure. Seems like she’s using the early morning to cut some long planks into smaller ones, as the unmistakable sound of saw on wood makes evident.");
+		else if (model.time.hours <= 10) outputText("The equine carpenter is looking at a book containing some furniture designs. She’s probably looking for ideas for her next piece.");
+		else if (model.time.hours <= 12) outputText("Near her tent, your equine friend is busy at work, currently sanding some pieces.");
+		else if (model.time.hours <= 13) outputText("Sidonie probably went to take her meal, given the hour. The recognizable smell of home-made food coming from her tent confirms quickly your suspicions.");
+		else if (model.time.hours <= 15) outputText("Some furniture pieces lie scattered near the equine carpenter’s workspace, who is varnishing them. A few finished ones are a bit away.");
+		else if (model.time.hours <= 16) outputText("Looks like Sidonie went to some place to sell her furniture. Se may return in an hour or so.");
+		else if (model.time.hours <= 18) outputText("Your equine friend is currently relaxing inside her tent, if you’d like to come in and spend some time with her.");
+		else if (model.time.hours <= 20) outputText("Oddly enough, Sidonie is picking some sandalwood sawdust and putting it on boiling water. Not matter the reason, the smell of the resulting liquid is certainly wonderful.");
+		else outputText("The horse-girl is having her dinner, as you manage to spot from outside. Seems like she’s having a hot drink with some bread.");
+		outputText("\n\n");
+		buttons.add( "Sidonie", SceneLib.sidonieFollower.mainSidonieMenu).hint("Visit Sidonie.");
+	}
     for each(var npc:XXCNPC in _campFollowers){
         npc.campDescription(buttons,XXCNPC.FOLLOWER);
     }

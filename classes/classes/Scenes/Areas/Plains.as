@@ -11,6 +11,7 @@ import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Plains.*;
 import classes.Scenes.Holidays;
+import classes.Scenes.NPCs.SidonieFollower;
 import classes.Scenes.SceneLib;
 
 use namespace CoC;
@@ -21,6 +22,7 @@ use namespace CoC;
 		public var gnollScene:GnollScene = new GnollScene();
 		public var gnollSpearThrowerScene:GnollSpearThrowerScene = new GnollSpearThrowerScene();
 		public var satyrScene:SatyrScene = new SatyrScene();
+		public var sidonie:SidonieFollower = new SidonieFollower();
 
 		public function Plains()
 		{
@@ -66,6 +68,14 @@ use namespace CoC;
 				},
 				chance: 0.5,
 				call: SceneLib.electraScene.repeatPlainsEnc
+			}, {
+				name: "sidonie",
+				when: function ():Boolean {
+					return flags[kFLAGS.SIDONIE_FOLLOWER] < 1
+						   && flags[kFLAGS.SIDONIE_RECOLLECTION] < 0;
+				},
+				chance: 0.5,
+				call: sidonie.meetingSidonieAtPlains
 			}, {
 				//Dem Kangasluts!  Force Sheila relationship phase!
 				name  : "sheila_xp3",

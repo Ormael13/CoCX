@@ -2201,6 +2201,10 @@ public class Appearance extends Utils
 		{
 			return i_creature.eyes.colour + " " + DEFAULT_EYES_NAMES[i_creature.eyes.type] + " eyes";
 		}
+		public static function earsDescript(i_creature:Creature):String
+		{
+			return i_creature.ears.type + " ears";
+		}
 
 /* All of these functions have been replaced with direct calls to the appropriate form of cockNoun().
 		private static function humanDescript(cockNum:Number):String

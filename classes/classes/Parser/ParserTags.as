@@ -46,6 +46,7 @@ public class ParserTags {
         "cocks"                 : function ():* { return CoC.instance.player.multiCockDescriptLight(); },
         "cunt"                  : function ():* { return CoC.instance.player.vaginaDescript(); },
         "eachcock"              : function ():* { return CoC.instance.player.sMultiCockDesc(); },
+        "ears"                  : function ():* { return CoC.instance.player.earsDescript(); },
         "evade"                 : function ():* { return "[Evade]"; },
         "eyes"                  : function ():* { return CoC.instance.player.eyesDescript(); },
         "eyecolor"              : function ():* { return CoC.instance.player.eyes.colour; },

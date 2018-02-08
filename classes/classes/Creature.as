@@ -3563,6 +3563,11 @@ public class Creature extends Utils
 		{
 			return Appearance.eyesDescript(this);
 		}
+		
+		public function earsDescript():String
+		{
+			return Appearance.earsDescript(this);
+		}
 
 		public function damageToughnessModifier(displayMode:Boolean = false):Number {
 			var temp:Number = 0;
