@@ -606,7 +606,7 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 2) {
 			outputText("You end your theme with a powerful finale compelling everyone around adore and love you.");
-			var lustDmgF:Number = monster.lustVuln * 3 * (player.inte / 5 * player.teaseLevel + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
+			var lustDmgF:Number = monster.lustVuln * 3 * (player.inte / 5 * (player.teaseLevel * 0.2) + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
 			if (player.hasPerk(PerkLib.ArcaneLash)) lustDmgF *= 1.5;
 			if (monster.hasPerk(PerkLib.EnemyGroupType)) {
 				if (player.hasPerk(PerkLib.ArouseTheAudience)) lustDmgF *= 7.5;
@@ -631,7 +631,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("You are still singing. Your compelling aria reaches far up to your opponent");
 			if(monster.plural) outputText("s");
 			outputText(" ears.");
-			var lustDmg2:Number = monster.lustVuln * (player.inte / 5 * player.teaseLevel + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
+			var lustDmg2:Number = monster.lustVuln * (player.inte / 5 * (player.teaseLevel * 0.2) + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
 			if (player.hasPerk(PerkLib.ArcaneLash)) lustDmg2 *= 1.5;
 			lustDmg2 = Math.round(lustDmg2);
 			monster.teased(lustDmg2);
@@ -643,7 +643,7 @@ public class MagicSpecials extends BaseCombatContent {
 			fatigue(50, USEFATG_MAGIC_NOBM);
 			clearOutput();
 			outputText("You start singing a enrapturing song.");
-			var lustDmg:Number = monster.lustVuln * 0.5 * (player.inte / 5 * player.teaseLevel + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
+			var lustDmg:Number = monster.lustVuln * 0.5 * (player.inte / 5 * (player.teaseLevel * 0.2) + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
 			if (player.hasPerk(PerkLib.ArcaneLash)) lustDmg *= 1.5;
 			lustDmg = Math.round(lustDmg);
 			monster.teased(lustDmg);

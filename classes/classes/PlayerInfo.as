@@ -71,10 +71,10 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.RAPHAEL_RAPIER_TRANING] > 0)
 			combatStats += "<b>Rapier Skill:</b> " + flags[kFLAGS.RAPHAEL_RAPIER_TRANING] + " / 4\n";
 
-		if (player.teaseLevel < 5)
-			combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / 5 (Exp: " + player.teaseXP + " / " + (10 + (player.teaseLevel + 1) * 5 * (player.teaseLevel + 1)) + ")\n";
+		if (player.teaseLevel < 25)
+			combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: " + player.teaseXP + " / " + (10 + (player.teaseLevel + 1) * 5 * (player.teaseLevel + 1)) + ")\n";
 		else
-			combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / 5 (Exp: MAX)\n";
+			combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)\n";
 
 		var maxes:Object = player.getAllMaxStats();
 		combatStats += "<b>Strength Cap:</b> " + maxes.str + "\n";

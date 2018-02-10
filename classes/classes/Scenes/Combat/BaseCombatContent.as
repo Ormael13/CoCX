@@ -123,6 +123,9 @@ public class BaseCombatContent extends BaseContent {
 	protected function scalingBonusWisdom():Number {
 		return combat.scalingBonusWisdom();
 	}
+	protected function scalingBonusLibido():Number {
+		return combat.scalingBonusLibido();
+	}
 	protected function spellCost(mod:Number):Number {
 		return combat.magic.spellCostImpl(mod);
 	}

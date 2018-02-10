@@ -998,8 +998,8 @@ public function naggaTease():void {
     //==============================
     //Determine basic success chance.
     //==============================
-    //5% chance for each tease level.
-    chance += player.teaseLevel * 5;
+    //1% chance for each tease level.
+    chance += player.teaseLevel;
     //10% for seduction perk
     if (player.findPerk(PerkLib.Seduction) >= 0) chance += 10;
     //10% for sexy armor types
@@ -1036,7 +1036,7 @@ public function naggaTease():void {
         damage += 5;
     }
     damage += player.level;
-    damage += player.teaseLevel * 2;
+    damage += player.teaseLevel;
     damage += rand(7);
     //partial skins bonuses
     switch (player.coatType()) {

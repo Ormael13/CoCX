@@ -74,8 +74,8 @@ public class CombatTeases extends BaseCombatContent {
 		//Determine basic success chance.
 		//==============================
 		chance = 60;
-		//5% chance for each tease level.
-		chance += player.teaseLevel * 5;
+		//1% chance for each tease level.
+		chance += player.teaseLevel;
 		//Extra chance for sexy undergarments.
 		chance += player.upperGarment.sexiness;
 		chance += player.lowerGarment.sexiness;
@@ -117,9 +117,7 @@ public class CombatTeases extends BaseCombatContent {
 			damage += 5;
 			bimbo = true;
 		}
-		if (player.level < 30) damage += player.level;
-		else if (player.level < 60) damage += 30 + ((player.level - 30) / 2);
-		else damage += 45 + ((player.level - 60) / 5);
+		damage += scalingBonusLibido() * 0.1;
 		if (player.findPerk(PerkLib.JobSeducer) >= 0) damage += player.teaseLevel * 3;
 		else damage += player.teaseLevel * 2;
 		if (player.findPerk(PerkLib.JobCourtesan) >= 0 && monster.findPerk(PerkLib.EnemyBossType) >= 0) damage *= 1.2;
@@ -1194,8 +1192,8 @@ public class CombatTeases extends BaseCombatContent {
 				 breasts = true;
 				 chance += 3;
 				 damage += 10;
-				 }
-				 */
+				 }*/
+				damage += scalingBonusToughness() * 0.1;
 				break;
 				//manticore tailpussy teases
 			case 47:
@@ -1520,12 +1518,19 @@ public class CombatTeases extends BaseCombatContent {
 			XP--;
 			player.teaseXP++;
 			//Level dat shit up!
-			if (player.teaseLevel < 5 && player.teaseXP >= 10 + (player.teaseLevel + 1) * 5 * (player.teaseLevel + 1)) {
+			if (player.teaseLevel < maxTeaseLevel() && player.teaseXP >= 10 + (player.teaseLevel + 1) * 5 * (player.teaseLevel + 1)) {
 				outputText("\n<b>Tease skill leveled up to " + (player.teaseLevel + 1) + "!</b>");
 				player.teaseLevel++;
 				player.teaseXP = 0;
 			}
 		}
+	}
+	
+	public function maxTeaseLevel():Number {
+		var maxLevel:Number = 1;
+		if (player.level < 24) maxLevel += player.level;
+		else maxLevel += 24;
+		return maxLevel;
 	}
 
 

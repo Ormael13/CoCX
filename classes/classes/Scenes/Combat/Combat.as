@@ -81,6 +81,9 @@ public class Combat extends BaseContent {
 		mod *= costPercent/100;
 		return mod;
 	}
+	public function maxTeaseLevel():Number {
+		return teases.maxTeaseLevel();
+	}
 	public function spellCost(mod:Number):Number {
 		return magic.spellCostImpl(mod);
 	}
@@ -3209,7 +3212,7 @@ public function awardPlayer(nextFunc:Function = null):void
 		monster.gems += bonusGems2;
 	}
 	if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) {
-		var bonusGems3:int = (monster.gems * 0.04) * player.teaseLevel;
+		var bonusGems3:int = (monster.gems * 0.04) * (player.teaseLevel * 0.2);
 		if (monster.lust >= monster.maxLust()) monster.gems += bonusGems3;
 	}
 	if (player.hasPerk(PerkLib.AscensionFortune)) {
@@ -4965,8 +4968,8 @@ public function ScyllaTease():void {
 		//Determine basic success chance.
 		//==============================
 		chance = 60;
-		//5% chance for each tease level.
-		chance += player.teaseLevel * 5;
+		//1% chance for each tease level.
+		chance += player.teaseLevel;
 		//10% for seduction perk
 		if(player.hasPerk(PerkLib.Seduction)) chance += 10;
 		//10% for sexy armor types
@@ -5004,8 +5007,8 @@ public function ScyllaTease():void {
 			damage += 5;
 			bimbo = true;
 		}
-		damage += player.level;
-		damage += player.teaseLevel*2;
+		damage += scalingBonusLibido() * 0.1;
+		damage += player.teaseLevel;
 		damage += rand(7);
 		//partial skins bonuses
 		switch (player.coatType()) {
@@ -5132,8 +5135,8 @@ public function GooTease():void {
 		//Determine basic success chance.
 		//==============================
 		chance = 60;
-		//5% chance for each tease level.
-		chance += player.teaseLevel * 5;
+		//1% chance for each tease level.
+		chance += player.teaseLevel;
 		//10% for seduction perk
 		if(player.hasPerk(PerkLib.Seduction)) chance += 10;
 		//10% for sexy armor types
@@ -5171,8 +5174,8 @@ public function GooTease():void {
 			damage += 5;
 			bimbo = true;
 		}
-		damage += player.level;
-		damage += player.teaseLevel*2;
+		damage += scalingBonusLibido() * 0.1;
+		damage += player.teaseLevel;
 		damage += rand(7);
 		//partial skins bonuses
 		switch (player.coatType()) {

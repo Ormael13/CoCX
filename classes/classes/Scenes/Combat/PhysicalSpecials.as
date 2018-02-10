@@ -1029,7 +1029,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		monster.createStatusEffect(StatusEffects.InkBlind, 2, 0, 0, 0);
 		monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 		if (monster.lustVuln > 0) {
-			var lustDmg:Number = 2 + (3 * player.teaseLevel) + rand(5);
+			var lustDmg:Number = 2 + player.teaseLevel + rand(5);
 			monster.teased(lustDmg);
 		}
 		outputText("\n\n");
