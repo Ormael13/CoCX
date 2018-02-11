@@ -675,9 +675,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (bimbo || bro || futa) {
 				lustDmgF += 5;
 			}
-			if (player.level < 30) lustDmgF += player.level;
-			else if (player.level < 60) lustDmgF += 30 + ((player.level - 30) / 2);
-			else lustDmgF += 45 + ((player.level - 60) / 5);
+			lustDmgF += scalingBonusLibido() * 0.1;
 			if (player.findPerk(PerkLib.JobSeducer) >= 0) lustDmgF += player.teaseLevel * 3;
 			else lustDmgF += player.teaseLevel * 2;
 			if (player.findPerk(PerkLib.JobCourtesan) >= 0 && monster.findPerk(PerkLib.EnemyBossType) >= 0) lustDmgF *= 1.2;

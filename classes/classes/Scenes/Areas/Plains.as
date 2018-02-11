@@ -72,9 +72,8 @@ use namespace CoC;
 				name: "sidonie",
 				when: function ():Boolean {
 					return flags[kFLAGS.SIDONIE_FOLLOWER] < 1
-						   && flags[kFLAGS.SIDONIE_RECOLLECTION] < 0;
+						   && flags[kFLAGS.SIDONIE_RECOLLECTION] < 1;
 				},
-				chance: 0.5,
 				call: sidonie.meetingSidonieAtPlains
 			}, {
 				//Dem Kangasluts!  Force Sheila relationship phase!
@@ -143,14 +142,15 @@ use namespace CoC;
 				chance: 0.5
 			}, {
 				name  : "gnoll",
-				chance: 0.5,
+				chance: 0.7,
 				call  : gnollSpearThrowerScene.gnoll2Encounter
 			}, {
 				name  : "gnoll2",
-				chance: 0.5,
+				chance: 0.7,
 				call  : gnollScene.gnollEncounter
 			}, {
 				name: "bunny",
+				chance: 0.3,
 				call: bunnyGirl.bunnbunbunMeet
 			}, {
 				name: "isabella",
@@ -169,12 +169,14 @@ use namespace CoC;
 				call  : SceneLib.helScene.encounterAJerkInThePlains
 			}, {
 				name: "satyr",
+				chance: 0.7,
 				call: satyrScene.satyrEncounter
 			}, {
 				name: "sheila",
 				when: function ():Boolean {
 					return flags[kFLAGS.SHEILA_DISABLED] == 0 && flags[kFLAGS.SHEILA_CLOCK] >= 0
 				},
+				chance: 0.5,
 				call: SceneLib.sheilaScene.sheilaEncounterRouter
 			});
 		}

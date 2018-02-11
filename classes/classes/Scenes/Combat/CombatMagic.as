@@ -74,7 +74,11 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.jewelry == jewelries.FOXHAIR) costPercent -= 20;
 		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (player.weapon == weapons.N_STAFF) costPercent += 200;
-		if (spellModImpl() > 1) costPercent += Math.round(spellModImpl() - 1);
+		if (spellModImpl() > 1) costPercent += Math.round(spellModImpl() - 1) * 10;
+		if (player.level >= 24 && player.inte >= 60) costPercent += 50;
+		if (player.level >= 42 && player.inte >= 120) costPercent += 50;
+		if (player.level >= 60 && player.inte >= 180) costPercent += 50;
+		if (player.level >= 78 && player.inte >= 240) costPercent += 50;
 		//Limiting it and multiplicative mods
 		if(player.hasPerk(PerkLib.BloodMage) && costPercent < 50) costPercent = 50;
 		mod *= costPercent/100;
@@ -93,7 +97,17 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
 		if (player.hasPerk(PerkLib.WizardsAndDaoistsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
 		if (player.hasPerk(PerkLib.WizardsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
-		if (player.hasPerk(PerkLib.WisenedHealer)) costPercent += 100;
+		if (player.hasPerk(PerkLib.WisenedHealer)) {
+			costPercent += 100;
+			if (player.level >= 24 && player.wis >= 60) costPercent += 25;
+			if (player.level >= 42 && player.wis >= 120) costPercent += 25;
+			if (player.level >= 60 && player.wis >= 180) costPercent += 25;
+			if (player.level >= 78 && player.wis >= 240) costPercent += 25;
+		}
+		if (player.level >= 24 && player.inte >= 60) costPercent += 25;
+		if (player.level >= 42 && player.inte >= 120) costPercent += 25;
+		if (player.level >= 60 && player.inte >= 180) costPercent += 25;
+		if (player.level >= 78 && player.inte >= 240) costPercent += 25;
 		if (player.hasPerk(PerkLib.NaturalHealingMinor)) costPercent -= 10;
 		if (player.hasPerk(PerkLib.NaturalHealingMajor)) costPercent -= 15;
 		if (player.hasPerk(PerkLib.NaturalHealingEpic)) costPercent -= 20;
@@ -101,7 +115,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.jewelry == jewelries.FOXHAIR) costPercent -= 20;
 		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (player.weapon == weapons.N_STAFF) costPercent += 200;
-		if (healModImpl() > 1) costPercent += Math.round(healModImpl() - 1);
+		if (healModImpl() > 1) costPercent += Math.round(healModImpl() - 1) * 10;
 		mod *= costPercent/100;
 		if (mod < 5) mod = 5;
 		mod = Math.round(mod * 100)/100;
@@ -119,7 +133,11 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.jewelry == jewelries.FOXHAIR) costPercent -= 20;
 		if (player.weapon == weapons.PURITAS || player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (player.weapon == weapons.N_STAFF) costPercent += 200;
-		if (spellModWhiteImpl() > 1) costPercent += Math.round(spellModWhiteImpl() - 1);
+		if (spellModWhiteImpl() > 1) costPercent += Math.round(spellModWhiteImpl() - 1) * 10;
+		if (player.level >= 24 && player.inte >= 60) costPercent += 50;
+		if (player.level >= 42 && player.inte >= 120) costPercent += 50;
+		if (player.level >= 60 && player.inte >= 180) costPercent += 50;
+		if (player.level >= 78 && player.inte >= 240) costPercent += 50;
 		//Limiting it and multiplicative mods
 		if(player.hasPerk(PerkLib.BloodMage) && costPercent < 50) costPercent = 50;
 		mod *= costPercent/100;
@@ -139,7 +157,17 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
 		if (player.hasPerk(PerkLib.WizardsAndDaoistsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
 		if (player.hasPerk(PerkLib.WizardsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
-		if (player.hasPerk(PerkLib.WisenedHealer)) costPercent += 100;
+		if (player.hasPerk(PerkLib.WisenedHealer)) {
+			costPercent += 100;
+			if (player.level >= 24 && player.wis >= 60) costPercent += 25;
+			if (player.level >= 42 && player.wis >= 120) costPercent += 25;
+			if (player.level >= 60 && player.wis >= 180) costPercent += 25;
+			if (player.level >= 78 && player.wis >= 240) costPercent += 25;
+		}
+		if (player.level >= 24 && player.inte >= 60) costPercent += 25;
+		if (player.level >= 42 && player.inte >= 120) costPercent += 25;
+		if (player.level >= 60 && player.inte >= 180) costPercent += 25;
+		if (player.level >= 78 && player.inte >= 240) costPercent += 25;
 		if (player.hasPerk(PerkLib.NaturalHealingMinor)) costPercent -= 10;
 		if (player.hasPerk(PerkLib.NaturalHealingMajor)) costPercent -= 15;
 		if (player.hasPerk(PerkLib.NaturalHealingEpic)) costPercent -= 20;
@@ -147,7 +175,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.jewelry == jewelries.FOXHAIR) costPercent -= 20;
 		if (player.weapon == weapons.PURITAS || player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (player.weapon == weapons.N_STAFF) costPercent += 200;
-		if (healModWhiteImpl() > 1) costPercent += Math.round(healModWhiteImpl() - 1);
+		if (healModWhiteImpl() > 1) costPercent += Math.round(healModWhiteImpl() - 1) * 10;
 		mod *= costPercent/100;
 		if (mod < 5) mod = 5;
 		mod = Math.round(mod * 100)/100;
@@ -165,7 +193,11 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.jewelry == jewelries.FOXHAIR) costPercent -= 20;
 		if (player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (player.weapon == weapons.N_STAFF) costPercent += 200;
-		if (spellModBlackImpl() > 1) costPercent += Math.round(spellModBlackImpl() - 1);
+		if (spellModBlackImpl() > 1) costPercent += Math.round(spellModBlackImpl() - 1) * 10;
+		if (player.level >= 24 && player.inte >= 60) costPercent += 50;
+		if (player.level >= 42 && player.inte >= 120) costPercent += 50;
+		if (player.level >= 60 && player.inte >= 180) costPercent += 50;
+		if (player.level >= 78 && player.inte >= 240) costPercent += 50;
 		//Limiting it and multiplicative mods
 		if(player.hasPerk(PerkLib.BloodMage) && costPercent < 50) costPercent = 50;
 		mod *= costPercent/100;
@@ -185,7 +217,17 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
 		if (player.hasPerk(PerkLib.WizardsAndDaoistsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
 		if (player.hasPerk(PerkLib.WizardsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
-		if (player.hasPerk(PerkLib.WisenedHealer)) costPercent += 100;
+		if (player.hasPerk(PerkLib.WisenedHealer)) {
+			costPercent += 100;
+			if (player.level >= 24 && player.wis >= 60) costPercent += 25;
+			if (player.level >= 42 && player.wis >= 120) costPercent += 25;
+			if (player.level >= 60 && player.wis >= 180) costPercent += 25;
+			if (player.level >= 78 && player.wis >= 240) costPercent += 25;
+		}
+		if (player.level >= 24 && player.inte >= 60) costPercent += 25;
+		if (player.level >= 42 && player.inte >= 120) costPercent += 25;
+		if (player.level >= 60 && player.inte >= 180) costPercent += 25;
+		if (player.level >= 78 && player.inte >= 240) costPercent += 25;
 		if (player.hasPerk(PerkLib.NaturalHealingMinor)) costPercent -= 10;
 		if (player.hasPerk(PerkLib.NaturalHealingMajor)) costPercent -= 15;
 		if (player.hasPerk(PerkLib.NaturalHealingEpic)) costPercent -= 20;
@@ -193,7 +235,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.jewelry == jewelries.FOXHAIR) costPercent -= 20;
 		if (player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (player.weapon == weapons.N_STAFF) costPercent += 200;
-		if (healModBlackImpl() > 1) costPercent += Math.round(healModBlackImpl() - 1);
+		if (healModBlackImpl() > 1) costPercent += Math.round(healModBlackImpl() - 1) * 10;
 		mod *= costPercent/100;
 		if (mod < 5) mod = 5;
 		mod = Math.round(mod * 100)/100;

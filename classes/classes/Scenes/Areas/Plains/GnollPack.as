@@ -135,7 +135,7 @@ package classes.Scenes.Areas.Plains
 			this.weaponValue = 25;
 			this.armorName = "skin";
 			this.armorDef = 7;
-			this.bonusHP = 600;
+			this.bonusHP = 100;
 			this.bonusLust = 10;
 			this.lust = 30;
 			this.lustVuln = .35;

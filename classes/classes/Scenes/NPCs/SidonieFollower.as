@@ -89,6 +89,7 @@ package classes.Scenes.NPCs
 			clearOutput();
 			outputText("Beaten and abused by the pack of gnolls, you fall to the ground bruised. Some minutes later, you gather enough strength to stand up, and manage to see that the silhouette of horse woman that they were chasing in the horizon. Seems like she has managed to escape while they were tangled with you.\n\n");
 			outputText("Since it’s obvious that she has gotten so far away that it’s unlikely that you catch up with her, you sigh, hoping that you have another chance meeting the running equine.\n\n");
+			flags[kFLAGS.SIDONIE_RECOLLECTION] = 18;
 			cleanupAfterCombat();
 		}
 		public function commingToCamp():void {

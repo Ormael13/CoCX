@@ -5757,7 +5757,7 @@ public function soulskillMagicalMod():Number {
 
 public function soulskillcostmulti():Number {
 	var multiss:Number = 1;
-	if (soulskillMod() > 1) multiss += Math.round(soulskillMod() - 1);/*
+	if (soulskillMod() > 1) multiss += Math.round(soulskillMod() - 1) * 10;/*
 	if (player.hasPerk(PerkLib.SoulPersonage)) multiss += 1;
 	if (player.hasPerk(PerkLib.SoulWarrior)) multiss += 1;
 	if (player.hasPerk(PerkLib.SoulSprite)) multiss += 1;
