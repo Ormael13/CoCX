@@ -181,6 +181,11 @@ public function telAdreMenu():void {
 		maddie.runAwayMaddieFollowup();
 		return;
 	}
+	if (flags[kFLAGS.LUNA_FOLLOWER] < 2 && rand(10) == 0) {
+		if (flags[kFLAGS.LUNA_FOLLOWER] == 1) SceneLib.lunaFollower.meetingLunaRepated();
+		else SceneLib.lunaFollower.meetingLunaFirstTime();
+		return
+	}
 	spriteSelect(-1);
 	outputText(images.showImage("location-teladre"));
 	clearOutput();

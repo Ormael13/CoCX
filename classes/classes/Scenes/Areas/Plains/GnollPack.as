@@ -13,8 +13,6 @@ package classes.Scenes.Areas.Plains
 	
 	public class GnollPack extends Monster
 	{
-		public var sidonie:SidonieFollower = new SidonieFollower();
-		
 		public function baseAttack():void
 		{
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
@@ -100,12 +98,12 @@ package classes.Scenes.Areas.Plains
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			sidonie.wonGnollPackFight();
+			SceneLib.sidonieFollower.wonGnollPackFight();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			sidonie.lostGnollPackFight();
+			SceneLib.sidonieFollower.lostGnollPackFight();
 		}
 		
 		public function GnollPack() 

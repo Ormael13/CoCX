@@ -142,8 +142,8 @@ package classes.Scenes.NPCs
 		
 		public function mainSidonieMenu():void {
 			clearOutput();
-			outputText("WIP\n\n");
-			outputText("\"<i>WIP</i>\"\n\n");
+			outputText("In the mood of spending some time with your camp’s carpenter, you approach Sidonie’s tent and find the horse-morph stretching outside her home, probably taking a break from her job. As soon the the caramel-furred equine spots you, she waves at you and invites you to her tent.\n\n");
+			outputText("\"<i>Good to see you, [name]! How things have been going for you?</i>\"\n\n");
 			menu();
 			addButton(0, "Appearance", SidonieAppearance);
 			addButton(1, "Talk", SidonieTalkMenu);
@@ -167,8 +167,8 @@ package classes.Scenes.NPCs
 		
 		public function SidonieTalkMenu():void {
 			clearOutput();
-			outputText("WIP\n\n");
-			outputText("\"<i>WIP</i>\"\n\n");
+			outputText("Looking around at the horse-girl quarters, you tell her that you’d like to chat a bit with her. Sidone nods and smiles.\n\n");
+			outputText("\"<i>Sure. sweetheart. What’s on your mind?</i>\"\n\n");
 			menu();
 			addButton(0, "Herself", SidonieTalkHerself);
 			addButton(1, "The Plains", SidonieTalkThePlains);

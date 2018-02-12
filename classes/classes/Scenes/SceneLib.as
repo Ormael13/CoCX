@@ -133,6 +133,8 @@ public class SceneLib {
 
     public static var latexGirl:LatexGirl = new LatexGirl();
 
+    public static var lunaFollower:LunaFollower = new LunaFollower();
+
     public static var marbleScene:MarbleScene = new MarbleScene();
 
     public static var marblePurification:MarblePurification = new MarblePurification();

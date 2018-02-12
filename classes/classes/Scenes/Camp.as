@@ -946,6 +946,7 @@ public function followersCount():Number {
 	if (flags[kFLAGS.FLOWER_LEVEL] >= 4) counter++;
 	if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) counter++;
     if (flags[kFLAGS.SIDONIE_FOLLOWER] >= 1) counter++;
+    if (flags[kFLAGS.LUNA_FOLLOWER] >= 4) counter++;
 	for each (var npc:XXCNPC in _campFollowers){
         if(npc.isCompanion(XXCNPC.FOLLOWER)){counter++;}
     }
@@ -1580,7 +1581,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 		buttons.add( "Holli", HolliPure.treeMenu).hint("Holli is in her tree at the edges of your camp.  You could go visit her if you want.");
 	}
 	//Michiko
-	buttons.add("???").disable("Knowledge is Power.");
+	//buttons.add("???").hint("Knowledge is Power.");
 	//Sidonie
 	if (flags[kFLAGS.SIDONIE_FOLLOWER] == 1) {
 		if (model.time.hours >= 6 && model.time.hours <= 8) outputText("Sidonie has taken a table out to have breakfast outside. By you can see, she’s munching a large bowl filled with oath, milk and strawberries.");
@@ -1595,6 +1596,13 @@ public function campFollowers(descOnly:Boolean = false):void {
 		else outputText("The horse-girl is having her dinner, as you manage to spot from outside. Seems like she’s having a hot drink with some bread.");
 		outputText("\n\n");
 		buttons.add( "Sidonie", SceneLib.sidonieFollower.mainSidonieMenu).hint("Visit Sidonie.");
+	}
+	//Luna
+	if (flags[kFLAGS.LUNA_FOLLOWER] >= 4) {
+		outputText("Luna wander around the camp doing her chores as usual.");
+		if (flags[kFLAGS.LUNA_JEALOUSY] >= 25) outputText(" She looks at you from time to time as if expecting you to notice her.");
+		outputText("\n\n");
+		buttons.add( "Luna", SceneLib.lunaFollower.mainLunaMenu).hint("Visit Luna.");
 	}
     for each(var npc:XXCNPC in _campFollowers){
         npc.campDescription(buttons,XXCNPC.FOLLOWER);

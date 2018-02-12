@@ -22,7 +22,6 @@ use namespace CoC;
 		public var gnollScene:GnollScene = new GnollScene();
 		public var gnollSpearThrowerScene:GnollSpearThrowerScene = new GnollSpearThrowerScene();
 		public var satyrScene:SatyrScene = new SatyrScene();
-		public var sidonie:SidonieFollower = new SidonieFollower();
 
 		public function Plains()
 		{
@@ -74,7 +73,7 @@ use namespace CoC;
 					return flags[kFLAGS.SIDONIE_FOLLOWER] < 1
 						   && flags[kFLAGS.SIDONIE_RECOLLECTION] < 1;
 				},
-				call: sidonie.meetingSidonieAtPlains
+				call: SceneLib.sidonieFollower.meetingSidonieAtPlains
 			}, {
 				//Dem Kangasluts!  Force Sheila relationship phase!
 				name  : "sheila_xp3",

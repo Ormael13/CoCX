@@ -139,6 +139,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Sidonie checks
 			if (flags[kFLAGS.SIDONIE_RECOLLECTION] > 0) flags[kFLAGS.SIDONIE_RECOLLECTION]--;
+			if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && flags[kFLAGS.LUNA_JEALOUSY] < 200) flags[kFLAGS.LUNA_JEALOUSY]++;
 			Begin("PlayerEvents","hourlyCheckRacialPerks");
 			needNext = hourlyCheckRacialPerks();
 			End("PlayerEvents","hourlyCheckRacialPerks");
@@ -541,6 +542,8 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				if (flags[kFLAGS.KINDRA_DAILY_TRAINING] > 0) flags[kFLAGS.KINDRA_DAILY_TRAINING] = 0;
 				//Reset Chi Chi Training daiy limit
 				if (flags[kFLAGS.CHI_CHI_DAILY_TRAINING] > 0) flags[kFLAGS.CHI_CHI_DAILY_TRAINING] = 0;
+				//Reset Luna Meal CD
+				if (flags[kFLAGS.LUNA_MEAL] > 0) flags[kFLAGS.LUNA_MEAL] = 0;
 				//Reset Diva Red Vial daiy limit
 				DivaScene.instance.tookVialToday = false;
 				//Clear sidewinder cooldown
