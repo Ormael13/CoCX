@@ -975,6 +975,7 @@ public function loversCount():Number {
 	if (arianScene.arianFollower()) counter++;
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) counter++;
 	if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
+	if (flags[kFLAGS.DIANA_FOLLOWER] > 3) counter++;
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
 	if (followerHel()) counter++;
 	//Izma!
@@ -998,6 +999,7 @@ public function loversHotBathCount():Number {
 	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) counter++;
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) counter++;
 	if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
+	if (flags[kFLAGS.DIANA_FOLLOWER] > 3) counter++;
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
 	if (followerHel()) counter++;
 	if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
@@ -1097,7 +1099,10 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		buttons.add( "Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu);
 	}
 	//Diana
-	buttons.add("???").disable("Let me heal you.");
+	if (flags[kFLAGS.DIANA_FOLLOWER] > 3) {
+		outputText("Lia write it plox.\n\n");
+		buttons.add("Diana", SceneLib.dianaScene.mainCampMenu);
+	}
 	//Etna
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) {
 		outputText("Etna is resting lazily on a rug in a very cat-like manner. She’s looking at you always with this adorable expression of hers, her tail wagging expectantly at your approach.\n\n");
@@ -1569,7 +1574,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 		buttons.add( "Shouldra", shouldraFollower.shouldraFollowerScreen).hint("Talk to Shouldra. She is currently residing in your body.");
 	}
 	//Ayane
-	if (flags[kFLAGS.AYANE_FOLLOWER] == 2) {
+	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) {
 		outputText("Ayane is tiddying your items to make sure everything is clean and well organised.\n\n");
 		buttons.add( "Ayane", SceneLib.ayaneFollower.ayaneCampMenu).hint("Visit Ayane a kitsune priestess of Taoth.");
 	}
@@ -1599,8 +1604,8 @@ public function campFollowers(descOnly:Boolean = false):void {
 	}
 	//Luna
 	if (flags[kFLAGS.LUNA_FOLLOWER] >= 4) {
-		outputText("Luna wander around the camp doing her chores as usual.");
-		if (flags[kFLAGS.LUNA_JEALOUSY] >= 25) outputText(" She looks at you from time to time as if expecting you to notice her.");
+		outputText("Luna wanders around the camp, doing her chores as usual.");
+		if (flags[kFLAGS.LUNA_JEALOUSY] >= 25) outputText(" She looks at you from time to time, as if expecting you to notice her.");
 		outputText("\n\n");
 		buttons.add( "Luna", SceneLib.lunaFollower.mainLunaMenu).hint("Visit Luna.");
 	}
@@ -2226,6 +2231,12 @@ CoC.instance.saves.saveGame(player.slotName);
 			sleepRecovery(false);
 			return;
 		}
+		//Full Moon
+		if (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0 && flags[kFLAGS.LUNA_FOLLOWER] < 7 && flags[kFLAGS.LUNA_AFFECTION] >= 50 && flags[kFLAGS.SLEEP_WITH] == "Luna" && player.gender > 0) {
+			SceneLib.lunaFollower.fullMoonEvent();
+			sleepRecovery(false);
+			return;
+		}
 		/******************************************************************/
 		/*       SLEEP WITH SYSTEM GOOOO                                  */
 		/******************************************************************/
@@ -2248,6 +2259,14 @@ CoC.instance.saves.saveGame(player.slotName);
 		else if(flags[kFLAGS.SLEEP_WITH] == "Arian" && arianScene.arianFollower()) {
 			arianScene.sleepWithArian();
 			return;
+		}
+		else if(flags[kFLAGS.SLEEP_WITH] == "Luna" && flags[kFLAGS.LUNA_FOLLOWER] >= 4) {
+			outputText("You head to bed, Luna following you. ");
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0 && flags[kFLAGS.LUNA_FOLLOWER] >= 9) {
+				SceneLib.lunaFollower.sleepingFullMoon();
+				return;
+			}
+			else outputText("Luna hugs you tightly, almost possessively so as you both doze off to sleep.");
 		}
 		else if (flags[kFLAGS.SLEEP_WITH] == "Ember" && flags[kFLAGS.EMBER_AFFECTION] >= 75 && followerEmber()) {
 			if (flags[kFLAGS.TIMES_SLEPT_WITH_EMBER] > 3) {

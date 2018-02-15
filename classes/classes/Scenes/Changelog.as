@@ -58,7 +58,7 @@ package classes.Scenes
 			outputText("-Having natural claws add toggle in combat menu to switch between normal or feral combat style. Only when PC not use any weapon (after few special exceptions) can benefit from feral combat style - when PC can attack more than once a turn fatigue costs will be halfed.\n");
 			outputText("-New melee weapon: Claws - obtainable by buying in weapon shop in He'Xin'Dao. 0 atk, 10% to cause bleed, 100 gems, is one of special exception weapons, which could be used without loosing benefits from using feral combat style.\n");
 			outputText("-All bleed effects not req. to lower enemy armor below 10. Also previous 50% chance for bleed effect was lowered to 25% for hooked gaunlets.\n");
-			outputText("-New range weapon: Hodr's Bow - obtained by . 22 atk, costing 2200 gems, -5% accuracy, Artifact Bow, each arrow can apply blind debuff on enemy.\n");
+			//outputText("-New range weapon: Hodr's Bow - obtained by . 22 atk, costing 2200 gems, -5% accuracy, Artifact Bow, each arrow can apply blind debuff on enemy.\n");
 			outputText("-First gaunlet repeatable reward was lowered to 15 spirit stones to keep in theme of 5 SS for each enemy defeated in gaunlet challanges.\n");
 			outputText("-Perk Rage give 50 more to max wrath and perk Anger 100 more to max wrath. To perk Job: Warlord req. was added option to use perk Feral Whirlwind instead of Whirlwind or Whipping. Other req. stay the same.\n");
 			outputText("-Beast Warrior PC's can use their own version of Whirlwind that req. only to have natural claws or weapons that can substitude natural claws. Almost all rest is similar to Whirlwind performed with any non-large/large weapon.\n");
@@ -81,6 +81,14 @@ package classes.Scenes
 			outputText("-New melee weapon (by Shamanknight): Fly-Whisk - buyable in weapons shop in He'Xin'Dao. Cost 80 spirit stones. Base atk is 0, increase magical soulskills power by 20%.\n");
 			outputText("-New melee weapon (by Shamanknight): Hook Sword - buyable in weapons shop in He'Xin'Dao. Cost 160 spirit stones. Base atk is 20, are dual normal weapons, have added perk Dexterous Swordsmanship (+10% to parry chance - can add to existing parry bonuses like from perk Parry).\n");
 			outputText("-New melee weapon (by Shamanknight): Snake Sword - buyable in weapons shop in He'Xin'Dao. Cost 80 spirit stones. Base atk is 20, can be used for Whipping special.\n");
+			outputText("-At Lake (and later Plain) PC cna enounted white furred horse-morph/unicorn. After her affection reach 100% she would introduce herself to PC. After this next meeting would give choice to accept or reject her.\n");
+			outputText("-When at cap Diana would provide healing option (full HP and up to half of max fatigue removed) plus 3 sex scenes.\n");
+			outputText("-At Plains PC can nencounter female equine (Sidonie) chased by group of angry gnolls. Could ignore it (event will proc in futre) or help. Helping leads to fight vs 4 gnolls after which or equine will escape in case PC lost, or join camp if won.\n");
+			outputText("-At camp Sidonie can talk with PC, have sex (3 scenes) or one a day go with PC to gather up to 300 wood.\n");
+			outputText("-Entering Tel'Adre there is 10% chance for event where PC can meet and hire maid Luna. If PC reject offer it will be possible to recruit her next time event proc.\n");
+			outputText("-In camp she will be able prepare once a day meal (recover a bit of HP, mana and fatigue), nurse (healing and a bit of fatigue recovery), talk. After her affection reach 50% she can selected as npc to sleep with.\n");
+			outputText("-Each 7 days if PC sleep with her and her affection is at 50% or more can proc special event 'Full Moon', where PC can accept Luna feeling or reject (it would lead to fight with her and if PC is partialy dog/wold-morph will also be unable to resist).\n");
+			outputText("-After Full Moon event PC would be able to choose one of Luna sex scenes or just... headpat her if not corrupted to much.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -136,6 +144,8 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): dodać yuki-onna TF
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

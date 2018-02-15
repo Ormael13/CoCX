@@ -139,7 +139,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Sidonie checks
 			if (flags[kFLAGS.SIDONIE_RECOLLECTION] > 0) flags[kFLAGS.SIDONIE_RECOLLECTION]--;
-			if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && flags[kFLAGS.LUNA_JEALOUSY] < 200) flags[kFLAGS.LUNA_JEALOUSY]++;
+			if (flags[kFLAGS.LUNA_FOLLOWER] >= 4) {
+				if (flags[kFLAGS.LUNA_JEALOUSY] < 200) flags[kFLAGS.LUNA_JEALOUSY]++;
+				if ((flags[kFLAGS.LUNA_FOLLOWER] == 6 || flags[kFLAGS.LUNA_FOLLOWER] == 10) && flags[kFLAGS.LUNA_JEALOUSY] < 50) flags[kFLAGS.LUNA_FOLLOWER]--;
+				if ((flags[kFLAGS.LUNA_FOLLOWER] == 5 || flags[kFLAGS.LUNA_FOLLOWER] == 9) && flags[kFLAGS.LUNA_JEALOUSY] >= 50 && (CoC.instance.model.time.hours > 6 && CoC.instance.model.time.hours < 23)) SceneLib.lunaFollower.warrningAboutJelously();
+			}
 			Begin("PlayerEvents","hourlyCheckRacialPerks");
 			needNext = hourlyCheckRacialPerks();
 			End("PlayerEvents","hourlyCheckRacialPerks");
@@ -567,6 +571,10 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				if (flags[kFLAGS.CHI_CHI_LVL_UP] < 5 && flags[kFLAGS.CHI_CHI_DAILY_TRAINING] < 1) {
 					if (flags[kFLAGS.CHI_CHI_LVL_UP] < 2) flags[kFLAGS.CHI_CHI_LVL_UP] = 2;
 					else flags[kFLAGS.CHI_CHI_LVL_UP]++;
+				}
+				//Full moon
+				if (flags[kFLAGS.LUNA_FOLLOWER] >= 4) {
+					flags[kFLAGS.LUNA_MOON_CYCLE]++;
 				}
 			}
 			if (CoC.instance.model.time.hours == 6) {

@@ -184,6 +184,13 @@ use namespace CoC;
 						},
 						chance: 0.05
 					}, {
+						name: "diana",
+						when: function():Boolean {
+							return flags[kFLAGS.DIANA_FOLLOWER] < 4 && flags[kFLAGS.DIANA_FOLLOWER] == 100;
+						},
+						chance: 0.5,
+						call: SceneLib.dianaScene.postNameForestEnc
+					}, {
 						name: "walk",
 						call: forestWalkFn
 					}, {

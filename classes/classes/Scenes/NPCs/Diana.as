@@ -115,7 +115,23 @@ package classes.Scenes.NPCs
 		override protected function performCombatAction():void
 		{
 			if (HPRatio() < .2 && (mana >= spellCostHeal())) usingHealSpell();
-			else if (flags[kFLAGS.DIANA_LVL_UP] >= 5) {
+			else if (flags[kFLAGS.DIANA_LVL_UP] >= 8) {
+				var choice4:Number = rand(6);
+				if (choice4 < 2) {
+					if ((soulforce >= soulskillCostManyBirds()) && rand(2) == 0) usingManyBirdsSoulskill();
+					else eAttack();
+				}
+				if (choice4 > 1 && choice3 < 5) {
+					if (HPRatio() < .6 && rand(2) == 0 && (mana >= spellCostHeal())) usingHealSpell();
+					else if (rand(2) == 0 && (mana < (this.maxMana() - 300))) usingARC();
+					else eAttack();
+				}
+				if (choice4 == 5) {
+					if (HPRatio() < .8) usingHealPill();
+					else eAttack();
+				}
+			}
+			else if (flags[kFLAGS.DIANA_LVL_UP] >= 5 && flags[kFLAGS.DIANA_LVL_UP] < 8) {
 				var choice3:Number = rand(6);
 				if (choice3 < 2) {
 					if ((soulforce >= soulskillCostManyBirds()) && rand(2) == 0) usingManyBirdsSoulskill();
@@ -281,7 +297,7 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 7) {
 				initStrTouSpeInte(30, 90, 60, 90);
-				initWisLibSensCor(90, 75, 50, 50);//at alicorn bump lib to 100 and sens to 75
+				initWisLibSensCor(90, 75, 50, 50);
 				this.weaponAttack = 6;
 				this.armorDef = 9;
 				this.level = 24;
@@ -295,7 +311,19 @@ package classes.Scenes.NPCs
 					add(consumables.UNICORN,1/2);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 8) {
-				//lvl 27 alicorn
+				initStrTouSpeInte(40, 100, 70, 100);
+				initWisLibSensCor(100, 100, 75, 50);
+				this.weaponAttack = 9;
+				this.armorDef = 12;
+				this.level = 27;
+				this.bonusHP = 220;
+				this.bonusMana = 120;
+				this.gems = rand(5) + 15;
+				this.drop = new ChainedDrop().
+					add(weapons.W_STAFF,1/10).
+					add(consumables.H_PILL,1/5).
+					add(consumables.D_ARCON,1/5).
+					add(consumables.ALICORN,1/2);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] < 2 && flags[kFLAGS.DIANA_FOLLOWER] < 3) {
 				this.a = "the ";
@@ -346,12 +374,10 @@ package classes.Scenes.NPCs
 				this.hairLength = 26;
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 8 && flags[kFLAGS.DIANA_FOLLOWER] < 3) {
-				//this.a = "the ";
-				//this.short = "alicorn";
 				this.a = "";
 				this.short = "Diana";
 				this.imageName = "diana";
-				this.long = "You are fighting a white furred 7 foot tall alicorn with long white hair and a decently toned body. Her green eyes follows your every move, looking for an exploitable opening. She’s currently in a defensive stance, ready to strike with her staff or kick your face with her hooves at the first opportunity.";
+				this.long = "Diana is a white furred 7 foot tall alicorn with long white hair and a decently toned body. Her green eyes follows your every move, looking for an exploitable opening. She’s currently in a defensive stance, ready to strike with her staff or kick your face with her hooves at the first opportunity.";
 				this.createVagina(true, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_TIGHT);
 				createBreastRow(Appearance.breastCupInverse("K"));
 				this.tallness = 7*12;
@@ -398,6 +424,15 @@ package classes.Scenes.NPCs
 				this.createPerk(PerkLib.SoulWarrior, 0, 0, 0, 0);
 				this.createPerk(PerkLib.HalfStepToImprovedSelfControl, 0, 0, 0, 0);
 				this.createPerk(PerkLib.NaturalHealingMinor, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.DIANA_LVL_UP] >= 6) {
+				//this.createPerk(PerkLib.SoulWarrior, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.DIANA_LVL_UP] >= 7) {
+				//this.createPerk(PerkLib.SoulWarrior, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.DIANA_LVL_UP] >= 8) {
+				//this.createPerk(PerkLib.SoulWarrior, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_FOLLOWER] == 3 || flags[kFLAGS.DIANA_FOLLOWER] == 4) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			checkMonster();

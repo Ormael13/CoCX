@@ -1404,6 +1404,13 @@ use namespace CoC;
 				else
 					race = "wolf-" + mf("boy", "girl");
 			}
+			if (werewolfScore() >= 6)
+			{
+				if (werewolfScore() >= 12)
+					race = "Werewolf";
+				else
+					race = "half werewolf";
+			}
 			if (foxScore() >= 4)
 			{
 				if (foxScore() >= 7 && isTaur() && lowerBody == LowerBody.FOX)
@@ -1979,6 +1986,8 @@ use namespace CoC;
 				chimeraCounter++;
 			if (wolfScore() >= 6)
 				chimeraCounter++;
+			if (werewolfScore() >= 6)
+				chimeraCounter++;
 			if (foxScore() >= 4)
 				chimeraCounter++;
 			if (ferretScore() >= 4)
@@ -2088,7 +2097,9 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (wolfScore() >= 6)
 				grandchimeraCounter++;
-*/			if (foxScore() >= 7)
+*/			if (werewolfScore() >= 12)
+				grandchimeraCounter++;
+			if (foxScore() >= 7)
 				grandchimeraCounter++;
 //			if (ferretScore() >= 4)
 //				grandchimeraCounter++;
@@ -4047,6 +4058,15 @@ use namespace CoC;
 			
 			End("Player","racialScore");
 			return wolfCounter;
+		}
+
+		//Werewolf score
+		public function werewolfScore():Number {
+			Begin("Player","racialScore","wolf");
+			var werewolfCounter:Number = 0;
+			
+			End("Player","racialScore");
+			return werewolfCounter;
 		}
 
 		public function sirenScore():Number {

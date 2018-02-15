@@ -282,8 +282,11 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.shield == shields.MABRACE) mod += .5;
 		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
 		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
-		if (player.weapon == weapons.ASCENSU) mod += .15;
 		if (player.hasStatusEffect(StatusEffects.Maleficium)) mod += 1;
+		if (player.weapon == weapons.PURITAS) mod *= 1.6;
+		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
+		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
+		mod = Math.round(mod);
 		return mod;
 	}
 	internal function healModImpl():Number {
@@ -316,7 +319,10 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.shield == shields.MABRACE) mod += .5;
 		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
 		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
-		if (player.weapon == weapons.ASCENSU) mod += .15;
+		if (player.weapon == weapons.PURITAS) mod *= 1.6;
+		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
+		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
+		mod = Math.round(mod);
 		return mod;
 	}
 	internal function spellModWhiteImpl():Number {
@@ -360,8 +366,10 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.shield == shields.MABRACE) mod += .5;
 		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
 		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
-		if (player.weapon == weapons.PURITAS || player.weapon == weapons.ASCENSU) mod += .15;
 		if (player.hasStatusEffect(StatusEffects.Maleficium)) mod += 1;
+		if (player.weapon == weapons.PURITAS) mod *= 1.6;
+		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
+		mod = Math.round(mod);
 		return mod;
 	}
 	internal function healModWhiteImpl():Number {
@@ -395,7 +403,9 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.shield == shields.MABRACE) mod += .5;
 		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
 		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
-		if (player.weapon == weapons.PURITAS || player.weapon == weapons.ASCENSU) mod += .15;
+		if (player.weapon == weapons.PURITAS) mod *= 1.6;
+		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
+		mod = Math.round(mod);
 		return mod;
 	}
 	internal function spellModBlackImpl():Number {
@@ -436,8 +446,10 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.shield == shields.MABRACE) mod += .5;
 		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
 		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
-		if (player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU) mod += .15;
 		if (player.hasStatusEffect(StatusEffects.Maleficium)) mod += 1;
+		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
+		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
+		mod = Math.round(mod);
 		return mod;
 	}
 	internal function healModBlackImpl():Number {
@@ -468,7 +480,9 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.shield == shields.MABRACE) mod += .5;
 		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
 		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
-		if (player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU) mod += .15;
+		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
+		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
+		mod = Math.round(mod);
 		return mod;
 	}
 	

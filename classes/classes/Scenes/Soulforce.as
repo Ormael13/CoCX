@@ -224,8 +224,8 @@ public function replacingBarbsWithsSowrds():void {
 	doNext(SoulforceCheats);
 }
 public function LvLUPDiana():void {
-	outputText("\n\n<b>Diana get stronger! (cheat stop working when she reach max possible lvl for now (atm it's lvl 15))</b>");
-	if (flags[kFLAGS.DIANA_LVL_UP] < 4) flags[kFLAGS.DIANA_LVL_UP]++;
+	outputText("\n\n<b>Diana get stronger! (cheat stop working when she reach max possible lvl (atm it's lvl 27))</b>");
+	if (flags[kFLAGS.DIANA_LVL_UP] < 8) flags[kFLAGS.DIANA_LVL_UP]++;
 	doNext(EnemiesMenu);
 }
 public function DELvLDiana():void {
