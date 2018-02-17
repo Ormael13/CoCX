@@ -1236,6 +1236,9 @@ public class PlayerAppearance extends BaseContent {
 		if (player.rearBody.type == RearBody.BAT_COLLAR){
 			outputText("  Around your neck is a thick collar of fur reminiscent of a bat's.");
 		}
+		if (player.rearBody.type == RearBody.WOLF_COLLAR){
+			outputText("  Around your neck there is a thick coat of [skin coat.color] fur. It looks great on you. That said, you can dismiss every one of your bestial features at any time should the need arise for you to appear human.");
+		}
 	}
 	public function describeWings():void {
 //WINGS!
@@ -1413,6 +1416,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your tongue is rough like that of a cat. You sometimes groom yourself with it.");
 		else if (player.tongue.type == Tongue.ELF)
 			outputText("  One could mistake you for a human but your voice is unnaturally beautiful and melodious giving you away as something else.");
+		else if (player.tongue.type == Tongue.DOG)
+			outputText("  You sometime let your panting canine tongue out to vent heat.");
 	}
 	public function describeBeard():void {
 //Beards!
@@ -1464,6 +1469,9 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if(eyeType == Eyes.GEMSTONES){
 			outputText("  Instead of regular eyes you see through a pair of gemstones that change hue based on your mood.");
+		}
+		else if(eyeType == Eyes.FERAL){
+			outputText("  In your eyes sometime dance a green light. It encompass your entire pupil when you let the beast within loose.");
 		}
 		else outputText("  Your eyes are [eyecolor].");
 	}
@@ -2404,10 +2412,14 @@ public function RacialScores():void {
 	else if (player.spiderScore() >= 4 && player.spiderScore() < 7) outputText("\n<font color=\"#0000a0\">Half Spider-morph: " + player.spiderScore() + " (-" + (10 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + " max Int)</font>");
 	else if (player.spiderScore() >= 1 && player.spiderScore() < 4) outputText("\n<font color=\"#008000\">Half Spider-morph: " + player.spiderScore() + "</font>");
 	else if (player.spiderScore() < 1) outputText("\n<font color=\"#ff0000\">Half Spider-morph: 0</font>");
-	if (player.wolfScore() >= 10) outputText("\n<font color=\"#0000a0\">Fenrir: " + player.wolfScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " maxTou, +" + (60 * (1 + player.newGamePlusMod())) + " maxSpe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.wolfScore() >= 7 && player.coatColor == "glacial white") outputText("\n<font color=\"#0000a0\">Winter wolf: " + player.wolfScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (20 * (1 + player.newGamePlusMod())) + " maxTou, +" + (30 * (1 + player.newGamePlusMod())) + " maxSpe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.wolfScore() >= 6) outputText("\n<font color=\"#0000a0\">Wolf-morph: " + player.wolfScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (10 * (1 + player.newGamePlusMod())) + " maxTou, +" + (30 * (1 + player.newGamePlusMod())) + " maxSpe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.wolfScore() >= 4 && player.wolfScore() < 6) outputText("\n<font color=\"#0000a0\">Wolf girl/boy: " + player.wolfScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Str, +" + (10 * (1 + player.newGamePlusMod())) + " maxSpe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+	if (player.werewolfScore() >= 11) outputText("\n<font color=\"#0000a0\">Werewolf: " + player.werewolfScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (60 * (1 + player.newGamePlusMod())) + " max Spe, -" + (20 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+	else if (player.wolfScore() >= 6 && player.wolfScore() < 12) outputText("\n<font color=\"#0000a0\">Half Werewolf: " + player.werewolfScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (20 * (1 + player.newGamePlusMod())) + " max Tou, +" + (30 * (1 + player.newGamePlusMod())) + " max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+	else if (player.wolfScore() >= 1 && player.wolfScore() < 6) outputText("\n<font color=\"#008000\">Half Werewolf: " + player.werewolfScore() + "</font>");
+	else if (player.wolfScore() < 1) outputText("\n<font color=\"#ff0000\">Half Werewolf: 0</font>");
+	if (player.wolfScore() >= 10) outputText("\n<font color=\"#0000a0\">Fenrir: " + player.wolfScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, +" + (60 * (1 + player.newGamePlusMod())) + " max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+	else if (player.wolfScore() >= 7 && player.coatColor == "glacial white") outputText("\n<font color=\"#0000a0\">Winter wolf: " + player.wolfScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (20 * (1 + player.newGamePlusMod())) + " max Tou, +" + (30 * (1 + player.newGamePlusMod())) + " max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+	else if (player.wolfScore() >= 6) outputText("\n<font color=\"#0000a0\">Wolf-morph: " + player.wolfScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (30 * (1 + player.newGamePlusMod())) + " max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+	else if (player.wolfScore() >= 4 && player.wolfScore() < 6) outputText("\n<font color=\"#0000a0\">Wolf girl/boy: " + player.wolfScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Str, +" + (10 * (1 + player.newGamePlusMod())) + " max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");
 	else if (player.wolfScore() >= 1 && player.wolfScore() < 4) outputText("\n<font color=\"#008000\">Wolf girl/boy: " + player.wolfScore() + "</font>");
 	else if (player.wolfScore() < 1) outputText("\n<font color=\"#ff0000\">Wolf girl/boy: 0</font>");
 	if (player.unicornScore() >= 9) {

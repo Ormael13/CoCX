@@ -24,6 +24,7 @@ import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.Forest.BeeGirl;
 import classes.Scenes.Areas.Forest.Kitsune;
 import classes.Scenes.Areas.GlacialRift.FrostGiant;
+import classes.Scenes.Areas.GlacialRift.WinterWolf;
 import classes.Scenes.Areas.HighMountains.Basilisk;
 import classes.Scenes.Areas.HighMountains.Harpy;
 import classes.Scenes.Areas.Mountain.Minotaur;
@@ -575,6 +576,7 @@ public function unarmedAttack():Number {
 		else unarmed += 2 * player.statusEffectv2(StatusEffects.SummonedElementalsMetal) * (1 + player.newGamePlusMod());
 	}
 	if (player.hasStatusEffect(StatusEffects.CrinosShape) && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) unarmed *= 1.1;
+	if (player.findPerk(PerkLib.Lycanthropy) >= 0) unarmed += 8 * (1 + player.newGamePlusMod());
 //	if (player.jewelryName == "fox hairpin") unarmed += .2;
 	unarmed = Math.round(unarmed);
 	return unarmed;
@@ -1051,7 +1053,8 @@ internal function wait():void {
 	}
 	else if (player.hasStatusEffect(StatusEffects.WolfHold)) {
 		clearOutput();
-		outputText("The wolf tear your body with its maw wounding you greatly as it starts to eat you alive!");
+		if (monster is WinterWolf) outputText("The wolf tear your body with its maw wounding you greatly as it starts to eat you alive!");
+		if (monster is Luna) outputText("Luna tears your body with her claws.");
 		player.takePhysDamage(5 + rand(5));
 		skipMonsterAction = true;
 	}
@@ -1204,12 +1207,16 @@ internal function wait():void {
 	else if (player.hasStatusEffect(StatusEffects.WolfHold)) {
 		clearOutput();
 		if (rand(3) == 0 || rand(80) < player.str / 1.5) {
-			outputText("You slam your head in the wolf sensible muzzle forcing it to recoil away as it whine in pain allowing you to stand up.");
+			if (monster is WinterWolf) outputText("You slam your head in the wolf sensible muzzle forcing it to recoil away as it whine in pain allowing you to stand up.");
+			if (monster is Luna) outputText("You try and shove Luna off and manage to stand back up; Luna growling at you.");
 			player.removeStatusEffect(StatusEffects.WolfHold);
 		}
 		else {
-			outputText("The wolf tear your body with its maw wounding you greatly as it starts to eat you alive!");
-			player.takePhysDamage(7 + rand(5));
+			if (monster is WinterWolf) {
+				outputText("The wolf tear your body with its maw wounding you greatly as it starts to eat you alive!");
+				player.takePhysDamage(7 + rand(5));
+			}
+			if (monster is Luna) outputText("You try and shove Luna off but she maintains the pin.");
 		}
 		skipMonsterAction = true;
 	}
@@ -5303,6 +5310,22 @@ public function VampireLeggoMyEggo():void {
 	outputText("You let your opponent free ending your embrace.");
 	outputText("\n\n");
 	monster.removeStatusEffect(StatusEffects.EmbraceVampire);
+	enemyAI();
+}
+
+//Claws Rend
+public function clawsRend():void {
+	fatigue(20, USEFATG_PHYSICAL);
+	outputText("You rend [monster a] [monster name] with your claws. ");
+	var damage:int = player.str;
+	damage += scalingBonusStrength() * 0.5;
+	damage = Math.round(damage);
+	doDamage(damage, true, true);
+	if(monster.HP < 1) {
+		doNext(combat.endHpVictory);
+		return;
+	}
+	outputText("\n\n");
 	enemyAI();
 }
 

@@ -378,6 +378,7 @@ use namespace CoC;
 			if (lowerBody == LowerBody.DRIDER) armorDef += (4 * newGamePlusMod);
 			if (lowerBody == LowerBody.GARGOYLE) armorDef += (8 * newGamePlusMod);
 			if (lowerBody == LowerBody.GARGOYLE_2) armorDef += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.Lycanthropy) >= 0) armorDef += 10 * newGamePlusMod;
 			//Soul Cultivators bonuses
 			if (findPerk(PerkLib.BodyCultivator) >= 0) {
 				armorDef += (1 * newGamePlusMod);
@@ -2661,6 +2662,8 @@ use namespace CoC;
 				catCounter++;
 			if (ears.type == Ears.CAT)
 				catCounter++;
+			if (eyes.type == Eyes.FERAL)
+				catCounter -= 11;
 			if (tongue.type == Tongue.CAT)
 				catCounter++;
 			if (tailType == Tail.CAT)
@@ -4035,6 +4038,8 @@ use namespace CoC;
 				wolfCounter++;
 			if (eyes.type == Eyes.FENRIR)
 				wolfCounter++;
+			if (eyes.type == Eyes.FERAL)
+				wolfCounter -= 11;
 			if (ears.type == Ears.WOLF)
 				wolfCounter++;
 			if (arms.type == Arms.WOLF)
@@ -4062,8 +4067,40 @@ use namespace CoC;
 
 		//Werewolf score
 		public function werewolfScore():Number {
-			Begin("Player","racialScore","wolf");
+			Begin("Player","racialScore","werewolf");
 			var werewolfCounter:Number = 0;
+			if (faceType == Face.WOLF)
+				werewolfCounter++;
+			if (eyes.type == Eyes.FERAL)
+				werewolfCounter++;
+			if (eyes.type == Eyes.FENRIR)
+				werewolfCounter -= 7;
+			if (ears.type == Ears.WOLF)
+				werewolfCounter++;
+			if (tongue.type == Tongue.DOG)
+				werewolfCounter++;
+			if (arms.type == Arms.WOLF)
+				werewolfCounter++;
+			if (lowerBody == LowerBody.WOLF)
+				werewolfCounter++;
+			if (tailType == Tail.WOLF)
+				werewolfCounter++;
+			if (hasPartialCoat(Skin.FUR))
+				werewolfCounter++;
+			if (rearBody.type == RearBody.WOLF_COLLAR)
+				werewolfCounter++;
+			if (rearBody.type == RearBody.FENRIR_ICE_SPIKES)
+				werewolfCounter -= 7;
+			if (wolfCocks() > 0 && werewolfCounter > 0)
+				werewolfCounter++;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && werewolfCounter >= 3)
+				werewolfCounter++;
+			if (cor >= 20)
+				werewolfCounter++;
+			if (findPerk(PerkLib.Lycanthropy) >= 0)
+				werewolfCounter++;
+			if (findPerk(PerkLib.LycanthropyDormant) >= 0)
+				werewolfCounter -= 11;
 			
 			End("Player","racialScore");
 			return werewolfCounter;
@@ -5242,7 +5279,21 @@ use namespace CoC;
 					maxSpe += (10 * newGamePlusMod);
 					maxInt -= (10 * newGamePlusMod);
 				}
-			}//+15(60)((70))(((140)))/10-20(50-60)((70-80))(((130-140)))
+			}//+15(60)((70))(((140))) / 10 - 20(50 - 60)((70 - 80))(((130 - 140)))
+			if (werewolfScore() >= 6) {
+				if (wolfScore() >= 12) {
+					maxStr += (100 * newGamePlusMod);
+					maxTou += (40 * newGamePlusMod);
+					maxSpe += (60 * newGamePlusMod);
+					maxInt -= (20 * newGamePlusMod);
+				}
+				else {
+					maxStr += (50 * newGamePlusMod);
+					maxTou += (20 * newGamePlusMod);
+					maxSpe += (30 * newGamePlusMod);
+					maxInt -= (10 * newGamePlusMod);
+				}
+			}
 			if (foxScore() >= 4) {
 				if (foxScore() >= 7) {
 					maxStr -= (30 * newGamePlusMod);
@@ -6052,6 +6103,28 @@ use namespace CoC;
 				maxWis += 30;
 			}
 			if (findPerk(PerkLib.CarefulButRecklessAimAndShooting) >= 0 && findPerk(PerkLib.ColdAim) < 0) maxTou -= (15 * newGamePlusMod);
+			if (hasPerk(PerkLib.Lycanthropy)) {
+				if (((flags[kFLAGS.LUNA_MOON_CYCLE] - 3) || (flags[kFLAGS.LUNA_MOON_CYCLE] + 3)) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
+					maxStr += (10 * newGamePlusMod);
+					maxTou += (10 * newGamePlusMod);
+					maxSpe += (10 * newGamePlusMod);
+				}
+				if (((flags[kFLAGS.LUNA_MOON_CYCLE] - 2) || (flags[kFLAGS.LUNA_MOON_CYCLE] + 2)) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
+					maxStr += (20 * newGamePlusMod);
+					maxTou += (20 * newGamePlusMod);
+					maxSpe += (20 * newGamePlusMod);
+				}
+				if (((flags[kFLAGS.LUNA_MOON_CYCLE] - 1) || (flags[kFLAGS.LUNA_MOON_CYCLE] + 1)) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
+					maxStr += (30 * newGamePlusMod);
+					maxTou += (30 * newGamePlusMod);
+					maxSpe += (30 * newGamePlusMod);
+				}
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0) {
+					maxStr += (40 * newGamePlusMod);
+					maxTou += (40 * newGamePlusMod);
+					maxSpe += (40 * newGamePlusMod);
+				}
+			}
 			End("Player","getAllMaxStats.perks2");
 			Begin("Player","getAllMaxStats.effects");
 			//Apply New Game+
@@ -6878,6 +6951,7 @@ use namespace CoC;
 				if (dcor > 0 && findPerk(PerkLib.PureAndLoving) >= 0) dcor *= 0.75;
 				if (dcor > 0 && weapon == game.weapons.HNTCANE) dcor *= 0.5;
 				if (findPerk(PerkLib.AscensionMoralShifter) >= 0) dcor *= 1 + (perkv1(PerkLib.AscensionMoralShifter) * 0.2);
+				if (findPerk(PerkLib.Lycanthropy) >= 0) dcor *= 1.2;
 				if (hasStatusEffect(StatusEffects.BlessingOfDivineFera)) dcor *= 2;
 				
 				if (sens > 50 && dsens > 0) dsens /= 2;

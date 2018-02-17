@@ -43,7 +43,7 @@ use namespace CoC;
 				return;
 			}
 			//Diana
-			if (flags[kFLAGS.DIANA_FOLLOWER] < 4 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && rand(5) == 0) {
+			if (flags[kFLAGS.DIANA_FOLLOWER] < 4 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && rand(4) == 0) {
 				SceneLib.dianaScene.repeatLakeEnc();
 				return;
 			}

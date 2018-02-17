@@ -2471,7 +2471,8 @@ public class Appearance extends Utils
 					[Tongue.DRACONIC, "draconic"],
 					[Tongue.ECHIDNA, "echidna"],
 					[Tongue.CAT, "cat"],
-					[Tongue.ELF, "elf"]
+					[Tongue.ELF, "elf"],
+					[Tongue.DOG, "dog"]
 				]
 		);
 		public static const DEFAULT_EYES_NAMES:Object = createMapFromPairs(
@@ -2491,7 +2492,8 @@ public class Appearance extends Utils
 					[Eyes.ONI, "oni"],
 					[Eyes.ELF, "elf"],
 					[Eyes.RAIJU, "raiju"],
-					[Eyes.GEMSTONES, "gemstones"]
+					[Eyes.GEMSTONES, "gemstones"],
+					[Eyes.FERAL, "feral"]
 				]
 		);
 		public static const DEFAULT_EARS_NAMES:Object = createMapFromPairs(
@@ -2744,7 +2746,8 @@ public class Appearance extends Utils
 					[RearBody.LION_MANE, "lion mane"],
 					[RearBody.SHARK_FIN, "shark fin"],
 					[RearBody.ORCA_BLOWHOLE, "orca blowhole"],
-					[RearBody.RAIJU_MANE, "raiju mane"]
+					[RearBody.RAIJU_MANE, "raiju mane"],
+					[RearBody.WOLF_COLLAR, "wolf mane"]
 				]
 		);
 		public static const DEFAULT_PIERCING_NAMES:Object = createMapFromPairs(

@@ -11,6 +11,7 @@ public class RearBody extends BodyPart {
 	public static const ORCA_BLOWHOLE:int     = 7;
 	public static const RAIJU_MANE:int        = 8;
 	public static const BAT_COLLAR:int        = 9;
+	public static const WOLF_COLLAR:int       = 10;
 	
 	public function RearBody() {
 		super(null, null);

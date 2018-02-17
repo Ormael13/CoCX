@@ -547,6 +547,7 @@ import classes.BodyParts.Wings;
 		[RearBody.ORCA_BLOWHOLE, StatusEffects.UnlockedOrcaBlowhole],
 		[RearBody.RAIJU_MANE, StatusEffects.UnlockedRaijuMane],
 		[RearBody.SHARK_FIN, StatusEffects.UnlockedSharkFin],
+		[RearBody.WOLF_COLLAR, null],
 	]);
 
 	public function setTongueType(tongueType:int):Boolean {
@@ -562,6 +563,7 @@ import classes.BodyParts.Wings;
 		[Tongue.HUMAN, [null, "Human Tongue"]],
 		[Tongue.ELF, [StatusEffects.UnlockedElfTongue, "Elf Tongue"]],
 		[Tongue.SNAKE, [StatusEffects.UnlockedSnakeTongue, "Snake Tongue"]],
+		[Tongue.DOG, [null, "Dog Tongue"]],
 	]);
 
 	/**

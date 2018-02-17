@@ -367,7 +367,7 @@ package classes.Scenes.NPCs
 				this.imageName = "unicornmare";
 				this.long = "You are fighting a white furred 7 foot tall unicorn with long white hair and a decently toned body. Her green eyes follows your every move, looking for an exploitable opening. She’s currently in a defensive stance, ready to strike with her staff or kick your face with her hooves at the first opportunity.";
 				this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_NORMAL);
-				createBreastRow(Appearance.breastCupInverse("K"));
+				createBreastRow(Appearance.breastCupInverse("J"));
 				this.tallness = 7*12;
 				this.hips.type = Hips.RATING_FERTILE+1;
 				this.butt.type = Butt.RATING_JIGGLY+1;
@@ -379,7 +379,7 @@ package classes.Scenes.NPCs
 				this.imageName = "diana";
 				this.long = "Diana is a white furred 7 foot tall alicorn with long white hair and a decently toned body. Her green eyes follows your every move, looking for an exploitable opening. She’s currently in a defensive stance, ready to strike with her staff or kick your face with her hooves at the first opportunity.";
 				this.createVagina(true, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_TIGHT);
-				createBreastRow(Appearance.breastCupInverse("K"));
+				createBreastRow(Appearance.breastCupInverse("J"));
 				this.tallness = 7*12;
 				this.hips.type = Hips.RATING_FERTILE+1;
 				this.butt.type = Butt.RATING_JIGGLY+1;

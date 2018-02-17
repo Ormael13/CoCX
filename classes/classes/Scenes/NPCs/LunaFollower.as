@@ -5,17 +5,31 @@
 package classes.Scenes.NPCs 
 {
 	import classes.*;
+	import classes.BodyParts.Antennae;
+	import classes.BodyParts.Arms;
+	import classes.BodyParts.Ears;
+	import classes.BodyParts.Eyes;
+	import classes.BodyParts.Face;
+	import classes.BodyParts.Horns;
+	import classes.BodyParts.LowerBody;
+	import classes.BodyParts.RearBody;
+	import classes.BodyParts.Skin;
+	import classes.BodyParts.Tail;
+	import classes.BodyParts.Tongue;
+	import classes.BodyParts.Wings;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.SceneLib;
+	import classes.Items.MutationsHelper;
 	
 	public class LunaFollower extends NPCAwareContent
 	{
+		public var mutations:MutationsHelper = new MutationsHelper();
 		
 		public function LunaFollower() 
 		{
 			
 		}
-		//luna foll 2 - kicked post moon event, 3 seen her dead in forest, 4,5 - pre full moon event, 6 jelly pre full moon, 7,8 - post moon chained, 9,10 - unchained post moon
+		//luna foll 2 - kicked post moon event, 3 seen her dead in forest, 4,5 - pre full moon event, 6 jelly pre full moon, 7,8 - post moon unchained, 9,10 - post moon chained, 11,12 - unchained post moon accepted
 		
 		public function lunaAffection(changes:Number = 0):Number
 		{
@@ -26,7 +40,7 @@ package classes.Scenes.NPCs
 		public function lunaJealousy(changes:Number = 0):Number
 		{
 			flags[kFLAGS.LUNA_JEALOUSY] += changes;
-			if (flags[kFLAGS.LUNA_JEALOUSY] > 100) flags[kFLAGS.LUNA_JEALOUSY] = 100;
+			if (flags[kFLAGS.LUNA_JEALOUSY] > 200) flags[kFLAGS.LUNA_JEALOUSY] = 200;
 			if (flags[kFLAGS.LUNA_JEALOUSY] < 0) flags[kFLAGS.LUNA_JEALOUSY] = 0;
 			return flags[kFLAGS.LUNA_JEALOUSY];
 		}
@@ -104,10 +118,12 @@ package classes.Scenes.NPCs
 				else addButton(4, "Nurse", nurseLuna);
 			}
 			if (flags[kFLAGS.LUNA_AFFECTION] >= 50) {
-				if (flags[kFLAGS.SLEEP_WITH] != "Luna") addButton(5,"Sleep With", lunaSleepToggle);
+				if (flags[kFLAGS.SLEEP_WITH] != "Luna") addButton(5, "Sleep With", lunaSleepToggle);
 				else addButton(5, "Sleep Alone", lunaSleepToggle);
 			}
-			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) addButton(6, "Sex", sexMenuMain);
+			if (flags[kFLAGS.LUNA_FOLLOWER] == 9 || flags[kFLAGS.LUNA_FOLLOWER] == 10) addButton(6, "Unchain", lunaChainToggle).hint("Unchain Luna and see what happens.");
+			if (flags[kFLAGS.LUNA_FOLLOWER] == 7 || flags[kFLAGS.LUNA_FOLLOWER] == 8) addButton(7, "Chain", lunaChainToggle).hint("Chain Luna.");
+			if (flags[kFLAGS.LUNA_FOLLOWER] > 10) addButton(6, "Sex", sexMenuMain);
 			addButton(14, "Leave", camp.campFollowers);
 		}
 		
@@ -231,10 +247,10 @@ package classes.Scenes.NPCs
 			lunaJealousy(-50);
 			lunaAffection(1);
 			HPChange(Math.round(player.maxHP() * .5), true);
-			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) {
+			if (flags[kFLAGS.LUNA_FOLLOWER] > 11) {
 				outputText(" Luna is giving a knowing smile, likely hoping you will jump at the opportunity, maybe she even did it on purpose. Do you take her here and now?\n\n");
 				menu();
-				if (flags[kFLAGS.LUNA_FOLLOWER] > 6) addButton(0, "Yes", sexMenuMain);
+				if (flags[kFLAGS.LUNA_FOLLOWER] > 11) addButton(0, "Yes", sexMenuMain);
 				addButton(0, "No", nurseLunaEnd);
 			}
 			else doNext(camp.returnToCampUseFourHours);
@@ -262,10 +278,23 @@ package classes.Scenes.NPCs
 		private function sleepWith(arg:String = ""):void {
 			flags[kFLAGS.SLEEP_WITH] = arg;
 		}
+		private function lunaChainToggle():void {
+			clearOutput();
+			if (flags[kFLAGS.LUNA_FOLLOWER] == 9 || flags[kFLAGS.LUNA_FOLLOWER] == 10) {
+				if (flags[kFLAGS.LUNA_FOLLOWER] == 9) flags[kFLAGS.LUNA_FOLLOWER] = 7;
+				if (flags[kFLAGS.LUNA_FOLLOWER] == 10) flags[kFLAGS.LUNA_FOLLOWER] = 8;
+			}
+			else {
+				if (flags[kFLAGS.LUNA_FOLLOWER] == 7) flags[kFLAGS.LUNA_FOLLOWER] = 9;
+				if (flags[kFLAGS.LUNA_FOLLOWER] == 8) flags[kFLAGS.LUNA_FOLLOWER] = 10;
+			}
+			menu();
+			addButton(0,"Next", mainLunaMenu);
+		}
 		public function sleepingFullMoon():void {
 			outputText("You would close your eyes, but you know Luna has other plans tonight, you can spot the telltale green glow in her eyes announcing an impending full moon and she smirks knowingly. Yep, you ain't going to bed without some sex first as Luna intends to bang you one way or another. Without much surprise, her already naked form indeed takes on a beastial shape. She sits in a waiting position, reminiscent of a good dog waiting on its treat.\n\n");
 			outputText("\"<i>Well " + player.mf("Master","Mistress") + ", you already know my mood, so let's get wild ok?</i>\"\n\n");
-			flags[kFLAGS.LUNA_MOONING] = 1;
+			flags[kFLAGS.LUNA_MOONING] = 2;
 			menu();
 			addButton(0, "Dominate", sexMenuDominateHer);
 		}
@@ -273,7 +302,9 @@ package classes.Scenes.NPCs
 		public function warrningAboutJelously():void {
 			clearOutput();
 			if (flags[kFLAGS.LUNA_FOLLOWER] == 5) flags[kFLAGS.LUNA_FOLLOWER] = 6;
-			else flags[kFLAGS.LUNA_FOLLOWER] = 10;
+			else if (flags[kFLAGS.LUNA_FOLLOWER] == 7) flags[kFLAGS.LUNA_FOLLOWER] = 8;
+			else if (flags[kFLAGS.LUNA_FOLLOWER] == 9) flags[kFLAGS.LUNA_FOLLOWER] = 10;
+			else flags[kFLAGS.LUNA_FOLLOWER] = 12;
 			outputText("Luna come over to you.\n\n");
 			outputText("\"<i>" + player.mf("Master","Mistress") + " you haven’t been using my services in some time. I came to remind you that should you need anything, and by that I truly mean anything you desire, all you need to do is call me. It is always my greatest pleasure to serve you.</i>\"\n\n");
 			outputText("She walk away to prepare today's food and clean which reminds you that you indeed hadn’t had her food in a while.\n\n");
@@ -282,18 +313,25 @@ package classes.Scenes.NPCs
 		
 		public function fullMoonEvent():void {
 			clearOutput();
-			outputText("You are woken up by something forcefully pinning you down. What you see takes you entirely by surprise. Luna is standing over you, staring at you like some kind of predator.\n\n");
-			outputText("\"<i>I can’t hold it anymore, " + player.mf("Master","Mistress") + ". I tried to but the things you do to me... the things I wish you would do to me... it's been intolerable. It's all your fault, after all you pushed me to do this.</i>\"\n\n");
-			outputText("What the hell is she talking about, you’ve done nothing of the sort.\n\n");
-			outputText("\"<i>Oh, but yes you did. Every time you made me cook a meal, every time I healed your wounds my desire for you grew, yet you wouldn’t use me fully... is my body not to your liking, " + player.mf("Master","Mistress") + "? Don’t worry, now that the moon is at its peak I’m finally ready, ready to make you realise how much you love me. You can’t deny us anymore, [name]!</i>\"\n\n");
-			outputText("A green flash appears in her brown eyes as they turn increasingly bestial. Her naked body shivers as fur begins to cover it, her hands and feet turn into paws her irises glow fluorescent green. Fur swiftly cover her arms up to a little under the shoulders and her legs up to the tight. The transformation ends with a bushy tail and a pair of animal ears at the top of her head. ");
-			outputText("She pants in delight at the pleasure of the change, revealing a dog like tongue and canines way too long and sharp to belong on any humans. Just what is she!?\n\n");
-			outputText("\"<i>See? I’m a werewolf, [name]. A fiend created by demonic magic that changes between hybrid and human shape at will. This is the second reason my former master fired me for. I’m a monster. At first I tried to hide it, for your sake, but you’ve been teasing me for so long now I can’t hold it in anymore, especially with the coming full moon.</i>\"\n\n");
-			outputText("This is quickly going to get out of hand. How will you answer to her advances?\n\n");
+			if (flags[kFLAGS.LUNA_FOLLOWER] == 7 || flags[kFLAGS.LUNA_FOLLOWER] == 8) {
+				outputText("Luna is smirking, a green glint in her eyes.\n\n");
+				outputText("\"<i>Sorry [name] I can’t hold myself anymore.</i>\"\n\n");
+				outputText("Oh no it's happening again! Luna is totally going to jump you, you can already see her beginning to transform as she prepare to make a second attempt.\n\n");
+			}
+			else {
+				outputText("You are woken up by something forcefully pinning you down. What you see takes you entirely by surprise. Luna is standing over you, staring at you like some kind of predator.\n\n");
+				outputText("\"<i>I can’t hold it anymore, " + player.mf("Master","Mistress") + ". I tried to but the things you do to me... the things I wish you would do to me... it's been intolerable. It's all your fault, after all you pushed me to do this.</i>\"\n\n");
+				outputText("What the hell is she talking about, you’ve done nothing of the sort.\n\n");
+				outputText("\"<i>Oh, but yes you did. Every time you made me cook a meal, every time I healed your wounds my desire for you grew, yet you wouldn’t use me fully... is my body not to your liking, " + player.mf("Master","Mistress") + "? Don’t worry, now that the moon is at its peak I’m finally ready, ready to make you realise how much you love me. You can’t deny us anymore, [name]!</i>\"\n\n");
+				outputText("A green flash appears in her brown eyes as they turn increasingly bestial. Her naked body shivers as fur begins to cover it, her hands and feet turn into paws her irises glow fluorescent green. Fur swiftly cover her arms up to a little under the shoulders and her legs up to the tight. The transformation ends with a bushy tail and a pair of animal ears at the top of her head. ");
+				outputText("She pants in delight at the pleasure of the change, revealing a dog like tongue and canines way too long and sharp to belong on any humans. Just what is she!?\n\n");
+				outputText("\"<i>See? I’m a werewolf, [name]. A fiend created by demonic magic that changes between hybrid and human shape at will. This is the second reason my former master fired me for. I’m a monster. At first I tried to hide it, for your sake, but you’ve been teasing me for so long now I can’t hold it in anymore, especially with the coming full moon.</i>\"\n\n");
+				outputText("This is quickly going to get out of hand. How will you answer to her advances?\n\n");
+			}
 			menu();
 			addButton(0, "Accept", fullMoonEventAccept);
-			//if (player.dogScore() > 5 || player.wolfScore() > 5) addButtonDisabled(1, "Resist", "");
-			//else addButton(1, "Resist", fullMoonEventResist);
+			if (player.dogScore() > 5 || player.wolfScore() > 5) addButtonDisabled(1, "Resist", "Your canine instincts kicks in, there is no way you can resist her advances.");
+			else addButton(1, "Resist", fullMoonEventResist);
 		}
 		public function fullMoonEventAccept():void {
 			clearOutput();
@@ -302,15 +340,93 @@ package classes.Scenes.NPCs
 			outputText("Well of course. Had she made her needs clear in the first place you would have helped her with them. There was no need for her to hide her desires. That aside, you already thought of her as more than just a maid. You just didn’t know how to tell her. You don’t care if she thinks she is a monster. From your point of view, even in this form she remains cute. To her utter surprise you");
 			if (!player.isNaked()) outputText(" get rid of your own clothes and");
 			outputText(" display your naked body, telling her she will get exactly what she wants.\n\n");
+			flags[kFLAGS.LUNA_MOONING] = 2;
 			doNext(sexMenuVaginal);
 		}
 		public function fullMoonEventResist():void {
 			clearOutput();
-			outputText("WIP\n\n");
-			outputText("\"<i>WIP</i>\"\n\n");
-			outputText("WIP\n\n");
-			outputText("\"<i>WIP</i>\"\n\n");
-			//fight Luna
+			outputText("You shove her with all your strength and get ready for a fight.\n\n");
+			outputText("\"<i>I knew you would need some convincing but it's all right, [name], I’m more than glad to help you with that.</i>\"\n\n");
+			outputText("She growls as she falls on all fours, her wolf tail trailing on the ground and her ears flattening on her head. There's nothing left of your cute maid here, just a feral beast ready to tear you to shreds, and with those sharp claws and fangs it's clearly something she’s more than able to do.\n\n");
+			outputText("\"<i>I will help you see my point of view once I’ve made sure you're no longer in any state to fight back. Once again it's all your fault if you end up getting hurt.</i>\"\n\n");
+			startCombat(new Luna());
+			doNext(playerMenu);
+		}
+		public function fullMoonEventResistWin():void {
+			clearOutput();
+			outputText("Luna falls to the ground in defeat. You swiftly proceed to tie her up so she does not cause further mayhem.\n\n");
+			outputText("\"<i>" + player.mf("Master","Mistress") + "... I am so sorry...on these nights I have no control over myself. Please do not fire me.</i>\"\n\n");
+			outputText("Apologies will come later for now you need to neutralize her for the night. To your surprise you conveniently find two large chain and manacles in her belongings and swiftly apply them to her to prevent her from harming you or anyone else. Finally sure that she won’t cause more trouble you sit next to her and discuss her future. You could indeed fire her, but she's been so nice and useful during the day, you are sure you would regret doing so. ");
+			outputText("On the other hand you could keep her but make sure she is chained at night. What will you do? All choices considered, however, all she truly ever wanted was to have sex with you, perhaps if you voiced your accord this entire issue would be solved.\n\n");
+			cleanupAfterCombat();
+			menu();
+			addButton(0, "Fire Her", fullMoonEventResistWinFireHer);
+			addButton(1, "Accept", fullMoonEventAccept);
+			addButton(2, "Chain Her", fullMoonEventResistWinChainHer);
+		}
+		public function fullMoonEventResistWinFireHer():void {
+			clearOutput();
+			outputText("Luna looks at you as if her world is breaking apart.\n\n");
+			outputText("\"<i>[name], y..you’re firing me?</i>\"\n\n");
+			outputText("You have been clear, she should scram now. Luna looks at you for a split second before running off in the woods. You have a bad feeling about this.\n\n");
+			flags[kFLAGS.LUNA_FOLLOWER] = 2;
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function fullMoonEventResistWinFireHerForest():void {
+			clearOutput();
+			outputText("As you explore the forest you come upon a gruesome sight. You thought Luna would've made it back to Tel’Adre but it seems that she didn’t. She’s right there in front of you… hanging from a rope tied to a tree. That she'd fall into such despair didn’t occur to you when you kicked her out of your camp. You leave the gruesome scene, still shaken by her lifeless expression. You can’t help but think deep down, that this was all your fault.\n\n");
+			flags[kFLAGS.LUNA_FOLLOWER] = 3;
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function fullMoonEventResistWinChainHer():void {
+			clearOutput();
+			outputText("You resolve to chain her to a tree every full moon from now on, though you suspect it'll be hard on her.\n\n");
+			flags[kFLAGS.LUNA_FOLLOWER] = 9;
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function fullMoonEventResistDefat():void {
+			clearOutput();
+			outputText("You are too weak to keep fighting and Luna senses it. Before you can react she pounces on you. You’re back to the position you were in earlier and this time you are in no way capable of putting up a fight.\n\n");
+			outputText("\"<i>It's ok, [name], the pain will only last for a few seconds and then...</i>\"\n\n");
+			outputText("Before you can ask her what she means by that she lunges and bites right into your shoulder. At first it hurts like crazy but then the pain recedes, replaced with spreading pleasure as the wounds begin to throb. Your" + (player.hasCock() ? " [cock] goes fully erect" : "") + "" + (player.gender == 3 ? " and your" : "") + "" + (player.hasCock() ? " pussy starts moistening" : "") + " from this weird feeling, something's not right.\n\n");
+			outputText("" + (player.humanScore() < 30 ? "Your body starts changing, and to your surprise, its features warp back to their former human features. You begin to think she may have purged you of the transformations that afflicted you, but that's not exactly it. " : "") + "Heat begins to spread from your wound and you start panting, trying to vent out the pleasure and the hot feeling in your body as something fundamental about you changes.\n\n");
+			outputText("Fur begins to grow on various point of your body, namely your arms and legs. Your nails sharpen and curve, turning into a full set of claws as your hands and feet reshape into 5 digit paws. You groan in pleasure, revealing your forming canines as your spine extends into a furry tail while your ears migrate to the top of your head, covering in fur and changing into triangular points like those of a wolf. You pant in pleasure at the change, revealing a moist dog like tongue");
+			if (player.hasCock()) outputText(" as you feel a tightness near the base of your cock where your skin seems to be bunching up. A canine-looking sheath begins forming around your cock’s base, tightening and pulling your penis inside its depths. A hot feeling envelops your member as it surges out and starts throbbing, the crown now a point. The sensations are too much for you.  You throw back your head and howl to the moon as the transformation completes, your pointed shaft erupting with intense force");
+			outputText(".\n\n");
+			player.lowerBody = LowerBody.WOLF;
+			if (player.legCount != 2) player.legCount = 2;
+			player.tailType = Tail.WOLF;
+			if (player.tailCount != 1) player.tailCount = 1;
+			player.rearBody.type = RearBody.WOLF_COLLAR;
+			player.arms.type = Arms.WOLF;
+			player.faceType = Face.WOLF;
+			player.ears.type = Ears.WOLF;
+			player.eyes.type = Eyes.FERAL;
+			player.tongue.type = Tongue.DOG;
+			player.wings.type = Wings.NONE;
+			player.antennae.type = Antennae.NONE;
+			player.horns.type = Horns.NONE;
+			player.skin.growCoat(Skin.FUR, Skin.COVERAGE_MEDIUM);
+			if (player.hasCock() && player.wolfCocks() < 1) {
+				var selectedCockValue:int = -1;
+				for (var indexI:int = 0; indexI < player.cocks.length; indexI++)
+				{
+					if (player.cocks[indexI].cockType != CockTypesEnum.WOLF)
+					{
+						selectedCockValue = indexI;
+						break;
+					}
+				}
+				if (selectedCockValue != -1) {
+					player.cocks[selectedCockValue].cockType = CockTypesEnum.WOLF;
+					player.cocks[selectedCockValue].knotMultiplier = 1.1;
+					player.cocks[selectedCockValue].thickenCock(2);
+				}
+			}
+			player.createPerk(PerkLib.Lycanthropy,0,0,0,0);
+			outputText("Barely satiated your eyes now focus back on Luna, lust overwhelming your cursed body. You must have her... NOW!\n\n");
+			cleanupAfterCombat();
+			doNext(sexMenuDominateHer);
 		}
 		
 		public function sexMenuMain():void {
@@ -381,8 +497,15 @@ package classes.Scenes.NPCs
 			lunaJealousy(-50);
 			lunaAffection(1);
 			player.orgasm();
-			if (flags[kFLAGS.LUNA_FOLLOWER] < 7) flags[kFLAGS.LUNA_FOLLOWER] = 9;
-			doNext(camp.returnToCampUseOneHour);
+			if (flags[kFLAGS.LUNA_FOLLOWER] < 7) flags[kFLAGS.LUNA_FOLLOWER] = 11;
+			if (flags[kFLAGS.LUNA_MOONING] == 2) {
+				flags[kFLAGS.LUNA_MOONING] = 1;
+				if (model.time.hours >= 21) CoC.instance.timeQ = 24 - model.time.hours;
+				else CoC.instance.timeQ = 0;
+				CoC.instance.timeQ += 6;
+				doNext(camp.sleepWrapper);
+			}
+			else doNext(camp.returnToCampUseOneHour);
 		}
 		public function sexMenuSpearPolishing():void {
 			clearOutput();
@@ -494,8 +617,9 @@ package classes.Scenes.NPCs
 					outputText("You keep painting her cunt several times under the moonlight until dawn finally breaks, the two of you resting a few hours before resuming activity.");
 					if (flags[kFLAGS.LUNA_FOLLOWER] < 7) {
 						outputText(" You're going to make sure to use her as often as necessary to imprint your scent on her from now on. She’s your beta and no one else’s.");
-						flags[kFLAGS.LUNA_FOLLOWER] = 9;
+						flags[kFLAGS.LUNA_FOLLOWER] = 11;
 					}
+					flags[kFLAGS.LUNA_MOONING] = 1;
 					if (model.time.hours >= 21) CoC.instance.timeQ = 24 - model.time.hours;
 					else CoC.instance.timeQ = 0;
 					CoC.instance.timeQ += 10;
@@ -521,7 +645,7 @@ package classes.Scenes.NPCs
 					outputText("That said, you are far from done. The moment you recover, you resume fucking with her like a beast several time under the moonlight until dawn finally breaks, the two of you resting a few hours before resuming activity.");
 					if (flags[kFLAGS.LUNA_FOLLOWER] < 7) {
 						outputText(" You're going to make sure to use her as often as necessary to imprint your scent on her from now on. She’s your beta and no one else’s.");
-						flags[kFLAGS.LUNA_FOLLOWER] = 9;
+						flags[kFLAGS.LUNA_FOLLOWER] = 11;
 					}
 					if (model.time.hours >= 21) CoC.instance.timeQ = 24 - model.time.hours;
 					else CoC.instance.timeQ = 0;

@@ -1100,7 +1100,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 	}
 	//Diana
 	if (flags[kFLAGS.DIANA_FOLLOWER] > 3) {
-		outputText("Lia write it plox.\n\n");
+		outputText("Diana is resting next to her many medical tools and medicines.\n\n");
 		buttons.add("Diana", SceneLib.dianaScene.mainCampMenu);
 	}
 	//Etna
@@ -2232,7 +2232,7 @@ CoC.instance.saves.saveGame(player.slotName);
 			return;
 		}
 		//Full Moon
-		if (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0 && flags[kFLAGS.LUNA_FOLLOWER] < 7 && flags[kFLAGS.LUNA_AFFECTION] >= 50 && flags[kFLAGS.SLEEP_WITH] == "Luna" && player.gender > 0) {
+		if (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0 && flags[kFLAGS.LUNA_FOLLOWER] < 9 && flags[kFLAGS.LUNA_AFFECTION] >= 50 && flags[kFLAGS.SLEEP_WITH] == "Luna" && player.gender > 0) {
 			SceneLib.lunaFollower.fullMoonEvent();
 			sleepRecovery(false);
 			return;

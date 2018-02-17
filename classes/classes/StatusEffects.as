@@ -307,6 +307,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const TailSlamWhip:StatusEffectType       = mk("Tail Slam Whip");
 		public static const IgnisCastedNuke:StatusEffectType  	= mk("Ignis Casted Nuke");
 		public static const IgnisCounter:StatusEffectType  		= mk("Ignis Counter");
+		public static const Pounce:StatusEffectType  			= mk("Pounce");
 		public static const RaijuUltReady:StatusEffectType      = mk("Raiju Ult Ready");
 		public static const Round:StatusEffectType              = mk("Round");
 		public static const round:StatusEffectType              = mk("round");

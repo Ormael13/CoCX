@@ -1373,7 +1373,7 @@ import flash.utils.getQualifiedClassName;
 			if (game.player.hasStatusEffect(StatusEffects.Exgartuan) && game.player.statusEffectv2(StatusEffects.Exgartuan) == 0 && rand(3) == 0) {
 				if (SceneLib.exgartuan.exgartuanCombatUpdate()) EngineCore.outputText("\n\n");
 			}
-			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire)) {
+			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce)) {
 				if (!handleConstricted()) return;
 			}
 			if (hasStatusEffect(StatusEffects.AbilityCooldown1) ) {
@@ -1411,7 +1411,16 @@ import flash.utils.getQualifiedClassName;
 		 */
 		protected function handleConstricted():Boolean
 		{
-			if (player.lowerBody == 26) {
+			if (hasStatusEffect(StatusEffects.Pounce)) {
+			EngineCore.outputText("" + capitalA + short + " struggle to get free.");
+			if (statusEffectv1(StatusEffects.Pounce) <= 0) {
+				EngineCore.outputText("" + capitalA + short + " struggle to get free and manage to shove you off.");
+				removeStatusEffect(StatusEffects.Pounce);
+			}
+			addStatusValue(StatusEffects.Pounce, 1, -1);
+			return false;
+			}
+			else if (player.lowerBody == 26) {
 			EngineCore.outputText("Your prey pushes at your tentacles, twisting and writhing in an effort to escape from your tentacle's tight bonds.");
 			if (statusEffectv1(StatusEffects.ConstrictedScylla) <= 0) {
 				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your tentacles to handle, breaking free of your tightly bound coils.");

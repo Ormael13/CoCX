@@ -83,13 +83,15 @@ use namespace CoC;
 			if (game.flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1) outputText("Etna");
 			else outputText("The manticore");
 			outputText(" bites into your ");
-			if (player.lowerBody == 26) outputText("tentacle");
+			if (hasStatusEffect(StatusEffects.Pounce)) outputText("arm");
+			else if (player.lowerBody == 26) outputText("tentacle");
 			else outputText("tail");
 			outputText(" making you yelp in surprise. She breaks out of the grapple grinning. You took ");
 			player.takePhysDamage(bitedmg, true);
 			outputText(" damage!");
 			if (hasStatusEffect(StatusEffects.Constricted)) removeStatusEffect(StatusEffects.Constricted);
 			if (hasStatusEffect(StatusEffects.ConstrictedScylla)) removeStatusEffect(StatusEffects.ConstrictedScylla);
+			if (hasStatusEffect(StatusEffects.Pounce)) removeStatusEffect(StatusEffects.Pounce);
 		}
 		
 		override protected function performCombatAction():void

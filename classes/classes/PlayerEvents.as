@@ -431,6 +431,18 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				else flags[kFLAGS.BIKINI_ARMOR_BONUS] = 0;
 			}
+			if (player.werewolfScore() >= 6 && player.hasPerk(PerkLib.LycanthropyDormant)) {
+				outputText("\nAs you become wolf enough your mind recedes into increasingly animalistic urges. It will only get worse as the moon comes closer to full. <b>Gained Lycanthropy.</b>\n");
+				player.createPerk(PerkLib.Lycanthropy,0,0,0,0);
+				player.removePerk(PerkLib.LycanthropyDormant);
+				needNext = true;
+			}
+			if (player.werewolfScore() < 6 && player.hasPerk(PerkLib.Lycanthropy)) {
+				outputText("\nYou feel your animalistic urges go dormant within you as you no longer are the werewolf you once were. <b>Gained Dormant lycanthropy.</b>\n");
+				player.createPerk(PerkLib.LycanthropyDormant,0,0,0,0);
+				player.removePerk(PerkLib.Lycanthropy);
+				needNext = true;
+			}
 			
 			//No better place for these since the code for the event is part of CoC.as or one of its included files
 			if (flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC] > 0) flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC]--; //Vala post-rape countdown
@@ -575,6 +587,45 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				//Full moon
 				if (flags[kFLAGS.LUNA_FOLLOWER] >= 4) {
 					flags[kFLAGS.LUNA_MOON_CYCLE]++;
+					if (player.hasPerk(PerkLib.Lycanthropy)) {
+						if ((flags[kFLAGS.LUNA_MOON_CYCLE] - 3) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
+							outputText("<b>\nYou can’t help but notice the moon is almost full as it rises up.  It seems transfixing like it is calling to you.");
+							outputText("\n\nYou feel your might increasing as the moon draws closer to fullness.</b>");
+							dynStats("str", (10 * player.newGamePlusMod()), "tou", (10 * player.newGamePlusMod()), "spe", (10 * player.newGamePlusMod()));
+						}
+						if ((flags[kFLAGS.LUNA_MOON_CYCLE] - 2) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
+							outputText("<b>\nWhen the almost-full moon appears it causes your heart to race with excitement.  You hearing seems better than ever.  Every breath brings a rush of smells through your nose that seem much more pronounced than they should.");
+							outputText("\n\nYou feel your might increasing as the moon draws closer to fullness.</b>");
+							dynStats("str", (10 * player.newGamePlusMod()), "tou", (10 * player.newGamePlusMod()), "spe", (10 * player.newGamePlusMod()));
+						}
+						if ((flags[kFLAGS.LUNA_MOON_CYCLE] - 1) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
+							outputText("<b>\nYou gaze at the moon and it seems to gaze back into you.   Something is coming and it won’t be long now.   You feel like you are crawling in your skin.  It feels like tear out of your body and be born anew.");
+							outputText("\n\nYou feel your might increasing as the moon draws closer to fullness. It's almost time.</b>");
+							dynStats("str", (10 * player.newGamePlusMod()), "tou", (10 * player.newGamePlusMod()), "spe", (10 * player.newGamePlusMod()));
+						}
+						if (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0) {
+							outputText("<b>\nYou are at the peak of your strength, it's a full moon tonight and you feel yourself burning with maddening desire as you go into " + player.mf("rut","heat") + ".</b>");
+							dynStats("str", (10 * player.newGamePlusMod()), "tou", (10 * player.newGamePlusMod()), "spe", (10 * player.newGamePlusMod()));
+							if (player.hasCock() || (player.gender == 3 && rand(2) == 0)) player.goIntoRut(false);
+							else if (player.hasVagina()) player.goIntoHeat(false);
+						}
+						if ((flags[kFLAGS.LUNA_MOON_CYCLE] + 1) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
+							outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>");
+							dynStats("str", -(10 * player.newGamePlusMod()), "tou", -(10 * player.newGamePlusMod()), "spe", -(10 * player.newGamePlusMod()));
+						}
+						if ((flags[kFLAGS.LUNA_MOON_CYCLE] + 2) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
+							outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>");
+							dynStats("str", -(10 * player.newGamePlusMod()), "tou", -(10 * player.newGamePlusMod()), "spe", -(10 * player.newGamePlusMod()));
+						}
+						if ((flags[kFLAGS.LUNA_MOON_CYCLE] + 3) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
+							outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>");
+							dynStats("str", -(10 * player.newGamePlusMod()), "tou", -(10 * player.newGamePlusMod()), "spe", -(10 * player.newGamePlusMod()));
+						}
+						if ((flags[kFLAGS.LUNA_MOON_CYCLE] + 4) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
+							outputText("<b>\nIt's a new moon tonight, you feel somewhat weak.</b>");
+							dynStats("str", -(10 * player.newGamePlusMod()), "tou", -(10 * player.newGamePlusMod()), "spe", -(10 * player.newGamePlusMod()));
+						}
+					}
 				}
 			}
 			if (CoC.instance.model.time.hours == 6) {

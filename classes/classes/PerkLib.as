@@ -1825,6 +1825,10 @@ public class PerkLib
 				"Allows you to shoot blinding and probably slightly arousing ink out of your genitalia similar like octopus.");
 		public static const JunglesWanderer:PerkType = mk("Jungle’s Wanderer", "Jungle’s Wanderer",
 				"Your nimble body has adapted to moving through jungles and forests, evading enemy attacks with ease and making yourself harder to catch. (+35 to the Evasion percentage)");
+		public static const Lycanthropy:PerkType = mk("Lycanthropy", "Lycanthropy",
+				"Your strength and urges are directly tied to the cycle of the moon. Furthermore, your skin is resistant to normal damage and your claws are sharper than normal.");
+		public static const LycanthropyDormant:PerkType = mk("Dormant Lycanthropy", "Dormant Lycanthropy",
+				"You sometimes hear echoes of the call of the moon. If you were more of a werebeast you likely would feel its pull again. A lycanthrope is never truly cured.");
 		public static const LightningAffinity:PerkType = mk("Lightning Affinity", "Lightning Affinity",
 				"Increase all damage dealt with lightning spells by 100% and reduce lightning damage taken by 50%.");
 		public static const LizanRegeneration:PerkType = mk("Lizan Regeneration", "Lizan Regeneration",

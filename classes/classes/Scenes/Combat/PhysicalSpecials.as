@@ -44,6 +44,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.faceType == Face.ORCA) {
 			buttons.add("OrcaBite", bite).hint("Bite in your opponent with your sharp teeths causing bleed.");
 		}
+		if (player.faceType == Face.WOLF) {
+			buttons.add("ViciousBite", bite).hint("Vicious bite your opponent with your sharp teeths causing bleed.");
+		}
 		if (player.faceType == Face.SNAKE_FANGS) {
 			bd = buttons.add("Bite", nagaBiteAttack).hint("Attempt to bite your opponent and inject venom.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
 			if (player.tailVenom < 25) {
@@ -74,6 +77,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Embrace
 		if ((player.wings.type == Wings.BAT_ARM || player.wings.type == Wings.VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType)) {
 			buttons.add("Embrace", vampireEmbrace).hint("Embrace an opponent in your wings.");
+		}
+		//Pounce
+		if ((player.catScore() > 4 || player.werewolfScore() >= 6) && !monster.hasPerk(PerkLib.EnemyGroupType)) {
+			buttons.add("Pounce", catPounce).hint("Pounce and rend your enemy using your claws, this initiate a grapple combo.");
 		}
 		//Kick attackuuuu
 		if (player.isTaur() || player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.BUNNY || player.lowerBody == LowerBody.KANGAROO) {
@@ -1796,6 +1803,51 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		enemyAI();
 	}
+	public function catPounce():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		clearOutput();
+		if(player.fatigue + physicalCost(10) > player.maxFatigue()) {
+			clearOutput();
+			outputText("You just don't have the energy to puonce at anyone right now...");
+			//Gone		menuLoc = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		if(monster.short == "pod") {
+			clearOutput();
+			outputText("You can't pounce something you're trapped inside of!");
+			//Gone		menuLoc = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		fatigue(10, USEFATG_PHYSICAL);
+		//Amily!
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
+			clearOutput();
+			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
+			enemyAI();
+			return;
+		}
+		//WRAP IT UPPP
+		if(40 + rand(player.spe) > monster.spe) {
+			outputText("You growl menacingly, dropping on all four" + (player.tail.type != Tail.NONE ? " and flicking your tail" : "") + ", as you pounce on " + monster.a + monster.short + " clawing at " + monster.pronoun1 + " body and leaving deep bleeding wounds.");
+			monster.createStatusEffect(StatusEffects.Pounce, 4 + rand(2),0,0,0);
+		}
+		//Failure
+		else {
+			//Failure (-10 HPs) -
+			outputText("As you attempt to grapple your target it slips out of your reach delivering a glancing blow to your limbs. ");
+			player.takePhysDamage(5, true);
+			if(player.HP <= 0) {
+				doNext(endHpLoss);
+				return;
+			}
+		}
+		outputText("\n\n");
+		enemyAI();
+	}
 
 	public function nagaBiteAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
@@ -2516,6 +2568,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			clearOutput();
 			if (player.faceType == Face.SHARK_TEETH) outputText("You're too fatigued to use your shark-like jaws!");
 			if (player.faceType == Face.ORCA) outputText("You're too fatigued to use your orca-like jaws!");
+			if (player.faceType == Face.WOLF) outputText("You're too fatigued to use your wolf jaws!");
 			menu();
 			addButton(0, "Next", combatMenu, false);
 			return;
@@ -2539,6 +2592,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("You open your mouth wide, your ");
 		if (player.faceType == Face.SHARK_TEETH) outputText("shark teeth extending out");
 		if (player.faceType == Face.ORCA) outputText("sharp orca teeth shining briefly");
+		if (player.faceType == Face.WOLF) outputText("sharp wolf teeth shining briefly");
 		clearOutput();
 		outputText(". Snarling with hunger, you lunge at your opponent, set to bite right into them!  ");
 		if(player.hasStatusEffect(StatusEffects.Blind)) outputText("In hindsight, trying to bite someone while blind was probably a bad idea... ");

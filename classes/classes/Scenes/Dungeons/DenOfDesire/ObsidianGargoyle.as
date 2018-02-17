@@ -12,7 +12,7 @@ public class ObsidianGargoyle extends AbstractGargoyle
 	{
 		public function moveLustBlast():void {
 			if (hasStatusEffect(StatusEffects.Uber)) {
-				if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FreezingBreathStun) || hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.StunnedTornado)) {
+				if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FreezingBreathStun) || hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.StunnedTornado) || hasStatusEffect(StatusEffects.Pounce)) {
 					outputText("Your interruption cause the gargoyle to choke in disbelief on whatever ability it was readying!");
 					removeStatusEffect(StatusEffects.Uber);
 				}

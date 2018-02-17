@@ -537,9 +537,19 @@ public function beMyStallion():void {
 	addButton(0, "Yes", breakingInYourMare);
 	addButton(1, "No", beMyStallionNo);
 }
+public function beMyStallionRepeat():void {
+	clearOutput();
+	outputText("Diana ask with clear hopes in her eyes.\n\n");
+	outputText("\"<i>Did you take your time to consider my request? Would you let me be your mare?</i>\"\n\n");
+	menu();
+	addButton(0, "Yes", breakingInYourMare);
+	addButton(1, "No", beMyStallionNo);
+}
 public function beMyStallionNo():void {
 	clearOutput();
-	outputText("you say, wondering where this is going. \"<i>I guess,</i>\"\n\n");
+	outputText("You apologize to Diana but you can’t, not now not yet. You need some time to consider the option first.\n\n");
+	outputText("For a moment she look at you disappointed like she expected something else then finally reply.\n\n");
+	outputText("\"<i>It’s all right take your time. Come back to me when you are ready to let me in your life and I will gladly come over.</i>\"\n\n");
 	cleanupAfterCombat();
 	return;
 }
@@ -658,7 +668,8 @@ public function breakingInYourMare2():void {
 
 public function mainCampMenu():void {
 	clearOutput();
-	outputText("Lia will soon help me write this part.\n\n");
+	outputText("You go check on Diana and find her reading a book on medicine. She swiftly acknowledge your presence.\n\n");
+	outputText("\"<i>Oh hello [name] did you need anything? If you are injured I can patch you up right away.</i>\"\n\n");
 	menu();
 	addButton(0, "Appearance", dianaAppearance);
 	//1 - Talk
@@ -670,9 +681,8 @@ public function mainCampMenu():void {
 
 public function dianaAppearance():void {
 	clearOutput();
-	outputText("Lia will soon help me write this part.\n\n");
-	outputText("Lia will soon help me write this part.\n\n");
-	outputText("Lia will soon help me write this part.\n\n");
+	outputText("Diana is a white furred 7 foot tall Alicorn with long white hair and a decently toned body covered with unblemish white fur. Her green eyes look at you both wise and gentle. She's currently looking at you while holding a book about medicine and plants.\n\n");
+	outputText("Your eyes pretend not to drop to her J cup breast below her neck though if she noticed she did not seem to mind. Her feets as with all horse morphs ends in hooves. You have been hit often enough by these to know not to mess with her. Her tail the same color as as hair is wrapped across her legs right now. You know Diana protected her virginity up to becoming a Alicorn, though now since you are her stallion, she is before anything your girlfriend.\n\n");
 	menu();
 	addButton(14, "Back", mainCampMenu);
 }
@@ -691,7 +701,8 @@ public function HealingScene():void {
 
 public function mainSexMenu():void {
 	clearOutput();
-	outputText("Lia will soon help me write this part.\n\n");
+	outputText("You ask your mare if she feels about spend some quality time with her ‘stallion’. Diana blush right away.\n\n");
+	outputText("\"<i>How would you want us to do it?</i>\"\n\n");
 	menu();
 	if (player.lust > 33 && player.hasCock()) {
 		//addButton(0, "Breeding", SexMenuBreeding);
