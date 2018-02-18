@@ -975,7 +975,7 @@ public function loversCount():Number {
 	if (arianScene.arianFollower()) counter++;
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) counter++;
 	if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
-	if (flags[kFLAGS.DIANA_FOLLOWER] > 3) counter++;
+	if (flags[kFLAGS.DIANA_FOLLOWER] > 5) counter++;
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
 	if (followerHel()) counter++;
 	//Izma!
@@ -999,7 +999,7 @@ public function loversHotBathCount():Number {
 	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) counter++;
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) counter++;
 	if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
-	if (flags[kFLAGS.DIANA_FOLLOWER] > 3) counter++;
+	if (flags[kFLAGS.DIANA_FOLLOWER] > 5) counter++;
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
 	if (followerHel()) counter++;
 	if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
@@ -1099,7 +1099,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		buttons.add( "Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu);
 	}
 	//Diana
-	if (flags[kFLAGS.DIANA_FOLLOWER] > 3) {
+	if (flags[kFLAGS.DIANA_FOLLOWER] > 5) {
 		outputText("Diana is resting next to her many medical tools and medicines.\n\n");
 		buttons.add("Diana", SceneLib.dianaScene.mainCampMenu);
 	}

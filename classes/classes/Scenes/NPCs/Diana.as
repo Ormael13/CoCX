@@ -115,22 +115,6 @@ package classes.Scenes.NPCs
 		override protected function performCombatAction():void
 		{
 			if (HPRatio() < .2 && (mana >= spellCostHeal())) usingHealSpell();
-			else if (flags[kFLAGS.DIANA_LVL_UP] >= 8) {
-				var choice4:Number = rand(6);
-				if (choice4 < 2) {
-					if ((soulforce >= soulskillCostManyBirds()) && rand(2) == 0) usingManyBirdsSoulskill();
-					else eAttack();
-				}
-				if (choice4 > 1 && choice3 < 5) {
-					if (HPRatio() < .6 && rand(2) == 0 && (mana >= spellCostHeal())) usingHealSpell();
-					else if (rand(2) == 0 && (mana < (this.maxMana() - 300))) usingARC();
-					else eAttack();
-				}
-				if (choice4 == 5) {
-					if (HPRatio() < .8) usingHealPill();
-					else eAttack();
-				}
-			}
 			else if (flags[kFLAGS.DIANA_LVL_UP] >= 5 && flags[kFLAGS.DIANA_LVL_UP] < 8) {
 				var choice3:Number = rand(6);
 				if (choice3 < 2) {
@@ -139,6 +123,7 @@ package classes.Scenes.NPCs
 				}
 				if (choice3 > 1 && choice3 < 5) {
 					if (HPRatio() < .6 && rand(2) == 0 && (mana >= spellCostHeal())) usingHealSpell();
+					else if (HPRatio() < .6 && rand(2) == 0 && !hasStatusEffect(StatusEffects.MonsterRegen2) && (mana >= spellCostRegenerate())) usingRegenerateSpell();
 					else if (rand(2) == 0 && (mana < (this.maxMana() - 300))) usingARC();
 					else eAttack();
 				}
@@ -180,7 +165,11 @@ package classes.Scenes.NPCs
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			dianaScene.wonOverDiana();
+			if (flags[kFLAGS.DIANA_AFFECTION] >= 100) {
+				if (flags[kFLAGS.DIANA_FOLLOWER] < 3) dianaScene.beMyStallion();
+				else dianaScene.beMyStallionRepeat();
+			}
+			else dianaScene.wonOverDiana();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -373,7 +362,7 @@ package classes.Scenes.NPCs
 				this.butt.type = Butt.RATING_JIGGLY+1;
 				this.hairLength = 26;
 			}
-			if (flags[kFLAGS.DIANA_LVL_UP] >= 8 && flags[kFLAGS.DIANA_FOLLOWER] < 3) {
+			if (flags[kFLAGS.DIANA_LVL_UP] >= 8 && (flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5)) {
 				this.a = "";
 				this.short = "Diana";
 				this.imageName = "diana";

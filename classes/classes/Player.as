@@ -4069,7 +4069,7 @@ use namespace CoC;
 		public function werewolfScore():Number {
 			Begin("Player","racialScore","werewolf");
 			var werewolfCounter:Number = 0;
-			if (faceType == Face.WOLF)
+			if (faceType == Face.WOLF_FANGS)
 				werewolfCounter++;
 			if (eyes.type == Eyes.FERAL)
 				werewolfCounter++;
@@ -4096,7 +4096,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && werewolfCounter >= 3)
 				werewolfCounter++;
 			if (cor >= 20)
-				werewolfCounter++;
+				werewolfCounter += 2;
 			if (findPerk(PerkLib.Lycanthropy) >= 0)
 				werewolfCounter++;
 			if (findPerk(PerkLib.LycanthropyDormant) >= 0)

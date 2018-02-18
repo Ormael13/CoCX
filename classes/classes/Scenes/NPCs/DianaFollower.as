@@ -550,6 +550,7 @@ public function beMyStallionNo():void {
 	outputText("You apologize to Diana but you can’t, not now not yet. You need some time to consider the option first.\n\n");
 	outputText("For a moment she look at you disappointed like she expected something else then finally reply.\n\n");
 	outputText("\"<i>It’s all right take your time. Come back to me when you are ready to let me in your life and I will gladly come over.</i>\"\n\n");
+	flags[kFLAGS.DIANA_FOLLOWER] = 5;
 	cleanupAfterCombat();
 	return;
 }
@@ -660,9 +661,10 @@ public function breakingInYourMare():void {
 }
 public function breakingInYourMare2():void {
 	clearOutput();
-	outputText("Lia will soon help me write this part.\n\n");
+	outputText("After resting a bit. You help your new mare get situated with herself, and then help her gather up her stuff so the two of you can head back to camp.\n\n");
+	outputText("After you make sure she has everything she needs, the two of you head back.\n\n");
 	outputText("(<b>Diana has been added to the Lovers menu!</b>)\n\n");
-	flags[kFLAGS.DIANA_FOLLOWER] = 4;
+	flags[kFLAGS.DIANA_FOLLOWER] = 6;
 	doNext(playerMenu);
 }
 
@@ -789,7 +791,7 @@ public function SexMenuTitsfuck():void {
 	else {
 		if (player.isAlraune()) outputText("Diana gets on her knees, while your vine cocks move out around her, the largest one moves in front of her.\n\n");
 		else {
-			outputText("You sit down on a on a nearby " + object() + " while Diana gets on her knees in front of you, before undoing your [armour] and pulling out your erect " + (player.cocks.length == 1 ? "[cock]" : "[cocks]") + "");
+			outputText("You sit down on a on a nearby " + object() + " while Diana gets on her knees in front of you, before undoing your [armor] and pulling out your erect " + (player.cocks.length == 1 ? "[cock]" : "[cocks]") + "");
 			if (player.isNaga()) outputText("from it’s protective snake slit");
 			if (player.isScylla()) outputText("out of from between your tentacles");
 			outputText(".\n\n");

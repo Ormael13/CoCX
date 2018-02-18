@@ -40,7 +40,6 @@ package classes.Scenes
 			outputText("-Manual that Chi Chi drops after beating PC in second fight unlock Soul Blast soulskill (15 turns CD, chance to stun for 3 turns and dmg scale with PC current str, int and wis)\n");
 			outputText("-Fixed bugs: Softlocks on few enemy bind specials (like Izumi or Ceraph), Wrath specials correctly list needed resource, option to send Izma to fishery before it's built, many other small fixes\n\n");
 			outputText("<b>Version 0.8i:</b>\n\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-New tier 0 misc lvl-up perk: Tough Hide. Req. Job: Beast Warrior perk and 30+ tou. Effect: Increase natural armor by 2 so long as PC have scale chitin fur or other natural armor.\n");
 			outputText("-New tier 1 misc lvl-up perk: Feral Armor. Req. Tough Hide perk and 60+ tou. Effect: Gain extra armor based on PC toughness so long as PC is naked, +20 to max wrath. (Similar to agility but PC must be naked and have natural armor)\n");
 			outputText("-New tier 1 misc lvl-up perk: Job: Healer. Req. 30+ int and 30+ wis. Effect: +5 to max Int and Wis (scalable), +30 to max Mana, +10% to spellpower when using healing spells\n");
@@ -81,7 +80,7 @@ package classes.Scenes
 			outputText("-New melee weapon (by Shamanknight): Fly-Whisk - buyable in weapons shop in He'Xin'Dao. Cost 80 spirit stones. Base atk is 0, increase magical soulskills power by 20%.\n");
 			outputText("-New melee weapon (by Shamanknight): Hook Sword - buyable in weapons shop in He'Xin'Dao. Cost 160 spirit stones. Base atk is 20, are dual normal weapons, have added perk Dexterous Swordsmanship (+10% to parry chance - can add to existing parry bonuses like from perk Parry).\n");
 			outputText("-New melee weapon (by Shamanknight): Snake Sword - buyable in weapons shop in He'Xin'Dao. Cost 80 spirit stones. Base atk is 20, can be used for Whipping special.\n");
-			outputText("-At Lake (and later Plain) PC cna enounted white furred horse-morph/unicorn. After her affection reach 100% she would introduce herself to PC. After this next meeting would give choice to accept or reject her.\n");
+			outputText("-At Lake (and later Plain) PC can enounted white furred horse-morph/unicorn. After her affection reach 100% she would introduce herself to PC. After this next meeting would give choice to accept or reject her.\n");
 			outputText("-When at cap Diana would provide healing option (full HP and up to half of max fatigue removed) plus 3 sex scenes.\n");
 			outputText("-At Plains PC can nencounter female equine (Sidonie) chased by group of angry gnolls. Could ignore it (event will proc in futre) or help. Helping leads to fight vs 4 gnolls after which or equine will escape in case PC lost, or join camp if won.\n");
 			outputText("-At camp Sidonie can talk with PC, have sex (3 scenes) or one a day go with PC to gather up to 300 wood.\n");
@@ -89,13 +88,14 @@ package classes.Scenes
 			outputText("-In camp she will be able prepare once a day meal (recover a bit of HP, mana and fatigue), nurse (healing and a bit of fatigue recovery), talk. After her affection reach 50% she can selected as npc to sleep with.\n");
 			outputText("-Each 7 days if PC sleep with her and her affection is at 50% or more can proc special event 'Full Moon', where PC can accept Luna feeling or reject (it would lead to fight with her and if PC is partialy dog/wold-morph will also be unable to resist).\n");
 			outputText("-After Full Moon event PC would be able to choose one of Luna sex scenes or just... headpat her if not corrupted to much.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Spells and Magic Healing costs would rise by 1% each 10% spell/healpower increase instead of each 100%. Also after reaching lvl 24, 42, 60 and 78 costs would increase by 50% of base value if int is high enough. For heals it's 25% increase when int (and wis if PC have Wisened Healer perk) will pass those tresholds.\n");
 			outputText("-Tease and few other lust dealing attacks scalling was changed to use libido scaling instead lvl based one + in case of alraune it will have toughness scaling too.\n");
 			outputText("-Giacomo was added to possible encounters in Soul Sense menu. Also Lumi Lab after first time visiting it would be moved to Dungeons submenu (since it should been like Sean shop inside one of dungeons).\n");
+			outputText("-Celess related events in forest would be temporaly unaccesable (not affecting anything if PC already have Celess in camp).\n");
 			outputText("-Fixed bugs: Patchouli not leading PC to Wonderland from camp, Sidewinder not having daily cooldown counter, Anzu missing from his palace, Chi Chi not dropping M.Gloves after first/second fight on soul arena, missing option to buy Taoth statue in Jewelery shop in Tel'Adre\n\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
 			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
 			outputText("-New event perk: Gargoyle. Gained in ritual to become gargoyle by picking own blood. Effects: \n");

@@ -77,7 +77,7 @@ use namespace CoC;
 			}, {
 				name: "diana",
 				when: function():Boolean {
-					return flags[kFLAGS.DIANA_FOLLOWER] < 4 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
+					return flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
 				},
 				call: SceneLib.dianaScene.repeatPlainsEnc
 			}, {

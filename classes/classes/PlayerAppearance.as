@@ -1823,6 +1823,19 @@ public class PlayerAppearance extends BaseContent {
 				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("  Cold blue mist seems to periodically escape from your mouth.");
 			}
 		}
+		if (faceType == Face.WOLF_FANGS) {
+			if (!player.hasCoat()) {
+				outputText("  Your face is human in shape and structure with [skin coat]");
+				if (skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
+				else if(skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
+				else if(skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
+				outputText(". Your mouth is somewhat human save for your wolf-like canines.");
+			} else if (player.hasPartialCoat(Skin.FUR)) {
+				outputText("  Your face looks human save for your wolf-like canines.  You've got [skin coat], hiding your [skin noadj] underneath your furry visage.");
+			} else {
+				outputText("  Your face looks human save for your wolf-like canines, but overlaid with glittering [skin coat].");
+			}
+		}
 		//cat-faces
 		if (faceType == Face.CAT || faceType == Face.CHESHIRE) {
 			if (!player.hasCoat()) {

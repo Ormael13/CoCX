@@ -186,7 +186,7 @@ use namespace CoC;
 					}, {
 						name: "diana",
 						when: function():Boolean {
-							return flags[kFLAGS.DIANA_FOLLOWER] < 4 && flags[kFLAGS.DIANA_FOLLOWER] == 100;
+							return flags[kFLAGS.DIANA_FOLLOWER] == 5 && flags[kFLAGS.DIANA_AFFECTION] == 100;
 						},
 						chance: 0.5,
 						call: SceneLib.dianaScene.postNameForestEnc
@@ -206,7 +206,7 @@ use namespace CoC;
 						name  : "bigjunk",
 						call  : bigJunkForestScene,
 						chance: bigJunkChance
-					}, {
+					},/* {
 						name: "celess-unicorn",
 						call: CelessScene.instance.celessUnicornIntro,
 						when: CelessScene.canMeetUnicorn
@@ -218,7 +218,7 @@ use namespace CoC;
 						name: "celess-armor",
 						call: CelessScene.instance.celessArmor,
 						when: CelessScene.canGetArmour
-					}, {
+					},*/ {
 						name  : "patchouli",
 						call  : SceneLib.patchouliScene.meetThePatchouli,
 						when  : function():Boolean {

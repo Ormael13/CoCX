@@ -598,6 +598,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (monster.hasPerk(PerkLib.IceVulnerability)) powerfistspowervalue *= 0.5;
 			if (monster.hasPerk(PerkLib.FireNature)) powerfistspowervalue *= 0.2;
 		}
+		if (player.haveWeaponForJouster()) {
+			if (player.isMeetingNaturalJousterReq()) powerfistspowervalue *= 3;
+			if (player.isMeetingNaturalJousterMasterGradeReq()) powerfistspowervalue *= 5;
+		}
 		if (player.weapon == weapons.RCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
 			if (monster.hasPerk(PerkLib.IceNature)) powerfistspowervalue *= 5;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) powerfistspowervalue *= 2;

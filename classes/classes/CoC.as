@@ -248,7 +248,7 @@ public class CoC extends MovieClip
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_0.8i";
-			version = ver + " (<b></b>)";
+			version = ver + " (<b>Project 8 (Part 2: Luna, Diana, Sidonie), Avian TF, few new weapons, Healer path, small fixes)</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

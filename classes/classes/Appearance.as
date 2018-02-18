@@ -2446,6 +2446,7 @@ public class Appearance extends Utils
 					[Face.ECHIDNA, "echidna"],
 					[Face.DEER, "deer"],
 					[Face.WOLF, "wolf"],
+					[Face.WOLF_FANGS, "wolf fangs"],
 					[Face.MANTICORE, "manticore"],
 					[Face.SALAMANDER_FANGS, "salamander"],
 					[Face.YETI_FANGS, "yeti"],

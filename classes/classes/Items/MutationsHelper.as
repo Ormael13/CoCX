@@ -427,6 +427,7 @@ import classes.BodyParts.Wings;
 		[Face.SNAKE_FANGS, StatusEffects.UnlockedSnakeFangs],
 		[Face.SPIDER_FANGS, StatusEffects.UnlockedSpiderFangs],
 		[Face.WOLF, null],
+		[Face.WOLF_FANGS, null],
 		[Face.YETI_FANGS, null],
 	]);
 
