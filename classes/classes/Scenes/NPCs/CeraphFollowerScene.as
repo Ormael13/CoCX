@@ -859,7 +859,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("The herm, at last restored to a pure woman, rubs the healed expanse of her abdomen, unbelieving, before leaping to her feet and excitedly seizing both of your hands. \"<i>I'm normal! No longer a freak! Oh, [name], I can never repay you for this. You've given me a new life! Please... won't you,</i>\" she gazes at you with a flush of anticipation, \"<i>won't you make love to me?</i>\" Pulling your hands to her hips, she steps close enough to kiss, but merely presses her forehead against your own, viridian eyes no longer clouded with coarse lust. Instead, they practically glow with the girl's ardor, her smile authentic and honest. Unblinking, you gaze into her eyes for a moment that stretches into an eternity, cupping a hand around her cheek. She reads your acceptance as clearly as if you'd been yelling it from the mountaintops and she returns your gentle smile, nuzzling her nose against yours.\n\n");
 
 			outputText("Drawing you back to your cot, Urta sits on the cushioned bedding, knees spread as she leans back and braces herself on her elbows. You sink between her muscled thighs, rubbing your palms up the dusky fur of her hips as you bring your head toward her leaking pussy. The delicate folds of her labia are as dark as her nose, but there is a certain elegance in their plush depths, like the petals of a black rose guarding the nectar of the flower. You trace your tongue around the edge of her vulva, warm skin tingling with the faintest trace of the athletic guardswoman's perfumed sweat, exciting the tip of your tongue and making you draw it back into your mouth to savor the untainted taste of the girl's body. Placing small kisses on the puffy lips of her sex, you draw the girl's skin into your mouth with a gentle sucking, nibbling at the fox's flesh with only your lips as you gradually, achingly work your way up to the polished nub of her clitoris, engorged from your teasing oral stimulation. You stroke the sensitive flesh with the tip of your nose, brushing the swell of your lower lip across Urta's joy-buzzer. She moans, her hips swaying back and forth in time to your movements.");
-			if (player.horns > 0) outputText("  Unable to keep her hands at her sides, but unwilling to stand between your mouth and her slit, the fox-girl takes hold of your horns, pulling your face tightly against her mound, her chest tight with a barely audible squeak of delight. Stroking the tip of your tongue at the curtain of her sex, you allow her the barest trace of penetration before drawing back and placing a wet kiss on her clit. Enough foreplay.");
+			if (player.horns.count > 0) outputText("  Unable to keep her hands at her sides, but unwilling to stand between your mouth and her slit, the fox-girl takes hold of your horns, pulling your face tightly against her mound, her chest tight with a barely audible squeak of delight. Stroking the tip of your tongue at the curtain of her sex, you allow her the barest trace of penetration before drawing back and placing a wet kiss on her clit. Enough foreplay.");
 			dynStats("lus", 200);
 			//[Next]
 			doNext(ceraphUrtaRoleplaySober2);
@@ -1552,7 +1552,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("\n\nShe pirouettes away, practically dancing into the sky while she strokes and teases the cock you just lost.  You shudder and shake as orgasm wracks your body, your cum falling like rain thousands of feet away.  You swear, you can hear your pet laughing.");
 			player.orgasm();
 			dynStats("lib", -2, "sen", -2, "cor", 5);
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218]++;
+			flags[kFLAGS.CERAPH_OWNED_DICKS]++;
 			player.removeCock(x, 1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1570,7 +1570,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			//(-100 lust, -1 fetish, +1 vagina toy status)
 			player.orgasm();
 			dynStats("lib", -2, "sen", -2, "cor", 5);
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219]++;
+			flags[kFLAGS.CERAPH_OWNED_PUSSIES]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1623,7 +1623,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("Ceraph turns and prances off through the rocks, tweaking your nipples HARD every few moments to remind you of your choice.  She vanishes before long, leaving you to deal with the slowly dwindling sensation of her cock in your tits.\n\n");
 			//(-1 fetish, +1 tit toy status)
 			dynStats("lus", 20, "cor", 5);
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220]++;
+			flags[kFLAGS.CERAPH_OWNED_TITS]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
 

@@ -10,7 +10,7 @@ package classes.Items.Armors
 	public final class InquisitorsCorset extends Armor {
 		
 		public function InquisitorsCorset() {
-			super("I.Corst", "I.Corst", "inquisitor's corset", "an inquisitor's corset", 4, 2000, "This sexualized and feminine red and gold ensemble carries with it the hopes of a shamed sorcerer.  Wearing it will cause spells to tax your health instead of exhausting you.", "Light", false, false);
+			super("I.Corst", "I.Corst", "inquisitor's corset", "an inquisitor's corset", 16, 2000, "This sexualized and feminine red and gold ensemble carries with it the hopes of a shamed sorcerer.  Wearing it will allow cast blood magic spells.", "Light", false, false);
 		}
 		
 		override public function useText():void {

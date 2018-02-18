@@ -114,8 +114,8 @@ public class Yeti extends Monster
 			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 8*12;
-			this.hipRating = Hips.RATING_BOYISH;
-			this.buttRating = Butt.RATING_TIGHT;
+			this.hips.type = Hips.RATING_BOYISH;
+			this.butt.type = Butt.RATING_TIGHT;
 			this.skin.growFur({color:"light"});
 			this.hairColor = "white";
 			this.hairLength = 8;

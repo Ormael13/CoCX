@@ -1,6 +1,7 @@
 package classes.Parser {
 import classes.Appearance;
 import classes.CoC;
+import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.Measurements;
 import classes.Scenes.SceneLib;
@@ -45,9 +46,10 @@ public class ParserTags {
         "cocks"                 : function ():* { return CoC.instance.player.multiCockDescriptLight(); },
         "cunt"                  : function ():* { return CoC.instance.player.vaginaDescript(); },
         "eachcock"              : function ():* { return CoC.instance.player.sMultiCockDesc(); },
+        "ears"                  : function ():* { return CoC.instance.player.earsDescript(); },
         "evade"                 : function ():* { return "[Evade]"; },
         "eyes"                  : function ():* { return CoC.instance.player.eyesDescript(); },
-        "eyecolor"              : function ():* { return CoC.instance.player.eyeColor; },
+        "eyecolor"              : function ():* { return CoC.instance.player.eyes.colour; },
         "face"                  : function ():* { return CoC.instance.player.face(); },
         "feet"                  : function ():* { return CoC.instance.player.feet(); },
         "foot"                  : function ():* { return CoC.instance.player.foot(); },
@@ -219,7 +221,7 @@ public class ParserTags {
         "cunt"                  : function ():* { return CoC.instance.monster.vaginaDescript(); },
         "eachcock"              : function ():* { return CoC.instance.monster.sMultiCockDesc(); },
         "eyes"                  : function ():* { return CoC.instance.monster.eyesDescript(); },
-        "eyecolor"              : function ():* { return CoC.instance.monster.eyeColor; },
+        "eyecolor"              : function ():* { return CoC.instance.monster.eyes.colour; },
         //			"face"						: function():* { return CoC.instance.monster.face(); },
         "feet"                  : function ():* { return CoC.instance.monster.feet(); },
         "foot"                  : function ():* { return CoC.instance.monster.foot(); },
@@ -484,6 +486,7 @@ public class ParserTags {
         "islactating"   : function ():* { return (CoC.instance.player.lactationQ() > 0); },
         "true"          : function ():* { return true; },
         "false"         : function ():* { return false; },
+	    "silly"         : function ():* { return EngineCore.silly();},
 
         //Prison
         "esteem": function ():* { return CoC.instance.player.esteem; },

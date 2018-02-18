@@ -93,6 +93,8 @@ public class SceneLib {
 
     public static var ceaniScene:CeaniScene = new CeaniScene();
 
+    public static var dianaScene:DianaFollower = new DianaFollower();
+
     public static var electraScene:ElectraFollower = new ElectraFollower();
 
     public static var emberScene:EmberScene = new EmberScene();
@@ -131,6 +133,8 @@ public class SceneLib {
 
     public static var latexGirl:LatexGirl = new LatexGirl();
 
+    public static var lunaFollower:LunaFollower = new LunaFollower();
+
     public static var marbleScene:MarbleScene = new MarbleScene();
 
     public static var marblePurification:MarblePurification = new MarblePurification();
@@ -148,6 +152,8 @@ public class SceneLib {
     public static var shouldraFollower:ShouldraFollower = new ShouldraFollower();
 
     public static var shouldraScene:ShouldraScene = new ShouldraScene();
+
+    public static var sidonieFollower:SidonieFollower = new SidonieFollower();
 
     public static var sophieBimbo:SophieBimbo = new SophieBimbo();
 

@@ -5,10 +5,13 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.GlobalFlags.*;
 import classes.Scenes.SceneLib;
+import classes.Scenes.Places.HeXinDao;
 import classes.internals.*;
 
 public class GoblinAssassin extends Monster
 	{
+		public var adventure:HeXinDao = new HeXinDao();
+		
 		protected function goblinDrugAttack():void {
 			var temp2:Number = rand(5);
 			var color:String = "";
@@ -103,8 +106,8 @@ public class GoblinAssassin extends Monster
 		}
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.goblinAssassinScene.gobboAssassinRapeIntro();
-			
+			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) adventure.gaunletchallange2fight2();
+			else SceneLib.goblinAssassinScene.gobboAssassinRapeIntro();
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
@@ -120,7 +123,16 @@ public class GoblinAssassin extends Monster
 		{
 			if (noInit) return;
 			this.a = "the ";
-			this.short = "goblin assassin";
+			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) {
+				this.short = "goblin adventurer";
+				this.level = 9;
+				this.bonusHP = 70;
+			}
+			else {
+				this.short = "goblin assassin";
+				this.level = 10;
+				this.bonusHP = 100;
+			}
 			this.imageName = "goblinassassin";
 			this.long = "Her appearance is that of a regular goblin, curvy and pale green, perhaps slightly taller than the norm. Her wavy, untamed hair is a deep shade of blue, covering her pierced ears and reaching just above her shoulders. Her soft curves are accentuated by her choice of wear, a single belt lined with assorted needles strapped across her full chest and a pair of fishnet stockings reaching up to her thick thighs. She bounces on the spot, preparing to dodge anything you might have in store, though your eyes seem to wander towards her bare slit and jiggling ass. Despite her obvious knowledge in combat, she’s a goblin all the same – a hard cock can go a long way.";
 			// this.plural = false;
@@ -131,8 +143,8 @@ public class GoblinAssassin extends Monster
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,50,0,0,0);
 			this.tallness = 35 + rand(4);
-			this.hipRating = Hips.RATING_AMPLE+2;
-			this.buttRating = Butt.RATING_LARGE;
+			this.hips.type = Hips.RATING_AMPLE + 2;
+			this.butt.type = Butt.RATING_LARGE;
 			this.skinTone = "dark green";
 			this.hairColor = "blue";
 			this.hairLength = 7;
@@ -143,11 +155,9 @@ public class GoblinAssassin extends Monster
 			this.weaponAttack = 2;
 			this.armorName = "leather straps";
 			this.armorDef = 1;
-			this.bonusHP = 70;
 			this.bonusLust = 20;
 			this.lust = 50;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 10;
 			this.gems = rand(50) + 25;
 			this.drop = new WeightedDrop().
 					add(consumables.GOB_ALE, 5).

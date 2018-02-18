@@ -112,7 +112,7 @@ public class IncubusMechanic extends Monster {
 					outputText("  Disgusted, you pull away from the purplish monstrosity, the act made easier by your well-slimed [legs].");
 					player.dynStats("lus", 5 + player.cor / 20);
 				}
-				SceneLib.combat.takePhysDamage(5);
+				player.takePhysDamage(5);
 			}
 			outputText("\nThe incubus gives an overconfident smile as his cock retracts away from you, returning to its normal size.");
 		}
@@ -179,8 +179,8 @@ public class IncubusMechanic extends Monster {
 			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
 			this.ass.analWetness = AssClass.WETNESS_SLIME_DROOLING;
 			this.tallness = rand(9) + 70;
-			this.hipRating = Hips.RATING_AMPLE;
-			this.buttRating = Butt.RATING_TIGHT;
+			this.hips.type = Hips.RATING_AMPLE;
+			this.butt.type = Butt.RATING_TIGHT;
 			this.lowerBody = LowerBody.DEMONIC_CLAWS;
 			this.skinTone = "light purple";
 			this.hairColor = "black";
@@ -219,8 +219,8 @@ public class IncubusMechanic extends Monster {
 			this.special1 = cockTripAttack;
 			this.special2 = spoogeAttack;
 			this.tailType = Tail.DEMONIC;
-			this.wingType = Wings.BAT_LIKE_TINY;
-			this.wingDesc = "tiny hidden";
+			this.wings.type = Wings.BAT_LIKE_TINY;
+			this.wings.desc = "tiny hidden";
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();

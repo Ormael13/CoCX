@@ -13,7 +13,8 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kCOUNTERS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
-import classes.Scenes.Dungeons.DungeonAbstractContent;
+	import classes.Scenes.Areas.Desert.SandWitchScene;
+	import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.NPCs.XXCNPC;
 import classes.Scenes.SceneLib;
@@ -366,11 +367,7 @@ public function saveLoad(e:MouseEvent = null):void
 	outputText("<b>Why does the Save File and Load File option not work?</b>\n");
 	outputText("<i>Save File and Load File are limited by the security settings imposed upon CoC by Flash. These options will only work if you have downloaded the game from the website, and are running it from your HDD. Additionally, they can only correctly save files to and load files from the directory where you have the game saved.</i>");
 	//This is to clear the 'game over' block from stopping simpleChoices from working.  Loading games supercede's game over.
-	if (mainView.getButtonText( 0 ) == "Game Over")
-	{
-		temp = 777;
-		mainView.setButtonText( 0, "save/load" );
-	}
+
 	menu();
 	//addButton(0, "Save", saveScreen);
 	addButton(1, "Load", loadScreen);
@@ -379,9 +376,10 @@ public function saveLoad(e:MouseEvent = null):void
 	addButton(6, "Load File", openSave);
 	//addButton(8, "AutoSave: " + autoSaveSuffix, autosaveToggle);
 	addButton(14, "Back", EventParser.gameOver, true);
-	
-	
-	if (temp == 777) {
+
+	if (mainView.getButtonText( 0 ) == "Game Over")
+	{
+		mainView.setButtonText( 0, "save/load" );
 		addButton(14, "Back", EventParser.gameOver, true);
 		return;
 	}
@@ -574,7 +572,6 @@ public function loadGame(slot:String):void
 		loadGameObject(saveFile, slot);
 		loadPermObject();
 		outputText("Game Loaded");
-		temp = 0;
 		
 		if (player.slotName == "VOID")
 		{
@@ -882,20 +879,19 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.tallness = player.tallness;
 		saveFile.data.hairColor = player.hairColor;
 		saveFile.data.hairType = player.hairType;
-		saveFile.data.gillType = player.gillType;
-		saveFile.data.armType = player.armType;
+		saveFile.data.gillType = player.gills.type;
+		saveFile.data.armType = player.arms.type;
 		saveFile.data.hairLength = player.hairLength;
 		saveFile.data.beardLength = player.beardLength;
-		saveFile.data.eyeType = player.eyeType;
-		saveFile.data.eyeColor = player.eyeColor;
+		saveFile.data.eyeType = player.eyes.type;
+		saveFile.data.eyeColor = player.eyes.colour;
 		saveFile.data.beardStyle = player.beardStyle;
-		saveFile.data.tongueType = player.tongueType;
-		saveFile.data.earType = player.earType;
-		saveFile.data.earValue = player.earValue;
-		saveFile.data.antennae = player.antennae;
-		saveFile.data.horns = player.horns;
-		saveFile.data.hornType = player.hornType;
-		saveFile.data.rearBody = player.rearBody;
+		saveFile.data.tongueType = player.tongue.type;
+		saveFile.data.earType = player.ears.type;
+		saveFile.data.antennae = player.antennae.type;
+		saveFile.data.horns = player.horns.count;
+		saveFile.data.hornType = player.horns.type;
+		saveFile.data.rearBody = player.rearBody.type;
 		player.facePart.saveToSaveData(saveFile.data);
 		//player.underBody.saveToSaveData(saveFile.data);
 		player.lowerBodyPart.saveToSaveData(saveFile.data);
@@ -903,10 +899,10 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		player.tail.saveToSaveData(saveFile.data);
 		player.clawsPart.saveToSaveData(saveFile.data);
 
-		saveFile.data.wingDesc = player.wingDesc;
-		saveFile.data.wingType = player.wingType;
-		saveFile.data.hipRating = player.hipRating;
-		saveFile.data.buttRating = player.buttRating;
+		saveFile.data.wingDesc = player.wings.desc;
+		saveFile.data.wingType = player.wings.type;
+		saveFile.data.hipRating = player.hips.type;
+		saveFile.data.buttRating = player.butt.type;
 		
 		//Sexual Stuff
 		saveFile.data.balls = player.balls;
@@ -1106,10 +1102,8 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.autoSave = player.autoSave;
 		
 		//PLOTZ
-        saveFile.data.whitney = CoC.instance.whitney;
         saveFile.data.monk = JojoScene.monk;
-        saveFile.data.sand = CoC.instance.sand;
-        saveFile.data.giacomo = CoC.instance.giacomo;
+        saveFile.data.sand = SandWitchScene.rapedBefore;
         saveFile.data.beeProgress = 0; //Now saved in a flag. getGame().beeProgress;
 
 		saveFile.data.isabellaOffspringData = [];
@@ -1730,13 +1724,13 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.femininity = saveFile.data.femininity;
 		//EYES
 		if (saveFile.data.eyeType == undefined)
-			player.eyeType = Eyes.HUMAN;
+			player.eyes.type = Eyes.HUMAN;
 		else
-			player.eyeType = saveFile.data.eyeType;
+			player.eyes.type = saveFile.data.eyeType;
 		if (saveFile.data.eyeColor == undefined)
-			player.eyeColor = "brown";
+			player.eyes.colour = "brown";
 		else
-			player.eyeColor = saveFile.data.eyeColor;
+			player.eyes.colour = saveFile.data.eyeColor;
 		//BEARS
 		if (saveFile.data.beardLength == undefined)
 			player.beardLength = 0;
@@ -1763,15 +1757,15 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		else
 			player.hairType = saveFile.data.hairType;
 		if (saveFile.data.gillType != undefined)
-			player.gillType = saveFile.data.gillType;
+			player.gills.type = saveFile.data.gillType;
 		else if (saveFile.data.gills == undefined)
-			player.gillType = Gills.NONE;
+			player.gills.type = Gills.NONE;
 		else
-			player.gillType = saveFile.data.gills ? Gills.ANEMONE : Gills.NONE;
+			player.gills.type = saveFile.data.gills ? Gills.ANEMONE : Gills.NONE;
 		if (saveFile.data.armType == undefined)
-			player.armType = Arms.HUMAN;
+			player.arms.type = Arms.HUMAN;
 		else
-			player.armType = saveFile.data.armType;
+			player.arms.type = saveFile.data.armType;
 		player.hairLength = saveFile.data.hairLength;
 		player.lowerBodyPart.loadFromSaveData(data);
 		player.skin.loadFromSaveData(data);
@@ -1779,36 +1773,32 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.facePart.loadFromSaveData(data);
 		player.tail.loadFromSaveData(data);
 		if (saveFile.data.tongueType == undefined)
-			player.tongueType = Tongue.HUMAN;
+			player.tongue.type = Tongue.HUMAN;
 		else
-			player.tongueType = saveFile.data.tongueType;
+			player.tongue.type = saveFile.data.tongueType;
 		if (saveFile.data.earType == undefined)
-			player.earType = Ears.HUMAN;
+			player.ears.type = Ears.HUMAN;
 		else
-			player.earType = saveFile.data.earType;
-		if (saveFile.data.earValue == undefined)
-			player.earValue = 0;
-		else
-			player.earValue = saveFile.data.earValue;
+			player.ears.type = saveFile.data.earType;
 		if (saveFile.data.antennae == undefined)
-			player.antennae = Antennae.NONE;
+			player.antennae.type = Antennae.NONE;
 		else
-			player.antennae = saveFile.data.antennae;
-		player.horns = saveFile.data.horns;
+			player.antennae.type = saveFile.data.antennae;
+		player.horns.count = saveFile.data.horns;
 		if (saveFile.data.hornType == undefined)
-			player.hornType = Horns.NONE;
+			player.horns.type = Horns.NONE;
 		else
-			player.hornType = saveFile.data.hornType;
+			player.horns.type = saveFile.data.hornType;
 
 		// <mod name="Dragon patch" author="Stadler76">
 		if (saveFile.data.rearBodyType != undefined)
 			saveFile.data.rearBody = saveFile.data.rearBodyType;
-		player.rearBody = (saveFile.data.rearBody == undefined) ? RearBody.NONE : saveFile.data.rearBody;
+		player.rearBody.type = (saveFile.data.rearBody == undefined) ? RearBody.NONE : saveFile.data.rearBody;
 
-		player.wingDesc = saveFile.data.wingDesc;
-		player.wingType = saveFile.data.wingType;
-		player.hipRating = saveFile.data.hipRating;
-		player.buttRating = saveFile.data.buttRating;
+		player.wings.desc = saveFile.data.wingDesc;
+		player.wings.type = saveFile.data.wingType;
+		player.hips.type = saveFile.data.hipRating;
+		player.butt.type = saveFile.data.buttRating;
 
 		//Sexual Stuff
 		player.balls = saveFile.data.balls;
@@ -2228,13 +2218,9 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.autoSave = saveFile.data.autoSave;
 		
 		//PLOTZ
-		game.whitney   = saveFile.data.whitney;
 		JojoScene.monk = saveFile.data.monk;
-		game.sand      = saveFile.data.sand;
-		if (saveFile.data.giacomo == undefined)
-			game.giacomo = 0;
-		else
-			game.giacomo = saveFile.data.giacomo;
+		SandWitchScene.rapedBefore      = saveFile.data.sand;
+
 		if (saveFile.data.beeProgress != undefined && saveFile.data.beeProgress == 1) SceneLib.forest.beeGirlScene.setTalked(); //Bee Progress update is now in a flag
 			//The flag will be zero for any older save that still uses beeProgress and newer saves always store a zero in beeProgress, so we only need to update the flag on a value of one.
 			

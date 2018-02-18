@@ -184,6 +184,13 @@ use namespace CoC;
 						},
 						chance: 0.05
 					}, {
+						name: "diana",
+						when: function():Boolean {
+							return flags[kFLAGS.DIANA_FOLLOWER] == 5 && flags[kFLAGS.DIANA_AFFECTION] == 100;
+						},
+						chance: 0.5,
+						call: SceneLib.dianaScene.postNameForestEnc
+					}, {
 						name: "walk",
 						call: forestWalkFn
 					}, {
@@ -199,19 +206,19 @@ use namespace CoC;
 						name  : "bigjunk",
 						call  : bigJunkForestScene,
 						chance: bigJunkChance
-					},{
+					},/* {
 						name: "celess-unicorn",
 						call: CelessScene.instance.celessUnicornIntro,
-						when: function():Boolean{
-							return (player.hasVirginVagina() || ((player.isMale()||player.isGenderless()) && player.ass.analLooseness == 0)) && (player.level > 20) && !player.isPregnant() && !CelessScene.instance.armorFound && ! CelessScene.instance.isCompanion();
-						}
+						when: CelessScene.canMeetUnicorn
+					}, {
+						name: "celess-nightmare",
+						call: CelessScene.instance.celessUnicornIntro,
+						when: CelessScene.canMeetNightmare
 					}, {
 						name: "celess-armor",
 						call: CelessScene.instance.celessArmor,
-						when: function():Boolean{
-							return CelessScene.instance.isCompanion() && !CelessScene.instance.armorFound;
-						}
-					}, {
+						when: CelessScene.canGetArmour
+					},*/ {
 						name  : "patchouli",
 						call  : SceneLib.patchouliScene.meetThePatchouli,
 						when  : function():Boolean {

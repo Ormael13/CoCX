@@ -133,8 +133,8 @@ public class ChameleonGirl extends Monster
 			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.tallness = rand(2) + 68;
-			this.hipRating = Hips.RATING_AMPLE + 2;
-			this.buttRating = Butt.RATING_LARGE;
+			this.hips.type = Hips.RATING_AMPLE + 2;
+			this.butt.type = Butt.RATING_LARGE;
 			this.skin.setBaseOnly({color:skinToneAdj[0],adj:skinToneAdj[1],type:Skin.PLAIN});
 			this.hairColor = "black";
 			this.hairLength = 15;

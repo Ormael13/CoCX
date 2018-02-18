@@ -75,7 +75,7 @@ public class ShouldraScene extends NPCAwareContent implements TimeAwareInterface
 			}
 			//Ghostgirl madness
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365] > 0) {
-				if (player.cockTotal() > 1 || player.faceType != Face.HUMAN || player.lowerBody != LowerBody.HUMAN || player.tailType > Tail.NONE || player.horns > 0 || player.cor > 15 || player.longestCockLength() > 10 || player.tallness < 65 || player.tallness > 78 || player.hasVagina())
+				if (player.cockTotal() > 1 || player.faceType != Face.HUMAN || player.lowerBody != LowerBody.HUMAN || player.tailType > Tail.NONE || player.horns.count > 0 || player.cor > 15 || player.longestCockLength() > 10 || player.tallness < 65 || player.tallness > 78 || player.hasVagina())
 					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365] = 0;
 				else {
 					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365]--;
@@ -95,7 +95,7 @@ internal function shouldraGreeting():void {
 	clearOutput();
 	if(silly() && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00366] == 0) {
 		//NO MUTANTS ALLOWED
-		if(player.cockTotal() > 1 || player.faceType != Face.HUMAN || player.lowerBody != LowerBody.HUMAN || player.tailType > Tail.NONE || player.horns > 0 || player.cor > 15 || player.longestCockLength() > 10 || player.tallness < 65 || player.tallness > 78 || player.hasVagina()) {}
+		if(player.cockTotal() > 1 || player.faceType != Face.HUMAN || player.lowerBody != LowerBody.HUMAN || player.tailType > Tail.NONE || player.horns.count > 0 || player.cor > 15 || player.longestCockLength() > 10 || player.tallness < 65 || player.tallness > 78 || player.hasVagina()) {}
 		else {
 			superCoolPaladinSexStuffDudeGasmJizzMonkies();
 			return;

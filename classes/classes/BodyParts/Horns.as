@@ -1,5 +1,4 @@
 package classes.BodyParts {
-import classes.Creature;
 
 public class Horns extends BodyPart {
 	public static const NONE:int                     = 0;
@@ -16,9 +15,11 @@ public class Horns extends BodyPart {
 	public static const ORCHID:int                   = 11;
 	public static const ONI_X2:int                   = 12;
 	public static const ONI:int                      = 13;
+	public static const BICORN:int                   = 14;
 	
-	public function Horns(creature:Creature, publicPrimitives:Array) {
-		super(creature, publicPrimitives);
+	public function Horns() {
+		super(null, null);
 	}
+	public var count:int = 0;
 }
 }

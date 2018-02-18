@@ -366,38 +366,50 @@ private function isabellasAccentCoaching():void {
 	var accentChange:Number = 0;
 	//(Success/Fail texts)
 	if(result < 12) {
-		temp = rand(3);
-		if(temp == 0) outputText("You spend an hour speaking with Isabella, but ultimately, you wind up making little, if any, progress.  The cow-girl seems a bit dispirited at the failure, but she gives you a big hug anyway.");
-		//(FAIL2) 
-		else if(temp == 1) {
-			outputText("In spite of your efforts to teach the foreign cow-girl, she doesn't seem to make any progress.  The worst part is, she keeps slumping down when you correct her, which only sets her bosom to jiggling, her cleavage looking larger than ever before.  You wind up quite distracted by the time the two of you get finished.");
-			dynStats("lus", 10);
-		}
-		//(FAIL3) 
-		else {
-			outputText("No matter what you do, you can't get the normally-industrious cow-girl to focus right now.  She's obviously bored with your attempts to teach her, and she spends the entire lesson trying to tease you with her body.  It's more effective than you care to admit");
-			if(player.hasCock()) outputText(", and you leave the lesson with certain stiffness in your loins.");
-			else if(player.hasVagina()) outputText(", and you leave the lesson with wet panties.");
-			else outputText(".");
-			//(+big lust)
-			dynStats("lus", 25);
+		switch (rand(3)) {
+			case 0:
+				outputText("You spend an hour speaking with Isabella, but ultimately, you wind up making little, if any, progress.  The cow-girl seems a bit dispirited at the failure, but she gives you a big hug anyway.");
+				break;
+
+			case 1:
+				outputText("In spite of your efforts to teach the foreign cow-girl, she doesn't seem to make any progress.  The worst part is, she keeps slumping down when you correct her, which only sets her bosom to jiggling, her cleavage looking larger than ever before.  You wind up quite distracted by the time the two of you get finished.");
+				dynStats("lus", 10);
+
+				break;
+			default:
+				outputText("No matter what you do, you can't get the normally-industrious cow-girl to focus right now.  She's obviously bored with your attempts to teach her, and she spends the entire lesson trying to tease you with her body.  It's more effective than you care to admit");
+				if (player.hasCock()) {
+					outputText(", and you leave the lesson with certain stiffness in your loins.");
+				} else if (player.hasVagina()) {
+					outputText(", and you leave the lesson with wet panties.");
+				} else {
+					outputText(".");
+				}
+				//(+big lust)
+				dynStats("lus", 25);
+
+				break;
 		}
 	}
 	else if(result < 14) {
-		temp = rand(2);
-		if(temp == 0) outputText("You spend an hour going over Isabella's language and diction with her.  She seems to make a little progress with it, which makes her happy, but you feel that in the grand scheme of things, she could do better.");
+		if(rand(2) == 0) outputText("You spend an hour going over Isabella's language and diction with her.  She seems to make a little progress with it, which makes her happy, but you feel that in the grand scheme of things, she could do better.");
 		else outputText("You go over Isabella's word choice with her and try to correct her whenever she uses the wrong word or slips into her native tongue.  She seems to make a modicum of progress, yet the downward cast of her eyes shows just how much better she feels she could have done.");
 		accentChange = 4 + rand(5);
 	}
 	else if(result <= 20) {
-		temp = rand(2);
-		if(temp == 0) outputText("You spend an hour trying to teach Isabella how to speak properly.  While she is often flustered by her mistakes, she makes notable improvements from this session.  By the time you two finish, she seems quite pleased with herself.");
-		else if(temp == 1) outputText("You go over Isabella's word choice with her and try to correct her whenever she uses the wrong word or slips into her native tongue.  It takes some time, but you're happy to tell Isabella that she seems to be making significant progress.");
+		switch (rand(2)) {
+			case 0:
+				outputText("You spend an hour trying to teach Isabella how to speak properly.  While she is often flustered by her mistakes, she makes notable improvements from this session.  By the time you two finish, she seems quite pleased with herself.");
+				break;
+
+			case 1:
+				outputText("You go over Isabella's word choice with her and try to correct her whenever she uses the wrong word or slips into her native tongue.  It takes some time, but you're happy to tell Isabella that she seems to be making significant progress.");
+				break;
+		}
 		accentChange = 8 + rand(8);
 	}
 	else {
-		temp = rand(2);
-		if(temp == 0) outputText("You sit down with Isabella to work on her language once again.  She gets quite involved in the lesson, and the cow-girl makes large strides toward lessening her accent.");
+		if(rand(2) == 0) outputText("You sit down with Isabella to work on her language once again.  She gets quite involved in the lesson, and the cow-girl makes large strides toward lessening her accent.");
 		else outputText("You go over Isabella's word choice with her in an effort to reduce her accent.  In short order, the cow-girl is looking at you with rapt, attentive eyes, hanging on to your every word as you help her disguise her tongue to match those she's surrounded by.");
 		accentChange = 12 + rand(10);
 	}
@@ -665,11 +677,11 @@ private function repeatGermanBratwurstInCamp():void {
 private function izzyTentacleRapeBool():Boolean {
 	spriteSelect(31);
 	var counter:Number = 0;
-	temp = player.cockTotal();
-	while(counter < (player.tentacleCocks() + player.stamenCocks()) && temp > 0) {
-		temp--;
+	var i:int = player.cockTotal();
+	while(counter < (player.tentacleCocks() + player.stamenCocks()) && i > 0) {
+		i--;
 		//Does this dick work for it?
-		if(player.cocks[temp].cockType == CockTypesEnum.TENTACLE && player.cocks[temp].cockLength >= 24) {
+		if(player.cocks[i].cockType == CockTypesEnum.TENTACLE && player.cocks[i].cockLength >= 24) {
 			counter++;
 		}
 	}
@@ -694,23 +706,23 @@ private function tentacleBoneFollowerIzzy():void {
 	var t10:int = -1;
 	
 	var counter:Number = 0;
-	temp = player.cocks.length;
-	while(counter < (player.tentacleCocks() + player.stamenCocks()) && temp > 0) {
-		temp--;
+	var i:int = player.cocks.length;
+	while(counter < (player.tentacleCocks() + player.stamenCocks()) && i > 0) {
+		i--;
 		//Does this dick work for it?
-		if(player.cocks[temp].cockType == CockTypesEnum.TENTACLE && player.cocks[temp].cockLength >= 24) {
+		if(player.cocks[i].cockType == CockTypesEnum.TENTACLE && player.cocks[i].cockLength >= 24) {
 			counter++;
 			//Set the tentacle array up
-			if(t1 == -1) t1 = temp;
-			else if(t2 == -1) t2 = temp;
-			else if(t3 == -1) t3 = temp;
-			else if(t4 == -1) t4 = temp;
-			else if(t5 == -1) t5 = temp;
-			else if(t6 == -1) t6 = temp;
-			else if(t7 == -1) t7 = temp;
-			else if(t8 == -1) t8 = temp;
-			else if(t9 == -1) t9 = temp;
-			else if(t10 == -1) t10 = temp;
+			if(t1 == -1) t1 = i;
+			else if(t2 == -1) t2 = i;
+			else if(t3 == -1) t3 = i;
+			else if(t4 == -1) t4 = i;
+			else if(t5 == -1) t5 = i;
+			else if(t6 == -1) t6 = i;
+			else if(t7 == -1) t7 = i;
+			else if(t8 == -1) t8 = i;
+			else if(t9 == -1) t9 = i;
+			else if(t10 == -1) t10 = i;
 		}
 	}
 	clearOutput();
@@ -730,7 +742,7 @@ private function tentacleBoneFollowerIzzy():void {
 	
 	//[if wings]
 	if(player.canFly() && player.str >= 90) {
-		outputText("\"<i>Time for a wild ride, sweetheart.</i>\"  You flap your " + player.wingDesc + " wings, mobilizing all your muscles in order to lift yourself off.  The weight you are burdened with is absurdly heavy, and you groan and pant in your attempts at taking off; eventually, you manage to part from the possessive surface little by little, grunting in triumph as you see your redoubled effort paying off; soon you're way up in the sky and Isabella's dickflesh prison is wobbling back and forth as you drag her under you. If it weren't for your colossal tentacle strength, the poor cow-girl would probably crash to the earth in a matter of seconds.  You keep ascending until Isabella realizes how high you both are and shrieks.  \"<i>");
+		outputText("\"<i>Time for a wild ride, sweetheart.</i>\"  You flap your " + player.wings.desc + " wings, mobilizing all your muscles in order to lift yourself off.  The weight you are burdened with is absurdly heavy, and you groan and pant in your attempts at taking off; eventually, you manage to part from the possessive surface little by little, grunting in triumph as you see your redoubled effort paying off; soon you're way up in the sky and Isabella's dickflesh prison is wobbling back and forth as you drag her under you. If it weren't for your colossal tentacle strength, the poor cow-girl would probably crash to the earth in a matter of seconds.  You keep ascending until Isabella realizes how high you both are and shrieks.  \"<i>");
 		if(isabellaAccent()) outputText("But... but vait!  I'm going to fall- I'm going to...</i>\"\n\n");
 		else outputText("But... but wait!  I'm going to fall- I'm going to...</i>\"\n\n");
 		
@@ -740,7 +752,7 @@ private function tentacleBoneFollowerIzzy():void {
 	outputText("After toying with her for a while, you decide to bring your other tentacle dicks into the game; with expert precision, you move your " + cockDescript(t3) + " to her face.  Moaning under your gentle ministrations, she doesn't even notice the protruding mammoth about to lodge inside her drooling mouth. With a ferocious thrust you slam it all the way between her pulpy lips. Her sighs of pleasure are abruptly muffled as you block her windpipe with vegetal dickflesh. You start ramming your meat up and down her throat, its raw musk making her dizzy.  She tries to accommodate the monster stretching her mouth by moving her tongue around your erect " + cockDescript(t3) + ", squeezing it there and there, fondling your veins and milking your urethra of your pre-cum. You groan from the tongue-teasing and start filling her stomach with oozing fluid; the intimate contact makes her squirm a little more under the almost unbearable arousal. She's doing an expert job with her mouth, and her throat feels so good, so tender...  You try to stuff more of your " + cockDescript(t3) + " inside her, always wanting more pleasure; the additional pressure almost sends her over the edge as she eagerly gobbles your vegetal rod.\n\n");
 	
 	//[if demon tongue]
-	if(player.tongueType == Tongue.DEMONIC || player.tongueType == Tongue.SNAKE || player.tongueType == Tongue.DRACONIC) {
+	if(player.tongue.type == Tongue.DEMONIC || player.tongue.type == Tongue.SNAKE || player.tongue.type == Tongue.DRACONIC) {
 		outputText("Using your long, extensible tongue, you decide to take a lick at her body.  Your tongue darts forward and gently locates her supple tits; you bring Isabelle closer with your vigorous tentacle dicks and start suckling at her breasts, drinking drops of her tasty milk one at a time.  Your constant stimulations arouse her more and more, and soon her nipples are releasing a regular trickle of her essence. You mercilessly drink her, probing your tongue around either of her udders as if to dig deeper to the source of this wonderful ambrosia. You keep gulping milk until you reach satiation, and then you drink some more. It's sweet, savory and invigorating; you could feed off her breasts for days.  You suckle her until her body shakes from the steady tactile provocation, before darting your tongue back.\n\n");
 		//end d-tongue inset
 	}
@@ -1113,7 +1125,7 @@ private function getIzzyBurped():void {
 		
 		var changed:Boolean = false;
 		//no new paragraph, but this obviously shouldn't happen with characters who already have hooves, cow/bull horns, lactating breasts, or a penis smaller than 8 inches. If you want to simply disable the following for those with the first two while simply adding a 'more' to the lactation or an 'even smaller' to the wang growing, I don't blame you, but if you could go in and 'if cow feet don't look at this shit' and whatever with each individual part, it'd probably read the best. Your call, you probably want to get done with this sooner than later. tl;dr it would be cool if you could make it fit as many of the criteria that apply at once.
-		if(player.lowerBody != LowerBody.HOOFED || player.horns <= 0 || player.hornType != Horns.COW_MINOTAUR) {
+		if(player.lowerBody != LowerBody.HOOFED || player.horns.count <= 0 || player.horns.type != Horns.COW_MINOTAUR) {
 			outputText("  With that whole affair over with, you go to stand... and find yourself falling once more.");
 		}
 		if(player.lowerBody != LowerBody.HOOFED) {
@@ -1123,14 +1135,14 @@ private function getIzzyBurped():void {
 			changed = true;
 		}
 		//[if no cow horns present]
-		if(player.horns <= 0 || player.hornType != Horns.COW_MINOTAUR) {
-			if(player.horns > 0 && player.hornType > Horns.NONE) outputText("  Your existing horns quiver, then reform into those of a " + player.mf("bull","cow"));
+		if(player.horns.count <= 0 || player.horns.type != Horns.COW_MINOTAUR) {
+			if(player.horns.count > 0 && player.horns.type > Horns.NONE) outputText("  Your existing horns quiver, then reform into those of a " + player.mf("bull","cow"));
 			else outputText("  Two nubs sprout from your forehead, swiftly thickening and growing into a large pair of curved bovine horns");
 			outputText(", throwing your center of balance off and aborting yet another attempt to right yourself.");
 			changed = true;
 		}
 		//[if no cow ears]
-		if(player.earType != Ears.COW) {
+		if(player.ears.type != Ears.COW) {
 			outputText("  Your ears wiggle a bit, then simply migrate higher up your head, lengthening and widening as they go.  Before you know it, you have cow ears.");
 			changed = true;
 		}
@@ -1210,7 +1222,7 @@ private function getIzzyBurped():void {
 		outputText("She rewards you by freeing one of her arms and wrapping it around your head, pulling you in between her gleaming ebony melons.  Shaking about and wrapping your head in a marshmallowy shroud of comfort, Isabella continues to force burps out, not content until all of the gas is gone.  She pulls you out of your fleshy prison after the oral venting subsides, dragging you down to the ground with her as her gassy magic begins to take hold.\n\n");
 		
 		//if meets any requirements for cow-y TF
-		if(player.lowerBody != LowerBody.HOOFED || player.horns <= 0 || player.hornType != Horns.COW_MINOTAUR || player.earType != Ears.COW || player.tailType != Tail.COW || (player.hasCock() && player.longestCockLength() < 18)) {
+		if(player.lowerBody != LowerBody.HOOFED || player.horns.count <= 0 || player.horns.type != Horns.COW_MINOTAUR || player.ears.type != Ears.COW || player.tailType != Tail.COW || (player.hasCock() && player.longestCockLength() < 18)) {
 			outputText("You're not surprised when you take the now-familiar cow-" + player.mf("boy","girl") + " form, ");
 			if((!player.hasCock() || rand(2) == 0) && player.hasVagina()) outputText("Isabella beaming with eagerness at your sloshing and swelling bosom.\n\n");
 			else if(player.hasCock()) outputText("Isabella not able to keep a little frustration from her face as your dick grows to enviable size.\n\n");

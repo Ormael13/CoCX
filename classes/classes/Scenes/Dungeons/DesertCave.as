@@ -3320,7 +3320,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			outputText("\n\nWrenching your eyes from her thickness, you look up at her innocently, still squeezing her slowly filling sack - those nuts are each big enough to fill a hand at this point.  The sorceress of seed gives you a lascivious smile and begins to rock her hips, fucking your mouth.  You let her have control and purse your lips into a tightly-sealed 'o'.  Fucking your mouth faster and harder, the cum witch sighs and says, \"<i>Oh, your mouth is nice and wet.  Such a tight little fuck-hole you've got there - you'll have my blessing in no time slut.  Doesn't that make you happy?</i>\"");
 			
 			outputText("\n\nGiving a hum of assent, you let the corners of your mouth crinkle upward in a smile as you're used.  It's starting to feel really good, like your throat really is a cunt, a horny, cock-hungry twat that needs to be plowed deep, long, and hard by her thick ebony dong.  It's dripping long ropes of wasted pre-seed into your belly, and it tingles with the pleasant promise of spooge to come.  You waggle your tongue around as best you can to enhance the sensation, getting hotter and hornier with each passing moment.");
-			if(player.tongueType > Tongue.HUMAN) outputText("  Your inhuman tongue slides further and further out, following the witch's bulging, pre-cum filled urethra towards her balls where it can curl around them, embracing them with slick, slippery saliva.  You can taste her unique flavor on her skin, and it makes you shudder with arousal.");
+			if(player.tongue.type > Tongue.HUMAN) outputText("  Your inhuman tongue slides further and further out, following the witch's bulging, pre-cum filled urethra towards her balls where it can curl around them, embracing them with slick, slippery saliva.  You can taste her unique flavor on her skin, and it makes you shudder with arousal.");
 			
 			outputText("\n\n\"<i>Fuck, I hope you're ready for a blessing,</i>\" the groaning futanari announces as she pulls out.  One of her hands stays on her delicious, spit-and-cum soaked dick, pumping through the frothy mix as she looks at your whorish, pursed lips.  The other stays in your hair, tingling almost constantly as you ready yourself for her anointment, the perfect gift you've been craving.  Your lust has risen to unbearable levels, making ");
 			if(virility) outputText("[eachCock] drip and drool your own seed onto the floor.  The heat inside you is so hot that you can't keep your ardor penned up, and it's slowly boiling out of your [balls] in a pleasure-filled orgasm that provides everything but relief.  You're sure that touching yourself would give you a proper orgasm, but you keep your hands where they belong - on her balls.");
@@ -3944,10 +3944,10 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 				if(player.biggestLactation() < 1) outputText("starting to lactate");
 				else outputText("lactating more");
 				outputText("?  Your belly is even bulging a little bit more than food can explain.\n");
-				temp = player.bRows();
-				while(temp > 0) {
-					temp--;
-					if(player.breastRows[temp].breastRating < 1) player.breastRows[temp].breastRating = 1;
+				var i:int = player.bRows();
+				while(i > 0) {
+					i--;
+					if(player.breastRows[i].breastRating < 1) player.breastRows[i].breastRating = 1;
 					
 				}
 				while(player.biggestLactation() < 1.5) {
@@ -3958,11 +3958,11 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			//3:
 			if(player.pregnancyIncubation == 216) {
 				outputText("\nYour breasts have definitely grown bigger, and they occasionally trickle milk.  More importantly than that, your stomach is bulging out in a small but unquestionable pot belly.  You're definitely pregnant.\n");
-				temp = player.bRows();
-				while(temp > 0) {
-					temp--;
-					if(player.breastRows[temp].breastRating < 20) player.breastRows[temp].breastRating++;
-					else player.breastRows[temp].breastRating += 0.5;
+				i = player.bRows();
+				while(i > 0) {
+					i--;
+					if(player.breastRows[i].breastRating < 20) player.breastRows[i].breastRating++;
+					else player.breastRows[i].breastRating += 0.5;
 				}
 				while(player.biggestLactation() < 1.5) {
 					player.boostLactation(.5);

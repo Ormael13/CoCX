@@ -277,14 +277,31 @@ private function talkWhitney():void {
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
-	
-	temp = rand(6);
-	if(temp == 0) outputText("It doesn't take long to find the independent farmer-girl.\n\n");
-	if(temp == 1) outputText("She's patrolling the edges of her farm with a wicked-looking scythe in hand.  She nods to you as you approach and fall in beside her.\n\n");
-	if(temp == 2) outputText("She's bent over in the pepper fields, pulling weeds left and right.  She stands up straight to wipe sweat from her fur and muzzle, and she gives you a friendly wave, encouraging you to come over and talk while she works.\n\n");
-	if(temp == 3) outputText("She's behind the barn, working a forge and repairing a few damaged farming tools.  Though her attention is focused on the metal on the anvil and the hammer in her hand, Whitney immediately turns and greets you, in between the blows of her hammer.\n\n");
-	if(temp == 4) outputText("She's rounding up a small herd of normal-looking cows.  Amazingly she has chosen to do so on foot, but is quick enough to keep up and corral her beasts.  Thankfully she's in the process of closing the gate to their pen when you finally catch up to her.  Whitney gives you a friendly smile as you come up to her and the two of you begin chatting immediately.\n\n");
-	if(temp == 5) outputText("She's leaning back against a thick tree with a wide-brimmed hat drooped low over her eyes.   You call out to her, thinking the dog-woman has fallen asleep, but her head snaps up and her alert eyes lock on to you immediately.  Maybe she wasn't dozing.  She calls out, \"<i>Come on over and 'ave a sit, I'm starved fer company!</i>\"  You settle in for a chat.\n\n");
+	switch (rand(6)) {
+		case 0:
+			outputText("It doesn't take long to find the independent farmer-girl.\n\n");
+			break;
+
+		case 1:
+			outputText("She's patrolling the edges of her farm with a wicked-looking scythe in hand.  She nods to you as you approach and fall in beside her.\n\n");
+			break;
+
+		case 2:
+			outputText("She's bent over in the pepper fields, pulling weeds left and right.  She stands up straight to wipe sweat from her fur and muzzle, and she gives you a friendly wave, encouraging you to come over and talk while she works.\n\n");
+			break;
+
+		case 3:
+			outputText("She's behind the barn, working a forge and repairing a few damaged farming tools.  Though her attention is focused on the metal on the anvil and the hammer in her hand, Whitney immediately turns and greets you, in between the blows of her hammer.\n\n");
+			break;
+
+		case 4:
+			outputText("She's rounding up a small herd of normal-looking cows.  Amazingly she has chosen to do so on foot, but is quick enough to keep up and corral her beasts.  Thankfully she's in the process of closing the gate to their pen when you finally catch up to her.  Whitney gives you a friendly smile as you come up to her and the two of you begin chatting immediately.\n\n");
+			break;
+
+		case 5:
+			outputText("She's leaning back against a thick tree with a wide-brimmed hat drooped low over her eyes.   You call out to her, thinking the dog-woman has fallen asleep, but her head snaps up and her alert eyes lock on to you immediately.  Maybe she wasn't dozing.  She calls out, \"<i>Come on over and 'ave a sit, I'm starved fer company!</i>\"  You settle in for a chat.\n\n");
+			break;
+	}
 	//[HAVE MILKER THAT ISN'T PLUGGED IN]
 	if(rand(4) == 0 && player.hasKeyItem("Breast Milker - Installed At Whitney's Farm") < 0) {
 		if(player.hasKeyItem("Breast Milker") >= 0) {
@@ -444,21 +461,16 @@ public function workFarm():void {
 	outputText("You ask Whitney if she could use help with anything and she points towards the pepper fields, \"<i>Ya mind gathering up some peppers for an hour or two?  I'm gonna need a few for supper tonight.  I'll even let you keep the best one!</i>\"\n\n");
 	outputText("You nod and borrow a basket, and set off towards the fields.  The next two hours are a blur of sweat and hard work as you prowl between the rows of plants, picking as many ripe red peppers as you can find.  When you finish, you drop the basket by Whitney's door, but not before taking your pepper.\n");
 	//(75% chance normal pepper, 25% chance \"<i>rare</i>\" pepper)
-	var pepper:Number = rand(4);
 	var itype:ItemType;
-	if(pepper <= 2) itype = consumables.CANINEP;
+	if(rand(4) <= 2) itype = consumables.CANINEP;
 	else {
-		temp = rand(5);
-		//-Oversized Pepper (+size, thickness)
-		if(temp == 0) itype = consumables.LARGEPP;
-		//-Double Pepper (+grows second cock or changes two cocks to dogcocks)
-		if(temp == 1) itype = consumables.DBLPEPP;
-		//-Black Pepper (Dark Fur, +corruption/libido)
-		if(temp == 2) itype = consumables.BLACKPP;
-		//-Knotty Pepper (+Knot + Cum Multiplier)
-		if(temp == 3) itype = consumables.KNOTTYP;
-		//-Bulbous Pepper (+ball size or fresh balls)
-		if(temp == 4) itype = consumables.BULBYPP;
+		itype = randomChoice(
+				consumables.LARGEPP, // Oversized Pepper (+size, thickness)
+				consumables.DBLPEPP, // Double Pepper (+grows second cock or changes two cocks to dogcocks)
+				consumables.BLACKPP, // Black Pepper (Dark Fur, +corruption/libido)
+				consumables.KNOTTYP, // Knotty Pepper (+Knot + Cum Multiplier)
+				consumables.BULBYPP  // Bulbous Pepper (+ball size or fresh balls)
+		);
 	}
 	trace("FARM SHIT: " + itype.shortName);
 	inventory.takeItem(itype, camp.returnToCampUseTwoHours);

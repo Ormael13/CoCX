@@ -945,7 +945,9 @@ public function followersCount():Number {
 	if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4) counter++;
 	if (flags[kFLAGS.FLOWER_LEVEL] >= 4) counter++;
 	if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) counter++;
-    for each (var npc:XXCNPC in _campFollowers){
+    if (flags[kFLAGS.SIDONIE_FOLLOWER] >= 1) counter++;
+    if (flags[kFLAGS.LUNA_FOLLOWER] >= 4) counter++;
+	for each (var npc:XXCNPC in _campFollowers){
         if(npc.isCompanion(XXCNPC.FOLLOWER)){counter++;}
     }
 	return counter;
@@ -973,6 +975,7 @@ public function loversCount():Number {
 	if (arianScene.arianFollower()) counter++;
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) counter++;
 	if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
+	if (flags[kFLAGS.DIANA_FOLLOWER] > 5) counter++;
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
 	if (followerHel()) counter++;
 	//Izma!
@@ -996,6 +999,7 @@ public function loversHotBathCount():Number {
 	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) counter++;
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) counter++;
 	if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
+	if (flags[kFLAGS.DIANA_FOLLOWER] > 5) counter++;
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
 	if (followerHel()) counter++;
 	if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
@@ -1005,6 +1009,7 @@ public function loversHotBathCount():Number {
 	if (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) counter++;
 	if (followerKiha()) counter++;
 	if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && flags[kFLAGS.JOY_COCK_SIZE] < 1) counter++;
+	if (flags[kFLAGS.SIDONIE_FOLLOWER] >= 1) counter++;
 	return counter;
 }
 
@@ -1043,16 +1048,32 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 	//AMILY
 	if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0 && !descOnly) {
 		outputText("Amily is currently strolling around your camp, ");
-		temp = rand(6);
-		if(temp == 0) {
-			outputText("dripping water and stark naked from a bath in the stream");
-			if(player.hasStatusEffect(StatusEffects.CampRathazul)) outputText(".  Rathazul glances over and immediately gets a nosebleed");
+		switch (rand(6)) {
+			case 0:
+				outputText("dripping water and stark naked from a bath in the stream");
+				if (player.hasStatusEffect(StatusEffects.CampRathazul)) outputText(".  Rathazul glances over and immediately gets a nosebleed");
+
+				break;
+
+			case 1:
+				outputText("slouching in the shade of some particularly prominent rocks, whittling twigs to create darts for her blowpipe");
+				break;
+
+			case 2:
+				outputText("dipping freshly-made darts into a jar of something that looks poisonous");
+				break;
+
+			case 3:
+				outputText("eating some of your supplies");
+				break;
+
+			case 4:
+				outputText("and she flops down on her nest to have a rest");
+				break;
+			default:
+				outputText("peeling the last strips of flesh off of an imp's skull and putting it on a particularly flat, sun-lit rock to bleach as a trophy");
+				break;
 		}
-		else if(temp == 1) outputText("slouching in the shade of some particularly prominent rocks, whittling twigs to create darts for her blowpipe");
-		else if(temp == 2) outputText("dipping freshly-made darts into a jar of something that looks poisonous");
-		else if(temp == 3) outputText("eating some of your supplies");
-		else if(temp == 4) outputText("and she flops down on her nest to have a rest");
-		else outputText("peeling the last strips of flesh off of an imp's skull and putting it on a particularly flat, sun-lit rock to bleach as a trophy");
 		outputText(".\n\n");
 		buttons.add("Amily", amilyScene.amilyFollowerEncounter);
 	}
@@ -1078,7 +1099,10 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		buttons.add( "Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu);
 	}
 	//Diana
-	buttons.add("???").disable("Let me heal you.");
+	if (flags[kFLAGS.DIANA_FOLLOWER] > 5) {
+		outputText("Diana is resting next to her many medical tools and medicines.\n\n");
+		buttons.add("Diana", SceneLib.dianaScene.mainCampMenu);
+	}
 	//Etna
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) {
 		outputText("Etna is resting lazily on a rug in a very cat-like manner. She’s looking at you always with this adorable expression of hers, her tail wagging expectantly at your approach.\n\n");
@@ -1228,7 +1252,6 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 	}
 	//MARBLE
 	if(player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) {
-		temp = rand(5);
 		outputText("A second bedroll rests next to yours; a large two handed hammer sometimes rests against it, depending on whether or not its owner needs it at the time.  ");
 		//Normal Murbles
 		if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 4) outputText("Marble isn’t here right now; she’s still off to see her family.");
@@ -1276,19 +1299,35 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 				}
 			}
 		}
-		//(Choose one of these at random to display each hour)
-		else if(temp == 0) outputText("Marble herself has gone off to Whitney's farm to get milked right now.");
-		else if(temp == 1) outputText("Marble herself has gone off to Whitney's farm to do some chores right now.");
-		else if(temp == 2) outputText("Marble herself isn't at the camp right now; she is probably off getting supplies, though she'll be back soon enough.");
-		else if(temp == 3) {
-			outputText("Marble herself is resting on her bedroll right now.");
+		else{
+			//(Choose one of these at random to display each hour)
+			var c:int = rand(5);
+			switch (c) {
+				case 0:
+					outputText("Marble herself has gone off to Whitney's farm to get milked right now.");
+					break;
+
+				case 1:
+					outputText("Marble herself has gone off to Whitney's farm to do some chores right now.");
+					break;
+
+				case 2:
+					outputText("Marble herself isn't at the camp right now; she is probably off getting supplies, though she'll be back soon enough.");
+					break;
+
+				case 3:
+					outputText("Marble herself is resting on her bedroll right now.");
+					break;
+
+				case 4:
+					outputText("Marble herself is wandering around the camp right now.");
+					break;
+			}
+			if(c < 3) {
+				outputText("  You're sure she'd be back in moments if you needed her.");
+			}
 		}
-		else if(temp == 4) {
-			outputText("Marble herself is wandering around the camp right now.");
-		}
-		if(temp < 3) {
-			outputText("  You're sure she'd be back in moments if you needed her.");
-		}
+
 		//Out getting family
 		//else outputText("Marble is out in the wilderness right now, searching for a relative.");
 		outputText("\n\n");
@@ -1535,7 +1574,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 		buttons.add( "Shouldra", shouldraFollower.shouldraFollowerScreen).hint("Talk to Shouldra. She is currently residing in your body.");
 	}
 	//Ayane
-	if (flags[kFLAGS.AYANE_FOLLOWER] == 2) {
+	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) {
 		outputText("Ayane is tiddying your items to make sure everything is clean and well organised.\n\n");
 		buttons.add( "Ayane", SceneLib.ayaneFollower.ayaneCampMenu).hint("Visit Ayane a kitsune priestess of Taoth.");
 	}
@@ -1547,7 +1586,29 @@ public function campFollowers(descOnly:Boolean = false):void {
 		buttons.add( "Holli", HolliPure.treeMenu).hint("Holli is in her tree at the edges of your camp.  You could go visit her if you want.");
 	}
 	//Michiko
-	buttons.add("???").disable("Knowledge is Power.");
+	//buttons.add("???").hint("Knowledge is Power.");
+	//Sidonie
+	if (flags[kFLAGS.SIDONIE_FOLLOWER] == 1) {
+		if (model.time.hours >= 6 && model.time.hours <= 8) outputText("Sidonie has taken a table out to have breakfast outside. By you can see, she’s munching a large bowl filled with oath, milk and strawberries.");
+		else if (model.time.hours <= 9) outputText("On a far part of the camp, you can distinguish Sidonie’s figure. Seems like she’s using the early morning to cut some long planks into smaller ones, as the unmistakable sound of saw on wood makes evident.");
+		else if (model.time.hours <= 10) outputText("The equine carpenter is looking at a book containing some furniture designs. She’s probably looking for ideas for her next piece.");
+		else if (model.time.hours <= 12) outputText("Near her tent, your equine friend is busy at work, currently sanding some pieces.");
+		else if (model.time.hours <= 13) outputText("Sidonie probably went to take her meal, given the hour. The recognizable smell of home-made food coming from her tent confirms quickly your suspicions.");
+		else if (model.time.hours <= 15) outputText("Some furniture pieces lie scattered near the equine carpenter’s workspace, who is varnishing them. A few finished ones are a bit away.");
+		else if (model.time.hours <= 16) outputText("Looks like Sidonie went to some place to sell her furniture. Se may return in an hour or so.");
+		else if (model.time.hours <= 18) outputText("Your equine friend is currently relaxing inside her tent, if you’d like to come in and spend some time with her.");
+		else if (model.time.hours <= 20) outputText("Oddly enough, Sidonie is picking some sandalwood sawdust and putting it on boiling water. Not matter the reason, the smell of the resulting liquid is certainly wonderful.");
+		else outputText("The horse-girl is having her dinner, as you manage to spot from outside. Seems like she’s having a hot drink with some bread.");
+		outputText("\n\n");
+		buttons.add( "Sidonie", SceneLib.sidonieFollower.mainSidonieMenu).hint("Visit Sidonie.");
+	}
+	//Luna
+	if (flags[kFLAGS.LUNA_FOLLOWER] >= 4) {
+		outputText("Luna wanders around the camp, doing her chores as usual.");
+		if (flags[kFLAGS.LUNA_JEALOUSY] >= 25) outputText(" She looks at you from time to time, as if expecting you to notice her.");
+		outputText("\n\n");
+		buttons.add( "Luna", SceneLib.lunaFollower.mainLunaMenu).hint("Visit Luna.");
+	}
     for each(var npc:XXCNPC in _campFollowers){
         npc.campDescription(buttons,XXCNPC.FOLLOWER);
     }
@@ -1578,7 +1639,7 @@ private function campActions():void {
 	addButton(5, "Build", campBuildingSim).hint("Check your camp build options.");
 	if (player.hasPerk(PerkLib.JobElementalConjurer) >= 0 || player.hasPerk(PerkLib.JobGolemancer) >= 0) addButton(6, "Winions", campWinionsArmySim).hint("Check your options for making some Winions.");
 	else addButtonDisabled(6, "Winions", "You need to be able to make some minions that fight for you to use this option like elementals or golems...");
-	if (player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(7, "Heal", spellHealcamp).hint("Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  \n\nMana Cost: 30");
+	if (player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(7, "Heal", spellHealcamp).hint("Heal will attempt to use white magic to instantly close your wounds and restore your body.  \n\nMana Cost: 30");
 	//addButton(8, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
 	if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) addButton(8, "Fishery", VisitFishery).hint("Visit Fishery.");
 	addButton(9, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
@@ -1678,67 +1739,24 @@ public function spellHealcamp():void {
 		doNext(campActions);
 		return;
 	}
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 	useMana(30);
-	outputText("You focus on your body and its desire to end pain, trying to draw on your arousal without enhancing it.\n");
-	//30% backfire!
-	var backfire:int = 30;
-	if (player.findPerk(PerkLib.FocusedMind) >= 0) backfire = 20;
-	backfire -= (player.inte * 0.15);
-	if (backfire < 15) backfire = 15;
-	else if (backfire < 5 && player.findPerk(PerkLib.FocusedMind) >= 0) backfire = 5;
-	if(rand(100) < backfire) {
-		outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ");
-		if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.");
-		if(player.gender == 1) {
-			if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.");
-			else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.");
-		}
-		if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.");
-		if(player.gender == 3) outputText(vaginaDescript(0) + " and [cocks] overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
-		dynStats("lib", .25, "lus", 15);
+	var healing:int = combat.scalingBonusIntelligence();
+	//healing *= spellMod();
+	if (player.unicornScore() >= 5) healing *= ((player.unicornScore() - 4) * 0.5);
+	if (player.alicornScore() >= 6) healing *= ((player.alicornScore() - 5) * 0.5);
+	if (player.armorName == "skimpy nurse's outfit") healing *= 1.2;
+	//Determine if critical heal!
+	var crit:Boolean = false;
+	var critHeal:int = 5;
+	if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) critHeal += (player.inte - 50) / 5;
+	if (rand(100) < critHeal) {
+		crit = true;
+		healing *= 1.75;
 	}
-	else {
-		temp = 0;
-		if (player.inte >= 21 && player.inte < 41) temp += (player.inte / 2 + rand((player.inte * 3) / 4));
-		if (player.inte >= 41 && player.inte < 61) temp += ((player.inte * 2) / 3 + rand(player.inte));
-		if (player.inte >= 61 && player.inte < 81) temp += ((player.inte * 5) / 6 + rand(player.inte * 1.25));
-		if (player.inte >= 81 && player.inte < 101) temp += (player.inte + rand(player.inte * 1.5));
-		if (player.inte >= 101 && player.inte < 151) temp += ((player.inte * 1.25) + rand(player.inte * 1.75));
-		if (player.inte >= 151 && player.inte < 201) temp += ((player.inte * 1.5) + rand(player.inte * 2));
-		if (player.inte >= 201 && player.inte < 251) temp += ((player.inte * 1.75) + rand(player.inte * 2.25));
-		if (player.inte >= 251 && player.inte < 301) temp += ((player.inte * 2) + rand(player.inte * 2.5));
-		if (player.inte >= 301 && player.inte < 351) temp += ((player.inte * 2.25) + rand(player.inte * 2.75));
-		if (player.inte >= 351 && player.inte < 401) temp += ((player.inte * 2.5) + rand(player.inte * 3));
-		if (player.inte >= 401 && player.inte < 451) temp += ((player.inte * 2.75) + rand(player.inte * 3.25));
-		if (player.inte >= 451 && player.inte < 501) temp += ((player.inte * 3) + rand(player.inte * 3.5));
-		if (player.inte >= 501 && player.inte < 551) temp += ((player.inte * 3.25) + rand(player.inte * 3.75));
-		if (player.inte >= 551 && player.inte < 601) temp += ((player.inte * 3.5) + rand(player.inte * 4));
-		if (player.inte >= 601 && player.inte < 651) temp += ((player.inte * 3.75) + rand(player.inte * 4.25));
-		if (player.inte >= 651 && player.inte < 701) temp += ((player.inte * 4) + rand(player.inte * 4.5));
-		if (player.inte >= 701 && player.inte < 751) temp += ((player.inte * 4.25) + rand(player.inte * 4.75));
-		if (player.inte >= 751 && player.inte < 801) temp += ((player.inte * 4.5) + rand(player.inte * 5));
-		if (player.inte >= 801 && player.inte < 851) temp += ((player.inte * 4.75) + rand(player.inte * 5.25));
-		if (player.inte >= 851 && player.inte < 901) temp += ((player.inte * 5) + rand(player.inte * 5.5));
-		if (player.inte >= 901 && player.inte < 951) temp += ((player.inte * 5.25) + rand(player.inte * 5.75));
-		if (player.inte >= 951) temp += ((player.inte * 5.5) + rand(player.inte * 6));
-		else temp += (player.inte/3 + rand(player.inte/2));
-		//temp *= spellMod();
-		if (player.unicornScore() >= 5) temp *= ((player.unicornScore() - 4) * 0.5);
-		if (player.alicornScore() >= 6) temp *= ((player.alicornScore() - 5) * 0.5);
-		if (player.armorName == "skimpy nurse's outfit") temp *= 1.2;
-		//Determine if critical heal!
-		//var crit:Boolean = false;
-		//var critHeal:int = 5;
-		//if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) critHeal += (player.inte - 50) / 5;
-		//if (rand(100) < critHeal) {
-			//crit = true;
-			//temp *= 1.75;
-		//}
-		temp = Math.round(temp);
-		outputText("You flush with success as your wounds begin to knit <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
-		HPChange(temp,false);
-	}
+	healing = Math.round(healing);
+	outputText("You chant a magical song of healing and recovery and your wounds start knitting themselves shut in response. <b>(<font color=\"#008000\">+" + healing + "</font>)</b>.");
+	if (crit == true) outputText(" <b>*Critical Heal!*</b>");
+	HPChange(healing,false);
 	outputText("\n\n");
 	statScreenRefresh();
 	flags[kFLAGS.SPELLS_CAST]++;
@@ -2213,6 +2231,12 @@ CoC.instance.saves.saveGame(player.slotName);
 			sleepRecovery(false);
 			return;
 		}
+		//Full Moon
+		if (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0 && flags[kFLAGS.LUNA_FOLLOWER] < 9 && flags[kFLAGS.LUNA_AFFECTION] >= 50 && flags[kFLAGS.SLEEP_WITH] == "Luna" && player.gender > 0) {
+			SceneLib.lunaFollower.fullMoonEvent();
+			sleepRecovery(false);
+			return;
+		}
 		/******************************************************************/
 		/*       SLEEP WITH SYSTEM GOOOO                                  */
 		/******************************************************************/
@@ -2235,6 +2259,14 @@ CoC.instance.saves.saveGame(player.slotName);
 		else if(flags[kFLAGS.SLEEP_WITH] == "Arian" && arianScene.arianFollower()) {
 			arianScene.sleepWithArian();
 			return;
+		}
+		else if(flags[kFLAGS.SLEEP_WITH] == "Luna" && flags[kFLAGS.LUNA_FOLLOWER] >= 4) {
+			outputText("You head to bed, Luna following you. ");
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0 && flags[kFLAGS.LUNA_FOLLOWER] >= 9) {
+				SceneLib.lunaFollower.sleepingFullMoon();
+				return;
+			}
+			else outputText("Luna hugs you tightly, almost possessively so as you both doze off to sleep.");
 		}
 		else if (flags[kFLAGS.SLEEP_WITH] == "Ember" && flags[kFLAGS.EMBER_AFFECTION] >= 75 && followerEmber()) {
 			if (flags[kFLAGS.TIMES_SLEPT_WITH_EMBER] > 3) {
@@ -2488,6 +2520,7 @@ private function dungeonFound():Boolean { //Returns true as soon as any known du
 	if (SceneLib.dungeons.checkPhoenixTowerClear()) return true;
 	if (flags[kFLAGS.HIDDEN_CAVE_FOUND] > 0) return true;
 	if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 0) return true;
+	if (flags[kFLAGS.LUMI_MET] > 0)  return true;
 	if (flags[kFLAGS.ANZU_PALACE_UNLOCKED] > 0)  return true;
 	return false;
 }
@@ -2604,6 +2637,7 @@ private function dungeons():void {
 	if (SceneLib.dungeons.checkPhoenixTowerClear()) addButton(6, "Phoenix Tower", dungeonH.returnToHeliaDungeon).hint("Re-visit the tower you went there as part of Helia's quest." + (SceneLib.dungeons.checkPhoenixTowerClear() ? "\n\nYou've helped Helia in the quest and resolved the problems. \n\nCLEARED!" : ""));
 	if (flags[kFLAGS.HIDDEN_CAVE_FOUND] > 0) addButton(10, "Hidden Cave", dungeonHC.enterDungeon).hint("Visit the hidden cave in the hills." + (SceneLib.dungeons.checkHiddenCaveClear() ? "\n\nCLEARED!" : ""));
 	if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 0) addButton(11, "Den of Desire", dungeonDD.enterDungeon).hint("Visit the den in blight ridge." + (SceneLib.dungeons.checkDenOfDesireClear() ? "\n\nCLEARED!" : ""));
+	if (flags[kFLAGS.LUMI_MET] > 0) addButton(12, "Lumi's Lab", SceneLib.lumi.lumiEncounter).hint("Visit Lumi's laboratory.");
 	if (flags[kFLAGS.ANZU_PALACE_UNLOCKED] > 0) addButton(13, "Anzu's Palace", dungeonAP.enterDungeon).hint("Visit the palace in the Glacial Rift where Anzu the avian deity resides.");
 	addButton(14, "Back", places);
 }
@@ -3168,7 +3202,6 @@ private function promptSaveUpdate():void {
 		flags[kFLAGS.GIACOMO_NOTICES_WORMS] = 0;
 		flags[kFLAGS.PHOENIX_ENCOUNTERED] = 0;
 		flags[kFLAGS.PHOENIX_WANKED_COUNTER] = 0;
-		if (CoC.instance.giacomo > 0) flags[kFLAGS.GIACOMO_MET] = 1;
 		flags[kFLAGS.MOD_SAVE_VERSION] = 4;
 		doCamp();
 		return;
@@ -3415,9 +3448,9 @@ private function promptSaveUpdate():void {
 	}
 /*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 19) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 20;
-		if (player.findPerk(PerkLib.ElementalConjurerMindAndBodyResolve) >= 0) {
-			player.removePerk(PerkLib.ElementalConjurerMindAndBodyResolve);
-			player.createPerk(PerkLib.ElementalConjurerMindAndBodyDedication, 0, 0, 0, 0);
+		if (player.findPerk(PerkLib.JobBarbarian) >= 0) {
+			player.removePerk(PerkLib.JobBarbarian);
+			player.createPerk(PerkLib.JobSwordsman, 0, 0, 0, 0);
 		}
 		clearOutput();
 		outputText("Switching one perk...if needed.");
@@ -3519,7 +3552,7 @@ private function eyesColorSelection():void {
 
 private function chooseEyesColorSaveUpdate(color:String):void {
 	clearOutput();
-	player.eyeColor = color;
+	player.eyes.colour = color;
 	outputText("You now have " + color + " eyes. You will be returned to your camp now and you can continue your usual gameplay.");
 	doNext(doCamp);
 }

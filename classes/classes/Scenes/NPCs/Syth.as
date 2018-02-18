@@ -164,8 +164,8 @@ public class Syth extends Monster
 			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 8*12;
-			this.hipRating = Hips.RATING_SLENDER;
-			this.buttRating = Butt.RATING_TIGHT;
+			this.hips.type = Hips.RATING_SLENDER;
+			this.butt.type = Butt.RATING_TIGHT;
 			this.lowerBody = LowerBody.SALAMANDER;
 			this.hairColor = "white";
 			this.hairLength = 1;
@@ -188,7 +188,7 @@ public class Syth extends Monster
 					add(weapons.DBFSWO,1/50).
 					add(armors.LEATHRA,1/20).
 					add(consumables.SALAMFW,0.7);
-			this.wingType = Wings.BAT_LIKE_LARGE_2;
+			this.wings.type = Wings.BAT_LIKE_LARGE_2;
 			this.tailType = Tail.SALAMANDER;
 			this.tailRecharge = 0;
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);

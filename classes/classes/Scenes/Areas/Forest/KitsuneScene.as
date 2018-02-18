@@ -2267,7 +2267,7 @@ public class KitsuneScene extends BaseContent
 		{
 			clearOutput();
 			if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] == 0) {
-				if (flags[kFLAGS.KITSUNE_SHRINE_VISIT] > 0 && player.earType == Ears.FOX && player.tailCount >= 2) {
+				if (flags[kFLAGS.KITSUNE_SHRINE_VISIT] > 0 && player.ears.type == Ears.FOX && player.tailCount >= 2) {
 					spriteSelect(SpriteDb.s_ayane);
 					outputText("As you wander the woods you spot a floating blue flame yet again. Being a kitsune yourself you’ve grown wise to that tactic, and go straight for the trickster herself. Surprisingly, it’s not one of the kitsune sisters you were expecting, but a different person. She wears a formal kimono and has hair as white as snow. When she notices you, she starts by giving you the classic \"<i>Hello adventurer would you like to...</i>\" line until she realises you also have a pair of fox ears and multiple tails. There is an awkward silence as she sizes you up, then sighs.\n\n");
 					outputText("\"<i>My apologies, I heard there was a human wandering the woods as of late, and I couldn’t stop myself from thinking of a potential meal. My name is Ayane. I don’t recall meeting you within the region, are you new?</i>\"\n\n");
@@ -2357,7 +2357,7 @@ public class KitsuneScene extends BaseContent
 			var tailzBefore:int = player.tailCount;
 			clearOutput();
 			outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to continue fighting against the forces of corruption that permeate the land.\n\n");
-			if (player.hasItem(consumables.FOXJEWL) && player.earType == Ears.FOX && player.tailType == Tail.FOX) {
+			if (player.hasItem(consumables.FOXJEWL) && player.ears.type == Ears.FOX && player.tailType == Tail.FOX) {
 				var notANineTail:Boolean = player.findPerk(PerkLib.CorruptedNinetails) < 0
 										   || player.perkv4(PerkLib.CorruptedNinetails) > 0;
 				if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && player.tailCount >= 2 && player.findPerk(PerkLib.StarSphereMastery) < 0) {

@@ -71,7 +71,7 @@ import classes.BodyParts.Wings;
 
 		public function humanizeEars():void {
 			outputText("\n\nOuch, your head aches! It feels like your ears are being yanked out of your head, and when you reach up to hold your aching noggin, you find they've vanished! Swooning and wobbling with little sense of balance, you nearly fall a half-dozen times before <b>a pair of normal, human ears sprout from the sides of your head.</b> You had almost forgotten what human ears felt like!");
-			player.earType = Ears.HUMAN;
+			player.ears.type = Ears.HUMAN;
 			changes++;
 		}
 
@@ -82,20 +82,20 @@ import classes.BodyParts.Wings;
 		}
 
 		public function humanizeEyes():void {
-			if (player.eyeType == Eyes.BLACK_EYES_SAND_TRAP) {
+			if (player.eyes.type == Eyes.BLACK_EYES_SAND_TRAP) {
 				outputText("\n\nYou feel a twinge in your eyes and you blink.  It feels like black cataracts have just fallen away from you, and you know without needing to see your reflection that your eyes have gone back to looking human.");
 			}
 			else {
 				outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.");
-				if (player.eyeType == Eyes.FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>");
+				if (player.eyes.type == Eyes.FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>");
 				outputText("  <b>You have normal, humanoid eyes again.</b>");
 			}
-			player.eyeType = Eyes.HUMAN;
+			player.eyes.type = Eyes.HUMAN;
 			changes++;
 		}
 
 		public function humanizeArms(degargoylize:Boolean=false):void {
-			switch (player.armType) {
+			switch (player.arms.type) {
 				case Arms.HUMAN:
 					return;
 				case Arms.WOLF:
@@ -136,6 +136,7 @@ import classes.BodyParts.Wings;
 					break;
 				case Arms.HARPY:
 				case Arms.PHOENIX:
+				case Arms.AVIAN:
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your feathery arms are shedding their feathery coating.  The wing-like shape your arms once had is gone in a matter of moments, leaving [skin] behind.");
 					break;
 				case Arms.GARGOYLE:
@@ -152,25 +153,25 @@ import classes.BodyParts.Wings;
 		}
 
 		public function removeWings(degargoylize:Boolean=false):void {
-			if (player.wingType == Wings.GARGOYLE_LIKE_LARGE && !degargoylize) return;
-			if (player.wingType == Wings.NONE) return;
+			if (player.wings.type == Wings.GARGOYLE_LIKE_LARGE && !degargoylize) return;
+			if (player.wings.type == Wings.NONE) return;
 			switch(rand(2)) {
 				case 0:
-					outputText("\n\nSensation fades from your " + player.wingDesc + " wings slowly but surely, leaving them dried out husks that break off to fall on the ground. Your back closes up to conceal the loss, as smooth and unbroken as the day you entered the portal.");
+					outputText("\n\nSensation fades from your " + player.wings.desc + " wings slowly but surely, leaving them dried out husks that break off to fall on the ground. Your back closes up to conceal the loss, as smooth and unbroken as the day you entered the portal.");
 					break;
 				case 1:
 					outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your shoulder-blades.  After a moment the pain passes, though your wings are gone!");
 					break;
 			}
-			player.wingType = Wings.NONE;
-			player.wingDesc = "non-existant";
+			player.wings.type = Wings.NONE;
+			player.wings.desc = "non-existant";
 			changes++;
 		}
 
 		public function updateGills(newGillType:int = Gills.NONE):int
 		{
 			trace("Called updateGills(" + newGillType + ")");
-			var oldgillType:int = player.gillType;
+			var oldgillType:int = player.gills.type;
 			if (oldgillType == newGillType) return 0; // no change
 
 			setGillType(newGillType);
@@ -204,7 +205,7 @@ import classes.BodyParts.Wings;
 						           +" hardly notice anything at all. You redress carefully.");
 					}
 					outputText("\n\n<b>You now have feathery gills!</b>");
-					return 1; // Gained gills or gillType changed
+					return 1; // Gained gills or gills.type changed
 
 				case Gills.FISH:
 					if (oldgillType == Gills.ANEMONE) {
@@ -220,12 +221,12 @@ import classes.BodyParts.Wings;
 						           +" that your neck has grown gills allowing you to breathe under water as if you were standing on land.");
 					}
 					outputText("\n\n<b>You now have fish like gills!</b>");
-					return 1; // Gained gills or gillType changed
+					return 1; // Gained gills or gills.type changed
 
 				default:
-					player.gillType = oldgillType;
+					player.gills.type = oldgillType;
 					changes--;
-					trace("ERROR: Unimplemented new gillType (" + newGillType + ") used");
+					trace("ERROR: Unimplemented new gills.type (" + newGillType + ") used");
 					return 0; // failsafe, should hopefully never happen
 			}
 		}
@@ -281,7 +282,7 @@ import classes.BodyParts.Wings;
 	// =================================
 
 	public function setAntennae(antennae:int):Boolean {
-		return setBodyPartType("antennae", METAMORPH_ANTENNAE, antennae);
+		return setBodyPartType("antennae.type", METAMORPH_ANTENNAE, antennae);
 	}
 	private const METAMORPH_ANTENNAE:Object = createMapFromPairs([
 		[Antennae.BEE, StatusEffects.UnlockedBeeAntennae],
@@ -289,9 +290,10 @@ import classes.BodyParts.Wings;
 		[Antennae.MANTIS, StatusEffects.UnlockedMantisAntennae],
 	]);
 	public function setArmType(armType:int):Boolean {
-		return setBodyPartType("armType", METAMORPH_ARMS, armType);
+		return setBodyPartType("arms.type", METAMORPH_ARMS, armType);
 	}
 	private const METAMORPH_ARMS:Object = createMapFromPairs([
+		[Arms.AVIAN, null],
 		[Arms.BEE, StatusEffects.UnlockedBeeArms],
 		[Arms.CAT, null],
 		[Arms.DRAGON, StatusEffects.UnlockedDraconicArms],
@@ -321,9 +323,10 @@ import classes.BodyParts.Wings;
 	]);
 
 	public function setEarType(earType:int):Boolean {
-		return setBodyPartType("earType", METAMORPH_EARS, earType);
+		return setBodyPartType("ears.type", METAMORPH_EARS, earType);
 	}
 	private const METAMORPH_EARS:Object = createMapFromPairs([
+		[Ears.AVIAN, null],
 		[Ears.BUNNY, null],
 		[Ears.CAT, null],
 		[Ears.COW, StatusEffects.UnlockedCowEars],
@@ -355,11 +358,11 @@ import classes.BodyParts.Wings;
 	]);
 
 	public function setEyeType(eyeType:int):Boolean {
-		return setBodyPartType("eyeType", METAMORPH_EYES, eyeType);
+		return setBodyPartType("eyes.type", METAMORPH_EYES, eyeType);
 	}
 	public function setEyeTypeAndColor(eyeType:int, color:String):Boolean {
-		player.eyeColor = color;
-		return setBodyPartType("eyeType", METAMORPH_EYES, eyeType);
+		player.eyes.colour = color;
+		return setBodyPartType("eyes.type", METAMORPH_EYES, eyeType);
 	}
 	private const METAMORPH_EYES:Object = createMapFromPairs([
 		[Eyes.BLACK_EYES_SAND_TRAP, null],
@@ -384,6 +387,7 @@ import classes.BodyParts.Wings;
 		return setBodyPartType("faceType", METAMORPH_FACES, faceType);
 	}
 	private const METAMORPH_FACES:Object = createMapFromPairs([
+		[Face.AVIAN, null],
 		[Face.BOAR, null],
 		[Face.BUCKTEETH, null],
 		[Face.BUCKTOOTH, null],
@@ -423,11 +427,12 @@ import classes.BodyParts.Wings;
 		[Face.SNAKE_FANGS, StatusEffects.UnlockedSnakeFangs],
 		[Face.SPIDER_FANGS, StatusEffects.UnlockedSpiderFangs],
 		[Face.WOLF, null],
+		[Face.WOLF_FANGS, null],
 		[Face.YETI_FANGS, null],
 	]);
 
 	public function setGillType(gillType:int):Boolean {
-		return setBodyPartType("gillType", METAMORPH_GILLS, gillType);
+		return setBodyPartType("gills.type", METAMORPH_GILLS, gillType);
 	}
 	private const METAMORPH_GILLS:Object = createMapFromPairs([
 		[Gills.ANEMONE, null],
@@ -456,15 +461,16 @@ import classes.BodyParts.Wings;
 
 	/**
 	 * @param hornType HORN_TYPE_xxxx
-	 * @param hornCount New horn count; -1 if "don't change"
+	 * @param hornCount New horns count; -1 if "don't change"
 	 */
 	public function setHornType(hornType:int, hornCount:int = -1):Boolean {
-		var a:Boolean = setBodyPartType("hornType", METAMORPH_HORNS, hornType);
-		if (hornCount >= 0) player.horns = hornCount;
+		var a:Boolean = setBodyPartType("horns.type", METAMORPH_HORNS, hornType);
+		if (hornCount >= 0) player.horns.count = hornCount;
 		return a;
 	}
 	private const METAMORPH_HORNS:Object = createMapFromPairs([
 		[Horns.ANTLERS, null],
+		[Horns.BICORN, null],
 		[Horns.COW_MINOTAUR, StatusEffects.UnlockedCowMinotaurHorns],
 		[Horns.DEMON, StatusEffects.UnlockedDemonHorns],
 		[Horns.DRACONIC_X2, StatusEffects.UnlockedDraconicX2],
@@ -484,6 +490,7 @@ import classes.BodyParts.Wings;
 		return setBodyPartType("lowerBody", METAMORPH_LOWER_BODIES, lowerBody);
 	}
 	private const METAMORPH_LOWER_BODIES:Object = createMapFromPairs([
+		[LowerBody.AVIAN, null],
 		[LowerBody.BEE, StatusEffects.UnlockedBeeLegs],
 		[LowerBody.BUNNY, null],
 		[LowerBody.CAT, null],
@@ -529,7 +536,7 @@ import classes.BodyParts.Wings;
 	]);
 
 	public function setRearBody(rearBody:int):Boolean {
-		return setBodyPartType("rearBody", METAMORPH_REAR_BODIES, rearBody);
+		return setBodyPartType("rearBody.type", METAMORPH_REAR_BODIES, rearBody);
 	}
 	private const METAMORPH_REAR_BODIES:Object = createMapFromPairs([
 		[RearBody.BEHEMOTH, null],
@@ -541,10 +548,11 @@ import classes.BodyParts.Wings;
 		[RearBody.ORCA_BLOWHOLE, StatusEffects.UnlockedOrcaBlowhole],
 		[RearBody.RAIJU_MANE, StatusEffects.UnlockedRaijuMane],
 		[RearBody.SHARK_FIN, StatusEffects.UnlockedSharkFin],
+		[RearBody.WOLF_COLLAR, null],
 	]);
 
 	public function setTongueType(tongueType:int):Boolean {
-		return setBodyPartType("tongueType", METAMORPH_TONGUES, tongueType);
+		return setBodyPartType("tongue.type", METAMORPH_TONGUES, tongueType);
 	}
 	// Here we override flavour text because it is 'tonuge' in StatusEffect id
 	// but changing that would break the saves
@@ -556,6 +564,7 @@ import classes.BodyParts.Wings;
 		[Tongue.HUMAN, [null, "Human Tongue"]],
 		[Tongue.ELF, [StatusEffects.UnlockedElfTongue, "Elf Tongue"]],
 		[Tongue.SNAKE, [StatusEffects.UnlockedSnakeTongue, "Snake Tongue"]],
+		[Tongue.DOG, [null, "Dog Tongue"]],
 	]);
 
 	/**
@@ -563,10 +572,10 @@ import classes.BodyParts.Wings;
 	 * @param tailCount new tail count, -1 means "do not change"
 	 */
 	public function setTailType(tailType:int, tailCount:int = -1):Boolean {
-		var a:Boolean = setBodyPartType("tailType", METAMORPH_TAILS, tailType);
+		var a:Boolean = setBodyPartType("tail.type", METAMORPH_TAILS, tailType);
 		if (tailCount < 0) return a;
 		if (tailType == Tail.FOX) {
-			var b:Boolean = setBodyPartType("tailCount", METAMORPH_FOX_TAILS, tailCount);
+			var b:Boolean = setBodyPartType("tail.count", METAMORPH_FOX_TAILS, tailCount);
 			return a || b;
 		} else {
 			player.tailCount = tailCount;
@@ -574,6 +583,7 @@ import classes.BodyParts.Wings;
 		}
 	}
 	private const METAMORPH_TAILS:Object     = createMapFromPairs([
+		[Tail.AVIAN, null],
 		[Tail.BEE_ABDOMEN, StatusEffects.UnlockedBeeTail],
 		[Tail.BEHEMOTH, null],
 		[Tail.CAT, null],
@@ -621,8 +631,8 @@ import classes.BodyParts.Wings;
 	]);
 
 	public function setWingType(wingType:int, wingDesc:String):Boolean {
-		var a:Boolean   = setBodyPartType("wingType", METAMORPH_WINGS, wingType);
-		player.wingDesc = wingDesc;
+		var a:Boolean   = setBodyPartType("wings.type", METAMORPH_WINGS, wingType);
+		player.wings.desc = wingDesc;
 		return a;
 	}
 	private const METAMORPH_WINGS:Object = createMapFromPairs([
@@ -635,6 +645,7 @@ import classes.BodyParts.Wings;
 		[Wings.DRACONIC_LARGE, StatusEffects.UnlockedDraconicWingsLarge],
 		[Wings.DRACONIC_SMALL, StatusEffects.UnlockedDraconicWingsSmall],
 		[Wings.FEATHERED_ALICORN, null],
+		[Wings.FEATHERED_AVIAN, null],
 		[Wings.FEATHERED_LARGE, StatusEffects.UnlockedHarpyWings],
 		[Wings.FEATHERED_PHOENIX, StatusEffects.UnlockedPhoenixWings],
 		[Wings.FEY_DRAGON_WINGS, null],
@@ -647,6 +658,7 @@ import classes.BodyParts.Wings;
 		[Wings.MANTIS_LIKE_LARGE, StatusEffects.UnlockedMantisWingsLarge],
 		[Wings.MANTIS_LIKE_LARGE_2, null],
 		[Wings.MANTIS_LIKE_SMALL, StatusEffects.UnlockedMantisWingsSmall],
+		[Wings.NIGHTMARE, null],
 		[Wings.NONE, null],
 		[Wings.PLANT, null],
 		[Wings.SHARK_FIN, null],
@@ -659,9 +671,18 @@ import classes.BodyParts.Wings;
 	 * @return true if added genetic memory (displayed "genetic memory unlocked" text)
 	 */
 	private function setBodyPartType(key:String, dict:Object, tgtType:int):Boolean {
-		if (player[key] == tgtType) return false;
-		player[key] = tgtType;
+		var splitKey:Array = key.split('.');
+		if(splitKey.length > 1){
+			var part:String = splitKey[0];
+			var prop:String = splitKey[1];
+			if(player[part][prop] == tgtType) return false;
+			player[part][prop] = tgtType;
+		} else {
+			if (player[key] == tgtType) return false;
+			player[key] = tgtType;
+		}
 		if (player.findPerk(PerkLib.GeneticMemory) < 0) return false;
+
 		var o:* = dict[tgtType];
 		if (o is Array) {
 			return addGeneticMemory(o[0], o[1]);

@@ -9,7 +9,9 @@ package classes.Items.Weapons
 		
 		public function QueensGuard() 
 		{
-			super("Q.Guard", "Q. Guard", "queen's guard", "a queen's guard", "slash", 20, 2400, "This weapon is made in the design of queen Lethice’s former nobility seal before the mage kingdom fell to corruption. It is said these swords were given to nobles entering knighthood to the queen. A pure hearted manly fencer seeking to protect that which he holds dearest will find his resolve empowered by this blade.");
+			super("Q.Guard", "Q. Guard", "queen's guard rapier", "a queen's guard rapier", "slash", 20, 2400,
+					" An elegant rapier made in brass and gold, with the seal of Mareth’s former nobility. The ruby gemstones running among the blade and the intricate engravings in gold identify it as belonging to the old kingdom knighthoods orders."
+			);
 		}
 		override public function get attack():Number{
 			var boost:int = 0;

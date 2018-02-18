@@ -208,18 +208,18 @@ use namespace CoC;
 					player.lengthChange(player.increaseCock(0, 5), player.cocks.length);
 					if(player.averageCockLength() >= 9 && player.averageCockThickness() < 2) {
 						outputText("You feel yourself gain in thickness as well, to match your new length.  ");
-						temp = player.cocks.length;
-						while(temp > 0) {
-							temp--;
-							if(player.cocks[temp].cockThickness < 2) player.cocks[temp].cockThickness++;
+						var i:int = player.cocks.length;
+						while(i > 0) {
+							i--;
+							if(player.cocks[i].cockThickness < 2) player.cocks[i].cockThickness++;
 						}
 					}
 					else if(player.averageCockLength() >= 15 && player.averageCockThickness() < 3) {
 						outputText("You feel yourself gain in thickness as well, to match your new length.  ");
-						temp = player.cocks.length;
-						while(temp > 0) {
-							temp--;
-							if(player.cocks[temp].cockThickness < 3) player.cocks[temp].cockThickness++;
+						i = player.cocks.length;
+						while(i > 0) {
+							i--;
+							if(player.cocks[i].cockThickness < 3) player.cocks[i].cockThickness++;
 						}
 					}
 				}
@@ -559,7 +559,6 @@ use namespace CoC;
 			else outputText(" feels hungrier than ever.  ");
 			outputText("You shove your crotch into your milk-dazed foe's white-stained visage, grinding your " + vaginaDescript(0) + " into her mouth until you cum all over her");
 			if(player.cocks.length == 0) {
-				temp = rand(3);
 				if(player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_SLAVERING) outputText(", soaking her with girl-cum.");
 				else {
 					if(player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_WET) outputText(", slicking her face with girlish cum.");
@@ -949,7 +948,7 @@ use namespace CoC;
 			menu();
 			addButton(0, "Grow Breasts", chooseBreasts).hint("Grow a new pair of breasts if flat-chested or grow existing breasts. \n\nAnd receive something else.");
 			addButton(1, "Grow Dick", chooseDick).hint("Grow a new penis. Somehow, you have a feeling that the new cock you'll receive won't be a normal cock. \n\nAnd receive something else.");
-			addButton(2, "Normal Face", normalFace).hint("Normalize your face. This will also remove your horns or antennae and change your ears back to human ears! \n\nAnd receive something else.");
+			addButton(2, "Normal Face", normalFace).hint("Normalize your face. This will also remove your horns or antennae.type and change your ears back to human ears! \n\nAnd receive something else.");
 			addButton(3, "Normal Chest", normalChest).hint("Normalize your chest. This will shrink breasts larger than E-cup to a reasonable size and remove their other unusual traits, if you have it. This will also change your skin to human skin. \n\nAnd receive something else.");
 			addButton(4, "Normal Groin", normalGroin).hint("Normalize your groin, removing any extra cocks and reset remaining cock to normal, if you have any. Or grow genitalia for genderless. \n\nAnd receive something else.");
 			addButton(5, "Normal Legs", normalLegs).hint("Turn your legs back to normal. This will also remove your tail, if you have any! \n\nAnd receive something else.");
@@ -1046,11 +1045,11 @@ use namespace CoC;
 				//Already has demoncocks
 				if(player.demonCocks() == player.cockTotal()) {
 					outputText("Your [cocks] leap forwards, taking to the dark magic with ease.  Inch after inch of new length erupts from your groin as your [cocks] get longer and thicker.  They pulsate, as if promising dark pleasure as they settle into their new enhanced size.");
-					temp = player.cocks.length;
-					while(temp > 0) {
-						temp--;
-						player.cocks[temp].cockLength += 6 + rand(10);
-						player.cocks[temp].thickenCock(3);	
+					var i:int = player.cocks.length;
+					while(i > 0) {
+						i--;
+						player.cocks[i].cockLength += 6 + rand(10);
+						player.cocks[i].thickenCock(3);
 					}
 				}
 				//Not yet full of demoncocks...
@@ -1059,12 +1058,12 @@ use namespace CoC;
 					if(player.cor < 80) outputText(" in horror");
 					else outputText(" curiously");
 					outputText(" as the skin of your [cocks] turns shiny and purplish-black.  Corrupt nodules begin to spring up over the entire length of each dick.  ");
-					temp = player.cocks.length;
-					while(temp > 0) {
-						temp--;
-						player.cocks[temp].cockLength += 3 + rand(5);
-						player.cocks[temp].thickenCock(2);
-						player.cocks[temp].cockType = CockTypesEnum.DEMON;
+					i = player.cocks.length;
+					while(i > 0) {
+						i--;
+						player.cocks[i].cockLength += 3 + rand(5);
+						player.cocks[i].thickenCock(2);
+						player.cocks[i].cockType = CockTypesEnum.DEMON;
 					}
 					if(player.cor < 50) outputText("<b>Your dicks are transforming into [cocks]!</b>  The new nubs wriggle about as they sprout over every inch of surface, save for the heads.  Unable to do anything but groan with forced pleasure and horror, you can only watch.  One last batch of nodules forms in a ring around the crowns of your [cocks], seemingly completing its transformation, until you notice, almost throwing up, that your testicles are also getting covered in black veins under your powerless eyes!  ");
 					else outputText("<b>Your dicks are transforming into [cocks]!</b>  The new nubs wriggle about as they sprout over every inch of surface, save for the heads.  You pant and moan in happiness as they lengthen one last time.  As you stroke all of their amazing length with both hands, the excitement of possessing such a magnificent pleasure tool makes you cum. You lick your fingers eagerly, tasting your new cum, while a last ring of nodules forms around the crowns of your beautiful [cocks].   Your new [cocks] pulsate darkly with each beat of your heart, but the thick, throbbing veins that are finishing to cover your testicles do not contain blood, but a black liquid which apparently has perverted them. You ponder what its purpose might be, but then you decide, as you stroke a huge, dark, bumpy shaft, that if they feel as good as they look, it doesn't really matter.  ");
@@ -1076,22 +1075,22 @@ use namespace CoC;
 		private function normalFace():void {
 			spriteSelect(16);
 			clearOutput();
-			if(player.horns > 0 || player.antennae > Antennae.NONE) {
+			if(player.horns.count > 0 || player.antennae.type > Antennae.NONE) {
 				outputText("Your forehead itches intensely.  You cannot help but stratch madly at it.  ");
-				if(player.horns > 0 && player.hornType != Horns.ORCHID) {
+				if(player.horns.count > 0 && player.horns.type != Horns.ORCHID) {
 					outputText("Your horns fall off, landing on the floor with a heavy thud.  ");
-					player.horns = 0;
-					player.hornType = Horns.NONE;
+					player.horns.count = 0;
+					player.horns.type = Horns.NONE;
 				}
-				if(player.antennae > Antennae.NONE) {
+				if(player.antennae.type > Antennae.NONE) {
 					outputText("Antennae pop free, and float lightly down towards the floor.  ");
-					player.antennae = Antennae.NONE;
+					player.antennae.type = Antennae.NONE;
 				}
 			}
 			//EARS
-			if(player.earType != Ears.HUMAN) {
+			if(player.ears.type != Ears.HUMAN) {
 				outputText("Pain erupts from both sides of your head as your ears reform and move, returning to look like your old human ears!  ");
-				player.earType = Ears.HUMAN;
+				player.ears.type = Ears.HUMAN;
 			}
 			//Face
 			if(player.faceType != Face.HUMAN) {
@@ -1103,7 +1102,7 @@ use namespace CoC;
 		private function normalChest():void {
 			spriteSelect(16);
 			clearOutput();
-			temp = 0;
+			var changes:int = 0;
 			if(player.breastRows.length > 1) {
 				player.removeBreastRow(1,player.breastRows.length-1);
 				outputText("Your chest tingles and begins to feel lighter.  You hastily pull open your [armor] and realize you only have [allbreasts] now!  ");
@@ -1111,87 +1110,86 @@ use namespace CoC;
 					outputText("Your nipples shrink down to a more normal size.  ");
 					player.nippleLength = .75;
 				}
-				temp++;
+				changes++;
 			}
 			//Size!
 			if(player.breastRows[0].breastRating > 7) {
 				outputText("The weighty flesh that constantly hangs from your chest gets lighter and lighter, vanishing rapidly.  ");
 				player.breastRows[0].breastRating = 3 + rand(5);
 				outputText("You now have [allbreasts].  ");
-				temp++;
+				changes++;
 			}
 			//Fix nips
 			if(player.nippleLength > 1) {
 				outputText("Your nipples shrink down to a more normal size.  ");
 				player.nippleLength = .75;
-				temp++;
+				changes++;
 			}
 			if(player.hasFuckableNipples()) {
 				outputText("The vagina-like openings in your nipples close, sealing themselves shut.  ");
 				player.breastRows[0].fuckable = false;
-				temp++;
+				changes++;
 			}
 			if(!player.skin.hasPlainSkinOnly()) {
 				outputText("The skin on your body itches intensely as it sheds it's [skin.type], revealing " + player.skinTone + " skin.  ");
 				player.skin.restore();
-				temp++;
+				changes++;
 			}
 			//Nothing changed
-			if(temp == 0) {
+			if(changes == 0) {
 				outputText("You tingle briefly but feel no obvious change.  Your chest is already fairly human.");
 			}
 			postOmnibusBoon();
 		}
 		private function normalGroin():void {
 			spriteSelect(16);
-			//Temp used to track changes
-			temp = 0;
+			var changes:int = 0;
 			clearOutput();
 			outputText("You feel a strange shivering sensation pass through you.  ");
 			//Remove multiple.
 			if(player.cocks.length > 1) {
 				outputText("Your [cocks] shiver and retract back towards your body.  When the process finishes you are left with only your [cock].  ");
 				player.removeCock(1,player.cocks.length-1);
-				temp++;
+				changes++;
 			}
 			//Super long nerf
 			if(player.hasCock()) {
 				if(player.cocks[0].cockLength > 12) {
 					outputText("A tingling sensation worms through your [cock] as it shrinks down to a more modest eleven inches.  ");
 					player.cocks[0].cockLength = 11;
-					temp++;
+					changes++;
 				}
 				//Super thick nerf
 				if(player.cocks[0].cockThickness > 2) {
 					outputText("Your [cock]'s obscene thickness withers down to roughly two inches of girth.  ");
 					player.cocks[0].cockThickness = 2;
-					temp++;
+					changes++;
 				}
 				//Humanitize
 				if(player.cocks[0].cockType != CockTypesEnum.HUMAN && player.cocks[0].cockType != CockTypesEnum.DEMON) {
 					outputText("The inhuman appearance of your [cock] shifts, the flesh rearranging itself into a more human configuration.  After a few seconds you have a very normal looking penis.  ");
 					player.cocks[0].cockType = CockTypesEnum.HUMAN;
-					temp++;
+					changes++;
 				}
 				//If demon cocked....
 				if(player.cocks[0].cockType == CockTypesEnum.DEMON) {
 					outputText("Your [cock] tingles as the bumps begin to fade.  After a moment the flesh darkens, and every single nodule reappears.  <b>Your corrupt penis resisted the magic!</b>  ");
-					temp++;
+					changes++;
 				}
 			}
 			//Balls shrink
 			if(player.ballSize > 5) {
-				temp++;
+				changes++;
 				outputText("The [balls] that constantly pull so heavily on your groin tingle and shrink down to a more managable size.  ");
 				player.ballSize = 2 + rand(3);
 			}
-			if(temp > 0) outputText("\n\n");
+			if(changes > 0) outputText("\n\n");
 			//Vajajay
 			if(player.vaginas.length > 0) {
 				if(player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_SLICK) {
 					outputText("The constant fluids leaking from your " + vaginaDescript(0) + " slow down, then stop.  ");
 					player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_WET;
-					temp++;
+					changes++;
 				}		
 			}
 			//Being genderless isn't normal too...
@@ -1214,18 +1212,18 @@ use namespace CoC;
 					player.createVagina();
 					outputText("An itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new " + vaginaDescript(0) + "</b>!");
 				}
-				temp++;
+				changes++;
 				outputText("\n\n");
 			}
 			//Reduce excessive anal wetness
 			if (player.ass.analWetness >= AssClass.WETNESS_SLIMY) {
 				outputText("The constant fluids leaking from your " + assDescript() + " slow down, then stop.  ");
 				player.ass.analWetness = AssClass.WETNESS_MOIST;
-				temp++;
+				changes++;
 			}
 
 			//Nothing changed
-			if(temp == 0) {
+			if(changes == 0) {
 				outputText("You tingle briefly but feel no obvious change.  Your crotch isn't really in need of becoming more human.");
 			}
 			postOmnibusBoon();

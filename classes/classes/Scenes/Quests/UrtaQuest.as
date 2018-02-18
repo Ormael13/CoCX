@@ -229,7 +229,7 @@ public function startUrtaQuest():void {
 	player.skinTone = "black";
 	player.lowerBody = LowerBody.FOX;
 	player.legCount = 2;
-	player.earType = Ears.FOX;
+	player.ears.type = Ears.FOX;
 	player.faceType = Face.FOX;
 	player.tailType = Tail.FOX;
 	player.tailCount = 1;
@@ -243,8 +243,8 @@ public function startUrtaQuest():void {
 	player.thickness = 30;
 	player.tone = 50;
 	player.femininity = 90;
-	player.hipRating = 12;
-	player.buttRating = 12;
+	player.hips.type = 12;
+	player.butt.type = 12;
 	player.ass.analLooseness = 2;
 	player.createStatusEffect(StatusEffects.BonusVCapacity,58,0,0,0);
 	player.createVagina();
@@ -288,7 +288,7 @@ public function startUrtaQuest():void {
 	player.createPerk(PerkLib.Berzerker,0,0,0,0);
 	player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
 	player.createPerk(PerkLib.JobWarrior,0,0,0,0);
-	player.createPerk(PerkLib.JobBarbarian,0,0,0,0);
+	player.createPerk(PerkLib.JobSwordsman,0,0,0,0);
 	player.createPerk(PerkLib.JobAllRounder,0,0,0,0);
 	player.createPerk(PerkLib.HiddenMomentum,0,0,0,0);
 	player.createPerk(PerkLib.HoldWithBothHands,0,0,0,0);

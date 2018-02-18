@@ -399,11 +399,11 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 		public function hasItemInStorage(itype:ItemType):Boolean { return itemTypeInStorage(itemStorage, 0, itemStorage.length, itype); }
 		
 		public function consumeItemInStorage(itype:ItemType):Boolean {
-			temp = itemStorage.length;
-			while(temp > 0) {
-				temp--;
-				if(itemStorage[temp].itype == itype && itemStorage[temp].quantity > 0) {
-					itemStorage[temp].quantity--;
+			var index:int = itemStorage.length;
+			while(index > 0) {
+				index--;
+				if(itemStorage[index].itype == itype && itemStorage[index].quantity > 0) {
+					itemStorage[index].quantity--;
 					return true;
 				}
 			}

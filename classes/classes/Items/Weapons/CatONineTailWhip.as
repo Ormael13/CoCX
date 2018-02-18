@@ -13,27 +13,25 @@ package classes.Items.Weapons
 		
 		public function CatONineTailWhip() 
 		{
-			super("CNTWhip", "CatONineTailWhip", "Cat o' nine tail whip", "a Cat o' nine tail whip", "whipping", 27, 1080, "A rope made unknown magic beast fur that unravelled into three small ropes, each of which is unravelled again designed to whip and cut your foes into submission.", "Large");
+			super("CNTWhip", "CatONineTailWhip", "Bastet Whip", "a Bastet Whip", "whipping", 27, 1080, "A rope made from unknown magic beast fur that unravelled into three small ropes, each of which is unravelled again designed to whip and cut your foes into submission.", "Large");
 		}
 		
 		override public function get attack():Number {
 			var boost:int = 0;
-			var base:int = 0;
-			base += 5;
-			if (game.player.findPerk(PerkLib.ArcaneLash) >= 0) boost += 5;
 			if ((game.player.str + game.player.spe) >= 270) {
-				base += 9;
-				if (game.player.findPerk(PerkLib.ArcaneLash) >= 0) boost += 9;
+				boost += 18;
+				if (game.player.findPerk(PerkLib.ArcaneLash) >= 0) boost += 27;
 			}
 			if ((game.player.str + game.player.spe) >= 180) {
-				base += 9;
-				if (game.player.findPerk(PerkLib.ArcaneLash) >= 0) boost += 9;
+				boost += 12;
+				if (game.player.findPerk(PerkLib.ArcaneLash) >= 0) boost += 21;
 			}
 			if ((game.player.str + game.player.spe) >= 90) {
-				base += 4;
-				if (game.player.findPerk(PerkLib.ArcaneLash) >= 0) boost += 4;
+				boost += 6;
+				if (game.player.findPerk(PerkLib.ArcaneLash) >= 0) boost += 15;
 			}
-            return (base + boost);
+            if (((game.player.str + game.player.spe) < 90) && game.player.findPerk(PerkLib.ArcaneLash) >= 0) boost += 9;
+			return (9 + boost);
         }
 		
 		override public function canUse():Boolean {

@@ -49,8 +49,8 @@ package classes.Scenes.Areas.DefiledRavine
 			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
 			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
 			this.tallness = rand(8) + 70;
-			this.hipRating = HIP_RATING_AMPLE+2;
-			this.buttRating = BUTT_RATING_LARGE;
+			this.hips.type = HIP_RATING_AMPLE + 2;
+			this.butt.type = BUTT_RATING_LARGE;
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
@@ -75,8 +75,8 @@ package classes.Scenes.Areas.DefiledRavine
 			this.special1 = game.combat.packAttack;
 			this.special2 = game.combat.lustAttack;
 			this.tailType = TAIL_TYPE_DEMONIC;
-			this.hornType = HORNS_DEMON;
-			this.horns = 2;
+			this.horns.type = HORNS_DEMON;
+			this.horns.count = 2;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();

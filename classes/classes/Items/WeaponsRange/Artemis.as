@@ -10,8 +10,10 @@ package classes.Items.WeaponsRange
 		
 		public function Artemis() 
 		{
-			super("Artemis", "Artemis", "Artemis", "Artemis", "shot", 25, 2000, "The white wood of this blessed bow seems to draw light in. The light arrows fired with this weapon strike true as if guided by divine hands.", "Bow",
-				PerkLib.Accuracy2,30,0,0,0);
+			super("Artemis", "Artemis", "Artemis longbow", "an Artemis longbow", "shot", 25, 2000,
+					"The white sandalwood of this blessed bow seems to draw light in. The radiant arrows fired with this holy weapon strike true as if guided by divine hands.",
+					"Bow", PerkLib.Accuracy2,30,0,0,0
+			);
 		}
 		override public function get attack():Number{
 			return (20 + ((100 - game.player.cor) / 20));

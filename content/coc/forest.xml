@@ -127,10 +127,12 @@
 					The woman has silvery white hair flowing around her perfect visage; and her sizable E cup would make most women back in Ingnam green with envy, then again, most things even somewhat female here in Mareth would cause the same reaction.
 					The comparison to a human, however, ends there.
 					Below her waist is the large lower-body of an immaculate white horse.
-					Her ears are covered with silvery white fur and while at first you mistook her for just a centaur warrior, the spear-like spiraling horn on her forehead warns you that there might be more to her.
+					Her ears are covered with silvery white fur and while at first you mistook her for just a centaur warrior, the spear-like spiraling horns on her forehead warns you that there might be more to her.
 					
 					<i>“Just leave and I won’t have to attack you. I swear on my honor that I won’t give chase should you leave peacefully. This is for your own good.”</i>
 					
+				</text>
+				<text name="introVirgin">
 					She suddenly sniffs something in the air and her expression changes to one of baffled disbelief.
 					
 					<i>“How is this even still possible in this lost corrupted land? A chaste person on Mareth?!”</i>
@@ -160,6 +162,57 @@
 					Your first guess was right, at least.
 					That meager consolation does little to numb the disappointment.
 				</text>
+				<text name="introNoVirgin">
+					You ask her why she is defending this relic and what it would take for you to gain access to it. She eyes you as if trying to figure out your intentions then sigh.
+					
+					<i>“Only the pure of heart and body may be allowed to pick up this shield, Marae herself tasked me with guarding it. If you truly wish to prove your worthiness then I will ask of you that you perform a task for me.”</i>
+					
+					What task?
+					
+					<i>“In the darkest reaches of the forest lurks a terrifying creature of great corruption known as a nightmare. It is anathema to purity and must be disposed of. Slay the nightmare and I will grant you access to the shield.”</i>
+					
+					On those word you leave, better seek out this creature as fast as possible.
+				</text>
+				<text name="introAfterNightmare">
+					You manage to find your way back to the sacred grove. As expected the guardian is swift to show, blocking your path to the shield her tall frame acting like a wall.
+					
+					<i>“Sorry but until you have proven yourself I cannot allow you any further.”</i>
+				</text>
+				<text name="introAfterNightmareShowProof">
+					You pull the nightmare twin horns out of your bag for the unicorn maiden to see, she nods in approval.
+					
+					<i>“What you did today perhaps will help to save what's left of this beautiful forest. Please allow me to perform this small service for you as a reward. I will restore that which you lost to the ravage of this fallen land.”</i>
+					
+					You pull the nightmare twin horns out of your bag for the unicorn maiden to see, she nods in approval.
+					
+					<i>“I was tasked with guarding the divine shield, Sanctuary, from dark influence. Demons cannot enter this grove and the impure reels at the mere thought of setting a single foot into this area. This armament needs a champion to wield it and take the fight to the fiends; however, due to Mareth’s purity being compromised,
+					people who match this description have almost all been destroyed by transformations or defiled by the many demonic inhabitants of the land. Only a pure virgin person such as you can hope to get past the ward.”</i>
+					
+					Interested in the magnificent shield on the altar, you ask what you would need to do to get access to this shield, since you already fulfill the requirements for entering here.
+					
+					<i>“Simple, since only one carrying my essence can pass the ward, I just need to share my essence with you.”</i>
+					
+					You raise an eyebrow at that, you’ve been in Mareth long enough to know an innuendo when you hear one, but surely such a pure individual must have meant something far more innocent. Still, you do glance at her lower half to make sure. Aaaand of course she has a horsecock, already at half-mast, too.
+					You bite down a sigh, you’re in fucking Mareth, of <i>course</i> she has one. Your first guess was right, at least. That meager consolation does little to numb the disappointment.
+					
+					<i>“So… you want this shield or not?”</i>
+				</text>
+				<text name="introNightmare">
+					As you explore the deepwoods you come upon a particularly corrupted grove. At the center of it you see many demons busy fucking each other, some of them wearing armors and weapons. The demons could’ve been a concern if not for an even bigger threat looming at the epicenter of this scene of utter decadence.
+					At the middle of a grove a centauress is busy fucking what seems to be a dog morph. Her massive horsecock bulges clearly visible in the woman’s stomach and each thrust rocks the adventurer’s body as her features begin to change.
+					The dog woman is begging but the centauress won’t stop, and you see the telltale sign of orgasm as her eyes roll, filling the woman with a massive amount of cum. The centauress screaming her delight.
+					
+					<i>“Yes this is it… abandon yourself to pleasure, feel it, live for it, Cum for me!”</i>
+					
+					Under your horrified gaze the dog morph’s fur falls apart, her nuzzle transforming into a more human face as her entire body shifts into that of a lascivious succubus. The woman body twitches on the ground, caught between the endless bliss of corruption and orgasm.
+					The centauress pulls her massive horsecock out of her last victim, cum flooding out of the former dog morph pussy mixed with purple fluids which swiftly crystallize into what is clearly lethicite!
+					She uses her recent cocksleeve body to whip away the excess cum from her horse meat then looks straight in your direction, noticing you and giving you a better look at her features. She has a pair of large bat wings as black as her fur and her entire body exudes an unearthly grace and beauty that would make even the most beautiful woman jealous, however this creature, as beautiful as she is, clearly represents all that is lewd, corrupted and depraved.
+					Beautiful yet corrupt like a fallen angel her entire body exudes an aura that would defile even the purest soul. If her outlook wasn’t enough the two parallel horns on her forehead clearly tells  everyone looking that she’s up to no good.
+					
+					<i>“Mmmm I thought I took good care of all the adventurers but I guess I forgot one. Don’t worry I will show you the depth of depravity and pleasure just like I did all the others. Just give up all hopes and abandon yourself to your desires, it will be sweet I assure you.”</i>
+					
+					She giggles then waves her hand seductively, her horsemeat hardening at the prospect of fucking again.
+				</text>
 				<text name="noway">
 					 You give her the same answer you gave all others, a flat “No” that leaves no room for negotiation
 					 <if test="silly()">followed by singing <i>“nope, nope, nope, fuck this shit, I’m out!” </i></if>
@@ -186,7 +239,7 @@
 						</if>
 					</if>
 					
-					<i>“A unicorn ‘horn’ can pierce through anything, just relax it will be easier for you.”</i>
+					<i>“A unicorn ‘horns’ can pierce through anything, just relax it will be easier for you.”</i>
 					<if test="silly() and playre.inte gt 70">
 						Part of you is mildly surprised, and grateful, no Demon has realized this potential application of spatial magic, otherwise they would have pushed to develop it until they learnt how to open portals to other realms by ramming a dick against space-time until they fucked it into submission.
 					</if>
@@ -218,7 +271,7 @@
 							You smirk seductively giving her a fair view of your virgin equine pussy as you tell the unicorn that for your first time, you might as well take a stallion.
 							Your pussy lips are already wet in anticipation of her maleness.\n
 						</text> 
-						<text name="intro"><i>“Well, since you agreed, I will let you in on a little secret. I won’t need to take your virginity. Rather, my ‘horn’ will pierce right through it.”\n\n</i></text>
+						<text name="intro"><i>“Well, since you agreed, I will let you in on a little secret. I won’t need to take your virginity. Rather, my ‘horns’ will pierce right through it.”\n\n</i></text>
 						<text name="taurSex">
 							She trots to you, her massive horsemeat hardening as she prepares to mount your [pussy]. She take a whiff of your [pussy] going so far as to give it a lick or two just so she can taste it. Satisfied, she gets on you and you can feel the tip of her flare making contact with your vaginal lips.
 							
@@ -270,6 +323,7 @@
 								</else>
 							</if>
 							
+							You should feel dirty and defiled yet for some reason you don’t. On the contrary your entire body feels so pure it's as if the unicorn blessed your entirety with her magic.
 							You head back to camp, still confused with this experience.\n\n
 						</text>
 					</lib>
@@ -315,6 +369,37 @@
 					The breastplate is ornamented with what you assume is a holy symbol, namely a blossoming oak tree <if test="flags[kFLAGS.MET_MARAE] gt 0">obviously Marae’s</if>.
 					It has plated barding and a skirt fit for a horse  body, it even comes with matching horseshoes. 
 					While clearly made like a full plate, it is surprisingly flexible, allowing for maneuverability similar to that of light armor, which is rather unusual.
+					
+				</text>
+			</lib>
+			<lib name="celess-nightmare">
+				<text name="won">
+					The nightmare falls over in incredulity as you stand above her victorious. She looks at you in awe and fear.
+					
+					<i>“You... curse you! This is impossible, nobody should be able to resist the call of corruption! Have mercy! My body is decadent and seductive how can you simply destroy such beauty! Allow me to serve you I can be useful I can...”</i>
+					
+					You step over her with clear intent to finish your work and declare sternly:
+					
+					<i>“You are a beautiful flower, yes, however your nectar is poison and your scent is a lethal trap. I won’t allow you to spread your malice any further...”</i>
+					
+					You end her life swiftly and mercilessly, putting a definitive end to her influence in the forest. You can already feel the area breathe easier as the thick fog of corruption surrounding this creature vanishes. The demons pay you no heed as you leave the area holding your opponent two horns as a trophy.
+				</text>
+				<text name="lost">
+					Defeated by your growing desire, you fall to the ground as the nightmare trots to your now prone form.
+					
+					<i>“It's all okay, I will help you become honest with yourself big girl. By the time you cum out your soul you will yearn for cock and thirst for cum, especially mine or perhaps I will restrain myself? Lets see...”</i>
+					
+					With this said she weaves a sign, watching with glee as your clothes fly away from you to go pile up on the side.
+					
+					<i>“You won’t need these for what is to come next.”</i>
+				</text>
+				<text name="lost-male">
+					You can’t help but weakly try and shove her away but the nightmare proves too strong. She kicks you on all fours and aligns her unholy cock with your [asshole]. You try to crawl away but she responds by jamming her entire length into your hole.
+					
+					<i>“Here we go for a ride! Ohhh yeaaaa!”</i>
+					
+					She neighs in pleasure as she violates your ass, thoroughly molding your hole after the shape of her cock. You scream at first from the stretching of your passage, her cock bulging in your belly, but pain slowly turns to pleasure as various things change about you.
+					
 					
 				</text>
 			</lib>

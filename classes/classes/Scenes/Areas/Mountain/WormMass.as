@@ -92,8 +92,8 @@ public class WormMass extends Monster
 			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.tallness = 1;
-			this.hipRating = Hips.RATING_SLENDER;
-			this.buttRating = Butt.RATING_BUTTLESS;
+			this.hips.type = Hips.RATING_SLENDER;
+			this.butt.type = Butt.RATING_BUTTLESS;
 			this.skinTone = "white";
 			initStrTouSpeInte(40, 10, 10, 1);
 			initWisLibSensCor(1, 90, 60, 90);

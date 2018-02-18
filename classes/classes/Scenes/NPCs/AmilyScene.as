@@ -4362,99 +4362,125 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			var description:String = "";
 			var rando:Number;
 			//Size descriptors 33% chance
+			var nippleLength:Number = flags[kFLAGS.AMILY_NIPPLE_LENGTH];
 			if(rand(4) == 0) {
 				//TINAHHHH
-				if(flags[kFLAGS.AMILY_NIPPLE_LENGTH] < .25) {
-					temp = rand(3);
-					if(temp == 0) description += "tiny ";
-					if(temp == 1) description += "itty-bitty ";
-					if(temp == 2) description += "teeny-tiny ";
-					if(temp == 3) description += "dainty ";
+				if(nippleLength < .25) {
+					description += randomChoice(
+							"tiny ",
+							"itty-bitty ",
+							"teeny-tiny ",
+							"dainty "
+					);
 				}
 				//Prominant
-				if(flags[kFLAGS.AMILY_NIPPLE_LENGTH] >= .4 && flags[kFLAGS.AMILY_NIPPLE_LENGTH] < 1) {
-					temp = rand(5);
-					if(temp == 0) description += "prominent ";
-					if(temp == 1) description += "pencil eraser-sized ";
-					if(temp == 2) description += "eye-catching ";
-					if(temp == 3) description += "pronounced ";
-					if(temp == 4) description += "striking ";
+				if(nippleLength >= .4 && nippleLength < 1) {
+					description += randomChoice(
+							"prominent ",
+							"pencil eraser-sized ",
+							"eye-catching ",
+							"pronounced ",
+							"striking "
+					);
 				}
 				//Big 'uns
-				if(flags[kFLAGS.AMILY_NIPPLE_LENGTH] >= 1 && flags[kFLAGS.AMILY_NIPPLE_LENGTH] < 2) {
-					temp = rand(4);
-					if(temp == 0) description += "forwards-jutting ";
-					if(temp == 1) description += "over-sized ";
-					if(temp == 2) description += "fleshy ";
-					if(temp == 3) description += "large protruding ";
+				if(nippleLength >= 1 && nippleLength < 2) {
+					description += randomChoice(
+							"forwards-jutting ",
+							"over-sized ",
+							"fleshy ",
+							"large protruding "
+					);
 				}
 				//'Uge
-				if(flags[kFLAGS.AMILY_NIPPLE_LENGTH] >= 2 && flags[kFLAGS.AMILY_NIPPLE_LENGTH] < 3.2) {
-					temp = rand(5);
-					if(temp == 0) description += "enlongated ";
-					if(temp == 1) description += "massive ";
-					if(temp == 2) description += "awkward ";
-					if(temp == 3) description += "lavish ";
-					if(temp == 4) description += "hefty ";
+				if(nippleLength >= 2 && nippleLength < 3.2) {
+					description += randomChoice(
+							"enlongated ",
+							"massive ",
+							"awkward ",
+							"lavish ",
+							"hefty "
+					);
 				}
 				//Massive
-				if(flags[kFLAGS.AMILY_NIPPLE_LENGTH] >= 3.2) {
-					temp = rand(4);
-					if(temp == 0) description += "bulky ";
-					if(temp == 1) description += "ponderous ";
-					if(temp == 2) description += "unmanageable ";
-					if(temp == 3) description += "thumb-sized ";
-					if(temp == 4) description += "cock-sized ";
-					if(temp == 5) description += "cow-like ";
+				if(nippleLength >= 3.2) {
+					description += randomChoice(
+							"bulky ",
+							"bulky ",
+							"unmanageable ",
+							"thumb-sized ",
+							"cock-sized ",
+							"cow-like "
+					);
 				}
 				descripted = true;
 			}
 			//Milkiness/Arousal/Wetness Descriptors 33% of the time
+			var lactationRate:Number = flags[kFLAGS.AMILY_LACTATION_RATE];
 			if(rand(3) == 0 && !descripted) {
 				//Just lactating!
-				if(flags[kFLAGS.AMILY_LACTATION_RATE] > 0) {
+				if(lactationRate > 0) {
 					//Light lactation
-					if(flags[kFLAGS.AMILY_LACTATION_RATE] <= 1) {
-						temp = rand(3);
-						if(temp == 0) description += "milk moistened ";
-						if(temp == 1) description += "slightly lactating ";
-						if(temp == 2) description += "milk-dampened ";
+					if(lactationRate <= 1) {
+						description += randomChoice(
+								"milk moistened ",
+								"slightly lactating ",
+								"milk-dampened "
+						);
 					}
 					//Moderate lactation
-					if(flags[kFLAGS.AMILY_LACTATION_RATE] > 1 && flags[kFLAGS.AMILY_LACTATION_RATE] <= 2) {
-						temp = rand(3);
-						if(temp == 0) description += "lactating ";
-						if(temp == 1) description += "milky ";
-						if(temp == 2) description += "milk-seeping ";
+					if(lactationRate > 1 && lactationRate <= 2) {
+						description += randomChoice(
+								"lactating ",
+								"milky ",
+								"milk-seeping "
+						);
 					}
 					//Heavy lactation
-					if(flags[kFLAGS.AMILY_LACTATION_RATE] > 2) {
-						temp = rand(4);
-						if(temp == 0) description += "dripping ";
-						if(temp == 1) description += "dribbling ";
-						if(temp == 2) description += "milk-leaking ";
-						if(temp == 3) description += "drooling ";
+					if(lactationRate > 2) {
+						description += randomChoice(
+								"dripping ",
+								"dribbling ",
+								"milk-leaking ",
+								"drooling "
+						);
 					}
 					descripted = true;
 				}
 			}
 			//Nounsssssssss*BOOM*
-			temp = rand(5);
-			if(temp == 0) description += "nipple";
-			if(temp == 1) {
-				if(flags[kFLAGS.AMILY_NIPPLE_LENGTH] < .5) description += "perky nipple";
-				else description += "cherry-like nub";
-			}
-			if(temp == 2) {
-				if(flags[kFLAGS.AMILY_LACTATION_RATE] >= 1 && flags[kFLAGS.AMILY_NIPPLE_LENGTH] >= 1) description += "teat";
-				else description += "nipple";
-			}
-			if(temp == 3) {
-				if(flags[kFLAGS.AMILY_LACTATION_RATE] >= 1 && flags[kFLAGS.AMILY_NIPPLE_LENGTH] >= 1) description += "teat";
-				else description += "nipple";
-			}
-			if(temp == 4) {
-				description += "nipple";
+			switch (rand(5)) {
+				case 0:
+					description += "nipple";
+					break;
+
+				case 1:
+					if (nippleLength < .5) {
+						description += "perky nipple";
+					} else {
+						description += "cherry-like nub";
+					}
+					break;
+
+				case 2:
+					if (lactationRate >= 1 && nippleLength >= 1) {
+						description += "teat";
+					} else {
+						description += "nipple";
+					}
+					break;
+
+				case 3:
+					if (lactationRate >= 1 && nippleLength >= 1) {
+						description += "teat";
+					} else {
+						description += "nipple";
+					}
+					break;
+
+				case 4:
+					description += "nipple";
+					break;
 			}
 			return description;
 		}

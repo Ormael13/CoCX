@@ -304,6 +304,16 @@ use namespace CoC;
 		public function isWearingArmor():Boolean {
 			return armor != ArmorLib.COMFORTABLE_UNDERCLOTHES && armor != ArmorLib.NOTHING;
 		}
+		//Natural Armor (need at least to partialy covering whole body)
+		public function haveNaturalArmor():Boolean
+		{
+			return findPerk(PerkLib.ThickSkin) >= 0 || skin.hasFur() || skin.hasChitin() || skin.hasScales() || skin.hasBark() || skin.hasDragonScales() || skin.hasBaseOnly(Skin.STONE);
+		}
+		//Unhindered related acceptable armor types
+		public function meetUnhinderedReq():Boolean
+		{
+			return armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armor == ArmorLib.NOTHING;
+		}
 		//override public function get armors
 		override public function get armorName():String {
 			if (_modArmorName.length > 0) return modArmorName;
@@ -335,8 +345,8 @@ use namespace CoC;
 			if (skin.hasFur()) armorDef += (p?1:2)*newGamePlusMod;
 			if (skin.hasChitin()) armorDef += (p?2:4)*newGamePlusMod;
 			if (skin.hasScales()) armorDef += (p?3:6)*newGamePlusMod; //bee-morph (), mantis-morph (), scorpion-morph (wpisane), spider-morph (wpisane)
-			if (skin.hasBark() || skin.hasDragonScales()) armorDef += (p?4:8)*newGamePlusMod; //może do 10 podnieść jak doda sie scales dla smoków?
-			if (skin.hasBaseOnly(Skin.STONE)) armorDef += (10 * newGamePlusMod);//może do 10 podnieść jak doda sie scales dla smoków?
+			if (skin.hasBark() || skin.hasDragonScales()) armorDef += (p?4:8)*newGamePlusMod;
+			if (skin.hasBaseOnly(Skin.STONE)) armorDef += (10 * newGamePlusMod);
 			//'Thick' dermis descriptor adds 1!
 			if (skinAdj == "smooth") armorDef += (1 * newGamePlusMod);
 			//Plant score bonuses
@@ -354,20 +364,21 @@ use namespace CoC;
 				else armorDef += (1 * newGamePlusMod);
 			}
 			//Bonus defense
-			if (armType == Arms.YETI) armorDef += (1 * newGamePlusMod);
-			if (armType == Arms.SPIDER || armType == Arms.MANTIS || armType == Arms.BEE || armType == Arms.SALAMANDER) armorDef += (2 * newGamePlusMod);
-			if (armType == Arms.GARGOYLE) armorDef += (8 * newGamePlusMod);
-			if (armType == Arms.GARGOYLE_2) armorDef += (5 * newGamePlusMod);
+			if (arms.type == Arms.YETI) armorDef += (1 * newGamePlusMod);
+			if (arms.type == Arms.SPIDER || arms.type == Arms.MANTIS || arms.type == Arms.BEE || arms.type == Arms.SALAMANDER) armorDef += (2 * newGamePlusMod);
+			if (arms.type == Arms.GARGOYLE) armorDef += (8 * newGamePlusMod);
+			if (arms.type == Arms.GARGOYLE_2) armorDef += (5 * newGamePlusMod);
 			if (tailType == Tail.SPIDER_ADBOMEN || tailType == Tail.MANTIS_ABDOMEN || tailType == Tail.BEE_ABDOMEN) armorDef += (2 * newGamePlusMod);
 			if (tailType == Tail.GARGOYLE) armorDef += (8 * newGamePlusMod);
 			if (tailType == Tail.GARGOYLE_2) armorDef += (5 * newGamePlusMod);
-			if (wingType == Wings.GARGOYLE_LIKE_LARGE) armorDef += (8 * newGamePlusMod);
+			if (wings.type == Wings.GARGOYLE_LIKE_LARGE) armorDef += (8 * newGamePlusMod);
 			if (lowerBody == LowerBody.YETI) armorDef += (1 * newGamePlusMod);
 			if (lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || lowerBody == LowerBody.BEE || lowerBody == LowerBody.MANTIS || lowerBody == LowerBody.SALAMANDER) armorDef += (2 * newGamePlusMod);
 			if (lowerBody == LowerBody.DRAGON) armorDef += (3 * newGamePlusMod);
 			if (lowerBody == LowerBody.DRIDER) armorDef += (4 * newGamePlusMod);
 			if (lowerBody == LowerBody.GARGOYLE) armorDef += (8 * newGamePlusMod);
 			if (lowerBody == LowerBody.GARGOYLE_2) armorDef += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.Lycanthropy) >= 0) armorDef += 10 * newGamePlusMod;
 			//Soul Cultivators bonuses
 			if (findPerk(PerkLib.BodyCultivator) >= 0) {
 				armorDef += (1 * newGamePlusMod);
@@ -408,6 +419,12 @@ use namespace CoC;
 				if (armorPerk == "Heavy") speedBonus += Math.round(spe / 50);
 			}
 			armorDef += speedBonus;
+			//Feral armor boosts armor ratings!
+			var toughnessBonus:int = 0;
+			if (findPerk(PerkLib.FeralArmor) >= 0 && haveNaturalArmor() && meetUnhinderedReq()) {
+				toughnessBonus += Math.round(tou / 20);
+			}
+			armorDef += toughnessBonus;
 			if (findPerk(PerkLib.PrestigeJobSentinel) >= 0 && armorPerk == "Heavy") armorDef += _armor.def;
 			if (findPerk(PerkLib.ShieldExpertise) >= 0 && shieldName != "nothing") {
 				if (shieldBlock >= 4) armorDef += Math.round(shieldBlock);
@@ -416,6 +433,8 @@ use namespace CoC;
 			//Acupuncture effect
 			if (findPerk(PerkLib.ChiReflowDefense) >= 0) armorDef *= UmasShop.NEEDLEWORK_DEFENSE_DEFENSE_MULTI;
 			if (findPerk(PerkLib.ChiReflowAttack) >= 0) armorDef *= UmasShop.NEEDLEWORK_ATTACK_DEFENSE_MULTI;
+			//Other bonuses
+			if (findPerk(PerkLib.ToughHide) >= 0 && haveNaturalArmor()) armorDef += (2 * newGamePlusMod);
 			armorDef = Math.round(armorDef);
 			//Berzerking removes armor
 			if (hasStatusEffect(StatusEffects.Berzerking) && findPerk(PerkLib.ColdFury) < 1) {
@@ -449,6 +468,62 @@ use namespace CoC;
 		override public function get armorValue():Number {
 			return _armor.value;
 		}
+		//Natural Claws (arm types and weapons that can substitude them)
+		public function haveNaturalClaws():Boolean
+		{
+			return arms.type == Arms.CAT || arms.type == Arms.DEVIL || arms.type == Arms.DRAGON || arms.type == Arms.FOX || arms.type == Arms.GARGOYLE || arms.type == Arms.LION || arms.type == Arms.LIZARD || arms.type == Arms.RAIJU
+			       || arms.type == Arms.RED_PANDA || arms.type == Arms.SALAMANDER || arms.type == Arms.WOLF;
+		}
+		public function haveNaturalClawsTypeWeapon():Boolean
+		{
+			return weaponName == "gauntlet with claws";
+		}
+		//Weapons for Whirlwind
+		public function isWeaponForWhirlwind():Boolean
+		{
+			return weapon == game.weapons.BFSWORD || weapon == game.weapons.NPHBLDE || weapon == game.weapons.EBNYBLD || weapon == game.weapons.CLAYMOR || weapon == game.weapons.URTAHLB || weapon == game.weapons.KIHAAXE || weapon == game.weapons.L__AXE || weapon == game.weapons.L_HAMMR || weapon == game.weapons.TRASAXE || weapon == game.weapons.WARHAMR
+			 || weapon == game.weapons.OTETSU || weapon == game.weapons.NODACHI || weapon == game.weapons.WGSWORD || weapon == game.weapons.DBFSWO || weapon == game.weapons.D_WHAM_ || weapon == game.weapons.DL_AXE_ || weapon == game.weapons.DSWORD_ || weapon == game.weapons.HALBERD || weapon == game.weapons.GUANDAO;// || weapon == game.weapons.
+		}
+		//Weapons for Whipping
+		public function isWeaponsForWhipping():Boolean
+		{
+			return weapon == game.weapons.FLAIL || weapon == game.weapons.L_WHIP || weapon == game.weapons.SUCWHIP || weapon == game.weapons.PSWHIP || weapon == game.weapons.WHIP || weapon == game.weapons.PWHIP || weapon == game.weapons.NTWHIP || weapon == game.weapons.CNTWHIP || weapon == game.weapons.RIBBON || weapon == game.weapons.ERIBBON
+			|| weapon == game.weapons.SNAKESW;
+		}
+		//1H Weapons
+		public function isOneHandedWeapons():Boolean
+		{
+			return weaponPerk != "Dual Large" && weaponPerk != "Dual" && weaponPerk != "Staff" && weaponPerk != "Large";
+		}
+		//Wrath Weapons
+		public function isLowGradeWrathWeapon():Boolean
+		{
+			return weapon == game.weapons.BFSWORD || weapon == game.weapons.NPHBLDE || weapon == game.weapons.EBNYBLD || weapon == game.weapons.OTETSU || weapon == game.weapons.POCDEST || weapon == game.weapons.DOCDEST || weapon == game.weapons.CNTWHIP;
+		}
+		public function isDualLowGradeWrathWeapon():Boolean
+		{
+			return weapon == game.weapons.DBFSWO;
+		}
+		//Fists and fist weapons
+		public function isFistOrFistWeapon():Boolean
+		{
+			return weaponName == "fists" || weapon == game.weapons.S_GAUNT || weapon == game.weapons.H_GAUNT || weapon == game.weapons.MASTGLO || weapon == game.weapons.KARMTOU || weapon == game.weapons.YAMARG || weapon == game.weapons.CLAWS;
+		}
+		//Natural Jouster perks req check
+		public function isMeetingNaturalJousterReq():Boolean
+		{
+			return (((isTaur() || isDrider()) && spe >= 60) && hasPerk(PerkLib.Naturaljouster) && (findPerk(PerkLib.DoubleAttack) < 0 || (hasPerk(PerkLib.DoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
+             || (spe >= 150 && hasPerk(PerkLib.Naturaljouster) && hasPerk(PerkLib.DoubleAttack) && (findPerk(PerkLib.DoubleAttack) < 0 || (hasPerk(PerkLib.DoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)));
+		}
+		public function isMeetingNaturalJousterMasterGradeReq():Boolean
+		{
+			return (((isTaur() || isDrider()) && spe >= 180) && hasPerk(PerkLib.NaturaljousterMastergrade) && (findPerk(PerkLib.DoubleAttack) < 0 || (hasPerk(PerkLib.DoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
+             || (spe >= 450 && hasPerk(PerkLib.NaturaljousterMastergrade) && hasPerk(PerkLib.DoubleAttack) && (findPerk(PerkLib.DoubleAttack) < 0 || (hasPerk(PerkLib.DoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)));
+		}
+		public function haveWeaponForJouster():Boolean
+		{
+			return weaponName == "deadly spear" || weaponName == "deadly lance" || weaponName == "deadly trident" || weaponName == "seraph spear" || weaponName == "demon snake spear";
+		}
 		//override public function get weapons
 		override public function get weaponName():String {
 			return _weapon.name;
@@ -459,7 +534,7 @@ use namespace CoC;
 		override public function get weaponAttack():Number {
 			var newGamePlusMod:int = this.newGamePlusMod()+1;
 			var attack:Number = _weapon.attack;
-			if (findPerk(PerkLib.JobBarbarian) >= 0 && weaponPerk == "Large") {
+			if (findPerk(PerkLib.JobSwordsman) >= 0 && weaponPerk == "Large") {
 				if (findPerk(PerkLib.WeaponMastery) >= 0 && str >= 100) {
 					if (findPerk(PerkLib.WeaponGrandMastery) >= 0 && str >= 140) attack *= 2;
 					else attack *= 1.5;
@@ -510,10 +585,10 @@ use namespace CoC;
 					attack += SceneLib.combat.unarmedAttack();
 				}
 			}
-			if (armType == Arms.MANTIS && weaponName == "fists") {
+			if (arms.type == Arms.MANTIS && weaponName == "fists") {
 				attack += (15 * newGamePlusMod);
 			}
-			if ((armType == Arms.YETI || armType == Arms.CAT) && weaponName == "fists") {
+			if ((arms.type == Arms.YETI || arms.type == Arms.CAT) && weaponName == "fists") {
 				attack += (5 * newGamePlusMod);
 			}
 			//Konstantine buff
@@ -537,6 +612,16 @@ use namespace CoC;
 		}
 		override public function get weaponValue():Number {
 			return _weapon.value;
+		}
+		//Artifacts Bows
+		public function isArtifactBow():Boolean
+		{
+			return weaponRange == game.weaponsrange.BOWGUID || weaponRange == game.weaponsrange.BOWHODR;
+		}
+		//Using Tome
+		public function isUsingTome():Boolean
+		{
+			return weaponRangeName == "nothing" || weaponRangeName == "Inquisitor’s Tome" || weaponRangeName == "Sage’s Sketchbook";
 		}
 		//override public function get weapons
 		override public function get weaponRangeName():String {
@@ -573,7 +658,7 @@ use namespace CoC;
 			if(findPerk(PerkLib.JobBrawler) >= 0 && str >= 60 && weaponRangeName == "fists") {
 				rangeattack += (5 * newGamePlusMod);
 			}
-			if(armType == MANTIS && weaponRangeName == "fists") {
+			if(arms.type == MANTIS && weaponRangeName == "fists") {
 				rangeattack += (15 * newGamePlusMod);
 			}
 			if(hasStatusEffect(StatusEffects.Berzerking)) rangeattack += (30 + (15 * newGamePlusMod));
@@ -915,6 +1000,7 @@ use namespace CoC;
 			if(findPerk(PerkLib.ResistanceIV) >= 0) lust -= 5;
 			if(findPerk(PerkLib.ResistanceV) >= 0) lust -= 5;
 			if(findPerk(PerkLib.ResistanceVI) >= 0) lust -= 5;
+			if((findPerk(PerkLib.UnicornBlessing) >= 0 && cor <= 20) || (findPerk(PerkLib.BicornBlessing) >= 0 && cor >= 80)) lust -= 10;
 			if(findPerk(PerkLib.ChiReflowLust) >= 0) lust -= UmasShop.NEEDLEWORK_LUST_LUST_RESIST;
 			if(lust < minLustCap) lust = minLustCap;
 			if(statusEffectv1(StatusEffects.BlackCatBeer) > 0) {
@@ -1155,7 +1241,7 @@ use namespace CoC;
 				else
 				{
 					desc += "a wide, cushiony body";
-					if (gender >= 2 || biggestTitSize() > 3 || hipRating > 7 || buttRating > 7)
+					if (gender >= 2 || biggestTitSize() > 3 || hips.type > 7 || butt.type > 7)
 						desc += " and plenty of jiggle on your curves";
 				}
 			}
@@ -1171,17 +1257,17 @@ use namespace CoC;
 				else if (tone > 25)
 				{
 					desc += "a very wide body";
-					if (gender >= 2 || biggestTitSize() > 4 || hipRating > 10 || buttRating > 10)
+					if (gender >= 2 || biggestTitSize() > 4 || hips.type > 10 || butt.type > 10)
 						desc += ", lots of curvy jiggles,";
 					desc += " and hints of muscle underneath";
 				}
 				else
 				{
 					desc += "a thick";
-					if (gender >= 2 || biggestTitSize() > 4 || hipRating > 10 || buttRating > 10)
+					if (gender >= 2 || biggestTitSize() > 4 || hips.type > 10 || butt.type > 10)
 						desc += ", voluptuous";
 					desc += " body and plush, ";
-					if (gender >= 2 || biggestTitSize() > 4 || hipRating > 10 || buttRating > 10)
+					if (gender >= 2 || biggestTitSize() > 4 || hips.type > 10 || butt.type > 10)
 						desc += " jiggly curves";
 					else
 						desc += " soft flesh";
@@ -1318,6 +1404,13 @@ use namespace CoC;
 					race = "wolf-morph";
 				else
 					race = "wolf-" + mf("boy", "girl");
+			}
+			if (werewolfScore() >= 6)
+			{
+				if (werewolfScore() >= 12)
+					race = "Werewolf";
+				else
+					race = "half werewolf";
 			}
 			if (foxScore() >= 4)
 			{
@@ -1769,14 +1862,19 @@ use namespace CoC;
 			if (vampireScore() >= 6){
 				race = vampireScore() >= 10 ? "vampire" : "dhampir"
 			}
+			if (avianScore() >= 4)
+			{
+				if (avianScore() >= 9)
+					race = "avian-morph";
+				else
+					race = "half avian-morph";
+			}
 			//</mod>
-			if (lowerBody == LowerBody.HOOFED && isTaur() && wingType == Wings.FEATHERED_LARGE) {
+			if (lowerBody == LowerBody.HOOFED && isTaur() && wings.type == Wings.FEATHERED_LARGE) {
 				race = "pegataur";
 			}
-			
 			if (lowerBody == LowerBody.PONY)
 				race = "pony-kin";
-
 			if (gooScore() >= 4)
 			{
 				if (gooScore() >= 8) {
@@ -1810,25 +1908,25 @@ use namespace CoC;
 				humanCounter++;
 			if (faceType == Face.HUMAN)
 				humanCounter++;
-			if (eyeType == Eyes.HUMAN)
+			if (eyes.type == Eyes.HUMAN)
 				humanCounter++;
-			if (earType == Ears.HUMAN)
+			if (ears.type == Ears.HUMAN)
 				humanCounter++;
-			if (earType == Ears.ELVEN)
+			if (ears.type == Ears.ELVEN)
 				humanCounter -= 7;
-			if (tongueType == 0)
+			if (tongue.type == 0)
 				humanCounter++;
-			if (gillType == 0)
+			if (gills.type == 0)
 				humanCounter++;
-			if (antennae == 0)
+			if (antennae.type == 0)
 				humanCounter++;
-			if (horns == 0)
+			if (horns.count == 0)
 				humanCounter++;
-			if (wingType == Wings.NONE)
+			if (wings.type == Wings.NONE)
 				humanCounter++;
 			if (tailType == 0)
 				humanCounter++;
-			if (armType == Arms.HUMAN)
+			if (arms.type == Arms.HUMAN)
 				humanCounter++;
 			if (lowerBody == LowerBody.HUMAN)
 				humanCounter++;
@@ -1888,6 +1986,8 @@ use namespace CoC;
 			if (dogScore() >= 4)
 				chimeraCounter++;
 			if (wolfScore() >= 6)
+				chimeraCounter++;
+			if (werewolfScore() >= 6)
 				chimeraCounter++;
 			if (foxScore() >= 4)
 				chimeraCounter++;
@@ -1967,6 +2067,8 @@ use namespace CoC;
 				chimeraCounter++;
 			if (jabberwockyScore() >= 4)
 				chimeraCounter++;
+			if (avianScore() >= 4)
+				chimeraCounter++;
 			if (gargoyleScore() >= 21)
 				chimeraCounter++;
 			if (gooScore() >= 4)
@@ -1996,7 +2098,9 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (wolfScore() >= 6)
 				grandchimeraCounter++;
-*/			if (foxScore() >= 7)
+*/			if (werewolfScore() >= 12)
+				grandchimeraCounter++;
+			if (foxScore() >= 7)
 				grandchimeraCounter++;
 //			if (ferretScore() >= 4)
 //				grandchimeraCounter++;
@@ -2089,6 +2193,8 @@ use namespace CoC;
 			if (vampireScore() >= 10)
 				grandchimeraCounter++;
 			if (jabberwockyScore() >= 10)
+				grandchimeraCounter++;	
+			if (avianScore() >= 9)
 				grandchimeraCounter++;
 			if (gargoyleScore() >= 21)
 				grandchimeraCounter++;
@@ -2198,10 +2304,12 @@ use namespace CoC;
 				internalChimeraRatingCounter -= 3;
 			if (findPerk(PerkLib.ChimericalBodyAdvancedStage) >= 0)
 				internalChimeraRatingCounter -= 4;
-			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
+			if (findPerk(PerkLib.ChimericalBodySemiPerfectStage) >= 0)
 				internalChimeraRatingCounter -= 5;
-			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				internalChimeraRatingCounter -= 6;
+			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+				internalChimeraRatingCounter -= 7;
 			End("Player","racialScore");
 			return internalChimeraRatingCounter;
 		}
@@ -2210,25 +2318,25 @@ use namespace CoC;
 		public function demonScore():Number {
 			Begin("Player","racialScore","demon");
 			var demonCounter:Number = 0;
-			if (hornType == Horns.DEMON && horns > 0)
+			if (horns.type == Horns.DEMON && horns.count > 0)
 				demonCounter++;
-			if (cor >= 50 && hornType == Horns.DEMON && horns > 4)
+			if (cor >= 50 && horns.type == Horns.DEMON && horns.count > 4)
 				demonCounter++;
 			if (tailType == Tail.DEMONIC)
 				demonCounter++;
-			if (wingType == Wings.BAT_LIKE_TINY)
+			if (wings.type == Wings.BAT_LIKE_TINY)
 				demonCounter++;
-			if (wingType == Wings.BAT_LIKE_LARGE)
+			if (wings.type == Wings.BAT_LIKE_LARGE)
 				demonCounter += 2;
-			if (wingType == Wings.BAT_LIKE_LARGE_2)
+			if (wings.type == Wings.BAT_LIKE_LARGE_2)
 				demonCounter += 4;
-			if (tongueType == Tongue.DEMONIC)
+			if (tongue.type == Tongue.DEMONIC)
 				demonCounter++;
 			if (cor >= 50 && hasPlainSkinOnly() && skinTone != "slippery")
 				demonCounter++;
 			if (cor >= 50 && faceType == Face.HUMAN)
 				demonCounter++;
-			if (cor >= 50 && armType == Arms.HUMAN)
+			if (cor >= 50 && arms.type == Arms.HUMAN)
 				demonCounter++;
 			if (lowerBody == LowerBody.DEMONIC_HIGH_HEELS || lowerBody == LowerBody.DEMONIC_CLAWS)
 				demonCounter++;
@@ -2240,7 +2348,7 @@ use namespace CoC;
 				demonCounter += 1;
 			if (findPerk(PerkLib.BlackHeart) >= 0 && findPerk(PerkLib.ChimericalBodyAdvancedStage) >= 0)
 				demonCounter++;
-			if (hornType == Horns.GOAT)
+			if (horns.type == Horns.GOAT)
 				demonCounter -= 10;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				demonCounter += 10;
@@ -2258,17 +2366,17 @@ use namespace CoC;
 				devilkinCounter++;
 			if (tailType == Tail.GOAT || tailType == Tail.DEMONIC)
 				devilkinCounter++;
-			if (wingType == Wings.BAT_LIKE_TINY || wingType == Wings.BAT_LIKE_LARGE)
+			if (wings.type == Wings.BAT_LIKE_TINY || wings.type == Wings.BAT_LIKE_LARGE)
 				devilkinCounter += 4;
-			if (armType == Arms.DEVIL)
+			if (arms.type == Arms.DEVIL)
 				devilkinCounter++;
-			if (hornType == Horns.GOAT)
+			if (horns.type == Horns.GOAT)
 				devilkinCounter++;
-			if (earType == Ears.GOAT)
+			if (ears.type == Ears.GOAT)
 				devilkinCounter++;
 			if (faceType == Face.DEVIL_FANGS)
 				devilkinCounter++;
-			if (eyeType == Eyes.DEVIL)
+			if (eyes.type == Eyes.DEVIL)
 				devilkinCounter++;
 			if (tallness < 48)
 				devilkinCounter++;
@@ -2284,13 +2392,13 @@ use namespace CoC;
 			var minoCounter:Number = 0;
 			if (faceType == Face.HUMAN || faceType == Face.COW_MINOTAUR)
 				minoCounter++;
-			if (earType == Ears.COW)
+			if (ears.type == Ears.COW)
 				minoCounter++;
 			if (tailType == Tail.COW)
 				minoCounter++;
 			if (lowerBody == LowerBody.HOOFED)
 				minoCounter++;
-			if (hornType == Horns.COW_MINOTAUR)
+			if (horns.type == Horns.COW_MINOTAUR)
 				minoCounter++;
 			if (minoCounter >= 4) {
 				if (cumQ() > 500)
@@ -2320,13 +2428,13 @@ use namespace CoC;
 			var cowCounter:Number = 0;
 			if (faceType == Face.HUMAN || faceType == Face.COW_MINOTAUR)
 				cowCounter++;
-			if (earType == Ears.COW)
+			if (ears.type == Ears.COW)
 				cowCounter++;
 			if (tailType == Tail.COW)
 				cowCounter++;
 			if (lowerBody == LowerBody.HOOFED)
 				cowCounter++;
-			if (hornType == Horns.COW_MINOTAUR)
+			if (horns.type == Horns.COW_MINOTAUR)
 				cowCounter++;
 			if (cowCounter >= 4) {
 				if (biggestTitSize() > 4)
@@ -2359,9 +2467,9 @@ use namespace CoC;
 				counter++;
 			if (hasVagina() && vaginaType() == VaginaClass.BLACK_SAND_TRAP)
 				counter++;
-			if (eyeType == Eyes.BLACK_EYES_SAND_TRAP)
+			if (eyes.type == Eyes.BLACK_EYES_SAND_TRAP)
 				counter++;
-			if (wingType == Wings.GIANT_DRAGONFLY)
+			if (wings.type == Wings.GIANT_DRAGONFLY)
 				counter++;
 			if (hasStatusEffect(StatusEffects.Uniball))
 				counter++;
@@ -2377,13 +2485,13 @@ use namespace CoC;
 				beeCounter++;
 			if (hairColor == "black and yellow") // TODO if hairColor2 == yellow && hairColor == black
 				beeCounter += 2;
-			if (antennae == Antennae.BEE)
+			if (antennae.type == Antennae.BEE)
 			{
 				beeCounter++;
 				if (faceType == Face.HUMAN)
 					beeCounter++;
 			}
-			if (armType == Arms.BEE)
+			if (arms.type == Arms.BEE)
 				beeCounter++;
 			if (lowerBody == LowerBody.BEE)
 			{
@@ -2393,9 +2501,9 @@ use namespace CoC;
 			}
 			if (tailType == Tail.BEE_ABDOMEN)
 				beeCounter++;
-			if (wingType == Wings.BEE_LIKE_SMALL)
+			if (wings.type == Wings.BEE_LIKE_SMALL)
 				beeCounter++;
-			if (wingType == Wings.BEE_LIKE_LARGE)
+			if (wings.type == Wings.BEE_LIKE_LARGE)
 				beeCounter += 2;
 			if (beeCounter > 0 && findPerk(PerkLib.TrachealSystem) >= 0)
 				beeCounter++;
@@ -2416,7 +2524,7 @@ use namespace CoC;
 			var counter:int = 0;
 			if (faceType == Face.FERRET_MASK) counter++;
 			if (faceType == Face.FERRET) counter+=2;
-			if (earType == Ears.FERRET) counter++;
+			if (ears.type == Ears.FERRET) counter++;
 			if (tailType == Tail.FERRET) counter++;
 			if (lowerBody == LowerBody.FERRET) counter++;
 			if (hasFur() && counter > 0) counter++;
@@ -2430,7 +2538,7 @@ use namespace CoC;
 			var dogCounter:Number = 0;
 			if (faceType == Face.DOG)
 				dogCounter++;
-			if (earType == Ears.DOG)
+			if (ears.type == Ears.DOG)
 				dogCounter++;
 			if (tailType == Tail.DOG)
 				dogCounter++;
@@ -2458,7 +2566,7 @@ use namespace CoC;
 		public function mouseScore():Number {
 			Begin("Player","racialScore","mouse");
 			var mouseCounter:Number = 0;
-			if (earType == Ears.MOUSE)
+			if (ears.type == Ears.MOUSE)
 				mouseCounter++;
 			if (tailType == Tail.MOUSE)
 				mouseCounter++;
@@ -2485,7 +2593,7 @@ use namespace CoC;
 				coonCounter++;
 			if (faceType == Face.RACCOON)
 				coonCounter += 2;
-			if (earType == Ears.RACCOON)
+			if (ears.type == Ears.RACCOON)
 				coonCounter++;
 			if (tailType == Tail.RACCOON)
 				coonCounter++;
@@ -2511,15 +2619,15 @@ use namespace CoC;
 			var foxCounter:Number = 0;
 			if (faceType == Face.FOX)
 				foxCounter++;
-			if (eyeType == Eyes.FOX)
+			if (eyes.type == Eyes.FOX)
 				foxCounter++;
-			if (earType == Ears.FOX)
+			if (ears.type == Ears.FOX)
 				foxCounter++;
 			if (tailType == Tail.FOX)
 				foxCounter++;
 			if (tailType == Tail.FOX && tailCount >= 2)
 				foxCounter -= 7;
-			if (armType == Arms.FOX)
+			if (arms.type == Arms.FOX)
 				foxCounter++;
 			if (lowerBody == LowerBody.FOX)
 				foxCounter++;
@@ -2550,15 +2658,17 @@ use namespace CoC;
 				catCounter++;
 			if (faceType == Face.CHESHIRE || faceType == Face.CHESHIRE_SMILE)
 				catCounter -= 7;
-			if (eyeType == Eyes.CAT_SLITS)
+			if (eyes.type == Eyes.CAT_SLITS)
 				catCounter++;
-			if (earType == Ears.CAT)
+			if (ears.type == Ears.CAT)
 				catCounter++;
-			if (tongueType == Tongue.CAT)
+			if (eyes.type == Eyes.FERAL)
+				catCounter -= 11;
+			if (tongue.type == Tongue.CAT)
 				catCounter++;
 			if (tailType == Tail.CAT)
 				catCounter++;
-			if (armType == Arms.CAT)
+			if (arms.type == Arms.CAT)
 				catCounter++;
 			if (lowerBody == LowerBody.CAT)
 				catCounter++;
@@ -2574,9 +2684,9 @@ use namespace CoC;
 				catCounter++;
 			if (hairColor == "lilac and white striped" && coatColor == "lilac and white striped")
 				catCounter -= 7;
-			if (hornType == Horns.DEMON || hornType == Horns.DRACONIC_X2 || hornType == Horns.DRACONIC_X4_12_INCH_LONG)
+			if (horns.type == Horns.DEMON || horns.type == Horns.DRACONIC_X2 || horns.type == Horns.DRACONIC_X4_12_INCH_LONG)
 				catCounter -= 2;
-			if (wingType == Wings.BAT_LIKE_TINY || wingType == Wings.DRACONIC_SMALL || wingType == Wings.BAT_LIKE_LARGE || wingType == Wings.DRACONIC_LARGE || Wings.BAT_LIKE_LARGE_2 || Wings.DRACONIC_HUGE)
+			if (wings.type == Wings.BAT_LIKE_TINY || wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.BAT_LIKE_LARGE || wings.type == Wings.DRACONIC_LARGE || Wings.BAT_LIKE_LARGE_2 || Wings.DRACONIC_HUGE)
 				catCounter -= 2;
 			if (findPerk(PerkLib.Flexibility) > 0)
 				catCounter++;
@@ -2600,15 +2710,15 @@ use namespace CoC;
 			var nekomataCounter:Number = 0;
 			if (faceType == Face.CAT || faceType == Face.CAT_CANINES)
 				nekomataCounter++;
-			if (eyeType == Eyes.CAT_SLITS)
+			if (eyes.type == Eyes.CAT_SLITS)
 				nekomataCounter++;
-			if (earType == Ears.CAT)
+			if (ears.type == Ears.CAT)
 				nekomataCounter++;
-			if (tongueType == Tongue.CAT)
+			if (tongue.type == Tongue.CAT)
 				nekomataCounter++;
 			if (tailType == Tail.CAT)
 				nekomataCounter++;
-			if (armType == Arms.CAT)
+			if (arms.type == Arms.CAT)
 				nekomataCounter++;
 			if (lowerBody == LowerBody.CAT)
 				nekomataCounter++;
@@ -2632,15 +2742,15 @@ use namespace CoC;
 			var cheshireCounter:Number = 0;
 			if (faceType == Face.CHESHIRE || faceType == Face.CHESHIRE_SMILE)
 				cheshireCounter += 2;
-			if (eyeType == Eyes.CAT_SLITS)
+			if (eyes.type == Eyes.CAT_SLITS)
 				cheshireCounter++;
-			if (earType == Ears.CAT)
+			if (ears.type == Ears.CAT)
 				cheshireCounter++;
-			if (tongueType == Tongue.CAT)
+			if (tongue.type == Tongue.CAT)
 				cheshireCounter++;
 			if (tailType == Tail.CAT)
 				cheshireCounter++;
-			if (armType == Arms.CAT)
+			if (arms.type == Arms.CAT)
 				cheshireCounter++;
 			if (lowerBody == LowerBody.CAT)
 				cheshireCounter++;
@@ -2667,17 +2777,17 @@ use namespace CoC;
 			var lizardCounter:Number = 0;
 			if (faceType == Face.LIZARD)
 				lizardCounter++;
-			if (earType == Ears.LIZARD)
+			if (ears.type == Ears.LIZARD)
 				lizardCounter++;
-			if (eyeType == Eyes.REPTILIAN)
+			if (eyes.type == Eyes.REPTILIAN)
 				lizardCounter++;
 			if (tailType == Tail.LIZARD)
 				lizardCounter++;
-			if (armType == Arms.LIZARD)
+			if (arms.type == Arms.LIZARD)
 				lizardCounter++;
 			if (lowerBody == LowerBody.LIZARD)
 				lizardCounter++;
-			if (horns > 0 && (hornType == Horns.DRACONIC_X2 || hornType == Horns.DRACONIC_X4_12_INCH_LONG))
+			if (horns.count > 0 && (horns.type == Horns.DRACONIC_X2 || horns.type == Horns.DRACONIC_X4_12_INCH_LONG))
 				lizardCounter++;
 			if (hasScales())
 				lizardCounter++;
@@ -2703,11 +2813,11 @@ use namespace CoC;
 		public function spiderScore():Number {
 			Begin("Player","racialScore","spider");
 			var spiderCounter:Number = 0;
-			if (eyeType == Eyes.FOUR_SPIDER_EYES)
+			if (eyes.type == Eyes.FOUR_SPIDER_EYES)
 				spiderCounter++;
 			if (faceType == Face.SPIDER_FANGS)
 				spiderCounter++;
-			if (armType == Arms.SPIDER)
+			if (arms.type == Arms.SPIDER)
 				spiderCounter++;
 			if (lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS)
 				spiderCounter++;
@@ -2740,7 +2850,7 @@ use namespace CoC;
 			var horseCounter:Number = 0;
 			if (faceType == Face.HORSE)
 				horseCounter++;
-			if (earType == Ears.HORSE)
+			if (ears.type == Ears.HORSE)
 				horseCounter++;
 			if (tailType == Tail.HORSE)
 				horseCounter++;
@@ -2751,7 +2861,7 @@ use namespace CoC;
 			if (hasVagina() && vaginaType() == VaginaClass.EQUINE)
 				horseCounter++;
 			if (hasFur()) {
-				if (armType == Arms.HUMAN)
+				if (arms.type == Arms.HUMAN)
 					horseCounter++;
 				horseCounter++;
 			}
@@ -2772,12 +2882,12 @@ use namespace CoC;
 		public function kitsuneScore():Number {
 			Begin("Player","racialScore","kitsune");
 			var kitsuneCounter:int = 0;
-			if (eyeType == Eyes.FOX)
+			if (eyes.type == Eyes.FOX)
 				kitsuneCounter++;
-			if (earType == Ears.FOX)
+			if (ears.type == Ears.FOX)
 				kitsuneCounter++;
 			//If the character has ears other than fox ears, -1
-			if (earType != Ears.FOX)
+			if (ears.type != Ears.FOX)
 				kitsuneCounter--;
 			if (tailType == Tail.FOX && tailCount >= 2 && tailCount < 4)
 				kitsuneCounter++;
@@ -2798,7 +2908,7 @@ use namespace CoC;
 				kitsuneCounter -= 2;
 			if (skin.base.type != Skin.PLAIN)
 				kitsuneCounter -= 3;
-			if (armType == Arms.HUMAN || armType == Arms.KITSUNE)
+			if (arms.type == Arms.HUMAN || arms.type == Arms.KITSUNE)
 				kitsuneCounter++;
 			if (lowerBody == LowerBody.FOX || lowerBody == LowerBody.HUMAN)
 				kitsuneCounter++;
@@ -2840,33 +2950,33 @@ use namespace CoC;
 				dragonCounter++;
 			if (faceType == Face.JABBERWOCKY || faceType == Face.BUCKTOOTH)
 				dragonCounter -= 10;
-			if (eyeType == Eyes.DRAGON)
+			if (eyes.type == Eyes.DRAGON)
 				dragonCounter++;
-			if (earType == Ears.DRAGON)
+			if (ears.type == Ears.DRAGON)
 				dragonCounter++;
 			if (tailType == Tail.DRACONIC)
 				dragonCounter++;
-			if (tongueType == Tongue.DRACONIC)
+			if (tongue.type == Tongue.DRACONIC)
 				dragonCounter++;
-			if (wingType == Wings.DRACONIC_SMALL)
+			if (wings.type == Wings.DRACONIC_SMALL)
 				dragonCounter++;
-			if (wingType == Wings.DRACONIC_LARGE)
+			if (wings.type == Wings.DRACONIC_LARGE)
 				dragonCounter += 2;
-			if (wingType == Wings.DRACONIC_HUGE)
+			if (wings.type == Wings.DRACONIC_HUGE)
 				dragonCounter += 4;
-			if (wingType == Wings.FEY_DRAGON_WINGS)
+			if (wings.type == Wings.FEY_DRAGON_WINGS)
 				dragonCounter -= 10;
 			if (lowerBody == LowerBody.DRAGON)
 				dragonCounter++;
-			if (armType == Arms.DRAGON)
+			if (arms.type == Arms.DRAGON)
 				dragonCounter++;
 			if (tallness > 120 && dragonCounter >= 10)
 				dragonCounter++;
 			if (skinType == Skin.DRAGON_SCALES)// FIXME: what about PARTIAL_DRAGON_SCALES?
 				dragonCounter++;
-			if (hornType == Horns.DRACONIC_X4_12_INCH_LONG)
+			if (horns.type == Horns.DRACONIC_X4_12_INCH_LONG)
 				dragonCounter += 2;
-			if (hornType == Horns.DRACONIC_X2)
+			if (horns.type == Horns.DRACONIC_X2)
 				dragonCounter++;
 		//	if (dragonCocks() > 0)
 		//		dragonCounter++;
@@ -2901,29 +3011,29 @@ use namespace CoC;
 				jabberwockyCounter++;
 			if (faceType == Face.DRAGON || faceType == Face.DRAGON_FANGS)
 				jabberwockyCounter -= 10;
-			if (eyeType == Eyes.DRAGON)
+			if (eyes.type == Eyes.DRAGON)
 				jabberwockyCounter++;
-			if (earType == Ears.DRAGON)
+			if (ears.type == Ears.DRAGON)
 				jabberwockyCounter++;
 			if (tailType == Tail.DRACONIC)
 				jabberwockyCounter++;
-			if (tongueType == Tongue.DRACONIC)
+			if (tongue.type == Tongue.DRACONIC)
 				jabberwockyCounter++;
-			if (wingType == Wings.FEY_DRAGON_WINGS)
+			if (wings.type == Wings.FEY_DRAGON_WINGS)
 				jabberwockyCounter += 4;
-			if (wingType == Wings.DRACONIC_SMALL || wingType == Wings.DRACONIC_LARGE || wingType == Wings.DRACONIC_HUGE)
+			if (wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.DRACONIC_HUGE)
 				jabberwockyCounter -= 10;
 			if (lowerBody == LowerBody.DRAGON)
 				jabberwockyCounter++;
-			if (armType == Arms.DRAGON)
+			if (arms.type == Arms.DRAGON)
 				jabberwockyCounter++;
 			if (tallness > 120 && jabberwockyCounter >= 10)
 				jabberwockyCounter++;
 			if (skinType == Skin.DRAGON_SCALES)// FIXME: what about PARTIAL_DRAGON_SCALES?
 				jabberwockyCounter++;
-			if (hornType == Horns.DRACONIC_X4_12_INCH_LONG)
+			if (horns.type == Horns.DRACONIC_X4_12_INCH_LONG)
 				jabberwockyCounter += 2;
-			if (hornType == Horns.DRACONIC_X2)
+			if (horns.type == Horns.DRACONIC_X2)
 				jabberwockyCounter++;
 		//	if (dragonCocks() > 0)
 		//		dragonCounter++;
@@ -2965,7 +3075,7 @@ use namespace CoC;
 				if (lowerBody == LowerBody.HUMAN)
 					goblinCounter++;
 			}
-			if (earType == Ears.ELFIN)
+			if (ears.type == Ears.ELFIN)
 				goblinCounter++;
 			if (skinTone == "pale yellow" || skinTone == "grayish-blue" || skinTone == "green" || skinTone == "dark green")
 				goblinCounter++;
@@ -2986,10 +3096,10 @@ use namespace CoC;
 				gooCounter++;
 				if (faceType == Face.HUMAN)
 					gooCounter++;
-				if (armType == Arms.HUMAN)
+				if (arms.type == Arms.HUMAN)
 					gooCounter++;
 			}
-			if (wingType == Wings.NONE)
+			if (wings.type == Wings.NONE)
 				gooCounter++;
 			if (lowerBody == LowerBody.GOO)
 				gooCounter += 2;
@@ -3013,17 +3123,17 @@ use namespace CoC;
 			var nagaCounter:Number = 0;
 			if (isNaga())
 				nagaCounter += 2;
-			if (tongueType == Tongue.SNAKE)
+			if (tongue.type == Tongue.SNAKE)
 				nagaCounter++;
 			if (faceType == Face.SNAKE_FANGS)
 				nagaCounter++;
-			if (armType == Arms.HUMAN)
+			if (arms.type == Arms.HUMAN)
 				nagaCounter++;
 			if (hasPartialCoat(Skin.SCALES))
 				nagaCounter++;
-			if (eyeType == Eyes.SNAKE)
+			if (eyes.type == Eyes.SNAKE)
 				nagaCounter++;
-			if (earType == Ears.SNAKE)
+			if (ears.type == Ears.SNAKE)
 				nagaCounter++;
 			if (gorgonScore() > 10 || vouivreScore() > 10 || couatlScore() > 10)
 				nagaCounter -= 8;
@@ -3037,27 +3147,27 @@ use namespace CoC;
 			var gorgonCounter:Number = 0;
 			if (isNaga())
 				gorgonCounter += 2;
-			if (tongueType == Tongue.SNAKE)
+			if (tongue.type == Tongue.SNAKE)
 				gorgonCounter++;
 			if (faceType == Face.SNAKE_FANGS)
 				gorgonCounter++;
-			if (armType == Arms.HUMAN)
+			if (arms.type == Arms.HUMAN)
 				gorgonCounter++;
 			if (hasCoatOfType(Skin.SCALES))
 				gorgonCounter++;
-			if (earType == Ears.SNAKE)
+			if (ears.type == Ears.SNAKE)
 				gorgonCounter++;
-			if (eyeType == Eyes.SNAKE)
+			if (eyes.type == Eyes.SNAKE)
 				gorgonCounter++;
-			if (eyeType == Eyes.GORGON)
+			if (eyes.type == Eyes.GORGON)
 				gorgonCounter += 2;
 			if (hairType == Hair.GORGON)
 				gorgonCounter += 2;
 			if (findPerk(PerkLib.GorgonsEyes) >= 0)
 				gorgonCounter++;
-			if (antennae != Antennae.NONE)
+			if (antennae.type != Antennae.NONE)
 				gorgonCounter -= 3;
-			if (wingType != Wings.NONE)
+			if (wings.type != Wings.NONE)
 				gorgonCounter -= 3;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				gorgonCounter += 10;
@@ -3075,21 +3185,21 @@ use namespace CoC;
 			var vouivreCounter:Number = 0;
 			if (isNaga())
 				vouivreCounter += 2;
-			if (tongueType == Tongue.SNAKE)
+			if (tongue.type == Tongue.SNAKE)
 				vouivreCounter++;
 			if (faceType == Face.SNAKE_FANGS)
 				vouivreCounter++;
-			if (armType == Arms.DRAGON)
+			if (arms.type == Arms.DRAGON)
 				vouivreCounter++;
 			if (hasCoatOfType(Skin.DRAGON_SCALES))
 				vouivreCounter++;
-			if (eyeType == Eyes.SNAKE)
+			if (eyes.type == Eyes.SNAKE)
 				vouivreCounter++;
-			if (earType == Ears.DRAGON)
+			if (ears.type == Ears.DRAGON)
 				vouivreCounter++;
-			if (hornType == Horns.DRACONIC_X4_12_INCH_LONG || hornType == Horns.DRACONIC_X2)
+			if (horns.type == Horns.DRACONIC_X4_12_INCH_LONG || horns.type == Horns.DRACONIC_X2)
 				vouivreCounter++;
-			if (wingType == Wings.DRACONIC_SMALL || wingType == Wings.DRACONIC_LARGE || wingType == Wings.DRACONIC_HUGE)
+			if (wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.DRACONIC_HUGE)
 				vouivreCounter += 2;
 			if (findPerk(PerkLib.DragonFireBreath) >= 0 && vouivreCounter >= 11)
 				vouivreCounter++;
@@ -3115,21 +3225,21 @@ use namespace CoC;
 			var couatlCounter:Number = 0;
 			if (isNaga())
 				couatlCounter += 2;
-			if (tongueType == Tongue.SNAKE)
+			if (tongue.type == Tongue.SNAKE)
 				couatlCounter++;
 			if (faceType == Face.SNAKE_FANGS)
 				couatlCounter++;
-			if (armType == Arms.HARPY)
+			if (arms.type == Arms.HARPY)
 				couatlCounter++;
 			if (hasCoatOfType(Skin.SCALES))
 				couatlCounter++;
-			if (earType == Ears.SNAKE)
+			if (ears.type == Ears.SNAKE)
 				couatlCounter++;
-			if (eyeType == Eyes.SNAKE)
+			if (eyes.type == Eyes.SNAKE)
 				couatlCounter++;
 			if (hairType == Hair.FEATHER)
 				couatlCounter++;
-			if (wingType == Wings.FEATHERED_LARGE)
+			if (wings.type == Wings.FEATHERED_LARGE)
 				couatlCounter += 2;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && couatlCounter >= 7)
 				couatlCounter += 1;
@@ -3146,7 +3256,7 @@ use namespace CoC;
 				bunnyCounter++;
 			if (tailType == Tail.RABBIT)
 				bunnyCounter++;
-			if (earType == Ears.BUNNY)
+			if (ears.type == Ears.BUNNY)
 				bunnyCounter++;
 			if (lowerBody == LowerBody.BUNNY)
 				bunnyCounter++;
@@ -3156,10 +3266,10 @@ use namespace CoC;
 			//Human skin on bunmorph adds
 			if (hasPlainSkin() && bunnyCounter > 1 && skinTone != "slippery")
 				bunnyCounter++;
-			//No wings and antennae a plus
-			if (bunnyCounter > 0 && antennae == 0)
+			//No wings and antennae.type a plus
+			if (bunnyCounter > 0 && antennae.type == 0)
 				bunnyCounter++;
-			if (bunnyCounter > 0 && wingType == Wings.NONE)
+			if (bunnyCounter > 0 && wings.type == Wings.NONE)
 				bunnyCounter++;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				bunnyCounter += 10;
@@ -3174,11 +3284,11 @@ use namespace CoC;
 		public function harpyScore():Number {
 			Begin("Player","racialScore","harpy");
 			var harpy:Number = 0;
-			if (armType == Arms.HARPY)
+			if (arms.type == Arms.HARPY)
 				harpy++;
 			if (hairType == Hair.FEATHER)
 				harpy++;
-			if (wingType == Wings.FEATHERED_LARGE)
+			if (wings.type == Wings.FEATHERED_LARGE)
 				harpy += 2;
 			if (tailType == Tail.HARPY)
 				harpy++;
@@ -3192,7 +3302,7 @@ use namespace CoC;
 				harpy++;
 			if (faceType == Face.SHARK_TEETH)
 				harpy--;
-			if (harpy >= 2 && (earType == Ears.HUMAN || earType == Ears.ELFIN))
+			if (harpy >= 2 && (ears.type == Ears.HUMAN || ears.type == Ears.ELFIN))
 				harpy++;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				harpy += 10;
@@ -3209,7 +3319,7 @@ use namespace CoC;
 			var kanga:Number = 0;
 			if (kangaCocks() > 0)
 				kanga++;
-			if (earType == Ears.KANGAROO)
+			if (ears.type == Ears.KANGAROO)
 				kanga++;
 			if (tailType == Tail.KANGAROO)
 				kanga++;
@@ -3230,13 +3340,13 @@ use namespace CoC;
 			var sharkCounter:Number = 0;
 			if (faceType == Face.SHARK_TEETH)
 				sharkCounter++;
-			if (gillType == Gills.FISH)
+			if (gills.type == Gills.FISH)
 				sharkCounter++;
-			if (rearBody == RearBody.SHARK_FIN)
+			if (rearBody.type == RearBody.SHARK_FIN)
 				sharkCounter++;
-			if (wingType == Wings.SHARK_FIN)
+			if (wings.type == Wings.SHARK_FIN)
 				sharkCounter -= 7;
-			if (armType == Arms.SHARK)
+			if (arms.type == Arms.SHARK)
 				sharkCounter++;
 			if (lowerBody == LowerBody.SHARK)
 				sharkCounter++;
@@ -3246,7 +3356,7 @@ use namespace CoC;
 				sharkCounter++;
 			if (hasScales() && InCollection(skin.coat.color, "rough gray","orange and black"))
 				sharkCounter++;
-			if (eyeType == Eyes.HUMAN && hairType == Hair.NORMAL && hairColor == "silver" && hasScales() && InCollection(skin.coat.color, "rough gray","orange and black"))
+			if (eyes.type == Eyes.HUMAN && hairType == Hair.NORMAL && hairColor == "silver" && hasScales() && InCollection(skin.coat.color, "rough gray","orange and black"))
 				sharkCounter++;
 			if (vaginas.length > 0 && cocks.length > 0)
 				sharkCounter++;
@@ -3263,7 +3373,7 @@ use namespace CoC;
 		public function orcaScore():Number {
 			Begin("Player","racialScore","orca");
 			var orcaCounter:Number = 0;
-			if (earType == Ears.ORCA)
+			if (ears.type == Ears.ORCA)
 				orcaCounter++;
 			if (tailType == Tail.ORCA)
 				orcaCounter++;
@@ -3271,17 +3381,17 @@ use namespace CoC;
 				orcaCounter++;
 			if (lowerBody == LowerBody.ORCA)
 				orcaCounter++;
-			if (armType == Arms.ORCA)
+			if (arms.type == Arms.ORCA)
 				orcaCounter++;
-			if (rearBody == RearBody.ORCA_BLOWHOLE)
+			if (rearBody.type == RearBody.ORCA_BLOWHOLE)
 				orcaCounter++;
 			if (hasPlainSkinOnly() && skinAdj == "glossy")
 				orcaCounter++;
 			if (skin.base.pattern == Skin.PATTERN_ORCA_UNDERBODY)
 				orcaCounter++;
-			if (wingType == Wings.NONE)
+			if (wings.type == Wings.NONE)
 				orcaCounter += 2;
-			if (eyeType == Eyes.HUMAN)
+			if (eyes.type == Eyes.HUMAN)
 				orcaCounter++;
 			if (tallness >= 84)
 				orcaCounter++;
@@ -3298,17 +3408,17 @@ use namespace CoC;
 		public function oniScore():Number {
 			Begin("Player","racialScore","oni");
 			var oniCounter:Number = 0;
-			if (earType == Ears.ONI)
+			if (ears.type == Ears.ONI)
 				oniCounter++;
 			if (faceType == Face.ONI_TEETH)
 				oniCounter++;
-			if (hornType == Horns.ONI)
+			if (horns.type == Horns.ONI)
 				oniCounter++;
-			if (armType == Arms.ONI)
+			if (arms.type == Arms.ONI)
 				oniCounter++;
 			if (lowerBody == LowerBody.ONI)
 				oniCounter++;
-			if (eyeType == Eyes.ONI && InCollection(eyeColor,Mutations.oniEyeColors))
+			if (eyes.type == Eyes.ONI && InCollection(eyes.colour,Mutations.oniEyeColors))
 				oniCounter++;
 			if (skinTone == "red" || skinTone == "reddish orange" || skinTone == "purple" || skinTone == "blue")
 				oniCounter++;
@@ -3335,13 +3445,13 @@ use namespace CoC;
 		public function elfScore():Number {
 			Begin("Player","racialScore","elf");
 			var elfCounter:Number = 0;
-			if (earType == Ears.ELVEN)
+			if (ears.type == Ears.ELVEN)
 				elfCounter++;
-			if (eyeType == Eyes.ELF)
+			if (eyes.type == Eyes.ELF)
 				elfCounter++;
-			if (tongueType == Tongue.ELF)
+			if (tongue.type == Tongue.ELF)
 				elfCounter++;
-			if (armType == Arms.ELF)
+			if (arms.type == Arms.ELF)
 				elfCounter++;
 			if (lowerBody == LowerBody.ELF)
 				elfCounter++;
@@ -3370,19 +3480,19 @@ use namespace CoC;
 		public function raijuScore():Number {
 			Begin("Player","racialScore","raiju");
 			var raijuCounter:Number = 0;
-			if (earType == Ears.WEASEL)
+			if (ears.type == Ears.WEASEL)
 				raijuCounter++;
-			if (eyeType == Eyes.RAIJU)
+			if (eyes.type == Eyes.RAIJU)
 				raijuCounter++;
 			if (faceType == Face.RAIJU_FANGS)
 				raijuCounter++;
-			if (armType == Arms.RAIJU)
+			if (arms.type == Arms.RAIJU)
 				raijuCounter++;
 			if (lowerBody == LowerBody.RAIJU)
 				raijuCounter++;
 			if (tailType == Tail.RAIJU)
 				raijuCounter++;
-			if (rearBody == RearBody.RAIJU_MANE)
+			if (rearBody.type == RearBody.RAIJU_MANE)
 				raijuCounter++;
 			if (skin.base.pattern == Skin.PATTERN_LIGHTNING_SHAPED_TATTOO)
 				raijuCounter++;
@@ -3460,23 +3570,23 @@ use namespace CoC;
 			var mantisCounter:Number = 0;
 			if (hasCoatOfType(Skin.CHITIN))
 				mantisCounter++;
-			if (antennae == Antennae.MANTIS)
+			if (antennae.type == Antennae.MANTIS)
 			{
 				mantisCounter++;
 				if (faceType == Face.HUMAN)
 					mantisCounter++;
 			}
-			if (armType == Arms.MANTIS)
+			if (arms.type == Arms.MANTIS)
 				mantisCounter++;
 			if (lowerBody == LowerBody.MANTIS)
 				mantisCounter++;
 			if (tailType == Tail.MANTIS_ABDOMEN)
 				mantisCounter++;
-			if (wingType == Wings.MANTIS_LIKE_SMALL)
+			if (wings.type == Wings.MANTIS_LIKE_SMALL)
 				mantisCounter++;
-			if (wingType == Wings.MANTIS_LIKE_LARGE)
+			if (wings.type == Wings.MANTIS_LIKE_LARGE)
 				mantisCounter += 2;
-			if (wingType == Wings.MANTIS_LIKE_LARGE_2)
+			if (wings.type == Wings.MANTIS_LIKE_LARGE_2)
 				mantisCounter += 4;
 			if (mantisCounter > 0 && findPerk(PerkLib.TrachealSystem) >= 0)
 				mantisCounter++;
@@ -3510,11 +3620,11 @@ use namespace CoC;
 				salamanderCounter++;
 			if (faceType == Face.SALAMANDER_FANGS)
 				salamanderCounter++;
-			if (earType == Ears.HUMAN && faceType == Face.SALAMANDER_FANGS)
+			if (ears.type == Ears.HUMAN && faceType == Face.SALAMANDER_FANGS)
 				salamanderCounter++;
-			if (eyeType == Eyes.REPTILIAN)
+			if (eyes.type == Eyes.REPTILIAN)
 				salamanderCounter++;
-			if (armType == Arms.SALAMANDER)
+			if (arms.type == Arms.SALAMANDER)
 				salamanderCounter++;
 			if (lowerBody == LowerBody.SALAMANDER)
 				salamanderCounter++;
@@ -3545,13 +3655,13 @@ use namespace CoC;
 			var yetiCounter:Number = 0;
 			if (skinTone == "dark")
 				yetiCounter++;
-			if (eyeType == Eyes.HUMAN)
+			if (eyes.type == Eyes.HUMAN)
 				yetiCounter++;
 			if (lowerBody == LowerBody.YETI)
 				yetiCounter++;
-			if (armType == Arms.YETI)
+			if (arms.type == Arms.YETI)
 				yetiCounter++;
-			if (earType == Ears.YETI)
+			if (ears.type == Ears.YETI)
 				yetiCounter++;
 			if (faceType == Face.YETI_FANGS)
 				yetiCounter++;
@@ -3565,7 +3675,7 @@ use namespace CoC;
 				yetiCounter++;
 			if (tallness >= 78)
 				yetiCounter++;
-			if (buttRating >= 10)
+			if (butt.type >= 10)
 				yetiCounter++;
 			
 			End("Player","racialScore");
@@ -3575,7 +3685,7 @@ use namespace CoC;
 		//Centaur score
 		public function centaurScore():Number
 		{
-			if (hornType == Horns.UNICORN)
+			if (horns.type == Horns.UNICORN)
 				return 0;
 			Begin("Player","racialScore","centaur");
 			var centaurCounter:Number = 0;
@@ -3587,9 +3697,9 @@ use namespace CoC;
 				centaurCounter++;
 			if (hasPlainSkinOnly())
 				centaurCounter++;
-			if (armType == Arms.HUMAN)
+			if (arms.type == Arms.HUMAN)
 				centaurCounter++;
-			if (earType == Ears.HUMAN || earType == Ears.HUMAN)
+			if (ears.type == Ears.HUMAN || ears.type == Ears.HUMAN)
 				centaurCounter++;
 			if (faceType == Face.HUMAN)
 				centaurCounter++;
@@ -3597,7 +3707,7 @@ use namespace CoC;
 				centaurCounter++;
 			if (hasVagina() && vaginaType() == VaginaClass.EQUINE)
 				centaurCounter++;
-			if (wingType != Wings.NONE)
+			if (wings.type != Wings.NONE)
 				centaurCounter -= 3;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				centaurCounter += 10;
@@ -3609,9 +3719,9 @@ use namespace CoC;
 
 		//Determine Unicorn Rating
 		public function unicornScore():Number {
-			if (hornType != Horns.UNICORN)
+			if (horns.type != Horns.UNICORN)
 				return 0;
-			if (wingType == Wings.FEATHERED_ALICORN)
+			if (wings.type == Wings.FEATHERED_ALICORN)
 				return 0;
 			Begin("Player","racialScore","unicorn");
 			var unicornCounter:Number = 0;
@@ -3619,7 +3729,7 @@ use namespace CoC;
 				unicornCounter += 2;
 			if (faceType == Face.HUMAN)
 				unicornCounter++;
-			if (earType == Ears.HORSE)
+			if (ears.type == Ears.HORSE)
 				unicornCounter++;
 			if (tailType == Tail.HORSE)
 				unicornCounter++;
@@ -3627,11 +3737,11 @@ use namespace CoC;
 				unicornCounter++;
 			if (legCount == 4)
 				unicornCounter++;
-			if (eyeColor == "red" || eyeColor == "blue")
+			if (eyes.colour == "red" || eyes.colour == "blue")
 				unicornCounter++;
-			if (hornType == Horns.UNICORN && horns < 6)
+			if (horns.type == Horns.UNICORN && horns.count < 6)
 				unicornCounter++;
-			if (hornType == Horns.UNICORN && horns >= 6)
+			if (horns.type == Horns.UNICORN && horns.count >= 6)
 				unicornCounter += 2;
 			if (hasFur() || hasPlainSkinOnly())
 				unicornCounter++;
@@ -3647,9 +3757,9 @@ use namespace CoC;
 		
 		//Determine Alicorn Rating
 		public function alicornScore():Number {
-			if (hornType != Horns.UNICORN)
+			if (horns.type != Horns.UNICORN)
 				return 0;
-			if (wingType != Wings.FEATHERED_ALICORN)
+			if (wings.type != Wings.FEATHERED_ALICORN)
 				return 0;
 			Begin("Player","racialScore","alicorn");
 			var alicornCounter:Number = 0;
@@ -3657,7 +3767,7 @@ use namespace CoC;
 				alicornCounter += 2;
 			if (faceType == Face.HUMAN)
 				alicornCounter++;
-			if (earType == Ears.HORSE)
+			if (ears.type == Ears.HORSE)
 				alicornCounter++;
 			if (tailType == Tail.HORSE)
 				alicornCounter++;
@@ -3665,13 +3775,13 @@ use namespace CoC;
 				alicornCounter++;
 			if (legCount == 4)
 				alicornCounter++;
-			if (eyeColor == "red" || eyeColor == "blue")
+			if (eyes.colour == "red" || eyes.colour == "blue")
 				alicornCounter++;
-			if (wingType == Wings.FEATHERED_ALICORN)
+			if (wings.type == Wings.FEATHERED_ALICORN)
 				alicornCounter += 2;
-			if (hornType == Horns.UNICORN && horns < 6)
+			if (horns.type == Horns.UNICORN && horns.count < 6)
 				alicornCounter++;
-			if (hornType == Horns.UNICORN && horns >= 6)
+			if (horns.type == Horns.UNICORN && horns.count >= 6)
 				alicornCounter += 2;
 			if (hasFur() || hasPlainSkinOnly())
 				alicornCounter++;
@@ -3695,14 +3805,14 @@ use namespace CoC;
 					phoenixCounter++;
 				if (faceType == Face.HUMAN && phoenixCounter > 2)
 					phoenixCounter++;
-				if (earType == Ears.HUMAN && phoenixCounter > 2)
+				if (ears.type == Ears.HUMAN && phoenixCounter > 2)
 					phoenixCounter++;
 			}
-			if (eyeType == Eyes.REPTILIAN)
+			if (eyes.type == Eyes.REPTILIAN)
 				phoenixCounter++;
-			if (wingType == Wings.FEATHERED_PHOENIX)
+			if (wings.type == Wings.FEATHERED_PHOENIX)
 				phoenixCounter++;
-			if (armType == Arms.PHOENIX)
+			if (arms.type == Arms.PHOENIX)
 				phoenixCounter++;
 			if (lowerBody == LowerBody.SALAMANDER)
 				phoenixCounter++;
@@ -3730,7 +3840,7 @@ use namespace CoC;
 				scyllaCounter++;
 			if (faceType != 0)
 				scyllaCounter--;
-			if (earType == Ears.ELFIN)
+			if (ears.type == Ears.ELFIN)
 				scyllaCounter++;
 			if (hasPlainSkinOnly() && skinAdj == "slippery")
 				scyllaCounter++;
@@ -3760,7 +3870,7 @@ use namespace CoC;
 			Begin("Player","racialScore","kitshoo");
 			var kitshooCounter:int = 0;
 			//If the character has fox ears, +1
-			if (earType == Ears.FOX)
+			if (ears.type == Ears.FOX)
 				kitshooCounter++;
 			//If the character has a fox tail, +1
 		//	if (tailType == FOX)
@@ -3829,11 +3939,11 @@ use namespace CoC;
 				plantCounter++;
 			if (faceType == Face.PLANT_DRAGON)
 				plantCounter--;
-			if (hornType == Horns.OAK || hornType == Horns.ORCHID)
+			if (horns.type == Horns.OAK || horns.type == Horns.ORCHID)
 				plantCounter++;
-			if (earType == Ears.ELFIN)
+			if (ears.type == Ears.ELFIN)
 				plantCounter++;
-			if (earType == Ears.LIZARD)
+			if (ears.type == Ears.LIZARD)
 				plantCounter--;
 			if ((hairType == Hair.LEAF || hairType == Hair.GRASS) && hairColor == "green")
 				plantCounter++;
@@ -3841,7 +3951,7 @@ use namespace CoC;
 				plantCounter++;
 		//	if (skinType == 6)/zielona skóra +1, bark skin +2
 		//		plantCounter += 2;
-			if (armType == Arms.PLANT)
+			if (arms.type == Arms.PLANT)
 				plantCounter++;
 			if (lowerBody == LowerBody.PLANT_HIGH_HEELS || lowerBody == LowerBody.PLANT_ROOT_CLAWS) {
 				if (tentacleCocks() > 0) {
@@ -3849,7 +3959,7 @@ use namespace CoC;
 				}
 				plantCounter++;
 			}
-			if (wingType == Wings.PLANT)
+			if (wings.type == Wings.PLANT)
 				plantCounter++;
 		//	if (scorpionCounter > 0 && findPerk(PerkLib.TrachealSystemEvolved) >= 0)
 		//		plantCounter++;
@@ -3868,17 +3978,17 @@ use namespace CoC;
 			var alrauneCounter:Number = 0;
 			if (faceType == Face.HUMAN)
 				alrauneCounter++;
-			if (eyeType == Eyes.HUMAN)
+			if (eyes.type == Eyes.HUMAN)
 				alrauneCounter++;
-			if (earType == Ears.ELFIN)
+			if (ears.type == Ears.ELFIN)
 				alrauneCounter++;
 			if ((hairType == Hair.LEAF || hairType == Hair.GRASS) && hairColor == "green")
 				alrauneCounter++;
 			if (skinType == Skin.PLAIN && (skinTone == "leaf green" || skinTone == "lime green" || skinTone == "turquoise"))
 				alrauneCounter++;
-			if (armType == Arms.PLANT)
+			if (arms.type == Arms.PLANT)
 				alrauneCounter++;
-			if (wingType == Wings.NONE)
+			if (wings.type == Wings.NONE)
 				alrauneCounter++;
 			if (lowerBody == LowerBody.PLANT_FLOWER)
 				alrauneCounter += 2;
@@ -3896,15 +4006,15 @@ use namespace CoC;
 				yggdrasilCounter += 2;
 			if ((hairType == Hair.ANEMONE || hairType == Hair.LEAF || hairType == Hair.GRASS) && hairColor == "green")
 				yggdrasilCounter++;
-			if (earType == Ears.LIZARD)
+			if (ears.type == Ears.LIZARD)
 				yggdrasilCounter++;
-			if (earType == Ears.ELFIN)
+			if (ears.type == Ears.ELFIN)
 				yggdrasilCounter -= 2;
-			if (armType == Arms.PLANT || armType == Arms.PLANT2)
+			if (arms.type == Arms.PLANT || arms.type == Arms.PLANT2)
 				yggdrasilCounter += 2;//++ - untill claws tf added arms tf will count for both arms and claws tf
 			//claws?
 
-			if (wingType == Wings.PLANT)
+			if (wings.type == Wings.PLANT)
 				yggdrasilCounter++;
 			//skin(fur(moss), scales(bark))
 			if (skinType == Skin.SCALES)
@@ -3926,11 +4036,13 @@ use namespace CoC;
 			var wolfCounter:Number = 0;
 			if (faceType == Face.WOLF)
 				wolfCounter++;
-			if (eyeType == Eyes.FENRIR)
+			if (eyes.type == Eyes.FENRIR)
 				wolfCounter++;
-			if (earType == Ears.WOLF)
+			if (eyes.type == Eyes.FERAL)
+				wolfCounter -= 11;
+			if (ears.type == Ears.WOLF)
 				wolfCounter++;
-			if (armType == Arms.WOLF)
+			if (arms.type == Arms.WOLF)
 				wolfCounter++;
 			if (lowerBody == LowerBody.WOLF)
 				wolfCounter++;
@@ -3940,17 +4052,58 @@ use namespace CoC;
 				wolfCounter++;
 			if (hairColor == "glacial white" && hasFur() && coatColor == "glacial white")
 				wolfCounter++;
-			if (rearBody == RearBody.FENRIR_ICE_SPIKES)
+			if (rearBody.type == RearBody.FENRIR_ICE_SPIKES)
 				wolfCounter++;
 			if (wolfCocks() > 0 && wolfCounter > 0)
 				wolfCounter++;
 			if (findPerk(PerkLib.FreezingBreath) >= 0)
 				wolfCounter++;
-			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && eyeType == 5)
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && eyes.type == 5)
 				wolfCounter += 1;
 			
 			End("Player","racialScore");
 			return wolfCounter;
+		}
+
+		//Werewolf score
+		public function werewolfScore():Number {
+			Begin("Player","racialScore","werewolf");
+			var werewolfCounter:Number = 0;
+			if (faceType == Face.WOLF_FANGS)
+				werewolfCounter++;
+			if (eyes.type == Eyes.FERAL)
+				werewolfCounter++;
+			if (eyes.type == Eyes.FENRIR)
+				werewolfCounter -= 7;
+			if (ears.type == Ears.WOLF)
+				werewolfCounter++;
+			if (tongue.type == Tongue.DOG)
+				werewolfCounter++;
+			if (arms.type == Arms.WOLF)
+				werewolfCounter++;
+			if (lowerBody == LowerBody.WOLF)
+				werewolfCounter++;
+			if (tailType == Tail.WOLF)
+				werewolfCounter++;
+			if (hasPartialCoat(Skin.FUR))
+				werewolfCounter++;
+			if (rearBody.type == RearBody.WOLF_COLLAR)
+				werewolfCounter++;
+			if (rearBody.type == RearBody.FENRIR_ICE_SPIKES)
+				werewolfCounter -= 7;
+			if (wolfCocks() > 0 && werewolfCounter > 0)
+				werewolfCounter++;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && werewolfCounter >= 3)
+				werewolfCounter++;
+			if (cor >= 20)
+				werewolfCounter += 2;
+			if (findPerk(PerkLib.Lycanthropy) >= 0)
+				werewolfCounter++;
+			if (findPerk(PerkLib.LycanthropyDormant) >= 0)
+				werewolfCounter -= 11;
+			
+			End("Player","racialScore");
+			return werewolfCounter;
 		}
 
 		public function sirenScore():Number {
@@ -3964,17 +4117,17 @@ use namespace CoC;
 				sirenCounter++;
 			if (tailType == Tail.SHARK)
 				sirenCounter++;
-			if (wingType == Wings.FEATHERED_LARGE)
+			if (wings.type == Wings.FEATHERED_LARGE)
 				sirenCounter += 2;
-			if (armType == Arms.HARPY)
+			if (arms.type == Arms.HARPY)
 				sirenCounter++;
 			if (lowerBody == LowerBody.SHARK)
 				sirenCounter++;
 			if (skinType == Skin.SCALES && (skinTone == "rough gray" || skinTone == "orange and black"))
 				sirenCounter++;
-			if (gillType == Gills.FISH)
+			if (gills.type == Gills.FISH)
 				sirenCounter++;
-			if (eyeType == Eyes.HUMAN)
+			if (eyes.type == Eyes.HUMAN)
 				sirenCounter++;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				sirenCounter += 10;
@@ -3987,7 +4140,7 @@ use namespace CoC;
 		public function pigScore():Number {
 			Begin("Player","racialScore","pig");
 			var pigCounter:Number = 0;
-			if (earType == Ears.PIG)
+			if (ears.type == Ears.PIG)
 				pigCounter++;
 			if (tailType == Tail.PIG)
 				pigCounter++;
@@ -4010,7 +4163,7 @@ use namespace CoC;
 			if (tailType == Tail.GOAT)
 				satyrCounter++;
 			if (satyrCounter >= 2) {
-				if (earType == Ears.ELFIN)
+				if (ears.type == Ears.ELFIN)
 					satyrCounter++;
 				if (faceType == Face.HUMAN)
 					satyrCounter++;
@@ -4030,13 +4183,13 @@ use namespace CoC;
 		public function rhinoScore():Number {
 			Begin("Player","racialScore","rhino");
 			var rhinoCounter:Number = 0;
-			if (earType == Ears.RHINO)
+			if (ears.type == Ears.RHINO)
 				rhinoCounter++;
 			if (tailType == Tail.RHINO)
 				rhinoCounter++;
 			if (faceType == Face.RHINO)
 				rhinoCounter++;
-			if (hornType == Horns.RHINO)
+			if (horns.type == Horns.RHINO)
 				rhinoCounter++;
 			if (rhinoCounter >= 2 && skinTone == "gray")
 				rhinoCounter++;
@@ -4054,13 +4207,13 @@ use namespace CoC;
 		public function echidnaScore():Number {
 			Begin("Player","racialScore","echidna");
 			var echidnaCounter:Number = 0;
-			if (earType == Ears.ECHIDNA)
+			if (ears.type == Ears.ECHIDNA)
 				echidnaCounter++;
 			if (tailType == Tail.ECHIDNA)
 				echidnaCounter++;
 			if (faceType == Face.ECHIDNA)
 				echidnaCounter++;
-			if (tongueType == Tongue.ECHIDNA)
+			if (tongue.type == Tongue.ECHIDNA)
 				echidnaCounter++;
 			if (lowerBody == LowerBody.ECHIDNA)
 				echidnaCounter++;
@@ -4076,7 +4229,7 @@ use namespace CoC;
 		public function deerScore():Number {
 			Begin("Player","racialScore","deer");
 			var deerCounter:Number = 0;
-			if (earType == Ears.DEER)
+			if (ears.type == Ears.DEER)
 				deerCounter++;
 			if (tailType == Tail.DEER)
 				deerCounter++;
@@ -4084,7 +4237,7 @@ use namespace CoC;
 				deerCounter++;
 			if (lowerBody == LowerBody.CLOVEN_HOOFED || lowerBody == LowerBody.DEERTAUR)
 				deerCounter++;
-			if (hornType == Horns.ANTLERS && horns >= 4)
+			if (horns.type == Horns.ANTLERS && horns.count >= 4)
 				deerCounter++;
 			if (deerCounter >= 2 && skinType == Skin.FUR)
 				deerCounter++;
@@ -4103,15 +4256,15 @@ use namespace CoC;
 			var dragonneCounter:Number = 0;
 			if (faceType == Face.CAT)
 				dragonneCounter++;
-			if (earType == Ears.CAT)
+			if (ears.type == Ears.CAT)
 				dragonneCounter++;
 			if (tailType == Tail.CAT)
 				dragonneCounter++;
-			if (tongueType == Tongue.DRACONIC)
+			if (tongue.type == Tongue.DRACONIC)
 				dragonneCounter++;
-			if (wingType == Wings.DRACONIC_LARGE)
+			if (wings.type == Wings.DRACONIC_LARGE)
 				dragonneCounter += 2;
-			if (wingType == Wings.DRACONIC_SMALL)
+			if (wings.type == Wings.DRACONIC_SMALL)
 				dragonneCounter++;
 			if (lowerBody == LowerBody.CAT)
 				dragonneCounter++;
@@ -4128,23 +4281,23 @@ use namespace CoC;
 			var manticoreCounter:Number = 0;
 			if (faceType == Face.MANTICORE)
 				manticoreCounter++;
-			if (eyeType == Eyes.MANTICORE)
+			if (eyes.type == Eyes.MANTICORE)
 				manticoreCounter++;
-			if (earType == Ears.LION)
+			if (ears.type == Ears.LION)
 				manticoreCounter++;
 			if (tailType == Tail.MANTICORE_PUSSYTAIL)
 				manticoreCounter += 2;
-			if (rearBody == RearBody.LION_MANE)
+			if (rearBody.type == RearBody.LION_MANE)
 				manticoreCounter++;
-			if (armType == Arms.LION)
+			if (arms.type == Arms.LION)
 				manticoreCounter++;
 			if (lowerBody == LowerBody.LION)
 				manticoreCounter++;
-			if (tongueType == Tongue.CAT)
+			if (tongue.type == Tongue.CAT)
 				manticoreCounter++;
-			if (wingType == Wings.MANTICORE_LIKE_SMALL)
+			if (wings.type == Wings.MANTICORE_LIKE_SMALL)
 				manticoreCounter++;
-			if (wingType == Wings.MANTICORE_LIKE_LARGE)
+			if (wings.type == Wings.MANTICORE_LIKE_LARGE)
 				manticoreCounter += 2;
 			if (!hasCock())
 				manticoreCounter++;
@@ -4170,11 +4323,11 @@ use namespace CoC;
 			var redpandaCounter:Number = 0;
 			if (faceType == Face.RED_PANDA)
 				redpandaCounter += 2;
-			if (earType == Ears.RED_PANDA)
+			if (ears.type == Ears.RED_PANDA)
 				redpandaCounter++;
 			if (tailType == Tail.RED_PANDA)
 				redpandaCounter++;
-			if (armType == Arms.RED_PANDA)
+			if (arms.type == Arms.RED_PANDA)
 				redpandaCounter++;
 			if (lowerBody == LowerBody.RED_PANDA)
 				redpandaCounter++;
@@ -4186,6 +4339,37 @@ use namespace CoC;
 				redpandaCounter++;
 			End("Player","racialScore");
 			return redpandaCounter;
+		}
+		
+		//Determine Horse Rating
+		public function avianScore():Number {
+			Begin("Player","racialScore","avian");
+			var avianCounter:Number = 0;
+			if (hairType == Hair.FEATHER)
+				avianCounter++;
+			if (faceType == Face.AVIAN)
+				avianCounter++;
+			if (ears.type == Ears.AVIAN)
+				avianCounter++;
+			if (tailType == Tail.AVIAN)
+				avianCounter++;
+			if (arms.type == Arms.AVIAN)
+				avianCounter++;
+			if (lowerBody == LowerBody.AVIAN)
+				avianCounter++;
+			if (wings.type == Wings.FEATHERED_AVIAN)
+				avianCounter += 2;
+			if (hasCoatOfType(Skin.FEATHER))
+				avianCounter++;
+			if (avianCocks() > 0)
+				avianCounter++;
+			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
+				avianCounter += 10;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && avianCounter >= 3)
+				avianCounter += 1;
+			
+			End("Player","racialScore");
+			return avianCounter;
 		}
 		
 		//Gargoyle
@@ -4200,17 +4384,17 @@ use namespace CoC;
 				gargoyleCounter++;
 			if (skinType == Skin.STONE)
 				gargoyleCounter++;
-			if (hornType == Horns.GARGOYLE)
+			if (horns.type == Horns.GARGOYLE)
 				gargoyleCounter++;
-			if (eyeType == Eyes.GEMSTONES)
+			if (eyes.type == Eyes.GEMSTONES)
 				gargoyleCounter++;
-			if (earType == Ears.ELFIN)
+			if (ears.type == Ears.ELFIN)
 				gargoyleCounter++;
 			if (faceType == Face.DEVIL_FANGS)
 				gargoyleCounter++;
-			if (tongueType == Tongue.DEMONIC)
+			if (tongue.type == Tongue.DEMONIC)
 				gargoyleCounter++;
-			if (armType == Arms.GARGOYLE || armType == Arms.GARGOYLE_2)
+			if (arms.type == Arms.GARGOYLE || arms.type == Arms.GARGOYLE_2)
 				gargoyleCounter++;
 			if (tailType == Tail.GARGOYLE || tailType == Tail.GARGOYLE_2)
 				gargoyleCounter++;
@@ -4220,7 +4404,7 @@ use namespace CoC;
 				gargoyleCounter++;
 			if (hasPerk(PerkLib.TransformationImmunity))
 				gargoyleCounter += 4;
-			if (wingType == Wings.GARGOYLE_LIKE_LARGE)
+			if (wings.type == Wings.GARGOYLE_LIKE_LARGE)
 				gargoyleCounter += 4;
 			
 			End("Player","racialScore");
@@ -4230,13 +4414,13 @@ use namespace CoC;
 		public function batScore():int{
             Begin("Player","racialScore","bat");
 			var counter:int = 0;
-			if(earType == Ears.BAT){ counter++;}
-			else if(earType == Ears.ELFIN){ counter -= 10;}
-			if(wingType == Wings.BAT_ARM) {counter += 5;}
+			if(ears.type == Ears.BAT){ counter++;}
+			else if(ears.type == Ears.ELFIN){ counter -= 10;}
+			if(wings.type == Wings.BAT_ARM) {counter += 5;}
 			if(lowerBody == LowerBody.HUMAN) {counter++;}
 			if(faceType == Face.VAMPIRE){counter +=2;}
-			if(eyeType == Eyes.VAMPIRE){counter++;}
-			if(rearBody == RearBody.BAT_COLLAR){counter++;}
+			if(eyes.type == Eyes.VAMPIRE){counter++;}
+			if(rearBody.type == RearBody.BAT_COLLAR){counter++;}
             End("Player","racialScore");
 			return counter < 0? 0:counter;
 		}
@@ -4244,13 +4428,13 @@ use namespace CoC;
 		public function vampireScore():int{
             Begin("Player","racialScore","vampire");
             var counter:int = 0;
-            if(earType == Ears.BAT){ counter-=10;}
-            else if(earType == Ears.VAMPIRE){ counter++;}
-			if(wingType == Wings.VAMPIRE){counter += 4;}
+            if(ears.type == Ears.BAT){ counter-=10;}
+            else if(ears.type == Ears.VAMPIRE){ counter++;}
+			if(wings.type == Wings.VAMPIRE){counter += 4;}
             if(lowerBody == LowerBody.HUMAN) {counter++;}
-			if(armType == Arms.HUMAN){counter++;}
+			if(arms.type == Arms.HUMAN){counter++;}
             if(faceType == Face.VAMPIRE){counter +=2;}
-			if(eyeType == Eyes.VAMPIRE){counter++;}
+			if(eyes.type == Eyes.VAMPIRE){counter++;}
             End("Player","racialScore");
 			return counter < 0? 0:counter;
 		}
@@ -5095,7 +5279,21 @@ use namespace CoC;
 					maxSpe += (10 * newGamePlusMod);
 					maxInt -= (10 * newGamePlusMod);
 				}
-			}//+15(60)((70))(((140)))/10-20(50-60)((70-80))(((130-140)))
+			}//+15(60)((70))(((140))) / 10 - 20(50 - 60)((70 - 80))(((130 - 140)))
+			if (werewolfScore() >= 6) {
+				if (wolfScore() >= 12) {
+					maxStr += (100 * newGamePlusMod);
+					maxTou += (40 * newGamePlusMod);
+					maxSpe += (60 * newGamePlusMod);
+					maxInt -= (20 * newGamePlusMod);
+				}
+				else {
+					maxStr += (50 * newGamePlusMod);
+					maxTou += (20 * newGamePlusMod);
+					maxSpe += (30 * newGamePlusMod);
+					maxInt -= (10 * newGamePlusMod);
+				}
+			}
 			if (foxScore() >= 4) {
 				if (foxScore() >= 7) {
 					maxStr -= (30 * newGamePlusMod);
@@ -5526,6 +5724,18 @@ use namespace CoC;
 				maxTou += (80 * newGamePlusMod);
 				maxSpe += (40 * newGamePlusMod);
 			}//+40/30-40
+			if (avianScore() >= 4) {
+				if (avianScore() >= 9) {
+					maxStr += (30 * newGamePlusMod);
+					maxSpe += (75 * newGamePlusMod);
+					maxInt += (30 * newGamePlusMod);
+				}
+				else {
+					maxStr += (15 * newGamePlusMod);
+					maxSpe += (30 * newGamePlusMod);
+					maxInt += (15 * newGamePlusMod);
+				}
+			}
 			if (isNaga()) {
 				maxStr += (15 * newGamePlusMod);
 				maxSpe += (15 * newGamePlusMod);
@@ -5743,7 +5953,7 @@ use namespace CoC;
 				maxLib += (6 * newGamePlusMod);
 				maxSen += (6 * newGamePlusMod);
 			}
-			if (findPerk(PerkLib.JobBarbarian) >= 0) maxStr += (10 * newGamePlusMod);
+			if (findPerk(PerkLib.JobSwordsman) >= 0) maxStr += (10 * newGamePlusMod);
 			if (findPerk(PerkLib.JobBeastWarrior) >= 0) {
 				maxStr += (5 * newGamePlusMod);
 				maxTou += (5 * newGamePlusMod);
@@ -5772,6 +5982,10 @@ use namespace CoC;
 				maxWis += (5 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.JobGuardian) >= 0) maxTou += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.JobHealer) >= 0) {
+				maxInt += (5 * newGamePlusMod);
+				maxWis += (5 * newGamePlusMod);
+			}
 			if (findPerk(PerkLib.JobHunter) >= 0) {
 				maxSpe += (10 * newGamePlusMod);
 				maxInt += (5 * newGamePlusMod);
@@ -5889,6 +6103,28 @@ use namespace CoC;
 				maxWis += 30;
 			}
 			if (findPerk(PerkLib.CarefulButRecklessAimAndShooting) >= 0 && findPerk(PerkLib.ColdAim) < 0) maxTou -= (15 * newGamePlusMod);
+			if (hasPerk(PerkLib.Lycanthropy)) {
+				if (((flags[kFLAGS.LUNA_MOON_CYCLE] - 3) || (flags[kFLAGS.LUNA_MOON_CYCLE] + 3)) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
+					maxStr += (10 * newGamePlusMod);
+					maxTou += (10 * newGamePlusMod);
+					maxSpe += (10 * newGamePlusMod);
+				}
+				if (((flags[kFLAGS.LUNA_MOON_CYCLE] - 2) || (flags[kFLAGS.LUNA_MOON_CYCLE] + 2)) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
+					maxStr += (20 * newGamePlusMod);
+					maxTou += (20 * newGamePlusMod);
+					maxSpe += (20 * newGamePlusMod);
+				}
+				if (((flags[kFLAGS.LUNA_MOON_CYCLE] - 1) || (flags[kFLAGS.LUNA_MOON_CYCLE] + 1)) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
+					maxStr += (30 * newGamePlusMod);
+					maxTou += (30 * newGamePlusMod);
+					maxSpe += (30 * newGamePlusMod);
+				}
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0) {
+					maxStr += (40 * newGamePlusMod);
+					maxTou += (40 * newGamePlusMod);
+					maxSpe += (40 * newGamePlusMod);
+				}
+			}
 			End("Player","getAllMaxStats.perks2");
 			Begin("Player","getAllMaxStats.effects");
 			//Apply New Game+
@@ -6104,6 +6340,9 @@ use namespace CoC;
 			}
 			if(hasStatusEffect(StatusEffects.HeroBane)) {
 				removeStatusEffect(StatusEffects.HeroBane);
+			}
+			if(hasStatusEffect(StatusEffects.PlayerRegenerate)) {
+				removeStatusEffect(StatusEffects.PlayerRegenerate);
 			}
 			if(hasStatusEffect(StatusEffects.Disarmed)) {
 				removeStatusEffect(StatusEffects.Disarmed);
@@ -6712,6 +6951,7 @@ use namespace CoC;
 				if (dcor > 0 && findPerk(PerkLib.PureAndLoving) >= 0) dcor *= 0.75;
 				if (dcor > 0 && weapon == game.weapons.HNTCANE) dcor *= 0.5;
 				if (findPerk(PerkLib.AscensionMoralShifter) >= 0) dcor *= 1 + (perkv1(PerkLib.AscensionMoralShifter) * 0.2);
+				if (findPerk(PerkLib.Lycanthropy) >= 0) dcor *= 1.2;
 				if (hasStatusEffect(StatusEffects.BlessingOfDivineFera)) dcor *= 2;
 				
 				if (sens > 50 && dsens > 0) dsens /= 2;

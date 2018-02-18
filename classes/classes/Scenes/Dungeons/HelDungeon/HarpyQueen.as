@@ -118,8 +118,8 @@ public class HarpyQueen extends Monster
 			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.tallness = rand(8) + 70;
-			this.hipRating = Hips.RATING_AMPLE+2;
-			this.buttRating = Butt.RATING_LARGE;
+			this.hips.type = Hips.RATING_AMPLE + 2;
+			this.butt.type = Butt.RATING_LARGE;
 			this.lowerBody = LowerBody.HARPY;
 			this.skin.setBaseOnly({color:"red"});
 			this.skinDesc = "feathers";
@@ -142,7 +142,7 @@ public class HarpyQueen extends Monster
 			this.gems = rand(25)+160;
 			this.additionalXP = 50;
 			this.tailType = Tail.HARPY;
-			this.wingType = Wings.FEATHERED_LARGE;
+			this.wings.type = Wings.FEATHERED_LARGE;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Spellpower, 0, 0, 0, 0);

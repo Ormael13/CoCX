@@ -219,8 +219,8 @@ public class Kitsune extends Monster
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.createStatusEffect(StatusEffects.BonusACapacity,20,0,0,0);
 			this.tallness = rand(24) + 60;
-			this.hipRating = Hips.RATING_AMPLE;
-			this.buttRating = Butt.RATING_AVERAGE+1;
+			this.hips.type = Hips.RATING_AMPLE;
+			this.butt.type = Butt.RATING_AVERAGE + 1;
 			this.skinTone = "pale";
 			this.skin.base.pattern = Skin.PATTERN_MAGICAL_TATTOO;
 			this.hairColor = hairColor;

@@ -620,16 +620,10 @@ public class Creature extends Utils
 		public function set clawType(value:int):void { this.clawsPart.type = value; }
 		// </mod>
 		public var underBody:UnderBody;
-
-		public var earType:Number = Ears.HUMAN;
-		public var earValue:Number = 0;
-		public var hornType:Number = Horns.NONE;
-		public var horns:Number = 0;
-		private var _wingType:Number = Wings.NONE;
-		public var wingDesc:String = "non-existant";
-		public function get wingType():Number { return _wingType; }
-		public function set wingType(value:Number):void { _wingType = value; }
-
+		public var ears:Ears = new Ears();
+		public var horns:Horns = new Horns();
+		public var wings:Wings = new Wings();
+		
 		/* lowerBody: see LOWER_BODY_TYPE_ */
 		public var lowerBodyPart:LowerBody;
 		public function get lowerBody():int { return lowerBodyPart.type; }
@@ -647,27 +641,9 @@ public class Creature extends Utils
 		public function set tailCount(value:Number):void { tail.count = value; }
 		public function set tailRecharge(value:Number):void { tail.recharge = value; }
 		
-		/*hipRating
-		0 - boyish
-		2 - slender
-		4 - average
-		6 - noticable/ample
-		10 - curvy//flaring
-		15 - child-bearing/fertile
-		20 - inhumanly wide*/
-		public var hipRating:Number = Hips.RATING_BOYISH;
-		
-		/*buttRating
-		0 - buttless
-		2 - tight
-		4 - average
-		6 - noticable
-		8 - large
-		10 - jiggly
-		13 - expansive
-		16 - huge
-		20 - inconceivably large/big/huge etc*/
-		public var buttRating:Number = Butt.RATING_BUTTLESS;
+
+		public var hips:Hips = new Hips();
+		public var butt:Butt = new Butt();
 		
 		//Piercings
 		//TODO: Pull this out into it's own class and enum.
@@ -691,24 +667,15 @@ public class Creature extends Utils
 		public var nosePLong:String = "";
 
 		//Head ornaments. Definitely need to convert away from hard coded types.
-		public var antennae:Number = Antennae.NONE;
-
-		//Eyetype
-		public var eyeType:Number = Eyes.HUMAN;
-		public var eyeColor:String = "brown";
-
-		//TongueType
-		public var tongueType:Number = Tongue.HUMAN;
-
-		//ArmType
-		public var armType:Number = Arms.HUMAN;
-
-		//GillType
-		public var gillType:int = Gills.NONE;
-		public function hasGills():Boolean { return gillType != Gills.NONE; }
+		public var antennae:Antennae = new Antennae();
+		public var eyes:Eyes = new Eyes();
+		public var tongue:Tongue = new Tongue();
+		public var arms:Arms = new Arms();
 		
-		//RearBody
-		public var rearBody:Number = RearBody.NONE;
+		public var gills:Gills = new Gills();
+		public function hasGills():Boolean { return gills.type != Gills.NONE; }
+		
+		public var rearBody:RearBody = new RearBody();
 
 		//Sexual Stuff		
 		//MALE STUFF
@@ -828,22 +795,22 @@ public class Creature extends Utils
 			// 2.1. non-negative Number fields
 			error += Utils.validateNonNegativeNumberFields(this,"Monster.validate",[
 				"balls", "ballSize", "cumMultiplier", "hoursSinceCum",
-				"tallness", "hipRating", "buttRating", "lowerBody", "armType",
+				"tallness", "hips.type", "butt.type", "lowerBody", "arms.type",
 				"hairLength", "hairType",
-				"faceType", "earType", "tongueType", "eyeType",
+				"faceType", "ears.type", "tongue.type", "eyes.type",
 				"str", "tou", "spe", "inte", "wis", "lib", "sens", "cor",
 				// Allow weaponAttack to be negative as a penalty to strength-calculated damage
 				// Same with armorDef, bonusHP, additionalXP
 				"weaponValue", "armorValue",
 				"lust", "fatigue", "soulforce", "mana", "wrath",
 				"level", "gems",
-				"tailCount", "tailVenom", "tailRecharge", "horns",
+				"tailCount", "tailVenom", "tailRecharge", "horns.type",
 				"HP", "XP"
 			]);
 			// 2.2. non-empty String fields
 			error += Utils.validateNonEmptyStringFields(this,"Monster.validate",[
 				"short",
-				"skinDesc", "eyeColor",
+				"skinDesc", "eyes.colour",
 				"weaponName", "weaponVerb", "armorName"
 			]);
 			// 3. validate members
@@ -874,10 +841,10 @@ public class Creature extends Utils
 				if (tailCount != 0) error += "No tail but tailCount = "+tailCount+". ";
 			}
 			// 4.4. horns
-			if (hornType == Horns.NONE){
-				if (horns>0) error += "horns > 0 but hornType = NONE. ";
+			if (horns.type == Horns.NONE){
+				if (horns.count > 0) error += "horns > 0 but horns.type = NONE. ";
 			} else {
-				if (horns==0) error += "Has horns but their number 'horns' = 0. ";
+				if (horns.count == 0) error += "Has horns but their number 'horns' = 0. ";
 			}
 			return error;
 		}
@@ -2322,6 +2289,10 @@ public class Creature extends Utils
 			return countCocksOfType(CockTypesEnum.STAMEN);
 		}
 
+		public function avianCocks():int { //How many aviancocks?
+			return countCocksOfType(CockTypesEnum.AVIAN);
+		}
+
 		public function findFirstCockType(ctype:CockTypesEnum):Number
 		{
 			var index:Number = 0;
@@ -2474,6 +2445,7 @@ public class Creature extends Utils
 			Wings.BAT_ARM,
 			Wings.VAMPIRE,
 			Wings.FEY_DRAGON_WINGS,
+			Wings.FEATHERED_AVIAN,
 			//WING_TYPE_IMP_LARGE,
 		];
 
@@ -2483,99 +2455,21 @@ public class Creature extends Utils
 			//web also makes false!
 			if (hasStatusEffect(StatusEffects.Web))
 				return false;
-			return canFlyWings.indexOf(_wingType) != -1;
-
+			return canFlyWings.indexOf(wings.type) != -1;
 		}
 
 		//PC can swim underwater?
 		public function canSwimUnderwater():Boolean
 		{
-			if (gillType != Gills.NONE)
+			if (gills.type != Gills.NONE)
 				return true;	//dodać jeszcze trzeba bedzie tu efekt of itemów i inne opcje dające oddych. pod wodą
 			return false;
-		}
-
-		//Artifacts Bows
-		public function isArtifactBow():Boolean
-		{
-			return game.player.weaponRange == game.weaponsrange.BOWGUID;
-
-		}
-
-		//Wrath Weapons
-		public function isLowGradeWrathWeapon():Boolean
-		{
-			return game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.NPHBLDE || game.player.weapon == game.weapons.EBNYBLD || game.player.weapon == game.weapons.OTETSU || game.player.weapon == game.weapons.POCDEST || game.player.weapon == game.weapons.DOCDEST || game.player.weapon == game.weapons.CNTWHIP;
-		}
-		public function isDualLowGradeWrathWeapon():Boolean
-		{
-			return game.player.weapon == game.weapons.DBFSWO;
-
-		}
-
-		//Fists and fist weapons
-		public function isFistOrFistWeapon():Boolean
-		{
-			return game.player.weaponName == "fists" || game.player.weapon == game.weapons.S_GAUNT || game.player.weapon == game.weapons.H_GAUNT || game.player.weapon == game.weapons.MASTGLO || game.player.weapon == game.weapons.KARMTOU || game.player.weapon == game.weapons.YAMARG;
-
-		}
-
-		//Weapons for Whirlwind
-		public function isWeaponForWhirlwind():Boolean
-		{
-			return game.player.weapon == game.weapons.BFSWORD || game.player.weapon == game.weapons.NPHBLDE || game.player.weapon == game.weapons.EBNYBLD || game.player.weapon == game.weapons.CLAYMOR || game.player.weapon == game.weapons.URTAHLB || game.player.weapon == game.weapons.KIHAAXE || game.player.weapon == game.weapons.L__AXE
-			 || game.player.weapon == game.weapons.L_HAMMR || game.player.weapon == game.weapons.TRASAXE || game.player.weapon == game.weapons.WARHAMR || game.player.weapon == game.weapons.OTETSU || game.player.weapon == game.weapons.NODACHI || game.player.weapon == game.weapons.WGSWORD || game.player.weapon == game.weapons.DBFSWO
-			 || game.player.weapon == game.weapons.D_WHAM_ || game.player.weapon == game.weapons.DL_AXE_ || game.player.weapon == game.weapons.DSWORD_// || game.player.weapon == game.weapons.
-		}
-
-		//Weapons for Whipping
-		public function isWeaponsForWhipping():Boolean
-		{
-			return game.player.weapon == game.weapons.FLAIL || game.player.weapon == game.weapons.L_WHIP || game.player.weapon == game.weapons.SUCWHIP || game.player.weapon == game.weapons.PSWHIP || game.player.weapon == game.weapons.WHIP || game.player.weapon == game.weapons.PWHIP || game.player.weapon == game.weapons.NTWHIP || game.player.weapon == game.weapons.CNTWHIP
-             || game.player.weapon == game.weapons.RIBBON || game.player.weapon == game.weapons.ERIBBON;
-
-		}
-
-		//Using Tome
-		public function isUsingTome():Boolean
-		{
-			return game.player.weaponRangeName == "nothing" || game.player.weaponRangeName == "Inquisitor’s Tome" || game.player.weaponRangeName == "Sage’s Sketchbook";
-
-		}
-
-		//Natural Jouster perks req check
-		public function isMeetingNaturalJousterReq():Boolean
-		{
-			return (((game.player.isTaur() || game.player.isDrider()) && game.player.spe >= 60) && game.player.findPerk(PerkLib.Naturaljouster) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && CoC.instance.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
-             || (game.player.spe >= 150 && game.player.findPerk(PerkLib.Naturaljouster) >= 0 && game.player.findPerk(PerkLib.DoubleAttack) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && CoC.instance.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)));
-
-		}
-		public function isMeetingNaturalJousterMasterGradeReq():Boolean
-		{
-			return (((game.player.isTaur() || game.player.isDrider()) && game.player.spe >= 180) && game.player.findPerk(PerkLib.NaturaljousterMastergrade) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && CoC.instance.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
-             || (game.player.spe >= 450 && game.player.findPerk(PerkLib.NaturaljousterMastergrade) >= 0 && game.player.findPerk(PerkLib.DoubleAttack) >= 0 && (game.player.findPerk(PerkLib.DoubleAttack) < 0 || (game.player.findPerk(PerkLib.DoubleAttack) >= 0 && CoC.instance.flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)));
-
-		}
-
-		//1H Weapons
-		public function isOneHandedWeapons():Boolean
-		{
-			return game.player.weaponPerk != "Dual Large" && game.player.weaponPerk != "Dual" && game.player.weaponPerk != "Staff" && game.player.weaponPerk != "Large";
-
 		}
 
 		//Naked
 		public function isNaked():Boolean
 		{
 			return game.player.armorName == "nothing" && game.player.upperGarmentName == "nothing" && game.player.lowerGarmentName == "nothing";
-
-		}
-
-		//Natural Armor (need at least to partialy covering whole body)
-		public function haveNaturalArmor():Boolean
-		{
-			return game.player.findPerk(PerkLib.ThickSkin) >= 0 || game.player.skin.hasFur() || game.player.skin.hasChitin() || game.player.skin.hasScales() || game.player.skin.hasBark() || game.player.skin.hasDragonScales() || game.player.skin.hasBaseOnly(Skin.STONE);
-
 		}
 
 		//Crit immunity
@@ -2592,19 +2486,16 @@ public class Creature extends Utils
 			return (game.player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && game.player.sens >= 25 && (game.monster.findPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0 || game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyGigantType) >= 0 || game.monster.findPerk(PerkLib.EnemyGroupType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0))
                     || (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.EnemyGodType) >= 0 || game.monster.findPerk(PerkLib.EnemyBossType) >= 0 || game.monster.findPerk(PerkLib.DarknessNature) >= 0 || game.monster.findPerk(PerkLib.FireNature) >= 0 || game.monster.findPerk(PerkLib.IceNature) >= 0 || game.monster.findPerk(PerkLib.LightningNature) >= 0))
                     || (game.player.findPerk(PerkLib.EyesOfTheHunterMaster) >= 0 && game.player.sens >= 75 && (game.monster.findPerk(PerkLib.DarknessVulnerability) >= 0 || game.monster.findPerk(PerkLib.FireVulnerability) >= 0 || game.monster.findPerk(PerkLib.IceVulnerability) >= 0 || game.monster.findPerk(PerkLib.LightningVulnerability) >= 0));
-
 		}
 		public function whenGeneralEnemyPerksDisplayed():Boolean
 		{
 			return (game.player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && game.player.sens >= 25 && (game.monster.findPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0 || game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyGigantType) >= 0 || game.monster.findPerk(PerkLib.EnemyGroupType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0))
                     || (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.EnemyGodType) >= 0 || game.monster.findPerk(PerkLib.EnemyBossType) >= 0));
-
 		}
 		public function whenElementalEnemyPerksDisplayed():Boolean
 		{
 			return (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.DarknessNature) >= 0 || game.monster.findPerk(PerkLib.FireNature) >= 0 || game.monster.findPerk(PerkLib.IceNature) >= 0 || game.monster.findPerk(PerkLib.LightningNature) >= 0))
                     || (game.player.findPerk(PerkLib.EyesOfTheHunterMaster) >= 0 && game.player.sens >= 75 && (game.monster.findPerk(PerkLib.DarknessVulnerability) >= 0 || game.monster.findPerk(PerkLib.FireVulnerability) >= 0 || game.monster.findPerk(PerkLib.IceVulnerability) >= 0 || game.monster.findPerk(PerkLib.LightningVulnerability) >= 0));
-
 		}
 
 		//check for vagoo
@@ -3040,6 +2931,8 @@ public class Creature extends Utils
 		public function hasLizardScales():Boolean { return skin.hasLizardScales(); }
 		public function hasNonLizardScales():Boolean { return skin.hasNonLizardScales(); }
 		public function hasFur():Boolean { return skin.hasFur(); }
+		public function hasChitin():Boolean { return skin.hasChitin(); }
+		public function hasFeather():Boolean { return skin.hasFeather(); }
 		public function hasMostlyPlainSkin():Boolean { return skin.hasMostlyPlainSkin(); }
 		public function hasPlainSkinOnly():Boolean { return skin.hasPlainSkinOnly(); }
 		public function hasPartialCoat(coat_type:int):Boolean { return skin.hasPartialCoat(coat_type); }
@@ -3608,7 +3501,7 @@ public class Creature extends Utils
 		 * Echidna 1 ft long (i'd consider it barely qualifying), demonic 2 ft long, draconic 4 ft long
 		 */
 		public function hasLongTongue():Boolean {
-			return tongueType == Tongue.DEMONIC || tongueType == Tongue.DRACONIC || tongueType == Tongue.ECHIDNA;
+			return tongue.type == Tongue.DEMONIC || tongue.type == Tongue.DRACONIC || tongue.type == Tongue.ECHIDNA;
 		}
 		
 		public function hairOrFur():String
@@ -3648,7 +3541,7 @@ public class Creature extends Utils
 		
 		public function hornDescript():String
 		{
-			return Appearance.DEFAULT_HORNS_NAMES[hornType] + " horns";
+			return Appearance.DEFAULT_HORNS_NAMES[horns.type] + " _horns";
 		}
 		
 		public function tailDescript():String
@@ -3669,6 +3562,11 @@ public class Creature extends Utils
 		public function eyesDescript():String
 		{
 			return Appearance.eyesDescript(this);
+		}
+		
+		public function earsDescript():String
+		{
+			return Appearance.earsDescript(this);
 		}
 
 		public function damageToughnessModifier(displayMode:Boolean = false):Number {
@@ -3710,6 +3608,8 @@ public class Creature extends Utils
 				if (game.player.weapon == game.weapons.JRAPIER || game.player.weapon == game.weapons.Q_GUARD || game.player.weapon == game.weapons.B_WIDOW || game.player.weapon == game.weapons.SPEAR || game.player.weapon == game.weapons.SESPEAR || game.player.weapon == game.weapons.DSSPEAR || game.player.weapon == game.weapons.LANCE
 				 || game.player.weaponRange == game.weaponsrange.SHUNHAR || game.player.weaponRange == game.weaponsrange.KSLHARP || game.player.weaponRange == game.weaponsrange.LEVHARP || (game.player.weaponName.indexOf("staff") != -1 && game.player.findPerk(PerkLib.StaffChanneling) >= 0)) armorMod = 0;
 				if (game.player.weapon == game.weapons.KATANA) armorMod -= 5;
+				if (game.player.weapon == game.weapons.HALBERD) armorMod *= 0.6;
+				if (game.player.weapon == game.weapons.GUANDAO) armorMod *= 0.4;
 				if (game.player.findPerk(PerkLib.LungingAttacks) >= 0) armorMod /= 2;
 				if (armorMod < 0) armorMod = 0;
 			}
@@ -3819,7 +3719,8 @@ public class Creature extends Utils
 			if (findPerk(PerkLib.Evade) >= 0) chance += 10;
 			if (findPerk(PerkLib.Flexibility) >= 0) chance += 6;
 			if (findPerk(PerkLib.Misdirection) >= 0 && armorName == "red, high-society bodysuit") chance += 10;
-			if (findPerk(PerkLib.Unhindered) >= 0 && (armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "nothing")) chance += 10;
+			//if (findPerk(PerkLib.Unhindered) >= 0 && meetUnhinderedReq()) chance += 10;
+			if (findPerk(PerkLib.Unhindered) >= 0 && (game.player.armorName == "arcane bangles" || game.player.armorName == "practically indecent steel armor" || game.player.armorName == "revealing chainmail bikini" || game.player.armorName == "slutty swimwear" || game.player.armorName == "barely-decent bondage straps" || game.player.armorName == "nothing")) chance += 10;
 			if (findPerk(PerkLib.JunglesWanderer) >= 0) chance += 35;
 			if (hasStatusEffect(StatusEffects.Illusion)) chance += 10;
 			if (hasStatusEffect(StatusEffects.Flying)) chance += 20;
@@ -3862,7 +3763,8 @@ public class Creature extends Utils
 			if (findPerk(PerkLib.Evade) >= 0 && (roll < 10)) return "Evade";
 			if (findPerk(PerkLib.Flexibility) >= 0 && (roll < 6)) return "Flexibility";
 			if (findPerk(PerkLib.Misdirection) >= 0 && armorName == "red, high-society bodysuit" && (roll < 10)) return "Misdirection";
-			if (findPerk(PerkLib.Unhindered) >= 0 && (armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "nothing") && (roll < 10)) return "Unhindered";
+			//if (findPerk(PerkLib.Unhindered) >= 0 && meetUnhinderedReq() && (roll < 10)) return "Unhindered";
+			if (findPerk(PerkLib.Unhindered) >= 0 && (game.player.armorName == "arcane bangles" || game.player.armorName == "practically indecent steel armor" || game.player.armorName == "revealing chainmail bikini" || game.player.armorName == "slutty swimwear" || game.player.armorName == "barely-decent bondage straps" || game.player.armorName == "nothing") && (roll < 10)) return "Unhindered";
 			if (findPerk(PerkLib.JunglesWanderer) >= 0 && (roll < 35)) return "Jungle's Wanderer";
 			if (hasStatusEffect(StatusEffects.Illusion) && (roll < 10)) return "Illusion";
 			if (hasStatusEffect(StatusEffects.Flying) && (roll < 20)) return "Flying";

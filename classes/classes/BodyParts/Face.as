@@ -34,19 +34,21 @@ public class Face extends SaveableBodyPart {
 	public static const MANTICORE:int        = 25;
 	public static const SALAMANDER_FANGS:int = 26;
 	public static const YETI_FANGS:int       = 27;
-	public static const ORCA:int         = 28;
-	public static const PLANT_DRAGON:int = 29;
-	public static const DRAGON_FANGS:int = 30;
-	public static const DEVIL_FANGS:int  = 31;
-	public static const ONI_TEETH:int    = 32;
-	public static const RAIJU_FANGS:int  = 33;
-	public static const VAMPIRE:int      = 34;
-	public static const BUCKTOOTH:int    = 35;
-	public static const JABBERWOCKY:int  = 36;
-	public static const RED_PANDA:int    = 37;
-	public static const CAT_CANINES:int  = 38;
-	public static const CHESHIRE:int     = 39;
-	public static const CHESHIRE_SMILE:int = 40;
+	public static const ORCA:int	         = 28;
+	public static const PLANT_DRAGON:int	 = 29;
+	public static const DRAGON_FANGS:int	 = 30;
+	public static const DEVIL_FANGS:int 	 = 31;
+	public static const ONI_TEETH:int   	 = 32;
+	public static const RAIJU_FANGS:int 	 = 33;
+	public static const VAMPIRE:int     	 = 34;
+	public static const BUCKTOOTH:int   	 = 35;
+	public static const JABBERWOCKY:int 	 = 36;
+	public static const RED_PANDA:int   	 = 37;
+	public static const CAT_CANINES:int 	 = 38;
+	public static const CHESHIRE:int    	 = 39;
+	public static const CHESHIRE_SMILE:int	 = 40;
+	public static const AVIAN:int			 = 41;
+	public static const WOLF_FANGS:int		 = 42;
 	
 	public function Face(creature:Creature) {
 		super(creature,"facePart",[]);
@@ -60,6 +62,11 @@ public class Face extends SaveableBodyPart {
 			HORSE, DOG, CAT, LIZARD, KANGAROO,
 			FOX, DRAGON, RHINO, ECHIDNA, DEER,
 			WOLF
+			   ].indexOf(type) >= 0;
+	}
+	public function hasBeak():Boolean {
+		return [
+			AVIAN
 			   ].indexOf(type) >= 0;
 	}
 	public function hasBeard():Boolean {

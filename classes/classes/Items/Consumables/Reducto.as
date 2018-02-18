@@ -24,12 +24,12 @@ public final class Reducto extends Consumable {
 		override public function useItem():Boolean {
 			var rdtBalls:Function	= (game.player.balls > 0 && game.player.ballSize > 1 ? reductoBalls : null);
 			var rdtBreasts:Function	= (game.player.breastRows.length > 0 && game.player.biggestTitSize() > 0 ? reductoBreasts : null);
-			var rdtButt:Function	= (game.player.buttRating > 1 ? reductoButt : null);
+			var rdtButt:Function	= (game.player.butt.type > 1 ? reductoButt : null);
 			var rdtClit:Function	= (game.player.vaginas.length > 0 && game.player.clitLength > 0.25 ? reductoClit : null);
 			var rdtCock:Function	= (game.player.cockTotal() > 0 && game.player.biggestCockArea() > 6 ? reductoCock : null);
-			var rdtHips:Function	= (game.player.hipRating > 2 ? reductoHips : null);
+			var rdtHips:Function	= (game.player.hips.type > 2 ? reductoHips : null);
 			var rdtNipples:Function	= (game.player.nippleLength > 0.25 ? reductoNipples : null);
-			var rdtHorns:Function	= (game.player.horns > 2 ? shrinkHorns : null);
+			var rdtHorns:Function	= (game.player.horns.count > 2 ? shrinkHorns : null);
 			clearOutput();
 			outputText("You ponder the paste in your hand and wonder what part of your body you would like to shrink.  What will you use it on?");
 			EngineCore.choices("Balls", rdtBalls, "Breasts", rdtBreasts, "Butt", rdtButt, "Clit", rdtClit, "Cock", rdtCock,
@@ -63,17 +63,17 @@ public final class Reducto extends Consumable {
 		private function reductoButt():void {
 			clearOutput();
 			outputText("You smear the foul-smelling paste onto your " + game.player.buttDescript() + ".  It feels cool at first but rapidly warms to an uncomfortable level of heat.\n\n");
-			if (game.player.buttRating >= 15) {
-				game.player.buttRating -= (3 + int(game.player.buttRating / 3));
+			if (game.player.butt.type >= 15) {
+				game.player.butt.type -= (3 + int(game.player.butt.type / 3));
 				outputText("Within seconds you feel noticeably lighter, and a quick glance shows your ass is significantly smaller.");
 			}
-			else if (game.player.buttRating >= 10) {
-				game.player.buttRating -= 3;
+			else if (game.player.butt.type >= 10) {
+				game.player.butt.type -= 3;
 				outputText("You feel much lighter as your " + game.player.buttDescript() + " jiggles slightly, adjusting to its smaller size.");
 			}
 			else {
-				game.player.buttRating -= Utils.rand(3) + 1;
-				if (game.player.buttRating < 1) game.player.buttRating = 1;
+				game.player.butt.type -= Utils.rand(3) + 1;
+				if (game.player.butt.type < 1) game.player.butt.type = 1;
 				outputText("After a few seconds your " + game.player.buttDescript() + " has shrunk to a much smaller size!");
 			}
 			game.player.dynStats("lib", -2, "lus", -10);
@@ -119,17 +119,17 @@ public final class Reducto extends Consumable {
 		private function reductoHips():void {
 			clearOutput();
 			outputText("You smear the foul-smelling paste onto your [hips].  It feels cool at first but rapidly warms to an uncomfortable level of heat.\n\n");
-			if (game.player.hipRating >= 15) {
-				game.player.hipRating -= (3 + int(game.player.hipRating / 3));
+			if (game.player.hips.type >= 15) {
+				game.player.hips.type -= (3 + int(game.player.hips.type / 3));
 				outputText("Within seconds you feel noticeably lighter, and a quick glance at your hips shows they've gotten significantly narrower.");
 			}
-			else if (game.player.hipRating >= 10) {
-				game.player.hipRating -= 3;
+			else if (game.player.hips.type >= 10) {
+				game.player.hips.type -= 3;
 				outputText("You feel much lighter as your [hips] shift slightly, adjusting to their smaller size.");
 			}
 			else {
-				game.player.hipRating -= Utils.rand(3) + 1;
-				if (game.player.hipRating < 1) game.player.hipRating = 1;
+				game.player.hips.type -= Utils.rand(3) + 1;
+				if (game.player.hips.type < 1) game.player.hips.type = 1;
 				outputText("After a few seconds your [hips] have shrunk to a much smaller size!");
 			}
 			game.player.dynStats("lib", -2, "lus", -10);
@@ -155,7 +155,7 @@ public final class Reducto extends Consumable {
 		public function shrinkHorns():void {
 			outputText("You doubt if the reducto is going to work but you apply the foul-smelling paste all over your horns anyways.\n\n");
 			outputText("Incredibly, it works and you can feel your horns receding by an inch.");
-			game.player.horns -= 1;
+			game.player.horns.count -= 1;
 			SceneLib.inventory.itemGoNext();
 		}
 		

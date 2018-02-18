@@ -6,10 +6,13 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.Scenes.SceneLib;
+import classes.Scenes.Places.HeXinDao;
 import classes.internals.*;
 
 public class HellHound extends Monster
 	{
+		public var hellpuppy:HeXinDao = new HeXinDao();
+		
 		protected function hellhoundFire():void {
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind)) {
@@ -105,31 +108,34 @@ public class HellHound extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (hpVictory) {
-				outputText("The hellhound's flames dim and the heads let out a whine before the creature slumps down, defeated and nearly unconscious.", true);
-				//Rape if not naga, turned on, and girl that can fit!
-				if (player.hasVagina() && player.lust >= 33 && !player.isNaga()) {
-					outputText("  You find yourself musing that you could probably take advantage of the poor 'doggy'.  Do you fuck it?");
-					EngineCore.simpleChoices("Fuck it", SceneLib.mountain.hellHoundScene.hellHoundPropahRape, "", null, "", null, "", null, "Leave", SceneLib.combat.cleanupAfterCombatImpl);
-				} else {
-					SceneLib.combat.cleanupAfterCombatImpl();
-				}
-			} else {
-				outputText("Unable to bear hurting you anymore, the hellhound's flames dim as he stops his attack. The two heads look at you, whining plaintively.  The hellhound slowly pads over to you and nudges its noses at your crotch.  It seems he wishes to pleasure you.\n\n", true);
-				var temp2:Function =null;
-				if (player.gender > 0 && player.lust >= 33) {
-					outputText("You realize your desires aren't quite sated.  You could let it please you");
+			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) hellpuppy.gaunletchallange2fight3();
+			else {
+				if (hpVictory) {
+					outputText("The hellhound's flames dim and the heads let out a whine before the creature slumps down, defeated and nearly unconscious.", true);
 					//Rape if not naga, turned on, and girl that can fit!
 					if (player.hasVagina() && player.lust >= 33 && !player.isNaga()) {
-						outputText(" or make it fuck you");
-						temp2 = SceneLib.mountain.hellHoundScene.hellHoundPropahRape;
+						outputText("  You find yourself musing that you could probably take advantage of the poor 'doggy'.  Do you fuck it?");
+						EngineCore.simpleChoices("Fuck it", SceneLib.mountain.hellHoundScene.hellHoundPropahRape, "", null, "", null, "", null, "Leave", SceneLib.combat.cleanupAfterCombatImpl);
+					} else {
+						SceneLib.combat.cleanupAfterCombatImpl();
 					}
-					outputText(".  What do you do?");
-					EngineCore.simpleChoices("Lick", SceneLib.mountain.hellHoundScene.hellHoundGetsRaped, "Fuck", temp2, "", null, "", null, "Leave", SceneLib.combat.cleanupAfterCombatImpl);
-				}
-				else {
-					outputText("You turn away, not really turned on enough to be interested in such an offer.");
-					SceneLib.combat.cleanupAfterCombatImpl();
+				} else {
+					outputText("Unable to bear hurting you anymore, the hellhound's flames dim as he stops his attack. The two heads look at you, whining plaintively.  The hellhound slowly pads over to you and nudges its noses at your crotch.  It seems he wishes to pleasure you.\n\n", true);
+					var temp2:Function =null;
+					if (player.gender > 0 && player.lust >= 33) {
+						outputText("You realize your desires aren't quite sated.  You could let it please you");
+						//Rape if not naga, turned on, and girl that can fit!
+						if (player.hasVagina() && player.lust >= 33 && !player.isNaga()) {
+							outputText(" or make it fuck you");
+							temp2 = SceneLib.mountain.hellHoundScene.hellHoundPropahRape;
+						}
+						outputText(".  What do you do?");
+						EngineCore.simpleChoices("Lick", SceneLib.mountain.hellHoundScene.hellHoundGetsRaped, "Fuck", temp2, "", null, "", null, "Leave", SceneLib.combat.cleanupAfterCombatImpl);
+					}
+					else {
+						outputText("You turn away, not really turned on enough to be interested in such an offer.");
+						SceneLib.combat.cleanupAfterCombatImpl();
+					}
 				}
 			}
 		}
@@ -165,8 +171,8 @@ public class HellHound extends Monster
 			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 47;
-			this.hipRating = Hips.RATING_AVERAGE;
-			this.buttRating = Butt.RATING_AVERAGE+1;
+			this.hips.type = Hips.RATING_AVERAGE;
+			this.butt.type = Butt.RATING_AVERAGE + 1;
 			this.lowerBody = LowerBody.DOG;
 			this.skin.growFur({color:"black"});
 			this.hairColor = "red";

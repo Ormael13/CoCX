@@ -165,8 +165,8 @@ public class Alraune extends Monster
 			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = rand(14) + 59;
-			this.hipRating = Hips.RATING_CURVY+3;
-			this.buttRating = Butt.RATING_EXPANSIVE;
+			this.hips.type = Hips.RATING_CURVY + 3;
+			this.butt.type = Butt.RATING_EXPANSIVE;
 			this.lowerBody = LowerBody.PLANT_FLOWER;
 			this.hairLength = 6;
 			initStrTouSpeInte(10, 100, 10, 60);

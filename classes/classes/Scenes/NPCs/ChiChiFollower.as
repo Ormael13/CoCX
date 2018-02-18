@@ -31,7 +31,6 @@ public function EnterOfTheChiChi():void {
 	flags[kFLAGS.CHI_CHI_AFFECTION] = 0;
 	flags[kFLAGS.CHI_CHI_LVL_UP] = 1;
 	startCombat(new ChiChi());
-	doNext(playerMenu);
 }
 
 public function WonFirstFight():void {
@@ -42,7 +41,7 @@ public function WonFirstFight():void {
 	outputText("\"<i>Thank you...</i>\"\n\n");
 	outputText("The entire crowd falls silent as the mouse morph hits the sandy arena ground, a small kid starts to cry in background. The medics run to her in a hurry, but scream something about her having died from fatal self inflicted injuries. You don’t really care however and just pick up her gloves on the ground as a prize for your victory. Surprisingly no-one cheers for you this time, not even the announcer who is normally so talkative. (I sincerely advise that you reload your game without saving unless you are fine with losing access to a lot of important key content.)\n\n");
 	flags[kFLAGS.CHI_CHI_FOLLOWER] = 2;
-	cleanupAfterCombat();
+	inventory.takeItem(weapons.MASTGLO, cleanupAfterCombat);
 }
 
 public function LostFirstFight():void {
@@ -77,6 +76,9 @@ public function WonSecondFightNo():void {
 	outputText("\"<i>I’m sorry to tell you this, but your master took a fatal wound to the head. We will bury her in the town graveyard, so if you would like to, you can visit her grave from time to time. Again my most sincere condolences.\n\n");
 	outputText("You are somewhat shocked to learn that Chi Chi died, did she go all out in this battle to the point it cost her life? You head back to camp trying to figure how such a tragic incident happened in a training session.\n\n");
 	flags[kFLAGS.CHI_CHI_FOLLOWER] = 2;
+	inventory.takeItem(weapons.MASTGLO, WonSecondFightNo2);
+}
+public function WonSecondFightNo2():void {
 	inventory.takeItem(consumables.SOBLMAN, cleanupAfterCombat);
 }
 public function WonSecondFightYes():void {
@@ -292,7 +294,6 @@ public function VeryReadyForTheFinalTraining():void {
 	outputText("She slams the ground with her closed fist creating a crater the size of a small arena. People go to the border of the makeshift ring, eager to see the pair of you duel. Chi Chi adopts her deadly elemental stance right away.\n\n");
 	outputText("\"<i>Prepare yourself!...</i>\"\n\n");
 	startCombat(new ChiChi());
-	doNext(playerMenu);
 }
 
 public function SoulskilsManualsShop():void {

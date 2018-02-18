@@ -40,6 +40,13 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Black Spell Effect Multiplier:</b> " + Math.round(100 * combat.spellModBlack()) + "%\n";
 		combatStats += "<b>Black Spell Cost:</b> " + combat.spellCostBlack(100) + "%\n";
 
+		combatStats += "<b>Heals Effect Multiplier:</b> " + Math.round(100 * combat.healMod()) + "%\n";
+		combatStats += "<b>Heals Cost:</b> " + combat.healCost(100) + "%\n";
+		combatStats += "<b>White Heals Effect Multiplier:</b> " + Math.round(100 * combat.healModWhite()) + "%\n";
+		combatStats += "<b>White Heals Cost:</b> " + combat.healCostWhite(100) + "%\n";
+		combatStats += "<b>Black Heals Effect Multiplier:</b> " + Math.round(100 * combat.healModBlack()) + "%\n";
+		combatStats += "<b>Black Heals Cost:</b> " + combat.healCostBlack(100) + "%\n";
+
 		if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
 			if (player.statusEffectv1(StatusEffects.Kindra) < 1)
 				combatStats += "<b>Bow Skill:</b> " + Math.round(player.statusEffectv1(StatusEffects.Kelt)) + " / 100\n";
@@ -49,8 +56,8 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Arrow/Bolt Cost:</b> " + combat.bowCost(100) + "%\n";
 		combatStats += "<b>Accuracy (1st range attack):</b> " + (combat.arrowsAccuracy() / 2) + "%\n";
 		if (player.findPerk(PerkLib.DoubleStrike) >= 0) combatStats += "<b>Accuracy (2nd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 15) + "%\n";
-		if (player.findPerk(PerkLib.Manyshot) >= 0) combatStats += "<b>Accuracy (3rd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 30) + "%\n";
-		if (player.findPerk(PerkLib.TripleStrike) >= 0) combatStats += "<b>Accuracy (4th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 45) + "%\n";
+		if (player.findPerk(PerkLib.TripleStrike) >= 0) combatStats += "<b>Accuracy (3rd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 30) + "%\n";
+		if (player.findPerk(PerkLib.Manyshot) >= 0) combatStats += "<b>Accuracy (4th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 45) + "%\n";
 		if (player.findPerk(PerkLib.WildQuiver) >= 0) combatStats += "<b>Accuracy (5th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 60) + "%\n";
 		if (player.findPerk(PerkLib.Multishot) >= 0) combatStats += "<b>Accuracy (6th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 75) + "%\n";
 
@@ -64,10 +71,10 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.RAPHAEL_RAPIER_TRANING] > 0)
 			combatStats += "<b>Rapier Skill:</b> " + flags[kFLAGS.RAPHAEL_RAPIER_TRANING] + " / 4\n";
 
-		if (player.teaseLevel < 5)
-			combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / 5 (Exp: " + player.teaseXP + " / " + (10 + (player.teaseLevel + 1) * 5 * (player.teaseLevel + 1)) + ")\n";
+		if (player.teaseLevel < 25)
+			combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: " + player.teaseXP + " / " + (10 + (player.teaseLevel + 1) * 5 * (player.teaseLevel + 1)) + ")\n";
 		else
-			combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / 5 (Exp: MAX)\n";
+			combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)\n";
 
 		var maxes:Object = player.getAllMaxStats();
 		combatStats += "<b>Strength Cap:</b> " + maxes.str + "\n";
@@ -443,8 +450,12 @@ public class PlayerInfo extends BaseContent {
 			}
 		}
 
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220] > 0)
-			interpersonStats += "<b>Body Parts Taken By Ceraph:</b> " + (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220]) + "\n";
+		if (flags[kFLAGS.CERAPH_OWNED_DICKS] + flags[kFLAGS.CERAPH_OWNED_PUSSIES] + flags[kFLAGS.CERAPH_OWNED_TITS] > 0)
+			interpersonStats += "<b>Body Parts Taken By Ceraph:</b> " + (flags[kFLAGS.CERAPH_OWNED_DICKS] + flags[kFLAGS.CERAPH_OWNED_PUSSIES] + flags[kFLAGS.CERAPH_OWNED_TITS]) + "\n";
+
+		if (flags[kFLAGS.DIANA_AFFECTION] > 0) {
+			interpersonStats += "<b>Diana Affection:</b> " + Math.round(flags[kFLAGS.DIANA_AFFECTION]) + "%\n";
+		}
 
 		if (flags[kFLAGS.ETNA_AFFECTION] > 0) {
 			interpersonStats += "<b>Etna Affection:</b> " + Math.round(flags[kFLAGS.ETNA_AFFECTION]) + "%\n";
@@ -543,10 +554,14 @@ public class PlayerInfo extends BaseContent {
             interpersonStats += "<b>Lottie's Encouragement:</b> " + SceneLib.telAdre.lottie.lottieMorale() + " (higher is better)\n" + "<b>Lottie's Figure:</b> " + SceneLib.telAdre.lottie.lottieTone() + " (higher is better)\n";
         if (SceneLib.mountain.salon.lynnetteApproval() != 0)
             interpersonStats += "<b>Lynnette's Approval:</b> " + SceneLib.mountain.salon.lynnetteApproval() + "\n";
-        if (flags[kFLAGS.OWCAS_ATTITUDE] > 0)
+        if (flags[kFLAGS.LUNA_FOLLOWER] > 3) {
+			interpersonStats += "<b>Luna Affection:</b> " + Math.round(flags[kFLAGS.LUNA_AFFECTION]) + "%\n";
+			interpersonStats += "<b>Luna Jealousy:</b> " + Math.round(flags[kFLAGS.LUNA_JEALOUSY]) + "%\n";
+		}
+		if (flags[kFLAGS.OWCAS_ATTITUDE] > 0)
 			interpersonStats += "<b>Owca's Attitude:</b> " + flags[kFLAGS.OWCAS_ATTITUDE] + "\n";
 
-if (SceneLib.telAdre.rubi.rubiAffection() > 0)
+		if (SceneLib.telAdre.rubi.rubiAffection() > 0)
             interpersonStats += "<b>Rubi's Affection:</b> " + Math.round(SceneLib.telAdre.rubi.rubiAffection()) + "%\n" + "<b>Rubi's Orifice Capacity:</b> " + Math.round(SceneLib.telAdre.rubi.rubiCapacity()) + "%\n";
         if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 0)
 			interpersonStats += "<b>Sapphire Affection:</b> " + Math.round(flags[kFLAGS.SAPPHIRE_AFFECTION]) + "%\n";

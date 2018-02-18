@@ -97,6 +97,9 @@ import flash.utils.getQualifiedClassName;
 		//For enemies
 		public var bonusHP:Number = 0;
 		public var bonusLust:Number = 0;
+		public var bonusSoulforce:Number = 0;
+		public var bonusWrath:Number = 0;
+		public var bonusMana:Number = 0;
 		public var monsterCounters:MonsterCounters = null;
 		public var bonusStr:Number = 0;
 		public var bonusTou:Number = 0;
@@ -322,7 +325,7 @@ import flash.utils.getQualifiedClassName;
 		public override function maxSoulforce():Number
 		{
 			//Base soulforce
-			var temp:Number = 50;
+			var temp:Number = 50 + this.bonusSoulforce;
 			if (findPerk(PerkLib.JobSoulCultivator) >= 0) {
 				if (this.level >= 2) temp += 25;
 				if (this.level >= 4) temp += 25;
@@ -337,6 +340,11 @@ import flash.utils.getQualifiedClassName;
 				if (this.level >= 14) temp += 40;
 				if (this.level >= 16) temp += 40;
 			}
+			if (findPerk(PerkLib.SoulWarrior) >= 0) {
+				if (this.level >= 18) temp += 50;
+				if (this.level >= 20) temp += 50;
+				if (this.level >= 22) temp += 50;
+			}
 			if (findPerk(PerkLib.InsightfulResourcesI) >= 0) temp += Math.round((this.wis*5) * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) temp *= 1.1;
 			if (hasPerk(PerkLib.EnemyTrueDemon)) temp = 0;
@@ -346,7 +354,7 @@ import flash.utils.getQualifiedClassName;
 		public override function maxWrath():Number
 		{
 			//Base wrath
-			var temp:Number = 250;
+			var temp:Number = 250 + this.bonusWrath;
 			if (findPerk(PerkLib.DoubleAttack) >= 0) temp += 10;
 			if (findPerk(PerkLib.TripleAttack) >= 0) temp += 10;
 			if (findPerk(PerkLib.QuadrupleAttack) >= 0) temp += 10;
@@ -355,6 +363,11 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.DoubleAttackLarge) >= 0) temp += 20;
 			if (findPerk(PerkLib.TripleAttackLarge) >= 0) temp += 20;
 			if (findPerk(PerkLib.PrimalFuryI) >= 0) temp += (10 * (1 + newGamePlusMod()));
+			if (findPerk(PerkLib.FeralArmor) >= 0) temp += 20;
+			if (findPerk(PerkLib.ClawTraining) >= 0) temp += 20;
+			if (findPerk(PerkLib.ExtraClawAttack) >= 0) temp += 30;
+			if (findPerk(PerkLib.MultiClawAttack) >= 0) temp += 40;
+			if (findPerk(PerkLib.ClawingFlurry) >= 0) temp += 50;
 			if (findPerk(PerkLib.BasicTranquilness) >= 0) temp += 15;
 			if (findPerk(PerkLib.HalfStepToImprovedTranquilness) >= 0) temp += 25;
 			if (findPerk(PerkLib.ImprovedTranquilness) >= 0) temp += 40;
@@ -370,7 +383,7 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.EpicTranquilness) >= 0) temp += 2250;
 			if (findPerk(PerkLib.HalfStepToMythicalTranquilness) >= 0) temp += 3500;
 			if (findPerk(PerkLib.MythicalTranquilness) >= 0) temp += 5000;
-			if (findPerk(PerkLib.JobBarbarian) >= 0) temp += 20;
+			if (findPerk(PerkLib.JobSwordsman) >= 0) temp += 20;
 			if (findPerk(PerkLib.JobBeastWarrior) >= 0) temp += 20;
 			if (findPerk(PerkLib.JobDervish) >= 0) temp += 20;
 			if (findPerk(PerkLib.JobWarlord) >= 0) temp += 20;
@@ -381,15 +394,15 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.Berzerker) >= 0) temp += 100;
 			if (findPerk(PerkLib.Lustzerker) >= 0) temp += 100;
 			if (findPerk(PerkLib.PrestigeJobBerserker) >= 0) temp += 200;
-			if (findPerk(PerkLib.Rage) >= 0) temp += 250;
-			if (findPerk(PerkLib.Anger) >= 0) temp += 300;
+			if (findPerk(PerkLib.Rage) >= 0) temp += 300;
+			if (findPerk(PerkLib.Anger) >= 0) temp += 400;
 			return temp;
 		}
 		
 		public override function maxMana():Number
 		{
 			//Base mana
-			var temp:Number = 100 + this.level * 10;
+			var temp:Number = 100 + this.level * 10 + this.bonusMana;
 			if (findPerk(PerkLib.BasicSpirituality) >= 0) temp += 45;
 			if (findPerk(PerkLib.HalfStepToImprovedSpirituality) >= 0) temp += 75;
 			if (findPerk(PerkLib.ImprovedSpirituality) >= 0) temp += 120;
@@ -419,6 +432,8 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.Mage) >= 0 && inte >= 50) temp += 30;
 			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) temp += 15;
 			if (findPerk(PerkLib.JobSorcerer) >= 0) temp += 15;
+			if (findPerk(PerkLib.JobHealer) >= 0) temp += 30;
+			if (findPerk(PerkLib.SpellpowerHealing) >= 0 && wis >= 50) temp += 30;
 			if (findPerk(PerkLib.ArcaneRegenerationMinor) >= 0) {
 				var tempmulti:Number = 1;
 				tempmulti += 0.1;
@@ -689,6 +704,72 @@ import flash.utils.getQualifiedClassName;
 			return damage;
 		}
 
+		public function inteligencescalingbonus():Number {
+			var inteligencescalingvalue:Number = 0;
+			if (inte >= 21 && inte < 41) inteligencescalingvalue += (inte / 2 + rand((inte * 3) / 4));
+			if (inte >= 41 && inte < 61) inteligencescalingvalue += ((inte * 2) / 3 + rand(inte));
+			if (inte >= 61 && inte < 81) inteligencescalingvalue += ((inte * 5) / 6 + rand(inte * 1.25));
+			if (inte >= 81 && inte < 101) inteligencescalingvalue += (inte + rand(inte * 1.5));
+			if (inte >= 101 && inte < 151) inteligencescalingvalue += ((inte * 1.25) + rand(inte * 1.75));
+			if (inte >= 151 && inte < 201) inteligencescalingvalue += ((inte * 1.5) + rand(inte * 2));
+			if (inte >= 201 && inte < 251) inteligencescalingvalue += ((inte * 1.75) + rand(inte * 2.25));
+			if (inte >= 251 && inte < 301) inteligencescalingvalue += ((inte * 2) + rand(inte * 2.5));
+			if (inte >= 301 && inte < 351) inteligencescalingvalue += ((inte * 2.25) + rand(inte * 2.75));
+			if (inte >= 351 && inte < 401) inteligencescalingvalue += ((inte * 2.5) + rand(inte * 3));
+			if (inte >= 401 && inte < 451) inteligencescalingvalue += ((inte * 2.75) + rand(inte * 3.25));
+			if (inte >= 451 && inte < 501) inteligencescalingvalue += ((inte * 3) + rand(inte * 3.5));
+			if (inte >= 501 && inte < 551) inteligencescalingvalue += ((inte * 3.25) + rand(inte * 3.75));
+			if (inte >= 551 && inte < 601) inteligencescalingvalue += ((inte * 3.5) + rand(inte * 4));
+			if (inte >= 601 && inte < 651) inteligencescalingvalue += ((inte * 3.75) + rand(inte * 4.25));
+			if (inte >= 651 && inte < 701) inteligencescalingvalue += ((inte * 4) + rand(inte * 4.5));
+			if (inte >= 701 && inte < 751) inteligencescalingvalue += ((inte * 4.25) + rand(inte * 4.75));
+			if (inte >= 751 && inte < 801) inteligencescalingvalue += ((inte * 4.5) + rand(inte * 5));
+			if (inte >= 801 && inte < 851) inteligencescalingvalue += ((inte * 4.75) + rand(inte * 5.25));
+			if (inte >= 851 && inte < 901) inteligencescalingvalue += ((inte * 5) + rand(inte * 5.5));
+			if (inte >= 901 && inte < 951) inteligencescalingvalue += ((inte * 5.25) + rand(inte * 5.75));
+			if (inte >= 951 && inte < 1001) inteligencescalingvalue += ((inte * 5.5) + rand(inte * 6));
+			if (inte >= 1001 && inte < 1051) inteligencescalingvalue += ((inte * 5.75) + rand(inte * 6.25));
+			if (inte >= 1051 && inte < 1101) inteligencescalingvalue += ((inte * 6) + rand(inte * 6.5));
+			if (inte >= 1101 && inte < 1151) inteligencescalingvalue += ((inte * 6.25) + rand(inte * 6.75));
+			if (inte >= 1151 && inte < 1201) inteligencescalingvalue += ((inte * 6.5) + rand(inte * 7));
+			if (inte >= 1201) inteligencescalingvalue += ((inte * 6.75) + rand(inte * 7.25));
+			else inteligencescalingvalue += (inte/3 + rand(inte/2));
+			return inteligencescalingvalue;
+		}
+
+		public function wisdomscalingbonus():Number {
+			var wisdomscalingvalue:Number = 0;
+			if (wis >= 21 && wis < 41) wisdomscalingvalue += (wis / 2 + rand((wis * 3) / 4));
+			if (wis >= 41 && wis < 61) wisdomscalingvalue += ((wis * 2) / 3 + rand(wis));
+			if (wis >= 61 && wis < 81) wisdomscalingvalue += ((wis * 5) / 6 + rand(wis * 1.25));
+			if (wis >= 81 && wis < 101) wisdomscalingvalue += (wis + rand(wis * 1.5));
+			if (wis >= 101 && wis < 151) wisdomscalingvalue += ((wis * 1.25) + rand(wis * 1.75));
+			if (wis >= 151 && wis < 201) wisdomscalingvalue += ((wis * 1.5) + rand(wis * 2));
+			if (wis >= 201 && wis < 251) wisdomscalingvalue += ((wis * 1.75) + rand(wis * 2.25));
+			if (wis >= 251 && wis < 301) wisdomscalingvalue += ((wis * 2) + rand(wis * 2.5));
+			if (wis >= 301 && wis < 351) wisdomscalingvalue += ((wis * 2.25) + rand(wis * 2.75));
+			if (wis >= 351 && wis < 401) wisdomscalingvalue += ((wis * 2.5) + rand(wis * 3));
+			if (wis >= 401 && wis < 451) wisdomscalingvalue += ((wis * 2.75) + rand(wis * 3.25));
+			if (wis >= 451 && wis < 501) wisdomscalingvalue += ((wis * 3) + rand(wis * 3.5));
+			if (wis >= 501 && wis < 551) wisdomscalingvalue += ((wis * 3.25) + rand(wis * 3.75));
+			if (wis >= 551 && wis < 601) wisdomscalingvalue += ((wis * 3.5) + rand(wis * 4));
+			if (wis >= 601 && wis < 651) wisdomscalingvalue += ((wis * 3.75) + rand(wis * 4.25));
+			if (wis >= 651 && wis < 701) wisdomscalingvalue += ((wis * 4) + rand(wis * 4.5));
+			if (wis >= 701 && wis < 751) wisdomscalingvalue += ((wis * 4.25) + rand(wis * 4.75));
+			if (wis >= 751 && wis < 801) wisdomscalingvalue += ((wis * 4.5) + rand(wis * 5));
+			if (wis >= 801 && wis < 851) wisdomscalingvalue += ((wis * 4.75) + rand(wis * 5.25));
+			if (wis >= 851 && wis < 901) wisdomscalingvalue += ((wis * 5) + rand(wis * 5.5));
+			if (wis >= 901 && wis < 951) wisdomscalingvalue += ((wis * 5.25) + rand(wis * 5.75));
+			if (wis >= 951 && wis < 1001) wisdomscalingvalue += ((wis * 5.5) + rand(wis * 6));
+			if (wis >= 1001 && wis < 1051) wisdomscalingvalue += ((wis * 5.75) + rand(wis * 6.25));
+			if (wis >= 1051 && wis < 1101) wisdomscalingvalue += ((wis * 6) + rand(wis * 6.5));
+			if (wis >= 1101 && wis < 1151) wisdomscalingvalue += ((wis * 6.25) + rand(wis * 6.75));
+			if (wis >= 1151 && wis < 1201) wisdomscalingvalue += ((wis * 6.5) + rand(wis * 7));
+			if (wis >= 1201) wisdomscalingvalue += ((wis * 6.75) + rand(wis * 7.25));
+			else wisdomscalingvalue += (wis/3 + rand(wis/2));
+			return wisdomscalingvalue;
+		}
+
 		/**
 		 * @return randomized damage reduced by player stats
 		 */
@@ -811,10 +892,10 @@ import flash.utils.getQualifiedClassName;
 			///*OPTIONAL*/ //this.createStatusEffect(StatusEffects.BonusACapacity, bonus, 0, 0, 0);
 			//// 5. Body
 			///*REQUIRED*/ this.tallness = ;
-			///*OPTIONAL*/ //this.hipRating = HIP_RATING_; // default boyish
-			///*OPTIONAL*/ //this.buttRating = BUTT_RATING_; // default buttless
+			///*OPTIONAL*/ //this.hips.type = HIP_RATING_; // default boyish
+			///*OPTIONAL*/ //this.butt.type = BUTT_RATING_; // default buttless
 			///*OPTIONAL*/ //this.lowerBody = LOWER_BODY_; //default human
-			///*OPTIONAL*/ //this.armType = ARM_TYPE_; // default human
+			///*OPTIONAL*/ //this.arms.type = ARM_TYPE_; // default human
 
 			//// 6. Skin
 			///*OPTIONAL*/ //this.skinTone = "skinTone"; // default "albino"
@@ -830,8 +911,8 @@ import flash.utils.getQualifiedClassName;
 			//// 8. Face
 			///*OPTIONAL*/ //this.faceType = FACE_; // default HUMAN
 			///*OPTIONAL*/ //this.earType = EARS_; // default HUMAN
-			///*OPTIONAL*/ //this.tongueType = TONGUE_; // default HUMAN
-			///*OPTIONAL*/ //this.eyeType = EYES_; // default HUMAN
+			///*OPTIONAL*/ //this.tongue.type = TONGUE_; // default HUMAN
+			///*OPTIONAL*/ //this.eyes.type = EYES_; // default HUMAN
 
 			//// 9. Primary stats.
 			///*REQUIRED*/ initStrTouSpeInte(,,,);
@@ -914,15 +995,15 @@ import flash.utils.getQualifiedClassName;
 			///*OPTIONAL*/ //this.tailRecharge = ; // default 5
 
 			//// 17. Horns
-			///*OPTIONAL*/ //this.hornType = HORNS_; // default NONE
+			///*OPTIONAL*/ //this.horns.type = HORNS_; // default NONE
 			///*OPTIONAL*/ //this.horns = numberOfHorns; // default 0
 
 			//// 18. Wings
-			///*OPTIONAL*/ //this.wingType = WING_TYPE_; // default NONE
-			///*OPTIONAL*/ //this.wingDesc = ; // default Appearance.DEFAULT_WING_DESCS[wingType]
+			///*OPTIONAL*/ //this.wings.type = WING_TYPE_; // default NONE
+			///*OPTIONAL*/ //this.wings.desc = ; // default Appearance.DEFAULT_WING_DESCS[wings.type]
 
 			//// 19. Antennae
-			///*OPTIONAL*/ //this.antennae = ANTENNAE_; // default NONE
+			///*OPTIONAL*/ //this.antennae.type = ANTENNAE_; // default NONE
 
 			//// REQUIRED !!!
 			//// In debug mode will throw an error for uninitialized monster
@@ -1070,13 +1151,6 @@ import flash.utils.getQualifiedClassName;
 			initedWisLibSensCor = true;
 		}
 
-
-		override public function set wingType(value:Number):void
-		{
-			if (!_checkCalled) this.wingDesc = Appearance.DEFAULT_WING_DESCS[value];
-			super.wingType = value;
-		}
-
 		override public function validate():String
 		{
 			var error:String = "";
@@ -1096,6 +1170,9 @@ import flash.utils.getQualifiedClassName;
 		public function checkMonster():Boolean
 		{
 			_checkCalled = true;
+			if(this.wings.type != Wings.NONE && this.wings.desc == "non-existant"){
+				this.wings.desc = Appearance.DEFAULT_WING_DESCS[this.wings.type]
+			}
 			checkError = validate();
 			if (checkError.length>0) CoC_Settings.error("Monster not initialized:"+checkError);
 			return checkError.length == 0;
@@ -1296,7 +1373,7 @@ import flash.utils.getQualifiedClassName;
 			if (game.player.hasStatusEffect(StatusEffects.Exgartuan) && game.player.statusEffectv2(StatusEffects.Exgartuan) == 0 && rand(3) == 0) {
 				if (SceneLib.exgartuan.exgartuanCombatUpdate()) EngineCore.outputText("\n\n");
 			}
-			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire)) {
+			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce)) {
 				if (!handleConstricted()) return;
 			}
 			if (hasStatusEffect(StatusEffects.AbilityCooldown1) ) {
@@ -1334,7 +1411,16 @@ import flash.utils.getQualifiedClassName;
 		 */
 		protected function handleConstricted():Boolean
 		{
-			if (player.lowerBody == 26) {
+			if (hasStatusEffect(StatusEffects.Pounce)) {
+			EngineCore.outputText("" + capitalA + short + " struggle to get free.");
+			if (statusEffectv1(StatusEffects.Pounce) <= 0) {
+				EngineCore.outputText("" + capitalA + short + " struggle to get free and manage to shove you off.");
+				removeStatusEffect(StatusEffects.Pounce);
+			}
+			addStatusValue(StatusEffects.Pounce, 1, -1);
+			return false;
+			}
+			else if (player.lowerBody == 26) {
 			EngineCore.outputText("Your prey pushes at your tentacles, twisting and writhing in an effort to escape from your tentacle's tight bonds.");
 			if (statusEffectv1(StatusEffects.ConstrictedScylla) <= 0) {
 				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your tentacles to handle, breaking free of your tightly bound coils.");
@@ -1583,11 +1669,11 @@ import flash.utils.getQualifiedClassName;
 					", "+Appearance.numberOfThings(vaginas.length,"vagina")+
 					" and "+Appearance.numberOfThings(breastRows.length,"breast row")+".\n\n";
 			// APPEARANCE
-			result +=Heis+Appearance.inchesAndFeetsAndInches(tallness)+" tall with "+
-					Appearance.describeByScale(hipRating,Appearance.DEFAULT_HIP_RATING_SCALES,"thinner than","wider than")+" hips and "+
-					Appearance.describeByScale(buttRating,Appearance.DEFAULT_BUTT_RATING_SCALES,"thinner than","wider than")+" butt.\n";
+			result += Heis + Appearance.inchesAndFeetsAndInches(tallness) + " tall with " +
+			          Appearance.describeByScale(hips.type,Appearance.DEFAULT_HIP_RATING_SCALES,"thinner than","wider than") + " hips and " +
+			          Appearance.describeByScale(butt.type,Appearance.DEFAULT_BUTT_RATING_SCALES,"thinner than","wider than") + " butt.\n";
 			result +=Pronoun3+" lower body is "+(Appearance.DEFAULT_LOWER_BODY_NAMES[lowerBody]||("lowerBody#"+lowerBody));
-			result += ", "+pronoun3+" arms are "+(Appearance.DEFAULT_ARM_NAMES[armType]||("armType#"+armType));
+			result += ", "+pronoun3+" arms are "+(Appearance.DEFAULT_ARM_NAMES[arms.type] || ("arms.type#" + arms.type));
 			result += ", "+pronoun1+" "+have+" "+skinTone+" "+skinAdj+" "+skinDesc+
 					  " (base "+(Appearance.DEFAULT_SKIN_NAMES[skin.baseType()]||("skinType#"+skin.baseType()))+")." +
 					  " (coat "+(Appearance.DEFAULT_SKIN_NAMES[skin.coatType()]||("skinType#"+skin.coatType()))+")." +
@@ -1605,19 +1691,19 @@ import flash.utils.getQualifiedClassName;
 				result += "no beard.\n";
 			}
 			result += Hehas
-					+(Appearance.DEFAULT_FACE_NAMES[faceType]||("faceType#"+faceType))+" face, "
-					+(Appearance.DEFAULT_EARS_NAMES[earType]||("earType#"+earType))+" ears, "
-					+(Appearance.DEFAULT_TONGUE_NAMES[tongueType]||("tongueType#"+tongueType))+" tongue and "
-					+(Appearance.DEFAULT_EYES_NAMES[eyeType]||("eyeType#"+eyeType))+" eyes.\n";
+			          + (Appearance.DEFAULT_FACE_NAMES[faceType]||("faceType#"+faceType)) + " face, "
+			          + (Appearance.DEFAULT_EARS_NAMES[ears.type] || ("earType#" + ears.type)) + " ears, "
+			          + (Appearance.DEFAULT_TONGUE_NAMES[tongue.type] || ("tongue.type#" + tongue.type)) + " tongue and "
+			          + (Appearance.DEFAULT_EYES_NAMES[eyes.type] || ("eyes.type#" + eyes.type)) + " eyes.\n";
 			result += Hehas;
 			if (tailType == Tail.NONE) result += "no tail, ";
 			else result+=(Appearance.DEFAULT_TAIL_NAMES[tailType]||("tailType#"+tailType))+" "+tailCount+" tails with venom="+tailVenom+" and recharge="+tailRecharge+", ";
-			if (hornType == Horns.NONE) result += "no horns, ";
-			else result += horns+" "+(Appearance.DEFAULT_HORNS_NAMES[hornType]||("hornType#"+hornType))+" horns, ";
-			if (wingType == Wings.NONE) result += "no wings, ";
-			else result += wingDesc+" wings (type "+(Appearance.DEFAULT_WING_NAMES[wingType]||("wingType#"+wingType))+"), ";
-			if (antennae == Antennae.NONE) result += "no antennae.\n\n";
-			else result += (Appearance.DEFAULT_ANTENNAE_NAMES[antennae]||("antennaeType#"+antennae))+" antennae.\n\n";
+			if (horns.type == Horns.NONE) result += "no horns, ";
+			else result += horns.count + " " + (Appearance.DEFAULT_HORNS_NAMES[horns.type] || ("horns.type#" + horns.type)) + " horns, ";
+			if (wings.type == Wings.NONE) result += "no wings, ";
+			else result += wings.desc + " wings (type " + (Appearance.DEFAULT_WING_NAMES[wings.type] || ("wings.type#" + wings.type)) + "), ";
+			if (antennae.type == Antennae.NONE) result += "no antennae.type.\n\n";
+			else result += (Appearance.DEFAULT_ANTENNAE_NAMES[antennae.type] || ("antennaeType#" + antennae.type)) + " antennae.type.\n\n";
 
 			// GENITALS AND BREASTS
 			for (var i:int = 0; i<cocks.length; i++){
@@ -1663,7 +1749,8 @@ import flash.utils.getQualifiedClassName;
 			result += Hehas + "str=" + str + ", tou=" + tou + ", spe=" + spe +", inte=" + inte +", wis=" + wis +", lib=" + lib + ", sens=" + sens + ", cor=" + cor + ".\n";
 			result += Pronoun1 + " can " + weaponVerb + " you with  " + weaponPerk + " " + weaponName+" (attack " + weaponAttack + ", value " + weaponValue+").\n";
 			result += Pronoun1 + " is guarded with " + armorPerk + " " + armorName+" (defense " + armorDef + ", value " + armorValue+").\n";
-			result += Hehas + HP + "/" + maxHP() + " HP, " + lust + "/" + maxLust() + " lust, " + fatigue + "/" + maxFatigue() + " fatigue, " + wrath + "/" + maxWrath() + " wrath, " + soulforce + "/" + maxSoulforce() + " soulforce, " + mana + "/" + maxMana() + " mana. " + Pronoun3 + " bonus HP=" + bonusHP + ", bonus lust=" + bonusLust + ", and lust vulnerability=" + lustVuln + ".\n";
+			result += Hehas + HP + "/" + maxHP() + " HP, " + lust + "/" + maxLust() + " lust, " + fatigue + "/" + maxFatigue() + " fatigue, " + wrath + "/" + maxWrath() + " wrath, " + soulforce + "/" + maxSoulforce() + " soulforce, " + mana + "/" + maxMana() + " mana. ";
+			result += Pronoun3 + " bonus HP=" + bonusHP + ", bonus lust=" + bonusLust + ", bonus wrath=" + bonusWrath + ", bonus mana=" + bonusMana + ", bonus soulforce=" + bonusSoulforce + ", and lust vulnerability=" + lustVuln + ".\n"
 			result += Heis + "level " + level + " and " + have+" " + gems + " gems. You will be awarded " + XP + " XP.\n";
 			
 			var numSpec:int = (special1 != null ? 1 : 0) + (special2 != null ? 1 : 0) + (special3 != null ? 1 : 0);
@@ -1840,8 +1927,8 @@ import flash.utils.getQualifiedClassName;
 				//Heal wounds
 				if(statusEffectv1(StatusEffects.GoreBleed) <= 0) {
 					outputText("The ");
-					if (player.hornType == Horns.COW_MINOTAUR) outputText("horns wounds");
-					else outputText("horn wound");
+					if (player.horns.type == Horns.COW_MINOTAUR) outputText("horns wounds");
+					else outputText("horns wound");
 					outputText(" you left on " + a + short + " stop bleeding so profusely.\n\n");
 					removeStatusEffect(StatusEffects.GoreBleed);
 				}
@@ -1851,14 +1938,14 @@ import flash.utils.getQualifiedClassName;
 					store5 = SceneLib.combat.doDamage(store5);
 					if (plural) {
 						outputText(capitalA + short + " bleed profusely from the jagged ");
-						if (player.hornType == Horns.COW_MINOTAUR) outputText("wounds your horns");
-						else outputText("wound your horn");
+						if (player.horns.type == Horns.COW_MINOTAUR) outputText("wounds your horns");
+						else outputText("wound your horns");
 						outputText(" left behind. <b>(<font color=\"#800000\">" + store5 + "</font>)</b>\n\n");
 					}
 					else {
 						outputText(capitalA + short + " bleeds profusely from the jagged ");
-						if (player.hornType == Horns.COW_MINOTAUR) outputText("wounds your horns");
-						else outputText("wound your horn");
+						if (player.horns.type == Horns.COW_MINOTAUR) outputText("wounds your horns");
+						else outputText("wound your horns");
 						outputText(" left behind. <b>(<font color=\"#800000\">" + store5 + "</font>)</b>\n\n");
 					}
 				}
@@ -1870,6 +1957,11 @@ import flash.utils.getQualifiedClassName;
 				if(statusEffectv1(StatusEffects.MonsterRegen) <= 0)
 					removeStatusEffect(StatusEffects.MonsterRegen);
 				addStatusValue(StatusEffects.MonsterRegen,1,-1);
+			}
+			if(hasStatusEffect(StatusEffects.MonsterRegen2)) {
+				if(statusEffectv1(StatusEffects.MonsterRegen2) <= 0)
+					removeStatusEffect(StatusEffects.MonsterRegen2);
+				addStatusValue(StatusEffects.MonsterRegen2,1,-1);
 			}
 			if(hasStatusEffect(StatusEffects.Timer)) {
 				if(statusEffectv1(StatusEffects.Timer) <= 0)
@@ -2001,7 +2093,7 @@ import flash.utils.getQualifiedClassName;
 			}
 			//regeneration perks for monsters
 			if ((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.LizanMarrowEvolved) >= 0 || findPerk(PerkLib.EnemyPlantType) >= 0 || findPerk(PerkLib.EnemyGodType) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0
-			|| findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.MonsterRegeneration) >= 0 || findPerk(PerkLib.Lifeline) >= 0 || hasStatusEffect(StatusEffects.MonsterRegen)) && (this.HP < maxHP()) && (this.HP > 0)) {
+			|| findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.MonsterRegeneration) >= 0 || findPerk(PerkLib.Lifeline) >= 0 || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2)) && (this.HP < maxHP()) && (this.HP > 0)) {
 				var healingPercent:Number = 0;
 				var temp2:Number = 0;
 				if (findPerk(PerkLib.Regeneration) >= 0) healingPercent += (0.5 * (1 + newGamePlusMod()));
@@ -2017,6 +2109,7 @@ import flash.utils.getQualifiedClassName;
 				if (hasStatusEffect(StatusEffects.MonsterRegen)) healingPercent += statusEffectv2(StatusEffects.MonsterRegen);
 				temp2 = Math.round(maxHP() * healingPercent / 100);
 				if (findPerk(PerkLib.Lifeline) >= 0) temp2 += (50 * (1 + newGamePlusMod()));
+				if (hasStatusEffect(StatusEffects.MonsterRegen2)) temp2 += statusEffectv2(StatusEffects.MonsterRegen2);
 				if (this is ChiChi && (flags[kFLAGS.CHI_CHI_SAM_TRAINING] < 2 || hasStatusEffect(StatusEffects.MonsterRegen))) {
 					outputText("To your surprise, Chi Chi’s wounds start closing! <b>(<font color=\"#008000\">+" + temp2 + "</font>)</b>.\n\n");
 				}
@@ -2112,6 +2205,10 @@ import flash.utils.getQualifiedClassName;
 				wis += (5 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.JobGuardian)) tou += (5 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.JobHealer)) {
+				inte += (5 * (1 + newGamePlusMod()));
+				wis += (5 * (1 + newGamePlusMod()));
+			}
 			if (hasPerk(PerkLib.JobHunter)) {
 				spe += (10 * (1 + newGamePlusMod()));
 				inte += (5 * (1 + newGamePlusMod()));

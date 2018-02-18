@@ -790,17 +790,17 @@ private function eatHolliFruit():void {
 	//TF CHANCES
 	if(rand(2) == 0 && player.cockTotal() > player.tentacleCocks()) {
 		var choices:Array = [];
-		temp = 0;
-		while(temp < player.cockTotal()) {
-			if(player.cocks[temp].cockType != CockTypesEnum.TENTACLE) choices[choices.length] = temp;
-			temp++;
+		var i:int = 0;
+		while(i < player.cockTotal()) {
+			if(player.cocks[i].cockType != CockTypesEnum.TENTACLE) choices[choices.length] = i;
+			i++;
 		}
-		temp = choices[rand(choices.length)];
-		outputText("\n\nYour " + num2Text2(temp+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer, all the way to the ground before you realize something is wrong.  You pull open your [armor] and look down, discovering your " + cockDescript(temp) + " has become a tentacle!  As you watch, it shortens back up; it's colored green except for a purplish head, and evidence seems to suggest you can make it stretch out at will.  <b>You now have a");
+		i = choices[rand(choices.length)];
+		outputText("\n\nYour " + num2Text2(i+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer, all the way to the ground before you realize something is wrong.  You pull open your [armor] and look down, discovering your " + cockDescript(i) + " has become a tentacle!  As you watch, it shortens back up; it's colored green except for a purplish head, and evidence seems to suggest you can make it stretch out at will.  <b>You now have a");
 		if(player.tentacleCocks() > 0) outputText("nother");
 		outputText(" tentacle-cock!</b>");
-		player.cocks[temp].cockType = CockTypesEnum.TENTACLE;
-		player.cocks[temp].knotMultiplier = 1.3;
+		player.cocks[i].cockType = CockTypesEnum.TENTACLE;
+		player.cocks[i].knotMultiplier = 1.3;
 		dynStats("sen", 3, "lus", 10);
 	}
 	flags[kFLAGS.HOLLI_FRUIT]--;
@@ -865,7 +865,7 @@ private function domUpSomeHolli():void {
 	outputText("\n\nSlapping your palm down on the other side, you look her right in her oddly gold and black eyes and tell her in no uncertain terms that she is going to serve and service you at your slightest whim.  Any choice she thinks she has is nothing more than an illusion.");
 	var domPowah:Number = player.level;
 	domPowah += player.tallness/12;
-	if(player.horns > 0) domPowah += 3;
+	if(player.horns.count > 0) domPowah += 3;
 	if(player.cor > 66) domPowah += 2;
 	//{fail} 
 	if(domPowah < 20) {
@@ -1130,9 +1130,9 @@ internal function defeatHolli():void {
 		outputText("Weary, the succubus godling folds into her tree, unwilling to allow you the sight of her defeat.  With her energy suppressed, you're free to ");
 		if(player.weaponName != "large axe") outputText("fetch an axe and ");
 		outputText("hack at her trunk, laboriously peeling bark and making wedge-shaped cuts in it as you try to fell the abomination.  It takes nearly eight hours, but eventually the gnarled tree topples.  No sooner does it fall than it shrivels and turns to ash.");
-		temp = 7;
-		while(temp > 0) {
-			temp--;
+		var i:int = 7;
+		while(i > 0) {
+			i--;
 			model.time.hours++;
 			if(model.time.hours > 23) {
 				model.time.days++;
@@ -1145,9 +1145,9 @@ internal function defeatHolli():void {
 	else {
 		outputText("The fire-blackened mouse cheers at you as the succubus groans and retreats completely into her bark.  \"<i>Well done, [name]!  Help me carry tinder and we can burn this abomination to the ground!</i>\"");
 		outputText("\n\nWeary but recognizing the need to finish this now, you help the monk haul firewood to the base of the tree until the blaze roars like a bonfire.  It takes hours of carrying wood and eventually cutting it as well, but finally the tree is nothing but ash.");
-		temp = 3;
-		while(temp > 0) {
-			temp--;
+		i = 3;
+		while(i > 0) {
+			i--;
 			model.time.hours++;
 			if(model.time.hours > 23) {
 				model.time.days++;

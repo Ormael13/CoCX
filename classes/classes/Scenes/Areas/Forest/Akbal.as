@@ -188,8 +188,8 @@ public class Akbal extends Monster
 			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 4*12;
-			this.hipRating = Hips.RATING_SLENDER;
-			this.buttRating = Butt.RATING_TIGHT;
+			this.hips.type = Hips.RATING_SLENDER;
+			this.butt.type = Butt.RATING_TIGHT;
 			this.skin.growFur({color:"spotted"});
 			this.hairColor = "black";
 			this.hairLength = 5;

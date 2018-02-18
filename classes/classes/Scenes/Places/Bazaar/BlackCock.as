@@ -214,12 +214,12 @@ import classes.lists.Gender;
 				case "P. Potatoes":
 					player.refillHunger(70);
 					if (flags[kFLAGS.HUNGER_ENABLED] == 0) player.modThickness(100, 2);
-					if (flags[kFLAGS.HUNGER_ENABLED] == 0 || (rand(2) == 0 && player.hunger >= 80)) player.buttRating++;
+					if (flags[kFLAGS.HUNGER_ENABLED] == 0 || (rand(2) == 0 && player.hunger >= 80)) player.butt.type++;
 					break;
 				case "Spicy Chilli":
 					player.refillHunger(60);
 					if (flags[kFLAGS.HUNGER_ENABLED] == 0) player.modThickness(100, 1);
-					if (flags[kFLAGS.HUNGER_ENABLED] == 0 || (rand(2) == 0 && player.hunger >= 80)) player.hipRating++;
+					if (flags[kFLAGS.HUNGER_ENABLED] == 0 || (rand(2) == 0 && player.hunger >= 80)) player.hips.type++;
 					break;
 				case "Prot. Shake":
 					player.refillHunger(30);
@@ -909,7 +909,7 @@ import classes.lists.Gender;
 			//Height
 			if (player.tallness < 64) outputText("You look up into Andy’s eyes and tell him you’re going to be fucking him today. He smiles as he looks down into your eyes and says, \"<i>So long as you fuck me hard, lil’ " + player.mf("guy", "gal") + "..</i>\" He obviously likes the idea of having your [cock] stuffed into his tailhole; you’ll have to oblige him and fuck the cocky bastard as hard as you can for insinuating that your height might be a problem.");
 			else if (player.tallness >= 64 && player.tallness < 68) outputText("You look straight into Andy’s eyes and tell him he’s going to be taking your [cock] today. He nods as you grab his trim waist and says, \"<i>Yes " + player.mf("sir", "ma'am") + "</i>\". From the way his dick jumps at the brief contact you can tell he quite likes the idea of you stuffing your [cock] into his tailhole.");
-			else outputText("You grab Andy by his polished horn and make him look up, tearing his gaze away from your body and directing it toward your face. His mouth drops open as you tell him you’re going to be fucking his little satyr ass today and his only response is a husky, \"<i>Oh fuck yes.</i>\" You can see his little knotted dog dick twitch at the thought of you ramming your [cock] into his tailhole. When you release his horns he rubs the spot with a smile; he is obviously a fan of the rough treatment, and maybe even a little giddy about you being taller than him.");
+			else outputText("You grab Andy by his polished horns and make him look up, tearing his gaze away from your body and directing it toward your face. His mouth drops open as you tell him you’re going to be fucking his little satyr ass today and his only response is a husky, \"<i>Oh fuck yes.</i>\" You can see his little knotted dog dick twitch at the thought of you ramming your [cock] into his tailhole. When you release his horns he rubs the spot with a smile; he is obviously a fan of the rough treatment, and maybe even a little giddy about you being taller than him.");
 			//Taur or not?
 			if (player.isTaur()) {
 				outputText("\n\nYou begin removing your [armor] slowly, sensually revealing your bare form. Andy quietly massages his leaking doggy dick as he watches, eyes hypnotized by your bare flesh. All you have to do is nod towards the barrel and the satyr climbs atop it, face down and ass in the air with his tiny little tail wagging in delight. His back is perfectly arched and his soft round ass cheeks spread, revealing a black rosebud winking in invitation. You give [eachCock] a quick flex before sliding your [cock] against the satyrs hungry derriere. He presses back, his plump rump obviously inviting you to tunnel into his soft little bud to your heart’s content. Arching your own back you thrust forward and slide up his crack. All it takes is a single order and the satyr reaches back and guides your erect length into his ass.");
@@ -1466,9 +1466,9 @@ import classes.lists.Gender;
 				player.skin.setBaseOnly();
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.armType != Arms.HUMAN) {
+			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.arms.type != Arms.HUMAN) {
 				outputText("\n\nYou feel a pleasant heat in your arms as smoke rises from them, <b>leaving normal human arms</b>.");
-				player.armType = Arms.HUMAN;
+				player.arms.type = Arms.HUMAN;
 				changes++;
 			}
 			if (rand(4) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.lowerBody != LowerBody.CLOVEN_HOOFED) {
@@ -1477,36 +1477,36 @@ import classes.lists.Gender;
 				player.legCount = 2;
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LowerBody.CLOVEN_HOOFED && player.hornType == Horns.GOAT && player.faceType != Face.HUMAN) {
+			if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LowerBody.CLOVEN_HOOFED && player.horns.type == Horns.GOAT && player.faceType != Face.HUMAN) {
 				outputText("\n\nYour face grows warm as suddenly your vision is engulfed in smoke, coughing and beating the smoke back you noticed a marked change in your features. Touching yourself you confirm you have a <b>normal human shaped face once again</b>.");
 				player.faceType = Face.HUMAN;
 				changes++;
 			}
-			if (rand(4) == 0 && changes < changeLimit && !player.hasScales() && player.lowerBody != LowerBody.GARGOYLE && player.earType != Ears.ELFIN) {
+			if (rand(4) == 0 && changes < changeLimit && !player.hasScales() && player.lowerBody != LowerBody.GARGOYLE && player.ears.type != Ears.ELFIN) {
 				outputText("\n\nYou feel an odd shifting sensation on the side of your head and, reaching up to inspect it, find a <b>pair of fleshy pointed ears</b>. "); 
 				if (player.hasFur()) outputText("As you examine your new elvish ears you feel fur grow around them, matching the rest of you.");
-				player.earType = Ears.ELFIN;
+				player.ears.type = Ears.ELFIN;
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.hornType == Horns.NONE) {
+			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.horns.type == Horns.NONE) {
 				outputText("You begin to feel a prickling sensation at the top of your head. Reaching up to inspect it, you find a pair of hard stubs. <b>You now have a pair of goat horns.</b>");
-				player.hornType = Horns.GOAT;
+				player.horns.type = Horns.GOAT;
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.hornType != Horns.GOAT && player.lowerBody != LowerBody.GARGOYLE && player.hornType != Horns.ORCHID) {
+			if (rand(3) == 0 && changes < changeLimit && player.horns.type != Horns.GOAT && player.lowerBody != LowerBody.GARGOYLE && player.horns.type != Horns.ORCHID) {
 				outputText("You begin to feel an odd itching sensation as you feel your horns repositioning. Once it's over, you reach up and find a pair of hard stubs. <b>You now have a pair of goat horns.</b>");
-				player.horns = 1;
-				player.hornType = Horns.GOAT;
+				player.horns.count = 1;
+				player.horns.type = Horns.GOAT;
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.hornType == Horns.GOAT && player.horns == 1) {
+			if (rand(3) == 0 && changes < changeLimit && player.horns.type == Horns.GOAT && player.horns.count == 1) {
 				outputText("You feel heat blooming in your forehead. Confused you reach up to find your goat horns growing and thickening into a pair of horns with ridges and a slight curve. <b>You now have a pair of tall-standing goat horns.</b>");
-				player.horns = 2;
+				player.horns.count = 2;
 				changes++;
 			}
-			if (rand(4) == 0 && changes < changeLimit && player.antennae != Antennae.NONE) {
-				outputText("You feel heat blooming in your head, centered at your antennae. It is a feeling similar to the burn of alcohol. When you reach up to inspect them your hands find nothing but quickly dispersing smoke. <b>You no longer have a pair of antennae.</b>");
-				player.antennae = Antennae.NONE;
+			if (rand(4) == 0 && changes < changeLimit && player.antennae.type != Antennae.NONE) {
+				outputText("You feel heat blooming in your head, centered at your antennae.type. It is a feeling similar to the burn of alcohol. When you reach up to inspect them your hands find nothing but quickly dispersing smoke. <b>You no longer have a pair of antennae.type.</b>");
+				player.antennae.type = Antennae.NONE;
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.cockTotal() == 1 && player.countCocksOfType(CockTypesEnum.HUMAN) == 0) {
@@ -1568,7 +1568,7 @@ import classes.lists.Gender;
 				outputText("\n\nYour skin feels clammy and a little rubbery. You touch yourself experimentally and notice that you can barely feel the pressure from your fingertips. Consumed with curiosity, you punch yourself lightly in the arm; the most you feel is a dull throb!");
 				dynStats("sen", -1);
 			}
-			if (rand(3) == 0 && player.inte > 15 && player.faceType == Face.RHINO && player.horns == 2) {
+			if (rand(3) == 0 && player.inte > 15 && player.faceType == Face.RHINO && player.horns.count == 2) {
 				outputText("\n\nYou shake your head and struggle to gather your thoughts, feeling a bit slow.");
 				dynStats("int", -1);
 			}
@@ -1577,24 +1577,24 @@ import classes.lists.Gender;
 			}
 			// Special TFs
 			//------------
-			if (rand(4) == 0 && changes < changeLimit && player.hornType != Horns.UNICORN && player.hornType != Horns.ORCHID && player.earType == Ears.HORSE && (player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.CLOVEN_HOOFED || player.horseScore() >= 3)) {
-				outputText("\n\nYou begin to feel an annoying tingling sensation at the top of your head. Reaching up to inspect it you find the <b>sharp nub of a horn protruding from the center of your forehead</b> and growing. Once it's complete you estimate it to be about six inches long.");
-				player.hornType = Horns.UNICORN;
-				player.horns = 6;
+			if (rand(4) == 0 && changes < changeLimit && player.horns.type != Horns.UNICORN && player.horns.type != Horns.ORCHID && player.ears.type == Ears.HORSE && (player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.CLOVEN_HOOFED || player.horseScore() >= 3)) {
+				outputText("\n\nYou begin to feel an annoying tingling sensation at the top of your head. Reaching up to inspect it you find the <b>sharp nub of a horns protruding from the center of your forehead</b> and growing. Once it's complete you estimate it to be about six inches long.");
+				player.horns.type = Horns.UNICORN;
+				player.horns.count = 6;
 				changes++;
 			}
-			if (rand(4) == 0 && changes < changeLimit && player.hornType == Horns.UNICORN && player.horns > 0 && player.horns < 12) {
-				outputText("\n\nYou begin to feel an intense pinching sensation in your central horn as it pushes out, growing longer and larger. You reach up and find <b>it has developed its own cute little spiral,</b> you estimate it to be about a foot long, two inches thick and very sturdy, a very useful natural weapon.");
-				player.horns = 12;
+			if (rand(4) == 0 && changes < changeLimit && player.horns.type == Horns.UNICORN && player.horns.count > 0 && player.horns.count < 12) {
+				outputText("\n\nYou begin to feel an intense pinching sensation in your central horns as it pushes out, growing longer and larger. You reach up and find <b>it has developed its own cute little spiral,</b> you estimate it to be about a foot long, two inches thick and very sturdy, a very useful natural weapon.");
+				player.horns.count = 12;
 				changes++;
 			}
 			// Normal TFs
 			//------------
 			//Removes wings
-			if (rand(4) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.wingType > Wings.NONE) {
-			//	if (player.wingType == SHARK_FIN) outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into your spine. After a moment the pain passes, though your fin is gone!");
+			if (rand(4) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.wings.type > Wings.NONE) {
+			//	if (player.wings.type == SHARK_FIN) outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into your spine. After a moment the pain passes, though your fin is gone!");
 				outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your shoulder-blades. After a moment the pain passes, though your wings are gone!");
-				player.wingType = Wings.NONE;
+				player.wings.type = Wings.NONE;
 				changes++;
 			}
 			//Fur/scales fall out
@@ -1623,8 +1623,8 @@ import classes.lists.Gender;
 				changes++;
 			}
 			//Arms change to regular
-			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.armType != Arms.HUMAN) {
-				switch(player.armType) {
+			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.arms.type != Arms.HUMAN) {
+				switch(player.arms.type) {
 					case Arms.HARPY:
 						outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your feathery arms are shedding their feathery coating. The wing-like shape your arms once had is gone in a matter of moments, leaving [skin.type] behind.");
 						break;
@@ -1633,7 +1633,7 @@ import classes.lists.Gender;
 						break;
 					default:
 				}
-				player.armType = Arms.HUMAN;
+				player.arms.type = Arms.HUMAN;
 				changes++;
 			}
 			//Change legs to normal
@@ -1644,10 +1644,10 @@ import classes.lists.Gender;
 				changes++;
 			}
 			//Removes antennaes!
-			if (rand(3) == 0 && changes < changeLimit && player.antennae > Antennae.NONE) {
-				outputText("\n\nYour " + hairDescript() + " itches so you give it a scratch, only to have your antennae fall to the ground. What a relief. <b>You've lost your antennae!</b>");
+			if (rand(3) == 0 && changes < changeLimit && player.antennae.type > Antennae.NONE) {
+				outputText("\n\nYour " + hairDescript() + " itches so you give it a scratch, only to have your antennae.type fall to the ground. What a relief. <b>You've lost your antennae.type!</b>");
 				changes++;
-				player.antennae = Antennae.NONE;
+				player.antennae.type = Antennae.NONE;
 			}
 			//Hair turns back to normal
 			if (rand(4) == 0 && changes < changeLimit && player.hairType != Hair.NORMAL) {
@@ -1677,10 +1677,10 @@ import classes.lists.Gender;
 			}
 			//Remove gills
 			if (rand(4) == 0 && changes < changeLimit && player.hasGills()) {
-				if (player.gillType == Gills.ANEMONE) outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.");
+				if (player.gills.type == Gills.ANEMONE) outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.");
 				else outputText("\n\nYou feel your gills tighten, the slits seeming to close all at once. As you let out a choked gasp your gills shrink into nothingness, leaving only smooth skin behind. Seems you won't be able to stay in the water quite so long anymore.");
 				outputText("  <b>You no longer have gills!</b>");
-				player.gillType = Gills.NONE;
+				player.gills.type = Gills.NONE;
 				changes++;
 			}
 			
@@ -1701,13 +1701,13 @@ import classes.lists.Gender;
 				changes++;
 			}
 			//Change ears to rhino
-			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.earType != Ears.RHINO) {
+			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.ears.type != Ears.RHINO) {
 				outputText("\n\nYou feel an odd uncomfortable sensation in your ears. Reaching up you find your ears shifting into an open tube shape, once they’re done you flick them around, enjoying the sensation of your new ears swishing through the air. <b>You now have rhino ears.</b>");
-				player.earType = Ears.RHINO;
+				player.ears.type = Ears.RHINO;
 				changes++;
 			}
 			//Change face to rhino
-			if (rand(4) == 0 && changes < changeLimit && player.earType == Ears.RHINO && player.skinTone == "gray" && player.faceType != Face.RHINO) {
+			if (rand(4) == 0 && changes < changeLimit && player.ears.type == Ears.RHINO && player.skinTone == "gray" && player.faceType != Face.RHINO) {
 				outputText("\n\nYour face suddenly goes numb. You begin to hear bone cracking as you vision suddenly shifts as you face stretches out and thickens. When your face is done growing you can see the edges of your elongated mouth and noise in the center of your field of vision. They barely impede your vision though. <b>You now have a rhino face.</b>");
 				player.faceType = Face.RHINO;
 				changes++;
@@ -1721,17 +1721,17 @@ import classes.lists.Gender;
 			}
 			//Gain rhino horns
 			//Tier 1
-			if (rand(4) == 0 && changes < changeLimit && player.faceType == Face.RHINO && player.hornType != Horns.RHINO && player.hornType != Horns.ORCHID) {
-				outputText("\n\nYou begin to feel an annoying tingling sensation at the top of your head. Reaching up to inspect it you find the sharp nub of a horn protruding from the center of your forehead and growing. Once it'sits complete you estimate it to be about six inches long. If it were sharper and a little longer it would make a useful natural weapon.");
-				player.horns = 1;
-				player.hornType = Horns.RHINO;
+			if (rand(4) == 0 && changes < changeLimit && player.faceType == Face.RHINO && player.horns.type != Horns.RHINO && player.horns.type != Horns.ORCHID) {
+				outputText("\n\nYou begin to feel an annoying tingling sensation at the top of your head. Reaching up to inspect it you find the sharp nub of a horns protruding from the center of your forehead and growing. Once it'sits complete you estimate it to be about six inches long. If it were sharper and a little longer it would make a useful natural weapon.");
+				player.horns.count = 1;
+				player.horns.type = Horns.RHINO;
 				changes++;
 			}
 			//Tier 2
-			if (rand(4) == 0 && changes < changeLimit && player.faceType == Face.RHINO && player.hornType == Horns.RHINO && player.horns == 1) {
-				outputText("\n\nYou begin to feel an annoying tingling sensation at the edge of your nose, above your field of vision. Reaching up you feel the sharp edge of a curved horn growing out the edge of your face. The itchy tingle continues as you feel both of your horns become sharp and tall. You estimate your older horn to be a mere seven inches and your new horn to be around a foot long. They’ll be useful natural weapons.");
+			if (rand(4) == 0 && changes < changeLimit && player.faceType == Face.RHINO && player.horns.type == Horns.RHINO && player.horns.count == 1) {
+				outputText("\n\nYou begin to feel an annoying tingling sensation at the edge of your nose, above your field of vision. Reaching up you feel the sharp edge of a curved horns growing out the edge of your face. The itchy tingle continues as you feel both of your horns become sharp and tall. You estimate your older horns to be a mere seven inches and your new horns to be around a foot long. They’ll be useful natural weapons.");
 				outputText("\n<b>(Gained physical special: Upheaval! Any time you lose your rhino face or horns, you will lose this ability.)</b>");
-				player.horns = 2;
+				player.horns.count = 2;
 				player.tailType = Horns.RHINO;
 				changes++;
 			}
@@ -1743,12 +1743,12 @@ import classes.lists.Gender;
 				cocksAffected = 0;
 				for (i = 0; i < player.cockTotal(); i++) {
 					if (player.cocks[i].cockType == CockTypesEnum.RHINO && player.cocks[i].cockLength >= 10) continue; //Skip over if rhino cock.
-					temp = player.increaseCock(player.smallestCockIndex(), rand(2) + 1);
+					var i2:int = player.increaseCock(player.smallestCockIndex(), rand(2) + 1);
 					dynStats("lib", 0.5, "lus", 3);
 					cocksAffected++;
 				}
 				outputText("\n\n");
-				player.lengthChange(temp, cocksAffected);
+				player.lengthChange(i2, cocksAffected);
 				changes++;
 			}
 			//Increase girth of rhino cock.
@@ -1768,9 +1768,9 @@ import classes.lists.Gender;
 				cocksAffected = 0;
 				for (i = 0; i < player.cockTotal(); i++) {
 					if (player.cocks[i].cockType == CockTypesEnum.RHINO && player.cocks[i].cockLength < 18) {
-						temp = player.increaseCock(i, 1 + rand(2));
+						i2 = player.increaseCock(i, 1 + rand(2));
 						outputText("\n\n");
-						player.lengthChange(temp, 1);
+						player.lengthChange(i2, 1);
 						dynStats("lib", 0.5, "lus", 3);
 						break;
 					}
@@ -1803,17 +1803,17 @@ import classes.lists.Gender;
 			}
 			//Gain height
 			if (rand(2) == 0 && changes < changeLimit && player.tallness < 102) {
-				temp = rand(5) + 3;
+				var growth:Number = rand(5) + 3;
 				//Slow rate of growth near ceiling
-				if (player.tallness > 90) temp = Math.floor(temp / 2);
+				if (player.tallness > 90) growth = Math.floor(growth / 2);
 				//Constrain height growth
-				if (temp == 0) temp = 1; //Never 0
-				if (temp > 6) temp = 6; //Constrain growth to 6 inches
+				if (growth == 0) growth = 1; //Never 0
+				if (growth > 6) growth = 6; //Constrain growth to 6 inches
 				//Flavor texts. Flavored like 1950's cigarettes. Yum.
-				if (temp < 3) outputText("\n\nYou shift uncomfortably as you realize you feel off balance. Gazing down, you realize you have grown SLIGHTLY taller.");
-				if (temp >= 3 && temp < 6) outputText("\n\nYou feel dizzy and slightly off, but quickly realize it's due to a sudden increase in height.");
-				if (temp == 6) outputText("\n\nStaggering forwards, you clutch at your head dizzily. You spend a moment getting your balance, and stand up, feeling noticeably taller.");
-				player.tallness += temp;
+				if (growth < 3) outputText("\n\nYou shift uncomfortably as you realize you feel off balance. Gazing down, you realize you have grown SLIGHTLY taller.");
+				if (growth >= 3 && growth < 6) outputText("\n\nYou feel dizzy and slightly off, but quickly realize it's due to a sudden increase in height.");
+				if (growth == 6) outputText("\n\nStaggering forwards, you clutch at your head dizzily. You spend a moment getting your balance, and stand up, feeling noticeably taller.");
+				player.tallness += growth;
 				changes++;
 			}
 			//Gain muscle tone
@@ -1853,23 +1853,23 @@ import classes.lists.Gender;
 				player.hairType = Hair.NORMAL;
 				changes++;
 			}
-			if (rand(4) == 0 && changes < changeLimit && player.armType == Arms.HARPY) {
+			if (rand(4) == 0 && changes < changeLimit && player.arms.type == Arms.HARPY) {
 				outputText("\n\nYour arm feathers fall out completely, <b>leaving only the " + player.skinFurScales() + " underneath.</b>");
-				player.armType = Arms.HUMAN;
+				player.arms.type = Arms.HUMAN;
 				changes++;
 			}
 			//Remove gills
 			if (rand(3) == 0 && changes < changeLimit && player.hasGills()) {
-				if (player.gillType == Gills.ANEMONE) outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.");
+				if (player.gills.type == Gills.ANEMONE) outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.");
 				else outputText("\n\nYou feel your gills tighten, the slits seeming to close all at once. As you let out a choked gasp your gills shrink into nothingness, leaving only smooth skin behind. Seems you won't be able to stay in the water quite so long anymore.");
 				outputText("  <b>You no longer have gills!</b>");
-				player.gillType = Gills.NONE;
+				player.gills.type = Gills.NONE;
 				changes++;
 			}
 			
-			if (rand(3) == 0 && changes < changeLimit && player.eyeType == Eyes.FOUR_SPIDER_EYES) {
+			if (rand(3) == 0 && changes < changeLimit && player.eyes.type == Eyes.FOUR_SPIDER_EYES) {
 				outputText("\n\nYour two forehead eyes start throbbing painfully, your sight in them eventually going dark. You touch your forehead to inspect your eyes, only to find out that they have disappeared. <b>You only have two eyes now!</b>");
-				player.eyeType = Eyes.HUMAN;
+				player.eyes.type = Eyes.HUMAN;
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.averageNipplesPerBreast() > 4) {
@@ -1888,9 +1888,9 @@ import classes.lists.Gender;
 				changes++;
 			}
 			//Gain Echidna ears
-			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.earType != Ears.ECHIDNA) {
+			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.ears.type != Ears.ECHIDNA) {
 				outputText("\n\n");
-				switch(player.earType) {
+				switch(player.ears.type) {
 					case Ears.LIZARD:
 						outputText("You feel a strange itching in your reptilian ears. As you scratch them, you can feel their scales flaking away, leaving you with smooth, rounded holes for ears.");
 						break;
@@ -1898,11 +1898,11 @@ import classes.lists.Gender;
 						outputText("Tightness centers on your scalp, pulling your ears down from their normal shape into small bumps with holes in their centers.");
 				}
 				outputText(" <b>You now have echidna ears!</b>");
-				player.earType = Ears.ECHIDNA;
+				player.ears.type = Ears.ECHIDNA;
 				changes++;
 			}
 			//Gain Echidna tail
-			if (rand(3) == 0 && changes < changeLimit && player.earType == Ears.ECHIDNA && player.tailType != Tail.ECHIDNA) {
+			if (rand(3) == 0 && changes < changeLimit && player.ears.type == Ears.ECHIDNA && player.tailType != Tail.ECHIDNA) {
 				outputText("\n\n");
 				switch(player.tailType) {
 					case Tail.NONE:
@@ -1960,7 +1960,7 @@ import classes.lists.Gender;
 				changes++;
 			}
 			//Gain Echidna legs
-			if (rand(3) == 0 && changes < changeLimit && player.earType == Ears.ECHIDNA && player.tailType && Tail.ECHIDNA && player.lowerBody != LowerBody.ECHIDNA) {
+			if (rand(3) == 0 && changes < changeLimit && player.ears.type == Ears.ECHIDNA && player.tailType && Tail.ECHIDNA && player.lowerBody != LowerBody.ECHIDNA) {
 				outputText("\n\n");
 				switch(player.lowerBody) {
 					//Irregular lower body type
@@ -2021,9 +2021,9 @@ import classes.lists.Gender;
 				changes++;
 			}
 			//Gain Echidna tongue
-			if (rand(3) == 0 && changes < changeLimit && player.echidnaScore() >= 2 && player.lowerBody != LowerBody.GARGOYLE && player.tongueType != Tongue.ECHIDNA) {
+			if (rand(3) == 0 && changes < changeLimit && player.echidnaScore() >= 2 && player.lowerBody != LowerBody.GARGOYLE && player.tongue.type != Tongue.ECHIDNA) {
 				outputText("\n\nYou feel an uncomfortable pressure in your tongue as it begins to shift and change. Within moments, you are able to behold your long, thin tongue. It has to be at least a foot long. <b>You now have an echidna tongue!</b>");
-				player.tongueType = Tongue.ECHIDNA;
+				player.tongue.type = Tongue.ECHIDNA;
 				changes++;
 			}
 			//Gain quill hair
@@ -2033,7 +2033,7 @@ import classes.lists.Gender;
 				changes++;
 			}
 			//Gain Echidna face if you have the right conditions.
-			if (rand(4) == 0 && changes < changeLimit && player.hasFur() && player.earType == Ears.ECHIDNA && player.tailType == Tail.ECHIDNA && player.tongueType == Tongue.ECHIDNA) {
+			if (rand(4) == 0 && changes < changeLimit && player.hasFur() && player.ears.type == Ears.ECHIDNA && player.tailType == Tail.ECHIDNA && player.tongue.type == Tongue.ECHIDNA) {
 				outputText("You groan loudly as the bones in your face begin to reshape and rearrange. Most notable, you feel your mouth lengthening into a long, thin snout. <b>You now have an echidna face!</b>");
 				player.faceType = Face.ECHIDNA;
 				changes++;
@@ -2050,11 +2050,11 @@ import classes.lists.Gender;
 
 			//Sexual changes
 			if (rand(3) == 0 && changes < changeLimit && player.hasCock() && player.cumMultiplier < 25) {
-				temp = 1 + rand(4);
+				var mult:Number = 1 + rand(4);
 				//Lots of cum raises cum multiplier cap to 2 instead of 1.5
-				if (player.findPerk(PerkLib.MessyOrgasms) >= 0) temp += rand(10);
-				temp *= 0.1;
-				player.cumMultiplier += temp;
+				if (player.findPerk(PerkLib.MessyOrgasms) >= 0) mult += rand(10);
+				mult *= 0.1;
+				player.cumMultiplier += mult;
 				//Flavor text
 				if (player.balls == 0) outputText("\n\nYou feel a churning inside your gut as something inside you changes.");
 				if (player.balls > 0) outputText("\n\nYou feel a churning in your [balls]. It quickly settles, leaving them feeling somewhat more dense.");
@@ -2079,9 +2079,9 @@ import classes.lists.Gender;
 			if (rand(2) == 0 && player.thickness < 90) {
 				player.modThickness(90, 2);
 			}
-			if (rand(2.4) == 0 && changes < changeLimit && player.hasVagina() && player.mf("m", "f") == "f" && player.hipRating < 14) {
+			if (rand(2.4) == 0 && changes < changeLimit && player.hasVagina() && player.mf("m", "f") == "f" && player.hips.type < 14) {
 				outputText("\n\nAfter finishing, you find that your gait has changed. Did your [hips] widen?");
-				player.hipRating++;
+				player.hips.type++;
 				changes++;
 			}
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;

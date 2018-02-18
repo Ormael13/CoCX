@@ -321,17 +321,17 @@ public class Centaurinum extends Consumable{
 			changes++;
 		}
 		//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-		if (changes < changeLimit && !InCollection(player.armType, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
+		if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
 			mutations.humanizeArms();
 			changes++;
 		}
 		//Human ears
-		if (player.armType == Arms.HUMAN && player.earType != Ears.HUMAN && changes < changeLimit && rand(4) == 0) {
+		if (player.arms.type == Arms.HUMAN && player.ears.type != Ears.HUMAN && changes < changeLimit && rand(4) == 0) {
 			mutations.humanizeEars();
 			changes++;
 		}
 		//Human face
-		if (player.earType == Ears.HUMAN && player.faceType != Face.HUMAN && changes < changeLimit && rand(4) == 0) {
+		if (player.ears.type == Ears.HUMAN && player.faceType != Face.HUMAN && changes < changeLimit && rand(4) == 0) {
 			mutations.humanizeFace();
 			changes++;
 		}

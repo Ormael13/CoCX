@@ -70,7 +70,7 @@ public class CombatUI extends BaseCombatContent {
 				if (player.weapon != weapons.SPEAR && player.weapon != weapons.LANCE && player.weapon != weapons.FRTAXE) {
 					btnMelee.disable("No way you could reach enemy with melee attacks while flying.");
 				}
-				else if (player.wingType == Wings.BAT_ARM) {
+				else if (player.wings.type == Wings.BAT_ARM) {
 					btnMelee.disable("No way you could use your melee weapon with those arms while flying.");
 				}
 			} else if (player.hasStatusEffect(StatusEffects.KnockedBack)) {
@@ -98,7 +98,7 @@ public class CombatUI extends BaseCombatContent {
 			default:
 				btnRanged.showDisabled("Shoot");
 		}
-		if(player.isFlying() && player.wingType == Wings.BAT_ARM){btnRanged.disable("It would be rather difficult to aim while flapping your arms.");}
+		if(player.isFlying() && player.wings.type == Wings.BAT_ARM){btnRanged.disable("It would be rather difficult to aim while flapping your arms.");}
 		btnItems.show("Items", inventory.inventoryMenu, "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
 		
 		// Submenus
@@ -181,18 +181,25 @@ public class CombatUI extends BaseCombatContent {
 			}
 			else addButtonDisabled(0, "Bite", "If only you had fangs.");
 			addButton(4, "Release", combat.VampireLeggoMyEggo);
+		} else if (monster.hasStatusEffect(StatusEffects.Pounce)) {
+			menu();
+			addButton(0, "Claws", combat.clawsRend).hint("Rend your enemy using your claws. \n\nFatigue Cost: " + physicalCost(20) + "");
+			if (player.fatigueLeft() <= combat.physicalCost(20)) {
+				button(0).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
+			}
+			//addButton(4, "Release", combat.GooLeggoMyEggo);
 		} else if (player.hasPerk(PerkLib.FirstAttackElementals) && flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] != 1) {
 			menu();
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) addButton(0, "Air", combat.baseelementalattacks, 1, player.statusEffectv2(StatusEffects.SummonedElementalsAir));
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) addButton(1, "Earth", combat.baseelementalattacks, 2, player.statusEffectv2(StatusEffects.SummonedElementalsEarth));
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire)) addButton(2, "Fire", combat.baseelementalattacks, 3, player.statusEffectv2(StatusEffects.SummonedElementalsFire));
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater)) addButton(3, "Water", combat.baseelementalattacks, 4, player.statusEffectv2(StatusEffects.SummonedElementalsWater));
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEther)) addButton(4, "Ether", combat.baseelementalattacks, 10, player.statusEffectv2(StatusEffects.SummonedElementalsEther));
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWood)) addButton(5, "Wood", combat.baseelementalattacks, 8, player.statusEffectv2(StatusEffects.SummonedElementalsWood));
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsMetal)) addButton(6, "Metal", combat.baseelementalattacks, 9, player.statusEffectv2(StatusEffects.SummonedElementalsMetal));
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce)) addButton(7, "Ice", combat.baseelementalattacks, 5, player.statusEffectv2(StatusEffects.SummonedElementalsIce));
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning)) addButton(8, "Lightning", combat.baseelementalattacks, 6, player.statusEffectv2(StatusEffects.SummonedElementalsLightning));
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) addButton(9, "Darkness", combat.baseelementalattacks, 7, player.statusEffectv2(StatusEffects.SummonedElementalsDarkness));
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) addButton(0, "Air", combat.baseelementalattacks, Combat.AIR);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) addButton(1, "Earth", combat.baseelementalattacks, Combat.EARTH);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire)) addButton(2, "Fire", combat.baseelementalattacks, Combat.FIRE);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater)) addButton(3, "Water", combat.baseelementalattacks, Combat.WATER);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEther)) addButton(4, "Ether", combat.baseelementalattacks, Combat.ETHER);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWood)) addButton(5, "Wood", combat.baseelementalattacks, Combat.WOOD);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsMetal)) addButton(6, "Metal", combat.baseelementalattacks, Combat.METAL);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce)) addButton(7, "Ice", combat.baseelementalattacks, Combat.ICE);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning)) addButton(8, "Lightning", combat.baseelementalattacks, Combat.LIGHTNING);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) addButton(9, "Darkness", combat.baseelementalattacks, Combat.DARKNESS);
 		} else if (player.hasPerk(PerkLib.FirstAttackGolems) && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1) {
 			menu();
 			addButton(0, "Send P.Gol/1", combat.pspecials.sendPernamentGolem1);

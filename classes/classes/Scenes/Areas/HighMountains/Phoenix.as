@@ -134,8 +134,8 @@ public class Phoenix extends Monster
 			this.createStatusEffect(StatusEffects.BonusACapacity,20,0,0,0);
 			this.tallness = 6 * 12 + 6;
 			this.tailType = Tail.SALAMANDER;
-			this.hipRating = Hips.RATING_CURVY;
-			this.buttRating = Butt.RATING_JIGGLY;
+			this.hips.type = Hips.RATING_CURVY;
+			this.butt.type = Butt.RATING_JIGGLY;
 			this.lowerBody = LowerBody.SALAMANDER;
 			this.skin.growCoat(Skin.SCALES,{color:"crimson"});
 			this.skin.base.color = "light";
@@ -158,7 +158,7 @@ public class Phoenix extends Monster
 			this.drop = new ChainedDrop().add(useables.EBONBLO,1/20)
 					.add(weapons.SCIMITR,1/20)
 					.elseDrop(consumables.NOCELIQ);
-			this.wingType = Wings.FEATHERED_PHOENIX;
+			this.wings.type = Wings.FEATHERED_PHOENIX;
 			this.special1 = doubleSlash;
 			this.special2 = phoenixFireBreath;
 			this.special3 = lustBang;

@@ -9,7 +9,7 @@ package classes.Items.Weapons
 	public class LargeClaymore extends Weapon {
 		
 		public function LargeClaymore() {
-			super("Claymor", "L.Claymore", "large claymore", "a large claymore", "cleaving sword-slash", 15, 600, "A massive sword that a very strong warrior might use.  Requires 40 strength to use.", "Large");
+			super("Claymor", "L.Claymore", "large claymore", "a large claymore", "cleaving sword-slash", 15, 600, "A massive sword that a very strong warrior might use.  Requires 40 strength to unleash full attack power.", "Large");
 		}
 		
 		override public function get attack():Number {

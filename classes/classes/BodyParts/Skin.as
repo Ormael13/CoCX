@@ -46,6 +46,7 @@ public class Skin extends SaveableBodyPart {
 	public static const PARTIAL_AQUA_SCALES:int   = 18;
 	public static const AQUA_RUBBER_LIKE:int      = 19;
 	public static const TATTOED_ONI:int           = 20;
+	public static const FEATHER:int 	          = 21;
 	
 	public static const PATTERN_NONE:int = 0;
 	public static const PATTERN_MAGICAL_TATTOO:int = 1;
@@ -264,6 +265,9 @@ public class Skin extends SaveableBodyPart {
 	public function hasGooSkin():Boolean {
 		return base.isAny(GOO);
 	}
+	public function hasFeather():Boolean {
+		return coat.isAny(FEATHER);
+	}
 	public function hasMostlyPlainSkin():Boolean {
 		return coverage <= COVERAGE_LOW && base.type == PLAIN;
 	}
@@ -361,6 +365,8 @@ public class Skin extends SaveableBodyPart {
 		 PLAIN, COVERAGE_NONE, 0],
 		[TATTOED_ONI,
 		 PLAIN, COVERAGE_NONE, 0],
+		[FEATHER,
+		 PLAIN, COVERAGE_HIGH, FEATHER],
 	]);
 	private static const TYPE_TO_BASE:Object               = TYPE_TO_BASE_COVERAGE_COAT[0];
 	private static const TYPE_TO_COVERAGE:Object           = TYPE_TO_BASE_COVERAGE_COAT[1];

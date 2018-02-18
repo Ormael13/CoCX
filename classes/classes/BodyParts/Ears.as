@@ -1,5 +1,4 @@
 package classes.BodyParts {
-import classes.Creature;
 
 public class Ears extends BodyPart {
 	public static const HUMAN:int     = 0;
@@ -32,9 +31,10 @@ public class Ears extends BodyPart {
 	public static const BAT:int       = 27;
 	public static const VAMPIRE:int   = 28;
 	public static const RED_PANDA:int = 29;
+	public static const AVIAN:int	  = 30;
 	
-	public function Ears(creature:Creature, publicPrimitives:Array) {
-		super(creature, publicPrimitives);
+	public function Ears() {
+		super(null, null);
 	}
 }
 }

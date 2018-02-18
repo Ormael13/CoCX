@@ -1,5 +1,4 @@
 package classes.BodyParts {
-import classes.Creature;
 
 public class Eyes extends BodyPart {
 	public var count:int;
@@ -20,9 +19,11 @@ public class Eyes extends BodyPart {
 	public static const RAIJU:int                = 14;
 	public static const VAMPIRE:int              = 15;
 	public static const GEMSTONES:int            = 16;
+	public static const FERAL:int            	 = 17;
 	
-	public function Eyes(creature:Creature, publicPrimitives:Array) {
-		super(creature, publicPrimitives);
+	public var colour:String = "brown";
+	public function Eyes() {
+		super(null, null);
 	}
 }
 }

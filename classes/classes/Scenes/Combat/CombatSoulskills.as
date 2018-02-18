@@ -176,9 +176,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		var soulforcecost:int = 30 * soulskillCost() * soulskillcostmulti();
 		player.soulforce -= soulforcecost;
-		var damage:Number = 0;
-		damage += player.str;
-		damage += strenghtscalingbonus() * 0.5;
+		var damage:Number = player.str;
+		damage += scalingBonusStrength() * 0.5;
 		if (damage < 10) damage = 10;
 		//weapon bonus
 		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.04));
@@ -209,7 +208,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
@@ -230,11 +229,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		if (monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
 	}
@@ -252,9 +247,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		var soulforcecost:int = 50 * soulskillCost() * soulskillcostmulti();
 		player.soulforce -= soulforcecost;
-		var damage:Number = 0;
-		damage += player.str;
-		damage += strenghtscalingbonus() * 0.5;
+		var damage:Number = player.str;
+		damage += scalingBonusStrength() * 0.5;
 		if (damage < 10) damage = 10;
 		//weapon bonus
 		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.04));
@@ -284,7 +278,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
@@ -300,11 +294,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		if (monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
 	}
@@ -325,8 +315,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		var soulforcecost:int = 10 * soulskillCost() * soulskillcostmulti();
 		player.soulforce -= soulforcecost;
-		var damage:Number = 0;
-		damage += inteligencescalingbonus();
+		var damage:Number = scalingBonusIntelligence();
 		if (damage < 10) damage = 10;
 		damage *= spellMod();
 		//soulskill mod effect
@@ -343,7 +332,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
@@ -356,11 +345,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		checkAchievementDamage(damage);
 		outputText("\n\n");
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		if (monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
 	}
@@ -379,8 +364,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		var soulforcecost:int = 60 * soulskillCost() * soulskillcostmulti();
 		player.soulforce -= soulforcecost;
-		var damage:Number = 0;
-		damage += inteligencescalingbonus();
+		var damage:Number = scalingBonusIntelligence();
 		if (damage < 10) damage = 10;
 		damage *= spellMod();
 		//soulskill mod effect
@@ -398,7 +382,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
@@ -407,11 +391,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		checkAchievementDamage(damage);
 		outputText("\n\n");
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		if (monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
 	}
@@ -421,12 +401,11 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		var soulforcecost:int = 30 * soulskillCost() * soulskillcostmulti();
 		player.soulforce -= soulforcecost;
-		var damage:Number = 0;
-		damage += unarmedAttack();
+		var damage:Number = unarmedAttack();
 		damage += player.str;
-		damage += strenghtscalingbonus();
+		damage += scalingBonusStrength();
 		damage += player.wis;
-		damage += wisdomscalingbonus();
+		damage += scalingBonusWisdom();
 		//other bonuses
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
 		var crit:Boolean = false;
@@ -438,7 +417,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
@@ -475,11 +454,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			outputText("too resolute to be frozen by your attack.</b>");
 		}
 		checkAchievementDamage(damage);
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		outputText("\n\n");
 		if (monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
@@ -490,12 +465,11 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		var soulforcecost:int = 30 * soulskillCost() * soulskillcostmulti();
 		player.soulforce -= soulforcecost;
-		var damage:Number = 0;
-		damage += unarmedAttack();
+		var damage:Number = unarmedAttack();
 		damage += player.str;
-		damage += strenghtscalingbonus();
+		damage += scalingBonusStrength();
 		damage += player.wis;
-		damage += wisdomscalingbonus();
+		damage += scalingBonusWisdom();
 		//other bonuses
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
 		var crit:Boolean = false;
@@ -507,7 +481,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
@@ -516,11 +490,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText("Setting your fist ablaze, you rush at " + monster.a + monster.short + " and scorch " + monster.pronoun2 + " with your searing flames. (<b><font color=\"#800000\">" + damage + "</font></b>)");
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		checkAchievementDamage(damage);
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		outputText("\n\n");
 		if (monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
@@ -551,12 +521,11 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		var soulforcecost:int = 30 * soulskillCost() * soulskillcostmulti();
 		player.soulforce -= soulforcecost;
-		var damage:Number = 0;
-		damage += unarmedAttack();
+		var damage:Number = unarmedAttack();
 		damage += player.str;
-		damage += strenghtscalingbonus();
+		damage += scalingBonusStrength();
 		damage += player.wis;
-		damage += wisdomscalingbonus();
+		damage += scalingBonusWisdom();
 		//other bonuses
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
 		var crit:Boolean = false;
@@ -568,7 +537,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
@@ -579,11 +548,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		checkAchievementDamage(damage);
 		outputText("\n\n");
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		if (monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
 	}
@@ -593,13 +558,12 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		var soulforcecost:int = 100 * soulskillCost() * soulskillcostmulti();
 		player.soulforce -= soulforcecost;
-		var damage:Number = 0;
-		damage += player.str;
-		damage += strenghtscalingbonus() * 1.8;
+		var damage:Number = player.str;
+		damage += scalingBonusStrength() * 1.8;
 		damage += player.inte;
-		damage += inteligencescalingbonus() * 1.8;
+		damage += scalingBonusIntelligence() * 1.8;
 		damage += player.wis;
-		damage += wisdomscalingbonus() * 1.8;
+		damage += scalingBonusWisdom() * 1.8;
 		if (damage < 10) damage = 10;
 		damage *= spellMod();
 		//soulskill mod effect
@@ -615,7 +579,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
@@ -632,11 +596,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, damage);
-		}
-		combat.HeroBaneProc();
+		combat.heroBaneProc(damage);
 		if (monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
 	}
@@ -689,7 +649,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (player.findPerk(PerkLib.GreyArchmage) >= 0 && player.inte >= 150) TranceBoost += 30;
 			if (player.findPerk(PerkLib.JobEnchanter) >= 0 && player.inte >= 50) TranceBoost += 5;
 			if (player.findPerk(PerkLib.Battleflash) >= 0 && player.inte >= 50) TranceBoost += 15;
-			if (player.findPerk(PerkLib.JobBarbarian) >= 0) TranceBoost -= 10;
+			if (player.findPerk(PerkLib.JobSwordsman) >= 0) TranceBoost -= 10;
 			if (player.findPerk(PerkLib.JobBrawler) >= 0) TranceBoost -= 10;
 			if (player.findPerk(PerkLib.JobDervish) >= 0) TranceBoost -= 10;
 			if (player.findPerk(PerkLib.IronFistsI) >= 0) TranceBoost -= 10;
@@ -709,8 +669,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		//	TranceBoost *= spellModBlack();
 			TranceBoost = FnHelpers.FN.logScale(TranceBoost,TranceABC,10);
 			TranceBoost = Math.round(TranceBoost);
-			temp = TranceBoost;
-			tempStrTou = temp;
+			tempStrTou = TranceBoost;
 			player.createStatusEffect(StatusEffects.TranceTransformation, 0, 0, 0, 0);
 			player.changeStatusValue(StatusEffects.TranceTransformation, 1, tempStrTou);
 			mainView.statsView.showStatUp('str');
@@ -748,8 +707,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (BeatOfWarBoost < 1) BeatOfWarBoost = 1;
 		BeatOfWarBoost = Math.round(BeatOfWarBoost);
 		if (!player.hasStatusEffect(StatusEffects.BeatOfWar)) player.createStatusEffect(StatusEffects.BeatOfWar,0,0,0,0);//player.addStatusValue(StatusEffects.BeatOfWar, 1, BeatOfWarBoost);
-		temp = BeatOfWarBoost;
-		tempStr = temp;
+		tempStr = BeatOfWarBoost;
 		player.addStatusValue(StatusEffects.BeatOfWar,1,tempStr);
 		mainView.statsView.showStatUp('str');
 		player.str += BeatOfWarBoost;			//player.statusEffectv1(StatusEffects.BeatOfWar);
@@ -854,8 +812,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	 mantisMultipleAttacks();
 	 }
 	 public function mantisMultipleAttacks():void {
-	 var damage:Number = 0;
-	 damage += player.spe;
+	 var damage:Number = player.spe;
 	 damage += speedscalingbonus() * 0.5;
 	 if (damage < 10) damage = 10;
 	 //adjusting to be used 60/100% of base speed while attacking depending on insect-related perks possesed
@@ -953,8 +910,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	 }
 	 var soulforcecost:int = 10 * soulskillCost() * soulskillcostmulti();
 	 player.soulforce -= soulforcecost;
-	 var damage:Number = 0;
-	 damage += player.str;
+	 var damage:Number = player.str;
 	 damage += strenghtscalingbonus() * 0.5;
 	 if (damage < 10) damage = 10;
 	 //weapon bonus

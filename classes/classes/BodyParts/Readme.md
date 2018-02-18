@@ -8,7 +8,7 @@ The `BodyParts` classes are container classes to keep multiple related propertys
 For example many TFs reset the players skin by setting all of their values to their default value one by one. Or it could happen, that you forget to update the skinAdj when (re)setting the players Skin. This is now possible with one method call, like
 ```as3
 // Restore everything to its default
-player.rearBody.restore(false);
+player.rearBody.type.restore(false);
 
 // Restore everything except the skintone to its default
 player.skin.restore();
@@ -44,7 +44,7 @@ player.skin.setProps({type: DRAGON_SCALES, adj: "tough", desc: "shield-shaped dr
 
 Another example for BodyParts with a `skin` property:
 ```as3
-player.rearBody.setProps({
+player.rearBody.type.setProps({
     type: DRACONIC_MANE,
     skin: {
         type: DRAGON_SCALES,

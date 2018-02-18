@@ -137,6 +137,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.removeStatusEffect(StatusEffects.CampSparingNpcsTimers2);
 				}
 			}
+			//Sidonie checks
+			if (flags[kFLAGS.SIDONIE_RECOLLECTION] > 0) flags[kFLAGS.SIDONIE_RECOLLECTION]--;
+			if (flags[kFLAGS.LUNA_FOLLOWER] >= 4) {
+				if (flags[kFLAGS.LUNA_JEALOUSY] < 200) flags[kFLAGS.LUNA_JEALOUSY]++;
+				if ((flags[kFLAGS.LUNA_FOLLOWER] == 6 || flags[kFLAGS.LUNA_FOLLOWER] == 10) && flags[kFLAGS.LUNA_JEALOUSY] < 50) flags[kFLAGS.LUNA_FOLLOWER]--;
+				if ((flags[kFLAGS.LUNA_FOLLOWER] == 5 || flags[kFLAGS.LUNA_FOLLOWER] == 9) && flags[kFLAGS.LUNA_JEALOUSY] >= 50 && (CoC.instance.model.time.hours > 6 && CoC.instance.model.time.hours < 23)) SceneLib.lunaFollower.warrningAboutJelously();
+			}
 			Begin("PlayerEvents","hourlyCheckRacialPerks");
 			needNext = hourlyCheckRacialPerks();
 			End("PlayerEvents","hourlyCheckRacialPerks");
@@ -424,6 +431,18 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				else flags[kFLAGS.BIKINI_ARMOR_BONUS] = 0;
 			}
+			if (player.werewolfScore() >= 6 && player.hasPerk(PerkLib.LycanthropyDormant)) {
+				outputText("\nAs you become wolf enough your mind recedes into increasingly animalistic urges. It will only get worse as the moon comes closer to full. <b>Gained Lycanthropy.</b>\n");
+				player.createPerk(PerkLib.Lycanthropy,0,0,0,0);
+				player.removePerk(PerkLib.LycanthropyDormant);
+				needNext = true;
+			}
+			if (player.werewolfScore() < 6 && player.hasPerk(PerkLib.Lycanthropy)) {
+				outputText("\nYou feel your animalistic urges go dormant within you as you no longer are the werewolf you once were. <b>Gained Dormant lycanthropy.</b>\n");
+				player.createPerk(PerkLib.LycanthropyDormant,0,0,0,0);
+				player.removePerk(PerkLib.Lycanthropy);
+				needNext = true;
+			}
 			
 			//No better place for these since the code for the event is part of CoC.as or one of its included files
 			if (flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC] > 0) flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC]--; //Vala post-rape countdown
@@ -539,8 +558,12 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				if (flags[kFLAGS.KINDRA_DAILY_TRAINING] > 0) flags[kFLAGS.KINDRA_DAILY_TRAINING] = 0;
 				//Reset Chi Chi Training daiy limit
 				if (flags[kFLAGS.CHI_CHI_DAILY_TRAINING] > 0) flags[kFLAGS.CHI_CHI_DAILY_TRAINING] = 0;
+				//Reset Luna Meal CD
+				if (flags[kFLAGS.LUNA_MEAL] > 0) flags[kFLAGS.LUNA_MEAL] = 0;
 				//Reset Diva Red Vial daiy limit
 				DivaScene.instance.tookVialToday = false;
+				//Clear sidewinder cooldown
+				if (player.hasStatusEffect(StatusEffects.CooldownSideWinder)) player.removeStatusEffect(StatusEffects.CooldownSideWinder);
 				//Daily Fishery production
 				if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) {
 					if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) flags[kFLAGS.FISHES_STORED_AT_FISHERY] += 5;
@@ -560,6 +583,49 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				if (flags[kFLAGS.CHI_CHI_LVL_UP] < 5 && flags[kFLAGS.CHI_CHI_DAILY_TRAINING] < 1) {
 					if (flags[kFLAGS.CHI_CHI_LVL_UP] < 2) flags[kFLAGS.CHI_CHI_LVL_UP] = 2;
 					else flags[kFLAGS.CHI_CHI_LVL_UP]++;
+				}
+				//Full moon
+				if (flags[kFLAGS.LUNA_FOLLOWER] >= 4) {
+					flags[kFLAGS.LUNA_MOON_CYCLE]++;
+					if (player.hasPerk(PerkLib.Lycanthropy)) {
+						if ((flags[kFLAGS.LUNA_MOON_CYCLE] - 3) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
+							outputText("<b>\nYou can’t help but notice the moon is almost full as it rises up.  It seems transfixing like it is calling to you.");
+							outputText("\n\nYou feel your might increasing as the moon draws closer to fullness.</b>");
+							dynStats("str", (10 * player.newGamePlusMod()), "tou", (10 * player.newGamePlusMod()), "spe", (10 * player.newGamePlusMod()));
+						}
+						if ((flags[kFLAGS.LUNA_MOON_CYCLE] - 2) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
+							outputText("<b>\nWhen the almost-full moon appears it causes your heart to race with excitement.  You hearing seems better than ever.  Every breath brings a rush of smells through your nose that seem much more pronounced than they should.");
+							outputText("\n\nYou feel your might increasing as the moon draws closer to fullness.</b>");
+							dynStats("str", (10 * player.newGamePlusMod()), "tou", (10 * player.newGamePlusMod()), "spe", (10 * player.newGamePlusMod()));
+						}
+						if ((flags[kFLAGS.LUNA_MOON_CYCLE] - 1) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
+							outputText("<b>\nYou gaze at the moon and it seems to gaze back into you.   Something is coming and it won’t be long now.   You feel like you are crawling in your skin.  It feels like tear out of your body and be born anew.");
+							outputText("\n\nYou feel your might increasing as the moon draws closer to fullness. It's almost time.</b>");
+							dynStats("str", (10 * player.newGamePlusMod()), "tou", (10 * player.newGamePlusMod()), "spe", (10 * player.newGamePlusMod()));
+						}
+						if (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0) {
+							outputText("<b>\nYou are at the peak of your strength, it's a full moon tonight and you feel yourself burning with maddening desire as you go into " + player.mf("rut","heat") + ".</b>");
+							dynStats("str", (10 * player.newGamePlusMod()), "tou", (10 * player.newGamePlusMod()), "spe", (10 * player.newGamePlusMod()));
+							if (player.hasCock() || (player.gender == 3 && rand(2) == 0)) player.goIntoRut(false);
+							else if (player.hasVagina()) player.goIntoHeat(false);
+						}
+						if ((flags[kFLAGS.LUNA_MOON_CYCLE] + 1) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
+							outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>");
+							dynStats("str", -(10 * player.newGamePlusMod()), "tou", -(10 * player.newGamePlusMod()), "spe", -(10 * player.newGamePlusMod()));
+						}
+						if ((flags[kFLAGS.LUNA_MOON_CYCLE] + 2) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
+							outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>");
+							dynStats("str", -(10 * player.newGamePlusMod()), "tou", -(10 * player.newGamePlusMod()), "spe", -(10 * player.newGamePlusMod()));
+						}
+						if ((flags[kFLAGS.LUNA_MOON_CYCLE] + 3) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
+							outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>");
+							dynStats("str", -(10 * player.newGamePlusMod()), "tou", -(10 * player.newGamePlusMod()), "spe", -(10 * player.newGamePlusMod()));
+						}
+						if ((flags[kFLAGS.LUNA_MOON_CYCLE] + 4) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
+							outputText("<b>\nIt's a new moon tonight, you feel somewhat weak.</b>");
+							dynStats("str", -(10 * player.newGamePlusMod()), "tou", -(10 * player.newGamePlusMod()), "spe", -(10 * player.newGamePlusMod()));
+						}
+					}
 				}
 			}
 			if (CoC.instance.model.time.hours == 6) {
@@ -659,7 +725,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				player.createPerk(PerkLib.ImprovedVenomGland, 0, 0, 0, 0);
 			}
 			//Flexibility perk
-			if (player.tailType == Tail.CAT && player.lowerBody == LowerBody.CAT && player.earType == Ears.CAT) { //Check for gain of cat agility - requires legs, tail, and ears
+			if (player.tailType == Tail.CAT && player.lowerBody == LowerBody.CAT && player.ears.type == Ears.CAT) { //Check for gain of cat agility - requires legs, tail, and ears
 				if (player.findPerk(PerkLib.Flexibility) < 0) {
 					outputText("\nWhile stretching, you notice that you're much more flexible than you were before.  Perhaps this will make it a bit easier to dodge attacks in battle?\n\n(<b>Gained Perk: Flexibility</b>)\n");
 					player.createPerk(PerkLib.Flexibility, 0, 0, 0, 0);
@@ -672,7 +738,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				needNext = true;
 			}
 			//Lustzerker perk
-			if ((player.tailType == Tail.SALAMANDER && player.lowerBody == LowerBody.SALAMANDER && player.armType == Arms.SALAMANDER) || (player.findPerk(PerkLib.Lustzerker) < 0 && player.findPerk(PerkLib.SalamanderAdrenalGlands) >= 0)) { //Check for gain of lustzerker - requires legs, arms and tail
+			if ((player.tailType == Tail.SALAMANDER && player.lowerBody == LowerBody.SALAMANDER && player.arms.type == Arms.SALAMANDER) || (player.findPerk(PerkLib.Lustzerker) < 0 && player.findPerk(PerkLib.SalamanderAdrenalGlands) >= 0)) { //Check for gain of lustzerker - requires legs, arms and tail
 				if (player.findPerk(PerkLib.Lustzerker) < 0) {
 					outputText("\nAfter drinking the last drop another hip flask of firewater you starts to feel a weird, maybe slightly unpleasant feeling inside your body.  Like many tiny flames cursing inside your veins making you ponder whats just happening with your body.  Remembering about salamanders natural talent to enter a berserk-like state you quess that should be it.\n\n(<b>Gained Perk: Lustzerker</b>)");
 					player.createPerk(PerkLib.Lustzerker, 0, 0, 0, 0);
@@ -685,7 +751,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				needNext = true;
 			}
 			//Lizan Regeneration perk
-			if ((player.tailType == Tail.LIZARD && player.lowerBody == LowerBody.LIZARD && player.earType == Ears.LIZARD) || (player.findPerk(PerkLib.LizanRegeneration) < 0 && player.findPerk(PerkLib.LizanMarrow) >= 0)) { //Check for gain of lustzerker - requires legs, arms and tail
+			if ((player.tailType == Tail.LIZARD && player.lowerBody == LowerBody.LIZARD && player.ears.type == Ears.LIZARD) || (player.findPerk(PerkLib.LizanRegeneration) < 0 && player.findPerk(PerkLib.LizanMarrow) >= 0)) { //Check for gain of lustzerker - requires legs, arms and tail
 				if (player.findPerk(PerkLib.LizanRegeneration) < 0) {
 					outputText("\nAfter drinking the last drop of reptilium you starts to feel unusual feeling somewhere inside your body.  Like many tiny waves moving inside your veins making you feel so much more refreshed than moment ago.  Remembering about fact that lizans are so much similar to lizards and those usualy posses natural talent to regenerate from even sever injuries you quessing it's could be that.\n\n(<b>Gained Perk: Lizan Regeneration</b>)");
 					player.createPerk(PerkLib.LizanRegeneration, 0, 0, 0, 0);
@@ -748,19 +814,19 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				needNext = true;
 			}
 			//Fenrir Eyes
-			if (player.eyeType != Eyes.FENRIR && player.hasKeyItem("Fenrir Collar") >= 0) {
+			if (player.eyes.type != Eyes.FENRIR && player.hasKeyItem("Fenrir Collar") >= 0) {
 				outputText("\nThe bone chilling voice of Fenrir ring in the back of your mind.");
 				outputText("\n\n\"<i>How dare you throw away my gifts...</i>\"");
 				outputText("\n\nThe collar power suddenly forcefully surge through your body transforming you back. \"<b>You now have glowing icy eyes.</b>\"\n");
-				player.eyeType = Eyes.FENRIR;
+				player.eyes.type = Eyes.FENRIR;
 				needNext = true;
 			}
 			//Fenrir Back Ice Shards
-			if (player.rearBody != RearBody.FENRIR_ICE_SPIKES && player.hasKeyItem("Fenrir Collar") >= 0) {
+			if (player.rearBody.type != RearBody.FENRIR_ICE_SPIKES && player.hasKeyItem("Fenrir Collar") >= 0) {
 				outputText("\nThe bone chilling voice of Fenrir ring in the back of your mind.");
 				outputText("\n\n\"<i>How dare you throw away my gift...</i>\"");
 				outputText("\n\nThe collar power suddenly forcefully surge through your body transforming you back.\"<b>Your back is now covered with sharp ice spike constantly cooling the air around you. (Gained Frozen Waste and Cold Mastery perks)</b>\"\n");
-				player.rearBody = RearBody.FENRIR_ICE_SPIKES;
+				player.rearBody.type = RearBody.FENRIR_ICE_SPIKES;
 				needNext = true;
 			}
 			//Cold Affinity
@@ -788,16 +854,16 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				needNext = true;
 			}
 			//Aquatic Affinity
-			if (player.lowerBody == LowerBody.ORCA && player.armType == Arms.ORCA && player.tailType == Tail.ORCA && player.earType == Ears.ORCA && player.findPerk(PerkLib.AquaticAffinity) < 0) {
+			if (player.lowerBody == LowerBody.ORCA && player.arms.type == Arms.ORCA && player.tailType == Tail.ORCA && player.ears.type == Ears.ORCA && player.findPerk(PerkLib.AquaticAffinity) < 0) {
 				outputText("\nYou suddenly feel an urge to jump into the nearest pool of water as your breath becomes ragged and messy. You swiftly run up to the stream and scream in release as you fill your aching respiratory systems with water. Wait water? You realise you just gained the ability to breath underwater but to make sure you can still breath normal air you go back to the surface. It soon appears you can still breath fresh air. Reassured on your condition you head back to camp.\n");
-				if (player.rearBody == RearBody.ORCA_BLOWHOLE) outputText("\nIt dawns on you that you didn't breath for a full hour. When you realise this you relax your blowhole and take in some air. Well wow it seems you can now hold in your oxigen for very lengthy period. This will be perfect for underwater explorations.\n");
+				if (player.rearBody.type == RearBody.ORCA_BLOWHOLE) outputText("\nIt dawns on you that you didn't breath for a full hour. When you realise this you relax your blowhole and take in some air. Well wow it seems you can now hold in your oxigen for very lengthy period. This will be perfect for underwater explorations.\n");
 				outputText("\n(<b>Gained Perk: Aquatic Affinity</b>)\n");
 				player.createPerk(PerkLib.AquaticAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if ((player.lowerBody != LowerBody.ORCA || player.armType != Arms.ORCA || player.tailType != Tail.ORCA || player.earType != Ears.ORCA) && player.findPerk(PerkLib.AquaticAffinity) >= 0) {
+			else if ((player.lowerBody != LowerBody.ORCA || player.arms.type != Arms.ORCA || player.tailType != Tail.ORCA || player.ears.type != Ears.ORCA) && player.findPerk(PerkLib.AquaticAffinity) >= 0) {
 				outputText("\nAs you lose the respiratory organ to breath underwater it also becomes obvious that you will drown if attempting to breath water in. You will need to get items or transform to breath underwater again.\n");
-				if (player.rearBody == RearBody.ORCA_BLOWHOLE) outputText("\nYou take a deep breath in then out. It seems you can no longer hold your breath like the whales do. It will take some using to.</b>\n");
+				if (player.rearBody.type == RearBody.ORCA_BLOWHOLE) outputText("\nYou take a deep breath in then out. It seems you can no longer hold your breath like the whales do. It will take some using to.</b>\n");
 				outputText("\n<b>(Lost Perk: Aquatic Affinity)</b>\n");
 				player.removePerk(PerkLib.AquaticAffinity);
 				needNext = true;
@@ -874,7 +940,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 			}
 			//Reset bad end warning
 			if (flags[kFLAGS.FOX_BAD_END_WARNING] == 1) {
-				if (player.faceType != Face.FOX || player.tailType != Tail.FOX || player.earType != Ears.FOX || player.lowerBody != LowerBody.FOX || player.skinType != Skin.FUR) {
+				if (player.faceType != Face.FOX || player.tailType != Tail.FOX || player.ears.type != Ears.FOX || player.lowerBody != LowerBody.FOX || player.skinType != Skin.FUR) {
 					flags[kFLAGS.FOX_BAD_END_WARNING] = 0;
 				}
 			}
@@ -1283,20 +1349,20 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 					else outputText("\n<b>Your crotch tingles for a second, and when you reach down to feel, your [legs] fold underneath you, limp.  You've got a vagina - the damned thing won't go away and it feels twice as sensitive this time.  Fucking bimbo liquer.</b>\n");
 					needNext = true;
 				}
-				if (player.hipRating < 12) {
+				if (player.hips.type < 12) {
 					if (player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0)
 						outputText("\nWhoah!  As you move, your [hips] sway farther and farther to each side, expanding with every step, soft new flesh filling in as your hips spread into something more appropriate on a tittering bimbo.  You giggle when you realize you can't walk any other way.  At least it makes you look, like, super sexy!\n");
 					else outputText("\nOh, no!  As you move, your [hips] sway farther and farther to each side, expanding with every step, soft new flesh filling in as your hips spread into something more appropriate for a bimbo.  Once you realize that you can't walk any other way, you sigh heavily, your only consolation the fact that your widened hips can be used to tease more effectively.\n");
 					player.dynStats("int", -1);
-					player.hipRating = 12;
+					player.hips.type = 12;
 					needNext = true;
 				}
-				if (player.buttRating < 12) {
+				if (player.butt.type < 12) {
 					if (player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0)
 						outputText("\nGradually warming, you find that your [butt] is practically sizzling with erotic energy.  You smile to yourself, imagining how much you wish you had a nice, plump, bimbo-butt again, your hands finding their way to the flesh on their own.  Like, how did they get down there?  You bite your lip when you realize how good your tush feels in your hands, particularly when it starts to get bigger.  Are butts supposed to do that?  Happy pink thoughts wash that concern away - it feels good, and you want a big, sexy butt!  The growth stops eventually, and you pout disconsolately when the lusty warmth's last lingering touches dissipate.  Still, you smile when you move and feel your new booty jiggling along behind you.  This will be fun!\n");
 					else outputText("\nGradually warming, you find that your [butt] is practically sizzling with erotic energy.  Oh, no!  You thought that having a big, bloated bimbo-butt was a thing of the past, but with how it's tingling under your groping fingertips, you have no doubt that you're about to see the second coming of your sexy ass.  Wait, how did your fingers get down there?  You pull your hands away somewhat guiltily as you feel your buttcheeks expanding.  Each time you bounce and shake your new derriere, you moan softly in enjoyment.  Damnit!  You force yourself to stop just as your ass does, but when you set off again, you can feel it bouncing behind you with every step.  At least it'll help you tease your foes a little more effectively...\n");
 					player.dynStats("int", -1, "lus", 10);
-					player.buttRating = 12;
+					player.butt.type = 12;
 					needNext = true;
 				}
 			}
@@ -1357,7 +1423,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 					//To Wong Foo, Thanks for Everything, Julie Newmar
 					outputText("\nYou sit atop your favorite flower, enjoying the smell of verdure and the sounds of the forest.  The sun is shining brightly and it feels wonderful on your chitin.  Your wings twitch happily in the soft breeze, and it feels good to be alive and doing the colony's work... the only sour note is your heavy, bloated abdomen, so full of unfertilized eggs that it droops, so full it strains your back and pinches your nerves.  Still, it's too nice a day to let that depress you, and you take up your customary song, humming tunelessly but mellifluously as you wait for passers-by.");
 					
-					outputText("\n\nYour antennae bob - was that someone?  Peering between the trees from the corner of your eye, you can see the figure of another person, and you intensify your hypnotic buzz, trying to draw it closer.  The figure steps into your clearing and out of the shadow; clad in [armor], " + player.mf("he","she") + " is yourself!  Confused, you stop humming and stare into your own face, and the other you takes the opportunity to open " + player.mf("his","her") + " garments, exposing " + player.mf("his","her") + " [cock]!");
+					outputText("\n\nYour antennae.type bob - was that someone?  Peering between the trees from the corner of your eye, you can see the figure of another person, and you intensify your hypnotic buzz, trying to draw it closer.  The figure steps into your clearing and out of the shadow; clad in [armor], " + player.mf("he","she") + " is yourself!  Confused, you stop humming and stare into your own face, and the other you takes the opportunity to open " + player.mf("his","her") + " garments, exposing " + player.mf("his","her") + " [cock]!");
 					
 					outputText("\n\nStartled, you slip down from your seat and try to run, but the other you has already crossed the clearing and seizes you by the fuzz on your hefty, swollen abdomen; your leg slips, propelling you face-first to the ground.  " + player.mf("He","She") + " pulls you back toward " + player.mf("his","her") + "self and, grabbing one of your chitinous legs, turns you over.  The other you spreads your fuzzed thighs, revealing your soft, wet pussy, and the sweet smell of honey hits your noses.  " + player.mf("His","Her") + " prick hardens intensely and immediately at the aroma of your pheromone-laden nectar, and " + player.mf("he","she") + " pushes it into you without so much as a word of apology, groaning as " + player.mf("he","she") + " begins to rut you mercilessly.  You can feel the sensations of " + player.mf("his","her") + " burning cock as if it were your own, and your legs wrap around your other self instinctively even as your mind recoils in confusion.");
 					
@@ -1413,7 +1479,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 					return true;
 				}
 				var ceraph:int; //Ceraph's dreams - overlaps normal night-time dreams.
-				switch (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220]) {
+				switch (flags[kFLAGS.CERAPH_OWNED_DICKS] + flags[kFLAGS.CERAPH_OWNED_PUSSIES] + flags[kFLAGS.CERAPH_OWNED_TITS]) {
 					case  0: ceraph =  0; break; //If you've given her no body parts then Ceraph will not cause any dreams
 					case  1: ceraph = 10; break; //Once every 10 days if 1, once every 7 days if 2, once every 5 days if 3
 					case  2: ceraph =  7; break;

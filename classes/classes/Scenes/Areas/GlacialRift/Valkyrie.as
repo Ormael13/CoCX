@@ -135,8 +135,8 @@ public class Valkyrie extends Monster
 			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 7*12;
-			this.hipRating = Hips.RATING_SLENDER;
-			this.buttRating = Butt.RATING_TIGHT;
+			this.hips.type = Hips.RATING_SLENDER;
+			this.butt.type = Butt.RATING_TIGHT;
 			this.skin.setBaseOnly({color:"light"});
 			this.hairColor = "white";
 			this.hairLength = 12;
@@ -159,8 +159,8 @@ public class Valkyrie extends Monster
 					.add(shields.GREATSH, 3)
 					.add(consumables.G__BOOK, 5)					
 					.add(null, 15);
-			this.wingType = Wings.HARPY;
-			this.wingDesc = "fluffy feathery";
+			this.wings.type = Wings.HARPY;
+			this.wings.desc = "fluffy feathery";
 			this.special1 = spearAttack;
 			this.special2 = shieldBash;
 			this.special3 = aerialRave;

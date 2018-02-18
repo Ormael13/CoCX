@@ -170,7 +170,8 @@ package classes.Scenes.NPCs
 		
 		public function KonstantinMainCampMenu():void {
 			clearOutput();
-			outputText("It's possible Coalsack will write some short text for this menu.\n\n");
+			outputText("Wanting to chat with the large bear-morph, you reach around where he is. Konstantin waves at you and beckons you to sit near him.\n\n");
+			outputText("\"<i>Hello, [name]! How have you been?</i>\"\n\n");
 			menu();
 			addButton(0, "Appearance", KonstantinAppearance);
 			addButton(1, "Talk", KonstantinTalkMenu);
@@ -193,6 +194,8 @@ package classes.Scenes.NPCs
 		
 		public function KonstantinTalkMenu():void {
 			clearOutput();
+			outputText("You sit at his side, and tell him that you want to chat with him a bit. He stops what he’s doing and sits to your side.\n\n");
+			outputText("\"<i>Sure, " + player.mf("man","girl") + ". I’ll always enjoy talking with you. What’s on your mind?</i>\"\n\n");
 			menu();
 			addButton(0, "Him", KonstantinTalkHim);
 			addButton(1, "His Work", KonstantinTalkHisWork);
@@ -217,7 +220,7 @@ package classes.Scenes.NPCs
 			clearOutput();
 			outputText("\"<i>The usual, forging new weapons to sell, sharpening blades and axes that lost their edge, making tools, fitting armors. The defense and protection is a life-or-death thing on Mareth, and my stuff is more often than not which separates people to meet an unfortunate end at the hands of a demon or a minotaur.</i>\"\n\n");
 			if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow" || player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle") outputText("\"<i>Recently, I’ve come in contact with some old fools from...how in hell’s name that place called, JaChinDau? that told me how to make strong materials for their ranged weapons. Those are all the rage there, since they allow a weaker fighter to defeat a stronger one, as long as he has some focus on his hands. I’ve learned about how sharpen arrows and javelins, and make this hollow metal balls that those ‘gun’ things makes use of.</i>\"\n\n");
-			if (flags[kFLAGS.KONSTANTIN_SERVICES] >= 3) outputText("\"<i>Also, since you’ve brought me some quite weird stuff to work with, I had to remove the dust from some old manuals about how handle magical and non-metal materials, and how turn them on solid plates and pieces of armor.</i>\"\n\n");
+			if (flags[kFLAGS.KONSTANTIN_SERVICES] >= 2) outputText("\"<i>Also, since you’ve brought me some quite weird stuff to work with, I had to remove the dust from some old manuals about how handle magical and non-metal materials, and how turn them on solid plates and pieces of armor.</i>\"\n\n");
 			outputText("Curious, you ask him how hard was reaching his level of skill in smithing, and if he’s happy with his current situation.\n\n");
 			outputText("\"<i>Metalworking is a life-time office, [name]. Becoming a successful one takes years as an apprentice and some luck to get on your paws. ");
 			if (player.hasPerk(PerkLib.HistorySmith) >= 0 || player.hasPerk(PerkLib.PastLifeSmith) >= 0) outputText("You have to agree with him on this, as your years working as the smith apprentice taught you. ");
@@ -273,28 +276,26 @@ package classes.Scenes.NPCs
 				}
 				if (player.hasItem(useables.B_CHITN)) {
 					outputText("Catching a glimpse of the piece of black chitin among your stuff, Konstantin remarks: ");
-					outputText("\"<i>That’s some carapace that probably fell off from those creepy bee creatures from the forest. Strong, flexible and durable, it won’t be hard for me to make a decent armor from those things. If you’re interested, ring me five, and I’ll make you one.</i>\"\n\n");
+					outputText("\"<i>That’s some carapace that probably fell off from those creepy bee creatures from the forest. Strong, flexible and durable, it won’t be hard for me to make a decent armor from those things. If you’re interested, bring me five, and I’ll make you one.</i>\"\n\n");
 				}
 				if (player.hasItem(useables.T_SSILK)) {
 					outputText("\"<i>How in the demon’s name you managed to get a piece of this silk? So far, it’s only produced by those disgusting, spider-like creatures from a mucky swamp quite far from there. That means, that either you beat the crap out of one of those fuckers, or you found a lost strand of this thing somewhere. Either way congratulations, as this is a very rare material. In fact, I can make a great piece of armor with it, but since i’ll have to buy some chemicals to make the thing sturdy without losing its flexible and soft properties, the price is gonna be a little higher this time.</i>\"\n\n");
 					outputText("\"<i>Taking a different approach, I could give it some basic plating, and then weaving the silk thread into a set of magical robes. but this would require some aid from a tailor and a caster, which also is gonna increase the price. In both cases, I’ll require 500 gems, and a total of 5 pieces of silk to make enough thread.</i>\"\n\n");
-					if (flags[kFLAGS.KONSTANTIN_SERVICES] >= 5) outputText("\"<i>Alternatively, if you want, an undergarment, I could made cloth for a shirt, a bra, a loincloth and even a set of panties. The material necessary for any of them would be less, only 2 strands of silk, but, since the chemical process is the same, I’ll still require the 500 gems.</i>\"\n\n");
+					outputText("\"<i>Alternatively, if you want, an undergarment, I could made cloth for a shirt, a bra, a loincloth and even a set of panties. The material necessary for any of them would be less, only 2 strands of silk, but, since the chemical process is the same, I’ll still require the 500 gems.</i>\"\n\n");
 				}
 				if (player.hasItem(useables.D_SCALE)) {
 					outputText("Konstantin carefully examines the dragonscale that you are storing on your pack. \"<i>Dragons in Mareth are a virtually extinct race");
 					if (emberScene.followerEmber()) outputText(", well, except for the one with us, so the chances of find one of those are pretty slim");
 					outputText(".</i>\"\n\n\"<i>Those things are quite tough, and with enough of them I could make an armor with exceptional defensive properties, and much less heavy than your standard platemail. If you’re not feeling on the mood of using a plate armor, I could get my hands on some magically enhanced linen cloth, and use the scales as reinforcement and decoration, thus creating a strong and comfortable set of robes. Since plate requires a lot of material, and I’d like to buy the cloth for the robes selling the remainder scales, I’ll have to ask you for 5 pieces of dragonscale in both cases.</i>\"\n\n");
-					if (flags[kFLAGS.KONSTANTIN_SERVICES] >= 5) outputText("\"<i>If you happened to like a smaller piece, I could assemble and undergarment for you, say, a bra, or a vest for your upper body, and a thong or a loincloth for your lower parts. Since we’re speaking of less cloth, I could do it with only 2 pieces of dragon scale.</i>\"\n\n");
+					outputText("\"<i>If you happened to like a smaller piece, I could assemble and undergarment for you, say, a bra, or a vest for your upper body, and a thong or a loincloth for your lower parts. Since we’re speaking of less cloth, I could do it with only 2 pieces of dragon scale.</i>\"\n\n");
 				}
 				if (player.hasItem(useables.EBONBLO)) {
 					outputText("You bear friend seems genuinely surprised by the strange, black bloom that you plucked not long ago.\n\n");
 					outputText("\"<i>Ebonbloom? If memory doesn’t fail me, it’s a flower with metal-like properties that grows in very remote sections of Mareth mountainous system, often found in crevices resting near almost vertical cliffs, or volcanic craters. No surprise that few people have seen one, and even less have gotten them on hand. I’m not an expert, so most of this stuff's properties are mystery for me too. The one thing I know for sure is that it’s quite durable, and very reactive to the right chemicals.</i>\"\n\n");
 					outputText("\"<i>Now that you have one sample, I could follow a process of metal casting, and bond the flower petals with a magically enhanced metal. From what I’ve studied, the metal that comes from those strange things has an oily texture, but it’s extremely durable. Another good thing about them Ebonblooms is that they’re quite malleable, so, with sufficient materialI I could grab the petals and laminate them together into a proper cloth, in case of that you’d opted by a robe or something similar.</i>\"\n\n");
 					outputText("\"<i>“In both cases I would need a good amount of them, say, 8 pieces. In case of you want a more complex piece, or a magically enhanced one, I’m going to need 10 pieces instead.</i>\"\n\n");
-					if (flags[kFLAGS.KONSTANTIN_SERVICES] >= 5) {
-						outputText("\"<i>Now, if you happen to like an undergarment, I could make one for you, say, a vest or a corset for your upper body and a thong or a jock for your lower parts. I can even enhance the properties of the latter ones.</i>\"\n\n");
-						outputText("\"<i>This would require a bit less Ebonbloom, maybe 3 pieces for each undergarment.</i>\"\n\n");
-					}
+					outputText("\"<i>Now, if you happen to like an undergarment, I could make one for you, say, a vest or a corset for your upper body and a thong or a jock for your lower parts. I can even enhance the properties of the latter ones.</i>\"\n\n");
+					outputText("\"<i>This would require a bit less Ebonbloom, maybe 3 pieces for each undergarment.</i>\"\n\n");
 				}
 				if (player.hasItem(useables.WT_BRAN)) {
 					outputText("You show Konstantin the branch from Yggdrasil and ask for his opinion. He gives you a slightly amused look. The bear takes the branch from you and examines it carefully, muttering thing about it’s texture and material, once he’s satisfied, he returns it to you.\n\n");
@@ -398,7 +399,6 @@ package classes.Scenes.NPCs
 				outputText("After a couple of minutes, during which Konstantin has been busy taking your measurements, the bear-smith takes the pot out of the furnace and after cooling with clean water, he pours the hot fluid into several molds placed on one of his workbenches. The substance solidifies quickly, and once it has become air-temperature, he smoothen the blemishes and turns them into beautiful emerald plates.\n\n");
 				outputText("Grabbing a mannequin that he has nearby for armor making purposes, he assembles a chest piece, a set of arm guards, shoulder and leg protections and even a couple of ornaments from the emerald plates. Once he’s finished your bear friend presents to you the brand new set of glistening gel armor.\n\n");
 				player.destroyItems(useables.GREENGL, 5);
-				if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
 				inventory.takeItem(armors.GELARMR, KonstantinMainCampMenu);
 			}
 			else KonstantinCraftingNotEnoughMaterials1();
@@ -409,7 +409,6 @@ package classes.Scenes.NPCs
 				outputText("The bear takes the chitin plates and gets to work on them on one of his bench, tools getting busy cutting smoothing and polishing each piece into a proper plate able to belong to a protective armor. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
 				outputText("The plates shine and shimmer like black steel.  He has used the yellow chitin to add accents and embroidery to the plates with a level of detail and craftsmanship rarely seen back home. A yellow fur neck lining has been fashioned from hairs found on the pieces.  The armor includes a breastplate, shoulder guards, full arm guards, and knee high boots, as well a pair of cuisses and graves.\n\n");
 				player.destroyItems(useables.B_CHITN, 5);
-				if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
 				inventory.takeItem(armors.BEEARMR, KonstantinMainCampMenu);
 			}
 			else KonstantinCraftingNotEnoughMaterials1();
@@ -424,12 +423,10 @@ package classes.Scenes.NPCs
 			addButton(0, "Armor", KonstantinCraftingSpiderSilkItems2, 1, null, null, armors.SSARMOR.description);
 			addButton(1, "Robes", KonstantinCraftingSpiderSilkItems2, 2, null, null, armors.SS_ROBE.description);
 			addButton(2, "Indec.R.", KonstantinCraftingSpiderSilkItems2, 3, null, null, armors.INDESSR.description);
-			if (flags[kFLAGS.KONSTANTIN_SERVICES] >= 5) {
-				addButton(5, "Bra", KonstantinCraftingSpiderSilkItems2, 4, null, null, undergarments.SS_BRA.description);
-				addButton(6, "Shirt", KonstantinCraftingSpiderSilkItems2, 5, null, null, undergarments.SSSHIRT.description);
-				addButton(7, "Panties", KonstantinCraftingSpiderSilkItems2, 6, null, null, undergarments.SSPANTY.description);
-				addButton(8, "Loincloth", KonstantinCraftingSpiderSilkItems2, 7, null, null, undergarments.SS_LOIN.description);
-			}
+			addButton(5, "Bra", KonstantinCraftingSpiderSilkItems2, 4, null, null, undergarments.SS_BRA.description);
+			addButton(6, "Shirt", KonstantinCraftingSpiderSilkItems2, 5, null, null, undergarments.SSSHIRT.description);
+			addButton(7, "Panties", KonstantinCraftingSpiderSilkItems2, 6, null, null, undergarments.SSPANTY.description);
+			addButton(8, "Loincloth", KonstantinCraftingSpiderSilkItems2, 7, null, null, undergarments.SS_LOIN.description);
 		}
 		private function KonstantinCraftingSpiderSilkItems2(spidersilkType:int):void {
 			if (spidersilkType == 1 || spidersilkType == 2 || spidersilkType == 3) { //Armor or robes
@@ -501,7 +498,6 @@ package classes.Scenes.NPCs
 					outputText("Something bugged! Please report this bug to Ormael/Aimozg/Oxdeception.");
 					itype = armors.SS_ROBE;
 				}
-				if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;
 				inventory.takeItem(itype, KonstantinMainCampMenu);
 			}
@@ -511,12 +507,10 @@ package classes.Scenes.NPCs
 			addButton(0, "Armor", KonstantinCraftingDragonscaleItems2, 1, null, null, armors.DSCLARM.description);
 			addButton(1, "Robes", KonstantinCraftingDragonscaleItems2, 2, null, null, armors.DSCLROB.description);
 			addButton(2, "Indec.R.", KonstantinCraftingDragonscaleItems2, 3, null, null, armors.INDEDSR.description);
-			if (flags[kFLAGS.KONSTANTIN_SERVICES] >= 5) {
-				addButton(5, "Bra", KonstantinCraftingDragonscaleItems2, 4, null, null, undergarments.DS_BRA.description);
-				addButton(6, "Vest", KonstantinCraftingDragonscaleItems2, 5, null, null, undergarments.DS_VEST.description);
-				addButton(7, "Thong", KonstantinCraftingDragonscaleItems2, 6, null, null, undergarments.DSTHONG.description);
-				addButton(8, "Loincloth", KonstantinCraftingDragonscaleItems2, 7, null, null, undergarments.DS_LOIN.description);
-			}
+			addButton(5, "Bra", KonstantinCraftingDragonscaleItems2, 4, null, null, undergarments.DS_BRA.description);
+			addButton(6, "Vest", KonstantinCraftingDragonscaleItems2, 5, null, null, undergarments.DS_VEST.description);
+			addButton(7, "Thong", KonstantinCraftingDragonscaleItems2, 6, null, null, undergarments.DSTHONG.description);
+			addButton(8, "Loincloth", KonstantinCraftingDragonscaleItems2, 7, null, null, undergarments.DS_LOIN.description);
 		}
 		private function KonstantinCraftingDragonscaleItems2(dragonscaleType:int):void {
 			if (dragonscaleType == 1 || dragonscaleType == 2 || dragonscaleType == 3) { //Armor or robes
@@ -593,7 +587,6 @@ package classes.Scenes.NPCs
 					outputText("Something bugged! Please report this bug to Ormael/Aimozg/Oxdeception.");
 					itype = armors.DSCLROB;
 				}
-				if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;
 				inventory.takeItem(itype, camp.returnToCampUseOneHour);
 			}
@@ -605,14 +598,12 @@ package classes.Scenes.NPCs
 			addButton(2, "Robes", KonstantinCraftingEbonbloomItems2, 3, null, null, armors.EWROBE_.description);
 			addButton(3, "Indec.R.", KonstantinCraftingEbonbloomItems2, 4, null, null, armors.INDEEWR.description);
 			if (player.hasItem(useables.EBONBLO, 10) && player.hasItem(armors.H_GARB_, 1) && player.hasKeyItem("Dark Mage’s Grimoire") >= 0) addButton(4, "H. Garb", KonstantinCraftingEbonbloomItems2, 5, null, null, armors.EHGARB_.description);
-			if (flags[kFLAGS.KONSTANTIN_SERVICES] >= 5) {
-				addButton(5, "Jock", KonstantinCraftingEbonbloomItems2, 6, null, null, undergarments.EW_JOCK.description);
-				addButton(6, "Thong", KonstantinCraftingEbonbloomItems2, 7, null, null, undergarments.EWTHONG.description);
-				addButton(7, "Vest", KonstantinCraftingEbonbloomItems2, 8, null, null, undergarments.EWTHONG.description);
-				addButton(8, "Corset", KonstantinCraftingEbonbloomItems2, 9, null, null, undergarments.EW_VEST.description);
-				addButton(10, "R.Jock", KonstantinCraftingEbonbloomItems2, 10, null, null, undergarments.R_JOCK.description);
-				addButton(11, "R.Thong", KonstantinCraftingEbonbloomItems2, 11, null, null, undergarments.R_THONG.description);
-			}
+			addButton(5, "Jock", KonstantinCraftingEbonbloomItems2, 6, null, null, undergarments.EW_JOCK.description);
+			addButton(6, "Thong", KonstantinCraftingEbonbloomItems2, 7, null, null, undergarments.EWTHONG.description);
+			addButton(7, "Vest", KonstantinCraftingEbonbloomItems2, 8, null, null, undergarments.EWTHONG.description);
+			addButton(8, "Corset", KonstantinCraftingEbonbloomItems2, 9, null, null, undergarments.EW_VEST.description);
+			addButton(10, "R.Jock", KonstantinCraftingEbonbloomItems2, 10, null, null, undergarments.R_JOCK.description);
+			addButton(11, "R.Thong", KonstantinCraftingEbonbloomItems2, 11, null, null, undergarments.R_THONG.description);
 		}
 		private function KonstantinCraftingEbonbloomItems2(ebonbloomType:int):void {
 			if (ebonbloomType == 1 || ebonbloomType == 2 || ebonbloomType == 3 || ebonbloomType == 4) { //Armor or robes
@@ -729,7 +720,6 @@ package classes.Scenes.NPCs
 					outputText("Something bugged! Please report this bug to Ormael/Aimozg/Oxdeception.");
 					itype = armors.EWJACK_;
 				}
-				if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;
 				inventory.takeItem(itype, camp.returnToCampUseOneHour);
 			}
@@ -785,7 +775,6 @@ package classes.Scenes.NPCs
 				outputText("Something bugged! Please report this bug to Ormael/Aimozg/Oxdeception.");
 				itype = weapons.WGSWORD;
 			}
-			if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;
 			inventory.takeItem(itype, camp.returnToCampUseOneHour);
 		}
@@ -797,7 +786,6 @@ package classes.Scenes.NPCs
 			if (player.biggestTitSize() >= 8) outputText(" Your " + biggestBreastSizeDescript() + " barely fit into the breastplate, leaving you displaying a large amount of jiggling cleavage.");
 			outputText("\n\nYou thank Konstantin for the armor, especially since it was hard to work with, and return to your duties.");
 			player.destroyItems(useables.DBAPLAT, 1);
-			if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
 			inventory.takeItem(armors.DBARMOR, camp.returnToCampUseOneHour);
 		}
 		private function KonstantinCraftingTentacledBarkArmor():void {
@@ -809,7 +797,6 @@ package classes.Scenes.NPCs
 			if (player.biggestTitSize() >= 8) outputText(" Your " + biggestBreastSizeDescript() + " barely fit into the breastplate, leaving you displaying a large amount of jiggling cleavage.");
 			outputText("\n\nYou thank Konstantin for the armor, especially since it was hard to work with, and return to your duties.");
 			player.destroyItems(useables.TBAPLAT, 1);
-			if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
 			inventory.takeItem(armors.TBARMOR, camp.returnToCampUseOneHour);
 		}
 		private function KonstantinCraftingPuritas():void {
@@ -820,7 +807,6 @@ package classes.Scenes.NPCs
 			outputText("\"<i>I’m not a magic expert, but I’m pretty sure that whatever arcane energy bound on that bark really meant serious business. I’m not sure if I want to try to do one of those things again. They’re fucking tedious to work with.  Anyway, here it is.</i>\"\n\n");
 			outputText("He pulls a cloth off his work table, revealing the staff. The glowing white bark has been melded into the staff’s surface, while emerald vines growing out of the bark adorn the length of the staff. The zigzag on the top of the staff has been adorned with several white crystals. Beyond the physical appearance you can feel the mild purity resonating in the staff. The bear-smith nods as you pick up the staff.\n\n");
 			outputText("\"<i>I hope that you find this thing useful, [name]. All this magic will surely give you a bit of edge on any battlefield.</i>\"\n\n");
-			if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
 			inventory.takeItem(weapons.PURITAS, camp.returnToCampUseOneHour);
 		}
 		private function KonstantinCraftingDepravito():void {
@@ -831,7 +817,6 @@ package classes.Scenes.NPCs
 			outputText("\"<i>I’m not a magic expert, but I’m pretty sure that whatever arcane energy bound on that bark really meant serious business. I’m not sure if I want to try to do one of those things again. They’re fucking tedious to work with.  Anyway, here it is.</i>\"\n\n");
 			outputText("He pulls a cloth off his work table, revealing the staff. The white bark has been melded into the staff’s surface, while the tentacles growing out of the bark adorn the length of the staff. The zigzag on the top of the staff has been adorned with several white crystals. Beyond the physical appearance you can feel the mild corruption resonating in the staff. The bear-smith nods as you pick up the staff.\n\n");
 			outputText("\"<i>I hope that you find this thing useful, [name]. But be wary of those.</i>\" Konstantin says, pointing the tentacles. \"<i>As you’ve realized, they’re a bit too playful.</i>\"\n\n");
-			if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
 			inventory.takeItem(weapons.DEPRAVA, camp.returnToCampUseOneHour);
 		}
 		private function KonstantinCraftingPuritasAscensus():void {
@@ -842,7 +827,6 @@ package classes.Scenes.NPCs
 			outputText("He pulls the cloth off the workbench, revealing the staff.  The white bark now covers the entire surface of the staff, the brown of mageboon wood completely hidden by the radiant bark.  Vines and tentacles run the length of the staff, grown from the staff itself.  You also notice that the entire staff is glowing softly.  The crystals in the zigzag at the top are larger, and have a soft light at their centers.\n\n");
 			outputText("\"<i>Well, I’m no magician, but I can tell you that whatever energy within the staff appears to have balanced out. The previous form of this staff has great power, but this power could only be used for a single type of magic. This restriction no longer exists.  Beyond that, the raw magical power in the staff has exceeded any other I’ve seen or worked with. I have no doubt it will be invaluable to your crusade.</i>\"\n\n");
 			outputText("You take the staff. From the first touch you feel the immense arcane power within the wood.\n\n");
-			if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
 			inventory.takeItem(weapons.ASCENSU, camp.returnToCampUseFourHours);
 		}
 		private function KonstantinCraftingDepravitoAscensus():void {
@@ -853,7 +837,6 @@ package classes.Scenes.NPCs
 			outputText("He pulls the cloth off the workbench, revealing the staff.  The white bark now covers the entire surface of the staff, the brown of mageboon wood completely hidden by the radiant bark.  Vines and tentacles run the length of the staff, grown from the staff itself.  You also notice that the entire staff is glowing softly.  The crystals in the zigzag at the top are larger, and have a soft light at their centers.\n\n");
 			outputText("\"<i>Well, I’m no magician, but I can tell you that whatever energy within the staff appears to have balanced out. The previous form of this staff has great power, but this power could only be used for a single type of magic. This restriction no longer exists.  Beyond that, the raw magical power in the staff has exceeded any other I’ve seen or worked with. I have no doubt it will be invaluable to your crusade.</i>\"\n\n");
 			outputText("You take the staff. From the first touch you feel the immense arcane power within the wood.\n\n");
-			if (flags[kFLAGS.KONSTANTIN_SERVICES] < 5) flags[kFLAGS.KONSTANTIN_SERVICES]++;
 			inventory.takeItem(weapons.ASCENSU, camp.returnToCampUseFourHours);
 		}
 		
@@ -988,7 +971,7 @@ package classes.Scenes.NPCs
 			if (player.balls > 0) outputText("You feel his huge set of fuzzy nuts rubbing against your own");
 			else outputText("You feel his huge set of fuzzy nuts rubbing against your taint");
 			outputText(", sending shivers of excitement through you body, feeling only enhanced by the deep kissing in which your tongues are interlocked, the warm puff of his breath tickling your [skin] from time to time");
-			if (player.wingType > 0) outputText(". Your [wings] flap softly, as you’re being subjected to the bear rough oral affections.");
+			if (player.wings.type > 0) outputText(". Your [wings] flap softly, as you’re being subjected to the bear rough oral affections.");
 			outputText(".\n\nKonstantin breaks the kiss with a slobbery lick on your cheek, and, with you still dazzled with the remainders of your make-out, he proceeds to grab your cock");
 			if (player.cockTotal() > 1) outputText("s");
 			outputText(" with his bear-like paw");

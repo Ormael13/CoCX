@@ -12,15 +12,13 @@ package classes.Scenes.Camp
 	
 	public class Jabberwocky extends Monster
 	{
-		public var patchouli:PatchouliScene = new PatchouliScene();
-		
 		public function ClawSwipe():void {
 			outputText("The jabberwocky slices you with its claw for ");
 			ClawSwipeDmg();
 			ClawSwipeDmg();
 			outputText(" damage.");
 		}
-		public function ClawSwipeDmg():void {
+		private function ClawSwipeDmg():void {
 			var damage:Number = 0;
 			damage += eBaseStrengthDamage();
 			if (damage < 10) damage = 10;
@@ -33,7 +31,7 @@ package classes.Scenes.Camp
 			player.takePhysDamage(damage, true);
 		}
 		
-		public function HyperFang():void {
+		private function HyperFang():void {
 			outputText("The jabberwocky bites you with it’s massive incisors, causing a deep wound. You start to bleed. ");
 			var damage:Number = 0;
 			damage += eBaseDamage();
@@ -81,13 +79,21 @@ package classes.Scenes.Camp
 		override public function defeated(hpVictory:Boolean):void
 		{
 			flags[kFLAGS.PATCHOULI_AND_WONDERLAND] = 2;
-			if (this.HP < 1) patchouli.patchouliExploreWonderlandJabberwockyHP();
-			else patchouli.patchouliExploreWonderlandJabberwockyLust();
+			clearOutput();
+			if (hpVictory){
+				outputText("The jabberwock falls to the ground, unable to fight further as it begins to masturbate fiercely. You pick up a few items you found in the area, and hurry to get the hell out before the seemingly indestructible beast is back up and ready to fight.\n\n");
+				cleanupAfterCombat();
+			} else {
+				outputText("The last thing you see is the jabberwocky’s open maw, before the rabbit-dragon devours you alive. What a tragic ending to your adventures.\n\n");
+				SceneLib.inventory.takeItem(weapons.VBLADE, cleanupAfterCombat);
+			}
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			patchouli.patchouliExploreWonderlandJabberwockyLost();
+			clearOutput();
+			outputText("The last thing you see is the jabberwocky’s open maw, before the rabbit-dragon devours you alive. What a tragic ending to your adventures.\n\n");
+			EventParser.gameOver();
 		}
 		
 		public function Jabberwocky() 

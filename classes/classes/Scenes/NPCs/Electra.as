@@ -146,8 +146,8 @@ use namespace CoC;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,20,0,0,0);
 			this.tallness = 72;
-			this.hipRating = Hips.RATING_CURVY+2;
-			this.buttRating = Butt.RATING_LARGE+1;
+			this.hips.type = Hips.RATING_CURVY + 2;
+			this.butt.type = Butt.RATING_LARGE + 1;
 			this.skinTone = "light";
 			this.hairColor = "blue";
 			this.hairLength = 13;
@@ -169,8 +169,8 @@ use namespace CoC;
 					add(armors.INDESSR,1/10).
 					add(consumables.L_DRAFT,1/4).
 					add(consumables.VOLTTOP,0.7);
-			this.rearBody = RearBody.RAIJU_MANE;
-			this.armType = Arms.RAIJU;
+			this.rearBody.type = RearBody.RAIJU_MANE;
+			this.arms.type = Arms.RAIJU;
 			this.lowerBody = LowerBody.RAIJU;
 			this.tailType = Tail.RAIJU;
 			this.tailRecharge = 0;

@@ -241,8 +241,8 @@ internal function rubiIntros():Function {
 
 //Approach Rubi scenes
 public function approachRubiScenes():void {
-	outputText(images.showImage("rubi-at-cafe"));
 	clearOutput();
+	outputText(images.showImage("rubi-at-cafe"));
 	rubiSprite();
 	//(First time)
 	if(flags[kFLAGS.RUBI_INTRODUCED] == 0) {
@@ -609,8 +609,8 @@ public function chatWithRubi():void {
 
 //Choose Rubi's Place?
 public function rubisFuckingHouseYouPervert():void {
-	outputText(images.showImage("rubi-at-house"));
 	clearOutput();
+	outputText(images.showImage("rubi-at-house"));
 	rubiSprite();
 	//(Not available to those with a centaur, naga or drider body.)
 	//(First Time?)
@@ -917,8 +917,8 @@ public function fuckRubi():void {
 //Dildo Fuck
 //(If the PC has the Deluxe Dildo) (If Orgasm Denial is activated, adds +2 to Blue Balls (Yay arousal drugs!))
 public function dildoFuckRubi():void {
-	outputText(images.showImage("rubi-dildo-fuck"));
 	clearOutput();
+	outputText(images.showImage("rubi-dildo-fuck"));
 	rubiSprite();
 	//(If PC has no cock)
 	if(!player.hasCock()) outputText("You don't have the equipment to give Rubi a good fucking, but there is one thing you do have.");
@@ -1021,8 +1021,8 @@ public function dildoFuckRubi():void {
 
 //Tease
 public function teaseRubi():void {
-	outputText(images.showImage("rubi-tease"));
 	clearOutput();
+	outputText(images.showImage("rubi-tease"));
 	rubiSprite();
 	//(Normal and Incubus Rubi.  Activates Orgasm Denial and adds 1 to Blue Balls.)
 	flags[kFLAGS.RUBI_ORGASM_DENIAL] = 1;
@@ -1101,8 +1101,8 @@ public function teaseRubi():void {
 
 //Release
 public function releaseRubi():void {
-	outputText(images.showImage("rubi-orgasm-denial-release"));
 	clearOutput();
+	outputText(images.showImage("rubi-orgasm-denial-release"));
 	rubiSprite();
 	//Will deactivate Orgasm Denial.  To start Denying again, the PC will have to Tease.
 	flags[kFLAGS.RUBI_ORGASM_DENIAL] = 0;
@@ -1234,8 +1234,8 @@ private function interruptTheNTRsYouCrazyFool():void {
 
 //(Wait)
 private function waitAndGetNTRedLikeTheBoyBitchYouAre():void {
-	outputText(images.showImage("rubi-get-ntr-ed"));
 	clearOutput();
+	outputText(images.showImage("rubi-get-ntr-ed"));
 	rubiSprite();
 	outputText("You decide to wait and see how this plays out.  The man fully disrobes and it's not at all surprising to you that he's not fully human.  A pair of wolf-like ears are perched upon his head, while a fluffy white and grey tail extends from his waist.  The wolfman opens his mouth to speak, but you can't hear what he says from out here.  Whatever it was, it certainly got Rubi's attention.");
 	outputText("\n\nThe blonde airhead moves from her position on the couch and kneels in front of the wolfman, whose back is to you.  From what you can see, you're certain she's sucking his cock.  Arousal and a twinge of jealousy well up inside you, and you find yourself moving around the side of the house to find a better vantage point.");
@@ -1331,8 +1331,8 @@ private function pimpOutRubi():void {
 
 //Actual Scene:
 private function chocoRubiMassage():void {
-	outputText(images.showImage("rubi-get-massage"));
 	clearOutput();
+	outputText(images.showImage("rubi-get-massage"));
 	rubiSprite();
 	outputText("You look over [rubi eir] supplies and decide that a pampered day at Rubi's \"spa\" is just what you need.  Allowing [rubi em] to escort you to [rubi eir] bed, you catch a few peeps of a pint-sized pup-tent in Rubi's bottoms.  [rubi Ey] doesn't seem aware of your prying gaze, but [rubi ey]'s blushing nonetheless, perhaps lost in [rubi eir] own less-than-pure thoughts as [rubi ey] guides you to the corner of [rubi eir] room.");
 
@@ -1429,8 +1429,8 @@ private function goInRubisClosetSoThatYouCanComeOutOfTheCloset():void {
 
 //Appearance
 private function rubiAppearance():void {
-	outputText(images.showImage("rubi-inspect-appearance"));
 	clearOutput();
+	outputText(images.showImage("rubi-inspect-appearance"));
 	rubiSprite();
 	outputText("You look over your naked, demon-morph lover.");
 	outputText("\n\nRubi is about five feet tall, with a very lithe, feminine body.  [rubi Eir] skin is ");
@@ -1508,6 +1508,7 @@ private function rubiAppearance():void {
 }
 
 //Get Dressed
+//FIXME These should be stored and saved in their own array, instead of flags
 private function playDressUp():void {
 	clearOutput();
 	rubiSprite();
@@ -1573,10 +1574,8 @@ private function playDressUp():void {
 	closet[closet.length] = "Rubi's Waitress's Uniform";
 	if(closet.length > 0) {
 		outputText("<b>Rubi's Closet Contains:</b>\n");
-		temp = 0;
-		while(temp < closet.length) {
-			outputText(closet[temp] + "\n");
-			temp++;
+		for each (var item:String in closet){
+			outputText(item+"\n");
 		}
 		outputText("\n");
 	}
@@ -1590,6 +1589,7 @@ private function playDressUp():void {
 	}
 	addButton(14,"Back",rubiAppearance);
 }
+//FIXME use a submenu instead of this second function
 private function playDressUp2():void {
 	clearOutput();
 	rubiSprite();
@@ -1653,10 +1653,8 @@ private function playDressUp2():void {
 	}
 	if(closet.length > 0) {
 		outputText("<b>Rubi's Closet Contains:</b>\n");
-		temp = 0;
-		while(temp < closet.length) {
-			outputText(closet[temp] + "\n");
-			temp++;
+		for each (var item:String in closet){
+			outputText(item+"\n");
 		}
 		outputText("\n");
 	}
@@ -2407,8 +2405,8 @@ private function anallyTrainYourBitchBoySlutHowToBeAnalForDCL():void {
 //Rubi must have at least a 5" cock
 //Requires 75 Affection
 private function getFuckedByRubi():void {
-	outputText(images.showImage("rubi-fucks-you"));
 	clearOutput();
+	outputText(images.showImage("rubi-fucks-you"));
 	rubiSprite();
 	outputText("Rather than wait for you to initiate something, Rubi takes you by the hands and leads you into the bedroom.  [rubi Ey] puts one arm on your shoulder and runs [rubi eir] fingers up through the hair on the back of your head before pulling you into a deep kiss.  Rubi's ");
 	//(normal/furry skin)
@@ -2513,8 +2511,8 @@ private function getFuckedByRubi():void {
 //If Rubi is being teased, adds +1 to blueballs
 //-100 arousal for PC
 private function rubiHotdogging():void {
-	outputText(images.showImage("rubi-hotdogged"));
 	clearOutput();
+	outputText(images.showImage("rubi-hotdogged"));
 	rubiSprite();
 	outputText("You sit on the couch next to your sexy lover and pull [rubi em] onto your lap with one smooth motion.  Rubi giggles, wiggling in place for a moment before leaning down to kiss you on the lips.  You put one hand on [rubi eir] supple ass, and another on [rubi eir] back between [rubi eir] shoulders and pull [rubi em] close, pressing your [tongue] into [rubi eir] mouth.  You sensually explore your partner's mouth as [rubi ey] closes [rubi eir] eyes and moans.");
 	outputText("\n\nThe two of you break the kiss long enough to gasp for breath, and go at it once more.  In your lip-locked escapade you blindly grasp at Rubi's clothing, stripping [rubi em] down, layer by layer until the ");
@@ -2576,8 +2574,8 @@ private function rubiHotdogging():void {
 
 //Tease
 private function teaseButtjobs():void {
-	outputText(images.showImage("rubi-tease-buttjob"));
 	clearOutput();
+	outputText(images.showImage("rubi-tease-buttjob"));
 	rubiSprite();
 	outputText("Grinning to yourself, you decide to tease the little demon " + rubiMF("boy","girl") + " a little further.  You plunge your thumb further into [rubi eir] ");
 	if(flags[kFLAGS.RUBI_NO_CUNT] == 1) outputText("ass");
@@ -2611,8 +2609,8 @@ private function teaseButtjobs():void {
 
 //Pop
 private function popButtjobs():void {
-	outputText(images.showImage("rubi-pop-buttjob"));
 	clearOutput();
+	outputText(images.showImage("rubi-pop-buttjob"));
 	rubiSprite();
 	outputText("No, you figure Rubi has been so great lately [rubi ey] definitely deserves to cum.  You plunge your thumb further into [rubi eir] ");
 	if(flags[kFLAGS.RUBI_NO_CUNT] == 1) outputText("ass");
@@ -2723,7 +2721,7 @@ private function giveRubiATFItem(itype:ItemType):void {
 		}
 		//(If Rubi gets demonic heels)
 		if(flags[kFLAGS.RUBI_FEET] == 0 && rand(3) == 0 && itype == consumables.SUCMILK) {
-			outputText("\n\nRubi suddenly hops from foot to foot, breathing in sharply.  \"<i>Ow, ow, ow!</i>\" [rubi ey] exclaims, dropping down onto [rubi eir] naked butt.  [rubi Ey] lifts one foot gingerly, inspecting the heel and sole.  Rubi rocks back and forth, craddling [rubi eir] foot as a pronounced bulge appears on the heel.  Soon, it splits as a sharp black horn grows out, pointing downwards.  After a minute of this, Rubi suddenly sighs with relief as the painful growth seems to subside.  [rubi Ey] gets to [rubi eir] feet, the horn making [rubi em] stand and walk as if [rubi ey] were wearing high heels.");
+			outputText("\n\nRubi suddenly hops from foot to foot, breathing in sharply.  \"<i>Ow, ow, ow!</i>\" [rubi ey] exclaims, dropping down onto [rubi eir] naked butt.  [rubi Ey] lifts one foot gingerly, inspecting the heel and sole.  Rubi rocks back and forth, craddling [rubi eir] foot as a pronounced bulge appears on the heel.  Soon, it splits as a sharp black horns grows out, pointing downwards.  After a minute of this, Rubi suddenly sighs with relief as the painful growth seems to subside.  [rubi Ey] gets to [rubi eir] feet, the horns making [rubi em] stand and walk as if [rubi ey] were wearing high heels.");
 			flags[kFLAGS.RUBI_FEET] = 1;
 		}
 		//(If Rubi gets horns)
@@ -3073,8 +3071,8 @@ private function giveRubiATFItem(itype:ItemType):void {
 
 //GRO+/REDUCTO
 private function rubiGrowPlusBreasts():void {
-	outputText(images.showImage("rubi-gro-plus-tits"));
 	clearOutput();
+	outputText(images.showImage("rubi-gro-plus-tits"));
 	rubiSprite();
 	outputText("You hand over the vial of blueish liquid.  Rubi takes a moment to look it over, before taking a deep breath and injecting half of the vial into one breast and the rest into [rubi eir] other breast.");
 
@@ -3102,8 +3100,8 @@ private function rubiGrowPlusBreasts():void {
 }
 //(If Penis)
 private function rubiPenisGroPlus():void {
-	outputText(images.showImage("rubi-gro-plus-penis"));
 	clearOutput();
+	outputText(images.showImage("rubi-gro-plus-penis"));
 	rubiSprite();
 	outputText("You hand over the vial of greenish liquid.  Rubi takes a moment to look it over, before taking a deep breath and injecting the entire thing into the base of [rubi eir] [rubi cock].");
 
@@ -3594,6 +3592,7 @@ private function pickAnItemToFeedRubi():void {
 
 
 //(Give Clothes)
+//FIXME These should be stored and saved in their own string array, instead of flags
 public function giveRubiClothes(itype:ItemType = null):void {
 	clearOutput();
 	rubiSprite();
@@ -3665,7 +3664,7 @@ public function hypnoBimboficationForRubiSloots():void
 	outputText("\n\n\"<i>Would you like to feel like this all the time - happy and carefree?</i>\" you ask.");
 
 	outputText("\n\nRubi nods, a little more vigorously.");
-	outputText("\n\nA predatory smile spreads across your face. \"<i>That's natural. Everyone wants to be happy, and I'm going to help you become soooo happy.</i>\" Imagining your tail as some kind of psionic antennae, you channel your thoughts through it as you continue to speak and mold your hapless victim. \"<i>You feel good right now because you are aroused and empty-minded, Rubi. Your mind prevented you from experiencing this complete bliss. Even now, it's interfering, forcing me to reroute your thoughts down to your dick to give you this present.</i>\"");
+	outputText("\n\nA predatory smile spreads across your face. \"<i>That's natural. Everyone wants to be happy, and I'm going to help you become soooo happy.</i>\" Imagining your tail as some kind of psionic antennae.type, you channel your thoughts through it as you continue to speak and mold your hapless victim. \"<i>You feel good right now because you are aroused and empty-minded, Rubi. Your mind prevented you from experiencing this complete bliss. Even now, it's interfering, forcing me to reroute your thoughts down to your dick to give you this present.</i>\"");
 	outputText("\n\nYou didn't think it possible, but Rubi's face slackens further.");
 
 	outputText("\n\n\"<i>I can help you fix that, Rubi, but I need your help. I need you to want it. I need you to want to be horny, thoughtless, and happy all the time. You need to truly want to feel this good all the time, and it does feel sooo good, doesn't it?</i>\"");

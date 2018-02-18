@@ -164,17 +164,17 @@ public class WorldTree extends BaseContent
 				if (player.cor >= 66) {
 					if (player.cockTotal() > player.tentacleCocks()) {
 						var choices:Array = [];
-						temp = 0;
-						while(temp < player.cockTotal()) {
-							if(player.cocks[temp].cockType != CockTypesEnum.TENTACLE) choices[choices.length] = temp;
-							temp++;
+						var i:int = 0;
+						while(i < player.cockTotal()) {
+							if(player.cocks[i].cockType != CockTypesEnum.TENTACLE) choices[choices.length] = i;
+							i++;
 						}
-						temp = choices[rand(choices.length)];
-						outputText("Your " + num2Text2(temp+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer, all the way to the ground before you realize something is wrong.  You pull open your [armor] and look down, discovering your " + cockDescript(temp) + " has become a tentacle!  As you watch, it shortens back up; it's colored green except for a purplish head, and evidence seems to suggest you can make it stretch out at will.  <b>You now have a");
+						i = choices[rand(choices.length)];
+						outputText("Your " + num2Text2(i+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer, all the way to the ground before you realize something is wrong.  You pull open your [armor] and look down, discovering your " + cockDescript(i) + " has become a tentacle!  As you watch, it shortens back up; it's colored green except for a purplish head, and evidence seems to suggest you can make it stretch out at will.  <b>You now have a");
 						if(player.tentacleCocks() > 0) outputText("nother");
 						outputText(" tentacle-cock!</b>\n\n");
-						player.cocks[temp].cockType = CockTypesEnum.TENTACLE;
-						player.cocks[temp].knotMultiplier = 1.3;
+						player.cocks[i].cockType = CockTypesEnum.TENTACLE;
+						player.cocks[i].knotMultiplier = 1.3;
 						dynStats("sen", 3, "lus", 10);
 						changes++;
 					}
@@ -183,17 +183,17 @@ public class WorldTree extends BaseContent
 					if (rand(2) == 0) {
 						if (player.cockTotal() > player.tentacleCocks()) {
 							var choices2:Array = [];
-							temp = 0;
-							while(temp < player.cockTotal()) {
-								if(player.cocks[temp].cockType != CockTypesEnum.TENTACLE) choices2[choices2.length] = temp;
-								temp++;
+							i = 0;
+							while(i < player.cockTotal()) {
+								if(player.cocks[i].cockType != CockTypesEnum.TENTACLE) choices2[choices2.length] = i;
+								i++;
 							}
-							temp = choices2[rand(choices2.length)];
-							outputText("Your " + num2Text2(temp+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer, all the way to the ground before you realize something is wrong.  You pull open your [armor] and look down, discovering your " + cockDescript(temp) + " has become a tentacle!  As you watch, it shortens back up; it's colored green except for a purplish head, and evidence seems to suggest you can make it stretch out at will.  <b>You now have a");
+							i = choices2[rand(choices2.length)];
+							outputText("Your " + num2Text2(i+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer, all the way to the ground before you realize something is wrong.  You pull open your [armor] and look down, discovering your " + cockDescript(i) + " has become a tentacle!  As you watch, it shortens back up; it's colored green except for a purplish head, and evidence seems to suggest you can make it stretch out at will.  <b>You now have a");
 							if(player.tentacleCocks() > 0) outputText("nother");
 							outputText(" tentacle-cock!</b>\n\n");
-							player.cocks[temp].cockType = CockTypesEnum.TENTACLE;
-							player.cocks[temp].knotMultiplier = 1.3;
+							player.cocks[i].cockType = CockTypesEnum.TENTACLE;
+							player.cocks[i].knotMultiplier = 1.3;
 							dynStats("sen", 3, "lus", 10);
 							changes++;
 						}
@@ -201,17 +201,17 @@ public class WorldTree extends BaseContent
 					else {
 						if (player.cockTotal() > player.stamenCocks()) {
 							var choices3:Array = [];
-							temp = 0;
-							while(temp < player.cockTotal()) {
-								if(player.cocks[temp].cockType != CockTypesEnum.STAMEN) choices3[choices3.length] = temp;
-								temp++;
+							i = 0;
+							while(i < player.cockTotal()) {
+								if(player.cocks[i].cockType != CockTypesEnum.STAMEN) choices3[choices3.length] = i;
+								i++;
 							}
-							temp = choices3[rand(choices3.length)];
-							outputText("You feel a strange tingling in your " + num2Text2(temp+1) + " cock. You remove your [armor] and look down and witness your cock shifting into a peculiar form. Its tapered, " + player.skinTone + " and crowned by several colorful balls that look sort of like knots. Its covered in sweet smelling dust...  you're secreting pollen!  <b>You now have a");
+							i = choices3[rand(choices3.length)];
+							outputText("You feel a strange tingling in your " + num2Text2(i+1) + " cock. You remove your [armor] and look down and witness your cock shifting into a peculiar form. Its tapered, " + player.skinTone + " and crowned by several colorful balls that look sort of like knots. Its covered in sweet smelling dust...  you're secreting pollen!  <b>You now have a");
 							if(player.tentacleCocks() > 0) outputText("nother");
 							outputText(" plantlike stamen cock!</b>\n\n");
-							player.cocks[temp].cockType = CockTypesEnum.STAMEN;
-							player.cocks[temp].knotMultiplier = 1.3;
+							player.cocks[i].cockType = CockTypesEnum.STAMEN;
+							player.cocks[i].knotMultiplier = 1.3;
 							dynStats("sen", 3, "lus", 10);
 							changes++;
 						}
@@ -220,17 +220,17 @@ public class WorldTree extends BaseContent
 				if (player.cor < 33) {
 					if (player.cockTotal() > player.stamenCocks()) {
 						var choices4:Array = [];
-						temp = 0;
-						while(temp < player.cockTotal()) {
-							if(player.cocks[temp].cockType != CockTypesEnum.STAMEN) choices4[choices4.length] = temp;
-							temp++;
+						i = 0;
+						while(i < player.cockTotal()) {
+							if(player.cocks[i].cockType != CockTypesEnum.STAMEN) choices4[choices4.length] = i;
+							i++;
 						}
-						temp = choices4[rand(choices4.length)];
-						outputText("You feel a strange tingling in your " + num2Text2(temp+1) + " cock. You remove your [armor] and look down and witness your cock shifting into a peculiar form. Its tapered, " + player.skinTone + " and crowned by several colorful balls that look sort of like knots. Its covered in sweet smelling dust...  you're secreting pollen!  <b>You now have a");
+						i = choices4[rand(choices4.length)];
+						outputText("You feel a strange tingling in your " + num2Text2(i+1) + " cock. You remove your [armor] and look down and witness your cock shifting into a peculiar form. Its tapered, " + player.skinTone + " and crowned by several colorful balls that look sort of like knots. Its covered in sweet smelling dust...  you're secreting pollen!  <b>You now have a");
 						if(player.tentacleCocks() > 0) outputText("nother");
 						outputText(" plantlike stamen cock!</b>\n\n");
-						player.cocks[temp].cockType = CockTypesEnum.STAMEN;
-						player.cocks[temp].knotMultiplier = 1.3;
+						player.cocks[i].cockType = CockTypesEnum.STAMEN;
+						player.cocks[i].knotMultiplier = 1.3;
 						dynStats("sen", 3, "lus", 10);
 						changes++;
 					}
@@ -289,57 +289,57 @@ public class WorldTree extends BaseContent
 			}
 			//Vines/tentacles arms
 			if (player.cor >= 66) {
-				if (player.armType != Arms.PLANT2 && changes < changeLimit) {
+				if (player.arms.type != Arms.PLANT2 && changes < changeLimit) {
 					outputText("You watch, spellbound, while your arms gradually change their entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.Looking over them you can see veined, vaguely phallic vines wrapping their way around your entire arm, in a manner that is decorative but oddly perverse. They remind you of the tentacle monsters in the forest...  <b>You now have tentacle-covered arms.</b>\n\n");
-					player.armType = Arms.PLANT2;
+					player.arms.type = Arms.PLANT2;
 					changes++;
 				}
 			}
 			if (player.cor >= 33 && player.cor < 66) {
 				if (rand(2) == 0) {
-					if (player.armType != Arms.PLANT2 && changes < changeLimit) {
+					if (player.arms.type != Arms.PLANT2 && changes < changeLimit) {
 						outputText("You watch, spellbound, while your arms gradually change their entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.Looking over them you can see veined, vaguely phallic vines wrapping their way around your entire arm, in a manner that is decorative but oddly perverse. They remind you of the tentacle monsters in the forest...  <b>You now have tentacle-covered arms.</b>\n\n");
-						player.armType = Arms.PLANT2;
+						player.arms.type = Arms.PLANT2;
 						changes++;
 					}
 				}
 				else {
-					if (player.armType != Arms.PLANT && changes < changeLimit) {
+					if (player.arms.type != Arms.PLANT && changes < changeLimit) {
 						outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.  Looking on them you can see a thin, delicate vines, with spade-shaped leaves unfolding from them as they curl snugly around your biceps and deltoids all the way down to your wrists. <b>You now have vine-covered arms.</b>\n\n");
-						player.armType = Arms.PLANT;
+						player.arms.type = Arms.PLANT;
 						changes++;
 					}
 				}
 			}
 			if (player.cor < 33) {
-				if (player.armType != Arms.PLANT && changes < changeLimit) {
+				if (player.arms.type != Arms.PLANT && changes < changeLimit) {
 					outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.  Looking on them you can see a thin, delicate vines, with spade-shaped leaves unfolding from them as they curl snugly around your biceps and deltoids all the way down to your wrists. <b>You now have vine-covered arms.</b>\n\n");
-					player.armType = Arms.PLANT;
+					player.arms.type = Arms.PLANT;
 					changes++;
 				}
 			}
 			//Cockvine wings
-			if ((player.armType == Arms.PLANT || player.armType == Arms.PLANT2) && player.wingType != Wings.PLANT && player.lowerBody != LowerBody.PLANT_FLOWER && changes < changeLimit && rand(3) == 0) {
-				if (player.wingType != Wings.NONE) {
+			if ((player.arms.type == Arms.PLANT || player.arms.type == Arms.PLANT2) && player.wings.type != Wings.PLANT && player.lowerBody != LowerBody.PLANT_FLOWER && changes < changeLimit && rand(3) == 0) {
+				if (player.wings.type != Wings.NONE) {
 					outputText("Your old wings are drooping leaving your back as smooth and unbroken as the day you entered the portal. But this state not last long.\n\n");
 				}
 				outputText("Pressure is building in multiple spots on your upper back. It feels more like several over-eager erections trapped in incredibly tight undies. You can’t help but groan with relief when finally the pressure peaks and many thick protrusions burst impatiently out of your [skin.type]. The hot, thick, vine-like growths thrust their way into being, feet of oily green tentacles, alarmingly energetic and prehensile, thrashing around your " + hipDescript() + ".");
 				outputText(" After a moment of concentration you cause one of these growths to rear around into your hand to take a closer look at it. It feels unmistakably dick-like - bulging, tender flesh under the fibrous skin, with quite a bit of flexible, able to bend all along its length and dart its wet, distended head in any direction you wish. <b>You now have cockvine wings.</b>\n\n");
-				player.wingType = Wings.PLANT;
+				player.wings.type = Wings.PLANT;
 				changes++;
 			}
 			//Bark claws
-		//	if (player.armType != ORCA && changes < changeLimit) {
+		//	if (player.arms.type != ORCA && changes < changeLimit) {
 		//		outputText("\n\nRemarkably, the sunscreen has no effect.  Maybe next time?");
-		//		player.armType = ORCA;
+		//		player.arms.type = ORCA;
 		//		changes++;
 		//	}
 			//Root claws
-			if (player.wingType == Wings.PLANT && player.lowerBody != LowerBody.YGG_ROOT_CLAWS && changes < changeLimit) {
+			if (player.wings.type == Wings.PLANT && player.lowerBody != LowerBody.YGG_ROOT_CLAWS && changes < changeLimit) {
 				outputText("You lose your balance and fall to the ground as your feet begin to contort. You watch as your roots rearrange into a more solid configuration. <b>Your roots have assumed the form of three-toed, clawed feet, complete with a small vestigial claw-toe on the back for added grip.</b>\n\n");
 				player.lowerBody = LowerBody.YGG_ROOT_CLAWS;
 				if (player.legCount != 2) player.legCount = 2;
-				changes++;//player.armType == ORCA && 
+				changes++;//player.arms.type == ORCA && 
 			}
 			//Plant Dragon face
 			if (player.lowerBody == LowerBody.YGG_ROOT_CLAWS && player.faceType != Face.PLANT_DRAGON && changes < changeLimit) {
@@ -374,11 +374,11 @@ public class WorldTree extends BaseContent
 				player.skin.growCoat(Skin.SCALES,{color:"mahogany",adj:"bark-like"},Skin.COVERAGE_COMPLETE);
 				changes++;	
 			}
-			if (player.earType != Ears.LIZARD && player.tailType == Tail.YGGDRASIL && player.lowerBody == LowerBody.YGG_ROOT_CLAWS && changes < changeLimit) {
+			if (player.ears.type != Ears.LIZARD && player.tailType == Tail.YGGDRASIL && player.lowerBody == LowerBody.YGG_ROOT_CLAWS && changes < changeLimit) {
 				outputText("All around you, a omnipresent buzzing is gradually becoming louder and louder.  Suddenly, you realize that it’s become painfully loud, the force of the sound making your eardrums throb painfully.  You attempt to block the sound with your ears, but your hands can’t find any ears to plug!  Suddenly, the buzzing stops, and the ringing in your ears begins to subside.  Probing the side of your head with your hands, you realize that your ears have become ");
 				if (player.hasFur() || player.hairLength > 0) outputText("discreet ");
 				outputText("earholes onthe side of your head. <b>You now have lizardlike ears.</b>\n\n");
-				player.earType = Ears.LIZARD;
+				player.ears.type = Ears.LIZARD;
 				changes++;
 			}
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;

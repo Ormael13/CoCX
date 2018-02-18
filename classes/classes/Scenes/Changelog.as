@@ -23,7 +23,7 @@ package classes.Scenes
 		private function Changelog20():void {
 			clearOutput();
 			menu();
-			outputText("<b>Version 0.8h2:</b>\n\n");
+			outputText("<b>Version 0.8h2 (Bugfixing):</b>\n\n");
 			outputText("-Max starting wrath for both monsters and PC rised from 100 to 250. PC will need 200 wrath for 2x power attack (monsters would also need 200) unless Job: Warrior perk is present.\n");
 			outputText("-Aside perk Job: Warrior also perk Job: Beast Warrior can unlock stronger than 2x Power Attacks\n");
 			outputText("-Hanging on Imp Skull will not throw PC back to main camp menu but back to menu where it can hang next one skull.\n");
@@ -38,14 +38,64 @@ package classes.Scenes
 			outputText("-Jabberwocky body parts would act as negative points to dragon score to avoid overlapping of both races bonuses.\n");
 			outputText("-Kindra archery training would progress 2x faster.\n");
 			outputText("-Manual that Chi Chi drops after beating PC in second fight unlock Soul Blast soulskill (15 turns CD, chance to stun for 3 turns and dmg scale with PC current str, int and wis)\n");
-			outputText("-Fixed bugs: Softlocks on few enemy bind specials (like Izumi or Ceraph), Wrath specials correctly list needed resource, option to send Izma to fishery before it's built, many other small fixes\n\n\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Softlocks on few enemy bind specials (like Izumi or Ceraph), Wrath specials correctly list needed resource, option to send Izma to fishery before it's built, many other small fixes\n\n");
 			outputText("<b>Version 0.8i:</b>\n\n");
+			outputText("-New tier 0 misc lvl-up perk: Tough Hide. Req. Job: Beast Warrior perk and 30+ tou. Effect: Increase natural armor by 2 so long as PC have scale chitin fur or other natural armor.\n");
+			outputText("-New tier 1 misc lvl-up perk: Feral Armor. Req. Tough Hide perk and 60+ tou. Effect: Gain extra armor based on PC toughness so long as PC is naked, +20 to max wrath. (Similar to agility but PC must be naked and have natural armor)\n");
+			outputText("-New tier 1 misc lvl-up perk: Job: Healer. Req. 30+ int and 30+ wis. Effect: +5 to max Int and Wis (scalable), +30 to max Mana, +10% to spellpower when using healing spells\n");
+			outputText("-New tier 1 misc lvl-up perk: Spellpower: Healing. Req. Job: Healer perk and 50+ wis. Effect: Increase max manay by 30 and increase all healing spells power by 20% as long PC wisdom is 50+\n");
+			outputText("-New tier 1 misc lvl-up perk: Wisened Healer. Req. Job: Healer perk and 50+ wis. Effect: Add wisdom scaling to healing spells at cost of 2x higher casting costs\n");
+			outputText("-New tier 1 misc lvl-up perk: Claw training. Req. Any claws (form racial tf or weapon that grants claws). Effect: Gain 1 extra natural attack with your claws, +20 to max wrath\n");
+			outputText("-New tier 2 misc lvl-up perk: Extra claw attack. Req. Claw training perk and Any claws (form racial tf or weapon that grants claws). Effect: When attacking with your claws, add an additional attack striking up to 3 times, +30 to max wrath\n");
+			outputText("-New tier 2 misc lvl-up perk: Feral Whirlwind. Req. Job: Beast Warrior perk. Effect: Increase by 50% base dmg of F. Whirlwind special\n");
+			outputText("-New tier 2 misc lvl-up perk: Natural healing (Minor). Req. 60+ wis, 15+ int and Wisened Healer perk. Effect: +30% healing power and -10% healing spells costs\n");
+			outputText("-New tier 3 misc lvl-up perk: Natural healing (Major). Req. 80+ wis, 20+ int and Natural healing (Minor) perk. Effect: +40% healing power and -15% healing spells costs\n");
+			outputText("-New tier 3 misc lvl-up perk: Multi Claw Attack. Req. Extra claw attack perk and Any claws (form racial tf or weapon that grants claws). Effect: When attacking with your claws, add an additional attack striking up to 4 times, +40 to max wrath\n");
+			outputText("-New tier 4 misc lvl-up perk: Clawing flurry. Req. Multi Claw Attack perk and Any claws (form racial tf or weapon that grants claws). Effect: When attacking with your claws, add an additional attack striking up to 5 times, +50 to max wrath\n");
+			outputText("-New tier 4 misc lvl-up perk: Natural healing (Epic). Req. 100+ wis, 25+ int and Natural healing (Major) perk. Effect: +50% healing power and -20% healing spells costs\n");
+			outputText("-New tier 5 misc lvl-up perk: Natural healing (Legendary). Req. 120+ wis, 30+ int and Natural healing (Epic) perk. Effect: +60% healing power and -25% healing spells costs\n");
+			outputText("-Having natural claws add toggle in combat menu to switch between normal or feral combat style. Only when PC not use any weapon (after few special exceptions) can benefit from feral combat style - when PC can attack more than once a turn fatigue costs will be halfed.\n");
+			outputText("-New melee weapon: Claws - obtainable by buying in weapon shop in He'Xin'Dao. 0 atk, 10% to cause bleed, 100 gems, is one of special exception weapons, which could be used without loosing benefits from using feral combat style.\n");
+			outputText("-All bleed effects not req. to lower enemy armor below 10. Also previous 50% chance for bleed effect was lowered to 25% for hooked gaunlets.\n");
+			//outputText("-New range weapon: Hodr's Bow - obtained by . 22 atk, costing 2200 gems, -5% accuracy, Artifact Bow, each arrow can apply blind debuff on enemy.\n");
+			outputText("-First gaunlet repeatable reward was lowered to 15 spirit stones to keep in theme of 5 SS for each enemy defeated in gaunlet challanges.\n");
+			outputText("-Perk Rage give 50 more to max wrath and perk Anger 100 more to max wrath. To perk Job: Warlord req. was added option to use perk Feral Whirlwind instead of Whirlwind or Whipping. Other req. stay the same.\n");
+			outputText("-Beast Warrior PC's can use their own version of Whirlwind that req. only to have natural claws or weapons that can substitude natural claws. Almost all rest is similar to Whirlwind performed with any non-large/large weapon.\n");
+			outputText("-Healing spells will have it own spellpower and cost reduction meter. Items like Mana Bracer, Nocturnal/Unicorn Staff or all 3 Marae Bark enhanced wizard staffs, rings, perks on weapons or armors or ascension one perk would boost heal power meter too in addition to normal spellpower. Similary perks on equipment + spell affinity perk would lower costs of heal spells.\n");
+			outputText("-Perk Mana Affinity I req. changed now to 25+ int and one of two perks: Job: Sorcerer or Job: Healer\n");
+			outputText("-Black Magic spell Heal digievolv... en becoming White Magic spell with all the same effect and costs (but without chance to backfire at PC ^^). I was all the time feeling it should be white magic with some other spell taking healing-type spell among black magic spells.\n");
+			outputText("-New Black Magic spell: Regenerate. When casted succesfully will give 7 turns regeneration effect on PC.\n");
+			outputText("-New Grey Magic spell: Nosferatu. It deals damage to enemy at same time healing PC by the same amount.\n");
+			outputText("-New TF item: Skyborn Seed (avian TF) buyable in He'Xin'Dao TF shop for 30 gems, droped by Hapries or radomly found in High Mountains. Bonuses for (Half) Avian-morph would be for 4(9) pts in racial score: +15(30) to max Str, +30(75) to max Spe and +15(30) to max Int.\n");
+			outputText("-New body part - legs: Avain Legs. No prereq.\n");
+			outputText("-New body part - tail: Avian Tail. Req. Avian Legs\n");
+			outputText("-New body part - arms: Avain Arms. Req. Avian Tail\n");
+			outputText("-New body part - wings: Avain wings. Req. Avain Arms\n");
+			outputText("-New body part - face: Avain Face. No prereq.\n");
+			outputText("-New body part - ears: Avain Ears. No prereq.\n");
+			outputText("-New body part - skin: Feathers. No prereq.\n");
+			//outputText("-New tier   lvl-up perk: . Req. . Effect: \n");
+			outputText("-New melee weapon (by Shamanknight): Halberd - buyable in weapons shop in Tel'Adre. Cost 1200 gems. Base atk is 6 increased by 9 when PC have 50+ str and another 15 more atk when having 100+ str. Attacks ignore 40% of target armor.\n");
+			outputText("-New melee weapon (by Shamanknight): Guan Dao - buyable in weapons shop in He'Xin'Dao. Cost 100 spirit stones. Base atk is 6 increased by 8 when PC have 50+ str and another 11 more atk when having 100+ str. Attacks ignore 60% of target armor.\n");
+			outputText("-New melee weapon (by Shamanknight): Fly-Whisk - buyable in weapons shop in He'Xin'Dao. Cost 80 spirit stones. Base atk is 0, increase magical soulskills power by 20%.\n");
+			outputText("-New melee weapon (by Shamanknight): Hook Sword - buyable in weapons shop in He'Xin'Dao. Cost 160 spirit stones. Base atk is 20, are dual normal weapons, have added perk Dexterous Swordsmanship (+10% to parry chance - can add to existing parry bonuses like from perk Parry).\n");
+			outputText("-New melee weapon (by Shamanknight): Snake Sword - buyable in weapons shop in He'Xin'Dao. Cost 80 spirit stones. Base atk is 20, can be used for Whipping special.\n");
+			outputText("-At Lake (and later Plain) PC can enounted white furred horse-morph/unicorn. After her affection reach 100% she would introduce herself to PC. After this next meeting would give choice to accept or reject her.\n");
+			outputText("-When at cap Diana would provide healing option (full HP and up to half of max fatigue removed) plus 3 sex scenes.\n");
+			outputText("-At Plains PC can nencounter female equine (Sidonie) chased by group of angry gnolls. Could ignore it (event will proc in futre) or help. Helping leads to fight vs 4 gnolls after which or equine will escape in case PC lost, or join camp if won.\n");
+			outputText("-At camp Sidonie can talk with PC, have sex (3 scenes) or one a day go with PC to gather up to 300 wood.\n");
+			outputText("-Entering Tel'Adre there is 10% chance for event where PC can meet and hire maid Luna. If PC reject offer it will be possible to recruit her next time event proc.\n");
+			outputText("-In camp she will be able prepare once a day meal (recover a bit of HP, mana and fatigue), nurse (healing and a bit of fatigue recovery), talk. After her affection reach 50% she can selected as npc to sleep with.\n");
+			outputText("-Each 7 days if PC sleep with her and her affection is at 50% or more can proc special event 'Full Moon', where PC can accept Luna feeling or reject (it would lead to fight with her and if PC is partialy dog/wold-morph will also be unable to resist).\n");
+			outputText("-After Full Moon event PC would be able to choose one of Luna sex scenes or just... headpat her if not corrupted to much.\n");
+			outputText("-Spells and Magic Healing costs would rise by 1% each 10% spell/healpower increase instead of each 100%. Also after reaching lvl 24, 42, 60 and 78 costs would increase by 50% of base value if int is high enough. For heals it's 25% increase when int (and wis if PC have Wisened Healer perk) will pass those tresholds.\n");
+			outputText("-Tease and few other lust dealing attacks scalling was changed to use libido scaling instead lvl based one + in case of alraune it will have toughness scaling too.\n");
+			outputText("-Giacomo was added to possible encounters in Soul Sense menu. Also Lumi Lab after first time visiting it would be moved to Dungeons submenu (since it should been like Sean shop inside one of dungeons).\n");
+			outputText("-Celess related events in forest would be temporaly unaccesable (not affecting anything if PC already have Celess in camp).\n");
+			outputText("-Fixed bugs: Patchouli not leading PC to Wonderland from camp, Sidewinder not having daily cooldown counter, Anzu missing from his palace, Chi Chi not dropping M.Gloves after first/second fight on soul arena, missing option to buy Taoth statue in Jewelery shop in Tel'Adre\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-Fixed bugs: \n");
 			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
 			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
 			outputText("-New event perk: Gargoyle. Gained in ritual to become gargoyle by picking own blood. Effects: \n");
@@ -53,19 +103,17 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Bat, Vampire, Cat, Cheshire cat
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Bat, Vampire, 
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
+			outputText("-New event related perk: Elemental Conjurer Mind and Body Dedication. Req.: Using Five-colored Elemental Pearl, which can be found after beating 2nd boss of Hidden Cave dungeon. Effect: It'll neutralize negative effects on max Str/Tou/Spe due to picking Elemental Conjurer Dedication perk.\n");
 			outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			outputText("-New event related perk: Elemental Conjurer Mind and Body Sacrifice. Req.: Using xxx, which can be found xxx. Effect: It'll neutralize negative effects on max Str/Tou/Spe due to picking Elemental Conjurer Sacrifice perk.\n");
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
@@ -96,9 +144,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): dodać yuki-onna TF
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -229,8 +274,6 @@ package classes.Scenes
 			outputText("-Perk Lifeline will now scale with NG tiers with amount of HP restored (it peak bonus will be reached in NG5+). Perks Bigger Golem Bag 1-6 would now increase pernament golems storage space by 1 when PC get perk Master Golem Maker.\n");
 			outputText("-Elemental Conjurer Dedication perk was moved from tier 1 to tier 4 increasing wisdom req. for it to 120. Perk Elemental Contract Rank 2 no longer req. this perk and it was moved as one of req. perks to perk Elemental Contract Rank 5. Elemental Conjurer Sacrifice perk was moved from tier 4 to tier 6 increasing wisdom req. for it to 220.");
 			outputText(" Mana cost reduction for perks Stronger Elemental Bond and Strongest Elemental Bond reduced to 20 and 40 from 30 and 90. Amount of mana used by attacking elementals increased by 25%.\n");
-			outputText("-Pearl gained by beating enemy in Hidden Cave will be giving Elemental Conjurer Mind and Body Dedication perk instead of Elemental Conjurer Mind and Body Resolve. For all PC's that used it already it will just replace perks and for those that still need to use this item will be granting new perk.\n");
-			outputText("-New event related perk: Elemental Conjurer Mind and Body Dedication. Req.: Using Five-colored Elemental Pearl, which can be found after beating 2nd boss of Hidden Cave dungeon. Effect: It'll neutralize negative effects on max Str/Tou/Spe due to picking Elemental Conjurer Dedication perk.\n");
 			outputText("-New event related perk: Jungle’s Wanderer. Req.: having 6 or more points in Red Panda race score. Effect: +35 to the Evasion percentage.\n");
 			outputText("-New tier 3 misc lvl-up perk: Speedy Recuperation. Req. Speedy Recovery perk. Effect: Regain fatigue +100% out of combat / +200% in combat faster\n");
 			outputText("-New tier 3 misc lvl-up perk: Recuperation Sleep. Req. Speedy Recovery perk. Effect: Gain +100% boost to health and fatigue recovery during sleep\n");
@@ -1111,7 +1154,7 @@ package classes.Scenes
 			outputText("-Added Alicorn racial Score and Alicornum (alicorn TF). Soul Evolved form of Unicorn that gained wings.\n");
 			outputText("-When unicorn score is 5 or higher PC is considered unicorn and getting following bonuses to stats (scaling with NG tier ofc): +5 spe, +10 int, +50 max hp, +20 max fatigue, +50 max soulforce\n");
 			outputText("-When alicorn score is 6 or higher PC is considered alicorn and getting following bonuses to stats (scaling with NG tier ofc): +5 spe, +20 int, +30 max hp, +50 max fatigue, +150 max soulforce\n");
-			outputText("-New (or I should say earlier unused but already existing in code) possible body parts to gain: Unicorn horn (that grow similar to minotaur horns) and tied to it gore special attack when horn is long enough.\n");
+			outputText("-New (or I should say earlier unused but already existing in code) possible body parts to gain: Unicorn horns (that grow similar to minotaur horns) and tied to it gore special attack when horns is long enough.\n");
 			outputText("-New possible body part to gain: Alicorn wings\n");
 			outputText("-Having unicorn or alicorn score high enough would add bonus to healing spell effect (+50% to effect for each point of racial score over 5 and 6 respectively - also those two racial scores bonuses can add to each other giving at max uni and ali scores +550% of effect power) and Violet Pupil Transformation (instead of giving +50% effect it adds 25 hp healed per turn). Tooltip for VPT would be always updating acording to changes in both racial scores.\n");
 			outputText("-Unicornum and Alicornum can be only crafted with Evangeline help for now.\n");

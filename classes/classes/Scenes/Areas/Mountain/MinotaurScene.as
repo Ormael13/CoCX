@@ -172,22 +172,22 @@ private function rapeMinotaurTentacles():void {
 	//Mixed dix
 	if((player.cockTotal() != player.tentacleCocks()) || (player.cockTotal() != player.stamenCocks())) {
 		mismatched = true;
-		temp = player.cocks.length;
+		var i:int = player.cocks.length;
 		temp2 = -1;
 		//Find the first non-tentacle dick for a point of comparison
-		while(temp > 0 && temp2 == -1) {
-			temp--;
-			if(player.cocks[temp].cockType != CockTypesEnum.TENTACLE) temp2 = temp;
+		while(i > 0 && temp2 == -1) {
+			i--;
+			if(player.cocks[i].cockType != CockTypesEnum.TENTACLE) temp2 = i;
 		}
 		//failsafe
 		if(temp2 == -1) temp2 = 0;
 		//Find the longest non-tentace dick
-		temp = player.cocks.length;
-		while(temp > 0) {
-			temp--;
+		i = player.cocks.length;
+		while(i > 0) {
+			i--;
 			//Check to see if this cock is longer than the saved one.
-			if(player.cocks[temp].cockLength > player.cocks[temp2].cockLength && player.cocks[temp].cockType != CockTypesEnum.TENTACLE) {
-				temp2 = temp;
+			if(player.cocks[i].cockLength > player.cocks[temp2].cockLength && player.cocks[i].cockType != CockTypesEnum.TENTACLE) {
+				temp2 = i;
 			}
 		}
 		outputText("Your " + cockDescript(temp2) + " slams into his tailhole, spreading it wider as you thrust in and out of the opening, relishing in the feeling of the rough, yet lubricated insides of the minotaur.  ");
@@ -229,25 +229,25 @@ private function rapeMinotaurTentacle():void {
 	outputText("You stand before the defeated minotaur and your tentacle dick begins to lash back and forth quickly, showing your excitement.  You see the hardness of his dick, and decide to do something about it... for both of you.  ");
 	outputText("You come up behind him and wrap your tentacle dick around his huge member, squeezing him tightly at his dick's base pump even more blood to it.  Then you wrap yourself around his massive erection a few more times and you're ready. You jerk him up and down, varying the pace, place, and strength of your grip, milking his dick for all he is worth.  ");
 	outputText("The minotaur's balls begin to spasm, so you wrap the base of your tentacle around him tightly, preventing his " + monster.cockDescriptShort(0) + " from cumming, driving the minotaur mad with desire.  Your own " + cockDescript(x) + " delights in the feeling of the fur of his balls and the hardness of his " + monster.cockDescriptShort(0) + ".  ");
-	//Reset for upcoming stuff
-	temp = 0;
+
+	var shown:int = 0;
 	//if multi with pony dick!
 	if(player.horseCocks() == 1) {
     	outputText("But it isn't enough for you. You take your pony prick, and with your hands, pull his anus wide. The flare at your tip takes some effort to get in, but once it's inside, you ram right to the hilt, knocking the wind from the minotaur with a solid grunt.  ");
-		temp = 1;
+		shown = 1;
 	}
 	//if multi with dogdick
-	if(player.dogCocks() == 1 && temp != 1) {
-		temp = 1;
+	if(player.dogCocks() == 1 && shown != 1) {
+		shown = 1;
 		outputText("But it isn't enough for you. You take your bitch knotter, and with your hands, pull his anus wide. You slide in easily, right up to your knot, but he's too tight for you to slip that in.  ");
 	}
 	//If single leftover dick
-	if(player.cocks.length == 2 && temp != 1) {
-		temp = 1;
+	if(player.cocks.length == 2 && shown != 1) {
+		shown = 1;
 		outputText("But you avail yourself of his free rear end, to further your own delights. A quick push, and you're in, buried to your hilt.  ");
 	}
-	if(player.cocks.length > 2 && temp != 1) {
-		temp = 1;
+	if(player.cocks.length > 2 && shown != 1) {
+		shown = 1;
 		outputText("It's not enough! Your other dicks demand attention too! Fortunately, he has a large hole for you to abuse... you stuff as many of your " + multiCockDescript() + " as you can, the rest hanging underneath him, slapping against his sack. ");
 	}
 	if(player.clitLength > 6) {
@@ -255,7 +255,7 @@ private function rapeMinotaurTentacle():void {
 	}
 	//Free pussy!
 	if(player.vaginas.length > 0) {
-		temp = 2;
+		shown = 2;
 		outputText("You're a woman, and it's about time you got some pussy action too!  You slide your " + vaginaDescript(0) + " onto " + player.cockDescript(x) + "-wrapped minotaur-prick, further driving the beast mad with lust.  He plaintatively groans, struggling to get his dick free or to cum, you aren't quite sure.  ");
 		outputText("Eventually, the moment is right.  You smile as you feel a boiling heat building in your groin, surging through your " + multiCockDescript() + " in a tide of white-hot pleasure.  You groan and shiver, lost in the pleasure until you begin to calm down.  ");
 		if(player.cumQ() < 50) outputText("Your cock made quite a mess of things, and when you pull him out, your " + vaginaDescript(0) + " makes a wet sucking sound.  ");
@@ -264,7 +264,7 @@ private function rapeMinotaurTentacle():void {
 	}
 	//Free ass!
 	else {
-		temp = 2;
+		shown = 2;
 		outputText("You're feeling a little kinky so you step in front of him, offering him a little bit more, pushing yourself down onto his meaty dick.  You slowly push down, enjoying every inch as it travels down your " + assholeDescript() + ", the pre leaking from it acting as a lubricant as his tentacle-wrapped cock works its way inside you.  ");
 		//Ass cum
 		outputText("Eventually, the moment is right.  You smile as you feel a boiling heat building in your groin, surging through your " + multiCockDescript() + " in a tide of white-hot pleasure.  You groan and shiver, lost in the pleasure until you begin to calm down.  ");
@@ -273,7 +273,7 @@ private function rapeMinotaurTentacle():void {
 		if(player.cumQ() >= 400) outputText("Your cock is blasted free from his ass by the force of your ejaculation, splattering rivers of spoo over the ground.  A river of the stickiness pours from his violated asshole, sticking in the fur of his thighs.  ");
 	}
 	//Cum tiem
-	if(temp < 2) {
+	if(shown < 2) {
 		if(player.cumQ() < 25) outputText("Eventually, the moment is right... you position yourself accordingly to do what you have in mind.  Your needs are both at their peak, and release will be soon!  Once you're properly set up behind him, you shove his head forward, making him take both your, and his own, dick into his mouth. His tongue trying to shove you out, slipping in between his and your own dick pushes you over the edge, and you release his balls, causing both of your dicks to fill his mouth with cum.");
 		//Big Cum
 		if(player.cumQ() >= 25 && player.cumQ() < 250) outputText("Eventually, the moment is right... you position yourself accordingly to do what you have in mind. Your needs are both at their peak, and release will be soon! Once you're properly set up behind him, you shove his head forward, making him take both your and his own dick into his mouth. His tongue tries to shove you out, slipping in between his and your own dick.  It pushes you over the edge, and you release his balls, causing both of your dicks to flood his mouth with cum, which dribbles out around his lips, and splatters onto his chest.");
@@ -495,7 +495,6 @@ private function minotaurGetsRapedByHerms():void {
 	player.slimeFeed();
 	outputText("\n\nWith little care for the beast's feelings, you grip his cock with both hands, pulling it towards yourself, bending it up at an awkward angle that makes him give a trembling moo of pain.   You edge closer, your own [cock] bumping into his pucker, his obscene equine-like cock dripping that wonderfully scented spunk as you pull it to your " + vaginaDescript(0) + ", smearing it against your cunt-lips.\n\n");
 	outputText("With a twisted grin and a grunt of pain, you push forward, slipping his " + monster.cockDescriptShort(0) + " into your " + vaginaDescript(0) + " as your [cock] penetrates his tight but accommodating back-door.  You immediately feel a surge of his pre-cum squirt into you as you push forward, forcefully spearing yourself AND him at the same time.  The slick fluids spread warmth through your groin, making you feel light-headed and horny at the same time, spurring you to force the last of both cock-lengths into their respective holes.\n\n");
-	temp = player.vaginas[0].vaginalLooseness;
 	player.cuntChange(monster.cockArea(0), true);
 	if(player.vaginas[0].vaginalLooseness < VaginaClass.LOOSENESS_GAPING) outputText("A small suppressed part of your mind dimly registers that this should be fairly painful, but the lust and drug-like pre-cum wash that thought away with waves of pleasure.  ");
 	if(player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_GAPING) outputText("The intense feelings seem to grow more and more powerful as he stays inside you, his drug-like pre-cum making your " + vaginaDescript(0) + " tingle from the inside-out.");
@@ -551,7 +550,7 @@ public function getRapedByMinotaur(autoRape:Boolean = false):void {
 			cleanupAfterCombat();
 			return;
 		}
-		if(rand(2) == 0 && player.buttRating >= 15 && player.vaginalCapacity() < monster.biggestCockArea() && player.tone < 60) {
+		if(rand(2) == 0 && player.butt.type >= 15 && player.vaginalCapacity() < monster.biggestCockArea() && player.tone < 60) {
 			getMinoHawtDawged();
 			return;
 		}

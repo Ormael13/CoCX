@@ -102,8 +102,8 @@ public class Rangiku extends Monster
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = 93;
-			this.hipRating = Hips.RATING_CURVY+3;
-			this.buttRating = Butt.RATING_JIGGLY;
+			this.hips.type = Hips.RATING_CURVY + 3;
+			this.butt.type = Butt.RATING_JIGGLY;
 			this.skinTone = "light";
 			this.hairColor = "strawberry blonde";
 			this.hairLength = 39;
@@ -171,7 +171,7 @@ public class Rangiku extends Monster
 					//add(armors.CHBIKNI,1/20).
 					//add(weapons.SCIMITR,1/20).
 					add(consumables.SALAMFW,0.7);
-			this.armType = Arms.SALAMANDER;
+			this.arms.type = Arms.SALAMANDER;
 			this.lowerBody = LowerBody.SALAMANDER;
 			this.tailType = Tail.SALAMANDER;
 			this.tailRecharge = 0;

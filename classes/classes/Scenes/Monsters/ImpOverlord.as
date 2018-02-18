@@ -224,8 +224,8 @@ public class ImpOverlord extends Imp
 			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = rand(14) + 40;
-			this.hipRating = Hips.RATING_BOYISH;
-			this.buttRating = Butt.RATING_TIGHT;
+			this.hips.type = Hips.RATING_BOYISH;
+			this.butt.type = Butt.RATING_TIGHT;
 			this.lowerBody = LowerBody.HOOFED;
 			this.skinTone = "red";
 			initStrTouSpeInte(100, 95, 85, 71);
@@ -250,7 +250,7 @@ public class ImpOverlord extends Imp
 					add(consumables.SUCMILK,12).
 					add(weapons.SCIMITR, 1).
 					add(armors.BEEARMR, 1);
-			this.wingType = Wings.IMP;
+			this.wings.type = Wings.IMP;
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}

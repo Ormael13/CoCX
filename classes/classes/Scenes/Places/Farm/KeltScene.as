@@ -234,9 +234,9 @@ private function keltEagerlyGetNaked():void {
 	}
 	outputText("Despite his harsh comments, you can see the lust in Kelt's eyes, and are more than a little turned on by his derisive laughter.  His critique only becomes more lewd when you continue.  " + player.clothedOrNaked("As you remove the lower half of your clothes, stripping completely naked", "As you perform a pelvic thrust and slowly spin around") +", he eyes your ass and lets out a crude hoot of scornful delight, ");
 	//(Too small, Firm to Shapely:
-	if(player.buttRating < 6) outputText("\"<i>Well, someone works out!  Got a nice, tight little ass there! Probably a little too tight, huh?  Don't worry, you can tell me... do the mean old monsters hurt when they fuck that poor little ass of yours? HA!</i>\"\r\r");
+	if(player.butt.type < 6) outputText("\"<i>Well, someone works out!  Got a nice, tight little ass there! Probably a little too tight, huh?  Don't worry, you can tell me... do the mean old monsters hurt when they fuck that poor little ass of yours? HA!</i>\"\r\r");
 	//(Medium, Large to Heavy:
-	else if(player.buttRating < 13) outputText("\"<i>Hey, nice little cushion you got back here!  Do you get that from sitting around all day?  Nah, can't be that.  I'm sure you get more than a workout on this baby... of course, cock is no substitute for a little exercise, you know!</i>\"\r\r");
+	else if(player.butt.type < 13) outputText("\"<i>Hey, nice little cushion you got back here!  Do you get that from sitting around all day?  Nah, can't be that.  I'm sure you get more than a workout on this baby... of course, cock is no substitute for a little exercise, you know!</i>\"\r\r");
 	//(Big, Voluminous and beyond:
 	else outputText("\"<i>Now there's a rear end I could get behind!  For someone who claims to be a hero, you sure are built like a fucktoy!  With an ass like that, you remind me of my last lay... of course, she was a horse!</i>\"\r\r");
 	outputText("He slaps your ass with his open palm, getting in a good grope while he's at it.  His animalistic musk is in your nostrils, making you feel dizzy and more than a little aroused.  He grins widely, then walks around to your front, ");
@@ -290,9 +290,9 @@ private function keltReluctantlyGetNaked():void {
 	}
 	outputText("Even with his harsh comments, you can see the lust in Kelt's eyes.  He is obviously enjoying seeing your naked flesh.  Despite the embarrasment, you are determined to not let his remarks get to you.  His critique only becomes more lewd as you continue, though.  " + player.clothedOrNaked("As you remove the lower half of your clothes, stripping completely naked", "As you perform a pelvic thrust and slowly spin around") +", he eyes your ass and lets out a crude hoot of scornful delight, ");
 	//(Too small, Firm to Shapely:
-	if(player.buttRating < 6) outputText("\"<i>Well, someone works out!  Got a nice, tight little ass there! Probably a little too tight, huh?  Don't worry, you can tell me... do the mean old monsters hurt when they fuck that poor little ass of yours? HA!</i>\"\r\r");
+	if(player.butt.type < 6) outputText("\"<i>Well, someone works out!  Got a nice, tight little ass there! Probably a little too tight, huh?  Don't worry, you can tell me... do the mean old monsters hurt when they fuck that poor little ass of yours? HA!</i>\"\r\r");
 	//(Medium, Large to Heavy:
-	else if(player.buttRating < 13) outputText("\"<i>Hey, nice little cushion you got back here!  Do you get that from sitting around all day?  Nah, can't be that.  I'm sure you get more than a workout on this baby... of course, cock is no substitute for a little exercise, you know!</i>\"\r\r");
+	else if(player.butt.type < 13) outputText("\"<i>Hey, nice little cushion you got back here!  Do you get that from sitting around all day?  Nah, can't be that.  I'm sure you get more than a workout on this baby... of course, cock is no substitute for a little exercise, you know!</i>\"\r\r");
 	//(Big, Voluminous and beyond:
 	else outputText("\"<i>Now there's a rear end I could get behind!  For someone who claims to be a hero, you sure are built like a fucktoy!  With an ass like that, you remind me of my last lay... of course, she was a horse!</i>\"\r\r");
 	outputText("He slaps your " + buttDescript() + " with his open palm, getting in a good grope while he's at it.  His animalistic musk is in your nostrils, making you feel dizzy and somehow even a little aroused.  The centaur's obvious enjoyment of your body is a little flattering, even if his words are cruel.  He paces around to your front, a shameless grin on his face while he taunts you, ");
@@ -542,17 +542,27 @@ private function keltMainEncounter3():void {
 	//(Clothed)
 	if(!player.hasStatusEffect(StatusEffects.NakedOn)) {
 		outputText("Kelt is arrogant, crude, and all too often cruel as he mocks your attempts at archery again and again.  Despite all this, however, he obviously does know what he's doing.  You try to ignore his insults and lewd comments as best as you can and focus on the archery.  In the end, you feel you've learned a lot, though Kelt remains snide.\r\r");
-		temp = rand(4);
-		//(25% Chance: 
-		if(temp == 0) outputText("\"<i>Oh, yes.  Looks like you're shaping up to be a pretty accurate archer.  Just make sure you only fight blind giants.  You know, massive targets that have no chance to dodge.  You'll do fine.</i>\"\r\r");
-		//(25% Chance: 
-		if(temp == 1) outputText("\"<i>Ha!  You want to become an archer?  Here's a hint... stop thinking about sucking cock for two seconds and AIM.</i>\"\r\r");
-		//(25% Chance: 
-		if(temp == 2) outputText("\"<i>See the red dot, in the middle of the target?  Imagine that's your ass, and the arrow is a big, fat, minotaur cock.  That should help you hit the target.</i>\"\r\r");
-		//(25% Chance: 
-		if(temp == 3) {
-			if(player.race() != "centaur") outputText("\"<i>If you were a centaur, I'd recommend suicide.  Since you're a [race], I'd say your best option is to fuck off.</i>\"\r\r");
-			else outputText("\"<i>As a centaur, I'd recommend suicide.  Really, it's that or man the fuck up.</i>\"\r\r");
+		switch (rand(4)) {
+			case 0:
+				outputText("\"<i>Oh, yes.  Looks like you're shaping up to be a pretty accurate archer.  Just make sure you only fight blind giants.  You know, massive targets that have no chance to dodge.  You'll do fine.</i>\"\r\r");
+				break;
+
+			case 1:
+				outputText("\"<i>Ha!  You want to become an archer?  Here's a hint... stop thinking about sucking cock for two seconds and AIM.</i>\"\r\r");
+				break;
+
+			case 2:
+				outputText("\"<i>See the red dot, in the middle of the target?  Imagine that's your ass, and the arrow is a big, fat, minotaur cock.  That should help you hit the target.</i>\"\r\r");
+				break;
+
+			case 3:
+				if (player.race() != "centaur") {
+					outputText("\"<i>If you were a centaur, I'd recommend suicide.  Since you're a [race], I'd say your best option is to fuck off.</i>\"\r\r");
+				} else {
+					outputText("\"<i>As a centaur, I'd recommend suicide.  Really, it's that or man the fuck up.</i>\"\r\r");
+				}
+
+				break;
 		}
 		//player.addStatusValue(StatusEffects.Kelt,1,5+rand(4));
 		if (player.statusEffectv1(StatusEffects.Kelt) < 90) bowSkill(5 + rand(4));
@@ -940,7 +950,7 @@ private function fuckKeltsShitUp():void {
 	spriteSelect(35);
 	clearOutput();
 	//If naga folks
-	if (player.faceType == Face.SNAKE_FANGS && player.tongueType == Tongue.SNAKE && player.lowerBody == LowerBody.NAGA) {
+	if (player.faceType == Face.SNAKE_FANGS && player.tongue.type == Tongue.SNAKE && player.lowerBody == LowerBody.NAGA) {
 		outputText(images.showImage("kelt-farm-naga-subkelt"));
 		outputText("Feigning a coy smile, you lick your lips with your forked tongue and beckon Kelt towards you.  The foolish stud trots over to you saying \"<i>That's more like it, worm.  Maybe when I'm done with your mouth, I'll let you have my dick in your ass, too.</i>\"  His sheath ripples and swells as his thick member begins to slowly droop out from the folded skin, hanging towards the ground.  It continues growing as he comes closer and closer, until it finally begins to grow rigid and arc towards your face.  You feel a moment of self-doubt as you breathe in his wonderful scent - wouldn't it be better, safer to just give in?  No, says a cold, reptile voice in your head.  You are the predator here and he, arrogant prey, has stepped into your trap.  Make him pay.  Make him know where his place in the world is.\r\r");
 

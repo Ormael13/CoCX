@@ -287,8 +287,8 @@ public class CaiLin extends Monster
 			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
-			this.hipRating = Hips.RATING_AMPLE;//hip size - ostatecznie size 15 (używać eggs jak Amily)
-			this.buttRating = Butt.RATING_NOTICEABLE;//butt size -  ostatecznie size 12 (używać eggs jak Amily)
+			this.hips.type = Hips.RATING_AMPLE;//hip size - ostatecznie size 15 (używać eggs jak Amily)
+			this.butt.type = Butt.RATING_NOTICEABLE;//butt size -  ostatecznie size 12 (używać eggs jak Amily)
 			this.lowerBody = LowerBody.NAGA;
 			this.skin.growCoat(Skin.SCALES,{color:"seven-colored"},Skin.COVERAGE_COMPLETE);
 			this.hairColor = "seven-colored";

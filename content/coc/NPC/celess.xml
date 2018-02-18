@@ -19,7 +19,7 @@
 				You are hardly surprised, already knowing how short most pregnancies are in Mareth.
 				<if test="player.inte gt 50">Maybe it’s due to how time and space distort in Mareth?</if>
 				Still, you had hoped this phase would have lasted at least a little bit longer.
-				<if test="isCorrupt">
+				<if test="$isCorrupt">
 					Your daughter wakes up as well, opening her beautiful crimson eyes to the world.
 					She, unlike her sire, has twilight black hair and fur.
 					<else>
@@ -27,7 +27,7 @@
 						She, like her sire, has pure white hair and fur as befits an unicorn. 
 					</else>
 				</if>
-				You expected her to have grown her horn by now, but strangely enough, her forehead is still clear, perhaps unicorns grow their horns when they grow older?
+				You expected her to have grown her horns by now, but strangely enough, her forehead is still clear, perhaps unicorns grow their horns when they grow older?
 				[if(intelligence> 50)Does make sense, otherwise they would cause some nasty internal damage during birth.]
 				
 				<i>“Mom, is something wrong?”</i>
@@ -37,7 +37,7 @@
 			</text>
 		</lib>
 		<text name="playTime">
-			<if test="isCorrupt">
+			<if test="$isCorrupt">
 				<output>$name</output> seems somewhat bored, and it occurs to you that being a mother comes before being the Champion.
 				You decide to bring your girl on an excursion, but the pair of you stumble upon a gang of imps.
 				You defeat them all to keep your daughter safe, but as you prepare to leave, you’re suddenly hit by a splash on your back.
@@ -79,7 +79,7 @@
 			You almost panic for a moment, before calming down and deciding to go look for her. 
 			When you finally find her by the stream, she’s holding her forehead, visibly in pain.
 			
-			<if test="isCorrupt">
+			<if test="$isCorrupt">
 				<i>“Ahhhh so good… this feels way too good!…Mom please look!”</i>
 				
 				Well, looks like it wasn’t pain, not at all. You watch spellbound as a duo of parallel horns, symbols of her corruption, push out of <output>$name</output>’s forehead. 
@@ -93,16 +93,16 @@
 				<else>
 					<i>“Oww! It hurts!...Mom… don’t look!”</i>
 					
-					You see your daughter is holding a large horn on her forehead. It seems she finally reached adulthood, her breasts inflating to E-cups only confirms your suspicion. She seems to be in pain 
+					You see your daughter is holding a large horns on her forehead. It seems she finally reached adulthood, her breasts inflating to E-cups only confirms your suspicion. She seems to be in pain
 					<if test="silly()">, kinda obvious, what with her outright telling you less than two seconds ago,</if>
-					and it’s your duty as her mother to do all you can to help her. You hug her, trying your best to comfort and distract her from the pain as the horn pushes forward, eventually growing to a length just shy of her sire’s own horn.
+					and it’s your duty as her mother to do all you can to help her. You hug her, trying your best to comfort and distract her from the pain as the horns pushes forward, eventually growing to a length just shy of her sire’s own horns.
 					
 					<i>“Mom… It’s terrible! I've grown this weird bony stump on my head, what do I do?”</i>
 					
-					You explain to your daughter that it's normal for unicorns to have a horn on their forehead and that you love her all the same, horn or not.
+					You explain to your daughter that it's normal for unicorns to have a horns on their forehead and that you love her all the same, horns or not.
 					She calms down and hugs you warmly like she always does. This time, however, you can’t help but notice the large horsecock between her leg rising to full mast.
 					Noticing where you’re looking, she blushes and tries to hide it from you, failing miserably due to being unable to reach it with her hands. All she achieves is looking somewhat silly.
-					You tell her it’s alright , that you’re here for her and that, as you already said, you love her, horn or no horn, no matter what kind. This manages to get a chuckle out of her, easing some of her worry, but not all of it.
+					You tell her it’s alright , that you’re here for her and that, as you already said, you love her, horns or no horns, no matter what kind. This manages to get a chuckle out of her, easing some of her worry, but not all of it.
 					You sigh, she’s your daughter, and no matter the problems she might have, she can always come to you and you will gladly go to any length to help her with it. No exceptions.. 
 					
 					<i>“Mom, I’m a little scared…why did it get so big?! How do I get rid of this huge thing between my legs?”</i>
@@ -118,7 +118,7 @@
 			You lick the flared tip to get a taste, satisfied with it you then proceed to put the thing in your mouth proper. <output>$name</output> moans as her horse dong throbs in appreciation for the attention you’re giving it.
 			You suck on her cock until she finally orgasms, the sweet cum flooding your throat.
 			
-			<if test="isCorrupt">
+			<if test="$isCorrupt">
 				Weirdly enough, you feel something change in you as the corrupted cum reaches your stomach. 
 				<else>
 					Her cum somehow makes your mind feel clearer and sharper, purifying some of the darker thoughts plaguing you. <output>$name</output>’s horsecock finally shrinks back to its sheath, but she’s still blushing like a tomato.
@@ -168,11 +168,11 @@
 				<dynStats cor="-1"/>
 			</text>
 			<text name="pureCorruption">
-				<output>$name</output> suddenly starts moaning as she holds her horn with both hands.
+				<output>$name</output> suddenly starts moaning as she holds her horns with both hands.
 				
 				<i>“Ahhhh so good… this feels way too good!…Mom, please look!”</i>
 				
-				You watch spellbound as her horn suddenly fissures by the center, dividing into a duo of parallel horns, symbol of her newfound corruption.
+				You watch spellbound as her horns suddenly fissures by the center, dividing into a duo of parallel horns, symbol of her newfound corruption.
 				Her formerly pure white fur starts to darken to pitch black as her eyes’ irises lose their azure blue, changing shade towards a fiendish red. 
 				She holds her horns like a pair of dicks, playing her hands along their length as if trying to masturbate them. 
 				Speaking of which, her 25 inch long horse cock is now fully erect and throbbing, almost as if an invisible hand was toying with it, a thick flow of precum steadily seeping out already. 
@@ -229,7 +229,7 @@
 			<text name="suckHerOff">
 				It's been a while since you last had a taste of her, thus you decide to give your daughter a sweet, loving blowjob! <output>$name</output> coos, delighted at the proposal.
 				
-				<i>“Oh… so mommy wants a taste of my delicious lower horn? Please, mom, feel free to indulge yourself.”</i>
+				<i>“Oh… so mommy wants a taste of my delicious lower horns? Please, mom, feel free to indulge yourself.”</i>
 				
 				You approach your girl’s massive tool and give it a few experimental strokes, making <output>$name</output> gasp in surprise.
 				You lick the flared tip to get a taste.
@@ -279,7 +279,7 @@
 		</text>
 		<text name="appearance">
 			Your daughter <output>$name</output> is a 
-			<if test="isCorrupt">
+			<if test="$isCorrupt">
 				Bicorn with 
 				Abyssal black fur. 
 				Her red eyes shine with a glimmer of sinister mischief and depravity, you sometime ponder whether or not she is the spawn of a demon rather than you.
@@ -296,7 +296,7 @@
 			
 			<output>$name</output> inherited a massive horsecock from her father. Easily 20 inch long, this beast can apparently, if the tales are true, pierce through anything.
 			
-			<if test="isCorrupt">
+			<if test="$isCorrupt">
 				She regularly use it to fuck imps and goblins alike when she is horny.
 				
 				<else>
@@ -305,7 +305,7 @@
 				</else>
 			</if>
 			As all centauress <output>$name</output> has a horse vagina behind her hindquarter.
-			<if test="isCorrupt">
+			<if test="$isCorrupt">
 				Knowing her well she likely already took enough cock down that way to beat a succubus at the art of fucking. Your lascivious daughter is far from virgin.
 				<else>
 					You pray that she will not lose her virginity to some corrupt creature. 
@@ -320,15 +320,15 @@
 				<i>“Certainly mother! Just leave the item on the ground and let me get to work.”</i>
 				
 				<output>$name</output> trots over to the item and starts channeling power. 
-				<if test="isCorrupt">
+				<if test="$isCorrupt">
 					You see her twin horns blazing with a dark purple aura of corruption as her horse cock goes erect. 
 					She start to massage her breasts then moans, her eyes rolling out as she spontaneously orgasms, a river of black cum flooding out of her flare right unto the item.
 					You see the armament transforming as fluid corruption seeps into the material, infusing it with unholy power. 
 					
 					She sighs in relief, shakes out the few last drops of corrupt cum, then steps away, leaving you to examine the fruit of her work.
 					<else>
-						Her horn starts to glow with a white halo of purity. 
-						She cradles the item within her hands like a newborn baby, then finally touches it with her horn, transferring the light into it.
+						Her horns starts to glow with a white halo of purity.
+						She cradles the item within her hands like a newborn baby, then finally touches it with her horns, transferring the light into it.
 						A miracle happens, as the item changes shape and starts to glow with holy power.
 						
 						Finally done, she comes back to you and solemnly deposits the blessed armament in your hand.
@@ -352,7 +352,7 @@
 					The woman has silvery white hair flowing around her perfect visage; and her sizable E cup would make most women back in Ingnam green with envy, then again, most things even somewhat female here in Mareth would cause the same reaction.
 					The comparison to a human, however, ends there.
 					Below her waist is the large lower-body of an immaculate white horse.
-					Her ears are covered with silvery white fur and while at first you mistook her for just a centaur warrior, the spear-like spiraling horn on her forehead warns you that there might be more to her.
+					Her ears are covered with silvery white fur and while at first you mistook her for just a centaur warrior, the spear-like spiraling horns on her forehead warns you that there might be more to her.
 
 					<i>“Just leave and I won’t have to attack you. I swear on my honor that I won’t give chase should you leave peacefully. This is for your own good.”</i>
 				</text>
@@ -427,7 +427,7 @@
 					</if>
 				</if>
 
-				<i>“A unicorn ‘horn’ can pierce through anything, just relax it will be easier for you.”</i>
+				<i>“A unicorn ‘horns’ can pierce through anything, just relax it will be easier for you.”</i>
 				<if test="silly() and playre.inte gt 70">
 					Part of you is mildly surprised, and grateful, no Demon has realized this potential application of spatial magic, otherwise they would have pushed to develop it until they learnt how to open portals to other realms by ramming a dick against space-time until they fucked it into submission.
 				</if>
@@ -459,7 +459,7 @@
 						You smirk seductively giving her a fair view of your virgin equine pussy as you tell the unicorn that for your first time, you might as well take a stallion.
 						Your pussy lips are already wet in anticipation of her maleness.\n
 					</text>
-					<text name="intro"><i>“Well, since you agreed, I will let you in on a little secret. I won’t need to take your virginity. Rather, my ‘horn’ will pierce right through it.”\n\n</i></text>
+					<text name="intro"><i>“Well, since you agreed, I will let you in on a little secret. I won’t need to take your virginity. Rather, my ‘horns’ will pierce right through it.”\n\n</i></text>
 					<text name="taurSex">
 						She trots to you, her massive horsemeat hardening as she prepares to mount your [pussy]. She take a whiff of your [pussy] going so far as to give it a lick or two just so she can taste it. Satisfied, she gets on you and you can feel the tip of her flare making contact with your vaginal lips.
 

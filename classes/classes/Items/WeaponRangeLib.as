@@ -17,6 +17,8 @@ package classes.Items
 		public const ARTEMIS:Artemis = new Artemis();
 		public const BLUNDER:WeaponRange = new WeaponRange("Blunder", "Blunderbuss", "blunderbuss rifle", "a blunderbuss rifle", "shot", 16, 800, "This is a blunderbuss rifle. It's effective at short range but poor at long range.", "Rifle");
 		public const BOWGUID:WeaponRange = new WeaponRange("BowGuid", "BowGuided", "Guided bow", "a Guided bow", "shot", 1, 400, "A bow ornemented with a small carving representing a target. It seems to never miss no mather how poorly you aim.", "Bow");
+		public const BOWHODR:WeaponRangeWithPerk = new WeaponRangeWithPerk("BowHodr", "BowHodr", "Hodr's bow", "a Hodr's bow", "shot", 22, 2200, "Once was a frost giant wielding this bow and boasting to be the best hunter. To punish him Fera cursed him and his weapon rendering him permanently blind. Regardless, arrows drawn by this bow seems to seek out the eyes of its target.", "Bow",
+				PerkLib.Accuracy2,10,0,0,0);
 		public const BOWHUNT:WeaponRange = new WeaponRange("BowHunt", "BowHunt", "hunter bow", "a hunter bow", "shot", 10, 500, "This is a hunter bow. It allow to attain better accuracy of shooted arrows than long bow at the cost of slight lower damage.", "Bow");
 		public const BOWKELT:WeaponRangeWithPerk = new WeaponRangeWithPerk("BowTain", "BowTain", "tainted bow", "a tainted bow", "shot", 30, 1500, "This bow is tainted by corruption in the past. It's quite effective at both short and long range. It balance helps uset to increase shooting accuracy quite a bit compared to other bows.", "Bow",
 				PerkLib.Accuracy1,10,0,0,0);
@@ -35,7 +37,7 @@ package classes.Items
 				PerkLib.Accuracy1,40,0,0,0);
 		public const HUXBOW_:WeaponRangeWithPerk = new WeaponRangeWithPerk("HuXbow", "HuntXbow", "hunter crossbow", "a hunter crossbow", "shot", 15, 750, "This is a hunter crossbow. Slight better one with better accuracy and bolts penetrative power than light crossbow.", "Crossbow",
 				PerkLib.Accuracy1,20,0,0,0);
-		public const IVIARG_:WeaponRangeWithPerk = new WeaponRangeWithPerk("IvIArq", "Iv.I.Arq", "Ivory inlaid arquebus", "a Ivory inlaid arquebus", "shot", 28, 1400, "Gifted with a great range and accuracy, this arquebus is probably one of the best firearms than you can find on this land. It’s butt and stock have a gold trim and inlaid ivory in a pattern of wreath leaves. A layer of gold and ivory also runs through the barrel, giving the rifle a majestic look without compromising its functionality.", "Rifle",
+		public const IVIARG_:WeaponRangeWithPerk = new WeaponRangeWithPerk("IvIArq", "Iv.I.Arq", "ivory inlaid arquebus", "an ivory inlaid arquebus", "shot", 28, 1400, "Gifted with a superb range and accuracy, this arquebus is truly a piece of art. Its stock has a gold trim and is inlaid with ivory in a pattern of wreath leaves. A layer of gold and ivory also runs through the barrel, giving the rifle a majestic look without compromising its functionality.", "Rifle",
 				PerkLib.Accuracy1,40,0,0,0);
 		public const KSLHARP:KrakenSlayerHarpoons = new KrakenSlayerHarpoons();
 		public const LCROSBW:WeaponRangeWithPerk = new WeaponRangeWithPerk("LCrosbw", "LCrossbow", "light crossbow", "a light crossbow", "shot", 5, 250, "This is a light crossbow. A most basic one that fires bolts at your enemies.", "Crossbow",

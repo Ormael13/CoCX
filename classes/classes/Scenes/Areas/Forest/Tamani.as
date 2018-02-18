@@ -119,7 +119,7 @@ public class Tamani extends Goblin
 				else SceneLib.forest.tamaniScene.tamaniSexLetHer();
 				} else {
 					outputText("You give into your lusts and masturbate, but Tamani doesn't seem to care.  She kicks and punches you over and over, screaming, \"<i>You dummy, why'd you get rid of the fun parts?</i>\"", true);
-					SceneLib.combat.takePhysDamage(10000);
+					player.takePhysDamage(10000);
 					SceneLib.combat.cleanupAfterCombatImpl();
 				}
 			}
@@ -140,8 +140,8 @@ public class Tamani extends Goblin
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,40,0,0,0);
 			this.tallness = 40;
-			this.hipRating = Hips.RATING_AMPLE+2;
-			this.buttRating = Butt.RATING_LARGE;
+			this.hips.type = Hips.RATING_AMPLE + 2;
+			this.butt.type = Butt.RATING_LARGE;
 			this.skinTone = "greenish gray";
 			this.hairColor = "pink and black";
 			this.hairLength = 16;

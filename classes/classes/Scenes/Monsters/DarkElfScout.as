@@ -18,7 +18,7 @@ public class DarkElfScout extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.SoulArena)) {
+			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) {
 				golems.gaunletchallange1postfight();
 			}
 			else darkelf.wonWithDarkElf();
@@ -58,16 +58,16 @@ public class DarkElfScout extends Monster
 				else if (this.weaponRangeAttack >= 151 && this.weaponRangeAttack < 201) damage *= (4.75 + ((this.weaponRangeAttack - 150) * 0.015));
 				else damage *= (5.5 + ((this.weaponRangeAttack - 200) * 0.01));
 				damage = Math.round(damage);
-				outputText("An arrow hit you for ");
+				outputText("An arrow hits you for ");
 				player.takePhysDamage(damage, true);
-				outputText(" damage. It was poisoned you feel your strength failing you!\n\n");
+				outputText(" damage. It was poisoned! You feel your strength failing you!\n\n");
 				player.addCombatBuff('spe', -3);
 			}
 		}
 		
 		public function AnkleShot():void
 		{
-			outputText("The dark skinned elf shot you through the ankle and gains some distance. Crippled like you are, it will be annoying to catch her, if not impossible. Better use ranged attack until you recover mobility.");
+			outputText("The dark skinned elf shoot you through the ankle and takes some distance. Crippled like you are, it will be annoying to catch her--if not impossible. Better use ranged attacks until you recover mobility.");
 			player.createStatusEffect(StatusEffects.Sealed2, 4, 0, 0, 0);
 		}
 		
@@ -78,7 +78,7 @@ public class DarkElfScout extends Monster
 				player.addStatusValue(StatusEffects.WindWall,2,-1);
 			}
 			else {
-				outputText("The dark elf makes a wicked smirk before letting out an arrow straight into your wing. You fall down, unable to fly and crashing to the ground. ");
+				outputText("The dark elf smirks wickedly before shooting an arrow straight into your wing. You fall, unable to fly, and crash into the ground. ");
 				player.removeStatusEffect(StatusEffects.Flying);
 				var damage:Number = 0;
 				damage += this.str * 1.5;
@@ -121,8 +121,8 @@ public class DarkElfScout extends Monster
 			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
 			this.ass.analWetness = AssClass.WETNESS_SLIME_DROOLING;
 			this.tallness = 72;
-			this.hipRating = Hips.RATING_CURVY;
-			this.buttRating = Butt.RATING_LARGE+1;
+			this.hips.type = Hips.RATING_CURVY;
+			this.butt.type = Butt.RATING_LARGE + 1;
 			this.lowerBody = LowerBody.ELF;
 			this.skinTone = "dark";
 			this.hairColor = "silver";

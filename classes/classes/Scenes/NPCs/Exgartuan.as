@@ -223,21 +223,21 @@ private function drinkFountainEndowment():void {
 	if(rand(3) == 0 && player.biggestTitSize() > 1) {
 		outputText("\n\nYour [allbreasts] balloon, each growing about four bra-sizes larger... they feel so... jiggly and sensitive.  Even your nipples seem to grow with them!  Your [armor] feels tighter than ever!");
 		player.nippleLength += .3;
-		temp = player.breastRows.length;
-		while(temp > 0) {
-			temp--;
-			player.breastRows[temp].breastRating += 4;
+		var i:int = player.breastRows.length;
+		while(i > 0) {
+			i--;
+			player.breastRows[i].breastRating += 4;
 		}
 		changed = true;
 	}
 	//(+Big dick)
 	if(rand(3) == 0 && player.cockTotal() > 0) {
 		outputText("\n\nYour [cocks] feels tighter inside your [armor], even when flaccid.  You shudder and realize you've probably gained more than a few inches in total length, and who knows how your thickness has changed.");
-		temp = player.cocks.length;
-		while(temp > 0) {
-			temp--;
-			player.cocks[temp].cockLength += 3;
-			player.cocks[temp].cockThickness += .3;
+		i = player.cocks.length;
+		while(i > 0) {
+			i--;
+			player.cocks[i].cockLength += 3;
+			player.cocks[i].cockThickness += .3;
 		}
 		changed = true;
 	}
@@ -282,10 +282,10 @@ private function exgartuanInfestDick():void {
 }
 private function exgartuanInfestTits():void {
 	outputText("\n\nYour [allbreasts] jiggle as they grow MUCH larger, turning into obscene mounds that shake with every motion of your body.  All your " + nippleDescript(0) + "s puff up with them, gaining volume to match their new, larger homes.  They feel hot and ache to be touched.");
-	temp = player.breastRows.length;
-	while(temp > 0) {
-		temp--;
-		player.breastRows[temp].breastRating += 7;
+	var i:int = player.breastRows.length;
+	while(i > 0) {
+		i--;
+		player.breastRows[i].breastRating += 7;
 	}
 	outputText("\n\nA voice suddenly splits the air, demanding, \"<i>Touch me mortal, or be stained!</i>\"");
 	outputText("\n\nYou look about in confusion, trying to locate the source of the voice.");
@@ -928,24 +928,24 @@ private function exgartuanSleepSurprise():void {
 		outputText("If someone were watching");
 		if(monk >= 5 && !player.hasStatusEffect(StatusEffects.NoJojo) && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) outputText(", and judging by Jojo's high pitched whines, he certainly is,");
 		outputText(" they'd see dick-flesh bulging with a heavy load as it's pumped into your lips.  The fully-inflated cum-tube distends your mouth, stretching your jaw painfully, and dumps its creamy cargo into its willing receptacle.  Your belly burbles as it adjusts to the ");
-		temp = player.cumQ();
-		if(temp < 50) outputText("surprisingly light");
-		else if(temp < 150) outputText("sticky");
-		else if(temp < 300) outputText("large, thick");
-		else if(temp < 800) outputText("long, thick blast of your");
+		var cumQ:Number = player.cumQ();
+		if(cumQ < 50) outputText("surprisingly light");
+		else if(cumQ < 150) outputText("sticky");
+		else if(cumQ < 300) outputText("large, thick");
+		else if(cumQ < 800) outputText("long, thick blast of your");
 		else outputText("immensely voluminous");
 		outputText(" deposit.  Quiet, barely audible squishes hang in the air around you as your gut is ");
-		if(temp < 500) outputText("pumped into");
+		if(cumQ < 500) outputText("pumped into");
 		else outputText("pumped full");
 		outputText(" with obscene, liquid sloshing.  Your " + hipDescript() + " and " + assDescript() + " rise off the ground with your back as your muscles lock");
 		if(player.balls > 0) outputText(" and your [balls] pull tight against your groin from the effort");
 		outputText(".");
-		temp = player.cumQ();
-		if(temp > 500) {
+		cumQ = player.cumQ();
+		if(cumQ > 500) {
 			outputText("  A gradual curve quickly rises on your belly");
-			if(temp > 1500) outputText(", but it doesn't stop there.  It keeps growing until you look full and pregnant.");
+			if(cumQ > 1500) outputText(", but it doesn't stop there.  It keeps growing until you look full and pregnant.");
 			else outputText(".");
-			if(temp > 2500) outputText("  Back-pressure blasts your [cock] free from your imprisoning oral cavity along with a fountain of seed while you weakly try to cough out enough spooge to breathe.");
+			if(cumQ > 2500) outputText("  Back-pressure blasts your [cock] free from your imprisoning oral cavity along with a fountain of seed while you weakly try to cough out enough spooge to breathe.");
 		}
 		outputText("\n\n");
 		

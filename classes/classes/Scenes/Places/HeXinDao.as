@@ -12,6 +12,9 @@ import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.Scenes.Areas.Forest.TentacleBeast;
+import classes.Scenes.Areas.Mountain.HellHound;
+import classes.Scenes.Areas.Swamp.CorruptedDrider;
+import classes.Scenes.Dungeons.HiddenCave.BossGolems;
 import classes.Scenes.Places.HeXinDao.*;
 import classes.Scenes.Monsters.*;
 import classes.Scenes.NPCs.Jeniffer;
@@ -28,6 +31,7 @@ public class HeXinDao extends BaseContent
 
     public var ignisarenaseer:IgnisArenaSeerScene = new IgnisArenaSeerScene();
     public var chichiScene:ChiChiFollower = new ChiChiFollower();
+	public var journeytotheeast:JourneyToTheEast = new JourneyToTheEast();
     //public var TFmerch:MogaHen = new MogaHen();
 
     public function HeXinDao()
@@ -52,7 +56,7 @@ public class HeXinDao extends BaseContent
         addButton(2, "SoulEquip", soulequipmentmerchant);
         addButton(3, "SoulArrow", soularrowmerchant);
         //addButton(5, "", ); siedziba lokalnej grupy zrzeszającej soul cultivators - PC aby potem pojsc dalej bedzie musial dolaczyc tutaj (pomyslec nad wiarygodnym sposobem zmuszenia go do tego - moze jakies ciekawe itemy/inne rzeczy dla czlonkow beda a miejsce sie zwolni jak wywala tak goblinke tworzynie golemow, ktora potem oczywiscie wcisnie sie do obozu PC aby w spokoju rozwijac sie w tworzeniu golemow itp.)
-        //addButton(6, "", ); jakies miejsce aby zdobywac gems lub/i EXP - moze jakies zadania tu zlecane czy cos w tym stylu?
+        addButton(6, "JourTTEast", journeytotheeast.enteringInn);
         addButton(7, "Arena", soularena);
         addButton(8, "Restaurant", restaurantShiraOfTheEast);
         if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 20 && flags[kFLAGS.CHI_CHI_FOLLOWER] < 2) addButton(13, "Chi Chi", chichiScene.MeetingChiChiInHeXinDao);
@@ -208,7 +212,7 @@ public class HeXinDao extends BaseContent
             addButton(5, "LargePp", buyItem,consumables.LARGEPP,sayLine(consumables.LARGEPP,"dog"),onBuyString).hint("Buy an overly large canine pepper.");
             addButton(6, "ChillyP", buyItem,consumables.CHILLYP,sayLine(consumables.CHILLYP,"winter wolf"),onBuyString).hint("Buy a Chilly pepper.");
             addButton(7, "MaraFruit", buyItem,consumables.MARAFRU,sayLine(consumables.MARAFRU,"plant"),onBuyString).hint("Buy an apple-shaped fruit.");
-            //addButton(8, "B.Gossr", BGossr).hint("Buy .");
+            addButton(8, "SkySeed", buyItem,consumables.SKYSEED,sayLine(consumables.SKYSEED,"avian"),onBuyString).hint("Buy a skyborn seed.");
             //addButton(9, "B.Gossr", BGossr).hint("Buy .");
             addButton(14, "Back", mogahenmerchant);
             statScreenRefresh();
@@ -310,7 +314,7 @@ public class HeXinDao extends BaseContent
         menu();
         addButton(1, "Shelf 1", soulequipmentshelf1);
         addButton(2, "Shelf 2", soulequipmentshelf2);
-        //	addButton(3, "Shelf 3", soulequipmentshelf3);//armors
+        addButton(3, "Shelf 3", soulequipmentshelf3);//armors and consumable
         //addButton(9, weapons.ERIBBON.shortName, weaponBuy, weapons.ERIBBON);//czy bedzie tu jako do sprzedaży czy jako nagroda za quest lub drop z mobka/bossa?
         //addButton(7, weapons.MACE.shortName, weaponBuy, weapons.MACE);//awl - wymagać bedzie możliwość lewitacji czy coś od PC aby to używać
         //addButton(8, weapons.MACE.shortName, weaponBuy, weapons.MACE);//bow made for soul cultivator xD
@@ -321,13 +325,16 @@ public class HeXinDao extends BaseContent
     }
     public function soulequipmentshelf1():void {
         menu();
-        addButton(0, consumables.W_STICK.shortName, weaponBuy, consumables.W_STICK);
-        addButton(1, consumables.BANGB_M.shortName, weaponBuy, consumables.BANGB_M);
-        addButton(5, weapons.TRASAXE.shortName, weaponBuy, weapons.TRASAXE);
-        addButton(6, weaponsrange.TRSXBOW.shortName, weaponBuy, weaponsrange.TRSXBOW);
-        addButton(7, shields.TRASBUC.shortName, weaponBuy, shields.TRASBUC);
-        addButton(8, armors.TRASARM.shortName, weaponBuy, armors.TRASARM);
-        addButton(10, weapons.W_STAFF.shortName, weaponBuy, weapons.W_STAFF);
+        addButton(0, weapons.TRASAXE.shortName, weaponBuy, weapons.TRASAXE);
+        addButton(1, weaponsrange.TRSXBOW.shortName, weaponBuy, weaponsrange.TRSXBOW);
+        addButton(2, shields.TRASBUC.shortName, weaponBuy, shields.TRASBUC);
+        addButton(3, armors.TRASARM.shortName, weaponBuy, armors.TRASARM);
+        addButton(5, weapons.W_STAFF.shortName, weaponBuy, weapons.W_STAFF);
+        addButton(6, weapons.GUANDAO.shortName, weaponBuy, weapons.GUANDAO);
+        addButton(7, weapons.HSWORDS.shortName, weaponBuy, weapons.HSWORDS);
+		addButton(8, weapons.SNAKESW.shortName, weaponBuy, weapons.SNAKESW);
+		//Changdao
+        addButton(10, weapons.FLYWHIS.shortName, weaponBuy, weapons.FLYWHIS);
         addButton(11, shields.MABRACE.shortName, weaponBuy, shields.MABRACE);
         addButton(14, "Back", soulequipmentmerchant);
     }
@@ -340,11 +347,12 @@ public class HeXinDao extends BaseContent
         addButton(4, weapons.SCLAYMO.shortName, weaponBuy, weapons.SCLAYMO);
         addButton(5, weapons.RIBBON.shortName, weaponBuy, weapons.RIBBON);
         addButton(6, weapons.S_GAUNT.shortName, weaponBuy, weapons.S_GAUNT);
-        addButton(7, weapons.FRTAXE.shortName, weaponBuy, weapons.FRTAXE);
+        addButton(7, weapons.CLAWS.shortName, weaponBuy, weapons.CLAWS);
         addButton(8, weapons.TCLAYMO.shortName, weaponBuy, weapons.TCLAYMO);
         addButton(9, weapons.ACLAYMO.shortName, weaponBuy, weapons.ACLAYMO);
         addButton(10, weapons.WHIP.shortName, weaponBuy, weapons.WHIP);
         addButton(11, weapons.PWHIP.shortName, weaponBuy, weapons.PWHIP);
+        addButton(12, weapons.FRTAXE.shortName, weaponBuy, weapons.FRTAXE);
         addButton(14, "Back", soulequipmentmerchant);
     }
     public function soulequipmentshelf3():void {
@@ -353,6 +361,8 @@ public class HeXinDao extends BaseContent
         //addButton(2, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic light armor made of soulmetal
         //addButton(0, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic heavy armor made of soulmetal
         //addButton(1, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic armor made of soulmetal that works with unhindered perk xD czyli coś ala bikini lub ogólnie tylko underwear z fragmentami zbroi lewitującymi wokół postaci i tylko w wypadku ataku wroga przesuwające sie aby przyjąć atak
+        addButton(10, consumables.W_STICK.shortName, weaponBuy, consumables.W_STICK);
+        addButton(11, consumables.BANGB_M.shortName, weaponBuy, consumables.BANGB_M);
         addButton(14, "Back", soulequipmentmerchant);
     }
 
@@ -474,7 +484,7 @@ public function soularena():void {
         outputText("Picking the one in the middle prepared for challanges you enter there and looking around checking who if there is currently anyone up for a challange.");
         menu();
         addButton(0, "Gaunlet 1", gaunletchallange1fight1).hint("Fight 3 diff enemies one after another.");
-        //if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] == 1) addButton(1, "Gaunlet 2", gaunletchallange2).hint("Fight 4 diff enemies one after another.");
+        //if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] == 1) addButton(1, "Gaunlet 2", gaunletchallange2fight1).hint("Fight 4 diff enemies one after another.");
         //addButton(2, "Gaunlet 3", gaunletchallange3).hint("Fight 5 diff enemies one after another.");
         //addButton(3, "Gaunlet 4", gaunletchallange4).hint("Fight 6 diff enemies one after another.");
         //addButton(4, "Gaunlet 5", gaunletchallange5).hint("Fight 7 diff enemies one after another.");
@@ -490,6 +500,7 @@ public function soularena():void {
         addButton(14, "Back", soularena);
     }
     private function arenaSelection(mon:Class):void{
+        player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
         if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
         startCombat(new mon());
         monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
@@ -503,6 +514,7 @@ public function soularena():void {
         outputText("\"<i>We start with an old timer everyone know about yet even if it is only the warm up do beware... the Dummy golems!!!</i>\"\n\n");
         outputText("A set of walking stone statues enter the arena, ready for battle. It seems you are to fight these first.\n\n");
         player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
+        player.createStatusEffect(StatusEffects.SoulArenaGaunlet, 0, 0, 0, 0);
         if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
         startCombat(new GolemsDummy());
     }
@@ -524,8 +536,8 @@ public function soularena():void {
         clearOutput();
         outputText("You exit the arena, victorious, basking in the cheering of the crowd and go to the prize counter for your reward. A woman greets you.\n\n");
         if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] >= 1) {
-            outputText("\"<i>Good show, champion. As a reward for your performance, please accept these 20 spirit stones. Please do come back again and maybe next time you could even try the harder challenge.</i>\"\n\n");
-            flags[kFLAGS.SPIRIT_STONES] += 20;
+            outputText("\"<i>Good show, champion. As a reward for your performance, please accept these 15 spirit stones. Please do come back again and maybe next time you could even try the harder challenge.</i>\"\n\n");
+            flags[kFLAGS.SPIRIT_STONES] += 15;
             cleanupAfterCombat();
         }
         else {
@@ -534,6 +546,49 @@ public function soularena():void {
             inventory.takeItem(weaponsrange.BOWGUID, cleanupAfterCombat);
         }
     }
+	public function gaunletchallange2fight1():void {
+		clearOutput();
+		outputText("As you enter the arena you spot your opponent at the other edge of the battlefield. It’s a goblin not unlike those you can meet in the wilderness, however she’s armed with a set of throwing knife and other gear you don’t see normally on those critters.\n\n");
+        outputText("The voice of the announcer ring into the stadium.\n\n");
+        outputText("\"<i>Ladies and gentlemans today someone challenged the second ranking gladiatorial test. Can this would be hero defeat all three opponent and earn not only a large sum of gems as well as the right to brag for a full month?! LET'S FIND OUT!</i>\"\n\n");
+        outputText("The gates open and the goblin charge at you weapon at the ready.\n\n");
+        player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
+        player.createStatusEffect(StatusEffects.SoulArenaGaunlet, 0, 0, 0, 0);
+        if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
+        startCombat(new GoblinAssassin());
+	}
+	public function gaunletchallange2fight2():void {
+		clearOutput();
+		outputText("As the goblin falls unconscious to the ground the crowd cheer for you.\n\n");
+        outputText("\"<i>It would seems the hero squashed that midget good but were only beginning. If I may the next contestant has been sex starved for two consecutive month and is desperate to sow his seed hence now we release... THE HOUND!!!</i>\"\n\n");
+        outputText("A massive hellhound of proportion larger than normal rush out of an opening gate. Its eye burns with lust.\n\n");
+        startCombat(new HellHound());
+	}
+	public function gaunletchallange2fight3():void {
+		clearOutput();
+		outputText("Placeholder.\n\n");
+        outputText("Placeholder.\n\n");
+        startCombat(new CorruptedDrider());
+	}
+	public function gaunletchallange2fight4():void {
+		clearOutput();
+		outputText("Placeholder.\n\n");
+        startCombat(new BossGolems());
+	}
+	public function gaunletchallange2postfight():void {
+		clearOutput();
+		outputText("Placeholder.\n\n");
+        if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] >= 2) {
+			 outputText("\"<i>Good show, champion. As a reward for your performance, please accept these 20 spirit stones. Please do come back again and maybe next time you could even try the harder challenge.</i>\"\n\n");
+			flags[kFLAGS.SPIRIT_STONES] += 20;
+            cleanupAfterCombat();
+		}
+		else {
+			outputText("Placeholder.\n\n");
+			flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] = 2;
+            inventory.takeItem(weaponsrange.BOWGUID, cleanupAfterCombat);
+		}
+	}
     public function restaurantShiraOfTheEast():void {
         clearOutput();
         outputText("You enter the exotic food restaurant ‘Shira of the east’ and check up the menu. Would you like to eat there?");

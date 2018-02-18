@@ -158,7 +158,7 @@ public class Holli extends Monster
 			player.addStatusValue(StatusEffects.HolliConstrict, 1, 9);
 			//Struggle Succeed
 			//if demon/dragon tongue, automatic success
-			if (player.tongueType > Tongue.HUMAN) {
+			if (player.tongue.type > Tongue.HUMAN) {
 				outputText("You can't move an arm nor a [leg] to bat the flower away... but she's literally holding your mouth open.  Your long tongue rolls out, gripping and ripping out several of the petals on the end of her stalk!  Holli screams and her roots slacken, allowing you to batter your way out of them.");
 				player.removeStatusEffect(StatusEffects.HolliConstrict);
 			}
@@ -243,8 +243,8 @@ public class Holli extends Monster
 			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = rand(12) + 55;
-			this.hipRating = Hips.RATING_CURVY;
-			this.buttRating = Butt.RATING_LARGE;
+			this.hips.type = Hips.RATING_CURVY;
+			this.butt.type = Butt.RATING_LARGE;
 			this.skinTone = "black";
 			this.hairColor = "sandy-blonde";
 			this.hairLength = 15;

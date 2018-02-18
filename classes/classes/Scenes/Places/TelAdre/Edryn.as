@@ -1012,12 +1012,11 @@ private function edrynPregChance():void {
 		preg = true;
 	}*/
 	//1% chance per 500mLs of cum, max 5%
-	temp = player.cumQ()/500;
-	if(temp > 5) temp = 5;
-	temp += player.virilityQ() * 200;
+	var score:Number = Math.min(player.cumQ()/500,5);
+	score += player.virilityQ() * 200;
 
-	trace("Edryn Preg Check Virility Score: " + temp);
-	if(player.cumQ() > 250 && temp >= rand(100)) {
+	trace("Edryn Preg Check Virility Score: " + score);
+	if(player.cumQ() > 250 && score >= rand(100)) {
 		preg = true;
 		trace("Edryn knocked up!");
 	}
@@ -1110,7 +1109,7 @@ public function eatEdrynPussyLikeABawss():void {
 	outputText("\n\nEdryn trots closer and says, \"<i>Then you'd best eat up hon, 'cause I got you a four course meal.</i>\"  Her swollen pussy is just inches away from you now.  The black lips part slightly before you, winking slowly as moisture begins to run from the bestial entrance, visibly fogging the air before you.  A web of girlish goo hangs across the slightly-spread entrance, and after one last inhalation of her almost sweet scent, you dive on in.  Your nose is the first casualty of your aggressive war on centaur-cunt, slurped down by the hungry folds as soon as you're pushing up against them.  You keep pushing until your mouth has slipped through the moist, sticky veil that hangs across her vagina, kissing her fat-lipped horse-pussy with gusto while you let your tongue slither out to play.");
 
 	outputText("\n\nAt the first lick, Edryn gets palpably wetter.  Sloppy juice washes out from inside her, covering your cheeks and chin before dripping off onto your [chest], leaving you marked with her feminine odor.  ");
-	if(player.tongueType > Tongue.HUMAN) outputText("She's not even begun to taste the fruits of your talents, and you let your long, long tongue spool out inside her, pressing hard on her walls and tenderly flicking across each sensitive fold inside her.  ");
+	if(player.tongue.type > Tongue.HUMAN) outputText("She's not even begun to taste the fruits of your talents, and you let your long, long tongue spool out inside her, pressing hard on her walls and tenderly flicking across each sensitive fold inside her.  ");
 	outputText("The busty, animalistic woman moans unashamedly, hands going to her breasts to squeeze them, her clit filling up to its full size.  You can feel the sensitive nodule plump up against the top of your mouth, so you open wide enough to give it a quick suck before returning to polishing her innards.  After that the equine pleasure-buzzer gets rock-hard and continues to bulge meaningfully against you, pulsing hotly in your mouth.");
 	outputText("\n\nYou sway dizzily on your [feet] as you try to focus on just basking in her pussy's delicious... potent... sexy aroma.  [EachCock] is lifting needily with every passing second.  ");
 	if(player.cockTotal() == 1) outputText("It's");

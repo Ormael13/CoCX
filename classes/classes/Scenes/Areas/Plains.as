@@ -11,6 +11,7 @@ import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Plains.*;
 import classes.Scenes.Holidays;
+import classes.Scenes.NPCs.SidonieFollower;
 import classes.Scenes.SceneLib;
 
 use namespace CoC;
@@ -66,6 +67,19 @@ use namespace CoC;
 				},
 				chance: 0.5,
 				call: SceneLib.electraScene.repeatPlainsEnc
+			}, {
+				name: "sidonie",
+				when: function ():Boolean {
+					return flags[kFLAGS.SIDONIE_FOLLOWER] < 1
+						   && flags[kFLAGS.SIDONIE_RECOLLECTION] < 1;
+				},
+				call: SceneLib.sidonieFollower.meetingSidonieAtPlains
+			}, {
+				name: "diana",
+				when: function():Boolean {
+					return flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
+				},
+				call: SceneLib.dianaScene.repeatPlainsEnc
 			}, {
 				//Dem Kangasluts!  Force Sheila relationship phase!
 				name  : "sheila_xp3",
@@ -133,14 +147,15 @@ use namespace CoC;
 				chance: 0.5
 			}, {
 				name  : "gnoll",
-				chance: 0.5,
+				chance: 0.7,
 				call  : gnollSpearThrowerScene.gnoll2Encounter
 			}, {
 				name  : "gnoll2",
-				chance: 0.5,
+				chance: 0.7,
 				call  : gnollScene.gnollEncounter
 			}, {
 				name: "bunny",
+				chance: 0.3,
 				call: bunnyGirl.bunnbunbunMeet
 			}, {
 				name: "isabella",
@@ -159,12 +174,14 @@ use namespace CoC;
 				call  : SceneLib.helScene.encounterAJerkInThePlains
 			}, {
 				name: "satyr",
+				chance: 0.7,
 				call: satyrScene.satyrEncounter
 			}, {
 				name: "sheila",
 				when: function ():Boolean {
 					return flags[kFLAGS.SHEILA_DISABLED] == 0 && flags[kFLAGS.SHEILA_CLOCK] >= 0
 				},
+				chance: 0.5,
 				call: SceneLib.sheilaScene.sheilaEncounterRouter
 			});
 		}

@@ -1745,7 +1745,7 @@ package classes.Scenes.Places.Prison
 				outputText("\"<i>No, slave. Say, 'Yes Mistress, I understand.' </i>\"[if (esteem < 65)  She tilts your head back so that you are once again looking into her eyes.] One glance at her face is enough to tell you that she will accept nothing less that total submission on this matter.\n\n");
 				outputText("\"<i>Yesth... Misth... treth... I undahh... thtand.</i>\" The sloppy sound of your voice sounding out the syllables brings color to your cheeks all over again[if (esteem < 20) , but now the unclean warmth is less distressing -- almost soothing][if (esteem > 60) , and you hope that this will placate her desire to degrade you for the time being].\n\n");
 				outputText("\"<i>Much better. Always remember your manners, slave, especially when your mouth is full. Now, feel free to relax and enjoy this, but do pay attention: I expect you to learn your lesson well.</i>\" She reaches down");
-				if(player.hornType > 0 && player.horns > 1)
+				if(player.horns.type > 0 && player.horns.count > 1)
 				{
 					outputText(" and grabs you firmly by your horns");
 				}
@@ -1756,7 +1756,7 @@ package classes.Scenes.Places.Prison
 				else
 				{
 					outputText(" and gets a firm grip on your ");
-					switch(player.earType)
+					switch(player.ears.type)
 					{
 						case 1:
 							outputText("horse-like ears");

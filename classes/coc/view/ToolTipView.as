@@ -1,13 +1,10 @@
 package coc.view {
-import flash.display.Bitmap;
-import flash.display.MovieClip;
-	import flash.display.Sprite;
-	import flash.display.DisplayObject;
-import flash.events.MouseEvent;
+import flash.display.DisplayObject;
+import flash.display.Sprite;
 import flash.text.TextField;
-	import flash.text.TextFieldType;
+import flash.text.TextFieldAutoSize;
 
-	//import coc.model.GameModel;
+//import coc.model.GameModel;
 
 	public class ToolTipView extends Block {
 		[Embed(source='../../../res/ui/tooltip.png')]
@@ -46,12 +43,13 @@ import flash.text.TextField;
 			});
 			this.tf = addTextField({
 				x:15,y:40,
-				width:316,height:176,
+				width:316,
 				multiline:true,wordWrap:true,
 				defaultTextFormat:{
 					size:15
 				}
 			});
+			this.tf.autoSize = TextFieldAutoSize.LEFT;
 		}
 
 		public function showForButton(button:DisplayObject):void {
@@ -65,6 +63,7 @@ import flash.text.TextField;
 				this.y = by - 347;
 			}*/
 			//else {
+			bg.height = Math.max(tf.height + 63,239)
 			bx = (bx >= 688 ? 680: bx);
 			this.x = bx - 13;
 			var y:Number = by - this.height - 2;

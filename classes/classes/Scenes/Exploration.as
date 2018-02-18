@@ -116,7 +116,7 @@ public class Exploration extends BaseContent
 			
 			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(5, "",	//Wuxia related area - ?latająca wyspa?
 		//	if (flags[kFLAGS.DISCOVERED_DEEP_SEA] > 0 && player.canSwimUnderwater()) addButton(6, "Deep Sea", deepsea.exploreDeepSea).hint("Visit the 'almost virgin' deep sea. But beware of... krakens. \n\nRecommended level: 75" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEEP_SEA] : ""));
-		//	if (player.gillType == 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0) addButtonDisabled(6, "Deep Sea", "(Not yet ready to be unlockable - it wil happen after few more mod builds after 0.7c) Without any way to breathe underwater you can't explore this area!");
+		//	if (player.gills.type == 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0) addButtonDisabled(6, "Deep Sea", "(Not yet ready to be unlockable - it wil happen after few more mod builds after 0.7c) Without any way to breathe underwater you can't explore this area!");
 			//if (flags[kFLAGS.DISCOVERED_PIT] > 0) addButton(7, "Pit", CoC.instance.abyss.explorePit).hint("Visit the pit. \n\nRecommended level: 36" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_PIT] : ""));
 			
 			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(10, "",	//Wuxia related area - ?latająca wyspa?
@@ -628,12 +628,14 @@ public class Exploration extends BaseContent
 				//Chance of encountering Giacomo!
 				if (choosey == 0) {
 					player.explored++;
-					SceneLib.giacomoShop.giacomoEncounter();
+					if (flags[kFLAGS.SOUL_SENSE_GIACOMO] < 3) SceneLib.giacomoShop.giacomoEncounter();
+					else genericGolGobImpEncounters(true);
 					return;
 				}
 				else if (choosey == 1) {
 					player.explored++;
-					SceneLib.lumi.lumiEncounter();
+					if (flags[kFLAGS.LUMI_MET] == 0) SceneLib.lumi.lumiEncounter();
+					else genericGolGobImpEncounters(true);
 					return;
 				}
 				else if (choosey == 2) {

@@ -19,7 +19,8 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kCOUNTERS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
-import classes.Scenes.Dungeons.DungeonAbstractContent;
+	import classes.Scenes.Areas.Desert.SandWitchScene;
+	import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.NPCs.XXCNPC;
 import classes.Scenes.SceneLib;
@@ -75,8 +76,6 @@ import coc.view.MainView;
 		
 		public function newGameGo():void {
 			XXCNPC.unloadSavedNPCs();
-			funcs = [];
-			args = [];
 			mainView.eventTestInput.x = -10207.5;
 			mainView.eventTestInput.y = -1055.1;
 			hideStats();
@@ -180,7 +179,7 @@ import coc.view.MainView;
 			player.skin.restore();
 			player.faceType = Face.HUMAN;
 			player.tailType = Tail.NONE;
-			player.tongueType = Tongue.HUMAN;
+			player.tongue.type = Tongue.HUMAN;
 			player.femininity = 50;
 			player.beardLength = 0;
 			player.beardStyle = 0;
@@ -199,15 +198,15 @@ import coc.view.MainView;
 			player.ass.fullness = 0;
 			player.fertility = 5;
 			player.fatigue = 0;
-			player.horns = 0;
+			player.horns.count = 0;
 			player.tallness = 60;
 			player.tailCount = 0;
 			player.tailVenom = 0;
 			player.tailRecharge = 0;
-			player.gillType = Gills.NONE;
-			player.rearBody = RearBody.NONE;
-			player.wingType = Wings.NONE;
-			player.wingDesc = "non-existant";
+			player.gills.type = Gills.NONE;
+			player.rearBody.type = RearBody.NONE;
+			player.wings.type = Wings.NONE;
+			player.wings.desc = "non-existant";
 			//Default
 			player.skinTone = "light";
 			player.hairColor = "brown";
@@ -269,10 +268,8 @@ import coc.view.MainView;
 
 			//PLOTZ
 			JojoScene.monk                               = 0;
-			CoC.instance.whitney                           = 0;
-			CoC.instance.sand                              = 0;
+			SandWitchScene.rapedBefore = false;
 		//Replaced by flag	CoC.instance.beeProgress = 0;
-			CoC.instance.giacomo                           = 0;
 			SceneLib.isabellaScene.isabellaOffspringData = []; //CLEAR!
 			//Lets get this bitch started
 			CoC.instance.inCombat = false;
@@ -619,8 +616,8 @@ import coc.view.MainView;
 			player.tone += 5;
 			
 			player.breastRows[0].breastRating = BreastCup.FLAT;
-			player.buttRating = Butt.RATING_TIGHT;
-			player.hipRating = Hips.RATING_SLENDER;
+			player.butt.type = Butt.RATING_TIGHT;
+			player.hips.type = Hips.RATING_SLENDER;
 			chooseComplexion();
 		}
 
@@ -633,8 +630,8 @@ import coc.view.MainView;
 			player.tone += 5;
 			
 			player.breastRows[0].breastRating = BreastCup.B;
-			player.buttRating = Butt.RATING_TIGHT;
-			player.hipRating = Hips.RATING_AMPLE;
+			player.butt.type = Butt.RATING_TIGHT;
+			player.hips.type = Hips.RATING_AMPLE;
 			chooseComplexion();
 		}
 
@@ -643,8 +640,8 @@ import coc.view.MainView;
 			player.thickness = 50;
 			
 			player.breastRows[0].breastRating = BreastCup.FLAT;
-			player.buttRating = Butt.RATING_AVERAGE;
-			player.hipRating = Hips.RATING_AVERAGE;
+			player.butt.type = Butt.RATING_AVERAGE;
+			player.hips.type = Hips.RATING_AVERAGE;
 			chooseComplexion();
 		}
 
@@ -653,8 +650,8 @@ import coc.view.MainView;
 			player.thickness = 50;
 			
 			player.breastRows[0].breastRating = BreastCup.C;
-			player.buttRating = Butt.RATING_NOTICEABLE;
-			player.hipRating = Hips.RATING_AMPLE;
+			player.butt.type = Butt.RATING_NOTICEABLE;
+			player.hips.type = Hips.RATING_AMPLE;
 			chooseComplexion();
 		}
 
@@ -668,8 +665,8 @@ import coc.view.MainView;
 			player.tone -= 5;
 			
 			player.breastRows[0].breastRating = BreastCup.FLAT;
-			player.buttRating = Butt.RATING_NOTICEABLE;
-			player.hipRating = Hips.RATING_AVERAGE;
+			player.butt.type = Butt.RATING_NOTICEABLE;
+			player.hips.type = Hips.RATING_AVERAGE;
 			chooseComplexion();
 		}
 
@@ -682,8 +679,8 @@ import coc.view.MainView;
 			player.thickness = 70;
 			
 			player.breastRows[0].breastRating = BreastCup.D;
-			player.buttRating = Butt.RATING_LARGE;
-			player.hipRating = Hips.RATING_CURVY;
+			player.butt.type = Butt.RATING_LARGE;
+			player.hips.type = Hips.RATING_CURVY;
 			chooseComplexion();
 		}
 
@@ -696,8 +693,8 @@ import coc.view.MainView;
 			player.tone = 26;
 			
 			player.breastRows[0].breastRating = BreastCup.A;
-			player.buttRating = Butt.RATING_NOTICEABLE;
-			player.hipRating = Hips.RATING_SLENDER;
+			player.butt.type = Butt.RATING_NOTICEABLE;
+			player.hips.type = Hips.RATING_SLENDER;
 			chooseComplexion();
 		}
 
@@ -710,8 +707,8 @@ import coc.view.MainView;
 			player.tone = 50;
 			
 			player.breastRows[0].breastRating = BreastCup.A;
-			player.buttRating = Butt.RATING_TIGHT;
-			player.hipRating = Hips.RATING_SLENDER;
+			player.butt.type = Butt.RATING_TIGHT;
+			player.hips.type = Hips.RATING_SLENDER;
 			chooseComplexion();
 		}
 
@@ -768,7 +765,7 @@ import coc.view.MainView;
 		}
 
 		private function setEyesColor(choice:String):void { //And choose hair
-			player.eyeColor = choice;
+			player.eyes.colour = choice;
 			clearOutput();
 			outputText("You selected a " + choice + " eyes color.\n\nYou will proceed to customization.");
 			//chooseEndowment(false);
@@ -918,7 +915,7 @@ import coc.view.MainView;
 		}
 
 		private function pickEyesColor(color:String = ""):void {
-			player.eyeColor = color;
+			player.eyes.colour = color;
 			genericStyleCustomizeMenu();
 		}
 
@@ -1261,7 +1258,7 @@ import coc.view.MainView;
 		private function setEndowmentFertile():void {
 			player.femininity += 5;
 			player.fertility += 25;
-			player.hipRating += 2;
+			player.hips.type += 2;
 			if (player.findPerk(PerkLib.Fertile) < 0) player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0);
 			chooseHistory();
 		}
@@ -2059,17 +2056,17 @@ import coc.view.MainView;
 			player.breastRows = [];
 			player.cocks = [];
 			player.vaginas = new <VaginaClass>[];
-			player.horns = 0;
-			player.hornType = Horns.NONE;
-			player.antennae = Antennae.NONE;
-			player.earType = Ears.HUMAN;
-			player.eyeType = Eyes.HUMAN;
-			player.tongueType = Tongue.HUMAN;
-			player.gillType = Gills.NONE;
-			player.armType = Arms.HUMAN;
-			player.wingType = Wings.NONE;
-			player.wingDesc = "non-existant";
-			player.rearBody = RearBody.NONE;
+			player.horns.count = 0;
+			player.horns.type = Horns.NONE;
+			player.antennae.type = Antennae.NONE;
+			player.ears.type = Ears.HUMAN;
+			player.eyes.type = Eyes.HUMAN;
+			player.tongue.type = Tongue.HUMAN;
+			player.gills.type = Gills.NONE;
+			player.arms.type = Arms.HUMAN;
+			player.wings.type = Wings.NONE;
+			player.wings.desc = "non-existant";
+			player.rearBody.type = RearBody.NONE;
 			player.lowerBody = LowerBody.HUMAN;
 			player.legCount = 2;
 			player.tailType = Tail.NONE;

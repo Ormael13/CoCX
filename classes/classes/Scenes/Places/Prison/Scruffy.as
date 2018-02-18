@@ -33,8 +33,8 @@ public class Scruffy extends Imp
 			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 40;
-			this.hipRating = Hips.RATING_BOYISH;
-			this.buttRating = Butt.RATING_TIGHT;
+			this.hips.type = Hips.RATING_BOYISH;
+			this.butt.type = Butt.RATING_TIGHT;
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 5;
@@ -52,7 +52,7 @@ public class Scruffy extends Imp
 			this.gems = rand(5) + 25;
 			this.drop = NO_DROP;
 			this.special1 = lustMagicAttack;
-			this.wingType = Wings.IMP;
+			this.wings.type = Wings.IMP;
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}

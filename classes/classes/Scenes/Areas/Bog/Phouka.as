@@ -279,14 +279,14 @@ public class Phouka extends Monster
 			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 5;
-			this.hipRating = Hips.RATING_SLENDER;
-			this.buttRating = Butt.RATING_TIGHT;
+			this.hips.type = Hips.RATING_SLENDER;
+			this.butt.type = Butt.RATING_TIGHT;
 			this.lowerBody = LowerBody.HUMAN;
-			this.armType = Arms.HUMAN;
+			this.arms.type = Arms.HUMAN;
 			this.skinTone = "black";
 			this.hairColor = "black";
 			this.hairLength = 1;
-			this.earType = Ears.ELFIN;
+			this.ears.type = Ears.ELFIN;
 			initStrTouSpeInte(90, 70, 140, 40);
 			initWisLibSensCor(40, 90, 35, 100);
 			this.weaponName = "claws";
@@ -306,8 +306,8 @@ public class Phouka extends Monster
 				.add(consumables.SDELITE, 13)
 				.add(consumables.P_WHSKY, 35)
 				.add(null, 20);
-			this.wingType = Wings.GIANT_DRAGONFLY; //Maybe later, if the PC can get them, make a Faerie wing type.
-			this.wingDesc = "small black faerie wings";
+			this.wings.type = Wings.GIANT_DRAGONFLY; //Maybe later, if the PC can get them, make a Faerie wing type.
+			this.wings.desc = "small black faerie wings";
 			checkMonster();
 		}
 

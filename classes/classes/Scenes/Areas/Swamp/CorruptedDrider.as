@@ -5,6 +5,7 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.Scenes.SceneLib;
+import classes.Scenes.Places.HeXinDao;
 import classes.internals.*;
 
 /**
@@ -13,7 +14,8 @@ import classes.internals.*;
 	 */
 	public class CorruptedDrider extends AbstractSpiderMorph
 	{
-
+		public var drider:HeXinDao = new HeXinDao();
+		
 		//Drider kiss!
 		public function driderKiss():void {
 			var temp:int;
@@ -131,7 +133,8 @@ import classes.internals.*;
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.swamp.corruptedDriderScene.defeatDriderIntro();
+			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) drider.gaunletchallange2fight4();
+			else SceneLib.swamp.corruptedDriderScene.defeatDriderIntro();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -162,8 +165,8 @@ import classes.internals.*;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,70,0,0,0);
 			this.tallness = 10*12;
-			this.hipRating = Hips.RATING_CURVY+2;
-			this.buttRating = Butt.RATING_LARGE+1;
+			this.hips.type = Hips.RATING_CURVY + 2;
+			this.butt.type = Butt.RATING_LARGE + 1;
 			this.lowerBody = LowerBody.DRIDER;
 			player.skin.restore();
 			this.hairColor = hairColor;

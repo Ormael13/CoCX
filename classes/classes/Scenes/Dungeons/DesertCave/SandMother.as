@@ -139,8 +139,8 @@ public class SandMother extends Monster
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.createStatusEffect(StatusEffects.BonusACapacity,50,0,0,0);
 			this.tallness = 8*12+6;
-			this.hipRating = Hips.RATING_CURVY;
-			this.buttRating = Butt.RATING_LARGE;
+			this.hips.type = Hips.RATING_CURVY;
+			this.butt.type = Butt.RATING_LARGE;
 			this.skinTone = "bronzed";
 			this.hairColor = "platinum-blonde";
 			this.hairLength = 15;

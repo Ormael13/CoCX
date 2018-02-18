@@ -63,14 +63,14 @@ public class MaraFruit extends Consumable{
 				dynStats("sen", .5);
 				boobsGrew = true;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.hipRating < 10) {
+			if (rand(3) == 0 && changes < changeLimit && player.hips.type < 10) {
 				outputText("\n\nYour gait shifts slightly to accommodate your widening [hips]. The change is subtle, but they're definitely broader.");
-				player.hipRating++;
+				player.hips.type++;
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.buttRating < 8) {
+			if (rand(3) == 0 && changes < changeLimit && player.butt.type < 8) {
 				outputText("\n\nWhen you stand back, up your [ass] jiggles with a good bit of extra weight.");
-				player.buttRating++;
+				player.butt.type++;
 				changes++;
 			}
 			if (player.vaginas.length > 0) {
@@ -178,20 +178,20 @@ public class MaraFruit extends Consumable{
 					if (temp2 > 0) changes++;
 				}
 			}
-			if (changes < changeLimit && rand(3) == 0 && player.hipRating >= 4) {
+			if (changes < changeLimit && rand(3) == 0 && player.hips.type >= 4) {
 				outputText("\n\nYou stumble a bit as the bones in your pelvis rearrange themselves painfully.  Your waistline has narrowed, becoming [hips].");
-				player.hipRating--;
-				if (player.hipRating > 15) player.hipRating--;
+				player.hips.type--;
+				if (player.hips.type > 15) player.hips.type--;
 				changes++;
 			}
-			if(player.buttRating >= 4 && rand(3) == 0 && changes < changeLimit)
+			if(player.butt.type >= 4 && rand(3) == 0 && changes < changeLimit)
 			{
 				outputText("\n\nYou cringe as your [butt] begins to feel uncomfortably tight.  Once the sensation passes, you look over your shoulder, inspecting yourself.  It would appear that your ass has become smaller!");
-				player.buttRating--;
-				if(player.buttRating > 10) player.buttRating--;
-				if(player.buttRating > 15) player.buttRating--;
-				if(player.buttRating > 20) player.buttRating--;
-				if(player.buttRating > 23) player.buttRating--;
+				player.butt.type--;
+				if(player.butt.type > 10) player.butt.type--;
+				if(player.butt.type > 15) player.butt.type--;
+				if(player.butt.type > 20) player.butt.type--;
+				if(player.butt.type > 23) player.butt.type--;
 				changes++;
 			}
 		}
@@ -235,14 +235,14 @@ public class MaraFruit extends Consumable{
 			changes++;
 		}
 		//Arms
-		if ((player.lowerBody == LowerBody.PLANT_HIGH_HEELS || player.lowerBody == LowerBody.PLANT_ROOT_CLAWS) && !InCollection(player.armType, Arms.GARGOYLE, Arms.PLANT) && changes < changeLimit && rand(3) == 0) {
+		if ((player.lowerBody == LowerBody.PLANT_HIGH_HEELS || player.lowerBody == LowerBody.PLANT_ROOT_CLAWS) && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.PLANT) && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nYou watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.  Looking on them you can see a thin, delicate vines, with spade-shaped leaves unfolding from them as they curl snugly around your biceps and deltoids all the way down to your wrists. <b>You now have vine-covered arms.</b>");
 			mutations.setArmType(Arms.PLANT);
 			changes++;
 		}
 		//Wings slot aka tentacle cockvine wings
-		if (player.armType == Arms.PLANT && player.wingType != Wings.PLANT && player.lowerBody != LowerBody.PLANT_FLOWER && changes < changeLimit && rand(3) == 0) {
-			if (player.wingType != Wings.NONE) {
+		if (player.arms.type == Arms.PLANT && player.wings.type != Wings.PLANT && player.lowerBody != LowerBody.PLANT_FLOWER && changes < changeLimit && rand(3) == 0) {
+			if (player.wings.type != Wings.NONE) {
 				outputText("\n\nYour old wings are drooping leaving your back as smooth and unbroken as the day you entered the portal. But this state not last long.");
 			}
 			outputText("\n\nPressure is building in multiple spots on your upper back. It feels more like several over-eager erections trapped in incredibly tight undies. You can’t help but groan with relief when finally the pressure peaks and many thick protrusions burst impatiently out of your [skin.type]. The hot, thick, vine-like growths thrust their way into being, feet of oily green tentacles, alarmingly energetic and prehensile, thrashing around your [hips].");
@@ -251,13 +251,13 @@ public class MaraFruit extends Consumable{
 			changes++;
 		}
 		//Ears
-		if (player.earType != Ears.ELFIN && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
+		if (player.ears.type != Ears.ELFIN && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed elfin ears</b>.  You bet they look cute!");
 			changes++;
 			mutations.setEarType(Ears.ELFIN);
 		}
 		//Face
-		if (player.faceType != Face.HUMAN && changes < changeLimit && rand(4) == 0 && player.earType == Ears.ELFIN) {
+		if (player.faceType != Face.HUMAN && changes < changeLimit && rand(4) == 0 && player.ears.type == Ears.ELFIN) {
 			changes++;
 			mutations.setFaceType(Face.HUMAN);
 			outputText("\n\nAnother violent sneeze escapes you.  It hurt!  You feel your nose and discover your face has changed back into a more normal look.  <b>You have a human looking face again!</b>");
@@ -285,22 +285,22 @@ public class MaraFruit extends Consumable{
 		if ((player.hairType == Hair.LEAF || player.hairType == Hair.GRASS) && changes < changeLimit && rand(2) == 0) {
 			//Males/genderless get oak horns
 			if (player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
-				if (player.horns == 0) {
+				if (player.horns.count == 0) {
 					outputText("\n\nYou hear the sound of cracking branches erupting from the tip of your skull.  Small bulges on either side of your head advance outwards in a straight line, eventually spreading out in multiple directions like a miniature tree.  Investigating the exotic additions sprouting from your head, the situation becomes clear.  <b>You've grown oak horns!</b>");
 					mutations.setHornType(Horns.OAK, 4 + rand(4));
 				}
-				if (player.horns > 0 && player.hornType != Horns.OAK) {
+				if (player.horns.count > 0 && player.horns.type != Horns.OAK) {
 					outputText("\n\nYou hear the sound of cracking branches erupting from the tip of your skull.  The horns on your head begin to twist and turn fanatically, their texture and size morphing considerably until they resemble something more like trees than anything else.  Branching out rebelliously, you've come to the conclusion that <b>you've somehow gained oak horns!</b>");
 					mutations.setHornType(Horns.OAK, 4 + rand(4));
 				}
 			}
 			//Females/futa get orchid flowers
 			else {
-				if (player.horns == 0 && player.hornType == Horns.NONE) {
+				if (player.horns.count == 0 && player.horns.type == Horns.NONE) {
 					outputText("\n\nA spot on each side of your head has been getting steadily sorer.  You’re beginning to think about finding somewhere quiet to take a look at it when it suddenly and rather shockingly bursts, allowing something hand-sized to bloom out from your [hair]. A huge orchids is now flourishing their floppy petals and stamen above your head!  <b>You've grown twin orchid flowers!</b>");
 					mutations.setHornType(Horns.ORCHID, 2);
 				}
-				if (player.horns > 0 && player.hornType != Horns.ORCHID) {
+				if (player.horns.count > 0 && player.horns.type != Horns.ORCHID) {
 					outputText("\n\nYour old horns slowly crumbling away until nothing is left.  Then a spot on each side of your head has been getting steadily sorer.  You’re beginning to think about finding somewhere quiet to take a look at it when it suddenly and rather shockingly bursts, allowing something hand-sized to bloom out from your [hair]. A huge pair of orchids is now flourishing their floppy petals and stamen above your head!  <b>You've grown a pair of orchid flowers!</b>");
 					mutations.setHornType(Horns.ORCHID, 2);
 				}
@@ -308,7 +308,7 @@ public class MaraFruit extends Consumable{
 			changes++;
 		}
 		//
-		if (player.plantScore() >= 7 && player.wingType == Wings.PLANT && player.hasStatusEffect(StatusEffects.AlrauneFlower) && changes < changeLimit && rand(2) == 0) {
+		if (player.plantScore() >= 7 && player.wings.type == Wings.PLANT && player.hasStatusEffect(StatusEffects.AlrauneFlower) && changes < changeLimit && rand(2) == 0) {
 			outputText("\n\nYour close your eyes to appreciate the feeling of the sun on your vegetal skin, losing yourself in the sensation. That is short lived as your feet suddenly tingle with a weird feeling. Opening your eye you look down in panic as your feet roots themselves in the ground and start to merge together up to your pussy into a trunk which turn a shade of green darker than the rest of your body. Your tentacle wings have also moved down to your feet tips but the weirdest happen when everything below your waist grow bloated easily becoming twice as large as you are. ");
 			outputText("Your legs almost look... like a flower about to bloom? Bloom it does indeed as everything below your waist explode in a orchid of enormous size with petal large enough to engulf you entirely. Worried about being rooted in place you try and move and to your surprise you pretty much discover you can actually walk around on the vine like tentacle cocks at the base of your body. It feels weird at first but you think you will get used to walking on pseudo vines.");
 			if (player.tailType != 0) {

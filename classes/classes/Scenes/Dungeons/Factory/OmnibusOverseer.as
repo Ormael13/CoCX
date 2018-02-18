@@ -86,8 +86,8 @@ public class OmnibusOverseer extends Monster
 			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
 			this.ass.analWetness = AssClass.WETNESS_SLIME_DROOLING;
 			this.tallness = rand(9) + 70;
-			this.hipRating = Hips.RATING_AMPLE+2;
-			this.buttRating = Butt.RATING_TIGHT;
+			this.hips.type = Hips.RATING_AMPLE + 2;
+			this.butt.type = Butt.RATING_TIGHT;
 			this.lowerBody = LowerBody.DEMONIC_HIGH_HEELS;
 			this.skinTone = "light purple";
 			this.hairColor = "purple";
@@ -112,8 +112,8 @@ public class OmnibusOverseer extends Monster
 			this.drop = new WeightedDrop(null, 1);
 			this.special1 = lustAura;
 			this.special2 = milkAttack;
-			this.wingType = Wings.BAT_LIKE_TINY;
-			this.wingDesc = "tiny hidden";
+			this.wings.type = Wings.BAT_LIKE_TINY;
+			this.wings.desc = "tiny hidden";
 			this.tailType = Tail.DEMONIC;
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);

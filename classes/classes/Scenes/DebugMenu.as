@@ -1118,50 +1118,50 @@ public class DebugMenu extends BaseContent
 			showChangeOptions(bodyPartEditorHead, page, FACE_TYPE_CONSTANTS, changeFaceType);
 		}
 		private function changeTongueType(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.tongueType = setIdx;
+			if (setIdx>=0) player.tongue.type = setIdx;
 			menu();
 			dumpPlayerData();
 			showChangeOptions(bodyPartEditorHead, page, TONGUE_TYPE_CONSTANTS, changeTongueType);
 		}
 		private function changeEyeType(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.eyeType = setIdx;
+			if (setIdx>=0) player.eyes.type = setIdx;
 			menu();
 			dumpPlayerData();
 			showChangeOptions(bodyPartEditorHead, page, EYE_TYPE_CONSTANTS, changeEyeType);
 		}
 		private function changeEyeColor(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.eyeColor = COLOR_CONSTANTS[setIdx];
+			if (setIdx>=0) player.eyes.colour = COLOR_CONSTANTS[setIdx];
 			menu();
 			dumpPlayerData();
 			showChangeOptions(bodyPartEditorHead, page, COLOR_CONSTANTS, changeEyeType);
 		}
 		private function changeEarType(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.earType = setIdx;
+			if (setIdx>=0) player.ears.type = setIdx;
 			menu();
 			dumpPlayerData();
 			showChangeOptions(bodyPartEditorHead, page, EAR_TYPE_CONSTANTS, changeEarType);
 		}
 		private function changeHornType(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.hornType = setIdx;
+			if (setIdx>=0) player.horns.type = setIdx;
 			menu();
 			dumpPlayerData();
 			showChangeOptions(bodyPartEditorHead, page, HORN_TYPE_CONSTANTS, changeHornType);
 		}
 		private function changeHornCount(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.horns = HORN_COUNT_CONSTANTS[setIdx];
+			if (setIdx>=0) player.horns.count = HORN_COUNT_CONSTANTS[setIdx];
 			menu();
 			dumpPlayerData();
 			tagDemosSkin();
 			showChangeOptions(bodyPartEditorHead, page, HORN_COUNT_CONSTANTS, changeHornCount);
 		}
 		private function changeAntennaeType(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.antennae = setIdx;
+			if (setIdx>=0) player.antennae.type = setIdx;
 			menu();
 			dumpPlayerData();
 			showChangeOptions(bodyPartEditorHead, page, ANTENNA_TYPE_CONSTANTS, changeAntennaeType);
 		}
 		private function changeGillType(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.gillType = setIdx;
+			if (setIdx>=0) player.gills.type = setIdx;
 			menu();
 			dumpPlayerData();
 			showChangeOptions(bodyPartEditorHead, page, GILLS_TYPE_CONSTANTS, changeGillType);
@@ -1353,7 +1353,7 @@ public class DebugMenu extends BaseContent
 			[RearBody.ORCA_BLOWHOLE, "7 ORCA_BLOWHOLE"],
 		];
 		private function changeArmType(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.armType = setIdx;
+			if (setIdx>=0) player.arms.type = setIdx;
 			menu();
 			dumpPlayerData();
 			showChangeOptions(bodyPartEditorTorso, page, ARM_TYPE_CONSTANTS, changeArmType);
@@ -1383,14 +1383,14 @@ public class DebugMenu extends BaseContent
 			showChangeOptions(bodyPartEditorTorso, page, TAIL_COUNT_CONSTANTS, changeTailCount);
 		}
 		private function changeWingType(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.wingType = setIdx;
+			if (setIdx>=0) player.wings.type = setIdx;
 			menu();
 			dumpPlayerData();
 			showChangeOptions(bodyPartEditorTorso, page, WING_TYPE_CONSTANTS, changeWingType);
 		}
 		private function changeWingDesc(page:int=0,setIdx:int=-1):void {
-			if (setIdx==0) player.wingDesc = "";
-			if (setIdx>=0) player.wingDesc = WING_DESC_CONSTANTS[setIdx];
+			if (setIdx==0) player.wings.desc = "";
+			if (setIdx>=0) player.wings.desc = WING_DESC_CONSTANTS[setIdx];
 			menu();
 			dumpPlayerData();
 			showChangeOptions(bodyPartEditorTorso, page, WING_DESC_CONSTANTS, changeWingDesc);
@@ -1408,7 +1408,7 @@ public class DebugMenu extends BaseContent
 			showChangeOptions(bodyPartEditorTorso, page, LEG_COUNT_CONSTANTS, changeLegCount);
 		}
 		private function changeRearBodyType(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.rearBody = setIdx;
+			if (setIdx>=0) player.rearBody.type = setIdx;
 			menu();
 			dumpPlayerData();
 			showChangeOptions(bodyPartEditorTorso, page, REAR_TYPE_CONSTANTS, changeRearBodyType);
@@ -1427,15 +1427,15 @@ public class DebugMenu extends BaseContent
 			outputText("<b>You are now a Manticore!</b>");
 			//Cat TF
 			player.faceType = Face.CAT;
-			player.earType = Ears.CAT;
+			player.ears.type = Ears.CAT;
 			player.lowerBody = LowerBody.CAT;
 			player.legCount = 2;
 			player.skin.restore();
 			player.skin.growFur();
 			//Draconic TF
-			player.hornType = Horns.DRACONIC_X2;
-			player.horns = 4;
-			player.wingType = Wings.BAT_LIKE_LARGE;
+			player.horns.type = Horns.DRACONIC_X2;
+			player.horns.count = 4;
+			player.wings.type = Wings.BAT_LIKE_LARGE;
 			//Scorpion TF
 			player.tailType = Tail.SCORPION;
 			player.tailVenom = 100;
@@ -1448,17 +1448,17 @@ public class DebugMenu extends BaseContent
 			outputText("<b>You are now a Dragonne!</b>");
 			//Cat TF
 			player.faceType = Face.CAT;
-			player.earType = Ears.CAT;
+			player.ears.type = Ears.CAT;
 			player.tailType = Tail.CAT;
 			player.lowerBody = LowerBody.CAT;
 			player.legCount = 2;
 			//Draconic TF
 			player.skin.restore();
 			player.skin.growCoat(Skin.SCALES);
-			player.tongueType = Tongue.DRACONIC;
-			player.hornType = Horns.DRACONIC_X2;
-			player.horns = 4;
-			player.wingType = Wings.DRACONIC_LARGE;
+			player.tongue.type = Tongue.DRACONIC;
+			player.horns.type = Horns.DRACONIC_X2;
+			player.horns.count = 4;
+			player.wings.type = Wings.DRACONIC_LARGE;
 			doNext(styleHackMenu);
 		}
 		

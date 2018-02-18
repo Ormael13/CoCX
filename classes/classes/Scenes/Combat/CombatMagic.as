@@ -74,7 +74,11 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.jewelry == jewelries.FOXHAIR) costPercent -= 20;
 		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (player.weapon == weapons.N_STAFF) costPercent += 200;
-		if (spellModImpl() > 1) costPercent += Math.round(spellModImpl() - 1);
+		if (spellModImpl() > 1) costPercent += Math.round(spellModImpl() - 1) * 10;
+		if (player.level >= 24 && player.inte >= 60) costPercent += 50;
+		if (player.level >= 42 && player.inte >= 120) costPercent += 50;
+		if (player.level >= 60 && player.inte >= 180) costPercent += 50;
+		if (player.level >= 78 && player.inte >= 240) costPercent += 50;
 		//Limiting it and multiplicative mods
 		if(player.hasPerk(PerkLib.BloodMage) && costPercent < 50) costPercent = 50;
 		mod *= costPercent/100;
@@ -83,6 +87,37 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.BloodMage) && mod < 5) mod = 5;
 		else if(mod < 2) mod = 2;
+		mod = Math.round(mod * 100)/100;
+		return mod;
+	}
+	internal function healCostImpl(mod:Number):Number {
+		var costPercent:Number = 100;
+		if (player.hasPerk(PerkLib.SeersInsight)) costPercent -= (100 * player.perkv1(PerkLib.SeersInsight));
+		if (player.hasPerk(PerkLib.SpellcastingAffinity)) costPercent -= player.perkv1(PerkLib.SpellcastingAffinity);
+		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
+		if (player.hasPerk(PerkLib.WizardsAndDaoistsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
+		if (player.hasPerk(PerkLib.WizardsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
+		if (player.hasPerk(PerkLib.WisenedHealer)) {
+			costPercent += 100;
+			if (player.level >= 24 && player.wis >= 60) costPercent += 25;
+			if (player.level >= 42 && player.wis >= 120) costPercent += 25;
+			if (player.level >= 60 && player.wis >= 180) costPercent += 25;
+			if (player.level >= 78 && player.wis >= 240) costPercent += 25;
+		}
+		if (player.level >= 24 && player.inte >= 60) costPercent += 25;
+		if (player.level >= 42 && player.inte >= 120) costPercent += 25;
+		if (player.level >= 60 && player.inte >= 180) costPercent += 25;
+		if (player.level >= 78 && player.inte >= 240) costPercent += 25;
+		if (player.hasPerk(PerkLib.NaturalHealingMinor)) costPercent -= 10;
+		if (player.hasPerk(PerkLib.NaturalHealingMajor)) costPercent -= 15;
+		if (player.hasPerk(PerkLib.NaturalHealingEpic)) costPercent -= 20;
+		if (player.hasPerk(PerkLib.NaturalHealingLegendary)) costPercent -= 25;
+		if (player.jewelry == jewelries.FOXHAIR) costPercent -= 20;
+		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
+		if (player.weapon == weapons.N_STAFF) costPercent += 200;
+		if (healModImpl() > 1) costPercent += Math.round(healModImpl() - 1) * 10;
+		mod *= costPercent/100;
+		if (mod < 5) mod = 5;
 		mod = Math.round(mod * 100)/100;
 		return mod;
 	}
@@ -98,7 +133,11 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.jewelry == jewelries.FOXHAIR) costPercent -= 20;
 		if (player.weapon == weapons.PURITAS || player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (player.weapon == weapons.N_STAFF) costPercent += 200;
-		if (spellModWhiteImpl() > 1) costPercent += Math.round(spellModWhiteImpl() - 1);
+		if (spellModWhiteImpl() > 1) costPercent += Math.round(spellModWhiteImpl() - 1) * 10;
+		if (player.level >= 24 && player.inte >= 60) costPercent += 50;
+		if (player.level >= 42 && player.inte >= 120) costPercent += 50;
+		if (player.level >= 60 && player.inte >= 180) costPercent += 50;
+		if (player.level >= 78 && player.inte >= 240) costPercent += 50;
 		//Limiting it and multiplicative mods
 		if(player.hasPerk(PerkLib.BloodMage) && costPercent < 50) costPercent = 50;
 		mod *= costPercent/100;
@@ -107,6 +146,38 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.BloodMage) && mod < 5) mod = 5;
 		else if(mod < 2) mod = 2;
+		mod = Math.round(mod * 100)/100;
+		return mod;
+	}
+	internal function healCostWhiteImpl(mod:Number):Number {
+		var costPercent:Number = 100;
+		if (player.hasPerk(PerkLib.Ambition)) costPercent -= (100 * player.perkv2(PerkLib.Ambition));
+		if (player.hasPerk(PerkLib.SeersInsight)) costPercent -= (100 * player.perkv1(PerkLib.SeersInsight));
+		if (player.hasPerk(PerkLib.SpellcastingAffinity)) costPercent -= player.perkv1(PerkLib.SpellcastingAffinity);
+		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
+		if (player.hasPerk(PerkLib.WizardsAndDaoistsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
+		if (player.hasPerk(PerkLib.WizardsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
+		if (player.hasPerk(PerkLib.WisenedHealer)) {
+			costPercent += 100;
+			if (player.level >= 24 && player.wis >= 60) costPercent += 25;
+			if (player.level >= 42 && player.wis >= 120) costPercent += 25;
+			if (player.level >= 60 && player.wis >= 180) costPercent += 25;
+			if (player.level >= 78 && player.wis >= 240) costPercent += 25;
+		}
+		if (player.level >= 24 && player.inte >= 60) costPercent += 25;
+		if (player.level >= 42 && player.inte >= 120) costPercent += 25;
+		if (player.level >= 60 && player.inte >= 180) costPercent += 25;
+		if (player.level >= 78 && player.inte >= 240) costPercent += 25;
+		if (player.hasPerk(PerkLib.NaturalHealingMinor)) costPercent -= 10;
+		if (player.hasPerk(PerkLib.NaturalHealingMajor)) costPercent -= 15;
+		if (player.hasPerk(PerkLib.NaturalHealingEpic)) costPercent -= 20;
+		if (player.hasPerk(PerkLib.NaturalHealingLegendary)) costPercent -= 25;
+		if (player.jewelry == jewelries.FOXHAIR) costPercent -= 20;
+		if (player.weapon == weapons.PURITAS || player.weapon == weapons.ASCENSU) costPercent -= 15;
+		if (player.weapon == weapons.N_STAFF) costPercent += 200;
+		if (healModWhiteImpl() > 1) costPercent += Math.round(healModWhiteImpl() - 1) * 10;
+		mod *= costPercent/100;
+		if (mod < 5) mod = 5;
 		mod = Math.round(mod * 100)/100;
 		return mod;
 	}
@@ -122,7 +193,11 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.jewelry == jewelries.FOXHAIR) costPercent -= 20;
 		if (player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (player.weapon == weapons.N_STAFF) costPercent += 200;
-		if (spellModBlackImpl() > 1) costPercent += Math.round(spellModBlackImpl() - 1);
+		if (spellModBlackImpl() > 1) costPercent += Math.round(spellModBlackImpl() - 1) * 10;
+		if (player.level >= 24 && player.inte >= 60) costPercent += 50;
+		if (player.level >= 42 && player.inte >= 120) costPercent += 50;
+		if (player.level >= 60 && player.inte >= 180) costPercent += 50;
+		if (player.level >= 78 && player.inte >= 240) costPercent += 50;
 		//Limiting it and multiplicative mods
 		if(player.hasPerk(PerkLib.BloodMage) && costPercent < 50) costPercent = 50;
 		mod *= costPercent/100;
@@ -131,6 +206,38 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.BloodMage) && mod < 5) mod = 5;
 		else if(mod < 2) mod = 2;
+		mod = Math.round(mod * 100)/100;
+		return mod;
+	}
+	internal function healCostBlackImpl(mod:Number):Number {
+		var costPercent:Number = 100;
+		if (player.hasPerk(PerkLib.Obsession)) costPercent -= (100 * player.perkv2(PerkLib.Obsession));
+		if (player.hasPerk(PerkLib.SeersInsight)) costPercent -= (100 * player.perkv1(PerkLib.SeersInsight));
+		if (player.hasPerk(PerkLib.SpellcastingAffinity)) costPercent -= player.perkv1(PerkLib.SpellcastingAffinity);
+		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
+		if (player.hasPerk(PerkLib.WizardsAndDaoistsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
+		if (player.hasPerk(PerkLib.WizardsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
+		if (player.hasPerk(PerkLib.WisenedHealer)) {
+			costPercent += 100;
+			if (player.level >= 24 && player.wis >= 60) costPercent += 25;
+			if (player.level >= 42 && player.wis >= 120) costPercent += 25;
+			if (player.level >= 60 && player.wis >= 180) costPercent += 25;
+			if (player.level >= 78 && player.wis >= 240) costPercent += 25;
+		}
+		if (player.level >= 24 && player.inte >= 60) costPercent += 25;
+		if (player.level >= 42 && player.inte >= 120) costPercent += 25;
+		if (player.level >= 60 && player.inte >= 180) costPercent += 25;
+		if (player.level >= 78 && player.inte >= 240) costPercent += 25;
+		if (player.hasPerk(PerkLib.NaturalHealingMinor)) costPercent -= 10;
+		if (player.hasPerk(PerkLib.NaturalHealingMajor)) costPercent -= 15;
+		if (player.hasPerk(PerkLib.NaturalHealingEpic)) costPercent -= 20;
+		if (player.hasPerk(PerkLib.NaturalHealingLegendary)) costPercent -= 25;
+		if (player.jewelry == jewelries.FOXHAIR) costPercent -= 20;
+		if (player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU) costPercent -= 15;
+		if (player.weapon == weapons.N_STAFF) costPercent += 200;
+		if (healModBlackImpl() > 1) costPercent += Math.round(healModBlackImpl() - 1) * 10;
+		mod *= costPercent/100;
+		if (mod < 5) mod = 5;
 		mod = Math.round(mod * 100)/100;
 		return mod;
 	}
@@ -175,8 +282,47 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.shield == shields.MABRACE) mod += .5;
 		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
 		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
-		if (player.weapon == weapons.ASCENSU) mod += .15;
 		if (player.hasStatusEffect(StatusEffects.Maleficium)) mod += 1;
+		if (player.weapon == weapons.PURITAS) mod *= 1.6;
+		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
+		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
+		mod = Math.round(mod);
+		return mod;
+	}
+	internal function healModImpl():Number {
+		var mod:Number = 1;
+		if(player.hasPerk(PerkLib.SpellpowerHealing) && player.wis >= 50) mod += .2;
+		if(player.hasPerk(PerkLib.NaturalHealingMinor)) mod += .3;
+		if(player.hasPerk(PerkLib.NaturalHealingMajor)) mod += .4;
+		if(player.hasPerk(PerkLib.NaturalHealingEpic)) mod += .5;
+		if(player.hasPerk(PerkLib.NaturalHealingLegendary)) mod += .6;
+		if(player.hasPerk(PerkLib.Obsession)) {
+			mod += player.perkv1(PerkLib.Obsession);
+		}
+		if(player.hasPerk(PerkLib.Ambition)) {
+			mod += player.perkv1(PerkLib.Ambition);
+		}
+		if(player.hasPerk(PerkLib.WizardsFocus)) {
+			mod += player.perkv1(PerkLib.WizardsFocus);
+		}
+		if(player.hasPerk(PerkLib.WizardsAndDaoistsFocus)) {
+			mod += player.perkv1(PerkLib.WizardsAndDaoistsFocus);
+		}
+		if(player.hasPerk(PerkLib.SagesKnowledge)) {
+			mod += player.perkv1(PerkLib.SagesKnowledge);
+		}
+		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
+		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
+		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
+		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
+		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
+		if (player.shield == shields.MABRACE) mod += .5;
+		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
+		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
+		if (player.weapon == weapons.PURITAS) mod *= 1.6;
+		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
+		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
+		mod = Math.round(mod);
 		return mod;
 	}
 	internal function spellModWhiteImpl():Number {
@@ -211,6 +357,7 @@ public class CombatMagic extends BaseCombatContent {
 			mod += player.perkv1(PerkLib.SagesKnowledge);
 		}
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
+		if (player.hasPerk(PerkLib.UnicornBlessing) && player.cor <= 20) mod += 20;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
@@ -219,8 +366,46 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.shield == shields.MABRACE) mod += .5;
 		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
 		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
-		if (player.weapon == weapons.PURITAS || player.weapon == weapons.ASCENSU) mod += .15;
 		if (player.hasStatusEffect(StatusEffects.Maleficium)) mod += 1;
+		if (player.weapon == weapons.PURITAS) mod *= 1.6;
+		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
+		mod = Math.round(mod);
+		return mod;
+	}
+	internal function healModWhiteImpl():Number {
+		var mod:Number = 1;
+		if(player.hasPerk(PerkLib.SpellpowerHealing) && player.wis >= 50) mod += .2;
+		if(player.hasPerk(PerkLib.NaturalHealingMinor)) mod += .3;
+		if(player.hasPerk(PerkLib.NaturalHealingMajor)) mod += .4;
+		if(player.hasPerk(PerkLib.NaturalHealingEpic)) mod += .5;
+		if(player.hasPerk(PerkLib.NaturalHealingLegendary)) mod += .6;
+		if(player.hasPerk(PerkLib.Ambition)) {
+			mod += player.perkv2(PerkLib.Ambition);
+		}
+		if(player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) {
+			mod += player.statusEffectv2(StatusEffects.BlessingOfDivineMarae);
+		}
+		if(player.hasPerk(PerkLib.WizardsFocus)) {
+			mod += player.perkv1(PerkLib.WizardsFocus);
+		}
+		if(player.hasPerk(PerkLib.WizardsAndDaoistsFocus)) {
+			mod += player.perkv1(PerkLib.WizardsAndDaoistsFocus);
+		}
+		if(player.hasPerk(PerkLib.SagesKnowledge)) {
+			mod += player.perkv1(PerkLib.SagesKnowledge);
+		}
+		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
+		if (player.hasPerk(PerkLib.UnicornBlessing) && player.cor <= 20) mod += 20;
+		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
+		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
+		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
+		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
+		if (player.shield == shields.MABRACE) mod += .5;
+		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
+		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
+		if (player.weapon == weapons.PURITAS) mod *= 1.6;
+		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
+		mod = Math.round(mod);
 		return mod;
 	}
 	internal function spellModBlackImpl():Number {
@@ -252,6 +437,7 @@ public class CombatMagic extends BaseCombatContent {
 			mod += player.perkv1(PerkLib.SagesKnowledge);
 		}
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
+		if (player.hasPerk(PerkLib.BicornBlessing) && player.cor >= 80) mod += 20;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
@@ -260,8 +446,43 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.shield == shields.MABRACE) mod += .5;
 		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
 		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
-		if (player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU) mod += .15;
 		if (player.hasStatusEffect(StatusEffects.Maleficium)) mod += 1;
+		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
+		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
+		mod = Math.round(mod);
+		return mod;
+	}
+	internal function healModBlackImpl():Number {
+		var mod:Number = 1;
+		if(player.hasPerk(PerkLib.SpellpowerHealing) && player.wis >= 50) mod += .2;
+		if(player.hasPerk(PerkLib.NaturalHealingMinor)) mod += .3;
+		if(player.hasPerk(PerkLib.NaturalHealingMajor)) mod += .4;
+		if(player.hasPerk(PerkLib.NaturalHealingEpic)) mod += .5;
+		if(player.hasPerk(PerkLib.NaturalHealingLegendary)) mod += .6;
+		if(player.hasPerk(PerkLib.Obsession)) {
+			mod += player.perkv2(PerkLib.Obsession);
+		}
+		if(player.hasPerk(PerkLib.WizardsFocus)) {
+			mod += player.perkv1(PerkLib.WizardsFocus);
+		}
+		if(player.hasPerk(PerkLib.WizardsAndDaoistsFocus)) {
+			mod += player.perkv1(PerkLib.WizardsAndDaoistsFocus);
+		}
+		if(player.hasPerk(PerkLib.SagesKnowledge)) {
+			mod += player.perkv1(PerkLib.SagesKnowledge);
+		}
+		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
+		if (player.hasPerk(PerkLib.BicornBlessing) && player.cor >= 80) mod += 20;
+		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
+		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
+		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
+		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
+		if (player.shield == shields.MABRACE) mod += .5;
+		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
+		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
+		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
+		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
+		mod = Math.round(mod);
 		return mod;
 	}
 	
@@ -533,6 +754,16 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			}
 		}
+		if (player.hasStatusEffect(StatusEffects.KnowsHeal)) {
+			bd = buttons.add("Heal", spellHeal)
+						.hint("Heal will attempt to use white magic to instnatly close your wounds and restore your body.  " +
+							  "\n\nMana Cost: " + healCostWhite(30) + "");
+			if (badLustForWhite) {
+				bd.disable("You are far too aroused to focus on white magic.");
+			} else if(player.mana < healCostWhite(30)) {
+				bd.disable("Your mana is too low to cast this spell.");
+			}
+		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
 			bd = buttons.add("Blizzard", spellBlizzard)
 						.hint("Blizzard is a potent ice based defense spell that will reduce power of any fire based attack used against the user.  " +
@@ -561,13 +792,15 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsHeal)) {
-			bd = buttons.add("Heal", spellHeal)
-						.hint("Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  " +
-							  "\n\nMana Cost: " + spellCostBlack(30) + "");
+		if (player.hasStatusEffect(StatusEffects.KnowsRegenerate)) {
+			bd = buttons.add("Regenerate", spellRegenerate)
+						.hint("Regenerate will attempt to trigger health recovery over time, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  " +
+							  "\n\nMana Cost: " + healCostBlack(50) + "");
 			if (badLustForBlack) {
 				bd.disable("You aren't turned on enough to use any black magics.");
-			} else if(player.mana < spellCostBlack(30)) {
+			} else if (player.hasStatusEffect(StatusEffects.PlayerRegenerate)) {
+				bd.disable("You are already under the effects of Regenerate and cannot cast it again.");
+			} else if(player.mana < healCostBlack(50)) {
 				bd.disable("Your mana is too low to cast this spell.");
 			}
 		}
@@ -625,7 +858,16 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		
 		// GRAY MAGIC
-		//	if (player.hasStatusEffect(StatusEffects.Knows)) buttons.add("	1st spell (non-fire or non-ice based) goes here
+		if (player.hasStatusEffect(StatusEffects.KnowsNosferatu)) {
+			bd = buttons.add("Nosferatu", spellNosferatu)
+						.hint("Nosferatu will deals damage and heals the user for 100% of damage done.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  " +
+							  "\n\nMana Cost: " + healCost(50) + "");
+			if (badLustForGrey) {
+				bd.disable("You can't use any grey magics.");
+			} else if(player.mana < healCost(50)) {
+				bd.disable("Your mana is too low to cast this spell.");
+			}
+		}
 		if (player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
 			if (player.hasStatusEffect(StatusEffects.ManaShield)) {
 				buttons.add("Deactiv MS", DeactivateManaShield).hint("Deactivate Mana Shield.\n");
@@ -638,6 +880,7 @@ public class CombatMagic extends BaseCombatContent {
 			}
 		}
 		//	if (player.hasStatusEffect(StatusEffects.KnowsWereBeast)) buttons.add("Were-beast",	were-beast spell goes here
+		//	if (player.hasStatusEffect(StatusEffects.Knows)) buttons.add("	next spell (non-fire or non-ice based) goes here
 		if (player.hasStatusEffect(StatusEffects.KnowsFireStorm)) {
 			bd = buttons.add("Fire Storm", spellFireStorm).hint("Drawning your own lust and force of the willpower to fuel radical change in the surrounding you can call forth an Fire Storm that will attack enemies in a wide area.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  \n\n<b>AoE Spell.</b>  \n\nMana Cost: " + spellCost(200) + "");
 			if (badLustForGrey) {
@@ -752,10 +995,10 @@ public class CombatMagic extends BaseCombatContent {
 		if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		else enemyAI();
 	}
-	public function spellHeal():void {
+	public function spellRegenerate():void {
 		clearOutput();
 		doNext(combatMenu);
-		useMana(30, 8);
+		useMana(50, 11);
 		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();
@@ -779,7 +1022,10 @@ public class CombatMagic extends BaseCombatContent {
 			if(player.gender == 3) outputText(vaginaDescript(0) + " and [cocks] overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
 			dynStats("lib", .25, "lus", 15);
 		}
-		else spellHealEffect();
+		else {
+			player.createStatusEffect(StatusEffects.PlayerRegenerate,7,0,0,0);
+			outputText(" This should hold up for about seven rounds.");
+		}
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		statScreenRefresh();
@@ -788,31 +1034,6 @@ public class CombatMagic extends BaseCombatContent {
 		spellPerkUnlock();
 		if(player.lust >= player.maxLust()) doNext(endLustLoss);
 		else enemyAI();
-	}
-
-	public function spellHealEffect():void {
-		temp = 0;
-		temp += inteligencescalingbonus();
-		temp *= spellModBlack();
-		if (player.unicornScore() >= 5) temp *= ((player.unicornScore() - 4) * 0.5);
-		if (player.alicornScore() >= 6) temp *= ((player.alicornScore() - 5) * 0.5);
-		if (player.armorName == "skimpy nurse's outfit") temp *= 1.2;
-		if (player.weaponName == "unicorn staff") temp *= 1.5;
-		//Determine if critical heal!
-		var crit:Boolean = false;
-		var critHeal:int = 5;
-		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-			if (player.inte <= 100) critHeal += (player.inte - 50) / 50;
-			if (player.inte > 100) critHeal += 10;
-		}
-		if (rand(100) < critHeal) {
-			crit = true;
-			temp *= 1.75;
-		}
-		temp = Math.round(temp);
-		outputText("You flush with success as your wounds begin to knit <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
-		if (crit == true) outputText(" <b>*Critical Heal!*</b>");
-		HPChange(temp,false);
 	}
 	/**
 	 * Generates from (x1,x2,x3,y1,y2) log-scale parameters (a,b,c) that will return:
@@ -839,7 +1060,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 150) MightBoost += 30;
 			if (player.hasPerk(PerkLib.JobEnchanter) && player.inte >= 50) MightBoost += 5;
 			if (player.hasPerk(PerkLib.Battlemage) && player.inte >= 50) MightBoost += 15;
-			if (player.hasPerk(PerkLib.JobBarbarian)) MightBoost -= 10;
+			if (player.hasPerk(PerkLib.JobSwordsman)) MightBoost -= 10;
 			if (player.hasPerk(PerkLib.JobBrawler)) MightBoost -= 10;
 			if (player.hasPerk(PerkLib.JobDervish)) MightBoost -= 10;
 			if (player.hasPerk(PerkLib.IronFistsI)) MightBoost -= 10;
@@ -963,7 +1184,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 150) BlinkBoost += 30;
 			if (player.hasPerk(PerkLib.JobEnchanter) && player.inte >= 50) BlinkBoost += 5;
 			if (player.hasPerk(PerkLib.Battleflash) && player.inte >= 50) BlinkBoost += 15;
-			if (player.hasPerk(PerkLib.JobBarbarian)) BlinkBoost -= 10;
+			if (player.hasPerk(PerkLib.JobSwordsman)) BlinkBoost -= 10;
 			if (player.hasPerk(PerkLib.JobBrawler)) BlinkBoost -= 10;
 			if (player.hasPerk(PerkLib.JobDervish)) BlinkBoost -= 10;
 			if (player.hasPerk(PerkLib.IronFistsI)) BlinkBoost -= 10;
@@ -994,8 +1215,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.EverLastingBuffs)) BlinkDuration += 5;
 			if (player.hasPerk(PerkLib.EternalyLastingBuffs)) BlinkDuration += 5;
 			player.createStatusEffect(StatusEffects.Blink,0,0,BlinkDuration,0);
-			temp = BlinkBoost;
-			tempSpe = temp;
+			tempSpe = BlinkBoost;
 			//if(player.spe + temp > 100) tempSpe = 100 - player.spe;
 			player.changeStatusValue(StatusEffects.Blink,1,tempSpe);
 			mainView.statsView.showStatUp('spe');
@@ -1073,9 +1293,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		clearOutput();
 		outputText("You narrow your eyes, focusing your own lust with deadly intent.  At the palm of your hand form ice spike that shots toward " + monster.a + monster.short + " !\n");
-		temp = 0;
-		temp += inteligencescalingbonus();
-		temp *= spellModBlack();
+		var damage:Number = scalingBonusIntelligence() * spellModBlack();
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1086,20 +1304,20 @@ public class CombatMagic extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
 		//High damage to goes.
-		temp = calcGlacialMod(temp);
-		if (monster.hasPerk(PerkLib.IceNature)) temp *= 0.2;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) temp *= 0.5;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) temp *= 2;
-		if (monster.hasPerk(PerkLib.FireNature)) temp *= 5;
-		if (player.hasPerk(PerkLib.ColdMastery)) temp *= 2;
-		if (player.hasPerk(PerkLib.ColdAffinity)) temp *= 2;
-		temp = Math.round(temp);
-		//if (monster.short == "goo-girl") temp = Math.round(temp * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
-		//if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.");
+		damage = calcGlacialMod(damage);
+		if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
+		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.5;
+		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;
+		if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
+		if (player.hasPerk(PerkLib.ColdMastery)) damage *= 2;
+		if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
+		damage = Math.round(damage);
+		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
+		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
+		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + damage + "</font></b> damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
 		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
@@ -1108,16 +1326,12 @@ public class CombatMagic extends BaseCombatContent {
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		checkAchievementDamage(temp);
+		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		monster.HP -= temp;
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
-		}
-		combat.HeroBaneProc();
+		monster.HP -= damage;
+		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if(monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
@@ -1146,9 +1360,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		clearOutput();
 		outputText("You narrow your eyes, focusing your own lust with deadly intent.  At the palm of your hand form a shard from pure darkness that shots toward " + monster.a + monster.short + " !\n");
-		temp = 0;
-		temp += inteligencescalingbonus();
-		temp *= spellModBlack();
+		var damage:Number = scalingBonusIntelligence() * spellModBlack();
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1159,20 +1371,20 @@ public class CombatMagic extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
 		//High damage to goes.
-		temp = calcEclypseMod(temp);
-		if (monster.hasPerk(PerkLib.DarknessNature)) temp *= 0.2;
-		if (monster.hasPerk(PerkLib.LightningVulnerability)) temp *= 0.5;
-		if (monster.hasPerk(PerkLib.DarknessVulnerability)) temp *= 2;
-		if (monster.hasPerk(PerkLib.LightningNature)) temp *= 5;
-//	if (player.hasPerk(PerkLib.ColdMastery)) temp *= 2;
-//	if (player.hasPerk(PerkLib.ColdAffinity)) temp *= 2;
-		temp = Math.round(temp);
-		//if (monster.short == "goo-girl") temp = Math.round(temp * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
-		//if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.");
+		damage = calcEclypseMod(damage);
+		if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 0.2;
+		if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 0.5;
+		if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 2;
+		if (monster.hasPerk(PerkLib.LightningNature)) damage *= 5;
+//	if (player.hasPerk(PerkLib.ColdMastery)) damage *= 2;
+//	if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
+		damage = Math.round(damage);
+		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
+		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
+		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + damage + "</font></b> damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
 		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
@@ -1181,16 +1393,12 @@ public class CombatMagic extends BaseCombatContent {
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		checkAchievementDamage(temp);
+		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		monster.HP -= temp;
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
-		}
-		combat.HeroBaneProc();
+		monster.HP -= damage;
+		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if(monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
@@ -1220,9 +1428,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		clearOutput();
 		outputText("You narrow your eyes, focusing your own lust and willpower with a deadly intent.  Above you starting to form small darn cloud that soon becoming quite wide and long.  Then almost endless rain of ice shards start to downpour on " + monster.a + monster.short + " and the rest of your surrounding!\n");
-		temp = 0;
-		temp += inteligencescalingbonus();
-		temp *= spellMod();
+		var damage:Number = scalingBonusIntelligence() * spellMod();
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1233,22 +1439,22 @@ public class CombatMagic extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
 		//High damage to goes.
-		temp = calcGlacialMod(temp);
-		if (monster.hasPerk(PerkLib.IceNature)) temp *= 0.2;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) temp *= 0.5;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) temp *= 2;
-		if (monster.hasPerk(PerkLib.FireNature)) temp *= 5;
-		if (player.hasPerk(PerkLib.ColdMastery)) temp *= 2;
-		if (player.hasPerk(PerkLib.ColdAffinity)) temp *= 2;
-		temp = Math.round(temp);
-		//if (monster.short == "goo-girl") temp = Math.round(temp * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
-		//if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2); - tak samo przemyśleć czy bdą dodatkowo ranione
-		if (monster.plural == true) temp *= 5;
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">(" + temp + ")");
-		if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) outputText(" (" + temp + ") ");
+		damage = calcGlacialMod(damage);
+		if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
+		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.5;
+		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;
+		if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
+		if (player.hasPerk(PerkLib.ColdMastery)) damage *= 2;
+		if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
+		damage = Math.round(damage);
+		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
+		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bdą dodatkowo ranione
+		if (monster.plural == true) damage *= 5;
+		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">(" + damage + ")");
+		if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) outputText(" (" + damage + ") ");
 		outputText("</font></b> damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
@@ -1258,17 +1464,13 @@ public class CombatMagic extends BaseCombatContent {
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) temp *= 2;
-		checkAchievementDamage(temp);
+		if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 2;
+		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		monster.HP -= temp;
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
-		}
-		combat.HeroBaneProc();
+		monster.HP -= damage;
+		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if(monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
@@ -1298,9 +1500,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		clearOutput();
 		outputText("You narrow your eyes, focusing your own lust and willpower with a deadly intent.  Around you starting to form small vortex of flames that soon becoming quite wide.  Then with a single thought you sends all that fire like a unstoppable storm toward " + monster.a + monster.short + " and the rest of your surrounding!\n");
-		temp = 0;
-		temp += inteligencescalingbonus();
-		temp *= spellMod();
+		var damage:Number = scalingBonusIntelligence() * spellMod();
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1311,21 +1511,21 @@ public class CombatMagic extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
 		//High damage to goes.
-		temp = calcInfernoMod(temp);
-		if (monster.short == "goo-girl") temp = Math.round(temp * 1.5);
-		if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2);
-		if (monster.plural == true) temp *= 5;
-		if (monster.hasPerk(PerkLib.IceNature)) temp *= 5;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) temp *= 2;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) temp *= 0.5;
-		if (monster.hasPerk(PerkLib.FireNature)) temp *= 0.2;
-		if (player.hasPerk(PerkLib.FireAffinity)) temp *= 2;
-		temp = Math.round(temp);
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">(" + temp + ")");
-		if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) outputText(" (" + temp + ") ");
+		damage = calcInfernoMod(damage);
+		if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
+		if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
+		if (monster.plural == true) damage *= 5;
+		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
+		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
+		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
+		if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
+		if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+		damage = Math.round(damage);
+		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">(" + damage + ")");
+		if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) outputText(" (" + damage + ") ");
 		outputText("</font></b> damage.");
 		//Using fire attacks on the goo]
 		if(monster.short == "goo-girl") {
@@ -1335,17 +1535,13 @@ public class CombatMagic extends BaseCombatContent {
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) temp *= 2;
-		checkAchievementDamage(temp);
+		if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 2;
+		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		monster.HP -= temp;
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
-		}
-		combat.HeroBaneProc();
+		monster.HP -= damage;
+		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if(monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
@@ -1364,6 +1560,54 @@ public class CombatMagic extends BaseCombatContent {
 		outputText("Deciding you not need for now to keep youe mana shield you concentrate and deactivating it.\n\n");
 		player.removeStatusEffect(StatusEffects.ManaShield);
 		enemyAI();
+	}
+	
+	public function spellNosferatu():void {
+		clearOutput();
+		doNext(combatMenu);
+		useMana(50, 9);
+		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			(monster as FrostGiant).giantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		outputText("You focus on your magic, trying to draw on it without enhancing your own arousal.\n");
+		//30% backfire!
+		var backfire:int = 30;
+		if (player.hasPerk(PerkLib.FocusedMind)) backfire = 20;
+		backfire -= (player.inte * 0.15);
+		if (backfire < 15) backfire = 15;
+		else if (backfire < 5 && player.hasPerk(PerkLib.FocusedMind)) backfire = 5;
+		if(rand(100) < backfire) {
+			outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ");
+			if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.");
+			if(player.gender == 1) {
+				if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.");
+				else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.");
+			}
+			if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.");
+			if(player.gender == 3) outputText(vaginaDescript(0) + " and [cocks] overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
+			dynStats("lib", .25, "lus", 15);
+		}
+		else {
+			var nosferatu:Number = 0;
+			nosferatu += player.inte;
+			if (player.hasPerk(PerkLib.WisenedHealer)) nosferatu += player.wis;
+			outputText(" You chant as your shadow suddenly takes on a life of its own, sprouting a multitude of mouths and tentacles which seek and tear into " + monster.a + monster.short + " shadow");
+			if (monster.plural == true) outputText("s");
+			outputText(", gorging on its owner’s life force to replenish your own. Soon enough the spell is over and your shadow returns to you, leaving you better for the wear.");
+			outputText(" <b>(<font color=\"#800000\">" + nosferatu + "</font>)</b>");
+			monster.HP -= nosferatu;
+			HPChange(nosferatu,false);
+		}
+		outputText("\n\n");
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		statScreenRefresh();
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		if(player.lust >= player.maxLust()) doNext(endLustLoss);
+		else enemyAI();
 	}
 
 	/**
@@ -1387,7 +1631,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 150) ChargeWeaponBoost += 30;
 		if (player.hasPerk(PerkLib.JobEnchanter) && player.inte >= 50) ChargeWeaponBoost += 5;
 		if (player.hasPerk(PerkLib.Spellsword) && player.inte >= 50) ChargeWeaponBoost += 15;
-		if (player.hasPerk(PerkLib.JobBarbarian)) ChargeWeaponBoost -= 10;
+		if (player.hasPerk(PerkLib.JobSwordsman)) ChargeWeaponBoost -= 10;
 		if (player.hasPerk(PerkLib.JobBrawler)) ChargeWeaponBoost -= 10;
 		if (player.hasPerk(PerkLib.JobDervish)) ChargeWeaponBoost -= 10;
 		if (player.hasPerk(PerkLib.IronFistsI)) ChargeWeaponBoost -= 10;
@@ -1463,7 +1707,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 150) ChargeArmorBoost += 30;
 		if (player.hasPerk(PerkLib.JobEnchanter) && player.inte >= 50) ChargeArmorBoost += 5;
 		if (player.hasPerk(PerkLib.Spellarmor) && player.inte >= 50) ChargeArmorBoost += 15;
-		if (player.hasPerk(PerkLib.JobBarbarian)) ChargeArmorBoost -= 10;
+		if (player.hasPerk(PerkLib.JobSwordsman)) ChargeArmorBoost -= 10;
 		if (player.hasPerk(PerkLib.JobBrawler)) ChargeArmorBoost -= 10;
 		if (player.hasPerk(PerkLib.JobDervish)) ChargeArmorBoost -= 10;
 		if (player.hasPerk(PerkLib.IronFistsI)) ChargeArmorBoost -= 10;
@@ -1518,6 +1762,50 @@ public class CombatMagic extends BaseCombatContent {
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		enemyAI();
+	}
+	public function spellHeal():void {
+		clearOutput();
+		doNext(combatMenu);
+		useMana(30, 10);
+		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			(monster as FrostGiant).giantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		spellHealEffect();
+		outputText("\n\n");
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		statScreenRefresh();
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		if(player.lust >= player.maxLust()) doNext(endLustLoss);
+		else enemyAI();
+	}
+	public function spellHealEffect():void {
+		var heal:Number = 0;
+		heal += scalingBonusIntelligence();
+		if (player.hasPerk(PerkLib.WisenedHealer)) heal += scalingBonusWisdom();
+		heal *= healModWhite();
+		if (player.unicornScore() >= 5) heal *= ((player.unicornScore() - 4) * 0.5);
+		if (player.alicornScore() >= 6) heal *= ((player.alicornScore() - 5) * 0.5);
+		if (player.armorName == "skimpy nurse's outfit") heal *= 1.2;
+		if (player.weaponName == "unicorn staff") heal *= 1.5;
+		//Determine if critical heal!
+		var crit:Boolean = false;
+		var critHeal:int = 5;
+		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
+			if (player.inte <= 100) critHeal += (player.inte - 50) / 50;
+			if (player.inte > 100) critHeal += 10;
+		}
+		if (rand(100) < critHeal) {
+			crit = true;
+			heal *= 1.75;
+		}
+		heal = Math.round(heal);
+		outputText("You chant a magical song of healing and recovery and your wounds start knitting themselves shut in response. <b>(<font color=\"#008000\">+" + heal + "</font>)</b>.");
+		if (crit == true) outputText(" <b>*Critical Heal!*</b>");
+		HPChange(heal,false);
 	}
 //(20) Blind – reduces your opponent's accuracy, giving an additional 50% miss chance to physical attacks.
 	public function spellBlind():void {
@@ -1620,6 +1908,7 @@ public class CombatMagic extends BaseCombatContent {
 	}
 	//(30) Whitefire – burns the enemy for 10 + int/3 + rand(int/2) * spellMod.
 	public function spellWhitefire():void {
+		var damage:Number;
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		doNext(combatMenu);
@@ -1644,9 +1933,7 @@ public class CombatMagic extends BaseCombatContent {
 			//Attack gains burn DoT for 2-3 turns.
 			outputText("You let loose a roiling cone of flames that wash over the horde of demons like a tidal wave, scorching at their tainted flesh with vigor unlike anything you've seen before. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!");
 			monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
-			temp = 0;
-			temp += inteligencescalingbonus();
-			temp *= spellModWhite();
+			damage = scalingBonusIntelligence() * spellModWhite();
 			//Determine if critical hit!
 			var crit:Boolean = false;
 			var critChance:int = 5;
@@ -1657,10 +1944,10 @@ public class CombatMagic extends BaseCombatContent {
 			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 			if (rand(100) < critChance) {
 				crit = true;
-				temp *= 1.75;
+				damage *= 1.75;
 			}
-			temp *= 1.75;
-			outputText(" (" + temp + ")");
+			damage *= 1.75;
+			outputText(" (" + damage + ")");
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		}
 		else
@@ -1668,9 +1955,7 @@ public class CombatMagic extends BaseCombatContent {
 			clearOutput();
 			outputText("You narrow your eyes, focusing your mind with deadly intent.  You snap your fingers and " + monster.a + monster.short + " is enveloped in a flash of white flames!\n");
 			if(monster is Diva){(monster as Diva).handlePlayerSpell("whitefire");}
-			temp = 0;
-			temp += inteligencescalingbonus();
-			temp *= spellModWhite();
+			damage = scalingBonusIntelligence() * spellModWhite();
 			//Determine if critical hit!
 			var crit2:Boolean = false;
 			var critChance2:int = 5;
@@ -1680,19 +1965,19 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			if (rand(100) < critChance2) {
 				crit = true;
-				temp *= 1.75;
+				damage *= 1.75;
 			}
 			//High damage to goes.
-			temp = calcInfernoMod(temp);
-			if (monster.short == "goo-girl") temp = Math.round(temp * 1.5);
-			if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2);
-			if (monster.hasPerk(PerkLib.IceNature)) temp *= 5;
-			if (monster.hasPerk(PerkLib.FireVulnerability)) temp *= 2;
-			if (monster.hasPerk(PerkLib.IceVulnerability)) temp *= 0.5;
-			if (monster.hasPerk(PerkLib.FireNature)) temp *= 0.2;
-			if (player.hasPerk(PerkLib.FireAffinity)) temp *= 2;
-			temp = Math.round(temp);
-			outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.");
+			damage = calcInfernoMod(damage);
+			if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
+			if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
+			if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
+			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
+			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
+			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
+			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+			damage = Math.round(damage);
+			outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + damage + "</font></b> damage.");
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 			//Using fire attacks on the goo]
 			if(monster.short == "goo-girl") {
@@ -1703,16 +1988,12 @@ public class CombatMagic extends BaseCombatContent {
 		if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		checkAchievementDamage(temp);
+		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		monster.HP -= temp;
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
-		}
-		combat.HeroBaneProc();
+		monster.HP -= damage;
+		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if (monster.HP < 1)
 		{
@@ -1752,9 +2033,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		clearOutput();
 		outputText("You charge out energy in your hand and fire it out in the form of a powerful bolt of lightning at " + monster.a + monster.short + " !\n");
-		temp = 0;
-		temp += inteligencescalingbonus();
-		temp *= spellModWhite();
+		var damage:Number = scalingBonusIntelligence() * spellModWhite();
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1765,20 +2044,20 @@ public class CombatMagic extends BaseCombatContent {
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			temp *= 1.75;
+			damage *= 1.75;
 		}
 		//High damage to goes.
-		temp = calcVoltageMod(temp);
-		if (monster.hasPerk(PerkLib.DarknessNature)) temp *= 5;
-		if (monster.hasPerk(PerkLib.LightningVulnerability)) temp *= 2;
-		if (monster.hasPerk(PerkLib.DarknessVulnerability)) temp *= 0.5;
-		if (monster.hasPerk(PerkLib.LightningNature)) temp *= 0.2;
-		if (player.hasPerk(PerkLib.LightningAffinity)) temp *= 2;
-		if (player.hasPerk(PerkLib.ElectrifiedDesire)) temp *= (1 + player.lust100);
-		temp = Math.round(temp);
-		//if (monster.short == "goo-girl") temp = Math.round(temp * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
-		//if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.");
+		damage = calcVoltageMod(damage);
+		if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 5;
+		if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 2;
+		if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 0.5;
+		if (monster.hasPerk(PerkLib.LightningNature)) damage *= 0.2;
+		if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 2;
+		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + player.lust100);
+		damage = Math.round(damage);
+		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
+		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
+		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + damage + "</font></b> damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
 		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
@@ -1787,16 +2066,12 @@ public class CombatMagic extends BaseCombatContent {
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		checkAchievementDamage(temp);
+		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		monster.HP -= temp;
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
-		}
-		combat.HeroBaneProc();
+		monster.HP -= damage;
+		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if(monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();
@@ -1868,10 +2143,10 @@ public class CombatMagic extends BaseCombatContent {
 			corruptionMulti += ((monster.cor - 57.5) / 100); //The increase to multiplier is diminished.
 		}
 
-		//temp = int((player.inte / 4 + rand(player.inte / 3)) * (spellMod() * corruptionMulti));
-		temp = int(10+(player.inte/3 + rand(player.inte/2)) * (spellMod() * corruptionMulti));
+		//damage = int((player.inte / 4 + rand(player.inte / 3)) * (spellMod() * corruptionMulti));
+		var damage:Number = int(10+(player.inte/3 + rand(player.inte/2)) * (spellMod() * corruptionMulti));
 
-		if (temp > 0)
+		if (damage > 0)
 		{
 			outputText("You thrust your palm forward, causing a blast of pure energy to slam against " + monster.a + monster.short + ", tossing");
 			if ((monster as Monster).plural == true) outputText(" them");
@@ -1888,26 +2163,22 @@ public class CombatMagic extends BaseCombatContent {
 			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 			if (rand(100) < critChance) {
 				crit = true;
-				temp *= 1.75;
+				damage *= 1.75;
 			}
-			outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.\n\n");
+			outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + damage + "</font></b> damage.\n\n");
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		}
 		else
 		{
-			temp = 0;
+			damage = 0;
 			outputText("You thrust your palm forward, causing a blast of pure energy to slam against " + monster.a + monster.short + ", which they ignore. It is probably best you don’t use this technique against the pure.\n\n");
 		}
 
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		monster.HP -= temp;
-		if (player.hasStatusEffect(StatusEffects.HeroBane)) {
-			if (player.statusEffectv2(StatusEffects.HeroBane) > 0) player.addStatusValue(StatusEffects.HeroBane, 2, -(player.statusEffectv2(StatusEffects.HeroBane)));
-			player.addStatusValue(StatusEffects.HeroBane, 2, temp);
-		}
-		combat.HeroBaneProc();
+		monster.HP -= damage;
+		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if(monster.HP < 1) doNext(endHpVictory);
 		else enemyAI();

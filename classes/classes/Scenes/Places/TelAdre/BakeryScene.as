@@ -125,7 +125,7 @@ public function ingredientsMenu():void {
 	menu();
 	addButton(0,"Fox Berry",buyFoxBerry);
 	addButton(1,"Ringtail Fig",buyFig);
-	addButton(2, "Mouse Cocoa", buyCocoa);
+	addButton(2,"Mouse Cocoa", buyCocoa);
 	addButton(3,"R.Rvr Root",buyRoot);
 	addButton(4,"Ferret Fruit",buyFerretFruit);
 	addButton(14,"Back",checkBakeryMenu);
@@ -387,51 +387,51 @@ public function nomnomnom(name:String,price:Number):void {
 		if(flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] == "doughnuts") {
 			outputText(player.modTone(0,2));
 			outputText(player.modThickness(100,1));
-			if(rand(3) == 0 && player.buttRating < 15 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
+			if(rand(3) == 0 && player.butt.type < 15 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
 				outputText("\n\nWhen you stand back up your " + buttDescript() + " jiggles a little bit more than you'd expect.");
-				player.buttRating++;
+				player.butt.type++;
 			}
-			if(rand(3) == 0 && player.hipRating < 15 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
+			if(rand(3) == 0 && player.hips.type < 15 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
 				outputText("\n\nAfter finishing, you find your gait has changed.  Did your hips widen?");
-				player.hipRating++;
+				player.hips.type++;
 			}
 			player.refillHunger(25);
 		}
 		else if(flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] == "cookies") {
 			outputText(player.modTone(0,1));
 			outputText(player.modThickness(100,2));
-			if(rand(3) == 0 && player.hipRating < 20 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
+			if(rand(3) == 0 && player.hips.type < 20 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
 				outputText("\n\nAfter finishing, you find your gait has changed.  Did your hips widen?");
-				player.hipRating++;
+				player.hips.type++;
 			}
 			player.refillHunger(20);
 		}
 		else if(flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] == "brownies") {
 			outputText(player.modThickness(100,4));
-			if(rand(2) == 0 && player.hipRating < 30 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
+			if(rand(2) == 0 && player.hips.type < 30 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
 				outputText("\n\nAfter finishing, you find your gait has changed.  Your " + hipDescript() + " definitely got wider.");
-				player.hipRating += 2;
+				player.hips.type += 2;
 			}
 			player.refillHunger(20);
 		}
 		else if(flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] == "cupcakes") {
 			outputText(player.modTone(0,4));
-			if(rand(2) == 0 && player.buttRating < 30 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
+			if(rand(2) == 0 && player.butt.type < 30 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
 				outputText("\n\nWhen you stand back up your " + buttDescript() + " jiggles with a good bit of extra weight.");
-				player.buttRating += 2;
+				player.butt.type += 2;
 			}
 			player.refillHunger(20);
 		}
 		else if(flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] == "pound cake") {
 			outputText(player.modTone(0,2));
 			outputText(player.modThickness(100,2));
-			if(rand(3) == 0 && player.buttRating < 25 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
+			if(rand(3) == 0 && player.butt.type < 25 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
 				outputText("\n\nWhen you stand back up your " + buttDescript() + " jiggles a little bit more than you'd expect.");
-				player.buttRating++;
+				player.butt.type++;
 			}
-			if(rand(3) == 0 && player.hipRating < 25 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
+			if(rand(3) == 0 && player.hips.type < 25 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
 				outputText("\n\nAfter finishing, you find your gait has changed.  Did your " + hipDescript() + " widen?");
-				player.hipRating++;
+				player.hips.type++;
 			}
 			player.refillHunger(50);
 		}

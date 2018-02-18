@@ -477,11 +477,11 @@ public function bimboChampagne(player:Player,clearScreen:Boolean,intro:Boolean):
 			player.changeStatusValue(StatusEffects.BimboChampagne,3,1);
 		}
 		//(player ass smaller than bimbo:
-		if(player.buttRating < 12) {
+		if(player.butt.type < 12) {
 			outputText("\n\nYour butt jiggles deliciously - it feels like the bubbles from the drink are pushing out your plump rump, filling it like bagged sparkling wine!  Your bubbly booty swells and inflates until it feels as airy as your head.  Like, this is soooo plush!");
-			player.changeStatusValue(StatusEffects.BimboChampagne,4, 12 - player.buttRating);
-			player.buttRating = 12;
-			if(player.hipRating < 10) player.hipRating = 10;
+			player.changeStatusValue(StatusEffects.BimboChampagne,4, 12 - player.butt.type);
+			player.butt.type = 12;
+			if(player.hips.type < 10) player.hips.type = 10;
 		}
 		dynStats("spe", -10, "lib", 1, "lus", 25);
 	}
@@ -499,7 +499,7 @@ public function removeBimboChampagne():void {
 		player.removeVagina();
 	}
 	if(player.statusEffectv4(StatusEffects.BimboChampagne) > 0) {
-		player.buttRating -= player.statusEffectv4(StatusEffects.BimboChampagne);
+		player.butt.type -= player.statusEffectv4(StatusEffects.BimboChampagne);
 		outputText("  Of course, the added junk in your trunk fades too, leaving you back to having a [butt].");
 	}
 	player.removeStatusEffect(StatusEffects.BimboChampagne);
@@ -667,9 +667,9 @@ private function leaveWithBeerTits():void {
 private function sellYourBooze():void {
 	clearOutput();
 	player.gems += 2;
-	temp = Math.round(player.lactationQ() / 100);
-	if(temp > 40) temp = 40 + rand(3);
-	player.gems += temp;
+	var gems:Number = Math.round(player.lactationQ() / 100);
+	if(gems > 40) gems = 40 + rand(3);
+	player.gems += gems;
 	player.gems = Math.round(player.gems);
 	statScreenRefresh();
 	//If player has only two breasts.
@@ -723,7 +723,7 @@ private function barBeerOrgyTits():void {
 	}
 	outputText("\n\nNiamh purrs, \"<i>O' deary lass, you look fit to pop.</i>\"  She pokes your bloated boob, \"<i>An' I don't mean ye booze balloons here.</i>\"  She leans over, plopping her fat tits down on top of your own, and gives you a huge wet kiss on your lips.  A round of cheers go up through the bar as she shoves her tongue inside your mouth.  Smiling as she pulls back she cheekily announces, \"<i>C'mon folks!  What say we tap this keg the right way?</i>\"");
 	//IF [player has huge ass]
-	if(player.buttRating >= 20) outputText("  She slaps your ass to emphasize her meaning, and the action sends jiggling waves through each immense cheek.");
+	if(player.butt.type >= 20) outputText("  She slaps your ass to emphasize her meaning, and the action sends jiggling waves through each immense cheek.");
 
 	outputText("\n\nA few more hollers go up from the crowd that's drunk themselves silly on the booze from your tits.  Hands and paws begin grabbing your limbs and tits and carry you aloft.  ");
 	if(player.biggestTitSize() >= 20) outputText("Your giant boobs are large enough to temporarily hang off the sides of your body as you're carried.");
@@ -819,7 +819,7 @@ private function barBeerOrgyTits():void {
 		//IF [player has large balls]
 		if(player.balls > 0 && player.ballSize > 14) outputText("  Your hanging testicles bounce around between everyone's legs.");
 		//IF [player has giant ass]
-		if(player.buttRating >= 22) outputText("  The fat of your ass cheeks jiggles and quakes even as Urta practically stuffs her hips into your crack.  \"<i>Damn, you've got a bigger ass than Edryn,</i>\" she chides as she spanks you.  \"<i>Hey!</i>\"  Edryn calls out with a false tone of hurt pride.");
+		if(player.butt.type >= 22) outputText("  The fat of your ass cheeks jiggles and quakes even as Urta practically stuffs her hips into your crack.  \"<i>Damn, you've got a bigger ass than Edryn,</i>\" she chides as she spanks you.  \"<i>Hey!</i>\"  Edryn calls out with a false tone of hurt pride.");
 
 		outputText("\n\nThe two of them fuck you senseless while the rest of the bar watches and cheers.  You start cumming without control which only eggs the two of them on to even rougher thrusts and grinds.  Long after the " + boozeBoobsType() + " stops leaking from your nipples and is replaced with your normal flow of milk, the two of them continue to fuck you hard enough to make your heavy tits shake and bounce for the crowd's enjoyment.");
 
@@ -885,8 +885,7 @@ private function barBeerOrgyTits():void {
 			outputText("  You walk slightly bow legged out of the bar.  Cum is still dripping from your snatch and will likely continue to do so for a while.");
 			//IF [player is not pregnant]
 			if(player.pregnancyType == 0) outputText("  You can't help but wonder how virile those dog morphs might have been as their cum and the cum of other customers sloshes around inside your uterus.");
-			temp = rand(6);
-			switch(temp) {
+			switch(rand(6)) {
 				case 0:
 					player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR);
 					break;

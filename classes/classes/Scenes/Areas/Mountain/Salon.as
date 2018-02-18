@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.Areas.Mountain{
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
+	import classes.BodyParts.Hair;
+	import classes.GlobalFlags.kFLAGS;
 
 public class Salon extends BaseContent implements TimeAwareInterface {
 
@@ -392,17 +393,17 @@ private function cutLong():void {
 private function hairGrow():void {
 	spriteSelect(38);
 	//-asking for a lengthening treatment with tentacle hair:
-	if(player.hairType == 4 || player.hairType == 6) {
+	if(player.hairType == Hair.ANEMONE || player.hairType == Hair.GORGON) {
 		outputText("Lynnette looks dubiously at you when you ask for a lengthening treatment.  \"<i>No offense hon, but that stuff is basically like an arm or an organ, not hair.  I'm not a goblin chirurgeon, and I wouldn't try to lengthen it even if one of my disobedient daughters were here to donate some parts.  Sorry to make you shoot and scoot, but I can't help you.  Maybe we could do something else?</i>\"\n\n");
 		salonPurchaseMenu();
 		return;
 	}
 	clearOutput();
 	outputText("Lynnette grabs a bottle and squirts a white fluid into your hair.  You really hope it isn't your payment.  But it must not be, as within short order you feel the added weight of ");
-	temp = rand(3) + 3;
 	flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
-	player.hairLength += temp;
-	outputText(num2Text(temp) + " more inches of [haircolor] hair.");
+	var growth:Number = rand(3) + 3;
+	player.hairLength += growth;
+	outputText(num2Text(growth) + " more inches of [haircolor] hair.");
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -436,7 +437,7 @@ private function dyeMenu():void {
 
 private function beardMenu():void {
 	clearOutput();
-	outputText("\<i>I can help you with your beard-related needs,</i>\" Lynnette says.");
+	outputText("\"<i>I can help you with your beard-related needs,</i>\" Lynnette says.");
 	menu();
 	if (player.hasBeard() && player.beardLength > 0.5) addButton(0, "Cut Beard", cutBeard);
 	if (player.hasBeard() && player.beardLength < 6) addButton(1, "Lengthen Beard", growBeard, 0);
@@ -467,30 +468,26 @@ private function growBeard(mode:int = 0):void {
 			outputText("You insist her that you really want a beard, whether you're a man or a woman.\n\n");
 			outputText("\"<i>Well... I'll get started now,</i>\" she says.");
 		}
-		else {
-			outputText("Lynnette grabs a bottle and squirts a white fluid onto your chin and cheeks.  You really hope it isn't your payment.  But it must not be, as within short order your new beard sprouts! ");
-			player.beardLength = 0.2;
-			if (temp >= 2) outputText("es");
-			outputText(" of [haircolor] beard.\n\n");
-			outputText("\"<i>I'll let you choose your style before you leave,</i>\" she says.\n\n");
-			changeBeardStyle();
-			return;
-		}
+
+		outputText("Lynnette grabs a bottle and squirts a white fluid onto your chin and cheeks.  You really hope it isn't your payment.  But it must not be, as within short order your new [haircolor] beard sprouts! ");
+		player.beardLength = 0.2;
+		outputText("\"<i>I'll let you choose your style before you leave,</i>\" she says.\n\n");
+		changeBeardStyle();
+		return;
+
 	}
 	//Grow existing beard.
 	else {
-			if(player.hairType == 4 || player.hairType == 6) {
+			if(player.hairType == Hair.ANEMONE || player.hairType == Hair.GORGON) {
 				outputText("Lynnette looks dubiously at you when you ask for a lengthening treatment.  \"<i>No offense hon, but that stuff is basically like an arm or an organ, not beard.  I'm not a goblin chirurgeon, and I wouldn't try to lengthen it even if one of my disobedient daughters were here to donate some parts.  Sorry to make you shoot and scoot, but I can't help you.  Maybe we could do something else?</i>\"\n\n");
 				beardMenu();
 				return;
 			}
 			clearOutput();
 			outputText("Lynnette grabs a bottle and squirts a white fluid onto your chin and cheeks.  You really hope it isn't your payment.  But it must not be, as within short order you feel the added weight of ");
-			temp = 5 + rand(5);
-			temp /= 5;
-			player.beardLength += temp;
-			outputText(num2Text(temp) + " more inch");
-			if (temp >= 2) outputText("es");
+			var growth:Number = (5 + rand(5))/5;
+			player.beardLength += growth;
+			outputText(num2Text(growth) + " more "+Measurements.inchesOrCentimetres(growth));
 			outputText(" of [haircolor] beard.");
 	}
 	doNext(camp.returnToCampUseOneHour);

@@ -142,7 +142,7 @@ public function encounterMarae():void {
 					addButton(1, "Lethicite", maraeStealLethicite);
 					addButton(2, "Accept", maraeBadEnd);
 					addButton(3, "Prank", maraeStealLethicite, true, null, null, "Play a practical joke on the corrupted goddess and pretend to steal her Lethicite. Why would you do this?", "Practical Joke");
-					addButton(4, "FIGHT!", promptFightMarae1, encounterMarae);
+					addButton(4, "FIGHT!", promptFightMarae1);
 
 			}
 			//Repeat corrupt meeting
@@ -285,7 +285,7 @@ private function alraunezeMeYes0():void {
 		player.cocks[9].cockType = CockTypesEnum.STAMEN;
 	}
 	if (!player.hasStatusEffect(StatusEffects.AlrauneFlower)) player.createStatusEffect(StatusEffects.AlrauneFlower,0,0,0,0);
-	if (player.wingType == Wings.PLANT) player.wingType = Wings.NONE;
+	if (player.wings.type == Wings.PLANT) player.wings.type = Wings.NONE;
 	player.lowerBody = LowerBody.PLANT_FLOWER;
 	player.legCount = 12;
 	doNext(camp.returnToCampUseTwoHours);
@@ -416,19 +416,8 @@ private function maraeBadEnd():void {
 	else {
 		outputText("You drink deeply, suckling her thick syrupy milk with strength born of an instantaneous addiction.  The desire to attain more of her 'milk' overrides any other thoughts, clouding over them like a dense morning fog.  The slick nipples feel like they tense and squirm in your mouth as you draw every last bit of their delicious cargo into your greedy gullet.  You " + hipDescript() + " twitch and squirm, throbbing and hard, making your [cocks] bob in the air.   Heedless of your groin's incessant begging, you work the nipple in your mouth as if it was your whole world, trying to pleasure as much as suckle.  You can feel your [cocks] squirming in the air  as if reaching for her.  Wait, squirming!?  You're pulled back from her nipple and given the chance to look down, where ");
 		if(player.tentacleCocks() < player.cockTotal()) {
-			//Single cawks
-			if(player.cocks.length == 1) {
-				//Set primary cock flag
-				player.cocks[0].cockType = CockTypesEnum.TENTACLE;
-			}
-			//multi
-			if(player.cockTotal() > 1) {
-				temp = player.cocks.length;
-				//Set cock flags
-				while(temp > 0) {
-					temp--;
-					player.cocks[temp].cockType = CockTypesEnum.TENTACLE;
-				}
+			for(var i:int = player.cocks.length; i >= 0; i--){
+				player.cocks[i].cockType = CockTypesEnum.TENTACLE;
 			}
 		}
 		outputText("<b>you see your [cocks] waving around, seeking a nearby orifice to fuck!</b>\n\n");
@@ -593,7 +582,7 @@ private function MaraeIIStageII():void {
 		outputText("  Both are dripping and giving tiny squirts of sweet pleasure that simultaneously dull the mind and reinforce your worship of this sexually-charged deity.\n\n");
 
 		outputText("Marae grunts and pulls on ");
-		if(player.horns > 0) outputText("your horns");
+		if(player.horns.count > 0) outputText("your horns");
 		else outputText("your " + hairDescript());
 		outputText(", shoving her thick clit-cock deep inside your throat.  You reflexively swallow down the bulging fuck-meat and ");
 		if(player.cor < 33) outputText("struggle to ");

@@ -27,8 +27,8 @@ public class RyuBiHuman extends Monster
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = rand(8) + 70;
-			this.hipRating = Hips.RATING_AMPLE+2;
-			this.buttRating = Butt.RATING_LARGE;
+			this.hips.type = Hips.RATING_AMPLE + 2;
+			this.butt.type = Butt.RATING_LARGE;
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
@@ -47,8 +47,8 @@ public class RyuBiHuman extends Monster
 			this.level = 21;
 			this.gems = 15 + rand(8);
 			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.2);//zamienić na worek of spirit stones ^^
-			this.hornType = Horns.DRACONIC_X4_12_INCH_LONG;
-			this.horns = 4;
+			this.horns.type = Horns.DRACONIC_X4_12_INCH_LONG;
+			this.horns.count = 4;
 			this.tailType = Tail.DRACONIC;
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGigantType, 0, 0, 0, 0);

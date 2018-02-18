@@ -33,10 +33,12 @@ import classes.Scenes.Monsters.DarkElfScout;
 import classes.Scenes.Monsters.DarkElfSlaver;
 import classes.Scenes.Monsters.DarkElfSniper;
 import classes.Scenes.NPCs.CelessScene;
+import classes.Scenes.NPCs.Diana;
 import classes.Scenes.NPCs.Electra;
 import classes.Scenes.NPCs.RyuBiDragon;
 import classes.Scenes.NPCs.Sonya;
 import classes.Scenes.Places.Boat.Marae;
+import classes.Scenes.Areas.Forest.Nightmare;
 
 use namespace CoC;
 	
@@ -203,33 +205,43 @@ use namespace CoC;
 			addButton(4, "Materials", MaterialMenu).hint("For creting various materials for tests.");
 			addButton(5, "Enemies", EnemiesMenu).hint("For spawning various enemies to test fight them.");
 			addButton(6, "Ascension", AscensionMenu).hint("Submenu for Ascension related stuff.");
-			//addButton(7, "TonsOfPerks", GiveTonsOfPermablePerks).hint("Give All unowned permable perks (for perm glitch test at ascension)");
 			addButton(7, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
 			addButton(8, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
-			if (flags[kFLAGS.PATCHOULI_AND_WONDERLAND] > 1) addButton(9, "JabberwockyReset", resetJabberwockyFlag).hint("Reseting Jabberwocky boss fight.");
-			if (player.eyeColor != "brown") addButton(10, "Eye Color", eyesColorSelection).hint("Set eye color to default one so saves will not go crazy over it.");
+			addButton(9, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
+			addButton(10, "Celess", celessIntroForced).hint("Due to hard time getting her intro here it's.");
 			addButton(11, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
-			//addButton(12, "<<< 12 >>>", CoC.instance.doNothing);
-			addButton(12, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
-			addButton(13, "Celess", celessIntroForced).hint("Due to hard time getting her intro here it's.");
-			//addButton(13, "<<< 13 >>>", CoC.instance.doNothing);
+			if (player.hasPerk(PerkLib.JobBarbarian)) addButton(12, "BarbToSword", replacingBarbsWithsSowrds).hint("Replacing Job: Barbarian with Job: Swordsman to keep integrity of test saves.");
+			//addButton(13, "13", );
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 public function celessIntroForced():void {
 	clearOutput();
 	CelessScene.instance.birthScene();
 }
-private function eyesColorSelection():void {
-	clearOutput();
-	player.eyeColor = "brown";
-	outputText("You now have brown eyes.");
+public function replacingBarbsWithsSowrds():void {
+	player.removePerk(PerkLib.JobBarbarian);
+	player.createPerk(PerkLib.JobSwordsman, 0, 0, 0, 0);
 	doNext(SoulforceCheats);
 }
-private function resetJabberwockyFlag():void {
+public function LvLUPDiana():void {
+	outputText("\n\n<b>Diana get stronger! (cheat stop working when she reach max possible lvl (atm it's lvl 27))</b>");
+	if (flags[kFLAGS.DIANA_LVL_UP] < 8) flags[kFLAGS.DIANA_LVL_UP]++;
+	doNext(EnemiesMenu);
+}
+public function AffectionUpDiana():void {
+	outputText("\n\n<b>+5% Diana affection</b>");
+	if (flags[kFLAGS.DIANA_AFFECTION] < 100) flags[kFLAGS.DIANA_AFFECTION] += 5;
+	doNext(EnemiesMenu);
+}
+public function DELvLDiana():void {
+	outputText("\n\n<b>Diana get weaker! (cheat stop working when she reach lvl 3)</b>");
+	if (flags[kFLAGS.DIANA_LVL_UP] > 0) flags[kFLAGS.DIANA_LVL_UP]--;
+	doNext(EnemiesMenu);
+}
+public function FightNightmare():void {
 	clearOutput();
-	outputText("You can now go fight Jabberwocky again.... for test!!!");
-	flags[kFLAGS.PATCHOULI_AND_WONDERLAND] = 1;
-	doNext(SoulforceCheats);
+	outputText("Entering battle with Nightmare! Enjoy ^^");
+	startCombat(new Nightmare());
 }
 		public function StatsMenu():void {
 			menu();
@@ -679,10 +691,11 @@ private function resetJabberwockyFlag():void {
 			addButton(6, "Ascensus", AddTheStaffs).hint("Add set of items for Ascensus.");
 			addButton(7, "DualLAxes", AddDualMinoAxes).hint("Add 1 pair of Large Axes.");
 			addButton(8, "NineTailWhip", AddNineTailWhip).hint("Add 1 Nine Tail Whip.");
+			addButton(9, "Hodr's Bow", AddHodrsBow).hint("Add 1 Hodr's Bow.");
 		//	addButton(9, "L Ayo Arm", AddLightAyoArmor).hint("Add 1 Light Ayo Armor for testing purposes.");
 			addButton(10, "SeerHairpin", AddTheSeerHairpin).hint("Add 1 Seer's Hairpin.");
 			addButton(11, "D.Scythe", AddTheDemonicScythe).hint("Add 1 Demonic Scythe.");
-			addButton(12, "CatONIneTWhip", AddCatONineTailWhip).hint("Add 1 Cat o' nine tail whip.");
+			addButton(12, "CatONIneTWhip", AddCatONineTailWhip).hint("Add 1 Bastet Whip.");
 			addButton(13, "InqTome", AddTheInquisitorsTome).hint("Add 1 Inquisitor's Tome.");
 			addButton(14, "Back", SoulforceCheats);
 		}
@@ -691,15 +704,12 @@ private function resetJabberwockyFlag():void {
 			addButton(0, "Fox Jewel", AddFoxJewel).hint("Add 1 Fox Jewel.");
 			addButton(1, "F.Fish", AddFreshFish).hint("Add 1 Fresh Fish.");
 			addButton(2, "BehemothCum", AddBehemothCum).hint("Add 1 bottle of Behemoth Cum.");
-			addButton(3, "VoltageTopaz", AddVoltageTopaz).hint("Add 1 Voltage Topaz.");
-			addButton(4, "Red Blood", AddRedBlood).hint("Add 1 vial of Red Blood (Bat TF).");
-			//addButtonDisabled(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
-			addButton(5, "Gorgon Oil", AddGorgonOil).hint("Add 1 vial of Gorgon Oil.");
-			addButton(6, "Vouivre Oil", AddVouivreOil).hint("Add 1 vial of Vouivre Oil.");
-			addButton(7, "Couatl Oil", AddCouatlOil).hint("Add 1 vial of Couatl Oil.");
-			//addButton(8, "V.D.ARC", AddVeryDilutedArcaneRegenConcotion).hint("Add 1 very diluted Arcane Regen Concotion.");
-			//addButton(9, "D.ARC", AddDilutedArcaneRegenConcotion).hint("Add 1 diluted Arcane Regen Concotion.");
-			addButton(8, "WoFruit", AddWonderFruit).hint("Add 1 Wonder Fruit.");
+			addButton(3, "TF's Pack", AddVoltageTopaz).hint("Add 1 Voltage Topaz, 1 vial of Red Blood (Bat TF) and 1 Wonder Fruit.");
+			addButton(4, "SkybornSeed", AddSkybornSeed).hint("Add 1 Skyborn Seed.");
+			//addButton(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
+			addButton(5, "Naga Oils", AddGorgonOil).hint("Add 1 vial of Gorgon, Vouivre and Couatl Oil.");
+			//addButton(7, "V.D.ARC", AddVeryDilutedArcaneRegenConcotion).hint("Add 1 very diluted Arcane Regen Concotion.");
+			//addButton(8, "D.ARC", AddDilutedArcaneRegenConcotion).hint("Add 1 diluted Arcane Regen Concotion.");
 			addButton(9, "SBMan", AddSoulBlastManual).hint("Add 1 Soul Blast manual.");
 			addButton(10, "White B.", AddWhiteBook).hint("Add 1 White Book.");
 			addButton(11, "Black B.", AddBlackBook).hint("Add 1 Black Book.");
@@ -723,19 +733,24 @@ private function resetJabberwockyFlag():void {
 		public function EnemiesMenu():void {
 			menu();
 			addButton(0, "FightForPearl", FightForPearl).hint("Test fight to get Sky Poison Pearl legally (aside we cheat to start fight)");
-			addButton(1, "MaraeFight", FightMarae).hint("Test fight with Marae (depending on game stage she can be buffed or unbuffed).");
-			addButton(2, "SonyaFight", FightSonya).hint("Test fight with Sonya.");
-			addButton(3, "RyuBiFight", FightRyuBi).hint("Test fight with RyuBi.");
-			addButton(4, "Alraune", FightAlraune).hint("Test fight with Alraune.");
+			addButton(1, "Marae", FightMarae).hint("Test fight with Marae (depending on game stage she can be buffed or unbuffed).");
+			addButton(2, "Sonya", FightSonya).hint("Test fight with Sonya.");
+			//addButton(3, "RyuBi", FightRyuBi).hint("Test fight with RyuBi.");
+			addButton(3, "Diana", FightDiana).hint("Test fight with Diana.");
+			addButton(4, "Nightmare", FightNightmare).hint("Test fight with Nightmare.");
+			//addButton(4, "Alraune", FightAlraune).hint("Test fight with Alraune.");
 			addButton(5, "DE Scout", FightDarkElfScout).hint("Test fight with Dark Elf Scout. (lvl 15)");
 			addButton(6, "DE Slaver", FightDarkElfSlaver).hint("Test fight with Dark Elf Slaver. (lvl 27)");
 			addButton(7, "DE Ranger", FightDarkElfRanger).hint("Test fight with Dark Elf Ranger. (lvl 39)");
-			addButton(8, "DE Sniper", FightDarkElfSniper).hint("Test fight with Dark Elf Sniper. (lvl 51)");
+			//addButton(8, "DE Sniper", FightDarkElfSniper).hint("Test fight with Dark Elf Sniper. (lvl 51)");
+			addButton(8, "DianaAffUp", AffectionUpDiana).hint("+5% Diana aff.");
 			addButton(9, "Electra", FightElectra).hint("Test fight with Electra.");
 			addButton(10, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
 			addButton(11, "DELvL Eva", DELvLEva).hint("DE LvL forcefully Evangeline for testing purpose down toward the lvl 12.");
-			addButton(12, "ObsidianGarg", FightObsidianGargoyle).hint("Test fight with Obsidian Gargoyle.");
-			addButton(13, "HeroslayerOmni", FightHeroslayerOmnibus).hint("Test fight with Heroslayer Omnibus.");
+			//addButton(12, "ObsidianGarg", FightObsidianGargoyle).hint("Test fight with Obsidian Gargoyle.");
+			//addButton(13, "HeroslayerOmni", FightHeroslayerOmnibus).hint("Test fight with Heroslayer Omnibus.");
+			addButton(12, "LvLUP Diana", LvLUPDiana).hint("LvL UP forcefully Diana for testing purpose up to the limit.");
+			addButton(13, "DELvL Diana", DELvLDiana).hint("DE LvL forcefully Diana for testing purpose down toward the lvl 3.");
 			addButton(14, "Back", SoulforceCheats);
 		}
 		public function AscensionMenu():void {
@@ -781,19 +796,23 @@ private function resetJabberwockyFlag():void {
 		}
 		public function AddVoltageTopaz():void {
 			outputText("\n\n<b>(Gained 1 Voltage Topaz!)</b>\n\n");
-			inventory.takeItem(consumables.VOLTTOP, SoulforceCheats);
+			inventory.takeItem(consumables.VOLTTOP, AddRedBlood);
 		}
 		public function AddRedBlood():void {
 			outputText("\n\n<b>(Gained 1 vial of red blood!)</b>\n\n");
-			inventory.takeItem(consumables.REDVIAL, NonEquipmentMenu);
+			inventory.takeItem(consumables.REDVIAL, AddWonderFruit);
+		}
+		public function AddWonderFruit():void {
+			outputText("\n\n<b>(Gained 1 Wonder Fruit!)</b>\n\n");
+			inventory.takeItem(consumables.WOFRUIT, NonEquipmentMenu);
 		}
 		public function AddGorgonOil():void {
 			outputText("\n\n<b>(Gained 1 vial of Gorgon Oil!)</b>\n\n");
-			inventory.takeItem(consumables.GORGOIL, NonEquipmentMenu);
+			inventory.takeItem(consumables.GORGOIL, AddVouivreOil);
 		}
 		public function AddVouivreOil():void {
 			outputText("\n\n<b>(Gained 1 vial of Vouivre Oil!)</b>\n\n");
-			inventory.takeItem(consumables.VOUIOIL, NonEquipmentMenu);
+			inventory.takeItem(consumables.VOUIOIL, AddCouatlOil);
 		}
 		public function AddCouatlOil():void {
 			outputText("\n\n<b>(Gained 1 vial of Couatl Oil!)</b>\n\n");
@@ -811,9 +830,9 @@ private function resetJabberwockyFlag():void {
 			outputText("\n\n<b>(Gained 1 Soul Blast Manual!)</b>\n\n");
 			inventory.takeItem(consumables.SOBLMAN, NonEquipmentMenu);
 		}
-		public function AddWonderFruit():void {
-			outputText("\n\n<b>(Gained 1 Wonder Fruit!)</b>\n\n");
-			inventory.takeItem(consumables.WOFRUIT, NonEquipmentMenu);
+		public function AddSkybornSeed():void {
+			outputText("\n\n<b>(Gained 1 Skyborn Seed!)</b>\n\n");
+			inventory.takeItem(consumables.SKYSEED, NonEquipmentMenu);
 		}
 		public function AddBehemothCum():void {
 			outputText("\n\n<b>(Gained 1 vial of Behemoth Cum!)</b>\n\n");
@@ -840,7 +859,7 @@ private function resetJabberwockyFlag():void {
 			inventory.takeItem(weapons.W_STAFF, EquipmentMenu);
 		}
 		public function AddCatONineTailWhip():void {
-			outputText("\n\n<b>(Gained 1 Cat o' nine tail whip!)</b>\n\n");
+			outputText("\n\n<b>(Gained 1 Bastet Whip!)</b>\n\n");
 			inventory.takeItem(weapons.CNTWHIP, EquipmentMenu);
 		}
 		public function AddTheEvelyn():void {
@@ -854,6 +873,10 @@ private function resetJabberwockyFlag():void {
 		public function AddGnollThrowingAxes():void {
 			outputText("\n\n<b>(Gained 1 Gnoll Throwing Axes!)</b>\n\n");
 			inventory.takeItem(weaponsrange.GTHRAXE, EquipmentMenu);
+		}
+		public function AddHodrsBow():void {
+			outputText("\n\n<b>(Gained 1 Hodr's Bow!)</b>\n\n");
+			inventory.takeItem(weaponsrange.BOWHODR, EquipmentMenu);
 		}
 		public function AddTheSeerHairpin():void {
 			outputText("\n\n<b>(Gained 1 Seer's Hairpin!)</b>\n\n");
@@ -1277,6 +1300,11 @@ private function resetJabberwockyFlag():void {
 			outputText("Entering battle with RyuBi! Enjoy ^^");
 			startCombat(new RyuBiDragon());
 		}
+		public function FightDiana():void {
+			clearOutput();
+			outputText("Entering battle with Diana! Enjoy ^^");
+			startCombat(new Diana());
+		}
 		public function FightAlraune():void {
 			clearOutput();
 			outputText("Entering battle with Alraune! Enjoy ^^");
@@ -1327,121 +1355,6 @@ private function resetJabberwockyFlag():void {
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] > 6) flags[kFLAGS.EVANGELINE_LVL_UP]--;
 			doNext(EnemiesMenu);
 		}
-		public function GiveTonsOfPermablePerks():void {
-			if (player.findPerk(PerkLib.CorruptedKitsune) < 0) {
-				player.createPerk(PerkLib.CorruptedKitsune, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Corrupted Kitsune!)</b>");
-			}
-			if (player.findPerk(PerkLib.CorruptedNinetails) < 0) {
-				player.createPerk(PerkLib.CorruptedNinetails, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Corrupted Ninetails!)</b>");
-			}
-			if (player.findPerk(PerkLib.DarkCharm) < 0) {
-				player.createPerk(PerkLib.DarkCharm, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Dark Charm!)</b>");
-			}
-			if (player.findPerk(PerkLib.DragonFireBreath) < 0) {
-				player.createPerk(PerkLib.DragonFireBreath, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Dragon Fire Breath!)</b>");
-			}
-			if (player.findPerk(PerkLib.DragonIceBreath) < 0) {
-				player.createPerk(PerkLib.DragonIceBreath, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Dragon Ice Breath!)</b>");
-			}
-			if (player.findPerk(PerkLib.EnlightenedKitsune) < 0) {
-				player.createPerk(PerkLib.EnlightenedKitsune, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Enlightened Kitsune!)</b>");
-			}
-			if (player.findPerk(PerkLib.EnlightenedNinetails) < 0) {
-				player.createPerk(PerkLib.EnlightenedNinetails, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Enlightened Ninetails!)</b>");
-			}
-			if (player.findPerk(PerkLib.FerasBoonAlpha) < 0) {
-				player.createPerk(PerkLib.FerasBoonAlpha, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Feras Boon Alpha!)</b>");
-			}
-			if (player.findPerk(PerkLib.FerasBoonBreedingBitch) < 0) {
-				player.createPerk(PerkLib.FerasBoonBreedingBitch, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Feras Boon Breeding Bitch!)</b>");
-			}
-			if (player.findPerk(PerkLib.FerasBoonMilkingTwat) < 0) {
-				player.createPerk(PerkLib.FerasBoonMilkingTwat, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Feras Boon Milking Twat!)</b>");
-			}
-			if (player.findPerk(PerkLib.FerasBoonSeeder) < 0) {
-				player.createPerk(PerkLib.FerasBoonSeeder, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Feras Boon Seeder!)</b>");
-			}
-			if (player.findPerk(PerkLib.FireLord) < 0) {
-				player.createPerk(PerkLib.FireLord, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Fire Lord!)</b>");
-			}
-			if (player.findPerk(PerkLib.Flexibility) < 0) {
-				player.createPerk(PerkLib.Flexibility, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Flexibility!)</b>");
-			}
-			if (player.findPerk(PerkLib.Hellfire) < 0) {
-				player.createPerk(PerkLib.Hellfire, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Hellfire!)</b>");
-			}
-			if (player.findPerk(PerkLib.InkSpray) < 0) {
-				player.createPerk(PerkLib.InkSpray, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Ink Spray!)</b>");
-			}
-			if (player.findPerk(PerkLib.LizanRegeneration) < 0) {
-				player.createPerk(PerkLib.LizanRegeneration, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Lizan Regeneration!)</b>");
-			}
-			if (player.findPerk(PerkLib.Lustzerker) < 0) {
-				player.createPerk(PerkLib.Lustzerker, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Lustzerker!)</b>");
-			}
-			if (player.findPerk(PerkLib.MagicalFertility) < 0) {
-				player.createPerk(PerkLib.MagicalFertility, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Magical Fertility!)</b>");
-			}
-			if (player.findPerk(PerkLib.MagicalVirility) < 0) {
-				player.createPerk(PerkLib.MagicalVirility, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Magical Virility!)</b>");
-			}
-			if (player.findPerk(PerkLib.MaraesGiftButtslut) < 0) {
-				player.createPerk(PerkLib.MaraesGiftButtslut, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Maraes Gift Buttslut!)</b>");
-			}
-			if (player.findPerk(PerkLib.MaraesGiftFertility) < 0) {
-				player.createPerk(PerkLib.MaraesGiftFertility, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Maraes Gift Fertility!)</b>");
-			}
-			if (player.findPerk(PerkLib.MaraesGiftProfractory) < 0) {
-				player.createPerk(PerkLib.MaraesGiftProfractory, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Maraes Gift Profractory!)</b>");
-			}
-			if (player.findPerk(PerkLib.MaraesGiftStud) < 0) {
-				player.createPerk(PerkLib.MaraesGiftStud, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Maraes Gift Stud!)</b>");
-			}
-			if (player.findPerk(PerkLib.MilkMaid) < 0) {
-				player.createPerk(PerkLib.MilkMaid, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: MilkMaid!)</b>");
-			}
-			if (player.findPerk(PerkLib.OneTrackMind) < 0) {
-				player.createPerk(PerkLib.OneTrackMind, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: One Track Mind!)</b>");
-			}
-			if (player.findPerk(PerkLib.PureAndLoving) < 0) {
-				player.createPerk(PerkLib.PureAndLoving, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Pure And Loving!)</b>");
-			}
-			if (player.findPerk(PerkLib.PurityBlessing) < 0) {
-				outputText("\n\n<b>(Gained Perk: Purity Blessing!)</b>");
-				player.createPerk(PerkLib.PurityBlessing, 0, 0, 0, 0);
-			}
-			if (player.findPerk(PerkLib.SensualLover) < 0) {
-				player.createPerk(PerkLib.SensualLover, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Sensual Lover!)</b>");
-			}
-			doNext(SoulforceCheats);
-		}
 		public function RevertCabinProgress():void {
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 2;
 			SoulforceCheats()
@@ -1455,19 +1368,19 @@ private function resetJabberwockyFlag():void {
 		}
 		public function BackToHumanForm():void {
 			flags[kFLAGS.GARGOYLE_BODY_MATERIAL] = 0;
-			player.armType = Arms.HUMAN;
-			player.eyeType = Eyes.HUMAN;
-			player.antennae = Antennae.NONE;
+			player.arms.type = Arms.HUMAN;
+			player.eyes.type = Eyes.HUMAN;
+			player.antennae.type = Antennae.NONE;
 			player.lowerBody = LowerBody.HUMAN;
 			player.legCount = 2;
-			player.wingType = Wings.NONE;
-			player.wingDesc = "non-existant";
-			player.tongueType = Tongue.HUMAN;
+			player.wings.type = Wings.NONE;
+			player.wings.desc = "non-existant";
+			player.tongue.type = Tongue.HUMAN;
 			player.tailType = Tail.NONE;
 			player.tailRecharge = 0;
-			player.horns = 0;
-			player.hornType = Horns.NONE;
-			player.earType = Ears.HUMAN;
+			player.horns.count = 0;
+			player.horns.type = Horns.NONE;
+			player.ears.type = Ears.HUMAN;
 			player.skin.restore();
 			clearOutput();
 			outputText("You have become fully human again.");
@@ -1506,20 +1419,20 @@ private function resetJabberwockyFlag():void {
 			player.skin.setBaseOnly({type:Skin.STONE});
 			player.hairType = Hair.NORMAL;
 			player.faceType = Face.HUMAN;
-			player.hornType = Horns.GARGOYLE;
-			player.horns = 12 + rand(4); 
-			player.armType = Arms.GARGOYLE;
+			player.horns.type = Horns.GARGOYLE;
+			player.horns.count = 12 + rand(4); 
+			player.arms.type = Arms.GARGOYLE;
 			player.tailType = Tail.GARGOYLE;
 			player.tailRecharge = 0;
-			player.wingType = Wings.GARGOYLE_LIKE_LARGE;
+			player.wings.type = Wings.GARGOYLE_LIKE_LARGE;
 			player.lowerBody = LowerBody.GARGOYLE;
 			player.legCount = 2;
-			player.eyeType = Eyes.HUMAN;
-			player.antennae = Antennae.NONE;
-			player.tongueType = Tongue.HUMAN;
-			player.earType = Ears.HUMAN;
-			player.gillType = Gills.NONE;
-			player.rearBody = RearBody.NONE;
+			player.eyes.type = Eyes.HUMAN;
+			player.antennae.type = Antennae.NONE;
+			player.tongue.type = Tongue.HUMAN;
+			player.ears.type = Ears.HUMAN;
+			player.gills.type = Gills.NONE;
+			player.rearBody.type = RearBody.NONE;
 			if (player.hasStatusEffect(StatusEffects.BlackNipples)) player.removeStatusEffect(StatusEffects.BlackNipples);
 		//	if (player.averageNipplesPerBreast() > 1) player.breastRows[x].nipplesPerBreast = 1;
 			if (player.hasStatusEffect(StatusEffects.Feeder)) {
@@ -2357,11 +2270,12 @@ private function resetJabberwockyFlag():void {
 			outputText("Using a tiny amount of soulforce you could try to use soul sense to locate some of people you meet of location you found before without wasting hours for that. Especialy if those people are usualy roaming around or places that constantly changing their location.");
 			outputText("\n\nAmount of soulforce used to locate them using soul sense depening of relative power of searched person or location.");
 			menu();
-			if (flags[kFLAGS.SOUL_SENSE_TAMANI] == 3) addButton(0, "Tamani", TamaniEnc);
-			if (flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] == 3) addButton(1, "Tamani D.", TamaniDaughtersEnc);
-			if (flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] == 3) addButton(2, "KitsuMansion", KitsuneMansion);
-			if (flags[kFLAGS.SOUL_SENSE_IZUMI] == 3) addButton(3, "Izumi", IzumiEnc);
-			if (flags[kFLAGS.SOUL_SENSE_WORLD_TREE] == 1) addButton(10, "WorldTree", findWorldTree);
+			if (flags[kFLAGS.SOUL_SENSE_TAMANI] >= 3) addButton(0, "Tamani", TamaniEnc);
+			if (flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] >= 3) addButton(1, "Tamani D.", TamaniDaughtersEnc);
+			if (flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] >= 3) addButton(2, "KitsuMansion", KitsuneMansion);
+			if (flags[kFLAGS.SOUL_SENSE_IZUMI] >= 3) addButton(3, "Izumi", IzumiEnc);
+			if (flags[kFLAGS.SOUL_SENSE_WORLD_TREE] >= 1) addButton(10, "WorldTree", findWorldTree);
+			if (flags[kFLAGS.SOUL_SENSE_GIACOMO] >= 3) addButton(13, "Giacomo", findGiacomo);
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 		public function TamaniEnc():void {
@@ -2413,6 +2327,17 @@ private function resetJabberwockyFlag():void {
 				player.soulforce -= 100;
 				statScreenRefresh();
 				wolrdtreeScene.YggdrasilDiscovery();
+			}
+			else {
+				outputText("Your current soulforce is too low.");
+				doNext(SoulSense);
+			}
+		}
+		public function findGiacomo():void {
+			if (player.soulforce >= 100) {
+				player.soulforce -= 100;
+				statScreenRefresh();
+				SceneLib.giacomoShop.giacomoEncounter();
 			}
 			else {
 				outputText("Your current soulforce is too low.");
