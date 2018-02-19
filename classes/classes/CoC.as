@@ -72,7 +72,7 @@ public class CoC extends MovieClip
     public var date:Date = new Date();
 
     //Mod save version.
-    public var modSaveVersion:Number = 19;
+    public var modSaveVersion:Number = 20;
     public var levelCap:Number = 150;
 
     //Used to restrict random drops from overlapping uniques
