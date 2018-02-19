@@ -3446,7 +3446,7 @@ private function promptSaveUpdate():void {
 		eyesColorSelection();
 		return;
 	}
-/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 19) {
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 19) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 20;
 		if (player.findPerk(PerkLib.JobBarbarian) >= 0) {
 			player.removePerk(PerkLib.JobBarbarian);
@@ -3457,7 +3457,7 @@ private function promptSaveUpdate():void {
 		doNext(doCamp);
 		return;
 	}
-	if (flags[kFLAGS.MOD_SAVE_VERSION] == 20) {
+/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 20) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 21;
 		clearOutput();
 		outputText("Text.");
