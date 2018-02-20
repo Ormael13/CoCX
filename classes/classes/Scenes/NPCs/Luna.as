@@ -8,6 +8,7 @@ package classes.Scenes.NPCs
 	import classes.BodyParts.Butt;
 	import classes.BodyParts.Hips;
 	import classes.Scenes.SceneLib;
+	import classes.GlobalFlags.kFLAGS;
 	import classes.internals.*;
 	
 	use namespace CoC;
@@ -51,12 +52,14 @@ package classes.Scenes.NPCs
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.lunaFollower.fullMoonEventResistWin();
+			if (flags[kFLAGS.LUNA_FOLLOWER] > 10) SceneLib.lunaFollower.sparLunaWon();
+			else SceneLib.lunaFollower.fullMoonEventResistWin();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.lunaFollower.fullMoonEventResistDefat();
+			if (flags[kFLAGS.LUNA_FOLLOWER] > 10) SceneLib.lunaFollower.sparLunaLost();
+			else SceneLib.lunaFollower.fullMoonEventResistDefeat();
 		}
 		
 		public function Luna() 

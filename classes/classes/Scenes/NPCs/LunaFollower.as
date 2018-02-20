@@ -121,7 +121,10 @@ package classes.Scenes.NPCs
 				if (flags[kFLAGS.SLEEP_WITH] != "Luna") addButton(5, "Sleep With", lunaSleepToggle);
 				else addButton(5, "Sleep Alone", lunaSleepToggle);
 			}
-			if (flags[kFLAGS.LUNA_FOLLOWER] > 10) addButton(6, "Sex", sexMenuMain);
+			if (flags[kFLAGS.LUNA_FOLLOWER] > 10) {
+				if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(2, "Spar", sparLuna);
+				addButton(6, "Sex", sexMenuMain);
+			}
 			if (flags[kFLAGS.LUNA_FOLLOWER] == 9 || flags[kFLAGS.LUNA_FOLLOWER] == 10) addButton(7, "Unchain", lunaChainToggle).hint("Unchain Luna and see what happens.");
 			if (flags[kFLAGS.LUNA_FOLLOWER] == 7 || flags[kFLAGS.LUNA_FOLLOWER] == 8) addButton(7, "Chain", lunaChainToggle).hint("Chain Luna.");
 			addButton(14, "Leave", camp.campFollowers);
@@ -213,6 +216,30 @@ package classes.Scenes.NPCs
 			lunaJealousy(-50);
 			lunaAffection(2);
 			doNext(camp.returnToCampUseOneHour);
+		}
+		
+		public function sparLuna():void {
+			clearOutput();
+			outputText("You ask Luna if she wouldn’t mind sparring with you.\n\n");
+			outputText("\"<i>" + player.mf("Master", "Mistress") + ", we both know it is best not to awaken my instincts during the day. I am a pitiful woman.</i>\"\n\n");
+			outputText("Well it's exactly because she is both strong and dangerous that you need her help to become so yourself.\n\n");
+			outputText("\"<i>If this is the " + player.mf("Master's", "Mistress'") + " wish, I will comply.</i>\"\n\n");
+			outputText("You both head to the ring and get ready for a brawl. She removes her dress and gets stark naked before you " + (camp.companionsCount() >= 2 ? "to the consternation of everyone who’s looking, " : "") + "before starting to pant as she changes shape. You recognise the green glow of crazed desire in her eyes now and almost regret your choice. Losing to her will likely result into you both having sex whether you like it or not.\n\n");
+			startCombat(new Luna());
+		}
+		public function sparLunaWon():void {
+			clearOutput();
+			outputText("You ask Luna if she wouldn’t mind sparring with you.\n\n");
+			outputText("\"<i>If this is the " + player.mf("Master's", "Mistress'") + " wish, I will comply.</i>\"\n\n");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function sparLunaLost():void {
+			clearOutput();
+			outputText("Luna pounces on you with a hungry growl. Guess you had it coming when you asked her to spar you.\n\n");
+			outputText("\"<i>You lost " + player.mf("Master", "Mistress") + ", therefore I’m entitled to do whatever I want with you. Well I don’t care what it is as long as we do it now.</i>\"\n\n");
+			monster.createPerk(PerkLib.NoGemsLost, 0, 0, 0, 0);
+			cleanupAfterCombat();
+			doNext(sexMenuDominateHer);
 		}
 		
 		public function mealLuna():void {
@@ -395,7 +422,7 @@ package classes.Scenes.NPCs
 			CoC.instance.timeQ += 6;
 			doNext(camp.sleepWrapper);
 		}
-		public function fullMoonEventResistDefat():void {
+		public function fullMoonEventResistDefeat():void {
 			clearOutput();
 			outputText("You are too weak to keep fighting and Luna senses it. Before you can react she pounces on you. You’re back to the position you were in earlier and this time you are in no way capable of putting up a fight.\n\n");
 			outputText("\"<i>It's ok, [name], the pain will only last for a few seconds and then...</i>\"\n\n");

@@ -1001,6 +1001,7 @@ public function loversHotBathCount():Number {
 	if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
 	if (flags[kFLAGS.DIANA_FOLLOWER] > 5) counter++;
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
+	if (flags[kFLAGS.LUNA_FOLLOWER] >= 4) counter++;
 	if (followerHel()) counter++;
 	if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
 	if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
@@ -1023,6 +1024,7 @@ public function sparableCampMembersCount():Number {
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) counter++;
 	if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
+	if (flags[kFLAGS.LUNA_FOLLOWER] > 10) counter++;
 	if (followerHel()) counter++;
 	if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
 	if (followerKiha()) counter++;
