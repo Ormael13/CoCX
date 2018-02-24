@@ -2702,7 +2702,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 		private function amilyCorruptSexMenu():void {
 			amilySprite();
 			if(player.gender > 0) {
-				outputText("Amily asks, \"<i>How would " + player.mf("master","mistress") + " like to use " + player.mf("his","her") + " cum-bucket today?");
+				outputText("Amily asks, \"<i>How would " + player.mf("master","mistress") + " like to use " + player.mf("his","her") + " cum-bucket today?</i>\"");
 				menu();
 				if (player.hasCock()) {
 					addButton(0, "Anal", corruptAmilyBuckFutter).hint("Fuck Amily in the ass!");

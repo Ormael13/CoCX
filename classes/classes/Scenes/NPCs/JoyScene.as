@@ -581,7 +581,7 @@ import classes.lists.Gender;
 				outputText("...Well, you're not really anything. And it's not really a lot of fun... can't you turn into a boy or a girl?");
 			}
 			//Corruption and perk check
-			outputText("\n\nNext, Joy closes her eyes and focuses on your aura.");
+			outputText("\"</i>\n\nNext, Joy closes her eyes and focuses on your aura.");
 			if (player.cor < 5) { //Pure
 				outputText("\n\n\"<i>Your aura's, like, super shiny white - I can't remember seeing anyone as clean and pretty as you!</i>\"");
 			}
@@ -1186,7 +1186,7 @@ import classes.lists.Gender;
 					outputText("\n\nShe sniffs it and squints her eyes at it. \"<i>Like, I think this will make my funstick bigger. Are you sure you want that [name]?</i>\"");
 				}
 				else {
-					outputText("\n\nShe sniffs it and squints her eyes at it. \"<i>Like, I think this could help me get my funstick back. Are you sure you want that [name]?\"");
+					outputText("\n\nShe sniffs it and squints her eyes at it. \"<i>Like, I think this could help me get my funstick back. Are you sure you want that [name]?\"</i>");
 				}
 				doYesNo(giveJoyAnIncubiDraftForReal, dontGiveJoyAnIncubiDraft);
 			}

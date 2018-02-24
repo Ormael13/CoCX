@@ -1677,7 +1677,7 @@ public class Holidays {
                 if (player.hasVagina()) EngineCore.addButton(3, "Pussy", pastieValentineIntro, "vag");
             }
             else {
-                EngineCore.outputText("\n\nYou tell Pastie that, regrettably, you only have what she sees.  She nods and says, \"<i>Too bad.  I think I'll better get going, then.  It's been somewhat fun, and I finally get a chance to go to sleep sober and wake up without a hangover.");
+                EngineCore.outputText("\n\nYou tell Pastie that, regrettably, you only have what she sees.  She nods and says, \"<i>Too bad.  I think I'll better get going, then.  It's been somewhat fun, and I finally get a chance to go to sleep sober and wake up without a hangover.\"</i>");
                 EngineCore.doNext(SceneLib.camp.returnToCampUseTwoHours);
             }
         }

@@ -2079,7 +2079,7 @@ private function iceCreamDate():void {
 
 	outputText("\n\nYour parfaits are not infinite, however, and once you've depleted your layered frozen treats it seems it's time to head back.  The two of you clasp hands once more and head out of the shop, heading back to Rubi's place in silence, content to be in each other's presence.");
 
-	outputText("\n\nOnce you're back in the house, Rubi sprawls out on the couch, a devilish grin on [rubi eir] face.  \"<i>So, you plan on giving me a good \"kiss\" good night?\"");
+	outputText("\n\nOnce you're back in the house, Rubi sprawls out on the couch, a devilish grin on [rubi eir] face.  \"<i>So, you plan on giving me a good \"kiss\" good night?\"</i>");
 	//[Go to Sex menu]
 	rubiSexMenu();
 	addButton(14,"Leave",camp.returnToCampUseOneHour);

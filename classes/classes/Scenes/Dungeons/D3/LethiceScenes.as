@@ -777,7 +777,7 @@ public class LethiceScenes extends BaseContent
 			outputText("\n\nThe girl blinks, the rage on her face replaced by confusion. <i>“W-what are you talking about, demon?”</i> she murmurs, looking up for the first time. You glance down at her from your place at Mistress’s side, really looking at this... this <i>“Champion”</i> for the first time. You feel a vague sense of recognition when you look at her, even as dirty and cum-slathered as she is, though you can’t place her. You squint, but trying to think more about it just makes your head hurt, and so you instead look down at those perky tits of hers, letting yourself get hard again at the thought of grabbing onto them and fucking her as your next bitch.");
 			
 			outputText("\n\n<i>“You’re lucky,”</i> Mistress smirks, standing. <i>“");
-			if (player.hasStatusEffect(StatusEffects.DungeonShutDown)) outputText("Your predecessor destroyed our welcoming facility. Otherwise I’m sure a certain imp would have revealed the truth to you long ago, before joining you with our breeding machines.");
+			if (player.hasStatusEffect(StatusEffects.DungeonShutDown)) outputText("Your predecessor destroyed our welcoming facility. Otherwise I’m sure a certain imp would have revealed the truth to you long ago, before joining you with our breeding machines.\"</i>");
 			else
 			{
 				outputText("How did you escape from the factory, I wonder? And so clean and pure, too... you’re belly’s not yet swollen with imps, and your breasts are so small. Did you slip through");
