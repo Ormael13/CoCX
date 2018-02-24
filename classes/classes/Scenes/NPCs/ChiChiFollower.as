@@ -73,7 +73,7 @@ public function WonSecondFight():void {
 public function WonSecondFightNo():void {
 	outputText("Likely the proud master would rather have her opponent leave her be than be dishonored any further. You head back toward your camp to rest after this well earned victory, pocketing the scroll you found on Chi Chi at the same time, as you fail to notice the blood beginning to slowly create a small pool under her.\n\n");
 	outputText("A peasant runs to you, stopping you from leaving for a moment.\n\n");
-	outputText("\"<i>I’m sorry to tell you this, but your master took a fatal wound to the head. We will bury her in the town graveyard, so if you would like to, you can visit her grave from time to time. Again my most sincere condolences.\n\n");
+	outputText("\"<i>I’m sorry to tell you this, but your master took a fatal wound to the head. We will bury her in the town graveyard, so if you would like to, you can visit her grave from time to time. Again my most sincere condolences.\"</i>\n\n");
 	outputText("You are somewhat shocked to learn that Chi Chi died, did she go all out in this battle to the point it cost her life? You head back to camp trying to figure how such a tragic incident happened in a training session.\n\n");
 	flags[kFLAGS.CHI_CHI_FOLLOWER] = 2;
 	inventory.takeItem(weapons.MASTGLO, WonSecondFightNo2);

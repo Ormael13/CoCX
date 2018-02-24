@@ -1798,7 +1798,7 @@ public class Pregnancy extends NPCAwareContent {
                     if (flags[kFLAGS.MARBLE_BOYS] == 0)
                     //has Marble had male kids before?
                     {
-                        EngineCore.outputText("You notice that Marble seems to be deep in thought, and you ask her what is wrong.  She starts after a moment and says, \"<i>Oh sweetie, no, it's nothing really.  I just never thought that I'd actually be able to father a son is all.  The thought never occurred to me.");
+                        EngineCore.outputText("You notice that Marble seems to be deep in thought, and you ask her what is wrong.  She starts after a moment and says, \"<i>Oh sweetie, no, it's nothing really.  I just never thought that I'd actually be able to father a son is all.  The thought never occurred to me.\"</i>");
                     }
                     //Add to marble-kids:
                     flags[kFLAGS.MARBLE_KIDS]++;
