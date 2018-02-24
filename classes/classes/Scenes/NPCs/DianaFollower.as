@@ -459,7 +459,7 @@ public function wonOverDianaSpare():void {
 	flags[kFLAGS.DIANA_DEFEATS_COUNTER]++;
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 1 && flags[kFLAGS.DIANA_LVL_UP] == 0) {
 		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 18);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 18);
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 18);
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 1;
 	}

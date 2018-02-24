@@ -693,8 +693,10 @@ public function FightNightmare():void {
 			addButton(8, "NineTailWhip", AddNineTailWhip).hint("Add 1 Nine Tail Whip.");
 			addButton(9, "Hodr's Bow", AddHodrsBow).hint("Add 1 Hodr's Bow.");
 		//	addButton(9, "L Ayo Arm", AddLightAyoArmor).hint("Add 1 Light Ayo Armor for testing purposes.");
-			addButton(10, "SeerHairpin", AddTheSeerHairpin).hint("Add 1 Seer's Hairpin.");
-			addButton(11, "D.Scythe", AddTheDemonicScythe).hint("Add 1 Demonic Scythe.");
+		//	addButton(10, "SeerHairpin", AddTheSeerHairpin).hint("Add 1 Seer's Hairpin.");
+			addButton(10, "TruestriekSword", AddTruestrikeSword).hint("Add 1 Truestrike Sword.");
+		//	addButton(11, "D.Scythe", AddTheDemonicScythe).hint("Add 1 Demonic Scythe.");
+			addButton(11, "ScepterComm", AddSceptreOfCommand).hint("Add 1 Sceptre of Command.");
 			addButton(12, "CatONIneTWhip", AddCatONineTailWhip).hint("Add 1 Bastet Whip.");
 			addButton(13, "InqTome", AddTheInquisitorsTome).hint("Add 1 Inquisitor's Tome.");
 			addButton(14, "Back", SoulforceCheats);
@@ -882,9 +884,17 @@ public function FightNightmare():void {
 			outputText("\n\n<b>(Gained 1 Seer's Hairpin!)</b>\n\n");
 			inventory.takeItem(jewelries.SEERPIN, EquipmentMenu);
 		}
+		public function AddTruestrikeSword():void {
+			outputText("\n\n<b>(Gained 1 Truestrike Sword!)</b>\n\n");
+			inventory.takeItem(weapons.TRSTSWO, EquipmentMenu);
+		}
 		public function AddTheDemonicScythe():void {
 			outputText("\n\n<b>(Gained 1 Demonic Scythe!)</b>\n\n");
 			inventory.takeItem(weapons.DEMSCYT, EquipmentMenu);
+		}
+		public function AddSceptreOfCommand():void {
+			outputText("\n\n<b>(Gained 1 Sceptre of Command!)</b>\n\n");
+			inventory.takeItem(weapons.SCECOMM, EquipmentMenu);
 		}
 		public function AddTheInquisitorsTome():void {
 			outputText("\n\n<b>(Gained 1 Inquisitor's Tome!)</b>\n\n");

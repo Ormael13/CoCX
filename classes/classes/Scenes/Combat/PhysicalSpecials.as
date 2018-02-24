@@ -1143,6 +1143,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
+		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		damage *= dmgamp;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
@@ -1196,6 +1197,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
+		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		damage *= dmgamp;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
@@ -1250,6 +1252,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
+		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		damage *= dmgamp;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
@@ -1291,6 +1294,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.EpicGolemMaker)) dmgamp += 0.25;
 		if (player.hasPerk(PerkLib.LegendaryGolemMaker)) dmgamp += 0.65;
+		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		damage *= dmgamp;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
@@ -1326,6 +1330,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.EpicGolemMaker)) dmgamp += 0.25;
 		if (player.hasPerk(PerkLib.LegendaryGolemMaker)) dmgamp += 0.65;
+		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		damage *= dmgamp;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
@@ -1361,6 +1366,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.EpicGolemMaker)) dmgamp += 0.25;
 		if (player.hasPerk(PerkLib.LegendaryGolemMaker)) dmgamp += 0.65;
+		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		damage *= dmgamp;
 		damage = Math.round(damage);
 		damage = doDamage(damage);

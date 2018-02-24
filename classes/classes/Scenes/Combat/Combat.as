@@ -829,6 +829,7 @@ public function elementalattacks(elementType:int, summonedElementals:int):void {
 	if (player.hasPerk(PerkLib.ElementalConjurerResolve)) elementalamplification += 0.1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 	if (player.hasPerk(PerkLib.ElementalConjurerDedication)) elementalamplification += 0.2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 	if (player.hasPerk(PerkLib.ElementalConjurerSacrifice)) elementalamplification += 0.3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+	if (player.weapon == weapons.SCECOMM) elementalamplification += 0.5;
 	elementalDamage *= elementalamplification;
 	//Determine if critical hit!
 	var crit:Boolean = false;
@@ -1251,6 +1252,11 @@ internal function wait():void {
 		} else {
 			enemyAI();
 		}
+}
+
+public function meleeAccuracy():Number {
+	var accmod:Number = 200;
+	return accmod;
 }
 
 public function arrowsAccuracy():Number {
@@ -2340,7 +2346,6 @@ public function attack():void {
 		return;
 	}
 	
-	var damage:Number = 0;
 	//Determine if dodged!
 	if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 		//Akbal dodges special education
@@ -2379,6 +2384,17 @@ public function attack():void {
 		enemyAI();
 		return;
 	}
+	meleeDamageAcc();
+}
+	
+public function meleeDamageAcc():void {
+	var accMelee:Number = 0;
+	accMelee += (meleeAccuracy() / 2);
+	if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) accMelee -= flags[kFLAGS.ATTACKS_ACCURACY];
+	if (player.weaponName == "Truestrike sword") accMelee = 100;
+//	fatigue(oneArrowTotalCost());
+	if (rand(100) < accMelee) {
+	var damage:Number = 0;
 	//------------
 	// DAMAGE
 	//------------
@@ -2780,16 +2796,19 @@ public function attack():void {
 		
 		dynStats("lus", 25);
 	}
-	
 	outputText("\n");
 	checkAchievementDamage(damage);
 	WrathWeaponsProc();
 	heroBaneProc(damage);
+	}
+	else {
+		
+	}
 	if(monster.HP <= 0){doNext(endHpVictory); return;}
 	if(monster.lust >= monster.maxLust()){doNext(endLustVictory); return;}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] >= 2){
 		flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]--;
-		//	flags[kFLAGS.ATTACKS_ACCURACY] += 5;
+	//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
 		attack();
 		return;
 	}
