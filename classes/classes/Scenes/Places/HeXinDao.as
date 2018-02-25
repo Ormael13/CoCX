@@ -484,7 +484,7 @@ public function soularena():void {
         outputText("Picking the one in the middle prepared for challanges you enter there and looking around checking who if there is currently anyone up for a challange.");
         menu();
         addButton(0, "Gaunlet 1", gaunletchallange1fight1).hint("Fight 3 diff enemies one after another.");
-        //if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] == 1) addButton(1, "Gaunlet 2", gaunletchallange2fight1).hint("Fight 4 diff enemies one after another.");
+        if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] == 1) addButton(1, "Gaunlet 2", gaunletchallange2fight1).hint("Fight 4 diff enemies one after another.");
         //addButton(2, "Gaunlet 3", gaunletchallange3).hint("Fight 5 diff enemies one after another.");
         //addButton(3, "Gaunlet 4", gaunletchallange4).hint("Fight 6 diff enemies one after another.");
         //addButton(4, "Gaunlet 5", gaunletchallange5).hint("Fight 7 diff enemies one after another.");
@@ -566,27 +566,34 @@ public function soularena():void {
 	}
 	public function gaunletchallange2fight3():void {
 		clearOutput();
-		outputText("Placeholder.\n\n");
-        outputText("Placeholder.\n\n");
+		outputText("The mutt fall defeated to the floor as the crowd scream your name. The announcer announce the next contestant.\n\n");
+        outputText("\"<i>The next opponent is a fighter known and loved by the public. You have heard her name told in shallow whispers for the next opponent is an expert of the terrible art known as BDSM. Yes you have all been waiting for her so cheer up for Malady the drider!!!</i>\"\n\n");
+        outputText("A drider in bondage suit comes out of the gate and eyes you amused.\n\n");
+        outputText("\"<i>You are my opponent uh? Doesn’t look like much. Little pet, by the time I’m done binding you, you will seldom call me mistress!</i>\"\n\n");
         startCombat(new CorruptedDrider());
 	}
 	public function gaunletchallange2fight4():void {
 		clearOutput();
-		outputText("Placeholder.\n\n");
+		outputText("As the drider falls defeated the crowd cheer to your victory. That said the battle is far from over yet. A large amount of shadows mass behind the opposite gate and already you can guess what's coming up for you.\n\n");
+        outputText("\"<i>The final contestant is both a new opponent and a test! The town golemancer has been working extra shifts on these thing she calls her babies!! Using the traditional gargoyle model but deprived of soul so for the purpose of mass production these living weapons will mercilessly beat the hell out of the contestant. Who do you think will win the living or the artificial creation? LEEEEETS FIND OUT!!!!!!</i>\"\n\n");
+        outputText("A full squad of stone gargoyle pour out of the gate their mace like tail trailing in the sands. Their claws are sharp and their soulless gaze tells you it will end poorly should you lose.\n\n");
         startCombat(new BossGolems());
 	}
 	public function gaunletchallange2postfight():void {
 		clearOutput();
-		outputText("Placeholder.\n\n");
+		outputText("The last gargoyle crumble to rubble and you hold its head up toward the public in victory.\n\n");
+        outputText("\"<i>The challenger defeated all of his opponent what a miracle! Challenger you may now exit the arena and claim your prize, well done!</i>\"\n\n");
+        outputText("You make your way toward the exit and to your surprise meet face to face with the town golemancer. She grudgingly handle you your reward.\n\n");
+        outputText("\"<i>I’m supposed to reward you ");
         if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] >= 2) {
-			 outputText("\"<i>Good show, champion. As a reward for your performance, please accept these 20 spirit stones. Please do come back again and maybe next time you could even try the harder challenge.</i>\"\n\n");
+			 outputText("a full chest of soulstone. Tsk I guess my golems were not ready yet. Next time if you do show up be ready because my future creation will definitely make a bloody mess out of you.</i>\"\n\n");
 			flags[kFLAGS.SPIRIT_STONES] += 20;
             cleanupAfterCombat();
 		}
 		else {
-			outputText("Placeholder.\n\n");
+			outputText("with this scepter. Tsk I guess my golems were not ready yet. Next time if you do show up be ready because my future creation will definitely make a bloody mess out of you.</i>\"\n\n");
 			flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] = 2;
-            inventory.takeItem(weaponsrange.BOWGUID, cleanupAfterCombat);
+            inventory.takeItem(weapons.SCECOMM, cleanupAfterCombat);
 		}
 	}
     public function restaurantShiraOfTheEast():void {

@@ -1713,26 +1713,26 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.ImprovedCrinosShape)) {
 			if (player.hasPerk(PerkLib.GreaterCrinosShape)) {
 				if (player.hasPerk(PerkLib.MasterCrinosShape)) {
-					temp1 += player.str * 0.2;
-					temp2 += player.tou * 0.2;
-					temp3 += player.spe * 0.2;
+					temp1 += player.str * 0.5;
+					temp2 += player.tou * 0.5;
+					temp3 += player.spe * 0.5;
 				}
 				else {
-					temp1 += player.str * 0.15;
-					temp2 += player.tou * 0.15;
-					temp3 += player.spe * 0.15;
+					temp1 += player.str * 0.4;
+					temp2 += player.tou * 0.4;
+					temp3 += player.spe * 0.4;
 				}
 			}
 			else {
-				temp1 += player.str * 0.1;
-				temp2 += player.tou * 0.1;
-				temp3 += player.spe * 0.1;
+				temp1 += player.str * 0.3;
+				temp2 += player.tou * 0.3;
+				temp3 += player.spe * 0.3;
 			}
 		}
 		else {
-			temp1 += player.str * 0.05;
-			temp2 += player.tou * 0.05;
-			temp3 += player.spe * 0.05;
+			temp1 += player.str * 0.2;
+			temp2 += player.tou * 0.2;
+			temp3 += player.spe * 0.2;
 		}
 		temp1 = Math.round(temp1);
 		temp2 = Math.round(temp2);

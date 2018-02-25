@@ -444,7 +444,7 @@ package classes.Scenes.NPCs
 			player.wings.type = Wings.NONE;
 			player.antennae.type = Antennae.NONE;
 			player.horns.type = Horns.NONE;
-			player.skin.growCoat(Skin.FUR, Skin.COVERAGE_MEDIUM);
+			player.skin.growCoat(Skin.FUR, null, Skin.COVERAGE_MEDIUM);
 			if (player.hasCock() && player.wolfCocks() < 1) {
 				var selectedCockValue:int = -1;
 				for (var indexI:int = 0; indexI < player.cocks.length; indexI++)

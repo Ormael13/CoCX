@@ -3461,13 +3461,28 @@ private function promptSaveUpdate():void {
 	}
 /*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 20) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 21;
+		if (player.hasPerk(PerkLib.Lycanthropy)) player.skin.coverage = Skin.COVERAGE_MEDIUM;
 		clearOutput();
-		outputText("Text.");
+		outputText("Time to defur our werewolfs... no worry it will be only partial deffuring.");
 		doNext(doCamp);
 		return;
 	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 21) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 22;
+		clearOutput();
+		outputText("Text.");
+		doNext(doCamp);
+		return;
+	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 22) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 23;
+		clearOutput();
+		outputText("Text.");
+		doNext(doCamp);
+		return;
+	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 23) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 24;
 		clearOutput();
 		outputText("Text.");
 		doNext(doCamp);
