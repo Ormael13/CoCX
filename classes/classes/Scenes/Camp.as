@@ -860,7 +860,8 @@ CoC.instance.saves.saveGame(player.slotName);
 	if (slavesCount() > 0) addButton(7, "Slaves", campSlavesMenu).hint("Check up on any slaves you have received and interact with them.");
 	addButton(8, "Camp Actions", campActions).hint("Interact with the camp surroundings and also read your codex or questlog.");
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) addButton(9, "Enter Cabin", cabinProgress.initiateCabin).hint("Enter your cabin."); //Enter cabin for furnish.
-	if (player.findPerk(PerkLib.JobSoulCultivator) >= 0 || debug) addButton(10, "Soulforce", soulforce.accessSoulforceMenu).hint("Spend some time on the cultivation or spend some of the soulforce.");
+	if (player.hasPerk(PerkLib.JobSoulCultivator) || debug) addButton(10, "Soulforce", soulforce.accessSoulforceMenu).hint("Spend some time on the cultivation or spend some of the soulforce.");
+	else if (!player.hasPerk(PerkLib.JobSoulCultivator) && player.hasPerk(PerkLib.Metamorph)) addButton(10, "Metamorf", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold freely your body.");
 	var canFap:Boolean = !player.hasStatusEffect(StatusEffects.Dysfunction) && (flags[kFLAGS.UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR] == 0 && !player.isTaur());
 	if (player.lust >= 30) {
 		addButton(11, "Masturbate", SceneLib.masturbation.masturbateMenu);
@@ -3461,7 +3462,10 @@ private function promptSaveUpdate():void {
 	}
 /*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 20) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 21;
-		if (player.hasPerk(PerkLib.Lycanthropy)) player.skin.coverage = Skin.COVERAGE_MEDIUM;
+		if (player.hasPerk(PerkLib.Lycanthropy)) {
+			player.skin.coverage = Skin.COVERAGE_LOW;
+			player.coatColor = player.hairColor;
+		}
 		clearOutput();
 		outputText("Time to defur our werewolfs... no worry it will be only partial deffuring.");
 		doNext(doCamp);

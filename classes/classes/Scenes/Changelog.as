@@ -95,12 +95,14 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added new info when PC have Luna in camp: Moon Cycle. Will show which day of it is currently and when night of full moon will be approaching will be red colored instead of norma black.\n");
 			outputText("-New Gaunlet challange on Soul Arena. Containt 4 fights that will or reward with Sceptre of Command or 20 spirit stones after winning. Req. finishing at least once Gaunlet 1 on soul arena.\n");
 			outputText("-New melee weapon: Sceptre of Command - won as reward for first time beating Gaunlet 2 on Soul Arena. Cost 600 gems and base atk 4. Increase by 50% damage of elementals and golems.\n");
 			outputText("-Beast Warrior Crinos Shape bonuses was increased from 5/10/15/20% of current str/tou/spe to 20/30/40/50%.\n");
+			outputText("-Metamorph perk would grant increase max soulforce by 50 and grant access to Metamorph option even if PC not yet have perk Job: Soul Cultivator.\n");
 			outputText("-Fly-Whisk price lowered by half.\n");
-			outputText("-Fixed bugs: Werewolf full fur instead of partial\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Werewolf full fur instead of partial, Luna bugs fixed\n\n\n\n\n");/*ostatni punkt changelogu
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: \n");
 			//outputText("-New range weapon: Hodr's Bow - obtained by . 22 atk, costing 2200 gems, -5% accuracy, Artifact Bow, each arrow can apply blind debuff on enemy.\n");
 			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
@@ -111,6 +113,8 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -153,6 +157,8 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): dodać yuki-onna TF
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

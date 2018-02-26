@@ -109,6 +109,7 @@ package classes.Scenes.NPCs
 			else if (model.time.hours <= 18) outputText("afternoon");
 			else outputText("evening");
 			outputText(" " + player.mf("Master","Mistress") + ". How can I be of assistance, if any? Just tell me what you may need.</i>\"\n\n");
+			outputText("Luna Follower flag: " + flags[kFLAGS.LUNA_FOLLOWER] + "\n\n");
 			menu();
 			addButton(0, "Appearance", LunaAppearance);
 			addButton(1, "Talk", talkMenuLuna);
@@ -369,6 +370,8 @@ package classes.Scenes.NPCs
 			outputText("Well of course. Had she made her needs clear in the first place you would have helped her with them. There was no need for her to hide her desires. That aside, you already thought of her as more than just a maid. You just didn’t know how to tell her. You don’t care if she thinks she is a monster. From your point of view, even in this form she remains cute. To her utter surprise you");
 			if (!player.isNaked()) outputText(" get rid of your own clothes and");
 			outputText(" display your naked body, telling her she will get exactly what she wants.\n\n");
+			if (flags[kFLAGS.LUNA_FOLLOWER] == 5 || flags[kFLAGS.LUNA_FOLLOWER] == 7 || flags[kFLAGS.LUNA_FOLLOWER] == 9) flags[kFLAGS.LUNA_FOLLOWER] = 11;
+			if (flags[kFLAGS.LUNA_FOLLOWER] == 6 || flags[kFLAGS.LUNA_FOLLOWER] == 8 || flags[kFLAGS.LUNA_FOLLOWER] == 10) flags[kFLAGS.LUNA_FOLLOWER] = 12;
 			flags[kFLAGS.LUNA_MOONING] = 2;
 			doNext(sexMenuVaginal);
 		}
@@ -444,7 +447,7 @@ package classes.Scenes.NPCs
 			player.wings.type = Wings.NONE;
 			player.antennae.type = Antennae.NONE;
 			player.horns.type = Horns.NONE;
-			player.skin.growCoat(Skin.FUR, null, Skin.COVERAGE_MEDIUM);
+			player.skin.growCoat(Skin.FUR, {color:player.hairColor}, Skin.COVERAGE_LOW);
 			if (player.hasCock() && player.wolfCocks() < 1) {
 				var selectedCockValue:int = -1;
 				for (var indexI:int = 0; indexI < player.cocks.length; indexI++)
@@ -537,7 +540,6 @@ package classes.Scenes.NPCs
 			lunaJealousy(-50);
 			lunaAffection(2);
 			player.orgasm();
-			if (flags[kFLAGS.LUNA_FOLLOWER] < 7) flags[kFLAGS.LUNA_FOLLOWER] = 11;
 			if (flags[kFLAGS.LUNA_MOONING] == 2) {
 				flags[kFLAGS.LUNA_MOONING] = 1;
 				if (model.time.hours >= 21) CoC.instance.timeQ = 24 - model.time.hours;

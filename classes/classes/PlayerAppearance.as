@@ -1831,7 +1831,7 @@ public class PlayerAppearance extends BaseContent {
 				else if(skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
 				outputText(". Your mouth is somewhat human save for your wolf-like canines.");
 			} else if (player.hasPartialCoat(Skin.FUR)) {
-				outputText("  Your face looks human save for your wolf-like canines.  You've got [skin coat], hiding your [skin noadj] underneath your furry visage.");
+				outputText("  Your face looks human save for your wolf-like canines.  On your cheek you have [skin coat].");
 			} else {
 				outputText("  Your face looks human save for your wolf-like canines, but overlaid with glittering [skin coat].");
 			}

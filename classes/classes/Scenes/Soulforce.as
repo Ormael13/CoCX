@@ -211,7 +211,7 @@ use namespace CoC;
 			addButton(10, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
 			addButton(11, "Celess", celessIntroForced).hint("Due to hard time getting her intro here it's.");
 			if (player.hasPerk(PerkLib.JobBarbarian)) addButton(12, "BarbToSword", replacingBarbsWithsSowrds).hint("Replacing Job: Barbarian with Job: Swordsman to keep integrity of test saves.");
-			if (player.hasPerk(PerkLib.Lycanthropy) && player.skin.coverage != Skin.COVERAGE_MEDIUM) addButton(13, "WWFurFix", fixingWerewolfFur).hint("Fixing full to partial werewolf fur.");
+			if (player.hasPerk(PerkLib.Lycanthropy) && player.skin.coverage != Skin.COVERAGE_LOW) addButton(13, "WWFurFix", fixingWerewolfFur).hint("Fixing full to partial werewolf fur.");
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 public function celessIntroForced():void {
@@ -224,7 +224,8 @@ public function replacingBarbsWithsSowrds():void {
 	doNext(SoulforceCheats);
 }
 public function fixingWerewolfFur():void {
-	player.skin.coverage = Skin.COVERAGE_MEDIUM;
+	player.skin.coverage = Skin.COVERAGE_LOW;
+	player.coatColor = player.hairColor;
 	doNext(SoulforceCheats);
 }
 public function LvLUPDiana():void {
