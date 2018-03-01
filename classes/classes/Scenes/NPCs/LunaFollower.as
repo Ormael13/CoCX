@@ -157,6 +157,7 @@ package classes.Scenes.NPCs
 			addButton(3, "Camp", talkMenuLunaCampThoughts);
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) addButton(4, "Lycanthropy", talkMenuLunaLycanthropy);
 			else addButtonDisabled(4, "???", "You need to know her better for this.");
+			if (flags[kFLAGS.LUNA_FOLLOWER] > 10 && (!player.hasPerk(PerkLib.Lycanthropy) || !player.hasPerk(PerkLib.LycanthropyDormant))) addButton(9, "Bite Me", talkMenuBiteMe);
 			addButton(14, "Back", mainLunaMenu);
 		}
 		public function talkMenuLunaHer():void {
@@ -218,6 +219,57 @@ package classes.Scenes.NPCs
 			lunaAffection(2);
 			doNext(camp.returnToCampUseOneHour);
 		}
+		public function talkMenuBiteMe():void {
+			clearOutput();
+			outputText("It occurs to you that you could gain the same kind of powers as Luna if you asked her. That said, is that what you truly want?\n\n");
+			menu();
+			addButton(0, "Yes", talkMenuBiteMeYes);
+			addButton(1, "No", talkMenuLuna);
+		}
+		public function talkMenuBiteMeYes():void {
+			outputText("You ask Luna the one thing she likely never expected, would she mind biting you? Luna almost panics the moment you request it, though she also blushes.\n\n");
+			outputText("\"<i>" + player.mf("Master","Mistress") + " I...This is a very important choice you are making here, did you truly think it through? I mean once you are cursed there's no removing it, you will truly be just like me.</i>\"\n\n");
+			outputText("You don’t mind it, truthfully if this can tie the both of you together better, you will do it all the more. Luna nods and undresses as she changes shape. You hold your arm before her and she lose all form of restraint biting you with just the required strength to draw blood. At first it hurts like crazy but then the pain recedes, replaced with spreading pleasure as the wounds begin to throb. ");
+			outputText("Your" + (player.hasCock() ? " [cock] goes fully erect" : "") + "" + (player.gender == 3 ? " and your" : "") + "" + (player.hasVagina() ? " pussy starts moistening" : "") + " from this weird feeling, something's not right.\n\n");
+			outputText("" + (player.humanScore() < 30 ? "Your body starts changing, and to your surprise, its features warp back to their former human features. You begin to think she may have purged you of the transformations that afflicted you, but that's not exactly it. " : "") + "Heat begins to spread from your wound and you start panting, trying to vent out the pleasure and the hot feeling in your body as something fundamental about you changes.\n\n");
+			outputText("Fur begins to grow on various point of your body, namely your arms and legs. Your nails sharpen and curve, turning into a full set of claws as your hands and feet reshape into 5 digit paws. You groan in pleasure, revealing your forming canines as your spine extends into a furry tail while your ears migrate to the top of your head, covering in fur and changing into triangular points like those of a wolf. You pant in pleasure at the change, revealing a moist dog like tongue");
+			if (player.hasCock()) outputText(" as you feel a tightness near the base of your cock where your skin seems to be bunching up. A canine-looking sheath begins forming around your cock’s base, tightening and pulling your penis inside its depths. A hot feeling envelops your member as it surges out and starts throbbing, the crown now a point. The sensations are too much for you.  You throw back your head and howl as the transformation completes, your pointed shaft erupting with intense force");
+			outputText(".\n\n");
+			player.lowerBody = LowerBody.WOLF;
+			if (player.legCount != 2) player.legCount = 2;
+			player.tailType = Tail.WOLF;
+			if (player.tailCount != 1) player.tailCount = 1;
+			player.rearBody.type = RearBody.WOLF_COLLAR;
+			player.arms.type = Arms.WOLF;
+			player.faceType = Face.WOLF_FANGS;
+			player.ears.type = Ears.WOLF;
+			player.eyes.type = Eyes.FERAL;
+			player.tongue.type = Tongue.DOG;
+			player.wings.type = Wings.NONE;
+			player.antennae.type = Antennae.NONE;
+			player.horns.type = Horns.NONE;
+			player.skin.growCoat(Skin.FUR, {color:player.hairColor}, Skin.COVERAGE_LOW);
+			if (player.hasCock() && player.wolfCocks() < 1) {
+				var selectedCockValue:int = -1;
+				for (var indexI:int = 0; indexI < player.cocks.length; indexI++)
+				{
+					if (player.cocks[indexI].cockType != CockTypesEnum.WOLF)
+					{
+						selectedCockValue = indexI;
+						break;
+					}
+				}
+				if (selectedCockValue != -1) {
+					player.cocks[selectedCockValue].cockType = CockTypesEnum.WOLF;
+					player.cocks[selectedCockValue].knotMultiplier = 1.1;
+					player.cocks[selectedCockValue].thickenCock(2);
+				}
+			}
+		//	player.dynStats("str", (40 * player.newGamePlusMod()), "tou", (40 * player.newGamePlusMod()), "spe", (40 * player.newGamePlusMod()), "cor", 20);
+			player.createPerk(PerkLib.Lycanthropy,0,0,0,0);
+			outputText("Barely satiated your eyes now focus back on Luna, lust overwhelming your cursed body. You must have her... NOW!\n\n");
+			doNext(sexMenuDominateHer);
+		}
 		
 		public function sparLuna():void {
 			clearOutput();
@@ -230,8 +282,10 @@ package classes.Scenes.NPCs
 		}
 		public function sparLunaWon():void {
 			clearOutput();
-			outputText("You ask Luna if she wouldn’t mind sparring with you.\n\n");
-			outputText("\"<i>If this is the " + player.mf("Master's", "Mistress'") + " wish, I will comply.</i>\"\n\n");
+			outputText("Luna sit down like a good well behaved dog to admit defeat.\n\n");
+			outputText("\"<i>I yield " + player.mf("Master", "Mistress") + ". You win this one. I hope this warm up was worth your time.</i>\"\n\n");
+			outputText("You thank Luna for helping you with your training and give her freedom to resume duty which she gladly do.\n\n");
+			cleanupAfterCombat();
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function sparLunaLost():void {
@@ -488,8 +542,8 @@ package classes.Scenes.NPCs
 					else addButtonDisabled(6, "???", "Req. Ayane in camp and 100 affection.");
 				}
 			}
-			if (player.cor < 33) addButton(10, "Headpat", sexMenuHeadpat);
-			else addButtonDisabled(10, "Headpat", "You're too corrupted for that!");
+			if (player.cor >= 30) addButton(10, "Headpat", sexMenuHeadpat);
+			else addButtonDisabled(10, "Headpat", "You're too pure for that!");
 			addButton(14, "Back", mainLunaMenu);
 		}
 		public function sexMenuHeadpat():void {

@@ -590,40 +590,48 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 					if (player.hasPerk(PerkLib.Lycanthropy)) {
 						if ((flags[kFLAGS.LUNA_MOON_CYCLE] - 3) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
 							outputText("<b>\nYou can’t help but notice the moon is almost full as it rises up.  It seems transfixing like it is calling to you.");
-							outputText("\n\nYou feel your might increasing as the moon draws closer to fullness.</b>");
+							outputText("\n\nYou feel your might increasing as the moon draws closer to fullness.</b>\n");
 							dynStats("str", (10 * player.newGamePlusMod()), "tou", (10 * player.newGamePlusMod()), "spe", (10 * player.newGamePlusMod()));
+							needNext = true;
 						}
 						if ((flags[kFLAGS.LUNA_MOON_CYCLE] - 2) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
 							outputText("<b>\nWhen the almost-full moon appears it causes your heart to race with excitement.  You hearing seems better than ever.  Every breath brings a rush of smells through your nose that seem much more pronounced than they should.");
-							outputText("\n\nYou feel your might increasing as the moon draws closer to fullness.</b>");
+							outputText("\n\nYou feel your might increasing as the moon draws closer to fullness.</b>\n");
 							dynStats("str", (10 * player.newGamePlusMod()), "tou", (10 * player.newGamePlusMod()), "spe", (10 * player.newGamePlusMod()));
+							needNext = true;
 						}
 						if ((flags[kFLAGS.LUNA_MOON_CYCLE] - 1) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
 							outputText("<b>\nYou gaze at the moon and it seems to gaze back into you.   Something is coming and it won’t be long now.   You feel like you are crawling in your skin.  It feels like tear out of your body and be born anew.");
-							outputText("\n\nYou feel your might increasing as the moon draws closer to fullness. It's almost time.</b>");
+							outputText("\n\nYou feel your might increasing as the moon draws closer to fullness. It's almost time.</b>\n");
 							dynStats("str", (10 * player.newGamePlusMod()), "tou", (10 * player.newGamePlusMod()), "spe", (10 * player.newGamePlusMod()));
+							needNext = true;
 						}
 						if (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0) {
-							outputText("<b>\nYou are at the peak of your strength, it's a full moon tonight and you feel yourself burning with maddening desire as you go into " + player.mf("rut","heat") + ".</b>");
+							outputText("<b>\nYou are at the peak of your strength, it's a full moon tonight and you feel yourself burning with maddening desire as you go into " + player.mf("rut","heat") + ".</b>\n");
 							dynStats("str", (10 * player.newGamePlusMod()), "tou", (10 * player.newGamePlusMod()), "spe", (10 * player.newGamePlusMod()));
 							if (player.hasCock() || (player.gender == 3 && rand(2) == 0)) player.goIntoRut(false);
 							else if (player.hasVagina()) player.goIntoHeat(false);
+							needNext = true;
 						}
 						if ((flags[kFLAGS.LUNA_MOON_CYCLE] + 1) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
-							outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>");
+							outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>\n");
 							dynStats("str", -(10 * player.newGamePlusMod()), "tou", -(10 * player.newGamePlusMod()), "spe", -(10 * player.newGamePlusMod()));
+							needNext = true;
 						}
 						if ((flags[kFLAGS.LUNA_MOON_CYCLE] + 2) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
-							outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>");
+							outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>\n");
 							dynStats("str", -(10 * player.newGamePlusMod()), "tou", -(10 * player.newGamePlusMod()), "spe", -(10 * player.newGamePlusMod()));
+							needNext = true;
 						}
 						if ((flags[kFLAGS.LUNA_MOON_CYCLE] + 3) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
-							outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>");
+							outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>\n");
 							dynStats("str", -(10 * player.newGamePlusMod()), "tou", -(10 * player.newGamePlusMod()), "spe", -(10 * player.newGamePlusMod()));
+							needNext = true;
 						}
 						if ((flags[kFLAGS.LUNA_MOON_CYCLE] + 4) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
-							outputText("<b>\nIt's a new moon tonight, you feel somewhat weak.</b>");
+							outputText("<b>\nIt's a new moon tonight, you feel somewhat weak.</b>\n");
 							dynStats("str", -(10 * player.newGamePlusMod()), "tou", -(10 * player.newGamePlusMod()), "spe", -(10 * player.newGamePlusMod()));
+							needNext = true;
 						}
 					}
 				}

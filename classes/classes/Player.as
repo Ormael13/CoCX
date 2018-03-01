@@ -5281,7 +5281,7 @@ use namespace CoC;
 				}
 			}//+15(60)((70))(((140))) / 10 - 20(50 - 60)((70 - 80))(((130 - 140)))
 			if (werewolfScore() >= 6) {
-				if (wolfScore() >= 12) {
+				if (werewolfScore() >= 12) {
 					maxStr += (100 * newGamePlusMod);
 					maxTou += (40 * newGamePlusMod);
 					maxSpe += (60 * newGamePlusMod);

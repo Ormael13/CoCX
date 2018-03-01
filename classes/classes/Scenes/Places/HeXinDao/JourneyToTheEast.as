@@ -39,6 +39,8 @@ package classes.Scenes.Places.HeXinDao
 			addButton(2, "NoceLiq", buyDrink, consumables.NOCELIQ);
 			addButton(3, "OniSake", buyDrink, consumables.ONISAKE);
 			addButton(4, "SalamFW", buyDrink, consumables.SALAMFW);
+			addButton(12, "BimboL", buyDrink, consumables.BIMBOLQ);
+			addButton(13, "BroBrew", buyDrink, consumables.BROBREW);
 			addButton(14, "Back", notThirsty);
 		}
 
