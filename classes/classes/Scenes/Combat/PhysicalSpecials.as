@@ -830,9 +830,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		fatigue(50, USEFATG_PHYSICAL);
 		var damage:Number = 0;
-		damage += (scalingBonusStrength() * 0.2) + player.str + unarmedAttack();
-		if (player.hasPerk(PerkLib.WhirlwindFeral)) damage += (scalingBonusStrength() * 0.1) + ((player.str + unarmedAttack()) * 0.5);
-		if (damage < 10) damage = 10;
+		damage += (scalingBonusStrength() * 0.3) + ((player.str + unarmedAttack()) * 1.5);
+		if (player.hasPerk(PerkLib.WhirlwindFeral)) damage += (scalingBonusStrength() * 0.15) + ((player.str + unarmedAttack()) * 0.75);
+		if (damage < 15) damage = 15;
 		//weapon bonus
 		if (player.weaponAttack < 101) damage *= (1 + (player.weaponAttack * 0.02));
 		else if (player.weaponAttack >= 101 && player.weaponAttack < 201) damage *= (2 + ((player.weaponAttack - 100) * 0.015));

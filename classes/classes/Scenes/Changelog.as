@@ -96,12 +96,15 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-Ice Fist and Fire Punch req. uing bare first or gaunlets. Punishing Kick req. to have bipedal or taur lower body.\n");
+			outputText("-Visiting Journey to the East inn after 5 pm give 25% to encounter drunk Chi Chi that may lead to drunken sex.\n");
 			outputText("-Added new info when PC have Luna in camp: Moon Cycle. Will show which day of it is currently and when night of full moon will be approaching will be red colored instead of norma black.\n");
 			outputText("-New Gaunlet challange on Soul Arena. Containt 4 fights that will or reward with Sceptre of Command or 20 spirit stones after winning. Req. finishing at least once Gaunlet 1 on soul arena.\n");
 			outputText("-New melee weapon: Sceptre of Command - won as reward for first time beating Gaunlet 2 on Soul Arena. Cost 600 gems and base atk 4. Increase by 50% damage of elementals and golems.\n");
 			outputText("-Beast Warrior Crinos Shape bonuses was increased from 5/10/15/20% of current str/tou/spe to 20/30/40/50%.\n");
 			outputText("-Metamorph perk would grant increase max soulforce by 50 and grant access to Metamorph option even if PC not yet have perk Job: Soul Cultivator.\n");
-			outputText("-Fly-Whisk price lowered by half.\n");
+			outputText("-Feral Whirlwind base dmg increased by 50%. Fly-Whisk price lowered by half.\n");
 			outputText("-Fixed bugs: Werewolf full fur instead of partial, Luna bugs fixed\n\n\n\n\n");/*ostatni punkt changelogu
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: \n");
 			//outputText("-New range weapon: Hodr's Bow - obtained by . 22 atk, costing 2200 gems, -5% accuracy, Artifact Bow, each arrow can apply blind debuff on enemy.\n");
@@ -113,14 +116,11 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Bat, Vampire, Cat, Cheshire cat
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
