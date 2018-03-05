@@ -225,7 +225,7 @@ public function wonOverDianaOralM():void {
 	if (flags[kFLAGS.DIANA_FOLLOWER] >= 2) {
 		outputText("You don’t really even have to tell her, she’s already practically drooling. She quickly grabs your ");
 		if (player.cockTotal() > 1) outputText("largest ");
-		outputText("cock. , before lovingly running her tongue down your shaft as well as planting some loving kisses across it, showering it with her devotion. She eventually moves her mouth back up the length, reaching the head and planting another loving kiss on it.\n\n");
+		outputText("cock, before lovingly running her tongue down your shaft as well as planting some loving kisses across it, showering it with her devotion. She eventually moves her mouth back up the length, reaching the head and planting another loving kiss on it.\n\n");
 		outputText("Pleased you start pushing your ");
 		if (player.cockTotal() > 1) outputText("largest ");
 		outputText("[cock] into her eager mouth, ");
@@ -440,7 +440,7 @@ public function wonOverDianaRape():void {
 		outputText("Grunting, and with a huge amount of self control, you pull yourself out of her, spraying your load over her back. Satisfied, you climb off her, leaving her to hang off the " + object() + ", crying softly to herself, while you dress yourself and leave.\n\n");
 	}
 	//if (player.isAlraune()) x;
-	if (flags[kFLAGS.DIANA_LVL_UP] < 2) flags[kFLAGS.DIANA_FOLLOWER] = 3;
+	if (flags[kFLAGS.DIANA_LVL_UP] < 3) flags[kFLAGS.DIANA_FOLLOWER] = 3;
 	else flags[kFLAGS.DIANA_FOLLOWER] = 4;
 	player.orgasm();
 	cleanupAfterCombat();

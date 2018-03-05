@@ -1078,7 +1078,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 				break;
 		}
 		outputText(".\n\n");
-		buttons.add("Amily", amilyScene.amilyFollowerEncounter);
+		buttons.add("Amily", amilyScene.amilyFollowerEncounter2).disableIf(player.statusEffectv1(StatusEffects.CampLunaMishaps1) > 0,"Hurt foot.");
 	}
 	//Amily out freaking Urta?
 	else if(flags[kFLAGS.AMILY_VISITING_URTA] == 1 || flags[kFLAGS.AMILY_VISITING_URTA] == 2) {
@@ -1099,7 +1099,8 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 	//Chi Chi
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) {
 		outputText("You can see Chi Chi not so far from Jojo. She’s busy practicing her many combos on a dummy. Said dummy will more than likely have to be replaced within twenty four hours.\n\n");
-		buttons.add( "Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu);
+		/*if (player.statusEffectv4(StatusEffects.CampLunaMishaps2) > 0) buttons.disable("Wet.");
+		else */buttons.add( "Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu2);
 	}
 	//Diana
 	if (flags[kFLAGS.DIANA_FOLLOWER] > 5) {
@@ -1109,7 +1110,8 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 	//Etna
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) {
 		outputText("Etna is resting lazily on a rug in a very cat-like manner. She’s looking at you always with this adorable expression of hers, her tail wagging expectantly at your approach.\n\n");
-		buttons.add( "Etna", SceneLib.etnaScene.etnaCampMenu).disableIf(player.statusEffectv4(StatusEffects.CampSparingNpcsTimers1) > 0,"Training.");
+		/*if (player.statusEffectv1(StatusEffects.CampLunaMishaps2) > 0) buttons.disable("Sleeping.");
+		else */buttons.add( "Etna", SceneLib.etnaScene.etnaCampMenu2).disableIf(player.statusEffectv4(StatusEffects.CampSparingNpcsTimers1) > 0,"Training.");
 	}
 	//Helia
 	if(SceneLib.helScene.followerHel()) {
@@ -1132,7 +1134,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 				outputText("<b>You see the salamander Helia pacing around camp, anxiously awaiting your departure to the harpy roost. Seeing you looking her way, she perks up, obviously ready to get underway.</b>\n\n");
 			}
 		}
-		buttons.add( "Helia", helFollower.heliaFollowerMenu);
+		buttons.add( "Helia", helFollower.heliaFollowerMenu2).disableIf(player.statusEffectv3(StatusEffects.CampLunaMishaps2) > 0,"Sleeping.");
 	}
 	//Isabella
 	if(isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) {
@@ -1225,7 +1227,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 				case 2: outputText("Izma is lying on her back near her bedroll. You wonder at first just why she isn't using her bed, but as you look closer you notice all the water pooled beneath her and the few droplets running down her arm, evidence that she's just returned from the stream."); break;
 			}
 			outputText("\n\n");
-			buttons.add( "Izma", izmaScene.izmaFollowerMenu);
+			buttons.add( "Izma", izmaScene.izmaFollowerMenu2).disableIf(player.statusEffectv4(StatusEffects.CampLunaMishaps1) > 0,"Fish smell.");
 		}
 	}
 	//Kiha!
@@ -1251,7 +1253,8 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 				outputText("Most of them are on fire.\n\n");
 			}
 		}
-		buttons.add( "Kiha", kihaScene.encounterKiha).disableIf(player.statusEffectv3(StatusEffects.CampSparingNpcsTimers1) > 0,"Training.");
+		/*if (player.statusEffectv1(StatusEffects.CampLunaMishaps2) > 0) buttons.disable("Cleaning burnt meat.");
+		else */buttons.add( "Kiha", kihaScene.encounterKiha2).disableIf(player.statusEffectv3(StatusEffects.CampSparingNpcsTimers1) > 0,"Training.");
 	}
 	//MARBLE
 	if(player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) {
@@ -1431,9 +1434,10 @@ public function campFollowers(descOnly:Boolean = false):void {
 	//Ember
 	if(emberScene.followerEmber()) {
 		emberScene.emberCampDesc();
-		buttons.add(
+		/*if (player.statusEffectv2(StatusEffects.CampLunaMishaps2) > 0) buttons.disable("Wet.");
+		else */buttons.add(
 				"Ember",
-				emberScene.emberCampMenu
+				emberScene.emberCampMenu2
 		).hint("Check up on Ember the dragon-" + (flags[kFLAGS.EMBER_ROUNDFACE] == 0 ? "morph" : flags[kFLAGS.EMBER_GENDER] == 1 ? "boy" : "girl" ) + ""
 		).disableIf(player.statusEffectv1(StatusEffects.CampSparingNpcsTimers1) > 0,"Training.");
 	}
@@ -1474,7 +1478,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText(" cabin");
 			if (!(model.time.hours > 4 && model.time.hours < 23)) outputText(" and the mouse is sleeping on it right now.\n\n");
 			else outputText(", though the mouse is probably hanging around the camp's perimeter.\n\n");
-			buttons.add( "Jojo", jojoScene.jojoCamp).hint("Go find Jojo around the edges of your camp and meditate with him or talk about watch duty.");
+			buttons.add( "Jojo", jojoScene.jojoCamp2).hint("Go find Jojo around the edges of your camp and meditate with him or talk about watch duty.").disableIf(player.statusEffectv2(StatusEffects.CampLunaMishaps1) > 0,"Annoyed.");
 		}
 	}
 	//Celess
@@ -1608,9 +1612,9 @@ public function campFollowers(descOnly:Boolean = false):void {
 	//Luna
 	if (flags[kFLAGS.LUNA_FOLLOWER] >= 4) {
 		outputText("Luna wanders around the camp, doing her chores as usual.");
-		if (flags[kFLAGS.LUNA_JEALOUSY] >= 25) outputText(" She looks at you from time to time, as if expecting you to notice her.");
+		if (flags[kFLAGS.LUNA_JEALOUSY] >= 50) outputText(" She looks at you from time to time, as if expecting you to notice her.");
 		outputText("\n\n");
-		buttons.add( "Luna", SceneLib.lunaFollower.mainLunaMenu).hint("Visit Luna.");
+		buttons.add( "Luna", SceneLib.lunaFollower.mainLunaMenu).hint("Visit Luna.").disableIf(player.statusEffectv1(StatusEffects.CampSparingNpcsTimers3) > 0,"Training.");
 	}
     for each(var npc:XXCNPC in _campFollowers){
         npc.campDescription(buttons,XXCNPC.FOLLOWER);
@@ -2235,7 +2239,7 @@ CoC.instance.saves.saveGame(player.slotName);
 			return;
 		}
 		//Full Moon
-		if (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0 && flags[kFLAGS.LUNA_FOLLOWER] < 9 && flags[kFLAGS.LUNA_AFFECTION] >= 50 && flags[kFLAGS.SLEEP_WITH] == "Luna" && player.gender > 0) {
+		if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8 && flags[kFLAGS.LUNA_FOLLOWER] < 9 && flags[kFLAGS.LUNA_AFFECTION] >= 50 && flags[kFLAGS.SLEEP_WITH] == "Luna" && player.gender > 0) {
 			SceneLib.lunaFollower.fullMoonEvent();
 			sleepRecovery(false);
 			return;
@@ -3466,6 +3470,7 @@ private function promptSaveUpdate():void {
 			player.skin.coverage = Skin.COVERAGE_LOW;
 			player.coatColor = player.hairColor;
 		}
+		if (flags[kFLAGS.LUNA_MOON_CYCLE] > 8) flags[kFLAGS.LUNA_MOON_CYCLE] = 1;
 		clearOutput();
 		outputText("Time to defur our werewolfs... no worry it will be only partial deffuring.");
 		doNext(doCamp);

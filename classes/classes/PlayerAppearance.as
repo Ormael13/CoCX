@@ -1025,6 +1025,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your " + num2Text(player.legCount) + " legs are equally covered in [skin coat.color] fur, ending on red-panda paws with short claws. They have a nimble and strong build, in case you need to escape from something.");
 		else if (player.lowerBody == LowerBody.AVIAN)
 			outputText("  You have strong thighs perfect for launching you into the air which end in slender, bird-like legs, covered with a [skin coat.color] plumage down to your knees and slightly rough, [skin] below. You have digitigrade feet, with toes that end in sharp talons.");
+		else if (player.lowerBody == LowerBody.GRYPHON)
+			outputText("  You have strong thighs perfect for launching you into the air ending in furred, feline legs, covered with a coat of soft, [skin coat.color2] fur. Your have digitigrade feet, lion-like, with soft, pink soles and paw pads, with feline toes ending in sharp, retractile claws.");
 		if (player.findPerk(PerkLib.Incorporeality) >= 0)
 			outputText("  Of course, your [legs] are partially transparent due to their ghostly nature."); // isn't goo transparent anyway?
 	}
@@ -1153,6 +1155,9 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.tailType == Tail.AVIAN) {
 			outputText("  A tail shaped like a fan of long, [skin coat.color] feathers rests above your " + assDescript() + ", twitching instinctively to help guide you if you were to take flight.");
 		}
+		else if (player.tailType == Tail.GRIFFIN) {
+			outputText("  From your backside hangs a long tail, leonine in shape and covered mostly by a layer of [skin coat.color2] fur with a tip made of a tuft of [skin coat.color] colored feathers. It moves sinuously as you walk.");
+		}
 	}
 	public function describeArms():void {
 //Wing arms
@@ -1213,6 +1218,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your arms are covered in [skin coat.color] up to your shoulder. They end with a pair of five-toed cat paws armed with lethal claws.");
 		else if (armType == Arms.AVIAN)
 			outputText("  Your arms are covered with [skin coat.color] colored feathers just a bit past your elbow. Your humanoid hands have " + player.skinTone + ", slightly rough skin and end in short claws.");
+		else if (armType == Arms.GRYPHON)
+			outputText("  The feathers on your arms reach a bit past your elbows, the fringe of [skin coat.color] plumage leading to your " + player.skinTone + ", slightly rough skinned hands. They end in short, avian claws.");
 		if (player.wings.type == Wings.BAT_ARM ){
 			outputText("  Your arm bones are thin and light in order to allow flight. You have grown a few extra fingers, which allow you to hold various items even with your abnormal hands, albeit at the cost of preventing flight while doing so.");
 		}
@@ -1473,6 +1480,9 @@ public class PlayerAppearance extends BaseContent {
 		else if(eyeType == Eyes.FERAL){
 			outputText("  In your eyes sometime dance a green light. It encompass your entire pupil when you let the beast within loose.");
 		}
+		else if(eyeType == Eyes.GRYPHON){
+			outputText("  Your gifted eyes have a bird-like appearance, having an [eyecolor] sclera and a large, black iris. A thin ring of black separates your sclera from your outer iris.");
+		}
 		else outputText("  Your eyes are [eyecolor].");
 	}
 	public function describeHairAndEars():void {
@@ -1552,6 +1562,9 @@ public class PlayerAppearance extends BaseContent {
 			}
 			if (earType == Ears.AVIAN){
 				outputText("  Two small holes at each side of your head serve you as ears. Hidden by tufts of feathers, they’re almost unnoticeable.");
+			}
+			if (earType == Ears.GRYPHON){
+				outputText("  A duo of triangular, streamlined ears are located at each side of your head, helping you to pinpoint sounds. They’re covered in soft, [skin coat.color] fur and end in tufts.");
 			}
 			//</mod>
 			if (player.gills.type == Gills.FISH)
@@ -1636,6 +1649,9 @@ public class PlayerAppearance extends BaseContent {
 			}
 			if (earType == Ears.AVIAN){
 				outputText("  The [hair] atop your head compliments you quite well, and two small holes at each side of your head serve you as ears. Hidden by tufts of feathers, they’re almost unnoticeable.");
+			}
+			if (earType == Ears.GRYPHON){
+				outputText("  Two triangular ears part your [hair] at each side of your head. They’re streamlined and adapted to fly, and are quite useful to locate sounds. They’re covered in soft, [skin coat.color] fur and end in tufts.");
 			}
 			//</mod>
 			if(player.antennae.type == Antennae.MANTIS)
@@ -1984,11 +2000,11 @@ public class PlayerAppearance extends BaseContent {
 		}
 		if (faceType == Face.RED_PANDA) {
 			outputText("  Your face has a distinctive animalistic muzzle, proper from a red-panda, complete with a cute pink nose.");
-			if (player.hasFullCoatOfType(Skin.FUR)) outputText("   A coat of soft, [skin coat] colored fur covers your head, with patches of white on your muzzle, cheeks and eyebrows.")
+			if (player.hasFullCoatOfType(Skin.FUR)) outputText("   A coat of soft, [skin coat.color] colored fur covers your head, with patches of white on your muzzle, cheeks and eyebrows.")
 		}
 		if (faceType == Face.AVIAN) {
 			outputText("  Your visage has a bird-like appearance, complete with an avian beak. A couple of small holes on it makes up for your nostrils, while a long, nimble tongue is hidden inside.");
-			if (player.hasFullCoatOfType(Skin.FEATHER)) outputText("   The rest of your face is decorated with a coat of [skin coat] feathers.")
+			if (player.hasFullCoatOfType(Skin.FEATHER)) outputText("   The rest of your face is decorated with a coat of [skin coat].")
 		}
 		//</mod>
 	}

@@ -265,8 +265,14 @@ package classes.Scenes.NPCs
 					player.cocks[selectedCockValue].thickenCock(2);
 				}
 			}
-		//	player.dynStats("str", (40 * player.newGamePlusMod()), "tou", (40 * player.newGamePlusMod()), "spe", (40 * player.newGamePlusMod()), "cor", 20);
-			player.createPerk(PerkLib.Lycanthropy,0,0,0,0);
+			var bonusStats:Number = 0;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) bonusStats += 10;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) bonusStats += 20;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats += 30;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats += 40;
+			player.createPerk(PerkLib.Lycanthropy,bonusStats,0,0,0);
+			player.dynStats("str", (bonusStats * player.newGamePlusMod()), "tou", (bonusStats * player.newGamePlusMod()), "spe", (bonusStats * player.newGamePlusMod()), "cor", 20);
+			statScreenRefresh();
 			outputText("Barely satiated your eyes now focus back on Luna, lust overwhelming your cursed body. You must have her... NOW!\n\n");
 			doNext(sexMenuDominateHer);
 		}
@@ -285,6 +291,28 @@ package classes.Scenes.NPCs
 			outputText("Luna sit down like a good well behaved dog to admit defeat.\n\n");
 			outputText("\"<i>I yield " + player.mf("Master", "Mistress") + ". You win this one. I hope this warm up was worth your time.</i>\"\n\n");
 			outputText("You thank Luna for helping you with your training and give her freedom to resume duty which she gladly do.\n\n");
+			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
+				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.LUNA_DEFEATS_COUNTER]++;
+				else flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 1;
+				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 2 && flags[kFLAGS.LUNA_LVL_UP] == 0) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 12);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 12, 0, 0, 0);
+					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.LUNA_LVL_UP] = 1;
+				}
+				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 3 && flags[kFLAGS.LUNA_LVL_UP] == 1) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 18);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 18, 0, 0, 0);
+					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.LUNA_LVL_UP] = 2;
+				}
+				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 4 && flags[kFLAGS.LUNA_LVL_UP] == 2) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 24);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 24, 0, 0, 0);
+					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.LUNA_LVL_UP] = 3;
+				}
+			}
 			cleanupAfterCombat();
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -518,8 +546,9 @@ package classes.Scenes.NPCs
 					player.cocks[selectedCockValue].thickenCock(2);
 				}
 			}
+			player.createPerk(PerkLib.Lycanthropy,40,0,0,0);
 			player.dynStats("str", (40 * player.newGamePlusMod()), "tou", (40 * player.newGamePlusMod()), "spe", (40 * player.newGamePlusMod()), "cor", 20);
-			player.createPerk(PerkLib.Lycanthropy,0,0,0,0);
+			statScreenRefresh();
 			outputText("Barely satiated your eyes now focus back on Luna, lust overwhelming your cursed body. You must have her... NOW!\n\n");
 			monster.createPerk(PerkLib.NoGemsLost, 0, 0, 0, 0);
 			cleanupAfterCombat();

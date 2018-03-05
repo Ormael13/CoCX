@@ -80,23 +80,52 @@ package classes.Scenes.NPCs
 			this.skin.growFur({color:"ashen"});
 			this.hairColor = "ashen";
 			this.hairLength = 8;
-			initStrTouSpeInte(40, 80, 40, 50);
-			initWisLibSensCor(50, 80, 40, 75);
+			if (flags[kFLAGS.LUNA_LVL_UP] == 0) {
+				initStrTouSpeInte(30, 90, 40, 50);
+				initWisLibSensCor(50, 80, 40, 75);
+				this.weaponAttack = 37;
+				this.armorDef = 200;
+				this.bonusHP = 800;
+				this.level = 9;
+			}
+			if (flags[kFLAGS.LUNA_LVL_UP] == 1) {
+				initStrTouSpeInte(30, 95, 45, 50);
+				initWisLibSensCor(50, 80, 40, 75);
+				this.weaponAttack = 37;
+				this.armorDef = 200;
+				this.bonusHP = 800;
+				this.level = 15;
+			}
+			if (flags[kFLAGS.LUNA_LVL_UP] == 2) {
+				initStrTouSpeInte(35, 100, 50, 50);
+				initWisLibSensCor(50, 80, 40, 75);
+				this.weaponAttack = 37;
+				this.armorDef = 200;
+				this.bonusHP = 850;
+				this.level = 21;
+			}
+			if (flags[kFLAGS.LUNA_LVL_UP] == 3) {
+				initStrTouSpeInte(35, 100, 55, 50);
+				initWisLibSensCor(50, 80, 40, 75);
+				this.weaponAttack = 37;
+				this.armorDef = 200;
+				this.bonusHP = 900;
+				this.level = 27;
+			}
 			this.weaponName = "paws";
 			this.weaponVerb="paw-slash";
-			this.weaponAttack = 37;
 			this.armorName = "fur";
-			this.armorDef = 200;
-			this.bonusHP = 800;
 			this.bonusLust = 10;
 			this.lust = 10;
 			this.lustVuln = 0;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 9;
 			this.gems = 5 + rand(5);
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.MonsterRegeneration, 5, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
+			if (flags[kFLAGS.LUNA_LVL_UP] >= 1) this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
+			if (flags[kFLAGS.LUNA_LVL_UP] >= 2) this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			if (flags[kFLAGS.LUNA_LVL_UP] >= 3) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

@@ -1654,6 +1654,11 @@ private function submitToLakeIzma():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 
+public function izmaFollowerMenu2():void {
+	if ((flags[kFLAGS.LUNA_JEALOUSY] > 100 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 150 && rand(10) < 8)) mishapsLunaIzma();
+	else izmaFollowerMenu();
+}
+
 //9999 CAMP FOLLOWER
 // tion camp
 //[Follower options]
@@ -3580,6 +3585,15 @@ private function izmaValeriaToggle():void {
 	}
 	menu();
 	addButton(4,"Back",izmaValeriaSubmenu);
+}
+
+public function mishapsLunaIzma():void {
+	clearOutput();
+	outputText("You pass by Izma’s spot and to your surprise, the smell of fish assaults your nose. For some weird reason, the entire area around Izma bedroll now smells of fish and, heck, it smells so much you decide to keep your distance until it’s gone.\n\n");
+	outputText("Perhaps someone dropped fish oil around here, but who?\n\n");
+	if (player.hasStatusEffect(StatusEffects.CampLunaMishaps1)) player.addStatusValue(StatusEffects.CampLunaMishaps1, 4, 1);
+	else player.createStatusEffect(StatusEffects.CampLunaMishaps1, 0, 0, 0, 1);
+	doNext(playerMenu);
 }
 
 }

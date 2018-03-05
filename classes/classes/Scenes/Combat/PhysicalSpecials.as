@@ -1818,7 +1818,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		clearOutput();
 		if(player.fatigue + physicalCost(10) > player.maxFatigue()) {
 			clearOutput();
-			outputText("You just don't have the energy to puonce at anyone right now...");
+			outputText("You just don't have the energy to pounce at anyone right now...");
 			//Gone		menuLoc = 1;
 			menu();
 			addButton(0, "Next", combatMenu, false);

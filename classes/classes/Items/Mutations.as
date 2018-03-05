@@ -6600,6 +6600,8 @@ public final class Mutations extends MutationsHelper
 			//Generic eating text:
 			clearOutput();
 			if (type == 0) outputText("You crack open the seed easily, and eat the fruit inside. A bit dry, as you expected, but with a sweet and aromatic taste that leaves you wanting another one.");
+			if (type == 1) outputText("Looking again at the fierce gryphon sculpted on brass and bronze that you found on that strange alcove, your curiosity gets the best of you, and you start examining it. As you do so, the magic stored long ago within the artifact pours out, and starts changing your body!");
+			if (type == 2) outputText("Looking again at the wonderful peacock carved in alabaster and ruby that you found on that strange alcove, your curiosity gets the best of you, and you start examining it. As you do so, the magic stored long ago within the artifact pours out, and starts changing your body!");
 			//Stats changes
 			//-Speed increase to 100.
 			if (player.spe < 100 && type == 0 && rand(3) == 0 && changes < changeLimit) {
@@ -6629,6 +6631,7 @@ public final class Mutations extends MutationsHelper
 				if (player.str < 40) dynStats("str", .5);
 				dynStats("str", .5);
 			}
+			if (type == 1 || type == 2) changeLimit = 1;
 			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//Sexual changes
 			if (player.avianCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && type == 0 && rand(3) == 0) {
@@ -6647,6 +6650,24 @@ public final class Mutations extends MutationsHelper
 				}
 				outputText("\n\nIt has acquired a reddish-pink coloration, with a smooth texture. The most notorious thing is its tapered, albeit slightly wavy shape, as well as its pointy head. All in all it has a very bird-like appearance.  <b>Seems like you’ve got an avian penis!</b>");
 				player.cocks[temp2].cockType = CockTypesEnum.AVIAN;
+				changes++;
+			}
+			if (player.gryphonCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && type == 1 && rand(3) == 0) {
+				for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
+					if (player.cocks[temp2].cockType != CockTypesEnum.GRYPHON) break;
+				}
+				outputText("\n\nThe magic of the statue feels more focused now, as it were to change a small but specific area of your body, and it does, as your nethers tinge under its effect.\n\nGiving them a glimpse, the first thing that becomes obvious if that your " + cockDescript(temp2) + " became a bit ticker, but albeit it retained it’s avian, tapered shape, it’s slightly wavy form became more straight. ");
+				outputText("It’s reddish-pink color became pink and it’s tip became more conical. Nevertheless, the main chance manifested across its length, where small, soft barbs grew, giving your member an the appearance of an avian-feline hybrid one.  <b>You'll have to try around your new gryphon cock to know how’ they’ll feel to use,</b> but you’re sure that it’ll be pleasant both for you and your partners.");
+				player.cocks[temp2].cockType = CockTypesEnum.GRYPHON;
+				changes++;
+			}
+			if (player.cockTotal() > 1 && player.gryphonCocks() > 0 && player.cockTotal() > player.gryphonCocks() && type == 1 && rand(3) == 0 && changes < changeLimit) {
+				for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
+					if (player.cocks[temp2].cockType != CockTypesEnum.GRYPHON) break;
+				}
+				outputText("\n\nThe magic of the statue feels more focused now, as it were to change a small but specific area of your body, and it does, as your nethers tinge under its effect.\n\nGiving them a glimpse, the first thing that becomes obvious if that your " + cockDescript(temp2) + " became a bit ticker, but albeit it retained it’s avian, tapered shape, it’s slightly wavy form became more straight. ");
+				outputText("It’s reddish-pink color became pink and it’s tip became more conical. Nevertheless, the main chance manifested across its length, where small, soft barbs grew, giving your member an the appearance of an avian-feline hybrid one.  <b>You'll have to try around your new gryphon cock to know how’ they’ll feel to use,</b> but you’re sure that it’ll be pleasant both for you and your partners.");
+				player.cocks[temp2].cockType = CockTypesEnum.GRYPHON;
 				changes++;
 			}
 			//Legs
@@ -6691,6 +6712,13 @@ public final class Mutations extends MutationsHelper
 				player.legCount = 2;
 				changes++;
 			}
+			if (player.lowerBody != LowerBody.GRYPHON && player.eyes.type == Eyes.GRYPHON && changes < changeLimit && type == 1 && rand(3) == 0) {
+				outputText("\n\nTaking a seat while you see how the magic within the statue affects you, a familiar numbness reaches your legs. The rough skin covering your lower legs and feet change into more usual, soft skin, and shortly after, it starts sprouting " + player.skin.coat.color2 + " colored fur over them.");
+				outputText("\n\nYour feet themselves reshape, losing their avian stance and gaining one much more feline, complete with soft pink paw pads. The talons at the end of each toe become retractile feline claws. Albeit walking with those seems initially tricky, you easily gain a hold on how using your <b>new gryphon-like legs.</b>");
+				setLowerBody(LowerBody.GRYPHON);
+				player.legCount = 2;
+				changes++;
+			}
 			//Tail
 			if (player.tailType != Tail.AVIAN && player.lowerBody == LowerBody.AVIAN && changes < changeLimit && type == 0 && rand(3) == 0) {
 				if (player.tailType > Tail.NONE) {
@@ -6709,6 +6737,12 @@ public final class Mutations extends MutationsHelper
 				}
 				outputText(" <b>In any case, you have now a full, fan-shaped avian tail above your " + buttDescript() + "!</b>");
 				setTailType(Tail.AVIAN);
+				changes++;
+			}
+			if (player.tailType != Tail.GRIFFIN && player.lowerBody == LowerBody.GRYPHON && changes < changeLimit && type == 1 && rand(3) == 0) {
+				outputText("\n\nThe fan of feathers at your backside reacts under the statue magic effects. An otherworldly magic envelopes it, making the feathers twist and converge in an odd fashion, at the same time that the small bump of your tail elongates until becoming long enough to reach far past your knee.");
+				outputText("\n\nBefore you notice it, the long feathers have merged into a tuft of " + player.skin.coat.color + " at the end of your now long tail, while the short, downy ones now cover every inch of bare skin that the elongated appendage now have. <b>Well, seems like you gained a griffin-like tail!</b> It’s quite leonine in shape, but its appearance remains a bit avian.");
+				setTailType(Tail.GRIFFIN);
 				changes++;
 			}
 			//Arms
@@ -6733,6 +6767,12 @@ public final class Mutations extends MutationsHelper
 				}
 				outputText("\n\nLuckily, the sensation returns to your arms, and you’re able to use them with normalcy, with the difference that <b>they’re now avian looking ones!</b>.");
 				setArmType(Arms.AVIAN);
+				changes++;
+			}
+			if (player.arms.type != Arms.GRYPHON && changes < changeLimit && type == 1 && rand(3) == 0) {
+				outputText("\n\nThe skin on your arms change a bit, as the " + player.skin.coat.color2 + " turning into soft, feline fur. Your palms and fingers acquire pink paw pads, while at the end of each one of your fingers, the talons sharpen and become prehensile, adopting a posture better suited to pounce over a unsuspecting victim.");
+				outputText("\n\nFrom the fringe on your elbows to your armpits, your " + player.skin.coat.color + " colored plumage remains the same. <b>At the end, you’ve gotten gryphon-like arms!</b>.");
+				setArmType(Arms.GRYPHON);
 				changes++;
 			}
 			//Wings
@@ -6789,6 +6829,12 @@ public final class Mutations extends MutationsHelper
 				setEarType(Ears.AVIAN);
 				changes++;
 			}
+			if (player.ears.type != Ears.GRYPHON && player.tailType == Tail.GRIFFIN && changes < changeLimit && type == 1 && rand(3) == 0) {
+				outputText("\n\nAfter another session under the statue magic, the lingering effects seem to having taken a toll on you, as your ears buzz. The sound turns worse for a second, and then vanish. You hear for a second a light flapping sound, and then, nothing.\n\nWhen everything seems to have finished, you realize that your hearing range has changed, and while your overall sense of hearing remains the same, pinpointing the source of a sounds is much easier. On a nearby reflection you discover the reason: ");
+				outputText("two triangular ears have sprouted at your head, streamlined to flight and with a gryphon like appearance. A short layer of downy feathers covers them, the tip having a distinctive tuft. Checking that your ears are rightly placed on the new auricles, <b>you smile happily at the sight of your gryphon ears,</b> noting how well they compliment your looks.");
+				setEarType(Ears.GRYPHON);
+				changes++;
+			}
 			//Skin
 			if (!player.hasFeather() && changes < changeLimit && type == 0 && rand(4) == 0) {
 				if (player.hasFur()) {
@@ -6823,6 +6869,13 @@ public final class Mutations extends MutationsHelper
 					outputText("\n\nAs you ponder this, the barbs have finished growing, and the new feather on your arms, legs back and shoulder elongate a bit, while the ones on your chest, face and belly, and...another soft spots, instead of becoming like the usual feather,  becomes fluffy and short, as a kind of down feathers. They all gain color, turning into a warm coat of " + player.skin.coat.color + " colored feathers. <b>Looks like you’re about ready to take flight with your new coat of feathers!</b>");
 				}
 				player.skin.growCoat(Skin.FEATHER,{color:player.skin.coat.color});
+				changes++;
+			}
+			//Eyes
+			if (player.eyes.type != Eyes.GRYPHON && player.arms.type == Arms.GRYPHON && changes < changeLimit && type == 1 && rand(3) == 0) {
+				outputText("\n\nThe mysterious energy coming from the statue continues adapting your body into a more fierce, strong shape. This time, it has affected you eyesight, as you suddenly notice how the long distances that you once had trouble seeing are clear as if you were in front of them, and that you can perceive even the minimal move even from several miles afar.");
+				outputText("\n\nChecking your changes on the river, you see clearly how your sclera has acquired a golden-orange coloration, as well as your outer iris, separated from the former by a thin circle of black. Both your pupil and your inner iris, which now has enlarged, are solid black. <b>Now you’ll have a blessed vision due those raptor, gryphon-like eyes.</b>");
+				setEyeTypeAndColor(Eyes.GRYPHON, "golden-orange");
 				changes++;
 			}
 			if (changes == 0 && type == 0) outputText("\n\nIt seems like the fruit had no effect this time. Maybe it was spoiled, or kept in storage for too much time?");

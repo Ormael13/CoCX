@@ -2293,6 +2293,11 @@ public class Creature extends Utils
 			return countCocksOfType(CockTypesEnum.AVIAN);
 		}
 
+		public function gryphonCocks():int { //How many gryphoncocks?
+			return countCocksOfType(CockTypesEnum.GRYPHON);
+		}
+
+
 		public function findFirstCockType(ctype:CockTypesEnum):Number
 		{
 			var index:Number = 0;

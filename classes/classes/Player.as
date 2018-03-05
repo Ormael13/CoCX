@@ -5074,6 +5074,8 @@ use namespace CoC;
 				min += 10;
 				if(eggs() >= 40) min += 10;
 			}
+			//Werebeast
+			if (hasPerk(PerkLib.Lycanthropy)) min += perk(findPerk(PerkLib.Lycanthropy)).value1;
 			//Jewelry effects
 			if (jewelryEffectId == JewelryLib.MODIFIER_MINIMUM_LUST)
 			{
@@ -6104,22 +6106,22 @@ use namespace CoC;
 			}
 			if (findPerk(PerkLib.CarefulButRecklessAimAndShooting) >= 0 && findPerk(PerkLib.ColdAim) < 0) maxTou -= (15 * newGamePlusMod);
 			if (hasPerk(PerkLib.Lycanthropy)) {
-				if (((flags[kFLAGS.LUNA_MOON_CYCLE] - 3) || (flags[kFLAGS.LUNA_MOON_CYCLE] + 3)) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) {
 					maxStr += (10 * newGamePlusMod);
 					maxTou += (10 * newGamePlusMod);
 					maxSpe += (10 * newGamePlusMod);
 				}
-				if (((flags[kFLAGS.LUNA_MOON_CYCLE] - 2) || (flags[kFLAGS.LUNA_MOON_CYCLE] + 2)) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) {
 					maxStr += (20 * newGamePlusMod);
 					maxTou += (20 * newGamePlusMod);
 					maxSpe += (20 * newGamePlusMod);
 				}
-				if (((flags[kFLAGS.LUNA_MOON_CYCLE] - 1) || (flags[kFLAGS.LUNA_MOON_CYCLE] + 1)) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) {
 					maxStr += (30 * newGamePlusMod);
 					maxTou += (30 * newGamePlusMod);
 					maxSpe += (30 * newGamePlusMod);
 				}
-				if (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0) {
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) {
 					maxStr += (40 * newGamePlusMod);
 					maxTou += (40 * newGamePlusMod);
 					maxSpe += (40 * newGamePlusMod);

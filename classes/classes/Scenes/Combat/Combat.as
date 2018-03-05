@@ -804,6 +804,7 @@ public function baseelementalattacks(elementType:int = -1):void {
 	if (summonedElementals >= 8 && manaCost > 45 && player.hasPerk(PerkLib.StrongestElementalBond)) manaCost -= 40;
 	if (player.mana < manaCost) {
 		outputText("Your mana is too low to fuel your elemental attack!\n\n");
+		flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 1;
 		doNext(combatMenu);
 	}
 	else {
@@ -5347,6 +5348,13 @@ public function clawsRend():void {
 	outputText("\n\n");
 	enemyAI();
 }
+public function PussyLeggoMyEggo():void {
+	clearOutput();
+	outputText("You let your opponent free ending your embrace.");
+	outputText("\n\n");
+	monster.removeStatusEffect(StatusEffects.Pounce);
+	enemyAI();
+}
 
 public function runAway(callHook:Boolean = true):void {
 	if (callHook && monster.onPcRunAttempt != null){
@@ -5833,10 +5841,24 @@ public function soulskillCost():Number {
 		for(var i:int = 20; (i <= 80) && (i <= stat); i += 20){
 			scale += stat - i;
 		}
-		for(i = 100; (i <= 1200) && (i <= stat); i += 50){
+		for(i = 100; (i <= 2000) && (i <= stat); i += 50){
 			scale += stat - i;
 		}
 		return scale;
+	}
+
+	private function inteWisLibScale(stat:int):Number{
+		var scale:Number = 6.75;
+		var changeBy:Number = 0.50;
+		if(stat <= 2000){
+			if(stat <= 100){
+				scale = (2/6) + ((int(stat/100)/20) * (1/6));
+				changeBy = 0.25;
+			} else {
+				scale = 1 + (int((stat - 100)/50) * 0.25);
+			}
+		}
+		return (stat * scale) + rand(stat * (scale + changeBy));
 	}
 
 	public function scalingBonusToughness():Number {
@@ -5851,26 +5873,12 @@ public function soulskillCost():Number {
 		return touSpeStrScale(player.str);
 	}
 
-	private function inteWisLibScale(stat:int):Number{
-		var scale:Number = 6.75;
-		var changeBy:Number = 0.50;
-		if(stat <= 1200){
-			if(stat <= 100){
-				scale = (2/6) + ((int(stat/100)/20) * (1/6));
-				changeBy = 0.25;
-			} else {
-				scale = 1 + (int((stat - 100)/50) * 0.25);
-			}
-		}
-		return (stat * scale) + rand(stat * (scale + changeBy));
-	}
-
 	public function scalingBonusWisdom():Number {
-		return inteWisLibScale(player.wis);
+		return touSpeStrScale(player.wis);
 	}
 
 	public function scalingBonusIntelligence():Number {
-		return inteWisLibScale(player.inte);
+		return touSpeStrScale(player.inte);
 	}
 
 	public function scalingBonusLibido():Number {
