@@ -286,7 +286,10 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) temp += (75 * (1 + newGamePlusMod()));
 			//Apply NG+, NG++, NG+++, etc.
 			temp += this.bonusLust * newGamePlusMod();
-			temp += this.level * 10;
+			temp += this.level * 2;
+			if (this.level >= 24) temp += this.level * 3;
+			if (this.level >= 42) temp += this.level * 5;
+			if (this.level >= 72) temp += this.level * 10;
 			return temp;
 		}
 		

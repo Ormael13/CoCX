@@ -2053,7 +2053,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 0.5;
 		if (monster.hasPerk(PerkLib.LightningNature)) damage *= 0.2;
 		if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 2;
-		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + player.lust100);
+		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
 		damage = Math.round(damage);
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione

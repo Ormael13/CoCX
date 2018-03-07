@@ -2269,7 +2269,7 @@ CoC.instance.saves.saveGame(player.slotName);
 		}
 		else if(flags[kFLAGS.SLEEP_WITH] == "Luna" && flags[kFLAGS.LUNA_FOLLOWER] >= 4) {
 			outputText("You head to bed, Luna following you. ");
-			if (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0 && flags[kFLAGS.LUNA_FOLLOWER] >= 9) {
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8 && flags[kFLAGS.LUNA_FOLLOWER] >= 9) {
 				SceneLib.lunaFollower.sleepingFullMoon();
 				return;
 			}

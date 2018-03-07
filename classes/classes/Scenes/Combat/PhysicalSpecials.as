@@ -223,7 +223,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd.disable("Your golems can't attack flying targets. (Only golems made by grand-master golem maker can do this)");
 			}
 		}
-		if (player.shield != ShieldLib.NOTHING) {
+		if (player.isShieldsForShieldBash()) {
 			bd = buttons.add("Shield Bash", shieldBash).hint("Bash your opponent with a shield. Has a chance to stun. Bypasses stun immunity. \n\nThe more you stun your opponent, the harder it is to stun them again.");
 			bd.requireFatigue(physicalCost(20));
 		}

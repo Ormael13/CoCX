@@ -81,6 +81,7 @@ use namespace CoC;
 			mainmenu();
 		}
 		private function mainmenu():void {
+			outputText("\n\nGargoyle Quest progress: " + flags[kFLAGS.GARGOYLE_QUEST] + "");
 			menu();
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 1) {
 				addButton(0, "Pray", PlayerPrayAtTemple).hint("Offer your prayer to one of the temple altar.");

@@ -29,7 +29,7 @@ package classes.Scenes.NPCs
 		{
 			
 		}
-		//luna foll 2 - kicked post moon event, 3 seen her dead in forest, 4,5 - pre full moon event, 6 jelly pre full moon, 7,8 - post moon unchained, 9,10 - post moon chained, 11,12 - unchained post moon accepted
+		//luna foll 2 - kicked post moon event, 3 seen her dead in forest, 4,5 - pre full moon event, 6 jelly pre full moon, 7,8 - post moon unchained, 9,10 - post moon chained, 11,12 - unchained post moon accepted (PC no WW), 13,14 - unchained post moon accepted and talked about lycantrophy (PC no WW), 15,16 - unchained post moon accepted (PC WW)
 		
 		public function lunaAffection(changes:Number = 0):Number
 		{
@@ -109,7 +109,6 @@ package classes.Scenes.NPCs
 			else if (model.time.hours <= 18) outputText("afternoon");
 			else outputText("evening");
 			outputText(" " + player.mf("Master","Mistress") + ". How can I be of assistance, if any? Just tell me what you may need.</i>\"\n\n");
-			outputText("Luna Follower flag: " + flags[kFLAGS.LUNA_FOLLOWER] + "\n\n");
 			menu();
 			addButton(0, "Appearance", LunaAppearance);
 			addButton(1, "Talk", talkMenuLuna);
@@ -157,7 +156,7 @@ package classes.Scenes.NPCs
 			addButton(3, "Camp", talkMenuLunaCampThoughts);
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) addButton(4, "Lycanthropy", talkMenuLunaLycanthropy);
 			else addButtonDisabled(4, "???", "You need to know her better for this.");
-			if (flags[kFLAGS.LUNA_FOLLOWER] > 10 && (!player.hasPerk(PerkLib.Lycanthropy) || !player.hasPerk(PerkLib.LycanthropyDormant))) addButton(9, "Bite Me", talkMenuBiteMe);
+			if ((flags[kFLAGS.LUNA_FOLLOWER] == 13 || flags[kFLAGS.LUNA_FOLLOWER] == 14) && (!player.hasPerk(PerkLib.Lycanthropy) || !player.hasPerk(PerkLib.LycanthropyDormant))) addButton(9, "Bite Me", talkMenuBiteMe);
 			addButton(14, "Back", mainLunaMenu);
 		}
 		public function talkMenuLunaHer():void {
@@ -215,6 +214,8 @@ package classes.Scenes.NPCs
 			outputText("\"<i>Well, my hormonal system is totally messed up as the lunar cycle causes me to go into heat.The closer we lycanthropes get to the full moon, the hornier we get, until we all turn into sex crazed beasts willing to go so far as to rape innocent people for a good fuck. That said, sex is not all there is to it. We are all gifted with the ability to change form at will, and I know for a fact that we’re also faster, ");
 			outputText("stronger, and sturdier than any normal morph or human. There is no known permanent cure to lycanthropy. The truth is that, while I could change into something different using transformatives, I think that so long as whatever I transform into is an animal I would still go mad during a full moon. Even worse, my bite can turn about anyone into a lycanthrope the same as me.</i>\"\n\n");
 			outputText("Guess she really is more than just a cute pup.\n\n");
+			if (flags[kFLAGS.LUNA_FOLLOWER] == 11) flags[kFLAGS.LUNA_FOLLOWER] = 13;
+			else flags[kFLAGS.LUNA_FOLLOWER] = 14;
 			lunaJealousy(-50);
 			lunaAffection(2);
 			doNext(camp.returnToCampUseOneHour);
@@ -416,7 +417,9 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.LUNA_FOLLOWER] == 5) flags[kFLAGS.LUNA_FOLLOWER] = 6;
 			else if (flags[kFLAGS.LUNA_FOLLOWER] == 7) flags[kFLAGS.LUNA_FOLLOWER] = 8;
 			else if (flags[kFLAGS.LUNA_FOLLOWER] == 9) flags[kFLAGS.LUNA_FOLLOWER] = 10;
-			else flags[kFLAGS.LUNA_FOLLOWER] = 12;
+			else if (flags[kFLAGS.LUNA_FOLLOWER] == 11) flags[kFLAGS.LUNA_FOLLOWER] = 12;
+			else if (flags[kFLAGS.LUNA_FOLLOWER] == 13) flags[kFLAGS.LUNA_FOLLOWER] = 14;
+			else flags[kFLAGS.LUNA_FOLLOWER] = 16;
 			outputText("Luna come over to you.\n\n");
 			outputText("\"<i>" + player.mf("Master","Mistress") + " you haven’t been using my services in some time. I came to remind you that should you need anything, and by that I truly mean anything you desire, all you need to do is call me. It is always my greatest pleasure to serve you.</i>\"\n\n");
 			outputText("She walk away to prepare today's food and clean which reminds you that you indeed hadn’t had her food in a while.\n\n");
@@ -747,7 +750,7 @@ package classes.Scenes.NPCs
 					outputText("\"<i>I knew you had it in you [name] please just make sure to use me regularly.</i>\"\n\n");
 					if (flags[kFLAGS.LUNA_FOLLOWER] < 7 && player.werewolfScore() > 6) {
 						outputText("Yes for sure! You're going to make sure to use her as often as necessary to imprint your scent on her from now on. She’s your beta and no one else’s.");
-						flags[kFLAGS.LUNA_FOLLOWER] = 11;
+						flags[kFLAGS.LUNA_FOLLOWER] = 15;
 					}
 					flags[kFLAGS.LUNA_MOONING] = 1;
 					if (model.time.hours >= 21) CoC.instance.timeQ = 24 - model.time.hours;
@@ -776,7 +779,7 @@ package classes.Scenes.NPCs
 					outputText("\"<i>I knew you had it in you [name] please just make sure to use me regularly.</i>\"\n\n");
 					if (flags[kFLAGS.LUNA_FOLLOWER] < 7 && player.werewolfScore() > 6) {
 						outputText("Yes for sure! You're going to make sure to use her as often as necessary to imprint your scent on her from now on. She’s your beta and no one else’s.");
-						flags[kFLAGS.LUNA_FOLLOWER] = 11;
+						flags[kFLAGS.LUNA_FOLLOWER] = 15;
 					}
 					flags[kFLAGS.LUNA_MOONING] = 1;
 					if (model.time.hours >= 21) CoC.instance.timeQ = 24 - model.time.hours;

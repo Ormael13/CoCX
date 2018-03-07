@@ -700,6 +700,11 @@ use namespace CoC;
 			return _jewelry.value;
 		}
 		
+		//Shields for Bash
+		public function isShieldsForShieldBash():Boolean
+		{
+			return shield == game.shields.BUCKLER || shield == game.shields.GREATSH || shield == game.shields.KITE_SH || shield == game.shields.TRASBUC || shield == game.shields.TOWERSH || shield == game.shields.DRGNSHL || shield == game.shields.SANCTYN || shield == game.shields.SANCTYL || shield == game.shields.SANCTYD;
+		}
 		//override public function get shields
 		override public function get shieldName():String {
 			return _shield.name;

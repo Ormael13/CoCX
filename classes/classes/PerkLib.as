@@ -3231,23 +3231,23 @@ public class PerkLib
             // CORRUPTION
             //------------
             //Slot 7 - Corrupted Libido - lust raises 10% slower.
-            CorruptedLibido.requireCor(25);
+            CorruptedLibido.requireCor(10);
             CorruptedLibido.defaultValue1 = 20;
             //Slot 7 - Seduction (Must have seduced Jojo)
-            Seduction.requireCor(50);
+            Seduction.requireCor(15);
             //Slot 7 - Nymphomania
-            Nymphomania.requireCor(75)
+            Nymphomania.requireCor(15)
                     .requirePerk(CorruptedLibido);
             //Slot 7 - UNFINISHED :3
-            Acclimation.requireCor(50)
+            Acclimation.requireCor(15)
                     .requirePerk(CorruptedLibido)
                     .requireMinLust(20);
-            SenseCorruption.requireCor(75);
+            SenseCorruption.requireCor(15);
             //Tier 1 Corruption Perks - acclimation over-rides
-            Sadist.requireCor(60)
+            Sadist.requireCor(20)
                     .requirePerk(CorruptedLibido)
                     .requireLevel(6);
-            ArousingAura.requireCor(70)
+            ArousingAura.requireCor(25)
                     .requirePerk(CorruptedLibido)
                     .requireLevel(6);
             //Tier 2
