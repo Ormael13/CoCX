@@ -1261,7 +1261,7 @@ public function meleeAccuracy():Number {
 }
 
 public function arrowsAccuracy():Number {
-	var accmod:Number = 60;
+	var accmod:Number = 80;
 	if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) accmod += 40;
 	if (player.hasPerk(PerkLib.Accuracy1)) {
 		accmod += player.perkv1(PerkLib.Accuracy1);

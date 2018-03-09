@@ -1646,7 +1646,7 @@ private function campActions():void {
 	addButton(5, "Build", campBuildingSim).hint("Check your camp build options.");
 	if (player.hasPerk(PerkLib.JobElementalConjurer) >= 0 || player.hasPerk(PerkLib.JobGolemancer) >= 0) addButton(6, "Winions", campWinionsArmySim).hint("Check your options for making some Winions.");
 	else addButtonDisabled(6, "Winions", "You need to be able to make some minions that fight for you to use this option like elementals or golems...");
-	if (player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(7, "Heal", spellHealcamp).hint("Heal will attempt to use white magic to instantly close your wounds and restore your body.  \n\nMana Cost: 30");
+	//addButton(7, "Heal", spellHealcamp).hint("Heal.  \n\nMana Cost: 30");
 	//addButton(8, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
 	if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) addButton(8, "Fishery", VisitFishery).hint("Visit Fishery.");
 	addButton(9, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
@@ -1737,39 +1737,6 @@ private function RetrieveStack():void {
 		outputText("\n\nYou need more fish to bag out a bundle.");
 		doNext(VisitFishery);
 	}
-}
-
-public function spellHealcamp():void {
-	clearOutput();
-	if(player.mana < 30) {
-		outputText("Your mana is too low to cast this spell.");
-		doNext(campActions);
-		return;
-	}
-	useMana(30);
-	var healing:int = combat.scalingBonusIntelligence();
-	//healing *= spellMod();
-	if (player.unicornScore() >= 5) healing *= ((player.unicornScore() - 4) * 0.5);
-	if (player.alicornScore() >= 6) healing *= ((player.alicornScore() - 5) * 0.5);
-	if (player.armorName == "skimpy nurse's outfit") healing *= 1.2;
-	//Determine if critical heal!
-	var crit:Boolean = false;
-	var critHeal:int = 5;
-	if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) critHeal += (player.inte - 50) / 5;
-	if (rand(100) < critHeal) {
-		crit = true;
-		healing *= 1.75;
-	}
-	healing = Math.round(healing);
-	outputText("You chant a magical song of healing and recovery and your wounds start knitting themselves shut in response. <b>(<font color=\"#008000\">+" + healing + "</font>)</b>.");
-	if (crit == true) outputText(" <b>*Critical Heal!*</b>");
-	HPChange(healing,false);
-	outputText("\n\n");
-	statScreenRefresh();
-	flags[kFLAGS.SPELLS_CAST]++;
-	//spellPerkUnlock();
-	doNext(doCamp);
-	cheatTime(1/12);
 }
 
 private function swimInStream():void {

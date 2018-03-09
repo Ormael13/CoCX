@@ -3123,7 +3123,6 @@ public class PerkLib
                     .requireLib(50)
                     .requireStatusEffect(StatusEffects.KnowsArouse, "Arouse spell");
             JobCourtesan.requirePerk(JobSeducer)
-                    .requirePerk(Heroism)
                     .requireLib(50)
                     .requireLevel(12);
             DazzlingDisplay.requirePerk(JobCourtesan)

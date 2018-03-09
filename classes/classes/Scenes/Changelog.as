@@ -94,6 +94,8 @@ package classes.Scenes
 			outputText("<b>Version 0.8i2:</b>\n\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-Diana later stages stats adjusted. Also added req. of min. lvl 3 to meet her at lake, lowered encounter chance.\n");
 			outputText("-Luna can be spared when PC accept her (by loosing in fight or just accepting). In case of simple accepting there would be new option showing up in talk menu after talking with her on Lycantrophy after accpting her that allow voluntary been biten by her. After sparing she can lvl up up to lvl 27.\n");
 			outputText("-Ice Fist and Fire Punch req. uing bare first or gaunlets. Punishing Kick req. to have bipedal or taur lower body.\n");
 			outputText("-Visiting Journey to the East inn after 5 pm give 25% to encounter drunk Chi Chi that may lead to drunken sex.\n");
@@ -102,10 +104,11 @@ package classes.Scenes
 			outputText("-New melee weapon: Sceptre of Command - won as reward for first time beating Gaunlet 2 on Soul Arena. Cost 600 gems and base atk 4. Increase by 50% damage of elementals and golems.\n");
 			outputText("-Beast Warrior Crinos Shape bonuses was increased from 5/10/15/20% of current str/tou/spe to 20/40/80/160%.\n");
 			outputText("-Metamorph perk would grant increase max soulforce by 50 and grant access to Metamorph option even if PC not yet have perk Job: Soul Cultivator.\n");
-			outputText("-Feral Whirlwind base dmg increased by 50%. Fly-Whisk price lowered by half. Shield Bash req. not proper type of shield not jsut any item in shield slot like mana bracer\n");
+			outputText("-Starting mana cap rised from 100 to 200 and starting fatigue cap from 100 to 150. Feral Whirlwind base dmg increased by 50%. Archery base accuracy increased form 30% to 40%. Fly-Whisk price lowered by half. Shield Bash req. not proper type of shield not just any item in shield slot like mana bracer.\n");
 			outputText("-Attacks using intelligence and wisdom scalling would now use scalling used by attack using str/tou/spe, which mean at stat values above 100 it would be weaker effect.\n");
 			outputText("-Req. for perks form corruption tree lowered: Corrupted Libido, Seduction, Nymphomania, Acclimation, Sense Corruption, Sadist, Arousing Aura\n");
-			outputText("-Fixed bugs: Werewolf full fur instead of partial, Luna bugs fixed, Raiju lust nukes nerfed\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-Monsters base lust cap lowered from 100 to 70. Also now they will get a few points to max cap each lvl (at begining 2, then 5, 10, 20).\n");
+			outputText("-Fixed bugs: Werewolf full fur instead of partial, Luna bugs fixed, Raiju lust nukes nerfed, Temple of the Divine rebulding bugfixing, removed req. of Herism perk for perk Job: Countresan, missing Anzu in his Palace\n\n\n\n\n");/*ostatni punkt changelogu
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: \n");
 			//outputText("-New range weapon: Hodr's Bow - obtained by . 22 atk, costing 2200 gems, -5% accuracy, Artifact Bow, each arrow can apply blind debuff on enemy.\n");
 			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
@@ -117,15 +120,12 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Bat, Vampire, Cat, Cheshire cat
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

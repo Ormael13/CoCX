@@ -260,7 +260,7 @@ import flash.utils.getQualifiedClassName;
 
 		protected override function maxLust_base():Number {
 			//Base lust
-			var temp:Number = 100 + this.bonusLust;
+			var temp:Number = 70 + this.bonusLust;
 			//Apply perks
 			if (findPerk(PerkLib.BasicSelfControl) >= 0) temp += 15;
 			if (findPerk(PerkLib.HalfStepToImprovedSelfControl) >= 0) temp += 25;
@@ -287,9 +287,10 @@ import flash.utils.getQualifiedClassName;
 			//Apply NG+, NG++, NG+++, etc.
 			temp += this.bonusLust * newGamePlusMod();
 			temp += this.level * 2;
-			if (this.level >= 24) temp += this.level * 3;
-			if (this.level >= 42) temp += this.level * 5;
-			if (this.level >= 72) temp += this.level * 10;
+			if (this.level >= 24) temp += (this.level - 23) * 3;
+			if (this.level >= 42) temp += (this.level - 42) * 5;
+			if (this.level >= 72) temp += (this.level - 72) * 10;
+			if (this.level >= 102) temp += (this.level - 102) * 20;
 			return temp;
 		}
 		

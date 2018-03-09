@@ -359,10 +359,10 @@ package classes.Scenes.NPCs
 			lunaAffection(5);
 			HPChange(Math.round(player.maxHP() * .5), true);
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 10) {
-				outputText(" Luna is giving a knowing smile, likely hoping you will jump at the opportunity, maybe she even did it on purpose. Do you take her here and now?\n\n");
+				outputText("\nLuna is giving a knowing smile, likely hoping you will jump at the opportunity, maybe she even did it on purpose. Do you take her here and now?\n\n");
 				menu();
-				if (flags[kFLAGS.LUNA_FOLLOWER] > 10) addButton(0, "Yes", sexMenuMain);
-				addButton(0, "No", nurseLunaEnd);
+				addButton(0, "Yes", sexMenuMain);
+				addButton(1, "No", nurseLunaEnd);
 			}
 			else doNext(camp.returnToCampUseFourHours);
 		}

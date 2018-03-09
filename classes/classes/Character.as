@@ -607,7 +607,7 @@ import classes.Items.JewelryLib;
 		
 		public override function maxFatigue():Number
 		{
-			var max:Number = 100;
+			var max:Number = 150;
 			if (game.player.alicornScore() >= 6) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.dragonScore() >= 20) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.dragonScore() >= 28) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -837,7 +837,7 @@ import classes.Items.JewelryLib;
 		
 		public override function maxMana():Number
 		{
-			var max:Number = 100;
+			var max:Number = 200;
 			if (findPerk(PerkLib.ManaAffinityI) >= 0) max += 35;
 			if (findPerk(PerkLib.ManaAffinityII) >= 0) max += 35;
 			if (findPerk(PerkLib.ManaAffinityIII) >= 0) max += 35;
