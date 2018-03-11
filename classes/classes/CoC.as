@@ -247,8 +247,8 @@ public class CoC extends MovieClip
         //model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8i2";
-			version = ver + " (<b></b>)";
+			ver = "1.0.2_mod_Xianxia_0.8i";
+			version = ver + " (<b>Project 8 (Part 2: Luna, Diana, Sidonie), Avian TF, few new weapons, Healer path, small fixes)</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

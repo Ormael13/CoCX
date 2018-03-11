@@ -863,7 +863,7 @@ private function growLethiciteDefenseYesYesYes():void {
 private function growLethiciteDefenseGuessNot():void {
 	spriteSelect(49);
 	clearOutput();
-	outputText("Rathazul nods sagely, \"<i>That may be wise.  Perhaps there will be another use for this power.\"</i>");
+	outputText("Rathazul nods sagely, \"<i>That may be wise.  Perhaps there will be another use for this power.");
 	doNext(returnToRathazulMenu);
 }
 

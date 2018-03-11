@@ -34,8 +34,6 @@ package classes.Scenes.NPCs
 			var cost:Number = 30;
 			cost *= spellCostMultiplier();
 			if (findPerk(PerkLib.NaturalHealingMinor) >= 0) cost -= 3;
-			if (findPerk(PerkLib.NaturalHealingMajor) >= 0) cost -= 4.5;
-			if (findPerk(PerkLib.NaturalHealingEpic) >= 0) cost -= 5;
 			if (findPerk(PerkLib.WisenedHealer) >= 0) cost *= 2;
 			return cost;
 		}
@@ -43,8 +41,6 @@ package classes.Scenes.NPCs
 			var cost:Number = 50;
 			cost *= spellCostMultiplier();
 			if (findPerk(PerkLib.NaturalHealingMinor) >= 0) cost -= 5;
-			if (findPerk(PerkLib.NaturalHealingMajor) >= 0) cost -= 7.5;
-			if (findPerk(PerkLib.NaturalHealingEpic) >= 0) cost -= 10;
 			if (findPerk(PerkLib.WisenedHealer) >= 0) cost *= 2;
 			return cost;
 		}
@@ -58,8 +54,6 @@ package classes.Scenes.NPCs
 			if (findPerk(PerkLib.WizardsFocus) >= 0) mod1 += .4;
 			if (findPerk(PerkLib.SpellpowerHealing) >= 0) mod1 += .2;
 			if (findPerk(PerkLib.NaturalHealingMinor) >= 0) mod1 += .3;
-			if (findPerk(PerkLib.NaturalHealingMajor) >= 0) mod1 += .4;
-			if (findPerk(PerkLib.NaturalHealingEpic) >= 0) mod1 += .5;
 			return mod1;
 		}
 		public function SpellMod():Number {
@@ -266,8 +260,8 @@ package classes.Scenes.NPCs
 				this.weaponAttack = 6;
 				this.armorDef = 9;
 				this.level = 18;
-				this.bonusHP = 730;
-				this.bonusMana = 285;
+				this.bonusHP = 725;
+				this.bonusMana = 265;
 				this.gems = rand(5) + 10;
 				this.drop = new ChainedDrop().
 					add(weapons.W_STAFF,1/10).
@@ -281,8 +275,8 @@ package classes.Scenes.NPCs
 				this.weaponAttack = 6;
 				this.armorDef = 9;
 				this.level = 21;
-				this.bonusHP = 785;
-				this.bonusMana = 310;
+				this.bonusHP = 220;
+				this.bonusMana = 120;
 				this.gems = rand(5) + 10;
 				this.drop = new ChainedDrop().
 					add(weapons.W_STAFF,1/10).
@@ -296,8 +290,8 @@ package classes.Scenes.NPCs
 				this.weaponAttack = 6;
 				this.armorDef = 9;
 				this.level = 24;
-				this.bonusHP = 790;
-				this.bonusMana = 330;
+				this.bonusHP = 220;
+				this.bonusMana = 120;
 				this.gems = rand(5) + 10;
 				this.drop = new ChainedDrop().
 					add(weapons.W_STAFF,1/10).
@@ -311,8 +305,8 @@ package classes.Scenes.NPCs
 				this.weaponAttack = 9;
 				this.armorDef = 12;
 				this.level = 27;
-				this.bonusHP = 845;
-				this.bonusMana = 355;
+				this.bonusHP = 220;
+				this.bonusMana = 120;
 				this.gems = rand(5) + 15;
 				this.drop = new ChainedDrop().
 					add(weapons.W_STAFF,1/10).
@@ -421,13 +415,13 @@ package classes.Scenes.NPCs
 				this.createPerk(PerkLib.NaturalHealingMinor, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 6) {
-				this.createPerk(PerkLib.NaturalHealingMajor, 0, 0, 0, 0);
+				//this.createPerk(PerkLib.SoulWarrior, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 7) {
-				this.createPerk(PerkLib.SoulSprite, 0, 0, 0, 0);
+				//this.createPerk(PerkLib.SoulWarrior, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 8) {
-				this.createPerk(PerkLib.NaturalHealingEpic, 0, 0, 0, 0);
+				//this.createPerk(PerkLib.SoulWarrior, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_FOLLOWER] == 3 || flags[kFLAGS.DIANA_FOLLOWER] == 4) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			checkMonster();

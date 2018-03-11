@@ -2386,7 +2386,6 @@ public class Appearance extends Utils
 			[Skin.DRAGON_SCALES, "dragon scales", "dragon scales", "", true],
 			[Skin.MOSS, "moss", "moss", "", false],
 			[Skin.AQUA_RUBBER_LIKE, "AQUA_RUBBER_LIKE", "slippery rubber-like skin", "", false],
-			[Skin.FEATHER, "FEATHER", "feather", "", false],
 			[Skin.TATTOED_ONI, "TATTOED_ONI", "tattooed skin", "", false],
 			[Skin.PARTIAL_DRAGON_SCALES, "partial dragon scales", "partial dragon scales", "", true],
 			[Skin.PARTIAL_STONE, "partial stone", "partial stone", "", false],
@@ -2495,8 +2494,7 @@ public class Appearance extends Utils
 					[Eyes.ELF, "elf"],
 					[Eyes.RAIJU, "raiju"],
 					[Eyes.GEMSTONES, "gemstones"],
-					[Eyes.FERAL, "feral"],
-					[Eyes.GRYPHON, "gryphon"]
+					[Eyes.FERAL, "feral"]
 				]
 		);
 		public static const DEFAULT_EARS_NAMES:Object = createMapFromPairs(
@@ -2529,8 +2527,7 @@ public class Appearance extends Utils
 					[Ears.ELVEN, "elven"],
 					[Ears.WEASEL, "weasel"],
 					[Ears.RED_PANDA, "red-panda"],
-					[Ears.AVIAN, "avian"],
-					[Ears.GRYPHON, "gryphon"]
+					[Ears.AVIAN, "avian"]
 				]
 		);
 		public static const DEFAULT_HORNS_NAMES:Object = createMapFromPairs(
@@ -2574,6 +2571,7 @@ public class Appearance extends Utils
 					[Arms.GARGOYLE_2, "gargoyle"],
 					[Arms.WOLF, "wolf"],
 					[Arms.LION, "lion"],
+					[Arms.SPHINX, "sphinx"],
 					[Arms.KITSUNE, "kitsune"],
 					[Arms.FOX, "fox"],
 					[Arms.LIZARD, "lizard"],
@@ -2587,8 +2585,7 @@ public class Appearance extends Utils
 					[Arms.RAIJU, "raiju"],
 					[Arms.RED_PANDA, "red-panda"],
 					[Arms.CAT, "cat"],
-					[Arms.AVIAN, "avian"],
-					[Arms.GRYPHON, "gryphon"]
+					[Arms.AVIAN, "avian"]
 				]
 		);
 		public static const DEFAULT_TAIL_NAMES:Object = createMapFromPairs(
@@ -2621,6 +2618,7 @@ public class Appearance extends Utils
 					[Tail.KITSHOO, "kitshoo"],
 					[Tail.MANTIS_ABDOMEN, "mantis abdomen"],
 					[Tail.WOLF, "wolf"],
+					[Tail.LION, "lion"],
 					[Tail.GARGOYLE, "mace-shaped gargoyle"],
 					[Tail.MANTICORE_PUSSYTAIL, "manticore pussytail"],
 					[Tail.ORCA, "orca"],
@@ -2628,8 +2626,7 @@ public class Appearance extends Utils
 					[Tail.RAIJU, "raiju"],
 					[Tail.RED_PANDA, "red-panda"],
 					[Tail.GARGOYLE_2, "axe-shaped gargoyle"],
-					[Tail.AVIAN, "avian"],
-					[Tail.GRIFFIN, "griffin"]
+					[Tail.AVIAN, "avian"]
 				]
 		);
 		public static const DEFAULT_WING_NAMES:Object = createMapFromPairs(
@@ -2650,6 +2647,7 @@ public class Appearance extends Utils
 					[Wings.DRACONIC_HUGE, "large majestic draconic"],
 					[Wings.FEATHERED_PHOENIX, "phoenix"],
 					[Wings.FEATHERED_ALICORN, "alicorn"],
+					[Wings.FEATHERED_SPHINX, "sphinx"],
 					[Wings.MANTIS_LIKE_SMALL, "small mantis-like"],
 					[Wings.MANTIS_LIKE_LARGE, "large mantis-like"],
 					[Wings.MANTIS_LIKE_LARGE_2, "two large pairs of mantis-like"],
@@ -2682,6 +2680,7 @@ public class Appearance extends Utils
 					[Wings.DRACONIC_HUGE, "large, majestic draconic"],
 					[Wings.FEATHERED_PHOENIX, "large crimson feathered"],
 					[Wings.FEATHERED_ALICORN, "large white feathered"],
+					[Wings.FEATHERED_SPHINX, "large feathered"],
 					[Wings.MANTIS_LIKE_SMALL, "small mantis-like"],
 					[Wings.MANTIS_LIKE_LARGE, "large mantis-like"],
 					[Wings.MANTIS_LIKE_LARGE_2, "two large pairs of mantis-like"],
@@ -2738,8 +2737,7 @@ public class Appearance extends Utils
 					[LowerBody.ELF, "elf"],
 					[LowerBody.RAIJU, "raiju"],
 					[LowerBody.RED_PANDA, "red-panda"],
-					[LowerBody.AVIAN, "avian"],
-					[LowerBody.GRYPHON, "gryphon"]
+					[LowerBody.AVIAN, "avian"]
 				]
 		);
 		// <mod name="Dragon patch" author="Stadler76">

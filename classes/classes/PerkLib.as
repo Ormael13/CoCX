@@ -3123,6 +3123,7 @@ public class PerkLib
                     .requireLib(50)
                     .requireStatusEffect(StatusEffects.KnowsArouse, "Arouse spell");
             JobCourtesan.requirePerk(JobSeducer)
+                    .requirePerk(Heroism)
                     .requireLib(50)
                     .requireLevel(12);
             DazzlingDisplay.requirePerk(JobCourtesan)
@@ -3230,23 +3231,23 @@ public class PerkLib
             // CORRUPTION
             //------------
             //Slot 7 - Corrupted Libido - lust raises 10% slower.
-            CorruptedLibido.requireCor(10);
+            CorruptedLibido.requireCor(25);
             CorruptedLibido.defaultValue1 = 20;
             //Slot 7 - Seduction (Must have seduced Jojo)
-            Seduction.requireCor(15);
+            Seduction.requireCor(50);
             //Slot 7 - Nymphomania
-            Nymphomania.requireCor(15)
+            Nymphomania.requireCor(75)
                     .requirePerk(CorruptedLibido);
             //Slot 7 - UNFINISHED :3
-            Acclimation.requireCor(15)
+            Acclimation.requireCor(50)
                     .requirePerk(CorruptedLibido)
                     .requireMinLust(20);
-            SenseCorruption.requireCor(15);
+            SenseCorruption.requireCor(75);
             //Tier 1 Corruption Perks - acclimation over-rides
-            Sadist.requireCor(20)
+            Sadist.requireCor(60)
                     .requirePerk(CorruptedLibido)
                     .requireLevel(6);
-            ArousingAura.requireCor(25)
+            ArousingAura.requireCor(70)
                     .requirePerk(CorruptedLibido)
                     .requireLevel(6);
             //Tier 2

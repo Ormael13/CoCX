@@ -695,7 +695,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			if (player.findPerk(PerkLib.SluttySimplicity) >= 0 && player.armorName == "nothing") lustDmgF *= (1 + ((10 + rand(11)) / 100));
 			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0) {
-				lustDmgF *= (1 + (player.lust100 * 0.01));
+				lustDmgF *= (1 + player.lust100);
 			}
 			if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) {
 				lustDmgF *= 1.15;
@@ -1127,7 +1127,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 2;
         if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 5;
         if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 2;
-		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
+		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + player.lust100);
 		damage = Math.round(damage);
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -1713,26 +1713,26 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.ImprovedCrinosShape)) {
 			if (player.hasPerk(PerkLib.GreaterCrinosShape)) {
 				if (player.hasPerk(PerkLib.MasterCrinosShape)) {
-					temp1 += player.str * 1.6;
-					temp2 += player.tou * 1.6;
-					temp3 += player.spe * 1.6;
+					temp1 += player.str * 0.2;
+					temp2 += player.tou * 0.2;
+					temp3 += player.spe * 0.2;
 				}
 				else {
-					temp1 += player.str * 0.8;
-					temp2 += player.tou * 0.8;
-					temp3 += player.spe * 0.8;
+					temp1 += player.str * 0.15;
+					temp2 += player.tou * 0.15;
+					temp3 += player.spe * 0.15;
 				}
 			}
 			else {
-				temp1 += player.str * 0.4;
-				temp2 += player.tou * 0.4;
-				temp3 += player.spe * 0.4;
+				temp1 += player.str * 0.1;
+				temp2 += player.tou * 0.1;
+				temp3 += player.spe * 0.1;
 			}
 		}
 		else {
-			temp1 += player.str * 0.2;
-			temp2 += player.tou * 0.2;
-			temp3 += player.spe * 0.2;
+			temp1 += player.str * 0.05;
+			temp2 += player.tou * 0.05;
+			temp3 += player.spe * 0.05;
 		}
 		temp1 = Math.round(temp1);
 		temp2 = Math.round(temp2);
@@ -1756,7 +1756,7 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	public function returnToNormalShape():void {
 		clearOutput();
-		outputText("Gathering all you willpower you forcefully subduing your inner beast and returning to your normal shape.");
+		outputText("Gathering all you willpower you forcefully subduing your inner beast and retunrning to your normal shape.");
 		player.dynStats("str", -player.statusEffectv1(StatusEffects.CrinosShape));
 		player.dynStats("tou", -player.statusEffectv2(StatusEffects.CrinosShape));
 		player.dynStats("spe", -player.statusEffectv3(StatusEffects.CrinosShape));

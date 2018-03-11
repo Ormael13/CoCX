@@ -607,7 +607,7 @@ import classes.Items.JewelryLib;
 		
 		public override function maxFatigue():Number
 		{
-			var max:Number = 150;
+			var max:Number = 100;
 			if (game.player.alicornScore() >= 6) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.dragonScore() >= 20) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.dragonScore() >= 28) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -672,7 +672,6 @@ import classes.Items.JewelryLib;
 			if (game.player.alicornScore() >= 6) max += (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));//przenieść do mnożnika?
 			if (game.player.unicornScore() >= 5) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));//przenieść do mnożnika?
 			if (hasPerk(PerkLib.DemonicLethicite)) max += Math.round(lib);
-			if (hasPerk(PerkLib.Metamorph)) max += 50;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 2) max += 25;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 3) max += 25;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 4) max += 30;
@@ -837,7 +836,7 @@ import classes.Items.JewelryLib;
 		
 		public override function maxMana():Number
 		{
-			var max:Number = 200;
+			var max:Number = 100;
 			if (findPerk(PerkLib.ManaAffinityI) >= 0) max += 35;
 			if (findPerk(PerkLib.ManaAffinityII) >= 0) max += 35;
 			if (findPerk(PerkLib.ManaAffinityIII) >= 0) max += 35;

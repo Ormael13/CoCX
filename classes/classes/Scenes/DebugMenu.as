@@ -627,7 +627,7 @@ public class DebugMenu extends BaseContent
 			}
 			displayHeader("Color picker");
 			outputText('\nCurrent color:');
-			outputText("\n<b>H</b>ue:\t\t\t"+h+' / 360\t(0: red, 120: green, 240: blue)');
+			outputText("\n<b>H</b>ue:\t\t\t"+h+' / 360\t<i>(0: red, 120: green, 240: blue)');
 			outputText("\n<b>S</b>aturation:\t\t"+s+' / 100\t(0: greyscale, 100: bright color)');
 			outputText("\n<b>L</b>uminosity:\t"+l+' / 100\t(0: black, 50: bright color, 100: white)');
 			outputText('\n\nCurrent mode: <b>'+pickerMode+' color</b>.');

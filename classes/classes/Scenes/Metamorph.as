@@ -40,8 +40,7 @@ public function accessMetamorphMenu():void {
 	addButton(11, "Page 2", accessPage2MetamorphMenu);
 //	addButton(12, "Page 3", accessPage3MetamorphMenu);
 //	addButton(13, "Page 4", accessPage4MetamorphMenu);
-	if (player.hasPerk(PerkLib.JobSoulCultivator)) addButton(14, "Back", SceneLib.soulforce.accessSoulforceMenu);
-	else addButton(14, "Back", playerMenu);
+	addButton(14, "Back", SceneLib.soulforce.accessSoulforceMenu);
 }
 
 private function accessPage1MetamorphMenu():void {
