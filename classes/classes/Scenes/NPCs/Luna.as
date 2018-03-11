@@ -8,6 +8,7 @@ package classes.Scenes.NPCs
 	import classes.BodyParts.Butt;
 	import classes.BodyParts.Hips;
 	import classes.Scenes.SceneLib;
+	import classes.GlobalFlags.kFLAGS;
 	import classes.internals.*;
 	
 	use namespace CoC;
@@ -51,12 +52,14 @@ package classes.Scenes.NPCs
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.lunaFollower.fullMoonEventResistWin();
+			if (flags[kFLAGS.LUNA_FOLLOWER] > 10) SceneLib.lunaFollower.sparLunaWon();
+			else SceneLib.lunaFollower.fullMoonEventResistWin();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.lunaFollower.fullMoonEventResistDefat();
+			if (flags[kFLAGS.LUNA_FOLLOWER] > 10) SceneLib.lunaFollower.sparLunaLost();
+			else SceneLib.lunaFollower.fullMoonEventResistDefeat();
 		}
 		
 		public function Luna() 
@@ -77,23 +80,52 @@ package classes.Scenes.NPCs
 			this.skin.growFur({color:"ashen"});
 			this.hairColor = "ashen";
 			this.hairLength = 8;
-			initStrTouSpeInte(40, 60, 40, 50);
-			initWisLibSensCor(50, 80, 40, 75);
+			if (flags[kFLAGS.LUNA_LVL_UP] == 0) {
+				initStrTouSpeInte(30, 90, 40, 50);
+				initWisLibSensCor(50, 80, 40, 75);
+				this.weaponAttack = 37;
+				this.armorDef = 200;
+				this.bonusHP = 800;
+				this.level = 9;
+			}
+			if (flags[kFLAGS.LUNA_LVL_UP] == 1) {
+				initStrTouSpeInte(30, 95, 45, 50);
+				initWisLibSensCor(50, 80, 40, 75);
+				this.weaponAttack = 37;
+				this.armorDef = 200;
+				this.bonusHP = 800;
+				this.level = 15;
+			}
+			if (flags[kFLAGS.LUNA_LVL_UP] == 2) {
+				initStrTouSpeInte(35, 100, 50, 50);
+				initWisLibSensCor(50, 80, 40, 75);
+				this.weaponAttack = 37;
+				this.armorDef = 200;
+				this.bonusHP = 850;
+				this.level = 21;
+			}
+			if (flags[kFLAGS.LUNA_LVL_UP] == 3) {
+				initStrTouSpeInte(35, 100, 55, 50);
+				initWisLibSensCor(50, 80, 40, 75);
+				this.weaponAttack = 37;
+				this.armorDef = 200;
+				this.bonusHP = 900;
+				this.level = 27;
+			}
 			this.weaponName = "paws";
 			this.weaponVerb="paw-slash";
-			this.weaponAttack = 37;
 			this.armorName = "fur";
-			this.armorDef = 2000;
-			this.bonusHP = 800;
 			this.bonusLust = 10;
 			this.lust = 10;
 			this.lustVuln = 0;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 10;
 			this.gems = 5 + rand(5);
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.MonsterRegeneration, 5, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
+			if (flags[kFLAGS.LUNA_LVL_UP] >= 1) this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
+			if (flags[kFLAGS.LUNA_LVL_UP] >= 2) this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			if (flags[kFLAGS.LUNA_LVL_UP] >= 3) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

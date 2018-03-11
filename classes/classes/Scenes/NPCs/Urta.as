@@ -2604,7 +2604,7 @@ private function tellUrtaNoMoreScylla():void {
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00147] = 1;
 	outputText("You let Urta know that you're willing to overlook this, but that Scylla is a slippery slope that's best avoided.  She nods, a sober expression on her vulpine face.  Once you finish, she replies, \"<i>I understand, but you need to know – when 'it' gets too much for me to handle... if you aren't around to help I'm going to see Edryn.  S-she helps... if it wasn't for her I probably would've given up and done something stupid a long time ago.  What we have is more important, but unless we can get together every couple days I'll NEED to visit her.  ");
 	if(urtaLove()) outputText("Just please, don't doubt my love for you.  ");
-	outputText("Do I need to stop drinking too?");
+	outputText("Do I need to stop drinking too?</i>");
 	//[Drink More] [Drink Less] [No Change] [Leave Her]
 	simpleChoices("Drink More", tellUrtaToBeADrunkenHussy, "Drink Less", tellUrtaToStopBeingALush, "No Change", tellUrtaToStayTheSame, "Leave Her", leaveUrtaAfterScyllaConfrontation, "", null);
 }
@@ -2615,7 +2615,7 @@ private function tellUrtaMoreScyllaIsFine():void {
 	outputText("You give Urta a raunchy, lewd smile and let her know that you're okay with her 'helping' Scylla, and vice-versa, so long as they don't mind you popping in.  She smiles and gives you a wink, but her expression darkens after a moment of thought.  Urta interrupts to mention, \"<i>There's something else.  If I can't find you or Scylla and I NEED to cum, I'll have to visit Edryn.  She's probably the only thing that's kept me sane, and if you aren't around to help with my needs I'll visit her.  ");
 	if(urtaLove()) outputText("Just remember that YOU'RE the one I love, not her.  ");
 	else outputText("Me and her, we've been partners in the guard for a long time, but the sex is just mechanical, to sate us.  You don't have to worry about her stealing me away.  ");
-	outputText("But what about my drinking or how I get when I'm drunk?  It doesn't bother you, does it?");
+	outputText("But what about my drinking or how I get when I'm drunk?  It doesn't bother you, does it?</i>");
 	//[Drink More] [Drink Less] [No Change] [Leave Her]
 	simpleChoices("Drink More", tellUrtaToBeADrunkenHussy, "Drink Less", tellUrtaToStopBeingALush, "No Change", tellUrtaToStayTheSame, "Leave Her", leaveUrtaAfterScyllaConfrontation, "", null);
 }
