@@ -37,6 +37,15 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("<b>You need more time before you can use Compelling Aria again.</b>\n\n");
 			}
 		}
+		
+		if (player.sphinxScore() >= 14) {
+			bd = buttons.add("Cursed Riddle", CursedRiddle, "Weave a curse in the form of a magical riddle. If the victims fails to answer it, it will be immediately struck by the curse. Intelligence determines the odds and damage.");
+			bd.requireFatigue(spellCost(50));
+			if (player.hasStatusEffect(StatusEffects.CooldownCursedRiddle)) {
+				bd.disable("<b>You need some time to think of a new riddle.</b>\n\n");
+			}
+		}
+		
 		if (player.hasPerk(PerkLib.Incorporeality)) {
 			buttons.add("Possess", possess).hint("Attempt to temporarily possess a foe and force them to raise their own lusts.");
 		}
@@ -51,6 +60,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You cannot focus to use this ability while you're having so much difficult breathing.");
 			}
 		}
+		
 		if (player.hasPerk(PerkLib.CorruptedKitsune) && player.tailType == Tail.FOX && player.tailCount >= 7) {
 			// Corrupt Fox Fire
 			bd = buttons.add("C.FoxFire", corruptedFoxFire,"Unleash a corrupted purple flame at your opponent for high damage. Less effective against corrupted enemies. \n");
@@ -695,7 +705,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			if (player.findPerk(PerkLib.SluttySimplicity) >= 0 && player.armorName == "nothing") lustDmgF *= (1 + ((10 + rand(11)) / 100));
 			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0) {
-				lustDmgF *= (1 + (player.lust100 * 0.01));
+				lustDmgF *= (1 + player.lust100);
 			}
 			if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) {
 				lustDmgF *= 1.15;
@@ -1127,7 +1137,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 2;
         if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 5;
         if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 2;
-		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
+		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + player.lust100);
 		damage = Math.round(damage);
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -1713,26 +1723,26 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.ImprovedCrinosShape)) {
 			if (player.hasPerk(PerkLib.GreaterCrinosShape)) {
 				if (player.hasPerk(PerkLib.MasterCrinosShape)) {
-					temp1 += player.str * 1.6;
-					temp2 += player.tou * 1.6;
-					temp3 += player.spe * 1.6;
+					temp1 += player.str * 0.2;
+					temp2 += player.tou * 0.2;
+					temp3 += player.spe * 0.2;
 				}
 				else {
-					temp1 += player.str * 0.8;
-					temp2 += player.tou * 0.8;
-					temp3 += player.spe * 0.8;
+					temp1 += player.str * 0.15;
+					temp2 += player.tou * 0.15;
+					temp3 += player.spe * 0.15;
 				}
 			}
 			else {
-				temp1 += player.str * 0.4;
-				temp2 += player.tou * 0.4;
-				temp3 += player.spe * 0.4;
+				temp1 += player.str * 0.1;
+				temp2 += player.tou * 0.1;
+				temp3 += player.spe * 0.1;
 			}
 		}
 		else {
-			temp1 += player.str * 0.2;
-			temp2 += player.tou * 0.2;
-			temp3 += player.spe * 0.2;
+			temp1 += player.str * 0.05;
+			temp2 += player.tou * 0.05;
+			temp3 += player.spe * 0.05;
 		}
 		temp1 = Math.round(temp1);
 		temp2 = Math.round(temp2);
@@ -1756,7 +1766,7 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	public function returnToNormalShape():void {
 		clearOutput();
-		outputText("Gathering all you willpower you forcefully subduing your inner beast and returning to your normal shape.");
+		outputText("Gathering all you willpower you forcefully subduing your inner beast and retunrning to your normal shape.");
 		player.dynStats("str", -player.statusEffectv1(StatusEffects.CrinosShape));
 		player.dynStats("tou", -player.statusEffectv2(StatusEffects.CrinosShape));
 		player.dynStats("spe", -player.statusEffectv3(StatusEffects.CrinosShape));
@@ -2489,6 +2499,55 @@ public class MagicSpecials extends BaseCombatContent {
 		else {
 			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
+	}
+	
+	//cursed riddle
+	public function CursedRiddle():void {
+		clearOutput();
+		player.createStatusEffect(StatusEffects.CooldownCursedRiddle, 0, 0, 0, 0);
+		outputText("You stop fighting for a second and speak aloud a magical riddle. " + monster.a + monster.short + " gives you a troubled look, everyone knows of the terrifying power of a sphinx riddle used as a curse. You give " + monster.a + monster.short + " some time crossing your forepaws in anticipation. ");
+		
+		//odds of success
+		var baseInteReq:Number = 200		
+		var chance:Number = Math.max(player.inte/baseInteReq, 0.05) + 25
+		chance = Math.min(chance, 0.80);
+		
+		if (Math.random() < chance){
+		outputText("\n\n" + monster.a + monster.short + " hazard an answer and your smirk as you respond, “Sadly incorrect!” Your curse smiting your foe for its mistake, leaving it stunned by pain and pleasure.");
+		//damage dealth
+		var damage:Number = ((scalingBonusWisdom() * 0.5) + scalingBonusIntelligence()) * spellMod();
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
+			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
+			if (player.inte > 100) critChance += 10;
+		}
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		damage = doDamage(damage);
+		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+		
+		//Lust damage dealth
+		if (monster.lustVuln > 0) {
+			outputText(" ");
+			var lustDmg:Number = monster.lustVuln * ((player.inte + (player.wis * 0.50)) / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
+			monster.teased(lustDmg);
+		}
+		monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+		outputText("\n\n");
+		combat.heroBaneProc(damage);
+		}
+		else {
+		outputText("\n\nTo your complete frustration, " + monster.a + monster.short + " answers correctly.");
+		outputText("\n\n");
+		}
+	if(monster.HP < 1) doNext(endHpVictory);
+	else enemyAI();
 	}
 
 //Transfer

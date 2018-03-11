@@ -73,7 +73,7 @@ public function WonSecondFight():void {
 public function WonSecondFightNo():void {
 	outputText("Likely the proud master would rather have her opponent leave her be than be dishonored any further. You head back toward your camp to rest after this well earned victory, pocketing the scroll you found on Chi Chi at the same time, as you fail to notice the blood beginning to slowly create a small pool under her.\n\n");
 	outputText("A peasant runs to you, stopping you from leaving for a moment.\n\n");
-	outputText("\"<i>I’m sorry to tell you this, but your master took a fatal wound to the head. We will bury her in the town graveyard, so if you would like to, you can visit her grave from time to time. Again my most sincere condolences.\"</i>\n\n");
+	outputText("\"<i>I’m sorry to tell you this, but your master took a fatal wound to the head. We will bury her in the town graveyard, so if you would like to, you can visit her grave from time to time. Again my most sincere condolences.\n\n");
 	outputText("You are somewhat shocked to learn that Chi Chi died, did she go all out in this battle to the point it cost her life? You head back to camp trying to figure how such a tragic incident happened in a training session.\n\n");
 	flags[kFLAGS.CHI_CHI_FOLLOWER] = 2;
 	inventory.takeItem(weapons.MASTGLO, WonSecondFightNo2);
@@ -421,11 +421,6 @@ public function SoulskilsManualsShopPunishingKick2():void {
 	doNext(camp.returnToCampUseFourHours);
 }
 
-public function ChiChiCampMainMenu2():void {
-	if ((flags[kFLAGS.LUNA_JEALOUSY] > 100 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 150 && rand(10) < 8)) mishapsLunaChiChi();
-	else ChiChiCampMainMenu();
-}
-
 public function ChiChiCampMainMenu():void {
 	clearOutput();
 	outputText("You go over to Chi Chi who pauses her training to head to you once you are close.");
@@ -521,18 +516,6 @@ public function chichiSparring():void {
 	outputText("The both of you head to the ring and Chi Chi takes on her fighting pose.\n\n");
 	outputText("\"<i>Don’t worry about me, I won’t need to go all out this time.</i>\"");
 	startCombat(new ChiChi());
-}
-
-public function mishapsLunaChiChi():void {
-	clearOutput();
-	outputText("As you go to visit Chi Chi you hear her scream. Running over to check whats going on you notice the fire mouse is now a sobbing mess, wet with water. You don’t recall her crying before so this must be serious.\n\n");
-	outputText("\"<i>Why why? Why would someone put a bucket right above my bedroll now I’m all wet and my fire will take hours to rise again!</i>\"\n\n");
-	outputText("She notice you checking her and panic.\n\n");
-	outputText("\"<i>Eep go away [name]! D..don’t look at me!! The last thing I need is you looking at me right now.</i>\"\n\n");
-	outputText("That’s quite the surprise. Does the proud fighter she normaly is turn into an awkward village girl the moment shes wet? Well regardless you guess you will have to visit her later because there’s no way she’s letting you approach her right now.\n\n");
-	if (player.hasStatusEffect(StatusEffects.CampLunaMishaps2)) player.addStatusValue(StatusEffects.CampLunaMishaps2, 4, 1);
-	else player.createStatusEffect(StatusEffects.CampLunaMishaps2, 0, 0, 0, 1);
-	doNext(playerMenu);
 }
 
 	}

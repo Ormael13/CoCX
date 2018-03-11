@@ -232,7 +232,6 @@ public class HeXinDao extends BaseContent
             addButton(1, "DryTent", buyItem,consumables.DRYTENT,sayLine(consumables.DRYTENT,"anemone"),onBuyString).hint("Buy a shriveled tentacle.");
             addButton(2, "EctoPls", buyItem,consumables.ECTOPLS,sayLine(consumables.ECTOPLS,"ghost"),onBuyString).hint("Buy a bottle of ectoplasm.");
             addButton(3, "TrapOil", buyItem,consumables.TRAPOIL,sayLine(consumables.TRAPOIL,"sand trap"),onBuyString).hint("Buy a vial of trap oil.");
-            addButton(4, "Icicle", buyItem,consumables.ICICLE_,sayLine(consumables.ICICLE_,"ice shard"),onBuyString).hint("Buy an icicle.");
             addButton(14, "Back", mogahenmerchant);
             statScreenRefresh();
         }
@@ -485,7 +484,7 @@ public function soularena():void {
         outputText("Picking the one in the middle prepared for challanges you enter there and looking around checking who if there is currently anyone up for a challange.");
         menu();
         addButton(0, "Gaunlet 1", gaunletchallange1fight1).hint("Fight 3 diff enemies one after another.");
-        if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] == 1) addButton(1, "Gaunlet 2", gaunletchallange2fight1).hint("Fight 4 diff enemies one after another.");
+        //if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] == 1) addButton(1, "Gaunlet 2", gaunletchallange2fight1).hint("Fight 4 diff enemies one after another.");
         //addButton(2, "Gaunlet 3", gaunletchallange3).hint("Fight 5 diff enemies one after another.");
         //addButton(3, "Gaunlet 4", gaunletchallange4).hint("Fight 6 diff enemies one after another.");
         //addButton(4, "Gaunlet 5", gaunletchallange5).hint("Fight 7 diff enemies one after another.");
@@ -507,11 +506,6 @@ public function soularena():void {
         monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
         monster.XP = Math.round(monster.XP / 2);
     }
-	public function gaunletsinbetween():void {
-		cleanupAfterCombat();
-        player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
-        player.createStatusEffect(StatusEffects.SoulArenaGaunlet, 0, 0, 0, 0);
-	}
     public function gaunletchallange1fight1():void {
         clearOutput();
         outputText("You register for the gauntlet challenge then when called, move out beyond the arena gate to face your opponent. The crowd is big, you sure will have quite the audience. A man with a necktie and a weird stick screams across the area.\n\n");
@@ -526,16 +520,14 @@ public function soularena():void {
     }
     public function gaunletchallange1fight2():void {
         clearOutput();
-		gaunletsinbetween();
-		outputText("As the last of the golem falls down, the commentator resumes.\n\n");
+        outputText("As the last of the golem falls down, the commentator resumes.\n\n");
         outputText("\"<i>This one is straight from the woods. Freshly caught and horny to boot. Can our champion’s strength overcome the beast’s lust? LET'S FIND OUT!!</i>\"\n\n");
         outputText("A shadow moves out behind the gate, revealing the shape of a fluid starved tentacle beast.\n\n");
         startCombat(new TentacleBeast());
     }
     public function gaunletchallange1fight3():void {
         clearOutput();
-		gaunletsinbetween();
-		outputText("As the tentacle beast whimpers and crawls away, the crowd cheers for you. Here comes the final round.\n\n");
+        outputText("As the tentacle beast whimpers and crawls away, the crowd cheers for you. Here comes the final round.\n\n");
         outputText("\"<i>This contestant is smaller than the last two... Smarter too, and most of all extremely deadly. She’s paid a handsome sack of gems daily to kick the ass of anyone who reach this stage, yet is by far the deadliest combatant of her division. She’s your favorite and an expert huntress. Here she comes... Merisiel the dark elf!!!</i>\"\n\n");
         outputText("A woman with dark skin walks by the entrance of the arena with only a bow for a weapon. She sure does look like an elf, however. She’s nothing like the gentle creature from your childhood stories as she observes you with a cruel, calculative gaze. The dark elf readies her bow, smirking.\n\n");
         startCombat(new DarkElfScout());
@@ -567,7 +559,6 @@ public function soularena():void {
 	}
 	public function gaunletchallange2fight2():void {
 		clearOutput();
-		gaunletsinbetween();
 		outputText("As the goblin falls unconscious to the ground the crowd cheer for you.\n\n");
         outputText("\"<i>It would seems the hero squashed that midget good but were only beginning. If I may the next contestant has been sex starved for two consecutive month and is desperate to sow his seed hence now we release... THE HOUND!!!</i>\"\n\n");
         outputText("A massive hellhound of proportion larger than normal rush out of an opening gate. Its eye burns with lust.\n\n");
@@ -575,36 +566,27 @@ public function soularena():void {
 	}
 	public function gaunletchallange2fight3():void {
 		clearOutput();
-		gaunletsinbetween();
-		outputText("The mutt fall defeated to the floor as the crowd scream your name. The announcer announce the next contestant.\n\n");
-        outputText("\"<i>The next opponent is a fighter known and loved by the public. You have heard her name told in shallow whispers for the next opponent is an expert of the terrible art known as BDSM. Yes you have all been waiting for her so cheer up for Malady the drider!!!</i>\"\n\n");
-        outputText("A drider in bondage suit comes out of the gate and eyes you amused.\n\n");
-        outputText("\"<i>You are my opponent uh? Doesn’t look like much. Little pet, by the time I’m done binding you, you will seldom call me mistress!</i>\"\n\n");
+		outputText("Placeholder.\n\n");
+        outputText("Placeholder.\n\n");
         startCombat(new CorruptedDrider());
 	}
 	public function gaunletchallange2fight4():void {
 		clearOutput();
-		gaunletsinbetween();
-		outputText("As the drider falls defeated the crowd cheer to your victory. That said the battle is far from over yet. A large amount of shadows mass behind the opposite gate and already you can guess what's coming up for you.\n\n");
-        outputText("\"<i>The final contestant is both a new opponent and a test! The town golemancer has been working extra shifts on these thing she calls her babies!! Using the traditional gargoyle model but deprived of soul so for the purpose of mass production these living weapons will mercilessly beat the hell out of the contestant. Who do you think will win the living or the artificial creation? LEEEEETS FIND OUT!!!!!!</i>\"\n\n");
-        outputText("A full squad of stone gargoyle pour out of the gate their mace like tail trailing in the sands. Their claws are sharp and their soulless gaze tells you it will end poorly should you lose.\n\n");
+		outputText("Placeholder.\n\n");
         startCombat(new BossGolems());
 	}
 	public function gaunletchallange2postfight():void {
 		clearOutput();
-		outputText("The last gargoyle crumble to rubble and you hold its head up toward the public in victory.\n\n");
-        outputText("\"<i>The challenger defeated all of his opponent what a miracle! Challenger you may now exit the arena and claim your prize, well done!</i>\"\n\n");
-        outputText("You make your way toward the exit and to your surprise meet face to face with the town golemancer. She grudgingly handle you your reward.\n\n");
-        outputText("\"<i>I’m supposed to reward you ");
+		outputText("Placeholder.\n\n");
         if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] >= 2) {
-			 outputText("a full chest of soulstone. Tsk I guess my golems were not ready yet. Next time if you do show up be ready because my future creation will definitely make a bloody mess out of you.</i>\"\n\n");
+			 outputText("\"<i>Good show, champion. As a reward for your performance, please accept these 20 spirit stones. Please do come back again and maybe next time you could even try the harder challenge.</i>\"\n\n");
 			flags[kFLAGS.SPIRIT_STONES] += 20;
             cleanupAfterCombat();
 		}
 		else {
-			outputText("with this scepter. Tsk I guess my golems were not ready yet. Next time if you do show up be ready because my future creation will definitely make a bloody mess out of you.</i>\"\n\n");
+			outputText("Placeholder.\n\n");
 			flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] = 2;
-            inventory.takeItem(weapons.SCECOMM, cleanupAfterCombat);
+            inventory.takeItem(weaponsrange.BOWGUID, cleanupAfterCombat);
 		}
 	}
     public function restaurantShiraOfTheEast():void {

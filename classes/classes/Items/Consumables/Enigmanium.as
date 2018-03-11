@@ -38,9 +38,9 @@ public class Enigmanium extends Consumable{
 			if (rand(2) == 0) changeLimit++;
 			if (rand(2) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+			if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
+			if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
+			if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
 			//Text go!
 			clearOutput();
 			outputText("You chug down the potion pinching your nose and hoping for the best. Knowledge flood your mind. Hey you could as well get to making riddles as a pastime.");
@@ -279,7 +279,8 @@ public class Enigmanium extends Consumable{
 				changes++;
 			}
 			
-			//If cocks that aren't horsified!
+			if ((player.isMaleOrHerm()) && rand(3) == 0 && changes < changeLimit) {
+			//If cocks that aren't Catsified!
 			if ((player.catCocks() + player.demonCocks()) < player.cocks.length) {
 				//Transform a cock and store it's index value to talk about it.
 				//Single cock
@@ -287,8 +288,9 @@ public class Enigmanium extends Consumable{
 					var temp:int = 0;
 					//Use temp3 to track whether or not anything is changed.
 					temp3 = 0;
+					if (player.cocks[0].cockType != CockTypesEnum.CAT) {
 					if (player.cocks[0].cockType == CockTypesEnum.HUMAN) {
-						outputText("\n\nYour [cock] swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. <b>Your new feline dong throbs powerfully</b> and spurts a few droplets of cum.");
+						outputText("\n\nYour [cock] swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. Your new feline dong throbs powerfully and spurts a few droplets of cum.");
 						temp = player.addHorseCock();
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
@@ -296,24 +298,25 @@ public class Enigmanium extends Consumable{
 					}
 					if (player.cocks[0].cockType == CockTypesEnum.DOG) {
 						temp = player.addHorseCock();
-						outputText("\n\nYour [cock] swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. <b>Your new feline dong throbs powerfully</b> and spurts a few droplets of cum.");
+						outputText("\n\nYour [cock] swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. Your new feline dong throbs powerfully and spurts a few droplets of cum.");
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
 						dynStats("lib", 5, "sen", 4, "lus", 35);
 					}
 					if (player.cocks[0].cockType == CockTypesEnum.TENTACLE) {
 						temp = player.addHorseCock();
-						outputText("\n\nYour [cock] swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. <b>Your new feline dong throbs powerfully</b> and spurts a few droplets of cum.");
+						outputText("\n\nYour [cock] swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. Your new feline dong throbs powerfully and spurts a few droplets of cum.");
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
 						dynStats("lib", 5, "sen", 4, "lus", 35);
 					}
 					if (player.cocks[0].cockType.Index > 4) {
-						outputText("\n\nYour [cock] swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. <b>Your new feline dong throbs powerfully</b> and spurts a few droplets of cum.");
+						outputText("\n\nYour [cock] swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. Your new feline dong throbs powerfully and spurts a few droplets of cum.");
 						temp = player.addHorseCock();
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
 						dynStats("lib", 5, "sen", 4, "lus", 35);
+					}
 					}
 					if (temp3 == 1) outputText("  <b>Your penis has transformed into a Cat's!</b>");
 				}
@@ -339,7 +342,7 @@ public class Enigmanium extends Consumable{
 				changes++;
 			}
 			//Players cocks are all horse-type - increase size!
-			else {
+			else if(player.hasCock()) {
 				//single cock
 				if (player.cocks.length == 1) {
 					temp2 = player.increaseCock(0, rand(3) + 1);
@@ -367,7 +370,7 @@ public class Enigmanium extends Consumable{
 					dynStats("sen", 1, "lus", 10);
 				}
 				outputText("\n\n");
-				if (temp2 > 2) outputText("Your " + player.cockDescript(temp) + " tightens painfully, inches of taut horse-flesh pouring out from your sheath as it grows longer.  Thick animal-pre forms at the flared tip, drawn out from the pleasure of the change.");
+				if (temp2 > 2) outputText("Your " + player.cockDescript(temp) + " tightens painfully, inches of taut flesh pouring out from your sheath as it grows longer.  Thick animal-pre forms at the flared tip, drawn out from the pleasure of the change.");
 				if (temp2 > 1 && temp2 <= 2) outputText("Aching pressure builds within your sheath, suddenly releasing as an inch or more of extra dick flesh spills out.  A dollop of pre beads on the head of your enlarged " + player.cockDescript(temp) + " from the pleasure of the growth.");
 				if (temp2 <= 1) outputText("A slight pressure builds and releases as your " + player.cockDescript(temp) + " pushes a bit further out of your sheath.");
 				changes++;
@@ -388,7 +391,7 @@ public class Enigmanium extends Consumable{
 				if (player.cor + player.lib < 60) outputText(" to have such a splendid tool.  You idly daydream about cunts and pussies, your " + Appearance.cockNoun(CockTypesEnum.CAT) + " plowing them relentlessly, stuffing them pregnant with cum");
 				if (player.cor + player.lib >= 60 && player.cor + player.lib < 100) outputText(" to be this way... You breath the powerful animalistic scent and fantasize about fucking catgirls and centaurs night and day until their bellies slosh with your cum");
 				if (player.cor + player.lib >= 100 && player.cor + player.lib <= 175) outputText(" to be a rutting stud.  You ache to find a catgirl in heat to breed with.  Longing to spend your evenings plunging a " + Appearance.cockNoun(CockTypesEnum.CAT) + " deep into their passages, dumping load after load of your thick animal-cum into them.  You'd be happy just fucking cunt morning, noon, and night.");
-				if (player.cor + player.lib > 175) outputText(" Your " + Appearance.cockNoun(CockTypesEnum.CAT) + " is perfect for fucking about anything that is a cat or a horse.  You imagine the feel of plowing an equine pussy deeply, bottoming out and unloading sticky jets of horse-jizz into its fertile womb.  Your hand strokes your cat cock of its own accord, musky pre dripping from the spiked tip with each stroke.  Your mind wanders to the thought of you with a harem of pregnant cat or centaurs.");
+				if (player.cor + player.lib > 175) outputText(" Your " + Appearance.cockNoun(CockTypesEnum.CAT) + " is perfect for fucking about anything that is a cat or a taur.  You imagine the feel of plowing an equine pussy deeply, bottoming out and unloading sticky jets of horse-jizz into its fertile womb.  Your hand strokes your cat cock of its own accord, musky pre dripping from the spiked tip with each stroke.  Your mind wanders to the thought of you with a harem of pregnant cat or centaurs.");
 				outputText(".");
 				if (player.cor < 30) outputText("  You shudder in revulsion at the strange thoughts and vow to control yourself better.");
 				if (player.cor >= 30 && player.cor < 60) outputText("  You wonder why you thought such odd things, but they have a certain appeal.");
@@ -411,36 +414,49 @@ public class Enigmanium extends Consumable{
 					dynStats("lib", 1, "lus", 3);
 				}
 				changes++;
-			}						
+			}
+		}
 			
 			//Body type changes.  Teh rarest of the rare.
 			//DA EARZ
 			if (player.ears.type != Ears.LION && player.tailType != Tail.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
 				//human to lion:
 				if (player.ears.type == Ears.HUMAN) {
-					if (rand(2) == 0) outputText("\n\nThe skin on the sides of your face stretches painfully as your ears migrate upwards, towards the top of your head. They shift and elongate a little, fur growing on them as they become feline in nature. <b>You now have cat ears.</b>");
-					else outputText("\n\nYour ears begin to tingle. You reach up with one hand and gently rub them. They appear to be growing fur. Within a few moments, they've migrated up to the top of your head and increased in size. The tingling stops and you find yourself hearing noises in a whole new way. <b>You now have cat ears.</b>");
+					if (rand(2) == 0) outputText("\n\nThe skin on the sides of your face stretches painfully as your ears migrate upwards, towards the top of your head. They shift and elongate a little, fur growing on them as they become feline in nature. <b>You now have Lion ears.</b>");
+					else outputText("\n\nYour ears begin to tingle. You reach up with one hand and gently rub them. They appear to be growing fur. Within a few moments, they've migrated up to the top of your head and increased in size. The tingling stops and you find yourself hearing noises in a whole new way. <b>You now have Lion ears.</b>");
 				}
 				//non human to lion:
 				else {
 					if (rand(2) == 0) outputText("\n\nYour ears change shape, morphing into round, feline ears not unlike those of a lion!  They swivel about reflexively as you adjust to them.  <b>You now have lion ears.</b>");
 					else outputText("\n\nYour ears tingle and begin to change shape. Within a few moments, they've become long and feline.  Thanks to the new fuzzy organs, you find yourself able to hear things that eluded your notice up until now. <b>You now have lion ears.</b>");
 				}
-				mutations.setEarType(Ears.CAT);
+				mutations.setEarType(Ears.LION);
 				changes++;
 			}
 			//DA TAIL (IF ALREADY HAZ URZ)
 			if (player.tailType != Tail.CAT && player.ears.type == Ears.LION && rand(4) == 0 && changes < changeLimit) {
 				if (player.tailType == Tail.NONE) {
-					choice = rand(3);
-					if (choice == 0) outputText("\n\nA pressure builds in your backside. You feel under your [armor] and discover an odd bump that seems to be growing larger by the moment. In seconds it passes between your fingers, bursts out the back of your clothes and grows most of the way to the ground. A thick coat of fur springs up to cover your new tail. You instinctively keep adjusting it to improve your balance. <b>You now have a cat-tail.</b>");
-					if (choice == 1) outputText("\n\nYou feel your backside shift and change, flesh molding and displacing into a long, flexible tail! <b>You now have a cat tail.</b>");
-					if (choice == 2) outputText("\n\nYou feel an odd tingling in your spine and your tail bone starts to throb and then swell. Within a few moments it begins to grow, adding new bones to your spine. Before you know it, you have a tail. Just before you think it's over, the tail begins to sprout soft, glossy [skin coat.color] fur. <b>You now have a cat tail.</b>");
+					switch(rand(3)){
+					case 0: outputText("\n\nA pressure builds in your backside. You feel under your [armor] and discover an odd bump that seems to be growing larger by the moment. In seconds it passes between your fingers, bursts out the back of your clothes and grows most of the way to the ground. A thick coat of fur springs up to cover your new tail. You instinctively keep adjusting it to improve your balance. <b>You now have a cat-tail.</b>"); break;
+					case 1: outputText("\n\nYou feel your backside shift and change, flesh molding and displacing into a long, flexible tail! <b>You now have a cat tail.</b>"); break;
+					case 2: outputText("\n\nYou feel an odd tingling in your spine and your tail bone starts to throb and then swell. Within a few moments it begins to grow, adding new bones to your spine. Before you know it, you have a tail. Just before you think it's over, the tail begins to sprout soft, glossy [skin coat.color] fur. <b>You now have a cat tail.</b>"); break;
+					}
 				}
 				else outputText("\n\nYou pause and tilt your head... something feels different.  Ah, that's what it is; you turn around and look down at your tail as it starts to change shape, narrowing and sprouting glossy fur. <b>You now have a cat tail.</b>");
 				mutations.setTailType(Tail.CAT);
 				changes++;
 			}
+			
+			//DA Mouth
+			if (player.faceType != Face.CAT_CANINES) {
+				if (player.faceType != Face.HUMAN) { outputText("\n\nYour face suddenly mold back into its former human shape. However you feel your canine changing elongating into sharp dagger-like teeth capable of causing severe injuries. ");
+				}		
+				else { outputText("\n\nYou feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. You purr at the change it gives you a cute look. <b>Your mouth is now filled with Cat-like canines.</b>");
+				}
+			mutations.setFaceType(Face.CAT_CANINES);
+			changes++;
+			}
+			
 			//Da paws (if already haz ears & tail)
 			if (player.tailType == Tail.CAT && player.ears.type == Ears.LION && rand(4) == 0 && changes < changeLimit && player.lowerBody != LowerBody.CAT) {
 				//hoof to cat:
@@ -458,6 +474,8 @@ public class Enigmanium extends Consumable{
 				player.legCount = 2;
 				changes++;
 			}
+			
+			//Sphinx Arms
 			if (player.lowerBody == LowerBody.CAT && rand(4) == 0 && changes < changeLimit && player.arms.type != Arms.SPHINX) {
 				if (player.arms.type != Arms.HUMAN) {
 					mutations.humanizeArms();

@@ -804,7 +804,6 @@ public function baseelementalattacks(elementType:int = -1):void {
 	if (summonedElementals >= 8 && manaCost > 45 && player.hasPerk(PerkLib.StrongestElementalBond)) manaCost -= 40;
 	if (player.mana < manaCost) {
 		outputText("Your mana is too low to fuel your elemental attack!\n\n");
-		flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 1;
 		doNext(combatMenu);
 	}
 	else {
@@ -830,7 +829,6 @@ public function elementalattacks(elementType:int, summonedElementals:int):void {
 	if (player.hasPerk(PerkLib.ElementalConjurerResolve)) elementalamplification += 0.1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 	if (player.hasPerk(PerkLib.ElementalConjurerDedication)) elementalamplification += 0.2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 	if (player.hasPerk(PerkLib.ElementalConjurerSacrifice)) elementalamplification += 0.3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-	if (player.weapon == weapons.SCECOMM) elementalamplification += 0.5;
 	elementalDamage *= elementalamplification;
 	//Determine if critical hit!
 	var crit:Boolean = false;
@@ -1255,13 +1253,8 @@ internal function wait():void {
 		}
 }
 
-public function meleeAccuracy():Number {
-	var accmod:Number = 200;
-	return accmod;
-}
-
 public function arrowsAccuracy():Number {
-	var accmod:Number = 80;
+	var accmod:Number = 60;
 	if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) accmod += 40;
 	if (player.hasPerk(PerkLib.Accuracy1)) {
 		accmod += player.perkv1(PerkLib.Accuracy1);
@@ -2347,6 +2340,7 @@ public function attack():void {
 		return;
 	}
 	
+	var damage:Number = 0;
 	//Determine if dodged!
 	if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 		//Akbal dodges special education
@@ -2385,17 +2379,6 @@ public function attack():void {
 		enemyAI();
 		return;
 	}
-	meleeDamageAcc();
-}
-	
-public function meleeDamageAcc():void {
-	var accMelee:Number = 0;
-	accMelee += (meleeAccuracy() / 2);
-	if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) accMelee -= flags[kFLAGS.ATTACKS_ACCURACY];
-	if (player.weaponName == "Truestrike sword") accMelee = 100;
-//	fatigue(oneArrowTotalCost());
-	if (rand(100) < accMelee) {
-	var damage:Number = 0;
 	//------------
 	// DAMAGE
 	//------------
@@ -2797,19 +2780,16 @@ public function meleeDamageAcc():void {
 		
 		dynStats("lus", 25);
 	}
+	
 	outputText("\n");
 	checkAchievementDamage(damage);
 	WrathWeaponsProc();
 	heroBaneProc(damage);
-	}
-	else {
-		
-	}
 	if(monster.HP <= 0){doNext(endHpVictory); return;}
 	if(monster.lust >= monster.maxLust()){doNext(endLustVictory); return;}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] >= 2){
 		flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]--;
-	//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
+		//	flags[kFLAGS.ATTACKS_ACCURACY] += 5;
 		attack();
 		return;
 	}
@@ -5348,13 +5328,6 @@ public function clawsRend():void {
 	outputText("\n\n");
 	enemyAI();
 }
-public function PussyLeggoMyEggo():void {
-	clearOutput();
-	outputText("You let your opponent free ending your embrace.");
-	outputText("\n\n");
-	monster.removeStatusEffect(StatusEffects.Pounce);
-	enemyAI();
-}
 
 public function runAway(callHook:Boolean = true):void {
 	if (callHook && monster.onPcRunAttempt != null){
@@ -5807,7 +5780,7 @@ public function soulskillMagicalMod():Number {
 
 public function soulskillcostmulti():Number {
 	var multiss:Number = 1;
-	if (soulskillMod() > 1) multiss += (soulskillMod() - 1) * 0.1;/*
+	if (soulskillMod() > 1) multiss += Math.round(soulskillMod() - 1) * 10;/*
 	if (player.hasPerk(PerkLib.SoulPersonage)) multiss += 1;
 	if (player.hasPerk(PerkLib.SoulWarrior)) multiss += 1;
 	if (player.hasPerk(PerkLib.SoulSprite)) multiss += 1;
@@ -5841,24 +5814,10 @@ public function soulskillCost():Number {
 		for(var i:int = 20; (i <= 80) && (i <= stat); i += 20){
 			scale += stat - i;
 		}
-		for(i = 100; (i <= 2000) && (i <= stat); i += 50){
+		for(i = 100; (i <= 1200) && (i <= stat); i += 50){
 			scale += stat - i;
 		}
 		return scale;
-	}
-
-	private function inteWisLibScale(stat:int):Number{
-		var scale:Number = 6.75;
-		var changeBy:Number = 0.50;
-		if(stat <= 2000){
-			if(stat <= 100){
-				scale = (2/6) + ((int(stat/100)/20) * (1/6));
-				changeBy = 0.25;
-			} else {
-				scale = 1 + (int((stat - 100)/50) * 0.25);
-			}
-		}
-		return (stat * scale) + rand(stat * (scale + changeBy));
 	}
 
 	public function scalingBonusToughness():Number {
@@ -5873,12 +5832,26 @@ public function soulskillCost():Number {
 		return touSpeStrScale(player.str);
 	}
 
+	private function inteWisLibScale(stat:int):Number{
+		var scale:Number = 6.75;
+		var changeBy:Number = 0.50;
+		if(stat <= 1200){
+			if(stat <= 100){
+				scale = (2/6) + ((int(stat/100)/20) * (1/6));
+				changeBy = 0.25;
+			} else {
+				scale = 1 + (int((stat - 100)/50) * 0.25);
+			}
+		}
+		return (stat * scale) + rand(stat * (scale + changeBy));
+	}
+
 	public function scalingBonusWisdom():Number {
-		return touSpeStrScale(player.wis);
+		return inteWisLibScale(player.wis);
 	}
 
 	public function scalingBonusIntelligence():Number {
-		return touSpeStrScale(player.inte);
+		return inteWisLibScale(player.inte);
 	}
 
 	public function scalingBonusLibido():Number {

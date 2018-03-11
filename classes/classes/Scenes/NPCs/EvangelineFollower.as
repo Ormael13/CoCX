@@ -703,7 +703,7 @@ private function recivingCraftedSoulGem():void {
 	clearOutput();
 	outputText("As you check on Evangeline she hands a purplish crystal to you.\n\n");
 	outputText("\"<i>Here's your soul gem. Please use this responsibly, they are very hard to craft, and quite dangerous.</i>\"\n\n");
-	outputText("<b>Acquired Soul Gem</b>\n\n");
+	outputText("<b>Acquired Soul Gem</b>");
 	if (flags[kFLAGS.GARGOYLE_QUEST] == 3) flags[kFLAGS.GARGOYLE_QUEST]++;
 	player.removeStatusEffect(StatusEffects.SoulGemCrafting);
 	inventory.takeItem(useables.SOULGEM, meetEvangeline);
