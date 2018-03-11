@@ -55,7 +55,7 @@ public class VampireBlood extends Consumable {
                 Check   : player.hasGooSkin(),
                 Override: mutations.humanizeSkin
             }, {
-                BodyPart: 'ears.Type',
+                BodyPart: 'ears.type',
                 ChangeTo: pure ? Ears.VAMPIRE : Ears.BAT,
                 Check   : pure ? player.ears.type != Ears.HUMAN : false,
                 Override: pure ? mutations.humanizeEars : null
@@ -63,7 +63,7 @@ public class VampireBlood extends Consumable {
                 BodyPart: 'eyes.type',
                 ChangeTo: Eyes.VAMPIRE
             }, {
-                BodyPart: 'face.Type',
+                BodyPart: 'faceType',
                 ChangeTo: Face.VAMPIRE
             }
         ];
@@ -112,7 +112,9 @@ public class VampireBlood extends Consumable {
 				            if(count)changes++;
 			            }
 			            outputText("\n\n");
-			            story.display(tf.BodyPart, {$pure: pure});
+			            if(count){
+				            story.display(tf.BodyPart, {$pure: pure});
+			            }
 			            hostObj[bodyPart] = tf.ChangeTo;
 			            for each(var extra:Object in tf.Addition){
 				            doChange(extra,false);

@@ -1462,8 +1462,8 @@ public class CombatTeases extends BaseCombatContent {
 			damage *= .7;
 			bonusDamage *= .7;
 			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0) {
-				damage *= (1 + player.lust100);
-				bonusDamage *= (1 + player.lust100);
+				damage *= (1 + (player.lust100 * 0.01));
+				bonusDamage *= (1 + (player.lust100 * 0.01));
 			}
 			if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) {
 				damage *= 1.15;

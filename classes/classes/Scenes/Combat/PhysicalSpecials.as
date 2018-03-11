@@ -223,7 +223,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd.disable("Your golems can't attack flying targets. (Only golems made by grand-master golem maker can do this)");
 			}
 		}
-		if (player.shield != ShieldLib.NOTHING) {
+		if (player.isShieldsForShieldBash()) {
 			bd = buttons.add("Shield Bash", shieldBash).hint("Bash your opponent with a shield. Has a chance to stun. Bypasses stun immunity. \n\nThe more you stun your opponent, the harder it is to stun them again.");
 			bd.requireFatigue(physicalCost(20));
 		}
@@ -830,9 +830,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		fatigue(50, USEFATG_PHYSICAL);
 		var damage:Number = 0;
-		damage += (scalingBonusStrength() * 0.2) + player.str + unarmedAttack();
-		if (player.hasPerk(PerkLib.WhirlwindFeral)) damage += (scalingBonusStrength() * 0.1) + ((player.str + unarmedAttack()) * 0.5);
-		if (damage < 10) damage = 10;
+		damage += (scalingBonusStrength() * 0.3) + ((player.str + unarmedAttack()) * 1.5);
+		if (player.hasPerk(PerkLib.WhirlwindFeral)) damage += (scalingBonusStrength() * 0.15) + ((player.str + unarmedAttack()) * 0.75);
+		if (damage < 15) damage = 15;
 		//weapon bonus
 		if (player.weaponAttack < 101) damage *= (1 + (player.weaponAttack * 0.02));
 		else if (player.weaponAttack >= 101 && player.weaponAttack < 201) damage *= (2 + ((player.weaponAttack - 100) * 0.015));
@@ -1143,6 +1143,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
+		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		damage *= dmgamp;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
@@ -1196,6 +1197,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
+		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		damage *= dmgamp;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
@@ -1250,6 +1252,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
+		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		damage *= dmgamp;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
@@ -1291,6 +1294,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.EpicGolemMaker)) dmgamp += 0.25;
 		if (player.hasPerk(PerkLib.LegendaryGolemMaker)) dmgamp += 0.65;
+		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		damage *= dmgamp;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
@@ -1326,6 +1330,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.EpicGolemMaker)) dmgamp += 0.25;
 		if (player.hasPerk(PerkLib.LegendaryGolemMaker)) dmgamp += 0.65;
+		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		damage *= dmgamp;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
@@ -1361,6 +1366,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.EpicGolemMaker)) dmgamp += 0.25;
 		if (player.hasPerk(PerkLib.LegendaryGolemMaker)) dmgamp += 0.65;
+		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		damage *= dmgamp;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
@@ -1812,7 +1818,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		clearOutput();
 		if(player.fatigue + physicalCost(10) > player.maxFatigue()) {
 			clearOutput();
-			outputText("You just don't have the energy to puonce at anyone right now...");
+			outputText("You just don't have the energy to pounce at anyone right now...");
 			//Gone		menuLoc = 1;
 			menu();
 			addButton(0, "Next", combatMenu, false);

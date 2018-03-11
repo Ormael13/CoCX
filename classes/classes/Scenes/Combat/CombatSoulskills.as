@@ -25,6 +25,8 @@ public class CombatSoulskills extends BaseCombatContent {
 			bd = buttons.add("Ice Fist", IceFist).hint("A chilling strike that can freeze an opponent solid, leaving it vulnerable to shattering soul art and hindering its movement.  \n\nSoulforce cost: " + 30 * soulskillCost() * soulskillcostmulti());
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) {
 				bd.disable("Try as you want, you can’t call on the power of this technique due to your close affinity to fire.");
+			} else if (!player.isFistOrFistWeapon()) {
+				bd.disable("<b>Your current used weapon not allow to use this technique.</b>");
 			} else if (player.soulforce < 30 * soulskillCost() * soulskillcostmulti()) {
 				bd.disable("<b>Your current soulforce is too low.</b>");
 			}
@@ -33,6 +35,8 @@ public class CombatSoulskills extends BaseCombatContent {
 			bd = buttons.add("Fire Punch", FirePunch).hint("Ignite your opponents dealing fire damage and setting them ablaze.  \n\nSoulforce cost: " + 30 * soulskillCost() * soulskillcostmulti());
 			if (player.soulforce < 30 * soulskillCost() * soulskillcostmulti()) {
 				bd.disable("Your current soulforce is too low.");
+			} else if (!player.isFistOrFistWeapon()) {
+				bd.disable("<b>Your current used weapon not allow to use this technique.</b>");
 			} else if (player.findPerk(PerkLib.ColdAffinity) >= 0) {
 				bd.disable("Try as you want, you can’t call on the power of this technique due to your close affinity to cold.");
 			}
@@ -57,6 +61,8 @@ public class CombatSoulskills extends BaseCombatContent {
 			buttons.add("Punishing Kick", PunishingKick).hint("A vicious kick that can daze an opponent, reducing its damage for a while.  \n\nWould go into cooldown after use for: 10 rounds  \n\nSoulforce cost: " + 30 * soulskillCost() * soulskillcostmulti());
 			if (player.hasStatusEffect(StatusEffects.CooldownPunishingKick)) {
 				bd.disable("You need more time before you can use Punishing Kick again.");
+			} else if (!player.isBiped() || !player.isTaur()) {
+				bd.disable("<b>Your legs not allow to use this technique.</b>");
 			} else if (player.soulforce < 30 * soulskillCost() * soulskillcostmulti()) {
 				bd.disable("Your current soulforce is too low.");
 			}

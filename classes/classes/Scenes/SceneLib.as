@@ -1,5 +1,6 @@
 package classes.Scenes {
 import classes.CoC;
+import classes.Items.Mutations;
 import classes.Scenes.Areas.*;
 import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.Combat.Combat;
@@ -26,6 +27,8 @@ public class SceneLib {
     public static var inventory:Inventory = new Inventory(CoC.instance.saves);
 
     public static var masturbation:Masturbation = new Masturbation();
+
+    public static var mutationsTable:Mutations = new Mutations();
 
     public static var beach:Beach = new Beach();
 

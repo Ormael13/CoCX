@@ -210,7 +210,7 @@ use namespace CoC;
 				outputText("\n\n\"<i>I think that even after we are friends and all, and the fact of we don’t mind…em...relieving pressure, together…</i>\"");
 				outputText("\n\nOh, you’re understanding the way of he’s going. After a few doubts, he puts his hand on yours and finally says:");
 				outputText("\n\n\"<i>I think… I now think of you as more than a friend. You see…despite being a god, sometimes I could be a little unsure, and explaining this kind of thing is difficult for me, but…I think, no, I’m sure what I feel about you is not only friendship, because, [name], I think that I’ve fallen in love with you. ");
-				outputText("\n\nI know how things are, if you don’t feel that, or if I’m being too pushy…I’ll understand it. But please, say to me what you feel about me.");
+				outputText("\n\nI know how things are, if you don’t feel that, or if I’m being too pushy…I’ll understand it. But please, say to me what you feel about me.\"</i>");
 				flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] = 4;
 				doYesNo(anzuRelatLvl4Sex, anzuRelatLvl4Dont);
 				return;

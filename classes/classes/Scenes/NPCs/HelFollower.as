@@ -475,7 +475,10 @@ public function angryHelAndIzzyCampHelHereFirst():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 
-
+public function heliaFollowerMenu2():void {
+	if ((flags[kFLAGS.LUNA_JEALOUSY] > 100 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 150 && rand(10) < 8)) mishapsLunaHel();
+	else heliaFollowerMenu();
+}
 
 //Introduction -- Followers -> Helia
 public function heliaFollowerMenu(display:Boolean = true):void {
@@ -2428,6 +2431,14 @@ outputText("\n\nYour hand slides across Sophie’s stomach to squeeze one of her
 	player.orgasm();
 	menu();
 	doNext(camp.returnToCampUseOneHour);
+}
+
+public function mishapsLunaHel():void {
+	clearOutput();
+	outputText("Helia is currently sleeping on her mats holding a bottle of firewater. You smell the bottle up and find clear sign of soporifics inside. Whoever did this wanted to get rid of her for a few hours. Regardless the result is the same and no matter what you do the lizard girl won’t wake up, might as well try again later.\n\n");
+	if (player.hasStatusEffect(StatusEffects.CampLunaMishaps2)) player.addStatusValue(StatusEffects.CampLunaMishaps2, 3, 1);
+	else player.createStatusEffect(StatusEffects.CampLunaMishaps2, 0, 0, 1, 0);
+	doNext(playerMenu);
 }
 	}
 }

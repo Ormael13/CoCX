@@ -419,6 +419,11 @@ public function etnaRapeIntro2():void
 	addButton(2, "No", etnaRapeNo);
 }
 
+public function etnaCampMenu2():void {
+	if ((flags[kFLAGS.LUNA_JEALOUSY] > 100 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 150 && rand(10) < 8)) mishapsLunaEtna();
+	else etnaCampMenu();
+}
+
 public function etnaCampMenu():void
 {
 	spriteSelect(SpriteDb.s_etna);
@@ -569,6 +574,16 @@ public function etnaSparsWithPC():void
 	outputText("You ask Etna for a mock battle with sex for the winner. With a confident smile, she agrees.\n\n");
 	outputText("\"<i>I have been training since. You better be ready or I will be the one on top.</i>\"");
 	startCombat(new Etna());
+}
+
+public function mishapsLunaEtna():void {
+	clearOutput();
+	outputText("You go check on Etna but find her sleeping in broad daylight. She acknowledge you for a second only.\n\n");
+	outputText("\"<i>Yawn... Sorry [name] since I found those weird herbs next to my carpet I just feel so drowsy. We will talk again later okay?</i>\"\n\n");
+	outputText("Well, guess you will come back later then, but herbs? Now that you look at them these herbs indeed look like catnip. You remove them from Etna direct environment for now. Still who would actually do this kind of prank?\n\n");
+	if (player.hasStatusEffect(StatusEffects.CampLunaMishaps2)) player.addStatusValue(StatusEffects.CampLunaMishaps2, 1, 1);
+	else player.createStatusEffect(StatusEffects.CampLunaMishaps2, 1, 0, 0, 0);
+	doNext(playerMenu);
 }
 
 	}

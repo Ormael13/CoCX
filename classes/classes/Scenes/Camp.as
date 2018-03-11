@@ -860,7 +860,8 @@ CoC.instance.saves.saveGame(player.slotName);
 	if (slavesCount() > 0) addButton(7, "Slaves", campSlavesMenu).hint("Check up on any slaves you have received and interact with them.");
 	addButton(8, "Camp Actions", campActions).hint("Interact with the camp surroundings and also read your codex or questlog.");
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) addButton(9, "Enter Cabin", cabinProgress.initiateCabin).hint("Enter your cabin."); //Enter cabin for furnish.
-	if (player.findPerk(PerkLib.JobSoulCultivator) >= 0 || debug) addButton(10, "Soulforce", soulforce.accessSoulforceMenu).hint("Spend some time on the cultivation or spend some of the soulforce.");
+	if (player.hasPerk(PerkLib.JobSoulCultivator) || debug) addButton(10, "Soulforce", soulforce.accessSoulforceMenu).hint("Spend some time on the cultivation or spend some of the soulforce.");
+	else if (!player.hasPerk(PerkLib.JobSoulCultivator) && player.hasPerk(PerkLib.Metamorph)) addButton(10, "Metamorf", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold freely your body.");
 	var canFap:Boolean = !player.hasStatusEffect(StatusEffects.Dysfunction) && (flags[kFLAGS.UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR] == 0 && !player.isTaur());
 	if (player.lust >= 30) {
 		addButton(11, "Masturbate", SceneLib.masturbation.masturbateMenu);
@@ -1001,6 +1002,7 @@ public function loversHotBathCount():Number {
 	if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
 	if (flags[kFLAGS.DIANA_FOLLOWER] > 5) counter++;
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
+	if (flags[kFLAGS.LUNA_FOLLOWER] >= 4) counter++;
 	if (followerHel()) counter++;
 	if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
 	if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
@@ -1023,6 +1025,7 @@ public function sparableCampMembersCount():Number {
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) counter++;
 	if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
+	if (flags[kFLAGS.LUNA_FOLLOWER] > 10) counter++;
 	if (followerHel()) counter++;
 	if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
 	if (followerKiha()) counter++;
@@ -1075,7 +1078,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 				break;
 		}
 		outputText(".\n\n");
-		buttons.add("Amily", amilyScene.amilyFollowerEncounter);
+		buttons.add("Amily", amilyScene.amilyFollowerEncounter2).disableIf(player.statusEffectv1(StatusEffects.CampLunaMishaps1) > 0,"Hurt foot.");
 	}
 	//Amily out freaking Urta?
 	else if(flags[kFLAGS.AMILY_VISITING_URTA] == 1 || flags[kFLAGS.AMILY_VISITING_URTA] == 2) {
@@ -1096,7 +1099,8 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 	//Chi Chi
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) {
 		outputText("You can see Chi Chi not so far from Jojo. She’s busy practicing her many combos on a dummy. Said dummy will more than likely have to be replaced within twenty four hours.\n\n");
-		buttons.add( "Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu);
+		/*if (player.statusEffectv4(StatusEffects.CampLunaMishaps2) > 0) buttons.disable("Wet.");
+		else */buttons.add( "Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu2);
 	}
 	//Diana
 	if (flags[kFLAGS.DIANA_FOLLOWER] > 5) {
@@ -1106,7 +1110,8 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 	//Etna
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) {
 		outputText("Etna is resting lazily on a rug in a very cat-like manner. She’s looking at you always with this adorable expression of hers, her tail wagging expectantly at your approach.\n\n");
-		buttons.add( "Etna", SceneLib.etnaScene.etnaCampMenu).disableIf(player.statusEffectv4(StatusEffects.CampSparingNpcsTimers1) > 0,"Training.");
+		/*if (player.statusEffectv1(StatusEffects.CampLunaMishaps2) > 0) buttons.disable("Sleeping.");
+		else */buttons.add( "Etna", SceneLib.etnaScene.etnaCampMenu2).disableIf(player.statusEffectv4(StatusEffects.CampSparingNpcsTimers1) > 0,"Training.");
 	}
 	//Helia
 	if(SceneLib.helScene.followerHel()) {
@@ -1129,7 +1134,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 				outputText("<b>You see the salamander Helia pacing around camp, anxiously awaiting your departure to the harpy roost. Seeing you looking her way, she perks up, obviously ready to get underway.</b>\n\n");
 			}
 		}
-		buttons.add( "Helia", helFollower.heliaFollowerMenu);
+		buttons.add( "Helia", helFollower.heliaFollowerMenu2).disableIf(player.statusEffectv3(StatusEffects.CampLunaMishaps2) > 0,"Sleeping.");
 	}
 	//Isabella
 	if(isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) {
@@ -1222,7 +1227,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 				case 2: outputText("Izma is lying on her back near her bedroll. You wonder at first just why she isn't using her bed, but as you look closer you notice all the water pooled beneath her and the few droplets running down her arm, evidence that she's just returned from the stream."); break;
 			}
 			outputText("\n\n");
-			buttons.add( "Izma", izmaScene.izmaFollowerMenu);
+			buttons.add( "Izma", izmaScene.izmaFollowerMenu2).disableIf(player.statusEffectv4(StatusEffects.CampLunaMishaps1) > 0,"Fish smell.");
 		}
 	}
 	//Kiha!
@@ -1248,7 +1253,8 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 				outputText("Most of them are on fire.\n\n");
 			}
 		}
-		buttons.add( "Kiha", kihaScene.encounterKiha).disableIf(player.statusEffectv3(StatusEffects.CampSparingNpcsTimers1) > 0,"Training.");
+		/*if (player.statusEffectv1(StatusEffects.CampLunaMishaps2) > 0) buttons.disable("Cleaning burnt meat.");
+		else */buttons.add( "Kiha", kihaScene.encounterKiha2).disableIf(player.statusEffectv3(StatusEffects.CampSparingNpcsTimers1) > 0,"Training.");
 	}
 	//MARBLE
 	if(player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) {
@@ -1428,9 +1434,10 @@ public function campFollowers(descOnly:Boolean = false):void {
 	//Ember
 	if(emberScene.followerEmber()) {
 		emberScene.emberCampDesc();
-		buttons.add(
+		/*if (player.statusEffectv2(StatusEffects.CampLunaMishaps2) > 0) buttons.disable("Wet.");
+		else */buttons.add(
 				"Ember",
-				emberScene.emberCampMenu
+				emberScene.emberCampMenu2
 		).hint("Check up on Ember the dragon-" + (flags[kFLAGS.EMBER_ROUNDFACE] == 0 ? "morph" : flags[kFLAGS.EMBER_GENDER] == 1 ? "boy" : "girl" ) + ""
 		).disableIf(player.statusEffectv1(StatusEffects.CampSparingNpcsTimers1) > 0,"Training.");
 	}
@@ -1471,7 +1478,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText(" cabin");
 			if (!(model.time.hours > 4 && model.time.hours < 23)) outputText(" and the mouse is sleeping on it right now.\n\n");
 			else outputText(", though the mouse is probably hanging around the camp's perimeter.\n\n");
-			buttons.add( "Jojo", jojoScene.jojoCamp).hint("Go find Jojo around the edges of your camp and meditate with him or talk about watch duty.");
+			buttons.add( "Jojo", jojoScene.jojoCamp2).hint("Go find Jojo around the edges of your camp and meditate with him or talk about watch duty.").disableIf(player.statusEffectv2(StatusEffects.CampLunaMishaps1) > 0,"Annoyed.");
 		}
 	}
 	//Celess
@@ -1605,9 +1612,9 @@ public function campFollowers(descOnly:Boolean = false):void {
 	//Luna
 	if (flags[kFLAGS.LUNA_FOLLOWER] >= 4) {
 		outputText("Luna wanders around the camp, doing her chores as usual.");
-		if (flags[kFLAGS.LUNA_JEALOUSY] >= 25) outputText(" She looks at you from time to time, as if expecting you to notice her.");
+		if (flags[kFLAGS.LUNA_JEALOUSY] >= 50) outputText(" She looks at you from time to time, as if expecting you to notice her.");
 		outputText("\n\n");
-		buttons.add( "Luna", SceneLib.lunaFollower.mainLunaMenu).hint("Visit Luna.");
+		buttons.add( "Luna", SceneLib.lunaFollower.mainLunaMenu).hint("Visit Luna.").disableIf(player.statusEffectv1(StatusEffects.CampSparingNpcsTimers3) > 0,"Training.");
 	}
     for each(var npc:XXCNPC in _campFollowers){
         npc.campDescription(buttons,XXCNPC.FOLLOWER);
@@ -1639,7 +1646,7 @@ private function campActions():void {
 	addButton(5, "Build", campBuildingSim).hint("Check your camp build options.");
 	if (player.hasPerk(PerkLib.JobElementalConjurer) >= 0 || player.hasPerk(PerkLib.JobGolemancer) >= 0) addButton(6, "Winions", campWinionsArmySim).hint("Check your options for making some Winions.");
 	else addButtonDisabled(6, "Winions", "You need to be able to make some minions that fight for you to use this option like elementals or golems...");
-	if (player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(7, "Heal", spellHealcamp).hint("Heal will attempt to use white magic to instantly close your wounds and restore your body.  \n\nMana Cost: 30");
+	//addButton(7, "Heal", spellHealcamp).hint("Heal.  \n\nMana Cost: 30");
 	//addButton(8, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
 	if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) addButton(8, "Fishery", VisitFishery).hint("Visit Fishery.");
 	addButton(9, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
@@ -1730,39 +1737,6 @@ private function RetrieveStack():void {
 		outputText("\n\nYou need more fish to bag out a bundle.");
 		doNext(VisitFishery);
 	}
-}
-
-public function spellHealcamp():void {
-	clearOutput();
-	if(player.mana < 30) {
-		outputText("Your mana is too low to cast this spell.");
-		doNext(campActions);
-		return;
-	}
-	useMana(30);
-	var healing:int = combat.scalingBonusIntelligence();
-	//healing *= spellMod();
-	if (player.unicornScore() >= 5) healing *= ((player.unicornScore() - 4) * 0.5);
-	if (player.alicornScore() >= 6) healing *= ((player.alicornScore() - 5) * 0.5);
-	if (player.armorName == "skimpy nurse's outfit") healing *= 1.2;
-	//Determine if critical heal!
-	var crit:Boolean = false;
-	var critHeal:int = 5;
-	if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) critHeal += (player.inte - 50) / 5;
-	if (rand(100) < critHeal) {
-		crit = true;
-		healing *= 1.75;
-	}
-	healing = Math.round(healing);
-	outputText("You chant a magical song of healing and recovery and your wounds start knitting themselves shut in response. <b>(<font color=\"#008000\">+" + healing + "</font>)</b>.");
-	if (crit == true) outputText(" <b>*Critical Heal!*</b>");
-	HPChange(healing,false);
-	outputText("\n\n");
-	statScreenRefresh();
-	flags[kFLAGS.SPELLS_CAST]++;
-	//spellPerkUnlock();
-	doNext(doCamp);
-	cheatTime(1/12);
 }
 
 private function swimInStream():void {
@@ -2232,7 +2206,7 @@ CoC.instance.saves.saveGame(player.slotName);
 			return;
 		}
 		//Full Moon
-		if (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0 && flags[kFLAGS.LUNA_FOLLOWER] < 9 && flags[kFLAGS.LUNA_AFFECTION] >= 50 && flags[kFLAGS.SLEEP_WITH] == "Luna" && player.gender > 0) {
+		if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8 && flags[kFLAGS.LUNA_FOLLOWER] < 9 && flags[kFLAGS.LUNA_AFFECTION] >= 50 && flags[kFLAGS.SLEEP_WITH] == "Luna" && player.gender > 0) {
 			SceneLib.lunaFollower.fullMoonEvent();
 			sleepRecovery(false);
 			return;
@@ -2262,7 +2236,7 @@ CoC.instance.saves.saveGame(player.slotName);
 		}
 		else if(flags[kFLAGS.SLEEP_WITH] == "Luna" && flags[kFLAGS.LUNA_FOLLOWER] >= 4) {
 			outputText("You head to bed, Luna following you. ");
-			if (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0 && flags[kFLAGS.LUNA_FOLLOWER] >= 9) {
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8 && flags[kFLAGS.LUNA_FOLLOWER] >= 9) {
 				SceneLib.lunaFollower.sleepingFullMoon();
 				return;
 			}
@@ -3459,13 +3433,32 @@ private function promptSaveUpdate():void {
 	}
 /*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 20) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 21;
+		if (player.hasPerk(PerkLib.Lycanthropy)) {
+			player.skin.coverage = Skin.COVERAGE_LOW;
+			player.coatColor = player.hairColor;
+		}
+		if (flags[kFLAGS.LUNA_MOON_CYCLE] > 8) flags[kFLAGS.LUNA_MOON_CYCLE] = 1;
 		clearOutput();
-		outputText("Text.");
+		outputText("Time to defur our werewolfs... no worry it will be only partial deffuring.");
 		doNext(doCamp);
 		return;
 	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 21) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 22;
+		clearOutput();
+		outputText("Text.");
+		doNext(doCamp);
+		return;
+	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 22) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 23;
+		clearOutput();
+		outputText("Text.");
+		doNext(doCamp);
+		return;
+	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 23) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 24;
 		clearOutput();
 		outputText("Text.");
 		doNext(doCamp);
