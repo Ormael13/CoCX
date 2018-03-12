@@ -208,20 +208,24 @@ use namespace CoC;
 			addButton(7, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
 			addButton(8, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
 			addButton(9, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
-			addButton(10, "Celess", celessIntroForced).hint("Due to hard time getting her intro here it's.");
-			addButton(11, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
+			addButton(10, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
+			addButton(11, "Celess", celessIntroForced).hint("Due to hard time getting her intro here it's.");
 			addButton(12, "DERP", AddEnigmanium).hint("DERP.");
-			if (player.hasPerk(PerkLib.JobBarbarian)) addButton(12, "BarbToSword", replacingBarbsWithsSowrds).hint("Replacing Job: Barbarian with Job: Swordsman to keep integrity of test saves.");
-			//addButton(13, "13", );
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] > 8) addButton(12, "MoonCycleAdj", moonCycleAdjusting).hint("Adjusting wild moon cycle to pokeba... norm.");
+			if (player.hasPerk(PerkLib.Lycanthropy) && player.skin.coverage != Skin.COVERAGE_LOW) addButton(13, "WWFurFix", fixingWerewolfFur).hint("Fixing full to partial werewolf fur.");
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 public function celessIntroForced():void {
 	clearOutput();
 	CelessScene.instance.birthScene();
 }
-public function replacingBarbsWithsSowrds():void {
-	player.removePerk(PerkLib.JobBarbarian);
-	player.createPerk(PerkLib.JobSwordsman, 0, 0, 0, 0);
+public function moonCycleAdjusting():void {
+	if (flags[kFLAGS.LUNA_MOON_CYCLE] > 8) flags[kFLAGS.LUNA_MOON_CYCLE] = 1;
+	doNext(SoulforceCheats);
+}
+public function fixingWerewolfFur():void {
+	player.skin.coverage = Skin.COVERAGE_LOW;
+	player.coatColor = player.hairColor;
 	doNext(SoulforceCheats);
 }
 public function LvLUPDiana():void {
@@ -694,8 +698,10 @@ public function FightNightmare():void {
 			addButton(8, "NineTailWhip", AddNineTailWhip).hint("Add 1 Nine Tail Whip.");
 			addButton(9, "Hodr's Bow", AddHodrsBow).hint("Add 1 Hodr's Bow.");
 		//	addButton(9, "L Ayo Arm", AddLightAyoArmor).hint("Add 1 Light Ayo Armor for testing purposes.");
-			addButton(10, "SeerHairpin", AddTheSeerHairpin).hint("Add 1 Seer's Hairpin.");
-			addButton(11, "D.Scythe", AddTheDemonicScythe).hint("Add 1 Demonic Scythe.");
+		//	addButton(10, "SeerHairpin", AddTheSeerHairpin).hint("Add 1 Seer's Hairpin.");
+			addButton(10, "TruestriekSword", AddTruestrikeSword).hint("Add 1 Truestrike Sword.");
+		//	addButton(11, "D.Scythe", AddTheDemonicScythe).hint("Add 1 Demonic Scythe.");
+			addButton(11, "ScepterComm", AddSceptreOfCommand).hint("Add 1 Sceptre of Command.");
 			addButton(12, "CatONIneTWhip", AddCatONineTailWhip).hint("Add 1 Bastet Whip.");
 			addButton(13, "InqTome", AddTheInquisitorsTome).hint("Add 1 Inquisitor's Tome.");
 			addButton(14, "Back", SoulforceCheats);
@@ -883,9 +889,17 @@ public function FightNightmare():void {
 			outputText("\n\n<b>(Gained 1 Seer's Hairpin!)</b>\n\n");
 			inventory.takeItem(jewelries.SEERPIN, EquipmentMenu);
 		}
+		public function AddTruestrikeSword():void {
+			outputText("\n\n<b>(Gained 1 Truestrike Sword!)</b>\n\n");
+			inventory.takeItem(weapons.TRSTSWO, EquipmentMenu);
+		}
 		public function AddTheDemonicScythe():void {
 			outputText("\n\n<b>(Gained 1 Demonic Scythe!)</b>\n\n");
 			inventory.takeItem(weapons.DEMSCYT, EquipmentMenu);
+		}
+		public function AddSceptreOfCommand():void {
+			outputText("\n\n<b>(Gained 1 Sceptre of Command!)</b>\n\n");
+			inventory.takeItem(weapons.SCECOMM, EquipmentMenu);
 		}
 		public function AddTheInquisitorsTome():void {
 			outputText("\n\n<b>(Gained 1 Inquisitor's Tome!)</b>\n\n");
@@ -1227,12 +1241,12 @@ public function FightNightmare():void {
 			outputText("\n\n<b>(Gained 1 Sky Poison Pearl!)</b>\n\n");
 			inventory.takeItem(consumables.SPPEARL, EquipmentMenu);
 		}
-		
+
 		public function AddEnigmanium():void {
 			outputText("\n\n<b>(Gained 1 Enigmanium!)</b>\n\n");
 			inventory.takeItem(consumables.ENIGMANIUM, EquipmentMenu);
 		}
-		
+
 		public function AddLightAyoArmor():void {
 			outputText("\n\n<b>(Gained 1 Light Ayo Armor!)</b>\n\n");
 			inventory.takeItem(armors.LAYOARM, EquipmentMenu);

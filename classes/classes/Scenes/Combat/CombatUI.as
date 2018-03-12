@@ -187,7 +187,7 @@ public class CombatUI extends BaseCombatContent {
 			if (player.fatigueLeft() <= combat.physicalCost(20)) {
 				button(0).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
 			}
-			//addButton(4, "Release", combat.GooLeggoMyEggo);
+			//addButton(4, "Release", combat.PussyLeggoMyEggo);
 		} else if (player.hasPerk(PerkLib.FirstAttackElementals) && flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] != 1) {
 			menu();
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) addButton(0, "Air", combat.baseelementalattacks, Combat.AIR);

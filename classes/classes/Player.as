@@ -700,6 +700,11 @@ use namespace CoC;
 			return _jewelry.value;
 		}
 		
+		//Shields for Bash
+		public function isShieldsForShieldBash():Boolean
+		{
+			return shield == game.shields.BUCKLER || shield == game.shields.GREATSH || shield == game.shields.KITE_SH || shield == game.shields.TRASBUC || shield == game.shields.TOWERSH || shield == game.shields.DRGNSHL || shield == game.shields.SANCTYN || shield == game.shields.SANCTYL || shield == game.shields.SANCTYD;
+		}
 		//override public function get shields
 		override public function get shieldName():String {
 			return _shield.name;
@@ -3718,7 +3723,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return centaurCounter;
 		}
-		
+
 		public function sphinxScore():Number
 		{
 			var sphinxCounter:Number = 0;
@@ -3747,7 +3752,7 @@ use namespace CoC;
 			if (tailType == Tail.LION)
 				sphinxCounter++;
 			if (lowerBody == LowerBody.CAT)
-				sphinxCounter++;		
+				sphinxCounter++;
 			if (faceType == Face.CAT_CANINES)
 				sphinxCounter++;
 			if (wings.type == Wings.FEATHERED_SPHINX)
@@ -3762,7 +3767,6 @@ use namespace CoC;
 				sphinxCounter += 1;
 			return sphinxCounter;
 		}
-
 
 		//Determine Unicorn Rating
 		public function unicornScore():Number {
@@ -5121,6 +5125,8 @@ use namespace CoC;
 				min += 10;
 				if(eggs() >= 40) min += 10;
 			}
+			//Werebeast
+			if (hasPerk(PerkLib.Lycanthropy)) min += perk(findPerk(PerkLib.Lycanthropy)).value1;
 			//Jewelry effects
 			if (jewelryEffectId == JewelryLib.MODIFIER_MINIMUM_LUST)
 			{
@@ -5328,7 +5334,7 @@ use namespace CoC;
 				}
 			}//+15(60)((70))(((140))) / 10 - 20(50 - 60)((70 - 80))(((130 - 140)))
 			if (werewolfScore() >= 6) {
-				if (wolfScore() >= 12) {
+				if (werewolfScore() >= 12) {
 					maxStr += (100 * newGamePlusMod);
 					maxTou += (40 * newGamePlusMod);
 					maxSpe += (60 * newGamePlusMod);
@@ -5366,8 +5372,8 @@ use namespace CoC;
 				}
 
 			}//+10 / 10 - 20
-			
-			
+
+
 			if (sphinxScore() >= 5) {
 				if (sphinxScore() >= 14) {
 					if (findPerk(PerkLib.Flexibility) > 0) maxSpe += (50 * newGamePlusMod);
@@ -5377,8 +5383,10 @@ use namespace CoC;
 					maxInt += (100 * newGamePlusMod);
 					maxWis += (40 * newGamePlusMod);
 				}
-			}//+40/-20/+40/+100/+35
-			
+			}//+50/-20/+40/+100/+40
+
+
+
 			if (nekomataScore() >= 11) {
 				if (findPerk(PerkLib.Flexibility) > 0) maxSpe += (50 * newGamePlusMod);
 				else maxSpe += (40 * newGamePlusMod);
@@ -6164,22 +6172,22 @@ use namespace CoC;
 			}
 			if (findPerk(PerkLib.CarefulButRecklessAimAndShooting) >= 0 && findPerk(PerkLib.ColdAim) < 0) maxTou -= (15 * newGamePlusMod);
 			if (hasPerk(PerkLib.Lycanthropy)) {
-				if (((flags[kFLAGS.LUNA_MOON_CYCLE] - 3) || (flags[kFLAGS.LUNA_MOON_CYCLE] + 3)) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) {
 					maxStr += (10 * newGamePlusMod);
 					maxTou += (10 * newGamePlusMod);
 					maxSpe += (10 * newGamePlusMod);
 				}
-				if (((flags[kFLAGS.LUNA_MOON_CYCLE] - 2) || (flags[kFLAGS.LUNA_MOON_CYCLE] + 2)) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) {
 					maxStr += (20 * newGamePlusMod);
 					maxTou += (20 * newGamePlusMod);
 					maxSpe += (20 * newGamePlusMod);
 				}
-				if (((flags[kFLAGS.LUNA_MOON_CYCLE] - 1) || (flags[kFLAGS.LUNA_MOON_CYCLE] + 1)) == (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0)) {
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) {
 					maxStr += (30 * newGamePlusMod);
 					maxTou += (30 * newGamePlusMod);
 					maxSpe += (30 * newGamePlusMod);
 				}
-				if (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0) {
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) {
 					maxStr += (40 * newGamePlusMod);
 					maxTou += (40 * newGamePlusMod);
 					maxSpe += (40 * newGamePlusMod);

@@ -50,6 +50,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const RED_PANDA:int             = 42;
 	public static const GARGOYLE_2:int            = 43;
 	public static const AVIAN:int            	  = 44;
+	public static const GRYPHON:int            	  = 45;
 	
 	override public function set type(value:int):void {
 		super.type = value;

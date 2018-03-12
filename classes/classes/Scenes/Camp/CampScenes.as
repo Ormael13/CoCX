@@ -125,7 +125,7 @@ public function PeepingTom3():void {
 //	 outputText("As a naga, Samira take a lot of space in the bath. You're glad you made it big enough to hold as many people as necessary.\n\n");//Samira
 	if (flags[kFLAGS.DIANA_FOLLOWER] > 5) outputText("Diana is resting next to a set of medicinal and aromatic oils she regularly spray in the bath.\n\n");
 	//Michiko
-	if (flags[kFLAGS.LUNA_FOLLOWER] >= 4) outputText("Luna is enjoying a break relaxing for once as she is not on duty" + (flags[kFLAGS.LUNA_MOON_CYCLE] > 7 ? ", though for a few split second you imagined her doing doggy paddle in the water" : "") + ".\n\n");
+	if (flags[kFLAGS.LUNA_FOLLOWER] >= 4) outputText("Luna is enjoying a break relaxing for once as she is not on duty" + (flags[kFLAGS.LUNA_FOLLOWER] > 6 ? ", though for a few split second you imagined her doing doggy paddle in the water" : "") + ".\n\n");
 	if (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] > 0 && flags[kFLAGS.ARIAN_COCK_SIZE] == 0) outputText("Arian while formerly a male seems to get along with the other girls.\n\n");
 	if (flags[kFLAGS.SIDONIE_FOLLOWER] >= 1) {
 		outputText("Sitting on a side of the spring that is spacious enough to accommodate his larger frame, Sidonie lies relaxed, among the girls. Most of them give her not-so subtle glances, some of them at her hefty bosom, but the most directed at the thick equine member dangling from the legs. Not caring too much about their looks, she simply lies and enjoy the bath.\n\n");
@@ -178,7 +178,7 @@ public function HaveAGirlBath():void {
 //	 outputText("As a naga Samira take a lot of space in the bath. You're glad you made it big enough to hold as many people as necessary.\n\n");//Samira
 	if (flags[kFLAGS.DIANA_FOLLOWER] > 5) outputText("Diana is resting next to a set of medicinal and aromatic oils she regularly spray in the bath. Can’t say this is not welcome.\n\n");
 	//Michiko
-	if (flags[kFLAGS.LUNA_FOLLOWER] >= 4) outputText("Luna is enjoying a break relaxing for once as she is not on duty" + (flags[kFLAGS.LUNA_MOON_CYCLE] > 7 ? ", though for a few split second you imagined her doing doggy paddle in the water" : "") + ".\n\n");
+	if (flags[kFLAGS.LUNA_FOLLOWER] >= 4) outputText("Luna is enjoying a break relaxing for once as she is not on duty" + (flags[kFLAGS.LUNA_FOLLOWER] > 6 ? ", though for a few split second you imagined her doing doggy paddle in the water" : "") + ".\n\n");
 	if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) {
 		if (flags[kFLAGS.IZMA_NO_COCK] == 0) outputText("While not entirely a girl, Izma is womanly enough that she was still accepted in the bath, her crotch well hidden behind a cloth.\n\n");
 		else outputText("While she was not always a girl, Izma is womanly enough that she was still accepted in the bath.\n\n");
