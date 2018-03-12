@@ -102,6 +102,8 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 				if (miscNieve
 					|| miscHolli
 					|| player.hasKeyItem("Dragon Egg") >= 0
+					|| player.hasKeyItem("Gryphon Statuette") >= 0
+					|| player.hasKeyItem("Peacock Statuette") >= 0
 					|| flags[kFLAGS.ANEMONE_KID] > 0
 					|| flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
 					if (miscNieve) {
@@ -173,7 +175,15 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 				if (flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
 					if (model.time.hours >= 6) addButton(5, "Garden", Gardening.manageuyourgarden).hint("Visit your plant offspring");
 				}
-				addButton(14, "Back", inventoryMenu);
+			/*	if (player.hasKeyItem("Gryphon Statuette") >= 0) {
+					addButton(6, "Gryphon", SceneLib.mutationsTable.skybornSeed(1));
+					foundItem = true;
+				}
+				if (player.hasKeyItem("Peacock Statuette") >= 0) {
+					addButton(6, "Peacock", SceneLib.mutationsTable.skybornSeed(2));
+					foundItem = true;
+				}
+			*/	addButton(14, "Back", inventoryMenu);
 		}
 		
 		public function BagOfCosmosMenu():void {

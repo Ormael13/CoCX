@@ -20,6 +20,7 @@ public class Eyes extends BodyPart {
 	public static const VAMPIRE:int              = 15;
 	public static const GEMSTONES:int            = 16;
 	public static const FERAL:int            	 = 17;
+	public static const GRYPHON:int            	 = 18;
 	
 	public var colour:String = "brown";
 	public function Eyes() {

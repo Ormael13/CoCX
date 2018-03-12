@@ -21,7 +21,12 @@ public class KihaScene extends NPCAwareContent {
 //const PC_WIN_LAST_KIHA_FIGHT:int = 345;
 //const KIHA_CHOKED_OUT_PC:int = 432;
 
-//Encounter Dragon-Gal 
+//Encounter Dragon-Gal
+public function encounterKiha2():void {
+	if ((flags[kFLAGS.LUNA_JEALOUSY] > 100 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 150 && rand(10) < 8)) mishapsLunaKiha();
+	else encounterKiha();
+}
+
 public function encounterKiha():void {
 	var temp:Function;
 	clearOutput();
@@ -900,6 +905,18 @@ private function analRapuzulaKiha():void {
 			//[Player receives: 1x Inquisitor's Tome]
 			flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] = 2;
 			inventory.takeItem(weaponsrange.I_TOME_, camp.returnToCampUseOneHour);
+		}
+		
+		public function mishapsLunaKiha():void {
+			clearOutput();
+			outputText("As you walk up to Kiha, you notice the dragon girl appears to be having a tantrum.\n\n");
+			outputText("\"<i>[name], are you the asshole that left all that burnt meat right next to my sleep area? What's the message behind this, you don’t like my cooking?!</i>\"\n\n");
+			outputText("You swear it's not you. Besides, you don’t hunt for food, so where would you even find the meat?\n\n");
+			outputText("\"<i>Umph! Whatever. Come back later, doofus, I need to clean up this mess!</i>\"\n\n");
+			outputText("You walk away and notice Luna in the distance cooking today’s meal with a satisfied smile.\n\n");
+			if (player.hasStatusEffect(StatusEffects.CampLunaMishaps1)) player.addStatusValue(StatusEffects.CampLunaMishaps1, 3, 1);
+			else player.createStatusEffect(StatusEffects.CampLunaMishaps1, 0, 0, 1, 0);
+			doNext(playerMenu);
 		}
 }
 }
