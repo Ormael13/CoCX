@@ -287,17 +287,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 
 		//Sky Pounce
-<<<<<<< HEAD
 		if (player.canPounce() && !monster.hasPerk(PerkLib.EnemyGroupType)) {
 			buttons.add("Skyrend", skyPounce).hint("Land into your enemy dealing damage and initiate a grapple combo. End flight.");
 		}		
 		
-=======
-		if (player.canPounce() && player.canFly() && !monster.hasPerk(PerkLib.EnemyGroupType)) {
-			buttons.add("Skyrend", skyPounce).hint("Crash into your enemy and initiate a grapple combo. End flight.");
-		}
-
->>>>>>> 529b53e89563b36776f14914bbdcafa319a2232e
 		//Tornado Strike
 		if (player.vouivreScore() >= 11) {
 			bd = buttons.add("Tornado Strike", TornadoStrike).hint("Use wind to forcefully lift a foe in the air and deal damage.  \n\nWould go into cooldown after use for: 8 rounds");
