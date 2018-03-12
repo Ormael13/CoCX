@@ -1152,6 +1152,9 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.tailType == Tail.RED_PANDA) {
 			outputText("  Sprouting from your [ass], you have a long, bushy tail. It has a beautiful pattern of rings in [skin coat.color] fluffy fur. It waves playfully as you walk giving to your step a mesmerizing touch.");
 		}
+		else if(player.tailType == Tail.LION) {
+			outputText("  A soft [skin coat.color] cat-tail sprouts just above your " + assDescript() + ", curling and twisting with every step to maintain perfect balance. It ends with a small puffy hair balls like that of a lion");
+		}
 		else if (player.tailType == Tail.AVIAN) {
 			outputText("  A tail shaped like a fan of long, [skin coat.color] feathers rests above your " + assDescript() + ", twitching instinctively to help guide you if you were to take flight.");
 		}
@@ -1176,6 +1179,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Shining thick, leathery red scales covers your arms from the biceps down and your fingernails are now a short curved claws.");
 		else if (armType == Arms.PLANT)
 			outputText("  Delicate vines crawl down from the upper parts of your arms to your wrists covered in spade-like leaves, that bob whenever you move.");
+		else if(armType == Arms.SPHINX)
+			outputText("  Your arms are covered with [skin coat.color] fur. They end with somewhat human-like hands armed with lethal claws.");
 		else if (armType == Arms.PLANT2)
 			outputText("  Vines crawl down from your shoulders to your wrists, tipped with slits that drool precum. They look like innocent decorations from a distance.");
 		else if (armType == Arms.SHARK)
@@ -1272,6 +1277,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the [haircolor]-colored wings folded close, they can unfurl to allow you to soar as gracefully as a harpy.");
 		if (wingType == Wings.FEATHERED_ALICORN)
 			outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the [haircolor]-colored wings folded close, they can unfurl to allow you to soar as gracefully as an alicorn.");
+		if (wingType == Wings.FEATHERED_SPHINX)
+			outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the [haircolor]-colored wings folded close, they can unfurl to allow you to soar as gracefully as an sphinx.");
 		if (wingType == Wings.FEATHERED_PHOENIX)
 			outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the crimson-colored wings folded close, they can unfurl to allow you to soar as gracefully as a phoenix.");
 		if (wingType == Wings.DRACONIC_SMALL)
@@ -1847,7 +1854,7 @@ public class PlayerAppearance extends BaseContent {
 				else if(skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
 				outputText(". Your mouth is somewhat human save for your wolf-like canines.");
 			} else if (player.hasPartialCoat(Skin.FUR)) {
-				outputText("  Your face looks human save for your wolf-like canines.  On your cheek you have [skin coat].");
+				outputText("  Your face looks human save for your wolf-like canines.  You've got [skin coat], hiding your [skin noadj] underneath your furry visage.");
 			} else {
 				outputText("  Your face looks human save for your wolf-like canines, but overlaid with glittering [skin coat].");
 			}
@@ -2037,6 +2044,12 @@ public function RacialScores():void {
 	if (player.bunnyScore() >= 4) outputText("\n<font color=\"#0000a0\">Bunny-morph: " + player.bunnyScore() + " (+" + (10 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
 	else if (player.bunnyScore() >= 1 && player.bunnyScore() < 4) outputText("\n<font color=\"#008000\">Bunny-morph: " + player.bunnyScore() + "</font>");
 	else if (player.bunnyScore() < 1) outputText("\n<font color=\"#ff0000\">Bunny-morph: 0</font>");
+
+	//Sphinx
+	if (player.sphinxScore() >= 14) outputText("\n<font color=\"#0000a0\">Sphinx: " + player.sphinxScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Str, -" + (20 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max Int, +" + (40 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
+	else if (player.sphinxScore() >= 1 && player.sphinxScore() < 14) outputText("\n<font color=\"#008000\">Sphinx: " + player.sphinxScore() + "</font>");
+	else if (player.sphinxScore() < 1) outputText("\n<font color=\"#ff0000\">Sphinx: 0</font>");
+
 	if (player.catScore() >= 8) {
 		outputText("\n<font color=\"#0000a0\">Cat-girl/Cat-boy/Cat Morph: " + player.catScore() + " (");
 		if (player.findPerk(PerkLib.Flexibility) > 0) outputText("+" + (70 * (1 + player.newGamePlusMod())) + " ");

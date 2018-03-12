@@ -331,7 +331,7 @@ public class PerkLib
 		public static const CatlikeNimbleness:PerkType = mk("Cat-like Nimbleness", "Cat-like Nimbleness",
 				"Your transformed joins allows you to move more swiftly and with greater nimbleness.",
 				"You choose the 'Cat-like Nimbleness' perk. Your body joints due to repeadly usage of cat-like flexibility became more nimble.");
-		public static const CatlikeNimblenessEvolved:PerkType = mk("Cat-like Nimbleness", "Cat-like Nimbleness",
+		public static const CatlikeNimblenessEvolved:PerkType = mk("Cat-like Nimbleness (Evolved)", "Cat-like Nimbleness (Evolved)",
 				"Your nimble body allows you to move more swiftly and with greater nimbleness than before.",
 				"You choose the 'Cat-like Nimbleness (Evolved)' perk. Continuous usage of cat-like flexibility caused it to undergone change.");
 		public static const Channeling:PerkType = mk("Channeling", "Channeling",

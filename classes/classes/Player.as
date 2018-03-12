@@ -1285,13 +1285,11 @@ use namespace CoC;
 		{
 			//Determine race type:
 			var race:String = "human";
-			if (catScore() >= 4) 
+			if (catScore() >= 4)
 			{
 				if (catScore() >= 8) {
 					if (isTaur() && lowerBody == LowerBody.CAT) {
 						race = "cat-taur";
-						if (faceType == Face.HUMAN)
-							race = "sphinx-morph"; // no way to be fully feral anyway
 					}
 					else {
 						race = "cat-morph";
@@ -1311,6 +1309,10 @@ use namespace CoC;
 							race = "half cat-" + mf("boy", "girl");
 					}
 				}
+			}
+			if (sphinxScore() >= 13)
+			{
+				race = "Sphinx";
 			}
 			if (nekomataScore() >= 11)
 			{
@@ -3722,6 +3724,50 @@ use namespace CoC;
 			return centaurCounter;
 		}
 
+		public function sphinxScore():Number
+		{
+			var sphinxCounter:Number = 0;
+			if (isTaur()) {
+				if (lowerBody == LowerBody.CAT)
+					sphinxCounter += 2;
+				if (tailType == Tail.CAT && (lowerBody == LowerBody.CAT))
+					sphinxCounter++;
+				if (skinType == 0 && (lowerBody == LowerBody.CAT))
+					sphinxCounter++;
+				if (arms.type == Arms.SPHINX && (lowerBody == LowerBody.CAT))
+					sphinxCounter++;
+				if (ears.type == Ears.LION && (lowerBody == LowerBody.CAT))
+					sphinxCounter++;
+				if (faceType == Face.CAT_CANINES && (lowerBody == LowerBody.CAT))
+					sphinxCounter++;
+			}
+			if (eyes.type == Eyes.CAT_SLITS)
+				sphinxCounter++;
+			if (ears.type == Ears.LION)
+				sphinxCounter++;
+			if (tongue.type == Tongue.CAT)
+				sphinxCounter++;
+			if (tailType == Tail.CAT)
+				sphinxCounter++;
+			if (tailType == Tail.LION)
+				sphinxCounter++;
+			if (lowerBody == LowerBody.CAT)
+				sphinxCounter++;
+			if (faceType == Face.CAT_CANINES)
+				sphinxCounter++;
+			if (wings.type == Wings.FEATHERED_SPHINX)
+				sphinxCounter += 2;
+			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
+				sphinxCounter += 10;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && sphinxCounter >= 3)
+				sphinxCounter += 1;
+			if (findPerk(PerkLib.Flexibility) > 0)
+				sphinxCounter++;
+			if (findPerk(PerkLib.CatlikeNimbleness) > 0)
+				sphinxCounter += 1;
+			return sphinxCounter;
+		}
+
 		//Determine Unicorn Rating
 		public function unicornScore():Number {
 			if (horns.type != Horns.UNICORN)
@@ -5326,6 +5372,21 @@ use namespace CoC;
 				}
 
 			}//+10 / 10 - 20
+
+
+			if (sphinxScore() >= 5) {
+				if (sphinxScore() >= 14) {
+					if (findPerk(PerkLib.Flexibility) > 0) maxSpe += (50 * newGamePlusMod);
+					else maxSpe += (40 * newGamePlusMod);
+					maxStr += (50 * newGamePlusMod);
+					maxTou -= (20 * newGamePlusMod);
+					maxInt += (100 * newGamePlusMod);
+					maxWis += (40 * newGamePlusMod);
+				}
+			}//+50/-20/+40/+100/+40
+
+
+
 			if (nekomataScore() >= 11) {
 				if (findPerk(PerkLib.Flexibility) > 0) maxSpe += (50 * newGamePlusMod);
 				else maxSpe += (40 * newGamePlusMod);

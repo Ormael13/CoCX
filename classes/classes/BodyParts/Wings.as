@@ -29,6 +29,7 @@ public class Wings extends BodyPart {
 	public static const FEY_DRAGON_WINGS:int     = 26;
 	public static const FEATHERED_AVIAN:int      = 27;
 	public static const NIGHTMARE:int    		 = 28;
+	public static const FEATHERED_SPHINX:int     = 29;
 	
 	public var desc:String = "non-existant";
 	public function Wings() {

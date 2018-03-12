@@ -89,7 +89,7 @@ public class VampireBlood extends Consumable {
         if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 		for each (var tf:Object in tfArr) {
             if (changes >= changeLimit) break;
-            if (rand(tf.Chance? tf.Chance : 3) == 0) {
+            if (trueOnceInN(tf.Chance? tf.Chance : 3)) {
 	            doChange(tf);
             }
 		}
@@ -97,30 +97,28 @@ public class VampireBlood extends Consumable {
         return false;
 
         function doChange(tf:Object,count:Boolean=true):void{
-            if(tf.ChangeTo != 1){
-	            if (tf.ChangeTo != -1) {
-		            var keys:Array = tf.BodyPart.split('.');
-		            var hostObj:Object = player;
-		            var bodyPart:String = tf.BodyPart;
-		            if(keys.length > 1){
-			            hostObj = player[keys[0]];
-			            bodyPart = keys[1];
+            if (tf.ChangeTo != -1) {
+	            var keys:Array = tf.BodyPart.split('.');
+	            var hostObj:Object = player;
+	            var bodyPart:String = tf.BodyPart;
+	            if(keys.length > 1){
+		            hostObj = player[keys[0]];
+		            bodyPart = keys[1];
+	            }
+	            if (hostObj[bodyPart] != tf.ChangeTo){
+		            if (tf.Check) {
+			            tf.Override();
+			            if(count)changes++;
 		            }
-		            if (hostObj[bodyPart] != tf.ChangeTo){
-			            if (tf.Check) {
-				            tf.Override();
-				            if(count)changes++;
-			            }
-			            outputText("\n\n");
-			            if(count){
-				            story.display(tf.BodyPart, {$pure: pure});
-			            }
-			            hostObj[bodyPart] = tf.ChangeTo;
-			            for each(var extra:Object in tf.Addition){
-				            doChange(extra,false);
-			            }
-			            if(count) changes++;
+		            outputText("\n\n");
+		            if(count){
+			            story.display(tf.BodyPart, {$pure: pure});
 		            }
+		            hostObj[bodyPart] = tf.ChangeTo;
+		            for each(var extra:Object in tf.Addition){
+			            doChange(extra,false);
+		            }
+		            if(count) changes++;
 	            }
             }
         }

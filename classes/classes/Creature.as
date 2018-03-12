@@ -2451,6 +2451,7 @@ public class Creature extends Utils
 			Wings.VAMPIRE,
 			Wings.FEY_DRAGON_WINGS,
 			Wings.FEATHERED_AVIAN,
+			Wings.FEATHERED_SPHINX,
 			//WING_TYPE_IMP_LARGE,
 		];
 
@@ -2462,6 +2463,25 @@ public class Creature extends Utils
 				return false;
 			return canFlyWings.indexOf(wings.type) != -1;
 		}
+
+		public static const canPounceLeg:Array = [
+			LowerBody.CAT,
+			LowerBody.LION,
+			LowerBody.WOLF,
+		];
+
+		public static const canPounceArms:Array = [
+			Arms.CAT,
+			Arms.LION,
+			Arms.SPHINX,
+			Arms.WOLF,
+		];
+
+		public function canPounce():Boolean
+		{
+			return canPounceLeg.indexOf(lowerBody) != -1 && canPounceArms.indexOf(arms.type) != -1;
+		}
+
 
 		//PC can swim underwater?
 		public function canSwimUnderwater():Boolean

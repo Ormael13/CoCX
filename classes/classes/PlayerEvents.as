@@ -754,7 +754,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				player.createPerk(PerkLib.ImprovedVenomGland, 0, 0, 0, 0);
 			}
 			//Flexibility perk
-			if (player.tailType == Tail.CAT && player.lowerBody == LowerBody.CAT && player.ears.type == Ears.CAT) { //Check for gain of cat agility - requires legs, tail, and ears
+			if (player.tailType == Tail.CAT || player.tailType == Tail.MANTICORE_PUSSYTAIL && player.lowerBody == LowerBody.CAT && player.ears.type == Ears.CAT || player.ears.type == Ears.LION) { //Check for gain of cat agility - requires legs, tail, and ears
 				if (player.findPerk(PerkLib.Flexibility) < 0) {
 					outputText("\nWhile stretching, you notice that you're much more flexible than you were before.  Perhaps this will make it a bit easier to dodge attacks in battle?\n\n(<b>Gained Perk: Flexibility</b>)\n");
 					player.createPerk(PerkLib.Flexibility, 0, 0, 0, 0);

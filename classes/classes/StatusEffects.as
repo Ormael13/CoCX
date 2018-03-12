@@ -601,6 +601,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		
 		public static const CooldownCompellingAria:StatusEffectType     = mkCombat("Cooldown Compelling Aria");
 		public static const CooldownCumCannon:StatusEffectType          = mkCombat("Cooldown Cum Cannon");
+		public static const CooldownCursedRiddle:StatusEffectType       = mkCombat("Cooldown Cursed Riddle");
 		public static const CooldownEarthStance:StatusEffectType        = mkCombat("Cooldown Earth Stance");
 		public static const CooldownEAspectAir:StatusEffectType         = mkCombat("Cooldown Elemental Aspect Air");
 		public static const CooldownEAspectEarth:StatusEffectType       = mkCombat("Cooldown Elemental Aspect Earth");
