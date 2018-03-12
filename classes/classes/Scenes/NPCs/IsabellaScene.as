@@ -258,7 +258,7 @@ public function unwelcomeFightCowGal():void {
 public function fightIsabella():void {
 	clearOutput();
 	if(!isabellaFollower()) isabellaFollowerScene.isabellaAffection(-5);
-	outputText("You smirk at Isabella, and ready your [weapon], telling her you intend to have you way with her.  She turns beet red and grabs her shield, announcing, \"<i>You von't find me such easy prey, and I vill punish you for being so naughty!</b>\"");
+	outputText("You smirk at Isabella, and ready your [weapon], telling her you intend to have you way with her.  She turns beet red and grabs her shield, announcing, \"<i>You von't find me such easy prey, and I vill punish you for being so naughty!</i>\"");
 	startCombat(new Isabella());
 	flags[kFLAGS.ISABELLA_ANGRY_AT_PC_COUNTER] += 72;
 	spriteSelect(31);

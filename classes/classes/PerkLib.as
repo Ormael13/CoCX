@@ -3123,7 +3123,6 @@ public class PerkLib
                     .requireLib(50)
                     .requireStatusEffect(StatusEffects.KnowsArouse, "Arouse spell");
             JobCourtesan.requirePerk(JobSeducer)
-                    .requirePerk(Heroism)
                     .requireLib(50)
                     .requireLevel(12);
             DazzlingDisplay.requirePerk(JobCourtesan)
@@ -3231,23 +3230,23 @@ public class PerkLib
             // CORRUPTION
             //------------
             //Slot 7 - Corrupted Libido - lust raises 10% slower.
-            CorruptedLibido.requireCor(25);
+            CorruptedLibido.requireCor(10);
             CorruptedLibido.defaultValue1 = 20;
             //Slot 7 - Seduction (Must have seduced Jojo)
-            Seduction.requireCor(50);
+            Seduction.requireCor(15);
             //Slot 7 - Nymphomania
-            Nymphomania.requireCor(75)
+            Nymphomania.requireCor(15)
                     .requirePerk(CorruptedLibido);
             //Slot 7 - UNFINISHED :3
-            Acclimation.requireCor(50)
+            Acclimation.requireCor(15)
                     .requirePerk(CorruptedLibido)
                     .requireMinLust(20);
-            SenseCorruption.requireCor(75);
+            SenseCorruption.requireCor(15);
             //Tier 1 Corruption Perks - acclimation over-rides
-            Sadist.requireCor(60)
+            Sadist.requireCor(20)
                     .requirePerk(CorruptedLibido)
                     .requireLevel(6);
-            ArousingAura.requireCor(70)
+            ArousingAura.requireCor(25)
                     .requirePerk(CorruptedLibido)
                     .requireLevel(6);
             //Tier 2
@@ -3367,13 +3366,9 @@ public class PerkLib
             BlackHeart.requirePerk(DarkCharm).requireCor(90).requireCustomFunction(function (player:Player):Boolean {
                 return player.demonScore() >= 6;
             }, "Demon race");
-			
             CatlikeNimbleness.requirePerk(Flexibility).requireCustomFunction(function (player:Player):Boolean {
-              return player.catScore() >= 4 || player.nekomataScore() >= 4 || player.cheshireScore() >= 4 || player.manticoreScore() >= 4 || player.sphinxScore() >= 4;
+                return player.catScore() >= 4 || player.nekomataScore() >= 4 || player.cheshireScore() >= 4;
             }, "Any cat race");
-			
-			//CatlikeNimbleness.requirePerk(Flexibility);			
-			
             DraconicLungs.requirePerk(DragonFireBreath)
                     .requirePerk(DragonIceBreath)
                     .requirePerk(DragonLightningBreath)

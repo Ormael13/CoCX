@@ -106,6 +106,10 @@ use namespace CoC;
 				phoenixScene.encounterPhoenix1();
 				return;
 			}
+			if ((player.hasKeyItem("Gryphon Statuette") < 0 || player.hasKeyItem("Peacock Statuette") < 0) && rand(4) == 0) {
+				caveScene();
+				return;
+			}
 			//10% chance to mino encounter rate if addicted
 			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0 && rand(10) == 0) {
 				spriteSelect(44);
@@ -178,6 +182,7 @@ use namespace CoC;
 				return;
 			}
 		}
+		
 		//\"<i>Chicken Harpy</i>\" by Jay Gatsby and not Savin he didn't do ANYTHING
 		//Initial Intro
 		public function chickenHarpy():void
@@ -210,7 +215,6 @@ use namespace CoC;
 			if (player.hasItem(consumables.OVIELIX, 3)) addButton(1, "Give Three", giveThreeOviElix);
 			addButton(4, "Leave", leaveChickenx);
 		}
-
 		//If Give Two
 		public function giveTwoOviElix():void
 		{
@@ -228,7 +232,6 @@ use namespace CoC;
 			addButton(4, "Purple", getHarpyEgg, consumables.PURPLEG);
 			addButton(5, "White", getHarpyEgg, consumables.WHITEEG);
 		}
-
 		//If Give Three
 		public function giveThreeOviElix():void
 		{
@@ -245,7 +248,6 @@ use namespace CoC;
 			addButton(4, "Purple", getHarpyEgg, consumables.L_PRPEG);
 			addButton(5, "White", getHarpyEgg, consumables.L_WHTEG);
 		}
-
 		//All Text
 		public function getHarpyEgg(itype:ItemType):void
 		{
@@ -255,7 +257,6 @@ use namespace CoC;
 			outputText("You take " + itype.longName + ", and the harpy nods in regards to your decision.  Prepping her cart back up for the road, she gives you a final wave goodbye before heading back down through the mountains.\n\n");
 			inventory.takeItem(itype, chickenHarpy);
 		}
-
 		//If No
 		public function leaveChickenx():void
 		{
@@ -263,6 +264,39 @@ use namespace CoC;
 			spriteSelect(90);
 			outputText("At the polite decline of her offer, the chicken harpy gives a warm smile before picking her cart back up and continuing along the path through the mountains.");
 			outputText("\n\nYou decide to take your own path, heading back to camp while you can.");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		
+		public function caveScene():void {
+			clearOutput();
+			outputText("Wandering once more around the rocky cliffs on the higher area of the mountains, you find yourself increasingly bores, as you spend the most of the hour tossing aside pebbles and rocks that fell on the path, or crushing the solidified snow with your footwear.\n\n");
+			outputText("On the middle of your careless, and surprisingly peaceful stroll, you happen to find an alcove carved on the cliff’s stone. It’s not very big, maybe three or four feet tall, five feet wide and two feet deep, resting one feet above the path ground, so you’re forced to get on your knees to examine it better.\n\n");
+			outputText("The alcove itself is seemingly empty, though after a better examination, the back has engraved on the cliff rock a long, detailed inscription. Sadly, you can’t get a word from it, since it’s written in a strange, old language that’s doesn’t barely resemble anything that you’ve found in Mareth. Carved on each side there area stylized figures of avian creatures, ");
+			outputText("the most noticeable ones being a gryphon with the wings spread, and in the other side, a peacock doing the same with its tail. As you put your hands on them, you notice a that a shape vaguely resembling a hand forming in the floor of the alcove.\n\n");
+			outputText("Tentatively you put one hand on place");
+			if (player.avianScore() < 9) {
+				outputText(", but absolutely nothing happens. Maybe the magic or whatever that thing was supposed to do stopped working long ago? In any case, you had enough looking for a while, and since you’re not getting anything useful from there, you resume your walk.\n\n");
+				doNext(camp.returnToCampUseOneHour);
+			}
+			else {
+				outputText(" and gasp in surprise as the figures depicting the creatures at the sides of the alcove recede as you do so, leaving in place two smaller alcoves with two statuettes on them.\n\n");
+				outputText("The first one, made on brass and bronze, depicts a fierce looking gryphon in an assault stance. Every bit of the artifact emanates an unnatural strength. On the other side, a statue made of alabaster and ruby gemstones is shaped as a graceful peacock. Strangely, besides being pretty, the way it’s crafted gives you a weird, mystic feel.\n\n");
+				outputText("You try to grab both, but as soon as you put your hands in one of them, the alcove with the other starts closing. Seems like you’ll have only one choice here.\n\n");
+				menu();
+				addButton(0, "Gryphon", caveSceneGryphon);
+				addButton(1, "Peacock", caveScenePeacock);
+			}
+		}
+		public function caveSceneGryphon():void {
+			outputText("Picking the brass-forged statuette, you immediately feel how its energy rushes through your avian body, invigorating it with an unknown force. Carefully putting it on your bag, you see how the other one is stored away by the hidden mechanism.\n\n");
+			outputText("With nothing useful left to you here, you resume your walk and return to your camp with the gryphon idol on your bag.\n\n");
+			player.createKeyItem("Gryphon Statuette", 0, 0, 0, 0);
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function caveScenePeacock():void {
+			outputText("Picking the alabaster statuette, you immediately feel how its energy rushes through your avian body, invigorating it with an unknown force. Carefully putting it on your bag, you see how the other one is stored away by the hidden mechanism.\n\n");
+			outputText("With nothing useful left to you here, you resume your walk and return to your camp with the peacock idol on your bag.\n\n");
+			player.createKeyItem("Peacock Statuette", 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}

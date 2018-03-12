@@ -209,6 +209,11 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 		}
 
 //Approaching Ember (Z)
+		public function emberCampMenu2():void {
+			if ((flags[kFLAGS.LUNA_JEALOUSY] > 100 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 150 && rand(10) < 8)) mishapsLunaEmber();
+			else emberCampMenu();
+		}
+
 		public function emberCampMenu():void
 		{
 			clearOutput();
@@ -4613,6 +4618,14 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			clearOutput();
 			outputText("You yawn and stretch, getting the kinks out of your body after a good night's sleep next to... Ember?");
 			outputText("\n\nYou look about, but see no sign of the dragon... " + emberMF("he", "she") + "'s probably gone to get breakfast." + player.clothedOrNaked(".. looking to the side, you spot your [armorName] neatly folded beside the nest.") + "  Smiling to yourself, you " + player.clothedOrNaked("put on your [armorName] and ") + "get ready for another day...");
+			doNext(playerMenu);
+		}
+		
+		public function mishapsLunaEmber():void {
+			clearOutput();
+			outputText("As you call for Ember the dragon simply does not show up. You can see " + emberMF("him", "her") + " in the sky searching angrily for something and even hear " + emberMF("him", "her") + " swear in the distance. Whatever made Ember so mad you don’t want to know. You decide to call " + emberMF("him", "her") + " later so to avoid getting yourself burned as " + emberMF("he", "she") + " indeed start to torch the landscape at random.\n\n");
+			if (player.hasStatusEffect(StatusEffects.CampLunaMishaps2)) player.addStatusValue(StatusEffects.CampLunaMishaps2, 2, 1);
+			else player.createStatusEffect(StatusEffects.CampLunaMishaps2, 0, 1, 0, 0);
 			doNext(playerMenu);
 		}
 	}

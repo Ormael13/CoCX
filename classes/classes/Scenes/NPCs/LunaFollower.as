@@ -29,7 +29,7 @@ package classes.Scenes.NPCs
 		{
 			
 		}
-		//luna foll 2 - kicked post moon event, 3 seen her dead in forest, 4,5 - pre full moon event, 6 jelly pre full moon, 7,8 - post moon unchained, 9,10 - post moon chained, 11,12 - unchained post moon accepted
+		//luna foll 2 - kicked post moon event, 3 seen her dead in forest, 4,5 - pre full moon event, 6 jelly pre full moon, 7,8 - post moon unchained, 9,10 - post moon chained, 11,12 - unchained post moon accepted (PC no WW), 13,14 - unchained post moon accepted and talked about lycantrophy (PC no WW), 15,16 - unchained post moon accepted (PC WW)
 		
 		public function lunaAffection(changes:Number = 0):Number
 		{
@@ -121,7 +121,10 @@ package classes.Scenes.NPCs
 				if (flags[kFLAGS.SLEEP_WITH] != "Luna") addButton(5, "Sleep With", lunaSleepToggle);
 				else addButton(5, "Sleep Alone", lunaSleepToggle);
 			}
-			if (flags[kFLAGS.LUNA_FOLLOWER] > 10) addButton(6, "Sex", sexMenuMain);
+			if (flags[kFLAGS.LUNA_FOLLOWER] > 10) {
+				if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(2, "Spar", sparLuna);
+				addButton(6, "Sex", sexMenuMain);
+			}
 			if (flags[kFLAGS.LUNA_FOLLOWER] == 9 || flags[kFLAGS.LUNA_FOLLOWER] == 10) addButton(7, "Unchain", lunaChainToggle).hint("Unchain Luna and see what happens.");
 			if (flags[kFLAGS.LUNA_FOLLOWER] == 7 || flags[kFLAGS.LUNA_FOLLOWER] == 8) addButton(7, "Chain", lunaChainToggle).hint("Chain Luna.");
 			addButton(14, "Leave", camp.campFollowers);
@@ -153,6 +156,7 @@ package classes.Scenes.NPCs
 			addButton(3, "Camp", talkMenuLunaCampThoughts);
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) addButton(4, "Lycanthropy", talkMenuLunaLycanthropy);
 			else addButtonDisabled(4, "???", "You need to know her better for this.");
+			if ((flags[kFLAGS.LUNA_FOLLOWER] == 13 || flags[kFLAGS.LUNA_FOLLOWER] == 14) && (!player.hasPerk(PerkLib.Lycanthropy) || !player.hasPerk(PerkLib.LycanthropyDormant))) addButton(9, "Bite Me", talkMenuBiteMe);
 			addButton(14, "Back", mainLunaMenu);
 		}
 		public function talkMenuLunaHer():void {
@@ -210,9 +214,116 @@ package classes.Scenes.NPCs
 			outputText("\"<i>Well, my hormonal system is totally messed up as the lunar cycle causes me to go into heat.The closer we lycanthropes get to the full moon, the hornier we get, until we all turn into sex crazed beasts willing to go so far as to rape innocent people for a good fuck. That said, sex is not all there is to it. We are all gifted with the ability to change form at will, and I know for a fact that we’re also faster, ");
 			outputText("stronger, and sturdier than any normal morph or human. There is no known permanent cure to lycanthropy. The truth is that, while I could change into something different using transformatives, I think that so long as whatever I transform into is an animal I would still go mad during a full moon. Even worse, my bite can turn about anyone into a lycanthrope the same as me.</i>\"\n\n");
 			outputText("Guess she really is more than just a cute pup.\n\n");
+			if (flags[kFLAGS.LUNA_FOLLOWER] == 11) flags[kFLAGS.LUNA_FOLLOWER] = 13;
+			else flags[kFLAGS.LUNA_FOLLOWER] = 14;
 			lunaJealousy(-50);
 			lunaAffection(2);
 			doNext(camp.returnToCampUseOneHour);
+		}
+		public function talkMenuBiteMe():void {
+			clearOutput();
+			outputText("It occurs to you that you could gain the same kind of powers as Luna if you asked her. That said, is that what you truly want?\n\n");
+			menu();
+			addButton(0, "Yes", talkMenuBiteMeYes);
+			addButton(1, "No", talkMenuLuna);
+		}
+		public function talkMenuBiteMeYes():void {
+			outputText("You ask Luna the one thing she likely never expected, would she mind biting you? Luna almost panics the moment you request it, though she also blushes.\n\n");
+			outputText("\"<i>" + player.mf("Master","Mistress") + " I...This is a very important choice you are making here, did you truly think it through? I mean once you are cursed there's no removing it, you will truly be just like me.</i>\"\n\n");
+			outputText("You don’t mind it, truthfully if this can tie the both of you together better, you will do it all the more. Luna nods and undresses as she changes shape. You hold your arm before her and she lose all form of restraint biting you with just the required strength to draw blood. At first it hurts like crazy but then the pain recedes, replaced with spreading pleasure as the wounds begin to throb. ");
+			outputText("Your" + (player.hasCock() ? " [cock] goes fully erect" : "") + "" + (player.gender == 3 ? " and your" : "") + "" + (player.hasVagina() ? " pussy starts moistening" : "") + " from this weird feeling, something's not right.\n\n");
+			outputText("" + (player.humanScore() < 30 ? "Your body starts changing, and to your surprise, its features warp back to their former human features. You begin to think she may have purged you of the transformations that afflicted you, but that's not exactly it. " : "") + "Heat begins to spread from your wound and you start panting, trying to vent out the pleasure and the hot feeling in your body as something fundamental about you changes.\n\n");
+			outputText("Fur begins to grow on various point of your body, namely your arms and legs. Your nails sharpen and curve, turning into a full set of claws as your hands and feet reshape into 5 digit paws. You groan in pleasure, revealing your forming canines as your spine extends into a furry tail while your ears migrate to the top of your head, covering in fur and changing into triangular points like those of a wolf. You pant in pleasure at the change, revealing a moist dog like tongue");
+			if (player.hasCock()) outputText(" as you feel a tightness near the base of your cock where your skin seems to be bunching up. A canine-looking sheath begins forming around your cock’s base, tightening and pulling your penis inside its depths. A hot feeling envelops your member as it surges out and starts throbbing, the crown now a point. The sensations are too much for you.  You throw back your head and howl as the transformation completes, your pointed shaft erupting with intense force");
+			outputText(".\n\n");
+			player.lowerBody = LowerBody.WOLF;
+			if (player.legCount != 2) player.legCount = 2;
+			player.tailType = Tail.WOLF;
+			if (player.tailCount != 1) player.tailCount = 1;
+			player.rearBody.type = RearBody.WOLF_COLLAR;
+			player.arms.type = Arms.WOLF;
+			player.faceType = Face.WOLF_FANGS;
+			player.ears.type = Ears.WOLF;
+			player.eyes.type = Eyes.FERAL;
+			player.tongue.type = Tongue.DOG;
+			player.wings.type = Wings.NONE;
+			player.antennae.type = Antennae.NONE;
+			player.horns.type = Horns.NONE;
+			player.skin.growCoat(Skin.FUR, {color:player.hairColor}, Skin.COVERAGE_LOW);
+			if (player.hasCock() && player.wolfCocks() < 1) {
+				var selectedCockValue:int = -1;
+				for (var indexI:int = 0; indexI < player.cocks.length; indexI++)
+				{
+					if (player.cocks[indexI].cockType != CockTypesEnum.WOLF)
+					{
+						selectedCockValue = indexI;
+						break;
+					}
+				}
+				if (selectedCockValue != -1) {
+					player.cocks[selectedCockValue].cockType = CockTypesEnum.WOLF;
+					player.cocks[selectedCockValue].knotMultiplier = 1.1;
+					player.cocks[selectedCockValue].thickenCock(2);
+				}
+			}
+			var bonusStats:Number = 0;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) bonusStats += 10;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) bonusStats += 20;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats += 30;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats += 40;
+			player.createPerk(PerkLib.Lycanthropy,bonusStats,0,0,0);
+			player.dynStats("str", (bonusStats * player.newGamePlusMod()), "tou", (bonusStats * player.newGamePlusMod()), "spe", (bonusStats * player.newGamePlusMod()), "cor", 20);
+			statScreenRefresh();
+			outputText("Barely satiated your eyes now focus back on Luna, lust overwhelming your cursed body. You must have her... NOW!\n\n");
+			doNext(sexMenuDominateHer);
+		}
+		
+		public function sparLuna():void {
+			clearOutput();
+			outputText("You ask Luna if she wouldn’t mind sparring with you.\n\n");
+			outputText("\"<i>" + player.mf("Master", "Mistress") + ", we both know it is best not to awaken my instincts during the day. I am a pitiful woman.</i>\"\n\n");
+			outputText("Well it's exactly because she is both strong and dangerous that you need her help to become so yourself.\n\n");
+			outputText("\"<i>If this is the " + player.mf("Master's", "Mistress'") + " wish, I will comply.</i>\"\n\n");
+			outputText("You both head to the ring and get ready for a brawl. She removes her dress and gets stark naked before you " + (camp.companionsCount() >= 2 ? "to the consternation of everyone who’s looking, " : "") + "before starting to pant as she changes shape. You recognise the green glow of crazed desire in her eyes now and almost regret your choice. Losing to her will likely result into you both having sex whether you like it or not.\n\n");
+			startCombat(new Luna());
+		}
+		public function sparLunaWon():void {
+			clearOutput();
+			outputText("Luna sit down like a good well behaved dog to admit defeat.\n\n");
+			outputText("\"<i>I yield " + player.mf("Master", "Mistress") + ". You win this one. I hope this warm up was worth your time.</i>\"\n\n");
+			outputText("You thank Luna for helping you with your training and give her freedom to resume duty which she gladly do.\n\n");
+			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
+				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.LUNA_DEFEATS_COUNTER]++;
+				else flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 1;
+				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 2 && flags[kFLAGS.LUNA_LVL_UP] == 0) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 12);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 12, 0, 0, 0);
+					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.LUNA_LVL_UP] = 1;
+				}
+				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 3 && flags[kFLAGS.LUNA_LVL_UP] == 1) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 18);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 18, 0, 0, 0);
+					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.LUNA_LVL_UP] = 2;
+				}
+				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 4 && flags[kFLAGS.LUNA_LVL_UP] == 2) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 24);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 24, 0, 0, 0);
+					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.LUNA_LVL_UP] = 3;
+				}
+			}
+			cleanupAfterCombat();
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function sparLunaLost():void {
+			clearOutput();
+			outputText("Luna pounces on you with a hungry growl. Guess you had it coming when you asked her to spar you.\n\n");
+			outputText("\"<i>You lost " + player.mf("Master", "Mistress") + ", therefore I’m entitled to do whatever I want with you. Well I don’t care what it is as long as we do it now.</i>\"\n\n");
+			monster.createPerk(PerkLib.NoGemsLost, 0, 0, 0, 0);
+			cleanupAfterCombat();
+			doNext(sexMenuDominateHer);
 		}
 		
 		public function mealLuna():void {
@@ -248,10 +359,10 @@ package classes.Scenes.NPCs
 			lunaAffection(5);
 			HPChange(Math.round(player.maxHP() * .5), true);
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 10) {
-				outputText(" Luna is giving a knowing smile, likely hoping you will jump at the opportunity, maybe she even did it on purpose. Do you take her here and now?\n\n");
+				outputText("\nLuna is giving a knowing smile, likely hoping you will jump at the opportunity, maybe she even did it on purpose. Do you take her here and now?\n\n");
 				menu();
-				if (flags[kFLAGS.LUNA_FOLLOWER] > 10) addButton(0, "Yes", sexMenuMain);
-				addButton(0, "No", nurseLunaEnd);
+				addButton(0, "Yes", sexMenuMain);
+				addButton(1, "No", nurseLunaEnd);
 			}
 			else doNext(camp.returnToCampUseFourHours);
 		}
@@ -306,7 +417,9 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.LUNA_FOLLOWER] == 5) flags[kFLAGS.LUNA_FOLLOWER] = 6;
 			else if (flags[kFLAGS.LUNA_FOLLOWER] == 7) flags[kFLAGS.LUNA_FOLLOWER] = 8;
 			else if (flags[kFLAGS.LUNA_FOLLOWER] == 9) flags[kFLAGS.LUNA_FOLLOWER] = 10;
-			else flags[kFLAGS.LUNA_FOLLOWER] = 12;
+			else if (flags[kFLAGS.LUNA_FOLLOWER] == 11) flags[kFLAGS.LUNA_FOLLOWER] = 12;
+			else if (flags[kFLAGS.LUNA_FOLLOWER] == 13) flags[kFLAGS.LUNA_FOLLOWER] = 14;
+			else flags[kFLAGS.LUNA_FOLLOWER] = 16;
 			outputText("Luna come over to you.\n\n");
 			outputText("\"<i>" + player.mf("Master","Mistress") + " you haven’t been using my services in some time. I came to remind you that should you need anything, and by that I truly mean anything you desire, all you need to do is call me. It is always my greatest pleasure to serve you.</i>\"\n\n");
 			outputText("She walk away to prepare today's food and clean which reminds you that you indeed hadn’t had her food in a while.\n\n");
@@ -342,6 +455,8 @@ package classes.Scenes.NPCs
 			outputText("Well of course. Had she made her needs clear in the first place you would have helped her with them. There was no need for her to hide her desires. That aside, you already thought of her as more than just a maid. You just didn’t know how to tell her. You don’t care if she thinks she is a monster. From your point of view, even in this form she remains cute. To her utter surprise you");
 			if (!player.isNaked()) outputText(" get rid of your own clothes and");
 			outputText(" display your naked body, telling her she will get exactly what she wants.\n\n");
+			if (flags[kFLAGS.LUNA_FOLLOWER] == 5 || flags[kFLAGS.LUNA_FOLLOWER] == 7 || flags[kFLAGS.LUNA_FOLLOWER] == 9) flags[kFLAGS.LUNA_FOLLOWER] = 11;
+			if (flags[kFLAGS.LUNA_FOLLOWER] == 6 || flags[kFLAGS.LUNA_FOLLOWER] == 8 || flags[kFLAGS.LUNA_FOLLOWER] == 10) flags[kFLAGS.LUNA_FOLLOWER] = 12;
 			flags[kFLAGS.LUNA_MOONING] = 2;
 			doNext(sexMenuVaginal);
 		}
@@ -395,7 +510,7 @@ package classes.Scenes.NPCs
 			CoC.instance.timeQ += 6;
 			doNext(camp.sleepWrapper);
 		}
-		public function fullMoonEventResistDefat():void {
+		public function fullMoonEventResistDefeat():void {
 			clearOutput();
 			outputText("You are too weak to keep fighting and Luna senses it. Before you can react she pounces on you. You’re back to the position you were in earlier and this time you are in no way capable of putting up a fight.\n\n");
 			outputText("\"<i>It's ok, [name], the pain will only last for a few seconds and then...</i>\"\n\n");
@@ -417,7 +532,7 @@ package classes.Scenes.NPCs
 			player.wings.type = Wings.NONE;
 			player.antennae.type = Antennae.NONE;
 			player.horns.type = Horns.NONE;
-			player.skin.growCoat(Skin.FUR, Skin.COVERAGE_MEDIUM);
+			player.skin.growCoat(Skin.FUR, {color:player.hairColor}, Skin.COVERAGE_LOW);
 			if (player.hasCock() && player.wolfCocks() < 1) {
 				var selectedCockValue:int = -1;
 				for (var indexI:int = 0; indexI < player.cocks.length; indexI++)
@@ -434,8 +549,9 @@ package classes.Scenes.NPCs
 					player.cocks[selectedCockValue].thickenCock(2);
 				}
 			}
+			player.createPerk(PerkLib.Lycanthropy,40,0,0,0);
 			player.dynStats("str", (40 * player.newGamePlusMod()), "tou", (40 * player.newGamePlusMod()), "spe", (40 * player.newGamePlusMod()), "cor", 20);
-			player.createPerk(PerkLib.Lycanthropy,0,0,0,0);
+			statScreenRefresh();
 			outputText("Barely satiated your eyes now focus back on Luna, lust overwhelming your cursed body. You must have her... NOW!\n\n");
 			monster.createPerk(PerkLib.NoGemsLost, 0, 0, 0, 0);
 			cleanupAfterCombat();
@@ -458,8 +574,8 @@ package classes.Scenes.NPCs
 					else addButtonDisabled(6, "???", "Req. Ayane in camp and 100 affection.");
 				}
 			}
-			if (player.cor < 33) addButton(10, "Headpat", sexMenuHeadpat);
-			else addButtonDisabled(10, "Headpat", "You're too corrupted for that!");
+			if (player.cor >= 30) addButton(10, "Headpat", sexMenuHeadpat);
+			else addButtonDisabled(10, "Headpat", "You're too pure for that!");
 			addButton(14, "Back", mainLunaMenu);
 		}
 		public function sexMenuHeadpat():void {
@@ -510,7 +626,6 @@ package classes.Scenes.NPCs
 			lunaJealousy(-50);
 			lunaAffection(2);
 			player.orgasm();
-			if (flags[kFLAGS.LUNA_FOLLOWER] < 7) flags[kFLAGS.LUNA_FOLLOWER] = 11;
 			if (flags[kFLAGS.LUNA_MOONING] == 2) {
 				flags[kFLAGS.LUNA_MOONING] = 1;
 				if (model.time.hours >= 21) CoC.instance.timeQ = 24 - model.time.hours;
@@ -635,7 +750,7 @@ package classes.Scenes.NPCs
 					outputText("\"<i>I knew you had it in you [name] please just make sure to use me regularly.</i>\"\n\n");
 					if (flags[kFLAGS.LUNA_FOLLOWER] < 7 && player.werewolfScore() > 6) {
 						outputText("Yes for sure! You're going to make sure to use her as often as necessary to imprint your scent on her from now on. She’s your beta and no one else’s.");
-						flags[kFLAGS.LUNA_FOLLOWER] = 11;
+						flags[kFLAGS.LUNA_FOLLOWER] = 15;
 					}
 					flags[kFLAGS.LUNA_MOONING] = 1;
 					if (model.time.hours >= 21) CoC.instance.timeQ = 24 - model.time.hours;
@@ -664,7 +779,7 @@ package classes.Scenes.NPCs
 					outputText("\"<i>I knew you had it in you [name] please just make sure to use me regularly.</i>\"\n\n");
 					if (flags[kFLAGS.LUNA_FOLLOWER] < 7 && player.werewolfScore() > 6) {
 						outputText("Yes for sure! You're going to make sure to use her as often as necessary to imprint your scent on her from now on. She’s your beta and no one else’s.");
-						flags[kFLAGS.LUNA_FOLLOWER] = 11;
+						flags[kFLAGS.LUNA_FOLLOWER] = 15;
 					}
 					flags[kFLAGS.LUNA_MOONING] = 1;
 					if (model.time.hours >= 21) CoC.instance.timeQ = 24 - model.time.hours;
