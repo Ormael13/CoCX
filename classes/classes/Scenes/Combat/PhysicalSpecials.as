@@ -290,8 +290,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		
 		//Sky Pounce
-		if (player.canPounce() && player.canFly() && !monster.hasPerk(PerkLib.EnemyGroupType)) {
-			buttons.add("Skyrend", skyPounce).hint("Crash into your enemy and initiate a grapple combo. End flight.");
+		if (player.canPounce() && !monster.hasPerk(PerkLib.EnemyGroupType)) {
+			buttons.add("Skyrend", skyPounce).hint("Land into your enemy dealing damage and initiate a grapple combo. End flight.");
 		}		
 		
 		//Tornado Strike
@@ -1876,7 +1876,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if(monster.short == "pod") {
 			clearOutput();
-			outputText("You can't crash into something you're trapped inside of!");
+			outputText("You can't land into something you're trapped inside of!");
 			//Gone		menuLoc = 1;
 			menu();
 			addButton(0, "Next", combatMenu, false);
@@ -1891,8 +1891,59 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		//WRAP IT UPPP
-		if(40 + rand(player.spe) > monster.spe) {
-			outputText("You growl menacingly, and fold your wings, as you dive into " + monster.a + monster.short + " clawing at its/her/his body and leaving deep bleeding wounds. You’re now grappling with your target ready to tear it to shreds.");
+		if (40 + rand(player.spe) > monster.spe) {
+					var damage:Number = 0;
+					//str bonuses
+					damage += player.str;
+					damage += scalingBonusStrength() * 0.5;
+					//tou bonuses
+					damage += player.spe;
+					damage += scalingBonusSpeed() * 0.5;
+					//addictive bonuses
+					if (player.hasPerk(PerkLib.IronFistsI)) damage += 10;
+					if (player.hasPerk(PerkLib.IronFistsII)) damage += 10;
+					if (player.hasPerk(PerkLib.IronFistsIII)) damage += 10;
+					if (player.hasPerk(PerkLib.IronFistsIV)) damage += 10;
+					if (player.hasPerk(PerkLib.IronFistsV)) damage += 10;
+					if (player.hasPerk(PerkLib.IronFistsVI)) damage += 10;
+					if (player.hasPerk(PerkLib.JobBrawler)) damage += (5 * (1 + player.newGamePlusMod()));
+					if (player.hasPerk(PerkLib.JobMonk)) damage += (10 * (1 + player.newGamePlusMod()));
+					if (player.hasStatusEffect(StatusEffects.Berzerking)) damage += (30 + (15 * player.newGamePlusMod()));
+					if (player.hasStatusEffect(StatusEffects.Lustzerking)) damage += (30 + (15 * player.newGamePlusMod()));
+					//multiplicative bonuses
+					if (player.hasPerk(PerkLib.HoldWithBothHands)) damage *= 1.2;
+					if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
+					if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= 1.1;
+					if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
+					if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+					//Determine if critical hit!
+					var crit:Boolean = false;
+					var critChance:int = 5;
+					if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
+						if (player.inte <= 100) critChance += (player.inte - 50) / 5;
+						if (player.inte > 100) critChance += 10;
+					}
+					if (player.hasPerk(PerkLib.Blademaster)) critChance += 5;
+					if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
+					if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+					if (rand(100) < critChance) {
+						crit = true;
+						damage *= 1.75;
+					}
+					damage = Math.round(damage);
+					damage = doDamage(damage);
+					outputText("You growl menacingly, and fold your wings, as you dive into " + monster.a + monster.short + " clawing at its/her/his body and leaving deep bleeding wounds dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!. You’re now grappling with your target ready to tear it to shreds.");
+					if (crit == true) {
+					outputText(" <b>*Critical Hit!*</b>");
+					if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
+					}
+					if (crit == false && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+						if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
+						else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
+					}
+					checkAchievementDamage(damage);
+					outputText("\n\n");
+					combat.heroBaneProc(damage);
 			monster.createStatusEffect(StatusEffects.Pounce, 4 + rand(2), 0, 0, 0);
 			player.removeStatusEffect(StatusEffects.Flying);
 			if (player.hasStatusEffect(StatusEffects.FlyingNoStun)) {
