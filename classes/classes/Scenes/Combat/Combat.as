@@ -5581,7 +5581,7 @@ public function runAway(callHook:Boolean = true):void {
 		return;
 	}
 	//SUCCESSFUL FLEE
-	if (player.spe > rand(monster.spe + escapeMod)) {
+	if ((player.spe > rand(monster.spe + escapeMod)) || monster.hasPerk(PerkLib.AlwaysSuccesfullRunaway)) {
 		//Escape prison
 		if (prison.inPrison) {
 			outputText("You quickly bolt out of the main entrance and after hiding for a good while, there's no sign of [monster a] [monster name]. You sneak back inside to retrieve whatever you had before you were captured. ");
@@ -5704,7 +5704,7 @@ public function greatDive():void {
 	}
 	doNext(combatMenu);
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-	fatigue(50, USEFATG_MAGIC);
+	fatigue(50, USEFATG_PHYSICAL);
 	var damage:Number = unarmedAttack();
 	damage += player.str;
 	damage += player.spe * 2;

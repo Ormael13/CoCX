@@ -292,7 +292,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}		
 		
 		//Tornado Strike
-		if (player.vouivreScore() >= 11) {
+		if (player.couatlScore() >= 11) {
 			bd = buttons.add("Tornado Strike", TornadoStrike).hint("Use wind to forcefully lift a foe in the air and deal damage.  \n\nWould go into cooldown after use for: 8 rounds");
 			bd.requireFatigue(physicalCost(60));
 			if (player.hasStatusEffect(StatusEffects.CooldownTornadoStrike)) {

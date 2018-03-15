@@ -123,11 +123,11 @@ package classes.Scenes.NPCs
 			if (HPRatio() < .2 && (mana >= spellCostHeal())) usingHealSpell();
 			else if (flags[kFLAGS.DIANA_LVL_UP] >= 5 && flags[kFLAGS.DIANA_LVL_UP] < 8) {
 				var choice3:Number = rand(6);
-				if (choice3 < 2) {
+				if (choice3 < 3) {
 					if ((soulforce >= soulskillCostManyBirds()) && rand(2) == 0) usingManyBirdsSoulskill();
 					else eAttack();
 				}
-				if (choice3 > 1 && choice3 < 5) {
+				if (choice3 > 2 && choice3 < 5) {
 					if (HPRatio() < .6 && rand(2) == 0 && (mana >= spellCostHeal())) usingHealSpell();
 					else if (HPRatio() < .6 && rand(2) == 0 && !hasStatusEffect(StatusEffects.MonsterRegen2) && (mana >= spellCostRegenerate())) usingRegenerateSpell();
 					else if (rand(2) == 0 && (mana < (this.maxMana() - 300))) usingARC();
@@ -140,11 +140,11 @@ package classes.Scenes.NPCs
 			}
 			else if (flags[kFLAGS.DIANA_LVL_UP] >= 2 && flags[kFLAGS.DIANA_LVL_UP] < 5) {
 				var choice2:Number = rand(6);
-				if (choice2 < 2) {
+				if (choice2 < 3) {
 					if ((soulforce >= soulskillCostManyBirds()) && rand(2) == 0) usingManyBirdsSoulskill();
 					else eAttack();
 				}
-				if (choice2 > 1 && choice2 < 5) {
+				if (choice2 > 2 && choice2 < 5) {
 					if (HPRatio() < .6 && rand(2) == 0 && (mana >= spellCostHeal())) usingHealSpell();
 					else if (rand(2) == 0 && (mana < (this.maxMana() - 80))) usingARC();
 					else eAttack();
@@ -156,8 +156,8 @@ package classes.Scenes.NPCs
 			}
 			else {
 				var choice1:Number = rand(6);
-				if (choice1 == 0) eAttack();
-				if (choice1 > 0 && choice1 < 5) {
+				if (choice1 < 3) eAttack();
+				if (choice1 > 2 && choice1 < 5) {
 					if (HPRatio() < .5 && rand(2) == 0 && (mana >= spellCostHeal())) usingHealSpell();
 					else if (rand(2) == 0 && (mana < (this.maxMana() - 40))) usingARC();
 					else eAttack();
@@ -332,7 +332,7 @@ package classes.Scenes.NPCs
 				this.butt.type = Butt.RATING_LARGE;
 				this.hairLength = 12;
 			}
-			if (flags[kFLAGS.DIANA_LVL_UP] >= 1 && flags[kFLAGS.DIANA_FOLLOWER] == 3) {
+			if (flags[kFLAGS.DIANA_LVL_UP] >= 0 && flags[kFLAGS.DIANA_FOLLOWER] == 3) {
 				this.a = "the ";
 				this.short = "horse morph";
 				this.imageName = "whitemare";
@@ -395,6 +395,7 @@ package classes.Scenes.NPCs
 			this.faceType = Face.HORSE;
 			this.tailType = Tail.HORSE;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.AlwaysSuccesfullRunaway, 0, 0, 0, 0);
 			this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 1) {
 				this.createPerk(PerkLib.JobHealer, 0, 0, 0, 0);

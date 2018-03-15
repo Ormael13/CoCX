@@ -210,7 +210,6 @@ use namespace CoC;
 			addButton(9, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
 			addButton(10, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
 			addButton(11, "Celess", celessIntroForced).hint("Due to hard time getting her intro here it's.");
-			addButton(12, "DERP", AddEnigmanium).hint("DERP.");
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] > 8) addButton(12, "MoonCycleAdj", moonCycleAdjusting).hint("Adjusting wild moon cycle to pokeba... norm.");
 			if (player.hasPerk(PerkLib.Lycanthropy) && player.skin.coverage != Skin.COVERAGE_LOW) addButton(13, "WWFurFix", fixingWerewolfFur).hint("Fixing full to partial werewolf fur.");
 			addButton(14, "Back", accessSoulforceMenu);
@@ -715,6 +714,7 @@ public function FightNightmare():void {
 			addButton(4, "SkybornSeed", AddSkybornSeed).hint("Add 1 Skyborn Seed.");
 			//addButton(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
 			addButton(5, "Naga Oils", AddGorgonOil).hint("Add 1 vial of Gorgon, Vouivre and Couatl Oil.");
+			addButton(6, "Enigmanium", AddEnigmanium).hint("Add 1 Enigmanium.");
 			//addButton(7, "V.D.ARC", AddVeryDilutedArcaneRegenConcotion).hint("Add 1 very diluted Arcane Regen Concotion.");
 			//addButton(8, "D.ARC", AddDilutedArcaneRegenConcotion).hint("Add 1 diluted Arcane Regen Concotion.");
 			addButton(9, "SBMan", AddSoulBlastManual).hint("Add 1 Soul Blast manual.");
@@ -1244,7 +1244,7 @@ public function FightNightmare():void {
 
 		public function AddEnigmanium():void {
 			outputText("\n\n<b>(Gained 1 Enigmanium!)</b>\n\n");
-			inventory.takeItem(consumables.ENIGMANIUM, EquipmentMenu);
+			inventory.takeItem(consumables.ENIGMANIUM, NonEquipmentMenu);
 		}
 
 		public function AddLightAyoArmor():void {

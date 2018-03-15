@@ -448,7 +448,7 @@ public class Enigmanium extends Consumable{
 			}
 			
 			//DA Mouth
-			if (player.faceType != Face.CAT_CANINES) {
+			if (player.faceType != Face.CAT_CANINES && player.ears.type == Ears.LION && rand(4) == 0 && changes < changeLimit) {
 				if (player.faceType != Face.HUMAN) { outputText("\n\nYour face suddenly mold back into its former human shape. However you feel your canine changing elongating into sharp dagger-like teeth capable of causing severe injuries. ");
 				}		
 				else { outputText("\n\nYou feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. You purr at the change it gives you a cute look. <b>Your mouth is now filled with Cat-like canines.</b>");

@@ -92,6 +92,7 @@ public function wonOverDiana():void {
 	clearOutput();
 	outputText("The horse morph kneels down defeated. Seems you can do whatever you want with her now. So, what will it be?\n\n");
 	menu();
+	levelingHerself();
 	if (player.lust >= 33) addButton(1, "Rape", wonOverDianaSex);
 	addButton(0, "Spare", wonOverDianaSpare);
 }
@@ -456,6 +457,16 @@ public function wonOverDianaSpare():void {
 		outputText("You tell the girl you will let her go. You have no business with her.\n\n");
 		outputText("At first she looks at you in confusion, then nods before running off in the forest. Maybe next time the two of you could meet on more friendly dispositions.\n\n");
 	}
+	cleanupAfterCombat();
+	return;
+}
+public function lostToDiana():void {
+	clearOutput();
+	outputText("The horse morph kicks you in the face, knocking you unconscious. When you wake up, you realise she got away with some of your gems. Guess that's not the worst thing that could happen, right?\n\n");
+	cleanupAfterCombat();
+	return;
+}
+private function levelingHerself():void {
 	flags[kFLAGS.DIANA_DEFEATS_COUNTER]++;
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 1 && flags[kFLAGS.DIANA_LVL_UP] == 0) {
 		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 18);
@@ -506,14 +517,6 @@ public function wonOverDianaSpare():void {
 		flags[kFLAGS.DIANA_LVL_UP] = 8;
 	}
 	dianaAffection(5);
-	cleanupAfterCombat();
-	return;
-}
-public function lostToDiana():void {
-	clearOutput();
-	outputText("The horse morph kicks you in the face, knocking you unconscious. When you wake up, you realise she got away with some of your gems. Guess that's not the worst thing that could happen, right?\n\n");
-	cleanupAfterCombat();
-	return;
 }
 public function beMyStallion():void {
 	clearOutput();
