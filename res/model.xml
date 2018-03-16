@@ -344,7 +344,7 @@
         <cell rect="162,109,50,62" name="legs/bee" dx="71" dy="115"/>
         <cell rect="214,191,59,45" name="tail/bee_abdomen" dx="96" dy="80"/>
         <cell rect="274,191,59,45" name="tail/spider" dx="90" dy="80"/>
-        <cell rect="164,199,43,25" name="antennae.type/bee" dx="68" dy="22"/>
+        <cell rect="164,199,43,25" name="antennae/bee" dx="68" dy="22"/>
         <cell rect="4,344,89,54" name="wings/bee" dx="50" dy="69"/>
     </spritemap>
     <spritemap file="hinezumi.png">
@@ -474,13 +474,13 @@
         <switch value="antennae.type">
             <case value="Antennae.NONE"></case>
             <case value="Antennae.MANTIS">
-                <show part="antennae.type/bee"/>
+                <show part="antennae/bee"/>
             </case>
             <case value="Antennae.BEE">
-                <show part="antennae.type/bee"/>
+                <show part="antennae/bee"/>
             </case>
             <default>
-                <show part="antennae.type/bee"/>
+                <show part="antennae/bee"/>
             </default>
         </switch>
 
