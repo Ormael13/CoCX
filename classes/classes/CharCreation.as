@@ -383,13 +383,6 @@ import coc.view.MainView;
 					newFlags[flag] = flags[flag];
 				}
 			}
-			/*
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0) {
-				var newGamePlusLevel:int = flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				var gameMode:Number = flags[kFLAGS.HUNGER_ENABLED];
-				var hardcoreMode:int = flags[kFLAGS.HARDCORE_MODE];
-				var hardcoreSlot:String = flags[kFLAGS.HARDCORE_SLOT];
-			}*/
 			//Clear plot storage array!
 			CoC.instance.flags = new DefaultDict();
 			var countersStorage:CountersStorage = kCOUNTERS.create();
@@ -398,12 +391,6 @@ import coc.view.MainView;
 			CoC.instance.saves.loadPermObject();
 			//Carry over data if new game plus.
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0) CoC.instance.flags = newFlags;
-			/*if (newGamePlusLevel > 0) {
-				flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = newGamePlusLevel;
-				flags[kFLAGS.HUNGER_ENABLED] = gameMode;
-				flags[kFLAGS.HARDCORE_MODE] = hardcoreMode;
-				flags[kFLAGS.HARDCORE_SLOT] = hardcoreSlot;
-			}*/
 			//Set that jojo debug doesn't need to run
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02999] = 3;
 			//Time reset
