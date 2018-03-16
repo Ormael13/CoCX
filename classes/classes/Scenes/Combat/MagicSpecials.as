@@ -2504,7 +2504,24 @@ public class MagicSpecials extends BaseCombatContent {
 	public function CursedRiddle():void {
 		clearOutput();
 		player.createStatusEffect(StatusEffects.CooldownCursedRiddle, 0, 0, 0, 0);
-		outputText("You stop fighting for a second and speak aloud a magical riddle. " + monster.a + monster.short + " gives you a troubled look, everyone knows of the terrifying power of a sphinx riddle used as a curse. You give " + monster.a + monster.short + " some time crossing your forepaws in anticipation. ");
+		outputText("You stop fighting for a second and speak aloud a magical riddle.\n\n");
+		var chosen:String = randomChoice(
+		"\"<i>If you speak my name, you destroy me. Who am I?</i>\"\n\n",
+		"\"<i>It belongs to me, but both my friends and enemies use it more than me. What is it?</i>\"\n\n",
+		"\"<i>What is the part of the bird that is not in the sky, which can swim in the ocean and always stay dry.</i>\"\n\n",
+		"\"<i>What comes once in a minute, twice in a moment, but never in a thousand years?</i>\"\n\n",
+		"\"<i>The more you take, the more you leave behind. What am I?</i>\"\n\n",
+		"\"<i>I reach for the sky, but clutch to the ground; sometimes I leave, but I am always around. What am I?</i>\"\n\n",
+		"\"<i>I am a path situated between high natural masses. Remove my first letter & you have a path situated between man-made masses. What am I?</i>\"\n\n",
+		"\"<i>I am two-faced but bear only one, I have no legs but travel widely. Men spill much blood over me, kings leave there imprint on me. I have greatest power when given away, yet lust for me keeps me locked away. What am I?</i>\"\n\n",
+		"\"<i>I always follow you around, everywhere you go at night. I look very bright to people, but I can make the sun dark. I can be in many different forms and shapes. What am I?</i>\"\n\n",
+		"\"<i>I have hundreds of legs but I can only lean. You make me feel dirty so you feel clean. What am I?</i>\"\n\n",
+		"\"<i>My tail is long, my coat is brown, I like the country, I like the town. I can live in a house or live in a shed, and I come out to play when you are in bed. What am I?</i>\"\n\n",
+		"\"<i>I welcome the day with a show of light, I steathily came here in the night. I bathe the earthy stuff at dawn, But by the noon, alas! I'm gone. What am I?</i>\"\n\n",
+		"\"<i>Which creature in the morning goes on four feet, at noon on two, and in the evening upon three?</i>\"\n\n"
+		);
+		outputText(chosen);
+		outputText("Startled by your query, " + monster.a + monster.short + " gives you a troubled look, everyone knows of the terrifying power of a sphinx riddle used as a curse. You give " + monster.a + monster.short + " some time crossing your forepaws in anticipation. ");
 
 		//odds of success
 		var baseInteReq:Number = 200
