@@ -59,7 +59,7 @@
                 part CDATA #REQUIRED>
         ]>
 <!--suppress EqualityComparisonWithCoercionJS, CheckTagEmptyBody -->
-<model name="demo" dir="./res/charview/" width="180" height="220" scale="1" originX="5" originY="10">
+<model name="demo" dir="./res/charview/" width="180" height="220" scale="1" originX="15" originY="10">
     <palette>
         <!--Colors common for skin/hair/fur/scales/... go here. Can be overriden later-->
         <common>
@@ -318,6 +318,8 @@
         <cell rect="50,335,92,62" name="horns_bg/kraken" dx="47" dy="16"/>
         <cell rect="1,272,35,56" name="arms_bg/kraken" dx="64" dy="65"/>
         <cell rect="38,272,36,56" name="arms/kraken" dx="90" dy="66"/>
+        <cell rect="211,63,56,34" name="horns_bg/demon" dx="65" dy="23"/>
+        <cell rect="270,11,125,88" name="legs_bg/cattaur" dx="72" dy="101"/>
     </spritemap>
     <spritemap file="chitin.png">
         <cell rect="1,23,38,22" name="breasts/Dchitin" dx="76" dy="70"/>
@@ -487,7 +489,7 @@
         <switch value="horns.type">
             <case value="Horns.NONE"></case>
             <case value="Horns.DEMON">
-                <show part="horns/2small"/>
+                <show part="horns_bg/demon"/>
             </case>
             <case value="Horns.COW_MINOTAUR">
                 <switch>
@@ -901,7 +903,7 @@
             <case values="LowerBody.HOOFED,LowerBody.PONY,LowerBody.CLOVEN_HOOFED">
                 <hide part="legs/*"/>
                 <switch>
-                    <case value="legCount==4">
+                    <case test="legCount==4">
                         <show part="legs_bg/centaur"/>
                     </case>
                     <default>
@@ -909,7 +911,18 @@
                     </default>
                 </switch>
             </case>
-            <case values="LowerBody.DOG,LowerBody.CAT,LowerBody.BUNNY,LowerBody.KANGAROO,LowerBody.WOLF,LowerBody.FOX,LowerBody.RACCOON,LowerBody.FERRET">
+            <case value="LowerBody.CAT">
+                <hide part="legs/*"/>
+                <switch>
+                    <case test="legCount==4">
+                        <show part="legs_bg/cattaur"/>
+                    </case>
+                    <default>
+                        <show part="legs/furpaws"/>
+                    </default>
+                </switch>
+            </case>
+            <case values="LowerBody.DOG,LowerBody.BUNNY,LowerBody.KANGAROO,LowerBody.WOLF,LowerBody.FOX,LowerBody.RACCOON,LowerBody.FERRET">
                 <hide part="legs/*"/>
                 <show part="legs/furpaws"/>
             </case>
