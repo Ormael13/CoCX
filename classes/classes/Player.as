@@ -2258,7 +2258,7 @@ use namespace CoC;
 		public function internalChimeraRating():Number {
 			Begin("Player","racialScore","internalChimeraRating");
 			var internalChimeraRatingCounter:Number = 0;
-			if (findPerk(PerkLib.BlackHeart) >= 0)
+			if (findPerk(PerkLib.BlackHeart) >= 0 || findPerk(PerkLib.DarkCharm) >= 0)
 				internalChimeraRatingCounter++;
 			if (findPerk(PerkLib.CatlikeNimbleness) >= 0)
 				internalChimeraRatingCounter++;
