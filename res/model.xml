@@ -85,7 +85,7 @@
             <color name="dusky">#f000f0</color>
             <color name="ebony">#3d3529</color>
             <color name="emerald">#35c073</color>
-            <color name="fair">#f7976e</color>
+            <color name="fair">#efcbbd</color>
             <color name="golden">#bb7c35</color>
             <color name="gray">#789097</color>
             <color name="green">#69ce76</color>
@@ -277,6 +277,7 @@
         <cell rect="1,181,23,11" name="breasts/0" dx="82" dy="77"/>
         <cell rect="50,181,23,11" name="breasts/B" dx="82" dy="76"/>
         <cell rect="1,213,119,68" name="tail/demon" dx="39" dy="91"/>
+        <cell rect="1,282,119,68" name="tail/cow" dx="39" dy="91"/>
         <cell rect="204,196,76,104" name="legs/harpy" dx="59" dy="91"/>
         <cell rect="283,129,181,137" name="wings/feather_large" dx="4" dy="14"/>
         <cell rect="364,30,75,88" name="hair/feather" dx="57" dy="2"/>
@@ -294,6 +295,8 @@
         <cell rect="471,325,50,74" name="legs/devil" dx="72" dy="107"/>
         <cell rect="471,193,45,38" name="horns_bg/devil" dx="62" dy="18"/>
         <cell rect="517,193,44,38" name="horns/devil" dx="85" dy="17"/>
+        <cell rect="247,329,57,44" name="horns_bg/cow" dx="67" dy="19"/>
+        <cell rect="305,329,57,44" name="horns/cow" dx="67" dy="19"/>
         <cell rect="470,129,43,58" name="tail/goat" dx="83" dy="79"/>
     </spritemap>
     <spritemap file="beasts.png">
@@ -367,6 +370,8 @@
         <cell rect="118,9,53,119" name="wings_bg/mantibig" dx="35" dy="36"/>
         <cell rect="174,9,53,119" name="wings/mantibig" dx="102" dy="35"/>
         <cell rect="117,140,54,31" name="neck/manticore" dx="67" dy="46"/>
+        <cell rect="118,179,92,137" name="wings_bg/fairy" dx="5" dy="5"/>
+        <cell rect="211,179,88,137" name="wings/fairy" dx="97" dy="5"/>
     </spritemap>
     <spritemap file="orca.png">
         <cell rect="1,2,105,43" name="ears/orca" dx="43" dy="34"/>
@@ -491,23 +496,8 @@
                 <show part="horns_bg/demon"/>
             </case>
             <case value="Horns.COW_MINOTAUR">
-                <switch>
-                    <case test="horns lt 3"><!--Two tiny horns-like nubs...-->
-                        <show part="horns/2small"/>
-                    </case>
-                    <case test="horns lt 6"><!--Two moderately sized horns...-->
-                        <show part="horns/2small"/>
-                    </case>
-                    <case test="horns lt 12"><!--Two large horns...-->
-                        <show part="horns/2large"/>
-                    </case>
-                    <case test="horns lt 20"><!--Two very large and dangerous looking horns...-->
-                        <show part="horns/2large"/>
-                    </case>
-                    <default><!--Two huge horns...-->
-                        <show part="horns/2large"/>
-                    </default>
-                </switch>
+                <show part="horns_bg/cow"/>
+                <show part="horns/cow"/>
             </case>
             <case value="Horns.GOAT">
                 <show part="horns/devil"/>
@@ -529,6 +519,7 @@
             </case>
             <case values="Ears.HORSE,Ears.COW,Ears.KANGAROO,Ears.RACOON,Ears.FERRET,Ears.PIG,Ears.RHINO,Ears.ECHIDNA,Ears.DEER"><!--TODO-->
                 <show part="ears/goat"/>
+                <show part="ears_bg/goat"/>
             </case>
             <case values="Ears.DOG,Ears.WOLF">
                 <show part="ears/wolf"/>
@@ -545,10 +536,8 @@
                 <show part="ears/wolf"/>
             </case>
             <case values="Ears.FOX,Ears.BAT">
-                <show part="ears/foxL"/>
-                <show part="ears/foxR"/>
-                <show part="ears_bg/foxL"/>
-                <show part="ears_bg/foxR"/>
+                <show part="ears/fox"/>
+                <show part="ears_bg/fox"/>
             </case>
             <case values="Ears.MOUSE">
                 <show part="ears/mouse"/>
@@ -1020,14 +1009,21 @@
                 <show part="wings/mantibig"/>
                 <show part="wings_bg/mantibig"/>
             </case>
+            <case values="Wings.FEY_DRAGON_WINGS">
+                <show part="wings/fairy"/>
+                <show part="wings_bg/fairy"/>
+            </case>
             <default>
             </default>
         </switch>
 
         <switch value="tailType">
             <case value="Tail.NONE"></case>
-            <case values="Tail.HORSE,Tail.DOG,Tail.COW,Tail.WOLF"><!--TODO -->
+            <case values="Tail.HORSE,Tail.DOG,Tail.WOLF"><!--TODO -->
                 <show part="tail/goat"/>
+            </case>
+            <case values="Tail.HORSE,Tail.DOG,Tail.COW,Tail.WOLF">
+                <show part="tail/cow"/>
             </case>
             <case value="Tail.DEMONIC">
                 <show part="tail/demon"/>

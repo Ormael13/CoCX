@@ -1290,6 +1290,12 @@ public class DebugMenu extends BaseContent
 			[Wings.PLANT, "21 PLANT"],
 			[Wings.MANTICORE_LIKE_SMALL, "22 MANTICORE_LIKE_SMALL"],
 			[Wings.MANTICORE_LIKE_LARGE, "23 MANTICORE_LIKE_LARGE"],
+			[Wings.BAT_ARM, "24 BAT_ARM"],
+			[Wings.VAMPIRE, "25 VAMPIRE"],
+			[Wings.FEY_DRAGON_WINGS, "26 FEY_DRAGON_WINGS"],
+			[Wings.FEATHERED_AVIAN, "27 FEATHERED_AVIAN"],
+			[Wings.NIGHTMARE, "28 NIGHTMARE"],
+			[Wings.FEATHERED_SPHINX, "29 FEATHERED_SPHINX"],
 		];
 		private static const WING_DESC_CONSTANTS:Array = [
 			"(none)","non-existant","tiny hidden","huge","small",
