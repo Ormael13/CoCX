@@ -57,7 +57,7 @@ import classes.BodyParts.Wings;
 				default:
 					outputText("\n\nYour [skin noadj] itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin.  <b>Your skin is once again normal!</b>");
 			}
-			player.skin.setBaseOnly({type: Skin.PLAIN});
+			player.skin.setBaseOnly({type: Skin.PLAIN,adj:""});
 			changes++;
 		}
 
