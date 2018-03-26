@@ -272,7 +272,7 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats += 30;
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats += 40;
 			player.createPerk(PerkLib.Lycanthropy,bonusStats,0,0,0);
-			player.dynStats("str", (bonusStats * player.newGamePlusMod()), "tou", (bonusStats * player.newGamePlusMod()), "spe", (bonusStats * player.newGamePlusMod()), "cor", 20);
+			player.dynStats("str", (bonusStats * (player.newGamePlusMod() + 1)), "tou", (bonusStats * (player.newGamePlusMod() + 1)), "spe", (bonusStats * (player.newGamePlusMod() + 1)), "cor", 20);
 			statScreenRefresh();
 			outputText("Barely satiated your eyes now focus back on Luna, lust overwhelming your cursed body. You must have her... NOW!\n\n");
 			doNext(sexMenuDominateHer);
@@ -550,7 +550,7 @@ package classes.Scenes.NPCs
 				}
 			}
 			player.createPerk(PerkLib.Lycanthropy,40,0,0,0);
-			player.dynStats("str", (40 * player.newGamePlusMod()), "tou", (40 * player.newGamePlusMod()), "spe", (40 * player.newGamePlusMod()), "cor", 20);
+			player.dynStats("str", (40 * (player.newGamePlusMod() + 1)), "tou", (40 * (player.newGamePlusMod() + 1)), "spe", (40 * (player.newGamePlusMod() + 1)), "cor", 20);
 			statScreenRefresh();
 			outputText("Barely satiated your eyes now focus back on Luna, lust overwhelming your cursed body. You must have her... NOW!\n\n");
 			monster.createPerk(PerkLib.NoGemsLost, 0, 0, 0, 0);
