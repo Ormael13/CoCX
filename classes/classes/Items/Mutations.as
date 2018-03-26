@@ -4366,12 +4366,8 @@ public final class Mutations extends MutationsHelper
 				outputText(player.skinTone + " colored.</b>");
 			}
 			//Change skin to normal
-			if (player.hasCoat() && player.skin.base.isAny(Skin.PLAIN, Skin.STONE) && rand(4) == 0 && changes < changeLimit) {
-				outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your " + player.skinFurScales() + " ");
-				if (player.hasScales()) outputText("are");
-				else outputText("is");
-				outputText(" falling to the ground, revealing flawless skin below.  <b>You now have normal skin.</b>");
-				player.skin.setBaseOnly({type:Skin.PLAIN});
+			if (!player.hasPlainSkinOnly() && rand(4) == 0 && changes < changeLimit) {
+				humanizeSkin();
 				changes++;
 			}
 			//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
