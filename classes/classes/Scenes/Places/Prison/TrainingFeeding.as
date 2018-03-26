@@ -387,7 +387,7 @@ package classes.Scenes.Places.Prison
 						break;
 					case 4:
 					default:
-						outputText("\"<i>Can you last any longer, slave? I don't think you can. Your knees are shaking. You're screaming loud enough to wake the dead. ");
+						outputText("\"<i>Can you last any longer, slave? I don't think you can. Your knees are shaking. You're screaming loud enough to wake the dead.\"</i> ");
 						if(player.hasVagina())
 						{
 							outputText("Your gaping pussy has lubricated me well enough to comfortably fuck an entire harem of dry, virgin assholes.");

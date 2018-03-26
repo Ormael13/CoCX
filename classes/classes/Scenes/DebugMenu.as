@@ -627,7 +627,7 @@ public class DebugMenu extends BaseContent
 			}
 			displayHeader("Color picker");
 			outputText('\nCurrent color:');
-			outputText("\n<b>H</b>ue:\t\t\t"+h+' / 360\t<i>(0: red, 120: green, 240: blue)');
+			outputText("\n<b>H</b>ue:\t\t\t"+h+' / 360\t(0: red, 120: green, 240: blue)');
 			outputText("\n<b>S</b>aturation:\t\t"+s+' / 100\t(0: greyscale, 100: bright color)');
 			outputText("\n<b>L</b>uminosity:\t"+l+' / 100\t(0: black, 50: bright color, 100: white)');
 			outputText('\n\nCurrent mode: <b>'+pickerMode+' color</b>.');
@@ -1290,6 +1290,12 @@ public class DebugMenu extends BaseContent
 			[Wings.PLANT, "21 PLANT"],
 			[Wings.MANTICORE_LIKE_SMALL, "22 MANTICORE_LIKE_SMALL"],
 			[Wings.MANTICORE_LIKE_LARGE, "23 MANTICORE_LIKE_LARGE"],
+			[Wings.BAT_ARM, "24 BAT_ARM"],
+			[Wings.VAMPIRE, "25 VAMPIRE"],
+			[Wings.FEY_DRAGON_WINGS, "26 FEY_DRAGON_WINGS"],
+			[Wings.FEATHERED_AVIAN, "27 FEATHERED_AVIAN"],
+			[Wings.NIGHTMARE, "28 NIGHTMARE"],
+			[Wings.FEATHERED_SPHINX, "29 FEATHERED_SPHINX"],
 		];
 		private static const WING_DESC_CONSTANTS:Array = [
 			"(none)","non-existant","tiny hidden","huge","small",

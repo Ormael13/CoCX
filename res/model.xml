@@ -59,7 +59,7 @@
                 part CDATA #REQUIRED>
         ]>
 <!--suppress EqualityComparisonWithCoercionJS, CheckTagEmptyBody -->
-<model name="demo" dir="./res/charview/" width="180" height="220" scale="1" originX="5" originY="10">
+<model name="demo" dir="./res/charview/" width="180" height="220" scale="1" originX="15" originY="10">
     <palette>
         <!--Colors common for skin/hair/fur/scales/... go here. Can be overriden later-->
         <common>
@@ -85,7 +85,7 @@
             <color name="dusky">#f000f0</color>
             <color name="ebony">#3d3529</color>
             <color name="emerald">#35c073</color>
-            <color name="fair">#f7976e</color>
+            <color name="fair">#efcbbd</color>
             <color name="golden">#bb7c35</color>
             <color name="gray">#789097</color>
             <color name="green">#69ce76</color>
@@ -167,18 +167,17 @@
             <color name="raven">#101728</color>
             <color name="snowy">#dddfe4</color>
         </property>
-        <property name="fur" src="skin.coat.color" default="#ffffff">
-        </property>
-        <property name="scales" src="skin.coat.color" default="#ffffff">
-        </property>
-        <property name="chitin" src="skin.coat.color" default="#ffffff">
-        </property>
-        <property name="chitin2" src="skin.coat.color" default="#ffffff">
-        </property>
+        <property name="hair2" src="hairColor" default="#ffffff"></property>
+        <property name="fur" src="skin.coat.color" default="#ffffff"></property>
+        <property name="fur2" src="skin.coat.color2" default="#ffffff"></property>
+        <property name="scales" src="skin.coat.color" default="#ffffff"></property>
+        <property name="scales2" src="skin.coat.color2" default="#ffffff"></property>
+        <property name="chitin" src="skin.coat.color" default="#ffffff"></property>
+        <property name="chitin2" src="skin.coat.color2" default="#ffffff"></property>
         <property name="skin" src="skinTone" default="#ffffff">
             <color name="pale">#f2e8e3</color>
         </property>
-        <property name="skin2" src="skinTone" default="#ffffff">
+        <property name="skin2" src="skin.base.color2" default="#ffffff">
             <color name="pale">#f2e8e3</color>
         </property>
         <property name="iris" src="eyes.colour" default="#0000ff">
@@ -247,11 +246,11 @@
     </spritesheet>-->
 
     <spritemap file="alraune.png">
-        <cell rect="1,1,59,20" name="horns_bg/orchid" dx="67" dy="12"/>
-        <cell rect="1,23,59,20" name="horns/orchid" dx="68" dy="16"/>
+        <cell rect="1,1,59,20" name="horns_bg/orchid" dx="67" dy="26"/>
+        <cell rect="1,23,59,20" name="horns/orchid" dx="68" dy="26"/>
         <cell rect="63,1,37,51" name="arms_bg/alraune" dx="60" dy="68"/>
         <cell rect="101,1,35,51" name="arms/alraune" dx="90" dy="68"/>
-        <cell rect="2,55,128,104" name="legs_bg/alraune" dx="31" dy="82"/>
+        <cell rect="2,55,128,104" name="legs_bg/alraune" dx="24" dy="82"/>
         <cell rect="2,161,149,124" name="legs_bg/liliraune" dx="-3" dy="58"/>
     </spritemap>
     <spritemap file="basic.png">
@@ -278,11 +277,12 @@
         <cell rect="1,181,23,11" name="breasts/0" dx="82" dy="77"/>
         <cell rect="50,181,23,11" name="breasts/B" dx="82" dy="76"/>
         <cell rect="1,213,119,68" name="tail/demon" dx="39" dy="91"/>
+        <cell rect="1,282,119,68" name="tail/cow" dx="39" dy="91"/>
         <cell rect="204,196,76,104" name="legs/harpy" dx="59" dy="91"/>
         <cell rect="283,129,181,137" name="wings/feather_large" dx="4" dy="14"/>
         <cell rect="364,30,75,88" name="hair/feather" dx="57" dy="2"/>
         <cell rect="440,30,75,88" name="hair_bg/feather" dx="59" dy="-1"/>
-        <cell rect="364,4,19,22" name="ears_bg/elfin" dx="66" dy="40"/>
+        <cell rect="364,4,19,22" name="ears_bg/elfin" dx="70" dy="44"/>
         <cell rect="384,4,29,22" name="ears/elfin" dx="94" dy="44"/>
         <cell rect="415,4,19,22" name="ears_bg/goat" dx="66" dy="44"/>
         <cell rect="435,4,29,22" name="ears/goat" dx="99" dy="44"/>
@@ -295,6 +295,8 @@
         <cell rect="471,325,50,74" name="legs/devil" dx="72" dy="107"/>
         <cell rect="471,193,45,38" name="horns_bg/devil" dx="62" dy="18"/>
         <cell rect="517,193,44,38" name="horns/devil" dx="85" dy="17"/>
+        <cell rect="247,329,57,44" name="horns_bg/cow" dx="67" dy="19"/>
+        <cell rect="305,329,57,44" name="horns/cow" dx="67" dy="19"/>
         <cell rect="470,129,43,58" name="tail/goat" dx="83" dy="79"/>
     </spritemap>
     <spritemap file="beasts.png">
@@ -304,7 +306,7 @@
         <cell rect="36,50,50,53" name="tail/fox2" dx="96" dy="66"/>
         <cell rect="95,1,48,51" name="tail/cat" dx="88" dy="71"/>
         <cell rect="95,54,48,51" name="tail/cat2" dx="91" dy="68"/>
-        <cell rect="146,1,47,29" name="ears_bg/fox" dx="68" dy="13"/>
+        <cell rect="146,1,47,29" name="ears_bg/fox" dx="70" dy="22"/>
         <cell rect="146,32,47,29" name="ears/fox" dx="71" dy="22"/>
         <cell rect="146,64,62,35" name="ears/wolf" dx="63" dy="18"/>
         <cell rect="146,102,56,23" name="ears/cat" dx="67" dy="27"/>
@@ -318,6 +320,8 @@
         <cell rect="50,335,92,62" name="horns_bg/kraken" dx="47" dy="16"/>
         <cell rect="1,272,35,56" name="arms_bg/kraken" dx="64" dy="65"/>
         <cell rect="38,272,36,56" name="arms/kraken" dx="90" dy="66"/>
+        <cell rect="211,63,56,34" name="horns_bg/demon" dx="65" dy="23"/>
+        <cell rect="270,11,125,88" name="legs_bg/cattaur" dx="71" dy="101"/>
     </spritemap>
     <spritemap file="chitin.png">
         <cell rect="1,23,38,22" name="breasts/Dchitin" dx="76" dy="70"/>
@@ -344,7 +348,7 @@
         <cell rect="162,109,50,62" name="legs/bee" dx="71" dy="115"/>
         <cell rect="214,191,59,45" name="tail/bee_abdomen" dx="96" dy="80"/>
         <cell rect="274,191,59,45" name="tail/spider" dx="90" dy="80"/>
-        <cell rect="164,199,43,25" name="antennae.type/bee" dx="68" dy="22"/>
+        <cell rect="164,199,43,25" name="antennae/bee" dx="68" dy="22"/>
         <cell rect="4,344,89,54" name="wings/bee" dx="50" dy="69"/>
     </spritemap>
     <spritemap file="hinezumi.png">
@@ -366,9 +370,11 @@
         <cell rect="118,9,53,119" name="wings_bg/mantibig" dx="35" dy="36"/>
         <cell rect="174,9,53,119" name="wings/mantibig" dx="102" dy="35"/>
         <cell rect="117,140,54,31" name="neck/manticore" dx="67" dy="46"/>
+        <cell rect="118,179,92,137" name="wings_bg/fairy" dx="5" dy="5"/>
+        <cell rect="211,179,88,137" name="wings/fairy" dx="97" dy="5"/>
     </spritemap>
     <spritemap file="orca.png">
-        <cell rect="1,2,105,43" name="ears/orca" dx="42" dy="34"/>
+        <cell rect="1,2,105,43" name="ears/orca" dx="43" dy="34"/>
         <cell rect="1,48,28,12" name="eyes/orca" dx="80" dy="48"/>
         <cell rect="1,63,39,44" name="head/orca" dx="76" dy="29"/>
         <cell rect="43,63,34,44" name="face/orca" dx="75" dy="30"/>
@@ -474,39 +480,24 @@
         <switch value="antennae.type">
             <case value="Antennae.NONE"></case>
             <case value="Antennae.MANTIS">
-                <show part="antennae.type/bee"/>
+                <show part="antennae/bee"/>
             </case>
             <case value="Antennae.BEE">
-                <show part="antennae.type/bee"/>
+                <show part="antennae/bee"/>
             </case>
             <default>
-                <show part="antennae.type/bee"/>
+                <show part="antennae/bee"/>
             </default>
         </switch>
 
         <switch value="horns.type">
             <case value="Horns.NONE"></case>
             <case value="Horns.DEMON">
-                <show part="horns/2small"/>
+                <show part="horns_bg/demon"/>
             </case>
             <case value="Horns.COW_MINOTAUR">
-                <switch>
-                    <case test="horns lt 3"><!--Two tiny horns-like nubs...-->
-                        <show part="horns/2small"/>
-                    </case>
-                    <case test="horns lt 6"><!--Two moderately sized horns...-->
-                        <show part="horns/2small"/>
-                    </case>
-                    <case test="horns lt 12"><!--Two large horns...-->
-                        <show part="horns/2large"/>
-                    </case>
-                    <case test="horns lt 20"><!--Two very large and dangerous looking horns...-->
-                        <show part="horns/2large"/>
-                    </case>
-                    <default><!--Two huge horns...-->
-                        <show part="horns/2large"/>
-                    </default>
-                </switch>
+                <show part="horns_bg/cow"/>
+                <show part="horns/cow"/>
             </case>
             <case value="Horns.GOAT">
                 <show part="horns/devil"/>
@@ -528,6 +519,7 @@
             </case>
             <case values="Ears.HORSE,Ears.COW,Ears.KANGAROO,Ears.RACOON,Ears.FERRET,Ears.PIG,Ears.RHINO,Ears.ECHIDNA,Ears.DEER"><!--TODO-->
                 <show part="ears/goat"/>
+                <show part="ears_bg/goat"/>
             </case>
             <case values="Ears.DOG,Ears.WOLF">
                 <show part="ears/wolf"/>
@@ -544,10 +536,8 @@
                 <show part="ears/wolf"/>
             </case>
             <case values="Ears.FOX,Ears.BAT">
-                <show part="ears/foxL"/>
-                <show part="ears/foxR"/>
-                <show part="ears_bg/foxL"/>
-                <show part="ears_bg/foxR"/>
+                <show part="ears/fox"/>
+                <show part="ears_bg/fox"/>
             </case>
             <case values="Ears.MOUSE">
                 <show part="ears/mouse"/>
@@ -901,7 +891,7 @@
             <case values="LowerBody.HOOFED,LowerBody.PONY,LowerBody.CLOVEN_HOOFED">
                 <hide part="legs/*"/>
                 <switch>
-                    <case value="legCount==4">
+                    <case test="legCount==4">
                         <show part="legs_bg/centaur"/>
                     </case>
                     <default>
@@ -909,7 +899,18 @@
                     </default>
                 </switch>
             </case>
-            <case values="LowerBody.DOG,LowerBody.CAT,LowerBody.BUNNY,LowerBody.KANGAROO,LowerBody.WOLF,LowerBody.FOX,LowerBody.RACCOON,LowerBody.FERRET">
+            <case value="LowerBody.CAT">
+                <hide part="legs/*"/>
+                <switch>
+                    <case test="legCount==4">
+                        <show part="legs_bg/cattaur"/>
+                    </case>
+                    <default>
+                        <show part="legs/furpaws"/>
+                    </default>
+                </switch>
+            </case>
+            <case values="LowerBody.DOG,LowerBody.BUNNY,LowerBody.KANGAROO,LowerBody.WOLF,LowerBody.FOX,LowerBody.RACCOON,LowerBody.FERRET">
                 <hide part="legs/*"/>
                 <show part="legs/furpaws"/>
             </case>
@@ -949,7 +950,6 @@
                 <hide part="legs/*"/>
                 <show part="legs/chitin"/>
             </case>
-            <!--<case value="LowerBody.SHARK">TODO </case>-->
             <!--<case value="LowerBody.GARGOYLE">TODO </case>-->
             <!--<case value="LowerBody.PLANT_HIGH_HEELS">TODO </case>-->
             <!--<case value="LowerBody.PLANT_ROOT_CLAWS">TODO </case>-->
@@ -969,7 +969,7 @@
                 </switch>
             </case>
             <!--<case value="LowerBody.YETI">TODO </case>-->
-            <case value="LowerBody.ORCA">
+            <case values="LowerBody.ORCA,LowerBody.SHARK">
                 <hide part="legs/*"/>
                 <show part="legs/orca"/>
             </case>
@@ -998,7 +998,7 @@
             </case>
             <!--TODO Wings.SHARK_FIN-->
             <case values="Wings.DRACONIC_SMALL,Wings.DRACONIC_LARGE,Wings.DRACONIC_HUGE"><!--TODO -->
-                <show part="wings/scales_left"/>
+                <show part="wings_bg/scales_left"/>
                 <show part="wings/scales_right"/>
             </case>
             <case values="Wings.GIANT_DRAGONFLY,Wings.MANTIS_LIKE_SMALL,Wings.MANTIS_LIKE_LARGE,Wings.MANTIS_LIKE_LARGE2"><!--TODO -->
@@ -1009,14 +1009,21 @@
                 <show part="wings/mantibig"/>
                 <show part="wings_bg/mantibig"/>
             </case>
+            <case values="Wings.FEY_DRAGON_WINGS">
+                <show part="wings/fairy"/>
+                <show part="wings_bg/fairy"/>
+            </case>
             <default>
             </default>
         </switch>
 
         <switch value="tailType">
             <case value="Tail.NONE"></case>
-            <case values="Tail.HORSE,Tail.DOG,Tail.COW,Tail.WOLF"><!--TODO -->
+            <case values="Tail.HORSE,Tail.DOG,Tail.WOLF"><!--TODO -->
                 <show part="tail/goat"/>
+            </case>
+            <case values="Tail.HORSE,Tail.DOG,Tail.COW,Tail.WOLF">
+                <show part="tail/cow"/>
             </case>
             <case value="Tail.DEMONIC">
                 <show part="tail/demon"/>
@@ -1026,9 +1033,6 @@
             </case>
             <case value="Tail.BEE_ABDOMEN">
                 <show part="tail/bee_abdomen"/>
-            </case>
-            <case value="Tail.SHARK">
-                <!--TODO -->
             </case>
             <case value="Tail.CAT">
                 <switch value="tailCount">
@@ -1119,7 +1123,7 @@
                 <!--TODO -->
                 <show part="tail/reptile"/>
             </case>
-            <case value="Tail.ORCA">
+            <case values="Tail.ORCA,Tail.SHARK">
                 <show part="tail/orca"/>
             </case>
             <case value="Tail.YGGDRASIL">

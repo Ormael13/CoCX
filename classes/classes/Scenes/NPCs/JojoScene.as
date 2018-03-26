@@ -2440,6 +2440,11 @@ public function refuseOfferOfHelp():void
 	jojoCampMenu();
 }
 
+public function jojoCamp2():void {
+	if ((flags[kFLAGS.LUNA_JEALOUSY] > 100 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 150 && rand(10) < 8)) mishapsLunaJojo();
+	else jojoCamp();
+}
+
 public function jojoCamp():void {
 	clearOutput();
 	jojoSprite();
@@ -3307,6 +3312,13 @@ private function suckJojosCock():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 
+public function mishapsLunaJojo():void {
+	clearOutput();
+	outputText("Jojo is looking at the ground in front of his training area in annoyance. Seems someone has drawn an ugly imp in the dirt using red paint and the imp happens to be jerking a 10 foot long cock. You spot Luna in the distance, cleaning the area with a smile. Surely it couldn’t have been her.\n\n");
+	if (player.hasStatusEffect(StatusEffects.CampLunaMishaps1)) player.addStatusValue(StatusEffects.CampLunaMishaps1, 2, 1);
+	else player.createStatusEffect(StatusEffects.CampLunaMishaps1, 0, 1, 0, 0);
+	doNext(playerMenu);
+}
 
 }
 }

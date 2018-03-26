@@ -260,7 +260,7 @@ import flash.utils.getQualifiedClassName;
 
 		protected override function maxLust_base():Number {
 			//Base lust
-			var temp:Number = 100 + this.bonusLust;
+			var temp:Number = 70 + this.bonusLust;
 			//Apply perks
 			if (findPerk(PerkLib.BasicSelfControl) >= 0) temp += 15;
 			if (findPerk(PerkLib.HalfStepToImprovedSelfControl) >= 0) temp += 25;
@@ -286,6 +286,11 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) temp += (75 * (1 + newGamePlusMod()));
 			//Apply NG+, NG++, NG+++, etc.
 			temp += this.bonusLust * newGamePlusMod();
+			temp += this.level * 2;
+			if (this.level >= 24) temp += (this.level - 23) * 3;
+			if (this.level >= 42) temp += (this.level - 42) * 5;
+			if (this.level >= 72) temp += (this.level - 72) * 10;
+			if (this.level >= 102) temp += (this.level - 102) * 20;
 			return temp;
 		}
 		
@@ -344,6 +349,21 @@ import flash.utils.getQualifiedClassName;
 				if (this.level >= 18) temp += 50;
 				if (this.level >= 20) temp += 50;
 				if (this.level >= 22) temp += 50;
+			}
+			if (findPerk(PerkLib.SoulSprite) >= 0) {
+				if (this.level >= 24) temp += 60;
+				if (this.level >= 26) temp += 60;
+				if (this.level >= 28) temp += 60;
+			}
+			if (findPerk(PerkLib.SoulScholar) >= 0) {
+				if (this.level >= 30) temp += 70;
+				if (this.level >= 32) temp += 70;
+				if (this.level >= 34) temp += 70;
+			}
+			if (findPerk(PerkLib.SoulElder) >= 0) {
+				if (this.level >= 36) temp += 80;
+				if (this.level >= 38) temp += 80;
+				if (this.level >= 40) temp += 80;
 			}
 			if (findPerk(PerkLib.InsightfulResourcesI) >= 0) temp += Math.round((this.wis*5) * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) temp *= 1.1;

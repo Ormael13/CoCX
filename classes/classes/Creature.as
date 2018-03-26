@@ -2293,6 +2293,11 @@ public class Creature extends Utils
 			return countCocksOfType(CockTypesEnum.AVIAN);
 		}
 
+		public function gryphonCocks():int { //How many gryphoncocks?
+			return countCocksOfType(CockTypesEnum.GRYPHON);
+		}
+
+
 		public function findFirstCockType(ctype:CockTypesEnum):Number
 		{
 			var index:Number = 0;
@@ -2446,6 +2451,7 @@ public class Creature extends Utils
 			Wings.VAMPIRE,
 			Wings.FEY_DRAGON_WINGS,
 			Wings.FEATHERED_AVIAN,
+			Wings.FEATHERED_SPHINX,
 			//WING_TYPE_IMP_LARGE,
 		];
 
@@ -2457,6 +2463,25 @@ public class Creature extends Utils
 				return false;
 			return canFlyWings.indexOf(wings.type) != -1;
 		}
+
+		public static const canPounceLeg:Array = [
+			LowerBody.CAT,
+			LowerBody.LION,
+			LowerBody.WOLF,
+		];
+
+		public static const canPounceArms:Array = [
+			Arms.CAT,
+			Arms.LION,
+			Arms.SPHINX,
+			Arms.WOLF,
+		];
+
+		public function canPounce():Boolean
+		{
+			return canPounceLeg.indexOf(lowerBody) != -1 && canPounceArms.indexOf(arms.type) != -1;
+		}
+
 
 		//PC can swim underwater?
 		public function canSwimUnderwater():Boolean
@@ -2965,34 +2990,38 @@ public class Creature extends Utils
 		public function canOvipositSpider():Boolean
 		{
 			return eggs() >= 10 && findPerk(PerkLib.SpiderOvipositor) >= 0 && isDrider() && tail.type == Tail.SPIDER_ADBOMEN;
-
 		}
 
 		public function canOvipositBee():Boolean
 		{
 			return eggs() >= 10 && findPerk(PerkLib.BeeOvipositor) >= 0 && tail.type == Tail.BEE_ABDOMEN;
+		}
 
+		public function canOvipositMantis():Boolean
+		{
+			return eggs() >= 10 && findPerk(PerkLib.MantisOvipositor) >= 0 && tail.type == Tail.MANTIS_ABDOMEN;
 		}
 
 		public function canOviposit():Boolean
 		{
-			return canOvipositSpider() || canOvipositBee();
-
+			return canOvipositSpider() || canOvipositBee() || canOvipositMantis();
 		}
 
 		public function eggs():int
 		{
-			if (findPerk(PerkLib.SpiderOvipositor) < 0 && findPerk(PerkLib.BeeOvipositor) < 0)
+			if (findPerk(PerkLib.SpiderOvipositor) < 0 && findPerk(PerkLib.BeeOvipositor) < 0 && findPerk(PerkLib.MantisOvipositor) < 0)
 				return -1;
 			else if (findPerk(PerkLib.SpiderOvipositor) >= 0)
 				return perkv1(PerkLib.SpiderOvipositor);
-			else
+			else if (findPerk(PerkLib.BeeOvipositor) >= 0)
 				return perkv1(PerkLib.BeeOvipositor);
+			else
+				return perkv1(PerkLib.MantisOvipositor);
 		}
 
 		public function addEggs(arg:int = 0):int
 		{
-			if (findPerk(PerkLib.SpiderOvipositor) < 0 && findPerk(PerkLib.BeeOvipositor) < 0)
+			if (findPerk(PerkLib.SpiderOvipositor) < 0 && findPerk(PerkLib.BeeOvipositor) < 0 && findPerk(PerkLib.MantisOvipositor) < 0)
 				return -1;
 			else {
 				if (findPerk(PerkLib.SpiderOvipositor) >= 0) {
@@ -3001,18 +3030,24 @@ public class Creature extends Utils
 						setPerkValue(PerkLib.SpiderOvipositor, 1, 50);
 					return perkv1(PerkLib.SpiderOvipositor);
 				}
-				else {
+				else if (findPerk(PerkLib.BeeOvipositor) >= 0) {
 					addPerkValue(PerkLib.BeeOvipositor, 1, arg);
 					if (eggs() > 50)
 						setPerkValue(PerkLib.BeeOvipositor, 1, 50);
 					return perkv1(PerkLib.BeeOvipositor);
+				}
+				else {
+					addPerkValue(PerkLib.MantisOvipositor, 1, arg);
+					if (eggs() > 50)
+						setPerkValue(PerkLib.MantisOvipositor, 1, 50);
+					return perkv1(PerkLib.MantisOvipositor);
 				}
 			}
 		}
 
 		public function dumpEggs():void
 		{
-			if (findPerk(PerkLib.SpiderOvipositor) < 0 && findPerk(PerkLib.BeeOvipositor) < 0)
+			if (findPerk(PerkLib.SpiderOvipositor) < 0 && findPerk(PerkLib.BeeOvipositor) < 0 && findPerk(PerkLib.MantisOvipositor) < 0)
 				return;
 			setEggs(0);
 			//Sets fertile eggs = regular eggs (which are 0)
@@ -3021,7 +3056,7 @@ public class Creature extends Utils
 
 		public function setEggs(arg:int = 0):int
 		{
-			if (findPerk(PerkLib.SpiderOvipositor) < 0 && findPerk(PerkLib.BeeOvipositor) < 0)
+			if (findPerk(PerkLib.SpiderOvipositor) < 0 && findPerk(PerkLib.BeeOvipositor) < 0 && findPerk(PerkLib.MantisOvipositor) < 0)
 				return -1;
 			else {
 				if (findPerk(PerkLib.SpiderOvipositor) >= 0) {
@@ -3030,33 +3065,43 @@ public class Creature extends Utils
 						setPerkValue(PerkLib.SpiderOvipositor, 1, 50);
 					return perkv1(PerkLib.SpiderOvipositor);
 				}
-				else {
+				else if (findPerk(PerkLib.BeeOvipositor) >= 0) {
 					setPerkValue(PerkLib.BeeOvipositor, 1, arg);
 					if (eggs() > 50)
 						setPerkValue(PerkLib.BeeOvipositor, 1, 50);
 					return perkv1(PerkLib.BeeOvipositor);
+				}
+				else {
+					setPerkValue(PerkLib.MantisOvipositor, 1, arg);
+					if (eggs() > 50)
+						setPerkValue(PerkLib.MantisOvipositor, 1, 50);
+					return perkv1(PerkLib.MantisOvipositor);
 				}
 			}
 		}
 
 		public function fertilizedEggs():int
 		{
-			if (findPerk(PerkLib.SpiderOvipositor) < 0 && findPerk(PerkLib.BeeOvipositor) < 0)
+			if (findPerk(PerkLib.SpiderOvipositor) < 0 && findPerk(PerkLib.BeeOvipositor) < 0 && findPerk(PerkLib.MantisOvipositor) < 0)
 				return -1;
 			else if (findPerk(PerkLib.SpiderOvipositor) >= 0)
 				return perkv2(PerkLib.SpiderOvipositor);
-			else
+			else if (findPerk(PerkLib.BeeOvipositor) >= 0)
 				return perkv2(PerkLib.BeeOvipositor);
+			else
+				return perkv2(PerkLib.MantisOvipositor);
 		}
 
 		public function fertilizeEggs():int
 		{
-			if (findPerk(PerkLib.SpiderOvipositor) < 0 && findPerk(PerkLib.BeeOvipositor) < 0)
+			if (findPerk(PerkLib.SpiderOvipositor) < 0 && findPerk(PerkLib.BeeOvipositor) < 0 && findPerk(PerkLib.MantisOvipositor) < 0)
 				return -1;
 			else if (findPerk(PerkLib.SpiderOvipositor) >= 0)
 				setPerkValue(PerkLib.SpiderOvipositor, 2, eggs());
-			else
+			else if (findPerk(PerkLib.BeeOvipositor) >= 0)
 				setPerkValue(PerkLib.BeeOvipositor, 2, eggs());
+			else
+				setPerkValue(PerkLib.MantisOvipositor, 2, eggs());
 			return fertilizedEggs();
 		}
 

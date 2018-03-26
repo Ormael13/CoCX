@@ -645,7 +645,7 @@ private function changeGooDick():void {
 		else outputText("I want you to order me to shift it often.  ");
 		outputText("Changing myself further, twisting my body into a sexual playground for you... that would be the ultimate thrill!</i>\"");
 		if(flags[kFLAGS.GOO_DICK_LENGTH] == 0) outputText("\n\n" + flags[kFLAGS.GOO_NAME] + " pulls a hand away from her pussy and says, \"<i>I'll need something masculine if you want me to grow a cock, [Master].  An incubi draft would work, or some minotaur blood, though the blood might make it a horsecock...</i>\"  She shudders and closes her eyes, imagining herself with a rigid equine pole.  Your goo must have a bit of a fetish.");
-		else outputText("\n\n" + flags[kFLAGS.GOO_NAME] + " pulls a hand away from her pussy and says, \"<i>What kind of penis would please you most?  I could probably do the human ones, dog dicks, horse cocks, cat pricks, tentacle wangs, or demon dongs.</i>\"  She gives a little shudder at the last one and licks her lips.  \"<i>You'll need to have an appropriate item to assist me though, [Master].  I'm not as flexible as I once was.");
+		else outputText("\n\n" + flags[kFLAGS.GOO_NAME] + " pulls a hand away from her pussy and says, \"<i>What kind of penis would please you most?  I could probably do the human ones, dog dicks, horse cocks, cat pricks, tentacle wangs, or demon dongs.</i>\"  She gives a little shudder at the last one and licks her lips.  \"<i>You'll need to have an appropriate item to assist me though, [Master].  I'm not as flexible as I once was.\"</i>");
 	}
 	//High Happiness + Whatever Obedience(F)
 	else if(gooHappiness() >= 70) {
@@ -654,7 +654,7 @@ private function changeGooDick():void {
 		else outputText("she'd like to change what kind of dick she has.");
 		outputText("  She beams and titters, \"<i>Omigod, I loved growing penises back before I changed!  It was so much fun to see how surprised it would make people and to make new shapes to see how they'd feel.  Let's do it!</i>\"");
 		if(flags[kFLAGS.GOO_DICK_LENGTH] == 0) outputText("\n\n" + flags[kFLAGS.GOO_NAME] + " taps her chin and says, \"<i>I'll need something masculine if you want me to grow a cock.  An incubi draft would work, or some minotaur blood, though the blood might make it a horsecock...</i>\"  She smiles wickedly.");
-		else outputText("\n\n" + flags[kFLAGS.GOO_NAME] + " taps her chin and says, \"<i>I can probably make almost any kind of penis, though I only really like the human ones, dog dicks, horse cocks, cat pricks, tentacle wangs, and demon dongs.</i>\"  She gives a little shudder at the last one and licks her lips.  \"<i>You'll need to have an appropriate item to assist me though, I'm not as flexible as I once was.");
+		else outputText("\n\n" + flags[kFLAGS.GOO_NAME] + " taps her chin and says, \"<i>I can probably make almost any kind of penis, though I only really like the human ones, dog dicks, horse cocks, cat pricks, tentacle wangs, and demon dongs.</i>\"  She gives a little shudder at the last one and licks her lips.  \"<i>You'll need to have an appropriate item to assist me though, I'm not as flexible as I once was.\"</i>");
 	}
 	//Low Obedience(F)
 	else {

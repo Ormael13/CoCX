@@ -92,6 +92,7 @@ public function wonOverDiana():void {
 	clearOutput();
 	outputText("The horse morph kneels down defeated. Seems you can do whatever you want with her now. So, what will it be?\n\n");
 	menu();
+	levelingHerself();
 	if (player.lust >= 33) addButton(1, "Rape", wonOverDianaSex);
 	addButton(0, "Spare", wonOverDianaSpare);
 }
@@ -225,7 +226,7 @@ public function wonOverDianaOralM():void {
 	if (flags[kFLAGS.DIANA_FOLLOWER] >= 2) {
 		outputText("You don’t really even have to tell her, she’s already practically drooling. She quickly grabs your ");
 		if (player.cockTotal() > 1) outputText("largest ");
-		outputText("cock. , before lovingly running her tongue down your shaft as well as planting some loving kisses across it, showering it with her devotion. She eventually moves her mouth back up the length, reaching the head and planting another loving kiss on it.\n\n");
+		outputText("cock, before lovingly running her tongue down your shaft as well as planting some loving kisses across it, showering it with her devotion. She eventually moves her mouth back up the length, reaching the head and planting another loving kiss on it.\n\n");
 		outputText("Pleased you start pushing your ");
 		if (player.cockTotal() > 1) outputText("largest ");
 		outputText("[cock] into her eager mouth, ");
@@ -440,7 +441,7 @@ public function wonOverDianaRape():void {
 		outputText("Grunting, and with a huge amount of self control, you pull yourself out of her, spraying your load over her back. Satisfied, you climb off her, leaving her to hang off the " + object() + ", crying softly to herself, while you dress yourself and leave.\n\n");
 	}
 	//if (player.isAlraune()) x;
-	if (flags[kFLAGS.DIANA_LVL_UP] < 2) flags[kFLAGS.DIANA_FOLLOWER] = 3;
+	if (flags[kFLAGS.DIANA_LVL_UP] < 3) flags[kFLAGS.DIANA_FOLLOWER] = 3;
 	else flags[kFLAGS.DIANA_FOLLOWER] = 4;
 	player.orgasm();
 	cleanupAfterCombat();
@@ -456,10 +457,20 @@ public function wonOverDianaSpare():void {
 		outputText("You tell the girl you will let her go. You have no business with her.\n\n");
 		outputText("At first she looks at you in confusion, then nods before running off in the forest. Maybe next time the two of you could meet on more friendly dispositions.\n\n");
 	}
+	cleanupAfterCombat();
+	return;
+}
+public function lostToDiana():void {
+	clearOutput();
+	outputText("The horse morph kicks you in the face, knocking you unconscious. When you wake up, you realise she got away with some of your gems. Guess that's not the worst thing that could happen, right?\n\n");
+	cleanupAfterCombat();
+	return;
+}
+private function levelingHerself():void {
 	flags[kFLAGS.DIANA_DEFEATS_COUNTER]++;
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 1 && flags[kFLAGS.DIANA_LVL_UP] == 0) {
 		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 18);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 18);
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 18);
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 1;
 	}
@@ -506,14 +517,6 @@ public function wonOverDianaSpare():void {
 		flags[kFLAGS.DIANA_LVL_UP] = 8;
 	}
 	dianaAffection(5);
-	cleanupAfterCombat();
-	return;
-}
-public function lostToDiana():void {
-	clearOutput();
-	outputText("The horse morph kicks you in the face, knocking you unconscious. When you wake up, you realise she got away with some of your gems. Guess that's not the worst thing that could happen, right?\n\n");
-	cleanupAfterCombat();
-	return;
 }
 public function beMyStallion():void {
 	clearOutput();

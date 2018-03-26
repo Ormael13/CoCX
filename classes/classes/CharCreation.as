@@ -231,6 +231,16 @@ import coc.view.MainView;
 				player.itemSlot4.emptySlot();
 				player.itemSlot5.unlocked = false;
 				player.itemSlot5.emptySlot();
+				player.itemSlot6.unlocked = false;
+				player.itemSlot6.emptySlot();
+				player.itemSlot7.unlocked = false;
+				player.itemSlot7.emptySlot();
+				player.itemSlot8.unlocked = false;
+				player.itemSlot8.emptySlot();
+				player.itemSlot9.unlocked = false;
+				player.itemSlot9.emptySlot();
+				player.itemSlot10.unlocked = false;
+				player.itemSlot10.emptySlot();
 			}
             //PIERCINGS
             player.nipplesPierced = 0;
@@ -367,11 +377,11 @@ import coc.view.MainView;
 				}
 			}
 			//player.perkPoints = player.level - 1;
+			var newFlags:DefaultDict = new DefaultDict();
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0) {
-				var newGamePlusLevel:int = flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				var gameMode:Number = flags[kFLAGS.HUNGER_ENABLED];
-				var hardcoreMode:int = flags[kFLAGS.HARDCORE_MODE];
-				var hardcoreSlot:String = flags[kFLAGS.HARDCORE_SLOT];
+				for each(var flag:int in [kFLAGS.NEW_GAME_PLUS_LEVEL, kFLAGS.HUNGER_ENABLED, kFLAGS.HARDCORE_MODE, kFLAGS.GAME_DIFFICULTY, kFLAGS.EASY_MODE_ENABLE_FLAG, kFLAGS.SFW_MODE, kFLAGS.WATERSPORTS_ENABLED, kFLAGS.SILLY_MODE_ENABLE_FLAG, kFLAGS.LOW_STANDARDS_FOR_ALL, kFLAGS.HYPER_HAPPY, kFLAGS.STAT_GAIN_MODE]) {
+					newFlags[flag] = flags[flag];
+				}
 			}
 			//Clear plot storage array!
 			CoC.instance.flags = new DefaultDict();
@@ -380,12 +390,7 @@ import coc.view.MainView;
 			CoC.instance.counters = new RootCounters(countersStorage);
 			CoC.instance.saves.loadPermObject();
 			//Carry over data if new game plus.
-			if (newGamePlusLevel > 0) {
-				flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = newGamePlusLevel;
-				flags[kFLAGS.HUNGER_ENABLED] = gameMode;
-				flags[kFLAGS.HARDCORE_MODE] = hardcoreMode;
-				flags[kFLAGS.HARDCORE_SLOT] = hardcoreSlot;
-			}
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0) CoC.instance.flags = newFlags;
 			//Set that jojo debug doesn't need to run
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02999] = 3;
 			//Time reset

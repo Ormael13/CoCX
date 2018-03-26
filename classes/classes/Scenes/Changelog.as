@@ -39,7 +39,7 @@ package classes.Scenes
 			outputText("-Kindra archery training would progress 2x faster.\n");
 			outputText("-Manual that Chi Chi drops after beating PC in second fight unlock Soul Blast soulskill (15 turns CD, chance to stun for 3 turns and dmg scale with PC current str, int and wis)\n");
 			outputText("-Fixed bugs: Softlocks on few enemy bind specials (like Izumi or Ceraph), Wrath specials correctly list needed resource, option to send Izma to fishery before it's built, many other small fixes\n\n");
-			outputText("<b>Version 0.8i:</b>\n\n");
+			outputText("<b>Version 0.8i (Project 8 (Part 2: Luna, Diana, Sidonie), Avian TF, few new weapons, Healer path, small fixes):</b>\n\n");
 			outputText("-New tier 0 misc lvl-up perk: Tough Hide. Req. Job: Beast Warrior perk and 30+ tou. Effect: Increase natural armor by 2 so long as PC have scale chitin fur or other natural armor.\n");
 			outputText("-New tier 1 misc lvl-up perk: Feral Armor. Req. Tough Hide perk and 60+ tou. Effect: Gain extra armor based on PC toughness so long as PC is naked, +20 to max wrath. (Similar to agility but PC must be naked and have natural armor)\n");
 			outputText("-New tier 1 misc lvl-up perk: Job: Healer. Req. 30+ int and 30+ wis. Effect: +5 to max Int and Wis (scalable), +30 to max Mana, +10% to spellpower when using healing spells\n");
@@ -57,7 +57,6 @@ package classes.Scenes
 			outputText("-Having natural claws add toggle in combat menu to switch between normal or feral combat style. Only when PC not use any weapon (after few special exceptions) can benefit from feral combat style - when PC can attack more than once a turn fatigue costs will be halfed.\n");
 			outputText("-New melee weapon: Claws - obtainable by buying in weapon shop in He'Xin'Dao. 0 atk, 10% to cause bleed, 100 gems, is one of special exception weapons, which could be used without loosing benefits from using feral combat style.\n");
 			outputText("-All bleed effects not req. to lower enemy armor below 10. Also previous 50% chance for bleed effect was lowered to 25% for hooked gaunlets.\n");
-			//outputText("-New range weapon: Hodr's Bow - obtained by . 22 atk, costing 2200 gems, -5% accuracy, Artifact Bow, each arrow can apply blind debuff on enemy.\n");
 			outputText("-First gaunlet repeatable reward was lowered to 15 spirit stones to keep in theme of 5 SS for each enemy defeated in gaunlet challanges.\n");
 			outputText("-Perk Rage give 50 more to max wrath and perk Anger 100 more to max wrath. To perk Job: Warlord req. was added option to use perk Feral Whirlwind instead of Whirlwind or Whipping. Other req. stay the same.\n");
 			outputText("-Beast Warrior PC's can use their own version of Whirlwind that req. only to have natural claws or weapons that can substitude natural claws. Almost all rest is similar to Whirlwind performed with any non-large/large weapon.\n");
@@ -74,7 +73,6 @@ package classes.Scenes
 			outputText("-New body part - face: Avain Face. No prereq.\n");
 			outputText("-New body part - ears: Avain Ears. No prereq.\n");
 			outputText("-New body part - skin: Feathers. No prereq.\n");
-			//outputText("-New tier   lvl-up perk: . Req. . Effect: \n");
 			outputText("-New melee weapon (by Shamanknight): Halberd - buyable in weapons shop in Tel'Adre. Cost 1200 gems. Base atk is 6 increased by 9 when PC have 50+ str and another 15 more atk when having 100+ str. Attacks ignore 40% of target armor.\n");
 			outputText("-New melee weapon (by Shamanknight): Guan Dao - buyable in weapons shop in He'Xin'Dao. Cost 100 spirit stones. Base atk is 6 increased by 8 when PC have 50+ str and another 11 more atk when having 100+ str. Attacks ignore 60% of target armor.\n");
 			outputText("-New melee weapon (by Shamanknight): Fly-Whisk - buyable in weapons shop in He'Xin'Dao. Cost 80 spirit stones. Base atk is 0, increase magical soulskills power by 20%.\n");
@@ -92,22 +90,43 @@ package classes.Scenes
 			outputText("-Tease and few other lust dealing attacks scalling was changed to use libido scaling instead lvl based one + in case of alraune it will have toughness scaling too.\n");
 			outputText("-Giacomo was added to possible encounters in Soul Sense menu. Also Lumi Lab after first time visiting it would be moved to Dungeons submenu (since it should been like Sean shop inside one of dungeons).\n");
 			outputText("-Celess related events in forest would be temporaly unaccesable (not affecting anything if PC already have Celess in camp).\n");
-			outputText("-Fixed bugs: Patchouli not leading PC to Wonderland from camp, Sidewinder not having daily cooldown counter, Anzu missing from his palace, Chi Chi not dropping M.Gloves after first/second fight on soul arena, missing option to buy Taoth statue in Jewelery shop in Tel'Adre\n\n\n\n\n\n");/*ostatni punkt changelogu
-			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("-Fixed bugs: Patchouli not leading PC to Wonderland from camp, Sidewinder not having daily cooldown counter, Anzu missing from his palace, Chi Chi not dropping M.Gloves after first/second fight on soul arena, missing option to buy Taoth statue in Jewelery shop in Tel'Adre\n\n");
+			outputText("<b>Version 0.8i2:</b>\n\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-Diana later stages stats adjusted. Also added req. of min. lvl 3 to meet her at lake, lowered encounter chance.\n");
+			outputText("-Luna can be spared when PC accept her (by loosing in fight or just accepting). In case of simple accepting there would be new option showing up in talk menu after talking with her on Lycantrophy after accpting her that allow voluntary been biten by her. After sparing she can lvl up up to lvl 27.\n");
+			outputText("-Ice Fist and Fire Punch req. uing bare first or gaunlets. Punishing Kick req. to have bipedal or taur lower body.\n");
+			outputText("-Visiting Journey to the East inn after 5 pm give 25% to encounter drunk Chi Chi that may lead to drunken sex.\n");
+			outputText("-Added new info when PC have Luna in camp: Moon Cycle. Will show which day of it is currently and when night of full moon will be approaching will be red colored instead of norma black.\n");
+			outputText("-New Gaunlet challange on Soul Arena. Containt 4 fights that will or reward with Sceptre of Command or 20 spirit stones after winning. Req. finishing at least once Gaunlet 1 on soul arena.\n");
+			outputText("-New melee weapon: Sceptre of Command - won as reward for first time beating Gaunlet 2 on Soul Arena. Cost 600 gems and base atk 4. Increase by 50% damage of elementals and golems.\n");
+			outputText("-Beast Warrior Crinos Shape bonuses was increased from 5/10/15/20% of current str/tou/spe to 20/40/80/160%.\n");
+			outputText("-Metamorph perk would grant increase max soulforce by 50 and grant access to Metamorph option even if PC not yet have perk Job: Soul Cultivator.\n");
+			outputText("-Starting mana cap rised from 100 to 200 and starting fatigue cap from 100 to 150. Feral Whirlwind base dmg increased by 50%. Archery base accuracy increased form 30% to 40%. Fly-Whisk price lowered by half. Shield Bash req. not proper type of shield not just any item in shield slot like mana bracer.\n");
+			outputText("-Attacks using intelligence and wisdom scalling would now use scalling used by attack using str/tou/spe, which mean at stat values above 100 it would be weaker effect.\n");
+			outputText("-Req. for perks form corruption tree lowered: Corrupted Libido, Seduction, Nymphomania, Acclimation, Sense Corruption, Sadist, Arousing Aura\n");
+			outputText("-Monsters base lust cap lowered from 100 to 70. Also now they will get a few points to max cap each lvl (at begining 2, then 5, 10, 20).\n");
+			outputText("-Fixed bugs: Werewolf full fur instead of partial, Luna bugs fixed, Raiju lust nukes nerfed, Temple of the Divine rebulding bugfixing, removed req. of Herism perk for perk Job: Countresan, missing Anzu in his Palace\n\n\n\n\n");/*ostatni punkt changelogu
+			//outputText("-New tier   lvl-up perk: . Req. . Effect: \n");
+			//outputText("-New range weapon: Hodr's Bow - obtained by . 22 atk, costing 2200 gems, -5% accuracy, Artifact Bow, each arrow can apply blind debuff on enemy.\n");
 			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
 			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
 			outputText("-New event perk: Gargoyle. Gained in ritual to become gargoyle by picking own blood. Effects: \n");
 			outputText("-New event perk: Corrupted Gargoyle. Gained in ritual to become gargoyle by picking minotaur blood. Effects: \n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Bat, Vampire, Cat, Cheshire cat
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -144,8 +163,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): dodać yuki-onna TF
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

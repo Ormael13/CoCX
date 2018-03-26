@@ -2548,6 +2548,11 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 		//----------=============================------------
 		//Approach Amily:
 		// EVENT 2427
+		public function amilyFollowerEncounter2():void {
+			if ((flags[kFLAGS.LUNA_JEALOUSY] > 100 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 150 && rand(10) < 8)) mishapsLunaAmily();
+			else amilyFollowerEncounter();
+		}
+		
 		public function amilyFollowerEncounter():void {
 			if(!amilyCorrupt() && player.eggs() >= 20 && player.canOviposit() && flags[kFLAGS.AMILY_OVIPOSITION_UNLOCKED] == 0) {
 				amilyEggStuff();
@@ -2702,7 +2707,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 		private function amilyCorruptSexMenu():void {
 			amilySprite();
 			if(player.gender > 0) {
-				outputText("Amily asks, \"<i>How would " + player.mf("master","mistress") + " like to use " + player.mf("his","her") + " cum-bucket today?");
+				outputText("Amily asks, \"<i>How would " + player.mf("master","mistress") + " like to use " + player.mf("his","her") + " cum-bucket today?</i>\"");
 				menu();
 				if (player.hasCock()) {
 					addButton(0, "Anal", corruptAmilyBuckFutter).hint("Fuck Amily in the ass!");
@@ -8292,6 +8297,16 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			dynStats("sen", -2);
 			amilyPreggoChance();
 			doNext(camp.returnToCampUseOneHour);
+		}
+		
+		public function mishapsLunaAmily():void {
+			clearOutput();
+			outputText("You check on Amily and notice the mouse is holding her foot visibly in pain.\n\n");
+			outputText("\"<i>Gah how did I step on these " + (silly() ? "Lego" : "rocks") + "!? I should’ve paid more attention. Sorry [name], we’ll talk again later.</i>\"\n\n");
+			outputText("You think you notice Luna watching from a distance, but surely it's just your imagination.\n\n");
+			if (player.hasStatusEffect(StatusEffects.CampLunaMishaps1)) player.addStatusValue(StatusEffects.CampLunaMishaps1, 1, 1);
+			else player.createStatusEffect(StatusEffects.CampLunaMishaps1, 1, 0, 0, 0);
+			doNext(playerMenu);
 		}
 	}
 }

@@ -34,6 +34,8 @@ package classes.Scenes.NPCs
 			var cost:Number = 30;
 			cost *= spellCostMultiplier();
 			if (findPerk(PerkLib.NaturalHealingMinor) >= 0) cost -= 3;
+			if (findPerk(PerkLib.NaturalHealingMajor) >= 0) cost -= 4.5;
+			if (findPerk(PerkLib.NaturalHealingEpic) >= 0) cost -= 5;
 			if (findPerk(PerkLib.WisenedHealer) >= 0) cost *= 2;
 			return cost;
 		}
@@ -41,6 +43,8 @@ package classes.Scenes.NPCs
 			var cost:Number = 50;
 			cost *= spellCostMultiplier();
 			if (findPerk(PerkLib.NaturalHealingMinor) >= 0) cost -= 5;
+			if (findPerk(PerkLib.NaturalHealingMajor) >= 0) cost -= 7.5;
+			if (findPerk(PerkLib.NaturalHealingEpic) >= 0) cost -= 10;
 			if (findPerk(PerkLib.WisenedHealer) >= 0) cost *= 2;
 			return cost;
 		}
@@ -54,6 +58,8 @@ package classes.Scenes.NPCs
 			if (findPerk(PerkLib.WizardsFocus) >= 0) mod1 += .4;
 			if (findPerk(PerkLib.SpellpowerHealing) >= 0) mod1 += .2;
 			if (findPerk(PerkLib.NaturalHealingMinor) >= 0) mod1 += .3;
+			if (findPerk(PerkLib.NaturalHealingMajor) >= 0) mod1 += .4;
+			if (findPerk(PerkLib.NaturalHealingEpic) >= 0) mod1 += .5;
 			return mod1;
 		}
 		public function SpellMod():Number {
@@ -117,11 +123,11 @@ package classes.Scenes.NPCs
 			if (HPRatio() < .2 && (mana >= spellCostHeal())) usingHealSpell();
 			else if (flags[kFLAGS.DIANA_LVL_UP] >= 5 && flags[kFLAGS.DIANA_LVL_UP] < 8) {
 				var choice3:Number = rand(6);
-				if (choice3 < 2) {
+				if (choice3 < 3) {
 					if ((soulforce >= soulskillCostManyBirds()) && rand(2) == 0) usingManyBirdsSoulskill();
 					else eAttack();
 				}
-				if (choice3 > 1 && choice3 < 5) {
+				if (choice3 > 2 && choice3 < 5) {
 					if (HPRatio() < .6 && rand(2) == 0 && (mana >= spellCostHeal())) usingHealSpell();
 					else if (HPRatio() < .6 && rand(2) == 0 && !hasStatusEffect(StatusEffects.MonsterRegen2) && (mana >= spellCostRegenerate())) usingRegenerateSpell();
 					else if (rand(2) == 0 && (mana < (this.maxMana() - 300))) usingARC();
@@ -134,11 +140,11 @@ package classes.Scenes.NPCs
 			}
 			else if (flags[kFLAGS.DIANA_LVL_UP] >= 2 && flags[kFLAGS.DIANA_LVL_UP] < 5) {
 				var choice2:Number = rand(6);
-				if (choice2 < 2) {
+				if (choice2 < 3) {
 					if ((soulforce >= soulskillCostManyBirds()) && rand(2) == 0) usingManyBirdsSoulskill();
 					else eAttack();
 				}
-				if (choice2 > 1 && choice2 < 5) {
+				if (choice2 > 2 && choice2 < 5) {
 					if (HPRatio() < .6 && rand(2) == 0 && (mana >= spellCostHeal())) usingHealSpell();
 					else if (rand(2) == 0 && (mana < (this.maxMana() - 80))) usingARC();
 					else eAttack();
@@ -150,8 +156,8 @@ package classes.Scenes.NPCs
 			}
 			else {
 				var choice1:Number = rand(6);
-				if (choice1 == 0) eAttack();
-				if (choice1 > 0 && choice1 < 5) {
+				if (choice1 < 3) eAttack();
+				if (choice1 > 2 && choice1 < 5) {
 					if (HPRatio() < .5 && rand(2) == 0 && (mana >= spellCostHeal())) usingHealSpell();
 					else if (rand(2) == 0 && (mana < (this.maxMana() - 40))) usingARC();
 					else eAttack();
@@ -260,8 +266,8 @@ package classes.Scenes.NPCs
 				this.weaponAttack = 6;
 				this.armorDef = 9;
 				this.level = 18;
-				this.bonusHP = 725;
-				this.bonusMana = 265;
+				this.bonusHP = 730;
+				this.bonusMana = 285;
 				this.gems = rand(5) + 10;
 				this.drop = new ChainedDrop().
 					add(weapons.W_STAFF,1/10).
@@ -275,8 +281,8 @@ package classes.Scenes.NPCs
 				this.weaponAttack = 6;
 				this.armorDef = 9;
 				this.level = 21;
-				this.bonusHP = 220;
-				this.bonusMana = 120;
+				this.bonusHP = 785;
+				this.bonusMana = 310;
 				this.gems = rand(5) + 10;
 				this.drop = new ChainedDrop().
 					add(weapons.W_STAFF,1/10).
@@ -290,8 +296,8 @@ package classes.Scenes.NPCs
 				this.weaponAttack = 6;
 				this.armorDef = 9;
 				this.level = 24;
-				this.bonusHP = 220;
-				this.bonusMana = 120;
+				this.bonusHP = 790;
+				this.bonusMana = 330;
 				this.gems = rand(5) + 10;
 				this.drop = new ChainedDrop().
 					add(weapons.W_STAFF,1/10).
@@ -305,8 +311,8 @@ package classes.Scenes.NPCs
 				this.weaponAttack = 9;
 				this.armorDef = 12;
 				this.level = 27;
-				this.bonusHP = 220;
-				this.bonusMana = 120;
+				this.bonusHP = 845;
+				this.bonusMana = 355;
 				this.gems = rand(5) + 15;
 				this.drop = new ChainedDrop().
 					add(weapons.W_STAFF,1/10).
@@ -326,7 +332,7 @@ package classes.Scenes.NPCs
 				this.butt.type = Butt.RATING_LARGE;
 				this.hairLength = 12;
 			}
-			if (flags[kFLAGS.DIANA_LVL_UP] >= 1 && flags[kFLAGS.DIANA_FOLLOWER] == 3) {
+			if (flags[kFLAGS.DIANA_LVL_UP] >= 0 && flags[kFLAGS.DIANA_FOLLOWER] == 3) {
 				this.a = "the ";
 				this.short = "horse morph";
 				this.imageName = "whitemare";
@@ -389,6 +395,7 @@ package classes.Scenes.NPCs
 			this.faceType = Face.HORSE;
 			this.tailType = Tail.HORSE;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.AlwaysSuccesfullRunaway, 0, 0, 0, 0);
 			this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 1) {
 				this.createPerk(PerkLib.JobHealer, 0, 0, 0, 0);
@@ -415,13 +422,13 @@ package classes.Scenes.NPCs
 				this.createPerk(PerkLib.NaturalHealingMinor, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 6) {
-				//this.createPerk(PerkLib.SoulWarrior, 0, 0, 0, 0);
+				this.createPerk(PerkLib.NaturalHealingMajor, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 7) {
-				//this.createPerk(PerkLib.SoulWarrior, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulSprite, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 8) {
-				//this.createPerk(PerkLib.SoulWarrior, 0, 0, 0, 0);
+				this.createPerk(PerkLib.NaturalHealingEpic, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_FOLLOWER] == 3 || flags[kFLAGS.DIANA_FOLLOWER] == 4) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			checkMonster();

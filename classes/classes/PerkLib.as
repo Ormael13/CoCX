@@ -329,9 +329,9 @@ public class PerkLib
 						"]",
 				"You choose the 'Catch the blade' perk, giving you a chance to deflect blow with your fists. (Speed-based).");
 		public static const CatlikeNimbleness:PerkType = mk("Cat-like Nimbleness", "Cat-like Nimbleness",
-				"Your transformed joints allow you to move more swiftly and with greater nimbleness.",
-				"You choose the 'Cat-like Nimbleness' perk.  Your joints have become more nimble due to repeated use of cat-like flexibility.");
-		public static const CatlikeNimblenessEvolved:PerkType = mk("Cat-like Nimbleness Evolved", "Cat-like Nimbleness Evolved",
+				"Your transformed joins allows you to move more swiftly and with greater nimbleness.",
+				"You choose the 'Cat-like Nimbleness' perk. Your body joints due to repeadly usage of cat-like flexibility became more nimble.");
+		public static const CatlikeNimblenessEvolved:PerkType = mk("Cat-like Nimbleness (Evolved)", "Cat-like Nimbleness (Evolved)",
 				"Your nimble body allows you to move more swiftly and with greater nimbleness than before.",
 				"You choose the 'Cat-like Nimbleness (Evolved)' perk.  Continuous usage of cat-like flexibility caused it to undergo change.");
 		public static const Channeling:PerkType = mk("Channeling", "Channeling",
@@ -1944,6 +1944,7 @@ public class PerkLib
 
 		// Monster perks
 		public static const Acid:PerkType = mk("Acid", "Acid", "");
+		public static const AlwaysSuccesfullRunaway:PerkType = mk("Always Succesfull Runaway", "Always Succesfull Runaway", "");
 		public static const DarknessNature:PerkType = mk("Darkness Nature", "Darkness Nature", "");
 		public static const DarknessVulnerability:PerkType = mk("Darkness Vulnerability", "Darkness Vulnerability", "");
 		public static const EnemyBeastOrAnimalMorphType:PerkType = mk("Beast or Animal-morph enemy type", "Beast or Animal-morph enemy type", "");
@@ -3123,7 +3124,6 @@ public class PerkLib
                     .requireLib(50)
                     .requireStatusEffect(StatusEffects.KnowsArouse, "Arouse spell");
             JobCourtesan.requirePerk(JobSeducer)
-                    .requirePerk(Heroism)
                     .requireLib(50)
                     .requireLevel(12);
             DazzlingDisplay.requirePerk(JobCourtesan)
@@ -3231,23 +3231,23 @@ public class PerkLib
             // CORRUPTION
             //------------
             //Slot 7 - Corrupted Libido - lust raises 10% slower.
-            CorruptedLibido.requireCor(25);
+            CorruptedLibido.requireCor(10);
             CorruptedLibido.defaultValue1 = 20;
             //Slot 7 - Seduction (Must have seduced Jojo)
-            Seduction.requireCor(50);
+            Seduction.requireCor(15);
             //Slot 7 - Nymphomania
-            Nymphomania.requireCor(75)
+            Nymphomania.requireCor(15)
                     .requirePerk(CorruptedLibido);
             //Slot 7 - UNFINISHED :3
-            Acclimation.requireCor(50)
+            Acclimation.requireCor(15)
                     .requirePerk(CorruptedLibido)
                     .requireMinLust(20);
-            SenseCorruption.requireCor(75);
+            SenseCorruption.requireCor(15);
             //Tier 1 Corruption Perks - acclimation over-rides
-            Sadist.requireCor(60)
+            Sadist.requireCor(20)
                     .requirePerk(CorruptedLibido)
                     .requireLevel(6);
-            ArousingAura.requireCor(70)
+            ArousingAura.requireCor(25)
                     .requirePerk(CorruptedLibido)
                     .requireLevel(6);
             //Tier 2
