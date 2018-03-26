@@ -329,11 +329,11 @@ public class PerkLib
 						"]",
 				"You choose the 'Catch the blade' perk, giving you a chance to deflect blow with your fists. (Speed-based).");
 		public static const CatlikeNimbleness:PerkType = mk("Cat-like Nimbleness", "Cat-like Nimbleness",
-				"Your transformed joins allows you to move more swiftly and with greater nimbleness.",
-				"You choose the 'Cat-like Nimbleness' perk. Your body joints due to repeadly usage of cat-like flexibility became more nimble.");
-		public static const CatlikeNimblenessEvolved:PerkType = mk("Cat-like Nimbleness", "Cat-like Nimbleness",
+				"Your transformed joints allow you to move more swiftly and with greater nimbleness.",
+				"You choose the 'Cat-like Nimbleness' perk.  Your joints have become more nimble due to repeated use of cat-like flexibility.");
+		public static const CatlikeNimblenessEvolved:PerkType = mk("Cat-like Nimbleness Evolved", "Cat-like Nimbleness Evolved",
 				"Your nimble body allows you to move more swiftly and with greater nimbleness than before.",
-				"You choose the 'Cat-like Nimbleness (Evolved)' perk. Continuous usage of cat-like flexibility caused it to undergone change.");
+				"You choose the 'Cat-like Nimbleness (Evolved)' perk.  Continuous usage of cat-like flexibility caused it to undergo change.");
 		public static const Channeling:PerkType = mk("Channeling", "Channeling",
 				"[if (player.inte>=60)" +
 						"Increases base spell strength by 20% and base mana pool by 30." +
