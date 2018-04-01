@@ -91,7 +91,7 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.LUNA_LVL_UP] == 1) {
 				initStrTouSpeInte(30, 95, 45, 50);
 				initWisLibSensCor(50, 80, 40, 75);
-				this.weaponAttack = 37;
+				this.weaponAttack = 38;
 				this.armorDef = 200;
 				this.bonusHP = 800;
 				this.level = 15;
@@ -99,15 +99,15 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.LUNA_LVL_UP] == 2) {
 				initStrTouSpeInte(35, 100, 50, 50);
 				initWisLibSensCor(50, 80, 40, 75);
-				this.weaponAttack = 37;
+				this.weaponAttack = 39;
 				this.armorDef = 200;
 				this.bonusHP = 850;
 				this.level = 21;
 			}
 			if (flags[kFLAGS.LUNA_LVL_UP] == 3) {
-				initStrTouSpeInte(35, 100, 55, 50);
+				initStrTouSpeInte(40, 105, 55, 50);
 				initWisLibSensCor(50, 80, 40, 75);
-				this.weaponAttack = 37;
+				this.weaponAttack = 40;
 				this.armorDef = 200;
 				this.bonusHP = 900;
 				this.level = 27;

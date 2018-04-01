@@ -607,7 +607,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 					flags[kFLAGS.LUNA_MOON_CYCLE]++;
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] > 8) flags[kFLAGS.LUNA_MOON_CYCLE] = 1;
 					if (player.hasPerk(PerkLib.Lycanthropy)) {
-						var changeV:Number = 10 * player.newGamePlusMod();
+						var changeV:Number = 10 * (player.newGamePlusMod() + 1);
 						if (flags[kFLAGS.LUNA_MOON_CYCLE] == 5) {
 							outputText("<b>\nYou can’t help but notice the moon is almost full as it rises up.  It seems transfixing like it is calling to you.");
 							outputText("\n\nYou feel your might increasing as the moon draws closer to fullness.</b>\n");

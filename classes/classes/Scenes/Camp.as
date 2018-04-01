@@ -3431,11 +3431,19 @@ private function promptSaveUpdate():void {
 		doNext(doCamp);
 		return;
 	}
-/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 20) {
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 20) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 21;
 		if (player.hasPerk(PerkLib.Lycanthropy)) {
 			player.skin.coverage = Skin.COVERAGE_LOW;
 			player.coatColor = player.hairColor;
+			player.removePerk(PerkLib.Lycanthropy);
+			var bonusStats:Number = 0;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) bonusStats += 10;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) bonusStats += 20;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats += 30;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats += 40;
+			player.createPerk(PerkLib.Lycanthropy,bonusStats,0,0,0);
+			player.dynStats("str", (bonusStats * (player.newGamePlusMod() + 1)), "tou", (bonusStats * (player.newGamePlusMod() + 1)), "spe", (bonusStats * (player.newGamePlusMod() + 1)), "cor", 20);
 		}
 		if (flags[kFLAGS.LUNA_MOON_CYCLE] > 8) flags[kFLAGS.LUNA_MOON_CYCLE] = 1;
 		clearOutput();
@@ -3443,7 +3451,7 @@ private function promptSaveUpdate():void {
 		doNext(doCamp);
 		return;
 	}
-	if (flags[kFLAGS.MOD_SAVE_VERSION] == 21) {
+/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 21) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 22;
 		clearOutput();
 		outputText("Text.");
