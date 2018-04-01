@@ -722,7 +722,7 @@ package classes.Scenes.NPCs
 		
 		public function sexMenuDominateHerIntro():void {
 			clearOutput();
-			outputText("You ask the maid how she feels about giving in to her beastly desire. The green glimmer in her eyes is all you need to see how much she desires it before she begins to shapeshift into her beast form.You ask the maid how she feels about giving in to her beastly desire. The green glimmer in her eyes is all you need to see how much she desires it before she begins to shapeshift into her beast form.\n\n");
+			outputText("You ask the maid how she feels about giving in to her beastly desire. The green glimmer in her eyes is all you need to see how much she desires it before she begins to shapeshift into her beast form.\n\n");
 			flags[kFLAGS.LUNA_MOONING] = 1;
 			doNext(sexMenuDominateHer);
 		}

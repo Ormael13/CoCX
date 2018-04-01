@@ -72,7 +72,7 @@ public class CoC extends MovieClip
     public var date:Date = new Date();
 
     //Mod save version.
-    public var modSaveVersion:Number = 20;
+    public var modSaveVersion:Number = 21;
     public var levelCap:Number = 150;
 
     //Used to restrict random drops from overlapping uniques
@@ -248,7 +248,7 @@ public class CoC extends MovieClip
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_0.8i2";
-			version = ver + " (<b></b>)";
+			version = ver + " (<b>Bugfixing</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

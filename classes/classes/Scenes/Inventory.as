@@ -174,7 +174,7 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 				}
 				if (flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
 					if (model.time.hours >= 6) addButton(5, "Garden", Gardening.manageuyourgarden).hint("Visit your plant offspring");
-				}
+				}/*
 				if (player.hasKeyItem("Gryphon Statuette") >= 0) {
 					addButton(6, "Gryphon", curry(m.skybornSeed, 1));
 					foundItem = true;
@@ -182,7 +182,7 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 				if (player.hasKeyItem("Peacock Statuette") >= 0) {
 					addButton(6, "Peacock", SceneLib.mutationsTable.skybornSeed(2));
 					foundItem = true;
-				}
+				}*/
 				addButton(14, "Back", inventoryMenu);
 		}
 		
