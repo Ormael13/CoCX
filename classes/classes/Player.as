@@ -5869,42 +5869,6 @@ use namespace CoC;
 				maxWis -= (15 * newGamePlusMod);
 				}
 			}
-			if (humanScore() == 30) {
-				maxStr += (40 * newGamePlusMod);
-				maxTou += (40 * newGamePlusMod);
-				maxSpe += (40 * newGamePlusMod);
-				maxInt += (40 * newGamePlusMod);
-				maxWis += (40 * newGamePlusMod);
-				maxLib += (40 * newGamePlusMod);
-				maxSen += (40 * newGamePlusMod);
-			}
-			if (humanScore() == 29) {
-				maxStr += (30 * newGamePlusMod);
-				maxTou += (30 * newGamePlusMod);
-				maxSpe += (30 * newGamePlusMod);
-				maxInt += (30 * newGamePlusMod);
-				maxWis += (30 * newGamePlusMod);
-				maxLib += (30 * newGamePlusMod);
-				maxSen += (30 * newGamePlusMod);
-			}
-			if (humanScore() == 28) {
-				maxStr += (20 * newGamePlusMod);
-				maxTou += (20 * newGamePlusMod);
-				maxSpe += (20 * newGamePlusMod);
-				maxInt += (20 * newGamePlusMod);
-				maxWis += (20 * newGamePlusMod);
-				maxLib += (20 * newGamePlusMod);
-				maxSen += (20 * newGamePlusMod);
-			}
-			if (humanScore() == 27) {
-				maxStr += (10 * newGamePlusMod);
-				maxTou += (10 * newGamePlusMod);
-				maxSpe += (10 * newGamePlusMod);
-				maxInt += (10 * newGamePlusMod);
-				maxWis += (10 * newGamePlusMod);
-				maxLib += (10 * newGamePlusMod);
-				maxSen += (10 * newGamePlusMod);
-			}
 			if (internalChimeraScore() >= 1) {
 				maxStr += (5 * internalChimeraScore() * newGamePlusMod);
 				maxTou += (5 * internalChimeraScore() * newGamePlusMod);
