@@ -750,17 +750,16 @@ public function basemeleeattacks():void {
 			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) mutlimeleefistattacksCost += 10;
 			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) mutlimeleefistattacksCost += 4;
 			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1) {
-				if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) mutlimeleefistattacksCost *= 0.5;
 				if (player.fatigue + mutlimeleefistattacksCost <= player.maxFatigue()) {
 					if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) fatigue(mutlimeleefistattacksCost);
 					else {
-						if (player.soulforce < mutlimeleefistattacksCost * 5) {
+						if (player.soulforce < mutlimeleefistattacksCost * 3) {
 							outputText("Your current soulforce is too low to attack more than once in this turn!\n\n");
 							flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 						}
 						else {
 							fatigue(mutlimeleefistattacksCost);
-							player.soulforce -= mutlimeleefistattacksCost * 5;
+							player.soulforce -= mutlimeleefistattacksCost * 3;
 						}
 					}
 				}

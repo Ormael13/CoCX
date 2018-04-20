@@ -831,7 +831,7 @@ import flash.utils.getQualifiedClassName;
 				if (findPerk(PerkLib.EnemyGroupType) >= 0) minXP *= 5;
 				return minXP;
 			}
-			return Math.round(((this.additionalXP + this.baseXP()) * this.bonusXP() * difference * multiplier) + this.humanity);
+			return Math.round(((this.additionalXP + this.baseXP()) * this.bonusXP() * difference * multiplier) + this.humanity());
 		}
 		protected function baseXP():Number
 		{

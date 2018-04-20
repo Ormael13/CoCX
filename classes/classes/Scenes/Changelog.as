@@ -101,14 +101,14 @@ package classes.Scenes
 			outputText("-New melee weapon: Sceptre of Command - won as reward for first time beating Gaunlet 2 on Soul Arena. Cost 600 gems and base atk 4. Increase by 50% damage of elementals and golems.\n");
 			outputText("-Beast Warrior Crinos Shape bonuses was increased from 5/10/15/20% of current str/tou/spe to 20/40/80/160%.\n");
 			outputText("-Metamorph perk would grant increase max soulforce by 50 and grant access to Metamorph option even if PC not yet have perk Job: Soul Cultivator.\n");
-			outputText("-Starting mana cap rised from 100 to 200 and starting fatigue cap from 100 to 150. Feral Whirlwind base dmg increased by 50%. Archery base accuracy increased form 30% to 40%. Fly-Whisk price lowered by half. Shield Bash req. not proper type of shield not just any item in shield slot like mana bracer.\n");
+			outputText("-Starting mana cap rised from 100 to 200 and starting fatigue cap from 100 to 150. Feral Whirlwind base dmg increased by 50%. Archery base accuracy increased from 30% to 40%. Fly-Whisk price lowered by half. Shield Bash req. not proper type of shield not just any item in shield slot like mana bracer.\n");
 			outputText("-Attacks using intelligence and wisdom scalling would now use scalling used by attack using str/tou/spe, which mean at stat values above 100 it would be weaker effect.\n");
 			outputText("-Req. for perks form corruption tree lowered: Corrupted Libido, Seduction, Nymphomania, Acclimation, Sense Corruption, Sadist, Arousing Aura\n");
 			outputText("-Monsters base lust cap lowered from 100 to 70. Also now they will get a few points to max cap each lvl (at begining 2, then 5, 10, 20).\n");
 			outputText("-Fixed bugs: Werewolf full fur instead of partial, Luna bugs fixed, Raiju lust nukes nerfed, Temple of the Divine rebulding bugfixing, removed req. of Heroism perk for perk Job: Countresan, missing Anzu in his Palace\n\n");
 			outputText("<b>Version 0.8i3:</b>\n\n");
 			outputText("-Human score bonuses changed form bonuses to stats into bonuses to EXP gains after fight - 1-5 pts * PC level (the less human PC became, the lower bonus till it reach 0 at 25 pts and below in human score)\n");
-			outputText("-\n");
+			outputText("-Fatigue cost reduction by half when using multi attcks removed. Soulforce costs mutiplier when using melee multittacks (with fists or gaunlets) lowered from 5x to 3x.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: \n\n\n\n");/*ostatni punkt changelogu
