@@ -33,6 +33,7 @@ public class Ears extends BodyPart {
 	public static const RED_PANDA:int = 29;
 	public static const AVIAN:int	  = 30;
 	public static const GRYPHON:int	  = 31;
+	// Don't forget to add new types in DebugMenu.as list EAR_TYPE_CONSTANTS
 	
 	public function Ears() {
 		super(null, null);

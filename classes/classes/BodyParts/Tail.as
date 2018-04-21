@@ -52,6 +52,7 @@ public class Tail extends SaveableBodyPart {
 	public static const AVIAN:int          		= 36;
 	public static const GRIFFIN:int          	= 37;
 	public static const LION:int                = 38;
+	// Don't forget to add new types in DebugMenu.as list TAIL_TYPE_CONSTANTS
 
 	override public function set type(value:int):void {
 		var old:int = type;

@@ -12,6 +12,7 @@ public class RearBody extends BodyPart {
 	public static const RAIJU_MANE:int        = 8;
 	public static const BAT_COLLAR:int        = 9;
 	public static const WOLF_COLLAR:int       = 10;
+	// Don't forget to add new types in DebugMenu.as list REAR_TYPE_CONSTANTS
 	
 	public function RearBody() {
 		super(null, null);
