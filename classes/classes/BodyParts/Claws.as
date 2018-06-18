@@ -18,6 +18,7 @@ public class Claws extends SaveableBodyPart {
 	public static const IMP:int        =  8; // NYI! Placeholder from Revamp
 	public static const COCKATRICE:int =  9; // NYI! Placeholder from Revamp
 	public static const RED_PANDA:int  = 10; // NYI! Placeholder from Revamp
+	// Don't forget to add new types in DebugMenu.as list CLAW_TYPE_CONSTANTS
 	
 	public function Claws(creature:Creature) {
 		super(creature,"clawsPart",["tone"]);

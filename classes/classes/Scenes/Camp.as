@@ -3023,6 +3023,8 @@ public function setLevelButton(allowAutoLevelTransition:Boolean):Boolean {
 			var soulforce:int = 0;
 			var wrath:int = 0;
 			var lust:int = 0;
+			var statpoints:int = 5;
+			var perkpoints:int = 1;
 			if (player.findPerk(PerkLib.AscensionUnlockedPotential) >= 0) {
 				hp += 20;
 				fatigue += 6;
@@ -3039,7 +3041,11 @@ public function setLevelButton(allowAutoLevelTransition:Boolean):Boolean {
 			if (player.findPerk(PerkLib.UnlockBody2ndStage) >= 0) fatigue += 5;
 			if (player.findPerk(PerkLib.UnlockMind2ndStage) >= 0) soulforce += 5;
 			if (player.findPerk(PerkLib.UnlockId2ndStage) >= 0) wrath += 1;
-			mainView.levelButton.toolTipText = "Level up to increase your maximum HP by " + hp + ", maximum Fatigue by " + fatigue + ", maximum Mana by " + mana + ", maximum Soulforce by " + soulforce + ", maximum Wrath by " + wrath + " and maximum Lust by " + lust + "; gain 5 attribute points and 1 perk points.";
+			if (player.level < 6) {
+				statpoints += 5;
+				perkpoints += 1;
+			}
+			mainView.levelButton.toolTipText = "Level up to increase your maximum HP by " + hp + ", maximum Fatigue by " + fatigue + ", maximum Mana by " + mana + ", maximum Soulforce by " + soulforce + ", maximum Wrath by " + wrath + " and maximum Lust by " + lust + "; gain " + statpoints + " attribute points and " + perkpoints + " perk points.";
 			if (flags[kFLAGS.AUTO_LEVEL] > 0 && allowAutoLevelTransition) {
                 CoC.instance.playerInfo.levelUpGo();
                 return true; //True indicates that you should be routed to level-up.

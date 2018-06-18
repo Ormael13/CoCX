@@ -5157,6 +5157,17 @@ use namespace CoC;
 			var maxCor:int = 100;
 			var newGamePlusMod:int = this.newGamePlusMod()+1;
 			
+			//Lowered caps due to too low lvl (yes every hero started from zero....right?)
+			if (level < 12) {
+				maxStr -= (5 * (12 - level));
+				maxTou -= (5 * (12 - level));
+				maxSpe -= (5 * (12 - level));
+				maxInt -= (5 * (12 - level));
+				maxWis -= (5 * (12 - level));
+				maxLib -= (5 * (12 - level));
+				maxSen -= (5 * (12 - level));
+			}
+			
 			//Alter max speed if you have oversized parts. (Realistic mode)
 			if (flags[kFLAGS.HUNGER_ENABLED] >= 1)
 			{
@@ -6253,7 +6264,7 @@ use namespace CoC;
 		}
 		
 		public function requiredXP():int {
-			var temp:int = level * 100;
+			var temp:int = (level + 1) * 100;
 			if (temp > 15000) temp = 15000;
 			return temp;
 		}

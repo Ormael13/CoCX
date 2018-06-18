@@ -30,6 +30,7 @@ public class Wings extends BodyPart {
 	public static const FEATHERED_AVIAN:int      = 27;
 	public static const NIGHTMARE:int    		 = 28;
 	public static const FEATHERED_SPHINX:int     = 29;
+	// Don't forget to add new types in DebugMenu.as list WING_TYPE_CONSTANTS
 	
 	public var desc:String = "non-existant";
 	public function Wings() {

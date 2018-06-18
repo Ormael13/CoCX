@@ -796,6 +796,7 @@ public class DebugMenu extends BaseContent
 			[Skin.GOO, "3 GOO"],
 			[Skin.STONE, "7 STONE"],
 			[Skin.AQUA_RUBBER_LIKE, "7 AQUA_RUBBER_LIKE"],
+			[Skin.FEATHER, "21 FEATHER"],
 		];
 		private static const SKIN_COAT_TYPES:Array = [
 			[Skin.FUR, "1 FUR"],
@@ -818,6 +819,7 @@ public class DebugMenu extends BaseContent
 			[Skin.PATTERN_NONE, "0 NONE"],
 			[Skin.PATTERN_BEE_STRIPES, "3 BEE_STRIPES"],
 			[Skin.PATTERN_TIGER_STRIPES, "4 TIGER_STRIPES"],
+			[Skin.PATTERN_RED_PANDA_UNDERBODY, "8 PATTERN_RED_PANDA_UNDERBODY"],
 		];
 		/*
 		private static const SKIN_TONE_CONSTANTS:Array = [
@@ -1010,6 +1012,15 @@ public class DebugMenu extends BaseContent
 			[Face.ONI_TEETH, "32 ONI_TEETH"],
 			[Face.RAIJU_FANGS, "33 RAIJU_FANGS"],
 			[Face.VAMPIRE, "34 VAMPIRE"],
+			[Face.VAMPIRE, "34 VAMPIRE"],
+			[Face.BUCKTOOTH, "35 BUCKTOOTH"],
+			[Face.JABBERWOCKY, "36 JABBERWOCKY"],
+			[Face.RED_PANDA, "37 RED_PANDA"],
+			[Face.CAT_CANINES, "38 CAT_CANINES"],
+			[Face.CHESHIRE, "39 CHESHIRE"],
+			[Face.CHESHIRE_SMILE, "40 CHESHIRE_SMILE"],
+			[Face.AVIAN, "41 AVIAN"],
+			[Face.WOLF_FANGS, "42 WOLF_FANGS"],
 		];
 		private static const TONGUE_TYPE_CONSTANTS:Array = [
 			[Tongue.HUMAN, "0 HUMAN"],
@@ -1019,6 +1030,7 @@ public class DebugMenu extends BaseContent
 			[Tongue.ECHIDNA, "4 ECHIDNA"],
 			[Tongue.CAT, "5 CAT"],
 			[Tongue.ELF, "6 ELF"],
+			[Tongue.DOG, "7 DOG"],
 		];
 		private static const EYE_TYPE_CONSTANTS:Array = [
 			[Eyes.HUMAN, "0 HUMAN"],
@@ -1037,6 +1049,9 @@ public class DebugMenu extends BaseContent
 			[Eyes.ELF, "13 ELF"],
 			[Eyes.RAIJU, "14 RAIJU"],
 			[Eyes.VAMPIRE, "15 VAMPIRE"],
+			[Eyes.GEMSTONES, "16 GEMSTONES"],
+			[Eyes.FERAL, "17 FERAL"],
+			[Eyes.GRYPHON, "18 GRYPHON"],
 		];
 		private static const EAR_TYPE_CONSTANTS:Array    = [
 			[Ears.HUMAN, "0 HUMAN"],
@@ -1068,6 +1083,9 @@ public class DebugMenu extends BaseContent
 			[Ears.WEASEL, "26 WEASEL"],
 			[Ears.BAT, "27 BAT"],
 			[Ears.VAMPIRE, "28 VAMPIRE"],
+			[Ears.RED_PANDA, "29 RED_PANDA"],
+			[Ears.AVIAN, "30 AVIAN"],
+			[Ears.GRYPHON, "31 GRYPHON"],
 		];
 		private static const HORN_TYPE_CONSTANTS:Array    = [
 			[Horns.NONE, "0 NONE"],
@@ -1084,6 +1102,7 @@ public class DebugMenu extends BaseContent
 			[Horns.ORCHID, "11 ORCHID"],
 			[Horns.ONI_X2, "12 ONI_X2"],
 			[Horns.ONI, "13 ONI"],
+			[Horns.BICORN, "14 BICORN"],
 		];
 		private static const HORN_COUNT_CONSTANTS:Array = [
 				0,1,2,3,4,
@@ -1094,6 +1113,7 @@ public class DebugMenu extends BaseContent
 			[Antennae.NONE, "0 NONE"],
 			[Antennae.MANTIS, "1 MANTIS"],
 			[Antennae.BEE, "2 BEE"],
+			[Antennae.COCKATRICE, "3 COCKATRICE"],
 		];
 		private static const GILLS_TYPE_CONSTANTS:Array   = [
 			[Gills.NONE, "0 NONE"],
@@ -1133,7 +1153,7 @@ public class DebugMenu extends BaseContent
 			if (setIdx>=0) player.eyes.colour = COLOR_CONSTANTS[setIdx];
 			menu();
 			dumpPlayerData();
-			showChangeOptions(bodyPartEditorHead, page, COLOR_CONSTANTS, changeEyeType);
+			showChangeOptions(bodyPartEditorHead, page, COLOR_CONSTANTS, changeEyeColor);
 		}
 		private function changeEarType(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.ears.type = setIdx;
@@ -1215,6 +1235,15 @@ public class DebugMenu extends BaseContent
 			[Arms.ORCA, "17 ORCA"],
 			[Arms.PLANT2, "18 PLANT2"],
 			[Arms.DEVIL, "19 DEVIL"],
+			[Arms.ONI, "20 ONI"],
+			[Arms.ELF, "21 ELF"],
+			[Arms.RAIJU, "22 RAIJU"],
+			[Arms.RED_PANDA, "23 RED_PANDA"],
+			[Arms.GARGOYLE_2, "24 GARGOYLE_2"],
+			[Arms.CAT, "25 CAT"],
+			[Arms.AVIAN, "26 AVIAN"],
+			[Arms.GRYPHON, "27 GRYPHON"],
+			[Arms.SPHINX, "28 SPHINX"],
 		];
 		private static const CLAW_TYPE_CONSTANTS:Array = [
 			[Claws.NORMAL, "0 NORMAL"],
@@ -1225,6 +1254,9 @@ public class DebugMenu extends BaseContent
 			[Claws.DOG, "5 DOG"],
 			[Claws.RAPTOR, "6 RAPTOR"],
 			[Claws.MANTIS, "7 MANTIS"],
+			[Claws.IMP, "8 IMP"],
+			[Claws.COCKATRICE, "9 COCKATRICE"],
+			[Claws.RED_PANDA, "10 RED_PANDA"],
 		];
 		private static const TAIL_TYPE_CONSTANTS:Array  = [
 			[Tail.NONE, "0 NONE"],
@@ -1260,6 +1292,12 @@ public class DebugMenu extends BaseContent
 			[Tail.GARGOYLE, "30 GARGOYLE"],
 			[Tail.ORCA, "31 ORCA"],
 			[Tail.YGGDRASIL, "32 YGGDRASIL"],
+			[Tail.RAIJU, "33 RAIJU"],
+			[Tail.RED_PANDA, "34 RED_PANDA"],
+			[Tail.GARGOYLE_2, "35 GARGOYLE_2"],
+			[Tail.AVIAN, "36 AVIAN"],
+			[Tail.GRIFFIN, "37 GRIFFIN"],
+			[Tail.LION, "38 LION"],
 		];
 		private static const TAIL_COUNT_CONSTANTS:Array = [
 			[0,"0"],1,2,3,4,
@@ -1343,6 +1381,13 @@ public class DebugMenu extends BaseContent
 			[LowerBody.YETI, "36 YETI"],
 			[LowerBody.ORCA, "37 ORCA"],
 			[LowerBody.YGG_ROOT_CLAWS, "38 YGG_ROOT_CLAWS"],
+			[LowerBody.ONI, "39 ONI"],
+			[LowerBody.ELF, "40 ELF"],
+			[LowerBody.RAIJU, "41 RAIJU"],
+			[LowerBody.RED_PANDA, "42 RED_PANDA"],
+			[LowerBody.GARGOYLE_2, "43 GARGOYLE_2"],
+			[LowerBody.AVIAN, "44 AVIAN"],
+			[LowerBody.GRYPHON, "45 GRYPHON"],
 		];
 		private static const LEG_COUNT_CONSTANTS:Array = [
 			1,2,4,6,8,
@@ -1357,6 +1402,9 @@ public class DebugMenu extends BaseContent
 			[RearBody.BEHEMOTH, "5 BEHEMOTH"],
 			[RearBody.SHARK_FIN, "6 SHARK_FIN"],
 			[RearBody.ORCA_BLOWHOLE, "7 ORCA_BLOWHOLE"],
+			[RearBody.RAIJU_MANE, "8 RAIJU_MANE"],
+			[RearBody.BAT_COLLAR, "9 BAT_COLLAR"],
+			[RearBody.WOLF_COLLAR, "10 WOLF_COLLAR"],
 		];
 		private function changeArmType(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.arms.type = setIdx;
