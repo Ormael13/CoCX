@@ -30,6 +30,7 @@ public class Arms extends BodyPart {
 	public static const AVIAN:int = 26;
 	public static const GRYPHON:int = 27;
 	public static const SPHINX:int = 28;
+	// Don't forget to add new types in DebugMenu.as list ARM_TYPE_CONSTANTS
 
 	public function Arms() {
 		super(null, null);

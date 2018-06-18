@@ -47,6 +47,7 @@ public class Skin extends SaveableBodyPart {
 	public static const AQUA_RUBBER_LIKE:int      = 19;
 	public static const TATTOED_ONI:int           = 20;
 	public static const FEATHER:int 	          = 21;
+	// Don't forget to add new types in DebugMenu.as lists SKIN_BASE_TYPES or SKIN_COAT_TYPES
 	
 	public static const PATTERN_NONE:int = 0;
 	public static const PATTERN_MAGICAL_TATTOO:int = 1;
@@ -57,6 +58,7 @@ public class Skin extends SaveableBodyPart {
 	public static const PATTERN_SPOTTED:int = 6;
 	public static const PATTERN_LIGHTNING_SHAPED_TATTOO:int = 7;
 	public static const PATTERN_RED_PANDA_UNDERBODY:int = 8;
+	// Don't forget to add new types in DebugMenu.as lists SKIN_BASE_TYPES or SKIN_COAT_TYPES
 	
 	public var base:SkinLayer;
 	public var coat:SkinLayer;
