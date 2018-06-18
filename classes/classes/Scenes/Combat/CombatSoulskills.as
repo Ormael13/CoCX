@@ -50,7 +50,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsEarthStance)) {
-			buttons.add("Earth Stance", EarthStance).hint("Take on the stability and strength of the earth gaining 30% damage reduction for the next 3 rounds.  \n\nWould go into cooldown after use for: 10 rounds  \n\nSoulforce cost: " + 30 * soulskillCost() * soulskillcostmulti());
+			bd = buttons.add("Earth Stance", EarthStance).hint("Take on the stability and strength of the earth gaining 30% damage reduction for the next 3 rounds.  \n\nWould go into cooldown after use for: 10 rounds  \n\nSoulforce cost: " + 30 * soulskillCost() * soulskillcostmulti());
 			if (player.hasStatusEffect(StatusEffects.CooldownEarthStance)) {
 				bd.disable("You need more time before you can use Earth Stance again.");
 			} else if (player.soulforce < 30 * soulskillCost() * soulskillcostmulti()) {
@@ -58,7 +58,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsPunishingKick)) {
-			buttons.add("Punishing Kick", PunishingKick).hint("A vicious kick that can daze an opponent, reducing its damage for a while.  \n\nWould go into cooldown after use for: 10 rounds  \n\nSoulforce cost: " + 30 * soulskillCost() * soulskillcostmulti());
+			bd = buttons.add("Punishing Kick", PunishingKick).hint("A vicious kick that can daze an opponent, reducing its damage for a while.  \n\nWould go into cooldown after use for: 10 rounds  \n\nSoulforce cost: " + 30 * soulskillCost() * soulskillcostmulti());
 			if (player.hasStatusEffect(StatusEffects.CooldownPunishingKick)) {
 				bd.disable("You need more time before you can use Punishing Kick again.");
 			} else if (!player.isBiped() || !player.isTaur()) {
@@ -68,7 +68,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsSoulBlast)) {
-			buttons.add("Soul Blast", SoulBlast).hint("Take in your reserve of soul force to unleash a torrent of devastating energy and obliterate your opponent.  \n\nWould go into cooldown after use for: 15 rounds  \n\nSoulforce cost: " + 100 * soulskillCost() * soulskillcostmulti());
+			bd = buttons.add("Soul Blast", SoulBlast).hint("Take in your reserve of soul force to unleash a torrent of devastating energy and obliterate your opponent.  \n\nWould go into cooldown after use for: 15 rounds  \n\nSoulforce cost: " + 100 * soulskillCost() * soulskillcostmulti());
 			if (player.hasStatusEffect(StatusEffects.CooldownSoulBlast)) {
 				bd.disable("You need more time before you can use Soul Blast again.");
 			} else if (player.soulforce < 100 * soulskillCost() * soulskillcostmulti()) {
@@ -77,9 +77,9 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsOverlimit)) {
 			if (player.hasStatusEffect(StatusEffects.Overlimit)) {
-				buttons.add("Overlimit(Off)", deactivaterOverlimit).hint("Deactivate Overlimit.");
+				bd = buttons.add("Overlimit(Off)", deactivaterOverlimit).hint("Deactivate Overlimit.");
 			} else {
-				buttons.add("Overlimit(On)", activaterOverlimit).hint("Strain your body to its limit to increase melee damage dealt by 100% at the cost of hurting yourself. This also increases lust resistance.");
+				bd = buttons.add("Overlimit(On)", activaterOverlimit).hint("Strain your body to its limit to increase melee damage dealt by 100% at the cost of hurting yourself. This also increases lust resistance.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsTripleThrust)) {
@@ -101,7 +101,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}
 		if (player.weapon == weapons.WDBLADE) {
-			buttons.add("Blade Dance", BladeDance).hint("Attack twice (four times if double attack is active, six times if triple attack is active and etc.).\n\nSoulforce cost: " + 50 * soulskillCost() * (1 + flags[kFLAGS.DOUBLE_ATTACK_STYLE]));
+			bd = buttons.add("Blade Dance", BladeDance).hint("Attack twice (four times if double attack is active, six times if triple attack is active and etc.).\n\nSoulforce cost: " + 50 * soulskillCost() * (1 + flags[kFLAGS.DOUBLE_ATTACK_STYLE]));
 			if (player.soulforce < 50 * soulskillCost() * (1 + flags[kFLAGS.DOUBLE_ATTACK_STYLE])) {
 				bd.disable("Your current soulforce is too low.");
 			}
@@ -139,7 +139,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsVioletPupilTransformation)) {
 			if (player.hasStatusEffect(StatusEffects.VioletPupilTransformation)) {
-				buttons.add("Deactiv VPT", DeactivateVioletPupilTransformation)
+				bd = buttons.add("Deactiv VPT", DeactivateVioletPupilTransformation)
 					   .hint("Deactivate Violet Pupil Transformation.");
 			} else {
 				bd = buttons.add("V P Trans", VioletPupilTransformation);
@@ -157,14 +157,14 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.findPerk(PerkLib.Trance) >= 0) {
 			if (!player.hasStatusEffect(StatusEffects.TranceTransformation)) {
-				buttons.add("Trance", TranceTransformation).hint("Activate Trance state, whcih enhancing physical and mental abilities at constant cost of soulforce.\n\nCost: 100 soulforce on activation and 50 soulforce per turn)");
+				bd = buttons.add("Trance", TranceTransformation).hint("Activate Trance state, whcih enhancing physical and mental abilities at constant cost of soulforce.\n\nCost: 100 soulforce on activation and 50 soulforce per turn)");
 				if (player.soulforce < 100) {
 					bd.disable("Your current soulforce is too low.");
 				} else if (player.hasStatusEffect(StatusEffects.OniRampage)) {
 					bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
 				}
 			} else {
-				buttons.add("DeActTrance", DeactivateTranceTransformation).hint("Deactivate Trance.");
+				bd = buttons.add("DeActTrance", DeactivateTranceTransformation).hint("Deactivate Trance.");
 			}
 		}
 	}

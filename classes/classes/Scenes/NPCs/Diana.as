@@ -145,8 +145,8 @@ package classes.Scenes.NPCs
 					else eAttack();
 				}
 				if (choice2 > 2 && choice2 < 5) {
-					if (HPRatio() < .6 && rand(2) == 0 && (mana >= spellCostHeal())) usingHealSpell();
-					else if (rand(2) == 0 && (mana < (this.maxMana() - 80))) usingARC();
+					if (HPRatio() < .6 && rand(3) == 0 && (mana >= spellCostHeal())) usingHealSpell();
+					else if (rand(3) == 0 && (mana < (this.maxMana() - 80))) usingARC();
 					else eAttack();
 				}
 				if (choice2 == 5) {
@@ -158,8 +158,8 @@ package classes.Scenes.NPCs
 				var choice1:Number = rand(6);
 				if (choice1 < 3) eAttack();
 				if (choice1 > 2 && choice1 < 5) {
-					if (HPRatio() < .5 && rand(2) == 0 && (mana >= spellCostHeal())) usingHealSpell();
-					else if (rand(2) == 0 && (mana < (this.maxMana() - 40))) usingARC();
+					if (HPRatio() < .5 && rand(4) == 0 && (mana >= spellCostHeal())) usingHealSpell();
+					else if (rand(4) == 0 && (mana < (this.maxMana() - 40))) usingARC();
 					else eAttack();
 				}
 				if (choice1 == 5) {

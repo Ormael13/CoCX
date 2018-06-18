@@ -109,7 +109,7 @@ package classes.Scenes
 			outputText("<b>Version 0.8i3:</b>\n\n");
 			outputText("-Human score bonuses changed form bonuses to stats into bonuses to EXP gains after fight - 1-5 pts * PC level (the less human PC became, the lower bonus till it reach 0 at 25 pts and below in human score)\n");
 			outputText("-Fatigue cost reduction by half when using multi attcks removed. Soulforce costs mutiplier when using melee multittacks (with fists or gaunlets) lowered from 5x to 3x.\n");
-			outputText("-\n");
+			outputText("-Diana chance to use healing or restopring mana actions was lowered at her low and medium levels from 50% to 33% and 25%.\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: \n\n\n\n");/*ostatni punkt changelogu
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: \n");
