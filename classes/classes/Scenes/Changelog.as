@@ -91,7 +91,7 @@ package classes.Scenes
 			outputText("-Giacomo was added to possible encounters in Soul Sense menu. Also Lumi Lab after first time visiting it would be moved to Dungeons submenu (since it should been like Sean shop inside one of dungeons).\n");
 			outputText("-Celess related events in forest would be temporaly unaccesable (not affecting anything if PC already have Celess in camp).\n");
 			outputText("-Fixed bugs: Patchouli not leading PC to Wonderland from camp, Sidewinder not having daily cooldown counter, Anzu missing from his palace, Chi Chi not dropping M.Gloves after first/second fight on soul arena, missing option to buy Taoth statue in Jewelery shop in Tel'Adre\n\n");
-			outputText("<b>Version 0.8i2:</b>\n\n");
+			outputText("<b>Version 0.8i2 (Bugfixing):</b>\n\n");
 			outputText("-Diana later stages stats adjusted. Also added req. of min. lvl 3 to meet her at lake, lowered encounter chance.\n");
 			outputText("-Luna can be spared when PC accept her (by loosing in fight or just accepting). In case of simple accepting there would be new option showing up in talk menu after talking with her on Lycantrophy after accpting her that allow voluntary been biten by her. After sparing she can lvl up up to lvl 27.\n");
 			outputText("-Ice Fist and Fire Punch req. using bare first or gaunlets. Punishing Kick req. to have bipedal or taur lower body.\n");
@@ -101,14 +101,17 @@ package classes.Scenes
 			outputText("-New melee weapon: Sceptre of Command - won as reward for first time beating Gaunlet 2 on Soul Arena. Cost 600 gems and base atk 4. Increase by 50% damage of elementals and golems.\n");
 			outputText("-Beast Warrior Crinos Shape bonuses was increased from 5/10/15/20% of current str/tou/spe to 20/40/80/160%.\n");
 			outputText("-Metamorph perk would grant increase max soulforce by 50 and grant access to Metamorph option even if PC not yet have perk Job: Soul Cultivator.\n");
-			outputText("-Starting mana cap rised from 100 to 200 and starting fatigue cap from 100 to 150. Feral Whirlwind base dmg increased by 50%. Archery base accuracy increased form 30% to 40%. Fly-Whisk price lowered by half. Shield Bash req. not proper type of shield not just any item in shield slot like mana bracer.\n");
+			outputText("-Starting mana cap rised from 100 to 200 and starting fatigue cap from 100 to 150. Feral Whirlwind base dmg increased by 50%. Archery base accuracy increased from 30% to 40%. Fly-Whisk price lowered by half. Shield Bash req. not proper type of shield not just any item in shield slot like mana bracer.\n");
 			outputText("-Attacks using intelligence and wisdom scalling would now use scalling used by attack using str/tou/spe, which mean at stat values above 100 it would be weaker effect.\n");
 			outputText("-Req. for perks form corruption tree lowered: Corrupted Libido, Seduction, Nymphomania, Acclimation, Sense Corruption, Sadist, Arousing Aura\n");
 			outputText("-Monsters base lust cap lowered from 100 to 70. Also now they will get a few points to max cap each lvl (at begining 2, then 5, 10, 20).\n");
-			outputText("-Fixed bugs: Werewolf full fur instead of partial, Luna bugs fixed, Raiju lust nukes nerfed, Temple of the Divine rebulding bugfixing, removed req. of Heroism perk for perk Job: Countresan, missing Anzu in his Palace\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Werewolf full fur instead of partial, Luna bugs fixed, Raiju lust nukes nerfed, Temple of the Divine rebulding bugfixing, removed req. of Heroism perk for perk Job: Countresan, missing Anzu in his Palace\n\n");
+			outputText("<b>Version 0.8i3:</b>\n\n");
+			outputText("-Human score bonuses changed form bonuses to stats into bonuses to EXP gains after fight - 1-5 pts * PC level (the less human PC became, the lower bonus till it reach 0 at 25 pts and below in human score)\n");
+			outputText("-Fatigue cost reduction by half when using multi attcks removed. Soulforce costs mutiplier when using melee multittacks (with fists or gaunlets) lowered from 5x to 3x.\n");
+			outputText("-PC starts with max stats caps of 40 that rise 5 pts each lvl up till lvl 12. Also each PC now start on lvl 0. (From 0 to Hero right? xD)\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Fixed bugs: \n\n\n\n");/*ostatni punkt changelogu
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: \n");
 			//outputText("-New range weapon: Hodr's Bow - obtained by . 22 atk, costing 2200 gems, -5% accuracy, Artifact Bow, each arrow can apply blind debuff on enemy.\n");
 			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
@@ -126,6 +129,7 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Bat, Vampire, Cat, Cheshire cat
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -163,6 +167,7 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): dodać yuki-onna TF
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

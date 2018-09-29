@@ -2212,11 +2212,12 @@ public function RacialScores():void {
 	else if (player.horseScore() >= 4 && player.horseScore() < 7) outputText("\n<font color=\"#0000a0\">Half Horse-morph: " + player.horseScore() + " (+" + (20 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (35 * (1 + player.newGamePlusMod())) + " max HP)</font>");
 	else if (player.horseScore() >= 1 && player.horseScore() < 4) outputText("\n<font color=\"#008000\">Half Horse-morph: " + player.horseScore() + "</font>");
 	else if (player.horseScore() < 1) outputText("\n<font color=\"#ff0000\">Half Horse-morph: 0</font>");
-	if (player.humanScore() == 30) outputText("\n<font color=\"#0000a0\">HUMANITY: 30 (+" + (40 * (1 + player.newGamePlusMod())) + " max Str / Tou / Spe / Int / Wis / Lib / Sen)</font>");
-	else if (player.humanScore() == 29) outputText("\n<font color=\"#0000a0\">HUMANITY: 29 (+" + (30 * (1 + player.newGamePlusMod())) + " max Str / Tou / Spe / Int / Wis / Lib / Sen)</font>");
-	else if (player.humanScore() == 28) outputText("\n<font color=\"#0000a0\">HUMANITY: 28 (+" + (20 * (1 + player.newGamePlusMod())) + " max Str / Tou / Spe / Int / Wis / Lib / Sen)</font>");
-	else if (player.humanScore() == 27) outputText("\n<font color=\"#0000a0\">HUMANITY: 27 (+" + (10 * (1 + player.newGamePlusMod())) + " max Str / Tou / Spe / Int / Wis / Lib / Sen)</font>");
-	else if (player.humanScore() < 27) outputText("\n<font color=\"#008000\">HUMANITY: " + player.humanScore() + "</font>");
+	if (player.humanScore() == 30) outputText("\n<font color=\"#0000a0\">HUMANITY: 30 (+" + (5 * player.level) + " bonus EXP gains)</font>");
+	else if (player.humanScore() == 29) outputText("\n<font color=\"#0000a0\">HUMANITY: 29 (+" + (4 * player.level) + " bonus EXP gains)</font>");
+	else if (player.humanScore() == 28) outputText("\n<font color=\"#0000a0\">HUMANITY: 28 (+" + (3 * player.level) + " bonus EXP gains)</font>");
+	else if (player.humanScore() == 27) outputText("\n<font color=\"#0000a0\">HUMANITY: 27 (+" + (2 * player.level) + " bonus EXP gains)</font>");
+	else if (player.humanScore() == 26) outputText("\n<font color=\"#0000a0\">HUMANITY: 26 (+" + (1 * player.level) + " bonus EXP gains)</font>");
+	else if (player.humanScore() < 26) outputText("\n<font color=\"#008000\">HUMANITY: " + player.humanScore() + "</font>");
 	if (player.internalChimeraScore() >= 1) {
 		outputText("\n<font color=\"#0000a0\">INTERNAL CHIMERICAL DISPOSITION: " + player.internalChimeraScore() + " (+" + (5 * player.internalChimeraScore() * (1 + player.newGamePlusMod())) + " max Str / Tou / Spe / Int / Wis / Lib)</font>");
 	}

@@ -190,7 +190,7 @@ use namespace CoC;
 			//addButton(5, "Upgrade", UpgradeItems).hint("."); //ulepszanie itemów
 			if (player.findPerk(PerkLib.Metamorph) >= 0) addButton(6, "Metamorf", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold freely your body.");//używanie metamorfowania z użyciem soulforce
 			if (player.findPerk(PerkLib.SoulSense) >= 0) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounter."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
-			//addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
+			addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
 			addButton(14, "Back", playerMenu);
 		}//w lini 28 w oOnLoadVariables zmian wprowadzić i w lini conditionalConverters w folderze parser zmian dot. wraith wprowadzić, zablokować perki soul tyrant i dual wield w momencie robienia release version
 		public function SoulforceCheats():void {
@@ -210,22 +210,11 @@ use namespace CoC;
 			addButton(9, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
 			addButton(10, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
 			addButton(11, "Celess", celessIntroForced).hint("Due to hard time getting her intro here it's.");
-			if (flags[kFLAGS.LUNA_MOON_CYCLE] > 8) addButton(12, "MoonCycleAdj", moonCycleAdjusting).hint("Adjusting wild moon cycle to pokeba... norm.");
-			if (player.hasPerk(PerkLib.Lycanthropy) && player.skin.coverage != Skin.COVERAGE_LOW) addButton(13, "WWFurFix", fixingWerewolfFur).hint("Fixing full to partial werewolf fur.");
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 public function celessIntroForced():void {
 	clearOutput();
 	CelessScene.instance.birthScene();
-}
-public function moonCycleAdjusting():void {
-	if (flags[kFLAGS.LUNA_MOON_CYCLE] > 8) flags[kFLAGS.LUNA_MOON_CYCLE] = 1;
-	doNext(SoulforceCheats);
-}
-public function fixingWerewolfFur():void {
-	player.skin.coverage = Skin.COVERAGE_LOW;
-	player.coatColor = player.hairColor;
-	doNext(SoulforceCheats);
 }
 public function LvLUPDiana():void {
 	outputText("\n\n<b>Diana get stronger! (cheat stop working when she reach max possible lvl (atm it's lvl 27))</b>");

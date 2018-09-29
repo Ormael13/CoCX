@@ -831,7 +831,7 @@ import flash.utils.getQualifiedClassName;
 				if (findPerk(PerkLib.EnemyGroupType) >= 0) minXP *= 5;
 				return minXP;
 			}
-			return Math.round((this.additionalXP + this.baseXP()) * this.bonusXP() * difference * multiplier);
+			return Math.round(((this.additionalXP + this.baseXP()) * this.bonusXP() * difference * multiplier) + this.humanity());
 		}
 		protected function baseXP():Number
 		{
@@ -848,6 +848,16 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.EnemyGigantType) >= 0) specENtypes *= 3;
 			if (findPerk(PerkLib.EnemyGroupType) >= 0) specENtypes *= 5;
 			return specENtypes;
+		}
+		protected function humanity():Number
+		{
+			var baseHumBoost:Number = 0;
+			if (game.player.humanScore() == 30) baseHumBoost += game.player.level * 5;
+			if (game.player.humanScore() == 29) baseHumBoost += game.player.level * 4;
+			if (game.player.humanScore() == 28) baseHumBoost += game.player.level * 3;
+			if (game.player.humanScore() == 27) baseHumBoost += game.player.level * 2;
+			if (game.player.humanScore() == 26) baseHumBoost += game.player.level * 1;
+			return baseHumBoost;
 		}
 
 		public function Monster()

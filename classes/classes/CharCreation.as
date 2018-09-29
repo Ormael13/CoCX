@@ -171,7 +171,7 @@ import coc.view.MainView;
 			player.lust = 15;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				player.XP = flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP];
-				player.level = 1;
+				player.level = 0;
 				
 				player.gems = flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS];
 			}
