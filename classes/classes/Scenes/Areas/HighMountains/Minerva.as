@@ -112,8 +112,6 @@ public class Minerva extends Monster
 		private function kiteFire():void
 		{
 			var damage:int = int(10 + (inte / 3 + rand(inte / 2)) * 1.5);
-			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
-			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			damage = Math.round(damage);
 			if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 				player.addStatusValue(StatusEffects.Blizzard,1,-1);
@@ -124,7 +122,7 @@ public class Minerva extends Monster
 				outputText("The siren holds her hand out, flashing you a cunning smirk and snapping her fingers.  Your entire body is engulfed in white-hot flames, searing flesh and burning your [armor].  The sudden flash of heat and fire elicit panic from deep within you, causing you to cry out and roll on the ground to put the fires out.  The burns aren't too severe, but you know you can't keep getting hit like that! ");
 			}
 			damage = Math.round(damage);
-			player.takeMagicDamage(damage, true);
+			player.takeFireDamage(damage, true);
 		}
 
 //Lust Attacks for tainted Minerva
@@ -238,6 +236,7 @@ public class Minerva extends Monster
 			this.weaponValue = 150;
 			this.armorName = game.armors.TUBETOP.name;
 			this.armorDef = 7;
+			this.armorMDef = 2;
 			this.armorPerk = "";
 			this.armorValue = 5;
 			this.bonusHP = 470;

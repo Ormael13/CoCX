@@ -156,13 +156,14 @@ public class Imp extends Monster
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 5;
-			initStrTouSpeInte(20, 10, 20, 12);
-			initWisLibSensCor(12, 45, 45, 100);
+			initStrTouSpeInte(18, 9, 18, 11);
+			initWisLibSensCor(11, 45, 45, 100);
 			this.weaponName = "claws";
 			this.weaponVerb = "claw-slash";
 			this.weaponAttack = 1;
 			this.armorName = "leathery skin";
 			this.armorDef = 1;
+			this.armorMDef = 0;
 			this.bonusLust = 30;
 			this.lust = 40;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;

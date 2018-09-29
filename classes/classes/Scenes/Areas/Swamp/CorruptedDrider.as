@@ -68,7 +68,7 @@ import classes.internals.*;
 				if(player.tallness < 72) outputText("down");
 				else outputText("over");
 				outputText(" to plant a sloppy, wet kiss upon your lips.  Her glossy lip-venom oozes everywhere, dribbling down your collective chins and sliding into your mouth.  You shudder, trying to resist, but your tongue betrays you.  It slides between her moist, puffy entrance, lapping at her venom and making love to her tongue.");
-				if(player.lust <= 99) outputText("  Somehow, you work up the willpower to back away, but your body slowly begins to burn hotter and harder, afflicted with a slowly-building lust.");
+				if(player.lust <= (0.9 * player.maxLust())) outputText("  Somehow, you work up the willpower to back away, but your body slowly begins to burn hotter and harder, afflicted with a slowly-building lust.");
 				player.createStatusEffect(StatusEffects.DriderKiss,0,0,0,0);
 			}
 			//Get hit 2nd time) 
@@ -81,7 +81,7 @@ import classes.internals.*;
 					if(player.hasCock()) outputText("  " + SMultiCockDesc() + " spews a rope of pre-cum into your [armor], desperate to get out and fuck.");
 					if(player.hasVagina()) outputText("  Fem-cum dribbles down your [legs] while your [clit] gets so hard you think it'll explode.");
 					outputText("  This time, the drider is the one to break the kiss.  She asks, \"<i>Are you ready, my horny little morsel?</i>\"\n");
-					if(player.lust <= 99) outputText("You shake your head 'no' and stand your ground!\n");
+					if(player.lust <= (0.9 * player.maxLust())) outputText("You shake your head 'no' and stand your ground!\n");
 				}
 				//(Get hit 3rd+ time)
 				else {
@@ -94,7 +94,7 @@ import classes.internals.*;
 						else if(player.wetness() < 5 && player.cumQ() < 500) outputText("large");
 						else outputText("massive");
 						outputText(" wet stain that reeks of your sheer sexual ache has formed in your [armor].");
-						if(player.lust <= 99) outputText("  Amazingly, you resist her and pull back, panting for breath.");
+						if(player.lust <= (0.9 * player.maxLust())) outputText("  Amazingly, you resist her and pull back, panting for breath.");
 					}
 				}
 			}
@@ -155,7 +155,7 @@ import classes.internals.*;
 			this.a = "the ";
 			this.short = "corrupted drider";
 			this.imageName = "corrupteddrider";
-			this.long = "This particular spider-woman is a drider - a creature with a humanoid top half and the lower body of a giant arachnid.  From a quick glance, you can tell that this one has fallen deeply to corruption.  She is utterly nude, exposing her four well-rounded, D-cup breasts with their shiny black nipples.  "+(pierced?"Gold piercings and chains link the curvy tits together, crossing in front of her four mounds in an 'x' pattern.  ":"")+"On her face and forehead, a quartet of lust-filled, " + skinTone + " eyes gaze back at you.  Behind her, the monster-girl's " + hairColor + " hair drapes down her back like a cloak.  The drider's lips seem to shine with a light all their own, and a steady trickle of purple, reflective fluid beads and drips from them.  At her waist, there's a juicy looking snatch with a large, highly visible clit.  From time to time it pulsates and grows, turning part-way into a demon-dick.  Her spider-half has eight spindly legs with black and " + hairColor + " stripes - a menacing display if ever you've seen one.";
+			this.long = "This particular spider-woman is a drider - a creature with a humanoid top half and the lower body of a giant arachnid.  From a quick glance, you can tell that this one has fallen deeply to corruption.  She is utterly nude, exposing her four well-rounded, D-cup breasts with their shiny black nipples.  "+(pierced?"Gold piercings and chains link the curvy tits together, crossing in front of her four mounds in an 'x' pattern.  ":"")+"On her face and forehead, a sextet of lust-filled, " + skinTone + " eyes gaze back at you.  Behind her, the monster-girl's " + hairColor + " hair drapes down her back like a cloak.  The drider's lips seem to shine with a light all their own, and a steady trickle of purple, reflective fluid beads and drips from them.  At her waist, there's a juicy looking snatch with a large, highly visible clit.  From time to time it pulsates and grows, turning part-way into a demon-dick.  Her spider-half has eight spindly legs with black and " + hairColor + " stripes - a menacing display if ever you've seen one.";
 			// this.plural = false;
 			this.createCock(9,2,CockTypesEnum.DEMON);
 			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_GAPING);
@@ -168,7 +168,6 @@ import classes.internals.*;
 			this.hips.type = Hips.RATING_CURVY + 2;
 			this.butt.type = Butt.RATING_LARGE + 1;
 			this.lowerBody = LowerBody.DRIDER;
-			player.skin.restore();
 			this.hairColor = hairColor;
 			this.hairLength = 24;
 			initStrTouSpeInte(110, 75, 70, 100);
@@ -178,6 +177,7 @@ import classes.internals.*;
 			this.weaponAttack = 30;
 			this.armorName = "carapace";
 			this.armorDef = 60;
+			this.armorMDef = 6;
 			this.armorPerk = "";
 			this.armorValue = 70;
 			if (pierced) {

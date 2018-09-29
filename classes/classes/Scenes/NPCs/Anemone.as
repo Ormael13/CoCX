@@ -81,6 +81,7 @@ public class Anemone extends Monster
 			this.weaponAttack = 16;
 			this.armorName = "clammy skin";
 			this.armorDef = 10;
+			this.armorMDef = 1;
 			this.bonusHP = 120;
 			this.bonusLust = 20;
 			this.lust = 30;

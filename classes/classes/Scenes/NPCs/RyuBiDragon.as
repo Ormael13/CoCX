@@ -69,6 +69,7 @@ public class RyuBiDragon extends Monster
 				initWisLibSensCor(10, 50, 35, 50);
 				this.weaponAttack = 4;
 				this.armorDef = 4;
+				this.armorMDef = 4;
 				this.lustVuln = .95;
 				this.bonusHP = 50;
 				this.bonusLust = 10;
@@ -79,6 +80,7 @@ public class RyuBiDragon extends Monster
 				initWisLibSensCor(25, 50, 35, 50);
 				this.weaponAttack = 7;
 				this.armorDef = 7;
+				this.armorMDef = 7;
 				this.lustVuln = .95;
 				this.bonusHP = 100;
 				this.bonusLust = 20;
@@ -89,6 +91,7 @@ public class RyuBiDragon extends Monster
 				initWisLibSensCor(40, 50, 35, 50);
 				this.weaponAttack = 10;
 				this.armorDef = 10;
+				this.armorMDef = 10;
 				this.lustVuln = .9;
 				this.bonusHP = 150;
 				this.bonusLust = 30;
@@ -99,6 +102,7 @@ public class RyuBiDragon extends Monster
 				initWisLibSensCor(60, 50, 35, 50);
 				this.weaponAttack = 15;
 				this.armorDef = 15;
+				this.armorMDef = 15;
 				this.lustVuln = .9;
 				this.bonusHP = 200;
 				this.bonusLust = 40;
@@ -109,6 +113,7 @@ public class RyuBiDragon extends Monster
 				initWisLibSensCor(80, 50, 35, 50);
 				this.weaponAttack = 20;
 				this.armorDef = 20;
+				this.armorMDef = 20;
 				this.lustVuln = .85;
 				this.bonusHP = 250;
 				this.bonusLust = 50;
@@ -119,6 +124,7 @@ public class RyuBiDragon extends Monster
 				initWisLibSensCor(100, 50, 35, 50);
 				this.weaponAttack = 25;
 				this.armorDef = 25;
+				this.armorMDef = 25;
 				this.lustVuln = .85;
 				this.bonusHP = 300;
 				this.bonusLust = 60;
@@ -129,6 +135,7 @@ public class RyuBiDragon extends Monster
 				initWisLibSensCor(100, 50, 35, 50);
 				this.weaponAttack = 36;
 				this.armorDef = 54;
+				this.armorMDef = 54;
 				this.lustVuln = .85;
 				this.bonusHP = 300;
 				this.bonusLust = 60;

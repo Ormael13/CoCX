@@ -485,6 +485,7 @@ public class KitsuneScene extends BaseContent
 			outputText("A viscous stream of femcum crashes against your face, dribbling down your chin as the blonde achieves climax shortly after you do, and altogether the four of you ride the waves of pleasure for what feels like ages.  Each passing second finds you more and more fatigued, and your eyelids grow heavier and heavier, muscles growing weak.\n\n");
 			outputText("Exhausted by the ordeal, you relax into a blissful stupor, only vaguely aware of the feeling of being dragged onto the deck.  The last thing you recall before slipping into unconsciousness is the three sisters crawling up alongside you, coaxing your twice-spent member back to life yet again with their magic, eyes glinting hungrily.");
 			//Increase PC cum production slightly due to residual effects from the kitsunes' magic.
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			player.orgasm();
 			outro();
 		} //end stillHungry();
@@ -1052,6 +1053,7 @@ public class KitsuneScene extends BaseContent
 			outputText("She leans down over you and whispers a line of some strange language into your ear, and almost immediately you can feel your consciousness begin to fail you.  The last thing you see before blacking out is her half-flaccid cock swaying happily between her legs as she bends down to pick up her clothes, flashing you one last look at her wide, round ass.\n\n");
 
 			//Advance time 8 hrs, lose X gems, return to camp. +Sensitivity, +Libido.
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1);
 			cleanupAfterCombat();
@@ -2073,6 +2075,7 @@ public class KitsuneScene extends BaseContent
 
 			outputText("You turn to gather your [armor], cleaning up and dressing once more, then whip around to the sound of rustling leaves.  A set of sticky footprints leads your gaze to the edge of a bush, a flash of red tails and a pair of plump hind cheeks disappearing into the forest.");
 			//Advance time 1hr and return to camp. +Sensitivity, +Libido
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1);
 			cleanupAfterCombat();
@@ -2301,12 +2304,12 @@ public class KitsuneScene extends BaseContent
 			addButton(0, "Read Books", readKitsuneBooks);
 			if (flags[kFLAGS.TOOK_KITSUNE_STATUE] == 0) addButton(1, "Meditate", meditateLikeAKitsuneEhQuestionMark);
 			if ((player.hasItem(useables.GLDSTAT) || flags[kFLAGS.TOOK_KITSUNE_STATUE] == 0) && flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] < 1) addButton(2, "Statue", stealAStatue);
-			if (player.findPerk(PerkLib.StarSphereMastery) > 0 && player.perkv1(PerkLib.StarSphereMastery) < 10 && player.gems >= 1000) addButton(3, "Offering", offeringToTaoth);
+			if (player.findPerk(PerkLib.StarSphereMastery) > 0 && ((player.hasPerk(PerkLib.KitsuneThyroidGlandFinalForm) && player.perkv1(PerkLib.StarSphereMastery) < 25) || player.perkv1(PerkLib.StarSphereMastery) < 10) && player.gems >= 1000) addButton(3, "Offering", offeringToTaoth);
             if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 2) addButton(5, "Ayane", SceneLib.ayaneFollower.ayaneShop);
             if (flags[kFLAGS.AYANE_FOLLOWER] == 1) {
 				addButton(6, "Servant", AyaneServant);
 			}
-			if (player.findPerk(PerkLib.CorruptedNinetails) >= 0 && player.inte >= 100 && player.cor >= 50 && flags[kFLAGS.AYANE_FOLLOWER] < 2) addButton(7, "Slave", AyaneSlave);
+			if (player.findPerk(PerkLib.CorruptedNinetails) >= 0 && player.inte >= 100 && player.cor >= 50 && flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 2) addButton(7, "Slave", AyaneSlave);
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 		
@@ -2342,7 +2345,7 @@ public class KitsuneScene extends BaseContent
 		{
 			clearOutput();
 			outputText("You leave a generous offering of gems at the shrine of Taoth and pray to the fox god for his support in your quest. Light falls from the sky and seems to condense in your star sphere, as you feel your kitsune powers increasing. When you look down to the offering bowl, you discover it is now empty.\n\n");
-			if (player.perkv1(PerkLib.StarSphereMastery) < 10) player.addPerkValue(PerkLib.StarSphereMastery, 1, 1);
+			if (player.perkv1(PerkLib.StarSphereMastery) < 20) player.addPerkValue(PerkLib.StarSphereMastery, 1, 1);
 			player.gems -= 1000;
 			doNext(camp.returnToCampUseOneHour);
 		}

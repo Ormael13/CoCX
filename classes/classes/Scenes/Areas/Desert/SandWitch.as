@@ -81,6 +81,7 @@ public class SandWitch extends Monster
 			this.weaponAttack = 1;
 			this.armorName = "robes";
 			this.armorDef = 2;
+			this.armorMDef = 10;
 			this.bonusHP = 100;
 			this.bonusLust = 20;
 			this.lust = 30;

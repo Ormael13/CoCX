@@ -82,7 +82,7 @@ public class Sirius extends Naga
 //Hit:
 			outputText("The snake-man moves too quickly for you to evade and he sinks long fangs into your flesh, leaving a wound that burns with horrific pain. ");
 			var damage:Number = 40 + rand(20);
-			damage = player.takeMagicDamage(damage, true);
+			damage = player.takePoisonDamage(damage, true);
 		}
 
 		override public function defeated(hpVictory:Boolean):void
@@ -122,6 +122,7 @@ public class Sirius extends Naga
 			this.weaponAttack = 37;
 			this.armorName = "scales";
 			this.armorDef = 31;
+			this.armorMDef = 31;
 			this.bonusHP = 400;
 			this.bonusLust = 20;
 			this.lust = 30;

@@ -150,13 +150,14 @@ public class Goblin extends Monster
 			this.skinTone = "dark green";
 			this.hairColor = "purple";
 			this.hairLength = 4;
-			initStrTouSpeInte(15, 20, 35, 42);
-			initWisLibSensCor(42, 45, 45, 60);
+			initStrTouSpeInte(14, 17, 30, 38);
+			initWisLibSensCor(38, 45, 45, 60);
 			this.weaponName = "fists";
 			this.weaponVerb = "tiny punch";
 			this.weaponAttack = 1;
 			this.armorName = "leather straps";
 			this.armorDef = 1;
+			this.armorMDef = 0;
 			this.bonusLust = 20;
 			this.lust = 50;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

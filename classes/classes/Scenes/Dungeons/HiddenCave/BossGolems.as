@@ -71,7 +71,8 @@ public class BossGolems extends AbstractGargoyle
 		
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			SceneLib.dungeons.hiddencave.defeatedByBossGolems();
+			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) cleanupAfterCombat();
+			else SceneLib.dungeons.hiddencave.defeatedByBossGolems();
 		}
 		
 		public function BossGolems() 
@@ -84,6 +85,7 @@ public class BossGolems extends AbstractGargoyle
 				this.bonusHP = 200;
 				this.weaponAttack = 24;
 				this.armorDef = 24;
+				this.armorMDef = 24;
 			}
 			else {
 				this.long = "You're currently fighting guardian quasi-gargoyles. They're all around six feet tall without any sexual characteristics, their stone body covered in cracks, with rudimental wins and fully formed mace or axe tails, using bare stone fists to smash intruders.";
@@ -93,6 +95,7 @@ public class BossGolems extends AbstractGargoyle
 				this.bonusHP = 100;
 				this.weaponAttack = 16;
 				this.armorDef = 16;
+				this.armorMDef = 16;
 			}
 			this.a = "the ";
 			this.short = "guardian quasi-gargoyles";

@@ -105,7 +105,7 @@ public function ayaneShop():void {
 		addButton(3, armors.PKIMONO.shortName, sellItem, armors.PKIMONO);
 		addButton(4, armors.ARCBANG.shortName, sellItem, armors.ARCBANG);
 		addButton(5, shields.SPI_FOC.shortName, sellItem, shields.SPI_FOC);
-		addButton(6, jewelries.FOXHAIR.shortName, sellItem, jewelries.FOXHAIR);
+		addButton(6, headjewelries.FOXHAIR.shortName, sellItem, headjewelries.FOXHAIR);
 		addButton(7, consumables.FOXJEWL.shortName, sellItem, consumables.FOXJEWL);
 		addButton(10, consumables.AGILI_E.shortName, sellItem, consumables.AGILI_E, 15);
 		addButton(11, consumables.SMART_T.shortName, sellItem, consumables.SMART_T);
@@ -149,7 +149,7 @@ public function ayaneShop():void {
 				case shields.SPI_FOC:
 					outputText("\"<i>This little icon is a very powerful spellcasting tool. It helps empower a kitsune’s magic. I don't get the use of shields; it’s so pointless. I can sell you one for <b>" + cost.toString() + " gems</b>.</i>\"");
 					break;
-				case jewelries.FOXHAIR:
+				case headjewelries.FOXHAIR:
 					outputText("\"<i>This might appear to be just an accessory, but I personally blessed it in the name of Taoth. Should you wear it, this hairpin is likely to improve your ability to focus soul magic. This item wasn’t easy to make, which is why I can’t sell it to you for less than <b>" + cost.toString() + " gems</b>.</i>\"");
 					break;
 				case consumables.FOXJEWL:

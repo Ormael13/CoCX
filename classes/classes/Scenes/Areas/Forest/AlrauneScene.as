@@ -114,6 +114,7 @@ public class AlrauneScene extends BaseContent
 			outputText("You barely recall her gently lifting you out of her bath and depositing you to the ground as you lose consciousness.\n\n");
 			outputText("When you wake up you are in a different area with your gear packed up next to you. Seems some thief made off with a small amount of your gems though.\n\n");
 			player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 		}
 		player.orgasm();
 		dynStats("lib", 15, "sen", 5);

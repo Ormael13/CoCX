@@ -489,6 +489,7 @@ private function rideDatSandTarpLikeIts1999():void {
 	outputText("\n\nIn an amplified post-coital euphoria, you slide off the sandtrap, almost falling straight over- you have been at it so long you've lost sensation in your [legs].  You slowly redress and then, before you take your leave, kneel next to the sandtrap's head.  It is still lying with its arms spread-eagled upon the slope, its abused, wilted oil prong slowly retracting, looking semi-comatose.  Smiling, you stroke its brow until it looks up and focuses on you.");
 	outputText("\n\n\"<i>What do you say, slave?</i>\"");
 	outputText("\n\nIt takes the creature several moments to gather its wits.  \"<i>Th-thank you, lion.</i>\"  Glowing with satisfaction, you begin the climb out of your conquest's hole and back towards camp.");
+	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 	player.orgasm();
 	dynStats("sen", -1);
 	cleanupAfterCombat();

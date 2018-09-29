@@ -199,6 +199,7 @@ use namespace CoC;
 				this.weaponRangeAttack = 20;
 				this.armorName = "clothes";
 				this.armorDef = 5;
+				this.armorMDef = 5;
 				this.bonusHP = 50;
 				this.level = 20;
 			}
@@ -211,6 +212,7 @@ use namespace CoC;
 				this.weaponRangeAttack = 20;
 				this.armorName = "clothes";
 				this.armorDef = 5;
+				this.armorMDef = 5;
 				this.bonusHP = 100;
 				this.level = 25;
 			}
@@ -223,6 +225,7 @@ use namespace CoC;
 				this.weaponRangeAttack = 20;
 				this.armorName = "clothes";
 				this.armorDef = 5;
+				this.armorMDef = 5;
 				this.bonusHP = 150;
 				this.level = 30;
 			}
@@ -235,6 +238,7 @@ use namespace CoC;
 				this.weaponRangeAttack = 20;
 				this.armorName = "clothes";
 				this.armorDef = 5;
+				this.armorMDef = 5;
 				this.bonusHP = 200;
 				this.level = 35;
 			}
@@ -247,6 +251,7 @@ use namespace CoC;
 				this.weaponRangeAttack = 20;
 				this.armorName = "clothes";
 				this.armorDef = 5;
+				this.armorMDef = 5;
 				this.bonusHP = 250;
 				this.level = 40;
 			}
@@ -259,6 +264,7 @@ use namespace CoC;
 				this.weaponRangeAttack = 20;
 				this.armorName = "clothes";
 				this.armorDef = 5;
+				this.armorMDef = 5;
 				this.bonusHP = 300;
 				this.level = 45;
 			}
@@ -271,6 +277,7 @@ use namespace CoC;
 				this.weaponRangeAttack = 50;
 				this.armorName = "light leather armor";
 				this.armorDef = 16;
+				this.armorMDef = 5;
 				this.bonusHP = 300;
 				this.level = 51;
 			}
@@ -283,6 +290,7 @@ use namespace CoC;
 				this.weaponRangeAttack = 55;
 				this.armorName = "light leather armor";
 				this.armorDef = 18;
+				this.armorMDef = 5;
 				this.bonusHP = 300;
 				this.level = 57;
 			}
@@ -295,6 +303,7 @@ use namespace CoC;
 				this.weaponRangeAttack = 60;
 				this.armorName = "light leather armor";
 				this.armorDef = 20;
+				this.armorMDef = 5;
 				this.bonusHP = 300;
 				this.level = 63;
 			}

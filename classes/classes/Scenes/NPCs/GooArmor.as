@@ -84,7 +84,10 @@ public class GooArmor extends GooGirl
 				doNext(SceneLib.combat.endLustLoss);
 			} else {
 				if(hasStatusEffect(StatusEffects.Spar)) SceneLib.valeria.pcWinsValeriaSparDefeat();
-				else SceneLib.dungeons.heltower.gooArmorBeatsUpPC();
+				else {
+					if (player.isGargoyle()) SceneLib.dungeons.heltower.gargoyleBadEndPhoenixTower();
+					else SceneLib.dungeons.heltower.gooArmorBeatsUpPC();
+				}
 			}
 		}
 		
@@ -118,6 +121,7 @@ public class GooArmor extends GooGirl
 			this.weaponAttack = 70;
 			this.armorName = "armor";
 			this.armorDef = 60;
+			this.armorMDef = 5;
 			this.bonusHP = 500;
 			this.bonusLust = 20;
 			this.lustVuln = .35;
@@ -125,6 +129,7 @@ public class GooArmor extends GooGirl
 			this.level = 30;
 			this.gems = rand(50)+80;
 			this.drop = NO_DROP;
+			this.createPerk(PerkLib.EnemyGooType, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

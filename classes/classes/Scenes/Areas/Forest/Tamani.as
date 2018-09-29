@@ -152,6 +152,7 @@ public class Tamani extends Goblin
 			this.weaponAttack = 1;
 			this.armorName = "leather straps";
 			this.armorDef = 1;
+			this.armorMDef = 1;
 			this.bonusHP = 60;
 			this.bonusLust = 20;
 			this.lust = 40;

@@ -55,6 +55,7 @@ public class MaleSpiderMorph extends AbstractSpiderMorph
 			this.weaponAttack = 24;
 			this.armorName = "exoskeleton";
 			this.armorDef = 23;
+			this.armorMDef = 2;
 			this.armorPerk = "";
 			this.armorValue = 70;
 			this.bonusHP = 200;

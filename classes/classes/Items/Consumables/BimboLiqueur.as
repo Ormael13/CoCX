@@ -3,9 +3,11 @@
  */
 package classes.Items.Consumables
 {
+import classes.CoC;
 import classes.Items.Consumable;
 import classes.PerkLib;
 import classes.VaginaClass;
+import classes.StatusEffects;
 import classes.internals.Utils;
 
 public class BimboLiqueur extends Consumable {
@@ -180,6 +182,7 @@ public class BimboLiqueur extends Consumable {
 				}
 				game.player.orgasm();
 				game.player.dynStats("int", -1, "lib", 5, "sen", 25);
+				if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= mutations.DrunkenPowerEmpowerOni()) mutations.DrunkenPowerEmpower();
 				//FULL ON BITCHFACE
 				game.player.modFem(100, 100);
 				//Body

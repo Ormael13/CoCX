@@ -124,6 +124,7 @@ public class DemonPackDesert extends Monster
 			this.weaponAttack = 5;
 			this.armorName = "demonic skin";
 			this.armorDef = 5;
+			this.armorMDef = 1;
 			this.bonusHP = 20;
 			this.bonusLust = 200;
 			this.lust = 30;

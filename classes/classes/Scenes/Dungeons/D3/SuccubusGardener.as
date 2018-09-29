@@ -36,6 +36,7 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 			this.weaponAttack = 29;
 			this.armorName = "tentaclothes";
 			this.armorDef = 12;
+			this.armorMDef = 1;
 			initStrTouSpeInte(100, 125, 110, 100);
 			initWisLibSensCor(100, 150, 60, 100);
 			this.bonusHP = 1200;
@@ -67,7 +68,8 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			cleanupEffects();
-			SceneLib.d3.succubusGardener.surrenderToTheGardener(hpVictory);
+			if (player.isGargoyle()) SceneLib.d3.gargoyleBadEndD3();
+			else SceneLib.d3.succubusGardener.surrenderToTheGardener(hpVictory);
 		}
 		
 		override protected function performCombatAction():void

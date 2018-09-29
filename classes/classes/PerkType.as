@@ -250,6 +250,36 @@ public class PerkType extends BaseContent
 			});
 			return this;
 		}
+		public function requireHeartMutationSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxHeartMutations() > 0;
+				},
+				text: "Free Heart Mutation Slot",
+				type: "heartmutation"
+			});
+			return this;
+		}
+		public function requireMusclesMutationSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxMusclesMutations() > 0;
+				},
+				text: "Free Muscles Mutation Slot",
+				type: "musclesmutation"
+			});
+			return this;
+		}
+		public function requireMouthMutationSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxMouthMutations() > 0;
+				},
+				text: "Free Mouth Mutation Slot",
+				type: "mouthmutation"
+			});
+			return this;
+		}
 		public function requireHungerEnabled():PerkType {
 			requirements.push({
 				fn  : function(player:Player):Boolean {

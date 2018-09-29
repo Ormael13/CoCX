@@ -61,6 +61,7 @@ public class LowerBody extends SaveableBodyPart {
 			case NAGA:
 				legCount = 1;
 				break;
+			case AVIAN:
 			case BEE:
 			case BUNNY:
 			case CAT:
@@ -70,15 +71,31 @@ public class LowerBody extends SaveableBodyPart {
 			case DOG:
 			case DRAGON:
 			case ECHIDNA:
+			case ELF:
 			case FERRET:
 			case FOX:
+			case GARGOYLE:
+			case GARGOYLE_2:
+			case GRYPHON:
 			case HARPY:
 			case HUMAN:
 			case KANGAROO:
+			case LION:
 			case LIZARD:
+			case MANTIS:
+			case ONI:
+			case ORCA:
+			case PLANT_HIGH_HEELS:
+			case PLANT_ROOT_CLAWS:
 			case RACCOON:
+			case RAIJU:
 			case RED_PANDA:
-			case SALAMANDER:
+			case RED_PANDA:
+			case SALAMANDER:	
+			case SHARK:
+			case WOLF:
+			case YETI:
+			case YGG_ROOT_CLAWS:
 				legCount = 2;
 				break;
 			case CLOVEN_HOOFED:

@@ -82,6 +82,7 @@ public class LustyDemons extends Monster
 			this.weaponAttack = 4;
 			this.armorName = "demonic skin";
 			this.armorDef = 8;
+			this.armorMDef = 1;
 			//6 attacks: 5 from demons (10 damage each), 1 from Vapula (80 damage), 200 gems, 200 xp, 700 hp*/
 			this.bonusHP = 1200;
 			this.bonusLust = 350;

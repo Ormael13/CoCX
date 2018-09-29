@@ -58,6 +58,7 @@ import classes.internals.*;
 			this.weaponAttack = 24;
 			this.armorName = "exoskeleton";
 			this.armorDef = 23;
+			this.armorMDef = 2;
 			this.armorPerk = "";
 			this.armorValue = 50;
 			this.bonusHP = 200;

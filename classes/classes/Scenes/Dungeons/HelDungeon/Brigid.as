@@ -18,10 +18,8 @@ public class Brigid extends Monster
 			//(Effect: Heavy Damage)
 			var damage:Number = Math.round((str + weaponAttack) - rand(player.tou) - player.armorDef);
 			if (damage < 30) damage = 30;
-			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
-			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			damage = Math.round(damage);
-			damage = player.takeMagicDamage(damage, true);
+			damage = player.takeFireDamage(damage, true);
 		}
 
 		//Attack Two: SHIELD BOP! OOM BOP!
@@ -60,7 +58,8 @@ public class Brigid extends Monster
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.brigidScene.pcDefeatedByBrigid();
+			if (player.isGargoyle()) SceneLib.dungeons.heltower.gargoyleBadEndPhoenixTower();
+			else SceneLib.brigidScene.pcDefeatedByBrigid();
 		}
 
 		public function Brigid()
@@ -90,6 +89,7 @@ public class Brigid extends Monster
 			this.weaponAttack = 34;
 			this.armorName = "armor";
 			this.armorDef = 24;
+			this.armorMDef = 2;
 			this.bonusHP = 1000;
 			this.bonusLust = 30;
 			this.lust = 20;

@@ -33,6 +33,7 @@ public class GoblinQueen extends Goblin
 			this.weaponAttack = 14;
 			this.armorName = "fur loincloth";
 			this.armorDef = 6;
+			this.armorMDef = 6;
 			this.fatigue = 0;
 			this.bonusHP = 275;
 			this.bonusLust = 20;

@@ -71,6 +71,7 @@ public class LoliBatGolem extends Monster
 			this.weaponAttack = 20;
 			this.armorName = "polished stone";
 			this.armorDef = 26;
+			this.armorMDef = 26;
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);

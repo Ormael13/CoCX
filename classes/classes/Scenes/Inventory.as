@@ -9,8 +9,12 @@ import classes.CoC;
 import classes.Items.Armor;
 import classes.Items.ArmorLib;
 import classes.Items.Consumable;
+import classes.Items.HeadJewelry;
+import classes.Items.HeadJewelryLib;
 import classes.Items.Jewelry;
 import classes.Items.JewelryLib;
+import classes.Items.Necklace;
+import classes.Items.NecklaceLib;
 import classes.Items.Shield;
 import classes.Items.ShieldLib;
 import classes.Items.Undergarment;
@@ -80,9 +84,13 @@ use namespace CoC;
 			outputText("<b>Weapon (Melee):</b> " + player.weapon.name + " (Attack: " + player.weaponAttack + ")\n");
 			outputText("<b>Weapon (Range):</b> " + player.weaponRange.name + " (Attack: " + player.weaponRangeAttack + ")\n");
 			outputText("<b>Shield:</b> " + player.shield.name + " (Block Rating: " + player.shieldBlock + ")\n");
-			outputText("<b>Armour:</b> " + player.armor.name + " (Defense: " + player.armorDef + ")\n");
+			outputText("<b>Armour:</b> " + player.armor.name + " (Physical / Magical Defense: " + player.armorDef + " / " + player.armorMDef + ")\n");
 			outputText("<b>Upper underwear:</b> " + player.upperGarment.name + "\n");
 			outputText("<b>Lower underwear:</b> " + player.lowerGarment.name + "\n");
+			outputText("<b>Head Accessory:</b> " + player.headjewelryName + "\n");
+			outputText("<b>Necklace:</b> " + player.necklaceName + "\n");
+			/*outputText("<b>Ring:</b> " + player.jewelryName + "\n");
+			outputText("<b>Ring:</b> " + player.jewelryName + "\n");*/
 			outputText("<b>Accessory:</b> " + player.jewelryName + "\n");
 			if (player.hasKeyItem("Bag of Cosmos") >= 0) outputText("\nAt your belt hangs bag of cosmos.\n");
 			if (player.hasKeyItem("Sky Poison Pearl") >= 0) outputText("\nThere is a circular green imprint at the palm of your left hand.\n");
@@ -174,15 +182,13 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 				}
 				if (flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
 					if (model.time.hours >= 6) addButton(5, "Garden", Gardening.manageuyourgarden).hint("Visit your plant offspring");
-				}/*
+				}
 				if (player.hasKeyItem("Gryphon Statuette") >= 0) {
-					addButton(6, "Gryphon", curry(m.skybornSeed, 1));
-					foundItem = true;
+					addButton(6, "Gryphon", CoC.instance.mutations.skybornSeed, 1);
 				}
 				if (player.hasKeyItem("Peacock Statuette") >= 0) {
-					addButton(6, "Peacock", SceneLib.mutationsTable.skybornSeed(2));
-					foundItem = true;
-				}*/
+					addButton(6, "Peacock", CoC.instance.mutations.skybornSeed, 2);
+				}
 				addButton(14, "Back", inventoryMenu);
 		}
 		
@@ -589,6 +595,20 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 					itemGoNext();
 				else takeItem(item, callNext);
 			}
+			else if (item is HeadJewelry) {
+				player.headJewelry.removeText();
+				item = player.setHeadJewelry(item as HeadJewelry); //Item is now the player's old head jewelry
+				if (item == null)
+					itemGoNext();
+				else takeItem(item, callNext);
+			}
+			else if (item is Necklace) {
+				player.necklace.removeText();
+				item = player.setNecklace(item as Necklace); //Item is now the player's old necklace
+				if (item == null)
+					itemGoNext();
+				else takeItem(item, callNext);
+			}
 			else if (item is Jewelry) {
 				player.jewelry.removeText();
 				item = player.setJewelry(item as Jewelry); //Item is now the player's old jewelry
@@ -814,27 +834,25 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 			if (player.lowerGarment != UndergarmentLib.NOTHING)
 			{
 				addButton(7, "Lowerwear", unequipLowerwear).hint(player.lowerGarment.description, capitalizeFirstLetter(player.lowerGarment.name));
-			}/*			
+			}
+			if (player.headJewelry != HeadJewelryLib.NOTHING)
+			{
+				addButton(10, "Head Acc", unequipHeadJewel).hint(player.headJewelry.description, capitalizeFirstLetter(player.headJewelry.name));
+			}		
+			if (player.necklace != NecklaceLib.NOTHING)
+			{
+				addButton(11, "Necklace", unequipNecklace).hint(player.necklace.description, capitalizeFirstLetter(player.necklace.name));
+			}/*
 			if (player.jewelry != JewelryLib.NOTHING)
 			{
-				addButton(10, "Necklace", unequipJewel).hint(player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
+				addButton(3, "Ring 1", unequipJewel).hint(player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
 			}
 			if (player.jewelry != JewelryLib.NOTHING)
 			{
-				addButton(11, "Ring 1", unequipJewel).hint(player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
-			}
-			if (player.jewelry != JewelryLib.NOTHING)
-			{
-				addButton(12, "Ring 2", unequipJewel).hint(player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
-			}
-			if (player.jewelry != JewelryLib.NOTHING)
-			{
-				addButton(2, "Accessory", unequipJewel).hint(player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
+				addButton(4 lub 8, "Ring 2", unequipJewel).hint(player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
 			}
 			zrobić sloty:
-			na broń dystansową
 			może jeszcze 1-3 kolejne ringi (poza pierwszym orginalnym slotem)
-			na naszyjnik
 			coś w stylu slotu na prawdziwe akcesoria
 			może coś na item związany z soulforce - ala latający miecz lub takie tam itemy ^^
 			przy dodawaniu tych slotow popatrzec czy ktorys nie bedzie musial uzywac tego fragmentu kodu:
@@ -865,6 +883,12 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 		}
 		public function unequipLowerwear():void {
 			takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_LOWERWEAR), inventoryMenu);
+		}
+		public function unequipHeadJewel():void {
+			takeItem(player.setHeadJewelry(HeadJewelryLib.NOTHING), inventoryMenu);
+		}
+		public function unequipNecklace():void {
+			takeItem(player.setNecklace(NecklaceLib.NOTHING), inventoryMenu);
 		}
 		public function unequipJewel():void {
 			takeItem(player.setJewelry(JewelryLib.NOTHING), inventoryMenu);

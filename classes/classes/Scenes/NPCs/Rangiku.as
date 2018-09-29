@@ -115,6 +115,7 @@ public class Rangiku extends Monster
 				this.weaponAttack = 26;
 				this.armorName = "black robe";
 				this.armorDef = 21;
+				this.armorMDef = 7;
 				this.bonusHP = 100;
 				this.level = 15;
 			}/*
@@ -126,6 +127,7 @@ public class Rangiku extends Monster
 				this.weaponAttack = 26;
 				this.armorName = "black robe";
 				this.armorDef = 21;
+				this.armorMDef = 7;
 				this.bonusHP = 100;
 				this.level = 30;
 			}
@@ -137,6 +139,7 @@ public class Rangiku extends Monster
 				this.weaponAttack = 26;
 				this.armorName = "black robe";
 				this.armorDef = 21;
+				this.armorMDef = 7;
 				this.bonusHP = 100;
 				this.level = 45;
 			}
@@ -148,6 +151,7 @@ public class Rangiku extends Monster
 				this.weaponAttack = 26;
 				this.armorName = "black robe";
 				this.armorDef = 21;
+				this.armorMDef = 7;
 				this.bonusHP = 100;
 				this.level = 60;
 			}
@@ -159,6 +163,7 @@ public class Rangiku extends Monster
 				this.weaponAttack = 26;
 				this.armorName = "black robe";
 				this.armorDef = 21;
+				this.armorMDef = 7;
 				this.bonusHP = 100;
 				this.level = 70;
 			}*/

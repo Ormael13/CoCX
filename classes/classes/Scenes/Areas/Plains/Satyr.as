@@ -164,6 +164,7 @@ public class Satyr extends Monster
 			this.weaponAttack = 0;
 			this.armorName = "thick fur";
 			this.armorDef = 2;
+			this.armorMDef = 0;
 			this.bonusHP = 300;
 			this.bonusLust = 20;
 			this.lust = 20;

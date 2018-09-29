@@ -441,6 +441,7 @@ private function urethraFuckDatGiantCock():void {
 	outputText("\n\nYou wake up about an hour later, dressed and in your boat, already docked back at shore.  The green giant Venus must have caught you.");
 	//[Corruption increases slightly, lust is decreased]
 	flags[kFLAGS.KAIJU_BAD_END_COUNTER]++;
+	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 	player.orgasm();
 	dynStats("cor", 1);
 	doNext(camp.returnToCampUseOneHour);
@@ -684,6 +685,7 @@ private function yesTurnKaijuFuta():void {
 	outputText("\n\nYou wake up about an hour later, dressed and in your boat, already docked back at shore.  The green giant Venus is there, sitting nearby and gazing out over the lake before your movements attract her attention.  \"<i>Hey there voyeur,</i>\" she says happily, a lot calmer than she was with you in her cock, but still with the ever present haze of lust in her eyes.  \"<i>Look, I just wanted to thank you. Not a lot of people are cool with me, what with my size and perverse delights that’d probably make a succubus faint, don’t act like you don’t know.  But you’ve been pretty cool, even when I shove you into sex holes where whole people probably shouldn’t go.  And, you gave me a cock.  I wanted a dick even before I started soaking up corrupt fluids like a sponge, and now I have one thanks to you. So... thanks babe,</i>\" she finishes before wading back out into the lake.  What a strange, grateful girl.");
 	flags[kFLAGS.KAIJU_COCK] = 1;
 	//[Corruption increases slightly, lust is decreased]
+	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 	player.orgasm();
 	dynStats("cor", 1);
 	doNext(camp.returnToCampUseOneHour);

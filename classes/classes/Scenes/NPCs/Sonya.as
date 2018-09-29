@@ -65,6 +65,7 @@ use namespace CoC;
 			this.weaponAttack = 70;
 			this.armorName = "thick fur";
 			this.armorDef = 30;
+			this.armorMDef = 0;
 			this.bonusHP = 100;
 			this.bonusLust = 30;
 			this.lust = 30;

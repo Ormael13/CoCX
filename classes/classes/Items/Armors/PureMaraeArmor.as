@@ -14,12 +14,13 @@ import classes.ItemType;
 	{
 		public function PureMaraeArmor() 
 		{
-			super("DB.Armr","D.B.Armor","divine bark armor","a suit of divine bark armor",60,7200,"This suit of armor is finely made from the white bark you've received from Marae as a reward.","Heavy");
+			super("DB.Armr","D.B.Armor","divine bark armor","a suit of divine bark armor",60,60,14400,"This suit of armor is finely made from the white bark you've received from Marae as a reward.","Heavy");
 		}
 		//każde 1 armor point kosztuje 120
 		override public function get supportsBulge():Boolean { return true; }
 		
 		override public function get def():Number { return 60 - int(game.player.cor / 2); }
+		override public function get mdef():Number { return 60 - int(game.player.cor / 2); }
 		
 		override public function useText():void
 		{

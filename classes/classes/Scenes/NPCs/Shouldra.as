@@ -118,6 +118,7 @@ import classes.internals.*;
 			this.weaponAttack = 14;
 			this.armorName = "comfortable clothes";
 			this.armorDef = 1;
+			this.armorMDef = 1;
 			this.bonusHP = 30;
 			this.bonusLust = 10;
 			this.lust = 10;

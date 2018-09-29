@@ -328,6 +328,7 @@ public class Sheila extends Monster
 			this.weaponAttack = 12;
 			this.armorName = "clothes";
 			this.armorDef = 7;
+			this.armorMDef = 0;
 			this.bonusHP = bonusHP;
 			this.bonusLust = 10;
 			this.lust = lust;

@@ -7,7 +7,7 @@ package classes.Items.Armors
 	public final class Nothing extends Armor {
 		
 		public function Nothing() {
-			super("nothing", "nothing", "nothing", "nothing", 0, 0, "nothing", "Light");
+			super("nothing", "nothing", "nothing", "nothing", 0, 0, 0, "nothing", "Light");
 		}
 		
 		override public function playerRemove():Armor {

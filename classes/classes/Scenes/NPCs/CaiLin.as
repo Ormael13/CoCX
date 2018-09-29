@@ -85,13 +85,13 @@ public class CaiLin extends Monster
 					player.spe -= 6;
 					showStatDown( 'spe' );
 					player.createStatusEffect(StatusEffects.MedusaVenom, 0,0,6,0);
-					player.takeMagicDamage(5+rand(5));
+					player.takePoisonDamage(5+rand(5));
 				}
 				else {
 					player.createStatusEffect(StatusEffects.MedusaVenom,0,0,0,0);
-					player.takeMagicDamage(5+rand(5));
+					player.takePoisonDamage(5+rand(5));
 				}
-				player.takeMagicDamage(5+rand(5));
+				player.takePoisonDamage(5+rand(5));
 			}
 			else {
 				outputText("The venom's effects intensify causing yor body and mind further weaker and mind even more muddled.");
@@ -134,8 +134,8 @@ public class CaiLin extends Monster
 					player.addStatusValue(StatusEffects.MedusaVenom,3,3);
 					player.takeMagicDamage(5+rand(5));
 				}
-				else player.takeMagicDamage(5+rand(5));
-				player.takeMagicDamage(5+rand(5));
+				else player.takePoisonDamage(5+rand(5));
+				player.takePoisonDamage(5+rand(5));
 			}
 		}
 		
@@ -211,8 +211,6 @@ public class CaiLin extends Monster
 			if (inte >= 151 && inte < 201) damage += ((inte * 1.5) + rand(inte * 2));
 			if (inte >= 201) damage += ((inte * 1.75) + rand(inte * 2.25));
 			damage *= SpellMod();
-			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
-			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 			player.addStatusValue(StatusEffects.Blizzard, 1, -1);
 			if (game.flags[kFLAGS.CAILIN_AFFECTION] >= 10) outputText("Cai'Lin");
@@ -230,7 +228,7 @@ public class CaiLin extends Monster
 				outputText("It's super effective!  ");
 			}
 			damage = Math.round(damage);
-			player.takeMagicDamage(damage, true);
+			player.takeFireDamage(damage, true);
 			fatigue += spellCostWhitefire();
 			flags[kFLAGS.CAILIN_SPELLS_CASTED]++;
 		}
@@ -263,6 +261,7 @@ public class CaiLin extends Monster
 				initWisLibSensCor(50, 30, 20, 40);
 				this.weaponAttack = 45;
 				this.armorDef = 40;
+				this.armorMDef = 30;
 				this.bonusHP = 300;
 				this.lustVuln = .9;
 				this.level = 20;
@@ -278,6 +277,7 @@ public class CaiLin extends Monster
 				initWisLibSensCor(70, 45, 30, 40);//lvl-up daje +20, +15, +10, +0
 				this.weaponAttack = 45;
 				this.armorDef = 40;
+				this.armorMDef = 30;
 				this.bonusHP = 400;
 				this.lustVuln = .8;//każdy lvl up to kolejne 0.1 niżej
 				this.level = 25;//każdy lvl up to +5 lvl-i chyba xD

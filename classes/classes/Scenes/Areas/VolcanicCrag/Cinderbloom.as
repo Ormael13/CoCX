@@ -32,6 +32,7 @@ public class Cinderbloom extends Alraune
 			initStrTouSpeInte(10, 250, 10, 100);
 			initWisLibSensCor(100, 200, 50, 0);
 			this.armorDef = 90;
+			this.armorMDef = 9;
 			this.bonusHP = 200;
 			this.level = 40;
 			this.gems = rand(25) + 15;

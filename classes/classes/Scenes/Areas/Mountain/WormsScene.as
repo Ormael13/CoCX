@@ -173,7 +173,7 @@ package classes.Scenes.Areas.Mountain
 		//Gone	menuLoc = 0;
 			if(player.fatigue + combat.physicalCost(40) > player.maxFatigue()) {
 				outputText("You try to summon up an orgasm, but you're too tired and waste your time trying!");
-				fatigue(100-player.fatigue);
+				fatigue(60);
 				enemyAI();
 				return;
 			}

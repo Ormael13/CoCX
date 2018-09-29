@@ -141,6 +141,7 @@ public class TentacleBeast extends Monster
 			this.weaponAttack = 10;
 			this.armorName = "rubbery skin";
 			this.armorDef = 18;
+			this.armorMDef = 2;
 			this.bonusHP = 400;
 			this.bonusLust = 20;
 			this.lust = 10;

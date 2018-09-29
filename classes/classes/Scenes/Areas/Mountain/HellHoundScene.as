@@ -77,6 +77,7 @@ public class HellHoundScene extends BaseContent
 			player.slimeFeed();
 			//(after either of them)
 			//(Lose player anal virginity; if player has vagina, lose vaginal virginity)
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			player.buttChange(monster.cockArea(0), true);
 			player.orgasm();
 			//[if not corrupt]
@@ -379,6 +380,7 @@ public class HellHoundScene extends BaseContent
 				else dynStats("cor", 1.5);
 				//Preggers chance!
 				player.knockUp(PregnancyStore.PREGNANCY_HELL_HOUND, PregnancyStore.INCUBATION_HELL_HOUND, 101);
+				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			}
 			cleanupAfterCombat();
 		}

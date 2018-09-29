@@ -354,6 +354,7 @@ import classes.internals.*;
 			this.weaponValue = 25;
 			this.armorName = "skin";
 			this.armorDef = 7;
+			this.armorMDef = 1;
 			this.bonusHP = 500;
 			this.bonusLust = 10;
 			this.lust = 30;

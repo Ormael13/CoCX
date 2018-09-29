@@ -84,6 +84,7 @@ public class GreenSlime extends Monster
 			this.weaponAttack = 3;
 			this.armorName = "gelatinous skin";
 			this.armorDef = 3;
+			this.armorMDef = 9;
 			this.bonusHP = 50;
 			this.bonusLust = 20;
 			this.lust = 30;
@@ -97,6 +98,7 @@ public class GreenSlime extends Monster
 			this.special2 = lustAttack;
 			this.special3 = lustAttack;
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyGooType, 0, 0, 0, 0);
 			checkMonster();
 		}
 

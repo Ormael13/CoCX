@@ -38,6 +38,7 @@ import classes.Scenes.SceneLib;
 			this.weaponVerb = "punch";
 			this.armorName = "wraps";
 			this.armorDef = 26;
+			this.armorMDef = 6;
 			this.bonusHP = 1800;
 			this.bonusLust = 40;
 			this.gems = 300 + rand(90);
@@ -59,7 +60,8 @@ import classes.Scenes.SceneLib;
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.d3.hermCentaur.inSovietCoCPonyRidesYou(hpVictory, pcCameWorms);
+			if (player.isGargoyle()) SceneLib.d3.gargoyleBadEndD3();
+			else SceneLib.d3.hermCentaur.inSovietCoCPonyRidesYou(hpVictory, pcCameWorms);
 		}
 		
 		// Gonna handle this a little differently than usual.

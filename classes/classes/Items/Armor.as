@@ -10,21 +10,25 @@ package classes.Items
 	public class Armor extends Useable //Equipable
 	{
 		private var _def:Number;
+		private var _mdef:Number;
 		private var _perk:String;
 		private var _name:String;
 		private var _supportsBulge:Boolean;
 		private var _supportsUndergarment:Boolean;
 		
-		public function Armor(id:String, shortName:String, name:String, longName:String, def:Number, value:Number = 0, description:String = null, perk:String = "", supportsBulge:Boolean = false, supportsUndergarment:Boolean = true) {
+		public function Armor(id:String, shortName:String, name:String, longName:String, def:Number, mdef:Number, value:Number = 0, description:String = null, perk:String = "", supportsBulge:Boolean = false, supportsUndergarment:Boolean = true) {
 			super(id, shortName, longName, value, description);
 			this._name = name;
 			this._def = def;
+			this._mdef = mdef;
 			this._perk = perk;
 			_supportsBulge = supportsBulge;
 			_supportsUndergarment = supportsUndergarment;
 		}
 		
 		public function get def():Number { return _def; }
+		
+		public function get mdef():Number { return _mdef; }
 		
 		public function get perk():String { return _perk; }
 		
@@ -50,7 +54,8 @@ package classes.Items
 			}
 			else desc += "Clothing ";
 			//Defense
-			desc += "\nDefense: " + String(def);
+			if (def > 0) desc += "\nDefense (P): " + String(def);
+			if (mdef > 0) desc += "\nDefense (M): " + String(mdef);
 			//Value
 			desc += "\nBase value: " + String(value);
 			return desc;

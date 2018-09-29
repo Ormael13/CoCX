@@ -62,6 +62,7 @@ public class GuardianGolems extends Monster
 			this.weaponAttack = 12;
 			this.armorName = "cracked stone";
 			this.armorDef = 12;
+			this.armorMDef = 12;
 			this.createPerk(PerkLib.Resolute, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);

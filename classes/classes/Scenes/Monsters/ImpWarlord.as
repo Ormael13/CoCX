@@ -89,6 +89,7 @@ public class ImpWarlord extends Imp
 			this.weaponAttack = 20;
 			this.armorName = "platemail";
 			this.armorDef = 17;
+			this.armorMDef = 1;
 			this.bonusHP = 350;
 			this.bonusLust = 30;
 			this.lust = 30;

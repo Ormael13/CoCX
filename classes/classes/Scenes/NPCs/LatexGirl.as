@@ -1499,6 +1499,7 @@ private function femalePCDomFucksLatexGooFuta():void {
 		outputText("\n\nYou nod, and then, before she can dwell on her punishment, you give her a kiss.  She blushes purple afterward, giggling into her palm.");
 	}
 	outputText("  You get dressed and leave with a swagger in your step.  A smiling, solid goo-girl sits in your wake.");
+	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 	player.orgasm();
 	dynStats("sen", -2);
 	player.slimeFeed();

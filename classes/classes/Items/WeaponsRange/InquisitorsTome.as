@@ -13,7 +13,7 @@ package classes.Items.WeaponsRange
 		
 		public function InquisitorsTome() 
 		{
-			super("I. Tome", "I. Tome", "Inquisitor's Tome", "an Inquisitor's Tome", "nothing", 0, 2000, "This red tome is filled with forbidden knowledge, concealed within a detailed treatise on the demon war. The magic within this tome allows you to cast spells using your health after you become too low on mana to cast spells normally.", "Tome");
+			super("I. Tome", "I. Tome", "Inquisitor’s Tome", "an Inquisitor's Tome", "nothing", 0, 2000, "This red tome is filled with forbidden knowledge, concealed within a detailed treatise on the demon war. The magic within this tome allows you to cast spells using your health after you become too low on mana to cast spells normally.", "Tome");
 		}
 		
 		override public function useText():void {

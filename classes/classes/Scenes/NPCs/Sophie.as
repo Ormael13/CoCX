@@ -290,6 +290,7 @@ import classes.internals.*;
 			this.weaponAttack = 40;
 			this.armorName = "feathers";
 			this.armorDef = 10;
+			this.armorMDef = 0;
 			this.bonusHP = 300;
 			this.bonusLust = 20;
 			this.lust = 10;

@@ -174,6 +174,7 @@ public class GooGirl extends Monster
 			this.weaponAttack = 7;
 			this.armorName = "gelatinous skin";
 			this.armorDef = 4;
+			this.armorMDef = 12;
 			this.bonusHP = 40;
 			this.bonusLust = 10;
 			this.lust = 45;
@@ -190,6 +191,7 @@ public class GooGirl extends Monster
 			this.special3 = 5039;
 */
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyGooType, 0, 0, 0, 0);
 			checkMonster();
 		}
 

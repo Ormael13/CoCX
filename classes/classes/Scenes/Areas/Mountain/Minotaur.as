@@ -89,6 +89,7 @@ import classes.internals.*;
 			this.weaponAttack = hasAxe?50:40;
 			this.armorName = "thick fur";
 			this.armorDef = 12;
+			this.armorMDef = 1;
 			this.bonusHP = 20 + rand(this.ballSize*2);
 			this.bonusLust = 30 + rand(this.ballSize*3);
 			this.lust = this.ballSize * 3;

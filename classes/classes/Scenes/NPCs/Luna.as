@@ -85,6 +85,7 @@ package classes.Scenes.NPCs
 				initWisLibSensCor(50, 80, 40, 75);
 				this.weaponAttack = 37;
 				this.armorDef = 200;
+				this.armorMDef = 5;
 				this.bonusHP = 800;
 				this.level = 9;
 			}
@@ -93,6 +94,7 @@ package classes.Scenes.NPCs
 				initWisLibSensCor(50, 80, 40, 75);
 				this.weaponAttack = 38;
 				this.armorDef = 200;
+				this.armorMDef = 5;
 				this.bonusHP = 800;
 				this.level = 15;
 			}
@@ -101,6 +103,7 @@ package classes.Scenes.NPCs
 				initWisLibSensCor(50, 80, 40, 75);
 				this.weaponAttack = 39;
 				this.armorDef = 200;
+				this.armorMDef = 5;
 				this.bonusHP = 850;
 				this.level = 21;
 			}
@@ -109,6 +112,7 @@ package classes.Scenes.NPCs
 				initWisLibSensCor(50, 80, 40, 75);
 				this.weaponAttack = 40;
 				this.armorDef = 200;
+				this.armorMDef = 5;
 				this.bonusHP = 900;
 				this.level = 27;
 			}

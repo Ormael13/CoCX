@@ -122,6 +122,7 @@ public class Harpy extends Monster
 			this.weaponAttack = 35;
 			this.armorName = "feathers";
 			this.armorDef = 10;
+			this.armorMDef = 1;
 			this.bonusHP = 200;
 			this.bonusLust = 20;
 			this.lust = 10;

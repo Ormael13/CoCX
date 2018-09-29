@@ -195,6 +195,7 @@ use namespace CoC;
 			this.weaponAttack = 66;
 			this.armorName = "thick fur";
 			this.armorDef = 22;
+			this.armorMDef = 3;
 			this.bonusHP = 640 + rand(this.ballSize*4);
 			this.bonusLust = 40 + rand(this.ballSize*3);
 			this.lust = 50;

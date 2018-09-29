@@ -52,6 +52,7 @@ package classes.Scenes.Monsters
 			this.weaponAttack = 75;
 			this.armorName = "stone";
 			this.armorDef = 75;
+			this.armorMDef = 75;
 			this.createPerk(PerkLib.Resolute, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);

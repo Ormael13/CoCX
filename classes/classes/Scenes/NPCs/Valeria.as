@@ -281,7 +281,7 @@ public function valeriaGetFucked():void {
 		feedValeria(Math.sqrt(player.cumQ()) + 5 + (player.averageVaginalWetness() * 5));
 	}
 	outputText("and looms over you.  \"<i>That was fun, partner,</i>\" she says, leaning down to give you a wet peck on the cheek. \"<i>Let's do that again soon, all right?</i>\"");
-
+	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 	player.orgasm();
 	dynStats("sen", -1);
 	HPChange(25 + (player.newGamePlusMod() * 15),false);
@@ -315,6 +315,7 @@ public function gooFlation(clearText:Boolean = true):void {
 		outputText("and looms over you.  \"<i>That was fun, partner,</i>\" she says, leaning down to give you a wet peck on the cheek. \"<i>Let's do that again soon, alright?</i>\"");
 		player.orgasm();
 		dynStats("sen", 1);
+		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 		HPChange(25 + (player.newGamePlusMod() * 15),false);
 		doNext(camp.returnToCampUseOneHour);
 	}
@@ -675,6 +676,7 @@ private function valeriaGooRapeII():void {
 	//Add some faux pregnancy descriptors to the appearance screen
 	//Prevent pregnancy if has a vagina when it happens.
 	//Be sure to track what holes get filled, as body parts may change before birth!
+	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 	flags[kFLAGS.TIMES_VALERIA_GOO_THREESOMED]++;
 	player.orgasm();
 	//v1 = time till birth.

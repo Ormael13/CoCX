@@ -147,6 +147,7 @@ public class Valkyrie extends Monster
 			this.weaponAttack = 32;
 			this.armorName = "bronze plates";
 			this.armorDef = 26;
+			this.armorMDef = 10;
 			this.bonusHP = 400;
 			this.bonusLust = 10;
 			this.lust = 25 + rand(15);

@@ -168,6 +168,7 @@ import classes.Scenes.SceneLib;
 			this.weaponAttack = 45;
 			this.armorName = "bikini and grass skirt";
 			this.armorDef = 12;
+			this.armorMDef = 1;
 			this.bonusHP = 330;
 			this.bonusLust = 20;
 			this.lust = 20;

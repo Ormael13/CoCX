@@ -147,8 +147,6 @@ public class Evangeline2 extends Monster
 			if (inte >= 151 && inte < 201) damage += ((inte * 1.5) + rand(inte * 2));
 			if (inte >= 201) damage += ((inte * 1.75) + rand(inte * 2.25));
 			damage *= SpellMod();
-			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
-			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			damage = Math.round(damage);
 			if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 			player.addStatusValue(StatusEffects.Blizzard, 1, -1);
@@ -163,7 +161,7 @@ public class Evangeline2 extends Monster
 				outputText("It's super effective!  ");
 			}
 			damage = Math.round(damage);
-			player.takeMagicDamage(damage, true);
+			player.takeFireDamage(damage, true);
 			fatigue += spellCostWhitefire();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;
 		}
@@ -322,6 +320,7 @@ public class Evangeline2 extends Monster
 				this.weaponAttack = 9;
 				this.armorName = "practically indecent steel armor";
 				this.armorDef = 11;
+				this.armorMDef = 5;
 				this.bonusHP = 210;
 				this.bonusLust = 40;
 				this.lustVuln = .8;
@@ -344,6 +343,7 @@ public class Evangeline2 extends Monster
 				this.weaponAttack = 9;
 				this.armorName = "lusty maiden's armor";
 				this.armorDef = 16;
+				this.armorMDef = 5;
 				this.bonusHP = 240;
 				this.bonusLust = 40;
 				this.lustVuln = .8;
@@ -367,6 +367,7 @@ public class Evangeline2 extends Monster
 				this.weaponAttack = 9;
 				this.armorName = "lusty maiden's armor";
 				this.armorDef = 16;
+				this.armorMDef = 5;
 				this.bonusHP = 270;
 				this.bonusLust = 40;
 				this.lustVuln = .8;
@@ -391,6 +392,7 @@ public class Evangeline2 extends Monster
 				this.weaponAttack = 9;
 				this.armorName = "lusty maiden's armor";
 				this.armorDef = 16;
+				this.armorMDef = 10;
 				this.bonusHP = 330;
 				this.bonusLust = 40;//Jak zyska perk BoosTierEnemy wtedy bonus lust musi wzrosnac do 50 z 40 wiec do tego czasu nie ma bonus lust bedzie na 40 stał
 				this.lust = 70;
@@ -417,6 +419,7 @@ public class Evangeline2 extends Monster
 				this.weaponAttack = 9;
 				this.armorName = "lusty maiden's armor";
 				this.armorDef = 16;
+				this.armorMDef = 10;
 				this.bonusHP = 360;
 				this.bonusLust = 40;
 				this.lust = 70;

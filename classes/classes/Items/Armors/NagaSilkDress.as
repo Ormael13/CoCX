@@ -4,7 +4,7 @@ import classes.Items.Armor;
 public class NagaSilkDress extends Armor {
     private var _name:String;
     public function NagaSilkDress() {
-        super("NagaDress","Naga Dress","","a desert naga silk dress",0,0,
+        super("NagaDress","Naga Dress","","a desert naga silk dress",0,0,0,
                 "",
         "",false,false);
         setColor();

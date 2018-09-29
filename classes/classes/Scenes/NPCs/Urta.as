@@ -772,6 +772,7 @@ public function urtaFuckHer(afterBefriending:Boolean = false):void {
 		outputText("Urta blows you a kiss as you put your own gear back together and flounces back to the bar, calling out, \"<i>We should do thish again shoon!</i>\"\n\n");
 
 		outputText("\"<i>Yes indeed,</i>\" you muse - the sooner the better.");
+		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 	}
 	else {
 		var x:Number = player.cockThatFits(urtaCapacity());
@@ -1433,6 +1434,7 @@ private function tenderTakeItUpTheAssFromUrta():void {
 	if(player.cumQ() > 750) outputText("  You really are a messy, " + player.mf("boy","girl") + " aren't you?");
 	outputText("</i>\"\n\n");
 	outputText("She untangles herself from you, the filled end of her condom loudly popping free from your backside as she disengages herself from you.  The two of you do your best to clean up and get dressed, and you give her a quick but passionate kiss before ducking out the door to check up on your camp.");
+	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 	player.orgasm();
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
@@ -1917,8 +1919,8 @@ private function rideUrtaInButtAtHomeLove():void {
 	outputText("She comes out of her stupor and murmurs, \"<i>Mmmm, that was nice,</i>\" as she stretches.  With practiced motions she slides off her condom, ties it off, and tosses it into a waste-can half filled with the things.  ");
 	if(player.cumQ() >= 1700) outputText("Urta sighs at the mess and laughs, \"<i>I guess we got a mess anyways, huh?</i>\"");
 	else outputText("Urta sighs contentedly and laughs, \"<i>I guess I don't have much of a mess to clean for once!</i>\"");
-
 	outputText("\n\nThe fox staggers up on weak legs, her now flaccid but still huge member swinging between her knees as she redresses.  You do the same, and the two of you part with another tender kiss and a whispered, \"<i>I love you.</i>\"\n");
+	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 	player.orgasm();
 	dynStats("sen", 1);
 	doNext(camp.returnToCampUseOneHour);
@@ -4864,7 +4866,7 @@ private function doggyStyle():void {
 	else outputText("boypussy");
 	outputText(".");
 	player.buttChange(60,true,true,false);
-
+	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 	outputText("\n\nSoon, Urta develops a good rhythm, thrusting in and out, her balls slapping your ");
 	if(player.hasCock()) outputText("dick");
 	else outputText("cunt");
@@ -5001,6 +5003,7 @@ private function getAPetReward():void {
 	outputText("  Your Owner doesn't just let it end there, however, she continues her paw-assault on your crotch, stroking and rubbing until you become little more than a gibbering mess of orgasm-infused flesh laying in a puddle of your own sexy goo.");
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 2;
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] += 2;
+	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 	outputText("...");
 	player.orgasm();
 	menu();

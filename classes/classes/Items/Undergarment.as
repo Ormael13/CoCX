@@ -30,7 +30,8 @@ package classes.Items
 		override public function get description():String {
 			var desc:String = _description;
 			//Defense
-			if (armorDef > 0) desc += "\nDefense: " + String(armorDef);
+			if (armorDef > 0) desc += "\nDefense (P): " + String(armorDef);
+			if (armorMDef > 0) desc += "\nDefense (M): " + String(armorMDef);
 			//Sexiness
 			if (sexiness > 0) desc += "\nSexiness: " + String(sexiness);
 			//Value
@@ -57,6 +58,25 @@ package classes.Items
 				case "rune thong":
 				case "rune jock":
 					return 3;
+				default:
+					return 0;
+			}
+		}
+		
+		public function get armorMDef():int {
+			switch(this.name) {
+				case "ebonweave corset":
+				case "ebonweave vest":
+				case "ebonweave jockstrap":
+				case "ebonweave thong":
+				case "rune thong":
+				case "rune jock":
+					return 1;
+				case "dragonscale bra":
+				case "dragonscale vest":
+				case "dragonscale loincloth":
+				case "dragonscale thong":
+					return 2;
 				default:
 					return 0;
 			}

@@ -223,6 +223,7 @@ public class FrostGiant extends Monster
 			this.weaponAttack = 96;
 			this.armorName = "ice";
 			this.armorDef = 90;
+			this.armorMDef = 9;
 			this.bonusHP = 800;
 			this.bonusLust = 10;
 			this.lust = 10;

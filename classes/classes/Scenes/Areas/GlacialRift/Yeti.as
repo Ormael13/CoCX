@@ -57,10 +57,8 @@ public class Yeti extends Monster
 				}
 				outputText("The beast takes a step back, mist forming into a ball in his clenched fist. It condenses into a ball before your eyes, and with a growl the beast whips it at you. The ball slams into your [armor] and explodes into frost, you hiss at the sting. The frost is also restricting your movement. ");
 				var damage:Number = (str / 2) + rand(20);
-				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 0.1;
-				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 3;
 				damage = Math.round(damage);
-				player.takeMagicDamage(damage, true);
+				player.takeIceDamage(damage, true);
 				tempSpeedLoss += 10;
 				player.dynStats("spe", -10);
 			}
@@ -126,6 +124,7 @@ public class Yeti extends Monster
 			this.weaponAttack = 36;
 			this.armorName = "thick fur";
 			this.armorDef = 30;
+			this.armorMDef = 10;
 			this.bonusHP = 1000;
 			this.bonusLust = 10;
 			this.lust = 10;

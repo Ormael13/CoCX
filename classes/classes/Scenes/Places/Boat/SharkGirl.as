@@ -66,6 +66,7 @@ public class SharkGirl extends Monster
 			this.weaponAttack = 20;
 			this.armorName = "tough skin";
 			this.armorDef = 12;
+			this.armorMDef = 1;
 			this.bonusHP = 20;
 			this.bonusLust = 20;
 			this.lust = 40;

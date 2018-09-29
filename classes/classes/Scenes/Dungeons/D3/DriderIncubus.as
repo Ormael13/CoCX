@@ -30,6 +30,7 @@ public class DriderIncubus extends AbstractSpiderMorph
 			this.weaponVerb = "lunge";
 			this.armorName = "chitin";
 			this.armorDef = 60;
+			this.armorMDef = 10;
 			this.bonusHP = 1500;
 			this.bonusLust = 40;
 			this.gems = 200 + rand(80);
@@ -55,7 +56,8 @@ public class DriderIncubus extends AbstractSpiderMorph
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.d3.driderIncubus.spooderbuttGetsANewCockSleeve(hpVictory, pcCameWorms);
+			if (player.isGargoyle()) SceneLib.d3.gargoyleBadEndD3();
+			else SceneLib.d3.driderIncubus.spooderbuttGetsANewCockSleeve(hpVictory, pcCameWorms);
 		}
 		
 		private var _goblinFree:Boolean = false;

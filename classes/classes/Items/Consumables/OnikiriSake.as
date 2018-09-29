@@ -2,6 +2,8 @@
  * @author Liadri
  */
 package classes.Items.Consumables {
+import classes.CoC;
+import classes.EngineCore;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Eyes;
@@ -13,6 +15,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumable;
 import classes.Items.Mutations;
 import classes.PerkLib;
+import classes.StatusEffects;
 
 public class OnikiriSake extends Consumable {
 	public function OnikiriSake() 
@@ -38,11 +41,15 @@ public class OnikiriSake extends Consumable {
 		//Temporary storage
 		var temp:Number = 0;
 		player.slimeFeed();
-		clearOutput();/*
-		if () {
-			outputText("(If silly mode) Oooooooh (End of cut)Yeaaaah!!!! (Silly mode) A walking amphora full of red wine bursts through a nearby wall and waves at you. (end of cut)That's just what you needed to quench your thirst…now time to beat up those puny eeehhh things to pulp!");
+		clearOutput();
+		if (CoC.instance.inCombat) {
+			if (EngineCore.silly()) outputText("Oooooooh ");
+			outputText("Yeaaaah!!!! ");
+			if (EngineCore.silly()) outputText("A walking amphora full of red wine bursts through a nearby wall and waves at you. ");
+			outputText("That's just what you needed to quench your thirst... now time to beat up those puny eeehhh... things to a pulp!");
 		}
-		else */outputText("Woa! That sake sure is powerful. You laugh as your cheeks redden with the obvious sign of complete inebriation. You're so drunk you barely register as your body begins to change.");
+		else outputText("Woa! That sake sure is powerful. You laugh as your cheeks redden with the obvious sign of complete inebriation. You're so drunk you barely register as your body begins to change.");
+		if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= mutations.DrunkenPowerEmpowerOni()) mutations.DrunkenPowerEmpower();
 		if (rand(3) == 0 && changes < changeLimit) {
 			if (player.str <= 50) {
 				outputText("\n\nPainful aches ripple through your body, flooding you with pain as your muscles flex and bulge, growing much stronger and more well-defined.");
@@ -68,6 +75,9 @@ public class OnikiriSake extends Consumable {
 				outputText("\n\nYour tough hide grows slightly thicker.");
 			}
 			changes++;
+		}
+		if (changes < changeLimit && rand(3) == 0 && player.tone < player.maxToneCap()) {
+			outputText(player.modTone((player.maxToneCap() - 5), 3));
 		}
 		if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 		//Sexual changed
@@ -185,7 +195,7 @@ public class OnikiriSake extends Consumable {
 		}
 		//mutationStep(player.skin.base.type == PLAIN && !player.skin.hasBattleTattoo(), 3, function(): void {
 		if (player.skin.base.type == Skin.PLAIN && !player.skin.hasBattleTattoo() && rand(3) == 0 && changes < changeLimit) {
-			outputText("\n\nAs you thought your skin couldn't handle more tattoo a few localised skin burns reveal a new set drawing along your skin, some decorating your chest. Well you might as well proudly display your <b>Oni tattooed skin.</b>");
+			outputText("\n\nAs you thought your skin couldn't handle more tattoo a few localised skin burns reveal a new set of drawing along your skin, some decorating your chest. Well you might as well proudly display your <b>Oni tattooed skin.</b>");
 		//	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedTattoed)) {
 		//		outputText("\n\n<b>Genetic Memory: Tattoed Skin - Memorized!</b>\n\n");
 		//		player.createStatusEffect(StatusEffects.UnlockedTattoed, 0, 0, 0, 0);

@@ -36,6 +36,7 @@ public class Izumi extends Monster
 			this.weaponAttack = 50;
 			this.armorName = "silken kimono";
 			this.armorDef = 14;
+			this.armorMDef = 10;
 			this.bonusHP = 800;
 			this.bonusLust = 10;
 			this.lust = 10;
@@ -44,7 +45,9 @@ public class Izumi extends Monster
 			this.level = 30;
 			this.gems = 50 + rand(50);
 			this.additionalXP = 150;
-			this.drop = new WeightedDrop(consumables.ONISAKE, 1);
+			this.drop = new ChainedDrop().add(armors.SPKIMO,1/10)
+					.add(necklaces.OBNECK,1/5)
+					.elseDrop(consumables.ONISAKE);
 			checkMonster();
 		}
 

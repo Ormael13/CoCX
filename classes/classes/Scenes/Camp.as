@@ -14,6 +14,7 @@ import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.HeXinDao;
 import classes.lists.Gender;
 
+import coc.view.CoCButton;
 import coc.view.ButtonDataList;
 import coc.view.MainView;
 
@@ -1099,8 +1100,8 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 	//Chi Chi
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) {
 		outputText("You can see Chi Chi not so far from Jojo. She’s busy practicing her many combos on a dummy. Said dummy will more than likely have to be replaced within twenty four hours.\n\n");
-		/*if (player.statusEffectv4(StatusEffects.CampLunaMishaps2) > 0) buttons.disable("Wet.");
-		else */buttons.add( "Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu2);
+		if (player.statusEffectv4(StatusEffects.CampLunaMishaps2) > 0) buttons.add( "Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu2).disableIf(player.statusEffectv4(StatusEffects.CampLunaMishaps2) > 0,"Wet.");
+		else buttons.add( "Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu2).disableIf(player.statusEffectv2(StatusEffects.CampSparingNpcsTimers2) > 0,"Training.");
 	}
 	//Diana
 	if (flags[kFLAGS.DIANA_FOLLOWER] > 5) {
@@ -1110,8 +1111,8 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 	//Etna
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) {
 		outputText("Etna is resting lazily on a rug in a very cat-like manner. She’s looking at you always with this adorable expression of hers, her tail wagging expectantly at your approach.\n\n");
-		/*if (player.statusEffectv1(StatusEffects.CampLunaMishaps2) > 0) buttons.disable("Sleeping.");
-		else */buttons.add( "Etna", SceneLib.etnaScene.etnaCampMenu2).disableIf(player.statusEffectv4(StatusEffects.CampSparingNpcsTimers1) > 0,"Training.");
+		if (player.statusEffectv1(StatusEffects.CampLunaMishaps2) > 0) buttons.add( "Etna", SceneLib.etnaScene.etnaCampMenu2).disableIf(player.statusEffectv1(StatusEffects.CampLunaMishaps2) > 0,"Sleeping.");
+		else buttons.add( "Etna", SceneLib.etnaScene.etnaCampMenu2).disableIf(player.statusEffectv4(StatusEffects.CampSparingNpcsTimers1) > 0,"Training.");
 	}
 	//Helia
 	if(SceneLib.helScene.followerHel()) {
@@ -1253,8 +1254,8 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 				outputText("Most of them are on fire.\n\n");
 			}
 		}
-		/*if (player.statusEffectv1(StatusEffects.CampLunaMishaps2) > 0) buttons.disable("Cleaning burnt meat.");
-		else */buttons.add( "Kiha", kihaScene.encounterKiha2).disableIf(player.statusEffectv3(StatusEffects.CampSparingNpcsTimers1) > 0,"Training.");
+		if (player.statusEffectv3(StatusEffects.CampLunaMishaps1) > 0) buttons.add( "Kiha", kihaScene.encounterKiha2).disableIf(player.statusEffectv3(StatusEffects.CampLunaMishaps1) > 0,"Cleaning burnt meat.");
+		else buttons.add( "Kiha", kihaScene.encounterKiha2).disableIf(player.statusEffectv3(StatusEffects.CampSparingNpcsTimers1) > 0,"Training.");
 	}
 	//MARBLE
 	if(player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) {
@@ -1434,12 +1435,8 @@ public function campFollowers(descOnly:Boolean = false):void {
 	//Ember
 	if(emberScene.followerEmber()) {
 		emberScene.emberCampDesc();
-		/*if (player.statusEffectv2(StatusEffects.CampLunaMishaps2) > 0) buttons.disable("Wet.");
-		else */buttons.add(
-				"Ember",
-				emberScene.emberCampMenu2
-		).hint("Check up on Ember the dragon-" + (flags[kFLAGS.EMBER_ROUNDFACE] == 0 ? "morph" : flags[kFLAGS.EMBER_GENDER] == 1 ? "boy" : "girl" ) + ""
-		).disableIf(player.statusEffectv1(StatusEffects.CampSparingNpcsTimers1) > 0,"Training.");
+		if (player.statusEffectv2(StatusEffects.CampLunaMishaps2) > 0) buttons.add( "Ember", emberScene.emberCampMenu2).hint("Check up on Ember the dragon-" + (flags[kFLAGS.EMBER_ROUNDFACE] == 0 ? "morph" : flags[kFLAGS.EMBER_GENDER] == 1 ? "boy" : "girl" ) + "").disableIf(player.statusEffectv2(StatusEffects.CampLunaMishaps2) > 0,"Busy searching.");
+		else buttons.add( "Ember", emberScene.emberCampMenu2).hint("Check up on Ember the dragon-" + (flags[kFLAGS.EMBER_ROUNDFACE] == 0 ? "morph" : flags[kFLAGS.EMBER_GENDER] == 1 ? "boy" : "girl" ) + "").disableIf(player.statusEffectv1(StatusEffects.CampSparingNpcsTimers1) > 0,"Training.");
 	}
 	//Sophie
 	if(sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
@@ -1659,11 +1656,13 @@ private function campActions():void {
 
 private function campBuildingSim():void {
 	menu();
-	if (player.hasKeyItem("Carpenter's Toolbox") >= 0 && flags[kFLAGS.CAMP_WALL_PROGRESS] < 100 && getCampPopulation() >= 4) addButton(0, "Build Wall", buildCampWallPrompt).hint("Build a wall around your camp to defend from the imps." + (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10 ? "\n\nProgress: " + (flags[kFLAGS.CAMP_WALL_PROGRESS]/10) + "/10 complete": "") + "");
-	if (player.hasKeyItem("Carpenter's Toolbox") >= 0 && flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 && flags[kFLAGS.CAMP_WALL_GATE] <= 0) addButton(0, "Build Gate", buildCampGatePrompt).hint("Build a gate to complete your camp defense.");
+	if (player.hasKeyItem("Carpenter's Toolbox") >= 0) {
+		if (flags[kFLAGS.CAMP_WALL_PROGRESS] < 100 && getCampPopulation() >= 4) addButton(0, "Build Wall", buildCampWallPrompt).hint("Build a wall around your camp to defend from the imps." + (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10 ? "\n\nProgress: " + (flags[kFLAGS.CAMP_WALL_PROGRESS]/10) + "/10 complete": "") + "");
+		if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 && flags[kFLAGS.CAMP_WALL_GATE] <= 0) addButton(0, "Build Gate", buildCampGatePrompt).hint("Build a gate to complete your camp defense.");
+		addButton(3, "Build Misc", campUpgrades.buildmiscMenu).hint("Build other structures than walls or cabin for your camp.");
+	}
 	if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10 && player.hasItem(useables.IMPSKLL, 1)) addButton(1, "AddImpSkull", promptHangImpSkull).hint("Add an imp skull to decorate the wall and to serve as deterrent for imps.", "Add Imp Skull");
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] < 10) addButton(2, "Build Cabin", cabinProgress.initiateCabin).hint("Work on your cabin."); //Work on cabin.
-	if (player.hasKeyItem("Carpenter's Toolbox") >= 0) addButton(3, "Build Misc", campUpgrades.buildmiscMenu).hint("Build other structures than walls or cabin for your camp.");
 	addButton(14, "Back", campActions);
 }
 
@@ -2049,8 +2048,8 @@ public function rest():void {
 		}
 		else if (player.isGargoyle())
 		{
-			if (timeQ != 1) outputText("You sit on your pedestal, your body hardening like stone as you briefly slumber for " + num2Text(timeQ) + " hours.\n");
-			else outputText("You sit on your pedestal, your body hardening like stone as you briefly slumber for an hour.\n");
+			if (timeQ != 1) outputText("You sit on your pedestal, your body petrifying like stone as you briefly slumber for " + num2Text(timeQ) + " hours.\n");
+			else outputText("You sit on your pedestal, your body petrifying like stone as you briefly slumber for an hour.\n");
 		}
 		else 
 		{
@@ -2215,7 +2214,7 @@ CoC.instance.saves.saveGame(player.slotName);
 		/*       SLEEP WITH SYSTEM GOOOO                                  */
 		/******************************************************************/
 		if (player.isGargoyle()) {
-			outputText("You sit on your pedestal, your body hardening like stone as you sleep for " + num2Text(timeQ) + " ");
+			outputText("You sit on your pedestal, your body petrifying like stone as you sleep for " + num2Text(timeQ) + " ");
 			if(timeQ == 1) outputText("hour.\n");
 			else outputText("hours.\n");
 		}
@@ -3027,20 +3026,38 @@ public function setLevelButton(allowAutoLevelTransition:Boolean):Boolean {
 			var perkpoints:int = 1;
 			if (player.findPerk(PerkLib.AscensionUnlockedPotential) >= 0) {
 				hp += 20;
+				lust += 2;
 				fatigue += 6;
-				mana += 12;
 			}
 			if (player.findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) {
-				lust += 2;
 				wrath += 2;
+				mana += 12;
 				soulforce += 6;
 			}
 			if (player.findPerk(PerkLib.UnlockBody) >= 0) hp += 15;
-			if (player.findPerk(PerkLib.UnlockMind) >= 0) mana += 10;
-			if (player.findPerk(PerkLib.UnlockId) >= 0) lust += 1;
-			if (player.findPerk(PerkLib.UnlockBody2ndStage) >= 0) fatigue += 5;
-			if (player.findPerk(PerkLib.UnlockMind2ndStage) >= 0) soulforce += 5;
+			if (player.findPerk(PerkLib.UnlockBody2ndStage) >= 0) hp += 15;
+			if (player.findPerk(PerkLib.UnlockBody3rdStage) >= 0) hp += 15;
+			if (player.findPerk(PerkLib.UnlockBody4thStage) >= 0) hp += 15;
+			if (player.findPerk(PerkLib.UnlockEndurance) >= 0) fatigue += 5;
+			if (player.findPerk(PerkLib.UnlockEndurance2ndStage) >= 0) fatigue += 5;
+			if (player.findPerk(PerkLib.UnlockEndurance3rdStage) >= 0) fatigue += 5;
+			if (player.findPerk(PerkLib.UnlockEndurance4thStage) >= 0) fatigue += 5;
+			if (player.findPerk(PerkLib.UnlockForce) >= 0) mana += 10;
+			if (player.findPerk(PerkLib.UnlockForce2ndStage) >= 0) mana += 10;
+			if (player.findPerk(PerkLib.UnlockForce3rdStage) >= 0) mana += 10;
+			if (player.findPerk(PerkLib.UnlockForce4thStage) >= 0) mana += 10;
+			if (player.findPerk(PerkLib.UnlockSpirit) >= 0) soulforce += 5;
+			if (player.findPerk(PerkLib.UnlockSpirit2ndStage) >= 0) soulforce += 5;
+			if (player.findPerk(PerkLib.UnlockSpirit3rdStage) >= 0) soulforce += 5;
+			if (player.findPerk(PerkLib.UnlockSpirit4thStage) >= 0) soulforce += 5;
+			if (player.findPerk(PerkLib.UnlockId) >= 0) wrath += 1;
 			if (player.findPerk(PerkLib.UnlockId2ndStage) >= 0) wrath += 1;
+			if (player.findPerk(PerkLib.UnlockId3rdStage) >= 0) wrath += 1;
+			if (player.findPerk(PerkLib.UnlockId4thStage) >= 0) wrath += 1;
+			if (player.findPerk(PerkLib.UnlockArdor) >= 0) lust += 1;
+			if (player.findPerk(PerkLib.UnlockArdor2ndStage) >= 0) lust += 1;
+			if (player.findPerk(PerkLib.UnlockArdor3rdStage) >= 0) lust += 1;
+			if (player.findPerk(PerkLib.UnlockArdor4thStage) >= 0) lust += 1;
 			if (player.level < 6) {
 				statpoints += 5;
 				perkpoints += 1;
@@ -3290,7 +3307,7 @@ private function promptSaveUpdate():void {
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 13) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 14;
 		clearOutput();
-		outputText("Attention! All Munchkins Kindly leave thou gate sixty and nine. As replacements there will be whole legion of All-Rounders commin in five, four, ...........aaaand their here ^^");
+		outputText("Attention! All Munchkins Kindly leave thou gate sixty and nine. As replacements there will be whole legion of All-Rounders commin in five, four, ...........aaaand they're here ^^");
 		if (player.findPerk(PerkLib.DeityJobMunchkin) >= 0) {
 			player.removePerk(PerkLib.DeityJobMunchkin);
 			player.createPerk(PerkLib.JobAllRounder, 0, 0, 0, 0);
@@ -3457,14 +3474,99 @@ private function promptSaveUpdate():void {
 		doNext(doCamp);
 		return;
 	}
-/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 21) {
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 21) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 22;
 		clearOutput();
-		outputText("Text.");
+		outputText("Time to get from zero to Hero. Also some lil gift if PC is at least on lvl 1 ^^");
+		outputText("\n\nThere was also minor reshuffle in chimera body (and some other) perks but let not talk about mutations.... remember kids: don't do mutations... become Mareth Champion and get them for free.");
+		if (flags[kFLAGS.STAT_GAIN_MODE] == CoC.STAT_GAIN_CLASSIC) {
+			player.statPoints += 5;
+			if (player.level > 6) player.statPoints += 30;
+			else player.statPoints += (5 * player.level);
+		}
+		if (player.level > 6) player.perkPoints += 7;
+		else player.perkPoints += player.level + 1;
+		if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] > 0) {
+			if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] == 1) player.createStatusEffect(StatusEffects.SoulArenaGaunlets1, 2, 0, 0, 0);
+			else player.createStatusEffect(StatusEffects.SoulArenaGaunlets1, 2, 2, 0, 0);
+			flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] = 0;
+		}
+		if (player.hasPerk(PerkLib.SenseCorruption)) {
+			player.removePerk(PerkLib.SenseCorruption);
+			player.perkPoints += 1;
+		}
+		if (player.hasPerk(PerkLib.SenseWrath)) {
+			player.removePerk(PerkLib.SenseWrath);
+			player.perkPoints += 1;
+		}
+		if (player.hasPerk(PerkLib.ChimericalBodyBasicStage)) {
+			player.removePerk(PerkLib.ChimericalBodyBasicStage);
+			player.createPerk(PerkLib.ChimericalBodySemiBasicStage,0,0,0,0);
+		}
+		if (player.hasPerk(PerkLib.ChimericalBodyAdvancedStage)) {
+			player.removePerk(PerkLib.ChimericalBodyAdvancedStage);
+			player.createPerk(PerkLib.ChimericalBodyBasicStage,0,0,0,0);
+		}
+		if (player.hasPerk(PerkLib.UnlockBody2ndStage)) {
+			player.removePerk(PerkLib.UnlockBody2ndStage);
+			player.createPerk(PerkLib.UnlockEndurance, 0, 0, 0, 0);
+		}
+		if (player.hasPerk(PerkLib.UnlockId)) {
+			player.removePerk(PerkLib.UnlockId);
+			player.createPerk(PerkLib.UnlockArdor, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.UnlockId2ndStage)) {
+				player.removePerk(PerkLib.UnlockId2ndStage);
+				player.createPerk(PerkLib.UnlockId, 0, 0, 0, 0);
+			}
+		}
+		if (player.hasPerk(PerkLib.UnlockMind)) {
+			player.removePerk(PerkLib.UnlockMind);
+			player.createPerk(PerkLib.UnlockForce, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.UnlockMind2ndStage)) {
+				player.removePerk(PerkLib.UnlockMind2ndStage);
+				player.createPerk(PerkLib.UnlockSpirit, 0, 0, 0, 0);
+			}
+		}
+		if (player.hasPerk(PerkLib.HalfStepToMythicalEndurance)) {
+			player.removePerk(PerkLib.HalfStepToMythicalEndurance);
+			player.createPerk(PerkLib.HalfStepToLegendaryEndurance, 0, 0, 0, 0);
+		}
+		if (player.hasPerk(PerkLib.MythicalEndurance)) {
+			player.removePerk(PerkLib.MythicalEndurance);
+			player.createPerk(PerkLib.LegendaryEndurance, 0, 0, 0, 0);
+		}
+		if (player.hasPerk(PerkLib.HalfStepToMythicalSelfControl)) {
+			player.removePerk(PerkLib.HalfStepToMythicalSelfControl);
+			player.createPerk(PerkLib.HalfStepToLegendarySelfControl, 0, 0, 0, 0);
+		}
+		if (player.hasPerk(PerkLib.MythicalSelfControl)) {
+			player.removePerk(PerkLib.MythicalSelfControl);
+			player.createPerk(PerkLib.LegendarySelfControl, 0, 0, 0, 0);
+		}
+		if (player.hasPerk(PerkLib.HalfStepToMythicalSpirituality)) {
+			player.removePerk(PerkLib.HalfStepToMythicalSpirituality);
+			player.createPerk(PerkLib.HalfStepToLegendarySpirituality, 0, 0, 0, 0);
+		}
+		if (player.hasPerk(PerkLib.MythicalSpirituality)) {
+			player.removePerk(PerkLib.MythicalSpirituality);
+			player.createPerk(PerkLib.LegendarySpirituality, 0, 0, 0, 0);
+		}
+		if (player.hasPerk(PerkLib.HalfStepToMythicalTranquilness)) {
+			player.removePerk(PerkLib.HalfStepToMythicalTranquilness);
+			player.createPerk(PerkLib.HalfStepToLegendaryTranquilness, 0, 0, 0, 0);
+		}
+		if (player.hasPerk(PerkLib.MythicalTranquilness)) {
+			player.removePerk(PerkLib.MythicalTranquilness);
+			player.createPerk(PerkLib.LegendaryTranquilness, 0, 0, 0, 0);
+		}
+		if (flags[kFLAGS.HIDDEN_CAVE_BOSSES] == 3) {
+			flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] = 6;
+			flags[kFLAGS.HIDDEN_CAVE_BOSSES] = 2;
+		}
 		doNext(doCamp);
 		return;
 	}
-	if (flags[kFLAGS.MOD_SAVE_VERSION] == 22) {
+/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 22) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 23;
 		clearOutput();
 		outputText("Text.");
@@ -3817,3 +3919,4 @@ private function fixHistory():void {
 */
 }
 }
+

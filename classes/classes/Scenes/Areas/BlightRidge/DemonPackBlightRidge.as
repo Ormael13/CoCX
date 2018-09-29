@@ -101,6 +101,7 @@ public class DemonPackBlightRidge extends Monster
 			this.weaponAttack = 62;
 			this.armorName = "demonic skin";
 			this.armorDef = 30;
+			this.armorMDef = 3;
 			this.bonusHP = 500;
 			this.bonusLust = 200;
 			this.lust = 30;

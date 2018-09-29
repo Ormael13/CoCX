@@ -20,10 +20,5 @@ package classes.Perks
 			super("Body Cultivator's Focus", "Body Cultivator's Focus",
 					"Your body cultivator's weapon grants you additional focus, increasing your physical soulskills power.");
 		}
-		
-		override public function keepOnAscension(respec:Boolean = false):Boolean 
-		{
-			return true;
-		}
 	}
 }

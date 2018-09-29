@@ -2203,7 +2203,7 @@ public class Appearance extends Utils
 		}
 		public static function earsDescript(i_creature:Creature):String
 		{
-			return i_creature.ears.type + " ears";
+			return DEFAULT_EARS_NAMES[i_creature.ears.type] + " ears";
 		}
 
 /* All of these functions have been replaced with direct calls to the appropriate form of cockNoun().

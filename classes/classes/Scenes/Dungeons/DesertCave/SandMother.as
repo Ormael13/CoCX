@@ -66,10 +66,8 @@ public class SandMother extends Monster
 				damage *= 0.2;
 				damage = Math.round(damage);
 			}
-			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
-			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			damage = Math.round(damage);
-			damage = player.takeMagicDamage(damage, true);
+			damage = player.takeFireDamage(damage, true);
 			removeStatusEffect(StatusEffects.Gigafire);
 		}
 			
@@ -99,8 +97,8 @@ public class SandMother extends Monster
 		//Unavoidable magic damage.
 		public function eatALightningBolt():void {
 			outputText("Holding her staff back, she lifts her free hand with her fingers outstretched in a fan.  Sparks dance between her slender digits, coiling around them like snakes.  In a flash, they rush to her palm and erupt in a lightning bolt, striking you instantly and unavoidably! ");
-			var damage:int = 30 + rand(10);
-			damage = player.takeMagicDamage(damage, true);
+			var damage:int = 60 + rand(20);
+			damage = player.takeLightningDamage(damage, true);
 		}
 		//*Whisper:
 		//As ackbal, stuns the PC 1 round.  Cannot be resisted.
@@ -121,7 +119,8 @@ public class SandMother extends Monster
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.dungeons.desertcave.loseToTheSandMother();
+			if (player.isGargoyle()) SceneLib.dungeons.desertcave.gargoyleBadEndSandWitches();
+			else SceneLib.dungeons.desertcave.loseToTheSandMother();
 		}
 		
 		public function SandMother()
@@ -153,6 +152,7 @@ public class SandMother extends Monster
 			this.weaponValue = 150;
 			this.armorName = "robes";
 			this.armorDef = 10;
+			this.armorMDef = 50;
 			this.bonusHP = 130;
 			this.bonusLust = 30;
 			this.lust = 20;

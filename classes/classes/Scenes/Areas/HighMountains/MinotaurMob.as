@@ -183,6 +183,7 @@ import classes.Scenes.SceneLib;
 			this.weaponAttack = 36;
 			this.armorName = "thick fur";
 			this.armorDef = 30;
+			this.armorMDef = 5;
 			var bonusHP:Number = 600 + 50 * (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3);
 			var lustVuln:Number = 0.45;
 			if((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 2 > 13) lustVuln = .3;

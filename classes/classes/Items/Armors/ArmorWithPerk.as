@@ -15,8 +15,8 @@ package classes.Items.Armors
 		private var playerPerkV3:Number;
 		private var playerPerkV4:Number;
 		
-		public function ArmorWithPerk(id:String, shortName:String,name:String, longName:String, def:Number, value:Number, description:String, perk:String, playerPerk:PerkType, playerPerkV1:Number, playerPerkV2:Number, playerPerkV3:Number, playerPerkV4:Number, playerPerkDesc:String = "", supportsBulge:Boolean = false, supportsUndergarment:Boolean = true) {
-			super(id, shortName, name,longName, def, value, description, perk, supportsBulge, supportsUndergarment);
+		public function ArmorWithPerk(id:String, shortName:String,name:String, longName:String, def:Number, mdef:Number, value:Number, description:String, perk:String, playerPerk:PerkType, playerPerkV1:Number, playerPerkV2:Number, playerPerkV3:Number, playerPerkV4:Number, playerPerkDesc:String = "", supportsBulge:Boolean = false, supportsUndergarment:Boolean = true) {
+			super(id, shortName, name,longName, def, mdef, value, description, perk, supportsBulge, supportsUndergarment);
 			this.playerPerk = playerPerk;
 			this.playerPerkV1 = playerPerkV1;
 			this.playerPerkV2 = playerPerkV2;
@@ -45,11 +45,13 @@ package classes.Items.Armors
 					desc += "(Light)";
 				}
 				else if (perk == "Medium") desc += "(Medium)";
-				else desc += "(Heavy)";
+				else if (perk == "Heavy") desc += "(Heavy)";
+				else if (perk == "Ayo") desc += "(Ayo)";
 			}
 			else desc += "Clothing ";
 			//Defense
-			if (def > 0) desc += "\nDefense: " + String(def);
+			if (def > 0) desc += "\nDefense (P): " + String(def);
+			if (mdef > 0) desc += "\nDefense (M): " + String(mdef);
 			//Value
 			if (value != 0) desc += "\nBase value: " + String(value);
 			//Perk

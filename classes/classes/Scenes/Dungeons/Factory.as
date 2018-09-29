@@ -190,6 +190,7 @@ use namespace CoC;
 					outputText("  ");
 				}
 				outputText("You glance over to the pile of glistening entwined bodies as they writhe in pleasure, and find yourself drawn in to the mass.  You spend the next four hours suckling tainted breast milk, fucking gaping pussies, and doing your damnedest to milk as much cum from the dick-girls around you.  Eventually the drugs work their way out of your system, leaving you to recover on the floor.  Cum, milk, and sweat drip from your nude form as you try to clean up and get dressed.");
+				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 				player.orgasm();
 				dynStats("int", -player.cor/10, "lib", 2*player.cor, "cor", 20);
 				player.slimeFeed();
@@ -197,7 +198,7 @@ use namespace CoC;
 				player.addPerkValue(PerkLib.ProductivityDrugs, 1, player.cor);	//minlibido += CURRENT cor
 				player.addPerkValue(PerkLib.ProductivityDrugs, 2, 10);			//mincorruption += 10
 				player.addPerkValue(PerkLib.ProductivityDrugs, 3, player.lib);	//cumproduction += CURRENT lib (same as cum witch blessing)
-				player.addPerkValue(PerkLib.ProductivityDrugs, 4, player.lib);//milkproduction += CURRENT lib (same as level1 milkmaid)
+				player.addPerkValue(PerkLib.ProductivityDrugs, 4, player.lib);	//milkproduction += CURRENT lib (same as level1 milkmaid)
 			}
 			//Second/third times...
 			else if (player.getAllMinStats()["lib"] < player.getAllMaxStats()["lib"]) {
@@ -244,6 +245,7 @@ use namespace CoC;
 				//HERM
 				if(player.vaginas.length > 0 && player.cocks.length > 0) outputText("You feel your " + multiCockDescript() + " getting milked by many wet holes, though you are too busy sucking cocks and moaning in ecstasy to notice who they belong to.  ");
 				outputText("The next eight hours are lost to your desires as you cum over and over, feeling mind-shattering pleasure.  You recover a while on the floor, soaked with a mixture of milk, cum, and pussy-juice.  Getting dressed is a bit troublesome with the recent changes, but you manage to squeeze back into your [armor].  You walk away while still feeling horny, and the moaning of the girls behind you doesn't help.  Maybe you could stay for another round...");
+				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 				player.orgasm();
 				dynStats("int", -player.cor / 10, "lib", 2 * player.cor, "cor", 20);
 				player.slimeFeed();
@@ -721,6 +723,7 @@ use namespace CoC;
 				player.refillHunger(100);
 				player.orgasm();
 				dynStats("cor", 20);
+				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 				if (flags[kFLAGS.LETHICE_DEFEATED] > 0) outputText("\n\n\"<i>You're lucky I've decided to let you go since you've overthrown Lethice,</i>\" the incubus grumbles.");
 				if(flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) doNext(doBadEndGeneric);
 				else cleanupAfterCombat();
@@ -770,6 +773,7 @@ use namespace CoC;
 					player.orgasm();
 					dynStats("cor", 25);
 					player.buttChange(monster.cockArea(0), true);
+					if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 					if (flags[kFLAGS.D3_GARDENER_DEFEATED] > 0 && flags[kFLAGS.D3_CENTAUR_DEFEATED] > 0 && flags[kFLAGS.D3_STATUE_DEFEATED] > 0) outputText("\n\n\"<i>You're lucky I've decided to let you go since you've overthrown Lethice,</i>\" the incubus grumbles.");
 					if(flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) doNext(doBadEndGeneric);
 					else cleanupAfterCombat();
@@ -803,6 +807,7 @@ use namespace CoC;
 					player.refillHunger(100);
 					player.buttChange(monster.cockArea(0), true);
 					player.orgasm();
+					if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 					if (flags[kFLAGS.D3_GARDENER_DEFEATED] > 0 && flags[kFLAGS.D3_CENTAUR_DEFEATED] > 0 && flags[kFLAGS.D3_STATUE_DEFEATED] > 0) outputText("\n\n\"<i>You're lucky I've decided to let you go since you've overthrown Lethice,</i>\" the incubus grumbles.");
 					dynStats("cor", 25);
 					if(flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) doNext(doBadEndGeneric);
@@ -885,6 +890,7 @@ use namespace CoC;
 				outputText("Relaxing the muscles in your [legs], you let a few inches of his length slip inside you, every nub and nodule of his corrupted prick filling the walls of your love-canal with inhuman pleasures that make your knees weak.  A particularly delightful bump brushes your " + clitDescript() + ", causing your [legs] to finally give out. The incubus' nubbly cock plunges entirely inside you.\n\n");
 				outputText("You gasp and moan like a cheap whore, disgusted by yourself and yet so turned on by the total loss of self-control.  The incubus is leering up at you, having regained some of his lost confidence.  Despite the lust, desire and pleasure burning through the hot pole buried in your abdomen, you work up enough rage to grip his neck with your left hand and practically choke him out.  You work your hips quickly as you feel his pre start to drip into your canal, spreading tingling warmth in the deepest parts of your passage and into your cervix.  You tighten your grip as you forcibly take your pleasure, barking in displeasure at the demon, \"<i>Don't look like you're enjoying this too much bitch, or I'll take it out of your hide.</i>\"  Satisfied at the renewed look of fear in his eyes, you return to using his magnificent tool as a masturbation aid.\n\n");
 				outputText("Unable to contain your body's desires due to either the demon's aura or his wonderful penis, you slam your " + vaginaDescript(0) + " onto his member with impunity, twitching and squeezing involuntarily.  His tainted pre-cum begins seeping deep inside your uterus and you cry out with orgasmic intensity.  Your entire body clenches down, even the hand clamped on the incubus' windpipe. You feel his demon-cock swell up inside you in response to his stress, stretching your cunt taut.  His skin darkens from the lack of oxygen as he begins cumming HARD inside you.  Your womb immediately fills with his demon-seed, leaving ribbons of spunk to drip from your tightly-stretched cunt.  You sigh in delight as your muscles slowly stop quivering.  With a pleasured gasp, you rise off the distended demon-prick, and realize that you've choked your foe into unconsciousness. Still, you did let him cum, so maybe he won't mind too much when he wakes.  Feeling sensual and sated, you redress and prepare to explore the rest of the factory. ");
+				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 				player.cuntChange(player.vaginalCapacity()*.8, true);
 				player.orgasm();
 				dynStats("cor", 2);
@@ -1847,4 +1853,4 @@ use namespace CoC;
 			//addButton(2, "Use", useBathroom);
 		}
 	}
-}
+}

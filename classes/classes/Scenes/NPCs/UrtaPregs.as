@@ -4,6 +4,7 @@ import classes.BodyParts.Tongue;
 import classes.GlobalFlags.*;
 import classes.PregnancyStore;
 import classes.Scenes.SceneLib;
+import classes.PerkLib;
 
 public class UrtaPregs extends NPCAwareContent {
 
@@ -1600,6 +1601,7 @@ private function urtaRaepsJoo():void {
 	outputText(" and close your eyes, letting sleep take you over even as the fox behind you drools on your back and continues to pound your ass raw.");
 	
 	outputText("\n\nYou come to your senses and notice the amazing softness of the pillow you're laying on.  It feels so good you can't help but dig your head in and rub your cheek against it.  \"<i>You like that, do you?</i>\"  A familiar voice says, sounding rather amused.");
+	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 	player.orgasm();
 	dynStats("sen", 3);
 	menu();

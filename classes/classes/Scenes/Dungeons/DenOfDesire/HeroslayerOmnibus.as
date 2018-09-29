@@ -52,7 +52,7 @@ public class HeroslayerOmnibus extends Monster
 				//Determine damage - str modified by enemy toughness!
 				damage = int((eBaseDamage() * 1.5) - Math.random() * (player.tou + player.armorDef));
 				if (damage > 0) {
-					damage = player.takePhysDamage(damage);
+					damage = player.takeFireDamage(damage);
 				}
 				if (damage <= 0) {
 					damage = 0;
@@ -178,6 +178,7 @@ public class HeroslayerOmnibus extends Monster
 			this.weaponAttack = 26;
 			this.armorName = "demon-skin";
 			this.armorDef = 1;
+			this.armorMDef = 75;
 			this.bonusHP = 2500;
 			this.bonusLust = 50;
 			this.lust = 30;

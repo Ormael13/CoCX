@@ -274,7 +274,7 @@ public class MainMenu extends BaseContent {
 		outputText("<li> Gats, Shamblesworth, Symphonie, and Fenoxo (Corrupted Drider)</li>");
 		outputText("<li> Bagpuss (Female Thanksgiving Event, Harpy Scissoring, Drider Bondage Fuck)</li>");
 		outputText("<li> Frogapus (The Wild Hunt)</li>");
-		outputText("<li> Liadri (Etna, Manticore Venom (TF item), Black Ink - female scylla TF item, female scylla exclusive masturbation scene, texts and name for Mantis TF - Blade Grass, Kindra (writing part and some of ideas for few secenes), Archery Overhaul (main designer for it), various TF's: Yeti, Orca, Raiju, manticore; Ceani the Orca girl, Electra the Raiju, Chi Chi the fire mouse)</li>");
+		outputText("<li> Liadri (Etna, Manticore Venom (TF item), Black Ink - female scylla TF item, female scylla exclusive masturbation scene, texts and name for Mantis TF - Blade Grass, Kindra (writing part and some of ideas for few secenes), Archery Overhaul (main designer for it), various TF's: Yeti, Orca, Raiju, manticore; Ceani the Orca girl, Electra the Raiju, Chi Chi the fire mouse, Gargoyle TF, Adventure Guild)</li>");
 		outputText("<li> Zevos (Spider-silk shirt, Dragonscale vest, Eldritch Ribbon, Ascensus, Depravation, Puritas items, Ebonbloom crafting material and all items made from it, Ignis)</li>");
 		outputText("<li> Coalsack (Anzu the Avian Deity, Arian App desc, option to change his/her scales color)</li>");
 		outputText("<li> Fenoxo (Everything Else)</li>");

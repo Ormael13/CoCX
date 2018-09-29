@@ -44,6 +44,7 @@ package classes.Scenes.Camp
 			this.weaponAttack = 20 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "tribulation clouds";
 			this.armorDef = 0;
+			this.armorMDef = 0;
 			this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
 			this.str += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

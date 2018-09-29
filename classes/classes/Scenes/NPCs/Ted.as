@@ -121,6 +121,7 @@ use namespace CoC;
 			this.weaponAttack = 8;
 			this.armorName = "dragonscales armor";
 			this.armorDef = 5;
+			this.armorMDef = 50;
 			this.lust = 15;
 			this.lustVuln = .9;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;

@@ -158,6 +158,7 @@ use namespace CoC;
 			this.weaponAttack = 12;
 			this.armorName = "indecent spider silk robe";
 			this.armorDef = 12;
+			this.armorMDef = 10;
 			this.bonusHP = 100;
 			this.bonusLust = 50;
 			this.lust = 30;

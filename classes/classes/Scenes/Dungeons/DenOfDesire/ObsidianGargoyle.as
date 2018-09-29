@@ -7,6 +7,7 @@ package classes.Scenes.Dungeons.DenOfDesire
 import classes.*;
 import classes.Scenes.Monsters.AbstractGargoyle;
 import classes.Scenes.SceneLib;
+import classes.internals.ChainedDrop;
 
 public class ObsidianGargoyle extends AbstractGargoyle
 	{
@@ -138,7 +139,8 @@ public class ObsidianGargoyle extends AbstractGargoyle
 			initStrTouSpeInte(150, 120, 90, 10);
 			initWisLibSensCor(10, 10, 10, 50);
 			this.tallness = 120;
-			this.drop = NO_DROP;
+			this.drop = new ChainedDrop()
+					.add(consumables.E_PEARL, 1);
 			this.level = 28;
 			this.bonusHP = 2500;
 			this.additionalXP = 500;
@@ -148,6 +150,7 @@ public class ObsidianGargoyle extends AbstractGargoyle
 			this.weaponAttack = 75;
 			this.armorName = "stone";
 			this.armorDef = 75;
+			this.armorMDef = 25;
 			this.createPerk(PerkLib.Resolute, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);

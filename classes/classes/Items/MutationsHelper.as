@@ -408,7 +408,7 @@ import classes.BodyParts.Wings;
 		[Face.ECHIDNA, null],
 		[Face.FERRET, null],
 		[Face.FERRET_MASK, null],
-		[Face.FOX, null],
+		[Face.FOX, StatusEffects.UnlockedFoxFace],
 		[Face.HORSE, null],
 		[Face.HUMAN, null],
 		[Face.JABBERWOCKY, null],

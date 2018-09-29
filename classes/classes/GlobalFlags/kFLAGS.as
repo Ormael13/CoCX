@@ -2603,7 +2603,7 @@ public static const UNKNOWN_FLAG_NUMBER_02594:int                               
 public static const UNKNOWN_FLAG_NUMBER_02595:int                                   = 2595;
 public static const UNKNOWN_FLAG_NUMBER_02596:int                                   = 2596;
 public static const UNKNOWN_FLAG_NUMBER_02597:int                                   = 2597;
-public static const UNKNOWN_FLAG_NUMBER_02598:int                                   = 2598;
+public static const AUTO_CAST_MANA_SHIELD:int                                   	= 2598;
 public static const IN_COMBAT_PLAYER_COMPANION_1_ACTION:int                         = 2599;
 public static const UNKNOWN_FLAG_NUMBER_02600:int                                   = 2600;
 public static const UNKNOWN_FLAG_NUMBER_02601:int                                   = 2601;

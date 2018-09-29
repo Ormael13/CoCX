@@ -61,7 +61,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			bd = buttons.add("Punishing Kick", PunishingKick).hint("A vicious kick that can daze an opponent, reducing its damage for a while.  \n\nWould go into cooldown after use for: 10 rounds  \n\nSoulforce cost: " + 30 * soulskillCost() * soulskillcostmulti());
 			if (player.hasStatusEffect(StatusEffects.CooldownPunishingKick)) {
 				bd.disable("You need more time before you can use Punishing Kick again.");
-			} else if (!player.isBiped() || !player.isTaur()) {
+			} else if (player.isDrider() || player.isGoo() || player.isNaga() || player.isScylla() || player.isAlraune()) {
 				bd.disable("<b>Your legs not allow to use this technique.</b>");
 			} else if (player.soulforce < 30 * soulskillCost() * soulskillcostmulti()) {
 				bd.disable("Your current soulforce is too low.");
@@ -143,12 +143,11 @@ public class CombatSoulskills extends BaseCombatContent {
 					   .hint("Deactivate Violet Pupil Transformation.");
 			} else {
 				bd = buttons.add("V P Trans", VioletPupilTransformation);
-				
-				var unicornScore:Number = player.unicornScore();
-				var alicornScore:Number = player.alicornScore();
-				if (unicornScore >= 5 && alicornScore >= 6) bd.hint("Violet Pupil Transformation is a regenerating oriented soul art that at the cost of constant using fixed amount of soulforce would be healing user.  Usualy it would ends when caster run out of soulforce to substain it or situation that casused it activation is over.\n\nSoulforce cost: <i>100 soulforce</i> regenerating <b>" + (200 + ((unicornScore - 4) * 25) + ((alicornScore - 5) * 25)) + " HP</b> per turn.");
-				else if (unicornScore >= 5) bd.hint("Violet Pupil Transformation is a regenerating oriented soul art that at the cost of constant using fixed amount of soulforce would be healing user.  Usualy it would ends when caster run out of soulforce to substain it or situation that casused it activation is over.\n\nSoulforce cost: <i>100 soulforce</i> regenerating <b>" + (200 + ((unicornScore - 4) * 25)) + " HP</b> per turn.");
-				else bd.hint("Violet Pupil Transformation is a regenerating oriented soul art that at the cost of constant using fixed amount of soulforce would be healing user.  Usualy it would ends when caster run out of soulforce to substain it or situation that casused it activation is over.\n\nSoulforce cost: <i>100 soulforce</i> regenerating <b>200 HP</b> per turn.");
+				var unicornB:int = player.unicornScore() >= 10 ? 25 : 0;
+				var alicornB:int = player.alicornScore() >= 12 ? 50 : 0;
+				/*if (alicornScore >= 12) bd.hint("Violet Pupil Transformation is a regenerating oriented soul art that at the cost of constant using fixed amount of soulforce would be healing user.  Usualy it would ends when caster run out of soulforce to substain it or situation that casused it activation is over.\n\nSoulforce cost: <i>100 soulforce</i> regenerating <b>" + (200 + ((unicornScore - 4) * 25) + ((alicornScore - 5) * 25)) + " HP</b> per turn.");
+				else if (unicornScore >= 10) bd.hint("Violet Pupil Transformation is a regenerating oriented soul art that at the cost of constant using fixed amount of soulforce would be healing user.  Usualy it would ends when caster run out of soulforce to substain it or situation that casused it activation is over.\n\nSoulforce cost: <i>100 soulforce</i> regenerating <b>" + (200 + ((unicornScore - 4) * 25)) + " HP</b> per turn.");
+				else */bd.hint("Violet Pupil Transformation is a regenerating oriented soul art that at the cost of constant using fixed amount of soulforce would be healing user.  Usualy it would ends when caster run out of soulforce to substain it or situation that casused it activation is over.\n\nSoulforce cost: <i>100 soulforce</i> regenerating <b>" + (200 + unicornB + alicornB) + " HP</b> per turn.");
 				
 				if (player.soulforce < 100) {
 					bd.disable("<b>Your current soulforce is too low.</b>");
@@ -197,15 +196,20 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.findPerk(PerkLib.HoldWithBothHands) >= 0 && player.weapon != WeaponLib.FISTS && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
 		if (player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80) damage *= 1.2;
 		if (player.findPerk(PerkLib.HistoryFighter) >= 0 || player.findPerk(PerkLib.PastLifeFighter) >= 0) damage *= 1.1;
+		if (player.hasPerk(PerkLib.DemonSlayer)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
 		if (player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
-		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
+		if (player.armor == armors.SPKIMO) damage *= 1.2;
+		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
+		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 		//triple strike bonus
 		damage *= 3;
 		if (monster.hasStatusEffect(StatusEffects.Frozen)) damage *= 2;
 		var crit:Boolean = false;
 		var critChance:int = 5;
+		if (player.isSwordTypeWeapon()) critChance += 10;
+		if (player.isDuelingTypeWeapon()) critChance += 20;
 		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
 			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
 			if (player.inte > 100) critChance += 10;
@@ -270,12 +274,17 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.findPerk(PerkLib.HoldWithBothHands) >= 0 && player.weapon != WeaponLib.FISTS && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
 		if (player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80) damage *= 1.2;
 		if (player.findPerk(PerkLib.HistoryFighter) >= 0 || player.findPerk(PerkLib.PastLifeFighter) >= 0) damage *= 1.1;
+		if (player.hasPerk(PerkLib.DemonSlayer)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
 		if (player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
-		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= 3;
+		if (player.armor == armors.SPKIMO) damage *= 1.2;
+		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
+		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 		var crit:Boolean = false;
 		var critChance:int = 5;
+		if (player.isSwordTypeWeapon()) critChance += 10;
+		if (player.isDuelingTypeWeapon()) critChance += 20;
 		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
 			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
 			if (player.inte > 100) critChance += 10;
@@ -668,6 +677,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (player.findPerk(PerkLib.AyoArmorProficiency) >= 0) TranceBoost -= 20;
 			if (player.findPerk(PerkLib.Agility) >= 0) TranceBoost -= 10;
 			if (player.findPerk(PerkLib.LightningStrikes) >= 0) TranceBoost -= 10;
+			if (player.findPerk(PerkLib.StarlightStrikes) >= 0) TranceBoost -= 10;
 			if (player.findPerk(PerkLib.BodyCultivator) >= 0) TranceBoost -= 5;
 		//	TranceBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
 			if (TranceBoost < 10) TranceBoost = 10;
@@ -837,6 +847,9 @@ public class CombatSoulskills extends BaseCombatContent {
 	 //other bonuses
 	 if (player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80) damage *= 1.2;
 	 if (player.findPerk(PerkLib.HistoryFighter) >= 0 || player.findPerk(PerkLib.PastLifeFighter) >= 0) damage *= 1.1;
+	 if (player.hasPerk(PerkLib.DemonSlayer)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
+	 if (player.armor == armors.SPKIMO) damage *= 1.2;
+		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 	 //Determine if critical hit!
 	 var crit:Boolean = false;
 	 var critChance:int = 5;
@@ -929,8 +942,11 @@ public class CombatSoulskills extends BaseCombatContent {
 	 if (player.findPerk(PerkLib.HoldWithBothHands) >= 0 && player.weapon != WeaponLib.FISTS && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
 	 if (player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80) damage *= 1.2;
 	 if (player.findPerk(PerkLib.HistoryFighter) >= 0 || player.findPerk(PerkLib.PastLifeFighter) >= 0) damage *= 1.1;
+	 if (player.hasPerk(PerkLib.DemonSlayer)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
 	 if (player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
 	 if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
+	if (player.armor == armors.SPKIMO) damage *= 1.2;
+	if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 	 //triple strike bonus
 	 damage *= 3;
 	 //soulskill mod effect

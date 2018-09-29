@@ -59,6 +59,7 @@ use namespace CoC;
 			this.weaponAttack = 16;
 			this.armorName = "leathery skin";
 			this.armorDef = 10;
+			this.armorMDef = 1;
 			this.bonusHP = 500;
 			this.bonusLust = 150;
 			this.lust = 30;

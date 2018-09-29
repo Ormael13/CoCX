@@ -72,7 +72,8 @@ public class HarpyMob extends Monster
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.dungeons.heltower.pcLosesToHarpyHorde();
+			if (player.isGargoyle()) SceneLib.dungeons.heltower.gargoyleBadEndPhoenixTower();
+			else SceneLib.dungeons.heltower.pcLosesToHarpyHorde();
 		}
 		
 		public function HarpyMob()
@@ -104,6 +105,7 @@ public class HarpyMob extends Monster
 			this.weaponAttack = 37;
 			this.armorName = "armor";
 			this.armorDef = 20;
+			this.armorMDef = 2;
 			this.bonusHP = 1000;
 			this.bonusLust = 100;
 			this.lust = 20;

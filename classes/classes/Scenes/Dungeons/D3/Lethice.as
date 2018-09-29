@@ -31,6 +31,7 @@ public class Lethice extends Monster
 			this.weaponVerb = "whip";
 			this.armorName = "wraps";
 			this.armorDef = 36;
+			this.armorMDef = 72;
 			this.bonusHP = 3000;
 			this.bonusLust = 150;
 			this.gems = 200 + rand(100);
@@ -118,13 +119,13 @@ public class Lethice extends Monster
 				phase2Ends(hpVictory);
 				return;
 			}
-
 			SceneLib.d3.lethice.defeated(hpVictory);
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.d3.lethice.won(hpVictory, pcCameWorms);
+			if (player.isGargoyle()) SceneLib.d3.gargoyleBadEndD3();
+			else SceneLib.d3.lethice.won(hpVictory, pcCameWorms);
 		}
 		
 		private var _roundCount:int = 0;

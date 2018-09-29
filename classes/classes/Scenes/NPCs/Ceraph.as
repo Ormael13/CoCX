@@ -314,6 +314,7 @@ public class Ceraph extends Monster
 			this.weaponAttack = 20;
 			this.armorName = "demon-skin";
 			this.armorDef = 10;
+			this.armorMDef = 10;
 			this.bonusHP = 200;
 			this.bonusLust = 40;
 			this.lust = 30;

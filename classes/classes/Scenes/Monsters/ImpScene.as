@@ -155,6 +155,7 @@ use namespace CoC;
 				//Preggers chance!
 				player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 				player.cuntChange(monster.cockArea(0), true, true, false);
+				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			}
 			player.orgasm();
 			dynStats("cor", 1);
@@ -265,6 +266,7 @@ use namespace CoC;
 				outputText("You trot over to the leader, still using the nearly unconscious imp as a cock sleeve, and pull the abused creature off of him. He looks shocked as you grab his cock and squeeze his balls, causing him to orgasm hard and spray you down in white hot seed. He collapses onto the ground, spent, as you wipe yourself down as best you can.");
 		
 				outputText("  Collecting your things, you give the assorted bodies one last look and stumble back to camp.");
+				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 				player.orgasm();
 				dynStats("cor", 1);
 			}
@@ -447,6 +449,7 @@ use namespace CoC;
 				//Ride around with him till he cums and falls off
 				outputText("When the creature completely bottoms out inside of you, you begin trotting forward with a wicked grin.  The creature's hands grasp your flanks desperately, and its " + monster.cockDescriptShort(0) + " bounces inside your " + vaginaDescript(0) + ", adding to your sensation.  The movement is causing the imp to push himself even harder against you as it tries to not fall off, and it is all you can do to keep an eye on where you are going.  Soon you can feel the imp's sperm filling your " + vaginaDescript(0) + " and overflowing even as your cunt-muscles try to milk it of all of its seed. Unsatisfied you begin to speed up as you use its " + monster.cockDescriptShort(0) + " to bring about your own orgasm.  The small creature is unable to let go without hurting itself.  It hangs on desperately while you increase the pace and begin making short jumps to force it deeper into you.  The feeling of sperm dripping out and over your " + clitDescript() + " pushes you over and cry out in intense pleasure.  When you finally slow down and clear your head the imp is nowhere to be seen.  Trotting back along the trail of sperm you left behind you find only its small satchel.");
 				player.cuntChange(monster.cockArea(0), true, true, false);
+				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 				player.orgasm();
 				cleanupAfterCombat();
 				return;
@@ -485,6 +488,7 @@ use namespace CoC;
 				outputText("\n\nIt is a relief when you feel the creature's sperm filling your womb and lubricating your raw cervix, your own body is wrecked by an intense orgasm while it breeds you.  You pass out, waking up to find that the imp has slipped out of you and is lying unconscious and coated completely in a mixture of your juices and his own. After looking for anything you might be able to take away from him you limp away, you ");
 				if(player.cor < 80) outputText("promise to yourself that you will not do that again.");
 				else outputText("find your cunt juices already dripping down your legs in anticipation of doing this again.");
+				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 				player.orgasm();
 				cleanupAfterCombat();
 				return;
@@ -1301,7 +1305,7 @@ use namespace CoC;
 		
 				outputText("With a sigh, he pulls his dick free, and you flop down, cum leaking out onto the ground from your well-fucked hole. If you could, like, focus at all, you'd totally be worrying about being, like, pregnant or whatever. But you lose consciousness.");
 				player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14); //Bigger imp means faster pregnancy
-		
+				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 				player.orgasm();
 				dynStats("lib", 1, "sen", 1, "cor", 1);
 				cleanupAfterCombat();
@@ -1491,6 +1495,7 @@ use namespace CoC;
 			else outputText("You quickly get dressed and leave the imp to his slumbering, his hands still tied together by his loincloth.");
 			//Gain xp and gems here
 			player.orgasm();
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			dynStats("sen", -3, "cor", 1);
 			cleanupAfterCombat();
 		}
@@ -2177,6 +2182,7 @@ use namespace CoC;
 			outputText("Sated for now, you rise up, your body dripping gooey whiteness.  Though in retrospect it isn't nearly as much as was pumped into your womb.");
 			if(player.pregnancyIncubation == 0) outputText("  You'll probably get pregnant.");
 			player.orgasm();
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14, 50);
 			cleanupAfterCombat();
 		}
@@ -2252,7 +2258,7 @@ use namespace CoC;
 				outputText("  Your cunt clenches around the invading cock as orgasm takes you, massaging the demonic tool with its instinctual desire to breed.  Somehow you get him off again, and take another squirt of seed into your waiting cunt.");
 			}
 			outputText("\n\n");
-			
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			outputText("Powerless and in the throes of post-coital bliss, you pass out.");
 			player.orgasm();
 			cleanupAfterCombat();
@@ -2272,3 +2278,4 @@ use namespace CoC;
 		}
 	}
 }
+

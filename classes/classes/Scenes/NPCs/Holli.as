@@ -255,6 +255,7 @@ public class Holli extends Monster
 			this.weaponAttack = 6;
 			this.armorName = "bark";
 			this.armorDef = 40;
+			this.armorMDef = 10;
 			this.bonusHP = 1000;
 			this.bonusLust = 40;
 			this.lust = 20;

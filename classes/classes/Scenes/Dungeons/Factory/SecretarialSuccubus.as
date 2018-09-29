@@ -75,6 +75,7 @@ public class SecretarialSuccubus extends AbstractSuccubus
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
 			this.armorDef = 6;
+			this.armorMDef = 1;
 			this.bonusHP = 200;
 			this.bonusLust = 40;
 			this.lust = 30;

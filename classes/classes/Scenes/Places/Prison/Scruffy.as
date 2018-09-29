@@ -45,6 +45,7 @@ public class Scruffy extends Imp
 			this.weaponAttack = 10;
 			this.armorName = "leathery skin";
 			this.armorDef = 5;
+			this.armorMDef = 1;
 			this.bonusLust = 30;
 			this.lust = 40;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;

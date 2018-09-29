@@ -168,6 +168,7 @@ public class FetishZealot extends Monster
 			this.weaponAttack = 12;
 			this.armorName = RELIGIOUS_CLOTHES;
 			this.armorDef = 10;
+			this.armorMDef = 5;
 			this.bonusLust = 20;
 			this.lust = 25;
 			this.lustVuln = 0.75;

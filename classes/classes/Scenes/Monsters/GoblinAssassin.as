@@ -99,10 +99,8 @@ public class GoblinAssassin extends Monster
 			outputText("\nYou shield yourself from the explosion, though the goblin has already lit a second needle which she throws behind you, launching your body forwards as it explodes behind your back. ");
 			//(High HP loss, no lust gain)
 			var damage:int = 25 + rand(75);
-			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
-			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			damage = Math.round(damage);
-			damage = player.takeMagicDamage(damage, true);
+			damage = player.takeFireDamage(damage, true);
 		}
 		override public function defeated(hpVictory:Boolean):void
 		{
@@ -155,6 +153,7 @@ public class GoblinAssassin extends Monster
 			this.weaponAttack = 2;
 			this.armorName = "leather straps";
 			this.armorDef = 1;
+			this.armorMDef = 1;
 			this.bonusLust = 20;
 			this.lust = 50;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

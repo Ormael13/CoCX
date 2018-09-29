@@ -94,6 +94,7 @@ package classes.Scenes.Areas.Plains
 			}
 			outputText("The hyena girl slumps against your body, but only for a moment.  Then she's suddenly up again, sliding her bizarre member out of you with an obscene slurp.  She leans down to pat your cheek and giggles, \"<i>Thanks, lover.</i>\"   Then she sprints off towards the horizon.");
 			outputText("  A whimper bubbles up your throat and comes out as a half-giggle as you slump down unconscious.");
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			player.orgasm();
 			cleanupAfterCombat();
 		}

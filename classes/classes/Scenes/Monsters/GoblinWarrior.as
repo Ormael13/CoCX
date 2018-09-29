@@ -85,6 +85,7 @@ public class GoblinWarrior extends Goblin
 			this.weaponAttack = 14;
 			this.armorName = "platemail";
 			this.armorDef = 12;
+			this.armorMDef = 1;
 			this.bonusHP = 400;
 			this.bonusLust = 20;
 			this.lust = 50;

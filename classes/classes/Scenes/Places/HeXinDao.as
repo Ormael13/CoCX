@@ -316,11 +316,16 @@ public class HeXinDao extends BaseContent
         addButton(1, "Shelf 1", soulequipmentshelf1);
         addButton(2, "Shelf 2", soulequipmentshelf2);
         addButton(3, "Shelf 3", soulequipmentshelf3);//armors and consumable
-        //addButton(9, weapons.ERIBBON.shortName, weaponBuy, weapons.ERIBBON);//czy bedzie tu jako do sprzedaży czy jako nagroda za quest lub drop z mobka/bossa?
         //addButton(7, weapons.MACE.shortName, weaponBuy, weapons.MACE);//awl - wymagać bedzie możliwość lewitacji czy coś od PC aby to używać
         //addButton(8, weapons.MACE.shortName, weaponBuy, weapons.MACE);//bow made for soul cultivator xD
         //addButton(12, "Talk", ).hint("Tak with .");
-        addButton(9, jewelries.SOULRNG.shortName, weaponBuy, jewelries.SOULRNG);
+        addButton(5, undergarments.STSHIRT.shortName, weaponBuy, undergarments.STSHIRT);
+        addButton(6, undergarments.STPANTY.shortName, weaponBuy, undergarments.STPANTY);
+        addButton(7, headjewelries.TSHAIR.shortName, weaponBuy, headjewelries.TSHAIR);
+        addButton(8, necklaces.TSNECK.shortName, weaponBuy, necklaces.TSNECK);
+        addButton(9, jewelries.TSRNG.shortName, weaponBuy, jewelries.TSRNG);
+        addButton(10, necklaces.SMNECK.shortName, weaponBuy, necklaces.SMNECK);
+        addButton(11, jewelries.SOULRNG.shortName, weaponBuy, jewelries.SOULRNG);
         addButton(14, "Back", riverislandVillageStuff);
         statScreenRefresh();
     }
@@ -334,7 +339,7 @@ public class HeXinDao extends BaseContent
         addButton(6, weapons.GUANDAO.shortName, weaponBuy, weapons.GUANDAO);
         addButton(7, weapons.HSWORDS.shortName, weaponBuy, weapons.HSWORDS);
 		addButton(8, weapons.SNAKESW.shortName, weaponBuy, weapons.SNAKESW);
-		//Changdao
+		//addButton(9, Changdao
         addButton(10, weapons.FLYWHIS.shortName, weaponBuy, weapons.FLYWHIS);
         addButton(11, shields.MABRACE.shortName, weaponBuy, shields.MABRACE);
         addButton(14, "Back", soulequipmentmerchant);
@@ -353,7 +358,8 @@ public class HeXinDao extends BaseContent
         addButton(9, weapons.ACLAYMO.shortName, weaponBuy, weapons.ACLAYMO);
         addButton(10, weapons.WHIP.shortName, weaponBuy, weapons.WHIP);
         addButton(11, weapons.PWHIP.shortName, weaponBuy, weapons.PWHIP);
-        addButton(12, weapons.FRTAXE.shortName, weaponBuy, weapons.FRTAXE);
+        addButton(12, weapons.ZWNDER.shortName, weaponBuy, weapons.ZWNDER);
+        addButton(13, weapons.PRURUMI.shortName, weaponBuy, weapons.PRURUMI);
         addButton(14, "Back", soulequipmentmerchant);
     }
     public function soulequipmentshelf3():void {
@@ -484,8 +490,12 @@ public function soularena():void {
         clearOutput();
         outputText("Picking the one in the middle prepared for challanges you enter there and looking around checking who if there is currently anyone up for a challange.");
         menu();
-        addButton(0, "Gaunlet 1", gaunletchallange1fight1).hint("Fight 3 diff enemies one after another.");
-        if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] == 1) addButton(1, "Gaunlet 2", gaunletchallange2fight1).hint("Fight 4 diff enemies one after another.");
+        if (player.statusEffectv1(StatusEffects.SoulArenaGaunlets1) > 1) addButtonDisabled(0, "Gaunlet 1", "You already won this gaunlet today. Come back tomorrow.");
+		else addButton(0, "Gaunlet 1", gaunletchallange1fight1).hint("Fight 3 diff enemies one after another.");
+        if (player.statusEffectv1(StatusEffects.SoulArenaGaunlets1) > 0) {
+			if (player.statusEffectv2(StatusEffects.SoulArenaGaunlets1) > 1) addButtonDisabled(1, "Gaunlet 2", "You already won this gaunlet today. Come back tomorrow.");
+			else addButton(1, "Gaunlet 2", gaunletchallange2fight1).hint("Fight 4 diff enemies one after another.");
+		}
         //addButton(2, "Gaunlet 3", gaunletchallange3).hint("Fight 5 diff enemies one after another.");
         //addButton(3, "Gaunlet 4", gaunletchallange4).hint("Fight 6 diff enemies one after another.");
         //addButton(4, "Gaunlet 5", gaunletchallange5).hint("Fight 7 diff enemies one after another.");
@@ -494,10 +504,10 @@ public function soularena():void {
         //addButton(7, "MachoSalamander", arenaSelection,Syth);
         //addButton(8, "MissSalamander", arenaSelection,Rangiku);
         //addButton(9, "LvL 24 Gargoyle", arenaSelection,GargoyleBasic);
-        addButton(10, "LvL 33 Golems", arenaSelection,GolemsBasic);
-        addButton(11, "LvL 42 Golems", arenaSelection,GolemsImproved);
-        addButton(12, "LvL 51 Golems", arenaSelection,GolemsAdvanced);
-        //if (flags[kFLAGS.CHI_CHI_AFFECTION] < 15) addButton(13, "Chi Chi", chichiScene.EnterOfTheChiChi);
+        //if (flags[kFLAGS.CHI_CHI_AFFECTION] < 15) addButton(10, "Chi Chi", chichiScene.EnterOfTheChiChi);
+        addButton(11, "LvL 33 Golems", arenaSelection,GolemsBasic);
+        addButton(12, "LvL 42 Golems", arenaSelection,GolemsImproved);
+        addButton(13, "LvL 51 Golems", arenaSelection,GolemsAdvanced);
         addButton(14, "Back", soularena);
     }
     private function arenaSelection(mon:Class):void{
@@ -523,34 +533,39 @@ public function soularena():void {
         player.createStatusEffect(StatusEffects.SoulArenaGaunlet, 0, 0, 0, 0);
         if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
         startCombat(new GolemsDummy());
+        monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
     }
     public function gaunletchallange1fight2():void {
         clearOutput();
 		gaunletsinbetween();
-		outputText("As the last of the golem falls down, the commentator resumes.\n\n");
+		outputText("\n\nAs the last of the golem falls down, the commentator resumes.\n\n");
         outputText("\"<i>This one is straight from the woods. Freshly caught and horny to boot. Can our champion’s strength overcome the beast’s lust? LET'S FIND OUT!!</i>\"\n\n");
         outputText("A shadow moves out behind the gate, revealing the shape of a fluid starved tentacle beast.\n\n");
         startCombat(new TentacleBeast());
+        monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
     }
     public function gaunletchallange1fight3():void {
         clearOutput();
 		gaunletsinbetween();
-		outputText("As the tentacle beast whimpers and crawls away, the crowd cheers for you. Here comes the final round.\n\n");
+		outputText("\n\nAs the tentacle beast whimpers and crawls away, the crowd cheers for you. Here comes the final round.\n\n");
         outputText("\"<i>This contestant is smaller than the last two... Smarter too, and most of all extremely deadly. She’s paid a handsome sack of gems daily to kick the ass of anyone who reach this stage, yet is by far the deadliest combatant of her division. She’s your favorite and an expert huntress. Here she comes... Merisiel the dark elf!!!</i>\"\n\n");
         outputText("A woman with dark skin walks by the entrance of the arena with only a bow for a weapon. She sure does look like an elf, however. She’s nothing like the gentle creature from your childhood stories as she observes you with a cruel, calculative gaze. The dark elf readies her bow, smirking.\n\n");
         startCombat(new DarkElfScout());
+        monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
     }
     public function gaunletchallange1postfight():void {
         clearOutput();
         outputText("You exit the arena, victorious, basking in the cheering of the crowd and go to the prize counter for your reward. A woman greets you.\n\n");
-        if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] >= 1) {
+        if (player.statusEffectv1(StatusEffects.SoulArenaGaunlets1) == 1) {
             outputText("\"<i>Good show, champion. As a reward for your performance, please accept these 15 spirit stones. Please do come back again and maybe next time you could even try the harder challenge.</i>\"\n\n");
-            flags[kFLAGS.SPIRIT_STONES] += 15;
+            player.addStatusValue(StatusEffects.SoulArenaGaunlets1, 1, 1);
+			flags[kFLAGS.SPIRIT_STONES] += 15;
             cleanupAfterCombat();
         }
         else {
             outputText("\"<i>Good show, champion. As a reward for your performance, please accept this magical bow. Please do come back again and maybe next time you could even try the harder challenge.</i>\"\n\n");
-            flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] = 1;
+            if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlets1)) player.addStatusValue(StatusEffects.SoulArenaGaunlets1, 1, 2);
+			else player.createStatusEffect(StatusEffects.SoulArenaGaunlets1, 2, 0, 0, 0);
             inventory.takeItem(weaponsrange.BOWGUID, cleanupAfterCombat);
         }
     }
@@ -564,31 +579,35 @@ public function soularena():void {
         player.createStatusEffect(StatusEffects.SoulArenaGaunlet, 0, 0, 0, 0);
         if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
         startCombat(new GoblinAssassin());
+        monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	}
 	public function gaunletchallange2fight2():void {
 		clearOutput();
 		gaunletsinbetween();
-		outputText("As the goblin falls unconscious to the ground the crowd cheer for you.\n\n");
+		outputText("\n\nAs the goblin falls unconscious to the ground the crowd cheer for you.\n\n");
         outputText("\"<i>It would seems the hero squashed that midget good but were only beginning. If I may the next contestant has been sex starved for two consecutive month and is desperate to sow his seed hence now we release... THE HOUND!!!</i>\"\n\n");
         outputText("A massive hellhound of proportion larger than normal rush out of an opening gate. Its eye burns with lust.\n\n");
         startCombat(new HellHound());
+        monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	}
 	public function gaunletchallange2fight3():void {
 		clearOutput();
 		gaunletsinbetween();
-		outputText("The mutt fall defeated to the floor as the crowd scream your name. The announcer announce the next contestant.\n\n");
+		outputText("\n\nThe mutt fall defeated to the floor as the crowd scream your name. The announcer announce the next contestant.\n\n");
         outputText("\"<i>The next opponent is a fighter known and loved by the public. You have heard her name told in shallow whispers for the next opponent is an expert of the terrible art known as BDSM. Yes you have all been waiting for her so cheer up for Malady the drider!!!</i>\"\n\n");
         outputText("A drider in bondage suit comes out of the gate and eyes you amused.\n\n");
         outputText("\"<i>You are my opponent uh? Doesn’t look like much. Little pet, by the time I’m done binding you, you will seldom call me mistress!</i>\"\n\n");
         startCombat(new CorruptedDrider());
+        monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	}
 	public function gaunletchallange2fight4():void {
 		clearOutput();
 		gaunletsinbetween();
-		outputText("As the drider falls defeated the crowd cheer to your victory. That said the battle is far from over yet. A large amount of shadows mass behind the opposite gate and already you can guess what's coming up for you.\n\n");
+		outputText("\n\nAs the drider falls defeated the crowd cheer to your victory. That said the battle is far from over yet. A large amount of shadows mass behind the opposite gate and already you can guess what's coming up for you.\n\n");
         outputText("\"<i>The final contestant is both a new opponent and a test! The town golemancer has been working extra shifts on these thing she calls her babies!! Using the traditional gargoyle model but deprived of soul so for the purpose of mass production these living weapons will mercilessly beat the hell out of the contestant. Who do you think will win the living or the artificial creation? LEEEEETS FIND OUT!!!!!!</i>\"\n\n");
         outputText("A full squad of stone gargoyle pour out of the gate their mace like tail trailing in the sands. Their claws are sharp and their soulless gaze tells you it will end poorly should you lose.\n\n");
         startCombat(new BossGolems());
+        monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	}
 	public function gaunletchallange2postfight():void {
 		clearOutput();
@@ -596,15 +615,16 @@ public function soularena():void {
         outputText("\"<i>The challenger defeated all of his opponent what a miracle! Challenger you may now exit the arena and claim your prize, well done!</i>\"\n\n");
         outputText("You make your way toward the exit and to your surprise meet face to face with the town golemancer. She grudgingly handle you your reward.\n\n");
         outputText("\"<i>I’m supposed to reward you ");
-        if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] >= 2) {
-			 outputText("a full chest of soulstone. Tsk I guess my golems were not ready yet. Next time if you do show up be ready because my future creation will definitely make a bloody mess out of you.</i>\"\n\n");
+        if (player.statusEffectv2(StatusEffects.SoulArenaGaunlets1) == 1) {
+			outputText("a full chest of spirit stones. Tsk I guess my golems were not ready yet. Next time if you do show up be ready because my future creation will definitely make a bloody mess out of you.</i>\"\n\n");
+			player.addStatusValue(StatusEffects.SoulArenaGaunlets1, 2, 1);
 			flags[kFLAGS.SPIRIT_STONES] += 20;
             cleanupAfterCombat();
 		}
 		else {
 			outputText("with this scepter. Tsk I guess my golems were not ready yet. Next time if you do show up be ready because my future creation will definitely make a bloody mess out of you.</i>\"\n\n");
-			flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] = 2;
-            inventory.takeItem(weapons.SCECOMM, cleanupAfterCombat);
+			player.addStatusValue(StatusEffects.SoulArenaGaunlets1, 2, 2);
+			inventory.takeItem(weapons.SCECOMM, cleanupAfterCombat);
 		}
 	}
     public function restaurantShiraOfTheEast():void {
@@ -679,9 +699,19 @@ public function soularena():void {
         else outputText("Chi Chi");
         outputText(" comes back with your order a few minutes later.");
         switch(level){
-            case "mild":outputText("\n\nThe meal is comforting and its refreshing nature will likely help you resist hot temperature today.");break;
-            case "spicy":outputText("\n\nThe meal is a little spicy but regardless leaves you feeling fortified. The weather won’t feel as harsh to you today.");break;
-            case "inferno":outputText("\n\nWow, the meal is so spicy you almost breathe smoke and fire. You gulp down several glasses of water but still start to sweat as your inner temperature rises. It’s likely you won’t have much to fear of the cold today.");break;
+            case "mild":
+				outputText("\n\nThe meal is comforting and its refreshing nature will likely help you resist hot temperature today.");
+				player.addStatusValue(StatusEffects.ShiraOfTheEastFoodBuff1, 2, 30);
+				break;
+            case "spicy":
+				outputText("\n\nThe meal is a little spicy but regardless leaves you feeling fortified. The weather won’t feel as harsh to you today.");
+				player.addStatusValue(StatusEffects.ShiraOfTheEastFoodBuff1, 2, 15);
+				player.addStatusValue(StatusEffects.ShiraOfTheEastFoodBuff1, 3, 15);
+				break;
+            case "inferno":
+				outputText("\n\nWow, the meal is so spicy you almost breathe smoke and fire. You gulp down several glasses of water but still start to sweat as your inner temperature rises. It’s likely you won’t have much to fear of the cold today.");
+				player.addStatusValue(StatusEffects.ShiraOfTheEastFoodBuff1, 3, 30);
+				break;
         }
         outputText("\n\nRegardless the food is excellent and you leave in high spirits for the rest of the day.");
         if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {

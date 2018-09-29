@@ -97,11 +97,13 @@ public function encounter():void {
 		simpleChoices("Fight", startTentacleBeastCombat, "Submit", tentacleLossRape, "", null, "", null, "", null);
 		return;
 	}
-	startCombat(new TentacleBeast());
+	if (rand(2) == 0) startCombat(new TentacleBeastRaging());
+	else startCombat(new TentacleBeast());
 }
 
 private function startTentacleBeastCombat():void {
-	startCombat(new TentacleBeast());
+	if (rand(2) == 0) startCombat(new TentacleBeastRaging());
+	else startCombat(new TentacleBeast());
 	playerMenu();
 }
 
@@ -765,6 +767,17 @@ private function tentacularGenderGooTimes():void {
 	outputText("It slams its tentacles down in a brutal blow, knocking you out.");
     if (CoC.instance.inCombat) cleanupAfterCombat();
     else doNext(camp.returnToCampUseOneHour);
+}
+public function choiceofaction():void {
+	menu();
+	addButton(0, "Kill It", killTentacleBeast);
+	addButton(4, "Leave", cleanupAfterCombat);
+}
+private function killTentacleBeast():void {
+	clearOutput();
+	outputText("\nYou put the misshapen creature out of its misery and carve out a tentacle as proof of your deed.\n");
+	if (player.cor < 25) dynStats("cor", -0.5);
+	inventory.takeItem(useables.SEVTENT, cleanupAfterCombat);
 }
 }
 }

@@ -7,6 +7,7 @@ import classes.Monster;
 import classes.PerkLib;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
+import classes.internals.ChainedDrop;
 
 /**
 	 * ...
@@ -22,7 +23,8 @@ import classes.StatusEffects;
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.d3.livingStatue.fuckinMarbleOP(hpVictory, pcCameWorms);
+			if (player.isGargoyle()) SceneLib.d3.gargoyleBadEndD3();
+			else SceneLib.d3.livingStatue.fuckinMarbleOP(hpVictory, pcCameWorms);
 		}
 		
 		public function LivingStatue() 
@@ -37,7 +39,8 @@ import classes.StatusEffects;
 			this.tallness = 16 * 12;
 			this.createBreastRow(0, 1);
 			initGenderless();
-			this.drop = NO_DROP;
+			this.drop = new ChainedDrop()
+					.add(consumables.E7PEARL, 1);
 			this.level = 42;
 			this.bonusHP = 3000;
 			this.weaponName = "stone greathammer";
@@ -45,6 +48,7 @@ import classes.StatusEffects;
 			this.weaponAttack = 120;
 			this.armorName = "cracked stone";
 			this.armorDef = 100;
+			this.armorMDef = 100;
 			this.additionalXP = 1000;
 			createPerk(PerkLib.Resolute, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);

@@ -93,6 +93,7 @@ use namespace CoC;
 			this.weaponRangeAttack = 12;
 			this.armorName = "light ayo armor";//zamienić na coś innego?
 			this.armorDef = 30;
+			this.armorMDef = 5;
 			//this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
 			checkMonster();
 		}

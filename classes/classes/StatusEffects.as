@@ -11,6 +11,9 @@ import classes.StatusEffects.VampireThirstEffect;
 	public class StatusEffects
 	{
 		// Non-combat player perks
+		public static const AdventureGuildQuests1:StatusEffectType          = mk("Adventure Guild Quests 1");
+		public static const AdventureGuildQuests2:StatusEffectType          = mk("Adventure Guild Quests 2");
+		public static const AdventureGuildQuests3:StatusEffectType          = mk("Adventure Guild Quests 3");
 		public static const AllNaturalOnaholeUsed:StatusEffectType          = mk("all-natural onahole used");
 		public static const AlrauneFlower:StatusEffectType                  = mk("Alraune Flower");
 		public static const AndysSmoke:StatusEffectType                     = mk("Andy's Smoke"); //v1: Hours; v2: Speed; v3: Intelligence
@@ -58,6 +61,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const DragonFireBreathCooldown:StatusEffectType       = mk("Dragon Fire Breath Cooldown");
 		public static const DragonIceBreathCooldown:StatusEffectType        = mk("Dragon Ice Breath Cooldown");
 		public static const DragonLightningBreathCooldown:StatusEffectType  = mk("Dragon Lightning Breath Cooldown");
+		public static const DrunkenPower:StatusEffectType                   = mk("Drunken Power");
 		public static const Dysfunction:StatusEffectType                    = mk("dysfunction");
 		public static const Edryn:StatusEffectType                          = mk("Edryn");
 		public static const Eggchest:StatusEffectType                       = mk("eggchest");
@@ -187,6 +191,9 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const SlimeCraving:StatusEffectType                   = mk("Slime Craving");
 		public static const SlimeCravingFeed:StatusEffectType               = mk("Slime Craving Feed");
 		public static const SlimeCravingOutput:StatusEffectType             = mk("Slime Craving Output");
+		public static const SoulArenaGaunlets1:StatusEffectType          	= mk("Soul Arena Gaunlets 1");
+		public static const SoulArenaGaunlets2:StatusEffectType          	= mk("Soul Arena Gaunlets 2");
+		public static const SoulArenaGaunlets3:StatusEffectType          	= mk("Soul Arena Gaunlets 3");
 		public static const SoulGemCrafting:StatusEffectType                = mk("SoulGemCrafting");
 		public static const SuccubiFirst:StatusEffectType                   = mk("SuccubiFirst");
 		public static const SuccubiNight:StatusEffectType                   = mk("succubiNight");
@@ -337,15 +344,15 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const UnlockedFur:StatusEffectType				 = mk("Unlocked Fur");//użyć fox fur lub inne skin tf scene text
 		public static const UnlockedScales:StatusEffectType				 = mk("Unlocked Scales");
 		public static const UnlockedChitin:StatusEffectType				 = mk("Unlocked Chitin");
-		public static const UnlockedDragonScales:StatusEffectType		 = mk("Unlocked Dragon Scales");
+		public static const UnlockedDragonScales:StatusEffectType		 = mk("Unlocked Dragon Scales");//4 (for line 346)
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");//pozostałe typy skóry tutaj a także partial skin types
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");//pozostałe typy skóry tutaj a także partial skin types
-		public static const UnlockedTattoed:StatusEffectType			 = mk("Unlocked Tattoed");
+		public static const UnlockedTattoed:StatusEffectType			 = mk("Unlocked Tattoed");//5
 		public static const UnlockedBattleTattoed:StatusEffectType		 = mk("Unlocked Battle Tattoed");
 		public static const UnlockedLightningTattoed:StatusEffectType	 = mk("Unlocked Lightning Tattoed");
-		public static const UnlockedFishGills:StatusEffectType			 = mk("Unlocked Fish Gills");
+		public static const UnlockedFishGills:StatusEffectType			 = mk("Unlocked Fish Gills");//8
 		
-		public static const UnlockedFoxLowerBody:StatusEffectType        = mk("Unlocked Fox Lower Body");
+		public static const UnlockedFoxLowerBody:StatusEffectType        = mk("Unlocked Fox Lower Body");//9
 		public static const UnlockedFoxArms:StatusEffectType             = mk("Unlocked Fox Arms");
 		public static const UnlockedFoxEars:StatusEffectType             = mk("Unlocked Fox Ears");
 		public static const UnlockedFoxTail:StatusEffectType             = mk("Unlocked Fox Tail");
@@ -393,12 +400,12 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const UnlockedSharkTail:StatusEffectType           = mk("Unlocked Shark Tail");
 		public static const UnlockedSharkLegs:StatusEffectType           = mk("Unlocked Shark Legs");
 		public static const UnlockedSharkArms:StatusEffectType           = mk("Unlocked Shark Arms");
-		public static const UnlockedSharkFin:StatusEffectType            = mk("Unlocked Shark Fin");
+		public static const UnlockedSharkFin:StatusEffectType            = mk("Unlocked Shark Fin");//57
 	//	public static const UnlockedGoo:StatusEffectType = mk("Unlocked Goo ");
 	//	public static const UnlockedGoo:StatusEffectType = mk("Unlocked Goo ");
 	//	public static const UnlockedGoo:StatusEffectType = mk("Unlocked Goo/Siren ");
 	//	public static const UnlockedGoo:StatusEffectType = mk("Unlocked Goo/Siren ");
-		public static const UnlockedDraconicX2:StatusEffectType 		 = mk("Unlocked Draconic Horns");
+		public static const UnlockedDraconicX2:StatusEffectType 		 = mk("Unlocked Draconic Horns");//58
 		public static const UnlockedDraconicX4:StatusEffectType 		 = mk("Unlocked Draconic Horns (2nd pair)");
 		public static const UnlockedFoxTail7th:StatusEffectType 		 = mk("Unlocked Fox Tail 7th");
 		public static const UnlockedFoxTail8th:StatusEffectType 		 = mk("Unlocked Fox Tail 8th");
@@ -471,7 +478,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const UnlockedRaijuFace:StatusEffectType			 = mk("Unlocked Raiju Face");
 		public static const UnlockedRaijuEars:StatusEffectType			 = mk("Unlocked Raiju Ears");
 		public static const UnlockedRaijuEyes:StatusEffectType			 = mk("Unlocked Raiju Eyes");
-		public static const UnlockedRaijuHair:StatusEffectType			 = mk("Unlocked Raiju Hair");
+		public static const UnlockedRaijuHair:StatusEffectType			 = mk("Unlocked Raiju Hair");//131 (for line 480)
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");
@@ -502,6 +509,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Blizzard:StatusEffectType                  = mkCombat("Blizzard");
 		public static const Bloodlust:StatusEffectType                 = mkCombat("Bloodlust");
 		public static const Bound:StatusEffectType                     = mkCombat("Bound");
+		public static const CounterAction:StatusEffectType             = mkCombat("Counter Action");
 		public static const BurnDoT:StatusEffectType                   = mkCombat("Burn DoT");
 		public static const CalledShot:StatusEffectType                = CalledShotDebuff.TYPE;
 		public static const CastedSpell:StatusEffectType               = mkCombat("Casted Spell");
@@ -516,6 +524,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const DefendMonsterVer:StatusEffectType          = mkCombat("Defend Monster Ver");
 		public static const DemonSeed:StatusEffectType                 = mkCombat("DemonSeed");
 		public static const Disarmed:StatusEffectType                  = mkCombat("Disarmed");
+		public static const Distracted:StatusEffectType                = mkCombat("Distracted");
 		public static const DriderKiss:StatusEffectType                = mkCombat("Drider Kiss");
 		public static const DwarfRage:StatusEffectType                 = mkCombat("Dwarf Rage");
 		public static const EarthStance:StatusEffectType	           = mkCombat("Earth Stance");
@@ -577,7 +586,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const SecondWindRegen:StatusEffectType           = mkCombat("Second Wind Regen");
 		public static const SharkBiteBleed:StatusEffectType            = mkCombat("Shark Bite Bleed");
 		public static const SheilaOil:StatusEffectType                 = mkCombat("Sheila Oil");
-		public static const Shielding:StatusEffectType                 = mkCombat("Sheilding");
+		public static const Shielding:StatusEffectType                 = mkCombat("Shielding");
 		public static const StoneLust:StatusEffectType                 = mkCombat("Stone Lust");
 		public static const StoneSkin:StatusEffectType                 = mkCombat("Stone Skin");
 		public static const Stunned:StatusEffectType                   = mkCombat("Stunned");
@@ -631,6 +640,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CooldownSonicScream:StatusEffectType        = mkCombat("Cooldown Sonic scream");
 		public static const CooldownSoulBlast:StatusEffectType          = mkCombat("Cooldown Soul Blast");
 		public static const CooldownStoneClaw:StatusEffectType          = mkCombat("Cooldown Stone Claw");
+		public static const CooldownStoneFist:StatusEffectType          = mkCombat("Cooldown Stone Fist");
+		public static const CooldownTailCleave:StatusEffectType         = mkCombat("Cooldown Tail Cleave");
 		public static const CooldownTailSlam:StatusEffectType           = mkCombat("Cooldown Tail Slam");
 		public static const CooldownTailSmack:StatusEffectType          = mkCombat("Cooldown Tail Smack");
 		public static const CooldownTornadoStrike:StatusEffectType      = mkCombat("Cooldown Tornado Strike");

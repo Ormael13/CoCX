@@ -80,6 +80,7 @@ public class Ember extends Monster
 					}
 					if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0 || player.findPerk(PerkLib.FireAffinity) >= 0) damage2 *= 1.6;
 					if (flags[kFLAGS.EMBER_LVL_UP] >= 1) damage2 *= (1 + (flags[kFLAGS.EMBER_LVL_UP] * 0.1));
+					damage2 = Math.round(damage2);
 					damage2 = player.takeMagicDamage(damage2, true);
 				}
 			}
@@ -192,6 +193,7 @@ public class Ember extends Monster
 				initWisLibSensCor(90, 50, 35, game.flags[kFLAGS.EMBER_COR]);
 				this.weaponAttack = 36;
 				this.armorDef = 54;
+				this.armorMDef = 54;
 				this.bonusHP = 800;
 				this.level = 20;
 			}
@@ -200,6 +202,7 @@ public class Ember extends Monster
 				initWisLibSensCor(105, 60, 40, game.flags[kFLAGS.EMBER_COR]);
 				this.weaponAttack = 43;
 				this.armorDef = 73;
+				this.armorMDef = 73;
 				this.bonusHP = 900;
 				this.level = 26;
 			}
@@ -208,6 +211,7 @@ public class Ember extends Monster
 				initWisLibSensCor(120, 70, 45, game.flags[kFLAGS.EMBER_COR]);
 				this.weaponAttack = 50;
 				this.armorDef = 92;
+				this.armorMDef = 92;
 				this.bonusHP = 1000;
 				this.level = 32;
 			}
@@ -216,6 +220,7 @@ public class Ember extends Monster
 				initWisLibSensCor(135, 80, 50, game.flags[kFLAGS.EMBER_COR]);
 				this.weaponAttack = 57;
 				this.armorDef = 111;
+				this.armorMDef = 111;
 				this.bonusHP = 1200;
 				this.level = 38;
 			}
@@ -224,6 +229,7 @@ public class Ember extends Monster
 				initWisLibSensCor(150, 90, 55, game.flags[kFLAGS.EMBER_COR]);
 				this.weaponAttack = 64;
 				this.armorDef = 130;
+				this.armorMDef = 130;
 				this.bonusHP = 1400;
 				this.level = 44;
 			}
@@ -232,6 +238,7 @@ public class Ember extends Monster
 				initWisLibSensCor(165, 100, 60, game.flags[kFLAGS.EMBER_COR]);
 				this.weaponAttack = 71;
 				this.armorDef = 150;
+				this.armorMDef = 150;
 				this.bonusHP = 1600;
 				this.level = 50;
 			}
@@ -240,6 +247,7 @@ public class Ember extends Monster
 				initWisLibSensCor(180, 110, 65, game.flags[kFLAGS.EMBER_COR]);
 				this.weaponAttack = 78;
 				this.armorDef = 170;
+				this.armorMDef = 170;
 				this.bonusHP = 1800;
 				this.level = 56;
 			}
@@ -248,6 +256,7 @@ public class Ember extends Monster
 				initWisLibSensCor(195, 120, 70, game.flags[kFLAGS.EMBER_COR]);
 				this.weaponAttack = 85;
 				this.armorDef = 190;
+				this.armorMDef = 190;
 				this.bonusHP = 2000;
 				this.level = 62;
 			}

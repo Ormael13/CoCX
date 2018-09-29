@@ -248,6 +248,9 @@ public class DungeonEngine extends BaseContent
 			return (flags[kFLAGS.HARPY_QUEEN_EXECUTED] != 0 && flags[kFLAGS.HEL_HARPIES_DEFEATED] > 0 && flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0 && flags[kFLAGS.HEL_BRIGID_DEFEATED] > 0);
 		}
 		public function checkHiddenCaveClear():Boolean {
+			return (flags[kFLAGS.HIDDEN_CAVE_BOSSES] > 0 && flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] > 4 && flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] > 4);
+		}
+		public function checkHiddenCaveHiddenStageClear():Boolean {
 			return (flags[kFLAGS.HIDDEN_CAVE_BOSSES] > 1 && flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] > 4 && flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] > 7);
 		}
 		public function checkDenOfDesireClear():Boolean {

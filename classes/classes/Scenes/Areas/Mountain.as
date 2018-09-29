@@ -118,7 +118,8 @@ public class Mountain extends BaseContent
 						when: function ():Boolean {
 							return player.hasStatusEffect(StatusEffects.WormsOn)
 								   && (!player.hasStatusEffect(StatusEffects.Infested) ||
-									   !player.hasStatusEffect(StatusEffects.MetWorms))
+									   !player.hasStatusEffect(StatusEffects.MetWorms) ||
+									   !player.isGargoyle())
 						},
 						call: wormsScene.wormEncounter
 					},{
@@ -442,6 +443,7 @@ public class Mountain extends BaseContent
 			//Chance to impregnate PC, get mino-fix, and maybe relief from feeder perk.
 			player.minoCumAddiction(10);
 			player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR);
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(60);
 			if (player.hasStatusEffect(StatusEffects.Feeder)) {
 				//You've now been milked, reset the timer for that
 				player.addStatusValue(StatusEffects.Feeder, 1, 1);

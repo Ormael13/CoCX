@@ -144,7 +144,8 @@ public class SandWitchMob extends Monster
 		
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			SceneLib.dungeons.desertcave.loseToSammitchMob();
+			if (player.isGargoyle()) SceneLib.dungeons.desertcave.gargoyleBadEndSandWitches();
+			else SceneLib.dungeons.desertcave.loseToSammitchMob();
 		}
 		
 		public function SandWitchMob()
@@ -177,6 +178,7 @@ public class SandWitchMob extends Monster
 			this.weaponValue = 150;
 			this.armorName = "robes";
 			this.armorDef = 2;
+			this.armorMDef = 10;
 			this.armorPerk = "";
 			this.armorValue = 5;
 			this.bonusHP = 100;

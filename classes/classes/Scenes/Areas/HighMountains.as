@@ -106,7 +106,7 @@ use namespace CoC;
 				phoenixScene.encounterPhoenix1();
 				return;
 			}
-			if ((player.hasKeyItem("Gryphon Statuette") < 0 || player.hasKeyItem("Peacock Statuette") < 0) && rand(4) == 0) {
+			if (player.hasKeyItem("Gryphon Statuette") < 0 && player.hasKeyItem("Peacock Statuette") < 0 && rand(4) == 0) {
 				caveScene();
 				return;
 			}

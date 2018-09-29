@@ -33,7 +33,8 @@ import classes.Scenes.SceneLib;
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.d3.jeanClaude.fuckhugeBasiliskFuckedYouUp(hpVictory);
+			if (player.isGargoyle()) SceneLib.d3.gargoyleBadEndD3();
+			else SceneLib.d3.jeanClaude.fuckhugeBasiliskFuckedYouUp(hpVictory);
 		}
 		
 		public function handleTease(lustDelta:Number, successful:Boolean):void
@@ -91,28 +92,29 @@ import classes.Scenes.SceneLib;
 			this.balls = 2;
 			this.ballSize = 6;
 			this.hoursSinceCum = 9999;
-			createBreastRow(0);
-			tallness = 86;
-			ass.analLooseness = 0;
-			ass.analWetness = 0;
-			hips.type = Hips.RATING_AVERAGE;
-			butt.type = Butt.RATING_AVERAGE;
-			lowerBody = LowerBody.LIZARD;
-			skinDesc = "green-purple mottled hide";
+			this.createBreastRow(0);
+			this.tallness = 86;
+			this.ass.analLooseness = 0;
+			this.ass.analWetness = 0;
+			this.hips.type = Hips.RATING_AVERAGE;
+			this.butt.type = Butt.RATING_AVERAGE;
+			this.lowerBody = LowerBody.LIZARD;
+			this.skinDesc = "green-purple mottled hide";
 			initStrTouSpeInte(100, 200, 110, 70);
 			initWisLibSensCor(70, 40, 40, 80);
-			faceType = Face.LIZARD;
-			weaponName = "cutlass";
-			weaponVerb = "slash";
-			weaponAttack = 25;
-			armorName = "leather tunic";
-			armorDef = 25;
+			this.faceType = Face.LIZARD;
+			this.weaponName = "cutlass";
+			this.weaponVerb = "slash";
+			this.weaponAttack = 25;
+			this.armorName = "leather tunic";
+			this.armorDef = 25;
+			this.armorMDef = 10;
 			this.bonusHP = 1000;
 			this.bonusLust = 30;
-			lustVuln = 0.6;
-			lust = 5;
-			level = 38;
-			gems = 700 + rand(100);
+			this.lustVuln = 0.6;
+			this.lust = 5;
+			this.level = 38;
+			this.gems = 700 + rand(100);
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.BasicSelfControl, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);

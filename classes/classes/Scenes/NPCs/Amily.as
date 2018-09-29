@@ -247,6 +247,7 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 			this.weaponAttack = 9;
 			this.armorName = "rags";
 			this.armorDef = 1;
+			this.armorMDef = 1;
 			this.bonusHP = 20;
 			this.bonusLust = 10;
 			this.lust = 20;

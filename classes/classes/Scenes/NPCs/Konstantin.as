@@ -25,6 +25,12 @@ package classes.Scenes.NPCs
 				return true;
 			return false;
 		}
+		private function anyUsableMaterials():Boolean {
+			if (player.hasItem(useables.GREENGL) || player.hasItem(useables.B_CHITN) || player.hasItem(useables.T_SSILK) || player.hasItem(useables.D_SCALE) || player.hasItem(useables.EBONBLO) || player.hasItem(useables.WT_BRAN) || player.hasItem(useables.DBAPLAT) || player.hasItem(useables.TBAPLAT)
+			 || (player.hasItem(useables.DBAPLAT) && player.hasItem(weapons.W_STAFF)) || (player.hasItem(useables.TBAPLAT) && player.hasItem(weapons.W_STAFF)) || (player.hasItem(useables.TBAPLAT) && player.hasItem(weapons.PURITAS)) || (player.hasItem(useables.DBAPLAT) && player.hasItem(weapons.DEPRAVA)))
+				return true;
+			return false;
+		}
 		public function meetKonstantinAtForest():void {
 			clearOutput();
 			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 1) {
@@ -269,7 +275,7 @@ package classes.Scenes.NPCs
 		public function KonstantinSmithingMenu():void {
 			clearOutput();
 			outputText("Seeing how Konstantin is working with armor and plating pieces, you happen to ask him if he could assemble some of the materials that you’ve found during your travels in Mareth into something useful to wear and protect yourself.\n\n");
-			if (player.hasItem(useables.GREENGL) || player.hasItem(useables.B_CHITN) || player.hasItem(useables.T_SSILK)) {
+			if (anyUsableMaterials()) {
 				if (player.hasItem(useables.GREENGL)) {
 					outputText("He looks over you bag’s contents, noticing a glimpse of the gel-like substance on it.\n\n");
 					outputText("\"<i>Hmm, seems like you’ve got a sample of those strange goo creatures that dwell around the lake these days. While they’re not in my exact area of expertise, I’ve found that those goo remains can become solid is exposed to the right chemicals under a particular temperature, probably due some innate property of the creatures that it comes from. Solid enough to make up for a pretty resilient armor, and flexible enough to deflect blows. If you wish, I can turn them into a protective armor for you, though I’ll require a larger amount, something like, five samples.</i>\"\n\n");
@@ -293,7 +299,7 @@ package classes.Scenes.NPCs
 					outputText("You bear friend seems genuinely surprised by the strange, black bloom that you plucked not long ago.\n\n");
 					outputText("\"<i>Ebonbloom? If memory doesn’t fail me, it’s a flower with metal-like properties that grows in very remote sections of Mareth mountainous system, often found in crevices resting near almost vertical cliffs, or volcanic craters. No surprise that few people have seen one, and even less have gotten them on hand. I’m not an expert, so most of this stuff's properties are mystery for me too. The one thing I know for sure is that it’s quite durable, and very reactive to the right chemicals.</i>\"\n\n");
 					outputText("\"<i>Now that you have one sample, I could follow a process of metal casting, and bond the flower petals with a magically enhanced metal. From what I’ve studied, the metal that comes from those strange things has an oily texture, but it’s extremely durable. Another good thing about them Ebonblooms is that they’re quite malleable, so, with sufficient materialI I could grab the petals and laminate them together into a proper cloth, in case of that you’d opted by a robe or something similar.</i>\"\n\n");
-					outputText("\"<i>“In both cases I would need a good amount of them, say, 8 pieces. In case of you want a more complex piece, or a magically enhanced one, I’m going to need 10 pieces instead.</i>\"\n\n");
+					outputText("\"<i>In both cases I would need a good amount of them, say, 8 pieces. In case of you want a more complex piece, or a magically enhanced one, I’m going to need 10 pieces instead.</i>\"\n\n");
 					outputText("\"<i>Now, if you happen to like an undergarment, I could make one for you, say, a vest or a corset for your upper body and a thong or a jock for your lower parts. I can even enhance the properties of the latter ones.</i>\"\n\n");
 					outputText("\"<i>This would require a bit less Ebonbloom, maybe 3 pieces for each undergarment.</i>\"\n\n");
 				}

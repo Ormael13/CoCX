@@ -101,6 +101,7 @@ public class OmnibusOverseer extends Monster
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
 			this.armorDef = 18;
+			this.armorMDef = 2;
 			this.bonusHP = 400;
 			this.bonusLust = 50;
 			this.lust = 20;

@@ -55,11 +55,11 @@ public class WinterWolf extends Monster
 				else {
 					player.createStatusEffect(StatusEffects.Frostbite,0,0,0,0);
 					damage += 20 + Math.round(rand(str / 4));
-					player.takeMagicDamage(damage);
+					player.takeIceDamage(damage);
 					dmgtaken += damage;
 				}
 				damage += 20 + Math.round(rand(str / 4));
-				player.takeMagicDamage(damage);
+				player.takeIceDamage(damage);
 				dmgtaken += damage;
 				outputText(" (<b><font color=\"#800000\">" + damage + "</font></b>)");
 			}
@@ -72,11 +72,11 @@ public class WinterWolf extends Monster
 				}
 				else {
 					damage += 20 + Math.round(rand(str / 4));
-					player.takeMagicDamage(damage);
+					player.takeIceDamage(damage);
 					dmgtaken += damage;
 				}
 				damage += 20 + Math.round(rand(str / 4));
-				player.takeMagicDamage(damage);
+				player.takeIceDamage(damage);
 				dmgtaken += damage;
 				outputText(" (<b><font color=\"#800000\">" + damage + "</font></b>)");
 			}
@@ -125,6 +125,7 @@ public class WinterWolf extends Monster
 			this.weaponAttack = 37;
 			this.armorName = "fur";
 			this.armorDef = 27;
+			this.armorMDef = 18;
 			this.bonusHP = 800;
 			this.bonusLust = 10;
 			this.lust = 10;

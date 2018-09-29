@@ -85,8 +85,11 @@ public class IncubusMechanic extends Monster {
 		
 		private function wonInDungeon3(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (flags[kFLAGS.LETHICE_DEFEATED] > 0) SceneLib.dungeons.factory.doLossIncubus();
-			else SceneLib.d3.incubusMechanic.mechanicFuckedYouUp(hpVictory, pcCameWorms);
+			if (player.isGargoyle()) SceneLib.d3.gargoyleBadEndD3();
+			else {
+				if (flags[kFLAGS.LETHICE_DEFEATED] > 0) SceneLib.dungeons.factory.doLossIncubus();
+				else SceneLib.d3.incubusMechanic.mechanicFuckedYouUp(hpVictory, pcCameWorms);
+			}
 		}
 		
 		private function cockTripAttack():void {
@@ -194,6 +197,7 @@ public class IncubusMechanic extends Monster {
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
 			this.armorDef = 12;
+			this.armorMDef = 1;
 			this.bonusHP = 350;
 			this.bonusLust = 40;
 			this.lust = 50;

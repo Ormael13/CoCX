@@ -79,6 +79,7 @@ public class Behemoth extends Monster
 			this.weaponAttack = 34;
 			this.armorName = "loincloth";
 			this.armorDef = 12;
+			this.armorMDef = 2;
 			this.bonusHP = 900;
 			this.bonusLust = 20;
 			this.lust = 15;

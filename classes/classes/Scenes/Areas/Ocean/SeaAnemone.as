@@ -85,6 +85,7 @@ public class SeaAnemone extends Monster
 			this.weaponAttack = 46;
 			this.armorName = "clammy skin";
 			this.armorDef = 30;
+			this.armorMDef = 3;
 			this.bonusHP = 500;
 			this.bonusLust = 20;
 			this.lust = 30;

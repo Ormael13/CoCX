@@ -25,8 +25,6 @@ public class PhoenixPlatoon extends Monster
 		public function phoenixPlatoonFireBreath():void {
 			//(Effect: One heavy-damage attack)
 			var damage:Number = 100 + rand(50);
-			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
-			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 			player.addStatusValue(StatusEffects.Blizzard, 1, -1);
 			outputText("Suddenly, the shield wall parts, revealing a single member of the platoon, a particularly muscular girl with a raging erection.  Before you can consider what's going on, she rears back and huffs at you.  To your horror, a great gout of fire erupts from her mouth, rolling towards you.  You dive, but are still caught partially in the inferno.  Luckly blizzard still surrounding you lowering amount of fire that pass throu it.");
@@ -36,7 +34,7 @@ public class PhoenixPlatoon extends Monster
 			outputText("Suddenly, the shield wall parts, revealing a single member of the platoon, a particularly muscular girl with a raging erection.  Before you can consider what's going on, she rears back and huffs at you.  To your horror, a great gout of fire erupts from her mouth, rolling towards you.  You dive, but are still caught partially in the inferno.");
 			}
 			damage = Math.round(damage);
-			damage = player.takeMagicDamage(damage, true);
+			damage = player.takeFireDamage(damage, true);
 		}
 		//ATTACK THREE: LUSTBANG GRENADE
 		public function phoenixPlatoonLustbang():void {
@@ -72,7 +70,8 @@ public class PhoenixPlatoon extends Monster
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.dungeons.heltower.phoenixPlatoonMurdersPC();
+			if (player.isGargoyle()) SceneLib.dungeons.heltower.gargoyleBadEndPhoenixTower();
+			else SceneLib.dungeons.heltower.phoenixPlatoonMurdersPC();
 		}
 		
 		public function PhoenixPlatoon()
@@ -107,6 +106,7 @@ public class PhoenixPlatoon extends Monster
 			this.weaponAttack = 59;
 			this.armorName = "armor";
 			this.armorDef = 46;
+			this.armorMDef = 10;
 			this.bonusHP = 1000;
 			this.bonusLust = 100;
 			this.lust = 20;
