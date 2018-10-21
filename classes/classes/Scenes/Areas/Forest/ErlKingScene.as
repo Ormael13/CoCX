@@ -454,9 +454,8 @@ public class ErlKingScene extends BaseContent
 
 			//[You gain: Gems + Fox berries / Canine Peppers / Neon Pink Egg ]	
 			var gemFind:int = 10 + rand(15);
-
 			outputText("<b>You found " + gemFind + " gems.</b>\n\n");
-
+			player.gems += gemFind;
 			var selector:int = rand(4);
 
 			if (selector == 0) inventory.takeItem(consumables.CANINEP, camp.returnToCampUseOneHour);
@@ -1024,7 +1023,11 @@ public class ErlKingScene extends BaseContent
 			//Gain fur
 			if (rand(4) == 0 && changes < changeLimit && player.horns.count > 0 && player.lowerBody != LowerBody.GARGOYLE && !player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("\n\nFor a moment, it looks like a ray of sunlight has shimmered through the canopy. You blink and realize that your fur has become dappled, with lighter, sun-speckled spots highlighting it.");
-				player.skin.growCoat(Skin.FUR,{color:"brown"});
+				player.skin.growCoat(Skin.FUR, {color:"brown"});
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+					outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
+					player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
+				}
 				changes++;
 			}
 			//Change face to normal

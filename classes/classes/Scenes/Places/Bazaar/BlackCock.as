@@ -1887,6 +1887,10 @@ import classes.lists.Gender;
 			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && !player.hasFur()) {
 				outputText("\n\nYou shiver, feeling a bit cold. Just as you begin to wish for something to cover up with, it seems your request is granted; <b>fur begins to grow all over your body!</b> You tug at the tufts in alarm, but they're firmly rooted and... actually pretty soft. Huh. ");
 				player.skin.growFur({color:"brown"});
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+					outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
+					player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
+				}
 				changes++;
 			}
 			//Gain Echidna ears

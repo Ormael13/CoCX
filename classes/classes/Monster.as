@@ -450,7 +450,7 @@ import flash.utils.getQualifiedClassName;
 				if (findPerk(PerkLib.SoulAncestor) >= 0) temp += 60;
 			}
 			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) temp *= 1.1;
-			if (hasPerk(PerkLib.EnemyTrueDemon)) temp = 0;
+			if (hasPerk(PerkLib.EnemyTrueDemon) || (hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.Sentience))) temp = 0;
 			return temp;
 		}
 		
@@ -503,13 +503,14 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.Rage) >= 0) temp += 300;
 			if (findPerk(PerkLib.Anger) >= 0) temp += 400;
 			if (findPerk(PerkLib.EnemyFeralType) >= 0) temp += 500;
+			if (hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.Sentience)) temp = 0;
 			return temp;
 		}
 		
 		public override function maxMana():Number
 		{
 			//Base mana
-			var temp:Number = 100 + this.level * 10 + this.bonusMana;
+			var temp:Number = 200 + this.level * 10 + this.bonusMana;
 			if (findPerk(PerkLib.BasicSpirituality) >= 0) temp += 45;
 			if (findPerk(PerkLib.HalfStepToImprovedSpirituality) >= 0) temp += 75;
 			if (findPerk(PerkLib.ImprovedSpirituality) >= 0) temp += 120;
@@ -554,6 +555,7 @@ import flash.utils.getQualifiedClassName;
 				if (findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0) tempmulti += 0.4;
 				temp *= tempmulti;
 			}
+			if (hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.Sentience)) temp = 0;
 			return temp;
 		}
 

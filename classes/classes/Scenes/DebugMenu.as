@@ -1491,7 +1491,7 @@ public class DebugMenu extends BaseContent
 			player.horns.count = 4;
 			player.wings.type = Wings.BAT_LIKE_LARGE;
 			//Scorpion TF
-			player.tailType = Tail.SCORPION;
+			player.tailType = Tail.MANTICORE_PUSSYTAIL;
 			player.tailVenom = 100;
 			player.tailRecharge = 5;
 			doNext(styleHackMenu);

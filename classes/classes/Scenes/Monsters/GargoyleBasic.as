@@ -57,6 +57,7 @@ package classes.Scenes.Monsters
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.Sentience, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

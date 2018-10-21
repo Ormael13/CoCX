@@ -16,6 +16,7 @@ import classes.Scenes.Dreams;
 import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.SceneLib;
+import classes.Scenes.Camp.UniqueCampScenes;
 import classes.StatusEffects.VampireThirstEffect;
 
 public class PlayerEvents extends BaseContent implements TimeAwareInterface {
@@ -25,6 +26,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			EventParser.timeAwareClassAdd(this);
 		}
 		
+		private var campUniqueScene:UniqueCampScenes = new UniqueCampScenes();
 		private var checkedTurkey:int; //Make sure we test each of these events just once in timeChangeLarge
 		private var checkedDream:int;
 		private var displayedBeeCock:Boolean;
@@ -723,19 +725,27 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				}
 				if (player.hunger <= 0) {
 					if (prison.inPrison) {
-						SceneLib.prison.changeWill(-1, prison.inPrison);
-						fatigue(2);
+						if (player.isGargoyle()) {
+							fatigue(2);//zmienić potem jak lia coś tu wymyśli
+						}
+						else {
+							SceneLib.prison.changeWill(-1, prison.inPrison);
+							fatigue(2);
+						}
 					}
 					else {
-						//Lose HP and makes fatigue go up. Lose body weight and muscles.
-						if (player.thickness < 25) {
-							player.takePhysDamage(player.maxHP() / 25);//użyć to jako strate hp jak PC nie ma hunger enabled i ma perki z chimerycznej natury jak lizan marrow, etc.
-							fatigue(2);
-							dynStats("str", -0.5, "tou", -0.5);
-						}
-						else if ((model.time.hours + 2) % 4 == 0) { //Lose thickness 2x as fast.
-							player.modThickness(1, 1);
-							player.modTone(1, 1);
+						if (player.isGargoyle()) campUniqueScene.droppingToZeroSatietyAsGargoyle();
+						else {
+							//Lose HP and makes fatigue go up. Lose body weight and muscles.
+							if (player.thickness < 25) {
+								player.takePhysDamage(player.maxHP() / 25);
+								fatigue(2);
+								dynStats("str", -0.5, "tou", -0.5);
+							}
+							else if ((model.time.hours + 2) % 4 == 0) { //Lose thickness 2x as fast.
+								player.modThickness(1, 1);
+								player.modTone(1, 1);
+							}
 						}
 					}
 					player.hunger = 0; //Prevents negative

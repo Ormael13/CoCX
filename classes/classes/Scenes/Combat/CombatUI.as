@@ -265,7 +265,10 @@ public class CombatUI extends BaseCombatContent {
 		menu();
 		var btnStruggle:CoCButton  = addButton(0, "Struggle", combat.struggle);
 		var btnBoundWait:CoCButton = addButton(1, "Wait", combat.wait);
-		if (player.hasPerk(PerkLib.Spectre) && player.hasPerk(PerkLib.Incorporeality)) addButton(3, "Possess", combat.mspecials.possess2);
+		if (player.hasPerk(PerkLib.Spectre) && player.hasPerk(PerkLib.Incorporeality)) {
+			if (player.hasStatusEffect(StatusEffects.CooldownPossess)) addButtonDisabled(3, "Possess", "<b>You need more time before you can use Possess again.</b>");
+			else addButton(3, "Possess", combat.mspecials.possess2);
+		}
 		if (player.hasStatusEffect(StatusEffects.UBERWEB)) {
 			addButton(6, "M. Special", submenuMagSpecials);
 		}

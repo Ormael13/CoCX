@@ -165,15 +165,17 @@ public class BeeHoney extends Consumable
 				changes++;
 			}
 			// Chitin
-			if (changes < changeLimit && (player.skin.coverage != Skin.COVERAGE_LOW
-				|| player.skin.coat.type != Skin.CHITIN
-				|| player.skin.coat.pattern != Skin.PATTERN_BEE_STRIPES)) {
+			if (changes < changeLimit && (player.skin.coverage != Skin.COVERAGE_LOW || player.skin.coat.type != Skin.CHITIN || player.skin.coat.pattern != Skin.PATTERN_BEE_STRIPES)) {
 				player.skin.growCoat(Skin.CHITIN,{
 					color:"yellow",
 					color2:"black",
 					pattern:Skin.PATTERN_BEE_STRIPES
 				},Skin.COVERAGE_LOW);
 				// TODO grow chitin text
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedChitin)) {
+					outputText("\n\n<b>Genetic Memory: Chitin - Memorized!</b>\n\n");
+					player.createStatusEffect(StatusEffects.UnlockedChitin, 0, 0, 0, 0);
+				}
 				changes++;
 			}
 			//Bee Legs

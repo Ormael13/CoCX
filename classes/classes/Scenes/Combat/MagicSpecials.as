@@ -46,6 +46,9 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.Incorporeality)) {
 			buttons.add("Possess", possess).hint("Attempt to temporarily possess a foe and force them to raise their own lusts.");
+			if (player.hasStatusEffect(StatusEffects.CooldownPossess)) {
+				bd.disable("<b>You need more time before you can use Possess again.</b>\n\n");
+			}
 		}
 		if (player.raijuScore() >= 7 && player.findPerk(PerkLib.ElectrifiedDesire) >= 0) {
 			bd = buttons.add("Orgasmic L.S.", OrgasmicLightningStrike, "Masturbate to unleash a massive discharge.", "Orgasmic Lightning Strike");
@@ -2871,7 +2874,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		fatigue(30, USEFATG_MAGIC_NOBM);
+		fatigue(50, USEFATG_MAGIC_NOBM);
 		outputText("You start drawing symbols in the air toward " + monster.a + monster.short + ".");
 		var lustDmg:Number = player.lust / 10 + player.lib / 10;
 		if (player.hasPerk(PerkLib.BlackHeart)) lustDmg += player.inte / 10;
@@ -2926,27 +2929,28 @@ public class MagicSpecials extends BaseCombatContent {
 	public function possess():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 		clearOutput();
-		if(monster.short == "plain girl" || monster.hasPerk(PerkLib.Incorporeality)) {
+		var maxIntCapForFail:Number = 100;
+		if (monster.hasPerk(PerkLib.Incorporeality)) {
 			outputText("With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself toward the opponent's frame.  Sadly, it was doomed to fail, as you bounce right off your foe's ghostly form.");
 		}
 		else if (monster is LivingStatue)
 		{
 			outputText("There is nothing to possess inside the golem.");
 		}
-		//Sample possession text (>79 int, perhaps?):
-		else if((!monster.hasCock() && !monster.hasVagina()) || monster.lustVuln == 0 || monster.inte == 0 || monster.inte > 100) {
+		else if ((!monster.hasCock() && !monster.hasVagina()) || monster.lustVuln == 0 || monster.inte == 0 || monster.inte > maxIntCapForFail) {
 			outputText("With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself into the opponent's frame.  Unfortunately, it seems ");
 			if(monster.inte > 100) outputText("they were FAR more mentally prepared than anything you can handle, and you're summarily thrown out of their body before you're even able to have fun with them.  Darn, you muse.\n\n");
 			else outputText("they have a body that's incompatible with any kind of possession.\n\n");
 		}
 		//Success!
-		else if(player.inte >= (monster.inte - 10) + rand(21)) {
+		else if (player.inte >= (monster.inte - 10) + rand(21)) {
 			outputText("With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself into your opponent's frame. Before they can regain the initiative, you take control of one of their arms, vigorously masturbating for several seconds before you're finally thrown out. Recorporealizing, you notice your enemy's blush, and know your efforts were somewhat successful.");
 			var damage:Number = Math.round(player.inte / 5) + rand(player.level) + player.level;
 			if (player.hasPerk(PerkLib.EromancyExpert)) damage *= 1.5;
 			monster.teased(monster.lustVuln * damage);
 			outputText("\n\n");
 			if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+			player.createStatusEffect(StatusEffects.CooldownPossess,2,0,0,0);
 		}
 		//Fail
 		else {
@@ -3552,4 +3556,4 @@ public class MagicSpecials extends BaseCombatContent {
 }
 
 }
-
+

@@ -17,7 +17,7 @@ package classes.Scenes
 		{}
 		
 		public function accessChangelogMenu():void {
-			Changelog22();
+			Changelog23();
 		}
 		
 		private function Changelog23():void {
@@ -25,14 +25,24 @@ package classes.Scenes
 			menu();
 			outputText("<b>Version 0.8j2:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("-New rare ascension perk -> Ascension: Building Prestige (4th Stage). Req. Ascension: Building Prestige (3rd Stage) perk and be at fourth ascension. It costs 20 asc points and will give 1 more slot for Prestige Jobs.\n");
+			outputText("-New rare ascension perk -> Ascension: Ascension: Transcendental Genetic Memory (Stage 1). Req. Ascension: Natural Metamorph perk. It cost 10 asc points and allow to perm up to 10 selected Metamorph options.\n");
+			outputText("-New rare ascension perk -> Ascension: Ascension: Transcendental Genetic Memory (Stage 2). Req. Ascension: Transcendental Genetic Memory (Stage 1) perk and be at second ascension. It cost 20 asc points and allow to perm up to 20 selected Metamorph options. (with prev perk it give max cap of 30)\n");
+			outputText("-New rare ascension perk -> Ascension: Ascension: Transcendental Genetic Memory (Stage 3). Req. Ascension: Transcendental Genetic Memory (Stage 2) perk and be at third ascension. It cost 30 asc points and allow to perm up to 30 selected Metamorph options. (with prev perks it give max cap of 60)\n");
+			outputText("-New rare ascension perk -> Ascension: Ascension: Transcendental Genetic Memory (Stage 4). Req. Ascension: Transcendental Genetic Memory (Stage 3) perk and be at fourth ascension. It cost 40 asc points and allow to perm up to 40 selected Metamorph options. (with prev perks it give max cap of 100)\n");
+			outputText("-New enemy perk: Sentience. Current added to Basic Gargoyle, Guardian Quasi-Gargoyles and Obsidian Gargoyle. Without this perk any construct-type enemy will have 0 wrath, soulforce and mana.\n");
+			outputText("-PC can now make pernament choosen Metamorph options (similary to perming specific perks) during ascension. There is limit on this but...few of you wanted to been able to take your favourite one mutation options to higher NG games.\n");
+			outputText("-Finishing twice each of current available three Adventure Guild quest will give 2 ascension perk points (total 6 points for all 3 quests). Beating either ver of Marae would give 3 asc perk points instead 1. Asc perk points reward for completing Deep Cave and Lethice Stronghold increased to respectively 2 and 3 pts.\n");
+			outputText("-Succubi's Delight can be bought at Moga Hen shop.\n");//Voltage topaz, vial of Manticore Venom, vial of ominous red liquid - gdzieś poszukać miejsca na nie ale nie w Moga Hen shop
+			outputText("-New item: Cold Fish Soup - buyable in Sean shop (incubus in Deep Cave/Zetaz Lair). Cost 20 gems. Lower between 2 to 5 libido and up to 10 lust after each use.\n");
+			outputText("-All tf effect that can remove feather hair will remove also quill hair.\n");
+			outputText("-Hummus can change now quill, ghost, fluffy, grass, silken hair into normal hair.\n");
+			outputText("-Possess m. special now will go for 2 turns cooldown after each use.\n");
+			outputText("-Rejecting offer to take Luna back to camp (be it on first time meeting her or during repeat scene) will not force PC back to camp, just back to main city menu.\n");
+			outputText("-Ceraph enc chance has been increased.\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-Fixed bugs: \n\n\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Fixed bugs: Unicorn/Alicorn/Bicorn/Nightmare 0 pts score, blank screen when learning new spell in Tel'Adre Tower, Gargoyle bonuses not applied at 20+ pts, wrong race classification when becoming Gargoyle, missing scene when PC hunger as Gargoyle drops to 0, missing gems reward from Prize option for Erlking enc, missing in few places unlocking fur for metamorph menu, ");
+			outputText("Spectre perk evasion boost effect lingering even without Incorporeality perk, Lust strike actual cost been lower than it was meantioned in tooltip\n\n\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
@@ -44,8 +54,6 @@ package classes.Scenes
 			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
 			outputText("-New tier 9 misc lvl-up perk: Chimerical Body: Peerless Stage. Req. Chimerical Body: Semi-Peerless Stage perk and 50+ points in Internal Chimerical Disposition score. Effect: delay by another 10 points appearing effect of negative HP regeneration and +5 to max Int/Wis/Lib/Sens (scalable), +10 to max Str/Tou/Spe (scalable).\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -75,8 +83,6 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
 			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
@@ -84,11 +90,11 @@ package classes.Scenes
 			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
 			outputText("\n");
 			outputText("\n");
-			outputText("\n");
 			outputText("\n");full stats bonuses not added yet to: Dragonne, Echidna, Ferret-morph, Kitshoo-morph, Mouse-morph, Pig-morph, Scorpion-morph
 			outputText("\n");New tier 0 lvl-up perk: Tracheal System (Evolved) (req. mantis score >= 4 and having Tracheal System perk; effect: )
 			outputText("\n");
 			outputText("\n");wolf pepper - nieużywany item chyba co można go by w wolf TF zmienić: dodaje special coś na kształt likantropii ^^
+			outputText("\n");aqua seed - item mający być siren tf item
 			outputText("\n");
 			outputText("<b>Version 0.8k:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -123,18 +129,25 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n"); (Gargoyle TF (end choice), Huge Bug Hunt, Perk-o-calipse 3 (~180 new ones of diff types), Job: Rogue line, Magical Resistance, 2 new item slots, Aerial Combat changes and many other small/QoL changes)*/
+			outputText("\n");*/
+			outputText("\n\n\n");
+			outputText("Plans for future builds (I know some of them are HUGE ones but without dreams to chase how can one change?):\n");
+			outputText("-Add more soulforce options.\n");
+			outputText("-Add soulforce stuff to our lovely monk-ish mouse ^^\n");
+			outputText("-Add soulforce stuff to kitsune encounters.\n");
+			outputText("-Add Wuxia themed area and enemies.\n");
+			outputText("-Add few new options during chara creation.\n");
+			outputText("-Add option to upgrade some of the items ingame (ofc using soulforce) and generaly few new shiny things to find/buy/store/use.\n");
+			outputText("-More camp build options (involving using stones and etc.)\n");
+			outputText("-Few more perks and achievements.\n");
+			outputText("-Make use of Metamorph perk (ofc all TF would be powered by soulforce ^^)\n");
 			addButton(0, "Next", Changelog22);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 		private function Changelog22():void {
 			clearOutput();
 			menu();
-			outputText("(Part 2/2) <b>Version 0.8j:</b>\n\n");
+			outputText("(Part 2/2) <b>Version 0.8j (Gargoyle TF (end choice), Huge Bug Hunt, Perk-o-calipse 3 (~150 new ones of diff types), Job: Rogue line, Magical Resistance, 2 new item slots, Aerial Combat changes and many other small/QoL changes):</b>\n\n");
 			outputText("-New rare ascension perk -> Ascension: Building Prestige (1st Stage). It costs 5 asc points and will give 1 more slot for Prestige Jobs.\n");
 			outputText("-New rare ascension perk -> Ascension: Additional Organ Mutation (1st Stage). Req. 10+ in internal chimera score and be at second ascension. It costs 20 asc points and will give 1 more slot for organ mutations. Like heart, muscles or mouth related racial mutation perks.\n");
 			outputText("-New rare ascension perk -> Ascension: Building Prestige (2nd Stage). Req. Ascension: Building Prestige (1st Stage) perk and be at second ascension. It costs 10 asc points and will give 1 more slot for Prestige Jobs.\n");
@@ -287,24 +300,13 @@ package classes.Scenes
 			outputText("-New event related perk: Elemental Conjurer Mind and Body Dedication. Req.: Using Five-colored Elemental Pearl, which can be found after beating 1st boss of Den of Desire dungeon (Obsidian Gargoyle). Effect: It'll neutralize negative effects on max Str/Tou/Spe due to picking Elemental Conjurer Dedication perk.\n");
 			outputText("-New event related perk: Elemental Conjurer Mind and Body Sacrifice. Req.: Using Seven-colored Elemental Pearl, which can be found after beating Statue in Lethice Stronghold. Effect: It'll neutralize negative effects on max Str/Tou/Spe due to picking Elemental Conjurer Sacrifice perk.\n");
 			outputText("-New enemy perks: Feral-type enemy, Goo-type enemy. First is for enemies that for some reason(s) lost part/all it rational sense turning into hulking monsters that usualy only looking out to kill not rape. Second is for all goo-ish enemies and makes them immune to crit strikes (similary to all constructs) and reduce taken physical dmg from PC attacks.");
-			outputText("\n\n\n");
-			outputText("Plans for future builds (I know some of them are HUGE ones but without dreams to chase how can one change?):\n");
-			outputText("-Add more soulforce options.\n");
-			outputText("-Add soulforce stuff to our lovely monk-ish mouse ^^\n");
-			outputText("-Add soulforce stuff to kitsune encounters.\n");
-			outputText("-Add Wuxia themed area and enemies.\n");
-			outputText("-Add few new options during chara creation.\n");
-			outputText("-Add option to upgrade some of the items ingame (ofc using soulforce) and generaly few new shiny things to find/buy/store/use.\n");
-			outputText("-More camp build options (involving using stones and etc.)\n");
-			outputText("-Few more perks and achievements.\n");
-			outputText("-Make use of Metamorph perk (ofc all TF would be powered by soulforce ^^)\n");
 			addButton(0, "Next", Changelog21);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 		private function Changelog21():void {
 			clearOutput();
 			menu();
-			outputText("(Part 1/2) <b>Version 0.8j:</b>\n\n");
+			outputText("(Part 1/2) <b>Version 0.8j (Gargoyle TF (end choice), Huge Bug Hunt, Perk-o-calipse 3 (~150 new ones of diff types), Job: Rogue line, Magical Resistance, 2 new item slots, Aerial Combat changes and many other small/QoL changes):</b>\n\n");
 			outputText("-Human score bonuses changed form bonuses to stats into bonuses to EXP gains after fight - 1-5 pts * PC level (the less human PC became, the lower bonus till it reach 0 at 29 pts and below in human score)\n");
 			outputText("-Fatigue cost reduction by half when using multi attacks removed. Soulforce costs mutiplier when using melee multittacks (with fists or gaunlets) lowered from 5x to 3x.\n");
 			outputText("-Diana chance to use healing or restoring mana actions was lowered at her low and medium levels from 50% to 33% and 25%.\n");

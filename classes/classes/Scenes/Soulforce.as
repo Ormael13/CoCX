@@ -192,7 +192,7 @@ use namespace CoC;
 			//addButton(5, "Upgrade", UpgradeItems).hint("."); //ulepszanie itemów
 			if (player.findPerk(PerkLib.Metamorph) >= 0) addButton(6, "Metamorf", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold freely your body.");//używanie metamorfowania z użyciem soulforce
 			if (player.findPerk(PerkLib.SoulSense) >= 0) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounter."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
-			//addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
+			addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
 			addButton(14, "Back", playerMenu);
 		}//w lini 28 w oOnLoadVariables zmian wprowadzić i w lini conditionalConverters w folderze parser zmian dot. wraith wprowadzić, zablokować perki soul king to soul ancestor w momencie robienia release version
 		public function SoulforceCheats():void {
@@ -209,11 +209,8 @@ use namespace CoC;
 			addButton(6, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
 			addButton(7, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
 			addButton(8, "Celess", celessIntroForced).hint("Due to hard time getting her intro here it's.");
-			if (player.hasPerk(PerkLib.UnlockMind)) addButton(9, "M to F", MindToForce).hint("Replacing Unlock: MInd perk(s) with correct one new ones before public build would come out.");
 			addButton(10, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
 			addButton(11, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
-			if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] > 0) addButton(12, "SoulArenaFix", xXx1).hint("Updating before save update for gaunlets access in soul arena.");
-			if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0 && player.keyItemv2("Adventurer Guild: Copper plate") < 1) addButton(13, "AdvGuildFix", xXx2).hint("Refund of spent SS on joining Adventure Guild and fixing req. for promotion to iron rank.");
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 public function celessIntroForced():void {
@@ -224,32 +221,6 @@ public function FightNightmare():void {
 	clearOutput();
 	outputText("Entering battle with Nightmare! Enjoy ^^");
 	startCombat(new Nightmare());
-}
-public function xXx1():void {
-	if (flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] == 1) player.createStatusEffect(StatusEffects.SoulArenaGaunlets1, 2, 0, 0, 0);
-	else player.createStatusEffect(StatusEffects.SoulArenaGaunlets1, 2, 2, 0, 0);
-	flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] = 0;
-	doNext(SoulforceCheats);
-}
-public function xXx2():void {
-	if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) >= 2) player.addKeyValue("Adventurer Guild: Copper plate", 1, 1);
-	if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) >= 2) player.addKeyValue("Adventurer Guild: Copper plate", 1, 1);
-	if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) > 5) player.addStatusValue(StatusEffects.AdventureGuildQuests1, 1, 1);
-	if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) > 5) player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 1);
-	player.addKeyValue("Adventurer Guild: Copper plate", 2, 1);
-	flags[kFLAGS.SPIRIT_STONES] += 15;
-	statScreenRefresh();
-	doNext(SoulforceCheats);
-}
-public function MindToForce():void {
-	player.removePerk(PerkLib.UnlockMind);
-	player.createPerk(PerkLib.UnlockForce, 0, 0, 0, 0);
-	if (player.hasPerk(PerkLib.UnlockMind2ndStage)) {
-		player.removePerk(PerkLib.UnlockMind2ndStage);
-		player.createPerk(PerkLib.UnlockSpirit, 0, 0, 0, 0);
-	}
-	statScreenRefresh();
-	doNext(SoulforceCheats);
 }
 		public function StatsAscensionMenu():void {
 			menu();

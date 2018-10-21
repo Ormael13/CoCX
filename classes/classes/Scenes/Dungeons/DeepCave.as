@@ -125,7 +125,7 @@ use namespace CoC;
 			if (player.hasItem(consumables.BIMBOCH) && flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] == 0) {
 				outputText("\n\nSean could probably do something with the Bimbo Champagne if you had enough of it...");
 				if (player.hasItem(consumables.BIMBOCH, 5)) {
-					addButton(10, consumables.BIMBOLQ.shortName, SceneLib.telAdre.niamh.yeahSeanLetsBimbooze);
+					addButton(7, consumables.BIMBOLQ.shortName, SceneLib.telAdre.niamh.yeahSeanLetsBimbooze);
 					outputText("  Luckily, you do!");
 				}
 			}
@@ -133,10 +133,11 @@ use namespace CoC;
 			addButton(1, consumables.SENSDRF.shortName, buyItem, 1);
 			addButton(2, consumables.REDUCTO.shortName, buyItem, 2);
 			addButton(3, consumables.AGILI_E.shortName, buyItem, 3);
-			addButton(4, consumables.VIXEN_T.shortName, buyItem, 4);
-			addButton(5, weapons.SUCWHIP.shortName, buyItem, 5);
-			addButton(6, weapons.PSWHIP.shortName, buyItem, 6);
-			addButton(7, weaponsrange.SSKETCH.shortName, buyItem, 7);
+			addButton(5, consumables.CFISHS.shortName, buyItem, 5);
+			addButton(6, consumables.VIXEN_T.shortName, buyItem, 6);
+			addButton(10, weapons.SUCWHIP.shortName, buyItem, 10);
+			addButton(11, weapons.PSWHIP.shortName, buyItem, 11);
+			addButton(12, weaponsrange.SSKETCH.shortName, buyItem, 12);
 			addButton(14, "Leave", roomEntrance);
 		}		
 		

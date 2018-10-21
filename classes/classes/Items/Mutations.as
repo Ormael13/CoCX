@@ -125,6 +125,18 @@ public final class Mutations extends MutationsHelper
 			else dynStats("lib", 1 + rand(2));
 			player.refillHunger(10);
 		}
+//Cold Fish Soup		
+		public function coldFishSoup(player:Player):void
+		{
+			player.slimeFeed();
+			clearOutput();
+			outputText("As you eat the soup you shiver as your bodily temperature drop. Not only that but the last thing on your mind right now is sex as you feel yourself freezing from the inside. The cold crisis eventualy passes but you remain relatively less libidinous afterward.");
+			dynStats("lus", -10);
+			if (player.lib > 100) dynStats("lib", -(2 + rand(4)));
+			else if (player.lib > 50) dynStats("lib", -(2 + rand(3)));
+			else dynStats("lib", -(2 + rand(2)));
+			player.refillHunger(15);
+		}
 
 		/* ITEMZZZZZ FUNCTIONS GO HERE */
 		public function incubiDraft(tainted:Boolean,player:Player):void
@@ -925,7 +937,11 @@ public final class Mutations extends MutationsHelper
 				if (!player.hasCoat()) outputText("\n\nYour skin itches intensely. You gaze down as more and more hairs break forth from your skin quickly transforming into a coat of glacial white fur which despite its external temperature feels warm inside.  <b>You are now covered in [haircolor] fur from head to toe.</b>");
 				else if (player.hasScales()) outputText("\n\nYour scales itch incessantly.  You scratch, feeling them flake off to reveal a coat of [haircolor] fur growing out from below!  <b>You are now covered in [haircolor] fur from head to toe.</b>");
 				else outputText("\n\nYour skin itch incessantly.  You scratch, feeling it current form shifting into a coat of glacial white fur which despite its external temperature feels warm inside.  <b>You are now covered in [haircolor] fur from head to toe.</b>");
-				player.skin.growCoat(Skin.FUR,{color:player.hairColor});
+				player.skin.growCoat(Skin.FUR, {color:player.hairColor});
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+					outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
+					player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
+				}
 				changes++;
 			}
 			if (rand(2) == 0 && changes < changeLimit && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.ears.type == Ears.WOLF && player.hasFullCoatOfType(Skin.FUR) && (player.hairColor != "glacial white" || player.coatColor != "glacial white")) {
@@ -1582,12 +1598,13 @@ public final class Mutations extends MutationsHelper
 				setFaceType(Face.DOG);
 				changes++;
 			}
-			//-Remove feathery hair (copy for equinum, canine peppers, Labova)
-			if (changes < changeLimit && player.hairType == 1 && rand(4) == 0) {
-				//(long):
-				if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft feather-hair droops over your eye.  Before you can blow the offending down away, you realize the feather is collapsing in on itself.  It continues to curl inward until all that remains is a normal strand of hair.  <b>Your hair is no longer feathery!</b>");
-				//(short)
-				else outputText("\n\nYou run your fingers through your downy-soft feather-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your feathers.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer feathery!</b>");
+			//-Remove feathery/quill hair (copy for equinum, canine peppers, Labova)
+			if (changes < changeLimit && (player.hairType == Hair.FEATHER || player.hairType == Hair.QUILL) && rand(3) == 0) {
+				var word1:String;
+				if (player.hairType == Hair.FEATHER) word1 = "feather";
+				else word1 = "quill";
+				if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft " + word1 + "-hair droops over your eye.  Before you can blow the offending down away, you realize the " + word1 + " is collapsing in on itself.  It continues to curl inward until all that remains is a normal strand of hair.  <b>Your hair is no longer " + word1 + "-like!</b>");
+				else outputText("\n\nYou run your fingers through your downy-soft " + word1 + "-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your " + word1 + "s.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer " + word1 + "-like!</b>");
 				changes++;
 				setHairType(Hair.NORMAL);
 			}
@@ -1608,7 +1625,13 @@ public final class Mutations extends MutationsHelper
 					player.skin.coat.color = player.hairColor;
 					player.skinAdj = "thick";
 				}
-				else player.skin.growCoat(Skin.FUR,{color:player.hairColor,adj:"thick"});
+				else {
+					player.skin.growCoat(Skin.FUR, {color:player.hairColor, adj:"thick"});
+					if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+						outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
+						player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
+					}
+				}
 			}
 			//Become furred - requires paws and tail
 			if (rand(4) == 0 && changes < changeLimit && player.lowerBody == LowerBody.DOG && player.tailType == Tail.DOG && !player.hasFur() && !player.isGargoyle()) {
@@ -1628,6 +1651,10 @@ public final class Mutations extends MutationsHelper
 					});
 				}
 				outputText("  <b>You are now covered in [skin coat.color] fur from head to toe.</b>");
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+					outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
+					player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
+				}
 				changes++;
 			}
 			//Change to paws - requires tail and ears
@@ -2737,12 +2764,13 @@ public final class Mutations extends MutationsHelper
 				dynStats("sen", .5);
 				boobsGrew = true;
 			}
-			//-Remove feathery hair (copy for equinum, canine peppers, Labova)
-			if (changes < changeLimit && player.hairType == 1 && rand(4) == 0) {
-				//(long):
-				if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft feather-hair droops over your eye.  Before you can blow the offending down away, you realize the feather is collapsing in on itself.  It continues to curl inward until all that remains is a normal strand of hair.  <b>Your hair is no longer feathery!</b>");
-				//(short)
-				else outputText("\n\nYou run your fingers through your downy-soft feather-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your feathers.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer feathery!</b>");
+			//-Remove feathery/quill hair (copy for equinum, canine peppers, Labova)
+			if (changes < changeLimit && (player.hairType == Hair.FEATHER || player.hairType == Hair.QUILL) && rand(3) == 0) {
+				var word1:String;
+				if (player.hairType == Hair.FEATHER) word1 = "feather";
+				else word1 = "quill";
+				if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft " + word1 + "-hair droops over your eye.  Before you can blow the offending down away, you realize the " + word1 + " is collapsing in on itself.  It continues to curl inward until all that remains is a normal strand of hair.  <b>Your hair is no longer " + word1 + "-like!</b>");
+				else outputText("\n\nYou run your fingers through your downy-soft " + word1 + "-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your " + word1 + "s.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer " + word1 + "-like!</b>");
 				changes++;
 				setHairType(Hair.NORMAL);
 			}
@@ -4442,12 +4470,13 @@ public final class Mutations extends MutationsHelper
 				changes++;
 				player.removeStatusEffect(StatusEffects.BlackNipples);
 			}
-			//Remove feathery hair (copy for equinum, canine peppers, Labova)
-			if (changes < changeLimit && player.hairType == Hair.FEATHER && rand(3) == 0) {
-				//(long):
-				if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft feather-hair droops over your eye.  Before you can blow the offending down away, you realize the feather is collapsing in on itself.  It continues to curl inward until all that remains is a normal strand of hair.  <b>Your hair is no longer feathery!</b>");
-				//(short)
-				else outputText("\n\nYou run your fingers through your downy-soft feather-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your feathers.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer feathery!</b>");
+			//Remove feathery/quill hair (copy for equinum, canine peppers, Labova)
+			if (changes < changeLimit && (player.hairType == Hair.FEATHER || player.hairType == Hair.QUILL) && rand(3) == 0) {
+				var word1:String;
+				if (player.hairType == Hair.FEATHER) word1 = "feather";
+				else word1 = "quill";
+				if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft " + word1 + "-hair droops over your eye.  Before you can blow the offending down away, you realize the " + word1 + " is collapsing in on itself.  It continues to curl inward until all that remains is a normal strand of hair.  <b>Your hair is no longer " + word1 + "-like!</b>");
+				else outputText("\n\nYou run your fingers through your downy-soft " + word1 + "-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your " + word1 + "s.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer " + word1 + "-like!</b>");
 				changes++;
 				setHairType(Hair.NORMAL);
 			}
@@ -4472,6 +4501,39 @@ public final class Mutations extends MutationsHelper
 				outputText("\n\nAs you finish the root, the scaled critters on your head shake wildly in displeasure. Then, a sudden heat envelopes your scalp. The transformative effects of your spicy meal make themselves notorious, as the writhing mess of snakes start hissing uncontrollably. Many of them go rigid, any kind of life that they could had taken away by the root effects. Soon all the snakes that made your hair are limp and lifeless.");
 				outputText("\n\nTheir dead bodies are separated from you head by a scorching sensation, and start falling to the ground, turning to dust in a matter of seconds. Examining your head on the stream, you realize that you have a normal, healthy scalp, though devoid of any kind of hair.");
 				outputText("\n\nThe effects don’t end here, though as the familiar sensation of hair returns to your head a moment later. After looking yourself on the stream again, you confirm that <b>your once bald head now has normal, short [haircolor] hair</b>.");
+				setHairType(Hair.NORMAL);
+				changes++;
+			}
+			//Remove ghost hair
+			if (changes < changeLimit && player.hairType == Hair.GHOST && rand(3) == 0) {
+				outputText("\n\nA sensation of weight assaults your scalp. You reach up and grab a handful of hair, confused. Your perplexion only heightens when you actually feel the follicles becoming heavier in your grasp.  Plucking a strand, you hold it up before you, surprised to see... it's no longer transparent!  You have normal hair!");
+				setHairType(Hair.NORMAL);
+				changes++;
+			}
+			//Remove leaf hair
+			if (changes < changeLimit && player.hairType == Hair.LEAF && rand(4) == 0) {
+				//(long):
+				if (player.hairLength >= 6) outputText("\n\nA lock of your leaf-hair droops over your eye.  Before you can blow the offending down away, you realize the leaf is changing until all that remains is a normal strand of hair.  <b>Your hair is no longer leaf-like!</b>");
+				//(short)
+				else outputText("\n\nYou run your fingers through your leaf-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your leafs.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer leaf-like!</b>");
+				changes++;
+				setHairType(Hair.NORMAL);
+			}
+			//Remove fluffy hair
+			if (changes < changeLimit && player.hairType == Hair.FLUFFY && rand(3) == 0) {
+				outputText("\n\nYou feel something strange going in on your head. You reach your hands up to feel your fluffy hair, only to find out that they have vanished and replaced with normal hair.  <b>Your hair is normal again!</b>");
+				setHairType(Hair.NORMAL);
+				changes++;
+			}
+			//Remove grass hair
+			if (changes < changeLimit && player.hairType == Hair.GRASS && rand(3) == 0) {
+				outputText("\n\nYou feel something strange going in on your head. You reach your hands up to feel your grass-hair, only to find out that the long, soft and leafy blades have vanished and replaced with normal hair.  <b>Your hair is normal again!</b>");
+				setHairType(Hair.NORMAL);
+				changes++;
+			}
+			//Remove silken hair
+			if (changes < changeLimit && player.hairType == Hair.SILKEN && rand(3) == 0) {
+				outputText("\n\nYou feel something strange going in on your head. You reach your hands up to feel your silken-hair, only to find out that they have changed back to normal hair.  <b>Your hair is normal again!</b>");
 				setHairType(Hair.NORMAL);
 				changes++;
 			}
@@ -7015,12 +7077,13 @@ public final class Mutations extends MutationsHelper
 				humanizeArms();
 				changes++;
 			}
-			//-Remove feathery hair (copy for equinum, canine peppers, Labova)
-			if (changes < changeLimit && player.hairType == 1 && rand(4) == 0) {
-				//(long):
-				if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft feather-hair droops over your eye.  Before you can blow the offending down away, you realize the feather is collapsing in on itself.  It continues to curl inward until all that remains is a normal strand of hair.  <b>Your hair is no longer feathery!</b>");
-				//(short)
-				else outputText("\n\nYou run your fingers through your downy-soft feather-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your feathers.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer feathery!</b>");
+			//-Remove feathery/quill hair (copy for equinum, canine peppers, Labova)
+			if (changes < changeLimit && (player.hairType == Hair.FEATHER || player.hairType == Hair.QUILL) && rand(3) == 0) {
+				var word1:String;
+				if (player.hairType == Hair.FEATHER) word1 = "feather";
+				else word1 = "quill";
+				if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft " + word1 + "-hair droops over your eye.  Before you can blow the offending down away, you realize the " + word1 + " is collapsing in on itself.  It continues to curl inward until all that remains is a normal strand of hair.  <b>Your hair is no longer " + word1 + "-like!</b>");
+				else outputText("\n\nYou run your fingers through your downy-soft " + word1 + "-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your " + word1 + "s.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer " + word1 + "-like!</b>");
 				changes++;
 				setHairType(Hair.NORMAL);
 			}
@@ -7105,6 +7168,10 @@ public final class Mutations extends MutationsHelper
 				outputText("\n\nYour [skin.type] itches terribly all over and you try cartoonishly to scratch everywhere at once.  ");
 				player.skin.growCoat(Skin.FUR,{color:"brown"});
 				outputText("As you pull your hands in, you notice [skin coat.color] fur growing on the backs of them.  All over your body the scene is repeated, covering you in the stuff.  <b>You now have fur!</b>");
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+					outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
+					player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
+				}
 			}
 			//-Roo footsies (Req: Tail)
 			if (player.lowerBody != LowerBody.KANGAROO && player.lowerBody != LowerBody.GARGOYLE && (type == 1 || player.tailType == Tail.KANGAROO) && changes < changeLimit && rand(4) == 0) {
@@ -9483,6 +9550,10 @@ public final class Mutations extends MutationsHelper
 				outputText("\n\nYou shiver, feeling a bit cold.  Just as you begin to wish for something to cover up with, it seems your request is granted; thick, bushy fur begins to grow all over your body!  You tug at the tufts in alarm, but they're firmly rooted and... actually pretty soft.  Huh.  ");
 				player.skin.growCoat(Skin.FUR,{color:"gray"});
 				outputText("<b>You now have a warm coat of [skin coat.color] raccoon fur!</b>");
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+					outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
+					player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
+				}
 				changes++;
 			}
 			//gain coon ears
@@ -9732,7 +9803,11 @@ public final class Mutations extends MutationsHelper
 					outputText(".  Alarmed and suspicious, you tuck in your hands, trying to will yourself not to scratch, but it doesn't make much difference.  Tufts of "+color+" fur begin to force through your skin");
 					if (player.hasScales()) outputText(", pushing your scales out with little pinches");
 					outputText(", resolving the problem for you.  <b>You now have fur.</b>");
-					player.skin.growCoat(Skin.FUR,{color:color});
+					player.skin.growCoat(Skin.FUR, {color:color});
+					if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+						outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
+						player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
+					}
 				}
 				//from other color fur
 				else {
@@ -10088,6 +10163,10 @@ public final class Mutations extends MutationsHelper
 				}
 				player.skin.growCoat(Skin.FUR,{color:player.hairColor});
 				outputText("  <b>You now have [skin coat.color] fur!</b>");
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+					outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
+					player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
+				}
 				changes++;
 			}
 			//Tail TFs!
@@ -11313,6 +11392,10 @@ public final class Mutations extends MutationsHelper
 			//Chitin skin
 			if (changes < changeLimit && !player.hasCoatOfType(Skin.CHITIN) && player.tailType == Tail.MANTIS_ABDOMEN && rand(2) == 0) {
 				growChitin("green");
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedChitin)) {
+					outputText("\n\n<b>Genetic Memory: Chitin - Memorized!</b>\n\n");
+					player.createStatusEffect(StatusEffects.UnlockedChitin, 0, 0, 0, 0);
+				}
 				changes++;
 			}
 			
@@ -11943,6 +12026,10 @@ public final class Mutations extends MutationsHelper
 					color2:"black",
 					pattern:Skin.PATTERN_RED_PANDA_UNDERBODY
 				});
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+					outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
+					player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
+				}
 				changes++;
 			}
 			player.refillHunger(20);

@@ -412,10 +412,7 @@ this.HP -= (this.maxHP() * 0.08);
 			//Prevents use of attack, bow, other physical type stuff
 			//Lasts 4 rounds? Iunno. Tune to adjust difficulty.
 			outputText("<i>“You fight well, for a mortal... but can you fight like a demon?”</i> He claps his hands together, bathing the immediate area in a wave of energy. Some of the nearby slaves cry out in alarm, then settle into giggling, cooing messes. You don’t seem any worse for the wear in its wake, though something feels wrong about holding your [weapon].");
-			
-			// 9999
 			if (player.cor <= 33) outputText(" What did he mean about fighting like a demon?");
-			
 			player.createStatusEffect(StatusEffects.TaintedMind, 4, 0, 0, 0);
 		}
 		

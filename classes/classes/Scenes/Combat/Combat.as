@@ -4333,6 +4333,15 @@ private function combatStatusesUpdate():void {
 		}
 		else player.addStatusValue(StatusEffects.MetalSkin,2,-1);
 	}
+	//Possess
+	if (player.hasStatusEffect(StatusEffects.CooldownPossess)) {
+		if (player.statusEffectv1(StatusEffects.CooldownPossess) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownPossess);
+		}
+		else {
+			player.addStatusValue(StatusEffects.CooldownPossess,1,-1);
+		}
+	}
 	//Hurricane Dance
 	if (player.hasStatusEffect(StatusEffects.CooldownHurricaneDance)) {
 		if (player.statusEffectv1(StatusEffects.CooldownHurricaneDance) <= 0) {

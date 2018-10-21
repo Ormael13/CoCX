@@ -80,6 +80,8 @@ public class PerkLib
 				"Your understanding of prestige jobs from previous life allows to pick 3rd one at lvl 42+.");
 		public static const AscensionBuildingPrestige03:PerkType = mk("Ascension: Building Prestige (3rd Stage)", "Ascension: Building Prestige (3rd Stage)",
 				"Your understanding of prestige jobs from previous life allows to pick 4th one at lvl 42+.");
+		public static const AscensionBuildingPrestige04:PerkType = mk("Ascension: Building Prestige (4th Stage)", "Ascension: Building Prestige (4th Stage)",
+				"Your understanding of prestige jobs from previous life allows to pick 5th one at lvl 42+.");
 		public static const AscensionCruelChimerasThesis:PerkType = mk("Ascension: Cruel Chimera's Thesis", "Ascension: Cruel Chimera's Thesis",
 				"Allows you to reduce by another one point needed to accumulate mutations into non-human species to attain race specific enhancing effects.");
 		public static const AscensionHerosHeritage:PerkType = mk("Ascension: Hero's Heritage", "Ascension: Hero's Heritage",
@@ -90,21 +92,29 @@ public class PerkLib
 				"Allows you to reduce by one needed to accumulate mutations into non-human species to attain race specific enhancing effects.");
 		public static const AscensionNaturalMetamorph:PerkType = mk("Ascension: Natural Metamorph", "Ascension: Natural Metamorph",
 				"When others needs to work hard on unlocking their metamorph potential you never had to do it. Whatever the reason for that is... truth be told you try not to think about it, affraid of what it might mean for you. You do not want to care about it as long as it's nothing harmfull for you in the long run.");
+		public static const AscensionTranscendentalGeneticMemoryStage1:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 1)", "Ascension: Transcendental Genetic Memory (Stage 1)",
+				"Allows to retain up to 10 choosen unlocked metamorph options.");
+		public static const AscensionTranscendentalGeneticMemoryStage2:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 2)", "Ascension: Transcendental Genetic Memory (Stage 2)",
+				"Allows to retain up to 20 choosen unlocked metamorph options.");
+		public static const AscensionTranscendentalGeneticMemoryStage3:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 3)", "Ascension: Transcendental Genetic Memory (Stage 3)",
+				"Allows to retain up to 30 choosen unlocked metamorph options.");
+		public static const AscensionTranscendentalGeneticMemoryStage4:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 4)", "Ascension: Transcendental Genetic Memory (Stage 4)",
+				"Allows to retain up to 40 choosen unlocked metamorph options.");
 		public static const AscensionUnderdog:PerkType = mk("Ascension: Underdog", "Ascension: Underdog",
 				"You're underdog. Gains twice more exp for beating up enemies above your current level with doubled limit after which increase to gained exp stops.");// Also allow to use 'accidentally' finding all forgotten or hidden legacies from times before the demon invasion.");
 		public static const AscensionUnlockedPotential:PerkType = mk("Ascension: Unlocked Potential", "Ascension: Unlocked Potential",
 				"Due to reincarnation experience your body becoming strong faster than in previous life (increased passive hp, lust, fatigue gains at lvl-up).");
 		public static const AscensionUnlockedPotential2ndStage:PerkType = mk("Ascension: Unlocked Potential (2nd Stage)", "Ascension: Unlocked Potential (2nd Stage)",
 				"Due to reincarnation experience your body becoming strong faster than in previous life (increased passive wrath, mana, soulforce gains at lvl-up).");
+	//	public static const AscensionTranscendentalGeneticMemoryStage5:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 5)", "Ascension: Transcendental Genetic Memory (Stage 5)",
 	//	public static const AscensionAdditionalOrganMutation02:PerkType = mk("Ascension: Additional Organ Mutation (2nd Stage)", "Ascension: Additional Organ Mutation (2nd Stage)",
 	//			"Numerous internal mutation changed your body to allow handle 3rd mutation of the same organ/internal body part.");
-	//	public static const AscensionBuildingPrestige04:PerkType = mk("Ascension: Building Prestige (4th Stage)", "Ascension: Building Prestige (4th Stage)",
-	//			"Your understanding of prestige jobs from previous life allows to pick 5th one at lvl 42+.");
+	//	public static const AscensionBuildingPrestige05:PerkType = mk("Ascension: Building Prestige (5th Stage)", "Ascension: Building Prestige (5th Stage)",
+	//			"Your understanding of prestige jobs from previous life allows to pick 6th one at lvl 42+.");
+	//			"Allows to retain up to 50 choosen unlocked metamorph options.");
+	//	public static const AscensionTranscendentalGeneticMemoryStage6:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 6)", "Ascension: Transcendental Genetic Memory (Stage 6)",
+	//			"Allows to retain up to 60 choosen unlocked metamorph options.");
 	//	public static const Ascension:PerkType = mk("Ascension: Artifical-made Metamorph", "Ascension: Artifical-made Metamorph",
-	//			".");
-	//	public static const Ascension:PerkType = mk("Ascension: ", "Ascension: ",
-	//			".");
-	//	public static const Ascension:PerkType = mk("Ascension: ", "Ascension: ",
 	//			".");
 	//	public static const Ascension:PerkType = mk("Ascension: ", "Ascension: ",
 	//			".");
@@ -2353,7 +2363,7 @@ public class PerkLib
 				"Akbal's blessings grant the ability to breathe burning green flames.");
 		public static const GargoyleCorrupted:PerkType = mk("Corrupted Gargoyle", "Corrupted Gargoyle",
 				"You need constant intakes of sexual fluids to stay alive.");
-		public static const GargoylePure:PerkType = mk("Gargoyle", "Gargoyle",
+		public static const GargoylePure:PerkType = mk("Gargoyle", "Pure Gargoyle",
 				"Need to gain sustenance from soulforce to stay alive.");
 		public static const GclassHeavenTribulationSurvivor:PerkType = mk("G class Heaven Tribulation Survivor", "G class Heaven Tribulation Survivor",
 				"You have survived second trial on cultivation path: G class Heaven Tribulation.");
@@ -2398,7 +2408,7 @@ public class PerkLib
 				"Your sensual attitude towards love and romance makes your tease ability slightly more effective.");
 		public static const SoulSense:PerkType = mk("Soul Sense", "Soul Sense",
 				"Your strong affinity toward soullforce helped to denvelop another sense called 'Soul Sense' by a fellow soul cultivators.");
-		public static const TransformationImmunity:PerkType = mk("Transformation immunity", "Transformation immunity",
+		public static const TransformationImmunity:PerkType = mk("Transformation immunity", "Transformation Immunity",
 				"As a magical construct you are immune to all effects that change the body of living beings, including most transformatives on Mareth (work as the regular transformative resistance except it reduce the odds of getting a body part tfed to 0 although stats increasing effects still could be triggered).");
 		public static const UnicornBlessing:PerkType = mk("Unicorn Blessing", "Unicorn Blessing",
 				"You are blessed with the power of a unicorn and while below 20 corruption all white magic spells are 20% stronger and lust resistance increased by 10%.");
@@ -2433,6 +2443,7 @@ public class PerkLib
 		public static const LightningVulnerability:PerkType = mk("Lightning Vulnerability", "Lightning Vulnerability", "");//NYU
 		public static const MonsterRegeneration:PerkType = mk("Monster Regeneration", "Monster Regeneration", "");
 		public static const NoGemsLost:PerkType = mk("No Gems Lost", "No Gems Lost", "");
+		public static const Sentience:PerkType = mk("Sentience", "Sentience", "");
 		public static const ShieldWielder:PerkType = mk("Shield wielder", "Shield wielder", "");
 		public static const TeaseResistance:PerkType = mk("Tease Resistance", "Tease Resistance", "");//NYU
 		//public static const EnemyPlantType:PerkType = mk("", "", "");

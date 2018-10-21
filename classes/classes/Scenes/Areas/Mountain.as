@@ -135,7 +135,7 @@ public class Mountain extends BaseContent
 						call: SceneLib.dungeons.enterFactory
 					},{
 						name:"ceraph",
-						chance:0.3,
+						chance:0.7,
 						when:function ():Boolean {
 							return !SceneLib.ceraphFollowerScene.ceraphIsFollower()
 									/* [INTERMOD:8chan]

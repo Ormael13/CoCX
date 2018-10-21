@@ -439,13 +439,13 @@ public class Creature extends Utils
 			return 100;
 		}
 		public function maxWrath():Number {
-			return 250;
+			return 0;
 		}
 		public function maxSoulforce():Number {
 			return 0;
 		}
 		public function maxMana():Number {
-			return 100;
+			return 0;
 		}
 		public function getMaxStats(stats:String):int {
 			var obj:Object = getAllMaxStats();
@@ -3771,7 +3771,7 @@ public class Creature extends Utils
 					chance += 5;
 					flychance += 5;
 				}
-				if (findPerk(PerkLib.Spectre) >= 0) {
+				if (findPerk(PerkLib.Spectre) >= 0 && findPerk(PerkLib.Incorporeality) >= 0) {
 					chance += 10;
 					flychance += 10;
 				}
@@ -3825,7 +3825,7 @@ public class Creature extends Utils
 			if (findPerk(PerkLib.ImprovedEvade) >= 0) generalevasion += 10;
 			if (findPerk(PerkLib.GreaterEvade) >= 0) generalevasion += 15;
 			if (findPerk(PerkLib.JobRogue) >= 0) generalevasion += 5;
-			if (findPerk(PerkLib.Spectre) >= 0) generalevasion += 10;
+			if (findPerk(PerkLib.Spectre) >= 0 && findPerk(PerkLib.Incorporeality) >= 0) generalevasion += 10;
 			if (generalevasion > 0) flyeavsion += generalevasion;
 			if (findPerk(PerkLib.AdvancedAerialCombat) >= 0) flyeavsion += 5;
 			if (findPerk(PerkLib.GreaterAerialCombat) >= 0) flyeavsion += 15;

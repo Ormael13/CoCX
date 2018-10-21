@@ -116,6 +116,7 @@ public class BossGolems extends AbstractGargoyle
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.Sentience, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

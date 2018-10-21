@@ -61,7 +61,8 @@ public class VolcanicCrag extends BaseContent
 					behemothScene.behemothIntro();
 					break;
 				case 1:
-					phoenixScene.encounterPhoenix2();
+					if (flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0) phoenixScene.encounterPhoenix2();
+					else behemothScene.behemothIntro();
 					break;
 				case 2:
 					clearOutput();

@@ -125,7 +125,8 @@ import classes.internals.*;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 12;
 			this.gems = 0;
-			this.drop = new ChainedDrop().add(consumables.ECTOPLS,1/3);
+			this.drop = new ChainedDrop().add(consumables.ECTOPLS, 1 / 3);
+			this.createPerk(PerkLib.Incorporeality, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

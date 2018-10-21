@@ -193,12 +193,13 @@ public class AbstractEquinum extends Consumable {
 			mutations.humanizeArms();
 			changes++;
 		}
-		//-Remove feathery hair (copy for equinum, canine peppers, Labova)
-		if (changes < changeLimit && player.hairType == 1 && rand(4) == 0) {
-			//(long):
-			if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft feather-hair droops over your eye.  Before you can blow the offending down away, you realize the feather is collapsing in on itself.  It continues to curl inward until all that remains is a normal strand of hair.  <b>Your hair is no longer feathery!</b>");
-			//(short)
-			else outputText("\n\nYou run your fingers through your downy-soft feather-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your feathers.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer feathery!</b>");
+		//-Remove feathery/quill hair (copy for equinum, canine peppers, Labova)
+		if (changes < changeLimit && (player.hairType == Hair.FEATHER || player.hairType == Hair.QUILL) && rand(3) == 0) {
+			var word1:String;
+			if (player.hairType == Hair.FEATHER) word1 = "feather";
+			else word1 = "quill";
+			if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft " + word1 + "-hair droops over your eye.  Before you can blow the offending down away, you realize the " + word1 + " is collapsing in on itself.  It continues to curl inward until all that remains is a normal strand of hair.  <b>Your hair is no longer " + word1 + "-like!</b>");
+			else outputText("\n\nYou run your fingers through your downy-soft " + word1 + "-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your " + word1 + "s.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer " + word1 + "-like!</b>");
 			changes++;
 			mutations.setHairType(Hair.NORMAL);
 		}
@@ -505,6 +506,10 @@ public class AbstractEquinum extends Consumable {
 			changes++;
 			if (type == 0) player.skin.growCoat(Skin.FUR, {color: randomChoice(["brown", "chocolate", "auburn", "sandy brown", "caramel", "peach", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "brown and white", "black and white"])});
 			else player.skin.growCoat(Skin.FUR, {color: randomChoice(["platinum blonde", "silver", "white"])});
+			if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+				outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
+				player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
+			}
 		}
 		//Ears - requires tail
 		if (player.ears.type != Ears.HORSE && player.tailType == Tail.HORSE && player.tailType != Tail.GARGOYLE && changes < changeLimit && rand(3) == 0) {

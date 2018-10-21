@@ -53,14 +53,13 @@ private function accessPage1MetamorphMenu():void {
 	addButton(3, "Face(2)", accessPage2FaceMenu);
 	addButton(4, "Face(3)", accessPage3FaceMenu);
 	addButton(5, "Tongue", accessTongueMenu);
-	addButton(6, "Eyes", accessEyesMenu);
-	addButton(7, "Ears(1)", accessPage1EarsMenu);
-	addButton(8, "Ears(2)", accessPage2EarsMenu);
-	addButton(9, "Horns", accessHornsMenu);
-	addButton(10, "Antennae", accessAntennaeMenu);
-	addButton(11, "Gills", accessGillsMenu);
-	addButton(12, "Arms(1)", accessPage1ArmsMenu);
-	addButton(13, "Arms(2)", accessPage2ArmsMenu);
+	addButton(6, "Eyes(1)", accessPage1EyesMenu);
+	addButton(7, "Eyes(2)", accessPage2EyesMenu);
+	addButton(8, "Ears(1)", accessPage1EarsMenu);
+	addButton(9, "Ears(2)", accessPage2EarsMenu);
+	addButton(10, "Horns", accessHornsMenu);
+	addButton(11, "Antennae", accessAntennaeMenu);
+	addButton(12, "Gills", accessGillsMenu);
 	addButton(14, "Back", accessMetamorphMenu);
 }
 private function accessSkinMenu():void {
@@ -187,7 +186,7 @@ private function accessTongueMenu():void {
 	else addButtonDisabled(5, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
-private function accessEyesMenu():void {
+private function accessPage1EyesMenu():void {
 	menu();
 	if (player.hasStatusEffect(StatusEffects.UnlockedSpiderFourEyes) && player.eyes.type != Eyes.FOUR_SPIDER_EYES && player.soulforce >= 100) addButton(0, "Spider", metamorphSpiderFourEyes);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedSpiderFourEyes) && player.eyes.type == Eyes.FOUR_SPIDER_EYES) addButtonDisabled(0, "Spider", "You already have spider four eyes.");
@@ -229,6 +228,14 @@ private function accessEyesMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuEyes) && player.eyes.type == Eyes.RAIJU) addButtonDisabled(13, "Raiju", "You already have raiju eyes.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuEyes) && player.eyes.type != Eyes.RAIJU && player.soulforce < 100) addButtonDisabled(13, "Raiju", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(13, "???", "You not yet unlocked this metamorphosis!");
+	addButton(14, "Back", accessPage1MetamorphMenu);
+}
+private function accessPage2EyesMenu():void {
+	menu();
+	if (player.hasStatusEffect(StatusEffects.UnlockedSpiderFourEyes) && player.eyes.type != Eyes.VAMPIRE && player.soulforce >= 100) addButton(0, "Vampire", metamorphVampireEyes);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedSpiderFourEyes) && player.eyes.type == Eyes.VAMPIRE) addButtonDisabled(0, "Vampire", "You already have vampire eyes.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedSpiderFourEyes) && player.eyes.type != Eyes.VAMPIRE && player.soulforce < 100) addButtonDisabled(0, "Vampire", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(0, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 private function accessPage1EarsMenu():void {
@@ -336,6 +343,25 @@ private function accessGillsMenu():void {
 	else addButtonDisabled(1, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
+
+private function accessPage2MetamorphMenu():void {
+	menu();
+	addButton(0, "Arms(1)", accessPage1ArmsMenu);
+	addButton(1, "Arms(2)", accessPage2ArmsMenu);
+	addButton(2, "Tail(1)", accessPage1TailMenu);
+	addButton(3, "Tail(2)", accessPage2TailMenu);
+	addButton(4, "Tail(3)", accessPage3TailMenu);
+	addButton(5, "Wings(1)", accessPage1WingsMenu);
+	addButton(6, "Wings(2)", accessPage2WingsMenu);
+	addButton(7, "Legs(1)", accessPage1LegsMenu);
+	addButton(8, "Legs(2)", accessPage2LegsMenu);
+	addButton(9, "Legs(3)", accessPage3LegsMenu);
+//	addButton(10, "Legs(4)", accessPage4LegsMenu);
+	addButton(10, "Rear B.", accessRearBodyMenu);
+//	addButton(12, "Back", accessMetamorphMenu);
+//	addButton(13, "Back", accessMetamorphMenu);
+	addButton(14, "Back", accessMetamorphMenu);
+}
 private function accessPage1ArmsMenu():void {
 	menu();
 	if (player.hasStatusEffect(StatusEffects.UnlockedHarpyArms) && player.arms.type != Arms.HARPY && player.soulforce >= 100) addButton(0, "Harpy", metamorphHarpyArms);
@@ -378,7 +404,7 @@ private function accessPage1ArmsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedLizardArms) && player.arms.type == Arms.LIZARD) addButtonDisabled(13, "Lizard", "You already have lizard arms.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedLizardArms) && player.arms.type != Arms.LIZARD && player.soulforce < 100) addButtonDisabled(13, "Lizard", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(13, "???", "You not yet unlocked this metamorphosis!");
-	addButton(14, "Back", accessPage1MetamorphMenu);
+	addButton(14, "Back", accessPage2MetamorphMenu);
 }
 private function accessPage2ArmsMenu():void {
 	menu();
@@ -406,26 +432,7 @@ private function accessPage2ArmsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuArms) && player.arms.type == Arms.RAIJU) addButtonDisabled(7, "Raiju", "You already have raiju arms.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuArms) && player.arms.type != Arms.RAIJU && player.soulforce < 100) addButtonDisabled(7, "Raiju", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(7, "???", "You not yet unlocked this metamorphosis!");
-	addButton(14, "Back", accessPage1MetamorphMenu);
-}
-
-private function accessPage2MetamorphMenu():void {
-	menu();
-	addButton(0, "Tail(1)", accessPage1TailMenu);
-	addButton(1, "Tail(2)", accessPage2TailMenu);
-	addButton(2, "Tail(3)", accessPage3TailMenu);
-	addButton(3, "Wings(1)", accessPage1WingsMenu);
-	addButton(4, "Wings(2)", accessPage2WingsMenu);
-	addButton(5, "Legs(1)", accessPage1LegsMenu);
-	addButton(6, "Legs(2)", accessPage2LegsMenu);
-	addButton(7, "Legs(3)", accessPage3LegsMenu);
-//	addButton(8, "Legs(4)", accessPage4LegsMenu);
-	addButton(8, "Rear B.", accessRearBodyMenu);
-//	addButton(10, "Back", accessMetamorphMenu);
-//	addButton(11, "Back", accessMetamorphMenu);
-//	addButton(12, "Back", accessMetamorphMenu);
-//	addButton(13, "Back", accessMetamorphMenu);
-	addButton(14, "Back", accessMetamorphMenu);
+	addButton(14, "Back", accessPage2MetamorphMenu);
 }
 private function accessPage1TailMenu():void {
 	menu();
@@ -731,7 +738,11 @@ private function accessRearBodyMenu():void {
 	if (player.hasStatusEffect(StatusEffects.UnlockedRaijuMane) && player.rearBody.type != RearBody.RAIJU_MANE && player.soulforce >= 100) addButton(7, "Raiju", metamorphRaijuMane);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuMane) && player.rearBody.type == RearBody.RAIJU_MANE) addButtonDisabled(7, "Raiju", "You already have raiju mane.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuMane) && player.rearBody.type != RearBody.RAIJU_MANE && player.soulforce < 100) addButtonDisabled(7, "Raiju", "You not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(6, "???", "You not yet unlocked this metamorphosis!");
+	else addButtonDisabled(7, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedBatCollar) && player.rearBody.type != RearBody.BAT_COLLAR && player.soulforce >= 100) addButton(8, "Bat", metamorphBatCollar);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedBatCollar) && player.rearBody.type == RearBody.BAT_COLLAR) addButtonDisabled(8, "Bat", "You already have bat collar.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedBatCollar) && player.rearBody.type != RearBody.BAT_COLLAR && player.soulforce < 100) addButtonDisabled(8, "Bat", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(8, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage2MetamorphMenu);
 }/*
 private function accessHairMenu():void {
@@ -845,7 +856,53 @@ private function metamorphGoo():void {
 	
 
 	doNext(accessMetamorphMenu);
+}
+private function metamorphFur():void {
+	clearOutput();
+	player.soulforce -= 100;
+	
+
+	doNext(accessMetamorphMenu);
 }*/
+private function metamorphVampireFace():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nYou yelp as a throbbing pain takes root in the sides of your mouth. You feel your canines grow longer as your throat grow dryer. You could go for some wine right now, with a bloody steak to top it off… maybe just the steak.");
+	outputText(" Or just the blood, really. You aren’t picky. Really, it’s up to you whether just rip off some poor sod’s throat and drink straight from the tap or drink blood from a wineglass, what with <b>your new vampire fangs!</b>");
+	player.hairType = Face.VAMPIRE;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphVampireEyes():void {
+	clearOutput();
+	player.soulforce -= 100;
+	if (player.eyes.type != Eyes.HUMAN) removeOddEyes();
+	outputText("\n\nYour eyes shift, causing sunlight to suddenly become annoyingly bright for you. It takes several minutes for your eyes to get used to it and, once they do, you still have to keep them half closed, so as to not be blinded by the sun’s glare.");
+	outputText(" Upon looking at your reflection in the water, you discover your irises have taken on a blood-red shade. <b>You have Vampire Eyes.</b>");
+	player.eyes.type = Eyes.VAMPIRE;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphVampireEars():void {
+	clearOutput();
+	player.soulforce -= 100;
+	
+
+	doNext(accessMetamorphMenu);
+}
+private function metamorphBatCollar():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nAn intense itching sets in around your neck. Bringing your hands to your neck to scratch it, you find sparse, downy fuzz. As you scratch away, it continues lengthening and growing in density until you have a collar of fur around your neck.");
+	outputText(" Well, this isn’t so bad, the scarf-like look is certainly nice, at the very least. <b>Your neck now sports a collar of fur.</b>");
+	player.hairType = RearBody.BAT_COLLAR;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphBatEars():void {
+	clearOutput();
+	player.soulforce -= 100;
+	
+
+	doNext(accessMetamorphMenu);
+}
 private function metamorphRaijuHair():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -2164,4 +2221,4 @@ private function restoreHumanArms():void {
 	player.arms.type = Arms.HUMAN;
 }
 	}
-}
+}

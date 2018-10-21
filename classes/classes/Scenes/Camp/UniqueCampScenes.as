@@ -64,7 +64,6 @@ public function droppingToZeroSatietyAsGargoyle():void
 	else {
 		outputText("Unable to sustain your movement longer you are unable to maintain control, you need sex NOW!\n\n");
 		if (player.hasVagina()) {
-			player.slimeFeed();
 			outputText("You rush into the mountain starved for energy and seduce the first minotaur you can find putting your drooling pussy on display. The minotaur used to have to fight for a hole to fuck does not complain and lay down for you to take him in.  Your eyes zero in as a dollop of pre escapes his ribbed horse-like member, locating the source of the scent.\n\n");
 			//Too small
 			if(player.vaginalCapacity() < monster.cockArea(0)) {
@@ -96,7 +95,6 @@ public function droppingToZeroSatietyAsGargoyle():void
 			dynStats("spe", -.5, "int", -.5, "sen", 1.5, "cor", 1);
 		}
 		else {
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			outputText("You rush into the forest starved for energy and forcefully grab the first goblin you can find wiping your rock hard cock against her face with clear intent. The goblin getting the idea that your pretty much ready to kill to get laid decide against puting any form of resistance.\n\n");
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			outputText(images.showImage("goblin-win-male-goblinboners"));
@@ -108,6 +106,7 @@ public function droppingToZeroSatietyAsGargoyle():void
 			outputText("relishing in the feeling of your ejaculate filling her up to the brim and plugging her entrance.  You slowly release yourself from her tight body, finishing off by covering her curved back and pert rump with the rest of your seed.\n\n");
 			outputText("You pick yourself back up, jerking yourself slowly as cum dribbles from your " + cockDescript(x) + " onto the collapsed body of the goblin.  It'll be awhile before she comes back to consciousness, but you're certain she'll have a better appreciation for sex when she does.");
 		}
+		player.refillGargoyleHunger(30);
 		doNext(camp.returnToCampUseOneHour);
 	}
 }

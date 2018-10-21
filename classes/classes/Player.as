@@ -1433,8 +1433,7 @@ use namespace CoC;
 					damage = reducePhysDamage(damage);
 					//Wrath
 					var gainedWrath:Number = 0;
-					gainedWrath += damage / 10;
-					gainedWrath = Math.round(gainedWrath);
+					gainedWrath += Math.round(damage / 10);
 					wrath += gainedWrath;
 					if (wrath > maxWrath()) wrath = maxWrath();
 					//game.HPChange(-damage, display);
@@ -1543,8 +1542,7 @@ use namespace CoC;
 					damage = reduceMagicDamage(damage);
 					//Wrath
 					var gainedWrath:Number = 0;
-					gainedWrath += damage / 10;
-					gainedWrath = Math.round(gainedWrath);
+					gainedWrath += Math.round(damage / 10);
 					wrath += gainedWrath;
 					if (wrath > maxWrath()) wrath = maxWrath();
 					//game.HPChange(-damage, display);
@@ -1626,8 +1624,7 @@ use namespace CoC;
 					damage = reduceFireDamage(damage);
 					//Wrath
 					var gainedWrath:Number = 0;
-					gainedWrath += damage / 10;
-					gainedWrath = Math.round(gainedWrath);
+					gainedWrath += Math.round(damage / 10);
 					wrath += gainedWrath;
 					if (wrath > maxWrath()) wrath = maxWrath();
 					//game.HPChange(-damage, display);
@@ -1709,8 +1706,7 @@ use namespace CoC;
 					damage = reduceIceDamage(damage);
 					//Wrath
 					var gainedWrath:Number = 0;
-					gainedWrath += damage / 10;
-					gainedWrath = Math.round(gainedWrath);
+					gainedWrath += Math.round(damage / 10);
 					wrath += gainedWrath;
 					if (wrath > maxWrath()) wrath = maxWrath();
 					//game.HPChange(-damage, display);
@@ -1789,8 +1785,7 @@ use namespace CoC;
 					damage = reduceLightningDamage(damage);
 					//Wrath
 					var gainedWrath:Number = 0;
-					gainedWrath += damage / 10;
-					gainedWrath = Math.round(gainedWrath);
+					gainedWrath += Math.round(damage / 10);
 					wrath += gainedWrath;
 					if (wrath > maxWrath()) wrath = maxWrath();
 					//game.HPChange(-damage, display);
@@ -1869,8 +1864,7 @@ use namespace CoC;
 					damage = reduceDarknessDamage(damage);
 					//Wrath
 					var gainedWrath:Number = 0;
-					gainedWrath += damage / 10;
-					gainedWrath = Math.round(gainedWrath);
+					gainedWrath += Math.round(damage / 10);
 					wrath += gainedWrath;
 					if (wrath > maxWrath()) wrath = maxWrath();
 					//game.HPChange(-damage, display);
@@ -1951,8 +1945,7 @@ use namespace CoC;
 					damage = reducePoisonDamage(damage);
 					//Wrath
 					var gainedWrath:Number = 0;
-					gainedWrath += damage / 10;
-					gainedWrath = Math.round(gainedWrath);
+					gainedWrath += Math.round(damage / 10);
 					wrath += gainedWrath;
 					if (wrath > maxWrath()) wrath = maxWrath();
 					//game.HPChange(-damage, display);
@@ -2746,10 +2739,10 @@ use namespace CoC;
 				if (isTaur()) race = "siren-taur";
 				else race = "siren";
 			}
-			if (gargoyleScore() >= 22)
+			if (gargoyleScore() >= 20)
 			{
-				if (hasPerk(PerkLib.GargoyleCorrupted)) race = "corrupted gargoyle";
-				else race = "gargoyle";
+				if (hasPerk(PerkLib.GargoylePure)) race = "pure gargoyle";
+				else race = "corrupted gargoyle";
 			}
 			if (batScore() >= 6){
 				race = batScore() >= 10? "bat":"half bat";
@@ -2924,7 +2917,7 @@ use namespace CoC;
 				humanCounter++;
 			if (findPerk(PerkLib.VenomGlandsFinalForm) < 0)
 				humanCounter++;
-			
+			if (isGargoyle()) humanCounter = 0;
 			End("Player","racialScore");
 			return humanCounter;
 		}
@@ -3031,7 +3024,7 @@ use namespace CoC;
 				chimeraCounter++;
 			if (avianScore() >= 4)
 				chimeraCounter++;
-			if (gargoyleScore() >= 22)
+			if (gargoyleScore() >= 20)
 				chimeraCounter++;
 			if (gooScore() >= 4)
 				chimeraCounter++;
@@ -3158,7 +3151,7 @@ use namespace CoC;
 				grandchimeraCounter++;	
 			if (avianScore() >= 9)
 				grandchimeraCounter++;
-			if (gargoyleScore() >= 22)
+			if (gargoyleScore() >= 20)
 				grandchimeraCounter++;
 			if (gooScore() >= 8)
 				grandchimeraCounter++;
@@ -5043,7 +5036,7 @@ use namespace CoC;
 			}
 			if (hasFur() || hasPlainSkinOnly())
 				unicornCounter++;
-			if (horns.type != Horns.UNICORN || horns.type != Horns.BICORN || wings.type == Wings.FEATHERED_ALICORN || wings.type == Wings.NIGHTMARE)
+			if (horns.type != Horns.UNICORN && horns.type != Horns.BICORN && (wings.type == Wings.FEATHERED_ALICORN || wings.type == Wings.NIGHTMARE))
 				unicornCounter = 0;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				unicornCounter += 10;
@@ -5102,7 +5095,7 @@ use namespace CoC;
 			}
 			if (hasFur() || hasPlainSkinOnly())
 				alicornCounter++;
-			if (horns.type != Horns.UNICORN || horns.type != Horns.BICORN || wings.type != Wings.FEATHERED_ALICORN || wings.type != Wings.NIGHTMARE)
+			if ((horns.type != Horns.UNICORN && wings.type != Wings.FEATHERED_ALICORN) || (horns.type != Horns.BICORN && wings.type != Wings.NIGHTMARE))
 				alicornCounter = 0;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				alicornCounter += 10;
@@ -5736,7 +5729,7 @@ use namespace CoC;
             Begin("Player","racialScore","bat");
 			var counter:int = 0;
 			if (ears.type == Ears.BAT) { counter++;}
-			else if (ears.type == Ears.ELFIN) { counter -= 10;}
+			if (ears.type == Ears.VAMPIRE) { counter -= 10;}
 			if (wings.type == Wings.BAT_ARM) {counter += 5;}
 			if (lowerBody == LowerBody.HUMAN) {counter++;}
 			if (faceType == Face.VAMPIRE) {counter += 2;}
@@ -5754,7 +5747,7 @@ use namespace CoC;
             Begin("Player","racialScore","vampire");
             var counter:int = 0;
             if (ears.type == Ears.BAT) {counter -= 10;}
-            else if (ears.type == Ears.VAMPIRE) { counter++;}
+            if (ears.type == Ears.VAMPIRE) { counter++;}
 			if (wings.type == Wings.VAMPIRE) {counter += 4;}
             if (lowerBody == LowerBody.HUMAN) {counter++;}
 			if (arms.type == Arms.HUMAN) {counter++;}
@@ -5803,16 +5796,18 @@ use namespace CoC;
 				gargoyleCounter++;
 			if (lowerBody == LowerBody.GARGOYLE || lowerBody == LowerBody.GARGOYLE_2)
 				gargoyleCounter++;
-			if (hasPerk(PerkLib.GargoylePure) || hasPerk(PerkLib.GargoyleCorrupted))
-				gargoyleCounter++;
+			if (wings.type == Wings.GARGOYLE_LIKE_LARGE)
+				gargoyleCounter += 2;
 			if (gills.type == Gills.NONE)
 				gargoyleCounter++;
 			if (rearBody.type == RearBody.NONE)
 				gargoyleCounter++;
+			if (antennae.type == Antennae.NONE)
+				gargoyleCounter++;
+			if (hasPerk(PerkLib.GargoylePure) || hasPerk(PerkLib.GargoyleCorrupted))
+				gargoyleCounter++;
 			if (hasPerk(PerkLib.TransformationImmunity))
 				gargoyleCounter += 5;
-			if (wings.type == Wings.GARGOYLE_LIKE_LARGE)
-				gargoyleCounter += 2;
 			End("Player","racialScore");
 			return gargoyleCounter;
 		}
@@ -5843,8 +5838,8 @@ use namespace CoC;
 				prestigeJobs++;
 			if (findPerk(PerkLib.AscensionBuildingPrestige03) >= 0)
 				prestigeJobs++;
-		//	if (findPerk(PerkLib.TrachealSystemEvolved) >= 0)
-		//		prestigeJobs++;
+			if (findPerk(PerkLib.AscensionBuildingPrestige04) >= 0)
+				prestigeJobs++;
 			return prestigeJobs;
 		}
 		public function maxHeartMutations():Number {
@@ -7227,7 +7222,7 @@ use namespace CoC;
 				maxLib += (5 * internalChimeraScore() * newGamePlusMod);
 				maxSen += (5 * internalChimeraScore() * newGamePlusMod);
 			}
-			if (gargoyleScore() >= 22) {
+			if (gargoyleScore() >= 20) {
 				if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) {
 					maxStr += (165 * newGamePlusMod);
 					maxTou += (250 * newGamePlusMod);

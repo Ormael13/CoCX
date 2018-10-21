@@ -2952,8 +2952,8 @@ private function ascendForReal():void {
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 2) performancePoints++;
 	//Dungeons
 	if (SceneLib.dungeons.checkFactoryClear()) performancePoints++;
-	if (SceneLib.dungeons.checkDeepCaveClear()) performancePoints++;
-	if (SceneLib.dungeons.checkLethiceStrongholdClear()) performancePoints++;
+	if (SceneLib.dungeons.checkDeepCaveClear()) performancePoints += 2;
+	if (SceneLib.dungeons.checkLethiceStrongholdClear()) performancePoints += 3;
 	if (SceneLib.dungeons.checkSandCaveClear()) performancePoints++;
 	if (SceneLib.dungeons.checkHiddenCaveClear()) performancePoints++;
 	if (SceneLib.dungeons.checkDenOfDesireClear()) performancePoints++;
@@ -2963,7 +2963,10 @@ private function ascendForReal():void {
 	if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) performancePoints += 2;
 	if (flags[kFLAGS.URTA_QUEST_STATUS] > 0) performancePoints += 2;
 	if (player.findPerk(PerkLib.Enlightened) >= 0) performancePoints += 1;
-	if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0 || flags[kFLAGS.PURE_MARAE_ENDGAME] >= 2) performancePoints += 1;
+	if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0 || flags[kFLAGS.PURE_MARAE_ENDGAME] >= 2) performancePoints += 3;
+	if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) >= 4) performancePoints += 2;
+	if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) >= 4) performancePoints += 2;
+	if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) >= 4) performancePoints += 2;
 	//Camp structures
 	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) performancePoints += 10;
 	if (flags[kFLAGS.CAMP_WALL_GATE] > 0) performancePoints += 11;
