@@ -162,6 +162,7 @@ public class Kelt extends Monster
 			this.weaponAttack = 11;
 			this.armorName = "tough skin";
 			this.armorDef = 10;
+			this.armorMDef = 0;
 			this.bonusHP = 250;
 			this.bonusLust = 20;
 			this.lust = 40;

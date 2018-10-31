@@ -89,6 +89,7 @@ public class Jojo extends Monster
 			this.weaponAttack = 5;
 			this.armorName = "robes";
 			this.armorDef = 1;
+			this.armorMDef = 10;
 			this.lust = 15;
 			this.lustVuln = .9;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;

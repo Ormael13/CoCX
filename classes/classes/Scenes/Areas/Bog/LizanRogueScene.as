@@ -238,6 +238,7 @@ public class LizanRogueScene extends BaseContent
 			player.createStatusEffect(StatusEffects.Eggs, rand(6), 0, rand(3) + 5, 0);
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			doNext(camp.returnToCampUseOneHour);
             if (CoC.instance.inCombat) cleanupAfterCombat();
         }
@@ -288,6 +289,7 @@ public class LizanRogueScene extends BaseContent
 			outputText("\n\nYou spend some time cuddling, the lizan's still on your back with his warm cock in your [asshole]. Eventually, you get up and give him a deep kiss before you return to your camp.");
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			doNext(camp.returnToCampUseOneHour);
             if (CoC.instance.inCombat) cleanupAfterCombat();
         }
@@ -349,6 +351,7 @@ public class LizanRogueScene extends BaseContent
 			player.createStatusEffect(StatusEffects.Eggs, rand(6), 0, rand(3) + 5, 0);
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(60);
 			doNext(camp.returnToCampUseOneHour);
             if (CoC.instance.inCombat) cleanupAfterCombat();
         }
@@ -449,6 +452,7 @@ public class LizanRogueScene extends BaseContent
 			player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS);
 			player.createStatusEffect(StatusEffects.Eggs, rand(6), 0, rand(3) + 5, 0);
 			player.orgasm();
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			cleanupAfterCombat();
 		}
 	}

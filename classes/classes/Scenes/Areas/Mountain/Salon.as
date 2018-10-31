@@ -605,6 +605,7 @@ private function minotaurCumBukkakeInSalon():void {
 	//[NEXT]
 	player.orgasm();
 	dynStats("lib", 2, "sen", 2, "cor", 2);
+	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 	doNext(minotaurSalonFollowUp);
 }
 private function minotaurSalonFollowUp():void {

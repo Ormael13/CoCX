@@ -21,7 +21,7 @@ package classes.Items
 		
 		//Upper
 		public const C_BRA  :Undergarment = new Undergarment("C. Bra ", "C. Bra", "comfortable bra", "a pair of comfortable bra", TYPE_UPPERWEAR, DEFAULT_VALUE, "A generic pair of bra. \n\nType: Undergarment (Upper)");
-		public const C_SHIRT:Undergarment = new Undergarment("C.Shirt", "C. Shirt", "comfortable shirt", "a comfortable shirt", TYPE_UPPERWEAR, DEFAULT_VALUE, "A generic pair of shirt. \n\nType: Undergarment (Upper)");
+		public const C_SHIRT:Undergarment = new Undergarment("C.Shirt", "C. Shirt", "comfortable shirt", "a comfortable shirt", TYPE_UPPERWEAR, DEFAULT_VALUE, "A generic shirt. \n\nType: Undergarment (Upper)");
 		public const DS_BRA :Undergarment = new Undergarment("DS. Bra", "D.Scale Bra", "dragonscale bra", "a pair of dragonscale bra", TYPE_UPPERWEAR, 600, "This bra appears to be made of dragon scale. It's held together with leather straps for flexibility. Great for those on the primal side! \n\nType: Undergarment (Upper)");
 		public const DS_VEST:Undergarment = new Undergarment("DS.Vest", "D.Scale Vest", "dragonscale vest", "a dragonscale vest", TYPE_UPPERWEAR, 600, "This sleeveless vest is made of dragonscale, treated until it is as light and comfortable as cloth.  However, these treatments have reduced the defensive properties of the dragonscale. \n\nType: Undergarment (Upper)");
 		public const EW_CORS:Undergarment = new Undergarment("EW.Cors", "E.W. Corset", "ebonweave corset", "an ebonweave corset", TYPE_UPPERWEAR, 900, "This corset is ebonweave, created using refined ebonbloom petals. The ebonweave is elastic, making the corset surprisingly comfortable to wear, while displaying your bust down to the most subtle curves. \n\nType: Undergarment (Upper)");
@@ -29,6 +29,7 @@ package classes.Items
 		public const LTX_BRA:Undergarment = new Undergarment("Ltx.Bra", "Latex Bra", "latex bra", "a pair of latex bra", TYPE_UPPERWEAR, 250, "This bra is black and shiny, obviously made of latex. It's designed to fit snugly against your breasts. \n\nType: Undergarment (Upper)");
 		public const SS_BRA :Undergarment = new Undergarment("SS. Bra", "S.Silk Bra", "spider-silk bra", "a pair of spider-silk bra", TYPE_UPPERWEAR, 1000, "This bra looks incredibly comfortable. It's as white as snow and finely woven with hundreds of strands of spider silk. \n\nType: Undergarment (Upper)");
 		public const SSSHIRT:Undergarment = new Undergarment("SSShirt", "S.Silk Shirt", "spider-silk shirt", "a spider-silk shirt", TYPE_UPPERWEAR, 1000, "A comfortable undershirt.  It's as white as snow and woven with hundreds of strands of fine spider silk. \n\nType: Undergarment (Upper)");
+		public const STSHIRT:Undergarment = new Undergarment("STShirt", "S.T.Shirt", "soul training shirt", "a soul training shirt", TYPE_UPPERWEAR, 200, "A shirt made from fabric capable to help train soulforce. \n\nType: Undergarment (Upper)");
 		
 		//Lower
 		public const C_LOIN :Undergarment = new Undergarment("C. Loin", "C. Loin", "comfortable loincloth", "a pair of comfortable loincloth", TYPE_LOWERWEAR, DEFAULT_VALUE, "A generic pair of loincloth. \n\nType: Undergarment (Lower)", "NagaWearable");
@@ -45,6 +46,7 @@ package classes.Items
 		public const R_THONG:RunedEbonweaveThong = new RunedEbonweaveThong();
 		public const SS_LOIN:Undergarment = new Undergarment("SS.Loin", "S.Silk Loin", "spider-silk loincloth", "a spider-silk loincloth", TYPE_LOWERWEAR, 1000, "This loincloth looks incredibly comfortable. It's as white as snow and finely woven with hundreds of strands of spider silk.  \n\nType: Undergarment (Lower)", "NagaWearable");
 		public const SSPANTY:Undergarment = new Undergarment("SSPanty", "S.Silk Panty", "spider-silk panties", "a pair of spider-silk panties", TYPE_LOWERWEAR, 1000, "These panties look incredibly comfortable. It's as white as snow and finely woven with hundreds of strands of spider silk. \n\nType: Undergarment (Lower)");
+		public const STPANTY:Undergarment = new Undergarment("STPanty", "S.T.Panties", "soul training panties", "a pair of soul training panties", TYPE_LOWERWEAR, 200, "A pair of panties made from fabric capable to help train soulforce. \n\nType: Undergarment (Lower)");
 		
 		public function UndergarmentLib() 
 		{

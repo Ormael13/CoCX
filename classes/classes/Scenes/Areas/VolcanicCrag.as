@@ -20,6 +20,7 @@ public class VolcanicCrag extends BaseContent
 		public var behemothScene:BehemothScene = new BehemothScene();
 		public var phoenixScene:PhoenixScene = new PhoenixScene();
 		public var alrauneScene:AlrauneScene = new AlrauneScene();
+		public var hellcatScene:HellCatScene = new HellCatScene();
 		
 		public function VolcanicCrag() 
 		{
@@ -61,7 +62,8 @@ public class VolcanicCrag extends BaseContent
 					behemothScene.behemothIntro();
 					break;
 				case 1:
-					phoenixScene.encounterPhoenix2();
+					if (flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0) phoenixScene.encounterPhoenix2();
+					else behemothScene.behemothIntro();
 					break;
 				case 2:
 					clearOutput();
@@ -83,6 +85,10 @@ public class VolcanicCrag extends BaseContent
 					} else {
 						alrauneScene.alrauneVolcanicCrag();
 					}
+					break;
+				case 5:	//Hellcat/Witches Sabbath
+					if ((flags[kFLAGS.WITCHES_SABBATH] > 3 && player.hellcatScore() > 9 && player.gender == 3) || (flags[kFLAGS.WITCHES_SABBATH] > 0 && player.catScore() >= 8 && player.inte >= 40 && player.hasStatusEffect(StatusEffects.KnowsWhitefire))) SceneLib.volcanicCrag.hellcatScene.WitchesSabbath();
+					else SceneLib.volcanicCrag.hellcatScene.HellCatIntro();
 					break;
 				default:
 					clearOutput();

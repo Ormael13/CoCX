@@ -222,6 +222,7 @@ import classes.internals.*;
 			this.weaponAttack = 4;
 			this.armorName = "pod";
 			this.armorDef = 4;
+			this.armorMDef = 0;
 			this.bonusHP = 1200;
 			this.lust = 10;
 			this.lustVuln = 0;

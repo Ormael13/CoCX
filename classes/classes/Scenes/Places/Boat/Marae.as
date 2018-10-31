@@ -63,7 +63,7 @@ public class Marae extends Monster
 				outputText("Without warning, the lightning hits you! Surge of electricity rushes through you painfully. ");
 				if (player.cor >= 50) outputText("The intensity of the pain is unbearable. ");
 				var damage:int = 100 + eBaseIntelligenceDamage() + eBaseWisdomDamage() + (player.cor * 5);
-				player.takeMagicDamage(damage, true);
+				player.takeLightningDamage(damage, true);
 			}
 			if (hasStatusEffect(StatusEffects.Uber)) removeStatusEffect(StatusEffects.Uber);
 		}
@@ -91,6 +91,7 @@ public class Marae extends Monster
 			}
 			if (hasStatusEffect(StatusEffects.Fear)) {
 				EngineCore.outputText("\"<i>You think I'm afraid of anything? Foolish mortal.</i>\" Marae snarls.\n\n");
+				this.spe += statusEffectv2(StatusEffects.Fear);
 				removeStatusEffect(StatusEffects.Fear);
 			}
 			var chooser:int = rand(10);
@@ -126,6 +127,7 @@ public class Marae extends Monster
 				this.weaponName = "tentacles";
 				this.weaponVerb="slap";
 				this.armorDef = 1000;
+				this.armorMDef = 1000;
 				this.weaponAttack = 100;
 				this.bonusLust += 300;
 				this.additionalXP = 3000;
@@ -145,6 +147,7 @@ public class Marae extends Monster
 				this.bonusHP += 5000;
 				if (game.flags[kFLAGS.MINERVA_TOWER_TREE] > 0) {
 					this.armorDef = 2000;
+					this.armorMDef = 2000;
 					this.str += 120;
 					this.tou += 120;
 					this.bonusHP += 4000;
@@ -153,6 +156,7 @@ public class Marae extends Monster
 				}
 				else {
 					this.armorDef = 1400;
+					this.armorMDef = 1400;
 					this.additionalXP = 4000;
 				}
 				this.special1 = smite;

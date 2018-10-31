@@ -60,6 +60,12 @@ public class BaseCombatContent extends BaseContent {
 	protected function unarmedAttack():Number {
 		return combat.unarmedAttack();
 	}
+	protected function ghostStrength():Number {
+		return combat.ghostStrength();
+	}
+	protected function ghostSpeed():Number {
+		return combat.ghostSpeed();
+	}
 	// =================
 	// CHECKS
 	// =================

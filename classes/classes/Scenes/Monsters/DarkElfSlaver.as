@@ -55,6 +55,7 @@ public class DarkElfSlaver extends DarkElfScout
 			this.weaponRangeAttack = 24;
 			this.armorName = "elven armor";
 			this.armorDef = 8;
+			this.armorMDef = 8;
 			this.bonusLust = 20;
 			this.lustVuln = .7;
 			this.lust = 50;

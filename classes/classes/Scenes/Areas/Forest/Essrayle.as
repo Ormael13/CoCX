@@ -323,6 +323,7 @@ private function hasPussyFeedEssy(newPage:Boolean = true):void {
 	
 	outputText("\n\nIt takes you a while, but you extricate yourself and clean off the best you can, leaving her with a friendly kiss on the cheek before you head on your way once more.  With visitors like you, she hardly seems like she'll mind being trapped in the enchanted flower pot.");
 	player.orgasm();
+	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 	if(player.fertility < 50) player.fertility++;
 	doNext(playerMenu);
 }

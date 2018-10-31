@@ -32,9 +32,10 @@ use namespace CoC;
 	
 public function accessMetamorphMenu():void {
 	clearOutput();
-	outputText("Using some of soulforce to re-gain any animal bodyparts that your body remember in it genetic memory.\n\n");
+	outputText("Using some of soulforce to re-gain any animal bodyparts that your body remember in it genetic memory.\n");
+	outputText("<i>Bonus to max soulforce: " + 50 * (1 + player.perkv1(PerkLib.Metamorph)) + "</i>\n\n");
 	outputText("<b>Race added to Metamorph:\n");
-	outputText("Bee, Cow, Couatl, Demon, Devil, Dragon, Elf, Fox, Gorgon, Harpy, Kitsune, Lizard, Mantis, Minotaur, Naga, Oni, Orca, Phoenix, Raiju, Salamander, Shark, Spider (+Drider)</b>");
+	outputText("Bat, Bee, Cow, Couatl, Demon, Devil, Dragon, Elf, Fox, Gorgon, Harpy, Kitsune, Lizard, Mantis, Minotaur, Naga, Oni, Orca, Phoenix, Raiju, Salamander, Shark, Spider (+Drider), Vampire</b>");
 	menu();
 	addButton(10, "Page 1", accessPage1MetamorphMenu);
 	addButton(11, "Page 2", accessPage2MetamorphMenu);
@@ -52,14 +53,14 @@ private function accessPage1MetamorphMenu():void {
 	addButton(3, "Face(2)", accessPage2FaceMenu);
 	addButton(4, "Face(3)", accessPage3FaceMenu);
 	addButton(5, "Tongue", accessTongueMenu);
-	addButton(6, "Eyes", accessEyesMenu);
-	addButton(7, "Ears(1)", accessPage1EarsMenu);
-	addButton(8, "Ears(2)", accessPage2EarsMenu);
-	addButton(9, "Horns", accessHornsMenu);
-	addButton(10, "Antennae", accessAntennaeMenu);
-	addButton(11, "Gills", accessGillsMenu);
-	addButton(12, "Arms(1)", accessPage1ArmsMenu);
-	addButton(13, "Arms(2)", accessPage2ArmsMenu);
+	addButton(6, "Eyes(1)", accessPage1EyesMenu);
+	addButton(7, "Eyes(2)", accessPage2EyesMenu);
+	addButton(8, "Ears(1)", accessPage1EarsMenu);
+	addButton(9, "Ears(2)", accessPage2EarsMenu);
+	addButton(10, "Ears(3)", accessPage3EarsMenu);
+	addButton(11, "Horns", accessHornsMenu);
+	addButton(12, "Antennae", accessAntennaeMenu);
+	addButton(13, "Gills", accessGillsMenu);
 	addButton(14, "Back", accessMetamorphMenu);
 }
 private function accessSkinMenu():void {
@@ -164,6 +165,10 @@ private function accessPage3FaceMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuFace) && player.faceType == Face.RAIJU_FANGS) addButtonDisabled(4, "Raiju", "You already have raiju fangs.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuFace) && player.faceType != Face.RAIJU_FANGS && player.soulforce < 100) addButtonDisabled(4, "Raiju", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(4, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedVampireFace) && player.faceType != Face.VAMPIRE && player.soulforce >= 100) addButton(5, "Vampire", metamorphVampireFace);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedVampireFace) && player.faceType == Face.VAMPIRE) addButtonDisabled(5, "Vampire", "You already have vampire fangs.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedVampireFace) && player.faceType != Face.VAMPIRE && player.soulforce < 100) addButtonDisabled(5, "Vampire", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(5, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 private function accessTongueMenu():void {
@@ -186,7 +191,7 @@ private function accessTongueMenu():void {
 	else addButtonDisabled(5, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
-private function accessEyesMenu():void {
+private function accessPage1EyesMenu():void {
 	menu();
 	if (player.hasStatusEffect(StatusEffects.UnlockedSpiderFourEyes) && player.eyes.type != Eyes.FOUR_SPIDER_EYES && player.soulforce >= 100) addButton(0, "Spider", metamorphSpiderFourEyes);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedSpiderFourEyes) && player.eyes.type == Eyes.FOUR_SPIDER_EYES) addButtonDisabled(0, "Spider", "You already have spider four eyes.");
@@ -228,6 +233,14 @@ private function accessEyesMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuEyes) && player.eyes.type == Eyes.RAIJU) addButtonDisabled(13, "Raiju", "You already have raiju eyes.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuEyes) && player.eyes.type != Eyes.RAIJU && player.soulforce < 100) addButtonDisabled(13, "Raiju", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(13, "???", "You not yet unlocked this metamorphosis!");
+	addButton(14, "Back", accessPage1MetamorphMenu);
+}
+private function accessPage2EyesMenu():void {
+	menu();
+	if (player.hasStatusEffect(StatusEffects.UnlockedVampireEyes) && player.eyes.type != Eyes.VAMPIRE && player.soulforce >= 100) addButton(0, "Vampire", metamorphVampireEyes);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedVampireEyes) && player.eyes.type == Eyes.VAMPIRE) addButtonDisabled(0, "Vampire", "You already have vampire eyes.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedVampireEyes) && player.eyes.type != Eyes.VAMPIRE && player.soulforce < 100) addButtonDisabled(0, "Vampire", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(0, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 private function accessPage1EarsMenu():void {
@@ -280,6 +293,18 @@ private function accessPage2EarsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuEars) && player.ears.type == Ears.WEASEL) addButtonDisabled(12, "Raiju", "You already have raiju ears.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuEars) && player.ears.type != Ears.WEASEL && player.soulforce < 100) addButtonDisabled(12, "Raiju", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(12, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedBatEars) && player.ears.type != Ears.BAT && player.soulforce >= 100) addButton(13, "Bat", metamorphBatEars);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedBatEars) && player.ears.type == Ears.BAT) addButtonDisabled(13, "Bat", "You already have bat ears.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedBatEars) && player.ears.type != Ears.BAT && player.soulforce < 100) addButtonDisabled(13, "Bat", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(13, "???", "You not yet unlocked this metamorphosis!");
+	addButton(14, "Back", accessPage1MetamorphMenu);
+}
+private function accessPage3EarsMenu():void {
+	menu();
+	if (player.hasStatusEffect(StatusEffects.UnlockedVampireEars) && player.ears.type != Ears.VAMPIRE && player.soulforce >= 100) addButton(0, "Vampire", metamorphVampireEars);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedVampireEars) && player.ears.type == Ears.VAMPIRE) addButtonDisabled(0, "Vampire", "You already have vampire ears.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedVampireEars) && player.ears.type != Ears.VAMPIRE && player.soulforce < 100) addButtonDisabled(0, "Vampire", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(0, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 private function accessHornsMenu():void {
@@ -335,6 +360,25 @@ private function accessGillsMenu():void {
 	else addButtonDisabled(1, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
+
+private function accessPage2MetamorphMenu():void {
+	menu();
+	addButton(0, "Arms(1)", accessPage1ArmsMenu);
+	addButton(1, "Arms(2)", accessPage2ArmsMenu);
+	addButton(2, "Tail(1)", accessPage1TailMenu);
+	addButton(3, "Tail(2)", accessPage2TailMenu);
+	addButton(4, "Tail(3)", accessPage3TailMenu);
+	addButton(5, "Wings(1)", accessPage1WingsMenu);
+	addButton(6, "Wings(2)", accessPage2WingsMenu);
+	addButton(7, "Legs(1)", accessPage1LegsMenu);
+	addButton(8, "Legs(2)", accessPage2LegsMenu);
+	addButton(9, "Legs(3)", accessPage3LegsMenu);
+//	addButton(10, "Legs(4)", accessPage4LegsMenu);
+	addButton(10, "Rear B.", accessRearBodyMenu);
+//	addButton(12, "Back", accessMetamorphMenu);
+//	addButton(13, "Back", accessMetamorphMenu);
+	addButton(14, "Back", accessMetamorphMenu);
+}
 private function accessPage1ArmsMenu():void {
 	menu();
 	if (player.hasStatusEffect(StatusEffects.UnlockedHarpyArms) && player.arms.type != Arms.HARPY && player.soulforce >= 100) addButton(0, "Harpy", metamorphHarpyArms);
@@ -369,15 +413,15 @@ private function accessPage1ArmsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxArms) && player.arms.type == Arms.FOX) addButtonDisabled(11, "Fox", "You already have fox arms.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxArms) && player.arms.type != Arms.FOX && player.soulforce < 100) addButtonDisabled(11, "Fox", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(11, "???", "You not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedKitsuneArms) && player.arms.type != Arms.FOX && player.soulforce >= 100) addButton(12, "Kitsune", metamorphKitsuneArms);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedKitsuneArms) && player.arms.type == Arms.FOX) addButtonDisabled(12, "Kitsune", "You already have kitsune arms.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedKitsuneArms) && player.arms.type != Arms.FOX && player.soulforce < 100) addButtonDisabled(12, "Kitsune", "You not have enough Soulforce for this metamorphosis.");
+	if (player.hasStatusEffect(StatusEffects.UnlockedKitsuneArms) && player.arms.type != Arms.KITSUNE && player.soulforce >= 100) addButton(12, "Kitsune", metamorphKitsuneArms);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedKitsuneArms) && player.arms.type == Arms.KITSUNE) addButtonDisabled(12, "Kitsune", "You already have kitsune arms.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedKitsuneArms) && player.arms.type != Arms.KITSUNE && player.soulforce < 100) addButtonDisabled(12, "Kitsune", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(12, "???", "You not yet unlocked this metamorphosis!");
 	if (player.hasStatusEffect(StatusEffects.UnlockedLizardArms) && player.arms.type != Arms.LIZARD && player.soulforce >= 100) addButton(13, "Lizard", metamorphLizardArms);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedLizardArms) && player.arms.type == Arms.LIZARD) addButtonDisabled(13, "Lizard", "You already have lizard arms.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedLizardArms) && player.arms.type != Arms.LIZARD && player.soulforce < 100) addButtonDisabled(13, "Lizard", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(13, "???", "You not yet unlocked this metamorphosis!");
-	addButton(14, "Back", accessPage1MetamorphMenu);
+	addButton(14, "Back", accessPage2MetamorphMenu);
 }
 private function accessPage2ArmsMenu():void {
 	menu();
@@ -405,26 +449,7 @@ private function accessPage2ArmsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuArms) && player.arms.type == Arms.RAIJU) addButtonDisabled(7, "Raiju", "You already have raiju arms.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuArms) && player.arms.type != Arms.RAIJU && player.soulforce < 100) addButtonDisabled(7, "Raiju", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(7, "???", "You not yet unlocked this metamorphosis!");
-	addButton(14, "Back", accessPage1MetamorphMenu);
-}
-
-private function accessPage2MetamorphMenu():void {
-	menu();
-	addButton(0, "Tail(1)", accessPage1TailMenu);
-	addButton(1, "Tail(2)", accessPage2TailMenu);
-	addButton(2, "Tail(3)", accessPage3TailMenu);
-	addButton(3, "Wings(1)", accessPage1WingsMenu);
-	addButton(4, "Wings(2)", accessPage2WingsMenu);
-	addButton(5, "Legs(1)", accessPage1LegsMenu);
-	addButton(6, "Legs(2)", accessPage2LegsMenu);
-	addButton(7, "Legs(3)", accessPage3LegsMenu);
-//	addButton(8, "Legs(4)", accessPage4LegsMenu);
-	addButton(8, "Rear B.", accessRearBodyMenu);
-//	addButton(10, "Back", accessMetamorphMenu);
-//	addButton(11, "Back", accessMetamorphMenu);
-//	addButton(12, "Back", accessMetamorphMenu);
-//	addButton(13, "Back", accessMetamorphMenu);
-	addButton(14, "Back", accessMetamorphMenu);
+	addButton(14, "Back", accessPage2MetamorphMenu);
 }
 private function accessPage1TailMenu():void {
 	menu();
@@ -456,82 +481,109 @@ private function accessPage1TailMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedHarpyTail) && player.tailType == Tail.HARPY) addButtonDisabled(8, "Harpy", "You already have harpy tail.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedHarpyTail) && player.tailType != Tail.HARPY && player.soulforce < 100) addButtonDisabled(8, "Harpy", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(10, "???", "You not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail) && player.tailType != Tail.FOX && player.soulforce >= 100) addButton(13, "Fox", metamorphTailFox);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail) && player.tailType == Tail.FOX && player.tailCount == 1) addButtonDisabled(13, "Fox", "You already have single fox tail.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail) && player.tailType != Tail.FOX && player.soulforce < 100) addButtonDisabled(13, "Fox", "You not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(13, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage2MetamorphMenu);
 }
 private function accessPage2TailMenu():void {
 	menu();
-	if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail2nd) && player.tailType == Tail.FOX && player.tailCount == 1 && player.soulforce >= 200) addButton(0, "Fox 2nd", metamorphTailFox2nd);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail2nd) && player.tailType == Tail.FOX && player.tailCount == 2) addButtonDisabled(0, "Fox 2nd", "You already have two fox tails.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail2nd) && player.tailType == Tail.FOX && player.tailCount == 1 && player.soulforce < 200) addButtonDisabled(0, "Fox 2nd", "You not have enough Soulforce for this metamorphosis.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail2nd) && player.tailType != Tail.FOX && player.tailCount != 1) addButtonDisabled(0, "Fox 2nd", "You not have proper type and amount of tails for this metamorphosis.");
+	if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail) && (player.tailType != Tail.FOX || (player.tailType == Tail.FOX && player.tailCount >= 2)) && player.soulforce >= 100) addButton(0, "Fox", metamorphTailFox);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail) && player.tailType == Tail.FOX && player.tailCount == 1) addButtonDisabled(0, "Fox", "You already have single fox tail.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail) && player.tailType != Tail.FOX && player.soulforce < 100) addButtonDisabled(0, "Fox", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(0, "???", "You not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail3rd) && player.tailType == Tail.FOX && player.tailCount == 2 && player.soulforce >= 300) addButton(1, "Fox 3rd", metamorphTailFox3rd);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail3rd) && player.tailType == Tail.FOX && player.tailCount == 3) addButtonDisabled(1, "Fox 3rd", "You already have three fox tails.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail3rd) && player.tailType == Tail.FOX && player.tailCount == 2 && player.soulforce < 300) addButtonDisabled(1, "Fox 3rd", "You not have enough Soulforce for this metamorphosis.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail3rd) && player.tailType != Tail.FOX && player.tailCount != 2) addButtonDisabled(1, "Fox 3rd", "You not have proper type and amount of tails for this metamorphosis.");
+	if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail2nd) && player.tailType == Tail.FOX && player.tailCount == 1 && player.soulforce >= 200) addButton(1, "Fox 2nd", metamorphTailFox2nd);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail2nd) && player.tailType == Tail.FOX) {
+		if (player.tailCount == 2) addButtonDisabled(1, "Fox 2nd", "You already have two fox tails.");
+		else if (player.tailCount == 1 && player.soulforce < 200) addButtonDisabled(1, "Fox 2nd", "You not have enough Soulforce for this metamorphosis.");
+		else addButtonDisabled(1, "Fox 2nd", "You need to have only one fox tail to use this metamophosis.");
+	}
+	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail2nd) && player.tailType != Tail.FOX) {
+		if (player.tailCount != 1) addButtonDisabled(1, "Fox 2nd", "You not have proper type of tails for this metamorphosis.");
+		else addButtonDisabled(1, "Fox 2nd", "You not have proper type and amount of tails for this metamorphosis.");
+	}
 	else addButtonDisabled(1, "???", "You not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail4th) && player.tailType == Tail.FOX && player.tailCount == 3 && player.soulforce >= 400) addButton(2, "Fox 4th", metamorphTailFox4th);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail4th) && player.tailType == Tail.FOX && player.tailCount == 4) addButtonDisabled(2, "Fox 4th", "You already have four fox tails.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail4th) && player.tailType == Tail.FOX && player.tailCount == 3 && player.soulforce < 400) addButtonDisabled(2, "Fox 4th", "You not have enough Soulforce for this metamorphosis.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail4th) && player.tailType != Tail.FOX && player.tailCount != 3) addButtonDisabled(2, "Fox 4th", "You not have proper type and amount of tails for this metamorphosis.");
+	if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail3rd) && player.tailType == Tail.FOX && player.tailCount == 2 && player.soulforce >= 300) addButton(2, "Fox 3rd", metamorphTailFox3rd);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail3rd) && player.tailType == Tail.FOX) {
+		if (player.tailCount == 3) addButtonDisabled(2, "Fox 3rd", "You already have three fox tails.");
+		else if (player.tailCount == 2 && player.soulforce < 300) addButtonDisabled(2, "Fox 3rd", "You not have enough Soulforce for this metamorphosis.");
+		else addButtonDisabled(2, "Fox 3rd", "You need to have two fox tails to use this metamophosis.");
+	}
+	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail3rd) && player.tailType != Tail.FOX && player.tailCount != 2) addButtonDisabled(2, "Fox 3rd", "You not have proper type and amount of tails for this metamorphosis.");
 	else addButtonDisabled(2, "???", "You not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail5th) && player.tailType == Tail.FOX && player.tailCount == 4 && player.soulforce >= 500) addButton(3, "Fox 5th", metamorphTailFox5th);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail5th) && player.tailType == Tail.FOX && player.tailCount == 5) addButtonDisabled(3, "Fox 5th", "You already have five fox tails.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail5th) && player.tailType == Tail.FOX && player.tailCount == 4 && player.soulforce < 500) addButtonDisabled(3, "Fox 5th", "You not have enough Soulforce for this metamorphosis.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail5th) && player.tailType != Tail.FOX && player.tailCount != 4) addButtonDisabled(3, "Fox 5th", "You not have proper type and amount of tails for this metamorphosis.");
+	if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail4th) && player.tailType == Tail.FOX && player.tailCount == 3 && player.soulforce >= 400) addButton(3, "Fox 4th", metamorphTailFox4th);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail4th) && player.tailType == Tail.FOX) {
+		if (player.tailCount == 4) addButtonDisabled(3, "Fox 4th", "You already have four fox tails.");
+		else if (player.tailCount == 3 && player.soulforce < 400) addButtonDisabled(3, "Fox 4th", "You not have enough Soulforce for this metamorphosis.");
+		else addButtonDisabled(3, "Fox 4th", "You need to have three fox tails to use this metamophosis.");
+	}
+	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail4th) && player.tailType != Tail.FOX && player.tailCount != 3) addButtonDisabled(3, "Fox 4th", "You not have proper type and amount of tails for this metamorphosis.");
 	else addButtonDisabled(3, "???", "You not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail6th) && player.tailType == Tail.FOX && player.tailCount == 5 && player.soulforce >= 600) addButton(4, "Fox 6th", metamorphTailFox6th);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail6th) && player.tailType == Tail.FOX && player.tailCount == 6) addButtonDisabled(4, "Fox 6th", "You already have six fox tails.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail6th) && player.tailType == Tail.FOX && player.tailCount == 5 && player.soulforce < 600) addButtonDisabled(4, "Fox 6th", "You not have enough Soulforce for this metamorphosis.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail6th) && player.tailType != Tail.FOX && player.tailCount != 5) addButtonDisabled(4, "Fox 6th", "You not have proper type and amount of tails for this metamorphosis.");
+	if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail5th) && player.tailType == Tail.FOX && player.tailCount == 4 && player.soulforce >= 500) addButton(4, "Fox 5th", metamorphTailFox5th);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail5th) && player.tailType == Tail.FOX) {
+		if (player.tailCount == 5) addButtonDisabled(4, "Fox 5th", "You already have five fox tails.");
+		else if (player.tailCount == 4 && player.soulforce < 500) addButtonDisabled(4, "Fox 5th", "You not have enough Soulforce for this metamorphosis.");
+		else addButtonDisabled(4, "Fox 5th", "You need to have four fox tails to use this metamophosis.");
+	}
+	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail5th) && player.tailType != Tail.FOX && player.tailCount != 4) addButtonDisabled(4, "Fox 5th", "You not have proper type and amount of tails for this metamorphosis.");
 	else addButtonDisabled(4, "???", "You not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail7th) && player.tailType == Tail.FOX && player.tailCount == 6 && player.soulforce >= 700) addButton(5, "Fox 7th", metamorphTailFox7th);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail7th) && player.tailType == Tail.FOX && player.tailCount == 7) addButtonDisabled(5, "Fox 7th", "You already have seven fox tails.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail7th) && player.tailType == Tail.FOX && player.tailCount == 6 && player.soulforce < 700) addButtonDisabled(5, "Fox 7th", "You not have enough Soulforce for this metamorphosis.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail7th) && player.tailType != Tail.FOX && player.tailCount != 6) addButtonDisabled(5, "Fox 7th", "You not have proper type and amount of tails for this metamorphosis.");
+	if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail6th) && player.tailType == Tail.FOX && player.tailCount == 5 && player.soulforce >= 600) addButton(5, "Fox 6th", metamorphTailFox6th);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail6th) && player.tailType == Tail.FOX) {
+		if (player.tailCount == 6) addButtonDisabled(5, "Fox 6th", "You already have six fox tails.");
+		else if (player.tailCount == 5 && player.soulforce < 600) addButtonDisabled(5, "Fox 6th", "You not have enough Soulforce for this metamorphosis.");
+		else addButtonDisabled(5, "Fox 6th", "You need to have five fox tails to use this metamophosis.");
+	}
+	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail6th) && player.tailType != Tail.FOX && player.tailCount != 5) addButtonDisabled(5, "Fox 6th", "You not have proper type and amount of tails for this metamorphosis.");
 	else addButtonDisabled(5, "???", "You not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail8th) && player.tailType == Tail.FOX && player.tailCount == 7 && player.soulforce >= 800) addButton(6, "Fox 8th", metamorphTailFox8th);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail8th) && player.tailType == Tail.FOX && player.tailCount == 8) addButtonDisabled(6, "Fox 8th", "You already have eight fox tails.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail8th) && player.tailType == Tail.FOX && player.tailCount == 7 && player.soulforce < 800) addButtonDisabled(6, "Fox 8th", "You not have enough Soulforce for this metamorphosis.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail8th) && player.tailType != Tail.FOX && player.tailCount != 7) addButtonDisabled(6, "Fox 8th", "You not have proper type and amount of tails for this metamorphosis.");
+	if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail7th) && player.tailType == Tail.FOX && player.tailCount == 6 && player.soulforce >= 700) addButton(6, "Fox 7th", metamorphTailFox7th);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail7th) && player.tailType == Tail.FOX) {
+		if (player.tailCount == 7) addButtonDisabled(6, "Fox 7th", "You already have seven fox tails.");
+		else if (player.tailCount == 6 && player.soulforce < 700) addButtonDisabled(6, "Fox 7th", "You not have enough Soulforce for this metamorphosis.");
+		else addButtonDisabled(6, "Fox 7th", "You need to have six fox tails to use this metamophosis.");
+	}
+	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail7th) && player.tailType != Tail.FOX && player.tailCount != 6) addButtonDisabled(6, "Fox 7th", "You not have proper type and amount of tails for this metamorphosis.");
 	else addButtonDisabled(6, "???", "You not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail9th) && player.tailType == Tail.FOX && player.tailCount == 8 && player.soulforce >= 900) addButton(7, "Fox 9th", metamorphTailFox9th);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail9th) && player.tailType == Tail.FOX && player.tailCount == 9) addButtonDisabled(7, "Fox 9th", "You already have nine fox tails.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail9th) && player.tailType == Tail.FOX && player.tailCount == 8 && player.soulforce < 900) addButtonDisabled(7, "Fox 9th", "You not have enough Soulforce for this metamorphosis.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail9th) && player.tailType != Tail.FOX && player.tailCount != 8) addButtonDisabled(7, "Fox 9th", "You not have proper type and amount of tails for this metamorphosis.");
+	if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail8th) && player.tailType == Tail.FOX && player.tailCount == 7 && player.soulforce >= 800) addButton(7, "Fox 8th", metamorphTailFox8th);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail8th) && player.tailType == Tail.FOX) {
+		if (player.tailCount == 8) addButtonDisabled(7, "Fox 8th", "You already have eight fox tails.");
+		else if (player.tailCount == 7 && player.soulforce < 800) addButtonDisabled(7, "Fox 8th", "You not have enough Soulforce for this metamorphosis.");
+		else addButtonDisabled(7, "Fox 8th", "You need to have seven fox tails to use this metamophosis.");
+	}
+	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail8th) && player.tailType != Tail.FOX && player.tailCount != 7) addButtonDisabled(7, "Fox 8th", "You not have proper type and amount of tails for this metamorphosis.");
 	else addButtonDisabled(7, "???", "You not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedDraconicTail) && player.tailType != Tail.DRACONIC && player.soulforce >= 100) addButton(8, "Dragon", metamorphDragonTail);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicTail) && player.tailType == Tail.DRACONIC) addButtonDisabled(13, "Dragon", "You already have dragon tail.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicTail) && player.tailType != Tail.DRACONIC && player.soulforce < 100) addButtonDisabled(13, "Dragon", "You not have enough Soulforce for this metamorphosis.");
+	if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail9th) && player.tailType == Tail.FOX && player.tailCount == 8 && player.soulforce >= 900) addButton(8, "Fox 9th", metamorphTailFox9th);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail9th) && player.tailType == Tail.FOX) {
+		if (player.tailCount == 9) addButtonDisabled(8, "Fox 9th", "You already have nine fox tails.");
+		else if (player.tailCount == 8 && player.soulforce < 900) addButtonDisabled(8, "Fox 9th", "You not have enough Soulforce for this metamorphosis.");
+		else addButtonDisabled(8, "Fox 9th", "You need to have eight fox tails to use this metamophosis.");
+	}
+	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxTail9th) && player.tailType != Tail.FOX && player.tailCount != 8) addButtonDisabled(8, "Fox 9th", "You not have proper type and amount of tails for this metamorphosis.");
 	else addButtonDisabled(8, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedDraconicTail) && player.tailType != Tail.DRACONIC && player.soulforce >= 100) addButton(9, "Dragon", metamorphDragonTail);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicTail) && player.tailType == Tail.DRACONIC) addButtonDisabled(9, "Dragon", "You already have dragon tail.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicTail) && player.tailType != Tail.DRACONIC && player.soulforce < 100) addButtonDisabled(9, "Dragon", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(9, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage2MetamorphMenu);
 }
 private function accessPage3TailMenu():void {
 	menu();
-	if (player.hasStatusEffect(StatusEffects.UnlockedGoatTail) && player.tailType != Tail.GOAT && player.soulforce >= 100) addButton(1, "Goat", metamorphGoatTail);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedGoatTail) && player.tailType == Tail.GOAT) addButtonDisabled(1, "Goat", "You already have goat tail.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedGoatTail) && player.tailType != Tail.GOAT && player.soulforce < 100) addButtonDisabled(1, "Goat", "You not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(1, "???", "You not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderTail) && player.tailType != Tail.SALAMANDER && player.soulforce >= 100) addButton(5, "Salamander", metamorphSalamanderTail);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderTail) && player.tailType == Tail.SALAMANDER) addButtonDisabled(5, "Salamander", "You already have salamander tail.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderTail) && player.tailType != Tail.SALAMANDER && player.soulforce < 100) addButtonDisabled(5, "Salamander", "You not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(5, "???", "You not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedMantisTail) && player.tailType != Tail.MANTIS_ABDOMEN && player.soulforce >= 100) addButton(7, "Mantis", metamorphMantisTail);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedMantisTail) && player.tailType == Tail.MANTIS_ABDOMEN) addButtonDisabled(7, "Mantis", "You already have mantis abdomen.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedMantisTail) && player.tailType != Tail.MANTIS_ABDOMEN && player.soulforce < 100) addButtonDisabled(7, "Mantis", "You not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(7, "???", "You not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedOrcaTail) && player.tailType != Tail.ORCA && player.soulforce >= 100) addButton(10, "Orca", metamorphOrcaTail);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaTail) && player.tailType == Tail.ORCA) addButtonDisabled(10, "Orca", "You already have orca tail.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaTail) && player.tailType != Tail.ORCA && player.soulforce < 100) addButtonDisabled(10, "Orca", "You not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(10, "???", "You not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedRaijuTail) && player.tailType != Tail.RAIJU && player.soulforce >= 100) addButton(12, "Raiju", metamorphRaijuTail);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuTail) && player.tailType == Tail.RAIJU) addButtonDisabled(12, "Raiju", "You already have raiju tail.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuTail) && player.tailType != Tail.RAIJU && player.soulforce < 100) addButtonDisabled(12, "Raiju", "You not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(12, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedGoatTail) && player.tailType != Tail.GOAT && player.soulforce >= 100) addButton(2, "Goat", metamorphGoatTail);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedGoatTail) && player.tailType == Tail.GOAT) addButtonDisabled(2, "Goat", "You already have goat tail.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedGoatTail) && player.tailType != Tail.GOAT && player.soulforce < 100) addButtonDisabled(2, "Goat", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(2, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderTail) && player.tailType != Tail.SALAMANDER && player.soulforce >= 100) addButton(6, "Salamander", metamorphSalamanderTail);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderTail) && player.tailType == Tail.SALAMANDER) addButtonDisabled(6, "Salamander", "You already have salamander tail.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderTail) && player.tailType != Tail.SALAMANDER && player.soulforce < 100) addButtonDisabled(6, "Salamander", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(6, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedMantisTail) && player.tailType != Tail.MANTIS_ABDOMEN && player.soulforce >= 100) addButton(8, "Mantis", metamorphMantisTail);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedMantisTail) && player.tailType == Tail.MANTIS_ABDOMEN) addButtonDisabled(8, "Mantis", "You already have mantis abdomen.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedMantisTail) && player.tailType != Tail.MANTIS_ABDOMEN && player.soulforce < 100) addButtonDisabled(8, "Mantis", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(8, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedOrcaTail) && player.tailType != Tail.ORCA && player.soulforce >= 100) addButton(11, "Orca", metamorphOrcaTail);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaTail) && player.tailType == Tail.ORCA) addButtonDisabled(11, "Orca", "You already have orca tail.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaTail) && player.tailType != Tail.ORCA && player.soulforce < 100) addButtonDisabled(11, "Orca", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(11, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedRaijuTail) && player.tailType != Tail.RAIJU && player.soulforce >= 100) addButton(13, "Raiju", metamorphRaijuTail);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuTail) && player.tailType == Tail.RAIJU) addButtonDisabled(13, "Raiju", "You already have raiju tail.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuTail) && player.tailType != Tail.RAIJU && player.soulforce < 100) addButtonDisabled(13, "Raiju", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(13, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage2MetamorphMenu);
 }
 private function accessPage1WingsMenu():void {
@@ -594,6 +646,14 @@ private function accessPage2WingsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedMantisWingsLarge) && player.wings.type != Wings.MANTIS_LIKE_LARGE && player.soulforce < 200) addButtonDisabled(1, "Mantis(L)", "You not have enough Soulforce for this metamorphosis.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedMantisWingsLarge) && player.wings.type != Wings.MANTIS_LIKE_SMALL) addButtonDisabled(1, "Mantis(L)", "You not have proper type of wings for this metamorphosis.");
 	else addButtonDisabled(1, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedBatWings) && player.wings.type != Wings.BAT_ARM && player.soulforce >= 100) addButton(7, "Bat", metamorphBatWings);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedBatWings) && player.wings.type == Wings.BAT_ARM) addButtonDisabled(7, "Bat", "You already have bat wings.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedBatWings) && player.wings.type != Wings.BAT_ARM && player.soulforce < 100) addButtonDisabled(7, "Bat", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(7, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedVampireWings) && player.wings.type != Wings.VAMPIRE && player.soulforce >= 100) addButton(8, "Vampire", metamorphVampireWings);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedVampireWings) && player.wings.type == Wings.VAMPIRE) addButtonDisabled(8, "Vampire", "You already have vampire wings.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedVampireWings) && player.wings.type != Wings.VAMPIRE && player.soulforce < 100) addButtonDisabled(8, "Vampire", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(8, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage2MetamorphMenu);
 }
 private function accessPage1LegsMenu():void {
@@ -703,7 +763,11 @@ private function accessRearBodyMenu():void {
 	if (player.hasStatusEffect(StatusEffects.UnlockedRaijuMane) && player.rearBody.type != RearBody.RAIJU_MANE && player.soulforce >= 100) addButton(7, "Raiju", metamorphRaijuMane);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuMane) && player.rearBody.type == RearBody.RAIJU_MANE) addButtonDisabled(7, "Raiju", "You already have raiju mane.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuMane) && player.rearBody.type != RearBody.RAIJU_MANE && player.soulforce < 100) addButtonDisabled(7, "Raiju", "You not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(6, "???", "You not yet unlocked this metamorphosis!");
+	else addButtonDisabled(7, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedBatCollar) && player.rearBody.type != RearBody.BAT_COLLAR && player.soulforce >= 100) addButton(8, "Bat", metamorphBatCollar);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedBatCollar) && player.rearBody.type == RearBody.BAT_COLLAR) addButtonDisabled(8, "Bat", "You already have bat collar.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedBatCollar) && player.rearBody.type != RearBody.BAT_COLLAR && player.soulforce < 100) addButtonDisabled(8, "Bat", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(8, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage2MetamorphMenu);
 }/*
 private function accessHairMenu():void {
@@ -817,7 +881,77 @@ private function metamorphGoo():void {
 	
 
 	doNext(accessMetamorphMenu);
+}
+private function metamorphFur():void {
+	clearOutput();
+	player.soulforce -= 100;
+	
+
+	doNext(accessMetamorphMenu);
 }*/
+private function metamorphVampireFace():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nYou yelp as a throbbing pain takes root in the sides of your mouth. You feel your canines grow longer as your throat grow dryer. You could go for some wine right now, with a bloody steak to top it off… maybe just the steak.");
+	outputText(" Or just the blood, really. You aren’t picky. Really, it’s up to you whether just rip off some poor sod’s throat and drink straight from the tap or drink blood from a wineglass, what with <b>your new vampire fangs!</b>");
+	player.hairType = Face.VAMPIRE;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphVampireEyes():void {
+	clearOutput();
+	player.soulforce -= 100;
+	if (player.eyes.type != Eyes.HUMAN) removeOddEyes();
+	outputText("\n\nYour eyes shift, causing sunlight to suddenly become annoyingly bright for you. It takes several minutes for your eyes to get used to it and, once they do, you still have to keep them half closed, so as to not be blinded by the sun’s glare.");
+	outputText(" Upon looking at your reflection in the water, you discover your irises have taken on a blood-red shade. <b>You have Vampire Eyes.</b>");
+	player.eyes.type = Eyes.VAMPIRE;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphVampireWings():void {
+	clearOutput();
+	player.soulforce -= 100;
+	if (player.wings.type == Wings.BAT_ARM) {
+		outputText("\n\nYou cry out as your arms creak and twist, your bones breaking down and reforming in a frenzy. Your parchment-like skin begins to fall off in clumps, leaving the mess of malformed bones that are your arms right now naked for all to see. However, even as you watch, dark blood creeps over the bone, properly aligning them before healing them over, although not in their old form. Within seconds, the pain is gone, as your bones are remade into ones alike those you were born with, in structure if nothing else, the eldritch power of your blood finally ebbing away, but not before the last of it settles and turns into a brand new patch of skin. It's still sensitive, but you'll get used to it. You catch something moving on the edge of your peripheral vision, causing your hard-won instincts to kick in, muscle memory forcing you into a lunge away from whatever it was before you’re even fully aware of what’s happening. Instead of dodging with your usual grace, you stumble and roll, landing on your wings... Wait, <i>wings??</i> It seems that, while you were fascinated by your bloody shenanigans, you failed to notice that you were growing wings. Understandable, since your arms breaking themselves several times over tends to take priority over such things, attention-wise.");
+		outputText(" You shakily stand up, your balance still thrown off by the new limb, inwardly grumbling at how long is it going to take you to get used to them. Distracted as you are, both from the ordeal and your inner grumbling, your first attempt at walking inevitably ends with an intimate reunion of your face and the ground. This time, you don’t bother to keep your cursing to the confines of your own mind. <b>You will now be able to enjoy nightly flights with your brand new vampire wings.</b>");
+	}
+	else outputText("\n\nA terrible pain flares in the center of your back, a pain so intense that you black out briefly, coming back to your senses as you hit your head against the ground. You hear a horrifying ripping noise as your back stretches and tears to allow new bones to expand, black as tar and far lighter than most of the bones in your body. These new bones shift under your shoulder blade skin as you fall on all groaning in pain and clawing at the ground. In a flash of pain they violently break out of your skin sending blood everywhere as you make a chilling scream your wounds slowly closing on their own. Still panting from the pain, you take a look at your new appendage. It's a pair of large vampire wings of impressive size. Feeling chilly you fold them back on your body and you ought to admit they indeed look like a large cape. <b>You will be able to enjoy nightly flight using your brand new vampire wings.</b>");
+	player.wings.type = Wings.VAMPIRE;
+	player.wings.desc = "large bat";
+	doNext(accessMetamorphMenu);
+}
+private function metamorphVampireEars():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\n");
+	if (player.ears.type != Ears.HUMAN) outputText("Your ears revert back to their old human shape you had almost forgotten what humans ears felt like, before you can dwell on the implications of that, the changes continue. ");
+	outputText("Your ears begin to prickle as they elongate to a point, being now reminiscent of those of elves, goblins, or in your case, vampires. Aside from looking cute, you find your new ears have drastically improved your hearing. <b>Sound has become an entirely new experience now that you have pointy vampire ears!</b>");
+	player.ears.type = Ears.VAMPIRE;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphBatCollar():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nAn intense itching sets in around your neck. Bringing your hands to your neck to scratch it, you find sparse, downy fuzz. As you scratch away, it continues lengthening and growing in density until you have a collar of fur around your neck.");
+	outputText(" Well, this isn’t so bad, the scarf-like look is certainly nice, at the very least. <b>Your neck now sports a collar of fur.</b>");
+	player.hairType = RearBody.BAT_COLLAR;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphBatWings():void {
+	clearOutput();
+	player.soulforce -= 100;
+	if (player.arms.type != Arms.HUMAN) restoreHumanArms();
+	outputText("\n\nLarge bones surge out of your wrists and elbows. You can feel your bones shifting and grinding all over your body as your skeletal structure begins changing into one more fit for a flying creature, with light, hollow bones. You collapse to the ground as they begin shifting proportions becoming thinner and longer to maximize area while reducing their density. Leathery flesh begins to cover your new bony protrusions, spreading between each of them like creeping moss.");
+	outputText(" Eventually, the skin stops growing and you admire your new arms. They are very obviously bat wings. You close them around your waist, like this they could easily be mistaken for a large cape when seen from afar. <b>You now have large bat wings.</b>");
+	player.wings.type = Wings.BAT_ARM;
+	player.wings.desc = "bat";
+	doNext(accessMetamorphMenu);
+}
+private function metamorphBatEars():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nYour ears begin to prickle and burn as the skin tears and stretches, changing into wide, deep ears, perfect for catching any stray sound. Which becomes apparent when your hearing becomes far more clear than it has ever been. <b>Sound has become an entirely new experience now that you have bat ears!</b>");
+	player.ears.type = Ears.BAT;
+	doNext(accessMetamorphMenu);
+}
 private function metamorphRaijuHair():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -1064,8 +1198,8 @@ private function metamorphMantisLegs():void {
 private function metamorphMantisAntennae():void {
 	clearOutput();
 	player.soulforce -= 100;
-	if (player.antennae.type == Antennae.BEE) outputText("\n\nYour head itches momentarily as your two floppy antennae.type changes slowly into long prehensile ones similar to those seen at mantis.");
-	else outputText("\n\nYour head itches momentarily as two long prehensile antennae.type sprout from your [hair].");
+	if (player.antennae.type == Antennae.BEE) outputText("\n\nYour head itches momentarily as your two floppy antennae changes slowly into long prehensile ones similar to those seen at mantis.");
+	else outputText("\n\nYour head itches momentarily as two long prehensile antennae sprout from your [hair].");
 	player.antennae.type = Antennae.MANTIS;
 	doNext(accessMetamorphMenu);
 }
@@ -1644,8 +1778,8 @@ private function metamorphBeeLegs():void {
 private function metamorphBeeAntennae():void {
 	clearOutput();
 	player.soulforce -= 100;
-	if (player.antennae.type == Antennae.MANTIS) outputText("\n\nYour head itches momentarily as your two long prehensile antennae.type changes slowly into floppy ones similar to those seen at bees.");
-	else outputText("\n\nYour head itches momentarily as two floppy antennae.type sprout from your " + hairDescript() + ".");
+	if (player.antennae.type == Antennae.MANTIS) outputText("\n\nYour head itches momentarily as your two long prehensile antennae changes slowly into floppy ones similar to those seen at bees.");
+	else outputText("\n\nYour head itches momentarily as two floppy antennae sprout from your " + hairDescript() + ".");
 	player.antennae.type = Antennae.BEE;
 	doNext(accessMetamorphMenu);
 }
@@ -2136,4 +2270,4 @@ private function restoreHumanArms():void {
 	player.arms.type = Arms.HUMAN;
 }
 	}
-}
+}

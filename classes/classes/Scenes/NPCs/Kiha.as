@@ -33,8 +33,6 @@ public class Kiha extends Monster
 				//Determine damage - str modified by enemy toughness!
 				var damage:int = int((str + weaponAttack) - rand(player.tou) - player.armorDef);
 				damage += 5;
-				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
-				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 				if (flags[kFLAGS.KIHA_LVL_UP] >= 1) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.1));
 				damage = Math.round(damage);
 				if (player.hasStatusEffect(StatusEffects.Blizzard)) {
@@ -47,7 +45,7 @@ public class Kiha extends Monster
 				if(!SceneLib.kihaFollower.followerKiha()) outputText("the swamp");
 				else outputText("the fight");
 				outputText(". ");
-				damage = player.takeMagicDamage(damage, true);
+				damage = player.takeFireDamage(damage, true);
 				outputText("\n");
 				if(player.HP >= 1) outputText("You follow the shrill cry of \"<i>B-BAKA!</i>\" in the distance until you reach the exact location you were in a few seconds earlier, prepared to fight again.");
 			}
@@ -76,12 +74,10 @@ public class Kiha extends Monster
 			//HIT!
 			else {
 				var damage:int = int((str) - (player.armorDef));
-				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
-				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 				if (flags[kFLAGS.KIHA_LVL_UP] >= 1) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.1));
 				damage = Math.round(damage);
 				outputText("Before you can react, you're struck by the power of her blows, feeling an intense pain in your chest as each fist makes contact.  With a final thrust, you're pushed backwards onto the ground; the dragoness smiles as she pulls her axe out of the ground, her hands still steaming from the fingertips. ");
-				damage = player.takeMagicDamage(damage, true);
+				damage = player.takeFireDamage(damage, true);
 				outputText("\n");
 			}
 		}
@@ -106,12 +102,10 @@ public class Kiha extends Monster
 			}
 			else {
 				var damage:Number = Math.round(90 + rand(10) + (player.newGamePlusMod() * 30));
-				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
-				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 				if (flags[kFLAGS.KIHA_LVL_UP] >= 1) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.1));
 				damage = Math.round(damage);
 				outputText("You try to avoid the flames, but you're too slow!  The inferno slams into you, setting you alight!  You drop and roll on the ground, putting out the fires as fast as you can.  As soon as the flames are out, you climb back up, smelling of smoke and soot. ");
-				damage = player.takeMagicDamage(damage, true);
+				damage = player.takeFireDamage(damage, true);
 				outputText("\n");
 			}
 		}
@@ -126,6 +120,7 @@ public class Kiha extends Monster
 		*/
 		override protected function handleFear():Boolean
 		{
+			this.spe += statusEffectv2(StatusEffects.Fear);
 			removeStatusEffect(StatusEffects.Fear);
 			outputText("Kiha shudders for a moment, then looks your way with a clear head.  \"<i>Fear was the first thing the demons taught us to overcome.  Do you think it would stay my blade?</i>\"\n");
 			return true;
@@ -221,6 +216,7 @@ public class Kiha extends Monster
 				initWisLibSensCor(60, 50, 45, 66);
 				this.weaponAttack = 28;
 				this.armorDef = 35;
+				this.armorMDef = 25;
 				this.bonusHP = 500;
 				this.level = 21;
 			}
@@ -229,6 +225,7 @@ public class Kiha extends Monster
 				initWisLibSensCor(70, 70, 55, 66);
 				this.weaponAttack = 38;
 				this.armorDef = 50;
+				this.armorMDef = 30;
 				this.bonusHP = 600;
 				this.level = 27;
 			}
@@ -237,6 +234,7 @@ public class Kiha extends Monster
 				initWisLibSensCor(80, 90, 65, 66);
 				this.weaponAttack = 48;
 				this.armorDef = 65;
+				this.armorMDef = 35;
 				this.bonusHP = 700;
 				this.level = 33;
 			}
@@ -245,6 +243,7 @@ public class Kiha extends Monster
 				initWisLibSensCor(90, 110, 75, 66);
 				this.weaponAttack = 58;
 				this.armorDef = 80;
+				this.armorMDef = 40;
 				this.bonusHP = 800;
 				this.level = 39;
 			}
@@ -253,6 +252,7 @@ public class Kiha extends Monster
 				initWisLibSensCor(100, 130, 85, 66);
 				this.weaponAttack = 68;
 				this.armorDef = 95;
+				this.armorMDef = 45;
 				this.bonusHP = 900;
 				this.level = 45;
 			}
@@ -261,6 +261,7 @@ public class Kiha extends Monster
 				initWisLibSensCor(110, 150, 95, 66);
 				this.weaponAttack = 78;
 				this.armorDef = 110;
+				this.armorMDef = 50;
 				this.bonusHP = 1000;
 				this.level = 51;
 			}
@@ -269,6 +270,7 @@ public class Kiha extends Monster
 				initWisLibSensCor(120, 170, 105, 66);
 				this.weaponAttack = 88;
 				this.armorDef = 125;
+				this.armorMDef = 55;
 				this.bonusHP = 1200;
 				this.level = 57;
 			}
@@ -277,6 +279,7 @@ public class Kiha extends Monster
 				initWisLibSensCor(130, 190, 115, 66);
 				this.weaponAttack = 98;
 				this.armorDef = 140;
+				this.armorMDef = 60;
 				this.bonusHP = 1400;
 				this.level = 63;
 			}

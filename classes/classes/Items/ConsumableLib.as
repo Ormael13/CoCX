@@ -127,7 +127,7 @@ public final class ConsumableLib extends BaseContent
 		public const LG_SFRP:SimpleConsumable = mk("LGSFRP", "LGSFRPill", "a low-grade Soulforce Recovery Pill", 5, "This low-grade recovery pill could help you recover some of the spent soulforce.  Naturaly it won't be much but in tight situation it could make a difference between won or lost fight.", m.lowgradesoulforcerecoverypill);
 		public const MG_SFRP:SimpleConsumable = mk("MGSFRP", "MGSFRPill", "a mid-grade Soulforce Recovery Pill", 30, "This mid-grade recovery pill could help you recover some of the spent soulforce.  It won't be much but still a few more time more than after using low-grade one version of this pill.", m.midgradesoulforcerecoverypill);
 		public const HG_SFRP:SimpleConsumable = mk("HGSFRP", "HGSFRPill", "a high-grade Soulforce Recovery Pill", 180, "This high-grade recovery pill could hep you recover some of the spent soulforce.  It can restore significant amount of soulforce compared to lower grade pills but still it's only an aid not a replacement for regular cultivation.", m.highgradesoulforcerecoverypill);
-		//public const SG_SFRP:SimpleConsumable = mk("SGSFRP", "SuperiorGradeSFRecovPill", "a superior-grade Soulforce Recovery Pill", m.superiorgradesoulforcerecoverypill, "This superior-grade recovery pill could hep you recover some of the spent soulforce.  Best possible to obtain pill to fast recover soulforce in tight situations when you not have time to cultivate.", 1080);
+		//public const SG_SFRP:SimpleConsumable = mk("SGSFRP", "SuperiorGradeSFRecovPill", "a superior-grade Soulforce Recovery Pill", 1080, "This superior-grade recovery pill could hep you recover some of the spent soulforce.  Best possible to obtain pill to fast recover soulforce in tight situations when you not have time to cultivate.", m.superiorgradesoulforcerecoverypill);
 
 		//SOUL SKILLS MANUALS
 		public const TRITMAN:SimpleConsumable = mk("TRITMAN", "TTManual", "a manual for Triple Thrust Soulskill", 50, "This manual would teach you how to use Triple Thrust soulskill.", m.triplethrustmanual);
@@ -147,8 +147,8 @@ public final class ConsumableLib extends BaseContent
 		public const P_PEARL:SimpleConsumable = mk("P.Pearl", "P.Pearl", "a pure pearl", 1000, "Marae gave you this pure pearl as a reward for shutting down the demonic factory.", m.purePearl);
 		public const EZEKFRU:SimpleConsumable = mk("EzekFru", "EzekielFruit", "a simple looking fruit", 300, "Evangeline gave you this fruit as means of showing her gratitude.", m.ezekielfruit);
 		public const E3PEARL:SimpleConsumable = mk("E3Pearl", "Elemen3CPearl", "a simple looking three-colored pearl", 200, "Pearl formed after defeating group of golems. It's surrounded by faint aura of elements.", m.lowgradeelementalPearl);
-		public const E_PEARL:SimpleConsumable = mk("E5Pearl", "Elemen5CPearl", "a simple looking five-colored pearl", 400, "Pearl formed after defeating . It's surrounded by weak aura of elements.", m.middlegradeelementalPearl);
-		public const E7PEARL:SimpleConsumable = mk("E7Pearl", "Elemen7CPearl", "a simple looking seven-colored pearl", 800, "Pearl formed after defeating . It's surrounded by aura of elements.", m.highgradeelementalPearl);
+		public const E_PEARL:SimpleConsumable = mk("E5Pearl", "Elemen5CPearl", "a simple looking five-colored pearl", 400, "Pearl formed after defeating obsidian gargoyle. It's surrounded by weak aura of elements.", m.middlegradeelementalPearl);
+		public const E7PEARL:SimpleConsumable = mk("E7Pearl", "Elemen7CPearl", "a simple looking seven-colored pearl", 800, "Pearl formed after defeating living statue. It's surrounded by aura of elements.", m.highgradeelementalPearl);
 
 		//NON-TRANSFORMATIVE ITEMS
 		public const AGILI_E:SimpleConsumable = mk("Agil.E.", "Agility E.", "an agility elixir", 6, "This greenish elixir is supposed to increase the user’s natural swiftness and agility.", m.agilityElixir);
@@ -158,11 +158,12 @@ public final class ConsumableLib extends BaseContent
 		public const C__MINT:Consumable = new Mint();
 		public const CERUL_P:Consumable = new CeruleanPotion();
 		public const COAL___:Consumable = new Coal();
+		public const CFISHS:SimpleConsumable = mk("CFishS.", "Cold Fish S.", "a bowl of cold fish soup", 20, "A soup made with fishes from the glacial rift. It is served cold to preserve the flavor and supposed calming effect which act as a lustkiller.", m.coldFishSoup);
 	//	public const DAO_DEW:SimpleConsumable = mk("Dao Dew", "Dao Dew", "a cup of vixen tea", 15, "An exotic tea made by kitsunes. This herbal infusion is rumored to improve your expertise and expand your sexual knowledge.", m.daoDew);
 		public const DEBIMBO:DeBimbo = new DeBimbo();
 		public const EXTSERM:HairExtensionSerum = new HairExtensionSerum();
 		public const F_DRAFT:SimpleConsumable = mk("F.Draft", "FuckDraft", "a vial of roiling red fluid labeled \"Fuck Draft\"", 6, "This vial of red fluid bubbles constantly inside the glass, as if eager to escape.  It smells very strongly, though its odor is difficult to identify.  The word \"Fuck\" is inscribed on the side of the vial.", curry(m.lustDraft, true));
-		public const INCOINS:SimpleConsumable = mk("incOIns", "incenOfIns", "an incense of Insight", 15, "These sticks, when burned, are rumored to fill an area with an incense that allows for deep meditation and granting greater insight.", m.incenseOfInsight);
+		public const INCOINS:SimpleConsumable = mk("IncOIns", "IncenOfIns", "an incense of Insight", 15, "These sticks, when burned, are rumored to fill an area with an incense that allows for deep meditation and granting greater insight.", m.incenseOfInsight);
 		public const H_PILL:Consumable = new HealPill();
 		public const HRBCNT:Consumable = new HerbalContraceptive();
 		public const ICICLE_:Consumable = new IceShard();

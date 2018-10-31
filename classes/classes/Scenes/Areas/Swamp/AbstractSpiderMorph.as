@@ -22,7 +22,7 @@ public class AbstractSpiderMorph extends Monster
 			else if(!player.hasStatusEffect(StatusEffects.WebSilence) && rand(3) == 0) {
 				spiderSilence();
 			}
-			else if(!player.hasStatusEffect(StatusEffects.Disarmed) && player.weaponName != "fists" && rand(3) == 0) {
+			else if(!player.hasStatusEffect(StatusEffects.Disarmed) && !player.isFistOrFistWeapon() && rand(3) == 0) {
 				spiderDisarm();
 			}
 			else if(rand(2) == 0 || player.spe < 2) getBitten();

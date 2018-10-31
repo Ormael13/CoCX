@@ -14,12 +14,13 @@ import classes.ItemType;
 	{
 		public function MaraeArmor() 
 		{
-			super("TB.Armr","T.B.Armor","tentacled bark armor","a suit of tentacled bark armor",55,6600,"This suit of armor is finely made from the white bark from corrupted Marae you've defeated. It comes with tentacles though.","Heavy");
+			super("TB.Armr","T.B.Armor","tentacled bark armor","a suit of tentacled bark armor",55,55,13200,"This suit of armor is finely made from the white bark from corrupted Marae you've defeated. It comes with tentacles though.","Heavy");
 		}
 		//każde 1 armor point kosztuje 120
 		override public function get supportsBulge():Boolean { return true; }
 		
 		override public function get def():Number { return 5 + int(game.player.cor / 2); }
+		override public function get mdef():Number { return 5 + int(game.player.cor / 2); }
 		
 		override public function useText():void
 		{

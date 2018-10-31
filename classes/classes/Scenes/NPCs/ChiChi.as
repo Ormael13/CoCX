@@ -210,6 +210,7 @@ use namespace CoC;
 			this.weaponVerb="punch";
 			this.armorName = "qipao";
 			this.armorDef = 1;
+			this.armorMDef = 10;
 			this.bonusHP = 25000;
 			this.bonusLust = 20;
 			this.lust = 30;

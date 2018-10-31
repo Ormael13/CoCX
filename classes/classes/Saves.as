@@ -630,10 +630,10 @@ public function savePermObject(isFile:Boolean):void {
 		saveFile.data.flags[kFLAGS.SFW_MODE] = flags[kFLAGS.SFW_MODE];
 		saveFile.data.flags[kFLAGS.WATERSPORTS_ENABLED] = flags[kFLAGS.WATERSPORTS_ENABLED];
 		saveFile.data.flags[kFLAGS.USE_12_HOURS] = flags[kFLAGS.USE_12_HOURS];
+		saveFile.data.flags[kFLAGS.USE_METRICS] = flags[kFLAGS.USE_METRICS];
 		saveFile.data.flags[kFLAGS.AUTO_LEVEL] = flags[kFLAGS.AUTO_LEVEL];
-
-		saveFile.data.settings = [];
-		saveFile.data.settings.useMetrics = Measurements.useMetrics;
+		//saveFile.data.settings = [];
+		//saveFile.data.settings.useMetrics = Measurements.useMetrics;
 		//achievements
 		saveFile.data.achievements = [];
 		for (i = 0; i < achievements.length; i++)
@@ -679,11 +679,10 @@ public function loadPermObject():void {
 			if (saveFile.data.flags[kFLAGS.SFW_MODE] != undefined) flags[kFLAGS.SFW_MODE] = saveFile.data.flags[kFLAGS.SFW_MODE];
 			if (saveFile.data.flags[kFLAGS.WATERSPORTS_ENABLED] != undefined) flags[kFLAGS.WATERSPORTS_ENABLED] = saveFile.data.flags[kFLAGS.WATERSPORTS_ENABLED];
 			if (saveFile.data.flags[kFLAGS.USE_12_HOURS] != undefined) flags[kFLAGS.USE_12_HOURS] = saveFile.data.flags[kFLAGS.USE_12_HOURS];
+			if (saveFile.data.flags[kFLAGS.USE_METRICS] != undefined) flags[kFLAGS.USE_METRICS] = saveFile.data.flags[kFLAGS.USE_METRICS];
 			if (saveFile.data.flags[kFLAGS.AUTO_LEVEL] != undefined) flags[kFLAGS.AUTO_LEVEL] = saveFile.data.flags[kFLAGS.AUTO_LEVEL];
 		}
-		if(saveFile.data.settings){
-			if(saveFile.data.settings.useMetrics != undefined){Measurements.useMetrics = saveFile.data.settings.useMetrics;}
-		}
+		//if(saveFile.data.settings){if(saveFile.data.settings.useMetrics != undefined){Measurements.useMetrics = saveFile.data.settings.useMetrics;}}
 		//achievements, will check if achievement exists.
 		if (saveFile.data.achievements) {
 			for (var i:int = 0; i < achievements.length; i++)
@@ -800,6 +799,8 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.armorId = player.armor.id;
 		saveFile.data.weaponId = player.weapon.id;
 		saveFile.data.weaponRangeId = player.weaponRange.id;
+		saveFile.data.headJewelryId = player.headJewelry.id;
+		saveFile.data.necklaceId = player.necklace.id;
 		saveFile.data.jewelryId = player.jewelry.id;
 		saveFile.data.shieldId = player.shield.id;
 		saveFile.data.upperGarmentId = player.upperGarment.id;
@@ -1555,6 +1556,30 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			for each (itype in ItemType.getItemLibrary()) {
 				if (itype is Shield && (itype as Shield).name == saveFile.data.shieldName){
 					player.setShieldHiddenField(itype as Shield || ShieldLib.NOTHING);
+					found = true;
+					break;
+				}
+			}
+		}
+		if (saveFile.data.headJewelryId){
+			player.setHeadJewelryHiddenField((ItemType.lookupItem(saveFile.data.headJewelryId) as HeadJewelry) || HeadJewelryLib.NOTHING);
+		} else {
+			player.setHeadJewelry(HeadJewelryLib.NOTHING);
+			for each (itype in ItemType.getItemLibrary()) {
+				if (itype is HeadJewelry && (itype as HeadJewelry).name == saveFile.data.headjewelryName){
+					player.setHeadJewelryHiddenField(itype as HeadJewelry || HeadJewelryLib.NOTHING);
+					found = true;
+					break;
+				}
+			}
+		}
+		if (saveFile.data.necklaceId){
+			player.setNecklaceHiddenField((ItemType.lookupItem(saveFile.data.necklaceId) as Necklace) || NecklaceLib.NOTHING);
+		} else {
+			player.setNecklace(NecklaceLib.NOTHING);
+			for each (itype in ItemType.getItemLibrary()) {
+				if (itype is Necklace && (itype as Necklace).name == saveFile.data.necklaceName){
+					player.setNecklaceHiddenField(itype as Necklace || NecklaceLib.NOTHING);
 					found = true;
 					break;
 				}
@@ -2595,3 +2620,4 @@ public function unFuckSave():void
     }
 }
 }
+

@@ -153,8 +153,8 @@ public class BeeHoney extends Consumable
 			}
 			//Antennae
 			if (changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && (player.antennae.type == Antennae.NONE || player.antennae.type == Antennae.MANTIS) && player.horns.count == 0 && Utils.rand(3) == 0) {
-				if (player.antennae.type == Antennae.MANTIS) outputText("\n\nYour head itches momentarily as your two long prehensile antennae.type changes slowly into floppy ones similar to those seen at bees.");
-				else outputText("\n\nYour head itches momentarily as two floppy antennae.type sprout from your " + Appearance.hairDescription(player) + ".");
+				if (player.antennae.type == Antennae.MANTIS) outputText("\n\nYour head itches momentarily as your two long prehensile antennae changes slowly into floppy ones similar to those seen at bees.");
+				else outputText("\n\nYour head itches momentarily as two floppy antennae sprout from your " + Appearance.hairDescription(player) + ".");
 				mutations.setAntennae(Antennae.BEE);
 				changes++;
 			}
@@ -165,15 +165,17 @@ public class BeeHoney extends Consumable
 				changes++;
 			}
 			// Chitin
-			if (changes < changeLimit && (player.skin.coverage != Skin.COVERAGE_LOW
-				|| player.skin.coat.type != Skin.CHITIN
-				|| player.skin.coat.pattern != Skin.PATTERN_BEE_STRIPES)) {
+			if (changes < changeLimit && (player.skin.coverage != Skin.COVERAGE_LOW || player.skin.coat.type != Skin.CHITIN || player.skin.coat.pattern != Skin.PATTERN_BEE_STRIPES)) {
 				player.skin.growCoat(Skin.CHITIN,{
 					color:"yellow",
 					color2:"black",
 					pattern:Skin.PATTERN_BEE_STRIPES
 				},Skin.COVERAGE_LOW);
 				// TODO grow chitin text
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedChitin)) {
+					outputText("\n\n<b>Genetic Memory: Chitin - Memorized!</b>\n\n");
+					player.createStatusEffect(StatusEffects.UnlockedChitin, 0, 0, 0, 0);
+				}
 				changes++;
 			}
 			//Bee Legs

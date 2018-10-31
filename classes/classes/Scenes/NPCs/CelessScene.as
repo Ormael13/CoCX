@@ -465,6 +465,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		}
 		player.createPerk(PerkLib.BicornBlessing, 0, 0, 0, 0);
 		player.cor = 100;
+		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 		player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);
 		doNext(camp.returnToCampUseOneHour);
 		_age = _ageDidPregnancy;

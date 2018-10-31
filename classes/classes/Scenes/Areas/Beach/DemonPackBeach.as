@@ -64,6 +64,7 @@ public class DemonPackBeach extends Monster
 			this.weaponAttack = 69;
 			this.armorName = "demonic skin";
 			this.armorDef = 55;
+			this.armorMDef = 10;
 			this.bonusHP = 200;
 			this.bonusLust = 200;
 			this.lust = 30;

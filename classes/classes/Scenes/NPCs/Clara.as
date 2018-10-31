@@ -157,6 +157,7 @@ public class Clara extends Monster
 			this.weaponAttack = 16;
 			this.armorName = "tough hide";
 			this.armorDef = 6;
+			this.armorMDef = 1;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 12;
 			this.bonusHP = 30;

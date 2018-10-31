@@ -140,20 +140,16 @@ public class Akbal extends Monster
 				if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 					player.addStatusValue(StatusEffects.Blizzard, 1, -1);
 					var damage2:int = inte / 4;
-					if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage2 *= 3;
-					if (player.findPerk(PerkLib.FireAffinity) >= 0) damage2 *= 0.3;
 					damage2 = Math.round(damage2);
 					outputText("Surrounding your blizzard absorbed huge part of the attack at the price of loosing some of it protective power.\n");
 					outputText("You are burned badly by the flames! ");
-					damage2 = player.takeMagicDamage(damage2, true);
+					damage2 = player.takeFireDamage(damage2, true);
 					return;
 				}
 				var damage:int = inte;
-				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
-				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 				damage = Math.round(damage);
 				outputText("You are burned badly by the flames! ");
-				damage = player.takeMagicDamage(damage, true);
+				damage = player.takeFireDamage(damage, true);
 			}
 		}
 		
@@ -200,6 +196,7 @@ public class Akbal extends Monster
 			this.weaponAttack = 17;
 			this.armorName = "shimmering pelt";
 			this.armorDef = 10;
+			this.armorMDef = 20;
 			this.bonusHP = 100;
 			this.bonusLust = 40;
 			this.lust = 30;

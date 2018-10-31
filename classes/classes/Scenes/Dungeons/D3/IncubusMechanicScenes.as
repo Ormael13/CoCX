@@ -339,7 +339,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			player.orgasm();
 			dynStats("cor+", 5);
 
-cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			cleanupAfterCombat(SceneLib.d3.resumeFromFight);
         }
 		
 		private const MECHANIC_DEMON_COCK:int = 0;
@@ -519,7 +519,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			outputText("\n\nHe's a demon. Maybe he'll actually find his way to your camp to be your fucktoy. More likely he was just saying whatever would save his hide and sharing his excessive perversions with you. You wouldn't mind him fucking you every morning, would you?");
 
 			outputText("\n\nShaking your head, you clear away the errant thoughts and focus on the battles to come.");
-
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			player.orgasm();
 			dynStats("cor+", 5);
 

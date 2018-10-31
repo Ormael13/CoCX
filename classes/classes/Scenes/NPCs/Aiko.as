@@ -47,6 +47,7 @@ use namespace CoC;
 			this.weaponRangeAttack = 30;
 			this.armorName = "robes";
 			this.armorDef = 5;
+			this.armorMDef = 30;
 			this.bonusHP = 120;
 			this.bonusLust = 20;
 			this.lust = 20;

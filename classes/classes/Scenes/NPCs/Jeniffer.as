@@ -81,6 +81,7 @@ package classes.Scenes.NPCs
 			this.weaponAttack = 36;
 			this.armorName = "stone covered by soulmetal plating";
 			this.armorDef = 45;
+			this.armorMDef = 45;
 			this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);

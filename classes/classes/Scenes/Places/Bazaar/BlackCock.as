@@ -1219,6 +1219,7 @@ import classes.lists.Gender;
 				outputText("\n\nThe Rhino puts a hand covered in your juices in front of your [face], \"<i>Lick it.</i>\" He commands and in your post-orgasmic state you don't even think about it, you just stick your [tongue] out and lap up a bit of your own cum. He tugs his giant dick from your wrecked ass and gives it a gentle palming, a silent thank you for the quick break from work.");
 			}
 			outputText("\n\nAs he helps you clean up he tells you how much he likes your ass. After chatting for a little bit he tells you he has to get back to work. As you walk out the tent flap all eyes are on you. After a few moments one of the satyrs sticks his fingers to his lips and gives a high pitched wolf whistle. Some of the tables with people in them erupt in stomping and clapping. Harry's harpy wife catches your eye and gives you a conspiratorial wink, rubbing her pussy through her tight little cut off pants as she watches you leave.");
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			flags[kFLAGS.BLACK_COCK_HARRY_SEX_COUNTER]++;
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
@@ -1390,6 +1391,7 @@ import classes.lists.Gender;
 			player.orgasm();
 			fatigue(25);
 			dynStats("lib", 1, "sens", 2, "cor", 1);
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			if (player.hasVagina()) player.knockUp(PregnancyStore.PREGNANCY_SATYR, PregnancyStore.INCUBATION_SATYR);
 			player.buttKnockUp(PregnancyStore.PREGNANCY_SATYR, PregnancyStore.INCUBATION_SATYR);
 			doNext(camp.returnToCampUseOneHour);
@@ -1885,6 +1887,10 @@ import classes.lists.Gender;
 			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && !player.hasFur()) {
 				outputText("\n\nYou shiver, feeling a bit cold. Just as you begin to wish for something to cover up with, it seems your request is granted; <b>fur begins to grow all over your body!</b> You tug at the tufts in alarm, but they're firmly rooted and... actually pretty soft. Huh. ");
 				player.skin.growFur({color:"brown"});
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+					outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
+					player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
+				}
 				changes++;
 			}
 			//Gain Echidna ears

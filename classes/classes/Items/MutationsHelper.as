@@ -318,6 +318,7 @@ import classes.BodyParts.Wings;
 		[Arms.RED_PANDA, null],
 		[Arms.SALAMANDER, StatusEffects.UnlockedSalamanderArms],
 		[Arms.SHARK, StatusEffects.UnlockedSharkArms],
+		[Arms.SPHINX, null],
 		[Arms.SPIDER, StatusEffects.UnlockedSpiderArms],
 		[Arms.WOLF, null],
 		[Arms.YETI, null],
@@ -328,6 +329,7 @@ import classes.BodyParts.Wings;
 	}
 	private const METAMORPH_EARS:Object = createMapFromPairs([
 		[Ears.AVIAN, null],
+		[Ears.BAT, StatusEffects.UnlockedBatEars],
 		[Ears.BUNNY, null],
 		[Ears.CAT, null],
 		[Ears.COW, StatusEffects.UnlockedCowEars],
@@ -354,6 +356,7 @@ import classes.BodyParts.Wings;
 		[Ears.RED_PANDA, null],
 		[Ears.RHINO, null],
 		[Ears.SNAKE, StatusEffects.UnlockedSnakeEars],
+		[Ears.VAMPIRE, StatusEffects.UnlockedVampireEars],
 		[Ears.WEASEL, StatusEffects.UnlockedRaijuEars],
 		[Ears.WOLF, null],
 		[Ears.YETI, null],
@@ -379,11 +382,13 @@ import classes.BodyParts.Wings;
 		[Eyes.GORGON, StatusEffects.UnlockedGorgonEyes],
 		[Eyes.GRYPHON, null],
 		[Eyes.HUMAN, null],
+		[Eyes.INFERNAL, null],
 		[Eyes.MANTICORE, null],
 		[Eyes.ONI, StatusEffects.UnlockedOniEyes],
 		[Eyes.RAIJU, StatusEffects.UnlockedRaijuEyes],
 		[Eyes.REPTILIAN, StatusEffects.UnlockedLizardEyes],
 		[Eyes.SNAKE, StatusEffects.UnlockedSnakeEyes],
+		[Eyes.VAMPIRE, StatusEffects.UnlockedVampireEyes],
 	]);
 
 	public function setFaceType(faceType:int):Boolean {
@@ -408,7 +413,7 @@ import classes.BodyParts.Wings;
 		[Face.ECHIDNA, null],
 		[Face.FERRET, null],
 		[Face.FERRET_MASK, null],
-		[Face.FOX, null],
+		[Face.FOX, StatusEffects.UnlockedFoxFace],
 		[Face.HORSE, null],
 		[Face.HUMAN, null],
 		[Face.JABBERWOCKY, null],
@@ -429,6 +434,7 @@ import classes.BodyParts.Wings;
 		[Face.SHARK_TEETH, StatusEffects.UnlockedSharkTeeth],
 		[Face.SNAKE_FANGS, StatusEffects.UnlockedSnakeFangs],
 		[Face.SPIDER_FANGS, StatusEffects.UnlockedSpiderFangs],
+		[Face.VAMPIRE, StatusEffects.UnlockedVampireFace],
 		[Face.WOLF, null],
 		[Face.WOLF_FANGS, null],
 		[Face.YETI_FANGS, null],
@@ -449,6 +455,7 @@ import classes.BodyParts.Wings;
 	}
 	private const METAMORPH_HAIR_TYPES:Object = createMapFromPairs([
 		[Hair.ANEMONE, null],
+		[Hair.BURNING, null],
 		[Hair.FEATHER, StatusEffects.UnlockedHarpyHair],
 		[Hair.FLUFFY, null],
 		[Hair.GHOST, null],
@@ -543,6 +550,7 @@ import classes.BodyParts.Wings;
 		return setBodyPartType("rearBody.type", METAMORPH_REAR_BODIES, rearBody);
 	}
 	private const METAMORPH_REAR_BODIES:Object = createMapFromPairs([
+		[RearBody.BAT_COLLAR, StatusEffects.UnlockedBatCollar],
 		[RearBody.BEHEMOTH, null],
 		[RearBody.DRACONIC_MANE, null],
 		[RearBody.DRACONIC_SPIKES, null],
@@ -590,6 +598,7 @@ import classes.BodyParts.Wings;
 		[Tail.AVIAN, null],
 		[Tail.BEE_ABDOMEN, StatusEffects.UnlockedBeeTail],
 		[Tail.BEHEMOTH, null],
+		[Tail.BURNING, null],
 		[Tail.CAT, null],
 		[Tail.COW, StatusEffects.UnlockedCowTail],
 		[Tail.DEER, null],

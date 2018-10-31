@@ -1583,13 +1583,17 @@ use namespace CoC;
 					outputText("While you do have all the ingredient required as it states in the formula you feel you don't understand magic well enough yet to risk the ritual. Who knows what fate awaits you should you fail it. You resolve to come back when you have enough arcane knowledge to attempt this.");
 					doNext(templeBasement);
 				}
+				else if (player.isPregnant() || player.isButtPregnant()) {
+					outputText("You can't become Gargoyle while pregnant. Come back after you give a birth.");
+					doNext(templeBasement);
+				}
 				else {
 					outputText("You think you’ve gathered all you need and proceed to move the statue up from the basement to the cathedral center next to the altar where it ought to be. You ask Sapphire to help you carry it, to which she complies, albeit she throws you several worried looks.");
 					outputText("\n\n<b>Are you sure about this? There's no turning back past this point.</b>");
 					menu();
 					addButton(0, "No", becomingGargoyleNo);
-				//	addButton(1, "Yes", becomingGargoyleYes);
-					
+					addButton(1, "Yes", becomingGargoyleYes);
+					addButton(2, "Back", currentStateOfStatue);
 				}
 			}
 			else {
@@ -1677,6 +1681,7 @@ use namespace CoC;
 				player.removePerk(PerkLib.Feeder);
 			}
 			player.removeVagina(0, 1);
+			if (player.hasStatusEffect(StatusEffects.Infested)) player.removeStatusEffect(StatusEffects.Infested);
 			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker3) == 1) player.clitLength = 0;
 			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker3) == 2) {
 				player.createVagina();
@@ -1700,6 +1705,226 @@ use namespace CoC;
 				player.balls = 2;
 				player.ballSize = player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) - 1;
 			}
+			if (player.hasPerk(PerkLib.BlackHeart)) {
+				player.removePerk(PerkLib.BlackHeart);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.BlackHeartEvolved)) {
+				player.removePerk(PerkLib.BlackHeartEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.BlackHeartFinalForm)) {
+				player.removePerk(PerkLib.BlackHeartFinalForm);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.CatlikeNimbleness)) {
+				player.removePerk(PerkLib.CatlikeNimbleness);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.CatlikeNimblenessEvolved)) {
+				player.removePerk(PerkLib.CatlikeNimblenessEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.DraconicLungs)) {
+				player.removePerk(PerkLib.DraconicLungs);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.DraconicLungsEvolved)) {
+				player.removePerk(PerkLib.DraconicLungsEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) {
+				player.removePerk(PerkLib.DraconicLungsFinalForm);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.GorgonsEyes)) {
+				player.removePerk(PerkLib.GorgonsEyes);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.GorgonsEyesEvolved)) {
+				player.removePerk(PerkLib.GorgonsEyesEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.HollowFangs)) {
+				player.removePerk(PerkLib.HollowFangs);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.HollowFangsEvolved)) {
+				player.removePerk(PerkLib.HollowFangsEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.HollowFangsFinalForm)) {
+				player.removePerk(PerkLib.HollowFangsFinalForm);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.KitsuneThyroidGland)) {
+				player.removePerk(PerkLib.KitsuneThyroidGland);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.KitsuneThyroidGlandEvolved)) {
+				player.removePerk(PerkLib.KitsuneThyroidGlandEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.KitsuneThyroidGlandFinalForm)) {
+				player.removePerk(PerkLib.KitsuneThyroidGlandFinalForm);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.LactaBovinaOvaries)) {
+				player.removePerk(PerkLib.LactaBovinaOvaries);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.LactaBovinaOvariesEvolved)) {
+				player.removePerk(PerkLib.LactaBovinaOvariesEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.LactaBovinaOvariesFinalForm)) {
+				player.removePerk(PerkLib.LactaBovinaOvariesFinalForm);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.LizanMarrow)) {
+				player.removePerk(PerkLib.LizanMarrow);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.LizanMarrowEvolved)) {
+				player.removePerk(PerkLib.LizanMarrowEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.ManticoreMetabolism)) {
+				player.removePerk(PerkLib.ManticoreMetabolism);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.ManticoreMetabolismEvolved)) {
+				player.removePerk(PerkLib.ManticoreMetabolismEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.MantislikeAgility)) {
+				player.removePerk(PerkLib.MantislikeAgility);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.MantislikeAgilityEvolved)) {
+				player.removePerk(PerkLib.MantislikeAgilityEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.MinotaurTesticles)) {
+				player.removePerk(PerkLib.MinotaurTesticles);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.MinotaurTesticlesEvolved)) {
+				player.removePerk(PerkLib.MinotaurTesticlesEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.MinotaurTesticlesFinalForm)) {
+				player.removePerk(PerkLib.MinotaurTesticlesFinalForm);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.ObsidianHeart)) {
+				player.removePerk(PerkLib.ObsidianHeart);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.ObsidianHeartEvolved)) {
+				player.removePerk(PerkLib.ObsidianHeartEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.ObsidianHeartFinalForm)) {
+				player.removePerk(PerkLib.ObsidianHeartFinalForm);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.OniMusculature)) {
+				player.removePerk(PerkLib.OniMusculature);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.OniMusculatureEvolved)) {
+				player.removePerk(PerkLib.OniMusculatureEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.OniMusculatureFinalForm)) {
+				player.removePerk(PerkLib.OniMusculatureFinalForm);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.SalamanderAdrenalGlands)) {
+				player.removePerk(PerkLib.SalamanderAdrenalGlands);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.SalamanderAdrenalGlandsEvolved)) {
+				player.removePerk(PerkLib.SalamanderAdrenalGlandsEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.ScyllaInkGlands)) {
+				player.removePerk(PerkLib.ScyllaInkGlands);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.TrachealSystem)) {
+				player.removePerk(PerkLib.TrachealSystem);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.TrachealSystemEvolved)) {
+				player.removePerk(PerkLib.TrachealSystemEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.TrachealSystemFinalForm)) {
+				player.removePerk(PerkLib.TrachealSystemFinalForm);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.VampiricBloodsteam)) {
+				player.removePerk(PerkLib.VampiricBloodsteam);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.VampiricBloodsteamEvolved)) {
+				player.removePerk(PerkLib.VampiricBloodsteamEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.VampiricBloodsteamFinalForm)) {
+				player.removePerk(PerkLib.VampiricBloodsteamFinalForm);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.VenomGlands)) {
+				player.removePerk(PerkLib.VenomGlands);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.VenomGlandsEvolved)) {
+				player.removePerk(PerkLib.VenomGlandsEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.VenomGlandsFinalForm)) {
+				player.removePerk(PerkLib.VenomGlandsFinalForm);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodyInitialStage)){
+				player.removePerk(PerkLib.ChimericalBodyInitialStage);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodySemiBasicStage)){
+				player.removePerk(PerkLib.ChimericalBodySemiBasicStage);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodyBasicStage)){
+				player.removePerk(PerkLib.ChimericalBodyBasicStage);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodySemiAdvancedStage)){
+				player.removePerk(PerkLib.ChimericalBodySemiAdvancedStage);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodyAdvancedStage)){
+				player.removePerk(PerkLib.ChimericalBodyAdvancedStage);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStage)){
+				player.removePerk(PerkLib.ChimericalBodySemiSuperiorStage);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodySuperiorStage)){
+				player.removePerk(PerkLib.ChimericalBodySuperiorStage);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodySemiPeerlessStage)){
+				player.removePerk(PerkLib.ChimericalBodySemiPeerlessStage);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodyPeerlessStage)) {
+				player.removePerk(PerkLib.ChimericalBodyPeerlessStage);
+				player.perkPoints += 1;
+			}
 			becomingGargoyleYes3();
 		}
 		public function becomingGargoyleYes3():void {
@@ -1716,12 +1941,13 @@ use namespace CoC;
 				outputText("<b>Gain perk: Gargoyle - Need to gain sustenance from soulforce to stay alive.</b>\n\n");
 			}
 			else {
-				outputText("Something went really wrong in the ritual. You're starting to crave fluids… any fluids and particularly cum and milk! Without an input of these, you feel you're gonna lose strength and eventually run out of energy, turning into an immobile ordinary statue! Worse yet, lust seems to creep up your mind like an uncontrollable wave. You need sex and you need it now!\n\n");
+				outputText("Something went really wrong in the ritual. You're starting to crave fluids... any fluids and particularly cum and milk! Without an input of these, you feel you're gonna lose strength and eventually run out of energy, turning into an immobile ordinary statue! Worse yet, lust seems to creep up your mind like an uncontrollable wave. You need sex and you need it now!\n\n");
 				outputText("<b>Gain perk: Corrupted Gargoyle - You need constant intakes of sexual fluids to stay alive.</b>\n\n");
 				player.lust = player.maxLust();
 			}
 			if (flags[kFLAGS.HUNGER_ENABLED] == 0) flags[kFLAGS.HUNGER_ENABLED] = 0.5;
-			player.createPerk(PerkLib.TransformationImmunity,0,0,0,0);
+			player.createPerk(PerkLib.TransformationImmunity, 0, 0, 0, 0);
+			player.destroyItems(useables.SOULGEM, 1);
 			outputText("After the weird feelings subside, you pick up what is your actual pedestal and move it to your camp.\n\n");
 			doNext(camp.returnToCampUseFourHours);
 		}

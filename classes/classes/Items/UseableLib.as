@@ -58,6 +58,12 @@ use namespace CoC;
 		public const DEMSKLL:SimpleUseable = new SimpleUseable("DemSkll", "DemonSkull", "a demon skull", 50, 
 			"A skull taken from a slain demon.",
 			"You look at the demon skull.  A pair of horns protrude from the skull.  You admire the overall frame of the skull yet you find no obvious uses for it.");
+		public const SEVTENT:SimpleUseable = new SimpleUseable("SevTent", "SevTent", "a severed tentacle", 50, 
+			"A severed tentacle taken from a slain tentacle beast.",
+			"You look at the severed tentacle skull.  It certain look a bit of...deformed more than any other tentacle you seen so far.  Is it natural occuring or forced mutation?");
+		public const FIMPSKL:SimpleUseable = new SimpleUseable("FImpSkl", "FImpSkul", "a feral imp skull", 25, 
+			"A skull taken from a slain feral imp.",
+			"You look at the feral imp skull.  A two pairs of horns protrude from the deformed skull.  You admire the overall frame of the skull yet you find no obvious uses for it.");
 		public const GOLCORE:SimpleUseable = new SimpleUseable("GolCore", "GolemCore", "a golem core", 1, 
 			"An undamaged core taken from a defeated golem.",
 			"You look at the undamaged golem core.  A simple small crystal sphere no larger than your fist that glows gently.  For those that know art of golem making it will be great use and for others it's uselss and better to sell it, preferably to merchant that specificaly buying such items.");

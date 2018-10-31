@@ -432,7 +432,7 @@ private function soberUrtaSatingPCHeat():void {
 	dynStats("lust=",0);
 	dynStats("lust=",0);
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 6;
-
+	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 	doNext(camp.returnToCampUseOneHour);
 }
 

@@ -121,27 +121,6 @@ public class MinotaurBlood extends Consumable {
 			}
 			changes++;
 		}
-		//+hooves
-		if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
-			mutations.humanizeArms();
-			changes++;
-		}
-		if (player.lowerBody != LowerBody.HOOFED && player.lowerBody != LowerBody.GARGOYLE) {
-			if (changes < changeLimit && rand(3) == 0) {
-				changes++;
-				if (player.lowerBody == LowerBody.HUMAN) outputText("\n\nYou stagger as your feet change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
-				if (player.lowerBody == LowerBody.DOG) outputText("\n\nYou stagger as your paws change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
-				if (player.lowerBody == LowerBody.NAGA) outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!");
-				//Catch-all
-				if (player.lowerBody > LowerBody.NAGA) outputText("\n\nYou stagger as your [feet] change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
-				if (!player.hasFur()) outputText("  A fine coat of fur grows out below your waist, itching briefly as it fills in.");
-				outputText("<b>  You now have hooves in place of your feet!</b>");
-				mutations.setLowerBody(LowerBody.HOOFED);
-				player.legCount = 2;
-				dynStats("spe", 1);
-				changes++;
-			}
-		}
 		if (!flags[kFLAGS.HYPER_HAPPY])
 		{
 			//Kills vagina size (and eventually the whole vagina)
@@ -304,26 +283,42 @@ public class MinotaurBlood extends Consumable {
 		}
 		//Appearance shit:
 		//Tail, Ears, Hooves, Horns, Height (no prereq), Face
-		//+height up to 9 foot
-		if (changes < changeLimit && rand(1.7) == 0 && player.tallness < 108) {
-			temp = rand(5) + 3;
-			//Slow rate of growth near ceiling
-			if (player.tallness > 90) temp = Math.floor(temp / 2);
-			//Never 0
-			if (temp == 0) temp = 1;
-			//Flavor texts.  Flavored like 1950's cigarettes. Yum.
-			if (temp < 5) outputText("\n\nYou shift uncomfortably as you realize you feel off balance.  Gazing down, you realize you have grown SLIGHTLY taller.");
-			if (temp >= 5 && temp < 7) outputText("\n\nYou feel dizzy and slightly off, but quickly realize it's due to a sudden increase in height.");
-			if (temp == 7) outputText("\n\nStaggering forwards, you clutch at your head dizzily.  You spend a moment getting your balance, and stand up, feeling noticeably taller.");
-			player.tallness += temp;
+		//+cow tail
+		if (changes < changeLimit && rand(2) == 0 && player.tailType != Tail.COW && player.tailType != Tail.GARGOYLE) {
+			if (player.tailType == Tail.NONE) outputText("\n\nYou feel the flesh above your " + Appearance.buttDescription(player) + " knotting and growing.  It twists and writhes around itself before flopping straight down, now shaped into a distinctly bovine form.  You have a <b>cow tail</b>.");
+			else {
+				if (player.tailType < Tail.SPIDER_ADBOMEN || player.tailType > Tail.BEE_ABDOMEN) {
+					outputText("\n\nYour tail bunches uncomfortably, twisting and writhing around itself before flopping straight down, now shaped into a distinctly bovine form.  You have a <b>cow tail</b>.");
+				}
+				//insect
+				if (player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.BEE_ABDOMEN) {
+					outputText("\n\nYour insect-like abdomen tingles pleasantly as it begins shrinking and softening, chitin morphing and reshaping until it looks exactly like a <b>cow tail</b>.");
+				}
+			}
+			mutations.setTailType(Tail.COW);
 			changes++;
 		}
-		//Face change, requires Ears + Height + Hooves
-		if (player.ears.type == Ears.COW && player.lowerBody == LowerBody.HOOFED && player.lowerBody != LowerBody.GARGOYLE && player.tallness >= 90 && changes < changeLimit && rand(3) == 0) {
-			if (player.faceType != Face.COW_MINOTAUR) {
-				outputText("\n\nBones shift and twist painfully as your visage twists and morphs to resemble that of the beast whose blood you now drink.  <b>You now have a minotaur-like face.</b>");
+		//+cow ears	- requires tail
+		if (player.ears.type != Ears.COW && changes < changeLimit && player.tailType == Tail.COW && player.tailType != Tail.GARGOYLE && rand(2) == 0) {
+			outputText("\n\nYou feel your ears tug on your scalp as they twist shape, becoming oblong and cow-like.  <b>You now have cow ears.</b>");
+			mutations.setEarType(Ears.COW);
+			changes++;
+		}
+		//+hooves
+		if (player.lowerBody != LowerBody.HOOFED && player.lowerBody != LowerBody.GARGOYLE) {
+			if (changes < changeLimit && rand(3) == 0) {
 				changes++;
-				mutations.setFaceType(Face.COW_MINOTAUR);
+				if (player.lowerBody == LowerBody.HUMAN) outputText("\n\nYou stagger as your feet change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
+				if (player.lowerBody == LowerBody.DOG) outputText("\n\nYou stagger as your paws change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
+				if (player.lowerBody == LowerBody.NAGA) outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!");
+				//Catch-all
+				if (player.lowerBody > LowerBody.NAGA) outputText("\n\nYou stagger as your [feet] change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
+				if (!player.hasFur()) outputText("  A fine coat of fur grows out below your waist, itching briefly as it fills in.");
+				outputText("<b>  You now have hooves in place of your feet!</b>");
+				mutations.setLowerBody(LowerBody.HOOFED);
+				player.legCount = 2;
+				dynStats("spe", 1);
+				changes++;
 			}
 		}
 		//+mino horns require ears/tail
@@ -383,25 +378,30 @@ public class MinotaurBlood extends Consumable {
 				changes++;
 			}
 		}
-		//+cow ears	- requires tail
-		if (player.ears.type != Ears.COW && changes < changeLimit && player.tailType == Tail.COW && player.tailType != Tail.GARGOYLE && rand(2) == 0) {
-			outputText("\n\nYou feel your ears tug on your scalp as they twist shape, becoming oblong and cow-like.  <b>You now have cow ears.</b>");
-			mutations.setEarType(Ears.COW);
+		if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
+			mutations.humanizeArms();
 			changes++;
 		}
-		//+cow tail
-		if (changes < changeLimit && rand(2) == 0 && player.tailType != Tail.COW && player.tailType != Tail.GARGOYLE) {
-			if (player.tailType == Tail.NONE) outputText("\n\nYou feel the flesh above your " + Appearance.buttDescription(player) + " knotting and growing.  It twists and writhes around itself before flopping straight down, now shaped into a distinctly bovine form.  You have a <b>cow tail</b>.");
-			else {
-				if (player.tailType < Tail.SPIDER_ADBOMEN || player.tailType > Tail.BEE_ABDOMEN) {
-					outputText("\n\nYour tail bunches uncomfortably, twisting and writhing around itself before flopping straight down, now shaped into a distinctly bovine form.  You have a <b>cow tail</b>.");
-				}
-				//insect
-				if (player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.BEE_ABDOMEN) {
-					outputText("\n\nYour insect-like abdomen tingles pleasantly as it begins shrinking and softening, chitin morphing and reshaping until it looks exactly like a <b>cow tail</b>.");
-				}
+		//Face change, requires Ears + Height + Hooves
+		if (player.ears.type == Ears.COW && player.lowerBody == LowerBody.HOOFED && player.lowerBody != LowerBody.GARGOYLE && player.tallness >= 90 && changes < changeLimit && rand(3) == 0) {
+			if (player.faceType != Face.COW_MINOTAUR) {
+				outputText("\n\nBones shift and twist painfully as your visage twists and morphs to resemble that of the beast whose blood you now drink.  <b>You now have a minotaur-like face.</b>");
+				changes++;
+				mutations.setFaceType(Face.COW_MINOTAUR);
 			}
-			mutations.setTailType(Tail.COW);
+		}
+		//+height up to 9 foot
+		if (changes < changeLimit && rand(1.7) == 0 && player.tallness < 108) {
+			temp = rand(5) + 3;
+			//Slow rate of growth near ceiling
+			if (player.tallness > 90) temp = Math.floor(temp / 2);
+			//Never 0
+			if (temp == 0) temp = 1;
+			//Flavor texts.  Flavored like 1950's cigarettes. Yum.
+			if (temp < 5) outputText("\n\nYou shift uncomfortably as you realize you feel off balance.  Gazing down, you realize you have grown SLIGHTLY taller.");
+			if (temp >= 5 && temp < 7) outputText("\n\nYou feel dizzy and slightly off, but quickly realize it's due to a sudden increase in height.");
+			if (temp == 7) outputText("\n\nStaggering forwards, you clutch at your head dizzily.  You spend a moment getting your balance, and stand up, feeling noticeably taller.");
+			player.tallness += temp;
 			changes++;
 		}
 		// Remove gills

@@ -328,8 +328,8 @@ import classes.lists.Gender;
 			outputText("\n\nYou stop and think about this... On one hand, catching this thief would be great, since that would mean one less problem to worry about, but Jojo would be risking himself.  Sure... he has battle training... and he did manage to live all by himself in the forest before you arrived... would a petty thief really pose a threat to someone like him?  And why were they targeting the Bimbo Liqueur?  From what you gather its a pretty potent transformative, so who knows what this mysterious visitor could be planning?  On the other hand... sometimes prevention is the better solution... you could just have Jojo keep a close eye on your stash to discourage any further attempts at theft, and this would ensure whoever is targeting the Bimbo Liqueur doesn’t get a chance to try and do any harm.");
 			outputText("\n\nWhat do you do?");
 			menu();
-			addButton(0, "Catch Thief", letsCatchThief);
-			addButton(1, "Guard Stash", letsGuardStash);
+			addButton(0, "Catch Thief", letsCatchThief).hint("Could lead to 'unexpected' situation.");
+			addButton(1, "Guard Stash", letsGuardStash).hint("Safe option.");
 		}
 		
 		//Attempt to catch thief, set flag to 2, route to bimbofication the next day.
@@ -1773,6 +1773,7 @@ import classes.lists.Gender;
 			outputText("\n\nYou sigh and get up, extracting yourself from under her; a small trickle of cum leaks from your used fuckhole, and down your legs; looks like you'll need a bath... but first. You help Joy up and pat her head telling her if she promises to be a good girl you two can have more fun later.");
 			outputText("\n\n\"<i>Yay!</i>\" Joy perks right up at that, throwing her arms into the air in delight.");
 			outputText("\n\nYou giggle at her reaction and gather your discarded clothes. Then take Joy's hand and begin making your way towards the nearest stream.");
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			player.orgasm();
 			dynStats("sens", 1, "cor", -(1 + Math.ceil(player.cor / 20)));
 			flags[kFLAGS.JOJO_VAGINAL_CATCH_COUNTER]++;
@@ -1825,6 +1826,7 @@ import classes.lists.Gender;
 			outputText("\n\n\"<i>No! Please! Don't cut off the sex! I couldn't stand no more sex!</i>\" Joy begs you.");
 			outputText("\n\nYou laugh at Joy's mortified expression and comfort her by hugging her and telling her you would never refuse something as cute as her... but if she really expects to have a shot at your ass again she'd better grab your stuff and help you clean up. Then you release her and make your way towards the stream.");
 			outputText("\n\nThe mouse bimbo watches you go. \"<i>Like, [name], that was really mean!</i>\" She whines, then scampers after you.");
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			player.orgasm();
 			dynStats("sens", 1, "cor", -(1 + Math.ceil(player.cor / 20)));
 			flags[kFLAGS.JOJO_ANAL_CATCH_COUNTER]++;
@@ -2290,4 +2292,4 @@ import classes.lists.Gender;
 		}
 	}
 
-}
+}

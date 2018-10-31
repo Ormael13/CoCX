@@ -162,7 +162,7 @@ public class ImpHorde extends Monster
 					if(hits == 2) outputText("Another imp punches you in the gut, hard!");
 					if(hits == 1) outputText("Your arm is mauled by the clawing!");
 					damage = 20 - rand(player.tou/10);
-					if (damage <= 0) damage = 1;
+					if (damage <= 4) damage = 5;
 					outputText(" ");
 					damage = player.takePhysDamage(damage, true);
 					outputText("\n");
@@ -222,6 +222,7 @@ public class ImpHorde extends Monster
 			this.weaponAttack = 12;
 			this.armorName = "skin";
 			this.armorDef = 6;
+			this.armorMDef = 1;
 			this.bonusHP = 800;
 			this.bonusLust = 150;
 			this.lust = 10;

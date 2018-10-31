@@ -72,7 +72,7 @@ public class CoC extends MovieClip
     public var date:Date = new Date();
 
     //Mod save version.
-    public var modSaveVersion:Number = 21;
+    public var modSaveVersion:Number = 22;
     public var levelCap:Number = 150;
 
     //Used to restrict random drops from overlapping uniques
@@ -87,15 +87,17 @@ public class CoC extends MovieClip
     public var saves:Saves                       = new Saves(gameStateDirectGet, gameStateDirectSet);
     public var playerAppearance:PlayerAppearance = new PlayerAppearance();
     // Items/
-    public var mutations:Mutations               = new Mutations();
-    public var consumables:ConsumableLib         = new ConsumableLib();
+    public var mutations:Mutations				= new Mutations();
+    public var consumables:ConsumableLib		= new ConsumableLib();
     public var useables:UseableLib;
-    public var weapons:WeaponLib                 = new WeaponLib();
-    public var weaponsrange:WeaponRangeLib       = new WeaponRangeLib();
-    public var armors:ArmorLib = new ArmorLib();
-    public var undergarments:UndergarmentLib = new UndergarmentLib();
-    public var jewelries:JewelryLib = new JewelryLib();
-    public var shields:ShieldLib = new ShieldLib();
+    public var weapons:WeaponLib				= new WeaponLib();
+    public var weaponsrange:WeaponRangeLib		= new WeaponRangeLib();
+    public var armors:ArmorLib					= new ArmorLib();
+    public var undergarments:UndergarmentLib	= new UndergarmentLib();
+    public var headjewelries:HeadJewelryLib		= new HeadJewelryLib();
+    public var necklaces:NecklaceLib			= new NecklaceLib();
+    public var jewelries:JewelryLib				= new JewelryLib();
+    public var shields:ShieldLib				= new ShieldLib();
 
 
     // Force updates in Pepper Flash ahuehue
@@ -247,7 +249,7 @@ public class CoC extends MovieClip
         //model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8j";
+			ver = "1.0.2_mod_Xianxia_0.8j2";
 			version = ver + " (<b></b>)";
 
         this.images = new ImageManager(stage, mainView);

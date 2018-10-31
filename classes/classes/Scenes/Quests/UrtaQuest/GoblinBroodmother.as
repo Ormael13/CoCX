@@ -54,6 +54,7 @@ public class GoblinBroodmother extends Goblin
 			this.weaponAttack = 20;
 			this.armorName = "leather straps";
 			this.armorDef = 5;
+			this.armorMDef = 1;
 			this.bonusHP = 300;
 			this.bonusLust = 30;
 			this.lust = 50;

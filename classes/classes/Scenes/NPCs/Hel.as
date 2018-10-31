@@ -94,8 +94,6 @@ public class Hel extends Monster
 			}
 			//Determine damage - str modified by enemy toughness!
 			damage = int((str) - rand(player.tou) - player.armorDef);
-			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
-			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			damage = Math.round(damage);
 			//No damage
 			if(damage <= 0) {
@@ -112,7 +110,7 @@ public class Hel extends Monster
 					lust += 5 * lustVuln;
 				}
 			}
-			if(damage > 0) damage = player.takeMagicDamage(damage, true);
+			if(damage > 0) damage = player.takeFireDamage(damage, true);
 			statScreenRefresh();
 			outputText("\n");
 		}
@@ -199,6 +197,7 @@ public class Hel extends Monster
 			this.weaponAttack = 26;
 			this.armorName = "scales";
 			this.armorDef = 21;
+			this.armorMDef = 2;
 			this.armorPerk = "";
 			this.armorValue = 50;
 			this.bonusHP = 300;

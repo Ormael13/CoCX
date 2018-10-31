@@ -40,6 +40,7 @@ public class Diva extends Monster {
         this.weaponVerb = "swoop";
         this.armorName = "dress";
         this.armorDef = levelBonus;
+		this.armorMDef = levelBonus;
         this.wings.type = Wings.BAT_LIKE_LARGE;
         this.bonusHP = levelBonus * 500;
         this.bonusLust = 50;

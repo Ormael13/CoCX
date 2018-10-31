@@ -58,8 +58,6 @@ public class GoblinShaman extends Goblin
 			else if (spellChooser == 2 && fatigue <= (100 - spellCostWhitefire)) {
 				outputText("The goblin narrows her eyes and focuses her mind with deadly intent. She snaps her fingers and you are enveloped in a flash of white flames!  ");
 				var damage:int = inte + rand(50) * spellMultiplier();
-				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
-				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 				if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 				player.addStatusValue(StatusEffects.Blizzard, 1, -1);
 				outputText("Luckly protective ice maelstorm still surrounding you lessening amount of damage.  ");
@@ -74,7 +72,7 @@ public class GoblinShaman extends Goblin
 				else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) damage *= 1.5;
 				else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) damage *= 2;
 				damage = Math.round(damage);
-				player.takeMagicDamage(damage, true);
+				player.takeFireDamage(damage, true);
 				fatigue += spellCostWhitefire;
 			}
 			//Arouse
@@ -160,6 +158,7 @@ public class GoblinShaman extends Goblin
 			this.weaponAttack = 14;
 			this.armorName = "fur loincloth";
 			this.armorDef = 6;
+			this.armorMDef = 18;
 			this.fatigue = 0;
 			this.bonusHP = 275;
 			this.bonusLust = 20;

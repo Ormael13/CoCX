@@ -10,7 +10,7 @@ import classes.internals.*;
 public class SandTrap extends Monster
 	{
 		//Wait:
-		public function sandTrapWait():void {
+		public function sandTrapClimb():void {
 			clearOutput();
 			game.spriteSelect(97);
 			if(!hasStatusEffect(StatusEffects.Climbed)) createStatusEffect(StatusEffects.Climbed,0,0,0,0);
@@ -140,6 +140,7 @@ public class SandTrap extends Monster
 			this.weaponAttack = 10;
 			this.armorName = "chitin";
 			this.armorDef = 20;
+			this.armorMDef = 2;
 			this.bonusHP = 100;
 			this.bonusLust = 20;
 			this.lust = 20;

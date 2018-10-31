@@ -18,6 +18,7 @@ public class Zetaz extends Monster
 			//burns lust and clears statuses before continuing with 
 			//turn.
 			if(lust > 50 && (hasStatusEffect(StatusEffects.Fear) || hasStatusEffect(StatusEffects.Blind))) {
+				if (hasStatusEffect(StatusEffects.Fear)) this.spe += statusEffectv2(StatusEffects.Fear);
 				removeStatusEffect(StatusEffects.Fear);
 				removeStatusEffect(StatusEffects.Blind);
 				lust -= 10;
@@ -122,7 +123,7 @@ public class Zetaz extends Monster
 			if(!hasStatusEffect(StatusEffects.round)) {
 				createStatusEffect(StatusEffects.round,1,0,0,0);
 				outputText("Zetaz asks, \"<i>Do you even realize how badly you fucked up my life, ");
-				if(player.humanScore() >= 4) outputText("human");
+				if(player.humanScore() >= 14) outputText("human");
 				else outputText("'human'");
 				outputText("?  No, of course not.  That's the kind of attitude I'd expect from one of you!</i>\"");
 			}
@@ -187,6 +188,7 @@ public class Zetaz extends Monster
 			this.weaponAttack = 21;
 			this.armorName = "leathery skin";
 			this.armorDef = 14;
+			this.armorMDef = 7;
 			this.bonusHP = 600;
 			this.bonusLust = 50;
 			this.lust = 40;

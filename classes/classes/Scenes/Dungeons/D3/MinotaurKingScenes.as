@@ -291,6 +291,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			player.orgasm();
 			dynStats("lus", 5, "scale", false);
 			player.createStatusEffect(StatusEffects.MinotaurKingsTouch, 0, 0, 0, 0);
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(60);
 			flags[kFLAGS.MINOTAURKINGS_TOUCH] = 1;
             cleanupAfterCombat(SceneLib.d3.resumeFromFight);
         }

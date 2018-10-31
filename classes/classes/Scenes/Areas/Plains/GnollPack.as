@@ -82,6 +82,7 @@ package classes.Scenes.Areas.Plains
 			}
 			if (hasStatusEffect(StatusEffects.Fear)) {
 				if (statusEffectv1(StatusEffects.Fear) == 0) {
+					this.spe += statusEffectv2(StatusEffects.Fear);
 					removeStatusEffect(StatusEffects.Fear);
 					outputText("Your foes shake free of their fear and ready themselves for battle.");
 				}
@@ -133,6 +134,7 @@ package classes.Scenes.Areas.Plains
 			this.weaponValue = 25;
 			this.armorName = "skin";
 			this.armorDef = 7;
+			this.armorMDef = 1;
 			this.bonusHP = 100;
 			this.bonusLust = 10;
 			this.lust = 30;
@@ -142,7 +144,8 @@ package classes.Scenes.Areas.Plains
 			this.gems = 800;
 			this.drop = new ChainedDrop().
 					add(consumables.REDUCTO,1/5).
-					add(consumables.SUCMILK,1/2).
+					add(consumables.SUCMILK,1/4).
+					add(weaponsrange.GTHRSPE,1/2).
 					elseDrop(consumables.BLACK_D);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			checkMonster();

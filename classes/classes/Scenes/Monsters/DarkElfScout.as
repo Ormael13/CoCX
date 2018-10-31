@@ -137,6 +137,7 @@ public class DarkElfScout extends Monster
 			this.weaponRangeAttack = 18;
 			this.armorName = "elven armor";
 			this.armorDef = 4;
+			this.armorMDef = 4;
 			this.bonusLust = 20;
 			this.lustVuln = .7;
 			this.lust = 50;

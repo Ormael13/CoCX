@@ -5,6 +5,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumables.SimpleConsumable;
 import classes.Items.Weapon;
 import classes.Scenes.SceneLib;
+import classes.EventParser;
 import classes.room;
 
 /**
@@ -267,6 +268,13 @@ import classes.room;
 			inRoomedDungeon = false;
 			inRoomedDungeonResume = null;
 			camp.returnToCampUseOneHour();
+		}
+
+		public function gargoyleBadEndD3():void
+		{
+			clearOutput();
+			outputText("You wake up chained to a pedestal in the fortress’ garden. It seems the demons prefered to revise your enchantments and keep you as a guardian and show you off as a prize instead of destroying you… heck a succubus is using your tail as a makeshift dildo to sate her lust... You've been designated the rank of decorative sex toy and the odds of you leaving this place ever again are very slim.");
+			EventParser.gameOver();
 		}
 
 		public function resumeFromFight():void
@@ -767,10 +775,10 @@ import classes.room;
 			{
 				outputText("<b><u>Throne Room</u></b>\n");
 				outputText("The throne room is intricately designed. Purple carpet with red highlights line the floor from the door to the throne. The throne appears to be carved in marble and dotted with lethicite. Along the way, there are beautifully carved marble columns and cum fountains. You blush just by looking at the fountains. ");
-				/*if (flags[kFLAGS.LETHICITE_ARMOR_TAKEN] <= 0 && player.newGamePlusMod() > 0) {
+				if (flags[kFLAGS.LETHICITE_ARMOR_TAKEN] <= 0 && player.newGamePlusMod() > 0) {
 					outputText("\n\nThere is still a suit of lethicite armor Lethice worn when you battled her, in good condition. You could take it if you like. ");
 					addButton(0, "Take Armor", lethice.takeLethiciteArmor).hint(armors.LTHCARM.description);
-				}*/
+				}
 			}
 			return false;
 		}

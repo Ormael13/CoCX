@@ -827,7 +827,7 @@ use namespace CoC;
 				outputText("\n\n");
 			}
 
-			outputText("Around you, your many drider children fervently explore their surroundings.  One climbs up your back and perches atop your head.  She raises one hand to her forehead to block the sun's glare and stretches all four of her jewel-like eyes wide, delighting in the wondrous world she surveys.");
+			outputText("Around you, your many drider children fervently explore their surroundings.  One climbs up your back and perches atop your head.  She raises one hand to her forehead to block the sun's glare and stretches all six of her jewel-like eyes wide, delighting in the wondrous world she surveys.");
 			if (player.eyes.type != Eyes.FOUR_SPIDER_EYES) outputText("  Suddenly she flops forward, leaning against your eyebrows and causing you to cross your eyes in an attempt to focus on her.  She seems confused by the way your eyes are different to hers.");
 			if (player.isNaga()) outputText("  A few baby driders crawl ponderously across your scaled tail.  You give your tail a little wiggle and suddenly they go wild crawling around it and letting out the faintest, cute little squeals.");
 			else outputText("  A few baby driders sit on each of your legs, facing each other.  Some gesture and squeak at each other in wonder while others pull faces.");

@@ -249,7 +249,8 @@ public class CeraphScene extends NPCAwareContent
 			outputText("As you leave, you don't bother to spare a glance at the confused omnibus; she isn't worth your time.\n\n");
 			player.cuntChange(monster.cockArea(0), true);
 			player.orgasm();
-			dynStats("lib", 3, "sen", 3,"cor", 1);
+			dynStats("lib", 3, "sen", 3, "cor", 1);
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
             if (CoC.instance.inCombat)
                 cleanupAfterCombat();
@@ -1456,3 +1457,4 @@ public class CeraphScene extends NPCAwareContent
 
 	}
 }
+

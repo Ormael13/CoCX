@@ -12,7 +12,7 @@ package classes.Perks
 
 		override public function desc(params:PerkClass = null):String
 		{
-			return "Lower your accuracy by " + params.value1 + "%.";
+			return "Lower your accuracy by " + params.value1 * 0.5 + "%.";
 		}
 
 		public function Accuracy2Perk()

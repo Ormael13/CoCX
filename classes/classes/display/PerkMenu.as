@@ -38,7 +38,7 @@ public class PerkMenu extends BaseContent {
 			addButton(button++, "Perk Up", CoC.instance.playerInfo.perkBuyMenu);
 		}
 		addButton(4, "Database", perkDatabase);
-		if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.findPerk(PerkLib.Combo) >= 0 || (player.hasPerk(PerkLib.JobBeastWarrior) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()))) {
+		if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.DoubleAttackSmall) || player.hasPerk(PerkLib.Combo) || (player.hasPerk(PerkLib.JobBeastWarrior) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()))) {
 			outputText("\n<b>You can adjust your melee attack settings.</b>");
 			addButton(5, "Melee Opt",doubleAttackOptions);
 		}
@@ -46,7 +46,7 @@ public class PerkMenu extends BaseContent {
 			outputText("\n<b>You can adjust your range strike settings.</b>");
 			addButton(6, "Range Opt",doubleStrikeOptions);
 		}
-		if (player.hasPerk(PerkLib.Spellsword) || player.hasPerk(PerkLib.Spellarmor) || player.hasPerk(PerkLib.Battleflash) || player.hasPerk(PerkLib.Battlemage) || player.hasPerk(PerkLib.FortressOfIntellect)) {
+		if (player.hasPerk(PerkLib.Spellsword) || player.hasPerk(PerkLib.Spellarmor) || player.hasPerk(PerkLib.Battleflash) || player.hasPerk(PerkLib.Battlemage) || player.hasPerk(PerkLib.Battleshield) || player.hasPerk(PerkLib.FortressOfIntellect)) {
 			outputText("\n<b>You can adjust your spell autocast settings.</b>");
 			addButton(7, "Spells Opt",spellautocastOptions);
 		}
@@ -69,20 +69,17 @@ public class PerkMenu extends BaseContent {
 		outputText("You will always attack ");
 		var doubleAttackStyle:Function = curry(setFlag,doubleAttackOptions,kFLAGS.DOUBLE_ATTACK_STYLE);
         var doubleAttackVal:int = flags[kFLAGS.DOUBLE_ATTACK_STYLE];
-        if (doubleAttackVal == 5) outputText("six times");
+        if (doubleAttackVal == 9) outputText("ten times");
+		if (doubleAttackVal == 8) outputText("nine times");
+		if (doubleAttackVal == 7) outputText("eight times");
+		if (doubleAttackVal == 6) outputText("seven times");
+		if (doubleAttackVal == 5) outputText("six times");
 		if (doubleAttackVal == 4) outputText("five times");
 		if (doubleAttackVal == 3) outputText("four times");
 		if (doubleAttackVal == 2) outputText("three times");
 		if (doubleAttackVal == 1) outputText("twice");
 		if (doubleAttackVal < 1) outputText("once");
-		outputText(" in combat turn");
-		if (doubleAttackVal == 5) outputText(" using 75% of your current strength");
-		if (doubleAttackVal == 4) outputText(" using 80% of your current strength");
-		if (doubleAttackVal == 3) outputText(" using 85% of your current strength");
-		if (doubleAttackVal == 2) outputText(" using 90% of your current strength");
-		if (doubleAttackVal == 1) outputText(" using 95% of your current strength");
-		outputText(".");
-		outputText("\n\nYou can change it to different amount of attacks.");
+		outputText(" in combat turn.\n\nYou can change it to different amount of attacks.");
 		if (player.findPerk(PerkLib.JobBeastWarrior) >= 0 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) {
 			outputText("\n\nYou can choose between fighting feral or normaly with your fists.");
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] == 0) outputText("\n\nFighting Style: <b>Normal</b>");
@@ -90,7 +87,7 @@ public class PerkMenu extends BaseContent {
 		}
 
         var maxCurrentAttacks:int = combat.maxCurrentAttacks();
-		var maxAttacks:int = Math.max(combat.maxFistAttacks(),combat.maxClawsAttacks(),combat.maxLargeAttacks(),combat.maxCommonAttacks());
+		var maxAttacks:int = Math.max(combat.maxFistAttacks(),combat.maxClawsAttacks(),combat.maxSmallAttacks(),combat.maxLargeAttacks(),combat.maxCommonAttacks());
 
 		if (doubleAttackVal != 0) addButton(0, "All Single", doubleAttackStyle,0);
 		if (maxAttacks >= 2 && doubleAttackVal != 1) {
@@ -98,21 +95,38 @@ public class PerkMenu extends BaseContent {
 			else addButton(1, "All Double", doubleAttackStyle,1);
 		}
 		if (maxAttacks >= 3 && doubleAttackVal != 2) {
-			if (maxCurrentAttacks < 3) addButtonDisabled(5, "All Triple", "You current melee weapon not allow to use this option");
-			else addButton(5, "All Triple", doubleAttackStyle,2);
+			if (maxCurrentAttacks < 3) addButtonDisabled(2, "All Triple", "You current melee weapon not allow to use this option");
+			else addButton(2, "All Triple", doubleAttackStyle,2);
 		}
 		if (maxAttacks >= 4 && doubleAttackVal != 3) {
-			if (maxCurrentAttacks < 4) addButtonDisabled(6, "All Quadruple", "You current melee weapon not allow to use this option");
-			else addButton(6, "All Quadruple", doubleAttackStyle,3);
+			if (maxCurrentAttacks < 4) addButtonDisabled(5, "All Quadruple", "You current melee weapon not allow to use this option");
+			else addButton(5, "All Quadruple", doubleAttackStyle,3);
 		}
 		if (maxAttacks >= 5 && doubleAttackVal != 4) {
-			if (maxCurrentAttacks < 5) addButtonDisabled(10, "All Penta", "You current melee weapon not allow to use this option");
-			else addButton(10, "All Penta", doubleAttackStyle,4);
+			if (maxCurrentAttacks < 5) addButtonDisabled(6, "All Penta", "You current melee weapon not allow to use this option");
+			else addButton(6, "All Penta", doubleAttackStyle,4);
 		}
 		if (maxAttacks >= 6 && doubleAttackVal != 5) {
-			if (maxCurrentAttacks < 6) addButtonDisabled(11, "All Hexe", "You current melee weapon not allow to use this option");
-			else addButton(11, "All Hexa", doubleAttackStyle,5);
+			if (maxCurrentAttacks < 6) addButtonDisabled(7, "All Hexe", "You current melee weapon not allow to use this option");
+			else addButton(7, "All Hexa", doubleAttackStyle,5);
 		}
+		if (maxAttacks >= 7 && doubleAttackVal != 6) {
+			if (maxCurrentAttacks < 7) addButtonDisabled(10, "All Hecta", "You current melee weapon not allow to use this option");
+			else addButton(10, "All Hecta", doubleAttackStyle,6);
+		}
+		if (maxAttacks >= 8 && doubleAttackVal != 7) {
+			if (maxCurrentAttacks < 8) addButtonDisabled(11, "All Octa", "You current melee weapon not allow to use this option");
+			else addButton(11, "All Octa", doubleAttackStyle,7);
+		}
+		if (maxAttacks >= 9 && doubleAttackVal != 8) {
+			if (maxCurrentAttacks < 9) addButtonDisabled(12, "All Nona", "You current melee weapon not allow to use this option");
+			else addButton(12, "All Nona", doubleAttackStyle,8);
+		}
+		if (maxAttacks >= 10 && doubleAttackVal != 9) {
+			if (maxCurrentAttacks < 10) addButtonDisabled(13, "All Deca", "You current melee weapon not allow to use this option");
+			else addButton(13, "All Deca", doubleAttackStyle,9);
+		}
+		//wolne tylko przyciski 3 i 8
 		if (player.findPerk(PerkLib.JobBeastWarrior) >= 0) {
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] != 0) addButton(4, "Normal", toggleflag, kFLAGS.FERAL_COMBAT_MODE, false);
 			if (((player.weaponName == "fists" && player.haveNaturalClaws()) || player.haveNaturalClawsTypeWeapon()) && flags[kFLAGS.FERAL_COMBAT_MODE] != 1) addButton(9, "Feral", toggleflag ,kFLAGS.FERAL_COMBAT_MODE, true);
@@ -240,6 +254,11 @@ public class PerkMenu extends BaseContent {
 			if (flags[kFLAGS.AUTO_CAST_BLINK] == 1) outputText("Manual");
 			else outputText("Autocast");
 		}
+		if (player.findPerk(PerkLib.Battleshield) >= 0) {
+			outputText("\n<b>Mana Shield:</b> ");
+			if (flags[kFLAGS.AUTO_CAST_MANA_SHIELD] == 1) outputText("Manual");
+			else outputText("Autocast");
+		}
 		if (player.findPerk(PerkLib.FortressOfIntellect) >= 0) {
 			outputText("\n<b>Fortress of Intellect:</b> ");
 			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) outputText("On");
@@ -252,7 +271,9 @@ public class PerkMenu extends BaseContent {
 		if (flags[kFLAGS.AUTO_CAST_MIGHT] != 0) addButton(2, "Autocast", toggleflag,kFLAGS.AUTO_CAST_MIGHT,false);
 		if (player.findPerk(PerkLib.Battlemage) >= 0 && flags[kFLAGS.AUTO_CAST_MIGHT] != 1) addButton(7, "Manual", toggleflag,kFLAGS.AUTO_CAST_MIGHT,true);
 		if (flags[kFLAGS.AUTO_CAST_BLINK] != 0) addButton(3, "Autocast", toggleflag,kFLAGS.AUTO_CAST_BLINK,false);
-		if (player.findPerk(PerkLib.Battleflash) >= 0 && flags[kFLAGS.AUTO_CAST_BLINK] != 1) addButton(8, "Manual", toggleflag,kFLAGS.AUTO_CAST_BLINK,false);
+		if (player.findPerk(PerkLib.Battleflash) >= 0 && flags[kFLAGS.AUTO_CAST_BLINK] != 1) addButton(8, "Manual", toggleflag,kFLAGS.AUTO_CAST_BLINK,true);
+		if (flags[kFLAGS.AUTO_CAST_MANA_SHIELD] != 0) addButton(4, "Autocast", toggleflag,kFLAGS.AUTO_CAST_MANA_SHIELD,false);
+		if (player.findPerk(PerkLib.Battleshield) >= 0 && flags[kFLAGS.AUTO_CAST_MANA_SHIELD] != 1) addButton(9, "Manual", toggleflag,kFLAGS.AUTO_CAST_MANA_SHIELD,true);
 		if (player.findPerk(PerkLib.FortressOfIntellect) >= 0 && !player.hasStatusEffect(StatusEffects.FortressOfIntellect)) addButton(12, "FoI On", toggleFortressOfIntelect,true);
 		if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) addButton(13, "FoI Off", toggleFortressOfIntelect,false);
 
@@ -380,7 +401,7 @@ public class PerkMenu extends BaseContent {
 		else addButtonDisabled(0,"Prev");
 		if (page*count<allPerks.length) addButton(1,"Next",perkDatabase,page+1);
 		else addButtonDisabled(1,"Next");
-		addButton(9, "Back", playerMenu);
+		addButton(9, "Back", displayPerks);
 	}
     private function toggleFlag(returnTo:Function,flag:int,on:Boolean):void{
         setFlag(returnTo,flag,((on)?1:0));

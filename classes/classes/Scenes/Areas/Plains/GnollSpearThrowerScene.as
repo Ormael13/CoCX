@@ -151,6 +151,7 @@ public class GnollSpearThrowerScene extends BaseContent
 			//<For Slimes> 
 			if (player.lowerBody == LowerBody.GOO) outputText("  Even as your eyes slide closed, you see the hyena kicking open the circle of dust.");
 			outputText("  The last thing you hear before blackness overtakes you is the barking laugh of the hyena as she leaves her newest conquest to sleep in the fields of grass.");
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			player.orgasm();
 			dynStats("sen", 2);
 			cleanupAfterCombat();

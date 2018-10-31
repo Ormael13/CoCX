@@ -12,7 +12,7 @@ public final class SeductiveArmor extends Armor {
 		
 		public function SeductiveArmor()
 		{
-			super("SeductA", "SeductA", "scandalously seductive armor", "a set of scandalously seductive armor", 0, 1, "A complete suit of scalemail shaped to hug tightly against every curve, it has a solid steel chest-plate with obscenely large nipples molded into it.  The armor does nothing to cover the backside, exposing the wearer's cheeks to the world.","Heavy");
+			super("SeductA", "SeductA", "scandalously seductive armor", "a set of scandalously seductive armor", 0, 0, 1, "A complete suit of scalemail shaped to hug tightly against every curve, it has a solid steel chest-plate with obscenely large nipples molded into it.  The armor does nothing to cover the backside, exposing the wearer's cheeks to the world.","Heavy");
 		}
 		
 		override public function useText():void {

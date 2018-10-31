@@ -37,6 +37,7 @@ public class ScarredBlade extends Monster
 			this.weaponAttack = 50;
 			this.armorName = "lethicite";
 			this.armorDef = 15;
+			this.armorMDef = 15;
 			this.bonusHP = 400;
 			this.lust = 0;
 			this.lustVuln = 0;

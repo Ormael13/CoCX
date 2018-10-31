@@ -39,6 +39,7 @@ public class RyuBiHuman extends Monster
 			this.weaponAttack = 36;
 			this.armorName = "scales";
 			this.armorDef = 54;
+			this.armorMDef = 54;
 			this.bonusHP = 600;
 			this.bonusLust = 10;
 			this.lust = 20;

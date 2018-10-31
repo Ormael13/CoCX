@@ -59,6 +59,7 @@ public class DarkElfSniper extends DarkElfScout
 			this.weaponRangeAttack = 36;
 			this.armorName = "elven armor";
 			this.armorDef = 16;
+			this.armorMDef = 16;
 			this.bonusLust = 20;
 			this.lustVuln = .7;
 			this.lust = 50;

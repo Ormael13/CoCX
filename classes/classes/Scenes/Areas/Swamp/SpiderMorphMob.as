@@ -126,6 +126,7 @@ public class SpiderMorphMob extends Monster
 			this.weaponAttack = 34;
 			this.armorName = "chitin";
 			this.armorDef = 30;
+			this.armorMDef = 3;
 			this.bonusHP = 1200;
 			this.bonusLust = 50;
 			this.lustVuln = .2;

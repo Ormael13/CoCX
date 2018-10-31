@@ -12,7 +12,7 @@ package classes.Items.Armors
 	public final class LightAyoArmor extends Armor {
 		
 		public function LightAyoArmor() {
-			super("LAyoArm","LAyoArm","light ayo armor","a light ayo armor",15,1800,"This suit of platemail is more than just platemail - it have added pieces of mstill enigmatic Ayo Tech that increase by a large margin it properties as long user is capable to feed it on regular basis with soulforce.","Ayo");
+			super("LAyoArm","LAyoArm","light ayo armor","a light ayo armor",15,0,1800,"This suit of platemail is more than just platemail - it have added pieces of mstill enigmatic Ayo Tech that increase by a large margin it properties as long user is capable to feed it on regular basis with soulforce.","Ayo");
 		}
 		
 		override public function get def():Number { 

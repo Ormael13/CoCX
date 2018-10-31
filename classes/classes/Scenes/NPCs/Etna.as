@@ -157,6 +157,7 @@ use namespace CoC;
 				initWisLibSensCor(170, 170, 80, 80);
 				this.weaponAttack = 36;
 				this.armorDef = 10;
+				this.armorMDef = 2;
 				this.bonusHP = 100;
 				this.level = 30;
 			}
@@ -165,6 +166,7 @@ use namespace CoC;
 				initWisLibSensCor(180, 190, 90, 80);
 				this.weaponAttack = 42;
 				this.armorDef = 12;
+				this.armorMDef = 2;
 				this.bonusHP = 150;
 				this.level = 36;
 			}
@@ -173,6 +175,7 @@ use namespace CoC;
 				initWisLibSensCor(190, 210, 100, 80);
 				this.weaponAttack = 48;
 				this.armorDef = 14;
+				this.armorMDef = 2;
 				this.bonusHP = 150;
 				this.level = 42;
 			}
@@ -181,6 +184,7 @@ use namespace CoC;
 				initWisLibSensCor(200, 230, 110, 80);
 				this.weaponAttack = 54;
 				this.armorDef = 16;
+				this.armorMDef = 3;
 				this.bonusHP = 200;
 				this.level = 48;
 			}
@@ -189,6 +193,7 @@ use namespace CoC;
 				initWisLibSensCor(210, 250, 120, 80);
 				this.weaponAttack = 60;
 				this.armorDef = 18;
+				this.armorMDef = 3;
 				this.bonusHP = 200;
 				this.level = 54;
 			}
@@ -197,6 +202,7 @@ use namespace CoC;
 				initWisLibSensCor(220, 270, 130, 80);
 				this.weaponAttack = 66;
 				this.armorDef = 20;
+				this.armorMDef = 4;
 				this.bonusHP = 250;
 				this.level = 60;
 			}
@@ -205,6 +211,7 @@ use namespace CoC;
 				initWisLibSensCor(230, 290, 140, 80);
 				this.weaponAttack = 72;
 				this.armorDef = 22;
+				this.armorMDef = 4;
 				this.bonusHP = 250;
 				this.level = 66;
 			}
@@ -213,6 +220,7 @@ use namespace CoC;
 				initWisLibSensCor(240, 310, 150, 80);
 				this.weaponAttack = 78;
 				this.armorDef = 24;
+				this.armorMDef = 4;
 				this.bonusHP = 250;
 				this.level = 72;
 			}

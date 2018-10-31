@@ -125,6 +125,7 @@ public class TamanisDaughters extends Goblin
 			this.weaponAttack = 5;
 			this.armorName = "leather straps";
 			this.armorDef = 5;
+			this.armorMDef = 1;
 			this.bonusHP = 50 + (int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 2) * 15);
 			if (bonusHP > 3350) bonusHP = 3350;
 			this.bonusLust = 20 + (int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 2) * 10);

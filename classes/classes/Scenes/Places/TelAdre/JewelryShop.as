@@ -21,6 +21,7 @@ public class JewelryShop extends Shop {
         addButton(0, "Normal rings", normalRings);
         addButton(1, "Special rings", specialRings);
         addButton(2, "Enchanted rings", enchantedRings);
+		//3 i 4 for necklaces and head accesories - maybe more buttons then move Jewelry Box i statue do niższego rzedu
         addButton(5, "Jewelry box",curry(confirmBuy, null, 500, "Equipment Storage - Jewelry Box"));
         addButton(6, useables.GLDSTAT.shortName, confirmBuy, useables.GLDSTAT);
 		addButton(14, "Leave", telAdre.telAdreMenu);

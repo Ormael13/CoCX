@@ -746,6 +746,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			flags[kFLAGS.DRIDERINCUBUS_FUCKED] = 1;
 			player.dynStats("cor+", 20);
 			player.orgasm();
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 			driderDefeatMenu();
 		}

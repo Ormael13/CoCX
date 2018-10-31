@@ -162,6 +162,7 @@ use namespace CoC;
 			this.weaponVerb="piercing stab";
 			this.armorName = "pink bikini";
 			this.armorDef = 25;
+			this.armorMDef = 5;
 			this.bonusHP = 2000;
 			this.bonusLust = 50;
 			this.lust = 30;

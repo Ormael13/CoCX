@@ -2,24 +2,24 @@
  * ...
  * @author Zavos
  */
-package classes.Items.Jewelries 
+package classes.Items.HeadJewelries 
 {
-	import classes.Items.Jewelry;
+	import classes.Items.HeadJewelry;
 	import classes.PerkLib;
 	import classes.Player;
 
-	public class SeersHairpin extends Jewelry
+	public class SeersHairpin extends HeadJewelry
 	{
 		
 		public function SeersHairpin() 
 		{
-			super("SeerPin", "Seer’s Hairpin", "seer’s hairpin", "a seer’s hairpin", 0, 0, 1600, "This hairpin is made from silver, the tip twisted into the shape of an eye and fitted with a crystal lens. Both an ornament and a tool, this pin will empower sorcery and soulforce. \n\nType: Accesory (Hairpin) \nBase value: 800","Ring");
+			super("SeerPin", "Seer’s Hairpin", "seer’s hairpin", "a seer’s hairpin", 0, 0, 1600, "This hairpin is made from silver, the tip twisted into the shape of an eye and fitted with a crystal lens. Both an ornament and a tool, this pin will empower sorcery and soulforce.","Hairpin");
 		}
 		
 		override public function get description():String {
 			var desc:String = _description;
 			//Type
-			desc += "\n\nType: Accesory (Hairpin)";
+			desc += "\n\nType: Jewelry (Hairpin)";
 			//Value
 			desc += "\nBase value: " + String(value);
 			//Perk
@@ -27,13 +27,13 @@ package classes.Items.Jewelries
 			return desc;
 		}
 		
-		override public function playerEquip():Jewelry {
+		override public function playerEquip():HeadJewelry {
 			while (game.player.findPerk(PerkLib.SeersInsight) >= 0) game.player.removePerk(PerkLib.SeersInsight);
 			game.player.createPerk(PerkLib.SeersInsight,0.2,0,0,0);
 			return super.playerEquip();
 		}
 		
-		override public function playerRemove():Jewelry {
+		override public function playerRemove():HeadJewelry {
 			while (game.player.findPerk(PerkLib.SeersInsight) >= 0) game.player.removePerk(PerkLib.SeersInsight);
 			return super.playerRemove();
 		}

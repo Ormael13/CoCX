@@ -34,7 +34,6 @@ public class ChameleonGirl extends Monster
 			else {
 				var damage:Number = int((str + weaponAttack) - rand(player.tou));
 				if (damage > 0) {
-					
 					outputText("The chameleon swings her arm at you, catching you with her claws.  You wince as they scratch your skin, leaving thin cuts in their wake. ");
 					damage = player.takePhysDamage(damage, true);
 				}
@@ -60,7 +59,6 @@ public class ChameleonGirl extends Monster
 			else {
 				var damage:Number = int((str + weaponAttack) - rand(player.tou) - player.armorDef) + 25;
 				if (damage > 0) {
-					
 					outputText("The chameleon leaps in your direction, rolls, and kicks you square in the shoulder as she ascends, sending you reeling.  You grunt in pain as a set of sharp claws rake across your chest. ");
 					damage = player.takePhysDamage(damage, true);
 				}
@@ -145,6 +143,7 @@ public class ChameleonGirl extends Monster
 			this.weaponAttack = 40;
 			this.armorName = "skin";
 			this.armorDef = 30;
+			this.armorMDef = 3;
 			this.bonusHP = 350;
 			this.bonusLust = 10;
 			this.lust = 30;

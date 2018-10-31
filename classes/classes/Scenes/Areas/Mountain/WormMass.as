@@ -102,6 +102,7 @@ public class WormMass extends Monster
 			this.weaponAttack = 1;
 			this.armorName = "skin";
 			this.armorDef = 1;
+			this.armorMDef = 0;
 			this.lust = 30;
 			this.lustVuln = 0;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;

@@ -19,13 +19,6 @@ public class HellHound extends Monster
 				outputText(capitalA + short + " completely misses you with a wave of dark fire! Thank the gods it's blind!");
 				return;
 			}
-			/*if(player.hasStatusEffect(StatusEffects.Web_dash_Silence) >= 0) {
-				outputText("You reach inside yourself to breathe flames, but as you ready to release a torrent of fire, it backs up in your throat, blocked by the webbing across your mouth.  It causes you to cry out as the sudden, heated force explodes in your own throat.\n");
-				changeFatigue(10);
-				takeMagicDamage(10+rand(20));
-				enemyAI();
-				return;
-			}*/
 			if(player.findPerk(PerkLib.Evade) >= 0 && player.spe >= 35 && rand(3) != 0) {
 				outputText("Both the hellhound's heads breathe in deeply before blasting a wave of dark fire at you.  You easily avoid the wave, diving to the side and making the most of your talents at evasion.");
 			}
@@ -38,8 +31,6 @@ public class HellHound extends Monster
 			else {
 				//Determine the damage to be taken
 				var temp:Number = 15 + rand(10);
-				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) temp *= 3;
-				if (player.findPerk(PerkLib.FireAffinity) >= 0) temp *= 0.3;
 				temp = Math.round(temp);
 				if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 				player.addStatusValue(StatusEffects.Blizzard,1,-1);
@@ -50,7 +41,7 @@ public class HellHound extends Monster
 				outputText("Both the hellhound's heads breathe in deeply before blasting a wave of dark fire at you. While the flames don't burn much, the unnatural heat fills your body with arousal. ");
 				}
 				temp = Math.round(temp);
-				player.takeMagicDamage(temp, true);
+				player.takeFireDamage(temp, true);
 				player.dynStats("lus", 20+(player.sens/10));
 				statScreenRefresh();
 				if(player.HP <= 0) {
@@ -80,29 +71,6 @@ public class HellHound extends Monster
 				outputText("The hellhound keeps his four eyes on you as he sniffs the ground where you were moments ago. He raises his heads back up and gives you a fiery grin - he seems to have acquired your scent!  It'll be hard to get away now...");
 				player.createStatusEffect(StatusEffects.NoFlee,0,0,0,0);
 			}
-			/*if(spe >= 80) {
-				if(spe == 100) {
-					hellhoundFire();
-					return;
-				}
-				else {
-					outputText("The hellhound sniffs your scent again, seemingly gaining more and more energy as he circles faster around you.");
-					spe = 100;	
-				}
-			}
-			else {
-				spe += 40;
-				outputText("The hellhound keeps his four eyes on you as he sniffs the ground where you were moments ago. He raises his heads back up and gives you a firey grin - He seems to have aquired you scent!  Running away will now be much more difficult...");
-			}
-			if(player.HP <= 0) {
-				doNext(endHpLoss);
-				return;
-			}
-			if(player.lust > player.maxLust()) {
-				doNext(endLustLoss);
-				return;
-			}
-			doNext(1);*/
 		}
 		
 
@@ -184,6 +152,7 @@ public class HellHound extends Monster
 			this.weaponAttack = 10;
 			this.armorName = "thick fur";
 			this.armorDef = 7;
+			this.armorMDef = 1;
 			this.bonusLust = 10;
 			this.lust = 25;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;

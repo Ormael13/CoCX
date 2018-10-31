@@ -75,6 +75,7 @@ public class UnderwaterTigersharkGirl extends Monster
 			this.weaponAttack = 66;
 			this.armorName = "tough skin";
 			this.armorDef = 20;
+			this.armorMDef = 2;
 			this.bonusHP = 500;
 			this.bonusLust = 20;
 			this.lust = 20;

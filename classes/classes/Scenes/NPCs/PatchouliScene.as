@@ -121,6 +121,7 @@ public class PatchouliScene extends NPCAwareContent {
 				outputText("\"<i>Please.. not so rough, my cock hurts!</i>\"\n\n");
 				outputText("He could at least pretend he likes it, you’re already are very kind, granting him the right to even get raped in the first place instead of straight out killing him. Soon, you find yourself on the verge of orgasm. Patchouli finally loses control of his cat cock as it twitches, filling you with kitty jizz and causing your orgasm shortly after.\n\n");
 				outputText("You keep milking the prankster for a few hours until he is passed out. Then bring him back to your camp and tie him to a tree.\n\n");
+				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			} else {
 				var x:int = player.cockThatFits(36, "length");
 				outputText("You force the catboy on his back and yank his shorts away, revealing his girly ass and his cute pucker. Patchouli gulps as your [cock] hardens, already aware of what is about to happen.\n\n");
@@ -520,6 +521,7 @@ public class PatchouliScene extends NPCAwareContent {
 		outputText("\n\n\"<i>Please.. Nyaaaaa!!! Rougher... Faster!</i>\"\n\n");
 		outputText("She's obviously liking it, which only bolsters your lust. Soon, you find yourself on the verge of orgasm. Patchoulie finally loses control of her cock as it twitches, filling you with kitty jizz and causing your own orgasm shortly after.\n\n");
 		outputText("Unsated, you keep milking the prankster for a few hours until you both pass out.\n\n");
+		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 		player.orgasm();
 		doNext(camp.returnToCampUseOneHour);
 	}

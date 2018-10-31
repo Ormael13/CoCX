@@ -1,8 +1,8 @@
 package classes.Items.Armors 
 {
 	import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
-import classes.ItemType;
+	import classes.CoC;
+	import classes.ItemType;
 	import classes.Items.Armor;
 	import classes.Player;
 
@@ -10,7 +10,7 @@ import classes.ItemType;
 	{
 		public function BeeArmor() 
 		{
-			super("BeeArmr","Bee Armor","sexy black chitin armor-plating","a set of chitinous armor",18,1080,"A suit of armor cleverly fashioned from giant bee chitin. It comes with a silken loincloth to protect your modesty.","Heavy");
+			super("BeeArmr","Bee Armor","sexy black chitin armor-plating","a set of chitinous armor",18,0,1080,"A suit of armor cleverly fashioned from giant bee chitin. It comes with a silken loincloth to protect your modesty.","Heavy");
 		}
 		
 		override public function useText():void

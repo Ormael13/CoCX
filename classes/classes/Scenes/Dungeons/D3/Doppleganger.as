@@ -151,32 +151,26 @@ import classes.VaginaClass;
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.d3.doppleganger.inSovietCoCSelfFucksYou();
+			if (player.isGargoyle()) SceneLib.d3.gargoyleBadEndD3();
+			else SceneLib.d3.doppleganger.inSovietCoCSelfFucksYou();
 		}
 		
 		public function handleSpellResistance(spell:String):void
 		{
 			outputText("The mirror demon barely even flinches as your fierce, puissant fire washes over [him].");
-
 			outputText("\n\n“<i>Picked up a few things since you’ve been here, then?</i>” [he] yawns. Flickers of flame cling to [his] fingers, its radiance sputtering and burning away, replaced by a livid black color. “<i>Serf magic. Easy to pick up, easy to use, difficult to impress with. Let me show you how it’s really done!</i>” [He] thrusts [his] hands out and hurls a pitiless black fireball straight at you, a negative replica of the one you just shot at [him].");
-			
 			if (spell == "fireball")
 			{
 				var damage:Number = player.level * 10 + 45 + rand(10);
-				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
-				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 				damage = Math.round(damage);
-				player.takeMagicDamage(damage, true);
+				player.takeFireDamage(damage, true);
 			}
 			else if (spell == "whitefire")
 			{
 				var damage2:Number = 10 + (player.inte / 3 + rand(player.inte / 2));
-				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage2 *= 3;
-				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage2 *= 0.3;
 				damage2 = Math.round(damage2);
-				player.takeMagicDamage(damage2, true);
+				player.takeFireDamage(damage2, true);
 			}
-			
 			addTalkShit();
 		}
 		
@@ -233,6 +227,7 @@ import classes.VaginaClass;
 			this.weaponAttack = player.weaponAttack;
 			this.weaponVerb = player.weaponVerb;
 			this.armorDef = player.armorDef;
+			this.armorMDef = player.armorMDef;
 			this.armorName = player.armorName;
 			this.level = player.level;
 			this.ass.analLooseness = player.ass.analLooseness;

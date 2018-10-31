@@ -3,6 +3,7 @@
  */
 package classes.Scenes.Combat {
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.HeadJewelryLib;
 import classes.Items.JewelryLib;
 import classes.Monster;
 import classes.PerkLib;
@@ -33,28 +34,39 @@ public class CombatMagic extends BaseCombatContent {
 			useMana((30 * spellChargeWeaponCostMultiplier()),5);
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-			spellPerkUnlock(); // XXX: message?
+			spellPerkUnlock();
+			outputText("<b>Charge Weapon was autocasted succesfully.</b>\n\n");
 		}
 		if (player.hasPerk(PerkLib.Spellarmor) && player.lust < getWhiteMagicLustCap() && player.mana >= (spellCostWhite(40) * spellChargeArmorCostMultiplier()) && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] == 0 && !player.isNaked()) {
 			spellChargeArmor(true);
 			useMana((40 * spellChargeArmorCostMultiplier()),5);
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-			spellPerkUnlock(); // XXX: message?
+			spellPerkUnlock();
+			outputText("<b>Charge Armor was autocasted succesfully.</b>\n\n");
 		}
 		if (player.hasPerk(PerkLib.Battlemage) && ((player.hasPerk(PerkLib.GreyMage) && player.lust >= 30) || player.lust >= 50) && player.mana >= (spellCostBlack(50) * spellMightCostMultiplier()) && flags[kFLAGS.AUTO_CAST_MIGHT] == 0) {
 			spellMight(true);
 			useMana((50 * spellMightCostMultiplier()),6);
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-			spellPerkUnlock(); // XXX: message?
+			spellPerkUnlock();
+			outputText("<b>Might was autocasted succesfully.</b>\n\n");
 		}
 		if (player.hasPerk(PerkLib.Battleflash) && ((player.hasPerk(PerkLib.GreyMage) && player.lust >= 30) || player.lust >= 50) && player.mana >= (spellCostBlack(40) * spellBlinkCostMultiplier()) && flags[kFLAGS.AUTO_CAST_BLINK] == 0) {
 			spellBlink(true);
 			useMana((40 * spellBlinkCostMultiplier()),6);
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-			spellPerkUnlock(); // XXX: message?
+			spellPerkUnlock();
+			outputText("<b>Blink was autocasted succesfully.</b>\n\n");
+		}
+		if (player.hasPerk(PerkLib.Battleshield) && (player.lust >= 50 || player.lust < (player.maxLust() - 49)) && flags[kFLAGS.AUTO_CAST_MANA_SHIELD] == 0) {
+			spellManaShield(true);
+			flags[kFLAGS.SPELLS_CAST]++;
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+			spellPerkUnlock();
+			outputText("<b>Mana Shield was autocasted succesfully.</b>\n\n");
 		}
 	}
 	internal function cleanupAfterCombatImpl():void {
@@ -71,7 +83,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
 		if (player.hasPerk(PerkLib.WizardsAndDaoistsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
 		if (player.hasPerk(PerkLib.WizardsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
-		if (player.jewelry == jewelries.FOXHAIR) costPercent -= 20;
+		if (player.headjewelryName == "fox hairpin") costPercent -= 20;
 		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (player.weapon == weapons.N_STAFF) costPercent += 200;
 		if (spellModImpl() > 1) costPercent += Math.round(spellModImpl() - 1) * 10;
@@ -112,7 +124,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalHealingMajor)) costPercent -= 15;
 		if (player.hasPerk(PerkLib.NaturalHealingEpic)) costPercent -= 20;
 		if (player.hasPerk(PerkLib.NaturalHealingLegendary)) costPercent -= 25;
-		if (player.jewelry == jewelries.FOXHAIR) costPercent -= 20;
+		if (player.headjewelryName == "fox hairpin") costPercent -= 20;
 		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (player.weapon == weapons.N_STAFF) costPercent += 200;
 		if (healModImpl() > 1) costPercent += Math.round(healModImpl() - 1) * 10;
@@ -130,7 +142,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
 		if (player.hasPerk(PerkLib.WizardsAndDaoistsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
 		if (player.hasPerk(PerkLib.WizardsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
-		if (player.jewelry == jewelries.FOXHAIR) costPercent -= 20;
+		if (player.headjewelryName == "fox hairpin") costPercent -= 20;
 		if (player.weapon == weapons.PURITAS || player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (player.weapon == weapons.N_STAFF) costPercent += 200;
 		if (spellModWhiteImpl() > 1) costPercent += Math.round(spellModWhiteImpl() - 1) * 10;
@@ -172,7 +184,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalHealingMajor)) costPercent -= 15;
 		if (player.hasPerk(PerkLib.NaturalHealingEpic)) costPercent -= 20;
 		if (player.hasPerk(PerkLib.NaturalHealingLegendary)) costPercent -= 25;
-		if (player.jewelry == jewelries.FOXHAIR) costPercent -= 20;
+		if (player.headjewelryName == "fox hairpin") costPercent -= 20;
 		if (player.weapon == weapons.PURITAS || player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (player.weapon == weapons.N_STAFF) costPercent += 200;
 		if (healModWhiteImpl() > 1) costPercent += Math.round(healModWhiteImpl() - 1) * 10;
@@ -190,7 +202,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
 		if (player.hasPerk(PerkLib.WizardsAndDaoistsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
 		if (player.hasPerk(PerkLib.WizardsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
-		if (player.jewelry == jewelries.FOXHAIR) costPercent -= 20;
+		if (player.headjewelryName == "fox hairpin") costPercent -= 20;
 		if (player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (player.weapon == weapons.N_STAFF) costPercent += 200;
 		if (spellModBlackImpl() > 1) costPercent += Math.round(spellModBlackImpl() - 1) * 10;
@@ -232,7 +244,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalHealingMajor)) costPercent -= 15;
 		if (player.hasPerk(PerkLib.NaturalHealingEpic)) costPercent -= 20;
 		if (player.hasPerk(PerkLib.NaturalHealingLegendary)) costPercent -= 25;
-		if (player.jewelry == jewelries.FOXHAIR) costPercent -= 20;
+		if (player.headjewelryName == "fox hairpin") costPercent -= 20;
 		if (player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (player.weapon == weapons.N_STAFF) costPercent += 200;
 		if (healModBlackImpl() > 1) costPercent += Math.round(healModBlackImpl() - 1) * 10;
@@ -252,12 +264,12 @@ public class CombatMagic extends BaseCombatContent {
 		if(player.hasPerk(PerkLib.JobSorcerer) && player.inte >= 25) mod += .1;
 		if(player.hasPerk(PerkLib.Mage) && player.inte >= 50) mod += .2;
 		if(player.hasPerk(PerkLib.Spellpower) && player.inte >= 50) mod += .1;
-		if(player.hasPerk(PerkLib.TraditionalMageI) && player.weaponPerk == "Staff" && player.isUsingTome()) mod += 1;
-		if(player.hasPerk(PerkLib.TraditionalMageII) && player.weaponPerk == "Staff" && player.isUsingTome()) mod += 1;
-		if(player.hasPerk(PerkLib.TraditionalMageIII) && player.weaponPerk == "Staff" && player.isUsingTome()) mod += 1;
-		if(player.hasPerk(PerkLib.TraditionalMageIV) && player.weaponPerk == "Staff" && player.isUsingTome()) mod += 1;
-		if(player.hasPerk(PerkLib.TraditionalMageV) && player.weaponPerk == "Staff" && player.isUsingTome()) mod += 1;
-		if(player.hasPerk(PerkLib.TraditionalMageVI) && player.weaponPerk == "Staff" && player.isUsingTome()) mod += 1;
+		if(player.hasPerk(PerkLib.TraditionalMageI) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
+		if(player.hasPerk(PerkLib.TraditionalMageII) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
+		if(player.hasPerk(PerkLib.TraditionalMageIII) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
+		if(player.hasPerk(PerkLib.TraditionalMageIV) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
+		if(player.hasPerk(PerkLib.TraditionalMageV) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
+		if(player.hasPerk(PerkLib.TraditionalMageVI) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
 		if(player.hasPerk(PerkLib.Obsession)) {
 			mod += player.perkv1(PerkLib.Obsession);
 		}
@@ -282,11 +294,17 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.shield == shields.MABRACE) mod += .5;
 		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
 		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
-		if (player.hasStatusEffect(StatusEffects.Maleficium)) mod += 1;
+		if (player.hasStatusEffect(StatusEffects.Maleficium)) {
+			if (player.hasPerk(PerkLib.ObsidianHeartEvolved)) {
+				if (player.hasPerk(PerkLib.ObsidianHeartFinalForm)) mod += 2.5;
+				else mod += 1.25;
+			}
+			else mod += 1;
+		}
 		if (player.weapon == weapons.PURITAS) mod *= 1.6;
 		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
 		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
-		mod = Math.round(mod);
+		mod = Math.round(mod * 100)/100;
 		return mod;
 	}
 	internal function healModImpl():Number {
@@ -322,7 +340,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.weapon == weapons.PURITAS) mod *= 1.6;
 		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
 		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
-		mod = Math.round(mod);
+		mod = Math.round(mod * 100)/100;
 		return mod;
 	}
 	internal function spellModWhiteImpl():Number {
@@ -357,7 +375,8 @@ public class CombatMagic extends BaseCombatContent {
 			mod += player.perkv1(PerkLib.SagesKnowledge);
 		}
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
-		if (player.hasPerk(PerkLib.UnicornBlessing) && player.cor <= 20) mod += 20;
+		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod += .2;
+		if (player.hasPerk(PerkLib.UnicornBlessing) && player.cor <= 20) mod += .2;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
@@ -366,10 +385,16 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.shield == shields.MABRACE) mod += .5;
 		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
 		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
-		if (player.hasStatusEffect(StatusEffects.Maleficium)) mod += 1;
+		if (player.hasStatusEffect(StatusEffects.Maleficium)) {
+			if (player.hasPerk(PerkLib.ObsidianHeartEvolved)) {
+				if (player.hasPerk(PerkLib.ObsidianHeartFinalForm)) mod += 2.5;
+				else mod += 1.25;
+			}
+			else mod += 1;
+		}
 		if (player.weapon == weapons.PURITAS) mod *= 1.6;
 		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
-		mod = Math.round(mod);
+		mod = Math.round(mod * 100)/100;
 		return mod;
 	}
 	internal function healModWhiteImpl():Number {
@@ -395,7 +420,8 @@ public class CombatMagic extends BaseCombatContent {
 			mod += player.perkv1(PerkLib.SagesKnowledge);
 		}
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
-		if (player.hasPerk(PerkLib.UnicornBlessing) && player.cor <= 20) mod += 20;
+		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod += .3;
+		if (player.hasPerk(PerkLib.UnicornBlessing) && player.cor <= 20) mod += .2;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
@@ -405,7 +431,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
 		if (player.weapon == weapons.PURITAS) mod *= 1.6;
 		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
-		mod = Math.round(mod);
+		mod = Math.round(mod * 100)/100;
 		return mod;
 	}
 	internal function spellModBlackImpl():Number {
@@ -437,7 +463,8 @@ public class CombatMagic extends BaseCombatContent {
 			mod += player.perkv1(PerkLib.SagesKnowledge);
 		}
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
-		if (player.hasPerk(PerkLib.BicornBlessing) && player.cor >= 80) mod += 20;
+		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod += .3;
+		if (player.hasPerk(PerkLib.BicornBlessing) && player.cor >= 80) mod += .2;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
@@ -446,10 +473,16 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.shield == shields.MABRACE) mod += .5;
 		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
 		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
-		if (player.hasStatusEffect(StatusEffects.Maleficium)) mod += 1;
+		if (player.hasStatusEffect(StatusEffects.Maleficium)) {
+			if (player.hasPerk(PerkLib.ObsidianHeartEvolved)) {
+				if (player.hasPerk(PerkLib.ObsidianHeartFinalForm)) mod += 2.5;
+				else mod += 1.25;
+			}
+			else mod += 1;
+		}
 		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
 		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
-		mod = Math.round(mod);
+		mod = Math.round(mod * 100)/100;
 		return mod;
 	}
 	internal function healModBlackImpl():Number {
@@ -472,7 +505,8 @@ public class CombatMagic extends BaseCombatContent {
 			mod += player.perkv1(PerkLib.SagesKnowledge);
 		}
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
-		if (player.hasPerk(PerkLib.BicornBlessing) && player.cor >= 80) mod += 20;
+		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod += .3;
+		if (player.hasPerk(PerkLib.BicornBlessing) && player.cor >= 80) mod += .2;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
@@ -482,7 +516,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
 		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
 		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
-		mod = Math.round(mod);
+		mod = Math.round(mod * 100)/100;
 		return mod;
 	}
 	
@@ -872,7 +906,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.ManaShield)) {
 				buttons.add("Deactiv MS", DeactivateManaShield).hint("Deactivate Mana Shield.\n");
 			} else {
-				bd = buttons.add("Mana Shield", ManaShield)
+				bd = buttons.add("Mana Shield", spellManaShield)
 						.hint("Drawning your own mana with help of lust and force of the willpower to form shield that can absorb attacks.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  \n\nMana Cost: 1 mana point per 1 point of damage blocked");
 				if (badLustForGrey) {
 					bd.disable("You can't use any grey magics.");
@@ -987,6 +1021,7 @@ public class CombatMagic extends BaseCombatContent {
 		monster.teased(lustDmg);
 		if (crit == true) outputText(" <b>Critical!</b>");
 		outputText("\n\n");
+		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		doNext(playerMenu);
 		flags[kFLAGS.SPELLS_CAST]++;
@@ -1073,6 +1108,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.AyoArmorProficiency)) MightBoost -= 20;
 			if (player.hasPerk(PerkLib.Agility)) MightBoost -= 10;
 			if (player.hasPerk(PerkLib.LightningStrikes)) MightBoost -= 10;
+			if (player.hasPerk(PerkLib.StarlightStrikes)) MightBoost -= 10;
 			if (player.hasPerk(PerkLib.BodyCultivator)) MightBoost -= 5;
 		//	MightBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
 			if (MightBoost < 10) MightBoost = 10;
@@ -1197,6 +1233,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.AyoArmorProficiency)) BlinkBoost -= 20;
 			if (player.hasPerk(PerkLib.Agility)) BlinkBoost -= 10;
 			if (player.hasPerk(PerkLib.LightningStrikes)) BlinkBoost -= 10;
+			if (player.hasPerk(PerkLib.StarlightStrikes)) BlinkBoost -= 10;
 			if (player.hasPerk(PerkLib.BodyCultivator)) BlinkBoost -= 5;
 		//	BlinkBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
 			if (BlinkBoost < 10) BlinkBoost = 10;
@@ -1547,7 +1584,13 @@ public class CombatMagic extends BaseCombatContent {
 		else enemyAI();
 	}
 	
-	public function ManaShield():void {
+	public function spellManaShield(silent:Boolean = false):void {
+		if (silent) {
+			if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+			player.createStatusEffect(StatusEffects.ManaShield,0,0,0,0);
+			statScreenRefresh();
+			return;
+		}
 		clearOutput();
 		outputText("Deciding you need additional protection during current fight you spend moment to concentrate and form barrier made of mana around you.  It will block attacks as long you would have enough mana.\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
@@ -1644,6 +1687,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.AyoArmorProficiency)) ChargeWeaponBoost -= 15;
 		if (player.hasPerk(PerkLib.Agility)) ChargeWeaponBoost -= 10;
 		if (player.hasPerk(PerkLib.LightningStrikes)) ChargeWeaponBoost -= 10;
+		if (player.hasPerk(PerkLib.StarlightStrikes)) ChargeWeaponBoost -= 10;
 		if (player.hasPerk(PerkLib.BodyCultivator)) ChargeWeaponBoost -= 5;
 	//	ChargeWeaponBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
 		if (ChargeWeaponBoost < 10) ChargeWeaponBoost = 10;
@@ -1720,6 +1764,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.AyoArmorProficiency)) ChargeArmorBoost -= 15;
 		if (player.hasPerk(PerkLib.Agility)) ChargeArmorBoost -= 10;
 		if (player.hasPerk(PerkLib.LightningStrikes)) ChargeArmorBoost -= 10;
+		if (player.hasPerk(PerkLib.StarlightStrikes)) ChargeArmorBoost -= 10;
 		if (player.hasPerk(PerkLib.BodyCultivator)) ChargeArmorBoost -= 5;
 	//	ChargeArmorBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
 		if (ChargeArmorBoost < 10) ChargeArmorBoost = 10;
@@ -1787,10 +1832,12 @@ public class CombatMagic extends BaseCombatContent {
 		heal += scalingBonusIntelligence();
 		if (player.hasPerk(PerkLib.WisenedHealer)) heal += scalingBonusWisdom();
 		heal *= healModWhite();
-		if (player.unicornScore() >= 5) heal *= ((player.unicornScore() - 4) * 0.5);
-		if (player.alicornScore() >= 6) heal *= ((player.alicornScore() - 5) * 0.5);
 		if (player.armorName == "skimpy nurse's outfit") heal *= 1.2;
 		if (player.weaponName == "unicorn staff") heal *= 1.5;
+		if (player.hasPerk(PerkLib.CloseToDeath) && player.HP < (player.maxHP() * 0.25)) {
+			if (player.hasPerk(PerkLib.CheatDeath) && player.HP < (player.maxHP() * 0.1)) heal *= 2.5;
+			else heal *= 1.5;
+		}
 		//Determine if critical heal!
 		var crit:Boolean = false;
 		var critHeal:int = 5;
@@ -2198,3 +2245,4 @@ public class CombatMagic extends BaseCombatContent {
 
 }
 }
+

@@ -3,6 +3,7 @@
  */
 package classes.Items.Consumables
 {
+import classes.CoC;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumable;
@@ -52,6 +53,7 @@ public class PhoukaWhiskey extends Consumable {
 				case 3: //Child is a faerie, hates phouka whiskey
 					outputText("You feel queasy and want to throw up.  There's a pain in your belly and you realize the baby you're carrying didn't like that at all.");
 			}
+			if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= mutations.DrunkenPowerEmpowerOni()) mutations.DrunkenPowerEmpower();
 			game.flags[kFLAGS.PREGNANCY_CORRUPTION]++; //Faerie or phouka babies become more corrupted, no effect if the player is not pregnant or on other types of babies
 			phoukaWhiskeyAddStatus(game.player);
 			return(false);

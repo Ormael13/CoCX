@@ -26,7 +26,7 @@ package classes.Scenes.Places.HeXinDao
 			}
 			menu();
 			addButton(0, "Drink", drinkAlcohol);
-			//addButton(4, "", );mission giving npc
+			addButton(4, "Adv.Guild", BoardkeeperYangMain);
 			//addButtonDisabled(12, "???", "You see some suspicious looking squirrel in one of inn corners. (Liadri + Star should bring this npc to more completness)");
 			addButton(14, "Leave", heXinDao.riverislandVillageStuff);
 		}
@@ -68,6 +68,433 @@ package classes.Scenes.Places.HeXinDao
 			inventory.takeItem(drink, drinkAlcohol);
 		}
 		
+		public function BoardkeeperYangMain():void {
+			clearOutput();
+			if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0 || player.hasKeyItem("Adventurer Guild: Iron plate") >= 0) {// || player.hasKeyItem("Adventurer Guild: Bronze plate") >= 0 || player.hasKeyItem("Adventurer Guild: Silver plate") >= 0 || player.hasKeyItem("Adventurer Guild: Gold plate") >= 0 || player.hasKeyItem("Adventurer Guild: Platinum plate") >= 0
+				outputText("Yang the job handler wait at you arm crossed. She looks bored like she has been there all day.\n\n");
+				outputText("\"<i>So [name] how can I help you today? Here to talk jobs or something else?</i>\"");
+				menu();
+				addButton(0, "Quest", BoardkeeperYangQuest);
+				addButton(1, "Talk", BoardkeeperYangTalk);
+				if (player.keyItemv1("Adventurer Guild: Copper plate") > 1) addButton(2, "Promotion", BoardkeeperYangPromotion).hint("Ask Yang for a promotion once you have achieved enough jobs.");
+				else addButtonDisabled(2, "Promotion", "Not meet req.");
+				addButton(3, "Sex", BoardkeeperYangSex);
+				addButton(4, "Back", curry(enteringInn,false));
+			}
+			else {
+				outputText("You approach the board covered in colorful papers and the panda girl next to it smile at you.\n\n");
+				outputText("\"<i>Well hello there! Are you looking for a job? I represent the adventurer guild and my organisation could use more able bodied men’s and women’s like you.</i>\"\n\n");
+				outputText("An adventurer guild? What's the benefits?\n\n");
+				outputText("\"<i>Mareth is both filled with perils, lost treasures and people in need of heroic assistance. By paying a small membership fee I can let you in on local events that could use your assistance and give you pointers to unplundered ruins. It’s only 5 spirit stones to join. Fame and treasure? All within your reach to grab.</i>\"");
+				menu();
+				addButton(0, "Decline", No);
+				addButton(1, "Join", Yes);
+			}
+		}
+		private function No():void {
+			clearOutput();
+			outputText("You aren’t interested into dungeon delving at the time. It's barely if you're not overburdened with your regular activities.");
+			doNext(curry(enteringInn,false));
+		}
+		private function Yes():void{
+			clearOutput();
+			if (flags[kFLAGS.SPIRIT_STONES] < 5) {
+				outputText("Yeah sure, you will join. Or rather you would like to but you lack the required spirit stones for the membership fee.\n\n");
+				outputText("\"<i>Its ok just go to Moga Hen, he should be able to exchange those gem of yours for the local currency.</i>\"");
+				doNext(curry(enteringInn,false));
+			}
+			else {
+				outputText("Yeah sure, you will join. You handle the ursine woman the spirit stones and sign the papers.\n\n");
+				outputText("\"<i>Perfect, Just perfect. Let me hand you over your badge.</i>\"\n\n");
+				outputText("She picks up a small Copper colored plate and give it to you.\n\n");
+				outputText("\"<i>Well as of now you are officially a member of the adventurer guild. Tell whenever you are ready ask for a quest and I will direct you to your target.</i>\"\n\n");
+				flags[kFLAGS.SPIRIT_STONES] -= 5;
+				statScreenRefresh();
+				player.createKeyItem("Adventurer Guild: Copper plate", 0, 0, 0, 0);
+				doNext(curry(enteringInn,false));
+			}
+		}
+		public function BoardkeeperYangQuest():void {
+			clearOutput();
+			outputText("The panda girl nod and allow you to browse the board.\n\n");
+			outputText("\"<i>Plenty of quest available. Which one will you take?</i>\"\n\n");
+			menu();
+			addButton(0, "Imps", BoardkeeperYangQuestImps1).hint("Cooper tier Quest.");
+			addButton(1, "Ferals(1)", BoardkeeperYangQuestFerals1).hint("Cooper tier Quest.");
+			addButton(2, "Ferals(2)", BoardkeeperYangQuestFerals2).hint("Cooper tier Quest.");
+			if (player.hasKeyItem("Adventurer Guild: Iron plate") >= 0) {
+				addButton(3, "Demons", BoardkeeperYangQuestDemons1).hint("Iron tier Quest.");
+			}
+			addButton(14, "Back", BoardkeeperYangMain);
+		}
+		public function BoardkeeperYangQuestImps1():void {
+			clearOutput();
+			if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests1)) {
+				if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) > 6) {
+					outputText("The panda decline the job request.\n\n");
+					outputText("\"<i>Sorry [name] this job is only once per day. Come back tomorrow.</i>\"\n\n");
+				}
+				else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 6) {
+					if (player.hasItem(useables.IMPSKLL, 5)) {
+						outputText("Yang examine the skulls to make sure those are imps then nods giving you your payment.\n\n");
+						outputText("\"<i>Good job [name] here is your payment.</i>\"\n\n");
+						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 1, 1);
+						player.destroyItems(useables.IMPSKLL, 5);
+						flags[kFLAGS.SPIRIT_STONES] += 7;
+						statScreenRefresh();
+					}
+					else {
+						outputText("The panda tap her foot on the ground.\n\n");
+						outputText("\"<i>I thought I had been clear the bounty require 5 imps skulls [name]. Get back to hunting.</i>\"\n\n");
+					}
+				}
+				else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 4) {
+					outputText("Yang eyes you with keen interest then ask.\n\n");
+					outputText("\"<i>Would you actually be interested into something easier? Right now there's a bounty on imp slaying. Bring me back 5 imp skulls and I will see it through that you are properly rewarded.</i>\"\n\n");
+					player.addStatusValue(StatusEffects.AdventureGuildQuests1, 1, 2);
+				}
+				else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 3) {
+					if (player.hasItem(useables.IMPSKLL, 4)) {
+						outputText("Yang examine the skulls to make sure those are imps then nods giving you your payment.\n\n");
+						outputText("\"<i>Good job [name] here is your payment along with a special training scroll.</i>\"\n\n");
+						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 1, 1);
+						player.destroyItems(useables.IMPSKLL, 4);
+						player.perkPoints += 1;
+					}
+					else {
+						outputText("The panda tap her foot on the ground.\n\n");
+						outputText("\"<i>I thought I had been clear the bounty require 4 imps skulls [name]. Get back to hunting.</i>\"\n\n");
+					}
+				}
+				else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 2) {
+					outputText("Yang eyes you with keen interest then ask.\n\n");
+					outputText("\"<i>Would you actually be interested into something easier? Right now there's a bounty on imp slaying. Bring me back 4 imp skulls and I will see it through that you are properly rewarded.</i>\"\n\n");
+					player.addStatusValue(StatusEffects.AdventureGuildQuests1, 1, 1);
+				}
+				else {
+					if (player.hasItem(useables.IMPSKLL, 3)) {
+						outputText("Yang examine the skulls to make sure those are imps then nods giving you your payment.\n\n");
+						outputText("\"<i>Good job [name] here is your payment. By the way I though you may want to be able to sense corruption, can be useful to hunt demons here have this amulet.</i>\"\n\n");
+						outputText("(<b>Acquired demon hunter amulet!</b>)\n\n");
+						outputText("(<b>Gained New Perk: Sense Corruption</b>)");
+						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 1, 1);
+						player.addKeyValue("Adventurer Guild: Copper plate", 1, 1);
+						player.createKeyItem("Demon Hunter Amulet", 0, 0, 0, 0);
+						player.createPerk(PerkLib.SenseCorruption, 0, 0, 0, 0);
+						player.destroyItems(useables.IMPSKLL, 3);
+					}
+					else {
+						outputText("The panda tap her foot on the ground.\n\n");
+						outputText("\"<i>I thought I had been clear the bounty require 3 imps skulls [name]. Get back to hunting.</i>\"\n\n");
+					}
+				}
+			}
+			else {
+				outputText("Yang eyes you with keen interest then ask.\n\n");
+				outputText("\"<i>Would you actually be interested into something easier? Right now there's a bounty on imp slaying. Bring me back 3 imp skulls and I will see it through that you are properly rewarded.</i>\"\n\n");
+				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests1)) player.addStatusValue(StatusEffects.AdventureGuildQuests1, 1, 1);
+				else player.createStatusEffect(StatusEffects.AdventureGuildQuests1, 1, 0, 0, 0);
+			}
+			doNext(curry(enteringInn,false));
+		}
+		public function BoardkeeperYangQuestFerals1():void {
+			clearOutput();
+			if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) > 0) {
+				if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) > 6) {
+					outputText("The panda decline the job request.\n\n");
+					outputText("\"<i>Sorry [name] this job is only once per day. Come back tomorrow.</i>\"\n\n");
+				}
+				else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 6) {
+					if (player.hasItem(useables.SEVTENT, 3)) {
+						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
+						outputText("\"<i>Good job there. I hope those plants did not prove to much trouble. Here is your payment.</i>\"\n\n");
+						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 1);
+						player.destroyItems(useables.SEVTENT, 3);
+						flags[kFLAGS.SPIRIT_STONES] += 8;
+						statScreenRefresh();
+					}
+					else outputText("You try turn in the quest but Yang tells you you don’t have enough tentacles yet.\n\n");
+				}
+				else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 4) {
+					outputText("\"<i>Someone put up a bounty for slaying tentacle beast. I would need lets say 3 tentacle from those mishapen creature as proof of your deed. Of course you will be rewarded for the job.</i>\"\n\n");
+					player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 2);
+				}
+				else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 3) {
+					if (player.hasItem(useables.SEVTENT, 2)) {
+						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
+						outputText("\"<i>Good job [name] here is your payment along with a special training scroll.</i>\"\n\n");
+						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 1);
+						player.destroyItems(useables.SEVTENT, 2);
+						player.perkPoints += 1;
+					}
+					else outputText("You try turn in the quest but Yang tells you you don’t have enough tentacles yet.\n\n");
+				}
+				else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 2) {
+					outputText("\"<i>Someone put up a bounty for slaying tentacle beast. I would need lets say 2 tentacle from those mishapen creature as proof of your deed. Of course you will be rewarded for the job.</i>\"\n\n");
+					player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 1);
+				}
+				else {
+					if (player.hasItem(useables.SEVTENT, 1)) {
+						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
+						outputText("\"<i>My my, I wasn’t sure I would ever see you back.</i>\"\n\n");
+						outputText("Seems she misjudged you then?\n\n");
+						outputText("\"<i>Everyone makes mistakes and plants assignments are way more dangerous than imps, you clearly outpaced expectation. Here is your payment. This reminds me some man told me to leave you this scroll as a reward too... should help you sense the anger of your opponents he said.</i>\"\n\n");
+						outputText("(<b>Gained New Perk: Sense Wrath</b>)");
+						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 1);
+						player.addKeyValue("Adventurer Guild: Copper plate", 1, 1);
+						player.createPerk(PerkLib.SenseWrath, 0, 0, 0, 0);
+						player.destroyItems(useables.SEVTENT, 1);
+					}
+					else outputText("You try turn in the quest but Yang tells you you don’t have enough tentacles yet.\n\n");
+				}
+			}
+			else {
+				outputText("\"<i>Someone put up a bounty for slaying tentacle beast. I would need lets say 1 tentacle from those mishapen creature as proof of your deed. Of course you will be rewarded for the job.</i>\"\n\n");
+				outputText("You shrug and accept the job. Plants... what could go wrong?\n\n");
+				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests2)) player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 1);
+				else player.createStatusEffect(StatusEffects.AdventureGuildQuests2, 1, 0, 0, 0);
+			}
+			doNext(curry(enteringInn,false));
+		}
+		public function BoardkeeperYangQuestDemons1():void {
+			clearOutput();
+			if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) > 0) {
+				if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) > 6) {
+					outputText("The panda decline the job request.\n\n");
+					outputText("\"<i>Sorry [name] this job is only once per day. Come back tomorrow.</i>\"\n\n");
+				}
+				else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 6) {
+					if (player.hasItem(useables.DEMSKLL, 3)) {
+						outputText("You turn in the quest and Yang nod.\n\n");
+						outputText("\"<i>Good job as usual here is your payment.</i>\"\n\n");
+						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 2, 1);
+						player.destroyItems(useables.DEMSKLL, 3);
+						flags[kFLAGS.SPIRIT_STONES] += 8;
+						statScreenRefresh();
+					}
+					else {
+						outputText("The panda tap her foot on the ground.\n\n");
+						outputText("\"<i>I thought I had been clear the bounty require 3 demon skulls [name]. Get back to hunting.</i>\"\n\n");
+					}
+				}
+				else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 4) {
+					outputText("\"<i>Hey [name] happen I have a new higher grade job for you if you’re interested.</i>\"\n\n");
+					outputText("Of course your interested what’s the job?\n\n");
+					outputText("\"<i>See it happens the town offer a generous sum for every demon slain. If you can bring me proof of the death of 3 demons.</i>\"\n\n");
+					player.addStatusValue(StatusEffects.AdventureGuildQuests1, 2, 2);
+				}
+				else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 3) {
+					if (player.hasItem(useables.DEMSKLL, 2)) {
+						outputText("You turn in the quest and Yang nod.\n\n");
+						outputText("\"<i>Good job [name] here is your payment along with a special training scroll.</i>\"\n\n");
+						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 2, 1);
+						player.destroyItems(useables.DEMSKLL, 2);
+						player.perkPoints += 1;
+					}
+					else {
+						outputText("The panda tap her foot on the ground.\n\n");
+						outputText("\"<i>I thought I had been clear the bounty require 2 demon skulls [name]. Get back to hunting.</i>\"\n\n");
+					}
+				}
+				else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 2) {
+					outputText("\"<i>Hey [name] happen I have a new higher grade job for you if you’re interested.</i>\"\n\n");
+					outputText("Of course your interested what’s the job?\n\n");
+					outputText("\"<i>See it happens the town offer a generous sum for every demon slain. If you can bring me proof of the death of 2 demons.</i>\"\n\n");
+					player.addStatusValue(StatusEffects.AdventureGuildQuests1, 2, 1);
+				}
+				else {
+					if (player.hasItem(useables.DEMSKLL, 1)) {
+						outputText("You display the proof of your victory.\n\n");
+						outputText("\"<i>Nice job [name] so about that special reward, it happens a traveling demon hunter has agreed to train whoever would kill demons in the art of slaying. Chika would you please come over? [name] cleared your bounty.</i>\"\n\n");
+						outputText("Chika which appears to be a rattel morph with an eyepatch. Rattel, or honey badgers, are known for their ferocity and the set of throwing dagger and poison flasks hanging from her belt, the pair of scimitar on her side and the crossbow on her back tells everything you need about her, ");
+						outputText("she's clearly an expert killer. Chika gaze goes through you and the inflexibility and sternness of it leaves you somewhat intimidated.\n\n");
+						outputText("\"<i>Doesn’t look like much... Ye sure " + player.mf("he", "she") + " smoked the targets?</i>\"\n\n");
+						outputText("Yang goes by the affirmative.\n\n");
+						outputText("\"<i>Ye and I are going to have a lot of dealings in the future. But first I want ya to follow me out in the town training area. I have a few things I would like to teach ye.</i>\"\n\n");
+						outputText("You spend the four next hour with the rattel morph learning new demon killing tricks. By the end of your training you have accumulated a good bank of knowledge on demon weak points and how to exploit them. Chika leaves by the end warning that you and her will eventually meet again.\n\n");
+						outputText("(<b>Gained New Perk: Demon Slayer</b>)");
+						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 2, 1);
+						player.addKeyValue("Adventurer Guild: Iron plate", 1, 1);
+						player.createPerk(PerkLib.DemonSlayer, 0.1, 0, 0, 0);
+						player.destroyItems(useables.DEMSKLL, 1);
+					}
+					else {
+						outputText("The panda tap her foot on the ground.\n\n");
+						outputText("\"<i>I thought I had been clear the bounty require 1 demon skull [name]. Get back to hunting.</i>\"\n\n");
+					}
+				}
+			}
+			else {
+				outputText("\"<i>Hey [name] happen I have a new higher grade job for you if you’re interested.</i>\"\n\n");
+				outputText("Of course your interested what’s the job?\n\n");
+				outputText("\"<i>See it happens the town offer a generous sum for every demon slain. If you can bring me proof of the death of demon. Should you come back I have a special reward for you in addition to your pay.</i>\"\n\n");
+				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests1)) player.addStatusValue(StatusEffects.AdventureGuildQuests1, 2, 1);
+				else player.createStatusEffect(StatusEffects.AdventureGuildQuests1, 0, 1, 0, 0);
+			}
+			doNext(curry(enteringInn,false));
+		}
+		public function BoardkeeperYangQuestFerals2():void {
+			clearOutput();
+			if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) > 0) {
+				if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) > 6) {
+					outputText("The panda decline the job request.\n\n");
+					outputText("\"<i>Sorry [name] this job is only once per day. Come back tomorrow.</i>\"\n\n");
+				}
+				else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 6) {
+					if (player.hasItem(useables.FIMPSKL, 5)) {
+						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
+						outputText("\"<i>Good job there. I heard those creatures are actually out there killing instead of raping, it’s quite chilling. Here is your payment.</i>\"\n\n");
+						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 1);
+						player.destroyItems(useables.FIMPSKL, 5);
+						flags[kFLAGS.SPIRIT_STONES] += 7;
+						statScreenRefresh();
+					}
+					else outputText("You try turn in the quest but Yang tells you you don’t have enough feral imp skulls yet.\n\n");
+				}
+				else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 4) {
+					outputText("\"<i>Someone put up a bounty for slaying feral imps. I would need lets say 5 feral imps skulls from those mishapen creature as proof of your deed. Of course you will be rewarded for the job.</i>\"\n\n");
+					player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 2);
+				}
+				else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 3) {
+					if (player.hasItem(useables.FIMPSKL, 4)) {
+						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
+						outputText("\"<i>Good job there. I heard those creatures are actually out there killing instead of raping, it’s quite chilling. Here is your payment along with a special training scroll.</i>\"\n\n");
+						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 1);
+						player.destroyItems(useables.FIMPSKL, 4);
+						player.perkPoints += 1;
+					}
+					else outputText("You try turn in the quest but Yang tells you you don’t have enough feral imp skulls yet.\n\n");
+				}
+				else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 2) {
+					outputText("\"<i>Someone put up a bounty for slaying feral imps. I would need lets say 4 feral imps skulls from those mishapen creature as proof of your deed. Of course you will be rewarded for the job.</i>\"\n\n");
+					player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 1);
+				}
+				else {
+					if (player.hasItem(useables.FIMPSKL, 3)) {
+						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
+						outputText("\"<i>My my, I wasn’t sure I would ever see you back.</i>\"\n\n");
+						outputText("Seems she misjudged you then?\n\n");
+						outputText("\"<i>Everyone makes mistakes and feral imps assignments are way more dangerous than normal imps, you clearly outpaced expectation. Here is your payment. This reminds me some man told me to leave you this scroll as a reward too... should help you fight feral opponents he said.</i>\"\n\n");
+						outputText("(<b>Gained New Perk: Feral Hunter</b>)");
+						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 1);
+						player.addKeyValue("Adventurer Guild: Copper plate", 1, 1);
+						player.createPerk(PerkLib.FeralHunter, 0.1, 0, 0, 0);
+						player.destroyItems(useables.FIMPSKL, 3);
+					}
+					else outputText("You try turn in the quest but Yang tells you you don’t have enough feral imp skulls yet.\n\n");
+				}
+			}
+			else {
+				outputText("\"<i>Someone put up a bounty for slaying feral imps. I would need lets say 3 feral imps skulls from those mishapen creature as proof of your deed. Of course you will be rewarded for the job.</i>\"\n\n");
+				outputText("You shrug and accept the job. It's time to hunt some imps.\n\n");
+				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests2)) player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 1);
+				else player.createStatusEffect(StatusEffects.AdventureGuildQuests2, 0, 1, 0, 0);
+			}
+			doNext(curry(enteringInn,false));
+		}
+		public function BoardkeeperYangQuestMinotaurs():void {
+			clearOutput();
+			outputText("Placeholder for lazyLia writing ^^\n\n");//mino hunts
+			doNext(curry(enteringInn,false));
+		}
+		public function BoardkeeperYangQuestFerals3():void {
+			clearOutput();
+			outputText("Placeholder for lazyLia writing ^^\n\n");//feral demons hunt
+			doNext(curry(enteringInn,false));
+		}
+		public function BoardkeeperYangQuest4():void {
+			clearOutput();//feral imps research
+			outputText("\"<i>The town schoolars put a bounty on some weird new variant of demon’s called feral, something about wanting to study the weird strait of unusually aggressive creatures. I would need lets say 10 feral imp skull so the scholar has enough material. Of course you will be rewarded for the job.</i>\"\n\n");
+			doNext(curry(enteringInn,false));
+		}
+		public function BoardkeeperYangQuest3():void {
+			clearOutput();
+			outputText("Placeholder for lazyLia writing ^^\n\n");
+			doNext(curry(enteringInn,false));
+		}
+		public function BoardkeeperYangQuest2():void {
+			clearOutput();
+			outputText("Placeholder for lazyLia writing ^^\n\n");
+			doNext(curry(enteringInn,false));
+		}
+		public function BoardkeeperYangQuest1():void {
+			clearOutput();
+			outputText("Placeholder for lazyLia writing ^^\n\n");
+			doNext(curry(enteringInn,false));
+		}
+		public function BoardkeeperYangTalk():void {
+			clearOutput();
+			outputText("Yang wait at you arm crossed.\n\n");
+			outputText("\"<i>Here to talk or something else?</i>\"");
+			menu();
+			addButton(0, "Her Job", BoardkeeperYangTalkHerJob);
+			addButton(1, "He'Xin'Dao", BoardkeeperYangTalkHeXinDao);
+			addButton(2, "Requests", BoardkeeperYangTalkRequests);
+			addButton(3, "Others", BoardkeeperYangTalkOthers);
+			addButton(4, "Back", BoardkeeperYangMain);
+		}
+		public function BoardkeeperYangTalkHerJob():void {
+			clearOutput();
+			outputText("What’s her job really. Is she an adventurer herself?\n\n");
+			outputText("\"<i>Me? No dear no I’m just the guild poster girl. I’m actually paid to stand there. That said there’s a few perk to it as I get to meet some of Mareth’s biggest badass face to face and sometime closer, if you catch my drift.</i>\"\n\n");
+			doNext(BoardkeeperYangTalk);
+		}
+		public function BoardkeeperYangTalkHeXinDao():void {
+			clearOutput();
+			outputText("Placeholder for lazyLia writing ^^\n\n");
+			doNext(BoardkeeperYangTalk);
+		}
+		public function BoardkeeperYangTalkRequests():void {
+			clearOutput();
+			outputText("Ok you are a member now, how do you take on a job?\n\n");
+			outputText("\"<i>First and foremost you come to me or any other board on mareth if you can find one. Then you choose a difficulty and I set you on a corresponding request.</i>\"\n\n");
+			outputText("Difficulty? You thought you could pick on the highest request right away.\n\n");
+			outputText("\"<i>No such thing " + player.mf("Mr", "Mrs") + " hero. The guild has strict ruling to prevent people throwing their lives away on job they can’t handle. We have a difficulty system based on skill and rank. You cannot take on a request way above your ranking until you have qualified for it. The rank are determined by copper, bronze, silver, gold and platinum plates.</i>\"\n\n");
+			doNext(BoardkeeperYangTalk);
+		}
+		public function BoardkeeperYangTalkOthers():void {
+			clearOutput();
+			outputText("If there is a guild there is bound to be many adventurers, who are they?\n\n");
+			outputText("\"<i>Well now that you ask yes there are a few local adventurers however most of them aren’t worthy of mention. That said one stands out, her name is Chi Chi and she regularly go out on request involving battling the corrupt forces. One hell of a fighter to, I heard she is a veteran of the town arena.");
+			if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) outputText(" If you want to get in on that action you may want to enlist in the arena gauntlet challenges to draw her attention.");
+			outputText("</i>\"\n\n");
+			doNext(BoardkeeperYangTalk);
+		}
+		public function BoardkeeperYangSex():void {
+			clearOutput();
+			outputText("She giggle before teasingly puffing her chest up, which only shows more cleavage than necessary.\n\n");
+			outputText("\"<i>Well that’s cute " + player.mf("Mr", "Mrs") + " hero but I don’t go for a ride with just anyone who ask. Complete at least a silver request for the guild and I will give you a shot.</i>\"");
+			doNext(curry(enteringInn,false));
+		}
+		public function BoardkeeperYangPromotion():void {
+			clearOutput();
+			if (player.keyItemv1("Adventurer Guild: Copper plate") > 1) {
+				if (flags[kFLAGS.SPIRIT_STONES] >= 10) {
+					outputText("Yang nod. \"<i>Yep it’s definitely time we promoted hou. You pass from Copper plate to Iron, congratulations!</i>\"\n\n");
+					outputText("She hand you over a new necklace which you proceed to don up.\n\n");
+					player.removeKeyItem("Adventurer Guild: Copper plate");
+					player.createKeyItem("Adventurer Guild: Iron plate", 0, 0, 0, 0);
+				}
+				else {
+					outputText("Yeah sure, you will get promoted. Or rather you would like to but you lack the required spirit stones for the promotion fee.\n\n");
+					outputText("\"<i>Its ok just go to Moga Hen, he should be able to exchange those gem of yours for the local currency.</i>\"");
+				}
+			}
+			if (player.keyItemv1("Adventurer Guild: Iron plate") > 1) {
+				if (flags[kFLAGS.SPIRIT_STONES] >= 15) {
+					outputText("Yang nod. \"<i>Yep it’s definitely time we promoted hou. You pass from Iron plate to Bronze, congratulations!</i>\"\n\n");
+					outputText("She hand you over a new necklace which you proceed to don up.\n\n");
+					player.removeKeyItem("Adventurer Guild: Iron plate");
+					player.createKeyItem("Adventurer Guild: Bronze plate", 0, 0, 0, 0);
+				}
+				else {
+					outputText("Yeah sure, you will get promoted. Or rather you would like to but you lack the required spirit stones for the promotion fee.\n\n");
+					outputText("\"<i>Its ok just go to Moga Hen, he should be able to exchange those gem of yours for the local currency.</i>\"");
+				}
+			}
+			doNext(BoardkeeperYangMain);
+		}
+		
 		public function ChiChiDrunkSex():void {
 			clearOutput();
 			outputText("As you enter the bar you hear a feminine laughter swiftly spotting what seems to be ");
@@ -75,7 +502,7 @@ package classes.Scenes.Places.HeXinDao
 			else if (flags[kFLAGS.CHI_CHI_FOLLOWER] >= 1 && flags[kFLAGS.CHI_CHI_AFFECTION] < 20) outputText("Chi Chi the waitress from the exotic food restaurant");
 			else outputText("a blazing mouse girl");
 			outputText(" sitting on one of the stool drinking sake.\n\n");
-			outputText("\"<i>Yeah, and after I told it I was the top girl here I punched it in the face, Woooooooo!</i>\"");
+			outputText("\"<i>Yeah, and after I told it I was the top girl here I punched it in the face, Woooooooo!</i>\" ");
 			outputText("The barman sighs, pretending not to notice the drunken mouse, aside for when he has to serve her a new drink. Just as you are about to order something she realises you are there and engages in conversation.\n\n");
 			if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) outputText("\"<i>Gaaaaah, [name], why do you hang around all those girls. Worse why do you fuck with them and not me?! Its like you are a " + player.mf("go go boy","cheap whore") + " selling your body to everyone and thish drives me mad! Yeaaa, I’m going to prove them all I’m the top shlut!</i>\"");
 			else if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 1) outputText("\"<i>Hey... you’re that so called champ who lost in the arena?! Well I like you. I like you so much I’d want you as my " + player.mf("boy","girl") + "friend but waaaah I’m way too shy to tell you that right! Well don’t go tell [name] I like " + player.mf("him","her") + " got it? Yeah who cares about that! Barman a round for [name] the best person I met woooo. Now let’s have sex!</i>\"");

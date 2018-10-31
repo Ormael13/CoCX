@@ -62,8 +62,6 @@ public class HarpyQueen extends Monster
 		public function whitefire():void {
 			outputText("The queen narrows her eyes and focuses her mind with deadly intent. She snaps her fingers and you are enveloped in a flash of white flames!");
 			var damage:int = inte + rand(50) * SpellMod();
-			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
-			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 			player.addStatusValue(StatusEffects.Blizzard, 1, -1);
 			outputText("Luckly protective ice maelstorm still surrounding you lessening amount of damage.  ");
@@ -78,7 +76,7 @@ public class HarpyQueen extends Monster
 			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) damage *= 1.5;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) damage *= 2;
 			damage = Math.round(damage);
-			player.takeMagicDamage(damage, true);
+			player.takeFireDamage(damage, true);
 			fatigue += spellCostWhitefire;
 		}
 		
@@ -103,7 +101,8 @@ public class HarpyQueen extends Monster
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.dungeons.heltower.harpyQueenBeatsUpPCBadEnd();
+			if (player.isGargoyle()) SceneLib.dungeons.heltower.gargoyleBadEndPhoenixTower();
+			else SceneLib.dungeons.heltower.harpyQueenBeatsUpPCBadEnd();
 		}
 
 		public function HarpyQueen()
@@ -132,6 +131,7 @@ public class HarpyQueen extends Monster
 			this.weaponAttack = 31;
 			this.armorName = "armor";
 			this.armorDef = 29;
+			this.armorMDef = 29;
 			this.bonusHP = 1000;
 			this.bonusLust = 30;
 			this.fatigue = 0;

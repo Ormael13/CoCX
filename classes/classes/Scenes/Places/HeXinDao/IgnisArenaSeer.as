@@ -26,11 +26,9 @@ public class IgnisArenaSeer extends Monster
 				player.removeStatusEffect(StatusEffects.Blizzard);
 				damage *= 0.5;
 			}
-			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
-			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			damage = Math.round(damage);
-			if (player.findPerk(PerkLib.SoulSprite) > 0) player.takeMagicDamage(damage, true);
-			if (player.findPerk(PerkLib.Archmage) > 0) player.takeMagicDamage(damage, true);
+			if (player.findPerk(PerkLib.SoulSprite) > 0) player.takeFireDamage(damage, true);
+			if (player.findPerk(PerkLib.Archmage) > 0) player.takeFireDamage(damage, true);
 			player.takeMagicDamage(damage, true);
 		}
 		
@@ -48,10 +46,8 @@ public class IgnisArenaSeer extends Monster
 			if (inte >= 301 && inte < 351) damage += ((inte * 2.25) + rand(inte * 2.75));
 			if (inte >= 351 && inte < 401) damage += ((inte * 2.5) + rand(inte * 3));
 			if (inte >= 401) damage += ((inte * 2.75) + rand(inte * 3.25));
-			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
-			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			damage = Math.round(damage);
-			player.takeMagicDamage(damage, true);
+			player.takeFireDamage(damage, true);
 			outputText(" ");
 			var lustDmg:Number = player.lustVuln * ((this.inte / 10) + rand(player.lib + player.cor) / 5);
 			lustDmg = Math.round(lustDmg);
@@ -145,6 +141,7 @@ public class IgnisArenaSeer extends Monster
 			this.weaponAttack = 8;
 			this.armorName = "grey kimono";
 			this.armorDef = 20;
+			this.armorMDef = 50;
 			this.bonusHP = 120;
 			this.bonusLust = 20;
 			this.lust = 20;
@@ -154,7 +151,7 @@ public class IgnisArenaSeer extends Monster
 			this.gems = rand(20) + 20;
 			if (flags[kFLAGS.IGNIS_ARENA_SEER] < 3) {
 			this.drop = new ChainedDrop()
-					.add(jewelries.SEERPIN, 1);
+					.add(headjewelries.SEERPIN, 1);
 			}
 			if (flags[kFLAGS.IGNIS_ARENA_SEER] > 2) {
 				this.drop = new WeightedDrop().

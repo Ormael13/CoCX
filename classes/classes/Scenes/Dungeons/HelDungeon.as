@@ -801,6 +801,7 @@ use namespace CoC;
 
 			outputText("\n\nWhen you come to your senses a few minutes later, the phoenix-girl is asleep, still holding you tight.  You pull her deflated lizard dick out of your ass and shudder as a torrent of her sizzling hot spunk dribbles out onto her thighs and hips.  You wriggle out of her tight embrace and give her a little kiss on the cheek before collecting your [armor] and heading out.");
 			//(Return to Mezzanine main menu)
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			player.orgasm();
 			doNext(playerMenu);
 		}
@@ -836,7 +837,8 @@ use namespace CoC;
 			//v1 = egg type.
 			//v2 = size - 0 for normal, 1 for large
 			//v3 = quantity
-			player.createStatusEffect(StatusEffects.Eggs,rand(6),0,(5 + rand(3)),0);
+			player.createStatusEffect(StatusEffects.Eggs, rand(6), 0, (5 + rand(3)), 0);
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			//(Return to Mezzanine main menu)
 			player.orgasm();
 			doNext(playerMenu);
@@ -868,6 +870,12 @@ use namespace CoC;
 			outputText("\n\nBefore you can respond, another orgasm washes over you, and a huge load of seed explodes into the thirty-first slut to claim your seed today.  And over her shoulders, you can see dozens more harpies, half of them your own spawn, waiting their turn.");
 			EventParser.gameOver();
 			if (flags[kFLAGS.HARDCORE_MODE] <= 0) addButton(1, "Retry", retryDungeonFromBadEndPrompt);
+		}
+
+		public function gargoyleBadEndPhoenixTower():void {
+			clearOutput();
+			outputText("You've lost count of the number of times you have come around to a harpy using you. Since the harpie’s spellcaster modified your enchantment, the only thing you've been able to think about is servicing phoenixes and harpies all day long. Being a sex toy is a most satisfying life for you. You never starve, never tire and you're maintained in a state of constant bliss... You don't know what happened to Helia after your defeat and truth be told you're not really in a position to care anymore with all those feathery mistresses to please.");
+			EventParser.gameOver();
 		}
 
 		//HARPY QUEEN -- PC VICTORIOUS

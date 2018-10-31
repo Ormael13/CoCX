@@ -284,6 +284,7 @@ public function blackCatBeerEffects(player:Player,clearScreen:Boolean = true,new
 		dynStats("spe", -5, "int", -5, "lib", lib, "lus", 20+rand(player.lib/4));
 	}
 	player.slimeFeed();
+	if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= CoC.instance.mutations.DrunkenPowerEmpowerOni()) CoC.instance.mutations.DrunkenPowerEmpower();
 }
 
 //Black Cat Beer Wears Off: This message is displayed eight hours after the last drink.
@@ -485,6 +486,7 @@ public function bimboChampagne(player:Player,clearScreen:Boolean,intro:Boolean):
 		}
 		dynStats("spe", -10, "lib", 1, "lus", 25);
 	}
+	if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= CoC.instance.mutations.DrunkenPowerEmpowerOni()) CoC.instance.mutations.DrunkenPowerEmpower();
 }
 
 public function removeBimboChampagne():void {
@@ -881,7 +883,8 @@ private function barBeerOrgyTits():void {
 		// IF [player has multiple cocks]
 		else if(player.cockTotal() > 1) outputText("  Various girls around the room are patting their bellies and giving you sultry looks while your cum continues to drip from their pussies.  You passively wonder if any of them might indeed be hauling around some larger pregnant bellies in a few days, but you try to push those thoughts from your head.  At the moment they seem happy.");
 		// IF [player has pussy]
-		if(player.hasVagina()) {
+		if (player.hasVagina()) {
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			outputText("  You walk slightly bow legged out of the bar.  Cum is still dripping from your snatch and will likely continue to do so for a while.");
 			//IF [player is not pregnant]
 			if(player.pregnancyType == 0) outputText("  You can't help but wonder how virile those dog morphs might have been as their cum and the cum of other customers sloshes around inside your uterus.");

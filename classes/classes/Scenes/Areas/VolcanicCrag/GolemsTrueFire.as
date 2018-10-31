@@ -80,6 +80,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			this.weaponAttack = 40;
 			this.armorName = "flame armor";
 			this.armorDef = 40;
+			this.armorMDef = 40;
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);

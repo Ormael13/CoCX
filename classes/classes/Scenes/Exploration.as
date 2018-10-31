@@ -158,13 +158,16 @@ public class Exploration extends BaseContent
 				else if (player.level < 16 && impChooser >= 80) impChooser = 79;
 				//Imp Lord
 				if (impChooser >= 50 && impChooser < 70) {
-					SceneLib.impScene.impLordEncounter();
+					if (rand(3) == 0) SceneLib.impScene.impLordFeralEncounter();
+					else SceneLib.impScene.impLordEncounter();
 					spriteSelect(29);
+					
 					return;
 				}
 				//Imp Warlord
 				else if (impChooser >= 70 && impChooser < 90) {
-					SceneLib.impScene.impWarlordEncounter();
+					if (rand(3) == 0) SceneLib.impScene.impWarlordFeralEncounter();
+					else SceneLib.impScene.impWarlordEncounter();
 					spriteSelect(125);
 					return;
 				}
@@ -176,13 +179,25 @@ public class Exploration extends BaseContent
 				}
 				else {
 					clearOutput();
-					outputText("An imp wings out of the sky and attacks!");
-					if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
+					if (rand(3) == 0) {
+						outputText("A feral imp wings out of the sky and attacks!");
+						if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
+							flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
+							outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
+						}
+						flags[kFLAGS.FERAL_EXTRAS] = 1;
+						startCombat(new FeralImps());
+						spriteSelect(29);
 					}
-					startCombat(new Imp());
-					spriteSelect(29);
+					else {
+						outputText("An imp wings out of the sky and attacks!");
+						if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
+							flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
+							outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
+						}
+						startCombat(new Imp());
+						spriteSelect(29);
+					}
 				}
 				return;
 			}
@@ -351,7 +366,8 @@ public class Exploration extends BaseContent
 			if (player.level < 16 && impChooser >= 75) impChooser = 74;
 			//Imp Warlord
 			if (impChooser >= 50 && impChooser < 75) {
-				SceneLib.impScene.impWarlordEncounter();
+				if (rand(3) == 0) SceneLib.impScene.impWarlordFeralEncounter();
+				else SceneLib.impScene.impWarlordEncounter();
 				spriteSelect(125);
 				return;
 			}
@@ -560,7 +576,7 @@ public class Exploration extends BaseContent
 					doNext(camp.returnToCampUseTwoHours);
 					return;
 				}				
-				//Discover Beach / Ocean/ Deep Sea
+				//Discover Beach / Ocean / Deep Sea
 				if (flags[kFLAGS.DISCOVERED_BEACH] <= 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && rand(3) == 0 && player.level >= 25) {
 					flags[kFLAGS.DISCOVERED_BEACH] = 1;
 					player.explored++;
@@ -687,7 +703,7 @@ public class Exploration extends BaseContent
 		
 		public function hiddencavediscovery():void {
 			flags[kFLAGS.HIDDEN_CAVE_FOUND] = 1;
-			outputText("You aproach what looks like a cave at first but the shattered bones on the ground hint to something else. Still where theres bones and dead explorer is bound to be treasure. The entrance is decorated with a pair of fiery torch");
+			outputText("\nYou aproach what looks like a cave at first but the shattered bones on the ground hint to something else. Still where theres bones and dead explorer is bound to be treasure. The entrance is decorated with a pair of fiery torch");
 			if (silly()) outputText(" and a sparkling arrow shaped sign post tell 'please come in adventurer, I'm in need of more bony decoration'");
 			outputText(".\n\n");
 			doNext(hiddencave.enterDungeon);

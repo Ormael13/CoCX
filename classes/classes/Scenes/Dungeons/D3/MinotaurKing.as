@@ -32,6 +32,7 @@ public class MinotaurKing extends Monster
 			this.weaponVerb = "swing";
 			this.armorName = "rags";
 			this.armorDef = 80;
+			this.armorMDef = 8;
 			this.bonusHP = 2000;
 			this.bonusLust = 100;
 			this.gems = 600 + rand(200);
@@ -105,7 +106,8 @@ public class MinotaurKing extends Monster
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.d3.minotaurKing.hailToTheKingBaby(hpVictory, pcCameWorms);
+			if (player.isGargoyle()) SceneLib.d3.gargoyleBadEndD3();
+			else SceneLib.d3.minotaurKing.hailToTheKingBaby(hpVictory, pcCameWorms);
 		}
 
 		private var _milkDrinks:int = 0;

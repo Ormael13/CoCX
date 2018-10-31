@@ -12,14 +12,14 @@ package classes.Scenes.Areas.Forest
 	import classes.BodyParts.LowerBody;
 	import classes.BodyParts.Tail;
 	import classes.GlobalFlags.kFLAGS;
-	//import classes.Scenes.NPCs.CelessScene;
+	import classes.Scenes.NPCs.CelessScene;
 	import classes.internals.*;
 	
 	use namespace CoC;
 	
 	public class Nightmare extends Monster
 	{
-	//	public var celessScene:CelessScene = new CelessScene();
+		public var celessScene:CelessScene = new CelessScene();
 		
 		public function usingCorruptionBlast():void {
 			outputText("The nightmare moans in pleasure as her massive equine cock begins to pulse with an unholy purple light.\n\n");
@@ -29,11 +29,7 @@ package classes.Scenes.Areas.Forest
 			this.lust = 0;
 		}
 		public function usingHeal():void {
-			if (!hasStatusEffect(StatusEffects.Uber)) {
-				outputText("The nightmare weaves a few signs in the air, her twin horns glowing purple as she begins to cast a powerful spell.");
-				createStatusEffect(StatusEffects.Uber, 0, 0, 0, 0);
-			}
-			else {
+			if (hasStatusEffect(StatusEffects.Uber)) {
 				removeStatusEffect(StatusEffects.Uber);
 				if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FreezingBreathStun) || hasStatusEffect(StatusEffects.StunnedTornado) || hasStatusEffect(StatusEffects.Fear) || hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce)) {
 					outputText("The nightmare reels in frustration as her concentration breaks under your assaults.\n\n");
@@ -43,6 +39,10 @@ package classes.Scenes.Areas.Forest
 					outputText("\"<i>It does not matter how much you wound me. These are useless before my almighty healing powers.</i>\"\n\n");
 					this.HP = this.maxHP();
 				}
+			}
+			else {
+				outputText("The nightmare weaves a few signs in the air, her twin horns glowing purple as she begins to cast a powerful spell.");
+				createStatusEffect(StatusEffects.Uber, 0, 0, 0, 0);
 			}
 		}
 		public function usingWingBuffet():void {
@@ -163,6 +163,7 @@ package classes.Scenes.Areas.Forest
 			this.weaponAttack = 1;
 			this.armorName = "fur";
 			this.armorDef = 1;
+			this.armorMDef = 10;
 			this.bonusHP = 20;
 			this.bonusLust = 10;
 			this.lust = 20;

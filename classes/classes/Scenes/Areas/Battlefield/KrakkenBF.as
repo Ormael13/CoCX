@@ -39,6 +39,7 @@ public class KrakkenBF extends Monster
 			this.weaponAttack = 60;
 			this.armorName = "thick skin";
 			this.armorDef = 30;
+			this.armorMDef = 30;
 			this.bonusHP = 150;
 			this.bonusLust = 20;
 			this.lust = 20;

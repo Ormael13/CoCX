@@ -245,6 +245,7 @@ private function bunbunFucksYourVag():void {
 	else {
 		player.knockUp(PregnancyStore.PREGNANCY_BUNNY, PregnancyStore.INCUBATION_BUNNY_BABY, 60);
 	}
+	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 	player.orgasm();
 	dynStats("lib", 1, "sen", -3);
 	doNext(camp.returnToCampUseEightHours);
@@ -334,6 +335,7 @@ private function bunbunFucksPCInAss():void {
 	outputText("She walks away, her puffy tail twitching with the breeze while your eyes drift closed.");
 	//(Easter ass-preg + 8 hours pass)
 	player.buttKnockUp(PregnancyStore.PREGNANCY_BUNNY, PregnancyStore.INCUBATION_BUNNY_EGGS, 1, 1);
+	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 	player.orgasm();
 	dynStats("lib", 1, "sen", 1);
 	doNext(camp.returnToCampUseEightHours);
@@ -968,6 +970,7 @@ private function getEggflated():void {
 		player.knockUp(PregnancyStore.PREGNANCY_BUNNY, PregnancyStore.INCUBATION_BUNNY_BABY, 60);
 		player.fertility++;
 	}
+	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 	outputText(player.modThickness(100,3));
 	outputText(player.modTone(0,3));
 	player.orgasm();

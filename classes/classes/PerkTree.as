@@ -36,10 +36,12 @@ public class PerkTree extends BaseContent {
 				PerkLib.JobWarrior,
 				PerkLib.PrestigeJobArcaneArcher,
 				PerkLib.PrestigeJobBerserker,
+				PerkLib.PrestigeJobNecromancer,
 				PerkLib.PrestigeJobSeer,
 				PerkLib.PrestigeJobSentinel,
 				PerkLib.PrestigeJobSoulArcher,
 				PerkLib.PrestigeJobSoulArtMaster,
+				PerkLib.PrestigeJobTempest,
 			],
 			stops: [
 				// PerkLib.JobAllRounder

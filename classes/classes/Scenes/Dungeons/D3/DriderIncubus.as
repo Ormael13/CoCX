@@ -30,6 +30,7 @@ public class DriderIncubus extends AbstractSpiderMorph
 			this.weaponVerb = "lunge";
 			this.armorName = "chitin";
 			this.armorDef = 60;
+			this.armorMDef = 10;
 			this.bonusHP = 1500;
 			this.bonusLust = 40;
 			this.gems = 200 + rand(80);
@@ -55,7 +56,8 @@ public class DriderIncubus extends AbstractSpiderMorph
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.d3.driderIncubus.spooderbuttGetsANewCockSleeve(hpVictory, pcCameWorms);
+			if (player.isGargoyle()) SceneLib.d3.gargoyleBadEndD3();
+			else SceneLib.d3.driderIncubus.spooderbuttGetsANewCockSleeve(hpVictory, pcCameWorms);
 		}
 		
 		private var _goblinFree:Boolean = false;
@@ -408,19 +410,9 @@ this.HP -= (this.maxHP() * 0.08);
 		private function taintedMind():void
 		{
 			//Prevents use of attack, bow, other physical type stuff
-			//Lasts 4 rounds? Iunno. Tune to adjust difficulty.
 			outputText("<i>“You fight well, for a mortal... but can you fight like a demon?”</i> He claps his hands together, bathing the immediate area in a wave of energy. Some of the nearby slaves cry out in alarm, then settle into giggling, cooing messes. You don’t seem any worse for the wear in its wake, though something feels wrong about holding your [weapon].");
-			
-			// 9999
 			if (player.cor <= 33) outputText(" What did he mean about fighting like a demon?");
-			
 			player.createStatusEffect(StatusEffects.TaintedMind, 4, 0, 0, 0);
-		}
-		
-		public function taintedMindAttackAttempt():void
-		{
-			outputText("You ready an attack, but find your hands groping your own body instead. Somehow the demon’s magic has made it impossible to strike at him, crossing wires that weren’t meant to be crossed. Frowning, you look down at your more aroused form, determined not to fall for this a second time.");
-			player.dynStats("lus", 15);
 		}
 		
 		//On same round timer as physical stun

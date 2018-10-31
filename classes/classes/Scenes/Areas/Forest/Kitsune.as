@@ -58,8 +58,6 @@ public class Kitsune extends Monster
 		{
 			outputText("The kitsune makes a small circle in the air with her fingers, conjuring up a pale blue flame into her palm with the sound of flint striking against steel.  Pursing her lips, she blows it toward you with a kiss.");
 			var damage:int = 5 + rand(20);
-			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
-			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 				player.addStatusValue(StatusEffects.Blizzard,1,-1);
 				outputText("\n\nThe flames burn furiously but power was negated by surround you blizzard, but still it leave you with an incredibly pleasant tingling sensation all over your body.  Your skin flushes with excitement, and you can feel blood rushing to your extremities, making you shudder with pleasure. ");
@@ -69,7 +67,7 @@ public class Kitsune extends Monster
 				outputText("\n\nThe flames burn furiously, but leave you with an incredibly pleasant tingling sensation all over your body.  Your skin flushes with excitement, and you can feel blood rushing to your extremities, making you shudder with pleasure. ");
 			}
 			damage = Math.round(damage);
-			damage = player.takeMagicDamage(damage, true);
+			damage = player.takeFireDamage(damage, true);
 			player.dynStats("lus", 15 + player.sens / 10);
 		}
 
@@ -232,6 +230,7 @@ public class Kitsune extends Monster
 			this.weaponAttack = 8;
 			this.armorName = "skin";
 			this.armorDef = 5;
+			this.armorMDef = 30;
 			this.bonusHP = 120;
 			this.bonusLust = 20;
 			this.lust = 20;

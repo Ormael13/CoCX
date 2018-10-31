@@ -89,6 +89,7 @@ public class ImpWarlord extends Imp
 			this.weaponAttack = 20;
 			this.armorName = "platemail";
 			this.armorDef = 17;
+			this.armorMDef = 1;
 			this.bonusHP = 350;
 			this.bonusLust = 30;
 			this.lust = 30;
@@ -105,6 +106,7 @@ public class ImpWarlord extends Imp
 			this.wings.type = Wings.IMP;
 			this.special1 = lustMagicAttack;
 			this.special2 = clawAttack;
+			this.special3 = doubleAttack;
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}

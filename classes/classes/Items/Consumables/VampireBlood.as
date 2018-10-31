@@ -1,4 +1,5 @@
 package classes.Items.Consumables {
+import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Eyes;
 import classes.BodyParts.Face;
@@ -7,6 +8,7 @@ import classes.BodyParts.Wings;
 import classes.CoC;
 import classes.Items.Consumable;
 import classes.PerkLib;
+import classes.StatusEffects;
 
 import coc.xxc.BoundStory;
 
@@ -53,18 +55,22 @@ public class VampireBlood extends Consumable {
                 BodyPart: 'wings.type',
                 ChangeTo: pure ? Wings.VAMPIRE : Wings.BAT_ARM,
                 Check   : player.hasGooSkin(),
-                Override: mutations.humanizeSkin
+                Override: mutations.humanizeSkin,
+                Metamorph: pure ? StatusEffects.UnlockedVampireWings : StatusEffects.UnlockedBatWings
             }, {
                 BodyPart: 'ears.type',
                 ChangeTo: pure ? Ears.VAMPIRE : Ears.BAT,
                 Check   : pure ? player.ears.type != Ears.HUMAN : false,
-                Override: pure ? mutations.humanizeEars : null
+                Override: pure ? mutations.humanizeEars : null,
+                Metamorph: pure ? StatusEffects.UnlockedVampireEars : StatusEffects.UnlockedBatEars
             }, {
                 BodyPart: 'eyes.type',
-                ChangeTo: Eyes.VAMPIRE
+                ChangeTo: Eyes.VAMPIRE,
+                Metamorph: StatusEffects.UnlockedVampireEyes
             }, {
                 BodyPart: 'faceType',
-                ChangeTo: Face.VAMPIRE
+                ChangeTo: Face.VAMPIRE,
+                Metamorph: StatusEffects.UnlockedVampireFace
             }
         ];
         if(pure){
@@ -81,7 +87,11 @@ public class VampireBlood extends Consumable {
         } else {
             tfArr.push({
                 BodyPart: 'rearBody.type',
-                ChangeTo: RearBody.BAT_COLLAR
+                ChangeTo: RearBody.BAT_COLLAR,
+                Metamorph: StatusEffects.UnlockedBatCollar
+            }, {
+                BodyPart: 'arms.type',
+                ChangeTo: Arms.HUMAN
             });
         }
         changeLimit = 1;
@@ -115,6 +125,9 @@ public class VampireBlood extends Consumable {
 			            story.display(tf.BodyPart, {$pure: pure});
 		            }
 		            hostObj[bodyPart] = tf.ChangeTo;
+     				if (tf.Metamorph) {
+        				mutations.addGeneticMemory(tf.Metamorph, tf.Metamorph.id.replace("Unlocked ", ""));
+     				}
 		            for each(var extra:Object in tf.Addition){
 			            doChange(extra,false);
 		            }

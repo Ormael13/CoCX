@@ -58,6 +58,7 @@ public class Farmers extends Monster
 			this.weaponAttack = 20;
 			this.armorName = "chitin";
 			this.armorDef = 10;
+			this.armorMDef = 1;
 			this.bonusHP = 300;
 			this.bonusLust = 10;
 			this.lustVuln = 0;

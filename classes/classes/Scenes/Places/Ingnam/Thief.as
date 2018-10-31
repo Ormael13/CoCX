@@ -32,13 +32,14 @@ public class Thief extends Monster
 			this.skinTone = "light";
 			this.hairColor = "brown";
 			this.hairLength = 4;
-			initStrTouSpeInte(17, 16, 16, 17);
-			initWisLibSensCor(17, 20, 15, 20);
+			initStrTouSpeInte(14, 12, 12, 14);
+			initWisLibSensCor(14, 20, 15, 20);
 			this.weaponName = "knife";
 			this.weaponVerb = "slash";
-			this.weaponAttack = 4;
+			this.weaponAttack = 3;
 			this.armorName = "leather armor";
-			this.armorDef = 4;
+			this.armorDef = 3;
+			this.armorMDef = 0;
 			this.bonusLust = 10;
 			this.lust = 25;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;

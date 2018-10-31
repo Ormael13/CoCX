@@ -145,8 +145,8 @@ package classes.Scenes.NPCs
 					else eAttack();
 				}
 				if (choice2 > 2 && choice2 < 5) {
-					if (HPRatio() < .6 && rand(2) == 0 && (mana >= spellCostHeal())) usingHealSpell();
-					else if (rand(2) == 0 && (mana < (this.maxMana() - 80))) usingARC();
+					if (HPRatio() < .6 && rand(3) == 0 && (mana >= spellCostHeal())) usingHealSpell();
+					else if (rand(3) == 0 && (mana < (this.maxMana() - 80))) usingARC();
 					else eAttack();
 				}
 				if (choice2 == 5) {
@@ -158,8 +158,8 @@ package classes.Scenes.NPCs
 				var choice1:Number = rand(6);
 				if (choice1 < 3) eAttack();
 				if (choice1 > 2 && choice1 < 5) {
-					if (HPRatio() < .5 && rand(2) == 0 && (mana >= spellCostHeal())) usingHealSpell();
-					else if (rand(2) == 0 && (mana < (this.maxMana() - 40))) usingARC();
+					if (HPRatio() < .5 && rand(4) == 0 && (mana >= spellCostHeal())) usingHealSpell();
+					else if (rand(4) == 0 && (mana < (this.maxMana() - 40))) usingARC();
 					else eAttack();
 				}
 				if (choice1 == 5) {
@@ -190,6 +190,7 @@ package classes.Scenes.NPCs
 				initWisLibSensCor(25, 25, 25, 50);
 				this.weaponAttack = 3;
 				this.armorDef = 6;
+				this.armorMDef = 12;
 				this.level = 3;
 				this.bonusHP = 80;
 				this.bonusMana = 50;
@@ -205,6 +206,7 @@ package classes.Scenes.NPCs
 				initWisLibSensCor(30, 30, 25, 50);
 				this.weaponAttack = 3;
 				this.armorDef = 6;
+				this.armorMDef = 12;
 				this.level = 6;
 				this.bonusHP = 270;
 				this.bonusMana = 65;
@@ -220,6 +222,7 @@ package classes.Scenes.NPCs
 				initWisLibSensCor(50, 50, 50, 50);
 				this.weaponAttack = 6;
 				this.armorDef = 9;
+				this.armorMDef = 27;
 				this.level = 9;
 				this.bonusHP = 485;
 				this.bonusMana = 170;
@@ -235,6 +238,7 @@ package classes.Scenes.NPCs
 				initWisLibSensCor(60, 55, 50, 50);
 				this.weaponAttack = 6;
 				this.armorDef = 9;
+				this.armorMDef = 27;
 				this.level = 12;
 				this.bonusHP = 520;
 				this.bonusMana = 220;
@@ -250,6 +254,7 @@ package classes.Scenes.NPCs
 				initWisLibSensCor(70, 60, 50, 50);
 				this.weaponAttack = 6;
 				this.armorDef = 9;
+				this.armorMDef = 27;
 				this.level = 15;
 				this.bonusHP = 725;
 				this.bonusMana = 265;
@@ -265,6 +270,7 @@ package classes.Scenes.NPCs
 				initWisLibSensCor(80, 65, 50, 50);
 				this.weaponAttack = 6;
 				this.armorDef = 9;
+				this.armorMDef = 27;
 				this.level = 18;
 				this.bonusHP = 730;
 				this.bonusMana = 285;
@@ -280,6 +286,7 @@ package classes.Scenes.NPCs
 				initWisLibSensCor(80, 70, 50, 50);
 				this.weaponAttack = 6;
 				this.armorDef = 9;
+				this.armorMDef = 27;
 				this.level = 21;
 				this.bonusHP = 785;
 				this.bonusMana = 310;
@@ -295,6 +302,7 @@ package classes.Scenes.NPCs
 				initWisLibSensCor(90, 75, 50, 50);
 				this.weaponAttack = 6;
 				this.armorDef = 9;
+				this.armorMDef = 27;
 				this.level = 24;
 				this.bonusHP = 790;
 				this.bonusMana = 330;
@@ -310,6 +318,7 @@ package classes.Scenes.NPCs
 				initWisLibSensCor(100, 100, 75, 50);
 				this.weaponAttack = 9;
 				this.armorDef = 12;
+				this.armorMDef = 48;
 				this.level = 27;
 				this.bonusHP = 845;
 				this.bonusMana = 355;

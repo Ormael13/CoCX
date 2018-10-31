@@ -54,7 +54,7 @@ package classes.Scenes.Camp
 				player.addStatusValue(StatusEffects.Blizzard, 1, -1);
 				damage *= 0.2;
 			}
-			player.takeMagicDamage(damage, true);
+			player.takeFireDamage(damage, true);
 			outputText(" damage. ");
 		}
 		
@@ -116,6 +116,7 @@ package classes.Scenes.Camp
 			this.weaponAttack = 50;
 			this.armorName = "dragon scales";
 			this.armorDef = 2000;
+			this.armorMDef = 10;
 			this.bonusLust = 30;
 			this.lustVuln = .6;
 			this.lust = 50;

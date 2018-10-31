@@ -28,10 +28,14 @@ public class PlayerInfo extends BaseContent {
 		// Begin Combat Stats
 		var combatStats:String = "";
 
-		combatStats += "<b>Resistance (Physical Damage):</b> " + (100 - Math.round(player.damagePercent(true))) + "-" + (100 - Math.round(player.damagePercent(true) - player.damageToughnessModifier(true))) + "% (Higher is better.)\n";
-
-		combatStats += "<b>Resistance (Magic Damage):</b> " + (100 - Math.round(player.damageMagicalPercent(true))) + "-" + (100 - Math.round(player.damageMagicalPercent(true) - player.damageIntelligenceModifier(true) - player.damageWisdomModifier(true))) + "% (Higher is better.)\n";
-		combatStats += "<b>Resistance (Lust):</b> " + (100 - Math.round(CoC.instance.player.lustPercent())) + "% (Higher is better.)\n";
+		combatStats += "<b>Resistance (Physical):</b> " + (100 - Math.round(player.damagePercent())) + "%\n";
+		combatStats += "<b>Resistance (Magic):</b> " + (100 - Math.round(player.damageMagicalPercent())) + "%\n";
+		combatStats += "<i>Resistance (Fire):</i> " + (100 - Math.round(player.damageFirePercent())) + "%\n";
+		combatStats += "<i>Resistance (Ice):</i> " + (100 - Math.round(player.damageIcePercent())) + "%\n";
+		combatStats += "<i>Resistance (Lightning):</i> " + (100 - Math.round(player.damageLightningPercent())) + "%\n";
+		combatStats += "<i>Resistance (Darkness):</i> " + (100 - Math.round(player.damageDarknessPercent())) + "%\n";
+		combatStats += "<i>Resistance (Poison):</i> " + (100 - Math.round(player.damagePoisonPercent())) + "%\n";
+		combatStats += "<b>Resistance (Lust):</b> " + (100 - Math.round(CoC.instance.player.lustPercent())) + "%\n";
 
 		combatStats += "<b>Spell Effect Multiplier:</b> " + Math.round(100 * combat.spellMod()) + "%\n";
 		combatStats += "<b>Spell Cost:</b> " + combat.spellCost(100) + "%\n";
@@ -47,6 +51,17 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Black Heals Effect Multiplier:</b> " + Math.round(100 * combat.healModBlack()) + "%\n";
 		combatStats += "<b>Black Heals Cost:</b> " + combat.healCostBlack(100) + "%\n";
 
+		combatStats += "<b>Accuracy (1st melee attack):</b> " + (combat.meleeAccuracy() / 2) + "%\n";
+		if (player.findPerk(PerkLib.DoubleAttackSmall) >= 0 || player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0) combatStats += "<b>Accuracy (2nd melee attack):</b> " + ((combat.meleeAccuracy() / 2) - combat.meleeAccuracyPenalty()) + "%\n";
+		if (player.findPerk(PerkLib.TripleAttackSmall) >= 0 || player.findPerk(PerkLib.TripleAttack) >= 0 || player.findPerk(PerkLib.TripleAttackLarge) >= 0) combatStats += "<b>Accuracy (3rd melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 2)) + "%\n";
+		if (player.findPerk(PerkLib.QuadrupleAttackSmall) >= 0 || player.findPerk(PerkLib.QuadrupleAttack) >= 0) combatStats += "<b>Accuracy (4th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 3)) + "%\n";
+		if (player.findPerk(PerkLib.PentaAttackSmall) >= 0 || player.findPerk(PerkLib.PentaAttack) >= 0) combatStats += "<b>Accuracy (5th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 4)) + "%\n";
+		if (player.findPerk(PerkLib.HexaAttackSmall) >= 0 || player.findPerk(PerkLib.HexaAttack) >= 0) combatStats += "<b>Accuracy (6th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 5)) + "%\n";
+		if (player.findPerk(PerkLib.HectaAttackSmall) >= 0) combatStats += "<b>Accuracy (7th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 6)) + "%\n";
+		if (player.findPerk(PerkLib.OctaAttackSmall) >= 0) combatStats += "<b>Accuracy (8th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 7)) + "%\n";
+		if (player.findPerk(PerkLib.NonaAttackSmall) >= 0) combatStats += "<b>Accuracy (9th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 8)) + "%\n";
+		if (player.findPerk(PerkLib.DecaAttackSmall) >= 0) combatStats += "<b>Accuracy (10th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 9)) + "%\n";
+
 		if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
 			if (player.statusEffectv1(StatusEffects.Kindra) < 1)
 				combatStats += "<b>Bow Skill:</b> " + Math.round(player.statusEffectv1(StatusEffects.Kelt)) + " / 100\n";
@@ -55,8 +70,8 @@ public class PlayerInfo extends BaseContent {
 		}
 		combatStats += "<b>Arrow/Bolt Cost:</b> " + combat.bowCost(100) + "%\n";
 		combatStats += "<b>Accuracy (1st range attack):</b> " + (combat.arrowsAccuracy() / 2) + "%\n";
-		if (player.findPerk(PerkLib.DoubleStrike) >= 0) combatStats += "<b>Accuracy (2nd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 15) + "%\n";
-		if (player.findPerk(PerkLib.TripleStrike) >= 0) combatStats += "<b>Accuracy (3rd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 30) + "%\n";
+		if (player.findPerk(PerkLib.DoubleStrike) >= 0) combatStats += "<b>Accuracy (2nd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - combat.arrowsAccuracyPenalty()) + "%\n";
+		if (player.findPerk(PerkLib.TripleStrike) >= 0) combatStats += "<b>Accuracy (3rd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - (combat.arrowsAccuracyPenalty() * 2)) + "%\n";
 		if (player.findPerk(PerkLib.Manyshot) >= 0) combatStats += "<b>Accuracy (4th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 45) + "%\n";
 		if (player.findPerk(PerkLib.WildQuiver) >= 0) combatStats += "<b>Accuracy (5th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 60) + "%\n";
 		if (player.findPerk(PerkLib.Multishot) >= 0) combatStats += "<b>Accuracy (6th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 75) + "%\n";
@@ -72,14 +87,16 @@ public class PlayerInfo extends BaseContent {
 			combatStats += "<b>Rapier Skill:</b> " + flags[kFLAGS.RAPHAEL_RAPIER_TRANING] + " / 4\n";
 
 		if (player.teaseLevel < 25)
-			combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: " + player.teaseXP + " / " + (10 + (player.teaseLevel + 1) * 5 * (player.teaseLevel + 1)) + ")\n";
+			combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: " + player.teaseXP + " / " + combat.teaseExpToLevelUp() + ")\n";
 		else
 			combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)\n";
 
 		var maxes:Object = player.getAllMaxStats();
 		combatStats += "<b>Strength Cap:</b> " + maxes.str + "\n";
+		combatStats += "<i>Ghost Strength:</i> +" + combat.ghostStrength() + "\n";
 		combatStats += "<b>Toughness Cap:</b> " + maxes.tou + "\n";
 		combatStats += "<b>Speed Cap:</b> " + maxes.spe + "\n";
+		//combatStats += "<i>Ghost Speed:</i> +" + combat.ghostSpeed() + "\n";
 		combatStats += "<b>Intelligence Cap:</b> " + maxes.inte + "\n";
 		combatStats += "<b>Wisdom Cap:</b> " + maxes.wis + "\n";
 		combatStats += "<b>Libido Cap:</b> " + maxes.lib + "\n";
@@ -89,6 +106,12 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Libido Minimum:</b> " + mins.lib + "\n";
 		combatStats += "<b>Sensitivity Minimum:</b> " + mins.sens + "\n";
 		combatStats += "<b>Corruption Minimum:</b> " + mins.cor + "\n";
+		
+		combatStats += "<b>HP Regeneration (%):</b> ~ " + combat.PercentBasedRegeneration() + " % / " + combat.maximumRegeneration() + " % (turn), ~ " + combat.PercentBasedRegeneration() * 2 + " % / " + combat.maximumRegeneration() * 2 + " % (hour)\n";
+		//combatStats += "<b>HP Regeneration (Total):</b> " + Math.round((player.maxHP() * combat.PercentBasedRegeneration() / 100) + combat.nonPercentBasedRegeneration()) + " /  turn, " + Math.round((player.maxHP() * combat.PercentBasedRegeneration() / 100) + combat.nonPercentBasedRegeneration()) * 2 + " /  hour\n";
+		combatStats += "<b>Wrath Regeneration:</b> " + combat.wrathregeneration2() * 2 + " / turn, " + combat.wrathregeneration2() + " / hour\n";
+		combatStats += "<b>Mana Regeneration:</b> " + Math.round(combat.manaregeneration2() * combat.manaRecoveryMultiplier()) + " / turn, " + Math.round(combat.manaregeneration2() * combat.manaRecoveryMultiplier()) * 2 + " / hour\n";
+		combatStats += "<b>Soulforce Regeneration:</b> " + Math.round(combat.soulforceregeneration2() * combat.soulforceRecoveryMultiplier()) + " / turn, " + Math.round(combat.soulforceregeneration2() * combat.soulforceRecoveryMultiplier()) * 2 + " / hour\n";
 
 		if (combatStats != "")
 			outputText("<b><u>Combat Stats</u></b>\n" + combatStats);
@@ -245,13 +268,14 @@ public class PlayerInfo extends BaseContent {
 			else if (player.tailType != Tail.SPIDER_ADBOMEN)
 				bodyStats += "<b>Venom:</b> " + player.tailVenom + "/" + player.maxVenom() + "\n";
 		}
-
+		bodyStats += "<b>Tone:</b> " + player.tone + " / " + player.maxToneCap() + "\n";
+		bodyStats += "<b>Thickness:</b> " + player.thickness + " / 100\n";
+		
 		bodyStats += "<b>Anal Capacity:</b> " + Math.round(player.analCapacity()) + "\n";
 		bodyStats += "<b>Anal Looseness:</b> " + Math.round(player.ass.analLooseness) + "\n";
-
+		
 		bodyStats += "<b>Fertility (Base) Rating:</b> " + Math.round(player.fertility) + "\n";
 		bodyStats += "<b>Fertility (With Bonuses) Rating:</b> " + Math.round(player.totalFertility()) + "\n";
-
 		if (player.cumQ() > 0)
 			bodyStats += "<b>Virility Rating:</b> " + Math.round(player.virilityQ() * 100) + "\n";
 		if (flags[kFLAGS.HUNGER_ENABLED] >= 1) bodyStats += "<b>Cum Production:</b> " + addComma(Math.round(player.cumQ())) + " / " + addComma(Math.round(player.cumCapacity())) + "mL (" + Math.round((player.cumQ() / player.cumCapacity()) * 100) + "%) \n";
@@ -684,6 +708,9 @@ if (SceneLib.valeria.valeriaFluidsEnabled()) {
 		if (player.statusEffectv1(StatusEffects.IzumisPipeSmoke) > 0)
 			statEffects += "Izumi's Pipe Smoke - " + player.statusEffectv1(StatusEffects.IzumisPipeSmoke) + " hours remaining. (Speed temporarily lowered.)\n";
 
+		if (player.statusEffectv1(StatusEffects.DrunkenPower) > 0)
+			statEffects += "Drunken Power - " + player.statusEffectv1(StatusEffects.DrunkenPower) + " hours remaining (Strength/libido temporarily increased, speed/intelligence temporarily lowered.)\n";
+
 		if (player.statusEffectv1(StatusEffects.UmasMassage) > 0)
 			statEffects += "Uma's Massage - " + player.statusEffectv3(StatusEffects.UmasMassage) + " hours remaining.\n";
 
@@ -697,7 +724,7 @@ if (SceneLib.valeria.valeriaFluidsEnabled()) {
 			statEffects += "Raiju Lightning - " + player.statusEffectv1(StatusEffects.RaijuLightningStatus) + " hours remaining. (During masturbation: rise instead lowering lust and extend duration of this effect by few hours. Could also cause uncontroled slowly transformation into raiju.)\n";
 		var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
 		if (vthirst != null) {
-			statEffects += "Vampire Thirst: " + vthirst.value1 + " ";
+			statEffects += "Vampire Thirst: " + vthirst.value1 + "/" + vthirst.maxThirst() + " ";
 			if (vthirst.currentBoost > 0) statEffects += "(+" + vthirst.currentBoost + " to str / spe / int / lib)";
 			statEffects += "\n";
 		}

@@ -81,6 +81,7 @@ import classes.internals.*;
 			}
 			if (hasStatusEffect(StatusEffects.Fear)) {
 				EngineCore.outputText("The gatekeeper appears to be immune to your fear.\n\n");
+				this.spe += statusEffectv2(StatusEffects.Fear);
 				removeStatusEffect(StatusEffects.Fear);
 			}
 			if (hasStatusEffect(StatusEffects.Uber)) {
@@ -135,6 +136,7 @@ import classes.internals.*;
 			this.weaponValue = 25;
 			this.armorName = "tunic and pants";
 			this.armorDef = 14;
+			this.armorMDef = 2;
 			this.bonusHP = 1750;
 			this.bonusLust = 40;
 			this.lust = 0;

@@ -163,6 +163,7 @@ package classes
 		
 		public function knockUpForce(newPregType:int = 0, newPregIncubation:int = 0):void
 		{
+			if (CoC.instance.player.isGargoyle()) return;
 			if (_pregnancyTypeFlag == 0 || _pregnancyIncubationFlag == 0) return; //Check that these variables were provided by the containing class
 			if (newPregType != 0) newPregType = (CoC.instance.flags[_pregnancyTypeFlag] & PREG_NOTICE_MASK) + newPregType;
 				//If a pregnancy 'continues' an existing pregnancy then do not change the value for last noticed stage
@@ -177,6 +178,7 @@ package classes
 		
 		public function buttKnockUpForce(newPregType:int = 0, newPregIncubation:int = 0):void
 		{
+			if (CoC.instance.player.isGargoyle()) return;
 			if (_buttPregnancyTypeFlag == 0 || _buttPregnancyIncubationFlag == 0) return; //Check that these variables were provided by the containing class
 			if (newPregType != 0) newPregType = (CoC.instance.flags[_buttPregnancyTypeFlag] & PREG_NOTICE_MASK) + newPregType;
 				//If a pregnancy 'continues' an existing pregnancy then do not change the value for last noticed stage

@@ -27,7 +27,7 @@ import classes.VaginaClass;
 
 public class Enigmanium extends Consumable{
 	public function Enigmanium() {
-		super("Enigmanium", "Enigmanium", "a vial of Enigmanium", 20, "This strange brew crafted by Evangeline combine harpy, cat, human and centaur traits. Supposedly it could allow you to become a sphinx.");
+		super("Enigmanium", "Enigmanium", "a vial of Enigmanium", 40, "This strange brew crafted by Evangeline combine harpy, cat, human and centaur traits. Supposedly it could allow you to become a sphinx.");
 	}
 	public override function useItem():Boolean {
 		var choice:int;
@@ -105,6 +105,8 @@ public class Enigmanium extends Consumable{
 				dynStats("lib", 1, "sen", .25);
 				changes++;
 			}
+
+		if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			
 		//Mare
 		if (player.gender == 2 || player.gender == 3) {
@@ -169,100 +171,35 @@ public class Enigmanium extends Consumable{
 			}
 		}
 		//Mare-gina
-		//classic horse-taur version
-		if (changes < changeLimit && rand(2) == 0 && player.lowerBody == LowerBody.CAT && player.lowerBody != LowerBody.GARGOYLE && !player.isTaur()) {
+			
+		//Increase player's breast size, if they are big FF or smaller
+			if (player.smallestTitSize() <= 14 && player.gender >= 2 && changes < changeLimit && rand(4) == 0) {
+			outputText("\n\nAfter eating it, your chest aches and tingles, and your hands reach up to scratch at it unthinkingly.  Silently, you hope that you aren't allergic to it.  Just as you start to scratch at your " + player.breastDescript(player.smallestTitRow()) + ", your chest pushes out in slight but sudden growth.");
+			player.breastRows[player.smallestTitRow()].breastRating++;
 			changes++;
-			outputText("\n\nImmense pain overtakes you as you feel your backbone snap.  The agony doesn't stop, blacking you out as your spine lengthens, growing with new flesh from your backside as the bones of your legs flex and twist.  Muscle groups shift and rearrange themselves as the change completes, the pain dying away as your consciousness returns.  <b>You now have the lower body of a centaur</b>.");
-			if (player.gender > 0) {
-				outputText("  After taking a moment to get used to your new body, you notice that your genitals now reside between the back legs on your centaur body.");
-			}
-			dynStats("spe", 3);
-			mutations.setLowerBody(LowerBody.CAT);
-			player.legCount = 4;
 		}
-			
-			//Increase player's breast size, if they are big FF or smaller
-				if (player.smallestTitSize() <= 14 && player.gender >= 2 && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nAfter eating it, your chest aches and tingles, and your hands reach up to scratch at it unthinkingly.  Silently, you hope that you aren't allergic to it.  Just as you start to scratch at your " + player.breastDescript(player.smallestTitRow()) + ", your chest pushes out in slight but sudden growth.");
-				player.breastRows[player.smallestTitRow()].breastRating++;
-				changes++;
-			}
-
-			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
-			//Sexual changes would go here if I wasn't a tard.
-			//Heat
-			if (rand(4) == 0 && changes < changeLimit)
-			{
-				var intensified:Boolean = player.inHeat;
-
-				if (player.goIntoHeat(false))
-				{
-					if (intensified)
-					{
-						if (rand(2) == 0) outputText("\n\nThe itch inside your [vagina] is growing stronger, and you desperately want to find a nice cock to massage the inside.");
-						else outputText("\n\nThe need inside your [vagina] grows even stronger.  You desperately need to find a mate to 'scratch your itch' and fill your womb with kittens.  It's difficult NOT to think about a cock slipping inside your moist fuck-tunnel, and at this point you'll have a hard time resisting ANY male who approaches.");
-					}
-					else
-					{
-						outputText("\n\nThe interior of your [vagina] clenches tightly, squeezing with reflexive, aching need.  Your skin flushes hot ");
-						if (player.hasFur()) outputText("underneath your fur ");
-						outputText("as images and fantasies ");
-						if (player.cor < 50) outputText("assault ");
-						else outputText("fill ");
-						outputText(" your mind.  Lithe cat-boys with their perfect, spine-covered cocks line up behind you, and you bend over to present your needy pussy to them.  You tremble with the desire to feel the exotic texture of their soft barbs rubbing your inner walls, smearing your [vagina] with their cum as you're impregnated.  Shivering, you recover from the fantasy and pull your fingers from your aroused sex.  <b>It would seem you've gone into heat!</b>");
-					}
-					changes++;
+		
+		//Sexual changes would go here if I wasn't a tard.
+		//Heat
+		if (rand(4) == 0 && changes < changeLimit)
+		{
+			var intensified:Boolean = player.inHeat;
+			if (player.goIntoHeat(false)) {
+				if (intensified) {
+					if (rand(2) == 0) outputText("\n\nThe itch inside your [vagina] is growing stronger, and you desperately want to find a nice cock to massage the inside.");
+					else outputText("\n\nThe need inside your [vagina] grows even stronger.  You desperately need to find a mate to 'scratch your itch' and fill your womb with kittens.  It's difficult NOT to think about a cock slipping inside your moist fuck-tunnel, and at this point you'll have a hard time resisting ANY male who approaches.");
 				}
-			}
-			
-			//Wings
-			if (player.wings.type == Wings.NONE && changes < changeLimit && player.arms.type == Arms.SPHINX && rand(4) == 0) {
-				outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your [skin.type]. It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, [haircolor] wings.</b>");
-				mutations.setWingType(Wings.FEATHERED_SPHINX, "large crimson feathered");
-				changes++;
-			}
-			//Remove old wings
-			if (player.wings.type != Wings.FEATHERED_SPHINX && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
-				mutations.removeWings();
-				changes++;
-			}
-			
-			
-			//generic version
-			if (player.lowerBody != LowerBody.CAT && player.lowerBody != LowerBody.GARGOYLE && !player.isTaur()) {
-				if (changes < changeLimit && rand(3) == 0) {
-					changes++;
-					//else if (player.lowerBody == DOG) outputText("\n\nYou stagger as your paws change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
-					if (player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.SCYLLA) {
-						if (player.lowerBody == LowerBody.NAGA) {
-							outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly in your new feet as they transform into paws!");
-						}
-						if (player.lowerBody == LowerBody.SCYLLA) {
-							outputText("\n\nYou collapse as your tentacle legs starts to merge in pairs, shifting into legs.  The pain is immense, particularly in your new feet as they transform into paws!");
-						}
-						mutations.setLowerBody(LowerBody.CAT);
-					}
-					//Catch-all
-					else {
-						if (player.lowerBody == LowerBody.HUMAN)
-							mutations.setLowerBody(LowerBody.CAT);
-						outputText("\n\nImmense pain overtakes you as you feel your backbone snap.  The agony doesn't stop, blacking you out as your spine lengthens, growing with new flesh from your backside as the bones of your legs flex and twist.  Muscle groups shift and rearrange themselves as the change completes, the pain dying away as your consciousness returns.  <b>You now have the lower body of a lion!</b>");
-					}
-					if (player.gender > 0)
-						outputText("  After taking a moment to get used to your new body, you notice that your genitals now reside between the hind legs of your body.");
-					dynStats("spe", 3);
-					//outputText("  A coat of beastial fur springs up below your waist, itching as it fills in.<b>  You now have paws in place of your feet!</b>");
-					player.legCount = 4;
-					//dynStats("cor", 0);
-					changes++;
+				else {
+					outputText("\n\nThe interior of your [vagina] clenches tightly, squeezing with reflexive, aching need.  Your skin flushes hot ");
+					if (player.hasFur()) outputText("underneath your fur ");
+					outputText("as images and fantasies ");
+					if (player.cor < 50) outputText("assault ");
+					else outputText("fill ");
+					outputText(" your mind.  Lithe cat-boys with their perfect, spine-covered cocks line up behind you, and you bend over to present your needy pussy to them.  You tremble with the desire to feel the exotic texture of their soft barbs rubbing your inner walls, smearing your [vagina] with their cum as you're impregnated.  Shivering, you recover from the fantasy and pull your fingers from your aroused sex.  <b>It would seem you've gone into heat!</b>");
 				}
-			}
-			
-			//Human skin	
-			if (player.tailType == Tail.CAT && !player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0) {
-				mutations.humanizeSkin();
 				changes++;
 			}
+		}
 
 			//Cat dangly-doo.
 			if (player.cockTotal() > 0 && player.catCocks() < player.cockTotal() && (player.ears.type == Ears.LION || rand(3) > 0) && (player.tailType == Tail.CAT || rand(3) > 0) && changes < changeLimit && rand(4) == 0) {
@@ -421,6 +358,63 @@ public class Enigmanium extends Consumable{
 				changes++;
 			}
 		}
+		//classic horse-taur version
+		if (changes < changeLimit && rand(2) == 0 && player.lowerBody == LowerBody.CAT && player.lowerBody != LowerBody.GARGOYLE && !player.isTaur()) {
+			changes++;
+			outputText("\n\nImmense pain overtakes you as you feel your backbone snap.  The agony doesn't stop, blacking you out as your spine lengthens, growing with new flesh from your backside as the bones of your legs flex and twist.  Muscle groups shift and rearrange themselves as the change completes, the pain dying away as your consciousness returns.  <b>You now have the lower body of a centaur</b>.");
+			if (player.gender > 0) {
+				outputText("  After taking a moment to get used to your new body, you notice that your genitals now reside between the back legs on your centaur body.");
+			}
+			dynStats("spe", 3);
+			mutations.setLowerBody(LowerBody.CAT);
+			player.legCount = 4;
+		}
+			
+			//Wings
+			if (player.wings.type == Wings.NONE && changes < changeLimit && player.arms.type == Arms.SPHINX && rand(4) == 0) {
+				outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your [skin.type]. It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, [haircolor] wings.</b>");
+				mutations.setWingType(Wings.FEATHERED_SPHINX, "large feathered");
+				changes++;
+			}
+			//Remove old wings
+			if (player.wings.type != Wings.FEATHERED_SPHINX && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+				mutations.removeWings();
+				changes++;
+			}
+			
+			
+			//generic version
+			if (player.lowerBody != LowerBody.CAT && player.lowerBody != LowerBody.GARGOYLE && !player.isTaur() && changes < changeLimit && rand(3) == 0) {
+				//else if (player.lowerBody == DOG) outputText("\n\nYou stagger as your paws change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
+				if (player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.SCYLLA) {
+					if (player.lowerBody == LowerBody.NAGA) {
+						outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly in your new feet as they transform into paws!");
+					}
+					if (player.lowerBody == LowerBody.SCYLLA) {
+						outputText("\n\nYou collapse as your tentacle legs starts to merge in pairs, shifting into legs.  The pain is immense, particularly in your new feet as they transform into paws!");
+					}
+					mutations.setLowerBody(LowerBody.CAT);
+				}
+				//Catch-all
+				else {
+					if (player.lowerBody == LowerBody.HUMAN)
+						mutations.setLowerBody(LowerBody.CAT);
+					outputText("\n\nImmense pain overtakes you as you feel your backbone snap.  The agony doesn't stop, blacking you out as your spine lengthens, growing with new flesh from your backside as the bones of your legs flex and twist.  Muscle groups shift and rearrange themselves as the change completes, the pain dying away as your consciousness returns.  <b>You now have the lower body of a lion!</b>");
+				}
+				if (player.gender > 0)
+					outputText("  After taking a moment to get used to your new body, you notice that your genitals now reside between the hind legs of your body.");
+				dynStats("spe", 3);
+				//outputText("  A coat of beastial fur springs up below your waist, itching as it fills in.<b>  You now have paws in place of your feet!</b>");
+				player.legCount = 4;
+				//dynStats("cor", 0);
+				changes++;
+			}
+			
+			//Human skin	
+			if (player.tailType == Tail.CAT && !player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0) {
+				mutations.humanizeSkin();
+				changes++;
+			}
 			
 			//Body type changes.  Teh rarest of the rare.
 			//DA EARZ

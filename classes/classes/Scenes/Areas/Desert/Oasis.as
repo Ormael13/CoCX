@@ -136,6 +136,7 @@ internal function oasisSexing():void {
 		outputText("\n\n");
 		//Preggers chance!
 		player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 90);
+		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 	}
 	//Buttbutt buuuuuttt
 	if(player.gender > 0) outputText("However, the demons are interested in every part of you, not just your crotch.  ");

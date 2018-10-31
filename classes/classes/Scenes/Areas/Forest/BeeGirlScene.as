@@ -1265,6 +1265,7 @@ public class BeeGirlScene extends BaseContent
 						dynStats("int", -.5, "lus", player.maxLust());
 					//Anal bee pregnancy!
 					player.buttKnockUp(PregnancyStore.PREGNANCY_BEE_EGGS, PregnancyStore.INCUBATION_BEE, 1, 1);
+					if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 				}
 				player.slimeFeed();
 				cleanupAfterCombat();

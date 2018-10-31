@@ -163,6 +163,7 @@ public class Gorgon extends Monster
 			this.weaponAttack = 31;
 			this.armorName = "scales";
 			this.armorDef = 31;
+			this.armorMDef = 10;
 			this.bonusHP = 500;
 			this.bonusLust = 10;
 			this.lust = 30;

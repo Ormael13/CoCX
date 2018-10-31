@@ -181,6 +181,7 @@ public class PhoenixScene extends BaseContent
 			outputText("\n\nUnable to take the cumulative pleasure, the phoenix cums. You go wide-eyed as her burning-hot cum pours into your waiting womb, scalding your depths with her sizzling, potent seed. You can only keep riding her, letting her jizz flow into you until the heat and pleasure sends you over the edge too. You hug the phoenix tight as orgasm hits you, shuddering and gasping as ecstasy threatens to overwhelm you. Your [vagina] milks your lover for every last drop until, breathless, you release your death-hold on your lover, letting her flop insensate to the ground.");
 			outputText("\n\nYou stand, a bit bow-legged, and watch as a bucket’s worth of her extra seed pours out of your sodden twat, pooling on the phoenix’s breasts and belly. Giggling, you stumble off her and collect your [armor].");
 			player.orgasm();
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			cleanupAfterCombat();
 		}
 		
@@ -199,6 +200,7 @@ public class PhoenixScene extends BaseContent
 			outputText("\n\nUnable to hold on for long, you bite down on her pink nipple and cum, letting waves of pleasure wash over you from your rectal intruder. Your sphincter crunches down hard on the lizard prick inside you, milking it just like a pussy would until, spurred on by your orgasm and bite to her most sensitive flesh, the phoenix-girl cums. You yelp as her burning-hot cum rushes into your ass, scalding your walls until you feel a massive wave of pleasure crash into you -- a second orgasm! Your mind goes utterly numb, nearly blacking out as tremors of ecsatcy pump into you from her dick.");
 			outputText("\n\nWhen you come to your senses a few minutes later, the phoenix girl is asleep, still holding you tight. You pull her deflated lizard dick out of your ass and shudder as a torrent of her sizzling-hot spunk dribbles out onto her thighs and hips. You wriggle out of her tight embrace and give her a little kiss on the cheek before collecting your [armor] and heading out.");
 			player.orgasm();
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			cleanupAfterCombat();
 		}
 		

@@ -45,62 +45,6 @@ package classes.Scenes.NPCs
 			return flags[kFLAGS.LUNA_JEALOUSY];
 		}
 		
-		public function meetingLunaFirstTime():void {
-			clearOutput();
-			outputText("As you wander the streets of Tel'Adre, you see a woman being brutally thrown out of a house along with her belongings. The crowd seems to be ignoring her.  Curious, you walk up to her just in time to see her start to cry. She wears what looks like a formal maid dress. Under her white bonnet, the maid sports short, ashen hair. You decide to break the ice and ask her what's going on. By all means she looks human, which is a surprise to you.\n\n");
-			outputText("\"<i>Why, this is terrible... I’m masterless, and out of a job! What am I going to do?</i>\"\n\n");
-			outputText("What did she do to be fired to begin with?\n\n");
-			outputText("\"<i>Master William’s wife is a liar. She didn’t like me around her husband, so she broke his favorite vase and framed me for it.</i>\"\n\n");
-			outputText("Well... Talk about unfair treatment. Aren’t there any other people she could work for in town?\n\n");
-			outputText("\"<i>Once a servant is cast out, everyone in town is going to learn about it. My life as a servant is ruined. What am I going to do? Work as a whore at the penthouse? I could never do such a thing.</i>\"\n\n");
-			outputText("You could help her or leave her be. What will you do?\n\n");
-			menu();
-			addButton(0, "Help", meetingLunaFirstTimeHelp);
-			addButton(1, "Leave", meetingLunaFirstTimeLeave);
-		}
-		public function meetingLunaFirstTimeLeave():void {
-			outputText("Sadly you see no way you could help her out. You leave, wishing her the best of luck.\n\n");
-			flags[kFLAGS.LUNA_FOLLOWER] = 1;
-			doNext(camp.returnToCampUseOneHour);
-		}
-		public function meetingLunaFirstTimeHelp():void {
-			clearOutput();
-			outputText("Now that you think about it, life at camp would be infinitely easier if you had a person like her helping around. How about she comes over to live with you at your camp?\n\n");
-			outputText("\"<i>You.. you would hire me? Even after I’ve been kicked out? Oh this is wonderful! Thank you so much!!</i>\"\n\n");
-			doNext(meetingLunaCamp);
-		}
-		public function meetingLunaRepated():void {
-			clearOutput();
-			outputText("As you walk the streets of Tel’Adre, you spot the human maid from before. She's holding an empty can and using it to beg for money as she sits on the side of the street. Seeing the former servant girl reduced to this state makes you feel terribly sorry for her. It is not too late to revise your decision, will you help her out?\n\n");
-			menu();
-			addButton(0, "Yes", meetingLunaRepatedYes);
-			addButton(1, "No", meetingLunaRepatedNo);
-		}
-		public function meetingLunaRepatedNo():void {
-			outputText("There is nothing you can do for her. You leave her be, for now.\n\n");
-			doNext(camp.returnToCampUseOneHour);
-		}
-		public function meetingLunaRepatedYes():void {
-			clearOutput();
-			outputText("Now that you think about it, life at camp would be infinitely easier if you had a person like her helping. How about she comes over to live with you at your camp? You walk to her and tell her that while you don’t own much but you would gladly take her.\n\n");
-			outputText("The maid, now beggar, looks at you with tears in her eyes, as if snapping out of a bad dream, then stands up as she replies.\n\n");
-			outputText("\"<i>You.. you would hire me? Even after I’ve been kicked out? Oh this is wonderful, thank you so much!!</i>\"\n\n");
-			doNext(meetingLunaCamp);
-		}
-		public function meetingLunaCamp():void {
-			outputText("The two of you head back to camp. The maid doesn’t comment on the fact you only have a cabin for a house");
-			if (camp.companionsCount() > 2) outputText(", let alone the many people camping next to you");
-			outputText(". In fact, she is practically overjoyed.\n\n");
-			outputText("As the two of you reach the middle of the camp, you finally introduce yourself as [name] champion of Ingnam. She swiftly realises she hasn’t presented herself yet and does so with reverence.\n\n");
-			outputText("\"<i>I’ve forgotten to introduce myself, please forgive me. My name is Luna. As you have probably figured out, I am a maid. Please allow me to call you " + player.mf("Master","Mistress") + " [name] from now on, I will serve you to the best of my abilities.</i>\"\n\n");
-			outputText("(<b>Luna has been added to the Followers menu!</b>)\n\n");
-			flags[kFLAGS.LUNA_FOLLOWER] = 4;
-			flags[kFLAGS.LUNA_LVL_UP] = 0;
-			flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.LUNA_MOON_CYCLE] = 1;
-			doNext(camp.returnToCampUseOneHour);
-		}
-		
 		public function mainLunaMenu():void {
 			clearOutput();
 			outputText("You call out to Luna and the maid comes over as fast as she can.\n\n");

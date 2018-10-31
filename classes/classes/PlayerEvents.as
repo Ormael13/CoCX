@@ -4,16 +4,20 @@ import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Eyes;
 import classes.BodyParts.Face;
+import classes.BodyParts.Hair;
+import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
+import classes.BodyParts.Wings;
 import classes.GlobalFlags.*;
 import classes.Items.*;
 import classes.Scenes.Dreams;
 import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.SceneLib;
+import classes.Scenes.Camp.UniqueCampScenes;
 import classes.StatusEffects.VampireThirstEffect;
 
 public class PlayerEvents extends BaseContent implements TimeAwareInterface {
@@ -23,6 +27,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			EventParser.timeAwareClassAdd(this);
 		}
 		
+		private var campUniqueScene:UniqueCampScenes = new UniqueCampScenes();
 		private var checkedTurkey:int; //Make sure we test each of these events just once in timeChangeLarge
 		private var checkedDream:int;
 		private var displayedBeeCock:Boolean;
@@ -552,7 +557,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 					if (player.beardLength > 0 && player.beardLength < 12) EventParser.growBeard(0.02);
 				}
 				//Clear dragon breath cooldowns!
-				if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(PerkLib.DraconicLungsEvolved) < 0) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
+				if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(PerkLib.DraconicLungsFinalForm) < 0) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
 				if (player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) && player.findPerk(PerkLib.DraconicLungs) < 0) player.removeStatusEffect(StatusEffects.DragonDarknessBreathCooldown);
 				if (player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) && player.findPerk(PerkLib.DraconicLungs) < 0) player.removeStatusEffect(StatusEffects.DragonFireBreathCooldown);
 				if (player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) && player.findPerk(PerkLib.DraconicLungs) < 0) player.removeStatusEffect(StatusEffects.DragonIceBreathCooldown);
@@ -583,11 +588,12 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 					if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) flags[kFLAGS.FISHES_STORED_AT_FISHERY] += 5;
 					if (flags[kFLAGS.CEANI_FOLLOWER] > 0) flags[kFLAGS.FISHES_STORED_AT_FISHERY] -= 5;
 				}
-				//Daily regeneration of soulforce for non soul cultivators
+				//Daily regeneration of soulforce for non soul cultivators && Metamorph bonus SF gain till cap
 				if (player.findPerk(PerkLib.JobSoulCultivator) < 0 && (player.soulforce < player.maxSoulforce())) {
 					player.soulforce += 50;
 					if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
 				}
+				if (player.perkv1(PerkLib.Metamorph) < 18) player.addPerkValue(PerkLib.Metamorph, 1, 1)
 				//Daily regeneration of mana for non mages
 				if (player.findPerk(PerkLib.JobSorcerer) < 0 && (player.mana < player.maxMana())) {
 					player.mana += 100;
@@ -656,11 +662,30 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 						needNext = true;
 					}
 				}
+				//Soul Arena Gaunlet reset
+				if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlets1)) {
+					if (player.statusEffectv1(StatusEffects.SoulArenaGaunlets1) > 1) player.addStatusValue(StatusEffects.SoulArenaGaunlets1, 1, -1);
+					if (player.statusEffectv2(StatusEffects.SoulArenaGaunlets1) > 1) player.addStatusValue(StatusEffects.SoulArenaGaunlets1, 2, -1);
+				}
+				//Adventure Quild daily quests reset
+				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests1)) {
+					if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) > 6) player.addStatusValue(StatusEffects.AdventureGuildQuests1, 1, -3);
+					if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) > 6) player.addStatusValue(StatusEffects.AdventureGuildQuests1, 2, -3);
+				}
+				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests2)) {
+					if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) > 6) player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, -3);
+					if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) > 6) player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, -3);
+				}
+				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests3)) {
+					if (player.statusEffectv1(StatusEffects.AdventureGuildQuests3) > 6) player.addStatusValue(StatusEffects.AdventureGuildQuests3, 1, -3);
+					if (player.statusEffectv2(StatusEffects.AdventureGuildQuests3) > 6) player.addStatusValue(StatusEffects.AdventureGuildQuests3, 2, -3);
+				}
 			}
 			if (CoC.instance.model.time.hours == 6) {
 				var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
 				if (vthirst != null) {
-					vthirst.modSatiety(-1);
+					if (player.hasPerk(PerkLib.VampiricBloodsteamEvolved) && player.statusEffectv2(StatusEffects.VampireThirst) < 1) player.addStatusValue(StatusEffects.VampireThirst, 2, 1);
+					else vthirst.modSatiety(-1);
 				}
 			}
 			return needNext;
@@ -691,22 +716,37 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 					if (player.hunger > 0) player.hunger -= (0.5 * multiplier);
 				}
 				if (player.buttPregnancyType == PregnancyStore.PREGNANCY_GOO_STUFFED) player.hunger = 100; //After Valeria x Goo Girl, you'll never get hungry until you "birth" the goo-girl.
-				if (player.hunger <= 0)
-				{
+				if (player.hunger < 50 && player.findPerk(PerkLib.MagicMetabolism) >= 0) {
+					var manaDrain:Number = 0;
+					manaDrain += 50 - player.hunger;
+					if (player.mana >= (manaDrain * 5)) {
+						player.mana -= (manaDrain * 5);
+						player.hunger = 50;
+					}
+				}
+				if (player.hunger <= 0) {
 					if (prison.inPrison) {
-						SceneLib.prison.changeWill(-1, prison.inPrison);
-						fatigue(2);
+						if (player.isGargoyle()) {
+							fatigue(2);//zmienić potem jak lia coś tu wymyśli
+						}
+						else {
+							SceneLib.prison.changeWill(-1, prison.inPrison);
+							fatigue(2);
+						}
 					}
 					else {
-						//Lose HP and makes fatigue go up. Lose body weight and muscles.
-						if (player.thickness < 25) {
-							player.takePhysDamage(player.maxHP() / 25);//użyć to jako strat hp jak PC nie ma hunger enabled i ma perki z chimerycznej natury jak lizan marrow, etc.
-							fatigue(2);
-							dynStats("str", -0.5, "tou", -0.5);
-						}
-						else if ((model.time.hours + 2) % 4 == 0) { //Lose thickness 2x as fast.
-							player.modThickness(1, 1);
-							player.modTone(1, 1);
+						if (player.isGargoyle()) campUniqueScene.droppingToZeroSatietyAsGargoyle();
+						else {
+							//Lose HP and makes fatigue go up. Lose body weight and muscles.
+							if (player.thickness < 25) {
+								player.takePhysDamage(player.maxHP() / 25);
+								fatigue(2);
+								dynStats("str", -0.5, "tou", -0.5);
+							}
+							else if ((model.time.hours + 2) % 4 == 0) { //Lose thickness 2x as fast.
+								player.modThickness(1, 1);
+								player.modTone(1, 1);
+							}
 						}
 					}
 					player.hunger = 0; //Prevents negative
@@ -745,7 +785,9 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 			if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS) { //Spider, Bee, Scorpion, Manticore and Naga Venom Recharge
 				if (player.tailRecharge < 5) player.tailRecharge = 5;
 				player.tailVenom += player.tailRecharge;
-				if (player.findPerk(PerkLib.ImprovedVenomGland) >= 0) player.tailVenom += 10;
+				if (player.findPerk(PerkLib.ImprovedVenomGland) >= 0) player.tailVenom += 5;
+				if (player.findPerk(PerkLib.VenomGlandsEvolved) >= 0) player.tailVenom += 2;
+				if (player.findPerk(PerkLib.VenomGlandsFinalForm) >= 0) player.tailVenom += 8;
 				if (player.tailVenom > player.maxVenom()) player.tailVenom = player.maxVenom();
 			}
 			//Improved venom gland
@@ -754,7 +796,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				player.createPerk(PerkLib.ImprovedVenomGland, 0, 0, 0, 0);
 			}
 			//Flexibility perk
-			if (player.tailType == Tail.CAT || player.tailType == Tail.MANTICORE_PUSSYTAIL && player.lowerBody == LowerBody.CAT && player.ears.type == Ears.CAT || player.ears.type == Ears.LION) { //Check for gain of cat agility - requires legs, tail, and ears
+			if ((player.tailType == Tail.CAT || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.tailType == Tail.BURNING) && player.lowerBody == LowerBody.CAT && (player.ears.type == Ears.CAT || player.ears.type == Ears.LION)) { //Check for gain of cat agility - requires legs, tail, and ears
 				if (player.findPerk(PerkLib.Flexibility) < 0) {
 					outputText("\nWhile stretching, you notice that you're much more flexible than you were before.  Perhaps this will make it a bit easier to dodge attacks in battle?\n\n(<b>Gained Perk: Flexibility</b>)\n");
 					player.createPerk(PerkLib.Flexibility, 0, 0, 0, 0);
@@ -872,12 +914,12 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				needNext = true;
 			}
 			//Fire Affinity
-			if ((player.salamanderScore() >= 4 || player.phoenixScore() >= 10) && player.findPerk(PerkLib.FireAffinity) < 0) {
+			if ((player.salamanderScore() >= 4 || player.phoenixScore() >= 10 || player.hellcatScore() >= 10) && player.findPerk(PerkLib.FireAffinity) < 0) {
 				outputText("\nYou suddenly feels your body temperature rising to ridiculus level. You pant for several minutes until your finaly at ease with your bodily heat. You doubt any more heat is gunna make you more incomfortable then this as you quietly soak in the soothing warmth your body naturaly produce. Its like your body is made out of living fire.\n\n(<b>Gained Perk: Fire Affinity</b>)\n");
 				player.createPerk(PerkLib.FireAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if ((player.salamanderScore() < 4 && player.phoenixScore() < 10) && player.findPerk(PerkLib.FireAffinity) >= 0) {
+			else if ((player.salamanderScore() < 4 && player.phoenixScore() < 10 && player.hellcatScore() < 10) && player.findPerk(PerkLib.FireAffinity) >= 0) {
 				outputText("\nYou suddenly feel chilly as your bodily temperature drop down to human level. You lost your natural warmth reverting to that of a standard human.\n\n<b>(Lost Perk: Fire Affinity)</b>\n");
 				player.removePerk(PerkLib.FireAffinity);
 				needNext = true;
@@ -913,7 +955,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 			}
 			//Soul Sense
 			if (player.maxSoulforce() >= 200 && player.findPerk(PerkLib.SoulApprentice) >= 0 && player.findPerk(PerkLib.SoulSense) < 0) {
-				outputText("\nDuring a casual walk around your camp you suddenly notice, or rather feel, something unexpected. Your surrounding blurs for a moment, to be replaced with a forest.You notice a goblin strolling nearby.. Suddenly, she stops and slowly looks around, staring directly at you. A moment later, your vision of the forest becomes blurry, eventually fading away to be replaced by your camp and its surroundings. ");
+				outputText("\nDuring a casual walk around your camp you suddenly notice, or rather feel, something unexpected. Your surrounding blurs for a moment, to be replaced with a forest. You notice a goblin strolling nearby. Suddenly, she stops and slowly looks around, staring directly at you. A moment later, your vision of the forest becomes blurry, eventually fading away to be replaced by your camp and its surroundings. ");
 				outputText("You shake your head, trying to figure out what had just happened. The only solution that you find within yourself is something that the soul cultivators you met in He’Xin’Dao mentioned. Another sense that they had developed, which allowed them to perceive distant places or find specific people over long distances. It looks as though you developed it, even without training.\n");
 				player.createPerk(PerkLib.SoulSense, 0, 0, 0, 0);
 				needNext = true;
@@ -958,13 +1000,22 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 			}
 			//Vampire Thirst
 			if (player.faceType == Face.VAMPIRE && !player.hasStatusEffect(StatusEffects.VampireThirst)) {
-				outputText("\nAn ominous thirst settle in your throat as you begin to hallucinate glasses of blood… how delicious it would feel on your palates. You realise you are salivating and do your best to control yourself. Still you now are clearly dependant on blood.\n");
+				outputText("\nAn ominous thirst settle in your throat as you begin to hallucinate glasses of blood... how delicious it would feel on your palates. You realise you are salivating and do your best to control yourself. Still you now are clearly dependant on blood.\n");
 				player.createStatusEffect(StatusEffects.VampireThirst, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if (player.faceType != Face.VAMPIRE && player.hasStatusEffect(StatusEffects.VampireThirst)) {
+			if (player.faceType != Face.VAMPIRE && player.hasStatusEffect(StatusEffects.VampireThirst) && !player.hasPerk(PerkLib.HollowFangs)) {
 				outputText("\nAs your fang disappear so do your vampiric urges. You become disgusted with yourself as you realise how much blood you drank.\n");
 				player.removeStatusEffect(StatusEffects.VampireThirst);
+				needNext = true;
+			}
+			//Loosing hellcat body parts
+			if ((player.tailType != Tail.BURNING || player.eyes.type != Eyes.INFERNAL || player.hairType != Hair.BURNING) && player.hellcatScore() > 8) {
+				outputText("\nAs you become less of a hellcat your inner fire entirely dies down, your body reverting to that of a standard feline.\n");
+				if (player.tailType == Tail.BURNING) player.tailType = Tail.CAT;
+				if (player.eyes.type == Eyes.INFERNAL) player.eyes.type = Eyes.CAT_SLITS;
+				if (player.hairType != Hair.BURNING) player.hairType = Hair.NORMAL;
+				if (flags[kFLAGS.WITCHES_SABBATH] > 1) flags[kFLAGS.WITCHES_SABBATH] = 1;
 				needNext = true;
 			}
 			//Reset bad end warning
@@ -983,8 +1034,8 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				else outputText("\nYou notice that you feel a bit stiff and your skin is a bit harder.  Something clicks in your mind as you finally unlock the potential to protect yourself from the goddamn basilisks! \n\n(<b>Gained Perk: Basilisk Resistance - Your maximum speed is permanently decreased but you are now immune to the basilisk's gaze!</b>)\n");
 				player.createPerk(PerkLib.BasiliskResistance, 0, 0, 0, 0);
 			}
-			if (flags[kFLAGS.TIMES_TRANSFORMED] >= 50 && player.findPerk(PerkLib.GeneticMemory) < 0) {
-				outputText("\nYour body behave weirdly as if all the transformation you had undergone had started to make it unsure about what it truly is. Sometime you even try to move limbs that are no longuer there. Suddenly you realise that no mather how many time you change your body remembers it. Your body developed a genetic memory! \n\n(<b>Gained Perk: Genetic Memory</b>)\n");
+			if (flags[kFLAGS.TIMES_TRANSFORMED] >= 25 && player.findPerk(PerkLib.GeneticMemory) < 0) {
+				outputText("\nYour body behave weirdly as if all the transformation, which you have undergone started to make it unsure about what it truly is. Sometime you even try to move limbs that are no longer there. Suddenly you realise that no mather how many time you change your body remembers it. Your body developed genetic memory! \n\n(<b>Gained Perk: Genetic Memory</b>)\n");
 				player.createPerk(PerkLib.GeneticMemory, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.TIMES_TRANSFORMED] >= 100 && player.findPerk(PerkLib.TransformationResistance) < 0) {
@@ -1008,6 +1059,79 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 			if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) == 0 && (player.tailType != Tail.FOX || player.tailCount < 9)) {
 				outputText("\n<b>Without your tails, the balance is disturbed and you loose your insights into the third path.</b>\n");
 				player.removePerk(PerkLib.NinetailsKitsuneOfBalance);
+				needNext = true;
+			}
+			if ((player.horns.type == Horns.BICORN || player.horns.type == Horns.UNICORN) && player.cor > 89 && player.findPerk(PerkLib.AvatorOfCorruption) < 0) {
+				outputText("\nA sudden wave of pleasure strike you making you moan");
+				if (player.horns.type == Horns.UNICORN) {
+					outputText(" as your horn begins to split in two");
+					player.horns.type = Horns.BICORN;
+				}
+				outputText(".");
+				if (player.hairColor != "black") {
+					outputText(" Your fur tingle and you coo in delight as it turn abyssal black.");
+					player.hairColor = "black";
+				}
+				if (player.eyes.colour != "red") {
+					outputText(" Meanwhile your eyes shine with malice as they take on a red corrupted tone reflecting the sorry state of your soul.");
+					player.eyes.colour = "red";
+				}
+				if (player.wings.type == Wings.FEATHERED_ALICORN) {
+					outputText(" Your wings aren’t spared either all the feather falling off to reveal a membranous demonic pair of bat wings.");
+					player.wings.type = Wings.NIGHTMARE;
+				}
+				outputText(" <b>You giggle in delight of your own corruption as you fall from grace into a ");
+				if (player.wings.type == Wings.NIGHTMARE) outputText("nightmare");
+				else outputText("bicorn");
+				outputText(". Mighty magical power start to swell in the twin horns on your forehead and you will gladly use them to despoil and tarnish anything pure or innocent left on mareth.</b>\n");
+				if (player.findPerk(PerkLib.AvatorOfPurity) >= 0) player.removePerk(PerkLib.AvatorOfPurity);
+				player.createPerk(PerkLib.AvatorOfCorruption, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if (player.horns.type == Horns.BICORN && player.wings.type == Wings.FEATHERED_ALICORN) {
+				outputText("\nYour wings changes as all the feather falling off to reveal a membranous demonic pair of bat wings.\n");
+				player.wings.type = Wings.NIGHTMARE;
+				needNext = true;
+			}
+			if (player.findPerk(PerkLib.AvatorOfCorruption) >= 0 && player.cor > 10 && player.horns.type != Horns.BICORN) {
+				outputText("\n<b>Without your horns, the magic power they once granted withers and dies, vanishing completely.</b>\n");
+				player.removePerk(PerkLib.AvatorOfCorruption);
+				needNext = true;
+			}
+			if ((player.horns.type == Horns.BICORN || player.horns.type == Horns.UNICORN) && player.cor < 11 && player.findPerk(PerkLib.AvatorOfPurity) < 0) {
+				outputText("\nA sudden wave of serenity pass over you as you realise how pure you have become.");
+				if (player.horns.type == Horns.BICORN) {
+					outputText(" Your two horns merges into a single one and you can feel the pure unity of your horn restored.");
+					player.horns.type = Horns.UNICORN;
+				}
+				if (player.hairColor != "white") {
+					outputText(" You sigh in relief as fur turns immaculate white.");
+					player.hairColor = "white";
+				}
+				if (player.eyes.colour != "blue") {
+					outputText(" Meanwhile your irises shift toward the sapphire blue as your mind clears off.");
+					player.eyes.colour = "blue";
+				}
+				if (player.wings.type == Wings.NIGHTMARE) {
+					outputText(" Your wings also redeem themselves changing into a pair of angelic wings covered with white feathers.");
+					player.wings.type = Wings.FEATHERED_ALICORN;
+				}
+				outputText(" <b>You laugh heartily at your unblemish pure form as you realise are an ");
+				if (player.wings.type == Wings.FEATHERED_ALICORN) outputText("alicorn");
+				else outputText("unicorn");
+				outputText(" now. Mighty magical power start to swell in the horn on your forehead and you will gladly use them to fight off the corruption that plagues mareth.</b>\n");
+				if (player.findPerk(PerkLib.AvatorOfCorruption) >= 0) player.removePerk(PerkLib.AvatorOfCorruption);
+				player.createPerk(PerkLib.AvatorOfPurity, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if (player.horns.type == Horns.UNICORN && player.wings.type == Wings.NIGHTMARE) {
+				outputText("\nYour wings redeem themselves changing into a pair of angelic wings covered with white feathers.\n");
+				player.wings.type = Wings.FEATHERED_ALICORN;
+				needNext = true;
+			}
+			if (player.findPerk(PerkLib.AvatorOfPurity) >= 0 && player.cor < 90 && player.horns.type != Horns.UNICORN) {
+				outputText("\n<b>Without your horn, the magic power it once granted withers and dies, vanishing completely.</b>\n");
+				player.removePerk(PerkLib.AvatorOfPurity);
 				needNext = true;
 			}
 			if (player.lowerBody == LowerBody.HARPY && player.tailType == Tail.HARPY && player.findPerk(PerkLib.HarpyWomb) >= 0) { //Make eggs big if harpied!
@@ -1099,6 +1223,18 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 					outputText("\n<b>The lust-increasing effects of harpy lipstick have worn off!\n</b>");
 					needNext = true;
 				}
+			}
+			if (player.hasStatusEffect(StatusEffects.DrunkenPower)) {
+				if (player.statusEffectv1(StatusEffects.DrunkenPower) <= 0) {
+					player.str -= player.statusEffectv2(StatusEffects.DrunkenPower);
+					player.spe += player.statusEffectv3(StatusEffects.DrunkenPower);
+					player.inte += player.statusEffectv3(StatusEffects.DrunkenPower);
+					player.lib -= player.statusEffectv2(StatusEffects.DrunkenPower);
+					player.removeStatusEffect(StatusEffects.DrunkenPower);
+					outputText("<b>Seems you are sober again.</b>\n\n");
+					needNext = true;
+				}
+				else player.addStatusValue(StatusEffects.DrunkenPower,1,-1);
 			}
 			if (player.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00285] >= 50 && player.findPerk(PerkLib.LuststickAdapted) < 0) { //Luststick resistance unlock
                 SceneLib.sophieBimbo.unlockResistance();
@@ -1564,3 +1700,4 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 		//End of Interface Implementation
 	}
 }
+

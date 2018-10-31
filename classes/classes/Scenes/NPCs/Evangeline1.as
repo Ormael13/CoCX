@@ -30,6 +30,7 @@ public class Evangeline1 extends Monster
 		Spellsword
 		Battleflash
 		Spellarmor
+		Battleshield
 		JobSeducer
 		ImprovedSelfControl
 		AdvancedSelfControl
@@ -168,8 +169,6 @@ public class Evangeline1 extends Monster
 			if (inte >= 81 && inte < 101) damage += (inte + rand(inte * 1.5));
 			if (inte >= 101) damage += ((inte * 1.25) + rand(inte * 1.75));
 			damage *= SpellMod();
-			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
-			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			damage = Math.round(damage);
 			if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 			player.addStatusValue(StatusEffects.Blizzard, 1, -1);
@@ -185,7 +184,7 @@ public class Evangeline1 extends Monster
 			}
 			damage *= 0.25;
 			damage = Math.round(damage);
-			player.takeMagicDamage(damage, true);
+			player.takeFireDamage(damage, true);
 			fatigue += spellCostWhitefire();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;
 		}
@@ -338,6 +337,7 @@ public class Evangeline1 extends Monster
 				this.weaponAttack = 1;
 				this.armorName = "rags";
 				this.armorDef = 1;
+				this.armorMDef = 1;
 				this.bonusHP = 30;
 				this.bonusLust = 5;
 				this.additionalXP += 5;
@@ -352,6 +352,7 @@ public class Evangeline1 extends Monster
 				this.weaponAttack = 1;
 				this.armorName = "rags";
 				this.armorDef = 1;
+				this.armorMDef = 1;
 				this.bonusHP = 60;
 				this.bonusLust = 10;
 				this.additionalXP += 10;
@@ -367,6 +368,7 @@ public class Evangeline1 extends Monster
 				this.weaponAttack = 1;
 				this.armorName = "rags";
 				this.armorDef = 1;
+				this.armorMDef = 1;
 				this.bonusHP = 90;
 				this.bonusLust = 15;
 				this.additionalXP += 15;
@@ -383,6 +385,7 @@ public class Evangeline1 extends Monster
 				this.weaponAttack = 6;
 				this.armorName = "rags";
 				this.armorDef = 1;
+				this.armorMDef = 1;
 				this.bonusHP = 120;
 				this.bonusLust = 20;
 				this.additionalXP += 20;
@@ -400,6 +403,7 @@ public class Evangeline1 extends Monster
 				this.weaponAttack = 6;
 				this.armorName = "practically indecent steel armor";
 				this.armorDef = 11;
+				this.armorMDef = 1;
 				this.bonusHP = 150;
 				this.bonusLust = 25;
 				this.additionalXP += 25;
@@ -418,6 +422,7 @@ public class Evangeline1 extends Monster
 				this.weaponAttack = 9;
 				this.armorName = "practically indecent steel armor";
 				this.armorDef = 11;
+				this.armorMDef = 1;
 				this.bonusHP = 180;
 				this.bonusLust = 30;
 				this.additionalXP += 30;

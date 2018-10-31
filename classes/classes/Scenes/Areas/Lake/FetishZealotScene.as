@@ -206,6 +206,7 @@ public class FetishZealotScene extends AbstractLakeContent
 						outputText("Your [cocks] spasms and covers you with a liberal amount of your own fluids.  ");
 					}
 					outputText("After a moment, your student pulls out of you and helps you back up.\n\n");
+					if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 				}
 			}
 			//Wrapping things up
@@ -290,6 +291,7 @@ public class FetishZealotScene extends AbstractLakeContent
 				outputText(" you are, he still seems to fit you like a glove.  With no need to adjust to his presence inside you, you immediately start to roughly fuck him.  To make sure he doesn't enjoy himself too much, you start to twist and pull at his nipples.  Between his gasps of pleasure and pain, he continues his prayer: \"<i>Gah, oh woe is me, ah-gha, my punishment is my pleas- agh!  My eternal torment will be –ugha, never being able to –hah, enjoy this forever.  Ugha!</i>\"  Finally tired of his antics, you punch him in the stomach, as his amazing rod pumping within your " + vaginaDescript(0) + " pushes you over the edge of an orgasm.\n\n");
 				outputText("Your lusts sated for now, you rise up off of him and put your [armor] back on.  You decide to leave him lying there, still coughing from the blow to his stomach.  ");
 				player.cuntChange(monster.cockArea(0), true);
+				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			}
 			player.orgasm();
 			cleanupAfterCombat();

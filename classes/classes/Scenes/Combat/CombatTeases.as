@@ -48,7 +48,10 @@ public class CombatTeases extends BaseCombatContent {
 			outputText("He is too focused on your eyes to pay any attention to your teasing moves, <b>looks like you'll have to beat him up.</b>\n\n");
 			return;
 		}
+		combat.wrathregeneration();
 		combat.fatigueRecovery();
+		combat.manaregeneration();
+		combat.soulforceregeneration();
 		if (monster.lustVuln == 0) {
 			outputText("You do your best to tease " + monster.a + monster.short + " with your body but it has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
 			enemyAI();
@@ -73,9 +76,9 @@ public class CombatTeases extends BaseCombatContent {
 		//==============================
 		//Determine basic success chance.
 		//==============================
-		chance = 60;
-		//1% chance for each tease level.
-		chance += player.teaseLevel;
+		chance = 70;
+		//2% chance for each tease level.
+		chance += player.teaseLevel * 2;
 		//Extra chance for sexy undergarments.
 		chance += player.upperGarment.sexiness;
 		chance += player.lowerGarment.sexiness;
@@ -252,7 +255,7 @@ public class CombatTeases extends BaseCombatContent {
 				if (player.tone >= 70) choices[choices.length] = 8;
 				if (player.tone >= 80) choices[choices.length] = 8;
 				if (player.tone >= 90) choices[choices.length] = 8;
-				if (player.tone == 100) choices[choices.length] = 8;
+				if (player.tone >= 100) choices[choices.length] = 8;
 			}
 			//9 Heroic Pose
 			if (player.tone >= 60 && player.str >= 50) {
@@ -1461,18 +1464,17 @@ public class CombatTeases extends BaseCombatContent {
 			//NERF TEASE DAMAGE
 			damage *= .7;
 			bonusDamage *= .7;
-			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0) {
-				damage *= (1 + (player.lust100 * 0.01));
-				bonusDamage *= (1 + (player.lust100 * 0.01));
-			}
-			if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) {
-				damage *= 1.15;
-				bonusDamage *= 1.15;
-			}
+			var damagemultiplier:Number = 1;
+			if (player.hasPerk(PerkLib.ElectrifiedDesire)) damagemultiplier += player.lust100 * 0.01;
+			if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += 0.15;
+			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
+			if (player.hasPerk(PerkLib.SuperSensual) && chance > 100) damagemultiplier += (0.01 * (chance - 100));
+			damage *= damagemultiplier;
+			bonusDamage *= damagemultiplier;
 			//Determine if critical tease!
 			var crit:Boolean = false;
 			var critChance:int = 5;
-			if (player.findPerk(PerkLib.CriticalPerformance) >= 0) {
+			if (player.hasPerk(PerkLib.CriticalPerformance)) {
 				if (player.lib <= 100) critChance += player.lib / 5;
 				if (player.lib > 100) critChance += 20;
 			}
@@ -1481,10 +1483,10 @@ public class CombatTeases extends BaseCombatContent {
 				crit = true;
 				damage *= 1.75;
 			}
-			if (player.findPerk(PerkLib.ChiReflowLust) >= 0) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
-			if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && player.findPerk(PerkLib.EnemyGroupType) >= 0) damage *= 1.5;
+			if (player.hasPerk(PerkLib.ChiReflowLust)) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
+			if (player.hasPerk(PerkLib.ArouseTheAudience) && player.hasPerk(PerkLib.EnemyGroupType)) damage *= 1.5;
 			damage = (damage + rand(bonusDamage)) * monster.lustVuln;
-			if (player.findPerk(PerkLib.DazzlingDisplay) >= 0 && rand(100) < 15) {
+			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 15) {
 				outputText("\n" + monster.a + monster.short + " is so mesmerised by your show that it stands there gawking.");
 				monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 			}
@@ -1500,12 +1502,11 @@ public class CombatTeases extends BaseCombatContent {
 				if (!justText) dynStats("lus", 2 + rand(3));
 			}
 			// Similar to fetish check, only add XP if the player IS the player...
-			if (!justText && !SceneLib.urtaQuest.isUrta()) teaseXP(1);
+			if (!justText && !SceneLib.urtaQuest.isUrta()) teaseXP(1 + bonusExpAfterSuccesfullTease());
 		}
 		//Nuttin honey
 		else {
-			if (!justText && !SceneLib.urtaQuest.isUrta()) teaseXP(5);
-
+			if (!justText && !SceneLib.urtaQuest.isUrta()) teaseXP(1);
 			if (monster is JeanClaude) (monster as JeanClaude).handleTease(0, false);
 			else if (monster is Doppleganger) (monster as Doppleganger).mirrorTease(0, false);
 			else if (!justText) outputText("\n" + monster.capitalA + monster.short + " seems unimpressed.");
@@ -1515,22 +1516,55 @@ public class CombatTeases extends BaseCombatContent {
 
 	public function teaseXP(XP:Number = 0):void {
 		while (XP > 0) {
-			XP--;
-			player.teaseXP++;
+			if (XP == 1) {
+				player.teaseXP++;
+				XP--;
+			}
+			else {
+				player.teaseXP += XP;
+				XP -= XP;
+			}
 			//Level dat shit up!
-			if (player.teaseLevel < maxTeaseLevel() && player.teaseXP >= 10 + (player.teaseLevel + 1) * 5 * (player.teaseLevel + 1)) {
+			if (player.teaseLevel < maxTeaseLevel() && player.teaseXP >= teaseExpToLevelUp()) {
 				outputText("\n<b>Tease skill leveled up to " + (player.teaseLevel + 1) + "!</b>");
 				player.teaseLevel++;
 				player.teaseXP = 0;
 			}
 		}
 	}
-	
+	public function bonusExpAfterSuccesfullTease():Number {
+		var sucessBonusTeaseExp:Number = 1;
+		if (player.hasPerk(PerkLib.SuperSensual)) sucessBonusTeaseExp += 2;
+		if (player.hasPerk(PerkLib.Sensual)) sucessBonusTeaseExp += 1;
+		return sucessBonusTeaseExp;
+	}
 	public function maxTeaseLevel():Number {
-		var maxLevel:Number = 1;
-		if (player.level < 24) maxLevel += player.level;
-		else maxLevel += 24;
+		var maxLevel:Number = 2;
+		if (player.hasPerk(PerkLib.SuperSensual)) {
+			if (player.level < 48) maxLevel += player.level;
+			else maxLevel += 48;
+		}
+		else {
+			if (player.level < 23) maxLevel += player.level;
+			else maxLevel += 23;
+		}
 		return maxLevel;
+	}
+	public function teaseExpToLevelUp():Number {
+		var expToLevelUp:Number = 10;
+		var expToLevelUp00:Number = player.teaseLevel + 1;
+		var expToLevelUp01:Number = 5;
+		var expToLevelUp02:Number = player.teaseLevel + 1;
+		if (player.hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+		//-2;//4th
+		//-3;//6th
+		if (player.hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+		if (player.hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+		if (player.hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+		if (player.hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+		//-3;//5th
+		expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+		return expToLevelUp;
 	}
 
 

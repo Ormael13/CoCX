@@ -124,6 +124,7 @@ public class Vala extends Monster
 			this.weaponAttack = 1;
 			this.armorName = "skin";
 			this.armorDef = 1;
+			this.armorMDef = 1;
 			var lustVuln:Number = .5;
 			if(game.flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 0) lustVuln += .25;
 			if(game.flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 2) lustVuln += .5;

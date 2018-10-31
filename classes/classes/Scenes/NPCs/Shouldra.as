@@ -118,13 +118,15 @@ import classes.internals.*;
 			this.weaponAttack = 14;
 			this.armorName = "comfortable clothes";
 			this.armorDef = 1;
+			this.armorMDef = 1;
 			this.bonusHP = 30;
 			this.bonusLust = 10;
 			this.lust = 10;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 12;
 			this.gems = 0;
-			this.drop = new ChainedDrop().add(consumables.ECTOPLS,1/3);
+			this.drop = new ChainedDrop().add(consumables.ECTOPLS, 1 / 3);
+			this.createPerk(PerkLib.Incorporeality, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

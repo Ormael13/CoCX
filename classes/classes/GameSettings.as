@@ -30,8 +30,7 @@ public class GameSettings extends BaseContent {
 		addButton(1, "Interface", settingsScreenInterfaceSettings);
 		addButton(3, "Font Size", fontSettingsMenu);
 		addButton(4, "Controls", displayControls);
-
-addButton(14, "Back", CoC.instance.mainMenu.mainMenu);
+		addButton(14, "Back", CoC.instance.mainMenu.mainMenu);
         if (flags[kFLAGS.HARDCORE_MODE] > 0) {
 			debug                               = false;
 			flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
@@ -428,7 +427,7 @@ addButton(14, "Back", CoC.instance.mainMenu.mainMenu);
 
 		outputText("\n\n");
 
-		if (Measurements.useMetrics)
+		if (flags[kFLAGS.USE_METRICS] > 0)
 			outputText("Measurement: <b>Metric</b>\n Height and cock size will be measured in metres and centimetres.");
 		else
 			outputText("Measurement: <b>Imperial</b>\n Height and cock size will be measured in feet and inches.");
@@ -566,7 +565,8 @@ addButton(14, "Back", CoC.instance.mainMenu.mainMenu);
 	 }
 	 */
 	public function toggleMeasurements():void {
-		Measurements.useMetrics = !Measurements.useMetrics;
+		if (flags[kFLAGS.USE_METRICS] < 1) flags[kFLAGS.USE_METRICS] = 1;
+		else flags[kFLAGS.USE_METRICS] = 0;
 		settingsScreenInterfaceSettings();
 	}
 

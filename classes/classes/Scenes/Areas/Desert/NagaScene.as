@@ -989,17 +989,20 @@ public function naggaTease():void {
         enemyAI();
         return;
     }
+	SceneLib.combat.wrathregeneration();
     SceneLib.combat.fatigueRecovery();
-    var damage:Number;
-    var chance:Number = 60;
+	SceneLib.combat.manaregeneration();
+	SceneLib.combat.soulforceregeneration();
+	var damage:Number;
+    var chance:Number = 70;
     var bimbo:Boolean = false;
     var bro:Boolean = false;
     var futa:Boolean = false;
     //==============================
     //Determine basic success chance.
     //==============================
-    //1% chance for each tease level.
-    chance += player.teaseLevel;
+    //2% chance for each tease level.
+    chance += player.teaseLevel * 2;
     //10% for seduction perk
     if (player.findPerk(PerkLib.Seduction) >= 0) chance += 10;
     //10% for sexy armor types
@@ -1077,14 +1080,15 @@ public function naggaTease():void {
     if (rand(100) <= chance) {
         //NERF TEASE DAMAGE
         damage *= .9;
-        if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) {
-            damage *= 1.15;
-        }
-        if (player.findPerk(PerkLib.DazzlingDisplay) >= 0 && rand(100) < 10) damage *= 1.2;
+		var damagemultiplier:Number = 1;
+        if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += 0.15;
+        if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
+		if (player.hasPerk(PerkLib.SuperSensual) && chance > 100) damagemultiplier += (0.01 * (chance - 100));
+		damage *= damagemultiplier;
         //Determine if critical tease!
         var crit:Boolean = false;
         var critChance:int = 5;
-        if (player.findPerk(PerkLib.CriticalPerformance) >= 0) {
+        if (player.hasPerk(PerkLib.CriticalPerformance)) {
             if (player.lib <= 100) critChance += player.lib / 5;
             if (player.lib > 100) critChance += 20;
         }
@@ -1092,13 +1096,13 @@ public function naggaTease():void {
             crit = true;
             damage *= 1.75;
         }
-        monster.teased(monster.lustVuln * damage);
+		monster.teased(monster.lustVuln * damage);
         if (crit == true) outputText(" <b>Critical!</b>");
-        SceneLib.combat.teaseXP(1);
+        SceneLib.combat.teaseXP(1 + SceneLib.combat.bonusExpAfterSuccesfullTease());
     }
     //Nuttin honey
     else {
-        SceneLib.combat.teaseXP(5);
+        SceneLib.combat.teaseXP(1);
         outputText("\n" + monster.capitalA + monster.short + " seems unimpressed.");
     }
     outputText("\n\n");
@@ -1204,4 +1208,4 @@ private function beePositANagaPlease():void {
 	cleanupAfterCombat();
 }
 	}
-}
+}

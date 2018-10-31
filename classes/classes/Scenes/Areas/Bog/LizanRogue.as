@@ -103,6 +103,7 @@ public class LizanRogue extends Monster
 			this.weaponAttack = 38;
 			this.armorName = "loincloth";
 			this.armorDef = 18;
+			this.armorMDef = 2;
 			this.bonusHP = 350;
 			this.bonusLust = 10;
 			this.lust = 20;

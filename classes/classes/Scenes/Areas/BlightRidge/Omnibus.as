@@ -64,6 +64,7 @@ use namespace CoC;
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
 			this.armorDef = 24;
+			this.armorMDef = 4;
 			this.bonusHP = 575;
 			this.bonusLust = 40;
 			this.lust = 30;

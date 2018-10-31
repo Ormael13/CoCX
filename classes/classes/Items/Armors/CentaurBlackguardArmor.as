@@ -11,7 +11,7 @@ package classes.Items.Armors
 		
 		public function CentaurBlackguardArmor() 
 		{
-			super("TaurBAr","Taur B. Armor","some taur blackguard armor","a set of taur blackguard armor",23,1698,"A suit of blackguard's armor for centaurs.","Heavy")
+			super("TaurBAr","Taur B. Armor","some taur blackguard armor","a set of taur blackguard armor",23,0,1698,"A suit of blackguard's armor for centaurs.","Heavy")
 		}
 		override public function canUse():Boolean{
 			if (game.player.isTaur()){return true}

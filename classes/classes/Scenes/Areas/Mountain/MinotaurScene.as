@@ -503,6 +503,7 @@ private function minotaurGetsRapedByHerms():void {
 	player.orgasm();
 	dynStats("spe", -.5, "int", -.5, "sen", 1.5, "cor", 1);
 	//Preggers chance!
+	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 	player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR);
 	cleanupAfterCombat();
 }
@@ -651,6 +652,7 @@ if (doSFWloss() && CoC.instance.inCombat) { //No rape in SFW mode.
 		}
 		//Preggers chance!
 		player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR);
+		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 	}
 	if(player.cockTotal() > 0 && (player.sens + rand(40) > 50)) {
 		outputText("You orgasm, ");
@@ -702,6 +704,7 @@ private function getOralRapedByMinotaur():void {
 	player.orgasm();
 	dynStats("sen", 1);
 	minoCumAddiction(10);
+	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
     if (CoC.instance.inCombat) cleanupAfterCombat();
     else doNext(camp.returnToCampUseFourHours);
 }
@@ -736,6 +739,7 @@ private function minoGetsTitFucked():void {
 	outputText("You squeeze tightly and press down, watching his dick-head flare out, nearly doubling size before it unloads, drenching your face and hair with his thick narcotic cream.   You manage to get your lips against it in time for the next blast, and nearly drown when it overfills your mouth.   You pull back, coughing, starting to get high, and swaying woozily as more and more cream spatters your body, continuing to be squeezed out by your slick heaving breasts.\n\n");
 	outputText("The bull-man relaxes at last, drenching you with one last wave before he passes out.  You stagger up and nearly trip over your legs, giggling and drunk on cow-spunk as you noisily slurp down the fluids drenching your face and hair.  You black out for a while...\n\n");
 	outputText("You wake up an hour later, unsure how you made it back to your camp, light-headed and euphoric with the lingering after-affects.  You also find a bottle on the ground next to you, filled to the brim with the fluid.  You don't remember filling it up, but you're already itching to pop it open and guzzle it down.  You manage to resist the urge.  Besides, you're still feeling GREAT from your last 'sample'.");
+	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 	minoCumAddiction(10);
 	monster.short = "tit-fucked Minotaur";
 	player.orgasm();

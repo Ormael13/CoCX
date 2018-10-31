@@ -108,7 +108,7 @@ import classes.Items.*;
 			//Equipment: Starts with spiked fist
 			player.setWeapon(weapons.S_GAUNT);
 			//Perks: Fighter and Lotsa Jizz"	Annetta
-			player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
+			if (!player.hasPerk(PerkLib.PastLifeFighter)) player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
 			player.createPerk(PerkLib.MessyOrgasms, 1.25, 0, 0, 0);
 			player.cumMultiplier = 20;
 		}
@@ -219,7 +219,7 @@ import classes.Items.*;
 			player.createPerk(PerkLib.Smart, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Channeling, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Mage, 0, 0, 0, 0);
-			player.createPerk(PerkLib.HistoryHealer, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PastLifeHealer)) player.createPerk(PerkLib.HistoryHealer, 0, 0, 0, 0);
 			player.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.KnowsArouse,0,0,0,0);
 			player.createStatusEffect(StatusEffects.KnowsHeal,0,0,0,0);
@@ -448,12 +448,12 @@ import classes.Items.*;
 			player.tone += 10;
 			player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0);
 			//- history: religion 
-			player.createPerk(PerkLib.HistoryReligious,0,0,0,0);
+			if (!player.hasPerk(PerkLib.PastLifeReligious)) player.createPerk(PerkLib.HistoryReligious,0,0,0,0);
 			//(and if possible)
 			//- history: fighter
-			player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
+			if (!player.hasPerk(PerkLib.PastLifeFighter)) player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
 			//- history: smith
-			player.createPerk(PerkLib.HistorySmith,0,0,0,0);
+			if (!player.hasPerk(PerkLib.PastLifeSmith)) player.createPerk(PerkLib.HistorySmith,0,0,0,0);
 			//in my ar, Issac was born to a disgraced priestess (she was raped by marauders) and raised by her alone until she died from an illness and was pretty much left to fend for and earn a living for himself (hence the fighter and smith background's too) until, years later he was chosen as 'champion'~
 			//~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			player.balls = 2;
@@ -661,7 +661,7 @@ import classes.Items.*;
 			player.tone = 88;
 			player.tongue.type = Tongue.DRACONIC;
 			//gel plate armor, warhammer, 88 body tone, 1 breast row, flat manly breasts, 0.2 inch nipples, 1 on each breast, draconic tongue, short hair-blue, light skin."	Lukaz
-			player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
+			if (!player.hasPerk(PerkLib.PastLifeFighter)) player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
 			player.createPerk(PerkLib.MessyOrgasms, 1.25, 0, 0, 0);
 		}
 		
@@ -686,7 +686,7 @@ import classes.Items.*;
 			player.butt.type = 12;
 			player.femininity = 100;
 			player.thickness = 33;
-			player.createPerk(PerkLib.HistorySlut, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PastLifeSlut)) player.createPerk(PerkLib.HistorySlut, 0, 0, 0, 0);
 			player.createPerk(PerkLib.BimboBody, 0, 0, 0, 0);
 			player.createPerk(PerkLib.BimboBrains, 0, 0, 0, 0);
 			player.createPerk(PerkLib.BigTits, 1.5, 0, 0, 0);
@@ -738,7 +738,7 @@ import classes.Items.*;
 			player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0);
 			player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0);
 			player.createPerk(PerkLib.Flexibility, 0, 0, 0, 0);
-			player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PastLifeScholar)) player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
 			player.skin.growFur({color:"ashen"});
 			player.tailType = Tail.CAT;
 			player.tallness = 55;
@@ -811,7 +811,7 @@ import classes.Items.*;
 			player.femininity -= 2;
 			player.cumMultiplier = 5.5;
 			player.createPerk(PerkLib.MessyOrgasms, 1.25, 0, 0, 0);
-			player.createPerk(PerkLib.HistoryWhore,0,0,0,0);
+			if (!player.hasPerk(PerkLib.PastLifeWhore)) player.createPerk(PerkLib.HistoryWhore,0,0,0,0);
 		}
 		
 		private function customNami():void {
@@ -858,7 +858,7 @@ import classes.Items.*;
 			//Gift Perk- Smarts
 			player.createPerk(PerkLib.Smart,0,0,0,0);
 			//History- Schooling
-			player.createPerk(PerkLib.HistoryScholar,0,0,0,0);
+			if (!player.hasPerk(PerkLib.PastLifeScholar)) player.createPerk(PerkLib.HistoryScholar,0,0,0,0);
 			player.itemSlot1.setItemAndQty(consumables.W__BOOK,1);
 			player.itemSlot2.setItemAndQty(consumables.B__BOOK,1);
 			player.tallness = 64;
@@ -974,7 +974,7 @@ import classes.Items.*;
 			player.createPerk(PerkLib.MessyOrgasms, 1.25, 0, 0, 0);
 			player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0);
 			//fighting history
-			player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
+			if (!player.hasPerk(PerkLib.PastLifeFighter)) player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
 			//3 starting perk points
 			player.perkPoints = 3;
 			//some starting gems (just go ahead and surprise me on the amount)
@@ -1159,7 +1159,7 @@ import classes.Items.*;
 			player.cumMultiplier = 5.5;
 	
 			player.createPerk(PerkLib.MessyOrgasms, 1.25, 0, 0, 0);
-			player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PastLifeScholar)) player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
 			//Apperance: Cat Ears, Large Bat Like Wings, 3 Rows of breasts (C cub, 0,2 nipples)
 			player.ears.type = Ears.CAT;
 			player.wings.type = Wings.BAT_LIKE_LARGE;
@@ -1199,7 +1199,6 @@ import classes.Items.*;
 			//dark skin tone
 			player.skinTone = "dark";
 			player.setWeapon(weapons.S_BLADE);
-	
 			//Elfin ears
 			player.ears.type = Ears.ELFIN;
 			//tight asshole
@@ -1209,8 +1208,9 @@ import classes.Items.*;
 			flags[kFLAGS.HISTORY_PERK_SELECTED] = 0;
 			player.str = 25;
 			player.tou = 25;
-			player.inte = 25;
 			player.spe = 25;
+			player.inte = 25;
+			player.wis = 25;
 			outputText("You are a literal angel from beyond, and you take the place of a vilage's champion for your own reasons...");
 		}
 		
@@ -1234,7 +1234,6 @@ import classes.Items.*;
 			player.createVagina();
 			player.breastRows[0].breastRating = 5;
 			player.breastRows[0].lactationMultiplier = 2;
-		
 			player.clitLength = 0.5;
 			player.fertility = 50;
 			player.hips.type = 6;
@@ -1244,6 +1243,7 @@ import classes.Items.*;
 			player.spe = 100;
 			player.inte = 100;
 			player.sens = 100;
+			player.wis = 100;
 			player.lib = 30;
 			player.cor = 71;
 			player.HP = EngineCore.maxHP();
@@ -1301,7 +1301,7 @@ import classes.Items.*;
 			player.createKeyItem("Equipment Storage - Jewelry Box",0,0,0,0);
 			player.createStatusEffect(StatusEffects.KnowsWhitefire, 0, 0, 0, 0);
 			
-			player.createPerk(PerkLib.HistoryFighter, 		0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PastLifeFighter)) player.createPerk(PerkLib.HistoryFighter, 		0, 0, 0, 0);
 			player.createPerk(PerkLib.Acclimation, 			0, 0, 0, 0);
 			player.createPerk(PerkLib.Berzerker, 			0, 0, 0, 0);
 			player.createPerk(PerkLib.BrutalBlows, 			0, 0, 0, 0);
@@ -1436,7 +1436,7 @@ import classes.Items.*;
 			player.spe+=3;
 			player.inte+=2;
 	
-			player.createPerk(PerkLib.HistorySlut, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PastLifeSlut)) player.createPerk(PerkLib.HistorySlut, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0);
 			player.teaseLevel = 3;
 		}
@@ -1527,7 +1527,7 @@ import classes.Items.*;
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;
 			//(Flexibility), (Incorporeality), History: Religious, Dragonfire, Brood Mother, Magical Fertility, Wet Pussy, Tough, Strong, Fast, Smart, History: Scholar, History: Slacker, Strong Back, Strong Back 2: Stronger Harder
 			player.createPerk(PerkLib.Flexibility, 0, 0, 0, 0);
-			player.createPerk(PerkLib.HistoryReligious, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PastLifeReligious)) player.createPerk(PerkLib.HistoryReligious, 0, 0, 0, 0);
 			player.createPerk(PerkLib.DragonFireBreath, 0, 0, 0, 0);
 			player.createPerk(PerkLib.DragonIceBreath,0,0,0,0);
 			player.createPerk(PerkLib.BroodMother, 0, 0, 0, 0);
@@ -1538,12 +1538,12 @@ import classes.Items.*;
 			player.createPerk(PerkLib.Strong, 0.25, 0, 0, 0);
 			player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0);
 			player.createPerk(PerkLib.Smart, 0.25, 0, 0, 0);
-			player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PastLifeScholar)) player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
 			player.createPerk(PerkLib.StrongBack,0,0,0,0);
 			player.itemSlot4.unlocked = true;
 			player.itemSlot5.unlocked = true;
 			player.createPerk(PerkLib.StrongBack2,0,0,0,0);
-			player.createPerk(PerkLib.HistorySlacker,0,0,0,0);
+			if (!player.hasPerk(PerkLib.PastLifeSlacker)) player.createPerk(PerkLib.HistorySlacker,0,0,0,0);
 			player.str += 4;
 			player.tou += 4;
 			player.inte += 2;
@@ -1575,8 +1575,8 @@ import classes.Items.*;
 			if (player.hasKeyItem("Backpack") < 0) player.createKeyItem("Backpack", 3, 0, 0, 0);
 			player.itemSlot1.setItemAndQty(consumables.H_BISCU, 5);
 
-			player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
-			player.createPerk(PerkLib.HistoryHealer, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PastLifeScholar)) player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PastLifeHealer)) player.createPerk(PerkLib.HistoryHealer, 0, 0, 0, 0);
 			player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
 			player.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Spellpower, 0, 0, 0, 0);
@@ -1666,6 +1666,7 @@ import classes.Items.*;
 			player.tou += 0; // still, your dragon blood makes you surprisingly tough for your size and condition
 			player.spe += 5; // can take some advantage from small frame
 			player.inte += 55; // your mind is your power!
+			player.wis += 55; // your mind is your power!
 			player.lib += 85; // yes, you have problems
 			player.cor += 31; // have high initial corruption, but also have religious history to meditate
 			
@@ -1691,10 +1692,10 @@ import classes.Items.*;
 			if (player.hasKeyItem("Equipment Rack - Armor") < 0) { player.createKeyItem("Equipment Rack - Armor", 0, 0, 0, 0); flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1; }			
 			
 			// have lots of different traits
-			if (player.findPerk(PerkLib.HistoryReligious) < 0) player.createPerk(PerkLib.HistoryReligious, 0, 0, 0, 0); // abandoned religion after obtaining nine tails and being disappointed in achieved enlightment
-			if (player.findPerk(PerkLib.HistoryAlchemist) < 0) player.createPerk(PerkLib.HistoryAlchemist, 0, 0, 0, 0); // and resorted to your hobby - alchemy
+			if (!player.hasPerk(PerkLib.PastLifeReligious) && player.findPerk(PerkLib.HistoryReligious) < 0) player.createPerk(PerkLib.HistoryReligious, 0, 0, 0, 0); // abandoned religion after obtaining nine tails and being disappointed in achieved enlightment
+			if (!player.hasPerk(PerkLib.PastLifeFighter) && player.findPerk(PerkLib.HistoryAlchemist) < 0) player.createPerk(PerkLib.HistoryAlchemist, 0, 0, 0, 0); // and resorted to your hobby - alchemy
 			if (player.findPerk(PerkLib.TransformationResistance) < 0) player.createPerk(PerkLib.TransformationResistance, 0, 0, 0, 0);  // tf resistance and alchemist are actually mutually nullifying each other - this is flavor mostly
-			if (player.findPerk(PerkLib.HistoryHealer) < 0) player.createPerk(PerkLib.HistoryHealer, 0, 0, 0, 0);  // with religious and alchemical knowlege you are skilled healer
+			if (!player.hasPerk(PerkLib.PastLifeHealer) && player.findPerk(PerkLib.HistoryHealer) < 0) player.createPerk(PerkLib.HistoryHealer, 0, 0, 0, 0);  // with religious and alchemical knowlege you are skilled healer
 			if (player.findPerk(PerkLib.Medicine) < 0) player.createPerk(PerkLib.Medicine, 0, 0, 0, 0); // able to treat wounds and poisoning alike
 			if (player.findPerk(PerkLib.AscensionMoralShifter) < 0) player.createPerk(PerkLib.AscensionMoralShifter, 5, 0, 0, 0); // your kitsune's trickster nature makes you susceptable to corruption
 			if (player.findPerk(PerkLib.AscensionTolerance) < 0) player.createPerk(PerkLib.AscensionTolerance, 10, 0, 0, 0); // but in the same time your enlightment keeps you from really turning to demon, so corruption level does not really affect you much
@@ -1713,6 +1714,8 @@ import classes.Items.*;
 			if (player.findPerk(PerkLib.EnlightenedNinetails) < 0) player.createPerk(PerkLib.EnlightenedNinetails, 0, 0, 0, 0);			
 			if (player.findPerk(PerkLib.DragonFireBreath) < 0) player.createPerk(PerkLib.DragonFireBreath, 0, 0, 0, 0);				
 			if (player.findPerk(PerkLib.DragonIceBreath) < 0) player.createPerk(PerkLib.DragonIceBreath, 0, 0, 0, 0);				
+			if (player.findPerk(PerkLib.DragonLightningBreath) < 0) player.createPerk(PerkLib.DragonLightningBreath, 0, 0, 0, 0);				
+			if (player.findPerk(PerkLib.DragonDarknessBreath) < 0) player.createPerk(PerkLib.DragonDarknessBreath, 0, 0, 0, 0);				
 			// some experiments with your body gave unusual results
 			if (player.findPerk(PerkLib.LustyRegeneration) < 0) player.createPerk(PerkLib.LustyRegeneration, 0, 0, 0, 0); // some of your experiments had nice returns
 			if (player.findPerk(PerkLib.Incorporeality) < 0) player.createPerk(PerkLib.Incorporeality, 0, 0, 0, 0);	// some was... strange
@@ -1721,6 +1724,10 @@ import classes.Items.*;
 			if (debug && player.findPerk(PerkLib.FerasBoonAlpha) < 0) player.createPerk(PerkLib.FerasBoonAlpha, 0, 0, 0, 0);			
 			if (debug && player.findPerk(PerkLib.FerasBoonBreedingBitch) < 0) player.createPerk(PerkLib.FerasBoonBreedingBitch, 0, 0, 0, 0);		
 			// Metamorph, Magic Metabolism and Puppeteer suggested perks would be also nice addition to character, but they are not implemented yet
+			player.createPerk(PerkLib.GeneticMemory, 0, 0, 0, 0);
+			player.createPerk(PerkLib.Metamorph, 0, 0, 0, 0);
+			player.createPerk(PerkLib.MagicMetabolism, 0, 0, 0, 0);
+			flags[kFLAGS.HUNGER_ENABLED] = 0.5;
 			
 			// you still aren't sure about gender preferences, but have some stashed eggs just in case... [why almost all inventory functions are private?]
 			if (player.itemSlot1.isEmpty())  player.itemSlot1.setItemAndQty(consumables.L_PNKEG, 1); // if you want to get rid of tentacles, but still maintain dragon one you'll have to find Ceraph
@@ -1963,8 +1970,8 @@ import classes.Items.*;
 			
 			// have some perks from past
 			player.createPerk(PerkLib.Smart, 0.25, 0, 0, 0);
-			player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
-			player.createPerk(PerkLib.HistoryAlchemist, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PastLifeScholar)) player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PastLifeAlchemist)) player.createPerk(PerkLib.HistoryAlchemist, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Channeling, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Mage, 0, 0, 0, 0);
 			player.createPerk(PerkLib.SpellcastingAffinity, 50, 0, 0, 0);

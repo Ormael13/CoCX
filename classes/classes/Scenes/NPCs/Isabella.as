@@ -206,6 +206,7 @@ public class Isabella extends Monster
 				initWisLibSensCor(64, 64, 25, 40);
 				this.weaponAttack = 18;
 				this.armorDef = 18;
+				this.armorMDef = 3;
 				this.bonusHP = 600;
 				this.level = 20;
 			}
@@ -214,6 +215,7 @@ public class Isabella extends Monster
 				initWisLibSensCor(73, 70, 30, 40);
 				this.weaponAttack = 21;
 				this.armorDef = 24;
+				this.armorMDef = 4;
 				this.bonusHP = 800;
 				this.level = 26;
 			}
@@ -222,6 +224,7 @@ public class Isabella extends Monster
 				initWisLibSensCor(82, 80, 35, 40);
 				this.weaponAttack = 24;
 				this.armorDef = 30;
+				this.armorMDef = 5;
 				this.bonusHP = 1000;
 				this.level = 32;
 			}
@@ -230,6 +233,7 @@ public class Isabella extends Monster
 				initWisLibSensCor(91, 90, 40, 40);
 				this.weaponAttack = 27;
 				this.armorDef = 36;
+				this.armorMDef = 6;
 				this.bonusHP = 1200;
 				this.level = 38;
 			}
@@ -238,6 +242,7 @@ public class Isabella extends Monster
 				initWisLibSensCor(100, 100, 45, 40);
 				this.weaponAttack = 30;
 				this.armorDef = 42;
+				this.armorMDef = 7;
 				this.bonusHP = 1400;
 				this.level = 44;
 			}
@@ -246,6 +251,7 @@ public class Isabella extends Monster
 				initWisLibSensCor(110, 110, 50, 40);
 				this.weaponAttack = 33;
 				this.armorDef = 48;
+				this.armorMDef = 8;
 				this.bonusHP = 1600;
 				this.level = 50;
 			}
@@ -254,6 +260,7 @@ public class Isabella extends Monster
 				initWisLibSensCor(120, 120, 55, 40);
 				this.weaponAttack = 36;
 				this.armorDef = 54;
+				this.armorMDef = 9;
 				this.bonusHP = 1800;
 				this.level = 56;
 			}
@@ -262,6 +269,7 @@ public class Isabella extends Monster
 				initWisLibSensCor(130, 130, 60, 40);
 				this.weaponAttack = 39;
 				this.armorDef = 60;
+				this.armorMDef = 10;
 				this.bonusHP = 2000;
 				this.level = 62;
 			}

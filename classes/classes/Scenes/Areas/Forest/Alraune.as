@@ -25,12 +25,12 @@ public class Alraune extends Monster
 			return statusEffectv1(StatusEffects.Level);
 		}
 		
-		public function alrauneWait():void {
+		public function alrauneStruggle():void {
 			clearOutput();
 			game.spriteSelect(SpriteDb.s_alraune);
 			outputText("You struggle against ");
 			if (Holidays.isHalloween()) outputText("Jack-O-Raune");
-			else outputText("the alraune");
+			else outputText("the " + this.short + "");
 			outputText(" vines, forcefully pulling yourself a good distance away from her.\n\n");
 			trapLevel(2);
 			player.fatigue += 50;
@@ -176,6 +176,7 @@ public class Alraune extends Monster
 			this.weaponAttack = 1;
 			this.armorName = "skin";
 			this.armorDef = 45;
+			this.armorMDef = 5;
 			this.bonusHP = 100;
 			this.bonusLust = 20;
 			this.lust = 20 + rand(40);

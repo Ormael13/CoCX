@@ -90,7 +90,7 @@ private function calledShot():void {
 			if(damage <= 0 || player.getEvasionRoll()) outputText("\nYou evade the strike.");
 			else {
 				outputText("\n" + flags[kFLAGS.HELSPAWN_NAME] + "'s tail catches you as you try to dodge.  Your [armor] sizzles, and you leap back with a yelp as she gives you a light burning. ");
-				damage = player.takeMagicDamage(damage, true);
+				damage = player.takeFireDamage(damage, true);
 			}
 		}
 
@@ -172,6 +172,7 @@ private function calledShot():void {
 			this.weaponAttack = 20;
 			this.armorName = "scales";
 			this.armorDef = 12;
+			this.armorMDef = 1;
 			this.armorPerk = "";
 			this.armorValue = 50;
 			this.bonusHP = 175;

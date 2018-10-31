@@ -771,6 +771,12 @@ import coc.xxc.StoryContext;
 		protected function get armors():ArmorLib{
 			return CoC.instance.armors;
 		}
+		protected function get headjewelries():HeadJewelryLib{
+			return CoC.instance.headjewelries;
+		}
+		protected function get necklaces():NecklaceLib{
+			return CoC.instance.necklaces;
+		}
 		protected function get jewelries():JewelryLib{
 			return CoC.instance.jewelries;
 		}

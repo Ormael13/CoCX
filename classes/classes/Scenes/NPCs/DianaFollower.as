@@ -726,9 +726,9 @@ public function SexMenuBreeding():void {
 }
 public function SexMenuVaginal():void {
 	clearOutput();
-	var x:int = player.cockThatFits(36, "length");
+	var x:int = player.cockThatFits(36, "length");/*
 	if (player.isTaur()) outputText("\"<i>Please hurry, I can’t wait!</i>\" Diana begs you, still hugging your head.\n\n");
-	else {
+	else {*/
 		outputText("You order Diana to get on all fours. She couldn’t move quicker as she happily gets on all fours, looking back at you with excitement clearly written on her face. You get behind Diana, moving her tail out of the way while she tries to shake her rear enticingly. You place your hand on Diana’s horse sex, earning a happy moan as well as a slight shiver.\n\n");
 		outputText("As soon as your hand runs across her lower lips you can already feel her growing dampness. You probably don’t even need to do much foreplay, since Diana gets wet so easily, but your mare deserves the full treatment. You start rubbing against her sex, making her moan as your fingers press and move along her thick lower lips, giving her clit a little flick once they reach the top, sending a bolt of pleasure up Diana’s spine and earning a gasp from her.\n\n");
 		outputText("When you pull your fingers away, your fingers are covered in her sticky juices, you show them to Diana, showing her how wet she is already. She moans softly, before taking the offered fingers in her mouth, licking and sucking them, cleaning them with her mouth, while with your other hand, you press a finger into her soaked cunt. She lets out a muffled moan through your fingers as your other fingers begin to thrust into her, causing more juices to spill down her legs.\n\n");
@@ -743,15 +743,15 @@ public function SexMenuVaginal():void {
 		outputText("\"<i>Although the cum is wasted on my back, maybe next time put it all in the proper place?</i>\" Diana says, gathering up some cum with one of her fingers and sucking it off.\n\n");
 		outputText("\"<i>Only if you're a good mare next time,</i>\" you say with a smirk on your face.\n\n");
 		outputText("Diana pouts a bit before you both say your goodbyes, you heading off.\n\n");
-	}
+	//}
 	player.orgasm();
 	doNext(camp.returnToCampUseOneHour);
 }
 public function SexMenuAnal():void {
 	clearOutput();
-	var x:int = player.cockThatFits(36, "length");
+	var x:int = player.cockThatFits(36, "length");/*
 	if (player.isTaur()) outputText("\"<i>Please hurry, I can’t wait!</i>\" Diana begs you, still hugging your head.\n\n");
-	else {
+	else {*/
 		outputText("You order Diana to get on all fours. She couldn’t move quicker as she happily gets on all fours, looking back at you with excitement clearly written on her face. You get behind her, moving her tail aside before pulling apart her fat butt cheeks and revealing her puckered arsehole, making Diana moan happily.\n\n");
 		outputText("You suck on one of your fingers, getting it nice and wet for the insertion, before bringing it down and pushing it into her rear, making her let out a little happy moan as your finger surprisingly, or maybe not, easily slips in.\n\n");
 		outputText("\"<i>You’re fingers are in my butt!</i>\" Diana moans, looking over her shoulder at you.\n\n");
@@ -781,7 +781,7 @@ public function SexMenuAnal():void {
 			outputText("\"<i>Thank you so much for properly punishing me,</i>\" she giggles, rubbing her well fucked arsehole, \"<i>I don’t think I’ll be able to sit down for awhile though. Though please come back soon, otherwise my other hole will get lonely.</i>\"\n\n");
 			outputText("After promising you will later, you head back to your adventure, while Diana rests for awhile.\n\n");
 		}
-	}
+	//}
 	player.orgasm();
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -790,8 +790,8 @@ public function SexMenuTitsfuck():void {
 	var x:int = player.cockThatFits(36, "length");
 	outputText("You request that Diana give you a titjob.\n\n");
 	outputText("\"<i>Of course my stallion, I would love to have your cock buried between my mounds,</i>\" Diana says, smiling happily while eagerly pressing her tits together.\n\n");
-	if (player.isTaur()) outputText("\"<i>Please hurry, I can’t wait!</i>\" Diana begs you, still hugging your head.\n\n");
-	else {
+	/*if (player.isTaur()) outputText("\"<i>Please hurry, I can’t wait!</i>\" Diana begs you, still hugging your head.\n\n");
+	else {*/
 		if (player.isAlraune()) outputText("Diana gets on her knees, while your vine cocks move out around her, the largest one moves in front of her.\n\n");
 		else {
 			outputText("You sit down on a on a nearby " + object() + " while Diana gets on her knees in front of you, before undoing your [armor] and pulling out your erect " + (player.cocks.length == 1 ? "[cock]" : "[cocks]") + "");
@@ -851,7 +851,7 @@ public function SexMenuTitsfuck():void {
 				outputText("You return the kiss, before heading off, you’ve got things to do.\n\n");
 			}
 		}
-	}
+	//}
 	player.orgasm();
 	doNext(camp.returnToCampUseOneHour);
 }
