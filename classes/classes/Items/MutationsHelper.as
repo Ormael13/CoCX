@@ -318,6 +318,7 @@ import classes.BodyParts.Wings;
 		[Arms.RED_PANDA, null],
 		[Arms.SALAMANDER, StatusEffects.UnlockedSalamanderArms],
 		[Arms.SHARK, StatusEffects.UnlockedSharkArms],
+		[Arms.SPHINX, null],
 		[Arms.SPIDER, StatusEffects.UnlockedSpiderArms],
 		[Arms.WOLF, null],
 		[Arms.YETI, null],
@@ -381,6 +382,7 @@ import classes.BodyParts.Wings;
 		[Eyes.GORGON, StatusEffects.UnlockedGorgonEyes],
 		[Eyes.GRYPHON, null],
 		[Eyes.HUMAN, null],
+		[Eyes.INFERNAL, null],
 		[Eyes.MANTICORE, null],
 		[Eyes.ONI, StatusEffects.UnlockedOniEyes],
 		[Eyes.RAIJU, StatusEffects.UnlockedRaijuEyes],
@@ -453,6 +455,7 @@ import classes.BodyParts.Wings;
 	}
 	private const METAMORPH_HAIR_TYPES:Object = createMapFromPairs([
 		[Hair.ANEMONE, null],
+		[Hair.BURNING, null],
 		[Hair.FEATHER, StatusEffects.UnlockedHarpyHair],
 		[Hair.FLUFFY, null],
 		[Hair.GHOST, null],
@@ -595,6 +598,7 @@ import classes.BodyParts.Wings;
 		[Tail.AVIAN, null],
 		[Tail.BEE_ABDOMEN, StatusEffects.UnlockedBeeTail],
 		[Tail.BEHEMOTH, null],
+		[Tail.BURNING, null],
 		[Tail.CAT, null],
 		[Tail.COW, StatusEffects.UnlockedCowTail],
 		[Tail.DEER, null],

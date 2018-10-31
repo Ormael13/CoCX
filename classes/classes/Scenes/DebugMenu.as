@@ -858,6 +858,7 @@ public class DebugMenu extends BaseContent
 			[Hair.GRASS, "9 GRASS"],
 			[Hair.SILKEN, "10 SILKEN"],
 			[Hair.STORM, "11 STORM"],
+			[Hair.BURNING, "12 BURNING"],
 		];
 		/*
 		private static const HAIR_COLOR_CONSTANTS:Array = [
@@ -1052,6 +1053,7 @@ public class DebugMenu extends BaseContent
 			[Eyes.GEMSTONES, "16 GEMSTONES"],
 			[Eyes.FERAL, "17 FERAL"],
 			[Eyes.GRYPHON, "18 GRYPHON"],
+			[Eyes.INFERNAL, "19 INFERNAL"],
 		];
 		private static const EAR_TYPE_CONSTANTS:Array    = [
 			[Ears.HUMAN, "0 HUMAN"],
@@ -1298,6 +1300,7 @@ public class DebugMenu extends BaseContent
 			[Tail.AVIAN, "36 AVIAN"],
 			[Tail.GRIFFIN, "37 GRIFFIN"],
 			[Tail.LION, "38 LION"],
+			[Tail.BURNING, "39 BURNING"],
 		];
 		private static const TAIL_COUNT_CONSTANTS:Array = [
 			[0,"0"],1,2,3,4,

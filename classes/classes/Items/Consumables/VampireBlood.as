@@ -1,4 +1,5 @@
 package classes.Items.Consumables {
+import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Eyes;
 import classes.BodyParts.Face;
@@ -88,6 +89,9 @@ public class VampireBlood extends Consumable {
                 BodyPart: 'rearBody.type',
                 ChangeTo: RearBody.BAT_COLLAR,
                 Metamorph: StatusEffects.UnlockedBatCollar
+            }, {
+                BodyPart: 'arms.type',
+                ChangeTo: Arms.HUMAN
             });
         }
         changeLimit = 1;

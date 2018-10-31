@@ -2967,6 +2967,7 @@ private function ascendForReal():void {
 	if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) >= 4) performancePoints += 2;
 	if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) >= 4) performancePoints += 2;
 	if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) >= 4) performancePoints += 2;
+	if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) >= 4) performancePoints += 2;
 	//Camp structures
 	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) performancePoints += 10;
 	if (flags[kFLAGS.CAMP_WALL_GATE] > 0) performancePoints += 11;

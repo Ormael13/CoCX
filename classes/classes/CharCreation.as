@@ -51,6 +51,8 @@ import coc.view.MainView;
 		public const MAX_FORTUNE_LEVEL:int = -1;				//No maximum level.(845)
 		public const MAX_VIRILITY_LEVEL:int = 10;				//40 AP
 		public const MAX_FERTILITY_LEVEL:int = 10;				//40 AP
+		public const MAX_MILK_FAUCET_LEVEL:int = 25;			//90 AP
+		public const MAX_CUM_HOSE_LEVEL:int = 25;				//90 AP
 		
 		private var specialCharacters:CharSpecial = new CharSpecial();
 		private var customPlayerProfile:Function;
@@ -1678,21 +1680,37 @@ import coc.view.MainView;
 			addButton(5, "Fertility", ascensionPerkSelection, PerkLib.AscensionFertility, MAX_FERTILITY_LEVEL, null, PerkLib.AscensionFertility.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFertility) + " / " + MAX_FERTILITY_LEVEL);
 			addButton(6, "Virility", ascensionPerkSelection, PerkLib.AscensionVirility, MAX_VIRILITY_LEVEL, null, PerkLib.AscensionVirility.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionVirility) + " / " + MAX_VIRILITY_LEVEL);
 			addButton(7, "Wisdom", ascensionPerkSelection, PerkLib.AscensionWisdom, MAX_WISDOM_LEVEL, null, PerkLib.AscensionWisdom.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionWisdom) + " / " + MAX_WISDOM_LEVEL);
+			addButton(8, "Milk Faucet", ascensionPerkSelection, PerkLib.AscensionMilkFaucet, MAX_MILK_FAUCET_LEVEL, null, PerkLib.AscensionMilkFaucet.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionMilkFaucet) + " / " + MAX_MILK_FAUCET_LEVEL);
+			addButton(9, "Cum Hose", ascensionPerkSelection, PerkLib.AscensionCumHose, MAX_CUM_HOSE_LEVEL, null, PerkLib.AscensionCumHose.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionCumHose) + " / " + MAX_CUM_HOSE_LEVEL);
 			addButton(14, "Back", ascensionMenu);
 		}
 		private function ascensionPerkMenu2():void {
 			clearOutput();
 			outputText("You can spend your Ascension Perk Points on special perks not available at level-up!");
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
+			var maxRank:int = 5;
+			maxRank += maxRankValue();
 			menu();
-			addButton(0, "Desires", ascensionPerkSelection2, PerkLib.AscensionDesires, MAX_DESIRES_LEVEL, null, PerkLib.AscensionDesires.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionDesires) + " / " + MAX_DESIRES_LEVEL);
-			addButton(1, "Endurance", ascensionPerkSelection2, PerkLib.AscensionEndurance, MAX_ENDURANCE_LEVEL, null, PerkLib.AscensionEndurance.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionEndurance) + " / " + MAX_ENDURANCE_LEVEL);
-			addButton(2, "Hardiness", ascensionPerkSelection2, PerkLib.AscensionHardiness, MAX_HARDINESS_LEVEL, null, PerkLib.AscensionHardiness.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionHardiness) + " / " + MAX_HARDINESS_LEVEL);
-			addButton(3, "Soul Purity", ascensionPerkSelection2, PerkLib.AscensionSoulPurity, MAX_SOULPURITY_LEVEL, null, PerkLib.AscensionSoulPurity.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionSoulPurity) + " / " + MAX_SOULPURITY_LEVEL);
-			addButton(4, "Inner Power", ascensionPerkSelection2, PerkLib.AscensionInnerPower, MAX_INNERPOWER_LEVEL, null, PerkLib.AscensionInnerPower.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionInnerPower) + " / " + MAX_INNERPOWER_LEVEL);
-			addButton(5, "Fury", ascensionPerkSelection2, PerkLib.AscensionFury, MAX_FURY_LEVEL, null, PerkLib.AscensionFury.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFury) + " / " + MAX_FURY_LEVEL);
-			addButton(6, "Transhuman.", ascensionPerkSelection2, PerkLib.AscensionTranshumanism, MAX_TRANSHUMANISM_LEVEL, null, PerkLib.AscensionTranshumanism.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanism) + " / " + MAX_TRANSHUMANISM_LEVEL);
+			addButton(0, "Desires", ascensionPerkSelection2, PerkLib.AscensionDesires, MAX_DESIRES_LEVEL, null, PerkLib.AscensionDesires.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionDesires) + " / " + maxRank);
+			addButton(1, "Endurance", ascensionPerkSelection2, PerkLib.AscensionEndurance, MAX_ENDURANCE_LEVEL, null, PerkLib.AscensionEndurance.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionEndurance) + " / " + maxRank);
+			addButton(2, "Hardiness", ascensionPerkSelection2, PerkLib.AscensionHardiness, MAX_HARDINESS_LEVEL, null, PerkLib.AscensionHardiness.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionHardiness) + " / " + maxRank);
+			addButton(3, "Soul Purity", ascensionPerkSelection2, PerkLib.AscensionSoulPurity, MAX_SOULPURITY_LEVEL, null, PerkLib.AscensionSoulPurity.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionSoulPurity) + " / " + maxRank);
+			addButton(4, "Inner Power", ascensionPerkSelection2, PerkLib.AscensionInnerPower, MAX_INNERPOWER_LEVEL, null, PerkLib.AscensionInnerPower.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionInnerPower) + " / " + maxRank);
+			addButton(5, "Fury", ascensionPerkSelection2, PerkLib.AscensionFury, MAX_FURY_LEVEL, null, PerkLib.AscensionFury.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFury) + " / " + maxRank);
+			addButton(6, "Transhuman.", ascensionPerkSelection2, PerkLib.AscensionTranshumanism, MAX_TRANSHUMANISM_LEVEL, null, PerkLib.AscensionTranshumanism.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanism) + " / " + maxRank);
 			addButton(14, "Back", ascensionMenu);
+		}
+		private function maxRankValue():Number {
+			var maxV:Number = 0;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) maxV += 5;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) maxV += 5;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) maxV += 5;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4) maxV += 5;
+			//if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 5) maxV += 5;
+			//if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 6) maxV += 5;
+			//if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 7) maxV += 5;
+			//if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 8) maxV += 5;
+			return maxV;
 		}
 		
 		private function ascensionPerkSelection(perk:* = null, maxLevel:int = 10):void {
@@ -1720,14 +1738,7 @@ import coc.view.MainView;
 		private function ascensionPerkSelection2(perk:* = null, maxRank:int = 10):void {
 			clearOutput();
 			var maxRank:int = 5;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) maxRank += 5;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) maxRank += 5;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) maxRank += 5;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4) maxRank += 5;
-			//if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 5) maxRank += 5;
-			//if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 6) maxRank += 5;
-			//if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 7) maxRank += 5;
-			//if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 8) maxRank += 5;
+			maxRank += maxRankValue();
 			outputText("Perk Effect: " + perk.longDesc);
 			outputText("\nCurrent level: " + player.perkv1(perk) + " / " + maxRank + "");
 			if (player.perkv1(perk) >= 25) outputText(" <b>(Maximum)</b>");
@@ -2812,7 +2823,8 @@ import coc.view.MainView;
 			mainView.hideComboBox();
 			outputText("Everything fades to white and finally... black. You can feel yourself being whisked back to reality as you slowly awaken in your room. You survey your surroundings and recognize almost immediately; you are in your room inside the inn in Ingnam! You get up and look around. ");
 			if (player.hasKeyItem("Sky Poison Pearl") >= 0) {
-				outputText("\n\nYou soon noticing a circular green imprint at the palm of your left hand. When you trying to figure out it meaning something clicks in your mind. It's a strange artifact that fused with your body that allow storing many things inside. Artifact that fused with your body? You are unable to recall when did yo... Wait a second there are few almost fully faded away memory fragments of you been somewhere underwater fearlessly facing some huge monster with tentacles as it legs... Doing you utermost efforts no other memories even slightest fragments apprear in your mind. Resigned you try to concentrate on remembering how to use this thing but those memories are still too blurred. Maybe with time you remember all about this... 'thing'.")
+				outputText("\n\nYou soon notice a circular green imprint at the palm of your left hand. When you try to figure out its meaning something clicks in your mind. It's a strange artifact that fused with your body that allows the storing of a multitude of objects. ...An artifact that fused with your body? You are unable to recall when th... Wait a second there are a few almost fully faded memory fragments of you being somewhere underwater, fearlessly facing some huge monster with tentacles for legs... Doing your uttermost effort to survive and win.. no other memories.. not even the slightest of fragments appear in your mind.");
+				outputText(" Resigned, you try to concentrate on remembering how to use this thing, but those memories are still too blurred out to make sense of. Maybe with time you'll remember all about this... 'thing'.")
 			}
 			player.breastRows = [];
 			player.cocks = [];

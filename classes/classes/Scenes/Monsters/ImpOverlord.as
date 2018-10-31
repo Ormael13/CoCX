@@ -104,10 +104,8 @@ public class ImpOverlord extends Imp
 			outputText("The imp mutters something to himself. Before you have time to react the demonic creature's hand is filled with a bright red fire that he hurls at you.  The flames lick at your body leaving a painful burn on your torso, as well as an arousing heat in your groin. ");
 			//[-HP // +Lust(minor)]
 			var damage:int = 80 + rand(20);
-			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
-			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			damage = Math.round(damage);
-			player.takeMagicDamage(damage, true);
+			player.takeFireDamage(damage, true);
 			player.dynStats("lus", 20 + player.cor / 10);
 		}
 

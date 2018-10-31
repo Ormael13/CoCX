@@ -2254,6 +2254,8 @@ public class Creature extends Utils
 			quantity *= (1 + (2 * perkv1(PerkLib.PiercedFertite)) / 100);
 			if (jewelryEffectId == JewelryLib.MODIFIER_FERTILITY)
 				quantity *= (1 + (jewelryEffectMagnitude / 100));
+			if (findPerk(PerkLib.AscensionCumHose) >= 0)
+				quantity += perkv1(PerkLib.AscensionCumHose) * 200;
 			//trace("Final Cum Volume: " + int(quantity) + "mLs.");
 			//if (quantity < 0) trace("SOMETHING HORRIBLY WRONG WITH CUM CALCULATIONS");
 			if (quantity < 2)

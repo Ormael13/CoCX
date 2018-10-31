@@ -13,6 +13,7 @@ public class Hair extends BodyPart {
 	public static const GRASS:int   = 9;
 	public static const SILKEN:int  = 10;
 	public static const STORM:int   = 11;
+	public static const BURNING:int = 12;
 	// Don't forget to add new types in DebugMenu.as list HAIR_TYPE_CONSTANTS
 	
 	public var color:String = "no";

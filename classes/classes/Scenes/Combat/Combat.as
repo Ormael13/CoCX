@@ -447,6 +447,10 @@ public function isPlayerStunned():Boolean
 		outputText("\n<b>You're too confused</b> about who you are to try to attack!");
 		stunned = true;
 	}
+	if (player.hasStatusEffect(StatusEffects.Confusion)) {
+		outputText("\n<b>You fight against the spell to return to your true form!</b>");
+		stunned = true;
+	}
 	return stunned;
 }
 
@@ -614,8 +618,8 @@ private function normalAttack():void {
 	attack();
 }
 public function basemeleeattacks():void {
-	if (monster is DriderIncubus) {
-		(monster as DriderIncubus).taintedMindAttackAttempt();
+	if (player.hasStatusEffect(StatusEffects.TaintedMind)) {
+		if (monster as DriderIncubus) taintedMindAttackAttempt();
 		return;
 	}
 	clearOutput();
@@ -1086,7 +1090,7 @@ public function lustAttack():void {
 internal function wait():void {
 	var skipMonsterAction:Boolean = false; // If false, enemyAI() will be called. If true, combatRoundOver()
 	flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 1;
-	fatigue( -5);
+	fatigue(-5);
 	wrathregeneration();
 	manaregeneration();
 	soulforceregeneration();
@@ -1448,6 +1452,10 @@ public function fireBow():void {
 		outputText("You can't use your range weapon right now!");
 		menu();
 		addButton(0, "Next", combatMenu, false);
+		return;
+	}
+	if (player.hasStatusEffect(StatusEffects.TaintedMind)) {
+		if (monster as DriderIncubus) taintedMindAttackAttempt();
 		return;
 	}
 	flags[kFLAGS.LAST_ATTACK_TYPE] = 1;
@@ -2515,7 +2523,7 @@ public function meleeDamageAcc():void {
 		//BASIC DAMAGE STUFF
 		damage += player.str;
 		damage += scalingBonusStrength() * 0.25;
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && player.weapon != WeaponLib.FISTS && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
 		if (damage < 10) damage = 10;
 		//Weapon addition!
 		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
@@ -2668,9 +2676,9 @@ public function meleeDamageAcc():void {
 			{
 				if (damage > 0) {
 					if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= 1.1;
-					if (player.hasPerk(PerkLib.DemonSlayer)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
+					if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
+					if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
 					if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
-					if (player.hasPerk(PerkLib.DemonSlayer)) damage *= 1.05;
 					if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
 					if (player.armor == armors.SPKIMO) damage *= 1.2;
 					if (player.necklace == necklaces.OBNECK) damage *= 1.2;
@@ -2701,7 +2709,8 @@ public function meleeDamageAcc():void {
 			var vbladeeffect:Boolean = false;
 			var vbladeeffectChance:int = 1;
 			if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= 1.1;
-			if (player.hasPerk(PerkLib.DemonSlayer)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
+			if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
+			if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
 			if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
 			if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
 			if (player.armor == armors.SPKIMO) damage *= 1.2;
@@ -3418,7 +3427,7 @@ private function combatStatusesUpdate():void {
 		dynStats("lus", 5);
 	}
 	if (player.hasStatusEffect(StatusEffects.TaintedMind)) {
-		player.addStatusValue(StatusEffects.TaintedMind, 1, 1);
+		player.addStatusValue(StatusEffects.TaintedMind, 1, -1);
 		if (player.statusEffectv1(StatusEffects.TaintedMind) <= 0)
 		{
 			player.removeStatusEffect(StatusEffects.TaintedMind);
@@ -3646,9 +3655,30 @@ private function combatStatusesUpdate():void {
 			outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds. (<font color=\"#800000\">" + hemorrhage + "</font>)</b>\n\n");
 		}
 	}
+	if (player.hasStatusEffect(StatusEffects.BurnDoT)) {
+		player.addStatusValue(StatusEffects.BurnDoT,1,-1);
+		if(player.statusEffectv1(StatusEffects.BurnDoT) <= 0) {
+			player.removeStatusEffect(StatusEffects.BurnDoT);
+			outputText("<b>WIP text.</b>\n\n");
+		}
+		//Deal damage if still wounded.
+		else {
+			var burndot:Number = 0;
+			burndot += player.maxHP() * player.statusEffectv2(StatusEffects.BurnDoT);
+			burndot = player.takeFireDamage(burndot);
+			outputText("<b>You gasp and wince in pain, feeling fire still searing your wounds. (<font color=\"#800000\">" + burndot + "</font>)</b>\n\n");
+		}
+	}
+	if(player.hasStatusEffect(StatusEffects.Polymorphed)) {
+		player.addStatusValue(StatusEffects.Polymorphed,1,-1);
+		if(player.statusEffectv1(StatusEffects.Polymorphed) <= 0) {
+			player.removeStatusEffect(StatusEffects.Polymorphed);
+			outputText("<b>You finally manage to break free from the spell regaining your true form.</b>\n\n");
+		}
+	}
 	if (player.hasStatusEffect(StatusEffects.Disarmed)) {
 		player.addStatusValue(StatusEffects.Disarmed,1,-1);
-		if (player.statusEffectv1(StatusEffects.Hemorrhage) <= 0) {
+		if (player.statusEffectv1(StatusEffects.Disarmed) <= 0) {
 			player.removeStatusEffect(StatusEffects.Disarmed);
 			if (player.weapon == WeaponLib.FISTS) {
 				player.setWeapon(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon);
@@ -4340,6 +4370,24 @@ private function combatStatusesUpdate():void {
 		}
 		else {
 			player.addStatusValue(StatusEffects.CooldownPossess,1,-1);
+		}
+	}
+	//Feline Curse
+	if (player.hasStatusEffect(StatusEffects.CooldownFelineCurse)) {
+		if (player.statusEffectv1(StatusEffects.CooldownFelineCurse) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownFelineCurse);
+		}
+		else {
+			player.addStatusValue(StatusEffects.CooldownFelineCurse,1,-1);
+		}
+	}
+	//Infernal Claw
+	if (player.hasStatusEffect(StatusEffects.CooldownInfernalClaw)) {
+		if (player.statusEffectv1(StatusEffects.CooldownInfernalClaw) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownInfernalClaw);
+		}
+		else {
+			player.addStatusValue(StatusEffects.CooldownInfernalClaw,1,-1);
 		}
 	}
 	//Hurricane Dance
@@ -5516,6 +5564,14 @@ public function PussyLeggoMyEggo():void {
 	monster.removeStatusEffect(StatusEffects.Pounce);
 	enemyAI();
 }
+		
+public function taintedMindAttackAttempt():void
+{
+	clearOutput();
+	outputText("You ready an attack, but find your hands groping your own body instead. Somehow the demon’s magic has made it impossible to strike at him, crossing wires that weren’t meant to be crossed. Frowning, you look down at your more aroused form, determined not to fall for this a second time.");
+	player.dynStats("lus", 15);
+	enemyAI();
+}
 
 public function runAway(callHook:Boolean = true):void {
 	if (callHook && monster.onPcRunAttempt != null){
@@ -5888,6 +5944,10 @@ public function greatDive():void {
 			if (monster.plural) outputText("s");
 			outputText(".");
 		}
+		if (player.haveWeaponForJouster()) {
+			if ((((player.isTaur() || player.isDrider()) && player.spe >= 60) && player.hasPerk(PerkLib.Naturaljouster)) || (player.spe >= 150 && player.hasPerk(PerkLib.Naturaljouster))) damage *= 3;
+			if ((((player.isTaur() || player.isDrider()) && player.spe >= 180) && player.hasPerk(PerkLib.NaturaljousterMastergrade)) || (player.spe >= 450 && player.hasPerk(PerkLib.NaturaljousterMastergrade))) damage *= 5;
+		}
 		if (player.level >= 36) damage *= 8;
 		else if (player.level >= 30) damage *= 7;
 		else if (player.level >= 24) damage *= 6;
@@ -6135,4 +6195,4 @@ public function scalingBonusLibido():Number {
 }
 }
 }
-
+

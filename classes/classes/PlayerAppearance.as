@@ -1190,13 +1190,16 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Sprouting from your [ass], you have a long, bushy tail. It has a beautiful pattern of rings in [skin coat.color] fluffy fur. It waves playfully as you walk giving to your step a mesmerizing touch.");
 		}
 		else if(player.tailType == Tail.LION) {
-			outputText("  A soft [skin coat.color] cat-tail sprouts just above your " + assDescript() + ", curling and twisting with every step to maintain perfect balance. It ends with a small puffy hair balls like that of a lion");
+			outputText("  A soft [skin coat.color] cat-tail sprouts just above your " + assDescript() + ", curling and twisting with every step to maintain perfect balance. It ends with a small puffy hair balls like that of a lion.");
 		}
 		else if (player.tailType == Tail.AVIAN) {
 			outputText("  A tail shaped like a fan of long, [skin coat.color] feathers rests above your " + assDescript() + ", twitching instinctively to help guide you if you were to take flight.");
 		}
 		else if (player.tailType == Tail.GRIFFIN) {
 			outputText("  From your backside hangs a long tail, leonine in shape and covered mostly by a layer of [skin coat.color2] fur with a tip made of a tuft of [skin coat.color] colored feathers. It moves sinuously as you walk.");
+		}
+		else if(player.tailType == Tail.BURNING) {
+			outputText("  A blazing cat tail pokes out from your " + assDescript() + ". It has a tendency to light things on fire if you are not careful but at least It assists with your balance.");
 		}
 	}
 	public function describeArms():void {
@@ -1262,9 +1265,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your arms are covered with [skin coat.color] colored feathers just a bit past your elbow. Your humanoid hands have " + player.skinTone + ", slightly rough skin and end in short claws.");
 		else if (armType == Arms.GRYPHON)
 			outputText("  The feathers on your arms reach a bit past your elbows, the fringe of [skin coat.color] plumage leading to your " + player.skinTone + ", slightly rough skinned hands. They end in short, avian claws.");
-		if (player.wings.type == Wings.BAT_ARM ){
-			outputText("  Your arm bones are thin and light in order to allow flight. You have grown a few extra fingers, which allow you to hold various items even with your abnormal hands, albeit at the cost of preventing flight while doing so.");
-		}
+		else if (player.wings.type == Wings.BAT_ARM)
+			outputText("  The bones in your arms are thin and light, as if made of only cartilage, granting you the ability to take flight. Instead of the five fingers you started out with, you now have three that are both larger and stronger. They allow you to hold various items even with your abnormal hands, albeit at the cost of preventing flight while doing so and making some things a little more awkward to grip.");
 	}
 	public function describeRearBody():void {
 		if (player.rearBody.type == RearBody.FENRIR_ICE_SPIKES) {
@@ -1315,7 +1317,7 @@ public class PlayerAppearance extends BaseContent {
 		if (wingType == Wings.FEATHERED_ALICORN)
 			outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the [haircolor]-colored wings folded close, they can unfurl to allow you to soar as gracefully as an alicorn.");
 		if (wingType == Wings.FEATHERED_SPHINX)
-			outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the [haircolor]-colored wings folded close, they can unfurl to allow you to soar as gracefully as an sphinx.");
+			outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the [haircolor]-colored wings folded close, they can unfurl to allow you to soar as gracefully as a sphinx.");
 		if (wingType == Wings.FEATHERED_PHOENIX)
 			outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the crimson-colored wings folded close, they can unfurl to allow you to soar as gracefully as a phoenix.");
 		if (wingType == Wings.DRACONIC_SMALL)
@@ -1529,6 +1531,9 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if(eyeType == Eyes.GRYPHON){
 			outputText("  Your gifted eyes have a bird-like appearance, having an [eyecolor] sclera and a large, black iris. A thin ring of black separates your sclera from your outer iris.");
+		}
+		else if(eyeType == Eyes.INFERNAL){
+			outputText("  Your eyes look fiendish, with their black sclera and glowing [eyecolor] iris. What's more, a small trail of fire blazes on the corners making them all the more intimidating.");
 		}
 		else outputText("  Your eyes are [eyecolor].");
 	}
@@ -2276,6 +2281,18 @@ public function RacialScores():void {
 	else if (player.harpyScore() >= 4 && player.harpyScore() < 8) outputText("\n<font color=\"#0000a0\">Half Harpy: " + player.harpyScore() + " (-" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (30 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
 	else if (player.harpyScore() >= 1 && player.harpyScore() < 4) outputText("\n<font color=\"#008000\">Half Harpy: " + player.harpyScore() + "</font>");
 	else if (player.harpyScore() < 1) outputText("\n<font color=\"#ff0000\">Half Harpy: 0</font>");
+	//Hellcat
+	if (player.hellcatScore() >= 10) {
+		outputText("\n<font color=\"#0000a0\">Hellcat: " + player.hellcatScore() + " (");
+		if (player.findPerk(PerkLib.Flexibility) > 0) {
+			if (player.findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) outputText("+" + (60 * (1 + player.newGamePlusMod())) + " ");
+			else outputText("+" + (50 * (1 + player.newGamePlusMod())) + " ");
+		}
+		else outputText("+" + (40 * (1 + player.newGamePlusMod())) + " ");
+		outputText("max Spe, +" + (70 * (1 + player.newGamePlusMod())) + " max Int, +" + (40 * (1 + player.newGamePlusMod())) + " max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " min/max Sens)</font>");
+	}
+	else if (player.hellcatScore() >= 1 && player.hellcatScore() < 10) outputText("\n<font color=\"#008000\">Hellcat: " + player.hellcatScore() + "</font>");
+	else if (player.hellcatScore() < 1) outputText("\n<font color=\"#ff0000\">Hellcat: 0</font>");
 	//Horse
 	if (player.horseScore() >= 7) outputText("\n<font color=\"#0000a0\">Horse-morph: " + player.horseScore() + " (+" + (35 * (1 + player.newGamePlusMod())) + " max Tou, +" + (70 * (1 + player.newGamePlusMod())) + " max Spe, +" + (70 * (1 + player.newGamePlusMod())) + " max HP)</font>");
 	else if (player.horseScore() >= 4 && player.horseScore() < 7) outputText("\n<font color=\"#0000a0\">Half Horse-morph: " + player.horseScore() + " (+" + (20 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (35 * (1 + player.newGamePlusMod())) + " max HP)</font>");
@@ -2548,7 +2565,12 @@ public function RacialScores():void {
 	else if (player.sirenScore() >= 1 && player.sirenScore() < 10) outputText("\n<font color=\"#008000\">Siren: " + player.sirenScore() + "</font>");
 	else if (player.sirenScore() < 1) outputText("\n<font color=\"#ff0000\">Siren: 0</font>");
 	//Sphinx
-	if (player.sphinxScore() >= 14) outputText("\n<font color=\"#0000a0\">Sphinx: " + player.sphinxScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Str, -" + (20 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max Int, +" + (40 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
+	if (player.sphinxScore() >= 14) {
+		outputText("\n<font color=\"#0000a0\">Sphinx: " + player.sphinxScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Str, -" + (20 * (1 + player.newGamePlusMod())) + " max Tou, ");
+		if (player.findPerk(PerkLib.Flexibility) > 0) outputText("+" + (50 * (1 + player.newGamePlusMod())) + " ");
+		else outputText("+" + (40 * (1 + player.newGamePlusMod())) + " ");
+		outputText(" max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max Int, +" + (40 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
+	}
 	else if (player.sphinxScore() >= 1 && player.sphinxScore() < 14) outputText("\n<font color=\"#008000\">Sphinx: " + player.sphinxScore() + "</font>");
 	else if (player.sphinxScore() < 1) outputText("\n<font color=\"#ff0000\">Sphinx: 0</font>");
 	//Spider
@@ -2666,4 +2688,4 @@ public function GenderForcedSettingFemale():void {
 		else outputText("<b>Yo, this is an error.</b>");
 	}
 }
-}
+}

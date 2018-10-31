@@ -4,6 +4,7 @@ import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Eyes;
 import classes.BodyParts.Face;
+import classes.BodyParts.Hair;
 import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
@@ -795,7 +796,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				player.createPerk(PerkLib.ImprovedVenomGland, 0, 0, 0, 0);
 			}
 			//Flexibility perk
-			if (player.tailType == Tail.CAT || player.tailType == Tail.MANTICORE_PUSSYTAIL && player.lowerBody == LowerBody.CAT && player.ears.type == Ears.CAT || player.ears.type == Ears.LION) { //Check for gain of cat agility - requires legs, tail, and ears
+			if ((player.tailType == Tail.CAT || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.tailType == Tail.BURNING) && player.lowerBody == LowerBody.CAT && (player.ears.type == Ears.CAT || player.ears.type == Ears.LION)) { //Check for gain of cat agility - requires legs, tail, and ears
 				if (player.findPerk(PerkLib.Flexibility) < 0) {
 					outputText("\nWhile stretching, you notice that you're much more flexible than you were before.  Perhaps this will make it a bit easier to dodge attacks in battle?\n\n(<b>Gained Perk: Flexibility</b>)\n");
 					player.createPerk(PerkLib.Flexibility, 0, 0, 0, 0);
@@ -913,12 +914,12 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				needNext = true;
 			}
 			//Fire Affinity
-			if ((player.salamanderScore() >= 4 || player.phoenixScore() >= 10) && player.findPerk(PerkLib.FireAffinity) < 0) {
+			if ((player.salamanderScore() >= 4 || player.phoenixScore() >= 10 || player.hellcatScore() >= 10) && player.findPerk(PerkLib.FireAffinity) < 0) {
 				outputText("\nYou suddenly feels your body temperature rising to ridiculus level. You pant for several minutes until your finaly at ease with your bodily heat. You doubt any more heat is gunna make you more incomfortable then this as you quietly soak in the soothing warmth your body naturaly produce. Its like your body is made out of living fire.\n\n(<b>Gained Perk: Fire Affinity</b>)\n");
 				player.createPerk(PerkLib.FireAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if ((player.salamanderScore() < 4 && player.phoenixScore() < 10) && player.findPerk(PerkLib.FireAffinity) >= 0) {
+			else if ((player.salamanderScore() < 4 && player.phoenixScore() < 10 && player.hellcatScore() < 10) && player.findPerk(PerkLib.FireAffinity) >= 0) {
 				outputText("\nYou suddenly feel chilly as your bodily temperature drop down to human level. You lost your natural warmth reverting to that of a standard human.\n\n<b>(Lost Perk: Fire Affinity)</b>\n");
 				player.removePerk(PerkLib.FireAffinity);
 				needNext = true;
@@ -954,7 +955,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 			}
 			//Soul Sense
 			if (player.maxSoulforce() >= 200 && player.findPerk(PerkLib.SoulApprentice) >= 0 && player.findPerk(PerkLib.SoulSense) < 0) {
-				outputText("\nDuring a casual walk around your camp you suddenly notice, or rather feel, something unexpected. Your surrounding blurs for a moment, to be replaced with a forest.You notice a goblin strolling nearby.. Suddenly, she stops and slowly looks around, staring directly at you. A moment later, your vision of the forest becomes blurry, eventually fading away to be replaced by your camp and its surroundings. ");
+				outputText("\nDuring a casual walk around your camp you suddenly notice, or rather feel, something unexpected. Your surrounding blurs for a moment, to be replaced with a forest. You notice a goblin strolling nearby. Suddenly, she stops and slowly looks around, staring directly at you. A moment later, your vision of the forest becomes blurry, eventually fading away to be replaced by your camp and its surroundings. ");
 				outputText("You shake your head, trying to figure out what had just happened. The only solution that you find within yourself is something that the soul cultivators you met in He’Xin’Dao mentioned. Another sense that they had developed, which allowed them to perceive distant places or find specific people over long distances. It looks as though you developed it, even without training.\n");
 				player.createPerk(PerkLib.SoulSense, 0, 0, 0, 0);
 				needNext = true;
@@ -1006,6 +1007,15 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 			if (player.faceType != Face.VAMPIRE && player.hasStatusEffect(StatusEffects.VampireThirst) && !player.hasPerk(PerkLib.HollowFangs)) {
 				outputText("\nAs your fang disappear so do your vampiric urges. You become disgusted with yourself as you realise how much blood you drank.\n");
 				player.removeStatusEffect(StatusEffects.VampireThirst);
+				needNext = true;
+			}
+			//Loosing hellcat body parts
+			if ((player.tailType != Tail.BURNING || player.eyes.type != Eyes.INFERNAL || player.hairType != Hair.BURNING) && player.hellcatScore() > 8) {
+				outputText("\nAs you become less of a hellcat your inner fire entirely dies down, your body reverting to that of a standard feline.\n");
+				if (player.tailType == Tail.BURNING) player.tailType = Tail.CAT;
+				if (player.eyes.type == Eyes.INFERNAL) player.eyes.type = Eyes.CAT_SLITS;
+				if (player.hairType != Hair.BURNING) player.hairType = Hair.NORMAL;
+				if (flags[kFLAGS.WITCHES_SABBATH] > 1) flags[kFLAGS.WITCHES_SABBATH] = 1;
 				needNext = true;
 			}
 			//Reset bad end warning

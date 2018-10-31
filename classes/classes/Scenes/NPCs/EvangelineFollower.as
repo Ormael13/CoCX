@@ -307,11 +307,11 @@ private function evangelineAlchemyMenu():void {
 	addButton(6, "Nocello Liq", MakingNocelloLiqueur).hint("Ask her to brew a special potion that could aid in becoming a phoenix. \n\nCost: 10 Gems \nNeeds 1 Golden Seed and 1 Salamander Firewater.");//Hybryd race TF
 	//addButton(7, "", ).hint(".");siren TF//Hybryd race TF
 	//addButton(8, "", ).hint(".");manticore TF//Hybryd race TF
-	//addButton(9, "", ).hint(".");
+	addButton(9, "Enigmanium", MakingEnigmaniumPotion).hint("Ask her to brew a special potion that could aid in becoming a sphinx. \n\nCost: 30 Gems \nNeeds 1 Centarium, 1 Golden Seed and 1 Whisker Fruit.");
 	addButton(10, "Alicornum", MakingAlicornumPotion).hint("Ask her to brew a special potion that could aid in becoming a unicorn. \n\nCost: 50 Gems \nNeeds 1 Unicornum and 4 Mid-grade Soulforce Recovery Pills.");//2nd stage Soul evolution race TF
 	addButton(11, "Scylla Ink", MakingScyllaInkPotion).hint("Ask her to brew a special potion based on Black Ink.");
 	//addButton(12, "Abyssal Ink", ).hint("Ask her to brew a special potion based on Black Abbysal Ink.");
-	addButton(13, "InferWine", MakingInfernalWinePotion).hint("Aske her to brew a special potion that could aid in becoming a infernal goat/devil. \n\nCost: 480 Gems \nNeeds 1 Satyr Wine, 1 Succubi milk and 1 Incubi draft.");
+	addButton(13, "InferWine", MakingInfernalWinePotion).hint("Ask her to brew a special potion that could aid in becoming a infernal goat/devil. \n\nCost: 480 Gems \nNeeds 1 Satyr Wine, 1 Succubi milk and 1 Incubi draft.");
 	addButton(14, "Back", meetEvangeline);
 }
 
@@ -442,6 +442,29 @@ private function MakingNocelloLiqueur():void {
 	outputText("You hand over one Golden Seed, one hip flask of Salamander Firewater and ten gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
 	outputText("\n\nAfter a while, she hands you a bottle labeled \"Nocello\".  ");
 	inventory.takeItem(consumables.NOCELIQ, evangelineAlchemyMenu);
+	cheatTime(1/6);
+}
+
+private function MakingEnigmaniumPotion():void {
+	clearOutput();
+	if (player.gems < 30) {
+		outputText("\"<i>I'm sorry but you don't have the gems for this potion,</i>\" Evangeline says.");
+		doNext(evangelineAlchemyMenu);
+		return;
+	}
+	else if (!(player.hasItem(consumables.CENTARI, 1) && player.hasItem(consumables.GLDSEED, 1) && player.hasItem(consumables.W_FRUIT, 1))) {
+		outputText("\"<i>I'm sorry but you don't have the materials I need. I need vial of Centaurinum, Golden Seed and Whisker Fruit,</i>\" Evangeline says.");
+		doNext(evangelineAlchemyMenu);
+		return;
+	}
+	player.destroyItems(consumables.CENTARI, 1);
+	player.destroyItems(consumables.GLDSEED, 1);
+	player.destroyItems(consumables.W_FRUIT, 1);
+	player.gems -= 30;
+	statScreenRefresh();
+	outputText("You hand over one vial of Centaurinum, one Golden Seed, one Whisker Fruit and thirty gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
+	outputText("\n\nAfter a while, she hands you a vial labeled \"Enigmanium\".  ");
+	inventory.takeItem(consumables.ENIGMANIUM, evangelineAlchemyMenu);
 	cheatTime(1/6);
 }
 

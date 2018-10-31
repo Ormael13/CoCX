@@ -192,7 +192,7 @@ use namespace CoC;
 			//addButton(5, "Upgrade", UpgradeItems).hint("."); //ulepszanie itemów
 			if (player.findPerk(PerkLib.Metamorph) >= 0) addButton(6, "Metamorf", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold freely your body.");//używanie metamorfowania z użyciem soulforce
 			if (player.findPerk(PerkLib.SoulSense) >= 0) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounter."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
-			addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
+			//addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
 			addButton(14, "Back", playerMenu);
 		}//w lini 28 w oOnLoadVariables zmian wprowadzić i w lini conditionalConverters w folderze parser zmian dot. wraith wprowadzić, zablokować perki soul king to soul ancestor w momencie robienia release version
 		public function SoulforceCheats():void {
@@ -719,11 +719,13 @@ public function FightNightmare():void {
 			addButton(0, "Fox Jewel", AddFoxJewel).hint("Add 1 Fox Jewel.");
 			addButton(1, "F.Fish", AddFreshFish).hint("Add 1 Fresh Fish.");
 			addButton(2, "BehemothCum", AddBehemothCum).hint("Add 1 bottle of Behemoth Cum.");
-			addButton(3, "TF's Pack", AddVoltageTopaz).hint("Add 1 Voltage Topaz, 1 vial of Red Blood (Bat TF) and 1 Wonder Fruit.");
+			addButton(3, "Naga Oils", AddGorgonOil).hint("Add 1 vial of Gorgon, Vouivre and Couatl Oil.");
 			addButton(4, "SkybornSeed", AddSkybornSeed).hint("Add 1 Skyborn Seed.");
 			//addButton(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
-			addButton(5, "Naga Oils", AddGorgonOil).hint("Add 1 vial of Gorgon, Vouivre and Couatl Oil.");
-			addButton(6, "Enigmanium", AddEnigmanium).hint("Add 1 Enigmanium.");
+			addButton(5, "Enigmanium", AddEnigmanium).hint("Add 1 vial of Enigmanium.");
+			addButton(6, "VoltageTopaz", AddVoltageTopaz).hint("Add 1 Voltage Topaz.");
+			addButton(7, "Red Vial", AddRedBlood).hint("Add 1 vial of Red Blood (Bat TF).");
+			addButton(8, "WonderFruit", AddWonderFruit).hint("Add 1 Wonder Fruit.");
 			//addButton(7, "V.D.ARC", AddVeryDilutedArcaneRegenConcotion).hint("Add 1 very diluted Arcane Regen Concotion.");
 			//addButton(8, "D.ARC", AddDilutedArcaneRegenConcotion).hint("Add 1 diluted Arcane Regen Concotion.");
 			addButton(9, "SBMan", AddSoulBlastManual).hint("Add 1 Soul Blast manual.");
@@ -744,6 +746,7 @@ public function FightNightmare():void {
 			addButton(6, "ChitinShard", AddBeeChitin).hint("Add 1 Chitin shard.");
 			addButton(7, "GreenGel", AddGreenGel).hint("Add 1 Green Gel.");
 			addButton(8, "DragonScale", AddDragonscale).hint("Add 1 Dragonscale.");
+			addButton(9, "F.Imp S.", AddFeralImpSkull).hint("Add 1 Feral Imp Skull.");
 			addButton(14, "Back", SoulforceCheats);
 		}
 		public function EnemiesMenu():void {
@@ -766,6 +769,10 @@ public function FightNightmare():void {
 			outputText("\n\n<b>(Gained 1 Blade Grass!)</b>\n\n");
 			inventory.takeItem(consumables.BLADEGR, SoulforceCheats);
 		}*/
+		public function AddFeralImpSkull():void {
+			outputText("\n\n<b>(Gained 1 Feral Imp Skull!)</b>\n\n");
+			inventory.takeItem(useables.FIMPSKL, MaterialMenu);
+		}
 		public function AddStaff():void {
 			outputText("\n\n<b>(Gained 1 Eldritch Staff!)</b>\n\n");
 			inventory.takeItem(weapons.E_STAFF, EquipmentMenu);
@@ -796,11 +803,11 @@ public function FightNightmare():void {
 		}
 		public function AddVoltageTopaz():void {
 			outputText("\n\n<b>(Gained 1 Voltage Topaz!)</b>\n\n");
-			inventory.takeItem(consumables.VOLTTOP, AddRedBlood);
+			inventory.takeItem(consumables.VOLTTOP, NonEquipmentMenu);
 		}
 		public function AddRedBlood():void {
 			outputText("\n\n<b>(Gained 1 vial of red blood!)</b>\n\n");
-			inventory.takeItem(consumables.REDVIAL, AddWonderFruit);
+			inventory.takeItem(consumables.REDVIAL, NonEquipmentMenu);
 		}
 		public function AddWonderFruit():void {
 			outputText("\n\n<b>(Gained 1 Wonder Fruit!)</b>\n\n");
@@ -817,6 +824,10 @@ public function FightNightmare():void {
 		public function AddCouatlOil():void {
 			outputText("\n\n<b>(Gained 1 vial of Couatl Oil!)</b>\n\n");
 			inventory.takeItem(consumables.COUAOIL, NonEquipmentMenu);
+		}
+		public function AddEnigmanium():void {
+			outputText("\n\n<b>(Gained 1 vial of Enigmanium!)</b>\n\n");
+			inventory.takeItem(consumables.ENIGMANIUM, NonEquipmentMenu);
 		}
 		public function AddVeryDilutedArcaneRegenConcotion():void {
 			outputText("\n\n<b>(Gained 1 very diluted Arcane Regen Concotion!)</b>\n\n");
@@ -1362,12 +1373,6 @@ public function FightNightmare():void {
 			outputText("\n\n<b>(Gained 1 Sky Poison Pearl!)</b>\n\n");
 			inventory.takeItem(consumables.SPPEARL, EquipmentMenu);
 		}
-
-		public function AddEnigmanium():void {
-			outputText("\n\n<b>(Gained 1 Enigmanium!)</b>\n\n");
-			inventory.takeItem(consumables.ENIGMANIUM, NonEquipmentMenu);
-		}
-
 		public function AddLightAyoArmor():void {
 			outputText("\n\n<b>(Gained 1 Light Ayo Armor!)</b>\n\n");
 			inventory.takeItem(armors.LAYOARM, EquipmentMenu);
@@ -2547,4 +2552,4 @@ public function FightNightmare():void {
 			}
 		}
 	}
-}
+}

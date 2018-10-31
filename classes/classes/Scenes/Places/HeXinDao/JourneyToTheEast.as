@@ -121,8 +121,9 @@ package classes.Scenes.Places.HeXinDao
 			menu();
 			addButton(0, "Imps", BoardkeeperYangQuestImps1).hint("Cooper tier Quest.");
 			addButton(1, "Ferals(1)", BoardkeeperYangQuestFerals1).hint("Cooper tier Quest.");
+			addButton(2, "Ferals(2)", BoardkeeperYangQuestFerals2).hint("Cooper tier Quest.");
 			if (player.hasKeyItem("Adventurer Guild: Iron plate") >= 0) {
-				addButton(2, "Demons", BoardkeeperYangQuestDemons1).hint("Iron tier Quest.");
+				addButton(3, "Demons", BoardkeeperYangQuestDemons1).hint("Iron tier Quest.");
 			}
 			addButton(14, "Back", BoardkeeperYangMain);
 		}
@@ -191,13 +192,14 @@ package classes.Scenes.Places.HeXinDao
 			else {
 				outputText("Yang eyes you with keen interest then ask.\n\n");
 				outputText("\"<i>Would you actually be interested into something easier? Right now there's a bounty on imp slaying. Bring me back 3 imp skulls and I will see it through that you are properly rewarded.</i>\"\n\n");
-				player.createStatusEffect(StatusEffects.AdventureGuildQuests1, 1, 0, 0, 0);
+				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests1)) player.addStatusValue(StatusEffects.AdventureGuildQuests1, 1, 1);
+				else player.createStatusEffect(StatusEffects.AdventureGuildQuests1, 1, 0, 0, 0);
 			}
 			doNext(curry(enteringInn,false));
 		}
 		public function BoardkeeperYangQuestFerals1():void {
 			clearOutput();
-			if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests2)) {
+			if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) > 0) {
 				if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) > 6) {
 					outputText("The panda decline the job request.\n\n");
 					outputText("\"<i>Sorry [name] this job is only once per day. Come back tomorrow.</i>\"\n\n");
@@ -249,7 +251,8 @@ package classes.Scenes.Places.HeXinDao
 			else {
 				outputText("\"<i>Someone put up a bounty for slaying tentacle beast. I would need lets say 1 tentacle from those mishapen creature as proof of your deed. Of course you will be rewarded for the job.</i>\"\n\n");
 				outputText("You shrug and accept the job. Plants... what could go wrong?\n\n");
-				player.createStatusEffect(StatusEffects.AdventureGuildQuests2, 1, 0, 0, 0);
+				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests2)) player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 1);
+				else player.createStatusEffect(StatusEffects.AdventureGuildQuests2, 1, 0, 0, 0);
 			}
 			doNext(curry(enteringInn,false));
 		}
@@ -325,7 +328,67 @@ package classes.Scenes.Places.HeXinDao
 				outputText("\"<i>Hey [name] happen I have a new higher grade job for you if you’re interested.</i>\"\n\n");
 				outputText("Of course your interested what’s the job?\n\n");
 				outputText("\"<i>See it happens the town offer a generous sum for every demon slain. If you can bring me proof of the death of demon. Should you come back I have a special reward for you in addition to your pay.</i>\"\n\n");
-				player.addStatusValue(StatusEffects.AdventureGuildQuests1, 2, 1);
+				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests1)) player.addStatusValue(StatusEffects.AdventureGuildQuests1, 2, 1);
+				else player.createStatusEffect(StatusEffects.AdventureGuildQuests1, 0, 1, 0, 0);
+			}
+			doNext(curry(enteringInn,false));
+		}
+		public function BoardkeeperYangQuestFerals2():void {
+			clearOutput();
+			if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) > 0) {
+				if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) > 6) {
+					outputText("The panda decline the job request.\n\n");
+					outputText("\"<i>Sorry [name] this job is only once per day. Come back tomorrow.</i>\"\n\n");
+				}
+				else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 6) {
+					if (player.hasItem(useables.FIMPSKL, 5)) {
+						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
+						outputText("\"<i>Good job there. I heard those creatures are actually out there killing instead of raping, it’s quite chilling. Here is your payment.</i>\"\n\n");
+						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 1);
+						player.destroyItems(useables.FIMPSKL, 5);
+						flags[kFLAGS.SPIRIT_STONES] += 7;
+						statScreenRefresh();
+					}
+					else outputText("You try turn in the quest but Yang tells you you don’t have enough feral imp skulls yet.\n\n");
+				}
+				else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 4) {
+					outputText("\"<i>Someone put up a bounty for slaying feral imps. I would need lets say 5 feral imps skulls from those mishapen creature as proof of your deed. Of course you will be rewarded for the job.</i>\"\n\n");
+					player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 2);
+				}
+				else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 3) {
+					if (player.hasItem(useables.FIMPSKL, 4)) {
+						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
+						outputText("\"<i>Good job there. I heard those creatures are actually out there killing instead of raping, it’s quite chilling. Here is your payment along with a special training scroll.</i>\"\n\n");
+						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 1);
+						player.destroyItems(useables.FIMPSKL, 4);
+						player.perkPoints += 1;
+					}
+					else outputText("You try turn in the quest but Yang tells you you don’t have enough feral imp skulls yet.\n\n");
+				}
+				else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 2) {
+					outputText("\"<i>Someone put up a bounty for slaying feral imps. I would need lets say 4 feral imps skulls from those mishapen creature as proof of your deed. Of course you will be rewarded for the job.</i>\"\n\n");
+					player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 1);
+				}
+				else {
+					if (player.hasItem(useables.FIMPSKL, 3)) {
+						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
+						outputText("\"<i>My my, I wasn’t sure I would ever see you back.</i>\"\n\n");
+						outputText("Seems she misjudged you then?\n\n");
+						outputText("\"<i>Everyone makes mistakes and feral imps assignments are way more dangerous than normal imps, you clearly outpaced expectation. Here is your payment. This reminds me some man told me to leave you this scroll as a reward too... should help you fight feral opponents he said.</i>\"\n\n");
+						outputText("(<b>Gained New Perk: Feral Hunter</b>)");
+						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 1);
+						player.addKeyValue("Adventurer Guild: Copper plate", 1, 1);
+						player.createPerk(PerkLib.FeralHunter, 0.1, 0, 0, 0);
+						player.destroyItems(useables.FIMPSKL, 3);
+					}
+					else outputText("You try turn in the quest but Yang tells you you don’t have enough feral imp skulls yet.\n\n");
+				}
+			}
+			else {
+				outputText("\"<i>Someone put up a bounty for slaying feral imps. I would need lets say 3 feral imps skulls from those mishapen creature as proof of your deed. Of course you will be rewarded for the job.</i>\"\n\n");
+				outputText("You shrug and accept the job. It's time to hunt some imps.\n\n");
+				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests2)) player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 1);
+				else player.createStatusEffect(StatusEffects.AdventureGuildQuests2, 0, 1, 0, 0);
 			}
 			doNext(curry(enteringInn,false));
 		}
@@ -334,14 +397,14 @@ package classes.Scenes.Places.HeXinDao
 			outputText("Placeholder for lazyLia writing ^^\n\n");//mino hunts
 			doNext(curry(enteringInn,false));
 		}
-		public function BoardkeeperYangFerals2():void {
+		public function BoardkeeperYangQuestFerals3():void {
 			clearOutput();
-			outputText("Placeholder for lazyLia writing ^^\n\n");//feral imps hunt
+			outputText("Placeholder for lazyLia writing ^^\n\n");//feral demons hunt
 			doNext(curry(enteringInn,false));
 		}
-		public function BoardkeeperYangFerals3():void {
-			clearOutput();
-			outputText("Placeholder for lazyLia writing ^^\n\n");//feral demons hunr
+		public function BoardkeeperYangQuest4():void {
+			clearOutput();//feral imps research
+			outputText("\"<i>The town schoolars put a bounty on some weird new variant of demon’s called feral, something about wanting to study the weird strait of unusually aggressive creatures. I would need lets say 10 feral imp skull so the scholar has enough material. Of course you will be rewarded for the job.</i>\"\n\n");
 			doNext(curry(enteringInn,false));
 		}
 		public function BoardkeeperYangQuest3():void {

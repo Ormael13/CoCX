@@ -4537,6 +4537,12 @@ public final class Mutations extends MutationsHelper
 				setHairType(Hair.NORMAL);
 				changes++;
 			}
+			//Remove burning hair
+			if (changes < changeLimit && player.hairType == Hair.BURNING && rand(3) == 0) {
+				outputText("\n\nYou're head begins to cool down until the flames entirely disapears leaving you with ordinary hairs.  <b>Your hair is normal again!</b>");
+				setHairType(Hair.NORMAL);
+				changes++;
+			}
 			//Restart hair growth
 			if(flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] > 0 && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYou feel an itching sensation in your scalp as you realize the change. <b>Your hair is growing normally again!</b>");
@@ -5055,7 +5061,7 @@ public final class Mutations extends MutationsHelper
 			}
 
 			//DAT EYES
-			if (player.tailType == Tail.CAT && player.ears.type == Ears.CAT && rand(4) == 0 && changes < changeLimit && player.lowerBody == LowerBody.CAT && (player.hasFur() || (player.hasCoatOfType(Skin.SCALES) && player.dragonneScore() >= 4)) && player.faceType == Face.CAT && player.eyes.type != Eyes.CAT_SLITS) {
+			if (player.tailType == Tail.CAT && player.ears.type == Ears.CAT && rand(4) == 0 && changes < changeLimit && player.lowerBody == LowerBody.CAT && (player.hasFur() || (player.hasCoatOfType(Skin.SCALES) && player.dragonneScore() >= 4)) && (player.faceType == Face.CAT || player.faceType == Face.CAT_CANINES) && player.eyes.type != Eyes.CAT_SLITS) {
 				//Gain cat-like eyes
 				outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.  <b>Your eyes has turned into those of cat with vertical slit</b>.");
 				setEyeType(Eyes.CAT_SLITS);

@@ -67,12 +67,15 @@ public class Questlog extends BaseContent
 			if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 2 || player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 4 || player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 7) outputText("Completed (for today)");
 			else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 1 || player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 3 || player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 6) outputText("In Progress");
 			else outputText("Not Started");
+			outputText("\n<b>Feral Imps Hunt:</b> ");
+			if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 2 || player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 4 || player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 7) outputText("Completed (for today)");
+			else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 1 || player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 3 || player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 6) outputText("In Progress");
+			else outputText("Not Started");
 			outputText("\n<b>Feral Tentacle Beasts Hunt:</b> ");
 			if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 2 || player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 4 || player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 7) outputText("Completed (for today)");
 			else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 1 || player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 3 || player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 6) outputText("In Progress");
 			else outputText("Not Started");
-			outputText("\n<b>Feral Imps Hunt:</b> Soon");
-			outputText("\n<b>Feral Demons Hunt:</b> Soon");
+			outputText("\n<i><b>Feral Demons Hunt:</b> Soon</i>");
 			/*if () outputText("\n\n<u><b>Twilight of the Gods</b></u>");
 			else outputText("\n<b>???</b>");
 			if () outputText("\n\n<u><b>The New Dawn</b></u>");

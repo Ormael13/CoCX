@@ -24,12 +24,15 @@ package classes.Scenes
 			clearOutput();
 			menu();
 			outputText("<b>Version 0.8j2:</b>\n\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("-Added in current version race effects to Metamorph perk: Bat, Vampire\n");
 			outputText("-New rare ascension perk -> Ascension: Building Prestige (4th Stage). Req. Ascension: Building Prestige (3rd Stage) perk and be at fourth ascension. It costs 20 asc points and will give 1 more slot for Prestige Jobs.\n");
 			outputText("-New rare ascension perk -> Ascension: Ascension: Transcendental Genetic Memory (Stage 1). Req. Ascension: Natural Metamorph perk. It cost 10 asc points and allow to perm up to 10 selected Metamorph options.\n");
 			outputText("-New rare ascension perk -> Ascension: Ascension: Transcendental Genetic Memory (Stage 2). Req. Ascension: Transcendental Genetic Memory (Stage 1) perk and be at second ascension. It cost 20 asc points and allow to perm up to 20 selected Metamorph options. (with prev perk it give max cap of 30)\n");
 			outputText("-New rare ascension perk -> Ascension: Ascension: Transcendental Genetic Memory (Stage 3). Req. Ascension: Transcendental Genetic Memory (Stage 2) perk and be at third ascension. It cost 30 asc points and allow to perm up to 30 selected Metamorph options. (with prev perks it give max cap of 60)\n");
 			outputText("-New rare ascension perk -> Ascension: Ascension: Transcendental Genetic Memory (Stage 4). Req. Ascension: Transcendental Genetic Memory (Stage 3) perk and be at fourth ascension. It cost 40 asc points and allow to perm up to 40 selected Metamorph options. (with prev perks it give max cap of 100)\n");
+			outputText("-New Ascension perk: Milk Faucet. It works same way like Hardiness but increasing milk production by 200 mL per rank. Max Rank: 25.\n");
+			outputText("-New Ascension perk: Cum Hose. It works same way like Hardiness but adding 200 mLs cum per orgasm per level. Max Rank: 25.\n");
+			outputText("-New event related perk: Feral Hunter. Req.: finishing for the first time quest for killing feral imps from Adventure Guild. Effect: +10% per perk rank more physical melee damage to Feral type enemies. It start at rank 1.\n");
 			outputText("-New enemy perk: Sentience. Current added to Basic Gargoyle, Guardian Quasi-Gargoyles and Obsidian Gargoyle. Without this perk any construct-type enemy will have 0 wrath, soulforce and mana.\n");
 			outputText("-PC can now make pernament choosen Metamorph options (similary to perming specific perks) during ascension. There is limit on this but...few of you wanted to been able to take your favourite one mutation options to higher NG games.\n");
 			outputText("-Finishing twice each of current available three Adventure Guild quest will give 2 ascension perk points (total 6 points for all 3 quests). Beating either ver of Marae would give 3 asc perk points instead 1. Asc perk points reward for completing Deep Cave and Lethice Stronghold increased to respectively 2 and 3 pts.\n");
@@ -40,9 +43,22 @@ package classes.Scenes
 			outputText("-Possess m. special now will go for 2 turns cooldown after each use.\n");
 			outputText("-Rejecting offer to take Luna back to camp (be it on first time meeting her or during repeat scene) will not force PC back to camp, just back to main city menu.\n");
 			outputText("-Ceraph enc chance has been increased.\n");
-			outputText("-\n");
-			outputText("-Fixed bugs: Unicorn/Alicorn/Bicorn/Nightmare 0 pts score, blank screen when learning new spell in Tel'Adre Tower, Gargoyle bonuses not applied at 20+ pts, wrong race classification when becoming Gargoyle, missing scene when PC hunger as Gargoyle drops to 0, missing gems reward from Prize option for Erlking enc, missing in few places unlocking fur for metamorph menu, ");
-			outputText("Spectre perk evasion boost effect lingering even without Incorporeality perk, Lust strike actual cost been lower than it was meantioned in tooltip\n\n\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-Incubus Drider special Tainted Mind affects now beside melee attacks and p.specials also range attacks. But a minor reminder: elementals attacks aren't melee attacks even if they may replace base melee attack button ;)\n");
+			outputText("-Evangeline can make new TF item - Enigmanium (sphinx TF). It req. 30 gems, 1 Centarium, 1 Golden Seed and 1 Whisker Fruit. Bonuses for having 14+ pts in sphinx score are: +50 to max Str, -20 to max Tou, +40 to max Spe, +100 to max Int and +40 to max Wis\n");
+			outputText("-New M. Special: Cursed Riddle - req. 14+ pts in sphinx score. It deal dmg, lust dmg (if enemy is not reistant to lust dmg) and stun for 1 turn as long enemy fail to solve PC riddle. (there are 13 diff riddles used during this special)\n");
+			outputText("-New body part - arms: Sphinx arms. Req. Cat Lower Body\n");
+			outputText("-New body part - wings: Sphinx wings. Req. Sphinx Arms\n");
+			outputText("-New body part - hair: Burning Hair. Req. Picking yes during third visit at Witches Sabbath event.\n");
+			outputText("-New body part - tail: Burning Tail. Req. Picking yes during third visit at Witches Sabbath event.\n");
+			outputText("-New body part - eyes: Infernal Hair. Req. Picking yes during third visit at Witches Sabbath event.\n");
+			outputText("-New M. Special: Infernal claw - req. 10+ pts in hellcat score. Deal physical damage using Natural weapon modifier+Spell modifier (Damage is dealt twice first as physical damage then as fire damage) then apply Bleed (Physical modifier) and Burn(Magical modifier) for 5 rounds. 8 round cooldown.\n");
+			outputText("-New M. Special: Feline curse - req. 10+ pts in hellcat score. Turn the victim into a small domestic cat for 3 rounds at the cost of arousing yourself. 15 round cooldown\n");
+			outputText("-During exploring Vulcanic Crag PC can meet new enemy - Hellcat. After meeting her once can find cave where gathered hellcat as long would be cat-morph (8+ pts in cat-morph score not any other cat race score), have 40+ int and know Whitefire spell.\n");
+			outputText("-During third visit when PC watched sabbath earlier is option to became hellcat itself. Bonuses for been one: +40 max Spe, +70 max Int, +40 max Lib, +25 min/max Sens.\n");
+			outputText("-Natural Jouster and Natural Jouster (Master grade) perks can now work with Great Dive as long PC meet req. regarding weapon used during dive and have perk Death Plunge.\n");
+			outputText("-New quest on Adventure Guild: hunting feral imps. First time completing reward is Feral Hunter perk, second time completing is 1 perk ponit and all afterward completetions giving 7 spirit stones.\n");
+			outputText("-Fixed bugs: Unicorn/Alicorn/Bicorn/Nightmare 0 pts score, blank screen when learning new spell in Tel'Adre Tower, Gargoyle bonuses not applied at 20+ pts, wrong race classification when becoming Gargoyle, missing scene when PC hunger as Gargoyle drops to 0, missing gems reward from Prize option for Erlking enc, missing in few places unlocking fur for metamorph menu, Spectre perk evasion boost ");
+			outputText("effect lingering even without Incorporeality perk, Lust strike actual cost been lower than it was meantioned in tooltip, never ending Tainted Mind debuff and blank screen related to it, cat/pig score calculation bug, cheshire real stat bonuses not matching those from player app screen, demon slayer working on all enemies not only true demons\n\n\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
@@ -66,15 +82,7 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Bat, Vampire, Cat, Cheshire cat, Unicorn, Alicorn, Bicorn, Nightmare
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Cat, Cheshire cat, Unicorn, Alicorn, Bicorn, Nightmare, Sphinx, Hellcat
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -111,7 +119,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): dodać yuki-onna TF
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -546,7 +553,7 @@ package classes.Scenes
 			outputText("-New body part: Red Panda Legs. Req. Red Panda Arms.\n");
 			outputText("-New body part: Red Panda Tail. No prereq. Having tail will give access to P. Special Tail Whip.\n");
 			outputText("-New TF item: Wonderfruit (cheshire cat TF) gained after visiting Wonderland with Patchouli. Aside few additional effects it works like normal cat TF giving the same effects. When cheshire racial score reach 11 pts PC will gain bonuses: +95 to max Spe, +70 to Int.\n");
-			outputText("-New body part: Cat Canines. Req. the same as cat face (cat tail, cat ears) and it's version with human face with onlt cat caninies. This one and normal full cat face effects would be triggered by normal or cheshire cat tf items.\n");
+			outputText("-New body part: Cat Canines. Req. the same as cat face (cat tail, cat ears) and it's version with human face with only cat caninies. This one and normal full cat face effects would be triggered by normal or cheshire cat tf items.\n");
 			outputText("-Marae combat stats buffed slightly and she will make better use of her stats for specials in both possible forms (pure and corrupt).\n");
 			outputText("-When PC reach lvl 24 and higher base value of HP and Fatigue recovery during Rest, Sleep (or Wait for Fatigue) will be increased by 50%. When PC would reach lvl 42 and higher +50% bonus to base value will change into +100% bonus.\n");
 			outputText("-Replaced texts for Jewel Shop with those written by Starglider (aka much better than sort of placeholder-ish texts that was there before).\n");

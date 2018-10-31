@@ -35,7 +35,7 @@ public function accessMetamorphMenu():void {
 	outputText("Using some of soulforce to re-gain any animal bodyparts that your body remember in it genetic memory.\n");
 	outputText("<i>Bonus to max soulforce: " + 50 * (1 + player.perkv1(PerkLib.Metamorph)) + "</i>\n\n");
 	outputText("<b>Race added to Metamorph:\n");
-	outputText("Bee, Cow, Couatl, Demon, Devil, Dragon, Elf, Fox, Gorgon, Harpy, Kitsune, Lizard, Mantis, Minotaur, Naga, Oni, Orca, Phoenix, Raiju, Salamander, Shark, Spider (+Drider)</b>");
+	outputText("Bat, Bee, Cow, Couatl, Demon, Devil, Dragon, Elf, Fox, Gorgon, Harpy, Kitsune, Lizard, Mantis, Minotaur, Naga, Oni, Orca, Phoenix, Raiju, Salamander, Shark, Spider (+Drider), Vampire</b>");
 	menu();
 	addButton(10, "Page 1", accessPage1MetamorphMenu);
 	addButton(11, "Page 2", accessPage2MetamorphMenu);
@@ -57,9 +57,10 @@ private function accessPage1MetamorphMenu():void {
 	addButton(7, "Eyes(2)", accessPage2EyesMenu);
 	addButton(8, "Ears(1)", accessPage1EarsMenu);
 	addButton(9, "Ears(2)", accessPage2EarsMenu);
-	addButton(10, "Horns", accessHornsMenu);
-	addButton(11, "Antennae", accessAntennaeMenu);
-	addButton(12, "Gills", accessGillsMenu);
+	addButton(10, "Ears(3)", accessPage3EarsMenu);
+	addButton(11, "Horns", accessHornsMenu);
+	addButton(12, "Antennae", accessAntennaeMenu);
+	addButton(13, "Gills", accessGillsMenu);
 	addButton(14, "Back", accessMetamorphMenu);
 }
 private function accessSkinMenu():void {
@@ -164,6 +165,10 @@ private function accessPage3FaceMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuFace) && player.faceType == Face.RAIJU_FANGS) addButtonDisabled(4, "Raiju", "You already have raiju fangs.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuFace) && player.faceType != Face.RAIJU_FANGS && player.soulforce < 100) addButtonDisabled(4, "Raiju", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(4, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedVampireFace) && player.faceType != Face.VAMPIRE && player.soulforce >= 100) addButton(5, "Vampire", metamorphVampireFace);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedVampireFace) && player.faceType == Face.VAMPIRE) addButtonDisabled(5, "Vampire", "You already have vampire fangs.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedVampireFace) && player.faceType != Face.VAMPIRE && player.soulforce < 100) addButtonDisabled(5, "Vampire", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(5, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 private function accessTongueMenu():void {
@@ -232,9 +237,9 @@ private function accessPage1EyesMenu():void {
 }
 private function accessPage2EyesMenu():void {
 	menu();
-	if (player.hasStatusEffect(StatusEffects.UnlockedSpiderFourEyes) && player.eyes.type != Eyes.VAMPIRE && player.soulforce >= 100) addButton(0, "Vampire", metamorphVampireEyes);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedSpiderFourEyes) && player.eyes.type == Eyes.VAMPIRE) addButtonDisabled(0, "Vampire", "You already have vampire eyes.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedSpiderFourEyes) && player.eyes.type != Eyes.VAMPIRE && player.soulforce < 100) addButtonDisabled(0, "Vampire", "You not have enough Soulforce for this metamorphosis.");
+	if (player.hasStatusEffect(StatusEffects.UnlockedVampireEyes) && player.eyes.type != Eyes.VAMPIRE && player.soulforce >= 100) addButton(0, "Vampire", metamorphVampireEyes);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedVampireEyes) && player.eyes.type == Eyes.VAMPIRE) addButtonDisabled(0, "Vampire", "You already have vampire eyes.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedVampireEyes) && player.eyes.type != Eyes.VAMPIRE && player.soulforce < 100) addButtonDisabled(0, "Vampire", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(0, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
@@ -288,6 +293,18 @@ private function accessPage2EarsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuEars) && player.ears.type == Ears.WEASEL) addButtonDisabled(12, "Raiju", "You already have raiju ears.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuEars) && player.ears.type != Ears.WEASEL && player.soulforce < 100) addButtonDisabled(12, "Raiju", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(12, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedBatEars) && player.ears.type != Ears.BAT && player.soulforce >= 100) addButton(13, "Bat", metamorphBatEars);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedBatEars) && player.ears.type == Ears.BAT) addButtonDisabled(13, "Bat", "You already have bat ears.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedBatEars) && player.ears.type != Ears.BAT && player.soulforce < 100) addButtonDisabled(13, "Bat", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(13, "???", "You not yet unlocked this metamorphosis!");
+	addButton(14, "Back", accessPage1MetamorphMenu);
+}
+private function accessPage3EarsMenu():void {
+	menu();
+	if (player.hasStatusEffect(StatusEffects.UnlockedVampireEars) && player.ears.type != Ears.VAMPIRE && player.soulforce >= 100) addButton(0, "Vampire", metamorphVampireEars);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedVampireEars) && player.ears.type == Ears.VAMPIRE) addButtonDisabled(0, "Vampire", "You already have vampire ears.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedVampireEars) && player.ears.type != Ears.VAMPIRE && player.soulforce < 100) addButtonDisabled(0, "Vampire", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(0, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 private function accessHornsMenu():void {
@@ -629,6 +646,14 @@ private function accessPage2WingsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedMantisWingsLarge) && player.wings.type != Wings.MANTIS_LIKE_LARGE && player.soulforce < 200) addButtonDisabled(1, "Mantis(L)", "You not have enough Soulforce for this metamorphosis.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedMantisWingsLarge) && player.wings.type != Wings.MANTIS_LIKE_SMALL) addButtonDisabled(1, "Mantis(L)", "You not have proper type of wings for this metamorphosis.");
 	else addButtonDisabled(1, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedBatWings) && player.wings.type != Wings.BAT_ARM && player.soulforce >= 100) addButton(7, "Bat", metamorphBatWings);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedBatWings) && player.wings.type == Wings.BAT_ARM) addButtonDisabled(7, "Bat", "You already have bat wings.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedBatWings) && player.wings.type != Wings.BAT_ARM && player.soulforce < 100) addButtonDisabled(7, "Bat", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(7, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedVampireWings) && player.wings.type != Wings.VAMPIRE && player.soulforce >= 100) addButton(8, "Vampire", metamorphVampireWings);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedVampireWings) && player.wings.type == Wings.VAMPIRE) addButtonDisabled(8, "Vampire", "You already have vampire wings.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedVampireWings) && player.wings.type != Wings.VAMPIRE && player.soulforce < 100) addButtonDisabled(8, "Vampire", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(8, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage2MetamorphMenu);
 }
 private function accessPage1LegsMenu():void {
@@ -881,11 +906,25 @@ private function metamorphVampireEyes():void {
 	player.eyes.type = Eyes.VAMPIRE;
 	doNext(accessMetamorphMenu);
 }
+private function metamorphVampireWings():void {
+	clearOutput();
+	player.soulforce -= 100;
+	if (player.wings.type == Wings.BAT_ARM) {
+		outputText("\n\nYou cry out as your arms creak and twist, your bones breaking down and reforming in a frenzy. Your parchment-like skin begins to fall off in clumps, leaving the mess of malformed bones that are your arms right now naked for all to see. However, even as you watch, dark blood creeps over the bone, properly aligning them before healing them over, although not in their old form. Within seconds, the pain is gone, as your bones are remade into ones alike those you were born with, in structure if nothing else, the eldritch power of your blood finally ebbing away, but not before the last of it settles and turns into a brand new patch of skin. It's still sensitive, but you'll get used to it. You catch something moving on the edge of your peripheral vision, causing your hard-won instincts to kick in, muscle memory forcing you into a lunge away from whatever it was before you’re even fully aware of what’s happening. Instead of dodging with your usual grace, you stumble and roll, landing on your wings... Wait, <i>wings??</i> It seems that, while you were fascinated by your bloody shenanigans, you failed to notice that you were growing wings. Understandable, since your arms breaking themselves several times over tends to take priority over such things, attention-wise.");
+		outputText(" You shakily stand up, your balance still thrown off by the new limb, inwardly grumbling at how long is it going to take you to get used to them. Distracted as you are, both from the ordeal and your inner grumbling, your first attempt at walking inevitably ends with an intimate reunion of your face and the ground. This time, you don’t bother to keep your cursing to the confines of your own mind. <b>You will now be able to enjoy nightly flights with your brand new vampire wings.</b>");
+	}
+	else outputText("\n\nA terrible pain flares in the center of your back, a pain so intense that you black out briefly, coming back to your senses as you hit your head against the ground. You hear a horrifying ripping noise as your back stretches and tears to allow new bones to expand, black as tar and far lighter than most of the bones in your body. These new bones shift under your shoulder blade skin as you fall on all groaning in pain and clawing at the ground. In a flash of pain they violently break out of your skin sending blood everywhere as you make a chilling scream your wounds slowly closing on their own. Still panting from the pain, you take a look at your new appendage. It's a pair of large vampire wings of impressive size. Feeling chilly you fold them back on your body and you ought to admit they indeed look like a large cape. <b>You will be able to enjoy nightly flight using your brand new vampire wings.</b>");
+	player.wings.type = Wings.VAMPIRE;
+	player.wings.desc = "large bat";
+	doNext(accessMetamorphMenu);
+}
 private function metamorphVampireEars():void {
 	clearOutput();
 	player.soulforce -= 100;
-	
-
+	outputText("\n\n");
+	if (player.ears.type != Ears.HUMAN) outputText("Your ears revert back to their old human shape you had almost forgotten what humans ears felt like, before you can dwell on the implications of that, the changes continue. ");
+	outputText("Your ears begin to prickle as they elongate to a point, being now reminiscent of those of elves, goblins, or in your case, vampires. Aside from looking cute, you find your new ears have drastically improved your hearing. <b>Sound has become an entirely new experience now that you have pointy vampire ears!</b>");
+	player.ears.type = Ears.VAMPIRE;
 	doNext(accessMetamorphMenu);
 }
 private function metamorphBatCollar():void {
@@ -896,11 +935,21 @@ private function metamorphBatCollar():void {
 	player.hairType = RearBody.BAT_COLLAR;
 	doNext(accessMetamorphMenu);
 }
+private function metamorphBatWings():void {
+	clearOutput();
+	player.soulforce -= 100;
+	if (player.arms.type != Arms.HUMAN) restoreHumanArms();
+	outputText("\n\nLarge bones surge out of your wrists and elbows. You can feel your bones shifting and grinding all over your body as your skeletal structure begins changing into one more fit for a flying creature, with light, hollow bones. You collapse to the ground as they begin shifting proportions becoming thinner and longer to maximize area while reducing their density. Leathery flesh begins to cover your new bony protrusions, spreading between each of them like creeping moss.");
+	outputText(" Eventually, the skin stops growing and you admire your new arms. They are very obviously bat wings. You close them around your waist, like this they could easily be mistaken for a large cape when seen from afar. <b>You now have large bat wings.</b>");
+	player.wings.type = Wings.BAT_ARM;
+	player.wings.desc = "bat";
+	doNext(accessMetamorphMenu);
+}
 private function metamorphBatEars():void {
 	clearOutput();
 	player.soulforce -= 100;
-	
-
+	outputText("\n\nYour ears begin to prickle and burn as the skin tears and stretches, changing into wide, deep ears, perfect for catching any stray sound. Which becomes apparent when your hearing becomes far more clear than it has ever been. <b>Sound has become an entirely new experience now that you have bat ears!</b>");
+	player.ears.type = Ears.BAT;
 	doNext(accessMetamorphMenu);
 }
 private function metamorphRaijuHair():void {

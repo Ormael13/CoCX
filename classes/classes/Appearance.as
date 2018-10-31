@@ -84,6 +84,7 @@ public class Appearance extends Utils
 				else if (i_creature.hairType == Hair.FLUFFY) description += "fluffy ";
 				else if (i_creature.hairType == Hair.GRASS) description += "grass-";
 				else if (i_creature.hairType == Hair.SILKEN) description += "silk-like ";
+				else if (i_creature.hairType == Hair.BURNING) description += "burning ";
 				description += "mane";
 				if (i_creature.hairType == Hair.STORM) description += " that ends with glowing lightning shaped locks";
 				return description;
@@ -105,7 +106,8 @@ public class Appearance extends Utils
 			else if (i_creature.hairType == Hair.FLUFFY) description += "fluffy ";
 			else if (i_creature.hairType == Hair.GRASS) description += "grass-";
 			else if (i_creature.hairType == Hair.SILKEN) description += "silk-like ";
-			description += "hair";
+			if (i_creature.hairType == Hair.BURNING) description += "mane of fire that burns things only when you wish it to";
+			else description += "hair";
 			if (i_creature.hairType == Hair.STORM) description += " that ends with glowing lightning shaped locks";
 			return description;
 		}
@@ -2660,8 +2662,8 @@ public class Appearance extends Utils
 					[Wings.PLANT, "three pairs of cockvines"],
 					[Wings.MANTICORE_LIKE_SMALL, "small manticore-like"],
 					[Wings.MANTICORE_LIKE_LARGE, "large manticore-like"],
-					[Wings.BAT_ARM, "large manticore-like"],
-					[Wings.VAMPIRE, "large manticore-like"],
+					[Wings.BAT_ARM, "bat"],
+					[Wings.VAMPIRE, "large bat"],
 					[Wings.FEY_DRAGON_WINGS, "large majestic fey draconic"],
 					[Wings.FEATHERED_AVIAN, "avian"],
 					[Wings.NIGHTMARE, "leathery"]

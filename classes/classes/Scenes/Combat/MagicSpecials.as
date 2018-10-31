@@ -153,13 +153,25 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.ObsidianHeartFinalForm)) bd.requireMana(spellCost(50),true);
 			else bd.requireMana(spellCost(40),true);
 		}
+		if (player.hellcatScore() >= 10) {
+			//Feline Curse
+			bd = buttons.add("Feline curse", FelineCurse, "Turn the victim into a small domestic cat for 3 rounds at the cost of arousing yourself. \n");
+			if (player.hasStatusEffect(StatusEffects.CooldownFelineCurse)) {
+				bd.disable("<b>You need more time before you can use Feline curse again.</b>\n\n");
+			}
+			//Infernal Claw
+			bd = buttons.add("Infernal claw", InfernalClaw, "Enhance your attack with magic then wound an opponent with your claw to inflict damage and status. \n");
+			if (player.hasStatusEffect(StatusEffects.CooldownInfernalClaw)) {
+				bd.disable("<b>You need more time before you can use Infernal claw again.</b>\n\n");
+			}
+		}
 		if (player.statusEffectv1(StatusEffects.VampireThirst) >= 20) {
-			// Eclipsing shadow
+			//Eclipsing shadow
 			bd = buttons.add("Eclipsing shadow", EclipsingShadow, "Plunge the area in complete darkness denying vision to your opponent. \n");
 			if (player.hasStatusEffect(StatusEffects.CooldownEclipsingShadow)) {
 				bd.disable("<b>You need more time before you can use Eclipsing shadow again.</b>\n\n");
 			}
-			// Sonic scream
+			//Sonic scream
 			bd = buttons.add("Sonic scream", SonicScream, "Draw on your tainted blood power to unleash a powerful sonic shockwave. \n");
 			if (player.hasStatusEffect(StatusEffects.CooldownSonicScream)) {
 				bd.disable("<b>You need more time before you can use Sonic scream again.</b>\n\n");
@@ -2706,41 +2718,40 @@ public class MagicSpecials extends BaseCombatContent {
 		var chance:Number = Math.max(player.inte/baseInteReq, 0.05) + 25
 		chance = Math.min(chance, 0.80);
 
-		if (Math.random() < chance){
-		outputText("\n\n" + monster.a + monster.short + " hazard an answer and your smirk as you respond, “Sadly incorrect!” Your curse smiting your foe for its mistake, leaving it stunned by pain and pleasure.");
-		//damage dealth
-		var damage:Number = ((scalingBonusWisdom() * 0.5) + scalingBonusIntelligence()) * spellMod();
-		//Determine if critical hit!
-		var crit:Boolean = false;
-		var critChance:int = 5;
-		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
-			if (player.inte > 100) critChance += 10;
-		}
-		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-		if (rand(100) < critChance) {
-			crit = true;
-			damage *= 1.75;
-		}
-		damage = Math.round(damage);
-		damage = doDamage(damage);
-		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-
-		//Lust damage dealth
-		if (monster.lustVuln > 0) {
-			outputText(" ");
-			var lustDmg:Number = monster.lustVuln * ((player.inte + (player.wis * 0.50)) / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
-			if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
-			monster.teased(lustDmg);
-			if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-		}
-		monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
-		outputText("\n\n");
-		combat.heroBaneProc(damage);
+		if (Math.random() < chance) {
+			outputText("\n\n" + monster.a + monster.short + " hazard an answer and your smirk as you respond, “Sadly incorrect!” Your curse smiting your foe for its mistake, leaving it stunned by pain and pleasure.");
+			//damage dealth
+			var damage:Number = ((scalingBonusWisdom() * 0.5) + scalingBonusIntelligence()) * spellMod();
+			//Determine if critical hit!
+			var crit:Boolean = false;
+			var critChance:int = 5;
+			if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
+				if (player.inte <= 100) critChance += (player.inte - 50) / 50;
+				if (player.inte > 100) critChance += 10;
+			}
+			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+			if (rand(100) < critChance) {
+				crit = true;
+				damage *= 1.75;
+			}
+			damage = Math.round(damage);
+			damage = doDamage(damage);
+			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+			//Lust damage dealth
+			if (monster.lustVuln > 0) {
+				outputText(" ");
+				var lustDmg:Number = monster.lustVuln * ((player.inte + (player.wis * 0.50)) / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
+				if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
+				monster.teased(lustDmg);
+				if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+			}
+			monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+			outputText("\n\n");
+			combat.heroBaneProc(damage);
 		}
 		else {
-		outputText("\n\nTo your complete frustration, " + monster.a + monster.short + " answers correctly.");
-		outputText("\n\n");
+			outputText("\n\nTo your complete frustration, " + monster.a + monster.short + " answers correctly.");
+			outputText("\n\n");
 		}
 	if(monster.HP < 1) doNext(endHpVictory);
 	else enemyAI();
@@ -2977,6 +2988,41 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) player.removeStatusEffect(StatusEffects.GiantGrabbed);
 		if (player.hasStatusEffect(StatusEffects.Tentagrappled)) player.removeStatusEffect(StatusEffects.Tentagrappled);
 		possess();
+	}
+
+//Feline Curse
+	public function FelineCurse():void {
+		clearOutput();
+		player.createStatusEffect(StatusEffects.CooldownFelineCurse,15,0,0,0);
+		outputText("You almost purr the curse aloud, heat filling your mind and body as you turn your foe into a small harmless house cat. It begins running around screeching in terror and confusion.");
+		var selflust:Number = 6 + rand(3);
+		selflust += scalingBonusLibido() * 0.1;
+		selflust = Math.round(selflust);
+		dynStats("lus", selflust);
+		monster.createStatusEffect(StatusEffects.Polymorphed, 3, 0, 0, 0);
+		if (player.lust >= player.maxLust()) doNext(endLustLoss);
+		else enemyAI();
+	}
+
+//Infernal Claw
+	public function InfernalClaw():void {
+		clearOutput();
+		player.createStatusEffect(StatusEffects.CooldownInfernalClaw, 8, 0, 0, 0);
+		var damage:Number = 0;
+		damage += unarmedAttack();
+		damage *= spellMod();
+		damage = Math.round(damage);
+		damage = doDamage(damage);//phys dmg
+		damage = doDamage(damage);//fire dmg
+		outputText("You growl as you unsheath your claws, enhancing them with a dash of fire magic. You leap forward and viciously rend your opponent for " + damage + " physical and " + damage + " fire damage. Reeling in pain " + monster.a + monster.short + " begins to bleed and burn at the same time.");
+		monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.05, 0, 0);
+		monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
+		outputText("\n\n");
+		checkAchievementDamage(damage * 2);
+		combat.heroBaneProc(damage * 2);
+		doNext(playerMenu);
+		if (monster.HP <= 0) doNext(endHpVictory);
+		else enemyAI();
 	}
 
 //Eclipsing shadow

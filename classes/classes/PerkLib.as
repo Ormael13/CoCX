@@ -55,6 +55,7 @@ public class PerkLib
 				"Produces 50% more cum volume.", null, true);
 				
 		// Ascension perks
+		public static const AscensionCumHose:AscensionCumHosePerk = new AscensionCumHosePerk();
 		public static const AscensionDesires:AscensionDesiresPerk = new AscensionDesiresPerk();
 		public static const AscensionEndurance:AscensionEndurancePerk = new AscensionEndurancePerk();
 		public static const AscensionHardiness:AscensionHardinessPerk = new AscensionHardinessPerk();
@@ -62,6 +63,7 @@ public class PerkLib
 		public static const AscensionFortune:AscensionFortunePerk = new AscensionFortunePerk();
 		public static const AscensionFury:AscensionFuryPerk = new AscensionFuryPerk();
 		public static const AscensionInnerPower:AscensionInnerPowerPerk = new AscensionInnerPowerPerk();
+		public static const AscensionMilkFaucet:AscensionMilkFaucetPerk = new AscensionMilkFaucetPerk();
 		public static const AscensionMoralShifter:AscensionMoralShifterPerk = new AscensionMoralShifterPerk();
 		public static const AscensionMysticality:AscensionMysticalityPerk = new AscensionMysticalityPerk();
 		public static const AscensionSoulPurity:AscensionSoulPurityPerk = new AscensionSoulPurityPerk();
@@ -174,33 +176,6 @@ public class PerkLib
 				"Seductive experience causes your tease attacks to be 15% more effective.", null, true);
 		
 		// Ordinary (levelup) perks
-		public static const VenomGlands:PerkType = mk("Venom Glands", "Venom Glands",
-				"Your body posses rudimentary venom glands along with changes in teeth to been able use this venom when biting.",
-				"You choose the 'Venom Glands' perk, by becoming much more venomous your body started to denvelop crude version of venom glads along with slight changes to your teeth.");
-		public static const VenomGlandsEvolved:PerkType = mk("Venom Glands (Evolved)", "Venom Glands (Evolved)",
-				"Your body posses half developed venom glands increasing their capacity. (+5% poison resistance)",
-				"You choose the 'Venom Glands (Evolved)' perk, continuous usage of the venom caused your venom glands evolution into more complete form.");
-		public static const VenomGlandsFinalForm:PerkType = mk("Venom Glands (Final Form)", "Venom Glands (Final Form)",
-				"Your body posses fully developed venom glands with large reservoir of venom and good recharge speed. (+10% to poison resistance and +10 max Tou (scalable))",
-				"You choose the 'Venom Glands (Final Form)' perk, after long time iusage of venom frm your glands they evolved into their final form.");
-		public static const HollowFangs:PerkType = mk("Hollow Fangs", "Hollow Fangs",
-				"Your fangs and mouth started to slowly change showing rudimental ability to suck out fluids like blood. (+5 max stack of Vampire Thirst)",
-				"You choose the 'Hollow Fangs' perk. Due to often feeding on fluids like blood your mouth started to adapt to such feeding style.");
-		public static const HollowFangsEvolved:PerkType = mk("Hollow Fangs (Evolved)", "Hollow Fangs (Evolved)",
-				"Your ability to suck substances like blood have developed halfway. (+5 max stack of Vampire Thirst, +3% more healed from Vampire Bite)",
-				"You choose the 'Hollow Fangs (Evolved)' perk, changes to your mouth and tissues around progressing.");
-		public static const HollowFangsFinalForm:PerkType = mk("Hollow Fangs (Final Form)", "Hollow Fangs (Final Form)",
-				"You can now freely feed on blood and other atypical fluids. (+5 max stack of Vampire Thirst, +7% more healed from Vampire Bite, each Vampire Bite giving 2 stacks and deal +50% lust dmg)",
-				"You choose the 'Hollow Fangs (Final Form)' perk, you are well prepared to feed on substances like blood now.");
-		public static const VampiricBloodsteam:PerkType = mk("Vampiric Bloodsteam", "Vampiric Bloodsteam",
-				"Your bloodsteam started to adapt to presence of vampiric blood. (+15 max stacks of Vampire Thirst)",
-				"You choose the 'Vampiric Bloodsteam' perk. Your bloodsteam started to adapt to presence of vampiric blood.");
-		public static const VampiricBloodsteamEvolved:PerkType = mk("Vampiric Bloodsteam (Evolved)", "Vampiric Bloodsteam (Evolved)",
-				"Your bloodsteam halfway adapted to presence of vampiric blood. (+30 max stacks of Vampire Thirst, Vampire Thirst stack decay each 2 days)",
-				"You choose the 'Vampiric Bloodsteam (Evolved)' perk, increasing adaptation level to vampiric blood in your veins.");
-		public static const VampiricBloodsteamFinalForm:PerkType = mk("Vampiric Bloodsteam (Final Form)", "Vampiric Bloodsteam (Final Form)",
-				"Your bloodsteam fully adapted to presence of vampiric blood. (+60 max stacks of Vampire Thirst, 50% higher bonus from each Vampire Thirst stack)",
-				"You choose the 'Vampiric Bloodsteam (Final Form)' perk, .");
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You choose the '' perk, .");
@@ -1065,6 +1040,15 @@ public class PerkLib
 		public static const HoldWithBothHands:PerkType = mk("Hold With Both Hands", "Hold With Both Hands",
 				"Gain +20% strength modifier with melee weapons when not using a shield.",
 				"You choose the 'Hold With Both Hands' perk.  As long as you're wielding a melee weapon and you're not using a shield, you gain 20% strength modifier to damage.");
+		public static const HollowFangs:PerkType = mk("Hollow Fangs", "Hollow Fangs",
+				"Your fangs and mouth started to slowly change showing rudimental ability to suck out fluids like blood. (+5 max stack of Vampire Thirst)",
+				"You choose the 'Hollow Fangs' perk. Due to often feeding on fluids like blood your mouth started to adapt to such feeding style.");
+		public static const HollowFangsEvolved:PerkType = mk("Hollow Fangs (Evolved)", "Hollow Fangs (Evolved)",
+				"Your ability to suck substances like blood have developed halfway. (+5 max stack of Vampire Thirst, +3% more healed from Vampire Bite)",
+				"You choose the 'Hollow Fangs (Evolved)' perk, changes to your mouth and tissues around progressing.");
+		public static const HollowFangsFinalForm:PerkType = mk("Hollow Fangs (Final Form)", "Hollow Fangs (Final Form)",
+				"You can now freely feed on blood and other atypical fluids. (+5 max stack of Vampire Thirst, +7% more healed from Vampire Bite, each Vampire Bite giving 2 stacks and deal +50% lust dmg)",
+				"You choose the 'Hollow Fangs (Final Form)' perk, you are well prepared to feed on substances like blood now.");
 		public static const HotBlooded:PerkType = mk("Hot Blooded", "Hot Blooded",
 				"Raises minimum lust by 20.",
 				"You choose the 'Hot Blooded' perk.  As a result of your enhanced libido, your lust no longer drops below 20!");
@@ -2074,6 +2058,24 @@ public class PerkLib
 		public static const UnlockForce4thStage:PerkType = mk("Unlock: Force (4th Stage)", "Unlock: Force (4th Stage)",
 				"Unlocking magic potential grants additional 10 Mana on each lvl-up (retroactive effect).",
 				"You choose the 'Unlock: Force (4th Stage)' perk, allowing you to increase passive Mana gains on lvl-up!");
+		public static const VampiricBloodsteam:PerkType = mk("Vampiric Bloodsteam", "Vampiric Bloodsteam",
+				"Your bloodsteam started to adapt to presence of vampiric blood. (+15 max stacks of Vampire Thirst)",
+				"You choose the 'Vampiric Bloodsteam' perk. Your bloodsteam started to adapt to presence of vampiric blood.");
+		public static const VampiricBloodsteamEvolved:PerkType = mk("Vampiric Bloodsteam (Evolved)", "Vampiric Bloodsteam (Evolved)",
+				"Your bloodsteam halfway adapted to presence of vampiric blood. (+30 max stacks of Vampire Thirst, Vampire Thirst stack decay each 2 days)",
+				"You choose the 'Vampiric Bloodsteam (Evolved)' perk, increasing adaptation level to vampiric blood in your veins.");
+		public static const VampiricBloodsteamFinalForm:PerkType = mk("Vampiric Bloodsteam (Final Form)", "Vampiric Bloodsteam (Final Form)",
+				"Your bloodsteam fully adapted to presence of vampiric blood. (+60 max stacks of Vampire Thirst, 50% higher bonus from each Vampire Thirst stack)",
+				"You choose the 'Vampiric Bloodsteam (Final Form)' perk, .");
+		public static const VenomGlands:PerkType = mk("Venom Glands", "Venom Glands",
+				"Your body posses rudimentary venom glands along with changes in teeth to been able use this venom when biting.",
+				"You choose the 'Venom Glands' perk, by becoming much more venomous your body started to denvelop crude version of venom glads along with slight changes to your teeth.");
+		public static const VenomGlandsEvolved:PerkType = mk("Venom Glands (Evolved)", "Venom Glands (Evolved)",
+				"Your body posses half developed venom glands increasing their capacity. (+5% poison resistance)",
+				"You choose the 'Venom Glands (Evolved)' perk, continuous usage of the venom caused your venom glands evolution into more complete form.");
+		public static const VenomGlandsFinalForm:PerkType = mk("Venom Glands (Final Form)", "Venom Glands (Final Form)",
+				"Your body posses fully developed venom glands with large reservoir of venom and good recharge speed. (+10% to poison resistance and +10 max Tou (scalable))",
+				"You choose the 'Venom Glands (Final Form)' perk, after long time iusage of venom frm your glands they evolved into their final form.");
 		public static const VitalShot:PerkType = mk("Vital Shot", "Vital Shot",
 				"Gain a +10% chance to do a critical strike with arrows.",
 				"You choose the 'Vital Shot' perk, gaining an additional +10% chance to cause a critical hit with arrows.");
@@ -2349,6 +2351,7 @@ public class PerkLib
 		public static const ElvenBounty:ElvenBountyPerk = new ElvenBountyPerk();
 		public static const FclassHeavenTribulationSurvivor:PerkType = mk("F class Heaven Tribulation Survivor", "F class Heaven Tribulation Survivor",
 				"You have survived third trial on cultivation path: F class Heaven Tribulation.");
+		public static const FeralHunter:FeralHunterPerk = new FeralHunterPerk();
 		public static const FerasBoonAlpha:PerkType = mk("Fera's Boon - Alpha", "Fera's Boon - Alpha",
 				"Increases the rate your cum builds up and cum production in general.");
 		public static const FerasBoonBreedingBitch:PerkType = mk("Fera's Boon - Breeding Bitch", "Fera's Boon - Breeding Bitch",

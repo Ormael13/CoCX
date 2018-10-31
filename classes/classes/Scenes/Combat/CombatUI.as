@@ -349,7 +349,7 @@ public class CombatUI extends BaseCombatContent {
 			return;
 		}
 		if (player.hasStatusEffect(StatusEffects.TaintedMind)) {
-			(monster as DriderIncubus).taintedMindAttackAttempt();
+			combat.taintedMindAttackAttempt();
 			return;
 		}
 		submenu(physpButtons,mainMenu);

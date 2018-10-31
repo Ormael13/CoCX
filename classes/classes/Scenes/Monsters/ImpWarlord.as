@@ -106,6 +106,7 @@ public class ImpWarlord extends Imp
 			this.wings.type = Wings.IMP;
 			this.special1 = lustMagicAttack;
 			this.special2 = clawAttack;
+			this.special3 = doubleAttack;
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}

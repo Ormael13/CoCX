@@ -76,6 +76,11 @@ use namespace CoC;
 			addButton(14, "Leave", cleanupAfterCombat);
 			
 		}
+		public function impVictory2():void {
+			outputText("The greater imp falls to the ground panting and growling in anger.  He quickly submits however, the thoroughness of his defeat obvious.  You walk towards the imp who gives one last defiant snarl before slipping into unconsciousness.");
+			addButton(0, "Kill Him", killFeralImp);
+			addButton(4, "Leave", cleanupAfterCombat);
+		}
 		private function rapeImpWithDick(condomed:Boolean = false):void {
 			var x:Number = player.cockThatFits(monster.analCapacity());
 			if (x < 0) x = 0;
@@ -1550,6 +1555,31 @@ use namespace CoC;
 			doNext(playerMenu);
 		}
 		
+		//FERAL IMP LORD
+		public function impLordFeralEncounter():void {
+			clearOutput();
+			outputText("A large corrupted feral imp crosses your path. He flashes a cruel smile your way while flexing his massive muscles.  No way around it, you ready your [weapon] for the fight.");
+			if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Imps!</b>");
+			}
+			flags[kFLAGS.FERAL_EXTRAS] = 2;
+			startCombat(new FeralImps());
+		}
+		
+		//FERAL IMP WARLORD
+		public function impWarlordFeralEncounter():void {
+			clearOutput();
+			outputText("A large corrupted feral imp crosses your path.  He is wearing armor, unlike most of the imps.  He is also wielding a sword in his right hand.  He flashes a cruel smile your way while flexing his massive muscles.  No way around it, you ready your [weapon] for the fight.");
+			flags[kFLAGS.TIMES_ENCOUNTERED_IMP_WARLORD]++;
+			if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Imps!</b>");
+			}
+			flags[kFLAGS.FERAL_EXTRAS] = 3;
+			startCombat(new FeralImps());
+		}
+		
 		//Rewards
 		//+20 XP
 		//+7-15 Gems
@@ -2273,8 +2303,20 @@ use namespace CoC;
 			addButton(0, "Take Skull", takeSkull);
 			addButton(1, "Leave", cleanupAfterCombat);
 		}
+		private function killFeralImp():void {
+			clearOutput();
+			flags[kFLAGS.IMPS_KILLED]++;
+			outputText("You make a quick work of the feral imp before dragging the corpse away. That's one less foul creature prowling the realms. ");
+			if (player.cor < 25) dynStats("cor", -0.5);
+			menu();
+			addButton(0, "Take Skull", takeSkull2);
+			addButton(1, "Leave", cleanupAfterCombat);
+		}
 		private function takeSkull():void {
 			inventory.takeItem(useables.IMPSKLL, cleanupAfterCombat);
+		}
+		private function takeSkull2():void {
+			inventory.takeItem(useables.FIMPSKL, cleanupAfterCombat);
 		}
 	}
 }

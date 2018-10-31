@@ -2290,8 +2290,8 @@ public static const KINDRA_02281:int            		                        = 2281
 public static const KINDRA_02282:int                       			            = 2282;
 public static const SOUL_CULTIVATION:int               		      	                = 2283;
 public static const DISCOVERED_BLIGHT_RIDGE:int               	                    = 2284;
-public static const DISCOVERED_OUTER_BATTLEFIELD:int   	                            = 2285;
-public static const DISCOVERED_INNER_BATTLEFIELD:int                   			   	= 2286;
+public static const DISCOVERED_OUTER_BATTLEFIELD:int   	                            = 2285;	//NYU
+public static const DISCOVERED_INNER_BATTLEFIELD:int                   			   	= 2286;	//NYU
 public static const DISCOVERED_02287:int                                   = 2287;		//for Wuxia related area 3
 public static const DISCOVERED_02288:int                                   = 2288;		//for Pit area
 public static const DISCOVERED_02289:int                          		   = 2289;		//for Abyss area
@@ -2352,15 +2352,15 @@ public static const EVANGELINE_02343:int                                   = 234
 public static const EVANGELINE_02344:int                                   = 2344;
 public static const EVANGELINE_02345:int                                   = 2345;
 public static const MULTIPLE_ATTACK_STYLE:int            	                        = 2346;
-public static const SOULFORCE_USED_FOR_BREAKTHROUGH:int                             = 2347;
+public static const SOULFORCE_USED_FOR_BREAKTHROUGH:int                             = 2347;	//NYU
 public static const FLOWER_LEVEL:int                    			                = 2348;
 public static const SPIRIT_STONES:int                       			            = 2349;
 public static const SOULFORCE_GAINED_FROM_CULTIVATING:int                           = 2350;
-public static const UNLOCKED_MERIDIANS:int                      	                = 2351;
+public static const UNLOCKED_MERIDIANS:int                      	                = 2351;	//NYU
 public static const GARGOYLE_BODY_MATERIAL:int                                      = 2352;
 public static const GARGOYLE_WINGS_TYPE:int     	                                = 2353;
-public static const GARGOYLE_QUEST:int                                 			    = 2354;//do sprawdzania jak daleko w quescie do uzyskania gargoyle body PC jest
-public static const GARGOYLE_BODY_SCULPTING_PROGRESS:int                            = 2355;//jak bardzo ciało gargulca jest gotowe
+public static const GARGOYLE_QUEST:int                                 			    = 2354;
+public static const GARGOYLE_BODY_SCULPTING_PROGRESS:int                            = 2355;
 public static const GARGOYLE_02356:int                                   = 2356;
 public static const GARGOYLE_02357:int                                   = 2357;//na wszelki wypadek tyle flag zarezerwowanych
 public static const SOULFORCE_GAINED_FROM_CULTIVATING_2:int                         = 2358;
@@ -2602,11 +2602,11 @@ public static const UNKNOWN_FLAG_NUMBER_02593:int                               
 public static const UNKNOWN_FLAG_NUMBER_02594:int                                   = 2594;
 public static const UNKNOWN_FLAG_NUMBER_02595:int                                   = 2595;
 public static const UNKNOWN_FLAG_NUMBER_02596:int                                   = 2596;
-public static const UNKNOWN_FLAG_NUMBER_02597:int                                   = 2597;
+public static const FERAL_EXTRAS:int                                                = 2597;
 public static const AUTO_CAST_MANA_SHIELD:int                                   	= 2598;
-public static const IN_COMBAT_PLAYER_COMPANION_1_ACTION:int                         = 2599;
+public static const WITCHES_SABBATH:int                         					= 2599;
 public static const UNKNOWN_FLAG_NUMBER_02600:int                                   = 2600;
-public static const UNKNOWN_FLAG_NUMBER_02601:int                                   = 2601;
+public static const IN_COMBAT_PLAYER_COMPANION_1_ACTION:int                         = 2601;
 public static const UNKNOWN_FLAG_NUMBER_02602:int                                   = 2602;
 public static const UNKNOWN_FLAG_NUMBER_02603:int                                   = 2603;
 public static const UNKNOWN_FLAG_NUMBER_02604:int                                   = 2604;
@@ -3007,3 +3007,4 @@ public static const HYPER_HAPPY:int                                             
 public static const UNKNOWN_FLAG_NUMBER_02999:int                                   = 2999; // ------------------------- Jojo Debug Flag?
 	}    
 }
+

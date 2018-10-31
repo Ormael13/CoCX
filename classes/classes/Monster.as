@@ -1732,7 +1732,7 @@ import flash.utils.getQualifiedClassName;
 
 		public function doAI():void
 		{
-			if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FreezingBreathStun) || hasStatusEffect(StatusEffects.StunnedTornado)) {
+			if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FreezingBreathStun) || hasStatusEffect(StatusEffects.StunnedTornado) || hasStatusEffect(StatusEffects.Polymorphed)) {
 				if (!handleStun()) return;
 			}
 			if (hasStatusEffect(StatusEffects.Fear)) {
@@ -1751,6 +1751,22 @@ import flash.utils.getQualifiedClassName;
 				}
 				else {
 					addStatusValue(StatusEffects.AbilityCooldown1,1,-1);
+				}
+			}
+			if (hasStatusEffect(StatusEffects.AbilityCooldown2) ) {
+				if (statusEffectv1(StatusEffects.AbilityCooldown2) <= 0) {
+					removeStatusEffect(StatusEffects.AbilityCooldown2);
+				}
+				else {
+					addStatusValue(StatusEffects.AbilityCooldown2,1,-1);
+				}
+			}
+			if (hasStatusEffect(StatusEffects.AbilityCooldown3) ) {
+				if (statusEffectv1(StatusEffects.AbilityCooldown3) <= 0) {
+					removeStatusEffect(StatusEffects.AbilityCooldown3);
+				}
+				else {
+					addStatusValue(StatusEffects.AbilityCooldown3,1,-1);
 				}
 			}
 			//If grappling... TODO implement grappling
@@ -1872,6 +1888,7 @@ import flash.utils.getQualifiedClassName;
 				if (plural) EngineCore.outputText("Your foes are too busy trying to break out of their icy prison to fight back.");
 				else EngineCore.outputText("Your foe is too busy trying to break out of his icy prison to fight back.");
 			}
+			else if (hasStatusEffect(StatusEffects.Polymorphed)) EngineCore.outputText(capitalA + short + " is fighting against the curse.");
 			else if (hasStatusEffect(StatusEffects.MonsterAttacksDisabled)) EngineCore.outputText(capitalA + short + " try to hit you but is unable to reach you!");
 			else {
 				if (plural) EngineCore.outputText("Your foes are too dazed from your last hit to strike back!");
@@ -2210,6 +2227,14 @@ import flash.utils.getQualifiedClassName;
 				}
 				else outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " currently encased in the ice prison!</b>\n\n");
 			}
+			if(hasStatusEffect(StatusEffects.Polymorphed)) {
+				addStatusValue(StatusEffects.Polymorphed,1,-1);
+				if(statusEffectv1(StatusEffects.Polymorphed) <= 0) {
+					outputText("<b>" + capitalA + short + " has freed " + pronoun2 + "self from the curse!</b>\n\n");
+					removeStatusEffect(StatusEffects.Polymorphed);
+				}
+				else outputText("<b>" + capitalA + short + " is fighting against the curse.</b>\n\n");
+			}
 			if(hasStatusEffect(StatusEffects.Distracted)) {
 				addStatusValue(StatusEffects.Distracted,1,-1);
 				if(statusEffectv1(StatusEffects.Distracted) <= 0) {
@@ -2337,6 +2362,23 @@ import flash.utils.getQualifiedClassName;
 						else outputText("wound your horns");
 						outputText(" left behind. <b>(<font color=\"#800000\">" + store5 + "</font>)</b>\n\n");
 					}
+				}
+			}
+			if(hasStatusEffect(StatusEffects.Hemorrhage)) {
+				//Countdown to heal
+				addStatusValue(StatusEffects.Hemorrhage, 1, -1);
+				//Heal wounds
+				if (statusEffectv1(StatusEffects.Hemorrhage) <= 0) {
+					outputText("The wounds you left on " + a + short + " stop bleeding so profusely.\n\n");
+					removeStatusEffect(StatusEffects.Hemorrhage);
+				}
+				//Deal damage if still wounded.
+				else {
+					var hemorrhage:Number = 0;
+					hemorrhage += maxHP() * statusEffectv2(StatusEffects.Hemorrhage);
+					hemorrhage = SceneLib.combat.doDamage(hemorrhage);
+					if (plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your attack left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
+					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your attack left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
 				}
 			}
 			if (hasStatusEffect(StatusEffects.Bloodlust)) {
@@ -2706,4 +2748,4 @@ import flash.utils.getQualifiedClassName;
 		}
 	}
 }
-
+

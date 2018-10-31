@@ -21,6 +21,7 @@ public class Eyes extends BodyPart {
 	public static const GEMSTONES:int            = 16;
 	public static const FERAL:int            	 = 17;
 	public static const GRYPHON:int            	 = 18;
+	public static const INFERNAL:int           	 = 19;
 	// Don't forget to add new types in DebugMenu.as list EYE_TYPE_CONSTANTS
 	
 	public var colour:String = "brown";
