@@ -47,7 +47,7 @@ public class LoliBatGolem extends Monster
 			this.a = "the ";
 			this.short = "loli bat golem";
 			this.imageName = "loli bat golem";
-			this.long = "You're currently fighting loli bat golem. It's four feet tall bat that looks like twelves years old girl, her stone body is smooth and polished and she's using bare stone claws to fight. In the middle of her forehead there isa big letter A tattoo.";
+			this.long = "You're currently fighting loli bat golem. It's four feet tall bat that looks like twelves years old girl, her stone body is smooth and polished and she's using bare stone claws to fight. In the middle of her forehead there is a big letter A tattoo.";
 			this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 100, 0, 0, 0);
@@ -60,7 +60,7 @@ public class LoliBatGolem extends Monster
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
 			this.skinTone = "light grey";
-			this.lustVuln = .2;
+			this.lustVuln = 0;
 			this.tallness = 48;
 			this.drop = new ChainedDrop()
 					.add(useables.GOLCORE, 1);

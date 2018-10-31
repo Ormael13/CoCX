@@ -58,7 +58,11 @@ package classes.Scenes
 			outputText("-Natural Jouster and Natural Jouster (Master grade) perks can now work with Great Dive as long PC meet req. regarding weapon used during dive and have perk Death Plunge.\n");
 			outputText("-New quest on Adventure Guild: hunting feral imps. First time completing reward is Feral Hunter perk, second time completing is 1 perk ponit and all afterward completetions giving 7 spirit stones.\n");
 			outputText("-Fixed bugs: Unicorn/Alicorn/Bicorn/Nightmare 0 pts score, blank screen when learning new spell in Tel'Adre Tower, Gargoyle bonuses not applied at 20+ pts, wrong race classification when becoming Gargoyle, missing scene when PC hunger as Gargoyle drops to 0, missing gems reward from Prize option for Erlking enc, missing in few places unlocking fur for metamorph menu, Spectre perk evasion boost ");
-			outputText("effect lingering even without Incorporeality perk, Lust strike actual cost been lower than it was meantioned in tooltip, never ending Tainted Mind debuff and blank screen related to it, cat/pig score calculation bug, cheshire real stat bonuses not matching those from player app screen, demon slayer working on all enemies not only true demons\n\n\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("effect lingering even without Incorporeality perk, Lust strike actual cost been lower than it was meantioned in tooltip, never ending Tainted Mind debuff and blank screen related to it, cat/pig score calculation bug, cheshire real stat bonuses not matching those from player app screen, demon slayer working on all enemies not only true demons, loli bat golems not fully lust resistant\n\n");
+			/*ostatni punkt changeloguoutputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n\n\n\n\n\n\n\n\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
@@ -73,10 +77,6 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
