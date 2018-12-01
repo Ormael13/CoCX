@@ -1240,7 +1240,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (armType == Arms.WOLF || armType == Arms.FOX)
 			outputText("  Your arms are covered in thick fur ending up with clawed hands with animal like paw pads.");
 		else if (armType == Arms.LION)
-			outputText("  Your arms are covered in [skin coat.color] up to your shoulder where it turns to white. They end with a pair of five-toed lion paws armed with lethal claws.");
+			outputText("  Your arms are covered in [skin coat.color] fur up to your shoulder where it turns to white. They end with a pair of five-toed lion paws armed with lethal claws.");
 		else if (armType == Arms.KITSUNE)
 			outputText("  Your arms are somewhat human save for your sharp nails.");
 		else if (armType == Arms.LIZARD || armType == Arms.DRAGON)
@@ -1260,7 +1260,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (armType == Arms.RED_PANDA)
 			outputText("  Soft, black-brown fluff cover your arms. Your paws have cute, pink paw pads and short claws.");
 		else if (armType == Arms.CAT)
-			outputText("  Your arms are covered in [skin coat.color] up to your shoulder. They end with a pair of five-toed cat paws armed with lethal claws.");
+			outputText("  Your arms are covered in [skin coat.color] fur up to your shoulder. They end with a pair of five-toed cat paws armed with lethal claws.");
 		else if (armType == Arms.AVIAN)
 			outputText("  Your arms are covered with [skin coat.color] colored feathers just a bit past your elbow. Your humanoid hands have " + player.skinTone + ", slightly rough skin and end in short claws.");
 		else if (armType == Arms.GRYPHON)
@@ -2178,6 +2178,19 @@ public function RacialScores():void {
 	}
 	else if (player.devilkinScore() >= 1 && player.devilkinScore() < 7) outputText("\n<font color=\"#008000\">Half devil: " + player.devilkinScore() + "</font>");
 	else if (player.devilkinScore() < 1) outputText("\n<font color=\"#ff0000\">Half devil: 0</font>");
+	//Displacer beast
+	if (player.displacerbeastScore() >= 13) {
+		outputText("\n<font color=\"#0000a0\">Displacer Beast: " + player.displacerbeastScore() + " (+" + (80 * (1 + player.newGamePlusMod())) + " max Str, ");
+		if (player.findPerk(PerkLib.Flexibility) > 0) {
+			if (player.findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) outputText("+" + (120 * (1 + player.newGamePlusMod())) + " ");
+			else outputText("+" + (110 * (1 + player.newGamePlusMod())) + " ");
+		}
+		else outputText("+" + (100 * (1 + player.newGamePlusMod())) + " ");
+		outputText("max Spe, -" + (25 * (1 + player.newGamePlusMod())) + " max Int, -" + (20 * (1 + player.newGamePlusMod())) + " max Wis, +" + (60 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+	}
+	else if (player.displacerbeastScore() >= 1 && player.displacerbeastScore() < 13) outputText("\n<font color=\"#008000\">Displacer Beast: " + player.displacerbeastScore() + "</font>");
+	else if (player.displacerbeastScore() < 1) outputText("\n<font color=\"#ff0000\">Displacer Beast: 0</font>");
+	outputText(" <font color=\"#ff0000\">NOT YET FULLY FUNCTIONAL RACE FOR PC</font>");
 	//Dog
 	if (player.dogScore() >= 4) outputText("\n<font color=\"#0000a0\">Dog-morph: " + player.dogScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Spe, -" + (5 * (1 + player.newGamePlusMod())) + " max Int)</font>");
 	else if (player.dogScore() >= 1 && player.dogScore() < 4) outputText("\n<font color=\"#008000\">Dog-morph: " + player.dogScore() + "</font>");
@@ -2447,7 +2460,7 @@ public function RacialScores():void {
 	else if (player.nagaScore() < 1) outputText("\n<font color=\"#ff0000\">Half-Naga: 0</font>");
 	//Nekomata
 	if (player.nekomataScore() >= 11) {
-		outputText("\n<font color=\"#0000a0\">Nekomanta: " + player.nekomataScore() + " (");
+		outputText("\n<font color=\"#0000a0\">Nekomata: " + player.nekomataScore() + " (");
 		if (player.findPerk(PerkLib.Flexibility) > 0) {
 			if (player.findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) outputText("+" + (60 * (1 + player.newGamePlusMod())) + " ");
 			else outputText("+" + (50 * (1 + player.newGamePlusMod())) + " ");
@@ -2455,8 +2468,9 @@ public function RacialScores():void {
 		else outputText("+" + (40 * (1 + player.newGamePlusMod())) + " ");
 		outputText("max Spe, +" + (40 * (1 + player.newGamePlusMod())) + " max Int, +" + (85 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
 	}
-	else if (player.nekomataScore() >= 1 && player.nekomataScore() < 11) outputText("\n<font color=\"#008000\">Nekomanta: " + player.nekomataScore() + "</font>");
-	else if (player.nekomataScore() < 1) outputText("\n<font color=\"#ff0000\">Nekomanta: 0</font>");
+	else if (player.nekomataScore() >= 1 && player.nekomataScore() < 11) outputText("\n<font color=\"#008000\">Nekomata: " + player.nekomataScore() + "</font>");
+	else if (player.nekomataScore() < 1) outputText("\n<font color=\"#ff0000\">Nekomata: 0</font>");
+	outputText(" <font color=\"#ff0000\">NOT YET FULLY FUNCTIONAL RACE FOR PC</font>");
 	//Oni
 	if (player.oniScore() >= 12) outputText("\n<font color=\"#0000a0\">Oni: " + player.oniScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Str, +" + (60 * (1 + player.newGamePlusMod())) + " max Tou, -" + (20 * (1 + player.newGamePlusMod())) + " max Int, +" + (40 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
 	else if (player.oniScore() >= 6 && player.oniScore() < 12) outputText("\n<font color=\"#0000a0\">Half Oni: " + player.oniScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, -" + (10 * (1 + player.newGamePlusMod())) + " max Int, +" + (20 * (1 + player.newGamePlusMod())) + " max Wis)</font>");

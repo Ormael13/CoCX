@@ -122,8 +122,9 @@ package classes.Scenes.Places.HeXinDao
 			addButton(0, "Imps", BoardkeeperYangQuestImps1).hint("Cooper tier Quest.");
 			addButton(1, "Ferals(1)", BoardkeeperYangQuestFerals1).hint("Cooper tier Quest.");
 			addButton(2, "Ferals(2)", BoardkeeperYangQuestFerals2).hint("Cooper tier Quest.");
+			addButton(3, "Minotaurs", BoardkeeperYangQuestMinotaurs).hint("Cooper tier Quest.");
 			if (player.hasKeyItem("Adventurer Guild: Iron plate") >= 0) {
-				addButton(3, "Demons", BoardkeeperYangQuestDemons1).hint("Iron tier Quest.");
+				addButton(4, "Demons", BoardkeeperYangQuestDemons1).hint("Iron tier Quest.");
 			}
 			addButton(14, "Back", BoardkeeperYangMain);
 		}
@@ -177,8 +178,8 @@ package classes.Scenes.Places.HeXinDao
 						outputText("\"<i>Good job [name] here is your payment. By the way I though you may want to be able to sense corruption, can be useful to hunt demons here have this amulet.</i>\"\n\n");
 						outputText("(<b>Acquired demon hunter amulet!</b>)\n\n");
 						outputText("(<b>Gained New Perk: Sense Corruption</b>)");
+						if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0) player.addKeyValue("Adventurer Guild: Copper plate", 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 1, 1);
-						player.addKeyValue("Adventurer Guild: Copper plate", 1, 1);
 						player.createKeyItem("Demon Hunter Amulet", 0, 0, 0, 0);
 						player.createPerk(PerkLib.SenseCorruption, 0, 0, 0, 0);
 						player.destroyItems(useables.IMPSKLL, 3);
@@ -240,8 +241,8 @@ package classes.Scenes.Places.HeXinDao
 						outputText("Seems she misjudged you then?\n\n");
 						outputText("\"<i>Everyone makes mistakes and plants assignments are way more dangerous than imps, you clearly outpaced expectation. Here is your payment. This reminds me some man told me to leave you this scroll as a reward too... should help you sense the anger of your opponents he said.</i>\"\n\n");
 						outputText("(<b>Gained New Perk: Sense Wrath</b>)");
+						if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0) player.addKeyValue("Adventurer Guild: Copper plate", 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 1);
-						player.addKeyValue("Adventurer Guild: Copper plate", 1, 1);
 						player.createPerk(PerkLib.SenseWrath, 0, 0, 0, 0);
 						player.destroyItems(useables.SEVTENT, 1);
 					}
@@ -313,8 +314,8 @@ package classes.Scenes.Places.HeXinDao
 						outputText("\"<i>Ye and I are going to have a lot of dealings in the future. But first I want ya to follow me out in the town training area. I have a few things I would like to teach ye.</i>\"\n\n");
 						outputText("You spend the four next hour with the rattel morph learning new demon killing tricks. By the end of your training you have accumulated a good bank of knowledge on demon weak points and how to exploit them. Chika leaves by the end warning that you and her will eventually meet again.\n\n");
 						outputText("(<b>Gained New Perk: Demon Slayer</b>)");
+						if (player.hasKeyItem("Adventurer Guild: Iron plate") >= 0) player.addKeyValue("Adventurer Guild: Iron plate", 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 2, 1);
-						player.addKeyValue("Adventurer Guild: Iron plate", 1, 1);
 						player.createPerk(PerkLib.DemonSlayer, 0.1, 0, 0, 0);
 						player.destroyItems(useables.DEMSKLL, 1);
 					}
@@ -376,8 +377,8 @@ package classes.Scenes.Places.HeXinDao
 						outputText("Seems she misjudged you then?\n\n");
 						outputText("\"<i>Everyone makes mistakes and feral imps assignments are way more dangerous than normal imps, you clearly outpaced expectation. Here is your payment. This reminds me some man told me to leave you this scroll as a reward too... should help you fight feral opponents he said.</i>\"\n\n");
 						outputText("(<b>Gained New Perk: Feral Hunter</b>)");
+						if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0) player.addKeyValue("Adventurer Guild: Copper plate", 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 1);
-						player.addKeyValue("Adventurer Guild: Copper plate", 1, 1);
 						player.createPerk(PerkLib.FeralHunter, 0.1, 0, 0, 0);
 						player.destroyItems(useables.FIMPSKL, 3);
 					}
@@ -394,7 +395,59 @@ package classes.Scenes.Places.HeXinDao
 		}
 		public function BoardkeeperYangQuestMinotaurs():void {
 			clearOutput();
-			outputText("Placeholder for lazyLia writing ^^\n\n");//mino hunts
+			if (player.statusEffectv3(StatusEffects.AdventureGuildQuests1) > 0) {
+				if (player.statusEffectv3(StatusEffects.AdventureGuildQuests1) > 6) {
+					outputText("The panda decline the job request.\n\n");
+					outputText("\"<i>Sorry [name] this job is only once per day. Come back tomorrow.</i>\"\n\n");
+				}
+				else if (player.statusEffectv3(StatusEffects.AdventureGuildQuests1) == 6) {
+					if (player.hasItem(useables.MINOHOR, 4)) {
+						outputText("Yang count the horns then smile.\n\n");
+						outputText("\"<i>Well you did bag four out of four nice job. The guild asked me to pay you this reward money as usual for slaying bulls. Do come and find me later on for a new job, or for something else...</i>\"\n\n");
+						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 3, 1);
+						player.destroyItems(useables.MINOHOR, 4);
+						flags[kFLAGS.SPIRIT_STONES] += 8;
+						statScreenRefresh();
+					}
+					else outputText("\"<i>Hey [name], I counted those horns and clearly you forgot a few. Get out there and bring me the remaining ones.</i>\"\n\n");
+				}
+				else if (player.statusEffectv3(StatusEffects.AdventureGuildQuests1) == 4) {
+					outputText("\"<i>Oh so you wanna go out and hunt some extra minotaurs? Good! You make sure to kill four or as many as you can so we can breath fresh air safe from minotaur musk, got it?</i>\"\n\n");
+					player.addStatusValue(StatusEffects.AdventureGuildQuests1, 3, 2);
+				}
+				else if (player.statusEffectv3(StatusEffects.AdventureGuildQuests1) == 3) {
+					if (player.hasItem(useables.MINOHOR, 3)) {
+						outputText("Yang count the horns then smile.\n\n");
+						outputText("\"<i>Well you did bag three out of three nice job. The guild asked me to pay you with this special training scroll for slaying bulls. Do come and find me later on for a new job, or for something else...</i>\"\n\n");
+						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 3, 1);
+						player.destroyItems(useables.MINOHOR, 3);
+						player.perkPoints += 1;
+					}
+					else outputText("\"<i>Hey [name], I counted those horns and clearly you forgot a few. Get out there and bring me the remaining ones.</i>\"\n\n");
+				}
+				else if (player.statusEffectv3(StatusEffects.AdventureGuildQuests1) == 2) {
+					outputText("\"<i>Oh so you wanna go out and hunt some extra minotaurs? Good! You make sure to kill three or as many as you can so we can breath fresh air safe from minotaur musk, got it?</i>\"\n\n");
+					player.addStatusValue(StatusEffects.AdventureGuildQuests1, 3, 1);
+				}
+				else {
+					if (player.hasItem(useables.MINOHOR, 2)) {
+						outputText("Yang count the horns then smile.\n\n");
+						outputText("\"<i>Well you indeed did bag two out of two. The guild asked me to pay you this specific tome. Betcha will find nice uses for these. Do come and find me later on for a new job, or for something else...</i>\"\n\n");
+						outputText("Yang gives you a telltale wink before handing you over your reward.\n\n");
+						if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0) player.addKeyValue("Adventurer Guild: Copper plate", 1, 1);
+						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 3, 1);
+						player.destroyItems(useables.MINOHOR, 2);
+						inventory.takeItem(consumables.TCLEAVE, curry(enteringInn,false));
+					}
+					else outputText("\"<i>Hey [name], I counted those horns and clearly you forgot a few. Get out there and bring me the remaining ones.</i>\"\n\n");
+				}
+			}
+			else {
+				outputText("Yang takes on a grave expression.\n\n");
+				outputText("\"<i>Look [name] I won’t sugar coat it up for you. We’re buried knee deep into horsecocks, specificaly minotaur cocks. What the guild would like you to do is go out, kill some of the bulls out there, say two or so of them, and bring back their horns. You do that for us and we'll reward you accordingly.</i>\"\n\n");
+				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests1)) player.addStatusValue(StatusEffects.AdventureGuildQuests1, 3, 1);
+				else player.createStatusEffect(StatusEffects.AdventureGuildQuests1, 0, 0, 1, 0);
+			}
 			doNext(curry(enteringInn,false));
 		}
 		public function BoardkeeperYangQuestFerals3():void {

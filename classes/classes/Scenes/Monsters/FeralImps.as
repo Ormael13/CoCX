@@ -47,6 +47,22 @@ import classes.internals.*;
 			}
 		}
 		
+		override protected function performCombatAction():void
+		{
+			this.wrath += 100;
+			if (flags[kFLAGS.FERAL_EXTRAS] < 3) {
+				var choice1:Number = rand(3);
+				if (choice1 < 2) eAttack();
+				if (choice1 == 2) clawAttack();
+			}
+			else if (flags[kFLAGS.FERAL_EXTRAS] == 3) {
+				var choice2:Number = rand(4);
+				if (choice2 < 2) eAttack();
+				if (choice2 == 2) clawAttack();
+				if (choice2 == 3) doubleAttack();
+			}
+		}
+		
 		override public function defeated(hpVictory:Boolean):void
 		{
 			game.flags[kFLAGS.DEMONS_DEFEATED]++;
@@ -154,6 +170,7 @@ import classes.internals.*;
 					add(consumables.IMPFOOD,4).
 					add(jewelries.POWRRNG,1);
 			this.wings.type = Wings.IMP;
+			this.createPerk(PerkLib.EnemyFeralType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}

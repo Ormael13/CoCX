@@ -138,6 +138,204 @@ public final class Mutations extends MutationsHelper
 			player.refillHunger(15);
 		}
 
+		public function purePearl(player:Player):void
+		{
+			clearOutput();
+			outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your core.");
+			dynStats("lib", -5, "lus", -25, "cor", -10);
+			if (player.findPerk(PerkLib.PurityBlessing) < 0) player.createPerk(PerkLib.PurityBlessing, 0, 0, 0, 0);
+		}
+
+		public function ezekielfruit(player:Player):void
+		{
+			clearOutput();
+			outputText("You take first bite of fruit that Evangeline gave you.  Surprisingly it taste delicious as nothing else you tasted before so without thinking more you ate rest of the fruit.");
+			if (player.findPerk(PerkLib.EzekielBlessing) < 0) player.createPerk(PerkLib.EzekielBlessing, 0, 0, 0, 0);
+			statScreenRefresh();
+			dynStats("str", 5, "tou", 5, "spe", 5, "inte", 5, "wis", 5, "lib", 5, "sen", 5);
+			player.refillHunger(50);
+		}
+
+		public function lowgradeelementalPearl(player:Player):void
+		{
+			clearOutput();
+			outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a calming sensation of three steams of mystical energies spreading in your body.");
+			if (player.findPerk(PerkLib.ElementalConjurerMindAndBodyResolve) < 0) player.createPerk(PerkLib.ElementalConjurerMindAndBodyResolve, 0, 0, 0, 0);
+		}
+		public function middlegradeelementalPearl(player:Player):void
+		{
+			clearOutput();
+			outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a calming sensation of five steams of mystical energies spreading in your body.");
+			if (player.findPerk(PerkLib.ElementalConjurerMindAndBodyDedication) < 0) player.createPerk(PerkLib.ElementalConjurerMindAndBodyDedication, 0, 0, 0, 0);
+		}
+		public function highgradeelementalPearl(player:Player):void
+		{
+			clearOutput();
+			outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a calming sensation of seven steams of mystical energies spreading in your body.");
+			if (player.findPerk(PerkLib.ElementalConjurerMindAndBodySacrifice) < 0) player.createPerk(PerkLib.ElementalConjurerMindAndBodySacrifice, 0, 0, 0, 0);
+		}
+
+		public function bagofcosmos(player:Player):void
+		{
+			if (player.hasKeyItem("Bag of Cosmos") < 0) {
+				clearOutput();
+				outputText("You hang your bag of cosmos on your belt and bind using small amount of your soulforce.  ");
+				player.createKeyItem("Bag of Cosmos", 0, 0, 0, 0);
+				outputText("<b>You now have 12 item slots bag.</b>");
+				return;
+			} else if (player.hasKeyItem("Bag of Cosmos") >= 0) {
+				outputText("When binding this bag of cosmos you notice you already have one of such type.  Damn now this one is wasted.  Well next time you will remember to not bind new ones when you got one already.");
+			}
+		}
+
+		public function skypoisonpearl(player:Player):void
+		{
+			clearOutput();
+			outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your core.\n\n");
+			player.createKeyItem("Sky Poison Pearl", 0, 0, 0, 0);
+			outputText("<b>You now have 14(98) item slots in your pearl.</b>");
+			flags[kFLAGS.SKY_POISON_PEARL] = 2;
+		}
+
+		public function lowgradesoulforcerecoverypill(player:Player):void {
+			outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 25)");
+			player.soulforce += 25;
+			if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(5);
+			statScreenRefresh();
+		}
+		public function midgradesoulforcerecoverypill(player:Player):void {
+			outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 150)");
+			player.soulforce += 150;
+			if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(25);
+			statScreenRefresh();
+		}
+		public function highgradesoulforcerecoverypill(player:Player):void {
+			outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 900)");
+			player.soulforce += 900;
+			if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(125);
+			statScreenRefresh();
+		}
+	//	public function superiorgradesoulforcerecoverypill(player:Player):void {
+	//		outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 5400)");
+	//		player.soulforce += 5400;
+	//		if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+	//		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(625);
+	//		statScreenRefresh();
+	//	}
+
+		public function triplethrustmanual(player:Player):void
+		{
+			clearOutput();
+			outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Triple Thrust.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+			if (!player.hasStatusEffect(StatusEffects.KnowsTripleThrust)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Triple Thrust.</b>");
+				player.createStatusEffect(StatusEffects.KnowsTripleThrust, 0, 0, 0, 0);
+				return;
+			}
+			if (player.hasStatusEffect(StatusEffects.KnowsTripleThrust)) {
+				outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+				player.soulforce += 20;
+				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+			}
+		}
+		public function dracosweepmanual(player:Player):void
+		{
+			clearOutput();
+			outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Draco Sweep.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+			if (!player.hasStatusEffect(StatusEffects.KnowsDracoSweep)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Draco Sweep.</b>");
+				player.createStatusEffect(StatusEffects.KnowsDracoSweep, 0, 0, 0, 0);
+				return;
+			}
+			if (player.hasStatusEffect(StatusEffects.KnowsDracoSweep)) {
+				outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+				player.soulforce += 20;
+				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+			}
+		}
+		public function manybirdsmanual(player:Player):void
+		{
+			clearOutput();
+			outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Many Birds.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+			if (!player.hasStatusEffect(StatusEffects.KnowsManyBirds)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Many Birds.</b>");
+				player.createStatusEffect(StatusEffects.KnowsManyBirds, 0, 0, 0, 0);
+				return;
+			}
+			if (player.hasStatusEffect(StatusEffects.KnowsManyBirds)) {
+				outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+				player.soulforce += 20;
+				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+			}
+		}
+		public function cometmanual(player:Player):void
+		{
+			clearOutput();
+			outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Comet.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+			if (!player.hasStatusEffect(StatusEffects.KnowsComet)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Comet.</b>");
+				player.createStatusEffect(StatusEffects.KnowsComet, 0, 0, 0, 0);
+				return;
+			}
+			if (player.hasStatusEffect(StatusEffects.KnowsComet)) {
+				outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+				player.soulforce += 100;
+				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+			}
+		}
+		public function violetpupiltransformationmanual(player:Player):void
+		{
+			clearOutput();
+			outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Violet Pupil Transformation.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+			if (!player.hasStatusEffect(StatusEffects.KnowsVioletPupilTransformation)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Violet Pupil Transformation.</b>");
+				player.createStatusEffect(StatusEffects.KnowsVioletPupilTransformation, 0, 0, 0, 0);
+				return;
+			}
+			if (player.hasStatusEffect(StatusEffects.KnowsVioletPupilTransformation)) {
+				outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+				player.soulforce += 100;
+				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+			}
+		}
+		public function soulblastmanual(player:Player):void
+		{
+			clearOutput();
+			outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Soul Blast.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+			outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Soul Blast.</b>");
+			player.createStatusEffect(StatusEffects.KnowsSoulBlast, 0, 0, 0, 0);
+		}
+
+		public function verydilutedarcaneregenconcotion(player:Player):void {
+			outputText("You grab your mana potion, pull the cork off and swiftly chug it down.\n\n(Recovered mana: 40)");
+			player.mana += 40;
+			if (player.mana > player.maxMana()) player.mana = player.maxMana();
+			statScreenRefresh();
+		}
+		public function dilutedarcaneregenconcotion(player:Player):void {
+			outputText("You grab your mana potion, pull the cork off and swiftly chug it down.\n\n(Recovered mana: 240)");
+			player.mana += 240;
+			if (player.mana > player.maxMana()) player.mana = player.maxMana();
+			statScreenRefresh();
+		}
+		
+		public function tomeofcleave(player:Player):void
+		{
+			clearOutput();
+			if (!player.hasStatusEffect(StatusEffects.KnowsCleave)) {
+				outputText("\n\nYou read the tome, enlightening yourself to the art of making your blows properly connect to multiple targets. You gained <b>new physical special: Cleave.</b>");
+				player.createStatusEffect(StatusEffects.KnowsCleave, 0, 0, 0, 0);
+				return;
+			}
+			if (player.hasStatusEffect(StatusEffects.KnowsCleave)) {
+				outputText("When you open the tome, it turns out you already know this special.  Having a hunch you read whole tome and when it disappears into thin air you feel it does restored some of your fatigue.");
+				EngineCore.changeFatigue(-25);
+			}
+		}
+
 		/* ITEMZZZZZ FUNCTIONS GO HERE */
 		public function incubiDraft(tainted:Boolean,player:Player):void
 		{
@@ -2393,190 +2591,6 @@ public final class Mutations extends MutationsHelper
 				}
 				player.refillHunger(60);
 			}
-		}
-
-		public function purePearl(player:Player):void
-		{
-			clearOutput();
-			outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your core.");
-			dynStats("lib", -5, "lus", -25, "cor", -10);
-			if (player.findPerk(PerkLib.PurityBlessing) < 0) player.createPerk(PerkLib.PurityBlessing, 0, 0, 0, 0);
-		}
-
-		public function ezekielfruit(player:Player):void
-		{
-			clearOutput();
-			outputText("You take first bite of fruit that Evangeline gave you.  Surprisingly it taste delicious as nothing else you tasted before so without thinking more you ate rest of the fruit.");
-			if (player.findPerk(PerkLib.EzekielBlessing) < 0) player.createPerk(PerkLib.EzekielBlessing, 0, 0, 0, 0);
-			statScreenRefresh();
-			dynStats("str", 5, "tou", 5, "spe", 5, "inte", 5, "wis", 5, "lib", 5, "sen", 5);
-			player.refillHunger(50);
-		}
-
-		public function lowgradeelementalPearl(player:Player):void
-		{
-			clearOutput();
-			outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a calming sensation of three steams of mystical energies spreading in your body.");
-			if (player.findPerk(PerkLib.ElementalConjurerMindAndBodyResolve) < 0) player.createPerk(PerkLib.ElementalConjurerMindAndBodyResolve, 0, 0, 0, 0);
-		}
-		public function middlegradeelementalPearl(player:Player):void
-		{
-			clearOutput();
-			outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a calming sensation of five steams of mystical energies spreading in your body.");
-			if (player.findPerk(PerkLib.ElementalConjurerMindAndBodyDedication) < 0) player.createPerk(PerkLib.ElementalConjurerMindAndBodyDedication, 0, 0, 0, 0);
-		}
-		public function highgradeelementalPearl(player:Player):void
-		{
-			clearOutput();
-			outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a calming sensation of seven steams of mystical energies spreading in your body.");
-			if (player.findPerk(PerkLib.ElementalConjurerMindAndBodySacrifice) < 0) player.createPerk(PerkLib.ElementalConjurerMindAndBodySacrifice, 0, 0, 0, 0);
-		}
-
-		public function bagofcosmos(player:Player):void
-		{
-			if (player.hasKeyItem("Bag of Cosmos") < 0) {
-				clearOutput();
-				outputText("You hang your bag of cosmos on your belt and bind using small amount of your soulforce.  ");
-				player.createKeyItem("Bag of Cosmos", 0, 0, 0, 0);
-				outputText("<b>You now have 12 item slots bag.</b>");
-				return;
-			} else if (player.hasKeyItem("Bag of Cosmos") >= 0) {
-				outputText("When binding this bag of cosmos you notice you already have one of such type.  Damn now this one is wasted.  Well next time you will remember to not bind new ones when you got one already.");
-			}
-		}
-
-		public function skypoisonpearl(player:Player):void
-		{
-			clearOutput();
-			outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your core.\n\n");
-			player.createKeyItem("Sky Poison Pearl", 0, 0, 0, 0);
-			outputText("<b>You now have 14(98) item slots in your pearl.</b>");
-			flags[kFLAGS.SKY_POISON_PEARL] = 2;
-		}
-
-		public function lowgradesoulforcerecoverypill(player:Player):void {
-			outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 25)");
-			player.soulforce += 25;
-			if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(5);
-			statScreenRefresh();
-		}
-		public function midgradesoulforcerecoverypill(player:Player):void {
-			outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 150)");
-			player.soulforce += 150;
-			if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(25);
-			statScreenRefresh();
-		}
-		public function highgradesoulforcerecoverypill(player:Player):void {
-			outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 900)");
-			player.soulforce += 900;
-			if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(125);
-			statScreenRefresh();
-		}
-	//	public function superiorgradesoulforcerecoverypill(player:Player):void {
-	//		outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 5400)");
-	//		player.soulforce += 5400;
-	//		if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-	//		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(625);
-	//		statScreenRefresh();
-	//	}
-
-		public function triplethrustmanual(player:Player):void
-		{
-			clearOutput();
-			outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Triple Thrust.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-			if (!player.hasStatusEffect(StatusEffects.KnowsTripleThrust)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Triple Thrust.</b>");
-				player.createStatusEffect(StatusEffects.KnowsTripleThrust, 0, 0, 0, 0);
-				return;
-			}
-			if (player.hasStatusEffect(StatusEffects.KnowsTripleThrust)) {
-				outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-				player.soulforce += 20;
-				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-			}
-		}
-		public function dracosweepmanual(player:Player):void
-		{
-			clearOutput();
-			outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Draco Sweep.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-			if (!player.hasStatusEffect(StatusEffects.KnowsDracoSweep)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Draco Sweep.</b>");
-				player.createStatusEffect(StatusEffects.KnowsDracoSweep, 0, 0, 0, 0);
-				return;
-			}
-			if (player.hasStatusEffect(StatusEffects.KnowsDracoSweep)) {
-				outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-				player.soulforce += 20;
-				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-			}
-		}
-		public function manybirdsmanual(player:Player):void
-		{
-			clearOutput();
-			outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Many Birds.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-			if (!player.hasStatusEffect(StatusEffects.KnowsManyBirds)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Many Birds.</b>");
-				player.createStatusEffect(StatusEffects.KnowsManyBirds, 0, 0, 0, 0);
-				return;
-			}
-			if (player.hasStatusEffect(StatusEffects.KnowsManyBirds)) {
-				outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-				player.soulforce += 20;
-				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-			}
-		}
-		public function cometmanual(player:Player):void
-		{
-			clearOutput();
-			outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Comet.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-			if (!player.hasStatusEffect(StatusEffects.KnowsComet)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Comet.</b>");
-				player.createStatusEffect(StatusEffects.KnowsComet, 0, 0, 0, 0);
-				return;
-			}
-			if (player.hasStatusEffect(StatusEffects.KnowsComet)) {
-				outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-				player.soulforce += 100;
-				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-			}
-		}
-		public function violetpupiltransformationmanual(player:Player):void
-		{
-			clearOutput();
-			outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Violet Pupil Transformation.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-			if (!player.hasStatusEffect(StatusEffects.KnowsVioletPupilTransformation)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Violet Pupil Transformation.</b>");
-				player.createStatusEffect(StatusEffects.KnowsVioletPupilTransformation, 0, 0, 0, 0);
-				return;
-			}
-			if (player.hasStatusEffect(StatusEffects.KnowsVioletPupilTransformation)) {
-				outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-				player.soulforce += 100;
-				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-			}
-		}
-		public function soulblastmanual(player:Player):void
-		{
-			clearOutput();
-			outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Soul Blast.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-			outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Soul Blast.</b>");
-			player.createStatusEffect(StatusEffects.KnowsSoulBlast, 0, 0, 0, 0);
-		}
-
-		public function verydilutedarcaneregenconcotion(player:Player):void {
-			outputText("You grab your mana potion, pull the cork off and swiftly chug it down.\n\n(Recovered mana: 40)");
-			player.mana += 40;
-			if (player.mana > player.maxMana()) player.mana = player.maxMana();
-			statScreenRefresh();
-		}
-		public function dilutedarcaneregenconcotion(player:Player):void {
-			outputText("You grab your mana potion, pull the cork off and swiftly chug it down.\n\n(Recovered mana: 240)");
-			player.mana += 240;
-			if (player.mana > player.maxMana()) player.mana = player.maxMana();
-			statScreenRefresh();
 		}
 
 		public function useMarbleMilk(player:Player):void
@@ -12055,4 +12069,4 @@ public final class Mutations extends MutationsHelper
 		}
 	}
 }
-
+

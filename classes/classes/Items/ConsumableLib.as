@@ -187,6 +187,7 @@ public final class ConsumableLib extends BaseContent
 		public const PRNPKR :Consumable = new PrincessPucker();
 		public const SENSDRF:Consumable = new SensitivityDraft();
 		public const SMART_T:Consumable = new ScholarsTea();
+		public const TCLEAVE:SimpleConsumable = mk("TCleave", "TCleave", "a tome for Cleave special", 10, "This tome would teach you how to use Cleave special.", m.tomeofcleave);
 		public const VITAL_T:Consumable = new VitalityTincture();
 		public const VIXEN_T:SimpleConsumable = mk("Vixen T", "Vixen T.", "a cup of vixen tea", 15, "An exotic tea made by kitsunes. This herbal infusion is rumored to improve your expertise and expand your sexual knowledge.", m.vixenTea);
 		public const W_STICK:WingStick = new WingStick();

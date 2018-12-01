@@ -671,6 +671,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests1)) {
 					if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) > 6) player.addStatusValue(StatusEffects.AdventureGuildQuests1, 1, -3);
 					if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) > 6) player.addStatusValue(StatusEffects.AdventureGuildQuests1, 2, -3);
+					if (player.statusEffectv3(StatusEffects.AdventureGuildQuests1) > 6) player.addStatusValue(StatusEffects.AdventureGuildQuests1, 3, -3);
 				}
 				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests2)) {
 					if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) > 6) player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, -3);
@@ -1010,13 +1011,19 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				needNext = true;
 			}
 			//Loosing hellcat body parts
-			if ((player.tailType != Tail.BURNING || player.eyes.type != Eyes.INFERNAL || player.hairType != Hair.BURNING) && player.hellcatScore() > 8) {
-				outputText("\nAs you become less of a hellcat your inner fire entirely dies down, your body reverting to that of a standard feline.\n");
-				if (player.tailType == Tail.BURNING) player.tailType = Tail.CAT;
-				if (player.eyes.type == Eyes.INFERNAL) player.eyes.type = Eyes.CAT_SLITS;
-				if (player.hairType != Hair.BURNING) player.hairType = Hair.NORMAL;
-				if (flags[kFLAGS.WITCHES_SABBATH] > 1) flags[kFLAGS.WITCHES_SABBATH] = 1;
-				needNext = true;
+			if (player.hellcatScore() >= 10 && flags[kFLAGS.WITCHES_SABBATH] > 1) {
+				var hellcatparts:Number = 3;
+				if (player.tailType != Tail.BURNING) hellcatparts -= 1;
+				if (player.hairType != Hair.BURNING) hellcatparts -= 1;
+				if (player.eyes.type != Eyes.INFERNAL) hellcatparts -= 1;
+				if (hellcatparts < 3) {
+					outputText("\nAs you become less of a hellcat your inner fire entirely dies down, your body reverting to that of a standard feline.\n");
+					if (player.tailType == Tail.BURNING) player.tailType = Tail.CAT;
+					if (player.hairType == Hair.BURNING) player.hairType = Hair.NORMAL;
+					if (player.eyes.type == Eyes.INFERNAL) player.eyes.type = Eyes.CAT_SLITS;
+					if (flags[kFLAGS.WITCHES_SABBATH] > 1) flags[kFLAGS.WITCHES_SABBATH] = 1;
+					needNext = true;
+				}
 			}
 			//Reset bad end warning
 			if (flags[kFLAGS.FOX_BAD_END_WARNING] == 1) {
@@ -1083,9 +1090,10 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				outputText(" <b>You giggle in delight of your own corruption as you fall from grace into a ");
 				if (player.wings.type == Wings.NIGHTMARE) outputText("nightmare");
 				else outputText("bicorn");
-				outputText(". Mighty magical power start to swell in the twin horns on your forehead and you will gladly use them to despoil and tarnish anything pure or innocent left on mareth.</b>\n");
+				outputText(". Mighty magical power start to swell in the twin horns on your forehead, washing away whats left of any purity you may have, and you will gladly use them to despoil and tarnish anything pure or innocent left on mareth.</b>\n");
 				if (player.findPerk(PerkLib.AvatorOfPurity) >= 0) player.removePerk(PerkLib.AvatorOfPurity);
 				player.createPerk(PerkLib.AvatorOfCorruption, 0, 0, 0, 0);
+				player.cor = 100;
 				needNext = true;
 			}
 			if (player.horns.type == Horns.BICORN && player.wings.type == Wings.FEATHERED_ALICORN) {
@@ -1119,9 +1127,10 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				outputText(" <b>You laugh heartily at your unblemish pure form as you realise are an ");
 				if (player.wings.type == Wings.FEATHERED_ALICORN) outputText("alicorn");
 				else outputText("unicorn");
-				outputText(" now. Mighty magical power start to swell in the horn on your forehead and you will gladly use them to fight off the corruption that plagues mareth.</b>\n");
+				outputText(" now. Mighty magical power start to swell in the horn on your forehead, cleansing whats left of any corruption you may have, and you will gladly use them to fight off the corruption that plagues mareth.</b>\n");
 				if (player.findPerk(PerkLib.AvatorOfCorruption) >= 0) player.removePerk(PerkLib.AvatorOfCorruption);
 				player.createPerk(PerkLib.AvatorOfPurity, 0, 0, 0, 0);
+				player.cor = 0;
 				needNext = true;
 			}
 			if (player.horns.type == Horns.UNICORN && player.wings.type == Wings.NIGHTMARE) {

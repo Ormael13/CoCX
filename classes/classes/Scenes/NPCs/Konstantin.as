@@ -60,7 +60,8 @@ package classes.Scenes.NPCs
 			}
 			menu();
 			addButton(0, "Armor", meetKonstantinAtForestArmor);
-			addButton(1, "Weapon", meetKonstantinAtForestWeapon);
+			if (player.weaponName == "fists") addButtonDisabled(1, "Weapon", "You need to use any melee weapon to pick this option.");
+			else addButton(1, "Weapon", meetKonstantinAtForestWeapon);
 			addButton(2, "Nothing", meetKonstantinAtForestNothing);
 		}
 		public function meetKonstantinAtForestArmor():void {
@@ -854,7 +855,8 @@ package classes.Scenes.NPCs
 			outputText("Sounds like a good offer. What will you do?\n\n");
 			menu();
 			addButton(0, "Armor", meetKonstantinAtForestArmor);
-			addButton(1, "Weapons", meetKonstantinAtForestWeapon);
+			if (player.weaponName == "fists") addButtonDisabled(1, "Weapon", "You need to use any melee weapon to pick this option.");
+			else addButton(1, "Weapon", meetKonstantinAtForestWeapon);
 			addButton(2, "Nothing", meetKonstantinAtForestNothing);
 		}
 		

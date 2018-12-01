@@ -2164,8 +2164,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 		if (player.slotName != "VOID" && player.autoSave && mainView.getButtonText( 0 ) != "Game Over") 
 		{
 			trace("Autosaving to slot: " + player.slotName);
-
-CoC.instance.saves.saveGame(player.slotName);
+			CoC.instance.saves.saveGame(player.slotName);
         }
 		//Clear screen
 		if (clrScreen) clearOutput();
