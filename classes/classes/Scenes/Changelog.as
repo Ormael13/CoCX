@@ -23,7 +23,7 @@ package classes.Scenes
 		private function Changelog23():void {
 			clearOutput();
 			menu();
-			outputText("<b>Version 0.8j2:</b>\n\n");
+			outputText("<b>Version 0.8j2 (Transcendental Genetic Memory, Sphinx and Hellcat TF's, Witches Sabbath event, bugfixes):</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: Bat, Vampire\n");
 			outputText("-New rare ascension perk -> Ascension: Building Prestige (4th Stage). Req. Ascension: Building Prestige (3rd Stage) perk and be at fourth ascension. It costs 20 asc points and will give 1 more slot for Prestige Jobs.\n");
 			outputText("-New rare ascension perk -> Ascension: Ascension: Transcendental Genetic Memory (Stage 1). Req. Ascension: Natural Metamorph perk. It cost 10 asc points and allow to perm up to 10 selected Metamorph options.\n");
@@ -36,7 +36,7 @@ package classes.Scenes
 			outputText("-New enemy perk: Sentience. Current added to Basic Gargoyle, Guardian Quasi-Gargoyles and Obsidian Gargoyle. Without this perk any construct-type enemy will have 0 wrath, soulforce and mana.\n");
 			outputText("-PC can now make pernament choosen Metamorph options (similary to perming specific perks) during ascension. There is limit on this but...few of you wanted to been able to take your favourite one mutation options to higher NG games.\n");
 			outputText("-Finishing twice each of current available three Adventure Guild quest will give 2 ascension perk points (total 6 points for all 3 quests). Beating either ver of Marae would give 3 asc perk points instead 1. Asc perk points reward for completing Deep Cave and Lethice Stronghold increased to respectively 2 and 3 pts.\n");
-			outputText("-Succubi's Delight can be bought at Moga Hen shop.\n");//Voltage topaz, vial of Manticore Venom, vial of ominous red liquid - gdzieś poszukać miejsca na nie ale nie w Moga Hen shop
+			outputText("-Succubi's Delight can be bought at Moga Hen shop.\n");
 			outputText("-New item: Cold Fish Soup - buyable in Sean shop (incubus in Deep Cave/Zetaz Lair). Cost 20 gems. Lower between 2 to 5 libido and up to 10 lust after each use.\n");
 			outputText("-All tf effect that can remove feather hair will remove also quill hair.\n");
 			outputText("-Hummus can change now quill, ghost, fluffy, grass, silken hair into normal hair.\n");
@@ -56,13 +56,17 @@ package classes.Scenes
 			outputText("-During exploring Vulcanic Crag PC can meet new enemy - Hellcat. After meeting her once can find cave where gathered hellcat as long would be cat-morph (8+ pts in cat-morph score not any other cat race score), have 40+ int and know Whitefire spell.\n");
 			outputText("-During third visit when PC watched sabbath earlier is option to became hellcat itself. Bonuses for been one: +40 max Spe, +70 max Int, +40 max Lib, +25 min/max Sens.\n");
 			outputText("-Natural Jouster and Natural Jouster (Master grade) perks can now work with Great Dive as long PC meet req. regarding weapon used during dive and have perk Death Plunge.\n");
+			outputText("-Sometimes instead of normal imps can be encountered feral imps. They got better attack, weaker defense, a bit higher wrath cap + faster gaining wrath.\n");
 			outputText("-New quest on Adventure Guild: hunting feral imps. First time completing reward is Feral Hunter perk, second time completing is 1 perk ponit and all afterward completetions giving 7 spirit stones.\n");
 			outputText("-Fixed bugs: Unicorn/Alicorn/Bicorn/Nightmare 0 pts score, blank screen when learning new spell in Tel'Adre Tower, Gargoyle bonuses not applied at 20+ pts, wrong race classification when becoming Gargoyle, missing scene when PC hunger as Gargoyle drops to 0, missing gems reward from Prize option for Erlking enc, missing in few places unlocking fur for metamorph menu, Spectre perk evasion boost ");
 			outputText("effect lingering even without Incorporeality perk, Lust strike actual cost been lower than it was meantioned in tooltip, never ending Tainted Mind debuff and blank screen related to it, cat/pig score calculation bug, cheshire real stat bonuses not matching those from player app screen, demon slayer working on all enemies not only true demons, loli bat golems not fully lust resistant\n\n");
-			/*ostatni punkt changeloguoutputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n\n\n\n\n\n\n\n\n");
+			outputText("<b>Version 0.8j3:</b>\n\n");//Voltage topaz, vial of Manticore Venom, vial of ominous red liquid - gdzieś poszukać miejsca na nie ale nie w Moga Hen shop
+			outputText("-Req. Cow/Minotaur score for Evolved and Final Form racial perks are lowered by 1/2 pts.\n");
+			outputText("-Construct, Plant, Goo type enemies gained immunity to bleed.\n");
+			outputText("-New quest on Adventure Guild: hunting minotaurs. First time completing reward is tome teaching Cleave, second time completing is 1 perk ponit and all afterward completetions giving 8 spirit stones.\n");
+			outputText("-New P. Special: Cleave - req. finishing 1 time minotaur hunt quest to get tome teaching this special. It can be used with either axe, sword or dueling sword type weapon and would apply bleeding on top of normal damage. If it's used on groups base dmg (not bleed) would be 3x higher.\n");
+			outputText("-Fixed bugs: Hellcat reverting to Cat text proc-ing each hour, overlapping all cat races racial bonuses, can't use weapon sharpening option in Konstantin menu if PC not hold any melee weapon\n\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("<b>Version 0.8k:</b>\n\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
@@ -77,13 +81,15 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Cat, Cheshire cat, Unicorn, Alicorn, Bicorn, Nightmare, Sphinx, Hellcat
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -104,7 +110,7 @@ package classes.Scenes
 			outputText("\n");wolf pepper - nieużywany item chyba co można go by w wolf TF zmienić: dodaje special coś na kształt likantropii ^^
 			outputText("\n");aqua seed - item mający być siren tf item
 			outputText("\n");
-			outputText("<b>Version 0.8k:</b>\n\n");
+			outputText("<b>Version 0.8l:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("\n");
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bedą one wcześniej już za czesto wypadać
@@ -119,6 +125,12 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): dodać yuki-onna TF
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

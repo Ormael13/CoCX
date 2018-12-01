@@ -67,6 +67,10 @@ public class Questlog extends BaseContent
 			if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 2 || player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 4 || player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 7) outputText("Completed (for today)");
 			else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 1 || player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 3 || player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 6) outputText("In Progress");
 			else outputText("Not Started");
+			outputText("\n<b>Minotaurs Hunt:</b> ");
+			if (player.statusEffectv3(StatusEffects.AdventureGuildQuests1) == 2 || player.statusEffectv3(StatusEffects.AdventureGuildQuests1) == 4 || player.statusEffectv3(StatusEffects.AdventureGuildQuests1) == 7) outputText("Completed (for today)");
+			else if (player.statusEffectv3(StatusEffects.AdventureGuildQuests1) == 1 || player.statusEffectv3(StatusEffects.AdventureGuildQuests1) == 3 || player.statusEffectv3(StatusEffects.AdventureGuildQuests1) == 6) outputText("In Progress");
+			else outputText("Not Started");
 			outputText("\n<b>Feral Imps Hunt:</b> ");
 			if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 2 || player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 4 || player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 7) outputText("Completed (for today)");
 			else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 1 || player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 3 || player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 6) outputText("In Progress");

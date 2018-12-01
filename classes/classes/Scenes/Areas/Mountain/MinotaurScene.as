@@ -24,6 +24,32 @@ private function minotaurNeed():Boolean {
  */
 public function minoVictoryRapeChoices():void {
 	spriteSelect(44);
+	var feedposit:String = "B. Feed";
+	clearOutput();
+	if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1) {
+		outputText("Smiling down at your vanquished foe, you feel a familiar hunger growing within you.  What do you do?");
+	}
+	//Not an addict
+	else if((player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) || (feedposit == "Lay Eggs" && flags[kFLAGS.SFW_MODE] <= 0)) {
+		if(monster.lust >= monster.maxLust()) outputText("You smile in satisfaction as the " + monster.short + " drops down on all fours and begins masturbating feverishly.  Sadly you realize your own needs have not been met.  Of course you could always fuck the eager bull...\n\nWhat do you do?");
+		else outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.  Sadly you realize your own needs have not been met.  Of course you could always rape the poor thing...\n\nWhat do you do?");
+	}
+	//Not able to rape but a feeder
+	else if(player.hasStatusEffect(StatusEffects.Feeder) && feedposit == "B. Feed" && flags[kFLAGS.SFW_MODE] <= 0) {
+		if(monster.lust >= monster.maxLust()) outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.  Sadly you realize your own need to breastfeed has not been met.  You could always let the poor thing have a drink...\n\nDo you?");
+		else outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.  Sadly you realize your own need to breastfeed has not been met.  You could always let the poor thing have a drink...\n\nWhat do you do?");
+	}
+	//No rape, no feeder
+	else {
+		if(monster.lust >= monster.maxLust()) outputText("You smile in satisfaction as the " + monster.short + " drops down on all fours and begins masturbating feverishly.");
+		else outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.");
+		cleanupAfterCombat();
+		return;
+	}
+	postfightoptions();
+}
+private function postfightoptions():void {
+	spriteSelect(44);
 	//Determine if PC can rape with a dick!
 	var x:Number = player.cockThatFits(monster.analCapacity());
 	var dickRape:Function = null;
@@ -78,37 +104,7 @@ public function minoVictoryRapeChoices():void {
 		filled = takeMinoCumDirectly;
 	}
 */	//Hungry for cum?  Grab a snickers.
-	clearOutput();
-	if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1) {
-		outputText("Smiling down at your vanquished foe, you feel a familiar hunger growing within you.  What do you do?");
-	}
-	//Not an addict
-	else if((player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) || (feedposit == "Lay Eggs" && flags[kFLAGS.SFW_MODE] <= 0)) {
-		if(monster.lust >= monster.maxLust()) outputText("You smile in satisfaction as the " + monster.short + " drops down on all fours and begins masturbating feverishly.  Sadly you realize your own needs have not been met.  Of course you could always fuck the eager bull...\n\nWhat do you do?");
-		else outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.  Sadly you realize your own needs have not been met.  Of course you could always rape the poor thing...\n\nWhat do you do?");
-	}
-	//Not able to rape but a feeder
-	else if(player.hasStatusEffect(StatusEffects.Feeder) && feedposit == "B. Feed" && flags[kFLAGS.SFW_MODE] <= 0) {
-		if(monster.lust >= monster.maxLust()) outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.  Sadly you realize your own need to breastfeed has not been met.  You could always let the poor thing have a drink...\n\nDo you?");
-		else outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.  Sadly you realize your own need to breastfeed has not been met.  You could always let the poor thing have a drink...\n\nWhat do you do?");
-	}
-	//No rape, no feeder
-	else {
-		if(monster.lust >= monster.maxLust()) outputText("You smile in satisfaction as the " + monster.short + " drops down on all fours and begins masturbating feverishly.");
-		else outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.");
-		cleanupAfterCombat();
-		return;
-	}
-	//No rapinz if not horney!
-/*	if(player.lust < 33) {
-		dickRape = null;
-		tentaRape = null;
-		hermRape = null;
-		urethralPen = null;
-		bj = null;
-	}
-	choices("Use Cock", dickRape, "Use Both", hermRape, "TentacleDick", tentaRape, "UrethraFuck", urethralPen, "Get Filled", filled, tempText, temp, "MakeHimSuck", bj, feedposit, temp2, "Leave", cleanupAfterCombat);
-*/	menu();
+	menu();
 	if (player.lust >= 33) {
 		if (dickRape != null) addButton(0, "Use Cock", bumRapeaMinotaur);
 		if (player.hasVagina())  addButton(1, "Use Vagina", girlRapeAMinotaur);
@@ -129,12 +125,23 @@ public function minoVictoryRapeChoices():void {
 			addButton(12, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
 		}
 	}
-	if (player.tailType == Tail.MANTICORE_PUSSYTAIL) addButton(13, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
+	addButton(13, "Other", otherpostfightoptions);
 	addButton(14, "Leave", cleanupAfterCombat);
 	if(x < 0 && player.hasCock()) outputText("\nSadly, you're too well endowed to penetrate the minotaur.");
 	if(player.gender == 3 && player.isTaur()) outputText("\nIf you had a different body type you might be able to penetrate him while taking him, but as a centaur that's not an option.");
 }
-
+private function otherpostfightoptions():void {
+	menu();
+	addButton(0, "Kill", killMinotaur);
+	if (player.tailType == Tail.MANTICORE_PUSSYTAIL) addButton(13, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
+	addButton(14, "Back", postfightoptions);
+}
+private function killMinotaur():void {
+	clearOutput();
+	outputText("You finish off the minotaur and claim his horns as your prize. ");
+	if (player.cor < 25) dynStats("cor", -0.5);
+	inventory.takeItem(useables.MINOHOR, cleanupAfterCombat);
+}
 
 //Tentacle scenes require multi dicks at minimum
 //(dicks > 1 && tentacledicks > 0)

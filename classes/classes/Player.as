@@ -758,6 +758,11 @@ use namespace CoC;
 		{
 			return weapon == game.weapons.FRTAXE || weapon == game.weapons.TDAGGER;
 		}
+		//Cleave compatibile weapons
+		public function haveWeaponForCleave():Boolean
+		{
+			return isAxeTypeWeapon() || isSwordTypeWeapon() || isDuelingTypeWeapon();
+		}
 		//Natural Jouster perks req check
 		public function isMeetingNaturalJousterReq():Boolean
 		{
@@ -837,11 +842,9 @@ use namespace CoC;
 					attack += SceneLib.combat.unarmedAttack();
 				}
 			}
-			if (arms.type == Arms.MANTIS && weaponName == "fists") {
-				attack += (15 * newGamePlusMod);
-			}
-			if ((arms.type == Arms.YETI || arms.type == Arms.CAT) && weaponName == "fists") {
-				attack += (5 * newGamePlusMod);
+			if (weaponName == "fists") {
+				if (arms.type == Arms.MANTIS) attack += (15 * newGamePlusMod);
+				if (arms.type == Arms.YETI || arms.type == Arms.CAT) attack += (5 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.PrestigeJobTempest) >= 0 && weaponPerk == "Dual") {
 				attack += (5 * newGamePlusMod);
@@ -2192,13 +2195,9 @@ use namespace CoC;
 					}
 				}
 			}
-			if (sphinxScore() >= 14)
-			{
-				race = "Sphinx";
-			}
 			if (nekomataScore() >= 11)
 			{
-				race = "Nekomanta";
+				race = "Nekomata";
 			}
 			if (cheshireScore() >= 11)
 			{
@@ -2207,6 +2206,14 @@ use namespace CoC;
 			if (hellcatScore() >= 10)
 			{
 				race = "Hellcat";
+			}
+			if (displacerbeastScore() >= 13)
+			{
+				race = "Displacer beast";
+			}
+			if (sphinxScore() >= 14)
+			{
+				race = "Sphinx";
 			}
 			if (lizardScore() >= 4)
 			{
@@ -3049,6 +3056,8 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (hellcatScore() >= 10)
 				grandchimeraCounter++;
+			if (displacerbeastScore() >= 13)
+				grandchimeraCounter++;
 			if (lizardScore() >= 8)
 				grandchimeraCounter++;
 			if (dragonScore() >= 10)
@@ -3733,8 +3742,6 @@ use namespace CoC;
 				catCounter -= 2;
 			if (hasFur() || hasPartialCoat(Skin.FUR))
 				catCounter++;
-			if (hairColor == "lilac and white striped" && coatColor == "lilac and white striped")
-				catCounter -= 7;
 			if (horns.type == Horns.DEMON || horns.type == Horns.DRACONIC_X2 || horns.type == Horns.DRACONIC_X4_12_INCH_LONG)
 				catCounter -= 2;
 			if (wings.type == Wings.BAT_LIKE_TINY || wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.BAT_LIKE_LARGE || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.BAT_LIKE_LARGE_2 || wings.type == Wings.DRACONIC_HUGE)
@@ -3755,6 +3762,7 @@ use namespace CoC;
 				catCounter += 1;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && catCounter >= 8)
 				catCounter += 1;
+			if (tailCount > 1 || (hairColor == "lilac and white striped" && coatColor == "lilac and white striped") || eyes.type == Eyes.INFERNAL || hairType == Hair.BURNING || tailType == Tail.BURNING) catCounter = 0;
 			if (isGargoyle()) catCounter = 0;
 			End("Player","racialScore");
 			return catCounter;
@@ -3771,7 +3779,7 @@ use namespace CoC;
 				nekomataCounter++;
 			if (tongue.type == Tongue.CAT)
 				nekomataCounter++;
-			if (tailType == Tail.CAT)
+			if (tailType == Tail.CAT && tailCount == 2)
 				nekomataCounter++;
 			if (arms.type == Arms.CAT)
 				nekomataCounter++;
@@ -3795,6 +3803,7 @@ use namespace CoC;
 				nekomataCounter += 1;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && nekomataCounter >= 8)
 				nekomataCounter += 1;
+			if (catScore() >= 8 || (hairColor == "lilac and white striped" && coatColor == "lilac and white striped") || eyes.type == Eyes.INFERNAL || hairType == Hair.BURNING || tailType == Tail.BURNING) nekomataCounter = 0;
 			if (isGargoyle()) nekomataCounter = 0;
 			End("Player","racialScore");
 			return nekomataCounter;
@@ -3837,6 +3846,7 @@ use namespace CoC;
 				cheshireCounter += 1;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && cheshireCounter >= 8)
 				cheshireCounter += 1;
+			if (catScore() >= 8 || tailCount > 1 || eyes.type == Eyes.INFERNAL || hairType == Hair.BURNING || tailType == Tail.BURNING) cheshireCounter = 0;
 			if (isGargoyle()) cheshireCounter = 0;
 			End("Player","racialScore");
 			return cheshireCounter;
@@ -3881,9 +3891,45 @@ use namespace CoC;
 				hellcatCounter += 1;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && hellcatCounter >= 8)
 				hellcatCounter += 1;
+			if (catScore() >= 8 || tailCount > 1 || (hairColor == "lilac and white striped" && coatColor == "lilac and white striped") || eyes.type != Eyes.INFERNAL || hairType != Hair.BURNING || tailType != Tail.BURNING) hellcatCounter = 0;
 			if (isGargoyle()) hellcatCounter = 0;
 			End("Player","racialScore");
 			return hellcatCounter;
+		}
+		//Determine displacer beast Rating
+		public function displacerbeastScore():Number {
+			Begin("Player","racialScore","displacerbeast");
+			var displacerbeastCounter:Number = 0;
+			if (eyes.type == Eyes.CAT_SLITS)
+				displacerbeastCounter++;
+			if (tongue.type == Tongue.CAT)
+				displacerbeastCounter++;
+			if (tailType == Tail.CAT)
+				displacerbeastCounter++;
+			if (arms.type == Arms.CAT)
+				displacerbeastCounter++;//a może specjalna wersja ramion tzn. 4 ramiona kocie ^^
+			if (lowerBody == LowerBody.CAT)
+				displacerbeastCounter++;
+			if (findPerk(PerkLib.Flexibility) > 0)
+				displacerbeastCounter++;
+			if (findPerk(PerkLib.CatlikeNimbleness) > 0)
+				displacerbeastCounter++;
+			if (findPerk(PerkLib.CatlikeNimblenessEvolved) > 0)
+				displacerbeastCounter++;
+			if (findPerk(PerkLib.CatlikeNimbleness) >= 0 && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
+				displacerbeastCounter++;
+			if (findPerk(PerkLib.CatlikeNimblenessEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
+				displacerbeastCounter++;
+			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+				displacerbeastCounter += 10;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && displacerbeastCounter >= 4)
+				displacerbeastCounter += 1;
+			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && displacerbeastCounter >= 8)
+				displacerbeastCounter += 1;
+			if (catScore() >= 8 || tailCount > 1 || (hairColor == "lilac and white striped" && coatColor == "lilac and white striped") || eyes.type == Eyes.INFERNAL || hairType == Hair.BURNING || tailType == Tail.BURNING) displacerbeastCounter = 0;
+			if (isGargoyle()) displacerbeastCounter = 0;
+			End("Player","racialScore");
+			return displacerbeastCounter;
 		}
 
 		//Determine lizard rating
@@ -6832,6 +6878,14 @@ use namespace CoC;
 				maxInt += (70 * newGamePlusMod);
 				maxLib += (40 * newGamePlusMod);
 				maxSen += (25 * newGamePlusMod);
+			}
+			if (displacerbeastScore() >= 13) {
+				maxStr += (80 * newGamePlusMod);
+				if (findPerk(PerkLib.Flexibility) > 0) maxSpe += (110 * newGamePlusMod);
+				else maxSpe += (100 * newGamePlusMod);
+				maxInt -= (25 * newGamePlusMod);
+				maxWis -= (20 * newGamePlusMod);
+				maxLib += (60 * newGamePlusMod);
 			}
 			if (bunnyScore() >= 4) {
 				maxSpe += (10 * newGamePlusMod);

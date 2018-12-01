@@ -34,6 +34,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	internal function buildMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
 		buttons.add("PowerAttack", powerAttackMenu).hint("Do a single way more powerfull wrath-enhanced strike.");
+		if (player.haveWeaponForCleave()) buttons.add("Cleave", pcCleave).hint("Deal extra damage to multiple foes. Cause area effect bleed damage.");
 		if (player.hasPerk(PerkLib.SneakyAttack) && player.haveWeaponForSneakAttack() && (monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.FreezingBreathStun) || monster.hasStatusEffect(StatusEffects.StunnedTornado)
 			|| monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind) || monster.hasStatusEffect(StatusEffects.Distracted))) buttons.add("SneakAttack", sneakAttack).hint("Strike the vitals of a stunned, blinded or distracted opponent for heavy damage.");
 		if (player.hasPerk(PerkLib.Feint)) buttons.add("Feint", feint).hint("Attempt to feint an opponent into dropping its guard.");
@@ -770,6 +771,108 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.spe >= 300) powerfistsmultipowervalue += 1;
 		}
 		return powerfistsmultipowervalue;
+	}
+	
+	public function pcCleave():void {
+		clearOutput();
+		outputText("You go for one mighty swing of your [weapon], effectively cleaving through everyone in front of you in an horizontal arc. Your strike leaves ");
+		if (!monster.hasPerk(PerkLib.EnemyGroupType)) outputText("a ");
+		outputText("deep gushing wound");
+		if (monster.hasPerk(PerkLib.EnemyGroupType)) outputText("s");
+		outputText(" in your ");
+		if (monster.hasPerk(PerkLib.EnemyGroupType)) outputText("foes. ");
+		else outputText("foe. ");
+		var damage:Number = 0;
+		damage += player.str;
+		damage += scalingBonusStrength() * 0.25;
+		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
+		if (damage < 10) damage = 10;
+		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
+		else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
+		else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (3.75 + ((player.weaponAttack - 100) * 0.02));
+		else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (4.75 + ((player.weaponAttack - 150) * 0.015));
+		else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
+		if (player.weapon == weapons.RCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
+			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
+			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
+			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
+		}
+		if (player.weapon == weapons.SCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
+			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.5;
+			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;
+			if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
+		}
+			if (player.weapon == weapons.TCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			if (monster.findPerk(PerkLib.DarknessNature) >= 0) damage *= 5;
+			if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) damage *= 2;
+			if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) damage *= 0.5;
+			if (monster.findPerk(PerkLib.LightningNature) >= 0) damage *= 0.2;
+		}
+		if (player.weapon == weapons.ACLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			if (monster.findPerk(PerkLib.DarknessNature) >= 0) damage *= 0.2;
+			if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) damage *= 0.5;
+			if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) damage *= 2;
+			if (monster.findPerk(PerkLib.LightningNature) >= 0) damage *= 5;
+		}
+		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= 1.1;
+		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
+		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
+		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
+		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+		if (player.armor == armors.SPKIMO) damage *= 1.2;
+		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
+		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
+		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+		if (monster.hasPerk(PerkLib.EnemyGroupType)) damage *= 3;
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
+			if (player.inte <= 100) critChance += (player.inte - 50) / 5;
+			if (player.inte > 100) critChance += 10;
+		}
+		if (player.hasPerk(PerkLib.WeaponMastery) && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
+		if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
+		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		damage = doDamage(damage);
+		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b> ");
+		if (player.weapon == weapons.PRURUMI && player.spe >= 150) {
+			damage = doDamage(damage);
+			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b> ");
+			if (player.spe >= 225) {
+				damage = doDamage(damage);
+				outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b> ");
+			}
+			if (player.spe >= 300) {
+				damage = doDamage(damage);
+				outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b> ");
+			}
+		}
+		if (crit == true) {
+			outputText("<b>Critical! </b>");
+			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
+		}
+		if (crit == false && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
+			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
+		}
+		outputText("\n\n");
+		combat.heroBaneProc(damage);
+		if (monster.canMonsterBleed()) {
+			if (monster.hasStatusEffect(StatusEffects.IzmaBleed)) {
+				if (monster.statusEffectv4(StatusEffects.IzmaBleed) == 0) monster.addStatusValue(StatusEffects.IzmaBleed, 4, 1);
+				monster.addStatusValue(StatusEffects.IzmaBleed, 2, 1);
+			}
+			else monster.createStatusEffect(StatusEffects.IzmaBleed,3,0,0,0);
+		}
+		enemyAI();
 	}
 	
 	public function sneakAttack():void {

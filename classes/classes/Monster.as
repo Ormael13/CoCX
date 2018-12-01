@@ -647,6 +647,11 @@ import flash.utils.getQualifiedClassName;
 			if (mult < 0) mult = 0;
 			return mult;
 		}
+		
+		public function canMonsterBleed():Boolean
+		{
+			return !hasPerk(PerkLib.EnemyConstructType) || !hasPerk(PerkLib.EnemyPlantType) || !hasPerk(PerkLib.EnemyGooType);
+		}
 
 		/**
 		 * @return HP/eMaxHP()

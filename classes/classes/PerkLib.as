@@ -2211,9 +2211,9 @@ public class PerkLib
 		public static const AquaticAffinity:PerkType = mk("Aquatic Affinity", "Aquatic Affinity",
 				"When in an aquatic battle you gains a +30 to strength and speed.");
 		public static const AvatorOfCorruption:PerkType = mk("Avatar of Corruption", "Avatar of Corruption",
-				".");
+				"Your impure body grants you shortened spellcasting cooldown and empowered black and healing magic.");
 		public static const AvatorOfPurity:PerkType = mk("Avatar of Purity", "Avatar of Purity",
-				".");
+				"Your pure body grants you shortened spellcasting cooldown and empowered white and healing magic.");
 		public static const BasiliskWomb:PerkType = mk("Basilisk Womb", "Basilisk Womb",
 				"Enables your eggs to be properly fertilized into basilisks of both genders!");
 		public static const BeeOvipositor:PerkType = mk("Bee Ovipositor", "Bee Ovipositor",
@@ -2449,8 +2449,8 @@ public class PerkLib
 		public static const Sentience:PerkType = mk("Sentience", "Sentience", "");
 		public static const ShieldWielder:PerkType = mk("Shield wielder", "Shield wielder", "");
 		public static const TeaseResistance:PerkType = mk("Tease Resistance", "Tease Resistance", "");//NYU
-		//public static const EnemyPlantType:PerkType = mk("", "", "");
-		//public static const Enemy:PerkType = mk("", "", "");undead/ghost?
+		//public static const Enemy   Type:PerkType = mk("-type enemy", "-type enemy", "");
+		//public static const Enemy:PerkType = mk("-type enemy", "-type enemy", "");undead/ghost?
 		//public static const :PerkType = mk("", "", ""); na poźniej dopisane perki wzór
 //dodać także typy perków dla poszczególnych ras przeciwników tak, ze bedą mogły one mieć jakieś korzyści też (np. jak ma Dragon nature to bonusy jak PC miałby dragon score > 6))
 		private static function mk(id:String, name:String, desc:String, longDesc:String = null, keepOnAscension:Boolean = false):PerkType
@@ -4563,7 +4563,7 @@ public class PerkLib
                 return player.femininity >= 95;
 				}, "95+ feminity")
 				.requireCustomFunction(function (player:Player):Boolean {
-					return player.cowScore() >= 9;
+					return player.cowScore() >= 8;
             }, "Lacta Bovine race");
             MinotaurTesticlesEvolved.requireLevel(18)
 				.requirePerk(MinotaurTesticles)
@@ -4574,7 +4574,7 @@ public class PerkLib
                 return player.femininity <= 5;
 				}, "5- feminity")
 				.requireCustomFunction(function (player:Player):Boolean {
-					return player.minotaurScore() >= 9;
+					return player.minotaurScore() >= 8;
             }, "Minotaur race");
             ChimericalBodyBasicStage.requirePerk(ChimericalBodySemiBasicStage)
                     .requireLevel(18)
@@ -4800,7 +4800,7 @@ public class PerkLib
                 return player.femininity >= 95;
 				}, "95+ feminity")
 				.requireCustomFunction(function (player:Player):Boolean {
-					return player.cowScore() >= 14;
+					return player.cowScore() >= 12;
             }, "Lacta Bovine race");
             MinotaurTesticlesFinalForm.requireLevel(36)
 				.requirePerk(MinotaurTesticlesEvolved)
@@ -4811,7 +4811,7 @@ public class PerkLib
                 return player.femininity <= 5;
 				}, "5- feminity")
 				.requireCustomFunction(function (player:Player):Boolean {
-					return player.minotaurScore() >= 14;
+					return player.minotaurScore() >= 12;
             }, "Minotaur race");
             ChimericalBodySemiSuperiorStage.requirePerk(ChimericalBodyAdvancedStage)
                     .requireLevel(36)

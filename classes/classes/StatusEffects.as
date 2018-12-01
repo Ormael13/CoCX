@@ -116,6 +116,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const KnowsBlizzard:StatusEffectType                  = mk("Knows Blizzard");
 		public static const KnowsCharge:StatusEffectType                    = mk("Knows Charge");//Charge Weapon
 		public static const KnowsChargeA:StatusEffectType                   = mk("Knows Charge Armor");
+		public static const KnowsCleave:StatusEffectType                    = mk("Knows Cleave");
 		public static const KnowsComet:StatusEffectType                     = mk("Knows Comet");
 		public static const KnowsDarknessShard:StatusEffectType             = mk("Knows Darkness Shard");
 		public static const KnowsDracoSweep:StatusEffectType                = mk("Knows Draco Sweep");

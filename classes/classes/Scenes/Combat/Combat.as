@@ -2928,6 +2928,7 @@ public function WeaponStatusProcs():void {
 	if (player.weapon == weapons.CLAWS) bleedChance += 10;
 	//25% Bleed chance
 	if ((player.weapon == weapons.H_GAUNT || player.weapon == weapons.CNTWHIP || player.weapon == weapons.TRIDAG)) bleedChance += 25;
+	if (monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyPlantType) || monster.hasPerk(PerkLib.EnemyGooType)) bleedChance = 0;
 	if (rand(100) < bleedChance) bleed = true;
 	if (bleed == true) {
 		if (monster.hasPerk(PerkLib.EnemyConstructType)) {
@@ -6195,4 +6196,4 @@ public function scalingBonusLibido():Number {
 }
 }
 }
-
+
