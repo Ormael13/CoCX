@@ -60,13 +60,15 @@ package classes.Scenes
 			outputText("-New quest on Adventure Guild: hunting feral imps. First time completing reward is Feral Hunter perk, second time completing is 1 perk ponit and all afterward completetions giving 7 spirit stones.\n");
 			outputText("-Fixed bugs: Unicorn/Alicorn/Bicorn/Nightmare 0 pts score, blank screen when learning new spell in Tel'Adre Tower, Gargoyle bonuses not applied at 20+ pts, wrong race classification when becoming Gargoyle, missing scene when PC hunger as Gargoyle drops to 0, missing gems reward from Prize option for Erlking enc, missing in few places unlocking fur for metamorph menu, Spectre perk evasion boost ");
 			outputText("effect lingering even without Incorporeality perk, Lust strike actual cost been lower than it was meantioned in tooltip, never ending Tainted Mind debuff and blank screen related to it, cat/pig score calculation bug, cheshire real stat bonuses not matching those from player app screen, demon slayer working on all enemies not only true demons, loli bat golems not fully lust resistant\n\n");
-			outputText("<b>Version 0.8j3:</b>\n\n");//Voltage topaz, vial of Manticore Venom, vial of ominous red liquid - gdzieś poszukać miejsca na nie ale nie w Moga Hen shop
+			outputText("<b>Version 0.8j3 (Bugfixing + new Adv Guild quest):</b>\n\n");
 			outputText("-Req. Cow/Minotaur score for Evolved and Final Form racial perks are lowered by 1/2 pts.\n");
 			outputText("-Construct, Plant, Goo type enemies gained immunity to bleed.\n");
 			outputText("-New quest on Adventure Guild: hunting minotaurs. First time completing reward is tome teaching Cleave, second time completing is 1 perk ponit and all afterward completetions giving 8 spirit stones.\n");
 			outputText("-New P. Special: Cleave - req. finishing 1 time minotaur hunt quest to get tome teaching this special. It can be used with either axe, sword or dueling sword type weapon and would apply bleeding on top of normal damage. If it's used on groups base dmg (not bleed) would be 3x higher.\n");
-			outputText("-Fixed bugs: Hellcat reverting to Cat text proc-ing each hour, overlapping all cat races racial bonuses, can't use weapon sharpening option in Konstantin menu if PC not hold any melee weapon\n\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
-			outputText("<b>Version 0.8k:</b>\n\n");
+			outputText("-Fixed bugs: Hellcat reverting to Cat text proc-ing each hour, overlapping all cat races racial bonuses, can't use weapon sharpening option in Konstantin menu if PC not hold any melee weapon\n\n");
+			outputText("<b>Version 0.8j3a:</b>\n\n");
+			outputText("-Fixed bugs: Sean (Deep Cave incubus) 2nd and 3rd shop menu row bug\n\n\n\n\n\n\n");/*ostatni punkt changelogu		 (Bugfixing + new Adv Guild quest)
+			outputText("<b>Version 0.8k:</b>\n\n");//Voltage topaz, vial of Manticore Venom, vial of ominous red liquid - umieścić je w sklepie kociej chimery + wszystkie kocie tf tam włożyć
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");

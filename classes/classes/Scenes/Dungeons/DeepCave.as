@@ -148,10 +148,11 @@ use namespace CoC;
 			if (item == 1) incubusBuy(consumables.SENSDRF);
 			if (item == 2) incubusBuy(consumables.REDUCTO);
 			if (item == 3) incubusBuy(consumables.AGILI_E);
-			if (item == 4) incubusBuy(consumables.VIXEN_T);
-			if (item == 5) incubusBuy(weapons.SUCWHIP);
-			if (item == 6) incubusBuy(weapons.PSWHIP);
-			if (item == 7) incubusBuy(weaponsrange.SSKETCH);
+			if (item == 5) incubusBuy(consumables.CFISHS);
+			if (item == 6) incubusBuy(consumables.VIXEN_T);
+			if (item == 10) incubusBuy(weapons.SUCWHIP);
+			if (item == 11) incubusBuy(weapons.PSWHIP);
+			if (item == 12) incubusBuy(weaponsrange.SSKETCH);
 		}
 
 		public function incubusBuy(itype:ItemType):void {
