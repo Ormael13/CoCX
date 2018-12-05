@@ -353,12 +353,12 @@ public class CombatMagic extends BaseCombatContent {
 		if(player.hasPerk(PerkLib.JobSorcerer) && player.inte >= 25) mod += .1;
 		if(player.hasPerk(PerkLib.Mage) && player.inte >= 50) mod += .2;
 		if(player.hasPerk(PerkLib.Spellpower) && player.inte >= 50) mod += .1;
-		if(player.hasPerk(PerkLib.TraditionalMageI) && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
-		if(player.hasPerk(PerkLib.TraditionalMageII) && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
-		if(player.hasPerk(PerkLib.TraditionalMageIII) && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
-		if(player.hasPerk(PerkLib.TraditionalMageIV) && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
-		if(player.hasPerk(PerkLib.TraditionalMageV) && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
-		if(player.hasPerk(PerkLib.TraditionalMageVI) && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
+		if(player.hasPerk(PerkLib.TraditionalMageI) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
+		if(player.hasPerk(PerkLib.TraditionalMageII) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
+		if(player.hasPerk(PerkLib.TraditionalMageIII) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
+		if(player.hasPerk(PerkLib.TraditionalMageIV) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
+		if(player.hasPerk(PerkLib.TraditionalMageV) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
+		if(player.hasPerk(PerkLib.TraditionalMageVI) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
 		if(player.hasPerk(PerkLib.Ambition)) {
 			mod += player.perkv2(PerkLib.Ambition);
 		}
@@ -444,12 +444,12 @@ public class CombatMagic extends BaseCombatContent {
 		if(player.hasPerk(PerkLib.JobSorcerer) && player.inte >= 25) mod += .1;
 		if(player.hasPerk(PerkLib.Mage) && player.inte >= 50) mod += .2;
 		if(player.hasPerk(PerkLib.Spellpower) && player.inte >= 50) mod += .1;
-		if(player.hasPerk(PerkLib.TraditionalMageI) && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
-		if(player.hasPerk(PerkLib.TraditionalMageII) && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
-		if(player.hasPerk(PerkLib.TraditionalMageIII) && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
-		if(player.hasPerk(PerkLib.TraditionalMageIV) && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
-		if(player.hasPerk(PerkLib.TraditionalMageV) && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
-		if(player.hasPerk(PerkLib.TraditionalMageVI) && player.weaponPerk == "Staff" && player.weaponRangeName == "nothing") mod += 1;
+		if(player.hasPerk(PerkLib.TraditionalMageI) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
+		if(player.hasPerk(PerkLib.TraditionalMageII) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
+		if(player.hasPerk(PerkLib.TraditionalMageIII) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
+		if(player.hasPerk(PerkLib.TraditionalMageIV) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
+		if(player.hasPerk(PerkLib.TraditionalMageV) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
+		if(player.hasPerk(PerkLib.TraditionalMageVI) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
 		if(player.hasPerk(PerkLib.Obsession)) {
 			mod += player.perkv2(PerkLib.Obsession);
 		}

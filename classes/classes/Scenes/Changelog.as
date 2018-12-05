@@ -66,9 +66,17 @@ package classes.Scenes
 			outputText("-New quest on Adventure Guild: hunting minotaurs. First time completing reward is tome teaching Cleave, second time completing is 1 perk ponit and all afterward completetions giving 8 spirit stones.\n");
 			outputText("-New P. Special: Cleave - req. finishing 1 time minotaur hunt quest to get tome teaching this special. It can be used with either axe, sword or dueling sword type weapon and would apply bleeding on top of normal damage. If it's used on groups base dmg (not bleed) would be 3x higher.\n");
 			outputText("-Fixed bugs: Hellcat reverting to Cat text proc-ing each hour, overlapping all cat races racial bonuses, can't use weapon sharpening option in Konstantin menu if PC not hold any melee weapon\n\n");
-			outputText("<b>Version 0.8j3a:</b>\n\n");
-			outputText("-Fixed bugs: Sean (Deep Cave incubus) 2nd and 3rd shop menu row bug\n\n\n\n\n\n\n");/*ostatni punkt changelogu		 (Bugfixing + new Adv Guild quest)
+			outputText("<b>Version 0.8j3a (Sean shop fix):</b>\n\n");
+			outputText("-Fixed bugs: Sean (Deep Cave incubus) 2nd and 3rd shop menu row bug\n\n");
 			outputText("<b>Version 0.8k:</b>\n\n");//Voltage topaz, vial of Manticore Venom, vial of ominous red liquid - umieścić je w sklepie kociej chimery + wszystkie kocie tf tam włożyć
+			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("-New rare ascension perk -> Ascension: Building Prestige (5th Stage). Req. Ascension: Building Prestige (4th Stage) perk and be at fourth ascension. It costs 25 asc points and will give 1 more slot for Prestige Jobs.\n");
+			outputText("-New rare ascension perk -> Ascension: Ascension: Transcendental Genetic Memory (Stage 5). Req. Ascension: Transcendental Genetic Memory (Stage 4) perk and be at fourth ascension. It cost 40 asc points and allow to perm up to 50 selected Metamorph options. (with prev perks it give max cap of 150)\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-Fixed bugs: Traditional Mage perks not affecting white/black spellpower as planned\n\n\n\n\n\n");/*ostatni punkt changelogu
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
@@ -83,8 +91,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -127,12 +134,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): dodać yuki-onna TF
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

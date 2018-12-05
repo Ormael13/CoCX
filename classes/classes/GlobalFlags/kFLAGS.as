@@ -2625,10 +2625,10 @@ public static const UNKNOWN_FLAG_NUMBER_02616:int                               
 public static const UNKNOWN_FLAG_NUMBER_02617:int                                   = 2617;
 public static const UNKNOWN_FLAG_NUMBER_02618:int                                   = 2618;
 public static const UNKNOWN_FLAG_NUMBER_02619:int                                   = 2619;
-public static const UNKNOWN_FLAG_NUMBER_02620:int                                   = 2620;
-public static const UNKNOWN_FLAG_NUMBER_02621:int                                   = 2621;
-public static const UNKNOWN_FLAG_NUMBER_02622:int                                   = 2622;
-public static const UNKNOWN_FLAG_NUMBER_02623:int                                   = 2623;
+public static const GALIA_LVL_UP:int                                   				= 2620;
+public static const GALIA_DEFEATS_COUNTER:int                               		= 2621;
+public static const GALIA_AFFECTION:int                                   			= 2622;
+public static const UNKNOWN_FLAG_NUMBER_02623:int                                	= 2623;
 public static const UNKNOWN_FLAG_NUMBER_02624:int                                   = 2624;
 public static const UNKNOWN_FLAG_NUMBER_02625:int                                   = 2625;
 public static const UNKNOWN_FLAG_NUMBER_02626:int                                   = 2626;
