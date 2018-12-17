@@ -41,9 +41,20 @@ public class Isabella extends Monster
 				var damage:Number;
 				if (flags[kFLAGS.ISABELLA_LVL_UP] >= 1) damage = Math.round(((weaponAttack + str + 20) * flags[kFLAGS.ISABELLA_LVL_UP]) - rand(player.tou+player.armorDef));
 				else damage = Math.round((weaponAttack + str + 20) - rand(player.tou + player.armorDef));
-				if (wrath >= 100) {
-					wrath -= 100;
-					damage *= 2;
+				if (flags[kFLAGS.ISABELLA_LVL_UP] >= 8) damage *= 0.2;
+				if (wrath >= 50) {
+					if (flags[kFLAGS.ISABELLA_LVL_UP] >= 8 && wrath >= 200) {
+						wrath -= 200;
+						damage *= 4;
+					}
+					else if (flags[kFLAGS.ISABELLA_LVL_UP] >= 4 && wrath >= 100) {
+						wrath -= 100;
+						damage *= 3;
+					}
+					else {
+						wrath -= 50;
+						damage *= 2;
+					}
 				}
 				if (damage < 0) {
 					outputText("You brace yourself and catch her shield in both hands, dragging through the dirt as you slow her charge to a stop.  She gapes down, completely awestruck by the show of power.");
@@ -84,6 +95,7 @@ public class Isabella extends Monster
 				var damage:Number = 0;
 				if (flags[kFLAGS.ISABELLA_LVL_UP] >= 1) damage = Math.round(((weaponAttack + str) * (1 + (flags[kFLAGS.ISABELLA_LVL_UP] * 0.1))) - rand(player.tou+player.armorDef));
 				else damage = Math.round((weaponAttack + str) - rand(player.tou+player.armorDef));
+				if (flags[kFLAGS.ISABELLA_LVL_UP] >= 8) damage *= 0.2;
 				if(damage < 0) {
 					outputText("You deflect her blow away, taking no damage.\n");
 					damage = 0;
@@ -127,7 +139,8 @@ public class Isabella extends Monster
 			else {
 				var damage:Number;
 				if (flags[kFLAGS.ISABELLA_LVL_UP] >= 1) damage = Math.round((str * (1 + (flags[kFLAGS.ISABELLA_LVL_UP] * 0.1))) - rand(player.tou+player.armorDef));
-				else damage = Math.round(str - rand(player.tou+player.armorDef));
+				else damage = Math.round(str - rand(player.tou + player.armorDef));
+				if (flags[kFLAGS.ISABELLA_LVL_UP] >= 8) damage *= 0.2;
 				if(damage <= 0) {
 					outputText("You manage to block her with your own fists.\n");
 				}
@@ -205,8 +218,8 @@ public class Isabella extends Monster
 				initStrTouSpeInte(80, 108, 75, 64);
 				initWisLibSensCor(64, 64, 25, 40);
 				this.weaponAttack = 18;
-				this.armorDef = 18;
-				this.armorMDef = 3;
+				this.armorDef = 16;
+				this.armorMDef = 4;
 				this.bonusHP = 600;
 				this.level = 20;
 			}
@@ -215,7 +228,7 @@ public class Isabella extends Monster
 				initWisLibSensCor(73, 70, 30, 40);
 				this.weaponAttack = 21;
 				this.armorDef = 24;
-				this.armorMDef = 4;
+				this.armorMDef = 6;
 				this.bonusHP = 800;
 				this.level = 26;
 			}
@@ -223,8 +236,8 @@ public class Isabella extends Monster
 				initStrTouSpeInte(120, 155, 100, 82);
 				initWisLibSensCor(82, 80, 35, 40);
 				this.weaponAttack = 24;
-				this.armorDef = 30;
-				this.armorMDef = 5;
+				this.armorDef = 32;
+				this.armorMDef = 8;
 				this.bonusHP = 1000;
 				this.level = 32;
 			}
@@ -232,8 +245,8 @@ public class Isabella extends Monster
 				initStrTouSpeInte(140, 180, 115, 91);
 				initWisLibSensCor(91, 90, 40, 40);
 				this.weaponAttack = 27;
-				this.armorDef = 36;
-				this.armorMDef = 6;
+				this.armorDef = 40;
+				this.armorMDef = 10;
 				this.bonusHP = 1200;
 				this.level = 38;
 			}
@@ -241,8 +254,8 @@ public class Isabella extends Monster
 				initStrTouSpeInte(160, 210, 130, 100);
 				initWisLibSensCor(100, 100, 45, 40);
 				this.weaponAttack = 30;
-				this.armorDef = 42;
-				this.armorMDef = 7;
+				this.armorDef = 48;
+				this.armorMDef = 12;
 				this.bonusHP = 1400;
 				this.level = 44;
 			}
@@ -250,8 +263,8 @@ public class Isabella extends Monster
 				initStrTouSpeInte(180, 240, 145, 110);
 				initWisLibSensCor(110, 110, 50, 40);
 				this.weaponAttack = 33;
-				this.armorDef = 48;
-				this.armorMDef = 8;
+				this.armorDef = 54;
+				this.armorMDef = 14;
 				this.bonusHP = 1600;
 				this.level = 50;
 			}
@@ -259,8 +272,8 @@ public class Isabella extends Monster
 				initStrTouSpeInte(200, 270, 160, 120);
 				initWisLibSensCor(120, 120, 55, 40);
 				this.weaponAttack = 36;
-				this.armorDef = 54;
-				this.armorMDef = 9;
+				this.armorDef = 62;
+				this.armorMDef = 16;
 				this.bonusHP = 1800;
 				this.level = 56;
 			}
@@ -268,10 +281,28 @@ public class Isabella extends Monster
 				initStrTouSpeInte(220, 300, 175, 130);
 				initWisLibSensCor(130, 130, 60, 40);
 				this.weaponAttack = 39;
-				this.armorDef = 60;
-				this.armorMDef = 10;
+				this.armorDef = 70;
+				this.armorMDef = 18;
 				this.bonusHP = 2000;
 				this.level = 62;
+			}
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 8) {
+				initStrTouSpeInte(240, 330, 190, 140);
+				initWisLibSensCor(140, 140, 65, 40);
+				this.weaponAttack = 42;
+				this.armorDef = 78;
+				this.armorMDef = 20;
+				this.bonusHP = 2200;
+				this.level = 68;
+			}
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 9) {
+				initStrTouSpeInte(260, 360, 205, 150);
+				initWisLibSensCor(150, 150, 70, 40);
+				this.weaponAttack = 45;
+				this.armorDef = 86;
+				this.armorMDef = 22;
+				this.bonusHP = 2400;
+				this.level = 74;
 			}
 			this.weaponName = "giant shield";
 			this.weaponVerb="smash";
@@ -286,6 +317,7 @@ public class Isabella extends Monster
 			this.tailType = Tail.COW;
 			this.tailRecharge = 0;
 			this.drop = NO_DROP;
+			this.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
 			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 1) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
@@ -304,6 +336,11 @@ public class Isabella extends Monster
 				this.createPerk(PerkLib.ImprovedTranquilness, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 7) this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
+			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 8) {
+				this.createPerk(PerkLib.EpicToughness, 0, 0, 0, 0);
+				this.createPerk(PerkLib.HalfStepToAdvancedTranquilness, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 9) this.createPerk(PerkLib.EpicStrength, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

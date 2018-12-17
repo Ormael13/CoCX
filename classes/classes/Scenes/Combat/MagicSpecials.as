@@ -490,6 +490,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
 		if (player.hasPerk(PerkLib.ColdMastery)) damage *= 2;
 		if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
+		if (player.necklaceName == "Blue Winter scarf") damage *= 1.2;
 		damage = Math.round(damage);
 		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, a powerful wave of cold blasting the area in front of you.  " + monster.capitalA + monster.short + " does " + monster.pronoun3 + " best to avoid it, but the wave of freezing air is too fast.");
 		//Shell
@@ -592,6 +593,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
 		if (player.hasPerk(PerkLib.ColdMastery)) damage *= 2;
 		if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
+		if (player.necklaceName == "Blue Winter scarf") damage *= 1.2;
 		damage = Math.round(damage);
 		outputText("You inhale deeply, then blow a freezing breath attack at your opponent, encasing it in ice!");
 		//Shell
@@ -1114,6 +1116,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;
 		if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
 		if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
+		if (player.necklaceName == "Blue Winter scarf") damage *= 1.2;
 		damage = Math.round(damage);
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -1392,6 +1395,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + ((player.lust100 * 0.01) * 0.25));
+			if (player.necklaceName == "Blue Winter scarf") damage *= 1.05;
 			damage *= 10;
 			damage = Math.round(damage);
 			//Shell

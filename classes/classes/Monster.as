@@ -564,7 +564,7 @@ import flash.utils.getQualifiedClassName;
 			var armorMod:Number = armorDef;
 			//--BASE--
 			//Modify armor rating based on melee weapons
-			if (game.player.weapon == game.weapons.JRAPIER || game.player.weapon == game.weapons.Q_GUARD || game.player.weapon == game.weapons.B_WIDOW || game.player.weapon == game.weapons.SPEAR || game.player.weapon == game.weapons.SESPEAR || game.player.weapon == game.weapons.DSSPEAR || game.player.weapon == game.weapons.LANCE
+			if (game.player.weapon == game.weapons.JRAPIER || game.player.weapon == game.weapons.Q_GUARD || game.player.weapon == game.weapons.B_WIDOW || game.player.weapon == game.weapons.SPEAR || game.player.weapon == game.weapons.SESPEAR || game.player.weapon == game.weapons.DSSPEAR || game.player.weapon == game.weapons.LANCE || game.player.weapon == game.weapons.NORTHIP
 			 || (game.player.weaponName.indexOf("staff") != -1 && game.player.findPerk(PerkLib.StaffChanneling) >= 0)) armorMod = 0;
 			if (game.player.weapon == game.weapons.KATANA) armorMod -= 5;
 			if (game.player.weapon == game.weapons.HALBERD) armorMod *= 0.6;
@@ -2529,7 +2529,7 @@ import flash.utils.getQualifiedClassName;
 			}
 			//regeneration perks for monsters
 			if ((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.LizanMarrowEvolved) >= 0 || findPerk(PerkLib.EnemyPlantType) >= 0 || findPerk(PerkLib.EnemyGodType) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0 || findPerk(PerkLib.MonsterRegeneration) >= 0 || findPerk(PerkLib.Lifeline) >= 0
-			|| findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0 || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2)) && (this.HP < maxHP()) && (this.HP > 0)) {
+			|| findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0 || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2)) && (this.HP < maxHP() || hasStatusEffect(StatusEffects.MonsterVPT)) && (this.HP < maxHP()) && (this.HP > 0)) {
 				var healingPercent:Number = 0;
 				var temp2:Number = 0;
 				if (findPerk(PerkLib.Regeneration) >= 0) healingPercent += (0.5 * (1 + newGamePlusMod()));
@@ -2547,6 +2547,7 @@ import flash.utils.getQualifiedClassName;
 				temp2 = Math.round(maxHP() * healingPercent / 100);
 				if (findPerk(PerkLib.Lifeline) >= 0) temp2 += (50 * (1 + newGamePlusMod()));
 				if (hasStatusEffect(StatusEffects.MonsterRegen2)) temp2 += statusEffectv2(StatusEffects.MonsterRegen2);
+				if (hasStatusEffect(StatusEffects.MonsterVPT)) temp2 += statusEffectv1(StatusEffects.MonsterVPT);
 				if (this is ChiChi && (flags[kFLAGS.CHI_CHI_SAM_TRAINING] < 2 || hasStatusEffect(StatusEffects.MonsterRegen))) {
 					outputText("To your surprise, Chi Chi’s wounds start closing! <b>(<font color=\"#008000\">+" + temp2 + "</font>)</b>.\n\n");
 				}
@@ -2722,6 +2723,27 @@ import flash.utils.getQualifiedClassName;
 				lib += (20 * (1 + newGamePlusMod()));
 				sens += (20 * (1 + newGamePlusMod()));
 			}
+			if (hasPerk(PerkLib.EpicStrength)) str += (35 + (5 * (1 + newGamePlusMod())));
+			if (hasPerk(PerkLib.LegendaryStrength)) str += (50 + (10 * (1 + newGamePlusMod())));
+			if (hasPerk(PerkLib.MythicalStrength)) str += (65 + (15 * (1 + newGamePlusMod())));
+			if (hasPerk(PerkLib.EpicToughness)) tou += (35 + (5 * (1 + newGamePlusMod())));
+			if (hasPerk(PerkLib.LegendaryToughness)) tou += (50 + (10 * (1 + newGamePlusMod())));
+			if (hasPerk(PerkLib.MythicalToughness)) tou += (65 + (15 * (1 + newGamePlusMod())));
+			if (hasPerk(PerkLib.EpicSpeed)) spe += (35 + (5 * (1 + newGamePlusMod())));
+			if (hasPerk(PerkLib.LegendarySpeed)) spe += (50 + (10 * (1 + newGamePlusMod())));
+			if (hasPerk(PerkLib.MythicalSpeed)) spe += (65 + (15 * (1 + newGamePlusMod())));
+			if (hasPerk(PerkLib.EpicIntelligence)) inte += (35 + (5 * (1 + newGamePlusMod())));
+			if (hasPerk(PerkLib.LegendaryIntelligence)) inte += (50 + (10 * (1 + newGamePlusMod())));
+			if (hasPerk(PerkLib.MythicalIntelligence)) inte += (65 + (15 * (1 + newGamePlusMod())));
+			if (hasPerk(PerkLib.EpicWisdom)) wis += (35 + (5 * (1 + newGamePlusMod())));
+			if (hasPerk(PerkLib.LegendaryWisdom)) wis += (50 + (10 * (1 + newGamePlusMod())));
+			if (hasPerk(PerkLib.MythicalWisdom)) wis += (65 + (15 * (1 + newGamePlusMod())));
+			if (hasPerk(PerkLib.EpicLibido)) lib += (35 + (5 * (1 + newGamePlusMod())));
+			if (hasPerk(PerkLib.LegendaryLibido)) lib += (50 + (10 * (1 + newGamePlusMod())));
+			if (hasPerk(PerkLib.MythicalLibido)) lib += (65 + (15 * (1 + newGamePlusMod())));
+			if (hasPerk(PerkLib.EpicSensitivity)) sens += (35 + (5 * (1 + newGamePlusMod())));
+			if (hasPerk(PerkLib.LegendarySensitivity)) sens += (50 + (10 * (1 + newGamePlusMod())));
+			if (hasPerk(PerkLib.MythicalSensitivity)) sens += (65 + (15 * (1 + newGamePlusMod())));
 			if (level > 25) bonusStatsAmp += 0.1*((int)(level-1)/25);
 			bonusAscStr += bonusStatsAmp * str * newGamePlusMod();
 			bonusAscTou += bonusStatsAmp * tou * newGamePlusMod();

@@ -138,6 +138,8 @@ public function campRathazul():void {
 	if(player.lust > 1400) dynStats("lus", -9);
 	if(player.lust > 1600) dynStats("lus", -10);
 	if(player.lust > 1800) dynStats("lus", -10);
+	if(player.lust > 2000) dynStats("lus", -11);
+	if(player.lust > 2200) dynStats("lus", -11);
 	//Introduction
 	outputText(images.showImage("rathazul-camp"));
 	outputText("Rathazul looks up from his equipment and gives you an uncertain smile.\n\n\"<i>Oh, don't mind me,</i>\" he says, \"<i>I'm just running some tests here.  Was there something you needed, [name]?</i>\"\n\n");

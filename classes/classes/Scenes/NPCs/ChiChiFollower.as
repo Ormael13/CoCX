@@ -156,6 +156,18 @@ public function WonSparringFight():void {
 			flags[kFLAGS.CHI_CHI_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.CHI_CHI_LVL_UP] = 6;
 		}
+		if (flags[kFLAGS.CHI_CHI_DEFEATS_COUNTER] == 10 && flags[kFLAGS.CHI_CHI_LVL_UP] == 6) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 2, 60);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 60, 0, 0);
+			flags[kFLAGS.CHI_CHI_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.CHI_CHI_LVL_UP] = 7;
+		}
+		if (flags[kFLAGS.CHI_CHI_DEFEATS_COUNTER] == 11 && flags[kFLAGS.CHI_CHI_LVL_UP] == 7) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 2, 66);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 66, 0, 0);
+			flags[kFLAGS.CHI_CHI_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.CHI_CHI_LVL_UP] = 8;
+		}
 	}
 	cleanupAfterCombat();
 }

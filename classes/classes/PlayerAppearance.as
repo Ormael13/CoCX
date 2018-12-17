@@ -1246,7 +1246,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (armType == Arms.LIZARD || armType == Arms.DRAGON)
 			outputText("  Shining thick, leathery scales covers your arms from the biceps down and your fingernails are now a short curved claws.");
 		else if (armType == Arms.YETI)
-			outputText("  Your two arms covered with thick fur end with large, powerful yeti hands. You can use them to smash or punch things when you're angry.");
+			outputText("  Your two arms covered with thick fur end with large and powerful yeti hands. You can use them to smash or punch things when you're angry.");
 		else if (armType == Arms.ORCA)
 			outputText("  A middle sized orca-like fin has sprouted on each of your forearms near the elbow. Additionally, the skin between your fingers forms a small webbing that is helpful when swimming.");
 		else if (armType == Arms.DEVIL)

@@ -68,15 +68,24 @@ package classes.Scenes
 			outputText("-Fixed bugs: Hellcat reverting to Cat text proc-ing each hour, overlapping all cat races racial bonuses, can't use weapon sharpening option in Konstantin menu if PC not hold any melee weapon\n\n");
 			outputText("<b>Version 0.8j3a (Sean shop fix):</b>\n\n");
 			outputText("-Fixed bugs: Sean (Deep Cave incubus) 2nd and 3rd shop menu row bug\n\n");
-			outputText("<b>Version 0.8k:</b>\n\n");//Voltage topaz, vial of Manticore Venom, vial of ominous red liquid - umieścić je w sklepie kociej chimery + wszystkie kocie tf tam włożyć
+			outputText("<b>Version 0.8k:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-New rare ascension perk -> Ascension: Building Prestige (5th Stage). Req. Ascension: Building Prestige (4th Stage) perk and be at fourth ascension. It costs 25 asc points and will give 1 more slot for Prestige Jobs.\n");
 			outputText("-New rare ascension perk -> Ascension: Ascension: Transcendental Genetic Memory (Stage 5). Req. Ascension: Transcendental Genetic Memory (Stage 4) perk and be at fourth ascension. It cost 40 asc points and allow to perm up to 50 selected Metamorph options. (with prev perks it give max cap of 150)\n");
+			outputText("-Increased max lvl camp npc's can attain after reaching end of training: Diana (lvl 39), Luna (lvl 39), Ceani (lvl 74), Ember (lvl 74), Isabella (lvl 74), Kiha (lvl 75), Kindra (lvl 75), Chi Chi (lvl 76), Etna (lvl 78)\n");
+			outputText("-Small corrections for few lvl-able npc's stats.\n");
+			outputText("-New encounter in Glacial Rift - Yu (yeti girl). After 2nd meeting she can be found using Places menu (Winter gear shop). She got 3 talk options with 1st req. to open two others. Sex also opens after seeing 1st talk option for the first time.\n");
+			outputText("-New necklaces (by Liadri): Blue / Green / Purple / Red / yellow Winter scarf - all buyable in Yu shop. Cost 800 gems. Increase PC resistance to cold by 20%, protect against frozen solid. This item also increase cold damage from spell and effect by 20%.\n");
+			outputText("-New underwears (by Liadri): Fur bikini top, Fur panty, Fur loincloth - buyable in Yu shop. Cost 600 gems each. Armor +1, Sexiness +1 and increase ice resistance by 10%.\n");
+			outputText("-New melee weapon (by Liadri): Northerner ice picks - buyable in Yu shop. Cost 800 gemes. Base atk is 5. It's small dual weapon and it ignores 100% of enemy armor.\n");
+			outputText("-Two new events in Glacial Rift: finding cache of gems or harvestable pile of stones. Req. to find Ornate Chest before they start to proc during exploration.\n");
+			outputText("-Fiercy wandering mysterious veiled merchant can be found during general exploration that sells some TF items or other stuff. Depending on rarity of item it may cost more than it default selling price. It can sometimes req. to fight first before PC can browse it shop.\n");
+			outputText("-Stats page got a minor revamp been split into 4 parts.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-Fixed bugs: Traditional Mage perks not affecting white/black spellpower as planned\n\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Traditional Mage perks not affecting white/black spellpower as planned, moving Tamani to Soul Sense removing her daughters enc before they move to SS menu too, mixed up texts for Jabberwocky post fight scenes, wrong set tone limits in few scenes/items effects\n\n\n\n\n\n");/*ostatni punkt changelogu
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
@@ -95,10 +104,21 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Cat, Cheshire cat, Unicorn, Alicorn, Bicorn, Nightmare, Sphinx, Hellcat
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -134,6 +154,14 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): dodać yuki-onna TF
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

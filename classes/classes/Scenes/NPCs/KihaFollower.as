@@ -2085,6 +2085,18 @@ private function lvlUpCheckup():void {
 			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.KIHA_LVL_UP] = 7;
 		}
+		if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.KIHA_LVL_UP] == 7) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 3, 66);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 66, 0);
+			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KIHA_LVL_UP] = 8;
+		}
+		if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] == 12 && flags[kFLAGS.KIHA_LVL_UP] == 8) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 3, 72);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 72, 0);
+			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KIHA_LVL_UP] = 9;
+		}
 	}
 }
 

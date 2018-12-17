@@ -2343,19 +2343,6 @@ public function surrender():void {
 	doNext(endLustLoss);
 }
 
-public function fatigueRecovery():void {
-	var fatiguecombatrecovery:Number = 0;
-	if (player.hasPerk(PerkLib.StarSphereMastery)) fatiguecombatrecovery += player.perkv1(PerkLib.StarSphereMastery);
-	if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) fatiguecombatrecovery += 1;
-	if (player.hasPerk(PerkLib.EnlightenedNinetails)) fatiguecombatrecovery += 1;
-	if (player.hasPerk(PerkLib.CorruptedNinetails)) fatiguecombatrecovery += 1;
-	if (player.hasPerk(PerkLib.EnlightenedKitsune)) fatiguecombatrecovery += 1;
-	if (player.hasPerk(PerkLib.CorruptedKitsune)) fatiguecombatrecovery += 1;
-	if (player.hasPerk(PerkLib.MasteredDefenceStance)) fatiguecombatrecovery += 1;
-	if (player.hasPerk(PerkLib.PerfectDefenceStance)) fatiguecombatrecovery += 1;
-	fatigue(-(1 + fatiguecombatrecovery));
-}
-
 //ATTACK
 public function attack():void {
 	flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
@@ -4525,9 +4512,31 @@ public function PercentBasedRegeneration():Number {
 }
 public function nonPercentBasedRegeneration():Number {
 	var maxNonPercentRegen:Number = 0;
-	if (player.hasPerk(PerkLib.Lifeline)) maxNonPercentRegen += 50 * (1 + player.newGamePlusMod());
-	if (player.hasPerk(PerkLib.Lifeline) && flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) maxNonPercentRegen += 50 * (1 + player.newGamePlusMod());
+	if (player.hasPerk(PerkLib.Lifeline)) {
+		maxNonPercentRegen += 50 * (1 + player.newGamePlusMod());
+		if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) maxNonPercentRegen += 50 * (1 + player.newGamePlusMod());
+	}
 	return maxNonPercentRegen;
+}
+
+public function fatigueRecovery():void {
+	var fatigue1:Number = 0;
+	fatigue1 += fatigueRecovery2();
+	fatigue(-fatigue1);
+}
+public function fatigueRecovery2():Number {
+	var fatiguecombatrecovery:Number = 1;
+	if (player.hasPerk(PerkLib.StarSphereMastery)) fatiguecombatrecovery += player.perkv1(PerkLib.StarSphereMastery);
+	if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) fatiguecombatrecovery += 1;
+	if (player.hasPerk(PerkLib.EnlightenedNinetails)) fatiguecombatrecovery += 1;
+	if (player.hasPerk(PerkLib.CorruptedNinetails)) fatiguecombatrecovery += 1;
+	if (player.hasPerk(PerkLib.EnlightenedKitsune)) fatiguecombatrecovery += 1;
+	if (player.hasPerk(PerkLib.CorruptedKitsune)) fatiguecombatrecovery += 1;
+	if (player.hasPerk(PerkLib.MasteredDefenceStance)) fatiguecombatrecovery += 1;
+	if (player.hasPerk(PerkLib.PerfectDefenceStance)) fatiguecombatrecovery += 1;
+	fatiguecombatrecovery *= fatigueRecoveryMultiplier();
+	fatiguecombatrecovery = Math.round(fatiguecombatrecovery);
+	return fatiguecombatrecovery;
 }
 
 public function soulforceregeneration(combat:Boolean = true):void {
@@ -4536,11 +4545,15 @@ public function soulforceregeneration(combat:Boolean = true):void {
 		gainedsoulforce += soulforceregeneration2();
 		if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.MasteredDefenceStance)) gainedsoulforce += 2;
 		if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.PerfectDefenceStance)) gainedsoulforce += 2;
+		gainedsoulforce *= soulforceRecoveryMultiplier();
 		if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) gainedsoulforce *= 2;
+		gainedsoulforce = Math.round(gainedsoulforce);
 		EngineCore.SoulforceChange(gainedsoulforce, false);
 	}
 	else {
 		gainedsoulforce += soulforceregeneration2() * 2;
+		gainedsoulforce *= soulforceRecoveryMultiplier();
+		gainedsoulforce = Math.round(gainedsoulforce);
 		EngineCore.SoulforceChange(gainedsoulforce, false);
 	}
 }

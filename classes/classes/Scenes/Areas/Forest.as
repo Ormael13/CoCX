@@ -119,6 +119,16 @@ use namespace CoC;
 								   && flags[kFLAGS.SOUL_SENSE_TAMANI] < 3;
 						}
 					}, {
+						name  : "Tamani_Daughters",
+						chance: 0.6,
+						call  : encounterTamanisDaughtersFn,
+						when  : function ():Boolean {
+							return player.gender > 0
+								&& player.cockTotal() > 0
+								&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 24
+								&& flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 3;
+						}
+					}, {
 						name  : "Jojo",
 						when  : function ():Boolean {
 							return !player.hasStatusEffect(StatusEffects.PureCampJojo)
@@ -305,6 +315,16 @@ use namespace CoC;
 						   && player.gender > 0
 						   && (player.cockTotal() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)
 						   && flags[kFLAGS.SOUL_SENSE_TAMANI] < 3;
+				}
+			}, {
+				name  : "Tamani_Daughters",
+				chance: 0.6,
+				call  : encounterTamanisDaughtersFn,
+				when  : function ():Boolean {
+					return player.gender > 0
+						   && player.cockTotal() > 0
+						   && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 24
+						   && flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 3;
 				}
 			}, {
 				name: "faerie",
@@ -592,6 +612,10 @@ use namespace CoC;
 			} else if (JojoScene.monk >= 2) { //Angry/Horny Jojo
 				SceneLib.jojoScene.corruptJojoEncounter();
 			}
+		}
+		private function encounterTamanisDaughtersFn():void {
+			clearOutput();
+			tamaniDaughtersScene.encounterTamanisDaughters();
 		}
 		private function tentacleBeastEncounterFn():void {
 			clearOutput();

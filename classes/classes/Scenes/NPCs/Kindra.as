@@ -103,9 +103,74 @@ use namespace CoC;
 			}
 		}
 		
+		public function KindraManyBirdsSoulskill():void {
+			outputText("Kindra thrust her hand outwards with deadly intent, and in the blink of an eye a crystals shoots towards you.  Crystals hits you, dealing ");
+			var soulforcecost:int = 10;// * soulskillCost() * soulskillcostmulti()
+			soulforce -= soulforcecost;
+			var damage:Number = inteligencescalingbonus();
+			if (damage < 10) damage = 10;
+			damage = Math.round(damage);
+			player.takeMagicDamage(damage, true);
+			outputText(" damage!");
+		}
+		
 		override protected function performCombatAction():void
 		{
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 7) {
+				if (HPRatio() < .5 && soulforce >= 100 && !hasStatusEffect(StatusEffects.MonsterVPT)) {
+					outputText("Kindra eyes starts to glow with a violet hua and you can see all of her wounds are now slowly healing.\n");
+					createStatusEffect(StatusEffects.MonsterVPT, 200, 0, 0, 0);
+				}
+				if (hasStatusEffect(StatusEffects.MonsterVPT)) {
+					if (HPRatio() > .9 || soulforce < 100) removeStatusEffect(StatusEffects.MonsterVPT);
+					else soulforce -= 100;
+				}
+			}
+			if (flags[kFLAGS.KINDRA_LVL_UP] >= 11) {
+				if (fatigue < (maxFatigue() - (bowShooting() * 6))) {
+					if (rand(2) == 0) {
+						KindraFireBow04();
+						if (fatigue >= 60) KindraDrinkSheepMilk();
+					}
+					else {
+						if (rand(2) == 0) {
+							KindraFireBow05();
+							if (fatigue >= 60) KindraDrinkSheepMilk();
+						}
+						else KindraFireBow06();
+					}
+				}
+				else {
+					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
+					else {
+						if (rand(2) == 0 && soulforce >= 10) KindraManyBirdsSoulskill();
+						else eAttack();
+					}
+				}
+			}
+			if (flags[kFLAGS.KINDRA_LVL_UP] == 9 || flags[kFLAGS.KINDRA_LVL_UP] == 10) {
+				if (fatigue < (maxFatigue() - (bowShooting() * 6))) {
+					if (rand(2) == 0) {
+						KindraFireBow04();
+						if (fatigue >= 60) KindraDrinkSheepMilk();
+					}
+					else {
+						if (rand(2) == 0) {
+							KindraFireBow05();
+							if (fatigue >= 60) KindraDrinkSheepMilk();
+						}
+						else KindraFireBow06();
+					}
+				}
+				else {
+					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
+					else {
+						if (rand(2) == 0 && soulforce >= 10) KindraManyBirdsSoulskill();
+						else eAttack();
+					}
+				}
+			}
+			if (flags[kFLAGS.KINDRA_LVL_UP] == 7 || flags[kFLAGS.KINDRA_LVL_UP] == 8) {
 				if (fatigue < (maxFatigue() - (bowShooting() * 6))) {
 					if (rand(2) == 0) KindraFireBow04();
 					else {
@@ -183,21 +248,38 @@ use namespace CoC;
 				this.short = "sheep-morph archer";
 				this.imageName = "kindra";
 				this.long = "You fight against sheep-morph archer.";//6'4"
+				this.weaponName = "dagger";
+				this.weaponRangeName = "bow";
+				this.armorName = "clothes";
 			}
 			if (flags[kFLAGS.KINDRA_AFFECTION] >= 7) {
 				this.a = "";
 				this.short = "Kindra";
 				this.imageName = "kindra";
-				this.long = "You fight against Kindra.";//6'4"
+				if (flags[kFLAGS.KINDRA_LVL_UP] < 7) {
+					this.long = "You fight against Kindra.";//6'4"
+					this.weaponName = "dagger";
+					this.weaponRangeName = "bow";
+					this.armorName = "clothes";
+				}
+				if (flags[kFLAGS.KINDRA_LVL_UP] >= 7 && flags[kFLAGS.KINDRA_LVL_UP] < 11) {
+					this.long = "You fight against Kindra.";//6'4"
+					this.weaponName = "sharp dagger";
+					this.weaponRangeName = "long bow";
+					this.armorName = "light leather armor";
+				}
+				if (flags[kFLAGS.KINDRA_LVL_UP] >= 11) {
+					this.long = "You fight against Kindra.";//6'4"
+					this.weaponName = "sharp tri-dagger";
+					this.weaponRangeName = "long composite bow";//potem jak stanie sie wiecej niż sheep-morph kolejna zmiana łuku
+					this.armorName = "light ebonweave armor";
+				}
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 1) {
 				initStrTouSpeInte(30, 50, 100, 80);
 				initWisLibSensCor(80, 30, 40, 10);
-				this.weaponName = "dagger";
 				this.weaponAttack = 8;
-				this.weaponRangeName = "bow";
 				this.weaponRangeAttack = 20;
-				this.armorName = "clothes";
 				this.armorDef = 5;
 				this.armorMDef = 5;
 				this.bonusHP = 50;
@@ -206,11 +288,8 @@ use namespace CoC;
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 2) {
 				initStrTouSpeInte(40, 65, 120, 100);
 				initWisLibSensCor(100, 30, 40, 10);
-				this.weaponName = "dagger";
 				this.weaponAttack = 8;
-				this.weaponRangeName = "bow";
 				this.weaponRangeAttack = 20;
-				this.armorName = "clothes";
 				this.armorDef = 5;
 				this.armorMDef = 5;
 				this.bonusHP = 100;
@@ -219,11 +298,8 @@ use namespace CoC;
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 3) {
 				initStrTouSpeInte(50, 80, 140, 120);
 				initWisLibSensCor(120, 30, 40, 10);
-				this.weaponName = "dagger";
 				this.weaponAttack = 8;
-				this.weaponRangeName = "bow";
 				this.weaponRangeAttack = 20;
-				this.armorName = "clothes";
 				this.armorDef = 5;
 				this.armorMDef = 5;
 				this.bonusHP = 150;
@@ -232,11 +308,8 @@ use namespace CoC;
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 4) {
 				initStrTouSpeInte(60, 95, 160, 140);
 				initWisLibSensCor(140, 30, 40, 10);
-				this.weaponName = "dagger";
 				this.weaponAttack = 8;
-				this.weaponRangeName = "bow";
 				this.weaponRangeAttack = 20;
-				this.armorName = "clothes";
 				this.armorDef = 5;
 				this.armorMDef = 5;
 				this.bonusHP = 200;
@@ -245,11 +318,8 @@ use namespace CoC;
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 5) {
 				initStrTouSpeInte(70, 110, 180, 150);
 				initWisLibSensCor(150, 30, 40, 10);
-				this.weaponName = "dagger";
 				this.weaponAttack = 8;
-				this.weaponRangeName = "bow";
 				this.weaponRangeAttack = 20;
-				this.armorName = "clothes";
 				this.armorDef = 5;
 				this.armorMDef = 5;
 				this.bonusHP = 250;
@@ -258,11 +328,8 @@ use namespace CoC;
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 6) {
 				initStrTouSpeInte(80, 130, 205, 150);
 				initWisLibSensCor(150, 30, 40, 10);
-				this.weaponName = "dagger";
 				this.weaponAttack = 8;
-				this.weaponRangeName = "bow";
 				this.weaponRangeAttack = 20;
-				this.armorName = "clothes";
 				this.armorDef = 5;
 				this.armorMDef = 5;
 				this.bonusHP = 300;
@@ -271,41 +338,52 @@ use namespace CoC;
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 7) {
 				initStrTouSpeInte(100, 150, 235, 150);
 				initWisLibSensCor(150, 50, 50, 10);
-				this.weaponName = "sharp dagger";
 				this.weaponAttack = 16;
-				this.weaponRangeName = "long bow";
 				this.weaponRangeAttack = 50;
-				this.armorName = "light leather armor";
 				this.armorDef = 16;
 				this.armorMDef = 5;
-				this.bonusHP = 300;
+				this.bonusHP = 320;
 				this.level = 51;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 8) {
-				initStrTouSpeInte(120, 170, 270, 150);
-				initWisLibSensCor(150, 70, 60, 10);
-				this.weaponName = "sharp dagger";
+				initStrTouSpeInte(120, 170, 270, 160);
+				initWisLibSensCor(160, 70, 60, 10);
 				this.weaponAttack = 17;
-				this.weaponRangeName = "long bow";
 				this.weaponRangeAttack = 55;
-				this.armorName = "light leather armor";
 				this.armorDef = 18;
 				this.armorMDef = 5;
-				this.bonusHP = 300;
+				this.bonusHP = 340;
 				this.level = 57;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 9) {
-				initStrTouSpeInte(140, 190, 310, 150);
-				initWisLibSensCor(150, 90, 70, 10);
-				this.weaponName = "sharp dagger";
+				initStrTouSpeInte(140, 190, 310, 170);
+				initWisLibSensCor(170, 90, 70, 10);
 				this.weaponAttack = 18;
-				this.weaponRangeName = "long bow";//potem jak stanie sie wiecej niż sheep-morph kolejna zmiana łuku
 				this.weaponRangeAttack = 60;
-				this.armorName = "light leather armor";
 				this.armorDef = 20;
 				this.armorMDef = 5;
-				this.bonusHP = 300;
+				this.bonusHP = 360;
 				this.level = 63;
+			}
+			if (flags[kFLAGS.KINDRA_LVL_UP] == 10) {
+				initStrTouSpeInte(160, 210, 350, 180);
+				initWisLibSensCor(180, 110, 80, 10);
+				this.weaponAttack = 19;
+				this.weaponRangeAttack = 65;
+				this.armorDef = 22;
+				this.armorMDef = 6;
+				this.bonusHP = 380;
+				this.level = 69;
+			}
+			if (flags[kFLAGS.KINDRA_LVL_UP] == 11) {
+				initStrTouSpeInte(180, 230, 390, 190);
+				initWisLibSensCor(190, 130, 90, 10);
+				this.weaponAttack = 24;
+				this.weaponRangeAttack = 100;
+				this.armorDef = 33;
+				this.armorMDef = 12;
+				this.bonusHP = 450;
+				this.level = 75;
 			}
 			this.createVagina(false, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_TIGHT);
 			createBreastRow(Appearance.breastCupInverse("C"));
@@ -324,17 +402,24 @@ use namespace CoC;
 			this.lustVuln = .95;
 			this.gems = 0;
 			this.drop = new ChainedDrop().
-			//		add(armors.CHBIKNI,0.15).
 					add(consumables.LG_SFRP,0.3).
 					add(consumables.SHEEPMK,0.6);
 			this.createPerk(PerkLib.JobRanger, 0, 0, 0, 0);
 			this.createPerk(PerkLib.BasicEndurance, 0, 0, 0, 0);
 			this.createPerk(PerkLib.ArchersStaminaI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
+			this.createPerk(PerkLib.SoulApprentice, 0, 0, 0, 0);
+			this.createPerk(PerkLib.SoulPersonage, 0, 0, 0, 0);
+			this.createPerk(PerkLib.SoulWarrior, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			if (flags[kFLAGS.KINDRA_LVL_UP] >= 1) this.createPerk(PerkLib.BasicSelfControl, 0, 0, 0, 0);
+			if (flags[kFLAGS.KINDRA_LVL_UP] >= 1) {
+				this.createPerk(PerkLib.BasicSelfControl, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulSprite, 0, 0, 0, 0);
+			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 2) {
 				this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
 				this.createPerk(PerkLib.HalfStepToImprovedEndurance, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulScholar, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 4) {
 				this.createPerk(PerkLib.JobHunter, 0, 0, 0, 0);
@@ -344,13 +429,34 @@ use namespace CoC;
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 6) {
 				this.createPerk(PerkLib.PrestigeJobArcaneArcher, 0, 0, 0, 0);
 				this.createPerk(PerkLib.HalfStepToAdvancedEndurance, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
 			}
-			if (flags[kFLAGS.KINDRA_LVL_UP] >= 7) this.createPerk(PerkLib.ArchersStaminaI, 0, 0, 0, 0);
+			if (flags[kFLAGS.KINDRA_LVL_UP] >= 7) {
+				this.createPerk(PerkLib.ArchersStaminaI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.PrestigeJobArcaneArcher, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulExalt, 0, 0, 0, 0);
+			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 8) {
 				this.createPerk(PerkLib.AdvancedEndurance, 0, 0, 0, 0);
 				this.createPerk(PerkLib.HalfStepToImprovedSelfControl, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulOverlord, 0, 0, 0, 0);
 			}
-			if (flags[kFLAGS.KINDRA_LVL_UP] >= 9) this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
+			if (flags[kFLAGS.KINDRA_LVL_UP] >= 9) {
+				this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EpicSpeed, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.KINDRA_LVL_UP] >= 10) {
+				this.createPerk(PerkLib.HalfStepToSuperiorEndurance, 0, 0, 0, 0);
+				this.createPerk(PerkLib.HalfStepToAdvancedSelfControl, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.KINDRA_LVL_UP] >= 11) {
+				this.createPerk(PerkLib.AdvancedSelfControl, 0, 0, 0, 0);
+				this.createPerk(PerkLib.PrestigeJobSoulArcher, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.KINDRA_LVL_UP] >= 12) {
+				this.createPerk(PerkLib.SuperiorEndurance, 0, 0, 0, 0);
+				this.createPerk(PerkLib.LegendarySpeed, 0, 0, 0, 0);
+			}
 			//if (flags[kFLAGS.KINDRA_LVL_UP] >= ) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);kiedy zacznie sie KindraQuest
 			checkMonster();
 		}

@@ -7,6 +7,7 @@ package classes.Scenes.NPCs
 import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
+import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 
 use namespace CoC;
@@ -84,16 +85,35 @@ use namespace CoC;
 			outputText("A dragon-boy fall on his knees ");
 			if (this.HP < 1)outputText("beaten up");
 			else outputText("too horny to fight back");
-			SceneLib.tedScene.defeatedTed();
+			if (flags[kFLAGS.HIDDEN_CAVE_BOSSES] >= 1) SceneLib.tedScene.defeatedTedPostHiddenCave();
+			else SceneLib.tedScene.defeatedTed();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.tedScene.lostToTed();
+			if (flags[kFLAGS.HIDDEN_CAVE_BOSSES] >= 1) SceneLib.tedScene.lostToTedPostHiddenCave();
+			else SceneLib.tedScene.lostToTed();
 		}
 		
 		public function Ted() 
 		{
+			if (flags[kFLAGS.TED_LVL_UP] < 1) {
+				initStrTouSpeInte(30, 50, 50, 30);
+				initWisLibSensCor(30, 20, 40, 50);
+				this.weaponAttack = 8;
+				this.armorDef = 5;
+				this.armorMDef = 50;
+				this.level = 9;
+			}
+			if (flags[kFLAGS.TED_LVL_UP] == 1) {
+				
+			}
+			if (flags[kFLAGS.TED_LVL_UP] == 2) {
+				
+			}
+			if (flags[kFLAGS.TED_LVL_UP] == 3) {
+				
+			}
 			this.a = "the ";
 			this.short = "mysterious dragon-boy";
 			this.imageName = "mysterious dragon-boy";
@@ -114,18 +134,12 @@ use namespace CoC;
 			this.skinDesc = "skin";
 			this.hairColor = "brown";
 			this.hairLength = 2;
-			initStrTouSpeInte(30, 50, 50, 30);
-			initWisLibSensCor(30, 20, 40, 50);
 			this.weaponName = "bam hammer";
 			this.weaponVerb="bam";
-			this.weaponAttack = 8;
 			this.armorName = "dragonscales armor";
-			this.armorDef = 5;
-			this.armorMDef = 50;
 			this.lust = 15;
 			this.lustVuln = .9;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 9;
 			this.gems = rand(10) + 5;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);

@@ -65,7 +65,7 @@ public final class Mutations extends MutationsHelper
 			clearOutput();
 			outputText("You open the can and “bottom up”, hoping it wasn’t just a scam to buy an overpriced beer. “Whoa, that’s one hell of a manly beverage!” The alcohol in the beer is so strong you actually feel like you could lift bigger things now. No...wait, you actually do as your muscle seems to surge with new raw power.");
 			dynStats("str", 1 + rand(2));
-			if (rand(3) == 0) outputText(player.modTone((player.maxToneCap() - 5), 3));
+			if (rand(3) == 0) outputText(player.modTone(player.maxToneCap(), 3));
 			player.refillHunger(10);
 			if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
 		}
@@ -77,7 +77,7 @@ public final class Mutations extends MutationsHelper
 			clearOutput();
 			outputText("The elixir tastes foul at first, but you guess it’s how it is with all medicine. As the merchant warned you, you begin to feel your muscles coiling like a spring, ready to allow you to make a swift dash. Your co-ordination definitively improved too, as well as your vision, as you can follow your movement despite the acceleration.");
 			dynStats("spe", 1 + rand(2));
-			if (rand(3) == 0) outputText(player.modTone((player.maxToneCap() - 5), 3));
+			if (rand(3) == 0) outputText(player.modTone(player.maxToneCap(), 3));
 			player.refillHunger(5);
 		}
 
@@ -7698,7 +7698,7 @@ public final class Mutations extends MutationsHelper
 			}
 			outputText("You finish admiring yourself and adjust your [armor] to better fit your new physique.  Maybe there's some bitches around you can fuck.  Hell, as good as you look, you might have other dudes wanting you to fuck them too, no homo.\n\n");
 			//max tone.  Thickness + 50
-			player.modTone(100, 100);
+			player.modTone(player.maxToneCap(), 100);
 			player.modThickness(100, 50);
 			//Bonus cum production!
 			player.createPerk(PerkLib.BroBrains, 0, 0, 0, 0);
@@ -10980,7 +10980,7 @@ public final class Mutations extends MutationsHelper
 			//Legs
 			if (player.lowerBody != LowerBody.YETI && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
 				if (player.lowerBody == LowerBody.HUMAN) {
-					outputText("\n\nYour legs start becoming excessively hairy down to your feet. They’re so hairy you can no longer see your skin. Just as you thought the transformation was over, you see your feet enlarging to twice their size. They look like those of a huge monkey. Well, you guess people can call you Bigfoot now with your enormous <b>yeti feet!</b>");
+					outputText("\n\nYour legs start becoming excessively hairy down to your feet. They’re so hairy that you can no longer see your skin. Just as you thought the transformation was over, you see your feet enlarging to twice their size. They look like those of a huge monkey. Well, you guess people can call you Bigfoot now with your enormous <b>yeti feet!</b>");
 					setLowerBody(LowerBody.YETI);
 				}
 				else {
@@ -10990,7 +10990,7 @@ public final class Mutations extends MutationsHelper
 			}
 			//Arms
 			if (player.lowerBody == LowerBody.YETI && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.YETI) && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nYour arms start to become excessively hairy down almost to your hands. They're so hairy, you can no longer see your skin. As the fur growth stops, your hands enlarge to twice their size. They look like huge monkey paws. Well, you guess punching people will be easy with your enormous <b>yeti hands!</b>");
+				outputText("\n\nYour arms start to become excessively hairy down almost to your hands. They're so hairy that you can no longer see your skin. As the fur growth stops, your hands enlarge to twice their size. They look like huge monkey paws. Well, you guess punching people will be easy with your enormous <b>yeti hands!</b>");
 				setArmType(Arms.YETI);
 				changes++;
 			}
@@ -11008,7 +11008,7 @@ public final class Mutations extends MutationsHelper
 			}
 			//Hair
 			if (player.faceType == Face.YETI_FANGS && player.hairType != Hair.FLUFFY && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nYour hair starts to grow longer and fluffier. It covers all sides of your head perfectly, like a furry helmet keeping it warm. Only your face and neck are devoid of this hairy armor which still manage to look like a nice short haircut. While it looks like hair at first, touching it proves it to be like a very thick coat of fluff. You now have <b>yeti fluffy [haircolor] hairs.</b>");
+				outputText("\n\nYour hair starts to grow longer and fluffier. It covers all sides of your head perfectly, like a furry helmet, keeping it warm. Only your face and neck are devoid of this hairy armor which still manage to look like a nice short haircut. While it looks like hair at first, touching it proves it to be like a very thick coat of fluff. You now have <b>yeti fluffy [haircolor] hairs.</b>");
 				setHairType(Hair.FLUFFY);
 				changes++;
 			}
@@ -11016,7 +11016,7 @@ public final class Mutations extends MutationsHelper
 			if (player.hairType == Hair.FLUFFY && !player.skin.checkProps({coverage:Skin.COVERAGE_LOW,coat:{type:Skin.FUR}}) && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nThick hair starts to grow in random areas all over your body. ");
 				if (player.breastRows.length > 0) outputText("Your breasts in particular cover with hair forming into what can only be described as a natural bikini.");
-				outputText(" Furthermore your hair natural color turns to white. Your body is now <b>partially covered with thick white fur!</b>");
+				outputText(" Furthermore, your hair natural color turns to white. Your body is now <b>partially covered with thick white fur!</b>");
 				player.skin.growFur({color:"white"},Skin.COVERAGE_LOW);
 				player.hairColor = "white";
 				changes++;

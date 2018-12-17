@@ -22,12 +22,17 @@ use namespace CoC;
 	{
 		public function moveBleedingBite():void {
 			outputText("Ceani lunges in for a bite tearing a fair chunk out of you and you begin bleeding. ");
+			var bleeddura:Number = 3;
 			var damage:Number = 0;
 			damage += eBaseStrengthDamage();
 			damage += rand(this.str);
+			if (flags[kFLAGS.CEANI_LVL_UP] >= 5) {
+				bleeddura += 1;
+				damage += eBaseStrengthDamage() * 0.5;
+			}
 			player.takePhysDamage(damage, true);
-			if (player.hasStatusEffect(StatusEffects.IzmaBleed)) player.addStatusValue(StatusEffects.IzmaBleed,1,3);
-			else player.createStatusEffect(StatusEffects.IzmaBleed,3,0,0,0);
+			if (player.hasStatusEffect(StatusEffects.IzmaBleed)) player.addStatusValue(StatusEffects.IzmaBleed,1,bleeddura);
+			else player.createStatusEffect(StatusEffects.IzmaBleed,bleeddura,0,0,0);
 		}
 		
 		public function moveHarpoonDancing():void {
@@ -43,6 +48,7 @@ use namespace CoC;
 		public function moveHarpoonDancingDamage():void {
 			var damage:Number = 0;
 			damage += eBaseStrengthDamage() * 0.5;
+			if (flags[kFLAGS.CEANI_LVL_UP] >= 5) damage += eBaseStrengthDamage() * 0.25;
 			damage += rand(this.str);
 			player.takePhysDamage(damage, true);
 		}
@@ -51,6 +57,7 @@ use namespace CoC;
 			outputText("Ceani’s tail sends you flying to the other edge of the ring. ");
 			var damage:Number = 0;
 			damage += eBaseStrengthDamage();
+			if (flags[kFLAGS.CEANI_LVL_UP] >= 5) damage += eBaseStrengthDamage() * 0.5;
 			damage += rand(this.str);
 			player.takePhysDamage(damage, true);
 			if (!player.hasPerk(PerkLib.Resolute)) {
@@ -72,6 +79,7 @@ use namespace CoC;
 			outputText("Ceani grabs her harpoon with both hands and slams it on you in an attempt to hammer you into the ground like a nail. You manage to block the weapon but the titanic impact sends you reeling in pain. ");
 			var damage:Number = 0;
 			damage += eBaseStrengthDamage() * 0.6;
+			if (flags[kFLAGS.CEANI_LVL_UP] >= 5) damage += eBaseStrengthDamage() * 0.3;
 			damage += rand(this.str);
 			player.takePhysDamage(damage, true);
 			outputText(" damage.");
@@ -107,6 +115,10 @@ use namespace CoC;
 		
 		public function Ceani() 
 		{
+			if (flags[kFLAGS.CEANI_LVL_UP] < 5) {
+				this.armorDef = 25;
+				this.armorMDef = 5;
+			}
 			if (flags[kFLAGS.CEANI_LVL_UP] == 0) {
 				this.level = 38;
 				initStrTouSpeInte(150, 300, 170, 200);
@@ -132,16 +144,34 @@ use namespace CoC;
 				this.weaponAttack = 40;
 			}
 			if (flags[kFLAGS.CEANI_LVL_UP] == 4) {
-				this.level = 70;
+				this.level = 68;
 				initStrTouSpeInte(270, 300, 250, 200);
 				initWisLibSensCor(200, 200, 80, 50);
 				this.weaponAttack = 48;
 			}
 			if (flags[kFLAGS.CEANI_LVL_UP] == 5) {
-				this.level = 76;
+				this.level = 74;
 				initStrTouSpeInte(300, 320, 270, 210);
 				initWisLibSensCor(210, 210, 80, 50);
 				this.weaponAttack = 56;
+				this.armorDef = 27;
+				this.armorMDef = 6;
+			}
+			if (flags[kFLAGS.CEANI_LVL_UP] == 6) {
+				this.level = 80;
+				initStrTouSpeInte(330, 340, 290, 220);
+				initWisLibSensCor(220, 220, 80, 50);
+				this.weaponAttack = 64;
+				this.armorDef = 29;
+				this.armorMDef = 7;
+			}
+			if (flags[kFLAGS.CEANI_LVL_UP] == 7) {
+				this.level = 86;
+				initStrTouSpeInte(360, 360, 310, 230);
+				initWisLibSensCor(230, 230, 80, 50);
+				this.weaponAttack = 72;
+				this.armorDef = 31;
+				this.armorMDef = 8;
 			}
 			this.a = "";
 			this.short = "Ceani";
@@ -161,8 +191,6 @@ use namespace CoC;
 			this.weaponName = "harpoon";
 			this.weaponVerb="piercing stab";
 			this.armorName = "pink bikini";
-			this.armorDef = 25;
-			this.armorMDef = 5;
 			this.bonusHP = 2000;
 			this.bonusLust = 50;
 			this.lust = 30;
@@ -178,10 +206,22 @@ use namespace CoC;
 			this.lowerBody = LowerBody.ORCA;
 			this.tailType = Tail.ORCA;
 			this.tailRecharge = 0;
-			//if (flags[kFLAGS.ETNA_FOLLOWER] > 1 || flags[kFLAGS.ETNA_TALKED_ABOUT_HER] > 1) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
-			//this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
-			//this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
-			//this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
+			if (flags[kFLAGS.CEANI_LVL_UP] >= 4) {
+				this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.CEANI_LVL_UP] >= 5) {
+				this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.CEANI_LVL_UP] >= 6) {
+				this.createPerk(PerkLib.EpicStrength, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EpicToughness, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.CEANI_LVL_UP] >= 7) {
+				this.createPerk(PerkLib.EpicSpeed, 0, 0, 0, 0);
+				this.createPerk(PerkLib.GoliathI, 0, 0, 0, 0);
+			}
 			checkMonster();
 		}
 	}

@@ -2127,6 +2127,18 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.EMBER_LVL_UP] = 7;
 				}
+				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 11 && flags[kFLAGS.EMBER_LVL_UP] == 7) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 66);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 66, 0, 0, 0);
+					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.EMBER_LVL_UP] = 8;
+				}
+				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 12 && flags[kFLAGS.EMBER_LVL_UP] == 8) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 72);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 72, 0, 0, 0);
+					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.EMBER_LVL_UP] = 9;
+				}
 			}
 			cleanupAfterCombat();
 		}

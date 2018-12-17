@@ -644,7 +644,8 @@ public class Exploration extends BaseContent
 				//Chance of encountering Giacomo!
 				if (choosey == 0) {
 					player.explored++;
-					if (flags[kFLAGS.SOUL_SENSE_GIACOMO] < 3) SceneLib.giacomoShop.giacomoEncounter();
+					if (flags[kFLAGS.SOUL_SENSE_GIACOMO] < 3 && rand(3) > 0) SceneLib.giacomoShop.giacomoEncounter();
+					else if (flags[kFLAGS.DINAH_LVL_UP] < 1) SceneLib.dinahScene.DinahIntro1();
 					else genericGolGobImpEncounters(true);
 					return;
 				}

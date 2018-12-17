@@ -38,6 +38,15 @@ public class TedScenes extends NPCAwareContent
 			removeButton(1);
 		}
 		
+		public function defeatedTedPostHiddenCave():void {
+			outputText(".\n\n");
+			cleanupAfterCombat();
+		}
+		
+		public function lostToTedPostHiddenCave():void {
+			clearOutput();
+			outputText(".\n\n");
+			cleanupAfterCombat();
+		}
 	}
-
 }

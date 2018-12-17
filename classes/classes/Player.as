@@ -1685,6 +1685,9 @@ use namespace CoC;
 			var mult:Number = damageMagicalPercent();
 			if (findPerk(PerkLib.FromTheFrozenWaste) >= 0 || findPerk(PerkLib.ColdAffinity) >= 0) mult -= 50;
 			if (findPerk(PerkLib.FireAffinity) >= 0) mult += 100;
+			if (upperGarmentName == "Fur bikini top") mult -= 10;
+			if (lowerGarmentName == "Fur loincloth" || lowerGarmentName == "Fur panty") mult -= 10;
+			if (necklaceName == "Blue Winter scarf") mult -= 20;
 			if (hasStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1) && (statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff1) > 0)) mult -= statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff1);
 			//Caps damage reduction at 100%
 			if (mult < 0) mult = 0;

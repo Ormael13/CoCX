@@ -67,6 +67,7 @@ package classes.Items
 		public const N_STAFF:NocturnusStaff = new NocturnusStaff();
 		public const NTWHIP :NineTailWhip = new NineTailWhip();
 		public const NODACHI:Weapon = new Weapon("Nodachi","Nodachi","nodachi","a nodachi","keen cut",25,1000,"A curved over 1,7 m long bladed weapon that cuts through flesh with the greatest of ease.", "Large");
+		public const NORTHIP:NorthernerIcePicks = new NorthernerIcePicks();
 		public const NPHBLDE:NephilimBlade = new NephilimBlade();
 		public const OTETSU :OniTetsubo = new OniTetsubo();
 		public const PIPE   :Weapon = new Weapon("Pipe   ","Pipe","pipe","a pipe","smash",2,80,"This is a simple rusted pipe of unknown origins.  It's hefty and could probably be used as an effective bludgeoning tool.");

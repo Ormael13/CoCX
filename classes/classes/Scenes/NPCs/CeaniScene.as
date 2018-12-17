@@ -607,17 +607,29 @@ public function sparringWithCeaniWon():void
 	outputText("You help her back up and walk her off to her bedroll. She thanks you and lays down to rest for the day. Its unlikely the two of you will be able to spar again before tomorrow anyway.\n\n");
 	if (flags[kFLAGS.CEANI_DAILY_TRAINING] < 1) flags[kFLAGS.CEANI_DAILY_TRAINING] = 1;
 	if (flags[kFLAGS.CEANI_DAILY_TRAINING] == 2) flags[kFLAGS.CEANI_DAILY_TRAINING] = 3;
-	if (flags[kFLAGS.CEANI_LVL_UP] < 3) flags[kFLAGS.CEANI_LVL_UP]++;/*		zmienić potem na < 4 zamiast < 3
+	if (flags[kFLAGS.CEANI_LVL_UP] < 4) flags[kFLAGS.CEANI_LVL_UP]++;
 	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2 && flags[kFLAGS.CEANI_LVL_UP] >= 4) {
 		if (flags[kFLAGS.CEANI_DEFEATS_COUNTER] >= 1) flags[kFLAGS.CEANI_DEFEATS_COUNTER]++;
 		else flags[kFLAGS.CEANI_DEFEATS_COUNTER] = 1;
-		if (flags[kFLAGS.CEANI_DEFEATS_COUNTER] == 11 && flags[kFLAGS.CHI_CHI_LVL_UP] == 4) {
+		if (flags[kFLAGS.CEANI_DEFEATS_COUNTER] == 11 && flags[kFLAGS.CEANI_LVL_UP] == 4) {
 			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 3, 66);
 			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 66, 0);
 			flags[kFLAGS.CEANI_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.CEANI_LVL_UP] = 5;
+		}/*
+		if (flags[kFLAGS.CEANI_DEFEATS_COUNTER] == 12 && flags[kFLAGS.CEANI_LVL_UP] == 4) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 3, 72);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 72, 0);
+			flags[kFLAGS.CEANI_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.CEANI_LVL_UP] = 6;
 		}
-	}*/
+		if (flags[kFLAGS.CEANI_DEFEATS_COUNTER] == 13 && flags[kFLAGS.CEANI_LVL_UP] == 4) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 3, 78);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 78, 0);
+			flags[kFLAGS.CEANI_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.CEANI_LVL_UP] = 7;
+		}*/
+	}
 	cleanupAfterCombat();
 }
 public function sparringWithCeaniLost():void

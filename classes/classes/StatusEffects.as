@@ -44,9 +44,11 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CampLunaMishaps1:StatusEffectType				= mk("Camp Luna Mishaps 1");
 		public static const CampLunaMishaps2:StatusEffectType				= mk("Camp Luna Mishaps 2");
 		public static const CampLunaMishaps3:StatusEffectType				= mk("Camp Luna Mishaps 3");
-		public static const CampSparingNpcsTimers1:StatusEffectType			= mk("Camp Sparing Npc's Timers 1");
-		public static const CampSparingNpcsTimers2:StatusEffectType			= mk("Camp Sparing Npc's Timers 2");
-		public static const CampSparingNpcsTimers3:StatusEffectType			= mk("Camp Sparing Npc's Timers 3");
+		public static const CampSparingDinah:StatusEffectType				= mk("Camp Sparing Dinah");
+		public static const CampSparingNpcsTimers1:StatusEffectType			= mk("Camp Sparing Npc's Timers 1");//Ember / Isabella / Kiha / Etna
+		public static const CampSparingNpcsTimers2:StatusEffectType			= mk("Camp Sparing Npc's Timers 2");//Kindra / Chi Chi / Ceani / Diana
+		public static const CampSparingNpcsTimers3:StatusEffectType			= mk("Camp Sparing Npc's Timers 3");//Luna /?Galia?/?Dinah?/?Cai'Lin?
+		public static const CampSparingNpcsTimers4:StatusEffectType			= mk("Camp Sparing Npc's Timers 4");//x / x / x / x
 		public static const ClaraCombatRounds:StatusEffectType              = mk("Clara Combat Rounds");
 		public static const ClaraFoughtInCamp:StatusEffectType              = mk("Clara Fought In Camp");
 		public static const CockPumped:StatusEffectType                     = mk("Cock Pumped");
@@ -308,6 +310,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const MissFirstRound:StatusEffectType     = mk("miss first round");
 		public static const MonsterRegen:StatusEffectType       = mk("Monster Regeneration");//% regen
 		public static const MonsterRegen2:StatusEffectType      = mk("Monster Regeneration2");//flat regen
+		public static const MonsterVPT:StatusEffectType 		= mk("Monster Violet Pupil Transformation");
 		public static const NoLoot:StatusEffectType             = mk("No Loot");
 		public static const PCTailTangle:StatusEffectType       = mk("PCTailTangle");
 		public static const PeachLootLoss:StatusEffectType      = mk("Peach Loot Loss");

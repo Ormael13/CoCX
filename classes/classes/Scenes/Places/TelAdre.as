@@ -1262,7 +1262,7 @@ private function goJogging():void {
 	//Thickness decrease!
 	outputText(player.modThickness(1,5+rand(2)));
 	//Muscleness boost!
-	outputText(player.modTone(100,2+rand(4)));
+	outputText(player.modTone(player.maxToneCap(),2+rand(4)));
 	outputText("\n\nDo you want to hit the showers before you head back to camp?");
 	if(flags[kFLAGS.BROOKE_MET] == 1) {
 		menu();

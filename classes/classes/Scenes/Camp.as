@@ -941,6 +941,7 @@ public function followersCount():Number {
 	if (sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
 	if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1) counter++;
 	if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
+	if (flags[kFLAGS.DINAH_LVL_UP] >= 1) counter++;
 	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) counter++;
 	if (helspawnFollower()) counter++;
 	if (flags[kFLAGS.ANEMONE_KID] > 0) counter++;
@@ -1008,6 +1009,7 @@ public function loversHotBathCount():Number {
 	if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
 	if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
 	if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
+	if (flags[kFLAGS.DINAH_LVL_UP] >= 1) counter++;
 	if (player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) counter++;
 	if (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) counter++;
 	if (followerKiha()) counter++;
@@ -1022,6 +1024,7 @@ public function sparableCampMembersCount():Number {
 	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
 	if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1) counter++;
 	if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
+	if (flags[kFLAGS.DINAH_LVL_UP] >= 1) counter++;
 	if (helspawnFollower()) counter++;
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) counter++;
 	if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
@@ -1095,7 +1098,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 	//Ceani
 	if (flags[kFLAGS.CEANI_FOLLOWER] > 0) {
 		outputText("Ceani is lazily sunbathing at the other side of the camp.\n\n");
-		buttons.add("Ceani", SceneLib.ceaniScene.ceaniCampMainMenu);
+		buttons.add("Ceani", SceneLib.ceaniScene.ceaniCampMainMenu).disableIf(player.statusEffectv3(StatusEffects.CampSparingNpcsTimers2) > 0,"Training.");
 	}
 	//Chi Chi
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) {
@@ -1106,7 +1109,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 	//Diana
 	if (flags[kFLAGS.DIANA_FOLLOWER] > 5) {
 		outputText("Diana is resting next to her many medical tools and medicines.\n\n");
-		buttons.add("Diana", SceneLib.dianaScene.mainCampMenu);
+		buttons.add("Diana", SceneLib.dianaScene.mainCampMenu).disableIf(player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) > 0,"Training.");
 	}
 	//Etna
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) {
@@ -1494,7 +1497,12 @@ public function campFollowers(descOnly:Boolean = false):void {
 	//Kindra
 	if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) {
 		outputText("You can see a set of finely crafted traps around your camp. Kindra must be hunting nearby.\n\n");
-		buttons.add( "Kindra", SceneLib.kindraFollower.meet2Kindra).hint("Visit Kindra the sheep-morph.");
+		buttons.add( "Kindra", SceneLib.kindraFollower.meet2Kindra).hint("Visit Kindra the sheep-morph.").disableIf(player.statusEffectv1(StatusEffects.CampSparingNpcsTimers2) > 0,"Training.");
+	}
+	//Dinah
+	if (flags[kFLAGS.DINAH_LVL_UP] >= 1) {
+		outputText("You can see a cart with various vials standing next to bedroll. Dinah must be somewhere nearby.\n\n");
+		buttons.add( "Dinah", SceneLib.dinahScene.DinahIntro2).hint("Visit Dinah the cat chimera merchant.");
 	}
 	//Helspawn
 	if (helspawnFollower()) {
@@ -2511,18 +2519,6 @@ private function farmFound():Boolean { //Returns true as soon as any known dunge
 //-----------------
 private function placesKnown():Boolean { //Returns true as soon as any known place is found
 	if (placesCount() > 0) return true;
-	//No need for redundant code!
-	/*if (flags[kFLAGS.BAZAAR_ENTERED] > 0) return true;
-	if (player.hasStatusEffect(StatusEffects.BoatDiscovery)) return true;
-	if (flags[kFLAGS.FOUND_CATHEDRAL] == 1) return true;
-	if (dungeonFound()) return true;
-	if (farmFound()) return true;
-	if (flags[kFLAGS.OWCA_UNLOCKED] == 1) return true;
-	if (player.hasStatusEffect(StatusEffects.HairdresserMeeting)) return true;
-	if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) return true;
-	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) return true;
-	if (flags[kFLAGS.MET_MINERVA] >= 4) return true;
-	if (flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) return true;*/
 	return false;
 }
 
@@ -2541,6 +2537,7 @@ public function placesCount():int {
 	if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0) places++;
 	if (flags[kFLAGS.HEXINDAO_UNLOCKED] > 0) places++;
 	if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] > 0) places++;
+	if (flags[kFLAGS.YU_SHOP] == 2) places++;
 	if (flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) places++;
 	return places;
 }
@@ -2562,7 +2559,6 @@ public function places():Boolean {
 	if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) addButton(5, "Tel'Adre", SceneLib.telAdre.telAdreMenu).hint("Visit the city of Tel'Adre in desert, easily recognized by the massive tower.");
 	if (flags[kFLAGS.BAZAAR_ENTERED] > 0) addButton(6, "Bazaar", SceneLib.bazaar.enterTheBazaar).hint("Visit the Bizarre Bazaar where the demons and corrupted beings hang out.");
 	if (flags[kFLAGS.OWCA_UNLOCKED] == 1) addButton(7, "Owca", SceneLib.owca.gangbangVillageStuff).hint("Visit the sheep village of Owca, known for its pit where a person is hung on the pole weekly to be gang-raped by the demons.");
-	
 	if (flags[kFLAGS.HEXINDAO_UNLOCKED] == 1) addButton(10, "He'Xin'Dao", hexindao.riverislandVillageStuff).hint("Visit the village of He'xin'dao, place where all greenhorn soul cultivators come together.");
 	addButton(4, "Next", placesPage2);
 	addButton(14, "Back", playerMenu);
@@ -2584,6 +2580,7 @@ private function placesPage2():void {
 	if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0) addButton(5, "Shrine", SceneLib.kitsuneScene.kitsuneShrine).hint("Visit the kitsune shrine in the deepwoods.");
 	if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(6, "Oasis Tower", SceneLib.highMountains.minervaScene.encounterMinerva).hint("Visit the ruined tower in the high mountains where Minerva resides.");
 	if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] > 0) addButton(7, "Temple", templeofdivine.repeatvisitintro).hint("Visit the temple in the high mountains where Sapphire resides.");
+	if (flags[kFLAGS.YU_SHOP] == 2) addButton(8, "Winter Gear", SceneLib.glacialYuShop.YuIntro).hint("Visit the Winter gear shop.");
 	
 //	if (flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) addButton(12, "Prison", CoC.instance.prison.prisonIntro, false, null, null, "Return to the prison and continue your life as Elly's slave.");
 	if (debug) addButton(13, "Ingnam", SceneLib.ingnam.returnToIngnam).hint("Return to Ingnam for debugging purposes. Night-time event weirdness might occur. You have been warned!");
@@ -3922,4 +3919,4 @@ private function fixHistory():void {
 */
 }
 }
-
+

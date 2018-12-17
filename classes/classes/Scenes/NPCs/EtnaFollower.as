@@ -405,12 +405,30 @@ public function etnaRapeIntro2():void
 			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 60);
 			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ETNA_LVL_UP] = 6;
-		}/*
+		}
 		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.ETNA_LVL_UP] == 6) {
 			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, 66);
 			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 66);
 			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ETNA_LVL_UP] = 7;
+		}
+		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] == 12 && flags[kFLAGS.ETNA_LVL_UP] == 7) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, 72);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 72);
+			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ETNA_LVL_UP] = 8;
+		}/*
+		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] == 13 && flags[kFLAGS.ETNA_LVL_UP] == 8) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, 78);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 78);
+			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ETNA_LVL_UP] = 9;
+		}
+		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] == 14 && flags[kFLAGS.ETNA_LVL_UP] == 9) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, 84);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 84);
+			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ETNA_LVL_UP] = 10;
 		}*/
 	}
 	menu();

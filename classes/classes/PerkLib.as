@@ -1484,10 +1484,10 @@ public class PerkLib
 				"Opponent have a hard time dealing serious damage as the sight of your naked body distract them (+10% dmg reduction).",
 				"You choose the 'Naked Truth' perk, causing opponent have a hard time dealing serious damage as the sight of your naked body distract them.");
 		public static const NaturalHealingEpic:PerkType = mk("Natural healing (Epic)", "Natural healing (Epic)",
-				"Incease healing power by 60% and lower healing spells mana costs by 25%.",
+				"Incease healing power by 50% and lower healing spells mana costs by 20%.",
 				"You choose the 'Natural healing (Epic)' perk, increasing healing spells effectivnes and lowering their costs.");
 		public static const NaturalHealingLegendary:PerkType = mk("Natural healing (Legendary)", "Natural healing (Legendary)",
-				"Incease healing power by 50% and lower healing spells mana costs by 20%.",
+				"Incease healing power by 60% and lower healing spells mana costs by 25%.",
 				"You choose the 'Natural healing (Legendary)' perk, increasing healing spells effectivnes and lowering their costs.");
 		public static const NaturalHealingMajor:PerkType = mk("Natural healing (Major)", "Natural healing (Major)",
 				"Incease healing power by 40% and lower healing spells mana costs by 15%.",
@@ -1608,7 +1608,7 @@ public class PerkLib
 				"You've trained in prestige art of combine soulforce with physical attacks to various deadly effect.",
 				"You choose 'Prestige Job: Soul Art Master' perk, training yourself to became Soul Art Master.");
 		public static const PrestigeJobTempest:PerkType = mk("Prestige Job: Tempest", "Prestige Job: Tempest",
-				"You've trained in prestige art of dual wieldingas you hack and slice through your opponents like a raging storm of steel.",
+				"You've trained in prestige art of dual wielding as you hack and slice through your opponents like a raging storm of steel.",
 				"You choose 'Prestige Job: Tempest' perk, training yourself to became Tempest.");
 		public static const PrimalFuryI:PerkType = mk("Primal Fury I", "Primal Fury I",
 				"Raises max Wrath by 10, generates 1 point of Wrath out of combat and double this amount during fight.",
@@ -4901,4 +4901,4 @@ public class PerkLib
 	initDependencies();
 }
 }
-
+
