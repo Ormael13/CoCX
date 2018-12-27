@@ -151,9 +151,18 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.removeStatusEffect(StatusEffects.CampSparingNpcsTimers3);
 				}
 			}
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) {
+				if (player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) > 0) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 1, -1);
+				if (player.statusEffectv2(StatusEffects.CampSparingNpcsTimers4) > 0) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, -1);
+				if (player.statusEffectv3(StatusEffects.CampSparingNpcsTimers4) > 0) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, -1);
+				if (player.statusEffectv4(StatusEffects.CampSparingNpcsTimers4) > 0) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 4, -1);
+				if (player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) <= 0 && player.statusEffectv2(StatusEffects.CampSparingNpcsTimers4) <= 0 && player.statusEffectv3(StatusEffects.CampSparingNpcsTimers4) <= 0 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers4) <= 0) {
+					player.removeStatusEffect(StatusEffects.CampSparingNpcsTimers4);
+				}
+			}
 			//Sidonie checks
 			if (flags[kFLAGS.SIDONIE_RECOLLECTION] > 0) flags[kFLAGS.SIDONIE_RECOLLECTION]--;
-			if (flags[kFLAGS.LUNA_FOLLOWER] >= 4) {
+			if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) {
 				if (flags[kFLAGS.LUNA_JEALOUSY] < 200) flags[kFLAGS.LUNA_JEALOUSY]++;
 				if ((flags[kFLAGS.LUNA_FOLLOWER] == 6 || flags[kFLAGS.LUNA_FOLLOWER] == 8 || flags[kFLAGS.LUNA_FOLLOWER] == 10 || flags[kFLAGS.LUNA_FOLLOWER] == 12 || flags[kFLAGS.LUNA_FOLLOWER] == 14 || flags[kFLAGS.LUNA_FOLLOWER] == 16) && flags[kFLAGS.LUNA_JEALOUSY] < 50) flags[kFLAGS.LUNA_FOLLOWER]--;
 				if ((flags[kFLAGS.LUNA_FOLLOWER] == 5 || flags[kFLAGS.LUNA_FOLLOWER] == 7 || flags[kFLAGS.LUNA_FOLLOWER] == 9 || flags[kFLAGS.LUNA_FOLLOWER] == 11 || flags[kFLAGS.LUNA_FOLLOWER] == 13 || flags[kFLAGS.LUNA_FOLLOWER] == 15) && flags[kFLAGS.LUNA_JEALOUSY] >= 50 && (CoC.instance.model.time.hours > 6 && CoC.instance.model.time.hours < 23)) SceneLib.lunaFollower.warrningAboutJelously();
@@ -609,58 +618,56 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				if (player.hasStatusEffect(StatusEffects.CampLunaMishaps2)) player.removeStatusEffect(StatusEffects.CampLunaMishaps2);
 				if (player.hasStatusEffect(StatusEffects.CampLunaMishaps3)) player.removeStatusEffect(StatusEffects.CampLunaMishaps3);
 				//Full moon
-				if (flags[kFLAGS.LUNA_FOLLOWER] >= 4) {
-					flags[kFLAGS.LUNA_MOON_CYCLE]++;
-					if (flags[kFLAGS.LUNA_MOON_CYCLE] > 8) flags[kFLAGS.LUNA_MOON_CYCLE] = 1;
-					if (player.hasPerk(PerkLib.Lycanthropy)) {
-						var changeV:Number = 10 * (player.newGamePlusMod() + 1);
-						if (flags[kFLAGS.LUNA_MOON_CYCLE] == 5) {
-							outputText("<b>\nYou can’t help but notice the moon is almost full as it rises up.  It seems transfixing like it is calling to you.");
-							outputText("\n\nYou feel your might increasing as the moon draws closer to fullness.</b>\n");
-							dynStats("str", changeV, "tou", changeV, "spe", changeV);
-							player.setPerkValue(PerkLib.Lycanthropy,1,10);
-						}
-						if (flags[kFLAGS.LUNA_MOON_CYCLE] == 6) {
-							outputText("<b>\nWhen the almost-full moon appears it causes your heart to race with excitement.  You hearing seems better than ever.  Every breath brings a rush of smells through your nose that seem much more pronounced than they should.");
-							outputText("\n\nYou feel your might increasing as the moon draws closer to fullness.</b>\n");
-							dynStats("str", changeV, "tou", changeV, "spe", changeV);
-							player.setPerkValue(PerkLib.Lycanthropy,1,20);
-						}
-						if (flags[kFLAGS.LUNA_MOON_CYCLE] == 7) {
-							outputText("<b>\nYou gaze at the moon and it seems to gaze back into you.   Something is coming and it won’t be long now.   You feel like you are crawling in your skin.  It feels like tear out of your body and be born anew.");
-							outputText("\n\nYou feel your might increasing as the moon draws closer to fullness. It's almost time.</b>\n");
-							dynStats("str", changeV, "tou", changeV, "spe", changeV);
-							player.setPerkValue(PerkLib.Lycanthropy,1,30);
-						}
-						if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) {
-							outputText("<b>\nYou are at the peak of your strength, it's a full moon tonight and you feel yourself burning with maddening desire as you go into " + player.mf("rut","heat") + ".</b>\n");
-							dynStats("str", changeV, "tou", changeV, "spe", changeV);
-							player.setPerkValue(PerkLib.Lycanthropy,1,40);
-							if (player.hasCock() || (player.gender == 3 && rand(2) == 0)) player.goIntoRut(false);
-							else if (player.hasVagina()) player.goIntoHeat(false);
-						}
-						if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1) {
-							outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>\n");
-							dynStats("str", -changeV, "tou", -changeV, "spe", -changeV);
-							player.setPerkValue(PerkLib.Lycanthropy,1,30);
-						}
-						if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2) {
-							outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>\n");
-							dynStats("str", -changeV, "tou", -changeV, "spe", -changeV);
-							player.setPerkValue(PerkLib.Lycanthropy,1,20);
-						}
-						if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3) {
-							outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>\n");
-							dynStats("str", -changeV, "tou", -changeV, "spe", -changeV);
-							player.setPerkValue(PerkLib.Lycanthropy,1,10);
-						}
-						if (flags[kFLAGS.LUNA_MOON_CYCLE] == 4) {
-							outputText("<b>\nIt's a new moon tonight, you feel somewhat weak.</b>\n");
-							dynStats("str", -changeV, "tou", -changeV, "spe", -changeV);
-							player.setPerkValue(PerkLib.Lycanthropy,1,0);
-						}
-						needNext = true;
+				flags[kFLAGS.LUNA_MOON_CYCLE]++;
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] > 8) flags[kFLAGS.LUNA_MOON_CYCLE] = 1;
+				if (player.hasPerk(PerkLib.Lycanthropy)) {
+					var changeV:Number = 10 * (player.newGamePlusMod() + 1);
+					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 5) {
+						outputText("<b>\nYou can’t help but notice the moon is almost full as it rises up.  It seems transfixing like it is calling to you.");
+						outputText("\n\nYou feel your might increasing as the moon draws closer to fullness.</b>\n");
+						dynStats("str", changeV, "tou", changeV, "spe", changeV);
+						player.setPerkValue(PerkLib.Lycanthropy,1,10);
 					}
+					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 6) {
+						outputText("<b>\nWhen the almost-full moon appears it causes your heart to race with excitement.  You hearing seems better than ever.  Every breath brings a rush of smells through your nose that seem much more pronounced than they should.");
+						outputText("\n\nYou feel your might increasing as the moon draws closer to fullness.</b>\n");
+						dynStats("str", changeV, "tou", changeV, "spe", changeV);
+						player.setPerkValue(PerkLib.Lycanthropy,1,20);
+					}
+					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 7) {
+						outputText("<b>\nYou gaze at the moon and it seems to gaze back into you.   Something is coming and it won’t be long now.   You feel like you are crawling in your skin.  It feels like tear out of your body and be born anew.");
+						outputText("\n\nYou feel your might increasing as the moon draws closer to fullness. It's almost time.</b>\n");
+						dynStats("str", changeV, "tou", changeV, "spe", changeV);
+						player.setPerkValue(PerkLib.Lycanthropy,1,30);
+					}
+					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) {
+						outputText("<b>\nYou are at the peak of your strength, it's a full moon tonight and you feel yourself burning with maddening desire as you go into " + player.mf("rut","heat") + ".</b>\n");
+						dynStats("str", changeV, "tou", changeV, "spe", changeV);
+						player.setPerkValue(PerkLib.Lycanthropy,1,40);
+						if (player.hasCock() || (player.gender == 3 && rand(2) == 0)) player.goIntoRut(false);
+						else if (player.hasVagina()) player.goIntoHeat(false);
+					}
+					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1) {
+						outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>\n");
+						dynStats("str", -changeV, "tou", -changeV, "spe", -changeV);
+						player.setPerkValue(PerkLib.Lycanthropy,1,30);
+					}
+					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2) {
+						outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>\n");
+						dynStats("str", -changeV, "tou", -changeV, "spe", -changeV);
+						player.setPerkValue(PerkLib.Lycanthropy,1,20);
+					}
+					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3) {
+						outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>\n");
+						dynStats("str", -changeV, "tou", -changeV, "spe", -changeV);
+						player.setPerkValue(PerkLib.Lycanthropy,1,10);
+					}
+					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 4) {
+						outputText("<b>\nIt's a new moon tonight, you feel somewhat weak.</b>\n");
+						dynStats("str", -changeV, "tou", -changeV, "spe", -changeV);
+						player.setPerkValue(PerkLib.Lycanthropy,1,0);
+					}
+					needNext = true;
 				}
 				//Soul Arena Gaunlet reset
 				if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlets1)) {

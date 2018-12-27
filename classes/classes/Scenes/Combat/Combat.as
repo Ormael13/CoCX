@@ -429,6 +429,7 @@ public function isPlayerBound():Boolean
 		outputText("\n<b>The demonesses tentacles are constricting your limbs!</b>");
 		bound = true;
 	}
+	if (player.hasStatusEffect(StatusEffects.YamataEntwine)) bound = true;
 	return bound;
 }
 
@@ -2343,19 +2344,6 @@ public function surrender():void {
 	doNext(endLustLoss);
 }
 
-public function fatigueRecovery():void {
-	var fatiguecombatrecovery:Number = 0;
-	if (player.hasPerk(PerkLib.StarSphereMastery)) fatiguecombatrecovery += player.perkv1(PerkLib.StarSphereMastery);
-	if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) fatiguecombatrecovery += 1;
-	if (player.hasPerk(PerkLib.EnlightenedNinetails)) fatiguecombatrecovery += 1;
-	if (player.hasPerk(PerkLib.CorruptedNinetails)) fatiguecombatrecovery += 1;
-	if (player.hasPerk(PerkLib.EnlightenedKitsune)) fatiguecombatrecovery += 1;
-	if (player.hasPerk(PerkLib.CorruptedKitsune)) fatiguecombatrecovery += 1;
-	if (player.hasPerk(PerkLib.MasteredDefenceStance)) fatiguecombatrecovery += 1;
-	if (player.hasPerk(PerkLib.PerfectDefenceStance)) fatiguecombatrecovery += 1;
-	fatigue(-(1 + fatiguecombatrecovery));
-}
-
 //ATTACK
 public function attack():void {
 	flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
@@ -2987,6 +2975,10 @@ public function heroBaneProc(damage:int = 0):void {
 			doNext(endHpLoss);
 		}
 	}
+}
+
+public function wearingWinterScarf():Boolean {
+	return player.necklaceName == "Blue Winter scarf" || player.necklaceName == "Green Winter scarf" || player.necklaceName == "Purple Winter scarf" || player.necklaceName == "Red Winter scarf" || player.necklaceName == "Yellow Winter scarf";
 }
 
 public function combatMiss():Boolean {
@@ -3792,6 +3784,28 @@ private function combatStatusesUpdate():void {
 			dynStats("lus", 25);
 		}
 	}
+	if (player.hasStatusEffect(StatusEffects.AikoLightningArrow)) {
+		if (player.statusEffectv1(StatusEffects.AikoLightningArrow) <= 0) {
+			player.removeStatusEffect(StatusEffects.AikoLightningArrow);
+			outputText("<b>You feel stronger as Aiko's lightning finally fades, though the arrow is still lodged in your side.</b>\n\n");
+			player.addCombatBuff('str',6);
+			player.addCombatBuff('spe',6);
+		}
+		//Shock effect:
+		else {
+			outputText("You fall to one knee as Aiko's Lighting pulses through your limbs, Oh how this hurts...");
+			player.takeLightningDamage(15, true);
+			outputText("\n\n");
+		}
+	}
+	if (player.hasStatusEffect(StatusEffects.YamataEntwine)) {
+		//Corrupting entwine effect:
+		outputText("Yamata's serpentine hair continues to pump their corrupted flames into you!  ");
+		player.takeFireDamage(8, true);
+		player.takeLustDamage(7, true);
+		player.dynStats("cor", 1);
+		flags[kFLAGS.YAMATA_MASOCHIST]++;
+	}
 	//Harpy lip gloss
 	if(player.hasCock() && player.hasStatusEffect(StatusEffects.Luststick) && (monster.short == "harpy" || monster.short == "Sophie")) {
 		//Chance to cleanse!
@@ -4525,9 +4539,31 @@ public function PercentBasedRegeneration():Number {
 }
 public function nonPercentBasedRegeneration():Number {
 	var maxNonPercentRegen:Number = 0;
-	if (player.hasPerk(PerkLib.Lifeline)) maxNonPercentRegen += 50 * (1 + player.newGamePlusMod());
-	if (player.hasPerk(PerkLib.Lifeline) && flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) maxNonPercentRegen += 50 * (1 + player.newGamePlusMod());
+	if (player.hasPerk(PerkLib.Lifeline)) {
+		maxNonPercentRegen += 50 * (1 + player.newGamePlusMod());
+		if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) maxNonPercentRegen += 50 * (1 + player.newGamePlusMod());
+	}
 	return maxNonPercentRegen;
+}
+
+public function fatigueRecovery():void {
+	var fatigue1:Number = 0;
+	fatigue1 += fatigueRecovery2();
+	fatigue(-fatigue1);
+}
+public function fatigueRecovery2():Number {
+	var fatiguecombatrecovery:Number = 1;
+	if (player.hasPerk(PerkLib.StarSphereMastery)) fatiguecombatrecovery += player.perkv1(PerkLib.StarSphereMastery);
+	if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) fatiguecombatrecovery += 1;
+	if (player.hasPerk(PerkLib.EnlightenedNinetails)) fatiguecombatrecovery += 1;
+	if (player.hasPerk(PerkLib.CorruptedNinetails)) fatiguecombatrecovery += 1;
+	if (player.hasPerk(PerkLib.EnlightenedKitsune)) fatiguecombatrecovery += 1;
+	if (player.hasPerk(PerkLib.CorruptedKitsune)) fatiguecombatrecovery += 1;
+	if (player.hasPerk(PerkLib.MasteredDefenceStance)) fatiguecombatrecovery += 1;
+	if (player.hasPerk(PerkLib.PerfectDefenceStance)) fatiguecombatrecovery += 1;
+	fatiguecombatrecovery *= fatigueRecoveryMultiplier();
+	fatiguecombatrecovery = Math.round(fatiguecombatrecovery);
+	return fatiguecombatrecovery;
 }
 
 public function soulforceregeneration(combat:Boolean = true):void {
@@ -4536,11 +4572,15 @@ public function soulforceregeneration(combat:Boolean = true):void {
 		gainedsoulforce += soulforceregeneration2();
 		if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.MasteredDefenceStance)) gainedsoulforce += 2;
 		if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.PerfectDefenceStance)) gainedsoulforce += 2;
+		gainedsoulforce *= soulforceRecoveryMultiplier();
 		if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) gainedsoulforce *= 2;
+		gainedsoulforce = Math.round(gainedsoulforce);
 		EngineCore.SoulforceChange(gainedsoulforce, false);
 	}
 	else {
 		gainedsoulforce += soulforceregeneration2() * 2;
+		gainedsoulforce *= soulforceRecoveryMultiplier();
+		gainedsoulforce = Math.round(gainedsoulforce);
 		EngineCore.SoulforceChange(gainedsoulforce, false);
 	}
 }
@@ -5010,6 +5050,18 @@ public function showMonsterLust():void {
 		if(monster.lust > (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) outputText("The demons lessen somewhat in the intensity of their attack, and some even eye up your assets as they strike at you.");
 		if(monster.lust >= (monster.maxLust() * 0.6) && monster.lust < (monster.maxLust() * 0.8)) outputText("The demons are obviously steering clear from damaging anything you might use to fuck and they're starting to leave their hands on you just a little longer after each blow. Some are starting to cop quick feels with their other hands and you can smell the demonic lust of a dozen bodies on the air.");
 		if(monster.lust >= (monster.maxLust() * 0.8)) outputText(" The demons are less and less willing to hit you and more and more willing to just stroke their hands sensuously over you. The smell of demonic lust is thick on the air and part of the group just stands there stroking themselves openly.");
+	}
+	else if (monster.short == "Aiko") {
+		if (monster.lust100 > 50 && monster.lust100 < 60) outputText("Aiko’s face is slightly pink from arousal. You can see her fidgeting in her stance once or twice, biting her lip slightly.  ");
+		if (monster.lust100 >= 60 && monster.lust100 < 80) outputText("Aiko’s cheeks are a deep crimson, and she breaks stance frequently to fan herself, panting visibly.  ");
+		if (monster.lust100 >= 80) outputText("Aiko’s knees are trembling with barely-restrained arousal, and you can see a small puddle forming at her feet as she takes a deep breath, trying to calm her flustered nerves.  ");
+	}
+	else if (monster.short == "Yamata") {
+		if (monster.lust100 < 20) outputText("Yamata seems to be fairly calm and collected, in spite of her obviously deranged nature. A barely-restrained psychosis swims just under the surface, threatening to boil over at any moment."+(monster.lust100 > 10?" Is she getting stronger?":"")+"  ");
+		if (monster.lust100 >= 20 && monster.lust100 < 40) outputText("Yamata is swaying a little with sadistic glee now, her psychotic grin wide and toothy. She occasionally twirls her sword around, cracking the joints in her neck from time to time and goading you into attacking. It seems like the more turned-on she becomes, the more powerful her attacks are.  ");
+		if (monster.lust100 >= 40 && monster.lust100 < 60) outputText("Yamata’s movements have started to become reckless, but that only serves to make her even more dangerous. The psychotic flame in her eyes is now accompanied by a lusty gaze and an occasional lick of her lips. You’re sure of it now; the more turned-on she is, the more dangerous her attacks become.  ");
+		if (monster.lust100 >= 60 && monster.lust100 < 80) outputText("Bloodlust is evident in Yamata’s eyes now, and it seems like she is subsisting on animalistic rage and adrenaline alone. Every swing is accompanied by hysterical laughter, and the smells of sex and violence emanating from her are overpowering. She’s getting more and more reckless with each swing! You should end this soon!  ");
+		if (monster.lust100 >= 80) outputText("Yamata has whipped herself into a lustful berserk frenzy, lashing out with reckless abandon. All of her self control has been cast aside, and she’s putting everything she has into every attack now. If things keep going like this, she might even end up wearing herself out! Though it might be hard to hold out until she eventually burns out!  ");
 	}
 	else {
 		if(monster.plural) {

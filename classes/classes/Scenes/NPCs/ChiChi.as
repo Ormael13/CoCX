@@ -191,6 +191,12 @@ use namespace CoC;
 				if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] < 2) this.level = 58;
 				if (flags[kFLAGS.CHI_CHI_LVL_UP] == 8) this.level = 76;
 			}
+			if (flags[kFLAGS.CHI_CHI_LVL_UP] == 9) {
+				initStrTouSpeInte(370, 370, 360, 230);
+				initWisLibSensCor(230, 140, 120, 50);
+				this.weaponAttack = 72;
+				this.level = 82;
+			}
 			this.a = "";
 			this.short = "Master Chi Chi of the four winds";
 			this.long = "";

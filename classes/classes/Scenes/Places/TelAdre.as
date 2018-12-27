@@ -181,7 +181,7 @@ public function telAdreMenu():void {
 		maddie.runAwayMaddieFollowup();
 		return;
 	}
-	if (flags[kFLAGS.LUNA_FOLLOWER] < 2 && rand(10) == 0) {
+	if (flags[kFLAGS.LUNA_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.LunaOff) && rand(10) == 0) {
 		if (flags[kFLAGS.LUNA_FOLLOWER] == 1) meetingLunaRepated();
 		else meetingLunaFirstTime();
 		return;
@@ -1262,7 +1262,7 @@ private function goJogging():void {
 	//Thickness decrease!
 	outputText(player.modThickness(1,5+rand(2)));
 	//Muscleness boost!
-	outputText(player.modTone(100,2+rand(4)));
+	outputText(player.modTone(player.maxToneCap(),2+rand(4)));
 	outputText("\n\nDo you want to hit the showers before you head back to camp?");
 	if(flags[kFLAGS.BROOKE_MET] == 1) {
 		menu();
@@ -1325,7 +1325,6 @@ public function meetingLunaCamp():void {
 	flags[kFLAGS.LUNA_FOLLOWER] = 4;
 	flags[kFLAGS.LUNA_LVL_UP] = 0;
 	flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
-	flags[kFLAGS.LUNA_MOON_CYCLE] = 1;
 	doNext(camp.returnToCampUseOneHour);
 }
 }

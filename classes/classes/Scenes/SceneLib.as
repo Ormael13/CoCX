@@ -3,6 +3,7 @@ import classes.CoC;
 import classes.Items.Mutations;
 import classes.Scenes.Areas.*;
 import classes.Scenes.Areas.Forest.KitsuneScene;
+import classes.Scenes.Areas.GlacialRift.YuWinterGearShop;
 import classes.Scenes.Combat.Combat;
 import classes.Scenes.Dungeons.AnzuPalace.AnzuScene;
 import classes.Scenes.Dungeons.D3.D3;
@@ -98,6 +99,8 @@ public class SceneLib {
 
     public static var dianaScene:DianaFollower = new DianaFollower();
 
+    public static var dinahScene:DinahFollower = new DinahFollower();
+
     public static var electraScene:ElectraFollower = new ElectraFollower();
 
     public static var emberScene:EmberScene = new EmberScene();
@@ -107,6 +110,8 @@ public class SceneLib {
     public static var evangelineFollower:EvangelineFollower = new EvangelineFollower();
 
     public static var exgartuan:Exgartuan = new Exgartuan();
+
+    public static var galiaFollower:GaliaFollower = new GaliaFollower();
 
     public static var helFollower:HelFollower = new HelFollower();
 
@@ -209,6 +214,10 @@ public class SceneLib {
     public static var metamorph:Metamorph = new Metamorph();
 
     public static var crafting:Crafting = new Crafting();
+
+    public static var aikoScene:AikoScene = new AikoScene();
+	
+	public static var glacialYuShop:YuWinterGearShop = new YuWinterGearShop();
 
     public function SceneLib() {
     }

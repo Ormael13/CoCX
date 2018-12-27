@@ -257,6 +257,18 @@ package classes.Scenes.NPCs
 					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.LUNA_LVL_UP] = 3;
 				}
+				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 5 && flags[kFLAGS.LUNA_LVL_UP] == 3) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 30);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 30, 0, 0, 0);
+					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.LUNA_LVL_UP] = 4;
+				}
+				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 6 && flags[kFLAGS.LUNA_LVL_UP] == 4) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 36);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 36, 0, 0, 0);
+					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.LUNA_LVL_UP] = 5;
+				}
 			}
 			cleanupAfterCombat();
 			doNext(camp.returnToCampUseOneHour);

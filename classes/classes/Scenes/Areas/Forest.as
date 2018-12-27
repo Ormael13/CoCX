@@ -11,6 +11,7 @@ import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Forest.*;
 import classes.Scenes.Holidays;
 import classes.Scenes.Monsters.DarkElfScene;
+import classes.Scenes.NPCs.AikoScene;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.SceneLib;
@@ -34,6 +35,7 @@ use namespace CoC;
 		public var erlkingScene:ErlKingScene = new ErlKingScene();
 		public var alrauneScene:AlrauneScene = new AlrauneScene();
 		public var darkelfScene:DarkElfScene = new DarkElfScene();
+		public var aikoScene:AikoScene = new AikoScene();
 		// public var dullahanScene:DullahanScene = new DullahanScene(); // [INTERMOD:8chan]
 
 		public function Forest() {
@@ -119,6 +121,16 @@ use namespace CoC;
 								   && flags[kFLAGS.SOUL_SENSE_TAMANI] < 3;
 						}
 					}, {
+						name  : "Tamani_Daughters",
+						chance: 0.6,
+						call  : encounterTamanisDaughtersFn,
+						when  : function ():Boolean {
+							return player.gender > 0
+								&& player.cockTotal() > 0
+								&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 24
+								&& flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 3;
+						}
+					}, {
 						name  : "Jojo",
 						when  : function ():Boolean {
 							return !player.hasStatusEffect(StatusEffects.PureCampJojo)
@@ -186,7 +198,7 @@ use namespace CoC;
 					}, {
 						name: "diana",
 						when: function():Boolean {
-							return flags[kFLAGS.DIANA_FOLLOWER] == 5 && flags[kFLAGS.DIANA_AFFECTION] == 100;
+							return flags[kFLAGS.DIANA_FOLLOWER] == 5 && flags[kFLAGS.DIANA_AFFECTION] == 100 && !player.hasStatusEffect(StatusEffects.DianaOff);
 						},
 						chance: 0.5,
 						call: SceneLib.dianaScene.postNameForestEnc
@@ -266,14 +278,16 @@ use namespace CoC;
 				name  : "etna",
 				when  : function():Boolean {
 					return flags[kFLAGS.ETNA_FOLLOWER] < 1
-						   && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2;
+						   && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
+						   && !player.hasStatusEffect(StatusEffects.EtnaOff);
 				},
 				call  : SceneLib.etnaScene.repeatYandereEnc
 			}, {
 				name  : "electra",
 				when  : function():Boolean {
 					return flags[kFLAGS.ELECTRA_FOLLOWER] < 1
-						   && flags[kFLAGS.ELECTRA_AFFECTION] >= 2;
+						   && flags[kFLAGS.ELECTRA_AFFECTION] >= 2
+						   && !player.hasStatusEffect(StatusEffects.ElectraOff);
 				},
 				chance: 0.5,
 				call  : SceneLib.electraScene.repeatDeepwoodsEnc
@@ -305,6 +319,16 @@ use namespace CoC;
 						   && player.gender > 0
 						   && (player.cockTotal() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)
 						   && flags[kFLAGS.SOUL_SENSE_TAMANI] < 3;
+				}
+			}, {
+				name  : "Tamani_Daughters",
+				chance: 0.6,
+				call  : encounterTamanisDaughtersFn,
+				when  : function ():Boolean {
+					return player.gender > 0
+						   && player.cockTotal() > 0
+						   && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 24
+						   && flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 3;
 				}
 			}, {
 				name: "faerie",
@@ -359,6 +383,14 @@ use namespace CoC;
 				name  : "dark_elf_scout",
 				call  : darkelfScene.introDarkELfScout,
 				chance: 0.8
+			}, {
+				name: "aiko",
+				call: aikoScene.encounterAiko,
+				when: function ():Boolean {
+					return (player.level > 35 
+						&& flags[kFLAGS.AIKO_TIMES_MET] < 4 
+						&& flags[kFLAGS.AIKO_BALL_RETURNED] != 2);
+				}
 			}, {
 				name: "dungeon",
 				call: SceneLib.dungeons.enterDeepCave,
@@ -592,6 +624,10 @@ use namespace CoC;
 			} else if (JojoScene.monk >= 2) { //Angry/Horny Jojo
 				SceneLib.jojoScene.corruptJojoEncounter();
 			}
+		}
+		private function encounterTamanisDaughtersFn():void {
+			clearOutput();
+			tamaniDaughtersScene.encounterTamanisDaughters();
 		}
 		private function tentacleBeastEncounterFn():void {
 			clearOutput();

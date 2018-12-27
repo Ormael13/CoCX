@@ -87,13 +87,13 @@ public class Kraken extends Monster
 			this.skin.setBaseOnly({color:"slippery"});
 			this.hairColor = "brown";
 			this.hairLength = 5;
-			initStrTouSpeInte(700, 200, 200, 250);
-			initWisLibSensCor(250, 200, 50, 50);
+			initStrTouSpeInte(700, 400, 400, 250);
+			initWisLibSensCor(250, 300, 250, 50);
 			this.weaponName = "large tentacle";
 			this.weaponVerb="slash";
 			this.weaponAttack = 145;
 			this.armorName = "super thick skin";
-			this.armorDef = 95;
+			this.armorDef = 190;
 			this.armorMDef = 95;
 			this.bonusHP = 10000;
 			this.bonusLust = 20;
@@ -101,7 +101,8 @@ public class Kraken extends Monster
 			this.lustVuln = .2;
 			this.level = 100;
 			this.gems = 0;
-			this.drop = new WeightedDrop(consumables.SPPEARL, 1);
+			this.drop = NO_DROP;
+			//this.drop = new WeightedDrop(consumables.SPPEARL, 1);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGigantType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);

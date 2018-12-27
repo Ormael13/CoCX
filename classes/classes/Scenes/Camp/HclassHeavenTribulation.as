@@ -46,11 +46,6 @@ package classes.Scenes.Camp
 			this.armorDef = 0;
 			this.armorMDef = 0;
 			this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
-			this.str += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.spe += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.newgamebonusHP = 140;
 			checkMonster();
 		}

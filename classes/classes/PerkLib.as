@@ -84,6 +84,8 @@ public class PerkLib
 				"Your understanding of prestige jobs from previous life allows to pick 4th one at lvl 42+.");
 		public static const AscensionBuildingPrestige04:PerkType = mk("Ascension: Building Prestige (4th Stage)", "Ascension: Building Prestige (4th Stage)",
 				"Your understanding of prestige jobs from previous life allows to pick 5th one at lvl 42+.");
+		public static const AscensionBuildingPrestige05:PerkType = mk("Ascension: Building Prestige (5th Stage)", "Ascension: Building Prestige (5th Stage)",
+				"Your understanding of prestige jobs from previous life allows to pick 6th one at lvl 42+.");
 		public static const AscensionCruelChimerasThesis:PerkType = mk("Ascension: Cruel Chimera's Thesis", "Ascension: Cruel Chimera's Thesis",
 				"Allows you to reduce by another one point needed to accumulate mutations into non-human species to attain race specific enhancing effects.");
 		public static const AscensionHerosHeritage:PerkType = mk("Ascension: Hero's Heritage", "Ascension: Hero's Heritage",
@@ -102,24 +104,22 @@ public class PerkLib
 				"Allows to retain up to 30 choosen unlocked metamorph options.");
 		public static const AscensionTranscendentalGeneticMemoryStage4:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 4)", "Ascension: Transcendental Genetic Memory (Stage 4)",
 				"Allows to retain up to 40 choosen unlocked metamorph options.");
+		public static const AscensionTranscendentalGeneticMemoryStage5:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 5)", "Ascension: Transcendental Genetic Memory (Stage 5)",
+				"Allows to retain up to 50 choosen unlocked metamorph options.");
 		public static const AscensionUnderdog:PerkType = mk("Ascension: Underdog", "Ascension: Underdog",
 				"You're underdog. Gains twice more exp for beating up enemies above your current level with doubled limit after which increase to gained exp stops.");// Also allow to use 'accidentally' finding all forgotten or hidden legacies from times before the demon invasion.");
 		public static const AscensionUnlockedPotential:PerkType = mk("Ascension: Unlocked Potential", "Ascension: Unlocked Potential",
 				"Due to reincarnation experience your body becoming strong faster than in previous life (increased passive hp, lust, fatigue gains at lvl-up).");
 		public static const AscensionUnlockedPotential2ndStage:PerkType = mk("Ascension: Unlocked Potential (2nd Stage)", "Ascension: Unlocked Potential (2nd Stage)",
 				"Due to reincarnation experience your body becoming strong faster than in previous life (increased passive wrath, mana, soulforce gains at lvl-up).");
-	//	public static const AscensionTranscendentalGeneticMemoryStage5:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 5)", "Ascension: Transcendental Genetic Memory (Stage 5)",
 	//	public static const AscensionAdditionalOrganMutation02:PerkType = mk("Ascension: Additional Organ Mutation (2nd Stage)", "Ascension: Additional Organ Mutation (2nd Stage)",
 	//			"Numerous internal mutation changed your body to allow handle 3rd mutation of the same organ/internal body part.");
-	//	public static const AscensionBuildingPrestige05:PerkType = mk("Ascension: Building Prestige (5th Stage)", "Ascension: Building Prestige (5th Stage)",
-	//			"Your understanding of prestige jobs from previous life allows to pick 6th one at lvl 42+.");
-	//			"Allows to retain up to 50 choosen unlocked metamorph options.");
 	//	public static const AscensionTranscendentalGeneticMemoryStage6:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 6)", "Ascension: Transcendental Genetic Memory (Stage 6)",
 	//			"Allows to retain up to 60 choosen unlocked metamorph options.");
 	//	public static const Ascension:PerkType = mk("Ascension: Artifical-made Metamorph", "Ascension: Artifical-made Metamorph",
 	//			".");
-	//	public static const Ascension:PerkType = mk("Ascension: ", "Ascension: ",
-	//			".");
+	//	public static const AscensionBuildingPrestige06:PerkType = mk("Ascension: Building Prestige (6th Stage)", "Ascension: Building Prestige (6th Stage)",
+	//			"Your understanding of prestige jobs from previous life allows to pick 7th one at lvl 42+.");
 	//	public static const Ascension:PerkType = mk("Ascension: ", "Ascension: ",
 	//			".");
 	//	public static const Ascension:PerkType = mk("Ascension: ", "Ascension: ",
@@ -1484,10 +1484,10 @@ public class PerkLib
 				"Opponent have a hard time dealing serious damage as the sight of your naked body distract them (+10% dmg reduction).",
 				"You choose the 'Naked Truth' perk, causing opponent have a hard time dealing serious damage as the sight of your naked body distract them.");
 		public static const NaturalHealingEpic:PerkType = mk("Natural healing (Epic)", "Natural healing (Epic)",
-				"Incease healing power by 60% and lower healing spells mana costs by 25%.",
+				"Incease healing power by 50% and lower healing spells mana costs by 20%.",
 				"You choose the 'Natural healing (Epic)' perk, increasing healing spells effectivnes and lowering their costs.");
 		public static const NaturalHealingLegendary:PerkType = mk("Natural healing (Legendary)", "Natural healing (Legendary)",
-				"Incease healing power by 50% and lower healing spells mana costs by 20%.",
+				"Incease healing power by 60% and lower healing spells mana costs by 25%.",
 				"You choose the 'Natural healing (Legendary)' perk, increasing healing spells effectivnes and lowering their costs.");
 		public static const NaturalHealingMajor:PerkType = mk("Natural healing (Major)", "Natural healing (Major)",
 				"Incease healing power by 40% and lower healing spells mana costs by 15%.",
@@ -1608,7 +1608,7 @@ public class PerkLib
 				"You've trained in prestige art of combine soulforce with physical attacks to various deadly effect.",
 				"You choose 'Prestige Job: Soul Art Master' perk, training yourself to became Soul Art Master.");
 		public static const PrestigeJobTempest:PerkType = mk("Prestige Job: Tempest", "Prestige Job: Tempest",
-				"You've trained in prestige art of dual wieldingas you hack and slice through your opponents like a raging storm of steel.",
+				"You've trained in prestige art of dual wielding as you hack and slice through your opponents like a raging storm of steel.",
 				"You choose 'Prestige Job: Tempest' perk, training yourself to became Tempest.");
 		public static const PrimalFuryI:PerkType = mk("Primal Fury I", "Primal Fury I",
 				"Raises max Wrath by 10, generates 1 point of Wrath out of combat and double this amount during fight.",
@@ -2446,11 +2446,12 @@ public class PerkLib
 		public static const LightningVulnerability:PerkType = mk("Lightning Vulnerability", "Lightning Vulnerability", "");//NYU
 		public static const MonsterRegeneration:PerkType = mk("Monster Regeneration", "Monster Regeneration", "");
 		public static const NoGemsLost:PerkType = mk("No Gems Lost", "No Gems Lost", "");
+		public static const Phylactery:PerkType = mk("Phylactery", "Phylactery", "");
 		public static const Sentience:PerkType = mk("Sentience", "Sentience", "");
 		public static const ShieldWielder:PerkType = mk("Shield wielder", "Shield wielder", "");
 		public static const TeaseResistance:PerkType = mk("Tease Resistance", "Tease Resistance", "");//NYU
-		//public static const Enemy   Type:PerkType = mk("-type enemy", "-type enemy", "");
-		//public static const Enemy:PerkType = mk("-type enemy", "-type enemy", "");undead/ghost?
+		//public static const Enemy_Type:PerkType = mk("-type enemy", "-type enemy", "");
+		//public static const Enemy_Type:PerkType = mk("-type enemy", "-type enemy", "");undead/ghost?
 		//public static const :PerkType = mk("", "", ""); na poźniej dopisane perki wzór
 //dodać także typy perków dla poszczególnych ras przeciwników tak, ze bedą mogły one mieć jakieś korzyści też (np. jak ma Dragon nature to bonusy jak PC miałby dragon score > 6))
 		private static function mk(id:String, name:String, desc:String, longDesc:String = null, keepOnAscension:Boolean = false):PerkType
@@ -3277,8 +3278,8 @@ public class PerkLib
             ElementalArrows.requireLevel(48)
                     .requirePerk(PrestigeJobArcaneArcher)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasStatusEffect(StatusEffects.KnowsIceSpike);
-                    }, "Whitefire or Ice Spike spell");
+                        return player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasStatusEffect(StatusEffects.KnowsIceSpike) || player.hasStatusEffect(StatusEffects.KnowsLightningBolt) || player.hasStatusEffect(StatusEffects.KnowsDarknessShard);
+                    }, "Whitefire or Ice Spike or Lightning Bolt or Darkness Shard spell");
             SteelStorm.requireLevel(48)
                     .requirePerk(PrestigeJobTempest);
             //Tier 9 Speed Perks
@@ -4901,4 +4902,4 @@ public class PerkLib
 	initDependencies();
 }
 }
-
+

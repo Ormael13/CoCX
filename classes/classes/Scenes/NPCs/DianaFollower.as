@@ -516,6 +516,18 @@ private function levelingHerself():void {
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 8;
 	}
+	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 5 && flags[kFLAGS.DIANA_LVL_UP] == 8) {
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 45);
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 45);
+		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
+		flags[kFLAGS.DIANA_LVL_UP] = 9;
+	}
+	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 6 && flags[kFLAGS.DIANA_LVL_UP] == 9) {
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 51);
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 51);
+		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
+		flags[kFLAGS.DIANA_LVL_UP] = 10;
+	}
 	dianaAffection(5);
 }
 public function beMyStallion():void {

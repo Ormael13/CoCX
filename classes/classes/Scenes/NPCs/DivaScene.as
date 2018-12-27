@@ -2,6 +2,7 @@ package classes.Scenes.NPCs {
 import classes.BodyParts.Face;
 import classes.Items.Consumables.VampireBlood;
 import classes.Scenes.Camp;
+import classes.StatusEffects;
 
 import coc.view.ButtonDataList;
 
@@ -59,7 +60,7 @@ public class DivaScene extends XXCNPC{
         }
     }
     public override function isCompanion(type:int = -1):Boolean{
-        if(type == LOVER || type == COMPANION)return status == -1;
+        if((type == LOVER || type == COMPANION) && !player.hasStatusEffect(StatusEffects.DivaOff))return status == -1;
         return false;
     }
     override public function campDescription(buttons:ButtonDataList, menuType:int = -1):void {

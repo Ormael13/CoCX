@@ -79,6 +79,10 @@ use namespace CoC;
 		public function impVictory2():void {
 			outputText("The greater imp falls to the ground panting and growling in anger.  He quickly submits however, the thoroughness of his defeat obvious.  You walk towards the imp who gives one last defiant snarl before slipping into unconsciousness.");
 			addButton(0, "Kill Him", killFeralImp);
+			if (flags[kFLAGS.GALIA_LVL_UP] > 0 && flags[kFLAGS.GALIA_LVL_UP] < 0.5) {
+				if (flags[kFLAGS.GALIA_AFFECTION] > 0) addButtonDisabled(3, "Capture", "You need to turn in already captured imp before you can capture another one.");
+				else addButton(3, "Capture", captureFeralImp);
+			}
 			addButton(4, "Leave", cleanupAfterCombat);
 		}
 		private function rapeImpWithDick(condomed:Boolean = false):void {
@@ -2294,6 +2298,12 @@ use namespace CoC;
 			cleanupAfterCombat();
 		}
 		
+		private function captureFeralImp():void {
+			clearOutput();
+			flags[kFLAGS.GALIA_AFFECTION] = 10;
+			outputText("You proceed to stow the weakened body of the crazed imp into the enchanted bag. ");
+			doNext(cleanupAfterCombat);
+		}
 		private function killImp():void {
 			clearOutput();
 			flags[kFLAGS.IMPS_KILLED]++;

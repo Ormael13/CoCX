@@ -451,7 +451,7 @@ public function analLottieMilkshake():void {
 	//LOTTIE FIGURE +1, MUSCLE TONE +1, DRAINS PC'S LUST.
 	lottieTone(1);
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00307] == 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00307] = 1;
-	outputText(player.modTone(100,1));
+	outputText(player.modTone(player.maxToneCap(),1));
 	player.orgasm();
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -544,7 +544,7 @@ public function getSuckedOffByAHamSandwich():void {
 	//LOTTIE FIGURE -1, MUSCLE TONE +1, DRAINS PC'S LUST.
 	lottieTone(-1);
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00306] == 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00306] = 1;
-	outputText(player.modTone(100,1));
+	outputText(player.modTone(player.maxToneCap(),1));
 	player.orgasm();
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1450,7 +1450,7 @@ private function jumpInPoolBeforeLottieSeesYourWingWang():void {
 	if(player.cockTotal() > 1) outputText("s");
 	outputText(" decided to say hello. Needless to say, you decide it'd be better if you swam alone – nothing's wrong with the occasional chubby-assed slut wandering now and then, but it's a pain to not be distracted. Lottie wades at the other end of the pool, doing the occasional stretch before breaking into laps. You take a page from her book and begin to work back and forth from either end, making sure not to stare at Lottie's massive chest as it bounces into the air every so often after a stroke. After a considerable amount of time, you both finish considerably more exhausted than before. She seems to have lightened up since your initial reaction to her body, so you shrug it off and head home.");
 	//ENCOURAGEMENT -1, FIGURE +2, MUSCLE TONE +2, LUST +9001
-	outputText(player.modTone(100,2));
+	outputText(player.modTone(player.maxToneCap(),2));
 	dynStats("lus", 40);
 	lottieTone(2);
 	lottieMorale(-1);
@@ -1468,7 +1468,7 @@ private function waitAndShowLottieYourPoolBoner():void {
 	outputText(". You almost experience a tinge of regret from the now incredibly awkward silence, but it's thrown out the window as soon as you feel a soft hand grab your throbbing member. Looking up, Lottie's face has reddened considerably, but her curiosity overrides her shame as she begins to slowly massage you to full mast. \"<i>I... I did this?</i>\" she asks, facing you with large, wondering eyes. You grin and nod, taking her hand and helping her stroke it further, only to be met with a slap on your wrist as she removes her grip. You look up, frowning as Lottie laughs at the situation. \"<i>I'm – it's nice to know that someone likes me.</i>\" She stutters, smiling timidly. \"<i>But, um, we're here to exercise, " + player.mf("big guy","babe") + ". We should do that.</i>\" You groan at the sudden cockblock, but you can't really argue. She takes your hand and leads you into the water, but not before you playfully grab a handful of her plush ass.\n\n");
 
 	outputText("A while later and you've both finished off several laps of the pool, exhausted from your progress. Lottie flashes you a large smile before you part ways, leaving you still somewhat aroused from the experience.");
-	outputText(player.modTone(100,2));
+	outputText(player.modTone(player.maxToneCap(),2));
 	dynStats("lus", 80);
 	lottieTone(2);
 	lottieMorale(2);

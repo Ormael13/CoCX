@@ -2579,7 +2579,7 @@ public class Creature extends Utils
 		//PC can swim underwater?
 		public function canSwimUnderwater():Boolean
 		{
-			if (gills.type != Gills.NONE)
+			if (gills.type != Gills.NONE || lowerBody == LowerBody.SCYLLA)
 				return true;	//dodać jeszcze trzeba bedzie tu efekt of itemów i inne opcje dające oddych. pod wodą
 			return false;
 		}

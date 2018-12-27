@@ -781,8 +781,8 @@ private function takeDatBroBrewFromDaBigMeanOlOrc():void {
 			player.modFem(0,100);
 		}
 		//max tone.  Thickness + 50
-		if(player.tone < 100) {
-			player.modTone(100,100);
+		if(player.tone < player.maxToneCap()) {
+			player.modTone(player.maxToneCap(),100);
 		}
 		if(player.thickness < 100) {
 			player.modThickness(100,50);

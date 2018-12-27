@@ -17,7 +17,7 @@ package classes.Items.Weapons
 		override public function get attack():Number {
 			var boost:int = 0;
 			if (game.player.str >= 120) boost += 9;
-			return (9 + boost); 
+			return (9 + boost);
 		}
 		
 		override public function canUse():Boolean {

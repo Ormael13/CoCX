@@ -65,7 +65,7 @@ public final class Mutations extends MutationsHelper
 			clearOutput();
 			outputText("You open the can and “bottom up”, hoping it wasn’t just a scam to buy an overpriced beer. “Whoa, that’s one hell of a manly beverage!” The alcohol in the beer is so strong you actually feel like you could lift bigger things now. No...wait, you actually do as your muscle seems to surge with new raw power.");
 			dynStats("str", 1 + rand(2));
-			if (rand(3) == 0) outputText(player.modTone((player.maxToneCap() - 5), 3));
+			if (rand(3) == 0) outputText(player.modTone(player.maxToneCap(), 3));
 			player.refillHunger(10);
 			if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
 		}
@@ -77,7 +77,7 @@ public final class Mutations extends MutationsHelper
 			clearOutput();
 			outputText("The elixir tastes foul at first, but you guess it’s how it is with all medicine. As the merchant warned you, you begin to feel your muscles coiling like a spring, ready to allow you to make a swift dash. Your co-ordination definitively improved too, as well as your vision, as you can follow your movement despite the acceleration.");
 			dynStats("spe", 1 + rand(2));
-			if (rand(3) == 0) outputText(player.modTone((player.maxToneCap() - 5), 3));
+			if (rand(3) == 0) outputText(player.modTone(player.maxToneCap(), 3));
 			player.refillHunger(5);
 		}
 
@@ -3966,15 +3966,21 @@ public final class Mutations extends MutationsHelper
 			}
 			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//Snake tounge
-			if (changes == 0 && player.tongue.type != Tongue.SNAKE && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && rand(3) == 0 && changes < changeLimit) {
+			if (player.tongue.type != Tongue.SNAKE && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && rand(3) == 0 && changes < changeLimit) {
 				if (player.tongue.type == Tongue.HUMAN) outputText("\n\nYour taste-buds start aching as they swell to an uncomfortably large size. Trying to understand what in the world could have provoked such a reaction, you bring your hands up to your mouth, your tongue feeling like it's trying to push its way past your lips. The soreness stops and you stick out your tongue to try and see what would have made it feel the way it did. As soon as you stick your tongue out you realize that it sticks out much further than it did before, and now appears to have split at the end, creating a forked tip. The scents in the air are much more noticeable to you with your snake-like tongue.");
 				else outputText("\n\nYour inhuman tongue shortens, pulling tight in the very back of your throat.  After a moment the bunched-up tongue-flesh begins to flatten out, then extend forwards.  By the time the transformation has finished, your tongue has changed into a long, forked snake-tongue.");
 				setTongueType(Tongue.SNAKE);
 				dynStats("sen", 5);
 				changes++;
 			}
+			//Dragon tongue
+			if (type == 2 && player.tongue.type != Tongue.DRACONIC && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && rand(3) == 0 && changes < changeLimit) {
+				outputText("\n\nYour tongue suddenly falls out of your mouth and begins undulating as it grows longer.  For a moment it swings wildly, completely out of control; but then settles down and you find you can control it at will, almost like a limb.  You're able to stretch it to nearly 4 feet and retract it back into your mouth to the point it looks like a normal human tongue.  <b>You now have a draconic tongue.</b>");
+				setTongueType(Tongue.DRACONIC);
+				changes++;
+			}
 			//Face with snake fangs
-			if (changes == 0 && player.tongue.type == Tongue.SNAKE && player.faceType != Face.SNAKE_FANGS && rand(3) == 0 && changes < changeLimit) {
+			if (player.tongue.type == Tongue.SNAKE && player.faceType != Face.SNAKE_FANGS && rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\nWithout warning, you feel your canine teeth jump almost an inch in size, clashing on your gums, cutting yourself quite badly. As you attempt to find a new way to close your mouth without dislocating your jaw, you notice that they are dripping with a bitter, khaki liquid.  Watch out, and <b>try not to bite your tongue with your poisonous fangs!</b>");
 				if (player.faceType != Face.HUMAN && player.faceType != Face.SHARK_TEETH && player.faceType != Face.BUNNY && player.faceType != Face.SPIDER_FANGS) {
 					outputText("  As the change progresses, your [face] reshapes.  The sensation is far more pleasant than teeth cutting into gums, and as the tingling transformation completes, <b>you've gained with a normal-looking, human visage.</b>");
@@ -3984,7 +3990,7 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//Snake lower body
-			if (changes == 0 && player.faceType == Face.SNAKE_FANGS && player.lowerBody != LowerBody.NAGA && rand(4) == 0 && changes < changeLimit) {
+			if (player.faceType == Face.SNAKE_FANGS && player.lowerBody != LowerBody.NAGA && rand(4) == 0 && changes < changeLimit) {
 				if (player.lowerBody == LowerBody.SCYLLA) {
 				outputText("\n\nYou collapse as your tentacle legs starts to merge and the pain is immense.  Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience. Once you feel you've recovered, you try to stand, but to your amazement you discover that you no longer have [legs]: the bottom half of your body is like that of a snake's.");
 				}
@@ -7698,7 +7704,7 @@ public final class Mutations extends MutationsHelper
 			}
 			outputText("You finish admiring yourself and adjust your [armor] to better fit your new physique.  Maybe there's some bitches around you can fuck.  Hell, as good as you look, you might have other dudes wanting you to fuck them too, no homo.\n\n");
 			//max tone.  Thickness + 50
-			player.modTone(100, 100);
+			player.modTone(player.maxToneCap(), 100);
 			player.modThickness(100, 50);
 			//Bonus cum production!
 			player.createPerk(PerkLib.BroBrains, 0, 0, 0, 0);
@@ -9910,8 +9916,10 @@ public final class Mutations extends MutationsHelper
 				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
 			//Demon tongue
-			if (player.tongue.type == Tongue.SNAKE && rand(2) == 0) {
-				outputText("\n\nYour snake-like tongue tingles, thickening in your mouth until it feels more like your old human tongue, at least for the first few inches.  It bunches up inside you, and when you open up your mouth to release it, roughly two feet of tongue dangles out.  You find it easy to move and control, as natural as walking.  <b>You now have a long demon-tongue.</b>");
+			if (player.tongue.type != Tongue.DEMONIC && rand(2) == 0) {
+				outputText("\n\nYour tongue tingles");
+				if (player.tongue.type != Tongue.HUMAN) outputText(", thickening in your mouth until it feels more like your old human tongue, at least for the first few inches");
+				outputText(".  It bunches up inside you, and when you open up your mouth to release it, roughly two feet of tongue dangles out.  You find it easy to move and control, as natural as walking.  <b>You now have a long demon-tongue.</b>");
 				setTongueType(Tongue.DEMONIC);
 				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
@@ -10824,7 +10832,7 @@ public final class Mutations extends MutationsHelper
 					changes++;
 				}
 			}
-			if ((type == 0 && player.gender == 2 || type == 2 && player.gender == 1) && player.lowerBody != LowerBody.SCYLLA && player.lowerBody != LowerBody.GARGOYLE && (player.lowerBody != LowerBody.NAGA && player.lowerBody != LowerBody.CLOVEN_HOOFED) && changes < changeLimit && rand(3) == 0) {
+			if (((type == 0 && player.gender == 2) || (type == 1 && player.gender == 3) || (type == 2 && player.gender == 1)) && player.lowerBody != LowerBody.SCYLLA && player.lowerBody != LowerBody.GARGOYLE && (player.lowerBody != LowerBody.NAGA && player.lowerBody != LowerBody.CLOVEN_HOOFED) && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYou suddenly feel your legs giving in bellow you and you fall off to the ground unable to resume standing.");
 				if (player.tailType != 0) {
 					if (player.tailType == 5 || player.tailType == 6) outputText(" Your insectile abdomen");
@@ -10835,6 +10843,7 @@ public final class Mutations extends MutationsHelper
 				outputText(" You suddenly feel something weird down your leg as you notice they are literally boneless! No wonder you fell down there's no way those empty lump of flesh would be able to carry your weight around. As you think over how you will fix this annoying situation wracking pain hits you in waves as your legs seems to stretch to a ridiculous length up to twice your height. Just as you think this can't get any weirder your legs split apart dividing into four then again into eighths!");
 				outputText(" You watch you toe disappearing turning your feet into what could have been described as eight very weird tails when your legs start to cover with what looks like suction cups similar to those of an octopus. <b>Your legs have turned into tentacles!</b>");
 				if (type == 0) outputText(" Looking for your privates you notice your pussy is right under your 8 legs just like the center of a fleshy flower and became about huge like a mouth ready to engulf anything.");
+				if (type == 1) outputText(" Looking for your privates you notice your pussy is right under your 8 legs just like the center of a fleshy flower and became about huge like a mouth ready to engulf anything and your cock is right between your 2 front 'legs' looking almost like another tentacle.");
 				if (type == 2) outputText(" Looking for your privates you notice your cock is right between your 2 front 'legs' looking almost like another tentacle.");
 				outputText(" As you lift yourself standing on your tentacles not only can you still walk somewhat but heck don't you feel like grabbing something and squeezing it in your pleasurable new legs!");
 				setLowerBody(LowerBody.SCYLLA);
@@ -10980,7 +10989,7 @@ public final class Mutations extends MutationsHelper
 			//Legs
 			if (player.lowerBody != LowerBody.YETI && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
 				if (player.lowerBody == LowerBody.HUMAN) {
-					outputText("\n\nYour legs start becoming excessively hairy down to your feet. They’re so hairy you can no longer see your skin. Just as you thought the transformation was over, you see your feet enlarging to twice their size. They look like those of a huge monkey. Well, you guess people can call you Bigfoot now with your enormous <b>yeti feet!</b>");
+					outputText("\n\nYour legs start becoming excessively hairy down to your feet. They’re so hairy that you can no longer see your skin. Just as you thought the transformation was over, you see your feet enlarging to twice their size. They look like those of a huge monkey. Well, you guess people can call you Bigfoot now with your enormous <b>yeti feet!</b>");
 					setLowerBody(LowerBody.YETI);
 				}
 				else {
@@ -10990,7 +10999,7 @@ public final class Mutations extends MutationsHelper
 			}
 			//Arms
 			if (player.lowerBody == LowerBody.YETI && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.YETI) && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nYour arms start to become excessively hairy down almost to your hands. They're so hairy, you can no longer see your skin. As the fur growth stops, your hands enlarge to twice their size. They look like huge monkey paws. Well, you guess punching people will be easy with your enormous <b>yeti hands!</b>");
+				outputText("\n\nYour arms start to become excessively hairy down almost to your hands. They're so hairy that you can no longer see your skin. As the fur growth stops, your hands enlarge to twice their size. They look like huge monkey paws. Well, you guess punching people will be easy with your enormous <b>yeti hands!</b>");
 				setArmType(Arms.YETI);
 				changes++;
 			}
@@ -11008,7 +11017,7 @@ public final class Mutations extends MutationsHelper
 			}
 			//Hair
 			if (player.faceType == Face.YETI_FANGS && player.hairType != Hair.FLUFFY && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nYour hair starts to grow longer and fluffier. It covers all sides of your head perfectly, like a furry helmet keeping it warm. Only your face and neck are devoid of this hairy armor which still manage to look like a nice short haircut. While it looks like hair at first, touching it proves it to be like a very thick coat of fluff. You now have <b>yeti fluffy [haircolor] hairs.</b>");
+				outputText("\n\nYour hair starts to grow longer and fluffier. It covers all sides of your head perfectly, like a furry helmet, keeping it warm. Only your face and neck are devoid of this hairy armor which still manage to look like a nice short haircut. While it looks like hair at first, touching it proves it to be like a very thick coat of fluff. You now have <b>yeti fluffy [haircolor] hairs.</b>");
 				setHairType(Hair.FLUFFY);
 				changes++;
 			}
@@ -11016,7 +11025,7 @@ public final class Mutations extends MutationsHelper
 			if (player.hairType == Hair.FLUFFY && !player.skin.checkProps({coverage:Skin.COVERAGE_LOW,coat:{type:Skin.FUR}}) && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nThick hair starts to grow in random areas all over your body. ");
 				if (player.breastRows.length > 0) outputText("Your breasts in particular cover with hair forming into what can only be described as a natural bikini.");
-				outputText(" Furthermore your hair natural color turns to white. Your body is now <b>partially covered with thick white fur!</b>");
+				outputText(" Furthermore, your hair natural color turns to white. Your body is now <b>partially covered with thick white fur!</b>");
 				player.skin.growFur({color:"white"},Skin.COVERAGE_LOW);
 				player.hairColor = "white";
 				changes++;

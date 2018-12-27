@@ -156,6 +156,18 @@ public function WonSparringFight():void {
 			flags[kFLAGS.CHI_CHI_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.CHI_CHI_LVL_UP] = 6;
 		}
+		if (flags[kFLAGS.CHI_CHI_DEFEATS_COUNTER] == 10 && flags[kFLAGS.CHI_CHI_LVL_UP] == 6) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 2, 60);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 60, 0, 0);
+			flags[kFLAGS.CHI_CHI_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.CHI_CHI_LVL_UP] = 7;
+		}
+		if (flags[kFLAGS.CHI_CHI_DEFEATS_COUNTER] == 11 && flags[kFLAGS.CHI_CHI_LVL_UP] == 7) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 2, 66);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 66, 0, 0);
+			flags[kFLAGS.CHI_CHI_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.CHI_CHI_LVL_UP] = 8;
+		}
 	}
 	cleanupAfterCombat();
 }
@@ -222,7 +234,7 @@ public function TrainingSoulArtsWithChiChi():void {
 			addButton(0, "No", NotReadyForTheFinalTraining);
 			addButton(1, "Yes", VeryReadyForTheFinalTraining);
 		}
-		else if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] >= 1 && flags[kFLAGS.CHI_CHI_SAM_TRAINING] < 2) {
+		else if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] == 1) {
 			outputText("As you head to practice on the dummy, Chi Chi holds you back.\n\n");
 			if (flags[kFLAGS.CHI_CHI_AFFECTION] > 60) {
 				outputText("You go to see Chi Chi, still a little hesitant to continue this particular lesson.\n\n");
@@ -262,13 +274,12 @@ public function TrainingSoulArtsWithChiChi():void {
 			if (player.spe < 100) {
 				dynStats("spe", 2);
 			}
-			flags[kFLAGS.CHI_CHI_SAM_TRAINING] = 1;
 			if (player.str >= 100 && player.spe >= 100) {
-				if (player.findPerk(PerkLib.MightyFist) < 0) {
+				if (!player.hasStatusEffect(StatusEffects.KnowsOverlimit)) {
 					outputText(" Chi Chi, noticing that you’re training hard, hands you a scroll.\n\n");
 					outputText("\"<i>This is a scroll containing the technique Overlimit. Use it with caution, because if abused, this technique can and WILL kill you.</i>\"\n\n");
 					outputText("<b>You learned the martial power Overlimit.</b>\n\n");
-					if (!player.hasStatusEffect(StatusEffects.KnowsOverlimit)) player.createStatusEffect(StatusEffects.KnowsOverlimit, 0, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.KnowsOverlimit, 0, 0, 0, 0);
 				}
 				flags[kFLAGS.CHI_CHI_SAM_TRAINING] = 1;
 				flags[kFLAGS.CHI_CHI_AFFECTION] += 30;

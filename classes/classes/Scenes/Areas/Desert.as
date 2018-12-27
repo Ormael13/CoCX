@@ -73,9 +73,9 @@ use namespace CoC;
 						name: "teladreDiscover",
 						when: function ():Boolean
 						{
-							return (!player.hasStatusEffect(StatusEffects.TelAdre)) && (player.exploredDesert >= 5);
+							return (!player.hasStatusEffect(StatusEffects.TelAdre)) && (player.exploredDesert >= 3);
 						},
-						chance: 2,
+						chance: 3,
 						call: SceneLib.telAdre.discoverTelAdre
 					}, {
 						name: "teladreEncounter",
@@ -145,7 +145,7 @@ use namespace CoC;
 						chance: 0.2,
 						when: function ():Boolean
 						{
-							return (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2);
+							return (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff));
 						},
 						call: SceneLib.etnaScene.repeatYandereEnc
 					}, {

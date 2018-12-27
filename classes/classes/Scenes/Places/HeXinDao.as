@@ -64,8 +64,8 @@ public class HeXinDao extends BaseContent
     }
     public function golemmerchant():void {
         clearOutput();
-        outputText("You enter a shop that got sign over the entrance titled 'Soul Items'.  Inside you see few stalls with similar looking items put on the display.  Actually it not seems this merchant got 'a wide' choice of things but for someone at the beginning of soul cultivator road it's probably enough.  Sensing some movements from the corner of the shop that is pernamently covered in darkness a person appearing without making any sound.  'He' is around five feet tall with outer appearance of some kind of demonic monster. ");
-        if (flags[kFLAGS.FOUND_CATHEDRAL] > 0) outputText("But he do looks quite similar to the gargoyle from the cathedral.");
+        outputText("You enter a shop that got sign over the entrance titled 'Soul Items'.  Inside you see few stalls with similar looking items put on the display.  Actually it not seems this merchant got 'a wide' choice of things but for someone at the beginning of soul cultivator road it's probably enough.  Sensing some movements from the corner of the shop that is pernamently covered in darkness a person appearing without making any sound.  'He' is around five feet tall with outer appearance of some kind of demonic monster.");
+        if (flags[kFLAGS.FOUND_CATHEDRAL] > 0) outputText(" But he do looks quite similar to the gargoyle from the cathedral.");
         outputText("\n\n\"<i>Welcome to my master's shop dear customer. Feel free to look around,</i>\" he says. \n\n");
         if (flags[kFLAGS.CODEX_ENTRY_GOLEMS] <= 0) {
             flags[kFLAGS.CODEX_ENTRY_GOLEMS] = 1;
@@ -155,9 +155,10 @@ public class HeXinDao extends BaseContent
         menu();
         addButton(0, "1st Stall", Tier1).hint("Check out first of stalls with a cheapest TF items.");
         addButton(1, "2nd Stall", Tier2).hint("Check out second of stalls with a cheapest TF items.");
-        addButton(2, "3rd Stall", Tier3).hint("Check out stall with more expensive TF items.");
-        addButton(3, "4th Stall", Tier4).hint("Check out stall with most expensive TF items.");
-        addButton(5, "5th Stall", Tier5).hint("Check out stall with most exotic TF items.");		//specjalne type TF jak ectoplasm ^^
+        addButton(2, "2nd Stall", Tier3).hint("Check out third of stalls with a cheapest TF items.");
+        addButton(3, "3rd Stall", Tier4).hint("Check out stall with more expensive TF items.");
+        addButton(4, "4th Stall", Tier5).hint("Check out stall with most expensive TF items.");
+        addButton(5, "5th Stall", Tier6).hint("Check out stall with most exotic TF items.");		//specjalne type TF jak ectoplasm ^^
         //addButton(10, "Talk", TalkWithMogaHen).hint("Talk with shopkeeper.");
         addButton(11, "Sell", sellItemsForSpiritStones).hint("Sell items for spirit stones.");
         addButton(12, "Exchange", exchangeGemsToSpiritStonesorReverse).hint("Exchange gems to spirit stones or spirit stones to gems.");
@@ -170,39 +171,45 @@ public class HeXinDao extends BaseContent
             addButton(1, "BeeHony", buyItem,consumables.BEEHONY,sayLine(consumables.BEEHONY,"bee"),onBuyString).hint("Buy a small vial filled with giant-bee honey.");
             addButton(2, "BladeGrass", buyItem,consumables.BLADEGR,sayLine(consumables.BLADEGR,"mantis"),onBuyString).hint("Buy a blade shaped grass.");
             addButton(3, "CanineP", buyItem,consumables.CANINEP,sayLine(consumables.CANINEP,"dog"),onBuyString).hint("Buy a Canine pepper.");
-            addButton(4, "Equinum", buyItem,consumables.EQUINUM,sayLine(consumables.EQUINUM,"horse"),onBuyString).hint("Buy a vial of Equinum.");
-            addButton(5, "Fox Berry", buyItem,consumables.FOXBERY,sayLine(consumables.FOXBERY,"fox"),onBuyString).hint("Buy a fox berry.");
-            addButton(6, "FerretFrt", buyItem,consumables.FRRTFRT,sayLine(consumables.FRRTFRT,"ferret"),onBuyString).hint("Buy a ferret fruit.");
-            addButton(7, "GoldenRind", buyItem,consumables.GLDRIND,sayLine(consumables.GLDRIND,"deer"),onBuyString).hint("Buy a golden rind.");
-            addButton(8, "GoldenSeed", buyItem,consumables.GLDSEED,sayLine(consumables.GLDSEED,"harpy"),onBuyString).hint("Buy a golden seed.");
-            addButton(9, "Gob.Ale", buyItem,consumables.GOB_ALE,sayLine(consumables.GOB_ALE,"goblin"),onBuyString).hint("Buy a flagon of potent goblin ale.");
-            addButton(10, "IncubiD", buyItem,consumables.INCUBID,sayLine(consumables.INCUBID,"incubus"),onBuyString).hint("Buy a flask of Incubi draft.");
-            addButton(11, "KangaFruit", buyItem,consumables.KANGAFT,sayLine(consumables.KANGAFT,"kangaroo"),onBuyString).hint("Buy a piece of kanga fruit.");
-            addButton(12, "La Bova", buyItem,consumables.LABOVA_,sayLine(consumables.LABOVA_,"cow"),onBuyString).hint("Buy a bottle containing a misty fluid labeled \"LaBova\".");
-            addButton(13, "MouseCo", buyItem,consumables.MOUSECO,sayLine(consumables.MOUSECO,"mouse"),onBuyString).hint("Buy a handful of mouse cocoa.");
+            addButton(4, "FaeEar", buyItem,consumables.ELFEARS,sayLine(consumables.ELFEARS,"elf"),onBuyString).hint("Buy a Fae ear shaped plant.");
+            addButton(5, "Equinum", buyItem,consumables.EQUINUM,sayLine(consumables.EQUINUM,"horse"),onBuyString).hint("Buy a vial of Equinum.");
+            addButton(6, "Fox Berry", buyItem,consumables.FOXBERY,sayLine(consumables.FOXBERY,"fox"),onBuyString).hint("Buy a fox berry.");
+            addButton(7, "FerretFrt", buyItem,consumables.FRRTFRT,sayLine(consumables.FRRTFRT,"ferret"),onBuyString).hint("Buy a ferret fruit.");
+            addButton(8, "GoldenRind", buyItem,consumables.GLDRIND,sayLine(consumables.GLDRIND,"deer"),onBuyString).hint("Buy a golden rind.");
+            addButton(9, "GoldenSeed", buyItem,consumables.GLDSEED,sayLine(consumables.GLDSEED,"harpy"),onBuyString).hint("Buy a golden seed.");
+            addButton(10, "Gob.Ale", buyItem,consumables.GOB_ALE,sayLine(consumables.GOB_ALE,"goblin"),onBuyString).hint("Buy a flagon of potent goblin ale.");
+            addButton(11, "IncubiD", buyItem,consumables.INCUBID,sayLine(consumables.INCUBID,"incubus"),onBuyString).hint("Buy a flask of Incubi draft.");
+            addButton(12, "KangaFruit", buyItem,consumables.KANGAFT,sayLine(consumables.KANGAFT,"kangaroo"),onBuyString).hint("Buy a piece of kanga fruit.");
+            addButton(13, "La Bova", buyItem,consumables.LABOVA_,sayLine(consumables.LABOVA_,"cow"),onBuyString).hint("Buy a bottle containing a misty fluid labeled \"LaBova\".");
             addButton(14, "Back", mogahenmerchant);
             statScreenRefresh();
         }
         function Tier2():void {
             menu();
-            addButton(0, "MinoBlo", buyItem,consumables.MINOBLO,sayLine(consumables.MINOBLO,"bull"),onBuyString).hint("Buy a vial of Minotaur blood.");
-            addButton(1, "PigTruffle", buyItem,consumables.PIGTRUF,sayLine(consumables.PIGTRUF,"pig"),onBuyString).hint("Buy a pigtail truffle.");
-            addButton(2, "Reptilum", buyItem,consumables.REPTLUM,sayLine(consumables.REPTLUM,"lizan"),onBuyString).hint("Buy a vial of Reptilum.");
-            addButton(3, "RingFig", buyItem,consumables.RINGFIG,sayLine(consumables.RINGFIG,"raccoon"),onBuyString).hint("Buy a ringtail fig.");
-            addButton(4, "S.Gossr", buyItem,consumables.S_GOSSR,sayLine(consumables.S_GOSSR,"spider"),onBuyString).hint("Buy a bundle of pink, gossamer webbing.");
-            addButton(5, "SalamFW", buyItem,consumables.SALAMFW,sayLine(consumables.SALAMFW,"salamander"),onBuyString).hint("Buy a hip flask of Salamander Firewater.");
-            addButton(6, "Scorpinum", buyItem,consumables.SCORICO,sayLine(consumables.SCORICO,"scorpion"),onBuyString).hint("Buy a vial of Scorpinum.");
-            addButton(7, "Shark.T", buyItem,consumables.SHARK_T,sayLine(consumables.SHARK_T,"shark"),onBuyString).hint("Buy a sharp shark tooth.");
-            addButton(8, "SnakeOil", buyItem,consumables.SNAKOIL,sayLine(consumables.SNAKOIL,"snake"),onBuyString).hint("Buy a vial of snake oil.");
-            addButton(9, "SucMilk", buyItem,consumables.SUCMILK,sayLine(consumables.SUCMILK,"sucubus"),onBuyString).hint("Buy a bottle of Succubi milk.");
-            addButton(10, "TSTooth", buyItem,consumables.TSTOOTH,sayLine(consumables.TSTOOTH,"tigershark"),onBuyString).hint("Buy a glowing tiger shark tooth.");
-            addButton(11, "W.Fruit", buyItem,consumables.W_FRUIT,sayLine(consumables.W_FRUIT,"cat"),onBuyString).hint("Buy a piece of whisker-fruit.");
-            addButton(12, "WetCloth", buyItem,consumables.WETCLTH,sayLine(consumables.WETCLTH,"goo"),onBuyString).hint("Buy a wet cloth dripping with slippery slime.");
-            addButton(13, "YetiCum", buyItem,consumables.YETICUM,sayLine(consumables.YETICUM,"yeti"),onBuyString).hint("Buy a bottle of Yeti Cum.");
+            addButton(0, "MouseCo", buyItem,consumables.MOUSECO,sayLine(consumables.MOUSECO,"mouse"),onBuyString).hint("Buy a handful of mouse cocoa.");
+            addButton(1, "MinoBlo", buyItem,consumables.MINOBLO,sayLine(consumables.MINOBLO,"bull"),onBuyString).hint("Buy a vial of Minotaur blood.");
+            addButton(2, "PigTruffle", buyItem,consumables.PIGTRUF,sayLine(consumables.PIGTRUF,"pig"),onBuyString).hint("Buy a pigtail truffle.");
+            addButton(3, "Reptilum", buyItem,consumables.REPTLUM,sayLine(consumables.REPTLUM,"lizan"),onBuyString).hint("Buy a vial of Reptilum.");
+            addButton(4, "RingFig", buyItem,consumables.RINGFIG,sayLine(consumables.RINGFIG,"raccoon"),onBuyString).hint("Buy a ringtail fig.");
+            addButton(5, "S.Gossr", buyItem,consumables.S_GOSSR,sayLine(consumables.S_GOSSR,"spider"),onBuyString).hint("Buy a bundle of pink, gossamer webbing.");
+            addButton(6, "SalamFW", buyItem,consumables.SALAMFW,sayLine(consumables.SALAMFW,"salamander"),onBuyString).hint("Buy a hip flask of Salamander Firewater.");
+            addButton(7, "Scorpinum", buyItem,consumables.SCORICO,sayLine(consumables.SCORICO,"scorpion"),onBuyString).hint("Buy a vial of Scorpinum.");
+            addButton(8, "Shark.T", buyItem,consumables.SHARK_T,sayLine(consumables.SHARK_T,"shark"),onBuyString).hint("Buy a sharp shark tooth.");
+            addButton(9, "SnakeOil", buyItem,consumables.SNAKOIL,sayLine(consumables.SNAKOIL,"snake"),onBuyString).hint("Buy a vial of snake oil.");
+            addButton(10, "SucMilk", buyItem,consumables.SUCMILK,sayLine(consumables.SUCMILK,"sucubus"),onBuyString).hint("Buy a bottle of Succubi milk.");
             addButton(14, "Back", mogahenmerchant);
             statScreenRefresh();
         }
-        function Tier3():void {
+		function Tier3():void {
+			menu();
+            addButton(0, "TSTooth", buyItem,consumables.TSTOOTH,sayLine(consumables.TSTOOTH,"tigershark"),onBuyString).hint("Buy a glowing tiger shark tooth.");
+            addButton(1, "W.Fruit", buyItem,consumables.W_FRUIT,sayLine(consumables.W_FRUIT,"cat"),onBuyString).hint("Buy a piece of whisker-fruit.");
+            addButton(2, "WetCloth", buyItem,consumables.WETCLTH,sayLine(consumables.WETCLTH,"goo"),onBuyString).hint("Buy a wet cloth dripping with slippery slime.");
+            addButton(3, "YetiCum", buyItem,consumables.YETICUM,sayLine(consumables.YETICUM,"yeti"),onBuyString).hint("Buy a bottle of Yeti Cum.");
+			addButton(14, "Back", mogahenmerchant);
+            statScreenRefresh();
+		}
+        function Tier4():void {
             menu();
             addButton(0, "BlackInk", buyItem,consumables.BLACKIN,sayLine(consumables.BLACKIN,"female scylla"),onBuyString).hint("Buy a vial of black ink.");
             addButton(1, "BlackPp", buyItem,consumables.BLACKPP,sayLine(consumables.BLACKPP,"dog"),onBuyString).hint("Buy solid black canine pepper.");
@@ -217,7 +224,7 @@ public class HeXinDao extends BaseContent
             addButton(14, "Back", mogahenmerchant);
             statScreenRefresh();
         }
-        function Tier4():void {
+        function Tier5():void {
             menu();
             addButton(0, "SpHoney", buyItem,consumables.SPHONEY,sayLine(consumables.SPHONEY,"bee"),onBuyString).hint("Buy a bottle of special bee honey.");
             addButton(1, "SatyrWine", buyItem,consumables.SATYR_W,sayLine(consumables.SATYR_W,"satyr"),onBuyString).hint("Buy a bottle of satyr wine.");
@@ -226,7 +233,7 @@ public class HeXinDao extends BaseContent
             addButton(14, "Back", mogahenmerchant);
             statScreenRefresh();
         }
-        function Tier5():void {
+        function Tier6():void {
             menu();
             addButton(0, "Coal", buyItem,consumables.COAL___,sayLine(consumables.COAL___,"heat or rut"),onBuyString).hint("Buy two pieces of coal.");
             addButton(1, "DryTent", buyItem,consumables.DRYTENT,sayLine(consumables.DRYTENT,"anemone"),onBuyString).hint("Buy a shriveled tentacle.");

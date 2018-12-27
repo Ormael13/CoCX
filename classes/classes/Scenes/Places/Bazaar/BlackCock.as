@@ -223,7 +223,7 @@ import classes.lists.Gender;
 					break;
 				case "Prot. Shake":
 					player.refillHunger(30);
-					player.modTone(100, 1);
+					player.modTone(player.maxToneCap(), 1);
 					player.modThickness(0, -1);
 					break;
 				case "Funnel Cake":

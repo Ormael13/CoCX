@@ -52,7 +52,7 @@ public class RyuBiHuman extends Monster
 			this.horns.count = 4;
 			this.tailType = Tail.DRACONIC;
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
-			this.createPerk(PerkLib.EnemyGigantType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyGodType, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

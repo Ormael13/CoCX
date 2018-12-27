@@ -23,11 +23,14 @@ use namespace CoC;
 		public var etnaScene:EtnaFollower = SceneLib.etnaScene;
 
 		public function moveClawCombo():void {
-			createStatusEffect(StatusEffects.Attacks, 2, 0, 0, 0);
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 8) createStatusEffect(StatusEffects.Attacks, 4, 0, 0, 0);
+			else if (flags[kFLAGS.ETNA_LVL_UP] >= 4) createStatusEffect(StatusEffects.Attacks, 3, 0, 0, 0);
+			else createStatusEffect(StatusEffects.Attacks, 2, 0, 0, 0);
 			eAttack();
 		}
 		
 		public function moveTailSpike():void {
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 9) TailSpike();
 			if (flags[kFLAGS.ETNA_LVL_UP] >= 6) TailSpike();
 			if (flags[kFLAGS.ETNA_LVL_UP] >= 3) TailSpike();
 			TailSpike();
@@ -220,9 +223,36 @@ use namespace CoC;
 				initWisLibSensCor(240, 310, 150, 80);
 				this.weaponAttack = 78;
 				this.armorDef = 24;
-				this.armorMDef = 4;
-				this.bonusHP = 250;
+				this.armorMDef = 5;
+				this.bonusHP = 300;
 				this.level = 72;
+			}
+			if (flags[kFLAGS.ETNA_LVL_UP] == 8) {
+				initStrTouSpeInte(180, 270, 480, 250);
+				initWisLibSensCor(250, 330, 160, 80);
+				this.weaponAttack = 84;
+				this.armorDef = 26;
+				this.armorMDef = 6;
+				this.bonusHP = 300;
+				this.level = 78;
+			}
+			if (flags[kFLAGS.ETNA_LVL_UP] == 9) {
+				initStrTouSpeInte(190, 285, 510, 260);
+				initWisLibSensCor(260, 350, 170, 80);
+				this.weaponAttack = 90;
+				this.armorDef = 28;
+				this.armorMDef = 7;
+				this.bonusHP = 400;
+				this.level = 84;
+			}
+			if (flags[kFLAGS.ETNA_LVL_UP] == 10) {
+				initStrTouSpeInte(200, 300, 540, 270);
+				initWisLibSensCor(270, 370, 180, 80);
+				this.weaponAttack = 96;
+				this.armorDef = 30;
+				this.armorMDef = 8;
+				this.bonusHP = 400;
+				this.level = 90;
 			}
 			createVagina(true,VaginaClass.WETNESS_NORMAL,VaginaClass.LOOSENESS_TIGHT);
 			this.createStatusEffect(StatusEffects.BonusVCapacity,60,0,0,0);
@@ -262,9 +292,18 @@ use namespace CoC;
 			if (flags[kFLAGS.ETNA_LVL_UP] >= 2) this.createPerk(PerkLib.HalfStepToImprovedSelfControl, 0, 0, 0, 0);
 			if (flags[kFLAGS.ETNA_LVL_UP] >= 3) this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
 			if (flags[kFLAGS.ETNA_LVL_UP] >= 4) this.createPerk(PerkLib.HalfStepToAdvancedSelfControl, 0, 0, 0, 0);
-			if (flags[kFLAGS.ETNA_LVL_UP] >= 5) this.createPerk(PerkLib.AdvancedSelfControl, 0, 0, 0, 0);
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 5) {
+				this.createPerk(PerkLib.AdvancedSelfControl, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EpicLibido, 0, 0, 0, 0);
+			}
 			if (flags[kFLAGS.ETNA_LVL_UP] >= 6) this.createPerk(PerkLib.HalfStepToSuperiorSelfControl, 0, 0, 0, 0);
 			if (flags[kFLAGS.ETNA_LVL_UP] >= 7) this.createPerk(PerkLib.SuperiorSelfControl, 0, 0, 0, 0);
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 8) {
+				this.createPerk(PerkLib.HalfStepToPeerlessSelfControl, 0, 0, 0, 0);
+				this.createPerk(PerkLib.LegendaryLibido, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 9) this.createPerk(PerkLib.PeerlessSelfControl, 0, 0, 0, 0);
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 10) this.createPerk(PerkLib.HalfStepToInhumanSelfControl, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

@@ -1044,6 +1044,18 @@ public function defeatIsabella():void {
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ISABELLA_LVL_UP] = 7;
 		}
+		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.ISABELLA_LVL_UP] == 7) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 66);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 66, 0, 0);
+			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ISABELLA_LVL_UP] = 8;
+		}
+		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 12 && flags[kFLAGS.ISABELLA_LVL_UP] == 8) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 72);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 72, 0, 0);
+			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ISABELLA_LVL_UP] = 9;
+		}
 	}
 	if(monster.statusEffectv1(StatusEffects.Sparring) == 2) {
 		outputText("You give the ");

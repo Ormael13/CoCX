@@ -24,225 +24,7 @@ public class PlayerInfo extends BaseContent {
 	public function displayStats():void {
 		spriteSelect(-1);
 		clearOutput();
-		displayHeader("Stats");
-		// Begin Combat Stats
-		var combatStats:String = "";
-
-		combatStats += "<b>Resistance (Physical):</b> " + (100 - Math.round(player.damagePercent())) + "%\n";
-		combatStats += "<b>Resistance (Magic):</b> " + (100 - Math.round(player.damageMagicalPercent())) + "%\n";
-		combatStats += "<i>Resistance (Fire):</i> " + (100 - Math.round(player.damageFirePercent())) + "%\n";
-		combatStats += "<i>Resistance (Ice):</i> " + (100 - Math.round(player.damageIcePercent())) + "%\n";
-		combatStats += "<i>Resistance (Lightning):</i> " + (100 - Math.round(player.damageLightningPercent())) + "%\n";
-		combatStats += "<i>Resistance (Darkness):</i> " + (100 - Math.round(player.damageDarknessPercent())) + "%\n";
-		combatStats += "<i>Resistance (Poison):</i> " + (100 - Math.round(player.damagePoisonPercent())) + "%\n";
-		combatStats += "<b>Resistance (Lust):</b> " + (100 - Math.round(CoC.instance.player.lustPercent())) + "%\n";
-
-		combatStats += "<b>Spell Effect Multiplier:</b> " + Math.round(100 * combat.spellMod()) + "%\n";
-		combatStats += "<b>Spell Cost:</b> " + combat.spellCost(100) + "%\n";
-		combatStats += "<b>White Spell Effect Multiplier:</b> " + Math.round(100 * combat.spellModWhite()) + "%\n";
-		combatStats += "<b>White Spell Cost:</b> " + combat.spellCostWhite(100) + "%\n";
-		combatStats += "<b>Black Spell Effect Multiplier:</b> " + Math.round(100 * combat.spellModBlack()) + "%\n";
-		combatStats += "<b>Black Spell Cost:</b> " + combat.spellCostBlack(100) + "%\n";
-
-		combatStats += "<b>Heals Effect Multiplier:</b> " + Math.round(100 * combat.healMod()) + "%\n";
-		combatStats += "<b>Heals Cost:</b> " + combat.healCost(100) + "%\n";
-		combatStats += "<b>White Heals Effect Multiplier:</b> " + Math.round(100 * combat.healModWhite()) + "%\n";
-		combatStats += "<b>White Heals Cost:</b> " + combat.healCostWhite(100) + "%\n";
-		combatStats += "<b>Black Heals Effect Multiplier:</b> " + Math.round(100 * combat.healModBlack()) + "%\n";
-		combatStats += "<b>Black Heals Cost:</b> " + combat.healCostBlack(100) + "%\n";
-
-		combatStats += "<b>Accuracy (1st melee attack):</b> " + (combat.meleeAccuracy() / 2) + "%\n";
-		if (player.findPerk(PerkLib.DoubleAttackSmall) >= 0 || player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0) combatStats += "<b>Accuracy (2nd melee attack):</b> " + ((combat.meleeAccuracy() / 2) - combat.meleeAccuracyPenalty()) + "%\n";
-		if (player.findPerk(PerkLib.TripleAttackSmall) >= 0 || player.findPerk(PerkLib.TripleAttack) >= 0 || player.findPerk(PerkLib.TripleAttackLarge) >= 0) combatStats += "<b>Accuracy (3rd melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 2)) + "%\n";
-		if (player.findPerk(PerkLib.QuadrupleAttackSmall) >= 0 || player.findPerk(PerkLib.QuadrupleAttack) >= 0) combatStats += "<b>Accuracy (4th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 3)) + "%\n";
-		if (player.findPerk(PerkLib.PentaAttackSmall) >= 0 || player.findPerk(PerkLib.PentaAttack) >= 0) combatStats += "<b>Accuracy (5th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 4)) + "%\n";
-		if (player.findPerk(PerkLib.HexaAttackSmall) >= 0 || player.findPerk(PerkLib.HexaAttack) >= 0) combatStats += "<b>Accuracy (6th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 5)) + "%\n";
-		if (player.findPerk(PerkLib.HectaAttackSmall) >= 0) combatStats += "<b>Accuracy (7th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 6)) + "%\n";
-		if (player.findPerk(PerkLib.OctaAttackSmall) >= 0) combatStats += "<b>Accuracy (8th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 7)) + "%\n";
-		if (player.findPerk(PerkLib.NonaAttackSmall) >= 0) combatStats += "<b>Accuracy (9th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 8)) + "%\n";
-		if (player.findPerk(PerkLib.DecaAttackSmall) >= 0) combatStats += "<b>Accuracy (10th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 9)) + "%\n";
-
-		if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
-			if (player.statusEffectv1(StatusEffects.Kindra) < 1)
-				combatStats += "<b>Bow Skill:</b> " + Math.round(player.statusEffectv1(StatusEffects.Kelt)) + " / 100\n";
-			if (player.statusEffectv1(StatusEffects.Kindra) > 0)
-				combatStats += "<b>Bow Skill:</b> " + (Math.round(player.statusEffectv1(StatusEffects.Kelt)) + Math.round(player.statusEffectv1(StatusEffects.Kindra))) + " / 250\n";
-		}
-		combatStats += "<b>Arrow/Bolt Cost:</b> " + combat.bowCost(100) + "%\n";
-		combatStats += "<b>Accuracy (1st range attack):</b> " + (combat.arrowsAccuracy() / 2) + "%\n";
-		if (player.findPerk(PerkLib.DoubleStrike) >= 0) combatStats += "<b>Accuracy (2nd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - combat.arrowsAccuracyPenalty()) + "%\n";
-		if (player.findPerk(PerkLib.TripleStrike) >= 0) combatStats += "<b>Accuracy (3rd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - (combat.arrowsAccuracyPenalty() * 2)) + "%\n";
-		if (player.findPerk(PerkLib.Manyshot) >= 0) combatStats += "<b>Accuracy (4th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 45) + "%\n";
-		if (player.findPerk(PerkLib.WildQuiver) >= 0) combatStats += "<b>Accuracy (5th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 60) + "%\n";
-		if (player.findPerk(PerkLib.Multishot) >= 0) combatStats += "<b>Accuracy (6th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 75) + "%\n";
-
-		combatStats += "<b>Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillMod()) + "%\n";
-		combatStats += "<b>Physical Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillPhysicalMod()) + "%\n";
-		combatStats += "<b>Magical Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillMagicalMod()) + "%\n";
-		combatStats += "<b>Soulskill Cost:</b> " + Math.round(100 * combat.soulskillCost()) + "%\n";
-
-		combatStats += "<b>Unarmed:</b> +" + combat.unarmedAttack() + "\n";
-
-		if (flags[kFLAGS.RAPHAEL_RAPIER_TRANING] > 0)
-			combatStats += "<b>Rapier Skill:</b> " + flags[kFLAGS.RAPHAEL_RAPIER_TRANING] + " / 4\n";
-
-		if (player.teaseLevel < 25)
-			combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: " + player.teaseXP + " / " + combat.teaseExpToLevelUp() + ")\n";
-		else
-			combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)\n";
-
-		var maxes:Object = player.getAllMaxStats();
-		combatStats += "<b>Strength Cap:</b> " + maxes.str + "\n";
-		combatStats += "<i>Ghost Strength:</i> +" + combat.ghostStrength() + "\n";
-		combatStats += "<b>Toughness Cap:</b> " + maxes.tou + "\n";
-		combatStats += "<b>Speed Cap:</b> " + maxes.spe + "\n";
-		//combatStats += "<i>Ghost Speed:</i> +" + combat.ghostSpeed() + "\n";
-		combatStats += "<b>Intelligence Cap:</b> " + maxes.inte + "\n";
-		combatStats += "<b>Wisdom Cap:</b> " + maxes.wis + "\n";
-		combatStats += "<b>Libido Cap:</b> " + maxes.lib + "\n";
-		combatStats += "<b>Sensitivity Cap:</b> " + maxes.sens + "\n";
-
-		var mins:Object = player.getAllMinStats();
-		combatStats += "<b>Libido Minimum:</b> " + mins.lib + "\n";
-		combatStats += "<b>Sensitivity Minimum:</b> " + mins.sens + "\n";
-		combatStats += "<b>Corruption Minimum:</b> " + mins.cor + "\n";
-		
-		combatStats += "<b>HP Regeneration (%):</b> ~ " + combat.PercentBasedRegeneration() + " % / " + combat.maximumRegeneration() + " % (turn), ~ " + combat.PercentBasedRegeneration() * 2 + " % / " + combat.maximumRegeneration() * 2 + " % (hour)\n";
-		//combatStats += "<b>HP Regeneration (Total):</b> " + Math.round((player.maxHP() * combat.PercentBasedRegeneration() / 100) + combat.nonPercentBasedRegeneration()) + " /  turn, " + Math.round((player.maxHP() * combat.PercentBasedRegeneration() / 100) + combat.nonPercentBasedRegeneration()) * 2 + " /  hour\n";
-		combatStats += "<b>Wrath Regeneration:</b> " + combat.wrathregeneration2() * 2 + " / turn, " + combat.wrathregeneration2() + " / hour\n";
-		combatStats += "<b>Mana Regeneration:</b> " + Math.round(combat.manaregeneration2() * combat.manaRecoveryMultiplier()) + " / turn, " + Math.round(combat.manaregeneration2() * combat.manaRecoveryMultiplier()) * 2 + " / hour\n";
-		combatStats += "<b>Soulforce Regeneration:</b> " + Math.round(combat.soulforceregeneration2() * combat.soulforceRecoveryMultiplier()) + " / turn, " + Math.round(combat.soulforceregeneration2() * combat.soulforceRecoveryMultiplier()) * 2 + " / hour\n";
-
-		if (combatStats != "")
-			outputText("<b><u>Combat Stats</u></b>\n" + combatStats);
-		// End Combat Stats
-
-		if (prison.inPrison || flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) prison.displayPrisonStats();
-
-		// Begin Children Stats
-		var childStats:String = "";
-
-		if (player.statusEffectv1(StatusEffects.Birthed) > 0)
-			childStats += "<b>Times Given Birth:</b> " + player.statusEffectv1(StatusEffects.Birthed) + "\n";
-
-		if (flags[kFLAGS.AMILY_MET] > 0)
-			childStats += "<b>Litters With Amily:</b> " + (flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]) + "\n";
-
-		if (flags[kFLAGS.BEHEMOTH_CHILDREN] > 0)
-			childStats += "<b>Children With Behemoth:</b> " + flags[kFLAGS.BEHEMOTH_CHILDREN] + "\n";
-
-		if (flags[kFLAGS.BENOIT_EGGS] > 0)
-			childStats += "<b>Benoit Eggs Laid:</b> " + flags[kFLAGS.BENOIT_EGGS] + "\n";
-		if (flags[kFLAGS.FEMOIT_EGGS_LAID] > 0)
-			childStats += "<b>Benoite Eggs Produced:</b> " + flags[kFLAGS.FEMOIT_EGGS_LAID] + "\n";
-
-		if (flags[kFLAGS.COTTON_KID_COUNT] > 0)
-			childStats += "<b>Children With Cotton:</b> " + flags[kFLAGS.COTTON_KID_COUNT] + "\n";
-
-		if (flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0)
-			childStats += "<b>Children With Edryn:</b> " + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + "\n";
-
-		if (flags[kFLAGS.EMBER_CHILDREN_MALES] > 0)
-			childStats += "<b>Ember Offspring (Males):</b> " + flags[kFLAGS.EMBER_CHILDREN_MALES] + "\n";
-		if (flags[kFLAGS.EMBER_CHILDREN_FEMALES] > 0)
-			childStats += "<b>Ember Offspring (Females):</b> " + flags[kFLAGS.EMBER_CHILDREN_FEMALES] + "\n";
-		if (flags[kFLAGS.EMBER_CHILDREN_HERMS] > 0)
-			childStats += "<b>Ember Offspring (Herms):</b> " + flags[kFLAGS.EMBER_CHILDREN_HERMS] + "\n";
-        if (SceneLib.emberScene.emberChildren() > 0)
-            childStats += "<b>Total Children With Ember:</b> " + (SceneLib.emberScene.emberChildren()) + "\n";
-        if (flags[kFLAGS.EMBER_EGGS] > 0)
-			childStats += "<b>Ember Eggs Produced:</b> " + flags[kFLAGS.EMBER_EGGS] + "\n";
-
-        if (SceneLib.isabellaScene.totalIsabellaChildren() > 0) {
-            if (SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_BOYS) > 0)
-                childStats += "<b>Children With Isabella (Human, Males):</b> " + SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_BOYS) + "\n";
-            if (SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_GIRLS) > 0)
-                childStats += "<b>Children With Isabella (Human, Females):</b> " + SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_GIRLS) + "\n";
-            if (SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_HERMS) > 0)
-                childStats += "<b>Children With Isabella (Human, Herms):</b> " + SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_HERMS) + "\n";
-            if (SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS) > 0)
-                childStats += "<b>Children With Isabella (Cowgirl, Females):</b> " + SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS) + "\n";
-            if (SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS) > 0)
-                childStats += "<b>Children With Isabella (Cowgirl, Herms):</b> " + SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS) + "\n";
-            childStats += "<b>Total Children With Isabella:</b> " + SceneLib.isabellaScene.totalIsabellaChildren() + "\n"
-        }
-
-		if (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] > 0)
-			childStats += "<b>Children With Izma (Sharkgirls):</b> " + flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + "\n";
-		if (flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0)
-			childStats += "<b>Children With Izma (Tigersharks):</b> " + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] + "\n";
-		if (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] > 0 && flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0)
-			childStats += "<b>Total Children with Izma:</b> " + (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS]) + "\n";
-
-        if (SceneLib.joyScene.getTotalLitters() > 0)
-            childStats += "<b>Litters With " + (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 ? "Joy" : "Jojo") + ":</b> " + SceneLib.joyScene.getTotalLitters() + "\n";
-        if (flags[kFLAGS.KELLY_KIDS_MALE] > 0)
-			childStats += "<b>Children With Kelly (Males):</b> " + flags[kFLAGS.KELLY_KIDS_MALE] + "\n";
-		if (flags[kFLAGS.KELLY_KIDS] - flags[kFLAGS.KELLY_KIDS_MALE] > 0)
-			childStats += "<b>Children With Kelly (Females):</b> " + (flags[kFLAGS.KELLY_KIDS] - flags[kFLAGS.KELLY_KIDS_MALE]) + "\n";
-		if (flags[kFLAGS.KELLY_KIDS] > 0)
-			childStats += "<b>Total Children With Kelly:</b> " + flags[kFLAGS.KELLY_KIDS] + "\n";
-        if (SceneLib.kihaFollower.pregnancy.isPregnant)
-            childStats += "<b>Kiha's Pregnancy:</b> " + SceneLib.kihaFollower.pregnancy.incubation + "\n";
-        if (flags[kFLAGS.KIHA_CHILDREN_BOYS] > 0)
-			childStats += "<b>Kiha Offspring (Males):</b> " + flags[kFLAGS.KIHA_CHILDREN_BOYS] + "\n";
-		if (flags[kFLAGS.KIHA_CHILDREN_GIRLS] > 0)
-			childStats += "<b>Kiha Offspring (Females):</b> " + flags[kFLAGS.KIHA_CHILDREN_GIRLS] + "\n";
-		if (flags[kFLAGS.KIHA_CHILDREN_HERMS] > 0)
-			childStats += "<b>Kiha Offspring (Herms):</b> " + flags[kFLAGS.KIHA_CHILDREN_HERMS] + "\n";
-        if (SceneLib.kihaFollower.totalKihaChildren() > 0)
-            childStats += "<b>Total Children With Kiha:</b> " + SceneLib.kihaFollower.totalKihaChildren() + "\n";
-        if (SceneLib.mountain.salon.lynnetteApproval() != 0)
-            childStats += "<b>Lynnette Children:</b> " + flags[kFLAGS.LYNNETTE_BABY_COUNT] + "\n";
-
-		if (flags[kFLAGS.MARBLE_KIDS] > 0)
-			childStats += "<b>Children With Marble:</b> " + flags[kFLAGS.MARBLE_KIDS] + "\n";
-
-		if (flags[kFLAGS.MINERVA_CHILDREN] > 0)
-			childStats += "<b>Children With Minerva:</b> " + flags[kFLAGS.MINERVA_CHILDREN] + "\n";
-
-		if (flags[kFLAGS.ANT_KIDS] > 0)
-			childStats += "<b>Ant Children With Phylla:</b> " + flags[kFLAGS.ANT_KIDS] + "\n";
-		if (flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0)
-			childStats += "<b>Drider Children With Phylla:</b> " + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] + "\n";
-		if (flags[kFLAGS.ANT_KIDS] > 0 && flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0)
-			childStats += "<b>Total Children With Phylla:</b> " + (flags[kFLAGS.ANT_KIDS] + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT]) + "\n";
-
-		if (flags[kFLAGS.SHEILA_JOEYS] > 0)
-			childStats += "<b>Children With Sheila (Joeys):</b> " + flags[kFLAGS.SHEILA_JOEYS] + "\n";
-		if (flags[kFLAGS.SHEILA_IMPS] > 0)
-			childStats += "<b>Children With Sheila (Imps):</b> " + flags[kFLAGS.SHEILA_IMPS] + "\n";
-		if (flags[kFLAGS.SHEILA_JOEYS] > 0 && flags[kFLAGS.SHEILA_IMPS] > 0)
-			childStats += "<b>Total Children With Sheila:</b> " + (flags[kFLAGS.SHEILA_JOEYS] + flags[kFLAGS.SHEILA_IMPS]) + "\n";
-
-		if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 0 || flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) {
-			childStats += "<b>Children With Sophie:</b> ";
-			var sophie:int = 0;
-			if (flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) sophie++;
-			sophie += flags[kFLAGS.SOPHIE_ADULT_KID_COUNT];
-			if (flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] > 0) sophie++;
-			childStats += sophie + "\n";
-		}
-
-		if (flags[kFLAGS.SOPHIE_EGGS_LAID] > 0)
-			childStats += "<b>Eggs Fertilized For Sophie:</b> " + (flags[kFLAGS.SOPHIE_EGGS_LAID] + sophie) + "\n";
-
-		if (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] > 0)
-			childStats += "<b>Children With Tamani:</b> " + flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] + " (after all forms of natural selection)\n";
-
-        if (SceneLib.urtaPregs.urtaKids() > 0)
-            childStats += "<b>Children With Urta:</b> " + SceneLib.urtaPregs.urtaKids() + "\n";
-        //Mino sons
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] > 0)
-			childStats += "<b>Number of Adult Minotaur Offspring:</b> " + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] + "\n";
-
-		//Alraune daughters
-		if (flags[kFLAGS.ALRAUNE_SEEDS] > 0)
-			childStats += "<b>Alraune daughters:</b> " + flags[kFLAGS.ALRAUNE_SEEDS] + " <b>(Oldest ones: " + (flags[kFLAGS.ALRAUNE_GROWING] - 1) + " days)</b>\n";
-
-		if (childStats != "")
-			outputText("\n<b><u>Children</u></b>\n" + childStats);
-		// End Children Stats
+		displayHeader("General Stats");
 
 		// Begin Body Stats
 		var bodyStats:String = "";
@@ -393,6 +175,12 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.TIMES_ORGASMED] > 0)
 			miscStats += "<b>Times Orgasmed:</b> " + flags[kFLAGS.TIMES_ORGASMED] + "\n";
 
+		if (flags[kFLAGS.LUNA_MOON_CYCLE] > 0) {
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) miscStats += "<font color=\"#C00000\"><b>Day of the Moon Cycle:</b> " + flags[kFLAGS.LUNA_MOON_CYCLE] + " (FULL MOON)</font>";
+			else miscStats += "<b>Day of the Moon Cycle:</b> " + flags[kFLAGS.LUNA_MOON_CYCLE];
+			miscStats += "\n";
+		}
+
 		if (miscStats != "")
 			outputText("\n<b><u>Miscellaneous Stats</u></b>\n" + miscStats);
 		// End Misc Stats
@@ -431,240 +219,6 @@ public class PlayerInfo extends BaseContent {
 		if (addictStats != "")
 			outputText("\n<b><u>Addictions</u></b>\n" + addictStats);
 		// End Addition Stats
-
-		// Begin Interpersonal Stats
-		var interpersonStats:String = "";
-
-		if (SceneLib.anzu.anzuRelationshipLevel() > 0) {
-			interpersonStats += "<b>Anzu's Affection:</b> " + flags[kFLAGS.ANZU_AFFECTION] + "%\n";
-			interpersonStats += "<b>Anzu's Relationship Level:</b> " + (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 1 ? "Acquaintances" : flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 2 ? "Friend" : flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 3 ? "Close Friend" : flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 4 ? "Lover" : "Undefined") + "\n";
-		}
-			
-		if (flags[kFLAGS.ARIAN_PARK] > 0)
-            interpersonStats += "<b>Arian's Health:</b> " + Math.round(SceneLib.arianScene.arianHealth()) + "\n";
-        if (flags[kFLAGS.ARIAN_VIRGIN] > 0)
-			interpersonStats += "<b>Arian Sex Counter:</b> " + Math.round(flags[kFLAGS.ARIAN_VIRGIN]) + "\n";
-
-		if (SceneLib.bazaar.benoit.benoitAffection() > 0)
-            interpersonStats += "<b>" + SceneLib.bazaar.benoit.benoitMF("Benoit", "Benoite") + " Affection:</b> " + Math.round(SceneLib.bazaar.benoit.benoitAffection()) + "%\n";
-        if (flags[kFLAGS.BROOKE_MET] > 0)
-            interpersonStats += "<b>Brooke Affection:</b> " + Math.round(SceneLib.telAdre.brooke.brookeAffection()) + "\n";
-        if (flags[kFLAGS.CEANI_AFFECTION] > 0)
-			interpersonStats += "<b>Ceani Affection:</b> " + Math.round(flags[kFLAGS.CEANI_AFFECTION]) + "%\n";
-			if (flags[kFLAGS.CEANI_FOLLOWER] == 1) {
-				if (flags[kFLAGS.CEANI_LVL_UP] == 5) interpersonStats += "<b>Ceani lvl:</b> 76\n";
-				if (flags[kFLAGS.CEANI_LVL_UP] == 4) interpersonStats += "<b>Ceani lvl:</b> 70\n";
-				if (flags[kFLAGS.CEANI_LVL_UP] == 3) interpersonStats += "<b>Ceani lvl:</b> 62\n";
-				if (flags[kFLAGS.CEANI_LVL_UP] == 2) interpersonStats += "<b>Ceani lvl:</b> 54\n";
-				if (flags[kFLAGS.CEANI_LVL_UP] == 1) interpersonStats += "<b>Ceani lvl:</b> 46\n";
-				if (flags[kFLAGS.CEANI_LVL_UP] == 0) interpersonStats += "<b>Ceani lvl:</b> 38\n";
-			}
-
-		if (flags[kFLAGS.CHI_CHI_AFFECTION] > 0) {
-			interpersonStats += "<b>Chi Chi Affection:</b> " + Math.round(flags[kFLAGS.CHI_CHI_AFFECTION]) + "%\n";
-			if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 3) {
-				if (flags[kFLAGS.CHI_CHI_LVL_UP] == 8) interpersonStats += "<b>Chi Chi lvl:</b> 76\n";
-				if (flags[kFLAGS.CHI_CHI_LVL_UP] == 7) interpersonStats += "<b>Chi Chi lvl:</b> 70\n";
-				if (flags[kFLAGS.CHI_CHI_LVL_UP] == 6) interpersonStats += "<b>Chi Chi lvl:</b> 64\n";
-				if (flags[kFLAGS.CHI_CHI_LVL_UP] == 5) interpersonStats += "<b>Chi Chi lvl:</b> 58\n";
-				if (flags[kFLAGS.CHI_CHI_LVL_UP] == 4) interpersonStats += "<b>Chi Chi lvl:</b> 49\n";
-				if (flags[kFLAGS.CHI_CHI_LVL_UP] == 3) interpersonStats += "<b>Chi Chi lvl:</b> 40\n";
-				if (flags[kFLAGS.CHI_CHI_LVL_UP] == 2) interpersonStats += "<b>Chi Chi lvl:</b> 31\n";
-				if (flags[kFLAGS.CHI_CHI_LVL_UP] < 2) interpersonStats += "<b>Chi Chi lvl:</b> 22\n";
-			}
-		}
-
-		if (flags[kFLAGS.CERAPH_OWNED_DICKS] + flags[kFLAGS.CERAPH_OWNED_PUSSIES] + flags[kFLAGS.CERAPH_OWNED_TITS] > 0)
-			interpersonStats += "<b>Body Parts Taken By Ceraph:</b> " + (flags[kFLAGS.CERAPH_OWNED_DICKS] + flags[kFLAGS.CERAPH_OWNED_PUSSIES] + flags[kFLAGS.CERAPH_OWNED_TITS]) + "\n";
-
-		if (flags[kFLAGS.DIANA_AFFECTION] > 0) {
-			interpersonStats += "<b>Diana Affection:</b> " + Math.round(flags[kFLAGS.DIANA_AFFECTION]) + "%\n";
-		}
-
-		if (flags[kFLAGS.ETNA_AFFECTION] > 0) {
-			interpersonStats += "<b>Etna Affection:</b> " + Math.round(flags[kFLAGS.ETNA_AFFECTION]) + "%\n";
-			if (flags[kFLAGS.ETNA_LVL_UP] == 7) interpersonStats += "<b>Etna lvl:</b> 72\n";
-			if (flags[kFLAGS.ETNA_LVL_UP] == 6) interpersonStats += "<b>Etna lvl:</b> 66\n";
-			if (flags[kFLAGS.ETNA_LVL_UP] == 5) interpersonStats += "<b>Etna lvl:</b> 60\n";
-			if (flags[kFLAGS.ETNA_LVL_UP] == 4) interpersonStats += "<b>Etna lvl:</b> 54\n";
-			if (flags[kFLAGS.ETNA_LVL_UP] == 3) interpersonStats += "<b>Etna lvl:</b> 48\n";
-			if (flags[kFLAGS.ETNA_LVL_UP] == 2) interpersonStats += "<b>Etna lvl:</b> 42\n";
-			if (flags[kFLAGS.ETNA_LVL_UP] == 1) interpersonStats += "<b>Etna lvl:</b> 36\n";
-			if (flags[kFLAGS.ETNA_LVL_UP] < 1) interpersonStats += "<b>Etna lvl:</b> 30\n";
-		}
-
-		if (flags[kFLAGS.ELECTRA_AFFECTION] > 0)
-			interpersonStats += "<b>Electra Affection:</b> " + Math.round(flags[kFLAGS.ELECTRA_AFFECTION]) + "%\n";
-
-		if (SceneLib.emberScene.emberAffection() > 0) {
-            interpersonStats += "<b>Ember Affection:</b> " + Math.round(SceneLib.emberScene.emberAffection()) + "%\n";
-            if (flags[kFLAGS.EMBER_LVL_UP] == 7) interpersonStats += "<b>Ember lvl:</b> 62\n";
-			if (flags[kFLAGS.EMBER_LVL_UP] == 6) interpersonStats += "<b>Ember lvl:</b> 56\n";
-			if (flags[kFLAGS.EMBER_LVL_UP] == 5) interpersonStats += "<b>Ember lvl:</b> 50\n";
-			if (flags[kFLAGS.EMBER_LVL_UP] == 4) interpersonStats += "<b>Ember lvl:</b> 44\n";
-			if (flags[kFLAGS.EMBER_LVL_UP] == 3) interpersonStats += "<b>Ember lvl:</b> 38\n";
-			if (flags[kFLAGS.EMBER_LVL_UP] == 2) interpersonStats += "<b>Ember lvl:</b> 32\n";
-			if (flags[kFLAGS.EMBER_LVL_UP] == 1) interpersonStats += "<b>Ember lvl:</b> 26\n";
-			if (flags[kFLAGS.EMBER_LVL_UP] < 1) interpersonStats += "<b>Ember lvl:</b> 20\n";
-		}
-
-		if (SceneLib.helFollower.helAffection() > 0)
-            interpersonStats += "<b>Helia Affection:</b> " + Math.round(SceneLib.helFollower.helAffection()) + "%\n";
-        if (SceneLib.helFollower.helAffection() >= 100)
-            interpersonStats += "<b>Helia Bonus Points:</b> " + Math.round(flags[kFLAGS.HEL_BONUS_POINTS]) + "\n";
-
-		if (flags[kFLAGS.ISABELLA_AFFECTION] > 0) {
-			interpersonStats += "<b>Isabella Affection:</b> ";
-            if (!SceneLib.isabellaFollowerScene.isabellaFollower())
-                interpersonStats += Math.round(flags[kFLAGS.ISABELLA_AFFECTION]) + "%\n";
-			else
-				interpersonStats += "100%\n";
-			if (flags[kFLAGS.ISABELLA_LVL_UP] == 7) interpersonStats += "<b>Isabella lvl:</b> 62\n";
-			if (flags[kFLAGS.ISABELLA_LVL_UP] == 6) interpersonStats += "<b>Isabella lvl:</b> 56\n";
-			if (flags[kFLAGS.ISABELLA_LVL_UP] == 5) interpersonStats += "<b>Isabella lvl:</b> 50\n";
-			if (flags[kFLAGS.ISABELLA_LVL_UP] == 4) interpersonStats += "<b>Isabella lvl:</b> 44\n";
-			if (flags[kFLAGS.ISABELLA_LVL_UP] == 3) interpersonStats += "<b>Isabella lvl:</b> 38\n";
-			if (flags[kFLAGS.ISABELLA_LVL_UP] == 2) interpersonStats += "<b>Isabella lvl:</b> 32\n";
-			if (flags[kFLAGS.ISABELLA_LVL_UP] == 1) interpersonStats += "<b>Isabella lvl:</b> 26\n";
-			if (flags[kFLAGS.ISABELLA_LVL_UP] < 1) interpersonStats += "<b>Isabella lvl:</b> 20\n";
-		}
-
-		if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) {
-			interpersonStats += "<b>Joy's Intelligence:</b> " + flags[kFLAGS.JOY_INTELLIGENCE];
-			if (flags[kFLAGS.JOY_INTELLIGENCE] >= 50) interpersonStats += " (MAX)";
-			interpersonStats += "\n";
-		}
-
-		if (flags[kFLAGS.KATHERINE_UNLOCKED] >= 4) {
-            interpersonStats += "<b>Katherine Submissiveness:</b> " + SceneLib.telAdre.katherine.submissiveness() + "\n";
-        }
-
-		if (player.hasStatusEffect(StatusEffects.Kelt) && flags[kFLAGS.KELT_BREAK_LEVEL] == 0 && flags[kFLAGS.KELT_KILLED] == 0) {
-			if (player.statusEffectv2(StatusEffects.Kelt) >= 130)
-				interpersonStats += "<b>Submissiveness To Kelt:</b> " + 100 + "%\n";
-			else
-				interpersonStats += "<b>Submissiveness To Kelt:</b> " + Math.round(player.statusEffectv2(StatusEffects.Kelt) / 130 * 100) + "%\n";
-
-		}
-
-		if (flags[kFLAGS.ANEMONE_KID] > 0)
-            interpersonStats += "<b>Kid A's Confidence:</b> " + SceneLib.anemoneScene.kidAXP() + "%\n";
-        if (flags[kFLAGS.KIHA_AFFECTION_LEVEL] == 2) {
-            if (SceneLib.kihaFollower.followerKiha())
-                interpersonStats += "<b>Kiha Affection:</b> " + 100 + "%\n";
-			else
-				interpersonStats += "<b>Kiha Affection:</b> " + Math.round(flags[kFLAGS.KIHA_AFFECTION]) + "%\n";
-			if (flags[kFLAGS.KIHA_LVL_UP] == 7) interpersonStats += "<b>Kiha lvl:</b> 63\n";
-			if (flags[kFLAGS.KIHA_LVL_UP] == 6) interpersonStats += "<b>Kiha lvl:</b> 57\n";
-			if (flags[kFLAGS.KIHA_LVL_UP] == 5) interpersonStats += "<b>Kiha lvl:</b> 51\n";
-			if (flags[kFLAGS.KIHA_LVL_UP] == 4) interpersonStats += "<b>Kiha lvl:</b> 45\n";
-			if (flags[kFLAGS.KIHA_LVL_UP] == 3) interpersonStats += "<b>Kiha lvl:</b> 39\n";
-			if (flags[kFLAGS.KIHA_LVL_UP] == 2) interpersonStats += "<b>Kiha lvl:</b> 33\n";
-			if (flags[kFLAGS.KIHA_LVL_UP] == 1) interpersonStats += "<b>Kiha lvl:</b> 27\n";
-			if (flags[kFLAGS.KIHA_LVL_UP] < 1) interpersonStats += "<b>Kiha lvl:</b> 21\n";
-		}
-
-		if (flags[kFLAGS.KINDRA_FOLLOWER] > 0)
-			interpersonStats += "<b>Kindra Affection:</b> " + Math.round(flags[kFLAGS.KINDRA_AFFECTION]) + "%\n";
-			if (flags[kFLAGS.KINDRA_AFFECTION] >= 5) {
-				if (flags[kFLAGS.KINDRA_LVL_UP] == 9) interpersonStats += "<b>Kindra lvl:</b> 63\n";
-				if (flags[kFLAGS.KINDRA_LVL_UP] == 8) interpersonStats += "<b>Kindra lvl:</b> 57\n";
-				if (flags[kFLAGS.KINDRA_LVL_UP] == 7) interpersonStats += "<b>Kindra lvl:</b> 51\n";
-				if (flags[kFLAGS.KINDRA_LVL_UP] < 7) interpersonStats += "<b>Kindra lvl:</b> 45\n";
-			}
-
-		//Lottie stuff
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0)
-            interpersonStats += "<b>Lottie's Encouragement:</b> " + SceneLib.telAdre.lottie.lottieMorale() + " (higher is better)\n" + "<b>Lottie's Figure:</b> " + SceneLib.telAdre.lottie.lottieTone() + " (higher is better)\n";
-        if (SceneLib.mountain.salon.lynnetteApproval() != 0)
-            interpersonStats += "<b>Lynnette's Approval:</b> " + SceneLib.mountain.salon.lynnetteApproval() + "\n";
-        if (flags[kFLAGS.LUNA_FOLLOWER] > 3) {
-			interpersonStats += "<b>Luna Affection:</b> " + Math.round(flags[kFLAGS.LUNA_AFFECTION]) + "%\n";
-			interpersonStats += "<b>Luna Jealousy:</b> " + Math.round(flags[kFLAGS.LUNA_JEALOUSY]) + "%\n";
-			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) interpersonStats += "<font color=\"#C00000\"><b>Day of the Moon Cycle:</b> " + flags[kFLAGS.LUNA_MOON_CYCLE] + " (FULL MOON)</font>";
-			else interpersonStats += "<b>Day of the Moon Cycle:</b> " + flags[kFLAGS.LUNA_MOON_CYCLE];
-			interpersonStats += "\n";
-			if (flags[kFLAGS.LUNA_LVL_UP] == 3) interpersonStats += "<b>Luna lvl:</b> 27\n";
-			if (flags[kFLAGS.LUNA_LVL_UP] == 2) interpersonStats += "<b>Luna lvl:</b> 21\n";
-			if (flags[kFLAGS.LUNA_LVL_UP] == 1) interpersonStats += "<b>Luna lvl:</b> 15\n";
-			if (flags[kFLAGS.LUNA_LVL_UP] == 0) interpersonStats += "<b>Luna lvl:</b> 9\n";
-		}
-		if (flags[kFLAGS.OWCAS_ATTITUDE] > 0)
-			interpersonStats += "<b>Owca's Attitude:</b> " + flags[kFLAGS.OWCAS_ATTITUDE] + "\n";
-
-		if (SceneLib.telAdre.rubi.rubiAffection() > 0)
-            interpersonStats += "<b>Rubi's Affection:</b> " + Math.round(SceneLib.telAdre.rubi.rubiAffection()) + "%\n" + "<b>Rubi's Orifice Capacity:</b> " + Math.round(SceneLib.telAdre.rubi.rubiCapacity()) + "%\n";
-        if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 0)
-			interpersonStats += "<b>Sapphire Affection:</b> " + Math.round(flags[kFLAGS.SAPPHIRE_AFFECTION]) + "%\n";
-		
-		if (flags[kFLAGS.SHEILA_XP] != 0) {
-            interpersonStats += "<b>Sheila's Corruption:</b> " + SceneLib.sheilaScene.sheilaCorruption();
-            if (SceneLib.sheilaScene.sheilaCorruption() > 100)
-                interpersonStats += " (Yes, it can go above 100)";
-			interpersonStats += "\n";
-		}
-
-if (SceneLib.valeria.valeriaFluidsEnabled()) {
-            interpersonStats += "<b>Valeria's Fluid:</b> " + flags[kFLAGS.VALERIA_FLUIDS] + "%\n"
-		}
-
-		if (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] != 0) {
-            if (SceneLib.urta.urtaLove()) {
-                if (flags[kFLAGS.URTA_QUEST_STATUS] == -1) interpersonStats += "<b>Urta Status:</b> <font color=\"#800000\">Gone</font>\n";
-				if (flags[kFLAGS.URTA_QUEST_STATUS] == 0) interpersonStats += "<b>Urta Status:</b> Lover\n";
-				if (flags[kFLAGS.URTA_QUEST_STATUS] == 1) interpersonStats += "<b>Urta Status:</b> <font color=\"#008000\">Lover+</font>\n";
-			}
-			else if (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] == -1)
-				interpersonStats += "<b>Urta Status:</b> Ashamed\n";
-			else if (flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] < 30)
-				interpersonStats += "<b>Urta's Affection:</b> " + Math.round(flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] * 3.3333) + "%\n";
-			else
-				interpersonStats += "<b>Urta Status:</b> Ready To Confess Love\n";
-		}
-
-		if (interpersonStats != "")
-			outputText("\n<b><u>Interpersonal Stats</u></b>\n" + interpersonStats);
-		// End Interpersonal Stats
-
-		// Begin Evangeline Stats
-		var evangelineStats:String = "";
-
-		if (flags[kFLAGS.EVANGELINE_AFFECTION] > 2) {
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 17) evangelineStats += "<b>Evangeline lvl:</b> 42\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 16) evangelineStats += "<b>Evangeline lvl:</b> 40\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 15) evangelineStats += "<b>Evangeline lvl:</b> 36\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 14) evangelineStats += "<b>Evangeline lvl:</b> 34\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 13) evangelineStats += "<b>Evangeline lvl:</b> 30\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 12) evangelineStats += "<b>Evangeline lvl:</b> 28\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 11) evangelineStats += "<b>Evangeline lvl:</b> 24\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 10) evangelineStats += "<b>Evangeline lvl:</b> 22\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 9) evangelineStats += "<b>Evangeline lvl:</b> 18\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 8) evangelineStats += "<b>Evangeline lvl:</b> 16\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 7) evangelineStats += "<b>Evangeline lvl:</b> 14\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 6) evangelineStats += "<b>Evangeline lvl:</b> 12\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5) evangelineStats += "<b>Evangeline lvl:</b> 10\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 4) evangelineStats += "<b>Evangeline lvl:</b> 8\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 3) evangelineStats += "<b>Evangeline lvl:</b> 6\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 2) evangelineStats += "<b>Evangeline lvl:</b> 4\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] < 2) evangelineStats += "<b>Evangeline lvl:</b> 2\n";
-			evangelineStats += "<b>Evangeline Affection:</b> " + Math.round(flags[kFLAGS.EVANGELINE_AFFECTION]) + "%\n";
-		}
-		if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 5) {
-			evangelineStats += "<b>Gems Purse:</b> " + flags[kFLAGS.EVANGELINE_GEMS_PURSE] + " gems\n";
-			evangelineStats += "<b>Spells Casted:</b> " + flags[kFLAGS.EVANGELINE_SPELLS_CASTED] + "\n";
-			if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] >= 0) {
-				if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] < 10) evangelineStats += "<b>Spells Cost:</b> 100%\n";
-				if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] >= 10 && flags[kFLAGS.EVANGELINE_SPELLS_CASTED] < 30) evangelineStats += "<b>Spells Cost:</b> 90%\n";
-				if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] >= 30 && flags[kFLAGS.EVANGELINE_SPELLS_CASTED] < 70) evangelineStats += "<b>Spells Cost:</b> 80%\n";
-				if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] >= 70 && flags[kFLAGS.EVANGELINE_SPELLS_CASTED] < 150) evangelineStats += "<b>Spells Cost:</b> 70%\n";
-				if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] >= 150 && flags[kFLAGS.EVANGELINE_SPELLS_CASTED] < 310) evangelineStats += "<b>Spells Cost:</b> 60%\n";
-				if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] >= 310) evangelineStats += "<b>Spells Cost:</b> 50%\n";
-			}
-		}
-
-		if (evangelineStats != "")
-			outputText("\n<b><u>Evangeline Stats</u></b>\n" + evangelineStats);
-		// End Evangeline Stats
 
 		// Begin Ongoing Stat Effects
 		var statEffects:String = "";
@@ -742,11 +296,552 @@ if (SceneLib.valeria.valeriaFluidsEnabled()) {
 			outputText("\n<b><u>Ongoing Status Effects</u></b>\n" + statEffects);
 		// End Ongoing Stat Effects
 		menu();
+		addButton(0, "Next", playerMenu);
 		if (player.statPoints > 0) {
 			outputText("\n\n<b>You have " + num2Text(player.statPoints) + " attribute point" + (player.statPoints == 1 ? "" : "s") + " to distribute.</b>");
 			addButton(1, "Stat Up", attributeMenu);
 		}
-		doNext(playerMenu);
+		addButtonDisabled(10, "General", "You are currently at this stats page.");
+		addButton(11, "Combat", displayStatsCombat);
+		addButton(12, "NPC's", displayStatsNpcs);
+		addButton(13, "Children", displayStatsChildren);
+	}
+	public function displayStatsCombat():void {
+		spriteSelect(-1);
+		clearOutput();
+		displayHeader("Combat Stats");
+		// Begin Combat Stats
+		var combatStats:String = "";
+
+		combatStats += "<b>Resistance (Physical):</b> " + (100 - Math.round(player.damagePercent())) + "%\n";
+		combatStats += "<b>Resistance (Magic):</b> " + (100 - Math.round(player.damageMagicalPercent())) + "%\n";
+		combatStats += "<i>Resistance (Fire):</i> " + (100 - Math.round(player.damageFirePercent())) + "%\n";
+		combatStats += "<i>Resistance (Ice):</i> " + (100 - Math.round(player.damageIcePercent())) + "%\n";
+		combatStats += "<i>Resistance (Lightning):</i> " + (100 - Math.round(player.damageLightningPercent())) + "%\n";
+		combatStats += "<i>Resistance (Darkness):</i> " + (100 - Math.round(player.damageDarknessPercent())) + "%\n";
+		combatStats += "<i>Resistance (Poison):</i> " + (100 - Math.round(player.damagePoisonPercent())) + "%\n";
+		combatStats += "<b>Resistance (Lust):</b> " + (100 - Math.round(CoC.instance.player.lustPercent())) + "%\n";
+		combatStats += "\n";
+		combatStats += "<b>Spell Effect Multiplier:</b> " + Math.round(100 * combat.spellMod()) + "%\n";
+		combatStats += "<b>Spell Cost:</b> " + combat.spellCost(100) + "%\n";
+		combatStats += "<b>White Spell Effect Multiplier:</b> " + Math.round(100 * combat.spellModWhite()) + "%\n";
+		combatStats += "<b>White Spell Cost:</b> " + combat.spellCostWhite(100) + "%\n";
+		combatStats += "<b>Black Spell Effect Multiplier:</b> " + Math.round(100 * combat.spellModBlack()) + "%\n";
+		combatStats += "<b>Black Spell Cost:</b> " + combat.spellCostBlack(100) + "%\n";
+		combatStats += "\n";
+		combatStats += "<b>Heals Effect Multiplier:</b> " + Math.round(100 * combat.healMod()) + "%\n";
+		combatStats += "<b>Heals Cost:</b> " + combat.healCost(100) + "%\n";
+		combatStats += "<b>White Heals Effect Multiplier:</b> " + Math.round(100 * combat.healModWhite()) + "%\n";
+		combatStats += "<b>White Heals Cost:</b> " + combat.healCostWhite(100) + "%\n";
+		combatStats += "<b>Black Heals Effect Multiplier:</b> " + Math.round(100 * combat.healModBlack()) + "%\n";
+		combatStats += "<b>Black Heals Cost:</b> " + combat.healCostBlack(100) + "%\n";
+		combatStats += "\n";
+		combatStats += "<b>Accuracy (1st melee attack):</b> " + (combat.meleeAccuracy() / 2) + "%\n";
+		if (player.findPerk(PerkLib.DoubleAttackSmall) >= 0 || player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0) combatStats += "<b>Accuracy (2nd melee attack):</b> " + ((combat.meleeAccuracy() / 2) - combat.meleeAccuracyPenalty()) + "%\n";
+		if (player.findPerk(PerkLib.TripleAttackSmall) >= 0 || player.findPerk(PerkLib.TripleAttack) >= 0 || player.findPerk(PerkLib.TripleAttackLarge) >= 0) combatStats += "<b>Accuracy (3rd melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 2)) + "%\n";
+		if (player.findPerk(PerkLib.QuadrupleAttackSmall) >= 0 || player.findPerk(PerkLib.QuadrupleAttack) >= 0) combatStats += "<b>Accuracy (4th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 3)) + "%\n";
+		if (player.findPerk(PerkLib.PentaAttackSmall) >= 0 || player.findPerk(PerkLib.PentaAttack) >= 0) combatStats += "<b>Accuracy (5th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 4)) + "%\n";
+		if (player.findPerk(PerkLib.HexaAttackSmall) >= 0 || player.findPerk(PerkLib.HexaAttack) >= 0) combatStats += "<b>Accuracy (6th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 5)) + "%\n";
+		if (player.findPerk(PerkLib.HectaAttackSmall) >= 0) combatStats += "<b>Accuracy (7th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 6)) + "%\n";
+		if (player.findPerk(PerkLib.OctaAttackSmall) >= 0) combatStats += "<b>Accuracy (8th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 7)) + "%\n";
+		if (player.findPerk(PerkLib.NonaAttackSmall) >= 0) combatStats += "<b>Accuracy (9th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 8)) + "%\n";
+		if (player.findPerk(PerkLib.DecaAttackSmall) >= 0) combatStats += "<b>Accuracy (10th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 9)) + "%\n";
+		combatStats += "\n";
+		if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
+			if (player.statusEffectv1(StatusEffects.Kindra) < 1)
+				combatStats += "<b>Bow Skill:</b> " + Math.round(player.statusEffectv1(StatusEffects.Kelt)) + " / 100\n";
+			if (player.statusEffectv1(StatusEffects.Kindra) > 0)
+				combatStats += "<b>Bow Skill:</b> " + (Math.round(player.statusEffectv1(StatusEffects.Kelt)) + Math.round(player.statusEffectv1(StatusEffects.Kindra))) + " / 250\n";
+		}
+		else combatStats += "<b>Bow Skill:</b> 0 / 100\n";
+		combatStats += "<b>Arrow/Bolt Cost:</b> " + combat.bowCost(100) + "%\n";
+		combatStats += "<b>Accuracy (1st range attack):</b> " + (combat.arrowsAccuracy() / 2) + "%\n";
+		if (player.findPerk(PerkLib.DoubleStrike) >= 0) combatStats += "<b>Accuracy (2nd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - combat.arrowsAccuracyPenalty()) + "%\n";
+		if (player.findPerk(PerkLib.TripleStrike) >= 0) combatStats += "<b>Accuracy (3rd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - (combat.arrowsAccuracyPenalty() * 2)) + "%\n";
+		if (player.findPerk(PerkLib.Manyshot) >= 0) combatStats += "<b>Accuracy (4th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 45) + "%\n";
+		if (player.findPerk(PerkLib.WildQuiver) >= 0) combatStats += "<b>Accuracy (5th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 60) + "%\n";
+		if (player.findPerk(PerkLib.Multishot) >= 0) combatStats += "<b>Accuracy (6th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 75) + "%\n";
+		combatStats += "\n";
+		combatStats += "<b>Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillMod()) + "%\n";
+		combatStats += "<b>Physical Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillPhysicalMod()) + "%\n";
+		combatStats += "<b>Magical Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillMagicalMod()) + "%\n";
+		combatStats += "<b>Soulskill Cost:</b> " + Math.round(100 * combat.soulskillCost()) + "%\n";
+		combatStats += "\n";
+		combatStats += "<b>Unarmed:</b> +" + combat.unarmedAttack() + "\n";
+		if (flags[kFLAGS.RAPHAEL_RAPIER_TRANING] > 0)
+			combatStats += "<b>Rapier Skill:</b> " + flags[kFLAGS.RAPHAEL_RAPIER_TRANING] + " / 4\n";
+
+		if (player.teaseLevel < 25)
+			combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: " + player.teaseXP + " / " + combat.teaseExpToLevelUp() + ")\n";
+		else
+			combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)\n";
+		combatStats += "\n";
+		var maxes:Object = player.getAllMaxStats();
+		var mins:Object = player.getAllMinStats();
+		combatStats += "<b>Strength Cap:</b> " + maxes.str + "\n";
+		combatStats += "<i>Ghost Strength:</i> +" + combat.ghostStrength() + "\n";
+		combatStats += "<b>Toughness Cap:</b> " + maxes.tou + "\n";
+		combatStats += "<b>Speed Cap:</b> " + maxes.spe + "\n";
+		//combatStats += "<i>Ghost Speed:</i> +" + combat.ghostSpeed() + "\n";
+		combatStats += "<b>Intelligence Cap:</b> " + maxes.inte + "\n";
+		combatStats += "<b>Wisdom Cap:</b> " + maxes.wis + "\n";
+		combatStats += "<b>Libido Cap:</b> " + maxes.lib + "\n";
+		combatStats += "<i>Libido Minimum:</i> " + mins.lib + "\n";
+		combatStats += "<b>Sensitivity Cap:</b> " + maxes.sens + "\n";
+		combatStats += "<i>Sensitivity Minimum:</i> " + mins.sens + "\n";
+		combatStats += "<i>Corruption Minimum:</i> " + mins.cor + "\n";
+		combatStats += "\n";
+		combatStats += "<b>HP Regeneration (%):</b> ~ " + combat.PercentBasedRegeneration() + " % / " + combat.maximumRegeneration() + " % (turn), ~ " + combat.PercentBasedRegeneration() * 2 + " % / " + combat.maximumRegeneration() * 2 + " % (hour)\n";
+		combatStats += "<b>HP Regeneration (Total):</b> ~ " + Math.round((player.maxHP() * combat.PercentBasedRegeneration() / 100) + combat.nonPercentBasedRegeneration()) + " HP /  turn, ~ " + Math.round((player.maxHP() * combat.PercentBasedRegeneration() / 100) + combat.nonPercentBasedRegeneration()) * 2 + " HP /  hour\n";
+		combatStats += "<b>Fatigue Recovery:</b> " + combat.fatigueRecovery2() + " / turn\n";
+		combatStats += "<b>Wrath Generation:</b> " + combat.wrathregeneration2() * 2 + " / turn, " + combat.wrathregeneration2() + " / hour\n";
+		combatStats += "<b>Mana Regeneration:</b> " + Math.round(combat.manaregeneration2() * combat.manaRecoveryMultiplier()) + " / turn, " + Math.round(combat.manaregeneration2() * combat.manaRecoveryMultiplier()) * 2 + " / hour\n";
+		combatStats += "<b>Soulforce Regeneration:</b> " + Math.round(combat.soulforceregeneration2() * combat.soulforceRecoveryMultiplier()) + " / turn, " + Math.round(combat.soulforceregeneration2() * combat.soulforceRecoveryMultiplier()) * 2 + " / hour\n";
+
+		if (combatStats != "")
+			outputText("\n<b><u>Combat Stats</u></b>\n" + combatStats);
+		// End Combat Stats
+
+		if (prison.inPrison || flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) prison.displayPrisonStats();
+		
+		menu();
+		addButton(0, "Next", playerMenu);
+		addButton(10, "General", displayStats);
+		addButtonDisabled(11, "Combat", "You are currently at this stats page.");
+		addButton(12, "NPC's", displayStatsNpcs);
+		addButton(13, "Children", displayStatsChildren);
+	}
+	public function displayStatsNpcs():void {
+		spriteSelect(-1);
+		clearOutput();
+		displayHeader("NPC's Stats");
+
+		// Begin Interpersonal Stats
+		var interpersonStats:String = "";
+			
+		if (flags[kFLAGS.AIKO_TIMES_MET] > 0) {
+			interpersonStats  += "<b>Aiko Affection</b>: "+flags[kFLAGS.AIKO_AFFECTION]+"\n";
+			if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] > 0)
+				interpersonStats  += "<b>Aiko Corruption</b>: "+flags[kFLAGS.AIKO_CORRUPTION]+"\n";
+		}
+		
+		if (SceneLib.anzu.anzuRelationshipLevel() > 0) {
+			interpersonStats += "<b>Anzu's Affection:</b> " + flags[kFLAGS.ANZU_AFFECTION] + "%\n";
+			interpersonStats += "<b>Anzu's Relationship Level:</b> " + (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 1 ? "Acquaintances" : flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 2 ? "Friend" : flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 3 ? "Close Friend" : flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 4 ? "Lover" : "Undefined") + "\n";
+		}
+			
+		if (flags[kFLAGS.ARIAN_PARK] > 0)
+            interpersonStats += "<b>Arian's Health:</b> " + Math.round(SceneLib.arianScene.arianHealth()) + "\n";
+        if (flags[kFLAGS.ARIAN_VIRGIN] > 0)
+			interpersonStats += "<b>Arian Sex Counter:</b> " + Math.round(flags[kFLAGS.ARIAN_VIRGIN]) + "\n";
+
+		if (SceneLib.bazaar.benoit.benoitAffection() > 0)
+            interpersonStats += "<b>" + SceneLib.bazaar.benoit.benoitMF("Benoit", "Benoite") + " Affection:</b> " + Math.round(SceneLib.bazaar.benoit.benoitAffection()) + "%\n";
+        if (flags[kFLAGS.BROOKE_MET] > 0)
+            interpersonStats += "<b>Brooke Affection:</b> " + Math.round(SceneLib.telAdre.brooke.brookeAffection()) + "\n";
+        if (flags[kFLAGS.CEANI_AFFECTION] > 0)
+			interpersonStats += "<b>Ceani Affection:</b> " + Math.round(flags[kFLAGS.CEANI_AFFECTION]) + "%\n";
+			if (flags[kFLAGS.CEANI_FOLLOWER] == 1) {
+				if (flags[kFLAGS.CEANI_LVL_UP] == 5) interpersonStats += "<b>Ceani lvl:</b> 74\n";
+				if (flags[kFLAGS.CEANI_LVL_UP] == 4) interpersonStats += "<b>Ceani lvl:</b> 68\n";
+				if (flags[kFLAGS.CEANI_LVL_UP] == 3) interpersonStats += "<b>Ceani lvl:</b> 60\n";
+				if (flags[kFLAGS.CEANI_LVL_UP] == 2) interpersonStats += "<b>Ceani lvl:</b> 54\n";
+				if (flags[kFLAGS.CEANI_LVL_UP] == 1) interpersonStats += "<b>Ceani lvl:</b> 46\n";
+				if (flags[kFLAGS.CEANI_LVL_UP] == 0) interpersonStats += "<b>Ceani lvl:</b> 38\n";
+			}
+
+		if (flags[kFLAGS.CHI_CHI_AFFECTION] > 0) {
+			interpersonStats += "<b>Chi Chi Affection:</b> " + Math.round(flags[kFLAGS.CHI_CHI_AFFECTION]) + "%\n";
+			if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 3) {
+				if (flags[kFLAGS.CHI_CHI_LVL_UP] == 8) interpersonStats += "<b>Chi Chi lvl:</b> 76\n";
+				if (flags[kFLAGS.CHI_CHI_LVL_UP] == 7) interpersonStats += "<b>Chi Chi lvl:</b> 70\n";
+				if (flags[kFLAGS.CHI_CHI_LVL_UP] == 6) interpersonStats += "<b>Chi Chi lvl:</b> 64\n";
+				if (flags[kFLAGS.CHI_CHI_LVL_UP] == 5) interpersonStats += "<b>Chi Chi lvl:</b> 58\n";
+				if (flags[kFLAGS.CHI_CHI_LVL_UP] == 4) interpersonStats += "<b>Chi Chi lvl:</b> 49\n";
+				if (flags[kFLAGS.CHI_CHI_LVL_UP] == 3) interpersonStats += "<b>Chi Chi lvl:</b> 40\n";
+				if (flags[kFLAGS.CHI_CHI_LVL_UP] == 2) interpersonStats += "<b>Chi Chi lvl:</b> 31\n";
+				if (flags[kFLAGS.CHI_CHI_LVL_UP] < 2) interpersonStats += "<b>Chi Chi lvl:</b> 22\n";
+			}
+		}
+
+		if (flags[kFLAGS.CERAPH_OWNED_DICKS] + flags[kFLAGS.CERAPH_OWNED_PUSSIES] + flags[kFLAGS.CERAPH_OWNED_TITS] > 0)
+			interpersonStats += "<b>Body Parts Taken By Ceraph:</b> " + (flags[kFLAGS.CERAPH_OWNED_DICKS] + flags[kFLAGS.CERAPH_OWNED_PUSSIES] + flags[kFLAGS.CERAPH_OWNED_TITS]) + "\n";
+
+		if (flags[kFLAGS.DIANA_AFFECTION] > 0) {
+			interpersonStats += "<b>Diana Affection:</b> " + Math.round(flags[kFLAGS.DIANA_AFFECTION]) + "%\n";
+			if (flags[kFLAGS.DIANA_LVL_UP] == 10) interpersonStats += "<b>Diana lvl:</b> 39\n";
+			if (flags[kFLAGS.DIANA_LVL_UP] == 9) interpersonStats += "<b>Diana lvl:</b> 33\n";
+			if (flags[kFLAGS.DIANA_LVL_UP] == 8) interpersonStats += "<b>Diana lvl:</b> 27\n";
+			if (flags[kFLAGS.DIANA_LVL_UP] == 7) interpersonStats += "<b>Diana lvl:</b> 24\n";
+			if (flags[kFLAGS.DIANA_LVL_UP] == 6) interpersonStats += "<b>Diana lvl:</b> 21\n";
+			if (flags[kFLAGS.DIANA_LVL_UP] == 5) interpersonStats += "<b>Diana lvl:</b> 18\n";
+			if (flags[kFLAGS.DIANA_LVL_UP] == 4) interpersonStats += "<b>Diana lvl:</b> 15\n";
+			if (flags[kFLAGS.DIANA_LVL_UP] == 3) interpersonStats += "<b>Diana lvl:</b> 12\n";
+			if (flags[kFLAGS.DIANA_LVL_UP] == 2) interpersonStats += "<b>Diana lvl:</b> 9\n";
+			if (flags[kFLAGS.DIANA_LVL_UP] == 1) interpersonStats += "<b>Diana lvl:</b> 6\n";
+			if (flags[kFLAGS.DIANA_LVL_UP] < 1) interpersonStats += "<b>Diana lvl:</b> 3\n";
+		}
+
+		if (flags[kFLAGS.DINAH_LVL_UP] > 0.5) {
+			interpersonStats += "<b>Dinah Affection:</b> " + Math.round(flags[kFLAGS.DINAH_AFFECTION]) + "%\n";
+			if (flags[kFLAGS.DINAH_LVL_UP] == 4) interpersonStats += "<b>Dinah lvl:</b> 26\n";
+			if (flags[kFLAGS.DINAH_LVL_UP] == 3) interpersonStats += "<b>Dinah lvl:</b> 20\n";
+			if (flags[kFLAGS.DINAH_LVL_UP] == 2) interpersonStats += "<b>Dinah lvl:</b> 14\n";
+			if (flags[kFLAGS.DINAH_LVL_UP] == 1) interpersonStats += "<b>Dinah lvl:</b> 8\n";
+		}
+
+		if (flags[kFLAGS.ETNA_AFFECTION] > 0) {
+			interpersonStats += "<b>Etna Affection:</b> " + Math.round(flags[kFLAGS.ETNA_AFFECTION]) + "%\n";
+			if (flags[kFLAGS.ETNA_LVL_UP] == 8) interpersonStats += "<b>Etna lvl:</b> 78\n";
+			if (flags[kFLAGS.ETNA_LVL_UP] == 7) interpersonStats += "<b>Etna lvl:</b> 72\n";
+			if (flags[kFLAGS.ETNA_LVL_UP] == 6) interpersonStats += "<b>Etna lvl:</b> 66\n";
+			if (flags[kFLAGS.ETNA_LVL_UP] == 5) interpersonStats += "<b>Etna lvl:</b> 60\n";
+			if (flags[kFLAGS.ETNA_LVL_UP] == 4) interpersonStats += "<b>Etna lvl:</b> 54\n";
+			if (flags[kFLAGS.ETNA_LVL_UP] == 3) interpersonStats += "<b>Etna lvl:</b> 48\n";
+			if (flags[kFLAGS.ETNA_LVL_UP] == 2) interpersonStats += "<b>Etna lvl:</b> 42\n";
+			if (flags[kFLAGS.ETNA_LVL_UP] == 1) interpersonStats += "<b>Etna lvl:</b> 36\n";
+			if (flags[kFLAGS.ETNA_LVL_UP] < 1) interpersonStats += "<b>Etna lvl:</b> 30\n";
+		}
+
+		if (flags[kFLAGS.ELECTRA_AFFECTION] > 0)
+			interpersonStats += "<b>Electra Affection:</b> " + Math.round(flags[kFLAGS.ELECTRA_AFFECTION]) + "%\n";
+
+		if (SceneLib.emberScene.emberAffection() > 0) {
+            interpersonStats += "<b>Ember Affection:</b> " + Math.round(SceneLib.emberScene.emberAffection()) + "%\n";
+            if (flags[kFLAGS.EMBER_LVL_UP] == 9) interpersonStats += "<b>Ember lvl:</b> 74\n";
+			if (flags[kFLAGS.EMBER_LVL_UP] == 8) interpersonStats += "<b>Ember lvl:</b> 68\n";
+			if (flags[kFLAGS.EMBER_LVL_UP] == 7) interpersonStats += "<b>Ember lvl:</b> 62\n";
+			if (flags[kFLAGS.EMBER_LVL_UP] == 6) interpersonStats += "<b>Ember lvl:</b> 56\n";
+			if (flags[kFLAGS.EMBER_LVL_UP] == 5) interpersonStats += "<b>Ember lvl:</b> 50\n";
+			if (flags[kFLAGS.EMBER_LVL_UP] == 4) interpersonStats += "<b>Ember lvl:</b> 44\n";
+			if (flags[kFLAGS.EMBER_LVL_UP] == 3) interpersonStats += "<b>Ember lvl:</b> 38\n";
+			if (flags[kFLAGS.EMBER_LVL_UP] == 2) interpersonStats += "<b>Ember lvl:</b> 32\n";
+			if (flags[kFLAGS.EMBER_LVL_UP] == 1) interpersonStats += "<b>Ember lvl:</b> 26\n";
+			if (flags[kFLAGS.EMBER_LVL_UP] < 1) interpersonStats += "<b>Ember lvl:</b> 20\n";
+		}
+
+		if (flags[kFLAGS.GALIA_LVL_UP] > 0.5) {
+			interpersonStats += "<b>Galia Affection:</b> " + Math.round(flags[kFLAGS.GALIA_AFFECTION]) + "%\n";
+			if (flags[kFLAGS.GALIA_LVL_UP] == 5) interpersonStats += "<b>Galia lvl:</b> 25\n";
+			if (flags[kFLAGS.GALIA_LVL_UP] == 4) interpersonStats += "<b>Galia lvl:</b> 19\n";
+			if (flags[kFLAGS.GALIA_LVL_UP] == 3) interpersonStats += "<b>Galia lvl:</b> 13\n";
+			if (flags[kFLAGS.GALIA_LVL_UP] == 2) interpersonStats += "<b>Galia lvl:</b> 7\n";
+			if (flags[kFLAGS.GALIA_LVL_UP] == 1) interpersonStats += "<b>Galia lvl:</b> 1\n";
+		}
+
+		if (SceneLib.helFollower.helAffection() > 0)
+            interpersonStats += "<b>Helia Affection:</b> " + Math.round(SceneLib.helFollower.helAffection()) + "%\n";
+        if (SceneLib.helFollower.helAffection() >= 100)
+            interpersonStats += "<b>Helia Bonus Points:</b> " + Math.round(flags[kFLAGS.HEL_BONUS_POINTS]) + "\n";
+
+		if (flags[kFLAGS.ISABELLA_AFFECTION] > 0) {
+			interpersonStats += "<b>Isabella Affection:</b> ";
+            if (!SceneLib.isabellaFollowerScene.isabellaFollower())
+                interpersonStats += Math.round(flags[kFLAGS.ISABELLA_AFFECTION]) + "%\n";
+			else
+				interpersonStats += "100%\n";
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 9) interpersonStats += "<b>Isabella lvl:</b> 74\n";
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 8) interpersonStats += "<b>Isabella lvl:</b> 68\n";
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 7) interpersonStats += "<b>Isabella lvl:</b> 62\n";
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 6) interpersonStats += "<b>Isabella lvl:</b> 56\n";
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 5) interpersonStats += "<b>Isabella lvl:</b> 50\n";
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 4) interpersonStats += "<b>Isabella lvl:</b> 44\n";
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 3) interpersonStats += "<b>Isabella lvl:</b> 38\n";
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 2) interpersonStats += "<b>Isabella lvl:</b> 32\n";
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 1) interpersonStats += "<b>Isabella lvl:</b> 26\n";
+			if (flags[kFLAGS.ISABELLA_LVL_UP] < 1) interpersonStats += "<b>Isabella lvl:</b> 20\n";
+		}
+
+		if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) {
+			interpersonStats += "<b>Joy's Intelligence:</b> " + flags[kFLAGS.JOY_INTELLIGENCE];
+			if (flags[kFLAGS.JOY_INTELLIGENCE] >= 50) interpersonStats += " (MAX)";
+			interpersonStats += "\n";
+		}
+
+		if (flags[kFLAGS.KATHERINE_UNLOCKED] >= 4) {
+            interpersonStats += "<b>Katherine Submissiveness:</b> " + SceneLib.telAdre.katherine.submissiveness() + "\n";
+        }
+
+		if (player.hasStatusEffect(StatusEffects.Kelt) && flags[kFLAGS.KELT_BREAK_LEVEL] == 0 && flags[kFLAGS.KELT_KILLED] == 0) {
+			if (player.statusEffectv2(StatusEffects.Kelt) >= 130)
+				interpersonStats += "<b>Submissiveness To Kelt:</b> " + 100 + "%\n";
+			else
+				interpersonStats += "<b>Submissiveness To Kelt:</b> " + Math.round(player.statusEffectv2(StatusEffects.Kelt) / 130 * 100) + "%\n";
+
+		}
+
+		if (flags[kFLAGS.ANEMONE_KID] > 0)
+            interpersonStats += "<b>Kid A's Confidence:</b> " + SceneLib.anemoneScene.kidAXP() + "%\n";
+        if (flags[kFLAGS.KIHA_AFFECTION_LEVEL] == 2) {
+            if (SceneLib.kihaFollower.followerKiha())
+                interpersonStats += "<b>Kiha Affection:</b> " + 100 + "%\n";
+			else
+				interpersonStats += "<b>Kiha Affection:</b> " + Math.round(flags[kFLAGS.KIHA_AFFECTION]) + "%\n";
+			if (flags[kFLAGS.KIHA_LVL_UP] == 9) interpersonStats += "<b>Kiha lvl:</b> 75\n";
+			if (flags[kFLAGS.KIHA_LVL_UP] == 8) interpersonStats += "<b>Kiha lvl:</b> 69\n";
+			if (flags[kFLAGS.KIHA_LVL_UP] == 7) interpersonStats += "<b>Kiha lvl:</b> 63\n";
+			if (flags[kFLAGS.KIHA_LVL_UP] == 6) interpersonStats += "<b>Kiha lvl:</b> 57\n";
+			if (flags[kFLAGS.KIHA_LVL_UP] == 5) interpersonStats += "<b>Kiha lvl:</b> 51\n";
+			if (flags[kFLAGS.KIHA_LVL_UP] == 4) interpersonStats += "<b>Kiha lvl:</b> 45\n";
+			if (flags[kFLAGS.KIHA_LVL_UP] == 3) interpersonStats += "<b>Kiha lvl:</b> 39\n";
+			if (flags[kFLAGS.KIHA_LVL_UP] == 2) interpersonStats += "<b>Kiha lvl:</b> 33\n";
+			if (flags[kFLAGS.KIHA_LVL_UP] == 1) interpersonStats += "<b>Kiha lvl:</b> 27\n";
+			if (flags[kFLAGS.KIHA_LVL_UP] < 1) interpersonStats += "<b>Kiha lvl:</b> 21\n";
+		}
+
+		if (flags[kFLAGS.KINDRA_FOLLOWER] > 0)
+			interpersonStats += "<b>Kindra Affection:</b> " + Math.round(flags[kFLAGS.KINDRA_AFFECTION]) + "%\n";
+			if (flags[kFLAGS.KINDRA_AFFECTION] >= 5) {
+				if (flags[kFLAGS.KINDRA_LVL_UP] == 11) interpersonStats += "<b>Kindra lvl:</b> 75\n";
+				if (flags[kFLAGS.KINDRA_LVL_UP] == 10) interpersonStats += "<b>Kindra lvl:</b> 69\n";
+				if (flags[kFLAGS.KINDRA_LVL_UP] == 9) interpersonStats += "<b>Kindra lvl:</b> 63\n";
+				if (flags[kFLAGS.KINDRA_LVL_UP] == 8) interpersonStats += "<b>Kindra lvl:</b> 57\n";
+				if (flags[kFLAGS.KINDRA_LVL_UP] == 7) interpersonStats += "<b>Kindra lvl:</b> 51\n";
+				if (flags[kFLAGS.KINDRA_LVL_UP] < 7) interpersonStats += "<b>Kindra lvl:</b> 45\n";
+			}
+
+		//Lottie stuff
+		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0)
+            interpersonStats += "<b>Lottie's Encouragement:</b> " + SceneLib.telAdre.lottie.lottieMorale() + " (higher is better)\n" + "<b>Lottie's Figure:</b> " + SceneLib.telAdre.lottie.lottieTone() + " (higher is better)\n";
+        if (SceneLib.mountain.salon.lynnetteApproval() != 0)
+            interpersonStats += "<b>Lynnette's Approval:</b> " + SceneLib.mountain.salon.lynnetteApproval() + "\n";
+        if (flags[kFLAGS.LUNA_FOLLOWER] > 3) {
+			interpersonStats += "<b>Luna Affection:</b> " + Math.round(flags[kFLAGS.LUNA_AFFECTION]) + "%\n";
+			interpersonStats += "<b>Luna Jealousy:</b> " + Math.round(flags[kFLAGS.LUNA_JEALOUSY]) + "%\n";
+			if (flags[kFLAGS.LUNA_LVL_UP] == 5) interpersonStats += "<b>Luna lvl:</b> 39\n";
+			if (flags[kFLAGS.LUNA_LVL_UP] == 4) interpersonStats += "<b>Luna lvl:</b> 33\n";
+			if (flags[kFLAGS.LUNA_LVL_UP] == 3) interpersonStats += "<b>Luna lvl:</b> 27\n";
+			if (flags[kFLAGS.LUNA_LVL_UP] == 2) interpersonStats += "<b>Luna lvl:</b> 21\n";
+			if (flags[kFLAGS.LUNA_LVL_UP] == 1) interpersonStats += "<b>Luna lvl:</b> 15\n";
+			if (flags[kFLAGS.LUNA_LVL_UP] == 0) interpersonStats += "<b>Luna lvl:</b> 9\n";
+		}
+		if (flags[kFLAGS.OWCAS_ATTITUDE] > 0)
+			interpersonStats += "<b>Owca's Attitude:</b> " + flags[kFLAGS.OWCAS_ATTITUDE] + "\n";
+
+		if (SceneLib.telAdre.rubi.rubiAffection() > 0)
+            interpersonStats += "<b>Rubi's Affection:</b> " + Math.round(SceneLib.telAdre.rubi.rubiAffection()) + "%\n" + "<b>Rubi's Orifice Capacity:</b> " + Math.round(SceneLib.telAdre.rubi.rubiCapacity()) + "%\n";
+        if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 0)
+			interpersonStats += "<b>Sapphire Affection:</b> " + Math.round(flags[kFLAGS.SAPPHIRE_AFFECTION]) + "%\n";
+		
+		if (flags[kFLAGS.SHEILA_XP] != 0) {
+            interpersonStats += "<b>Sheila's Corruption:</b> " + SceneLib.sheilaScene.sheilaCorruption();
+            if (SceneLib.sheilaScene.sheilaCorruption() > 100)
+                interpersonStats += " (Yes, it can go above 100)";
+			interpersonStats += "\n";
+		}
+
+		if (SceneLib.valeria.valeriaFluidsEnabled()) {
+            interpersonStats += "<b>Valeria's Fluid:</b> " + flags[kFLAGS.VALERIA_FLUIDS] + "%\n"
+		}
+
+		if (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] != 0) {
+            if (SceneLib.urta.urtaLove()) {
+                if (flags[kFLAGS.URTA_QUEST_STATUS] == -1) interpersonStats += "<b>Urta Status:</b> <font color=\"#800000\">Gone</font>\n";
+				if (flags[kFLAGS.URTA_QUEST_STATUS] == 0) interpersonStats += "<b>Urta Status:</b> Lover\n";
+				if (flags[kFLAGS.URTA_QUEST_STATUS] == 1) interpersonStats += "<b>Urta Status:</b> <font color=\"#008000\">Lover+</font>\n";
+			}
+			else if (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] == -1)
+				interpersonStats += "<b>Urta Status:</b> Ashamed\n";
+			else if (flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] < 30)
+				interpersonStats += "<b>Urta's Affection:</b> " + Math.round(flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] * 3.3333) + "%\n";
+			else
+				interpersonStats += "<b>Urta Status:</b> Ready To Confess Love\n";
+		}
+
+		if (interpersonStats != "")
+			outputText("\n<b><u>Interpersonal Stats</u></b>\n" + interpersonStats);
+		// End Interpersonal Stats
+
+		// Begin Evangeline Stats
+		var evangelineStats:String = "";
+		if (flags[kFLAGS.EVANGELINE_AFFECTION] > 2) {
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 17) evangelineStats += "<b>Evangeline lvl:</b> 42\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 16) evangelineStats += "<b>Evangeline lvl:</b> 40\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 15) evangelineStats += "<b>Evangeline lvl:</b> 36\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 14) evangelineStats += "<b>Evangeline lvl:</b> 34\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 13) evangelineStats += "<b>Evangeline lvl:</b> 30\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 12) evangelineStats += "<b>Evangeline lvl:</b> 28\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 11) evangelineStats += "<b>Evangeline lvl:</b> 24\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 10) evangelineStats += "<b>Evangeline lvl:</b> 22\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 9) evangelineStats += "<b>Evangeline lvl:</b> 18\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 8) evangelineStats += "<b>Evangeline lvl:</b> 16\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 7) evangelineStats += "<b>Evangeline lvl:</b> 14\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 6) evangelineStats += "<b>Evangeline lvl:</b> 12\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5) evangelineStats += "<b>Evangeline lvl:</b> 10\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 4) evangelineStats += "<b>Evangeline lvl:</b> 8\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 3) evangelineStats += "<b>Evangeline lvl:</b> 6\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 2) evangelineStats += "<b>Evangeline lvl:</b> 4\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] < 2) evangelineStats += "<b>Evangeline lvl:</b> 2\n";
+			evangelineStats += "<b>Evangeline Affection:</b> " + Math.round(flags[kFLAGS.EVANGELINE_AFFECTION]) + "%\n";
+		}
+		if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 5) {
+			evangelineStats += "<b>Gems Purse:</b> " + flags[kFLAGS.EVANGELINE_GEMS_PURSE] + " gems\n";
+			evangelineStats += "<b>Spells Casted:</b> " + flags[kFLAGS.EVANGELINE_SPELLS_CASTED] + "\n";
+			if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] >= 0) {
+				if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] < 10) evangelineStats += "<b>Spells Cost:</b> 100%\n";
+				if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] >= 10 && flags[kFLAGS.EVANGELINE_SPELLS_CASTED] < 30) evangelineStats += "<b>Spells Cost:</b> 90%\n";
+				if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] >= 30 && flags[kFLAGS.EVANGELINE_SPELLS_CASTED] < 70) evangelineStats += "<b>Spells Cost:</b> 80%\n";
+				if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] >= 70 && flags[kFLAGS.EVANGELINE_SPELLS_CASTED] < 150) evangelineStats += "<b>Spells Cost:</b> 70%\n";
+				if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] >= 150 && flags[kFLAGS.EVANGELINE_SPELLS_CASTED] < 310) evangelineStats += "<b>Spells Cost:</b> 60%\n";
+				if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] >= 310) evangelineStats += "<b>Spells Cost:</b> 50%\n";
+			}
+		}
+		if (evangelineStats != "")
+			outputText("\n<b><u>Evangeline Stats</u></b>\n" + evangelineStats);
+		// End Evangeline Stats
+		
+		// Begin RyuBi Stats
+		var ryubiStats:String = "";
+		if (ryubiStats != "")
+			outputText("\n<b><u>RyuBi Stats</u></b>\n" + ryubiStats);
+		// End RyuBi Stats
+		
+		// Begin Galia Stats
+		var galiaStats:String = "";
+		if (galiaStats != "")
+			outputText("\n<b><u>Galia Stats</u></b>\n" + galiaStats);
+		// End Galia Stats
+		menu();
+		addButton(0, "Next", playerMenu);
+		addButton(10, "General", displayStats);
+		addButton(11, "Combat", displayStatsCombat);
+		addButtonDisabled(12, "NPC's", "You are currently at this stats page.");
+		addButton(13, "Children", displayStatsChildren);
+	}
+	public function displayStatsChildren():void {
+		spriteSelect(-1);
+		clearOutput();
+		displayHeader("Children Stats");
+		// Begin Children Stats
+		var childStats:String = "";
+
+		if (player.statusEffectv1(StatusEffects.Birthed) > 0)
+			childStats += "<b>Times Given Birth:</b> " + player.statusEffectv1(StatusEffects.Birthed) + "\n";
+
+		if (flags[kFLAGS.AMILY_MET] > 0)
+			childStats += "<b>Litters With Amily:</b> " + (flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]) + "\n";
+
+		if (flags[kFLAGS.BEHEMOTH_CHILDREN] > 0)
+			childStats += "<b>Children With Behemoth:</b> " + flags[kFLAGS.BEHEMOTH_CHILDREN] + "\n";
+
+		if (flags[kFLAGS.BENOIT_EGGS] > 0)
+			childStats += "<b>Benoit Eggs Laid:</b> " + flags[kFLAGS.BENOIT_EGGS] + "\n";
+		if (flags[kFLAGS.FEMOIT_EGGS_LAID] > 0)
+			childStats += "<b>Benoite Eggs Produced:</b> " + flags[kFLAGS.FEMOIT_EGGS_LAID] + "\n";
+
+		if (flags[kFLAGS.COTTON_KID_COUNT] > 0)
+			childStats += "<b>Children With Cotton:</b> " + flags[kFLAGS.COTTON_KID_COUNT] + "\n";
+
+		if (flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0)
+			childStats += "<b>Children With Edryn:</b> " + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + "\n";
+
+		if (flags[kFLAGS.EMBER_CHILDREN_MALES] > 0)
+			childStats += "<b>Ember Offspring (Males):</b> " + flags[kFLAGS.EMBER_CHILDREN_MALES] + "\n";
+		if (flags[kFLAGS.EMBER_CHILDREN_FEMALES] > 0)
+			childStats += "<b>Ember Offspring (Females):</b> " + flags[kFLAGS.EMBER_CHILDREN_FEMALES] + "\n";
+		if (flags[kFLAGS.EMBER_CHILDREN_HERMS] > 0)
+			childStats += "<b>Ember Offspring (Herms):</b> " + flags[kFLAGS.EMBER_CHILDREN_HERMS] + "\n";
+        if (SceneLib.emberScene.emberChildren() > 0)
+            childStats += "<b>Total Children With Ember:</b> " + (SceneLib.emberScene.emberChildren()) + "\n";
+        if (flags[kFLAGS.EMBER_EGGS] > 0)
+			childStats += "<b>Ember Eggs Produced:</b> " + flags[kFLAGS.EMBER_EGGS] + "\n";
+
+        if (SceneLib.isabellaScene.totalIsabellaChildren() > 0) {
+            if (SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_BOYS) > 0)
+                childStats += "<b>Children With Isabella (Human, Males):</b> " + SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_BOYS) + "\n";
+            if (SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_GIRLS) > 0)
+                childStats += "<b>Children With Isabella (Human, Females):</b> " + SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_GIRLS) + "\n";
+            if (SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_HERMS) > 0)
+                childStats += "<b>Children With Isabella (Human, Herms):</b> " + SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_HERMS) + "\n";
+            if (SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS) > 0)
+                childStats += "<b>Children With Isabella (Cowgirl, Females):</b> " + SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS) + "\n";
+            if (SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS) > 0)
+                childStats += "<b>Children With Isabella (Cowgirl, Herms):</b> " + SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS) + "\n";
+            childStats += "<b>Total Children With Isabella:</b> " + SceneLib.isabellaScene.totalIsabellaChildren() + "\n"
+        }
+
+		if (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] > 0)
+			childStats += "<b>Children With Izma (Sharkgirls):</b> " + flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + "\n";
+		if (flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0)
+			childStats += "<b>Children With Izma (Tigersharks):</b> " + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] + "\n";
+		if (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] > 0 && flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0)
+			childStats += "<b>Total Children with Izma:</b> " + (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS]) + "\n";
+
+        if (SceneLib.joyScene.getTotalLitters() > 0)
+            childStats += "<b>Litters With " + (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 ? "Joy" : "Jojo") + ":</b> " + SceneLib.joyScene.getTotalLitters() + "\n";
+        if (flags[kFLAGS.KELLY_KIDS_MALE] > 0)
+			childStats += "<b>Children With Kelly (Males):</b> " + flags[kFLAGS.KELLY_KIDS_MALE] + "\n";
+		if (flags[kFLAGS.KELLY_KIDS] - flags[kFLAGS.KELLY_KIDS_MALE] > 0)
+			childStats += "<b>Children With Kelly (Females):</b> " + (flags[kFLAGS.KELLY_KIDS] - flags[kFLAGS.KELLY_KIDS_MALE]) + "\n";
+		if (flags[kFLAGS.KELLY_KIDS] > 0)
+			childStats += "<b>Total Children With Kelly:</b> " + flags[kFLAGS.KELLY_KIDS] + "\n";
+        if (SceneLib.kihaFollower.pregnancy.isPregnant)
+            childStats += "<b>Kiha's Pregnancy:</b> " + SceneLib.kihaFollower.pregnancy.incubation + "\n";
+        if (flags[kFLAGS.KIHA_CHILDREN_BOYS] > 0)
+			childStats += "<b>Kiha Offspring (Males):</b> " + flags[kFLAGS.KIHA_CHILDREN_BOYS] + "\n";
+		if (flags[kFLAGS.KIHA_CHILDREN_GIRLS] > 0)
+			childStats += "<b>Kiha Offspring (Females):</b> " + flags[kFLAGS.KIHA_CHILDREN_GIRLS] + "\n";
+		if (flags[kFLAGS.KIHA_CHILDREN_HERMS] > 0)
+			childStats += "<b>Kiha Offspring (Herms):</b> " + flags[kFLAGS.KIHA_CHILDREN_HERMS] + "\n";
+        if (SceneLib.kihaFollower.totalKihaChildren() > 0)
+            childStats += "<b>Total Children With Kiha:</b> " + SceneLib.kihaFollower.totalKihaChildren() + "\n";
+        if (SceneLib.mountain.salon.lynnetteApproval() != 0)
+            childStats += "<b>Lynnette Children:</b> " + flags[kFLAGS.LYNNETTE_BABY_COUNT] + "\n";
+
+		if (flags[kFLAGS.MARBLE_KIDS] > 0)
+			childStats += "<b>Children With Marble:</b> " + flags[kFLAGS.MARBLE_KIDS] + "\n";
+
+		if (flags[kFLAGS.MINERVA_CHILDREN] > 0)
+			childStats += "<b>Children With Minerva:</b> " + flags[kFLAGS.MINERVA_CHILDREN] + "\n";
+
+		if (flags[kFLAGS.ANT_KIDS] > 0)
+			childStats += "<b>Ant Children With Phylla:</b> " + flags[kFLAGS.ANT_KIDS] + "\n";
+		if (flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0)
+			childStats += "<b>Drider Children With Phylla:</b> " + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] + "\n";
+		if (flags[kFLAGS.ANT_KIDS] > 0 && flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0)
+			childStats += "<b>Total Children With Phylla:</b> " + (flags[kFLAGS.ANT_KIDS] + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT]) + "\n";
+
+		if (flags[kFLAGS.SHEILA_JOEYS] > 0)
+			childStats += "<b>Children With Sheila (Joeys):</b> " + flags[kFLAGS.SHEILA_JOEYS] + "\n";
+		if (flags[kFLAGS.SHEILA_IMPS] > 0)
+			childStats += "<b>Children With Sheila (Imps):</b> " + flags[kFLAGS.SHEILA_IMPS] + "\n";
+		if (flags[kFLAGS.SHEILA_JOEYS] > 0 && flags[kFLAGS.SHEILA_IMPS] > 0)
+			childStats += "<b>Total Children With Sheila:</b> " + (flags[kFLAGS.SHEILA_JOEYS] + flags[kFLAGS.SHEILA_IMPS]) + "\n";
+
+		if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 0 || flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) {
+			childStats += "<b>Children With Sophie:</b> ";
+			var sophie:int = 0;
+			if (flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) sophie++;
+			sophie += flags[kFLAGS.SOPHIE_ADULT_KID_COUNT];
+			if (flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] > 0) sophie++;
+			childStats += sophie + "\n";
+		}
+
+		if (flags[kFLAGS.SOPHIE_EGGS_LAID] > 0)
+			childStats += "<b>Eggs Fertilized For Sophie:</b> " + (flags[kFLAGS.SOPHIE_EGGS_LAID] + sophie) + "\n";
+
+		if (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] > 0)
+			childStats += "<b>Children With Tamani:</b> " + flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] + " (after all forms of natural selection)\n";
+
+        if (SceneLib.urtaPregs.urtaKids() > 0)
+            childStats += "<b>Children With Urta:</b> " + SceneLib.urtaPregs.urtaKids() + "\n";
+        //Mino sons
+		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] > 0)
+			childStats += "<b>Number of Adult Minotaur Offspring:</b> " + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] + "\n";
+
+		//Alraune daughters
+		if (flags[kFLAGS.ALRAUNE_SEEDS] > 0)
+			childStats += "<b>Alraune daughters:</b> " + flags[kFLAGS.ALRAUNE_SEEDS] + " <b>(Oldest ones: " + (flags[kFLAGS.ALRAUNE_GROWING] - 1) + " days)</b>\n";
+
+		if (childStats != "")
+			outputText("\n<b><u>Children</u></b>\n" + childStats);
+		// End Children Stats
+		menu();
+		addButton(0, "Next", playerMenu);
+		addButton(10, "General", displayStats);
+		addButton(11, "Combat", displayStatsCombat);
+		addButton(12, "NPC's", displayStatsNpcs);
+		addButtonDisabled(13, "Children", "You are currently at this stats page.");
 	}
 
 	//------------
@@ -777,7 +872,8 @@ if (SceneLib.valeria.valeriaFluidsEnabled()) {
 					outputText("\n\nYou have gained ten attribute points and two perk points!");
 				}
 			} else {
-				outputText("\n\nYou have gained one perk point!");
+				if (player.level > 6) outputText("\n\nYou have gained one perk point!");
+				else outputText("\n\nYou have gained two perk points!");
 			}
 
 			if (player.statPoints>0) {
@@ -1063,7 +1159,7 @@ if (SceneLib.valeria.valeriaFluidsEnabled()) {
 			for each (var pt:PerkType in unlocks) outputText("<li>" + pt.name + " (" + pt.longDesc + ")</li>");
 			outputText("</ul>");
 		}
-		outputText("If you would like to select this perk, click <b>Okay</b>.  Otherwise, select a new perk, or press <b>Skip</b> to make a decision later.");
+		outputText("If you would like to select this perk, click <b>Okay</b>.  Otherwise, select a new perk, or press <b>Skip</b> to make a decision later.\n");
 		if (player.perkPoints>1) outputText("\n\nYou have "+numberOfThings(player.perkPoints,"perk point","perk points")+".\n\n");
 		for each(var p:* in perkList){
 			outputText("<u><a href=\"event:"+perkList.indexOf(p)+"\">"+p.perk.perkName+"</a></u>\n");
@@ -1083,6 +1179,14 @@ if (SceneLib.valeria.valeriaFluidsEnabled()) {
 		if (perk.ptype == PerkLib.StrongBack) player.itemSlot4.unlocked = true;
 		if (perk.ptype == PerkLib.TankI || perk.ptype == PerkLib.TankII || perk.ptype == PerkLib.TankIII || perk.ptype == PerkLib.TankIV || perk.ptype == PerkLib.TankV || perk.ptype == PerkLib.TankVI) {
 			HPChange(player.tou, false);
+			statScreenRefresh();
+		}
+		if (perk.ptype == PerkLib.GoliathI || perk.ptype == PerkLib.GoliathII || perk.ptype == PerkLib.GoliathIII || perk.ptype == PerkLib.GoliathIV || perk.ptype == PerkLib.GoliathV || perk.ptype == PerkLib.GoliathVI) {
+			HPChange(player.str, false);
+			statScreenRefresh();
+		}
+		if (perk.ptype == PerkLib.CheetahI || perk.ptype == PerkLib.CheetahII || perk.ptype == PerkLib.CheetahIII || perk.ptype == PerkLib.CheetahIV || perk.ptype == PerkLib.CheetahV || perk.ptype == PerkLib.CheetahVI) {
+			HPChange(player.spe, false);
 			statScreenRefresh();
 		}
 		if (player.perkPoints > 0) {

@@ -13,13 +13,13 @@ import classes.internals.*;
 	public class FeralImps extends Monster
 	{
 		public function clawAttack():void {
-			outputText("The imp warlord charges at you with his claws ready! ");
+			outputText("The " + this.short + " charges at you with his claws ready! ");
 			if (player.getEvasionRoll()) {
 				outputText("You manage to avoid his claws thanks to your reaction!");
 				return;
 			}
 			else {
-				outputText("The imp manages to swipe you!  You let out a cry in pain. ");
+				outputText("The " + this.short + " manages to swipe you!  You let out a cry in pain. ");
 				var damage:int = rand(50) + str + weaponAttack;
 				if (damage < 20) damage = 20;
 				player.takePhysDamage(damage, true);
@@ -27,13 +27,13 @@ import classes.internals.*;
 		}
 
 		public function doubleAttack():void {
-			outputText("The imp warlord charges at you with his claws ready and sword raised! ");
+			outputText("The " + this.short + " charges at you with his claws ready and sword raised! ");
 			if (player.getEvasionRoll()) {
 				outputText("You manage to dodge his deadly attack!");
 				return;
 			}
 			else {
-				outputText("The imp manages to slash you with his sword and his deadly claws!");
+				outputText("The " + this.short + " manages to slash you with his sword and his deadly claws!");
 				var damage:int = rand(50) + str + weaponAttack;
 				if (damage < 20) damage = 20; //Min-cap damage.
 				if (damage >= 50) {
@@ -92,6 +92,7 @@ import classes.internals.*;
 				this.armorName = "leathery skin";
 				this.armorDef = 1;
 				this.armorMDef = 0;
+				this.bonusWrath = 50;
 				this.bonusLust = 30;
 				this.lust = 40;
 				this.level = 1;
@@ -115,6 +116,7 @@ import classes.internals.*;
 				this.armorDef = 5;
 				this.armorMDef = 1;
 				this.bonusHP = 100;
+				this.bonusWrath = 150;
 				this.bonusLust = 30;
 				this.lust = 30;
 				this.lustVuln = .65;
@@ -139,6 +141,7 @@ import classes.internals.*;
 				this.armorDef = 17;
 				this.armorMDef = 1;
 				this.bonusHP = 350;
+				this.bonusWrath = 250;
 				this.bonusLust = 30;
 				this.lust = 30;
 				this.lustVuln = .4;

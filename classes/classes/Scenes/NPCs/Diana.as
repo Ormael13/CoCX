@@ -36,6 +36,7 @@ package classes.Scenes.NPCs
 			if (findPerk(PerkLib.NaturalHealingMinor) >= 0) cost -= 3;
 			if (findPerk(PerkLib.NaturalHealingMajor) >= 0) cost -= 4.5;
 			if (findPerk(PerkLib.NaturalHealingEpic) >= 0) cost -= 5;
+			if (findPerk(PerkLib.NaturalHealingLegendary) >= 0) cost -= 6.5;
 			if (findPerk(PerkLib.WisenedHealer) >= 0) cost *= 2;
 			return cost;
 		}
@@ -45,6 +46,7 @@ package classes.Scenes.NPCs
 			if (findPerk(PerkLib.NaturalHealingMinor) >= 0) cost -= 5;
 			if (findPerk(PerkLib.NaturalHealingMajor) >= 0) cost -= 7.5;
 			if (findPerk(PerkLib.NaturalHealingEpic) >= 0) cost -= 10;
+			if (findPerk(PerkLib.NaturalHealingLegendary) >= 0) cost -= 12.5;
 			if (findPerk(PerkLib.WisenedHealer) >= 0) cost *= 2;
 			return cost;
 		}
@@ -60,6 +62,7 @@ package classes.Scenes.NPCs
 			if (findPerk(PerkLib.NaturalHealingMinor) >= 0) mod1 += .3;
 			if (findPerk(PerkLib.NaturalHealingMajor) >= 0) mod1 += .4;
 			if (findPerk(PerkLib.NaturalHealingEpic) >= 0) mod1 += .5;
+			if (findPerk(PerkLib.NaturalHealingLegendary) >= 0) mod1 += .6;
 			return mod1;
 		}
 		public function SpellMod():Number {
@@ -83,7 +86,7 @@ package classes.Scenes.NPCs
 		}
 		
 		public function usingManyBirdsSoulskill():void {
-			outputText("She thrust her hand outwards with deadly intent, and in the blink of an eye a crystal shoots towards you.  Crystal hits you, dealing ");
+			outputText("She thrust her hand outwards with deadly intent, and in the blink of an eye a crystals shoots towards you.  Crystals hits you, dealing ");
 			var soulforcecost:int = 10;// * soulskillCost() * soulskillcostmulti()
 			soulforce -= soulforcecost;
 			var damage:Number = inteligencescalingbonus();
@@ -120,6 +123,14 @@ package classes.Scenes.NPCs
 		
 		override protected function performCombatAction():void
 		{
+			if (flags[kFLAGS.DIANA_LVL_UP] >= 8 && HPRatio() < .2 && soulforce >= 100 && !hasStatusEffect(StatusEffects.MonsterVPT)) {
+				outputText("Diana eyes starts to glow with a violet hua and you can see all of her wounds are now slowly healing.\n");
+				createStatusEffect(StatusEffects.MonsterVPT, 200, 0, 0, 0);
+			}
+			if (hasStatusEffect(StatusEffects.MonsterVPT)) {
+				if (HPRatio() > .9 || soulforce < 100) removeStatusEffect(StatusEffects.MonsterVPT);
+				else soulforce -= 100;
+			}
 			if (HPRatio() < .2 && (mana >= spellCostHeal())) usingHealSpell();
 			else if (flags[kFLAGS.DIANA_LVL_UP] >= 5 && flags[kFLAGS.DIANA_LVL_UP] < 8) {
 				var choice3:Number = rand(6);
@@ -194,12 +205,6 @@ package classes.Scenes.NPCs
 				this.level = 3;
 				this.bonusHP = 80;
 				this.bonusMana = 50;
-				this.gems = rand(5) + 5;
-				this.drop = new ChainedDrop().
-					add(weapons.W_STAFF,1/10).
-					add(consumables.H_PILL,1/5).
-					add(consumables.VDARCON,1/5).
-					add(consumables.EQUINUM,1/2);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 1) {
 				initStrTouSpeInte(25, 30, 30, 80);
@@ -210,12 +215,6 @@ package classes.Scenes.NPCs
 				this.level = 6;
 				this.bonusHP = 270;
 				this.bonusMana = 65;
-				this.gems = rand(5) + 5;
-				this.drop = new ChainedDrop().
-					add(weapons.W_STAFF,1/10).
-					add(consumables.H_PILL,1/5).
-					add(consumables.VDARCON,1/5).
-					add(consumables.EQUINUM,1/2);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 2) {
 				initStrTouSpeInte(30, 40, 35, 80);
@@ -226,12 +225,6 @@ package classes.Scenes.NPCs
 				this.level = 9;
 				this.bonusHP = 485;
 				this.bonusMana = 170;
-				this.gems = rand(5) + 10;
-				this.drop = new ChainedDrop().
-					add(weapons.W_STAFF,1/10).
-					add(consumables.H_PILL,1/5).
-					add(consumables.VDARCON,1/5).
-					add(consumables.UNICORN,1/2);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 3) {
 				initStrTouSpeInte(30, 50, 40, 80);
@@ -242,12 +235,6 @@ package classes.Scenes.NPCs
 				this.level = 12;
 				this.bonusHP = 520;
 				this.bonusMana = 220;
-				this.gems = rand(5) + 10;
-				this.drop = new ChainedDrop().
-					add(weapons.W_STAFF,1/10).
-					add(consumables.H_PILL,1/5).
-					add(consumables.VDARCON,1/5).
-					add(consumables.UNICORN,1/2);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 4) {
 				initStrTouSpeInte(30, 60, 45, 80);
@@ -258,12 +245,6 @@ package classes.Scenes.NPCs
 				this.level = 15;
 				this.bonusHP = 725;
 				this.bonusMana = 265;
-				this.gems = rand(5) + 10;
-				this.drop = new ChainedDrop().
-					add(weapons.W_STAFF,1/10).
-					add(consumables.H_PILL,1/5).
-					add(consumables.VDARCON,1/5).
-					add(consumables.UNICORN,1/2);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 5) {
 				initStrTouSpeInte(30, 70, 50, 80);
@@ -274,12 +255,6 @@ package classes.Scenes.NPCs
 				this.level = 18;
 				this.bonusHP = 730;
 				this.bonusMana = 285;
-				this.gems = rand(5) + 10;
-				this.drop = new ChainedDrop().
-					add(weapons.W_STAFF,1/10).
-					add(consumables.H_PILL,1/5).
-					add(consumables.D_ARCON,1/5).
-					add(consumables.UNICORN,1/2);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 6) {
 				initStrTouSpeInte(30, 80, 55, 90);
@@ -290,12 +265,6 @@ package classes.Scenes.NPCs
 				this.level = 21;
 				this.bonusHP = 785;
 				this.bonusMana = 310;
-				this.gems = rand(5) + 10;
-				this.drop = new ChainedDrop().
-					add(weapons.W_STAFF,1/10).
-					add(consumables.H_PILL,1/5).
-					add(consumables.D_ARCON,1/5).
-					add(consumables.UNICORN,1/2);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 7) {
 				initStrTouSpeInte(30, 90, 60, 90);
@@ -306,12 +275,6 @@ package classes.Scenes.NPCs
 				this.level = 24;
 				this.bonusHP = 790;
 				this.bonusMana = 330;
-				this.gems = rand(5) + 10;
-				this.drop = new ChainedDrop().
-					add(weapons.W_STAFF,1/10).
-					add(consumables.H_PILL,1/5).
-					add(consumables.D_ARCON,1/5).
-					add(consumables.UNICORN,1/2);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 8) {
 				initStrTouSpeInte(40, 100, 70, 100);
@@ -320,14 +283,28 @@ package classes.Scenes.NPCs
 				this.armorDef = 12;
 				this.armorMDef = 48;
 				this.level = 27;
-				this.bonusHP = 845;
-				this.bonusMana = 355;
-				this.gems = rand(5) + 15;
-				this.drop = new ChainedDrop().
-					add(weapons.W_STAFF,1/10).
-					add(consumables.H_PILL,1/5).
-					add(consumables.D_ARCON,1/5).
-					add(consumables.ALICORN,1/2);
+				this.bonusHP = 1000;
+				this.bonusMana = 450;
+			}
+			if (flags[kFLAGS.DIANA_LVL_UP] == 9) {
+				initStrTouSpeInte(40, 110, 80, 110);
+				initWisLibSensCor(110, 110, 85, 50);
+				this.weaponAttack = 10;
+				this.armorDef = 13;
+				this.armorMDef = 52;
+				this.level = 33;
+				this.bonusHP = 1010;
+				this.bonusMana = 480;
+			}
+			if (flags[kFLAGS.DIANA_LVL_UP] == 10) {
+				initStrTouSpeInte(40, 120, 90, 120);
+				initWisLibSensCor(120, 120, 95, 50);
+				this.weaponAttack = 11;
+				this.armorDef = 14;
+				this.armorMDef = 56;
+				this.level = 39;
+				this.bonusHP = 1020;
+				this.bonusMana = 510;
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] < 2 && flags[kFLAGS.DIANA_FOLLOWER] < 3) {
 				this.a = "the ";
@@ -340,6 +317,12 @@ package classes.Scenes.NPCs
 				this.hips.type = Hips.RATING_CURVY;
 				this.butt.type = Butt.RATING_LARGE;
 				this.hairLength = 12;
+				this.gems = rand(5) + 5;
+				this.drop = new ChainedDrop().
+					add(weapons.W_STAFF,1/10).
+					add(consumables.H_PILL,1/5).
+					add(consumables.VDARCON,1/5).
+					add(consumables.EQUINUM,1/2);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 0 && flags[kFLAGS.DIANA_FOLLOWER] == 3) {
 				this.a = "the ";
@@ -352,6 +335,12 @@ package classes.Scenes.NPCs
 				this.hips.type = Hips.RATING_CURVY+2;
 				this.butt.type = Butt.RATING_LARGE+1;
 				this.hairLength = 16;
+				this.gems = rand(5) + 10;
+				this.drop = new ChainedDrop().
+					add(weapons.W_STAFF,1/10).
+					add(consumables.H_PILL,1/5).
+					add(consumables.D_ARCON,1/5).
+					add(consumables.EQUINUM,1/2);
 			}
 			if ((flags[kFLAGS.DIANA_LVL_UP] >= 2 && flags[kFLAGS.DIANA_LVL_UP] < 8) && flags[kFLAGS.DIANA_FOLLOWER] < 3) {
 				this.a = "the ";
@@ -364,6 +353,12 @@ package classes.Scenes.NPCs
 				this.hips.type = Hips.RATING_CURVY+2;
 				this.butt.type = Butt.RATING_LARGE+1;
 				this.hairLength = 16;
+				this.gems = rand(5) + 10;
+				this.drop = new ChainedDrop().
+					add(weapons.W_STAFF,1/10).
+					add(consumables.H_PILL,1/5).
+					add(consumables.D_ARCON,1/5).
+					add(consumables.UNICORN,1/2);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 2 && flags[kFLAGS.DIANA_FOLLOWER] == 4) {
 				this.a = "the ";
@@ -376,6 +371,12 @@ package classes.Scenes.NPCs
 				this.hips.type = Hips.RATING_FERTILE+1;
 				this.butt.type = Butt.RATING_JIGGLY+1;
 				this.hairLength = 26;
+				this.gems = rand(5) + 10;
+				this.drop = new ChainedDrop().
+					add(weapons.W_STAFF,1/10).
+					add(consumables.H_PILL,1/5).
+					add(consumables.D_ARCON,1/5).
+					add(consumables.UNICORN,1/2);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 8 && (flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5)) {
 				this.a = "";
@@ -388,6 +389,12 @@ package classes.Scenes.NPCs
 				this.hips.type = Hips.RATING_FERTILE+1;
 				this.butt.type = Butt.RATING_JIGGLY+1;
 				this.hairLength = 26;
+				this.gems = rand(5) + 15;
+				this.drop = new ChainedDrop().
+					add(weapons.W_STAFF,1/10).
+					add(consumables.H_PILL,1/5).
+					add(consumables.D_ARCON,1/5).
+					add(consumables.ALICORN,1/2);
 			}
 			// this.plural = false;
 			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
@@ -438,6 +445,12 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 8) {
 				this.createPerk(PerkLib.NaturalHealingEpic, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.DIANA_LVL_UP] >= 9) {
+				this.createPerk(PerkLib.SoulScholar, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.DIANA_LVL_UP] >= 10) {
+				this.createPerk(PerkLib.NaturalHealingLegendary, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_FOLLOWER] == 3 || flags[kFLAGS.DIANA_FOLLOWER] == 4) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			checkMonster();

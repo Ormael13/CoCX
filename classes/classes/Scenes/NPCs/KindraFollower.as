@@ -98,6 +98,18 @@ public function wonFightWithKindra():void {
 			flags[kFLAGS.KINDRA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.KINDRA_LVL_UP] = 9;
 		}
+		if (flags[kFLAGS.KINDRA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.KINDRA_LVL_UP] == 9) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 1, 66);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 66, 0, 0, 0);
+			flags[kFLAGS.KINDRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KINDRA_LVL_UP] = 10;
+		}
+		if (flags[kFLAGS.KINDRA_DEFEATS_COUNTER] == 12 && flags[kFLAGS.KINDRA_LVL_UP] == 10) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 1, 72);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 72, 0, 0, 0);
+			flags[kFLAGS.KINDRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KINDRA_LVL_UP] = 11;
+		}
 	}
 	kindraAffection(1);
 	cleanupAfterCombat();
