@@ -13,6 +13,11 @@ public class SpriteDb {
 		return CoC.instance.flags[kFLAGS.SPRITE_STYLE] === 1;
 	}
 
+	[Embed(source="../../../res/sprites/aiko.png")]
+	public static const s_aiko_16bit:Class;
+	public static function get s_aiko():Class {
+		return is8bit ? s_kitsune_blonde_8bit : s_aiko_16bit;
+	}
 	[Embed(source="../../../res/sprites/akbal.png")]
 	public static var s_akbal_16bit:Class;
 	[Embed(source="../../../res/sprites8bit/akbal-old.png")]
@@ -738,6 +743,11 @@ public class SpriteDb {
 	public static var s_valeria_8bit:Class;
 	public static function get s_valeria(): Class {
 		return is8bit ? s_valeria_8bit : s_valeria_16bit;
+	}
+	[Embed(source="../../../res/sprites/yamata.png")]
+	public static const s_yamata_16bit:Class;
+	public static function get s_yamata():Class {
+		return is8bit ? s_kitsune_black_8bit : s_yamata_16bit;
 	}
 	[Embed(source="../../../res/sprites/venus.png")]
 	public static var s_venus_16bit:Class;

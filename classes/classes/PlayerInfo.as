@@ -175,6 +175,12 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.TIMES_ORGASMED] > 0)
 			miscStats += "<b>Times Orgasmed:</b> " + flags[kFLAGS.TIMES_ORGASMED] + "\n";
 
+		if (flags[kFLAGS.LUNA_MOON_CYCLE] > 0) {
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) miscStats += "<font color=\"#C00000\"><b>Day of the Moon Cycle:</b> " + flags[kFLAGS.LUNA_MOON_CYCLE] + " (FULL MOON)</font>";
+			else miscStats += "<b>Day of the Moon Cycle:</b> " + flags[kFLAGS.LUNA_MOON_CYCLE];
+			miscStats += "\n";
+		}
+
 		if (miscStats != "")
 			outputText("\n<b><u>Miscellaneous Stats</u></b>\n" + miscStats);
 		// End Misc Stats
@@ -347,6 +353,7 @@ public class PlayerInfo extends BaseContent {
 			if (player.statusEffectv1(StatusEffects.Kindra) > 0)
 				combatStats += "<b>Bow Skill:</b> " + (Math.round(player.statusEffectv1(StatusEffects.Kelt)) + Math.round(player.statusEffectv1(StatusEffects.Kindra))) + " / 250\n";
 		}
+		else combatStats += "<b>Bow Skill:</b> 0 / 100\n";
 		combatStats += "<b>Arrow/Bolt Cost:</b> " + combat.bowCost(100) + "%\n";
 		combatStats += "<b>Accuracy (1st range attack):</b> " + (combat.arrowsAccuracy() / 2) + "%\n";
 		if (player.findPerk(PerkLib.DoubleStrike) >= 0) combatStats += "<b>Accuracy (2nd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - combat.arrowsAccuracyPenalty()) + "%\n";
@@ -370,6 +377,7 @@ public class PlayerInfo extends BaseContent {
 			combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)\n";
 		combatStats += "\n";
 		var maxes:Object = player.getAllMaxStats();
+		var mins:Object = player.getAllMinStats();
 		combatStats += "<b>Strength Cap:</b> " + maxes.str + "\n";
 		combatStats += "<i>Ghost Strength:</i> +" + combat.ghostStrength() + "\n";
 		combatStats += "<b>Toughness Cap:</b> " + maxes.tou + "\n";
@@ -378,11 +386,10 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Intelligence Cap:</b> " + maxes.inte + "\n";
 		combatStats += "<b>Wisdom Cap:</b> " + maxes.wis + "\n";
 		combatStats += "<b>Libido Cap:</b> " + maxes.lib + "\n";
+		combatStats += "<i>Libido Minimum:</i> " + mins.lib + "\n";
 		combatStats += "<b>Sensitivity Cap:</b> " + maxes.sens + "\n";
-		var mins:Object = player.getAllMinStats();
-		combatStats += "<b>Libido Minimum:</b> " + mins.lib + "\n";
-		combatStats += "<b>Sensitivity Minimum:</b> " + mins.sens + "\n";
-		combatStats += "<b>Corruption Minimum:</b> " + mins.cor + "\n";
+		combatStats += "<i>Sensitivity Minimum:</i> " + mins.sens + "\n";
+		combatStats += "<i>Corruption Minimum:</i> " + mins.cor + "\n";
 		combatStats += "\n";
 		combatStats += "<b>HP Regeneration (%):</b> ~ " + combat.PercentBasedRegeneration() + " % / " + combat.maximumRegeneration() + " % (turn), ~ " + combat.PercentBasedRegeneration() * 2 + " % / " + combat.maximumRegeneration() * 2 + " % (hour)\n";
 		combatStats += "<b>HP Regeneration (Total):</b> ~ " + Math.round((player.maxHP() * combat.PercentBasedRegeneration() / 100) + combat.nonPercentBasedRegeneration()) + " HP /  turn, ~ " + Math.round((player.maxHP() * combat.PercentBasedRegeneration() / 100) + combat.nonPercentBasedRegeneration()) * 2 + " HP /  hour\n";
@@ -411,7 +418,13 @@ public class PlayerInfo extends BaseContent {
 
 		// Begin Interpersonal Stats
 		var interpersonStats:String = "";
-
+			
+		if (flags[kFLAGS.AIKO_TIMES_MET] > 0) {
+			interpersonStats  += "<b>Aiko Affection</b>: "+flags[kFLAGS.AIKO_AFFECTION]+"\n";
+			if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] > 0)
+				interpersonStats  += "<b>Aiko Corruption</b>: "+flags[kFLAGS.AIKO_CORRUPTION]+"\n";
+		}
+		
 		if (SceneLib.anzu.anzuRelationshipLevel() > 0) {
 			interpersonStats += "<b>Anzu's Affection:</b> " + flags[kFLAGS.ANZU_AFFECTION] + "%\n";
 			interpersonStats += "<b>Anzu's Relationship Level:</b> " + (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 1 ? "Acquaintances" : flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 2 ? "Friend" : flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 3 ? "Close Friend" : flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 4 ? "Lover" : "Undefined") + "\n";
@@ -469,6 +482,14 @@ public class PlayerInfo extends BaseContent {
 			if (flags[kFLAGS.DIANA_LVL_UP] < 1) interpersonStats += "<b>Diana lvl:</b> 3\n";
 		}
 
+		if (flags[kFLAGS.DINAH_LVL_UP] > 0.5) {
+			interpersonStats += "<b>Dinah Affection:</b> " + Math.round(flags[kFLAGS.DINAH_AFFECTION]) + "%\n";
+			if (flags[kFLAGS.DINAH_LVL_UP] == 4) interpersonStats += "<b>Dinah lvl:</b> 26\n";
+			if (flags[kFLAGS.DINAH_LVL_UP] == 3) interpersonStats += "<b>Dinah lvl:</b> 20\n";
+			if (flags[kFLAGS.DINAH_LVL_UP] == 2) interpersonStats += "<b>Dinah lvl:</b> 14\n";
+			if (flags[kFLAGS.DINAH_LVL_UP] == 1) interpersonStats += "<b>Dinah lvl:</b> 8\n";
+		}
+
 		if (flags[kFLAGS.ETNA_AFFECTION] > 0) {
 			interpersonStats += "<b>Etna Affection:</b> " + Math.round(flags[kFLAGS.ETNA_AFFECTION]) + "%\n";
 			if (flags[kFLAGS.ETNA_LVL_UP] == 8) interpersonStats += "<b>Etna lvl:</b> 78\n";
@@ -497,6 +518,15 @@ public class PlayerInfo extends BaseContent {
 			if (flags[kFLAGS.EMBER_LVL_UP] == 2) interpersonStats += "<b>Ember lvl:</b> 32\n";
 			if (flags[kFLAGS.EMBER_LVL_UP] == 1) interpersonStats += "<b>Ember lvl:</b> 26\n";
 			if (flags[kFLAGS.EMBER_LVL_UP] < 1) interpersonStats += "<b>Ember lvl:</b> 20\n";
+		}
+
+		if (flags[kFLAGS.GALIA_LVL_UP] > 0.5) {
+			interpersonStats += "<b>Galia Affection:</b> " + Math.round(flags[kFLAGS.GALIA_AFFECTION]) + "%\n";
+			if (flags[kFLAGS.GALIA_LVL_UP] == 5) interpersonStats += "<b>Galia lvl:</b> 25\n";
+			if (flags[kFLAGS.GALIA_LVL_UP] == 4) interpersonStats += "<b>Galia lvl:</b> 19\n";
+			if (flags[kFLAGS.GALIA_LVL_UP] == 3) interpersonStats += "<b>Galia lvl:</b> 13\n";
+			if (flags[kFLAGS.GALIA_LVL_UP] == 2) interpersonStats += "<b>Galia lvl:</b> 7\n";
+			if (flags[kFLAGS.GALIA_LVL_UP] == 1) interpersonStats += "<b>Galia lvl:</b> 1\n";
 		}
 
 		if (SceneLib.helFollower.helAffection() > 0)
@@ -578,9 +608,6 @@ public class PlayerInfo extends BaseContent {
         if (flags[kFLAGS.LUNA_FOLLOWER] > 3) {
 			interpersonStats += "<b>Luna Affection:</b> " + Math.round(flags[kFLAGS.LUNA_AFFECTION]) + "%\n";
 			interpersonStats += "<b>Luna Jealousy:</b> " + Math.round(flags[kFLAGS.LUNA_JEALOUSY]) + "%\n";
-			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) interpersonStats += "<font color=\"#C00000\"><b>Day of the Moon Cycle:</b> " + flags[kFLAGS.LUNA_MOON_CYCLE] + " (FULL MOON)</font>";
-			else interpersonStats += "<b>Day of the Moon Cycle:</b> " + flags[kFLAGS.LUNA_MOON_CYCLE];
-			interpersonStats += "\n";
 			if (flags[kFLAGS.LUNA_LVL_UP] == 5) interpersonStats += "<b>Luna lvl:</b> 39\n";
 			if (flags[kFLAGS.LUNA_LVL_UP] == 4) interpersonStats += "<b>Luna lvl:</b> 33\n";
 			if (flags[kFLAGS.LUNA_LVL_UP] == 3) interpersonStats += "<b>Luna lvl:</b> 27\n";
@@ -1132,7 +1159,7 @@ public class PlayerInfo extends BaseContent {
 			for each (var pt:PerkType in unlocks) outputText("<li>" + pt.name + " (" + pt.longDesc + ")</li>");
 			outputText("</ul>");
 		}
-		outputText("If you would like to select this perk, click <b>Okay</b>.  Otherwise, select a new perk, or press <b>Skip</b> to make a decision later.");
+		outputText("If you would like to select this perk, click <b>Okay</b>.  Otherwise, select a new perk, or press <b>Skip</b> to make a decision later.\n");
 		if (player.perkPoints>1) outputText("\n\nYou have "+numberOfThings(player.perkPoints,"perk point","perk points")+".\n\n");
 		for each(var p:* in perkList){
 			outputText("<u><a href=\"event:"+perkList.indexOf(p)+"\">"+p.perk.perkName+"</a></u>\n");
@@ -1152,6 +1179,14 @@ public class PlayerInfo extends BaseContent {
 		if (perk.ptype == PerkLib.StrongBack) player.itemSlot4.unlocked = true;
 		if (perk.ptype == PerkLib.TankI || perk.ptype == PerkLib.TankII || perk.ptype == PerkLib.TankIII || perk.ptype == PerkLib.TankIV || perk.ptype == PerkLib.TankV || perk.ptype == PerkLib.TankVI) {
 			HPChange(player.tou, false);
+			statScreenRefresh();
+		}
+		if (perk.ptype == PerkLib.GoliathI || perk.ptype == PerkLib.GoliathII || perk.ptype == PerkLib.GoliathIII || perk.ptype == PerkLib.GoliathIV || perk.ptype == PerkLib.GoliathV || perk.ptype == PerkLib.GoliathVI) {
+			HPChange(player.str, false);
+			statScreenRefresh();
+		}
+		if (perk.ptype == PerkLib.CheetahI || perk.ptype == PerkLib.CheetahII || perk.ptype == PerkLib.CheetahIII || perk.ptype == PerkLib.CheetahIV || perk.ptype == PerkLib.CheetahV || perk.ptype == PerkLib.CheetahVI) {
+			HPChange(player.spe, false);
 			statScreenRefresh();
 		}
 		if (player.perkPoints > 0) {

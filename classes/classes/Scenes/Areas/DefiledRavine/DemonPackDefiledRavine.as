@@ -4,9 +4,13 @@
  */
 package classes.Scenes.Areas.DefiledRavine 
 {
-	import classes.*;
-	import classes.internals.WeightedDrop;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.Horns;
+import classes.BodyParts.Tail;
+import classes.Scenes.SceneLib;
+import classes.internals.WeightedDrop;
 	
 	public class DemonPackDefiledRavine extends Monster
 	{
@@ -73,8 +77,8 @@ package classes.Scenes.Areas.DefiledRavine
 							consumables.INCUBID,
 							consumables.OVIELIX,
 							consumables.B__BOOK);
-			this.special1 = game.combat.packAttack;
-			this.special2 = game.combat.lustAttack;
+			this.special1 = SceneLib.combat.packAttack;
+			this.special2 = SceneLib.combat.lustAttack;
 			this.tailType = TAIL_TYPE_DEMONIC;
 			this.horns.type = HORNS_DEMON;
 			this.horns.count = 2;

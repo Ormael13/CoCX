@@ -2446,11 +2446,12 @@ public class PerkLib
 		public static const LightningVulnerability:PerkType = mk("Lightning Vulnerability", "Lightning Vulnerability", "");//NYU
 		public static const MonsterRegeneration:PerkType = mk("Monster Regeneration", "Monster Regeneration", "");
 		public static const NoGemsLost:PerkType = mk("No Gems Lost", "No Gems Lost", "");
+		public static const Phylactery:PerkType = mk("Phylactery", "Phylactery", "");
 		public static const Sentience:PerkType = mk("Sentience", "Sentience", "");
 		public static const ShieldWielder:PerkType = mk("Shield wielder", "Shield wielder", "");
 		public static const TeaseResistance:PerkType = mk("Tease Resistance", "Tease Resistance", "");//NYU
-		//public static const Enemy   Type:PerkType = mk("-type enemy", "-type enemy", "");
-		//public static const Enemy:PerkType = mk("-type enemy", "-type enemy", "");undead/ghost?
+		//public static const Enemy_Type:PerkType = mk("-type enemy", "-type enemy", "");
+		//public static const Enemy_Type:PerkType = mk("-type enemy", "-type enemy", "");undead/ghost?
 		//public static const :PerkType = mk("", "", ""); na poźniej dopisane perki wzór
 //dodać także typy perków dla poszczególnych ras przeciwników tak, ze bedą mogły one mieć jakieś korzyści też (np. jak ma Dragon nature to bonusy jak PC miałby dragon score > 6))
 		private static function mk(id:String, name:String, desc:String, longDesc:String = null, keepOnAscension:Boolean = false):PerkType
@@ -3277,8 +3278,8 @@ public class PerkLib
             ElementalArrows.requireLevel(48)
                     .requirePerk(PrestigeJobArcaneArcher)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasStatusEffect(StatusEffects.KnowsIceSpike);
-                    }, "Whitefire or Ice Spike spell");
+                        return player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasStatusEffect(StatusEffects.KnowsIceSpike) || player.hasStatusEffect(StatusEffects.KnowsLightningBolt) || player.hasStatusEffect(StatusEffects.KnowsDarknessShard);
+                    }, "Whitefire or Ice Spike or Lightning Bolt or Darkness Shard spell");
             SteelStorm.requireLevel(48)
                     .requirePerk(PrestigeJobTempest);
             //Tier 9 Speed Perks

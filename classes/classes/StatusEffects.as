@@ -47,7 +47,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CampSparingDinah:StatusEffectType				= mk("Camp Sparing Dinah");
 		public static const CampSparingNpcsTimers1:StatusEffectType			= mk("Camp Sparing Npc's Timers 1");//Ember / Isabella / Kiha / Etna
 		public static const CampSparingNpcsTimers2:StatusEffectType			= mk("Camp Sparing Npc's Timers 2");//Kindra / Chi Chi / Ceani / Diana
-		public static const CampSparingNpcsTimers3:StatusEffectType			= mk("Camp Sparing Npc's Timers 3");//Luna /?Galia?/?Dinah?/?Cai'Lin?
+		public static const CampSparingNpcsTimers3:StatusEffectType			= mk("Camp Sparing Npc's Timers 3");//Luna / Galia / Dinah /?Cai'Lin?
 		public static const CampSparingNpcsTimers4:StatusEffectType			= mk("Camp Sparing Npc's Timers 4");//x / x / x / x
 		public static const ClaraCombatRounds:StatusEffectType              = mk("Clara Combat Rounds");
 		public static const ClaraFoughtInCamp:StatusEffectType              = mk("Clara Fought In Camp");
@@ -248,6 +248,11 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const PrisonCaptorEllyScratch:StatusEffectType = mk("prisonCaptorEllyScatch");
 		
 		
+		public static const DianaOff:StatusEffectType            = mk("Diana Off");
+		public static const DivaOff:StatusEffectType             = mk("Diva Off");
+		public static const ElectraOff:StatusEffectType          = mk("Electra Off");
+		public static const EtnaOff:StatusEffectType             = mk("Etna Off");
+		public static const LunaOff:StatusEffectType             = mk("Luna Off");
 		public static const UmasMassage:StatusEffectType         = mk("Uma's Massage"); //v1 = bonus index; v2 = bonus value; v3 = remaining time
 		public static const Uniball:StatusEffectType             = mk("Uniball");
 		public static const UsedNaturalSelfStim:StatusEffectType = mk("used natural self-stim");
@@ -268,6 +273,9 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const AbilityCooldown1:StatusEffectType   = mk("Ability Cooldown 1");
 		public static const AbilityCooldown2:StatusEffectType   = mk("Ability Cooldown 2");
 		public static const AbilityCooldown3:StatusEffectType   = mk("Ability Cooldown 3");
+		public static const AikoLustPrank:StatusEffectType 		= mk("Aiko sex prank");
+		public static const AikoHyper:StatusEffectType 			= mk("Aiko hyper attacks");
+		public static const AikoArcaneArcher:StatusEffectType 	= mk("Aiko archer attacks");
 		public static const Attacks:StatusEffectType            = mk("attacks");
 		public static const BimboBrawl:StatusEffectType         = mk("bimboBrawl");
 		public static const BowCooldown:StatusEffectType        = mk("Bow Cooldown");
@@ -343,6 +351,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Vala:StatusEffectType               = mk("vala");
 		public static const Vapula:StatusEffectType             = mk("Vapula");
 		public static const WhipReady:StatusEffectType          = mk("Whip Ready");
+		public static const YamataCanon:StatusEffectType 		= mk("Yamata Foxfire Canon");
 		
 		//metamorph
 		public static const TranscendentalGeneticMemory:StatusEffectType = mk("Transcendental Genetic Memory");//v1 - limit of permable options, v2 - current permed options counter
@@ -689,6 +698,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const PigbysHands:StatusEffectType           = mkCombat("Pigbys Hands");
 		public static const SoulArena:StatusEffectType             = mkCombat("Soul Arena");
 		public static const SoulArenaGaunlet:StatusEffectType      = mkCombat("Soul Arena Gaunlet");
+		public static const AikoLightningArrow:StatusEffectType    = mkCombat("Aiko archer attacks");
+		public static const YamataEntwine:StatusEffectType 		   = mkCombat("Yamata Entwine");
 
 		/**
 		 * Creates status affect

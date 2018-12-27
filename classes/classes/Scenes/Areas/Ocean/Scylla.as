@@ -13,7 +13,7 @@ import classes.internals.*;
 public class Scylla extends Monster
 	{
 		public function scyllaConstrict():void {
-			outputText("The " + this.short + "’s tentacles grab you all at once and start to squeeze you!");
+			outputText("" + this.capitalA + this.short + "’s tentacles grab you all at once and start to squeeze you!");
 			player.createStatusEffect(StatusEffects.ScyllaBind,0,0,0,0); 
 			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
 				player.takePhysDamage(4+rand(6));
@@ -22,7 +22,7 @@ public class Scylla extends Monster
 		
 		public function scyllaInkSpray():void {
 			clearOutput();
-			outputText("The scylla stretches all her tentacles apart revealing a huge gaping pussy at the center which spray a cloud of ink all around you impairing your vision. ");
+			outputText("" + this.capitalA + this.short + " stretches all her tentacles apart revealing a huge gaping pussy at the center which spray a cloud of ink all around you impairing your vision. ");
 			player.createStatusEffect(StatusEffects.Blind, 2, 0, 0, 0);
 		}
 		
@@ -30,7 +30,7 @@ public class Scylla extends Monster
 			clearOutput();
 			var damage:Number = 0;
 			damage += eBaseStrengthDamage() * 2;
-			outputText("The scylla slaps you with her tentacles, dealing ");
+			outputText("" + this.capitalA + this.short + " slaps you with her tentacles, dealing ");
 			player.takePhysDamage(damage, true);
 			player.takePhysDamage(damage, true);
 			player.takePhysDamage(damage, true);
@@ -43,7 +43,7 @@ public class Scylla extends Monster
 			clearOutput();
 			var damage:Number = 0;
 			damage += eBaseStrengthDamage() * 2;
-			outputText("The scylla slaps you with her tentacles, dealing ");
+			outputText("" + this.capitalA + this.short + " slaps you with her tentacles, dealing ");
 			player.takePhysDamage(damage, true);
 			player.takePhysDamage(damage, true);
 			outputText(" damage!");
@@ -87,8 +87,8 @@ public class Scylla extends Monster
 			this.skin.setBaseOnly({color:"slippery"});
 			this.hairColor = "brown";
 			this.hairLength = 5;
-			initStrTouSpeInte(350, 100, 100, 150);
-			initWisLibSensCor(150, 100, 50, 50);
+			initStrTouSpeInte(450, 250, 250, 150);
+			initWisLibSensCor(150, 200, 150, 50);
 			this.weaponName = "tentacle";
 			this.weaponVerb="slash";
 			this.weaponAttack = 86;
@@ -101,7 +101,8 @@ public class Scylla extends Monster
 			this.lustVuln = .2;
 			this.level = 70;
 			this.gems = 0;
-			this.drop = new WeightedDrop(consumables.BLACKIN, 1);
+			this.drop = NO_DROP;
+			//this.drop = new WeightedDrop(consumables.BLACKIN, 1);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);

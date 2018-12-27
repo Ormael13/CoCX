@@ -118,6 +118,8 @@ package classes.Scenes.Explore
 			function ():Monster {return new TamanisDaughters();},
 			function ():Monster {return new Vala();},
 			function ():Monster {return new Zetaz();},
+			function ():Monster {return new Aiko();},
+			function ():Monster {return new Yamata();},
 			// ...VERY special monsters third.
 			function ():Monster {return new EncapsulationPod();},
 			function ():Monster {return new Sheila();},

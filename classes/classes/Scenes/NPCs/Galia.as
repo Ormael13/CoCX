@@ -10,36 +10,92 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 	public class Galia extends Monster
 	{
+		public function clawAttack():void {
+			outputText("" + this.capitalA + this.short + " charges at you with his claws ready! ");
+			if (player.getEvasionRoll()) {
+				outputText("You manage to avoid his claws thanks to your reaction!");
+				return;
+			}
+			else {
+				outputText("" + this.capitalA + this.short + " manages to swipe you!  You let out a cry in pain. ");
+				var damage:int = rand(50) + str + weaponAttack;
+				if (damage < 20) damage = 20;
+				player.takePhysDamage(damage, true);
+			}
+		}
+
+		public function doubleAttack():void {
+			outputText("" + this.capitalA + this.short + " charges at you with his claws ready and sword raised! ");
+			if (player.getEvasionRoll()) {
+				outputText("You manage to dodge his deadly attack!");
+				return;
+			}
+			else {
+				outputText("" + this.capitalA + this.short + " manages to slash you with his sword and his deadly claws!");
+				var damage:int = rand(50) + str + weaponAttack;
+				if (damage < 20) damage = 20; //Min-cap damage.
+				if (damage >= 50) {
+					outputText("You let out a cry in pain and you swear you could see your wounds bleeding. ");
+					player.createStatusEffect(StatusEffects.IzmaBleed, 2, 0, 0, 0);
+				}
+				else {
+					outputText("Thankfully the wounds aren't that serious. ");
+				}
+				player.takePhysDamage(damage, true);
+			}
+		}
+		
+		override protected function performCombatAction():void
+		{
+			this.wrath += 100;
+			var choice1:Number = rand(4);
+			if (choice1 < 2) eAttack();
+			if (choice1 == 2) clawAttack();
+			if (choice1 == 3) doubleAttack();
+		}
+		
+		override public function defeated(hpVictory:Boolean):void
+		{
+			cleanupAfterCombat();
+			if (flags[kFLAGS.GALIA_LVL_UP] >= 1) {
+			//if (player.hasStatusEffect(StatusEffects.CampSparingDinah)) {
+				//player.removeStatusEffect(StatusEffects.CampSparingDinah);
+				SceneLib.galiaFollower.GaliaLostSparring();
+			}
+			else SceneLib.impScene.impVictory2();
+		}
+
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if (flags[kFLAGS.GALIA_LVL_UP] >= 1) {
+			//if (player.hasStatusEffect(StatusEffects.CampSparingDinah)) {
+				//player.removeStatusEffect(StatusEffects.CampSparingDinah);
+				SceneLib.galiaFollower.GaliaWonSparring();
+			}
+			else {
+				outputText("Last thing you remember before black out is imp smashing you on the head with it sandal.");
+				cleanupAfterCombat();
+			}
+		}
 		
 		public function Galia() 
 		{
 			if (flags[kFLAGS.GALIA_LVL_UP] < 1) {
 				this.a = "the ";
 				this.short = "imp";
+				this.imageName = "imp";
+				this.long = "An feral imp is short, only a few feet tall.  An unkempt mane of shaggy black hair hangs from his head, parted by two short curved horns.  His eyes are solid black, save for tiny red irises which glow with evil intent.  His skin is bright red, and unencumbered by clothing or armor, save for a small loincloth at his belt, and he's extremely well-muscled.  His feet are covered by tiny wooden sandals, and his hands tipped with sharp claws.  A pair of tiny but functional wings occasionally flap from his back.";
 			}
 			if (flags[kFLAGS.GALIA_LVL_UP] >= 1) {
 				this.a = "";
 				this.short = "Galia";
 			}
-			if (flags[kFLAGS.GALIA_LVL_UP] < 1) {
-				this.imageName = "imp";
-				this.long = "An feral imp is short, only a few feet tall.  An unkempt mane of shaggy black hair hangs from his head, parted by two short curved horns.  His eyes are solid black, save for tiny red irises which glow with evil intent.  His skin is bright red, and unencumbered by clothing or armor, save for a small loincloth at his belt, and he's extremely well-muscled.  His feet are covered by tiny wooden sandals, and his hands tipped with sharp claws.  A pair of tiny but functional wings occasionally flap from his back.";
-				initStrTouSpeInte(35, 5, 5, 5);
-				initWisLibSensCor(5, 5, 5, 100);
-				this.weaponAttack = 2;
-				this.armorDef = 1;
-				this.armorMDef = 0;
-				this.bonusWrath = 50;
-				this.bonusLust = 30;
-				this.lust = 40;
-				this.level = 1;
-				this.gems = rand(5) + 5;
-			}
-			if (flags[kFLAGS.GALIA_LVL_UP] == 1) {
+			if (flags[kFLAGS.GALIA_LVL_UP] < 2) {
 				initStrTouSpeInte(35, 5, 5, 5);
 				initWisLibSensCor(5, 5, 5, 100);
 				this.weaponAttack = 2;
@@ -90,7 +146,7 @@ import classes.internals.*;
 				this.level = 19;
 				this.gems = rand(5) + 5;
 			}
-			if (flags[kFLAGS.GALIA_LVL_UP] == 5) {//piewrsza speciajna ewolucja/mutacja
+			if (flags[kFLAGS.GALIA_LVL_UP] == 5) {//pierwsza specialna ewolucja/mutacja
 				initStrTouSpeInte(35, 5, 5, 5);
 				initWisLibSensCor(5, 5, 5, 100);
 				this.weaponAttack = 2;

@@ -13,6 +13,7 @@ import classes.Scenes.Dungeons.D3.DriderIncubus;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.SuccubusGardener;
 import classes.Scenes.NPCs.Ceraph;
+import classes.Scenes.NPCs.Yamata;
 import classes.Scenes.SceneLib;
 import classes.StatusEffectClass;
 import classes.StatusEffects;
@@ -287,6 +288,10 @@ public class CombatUI extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.Tentagrappled)) {
 			btnStruggle.call((monster as SuccubusGardener).grappleStruggle);
 			btnBoundWait.call((monster as SuccubusGardener).grappleWait);
+		}
+		if (player.hasStatusEffect(StatusEffects.YamataEntwine)) {
+			btnStruggle.call((monster as Yamata).entwineStruggle);
+			btnBoundWait.call((monster as Yamata).entwineWait);
 		}
 		if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles) && player.statusEffectv3(StatusEffects.LethicesRapeTentacles) == 1) {
 			outputText("\n<b>Lethice's tentacles have a firm grip of your limbs!</b>");

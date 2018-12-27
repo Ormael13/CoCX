@@ -19,7 +19,25 @@ package classes.Scenes
 		public function accessChangelogMenu():void {
 			Changelog23();
 		}
-		
+		//zrobić do 2019 na świta event z choinką i reniferami i nie odblokowywać go do ok. 20-24 grudnia 2019 xD
+		private function Changelog26():void {
+			clearOutput();
+			menu();
+			addButton(0, "Next", Changelog25);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
+		}
+		private function Changelog25():void {
+			clearOutput();
+			menu();
+			addButton(0, "Next", Changelog24);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
+		}
+		private function Changelog24():void {
+			clearOutput();
+			menu();
+			addButton(0, "Next", Changelog23);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
+		}
 		private function Changelog23():void {
 			clearOutput();
 			menu();
@@ -69,23 +87,30 @@ package classes.Scenes
 			outputText("<b>Version 0.8j3a (Sean shop fix):</b>\n\n");
 			outputText("-Fixed bugs: Sean (Deep Cave incubus) 2nd and 3rd shop menu row bug\n\n");
 			outputText("<b>Version 0.8k:</b>\n\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-New rare ascension perk -> Ascension: Building Prestige (5th Stage). Req. Ascension: Building Prestige (4th Stage) perk and be at fourth ascension. It costs 25 asc points and will give 1 more slot for Prestige Jobs.\n");
 			outputText("-New rare ascension perk -> Ascension: Ascension: Transcendental Genetic Memory (Stage 5). Req. Ascension: Transcendental Genetic Memory (Stage 4) perk and be at fourth ascension. It cost 40 asc points and allow to perm up to 50 selected Metamorph options. (with prev perks it give max cap of 150)\n");
 			outputText("-Increased max lvl camp npc's can attain after reaching end of training: Diana (lvl 39), Luna (lvl 39), Ceani (lvl 74), Ember (lvl 74), Isabella (lvl 74), Kiha (lvl 75), Kindra (lvl 75), Chi Chi (lvl 76), Etna (lvl 78)\n");
 			outputText("-Small corrections for few lvl-able npc's stats.\n");
 			outputText("-New encounter in Glacial Rift - Yu (yeti girl). After 2nd meeting she can be found using Places menu (Winter gear shop). She got 3 talk options with 1st req. to open two others. Sex also opens after seeing 1st talk option for the first time.\n");
-			outputText("-New necklaces (by Liadri): Blue / Green / Purple / Red / yellow Winter scarf - all buyable in Yu shop. Cost 800 gems. Increase PC resistance to cold by 20%, protect against frozen solid. This item also increase cold damage from spell and effect by 20%.\n");
+			outputText("-New necklaces (by Liadri): Blue / Green / Purple / Red / Yellow Winter scarf - all buyable in Yu shop. Cost 800 gems. Increase PC resistance to cold by 20%, protect against frozen solid. This item also increase cold damage from spell and effect by 20%.\n");
 			outputText("-New underwears (by Liadri): Fur bikini top, Fur panty, Fur loincloth - buyable in Yu shop. Cost 600 gems each. Armor +1, Sexiness +1 and increase ice resistance by 10%.\n");
 			outputText("-New melee weapon (by Liadri): Northerner ice picks - buyable in Yu shop. Cost 800 gemes. Base atk is 5. It's small dual weapon and it ignores 100% of enemy armor.\n");
 			outputText("-Two new events in Glacial Rift: finding cache of gems or harvestable pile of stones. Req. to find Ornate Chest before they start to proc during exploration.\n");
-			outputText("-Fiercy wandering mysterious veiled merchant can be found during general exploration that sells some TF items or other stuff. Depending on rarity of item it may cost more than it default selling price. It can sometimes req. to fight first before PC can browse it shop.\n");
+			outputText("-Mysterious veiled traveling merchant can be found during general exploration that sells some TF items or other stuff. Depending on rarity of item it may cost more than it default selling price. It req. to fight before PC can browse it shop. Could also come to camp to provide more stable source of tf items it sell. Still could try to force PC into fight beofre letting check goods.\n");
 			outputText("-Stats page got a minor revamp been split into 4 parts.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-Fixed bugs: Traditional Mage perks not affecting white/black spellpower as planned, moving Tamani to Soul Sense removing her daughters enc before they move to SS menu too, mixed up texts for Jabberwocky post fight scenes, wrong set tone limits in few scenes/items effects\n\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-Aiko have been ported from Revamp with all her stuff and her half-sister Yamata fight. Due to minor diff between mods both npc's stats been adjusted a bit up. To meet Aiko PC must be above lvl 35.\n");
+			outputText("-Semi-pernament option for high lvl explorers added on 2nd page of Explore menu (req. 54+ lvl to be able pick it) with 55+ lvl enemies that would slowly be fleshed out more and moved to final destination areas. But for now they are there in this new explore option to let high lvl PC have smth to do or to test their builds before facing Marae ;)\n");
+			outputText("-God type enemies lost 5% HP regen. Also Marae been super sneaky godess and lvl'd up in secret to lvl 105 along with boosting her combat potential.\n");
+			outputText("-Added new options in NPC's submenu in Camp Actions. Allow to enable or disable some of the NPC's encounters in wildness or/and interactions in camp. Disabled npc's would still contribute to gained ascension points. Currently there is five npc's that can turn on/off with it: Diana, Diva, Electra (raiju girl), Etna and Luna.\n");
+			outputText("-Jabberwocky racial score req. either on of it face variants or fairy wings. Without those it would drop to 0. Also removed half-jabberwocky score bonuses and now it's only jabberwocky or greater jabberwocky bonuses.\n");
+			outputText("-Scylla tf legs tf can proc for herm PC too. Couatl Oil can also proc PC tongue tf-ing into dragon one instead of snake one.\n");
+			outputText("-New Quest in Adventure Guild that req. doing at least twice Kill Feral Imps quest: Capturing Feral Imps. PC must capture 10 feral imps (with added option post fight for capturing) and bring each one back to Yang (bag that is given to bring them back can keep safetly only one feral imp inside so...PC need to visit Yang after each imp capture - but each brought imp will give PC some spirit stones ;)). To not spoil too much I would say that the end of quest will have choice to make by PC.\n");
+			outputText("-Raiju girl have new post fight scene - Headpat (written by Liadri - reward for long forgotten by nearly everyone achiev hunt event). Just not let get your PC charged up when giving her those headpats ;)\n");
+			outputText("-During Minotaur King fight Excellia can occasionaly try to disturb male/herm PC by teasing him. Also a bit adjusted mino/exce tease/lust dmg.\n");
+			outputText("-Elf Tf added to Moga Hen shop and stalls been a bit rearrange to have 3 stalls with cheapest tf items not 2.\n");
+			outputText("-Fixed bugs: Traditional Mage perks not affecting white/black spellpower as planned, moving Tamani to Soul Sense removing her daughters enc before they move to SS menu too, mixed up texts for Jabberwocky post fight scenes, wrong set tone limits in few scenes/items effects, Elemental arrows from Arcane archer will unlock also if PC have lighting/darkness spell, ");
+			outputText("Skiping learning Overlimit if stats are too low when training with Chi Chi, missing display dmg on Luna Ravange move, demonic tongue tf change req. to have snake tongue\n\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
@@ -95,7 +120,10 @@ package classes.Scenes
 			outputText("-New range weapon: Hodr's Bow - obtained by . 22 atk, costing 2200 gems, -5% accuracy, Artifact Bow, each arrow can apply blind debuff on enemy.\n");
 			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
 			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
+			outputText("-New necklace (by Ormael): Crinos Shape necklace - possible to recive as one of rewards from non-repeatable Adventure Guild quest for capturing feral imps. Cost 400 gems. Would allow PC to use Crinos Shape even without perk Job: Beast Warrior with wrath costs and boost as the one gained from picking Job: Beast Warrior. In case PC got this perk or pick it in future will boost ");
+			outputText("Crinos Shape transformation by 20% and drain additional 5 wrath per turn on top of current Crinos Shape stats boost and wraith drain.\n");
 			outputText("-New tier 9 misc lvl-up perk: Chimerical Body: Peerless Stage. Req. Chimerical Body: Semi-Peerless Stage perk and 50+ points in Internal Chimerical Disposition score. Effect: delay by another 10 points appearing effect of negative HP regeneration and +5 to max Int/Wis/Lib/Sens (scalable), +10 to max Str/Tou/Spe (scalable).\n");
+			//outputText("-New enemy perk: Phylactery. Current added to (noone atm). With this perk any true demon-type enemy can have soulforce like any being with soul even been able to soul cultivate.\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-\n");
 			outputText("-\n");
@@ -104,16 +132,8 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
+			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Siren, Cat, Cheshire cat, Unicorn, Alicorn, Bicorn, Nightmare, Sphinx, Hellcat
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

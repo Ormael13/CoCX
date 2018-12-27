@@ -1351,7 +1351,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
 		if (player.hasPerk(PerkLib.ColdMastery)) damage *= 2;
 		if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
-		if (player.necklaceName == "Blue Winter scarf") damage *= 1.2;
+		if (combat.wearingWinterScarf()) damage *= 1.2;
 		damage = Math.round(damage);
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
@@ -1487,7 +1487,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
 		if (player.hasPerk(PerkLib.ColdMastery)) damage *= 2;
 		if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
-		if (player.necklaceName == "Blue Winter scarf") damage *= 1.2;
+		if (combat.wearingWinterScarf()) damage *= 1.2;
 		damage = Math.round(damage);
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bdą dodatkowo ranione

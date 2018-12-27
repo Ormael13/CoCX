@@ -17,6 +17,10 @@ import classes.Scenes.Monsters.*;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.RyuBiDragon;
 import classes.Scenes.Places.HeXinDao;
+import classes.Scenes.Explore.KitsuneElder;
+import classes.Scenes.Explore.KitsuneAncestor;
+import classes.Scenes.Areas.DeepSea.Kraken;
+import classes.Scenes.Areas.Ocean.Scylla;
 
 //import classes.Scenes.Areas.nazwa lokacji;
 	//import classes.Scenes.Areas.nazwa lokacji;
@@ -118,10 +122,10 @@ public class Exploration extends BaseContent
 		//	if (flags[kFLAGS.DISCOVERED_DEEP_SEA] > 0 && player.canSwimUnderwater()) addButton(6, "Deep Sea", deepsea.exploreDeepSea).hint("Visit the 'almost virgin' deep sea. But beware of... krakens. \n\nRecommended level: 75" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEEP_SEA] : ""));
 		//	if (player.gills.type == 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0) addButtonDisabled(6, "Deep Sea", "(Not yet ready to be unlockable - it wil happen after few more mod builds after 0.7c) Without any way to breathe underwater you can't explore this area!");
 			//if (flags[kFLAGS.DISCOVERED_PIT] > 0) addButton(7, "Pit", CoC.instance.abyss.explorePit).hint("Visit the pit. \n\nRecommended level: 36" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_PIT] : ""));
-			
+			if (player.level >= 54) addButton(13, "HL Explore", tryDiscover2).hint("Explore to find strong and dangerous enemies.");
 			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(10, "",	//Wuxia related area - ?latająca wyspa?
 			//if (flags[kFLAGS.DISCOVERED_ABYSS] > 0) addButton(12, "Abyss", CoC.instance.abyss.exploreAbyss).hint("Visit the abyss. \n\nRecommended level: 51" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_ABYSS] : ""));
-			
+			else addButtonDisabled(13, "HL Explore", "Req. lvl 42+");
 			if (debug) addButton(4, "Debug", exploreDebug.doExploreDebug);
 			addButton(9, "Previous", goBackToPageI);
 			addButton(14, "Back", playerMenu);
@@ -693,6 +697,37 @@ public class Exploration extends BaseContent
 			}
 			player.explored++;
 			doNext(camp.returnToCampUseOneHour);
+		}
+		
+		//Temporaly place of finding enemies for high lvl PC's (55+)
+		public function tryDiscover2():void {
+			clearOutput();
+			if (rand(2) == 0) {
+				outputText("Traversing Mareth vast areas you stops near something looking like a soul cultivator cave.");
+				outputText("\n\n<b>A wild Kitsune Elder Appears.</b>");
+				startCombat(new KitsuneElder());//lvl 55
+				return;
+			}
+			else if (rand(2) == 0) {
+				outputText("Traversing Mareth vast areas you're suddenly found yourself underwater!!!");
+				outputText("\n\n<b>Aaaand....A wild Scylla Appears.</b>");
+				if (!player.canSwimUnderwater()) player.createStatusEffect(StatusEffects.UnderwaterOutOfAir,0,0,0,0);
+				startCombat(new Scylla());//lvl 70
+				return;
+			}
+			else if (rand(2) == 0) {
+				outputText("Traversing Mareth vast areas you stops near something looking like a soul cultivator cave.");
+				outputText("\n\n<b>A wild Kitsune Sage Appears.</b>");
+				startCombat(new KitsuneAncestor());//lvl 80
+				return;
+			}
+			else {
+				outputText("Traversing Mareth vast areas you're suddenly found yourself underwater!!!");
+				outputText("\n\n<b>Aaaand....A wild Kraken Appears.</b>");
+				if (!player.canSwimUnderwater()) player.createStatusEffect(StatusEffects.UnderwaterOutOfAir,0,0,0,0);
+				startCombat(new Kraken());//lvl 100 GIGANT BOSS
+				return;
+			}
 		}
 
 		public function pearldiscovery():void {

@@ -51,7 +51,8 @@ public class Mountain extends BaseContent
 						name  : "etna",
 						when  : function():Boolean {
 							return flags[kFLAGS.ETNA_FOLLOWER] < 1
-								   && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2;
+								   && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
+								   && !player.hasStatusEffect(StatusEffects.EtnaOff);
 						},
 						chance: 0.5,
 						call  : SceneLib.etnaScene.repeatYandereEnc
@@ -167,7 +168,7 @@ public class Mountain extends BaseContent
 					}, {
 						name: "electra",
 						when: function ():Boolean {
-							return flags[kFLAGS.ELECTRA_FOLLOWER] < 1;
+							return flags[kFLAGS.ELECTRA_FOLLOWER] < 1 && !player.hasStatusEffect(StatusEffects.ElectraOff);
 						},
 						chance:0.5,
 						call: function ():void {
@@ -177,7 +178,7 @@ public class Mountain extends BaseContent
 					}, {
 						name: "diva",
 						when: function():Boolean {
-							return flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && DivaScene.instance.status >= 0;
+							return flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && DivaScene.instance.status >= 0 && !player.hasStatusEffect(StatusEffects.DivaOff);
 						},
 						call: DivaScene.encounter
 					},{

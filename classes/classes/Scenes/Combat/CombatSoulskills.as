@@ -425,7 +425,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		damage += scalingBonusWisdom();
 		//other bonuses
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
-		if (player.necklaceName == "Blue Winter scarf") damage *= 1.2;
+		if (combat.wearingWinterScarf()) damage *= 1.2;
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {

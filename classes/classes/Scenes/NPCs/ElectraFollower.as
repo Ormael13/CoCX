@@ -112,6 +112,7 @@ public function PlayerSexElectra():void
 	menu();
 	if (player.lust >= 33) addButton(0, "Yea Sure", ElectraSeXYes);
 	addButton(1, "No Way", ElectraSeXNo);
+	addButton(2, "Headpat", ElectraSeXHeadpat);
 }
 public function ElectraSeXYes():void
 {
@@ -119,7 +120,7 @@ public function ElectraSeXYes():void
 	if (flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 3) outputText("Electra");
 	else outputText("The raiju");
 	outputText(" surprises you by jumping on top of you before you can even finish your sentence.\n\n");
-	outputText("\"<i>Lets not waste any time then!</i>\"");
+	outputText("\"<i>Let's not waste any time then!</i>\"");
 	outputText("She swiftly takes a hold of your clothes and start methodically stripping you. If you weren't any wiser you would think she is actually turning the table on you but actually she is just so excited to finally get laid that she no longer holds any of her inhibitions on.\n\n");
 	if (player.hasCock()) ElectraSeXYesM();
 	else ElectraSeXYesF();
@@ -128,7 +129,7 @@ public function ElectraSeXYesM():void
 {
 	outputText("\"<i>Ahhh gimme that lighting rod please put it in!</i>\"");
 	outputText("She begins flaunting her pussy like a target. Well if she wants it that badly you won’t be the one to disappoint her. You grab her hips and slowly but surely pull her down your [cock]. The girl scream in joy as you finally hit the bottom of her pussy and start rocking up and down without you having to ask anything. There's something odd about this.\n\n");
-	outputText("\"<i>Ahhhn were plugged! Were plugged! I’m going to pour it all out!!!!</i>\"");
+	outputText("\"<i>Ahhhn we're plugged! We're plugged! I’m going to pour it all out!!!!</i>\"");
 	if (flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] == 2 || flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 4) outputText("Well here you go again... You get ready to get jolted as");
 	if (flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] == 1 || flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] == 3) {
 		outputText("Wait what?! Before you can ask what she means by that");
@@ -156,7 +157,7 @@ public function ElectraSeXYesM():void
 public function ElectraSeXYesF():void
 {
 	outputText("Before you can issue a protest, she begins to grind her pussy against your own making you moan. Her nice E sized teats are bouncing as something not unlike static electricity begins to form between you. No wait it totally is electricity! You are immediately zapped, your pussy gushing with fluids and your brain going mushy as your pleasure buzzers are all set alight by the raiju’s electric current. ");
-	outputText("She seems to be riding the orgasm of her life as her own pussy juices are melding with yours electricity dancing in the air around you two. You cum and cum again at such a speed you have no idea how you still manage to retain some semblance of consciousness from the mind numbing pleasure in your switch. Both of you finally lose consciousness as the electric flow ebbs your tongues loling out from the intense pleasure.\n\n");
+	outputText("She seems to be riding the orgasm of her life as her own pussy juices are melding with yours, electricity dancing in the air around you two. You cum and cum again at such a speed you have no idea how you still manage to retain some semblance of consciousness from the mind numbing pleasure in your switch. Both of you finally lose consciousness as the electric flow ebbs your tongues loling out from the intense pleasure.\n\n");
 	outputText("You wake up with the raiju next to you. The ground is still a massive pool of girl cum, but for some reason you feel satisfied.\n\n");
 	outputText("\"<i>Good morning, I was wondering when you would wake up. I must thank you, you helped me evacuate all the stockpiled energy I had.</i>\"");
 	outputText("She slowly part away from your pussy with a satisfied smile. Where's the crazy girl from before?\n\n");
@@ -167,6 +168,32 @@ public function ElectraSeXYesF():void
 		player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
 	}
 	else player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
+	electraAffection(10);
+	player.orgasm();
+	monster.createPerk(PerkLib.NoGemsLost, 0, 0, 0, 0);
+	inventory.takeItem(consumables.VOLTTOP, cleanupAfterCombat);
+}
+public function ElectraSeXHeadpat():void
+{
+	outputText("For reason unknown you feel like headpating ");
+	if (flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 3) outputText("Electra");
+	else outputText("the raiju");
+	outputText(". At first she looks at you, somewhat confused, before a dopey smile start breaking out on her face.\n\n");
+	outputText("You proceed to gently rub her hairs then her ears, something not unlike static electricity slowly charging beneath your fingers. As the static transfer from her body to yours it begins focusing down between your legs, your");
+	if (player.hasCock()) {
+		outputText(" cock fully reaching its full erect state within no time");
+		if (player.hasVagina()) outputText(", as your pussy gushes with tingling pleasure anticipation");
+	}
+	if (player.hasVagina()) outputText(" pussy gushing with tingling pleasure and anticipation");
+	outputText(". The raiju seems to be deeply enjoying this gentle treatment her pussy discharging small leaks of plasma as her body evacuate its static through your caring hand. Only as her charge is fully transferred do you reach your own orgasm your cum mixing up with the plasma already on the ground.\n\n");
+	outputText("The raiju eye seems clearer now, more focused and she stutter an apology as you slowly remove your still tingling hand.\n\n");
+	outputText("\"<i>Thank you so much for that I really need it. I have to go now but here take this jewel and these gems for your trouble. I hope we see each others again.</i>\"");
+	outputText("She hand you over a yellow jewel and a good amount of gems before leaving. As for you, your entire body still feels sensitive and aches for touch from the slowly receding voltage. Something however tells you that indulging yourself would be a bad idea.\n\n");
+	if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+		player.removeStatusEffect(StatusEffects.RaijuLightningStatus);
+		player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
+	}
+	else player.createStatusEffect(StatusEffects.RaijuLightningStatus, 169, 0, 0, 0);
 	electraAffection(10);
 	player.orgasm();
 	monster.createPerk(PerkLib.NoGemsLost, 0, 0, 0, 0);

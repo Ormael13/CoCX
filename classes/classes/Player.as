@@ -1451,6 +1451,9 @@ use namespace CoC;
 				if (flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
 					dynStats("lus", int(damage / 2));
 				}
+				if (flags[kFLAGS.YAMATA_MASOCHIST] > 1 && flags[kFLAGS.AIKO_BOSS_COMPLETE] < 1) {
+					dynStats("lus", int(damage / 8));
+				}
 				//Prevent negatives
 				if (HP<=0){
 					HP = 0;
@@ -2264,19 +2267,15 @@ use namespace CoC;
 					}
 				}
 			}
-			if (jabberwockyScore() >= 4)
+			if (jabberwockyScore() >= 10)
 			{
 				if (jabberwockyScore() >= 20) {
 					if (isTaur()) race = " greater jabberwocky-taur";
 					else race = "greater jabberwocky";
 				}
-				else if (jabberwockyScore() >= 10) {
+				else {
 					if (isTaur()) race = "jabberwocky-taur";
 					else race = "jabberwocky";
-				}
-				else {
-					if (isTaur()) race = "half-jabberwocky-taur";
-					else race = "half-jabberwocky";
 				}
 			}
 			if (raccoonScore() >= 4)
@@ -4263,6 +4262,7 @@ use namespace CoC;
 				jabberwockyCounter++;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && jabberwockyCounter >= 8)
 				jabberwockyCounter += 1;
+			if (faceType != Face.JABBERWOCKY || faceType != Face.BUCKTOOTH || wings.type != Wings.FEY_DRAGON_WINGS) jabberwockyCounter = 0;
 			if (isGargoyle()) jabberwockyCounter = 0;
 			End("Player","racialScore");
 			return jabberwockyCounter;
@@ -4339,6 +4339,8 @@ use namespace CoC;
 				nagaCounter += 2;
 			if (tongue.type == Tongue.SNAKE)
 				nagaCounter++;
+			if (tongue.type == Tongue.DRACONIC)
+				nagaCounter--;
 			if (faceType == Face.SNAKE_FANGS)
 				nagaCounter++;
 			if (arms.type == Arms.HUMAN)
@@ -4377,6 +4379,8 @@ use namespace CoC;
 				gorgonCounter += 2;
 			if (tongue.type == Tongue.SNAKE)
 				gorgonCounter++;
+			if (tongue.type == Tongue.DRACONIC)
+				gorgonCounter--;
 			if (faceType == Face.SNAKE_FANGS)
 				gorgonCounter++;
 			if (arms.type == Arms.HUMAN)
@@ -4427,6 +4431,8 @@ use namespace CoC;
 				vouivreCounter += 2;
 			if (tongue.type == Tongue.SNAKE)
 				vouivreCounter++;
+			if (tongue.type == Tongue.DRACONIC)
+				vouivreCounter--;
 			if (faceType == Face.SNAKE_FANGS)
 				vouivreCounter++;
 			if (arms.type == Arms.DRAGON)
@@ -4485,7 +4491,7 @@ use namespace CoC;
 			var couatlCounter:Number = 0;
 			if (isNaga())
 				couatlCounter += 2;
-			if (tongue.type == Tongue.SNAKE)
+			if (tongue.type == Tongue.SNAKE || tongue.type == Tongue.DRACONIC)
 				couatlCounter++;
 			if (faceType == Face.SNAKE_FANGS)
 				couatlCounter++;
@@ -6120,6 +6126,12 @@ use namespace CoC;
 			if (flags[kFLAGS.MEANINGLESS_CORRUPTION] > 0) temp += 100;
 			return temp;
 		}
+		public function corAdjustedUp():Number {
+			return boundFloat(0, cor + corruptionTolerance(), 100);
+		}
+		public function corAdjustedDown():Number {
+			return boundFloat(0, cor - corruptionTolerance(), 100);
+		}
 		
 		public function newGamePlusMod():int {
 			var temp:int = flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
@@ -6763,7 +6775,7 @@ use namespace CoC;
 				maxWis += (15 * newGamePlusMod);
 				}
 			}//+60/50-60
-			if (jabberwockyScore() >= 4) {
+			if (jabberwockyScore() >= 10) {
 				if (jabberwockyScore() >= 20) {
 				maxStr += (95 * newGamePlusMod);
 				maxTou += (95 * newGamePlusMod);
@@ -6772,20 +6784,13 @@ use namespace CoC;
 				maxWis -= (50 * newGamePlusMod);
 				maxLib += (20 * newGamePlusMod);
 				}
-				else if (jabberwockyScore() >= 10 && jabberwockyScore() < 20) {
+				else {
 				maxStr += (50 * newGamePlusMod);
 				maxTou += (40 * newGamePlusMod);
 				maxSpe += (50 * newGamePlusMod);
 				maxInt += (20 * newGamePlusMod);
 				maxWis -= (20 * newGamePlusMod);
 				maxLib += (10 * newGamePlusMod);
-				}
-				else {
-				maxStr += (15 * newGamePlusMod);
-				maxTou += (15 * newGamePlusMod);
-				maxSpe += (30 * newGamePlusMod);
-				maxInt += (15 * newGamePlusMod);
-				maxWis -= (15 * newGamePlusMod);
 				}
 			}
 			if (dogScore() >= 4) {

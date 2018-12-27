@@ -25,56 +25,59 @@ import classes.internals.Utils;
 		public function DinahIntro1():void {
 			clearOutput();//non-camp intro
 			//Camp offer!
-			if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] >= 3) {
+			if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] >= 3 && flags[kFLAGS.DINAH_LVL_UP] < 0.5) {
 				flags[kFLAGS.DINAH_LVL_UP] = 0.5;
-				outputText("You once again spy the mysterious veiled merchant in the distance. You fast turning around to walk like nothing happened least it would decide to entertain itself with you fighting when the air before you tremble for a moment and you're greet face to face well face to hood covered face with that excentric merchant.");
-				outputText("\"<i>You know, I think I might have much more fun been close to you, like you know been hanging around in your camp, in case you need my goods or I need someone to fight with. What do you say?</i>\" asks the merchant.\n\n(Move mysterious veiled merchant into your camp?)");
+				outputText("You, once again, spot the mysterious veiled merchant in the distance. You turn around curtly to walk like nothing happened, lest they would decide to entertain themself with you fighting again.  Then the air trembles for a moment; and you're greeted face to face, well, face to hood-covered face with that eccentric merchant.\n\n");
+				outputText("\"<i>You know, I think I might have much more fun being close to you.  Like, you know, hanging around in your camp, in case you need my goods. Or if I need someone to fight with. What do you say?</i>\" asks the merchant.\n\n(Move mysterious veiled merchant into your camp?)");
 				doYesNo(DinahMoveToCamp, DinahMoveDecline);
 				return;
 			}
 			if (flags[kFLAGS.DINAH_LVL_UP] >= 0.25) {
-				outputText("You spy the mysterious veiled merchant in the distance. While reconsidering if you should just turn back it notice you and already starts to making the same seal you seen before. Looks like you once again become it 'entertainent', but at least it would let you buy something nice as long you got gems for it, right?");
+				outputText("You spot the mysterious veiled merchant in the distance. While reconsidering if you should just turn back; they notice you, and start to cast the same magic seal you saw before. Looks like you, once again, become their 'entertainent', but at least they will let you buy something nice as long you have the gems for it, right?");
 			}
 			else {
-				outputText("As you travel, you see another person on the road.  It is tethered to a small cart.  It is dressed in long cape with hood covering it body from head to feet to the point you can't be sure if it male or female.  Then it notice your presence and stops it cart.\n\n");
-				outputText("\"<i>Greetings, traveler! You come at good moment since my boredom was getting too uncomfortable. IF you entertain me enough I would let you check my items. And buy IF any of them catch your attention.</i>\" Even it voice is neither male or female.\n\n");
-				outputText("And when you thinking over it words it rise one of it hands to make some sort of seal in air. Almost instantly from seal jumps out something that almost instantly pounce toward you. Yes, now it's cleary what that person meant by entertaining it so you preparing your [weapon].");
+				outputText("As you travel; you see another person on the road, they are tethered to a small cart.  The figure is dressed in long cape with a hood covering their body from head to feet. You can't be sure if they're male or female.  Then they notice your presence and stops the cart suddenly.\n\n");
+				outputText("\"<i>Greetings, traveler! You come at a good moment, my boredom was getting too uncomfortable. Maybe, if you entertain me enough, I might let you browse my wares. You will be able to PURCHASE them if any of them catch your attention.</i>\" Even it voice is neither male or female.\n\n");
+				outputText("When you thinking over, they mutter some words and raise one of their hands to make some sort of magical seal in the air.  Almost instantly; something from the magical seal jumps out.  Something that almost instantly pounces toward you. Yes, now it's cleary what that person meant by entertaining them, so you prepare your [weapon].");
 				flags[kFLAGS.DINAH_LVL_UP] = 0.25;
+				flags[kFLAGS.DINAH_CUP_SIZE] = 1;
+				flags[kFLAGS.DINAH_HIPS_ASS_SIZE] = 1;
 			}
 			startCombat(new Dinah());
 		}
 		private function DinahMoveToCamp():void {
 			clearOutput();
-			outputText("It smiles happily back at you, showing for the first time a tiny bit of skin, which is somewhat disturbing wide smile under it hood, and begins packing up it equipment.  It mutters over it shoulder, \"<i>That will be so much fun. I just could feel it in my tails. You can head on back and I'll see you within the hour, maybe bit sooner or later.  Oh my, yes.</i>\" ");
-			outputText("It stops for a moment as if recalling something and then it pull off it hood revealing head covered with fiery black and purple hair parted by cat ears and twin pair of small horns. Looking at you with her literlay burning eyes she only utter one word, with clearly female voice now, before disapearing, \"<i>Dinah.</i>\" ");
+			outputText("They smile happily back at you, showing for the first time a tiny bit of skin. The wide smile is somewhat disturbing under their hood, and they begin packing up their equipment.  They mutter over their shoulder, \"<i>This will be so much fun. I could just feel the excitement in my tails. You can head on back and I'll see you within the hour, maybe a bit sooner or a bit later.  Oh my, yeah.</i>\" ");
+			outputText(" They stop for a moment as if recalling something and then they pull off their hood, revealing a head covered with fiery black and purple hair parted by cat ears, and  two pairs of small horns. Looking at you, with her literally burning eyes, she only utters one word, with a clearly female voice now, before disapearing, \"<i>Dinah.</i>\"");
+			outputText("\n\n(<b>Dinah has been added to the Followers menu!</b>)\n\n");
 			flags[kFLAGS.DINAH_LVL_UP] = 1;
 			flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.DINAH_CUP_SIZE] = 1;
-			flags[kFLAGS.DINAH_HIPS_ASS_SIZE] = 1;
+			flags[kFLAGS.DINAH_AFFECTION] = 0;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		private function DinahMoveDecline():void {
 			clearOutput();
-			outputText("It wheezes out a sigh.\n\n\"<i>So much of letdown,</i>\" it mutters as it packs up it goods to travel toward the horizon.");
+			outputText("They wheeze out an exaggerated sigh.\n\n\"<i>So much of letdown.</i>\" they mutter, as they pack up their goods to travel toward the horizon.");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function DinahIntro2():void {
 			clearOutput();//camp intro
-			outputText("What will be the choice this time? (totaly WIP text) ");
+			outputText("\"<i>Oh, Great Lady Godiva, tell us your will!</i>\" With religious zeal, Dinah pulls a coin out of nowhere and throws it into the air. But before it can fall on the ground, it vanishes. ");
 			if (rand(4) > 0 && flags[kFLAGS.DINAH_AFFECTION] < 90) {
-				outputText("Get Jinx'd.");
+				outputText("\"<i>The Coin Told Me To <b>Cuddle</b> You.</i>\" her smile becomes even wider. You've got a <i>very</i> bad feeling about this. It looks like there is no other choice. You've gotta to beat some sense into her before getting back to buisness.");
 				startCombat(new Dinah());
 			}
 			else {
-				outputText("Get Minx'd.");
+				outputText("\"<i>Seems the odds where in your favor this time.</i>\" she remarks with a somewhat disappointed voice.");
 				doNext(DinahMainMenu);
 			}
 		}
 		public function DinahMainMenu():void {
 			var atCamp:Boolean = (flags[kFLAGS.DINAH_LVL_UP] > 0.5);
+			var weather_choice:Array = ["sunny", "rainy", "snowy", "windy", "dankest", "reeking with undistilled lust"];
 			clearOutput();
-			if (atCamp) outputText("WIP.");
-			else outputText("WIP.");
+			if (atCamp) outputText("\"<i>What can I do for you, [name], this " + randomChoice(weather_choice) + " day?</i>\" Dinha asks you with a disturbingly wide and briliant smile on her face.");
+			else outputText("\"<i>Will you gaze at me the whole day or will you buy something?</i>\" They grumble to themselves.");
 			menu();
 			addButton(2, "Shop", DinahShopMainMenu);
 			if (atCamp) {
@@ -88,41 +91,61 @@ import classes.internals.Utils;
 				addButton(14, "Back", camp.campFollowers);
 			}
 			else {
-				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] >= 3) addButton(13, "Inv2Camp", DinahMoveToCamp);
+				if (flags[kFLAGS.DINAH_LVL_UP] >= 0.5) addButton(13, "Inv2Camp", DinahMoveToCamp);
 				addButton(14, "Leave", camp.returnToCampUseOneHour);
 			}
 		}
 		
 		public function DinahAppearance():void {
 			clearOutput();
-			outputText("Dinah is seven foot and eight inches tall cat chimera of all known cat races in this realm. (WIP)");
-			outputText("");//" + Appearance.breastCup(flags[kFLAGS.DINAH_CUP_SIZE]) + "
-			menu();
+			outputText("Dinah is a 7' 8\" tall cat chimera of seemly all cat races in this realm. Burning eyes like those of hellcats and, fiery hair with colors like those of cheshire cats, parted by twin pair of small horns. Behind her slowly moves two blazing tails, and two long tentacles similar to that of a calamari. Her four arms completes her chimeric visage.");
+			outputText("");//She has " + amilyHips() + " and a " + amilyButt() + ". She has a pair of " + amilyTits() + " on her chest. They have " + flags[kFLAGS.AMILY_NIPPLE_LENGTH] + "-inch nipples at their tips and must be at least " + Appearance.breastCup(flags[kFLAGS.AMILY_CUP_SIZE]) + "s.	" + Appearance.breastCup(flags[kFLAGS.DINAH_CUP_SIZE]) + "
+			menu();//very long, flowing locks of - between shouled length and ass length - hair desc
 			addButton(14, "Back", DinahMainMenu);
 		}
 		
 		public function DinahSparring():void {
 			clearOutput();
-			outputText("WIP.");
+			outputText("\"<i>Oh, you sensed my slowly building boredom? Not gonna say no to some entertaiment!</i>\" she makes few strenches and assumes a combat pose. \"<i>Let's <b>play</b> [name]!</i>\".");
 			player.createStatusEffect(StatusEffects.CampSparingDinah,0,0,0,0);
 			startCombat(new Dinah());
 		}
 		public function DinahWonSparring():void {
 			clearOutput();
-			outputText("WIP.");
-			menu();
-			addButton(14, "Back", camp.returnToCampUseOneHour);
+			outputText("\"<i>Point for the House Griff... Err I mean for the team of Dinah and Lady Godiva!</i>\" she giggles while doing a short victory dance.");
+			cleanupAfterCombat();
 		}
 		public function DinahLostSparring():void {
 			clearOutput();
-			outputText("WIP.");
-			menu();
-			addButton(14, "Back", camp.returnToCampUseOneHour);
+			outputText("\"<i>Was that your will, Lady Godiva?</i>\" she mumbles under her breath.");
+			/*if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
+				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] >= 1) flags[kFLAGS.DINAH_DEFEATS_COUNTER]++;
+				else flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 1;
+				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 1 && flags[kFLAGS.DINAH_LVL_UP] == 1) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 6);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 6, 0);
+					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.DINAH_LVL_UP] = 2;
+				}
+				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 2 && flags[kFLAGS.DINAH_LVL_UP] == 2) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 12);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 12, 0);
+					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.DINAH_LVL_UP] = 3;
+				}
+				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 3 && flags[kFLAGS.DINAH_LVL_UP] == 3) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 18);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 18, 0);
+					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.DINAH_LVL_UP] = 4;
+				}
+			}*/
+			cleanupAfterCombat();
 		}
 		
 		public function DinahShopMainMenu():void {
 			clearOutput();
-			outputText("You begin to browse veiled merchant shop inventory.");
+			outputText("You begin to browse "+(flags[kFLAGS.DINAH_LVL_UP] > 0.5 ?"Dinah":"veiled merchant")+" shop inventory.");
 			menu();
 			addButton(0, consumables.AGILI_E.shortName, buyItem1, 0).hint("Buy an agility elixir.");
 			addButton(1, consumables.W_FRUIT.shortName, buyItem1, 1).hint("Buy a piece of whisker-fruit.");
@@ -186,8 +209,6 @@ import classes.internals.Utils;
 		public function catChimeraTransact1(itype:ItemType):void {
 			clearOutput();
 			player.gems -= itype.value;
-			//outputText("You bring your purchase to an icy counter and Yu check up her prices list before exchanging it for your gems.\n\n");
-			//outputText("\"<i>Thanks for patronage.</i>\"\n\n");
 			statScreenRefresh();
 			inventory.takeItem(itype, DinahShopMainMenu);
 		}

@@ -111,6 +111,8 @@ public class SceneLib {
 
     public static var exgartuan:Exgartuan = new Exgartuan();
 
+    public static var galiaFollower:GaliaFollower = new GaliaFollower();
+
     public static var helFollower:HelFollower = new HelFollower();
 
     public static var helScene:HelScene = new HelScene();
@@ -213,7 +215,9 @@ public class SceneLib {
 
     public static var crafting:Crafting = new Crafting();
 
-    public static var glacialYuShop:YuWinterGearShop = new YuWinterGearShop();
+    public static var aikoScene:AikoScene = new AikoScene();
+	
+	public static var glacialYuShop:YuWinterGearShop = new YuWinterGearShop();
 
     public function SceneLib() {
     }

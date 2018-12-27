@@ -2338,9 +2338,8 @@ public function RacialScores():void {
 		else outputText((40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (50 * (1 + player.newGamePlusMod())));
 		outputText(" max Spe, +" + (20 * (1 + player.newGamePlusMod())) + " max Int, -" + (20 * (1 + player.newGamePlusMod())) + " max Wis, +" + (10 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
 	}
-	else if (player.jabberwockyScore() >= 4 && player.jabberwockyScore() < 10) outputText("\n<font color=\"#0000a0\">Half-Jabberwocky: " + player.jabberwockyScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Str, +" + (15 * (1 + player.newGamePlusMod())) + " max Tou, +" + (30 * (1 + player.newGamePlusMod())) + " max Spe, +" + (15 * (1 + player.newGamePlusMod())) + " max Int, -" + (15 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
-	else if (player.jabberwockyScore() >= 1 && player.jabberwockyScore() < 4) outputText("\n<font color=\"#008000\">Half-Jabberwocky: " + player.jabberwockyScore() + "</font>");
-	else if (player.jabberwockyScore() < 1) outputText("\n<font color=\"#ff0000\">Half-Jabberwocky: 0</font>");
+	else if (player.jabberwockyScore() >= 1 && player.jabberwockyScore() < 10) outputText("\n<font color=\"#008000\">Jabberwocky: " + player.jabberwockyScore() + "</font>");
+	else if (player.jabberwockyScore() < 1) outputText("\n<font color=\"#ff0000\">Jabberwocky: 0</font>");
 	//Kangaroo
 	if (player.kangaScore() >= 4) outputText("\n<font color=\"#0000a0\">Kangaroo-morph: " + player.kangaScore() + " (+" + (5 * (1 + player.newGamePlusMod())) + " max Tou, +" + (15 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
 	else if (player.kangaScore() >= 1 && player.kangaScore() < 4) outputText("\n<font color=\"#008000\">Kangaroo-morph: " + player.kangaScore() + "</font>");

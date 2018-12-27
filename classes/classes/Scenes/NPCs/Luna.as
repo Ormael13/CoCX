@@ -41,9 +41,11 @@ package classes.Scenes.NPCs
 		
 		public function usingRavage():void {
 			outputText("Luna rends you with her claws.");
-			if (flags[kFLAGS.LUNA_LVL_UP] >= 6) eBaseStrengthDamage() * 1.5;
-			else if (flags[kFLAGS.LUNA_LVL_UP] >= 3) eBaseStrengthDamage() * 1.2;
-			else eBaseStrengthDamage();
+			var RavageDmg:Number = eBaseStrengthDamage();
+			if (flags[kFLAGS.LUNA_LVL_UP] >= 3) RavageDmg += eBaseStrengthDamage() * 0.2;
+			if (flags[kFLAGS.LUNA_LVL_UP] >= 6) RavageDmg += eBaseStrengthDamage() * 0.3;
+			RavageDmg = Math.round(RavageDmg);
+			player.takePhysDamage(RavageDmg);
 		}
 		
 		override protected function performCombatAction():void {

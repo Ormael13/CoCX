@@ -949,7 +949,7 @@ public function followersCount():Number {
 	if (flags[kFLAGS.FLOWER_LEVEL] >= 4) counter++;
 	if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) counter++;
     if (flags[kFLAGS.SIDONIE_FOLLOWER] >= 1) counter++;
-    if (flags[kFLAGS.LUNA_FOLLOWER] >= 4) counter++;
+    if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
 	for each (var npc:XXCNPC in _campFollowers){
         if(npc.isCompanion(XXCNPC.FOLLOWER)){counter++;}
     }
@@ -962,8 +962,8 @@ public function slavesCount():Number {
 	if (vapulaSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) counter++;
 	if (campCorruptJojo() && flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 0) counter++;
 	if (amilyScene.amilyFollower() && amilyScene.amilyCorrupt() && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) counter++;
-	//Bimbo sophie
-	if (bimboSophie() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
+	if (bimboSophie() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;//Bimbo sophie
+	if (flags[kFLAGS.GALIA_LVL_UP] >= 1) counter++;
 	if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= 5) counter++;
 	if (ceraphIsFollower()) counter++;
 	if (milkSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) counter++;
@@ -978,8 +978,8 @@ public function loversCount():Number {
 	if (arianScene.arianFollower()) counter++;
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) counter++;
 	if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
-	if (flags[kFLAGS.DIANA_FOLLOWER] > 5) counter++;
-	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
+	if (flags[kFLAGS.DIANA_FOLLOWER] > 5 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
+	if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) counter++;
 	if (followerHel()) counter++;
 	//Izma!
 	if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
@@ -1002,14 +1002,15 @@ public function loversHotBathCount():Number {
 	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) counter++;
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) counter++;
 	if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
-	if (flags[kFLAGS.DIANA_FOLLOWER] > 5) counter++;
-	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
-	if (flags[kFLAGS.LUNA_FOLLOWER] >= 4) counter++;
+	if (flags[kFLAGS.DIANA_FOLLOWER] > 5 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
+	if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) counter++;
+	if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
 	if (followerHel()) counter++;
 	if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
 	if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
 	if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
-	if (flags[kFLAGS.DINAH_LVL_UP] >= 1) counter++;
+	//if (flags[kFLAGS.DINAH_LVL_UP] >= 1) counter++;
+	//if (flags[kFLAGS.GALIA_LVL_UP] >= 1) counter++;
 	if (player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) counter++;
 	if (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) counter++;
 	if (followerKiha()) counter++;
@@ -1025,11 +1026,12 @@ public function sparableCampMembersCount():Number {
 	if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1) counter++;
 	if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
 	if (flags[kFLAGS.DINAH_LVL_UP] >= 1) counter++;
+	//if (flags[kFLAGS.GALIA_LVL_UP] >= 1) counter++;
 	if (helspawnFollower()) counter++;
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) counter++;
 	if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
-	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) counter++;
-	if (flags[kFLAGS.LUNA_FOLLOWER] > 10) counter++;
+	if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) counter++;
+	if (flags[kFLAGS.LUNA_FOLLOWER] > 10 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
 	if (followerHel()) counter++;
 	if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
 	if (followerKiha()) counter++;
@@ -1107,12 +1109,14 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		else buttons.add( "Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu2).disableIf(player.statusEffectv2(StatusEffects.CampSparingNpcsTimers2) > 0,"Training.");
 	}
 	//Diana
-	if (flags[kFLAGS.DIANA_FOLLOWER] > 5) {
+	if (flags[kFLAGS.DIANA_FOLLOWER] > 5 && !player.hasStatusEffect(StatusEffects.DianaOff)) {
 		outputText("Diana is resting next to her many medical tools and medicines.\n\n");
 		buttons.add("Diana", SceneLib.dianaScene.mainCampMenu).disableIf(player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) > 0,"Training.");
 	}
+	//Electra
+	
 	//Etna
-	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) {
+	if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) {
 		outputText("Etna is resting lazily on a rug in a very cat-like manner. She’s looking at you always with this adorable expression of hers, her tail wagging expectantly at your approach.\n\n");
 		if (player.statusEffectv1(StatusEffects.CampLunaMishaps2) > 0) buttons.add( "Etna", SceneLib.etnaScene.etnaCampMenu2).disableIf(player.statusEffectv1(StatusEffects.CampLunaMishaps2) > 0,"Sleeping.");
 		else buttons.add( "Etna", SceneLib.etnaScene.etnaCampMenu2).disableIf(player.statusEffectv4(StatusEffects.CampSparingNpcsTimers1) > 0,"Training.");
@@ -1397,6 +1401,11 @@ public function campSlavesMenu(descOnly:Boolean = false):void {
 		outputText("\n\n");
 		buttons.add( "Vapula", vapula.callSlaveVapula);
 	}
+	//Galia
+	if (flags[kFLAGS.GALIA_LVL_UP] >= 1) {
+		if (flags[kFLAGS.GALIA_AFFECTION] < 10) outputText("Near the camp edge nearly next to Evangeline bedroll sits a large wooden cage for keeping brought back from Adventure Guild female imp. Despite been one of those more feral she most of the time spend sitting monitionlessly and gazing into the horizon.\n\n");
+		else outputText("Nothing to see here yet.\n\n");
+	}
 	//Patchouli
 	if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= 5) {
 		if (flags[kFLAGS.PATCHOULI_FOLLOWER] == 5) outputText("Patchouli is still tied to a tree. Even incapacitated in this way, he keeps grinning at you, as if taunting you.\n\n");
@@ -1615,7 +1624,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 		buttons.add( "Sidonie", SceneLib.sidonieFollower.mainSidonieMenu).hint("Visit Sidonie.");
 	}
 	//Luna
-	if (flags[kFLAGS.LUNA_FOLLOWER] >= 4) {
+	if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) {
 		outputText("Luna wanders around the camp, doing her chores as usual.");
 		if (flags[kFLAGS.LUNA_JEALOUSY] >= 50) outputText(" She looks at you from time to time, as if expecting you to notice her.");
 		outputText("\n\n");
@@ -1658,7 +1667,7 @@ private function campActions():void {
 	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2) addButton(10, "Ward", MagicWardMenu).hint("Activate or Deactivate Magic Ward around camp.");
 	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) addButton(11, "Kitsune Shrine", campScenes.KitsuneShrine).hint("Meditate at camp Kitsune Shrine.");
 	if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(12, "Hot Spring", campScenes.HotSpring).hint("Visit Hot Spring.");
-	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(13, "NPC's Training", SparrableNPCsMenu);
+	addButton(13, "NPC's", SparrableNPCsMenu);
 	addButton(14, "Back", playerMenu);
 }
 
@@ -1701,13 +1710,27 @@ private function MagicWardMenu():void {
 
 private function SparrableNPCsMenu():void {
 	clearOutput();
-	outputText("Placeholder text about deciding if sparrable npc's in camp should train or relax (train mean rising in lvl after enough time loosing to PC in sparrings).");
-	outputText("\n\nPlaceholder text about current mode camp combat NPC's are in: ");
-	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) outputText("Training Mode");
-	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) outputText("Relax Mode");
+	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
+		outputText("Placeholder text about deciding if sparrable npc's in camp should train or relax (train mean rising in lvl after enough time loosing to PC in sparrings).");
+		outputText("\n\nPlaceholder text about current mode camp combat NPC's are in: ");
+		if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) outputText("Training Mode\n");
+		if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) outputText("Relax Mode\n");
+	}
+	if (player.hasStatusEffect(StatusEffects.DianaOff)) outputText("\nDiana: <font color=\"#800000\"><b>Disabled</b></font>");
+	if (player.hasStatusEffect(StatusEffects.DivaOff)) outputText("\nDiva: <font color=\"#800000\"><b>Disabled</b></font>");
+	if (player.hasStatusEffect(StatusEffects.ElectraOff)) outputText("\nElectra: <font color=\"#800000\"><b>Disabled</b></font>");
+	if (player.hasStatusEffect(StatusEffects.EtnaOff)) outputText("\nEtna: <font color=\"#800000\"><b>Disabled</b></font>");
+	if (player.hasStatusEffect(StatusEffects.LunaOff)) outputText("\nLuna: <font color=\"#800000\"><b>Disabled</b></font>");
 	menu();
-	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) addButton(0, "Train", NPCsTrain);
-	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) addButton(1, "Relax", NPCsRelax);
+	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
+		if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) addButton(10, "Train", NPCsTrain);
+		if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) addButton(11, "Relax", NPCsRelax);
+	}
+	addButton(0, "Diana", toggleDianaMenu).hint("Enable or Disable Diana. This will remove her from enc table and if already in camp disable access to her.");
+	addButton(1, "Diva", toggleDivaMenu).hint("Enable or Disable Diva. This will remove her from enc table and if already in camp disable access to her.");
+	addButton(2, "Electra", toggleElectraMenu).hint("Enable or Disable Electra. This will remove her from enc table and if already in camp disable access to her.");
+	addButton(3, "Etna", toggleEtnaMenu).hint("Enable or Disable Etna. This will remove her from enc table and if already in camp disable access to her.");
+	addButton(5, "Luna", toggleLunaMenu).hint("Enable or Disable Luna. This will remove her from enc table and if already in camp disable access to her.");
 	addButton(14, "Back", campActions);
 }
 private function NPCsTrain():void {
@@ -1719,6 +1742,35 @@ private function NPCsRelax():void {
 	outputText("\n\nPlaceholder text about telling NPC's to relax.");
 	flags[kFLAGS.SPARRABLE_NPCS_TRAINING] = 1;
 	doNext(SparrableNPCsMenu);
+}
+
+private function toggleDianaMenu():void {
+	if (player.hasStatusEffect(StatusEffects.DianaOff)) player.removeStatusEffect(StatusEffects.DianaOff);
+	else player.createStatusEffect(StatusEffects.DianaOff, 0, 0, 0, 0);
+	SparrableNPCsMenu();
+}
+private function toggleDivaMenu():void {
+	if (player.hasStatusEffect(StatusEffects.DivaOff)) player.removeStatusEffect(StatusEffects.DivaOff);
+	else player.createStatusEffect(StatusEffects.DivaOff, 0, 0, 0, 0);
+	SparrableNPCsMenu();
+}
+private function toggleElectraMenu():void {
+	if (player.hasStatusEffect(StatusEffects.ElectraOff)) player.removeStatusEffect(StatusEffects.ElectraOff);
+	else player.createStatusEffect(StatusEffects.ElectraOff, 0, 0, 0, 0);
+	SparrableNPCsMenu();
+}
+private function toggleEtnaMenu():void {
+	if (player.hasStatusEffect(StatusEffects.EtnaOff)) player.removeStatusEffect(StatusEffects.EtnaOff);
+	else player.createStatusEffect(StatusEffects.EtnaOff, 0, 0, 0, 0);
+	SparrableNPCsMenu();
+}
+private function toggleLunaMenu():void {
+	if (player.hasStatusEffect(StatusEffects.LunaOff)) player.removeStatusEffect(StatusEffects.LunaOff);
+	else {
+		player.createStatusEffect(StatusEffects.LunaOff, 0, 0, 0, 0);
+		flags[kFLAGS.SLEEP_WITH] == "";
+	}
+	SparrableNPCsMenu();
 }
 
 private function VisitFishery():void {
@@ -2212,7 +2264,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 			return;
 		}
 		//Full Moon
-		if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8 && flags[kFLAGS.LUNA_FOLLOWER] < 9 && flags[kFLAGS.LUNA_AFFECTION] >= 50 && flags[kFLAGS.SLEEP_WITH] == "Luna" && player.gender > 0) {
+		if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8 && flags[kFLAGS.LUNA_FOLLOWER] < 9 && flags[kFLAGS.LUNA_AFFECTION] >= 50 && flags[kFLAGS.SLEEP_WITH] == "Luna" && player.gender > 0 && !player.hasStatusEffect(StatusEffects.LunaOff)) {
 			SceneLib.lunaFollower.fullMoonEvent();
 			sleepRecovery(false);
 			return;
@@ -2582,6 +2634,7 @@ private function placesPage2():void {
 	if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] > 0) addButton(7, "Temple", templeofdivine.repeatvisitintro).hint("Visit the temple in the high mountains where Sapphire resides.");
 	if (flags[kFLAGS.YU_SHOP] == 2) addButton(8, "Winter Gear", SceneLib.glacialYuShop.YuIntro).hint("Visit the Winter gear shop.");
 	
+	if (flags[kFLAGS.AIKO_TIMES_MET] > 3) addButton(10, "Great Tree", SceneLib.aikoScene.encounterAiko).hint("Visit the Great Tree in the Deep Woods where Aiko lives.");
 //	if (flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) addButton(12, "Prison", CoC.instance.prison.prisonIntro, false, null, null, "Return to the prison and continue your life as Elly's slave.");
 	if (debug) addButton(13, "Ingnam", SceneLib.ingnam.returnToIngnam).hint("Return to Ingnam for debugging purposes. Night-time event weirdness might occur. You have been warned!");
 	addButton(4, "Previous", placesToPage1);
@@ -2946,6 +2999,11 @@ private function ascendForReal():void {
 	//Companions
 	performancePoints += companionsCount();
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 2) performancePoints++;
+	if (player.hasStatusEffect(StatusEffects.DianaOff)) performancePoints++;
+	if (player.hasStatusEffect(StatusEffects.DivaOff)) performancePoints++;
+	if (player.hasStatusEffect(StatusEffects.ElectraOff)) performancePoints++;
+	if (player.hasStatusEffect(StatusEffects.EtnaOff)) performancePoints++;
+	if (player.hasStatusEffect(StatusEffects.LunaOff)) performancePoints++;
 	//Dungeons
 	if (SceneLib.dungeons.checkFactoryClear()) performancePoints++;
 	if (SceneLib.dungeons.checkDeepCaveClear()) performancePoints += 2;
