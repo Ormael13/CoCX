@@ -79,7 +79,7 @@ import classes.internals.*;
 		{
 			if (flags[kFLAGS.FERAL_EXTRAS] == 1) {
 				this.a = "the ";
-				this.short = "imp";
+				this.short = "feral imp";
 				this.imageName = "imp";
 				this.long = "An feral imp is short, only a few feet tall.  An unkempt mane of shaggy black hair hangs from his head, parted by two short curved horns.  His eyes are solid black, save for tiny red irises which glow with evil intent.  His skin is bright red, and unencumbered by clothing or armor, save for a small loincloth at his belt, and he's extremely well-muscled.  His feet are covered by tiny wooden sandals, and his hands tipped with sharp claws.  A pair of tiny but functional wings occasionally flap from his back.";
 				this.plural = false;
@@ -101,7 +101,7 @@ import classes.internals.*;
 			}
 			if (flags[kFLAGS.FERAL_EXTRAS] == 2) {
 				this.a = "the ";
-				this.short = "imp lord";
+				this.short = "feral imp lord";
 				this.imageName = "implord";
 				this.long = "The feral imp lord has an angular face, complete with curved nose and burnt red skin typical of imps.  He has no hair on his head, leaving his cold, wrath-clouded, black eyes unobstructed.  Just above his long pointed ears are two curved bovine horns.  While still short, he's much taller then the average imp, being nearly four feet tall, and grotesque overdeveloped muscles.  A pair of powerful wings extends out from his shoulders, however, you suspect he wouldn't be able to fly for long due to his extreme bulk.  A thick coating of fur starts at his well toned hips and works its way down his powerful legs.  His legs end in a pair of oddly jointed, demonic hooves.  His demonic figure is completed by a thin tail that has an arrowhead shaped tip.\n\nThe feral imp lord, like most feral imps wear very little clothing; only a simple loincloth and satchel hang from his waist.  You also note that the imp has two barbell piercings in his nipples. The creature doesn't seem to have any weapons, aside from his sharp black finger nails.";
 				this.plural = false;
@@ -126,7 +126,7 @@ import classes.internals.*;
 			}
 			if (flags[kFLAGS.FERAL_EXTRAS] == 3) {
 				this.a = "the ";
-				this.short = "imp warlord";
+				this.short = "feral imp warlord";
 				this.imageName = "impwarlord";
 				this.long = "The greater feral imp has an angular face, complete with curved nose and burnt red skin typical of imps.  He has a black hair on his head and his eyes are deep black.  Just above his long pointed ears are two curved bovine horns.  While still short, he's much taller than the average feral imp, being nearly four feet tall, and with grotesque overgrown muscles.  A pair of powerful wings extends out from his shoulders, however, you suspect he wouldn't be able to fly for long due to his extreme bulk.  A thick coating of fur starts at his well toned hips and works its way down his powerful legs.  His legs end in a pair of oddly jointed, demonic hooves.  His demonic figure is completed by a thin tail that has an arrowhead shaped tip.\n\nUnlike most feral imps, he is wearing a metal chestplate and bracers for protection. He doesn't appear to be wearing anything other than his armor and loincloth.  He wields a sword in his right hand and he doesn't appear to wield anything in his left hand, suggesting that he also attacks with his claws.";
 				this.plural = false;

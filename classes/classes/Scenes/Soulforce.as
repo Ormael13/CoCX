@@ -24,6 +24,7 @@ import classes.Scenes.Areas.DeepSea.Kraken;
 import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.Forest.TamainsDaughtersScene;
 import classes.Scenes.Areas.Forest.TamaniScene;
+import classes.Scenes.Areas.Forest.TentacleBeastRaging;
 import classes.Scenes.Areas.Forest.WorldTree;
 import classes.Scenes.Areas.HighMountains.IzumiScene;
 import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
@@ -763,6 +764,7 @@ public function FightNightmare():void {
 			addButton(9, "Electra", FightElectra).hint("Test fight with Electra.");
 			addButton(10, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
 			addButton(11, "DELvL Eva", DELvLEva).hint("DE LvL forcefully Evangeline for testing purpose down toward the lvl 12.");
+			addButton(12, "FeralT.Beast", FightFeralImp).hint("Test fight with feral tentacle beast.");
 			addButton(14, "Back", SoulforceCheats);
 		}/*
 		public function AddBladeGrass():void {
@@ -1481,6 +1483,11 @@ public function FightNightmare():void {
 			outputText("\n\n<b>Evangeline get weaker! (cheat stop working when she reach lvl 12)</b>");
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] > 6) flags[kFLAGS.EVANGELINE_LVL_UP]--;
 			doNext(EnemiesMenu);
+		}
+		public function FightFeralImp():void {
+			clearOutput();
+			outputText("Entering battle with feral tentacle beast! Enjoy ^^");
+			startCombat(new TentacleBeastRaging());
 		}
 		public function RevertCabinProgress():void {
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 2;

@@ -1403,7 +1403,7 @@ public function campSlavesMenu(descOnly:Boolean = false):void {
 	}
 	//Galia
 	if (flags[kFLAGS.GALIA_LVL_UP] >= 1) {
-		if (flags[kFLAGS.GALIA_AFFECTION] < 10) outputText("Near the camp edge nearly next to Evangeline bedroll sits a large wooden cage for keeping brought back from Adventure Guild female imp. Despite been one of those more feral she most of the time spend sitting monitionlessly and gazing into the horizon.\n\n");
+		if (flags[kFLAGS.GALIA_AFFECTION] < 10) outputText("Near the camp edge nearly next to Evangeline bedroll sits a large wooden cage for keeping female imp brought back from Adventure Guild. Despite been one of those more feral she most of the time spend sitting motionlessly and gazing into the horizon.\n\n");
 		else outputText("Nothing to see here yet.\n\n");
 	}
 	//Patchouli

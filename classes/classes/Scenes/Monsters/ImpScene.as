@@ -77,7 +77,7 @@ use namespace CoC;
 			
 		}
 		public function impVictory2():void {
-			outputText("The greater imp falls to the ground panting and growling in anger.  He quickly submits however, the thoroughness of his defeat obvious.  You walk towards the imp who gives one last defiant snarl before slipping into unconsciousness.");
+			outputText("The feral imp falls to the ground panting and growling in anger.  He quickly submits however, the thoroughness of his defeat obvious.  You walk towards the imp who gives one last defiant snarl before slipping into unconsciousness.");
 			addButton(0, "Kill Him", killFeralImp);
 			if (flags[kFLAGS.GALIA_LVL_UP] > 0 && flags[kFLAGS.GALIA_LVL_UP] < 0.5) {
 				if (flags[kFLAGS.GALIA_AFFECTION] > 0) addButtonDisabled(3, "Capture", "You need to turn in already captured imp before you can capture another one.");
@@ -2330,4 +2330,4 @@ use namespace CoC;
 		}
 	}
 }
-
+

@@ -129,8 +129,11 @@ package classes.Scenes.Places.HeXinDao
 			else {
 				addButtonDisabled(4, "Demons", "Only for Iron tier Adventurer.");
 			}
-			if (flags[kFLAGS.GALIA_LVL_UP] >= 0.5) addButtonDisabled(10, "Ferals (C)", "You already finished this quest.");
-			else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) >= 3 && flags[kFLAGS.GALIA_LVL_UP] < 0.5) addButton(10, "Ferals (C)", BoardkeeperYangQuestEzekiel1);
+			if (flags[kFLAGS.GALIA_LVL_UP] == 0.53 || (flags[kFLAGS.GALIA_LVL_UP] >= 0.5 && flags[kFLAGS.GALIA_TALKS] > 0)) addButtonDisabled(10, "Ferals (C)", "You already finished this quest.");
+			else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) >= 2) {
+				if (flags[kFLAGS.GALIA_LVL_UP] >= 0.44 && flags[kFLAGS.GALIA_AFFECTION] == 10) addButton(10, "Ferals (C)", BoardkeeperYangQuestEzekiel1a);
+				else addButton(10, "Ferals (C)", BoardkeeperYangQuestEzekiel1);
+			}
 			else addButtonDisabled(10, "Ferals (C)", "Req. finishing Ferals(2) quest first.");
 			addButton(14, "Back", BoardkeeperYangMain);
 		}
@@ -459,44 +462,50 @@ package classes.Scenes.Places.HeXinDao
 		public function BoardkeeperYangQuestEzekiel1():void {
 			clearOutput();
 			if (flags[kFLAGS.GALIA_LVL_UP] > 0) {
-				if (flags[kFLAGS.GALIA_LVL_UP] == 0.45) {
+				if (flags[kFLAGS.GALIA_AFFECTION] == 10) {
 					outputText("You turn in the quest and Yang nod in appreciation. She verify the imp, it literally trying to claw at her face before she close the bag again.\n\n");
-					outputText("\"<i>Looks feral, good job there. The imp will be delivered to the researchers address and she will study it in order to perhaps develop a cure. As for you I think you earned your reward. By the way this imp is clearly a female, this is a rare find. If you hand it to us we will increase your reward accordingly that is… unless you want to keep her?</i>\"\n\n");
-					menu();
-					addButton(1, "No want");
-					addButton(3, "Keep");
+					outputText("\"<i>Looks feral, good job there. The imp will be delivered to the researchers address and she will study it in order to perhaps develop a cure. As for you I think you earned your reward.</i>\"\n\n");
+					if (flags[kFLAGS.GALIA_LVL_UP] == 0.01) flags[kFLAGS.GALIA_LVL_UP] = 0.05;
+					else flags[kFLAGS.GALIA_LVL_UP] += 0.05;
+					flags[kFLAGS.GALIA_AFFECTION] = 0;
+					flags[kFLAGS.SPIRIT_STONES] += 2;
+					statScreenRefresh();
 				}
-				else {
-					if (flags[kFLAGS.GALIA_AFFECTION] == 10) {
-						outputText("You turn in the quest and Yang nod in appreciation. She verify the imp, it literally trying to claw at her face before she close the bag again.\n\n");
-						outputText("\"<i>Looks feral, good job there. The imp will be delivered to the researchers address and she will study it in order to perhaps develop a cure. As for you I think you earned your reward.</i>\"\n\n");
-						if (flags[kFLAGS.GALIA_LVL_UP] == 0.01) flags[kFLAGS.GALIA_LVL_UP] = 0.05;
-						else flags[kFLAGS.GALIA_LVL_UP] += 0.05;
-						flags[kFLAGS.GALIA_AFFECTION] = 0;
-						flags[kFLAGS.SPIRIT_STONES] += 2;
-					}
-					else outputText("You try turn in the quest but looking inside your bag Yang tells you you cant turn an empty bag in and need to capture an imp first.\n\n");
-				}
+				else outputText("You try turn in the quest but looking inside your bag Yang tells you you cant turn an empty bag in and need to capture an imp first.\n\n");
 			}
 			else {
 				outputText("\"<i>You remember that scholar studying the feral creatures? Happens to be this time around she needs you to capture feral imp alive. I understand this is a weird job but we need imps so to study them and understand what is causing them to go mad. For this purpose the guild prepared a special enchanted bag for you to stow an imp in. Of course you will be paid for the job.</i>\"\n\n");
-				outputText(" You shrug and accept the job. Guess you are back fighting imps once again.\n\n");
+				outputText("You shrug and accept the job. Guess you are back fighting imps once again.\n\n");
 				flags[kFLAGS.GALIA_LVL_UP] = 0.01;
 			}
 			doNext(curry(enteringInn, false));
 		}
+		public function BoardkeeperYangQuestEzekiel1a():void {
+			clearOutput();
+			outputText("You turn in the quest and Yang nod in appreciation. She verify the imp, it literally trying to claw at her face before she close the bag again.\n\n");
+			outputText("\"<i>Looks feral, good job there. The imp will be delivered to the researchers address and she will study it in order to perhaps develop a cure. As for you I think you earned your reward. By the way this imp is clearly a female, this is a rare find. If you hand it to us we will increase your reward accordingly that is… unless you want to keep her?</i>\"\n\n");
+			menu();
+			addButton(1, "No want", BoardkeeperYangQuestEzekiel1NoWant);
+			addButton(3, "Keep", BoardkeeperYangQuestEzekiel1Keep);
+		}
 		public function BoardkeeperYangQuestEzekiel1NoWant():void {
 			outputText("You turn in the quest and Yang nod in appreciation. She verify the imp, it literally trying to claw at her face before she close the bag again.\n\n");
 			outputText("\"<i>Looks feral, good job there. The imp will be delivered to the researchers address and she will study it in order to perhaps develop a cure. As for you I think you earned your reward.</i>\"\n\n");
-			flags[kFLAGS.GALIA_LVL_UP] = 0.5;
+			flags[kFLAGS.GALIA_LVL_UP] = 0.53;
 			flags[kFLAGS.GALIA_AFFECTION] = 0;
 			flags[kFLAGS.SPIRIT_STONES] += 22;
+			statScreenRefresh();
 			doNext(curry(enteringInn, false));
 		}
 		public function BoardkeeperYangQuestEzekiel1Keep():void {
 			outputText("She sigh in disappointment before grabbing the female imp by the neck, putting her in an harness and handing her back to you fully hogtied.\n\n");
 			outputText("\"<i>Guess there is no helping it then make sure she does not cause trouble.</i>\"\n\n");
 			doNext(SceneLib.galiaFollower.bringBackTheFemImp);
+		}
+		public function BoardkeeperYangQuestEzekiel2():void {
+			clearOutput();
+			outputText("Placeholder for lazyLia writing ^^\n\n");//feral tentacle beasts capture
+			doNext(curry(enteringInn,false));
 		}
 		public function BoardkeeperYangQuestFerals3():void {
 			clearOutput();

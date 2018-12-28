@@ -83,9 +83,10 @@ public class Questlog extends BaseContent
 			outputText("\n\n<u><b>Twilight of the Gods</b></u>");
 			outputText("\n<b>Feral Imps Capture:</b> ");
 			if (flags[kFLAGS.GALIA_LVL_UP] >= 0.5) outputText("Completed");
-			else if (flags[kFLAGS.GALIA_LVL_UP] >= 0.05 && flags[kFLAGS.GALIA_LVL_UP] < 0.5) outputText("In Progress (" + (flags[kFLAGS.GALIA_LVL_UP] * 20) + " / 10)");
-			else if (flags[kFLAGS.GALIA_LVL_UP] < 0.05) outputText("In Progress (0 / 10))");
+			else if (flags[kFLAGS.GALIA_LVL_UP] >= 0.05 && flags[kFLAGS.GALIA_LVL_UP] < 0.5) outputText("In Progress (" + Math.round(flags[kFLAGS.GALIA_LVL_UP] * 20) + " / 10)");
+			else if (flags[kFLAGS.GALIA_LVL_UP] >= 0.01 && flags[kFLAGS.GALIA_LVL_UP] < 0.05) outputText("In Progress (0 / 10)");
 			else outputText("Not Started");
+			outputText("\n<i><b>Feral Tentacle Beasts Hunt:</b> Soon</i>");
 			/*if () outputText("\n\n<u><b>The New Dawn</b></u>");
 			else outputText("\n<b>???</b>");*/
 			menu();
@@ -95,7 +96,7 @@ public class Questlog extends BaseContent
 			if (SceneLib.dungeons.checkSandCaveClear() && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] < 2) addButton(5, "Sand Cave", takeRewardForSandCave);
 			if (SceneLib.dungeons.checkPhoenixTowerClear() && flags[kFLAGS.CLEARED_HEL_TOWER] < 2) addButton(6, "Phoenix Tower", takeRewardForPhoenixTower);
 			if (SceneLib.dungeons.checkHiddenCaveClear() && flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 6) addButton(10, "Hidden Cave", takeRewardForHiddenCave);
-			if (SceneLib.dungeons.checkHiddenCaveHiddenStageClear() && flags[kFLAGS.HIDDEN_CAVE_BOSSES] < 3) addButton(10, "Hidden Cave(HS)", takeRewardForHiddenCaveHiddenStage).hint("Hidden Cave (Hidden Stage bonus)");
+			if (SceneLib.dungeons.checkHiddenCaveHiddenStageClear() && flags[kFLAGS.HIDDEN_CAVE_BOSSES] < 3) addButton(10, "Hidden C.(HS)", takeRewardForHiddenCaveHiddenStage).hint("Hidden Cave (Hidden Stage bonus)");
 			if (SceneLib.dungeons.checkDenOfDesireClear() && flags[kFLAGS.DEN_OF_DESIRE_QUEST] < 2) addButton(11, "Den of Desire", takeRewardForDenOfDesire);
 			//button 13 - Lia undersea chtulu dungeon
 			addButton(14, "Back", playerMenu);

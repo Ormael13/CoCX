@@ -22,16 +22,17 @@ import classes.Scenes.NPCs.Galia;
 			outputText("\"<i>[name] you MUST allow me to do test on this thing I must study its ecology and function maybe I will even finish with a live dissection!</i>\"\n\n");
 			outputText("Evangeline pout before turning back to you.");
 			if (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) {
-				outputText("Amily annoyed reply right away.\n\n");
+				outputText("\n\nAmily annoyed reply right away.\n\n");
 				outputText("\"<i>Get to the dissection already this thing is polluting our air! The sooner it's dead the better.</i>\"\n\n");
 			}
-			if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] < 3) outputText("Jojo simply adds that killing it now is the merciful thing to do while.\n\n");
-			//(If pure/corrupt Celess) Celess seems genuinely scared/curious of the imp.
-			//(If Alvina) outputText("While not physically present you can hear Alvina giggle in your mind replying that this thing would make an interesting lab rat for her black magic researches.\n\n");
-			//(Siegweird) outputText("Siegweird propose to skip the dissection and simply kill it now.\n\n");
+			if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] < 3) outputText("\n\nJojo simply adds that killing it now is the merciful thing to do while.\n\n");
+			//(If pure/corrupt Celess) outputText("\n\nCeless seems genuinely scared/curious of the imp.");
+			//(If Alvina) outputText("\n\nWhile not physically present you can hear Alvina giggle in your mind replying that this thing would make an interesting lab rat for her black magic researches.\n\n");
+			//(Siegweird) outputText("\n\nSiegweird propose to skip the dissection and simply kill it now.\n\n");
 			outputText("Yea no one is going to perform any experiment or dissection on this imp until you authorize it. This much you make clear to Evangeline. She is disappointed at first but reply regardless.\n\n");
 			outputText("\"<i>When you care enough but the progress of science tell me and we'll proceed with the tests.</i>\"\n\n");
 			//outputText("(<b>Galia has been added to the Slaves menu!</b>)\n\n");w innej późniejszej scenie wspomnieć to
+			flags[kFLAGS.GALIA_TALKS] = 1;
 			flags[kFLAGS.GALIA_LVL_UP] = 1;
 			flags[kFLAGS.GALIA_AFFECTION] = 1;
 			doNext(camp.returnToCampUseOneHour);
