@@ -34,6 +34,24 @@ package classes.Scenes
 		}
 		private function Changelog24():void {
 			clearOutput();
+			outputText("<b>Version 0.8k2:</b>\n\n");
+			outputText("-\n");
+			outputText("-Fixed bugs: \n\n\n\n\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");
+			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			outputText("-New melee weapon: Throwing Dagger - obtained by . Cost 160 gems. Base atk is 2. Could be thrown at flying enemies.\n");
+			outputText("-New melee weapon: Tri-Dagger - obtained by . Cost 320 gems. Base atk is 4. Have 25% chance to leave bleeding wound.\n");
+			outputText("-New melee weapon: Dagger Whip - obtained by . Cost 200 gems. Base atk is 5. Could be used to attack few enemies at once.\n");
+			outputText("-New range weapon: Hodr's Bow - obtained by . 22 atk, costing 2200 gems, -5% accuracy, Artifact Bow, each arrow can apply blind debuff on enemy.\n");
+			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
+			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
+			outputText("-New necklace (by Ormael): Crinos Shape necklace - possible to recive as one of rewards from non-repeatable Adventure Guild quest for capturing feral imps. Cost 400 gems. Would allow PC to use Crinos Shape even without perk Job: Beast Warrior with wrath costs and boost as the one gained from picking Job: Beast Warrior. In case PC got this perk or pick it in future will boost ");
+			outputText("Crinos Shape transformation by 20% and drain additional 5 wrath per turn on top of current Crinos Shape stats boost and wraith drain.\n");
+			outputText("-New tier 9 misc lvl-up perk: Chimerical Body: Peerless Stage. Req. Chimerical Body: Semi-Peerless Stage perk and 50+ points in Internal Chimerical Disposition score. Effect: delay by another 10 points appearing effect of negative HP regeneration and +5 to max Int/Wis/Lib/Sens (scalable), +10 to max Str/Tou/Spe (scalable).\n");
+			//outputText("-New enemy perk: Phylactery. Current added to (noone atm). With this perk any true demon-type enemy can have soulforce like any being with soul even been able to soul cultivate.\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");
 			menu();
 			addButton(0, "Next", Changelog23);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
@@ -86,7 +104,7 @@ package classes.Scenes
 			outputText("-Fixed bugs: Hellcat reverting to Cat text proc-ing each hour, overlapping all cat races racial bonuses, can't use weapon sharpening option in Konstantin menu if PC not hold any melee weapon\n\n");
 			outputText("<b>Version 0.8j3a (Sean shop fix):</b>\n\n");
 			outputText("-Fixed bugs: Sean (Deep Cave incubus) 2nd and 3rd shop menu row bug\n\n");
-			outputText("<b>Version 0.8k:</b>\n\n");
+			outputText("<b>Version 0.8k (Yu shop, Dinah, stats page splitting, Aiko porting from CoCR, new quest in AG, experimental high level exploration, QoL changes):</b>\n\n");
 			outputText("-New rare ascension perk -> Ascension: Building Prestige (5th Stage). Req. Ascension: Building Prestige (4th Stage) perk and be at fourth ascension. It costs 25 asc points and will give 1 more slot for Prestige Jobs.\n");
 			outputText("-New rare ascension perk -> Ascension: Ascension: Transcendental Genetic Memory (Stage 5). Req. Ascension: Transcendental Genetic Memory (Stage 4) perk and be at fourth ascension. It cost 40 asc points and allow to perm up to 50 selected Metamorph options. (with prev perks it give max cap of 150)\n");
 			outputText("-Increased max lvl camp npc's can attain after reaching end of training: Diana (lvl 39), Luna (lvl 39), Ceani (lvl 74), Ember (lvl 74), Isabella (lvl 74), Kiha (lvl 75), Kindra (lvl 75), Chi Chi (lvl 76), Etna (lvl 78)\n");
@@ -109,24 +127,7 @@ package classes.Scenes
 			outputText("-During Minotaur King fight Excellia can occasionaly try to disturb male/herm PC by teasing him. Also a bit adjusted mino/exce tease/lust dmg.\n");
 			outputText("-Elf Tf added to Moga Hen shop and stalls been a bit rearrange to have 3 stalls with cheapest tf items not 2.\n");
 			outputText("-Fixed bugs: Traditional Mage perks not affecting white/black spellpower as planned, moving Tamani to Soul Sense removing her daughters enc before they move to SS menu too, mixed up texts for Jabberwocky post fight scenes, wrong set tone limits in few scenes/items effects, Elemental arrows from Arcane archer will unlock also if PC have lighting/darkness spell, ");
-			outputText("Skiping learning Overlimit if stats are too low when training with Chi Chi, missing display dmg on Luna Ravange move, demonic tongue tf change req. to have snake tongue\n\n\n\n\n\n");/*ostatni punkt changelogu
-			outputText("-Added in current version race effects to Metamorph perk: \n");
-			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-New melee weapon: Throwing Dagger - obtained by . Cost 160 gems. Base atk is 2. Could be thrown at flying enemies.\n");
-			outputText("-New melee weapon: Tri-Dagger - obtained by . Cost 320 gems. Base atk is 4. Have 25% chance to leave bleeding wound.\n");
-			outputText("-New melee weapon: Dagger Whip - obtained by . Cost 200 gems. Base atk is 5. Could be used to attack few enemies at once.\n");
-			outputText("-New range weapon: Hodr's Bow - obtained by . 22 atk, costing 2200 gems, -5% accuracy, Artifact Bow, each arrow can apply blind debuff on enemy.\n");
-			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
-			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
-			outputText("-New necklace (by Ormael): Crinos Shape necklace - possible to recive as one of rewards from non-repeatable Adventure Guild quest for capturing feral imps. Cost 400 gems. Would allow PC to use Crinos Shape even without perk Job: Beast Warrior with wrath costs and boost as the one gained from picking Job: Beast Warrior. In case PC got this perk or pick it in future will boost ");
-			outputText("Crinos Shape transformation by 20% and drain additional 5 wrath per turn on top of current Crinos Shape stats boost and wraith drain.\n");
-			outputText("-New tier 9 misc lvl-up perk: Chimerical Body: Peerless Stage. Req. Chimerical Body: Semi-Peerless Stage perk and 50+ points in Internal Chimerical Disposition score. Effect: delay by another 10 points appearing effect of negative HP regeneration and +5 to max Int/Wis/Lib/Sens (scalable), +10 to max Str/Tou/Spe (scalable).\n");
-			//outputText("-New enemy perk: Phylactery. Current added to (noone atm). With this perk any true demon-type enemy can have soulforce like any being with soul even been able to soul cultivate.\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("Skiping learning Overlimit if stats are too low when training with Chi Chi, missing display dmg on Luna Ravange move, demonic tongue tf change req. to have snake tongue\n\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("\n");
 			outputText("\n");
