@@ -971,7 +971,7 @@ private function getEggflated():void {
 		player.fertility++;
 	}
 	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-	outputText(player.modThickness(100,3));
+	outputText(player.modThickness(player.maxThicknessCap(),3));
 	outputText(player.modTone(0,3));
 	player.orgasm();
 	dynStats("lib", 1, "sen", -3);

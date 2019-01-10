@@ -104,12 +104,14 @@ import classes.BodyParts.Wings;
 				case Arms.YETI:
 				case Arms.DEVIL:
 				case Arms.CAT:
+				case Arms.BOAR:
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' [skin coat.color] fur is flaking away, leaving [skin base.type] behind.  Also the claws on your fingers reverts back into ordinary nails.");
 					break;
 				case Arms.ELF:
 				case Arms.KITSUNE:
 				case Arms.ONI:
 				case Arms.RAIJU:
+				case Arms.PIG:
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' claws retracting back into ordinary nails. You hand looks human again.");
 					break;
 				case Arms.SHARK:
@@ -295,6 +297,7 @@ import classes.BodyParts.Wings;
 	private const METAMORPH_ARMS:Object = createMapFromPairs([
 		[Arms.AVIAN, null],
 		[Arms.BEE, StatusEffects.UnlockedBeeArms],
+		[Arms.BOAR, StatusEffects.UnlockedBoarArms],
 		[Arms.CAT, null],
 		[Arms.DRAGON, StatusEffects.UnlockedDraconicArms],
 		[Arms.DEVIL, StatusEffects.UnlockedDevilArms],
@@ -312,6 +315,7 @@ import classes.BodyParts.Wings;
 		[Arms.ONI, StatusEffects.UnlockedOniArms],
 		[Arms.ORCA, StatusEffects.UnlockedOrcaArms],
 		[Arms.PHOENIX, StatusEffects.UnlockedPhoenixArms],
+		[Arms.PIG, StatusEffects.UnlockedPigArms],
 		[Arms.PLANT, null],
 		[Arms.PLANT2, null],
 		[Arms.RAIJU, StatusEffects.UnlockedRaijuArms],
@@ -351,7 +355,7 @@ import classes.BodyParts.Wings;
 		[Ears.MOUSE, null],
 		[Ears.ONI, StatusEffects.UnlockedOniEars],
 		[Ears.ORCA, StatusEffects.UnlockedOrcaEars],
-		[Ears.PIG, null],
+		[Ears.PIG, StatusEffects.UnlockedPigEars],
 		[Ears.RACCOON, null],
 		[Ears.RED_PANDA, null],
 		[Ears.RHINO, null],
@@ -396,7 +400,7 @@ import classes.BodyParts.Wings;
 	}
 	private const METAMORPH_FACES:Object = createMapFromPairs([
 		[Face.AVIAN, null],
-		[Face.BOAR, null],
+		[Face.BOAR, StatusEffects.UnlockedBoarFace],
 		[Face.BUCKTEETH, null],
 		[Face.BUCKTOOTH, null],
 		[Face.BUNNY, null],
@@ -423,7 +427,7 @@ import classes.BodyParts.Wings;
 		[Face.MOUSE, null],
 		[Face.ONI_TEETH, StatusEffects.UnlockedOniFace],
 		[Face.ORCA, StatusEffects.UnlockedOrcaFace],
-		[Face.PIG, null],
+		[Face.PIG, StatusEffects.UnlockedPigFace],
 		[Face.PLANT_DRAGON, null],
 		[Face.RACCOON, null],
 		[Face.RACCOON_MASK, null],
@@ -622,7 +626,7 @@ import classes.BodyParts.Wings;
 		[Tail.MOUSE, null],
 		[Tail.NONE, null],
 		[Tail.ORCA, StatusEffects.UnlockedOrcaTail],
-		[Tail.PIG, null],
+		[Tail.PIG, StatusEffects.UnlockedPigTail],
 		[Tail.RABBIT, null],
 		[Tail.RACCOON, null],
 		[Tail.RAIJU, StatusEffects.UnlockedRaijuTail],

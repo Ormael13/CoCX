@@ -300,7 +300,13 @@ public class Pregnancy extends NPCAwareContent {
             }
             if (player.pregnancyType == PregnancyStore.PREGNANCY_CELESS){
                 if (player.pregnancyIncubation == 696){
-                    EngineCore.outputText("\n<b>Since that day in the forest, your stomach has remained somewhat the same. You thought it would have turned back to normal by now. Seems like she did actually manage to impregnate you without taking your virginity, doesn’t it?</b>\n");
+                    EngineCore.outputText("\n<b>Since that day in the forest, your stomach has remained somewhat the same. You thought it would have turned back to normal by now. ");
+					if (player.hasPerk(PerkLib.UnicornBlessing)) EngineCore.outputText("Seems like she did actually manage to impregnate you without taking your virginity, doesn’t it?");
+					if (player.hasPerk(PerkLib.BicornBlessing)) {
+						EngineCore.outputText("As corrupt this child might be you still intend to bring her into the world.");
+						if (player.cor <= 10) EngineCore.outputText(" Perhaps you could actualy raise her as a pure being?");
+					}
+					EngineCore.outputText("</b>\n");
                     displayedUpdate = true;
                 }
                 if (player.pregnancyIncubation == 480){

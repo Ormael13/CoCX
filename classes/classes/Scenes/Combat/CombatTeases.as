@@ -103,6 +103,7 @@ public class CombatTeases extends BaseCombatContent {
 		if (player.findPerk(PerkLib.SensualLover) >= 0) {
 			chance += 2;
 		}
+		if (player.findPerk(PerkLib.FlawlessBody) >= 0) chance += 10;
 		if (player.findPerk(PerkLib.ChiReflowLust) >= 0) chance += UmasShop.NEEDLEWORK_LUST_TEASE_MULTI;
 		//==============================
 		//Determine basic damage.
@@ -120,6 +121,7 @@ public class CombatTeases extends BaseCombatContent {
 			damage += 5;
 			bimbo = true;
 		}
+		if (player.findPerk(PerkLib.FlawlessBody) >= 0) damage += 10;
 		damage += scalingBonusLibido() * 0.1;
 		if (player.findPerk(PerkLib.JobSeducer) >= 0) damage += player.teaseLevel * 3;
 		else damage += player.teaseLevel * 2;

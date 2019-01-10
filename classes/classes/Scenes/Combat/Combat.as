@@ -196,10 +196,6 @@ public class Combat extends BaseContent {
 		else if (player.weaponRangePerk == "Bow") return maxBowAttacks();
 		else return 1;
 	}
-	
-	public function PlayerHPRatio():Number{
-		return player.HP/player.maxHP();
-	}
 
 	public function endHpVictory():void
 {
@@ -526,7 +522,8 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 	internal function buildOtherActions(buttons:ButtonDataList):void {
 		var bd:ButtonData;
 		buttons.add("Surrender",combat.surrender,"Fantasize about your opponent in a sexual way so much it would fill up your lust you'll end up getting raped.");
-		if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.DoubleAttackSmall) || player.hasPerk(PerkLib.Combo) || (player.hasPerk(PerkLib.JobBeastWarrior) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()))) {
+		if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.DoubleAttackSmall) || player.hasPerk(PerkLib.Combo) || (player.hasPerk(PerkLib.JobBeastWarrior) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) || 
+		((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm))) {
 			buttons.add("Melee Opt",CoC.instance.perkMenu.doubleAttackOptions,"You can adjust your melee attack settings.");
 		}
 		if (player.hasPerk(PerkLib.DoubleStrike) || player.hasPerk(PerkLib.ElementalArrows) || player.hasPerk(PerkLib.Cupid)) {
@@ -948,10 +945,7 @@ public function elementalattacks(elementType:int, summonedElementals:int):void {
 	//Determine if critical hit!
 	var crit:Boolean = false;
 	var critChance:int = 5;
-	if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-		if (player.inte <= 100) critChance += (player.inte - 50) / 5;
-		if (player.inte > 100) critChance += 10;
-	}
+	critChance += combatMagicalCritical();
 	if (elementType == AIR || elementType == WATER || elementType == METAL || elementType == ETHER) critChance += 10;
 	if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 	if (rand(100) < critChance) {
@@ -1393,8 +1387,10 @@ public function meleeAccuracy():Number {
 	return accmod;
 }
 public function meleeAccuracyPenalty():Number {
-	var accmodpenalty:Number = 10;
-	return accmodpenalty;
+	var accmmodpenalty:Number = 10;
+	if (player.hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm)) accmmodpenalty -= 5;
+	if (accmmodpenalty < 0) accmmodpenalty = 0;
+	return accmmodpenalty;
 }
 
 public function arrowsAccuracy():Number {
@@ -1427,9 +1423,11 @@ public function arrowsAccuracy():Number {
 	return accmod;
 }
 public function arrowsAccuracyPenalty():Number {
-	var accmodpenalty:Number = 15;
-	if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) accmodpenalty -= 10;
-	return accmodpenalty;
+	var accrmodpenalty:Number = 15;
+	if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) accrmodpenalty -= 10;
+	if (player.hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm)) accrmodpenalty -= 5;
+	if (accrmodpenalty < 0) accrmodpenalty = 0;
+	return accrmodpenalty;
 }
 
 public function oneArrowTotalCost():Number {
@@ -1692,6 +1690,7 @@ public function multiArrowsStrike():void {
 			if (player.inte > 100) critChance += 10;
 		}
 		if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
+		if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
@@ -2000,6 +1999,7 @@ public function throwWeapon():void {
 		}
 		if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
 		if (player.hasPerk(PerkLib.AnatomyExpert)) critChance += 10;
+		if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
@@ -2151,6 +2151,7 @@ public function shootWeapon():void {
 			if (player.inte > 100) critChance += 10;
 		}
 		if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
+		if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
@@ -2511,6 +2512,14 @@ public function meleeDamageAcc():void {
 		//BASIC DAMAGE STUFF
 		damage += player.str;
 		damage += scalingBonusStrength() * 0.25;
+		if (player.hasPerk(PerkLib.SpeedDemon) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] > 0 && player.isNoLargeNoStaffWeapon()) {
+			damage += player.spe;
+			damage += scalingBonusSpeed() * 0.20;
+		}
+		if (player.hasPerk(PerkLib.QuickStrike) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] > 0 && (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small")) {
+			damage += (player.spe / 2);
+			damage += scalingBonusSpeed() * 0.10;
+		}
 		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
 		if (damage < 10) damage = 10;
 		//Weapon addition!
@@ -2575,16 +2584,12 @@ public function meleeDamageAcc():void {
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		var critDamage:Number = 1.75;
+		critChance += combatPhysicalCritical();
 		if (player.isSwordTypeWeapon()) critChance += 10;
 		if (player.isDuelingTypeWeapon()) critChance += 20;
-		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-			if (player.inte <= 100) critChance += (player.inte - 50) / 5;
-			if (player.inte > 100) critChance += 10;
-		}
 		if (player.hasPerk(PerkLib.JobDervish) && (player.weaponPerk != "Large" || player.weaponPerk != "Staff")) critChance += 10;
 		if (player.hasPerk(PerkLib.WeaponMastery) && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
 		if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
-		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
 		if (player.weapon == weapons.MASAMUN || (player.weapon == weapons.WG_GAXE && monster.cor > 66) || ((player.weapon == weapons.DE_GAXE || player.weapon == weapons.YAMARG) && monster.cor < 33)) critChance += 10;
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
@@ -2901,7 +2906,7 @@ public function WeaponStatusProcs():void {
 	//20% Stun chance
 	if (player.isFistOrFistWeapon() && player.weapon != weapons.KARMTOU && player.hasPerk(PerkLib.MightyFist)) stunChance += 20;
 	//25% Stun chance
-	if (player.weapon != weapons.KARMTOU && player.hasPerk(PerkLib.MightyFist)) stunChance += 25;
+	if (player.weapon == weapons.KARMTOU && player.hasPerk(PerkLib.MightyFist)) stunChance += 25;
 	//30% Stun chance
 	if (player.weapon == weapons.ZWNDER && !monster.hasStatusEffect(StatusEffects.Stunned)) stunChance += 30;
 	if ((rand(100) < stunChance) && !monster.hasPerk(PerkLib.Resolute)) stun = true;
@@ -2938,7 +2943,7 @@ public function WeaponStatusProcs():void {
 public function WrathWeaponsProc():void {
 	if (player.weapon == weapons.BLETTER) {
 		player.takePhysDamage(player.maxHP() * 0.02);
-		if (player.HP < 1) {
+		if (player.HP < player.minHP()) {
 			doNext(endHpLoss);
 			return;
 		}
@@ -2947,7 +2952,7 @@ public function WrathWeaponsProc():void {
 		if (player.wrath >= 1) player.wrath -= 1;
 		else {
 			player.takePhysDamage(10);
-			if (player.HP < 1) {
+			if (player.HP < player.minHP()) {
 				doNext(endHpLoss);
 				return;
 			}
@@ -2957,7 +2962,7 @@ public function WrathWeaponsProc():void {
 		if (player.wrath >= 2) player.wrath -= 2;
 		else {
 			player.takePhysDamage(20);
-			if (player.HP < 1) {
+			if (player.HP < player.minHP()) {
 				doNext(endHpLoss);
 				return;
 			}
@@ -2971,7 +2976,7 @@ public function heroBaneProc(damage:int = 0):void {
 			outputText("\nYou feel [monster a] [monster name] wounds as well as your owns as the link mirrors the pain back to you for " + damage + " damage!\n");
 			player.takePhysDamage(damage);
 		}
-		if (player.HP < 1) {
+		if (player.HP < player.minHP()) {
 			doNext(endHpLoss);
 		}
 	}
@@ -2996,16 +3001,35 @@ public function combatParry():Boolean {
 	return rand(100) <= parryChance;
 //	trace("Parried!");
 }
-public function combatCritical():Boolean {
-	var critChance:int = 4;
+public function combatPhysicalCritical():Number {
+	var critPChance:int = 0;
 	if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-		if (player.inte <= 100) critChance += (player.inte - 50) / 50;
-		if (player.inte > 100) critChance += 1;
+		if (player.inte <= 100) critPChance += (player.inte - 50) / 5;
+		if (player.inte > 100) critPChance += 10;
 	}
-	if (player.hasPerk(PerkLib.Blademaster) && (player.weaponVerb == "slash" || player.weaponVerb == "cleave" || player.weaponVerb == "keen cut")) critChance += 5;
-	return rand(100) <= critChance;
+	if (player.hasPerk(PerkLib.GrandTactician) && player.inte >= 150) {
+		if (player.inte <= 300) critPChance += (player.inte - 150) / 5;
+		if (player.inte > 300) critPChance += 30;
+	}
+	if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critPChance += 5;
+	if (player.hasPerk(PerkLib.Blademaster) && player.shield == ShieldLib.NOTHING && (player.isSwordTypeWeapon() || player.isDuelingTypeWeapon() || player.isAxeTypeWeapon())) critPChance += 5;
+	if (player.hasPerk(PerkLib.GrandBlademaster) && player.shield == ShieldLib.NOTHING && (player.isSwordTypeWeapon() || player.isDuelingTypeWeapon() || player.isAxeTypeWeapon())) critPChance += 15;
+	if (player.hasStatusEffect(StatusEffects.Rage)) critPChance += player.statusEffectv1(StatusEffects.Rage);
+	return critPChance;
 }
-
+public function combatMagicalCritical():Number {
+	var critMChance:int = 0;
+	if (player.hasPerk(PerkLib.MagiculesTheory) && player.wis >= 50) {
+		if (player.wis <= 100) critMChance += (player.wis - 50) / 5;
+		if (player.wis > 100) critMChance += 10;
+	}
+	if (player.hasPerk(PerkLib.AdvancedMagiculesTheory) && player.wis >= 150) {
+		if (player.wis <= 300) critMChance += (player.wis - 150) / 5;
+		if (player.wis > 300) critMChance += 30;
+	}
+	if (player.hasPerk(PerkLib.ElvenSense) && player.wis >= 50) critMChance += 5;
+	return critMChance;
+}
 public function combatBlock(doFatigue:Boolean = false):Boolean {
 	//Set chance
 	var blockChance:int = 20 + player.shieldBlock + Math.floor((player.str - monster.str) / 5);
@@ -3041,7 +3065,10 @@ public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = 
 	}
 	if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
 		var bonusDamageFromMissingHP:Number = 1;
-		if (PlayerHPRatio() < 1) bonusDamageFromMissingHP += 1 - PlayerHPRatio();
+		if (player.hp100 < 100) {
+			if (player.hp100 < 1) bonusDamageFromMissingHP += 0.99;
+			else bonusDamageFromMissingHP += (1 - (player.hp100 * 0.01));
+		}
 		damage *= bonusDamageFromMissingHP;
 	}
 	if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
@@ -4501,6 +4528,8 @@ public function regeneration(combat:Boolean = true):void {
 		if (player.perkv1(PerkLib.Sanctuary) == 2) healingPercent += player.cor / (100 + player.corruptionTolerance());
 		if (player.hasStatusEffect(StatusEffects.SecondWindRegen)) healingPercent += 5;
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) healingPercent -= 10;
+		if (player.hasPerk(PerkLib.Ferocity) && player.HP < 1) healingPercent -= 1;
+		if (player.hasPerk(PerkLib.Diehard) && !player.hasPerk(PerkLib.EpicDiehard) && player.HP < 1) healingPercent -= 1;
 		if (healingPercent > maximumRegeneration()) healingPercent = maximumRegeneration();
 		HPChange(Math.round((player.maxHP() * healingPercent / 100) + nonPercentBasedRegeneration()), false);
 	}
@@ -4658,6 +4687,7 @@ public function wrathregeneration(combat:Boolean = true):void {
 			if (player.hasPerk(PerkLib.GreaterCrinosShape)) gainedwrath += 3;
 			if (player.hasPerk(PerkLib.MasterCrinosShape)) gainedwrath += 4;
 		}
+		if (player.hasPerk(PerkLib.Ferocity) && player.HP < 1) gainedwrath *= 2;
 		EngineCore.WrathChange(gainedwrath, false);
 	}
 	else {
@@ -4678,6 +4708,8 @@ public function wrathregeneration2():Number {
 	if (player.hasPerk(PerkLib.Lustzerker)) wrathregen += 1;
 	if (player.hasPerk(PerkLib.Rage)) wrathregen += 1;
 	if (player.hasPerk(PerkLib.Anger)) wrathregen += 1;
+	if (player.hasPerk(PerkLib.OrcAdrenalGlandsFinalForm)) wrathregen += 2;
+	if (player.hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) wrathregen += 2;
 	return wrathregen;
 }
 
@@ -4727,6 +4759,7 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 		if (player.findPerk(PerkLib.GreyMage) < 0 && player.lust < 50) player.lust = 50;
 	}
 	magic.applyAutocast();
+	mspecials.applyAutocast2();
 	//Adjust lust vulnerability in New Game+.
 	if (player.newGamePlusMod() == 1) monster.lustVuln *= 0.9;
 	else if (player.newGamePlusMod() == 2) monster.lustVuln *= 0.8;
@@ -4802,15 +4835,15 @@ public function display():void {
 			var level:int = monster.statusEffectv1(StatusEffects.Level);
 			if (monster is SandTrap) {
 				//[(new PG for PC height levels)PC level 4: 
-				if(level == 4) outputText("You are right at the edge of its pit.  If you can just manage to keep your footing here, you'll be safe.");
-				else if(level == 3) outputText("The sand sinking beneath your feet has carried you almost halfway into the creature's pit.");
+				if (level == 4) outputText("You are right at the edge of its pit.  If you can just manage to keep your footing here, you'll be safe.");
+				else if (level == 3) outputText("The sand sinking beneath your feet has carried you almost halfway into the creature's pit.");
 				else outputText("The dunes tower above you and the hissing of sand fills your ears.  <b>The leering sandtrap is almost on top of you!</b>");
 				//no new PG)
 				outputText("  You could try attacking it with your [weapon], but that will carry you straight to the bottom.  Alternately, you could try to tease it or hit it at range, or wait and maintain your footing until you can clamber up higher.");
 			}
 			if (monster is Alraune) {
 				if (level == 5|| level == 6) outputText("The [monster name] keeps pulling you ever closer. You are a fair distance from her for now but she keeps drawing you in.");
-				else if(level == 4) outputText("The [monster name] keeps pulling you ever closer. You are getting dangerously close to her.");
+				else if (level == 4 || level == 3) outputText("The [monster name] keeps pulling you ever closer. You are getting dangerously close to her.");
 				else {
 					outputText("The [monster name] keeps pulling you ever closer. You are almost in the pitcher, the ");
 					if (isHalloween()) outputText("pumpkin");
@@ -5118,15 +5151,15 @@ public function combatRoundOver():void {
 	// Returns true if combat is over. Setups doNext to win/loss/combat menu
 	public function combatIsOver():Boolean {
 	if (!inCombat) return false;
-	if(monster.HP < 1) {
+	if (monster.HP < monster.minHP()) {
 		doNext(endHpVictory);
 		return true;
 	}
-	if(monster.lust > monster.maxLust()) {
+	if (monster.lust > monster.maxLust()) {
 		doNext(endLustVictory);
 		return true;
 	}
-	if(monster.hasStatusEffect(StatusEffects.Level)) {
+	if (monster.hasStatusEffect(StatusEffects.Level)) {
 		if(monster is SandTrap && (monster as SandTrap).trapLevel() <= 1) {
 			SceneLib.desert.sandTrapScene.sandtrapmentLoss();
 			return true;
@@ -5135,15 +5168,15 @@ public function combatRoundOver():void {
 			return true;
 		}
 	}
-	if(monster.short == "basilisk" && player.spe <= 1) {
+	if (monster.short == "basilisk" && player.spe <= 1) {
 		doNext(endHpLoss);
 		return true;
 	}
-	if(player.HP < 1) {
+	if (player.HP < player.minHP()) {
 		doNext(endHpLoss);
 		return true;
 	}
-	if(player.lust >= player.maxLust()) {
+	if (player.lust >= player.maxLust()) {
 		doNext(endLustLoss);
 		return true;
 	}
@@ -5271,6 +5304,7 @@ public function ScyllaTease():void {
 		if(player.hasPerk(PerkLib.SensualLover)) {
 			chance += 2;
 		}
+		if (player.findPerk(PerkLib.FlawlessBody) >= 0) chance += 10;
 		//==============================
 		//Determine basic damage.
 		//==============================
@@ -5287,6 +5321,7 @@ public function ScyllaTease():void {
 			damage += 5;
 			bimbo = true;
 		}
+		if (player.findPerk(PerkLib.FlawlessBody) >= 0) damage += 10;
 		damage += scalingBonusLibido() * 0.1;
 		damage += player.teaseLevel;
 		damage += rand(7);
@@ -5439,6 +5474,7 @@ public function GooTease():void {
 		if(player.hasPerk(PerkLib.SensualLover)) {
 			chance += 2;
 		}
+		if (player.findPerk(PerkLib.FlawlessBody) >= 0) chance += 10;
 		//==============================
 		//Determine basic damage.
 		//==============================
@@ -5455,6 +5491,7 @@ public function GooTease():void {
 			damage += 5;
 			bimbo = true;
 		}
+		if (player.findPerk(PerkLib.FlawlessBody) >= 0) damage += 10;
 		damage += scalingBonusLibido() * 0.1;
 		damage += player.teaseLevel;
 		damage += rand(7);
@@ -6026,6 +6063,7 @@ public function greatDive():void {
 		if (player.inte <= 100) critChance += (player.inte - 50) / 5;
 		if (player.inte > 100) critChance += 10;
 	}
+	if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
 	if (player.hasPerk(PerkLib.DeathPlunge) && player.hasPerk(PerkLib.WeaponMastery) && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
 	if (player.hasPerk(PerkLib.DeathPlunge) && player.hasPerk(PerkLib.WeaponGrandMastery) && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
 	if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
@@ -6167,18 +6205,21 @@ public function soulskillCost():Number {
 public function ghostStrength():Number {
 	var ghostStr:Number = 0;
 	var ghostStrMulti:Number = 1;
-	if (player.hasPerk(PerkLib.Brute)) ghostStr += (10 + (10 * player.newGamePlusMod()));
-	if (player.hasPerk(PerkLib.ImprovedBrute)) ghostStr += (20 + (20 * player.newGamePlusMod()));
-	if (player.hasPerk(PerkLib.GreaterBrute)) ghostStr += (30 + (30 * player.newGamePlusMod()));
-	if (player.hasPerk(PerkLib.EpicBrute)) ghostStr += (40 + (40 * player.newGamePlusMod()));
-	if (player.hasPerk(PerkLib.LegendaryBrute)) ghostStr += (50 + (50 * player.newGamePlusMod()));
-	if (player.hasPerk(PerkLib.MythicalBrute)) ghostStr += (60 + (60 * player.newGamePlusMod()));
+	if (player.hasPerk(PerkLib.Brute)) ghostStr += (20 + (10 * (player.newGamePlusMod())));
+	if (player.hasPerk(PerkLib.ImprovedBrute)) ghostStr += (40 + (20 * player.newGamePlusMod()));
+	if (player.hasPerk(PerkLib.GreaterBrute)) ghostStr += (60 + (30 * player.newGamePlusMod()));
+	if (player.hasPerk(PerkLib.EpicBrute)) ghostStr += (80 + (40 * player.newGamePlusMod()));
+	if (player.hasPerk(PerkLib.LegendaryBrute)) ghostStr += (100 + (50 * player.newGamePlusMod()));
+	if (player.hasPerk(PerkLib.MythicalBrute)) ghostStr += (120 + (60 * player.newGamePlusMod()));
 	if (player.hasPerk(PerkLib.Brawn)) ghostStrMulti += .05;
 	if (player.hasPerk(PerkLib.ImprovedBrawn)) ghostStrMulti += .1;
 	if (player.hasPerk(PerkLib.GreaterBrawn)) ghostStrMulti += .15;
 	if (player.hasPerk(PerkLib.EpicBrawn)) ghostStrMulti += .2;
 	if (player.hasPerk(PerkLib.LegendaryBrawn)) ghostStrMulti += .25;
 	if (player.hasPerk(PerkLib.MythicalBrawn)) ghostStrMulti += .3;
+	if (player.hasPerk(PerkLib.OrcAdrenalGlands)) ghostStr += (5 + (5 * (player.newGamePlusMod())));
+	if (player.hasPerk(PerkLib.OrcAdrenalGlandsEvolved)) ghostStr += (10 + (10 * (player.newGamePlusMod())));
+	if (player.hasPerk(PerkLib.OrcAdrenalGlandsFinalForm)) ghostStr += (15 + (15 * (player.newGamePlusMod())));
 	ghostStr *= ghostStrMulti;
 	ghostStr = Math.round(ghostStr);
 	return ghostStr;
@@ -6190,6 +6231,9 @@ private function ghostRealStrength():Number {
 }
 public function ghostSpeed():Number {
 	var ghostSpe:Number = 0;
+	if (player.hasPerk(PerkLib.ElvishPeripheralNervSys)) ghostSpe += (5 + (5 * (player.newGamePlusMod())));
+	if (player.hasPerk(PerkLib.ElvishPeripheralNervSysEvolved)) ghostSpe += (10 + (10 * (player.newGamePlusMod())));
+	if (player.hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm)) ghostSpe += (15 + (15 * (player.newGamePlusMod())));
 	ghostSpe = Math.round(ghostSpe);
 	return ghostSpe;
 }
@@ -6248,4 +6292,4 @@ public function scalingBonusLibido():Number {
 }
 }
 }
-
+

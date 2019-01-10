@@ -51,8 +51,11 @@ public class BaseCombatContent extends BaseContent {
 	protected function combatParry():Boolean {
 		return combat.combatParry();
 	}
-	protected function combatCritical():Boolean {
-		return combat.combatCritical();
+	protected function combatPhysicalCritical():Number {
+		return combat.combatPhysicalCritical();
+	}
+	protected function combatMagicalCritical():Number {
+		return combat.combatMagicalCritical();
 	}
 	protected function combatBlock(doFatigue:Boolean = false):Boolean {
 		return combat.combatBlock(doFatigue);
@@ -71,9 +74,12 @@ public class BaseCombatContent extends BaseContent {
 	// =================
 	protected function hasSpells():Boolean {
 	return player.hasSpells();
-}
+	}
 	protected function spellCount():Number {
 		return player.spellCount();
+	}
+	protected function spellCountWhiteBlack():Number {
+		return player.spellCountWhiteBlack();
 	}
 	protected function spellPerkUnlock():void {
 		combat.spellPerkUnlock();

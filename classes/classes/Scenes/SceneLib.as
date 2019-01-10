@@ -85,6 +85,8 @@ public class SceneLib {
 
     public static var anemoneScene:AnemoneScene = new AnemoneScene();
 
+    public static var ariaScene:AriaFollower = new AriaFollower();
+
     public static var arianScene:ArianScene = new ArianScene();
 
     public static var ayaneFollower:AyaneFollower = new AyaneFollower();

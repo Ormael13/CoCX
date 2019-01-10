@@ -211,11 +211,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		var critChance:int = 5;
 		if (player.isSwordTypeWeapon()) critChance += 10;
 		if (player.isDuelingTypeWeapon()) critChance += 20;
-		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
-			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
-			if (player.inte > 100) critChance += 10;
-		}
-		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
+		critChance += combat.combatPhysicalCritical();
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
@@ -287,11 +283,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		var critChance:int = 5;
 		if (player.isSwordTypeWeapon()) critChance += 10;
 		if (player.isDuelingTypeWeapon()) critChance += 20;
-		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
-			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
-			if (player.inte > 100) critChance += 10;
-		}
-		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
+		critChance += combat.combatPhysicalCritical();
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
@@ -332,7 +324,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		var soulforcecost:int = 10 * soulskillCost() * soulskillcostmulti();
 		player.soulforce -= soulforcecost;
-		var damage:Number = scalingBonusIntelligence();
+		var damage:Number = scalingBonusWisdom();
 		if (damage < 10) damage = 10;
 		damage *= spellMod();
 		//soulskill mod effect
@@ -342,10 +334,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
-		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
-			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
-			if (player.inte > 100) critChance += 10;
-		}
+		critChance += combatMagicalCritical();
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
@@ -381,7 +370,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		var soulforcecost:int = 60 * soulskillCost() * soulskillcostmulti();
 		player.soulforce -= soulforcecost;
-		var damage:Number = scalingBonusIntelligence();
+		var damage:Number = scalingBonusWisdom();
 		if (damage < 10) damage = 10;
 		damage *= spellMod();
 		//soulskill mod effect
@@ -392,10 +381,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
 		var crit:Boolean = false;
 		var critChance:int = 5;
-		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
-			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
-			if (player.inte > 100) critChance += 10;
-		}
+		critChance += combatMagicalCritical();
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
@@ -432,6 +418,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
 			if (player.inte > 100) critChance += 10;
 		}
+		if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
@@ -496,6 +483,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
 			if (player.inte > 100) critChance += 10;
 		}
+		if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
@@ -552,6 +540,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
 			if (player.inte > 100) critChance += 10;
 		}
+		if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
@@ -590,10 +579,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
 		var crit:Boolean = false;
 		var critChance:int = 5;
-		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
-			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
-			if (player.inte > 100) critChance += 10;
-		}
+		critChance += combatMagicalCritical();
 		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
@@ -861,6 +847,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	 if (player.inte <= 100) critChance += (player.inte - 50) / 50;
 	 if (player.inte > 100) critChance += 1;
 	 }
+	 if (player.hasPerk(PerkLib.ElvenSense) && && player.inte >= 50) critChance += 5;
 	 if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
 	 if (rand(100) < critChance) {
 	 crit = true;

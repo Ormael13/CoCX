@@ -33,6 +33,7 @@ import classes.Scenes.Monsters.DarkElfRanger;
 import classes.Scenes.Monsters.DarkElfScout;
 import classes.Scenes.Monsters.DarkElfSlaver;
 import classes.Scenes.Monsters.DarkElfSniper;
+import classes.Scenes.NPCs.Aria;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.Diana;
 import classes.Scenes.NPCs.Electra;
@@ -193,7 +194,7 @@ use namespace CoC;
 			//addButton(5, "Upgrade", UpgradeItems).hint("."); //ulepszanie itemów
 			if (player.findPerk(PerkLib.Metamorph) >= 0) addButton(6, "Metamorf", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold freely your body.");//używanie metamorfowania z użyciem soulforce
 			if (player.findPerk(PerkLib.SoulSense) >= 0) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounter."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
-			//addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
+			addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
 			addButton(14, "Back", playerMenu);
 		}//w lini 28 w oOnLoadVariables zmian wprowadzić i w lini conditionalConverters w folderze parser zmian dot. wraith wprowadzić, zablokować perki soul king to soul ancestor w momencie robienia release version
 		public function SoulforceCheats():void {
@@ -212,16 +213,224 @@ use namespace CoC;
 			addButton(8, "Celess", celessIntroForced).hint("Due to hard time getting her intro here it's.");
 			addButton(10, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
 			addButton(11, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
+			addButton(12, "PerkGalore1", GargoyleMenu2);
+			addButton(13, "PerkGalore2", GargoyleMenu3);
 			addButton(14, "Back", accessSoulforceMenu);
+		}
+		public function GargoyleMenu2():void {
+			if (player.findPerk(PerkLib.CorruptedKitsune) < 0) {
+				player.createPerk(PerkLib.CorruptedKitsune, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Corrupted Kitsune!)</b>");
+			}
+			if (player.findPerk(PerkLib.CorruptedNinetails) < 0) {
+				player.createPerk(PerkLib.CorruptedNinetails, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Corrupted Ninetails!)</b>");
+			}
+			if (player.findPerk(PerkLib.EnlightenedKitsune) < 0) {
+				player.createPerk(PerkLib.EnlightenedKitsune, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Enlightened Kitsune!)</b>");
+			}
+			if (player.findPerk(PerkLib.EnlightenedNinetails) < 0) {
+				player.createPerk(PerkLib.EnlightenedNinetails, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Enlightened Ninetails!)</b>");
+			}
+			if (player.findPerk(PerkLib.FerasBoonAlpha) < 0) {
+				player.createPerk(PerkLib.FerasBoonAlpha, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Feras Boon Alpha!)</b>");
+			}
+			if (player.findPerk(PerkLib.FerasBoonBreedingBitch) < 0) {
+				player.createPerk(PerkLib.FerasBoonBreedingBitch, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Feras Boon Breeding Bitch!)</b>");
+			}
+			if (player.findPerk(PerkLib.FerasBoonMilkingTwat) < 0) {
+				player.createPerk(PerkLib.FerasBoonMilkingTwat, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Feras Boon Milking Twat!)</b>");
+			}
+			if (player.findPerk(PerkLib.FerasBoonSeeder) < 0) {
+				player.createPerk(PerkLib.FerasBoonSeeder, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Feras Boon Seeder!)</b>");
+			}
+			if (player.findPerk(PerkLib.FireLord) < 0) {
+				player.createPerk(PerkLib.FireLord, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: FireLord!)</b>");
+			}
+			if (player.findPerk(PerkLib.Hellfire) < 0) {
+				player.createPerk(PerkLib.Hellfire, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Hellfire!)</b>");
+			}
+			if (player.findPerk(PerkLib.MagicalFertility) < 0) {
+				player.createPerk(PerkLib.MagicalFertility, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Magical Fertility!)</b>");
+			}
+			if (player.findPerk(PerkLib.MagicalVirility) < 0) {
+				player.createPerk(PerkLib.MagicalVirility, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Magical Virility!)</b>");
+			}
+			if (player.findPerk(PerkLib.MaraesGiftButtslut) < 0) {
+				player.createPerk(PerkLib.MaraesGiftButtslut, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Maraes Gift Buttslut!)</b>");
+			}
+			if (player.findPerk(PerkLib.MaraesGiftFertility) < 0) {
+				player.createPerk(PerkLib.MaraesGiftFertility, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Maraes Gift Fertility!)</b>");
+			}
+			if (player.findPerk(PerkLib.MaraesGiftProfractory) < 0) {
+				player.createPerk(PerkLib.MaraesGiftProfractory, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Maraes Gift Profractory!)</b>");
+			}
+			if (player.findPerk(PerkLib.MaraesGiftStud) < 0) {
+				player.createPerk(PerkLib.MaraesGiftStud, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Maraes Gift Stud!)</b>");
+			}
+			if (player.findPerk(PerkLib.NinetailsKitsuneOfBalance) < 0) {
+				player.createPerk(PerkLib.NinetailsKitsuneOfBalance, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: 9T Kitsune Of Balance!)</b>");
+			}
+			if (player.findPerk(PerkLib.MilkMaid) < 0) {
+				player.createPerk(PerkLib.MilkMaid, 1, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: MilkMaid!)</b>");
+			}
+			if (player.findPerk(PerkLib.OneTrackMind) < 0) {
+				player.createPerk(PerkLib.OneTrackMind, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: One Track Mind!)</b>");
+			}
+			if (player.findPerk(PerkLib.PureAndLoving) < 0) {
+				player.createPerk(PerkLib.PureAndLoving, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Pure And Loving!)</b>");
+			}
+			if (player.findPerk(PerkLib.PurityBlessing) < 0) {
+				player.createPerk(PerkLib.PurityBlessing, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Purity Blessing!)</b>");
+			}
+			if (player.findPerk(PerkLib.SensualLover) < 0) {
+				player.createPerk(PerkLib.SensualLover, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Sensual Lover!)</b>");
+			}
+			doNext(SoulforceCheats);
+		}
+		public function GargoyleMenu3():void {
+			if (player.findPerk(PerkLib.BroodMother) < 0) {
+				player.createPerk(PerkLib.BroodMother, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Brood Mother!)</b>");
+			}
+			if (player.findPerk(PerkLib.Androgyny) < 0) {
+				player.createPerk(PerkLib.Androgyny, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Androgyny!)</b>");
+			}
+			if (player.findPerk(PerkLib.BasiliskWomb) < 0) {
+				player.createPerk(PerkLib.BasiliskWomb, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Basilisk Womb!)</b>");
+			}
+			if (player.findPerk(PerkLib.BunnyEggs) < 0) {
+				player.createPerk(PerkLib.BunnyEggs, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Bunny Eggs!)</b>");
+			}
+			if (player.findPerk(PerkLib.DeityJobMunchkin) < 0) {
+				player.createPerk(PerkLib.DeityJobMunchkin, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Deity Job: Munchkin!)</b>");
+			}
+			if (player.findPerk(PerkLib.Diapause) < 0) {
+				player.createPerk(PerkLib.Diapause, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Diapause!)</b>");
+			}
+			if (player.findPerk(PerkLib.Feeder) < 0) {
+				player.createPerk(PerkLib.Feeder, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Feeder!)</b>");
+			}
+			if (player.findPerk(PerkLib.HarpyWomb) < 0) {
+				player.createPerk(PerkLib.HarpyWomb, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Harpy Womb!)</b>");
+			}
+			if (player.findPerk(PerkLib.ImprovedVenomGland) < 0) {
+				player.createPerk(PerkLib.ImprovedVenomGland, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Improved Venom Gland!)</b>");
+			}
+			if (player.findPerk(PerkLib.MinotaurCumResistance) < 0) {
+				player.createPerk(PerkLib.MinotaurCumResistance, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Minotaur Cum Resistance!)</b>");
+			}
+			if (player.findPerk(PerkLib.BasiliskResistance) < 0) {
+				player.createPerk(PerkLib.BasiliskResistance, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Basilisk Resistance!)</b>");
+			}
+			if (player.findPerk(PerkLib.Cornucopia) < 0) {
+				player.createPerk(PerkLib.Cornucopia, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Cornucopia!)</b>");
+			}
+			if (player.findPerk(PerkLib.DemonicLethicite) < 0) {
+				player.createPerk(PerkLib.DemonicLethicite, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Demonic Lethicite!)</b>");
+			}
+			if (player.findPerk(PerkLib.DemonSlayer) < 0) {
+				player.createPerk(PerkLib.DemonSlayer, 0.1, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Demon Slayer!)</b>");
+			}
+			if (player.findPerk(PerkLib.ElvenBounty) < 0) {
+				player.createPerk(PerkLib.ElvenBounty, 0, 15, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Elven Bounty!)</b>");
+			}
+			if (player.findPerk(PerkLib.FeralHunter) < 0) {
+				player.createPerk(PerkLib.FeralHunter, 0.1, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Feral Hunter!)</b>");
+			}
+			if (player.findPerk(PerkLib.MarbleResistant) < 0) {
+				player.createPerk(PerkLib.MarbleResistant, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Marble Resistant!)</b>");
+			}
+			if (player.findPerk(PerkLib.Misdirection) < 0) {
+				player.createPerk(PerkLib.Misdirection, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Misdirection!)</b>");
+			}
+			if (player.findPerk(PerkLib.OmnibusGift) < 0) {
+				player.createPerk(PerkLib.OmnibusGift, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Omnibus Gift!)</b>");
+			}
+			if (player.findPerk(PerkLib.PilgrimsBounty) < 0) {
+				player.createPerk(PerkLib.PilgrimsBounty, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Pilgrims Bounty!)</b>");
+			}
+			if (player.findPerk(PerkLib.ProductivityDrugs) < 0) {
+				player.createPerk(PerkLib.ProductivityDrugs, 0, 0, 0, 0);
+				player.addPerkValue(PerkLib.ProductivityDrugs, 1, player.cor);
+				player.addPerkValue(PerkLib.ProductivityDrugs, 2, 10);
+				player.addPerkValue(PerkLib.ProductivityDrugs, 3, player.lib);
+				player.addPerkValue(PerkLib.ProductivityDrugs, 4, player.lib);
+				outputText("\n\n<b>(Gained Perk: Productivity Drugs!)</b>");
+			}
+			if (player.findPerk(PerkLib.SenseCorruption) < 0) {
+				player.createPerk(PerkLib.SenseCorruption, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Sense Corruption!)</b>");
+			}
+			if (player.findPerk(PerkLib.SenseWrath) < 0) {
+				player.createPerk(PerkLib.SenseWrath, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Sense Wrath!)</b>");
+			}
+			if (player.findPerk(PerkLib.Whispered) < 0) {
+				player.createPerk(PerkLib.Whispered, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Whispered!)</b>");
+			}
+			if (player.findPerk(PerkLib.ControlledBreath) < 0) {
+				player.createPerk(PerkLib.ControlledBreath, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Controlled Breath!)</b>");
+			}
+			if (player.findPerk(PerkLib.CleansingPalm) < 0) {
+				player.createPerk(PerkLib.CleansingPalm, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Cleansing Palm!)</b>");
+			}
+			if (player.findPerk(PerkLib.Enlightened) < 0) {
+				player.createPerk(PerkLib.Enlightened, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Enlightened!)</b>");
+			}
+			doNext(SoulforceCheats);
 		}
 public function celessIntroForced():void {
 	clearOutput();
 	CelessScene.instance.birthScene();
 }
-public function FightNightmare():void {
+public function FightAria():void {
 	clearOutput();
-	outputText("Entering battle with Nightmare! Enjoy ^^");
-	startCombat(new Nightmare());
+	outputText("Entering battle with Melkie! Enjoy ^^");
+	startCombat(new Aria());
 }
 		public function StatsAscensionMenu():void {
 			menu();
@@ -235,7 +444,7 @@ public function FightNightmare():void {
 			addButton(7, "Spe", StatsMenuSpe).hint("Adj Spe.");
 			addButton(8, "Inte", StatsMenuInte).hint("Adj Inte.");
 			addButton(9, "Wis", StatsMenuWis).hint("Adj Wis.");
-			addButton(10, "Tone/Thicc", StatsMenuToneThickness).hint("Adj Tone/Thickness.");
+			addButton(10, "Tone/Thicc/Fem", StatsMenuToneThicknessFeminity).hint("Adj Tone/Thickness/Feminity.");
 			addButton(11, "Lib", StatsMenuLib).hint("Adj Lib.");
 			addButton(12, "Sens", StatsMenuSens).hint("Adj Sens.");
 			addButton(13, "Cor", StatsMenuCor).hint("Adj Cor.");
@@ -337,16 +546,20 @@ public function FightNightmare():void {
 			addButton(8, "Cor Down 4", SubCor4).hint("Substract 50 from Cor.");
 			addButton(14, "Back", StatsAscensionMenu);
 		}
-		public function StatsMenuToneThickness():void {
+		public function StatsMenuToneThicknessFeminity():void {
 			menu();
 			addButton(0, "Tone Up 1", AddTone1).hint("Add 1 to Tone.");
-			addButton(5, "Tone Down 1", SubTone1).hint("Substract 1 from Tone.");
+			addButton(2, "Tone Down 1", SubTone1).hint("Substract 1 from Tone.");
 			addButton(1, "Tone Up 2", AddTone2).hint("Add 10 to Tone.");
-			addButton(6, "Tone Down 2", SubTone2).hint("Substract 10 from Tone.");
-			addButton(2, "Thickness Up 1", AddThickness1).hint("Add 1 to Thickness.");
+			addButton(3, "Tone Down 2", SubTone2).hint("Substract 10 from Tone.");
+			addButton(5, "Thickness Up 1", AddThickness1).hint("Add 1 to Thickness.");
 			addButton(7, "Thickness Down 1", SubThickness1).hint("Substract 1 from Thickness.");
-			addButton(3, "Thickness Up 2", AddThickness2).hint("Add 10 to Thickness.");
+			addButton(6, "Thickness Up 2", AddThickness2).hint("Add 10 to Thickness.");
 			addButton(8, "Thickness Down 2", SubThickness2).hint("Substract 10 from Thickness.");
+			addButton(10, "Feminity Up 1", AddFeminity1).hint("Add 1 to Feminity.");
+			addButton(12, "Feminity Down 1", SubFeminity1).hint("Substract 1 from Feminity.");
+			addButton(11, "Feminity Up 2", AddFeminity2).hint("Add 10 to Feminity.");
+			addButton(13, "Feminity Down 2", SubFeminity2).hint("Substract 10 from Feminity.");
 			addButton(14, "Back", StatsAscensionMenu);
 		}
 		public function PerksGemsEXPLvL():void {
@@ -724,9 +937,8 @@ public function FightNightmare():void {
 			addButton(4, "SkybornSeed", AddSkybornSeed).hint("Add 1 Skyborn Seed.");
 			//addButton(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
 			addButton(5, "Enigmanium", AddEnigmanium).hint("Add 1 vial of Enigmanium.");
-			addButton(6, "VoltageTopaz", AddVoltageTopaz).hint("Add 1 Voltage Topaz.");
-			addButton(7, "Red Vial", AddRedBlood).hint("Add 1 vial of Red Blood (Bat TF).");
-			addButton(8, "WonderFruit", AddWonderFruit).hint("Add 1 Wonder Fruit.");
+			addButton(6, "VT RV WF", AddVoltageTopaz).hint("Add 1 Voltage Topaz, 1 vial of Red Blood (Bat TF) and 1 Wonder Fruit.");
+			addButton(7, "Skelp", AddSkelp).hint("Add 1 Skelp (WIP Melkie TF).");
 			//addButton(7, "V.D.ARC", AddVeryDilutedArcaneRegenConcotion).hint("Add 1 very diluted Arcane Regen Concotion.");
 			//addButton(8, "D.ARC", AddDilutedArcaneRegenConcotion).hint("Add 1 diluted Arcane Regen Concotion.");
 			addButton(9, "SBMan", AddSoulBlastManual).hint("Add 1 Soul Blast manual.");
@@ -756,7 +968,7 @@ public function FightNightmare():void {
 			addButton(1, "Marae", FightMarae).hint("Test fight with Marae (depending on game stage she can be buffed or unbuffed).");
 			addButton(2, "Sonya", FightSonya).hint("Test fight with Sonya.");
 			addButton(3, "RyuBi", FightRyuBi).hint("Test fight with RyuBi.");
-			addButton(4, "Nightmare", FightNightmare).hint("Test fight with Nightmare.");
+			addButton(4, "Aria", FightAria).hint("Test fight with melkie Aria.");
 			addButton(5, "DE Scout", FightDarkElfScout).hint("Test fight with Dark Elf Scout. (lvl 15)");
 			addButton(6, "DE Slaver", FightDarkElfSlaver).hint("Test fight with Dark Elf Slaver. (lvl 27)");
 			addButton(7, "DE Ranger", FightDarkElfRanger).hint("Test fight with Dark Elf Ranger. (lvl 39)");
@@ -765,8 +977,21 @@ public function FightNightmare():void {
 			addButton(10, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
 			addButton(11, "DELvL Eva", DELvLEva).hint("DE LvL forcefully Evangeline for testing purpose down toward the lvl 12.");
 			addButton(12, "FeralT.Beast", FightFeralImp).hint("Test fight with feral tentacle beast.");
+			addButton(13, "Miss Codex", AddManticoreRaijuCodex);
 			addButton(14, "Back", SoulforceCheats);
-		}/*
+		}
+		public function AddManticoreRaijuCodex():void {
+			if (flags[kFLAGS.CODEX_ENTRY_MANTICORES] <= 0 && flags[kFLAGS.ETNA_AFFECTION] > 0) {
+				flags[kFLAGS.CODEX_ENTRY_MANTICORES] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Manticore!</b>")
+			}
+			if (flags[kFLAGS.CODEX_ENTRY_RAIJU] <= 0 && flags[kFLAGS.ELECTRA_AFFECTION] > 0) {
+				flags[kFLAGS.CODEX_ENTRY_RAIJU] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Raiju!</b>")
+			}
+			doNext(EnemiesMenu);
+		}
+		/*
 		public function AddBladeGrass():void {
 			outputText("\n\n<b>(Gained 1 Blade Grass!)</b>\n\n");
 			inventory.takeItem(consumables.BLADEGR, SoulforceCheats);
@@ -805,11 +1030,11 @@ public function FightNightmare():void {
 		}
 		public function AddVoltageTopaz():void {
 			outputText("\n\n<b>(Gained 1 Voltage Topaz!)</b>\n\n");
-			inventory.takeItem(consumables.VOLTTOP, NonEquipmentMenu);
+			inventory.takeItem(consumables.VOLTTOP, AddRedBlood);
 		}
 		public function AddRedBlood():void {
 			outputText("\n\n<b>(Gained 1 vial of red blood!)</b>\n\n");
-			inventory.takeItem(consumables.REDVIAL, NonEquipmentMenu);
+			inventory.takeItem(consumables.REDVIAL, AddWonderFruit);
 		}
 		public function AddWonderFruit():void {
 			outputText("\n\n<b>(Gained 1 Wonder Fruit!)</b>\n\n");
@@ -830,6 +1055,10 @@ public function FightNightmare():void {
 		public function AddEnigmanium():void {
 			outputText("\n\n<b>(Gained 1 vial of Enigmanium!)</b>\n\n");
 			inventory.takeItem(consumables.ENIGMANIUM, NonEquipmentMenu);
+		}
+		public function AddSkelp():void {
+			outputText("\n\n<b>(Gained 1 Skelp!)</b>\n\n");
+			inventory.takeItem(consumables.SKELP__, NonEquipmentMenu);
 		}
 		public function AddVeryDilutedArcaneRegenConcotion():void {
 			outputText("\n\n<b>(Gained 1 very diluted Arcane Regen Concotion!)</b>\n\n");
@@ -1112,22 +1341,32 @@ public function FightNightmare():void {
 		public function AddTone1():void {
 			player.tone = player.tone + 1;
 			statScreenRefresh();
-			StatsMenuToneThickness();
+			StatsMenuToneThicknessFeminity();
 		}
 		public function AddTone2():void {
 			player.tone = player.tone + 10;
 			statScreenRefresh();
-			StatsMenuToneThickness();
+			StatsMenuToneThicknessFeminity();
 		}
 		public function AddThickness1():void {
 			player.thickness = player.thickness + 1;
 			statScreenRefresh();
-			StatsMenuToneThickness();
+			StatsMenuToneThicknessFeminity();
 		}
 		public function AddThickness2():void {
 			player.thickness = player.thickness + 10;
 			statScreenRefresh();
-			StatsMenuToneThickness();
+			StatsMenuToneThicknessFeminity();
+		}
+		public function AddFeminity1():void {
+			player.femininity = player.femininity + 1;
+			statScreenRefresh();
+			StatsMenuToneThicknessFeminity();
+		}
+		public function AddFeminity2():void {
+			player.femininity = player.femininity + 10;
+			statScreenRefresh();
+			StatsMenuToneThicknessFeminity();
 		}
 		public function SubStr1():void {
 			player.str = player.str - 1;
@@ -1292,22 +1531,32 @@ public function FightNightmare():void {
 		public function SubTone1():void {
 			player.tone = player.tone - 1;
 			statScreenRefresh();
-			StatsMenuToneThickness();
+			StatsMenuToneThicknessFeminity();
 		}
 		public function SubTone2():void {
 			player.tone = player.tone - 10;
 			statScreenRefresh();
-			StatsMenuToneThickness();
+			StatsMenuToneThicknessFeminity();
 		}
 		public function SubThickness1():void {
 			player.thickness = player.thickness - 1;
 			statScreenRefresh();
-			StatsMenuToneThickness();
+			StatsMenuToneThicknessFeminity();
 		}
 		public function SubThickness2():void {
 			player.thickness = player.thickness - 10;
 			statScreenRefresh();
-			StatsMenuToneThickness();
+			StatsMenuToneThicknessFeminity();
+		}
+		public function SubFeminity1():void {
+			player.femininity = player.femininity - 1;
+			statScreenRefresh();
+			StatsMenuToneThicknessFeminity();
+		}
+		public function SubFeminity2():void {
+			player.femininity = player.femininity - 10;
+			statScreenRefresh();
+			StatsMenuToneThicknessFeminity();
 		}
 		public function AddPerkPoint():void {
 			player.perkPoints = player.perkPoints + 1;
@@ -2485,11 +2734,17 @@ public function FightNightmare():void {
 			outputText("\n\nAmount of soulforce used to locate them using soul sense depening of relative power of searched person or location.");
 			menu();
 			if (flags[kFLAGS.SOUL_SENSE_TAMANI] >= 3) addButton(0, "Tamani", TamaniEnc);
+			else addButtonDisabled(0, "Tamani", "");
 			if (flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] >= 3) addButton(1, "Tamani D.", TamaniDaughtersEnc);
+			else addButtonDisabled(1, "Tamani D.", "");
 			if (flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] >= 3) addButton(2, "KitsuMansion", KitsuneMansion);
+			else addButtonDisabled(2, "KitsuMansion", "");
 			if (flags[kFLAGS.SOUL_SENSE_IZUMI] >= 3) addButton(3, "Izumi", IzumiEnc);
+			else addButtonDisabled(3, "Izumi", "");
 			if (flags[kFLAGS.SOUL_SENSE_WORLD_TREE] >= 1) addButton(10, "WorldTree", findWorldTree);
+			else addButtonDisabled(10, "WorldTree", "");
 			if (flags[kFLAGS.SOUL_SENSE_GIACOMO] >= 3) addButton(13, "Giacomo", findGiacomo);
+			else addButtonDisabled(13, "Giacomo", "");
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 		public function TamaniEnc():void {

@@ -20,6 +20,25 @@ import coc.view.ButtonDataList;
 
 public class MagicSpecials extends BaseCombatContent {
 	public function MagicSpecials() {}
+	internal function applyAutocast2():void {
+		outputText("\n\n");
+		if (player.wrath >= 50 && (flags[kFLAGS.ZERKER_COMBAT_MODE] == 1 && flags[kFLAGS.ZERKER_COMBAT_MODE] == 3)) {
+			player.wrath -= 50;
+			var berzerkDuration:Number = 10;
+			if (player.hasPerk(PerkLib.SalamanderAdrenalGlandsEvolved)) berzerkDuration += 2;
+			if (player.hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) berzerkDuration += 8;
+			player.createStatusEffect(StatusEffects.Berzerking,berzerkDuration,0,0,0);
+			outputText("<b>Berzerking was used succesfully.</b>\n\n");
+		}
+		if (player.wrath >= 50 && (flags[kFLAGS.ZERKER_COMBAT_MODE] == 2 && flags[kFLAGS.ZERKER_COMBAT_MODE] == 3)) {
+			player.wrath -= 50;
+			var lustzerkDuration:Number = 10;
+			if (player.hasPerk(PerkLib.SalamanderAdrenalGlandsEvolved)) lustzerkDuration += 2;
+			if (player.hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) lustzerkDuration += 8;
+			player.createStatusEffect(StatusEffects.Lustzerking,lustzerkDuration,0,0,0);
+			outputText("<b>Lustzerking was used succesfully.</b>\n\n");
+		}
+	}
 	//------------
 	// M. SPECIALS
 	//------------
@@ -738,6 +757,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (bimbo || bro || futa) {
 				lustDmgF += 5;
 			}
+			if (player.findPerk(PerkLib.FlawlessBody) >= 0) lustDmgF += 10;
 			lustDmgF += scalingBonusLibido() * 0.1;
 			if (player.hasPerk(PerkLib.EromancyExpert)) lustDmgF *= 1.5;
 			if (player.findPerk(PerkLib.JobSeducer) >= 0) lustDmgF += player.teaseLevel * 3;
@@ -1764,10 +1784,7 @@ public class MagicSpecials extends BaseCombatContent {
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
-		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
-			if (player.inte > 100) critChance += 10;
-		}
+		critChance += combatMagicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
@@ -1836,6 +1853,7 @@ public class MagicSpecials extends BaseCombatContent {
 		player.wrath -= 50;
 		var berzerkDuration:Number = 10;
 		if (player.hasPerk(PerkLib.SalamanderAdrenalGlandsEvolved)) berzerkDuration += 2;
+		if (player.hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) berzerkDuration += 8;
 		if (player.hasPerk(PerkLib.ColderFury)) {
 			outputText("You roar and unleash your savage fury in order to destroy your foe!\n\n");
 		}
@@ -1852,6 +1870,7 @@ public class MagicSpecials extends BaseCombatContent {
 		player.wrath -= 50;
 		var lustzerkDuration:Number = 10;
 		if (player.hasPerk(PerkLib.SalamanderAdrenalGlandsEvolved)) lustzerkDuration += 2;
+		if (player.hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) lustzerkDuration += 8;
 		if (player.hasPerk(PerkLib.ColderLust)) {
 			outputText("You roar and unleash your lustful fury in order to destroy your foe!\n\n");
 		}
@@ -1989,10 +2008,7 @@ public class MagicSpecials extends BaseCombatContent {
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
-		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
-			if (player.inte > 100) critChance += 10;
-		}
+		critChance += combatMagicalCritical();
 		if (player.hasPerk(PerkLib.ObsidianHeartFinalForm)) critChance += 20;
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
@@ -2102,10 +2118,7 @@ public class MagicSpecials extends BaseCombatContent {
 	 //Determine if critical hit!
 	 var crit:Boolean = false;
 	 var critChance:int = 5;
-	 if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-	 if (player.inte <= 100) critChance += (player.inte - 50) / 50;
-	 if (player.inte > 100) critChance += 10;
-	 }
+	 critChance += combatMagicalCritical();
 	 if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 	 if (rand(100) < critChance) {
 	 crit = true;
@@ -2208,10 +2221,7 @@ public class MagicSpecials extends BaseCombatContent {
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
-		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
-			if (player.inte > 100) critChance += 10;
-		}
+		critChance += combatMagicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
@@ -2330,10 +2340,7 @@ public class MagicSpecials extends BaseCombatContent {
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
-		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
-			if (player.inte > 100) critChance += 10;
-		}
+		critChance += combatMagicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
@@ -2445,10 +2452,7 @@ public class MagicSpecials extends BaseCombatContent {
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
-		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
-			if (player.inte > 100) critChance += 10;
-		}
+		critChance += combatMagicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
@@ -2735,10 +2739,7 @@ public class MagicSpecials extends BaseCombatContent {
 			//Determine if critical hit!
 			var crit:Boolean = false;
 			var critChance:int = 5;
-			if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-				if (player.inte <= 100) critChance += (player.inte - 50) / 50;
-				if (player.inte > 100) critChance += 10;
-			}
+			critChance += combatMagicalCritical();
 			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 			if (rand(100) < critChance) {
 				crit = true;

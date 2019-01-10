@@ -429,11 +429,14 @@ public class Creature extends Utils
 		}
 		public function maxHP():Number {
 			var max:Number = Math.round(maxHP_base()*maxHP_mult());
-			return Math.min(999999,max);
+			return Math.min(1009999,max);
+		}
+		public function minHP():Number {
+			return 1;
 		}
 		public function maxLust():Number {
 			var max:Number = Math.round(maxLust_base()*maxLust_mult());
-			return Math.min(59999,max);
+			return Math.min(62999,max);
 		}
 		public function maxFatigue():Number {
 			return 100;
@@ -3778,6 +3781,18 @@ public class Creature extends Utils
 					flychance += 10;
 				}
 			}
+			if (findPerk(PerkLib.ElvenSense) >= 0) {
+				chance += 5;
+				flychance += 5;
+				if (findPerk(PerkLib.ElvishPeripheralNervSysEvolved) >= 0) {
+					chance += 10;
+					flychance += 10;
+				}
+				if (findPerk(PerkLib.ElvishPeripheralNervSysFinalForm) >= 0) {
+					chance += 15;
+					flychance += 15;
+				}
+			}
 			if (findPerk(PerkLib.Flexibility) >= 0) chance += 6;
 			if (findPerk(PerkLib.Misdirection) >= 0 && armorName == "red, high-society bodysuit") chance += 10;
 			//if (findPerk(PerkLib.Unhindered) >= 0 && meetUnhinderedReq()) chance += 10;
@@ -3828,11 +3843,14 @@ public class Creature extends Utils
 			if (findPerk(PerkLib.GreaterEvade) >= 0) generalevasion += 15;
 			if (findPerk(PerkLib.JobRogue) >= 0) generalevasion += 5;
 			if (findPerk(PerkLib.Spectre) >= 0 && findPerk(PerkLib.Incorporeality) >= 0) generalevasion += 10;
+			if (findPerk(PerkLib.ElvenSense) >= 0) generalevasion += 5;
+			if (findPerk(PerkLib.ElvishPeripheralNervSysEvolved) >= 0) generalevasion += 10;
+			if (findPerk(PerkLib.ElvishPeripheralNervSysFinalForm) >= 0) generalevasion += 15;
 			if (generalevasion > 0) flyeavsion += generalevasion;
 			if (findPerk(PerkLib.AdvancedAerialCombat) >= 0) flyeavsion += 5;
 			if (findPerk(PerkLib.GreaterAerialCombat) >= 0) flyeavsion += 15;
 			// perks
-			if (findPerk(PerkLib.Evade) >= 0 && (roll < generalevasion)) return "Evade";
+			if ((findPerk(PerkLib.Evade) >= 0 || findPerk(PerkLib.ElvenSense) >= 0) && (roll < generalevasion)) return "Evade";
 			if (findPerk(PerkLib.Flexibility) >= 0 && (roll < 6)) return "Flexibility";
 			if (findPerk(PerkLib.Misdirection) >= 0 && armorName == "red, high-society bodysuit" && (roll < 10)) return "Misdirection";
 			//if (findPerk(PerkLib.Unhindered) >= 0 && meetUnhinderedReq() && (roll < 10)) return "Unhindered";

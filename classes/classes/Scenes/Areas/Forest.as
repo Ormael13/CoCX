@@ -36,6 +36,7 @@ use namespace CoC;
 		public var alrauneScene:AlrauneScene = new AlrauneScene();
 		public var darkelfScene:DarkElfScene = new DarkElfScene();
 		public var aikoScene:AikoScene = new AikoScene();
+		public var nightmareScene:NightmareScene = new NightmareScene();
 		// public var dullahanScene:DullahanScene = new DullahanScene(); // [INTERMOD:8chan]
 
 		public function Forest() {
@@ -218,19 +219,23 @@ use namespace CoC;
 						name  : "bigjunk",
 						call  : bigJunkForestScene,
 						chance: bigJunkChance
-					},/* {
+					}, {
 						name: "celess-unicorn",
 						call: CelessScene.instance.celessUnicornIntro,
-						when: CelessScene.canMeetUnicorn
+						when: CelessScene.canMeetUnicorn,
+						chance: 25
 					}, {
 						name: "celess-nightmare",
-						call: CelessScene.instance.celessUnicornIntro,
-						when: CelessScene.canMeetNightmare
+						call: nightmareScene.nightmareIntro,
+						when: function():Boolean {
+							return player.hasStatusEffect(StatusEffects.CanMeetNightmare) && player.statusEffectv1(StatusEffects.CanMeetNightmare) < 1;
+						},
+						chance: 25
 					}, {
 						name: "celess-armor",
 						call: CelessScene.instance.celessArmor,
 						when: CelessScene.canGetArmour
-					},*/ {
+					}, {
 						name  : "patchouli",
 						call  : SceneLib.patchouliScene.meetThePatchouli,
 						when  : function():Boolean {

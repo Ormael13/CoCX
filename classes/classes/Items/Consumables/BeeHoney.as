@@ -254,9 +254,9 @@ public class BeeHoney extends Consumable
 				mutations.setWingType(Wings.BEE_LIKE_SMALL, "small bee-like");
 			}
 			//Melt demon wings!
-			if (changes < changeLimit && (player.wings.type == Wings.BAT_LIKE_TINY || player.wings.type == Wings.BAT_LIKE_LARGE || player.wings.type == Wings.BAT_LIKE_LARGE_2)) {
+			if (changes < changeLimit && (player.wings.type != Wings.BEE_LIKE_SMALL || player.wings.type != Wings.BEE_LIKE_LARGE)) {
 				changes++;
-				outputText("\n\nYour demonic wings ripple, jelly-like.  Worried, you crane back to look, and to your horror, they're melting away!  Runnels of amber honey trail down the wings' edges, building into a steady flow.  <b>In a moment, the only remnant of your wings is a puddle of honey in the dirt</b>.  Even that is gone in seconds, wicked into the dry soil.");
+				outputText("\n\nYour wings ripple, jelly-like.  Worried, you crane back to look, and to your horror, they're melting away!  Runnels of amber honey trail down the wings' edges, building into a steady flow.  <b>In a moment, the only remnant of your wings is a puddle of honey in the dirt</b>.  Even that is gone in seconds, wicked into the dry soil.");
 				mutations.removeWings();
 			}
 			//Remove gills!

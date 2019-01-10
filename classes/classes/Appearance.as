@@ -2576,7 +2576,6 @@ public class Appearance extends Utils
 					[Arms.GARGOYLE_2, "gargoyle"],
 					[Arms.WOLF, "wolf"],
 					[Arms.LION, "lion"],
-					[Arms.SPHINX, "sphinx"],
 					[Arms.KITSUNE, "kitsune"],
 					[Arms.FOX, "fox"],
 					[Arms.LIZARD, "lizard"],
@@ -2591,7 +2590,10 @@ public class Appearance extends Utils
 					[Arms.RED_PANDA, "red-panda"],
 					[Arms.CAT, "cat"],
 					[Arms.AVIAN, "avian"],
-					[Arms.GRYPHON, "gryphon"]
+					[Arms.GRYPHON, "gryphon"],
+					[Arms.SPHINX, "sphinx"],
+					[Arms.PIG, "pig"],
+					[Arms.BOAR, "boar"]
 				]
 		);
 		public static const DEFAULT_TAIL_NAMES:Object = createMapFromPairs(

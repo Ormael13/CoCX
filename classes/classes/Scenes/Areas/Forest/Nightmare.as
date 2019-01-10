@@ -12,18 +12,18 @@ package classes.Scenes.Areas.Forest
 	import classes.BodyParts.LowerBody;
 	import classes.BodyParts.Tail;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.NPCs.CelessScene;
+	import classes.Scenes.Areas.Forest.NightmareScene;
 	import classes.internals.*;
 	
 	use namespace CoC;
 	
 	public class Nightmare extends Monster
 	{
-		public var celessScene:CelessScene = new CelessScene();
+		public var nightmareScene:NightmareScene = new NightmareScene();
 		
 		public function usingCorruptionBlast():void {
 			outputText("The nightmare moans in pleasure as her massive equine cock begins to pulse with an unholy purple light.\n\n");
-			outputText("\"<i>Oooooh....Ahhhh yessss, cuming I’m cuuuuming! Please watch and bathe in my depravity!!!</i>\"\n\n");
+			outputText("\"<i>Oooooh....Ahhhh yessss, cuming I’m cuuuuming! Go on and watch, bathe in my depravity!!!</i>\"\n\n");
 			outputText("She lifts her forelegs as her cock shoots a deluge of cum at you, her tainted fluids soaking in your skin.\n\n");
 			dynStats("cor", 50, "lust", (player.lib + this.lust) * 2, "scale", false);
 			this.lust = 0;
@@ -98,14 +98,14 @@ package classes.Scenes.Areas.Forest
 			}
 			else {
 				outputText("Her hand slides on your skin leaving a tingling sensation of pleasure as the area she touched glows with tainted magic forcing a moan out you.");
-				player.dynStats("cor", 5, "lib", 10, "sens", 10, "lust", 10, "scale", false);
+				player.dynStats("cor", 5, "lib", 10, "sens", 10, "lust", (player.maxLust() * 0.05), "scale", false);
 			}
 		}
 		
 		public function AuraOfDamnation():void {
 			outputText("You feel yourself progressively losing your resolve and restraint as the nightmare’s aura seeps in and corrupts the core of your very being!\n\n");
 			player.dynStats("cor", 5, "lib", 10, "sens", 10, "lust", 10, "scale", false);
-			//if (player.cor >= 100) celessScene.nightmareDefeated();
+			if (player.cor >= 100) nightmareScene.nightmareVictory();
 		}
 		
 		override protected function performCombatAction():void
@@ -122,17 +122,17 @@ package classes.Scenes.Areas.Forest
 			if (choice == 2) usingWingBuffet();
 			if (choice == 3) usingHeal();
 		}
-		/*
+		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			celessScene.nightmareDefeat();
+			nightmareScene.nightmareDefeat();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			celessScene.nightmareDefeated();
+			nightmareScene.nightmareVictory();
 		}
-		*/
+		
 		public function Nightmare() 
 		{
 			this.a = "the ";
@@ -156,15 +156,15 @@ package classes.Scenes.Areas.Forest
 			this.skin.growFur({color:"tawny"});
 			this.hairColor = "brown";
 			this.hairLength = 5;
-			initStrTouSpeInte(20, 80, 120, 20);
+			initStrTouSpeInte(20, 125, 120, 20);
 			initWisLibSensCor(20, 125, 75, 100);
 			this.weaponName = "fists";
 			this.weaponVerb="punch";
 			this.weaponAttack = 1;
 			this.armorName = "fur";
-			this.armorDef = 1;
-			this.armorMDef = 10;
-			this.bonusHP = 20;
+			this.armorDef = 4;
+			this.armorMDef = 20;
+			this.bonusHP = 1000;
 			this.bonusLust = 10;
 			this.lust = 20;
 			this.lustVuln = .85;

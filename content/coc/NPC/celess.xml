@@ -21,10 +21,10 @@
 				Still, you had hoped this phase would have lasted at least a little bit longer.
 				<if test="$isCorrupt">
 					Your daughter wakes up as well, opening her beautiful crimson eyes to the world.
-					She, unlike her sire, has twilight black hair and fur.
+					She has silver hair and twilight black fur.
 					<else>
 						Your daughter wakes up as well, opening her beautiful azure eyes to the world.
-						She, like her sire, has pure white hair and fur as befits an unicorn. 
+						She has platinum blonde hair and white fur as befits an unicorn. 
 					</else>
 				</if>
 				You expected her to have grown her horns by now, but strangely enough, her forehead is still clear, perhaps unicorns grow their horns when they grow older?
@@ -89,7 +89,7 @@
 				Your little girl seems to have matured to adulthood.
 				
 				<i>“Mom… I feel so energised, and hot... please... help me get that throbbing thing to calm down.”</i>
-				<display ref="incest/doHeatOrRut"/>
+				<display ref="../incest/doHeatOrRut"/>
 				<else>
 					<i>“Oww! It hurts!...Mom… don’t look!”</i>
 					
@@ -111,7 +111,7 @@
 			</if>
 			
 			<if test="player.isFemaleOrHerm()">
-				This is a… somewhat unusual situation, but as a <if test="player.isFemale()">female<else>herm like her</else></if>it’s something you can understand.
+				This is a… somewhat unusual situation, but as a <if test="player.isFemale()">female<else>herm like her</else></if> it’s something you can understand.
 				<else>You really would prefer not to do this but sadly you have no other way to solve this problem.</else>
 			</if>
 			You approach your girl’s massive tool and give it a few experimental strokes, making <output>$name</output> gasp in surprise. 
@@ -134,7 +134,7 @@
 		</text>
 		<lib name="incest">
 			<text name="masturbateHer">
-				You simply help her by masturbating her horse dong to satisfaction. Celess<output>$name</output> thanks you afterward and goes to sit in a corner to rest.
+				You simply help her by masturbating her horse dong to satisfaction. <output>$name</output> thanks you afterward and goes to sit in a corner to rest.
 			</text>
 			<text name="centaurToys">
 				You point at the centaur toys and she swiftly gallops to them with a clear idea of how to use them.
@@ -142,8 +142,8 @@
 			</text>
 			
 			<text name="pureIncest">
-				No matter how wicked you might be, you just can’t find the resolve to rape your innocent daughter.
-				Just as you're about to dismiss the idea completely, <output>$name</output> surprises you.
+				No matter how weird a parent you might be, you just can’t find the resolve to fuck your innocent daughter.
+				<if test="player.cor gt 20">Just as you're about to dismiss the idea completely, <output>$name</output> surprises you.</if>
 				
 				<i>“MOM! HELP! ITS BACK!</i>
 				
@@ -173,7 +173,7 @@
 				<i>“Ahhhh so good… this feels way too good!…Mom, please look!”</i>
 				
 				You watch spellbound as her horns suddenly fissures by the center, dividing into a duo of parallel horns, symbol of her newfound corruption.
-				Her formerly pure white fur starts to darken to pitch black as her eyes’ irises lose their azure blue, changing shade towards a fiendish red. 
+				Her formerly pure white fur starts to darken to pitch black as her eyes’ irises lose their azure blue, changing shade towards a fiendish red. Even her hairs changes silks of silver replacing her former platinum blonde strands. 
 				She holds her horns like a pair of dicks, playing her hands along their length as if trying to masturbate them. 
 				Speaking of which, her 25 inch long horse cock is now fully erect and throbbing, almost as if an invisible hand was toying with it, a thick flow of precum steadily seeping out already. 
 				And as her horns finish repositioning on each side of her forehead, her horsecock explodes, splattering much of the ground, covering it in white. <output>$name</output> seems to have embraced her inner corruption.
@@ -206,11 +206,11 @@
 				<i>“Mommy wanna play daddy today? Sure, I can get in front of that ride.”</i>
 				
 				That being all the encouragement you need, you position yourself behind her and ram  your “Cock descript” into her warm gaping cunt without hesitation.
-				She moans in delight as you force in as much of your cock as you can  while looking for the perfect angle. <output>$name</output> taunts you with dirty talk all the while.
+				She moans in delight as you force in as much of your cock as you can while looking for the perfect angle. <output>$name</output> taunts you with dirty talk all the while.
 				
 				<i>“Mom, please defile me as much as you want, punish my sinful pussy!”</i>
 				
-				Sinful, eh? Like mother like daughter. Her pussy, despite it’s size, acts as if it had a mind of its own, squeezing your cock as if trying to smother it.
+				Sinful, eh? Like mother like daughter. Her pussy, despite its size, acts as if it had a mind of its own, squeezing your cock as if trying to smother it.
 				You would suspect her of having some succubus blood were you not aware of her actual heritage.
 				
 				<i>“Tired already, mom? C’mon, you can screw me better than that! Or, perhaps, you'd rather be the one to be screwed?” </i>
@@ -280,21 +280,42 @@
 		<text name="appearance">
 			Your daughter <output>$name</output> is a 
 			<if test="$isCorrupt">
-				Bicorn with 
-				Abyssal black fur. 
-				Her red eyes shine with a glimmer of sinister mischief and depravity, you sometime ponder whether or not she is the spawn of a demon rather than you.
-				She wanders around in a black dress. By the look of it you'd think she stole it from a nun of the church of the fetish as it emphasise her generous D cup breast and put the focus on her assets. 
+				bicorn with 
+				abyssal black fur. 
+				Her red eyes shine with a glimmer of sinister mischief and depravity, you sometime ponder whether or not she is the spawn of a demon rather than you. Her hairs are silver.
+				She wanders around in a black dress. By the look of it you'd think she stole it from a nun of the church of the fetish as it emphasise her generous 
+				<if test="$isAdult">
+					E
+					<else>
+						D
+					</else>
+				</if>
+				 cup breast and put the focus on her assets. 
 				
 				<else>
-					Unicorn with 
+					unicorn with 
 					immaculate white fur.
-					Her blue eyes are the most innocent you've seen on mareth, if angels did exist she would be one.
-					She wander around in a white dress that covers her more then decent D cup breasts, through where she found it is a mystery even to you. Maybe it was a gift from her father though he never shown back to reclaim her.
+					Her blue eyes are the most innocent you've seen on mareth, if angels did exist she would be one. Her hairs are platinum blonde.
+					She wander around in a white dress that covers her more than decent 
+					<if test="$isAdult">
+						E
+						<else>
+							D
+						</else>
+					</if>
+					 cup breasts, through where she found it is a mystery even to you. Maybe it was a gift from her father though he never shown back to reclaim her.
 					
 				</else>
 			</if> 
 			
-			<output>$name</output> inherited a massive horsecock from her father. Easily 20 inch long, this beast can apparently, if the tales are true, pierce through anything.
+			<output>$name</output> inherited a massive horsecock from her father. Easily 
+			<if test="$isAdult">
+				20
+				<else>
+					10
+				</else>
+			</if>
+			 inch long, this beast can apparently, if the tales are true, pierce through anything.
 			
 			<if test="$isCorrupt">
 				She regularly use it to fuck imps and goblins alike when she is horny.
@@ -400,6 +421,30 @@
 
 					On those word you leave, better seek out this creature as fast as possible.
 				</text>
+				<text name="introAfterNightmare">
+					You manage to find your way back to the sacred grove. As expected the guardian is swift to show, blocking your path to the shield her tall frame acting like a wall.
+					
+					<i>“Sorry but until you have proven yourself I cannot allow you any further.”</i>
+				</text>
+				<text name="introAfterNightmareShowProof">
+					You pull the nightmare twin horns out of your bag for the unicorn maiden to see, she nods in approval.
+					
+					<i>“What you did today perhaps will help to save what's left of this beautiful forest. Please allow me to perform this small service for you as a reward. I will restore that which you lost to the ravage of this fallen land.”</i>
+					
+					Her horn begins to glow a warm soothing light and, as she touches your cheek with her right hand you feel something change in your body as you recover your<if test="player.hasPerk(PerkLib.HistoryWhore)"> long</if> lost virginity. That said what happens now that you are pure again?
+					
+					<i>“I was tasked with guarding the divine shield, Sanctuary, from dark influence. Demons cannot enter this grove and the impure reels at the mere thought of setting a single foot into this area. This armament needs a champion to wield it and take the fight to the fiends; however, due to Mareth’s purity being compromised,
+					people who match this description have almost all been destroyed by transformations or defiled by the many demonic inhabitants of the land. Only a pure virgin person such as you can hope to get past the ward.”</i>
+					
+					Interested in the magnificent shield on the altar, you ask what you would need to do to get access to this shield, since you already fulfill the requirements for entering here.
+					
+					<i>“Simple, since only one carrying my essence can pass the ward, I just need to share my essence with you.”</i>
+					
+					You raise an eyebrow at that, you’ve been in Mareth long enough to know an innuendo when you hear one, but surely such a pure individual must have meant something far more innocent. Still, you do glance at her lower half to make sure. Aaaand of course she has a horsecock, already at half-mast, too.
+					You bite down a sigh, you’re in fucking Mareth, of <i>course</i> she has one. Your first guess was right, at least. That meager consolation does little to numb the disappointment.
+					
+					<i>“So… you want this shield or not?”</i>
+				</text>
 			</lib>
 			<text name="noway">
 				You give her the same answer you gave all others, a flat “No” that leaves no room for negotiation
@@ -502,7 +547,7 @@
 
 						When you wake up you are no longer in the grove.
 						It would seem that the unicorn moved you to the forest’s edge.
-						She did keep her word, however, since the fabled shield is resting on your lap… seemingly protecting your inflated<if test="$isTaur">horse</if> belly.
+						She did keep her word, however, since the fabled shield is resting on your lap… seemingly protecting your inflated<if test="$isTaur"> horse</if> belly.
 						<if test="$isTaur">
 							You feel that all of her cum is still inside of you, somehow kept from leaking out and sloshing as you move.
 							<else>
@@ -528,7 +573,7 @@
 
 			</text>
 			<text name="fuck-her">
-				It’s not everyday you get to see a centauress with such a fine pussy<if test="player.hasStatusEffect(StatusEffects.TelAdre) eq true">beside Edryn's of course</if>.
+				It’s not everyday you get to see a centauress with such a fine pussy<if test="player.hasStatusEffect(StatusEffects.TelAdre) eq true"> beside Edryn's of course</if>.
 				You ask the unicorn about it.
 
 				<i>“Umph... I guess that can work too, but I'm only doing it because you are a virgin, unicorns don’t mate with anything else.”</i>

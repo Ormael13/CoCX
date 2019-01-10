@@ -4,7 +4,7 @@ import classes.EngineCore;
 import classes.Items.Consumable;
 
 /**
-	 * Item that increases STR and/or VIT
+	 * Item that increases VIT
 	 */
 	public class VitalityTincture extends Consumable
 	{

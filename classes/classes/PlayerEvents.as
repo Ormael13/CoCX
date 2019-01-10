@@ -15,6 +15,7 @@ import classes.GlobalFlags.*;
 import classes.Items.*;
 import classes.Scenes.Dreams;
 import classes.Scenes.Holidays;
+import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.SceneLib;
 import classes.Scenes.Camp.UniqueCampScenes;
@@ -471,7 +472,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.Lycanthropy);
 				needNext = true;
 			}
-			
 			//No better place for these since the code for the event is part of CoC.as or one of its included files
 			if (flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC] > 0) flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC]--; //Vala post-rape countdown
 			if (flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] > 0 && flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] < 500) flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY]++;
@@ -594,7 +594,10 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				if (player.hasStatusEffect(StatusEffects.CooldownSideWinder)) player.removeStatusEffect(StatusEffects.CooldownSideWinder);
 				//Daily Fishery production
 				if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) {
-					if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) flags[kFLAGS.FISHES_STORED_AT_FISHERY] += 5;
+					if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) {
+						flags[kFLAGS.FISHES_STORED_AT_FISHERY] += 5;
+						if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 2) flags[kFLAGS.FISHES_STORED_AT_FISHERY] += 2;
+					}
 					if (flags[kFLAGS.CEANI_FOLLOWER] > 0) flags[kFLAGS.FISHES_STORED_AT_FISHERY] -= 5;
 				}
 				//Daily regeneration of soulforce for non soul cultivators && Metamorph bonus SF gain till cap
@@ -961,6 +964,24 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				player.removePerk(PerkLib.ElectrifiedDesire);
 				needNext = true;
 			}
+			//Elven Sense
+			if ((player.eyes.type != Eyes.ELF || player.ears.type != Ears.ELVEN) && player.findPerk(PerkLib.ElvenSense) >= 0 && player.findPerk(PerkLib.ElvishPeripheralNervSys) < 0) {
+				outputText("\nYour natural electricity production start dropping at a dramatic rate until finally.\n\n<b>(Lost the Elven Sense perk!)</b>\n");
+				player.removePerk(PerkLib.ElvenSense);
+				needNext = true;
+			}
+			//Flawless Body
+			if ((player.lowerBody != LowerBody.ELF || player.arms.type != Arms.ELF || !player.hasPlainSkinOnly() || player.skinAdj != "flawless") && player.findPerk(PerkLib.FlawlessBody) >= 0) {
+				outputText("\nYour body has becomes less alluring and graceful as part of reverting to a more mundane appearance.\n\n<b>(Lost the Flawless Body perk!)</b>\n");
+				player.removePerk(PerkLib.FlawlessBody);
+				needNext = true;
+			}
+			//Ferocity
+			if (player.orcScore() < 11 && player.findPerk(PerkLib.Ferocity) >= 0 && player.findPerk(PerkLib.OrcAdrenalGlandsFinalForm) < 0) {
+				outputText("\nYour natural ferocity start vanishing at a dramatic rate until finally there is no more. You realise you likely aren’t orc enough anymore, considering you felt so invincible with it, might not be a good thing.\n\n<b>(Lost the Ferocity perk!)</b>\n");
+				player.removePerk(PerkLib.Ferocity);
+				needNext = true;
+			}
 			//Soul Sense
 			if (player.maxSoulforce() >= 200 && player.findPerk(PerkLib.SoulApprentice) >= 0 && player.findPerk(PerkLib.SoulSense) < 0) {
 				outputText("\nDuring a casual walk around your camp you suddenly notice, or rather feel, something unexpected. Your surrounding blurs for a moment, to be replaced with a forest. You notice a goblin strolling nearby. Suddenly, she stops and slowly looks around, staring directly at you. A moment later, your vision of the forest becomes blurry, eventually fading away to be replaced by your camp and its surroundings. ");
@@ -1038,11 +1059,11 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 					flags[kFLAGS.FOX_BAD_END_WARNING] = 0;
 				}
 			}
-			/*if (flags[kFLAGS.PIG_BAD_END_WARNING] == 1) {
-			 if (player.faceType != PIG || player.tailType != PIG || player.earType != PIG || player.lowerBody != CLOVEN_HOOFED) {
-			 flags[kFLAGS.PIG_BAD_END_WARNING] = 0;
-			 }
-			 }*/
+			if (flags[kFLAGS.PIG_BAD_END_WARNING] == 1) {
+				if (player.faceType != Face.PIG || player.tailType != Tail.PIG || player.ears.type != Ears.PIG || player.lowerBody != LowerBody.CLOVEN_HOOFED) {
+					flags[kFLAGS.PIG_BAD_END_WARNING] = 0;
+				}
+			}
 			if (flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] >= 100 && player.findPerk(PerkLib.BasiliskResistance) < 0) {
 				if (player.findPerk(PerkLib.GorgonsEyes) >= 0) outputText("\nYou notice that you feel a bit stiff and your skin is a bit harder.  Something clicks in your mind as you finally unlock the potential to protect yourself from the goddamn basilisks! \n\n(<b>Gained Perk: Basilisk Resistance - You are now immune to the basilisk's gaze!</b>)\n");
 				else outputText("\nYou notice that you feel a bit stiff and your skin is a bit harder.  Something clicks in your mind as you finally unlock the potential to protect yourself from the goddamn basilisks! \n\n(<b>Gained Perk: Basilisk Resistance - Your maximum speed is permanently decreased but you are now immune to the basilisk's gaze!</b>)\n");
@@ -1120,7 +1141,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 					player.horns.type = Horns.UNICORN;
 				}
 				if (player.hairColor != "white") {
-					outputText(" You sigh in relief as fur turns immaculate white.");
+					outputText(" You sigh in relief as your fur turns immaculate white.");
 					player.hairColor = "white";
 				}
 				if (player.eyes.colour != "blue") {
@@ -1131,7 +1152,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 					outputText(" Your wings also redeem themselves changing into a pair of angelic wings covered with white feathers.");
 					player.wings.type = Wings.FEATHERED_ALICORN;
 				}
-				outputText(" <b>You laugh heartily at your unblemish pure form as you realise are an ");
+				outputText(" <b>You laugh heartily at your unblemish pure form as you realise you are an ");
 				if (player.wings.type == Wings.FEATHERED_ALICORN) outputText("alicorn");
 				else outputText("unicorn");
 				outputText(" now. Mighty magical power start to swell in the horn on your forehead, cleansing whats left of any corruption you may have, and you will gladly use them to fight off the corruption that plagues mareth.</b>\n");
@@ -1716,4 +1737,4 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 		//End of Interface Implementation
 	}
 }
-
+

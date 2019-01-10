@@ -30,6 +30,9 @@ public class Arms extends BodyPart {
 	public static const AVIAN:int = 26;
 	public static const GRYPHON:int = 27;
 	public static const SPHINX:int = 28;
+	public static const PIG:int = 29;
+	public static const BOAR:int = 30;
+	public static const ORC:int = 31;
 	// Don't forget to add new types in DebugMenu.as list ARM_TYPE_CONSTANTS
 
 	public function Arms() {

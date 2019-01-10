@@ -67,7 +67,7 @@ public class DarkElfScout extends Monster
 		
 		public function AnkleShot():void
 		{
-			outputText("The dark skinned elf shoot you through the ankle and takes some distance. Crippled like you are, it will be annoying to catch her--if not impossible. Better use ranged attacks until you recover mobility.");
+			outputText("The dark skinned elf shoot you through the ankle and takes  some distance. Crippled like you are, it will be annoying to catch her--if not impossible. Better use ranged attacks until you recover mobility.");
 			player.createStatusEffect(StatusEffects.Sealed2, 4, 0, 0, 0);
 		}
 		
@@ -81,8 +81,8 @@ public class DarkElfScout extends Monster
 				outputText("The dark elf smirks wickedly before shooting an arrow straight into your wing. You fall, unable to fly, and crash into the ground. ");
 				player.removeStatusEffect(StatusEffects.Flying);
 				var damage:Number = 0;
-				damage += this.str * 1.5;
-				damage += eBaseSpeedDamage() * 1.5;
+				damage += this.str * 2.5;
+				damage += eBaseSpeedDamage() * 2.5;
 				if (damage < 10) damage = 10;
 				if (this.weaponRangeAttack < 51) damage *= (1 + (this.weaponRangeAttack * 0.03));
 				else if (this.weaponRangeAttack >= 51 && this.weaponRangeAttack < 101) damage *= (2.5 + ((this.weaponRangeAttack - 50) * 0.025));

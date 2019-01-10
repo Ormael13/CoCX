@@ -4402,7 +4402,7 @@ internal function slurpFawkesCocksForFunAndInflation():void {
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] += 3;
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 5;
 	urtaLove(2);
-	if(rand(2) == 0) outputText(player.modThickness(100,2));
+	if(rand(2) == 0) outputText(player.modThickness(player.maxThicknessCap(),2));
 	if(rand(2) == 0) outputText(player.modTone(0,2));
 	doNext(camp.returnToCampUseOneHour);
 }

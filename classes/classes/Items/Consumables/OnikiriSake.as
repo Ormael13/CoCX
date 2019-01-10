@@ -77,7 +77,7 @@ public class OnikiriSake extends Consumable {
 			changes++;
 		}
 		if (changes < changeLimit && rand(3) == 0 && player.tone < player.maxToneCap()) {
-			outputText(player.modTone((player.maxToneCap() - 5), 3));
+			outputText(player.modTone(player.maxToneCap(), 3));
 		}
 		if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 		//Sexual changed
@@ -223,7 +223,6 @@ public class OnikiriSake extends Consumable {
 		//FAILSAFE CHANGE
 		if (changes == 0) {
 			outputText("\n\nRemarkably, the sake has no effect aside making you feel little more drunk.  Maybe next time?");
-			player.refillHunger(10);
 		}
 		player.refillHunger(10);
 		return false;

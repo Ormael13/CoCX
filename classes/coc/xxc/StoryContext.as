@@ -8,6 +8,7 @@ import classes.CockTypesEnum;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.SceneLib;
+import classes.PerkLib;
 
 import coc.xlogic.ExecContext;
 
@@ -23,6 +24,7 @@ public class StoryContext extends ExecContext{
 				kFLAGS:kFLAGS,
 				kGAMECLASS:CoC.instance,
 				Math:Math,
+                PerkLib:PerkLib,
 				SceneLib:SceneLib,
 				Skin:Skin
 			}

@@ -51,7 +51,8 @@ public class PlayerInfo extends BaseContent {
 				bodyStats += "<b>Venom:</b> " + player.tailVenom + "/" + player.maxVenom() + "\n";
 		}
 		bodyStats += "<b>Tone:</b> " + player.tone + " / " + player.maxToneCap() + "\n";
-		bodyStats += "<b>Thickness:</b> " + player.thickness + " / 100\n";
+		bodyStats += "<b>Thickness:</b> " + player.thickness + " / " + player.maxThicknessCap() + "\n";
+		bodyStats += "<b>Feminity:</b> " + player.femininity + " / 100\n";
 		
 		bodyStats += "<b>Anal Capacity:</b> " + Math.round(player.analCapacity()) + "\n";
 		bodyStats += "<b>Anal Looseness:</b> " + Math.round(player.ass.analLooseness) + "\n";
@@ -125,8 +126,11 @@ public class PlayerInfo extends BaseContent {
 		// Begin Misc Stats
 		var miscStats:String = "";
 
-		if (camp.getCampPopulation() > 0)
+		if (camp.getCampPopulation() > 0) {
 			miscStats += "<b>Camp Population:</b> " + camp.getCampPopulation() + "\n";
+		//if (camp.getCampUndergroundPopulation() > 0)
+			miscStats += "<b>Camp Underground Population:</b> " + camp.getCampUndergroundPopulation() + "\n";
+		}
 
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 1) {
 			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2)
@@ -276,12 +280,6 @@ public class PlayerInfo extends BaseContent {
 
 		if (player.statusEffectv1(StatusEffects.RaijuLightningStatus) > 0)
 			statEffects += "Raiju Lightning - " + player.statusEffectv1(StatusEffects.RaijuLightningStatus) + " hours remaining. (During masturbation: rise instead lowering lust and extend duration of this effect by few hours. Could also cause uncontroled slowly transformation into raiju.)\n";
-		var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
-		if (vthirst != null) {
-			statEffects += "Vampire Thirst: " + vthirst.value1 + "/" + vthirst.maxThirst() + " ";
-			if (vthirst.currentBoost > 0) statEffects += "(+" + vthirst.currentBoost + " to str / spe / int / lib)";
-			statEffects += "\n";
-		}
 
 		if (player.statusEffectv1(StatusEffects.KonstantinArmorPolishing) > 0)
 			statEffects += "Armor Polishing - " + player.statusEffectv1(StatusEffects.KonstantinArmorPolishing) + " hours remaining. (+" + player.statusEffectv2(StatusEffects.KonstantinArmorPolishing) + "% to armor)\n";
@@ -291,6 +289,13 @@ public class PlayerInfo extends BaseContent {
 
 		if (player.statusEffectv1(StatusEffects.Dysfunction) > 0)
 			statEffects += "Dysfunction - " + player.statusEffectv1(StatusEffects.Dysfunction) + " hours remaining. (Disables masturbation)\n";
+		
+		var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
+		if (vthirst != null) {
+			statEffects += "Vampire Thirst: " + vthirst.value1 + "/" + vthirst.maxThirst() + " ";
+			if (vthirst.currentBoost > 0) statEffects += "(+" + vthirst.currentBoost + " to str / spe / int / lib)";
+			statEffects += "\n";
+		}
 
 		if (statEffects != "")
 			outputText("\n<b><u>Ongoing Status Effects</u></b>\n" + statEffects);
@@ -382,7 +387,7 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<i>Ghost Strength:</i> +" + combat.ghostStrength() + "\n";
 		combatStats += "<b>Toughness Cap:</b> " + maxes.tou + "\n";
 		combatStats += "<b>Speed Cap:</b> " + maxes.spe + "\n";
-		//combatStats += "<i>Ghost Speed:</i> +" + combat.ghostSpeed() + "\n";
+		combatStats += "<i>Ghost Speed:</i> +" + combat.ghostSpeed() + "\n";
 		combatStats += "<b>Intelligence Cap:</b> " + maxes.inte + "\n";
 		combatStats += "<b>Wisdom Cap:</b> " + maxes.wis + "\n";
 		combatStats += "<b>Libido Cap:</b> " + maxes.lib + "\n";
@@ -391,6 +396,14 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<i>Sensitivity Minimum:</i> " + mins.sens + "\n";
 		combatStats += "<i>Corruption Minimum:</i> " + mins.cor + "\n";
 		combatStats += "\n";
+		if (player.statusEffectv1(StatusEffects.FeedingEuphoria) > 0) combatStats += "<b>Feeding Euphoria:</b> " + player.statusEffectv1(StatusEffects.FeedingEuphoria) + " hours remaining (+" + player.statusEffectv2(StatusEffects.FeedingEuphoria) + " to spe)\n";
+		var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
+		if (vthirst != null) {
+			combatStats += "<b>Vampire Thirst:</b> " + vthirst.value1 + "/" + vthirst.maxThirst() + " ";
+			if (vthirst.currentBoost > 0) combatStats += "(+" + vthirst.currentBoost + " to str / spe / int / lib)";
+			combatStats += "\n\n";
+		}
+		combatStats += "<b>Minimum HP:</b> " + player.minHP() + "\n";
 		combatStats += "<b>HP Regeneration (%):</b> ~ " + combat.PercentBasedRegeneration() + " % / " + combat.maximumRegeneration() + " % (turn), ~ " + combat.PercentBasedRegeneration() * 2 + " % / " + combat.maximumRegeneration() * 2 + " % (hour)\n";
 		combatStats += "<b>HP Regeneration (Total):</b> ~ " + Math.round((player.maxHP() * combat.PercentBasedRegeneration() / 100) + combat.nonPercentBasedRegeneration()) + " HP /  turn, ~ " + Math.round((player.maxHP() * combat.PercentBasedRegeneration() / 100) + combat.nonPercentBasedRegeneration()) * 2 + " HP /  hour\n";
 		combatStats += "<b>Fatigue Recovery:</b> " + combat.fatigueRecovery2() + " / turn\n";
@@ -401,7 +414,19 @@ public class PlayerInfo extends BaseContent {
 		if (combatStats != "")
 			outputText("\n<b><u>Combat Stats</u></b>\n" + combatStats);
 		// End Combat Stats
+		
+		// Begin Kill Counters Stats
+		var killCountStats:String = "";
 
+		killCountStats += "<b>Goblins:</b> " + flags[kFLAGS.GOBLINS_KILLED] + "\n";
+		killCountStats += "<b>Hellhounds:</b> " + flags[kFLAGS.HELLHOUNDS_KILLED] + "\n";
+		killCountStats += "<b>Imps:</b> " + flags[kFLAGS.IMPS_KILLED] + "\n";
+		killCountStats += "<b>Minotaurs:</b> " + flags[kFLAGS.MINOTAURS_KILLED] + "\n";
+
+		if (killCountStats != "")
+			outputText("\n<b><u>Kill Counters</u></b>\n" + killCountStats);
+		// End Kill Counters Stats
+		
 		if (prison.inPrison || flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) prison.displayPrisonStats();
 		
 		menu();

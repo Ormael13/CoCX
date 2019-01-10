@@ -611,6 +611,43 @@ import classes.Items.JewelryLib;
 			return cocks[arg].hasKnot();
 		}
 		
+		public override function minHP():Number
+		{
+			var min:Number = 1;
+			if (findPerk(PerkLib.Diehard) >= 0) {
+				min -= maxHP() * 0.02;
+				min -= (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}
+			if (findPerk(PerkLib.ImprovedDiehard) >= 0) {
+				min -= maxHP() * 0.04;
+				min -= (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}
+			if (findPerk(PerkLib.GreaterDiehard) >= 0) {
+				min -= maxHP() * 0.06;
+				min -= (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}
+			if (findPerk(PerkLib.EpicDiehard) >= 0) {
+				min -= maxHP() * 0.08;
+				min -= (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}//nastepny diehard to 5% i 1000
+			if (findPerk(PerkLib.OrcAdrenalGlandsFinalForm) >= 0 || game.player.orcScore() >= 11) {
+				if (findPerk(PerkLib.Ferocity) >= 0) min -= maxHP() * 0.07;
+				if (findPerk(PerkLib.OrcAdrenalGlands) >= 0) min -= maxHP() * 0.01;
+				if (findPerk(PerkLib.OrcAdrenalGlandsEvolved) >= 0) min -= maxHP() * 0.02;
+			}
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) {
+				min -= str;
+				min -= tou;
+				min -= spe;
+				min -= inte;
+				min -= wis;
+				min -= lib;
+				min -= sens;
+			}
+			min = Math.round(min);
+			return min;
+		}
+		
 		public override function maxFatigue():Number
 		{
 			var max:Number = 150;
@@ -756,7 +793,12 @@ import classes.Items.JewelryLib;
 			if (flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] > 0) max += flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING];//+310
 			if (jewelryEffectId == JewelryLib.MODIFIER_SF) max += jewelryEffectMagnitude;//+20
 			if (necklaceName == "soulmetal necklace") max += necklaceEffectMagnitude;//+100
-			if (findPerk(PerkLib.JobSoulCultivator) >= 0) {//4105-5105 soulforce na razie przed liczeniem mnożnika jest
+			if (findPerk(PerkLib.UnlockSpirit) >= 0) max += level * 5;
+			if (findPerk(PerkLib.UnlockSpirit2ndStage) >= 0) max += level * 5;
+			if (findPerk(PerkLib.UnlockSpirit3rdStage) >= 0) max += level * 5;
+			if (findPerk(PerkLib.UnlockSpirit4thStage) >= 0) max += level * 5;
+			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 6;
+			if (findPerk(PerkLib.JobSoulCultivator) >= 0) {//8005-9005 soulforce na razie przed liczeniem mnożnika jest
 				var multimax:Number = 1;
 				if (game.player.alicornScore() >= 12) multimax += 0.2;
 				if (game.player.dragonScore() >= 20) multimax += 0.1;
@@ -786,15 +828,10 @@ import classes.Items.JewelryLib;
 				if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) multimax += 0.2;
 				//if (flags[kFLAGS.UNLOCKED_MERIDIANS] > 0) multimax += flags[kFLAGS.UNLOCKED_MERIDIANS] * 0.05;
 				//if (findPerk(PerkLib.Ascension) >= 0) multimax += perkv1(PerkLib.Ascension) * 0.01;
-				max *= multimax;
+				max *= multimax;//3.75
 			}
-			if (findPerk(PerkLib.UnlockSpirit) >= 0) max += level * 5;
-			if (findPerk(PerkLib.UnlockSpirit2ndStage) >= 0) max += level * 5;
-			if (findPerk(PerkLib.UnlockSpirit3rdStage) >= 0) max += level * 5;
-			if (findPerk(PerkLib.UnlockSpirit4thStage) >= 0) max += level * 5;
-			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 6;
 			max = Math.round(max);
-			if (max > 399999) max = 399999;
+			if (max > 429999) max = 429999;
 			return max;
 		}
 		
@@ -855,8 +892,12 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.UnlockId2ndStage) >= 0) max += level;
 			if (findPerk(PerkLib.UnlockId3rdStage) >= 0) max += level;
 			if (findPerk(PerkLib.UnlockId4thStage) >= 0) max += level;
-			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 2;
-			if (max > 39999) max = 39999;
+			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 2;//~35,730
+			var multimax:Number = 1;
+			if (game.player.orcScore() >= 5) multimax += 0.1;
+			if (game.player.orcScore() >= 11) multimax += 0.1;
+			max *= multimax;
+			if (max > 42999) max = 42999;
 			return max;
 		}
 		
@@ -929,13 +970,12 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.EromancyBeginner) >= 0) max += Math.round(inte);
 			if (findPerk(PerkLib.EromancyExpert) >= 0) max += Math.round(inte);
 			if (findPerk(PerkLib.EromancyMaster) >= 0) max += Math.round(inte*2);
+			var multimax:Number = 1;
 			if (findPerk(PerkLib.ArcaneRegenerationMinor) >= 0 && inte >= 50) {
-				var multimax:Number = 1;
 				multimax += 0.1;
 				if (findPerk(PerkLib.ArcaneRegenerationMajor) >= 0 && inte >= 75) multimax += 0.2;
 				if (findPerk(PerkLib.ArcaneRegenerationEpic) >= 0 && inte >= 100) multimax += 0.3;
 				if (findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0 && inte >= 125) multimax += 0.4;
-				max *= multimax;
 			}
 			if (findPerk(PerkLib.AscensionInnerPower) >= 0) max += perkv1(PerkLib.AscensionInnerPower) * 40;
 			if (jewelryEffectId == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude;
@@ -945,8 +985,11 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.UnlockForce3rdStage) >= 0) max += level * 10;
 			if (findPerk(PerkLib.UnlockForce4thStage) >= 0) max += level * 10;
 			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 12;
+			if (game.player.elfScore() >= 5) multimax += 0.1;
+			if (game.player.elfScore() >= 11) multimax += 0.1;
+			max *= multimax;
 			max = Math.round(max);
-			if (max > 499999) max = 499999;
+			if (max > 569999) max = 569999;
 			return max;
 		}
 		

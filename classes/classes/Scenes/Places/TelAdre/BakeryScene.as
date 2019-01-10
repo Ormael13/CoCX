@@ -386,7 +386,7 @@ public function nomnomnom(name:String,price:Number):void {
 		outputText("You hand over " + num2Text(flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE]) + " gems and get your " + flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] + ".  A moment later you're at a table, licking the sugary residue from your fingertips and wondering just how they make the food so damned good.");
 		if(flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] == "doughnuts") {
 			outputText(player.modTone(0,2));
-			outputText(player.modThickness(100,1));
+			outputText(player.modThickness(player.maxThicknessCap(),1));
 			if(rand(3) == 0 && player.butt.type < 15 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
 				outputText("\n\nWhen you stand back up your " + buttDescript() + " jiggles a little bit more than you'd expect.");
 				player.butt.type++;
@@ -399,7 +399,7 @@ public function nomnomnom(name:String,price:Number):void {
 		}
 		else if(flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] == "cookies") {
 			outputText(player.modTone(0,1));
-			outputText(player.modThickness(100,2));
+			outputText(player.modThickness(player.maxThicknessCap(),2));
 			if(rand(3) == 0 && player.hips.type < 20 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
 				outputText("\n\nAfter finishing, you find your gait has changed.  Did your hips widen?");
 				player.hips.type++;
@@ -407,7 +407,7 @@ public function nomnomnom(name:String,price:Number):void {
 			player.refillHunger(20);
 		}
 		else if(flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] == "brownies") {
-			outputText(player.modThickness(100,4));
+			outputText(player.modThickness(player.maxThicknessCap(),4));
 			if(rand(2) == 0 && player.hips.type < 30 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
 				outputText("\n\nAfter finishing, you find your gait has changed.  Your " + hipDescript() + " definitely got wider.");
 				player.hips.type += 2;
@@ -424,7 +424,7 @@ public function nomnomnom(name:String,price:Number):void {
 		}
 		else if(flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] == "pound cake") {
 			outputText(player.modTone(0,2));
-			outputText(player.modThickness(100,2));
+			outputText(player.modThickness(player.maxThicknessCap(),2));
 			if(rand(3) == 0 && player.butt.type < 25 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
 				outputText("\n\nWhen you stand back up your " + buttDescript() + " jiggles a little bit more than you'd expect.");
 				player.butt.type++;

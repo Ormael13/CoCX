@@ -136,7 +136,7 @@ private function acceptDominikasKnowledge():void {
 		outputText("\"<i>Now then,</i>\" she says. Her hands glow with a brief sense of power, and many of the tattoos shine with equal illumination. She gestures with her hand and the lamps all acquire an unearthly light, as green glowing circles appear interlinked on the floor. \"<i>How much do you know about magic?</i>\"\n\n");
 
 		//[If player knows all spells]
-		if(player.spellCount() == 12) {
+		if(player.spellCountWhiteBlack() == 13) {
 			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00154] == 0) {
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00154]++;
 				outputText("You blink, then casually mention that you actually know quite a bit about magic. Dominika listens to you explain your skill in white and black magic, then coughs awkwardly and glances to the side. \"<i>O-oh,</i>\" she says, \"<i>Well. Uhm. I guess we can talk about magical theory, maybe?</i>\"\n\n");
@@ -215,21 +215,17 @@ private function acceptDominikasKnowledge():void {
 
 			outputText("Even with your inexperience, you find Dominika to be a good teacher. She helps you focus and train your mind, and you quickly find your first spell to be easy to perform.");
 			//(Player receives random unlearned spell.)
-			if(!player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
-				player.createStatusEffect(StatusEffects.KnowsBlizzard,0,0,0,0);
-				outputText("\n\n<b>New Black Magic Spell Learned: Blizzard</b>");
+			if(!player.hasStatusEffect(StatusEffects.KnowsMight)) {
+				player.createStatusEffect(StatusEffects.KnowsMight,0,0,0,0);
+				outputText("\n\n<b>New Black Magic Spell Learned: Might</b>");
 			}
 			else if(!player.hasStatusEffect(StatusEffects.KnowsBlink)) {
 				player.createStatusEffect(StatusEffects.KnowsBlink,0,0,0,0);
 				outputText("\n\n<b>New Black Magic Spell Learned: Blink</b>");
 			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsMight)) {
-				player.createStatusEffect(StatusEffects.KnowsMight,0,0,0,0);
-				outputText("\n\n<b>New Black Magic Spell Learned: Might</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsHeal)) {
-				player.createStatusEffect(StatusEffects.KnowsHeal,0,0,0,0);
-				outputText("\n\n<b>New Black Magic Spell Learned: Heal</b>");
+			else if(!player.hasStatusEffect(StatusEffects.KnowsRegenerate)) {
+				player.createStatusEffect(StatusEffects.KnowsRegenerate,0,0,0,0);
+				outputText("\n\n<b>New Black Magic Spell Learned: Regenerate</b>");
 			}
 			else if(!player.hasStatusEffect(StatusEffects.KnowsArouse)) {
 				player.createStatusEffect(StatusEffects.KnowsArouse,0,0,0,0);
@@ -243,6 +239,10 @@ private function acceptDominikasKnowledge():void {
 				player.createStatusEffect(StatusEffects.KnowsChargeA,0,0,0,0);
 				outputText("\n\n<b>New White Magic Spell Learned: Charge Armor</b>");
 			}
+			else if(!player.hasStatusEffect(StatusEffects.KnowsHeal)) {
+				player.createStatusEffect(StatusEffects.KnowsHeal,0,0,0,0);
+				outputText("\n\n<b>New White Magic Spell Learned: Heal</b>");
+			}
 			else if(!player.hasStatusEffect(StatusEffects.KnowsBlind)) {
 				player.createStatusEffect(StatusEffects.KnowsBlind,0,0,0,0);
 				outputText("\n\n<b>New White Magic Spell Learned: Blind</b>");
@@ -253,9 +253,21 @@ private function acceptDominikasKnowledge():void {
 			}
 			else if(!player.hasStatusEffect(StatusEffects.KnowsIceSpike)) {
 				player.createStatusEffect(StatusEffects.KnowsIceSpike,0,0,0,0);
-				outputText("\n\n<b>New White Magic Spell Learned: Ice Rain</b>");
+				outputText("\n\n<b>New Black Magic Spell Learned: Ice Spike</b>");
 			}
-			else outputText("==SOMETHING FUCKED UP.  TELL FEN VIA DICORD (link to it in first post of fen forum mod thread)==");
+			else if(!player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) {
+				player.createStatusEffect(StatusEffects.KnowsLightningBolt,0,0,0,0);
+				outputText("\n\n<b>New White Magic Spell Learned: Lightning Bolt</b>");
+			}
+			else if(!player.hasStatusEffect(StatusEffects.KnowsDarknessShard)) {
+				player.createStatusEffect(StatusEffects.KnowsDarknessShard,0,0,0,0);
+				outputText("\n\n<b>New Black Magic Spell Learned: Darkness Shard</b>");
+			}
+			else if(!player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
+				player.createStatusEffect(StatusEffects.KnowsBlizzard,0,0,0,0);
+				outputText("\n\n<b>New White Magic Spell Learned: Blizzard</b>");
+			}
+			else outputText("==SOMETHING FUCKED UP.  TELL ORMAEL VIA DICORD (link to it in first post of fen forum mod thread)==");
 			dynStats("int", 2);
 		}
 	}

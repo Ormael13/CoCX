@@ -51,6 +51,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const GARGOYLE_2:int            = 43;
 	public static const AVIAN:int            	  = 44;
 	public static const GRYPHON:int            	  = 45;
+	public static const ORC:int	            	  = 46;
 	// Don't forget to add new types in DebugMenu.as list LOWER_TYPE_CONSTANTS
 	
 	override public function set type(value:int):void {

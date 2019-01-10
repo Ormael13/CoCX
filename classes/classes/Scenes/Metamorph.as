@@ -35,7 +35,7 @@ public function accessMetamorphMenu():void {
 	outputText("Using some of soulforce to re-gain any animal bodyparts that your body remember in it genetic memory.\n");
 	outputText("<i>Bonus to max soulforce: " + 50 * (1 + player.perkv1(PerkLib.Metamorph)) + "</i>\n\n");
 	outputText("<b>Race added to Metamorph:\n");
-	outputText("Bat, Bee, Cow, Couatl, Demon, Devil, Dragon, Elf, Fox, Gorgon, Harpy, Kitsune, Lizard, Mantis, Minotaur, Naga, Oni, Orca, Phoenix, Raiju, Salamander, Shark, Spider (+Drider), Vampire</b>");
+	outputText("Bat, Bee, Boar, Cow, Couatl, Demon, Devil, Dragon, Elf, Fox, Gorgon, Harpy, Kitsune, Lizard, Mantis, Minotaur, Naga, Oni, Orca, Phoenix, Pig, Raiju, Salamander, Shark, Spider (+Drider), Vampire</b>");
 	menu();
 	addButton(10, "Page 1", accessPage1MetamorphMenu);
 	addButton(11, "Page 2", accessPage2MetamorphMenu);
@@ -137,6 +137,14 @@ private function accessPage1FaceMenu():void {
 }
 private function accessPage2FaceMenu():void {
 	menu();
+	if (player.hasStatusEffect(StatusEffects.UnlockedPigFace) && player.faceType != Face.PIG && player.soulforce >= 100) addButton(4, "Pig", metamorphPigFace);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedPigFace) && player.faceType == Face.PIG) addButtonDisabled(4, "Pig", "You already have pig face.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedPigFace) && player.faceType != Face.PIG && player.soulforce < 100) addButtonDisabled(4, "Pig", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(4, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedBoarFace) && player.faceType != Face.BOAR && player.soulforce >= 100) addButton(5, "Boar", metamorphBoarFace);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedBoarFace) && player.faceType == Face.BOAR) addButtonDisabled(5, "Boar", "You already have boar face.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedBoarFace) && player.faceType != Face.BOAR && player.soulforce < 100) addButtonDisabled(5, "Boar", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(5, "???", "You not yet unlocked this metamorphosis!");
 	if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderFace) && player.faceType != Face.SALAMANDER_FANGS && player.soulforce >= 100) addButton(11, "Salamander", metamorphSalamanderFace);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderFace) && player.faceType == Face.SALAMANDER_FANGS) addButtonDisabled(11, "Salamander", "You already have salamander fangs.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderFace) && player.faceType != Face.SALAMANDER_FANGS && player.soulforce < 100) addButtonDisabled(11, "Salamander", "You not have enough Soulforce for this metamorphosis.");
@@ -265,6 +273,10 @@ private function accessPage1EarsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicEars) && player.ears.type == Ears.DRAGON) addButtonDisabled(9, "Dragon", "You already have dragon ears.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicEars) && player.ears.type != Ears.DRAGON && player.soulforce < 100) addButtonDisabled(9, "Dragon", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(9, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedPigEars) && player.ears.type != Ears.PIG && player.soulforce >= 100) addButton(13, "Pig", metamorphPigEars);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedPigEars) && player.ears.type == Ears.PIG) addButtonDisabled(13, "Pig", "You already have pig ears.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedPigEars) && player.ears.type != Ears.PIG && player.soulforce < 100) addButtonDisabled(13, "Pig", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(13, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 private function accessPage2EarsMenu():void {
@@ -365,18 +377,17 @@ private function accessPage2MetamorphMenu():void {
 	menu();
 	addButton(0, "Arms(1)", accessPage1ArmsMenu);
 	addButton(1, "Arms(2)", accessPage2ArmsMenu);
-	addButton(2, "Tail(1)", accessPage1TailMenu);
-	addButton(3, "Tail(2)", accessPage2TailMenu);
-	addButton(4, "Tail(3)", accessPage3TailMenu);
-	addButton(5, "Wings(1)", accessPage1WingsMenu);
-	addButton(6, "Wings(2)", accessPage2WingsMenu);
-	addButton(7, "Legs(1)", accessPage1LegsMenu);
-	addButton(8, "Legs(2)", accessPage2LegsMenu);
-	addButton(9, "Legs(3)", accessPage3LegsMenu);
-//	addButton(10, "Legs(4)", accessPage4LegsMenu);
-	addButton(10, "Rear B.", accessRearBodyMenu);
-//	addButton(12, "Back", accessMetamorphMenu);
-//	addButton(13, "Back", accessMetamorphMenu);
+	addButton(2, "Arms(3)", accessPage3ArmsMenu);
+	addButton(3, "Tail(1)", accessPage1TailMenu);
+	addButton(4, "Tail(2)", accessPage2TailMenu);
+	addButton(5, "Tail(3)", accessPage3TailMenu);
+	addButton(6, "Wings(1)", accessPage1WingsMenu);
+	addButton(7, "Wings(2)", accessPage2WingsMenu);
+	addButton(8, "Legs(1)", accessPage1LegsMenu);
+	addButton(9, "Legs(2)", accessPage2LegsMenu);
+	addButton(10, "Legs(3)", accessPage3LegsMenu);
+//	addButton(11, "Legs(4)", accessPage4LegsMenu);
+	addButton(11, "Rear B.", accessRearBodyMenu);
 	addButton(14, "Back", accessMetamorphMenu);
 }
 private function accessPage1ArmsMenu():void {
@@ -449,6 +460,18 @@ private function accessPage2ArmsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuArms) && player.arms.type == Arms.RAIJU) addButtonDisabled(7, "Raiju", "You already have raiju arms.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuArms) && player.arms.type != Arms.RAIJU && player.soulforce < 100) addButtonDisabled(7, "Raiju", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(7, "???", "You not yet unlocked this metamorphosis!");
+	addButton(14, "Back", accessPage2MetamorphMenu);
+}
+private function accessPage3ArmsMenu():void {
+	menu();
+	if (player.hasStatusEffect(StatusEffects.UnlockedPigArms) && player.arms.type != Arms.PIG && player.soulforce >= 100) addButton(0, "Pig", metamorphPigArms);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedPigArms) && player.arms.type == Arms.PIG) addButtonDisabled(0, "Pig", "You already have pig arms.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedPigArms) && player.arms.type != Arms.PIG && player.soulforce < 100) addButtonDisabled(0, "Pig", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(0, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedBoarArms) && player.arms.type != Arms.BOAR && player.soulforce >= 100) addButton(1, "Boar", metamorphBoarArms);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedBoarArms) && player.arms.type == Arms.BOAR) addButtonDisabled(1, "Boar", "You already have boar arms.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedBoarArms) && player.arms.type != Arms.BOAR && player.soulforce < 100) addButtonDisabled(1, "Boar", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(1, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage2MetamorphMenu);
 }
 private function accessPage1TailMenu():void {
@@ -564,6 +587,10 @@ private function accessPage2TailMenu():void {
 }
 private function accessPage3TailMenu():void {
 	menu();
+	if (player.hasStatusEffect(StatusEffects.UnlockedPigTail) && player.tailType != Tail.PIG && player.soulforce >= 100) addButton(0, "Pig", metamorphPigTail);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedPigTail) && player.tailType == Tail.PIG) addButtonDisabled(0, "Pig", "You already have pig tail.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedPigTail) && player.tailType != Tail.PIG && player.soulforce < 100) addButtonDisabled(0, "Pig", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(0, "???", "You not yet unlocked this metamorphosis!");
 	if (player.hasStatusEffect(StatusEffects.UnlockedGoatTail) && player.tailType != Tail.GOAT && player.soulforce >= 100) addButton(2, "Goat", metamorphGoatTail);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedGoatTail) && player.tailType == Tail.GOAT) addButtonDisabled(2, "Goat", "You already have goat tail.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedGoatTail) && player.tailType != Tail.GOAT && player.soulforce < 100) addButtonDisabled(2, "Goat", "You not have enough Soulforce for this metamorphosis.");
@@ -889,12 +916,57 @@ private function metamorphFur():void {
 
 	doNext(accessMetamorphMenu);
 }*/
+private function metamorphBoarArms():void {
+	clearOutput();
+	player.soulforce -= 100;
+	if (player.arms.type != Arms.HUMAN) restoreHumanArms();
+	outputText("\n\nYour arms and hands start covering in fur at an alarming rate suddenly as you poke at your palms you jolt up as they become extremely sensitive. Furthermore your nails become increasingly pointed turning black just like a set of claws. <b>You now have boar arms.</b>");
+	player.arms.type = Arms.BOAR;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphBoarFace():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nYou cry out in pain as the bones in your face begin to break and rearrange. You rub your face furiously in an attempt to ease the pain, but to no avail. Your bottom teeth ache as well. What’s happening to you? As the sensations pass, you examine your face in a nearby puddle. <b>You nearly gasp in shock at the sight of your new tusky boar face!</b>");
+	player.faceType = Face.BOAR;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphPigFace():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nYou cry out in pain as the bones in your face begin to break and rearrange. You rub your face furiously in an attempt to ease the pain, but to no avail. As the sensations pass, you examine your face in a nearby puddle. <b>You nearly gasp in shock at the sight of your new pig face!</b>");
+	player.faceType = Face.PIG;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphPigArms():void {
+	clearOutput();
+	player.soulforce -= 100;
+	if (player.arms.type != Arms.HUMAN) restoreHumanArms();
+	outputText("\n\nYour finguers starts to feel like some bee stung them as they inflates to a more chubby size your nails tickening and darkening turning into clover-like claws. Aside of your now fat finguers and darker claws your arms remains about the same. <b>You now have pig arms.</b>");
+	player.arms.type = Arms.PIG;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphPigTail():void {
+	clearOutput();
+	player.soulforce -= 100;
+	if (player.tailType == Tail.NONE) outputText("\n\nYou feel a tug at the base of your spine as it lengthens ever so slightly. Looking over your shoulder, <b>you find that you have sprouted a small, curly pig tail.</b>");
+	else outputText("\n\nYou feel a pinching sensation in your [tail] as it begins to warp in change. When the sensation dissipates, <b>you are left with a small, curly pig tail.</b>");
+	player.tailType = Tail.PIG;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphPigEars():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nYou feel a pressure on your ears as they begin to reshape. Once the changes finish, you flick them about experimentally, <b>and you’re left with pointed, floppy pig ears.</b>");
+	player.ears.type = Ears.PIG;
+	doNext(accessMetamorphMenu);
+}
 private function metamorphVampireFace():void {
 	clearOutput();
 	player.soulforce -= 100;
 	outputText("\n\nYou yelp as a throbbing pain takes root in the sides of your mouth. You feel your canines grow longer as your throat grow dryer. You could go for some wine right now, with a bloody steak to top it off… maybe just the steak.");
 	outputText(" Or just the blood, really. You aren’t picky. Really, it’s up to you whether just rip off some poor sod’s throat and drink straight from the tap or drink blood from a wineglass, what with <b>your new vampire fangs!</b>");
-	player.hairType = Face.VAMPIRE;
+	player.faceType = Face.VAMPIRE;
 	doNext(accessMetamorphMenu);
 }
 private function metamorphVampireEyes():void {
@@ -1424,7 +1496,7 @@ private function metamorphDragonEars():void {
 private function metamorphGorgonEyes():void {
 	clearOutput();
 	player.soulforce -= 100;
-	outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you.  As you steady and open your eyes, all seems to be fine until at least it seems so. But when moment later, when you casualy look at your hands pondering if there is any other effect the numbing sensation starts to spread starting from your hands fingers. Worried you focus your gaze at them to notice, that they typical texture becoming grey colored much similar to that of... stone? And slowy you realize the more you look at them, the faster change. Panicked for a moment you look away and then this numbing feeling starting to slowly receed. But looking back at them causing it to return. After moment, and closing eyelids, you conclude that your eyes must have gained an useful ability.  <b>Your eyes has turned into gorgon eyes.</b>.");
+	outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you.  As you steady and open your eyes, all seems to be fine until at least it seems so. But when moment later, when you casualy look at your hands pondering if there is any other effect the numbing sensation starts to spread starting from your hands fingers. Worried you focus your gaze at them to notice, that they typical texture becoming grey colored much similar to that of... stone? And slowy you realize the more you look at them, the faster change. Panicked for a moment you look away and then this numbing feeling starting to slowly receed. But looking back at them causing it to return. After moment, and closing eyelids, you conclude that your eyes must have gained an useful ability.  <b>Your eyes has turned into gorgon eyes.</b>");
 	player.eyes.type = Eyes.GORGON;
 	doNext(accessMetamorphMenu);
 }
@@ -2270,4 +2342,4 @@ private function restoreHumanArms():void {
 	player.arms.type = Arms.HUMAN;
 }
 	}
-}
+}

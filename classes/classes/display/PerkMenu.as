@@ -85,6 +85,17 @@ public class PerkMenu extends BaseContent {
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] == 0) outputText("\n\nFighting Style: <b>Normal</b>");
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1) outputText("\n\nFighting Style: <b>Feral</b>");
 		}
+		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) {
+			outputText("\n\nYou can choose between starting fight with berserker, lustzerker, both or none.");
+			outputText("\n\nBerzerker: <b>");
+			if (flags[kFLAGS.ZERKER_COMBAT_MODE] == 1 || flags[kFLAGS.ZERKER_COMBAT_MODE] == 3) outputText("Autocast");
+			if (flags[kFLAGS.ZERKER_COMBAT_MODE] == 0 || flags[kFLAGS.ZERKER_COMBAT_MODE] == 2) outputText("Manual");
+			outputText("</b>");
+			outputText("\n\nLustzerker: <b>");
+			if (flags[kFLAGS.ZERKER_COMBAT_MODE] == 2 || flags[kFLAGS.ZERKER_COMBAT_MODE] == 3) outputText("Autocast");
+			if (flags[kFLAGS.ZERKER_COMBAT_MODE] == 0 || flags[kFLAGS.ZERKER_COMBAT_MODE] == 1) outputText("Manual");
+			outputText("</b>");
+		}
 
         var maxCurrentAttacks:int = combat.maxCurrentAttacks();
 		var maxAttacks:int = Math.max(combat.maxFistAttacks(),combat.maxClawsAttacks(),combat.maxSmallAttacks(),combat.maxLargeAttacks(),combat.maxCommonAttacks());
@@ -126,14 +137,26 @@ public class PerkMenu extends BaseContent {
 			if (maxCurrentAttacks < 10) addButtonDisabled(13, "All Deca", "You current melee weapon not allow to use this option");
 			else addButton(13, "All Deca", doubleAttackStyle,9);
 		}
-		//wolne tylko przyciski 3 i 8
+		addButton(9, "Others", doubleAttackOptions2);
+
+		if (CoC.instance.inCombat) addButton(14, "Back", combat.combatMenu);
+        else addButton(14, "Back", displayPerks);
+	}
+	public function doubleAttackOptions2():void {
+		var toggleflag:Function = curry(toggleFlag, doubleAttackOptions2);
+		var zerkingStyle:Function = curry(setFlag,doubleAttackOptions2,kFLAGS.ZERKER_COMBAT_MODE);
+		menu();
+		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) {
+			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 0) addButton(0, "None", zerkingStyle,0);
+			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 1) addButton(1, "Berserking", zerkingStyle,1);
+			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 2) addButton(2, "Lustzerking", zerkingStyle,2);
+			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 3) addButton(3, "Both", zerkingStyle,3);
+		}
 		if (player.findPerk(PerkLib.JobBeastWarrior) >= 0) {
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] != 0) addButton(4, "Normal", toggleflag, kFLAGS.FERAL_COMBAT_MODE, false);
 			if (((player.weaponName == "fists" && player.haveNaturalClaws()) || player.haveNaturalClawsTypeWeapon()) && flags[kFLAGS.FERAL_COMBAT_MODE] != 1) addButton(9, "Feral", toggleflag ,kFLAGS.FERAL_COMBAT_MODE, true);
 		}
-
-		if (CoC.instance.inCombat) addButton(14, "Back", combat.combatMenu);
-        else addButton(14, "Back", displayPerks);
+		addButton(14, "Back", doubleAttackOptions);
 	}
 
 	public function doubleStrikeOptions():void {
@@ -206,9 +229,25 @@ public class PerkMenu extends BaseContent {
 			if (maxCurrentRangeAttacks < 6) addButtonDisabled(7, "All Hexa", "You current range weapon not allow to use this option");
 			else addButton(7, "All Hexa", doubleStrikeStyle,5);
 		}
-		if (player.findPerk(PerkLib.ElementalArrows) >= 0 && flags[kFLAGS.ELEMENTAL_ARROWS] != 0) addButton(3, "None", elementalArrows,NONE);
-		if (player.findPerk(PerkLib.ElementalArrows) >= 0 && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && flags[kFLAGS.ELEMENTAL_ARROWS] != 1) addButton(8, "Fire", elementalArrows,FIRE);
-		if (player.findPerk(PerkLib.ElementalArrows) >= 0 && player.hasStatusEffect(StatusEffects.KnowsIceSpike) && flags[kFLAGS.ELEMENTAL_ARROWS] != 2) addButton(9, "Ice", elementalArrows,ICE);
+		addButton(13, "Enchantments", doubleStrikeOptions2);
+        if (CoC.instance.inCombat) addButton(14, "Back", combat.combatMenu);
+        else addButton(14, "Back", displayPerks);
+	}
+	public function doubleStrikeOptions2():void {
+		const NONE:int = 0;
+		const FIRE:int = 1;
+		const ICE :int = 2;
+		const LIGHTNING:int = 3;
+		const DARKNESS:int = 4;
+		var toggleflag:Function = curry(toggleFlag,doubleStrikeOptions);
+        var doubleStrikeStyle:Function = curry(setFlag,doubleStrikeOptions,kFLAGS.DOUBLE_STRIKE_STYLE);
+        var elementalArrows:Function = curry(setFlag,doubleStrikeOptions,kFLAGS.ELEMENTAL_ARROWS);
+		menu();
+		if (player.findPerk(PerkLib.ElementalArrows) >= 0 && flags[kFLAGS.ELEMENTAL_ARROWS] != 0) addButton(0, "None", elementalArrows,NONE);
+		if (player.findPerk(PerkLib.ElementalArrows) >= 0 && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && flags[kFLAGS.ELEMENTAL_ARROWS] != 1) addButton(1, "Fire", elementalArrows,FIRE);
+		if (player.findPerk(PerkLib.ElementalArrows) >= 0 && player.hasStatusEffect(StatusEffects.KnowsIceSpike) && flags[kFLAGS.ELEMENTAL_ARROWS] != 2) addButton(2, "Ice", elementalArrows,ICE);
+		if (player.findPerk(PerkLib.ElementalArrows) >= 0 && player.hasStatusEffect(StatusEffects.KnowsLightningBolt) && flags[kFLAGS.ELEMENTAL_ARROWS] != 3) addButton(6, "Lightning", elementalArrows,LIGHTNING);
+		if (player.findPerk(PerkLib.ElementalArrows) >= 0 && player.hasStatusEffect(StatusEffects.KnowsDarknessShard) && flags[kFLAGS.ELEMENTAL_ARROWS] != 4) addButton(7, "Darkness", elementalArrows,DARKNESS);
 		if (player.findPerk(PerkLib.Cupid) >= 0 && flags[kFLAGS.CUPID_ARROWS] != 0) addButton(10, "None", toggleflag,kFLAGS.CUPID_ARROWS,false);
 		if (player.findPerk(PerkLib.Cupid) >= 0 && player.hasStatusEffect(StatusEffects.KnowsArouse) && flags[kFLAGS.CUPID_ARROWS] != 1) addButton(11, "Arouse", toggleflag,kFLAGS.CUPID_ARROWS,true);
 		if (player.findPerk(PerkLib.EnvenomedBolt) >= 0 && flags[kFLAGS.ENVENOMED_BOLTS] != 0) addButton(12, "None", toggleflag,kFLAGS.ENVENOMED_BOLTS,false);
@@ -224,9 +263,7 @@ public class PerkMenu extends BaseContent {
 		{
             addButton(13, "Venom", toggleflag,kFLAGS.ENVENOMED_BOLTS,true);
 		}
-        if (CoC.instance.inCombat) addButton(14, "Back", combat.combatMenu);
-        else addButton(14, "Back", displayPerks);
-
+		addButton(14, "Back", doubleStrikeOptions);
 	}
 
 	public function spellautocastOptions():void {

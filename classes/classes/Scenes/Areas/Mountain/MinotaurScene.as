@@ -138,6 +138,7 @@ private function otherpostfightoptions():void {
 }
 private function killMinotaur():void {
 	clearOutput();
+	flags[kFLAGS.MINOTAURS_KILLED]++;
 	outputText("You finish off the minotaur and claim his horns as your prize. ");
 	if (player.cor < 25) dynStats("cor", -0.5);
 	inventory.takeItem(useables.MINOHOR, cleanupAfterCombat);

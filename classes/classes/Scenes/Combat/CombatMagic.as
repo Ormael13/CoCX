@@ -1334,10 +1334,7 @@ public class CombatMagic extends BaseCombatContent {
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
-		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
-			if (player.inte > 100) critChance += 10;
-		}
+		critChance += combatMagicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
@@ -1402,10 +1399,7 @@ public class CombatMagic extends BaseCombatContent {
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
-		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
-			if (player.inte > 100) critChance += 10;
-		}
+		critChance += combatMagicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
@@ -1465,15 +1459,12 @@ public class CombatMagic extends BaseCombatContent {
 			return;
 		}
 		clearOutput();
-		outputText("You narrow your eyes, focusing your own lust and willpower with a deadly intent.  Above you starting to form small darn cloud that soon becoming quite wide and long.  Then almost endless rain of ice shards start to downpour on " + monster.a + monster.short + " and the rest of your surrounding!\n");
+		outputText("You narrow your eyes, focusing your own lust and willpower with a deadly intent.  Above you starting to form small dark cloud that soon becoming quite wide and long.  Then almost endless rain of ice shards start to downpour on " + monster.a + monster.short + " and the rest of your surrounding!\n");
 		var damage:Number = scalingBonusIntelligence() * spellMod();
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
-		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
-			if (player.inte > 100) critChance += 10;
-		}
+		critChance += combatMagicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
@@ -1543,10 +1534,7 @@ public class CombatMagic extends BaseCombatContent {
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
-		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
-			if (player.inte > 100) critChance += 10;
-		}
+		critChance += combatMagicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
@@ -1843,10 +1831,7 @@ public class CombatMagic extends BaseCombatContent {
 		//Determine if critical heal!
 		var crit:Boolean = false;
 		var critHeal:int = 5;
-		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-			if (player.inte <= 100) critHeal += (player.inte - 50) / 50;
-			if (player.inte > 100) critHeal += 10;
-		}
+		critHeal += combatMagicalCritical();
 		if (rand(100) < critHeal) {
 			crit = true;
 			heal *= 1.75;
@@ -1986,10 +1971,7 @@ public class CombatMagic extends BaseCombatContent {
 			//Determine if critical hit!
 			var crit:Boolean = false;
 			var critChance:int = 5;
-			if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-				if (player.inte <= 100) critChance += (player.inte - 50) / 50;
-				if (player.inte > 100) critChance += 10;
-			}
+			critChance += combatMagicalCritical();
 			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 			if (rand(100) < critChance) {
 				crit = true;
@@ -2008,10 +1990,7 @@ public class CombatMagic extends BaseCombatContent {
 			//Determine if critical hit!
 			var crit2:Boolean = false;
 			var critChance2:int = 5;
-			if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-				if (player.inte <= 100) critChance2 += (player.inte - 50) / 50;
-				if (player.inte > 100) critChance2 += 10;
-			}
+			critChance2 += combatMagicalCritical();
 			if (rand(100) < critChance2) {
 				crit = true;
 				damage *= 1.75;
@@ -2086,10 +2065,7 @@ public class CombatMagic extends BaseCombatContent {
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
-		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
-			if (player.inte > 100) critChance += 10;
-		}
+		critChance += combatMagicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
@@ -2205,10 +2181,7 @@ public class CombatMagic extends BaseCombatContent {
 			//Determine if critical hit!
 			var crit:Boolean = false;
 			var critChance:int = 5;
-			if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-				if (player.inte <= 100) critChance += (player.inte - 50) / 50;
-				if (player.inte > 100) critChance += 10;
-			}
+			critChance += combat.combatPhysicalCritical();
 			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 			if (rand(100) < critChance) {
 				crit = true;

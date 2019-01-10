@@ -17,7 +17,7 @@ import classes.Scenes.NPCs.Galia;
 		public function bringBackTheFemImp():void {
 			clearOutput();
 			outputText("You arrive back in camp just in time to spot Evangeline poking your recent impish acquisition with a stick taking swift notes on a paper with a semi manic smile.\n\n");
-			outputText("\"<i>Oh my gosh! Oh my gosh!! Oh my GOSH!!! A live female imp I never thought I’d see one of those! And it’s alive too!</i>\"\n\n");
+			outputText("\"<i>Oh my gosh! Oh my gosh!! Oh my GOSH!!! A female imp I never thought I’d see one of those! And it’s alive too!</i>\"\n\n");
 			outputText("Evangeline suddenly realise you are staring awkwardly and rush to you.\n\n");
 			outputText("\"<i>[name] you MUST allow me to do test on this thing I must study its ecology and function maybe I will even finish with a live dissection!</i>\"\n\n");
 			outputText("Evangeline pout before turning back to you.");
@@ -26,11 +26,11 @@ import classes.Scenes.NPCs.Galia;
 				outputText("\"<i>Get to the dissection already this thing is polluting our air! The sooner it's dead the better.</i>\"\n\n");
 			}
 			if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] < 3) outputText("\n\nJojo simply adds that killing it now is the merciful thing to do while.\n\n");
-			//(If pure/corrupt Celess) outputText("\n\nCeless seems genuinely scared/curious of the imp.");
+			if (CelessScene.instance.isCompanion()) outputText("\n\nCeless seems genuinely "+(CelessScene.instance.isCorrupt ? "curious" : "scared")+" of the imp.");
 			//(If Alvina) outputText("\n\nWhile not physically present you can hear Alvina giggle in your mind replying that this thing would make an interesting lab rat for her black magic researches.\n\n");
 			//(Siegweird) outputText("\n\nSiegweird propose to skip the dissection and simply kill it now.\n\n");
 			outputText("Yea no one is going to perform any experiment or dissection on this imp until you authorize it. This much you make clear to Evangeline. She is disappointed at first but reply regardless.\n\n");
-			outputText("\"<i>When you care enough but the progress of science tell me and we'll proceed with the tests.</i>\"\n\n");
+			outputText("\"<i>When you care enough about the progress of science tell me and we'll proceed with the tests.</i>\"\n\n");
 			//outputText("(<b>Galia has been added to the Slaves menu!</b>)\n\n");w innej późniejszej scenie wspomnieć to
 			flags[kFLAGS.GALIA_TALKS] = 1;
 			flags[kFLAGS.GALIA_LVL_UP] = 1;

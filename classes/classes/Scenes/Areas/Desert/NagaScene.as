@@ -1024,6 +1024,7 @@ public function naggaTease():void {
     if (player.findPerk(PerkLib.SensualLover) >= 0) {
         chance += 2;
     }
+    if (player.findPerk(PerkLib.FlawlessBody) >= 0) chance += 10;
     //==============================
     //Determine basic damage.
     //==============================
@@ -1038,6 +1039,7 @@ public function naggaTease():void {
     if (bimbo || bro || futa) {
         damage += 5;
     }
+    if (player.findPerk(PerkLib.FlawlessBody) >= 0) damage += 10;
     damage += player.level;
     damage += player.teaseLevel;
     damage += rand(7);

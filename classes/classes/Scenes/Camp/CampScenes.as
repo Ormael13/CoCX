@@ -114,7 +114,7 @@ public function PeepingTom3():void {
 		outputText(".\n\n");
 	}
 	if (followerHel()) outputText("Helia is lazily sitting in the bath, not saying a word.\n\n");
-//	 outputText("-Daughtername- is relaxing letting her equine half soak in the deeper watery area.\n\n");//Celess
+	if (CelessScene.instance.isCompanion() && CelessScene.instance.isAdult) outputText(CelessScene.instance.Name+" is relaxing letting her equine half soak in the deeper watery area.\n\n");//Celess
 	if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) outputText("Kindra’s wool doesn't seem to prevent her from enjoying the bath.\n\n");
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) outputText("Etna isn’t far from your hiding spot, her tail tip covered with a towel for everyone else's safety.\n\n");
 	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) outputText("Ayane is enjoying some time off duty in the other corner, tending to her fur.\n\n");
@@ -167,7 +167,7 @@ public function HaveAGirlBath():void {
 		outputText(".\n\n");
 	}
 	if (followerHel()) outputText("Helia is lazily sitting in the bath, not saying a word.\n\n");
-//	 outputText("-Daughtername- is relaxing letting her equine half soak in the deeper watery area.\n\n");//Celess
+	if (CelessScene.instance.isCompanion() && CelessScene.instance.isAdult) outputText(CelessScene.instance.Name+" is relaxing letting her equine half soak in the deeper watery area.\n\n");//Celess
 	if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) outputText("Kindra’s wool doesn't seem to prevent her from enjoying the bath.\n\n");
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) outputText("Etna isn’t far from you, her tail tip covered with a towel for everyone else's safety.\n\n");
 	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) {

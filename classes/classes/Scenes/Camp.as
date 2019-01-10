@@ -647,9 +647,26 @@ CoC.instance.saves.saveGame(player.slotName);
 	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 5) outputText("There's warehouse and second one warehouse half finished construction connected by granary located in the east section of your campsite.\n\n");
 	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 6) outputText("There's two warehouses and granary connecting them located in the east section of your campsite.\n\n");
 	if(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) outputText("Some of your friends are currently sparring in the rings at the side of your camp.\n\n");
-	if(flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 1) outputText("A large arcane circle is written at the edge of your camp. Its runes regularly glow with impulse of power.\n\n");
-	if(flags[kFLAGS.CAMP_UPGRADES_DAM] == 1) outputText("A small dam help increase the width of the nearby stream slowing the passage of water.\n\n");
-	if(flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 1) outputText("Not so far from it is your fishery. You can see several barrel possibly full of freshly caught fish next to it.\n\n");
+	if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 1) {
+		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 3) outputText("Three large arcane circles are");
+		else if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 2) outputText("Two large arcane circles are");
+		else outputText("A large arcane circle is");
+		outputText(" written at the edge of your camp. Its runes regularly glow with impulse of power.\n\n");
+	}
+	if (flags[kFLAGS.CAMP_UPGRADES_DAM] >= 1) {
+		if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 3) outputText("A big wooden dam increase the width of the nearby stream up to the point of creating very narrow miniature lake");
+		else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 2) outputText("A woden dam help increase noticably the width of the nearby stream slowing the passage of water");
+		else outputText("A small woden dam help increase the width of the nearby stream slowing the passage of water");
+		outputText(".\n\n");
+	}
+	if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) {
+		outputText("Not so far from it is your ");
+		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 1) outputText("small");
+		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 2) outputText("medium-sized");
+		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 3) outputText("big");
+		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 4) outputText("large");
+		outputText(" fishery. You can see several barrel possibly full of freshly caught fish next to it.\n\n");
+	}
 	//Nursery
 	if(flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] == 100 && player.hasStatusEffect(StatusEffects.CampMarble)) {
 		outputText("Marble has built a fairly secure nursery amongst the rocks to house your ");
@@ -1676,7 +1693,8 @@ private function campBuildingSim():void {
 	if (player.hasKeyItem("Carpenter's Toolbox") >= 0) {
 		if (flags[kFLAGS.CAMP_WALL_PROGRESS] < 100 && getCampPopulation() >= 4) addButton(0, "Build Wall", buildCampWallPrompt).hint("Build a wall around your camp to defend from the imps." + (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10 ? "\n\nProgress: " + (flags[kFLAGS.CAMP_WALL_PROGRESS]/10) + "/10 complete": "") + "");
 		if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 && flags[kFLAGS.CAMP_WALL_GATE] <= 0) addButton(0, "Build Gate", buildCampGatePrompt).hint("Build a gate to complete your camp defense.");
-		addButton(3, "Build Misc", campUpgrades.buildmiscMenu).hint("Build other structures than walls or cabin for your camp.");
+		addButton(3, "Build Cabin(O)", campUpgrades.buildCampMembersCabinsMenu).hint("Work on your camp members cabins.");
+		addButton(5, "Build Misc", campUpgrades.buildmiscMenu).hint("Build other structures than walls or cabins for your camp.");
 	}
 	if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10 && player.hasItem(useables.IMPSKLL, 1)) addButton(1, "AddImpSkull", promptHangImpSkull).hint("Add an imp skull to decorate the wall and to serve as deterrent for imps.", "Add Imp Skull");
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] < 10) addButton(2, "Build Cabin", cabinProgress.initiateCabin).hint("Work on your cabin."); //Work on cabin.
@@ -3020,8 +3038,10 @@ private function ascendForReal():void {
 	if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0 || flags[kFLAGS.PURE_MARAE_ENDGAME] >= 2) performancePoints += 3;
 	if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) >= 4) performancePoints += 2;
 	if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) >= 4) performancePoints += 2;
+	if (player.statusEffectv3(StatusEffects.AdventureGuildQuests1) >= 4) performancePoints += 2;
 	if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) >= 4) performancePoints += 2;
 	if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) >= 4) performancePoints += 2;
+	if (flags[kFLAGS.GALIA_LVL_UP] >= 0.5) performancePoints += 5;
 	//Camp structures
 	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) performancePoints += 10;
 	if (flags[kFLAGS.CAMP_WALL_GATE] > 0) performancePoints += 11;
@@ -3035,8 +3055,8 @@ private function ascendForReal():void {
 	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) performancePoints += 2;
 	if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > 0) performancePoints += flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE];
 	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] > 1) performancePoints += 2;
-	if (flags[kFLAGS.CAMP_UPGRADES_DAM] > 0) performancePoints += flags[kFLAGS.CAMP_UPGRADES_DAM];
-	if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) performancePoints += flags[kFLAGS.CAMP_UPGRADES_FISHERY];
+	if (flags[kFLAGS.CAMP_UPGRADES_DAM] > 0) performancePoints += (flags[kFLAGS.CAMP_UPGRADES_DAM] * 2);
+	if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) performancePoints += (flags[kFLAGS.CAMP_UPGRADES_FISHERY] * 2);
 	//Children
 	var childPerformance:int = 0;
 	childPerformance += (flags[kFLAGS.MINERVA_CHILDREN] + flags[kFLAGS.BEHEMOTH_CHILDREN] + flags[kFLAGS.MARBLE_KIDS] + (flags[kFLAGS.SHEILA_JOEYS] + flags[kFLAGS.SHEILA_IMPS]) + izmaScene.totalIzmaChildren() + isabellaScene.totalIsabellaChildren() + kihaFollower.totalKihaChildren() + emberScene.emberChildren() + urtaPregs.urtaKids() + sophieBimbo.sophieChildren());
@@ -3171,6 +3191,13 @@ public function getCampPopulation():int {
 	//------------
 	//Return number!
 	return pop;
+}
+//Camp underground population!
+public function getCampUndergroundPopulation():int {
+	var undpop:int = 0;
+	if (flags[kFLAGS.ANT_WAIFU] > 0) undpop++;
+	if (flags[kFLAGS.ANT_KIDS] > 0 || flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0) undpop += (flags[kFLAGS.ANT_KIDS] + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT]);
+	return undpop;
 }
 
 private function fixFlags():void {
@@ -3799,7 +3826,8 @@ private function updateAchievements():void {
 	if (player.level >= 30) awardAchievement("Master", kACHIEVEMENTS.LEVEL_MASTER);
 	if (player.level >= 45) awardAchievement("Grandmaster", kACHIEVEMENTS.LEVEL_GRANDMASTER);
 	if (player.level >= 60) awardAchievement("Illuistrous", kACHIEVEMENTS.LEVEL_ILLUSTRIOUS);
-	//if (player.level >= 75) awardAchievement("Overlord", kACHIEVEMENTS.LEVEL_OVERLORD);
+	if (player.level >= 75) awardAchievement("Overlord", kACHIEVEMENTS.LEVEL_OVERLORD);
+	if (player.level >= 90) awardAchievement("Sovereign", kACHIEVEMENTS.LEVEL_SOVEREIGN);
 	if (player.level >= 100) awardAchievement("Are you a god?", kACHIEVEMENTS.LEVEL_ARE_YOU_A_GOD);
 	
 	//Population
@@ -3813,6 +3841,17 @@ private function updateAchievements():void {
 	if (getCampPopulation() >= 1000) awardAchievement("City-State", kACHIEVEMENTS.POPULATION_CITY_STATE);
 	if (getCampPopulation() >= 2500) awardAchievement("Kingdom", kACHIEVEMENTS.POPULATION_KINGDOM);
 	if (getCampPopulation() >= 5000) awardAchievement("Empire", kACHIEVEMENTS.POPULATION_EMPIRE);
+	if (getCampPopulation() >= 10000) awardAchievement("Large Empire", kACHIEVEMENTS.POPULATION_LARGE_EMPIRE);
+	if (getCampUndergroundPopulation() >= 1) awardAchievement("My First Underground Companion", kACHIEVEMENTS.UNDERGROUND_POPULATION_FIRST);
+	if (getCampUndergroundPopulation() >= 20) awardAchievement("Underground Hamlet", kACHIEVEMENTS.UNDERGROUND_POPULATION_HAMLET);
+	if (getCampUndergroundPopulation() >= 50) awardAchievement("Underground Village", kACHIEVEMENTS.UNDERGROUND_POPULATION_VILLAGE);
+	if (getCampUndergroundPopulation() >= 100) awardAchievement("Underground Town", kACHIEVEMENTS.UNDERGROUND_POPULATION_TOWN);
+	if (getCampUndergroundPopulation() >= 250) awardAchievement("Underground City", kACHIEVEMENTS.UNDERGROUND_POPULATION_CITY);
+	if (getCampUndergroundPopulation() >= 500) awardAchievement("Underground Metropolis", kACHIEVEMENTS.UNDERGROUND_POPULATION_METROPOLIS);
+	if (getCampUndergroundPopulation() >= 1000) awardAchievement("Underground Megalopolis", kACHIEVEMENTS.UNDERGROUND_POPULATION_MEGALOPOLIS);
+	if (getCampUndergroundPopulation() >= 2500) awardAchievement("Underground Large Megalopolis", kACHIEVEMENTS.UNDERGROUND_POPULATION_LARGE_MEGALOPOLIS);
+	if (getCampUndergroundPopulation() >= 5000) awardAchievement("Underground City-State", kACHIEVEMENTS.UNDERGROUND_POPULATION_CITY_STATE);
+	if (getCampUndergroundPopulation() >= 10000) awardAchievement("Underground Kingdom", kACHIEVEMENTS.UNDERGROUND_POPULATION_KINGDOM);
 	
 	//Time
 	if (model.time.days >= 30) awardAchievement("It's been a month", kACHIEVEMENTS.TIME_MONTH);
@@ -3848,7 +3887,7 @@ private function updateAchievements():void {
 		awardAchievement("End of Reign", kACHIEVEMENTS.DUNGEON_END_OF_REIGN);
 		dungeonsCleared++;
 	}
-	if (SceneLib.dungeons.checkHiddenCaveClear()) {
+	if (SceneLib.dungeons.checkHiddenCaveHiddenStageClear()) {
 		awardAchievement("Tiger stalking the Dragon", kACHIEVEMENTS.DUNGEON_TIGER_STALKING_THE_DRAGON);
 		dungeonsCleared++;
 	}
@@ -3889,8 +3928,39 @@ private function updateAchievements():void {
 	if (flags[kFLAGS.NIEVE_STAGE] == 5) awardAchievement("The Lovable Snowman", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_III);
 
 	//General
-	if (flags[kFLAGS.DEMONS_DEFEATED] >= 25 && model.time.days >= 10) awardAchievement("Portal Defender", kACHIEVEMENTS.GENERAL_PORTAL_DEFENDER);
+	if (flags[kFLAGS.DEMONS_DEFEATED] >= 20 && model.time.days >= 10) awardAchievement("Portal Defender", kACHIEVEMENTS.GENERAL_PORTAL_DEFENDER);
+	if (flags[kFLAGS.DEMONS_DEFEATED] >= 40 && model.time.days >= 25) awardAchievement("Portal Defender 2: Defend Harder", kACHIEVEMENTS.GENERAL_PORTAL_DEFENDER_2_DEFEND_HARDER);
+	if (flags[kFLAGS.DEMONS_DEFEATED] >= 100 && model.time.days >= 45) awardAchievement("Portal Defender 3D: The Longest Night", kACHIEVEMENTS.GENERAL_PORTAL_DEFENDER_3D_THE_LONGEST_NIGHT);
+	if (flags[kFLAGS.DEMONS_DEFEATED] >= 300 && model.time.days >= 70) awardAchievement("Portal Defender 4.0: Die Hard", kACHIEVEMENTS.GENERAL_PORTAL_DEFENDER_4_0_DIE_HARD);
+	if (flags[kFLAGS.DEMONS_DEFEATED] >= 1050 && model.time.days >= 100) awardAchievement("Portal Defender 5: A Good Day to Die Hard", kACHIEVEMENTS.GENERAL_PORTAL_DEFENDER_5_A_GOOD_DAY_TO_DIE_HARD);
+	if (flags[kFLAGS.IMPS_KILLED] >= 25) awardAchievement("Just to Spite You", kACHIEVEMENTS.GENERAL_JUST_TO_SPITE_YOU);
+	if (flags[kFLAGS.IMPS_KILLED] >= 125) awardAchievement("Just to Spite You 2: Spite Harder", kACHIEVEMENTS.GENERAL_JUST_TO_SPITE_YOU_2_SPITE_HARDER);
+	if (flags[kFLAGS.IMPS_KILLED] >= 625) awardAchievement("Just to Spite You 3: I'm Back", kACHIEVEMENTS.GENERAL_JUST_TO_SPITE_YOU_3_IM_BACK);
+	//if (flags[kFLAGS.GOBLINS_KILLED] >= 25) awardAchievement("", kACHIEVEMENTS.);
+	//if (flags[kFLAGS.GOBLINS_KILLED] >= 125) awardAchievement("", kACHIEVEMENTS.);
+	//if (flags[kFLAGS.GOBLINS_KILLED] >= 625) awardAchievement("", kACHIEVEMENTS.);
+	//if (flags[kFLAGS.HELLHOUNDS_KILLED] >= 10) awardAchievement("", kACHIEVEMENTS.);
+	//if (flags[kFLAGS.HELLHOUNDS_KILLED] >= 50) awardAchievement("", kACHIEVEMENTS.);
+	//if (flags[kFLAGS.HELLHOUNDS_KILLED] >= 250) awardAchievement("", kACHIEVEMENTS.);
+	if (flags[kFLAGS.MINOTAURS_KILLED] >= 10) awardAchievement("Killing the bull by the horns", kACHIEVEMENTS.GENERAL_KILLING_THE_BULL_BY_THE_HORNS);
+	if (flags[kFLAGS.MINOTAURS_KILLED] >= 50) awardAchievement("Killing the bull by the horns 2: Kill Harder", kACHIEVEMENTS.GENERAL_KILLING_THE_BULL_BY_THE_HORNS_2_KILL_HARDER);
+	if (flags[kFLAGS.MINOTAURS_KILLED] >= 250) awardAchievement("Killing the bull by the horns 3: I'm Back", kACHIEVEMENTS.GENERAL_KILLING_THE_BULL_BY_THE_HORNS_3_IM_BACK);
 	
+	var TotalKillCount:int = 0;
+	if (flags[kFLAGS.IMPS_KILLED] > 0) TotalKillCount += flags[kFLAGS.IMPS_KILLED];
+	if (flags[kFLAGS.GOBLINS_KILLED] > 0) TotalKillCount += flags[kFLAGS.GOBLINS_KILLED];
+	if (flags[kFLAGS.HELLHOUNDS_KILLED] > 0) TotalKillCount += flags[kFLAGS.HELLHOUNDS_KILLED];
+	if (flags[kFLAGS.MINOTAURS_KILLED] > 0) TotalKillCount += flags[kFLAGS.MINOTAURS_KILLED];
+	if (TotalKillCount >= 47) awardAchievement("Body Count: Monty Python and the Holy Grail", kACHIEVEMENTS.GENERAL_BODY_COUNT_MPATHG);
+	if (TotalKillCount >= 80) awardAchievement("Body Count: Deadpool", kACHIEVEMENTS.GENERAL_BODY_COUNT_DEADPOOL);
+	if (TotalKillCount >= 144) awardAchievement("Body Count: Robocop", kACHIEVEMENTS.GENERAL_BODY_COUNT_ROBOCOP);
+	if (TotalKillCount >= 191) awardAchievement("Body Count: Total Recall", kACHIEVEMENTS.GENERAL_BODY_COUNT_TOTALRECALL);
+	if (TotalKillCount >= 247) awardAchievement("Body Count: Rambo", kACHIEVEMENTS.GENERAL_BODY_COUNT_RAMBO);
+	if (TotalKillCount >= 307) awardAchievement("Body Count: Titanic", kACHIEVEMENTS.GENERAL_BODY_COUNT_TITANIC);
+	/*if (TotalKillCount >= 468) awardAchievement("Body Count: The Lord of the Rings - Two Towers", kACHIEVEMENTS.GENERAL_BODY_COUNT_LOTR_TT);
+	if (TotalKillCount >= 600) awardAchievement("Body Count: 300", kACHIEVEMENTS.GENERAL_BODY_COUNT_300);
+	if (TotalKillCount >= 836) awardAchievement("Body Count: The Lord of the Rings - Return of the King", kACHIEVEMENTS.GENERAL_BODY_COUNT_LOTR_ROTK);
+	if (TotalKillCount >= 1410) awardAchievement("Body Count: Bloodiest Champion Ever", kACHIEVEMENTS.GENERAL_BODY_COUNT_BLOODIEST_CHAMPION_EVER);*/
 	
 	var NPCsBadEnds:int = 0; //Check how many NPCs got bad-ended.
 	if (flags[kFLAGS.D1_OMNIBUS_KILLED] > 0) NPCsBadEnds++;
@@ -3918,9 +3988,14 @@ private function updateAchievements():void {
 	if (flags[kFLAGS.TIMES_TRANSFORMED] >= 1) awardAchievement("What's Happening to Me?", kACHIEVEMENTS.GENERAL_WHATS_HAPPENING_TO_ME);
 	if (flags[kFLAGS.TIMES_TRANSFORMED] >= 10) awardAchievement("Transformer", kACHIEVEMENTS.GENERAL_TRANSFORMER);
 	if (flags[kFLAGS.TIMES_TRANSFORMED] >= 25) awardAchievement("Shapeshifty", kACHIEVEMENTS.GENERAL_SHAPESHIFTY);
+	if (flags[kFLAGS.TIMES_TRANSFORMED] >= 100) awardAchievement("Lego-(Wo)Man", kACHIEVEMENTS.GENERAL_LEGO_WO_MAN);
+	if (flags[kFLAGS.TIMES_TRANSFORMED] >= 250) awardAchievement("Transformer-o-holic", kACHIEVEMENTS.GENERAL_TRANSFORMER_O_HOLIC);
+	if (flags[kFLAGS.TIMES_TRANSFORMED] >= 1000) awardAchievement("Tzimisce Antediluvian", kACHIEVEMENTS.GENERAL_TZIMISCE_ANTEDILUVIAN);
+	if (flags[kFLAGS.TIMES_TRANSFORMED] >= 2500) awardAchievement("Just one last transformation item!!!", kACHIEVEMENTS.GENERAL_JUST_ONE_LAST_TRANSFORMATION_ITEM);
 	if (flags[kFLAGS.TIMES_MASTURBATED] >= 1) awardAchievement("Fapfapfap", kACHIEVEMENTS.GENERAL_FAPFAPFAP);
 	if (flags[kFLAGS.TIMES_MASTURBATED] >= 10) awardAchievement("Faptastic", kACHIEVEMENTS.GENERAL_FAPTASTIC);
 	if (flags[kFLAGS.TIMES_MASTURBATED] >= 100) awardAchievement("Master-bation", kACHIEVEMENTS.GENERAL_FAPSTER);
+	if (flags[kFLAGS.TIMES_MASTURBATED] >= 1000) awardAchievement("Grand Master-bation", kACHIEVEMENTS.GENERAL_FAPSTER_2);
 	
 	if (player.armorName == "goo armor") awardAchievement("Goo Armor", kACHIEVEMENTS.GENERAL_GOO_ARMOR);
 	if (helspawnFollower()) awardAchievement("Helspawn", kACHIEVEMENTS.GENERAL_HELSPAWN);
@@ -3937,12 +4012,26 @@ private function updateAchievements():void {
 	if (player.perks.length >= 100) awardAchievement("Ultra Perky", kACHIEVEMENTS.GENERAL_ULTRA_PERKY);
 	if (player.perks.length >= 200) awardAchievement("Hyper Perky", kACHIEVEMENTS.GENERAL_HYPER_PERKY);
 	if (player.perks.length >= 300) awardAchievement("Umber Perky", kACHIEVEMENTS.GENERAL_UMBER_PERKY);
-	if (player.str >= 50 && player.tou >= 50 && player.spe >= 50 && player.inte >= 50 && player.wis >= 50 && player.lib >= 50 && player.sens >= 50) awardAchievement("Jack of All Trades", kACHIEVEMENTS.GENERAL_STATS_50);
-	if (player.str >= 100 && player.tou >= 100 && player.spe >= 100 && player.inte >= 100 && player.wis >= 100 && player.lib >= 100 && player.sens >= 100) awardAchievement("Incredible Stats", kACHIEVEMENTS.GENERAL_STATS_100);
-	if (player.str >= 150 && player.tou >= 150 && player.spe >= 150 && player.inte >= 150 && player.wis >= 150 && player.lib >= 150 && player.sens >= 150) awardAchievement("Anmazing Stats", kACHIEVEMENTS.GENERAL_STATS_150);
-	if (player.str >= 200 && player.tou >= 200 && player.spe >= 200 && player.inte >= 200 && player.wis >= 200 && player.lib >= 200 && player.sens >= 200) awardAchievement("Superhuman Stats", kACHIEVEMENTS.GENERAL_STATS_200);
-	if (player.str >= 300 && player.tou >= 300 && player.spe >= 300 && player.inte >= 300 && player.wis >= 300 && player.lib >= 300 && player.sens >= 300) awardAchievement("Inhuman Stats", kACHIEVEMENTS.GENERAL_STATS_300);
-	//if (player.str >= 500 && player.tou >= 500 && player.spe >= 500 && player.inte >= 500) awardAchievement("Incredible Stats", kACHIEVEMENTS.GENERAL_STATS_500);
+	if (player.perks.length >= 444) awardAchievement("Perky Beast of Death", kACHIEVEMENTS.GENERAL_PERKY_BEAST_OF_DEATH);
+	if (player.perks.length >= 600) awardAchievement("Perky King", kACHIEVEMENTS.GENERAL_PERKY_KING);
+	//if (player.perks.length >= 800) awardAchievement("Ridiculous Perky King", kACHIEVEMENTS.GENERAL_RIDICULOUS_PERKY_KING);
+	//if (player.perks.length >= 1000) awardAchievement("Ludicrous Perky King", kACHIEVEMENTS.GENERAL_LUDICROUS_PERKY_KING);
+	if (player.internalChimeraScore() >= 4) awardAchievement("Lesser Chimera", kACHIEVEMENTS.GENERAL_LESSER_CHIMERA);
+	if (player.internalChimeraScore() >= 8) awardAchievement("Normal Chimera", kACHIEVEMENTS.GENERAL_NORMAL_CHIMERA);
+	if (player.internalChimeraScore() >= 16) awardAchievement("Greater Chimera", kACHIEVEMENTS.GENERAL_GREATER_CHIMERA);
+	if (player.internalChimeraScore() >= 32) awardAchievement("Elder Chimera", kACHIEVEMENTS.GENERAL_ELDER_CHIMERA);
+	if (player.internalChimeraScore() >= 64) awardAchievement("Ultimate Lifeform", kACHIEVEMENTS.GENERAL_ULTIMATE_LIFEFORM);
+	if (player.str >= 50 && player.tou >= 50 && player.spe >= 50 && player.inte >= 50 && player.wis >= 50 && player.lib >= 40 && player.sens >= 20) awardAchievement("Jack of All Trades", kACHIEVEMENTS.GENERAL_STATS_50);
+	if (player.str >= 100 && player.tou >= 100 && player.spe >= 100 && player.inte >= 100 && player.wis >= 100 && player.lib >= 80 && player.sens >= 40) awardAchievement("Incredible Stats", kACHIEVEMENTS.GENERAL_STATS_100);
+	if (player.str >= 150 && player.tou >= 150 && player.spe >= 150 && player.inte >= 150 && player.wis >= 150 && player.lib >= 120 && player.sens >= 60) awardAchievement("Anmazing Stats", kACHIEVEMENTS.GENERAL_STATS_150);
+	if (player.str >= 200 && player.tou >= 200 && player.spe >= 200 && player.inte >= 200 && player.wis >= 200 && player.lib >= 160 && player.sens >= 80) awardAchievement("Superhuman Stats", kACHIEVEMENTS.GENERAL_STATS_200);
+	if (player.str >= 300 && player.tou >= 300 && player.spe >= 300 && player.inte >= 300 && player.wis >= 300 && player.lib >= 240 && player.sens >= 120) awardAchievement("Inhuman Stats", kACHIEVEMENTS.GENERAL_STATS_300);
+	if (player.str >= 500 && player.tou >= 500 && player.spe >= 500 && player.inte >= 500 && player.wis >= 500 && player.lib >= 400 && player.sens >= 200) awardAchievement("Epic Stats", kACHIEVEMENTS.GENERAL_STATS_500);
+	if (player.str >= 1000 && player.tou >= 1000 && player.spe >= 1000 && player.inte >= 1000 && player.wis >= 1000 && player.lib >= 800 && player.sens >= 400) awardAchievement("Legendary Stats", kACHIEVEMENTS.GENERAL_STATS_1000);
+	if (player.str >= 2000 && player.tou >= 2000 && player.spe >= 2000 && player.inte >= 2000 && player.wis >= 2000 && player.lib >= 1600 && player.sens >= 800) awardAchievement("Mythical Stats", kACHIEVEMENTS.GENERAL_STATS_2000);
+	if (player.str >= 5000 && player.tou >= 5000 && player.spe >= 5000 && player.inte >= 5000 && player.wis >= 5000 && player.lib >= 4000 && player.sens >= 2000) awardAchievement("Transcendental Stats", kACHIEVEMENTS.GENERAL_STATS_5000);
+	if (player.str >= 15000 && player.tou >= 15000 && player.spe >= 15000 && player.inte >= 15000 && player.wis >= 15000 && player.lib >= 12000 && player.sens >= 6000) awardAchievement("Divine Stats", kACHIEVEMENTS.GENERAL_STATS_15000);
+	if (player.str >= 268445279 && player.tou >= 268445279 && player.spe >= 268445279 && player.inte >= 268445279 && player.wis >= 268445279) awardAchievement("OPK", kACHIEVEMENTS.GENERAL_STATS_2000);
 	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_SCHIZOPHRENIA] >= 4) awardAchievement("Schizophrenic", kACHIEVEMENTS.GENERAL_SCHIZO);
 	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_CLEAN_SLATE] >= 2) awardAchievement("Clean Slate", kACHIEVEMENTS.GENERAL_CLEAN_SLATE);
 	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_IM_NO_LUMBERJACK] >= 100) awardAchievement("I'm No Lumberjack", kACHIEVEMENTS.GENERAL_IM_NO_LUMBERJACK);
@@ -3965,6 +4054,26 @@ private function updateAchievements():void {
 	if (flags[kFLAGS.KELT_BREAK_LEVEL] == 4) NPCsDedicked++;
 	if (NPCsDedicked >= 3) awardAchievement("Dick Banisher", kACHIEVEMENTS.GENERAL_DICK_BANISHER);
 	if (NPCsDedicked >= 7) awardAchievement("You Bastard", kACHIEVEMENTS.GENERAL_YOU_BASTARD); //Take that, dedickers!
+	
+	if (player.newGamePlusMod() >= 1) awardAchievement("xXx2: The Next Level", kACHIEVEMENTS.EPIC_XXX2_THE_NEXT_LEVEL);
+	if (player.newGamePlusMod() >= 2) awardAchievement("xXx: The Return of Mareth Champion", kACHIEVEMENTS.EPIC_XXX_THE_RETURN_OF_MARETH_CHAMPION);
+	
+	if (player.hasStatusEffect(StatusEffects.AchievementsNormalShadowTotal)) {
+		//Shadow
+		if (player.statusEffectv2(StatusEffects.AchievementsNormalShadowTotal) >= 1) awardAchievement("Shadow Initiate", kACHIEVEMENTS.SHADOW_INITIATE);
+		if (player.statusEffectv2(StatusEffects.AchievementsNormalShadowTotal) >= 10) awardAchievement("Shadow Squire", kACHIEVEMENTS.SHADOW_SQUIRE);
+		if (player.statusEffectv2(StatusEffects.AchievementsNormalShadowTotal) >= 25) awardAchievement("Shadow Knight", kACHIEVEMENTS.SHADOW_KNIGHT);
+		if (player.statusEffectv2(StatusEffects.AchievementsNormalShadowTotal) >= 45) awardAchievement("Shadow Paladin", kACHIEVEMENTS.SHADOW_PALADIN);
+		if (player.statusEffectv2(StatusEffects.AchievementsNormalShadowTotal) >= 70) awardAchievement("Shadow General", kACHIEVEMENTS.SHADOW_GENERAL);
+		//Epic
+		if (player.statusEffectv3(StatusEffects.AchievementsNormalShadowTotal) >= 10) awardAchievement("Achievementception", kACHIEVEMENTS.EPIC_ACHIEVEMENTCEPTION);
+		if (player.statusEffectv3(StatusEffects.AchievementsNormalShadowTotal) >= 30) awardAchievement("Achievement within Achievement", kACHIEVEMENTS.EPIC_ACHIEVEMENT_WITHIN_ACHIEVEMENT);
+		if (player.statusEffectv3(StatusEffects.AchievementsNormalShadowTotal) >= 60) awardAchievement("Achievements - Going Deeper (1st layer)", kACHIEVEMENTS.EPIC_ACHIEVEMENTS_GOING_DEEPER_1L);
+		if (player.statusEffectv3(StatusEffects.AchievementsNormalShadowTotal) >= 100) awardAchievement("Achievements - Going Deeper (2nd layer)", kACHIEVEMENTS.EPIC_ACHIEVEMENTS_GOING_DEEPER_2L);
+		if (player.statusEffectv3(StatusEffects.AchievementsNormalShadowTotal) >= 300) awardAchievement("Achievements - Going Deeper (3rd layer)", kACHIEVEMENTS.EPIC_ACHIEVEMENTS_GOING_DEEPER_3L);
+		if (player.statusEffectv3(StatusEffects.AchievementsNormalShadowTotal) >= 600) awardAchievement("Achievements Limbo", kACHIEVEMENTS.EPIC_ACHIEVEMENTS_LIMBO);
+		player.removeStatusEffect(StatusEffects.AchievementsNormalShadowTotal);
+	}
 }
 
 /*

@@ -994,7 +994,7 @@ public class Holidays {
                     flags[kFLAGS.MORE_TURKEY] = 0;
                 }
                 else {
-                    EngineCore.outputText("\n\n<b>You might be able to have some new, kinky fun with Gobbles this year if you had something lusty on you...</b>.");
+                    EngineCore.outputText("\n\n<b>You might be able to have some new, kinky fun with Gobbles this year if you had something lusty on you...</b>");
                     flags[kFLAGS.MORE_TURKEY] = 1;
                 }
             }

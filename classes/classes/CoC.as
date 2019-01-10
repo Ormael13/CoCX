@@ -249,8 +249,8 @@ public class CoC extends MovieClip
         //model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8k";
-			version = ver + " (<b>Yu shop, Dinah, stats page splitting, Aiko porting from CoCR, new quest in AG, experimental high level exploration, QoL changes</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8l";
+			version = ver + " (<b></b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);
