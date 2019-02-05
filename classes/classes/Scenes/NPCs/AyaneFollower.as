@@ -4,9 +4,9 @@
  */
 package classes.Scenes.NPCs 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Items.Useable;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.Useable;
 import classes.display.SpriteDb;
 
 public class AyaneFollower extends NPCAwareContent

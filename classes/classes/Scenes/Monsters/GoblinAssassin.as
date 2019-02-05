@@ -105,7 +105,7 @@ public class GoblinAssassin extends Monster
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) adventure.gaunletchallange2fight2();
-			else SceneLib.goblinAssassinScene.gobboAssassinRapeIntro();
+			else SceneLib.goblinAssassinScene.gobboAssassinRapeIntro1();
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
@@ -114,7 +114,7 @@ public class GoblinAssassin extends Monster
 				SceneLib.combat.cleanupAfterCombatImpl();
 			} 
 			else {
-				SceneLib.goblinAssassinScene.gobboAssassinBeatYaUp();
+				SceneLib.goblinAssassinScene.gobboAssassinBeatYaUp1();
 			}
 		}
 		public function GoblinAssassin(noInit:Boolean=false)
@@ -128,7 +128,7 @@ public class GoblinAssassin extends Monster
 			}
 			else {
 				this.short = "goblin assassin";
-				this.level = 10;
+				this.level = 8;
 				this.bonusHP = 100;
 			}
 			this.imageName = "goblinassassin";

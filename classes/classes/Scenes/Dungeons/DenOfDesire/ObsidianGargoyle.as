@@ -138,7 +138,6 @@ public class ObsidianGargoyle extends AbstractGargoyle
 			this.tallness = 120;
 			initStrTouSpeInte(150, 120, 90, 10);
 			initWisLibSensCor(10, 10, 10, 50);
-			this.tallness = 120;
 			this.drop = new ChainedDrop()
 					.add(consumables.E_PEARL, 1);
 			this.level = 28;

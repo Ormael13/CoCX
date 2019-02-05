@@ -58,6 +58,11 @@ public class Questlog extends BaseContent
 			else if (SceneLib.dungeons.checkDenOfDesireClear()) outputText("Completed");
 			else if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 1) outputText("In Progress");
 			else outputText("Not Started");
+			outputText("\n\n<u><b>River Dungeon Exploration</b></u>");
+			outputText("\n<b>1st Floor:</b> ");
+			if (SceneLib.dungeons.checkRiverDungeon1stFloorClear()) outputText("Completed");
+			else outputText("Not Started/In Progress");
+			outputText("\n<i><b>2nd Floor:</b> Soon</i>");
 			outputText("\n\n<u><b>Adventure Guild Quests</b></u>");
 			outputText("\n<b>Imps Hunt:</b> ");
 			if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 2 || player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 4 || player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 7) outputText("Completed (for today)");
@@ -80,13 +85,22 @@ public class Questlog extends BaseContent
 			else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 1 || player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 3 || player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 6) outputText("In Progress");
 			else outputText("Not Started");
 			outputText("\n<i><b>Feral Demons Hunt:</b> Soon</i>");
+			outputText("\n<i><b>Green Gel Gathering:</b> Soon</i>");
+			outputText("\n<b>Black Chitin Gathering:</b> ");
+			if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) == 2 || player.statusEffectv1(StatusEffects.AdventureGuildQuests4) == 5) outputText("Completed (for today)");
+			else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) == 1 || player.statusEffectv1(StatusEffects.AdventureGuildQuests4) == 4) outputText("In Progress");
+			else outputText("Not Started");
+			//outputText("\n<i><b>Spider-silk Gathering:</b> Soon</i>");
+			//outputText("\n<i><b>Dragonscale Gathering:</b> Soon</i>");
+			//outputText("\n<i><b>Ebonbloom Gathering:</b> Soon</i>");
+			//outputText("\n<i><b>World Tree Branch Gathering:</b> Soon</i>");
 			outputText("\n\n<u><b>Twilight of the Gods</b></u>");
 			outputText("\n<b>Feral Imps Capture:</b> ");
 			if (flags[kFLAGS.GALIA_LVL_UP] >= 0.5) outputText("Completed");
 			else if (flags[kFLAGS.GALIA_LVL_UP] >= 0.05 && flags[kFLAGS.GALIA_LVL_UP] < 0.5) outputText("In Progress (" + Math.round(flags[kFLAGS.GALIA_LVL_UP] * 20) + " / 10)");
 			else if (flags[kFLAGS.GALIA_LVL_UP] >= 0.01 && flags[kFLAGS.GALIA_LVL_UP] < 0.05) outputText("In Progress (0 / 10)");
 			else outputText("Not Started");
-			outputText("\n<i><b>Feral Tentacle Beasts Hunt:</b> Soon</i>");
+			outputText("\n<i><b>Feral Tentacle Beasts Capture:</b> Soon</i>");
 			/*if () outputText("\n\n<u><b>The New Dawn</b></u>");
 			else outputText("\n<b>???</b>");*/
 			menu();

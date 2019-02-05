@@ -177,7 +177,7 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 			}
 			this.HP = this.maxHP();
 			this.lustVuln += 0.3;
-			this.fatigue += 5;
+			this.fatigue += 10;
 			if (fatigue >= this.maxFatigue()) { //Exhausted!
 				outputText(" <b>It appears that the vines have run out of pink slime.</b>");
 				fatigue = this.maxFatigue();

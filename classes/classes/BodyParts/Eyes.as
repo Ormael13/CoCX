@@ -16,12 +16,13 @@ public class Eyes extends BodyPart {
 	public static const DEVIL:int                = 11;
 	public static const ONI:int                  = 12;
 	public static const ELF:int                  = 13;
-	public static const RAIJU:int                = 14;
+	public static const RAIJU:int                = 14;//button 0 on 2nd page of metamorph
 	public static const VAMPIRE:int              = 15;
 	public static const GEMSTONES:int            = 16;
 	public static const FERAL:int            	 = 17;
 	public static const GRYPHON:int            	 = 18;
 	public static const INFERNAL:int           	 = 19;
+	public static const ORC:int		           	 = 20;
 	// Don't forget to add new types in DebugMenu.as list EYE_TYPE_CONSTANTS
 	
 	public var colour:String = "brown";

@@ -155,6 +155,7 @@ public class DungeonEngine extends BaseContent
 		public var desertcave:DesertCave = new DesertCave;
 		public var heltower:HelDungeon = new HelDungeon;
 		public var cabin:YourCabin = new YourCabin;
+		public var riverdungeon:RiverDungeon = new RiverDungeon();
 		public var hiddencave:HiddenCave = new HiddenCave();
 		public var denofdesire:DenOfDesire = new DenOfDesire();
 		public var anzupalace:AnzuPalace = new AnzuPalace();
@@ -236,6 +237,27 @@ public class DungeonEngine extends BaseContent
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_HIDDEN_CAVE_MEDIUM_CAVE) hiddencave.roomMediumCave();
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_HIDDEN_CAVE_SMALL_CAVE_E) hiddencave.roomSmallCaveE();
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_HIDDEN_CAVE_SMALL_CAVE_N) hiddencave.roomSmallCaveN();
+			//River Dungeon
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_01) riverdungeon.roomA01();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_02) riverdungeon.roomA02();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_03) riverdungeon.roomA03();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_04) riverdungeon.roomA04();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_05) riverdungeon.roomA05();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_06) riverdungeon.roomA06();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_07) riverdungeon.roomA07();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_08) riverdungeon.roomA08();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_09) riverdungeon.roomA09();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_10) riverdungeon.roomA10();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_11) riverdungeon.roomA11();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_12) riverdungeon.roomA12();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_13) riverdungeon.roomA13();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_14) riverdungeon.roomA14();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_15) riverdungeon.roomA15();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_16) riverdungeon.roomA16();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_17) riverdungeon.roomA17();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_18) riverdungeon.roomA18();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_19) riverdungeon.roomA19();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_20) riverdungeon.roomA20();
 			//Den of Desire
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_DEN_OF_DESIRE_ENTRANCE) denofdesire.roomEntrance();
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_DEN_OF_DESIRE_GREAT_HALL_AREA) denofdesire.roomGreatHallArea();
@@ -283,6 +305,9 @@ public class DungeonEngine extends BaseContent
 		}
 		public function checkDenOfDesireClear():Boolean {
 			return (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 2);
+		}
+		public function checkRiverDungeon1stFloorClear():Boolean {
+			return (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 2);//1 - pok 1 golema, 2 pokonanie 2 golem, 3 pokonanie obu golemów
 		}
 		
 		public function enterFactory():void {

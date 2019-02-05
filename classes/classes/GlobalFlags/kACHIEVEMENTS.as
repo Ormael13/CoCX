@@ -33,7 +33,7 @@ package classes.GlobalFlags
 		public static const ZONE_ARCHAEOLOGIST:int				= 023; //Visit the town ruins 15 times.
 		public static const ZONE_FARMER:int						= 024; //Visit the farm 30 times.
 		public static const ZONE_SEA_LEGS:int					= 025; //Use the boat 15 times.
-		public static const ZONE_ROASTED:int					= 026; //Explore the volcanic crag 50 times.
+		public static const ZONE_ROASTED:int					= 026; //Explore the volcanic crag 100 times.
 		public static const ZONE_TAINTED:int					= 027; //Explore Blight Ridge 100 times.
 		public static const ZONE_SUNBURNED:int					= 028; //Explore Beach 100 times.
 		public static const ZONE_SAILOR:int						= 029; //Explore Ocean 100 times.
@@ -45,9 +45,9 @@ package classes.GlobalFlags
 		public static const LEVEL_JOURNEYMAN:int				= 033; //Level 15
 		public static const LEVEL_EXPERT:int					= 034; //Level 20
 		public static const LEVEL_MASTER:int					= 035; //Level 30
-		public static const LEVEL_GRANDMASTER:int				= 036; //Level 40
-		public static const LEVEL_ILLUSTRIOUS:int				= 037; //Level 50
-		public static const LEVEL_OVERLORD:int					= 038; //Level 60
+		public static const LEVEL_GRANDMASTER:int				= 036; //Level 45
+		public static const LEVEL_ILLUSTRIOUS:int				= 037; //Level 60
+		public static const LEVEL_OVERLORD:int					= 038; //Level 75
 		public static const LEVEL_ARE_YOU_A_GOD:int				= 039; //Level 100 (shadow achievement)
 		
 		//Population Achievements (040-049)
@@ -208,19 +208,19 @@ package classes.GlobalFlags
 		public static const TIME_QUARTER:int					= 179; //90 days
 		
 		
-		//Epic Achievements (180-189)
+		//Epic Achievements (180-188)
 		public static const EPIC_ACHIEVEMENTCEPTION:int					= 180;
 		public static const EPIC_ACHIEVEMENT_WITHIN_ACHIEVEMENT:int		= 181;
-		public static const UNKNOWN_ACHIEVEMENT_182:int			= 182;
-		public static const UNKNOWN_ACHIEVEMENT_183:int			= 183;
-		public static const UNKNOWN_ACHIEVEMENT_184:int			= 184;
-		public static const UNKNOWN_ACHIEVEMENT_185:int			= 185;
-		public static const UNKNOWN_ACHIEVEMENT_186:int			= 186;
-		public static const UNKNOWN_ACHIEVEMENT_187:int			= 187;
-		public static const UNKNOWN_ACHIEVEMENT_188:int			= 188;
-		public static const UNKNOWN_ACHIEVEMENT_189:int			= 189;
+		public static const EPIC_ACHIEVEMENTS_GOING_DEEPER_1L:int		= 182;
+		public static const EPIC_ACHIEVEMENTS_GOING_DEEPER_2L:int		= 183;
+		public static const EPIC_ACHIEVEMENTS_GOING_DEEPER_3L:int		= 184;
+		public static const EPIC_ACHIEVEMENTS_LIMBO:int					= 185;
+		public static const EPIC_XXX2_THE_NEXT_LEVEL:int				= 186;
+		public static const EPIC_XXX_THE_RETURN_OF_MARETH_CHAMPION:int	= 187;
+		public static const EPIC_XXX4_:int			= 188;
 		
 		
+		public static const GENERAL_PERKY_BEAST_OF_DEATH:int		= 189;
 		public static const COMBAT_REITERPALLASCH:int				= 190;
 		public static const COMBAT_UNCANNY_REITERPALLASCH:int		= 191;
 		public static const COMBAT_UNCANNY_BLOOD_LETTER:int			= 192;
@@ -232,7 +232,7 @@ package classes.GlobalFlags
 		public static const GENERAL_STATS_300:int					= 198;
 		public static const GENERAL_STATS_500:int					= 199;
 		public static const ZONE_DIVER:int							= 200; //Explore Deep Sea 100 times.
-		public static const UNKNOWN_ACHIEVEMENT_201:int				= 201; //Explore Outer Battlefield 100 times.
+		public static const ZONE_ROOKIE:int							= 201; //Explore Outer Battlefield 100 times.
 		public static const DUNGEON_TIGER_STALKING_THE_DRAGON:int	= 202;
 		public static const DUNGEON_SLAIN_THE_HEROSLAYER:int		= 203;
 		public static const GENERAL_BAD_ENDER_2:int					= 204; //Cause 4 bad ends to various NPCs.
@@ -241,17 +241,122 @@ package classes.GlobalFlags
 		public static const DUNGEON_DELVER_EXPERT:int				= 207;
 		public static const DUNGEON_DELVER_GRAND_MASTER:int			= 208;
 		public static const UNKNOWN_ACHIEVEMENT_209:int				= 209; //Explore Outer Battlefield 100 times.
-		public static const UNKNOWN_ACHIEVEMENT_210:int			= 210;
-		public static const UNKNOWN_ACHIEVEMENT_211:int			= 211;
-		public static const UNKNOWN_ACHIEVEMENT_212:int			= 212;
-		public static const UNKNOWN_ACHIEVEMENT_213:int			= 213;
-		public static const UNKNOWN_ACHIEVEMENT_214:int			= 214;
-		public static const UNKNOWN_ACHIEVEMENT_215:int			= 215;
-		public static const UNKNOWN_ACHIEVEMENT_216:int			= 216;
-		public static const UNKNOWN_ACHIEVEMENT_217:int			= 217;
-		public static const UNKNOWN_ACHIEVEMENT_218:int			= 218;
-		public static const UNKNOWN_ACHIEVEMENT_219:int			= 219;
-		public static const UNKNOWN_ACHIEVEMENT_220:int			= 220;
+		public static const UNKNOWN_ACHIEVEMENT_210:int				= 210; //Explore Inner Battlefield 100 times.
+		public static const UNKNOWN_ACHIEVEMENT_211:int				= 211; //Explore 3rd area post inner battlefield 100 times.
+		public static const GENERAL_LESSER_CHIMERA:int				= 212;
+		public static const GENERAL_NORMAL_CHIMERA:int				= 213;
+		public static const GENERAL_GREATER_CHIMERA:int				= 214;
+		public static const GENERAL_ELDER_CHIMERA:int				= 215;
+		public static const GENERAL_ULTIMATE_LIFEFORM:int			= 216;
+		public static const GENERAL_PERKY_KING:int					= 217;
+		public static const GENERAL_RIDICULOUS_PERKY_KING:int		= 218;
+		public static const GENERAL_LUDICROUS_PERKY_KING:int		= 219;
+		
+		
+		//Shadow Slave Achievements (220-229)
+		public static const SHADOW_INITIATE:int			= 220;
+		public static const SHADOW_SQUIRE:int			= 221;
+		public static const SHADOW_KNIGHT:int			= 222;
+		public static const SHADOW_PALADIN:int			= 223;
+		public static const SHADOW_GENERAL:int			= 224;
+		public static const UNKNOWN_ACHIEVEMENT_225:int			= 225;
+		public static const UNKNOWN_ACHIEVEMENT_226:int			= 226;
+		public static const UNKNOWN_ACHIEVEMENT_227:int			= 227;
+		public static const UNKNOWN_ACHIEVEMENT_228:int			= 228;
+		public static const UNKNOWN_ACHIEVEMENT_229:int			= 229;
+		
+		
+		//Epic Achievements (230-239)
+		public static const EPIC_XXX5_:int			= 230;
+		public static const EPIC_XXX6_:int			= 231;
+		public static const UNKNOWN_ACHIEVEMENT_232:int			= 232;
+		public static const UNKNOWN_ACHIEVEMENT_233:int			= 233;
+		public static const UNKNOWN_ACHIEVEMENT_234:int			= 234;
+		public static const UNKNOWN_ACHIEVEMENT_235:int			= 235;
+		public static const UNKNOWN_ACHIEVEMENT_236:int			= 236;
+		public static const UNKNOWN_ACHIEVEMENT_237:int			= 237;
+		public static const UNKNOWN_ACHIEVEMENT_238:int			= 238;
+		public static const UNKNOWN_ACHIEVEMENT_239:int			= 239;
+		
+		
+		public static const GENERAL_JUST_TO_SPITE_YOU:int							= 240;
+		public static const GENERAL_JUST_TO_SPITE_YOU_2_SPITE_HARDER:int			= 241;
+		public static const GENERAL_KILLING_THE_BULL_BY_THE_HORNS:int				= 242;
+		public static const GENERAL_KILLING_THE_BULL_BY_THE_HORNS_2_KILL_HARDER:int	= 243;
+		public static const GENERAL_BODY_COUNT_MPATHG:int							= 244;
+		public static const GENERAL_BODY_COUNT_DEADPOOL:int							= 245;
+		public static const GENERAL_BODY_COUNT_ROBOCOP:int							= 246;
+		public static const GENERAL_BODY_COUNT_TOTALRECALL:int						= 247;
+		public static const GENERAL_BODY_COUNT_RAMBO:int							= 248;
+		public static const GENERAL_BODY_COUNT_TITANIC:int							= 249;
+		public static const GENERAL_BODY_COUNT_LOTR_TT:int							= 250;
+		public static const GENERAL_BODY_COUNT_300:int								= 251;
+		public static const GENERAL_BODY_COUNT_LOTR_ROTK:int						= 252;
+		public static const GENERAL_BODY_COUNT_BLOODIEST_CHAMPION_EVER:int			= 253;
+		public static const GENERAL_PORTAL_DEFENDER_2_DEFEND_HARDER:int				= 254;
+		public static const GENERAL_PORTAL_DEFENDER_3D_THE_LONGEST_NIGHT:int		= 255;
+		public static const GENERAL_PORTAL_DEFENDER_4_0_DIE_HARD:int				= 256;
+		public static const GENERAL_PORTAL_DEFENDER_5_A_GOOD_DAY_TO_DIE_HARD:int	= 257;
+		
+		//Population Achievements (258-268)
+		public static const UNDERGROUND_POPULATION_FIRST:int				= 258; //Underground Population 1
+		public static const UNDERGROUND_POPULATION_HAMLET:int				= 259; //Underground Population 20
+		public static const UNDERGROUND_POPULATION_VILLAGE:int				= 260; //Underground Population 50
+		public static const UNDERGROUND_POPULATION_TOWN:int					= 261; //Underground Population 100
+		public static const UNDERGROUND_POPULATION_CITY:int					= 262; //Underground Population 250
+		public static const UNDERGROUND_POPULATION_METROPOLIS:int			= 263; //Underground Population 500
+		public static const UNDERGROUND_POPULATION_MEGALOPOLIS:int			= 264; //Underground Population 1,000
+		public static const UNDERGROUND_POPULATION_LARGE_MEGALOPOLIS:int	= 265; //Underground Population 2,500 (shadow achievement)
+		public static const UNDERGROUND_POPULATION_CITY_STATE:int			= 266; //Underground Population 5,000 (shadow achievement)
+		public static const UNDERGROUND_POPULATION_KINGDOM:int				= 267; //Underground Population 10,000 (shadow achievement)
+		public static const POPULATION_LARGE_EMPIRE:int						= 268; //Population 10,000 (shadow achievement)
+		
+		public static const LEVEL_SOVEREIGN:int								= 038; //Level 90
+		
+		public static const GENERAL_FAPSTER_2:int								= 269;
+		public static const GENERAL_LEGO_WO_MAN:int								= 270;
+		public static const GENERAL_TRANSFORMER_O_HOLIC:int						= 271;
+		public static const GENERAL_TZIMISCE_ANTEDILUVIAN:int					= 272;
+		public static const GENERAL_JUST_ONE_LAST_TRANSFORMATION_ITEM:int		= 273;
+		public static const GENERAL_STATS_1000:int								= 274;
+		public static const GENERAL_STATS_2000:int								= 275;
+		public static const GENERAL_STATS_5000:int								= 276;
+		public static const GENERAL_STATS_15000:int								= 277;
+		public static const GENERAL_STATS_OPK:int								= 278;
+		public static const GENERAL_JUST_TO_SPITE_YOU_3_IM_BACK:int				= 279;
+		public static const GENERAL_KILLING_THE_BULL_BY_THE_HORNS_3_IM_BACK:int	= 280;
+		public static const GENERAL_GOBLIN_SLAYER:int							= 281;
+		public static const GENERAL_GOBLIN_SLAYER_2_SLAY_HARDER:int				= 282;
+		public static const GENERAL_GOBLIN_SLAYER_3_IM_BACK:int					= 283;
+		public static const GENERAL_PLAY_DEAD_FIDO:int							= 284;
+		public static const GENERAL_PLAY_DEAD_FIDO_2_PLAY_HARDER:int			= 285;
+		public static const GENERAL_PLAY_DEAD_FIDO_3_IM_BACK:int				= 286;
+		
+		public static const ZONE_CAVEMAN:int						= 287; //100 exploration of Caves
+		public static const ZONE_288:int		= 288;//100 exploration of Deep Desert
+		public static const ZONE_289:int		= 289;//100 exploration of Inner Battlefield (Warmoger lub dla 3 obszaru battlefield-a)
+		public static const ZONE_290:int		= 290;//100 exploration of Defiled Ravine
+		public static const ZONE_291:int		= 291;//100 exploration of Marsh
+		public static const ZONE_292:int		= 292;//100 exploration of Deep Caves
+		public static const ZONE_293:int		= 293;//100 exploration of Tundra
+		public static const ZONE_ASHES_TO_ASHES_DUST_TO_DUST:int	= 294;//100 exploration of Ashlands
+		public static const ZONE_295:int		= 295;//100 exploration of Outer Plateau
+		public static const ZONE_296:int		= 296;//100 exploration of Inner Plateau
+		public static const ZONE_297:int		= 297;//100 exploration of 3rd forest related area (jungle?) ZONE_JUMANJI?
+		public static const ZONE_298:int		= 298;//100 exploration of 4th forest related area
+		public static const ZONE_299:int		= 299;//100 exploration of 3rd blight ridge related area
+		public static const ZONE_300:int		= 300;//100 exploration of 4th blight ridge related area
+		public static const ZONE_301:int		= 301;//100 exploration of 2nd plains related area
+		public static const ZONE_302:int		= 302;//100 exploration of 3rd plains related area
+		public static const ZONE_303:int		= 303;//100 exploration of 3rd caves related area
+		public static const ZONE_304:int		= 304;//100 exploration of x1
+		public static const ZONE_305:int		= 305;//100 exploration of x2
+		
+		public static const GENERAL_TEXAS_RANGER:int			= 306;
+		public static const UNKNOWN_ACHIEVEMENT_307:int			= 307;//GENERAL_VAN_DAMME_IT
+		public static const UNKNOWN_ACHIEVEMENT_308:int			= 308;
+		public static const UNKNOWN_ACHIEVEMENT_309:int			= 309;
+		public static const UNKNOWN_ACHIEVEMENT_310:int			= 310;
 		
 	}
 

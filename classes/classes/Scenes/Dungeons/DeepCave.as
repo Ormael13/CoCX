@@ -975,7 +975,7 @@ use namespace CoC;
 				player.orgasm();
 			}
 			//Done if escaped
-			if(monster.lust == 100) {
+			if(monster.lust == monster.maxLust()) {
 				flags[kFLAGS.ZETAZ_FUNGUS_ROOM_DEFEATED]++;
 				cleanupAfterCombat();
 				return;

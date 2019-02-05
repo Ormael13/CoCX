@@ -782,10 +782,10 @@ private function takeDatBroBrewFromDaBigMeanOlOrc():void {
 		}
 		//max tone.  Thickness + 50
 		if(player.tone < player.maxToneCap()) {
-			player.modTone(player.maxToneCap(),100);
+			player.modTone(player.maxToneCap(),player.maxToneCap());
 		}
-		if(player.thickness < 100) {
-			player.modThickness(100,50);
+		if(player.thickness < player.maxThicknessCap()) {
+			player.modThickness(player.maxThicknessCap(),(player.maxThicknessCap() * 0.5));
 		}
 		if(player.inte > 21) player.inte = 21;
 		dynStats("str", 33,"tou", 33, "int", -1, "lib", 4, "lus", 40);

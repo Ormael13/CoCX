@@ -38,7 +38,7 @@ public class Valkyrie extends Monster
 				var attacks:int = 1 + rand(3);
 				var damage:int = 0;
 				while (attacks > 0) {
-					damage += ((str) + rand(50));
+					damage += ((str * 1.25) + rand(65));
 					attacks--;
 				}
 				player.takePhysDamage(damage, true);
@@ -77,7 +77,7 @@ public class Valkyrie extends Monster
 					player.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
 				}
 				else outputText("backwards. ");
-				var damage:int = ((str + 50) + rand(50));
+				var damage:int = (((str * 1.25) + 65) + rand(65));
 				player.takePhysDamage(damage, true);
 			}
 		}
@@ -108,7 +108,7 @@ public class Valkyrie extends Monster
 			else
 			{
 				outputText("Before you can react, she launches into the air, propelling the two of you upwards with her powerful wings.  You struggle, but it’s no use -- until she lets go.  You cry out in terror as you fall back to the earth, crashing painfully into a convenient snowbank, while your opponent lands gracefully a few feet away. ");
-				var damage:int = ((str + 200) + rand(100));
+				var damage:int = (((str * 1.25) + 300) + rand(150));
 				player.takePhysDamage(damage, true);
 			}
 		}
@@ -140,21 +140,21 @@ public class Valkyrie extends Monster
 			this.skin.setBaseOnly({color:"light"});
 			this.hairColor = "white";
 			this.hairLength = 12;
-			initStrTouSpeInte(145, 120, 100, 60);
-			initWisLibSensCor(60, 40, 50, 15);
+			initStrTouSpeInte(185, 165, 140, 75);
+			initWisLibSensCor(75, 40, 50, 15);
 			this.weaponName = "spear and shield";
 			this.weaponVerb="pummel";
-			this.weaponAttack = 32;
+			this.weaponAttack = 34;
 			this.armorName = "bronze plates";
-			this.armorDef = 26;
-			this.armorMDef = 10;
-			this.bonusHP = 400;
+			this.armorDef = 29;
+			this.armorMDef = 12;
+			this.bonusHP = 450;
 			this.bonusLust = 10;
 			this.lust = 25 + rand(15);
 			this.lustVuln = 0.46;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 30;
-			this.gems = 40 + rand(15);
+			this.level = 44;
+			this.gems = 55 + rand(20);
 			this.drop = new WeightedDrop()
 					.add(weapons.SPEAR, 1)
 					.add(shields.GREATSH, 3)

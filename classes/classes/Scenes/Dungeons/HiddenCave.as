@@ -39,7 +39,6 @@ public class HiddenCave extends DungeonAbstractContent
 		private static const DUNGEON_HIDDEN_CAVE_SMALL_CAVE_E:int  	= 62;
 		private static const DUNGEON_HIDDEN_CAVE_SMALL_CAVE_N:int  	= 63;
 		
-		
 		public function HiddenCave() {}
 		
 		public function enterDungeon():void {
@@ -321,7 +320,10 @@ public class HiddenCave extends DungeonAbstractContent
 			outputText("<b><u>Stone Staircase (Basement)</u></b>\n");
 			outputText("In front of you is a stairway leading back to the upper level.");
 			dungeons.setDungeonButtons(roomTunnel00, null, null, null);
-			addButton(5, "Upstairs", roomSStaircase);
+			addButton(5, "Upstairs", roomSStaircase);/*
+			if (player.hasKeyItem("Jade Talisman") >= 0 && flags[kFLAGS.AURORA_LVL] == 1) {
+				addButton(0, "J.Talisman", putInTheJadeTalisman);
+			}*/
 		}
 		public function roomTunnel00():void {
 			dungeonLoc = 56;
@@ -481,6 +483,12 @@ public class HiddenCave extends DungeonAbstractContent
 			}
 		}
 		
+		private function putInTheJadeTalisman():void {
+			clearOutput();
+			outputText("There is a loud rumbling from the direction of the tunnel...");
+			player.removeKeyItem("Jade Talisman");
+			doNext(playerMenu);
+		}
 		private function pullTheLever():void {
 			clearOutput();
 			outputText("There is a loud rumbling from the direction of the tunnel...");

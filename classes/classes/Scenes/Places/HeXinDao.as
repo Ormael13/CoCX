@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  *
- * Simple village for soul cultivators He'xin'dao - River Island
+ * Simple village for soul cultivators He'Xin'Dao - River Island
  */
 
 package classes.Scenes.Places {
@@ -15,6 +15,8 @@ import classes.Scenes.Areas.Forest.TentacleBeast;
 import classes.Scenes.Areas.Mountain.HellHound;
 import classes.Scenes.Areas.Swamp.CorruptedDrider;
 import classes.Scenes.Dungeons.HiddenCave.BossGolems;
+import classes.Scenes.Dungeons.RiverDungeon;
+import classes.Scenes.NPCs.NeisaFollower;
 import classes.Scenes.Places.HeXinDao.*;
 import classes.Scenes.Monsters.*;
 import classes.Scenes.NPCs.Jeniffer;
@@ -28,22 +30,113 @@ import classes.Scenes.NPCs.Rangiku;
 
 public class HeXinDao extends BaseContent
 {
-
     public var ignisarenaseer:IgnisArenaSeerScene = new IgnisArenaSeerScene();
+    public var neisaScene:NeisaFollower = new NeisaFollower();
     public var chichiScene:ChiChiFollower = new ChiChiFollower();
 	public var journeytotheeast:JourneyToTheEast = new JourneyToTheEast();
-    //public var TFmerch:MogaHen = new MogaHen();
+    public var riverdungeon:RiverDungeon = new RiverDungeon();
 
     public function HeXinDao()
     {
 
     }
+	
+	public function riverislandVillageStuff0():void {
+		spriteSelect(-1);
+        clearOutput();
+		if (isLunarNewYear()) {
+			outputText("As you enter the town you notice something out of the norm. It would seem the citizens are celebrating something. There are red drapes everywhere and even a giant snake-like Muppet parading in the streets. What is going on in He’Xin’Dao? Maybe you should attend?");
+			menu();
+			addButton(1, "Maybe later", riverislandVillageStuff1);
+			addButton(3, "Sure!", riverislandVillageStuffLunar);
+		}
+		else riverislandVillageStuff();
+	}
+	public function riverislandVillageStuff1():void {
+		outputText("\n\nYou aren’t here today for a festival. Maybe you will attend tomorrow.\n\n");
+		doNext(riverislandVillageStuff);
+	}
+	public function riverislandVillageStuffLunar():void {
+		clearOutput();
+		flags[kFLAGS.LUNAR_NEW_YEAR] = date.fullYear;
+		if (flags[kFLAGS.LUNAR_NEW_YEAR] <= 2015) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "goat";
+		else if (flags[kFLAGS.LUNAR_NEW_YEAR] == 2016) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "monkey";
+		else if (flags[kFLAGS.LUNAR_NEW_YEAR] == 2017) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "rooster";
+		else if (flags[kFLAGS.LUNAR_NEW_YEAR] == 2018) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "dog";
+		else if (flags[kFLAGS.LUNAR_NEW_YEAR] >= 2019) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "pig";;
+		outputText("You go deeper in town and discover the whole place is indeed covered in red. The big question now is what should you check upon first?");
+		menu();
+		//addButton(0, "", riverislandVillageStuffLunarGifts);
+		addButton(1, "Food", riverislandVillageStuffLunarFood);
+		addButton(2, "Clothing", riverislandVillageStuffLunarClothing);
+		//addButton(3, "Fireworks", riverislandVillageStuffLunarFireworks);
+		//addButton(4, "Chi Chi", riverislandVillageStuffLunarChiChi);
+		addButton(14, "Back", riverislandVillageStuff1).hint("Leave festival part of He'Xin'Dao.");
+	}
+	public function riverislandVillageStuffLunarGifts():void {
+		
+	}
+	public function riverislandVillageStuffLunarFood():void {
+		clearOutput();
+		outputText("The local restaurant seems to be offering some speciality food and the best of it all; is it's free! Some " + flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] + "-morphs are handling it all over for extra thematics. You proceed to grab a plate of these strange ravioli the people calls jiǎozi taking this rice dessert they call niángāo right after. The meal is comforting and you would believe everything in mareth was going fine right now if not for the reddish stormy sky in the far distance which contrast with these festivities.");
+		player.refillHunger(50);
+		doNext(riverislandVillageStuffLunar);
+	}
+	public function riverislandVillageStuffLunarClothing():void {
+		clearOutput();
+		outputText("As you take a corner you spot a " + flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] + " girl working at what appears to be a festive cloth store.");
+		outputText("\n\n\"<i>Come over people! Look the part! Buy a dress for the festivities only for 100 gems! C'mon and buy while there's some left!</i>\"");
+		outputText("\n\nDo you buy one from the " + flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] + " girl?");
+		menu();
+		addButton(1, "Yes", riverislandVillageStuffLunarClothing2);
+		addButton(3, "No", riverislandVillageStuffLunar);
+	}
+	public function riverislandVillageStuffLunarClothing2():void {
+		outputText("\n\n\"<i>Which color would you want your dress to be?</i>\"");
+		menu();
+		if (player.gems >= 100) {
+			addButton(0, armors.R_CHANG.shortName, dressBuy, armors.R_CHANG);
+			addButton(1, armors.G_CHANG.shortName, dressBuy, armors.G_CHANG);
+			addButton(2, armors.B_CHANG.shortName, dressBuy, armors.B_CHANG);
+			addButton(3, armors.P_CHANG.shortName, dressBuy, armors.P_CHANG);
+			addButton(5, armors.R_QIPAO.shortName, dressBuy, armors.R_QIPAO);
+			addButton(6, armors.G_QIPAO.shortName, dressBuy, armors.G_QIPAO);
+			addButton(7, armors.B_QIPAO.shortName, dressBuy, armors.B_QIPAO);
+			addButton(8, armors.P_QIPAO.shortName, dressBuy, armors.P_QIPAO);
+		}
+		addButton(14, "Back", riverislandVillageStuff);
+	}
+	private function dressBuy(itype:ItemType):void {
+        clearOutput();
+        outputText("She hands you the dress after taking in your gems.");
+		outputText("\n\n\"<i>Happy year of the " + flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] + ", I wish you great luck!</i>\"");
+		outputText("\n\nYou put the dress in your bag for now. Now to put it on.");
+		outputText("\n\n<b>You got a Lunar new year dress.</b>\n\n");
+		player.gems -= 100;
+        statScreenRefresh();
+        inventory.takeItem(itype, riverislandVillageStuffLunar);
+    }
+	public function riverislandVillageStuffLunarFireworks():void {
+		
+	}
+	public function riverislandVillageStuffLunarChiChi():void {
+		clearOutput();
+		outputText("You are surprised to spot Chi Chi in the crowd wearing a traditional kimono. The hinezumi notice you right away and invite you to join her.");
+		if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 4) {
+			outputText("\n\n\"<i>Oh it's you? Did you came to train? I’m sorry, but today I’m on a break. It's the Lunar festival and this event only happens once a year. How about we share a cup of sake and watch the fireworks? You could use a break too, ya know?</i>\"");
+			outputText("\n\nYou both share sake and food and jokes all night while watching the fireworks. It's only when it gets very late that you bid her farewell and head back to camp.");
+			doNext(riverislandVillageStuff);
+		}
+		else {
+			outputText("\n\n\"<i>Come over people! Look the part! Buy a dress for the festivities only for 50 gems! C'mon and buy while there's some left!</i>\"");
+		}
+	}
 
     public function riverislandVillageStuff():void {
         spriteSelect(-1);
         clearOutput();
-        outputText("He'Xin'Dao is large sized village placed on many various sized islands in the middle of large river that flow from east ot west. Aside from bridges connecting each of the island to others, two larger ones connects them as whole to both sides of the river serving as only point of access to it.  Protection formations laid out preventing from entering by swimming throu the river directly to any of the smaller islands, which force anyone to use bridges if their wish to enter.\n");
-        //outputText("\n\nNear one of major briges is located merchant area with various smaller or larger places where all visitors can buy or sell various items. Among then two attracts most attention with first been largest stall here and other largest shop. On almsot opposite side of village near other brige is located medium sized shop with sign indicating it govern local exchanges and transformation items market.");
+        outputText("He'Xin'Dao is large sized village placed on many various sized islands in the middle of large river that flow from east to west. Aside from bridges connecting each of the island to others, two larger ones connects them as whole to both sides of the river serving as only point of access to it.  Protection formations laid out preventing from entering by swimming throu the river directly to any of the smaller islands, which force anyone to use bridges if their wish to enter.\n");
+        //outputText("\n\nNear one of major briges is located merchant area with various smaller or larger places where all visitors can buy or sell various items. Among then two attracts most attention with first been largest stall here and other largest shop. On almost opposite side of village near other brige is located medium sized shop with sign indicating it govern local exchanges and transformation items market.");
         //outputText("\n\nAt the island located on west end of He'Xin'Dao you see one of biggest buildings here. From sounds of weapon clashing it seems to be some kind of local arena.");
         //outputText("\n.");	//Z czasem jak bede dodawac miejsca opis wioski bedzie rozbudowywany :P
         riverislandMenuShow();
@@ -55,6 +148,7 @@ public class HeXinDao extends BaseContent
         addButton(1, "TFspec/Exch", mogahenmerchant);
         addButton(2, "SoulEquip", soulequipmentmerchant);
         addButton(3, "SoulArrow", soularrowmerchant);
+		//addButton(4, "Dungeon", entranceToRiverDungeon);
         //addButton(5, "", ); siedziba lokalnej grupy zrzeszającej soul cultivators - PC aby potem pojsc dalej bedzie musial dolaczyc tutaj (pomyslec nad wiarygodnym sposobem zmuszenia go do tego - moze jakies ciekawe itemy/inne rzeczy dla czlonkow beda a miejsce sie zwolni jak wywala tak goblinke tworzynie golemow, ktora potem oczywiscie wcisnie sie do obozu PC aby w spokoju rozwijac sie w tworzeniu golemow itp.)
         addButton(6, "JourTTEast", journeytotheeast.enteringInn);
         addButton(7, "Arena", soularena);
@@ -155,10 +249,10 @@ public class HeXinDao extends BaseContent
         menu();
         addButton(0, "1st Stall", Tier1).hint("Check out first of stalls with a cheapest TF items.");
         addButton(1, "2nd Stall", Tier2).hint("Check out second of stalls with a cheapest TF items.");
-        addButton(2, "2nd Stall", Tier3).hint("Check out third of stalls with a cheapest TF items.");
-        addButton(3, "3rd Stall", Tier4).hint("Check out stall with more expensive TF items.");
-        addButton(4, "4th Stall", Tier5).hint("Check out stall with most expensive TF items.");
-        addButton(5, "5th Stall", Tier6).hint("Check out stall with most exotic TF items.");		//specjalne type TF jak ectoplasm ^^
+        addButton(2, "3rd Stall", Tier3).hint("Check out third of stalls with a cheapest TF items.");
+        addButton(3, "4th Stall", Tier4).hint("Check out stall with more expensive TF items.");
+        addButton(4, "5th Stall", Tier5).hint("Check out stall with most expensive TF items.");
+        addButton(5, "6th Stall", Tier6).hint("Check out stall with most exotic TF items.");		//specjalne type TF jak ectoplasm ^^
         //addButton(10, "Talk", TalkWithMogaHen).hint("Talk with shopkeeper.");
         addButton(11, "Sell", sellItemsForSpiritStones).hint("Sell items for spirit stones.");
         addButton(12, "Exchange", exchangeGemsToSpiritStonesorReverse).hint("Exchange gems to spirit stones or spirit stones to gems.");
@@ -188,15 +282,16 @@ public class HeXinDao extends BaseContent
             menu();
             addButton(0, "MouseCo", buyItem,consumables.MOUSECO,sayLine(consumables.MOUSECO,"mouse"),onBuyString).hint("Buy a handful of mouse cocoa.");
             addButton(1, "MinoBlo", buyItem,consumables.MINOBLO,sayLine(consumables.MINOBLO,"bull"),onBuyString).hint("Buy a vial of Minotaur blood.");
-            addButton(2, "PigTruffle", buyItem,consumables.PIGTRUF,sayLine(consumables.PIGTRUF,"pig"),onBuyString).hint("Buy a pigtail truffle.");
-            addButton(3, "Reptilum", buyItem,consumables.REPTLUM,sayLine(consumables.REPTLUM,"lizan"),onBuyString).hint("Buy a vial of Reptilum.");
-            addButton(4, "RingFig", buyItem,consumables.RINGFIG,sayLine(consumables.RINGFIG,"raccoon"),onBuyString).hint("Buy a ringtail fig.");
-            addButton(5, "S.Gossr", buyItem,consumables.S_GOSSR,sayLine(consumables.S_GOSSR,"spider"),onBuyString).hint("Buy a bundle of pink, gossamer webbing.");
-            addButton(6, "SalamFW", buyItem,consumables.SALAMFW,sayLine(consumables.SALAMFW,"salamander"),onBuyString).hint("Buy a hip flask of Salamander Firewater.");
-            addButton(7, "Scorpinum", buyItem,consumables.SCORICO,sayLine(consumables.SCORICO,"scorpion"),onBuyString).hint("Buy a vial of Scorpinum.");
-            addButton(8, "Shark.T", buyItem,consumables.SHARK_T,sayLine(consumables.SHARK_T,"shark"),onBuyString).hint("Buy a sharp shark tooth.");
-            addButton(9, "SnakeOil", buyItem,consumables.SNAKOIL,sayLine(consumables.SNAKOIL,"snake"),onBuyString).hint("Buy a vial of snake oil.");
-            addButton(10, "SucMilk", buyItem,consumables.SUCMILK,sayLine(consumables.SUCMILK,"sucubus"),onBuyString).hint("Buy a bottle of Succubi milk.");
+            addButton(2, "OrcMead", buyItem,consumables.ORCMEAD,sayLine(consumables.ORCMEAD,"orc"),onBuyString).hint("Buy a flagon of potent orc mead.");
+            addButton(3, "PigTruffle", buyItem,consumables.PIGTRUF,sayLine(consumables.PIGTRUF,"pig"),onBuyString).hint("Buy a pigtail truffle.");
+            addButton(4, "Reptilum", buyItem,consumables.REPTLUM,sayLine(consumables.REPTLUM,"lizan"),onBuyString).hint("Buy a vial of Reptilum.");
+            addButton(5, "RingFig", buyItem,consumables.RINGFIG,sayLine(consumables.RINGFIG,"raccoon"),onBuyString).hint("Buy a ringtail fig.");
+            addButton(6, "S.Gossr", buyItem,consumables.S_GOSSR,sayLine(consumables.S_GOSSR,"spider"),onBuyString).hint("Buy a bundle of pink, gossamer webbing.");
+            addButton(7, "SalamFW", buyItem,consumables.SALAMFW,sayLine(consumables.SALAMFW,"salamander"),onBuyString).hint("Buy a hip flask of Salamander Firewater.");
+            addButton(8, "Scorpinum", buyItem,consumables.SCORICO,sayLine(consumables.SCORICO,"scorpion"),onBuyString).hint("Buy a vial of Scorpinum.");
+            addButton(9, "Shark.T", buyItem,consumables.SHARK_T,sayLine(consumables.SHARK_T,"shark"),onBuyString).hint("Buy a sharp shark tooth.");
+            addButton(10, "SnakeOil", buyItem,consumables.SNAKOIL,sayLine(consumables.SNAKOIL,"snake"),onBuyString).hint("Buy a vial of snake oil.");
+            addButton(11, "SucMilk", buyItem,consumables.SUCMILK,sayLine(consumables.SUCMILK,"sucubus"),onBuyString).hint("Buy a bottle of Succubi milk.");
             addButton(14, "Back", mogahenmerchant);
             statScreenRefresh();
         }
@@ -400,6 +495,18 @@ public class HeXinDao extends BaseContent
         statScreenRefresh();
         inventory.takeItem(itype, soulequipmentmerchant);
     }
+	
+	public function entranceToRiverDungeon():void {
+		clearOutput();
+		if (flags[kFLAGS.NEISA_FOLLOWER] == 0) neisaScene.firstTimeEnteringRiverDungeon();
+		else {
+			outputText("Repeat entering scene for dungeon. Till henchmans are added it will not be opened again. (Temporaly scene text!!!)");
+			menu();
+			if (flags[kFLAGS.PLAYER_COMPANION_1] != "") addButton(1, "Enter", riverdungeon.enterDungeon);
+			else addButtonDisabled(1, "Enter", "Seems you need to find someone to form party with you.");
+			addButton(3, "Back", riverislandVillageStuff);
+		}
+	}
 
     public function soularrowmerchant():void {
         clearOutput();//później zamienić soulequipment na imie sprzedawczyni ^^ female centaur npc
@@ -737,6 +844,7 @@ public function soularena():void {
         var tempToughness:int = player.statusEffectv4(StatusEffects.ShiraOfTheEastFoodBuff2);
         dynStats("tou", tempToughness);
         flags[kFLAGS.SPIRIT_STONES]--;
+		player.refillHunger(100);
         statScreenRefresh();
         doNext(camp.returnToCampUseOneHour);
     }

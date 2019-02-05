@@ -47,10 +47,21 @@ public class EngineCore {
      */
     public static function HPChange(changeNum:Number, display:Boolean):Number {
         var before:Number = CoC.instance.player.HP;
+		var healingFromHealer:Number = 1;
         if (changeNum == 0) return 0;
         if (changeNum > 0) {
             //Increase by 20%!
-            if (CoC.instance.player.findPerk(PerkLib.HistoryHealer) >= 0 || CoC.instance.player.findPerk(PerkLib.PastLifeHealer) >= 0) changeNum *= 1.2;
+            if (CoC.instance.player.findPerk(PerkLib.HistoryHealer) >= 0 || CoC.instance.player.findPerk(PerkLib.PastLifeHealer) >= 0) {
+				healingFromHealer += 0.2;
+				if (CoC.instance.player.findPerk(PerkLib.Nurse) >= 0) healingFromHealer += 0.2;
+				if (CoC.instance.player.findPerk(PerkLib.Doctor) >= 0) healingFromHealer += 0.2;
+				if (CoC.instance.player.findPerk(PerkLib.FirstResponse) >= 0) healingFromHealer += 0.2;
+				if (CoC.instance.player.findPerk(PerkLib.Paramedic) >= 0) healingFromHealer += 0.2;
+				if (CoC.instance.player.findPerk(PerkLib.SurgeonsAide) >= 0) healingFromHealer += 0.2;
+				if (CoC.instance.player.findPerk(PerkLib.Surgeon) >= 0) healingFromHealer += 0.2;
+				if (CoC.instance.player.findPerk(PerkLib.Medic) >= 0) healingFromHealer += 0.2;
+				changeNum *= healingFromHealer;
+			}
             if (CoC.instance.player.HP + int(changeNum) > maxHP()) {
                 if (CoC.instance.player.HP >= maxHP()) {
                     if (display) HPChangeNotify(changeNum);
@@ -96,8 +107,8 @@ public class EngineCore {
                 outputText("You gain <b><font color=\"#008000\">" + int(changeNum) + "</font></b> HP.\n");
         }
         else {
-            if (CoC.instance.player.HP <= 0)
-                outputText("You take <b><font color=\"#800000\">" + int(changeNum * -1) + "</font></b> damage, dropping your HP to 0.\n");
+            if (CoC.instance.player.HP <= CoC.instance.player.minHP())
+                outputText("You take <b><font color=\"#800000\">" + int(changeNum * -1) + "</font></b> damage, dropping your HP to "+CoC.instance.player.minHP()+".\n");
             else
                 outputText("You take <b><font color=\"#800000\">" + int(changeNum * -1) + "</font></b> damage.\n");
         }

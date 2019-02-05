@@ -90,7 +90,6 @@ CAMP_CABIN_SAND_RESOURCES
 CAMP_CABIN_CONCRETE_RESOURCES
 */
 public function buildmiscMenu():void {
-	//clearOutput();
 	menu();
 	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 1 || flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 2) addButton(0, "Wood Storage", materialgatheringstorageupgrade).hint("Build up storage to gather more wood at the camp. (Req. 150 fatigue)");
 	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) addButton(0, "Stone Storage", materialgatheringstorageupgrade).hint("Build up storage to gather more stones at the camp. (Req. 150 fatigue)");
@@ -103,11 +102,19 @@ public function buildmiscMenu():void {
 		if (player.findPerk(PerkLib.StarSphereMastery) >= 0 && player.hasItem(useables.GLDSTAT)) addButton(2, "Shrine", kitsuneshrine2).hint("Finish up kitsune shrine at the camp.");
 	}
 	if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 2 || flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 3) addButton(3, "Hot Spring", hotspring).hint("Build up hot spring at the camp. (Req. 100 fatigue)");
-	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 1) addButton(4, "Sparring Ring", sparringRing).hint("Build up sparring ring at the camp. (Unlock sparring option for all camp members that have this option)(Req. 50 fatigue)");
+	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 1 && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2) addButton(4, "Sparring Ring", sparringRing).hint("Build up sparring ring at the camp. (Unlock sparring option for all camp members that have this option)(Req. 50 fatigue)");
 	if (player.findPerk(PerkLib.JobElementalConjurer) >= 0 && flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] < 3) addButton(5, "Arcane Circle", arcaneCircle).hint("Build an arcane circle at the camp. (Unlock elementals summons related options)(Req. 50 fatigue, enough mana and blood)");
 	if (player.inte >= 50 && flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 1) addButton(6, "Magic Ward", magicWard).hint("Set up a Magic Ward around the camp. (Req. 200 fatigue)");
-	if (flags[kFLAGS.CAMP_UPGRADES_DAM] < 1) addButton(7, "Dam", dam).hint("Build up a dam on the steam next to the camp. (Req. 200 fatigue)");
+	if (flags[kFLAGS.CAMP_UPGRADES_DAM] < 1) addButton(7, "Dam", dam).hint("Build up a dam on the steam next to the camp. (Req. 200 fatigue * tier of build dam)");
 	if (flags[kFLAGS.CAMP_UPGRADES_DAM] >= 1 && flags[kFLAGS.CAMP_UPGRADES_FISHERY] < 1) addButton(8, "Fishery", fishery).hint("Build up a fishery on the steam next to the camp. (Req. 200 fatigue)");
+	addButton(14, "Back", playerMenu);
+}
+public function buildCampMembersCabinsMenu():void {
+	menu();
+	addButtonDisabled(0, "Lair", "You need to have Ember for those upgrades.");
+	addButtonDisabled(1, "Ant Hill", "You need to have Phylla for those upgrades.");
+	addButtonDisabled(2, "Horse-barn", "You need to have any cow-like camp member for those upgrades.");
+	addButtonDisabled(3, "Rockery", "You need to have any flying camp member for those upgrades.");
 	addButton(14, "Back", playerMenu);
 }
 
@@ -1256,17 +1263,22 @@ private function setUpMagicWard2():void {
 //Dam Upgrade
 public function dam():void {
 	clearOutput();
-	if (player.fatigue <= player.maxFatigue() - 200)
-	{
-		if (flags[kFLAGS.CAMP_UPGRADES_DAM] < 1) { 
-			buildUpMinorWoodDam();
-			return;
-		}/*
-		if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 1) { 
-			buildUpMajorWoodDam() 
-			return; 
-		}*/
+	if (flags[kFLAGS.CAMP_UPGRADES_DAM] < 1 && player.fatigue <= player.maxFatigue() - 200) { 
+		buildUpMinorWoodDam();
+		return;
 	}
+	if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 1 && player.fatigue <= player.maxFatigue() - 400) { 
+		buildUpWoodDam();
+		return; 
+	}
+	if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 2 && player.fatigue <= player.maxFatigue() - 600) { 
+		buildUpMajorWoodDam();
+		return; 
+	}/*
+	if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 3 && player.fatigue <= player.maxFatigue() - 800) { 
+		buildUpMinorStoneDam();
+		return; 
+	}*/
 	else
 	{	
 		outputText("You are too exhausted to work on dam!");
@@ -1302,29 +1314,12 @@ private function buildUpMinorWoodDam2():void {
 	fatigue(fatigueAmount);
 	doNext(camp.returnToCampUseEightHours);
 }
-
-//Fishery Upgrade
-public function fishery():void {
-	clearOutput();
-	if (player.fatigue <= player.maxFatigue() - 200)
-	{
-		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] < 1) { 
-			buildUpFishery();
-			return;
-		}
-	}
-	else
-	{	
-		outputText("You are too exhausted to work on fishery!");
-		doNext(playerMenu);
-	}
-}
-public function buildUpFishery():void {
-	outputText("Do you start work on building fishery? (Cost: 200 nails, 300 wood.)\n");
+public function buildUpWoodDam():void {
+	outputText("Do you start work on upgrading your small wood dam? (Cost: 250 nails, 375 wood.)\n");
 	checkMaterials();
-	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 300)
+	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 250 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 375)
 	{
-		doYesNo(buildUpFishery2, noThanks);
+		doYesNo(buildUpWoodDam2, noThanks);
 	}
 	else
 	{
@@ -1332,13 +1327,128 @@ public function buildUpFishery():void {
 		doNext(playerMenu);
 	}
 }
-private function buildUpFishery2():void {
+private function buildUpWoodDam2():void {
+	flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 250;
+	flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 375;
+	clearOutput();
+	outputText("You get down to work expanding the dam plank by plank starting from sides. At first it goes slowly but you eventualy speed up, to slow down again near end of the work. New taller and wider dam starts to accumulative water to form something between steam and miniature narrow shaped lake.");
+	flags[kFLAGS.CAMP_UPGRADES_DAM] = 2;
+	//Gain fatigue.
+	var fatigueAmount:int = 400;
+	fatigueAmount -= player.str / 5;
+	fatigueAmount -= player.tou / 10;
+	fatigueAmount -= player.spe / 10;
+	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 40;
+	if (fatigueAmount < 10) fatigueAmount = 10;
+	fatigue(fatigueAmount);
+	doNext(camp.returnToCampUseEightHours);
+}
+public function buildUpMajorWoodDam():void {
+	outputText("Do you start work on upgrading your wood dam? (Cost: 300 nails, 450 wood.)\n");
+	checkMaterials();
+	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 300 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 450)
+	{
+		doYesNo(buildUpMajorWoodDam2, noThanks);
+	}
+	else
+	{
+		errorNotEnough();
+		doNext(playerMenu);
+	}
+}
+private function buildUpMajorWoodDam2():void {
+	flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 300;
+	flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 450;
+	clearOutput();
+	outputText("You get down to work on expanding the dam for the second time like the last time putting planks on the sides first. It progress slowly until you put last ones on the top of dam. Tired but satisfied with your work you look how previous widened steam due to higher water accumulation turn into proper miniature yet very narrow mini lake.");
+	flags[kFLAGS.CAMP_UPGRADES_DAM] = 3;
+	//Gain fatigue.
+	var fatigueAmount:int = 600;
+	fatigueAmount -= player.str / 5;
+	fatigueAmount -= player.tou / 10;
+	fatigueAmount -= player.spe / 10;
+	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 60;
+	if (fatigueAmount < 10) fatigueAmount = 10;
+	fatigue(fatigueAmount);
+	doNext(camp.returnToCampUseEightHours);
+}
+
+//Fishery Upgrade
+public function fishery():void {
+	clearOutput();
+	if (player.fatigue <= player.maxFatigue() - 200)
+	{
+		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] < 1) { 
+			buildUpFishery1();
+			return;
+		}
+		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 1) { 
+			if (flags[kFLAGS.CAMP_UPGRADES_DAM] >= 2) {
+				buildUpFishery2();
+				return;
+			}
+			else {
+				outputText("You need to expand your dam more before you can expand your fishery!");
+				doNext(playerMenu);
+			}
+		}
+		//3 stopień rozbudowy na 5 stopniu tamy (2 st. kamiennej tamy) a 4 stopień na 7 stopniu tamy (4 st. kamiennej)
+	}
+	else
+	{	
+		outputText("You are too exhausted to work on fishery!");
+		doNext(playerMenu);
+	}
+}
+public function buildUpFishery1():void {
+	outputText("Do you start work on building fishery? (Cost: 200 nails, 300 wood.)\n");
+	checkMaterials();
+	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 300)
+	{
+		doYesNo(buildUpFishery1Yes, noThanks);
+	}
+	else
+	{
+		errorNotEnough();
+		doNext(playerMenu);
+	}
+}
+private function buildUpFishery1Yes():void {
 	flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 200;
 	flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 300;
 	clearOutput();
 	outputText("You spend a 8 hours hammering nail and building your fishery. At the end of it you look at the result with pride. Time to have someone on fishing duty.");
 	flags[kFLAGS.CAMP_UPGRADES_FISHERY] = 1;
 	flags[kFLAGS.FISHES_STORED_AT_FISHERY] = 0;
+	//Gain fatigue.
+	var fatigueAmount:int = 200;
+	fatigueAmount -= player.str / 5;
+	fatigueAmount -= player.tou / 10;
+	fatigueAmount -= player.spe / 10;
+	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
+	if (fatigueAmount < 10) fatigueAmount = 10;
+	fatigue(fatigueAmount);
+	doNext(camp.returnToCampUseEightHours);
+}
+public function buildUpFishery2():void {
+	outputText("Do you start work on building fishery? (Cost: 300 nails, 450 wood.)\n");
+	checkMaterials();
+	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 300 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 450)
+	{
+		doYesNo(buildUpFishery2Yes, noThanks);
+	}
+	else
+	{
+		errorNotEnough();
+		doNext(playerMenu);
+	}
+}
+private function buildUpFishery2Yes():void {
+	flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 300;
+	flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 450;
+	clearOutput();
+	outputText("You spend a 8 hours hammering nail and expanding your fishery. At the end of it you look at the result with pride. Now you can have two people on fishing duty.");
+	flags[kFLAGS.CAMP_UPGRADES_FISHERY] = 2;
 	//Gain fatigue.
 	var fatigueAmount:int = 200;
 	fatigueAmount -= player.str / 5;
@@ -1408,7 +1518,7 @@ public function checkMaterials():void {
 // ?button 5 - Kid A barrel changes?
 // ?button 6 - Behemoth lair upgr?
 // ?button 7 - Lith lair upgr? (Rycharde corr drider slave)
-// ?button 8 - Kimika living place upgr? (Adorable Sheep-morph archer with "a slight issue" ^^)
+// ?button 8 - Kimika(Kindra) living place upgr? (Adorable Sheep-morph archer with "a slight issue" ^^)
 // button 9 - previous page
 // ?button 10 - Helia + Helspawn living place?
 // button 14 - back

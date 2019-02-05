@@ -1,5 +1,5 @@
 /**
- * Created by Kitteh6660. Glacial Rift is a new area with level 30-40 encounters
+ * Created by Kitteh6660. Glacial Rift is a area with level 30-40 encounters	(outer lvl 60-80, inner lvl 85-110)
  * Currently a Work in Progress.
  * 
  * Please see this project. (This is not mine.) http://forum.fenoxo.com/thread-10719.html
@@ -137,16 +137,21 @@ use namespace CoC;
 					addButton(0, "Fight", fightValeria);
 					addButton(1, "Submit", SceneLib.valeria.pcWinsValeriaSparDefeat, true);
 					break;
-				case 7: //Find item!
+				case 7: //Find Aria of item!
 					clearOutput();
-					var itemChooser:Number = rand(2);
-					if (itemChooser == 0) {
-						outputText("As you cross one of the floating ice sheets that make up the bulk of the rift, your eyes are drawn to a bright glint amidst the white backdrop.  As you eagerly approach the gleam, you discover a single tiny spire of ice, jutting from the surrounding snow.  You pluck it gently from the ground, give it a quick glance over and, satisfied that it won’t try and kill you, drop it in your bag. ");
-						inventory.takeItem(consumables.ICICLE_, camp.returnToCampUseOneHour);
+					if (rand(2) == 0) {
+						SceneLib.ariaScene.MelkieEncounter();
 					}
-					else if (itemChooser == 1) {
-						outputText("As you make your way across the icy wastes, you notice a small corked ivory horns half-buried under the snow, filled with a thick sweet-looking liquor. You stop and dig it up, sniffing curiously at the liquid. The scent reminds you of the honey secreted by the bee-girls of Mareth, though with hints of alcohol and... something else. You place the horns of mead in your bag and continue on your way. ");
-						inventory.takeItem(consumables.GODMEAD, camp.returnToCampUseOneHour);					
+					else {
+						var itemChooser:Number = rand(2);
+						if (itemChooser == 0) {
+							outputText("As you cross one of the floating ice sheets that make up the bulk of the rift, your eyes are drawn to a bright glint amidst the white backdrop.  As you eagerly approach the gleam, you discover a single tiny spire of ice, jutting from the surrounding snow.  You pluck it gently from the ground, give it a quick glance over and, satisfied that it won’t try and kill you, drop it in your bag. ");
+							inventory.takeItem(consumables.ICICLE_, camp.returnToCampUseOneHour);
+						}
+						else if (itemChooser == 1) {
+							outputText("As you make your way across the icy wastes, you notice a small corked ivory horns half-buried under the snow, filled with a thick sweet-looking liquor. You stop and dig it up, sniffing curiously at the liquid. The scent reminds you of the honey secreted by the bee-girls of Mareth, though with hints of alcohol and... something else. You place the horns of mead in your bag and continue on your way. ");
+							inventory.takeItem(consumables.GODMEAD, camp.returnToCampUseOneHour);					
+						}
 					}
 					break;
 				case 8: //Find ornate chest!

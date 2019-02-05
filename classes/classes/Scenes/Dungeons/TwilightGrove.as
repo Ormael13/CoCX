@@ -5,12 +5,22 @@
  */
 package classes.Scenes.Dungeons 
 {
-	public class TwilightGrove 
+import classes.EventParser;
+import classes.GlobalFlags.kFLAGS;
+
+	public class TwilightGrove extends DungeonAbstractContent
 	{
 		
 		public function TwilightGrove() 
 		{
 			
+		}
+		
+		public function exitDungeon():void {
+			inDungeon = false;
+			clearOutput();
+			outputText("You leave the river dungeon behind and take off through the He'Xin'Dao back towards camp.");
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 	}

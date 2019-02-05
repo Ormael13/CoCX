@@ -15,7 +15,7 @@ public class Ears extends BodyPart {
 	public static const RACCOON:int   = 11;
 	public static const MOUSE:int     = 12;
 	public static const FERRET:int    = 13;
-	public static const PIG:int       = 14;
+	public static const PIG:int       = 14;//button 0 on 2nd page of metamorph
 	public static const RHINO:int     = 15;
 	public static const ECHIDNA:int   = 16;
 	public static const DEER:int      = 17;
@@ -29,7 +29,7 @@ public class Ears extends BodyPart {
 	public static const ELVEN:int     = 25;
 	public static const WEASEL:int    = 26;
 	public static const BAT:int       = 27;
-	public static const VAMPIRE:int   = 28;
+	public static const VAMPIRE:int   = 28;//button 0 on 2nd page of metamorph
 	public static const RED_PANDA:int = 29;
 	public static const AVIAN:int	  = 30;
 	public static const GRYPHON:int	  = 31;

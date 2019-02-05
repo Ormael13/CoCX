@@ -994,7 +994,7 @@ public class Holidays {
                     flags[kFLAGS.MORE_TURKEY] = 0;
                 }
                 else {
-                    EngineCore.outputText("\n\n<b>You might be able to have some new, kinky fun with Gobbles this year if you had something lusty on you...</b>.");
+                    EngineCore.outputText("\n\n<b>You might be able to have some new, kinky fun with Gobbles this year if you had something lusty on you...</b>");
                     flags[kFLAGS.MORE_TURKEY] = 1;
                 }
             }
@@ -4327,6 +4327,10 @@ public class Holidays {
 
     public static function isHalloween():Boolean {
         return ((date.date >= 28 && date.month == 9) || (date.date < 2 && date.month == 10) || flags[kFLAGS.ITS_EVERY_DAY] > 0);
+    }
+
+    public static function isLunarNewYear():Boolean {
+        return ((date.date >= 21 && date.month == 0) || (date.date < 20 && date.month == 1) || flags[kFLAGS.ITS_EVERY_DAY] > 0);
     }
 
     /*Credits

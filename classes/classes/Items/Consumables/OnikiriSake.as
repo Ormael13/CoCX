@@ -36,6 +36,13 @@ public class OnikiriSake extends Consumable {
 		var changeLimit:Number = 1;
 		if (rand(3) == 0) changeLimit++;
 		if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
+		if (player.findPerk(PerkLib.Enhancement) >= 0) changeLimit++;
+		if (player.findPerk(PerkLib.Fusion) >= 0) changeLimit++;
+		if (player.findPerk(PerkLib.Enchantment) >= 0) changeLimit++;
+		if (player.findPerk(PerkLib.Refinement) >= 0) changeLimit++;
+		if (player.findPerk(PerkLib.Saturation) >= 0) changeLimit++;
+		if (player.findPerk(PerkLib.Perfection) >= 0) changeLimit++;
+		if (player.findPerk(PerkLib.Creationism) >= 0) changeLimit++;
 		if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
 		if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 		//Temporary storage
@@ -77,7 +84,7 @@ public class OnikiriSake extends Consumable {
 			changes++;
 		}
 		if (changes < changeLimit && rand(3) == 0 && player.tone < player.maxToneCap()) {
-			outputText(player.modTone((player.maxToneCap() - 5), 3));
+			outputText(player.modTone(player.maxToneCap(), 3));
 		}
 		if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 		//Sexual changed
@@ -196,10 +203,10 @@ public class OnikiriSake extends Consumable {
 		//mutationStep(player.skin.base.type == PLAIN && !player.skin.hasBattleTattoo(), 3, function(): void {
 		if (player.skin.base.type == Skin.PLAIN && !player.skin.hasBattleTattoo() && rand(3) == 0 && changes < changeLimit) {
 			outputText("\n\nAs you thought your skin couldn't handle more tattoo a few localised skin burns reveal a new set of drawing along your skin, some decorating your chest. Well you might as well proudly display your <b>Oni tattooed skin.</b>");
-		//	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedTattoed)) {
-		//		outputText("\n\n<b>Genetic Memory: Tattoed Skin - Memorized!</b>\n\n");
-		//		player.createStatusEffect(StatusEffects.UnlockedTattoed, 0, 0, 0, 0);
-		//	}
+			if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedBattleTattoed)) {
+				outputText("\n\n<b>Genetic Memory: Battle Tattoed Skin - Memorized!</b>\n\n");
+				player.createStatusEffect(StatusEffects.UnlockedBattleTattoed, 0, 0, 0, 0);
+			}
 			player.skin.base.pattern = Skin.PATTERN_BATTLE_TATTOO;
 			player.skin.base.adj = "battle tattooed";
 			changes++;
@@ -223,7 +230,6 @@ public class OnikiriSake extends Consumable {
 		//FAILSAFE CHANGE
 		if (changes == 0) {
 			outputText("\n\nRemarkably, the sake has no effect aside making you feel little more drunk.  Maybe next time?");
-			player.refillHunger(10);
 		}
 		player.refillHunger(10);
 		return false;

@@ -5,17 +5,20 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Dungeons.RiverDungeon;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class GreenSlime extends Monster
 	{
+		public var floor1:RiverDungeon = new RiverDungeon();
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
 			outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.", true);
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) SceneLib.combat.cleanupAfterCombatImpl();
 			//Boobfeed.
-			if(player.hasStatusEffect(StatusEffects.Feeder) && flags[kFLAGS.SFW_MODE] <= 0) {
+			else if (player.hasStatusEffect(StatusEffects.Feeder) && flags[kFLAGS.SFW_MODE] <= 0) {
 				//Eligable to rape
 				if(player.lust >= 33 && player.gender > 0) {
 					outputText("\n\nYou're horny enough to try and rape it, though you'd rather see how much milk you can squirt into it.  What do you do?");
@@ -28,7 +31,7 @@ public class GreenSlime extends Monster
 				}
 			}
 			//Not a breastfeeder
-			else if(player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
+			else if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("  Sadly you realize your own needs have not been met.  Of course, you could always play with the poor thing... Do you rape it?");
 				EngineCore.doYesNo(SceneLib.lake.greenSlimeScene.slimeVictoryRape, SceneLib.combat.cleanupAfterCombatImpl);
 			}
@@ -37,10 +40,13 @@ public class GreenSlime extends Monster
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (pcCameWorms) {
-				outputText("\n\nThe slime doesn't even seem to notice.\n\n");
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) floor1.defeatedByGreenSlime();
+			else {
+				if (pcCameWorms) {
+					outputText("\n\nThe slime doesn't even seem to notice.\n\n");
+				}
+				doNext(SceneLib.lake.greenSlimeScene.slimeLoss);
 			}
-			doNext(SceneLib.lake.greenSlimeScene.slimeLoss);
 		}
 		
 		private function lustAttack():void {
@@ -57,6 +63,24 @@ public class GreenSlime extends Monster
 		
 		public function GreenSlime()
 		{
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
+				initStrTouSpeInte(30, 50, 40, 10);
+				initWisLibSensCor(10, 80, 60, 20);
+				this.weaponAttack = 4;
+				this.armorDef = 4;
+				this.armorMDef = 12;
+				this.bonusHP = 100;
+				this.level = 6;
+			}
+			else {
+				initStrTouSpeInte(25, 30, 10, 5);
+				initWisLibSensCor(5, 50, 60, 20);
+				this.weaponAttack = 3;
+				this.armorDef = 3;
+				this.armorMDef = 9;
+				this.bonusHP = 50;
+				this.level = 4;
+			}
 			trace("GreenSlime Constructor!");
 			this.a = "a ";
 			this.short = "green slime";
@@ -77,19 +101,12 @@ public class GreenSlime extends Monster
 			this.butt.type = Butt.RATING_LARGE;
 			this.lowerBody = LowerBody.GOO;
 			this.skinTone = "green";
-			initStrTouSpeInte(25, 30, 10, 5);
-			initWisLibSensCor(5, 50, 60, 20);
 			this.weaponName = "hands";
 			this.weaponVerb = "slap";
-			this.weaponAttack = 3;
 			this.armorName = "gelatinous skin";
-			this.armorDef = 3;
-			this.armorMDef = 9;
-			this.bonusHP = 50;
 			this.bonusLust = 20;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 4;
 			this.gems = rand(5) + 3;
 			this.drop = new ChainedDrop().add(weapons.PIPE, 1 / 10)
 					.add(consumables.WETCLTH, 1 / 2)

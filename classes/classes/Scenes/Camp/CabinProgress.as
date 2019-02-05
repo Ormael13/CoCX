@@ -132,8 +132,7 @@ import classes.Scenes.SceneLib;
 		}
 
 		public function canGatherWoods():Boolean {
-			return flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 4
-				   && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < maxWoodSupply;
+			return player.hasKeyItem("Carpenter's Toolbox") >= 0 || player.weapon == weapons.L__AXE || flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < maxWoodSupply;
 		}
 		//STAGE 4 - Gather woods, explore forest to encounter.
 		public function gatherWoods():void {

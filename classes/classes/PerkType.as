@@ -280,6 +280,16 @@ public class PerkType extends BaseContent
 			});
 			return this;
 		}
+		public function requireAdrenalGlandsMutationSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxAdrenalGlandsMutations() > 0;
+				},
+				text: "Free Adrenal Glands Mutation Slot",
+				type: "adrenalglandsmutation"
+			});
+			return this;
+		}
 		public function requireHungerEnabled():PerkType {
 			requirements.push({
 				fn  : function(player:Player):Boolean {

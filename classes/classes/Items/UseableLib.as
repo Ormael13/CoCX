@@ -67,6 +67,9 @@ use namespace CoC;
 		public const MINOHOR:SimpleUseable = new SimpleUseable("MinoHor", "MinoHorns", "a minotaur horns", 35, 
 			"A horns taken from a slain minotaur.",
 			"You look at the pair of minotaur horns.  You admire the overall frame of the horns yet you find no obvious uses for them.");
+		public const GOBOEAR:SimpleUseable = new SimpleUseable("GoboEar", "GoblinEar", "a goblin ear", 25, 
+			"A goblin ear taken from a slain goblin.",
+			"You look at the goblin ear.  You admire the overall curve of the ear yet you find no obvious uses for it.");
 		public const GOLCORE:SimpleUseable = new SimpleUseable("GolCore", "GolemCore", "a golem core", 1, 
 			"An undamaged core taken from a defeated golem.",
 			"You look at the undamaged golem core.  A simple small crystal sphere no larger than your fist that glows gently.  For those that know art of golem making it will be great use and for others it's uselss and better to sell it, preferably to merchant that specificaly buying such items.");

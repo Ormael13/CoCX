@@ -58,6 +58,7 @@ public class Skin extends SaveableBodyPart {
 	public static const PATTERN_SPOTTED:int = 6;
 	public static const PATTERN_LIGHTNING_SHAPED_TATTOO:int = 7;
 	public static const PATTERN_RED_PANDA_UNDERBODY:int = 8;
+	public static const PATTERN_SCAR_SHAPED_TATTOO:int = 9;
 	// Don't forget to add new types in DebugMenu.as lists SKIN_BASE_TYPES or SKIN_COAT_TYPES
 	
 	public var base:SkinLayer;
@@ -290,6 +291,9 @@ public class Skin extends SaveableBodyPart {
 	}
 	public function hasLightningShapedTattoo():Boolean {
 		return base.pattern == PATTERN_LIGHTNING_SHAPED_TATTOO;
+	}
+	public function hasScarShapedTattoo():Boolean {
+		return base.pattern == PATTERN_SCAR_SHAPED_TATTOO;
 	}
 	override public function restore(keepTone:Boolean = true):void {
 		coverage = COVERAGE_NONE;

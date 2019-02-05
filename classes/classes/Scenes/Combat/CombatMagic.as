@@ -5,17 +5,16 @@ package classes.Scenes.Combat {
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.HeadJewelryLib;
 import classes.Items.JewelryLib;
-import classes.Monster;
 import classes.PerkLib;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.Areas.GlacialRift.FrostGiant;
+import classes.Scenes.Areas.Tundra.YoungFrostGiant;
 import classes.Scenes.Dungeons.D3.Doppleganger;
 import classes.Scenes.Dungeons.D3.JeanClaude;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.LivingStatue;
 import classes.Scenes.NPCs.Diva;
 import classes.Scenes.NPCs.Holli;
-import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
@@ -94,9 +93,6 @@ public class CombatMagic extends BaseCombatContent {
 		//Limiting it and multiplicative mods
 		if(player.hasPerk(PerkLib.BloodMage) && costPercent < 50) costPercent = 50;
 		mod *= costPercent/100;
-		if (player.hasPerk(PerkLib.HistoryScholar) || player.hasPerk(PerkLib.PastLifeScholar)) {
-			if(mod > 2) mod *= .8;
-		}
 		if (player.hasPerk(PerkLib.BloodMage) && mod < 5) mod = 5;
 		else if(mod < 2) mod = 2;
 		mod = Math.round(mod * 100)/100;
@@ -153,9 +149,6 @@ public class CombatMagic extends BaseCombatContent {
 		//Limiting it and multiplicative mods
 		if(player.hasPerk(PerkLib.BloodMage) && costPercent < 50) costPercent = 50;
 		mod *= costPercent/100;
-		if (player.hasPerk(PerkLib.HistoryScholar) || player.hasPerk(PerkLib.PastLifeScholar)) {
-			if(mod > 2) mod *= .8;
-		}
 		if (player.hasPerk(PerkLib.BloodMage) && mod < 5) mod = 5;
 		else if(mod < 2) mod = 2;
 		mod = Math.round(mod * 100)/100;
@@ -213,9 +206,6 @@ public class CombatMagic extends BaseCombatContent {
 		//Limiting it and multiplicative mods
 		if(player.hasPerk(PerkLib.BloodMage) && costPercent < 50) costPercent = 50;
 		mod *= costPercent/100;
-		if (player.hasPerk(PerkLib.HistoryScholar) || player.hasPerk(PerkLib.PastLifeScholar)) {
-			if(mod > 2) mod *= .8;
-		}
 		if (player.hasPerk(PerkLib.BloodMage) && mod < 5) mod = 5;
 		else if(mod < 2) mod = 2;
 		mod = Math.round(mod * 100)/100;
@@ -716,6 +706,15 @@ public class CombatMagic extends BaseCombatContent {
 		var badLustForWhite:Boolean        = player.lust >= getWhiteMagicLustCap();
 		var badLustForBlack:Boolean        = player.lust < getBlackMagicMinLust();
 		var badLustForGrey:Boolean         = player.lust < 50 || player.lust > (player.maxLust() - 50);
+		//Most basic spell ever ^^
+		if (player.hasPerk(PerkLib.JobSorcerer)) {
+			bd = buttons.add("M.Bolt", spellMagicBolt);
+			if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") bd.hint("Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Magic Bolt");
+			else bd.hint("Attempt to attack the enemy with magic bolt.  Damage done is determined by your intelligence.", "Magic Bolt");
+			if (player.mana < spellCost(10)) {
+				bd.disable("Your mana is too low to cast this spell.");
+			}
+		}
 		//WHITE SHITZ
 		if (player.hasStatusEffect(StatusEffects.KnowsBlind)) {
 			bd = buttons.add("Blind", spellBlind)
@@ -940,13 +939,64 @@ public class CombatMagic extends BaseCombatContent {
 		
 	}
 	
+	public function spellMagicBolt():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		useMana(10, 1);
+		if(handleShell()){return;}
+		outputText("You narrow your eyes, focusing your mind with deadly intent.  ");
+		if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") outputText("You point your staff and shots magic bolt toward " + monster.a + monster.short + "!\n\n");
+		else outputText("You point your hand toward " + monster.a + monster.short + " and shots magic bolt!\n\n");
+		var damage:Number = scalingBonusIntelligence() * spellMod() * 0.25;
+		if (damage < 10) damage = 10;
+		//weapon bonus
+		if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") {
+			if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.04));
+			else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (3 + ((player.weaponAttack - 50) * 0.035));
+			else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (4.75 + ((player.weaponAttack - 100) * 0.03));
+			else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (6.25 + ((player.weaponAttack - 150) * 0.025));
+			else damage *= (7.5 + ((player.weaponAttack - 200) * 0.02));
+		}
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + damage + "</font></b> damage.");
+		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		outputText("\n\n");
+		checkAchievementDamage(damage);
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		monster.HP -= damage;
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		if(monster.HP < 1) doNext(endHpVictory);
+		else
+		{
+			if (monster is Lethice && (monster as Lethice).fightPhase == 3)
+			{
+				outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
+				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
+			}
+			enemyAI();
+		}
+	}
+	
 	public function spellArouse():void {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(20)) player.HP -= spellCostBlack(20);
 		else useMana(20,6);
 		statScreenRefresh();
-		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-			(monster as FrostGiant).giantBoulderHit(2);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
 			enemyAI();
 			return;
 		}
@@ -1034,20 +1084,21 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		useMana(50, 11);
-		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-			(monster as FrostGiant).giantBoulderHit(2);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
 			enemyAI();
 			return;
 		}
-		outputText("You focus on your body and its desire to end pain, trying to draw on your arousal without enhancing it.\n");
+		outputText("You focus on your body and its desire to end pain, trying to draw on your arousal without enhancing it.");
 		//30% backfire!
 		var backfire:int = 30;
 		if (player.hasPerk(PerkLib.FocusedMind)) backfire = 20;
 		backfire -= (player.inte * 0.15);
-		if (backfire < 15) backfire = 15;
-		else if (backfire < 5 && player.hasPerk(PerkLib.FocusedMind)) backfire = 5;
+		if (backfire < 5 && player.hasPerk(PerkLib.FocusedMind)) backfire = 5;
+		else if (backfire < 15) backfire = 15;
 		if(rand(100) < backfire) {
-			outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ");
+			outputText(" An errant sexual thought crosses your mind, and you lose control of the spell!  Your ");
 			if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.");
 			if(player.gender == 1) {
 				if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.");
@@ -1160,8 +1211,9 @@ public class CombatMagic extends BaseCombatContent {
 		var tempStr:Number = 0;
 		var tempTou:Number = 0;
 		var tempInt:Number = 0;
-		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-			(monster as FrostGiant).giantBoulderHit(2);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
 			enemyAI();
 			return;
 		}
@@ -1169,8 +1221,8 @@ public class CombatMagic extends BaseCombatContent {
 		//30% backfire!
 		var backfire:int = 30;
 		if (player.hasPerk(PerkLib.FocusedMind)) backfire = 20;
-		if (backfire < 15) backfire = 15;
-		else if (backfire < 5 && player.hasPerk(PerkLib.FocusedMind)) backfire = 5;
+		if (backfire < 5 && player.hasPerk(PerkLib.FocusedMind)) backfire = 5;
+		else if (backfire < 15) backfire = 15;
 		if(rand(100) < backfire) {
 			outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ");
 			if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.");
@@ -1272,8 +1324,9 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < (40 * spellBlinkCostMultiplier())) player.HP -= (40 * spellBlinkCostMultiplier());
 		else useMana((40 * spellBlinkCostMultiplier()),6);
 		var tempSpe:Number = 0;
-		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-			(monster as FrostGiant).giantBoulderHit(2);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
 			enemyAI();
 			return;
 		}
@@ -1281,8 +1334,8 @@ public class CombatMagic extends BaseCombatContent {
 		//30% backfire!
 		var backfire:int = 30;
 		if (player.hasPerk(PerkLib.FocusedMind)) backfire = 20;
-		if (backfire < 15) backfire = 15;
-		else if (backfire < 5 && player.hasPerk(PerkLib.FocusedMind)) backfire = 5;
+		if (backfire < 5 && player.hasPerk(PerkLib.FocusedMind)) backfire = 5;
+		else if (backfire < 15) backfire = 15;
 		if(rand(100) < backfire) {
 			outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ");
 			if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.");
@@ -1323,8 +1376,9 @@ public class CombatMagic extends BaseCombatContent {
 		//spellPerkUnlock();
 		//return;
 		//}
-		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-			(monster as FrostGiant).giantBoulderHit(2);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
 			enemyAI();
 			return;
 		}
@@ -1334,10 +1388,7 @@ public class CombatMagic extends BaseCombatContent {
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
-		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
-			if (player.inte > 100) critChance += 10;
-		}
+		critChance += combatMagicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
@@ -1391,8 +1442,9 @@ public class CombatMagic extends BaseCombatContent {
 		//spellPerkUnlock();
 		//return;
 		//}
-		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-			(monster as FrostGiant).giantBoulderHit(2);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
 			enemyAI();
 			return;
 		}
@@ -1402,10 +1454,7 @@ public class CombatMagic extends BaseCombatContent {
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
-		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
-			if (player.inte > 100) critChance += 10;
-		}
+		critChance += combatMagicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
@@ -1459,21 +1508,19 @@ public class CombatMagic extends BaseCombatContent {
 		//spellPerkUnlock();
 		//return;
 		//}
-		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-			(monster as FrostGiant).giantBoulderHit(2);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
 			enemyAI();
 			return;
 		}
 		clearOutput();
-		outputText("You narrow your eyes, focusing your own lust and willpower with a deadly intent.  Above you starting to form small darn cloud that soon becoming quite wide and long.  Then almost endless rain of ice shards start to downpour on " + monster.a + monster.short + " and the rest of your surrounding!\n");
+		outputText("You narrow your eyes, focusing your own lust and willpower with a deadly intent.  Above you starting to form small dark cloud that soon becoming quite wide and long.  Then almost endless rain of ice shards start to downpour on " + monster.a + monster.short + " and the rest of your surrounding!\n");
 		var damage:Number = scalingBonusIntelligence() * spellMod();
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
-		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
-			if (player.inte > 100) critChance += 10;
-		}
+		critChance += combatMagicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
@@ -1532,8 +1579,9 @@ public class CombatMagic extends BaseCombatContent {
 		//spellPerkUnlock();
 		//return;
 		//}
-		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-			(monster as FrostGiant).giantBoulderHit(2);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
 			enemyAI();
 			return;
 		}
@@ -1543,10 +1591,7 @@ public class CombatMagic extends BaseCombatContent {
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
-		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
-			if (player.inte > 100) critChance += 10;
-		}
+		critChance += combatMagicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
@@ -1611,8 +1656,9 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		useMana(50, 9);
-		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-			(monster as FrostGiant).giantBoulderHit(2);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
 			enemyAI();
 			return;
 		}
@@ -1621,8 +1667,8 @@ public class CombatMagic extends BaseCombatContent {
 		var backfire:int = 30;
 		if (player.hasPerk(PerkLib.FocusedMind)) backfire = 20;
 		backfire -= (player.inte * 0.15);
-		if (backfire < 15) backfire = 15;
-		else if (backfire < 5 && player.hasPerk(PerkLib.FocusedMind)) backfire = 5;
+		if (backfire < 5 && player.hasPerk(PerkLib.FocusedMind)) backfire = 5;
+		else if (backfire < 15) backfire = 15;
 		if(rand(100) < backfire) {
 			outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ");
 			if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.");
@@ -1716,8 +1762,9 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < (30 * spellChargeWeaponCostMultiplier())) player.HP -= (30 * spellChargeWeaponCostMultiplier());
 		else useMana((30 * spellChargeWeaponCostMultiplier()), 5);
-		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-			(monster as FrostGiant).giantBoulderHit(2);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
 			enemyAI();
 			return;
 		}
@@ -1792,8 +1839,9 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < (40 * spellChargeArmorCostMultiplier())) player.HP -= (40 * spellChargeArmorCostMultiplier());
 		else useMana((40 * spellChargeArmorCostMultiplier()), 5);
-		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-			(monster as FrostGiant).giantBoulderHit(2);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
 			enemyAI();
 			return;
 		}
@@ -1814,8 +1862,9 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		useMana(30, 10);
-		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-			(monster as FrostGiant).giantBoulderHit(2);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
 			enemyAI();
 			return;
 		}
@@ -1843,10 +1892,7 @@ public class CombatMagic extends BaseCombatContent {
 		//Determine if critical heal!
 		var crit:Boolean = false;
 		var critHeal:int = 5;
-		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-			if (player.inte <= 100) critHeal += (player.inte - 50) / 50;
-			if (player.inte > 100) critHeal += 10;
-		}
+		critHeal += combatMagicalCritical();
 		if (rand(100) < critHeal) {
 			crit = true;
 			heal *= 1.75;
@@ -1897,8 +1943,9 @@ public class CombatMagic extends BaseCombatContent {
 
 					player.createStatusEffect(StatusEffects.Blind, 2 + player.inte / 20, 0, 0, 0);
 				}
-				if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-					(monster as FrostGiant).giantBoulderHit(2);
+				if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+					if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+					if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
 					enemyAI();
 					return;
 				}
@@ -1972,8 +2019,9 @@ public class CombatMagic extends BaseCombatContent {
 			spellPerkUnlock();
 			return;
 		}
-		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-			(monster as FrostGiant).giantBoulderHit(2);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
 			enemyAI();
 			return;
 		}
@@ -1986,10 +2034,7 @@ public class CombatMagic extends BaseCombatContent {
 			//Determine if critical hit!
 			var crit:Boolean = false;
 			var critChance:int = 5;
-			if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-				if (player.inte <= 100) critChance += (player.inte - 50) / 50;
-				if (player.inte > 100) critChance += 10;
-			}
+			critChance += combatMagicalCritical();
 			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 			if (rand(100) < critChance) {
 				crit = true;
@@ -2008,10 +2053,7 @@ public class CombatMagic extends BaseCombatContent {
 			//Determine if critical hit!
 			var crit2:Boolean = false;
 			var critChance2:int = 5;
-			if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-				if (player.inte <= 100) critChance2 += (player.inte - 50) / 50;
-				if (player.inte > 100) critChance2 += 10;
-			}
+			critChance2 += combatMagicalCritical();
 			if (rand(100) < critChance2) {
 				crit = true;
 				damage *= 1.75;
@@ -2075,8 +2117,9 @@ public class CombatMagic extends BaseCombatContent {
 		//spellPerkUnlock();
 		//return;
 		//}
-		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-			(monster as FrostGiant).giantBoulderHit(2);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
 			enemyAI();
 			return;
 		}
@@ -2086,10 +2129,7 @@ public class CombatMagic extends BaseCombatContent {
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
-		if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
-			if (player.inte > 100) critChance += 10;
-		}
+		critChance += combatMagicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
@@ -2132,8 +2172,9 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(50)) player.HP -= spellCostWhite(50);
 		else useMana(50,5);
-		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-			(monster as FrostGiant).giantBoulderHit(2);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
 			enemyAI();
 			return;
 		}
@@ -2153,85 +2194,6 @@ public class CombatMagic extends BaseCombatContent {
 		enemyAI();
 	}
 
-	public function spellCleansingPalm():void
-	{
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
-		clearOutput();
-		doNext(combatMenu);
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		fatigue(30, USEFATG_MAGIC);
-		if(handleShell()){return;}
-
-		if (monster.short == "Jojo")
-		{
-			// Not a completely corrupted monkmouse
-			if (JojoScene.monk < 2)
-			{
-				outputText("You thrust your palm forward, sending a blast of pure energy towards Jojo. At the last second he sends a blast of his own against yours canceling it out\n\n");
-				flags[kFLAGS.SPELLS_CAST]++;
-				if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-				spellPerkUnlock();
-				enemyAI();
-				return;
-			}
-		}
-
-		if (monster is LivingStatue)
-		{
-			outputText("You thrust your palm forward, causing a blast of pure energy to slam against the giant stone statue- to no effect!");
-			flags[kFLAGS.SPELLS_CAST]++;
-			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-			spellPerkUnlock();
-			enemyAI();
-			return;
-		}
-
-		var corruptionMulti:Number = (monster.cor - 20) / 25;
-		if (corruptionMulti > 1.5) {
-			corruptionMulti = 1.5;
-			corruptionMulti += ((monster.cor - 57.5) / 100); //The increase to multiplier is diminished.
-		}
-
-		//damage = int((player.inte / 4 + rand(player.inte / 3)) * (spellMod() * corruptionMulti));
-		var damage:Number = int(10+(player.inte/3 + rand(player.inte/2)) * (spellMod() * corruptionMulti));
-
-		if (damage > 0)
-		{
-			outputText("You thrust your palm forward, causing a blast of pure energy to slam against " + monster.a + monster.short + ", tossing");
-			if ((monster as Monster).plural == true) outputText(" them");
-			else outputText((monster as Monster).mfn(" him", " her", " it"));
-			outputText(" back a few feet.\n\n");
-			if (silly() && corruptionMulti >= 1.75) outputText("It's super effective!  ");
-			//Determine if critical hit!
-			var crit:Boolean = false;
-			var critChance:int = 5;
-			if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
-				if (player.inte <= 100) critChance += (player.inte - 50) / 50;
-				if (player.inte > 100) critChance += 10;
-			}
-			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-			if (rand(100) < critChance) {
-				crit = true;
-				damage *= 1.75;
-			}
-			outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + damage + "</font></b> damage.\n\n");
-			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
-		}
-		else
-		{
-			damage = 0;
-			outputText("You thrust your palm forward, causing a blast of pure energy to slam against " + monster.a + monster.short + ", which they ignore. It is probably best you don’t use this technique against the pure.\n\n");
-		}
-
-		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-		spellPerkUnlock();
-		monster.HP -= damage;
-		combat.heroBaneProc(damage);
-		statScreenRefresh();
-		if(monster.HP < 1) doNext(endHpVictory);
-		else enemyAI();
-	}
 	private function handleShell():Boolean{
         if(monster.hasStatusEffect(StatusEffects.Shell)) {
             outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");

@@ -939,7 +939,7 @@ public function nagaPlayerConstrict():void {
 		//Failure (-10 HPs) -
 		outputText("You launch yourself at your opponent and attempt to wrap yourself around " + monster.pronoun2 + ". Before you can even get close enough, " +monster.a + monster.short + " jumps out of the way, causing you to fall flat on your face. You quickly pick yourself up and jump back. ");
 		player.takePhysDamage(5, true);
-		if(player.HP <= 0) {
+		if(player.HP <= player.minHP()) {
 			doNext(SceneLib.combat.endHpLoss);
 			return;
 		}
@@ -1024,6 +1024,7 @@ public function naggaTease():void {
     if (player.findPerk(PerkLib.SensualLover) >= 0) {
         chance += 2;
     }
+    if (player.findPerk(PerkLib.FlawlessBody) >= 0) chance += 10;
     //==============================
     //Determine basic damage.
     //==============================
@@ -1038,6 +1039,7 @@ public function naggaTease():void {
     if (bimbo || bro || futa) {
         damage += 5;
     }
+    if (player.findPerk(PerkLib.FlawlessBody) >= 0) damage += 10;
     damage += player.level;
     damage += player.teaseLevel;
     damage += rand(7);
@@ -1081,7 +1083,7 @@ public function naggaTease():void {
         //NERF TEASE DAMAGE
         damage *= .9;
 		var damagemultiplier:Number = 1;
-        if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += 0.15;
+        if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
         if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
 		if (player.hasPerk(PerkLib.SuperSensual) && chance > 100) damagemultiplier += (0.01 * (chance - 100));
 		damage *= damagemultiplier;

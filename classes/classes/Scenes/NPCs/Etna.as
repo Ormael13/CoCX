@@ -21,7 +21,7 @@ use namespace CoC;
 	public class Etna extends Monster
 	{
 		public var etnaScene:EtnaFollower = SceneLib.etnaScene;
-
+		
 		public function moveClawCombo():void {
 			if (flags[kFLAGS.ETNA_LVL_UP] >= 8) createStatusEffect(StatusEffects.Attacks, 4, 0, 0, 0);
 			else if (flags[kFLAGS.ETNA_LVL_UP] >= 4) createStatusEffect(StatusEffects.Attacks, 3, 0, 0, 0);

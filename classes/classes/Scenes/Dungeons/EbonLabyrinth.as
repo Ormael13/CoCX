@@ -5,12 +5,22 @@
  */
 package classes.Scenes.Dungeons 
 {
-	public class EbonLabyrinth 
+import classes.EventParser;
+import classes.GlobalFlags.kFLAGS;
+
+	public class EbonLabyrinth extends DungeonAbstractContent
 	{
 		
 		public function EbonLabyrinth() 
 		{
 			
+		}
+		
+		public function exitDungeon():void {
+			inDungeon = false;
+			clearOutput();
+			outputText("You leave the river dungeon behind and take off through the He'Xin'Dao back towards camp.");
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 	}

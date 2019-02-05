@@ -468,7 +468,7 @@ public function sharkLossOceanRape2():void {
 	}
 	else {
 		outputText("She swiftly grabs hold of your hairs and pull you down to her nethers.\n\n\"<i>");
-		if (player.hasCock()) outputText("You’re way to pathetic to get any decent fertilisation from. ");
+		if (player.hasCock()) outputText("You’re way too pathetic to get any decent fertilisation from. ");
 		outputText("Lick my cunt and fast!</i>\"\n\n");
 		outputText("You hurry and get to the task, shoving your tongue into her slit. The shark girl seems to enjoy your eager effort but the moment you relent she swiftly grabs hold of your head and jams it back on her pussy.\n\n");
 		outputText("\"<i>Who said you had right to stop?! I don’t care if you're tired, you're going to fully get me off or it'll go bad for you.</i>\"\n\n");

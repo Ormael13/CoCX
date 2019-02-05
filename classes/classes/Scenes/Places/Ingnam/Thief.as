@@ -32,8 +32,8 @@ public class Thief extends Monster
 			this.skinTone = "light";
 			this.hairColor = "brown";
 			this.hairLength = 4;
-			initStrTouSpeInte(14, 12, 12, 14);
-			initWisLibSensCor(14, 20, 15, 20);
+			initStrTouSpeInte(11, 9, 9, 11);
+			initWisLibSensCor(11, 18, 14, 20);
 			this.weaponName = "knife";
 			this.weaponVerb = "slash";
 			this.weaponAttack = 3;

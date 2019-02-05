@@ -118,9 +118,8 @@ public class Mountain extends BaseContent
 						},
 						when: function ():Boolean {
 							return player.hasStatusEffect(StatusEffects.WormsOn)
-								   && (!player.hasStatusEffect(StatusEffects.Infested) ||
-									   !player.hasStatusEffect(StatusEffects.MetWorms) ||
-									   !player.isGargoyle())
+								&& !player.hasStatusEffect(StatusEffects.Infested)
+								&& !player.isGargoyle();
 						},
 						call: wormsScene.wormEncounter
 					},{
@@ -182,8 +181,14 @@ public class Mountain extends BaseContent
 						},
 						call: DivaScene.encounter
 					},{
-						name:"darkelf",
-						call:darkelfScene.introDarkELfScout
+						name: "darkelf",
+						call: darkelfScene.introDarkELfScout
+					},{
+						name: "ted",
+						when: function():Boolean {
+							return flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 4 && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1;
+						},
+						call: SceneLib.tedScene.introPostHiddenCave
 					},{
 						name:"hike",
 						chance:0.2,

@@ -36,7 +36,11 @@ public class PinchousWaterwearAndTools extends BaseContent
 		
 		public function PinchousWaterwearAndToolsShopMenu():void {
 			menu();
-			addButton(2, weapons.TRIDENT.shortName, weaponBuy, weapons.TRIDENT);
+			//crab tf - 0
+			addButton(1, consumables.ORCASUN.shortName, itemBuy, consumables.ORCASUN);
+			addButton(2, weapons.TRIDENT.shortName, itemBuy, weapons.TRIDENT);
+			addButton(3, consumables.BLACKIN.shortName, itemBuy, consumables.BLACKIN);
+			//kraken tf - 4
 			addButton(14, "Leave", leavePinchousWaterwearAndToolsShop);
 		}
 		public function PinchousWaterwearAndToolsShopMenu2():void {
@@ -44,9 +48,14 @@ public class PinchousWaterwearAndTools extends BaseContent
 			outputText("\"<i>This is my shop: ‘Pinchou’s waterwear and tools’, my name is... oh it’s you again... Well sure go ahead and browse you know my inventory already.</i>\"\n\n");
 			PinchousWaterwearAndToolsShopMenu();
 		}
-		private function weaponBuy(itype:ItemType):void {
+		private function itemBuy(itype:ItemType):void {
 			clearOutput();
-			outputText("\"<i>That'll be " + itype.value + " gems.</i>\"");
+			switch (itype) {
+				case consumables.ORCASUN:	outputText("\"<i>A bottle of sunscreen lotion to protect against those annoying sunburns. That said its an item made for orca morphs who favor sunbathing. You might want to take precautions. Anyway it’s " + itype.value + " gems each.</i>\""); break;
+				case weapons.TRIDENT:		outputText("\"<i>That is a trident… useful for catching fish or fighting underwater. I can part with it for " + itype.value + " gems.</i>\""); break;
+				case consumables.BLACKIN:	outputText("\"<i>This is standard calligraphy equipment, you know to write stuff. However I heard that if consumed weird things can happens. You might want to take precautions. Anyway it’s " + itype.value + " gems each.</i>\""); break;
+			}
+			//outputText("\"<i>That is a trident… useful for catching fish or fighting underwater. I can part with it for " + itype.value + " gems.</i>\"");
 			if(player.gems < itype.value) {
 				outputText("\n\nYou count out your gems and realize it's beyond your price range.");
 				doNext(PinchousWaterwearAndToolsShopMenu2);

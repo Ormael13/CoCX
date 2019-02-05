@@ -5,6 +5,7 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
+import classes.Scenes.Dungeons.RiverDungeon;
 import classes.Scenes.SceneLib;
 import classes.Scenes.Places.HeXinDao;
 import classes.internals.*;
@@ -12,6 +13,7 @@ import classes.internals.*;
 public class HellHound extends Monster
 	{
 		public var hellpuppy:HeXinDao = new HeXinDao();
+		public var floor1:RiverDungeon = new RiverDungeon();
 		
 		protected function hellhoundFire():void {
 			//Blind dodge change
@@ -44,7 +46,7 @@ public class HellHound extends Monster
 				player.takeFireDamage(temp, true);
 				player.dynStats("lus", 20+(player.sens/10));
 				statScreenRefresh();
-				if(player.HP <= 0) {
+				if(player.HP <= player.minHP()) {
 					doNext(SceneLib.combat.endHpLoss);
 					return;
 				}
@@ -76,7 +78,8 @@ public class HellHound extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) hellpuppy.gaunletchallange2fight3();
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) SceneLib.combat.cleanupAfterCombatImpl();
+			else if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) hellpuppy.gaunletchallange2fight3();
 			else {
 				if (hpVictory) {
 					outputText("The hellhound's flames dim and the heads let out a whine before the creature slumps down, defeated and nearly unconscious.", true);
@@ -110,12 +113,12 @@ public class HellHound extends Monster
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if(pcCameWorms){
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) floor1.defeatedByHellHound();
+			else if(pcCameWorms){
 				outputText("\n\nThe hellhound snorts and leaves you to your fate.");
 				doNext(SceneLib.combat.cleanupAfterCombatImpl);
-			} else {
-				SceneLib.mountain.hellHoundScene.hellhoundRapesPlayer();
 			}
+			else SceneLib.mountain.hellHoundScene.hellhoundRapesPlayer();
 		}
 
 		public function HellHound(noInit:Boolean=false)

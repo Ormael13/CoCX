@@ -25,6 +25,13 @@ public class Centaurinum extends Consumable{
 		var changeLimit:Number = 1;
 		if (rand(2) == 0) changeLimit++;
 		if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
+		if (player.findPerk(PerkLib.Enhancement) >= 0) changeLimit++;
+		if (player.findPerk(PerkLib.Fusion) >= 0) changeLimit++;
+		if (player.findPerk(PerkLib.Enchantment) >= 0) changeLimit++;
+		if (player.findPerk(PerkLib.Refinement) >= 0) changeLimit++;
+		if (player.findPerk(PerkLib.Saturation) >= 0) changeLimit++;
+		if (player.findPerk(PerkLib.Perfection) >= 0) changeLimit++;
+		if (player.findPerk(PerkLib.Creationism) >= 0) changeLimit++;
 		if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
 		if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 		//Temporary storage
@@ -316,22 +323,27 @@ public class Centaurinum extends Consumable{
 			changes++;
 		}
 		//Human skin	
-		if (player.tailType == Tail.HORSE && !player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0) {
+		if (player.tailType == Tail.HORSE && !player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
 			mutations.humanizeSkin();
 			changes++;
 		}
 		//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-		if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
+		if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(3) == 0) {
 			mutations.humanizeArms();
 			changes++;
 		}
 		//Human ears
-		if (player.arms.type == Arms.HUMAN && player.ears.type != Ears.HUMAN && changes < changeLimit && rand(4) == 0) {
+		if (player.arms.type == Arms.HUMAN && player.ears.type != Ears.HUMAN && changes < changeLimit && rand(3) == 0) {
 			mutations.humanizeEars();
 			changes++;
 		}
+		if (player.ears.type != Ears.HORSE && player.ears.type == Ears.HUMAN && player.tailType != Tail.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+			outputText("\n\nYour ears tug painfully on your face as they begin shifting, moving upwards to the top of your head and transforming into a upright animalistic ears.  <b>You now have horse ears.</b>");
+			mutations.setEarType(Ears.HORSE);
+			changes++;
+		}
 		//Human face
-		if (player.ears.type == Ears.HUMAN && player.faceType != Face.HUMAN && changes < changeLimit && rand(4) == 0) {
+		if (player.ears.type == Ears.HUMAN && player.faceType != Face.HUMAN && changes < changeLimit && rand(3) == 0) {
 			mutations.humanizeFace();
 			changes++;
 		}

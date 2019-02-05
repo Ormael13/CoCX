@@ -814,6 +814,7 @@ public class DebugMenu extends BaseContent
 			[Skin.PATTERN_ORCA_UNDERBODY, "2 ORCA_UNDERBODY"],
 			[Skin.PATTERN_BATTLE_TATTOO, "5 BATTLE_TATTOO"],
 			[Skin.PATTERN_LIGHTNING_SHAPED_TATTOO, "7 LIGHTNING_SHAPED_TATTOO"],
+			[Skin.PATTERN_SCAR_SHAPED_TATTOO, "9 SCAR_SHAPED_TATTOO"],
 		];
 		private static const PATTERN_COAT_TYPES:Array = [
 			[Skin.PATTERN_NONE, "0 NONE"],
@@ -1022,6 +1023,8 @@ public class DebugMenu extends BaseContent
 			[Face.CHESHIRE_SMILE, "40 CHESHIRE_SMILE"],
 			[Face.AVIAN, "41 AVIAN"],
 			[Face.WOLF_FANGS, "42 WOLF_FANGS"],
+			[Face.ORC_FANGS, "43 ORC_FANGS"],
+			[Face.ANIMAL_TOOTHS, "44 ANIMAL_TOOTHS"],
 		];
 		private static const TONGUE_TYPE_CONSTANTS:Array = [
 			[Tongue.HUMAN, "0 HUMAN"],
@@ -1054,6 +1057,7 @@ public class DebugMenu extends BaseContent
 			[Eyes.FERAL, "17 FERAL"],
 			[Eyes.GRYPHON, "18 GRYPHON"],
 			[Eyes.INFERNAL, "19 INFERNAL"],
+			[Eyes.ORC, "20 ORC"],
 		];
 		private static const EAR_TYPE_CONSTANTS:Array    = [
 			[Ears.HUMAN, "0 HUMAN"],
@@ -1246,6 +1250,10 @@ public class DebugMenu extends BaseContent
 			[Arms.AVIAN, "26 AVIAN"],
 			[Arms.GRYPHON, "27 GRYPHON"],
 			[Arms.SPHINX, "28 SPHINX"],
+			[Arms.PIG, "29 PIG"],
+			[Arms.BOAR, "30 BOAR"],
+			[Arms.ORC, "31 ORC"],
+			[Arms.DISPLACER, "32 DISPLACER"],
 		];
 		private static const CLAW_TYPE_CONSTANTS:Array = [
 			[Claws.NORMAL, "0 NORMAL"],
@@ -1391,6 +1399,7 @@ public class DebugMenu extends BaseContent
 			[LowerBody.GARGOYLE_2, "43 GARGOYLE_2"],
 			[LowerBody.AVIAN, "44 AVIAN"],
 			[LowerBody.GRYPHON, "45 GRYPHON"],
+			[LowerBody.ORC, "46 ORC"],
 		];
 		private static const LEG_COUNT_CONSTANTS:Array = [
 			1,2,4,6,8,
@@ -1408,6 +1417,7 @@ public class DebugMenu extends BaseContent
 			[RearBody.RAIJU_MANE, "8 RAIJU_MANE"],
 			[RearBody.BAT_COLLAR, "9 BAT_COLLAR"],
 			[RearBody.WOLF_COLLAR, "10 WOLF_COLLAR"],
+			[RearBody.DISPLACER_TENTACLES, "11 DISPLACER_TENTACLES"],
 		];
 		private function changeArmType(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.arms.type = setIdx;

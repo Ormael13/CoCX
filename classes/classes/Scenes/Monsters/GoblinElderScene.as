@@ -256,17 +256,29 @@ public class GoblinElderScene extends BaseContent
 			if (player.lust >= 33 && player.gender > 0 && (fitsFuck != null || cuntFuck != null || tooBig != null ||
 					corruptTooBig != null || buttseks != null || feeder != null || spiderCondom != null || eggs != null) && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("\n\n<b>What do you do to her, and if anything, which of your body parts do you use?</b>");
-				choices("Dick Fuck", fitsFuck, "DickTooBig", tooBig, "CorruptDick", corruptTooBig, "Dick In Ass", buttseks, "Jog Fuck", jog, "Breastfeed", feeder, "Web Condom", spiderCondom, "Pussies", cuntFuck, "Lay Eggs", eggs, "Leave", cleanupAfterCombat);
-				if (player.hasItem(useables.CONDOM) && player.cockThatFits(monster.vaginalCapacity()) >= 0) {
-					addButton(6, "Use Condom", goblinCondomed, 1);
+				menu();
+				if (fitsFuck != null) addButton(0, "Dick Fuck", fitsFuck);
+				if (tooBig != null) addButton(1, "DickTooBig", tooBig);
+				if (corruptTooBig != null) addButton(2, "CorruptDick", corruptTooBig);
+				if (buttseks != null) addButton(3, "Dick In Ass", buttseks);
+				if (jog != null) addButton(4, "Jog Fuck", jog);
+				if (player.hasStatusEffect(StatusEffects.Feeder)) addButton(5, "Breastfeed", feeder);
+				if ((player.tailType == Tail.SPIDER_ADBOMEN || player.hasItem(useables.CONDOM)) && player.cockThatFits(monster.vaginalCapacity()) >= 0) {
+					if (player.tailType == Tail.SPIDER_ADBOMEN) addButton(6, "Web Condom", goblinCondomed, 0);
+					if (player.hasItem(useables.CONDOM)) addButton(11, "Use Condom", goblinCondomed, 1);
 				}
+				if (player.hasVagina()) addButton(7, "Pussies", cuntFuck);
+				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
+				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else if (feeder!=null || eggs!=null) {
 				outputText("\n\n<b>You aren't horny enough to rape her, but ");
 				if (feeder!=null) outputText("your nipples ache with the desire to feed her your milk.  Do you feed her milk or leave?</b>");
 				else outputText("your abdomen aches with the desire to impregnate her full of insect eggs.  Do you?</b>");
-				simpleChoices("Feed", feeder, "Lay Eggs", eggs, "", null, "", null, "Leave", cleanupAfterCombat);
-				//doYesNo(feeder,cleanupAfterCombat);
+				menu();
+				if (player.hasStatusEffect(StatusEffects.Feeder)) addButton(5, "Breastfeed", feeder);
+				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
+				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else 
 			{

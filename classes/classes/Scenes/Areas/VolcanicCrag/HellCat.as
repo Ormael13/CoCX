@@ -26,7 +26,7 @@ import classes.internals.*;
 		
 		public function hellcatFireball():void
 		{
-			var damage:int = inte + rand(20);
+			var damage:int = (inte * 1.1) + rand(25);
 			damage = Math.round(damage);
 			player.takeFireDamage(damage, true);
 			outputText("The hellcat cast a spell, materializing a fireball before throwing it at you. " + damage + " fire damage!");
@@ -35,7 +35,7 @@ import classes.internals.*;
 		public function hellcatInfernalClaw():void
 		{
 			outputText("The hellcat growls at you, unsheathing her claws which turns orange-red like hot irons as she enhances it with a dash of fire magic. She leaps forward and viciously attempts to rend you. ");
-			var firedamage:int = (inte / 3) + rand(5);
+			var firedamage:int = (inte * 0.45) + rand(10);
 			firedamage = Math.round(firedamage);
 			player.takeFireDamage(firedamage, true);
 			if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
@@ -108,23 +108,23 @@ import classes.internals.*;
 			this.skinTone = "ashen";
 			this.hairColor = "midnight black";
 			this.hairLength = 13;
-			initStrTouSpeInte(60, 60, 120, 180);
+			initStrTouSpeInte(70, 70, 150, 210);
 			initWisLibSensCor(140, 145, 50, 80);
 			this.weaponName = "claws";
 			this.weaponVerb="slash";
 			this.weaponAttack = 2;
 			this.armorName = "hooded cape";
-			this.armorDef = 2;
-			this.armorMDef = 40;
+			this.armorDef = 3;
+			this.armorMDef = 50;
 			this.armorPerk = "";
 			this.armorValue = 50;
-			this.bonusHP = 200;
+			this.bonusHP = 222;
 			this.bonusLust = 100;
 			this.lust = 20;
 			this.lustVuln = .1;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 38;
-			this.gems = rand(45) + 30;
+			this.level = 46;
+			this.gems = rand(55) + 40;
 			this.drop = new WeightedDrop().add(consumables.W_FRUIT,5)
 					//.add(useables.T_SSILK,1)
 					.add(null,4);

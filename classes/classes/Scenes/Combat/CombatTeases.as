@@ -103,6 +103,7 @@ public class CombatTeases extends BaseCombatContent {
 		if (player.findPerk(PerkLib.SensualLover) >= 0) {
 			chance += 2;
 		}
+		if (player.findPerk(PerkLib.FlawlessBody) >= 0) chance += 10;
 		if (player.findPerk(PerkLib.ChiReflowLust) >= 0) chance += UmasShop.NEEDLEWORK_LUST_TEASE_MULTI;
 		//==============================
 		//Determine basic damage.
@@ -120,6 +121,7 @@ public class CombatTeases extends BaseCombatContent {
 			damage += 5;
 			bimbo = true;
 		}
+		if (player.findPerk(PerkLib.FlawlessBody) >= 0) damage += 10;
 		damage += scalingBonusLibido() * 0.1;
 		if (player.findPerk(PerkLib.JobSeducer) >= 0) damage += player.teaseLevel * 3;
 		else damage += player.teaseLevel * 2;
@@ -1466,7 +1468,7 @@ public class CombatTeases extends BaseCombatContent {
 			bonusDamage *= .7;
 			var damagemultiplier:Number = 1;
 			if (player.hasPerk(PerkLib.ElectrifiedDesire)) damagemultiplier += player.lust100 * 0.01;
-			if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += 0.15;
+			if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
 			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
 			if (player.hasPerk(PerkLib.SuperSensual) && chance > 100) damagemultiplier += (0.01 * (chance - 100));
 			damage *= damagemultiplier;

@@ -80,6 +80,11 @@ import coc.xxc.StoryContext;
 		{
 			return EngineCore.awardAchievement(title, achievement, display, nl, nl2);
 		}
+
+		protected function isLunarNewYear():Boolean
+		{
+			return Holidays.isLunarNewYear();
+		}
 		
 		protected function isHalloween():Boolean
 		{

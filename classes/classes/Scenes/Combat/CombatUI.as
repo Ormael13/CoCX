@@ -88,12 +88,12 @@ public class CombatUI extends BaseCombatContent {
 				break;
 			case "Throwing":
                 btnRanged.show("Throw", combat.fireBow, "Attempt to throw " + player.weaponRangeName + " at enemy.  Damage done is determined by your strength and weapon.");
-                if ( player.ammo <= 0 && player.weaponRange != weaponsrange.SHUNHAR) btnRanged.disable("You have used all your throwing weapons in this fight.");
+                if (player.ammo <= 0 && player.weaponRange != weaponsrange.SHUNHAR) btnRanged.disable("You have used all your throwing weapons in this fight.");
 				break;
 			case "Pistol":
 			case "Rifle":
                 if (player.ammo <= 0)
-                    btnRanged.show("Reload", combat.reloadWeapon, "Your " + player.weaponRangeName + " is out of ammo.  You'll have to reload it before attack.");
+                    btnRanged.show("Reload", combat.reloadWeapon1, "Your " + player.weaponRangeName + " is out of ammo.  You'll have to reload it before attack.");
                 else btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon.");
 				break;
 			default:
@@ -237,6 +237,16 @@ public class CombatUI extends BaseCombatContent {
 					if (player.mana >= combat.pspecials.pernamentgolemsendcost() * 5) addButton(2, "Send P.Gol/5", combat.pspecials.sendPernamentGolem5);
 					else addButtonDisabled(2, "Send P.Gol/5", "Not enough mana.");
 				}
+			}
+		} else if (flags[kFLAGS.PLAYER_COMPANION_1] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) {
+			flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") {
+				combat.comfoll.neisaCombatActions();
+			}
+		} else if (flags[kFLAGS.PLAYER_COMPANION_2] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) {
+			flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Neisa") {
+				combat.comfoll.neisaCombatActions();
 			}
 		}
 		

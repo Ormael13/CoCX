@@ -46,7 +46,7 @@ public class GoblinWarrior extends Goblin
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.goblinWarriorScene.goblinWarriorRapeIntro();
+			SceneLib.goblinWarriorScene.goblinWarriorRapeIntro1();
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
@@ -55,7 +55,7 @@ public class GoblinWarrior extends Goblin
 				SceneLib.combat.cleanupAfterCombatImpl();
 			} 
 			else {
-				SceneLib.goblinWarriorScene.gobboWarriorBeatYaUp();
+				SceneLib.goblinWarriorScene.gobboWarriorBeatYaUp1();
 			}
 		}
 		
@@ -95,6 +95,7 @@ public class GoblinWarrior extends Goblin
 			this.gems = rand(15) + 15;
 			this.drop = new WeightedDrop().
 					add(consumables.GOB_ALE,5).
+					add(jewelries.POWRRNG,1).
 					addMany(1,consumables.L_DRAFT,
 							consumables.PINKDYE,
 							consumables.BLUEDYE,

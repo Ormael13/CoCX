@@ -64,7 +64,8 @@ public class RyuBiDragon extends Monster
 		
 		public function RyuBiDragon() 
 		{
-			if (flags[kFLAGS.RYUBI_LVL_UP] == 1) {
+			//if (flags[kFLAGS.RYUBI_LVL_UP] == 1) {
+				if (flags[kFLAGS.RYUBI_LVL_UP] < 2) {
 				initStrTouSpeInte(100, 100, 20, 10);
 				initWisLibSensCor(10, 50, 35, 50);
 				this.weaponAttack = 4;

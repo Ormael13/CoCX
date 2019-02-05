@@ -17,7 +17,9 @@ package classes.Items
 				PerkLib.WizardsEndurance,10,0,0,0);
 		public const ARCBANG:ArmorWithPerk = new ArmorWithPerk("ArcaBangl","ArcaneBangles","arcane bangles","a set of arcane bangles",0,1,150,"Silver bangles to be worn from the wrists and ankles, inscribed with arcane runes.  For some reason, you feel like wearing these with armor or clothes is somehow wrong.","Light",
 				PerkLib.WizardsEnduranceAndSluttySeduction,20,5,0,0,"Your arcane bangles allows you access to 'Seduce', an improved form of 'Tease'.");
+		public const B_CHANG:Armor = new Armor("B.Chang","BlueChangshan","Blue Lunar new year dress (m)","a Blue Lunar new year dress (m)",0,0,100,"A simple yet elegant blue changshan with dragon motif. This clothing is said to bring in good luck increasing evasiveness and critical chance.","Light");
 		public const B_DRESS:Armor = new Armor("B.Dress","Long Dress","long ballroom dress patterned with sequins","a ballroom dress patterned with sequins",0,0,40,"A long ballroom dress patterned with sequins.  Perfect for important occasions.","Medium");
+		public const B_QIPAO:Armor = new Armor("B.Qipao","BlueQipao","Blue Lunar new year dress (f)","a Blue Lunar new year dress (f)",0,0,100,"A simple yet elegant blue qipao with floral motif. This dress is said to bring in good luck increasing evasiveness and critical chance.","Light");
 		public const BEEARMR:Armor = new BeeArmor();
 		public const BIMBOSK:ArmorWithPerk = new ArmorWithPerk("BimboSk","BimboSk","bimbo skirt","a skirt that looks like it belongs on a bimbo",1,0,40,"A tight, cleavage-inducing halter top and an extremely short miniskirt.  The sexual allure of this item is undoubtable.","Light",
 				PerkLib.SluttySeduction,10,0,0,0,"Your delightfully slutty yet upbeat garb helps you seduce your foes!", false, false);
@@ -44,6 +46,8 @@ package classes.Items
 				PerkLib.WizardsEndurance,30,0,0,0);
 		public const FULLCHN:Armor = new Armor("FullChn","Full Chain","full-body chainmail","a full suit of chainmail armor",8,0,320,"This full suit of chainmail armor covers its wearer from head to toe in protective steel rings.","Medium");
 		public const FULLPLT:Armor = new Armor("FullPlt","Full Plate","full platemail","a suit of full-plate armor",21,0,1260,"A highly protective suit of steel platemail.  It would be hard to find better physical protection than this.","Heavy");
+		public const G_CHANG:Armor = new Armor("G.Chang","GreenChangshan","Green Lunar new year dress (m)","a Green Lunar new year dress (m)",0,0,100,"A simple yet elegant green changshan with dragon motif. This clothing is said to bring in good luck increasing evasiveness and critical chance.","Light");
+		public const G_QIPAO:Armor = new Armor("G.Qipao","GreenQipao","Green Lunar new year dress (f)","a Green Lunar new year dress (f)",0,0,100,"A simple yet elegant green qipao with floral motif. This dress is said to bring in good luck increasing evasiveness and critical chance.","Light");
 		public const GELARMR:Armor = new Armor("GelArmr","GelArmr","glistening gel-armor plates","a suit of gel armor",10,0,600,"This suit of interlocking plates is made from a strange green material.  It feels spongy to the touch but is amazingly resiliant.","Heavy");
 		public const GOOARMR:GooArmor = new GooArmor();
 		public const H_GARB_:HereticsGarb = new HereticsGarb();
@@ -69,9 +73,13 @@ package classes.Items
 		public const NURSECL:ArmorWithPerk = new ArmorWithPerk("NurseCl","NurseCl","skimpy nurse's outfit","a nurse's outfit",0,0,100,"This borderline obscene nurse's outfit would barely cover your hips and crotch.  The midriff is totally exposed, and the white top leaves plenty of room for cleavage.  A tiny white hat tops off the whole ensemble.  It would grant a small regeneration to your HP.","Light",
 				PerkLib.SluttySeduction,8,0,0,0,"Your fetishy nurse outfit allows you access to an improved form of 'Tease'.");
 		public const OVERALL:Armor = new Armor("Overall", "Overalls", "white shirt and overalls", "a white shirt and overalls", 0, 0, 25, "A simple white shirt and overalls.", "Light", true);
+		public const P_CHANG:Armor = new Armor("P.Chang","PurpleChangshan","Purple Lunar new year dress (m)","a Purple Lunar new year dress (m)",0,0,100,"A simple yet elegant purple changshan with dragon motif. This clothing is said to bring in good luck increasing evasiveness and critical chance.","Light");
+		public const P_QIPAO:Armor = new Armor("P.Qipao","PurpleQipao","Purple Lunar new year dress (f)","a Purple Lunar new year dress (f)",0,0,100,"A simple yet elegant purple qipao with floral motif. This dress is said to bring in good luck increasing evasiveness and critical chance.","Light");
 		public const PKIMONO:ArmorWithPerk = new ArmorWithPerk("P.Kimono","P.Kimono","purple kimono","a purple kimono",0,1,200,"This lovely purple kimono is adorned with a floral pattern. It will likely increase your spiritual power as a kitsune.","Light",
 				PerkLib.WizardsAndDaoistsEndurance,20,20,0,0);
 		public const R_BDYST:Armor = new Armor("R.BdySt","R.BdySt","red, high-society bodysuit","a red bodysuit for high society",1,0,50,"A high society bodysuit. It is as easy to mistake it for ballroom apparel as it is for boudoir lingerie. The thin transparent fabric is so light and airy that it makes avoiding blows a second nature.","Light", true, false);
+		public const R_CHANG:Armor = new Armor("R.Chang","RedChangshan","Red Lunar new year dress (m)","a Red Lunar new year dress (m)",0,0,100,"A simple yet elegant red changshan with dragon motif. This clothing is said to bring in good luck increasing evasiveness and critical chance.","Light");
+		public const R_QIPAO:Armor = new Armor("R.Qipao","RedQipao","Red Lunar new year dress (f)","a Red Lunar new year dress (f)",0,0,100,"A simple yet elegant red qipao with floral motif. This dress is said to bring in good luck increasing evasiveness and critical chance.","Light");
 		public const RBBRCLT:ArmorWithPerk = new ArmorWithPerk("RbbrClt","Rbbr Fetish","rubber fetish clothes","a set of revealing rubber fetish clothes",3,0,150,"A revealing set of fetish-wear.  Upgrades your tease attack with the \"Slutty Seduction\" perk.","Light",
 				PerkLib.SluttySeduction,8,0,0,0,"Your fetishy rubberwear allows you access to 'Seduce', an improved form of 'Tease'.", true, false);
 		public const RKIMONO:ArmorWithPerk = new ArmorWithPerk("R.Kimono","R.Kimono","red kimono","a red kimono",0,1,200,"This lovely red kimono is adorned with a floral pattern. It will likely increase your spiritual power as a kitsune.","Light",

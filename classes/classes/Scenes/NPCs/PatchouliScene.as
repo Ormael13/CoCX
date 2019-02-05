@@ -47,7 +47,8 @@ public class PatchouliScene extends NPCAwareContent {
 		}
 		else {
 			_allVisited = player.exploredMountain > 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 &&
-			              flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 &&
+			              flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 &&/* flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] > 0 &&
+						  flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && flags[kFLAGS.DISCOVERED_CAVES] > 0 &&*/
 			              flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0 && flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0 &&
 			              flags[kFLAGS.DISCOVERED_BEACH] > 0 && flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0 &&
 			              flags[kFLAGS.BOG_EXPLORED] > 0 && player.hasStatusEffect(StatusEffects.ExploredDeepwoods);
@@ -166,6 +167,7 @@ public class PatchouliScene extends NPCAwareContent {
 
 		clearOutput();
 		outputText("The cat jumps down from the tree and walks ahead of you, showing you the way. Strangely, the landscape seems to change absurdly fast around you as you follow him until ");
+		//outer battlefield 5
 		// 5
 		if (player.exploredMountain < 1) {
 			outputText("you end up in a somewhat mountainy area.\n\n");
@@ -242,6 +244,7 @@ public class PatchouliScene extends NPCAwareContent {
 			outputText("You can hear the cat chuckle in the distance as you engage with a full crew of demonic pirates!");
 			startCombat(new DemonPackBeach());
 		}
+		//caves 30 (leave with displacer beast i suppose xD)
 		// 25
 		else if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] < 1) {
 			outputText("the temperature drops drastically. You see snow falling all around you and realise that you are now in some kind of inhospitable icy wasteland.\n\n");

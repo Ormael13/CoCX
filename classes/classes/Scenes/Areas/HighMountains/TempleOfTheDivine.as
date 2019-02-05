@@ -1737,6 +1737,18 @@ use namespace CoC;
 				player.removePerk(PerkLib.DraconicLungsFinalForm);
 				player.perkPoints += 1;
 			}
+			if (player.hasPerk(PerkLib.ElvishPeripheralNervSys)) {
+				player.removePerk(PerkLib.ElvishPeripheralNervSys);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.ElvishPeripheralNervSysEvolved)) {
+				player.removePerk(PerkLib.ElvishPeripheralNervSysEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm)) {
+				player.removePerk(PerkLib.ElvishPeripheralNervSysFinalForm);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.GorgonsEyes)) {
 				player.removePerk(PerkLib.GorgonsEyes);
 				player.perkPoints += 1;
@@ -1841,6 +1853,30 @@ use namespace CoC;
 				player.removePerk(PerkLib.OniMusculatureFinalForm);
 				player.perkPoints += 1;
 			}
+			if (player.hasPerk(PerkLib.OrcAdrenalGlands)) {
+				player.removePerk(PerkLib.OrcAdrenalGlands);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.OrcAdrenalGlandsEvolved)) {
+				player.removePerk(PerkLib.OrcAdrenalGlandsEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.OrcAdrenalGlandsFinalForm)) {
+				player.removePerk(PerkLib.OrcAdrenalGlandsFinalForm);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.PigBoarFat)) {
+				player.removePerk(PerkLib.PigBoarFat);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.PigBoarFatEvolved)) {
+				player.removePerk(PerkLib.PigBoarFatEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.PigBoarFatFinalForm)) {
+				player.removePerk(PerkLib.PigBoarFatFinalForm);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.SalamanderAdrenalGlands)) {
 				player.removePerk(PerkLib.SalamanderAdrenalGlands);
 				player.perkPoints += 1;
@@ -1849,8 +1885,16 @@ use namespace CoC;
 				player.removePerk(PerkLib.SalamanderAdrenalGlandsEvolved);
 				player.perkPoints += 1;
 			}
+			if (player.hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) {
+				player.removePerk(PerkLib.SalamanderAdrenalGlandsFinalForm);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.ScyllaInkGlands)) {
 				player.removePerk(PerkLib.ScyllaInkGlands);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.ScyllaInkGlandsEvolved)) {
+				player.removePerk(PerkLib.ScyllaInkGlandsEvolved);
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.TrachealSystem)) {

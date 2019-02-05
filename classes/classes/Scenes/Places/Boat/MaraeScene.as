@@ -383,7 +383,7 @@ public function winAgainstMarae():void {
 		if (monster.HP <= 0) outputText("Marae reels back from the incredible amount of damage you've dealt to her.");
 		else outputText("Marae clearly shows signs of her overwhelming arousal and reels back.");
 		outputText("\n\n\"<i>You have managed to defeat me, champion,</i>\" Marae says, \"<i>Now for the rewards.</i>\"");
-		outputText("\n\nThe deity sheds a layer of bark, one piece at a time. \"<i>Take these and bring them to the alchemist Rathazul; he should be able to make armor for you. With luck, we won't need to meet again. I need a long rest after the battle. Farewell,</i>\" Marae says smilingly.");
+		outputText("\n\nThe deity sheds a layer of bark, one piece at a time. \"<i>Take these and bring them to the armorsmith Konstantin; he should be able to make armor for you. With luck, we won't need to meet again. I need a long rest after the battle. Farewell,</i>\" Marae says smilingly.");
 		outputText("\n\nYou pick up the bark and examine it thoroughly. It's unusually strong for a bark. You thank Marae for the bark, get on your boat and ferry back to the shore.");
 		outputText("\n\n<b>(Item Gained: Divine Bark Plates!)</b>");
 		awardAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER, true, true);

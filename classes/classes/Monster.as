@@ -341,6 +341,10 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) temp += (50 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) temp += (75 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) temp += (100 * (1 + newGamePlusMod()));
+			if (findPerk(PerkLib.UnlockArdor) >= 0) temp += level;
+			if (findPerk(PerkLib.UnlockArdor2ndStage) >= 0) temp += level;
+			if (findPerk(PerkLib.UnlockArdor3rdStage) >= 0) temp += level;
+			if (findPerk(PerkLib.UnlockArdor4thStage) >= 0) temp += level;
 			//Apply NG+, NG++, NG+++, etc.
 			temp += this.bonusLust * newGamePlusMod();
 			temp += this.level * 2;
@@ -502,7 +506,12 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.PrestigeJobTempest) >= 0) temp += 100;
 			if (findPerk(PerkLib.Rage) >= 0) temp += 300;
 			if (findPerk(PerkLib.Anger) >= 0) temp += 400;
-			if (findPerk(PerkLib.EnemyFeralType) >= 0) temp += 500;
+			if (findPerk(PerkLib.FuelForTheFire) >= 0) temp += 500;
+			if (findPerk(PerkLib.TooAngryToDie) >= 0) temp += 600;
+			if (findPerk(PerkLib.EnemyFeralType) >= 0) {
+				temp += 500;
+				if (findPerk(PerkLib.EnemyGroupType) >= 0) temp += 2000;
+			}
 			if (hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.Sentience)) temp = 0;
 			return temp;
 		}
@@ -1721,6 +1730,11 @@ import flash.utils.getQualifiedClassName;
 					player.createStatusEffect(StatusEffects.CounterAction,2,0,0,0);
 					SceneLib.combat.basemeleeattacks();
 				}
+				if (game.player.findPerk(PerkLib.Backlash) >= 0 && game.player.isFistOrFistWeapon()) {
+					player.createStatusEffect(StatusEffects.CounterAction, 1, 0, 0, 0);
+					outputText(" As you block the blow you exploit the opening in your opponent’s guard to deliver a vicious kick.");
+					SceneLib.combat.basemeleeattacks();
+				}
 				return true;
 			}
 			//Block with shield
@@ -1772,6 +1786,14 @@ import flash.utils.getQualifiedClassName;
 				}
 				else {
 					addStatusValue(StatusEffects.AbilityCooldown3,1,-1);
+				}
+			}
+			if (hasStatusEffect(StatusEffects.Lustzerking)) {
+				this.wrath += 5;
+				if (statusEffectv1(StatusEffects.Lustzerking) > 1) addStatusValue(StatusEffects.Lustzerking, 1, -1);
+				else {
+					weaponAttack -= statusEffectv2(StatusEffects.Lustzerking);
+					removeStatusEffect(StatusEffects.Lustzerking);
 				}
 			}
 			//If grappling... TODO implement grappling
@@ -2528,8 +2550,9 @@ import flash.utils.getQualifiedClassName;
 				}
 			}
 			//regeneration perks for monsters
-			if (((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.LizanMarrowEvolved) >= 0 || findPerk(PerkLib.EnemyPlantType) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0 || findPerk(PerkLib.MonsterRegeneration) >= 0 || findPerk(PerkLib.Lifeline) >= 0
-			|| findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0 || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2)) && this.HP < maxHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxHP()) && (this.HP > 0))) {
+			if (((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.LizanMarrowEvolved) >= 0 || findPerk(PerkLib.EnemyPlantType) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0 || findPerk(PerkLib.MonsterRegeneration) >= 0 || findPerk(PerkLib.Lifeline) >= 0 || findPerk(PerkLib.ImprovedLifeline) >= 0 
+			|| findPerk(PerkLib.GreaterLifeline) >= 0 || findPerk(PerkLib.EpicLifeline) >= 0 || findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0 || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2)) && this.HP < maxHP()) 
+			|| (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxHP()) && (this.HP > 0))) {
 				var healingPercent:Number = 0;
 				var temp2:Number = 0;
 				if (findPerk(PerkLib.Regeneration) >= 0) healingPercent += (0.5 * (1 + newGamePlusMod()));
@@ -2544,7 +2567,10 @@ import flash.utils.getQualifiedClassName;
 				if (findPerk(PerkLib.MonsterRegeneration) >= 0) healingPercent += perkv1(PerkLib.MonsterRegeneration);
 				if (hasStatusEffect(StatusEffects.MonsterRegen)) healingPercent += statusEffectv2(StatusEffects.MonsterRegen);
 				temp2 = Math.round(maxHP() * healingPercent / 100);
-				if (findPerk(PerkLib.Lifeline) >= 0) temp2 += (50 * (1 + newGamePlusMod()));
+				if (findPerk(PerkLib.Lifeline) >= 0) temp2 += (45 * (1 + newGamePlusMod()));
+				if (findPerk(PerkLib.ImprovedLifeline) >= 0) temp2 += (60 * (1 + newGamePlusMod()));
+				if (findPerk(PerkLib.GreaterLifeline) >= 0) temp2 += (90 * (1 + newGamePlusMod()));
+				if (findPerk(PerkLib.EpicLifeline) >= 0) temp2 += (120 * (1 + newGamePlusMod()));
 				if (hasStatusEffect(StatusEffects.MonsterRegen2)) temp2 += statusEffectv2(StatusEffects.MonsterRegen2);
 				if (hasStatusEffect(StatusEffects.MonsterVPT)) temp2 += statusEffectv1(StatusEffects.MonsterVPT);
 				if (this is ChiChi && (flags[kFLAGS.CHI_CHI_SAM_TRAINING] < 2 || hasStatusEffect(StatusEffects.MonsterRegen))) {
@@ -2628,6 +2654,19 @@ import flash.utils.getQualifiedClassName;
 				lib += (6 * (1 + newGamePlusMod()));
 				sens += (6 * (1 + newGamePlusMod()));
 			}
+			if (hasPerk(PerkLib.JobBeastWarrior) >= 0) {
+				str += (5 * (1 + newGamePlusMod()));
+				tou += (5 * (1 + newGamePlusMod()));
+				spe += (5 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator) >= 0) {
+					inte += (5 * (1 + newGamePlusMod()));
+					wis += (5 * (1 + newGamePlusMod()));
+				}
+				else {
+					inte -= (5 * (1 + newGamePlusMod()));
+					wis -= (5 * (1 + newGamePlusMod()));
+				}
+			}
 			if (hasPerk(PerkLib.JobBrawler)) str += (10 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.JobCourtesan)) lib += (15 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.JobDefender)) tou += (15 * (1 + newGamePlusMod()));
@@ -2642,6 +2681,7 @@ import flash.utils.getQualifiedClassName;
 				wis += (5 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.JobGuardian)) tou += (5 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.JobGunslinger)) wis += (10 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.JobHealer)) {
 				inte += (5 * (1 + newGamePlusMod()));
 				wis += (5 * (1 + newGamePlusMod()));
@@ -2769,6 +2809,10 @@ import flash.utils.getQualifiedClassName;
 			if (level > 10) bonusAscMaxHP *= (int)(level / 10 + 1);
 			weaponAttack += (1 + (int)(weaponAttack / 5)) * newGamePlusMod();
 			if (weaponRangeAttack > 0) weaponRangeAttack += (1 + (int)(weaponRangeAttack / 5)) * newGamePlusMod();
+			if (hasPerk(PerkLib.FeralArmor)) {
+				armorDef += Math.round(tou / 20);
+				armorMDef += Math.round(tou / 20);
+			}
 			armorDef += ((int)(1 + armorDef / 10)) * newGamePlusMod();
 			armorMDef += ((int)(1 + armorMDef / 10)) * newGamePlusMod();
 		}

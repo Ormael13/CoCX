@@ -2449,7 +2449,6 @@ public class Appearance extends Utils
 					[Face.ECHIDNA, "echidna"],
 					[Face.DEER, "deer"],
 					[Face.WOLF, "wolf"],
-					[Face.WOLF_FANGS, "wolf fangs"],
 					[Face.MANTICORE, "manticore"],
 					[Face.SALAMANDER_FANGS, "salamander"],
 					[Face.YETI_FANGS, "yeti"],
@@ -2457,14 +2456,19 @@ public class Appearance extends Utils
 					[Face.PLANT_DRAGON, "plant dragon"],
 					[Face.DRAGON_FANGS, "dragon fangs"],
 					[Face.DEVIL_FANGS, "devil fangs"],
+					[Face.ONI_TEETH, "oni teeth"],
 					[Face.RAIJU_FANGS, "raiju"],
+					[Face.VAMPIRE, "vampire"],
 					[Face.BUCKTOOTH, "jabberwocky buck tooths"],
 					[Face.JABBERWOCKY, "jabberwocky"],
 					[Face.RED_PANDA, "red-panda"],
 					[Face.CAT_CANINES, "cat canines"],
 					[Face.CHESHIRE, "cheshire"],
 					[Face.CHESHIRE_SMILE, "cheshire"],
-					[Face.AVIAN, "avian"]
+					[Face.AVIAN, "avian"],
+					[Face.WOLF_FANGS, "wolf fangs"],
+					[Face.ORC_FANGS, "orc fangs"],
+					[Face.ANIMAL_TOOTHS, "animal tooths"]
 				]
 		);
 		public static const DEFAULT_TONGUE_NAMES:Object = createMapFromPairs(
@@ -2576,7 +2580,6 @@ public class Appearance extends Utils
 					[Arms.GARGOYLE_2, "gargoyle"],
 					[Arms.WOLF, "wolf"],
 					[Arms.LION, "lion"],
-					[Arms.SPHINX, "sphinx"],
 					[Arms.KITSUNE, "kitsune"],
 					[Arms.FOX, "fox"],
 					[Arms.LIZARD, "lizard"],
@@ -2591,7 +2594,11 @@ public class Appearance extends Utils
 					[Arms.RED_PANDA, "red-panda"],
 					[Arms.CAT, "cat"],
 					[Arms.AVIAN, "avian"],
-					[Arms.GRYPHON, "gryphon"]
+					[Arms.GRYPHON, "gryphon"],
+					[Arms.SPHINX, "sphinx"],
+					[Arms.PIG, "pig"],
+					[Arms.BOAR, "boar"],
+					[Arms.DISPLACER, "displacer"]
 				]
 		);
 		public static const DEFAULT_TAIL_NAMES:Object = createMapFromPairs(
@@ -2725,7 +2732,7 @@ public class Appearance extends Utils
 					[LowerBody.FERRET, "ferret"],
 					[LowerBody.CLOVEN_HOOFED, "cloven-hoofed"],
 					[LowerBody.ECHIDNA, "echidna"],
-					[LowerBody.ECHIDNA, "deertaur"],
+					[LowerBody.DEERTAUR, "deertaur"],
 					[LowerBody.SALAMANDER, "salamander"],
 					[LowerBody.SCYLLA, "slippery octopus tentacles"],
 					[LowerBody.MANTIS, "mantis"],
@@ -2760,7 +2767,8 @@ public class Appearance extends Utils
 					[RearBody.SHARK_FIN, "shark fin"],
 					[RearBody.ORCA_BLOWHOLE, "orca blowhole"],
 					[RearBody.RAIJU_MANE, "raiju mane"],
-					[RearBody.WOLF_COLLAR, "wolf mane"]
+					[RearBody.WOLF_COLLAR, "wolf mane"],
+					[RearBody.DISPLACER_TENTACLES, "displacer tentacles"]
 				]
 		);
 		public static const DEFAULT_PIERCING_NAMES:Object = createMapFromPairs(
@@ -3350,4 +3358,4 @@ public class Appearance extends Utils
 			return descript;
 		}
 	}
-}
+}

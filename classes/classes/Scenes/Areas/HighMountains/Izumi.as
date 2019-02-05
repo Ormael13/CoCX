@@ -14,6 +14,16 @@ public class Izumi extends Monster
 		
 		public function Izumi() 
 		{
+			{
+				initStrTouSpeInte(230, 150, 110, 100);
+				initWisLibSensCor(100, 30, 25, 15);
+				this.weaponAttack = 50;
+				this.armorDef = 14;
+				this.armorMDef = 10;
+				this.bonusHP = 800;
+				this.level = 30;
+				this.additionalXP = 150;
+			}
 			this.a = "";
 			this.short = "Izumi";
 			this.imageName = "izumi";
@@ -23,28 +33,20 @@ public class Izumi extends Monster
 			createBreastRow(Appearance.breastCupInverse("FF")); // The doc mentions her breasts would be around D/DD on a "normal human" so err, winging this shit
 			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
-			this.tallness = 9*12+0;
+			this.tallness = 108;
 			this.hips.type = Hips.RATING_AVERAGE;
 			this.butt.type = Butt.RATING_TIGHT;
 			this.skinTone = "creamy-white";
 			this.hairColor = "golden";
 			this.hairLength = 25;
-			initStrTouSpeInte(230, 150, 110, 100);
-			initWisLibSensCor(100, 30, 25, 15);
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
-			this.weaponAttack = 50;
 			this.armorName = "silken kimono";
-			this.armorDef = 14;
-			this.armorMDef = 10;
-			this.bonusHP = 800;
 			this.bonusLust = 10;
 			this.lust = 10;
 			this.lustVuln = 0.33;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 30;
 			this.gems = 50 + rand(50);
-			this.additionalXP = 150;
 			this.drop = new ChainedDrop().add(armors.SPKIMO,1/10)
 					.add(necklaces.OBNECK,1/5)
 					.elseDrop(consumables.ONISAKE);

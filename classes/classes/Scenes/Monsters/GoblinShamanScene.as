@@ -230,10 +230,21 @@ public class GoblinShamanScene extends BaseContent
 			if (player.lust >= 33 && player.gender > 0 && (fitsFuck != null || cuntFuck != null || tooBig != null ||
 					corruptTooBig != null || buttseks != null || feeder != null || spiderCondom != null || eggs != null) && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("\n\n<b>What do you do to her, and if anything, which of your body parts do you use?</b>");
-				choices("Dick Fuck", fitsFuck, "DickTooBig", tooBig, "CorruptDick", corruptTooBig, "Dick In Ass", buttseks, "Jog Fuck", jog, "Breastfeed", feeder, "Web Condom", spiderCondom, "Pussies", cuntFuck, "Lay Eggs", eggs, "Leave", cleanupAfterCombat);
-				if (player.hasItem(useables.CONDOM) && player.cockThatFits(monster.vaginalCapacity()) >= 0) {
-					addButton(6, "Use Condom", goblinCondomed, 1);
+				menu();
+				if (fitsFuck != null) addButton(0, "Dick Fuck", fitsFuck);
+				if (tooBig != null) addButton(1, "DickTooBig", tooBig);
+				if (corruptTooBig != null) addButton(2, "CorruptDick", corruptTooBig);
+				if (buttseks != null) addButton(3, "Dick In Ass", buttseks);
+				if (jog != null) addButton(4, "Jog Fuck", jog);
+				if (player.hasStatusEffect(StatusEffects.Feeder)) addButton(5, "Breastfeed", feeder);
+				if ((player.tailType == Tail.SPIDER_ADBOMEN || player.hasItem(useables.CONDOM)) && player.cockThatFits(monster.vaginalCapacity()) >= 0) {
+					if (player.tailType == Tail.SPIDER_ADBOMEN) addButton(6, "Web Condom", goblinCondomed, 0);
+					if (player.hasItem(useables.CONDOM)) addButton(11, "Use Condom", goblinCondomed, 1);
 				}
+				if (player.hasVagina()) addButton(7, "Pussies", cuntFuck);
+				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
+				addButton(10, "Kill", killGoblin);
+				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else if (feeder!=null || eggs!=null) {
 				outputText("\n\n<b>You aren't horny enough to rape her, but ");
@@ -721,6 +732,17 @@ public class GoblinShamanScene extends BaseContent
 			player.dumpEggs();
 			player.orgasm();
 			cleanupAfterCombat();
+		}
+		private function killGoblin():void {
+			clearOutput();
+			flags[kFLAGS.GOBLINS_KILLED]++;
+			if (flags[kFLAGS.NO_GORE_MODE] >= 1) outputText("You make a quick work of the goblin shaman before dragging the corpse away. That's one less foul creature prowling the realms. ");
+			else {
+				outputText("You slowly stalk towards your defeated foe. The goblin shaman looks at you, lust filling her eyes as she believes you're going to use her. That lust quickly changes to fear as you pull a small knife out of its holster, the blade gleaming dangerously.\n\n");
+				outputText("The goblin shaman tries to run, but in her tired state, only manages to stumble around as you draw closer. You grab her by the hair and hoist her up, placing the sharp edge of the knife against her ear. The goblin shaman wails in pain as you cut her ear off, blood spurting out as you quickly slit her throat to put the thing out of its misery. ");
+			}
+			if (player.cor < 25) dynStats("cor", -0.5);
+			inventory.takeItem(useables.GOBOEAR, cleanupAfterCombat);
 		}
 	}
 }

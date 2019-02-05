@@ -208,17 +208,17 @@ import classes.lists.Gender;
 					break;
 				case "Giant Burger":
 					player.refillHunger(70);
-					if (flags[kFLAGS.HUNGER_ENABLED] == 0) player.modThickness(100, 4);
+					if (flags[kFLAGS.HUNGER_ENABLED] == 0) player.modThickness(player.maxThicknessCap(), 4);
 					if (rand(3) == 0 && player.hairLength < 16) player.hairLength += 0.5;
 					break;
 				case "P. Potatoes":
 					player.refillHunger(70);
-					if (flags[kFLAGS.HUNGER_ENABLED] == 0) player.modThickness(100, 2);
+					if (flags[kFLAGS.HUNGER_ENABLED] == 0) player.modThickness(player.maxThicknessCap(), 2);
 					if (flags[kFLAGS.HUNGER_ENABLED] == 0 || (rand(2) == 0 && player.hunger >= 80)) player.butt.type++;
 					break;
 				case "Spicy Chilli":
 					player.refillHunger(60);
-					if (flags[kFLAGS.HUNGER_ENABLED] == 0) player.modThickness(100, 1);
+					if (flags[kFLAGS.HUNGER_ENABLED] == 0) player.modThickness(player.maxThicknessCap(), 1);
 					if (flags[kFLAGS.HUNGER_ENABLED] == 0 || (rand(2) == 0 && player.hunger >= 80)) player.hips.type++;
 					break;
 				case "Prot. Shake":
@@ -229,19 +229,19 @@ import classes.lists.Gender;
 				case "Funnel Cake":
 					player.refillHunger(50);
 					player.modTone(0, 2);
-					if (flags[kFLAGS.HUNGER_ENABLED] == 0) player.modThickness(100, 1);
+					if (flags[kFLAGS.HUNGER_ENABLED] == 0) player.modThickness(player.maxThicknessCap(), 1);
 					break;
 				case "R.Tk. Dinner":
 					if (player.hunger < 60) player.hunger = 60;
 					player.refillHunger(40);
 					player.modTone(0, 5);
-					if (flags[kFLAGS.HUNGER_ENABLED] == 0) player.modThickness(100, 2);
+					if (flags[kFLAGS.HUNGER_ENABLED] == 0) player.modThickness(player.maxThicknessCap(), 2);
 					break;
 				case "G.Ham Dinner":
 					if (player.hunger < 60) player.hunger = 60;
 					player.refillHunger(40);
 					player.modTone(0, 2);
-					if (flags[kFLAGS.HUNGER_ENABLED] == 0) player.modThickness(100, 5);
+					if (flags[kFLAGS.HUNGER_ENABLED] == 0) player.modThickness(player.maxThicknessCap(), 5);
 					break;
 				case "MysteryMeat":
 					player.refillHunger(50);
@@ -1275,7 +1275,7 @@ import classes.lists.Gender;
 			if (flags[kFLAGS.BLACK_COCK_FRIDAS_CAKE_EATEN_COUNTER] == 0) outputText("\n\nYou waste no time digging into the cake. She's right. The cake is absolutely delicious! Within moments, the savory morsel is gone. You wish that there had been more.");
 			else outputText("\n\nYou immediately dig in, very excited for another piece. You let out a small burp as you finish, but let out a sigh of disappointment at the fact that there is nothing left of your piece of cake.");
 			player.refillHunger(35);
-			if (flags[kFLAGS.HUNGER_ENABLED] == 0) player.modThickness(100, 2);
+			if (flags[kFLAGS.HUNGER_ENABLED] == 0) player.modThickness(player.maxThicknessCap(), 2);
 			player.modTone(0, 1);
 			if (!player.hasStatusEffect(StatusEffects.Fullness)) player.createStatusEffect(StatusEffects.Fullness, 2, 0, 0, 0);
 			else player.changeStatusValue(StatusEffects.Fullness, 1, 2);
@@ -1410,6 +1410,13 @@ import classes.lists.Gender;
 			var changes:int = 0;
 			var changeLimit:int = 3;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.Enhancement) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.Fusion) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.Enchantment) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.Refinement) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.Saturation) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.Perfection) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.Creationism) >= 0) changeLimit++;
 			if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
 			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//Stats and genital changes
@@ -1475,8 +1482,8 @@ import classes.lists.Gender;
 			}
 			if (rand(4) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.lowerBody != LowerBody.CLOVEN_HOOFED) {
 				outputText("\n\nYou feel an odd sensation in your lower region. Your [feet] shift and you hear bones cracking as they reform. Fur grows on your legs and soon you're looking at a <b>new pair of goat legs</b>.");
-				player.lowerBody = LowerBody.CLOVEN_HOOFED;
 				player.legCount = 2;
+				CoC.instance.mutations.setLowerBody(LowerBody.CLOVEN_HOOFED);
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LowerBody.CLOVEN_HOOFED && player.horns.type == Horns.GOAT && player.faceType != Face.HUMAN) {
@@ -1487,18 +1494,18 @@ import classes.lists.Gender;
 			if (rand(4) == 0 && changes < changeLimit && !player.hasScales() && player.lowerBody != LowerBody.GARGOYLE && player.ears.type != Ears.ELFIN) {
 				outputText("\n\nYou feel an odd shifting sensation on the side of your head and, reaching up to inspect it, find a <b>pair of fleshy pointed ears</b>. "); 
 				if (player.hasFur()) outputText("As you examine your new elvish ears you feel fur grow around them, matching the rest of you.");
-				player.ears.type = Ears.ELFIN;
+				CoC.instance.mutations.setEarType(Ears.ELFIN);
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.horns.type == Horns.NONE) {
 				outputText("You begin to feel a prickling sensation at the top of your head. Reaching up to inspect it, you find a pair of hard stubs. <b>You now have a pair of goat horns.</b>");
-				player.horns.type = Horns.GOAT;
+				CoC.instance.mutations.setHornType(Horns.GOAT);
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.horns.type != Horns.GOAT && player.lowerBody != LowerBody.GARGOYLE && player.horns.type != Horns.ORCHID) {
 				outputText("You begin to feel an odd itching sensation as you feel your horns repositioning. Once it's over, you reach up and find a pair of hard stubs. <b>You now have a pair of goat horns.</b>");
 				player.horns.count = 1;
-				player.horns.type = Horns.GOAT;
+				CoC.instance.mutations.setHornType(Horns.GOAT);
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.horns.type == Horns.GOAT && player.horns.count == 1) {
@@ -1528,12 +1535,12 @@ import classes.lists.Gender;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.tailType == 0) {
 				outputText("You feel an odd itchy sensation just above your [ass]. Twisting around to inspect it you find a short stubby tail that wags when you're happy. <b>You now have a goat tail.</b>");
-				player.tailType = Tail.GOAT;
+				CoC.instance.mutations.setTailType(Tail.GOAT);
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.tailType > 0 && player.lowerBody != LowerBody.GARGOYLE && player.tailType != Tail.GOAT) {
 				outputText("You [tail] suddenly goes numb. Looking back you see it changing, twisting and reforming into a <b>short stubby goat-like tail</b>.");
-				player.tailType = Tail.GOAT;
+				CoC.instance.mutations.setTailType(Tail.GOAT);
 				changes++;
 			}
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -1543,6 +1550,13 @@ import classes.lists.Gender;
 			var changes:int = 0;
 			var changeLimit:int = 3;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.Enhancement) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.Fusion) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.Enchantment) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.Refinement) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.Saturation) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.Perfection) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.Creationism) >= 0) changeLimit++;
 			if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
 			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			// Stats Changes
@@ -1841,6 +1855,13 @@ import classes.lists.Gender;
 			var changes:int = 0;
 			var changeLimit:int = 3;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.Enhancement) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.Fusion) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.Enchantment) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.Refinement) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.Saturation) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.Perfection) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.Creationism) >= 0) changeLimit++;
 			if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
 			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			var i:int = 0;

@@ -20,7 +20,7 @@ public class Face extends SaveableBodyPart {
 	public static const FOX:int              = 11;
 	public static const DRAGON:int           = 12;
 	public static const RACCOON_MASK:int     = 13;
-	public static const RACCOON:int          = 14;
+	public static const RACCOON:int          = 14;//button 0 on 2nd page of metamorph
 	public static const BUCKTEETH:int        = 15;
 	public static const MOUSE:int            = 16;
 	public static const FERRET_MASK:int      = 17;
@@ -34,7 +34,7 @@ public class Face extends SaveableBodyPart {
 	public static const MANTICORE:int        = 25;
 	public static const SALAMANDER_FANGS:int = 26;
 	public static const YETI_FANGS:int       = 27;
-	public static const ORCA:int	         = 28;
+	public static const ORCA:int	         = 28;//button 0 on 3rd page of metamorph
 	public static const PLANT_DRAGON:int	 = 29;
 	public static const DRAGON_FANGS:int	 = 30;
 	public static const DEVIL_FANGS:int 	 = 31;
@@ -48,7 +48,9 @@ public class Face extends SaveableBodyPart {
 	public static const CHESHIRE:int    	 = 39;
 	public static const CHESHIRE_SMILE:int	 = 40;
 	public static const AVIAN:int			 = 41;
-	public static const WOLF_FANGS:int		 = 42;
+	public static const WOLF_FANGS:int		 = 42;//button 0 on 4th page of metamorph
+	public static const ORC_FANGS:int		 = 43;
+	public static const ANIMAL_TOOTHS:int	 = 44;
 	// Don't forget to add new types in DebugMenu.as list FACE_TYPE_CONSTANTS
 	
 	public function Face(creature:Creature) {
