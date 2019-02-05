@@ -43,8 +43,8 @@ public class VampireThirstEffect extends StatusEffectClass {
         return value1*singleStackBoost;
     }
     public function get singleStackBoost():Number {
-        if (game.player.hasPerk(PerkLib.VampiricBloodsteamFinalForm)) return 3 + game.player.newGamePlusMod();
-		else return 2 + game.player.newGamePlusMod();
+        if (game.player.hasPerk(PerkLib.VampiricBloodsteamFinalForm)) return ((1 + game.player.newGamePlusMod()) * 3);
+		else return ((1 + game.player.newGamePlusMod()) * 2);
     }
     
     override public function onRemove():void {

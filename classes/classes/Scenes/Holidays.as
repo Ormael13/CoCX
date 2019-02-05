@@ -4329,6 +4329,10 @@ public class Holidays {
         return ((date.date >= 28 && date.month == 9) || (date.date < 2 && date.month == 10) || flags[kFLAGS.ITS_EVERY_DAY] > 0);
     }
 
+    public static function isLunarNewYear():Boolean {
+        return ((date.date >= 21 && date.month == 0) || (date.date < 20 && date.month == 1) || flags[kFLAGS.ITS_EVERY_DAY] > 0);
+    }
+
     /*Credits
     Fenoxo- for providing the game in which this scene might go into
     Kinathis - The \"<i>Suck Him</i>\" scene

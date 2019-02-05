@@ -151,22 +151,22 @@ public class GoblinShaman extends Goblin
 			this.skinTone = "dark green";
 			this.hairColor = "indigo";
 			this.hairLength = 4;
-			initStrTouSpeInte(74, 50, 70, 87);
-			initWisLibSensCor(87, 45, 45, 60);
+			initStrTouSpeInte(79, 60, 80, 97);
+			initWisLibSensCor(97, 45, 45, 60);
 			this.weaponName = "wizard staff";
 			this.weaponVerb = "bludgeon";
-			this.weaponAttack = 14;
+			this.weaponAttack = 16;
 			this.armorName = "fur loincloth";
-			this.armorDef = 6;
-			this.armorMDef = 18;
+			this.armorDef = 12;
+			this.armorMDef = 36;
 			this.fatigue = 0;
-			this.bonusHP = 275;
+			this.bonusHP = 375;
 			this.bonusLust = 20;
 			this.lust = 35;
 			this.lustVuln = 0.4;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 14;
-			this.gems = rand(15) + 15;
+			this.level = 24;
+			this.gems = rand(15) + 25;
 			this.drop = new WeightedDrop().
 					add(consumables.GOB_ALE,5).
 					add(weapons.W_STAFF,1).

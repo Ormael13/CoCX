@@ -613,7 +613,7 @@ import classes.Items.JewelryLib;
 		
 		public override function minHP():Number
 		{
-			var min:Number = 1;
+			var min:Number = 0;
 			if (findPerk(PerkLib.Diehard) >= 0) {
 				min -= maxHP() * 0.02;
 				min -= (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -696,10 +696,13 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.MythicalEndurance) >= 0) max += 20000;
 			if (findPerk(PerkLib.JobHunter) >= 0) max += 50;
 			if (findPerk(PerkLib.JobRanger) >= 0) max += 5;
+			if (findPerk(PerkLib.JobGunslinger) >= 0) max += 10;
 			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) max += 100;
 			if (findPerk(PerkLib.PrestigeJobArcaneArcher) >= 0) max += 600;
 			if (findPerk(PerkLib.PrestigeJobSoulArcher) >= 0) max += 150;
 			if (findPerk(PerkLib.PrestigeJobSeer) >= 0) max += 900;
+			if (findPerk(PerkLib.RapidReload) >= 0) max += 15;
+			if (findPerk(PerkLib.LightningReload) >= 0) max += 25;
 			if (findPerk(PerkLib.EromancyBeginner) >= 0) max += Math.round(lib);
 			if (findPerk(PerkLib.EromancyExpert) >= 0) max += Math.round(lib*2);
 			if (findPerk(PerkLib.EromancyMaster) >= 0) max += Math.round(lib*2);
@@ -713,7 +716,7 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.UnlockEndurance3rdStage) >= 0) max += level * 5;
 			if (findPerk(PerkLib.UnlockEndurance4thStage) >= 0) max += level * 5;
 			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 6;
-			if (max > 299999) max = 299999;
+			if (max > 899999) max = 899999;
 			return max;
 		}
 		
@@ -798,16 +801,23 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.UnlockSpirit3rdStage) >= 0) max += level * 5;
 			if (findPerk(PerkLib.UnlockSpirit4thStage) >= 0) max += level * 5;
 			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 6;
+			var multimax:Number = 1;
+			if (game.player.alicornScore() >= 12) multimax += 0.2;
+			if (game.player.dragonScore() >= 20) multimax += 0.1;
+			if (game.player.dragonScore() >= 28) multimax += 0.1;
+			if (game.player.kitsuneScore() >= 5 && game.player.tailCount >= 2 && game.player.tailCount < 9) multimax += 0.2;
+			if (game.player.kitsuneScore() >= 12 && game.player.tailCount == 9) multimax += 0.4;
+			if (game.player.unicornScore() >= 10) multimax += 0.1;
+			if (findPerk(PerkLib.HistoryCultivator) >= 0 || findPerk(PerkLib.PastLifeCultivator) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.Wizened) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.PathOfEnlightenment) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.Embodiment) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.InControl) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.Metamorphable) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.SoulPowered) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.AllSeeing) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) multimax += 0.1;
 			if (findPerk(PerkLib.JobSoulCultivator) >= 0) {//8005-9005 soulforce na razie przed liczeniem mnożnika jest
-				var multimax:Number = 1;
-				if (game.player.alicornScore() >= 12) multimax += 0.2;
-				if (game.player.dragonScore() >= 20) multimax += 0.1;
-				if (game.player.dragonScore() >= 28) multimax += 0.1;
-				if (game.player.kitsuneScore() >= 5 && game.player.tailCount >= 2 && game.player.tailCount < 9) multimax += 0.2;
-				if (game.player.kitsuneScore() >= 12 && game.player.tailCount == 9) multimax += 0.4;
-				if (game.player.unicornScore() >= 10) multimax += 0.1;
-				if (findPerk(PerkLib.HistoryCultivator) >= 0 || findPerk(PerkLib.PastLifeCultivator) >= 0) multimax += 0.1;
-				if (findPerk(PerkLib.DeityJobMunchkin) >= 0) multimax += 0.1;
 				if (findPerk(PerkLib.Dantain) >= 0) {
 					if (findPerk(PerkLib.JobSoulCultivator) >= 0) multimax += 0.1;
 					if (findPerk(PerkLib.SoulApprentice) >= 0) multimax += 0.1;
@@ -828,10 +838,11 @@ import classes.Items.JewelryLib;
 				if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) multimax += 0.2;
 				//if (flags[kFLAGS.UNLOCKED_MERIDIANS] > 0) multimax += flags[kFLAGS.UNLOCKED_MERIDIANS] * 0.05;
 				//if (findPerk(PerkLib.Ascension) >= 0) multimax += perkv1(PerkLib.Ascension) * 0.01;
-				max *= multimax;//3.75
+				
 			}
+			max *= multimax;
 			max = Math.round(max);
-			if (max > 429999) max = 429999;
+			if (max > 669999) max = 669999;
 			return max;
 		}
 		
@@ -886,6 +897,8 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.PrestigeJobBerserker) >= 0) max += 200;
 			if (findPerk(PerkLib.Rage) >= 0) max += 300;
 			if (findPerk(PerkLib.Anger) >= 0) max += 400;
+			if (findPerk(PerkLib.FuelForTheFire) >= 0) max += 500;
+			if (findPerk(PerkLib.TooAngryToDie) >= 0) max += 600;
 			if (findPerk(PerkLib.PrestigeJobTempest) >= 0) max += 100;
 			if (findPerk(PerkLib.AscensionFury) >= 0) max += perkv1(PerkLib.AscensionFury) * 20;
 			if (findPerk(PerkLib.UnlockId) >= 0) max += level;
@@ -897,7 +910,7 @@ import classes.Items.JewelryLib;
 			if (game.player.orcScore() >= 5) multimax += 0.1;
 			if (game.player.orcScore() >= 11) multimax += 0.1;
 			max *= multimax;
-			if (max > 42999) max = 42999;
+			if (max > 43999) max = 43999;
 			return max;
 		}
 		
@@ -971,6 +984,16 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.EromancyExpert) >= 0) max += Math.round(inte);
 			if (findPerk(PerkLib.EromancyMaster) >= 0) max += Math.round(inte*2);
 			var multimax:Number = 1;
+			if (game.player.elfScore() >= 5) multimax += 0.1;
+			if (game.player.elfScore() >= 11) multimax += 0.1;
+			if (findPerk(PerkLib.HistoryScholar) >= 0 || findPerk(PerkLib.PastLifeScholar) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.Studious) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.Teacher) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.Professor) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.Principle) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.Dean) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.President) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.Nerd) >= 0) multimax += 0.1;
 			if (findPerk(PerkLib.ArcaneRegenerationMinor) >= 0 && inte >= 50) {
 				multimax += 0.1;
 				if (findPerk(PerkLib.ArcaneRegenerationMajor) >= 0 && inte >= 75) multimax += 0.2;
@@ -985,11 +1008,9 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.UnlockForce3rdStage) >= 0) max += level * 10;
 			if (findPerk(PerkLib.UnlockForce4thStage) >= 0) max += level * 10;
 			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 12;
-			if (game.player.elfScore() >= 5) multimax += 0.1;
-			if (game.player.elfScore() >= 11) multimax += 0.1;
 			max *= multimax;
 			max = Math.round(max);
-			if (max > 569999) max = 569999;
+			if (max > 1060999) max = 1060999;
 			return max;
 		}
 		

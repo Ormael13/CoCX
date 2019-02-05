@@ -7,6 +7,7 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.GlacialRift.FrostGiant;
+import classes.Scenes.Areas.Tundra.YoungFrostGiant;
 import classes.Scenes.Dungeons.D3.Doppleganger;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.LivingStatue;
@@ -44,11 +45,6 @@ public class MagicSpecials extends BaseCombatContent {
 	//------------
 	internal function buildMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
-		if (player.hasPerk(PerkLib.JobSorcerer)) {
-			bd = buttons.add("M.Bolt", magicbolt);
-			if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") bd.hint("Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Magic Bolt");
-			else bd.hint("Attempt to attack the enemy with magic bolt.  Damage done is determined by your intelligence.", "Magic Bolt");
-		}
 		if (player.harpyScore() >= 8 || player.sirenScore() >= 10) {
 			bd = buttons.add("Compelling Aria", singCompellingAria, "Sing for a moment.");
 			bd.requireFatigue(spellCost(50));
@@ -434,15 +430,6 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.ShieldingSpell)) buttons.add("Shielding", shieldingSpell);
 		if (player.hasStatusEffect(StatusEffects.ImmolationSpell)) buttons.add("Immolation", immolationSpell);
 		if (player.hasStatusEffect(StatusEffects.IcePrisonSpell)) buttons.add("Ice Prison", iceprisonSpell);
-		
-		// JOJO specials - moved from Spells (no longer silenceable)
-		if (player.hasPerk(PerkLib.CleansingPalm)) {
-			bd = buttons.add("C.Palm", combat.magic.spellCleansingPalm).hint("Unleash the power of your cleansing aura! More effective against corrupted opponents. Doesn't work on the pure.  \n", "Cleansing Palm");
-			bd.requireFatigue(spellCost(30),true);
-			if (player.cor >= (10 + player.corruptionTolerance())) {
-				bd.disable("You are too corrupt to use this ability!");
-			}
-		}
 	}
 
 	//New Abilities and Items
@@ -782,7 +769,7 @@ public class MagicSpecials extends BaseCombatContent {
 				lustDmgF *= (1 + (player.lust100 * 0.01));
 			}
 			if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) {
-				lustDmgF *= 1.15;
+				lustDmgF *= (1 + combat.historyWhoreBonus());
 			}
 			//Determine if critical tease!
 			var crit:Boolean = false;
@@ -1756,98 +1743,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 		}
 	}
-	public function magicbolt():void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
-		clearOutput();
-//	fatigue(40, USEFATG_MAGIC);
-		if(monster.hasStatusEffect(StatusEffects.Shell)) {
-			outputText("As soon as your magic bolt touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-			flags[kFLAGS.SPELLS_CAST]++;
-			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-			spellPerkUnlock();
-			enemyAI();
-			return;
-		}
-		outputText("You narrow your eyes, focusing your mind with deadly intent.  ");
-		if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") outputText("You point your staff and shots magic bolt toward " + monster.a + monster.short + "!\n\n");
-		else outputText("You point your hand toward " + monster.a + monster.short + " and shots magic bolt!\n\n");
-		var damage:Number = scalingBonusIntelligence() * 0.2;
-		if (damage < 10) damage = 10;
-		//weapon bonus
-		if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") {
-			if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.04));
-			else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (3 + ((player.weaponAttack - 50) * 0.035));
-			else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (4.75 + ((player.weaponAttack - 100) * 0.03));
-			else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (6.25 + ((player.weaponAttack - 150) * 0.025));
-			else damage *= (7.5 + ((player.weaponAttack - 200) * 0.02));
-		}
-		//Determine if critical hit!
-		var crit:Boolean = false;
-		var critChance:int = 5;
-		critChance += combatMagicalCritical();
-		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-		if (rand(100) < critChance) {
-			crit = true;
-			damage *= 1.75;
-		}
-		damage = Math.round(damage);
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + damage + "</font></b> damage.");
-		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
-		outputText("\n\n");
-		checkAchievementDamage(damage);
-		monster.HP -= damage;
-		combat.heroBaneProc(damage);
-		statScreenRefresh();
-		if (monster.HP < 1)
-		{
-			doNext(endHpVictory);
-		}
-		else
-		{
-			if (monster is Lethice && (monster as Lethice).fightPhase == 3)
-			{
-				outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
-				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
-			}
-			enemyAI();
-		}
-//	if(monster.lustVuln > 0) {
-//			if(player.weapon == weapons.L_DAGGR) {
-//				outputText("\n" + monster.capitalA + monster.short + " shivers as your weapon's 'poison' goes to work.");
-//				monster.teased(monster.lustVuln * (5 + player.cor / 10));
-//			}
-	}
 	
-	public function dwarfrage():void {
-		clearOutput();
-		player.wrath -= 50;
-		var temp:Number = 0;
-		var tempStr:Number = 0;
-		var tempTouSpe:Number = 0;
-		var dwarfrageDuration:Number = 10;
-		var DwarfRageBoost:Number = 10;
-		if (player.hasPerk(PerkLib.JobSwordsman)) DwarfRageBoost += 5;
-		if (player.hasPerk(PerkLib.JobBrawler)) DwarfRageBoost += 5;
-		if (player.hasPerk(PerkLib.Berzerker)) DwarfRageBoost += 5;
-		if (player.hasPerk(PerkLib.Lustzerker)) DwarfRageBoost += 5;
-	//	DwarfRageBoost += player.tou / 10;player.tou * 0.1 - im wytrzymalesze ciało tym wiekszy bonus może udźwignąć
-		outputText("You roar and unleash your dwarf rage in order to destroy your foe!\n\n");
-		player.createStatusEffect(StatusEffects.DwarfRage, 0, 0, dwarfrageDuration, 0);
-		temp = DwarfRageBoost;
-		tempStr = temp * 2;
-		tempTouSpe = temp;
-		player.changeStatusValue(StatusEffects.DwarfRage,1,tempStr);
-		player.changeStatusValue(StatusEffects.DwarfRage,2,tempTouSpe);
-		mainView.statsView.showStatUp('str');
-		mainView.statsView.showStatUp('tou');
-		mainView.statsView.showStatUp('spe');
-		player.str += player.statusEffectv1(StatusEffects.DwarfRage);
-		player.tou += player.statusEffectv2(StatusEffects.DwarfRage);
-		player.spe += player.statusEffectv2(StatusEffects.DwarfRage);
-		statScreenRefresh();
-		enemyAI();
-	}
-
 	public function berzerk():void {
 		clearOutput();
 		player.wrath -= 50;
@@ -1882,6 +1778,38 @@ public class MagicSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 	
+	public function dwarfrage():void {
+		clearOutput();
+		player.wrath -= 50;
+		var temp:Number = 0;
+		var tempStr:Number = 0;
+		var tempTouSpe:Number = 0;
+		var dwarfrageDuration:Number = 10;
+		var DwarfRageBoost:Number = 10;
+		if (player.hasPerk(PerkLib.JobSwordsman)) DwarfRageBoost += 5;
+		if (player.hasPerk(PerkLib.JobBrawler)) DwarfRageBoost += 5;
+		if (player.hasPerk(PerkLib.Berzerker)) DwarfRageBoost += 5;
+		if (player.hasPerk(PerkLib.Lustzerker)) DwarfRageBoost += 5;
+	//	DwarfRageBoost += player.tou / 10;player.tou * 0.1 - im wytrzymalesze ciało tym wiekszy bonus może udźwignąć
+		outputText("You roar and unleash your dwarf rage in order to destroy your foe!\n\n");
+		var oldHPratio:Number = player.hp100/100;
+		player.createStatusEffect(StatusEffects.DwarfRage, 0, 0, dwarfrageDuration, 0);
+		temp = DwarfRageBoost;
+		tempStr = temp * 2;
+		tempTouSpe = temp;
+		player.changeStatusValue(StatusEffects.DwarfRage,1,tempStr);
+		player.changeStatusValue(StatusEffects.DwarfRage,2,tempTouSpe);
+		mainView.statsView.showStatUp('str');
+		mainView.statsView.showStatUp('tou');
+		mainView.statsView.showStatUp('spe');
+		player.str += player.statusEffectv1(StatusEffects.DwarfRage);
+		player.tou += player.statusEffectv2(StatusEffects.DwarfRage);
+		player.spe += player.statusEffectv2(StatusEffects.DwarfRage);
+		player.HP = oldHPratio*player.maxHP();
+		statScreenRefresh();
+		enemyAI();
+	}
+
 	public function crinosshapeCost():Number {
 		var modcsc:Number = 5;
 		if (player.hasPerk(PerkLib.ImprovedCrinosShape)) modcsc += 5;
@@ -1932,6 +1860,7 @@ public class MagicSpecials extends BaseCombatContent {
 		temp2 = Math.round(temp2);
 		temp3 = Math.round(temp3);
 		outputText("You roar and unleash your inner beast assuming Crinos Shape in order to destroy your foe!\n\n");
+		var oldHPratio:Number = player.hp100/100;
 		player.createStatusEffect(StatusEffects.CrinosShape, 0, 0, 0, 0);
 		tempStr = temp1;
 		tempTou = temp2;
@@ -1945,6 +1874,7 @@ public class MagicSpecials extends BaseCombatContent {
 		player.str += player.statusEffectv1(StatusEffects.CrinosShape);
 		player.tou += player.statusEffectv2(StatusEffects.CrinosShape);
 		player.spe += player.statusEffectv3(StatusEffects.CrinosShape);
+		player.HP = oldHPratio*player.maxHP();
 		statScreenRefresh();
 		enemyAI();
 	}
@@ -1994,8 +1924,9 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-			(monster as FrostGiant).giantBoulderHit(2);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
 			enemyAI();
 			return;
 		}
@@ -3613,4 +3544,4 @@ public class MagicSpecials extends BaseCombatContent {
 }
 
 }
-
+

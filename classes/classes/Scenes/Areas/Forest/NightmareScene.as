@@ -108,7 +108,7 @@ package classes.Scenes.Areas.Forest
 					player.coatColor == "black";
 				}
 				if (player.horns.type != Horns.BICORN) {
-					outputText("(If no bicorn horn)Just as you are about to achieve orgasm a pair of small parallel nub begins forming on your forehead.");
+					outputText(" Just as you are about to achieve orgasm a pair of small parallel nub begins forming on your forehead.");
 					player.horns.type = Horns.BICORN;
 				}
 				outputText(" The nightmare herself seems to lose control as the two of you keep fucking like wild animals.\n\n");

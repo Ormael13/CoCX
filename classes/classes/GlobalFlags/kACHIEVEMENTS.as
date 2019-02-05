@@ -33,7 +33,7 @@ package classes.GlobalFlags
 		public static const ZONE_ARCHAEOLOGIST:int				= 023; //Visit the town ruins 15 times.
 		public static const ZONE_FARMER:int						= 024; //Visit the farm 30 times.
 		public static const ZONE_SEA_LEGS:int					= 025; //Use the boat 15 times.
-		public static const ZONE_ROASTED:int					= 026; //Explore the volcanic crag 50 times.
+		public static const ZONE_ROASTED:int					= 026; //Explore the volcanic crag 100 times.
 		public static const ZONE_TAINTED:int					= 027; //Explore Blight Ridge 100 times.
 		public static const ZONE_SUNBURNED:int					= 028; //Explore Beach 100 times.
 		public static const ZONE_SAILOR:int						= 029; //Explore Ocean 100 times.
@@ -232,7 +232,7 @@ package classes.GlobalFlags
 		public static const GENERAL_STATS_300:int					= 198;
 		public static const GENERAL_STATS_500:int					= 199;
 		public static const ZONE_DIVER:int							= 200; //Explore Deep Sea 100 times.
-		public static const UNKNOWN_ACHIEVEMENT_201:int				= 201; //Explore Outer Battlefield 100 times.
+		public static const ZONE_ROOKIE:int							= 201; //Explore Outer Battlefield 100 times.
 		public static const DUNGEON_TIGER_STALKING_THE_DRAGON:int	= 202;
 		public static const DUNGEON_SLAIN_THE_HEROSLAYER:int		= 203;
 		public static const GENERAL_BAD_ENDER_2:int					= 204; //Cause 4 bad ends to various NPCs.
@@ -325,14 +325,38 @@ package classes.GlobalFlags
 		public static const GENERAL_STATS_OPK:int								= 278;
 		public static const GENERAL_JUST_TO_SPITE_YOU_3_IM_BACK:int				= 279;
 		public static const GENERAL_KILLING_THE_BULL_BY_THE_HORNS_3_IM_BACK:int	= 280;
-		public static const GENERAL_281:int			= 281;
-		public static const GENERAL_282_2__HARDER:int			= 282;
-		public static const GENERAL_283_3_IM_BACK:int			= 283;
-		public static const GENERAL_284:int			= 284;
-		public static const GENERAL_285_2__HARDER:int			= 285;
-		public static const GENERAL_286_3_IM_BACK:int			= 286;
-		public static const UNKNOWN_ACHIEVEMENT_287:int			= 287;
-		public static const UNKNOWN_ACHIEVEMENT_288:int			= 288;
+		public static const GENERAL_GOBLIN_SLAYER:int							= 281;
+		public static const GENERAL_GOBLIN_SLAYER_2_SLAY_HARDER:int				= 282;
+		public static const GENERAL_GOBLIN_SLAYER_3_IM_BACK:int					= 283;
+		public static const GENERAL_PLAY_DEAD_FIDO:int							= 284;
+		public static const GENERAL_PLAY_DEAD_FIDO_2_PLAY_HARDER:int			= 285;
+		public static const GENERAL_PLAY_DEAD_FIDO_3_IM_BACK:int				= 286;
+		
+		public static const ZONE_CAVEMAN:int						= 287; //100 exploration of Caves
+		public static const ZONE_288:int		= 288;//100 exploration of Deep Desert
+		public static const ZONE_289:int		= 289;//100 exploration of Inner Battlefield (Warmoger lub dla 3 obszaru battlefield-a)
+		public static const ZONE_290:int		= 290;//100 exploration of Defiled Ravine
+		public static const ZONE_291:int		= 291;//100 exploration of Marsh
+		public static const ZONE_292:int		= 292;//100 exploration of Deep Caves
+		public static const ZONE_293:int		= 293;//100 exploration of Tundra
+		public static const ZONE_ASHES_TO_ASHES_DUST_TO_DUST:int	= 294;//100 exploration of Ashlands
+		public static const ZONE_295:int		= 295;//100 exploration of Outer Plateau
+		public static const ZONE_296:int		= 296;//100 exploration of Inner Plateau
+		public static const ZONE_297:int		= 297;//100 exploration of 3rd forest related area (jungle?) ZONE_JUMANJI?
+		public static const ZONE_298:int		= 298;//100 exploration of 4th forest related area
+		public static const ZONE_299:int		= 299;//100 exploration of 3rd blight ridge related area
+		public static const ZONE_300:int		= 300;//100 exploration of 4th blight ridge related area
+		public static const ZONE_301:int		= 301;//100 exploration of 2nd plains related area
+		public static const ZONE_302:int		= 302;//100 exploration of 3rd plains related area
+		public static const ZONE_303:int		= 303;//100 exploration of 3rd caves related area
+		public static const ZONE_304:int		= 304;//100 exploration of x1
+		public static const ZONE_305:int		= 305;//100 exploration of x2
+		
+		public static const GENERAL_TEXAS_RANGER:int			= 306;
+		public static const UNKNOWN_ACHIEVEMENT_307:int			= 307;//GENERAL_VAN_DAMME_IT
+		public static const UNKNOWN_ACHIEVEMENT_308:int			= 308;
+		public static const UNKNOWN_ACHIEVEMENT_309:int			= 309;
+		public static const UNKNOWN_ACHIEVEMENT_310:int			= 310;
 		
 	}
 

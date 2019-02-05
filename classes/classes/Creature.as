@@ -429,14 +429,14 @@ public class Creature extends Utils
 		}
 		public function maxHP():Number {
 			var max:Number = Math.round(maxHP_base()*maxHP_mult());
-			return Math.min(1009999,max);
+			return Math.min(3049999,max);
 		}
 		public function minHP():Number {
-			return 1;
+			return 0;
 		}
 		public function maxLust():Number {
 			var max:Number = Math.round(maxLust_base()*maxLust_mult());
-			return Math.min(62999,max);
+			return Math.min(119999,max);
 		}
 		public function maxFatigue():Number {
 			return 100;
@@ -3761,6 +3761,7 @@ public class Creature extends Utils
 			var flychance:Number = 20;
 			if (findPerk(PerkLib.AdvancedAerialCombat) >= 0) flychance += 5;
 			if (findPerk(PerkLib.GreaterAerialCombat) >= 0) flychance += 15;
+			if (hasStatusEffect(StatusEffects.Flying)) chance += flychance;
 			if (findPerk(PerkLib.Evade) >= 0) {
 				chance += 5;
 				flychance += 5;
@@ -3797,12 +3798,12 @@ public class Creature extends Utils
 			if (findPerk(PerkLib.Misdirection) >= 0 && armorName == "red, high-society bodysuit") chance += 10;
 			//if (findPerk(PerkLib.Unhindered) >= 0 && meetUnhinderedReq()) chance += 10;
 			if (findPerk(PerkLib.Unhindered) >= 0 && (game.player.armorName == "arcane bangles" || game.player.armorName == "practically indecent steel armor" || game.player.armorName == "revealing chainmail bikini" || game.player.armorName == "slutty swimwear" || game.player.armorName == "barely-decent bondage straps" || game.player.armorName == "nothing")) chance += 10;
+			if (game.player.armor == game.armors.R_CHANG || game.player.armor == game.armors.R_QIPAO || game.player.armor == game.armors.G_CHANG || game.player.armor == game.armors.G_QIPAO || game.player.armor == game.armors.B_CHANG || game.player.armor == game.armors.B_QIPAO || game.player.armor == game.armors.P_CHANG || game.player.armor == game.armors.P_QIPAO) chance += 5;
 			if (findPerk(PerkLib.JunglesWanderer) >= 0) chance += 35;
 			if (hasStatusEffect(StatusEffects.Illusion)) {
 				if (findPerk(PerkLib.KitsuneThyroidGlandFinalForm) >= 0) chance += 20;
 				else chance += 10;
 			}
-			if (hasStatusEffect(StatusEffects.Flying)) chance += flychance;
 			if (hasStatusEffect(StatusEffects.HurricaneDance)) chance += 25;
 			if (hasStatusEffect(StatusEffects.BladeDance)) chance += 30;
 			if (game.player.cheshireScore() >= 11) {

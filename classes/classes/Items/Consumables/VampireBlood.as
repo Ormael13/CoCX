@@ -94,8 +94,18 @@ public class VampireBlood extends Consumable {
                 ChangeTo: Arms.HUMAN
             });
         }
-        changeLimit = 1;
         changes = 0;
+        changeLimit = 1;
+		if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
+		if (player.hasPerk(PerkLib.Enhancement)) changeLimit++;
+		if (player.hasPerk(PerkLib.Fusion)) changeLimit++;
+		if (player.hasPerk(PerkLib.Enchantment)) changeLimit++;
+		if (player.hasPerk(PerkLib.Refinement)) changeLimit++;
+		if (player.hasPerk(PerkLib.Saturation)) changeLimit++;
+		if (player.hasPerk(PerkLib.Perfection)) changeLimit++;
+		if (player.hasPerk(PerkLib.Creationism)) changeLimit++;
+		if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
+		if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
         if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 		for each (var tf:Object in tfArr) {
             if (changes >= changeLimit) break;

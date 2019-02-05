@@ -174,6 +174,12 @@ use namespace CoC;
 				},
 				call  : SceneLib.helScene.encounterAJerkInThePlains
 			}, {
+				name: "ted",
+				when: function():Boolean {
+					return flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 4 && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1;
+				},
+				call: SceneLib.tedScene.introPostHiddenCave
+			},{
 				name: "satyr",
 				chance: 0.7,
 				call: satyrScene.satyrEncounter

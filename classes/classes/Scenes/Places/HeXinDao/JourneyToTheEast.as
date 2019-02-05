@@ -84,7 +84,7 @@ package classes.Scenes.Places.HeXinDao
 			}
 			else {
 				outputText("You approach the board covered in colorful papers and the panda girl next to it smile at you.\n\n");
-				outputText("\"<i>Well hello there! Are you looking for a job? I represent the adventurer guild and my organisation could use more able bodied men’s and women’s like you.</i>\"\n\n");
+				outputText("\"<i>Well hello there! Are you looking for a job? I represent the adventurer guild and my organisation could use more able bodied men and women like you.</i>\"\n\n");
 				outputText("An adventurer guild? What's the benefits?\n\n");
 				outputText("\"<i>Mareth is both filled with perils, lost treasures and people in need of heroic assistance. By paying a small membership fee I can let you in on local events that could use your assistance and give you pointers to unplundered ruins. It’s only 5 spirit stones to join. Fame and treasure? All within your reach to grab.</i>\"");
 				menu();
@@ -130,6 +130,7 @@ package classes.Scenes.Places.HeXinDao
 			else {
 				addButtonDisabled(4, "Demons", "Only for Iron tier Adventurer.");
 			}
+			addButton(5, "Chitin", BoardkeeperYangQuestChitin).hint("Cooper tier Quest.");
 			if (flags[kFLAGS.GALIA_LVL_UP] == 0.53 || (flags[kFLAGS.GALIA_LVL_UP] >= 0.5 && flags[kFLAGS.GALIA_TALKS] > 0)) addButtonDisabled(10, "Ferals (C)", "You already finished this quest.");
 			else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) >= 2) {
 				if (flags[kFLAGS.GALIA_LVL_UP] >= 0.44 && flags[kFLAGS.GALIA_AFFECTION] == 10) addButton(10, "Ferals (C)", BoardkeeperYangQuestEzekiel1a);
@@ -460,6 +461,49 @@ package classes.Scenes.Places.HeXinDao
 			}
 			doNext(curry(enteringInn,false));
 		}
+		public function BoardkeeperYangQuestChitin():void {
+			clearOutput();
+			if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) > 0) {
+				if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) > 4) {
+					outputText("The panda decline the job request.\n\n");
+					outputText("\"<i>Sorry [name] this job is only once per day. Come back tomorrow.</i>\"\n\n");
+				}
+				else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) == 4) {
+					if (player.hasItem(useables.B_CHITN, 5)) {
+						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
+						outputText("\"<i>Good job there. I hope gathering these did not prove to much trouble. Here is your payment.</i>\"\n\n");
+						player.addStatusValue(StatusEffects.AdventureGuildQuests4, 1, 1);
+						player.destroyItems(useables.B_CHITN, 5);
+						flags[kFLAGS.SPIRIT_STONES] += 4;
+						statScreenRefresh();
+					}
+					else outputText("You try to turn in the quest but Yang tells you you don’t have enough chitin yet.\n\n");
+				}
+				else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) == 2) {
+					outputText("\"<i>You may or may not like that one. The good news is you are going out to gather chitin the bad news is it primarily drop from bee girls which is a friendly species so your morality may be put to the test. How you handle that is up to you, ");
+					outputText("for all I know chitin is often found on the forest ground where bee girls trives. Regardless bring us back 5 chitin and your job will be done.</i>\"\n\n");
+					player.addStatusValue(StatusEffects.AdventureGuildQuests4, 3, 2);
+				}
+				else {
+					if (player.hasItem(useables.B_CHITN, 5)) {
+						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
+						outputText("\"<i>My my, nice job. I can only hope you kept that weapon clean of innocent blood. Regardless here is your payment. This reminds me the client told me to leave you this scroll as a reward too you know what to do with it I suppose?</i>\"\n\n");
+						if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0) player.addKeyValue("Adventurer Guild: Copper plate", 1, 1);
+						player.addStatusValue(StatusEffects.AdventureGuildQuests4, 3, 1);
+						player.destroyItems(useables.B_CHITN, 5);
+						player.perkPoints += 1;
+					}
+					else outputText("You try to turn in the quest but Yang tells you you don’t have enough chitin yet.\n\n");
+				}
+			}
+			else {
+				outputText("\"<i>You may or may not like that one. The good news is you are going out to gather chitin the bad news is it primarily drop from bee girls which is a friendly species so your morality may be put to the test. How you handle that is up to you, ");
+				outputText("for all I know chitin is often found on the forest ground where bee girls trives. Regardless bring us back 5 chitin and your job will be done.</i>\"\n\n");
+				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests4)) player.addStatusValue(StatusEffects.AdventureGuildQuests4, 1, 1);
+				else player.createStatusEffect(StatusEffects.AdventureGuildQuests4, 1, 0, 0, 0);
+			}
+			doNext(curry(enteringInn,false));
+		}
 		public function BoardkeeperYangQuestEzekiel1():void {
 			clearOutput();
 			if (flags[kFLAGS.GALIA_LVL_UP] > 0) {
@@ -517,11 +561,6 @@ package classes.Scenes.Places.HeXinDao
 			clearOutput();//golem harvesting quest
 			outputText("Placeholder for lazyLia writing ^^\n\n");
 			outputText("Placeholder for lazyLia writing ^^\n\n");
-			outputText("Placeholder for lazyLia writing ^^\n\n");
-			doNext(curry(enteringInn,false));
-		}
-		public function BoardkeeperYangQuest3():void {
-			clearOutput();
 			outputText("Placeholder for lazyLia writing ^^\n\n");
 			doNext(curry(enteringInn,false));
 		}

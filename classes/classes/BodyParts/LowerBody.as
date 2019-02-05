@@ -22,20 +22,22 @@ public class LowerBody extends SaveableBodyPart {
 	public static const BUNNY:int                 = 12;
 	public static const HARPY:int                 = 13;
 	public static const KANGAROO:int              = 14;
-	public static const CHITINOUS_SPIDER_LEGS:int = 15;
+	public static const CHITINOUS_SPIDER_LEGS:int = 15;//button 0 on 2nd page of metamorph
 	public static const DRIDER:int                = 16;
 	public static const FOX:int                   = 17;
 	public static const DRAGON:int                = 18;
 	public static const RACCOON:int               = 19;
 	public static const FERRET:int                = 20;
 	public static const CLOVEN_HOOFED:int         = 21;
+	//public static const :int         = 22;not used anywhere legs number likely ^^
 	public static const ECHIDNA:int               = 23;
 	public static const DEERTAUR:int              = 24;//[Deprecated] use CLOVEN_HOOFED and legCount = 4
 	public static const SALAMANDER:int            = 25;
 	public static const SCYLLA:int                = 26;
 	public static const MANTIS:int                = 27;
+	//public static const :int         = 28;thunder mantis legs
 	public static const SHARK:int                 = 29;
-	public static const GARGOYLE:int              = 30;
+	public static const GARGOYLE:int              = 30;//button 0 on 3rd page of metamorph
 	public static const PLANT_HIGH_HEELS:int      = 31;
 	public static const PLANT_ROOT_CLAWS:int      = 32;
 	public static const WOLF:int                  = 33;
@@ -49,7 +51,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const RAIJU:int                 = 41;
 	public static const RED_PANDA:int             = 42;
 	public static const GARGOYLE_2:int            = 43;
-	public static const AVIAN:int            	  = 44;
+	public static const AVIAN:int            	  = 44;//button 0 on 4th page of metamorph
 	public static const GRYPHON:int            	  = 45;
 	public static const ORC:int	            	  = 46;
 	// Don't forget to add new types in DebugMenu.as list LOWER_TYPE_CONSTANTS

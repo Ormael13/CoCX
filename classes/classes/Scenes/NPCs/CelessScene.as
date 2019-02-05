@@ -17,7 +17,7 @@ import flash.utils.getQualifiedClassName;
 
 /**
  * ...
- * @author Oxdeception
+ * @author Oxdeception, aimozg, Ormael
  */
 public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	private static const _ageIsAdult:int = -1;
@@ -39,7 +39,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				CoC.instance.player.level >= 10
 				&& !CoC.instance.player.isPregnant()
 				&& !instance.armorFound
-				&& instance._age == 0
+				&& (instance._age == 0 || instance._age < -1)
 		);
 	}
 
@@ -202,7 +202,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	}
 
     public function birthScene():void {
-		if (_age == _ageDidPregnancy) {
+		if (_age != _ageShouldDoBirth) {
 			_age = _ageShouldDoBirth;
 		}
 		else {
@@ -250,7 +250,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			//	[armors.LMARMOR,		armors.,			armors.]
 		];
 		clearOutput();
-		outputText("<b>"+_name+" can empower items using materials gems and her innate magic to bless/corrupt gear. Would you like her to create a legendary item and in that case which?</b>");
+		outputText("<b>"+_name+" can empower items using materials gems and her innate magic to bless/corrupt gear. Would you like her to create an epic item and in that case which?</b>");// legendary
 //Celess
 		var selectfrom:int = isCorrupt ? 2 : 1;
 		var selectMenu:ButtonDataList = new ButtonDataList();
@@ -282,7 +282,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			display("strings/forest-unicorn/intro/introAfterNightmare");
 			menu();
 			addButton(0, "Back", camp.returnToCampUseOneHour);
-			if (player.hasKeyItem("Nightmare Horns")) addButton(1, "Show proof", celessUnicornIntro2);
+			if (player.hasKeyItem("Nightmare Horns") >= 0) addButton(1, "Show proof", celessUnicornIntro2);
 			else addButtonDisabled(1, "Show proof", "Req. to have Nightmare Horns.");
 			return;
 		}
@@ -325,7 +325,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				break;
 			case 3:
 				scene("strings/forest-unicorn/okay-female", { $wasMale: wasMale, $isTaur: player.isTaur() } );
-				if (player.hasKeyItem("Nightmare Horns")) player.removeKeyItem("Nightmare Horns");
+				if (player.hasKeyItem("Nightmare Horns") >= 0) player.removeKeyItem("Nightmare Horns");
 				player.createPerk(PerkLib.UnicornBlessing, 0, 0, 0, 0);
 				player.cor = 0;
 				player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);
@@ -369,7 +369,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				break;
 			case 3:
 				scene("strings/forest-unicorn/okay-female", { $wasMale: wasMale, $isTaur: player.isTaur() } );
-				if (player.hasKeyItem("Nightmare Horns")) player.removeKeyItem("Nightmare Horns");
+				if (player.hasKeyItem("Nightmare Horns") >= 0) player.removeKeyItem("Nightmare Horns");
 				player.createPerk(PerkLib.UnicornBlessing, 0, 0, 0, 0);
 				player.cor = 0;
 				player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);

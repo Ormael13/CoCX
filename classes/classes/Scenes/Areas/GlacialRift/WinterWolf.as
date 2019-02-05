@@ -54,11 +54,11 @@ public class WinterWolf extends Monster
 				}
 				else {
 					player.createStatusEffect(StatusEffects.Frostbite,0,0,0,0);
-					damage += 20 + Math.round(rand(str / 4));
+					damage += 30 + Math.round(rand(str / 3));
 					player.takeIceDamage(damage);
 					dmgtaken += damage;
 				}
-				damage += 20 + Math.round(rand(str / 4));
+				damage += 30 + Math.round(rand(str / 3));
 				player.takeIceDamage(damage);
 				dmgtaken += damage;
 				outputText(" (<b><font color=\"#800000\">" + damage + "</font></b>)");
@@ -71,11 +71,11 @@ public class WinterWolf extends Monster
 					player.addStatusValue(StatusEffects.Frostbite,1,5);
 				}
 				else {
-					damage += 20 + Math.round(rand(str / 4));
+					damage += 30 + Math.round(rand(str / 3));
 					player.takeIceDamage(damage);
 					dmgtaken += damage;
 				}
-				damage += 20 + Math.round(rand(str / 4));
+				damage += 30 + Math.round(rand(str / 3));
 				player.takeIceDamage(damage);
 				dmgtaken += damage;
 				outputText(" (<b><font color=\"#800000\">" + damage + "</font></b>)");
@@ -86,7 +86,7 @@ public class WinterWolf extends Monster
 			outputText("The wolf suddenly grab you crushing you under its paw as it start tearing you apart with its maw.");
 			player.createStatusEffect(StatusEffects.WolfHold,0,0,0,0); 
 			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
-				player.takePhysDamage(8+rand(10));
+				player.takePhysDamage(12+rand(15));
 			}
 		}
 		
@@ -118,20 +118,20 @@ public class WinterWolf extends Monster
 			this.skin.growFur({color:"glacial white"});
 			this.hairColor = "glacial white";
 			this.hairLength = 8;
-			initStrTouSpeInte(130, 160, 80, 90);
+			initStrTouSpeInte(150, 190, 100, 90);
 			initWisLibSensCor(80, 20, 15, 75);
 			this.weaponName = "paws";
 			this.weaponVerb="paw-slash";
-			this.weaponAttack = 37;
+			this.weaponAttack = 43;
 			this.armorName = "fur";
-			this.armorDef = 27;
-			this.armorMDef = 18;
+			this.armorDef = 36;
+			this.armorMDef = 27;
 			this.bonusHP = 800;
 			this.bonusLust = 10;
 			this.lust = 10;
 			this.lustVuln = 0.4;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 33;
+			this.level = 47;
 			this.gems = 100 + rand(25);
 			this.drop = new WeightedDrop()
 					.add(consumables.CHILLYP, 1)

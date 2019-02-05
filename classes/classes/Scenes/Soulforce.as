@@ -34,6 +34,7 @@ import classes.Scenes.Monsters.DarkElfScout;
 import classes.Scenes.Monsters.DarkElfSlaver;
 import classes.Scenes.Monsters.DarkElfSniper;
 import classes.Scenes.NPCs.Aria;
+import classes.Scenes.NPCs.Aurora;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.Diana;
 import classes.Scenes.NPCs.Electra;
@@ -194,7 +195,7 @@ use namespace CoC;
 			//addButton(5, "Upgrade", UpgradeItems).hint("."); //ulepszanie itemów
 			if (player.findPerk(PerkLib.Metamorph) >= 0) addButton(6, "Metamorf", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold freely your body.");//używanie metamorfowania z użyciem soulforce
 			if (player.findPerk(PerkLib.SoulSense) >= 0) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounter."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
-			addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
+			//addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
 			addButton(14, "Back", playerMenu);
 		}//w lini 28 w oOnLoadVariables zmian wprowadzić i w lini conditionalConverters w folderze parser zmian dot. wraith wprowadzić, zablokować perki soul king to soul ancestor w momencie robienia release version
 		public function SoulforceCheats():void {
@@ -210,12 +211,53 @@ use namespace CoC;
 			addButton(5, "Enemies", EnemiesMenu).hint("For spawning various enemies to test fight them.");
 			addButton(6, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
 			addButton(7, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
-			addButton(8, "Celess", celessIntroForced).hint("Due to hard time getting her intro here it's.");
-			addButton(10, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
-			addButton(11, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
-			addButton(12, "PerkGalore1", GargoyleMenu2);
-			addButton(13, "PerkGalore2", GargoyleMenu3);
+			if (flags[kFLAGS.HIDDEN_CAVE_BOSSES] >= 1 && flags[kFLAGS.TED_LVL_UP] == 0) addButton(8, "DragonBoyFix", settingTedFlag).hint("To fix one flag for him before save update would fix it anyway so testers can test him before public ver update time ^^");
+			if (player.perkv2(PerkLib.ProductivityDrugs) > 10) addButton(9, "P.Drugs Fix", fixingProductionDrugs).hint("To fix Productive Drug perk wild rampage.");
+			if (flags[kFLAGS.AURORA_LVL] >= 1) addButton(9, "Aurora", FightAurora).hint("Just to test her initial sparring form for now.");
+			//addButton(9, "ChimeraBodyUlt", ChimeraBodyUltimateStage).hint("Ultimate Stage of Chimera Body for tests and lulz. Now with on/off switch for more lulz.");
+			addButton(10, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
+			addButton(11, "PerkGalore1", GargoyleMenu2);
+			addButton(12, "PerkGalore2", GargoyleMenu3);
+			addButton(13, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
 			addButton(14, "Back", accessSoulforceMenu);
+		}
+public function FightAria():void {
+	clearOutput();
+	outputText("Entering battle with Melkie! Enjoy ^^");
+	startCombat(new Aria());
+}
+public function FightAurora():void {
+	clearOutput();
+	outputText("Entering battle with Aurora! Enjoy ^^");
+	startCombat(new Aurora());
+}
+public function settingTedFlag():void {
+	clearOutput();
+	outputText("Fixed flag to encounter dragon boy outside hidden cave beofre save update will fix it for public users.");
+	flags[kFLAGS.TED_DEFEATS_COUNTER] = 1;
+	flags[kFLAGS.TED_LVL_UP] = 1;
+	doNext(SoulforceCheats);
+}
+public function fixingProductionDrugs():void {
+	clearOutput();
+	outputText("Fixed flag to encounter dragon boy outside hidden cave beofre save update will fix it for public users.");
+	player.removePerk(PerkLib.ProductivityDrugs);
+	player.createPerk(PerkLib.ProductivityDrugs,0,10,0,0);
+	player.addPerkValue(PerkLib.ProductivityDrugs, 1, Math.round(player.cor/2));	//minlibido += CURRENT cor / 2
+	player.addPerkValue(PerkLib.ProductivityDrugs, 3, player.lib);	//cumproduction += CURRENT lib (same as cum witch blessing)
+	player.addPerkValue(PerkLib.ProductivityDrugs, 4, player.lib);//milkproduction += CURRENT lib (same as level1 milkmaid)
+	doNext(SoulforceCheats);
+}
+		public function ChimeraBodyUltimateStage():void {
+			if (player.hasPerk(PerkLib.ChimericalBodyUltimateStage)) {
+				player.removePerk(PerkLib.ChimericalBodyUltimateStage);
+				outputText("\n\n<b>(Lost Perk: Chimerical Body: Ultimate Stage!)</b>");
+			}
+			else {
+				player.createPerk(PerkLib.ChimericalBodyUltimateStage, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Chimerical Body: Ultimate Stage!)</b>");
+			}
+			doNext(SoulforceCheats);
 		}
 		public function GargoyleMenu2():void {
 			if (player.findPerk(PerkLib.CorruptedKitsune) < 0) {
@@ -306,9 +348,133 @@ use namespace CoC;
 				player.createPerk(PerkLib.SensualLover, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Sensual Lover!)</b>");
 			}
+			if (player.findPerk(PerkLib.Refinement) >= 0 && player.findPerk(PerkLib.Saturation) < 0) {
+				player.createPerk(PerkLib.Saturation, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Saturation!)</b>");
+				player.createPerk(PerkLib.Perfection, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Perfection!)</b>");
+				player.createPerk(PerkLib.Creationism, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Creationism!)</b>");
+			}
+			if (player.findPerk(PerkLib.InControl) >= 0 && player.findPerk(PerkLib.Metamorphable) < 0) {
+				player.createPerk(PerkLib.Metamorphable, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Metamorphable!)</b>");
+				player.createPerk(PerkLib.SoulPowered, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Soul Powered!)</b>");
+				player.createPerk(PerkLib.AllSeeing, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: All-Seeing!)</b>");
+			}
+			if (player.findPerk(PerkLib.BodyOfSteel) >= 0 && player.findPerk(PerkLib.MindOfSteel) < 0) {
+				player.createPerk(PerkLib.MindOfSteel, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Mind of Steel!)</b>");
+				player.createPerk(PerkLib.SoulOfSteel, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Soul of Steel!)</b>");
+				player.createPerk(PerkLib.GodOfSteel, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: God of Steel!)</b>");
+			}
+			if (player.findPerk(PerkLib.Collector) >= 0 && player.findPerk(PerkLib.Hoarder) < 0) {
+				player.createPerk(PerkLib.Hoarder, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Hoarder!)</b>");
+				player.createPerk(PerkLib.BlessedByLadyGodiva, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Blessed by Lady Godiva!)</b>");
+				player.createPerk(PerkLib.LadyGodivasFavoriteChild, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Lady Godiva's favorite Child!)</b>");
+			}
+			if (player.findPerk(PerkLib.Paramedic) >= 0 && player.findPerk(PerkLib.SurgeonsAide) < 0) {
+				player.createPerk(PerkLib.SurgeonsAide, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Surgeon's Aide!)</b>");
+				player.createPerk(PerkLib.Surgeon, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Surgeon!)</b>");
+				player.createPerk(PerkLib.Medic, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: MEDIC!!!!)</b>");
+			}
+			if (player.findPerk(PerkLib.Pastor) >= 0 && player.findPerk(PerkLib.Saint) < 0) {
+				player.createPerk(PerkLib.Saint, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Saint!)</b>");
+				player.createPerk(PerkLib.Cardinal, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Cardinal!)</b>");
+				player.createPerk(PerkLib.Pope, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Pope!)</b>");
+			}
+			if (player.findPerk(PerkLib.Principle) >= 0 && player.findPerk(PerkLib.Dean) < 0) {
+				player.createPerk(PerkLib.Dean, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Dean!)</b>");
+				player.createPerk(PerkLib.President, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: President!)</b>");
+				player.createPerk(PerkLib.Nerd, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: NERD!!!!)</b>");
+			}
+			if (player.findPerk(PerkLib.EngineersFriend) >= 0 && player.findPerk(PerkLib.SnipersFriend) < 0) {
+				player.createPerk(PerkLib.SnipersFriend, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Sniper's Friend!)</b>");
+				player.createPerk(PerkLib.SpysEnemy, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Spy's Enemy!)</b>");
+				player.createPerk(PerkLib.ShitYouTouchedSasha, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: SHIT YOU TOUCHED SASHA!!!)</b>");
+			}
+			if (player.findPerk(PerkLib.SkippingWork) >= 0 && player.findPerk(PerkLib.Napping) < 0) {
+				player.createPerk(PerkLib.Napping, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Napping!)</b>");
+				player.createPerk(PerkLib.ZZZ, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: ZZZ!)</b>");
+				player.createPerk(PerkLib.Lazy, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: LAZY!!!!)</b>");
+			}/*		Slut
+			if (player.findPerk(PerkLib.) >= 0 && player.findPerk(PerkLib.) < 0) {
+				player.createPerk(PerkLib., 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: !)</b>");
+				player.createPerk(PerkLib., 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: !)</b>");
+				player.createPerk(PerkLib., 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: !)</b>");
+			}*/
+			if (player.findPerk(PerkLib.Hammer) >= 0 && player.findPerk(PerkLib.Anvil) < 0) {
+				player.createPerk(PerkLib.Anvil, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Anvil!)</b>");
+				player.createPerk(PerkLib.Weap0n, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Weapon!)</b>");
+				player.createPerk(PerkLib.Arm0r, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Armor!)</b>");
+			}
+			if (player.findPerk(PerkLib.BrothelOwner) >= 0 && player.findPerk(PerkLib.Pornstar) < 0) {
+				player.createPerk(PerkLib.Pornstar, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Pornstar!)</b>");
+				player.createPerk(PerkLib.SexChampion, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Sex Champion!)</b>");
+				player.createPerk(PerkLib.SexDeity, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Sex Deity!)</b>");
+			}
 			doNext(SoulforceCheats);
 		}
 		public function GargoyleMenu3():void {
+			if (player.findPerk(PerkLib.PrestigeJobNecromancer) < 0) {
+				player.createPerk(PerkLib.PrestigeJobNecromancer, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Prestige Job: Necromancer!)</b>");
+			}
+			if (player.findPerk(PerkLib.PrestigeJobSeer) < 0) {
+				player.createPerk(PerkLib.PrestigeJobSeer, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Prestige Job: Seer!)</b>");
+			}
+			if (player.findPerk(PerkLib.PrestigeJobSoulArcher) < 0) {
+				player.createPerk(PerkLib.PrestigeJobSoulArcher, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Prestige Job: Soul Archer!)</b>");
+			}
+			if (player.findPerk(PerkLib.PiercedCrimstone) < 0) {
+				player.createPerk(PerkLib.PiercedCrimstone, 5, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Pierced: Crimstone!)</b>");
+			}
+			if (player.findPerk(PerkLib.PiercedFertite) < 0) {
+				player.createPerk(PerkLib.PiercedFertite, 5, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Pierced: Fertite!)</b>");
+			}
+			if (player.findPerk(PerkLib.PiercedFurrite) < 0) {
+				player.createPerk(PerkLib.PiercedFurrite, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Pierced: Furrite!)</b>");
+			}
+			if (player.findPerk(PerkLib.PiercedLethite) < 0) {
+				player.createPerk(PerkLib.PiercedLethite, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Pierced: Lethite!)</b>");
+			}
 			if (player.findPerk(PerkLib.BroodMother) < 0) {
 				player.createPerk(PerkLib.BroodMother, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Brood Mother!)</b>");
@@ -421,17 +587,56 @@ use namespace CoC;
 				player.createPerk(PerkLib.Enlightened, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Enlightened!)</b>");
 			}
+			if (player.findPerk(PerkLib.HistoryAlchemist) < 0 && player.findPerk(PerkLib.PastLifeAlchemist) < 0) {
+				player.createPerk(PerkLib.HistoryAlchemist, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: History: Alchemist!)</b>");
+			}
+			if (player.findPerk(PerkLib.HistoryCultivator) < 0 && player.findPerk(PerkLib.PastLifeCultivator) < 0) {
+				player.createPerk(PerkLib.HistoryCultivator, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: History: Cultivator!)</b>");
+			}
+			if (player.findPerk(PerkLib.HistoryFighter) < 0 && player.findPerk(PerkLib.PastLifeFighter) < 0) {
+				player.createPerk(PerkLib.HistoryFighter, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: History: Fighter!)</b>");
+			}
+			if (player.findPerk(PerkLib.HistoryFortune) < 0 && player.findPerk(PerkLib.PastLifeFortune) < 0) {
+				player.createPerk(PerkLib.HistoryFortune, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: History: Fortune!)</b>");
+			}
+			if (player.findPerk(PerkLib.HistoryHealer) < 0 && player.findPerk(PerkLib.PastLifeHealer) < 0) {
+				player.createPerk(PerkLib.HistoryHealer, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: History: Healer!)</b>");
+			}
+			if (player.findPerk(PerkLib.HistoryReligious) < 0 && player.findPerk(PerkLib.PastLifeReligious) < 0) {
+				player.createPerk(PerkLib.HistoryReligious, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: History: Religious!)</b>");
+			}
+			if (player.findPerk(PerkLib.HistoryScholar) < 0 && player.findPerk(PerkLib.PastLifeScholar) < 0) {
+				player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: History: Scholar!)</b>");
+			}
+			if (player.findPerk(PerkLib.HistoryScout) < 0 && player.findPerk(PerkLib.PastLifeScout) < 0) {
+				player.createPerk(PerkLib.HistoryScout, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: History: Scout!)</b>");
+			}
+			if (player.findPerk(PerkLib.HistorySlacker) < 0 && player.findPerk(PerkLib.PastLifeSlacker) < 0) {
+				player.createPerk(PerkLib.HistorySlacker, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: History: Slacker!)</b>");
+			}
+			if (player.findPerk(PerkLib.HistorySlut) < 0 && player.findPerk(PerkLib.PastLifeSlut) < 0) {
+				player.createPerk(PerkLib.HistorySlut, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: History: Slut!)</b>");
+			}
+			if (player.findPerk(PerkLib.HistorySmith) < 0 && player.findPerk(PerkLib.PastLifeSmith) < 0) {
+				player.createPerk(PerkLib.HistorySmith, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: History: Smith!)</b>");
+			}
+			if (player.findPerk(PerkLib.HistoryWhore) < 0 && player.findPerk(PerkLib.PastLifeWhore) < 0) {
+				player.createPerk(PerkLib.HistoryWhore, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: History: Whore!)</b>");
+			}
 			doNext(SoulforceCheats);
 		}
-public function celessIntroForced():void {
-	clearOutput();
-	CelessScene.instance.birthScene();
-}
-public function FightAria():void {
-	clearOutput();
-	outputText("Entering battle with Melkie! Enjoy ^^");
-	startCombat(new Aria());
-}
 		public function StatsAscensionMenu():void {
 			menu();
 			addButton(0, "EarlyAscension", EarlyAscension).hint("Allowing to premature ascension.");
@@ -911,20 +1116,20 @@ public function FightAria():void {
 			menu();
 			addButton(0, "Rap. Perk", AddRapPerk).hint("Add Raphael Rapier Perk and 1 Dragon Rapier.  USE only ONCE to not break the game!");
 			addButton(1, "Sky Pearl", AddSkyPoisonPearl).hint("Add 1 Sky Poison Pearl.");
-			addButton(2, "Staff", AddStaff).hint("Add 1 Eldritch Staff.");
+			addButton(2, "Ascensus", AddTheStaffs).hint("Add set of items for Ascensus.");
 			addButton(3, "Evelyn", AddTheEvelyn).hint("Add 1 Evelyn Crossbow.");
-			addButton(4, "MasterGloves", AddMasterGloves).hint("Add 1 master Gloves.");
-			addButton(5, "G.Thr.Axes", AddGnollThrowingAxes).hint("Add 1 Gnoll Throwing Axes.");
-			addButton(6, "Ascensus", AddTheStaffs).hint("Add set of items for Ascensus.");
-			addButton(7, "DualLAxes", AddDualMinoAxes).hint("Add 1 pair of Large Axes.");
-		//	addButton(8, "NineTailWhip", AddNineTailWhip).hint("Add 1 Nine Tail Whip.");
-			addButton(8, "SH/SPK/OBN", AddTheSeerHairpinAndCo).hint("Add 1 Seer's Hairpin, Sakura Petal Kimono and Oni bead necklace.");
-			addButton(9, "Hodr's Bow", AddHodrsBow).hint("Add 1 Hodr's Bow.");
-		//	addButton(9, "L Ayo Arm", AddLightAyoArmor).hint("Add 1 Light Ayo Armor for testing purposes.");
-			addButton(10, "TruestriekSword", AddTruestrikeSword).hint("Add 1 Truestrike Sword.");
-			addButton(11, "ScepterComm", AddSceptreOfCommand).hint("Add 1 Sceptre of Command.");
-			addButton(12, "D.Scythe", AddTheDemonicScythe).hint("Add 1 Demonic Scythe.");
-		//	addButton(12, "CatONIneTWhip", AddCatONineTailWhip).hint("Add 1 Bastet Whip.");
+			addButton(4, "DualLAxes", AddDualMinoAxes).hint("Add 1 pair of Large Axes.");
+			addButton(5, "T.Dagger", AddThrowingDagger).hint("Add 1 Throwing Dagger.");
+			addButton(6, "Tri-Dagger", AddTriDagger).hint("Add 1 Tri-Dagger.");
+			addButton(7, "Dagger Whip", AddDaggerWhip).hint("Add 1 Dagger Whip.");
+			addButton(8, "C.S.Necklace", AddCrinosShapeNecklace).hint("Add 1 Crinos Shape necklace.");
+			addButton(9, "Duel.Pistol", AddDuelingPistol).hint("Add 1 Dueling pistol.");
+			addButton(10, "ADBShotgun", AddAntiqueDoubleBarrelShotgun).hint("Add 1 Antique double barrel shotgun.");
+			addButton(11, "ADBScattergun", AddAntiqueDoubleBarrelScattergun).hint("Add 1 Antique double barrel scattergun.");
+			//addButton(9, "NineTailWhip", AddNineTailWhip).hint("Add 1 Nine Tail Whip.");
+			//addButton(10, "CatONIneTWhip", AddCatONineTailWhip).hint("Add 1 Bastet Whip.");
+			//addButton(10, "L Ayo Arm", AddLightAyoArmor).hint("Add 1 Light Ayo Armor for testing purposes.");
+			addButton(12, "MatrixArmory1", AddTheSeerHairpinAndCo).hint("Adds: 1 Eldritch Staff, 1 master Gloves, 1 Gnoll Throwing Axes, 1 Hodr's Bow, 1 Truestrike Sword, 1 Sceptre of Command, 1 Demonic Scythe, 1 Seer's Hairpin, Sakura Petal Kimono, Oni bead necklace");
 			addButton(13, "InqTome", AddTheInquisitorsTome).hint("Add 1 Inquisitor's Tome.");
 			addButton(14, "Back", SoulforceCheats);
 		}
@@ -941,6 +1146,7 @@ public function FightAria():void {
 			addButton(7, "Skelp", AddSkelp).hint("Add 1 Skelp (WIP Melkie TF).");
 			//addButton(7, "V.D.ARC", AddVeryDilutedArcaneRegenConcotion).hint("Add 1 very diluted Arcane Regen Concotion.");
 			//addButton(8, "D.ARC", AddDilutedArcaneRegenConcotion).hint("Add 1 diluted Arcane Regen Concotion.");
+			addButton(8, "D.Fruit", AddDisplacerFruit).hint("Add 1 Displacer Fruit.");
 			addButton(9, "SBMan", AddSoulBlastManual).hint("Add 1 Soul Blast manual.");
 			addButton(10, "White B.", AddWhiteBook).hint("Add 1 White Book.");
 			addButton(11, "Black B.", AddBlackBook).hint("Add 1 Black Book.");
@@ -968,12 +1174,12 @@ public function FightAria():void {
 			addButton(1, "Marae", FightMarae).hint("Test fight with Marae (depending on game stage she can be buffed or unbuffed).");
 			addButton(2, "Sonya", FightSonya).hint("Test fight with Sonya.");
 			addButton(3, "RyuBi", FightRyuBi).hint("Test fight with RyuBi.");
-			addButton(4, "Aria", FightAria).hint("Test fight with melkie Aria.");
-			addButton(5, "DE Scout", FightDarkElfScout).hint("Test fight with Dark Elf Scout. (lvl 15)");
-			addButton(6, "DE Slaver", FightDarkElfSlaver).hint("Test fight with Dark Elf Slaver. (lvl 27)");
-			addButton(7, "DE Ranger", FightDarkElfRanger).hint("Test fight with Dark Elf Ranger. (lvl 39)");
-			addButton(8, "DE Sniper", FightDarkElfSniper).hint("Test fight with Dark Elf Sniper. (lvl 51)");
-			addButton(9, "Electra", FightElectra).hint("Test fight with Electra.");
+			addButton(4, "Aria", FightAria).hint("Test fight with melkie huntress Aria.");
+			addButton(5, "DE Ranger", FightDarkElfRanger).hint("Test fight with Dark Elf Ranger. (lvl 39)");
+			addButton(6, "DE Sniper", FightDarkElfSniper).hint("Test fight with Dark Elf Sniper. (lvl 51)");
+			addButton(7, "Electra", FightElectra).hint("Test fight with Electra.");
+			addButton(8, "LvLUP Aurora", LvLUPAurora).hint("LvL UP forcefully Aurora for testing purpose up to the limit.");
+			addButton(9, "DELvL Aurora", DELvLAurora).hint("DE LvL forcefully Aurora for testing purpose down toward the lvl 1.");
 			addButton(10, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
 			addButton(11, "DELvL Eva", DELvLEva).hint("DE LvL forcefully Evangeline for testing purpose down toward the lvl 12.");
 			addButton(12, "FeralT.Beast", FightFeralImp).hint("Test fight with feral tentacle beast.");
@@ -999,10 +1205,6 @@ public function FightAria():void {
 		public function AddFeralImpSkull():void {
 			outputText("\n\n<b>(Gained 1 Feral Imp Skull!)</b>\n\n");
 			inventory.takeItem(useables.FIMPSKL, MaterialMenu);
-		}
-		public function AddStaff():void {
-			outputText("\n\n<b>(Gained 1 Eldritch Staff!)</b>\n\n");
-			inventory.takeItem(weapons.E_STAFF, EquipmentMenu);
 		}
 		public function AddSpiderSilk():void {
 			outputText("\n\n<b>(Gained 1 Spider Silk!)</b>\n\n");
@@ -1072,6 +1274,10 @@ public function FightAria():void {
 			outputText("\n\n<b>(Gained 1 Soul Blast Manual!)</b>\n\n");
 			inventory.takeItem(consumables.SOBLMAN, NonEquipmentMenu);
 		}
+		public function AddDisplacerFruit():void {
+			outputText("\n\n<b>(Gained 1 Displacer Fruit!)</b>\n\n");
+			inventory.takeItem(consumables.D_FRUIT, NonEquipmentMenu);
+		}
 		public function AddSkybornSeed():void {
 			outputText("\n\n<b>(Gained 1 Skyborn Seed!)</b>\n\n");
 			inventory.takeItem(consumables.SKYSEED, NonEquipmentMenu);
@@ -1108,41 +1314,73 @@ public function FightAria():void {
 			outputText("\n\n<b>(Gained 1 Evelyn Crossbow!)</b>\n\n");
 			inventory.takeItem(weaponsrange.EVELYN_, EquipmentMenu);
 		}
-		public function AddMasterGloves():void {
-			outputText("\n\n<b>(Gained 1 Master Gloves!)</b>\n\n");
-			inventory.takeItem(weapons.MASTGLO, EquipmentMenu);
+		public function AddThrowingDagger():void {
+			outputText("\n\n<b>(Gained 1 Throwing Dagger!)</b>\n\n");
+			inventory.takeItem(weapons.TDAGGER, EquipmentMenu);
 		}
-		public function AddGnollThrowingAxes():void {
-			outputText("\n\n<b>(Gained 1 Gnoll Throwing Axes!)</b>\n\n");
-			inventory.takeItem(weaponsrange.GTHRAXE, EquipmentMenu);
+		public function AddTriDagger():void {
+			outputText("\n\n<b>(Gained 1 Tri-Dagger!)</b>\n\n");
+			inventory.takeItem(weapons.TRIDAG, EquipmentMenu);
 		}
-		public function AddHodrsBow():void {
-			outputText("\n\n<b>(Gained 1 Hodr's Bow!)</b>\n\n");
-			inventory.takeItem(weaponsrange.BOWHODR, EquipmentMenu);
+		public function AddDaggerWhip():void {
+			outputText("\n\n<b>(Gained 1 Dagger Whip!)</b>\n\n");
+			inventory.takeItem(weapons.DAGWHIP, EquipmentMenu);
+		}
+		public function AddCrinosShapeNecklace():void {
+			outputText("\n\n<b>(Gained 1 Crinos Shape necklace!)</b>\n\n");
+			inventory.takeItem(necklaces.CSNECK, EquipmentMenu);
+		}
+		public function AddDuelingPistol():void {
+			outputText("\n\n<b>(Gained 1 Dueling pistol!)</b>\n\n");
+			inventory.takeItem(weaponsrange.DUEL_P_, EquipmentMenu);
+		}
+		public function AddAntiqueDoubleBarrelShotgun():void {
+			outputText("\n\n<b>(Gained 1 Antique double barrel shotgun!)</b>\n\n");
+			inventory.takeItem(weaponsrange.ADBSHOT, EquipmentMenu);
+		}
+		public function AddAntiqueDoubleBarrelScattergun():void {
+			outputText("\n\n<b>(Gained 1 Antique double barrel scattergun!)</b>\n\n");
+			inventory.takeItem(weaponsrange.ADBSCAT, EquipmentMenu);
 		}
 		public function AddTheSeerHairpinAndCo():void {
-			outputText("\n\n<b>(Gained 1 Seer's Hairpin!)</b>\n\n");
-			inventory.takeItem(headjewelries.SEERPIN, AddTheSeerHairpinAndCo1);
+			outputText("\n\n<b>(Gained 1 Eldritch Staff!)</b>\n\n");
+			inventory.takeItem(weapons.E_STAFF, AddTheSeerHairpinAndCo1);
 		}
 		public function AddTheSeerHairpinAndCo1():void {
-			outputText("\n\n<b>(Gained 1 Sakura Petal Kimono!)</b>\n\n");
-			inventory.takeItem(armors.SPKIMO, AddTheSeerHairpinAndCo2);
+			outputText("\n\n<b>(Gained 1 Master Gloves!)</b>\n\n");
+			inventory.takeItem(weapons.MASTGLO, AddTheSeerHairpinAndCo2);
 		}
 		public function AddTheSeerHairpinAndCo2():void {
+			outputText("\n\n<b>(Gained 1 Gnoll Throwing Axes!)</b>\n\n");
+			inventory.takeItem(weaponsrange.GTHRAXE, AddTheSeerHairpinAndCo3);
+		}
+		public function AddTheSeerHairpinAndCo3():void {
+			outputText("\n\n<b>(Gained 1 Hodr's Bow!)</b>\n\n");
+			inventory.takeItem(weaponsrange.BOWHODR, AddTheSeerHairpinAndCo4);
+		}
+		public function AddTheSeerHairpinAndCo4():void {
+			outputText("\n\n<b>(Gained 1 Sceptre of Command!)</b>\n\n");
+			inventory.takeItem(weapons.SCECOMM, AddTheSeerHairpinAndCo5);
+		}
+		public function AddTheSeerHairpinAndCo5():void {
+			outputText("\n\n<b>(Gained 1 Truestrike Sword!)</b>\n\n");
+			inventory.takeItem(weapons.TRSTSWO, AddTheSeerHairpinAndCo6);
+		}
+		public function AddTheSeerHairpinAndCo6():void {
+			outputText("\n\n<b>(Gained 1 Demonic Scythe!)</b>\n\n");
+			inventory.takeItem(weapons.DEMSCYT, AddTheSeerHairpinAndCo7);
+		}
+		public function AddTheSeerHairpinAndCo7():void {
+			outputText("\n\n<b>(Gained 1 Seer's Hairpin!)</b>\n\n");
+			inventory.takeItem(headjewelries.SEERPIN, AddTheSeerHairpinAndCo8);
+		}
+		public function AddTheSeerHairpinAndCo8():void {
+			outputText("\n\n<b>(Gained 1 Sakura Petal Kimono!)</b>\n\n");
+			inventory.takeItem(armors.SPKIMO, AddTheSeerHairpinAndCo9);
+		}
+		public function AddTheSeerHairpinAndCo9():void {
 			outputText("\n\n<b>(Gained 1 Oni bead necklace!)</b>\n\n");
 			inventory.takeItem(necklaces.OBNECK, EquipmentMenu);
-		}
-		public function AddTruestrikeSword():void {
-			outputText("\n\n<b>(Gained 1 Truestrike Sword!)</b>\n\n");
-			inventory.takeItem(weapons.TRSTSWO, EquipmentMenu);
-		}
-		public function AddTheDemonicScythe():void {
-			outputText("\n\n<b>(Gained 1 Demonic Scythe!)</b>\n\n");
-			inventory.takeItem(weapons.DEMSCYT, EquipmentMenu);
-		}
-		public function AddSceptreOfCommand():void {
-			outputText("\n\n<b>(Gained 1 Sceptre of Command!)</b>\n\n");
-			inventory.takeItem(weapons.SCECOMM, EquipmentMenu);
 		}
 		public function AddTheInquisitorsTome():void {
 			outputText("\n\n<b>(Gained 1 Inquisitor's Tome!)</b>\n\n");
@@ -1698,16 +1936,6 @@ public function FightAria():void {
 			outputText("Entering battle with RyuBi! Enjoy ^^");
 			startCombat(new RyuBiDragon());
 		}
-		public function FightDarkElfScout():void {
-			clearOutput();
-			outputText("Entering battle with Dark Elf Scout! Enjoy ^^");
-			startCombat(new DarkElfScout());
-		}
-		public function FightDarkElfSlaver():void {
-			clearOutput();
-			outputText("Entering battle with Dark Elf Slaver! Enjoy ^^");
-			startCombat(new DarkElfSlaver());
-		}
 		public function FightDarkElfRanger():void {
 			clearOutput();
 			outputText("Entering battle with Dark Elf Ranger! Enjoy ^^");
@@ -1722,6 +1950,16 @@ public function FightAria():void {
 			clearOutput();
 			outputText("Entering battle with Electra! Enjoy ^^");
 			startCombat(new Electra());
+		}
+		public function LvLUPAurora():void {
+			outputText("\n\n<b>Aurora get stronger! (cheat stop working when she reach max possible lvl for now (atm it's lvl 55))</b>");
+			if (flags[kFLAGS.AURORA_LVL] < 10) flags[kFLAGS.AURORA_LVL]++;
+			doNext(EnemiesMenu);
+		}
+		public function DELvLAurora():void {
+			outputText("\n\n<b>Aurora get weaker! (cheat stop working when she reach lvl 1)</b>");
+			if (flags[kFLAGS.AURORA_LVL] > 1) flags[kFLAGS.AURORA_LVL]--;
+			doNext(EnemiesMenu);
 		}
 		public function LvLUPEva():void {
 			outputText("\n\n<b>Evangeline get stronger! (cheat stop working when she reach max possible lvl for now (atm it's lvl 42))</b>");
@@ -2814,4 +3052,4 @@ public function FightAria():void {
 			}
 		}
 	}
-}
+}

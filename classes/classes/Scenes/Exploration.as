@@ -28,11 +28,6 @@ import classes.Scenes.Areas.Ocean.Scylla;
 public class Exploration extends BaseContent
 	{
 		public var exploreDebug:ExploreDebug = new ExploreDebug();
-		public var blightridge:BlightRidge = new BlightRidge();
-		public var beach:Beach = new Beach();
-		public var ocean:Ocean = new Ocean();
-		public var deepsea:DeepSea = new DeepSea();
-		//public var blightridge:BlightRidge = new BlightRidge();	//dla nowych lokacji
 		public var hexindao:HeXinDao = new HeXinDao();
 		public var hiddencave:HiddenCave = new HiddenCave();
 		public var TrueDemons:DemonScene = new DemonScene();
@@ -94,15 +89,14 @@ public class Exploration extends BaseContent
 			if (player.exploredLake > 0) addButton(2, "Lake", SceneLib.lake.exploreLake).hint("Visit the lake and explore the beach. \n\nRecommended level: 1" + (player.level < 3 ? "\n\nLooks like it's still quiet here!" : "") + (debug ? "\n\nTimes explored: " + player.exploredLake : ""));
 			if (player.exploredDesert > 0) addButton(3, "Desert", SceneLib.desert.exploreDesert).hint("Visit the dry desert. \n\nRecommended level: 5" + (debug ? "\n\nTimes explored: " + player.exploredDesert : ""));
 			
-			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(5, "Battlefield", battlefield.exploreBattlefield).hint("Visit the battlefield. \n\nRecommended level: 6" + (player.level < 18 ? "\n\nBut it's still too dangerous place to visit lightly!" : "") + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_] : ""));
+			if (flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] > 0) addButton(5, "Battlefield(O)", SceneLib.battlefiledouter.exploreOuterBattlefield).hint("Visit the outer battlefield. \n\nRecommended level: 6" + (player.level < 18 ? "\n\nBut it's still too dangerous place to visit lightly!" : "") + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] : ""));
 			if (player.exploredMountain > 0) addButton(6, "Mountain", SceneLib.mountain.exploreMountain).hint("Visit the mountain. \n\nRecommended level: 10" + (debug ? "\n\nTimes explored: " + player.exploredMountain : ""));
 			if (flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0) addButton(7, "Plains", SceneLib.plains.explorePlains).hint("Visit the plains. \n\nRecommended level: 14" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_PLAINS] : ""));
 			if (flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0) addButton(8, "Swamp", SceneLib.swamp.exploreSwamp).hint("Visit the wet swamplands. \n\nRecommended level: 18" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_SWAMP] : ""));
 			
-			if (flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0) addButton(10, "Blight Ridge", blightridge.exploreBlightRidge).hint("Visit the corrupted blight ridge. \n\nRecommended level: 26" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] : ""));
-			if (flags[kFLAGS.DISCOVERED_BEACH] > 0) addButton(11, "Beach", beach.exploreBeach).hint("Visit the sunny beach. \n\nRecommended level: 30" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_BEACH] : ""));
-			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(12, "Glacial Rift", SceneLib.glacialRift.exploreGlacialRift).hint("Visit the chilly glacial rift. \n\nRecommended level: 30" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] : ""));
-			if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0) addButton(13, "Volcanic Crag", SceneLib.volcanicCrag.exploreVolcanicCrag).hint("Visit the infernal volcanic crag. \n\nRecommended level: 30" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] : ""));
+			if (flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0) addButton(10, "Blight Ridge", SceneLib.blightridge.exploreBlightRidge).hint("Visit the corrupted blight ridge. \n\nRecommended level: 26" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] : ""));
+			if (flags[kFLAGS.DISCOVERED_BEACH] > 0) addButton(11, "Beach", SceneLib.beach.exploreBeach).hint("Visit the sunny beach. \n\nRecommended level: 30" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_BEACH] : ""));
+			if (flags[kFLAGS.DISCOVERED_CAVES] > 0) addButton(12, "Caves", SceneLib.caves.exploreCaves).hint("Visit the gloomy caves. \n\nRecommended level: 35" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_CAVES] : ""));
 			
 			if (debug) addButton(9, "Debug", exploreDebug.doExploreDebug);
 			addButton(4, "Next", explorePageII);
@@ -114,21 +108,23 @@ public class Exploration extends BaseContent
 			flags[kFLAGS.EXPLORATION_PAGE] = 2;
 			menu();
 			if (SceneLib.forest.deepwoodsDiscovered()) addButton(0, "Deepwoods", SceneLib.forest.exploreDeepwoods).hint("Visit the dark, bioluminescent deepwoods. \n\nRecommended level: 12" + (debug ? "\n\nTimes explored: " + SceneLib.forest.timesExploredDeepwoods() : ""));
-			if (flags[kFLAGS.DISCOVERED_OCEAN] > 0) addButton(1, "Ocean", ocean.exploreOcean).hint("Explore the ocean surface. But beware of... sharks. \n\nRecommended level: 50" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_OCEAN] : ""));
+			if (flags[kFLAGS.DISCOVERED_OCEAN] > 0) addButton(1, "Ocean", SceneLib.ocean.exploreOcean).hint("Explore the ocean surface. But beware of... sharks. \n\nRecommended level: 50" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_OCEAN] : ""));
 			if (flags[kFLAGS.DISCOVERED_OCEAN] <= 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0) addButtonDisabled(1, "Ocean", "You need to find first some way to sail over the water surface to explore this area.");
 			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(2, "High Mountain", SceneLib.highMountains.exploreHighMountain).hint("Visit the high mountains where basilisks and harpies are found. \n\nRecommended level: 20" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] : ""));
 			if (flags[kFLAGS.BOG_EXPLORED] > 0) addButton(3, "Bog", SceneLib.bog.exploreBog).hint("Visit the dark bog. \n\nRecommended level: 28" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.BOG_EXPLORED] : ""));
 			
+			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(5, "Glacial Rift", SceneLib.glacialRift.exploreGlacialRift).hint("Visit the chilly glacial rift. \n\nRecommended level: 35" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] : ""));
+			if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0) addButton(6, "Volcanic Crag", SceneLib.volcanicCrag.exploreVolcanicCrag).hint("Visit the infernal volcanic crag. \n\nRecommended level: 35" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] : ""));
 			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(5, "",	//Wuxia related area - ?latająca wyspa?
-		//	if (flags[kFLAGS.DISCOVERED_DEEP_SEA] > 0 && player.canSwimUnderwater()) addButton(6, "Deep Sea", deepsea.exploreDeepSea).hint("Visit the 'almost virgin' deep sea. But beware of... krakens. \n\nRecommended level: 75" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEEP_SEA] : ""));
-		//	if (player.gills.type == 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0) addButtonDisabled(6, "Deep Sea", "(Not yet ready to be unlockable - it wil happen after few more mod builds after 0.7c) Without any way to breathe underwater you can't explore this area!");
-			//if (flags[kFLAGS.DISCOVERED_PIT] > 0) addButton(7, "Pit", CoC.instance.abyss.explorePit).hint("Visit the pit. \n\nRecommended level: 36" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_PIT] : ""));
+		//	if (flags[kFLAGS.DISCOVERED_DEEP_SEA] > 0 && player.canSwimUnderwater()) addButton(7, "Deep Sea", SceneLib.deepsea.exploreDeepSea).hint("Visit the 'almost virgin' deep sea. But beware of... krakens. \n\nRecommended level: 75" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEEP_SEA] : ""));
+		//	if (player.gills.type == 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0) addButtonDisabled(7, "Deep Sea", "(Not yet ready to be unlockable - it wil happen after few more mod builds after 0.7c) Without any way to breathe underwater you can't explore this area!");
+			//if (flags[kFLAGS.DISCOVERED_PIT] > 0) addButton(8, "Pit", CoC.instance.abyss.explorePit).hint("Visit the pit. \n\nRecommended level: 36" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_PIT] : ""));
 			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(10, "",	//Wuxia related area - ?latająca wyspa?
 			//if (flags[kFLAGS.DISCOVERED_ABYSS] > 0) addButton(12, "Abyss", CoC.instance.abyss.exploreAbyss).hint("Visit the abyss. \n\nRecommended level: 51" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_ABYSS] : ""));
-			if (player.level >= 42) addButton(12, "ML Explore", tryDiscover2).hint("Explore to find new enemies.");
-			else addButtonDisabled(12, "ML Explore", "Req. lvl 42+");
-			if (player.level >= 55) addButton(13, "HL Explore", tryDiscover3).hint("Explore to find strong and dangerous enemies.");
-			else addButtonDisabled(13, "HL Explore", "Req. lvl 55+");
+			if (player.level >= 51) addButton(12, "ML Explore", tryDiscover2).hint("Explore to find new enemies.");
+			else addButtonDisabled(12, "ML Explore", "Req. lvl 51+");
+			if (player.level >= 70) addButton(13, "HL Explore", tryDiscover3).hint("Explore to find strong and dangerous enemies.");
+			else addButtonDisabled(13, "HL Explore", "Req. lvl 70+");
 			if (debug) addButton(4, "Debug", exploreDebug.doExploreDebug);
 			addButton(9, "Previous", goBackToPageI);
 			addButton(14, "Back", playerMenu);
@@ -310,9 +306,9 @@ public class Exploration extends BaseContent
 					else goblinChooser += 20;
 					//Limit chooser range
 					if (goblinChooser > 100) goblinChooser = 100;
-					if (player.level < 10 && goblinChooser >= 20) goblinChooser = 29;
-					else if (player.level < 12 && goblinChooser >= 60) goblinChooser = 49;
-					else if (player.level < 16 && goblinChooser >= 80) goblinChooser = 79;
+					if (player.level < 8 && goblinChooser >= 20) goblinChooser = 29;
+					else if (player.level < 16 && goblinChooser >= 60) goblinChooser = 49;
+					else if (player.level < 24 && goblinChooser >= 80) goblinChooser = 79;
 					//Goblin assassin!
 					if (goblinChooser >= 30 && goblinChooser < 50) {
 						SceneLib.goblinAssassinScene.goblinAssassinEncounter();
@@ -386,7 +382,8 @@ public class Exploration extends BaseContent
 			}
 			//Pack of Imps
 			else {
-				SceneLib.impScene.impPackEncounter();
+				if (rand(3) == 0) SceneLib.impScene.impPackEncounter2();
+				else SceneLib.impScene.impPackEncounter();
 				return;
 			}
 		}
@@ -470,6 +467,41 @@ public class Exploration extends BaseContent
 				return;
 			}
 		}
+		public function genericGobImpEncounters1(even:Boolean = false):void {
+			var gobimpChooser:int = rand(40);
+			//Limit chooser range
+			if (player.level < 18 && gobimpChooser >= 20) gobimpChooser = 19;
+			else if (player.level < 30 && gobimpChooser >= 30) gobimpChooser = 29;
+			clearOutput();
+			//Feral Imps pack
+			if (gobimpChooser >= 10 && gobimpChooser < 20) {
+				SceneLib.impScene.impPackEncounter2();
+				return;
+			}
+			//Imps pack
+			if (gobimpChooser >= 20 && gobimpChooser < 30) {
+				SceneLib.impScene.impPackEncounter();
+				return;
+			}
+			//Goblins Warriors
+			if (gobimpChooser >= 30) {
+				if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_WARRIOR] >= 1) {
+					SceneLib.goblinWarriorScene.goblinWarriorsEncounter();
+					spriteSelect(123);
+				}
+				else SceneLib.impScene.impPackEncounter();
+				return;
+			}
+			//Goblin Adventurers
+			else {
+				if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_ASSASSIN] >= 1) {
+					SceneLib.goblinAssassinScene.goblinAdventurersEncounter();
+					spriteSelect(24);
+				}
+				else SceneLib.impScene.impPackEncounter2();
+				return;
+			}
+		}
 		
 		//Try to find a new location - called from doExplore once the first location is found
 		public function tryDiscover():void
@@ -535,7 +567,16 @@ public class Exploration extends BaseContent
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
-				if (player.exploredDesert >= 1 && player.exploredMountain <= 0 && rand(3) == 0 && player.level >= 5) {
+				//Discover Outer Battlefield
+				if (player.exploredDesert >= 1 && flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] <= 0 && rand(3) == 0 && player.level >= 5) {
+					flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] = 1;
+					player.explored++;
+					clearOutput();
+					outputText("While exploring you run into the sight of endless field, littered with the remains of fallen soldiers from what appears to have been the demon war, this much do the horned skeletons tells. You can see some golem husk on the ground as well. It’s very plausible the war is still ongoing.\n\n<b>You've discovered the (Outer) Battlefield!</b>");
+					doNext(camp.returnToCampUseOneHour);
+					return;
+				}
+				if (flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] > 0 && player.exploredMountain <= 0 && rand(3) == 0 && player.level >= 5) {
 					outputText("Thunder booms overhead, shaking you out of your thoughts.  High above, dark clouds encircle a distant mountain peak.  You get an ominous feeling in your gut as you gaze up at it.\n\n<b>You've discovered the Mountain!</b>");
 					player.explored++;
 					player.exploredMountain = 1;
@@ -593,7 +634,17 @@ public class Exploration extends BaseContent
 					doNext(camp.returnToCampUseTwoHours);
 					return;
 				}
-				//Discover Glacial Rift!
+				//Discover Caves!
+				if (flags[kFLAGS.DISCOVERED_CAVES] <= 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0 && rand(3) == 0 && player.level >= 30) {
+					flags[kFLAGS.DISCOVERED_CAVES] = 1;
+					player.explored++;
+					clearOutput();
+					outputText("As you explore the area you run into a somewhat big hole in the landscape. You look inside unsure as it seems to lead into the depths of Mareth. Resolving yourself to chase the demons wherever they go you decide to still enter the hole discovering a full world of linked tunnels beneath Mareth ground.\n\n");
+					outputText("<b>You've discovered the Caves!</b>");
+					doNext(camp.returnToCampUseTwoHours);
+					return;
+				}
+				//Discover Glacial Rift! - do przeniesienia do Caves exploration
 				if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] <= 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && rand(3) == 0 && player.level >= 25) {
 					flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] = 1;
 					player.explored++;
@@ -603,7 +654,7 @@ public class Exploration extends BaseContent
 					doNext(camp.returnToCampUseTwoHours);
 					return;
 				}
-				//Discover Volcanic Crag!
+				//Discover Volcanic Crag! - do przeniesienia do Caves exploration
 				if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] <= 0 && flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0 && rand(3) == 0 && player.level >= 25) {
 					flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] = 1;
 					player.explored++;
@@ -614,8 +665,8 @@ public class Exploration extends BaseContent
 					return;
 				}/*
 				//Discover Abyss
-				if (player.exploredMountain >= 1 && rand(3) == 0 && flags[kFLAGS.TIMES_EXPLORED_ABYSS] <= 0 && flags[CoC.instance.dungeons.checkFactoryClear()] > 0 && (player.level >= 10) {
-					flags[kFLAGS.DISCOVERED_ABYSS] = 1;
+				if (flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && flags[kFLAGS.] <= 0 && rand(3) == 0 && player.level >= 10) {
+					flags[kFLAGS.] = 1;
 					player.explored++;
 					clearOutput();
 					outputText("You walk \n\n");
@@ -624,8 +675,8 @@ public class Exploration extends BaseContent
 					return;
 				}
 				//Discover Pit
-				if (player.exploredAbyss >= 1 && rand(3) == 0 && flags[kFLAGS.TIMES_EXPLORED_PIT] <= 0 && (player.level >= 16) {
-					flags[kFLAGS.DISCOVERED_PIT] = 1;
+				if (flags[kFLAGS.] > 0 && flags[kFLAGS.] <= 0 && rand(3) == 0 && player.level >= 16) {
+					flags[kFLAGS.] = 1;
 					player.explored++;
 					clearOutput();
 					outputText("You walk \n\n");
@@ -702,32 +753,26 @@ public class Exploration extends BaseContent
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
-		//Temporaly place of finding enemies for medium high lvl PC's (between 42 and 54)
+		//Temporaly place of finding enemies for medium high lvl PC's (between 51 and 70)
 		public function tryDiscover2():void  {
 			clearOutput();
 			if (rand(2) == 0) {
-				outputText("Traversing Mareth vast areas you're stopped by group of suspicious green shortstacks.");
-				outputText("\n\n<b>A wild Goblin Warriors Appears.</b>");
-				startCombat(new GoblinWarriors());//lvl 42 SHIELD WIELDER GROUP
-				return;
-			}
-			else {
 				outputText("Traversing Mareth vast areas you're stopped by the arrow to the <u>kne</u> 'place between ground and your waist'.");
 				outputText("\n\n<b>A wild Dark Elf Sniper Appears.</b>");
 				startCombat(new DarkElfSniper());//lvl 51
 				return;
 			}
-		}
-		//Temporaly place of finding enemies for high lvl PC's (55+)
-		public function tryDiscover3():void {
-			clearOutput();
-			if (rand(2) == 0) {
+			else {
 				outputText("Traversing Mareth vast areas you stops near something looking like a soul cultivator cave.");
 				outputText("\n\n<b>A wild Kitsune Elder Appears.</b>");
 				startCombat(new KitsuneElder());//lvl 55
 				return;
 			}
-			else if (rand(2) == 0) {
+		}
+		//Temporaly place of finding enemies for high lvl PC's (70+)
+		public function tryDiscover3():void {
+			clearOutput();
+			if (rand(2) == 0) {
 				outputText("Traversing Mareth vast areas you're suddenly found yourself underwater!!!");
 				outputText("\n\n<b>Aaaand....A wild Scylla Appears.</b>");
 				if (!player.canSwimUnderwater()) player.createStatusEffect(StatusEffects.UnderwaterOutOfAir,0,0,0,0);
@@ -766,6 +811,7 @@ public class Exploration extends BaseContent
 		
 		public function hiddencavediscovery():void {
 			flags[kFLAGS.HIDDEN_CAVE_FOUND] = 1;
+			clearOutput();
 			outputText("\nYou aproach what looks like a cave at first but the shattered bones on the ground hint to something else. Still where theres bones and dead explorer is bound to be treasure. The entrance is decorated with a pair of fiery torch");
 			if (silly()) outputText(" and a sparkling arrow shaped sign post tell 'please come in adventurer, I'm in need of more bony decoration'");
 			outputText(".\n\n");

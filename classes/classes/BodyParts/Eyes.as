@@ -16,7 +16,7 @@ public class Eyes extends BodyPart {
 	public static const DEVIL:int                = 11;
 	public static const ONI:int                  = 12;
 	public static const ELF:int                  = 13;
-	public static const RAIJU:int                = 14;
+	public static const RAIJU:int                = 14;//button 0 on 2nd page of metamorph
 	public static const VAMPIRE:int              = 15;
 	public static const GEMSTONES:int            = 16;
 	public static const FERAL:int            	 = 17;

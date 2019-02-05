@@ -49,24 +49,30 @@ public class Achievements extends BaseContent
 			addAchievement("Marae's Savior", kACHIEVEMENTS.STORY_MARAE_SAVIOR, "Complete Marae's quest.");
 			addAchievement("Revenge at Last", kACHIEVEMENTS.STORY_ZETAZ_REVENGE, "Defeat Zetaz and obtain the map.");
 			addAchievement("Demon Slayer", kACHIEVEMENTS.STORY_FINALBOSS, "Defeat Lethice.");
-			titleAchievementSection("Zones"); //18 achievements
+			titleAchievementSection("Zones"); //23 achievements
 			addAchievement("Explorer", kACHIEVEMENTS.ZONE_EXPLORER, "Discover every zone.");
 			addAchievement("Sightseer", kACHIEVEMENTS.ZONE_SIGHTSEER, "Discover every place.");
 			addAchievement("Where am I?", kACHIEVEMENTS.ZONE_WHERE_AM_I, "Explore for the first time.");
 			addAchievement("Forest Ranger", kACHIEVEMENTS.ZONE_FOREST_RANGER, "Explore the forest 100 times.");
 			addAchievement("Vacationer", kACHIEVEMENTS.ZONE_VACATIONER, "Explore the lake 100 times.");
 			addAchievement("Dehydrated", kACHIEVEMENTS.ZONE_DEHYDRATED, "Explore the desert 100 times.");
+			addAchievement("Rookie", kACHIEVEMENTS.ZONE_ROOKIE, "Explore the outer battlefield 100 times.");
 			addAchievement("Mountaineer", kACHIEVEMENTS.ZONE_MOUNTAINEER, "Explore the mountains 100 times.");
 			addAchievement("Rolling Hills", kACHIEVEMENTS.ZONE_ROLLING_HILLS, "Explore the plains 100 times.");
 			addAchievement("Wet All Over", kACHIEVEMENTS.ZONE_WET_ALL_OVER, "Explore the swamp 100 times.");
 			addAchievement("Tainted", kACHIEVEMENTS.ZONE_TAINTED, "Explore the blight ridge 100 times");
-			addAchievement("Frozen", kACHIEVEMENTS.ZONE_FROZEN, "Explore the glacial rift 100 times.");
-			addAchievement("Roasted", kACHIEVEMENTS.ZONE_ROASTED, "Explore the volcanic crag 100 times.");
 			addAchievement("We Need to Go Deeper", kACHIEVEMENTS.ZONE_WE_NEED_TO_GO_DEEPER, "Explore the deepwoods 100 times.");
+			//addAchievement("Jumanji", kACHIEVEMENTS., "Explore the jungle 100 times.");
 			addAchievement("Sunburned", kACHIEVEMENTS.ZONE_SUNBURNED, "Explore the beach 100 times.");
+			addAchievement("Caveman", kACHIEVEMENTS.ZONE_CAVEMAN, "Explore the caves 100 times.");
 			addAchievement("Light-headed", kACHIEVEMENTS.ZONE_LIGHT_HEADED, "Explore the high mountains 100 times.");
 			addAchievement("All Murky", kACHIEVEMENTS.ZONE_ALL_MURKY, "Explore the bog 100 times.");
 			addAchievement("Sea-Legs", kACHIEVEMENTS.ZONE_SAILOR, "Explore the ocean 100 times.");
+			//addAchievement("Spelunker", kACHIEVEMENTS., "Explore the deep caves 100 times.");
+			//addAchievement("", kACHIEVEMENTS., "Explore the tundra 100 times.");
+			addAchievement("Frozen", kACHIEVEMENTS.ZONE_FROZEN, "Explore the glacial rift 100 times.");
+			//addAchievement("Ashes to ashes, dust to dust", kACHIEVEMENTS.ZONE_ASHES_TO_ASHES_DUST_TO_DUST, "Explore the ashlands 100 times.");
+			addAchievement("Roasted", kACHIEVEMENTS.ZONE_ROASTED, "Explore the volcanic crag 100 times.");
 			addAchievement("Diver", kACHIEVEMENTS.ZONE_DIVER, "Explore the deep sea 100 times.");
 			addAchievement("Archaeologist", kACHIEVEMENTS.ZONE_ARCHAEOLOGIST, "Explore the town ruins 15 times.");
 			addAchievement("Farmer", kACHIEVEMENTS.ZONE_FARMER, "Visit Whitney's farm 30 times.");
@@ -216,6 +222,12 @@ public class Achievements extends BaseContent
 			addAchievement("Just to Spite You", kACHIEVEMENTS.GENERAL_JUST_TO_SPITE_YOU, "Kill 25 imps during your time in Mareth.");
 			addAchievement("Just to Spite You 2: Spite Harder", kACHIEVEMENTS.GENERAL_JUST_TO_SPITE_YOU_2_SPITE_HARDER, "Kill 125 imps during your time in Mareth.");
 			addAchievement("Just to Spite You 3: I'm back", kACHIEVEMENTS.GENERAL_JUST_TO_SPITE_YOU_3_IM_BACK, "Kill 625 imps during your time in Mareth.");
+			addAchievement("Goblin Slayer", kACHIEVEMENTS.GENERAL_GOBLIN_SLAYER, "Kill 25 goblins during your time in Mareth.");
+			addAchievement("Goblin Slayer 2: Slay Harder", kACHIEVEMENTS.GENERAL_GOBLIN_SLAYER_2_SLAY_HARDER, "Kill 125 goblins during your time in Mareth.");
+			addAchievement("Goblin Slayer 3: I'm back", kACHIEVEMENTS.GENERAL_GOBLIN_SLAYER_3_IM_BACK, "Kill 625 goblins during your time in Mareth.");
+			addAchievement("Play dead Fido", kACHIEVEMENTS.GENERAL_PLAY_DEAD_FIDO, "Kill 10 hellhounds during your time in Mareth.");
+			addAchievement("Play dead Fido 2: Play Harder", kACHIEVEMENTS.GENERAL_PLAY_DEAD_FIDO_2_PLAY_HARDER, "Kill 50 hellhounds during your time in Mareth.");
+			addAchievement("Play dead Fido 3: I'm back", kACHIEVEMENTS.GENERAL_PLAY_DEAD_FIDO_3_IM_BACK, "Kill 250 hellhounds during your time in Mareth.");
 			addAchievement("Killing the bull by the horns", kACHIEVEMENTS.GENERAL_KILLING_THE_BULL_BY_THE_HORNS, "Kill 10 minotaurs during your time in Mareth.");
 			addAchievement("Killing the bull by the horns 2: Kill Harder", kACHIEVEMENTS.GENERAL_KILLING_THE_BULL_BY_THE_HORNS_2_KILL_HARDER, "Kill 50 minotaurs during your time in Mareth.");
 			addAchievement("Killing the bull by the horns 3: I'm back", kACHIEVEMENTS.GENERAL_KILLING_THE_BULL_BY_THE_HORNS_3_IM_BACK, "Kill 250 minotaurs during your time in Mareth.");
@@ -224,11 +236,11 @@ public class Achievements extends BaseContent
 			addAchievement("Body Count: Robocop", kACHIEVEMENTS.GENERAL_BODY_COUNT_ROBOCOP, "Kill 144 enemies.");
 			addAchievement("Body Count: Total Recall", kACHIEVEMENTS.GENERAL_BODY_COUNT_TOTALRECALL, "Kill 191 enemies.");
 			addAchievement("Body Count: Rambo", kACHIEVEMENTS.GENERAL_BODY_COUNT_RAMBO, "Kill 247 enemies.");
-			addAchievement("Body Count: Titanic", kACHIEVEMENTS.GENERAL_BODY_COUNT_TITANIC, "Kill 307 enemies.");/*
+			addAchievement("Body Count: Titanic", kACHIEVEMENTS.GENERAL_BODY_COUNT_TITANIC, "Kill 307 enemies.");
 			addAchievement("Body Count: The Lord of the Rings - Two Towers", kACHIEVEMENTS.GENERAL_BODY_COUNT_LOTR_TT, "Kill 468 enemies.");
 			addAchievement("Body Count: 300", kACHIEVEMENTS.GENERAL_BODY_COUNT_300, "Kill 600 enemies.");
 			addAchievement("Body Count: The Lord of the Rings - Return of the King", kACHIEVEMENTS.GENERAL_BODY_COUNT_LOTR_ROTK, "Kill 836 enemies.");
-			addAchievement("Body Count: Bloodiest Champion Ever", kACHIEVEMENTS.GENERAL_BODY_COUNT_BLOODIEST_CHAMPION_EVER, "Kill 1410 enemies.", "", true);*/
+			//addAchievement("Body Count: Bloodiest Champion Ever", kACHIEVEMENTS.GENERAL_BODY_COUNT_BLOODIEST_CHAMPION_EVER, "Kill 1410 enemies.", "", true);
 			addAchievement("Bad Ender", kACHIEVEMENTS.GENERAL_BAD_ENDER, "Cause or witness 2 Bad Ends to various NPCs.");
 			addAchievement("Bad Ender 2: Electric Boogaloo", kACHIEVEMENTS.GENERAL_BAD_ENDER_2, "Cause or witness 4 Bad Ends to various NPCs.");
 			addAchievement("Bad Ender 3: Serious Serial Slayer", kACHIEVEMENTS.GENERAL_BAD_ENDER_3, "Cause or witness 8 Bad Ends to various NPCs.");
@@ -283,6 +295,7 @@ public class Achievements extends BaseContent
 			addAchievement("Divine Stats", kACHIEVEMENTS.GENERAL_STATS_15000, "Have at least 15,000 in str/tou/spe/int/wis, 12,000 in lib and 6,000 in sens.", "", true);
 			addAchievement("OPK", kACHIEVEMENTS.GENERAL_STATS_OPK, "Have at least 268,445,279 in at least 5 stats... She's proud of you, you know?", "", true);
 			addAchievement("Like Chuck Norris", kACHIEVEMENTS.GENERAL_LIKE_CHUCK_NORRIS, "Defeat the Frost Giant without any equipment.", "Defeat the Frost Giant without any equipment. Way to be a badass!");
+			addAchievement("Texas Ranger", kACHIEVEMENTS.GENERAL_TEXAS_RANGER, "Defeat young Frost Giant without any equipment.", "Defeat young Frost Giant without any equipment. Way to make Walker be proud of you!");
 			addAchievement("Tentacle Beast Slayer", kACHIEVEMENTS.GENERAL_TENTACLE_BEAST_SLAYER, "Slay your first Tentacle Beast.");
 			addAchievement("Hammer Time", kACHIEVEMENTS.GENERAL_HAMMER_TIME, "Buy a total of 300 nails.");
 			addAchievement("Nail Scavenger", kACHIEVEMENTS.GENERAL_NAIL_SCAVENGER, "Scavenge a total of 200 nails from the library wreckage");

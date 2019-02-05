@@ -20,7 +20,7 @@ public class Behemoth extends Monster
 			}
 			else {
 				outputText("You weren't aware of that and his tail hits you!  <b>Your defense has been reduced!</b>  ");
-				var damage:int = str + level;
+				var damage:int = (str * 1.2) + level;
 				player.takePhysDamage(damage, true);
 			}
 			if (hasStatusEffect(StatusEffects.TailWhip)) addStatusValue(StatusEffects.TailWhip, 1, 5);
@@ -85,7 +85,7 @@ public class Behemoth extends Monster
 			this.lust = 15;
 			this.lustVuln = 0.3;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 30;
+			this.level = 40;
 			this.gems = 70 + rand(30);
 			this.drop = NO_DROP;
 			this.special1 = tailWhip;

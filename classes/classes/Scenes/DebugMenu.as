@@ -1024,6 +1024,7 @@ public class DebugMenu extends BaseContent
 			[Face.AVIAN, "41 AVIAN"],
 			[Face.WOLF_FANGS, "42 WOLF_FANGS"],
 			[Face.ORC_FANGS, "43 ORC_FANGS"],
+			[Face.ANIMAL_TOOTHS, "44 ANIMAL_TOOTHS"],
 		];
 		private static const TONGUE_TYPE_CONSTANTS:Array = [
 			[Tongue.HUMAN, "0 HUMAN"],
@@ -1252,6 +1253,7 @@ public class DebugMenu extends BaseContent
 			[Arms.PIG, "29 PIG"],
 			[Arms.BOAR, "30 BOAR"],
 			[Arms.ORC, "31 ORC"],
+			[Arms.DISPLACER, "32 DISPLACER"],
 		];
 		private static const CLAW_TYPE_CONSTANTS:Array = [
 			[Claws.NORMAL, "0 NORMAL"],
@@ -1415,6 +1417,7 @@ public class DebugMenu extends BaseContent
 			[RearBody.RAIJU_MANE, "8 RAIJU_MANE"],
 			[RearBody.BAT_COLLAR, "9 BAT_COLLAR"],
 			[RearBody.WOLF_COLLAR, "10 WOLF_COLLAR"],
+			[RearBody.DISPLACER_TENTACLES, "11 DISPLACER_TENTACLES"],
 		];
 		private function changeArmType(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.arms.type = setIdx;

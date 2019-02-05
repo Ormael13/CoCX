@@ -119,6 +119,21 @@ import classes.Scenes.Monsters.Goblin;
 			if (choice == 4) goblinsDrugAttack();
 		}
 		
+		override public function defeated(hpVictory:Boolean):void
+		{
+			SceneLib.goblinWarriorScene.goblinWarriorRapeIntro2();
+		}
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if (player.gender == 0 || flags[kFLAGS.SFW_MODE] > 0) {
+				outputText("You collapse in front of goblins, too wounded to fight.  They growls and kicks you in the head, making your vision swim. As your sight fades, you hear them murmur, \"<i>Fucking dicks can't even bother to grow a dick or cunt.</i>\"");
+				SceneLib.combat.cleanupAfterCombatImpl();
+			} 
+			else {
+				SceneLib.goblinWarriorScene.gobboWarriorBeatYaUp2();
+			}
+		}
+		
 		public function GoblinWarriors() 
 		{
 			this.a = "the ";
@@ -152,10 +167,11 @@ import classes.Scenes.Monsters.Goblin;
 			this.lust = 50;
 			this.lustVuln = 0.44;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 42;
+			this.level = 40;
 			this.gems = rand(50) + 75;
 			this.drop = new WeightedDrop().
 					add(consumables.GOB_ALE,5).
+					add(jewelries.POWRRNG,1).
 					addMany(1,consumables.L_DRAFT,
 							consumables.PINKDYE,
 							consumables.BLUEDYE,

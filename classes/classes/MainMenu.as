@@ -107,7 +107,6 @@ public class MainMenu extends BaseContent {
 		outputText("<li>Try to keep your keyboard clean.  Think of the children!</li>");
 		//Other Info
 		outputText("\n\nFor more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'>fenoxo.com</a></u></b>. ");
-		outputText("\n\nCheck out Trials in Tainted Space as well!");
 		outputText("\n\nFall of Eden is worth a try too ^^");
 
 		if (debug)

@@ -7,6 +7,7 @@ package classes.Scenes.Monsters
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.CoC;
+	import classes.Scenes.Areas.Caves.DarkElfRangerCaves;
 
 	public class DarkElfScene extends BaseContent
 	{
@@ -36,6 +37,12 @@ package classes.Scenes.Monsters
 			outputText("As you explore the area an arrow passes by your elbow, and misses you by a mere inch. You look for your aggressor and spot a dark-skinned woman with pointed ears, purple eyes, and a bow. Having realised her quarry spotted her, she jumps down from her hiding spot toward you and draws a few arrows, smiling malevolently.\n\n");
 			outputText("\"<i>Let's see if you make for good slave material, maybe I can sell you for a nice price.</i>\"\n\n");
 			startCombat(new DarkElfSniper);
+		}
+		public function introDarkELfRangerCaves():void {
+			clearOutput();
+			outputText("As you explore the tunnels an arrow flies out of the shadows and passes by your elbow, missing you by a mere inch. You look for your aggressor and spot a dark-skinned woman with pointed ears, purple eyes, and a bow. Having realised her quarry spotted her, she jumps down from her hiding spot toward you and draws a few arrows, smiling malevolently.\n\n");
+			outputText("\"<i>Let's see if you make for good slave material, maybe I can sell you for a nice price.</i>\"\n\n");
+			startCombat(new DarkElfRangerCaves);
 		}
 		
 		public function lostToDarkElf():void {

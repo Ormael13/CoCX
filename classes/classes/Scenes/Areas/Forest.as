@@ -214,26 +214,18 @@ use namespace CoC;
 								   && (flags[kFLAGS.ESSY_MET_IN_DUNGEON] == 0
 									   || flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 1)
 						},
-						chance: 0.1
+						chance: 0.25
 					}, {
 						name  : "bigjunk",
 						call  : bigJunkForestScene,
 						chance: bigJunkChance
 					}, {
 						name: "celess-unicorn",
-						call: CelessScene.instance.celessUnicornIntro,
-						when: CelessScene.canMeetUnicorn,
-						chance: 25
-					}, {
-						name: "celess-nightmare",
-						call: nightmareScene.nightmareIntro,
-						when: function():Boolean {
-							return player.hasStatusEffect(StatusEffects.CanMeetNightmare) && player.statusEffectv1(StatusEffects.CanMeetNightmare) < 1;
-						},
-						chance: 25
+						call: function():*{return CelessScene.instance.celessUnicornIntro();},
+						when: CelessScene.canMeetUnicorn
 					}, {
 						name: "celess-armor",
-						call: CelessScene.instance.celessArmor,
+						call: function():*{return CelessScene.instance.celessArmor();},
 						when: CelessScene.canGetArmour
 					}, {
 						name  : "patchouli",
@@ -302,6 +294,12 @@ use namespace CoC;
 					return flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] < 3;
 				},
 				call: kitsuneScene.enterTheTrickster
+			}, {
+				name: "celess-nightmare",
+				call: nightmareScene.nightmareIntro,
+				when: function():Boolean {
+					return player.hasStatusEffect(StatusEffects.CanMeetNightmare) && player.statusEffectv1(StatusEffects.CanMeetNightmare) < 1;
+				}
 			},/*{ // [INTERMOD:8chan]
 			 name: "dullahan",
 			 call: dullahanScene
@@ -397,6 +395,12 @@ use namespace CoC;
 						&& flags[kFLAGS.AIKO_BALL_RETURNED] != 2);
 				}
 			}, {
+				name: "ted",
+				when: function():Boolean {
+					return flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 4 && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1;
+				},
+				call: SceneLib.tedScene.introPostHiddenCave
+			},{
 				name: "dungeon",
 				call: SceneLib.dungeons.enterDeepCave,
 				when: SceneLib.dungeons.canFindDeepCave

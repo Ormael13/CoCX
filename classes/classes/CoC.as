@@ -72,7 +72,7 @@ public class CoC extends MovieClip
     public var date:Date = new Date();
 
     //Mod save version.
-    public var modSaveVersion:Number = 22;
+    public var modSaveVersion:Number = 23;
     public var levelCap:Number = 150;
 
     //Used to restrict random drops from overlapping uniques
@@ -250,7 +250,7 @@ public class CoC extends MovieClip
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_0.8l";
-			version = ver + " (<b></b>)";
+			version = ver + " (<b>New Lunar Year mini-event + pig/boar/elf TF's rework, orc + displacer beast TF, 2 new areas + new enemies, Job: Gunslinger perk line, Perk-o-calipse 4 (77 perks), Achiev-o-calipse (over 70 new achievs), The Unicorn Daughter Strikes Back (Yes Celess is Back)</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

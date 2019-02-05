@@ -194,14 +194,13 @@ use namespace CoC;
 				player.orgasm();
 				dynStats("int", -player.cor/10, "lib", 2*player.cor, "cor", 20);
 				player.slimeFeed();
-				player.createPerk(PerkLib.ProductivityDrugs,0,0,0,0);
-				player.addPerkValue(PerkLib.ProductivityDrugs, 1, player.cor);	//minlibido += CURRENT cor
-				player.addPerkValue(PerkLib.ProductivityDrugs, 2, 10);			//mincorruption += 10
+				player.createPerk(PerkLib.ProductivityDrugs,0,10,0,0);
+				player.addPerkValue(PerkLib.ProductivityDrugs, 1, Math.round(player.cor/2));	//minlibido += CURRENT cor / 2
 				player.addPerkValue(PerkLib.ProductivityDrugs, 3, player.lib);	//cumproduction += CURRENT lib (same as cum witch blessing)
-				player.addPerkValue(PerkLib.ProductivityDrugs, 4, player.lib);	//milkproduction += CURRENT lib (same as level1 milkmaid)
+				player.addPerkValue(PerkLib.ProductivityDrugs, 4, player.lib);//milkproduction += CURRENT lib (same as level1 milkmaid)
 			}
-			//Second/third times...
-			else if (player.getAllMinStats()["lib"] < player.getAllMaxStats()["lib"]) {
+			//Second time...
+			else if (player.hasPerk(PerkLib.ProductivityDrugs)) {
 				//[[2nd time]] 
 				outputText("You eagerly put on the modified harness and let them inject you with more of those body-altering chemicals.  As they fill you with artificial lust and desire, you cry out and beg for more.  They oblige you and give you a larger dose than the first time.  ");
 				//Grow dick!
@@ -249,13 +248,9 @@ use namespace CoC;
 				player.orgasm();
 				dynStats("int", -player.cor / 10, "lib", 2 * player.cor, "cor", 20);
 				player.slimeFeed();
-				player.addPerkValue(PerkLib.ProductivityDrugs, 1, player.cor);	//minlibido += CURRENT cor
-				player.addPerkValue(PerkLib.ProductivityDrugs, 2, 10);			//mincorruption += 10
-				player.addPerkValue(PerkLib.ProductivityDrugs, 3, player.lib);	//cumproduction += CURRENT lib (same as cum witch blessing)
-				player.addPerkValue(PerkLib.ProductivityDrugs, 4, player.lib);//milkproduction += CURRENT lib (same as level1 milkmaid)
 			}
 			//Third time, move on to bad end!
-			else {
+			else if (player.perkv2(PerkLib.ProductivityDrugs) == 20) {
 				doBadEndTension();
 			}
 			doNext(roomMainChamber);

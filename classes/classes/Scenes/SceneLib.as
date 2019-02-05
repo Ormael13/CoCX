@@ -2,7 +2,9 @@ package classes.Scenes {
 import classes.CoC;
 import classes.Items.Mutations;
 import classes.Scenes.Areas.*;
+import classes.Scenes.Areas.Caves.DisplacerBeastScene;
 import classes.Scenes.Areas.Forest.KitsuneScene;
+import classes.Scenes.Areas.GlacialRift.FrostGiantScene;
 import classes.Scenes.Areas.GlacialRift.YuWinterGearShop;
 import classes.Scenes.Combat.Combat;
 import classes.Scenes.Dungeons.AnzuPalace.AnzuScene;
@@ -31,6 +33,8 @@ public class SceneLib {
 
     public static var mutationsTable:Mutations = new Mutations();
 
+    public static var battlefiledouter:BattlefieldOuter = new BattlefieldOuter();
+
     public static var beach:Beach = new Beach();
 
     public static var blightridge:BlightRidge = new BlightRidge();
@@ -43,8 +47,6 @@ public class SceneLib {
 
     public static var forest:Forest = new Forest();
 
-    public static var glacialRift:GlacialRift = new GlacialRift();
-
     public static var highMountains:HighMountains = new HighMountains();
 
     public static var lake:Lake = new Lake();
@@ -56,6 +58,10 @@ public class SceneLib {
     public static var plains:Plains = new Plains();
 
     public static var swamp:Swamp = new Swamp();
+
+    public static var caves:Caves = new Caves();
+
+    public static var glacialRift:GlacialRift = new GlacialRift();
 
     public static var volcanicCrag:VolcanicCrag = new VolcanicCrag();
 
@@ -80,6 +86,8 @@ public class SceneLib {
     public static var goblinShamanScene:GoblinShamanScene = new GoblinShamanScene();
 
     public static var goblinElderScene:GoblinElderScene = new GoblinElderScene();
+	
+	public static var displacerbeastScene:DisplacerBeastScene = new DisplacerBeastScene();
 
     public static var amilyScene:AmilyScene = new AmilyScene();
 

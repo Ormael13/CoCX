@@ -624,7 +624,7 @@ public class PlayerAppearance extends BaseContent {
 			else if (player.hasCoatOfType(Skin.CHITIN))
 				outputText("A chitin [sack] hugs your [balls] tightly against your body.");
 			else if (player.hasScales())
-				outputText("A scaley [sack] hugs your [balls] tightly against your body.");
+				outputText("A scaly [sack] hugs your [balls] tightly against your body.");
 			else if (player.skinType == Skin.STONE)
 				outputText("A stone-solid sack with [balls] swings heavily" + swingsWhere);
 			else if (player.skinType == Skin.GOO)
@@ -1067,7 +1067,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.lowerBody == LowerBody.GRYPHON)
 			outputText("  You have strong thighs perfect for launching you into the air ending in furred, feline legs, covered with a coat of soft, [skin coat.color2] fur. Your have digitigrade feet, lion-like, with soft, pink soles and paw pads, with feline toes ending in sharp, retractile claws.");
 		else if (player.lowerBody == LowerBody.ORC)
-			outputText("  Your " + num2Text(player.legCount) + " bowed legs are covered with a set of scarlike tattoo and your feet end with sharp nails.");
+			outputText("  Your " + num2Text(player.legCount) + " bowed legs are covered with a set of scar-like tattoos and your feet end with sharp, pointed nails.");
 		if (player.findPerk(PerkLib.Incorporeality) >= 0)
 			outputText("  Of course, your [legs] are partially transparent due to their ghostly nature."); // isn't goo transparent anyway?
 	}
@@ -1274,7 +1274,9 @@ public class PlayerAppearance extends BaseContent {
 		else if (armType == Arms.BOAR)
 			outputText("  Your arms are covered in thick [skin coat.color] fur ending up with hands with sharp black nails.");
 		else if (armType == Arms.ORC)
-			outputText("  Your arms looks human enough, aside the fact they're bit longer and covered in scarlike tattos. They end up with hands with sharp nails.");
+			outputText("  Your arms looks human enough, aside the fact they're covered in scar-like tattoos and are a bit longer than usual. They end up with hands that have sharp nails on each finger.");
+		else if (armType == Arms.DISPLACER)
+			outputText("  Where a normal creature would have only two arms you instead have four covered with [skin coat.color] fur. They end with a pair of five-toed lion paws armed with lethal claws. You generally use them to move around lightning fast or to seize and rend preys.");
 		else if (player.wings.type == Wings.BAT_ARM)
 			outputText("  The bones in your arms are thin and light, as if made of only cartilage, granting you the ability to take flight. Instead of the five fingers you started out with, you now have three that are both larger and stronger. They allow you to hold various items even with your abnormal hands, albeit at the cost of preventing flight while doing so and making some things a little more awkward to grip.");
 	}
@@ -1294,11 +1296,14 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.rearBody.type == RearBody.RAIJU_MANE) {
 			outputText("  A thick collar of fur grows around your neck. Multiple strands of fur are colored in a dark shade, making it look like a lightning bolt runs along the center of your fur collar.");
 		}
-		if (player.rearBody.type == RearBody.BAT_COLLAR){
+		if (player.rearBody.type == RearBody.BAT_COLLAR) {
 			outputText("  Around your neck is a thick collar of fur reminiscent of a bat's.");
 		}
-		if (player.rearBody.type == RearBody.WOLF_COLLAR){
+		if (player.rearBody.type == RearBody.WOLF_COLLAR) {
 			outputText("  Around your neck there is a thick coat of [skin coat.color] fur. It looks great on you. That said, you can dismiss every one of your bestial features at any time should the need arise for you to appear human.");
+		}
+		if (player.rearBody.type == RearBody.DISPLACER_TENTACLES) {
+			outputText("  On your back grows two tentacles with a pair of thick, heavy feelers. You use them to suck your victims dry of their milk loads as you pump them full of your lewd venom.");
 		}
 	}
 	public function describeWings():void {
@@ -1546,7 +1551,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your eyes look fiendish, with their black sclera and glowing [eyecolor] iris. What's more, a small trail of fire blazes on the corners making them all the more intimidating.");
 		}
 		else if(eyeType == Eyes.ORC){
-			outputText("  Your [eyecolor] slanted eyes have slitted pupils. They usual seems to gleam with malice, avarice, or lechery giving off beady eye vibre.");
+			outputText("  Your [eyecolor], slanted eyes have slitted pupils. They usually seem to gleam with a sort of malice, avarice, or lechery, giving off beady-eyed vibe.");
 		}
 		else outputText("  Your eyes are [eyecolor].");
 	}
@@ -1809,7 +1814,8 @@ public class PlayerAppearance extends BaseContent {
 			if(faceType == Face.VAMPIRE){
 				outputText("  Your mouth could pass for human if not for the pair of long and pointy canines you use to tear into your victims to get at their blood.");
 			}
-		} else if (faceType == Face.FERRET) {
+		}
+		else if (faceType == Face.FERRET) {
 			if (player.hasFullCoatOfType(Skin.FUR)) outputText("  Your face is coated in [skin coat] with [skin base] underneath, an adorable cross between human and ferret features.  It is complete with a wet nose and whiskers.");
 			else if (player.hasCoat()) outputText("  Your face is an adorable cross between human and ferret features, complete with a wet nose and whiskers.  The only oddity is [skin base] covered with [skin coat].");
 			else outputText("  Your face is an adorable cross between human and ferret features, complete with a wet nose and whiskers.  The only oddity is your lack of fur, leaving only [skin] visible on your ferret-like face.");
@@ -1870,10 +1876,26 @@ public class PlayerAppearance extends BaseContent {
 			} else {
 				outputText("  Strangely, [skin coat] adorn every inch of your animalistic visage.");
 			}
-		} else if (faceType == Face.MOUSE) {
+		}
+		else if (faceType == Face.MOUSE) {
 			//appearance
 			outputText("  You have a snubby, tapered mouse's face, with whiskers, a little pink nose, and [skin full]");
 			outputText(".  Two large incisors complete it.");
+		}
+		//animal tooths
+		if (faceType == Face.ANIMAL_TOOTHS) {
+			if (!player.hasCoat()) {
+				outputText("  Your face");
+				if (skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
+				else if(skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
+				else if(skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
+				else if(skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos");
+				outputText(" looks human save for your sharp canines.");
+			} else if (player.hasFullCoatOfType(Skin.FUR)) {
+				outputText("  Your face looks human save for your sharp canines.  Your [skin coat.nocolor] is [skin coat.color], hiding your [skin base] underneath.");
+			} else {
+				outputText("  Your face looks human save for your sharp canines, but overlaid with glittering patches of [skin coat].");
+			}
 		}
 		//horse-face
 		if (faceType == Face.HORSE) {
@@ -1892,7 +1914,7 @@ public class PlayerAppearance extends BaseContent {
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  You have a dog's face, complete with wet nose and panting tongue.  You've got [skin coat], hiding your [skin base] underneath your furry visage.");
 			} else {
-				outputText("  You have the facial structure of a dog, wet nose and all, but overlaid with glittering [skin coat]");
+				outputText("  You have the facial structure of a dog, wet nose and all, but overlaid with glittering patches of [skin coat]");
 			}
 		}
 		//wolf-face
@@ -1911,7 +1933,7 @@ public class PlayerAppearance extends BaseContent {
 				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("Cold blue mist seems to periodically escape from your mouth.   ");
 				outputText("You've got [skin coat], hiding your [skin noadj] underneath your furry visage.");
 			} else {
-				outputText("  You have the facial structure of a wolf, wet nose and all, but overlaid with glittering [skin coat].");
+				outputText("  You have the facial structure of a wolf, wet nose and all, but overlaid with glittering patches of [skin coat].");
 				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("  Cold blue mist seems to periodically escape from your mouth.");
 			}
 		}
@@ -1926,7 +1948,7 @@ public class PlayerAppearance extends BaseContent {
 			} else if (player.hasPartialCoat(Skin.FUR)) {
 				outputText("  Your face looks human save for your wolf-like canines.  You've got [skin coat], hiding your [skin noadj] underneath your furry visage.");
 			} else {
-				outputText("  Your face looks human save for your wolf-like canines, but overlaid with glittering [skin coat].");
+				outputText("  Your face looks human save for your wolf-like canines, but overlaid with glittering patches of [skin coat].");
 			}
 		}
 		//cat-faces
@@ -1941,7 +1963,7 @@ public class PlayerAppearance extends BaseContent {
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  You have a cat-like face, complete with moist nose and whiskers.  Your [skin coat.nocolor] is [skin coat.color], hiding your [skin base] underneath.");
 			} else {
-				outputText("  Your facial structure blends humanoid features with those of a cat.  A moist nose and whiskers are included, but overlaid with glittering [skin coat].");
+				outputText("  Your facial structure blends humanoid features with those of a cat.  A moist nose and whiskers are included, but overlaid with glittering patches of [skin coat].");
 			}
 			if (faceType == Face.CHESHIRE) outputText(" For some reason your facial expression is that of an everlasting yet somewhat unsettling grin.");
 		}
@@ -1998,12 +2020,12 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your face is human in shape and structure with [skin coat]. Your mouth could pass for human if not for your two sharp weasel canines.");
 		}
 		if (faceType == Face.ORC_FANGS) {
-			outputText("  Your face is human in shape and structure, with [skin base] ");
+			outputText("  our face is human in shape and structure, with [skin base] ");
 			if (skin.hasMagicalTattoo()) outputText("covered with magical tattoo");
 			else if(skin.hasBattleTattoo()) outputText("covered with battle tattoo");
 			else if(skin.hasLightningShapedTattoo()) outputText("covered with a few glowing lightning tattoos");
-			else if(skin.hasScarShapedTattoo()) outputText("covered with a few scar tattoos");
-			outputText(". Your mouth could pass for human if not for your two lower canines resembling boar tusks.");
+			else if(skin.hasScarShapedTattoo()) outputText("covered in scar-like tattoos");
+			outputText(". Your mouth could pass for human if it were not for your two lower canines resembling boar tusks poking out of your mouth.");
 		}
 		if (faceType == Face.ORCA) {
 			if (skin.hasPlainSkinOnly() && player.skinAdj == "glossy" && player.skinTone == "white and black")
@@ -2228,7 +2250,6 @@ public function RacialScores():void {
 	}
 	else if (player.displacerbeastScore() >= 1 && player.displacerbeastScore() < 13) outputText("\n<font color=\"#008000\">Displacer Beast: " + player.displacerbeastScore() + "</font>");
 	else if (player.displacerbeastScore() < 1) outputText("\n<font color=\"#ff0000\">Displacer Beast: 0</font>");
-	outputText(" <font color=\"#ff0000\">NOT YET FULLY FUNCTIONAL RACE FOR PC</font>");
 	//Dog
 	if (player.dogScore() >= 4) outputText("\n<font color=\"#0000a0\">Dog-morph: " + player.dogScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Spe, -" + (5 * (1 + player.newGamePlusMod())) + " max Int)</font>");
 	else if (player.dogScore() >= 1 && player.dogScore() < 4) outputText("\n<font color=\"#008000\">Dog-morph: " + player.dogScore() + "</font>");
@@ -2268,11 +2289,11 @@ public function RacialScores():void {
 	//Elf
 	if (player.elfScore() >= 11) {
 		outputText("\n<font color=\"#0000a0\">Elf: " + player.elfScore() + " (-" + (10 * (1 + player.newGamePlusMod())) + " max Str, -" + (15 * (1 + player.newGamePlusMod())) + " max Tou, +" + (80 * (1 + player.newGamePlusMod())) + " max Spe, +" + (80 * (1 + player.newGamePlusMod())) + " max Int, +" + (60 * (1 + player.newGamePlusMod())) + " max Wis, ");
-		outputText("+" + (30 * (1 + player.newGamePlusMod())) + " max Sens, +" + (30 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
+		outputText("+" + (30 * (1 + player.newGamePlusMod())) + " max Sens, +" + (30 * (1 + player.newGamePlusMod())) + " min Sens, +20% max Mana)</font>");
 	}
 	else if (player.elfScore() >= 5 && player.elfScore() < 11) {
 		outputText("\n<font color=\"#0000a0\">Half Elf: " + player.elfScore() + " (-" + (10 * (1 + player.newGamePlusMod())) + " max Str, -" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (40 * (1 + player.newGamePlusMod())) + " max Int, +" + (30 * (1 + player.newGamePlusMod())) + " max Wis, ");
-		outputText("+" + (15 * (1 + player.newGamePlusMod())) + " max Sens, +" + (15 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
+		outputText("+" + (15 * (1 + player.newGamePlusMod())) + " max Sens, +" + (15 * (1 + player.newGamePlusMod())) + " min Sens, +10% max Mana)</font>");
 	}
 	else if (player.elfScore() >= 1 && player.elfScore() < 5) outputText("\n<font color=\"#008000\">Half Elf: " + player.elfScore() + "</font>");
 	else if (player.elfScore() < 1) outputText("\n<font color=\"#ff0000\">Half Elf: 0</font>");
@@ -2305,8 +2326,8 @@ public function RacialScores():void {
 	else if (player.gargoyleScore() >= 1 && player.gargoyleScore() < 20) ("\n<font color=\"#008000\">GARGOYLE: " + player.gargoyleScore() + "</font>");
 	else if (player.gargoyleScore() < 1) outputText("\n<font color=\"#ff0000\">GARGOYLE: 0</font>");
 	//Goblin
-	if (player.goblinScore() >= 4) outputText("\n<font color=\"#0000a0\">Goblin: " + player.goblinScore() + " (+" + (20 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.goblinScore() >= 1 && player.goblinScore() < 4) outputText("\n<font color=\"#008000\">Goblin: " + player.goblinScore() + "</font>");
+	if (player.goblinScore() >= 10) outputText("\n<font color=\"#0000a0\">Goblin: " + player.goblinScore() + " (-" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (75 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max Int, +" + (25 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+	else if (player.goblinScore() >= 1 && player.goblinScore() < 10) outputText("\n<font color=\"#008000\">Goblin: " + player.goblinScore() + "</font>");
 	else if (player.goblinScore() < 1) outputText("\n<font color=\"#ff0000\">Goblin: 0</font>");
 	//Goo
 	if (player.gooScore() >= 8) outputText("\n<font color=\"#0000a0\">Goo: " + player.gooScore() + " (+" + (80 * (1 + player.newGamePlusMod())) + " max Tou, -" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (40 * (1 + player.newGamePlusMod())) + " max Lib)</font>");

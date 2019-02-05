@@ -27,7 +27,7 @@ public class Yeti extends Monster
 					return;
 				}
 				outputText("Like a white blur the yeti charges you, striking at you with his claws and slashing over your [armor] before a fist collides with your side, sending you sliding over the icy floor. ");
-				var damage:Number = str + 25 + rand(50);
+				var damage:Number = (str * 1.25) + 75 + rand(60);
 				player.takePhysDamage(damage, true);
 			}
 		}
@@ -35,14 +35,14 @@ public class Yeti extends Monster
 			if (player.getEvasionRoll()) {
 				//yeti takes moderate damage
 				outputText("Sensing the beast’s intentions as you hear the cracking of ice under his feet, you dart to the side as the beast launches at you. With wide eyes, the ice yeti collides face first into the wall of the cave with a yelped growl. It rubs its face as it glares at you. ");
-				var yetiDamage:Number = 30 + rand(50);
+				var yetiDamage:Number = 50 + rand(80);
 				HP -= yetiDamage;
 				outputText("The beast takes <b><font color=\"#080000\">" + yetiDamage + "</font></b> damage.");
 			}
 			else {
 				//take heavy damage
 				outputText("The beast’s hind claws dig into the ice before his giant furred body launches at you and he collides with you in a brutal tackle. The pair of you are sent rolling around on the floor as you trade blows with the furred beast, and then he lifts you up and tosses you aside, your body hitting the ice walls with a groan. You shakily get to your feet. ");
-				var damage:Number = str + 50 + rand(150);
+				var damage:Number = (str * 1.4) + 200 + rand(250);
 				player.takePhysDamage(damage, true);				
 			}
 		}
@@ -56,20 +56,20 @@ public class Yeti extends Monster
 					return;
 				}
 				outputText("The beast takes a step back, mist forming into a ball in his clenched fist. It condenses into a ball before your eyes, and with a growl the beast whips it at you. The ball slams into your [armor] and explodes into frost, you hiss at the sting. The frost is also restricting your movement. ");
-				var damage:Number = (str / 2) + rand(20);
+				var damage:Number = (str * 0.8) + rand(30);
 				damage = Math.round(damage);
 				player.takeIceDamage(damage, true);
-				tempSpeedLoss += 10;
-				player.dynStats("spe", -10);
+				tempSpeedLoss += 15;
+				player.dynStats("spe", -15);
 			}
 			//take slight damage, reduce speed
 			//nothing
 		}
 		public function yetiTease():void {
 			//lust increased
-			if (rand(player.lib + player.cor) >= 30 && rand(3) > 0) {
+			if (rand(player.lib + player.cor) >= 60 && rand(3) > 0) {
 				outputText("You stare the beast down, though it looks like he’s distracted, with a hand dipping down to fondle his own ballsack. As your eyes follow it, you see a girthy red tip peeking out of his sheath, looking slick and releasing a wisp of steam in the air. Watching something so lewd has brought warmth to your body in this frozen cave, and you begin to wonder if his intentions are to eat or fuck you.");
-				player.dynStats("lust", 20 + rand(10));
+				player.dynStats("lust", 30 + rand(15));
 			}
 			else outputText("The beast before you seems a bit distracted, a hand dipping to fondle his ballsack, but you keep your focus fixed on the monsters face, unwilling to let your guard waver for even a moment.");
 		}
@@ -117,21 +117,21 @@ public class Yeti extends Monster
 			this.skin.growFur({color:"light"});
 			this.hairColor = "white";
 			this.hairLength = 8;
-			initStrTouSpeInte(140, 160, 80, 50);
-			initWisLibSensCor(40, 40, 20, 45);
+			initStrTouSpeInte(225, 260, 125, 80);
+			initWisLibSensCor(70, 40, 20, 45);
 			this.weaponName = "fists";
 			this.weaponVerb="punch";
-			this.weaponAttack = 36;
+			this.weaponAttack = 60;
 			this.armorName = "thick fur";
-			this.armorDef = 30;
-			this.armorMDef = 10;
-			this.bonusHP = 1000;
+			this.armorDef = 60;
+			this.armorMDef = 20;
+			this.bonusHP = 2000;
 			this.bonusLust = 10;
 			this.lust = 10;
 			this.lustVuln = 0.4;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 37;
-			this.gems = 45 + rand(30);
+			this.level = 60;
+			this.gems = 75 + rand(40);
 			this.drop = new WeightedDrop()
 					.add(consumables.YETICUM, 1)
 					.add(null, 2);

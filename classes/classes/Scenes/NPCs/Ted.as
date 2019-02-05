@@ -17,10 +17,10 @@ use namespace CoC;
 		private function tedSpecialAttackOne():void {
 			var damage:Number = 0;
 			if (hasStatusEffect(StatusEffects.Blind)) {
-				outputText("Dragon-boy makes a wide sweeping attack with his hammer, which is difficult to avoid even from a blinded opponent.\n");
+				outputText((flags[kFLAGS.TED_LVL_UP] >= 3 ?"Ted":"Dragon-boy")+" makes a wide sweeping attack with his hammer, which is difficult to avoid even from a blinded opponent.\n");//Ted
 			}
 			if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
-				outputText("You barely manage to avoid a wide sweeping attack from dragon-boy by rolling under it.");
+				outputText("You barely manage to avoid a wide sweeping attack from dragon-boy by rolling under it.");//Ted's
 				return;
 			}
 			damage = int((str + 60 + weaponAttack) - Math.random()*(player.tou) - player.armorDef);
@@ -29,14 +29,14 @@ use namespace CoC;
 				damage = 0;
 				outputText("You easily deflect and block the damage from dragon boy wide swing.");//Ted's
 			}
-			else outputText("Dragon boy easily hits you with a wide, difficult to avoid swing.  ");
+			else outputText((flags[kFLAGS.TED_LVL_UP] >= 3 ?"Ted":"Dragon-boy")+" easily hits you with a wide, difficult to avoid swing.  ");//Ted
 			if(damage > 0) player.takePhysDamage(damage, true);
 			statScreenRefresh();
 		}
 		private function tedSpecialAttackTwo():void {
 			var damage:Number = 0;
 			if (hasStatusEffect(StatusEffects.Blind)) {
-				outputText("Dragon-boy unwisely tries to make a massive swing while blinded, which you are easily able to avoid.");
+				outputText((flags[kFLAGS.TED_LVL_UP] >= 3 ?"Ted":"Dragon-boy")+" unwisely tries to make a massive swing while blinded, which you are easily able to avoid.");//Ted
 				return;
 			}
 			if (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 60) {
@@ -44,7 +44,7 @@ use namespace CoC;
 				return;
 			}
 			if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 60) {
-				outputText("You easily sidestep as dragon-boy tries to deliver a huge overhand blow.");
+				outputText("You easily sidestep as dragon-boy tries to deliver a huge overhand blow.");//Ted
 				return;
 			}
 			damage = int((str + 30 + weaponAttack) - Math.random()*(player.tou) - player.armorDef);
@@ -53,7 +53,7 @@ use namespace CoC;
 				outputText("You somehow manage to deflect and block dragon-boy massive overhead swing.");//Ted's
 			}
 			if (damage > 0) {
-				outputText("You are struck by a two-handed overhead swing from the enraged dragon-boy.  ");
+				outputText("You are struck by a two-handed overhead swing from the enraged dragon-boy.  ");//Ted
 				damage = player.takePhysDamage(damage, true);
 			}
 			statScreenRefresh();
@@ -72,26 +72,35 @@ use namespace CoC;
 		}
 		
 		override protected function performCombatAction():void
-		{
-			var choice1:Number = rand(3);
-			if (choice1 == 0) eAttack();
-			if (choice1 == 1) tedSpecialAttackOne();
-			if (choice1 == 2) tedSpecialAttackTwo();
+		{/*
+			if (flags[kFLAGS.TED_LVL_UP] >= 2) {
+				var choice1:Number = rand(4);
+				if (choice1 == 0) eAttack();
+				if (choice1 == 1) tedSpecialAttackOne();
+				if (choice1 == 2) tedSpecialAttackTwo();
+				if (choice1 == 3) tedSpecialAttack1();
+			}
+			else {*/
+				var choice2:Number = rand(3);
+				if (choice2 == 0) eAttack();
+				if (choice2 == 1) tedSpecialAttackOne();
+				if (choice2 == 2) tedSpecialAttackTwo();
+			//}
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
 			clearOutput();
-			outputText("A dragon-boy fall on his knees ");
+			outputText((flags[kFLAGS.TED_LVL_UP] >= 3 ?"Ted":"A dragon-boy")+" fall on his knees ");
 			if (this.HP < 1)outputText("beaten up");
 			else outputText("too horny to fight back");
-			if (flags[kFLAGS.HIDDEN_CAVE_BOSSES] >= 1) SceneLib.tedScene.defeatedTedPostHiddenCave();
+			if (flags[kFLAGS.TED_LVL_UP] >= 1) SceneLib.tedScene.defeatedTedPostHiddenCave();
 			else SceneLib.tedScene.defeatedTed();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (flags[kFLAGS.HIDDEN_CAVE_BOSSES] >= 1) SceneLib.tedScene.lostToTedPostHiddenCave();
+			if (flags[kFLAGS.TED_LVL_UP] >= 1) SceneLib.tedScene.lostToTedPostHiddenCave();
 			else SceneLib.tedScene.lostToTed();
 		}
 		
@@ -106,16 +115,37 @@ use namespace CoC;
 				this.level = 9;
 			}
 			if (flags[kFLAGS.TED_LVL_UP] == 1) {
-				
+				initStrTouSpeInte(40, 70, 70, 40);
+				initWisLibSensCor(40, 25, 50, 50);
+				this.weaponAttack = 10;
+				this.armorDef = 10;
+				this.armorMDef = 55;
+				this.level = 15;
 			}
 			if (flags[kFLAGS.TED_LVL_UP] == 2) {
-				
+				initStrTouSpeInte(50, 90, 90, 50);
+				initWisLibSensCor(50, 30, 60, 50);
+				this.weaponAttack = 12;
+				this.armorDef = 15;
+				this.armorMDef = 60;
+				this.level = 21;
 			}
 			if (flags[kFLAGS.TED_LVL_UP] == 3) {
-				
+				initStrTouSpeInte(60, 110, 110, 60);
+				initWisLibSensCor(60, 35, 70, 50);
+				this.weaponAttack = 14;
+				this.armorDef = 20;
+				this.armorMDef = 65;
+				this.level = 27;
 			}
-			this.a = "the ";
-			this.short = "mysterious dragon-boy";
+			if (flags[kFLAGS.TED_LVL_UP] >= 3) {
+				this.a = "";
+				this.short = "Ted";
+			}
+			else {
+				this.a = "the ";
+				this.short = "mysterious dragon-boy";
+			}
 			this.imageName = "mysterious dragon-boy";
 			this.long = "Before you stands a dragon-boy.  Though he stands only six and half feet tall, he is covered in lean muscle and moves with grace no lesser than most skilled balet dancers.  He wears armor made of green dragon scales and fight using an oversized hammer that got inscribed on it words 'bam' and 'hammer'. Thou to be truth to be said word 'bam' looks like it was orginaly word 'ban'.";
 			// this.plural = false;

@@ -38,7 +38,7 @@ import classes.BodyParts.Wings;
 				outputText("On the ground is all that is left of your flower, a single petal still intact that you proceed to put in your bag. Something tells you you will need it to become an alraune again.  <b>You have human legs again.</b>");
 			}
 			else /*if (player.isBiped()) */outputText("\n\nYou collapse as your legs shift and twist.  By the time the pain subsides, you notice that you have normal legs and normal feet.  <b>You now have normal feet!</b>");
-			player.lowerBody = LowerBody.HUMAN;
+			setLowerBody(LowerBody.HUMAN);
 			player.legCount  = 2;
 			changes++;
 		}
@@ -57,7 +57,11 @@ import classes.BodyParts.Wings;
 				default:
 					outputText("\n\nYour [skin noadj] itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin.  <b>Your skin is once again normal!</b>");
 			}
-			player.skin.setBaseOnly({type: Skin.PLAIN,adj:""});
+			player.skin.setBaseOnly({type: Skin.PLAIN, adj:""});
+			if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedHumanSkin)) {
+				outputText("\n\n<b>Genetic Memory: Human skin - Memorized!</b>\n\n");
+				player.createStatusEffect(StatusEffects.UnlockedHumanSkin, 0, 0, 0, 0);
+			}
 			changes++;
 		}
 
@@ -71,13 +75,13 @@ import classes.BodyParts.Wings;
 
 		public function humanizeEars():void {
 			outputText("\n\nOuch, your head aches! It feels like your ears are being yanked out of your head, and when you reach up to hold your aching noggin, you find they've vanished! Swooning and wobbling with little sense of balance, you nearly fall a half-dozen times before <b>a pair of normal, human ears sprout from the sides of your head.</b> You had almost forgotten what human ears felt like!");
-			player.ears.type = Ears.HUMAN;
+			setEarType(Ears.HUMAN);
 			changes++;
 		}
 
 		public function humanizeFace():void {
 			outputText("\n\nSudden agony sweeps over your [face], your visage turning hideous as bones twist and your jawline shifts. The pain slowly vanishes, leaving you weeping into your fingers. When you pull your hands away you realize you've been left with a completely normal, <b>human face</b>.");
-			player.faceType = Face.HUMAN;
+			setFaceType(Face.HUMAN);
 			changes++;
 		}
 
@@ -90,7 +94,7 @@ import classes.BodyParts.Wings;
 				if (player.eyes.type == Eyes.FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>");
 				outputText("  <b>You have normal, humanoid eyes again.</b>");
 			}
-			player.eyes.type = Eyes.HUMAN;
+			setEyeType(Eyes.HUMAN);
 			changes++;
 		}
 
@@ -106,6 +110,9 @@ import classes.BodyParts.Wings;
 				case Arms.CAT:
 				case Arms.BOAR:
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' [skin coat.color] fur is flaking away, leaving [skin base.type] behind.  Also the claws on your fingers reverts back into ordinary nails.");
+					break;
+				case Arms.DISPLACER:
+					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' [skin coat.color] fur is flaking away, leaving [skin base.type] behind.  Also the claws on your fingers reverts back into ordinary nails and both pairs fuse back into one.");
 					break;
 				case Arms.ELF:
 				case Arms.KITSUNE:
@@ -165,8 +172,7 @@ import classes.BodyParts.Wings;
 					outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your shoulder-blades.  After a moment the pain passes, though your wings are gone!");
 					break;
 			}
-			player.wings.type = Wings.NONE;
-			player.wings.desc = "non-existant";
+			setWingType(Wings.NONE, "non-existant");
 			changes++;
 		}
 
@@ -246,6 +252,13 @@ import classes.BodyParts.Wings;
 			if (rand(i) == 0) changeLimit++;
 		}
 		if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
+		if (player.findPerk(PerkLib.Enhancement) >= 0) changeLimit++;
+		if (player.findPerk(PerkLib.Fusion) >= 0) changeLimit++;
+		if (player.findPerk(PerkLib.Enchantment) >= 0) changeLimit++;
+		if (player.findPerk(PerkLib.Refinement) >= 0) changeLimit++;
+		if (player.findPerk(PerkLib.Saturation) >= 0) changeLimit++;
+		if (player.findPerk(PerkLib.Perfection) >= 0) changeLimit++;
+		if (player.findPerk(PerkLib.Creationism) >= 0) changeLimit++;
 		if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
 		if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 		return changes;
@@ -289,6 +302,7 @@ import classes.BodyParts.Wings;
 	private const METAMORPH_ANTENNAE:Object = createMapFromPairs([
 		[Antennae.BEE, StatusEffects.UnlockedBeeAntennae],
 		[Antennae.COCKATRICE, null],
+		[Antennae.NONE, StatusEffects.UnlockedHumanNoAntennae],
 		[Antennae.MANTIS, StatusEffects.UnlockedMantisAntennae],
 	]);
 	public function setArmType(armType:int):Boolean {
@@ -299,6 +313,7 @@ import classes.BodyParts.Wings;
 		[Arms.BEE, StatusEffects.UnlockedBeeArms],
 		[Arms.BOAR, StatusEffects.UnlockedBoarArms],
 		[Arms.CAT, null],
+		[Arms.DISPLACER, null],
 		[Arms.DRAGON, StatusEffects.UnlockedDraconicArms],
 		[Arms.DEVIL, StatusEffects.UnlockedDevilArms],
 		[Arms.ELF, StatusEffects.UnlockedElfArms],
@@ -307,7 +322,7 @@ import classes.BodyParts.Wings;
 		[Arms.GARGOYLE_2, null],
 		[Arms.GRYPHON, null],
 		[Arms.HARPY, StatusEffects.UnlockedHarpyArms],
-		[Arms.HUMAN, null],
+		[Arms.HUMAN, StatusEffects.UnlockedHumanArms],
 		[Arms.KITSUNE, StatusEffects.UnlockedKitsuneArms],
 		[Arms.LION, null],
 		[Arms.LIZARD, StatusEffects.UnlockedLizardArms],
@@ -348,7 +363,7 @@ import classes.BodyParts.Wings;
 		[Ears.GOAT, StatusEffects.UnlockedGoatEars],
 		[Ears.GRYPHON, null],
 		[Ears.HORSE, null],
-		[Ears.HUMAN, null],
+		[Ears.HUMAN, StatusEffects.UnlockedHumanEars],
 		[Ears.KANGAROO, null],
 		[Ears.LION, null],
 		[Ears.LIZARD, StatusEffects.UnlockedLizardEars],
@@ -385,7 +400,7 @@ import classes.BodyParts.Wings;
 		[Eyes.GEMSTONES, null],
 		[Eyes.GORGON, StatusEffects.UnlockedGorgonEyes],
 		[Eyes.GRYPHON, null],
-		[Eyes.HUMAN, null],
+		[Eyes.HUMAN, StatusEffects.UnlockedHumanEyes],
 		[Eyes.INFERNAL, null],
 		[Eyes.MANTICORE, null],
 		[Eyes.ONI, StatusEffects.UnlockedOniEyes],
@@ -419,7 +434,7 @@ import classes.BodyParts.Wings;
 		[Face.FERRET_MASK, null],
 		[Face.FOX, StatusEffects.UnlockedFoxFace],
 		[Face.HORSE, null],
-		[Face.HUMAN, null],
+		[Face.HUMAN, StatusEffects.UnlockedHumanFace],
 		[Face.JABBERWOCKY, null],
 		[Face.KANGAROO, null],
 		[Face.LIZARD, StatusEffects.UnlockedLizardFace],
@@ -451,7 +466,7 @@ import classes.BodyParts.Wings;
 		[Gills.ANEMONE, null],
 		[Gills.FISH, StatusEffects.UnlockedFishGills],
 		[Gills.GILLS_IN_TENTACLE_LEGS, null],
-		[Gills.NONE, null],
+		[Gills.NONE, StatusEffects.UnlockedHumanNoGills],
 	]);
 
 	public function setHairType(hairType:int):Boolean {
@@ -467,7 +482,7 @@ import classes.BodyParts.Wings;
 		[Hair.GORGON, StatusEffects.UnlockedGorgonHair],
 		[Hair.GRASS, null],
 		[Hair.LEAF, null],
-		[Hair.NORMAL, null],
+		[Hair.NORMAL, StatusEffects.UnlockedHumanHair],
 		[Hair.QUILL, null],
 		[Hair.SILKEN, StatusEffects.UnlockedElfHair],
 		[Hair.STORM, StatusEffects.UnlockedRaijuHair],
@@ -491,7 +506,7 @@ import classes.BodyParts.Wings;
 		[Horns.DRACONIC_X4_12_INCH_LONG, StatusEffects.UnlockedDraconicX4],
 		[Horns.GARGOYLE, null],
 		[Horns.GOAT, StatusEffects.UnlockedGoatHorns],
-		[Horns.NONE, null],
+		[Horns.NONE, StatusEffects.UnlockedHumanNoHorns],
 		[Horns.OAK, null],
 		[Horns.ONI, StatusEffects.UnlockedOniSingleHorn],
 		[Horns.ONI_X2, StatusEffects.UnlockedOniTwinHorns],
@@ -527,7 +542,7 @@ import classes.BodyParts.Wings;
 		[LowerBody.GRYPHON, null],
 		[LowerBody.HARPY, StatusEffects.UnlockedHarpyLegs],
 		[LowerBody.HOOFED, StatusEffects.UnlockedHoofedLegs],
-		[LowerBody.HUMAN, null],
+		[LowerBody.HUMAN, StatusEffects.UnlockedHumanLowerBody],
 		[LowerBody.KANGAROO, null],
 		[LowerBody.LION, null],
 		[LowerBody.LIZARD, StatusEffects.UnlockedLizardLegs],
@@ -556,11 +571,12 @@ import classes.BodyParts.Wings;
 	private const METAMORPH_REAR_BODIES:Object = createMapFromPairs([
 		[RearBody.BAT_COLLAR, StatusEffects.UnlockedBatCollar],
 		[RearBody.BEHEMOTH, null],
+		[RearBody.DISPLACER_TENTACLES, null],
 		[RearBody.DRACONIC_MANE, null],
 		[RearBody.DRACONIC_SPIKES, null],
 		[RearBody.FENRIR_ICE_SPIKES, null],
 		[RearBody.LION_MANE, null],
-		[RearBody.NONE, null],
+		[RearBody.NONE, StatusEffects.UnlockedHumanNoRearBody],
 		[RearBody.ORCA_BLOWHOLE, StatusEffects.UnlockedOrcaBlowhole],
 		[RearBody.RAIJU_MANE, StatusEffects.UnlockedRaijuMane],
 		[RearBody.SHARK_FIN, StatusEffects.UnlockedSharkFin],
@@ -577,7 +593,7 @@ import classes.BodyParts.Wings;
 		[Tongue.DEMONIC, [StatusEffects.UnlockedDemonTonuge, "Demonic Tongue"]],
 		[Tongue.DRACONIC, [StatusEffects.UnlockedDraconicTongue, "Draconic Tongue"]],
 		[Tongue.ECHIDNA, [null, "Echidna Tongue"]],
-		[Tongue.HUMAN, [null, "Human Tongue"]],
+		[Tongue.HUMAN, [StatusEffects.UnlockedHumanTongue, "Human Tongue"]],
 		[Tongue.ELF, [StatusEffects.UnlockedElfTongue, "Elf Tongue"]],
 		[Tongue.SNAKE, [StatusEffects.UnlockedSnakeTongue, "Snake Tongue"]],
 		[Tongue.DOG, [null, "Dog Tongue"]],
@@ -624,7 +640,7 @@ import classes.BodyParts.Wings;
 		[Tail.MANTICORE_PUSSYTAIL, null],
 		[Tail.MANTIS_ABDOMEN, StatusEffects.UnlockedMantisTail],
 		[Tail.MOUSE, null],
-		[Tail.NONE, null],
+		[Tail.NONE, StatusEffects.UnlockedHumanNoTail],
 		[Tail.ORCA, StatusEffects.UnlockedOrcaTail],
 		[Tail.PIG, StatusEffects.UnlockedPigTail],
 		[Tail.RABBIT, null],
@@ -677,7 +693,7 @@ import classes.BodyParts.Wings;
 		[Wings.MANTIS_LIKE_LARGE_2, null],
 		[Wings.MANTIS_LIKE_SMALL, StatusEffects.UnlockedMantisWingsSmall],
 		[Wings.NIGHTMARE, null],
-		[Wings.NONE, null],
+		[Wings.NONE, StatusEffects.UnlockedHumanNoWings],
 		[Wings.PLANT, null],
 		[Wings.SHARK_FIN, null],
 	]);

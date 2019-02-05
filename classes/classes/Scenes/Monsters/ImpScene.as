@@ -77,8 +77,11 @@ use namespace CoC;
 			
 		}
 		public function impVictory2():void {
-			outputText("The feral imp falls to the ground panting and growling in anger.  He quickly submits however, the thoroughness of his defeat obvious.  You walk towards the imp who gives one last defiant snarl before slipping into unconsciousness.");
+			if (flags[kFLAGS.FERAL_EXTRAS] == 4) outputText("The feral imps falls to the ground panting and growling in anger.  They quickly submits however, or so it seems like.  Looking like it was coordinated most fo them stands up and limps away or fly away leaving one weakest among the pack.  You walk towards him, while he gives one last defiant snarl before slipping into unconsciousness.");
+			else outputText("The feral imp falls to the ground panting and growling in anger.  He quickly submits however, the thoroughness of his defeat obvious.  You walk towards the imp who gives one last defiant snarl before slipping into unconsciousness.");
+			menu();
 			addButton(0, "Kill Him", killFeralImp);
+			if (player.tailType == Tail.MANTICORE_PUSSYTAIL) addButton(2, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
 			if (flags[kFLAGS.GALIA_LVL_UP] > 0 && flags[kFLAGS.GALIA_LVL_UP] < 0.5) {
 				if (flags[kFLAGS.GALIA_AFFECTION] > 0) addButtonDisabled(3, "Capture", "You need to turn in already captured imp before you can capture another one.");
 				else addButton(3, "Capture", captureFeralImp);
@@ -1305,13 +1308,10 @@ use namespace CoC;
 				outputText(images.showImage("imp-loss-female-fuck"));
 				outputText("You sink to the ground, assuming a position that feels all too natural to you now, leaning forward to let your [allbreasts] hang down slightly. The imp looks you up and down, wickedly eyeing your ready, slightly open lips. He drops his loin-cloth to reveal a hardening cock. Your eyes bulge as it grows larger... and larger... and larger! The imp's cock finally bulges to a full twelve inches... and it's moving closer. You struggle to think... but you just can't! You want that in your mouth, like, so bad!\n\n");
 				outputText("Your " + vaginaDescript(0) + " drips in anticipation, and you find yourself involuntarily moving your knees farther apart to prepare yourself to be filled. He smiles and presses his cock against your " + vaginaDescript(0) + ", pushing you back to get a better angle. You try to make words, but your brain can only think of so much at once! Right now, it's thinking of cock, which, naturally, makes you open your mouth and let out a slutty moan.\n\n");
-		
 				outputText("The imp pushes into you violently, ramming his cock in to the hilt, leaving you gasping in pain and surprise. He leaves it in your slutty pussy, giving you a second to... oh who is he kidding... he can tell by your air-headed look that you've done nothing but take cocks your whole life. He fucks you hard, slapping your " + buttDescript() + " to remind you who is in charge. You can't help but think about, like, how you just love it when a man takes charge. Less thinking!");
 				player.cuntChange(12,true,true,false);
 				outputText("\n\n");
-		
 				outputText("The rough fucking becomes more and more pleasurable as time goes on. You moan air-headedly with each thrust, hips squeezing around the demon-cock- loving the feeling of his fullness. Before long you can't help but cum all over him, your vagina locking around his cock like a vice, muscles rippling, milking him for his cum. The imp's prick explodes inside you, pumping huge loads of hot demon-seed inside you with each eruption. You swoon, feeling it fill your womb and distend your belly as the imp's orgasm fills you with insane amounts of cum.\n\n");
-		
 				outputText("With a sigh, he pulls his dick free, and you flop down, cum leaking out onto the ground from your well-fucked hole. If you could, like, focus at all, you'd totally be worrying about being, like, pregnant or whatever. But you lose consciousness.");
 				player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14); //Bigger imp means faster pregnancy
 				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
@@ -1401,7 +1401,6 @@ use namespace CoC;
 						if(player.sens > 40) {
 							outputText("  You manage to orgasm from the feeling of being filled by hot cum.");
 							if(player.gender == 1) outputText("  You jizz all over the ground in front of you, spraying cum in huge squirts in time with the demon's thrusts.");
-		
 							player.orgasm();
 							dynStats("cor", 1);
 						}
@@ -1413,6 +1412,11 @@ use namespace CoC;
 			else {
 				outputText("\n<b>You fall, defeated by the imp!</b>\nThe last thing you see before losing consciousness is the creature undoing its crude loincloth to reveal a rather disproportionately-sized member.");
 			}
+			cleanupAfterCombat();
+		}
+		public function impRapesYou2():void {
+			clearOutput();
+			outputText("\n<b>You fall, defeated by the imp!</b>\nThe last thing you see before losing consciousness is the creatures stating to argue over something, after undoing their crude loincloth to reveal a rather disproportionately-sized members.");
 			cleanupAfterCombat();
 		}
 		
@@ -2152,6 +2156,17 @@ use namespace CoC;
 			}
 			doNext(playerMenu);
 		}
+		public function impPackEncounter2():void {
+			clearOutput();
+			outputText("During your searching thou current location you suddenly hear sound of many wings flapping.  Turning around you notice a large group of feral imps flying toward you.  In no time their catch up to you and surrounds.  No way around it, you ready your [weapon] for the fight.");
+			flags[kFLAGS.FERAL_EXTRAS] = 4;
+			startCombat(new FeralImps());
+			if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
+			}
+			doNext(playerMenu);
+		}
 		
 		public function defeatImpPack():void {
 			clearOutput();
@@ -2227,11 +2242,8 @@ use namespace CoC;
 			if(player.HP < 1) outputText("Unable to handle your myriad wounds, you collapse with your strength exhausted.\n\n");
 			//(LUST)
 			else outputText("Unable to handle the lust coursing through your body, you give up and collapse, hoping the mob will get you off.\n\n");
-			
 			outputText("In seconds, the squirming red bodies swarm over you, blotting the rest of the room from your vision.  You can feel their scrabbling fingers and hands tearing off your [armor], exposing your body to their always hungry eyes.   Their loincloths disappear as their growing demonic members make themselves known, pushing the tiny flaps of fabric out of the way or outright tearing through them.   You're groped, touched, and licked all over, drowning in a sea of long tongues and small nude bodies.\n\n");
-					   
 			outputText("You're grabbed by the chin, and your jaw is pried open to make room for a swollen dog-dick.   It's shoved in without any warmup or fan-fare, and you're forced to taste his pre in the back of your throat.  You don't dare bite down or resist in such a compromised position, and you're forced to try and suppress your gag reflex and keep your teeth back as he pushes the rest of the way in, burying his knot behind your lips.\n\n");
-			
 			//(tits)
 			if(player.biggestTitSize() > 1) {
 				outputText("A sudden weight drops onto your chest as one of the demons straddles your belly, allowing his thick, tainted fuck-stick to plop down between your [allbreasts].  The hot fluid leaking from his nodule-ringed crown  swiftly lubricates your cleavage.  In seconds the little devil is squeezing your " + breastDescript(0) + " around himself as he starts pounding his member into your tits.  The purplish tip peeks out between your jiggling flesh mounds, dripping with tainted moisture.");

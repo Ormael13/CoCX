@@ -188,22 +188,22 @@ public class GoblinElder extends Goblin
 			this.skinTone = "yellowish-green";
 			this.hairColor = "dark green";
 			this.hairLength = 4;
-			initStrTouSpeInte(95, 75, 70, 100);
-			initWisLibSensCor(100, 55, 35, 45);
+			initStrTouSpeInte(115, 95, 80, 120);
+			initWisLibSensCor(120, 65, 35, 45);
 			this.weaponName = "primal sword";
 			this.weaponVerb = "slash";
-			this.weaponAttack = 25;
+			this.weaponAttack = 35;
 			this.armorName = "bone armor";
-			this.armorDef = 24;
-			this.armorMDef = 12;
+			this.armorDef = 48;
+			this.armorMDef = 18;
 			this.fatigue = 0;
-			this.bonusHP = 425;
+			this.bonusHP = 900;
 			this.bonusLust = 20;
 			this.lust = 35;
 			this.lustVuln = 0.4;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 20;
-			this.gems = rand(15) + 25;
+			this.level = 32;
+			this.gems = rand(10) + 40;
 			this.drop = new WeightedDrop().
 					add(consumables.GOB_ALE, 5).
 					add(consumables.REDUCTO,2).
@@ -214,9 +214,6 @@ public class GoblinElder extends Goblin
 							consumables.ORANGDY,
 							consumables.GREEN_D,
 							consumables.PURPDYE);
-			this.special1 = goblinDrugAttack;
-			this.special2 = goblinTeaseAttack;
-			//this.special3 = castSpell;
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);

@@ -64,7 +64,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			this.imageName = "true fire golems";
 			this.long = "You're currently fighting true fire golems. They're all around seven feet tall without any sexual characteristics, their body covered in flames and using bare fists to smash enemies.";
 			this.plural = true;
-			initStrTouSpeInte(150, 120, 90, 10);
+			initStrTouSpeInte(175, 135, 90, 10);
 			initWisLibSensCor(10, 10, 10, 50);
 			this.lustVuln = 0;
 			this.tallness = 84;
@@ -72,15 +72,15 @@ package classes.Scenes.Areas.VolcanicCrag
 			initGenderless();
 			this.drop = new ChainedDrop()
 					.add(useables.GOLCORE, 1);
-			this.level = 33;
-			this.bonusHP = 350;
-			this.additionalXP = 350;
+			this.level = 43;
+			this.bonusHP = 400;
+			this.additionalXP = 400;
 			this.weaponName = "fists";
 			this.weaponVerb = "smash";
-			this.weaponAttack = 40;
+			this.weaponAttack = 45;
 			this.armorName = "flame armor";
-			this.armorDef = 40;
-			this.armorMDef = 40;
+			this.armorDef = 45;
+			this.armorMDef = 45;
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);

@@ -26,11 +26,8 @@ package classes.Scenes.NPCs
 		public var mutations:MutationsHelper = new MutationsHelper();
 		
 		public function LunaFollower() 
-		{
-			
-		}
-		//luna foll 2 - kicked post moon event, 3 seen her dead in forest, 4,5 - pre full moon event, 6 jelly pre full moon, 7,8 - post moon unchained, 9,10 - post moon chained, 11,12 - unchained post moon accepted (PC no WW), 13,14 - unchained post moon accepted and talked about lycantrophy (PC no WW), 15,16 - unchained post moon accepted (PC WW)
-		
+		{}
+		//luna follower flag: 2 - kicked post moon event, 3 seen her dead in forest, 4,5 - pre full moon event, 6 jelly pre full moon, 7,8 - post moon unchained, 9,10 - post moon chained, 11,12 - unchained post moon accepted (PC no WW), 13,14 - unchained post moon accepted and talked about lycantrophy (PC no WW), 15,16 - unchained post moon accepted (PC WW)
 		public function lunaAffection(changes:Number = 0):Number
 		{
 			flags[kFLAGS.LUNA_AFFECTION] += changes;

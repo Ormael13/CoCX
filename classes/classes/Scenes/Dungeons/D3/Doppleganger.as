@@ -84,7 +84,7 @@ import classes.VaginaClass;
 				return;
 			}
 			
-			if (player.HP < player.minHP())
+			if (player.HP <= player.minHP())
 			{
 				doNext(SceneLib.combat.endHpLoss);
 				return;

@@ -317,43 +317,55 @@ public class Kiha extends Monster
 			this.wings.type = Wings.DRACONIC_LARGE;
 			this.wings.desc = "huge";
 			this.tailType = Tail.LIZARD;
-			if (flags[kFLAGS.KIHA_LVL_UP] >= 1) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 1) {
+				this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 2) {
-				this.createPerk(PerkLib.Lifeline, 0, 0, 0, 0);
+				this.createPerk(PerkLib.LizanRegeneration, 0, 0, 0, 0);
 				this.createPerk(PerkLib.BasicTranquilness, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 3) {
-				this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 				this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 4) {
-				this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
+				this.createPerk(PerkLib.ImprovedLifeline, 0, 0, 0, 0);
 				this.createPerk(PerkLib.HalfStepToImprovedTranquilness, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 5) {
-				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EpicStrength, 0, 0, 0, 0);
 				this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 6) {
-				this.createPerk(PerkLib.LizanRegeneration, 0, 0, 0, 0);
+				this.createPerk(PerkLib.LizanMarrow, 0, 0, 0, 0);
 				this.createPerk(PerkLib.ImprovedTranquilness, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 7) {
-				this.createPerk(PerkLib.EpicStrength, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EpicToughness, 0, 0, 0, 0);
 				this.createPerk(PerkLib.EpicSpeed, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 8) {
-				this.createPerk(PerkLib.LizanMarrow, 0, 0, 0, 0);
+				this.createPerk(PerkLib.GreaterLifeline, 0, 0, 0, 0);
 				this.createPerk(PerkLib.HalfStepToAdvancedTranquilness, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 9) {
-				this.createPerk(PerkLib.EpicToughness, 0, 0, 0, 0);
+				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				this.createPerk(PerkLib.EpicLibido, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 10) {
-				this.createPerk(PerkLib.LizanMarrowEvolved, 0, 0, 0, 0);
+				this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 				this.createPerk(PerkLib.AdvancedTranquilness, 0, 0, 0, 0);
+			}/*
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 11) {
+				this.createPerk(PerkLib., 0, 0, 0, 0);
+				this.createPerk(PerkLib., 0, 0, 0, 0);
 			}
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 12) {
+				this.createPerk(PerkLib.LizanMarrowEvolved, 0, 0, 0, 0);
+				this.createPerk(PerkLib., 0, 0, 0, 0);
+			}*/
+			this.createPerk(PerkLib.Lifeline, 0, 0, 0, 0);
 			checkMonster();
 		}
 

@@ -26,20 +26,20 @@ public class Tail extends SaveableBodyPart {
 	public static const RABBIT:int              = 10;
 	public static const HARPY:int               = 11;
 	public static const KANGAROO:int            = 12;
-	public static const FOX:int                 = 13;
+	public static const FOX:int                 = 13;//button 0 on 2nd page of metamorph
 	public static const DRACONIC:int            = 14;
 	public static const RACCOON:int             = 15;
 	public static const MOUSE:int               = 16;
 	public static const FERRET:int              = 17;
 	public static const BEHEMOTH:int            = 18;
-	public static const PIG:int                 = 19;
+	public static const PIG:int                 = 19;//button 0 on 3rd page of metamorph
 	public static const SCORPION:int            = 20;
 	public static const GOAT:int                = 21;
 	public static const RHINO:int               = 22;
 	public static const ECHIDNA:int             = 23;
 	public static const DEER:int                = 24;
 	public static const SALAMANDER:int          = 25;
-	public static const KITSHOO:int             = 26;
+	public static const KITSHOO:int             = 26;//button 0 on 4th page of metamorph for 8th kitshoo tail
 	public static const MANTIS_ABDOMEN:int      = 27;
 	public static const MANTICORE_PUSSYTAIL:int = 28;
 	public static const WOLF:int                = 29;
@@ -52,7 +52,7 @@ public class Tail extends SaveableBodyPart {
 	public static const AVIAN:int          		= 36;
 	public static const GRIFFIN:int          	= 37;
 	public static const LION:int                = 38;
-	public static const BURNING:int             = 39;
+	public static const BURNING:int             = 39;//button 0 on 5th page of metamorph
 	// Don't forget to add new types in DebugMenu.as list TAIL_TYPE_CONSTANTS
 
 	override public function set type(value:int):void {

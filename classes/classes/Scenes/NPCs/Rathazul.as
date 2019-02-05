@@ -288,7 +288,7 @@ private function rathazulWorkOffer():Boolean {
 		outputText("Will you take him up on an offer or leave?");
 		//In camp has no time passage if left.
 		menu();
-		if (dyes) addButton(0, "Make Dye", makeDyes).hint("Ask him to make a special dye for you. \n\nCost: 50 Gems.");
+		if (dyes && player.hasItem(consumables.REPTLUM, 1) && flags[kFLAGS.ARIAN_SCALES] > 0) addButton(0, "Make Dye", makeDyes).hint("Ask him to make a special dye for you. \n\nCost: 50 Gems.");//dye for Arian scales atm only doable
 		//Shop sub-menu
 		if (dyes || philters || reductos)
 			addButton(1, "Shop", rathazulShopMenu).hint("Check Rathazul's wares.");

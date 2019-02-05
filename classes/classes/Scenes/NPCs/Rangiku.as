@@ -48,7 +48,7 @@ public class Rangiku extends Monster
 		*/
 		private function rangikuBerserk():void {
 			wrath -= 50;
-			outputText("Salamander roar and unleash her lustful fury in order to destroy you!\n\n");
+			outputText("Salamander roar and unleash her lustful fury in order to destroy you!\n\n");//Oni
 			this.weaponAttack += (40 + (40 * (1 + player.newGamePlusMod)));
 			createStatusEffect(StatusEffects.Lustzerking,10,0,0,0);
 		}
@@ -81,7 +81,7 @@ public class Rangiku extends Monster
 		override public function get long():String
 		{
 			var str:String = "";
-			str += "You are fighting a salamander – a little over seven foot tall woman with crimson scales covering her legs, back, and forearms, with a tail swishing menacingly behind her, ablaze with a red-hot fire.  Her strawberry blonde hair accents her sapphire eyes, while her body covers black robe.  Her dual large axes are raised to her side, looking for any hole in your guard.";
+			str += "You are fighting an oni – a little over seven foot tall woman with crimson scales covering her legs, back, and forearms, with a tail swishing menacingly behind her, ablaze with a red-hot fire.  Her strawberry blonde hair accents her sapphire eyes, while her body covers black robe.  Her dual large axes are raised to her side, looking for any hole in your guard.";
 			if (hasStatusEffect(StatusEffects.Lustzerking))
 			{
 				str += "\n\n<b>Looking at her posture and gaze indicates that she's currently under effect of some sort of berserking state.</b>";
@@ -92,18 +92,17 @@ public class Rangiku extends Monster
 		public function Rangiku() 
 		{
 			this.a = "the ";
-			this.short = "salamander";
+			this.short = "oni";
 			this.imageName = "rangiku";
 			this.long = "";
 			createVagina(true,VaginaClass.WETNESS_NORMAL,VaginaClass.LOOSENESS_NORMAL);
-			createStatusEffect(StatusEffects.BonusVCapacity,120,0,0,0);
-			createBreastRow(Appearance.breastCupInverse("G"));
+			createStatusEffect(StatusEffects.BonusVCapacity,100,0,0,0);
+			createBreastRow(Appearance.breastCupInverse("K"));//all god(ess) of war heralds if female would end up with K cup and been bit taller than race standars i think xD
 			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
-			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
-			this.tallness = 93;
-			this.hips.type = Hips.RATING_CURVY + 3;
-			this.butt.type = Butt.RATING_JIGGLY;
+			this.tallness = 92;
+			this.hips.type = Hips.RATING_CURVY + 4;
+			this.butt.type = Butt.RATING_JIGGLY + 1;
 			this.skinTone = "light";
 			this.hairColor = "strawberry blonde";
 			this.hairLength = 39;
