@@ -15,7 +15,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const AdventureGuildQuests1:StatusEffectType          = mk("Adventure Guild Quests 1");//Imps Hunt / Demons Hunt / Minotaurs Hunt / x
 		public static const AdventureGuildQuests2:StatusEffectType          = mk("Adventure Guild Quests 2");//Feral Tentacle Beasts Hunt / Feral Imps Hunt / x / x
 		public static const AdventureGuildQuests3:StatusEffectType          = mk("Adventure Guild Quests 3");//x / x / x / x
-		public static const AdventureGuildQuests4:StatusEffectType          = mk("Adventure Guild Quests 4");//Chitin gathering / x / x / x
+		public static const AdventureGuildQuests4:StatusEffectType          = mk("Adventure Guild Quests 4");//Chitin gathering / Gel gathering / x / x
 		public static const AllNaturalOnaholeUsed:StatusEffectType          = mk("all-natural onahole used");
 		public static const AlrauneFlower:StatusEffectType                  = mk("Alraune Flower");
 		public static const AndysSmoke:StatusEffectType                     = mk("Andy's Smoke"); //v1: Hours; v2: Speed; v3: Intelligence
