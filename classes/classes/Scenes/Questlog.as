@@ -57,12 +57,12 @@ public class Questlog extends BaseContent
 			if (flags[kFLAGS.DEN_OF_DESIRE_QUEST] == 2) outputText("Completed (Reward taken)");
 			else if (SceneLib.dungeons.checkDenOfDesireClear()) outputText("Completed");
 			else if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 1) outputText("In Progress");
-			else outputText("Not Started");
+			else outputText("Not Started");/*
 			outputText("\n\n<u><b>River Dungeon Exploration</b></u>");
 			outputText("\n<b>1st Floor:</b> ");
 			if (SceneLib.dungeons.checkRiverDungeon1stFloorClear()) outputText("Completed");
 			else outputText("Not Started/In Progress");
-			outputText("\n<i><b>2nd Floor:</b> Soon</i>");
+			outputText("\n<i><b>2nd Floor:</b> Soon</i>");*/
 			outputText("\n\n<u><b>Adventure Guild Quests</b></u>");
 			outputText("\n<b>Imps Hunt:</b> ");
 			if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 2 || player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 4 || player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 7) outputText("Completed (for today)");

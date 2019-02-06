@@ -28,7 +28,7 @@ package classes.Scenes
 		}
 		private function Changelog25():void {
 			clearOutput();
-			outputText("(Part 2/2) <b>Version 0.8l:</b>\n\n");
+			outputText("(Part 2/2) <b>Version 0.8l (New Lunar Year mini-event + pig/boar/elf TF's rework, orc + displacer beast TF, 2 new areas + new enemies, Job: Gunslinger perk line, Perk-o-calipse 4 (77 perks), Achiev-o-calipse (over 70 new achievs), The Unicorn Daughter Strikes Back (Yes Celess is Back)):</b>\n\n");
 			outputText("-New area to find and explore: Caves. PC need to be lvl 30+ and can be found by using Explore option.\n");//Glacial Rift and Vulcanic Crag are now found by exploring Caves.
 			outputText("-New area to find and explore: Outer Battlefield. PC need to be lvl 5+ and can be found by using Explore option. Finding this area will now replace finding desert in req. to find mountains. This area is populated by group type enemies so either PC strong enough to deal with them without any aoe skills or need to get at least one aoe type of attacks.\n");
 			outputText("-New enemy added to Glacial Rift: Young Frost Giant - lvl 49. Frost Giant been buffed in attacks effects and stats to match his new lvl 80 status.\n");
@@ -84,9 +84,15 @@ package classes.Scenes
 			outputText("-Fixed bugs: missing toogle for lightning and darkness arrows, missing feminity meter on stats page, satyr tf not unlocking relevant metamorph options, cat tf's not unlocking fur option in metamorph, bee wings tf only triggering from no wings or demon wings, demon/devil tf only tf-ing specific type of wings, not working vampire face metamorph option, no menu after defeating ");
 			outputText("phoenix outside the tower when PC lust was above 33, Dominika spell learning error msg, T.Golems 3 and 5 send option error in picking cores, some weapon not counting toward using whirlwind, Cleave special usable before learning it and having no fatigue cost, magical soulskills still scaling of intelligence, Focused Mind improperly affecting min backfire chance, Crinos Shape ");
 			outputText("and Dwarf Rage specials not increasing current HP proportional to max HP, ivory inlaid arquebus not loading ammo at combat start or reloading ammo during combat, Hardcore save slot number not kept during ascension, Deep Cave Pod bad-end suddenylu becoming victory scene, Second Wind not increasing also max Reg % cap for it duration, not adding dmg bonus to arrow/bolt attacks ");
-			outputText("for using lightning or darkness arrows, eating in HXD restaurant / giving Sidone BJ / giving Konstantine BJ not refilling hunger\n\n\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("for using lightning or darkness arrows, eating in HXD restaurant / giving Sidone BJ / giving Konstantine BJ not refilling hunger, chitin gathering not progressing properly\n\n");/*ostatni punkt changelogu
+			outputText("<b>Version 0.8l2:</b>\n\n");
+			outputText("-New quest on Adventure Guild: gather green gel. First time completing reward is 1 perk point and all afterward completetions giving 3 spirit stones.\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-Fixed bugs: \n\n\n\n\n\n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");
 			outputText("\n");cel na 0.8: dodać nekomanta TF
 			outputText("\n");cel na 0.8: dodać kitsune/salamander TF
@@ -189,6 +195,14 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");*/
 			outputText("\n\n\n");
 			outputText("Plans for future builds (I know some of them are HUGE ones but without dreams to chase how can one change?):\n");
@@ -206,7 +220,7 @@ package classes.Scenes
 		}
 		private function Changelog24():void {
 			clearOutput();
-			outputText("(Part 1/2) <b>Version 0.8l:</b>\n\n");
+			outputText("(Part 1/2) <b>Version 0.8l (New Lunar Year mini-event + pig/boar/elf TF's rework, orc + displacer beast TF, 2 new areas + new enemies, Job: Gunslinger perk line, Perk-o-calipse 4 (77 perks), Achiev-o-calipse (over 70 new achievs), The Unicorn Daughter Strikes Back (Yes Celess is Back)):</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: Pig, Boar\n");
 			outputText("-New tier 0 misc lvl-up perk: Pig/Boar Fat. Req. 100+ thickness and pig score 4+. Effect: +1 to pig score, double dmg added to Body Slam that is based on thickness, +1 to physical/magicical armor def value (scalable), +10 to max thickness and +5 to max tou (scalable).\n");
 			outputText("-New tier 0 misc lvl-up perk: Orc Adrenal Glands. Req. Ferocity perk and 4+ orc score and free slot for adrenal glands mutations. Effect: +1 to orc score, increasing Ferocity limit by 2%, 5 pts of phantom Str (scalable).\n");
