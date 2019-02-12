@@ -83,7 +83,24 @@ public function encounterAiko():void {
 		+"You find yourself at a loss for words, your mouth hanging agape. \n\n"
 		+"Giggling lightly, the fox-eared woman walks up to you, pushing your lower jaw up with her index finger and walking around you, as if sizing you up. <i>“Hmm...It’s been a long time since I’ve seen a newcomer around here,”</i> she said, nodding slowly to herself. <i>“You must be the one that everyone has been talking about.”</i>\n\n"
 		+"Everyone? What is she talking about? Finally, you come to your senses and ask her who she is, and what just happened to the giant. \n\n");
-		if (player.kitsuneScore() == 0) {
+		if (player.kitsuneScore() >= 6 && player.tailType == 13) {
+			if (player.tailCount == 9) {
+				outputText("<i>“I am Aiko, guardian of these woo...”</i> she suddenly stops and wides her eyes, noting the swishy wheel of nine tails behind you. Gritting her teeth, she immediately falls on her knees, biting her lower lip much to your confusion. <i>“Please accept my deepest apologies! I... I didn't think you were nine-tails, my "+ player.mf("lord", "lady") +"! I'm so sorry!”</i>\n\n"
+				+"Confused, you rub your fingers into your [hair], speechless. After some time, your recall Ayane's description of nine-tailed kitsunes, you are supposed to be nobility into the kitsune race, but you give a playful smile and tell her to not worry about that since it's your first meeting, offering her a hand.\n\n"
+				+"Embarrassed, she lower her ears in shame and accepts your help, moving nervously her seven swishy tails. <i>“I-I just can't resist playing with newcomers, but since you fell into my prank, I thought you were some kind of illusionist with your tails!”</i> Giving a very nervous laugh, she successfully tries to mask her embarrassed blush. <i>“My name is Aiko, the guardian of these woods. My village didn't inform me that a nine-tails was on their way to visit us.. can I ask yours, my "+ player.mf("lord", "lady") +"”</i>\n\n"
+				+"You calmly give her your name, she's a very interesting fellow, and at least she's not trying to rape you like half of Mareth. You add that you only recently became a nine-tailed kitsune and you are still learning about their culture, telling her she shouldn't be so formal."
+				+"\n\n<i>“"+ player.mf("Lord", "Lady") +" [name]... no... [name]...It can be a bit sudden.. but can I ask you my ball back, please? You know how important is for us, probably you have one of your own, too.”</i> She seems much more relaxed after you told her to not worry about formalities.\n\n"
+				+"<i>“Even if I'm strong, I don't know if I can match the power of a High "+ player.mf("Priest", "Priestess") +" of our god... but if I have to, I can get pretty rough... So tell me, [name], do I have to get rough?”</i>");
+			}
+			else  {
+				outputText("<i>“I am Aiko, guardian of these woods. I see that you are one of my kind, but you are not from my village. So, are other clans still unaffected by the corruption?”</i>\n\n"
+				+"Calmly, you explain that you only recently have become a kitsune via the magic that lurks in Mareth. She gives a playful nod and laughs slightly. <i>“I just can't resist, it was so easy to trick you, you need to improve if you want to be a full-fledged kitsune!”</i> she says with a playful grin, you can't help to be a bit embarrassed for this.\n\n"
+				+"<i>“Anyhow, what's your name, fellow kitsune? We don't often get visitors since the Demons came.”</i> she asks, folding her arms under her large jiggling breasts.\n\n"
+				+"You give her your name, somewhat relieved to find another resident of this world that is interested in more than beating you into submission and raping you—at least, so far."
+				+"\n\n<i>“[name], huh? Well, [name], would it be terribly too much trouble for you to give me back my Ball? You know how important is for us since you're my kind.”</i> You know how important the sphere is for a kitsune, but before you can make the decision, she cuts you off <i>“Of course, I'm not afraid to get rough when I need to. So tell me, [name], do I have to get rough?”</i>");
+			}
+		}
+		else {
 			outputText("<i>“I am Aiko, guardian of these woods. You’re trespassing in kitsune territory. Didn’t you see the sign?”</i>\n\n"
 			+"You explain to her that you couldn’t read the sign, but even when you tried to leave, you ended up getting turned around again and again.\n\n"
 			+"<i>“Oh. Right…”</i> Aiko says, making a show of trying to look innocent. <i>“What can I say, I just couldn’t resist! Like I said, you’re the first newcomer I’ve seen in quite some time. There’s only so much amusement to be found when your only company is a tree. So then, newcomer, I’ve given you my name, why don’t you tell me yours?”</i>\n\n"
@@ -93,20 +110,6 @@ public function encounterAiko():void {
 			+(player.cor>20?"and tell her as much with a slight scowl,":"") + " but you nod your head " + (player.cor<=20?"politely":"")
 			+", now understanding that the giant was merely an illusion cast by this girl.\n\n"
 			+"<i>“Of course, I’m not afraid to get rough when I have to. So tell me, [name], do I have to get rough?”</i>");
-		}
-		else if (player.tail.type == Tail.FOX && player.tail.count == 9) {
-			outputText("<i>“I am Aiko, guardian of these woo...”</i> she suddenly stops and wides her eyes, noting the swishy wheel of nine tails behind you. Gritting her teeth, she immediately falls on her knees, biting her lower lip much to your confusion. <i>“Please accept my deepest apologies! I... I didn't think you were nine-tails, my "+ player.mf("lord", "lady") +"! I'm so sorry!”</i>\n\n"
-			+"Confused, you rub your fingers into your [hair], speechless. After some time, your recall Ayane's description of nine-tailed kitsunes, you are supposed to be nobility into the kitsune race, but you give a playful smile and tell her to not worry about that since it's your first meeting, offering her a hand.\n\n"
-			+"Embarrassed, she lower her ears in shame and accepts your help, moving nervously her seven swishy tails. <i>“I-I just can't resist playing with newcomers, but since you fell into my prank, I thought you were some kind of illusionist with your tails!”</i> Giving a very nervous laugh, she successfully tries to mask her embarrassed blush. <i>“My name is Aiko, the guardian of these woods. My village didn't inform me that a nine-tails was on their way to visit us.. can I ask yours, my "+ player.mf("lord", "lady") +"”</i>\n\n"
-			+"You calmly give her your name, she's a very interesting fellow, and at least she's not trying to rape you like half of Mareth. You add that you only recently became a nine-tailed kitsune and you are still learning about their culture, telling her she shouldn't be so formal."
-			+"\n\n<i>“"+ player.mf("Lord", "Lady") +" [name]... no... [name]...It can be a bit sudden.. but can I ask you my ball back, please? You know how important is for us, probably you have one of your own, too.”</i> She seems much more relaxed after you told her to not worry about formalities.\n\n"
-			+"<i>“Even if I'm strong, I don't know if I can match the power of a High "+ player.mf("Priest", "Priestess") +" of our god... but if I have to, I can get pretty rough... So tell me, [name], do I have to get rough?”</i>");
-		} else {
-			outputText("<i>“I am Aiko, guardian of these woods. I see that you are one of my kind, but you are not from my village. So, are other clans still unaffected by the corruption?”</i>\n\n"
-			+"Calmly, you explain that you only recently have become a kitsune via the magic that lurks in Mareth. She gives a playful nod and laughs slightly. <i>“I just can't resist, it was so easy to trick you, you need to improve if you want to be a full-fledged kitsune!”</i> she says with a playful grin, you can't help to be a bit embarrassed for this.\n\n"
-			+"<i>“Anyhow, what's your name, fellow kitsune? We don't often get visitors since the Demons came.”</i> she asks, folding her arms under her large jiggling breasts.\n\n"
-			+"You give her your name, somewhat relieved to find another resident of this world that is interested in more than beating you into submission and raping you—at least, so far."
-			+"\n\n<i>“[name], huh? Well, [name], would it be terribly too much trouble for you to give me back my Ball? You know how important is for us since you're my kind.”</i> You know how important the sphere is for a kitsune, but before you can make the decision, she cuts you off <i>“Of course, I'm not afraid to get rough when I need to. So tell me, [name], do I have to get rough?”</i>");
 		}
 		
 		//[Yes][No]

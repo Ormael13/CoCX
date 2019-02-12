@@ -113,6 +113,7 @@ public function basicarcherytraining2():void
 
 public function beachInteractionsAfterArcheryTraining():void
 {
+	spriteSelect(SpriteDb.s_ceani);
 	clearOutput();
 	if (player.statusEffectv1(StatusEffects.Kindra) > 145 && player.weaponRange == weaponsrange.SHUNHAR && flags[kFLAGS.CEANI_ARCHERY_TRAINING] == 4) {
 		outputText("You have gone a long way in learning how to use various ranged weapons. It occurs to you Ceani could learn a thing or two from you, and, as you spot the orca girl lazily resting on the beach you give her a wave.\n\n");
@@ -173,6 +174,7 @@ public function beachInteractionsAfterArcheryTraining():void
 
 public function oceanInteractionsAfterArcheryTraining():void
 {
+	spriteSelect(SpriteDb.s_ceani);
 	clearOutput();
 	outputText("You find move around the ocean when you spot Ceani swimming nearby.\n\n");
 	outputText("\"<i>Hey it’s you [name] nice to see you. I was wondering how you were. How is your demon hunting going?</i>\"\n\n");
@@ -204,6 +206,7 @@ public function oceanInteractionsAfterArcheryTraining():void
 }
 
 public function ceaniCampMainMenu():void {
+	spriteSelect(SpriteDb.s_ceani);
 	clearOutput();
 	outputText("As you walk over to her Ceani greet with with a bright smile. Her tail swishing once or twice behind her.\n\n");
 	outputText("\"<i>Good ");
@@ -221,6 +224,7 @@ public function ceaniCampMainMenu():void {
 }
 
 public function ceaniAppearance():void {
+	spriteSelect(SpriteDb.s_ceani);
 	clearOutput();
 	outputText("Ceani is a 11 feet tall Orca morph. Her flowing pink hair are tied on the front in two bangles and left flowing on her back with a larger golden bangle to tie them together at the end. Her orange pupils always sparkle with the shine of someone who is almost always ready to laugh and her somewhat flat orca nose and cute toothy mouth only make her face all the more friendly. Her large ears are alert to sound both on land and underwater, likely she also uses them for directions. She is laying on the sand next to you smiling as you look her up. She wears a pink bikini to cover her privates.\n\n");
 	outputText("Her arms and legs looks about human save for the fins on her forearms not to mention her webbed fingers and toes. Her, still wet, skin is black with a white underside that runs all along her body length up to below her nose. She has a pair of white circles under and above her eyes in an orca pattern. From her well shaped ass surges a powerful tail with a dorsal fin that swishes constantly behind her. It is strong enough to launch her several meter above the water level when she swim.\n\n");
@@ -239,6 +243,7 @@ public function beachInteractionsTalk():void
 }
 public function talkHer():void
 {
+	spriteSelect(SpriteDb.s_ceani);
 	clearOutput();
 	outputText("So is she genuinely from Mareth or does she hail from another world?\n\n");
 	outputText("\"<i>Actually, yes, I am from Mareth, though this isn’t the same ocean as I used to hunt in. Many of the aquatic species migrated to the lake or to the underground ocean when the demons began to hold the water up. This area however is under a constant spell that cancels their magic, so it rains from time to time albeit with powerful thunderstorms. Many of the species living in these depths are from a different world, including less than friendly creatures ");
@@ -252,6 +257,7 @@ public function talkHer():void
 }
 public function talkHunger():void
 {
+	spriteSelect(SpriteDb.s_ceani);
 	clearOutput();
 	outputText("Ok, so how come is she constantly hungry anyway?\n\n");
 	outputText("\"<i>Well, truth be told, I’m a big eater and my size doesn’t help, so I have to constantly stay on the hunt to maintain my strength. I can spend up to 3 or 4 hours without eating if needs be but the rest of the time I eat every catch I find right away.</i>\"\n\n");
@@ -261,6 +267,7 @@ public function talkHunger():void
 }
 public function talkSea():void
 {
+	spriteSelect(SpriteDb.s_ceani);
 	clearOutput();
 	outputText("Last you heard, Mareth water supply ran low, so how come there is an entire sea here. Ceani simply shrugs in reply.\n\n");
 	outputText("\"<i>Marae roots doesn’t extend to this place mainly because this sea was not originally here. The cult of the deep one is the reason why there is water here in the first place. When the demons attempted to dry out the world, they hid in underwater caves and sealed them shut to prevent the water from escaping. One of their air breathing acolytes came to this place and started the initial flood that would fill this area, the rest of them came over. ");
@@ -276,6 +283,7 @@ public function talkSea():void
 
 public function beachInteractionsDate():void
 {
+	spriteSelect(SpriteDb.s_ceani);
 	clearOutput();
 	outputText("You ask the Orca if she would like to go on a date with you?\n\n");
 	outputText("\"<i>Sure! but I can’t leave the sea for too long. I prefer to stay close to my food if possible.</i>\"\n\n");
@@ -286,6 +294,7 @@ public function beachInteractionsDate():void
 
 public function oceanInteractionsDate():void
 {
+	spriteSelect(SpriteDb.s_ceani);
 	clearOutput();
 	outputText("You ask the Orca if she would like to go on a date with you?\n\n");
 	outputText("\"<i>Sure! but I can’t leave the sea for too long. I prefer to stay close to my food if possible.</i>\"\n\n");
@@ -296,6 +305,7 @@ public function oceanInteractionsDate():void
 
 public function campInteractionsDateAndFuck():void
 {
+	spriteSelect(SpriteDb.s_ceani);
 	clearOutput();
 	outputText("Where would you like to hang out with her?\n\n");
 	menu();
@@ -304,6 +314,7 @@ public function campInteractionsDateAndFuck():void
 }
 public function beachInteractionsDateUnderwater3():void
 {
+	spriteSelect(SpriteDb.s_ceani);
 	clearOutput();
 	outputText("The two of you make the trip back to the ocean. As soon as she is in range Ceani dive in laughing.\n\n");
 	outputText("\"<i>Oh I had forgot how different from the stream sea salted waters feels like. Come on [name] I wouldn't want you to be left behind especially since I am in a swimming mood.</i>\"\n\n");
@@ -311,6 +322,7 @@ public function beachInteractionsDateUnderwater3():void
 }
 public function beachInteractionsDateOnTheBeach3():void
 {
+	spriteSelect(SpriteDb.s_ceani);
 	clearOutput();
 	outputText("The both of you go take a stroll on the beach discussing your daily activities. There isn’t anyone aside from you two in the area and soon Ceani realise this.\n\n");
 	beachInteractionsDateOnTheBeach2();
@@ -318,6 +330,7 @@ public function beachInteractionsDateOnTheBeach3():void
 
 public function beachInteractionsDateUnderwater0():void
 {
+	spriteSelect(SpriteDb.s_ceani);
 	clearOutput();
 	outputText("You propose the two of you move underwater and have a trip out at sea.\n\n");
 	outputText("\"<i>Oh, so you want us to swim together? Sure I was done sunbathing anyway.</i>\"\n\n");
@@ -328,6 +341,7 @@ public function beachInteractionsDateUnderwater0():void
 
 public function beachInteractionsDateUnderwater1():void
 {
+	spriteSelect(SpriteDb.s_ceani);
 	clearOutput();
 	outputText("Why go anywhere else? The water here is pleasant enough and the two of you could go sightseeing.\n\n");
 	outputText("\"<i>I agree and I think I know just the places too.</i>\"\n\n");
@@ -430,6 +444,7 @@ public function underwaterDateFemaleVer():void
 
 public function beachInteractionsDateOnTheBeach0():void
 {
+	spriteSelect(SpriteDb.s_ceani);
 	clearOutput();
 	outputText("How about a walk? It's not like she spend that much time out of the water anyway. The both of you take a stroll on the beach");
 	beachInteractionsDateOnTheBeach2();
@@ -437,6 +452,7 @@ public function beachInteractionsDateOnTheBeach0():void
 
 public function beachInteractionsDateOnTheBeach1():void
 {
+	spriteSelect(SpriteDb.s_ceani);
 	clearOutput();
 	outputText("How about a walk? It's not like she spend that much time out of the water anyway.\n\n");
 	outputText("\"<i>Well I guess you’re right. I spend most of my day underwater. A walk wouldn’t hurt.</i>\"\n\n");
@@ -544,6 +560,7 @@ public function beachDateFemaleVer():void {
 
 public function come2campCeani():void
 {
+	spriteSelect(SpriteDb.s_ceani);
 	clearOutput();
 	outputText("You ask Ceani if she would mind living with you. Her white spots reddens in shyness.\n\n");
 	outputText("\"<i>I...Sure [name] we could both live together at the sea I would really be happy to share life with you.</i>\"\n\n");
@@ -573,6 +590,7 @@ public function come2campCeani():void
 
 public function fishingContestWithCeani():void
 {
+	spriteSelect(SpriteDb.s_ceani);
 	clearOutput();
 	outputText("You ask Ceani if she would mind for the two of you to have a friendly fishing competition again.\n\n");
 	outputText("\"<i>Well sure lover, honestly I don’t care whoever win I need exercise and the catches will make for a neat meal. That said I plan to win.</i>\"\n\n");
@@ -591,6 +609,7 @@ public function fishingContestWithCeani():void
 
 public function sparringWithCeani():void
 {
+	spriteSelect(SpriteDb.s_ceani);
 	clearOutput();
 	outputText("You ask the Orca morph if she would mind sparring with you.\n\n");
 	outputText("\"<i>I don’t want to hurt you and...</i>\"\n\n");
@@ -601,6 +620,7 @@ public function sparringWithCeani():void
 }
 public function sparringWithCeaniWon():void
 {
+	spriteSelect(SpriteDb.s_ceani);
 	clearOutput();
 	outputText("Ceani kneels to the ground to admit defeat.\n\n");
 	outputText("\"<i>Wow [name] your way stronger then you look! Had I been any less tough or smaller you could have broke some of my bones. I'll have to be more careful next time. Care to help me back to my bedroll? I think I will need a nap...</i>\"\n\n");
@@ -634,6 +654,7 @@ public function sparringWithCeaniWon():void
 }
 public function sparringWithCeaniLost():void
 {
+	spriteSelect(SpriteDb.s_ceani);
 	clearOutput();
 	outputText("You put a kneel down in defeat. Wow she's way tougher than she looks.\n\n");
 	outputText("\"<i>Oh my gosh! Wow, I’m so sorry! Are you hurt [name]! Gah I knew I should have held back!!!</i>\"\n\n");

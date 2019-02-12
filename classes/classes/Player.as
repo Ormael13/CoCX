@@ -420,14 +420,14 @@ use namespace CoC;
 			if (skin.hasBaseOnly(Skin.STONE)) armorDef += (10 * newGamePlusMod);
 			//'Thick' dermis descriptor adds 1!
 			if (skinAdj == "smooth") armorDef += (1 * newGamePlusMod);
-			//Plant score bonuses
+			//Plant races score bonuses
 			if (plantScore() >= 4) {
 				if (plantScore() >= 7) armorDef += (10 * newGamePlusMod);
 				else if (plantScore() == 6) armorDef += (8 * newGamePlusMod);
 				else if (plantScore() == 5) armorDef += (4 * newGamePlusMod);
 				else armorDef += (2 * newGamePlusMod);
 			}
-			if (yggdrasilScore() >= 10) armorDef += (10 * newGamePlusMod);
+			if (yggdrasilScore() >= 10 || alrauneScore() >= 10) armorDef += (10 * newGamePlusMod);
 			//Dragon score bonuses
 			if (dragonScore() >= 10) {
 				if (dragonScore() >= 28) armorDef += (10 * newGamePlusMod);
@@ -702,8 +702,8 @@ use namespace CoC;
 		//Natural Claws (arm types and weapons that can substitude them)
 		public function haveNaturalClaws():Boolean
 		{
-			return arms.type == Arms.CAT || arms.type == Arms.DEVIL || arms.type == Arms.DRAGON || arms.type == Arms.FOX || arms.type == Arms.GARGOYLE || arms.type == Arms.LION || arms.type == Arms.LIZARD || arms.type == Arms.RAIJU
-			 || arms.type == Arms.RED_PANDA || arms.type == Arms.SALAMANDER || arms.type == Arms.WOLF;
+			return arms.type == Arms.CAT || arms.type == Arms.DEVIL || arms.type == Arms.DISPLACER || arms.type == Arms.DRAGON || arms.type == Arms.FOX || arms.type == Arms.GARGOYLE || arms.type == Arms.LION
+			 || arms.type == Arms.LIZARD || arms.type == Arms.RAIJU || arms.type == Arms.RED_PANDA || arms.type == Arms.SALAMANDER || arms.type == Arms.WOLF;
 		}
 		public function haveNaturalClawsTypeWeapon():Boolean
 		{
@@ -1319,6 +1319,13 @@ use namespace CoC;
 			if(findPerk(PerkLib.ResistanceIV) >= 0) lust -= 5;
 			if(findPerk(PerkLib.ResistanceV) >= 0) lust -= 5;
 			if(findPerk(PerkLib.ResistanceVI) >= 0) lust -= 5;
+			if(findPerk(PerkLib.PewWarmer) >= 0) lust -= 5;
+			if(findPerk(PerkLib.Acolyte) >= 0) lust -= 5;
+			if(findPerk(PerkLib.Priest) >= 0) lust -= 5;
+			if(findPerk(PerkLib.Pastor) >= 0) lust -= 5;
+			if(findPerk(PerkLib.Saint) >= 0) lust -= 5;
+			if(findPerk(PerkLib.Cardinal) >= 0) lust -= 5;
+			if(findPerk(PerkLib.Pope) >= 0) lust -= 5;
 			if(findPerk(PerkLib.LactaBovinaOvariesEvolved) >= 0) lust -= 5;
 			if(findPerk(PerkLib.MinotaurTesticlesEvolved) >= 0) lust -= 5;
 			if((findPerk(PerkLib.UnicornBlessing) >= 0 && cor <= 20) || (findPerk(PerkLib.BicornBlessing) >= 0 && cor >= 80)) lust -= 10;
@@ -6714,6 +6721,27 @@ use namespace CoC;
 			if (this.findPerk(PerkLib.HistoryReligious) >= 0 || this.findPerk(PerkLib.PastLifeReligious) >= 0) {
 				minLib -= 2;
 			}
+			if (this.findPerk(PerkLib.PewWarmer) >= 0) {
+				minLib -= 2;
+			}
+			if (this.findPerk(PerkLib.Acolyte) >= 0) {
+				minLib -= 2;
+			}
+			if (this.findPerk(PerkLib.Priest) >= 0) {
+				minLib -= 2;
+			}
+			if (this.findPerk(PerkLib.Pastor) >= 0) {
+				minLib -= 2;
+			}
+			if (this.findPerk(PerkLib.Saint) >= 0) {
+				minLib -= 2;
+			}
+			if (this.findPerk(PerkLib.Cardinal) >= 0) {
+				minLib -= 2;
+			}
+			if (this.findPerk(PerkLib.Pope) >= 0) {
+				minLib -= 2;
+			}
 			if (this.findPerk(PerkLib.GargoylePure) >= 0) {
 				minLib = 5;
 				minSen = 5;
@@ -6722,21 +6750,20 @@ use namespace CoC;
 				minSen += 15;
 			}
 			//Factory Perks
-			if(this.hasPerk(PerkLib.DemonicLethicite)) {minCor+=10;minLib+=10;}
-			if(this.hasPerk(PerkLib.ProductivityDrugs)) {minLib+=this.perkv1(PerkLib.ProductivityDrugs);minCor+=10;}
-
+			if (this.hasPerk(PerkLib.DemonicLethicite)) {minCor+=10;minLib+=10;}
+			if (this.hasPerk(PerkLib.ProductivityDrugs)) {minLib+=this.perkv1(PerkLib.ProductivityDrugs);minCor+=10;}
 			//Minimum Sensitivity
-			if(this.manticoreScore() >= 6) minSen += (30 * newGamePlusMod);
-			if(this.manticoreScore() >= 12) minSen += (15 * newGamePlusMod);
-			if(this.devilkinScore() >= 7) minSen += (10 * newGamePlusMod);
-			if(this.devilkinScore() >= 11) minSen += (15 * newGamePlusMod);
-			if(this.devilkinScore() >= 14) minSen += (30 * newGamePlusMod);
-			if(this.elfScore() >= 5) minSen += (15 * newGamePlusMod);
-			if(this.elfScore() >= 11) minSen += (15 * newGamePlusMod);
-			if(this.raijuScore() >= 5) minSen += (25 * newGamePlusMod);
-			if(this.raijuScore() >= 10) minSen += (25 * newGamePlusMod);
-			if(this.hellcatScore() >= 10) minSen += (25 * newGamePlusMod);
-
+			if (this.manticoreScore() >= 6) minSen += (30 * newGamePlusMod);
+			if (this.manticoreScore() >= 12) minSen += (15 * newGamePlusMod);
+			if (this.devilkinScore() >= 7) minSen += (10 * newGamePlusMod);
+			if (this.devilkinScore() >= 11) minSen += (15 * newGamePlusMod);
+			if (this.devilkinScore() >= 14) minSen += (30 * newGamePlusMod);
+			if (this.elfScore() >= 5) minSen += (15 * newGamePlusMod);
+			if (this.elfScore() >= 11) minSen += (15 * newGamePlusMod);
+			if (this.raijuScore() >= 5) minSen += (25 * newGamePlusMod);
+			if (this.raijuScore() >= 10) minSen += (25 * newGamePlusMod);
+			if (this.hellcatScore() >= 10) minSen += (25 * newGamePlusMod);
+			if (minLib < 1) minLib = 1;
 			return {
 				str:minStr,
 				tou:minTou,

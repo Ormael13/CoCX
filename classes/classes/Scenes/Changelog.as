@@ -19,7 +19,7 @@ package classes.Scenes
 		public function accessChangelogMenu():void {
 			Changelog25();
 		}
-		//zrobić do 2019 na świta event z choinką i reniferami i nie odblokowywać go do ok. 20-24 grudnia 2019 xD
+		//zrobić do 2019 na świeta event z choinką i reniferami i nie odblokowywać go do ok. 20-24 grudnia 2019 xD
 		private function Changelog26():void {
 			clearOutput();
 			menu();
@@ -38,7 +38,6 @@ package classes.Scenes
 			outputText("-Each year between 21th January and 20th February there will be new holidat period - Lunar New Year that will have some events happening in Mareth during that time.\n");
 			outputText("-For this year i put in small celebration event in He'Xin'Dao that allow to eat food for free or buy new clothes (they are all the same just with 4 diff colors and for male/female PC's). And what cool that npc's there are matching current new year (well within reason so going to next year or beofre year 2015 will set animal to the one for either year 2015 or year 2019).\n");
 			outputText("-New clothes: Red/Green/Blue/Purple Lunar new year dress (m)/(f). All of them bought during New Lunar event in He'Xin'Dao for 100 gems. They have 0 armor/mag resistance but grants 5% to dodge and 5% to crit chance for phys and mag attacks.\n");
-			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
 			outputText("-New body part - arms: Pig arms. Req. Cloven Hooves Legs and Pig Tail\n");
 			outputText("-New body part - arms: Boar arms. Req. Cloven Hooves Legs and Pig Tail\n");
 			outputText("-Pig/Boar race now have racial bonuses. Half Pig-morph/Pig-morph/Boar-morph that req. 4/8/12 pts in pig score: +30/60/125 to max Str, +60/120/125 to max Tou, -10/15/15 to max Spe, -5/10/10 to max Int, -0/5/0 to max Wis\n");
@@ -53,8 +52,6 @@ package classes.Scenes
 			outputText("-New body part - rear body: Displacer tentacles. Req. Displacer Arms\n");
 			outputText("-New TF item: Displacer Fruit. Buyable at Dinah shop. Using this item will turn PC into displacer beast. Displacer beast bonuses at 13+ racial score (scalable): +80 to max Str, +100 to max Spe, -25 to max Int, -20 to max Wis, +60 to max Lib\n");
 			outputText("-New body part - face: Animal fangs. General type of face that is human with exception of having animal-like teeth. Some of races would have in future added this ver of face as option to full animal face or as just a face variant used by that race.\n");
-			//outputText("-New TF item: . Gained by bringing Orc Mead to Lumi for enhancing. Using this item will turn PC into high orc. High Orc (scalable): +130 to max Str, +30 to max Tou, +10 to max Spe, -30 to max Int, +25 to max Lib, +20% to max Wrath.\n");
-			//outputText("-New TF item: . Gained by bringing Elf Ear to Lumi for enhancing. Using this item will turn PC into high elf. High Elf (scalable): -10 to max Str, -15 to max Tou, +80 to max Spe, +80 to max Int, +60 to max Wis, +30 max/min Sens, +20% to max Mana.\n");
 			outputText("-Celess is once again accesable. She come back with alternative recruit path for non virgin PC's that involve fight with Nightmare.\n");
 			outputText("-75 new achievements (26 of them are shadow achiev). Some of them are not yet possible to unlock, so not worry too much, if you can't catch them all.\n");
 			outputText("-Dam and Fishery structures giving 2x more asc points per build tier. Completed Feral Imp Capture quest is giving 5 asc points.\n");
@@ -84,15 +81,72 @@ package classes.Scenes
 			outputText("-Fixed bugs: missing toogle for lightning and darkness arrows, missing feminity meter on stats page, satyr tf not unlocking relevant metamorph options, cat tf's not unlocking fur option in metamorph, bee wings tf only triggering from no wings or demon wings, demon/devil tf only tf-ing specific type of wings, not working vampire face metamorph option, no menu after defeating ");
 			outputText("phoenix outside the tower when PC lust was above 33, Dominika spell learning error msg, T.Golems 3 and 5 send option error in picking cores, some weapon not counting toward using whirlwind, Cleave special usable before learning it and having no fatigue cost, magical soulskills still scaling of intelligence, Focused Mind improperly affecting min backfire chance, Crinos Shape ");
 			outputText("and Dwarf Rage specials not increasing current HP proportional to max HP, ivory inlaid arquebus not loading ammo at combat start or reloading ammo during combat, Hardcore save slot number not kept during ascension, Deep Cave Pod bad-end suddenylu becoming victory scene, Second Wind not increasing also max Reg % cap for it duration, not adding dmg bonus to arrow/bolt attacks ");
-			outputText("for using lightning or darkness arrows, eating in HXD restaurant / giving Sidone BJ / giving Konstantine BJ not refilling hunger, chitin gathering not progressing properly\n\n");/*ostatni punkt changelogu
+			outputText("for using lightning or darkness arrows, eating in HXD restaurant / giving Sidone BJ / giving Konstantine BJ not refilling hunger, chitin gathering not progressing properly\n\n");
 			outputText("<b>Version 0.8l2:</b>\n\n");
-			outputText("-New quest on Adventure Guild: gather green gel. First time completing reward is 1 perk point and all afterward completetions giving 3 spirit stones.\n");
+			outputText("-New armor: Black Kimono. Buyable at Ayane shop magic resistance: 1, 200 gems, decrease spells and soulskills costs by 20%, increase foxfire power by 20%\n");
+			outputText("-New option at Lunar Festival at HXD: Gifts. Usable only once (need to ascend to been able pick it up again) and give randomn amount of gems.\n");
+			outputText("-New option at Lunar Festival at HXD: Fireworks. Accesable when it's 8 pm or later.\n");
+			outputText("-New option at Lunar Festival at HXD: Chi Chi. req. to fight with her once at arena and not causing her death. Accesable when it's 6 pm or later. Also added Chi Chi status on NPC's stats subpage.\n");
+			outputText("-Eating food or buying clothes would now progress time a bit.\n");
+			outputText("-Killing Patchouli would also give asc point just like bimbofication and making her slave at camp giving. Not like i suggest to be so cruel to him.\n");
+			outputText("-Chi Chi, Raiju, Ceani, Patchouli have sprite added to many more scenes.\n");
+			outputText("-New tier 1 misc lvl-up perk: Pew Warmer. Req. History: Religious or Past Life: Religious perk. Effect: -2 min libido and +5% to lust resistance.\n");
+			outputText("-New tier 4 misc lvl-up perk: Acolyte. Req. Pew Warmer perk. Effect: -2 min libido and +5% to lust resistance.\n");
+			outputText("-New tier 7 misc lvl-up perk: Priest. Req. Acolyte perk. Effect: -2 min libido and +5% to lust resistance.\n");
+			outputText("-New tier 12 misc lvl-up perk: Pastor. Req. Priest perk. Effect: -2 min libido and +5% to lust resistance.\n");
+			/*outputText("-New tier 17 misc lvl-up perk: Saturation. Req. Refinement perk. Effect: number of possible effects of transformatives +1.\n");
+			outputText("-New tier 17 misc lvl-up perk: Metamorphable. Req. In Control perk. Effect: +10% max soulforce.\n");
+			outputText("-New tier 17 misc lvl-up perk: Mind of Steel. Req. Body of Steel perk. Effect: +10% melee phys dmg.\n");
+			outputText("-New tier 17 misc lvl-up perk: Hoarder. Req. Collector perk. Effect: 15% more gems from victories.\n");
+			outputText("-New tier 17 misc lvl-up perk: Surgeon's Aide. Req. Paramedic perk. Effect: increases HP gains by 20%.\n");
+			outputText("-New tier 17 misc lvl-up perk: Saint. Req. Pastor perk. Effect: -2 min libido and +5% to lust resistance.\n");
+			outputText("-New tier 17 misc lvl-up perk: Dean. Req. Principle perk. Effect: +10% max mana.\n");
+			outputText("-New tier 17 misc lvl-up perk: Sniper's Friend. Req. Engineer's Friend perk. Effect: +10% range phys dmg.\n");
+			outputText("-New tier 17 misc lvl-up perk: Napping. Req. Skipping Work perk. Effect: +20% to fatigue recovery.\n");
+			//slut line
+			outputText("-New tier 17 misc lvl-up perk: Anvil. Req. Hammer perk. Effect: increasing armor proficiency. (+5% phys/mag resistance)\n");
+			outputText("-New tier 17 misc lvl-up perk: Pornstar. Req. Brothel Owner perk. Effect: +15% tease dmg.\n");
+			outputText("-New tier ?? misc lvl-up perk: Perfection. Req. Saturation perk. Effect: number of possible effects of transformatives +1.\n");
+			outputText("-New tier ?? misc lvl-up perk: Soul Powered. Req. Metamorphable perk. Effect: +10% max soulforce.\n");
+			outputText("-New tier ?? misc lvl-up perk: Soul of Steel. Req. Mind of Steel perk. Effect: +10% melee phys dmg.\n");
+			outputText("-New tier ?? misc lvl-up perk: Blessed by Lady Godiva. Req. Hoarder perk. Effect: 15% more gems from victories.\n");
+			outputText("-New tier ?? misc lvl-up perk: Surgeon. Req. Surgeon's Aide perk. Effect: increases HP gains by 20%.\n");
+			outputText("-New tier ?? misc lvl-up perk: Cardinal. Req. Saint perk. Effect: -2 min libido and +5% to lust resistance.\n");
+			outputText("-New tier ?? misc lvl-up perk: President. Req. Dean perk. Effect: +10% max mana.\n");
+			outputText("-New tier ?? misc lvl-up perk: Spy's Enemy. Req. Sniper's Friend perk. Effect: +10% range phys dmg.\n");
+			outputText("-New tier ?? misc lvl-up perk: ZZZ. Req. Napping perk. Effect: +20% to fatigue recovery.\n");
+			//slut line
+			outputText("-New tier ?? misc lvl-up perk: Weapon. Req. Anvil perk. Effect: increasing armor proficiency. (+5% phys/mag resistance)\n");
+			outputText("-New tier ?? misc lvl-up perk: Sex Champion. Req. Pornstar perk. Effect: +15% tease dmg.\n");
+			outputText("-New tier ?? misc lvl-up perk: Creationism. Req. Perfection perk. Effect: number of possible effects of transformatives +1.\n");
+			outputText("-New tier ?? misc lvl-up perk: All-Seeing. Req. Soul Powered perk. Effect: +10% max soulforce.\n");
+			outputText("-New tier ?? misc lvl-up perk: God of Steel. Req. Soul of Steel perk. Effect: +10% melee phys dmg.\n");
+			outputText("-New tier ?? misc lvl-up perk: Lady Godiva's favorite Child. Req. Blessed by Lady Godiva perk. Effect: 15% more gems from victories.\n");
+			outputText("-New tier ?? misc lvl-up perk: MEDIC!!!. Req. Surgeon perk. Effect: increases HP gains by 20%.\n");
+			outputText("-New tier ?? misc lvl-up perk: Pope. Req. Cardinal perk. Effect: -2 min libido and +5% to lust resistance.\n");
+			outputText("-New tier ?? misc lvl-up perk: NERD!!!. Req. President perk. Effect: +10% max mana.\n");
+			outputText("-New tier ?? misc lvl-up perk: SHIT YOU TOUCHED SASHA!!! Req. Spy's Enemy perk. Effect: +10% range phys dmg.\n");
+			outputText("-New tier ?? misc lvl-up perk: LAZY!!! Req. ZZZ perk. Effect: +20% to fatigue recovery.\n");
+			//slut line
+			outputText("-New tier ?? misc lvl-up perk: Armor. Req. Weapon perk. Effect: increasing armor proficiency. (+5% phys/mag resistance)\n");
+			outputText("-New tier ?? misc lvl-up perk: Sex Deity. Req. Sex Champion perk. Effect: +15% tease dmg.\n");*/
+			/*outputText("-New tier 1 misc lvl-up perk: . Req. History: Slut or Past Life: Slut perk. Effect: .\n");.
+			outputText("-New tier 4 misc lvl-up perk: . Req.  perk. Effect: .\n");
+			outputText("-New tier 7 misc lvl-up perk: . Req.  perk. Effect: .\n");
+			outputText("-New tier 12 misc lvl-up perk: . Req.  perk. Effect: .\n");
+			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: .\n");
+			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: .\n");
+			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: .\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-Fixed bugs: \n\n\n\n\n\n");
+			outputText("-\n");*/
+			outputText("-Fixed bugs: Alraune loosing natural armor bonus from been plant race, Displacer beast defeat scene parser errors, Bro Brew giving incorrect cock size, one of new goblins group not fully recognized as group by game, unable to use Pounce/Sky Pounce as displacer beast, Aiko recognizing non-kitsune PC as kitsune\n\n\n\n\n\n");/*ostatni punkt changelogu
+			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
+			//outputText("-New TF item: . Gained by bringing Orc Mead to Lumi for enhancing. Using this item will turn PC into high orc. High Orc (scalable): +130 to max Str, +30 to max Tou, +10 to max Spe, -30 to max Int, +25 to max Lib, +20% to max Wrath.\n");
+			//outputText("-New TF item: . Gained by bringing Elf Ear to Lumi for enhancing. Using this item will turn PC into high elf. High Elf (scalable): -10 to max Str, -15 to max Tou, +80 to max Spe, +80 to max Int, +60 to max Wis, +30 max/min Sens, +20% to max Mana.\n");
+			//outputText("-New quest on Adventure Guild: gather green gel. First time completing reward is 1 perk point and all afterward completetions giving 3 spirit stones.\n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");
 			outputText("\n");cel na 0.8: dodać nekomanta TF
 			outputText("\n");cel na 0.8: dodać kitsune/salamander TF
@@ -173,6 +227,9 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we wlasciwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -301,56 +358,6 @@ package classes.Scenes
 			outputText("-New event perk: Ferocity. Gained by using orc tf when having orc: legs, arms, fangs, eyes; scar shaped tattoes and 11+ in orc score. Effect: PC continue fighting even when HP is below 0. Will loose 1% of max HP each round and would loose fight by HP defeat when negative HP reach 15% of max HP. Doubles wrath generated when below 0 HP. Would be lost if orc score drop below 11 pts. (+2 to orc score)\n");
 			outputText("-New event perk: Elven Sense. Gained by using elf tf when PC have both elf eyes and ears. Effect: Gain a chance to dodge attacks (+5%) and an increased chance to score critical hits (+5% to both phys and magical crit chance when having 50+ int/wis). Would be lost if PC not have elf eyes and ears. (+1 to elf score)\n");
 			outputText("-New event perk: Flawless Body. Gained by using elf tf when PC skin change to flawless human skin. Effect: Your elven body with its flawless form and skin is so alluring it reinforces your ability to tease. Would be lost if PC not have elf arms, elf legs and flawless normal (human) skin. (+10 slutty seduction, +1 to elf score)\n");
-			/*outputText("-New tier 17 misc lvl-up perk: Saturation. Req. Refinement perk. Effect: number of possible effects of transformatives +1.\n");
-			outputText("-New tier 17 misc lvl-up perk: Metamorphable. Req. In Control perk. Effect: +10% max soulforce.\n");
-			outputText("-New tier 17 misc lvl-up perk: Mind of Steel. Req. Body of Steel perk. Effect: +10% melee phys dmg.\n");
-			outputText("-New tier 17 misc lvl-up perk: Hoarder. Req. Collector perk. Effect: 15% more gems from victories.\n");
-			outputText("-New tier 17 misc lvl-up perk: Surgeon's Aide. Req. Paramedic perk. Effect: increases HP gains by 20%.\n");
-			
-			outputText("-New tier 17 misc lvl-up perk: Dean. Req. Principle perk. Effect: +10% max mana.\n");
-			
-			outputText("-New tier 17 misc lvl-up perk: Napping. Req. Skipping Work perk. Effect: +20% to fatigue recovery.\n");
-			outputText("-New tier 17 misc lvl-up perk: Anvil. Req. Hammer perk. Effect: increasing armor proficiency. (+5% phys/mag resistance)\n");
-			outputText("-New tier 17 misc lvl-up perk: Pornstar. Req. Brothel Owner perk. Effect: +15% tease dmg.\n");
-			outputText("-New tier ?? misc lvl-up perk: Perfection. Req. Saturation perk. Effect: number of possible effects of transformatives +1.\n");
-			outputText("-New tier ?? misc lvl-up perk: Soul Powered. Req. Metamorphable perk. Effect: +10% max soulforce.\n");
-			outputText("-New tier ?? misc lvl-up perk: Soul of Steel. Req. Mind of Steel perk. Effect: +10% melee phys dmg.\n");
-			outputText("-New tier ?? misc lvl-up perk: Blessed by Lady Godiva. Req. Hoarder perk. Effect: 15% more gems from victories.\n");
-			outputText("-New tier ?? misc lvl-up perk: Surgeon. Req. Surgeon's Aide perk. Effect: increases HP gains by 20%.\n");
-			
-			outputText("-New tier ?? misc lvl-up perk: President. Req. Dean perk. Effect: +10% max mana.\n");
-			
-			outputText("-New tier ?? misc lvl-up perk: ZZZ. Req. Napping perk. Effect: +20% to fatigue recovery.\n");
-			outputText("-New tier ?? misc lvl-up perk: Weapon. Req. Anvil perk. Effect: increasing armor proficiency. (+5% phys/mag resistance)\n");
-			outputText("-New tier ?? misc lvl-up perk: Sex Champion. Req. Pornstar perk. Effect: +15% tease dmg.\n");
-			outputText("-New tier ?? misc lvl-up perk: Creationism. Req. Perfection perk. Effect: number of possible effects of transformatives +1.\n");
-			outputText("-New tier ?? misc lvl-up perk: All-Seeing. Req. Soul Powered perk. Effect: +10% max soulforce.\n");
-			outputText("-New tier ?? misc lvl-up perk: God of Steel. Req. Soul of Steel perk. Effect: +10% melee phys dmg.\n");
-			outputText("-New tier ?? misc lvl-up perk: Lady Godiva's favorite Child. Req. Blessed by Lady Godiva perk. Effect: 15% more gems from victories.\n");
-			outputText("-New tier ?? misc lvl-up perk: MEDIC!!!. Req. Surgeon perk. Effect: increases HP gains by 20%.\n");
-			
-			outputText("-New tier ?? misc lvl-up perk: NERD!!!. Req. President perk. Effect: +10% max mana.\n");
-			
-			outputText("-New tier ?? misc lvl-up perk: LAZY!!! Req. ZZZ perk. Effect: +20% to fatigue recovery.\n");
-			outputText("-New tier ?? misc lvl-up perk: Armor. Req. Weapon perk. Effect: increasing armor proficiency. (+5% phys/mag resistance)\n");
-			outputText("-New tier ?? misc lvl-up perk: Sex Deity. Req. Sex Champion perk. Effect: +15% tease dmg.\n");*/
-			/*outputText("-New tier 1 misc lvl-up perk: . Req. History: Religious or Past Life: Religious perk. Effect: .\n");
-			outputText("-New tier 4 misc lvl-up perk: . Req.  perk. Effect: .\n");
-			outputText("-New tier 7 misc lvl-up perk: . Req.  perk. Effect: .\n");
-			outputText("-New tier 12 misc lvl-up perk: . Req.  perk. Effect: .\n");
-			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: .\n");
-			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: .\n");
-			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: .\n");
-			outputText("-New tier 17 misc lvl-up perk: Sniper's Friend. Req. Engineer's Friend perk. Effect: +10% range phys dmg.\n");
-			outputText("-New tier ?? misc lvl-up perk: Spy's Enemy. Req. Sniper's Friend perk. Effect: +10% range phys dmg.\n");
-			outputText("-New tier ?? misc lvl-up perk: SHIT YOU TOUCHED SASHA!!! Req. Spy's Enemy perk. Effect: +10% range phys dmg.\n");*/
-			/*outputText("-New tier 1 misc lvl-up perk: . Req. History: Slut or Past Life: Slut perk. Effect: .\n");.
-			outputText("-New tier 4 misc lvl-up perk: . Req.  perk. Effect: .\n");
-			outputText("-New tier 7 misc lvl-up perk: . Req.  perk. Effect: .\n");
-			outputText("-New tier 12 misc lvl-up perk: . Req.  perk. Effect: .\n");
-			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: .\n");
-			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: .\n");
-			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: .\n");*/
 			outputText("-History: Smith and Past Life: Smith have bonus to phys armor bonus and magic resistance bonus lowered from 10% to 5%.\n");
 			outputText("-History: Scholar and Past Life: Scholar perks effects was changed from -20% of spells mana cost to +10 max mana.\n");
 			outputText("-History: Fighter and Past Life: Fighter perks now grant additionaly 10% to melee accuracy. Tactician and Great tactician affects crit chance for bow/crossbow/throwing weapon range attacks and specials based on using those weapons.\n");

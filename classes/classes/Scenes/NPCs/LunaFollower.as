@@ -20,6 +20,7 @@ package classes.Scenes.NPCs
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.SceneLib;
 	import classes.Items.MutationsHelper;
+	import classes.display.SpriteDb;
 	
 	public class LunaFollower extends NPCAwareContent
 	{
@@ -43,6 +44,7 @@ package classes.Scenes.NPCs
 		}
 		
 		public function mainLunaMenu():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("You call out to Luna and the maid comes over as fast as she can.\n\n");
 			outputText("\"<i>Good ");
@@ -72,6 +74,7 @@ package classes.Scenes.NPCs
 		}
 		
 		public function LunaAppearance():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			if (flags[kFLAGS.LUNA_FOLLOWER] < 7) {
 				outputText("Luna is a human maid. She wears the classic maid uniform and bonnet at all times. Her golden eyes always look to you, paying close attention, waiting for any potential orders. That said, her face is not bad to look at and she could pass for cute. Her ashen hair fits her perfectly.\n\n");
@@ -87,6 +90,7 @@ package classes.Scenes.NPCs
 		}
 		
 		public function talkMenuLuna():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("You tell Luna you would like to discuss a few things with her.\n\n");
 			outputText("\"<i>How may I be of help, " + player.mf("Master","Mistress") + "?</i>\"\n\n");
@@ -101,6 +105,7 @@ package classes.Scenes.NPCs
 			addButton(14, "Back", mainLunaMenu);
 		}
 		public function talkMenuLunaHer():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("How long has she worked as a maid?\n\n");
 			outputText("\"<i>Um... it’s  been a while. I recall entering the service at a very young age and bounced from master to master several times. I don’t think that event at the magic shop counts, however.</i>\"\n\n");
@@ -113,6 +118,7 @@ package classes.Scenes.NPCs
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function talkMenuLunaWhatCanSheDo():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("Just what can she do for you, exactly? No one in Ingnam was rich enough to employ a maid, and you barely understand what the job exactly entails.\n\n");
 			outputText("\"<i>Well, I am a maid. I do cleaning, cooking, nursing, and even a few side jobs you don’t want to think about, like washing the dishes and pest control. That said, if you ever need anything from me just ask.");
@@ -124,6 +130,7 @@ package classes.Scenes.NPCs
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function talkMenuLunaHuman():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) {
 				outputText("She lied to you when she said she was human. Why?\n\n");
@@ -141,6 +148,7 @@ package classes.Scenes.NPCs
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function talkMenuLunaCampThoughts():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("What does she think of your camp?\n\n");
 			if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10) outputText("\"<i>I can’t say your home is as big as the ones I’m used to dwelling in. Perhaps one day the good " + player.mf("master","mistress") + " will consider expanding it?</i>\"\n\n");
@@ -150,6 +158,7 @@ package classes.Scenes.NPCs
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function talkMenuLunaLycanthropy():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("So what's it exactly like to be a werewolf? Aside from it making you howl at the moon.\n\n");
 			outputText("\"<i>Well, my hormonal system is totally messed up as the lunar cycle causes me to go into heat.The closer we lycanthropes get to the full moon, the hornier we get, until we all turn into sex crazed beasts willing to go so far as to rape innocent people for a good fuck. That said, sex is not all there is to it. We are all gifted with the ability to change form at will, and I know for a fact that we’re also faster, ");
@@ -162,6 +171,7 @@ package classes.Scenes.NPCs
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function talkMenuBiteMe():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("It occurs to you that you could gain the same kind of powers as Luna if you asked her. That said, is that what you truly want?\n\n");
 			menu();
@@ -220,6 +230,7 @@ package classes.Scenes.NPCs
 		}
 		
 		public function sparLuna():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("You ask Luna if she wouldn’t mind sparring with you.\n\n");
 			outputText("\"<i>" + player.mf("Master", "Mistress") + ", we both know it is best not to awaken my instincts during the day. I am a pitiful woman.</i>\"\n\n");
@@ -229,6 +240,7 @@ package classes.Scenes.NPCs
 			startCombat(new Luna());
 		}
 		public function sparLunaWon():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("Luna sit down like a good well behaved dog to admit defeat.\n\n");
 			outputText("\"<i>I yield " + player.mf("Master", "Mistress") + ". You win this one. I hope this warm up was worth your time.</i>\"\n\n");
@@ -271,6 +283,7 @@ package classes.Scenes.NPCs
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function sparLunaLost():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("Luna pounces on you with a hungry growl. Guess you had it coming when you asked her to spar you.\n\n");
 			outputText("\"<i>You lost " + player.mf("Master", "Mistress") + ", therefore I’m entitled to do whatever I want with you. Well I don’t care what it is as long as we do it now.</i>\"\n\n");
@@ -280,6 +293,7 @@ package classes.Scenes.NPCs
 		}
 		
 		public function mealLuna():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("You ask Luna if today's meal is ready.\n\n");
 			if (flags[kFLAGS.LUNA_MEAL] == 1) {
@@ -303,6 +317,7 @@ package classes.Scenes.NPCs
 		}
 		
 		public function nurseLuna():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("You ask the maid if she could heal you.\n\n");
 			outputText("\"<i>I will tend to your wounds at once.</i>\"\n\n");
@@ -325,6 +340,7 @@ package classes.Scenes.NPCs
 		}
 		
 		private function lunaSleepToggle():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			if(flags[kFLAGS.SLEEP_WITH] != "Luna") {
 				outputText("You ask Luna if she would mind sleeping with you.\n\n");
@@ -343,6 +359,7 @@ package classes.Scenes.NPCs
 			flags[kFLAGS.SLEEP_WITH] = arg;
 		}
 		private function lunaChainToggle():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			if (flags[kFLAGS.LUNA_FOLLOWER] == 9 || flags[kFLAGS.LUNA_FOLLOWER] == 10) {
 				outputText("Luna is currently free to roam at night.\n\n");
@@ -366,6 +383,7 @@ package classes.Scenes.NPCs
 		}
 		
 		public function warrningAboutJelously():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			if (flags[kFLAGS.LUNA_FOLLOWER] == 5) flags[kFLAGS.LUNA_FOLLOWER] = 6;
 			else if (flags[kFLAGS.LUNA_FOLLOWER] == 7) flags[kFLAGS.LUNA_FOLLOWER] = 8;
@@ -380,6 +398,7 @@ package classes.Scenes.NPCs
 		}
 		
 		public function fullMoonEvent():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			if (flags[kFLAGS.LUNA_FOLLOWER] == 7 || flags[kFLAGS.LUNA_FOLLOWER] == 8) {
 				outputText("Luna is smirking, a green glint in her eyes.\n\n");
@@ -402,6 +421,7 @@ package classes.Scenes.NPCs
 			else addButton(1, "Resist", fullMoonEventResist);
 		}
 		public function fullMoonEventAccept():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("You declare that you won’t fight her.\n\n");
 			outputText("\"<i>Wait, what? You.. you're just going to give in? Like this?</i>\"\n\n");
@@ -414,6 +434,7 @@ package classes.Scenes.NPCs
 			doNext(sexMenuVaginal);
 		}
 		public function fullMoonEventResist():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("You shove her with all your strength and get ready for a fight.\n\n");
 			outputText("\"<i>I knew you would need some convincing but it's all right, [name], I’m more than glad to help you with that.</i>\"\n\n");
@@ -423,6 +444,7 @@ package classes.Scenes.NPCs
 			doNext(playerMenu);
 		}
 		public function fullMoonEventResistWin():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("Luna falls to the ground in defeat. You swiftly proceed to tie her up so she does not cause further mayhem.\n\n");
 			outputText("\"<i>" + player.mf("Master","Mistress") + "... I am so sorry...on these nights I have no control over myself. Please do not fire me.</i>\"\n\n");
@@ -436,6 +458,7 @@ package classes.Scenes.NPCs
 			addButton(2, "Chain Her", fullMoonEventResistWinChainHer);
 		}
 		public function fullMoonEventResistWinFireHer():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("Luna looks at you as if her world is breaking apart.\n\n");
 			outputText("\"<i>[name], y..you’re firing me?</i>\"\n\n");
@@ -448,12 +471,14 @@ package classes.Scenes.NPCs
 			doNext(camp.sleepWrapper);
 		}
 		public function fullMoonEventResistWinFireHerForest():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("As you explore the forest you come upon a gruesome sight. You thought Luna would've made it back to Tel’Adre but it seems that she didn’t. She’s right there in front of you… hanging from a rope tied to a tree. That she'd fall into such despair didn’t occur to you when you kicked her out of your camp. You leave the gruesome scene, still shaken by her lifeless expression. You can’t help but think deep down, that this was all your fault.\n\n");
 			flags[kFLAGS.LUNA_FOLLOWER] = 3;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function fullMoonEventResistWinChainHer():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("You resolve to chain her to a tree every full moon from now on, though you suspect it'll be hard on her.\n\n");
 			flags[kFLAGS.LUNA_FOLLOWER] = 9;
@@ -464,6 +489,7 @@ package classes.Scenes.NPCs
 			doNext(camp.sleepWrapper);
 		}
 		public function fullMoonEventResistDefeat():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("You are too weak to keep fighting and Luna senses it. Before you can react she pounces on you. You’re back to the position you were in earlier and this time you are in no way capable of putting up a fight.\n\n");
 			outputText("\"<i>It's ok, [name], the pain will only last for a few seconds and then...</i>\"\n\n");
@@ -512,6 +538,7 @@ package classes.Scenes.NPCs
 		}
 		
 		public function sexMenuMain():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("You feel really hot right now and mention it to Luna, who blushes.\n\n");
 			outputText("\"<i>I...It would be my pride to attend to your needs... Any needs you may have, " + player.mf("Master","Mistress") + ". What would you wish of me?</i>\"\n\n");
@@ -532,6 +559,7 @@ package classes.Scenes.NPCs
 			addButton(14, "Back", mainLunaMenu);
 		}
 		public function sexMenuHeadpat():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("Luna is so cute, you can’t help yourself from patting her head! At first she's surprised but, soon after, she closes her eyes in delight as her ears take on their wolfish appearance. Her tail pops out and wags from side to side as she sighs in happiness. She realises only a few second later that she’s transforming and swiftly puts an end to it, masking her animalistic features.\n\n");
 			outputText("\"<i>Uhhhh, sorry, " + player.mf("master","mistress") + ". I don’t know what took hold of me.</i>\"\n\n");
@@ -539,6 +567,7 @@ package classes.Scenes.NPCs
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function sexMenuVaginalIntro():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("Your body aches from your time out adventuring. It seems your constant expeditions have taken a toll on you,  unable to even bring yourself to a full smile in the presence of your devoted maid and instead settle for a small one. Your body language worries Luna and she rushes to your side, placing a hand on your chest and looking deeply into your eyes.\n\n");
 			outputText("\"<i>" + player.mf("Master","Mistress") + ", are you well? Have you been injured while on your journeys?</i>\"\n\n");
@@ -589,6 +618,7 @@ package classes.Scenes.NPCs
 			else doNext(camp.returnToCampUseOneHour);
 		}
 		public function sexMenuSpearPolishing():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			var x:int = player.cockThatFits(36, "length");
 			outputText("You request Luna to pleasure you with her mouth.\n\n");
@@ -618,6 +648,7 @@ package classes.Scenes.NPCs
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function sexMenuBoobjob():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("Your eyes can’t help but rove over Luna’s form, focusing on those modest C cups she sports. Lost in your lustful thoughts, you imagine many different ways you could pleasure yourself with teets such as hers, your cock" + (player.cocks.length == 1 ? "" : "s") + " aching in need as a result.\n\n");
 			outputText("Luna searches your face for a moment, before nodding knowingly. \"<i>Master, would you like to relieve yourself using my body?</i>\" You compliment her for her intuition, you’d indeed enjoy relieving yourself with her lovely body. A single nod with a knowing smile is her response. She moves to undress you, removing your [armor] " + (player.weaponName == "fists" ? "" : "and [weapon] ") + "laying them down beside you before removing her own clothing. ");
@@ -633,6 +664,7 @@ package classes.Scenes.NPCs
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function sexMenuDoggyTreats():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("You wouldn't mind her giving in to her less human instincts while the two of you have sex, so long as she keeps it under control. Heck, right now, you would really like to check out that cute butt of hers.\n\n");
 			outputText("Your reply has an immediate effect on Luna and she licks her lips with a seductive stare, slowly taking off her clothes. It does not take long before she is entirely naked and you see the telltale signs of her body shapeshifting. Her eyes begin to take on a glowing green hue and fur begins to grow out of her limbs.\n\n");
@@ -649,6 +681,7 @@ package classes.Scenes.NPCs
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function sexMenuSandwichWithAyane():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("As you mull over your options. Ayane comes over to do her report and stare at you both with wide eyes.\n\n");
 			outputText("\"<i>No way! You’re going to reward the mutt over your devoted priestess? I will have none of that! Luna, I challenge you to a duel to see who makes [name] cum first!</i>\"\n\n");
@@ -674,12 +707,14 @@ package classes.Scenes.NPCs
 		}
 		
 		public function sexMenuDominateHerIntro():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("You ask the maid how she feels about giving in to her beastly desire. The green glimmer in her eyes is all you need to see how much she desires it before she begins to shapeshift into her beast form.\n\n");
 			flags[kFLAGS.LUNA_MOONING] = 1;
 			doNext(sexMenuDominateHer);
 		}
 		public function sexMenuDominateHer():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("You grab at the werewolf girl’s exposed chest and begin tugging, making her moan in delight at your forceful attention.\n\n");
 			outputText("\"<i>Ooooh " + player.mf("Master","Mistress") + ", I knew you loved me! Please make me your bitch for the night!</i>\"\n\n");
@@ -744,6 +779,7 @@ package classes.Scenes.NPCs
 		}
 		/*
 		public function sexMenuSpearPolishing():void {
+			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("WIP\n\n");
 			outputText("\"<i>WIP</i>\"\n\n");

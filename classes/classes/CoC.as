@@ -249,8 +249,8 @@ public class CoC extends MovieClip
         //model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8l";
-			version = ver + " (<b>New Lunar Year mini-event + pig/boar/elf TF's rework, orc + displacer beast TF, 2 new areas + new enemies, Job: Gunslinger perk line, Perk-o-calipse 4 (77 perks), Achiev-o-calipse (over 70 new achievs), The Unicorn Daughter Strikes Back (Yes Celess is Back)</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8l2";
+			version = ver + " (<b>Bugfixes + missing content that not make in time for previous version</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

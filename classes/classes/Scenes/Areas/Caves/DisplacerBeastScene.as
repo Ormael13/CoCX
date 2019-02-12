@@ -40,7 +40,7 @@ public function displacerBeastMilkfeeding():void {
 }
 public function displacerBeastDefeat():void {
 	clearOutput();
-	outputText("As you fall defeated by the octopi-cat woman. Her expression change from aggressive to delighted as she strips your gear away. You expect your crotch to get played with but to your surprise, she goes for your [breast] applying her tentacles on them like a pair of suction cups. You gasp in surprise as something not unlike needles somehow enter your nipples doing god knows what inside of your chest which inflate to ");
+	outputText("As you fall defeated by the octopi-cat woman. Her expression change from aggressive to delighted as she strips your gear away. You expect your crotch to get played with but to your surprise, she goes for your [breasts] applying her tentacles on them like a pair of suction cups. You gasp in surprise as something not unlike needles somehow enter your nipples doing god knows what inside of your chest which inflate to ");
 	if (player.breastRows[0].breastRating < 5) {
 		if (player.breastRows.length == 0) {
 			player.createBreastRow();
@@ -52,7 +52,7 @@ public function displacerBeastDefeat():void {
 	}
 	else player.growTits(2, 1, false, 3);
 	if (player.breastRows[0].lactationMultiplier < 1) player.breastRows[0].lactationMultiplier = 1.25;
-	outputText("[breastcup] cup! You feel sudden dribbles of milk begin to flow out of your overgrown breasts as the tentacles begin to suckle on them and you moan in surprise at this violation!\n\n");
+	outputText(player.breastCup(0) + " cup! You feel sudden dribbles of milk begin to flow out of your overgrown breasts as the tentacles begin to suckle on them and you moan in surprise at this violation!\n\n");
 	outputText("The four-armed catgirl seems to be enjoying herself, mewling as she forcefully sucks your" + (player.breastRows[0].lactationMultiplier == 1.25 ?" newly flowing":"") + " milk out! The feeling in your chest eventually becomes too much for you and you");
 	if (player.hasCock()) {
 		if (player.hasVagina()) outputText("r’e cock and pussy leak fluid");

@@ -135,7 +135,7 @@ import classes.internals.*;
 			this.short = "goblin adventurers";
 			this.imageName = "goblinassassin";
 			this.long = "Their appearances are those of a regular goblin, curvy and pale green, perhaps slightly taller than the norm. Their wavy, untamed hair is a deep shade of blue, covering their pierced ears and reaching just above shoulders. Soft curves are accentuated by their choice of wear, a single belt lined with assorted needles strapped across full chest and a pair of fishnet stockings reaching up to thick thighs. They bounces on the spot, preparing to dodge anything you might have in store, though your eyes seem to wander towards their bare slits and jiggling asses. Despite obvious knowledge in combat, they’re a goblins all the same – a hard cock can go a long way.";
-			// this.plural = false;
+			this.plural = true;
 			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 90, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));

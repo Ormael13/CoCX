@@ -1693,11 +1693,12 @@ private function campBuildingSim():void {
 	if (player.hasKeyItem("Carpenter's Toolbox") >= 0) {
 		if (flags[kFLAGS.CAMP_WALL_PROGRESS] < 100 && getCampPopulation() >= 4) addButton(0, "Build Wall", buildCampWallPrompt).hint("Build a wall around your camp to defend from the imps." + (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10 ? "\n\nProgress: " + (flags[kFLAGS.CAMP_WALL_PROGRESS]/10) + "/10 complete": "") + "");
 		if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 && flags[kFLAGS.CAMP_WALL_GATE] <= 0) addButton(0, "Build Gate", buildCampGatePrompt).hint("Build a gate to complete your camp defense.");
-		addButton(3, "Build Cabin(O)", campUpgrades.buildCampMembersCabinsMenu).hint("Work on your camp members cabins.");
-		addButton(5, "Build Misc", campUpgrades.buildmiscMenu).hint("Build other structures than walls or cabins for your camp.");
+		//addButton(2, "Build Cabin(O)", campUpgrades.buildCampMembersCabinsMenu).hint("Work on your camp members cabins.");
+		addButton(5, "Build Misc", campUpgrades.buildmisc1Menu).hint("Build other structures than walls or cabins for your camp.");
+		//addButton(6, "Build Misc(O)", campUpgrades.).hint("Other structures than walls or cabins for your camp.");
 	}
-	if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10 && player.hasItem(useables.IMPSKLL, 1)) addButton(1, "AddImpSkull", promptHangImpSkull).hint("Add an imp skull to decorate the wall and to serve as deterrent for imps.", "Add Imp Skull");
-	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] < 10) addButton(2, "Build Cabin", cabinProgress.initiateCabin).hint("Work on your cabin."); //Work on cabin.
+	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] < 10) addButton(1, "Build Cabin", cabinProgress.initiateCabin).hint("Work on your cabin."); //Work on cabin.
+	if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10 && player.hasItem(useables.IMPSKLL, 1)) addButton(10, "AddImpSkull", promptHangImpSkull).hint("Add an imp skull to decorate the wall and to serve as deterrent for imps.", "Add Imp Skull");
 	addButton(14, "Back", campActions);
 }
 
@@ -3027,6 +3028,7 @@ private function ascendForReal():void {
 	//Companions
 	performancePoints += companionsCount();
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 2) performancePoints++;
+	if (flags[kFLAGS.PATCHOULI_FOLLOWER] == 3) performancePoints++;
 	if (player.hasStatusEffect(StatusEffects.DianaOff)) performancePoints++;
 	if (player.hasStatusEffect(StatusEffects.DivaOff)) performancePoints++;
 	if (player.hasStatusEffect(StatusEffects.ElectraOff)) performancePoints++;
@@ -3666,7 +3668,7 @@ private function promptSaveUpdate():void {
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 22) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 23;
 		clearOutput();
-		outputText("Transcendenting Transcendental Genetic Memory by 50%, Catching Cowardly dragon-boys and refreshing does of Productivity Drugs.");
+		outputText("Transcendenting Transcendental Genetic Memory by 50%, Catching Cowardly dragon-boys and refreshing dose of Productivity Drugs.");
 		if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 5);
 		if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2)) player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 10);
 		if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3)) player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 15);

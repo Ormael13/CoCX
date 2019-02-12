@@ -89,7 +89,7 @@ flagi na przyszłościowe surowce coby nie zapomnieć iż je już wpisałem do k
 CAMP_CABIN_SAND_RESOURCES
 CAMP_CABIN_CONCRETE_RESOURCES
 */
-public function buildmiscMenu():void {
+public function buildmisc1Menu():void {
 	menu();
 	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 1 || flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 2) addButton(0, "Wood Storage", materialgatheringstorageupgrade).hint("Build up storage to gather more wood at the camp. (Req. 150 fatigue)");
 	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) addButton(0, "Stone Storage", materialgatheringstorageupgrade).hint("Build up storage to gather more stones at the camp. (Req. 150 fatigue)");

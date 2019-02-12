@@ -2568,6 +2568,7 @@ public class Creature extends Utils
 
 		public static const canPounceArms:Array = [
 			Arms.CAT,
+			Arms.DISPLACER,
 			Arms.LION,
 			Arms.SPHINX,
 			Arms.WOLF,

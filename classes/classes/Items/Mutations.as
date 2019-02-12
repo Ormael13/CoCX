@@ -7726,8 +7726,8 @@ public final class Mutations extends MutationsHelper
 				if (player.balls == 0) outputText("  Two rounded orbs drop down below, filling out a new, fleshy sac above your [legs].  Sweet!  You can probably cum buckets with balls like these.");
 				outputText("\n\n");
 				player.createCock();
-				player.cocks[0].cockLength = 12;
-				player.cocks[0].cockThickness = 2.75;
+				player.cocks[0].cockLength = 10;
+				player.cocks[0].cockThickness = 2;
 				if (player.balls == 0) {
 					player.balls = 2;
 					player.ballSize = 3;

@@ -244,7 +244,7 @@ use namespace CoC;
 			this.a = "";
 			this.short = "Aurora";
 			this.imageName = "aurora";
-			this.long = "Before you stands Aurora at 9 feet tall, and has an overall thicker body than most golems. She has HHH cup breasts.  Right above where her cleavage begins, is a black tattoo with the letter A above 3 lines, forming the Roman numeral 3. Her skin is a light turquoise with blue markings all over, and a white belly. Her hair is a navy blue, with green eyes on a bat-like face. Two huge bat wings come from her back, and she has a long tail ending in blue fur. Around her neck is a mane of light blue fur. Two huge bat ears swivel around from the top of her head, detecting all noises in the area.";
+			this.long = "Before you stands Aurora at 9 feet tall, and has an overall thicker body than most golems. She has HHH cup breasts. Right above where her cleavage begins, is a black tattoo with the letter A above 3 lines, forming the Roman numeral 3. Her skin is a light turquoise with blue markings all over, and a white belly. Her hair is a navy blue, with green eyes on a bat-like face. Two huge bat wings come from her back, and she has a long tail ending in blue fur. Around her neck is a mane of light blue fur. Two huge bat ears swivel around from the top of her head, detecting all noises in the area.";
 			this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 30, 0, 0, 0);
