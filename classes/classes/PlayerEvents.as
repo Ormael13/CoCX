@@ -1752,7 +1752,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 					flags[kFLAGS.SOUL_SENSE_WORLD_TREE] = 1;
 					EngineCore.doNext(playerMenu);
 					return true;
-				}
+				}/*
 				if (player.hasKeyItem("Jade Talisman") >= 0 && flags[kFLAGS.AURORA_LVL] < 1) {
 					outputText("\nYou have weird dream tonight. In that dream you’re back in the Hidden Cave, exploring it room after room, smashing to pieces any of the golems or small bat golems you find and looting the treasures. Then you face the dragon-boy in short, but intensive fight, ending with him running away like coward, while still having enough courage to leave some witty remarks.");
 					outputText("\n\nMaking sure you not overlooked any valuable items you walk slowly toward stairway leading to first floor when... your gaze stops on one of walls in the room with the stairway. Compared to other nearby walls which are all without any damage or otherwise imperfections you spot on this particular wall something. Something like a crack or...keyhole? Intrigued you start to walk toward it...");
@@ -1761,7 +1761,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 					flags[kFLAGS.AURORA_LVL] = 1;
 					EngineCore.doNext(playerMenu);
 					return true;
-				}
+				}*/
 				if (player.lib > 50 || player.lust > 40) { //Randomly generated dreams here
 					if (dreams.dreamSelect()) return true;
 				}

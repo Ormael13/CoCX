@@ -103,10 +103,11 @@ public function ayaneShop():void {
 		addButton(1, armors.RKIMONO.shortName, sellItem, armors.RKIMONO);
 		addButton(2, armors.BKIMONO.shortName, sellItem, armors.BKIMONO);
 		addButton(3, armors.PKIMONO.shortName, sellItem, armors.PKIMONO);
-		addButton(4, armors.ARCBANG.shortName, sellItem, armors.ARCBANG);
-		addButton(5, shields.SPI_FOC.shortName, sellItem, shields.SPI_FOC);
-		addButton(6, headjewelries.FOXHAIR.shortName, sellItem, headjewelries.FOXHAIR);
-		addButton(7, consumables.FOXJEWL.shortName, sellItem, consumables.FOXJEWL);
+		addButton(4, armors.BLKIMONO.shortName, sellItem, armors.BLKIMONO);
+		addButton(5, armors.ARCBANG.shortName, sellItem, armors.ARCBANG);
+		addButton(7, shields.SPI_FOC.shortName, sellItem, shields.SPI_FOC);
+		addButton(8, headjewelries.FOXHAIR.shortName, sellItem, headjewelries.FOXHAIR);
+		addButton(9, consumables.FOXJEWL.shortName, sellItem, consumables.FOXJEWL);
 		addButton(10, consumables.AGILI_E.shortName, sellItem, consumables.AGILI_E, 15);
 		addButton(11, consumables.SMART_T.shortName, sellItem, consumables.SMART_T);
 		addButton(12, consumables.VIXEN_T.shortName, sellItem, consumables.VIXEN_T);
@@ -139,6 +140,7 @@ public function ayaneShop():void {
 			switch(item){
 				case armors.WKIMONO:
 				case armors.RKIMONO:
+				case armors.BLKIMONO:
 				case armors.BKIMONO:
 				case armors.PKIMONO:
 					outputText("\"<i>To look the part, you will have to dress the part. This magical clothing is made for a kitsune, and to be honest I think <b>" + cost.toString() + " gems</b> is somewhat cheap for an enchanted garment like this.</i>\"");

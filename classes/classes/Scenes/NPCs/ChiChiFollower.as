@@ -8,7 +8,8 @@ package classes.Scenes.NPCs
 	import classes.GlobalFlags.kFLAGS;
 	import classes.CoC;
 	import classes.Scenes.Places.HeXinDao;
-import classes.Scenes.SceneLib;
+	import classes.Scenes.SceneLib;
+	import classes.display.SpriteDb;
 
 use namespace CoC;
 	
@@ -20,6 +21,7 @@ use namespace CoC;
 		{}
 
 public function EnterOfTheChiChi():void {
+	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	outputText("You step into the arena once more, but this time your opponent is slightly different. While of small stature like other mice you’ve met in He’Xin’Dao, this mouse morph has pinkish red hair and oriental clothes. She wears a pair of spiked gloves, her fists are clenched slightly at her sides, and she clearly sports a pair of C cup breasts under her clothes. The announcer screams out the participant's names as usual, their enthusiastic introductions is something you’ve grown used to.\n\n");
 	outputText("\"<i>In the left corner, coming from another world, [name], Champion of Ingnam! And in the right corner, from a land far away to the east, the martial arts master, Chi Chi of the four winds!</i>\"\n\n");
@@ -34,6 +36,7 @@ public function EnterOfTheChiChi():void {
 }
 
 public function WonFirstFight():void {
+	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	outputText("The mouse looks at you in complete disbelief, her shaking voice slowly breaking down as she falls to her knees and coughs blood on the ground.\n\n");
 	outputText("\"<i>Is this... my blood... it is... beautiful. I never thought I would see the day when I...</i>\"\n\n");
@@ -45,6 +48,7 @@ public function WonFirstFight():void {
 }
 
 public function LostFirstFight():void {
+	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	if (player.HP < 1) {
 		outputText("\"<i>Is that all you’ve got? How dare you even call yourself a champion? You barely know how to fight! You tried well, albeit, not well enough. If you intend to actually call yourself a warrior, perhaps someday you should seek me out in town, I could teach you...  if you have knowledge of the basics that is, I don’t teach my skill to just anyone.</i>\"\n\n");
@@ -61,6 +65,7 @@ public function LostFirstFight():void {
 }
 
 public function WonSecondFight():void {
+	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	outputText("Chi Chi looks at you in disbelief, as your last hit propels her brutally into the arena wall, the sheer power of your strike imprinting the mouse's form in the rock.\n\n");
 	outputText("Chi Chi falls limp to the ground, barely able to stand as her fire dies out with a puff of smoke. She looks so weak and vulnerable now.\n\n");
@@ -121,6 +126,7 @@ public function WonSecondFightYes():void {
 }
 
 public function LostSecondFight():void {
+	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	outputText("Chi Chi sighs at your defeated form and jumps out of the ring.\n\n");
 	outputText("\"<i>I have nothing more to teach you, though you did fight with courage and valor, you couldn’t defeat me. From now on, you must continue and learn on your own.</i>\"\n\n");
@@ -131,6 +137,7 @@ public function LostSecondFight():void {
 }
 
 public function WonSparringFight():void {
+	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	outputText("Chi Chi bows down, admitting defeat.\n\n");
 	outputText("\"<i>Good fight. You aren’t losing your edge, which is good. You will need it to defeat ");
@@ -173,6 +180,7 @@ public function WonSparringFight():void {
 }
 
 public function LostSparringFight():void {
+	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	outputText("Chi Chi helps you up as you kneel in defeat.\n\n");
 	outputText("\"<i>[name] are you ok!? Oh, I knew I shouldn’t have used that move...</i>\"\n\n");
@@ -182,6 +190,7 @@ public function LostSparringFight():void {
 }
 
 public function MeetingChiChiInHeXinDao():void {
+	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	outputText("You spot Chi Chi meditating by the river. There are various scorched wooden dummies next to her and it’s obvious the monk was practicing her techniques. You barely take two steps towards her before the mouse stands up and looks you straight in the eye.\n\n");
 	if (flags[kFLAGS.CHI_CHI_AFFECTION] > 20) {
@@ -207,6 +216,7 @@ public function MeetingChiChiInHeXinDao():void {
 }
 
 public function MeetingChiChiInHeXinDao2():void {
+	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	outputText("Chi Chi cross her arm impatiently.\n\n");
 	outputText("\"<i>Anything else I can do for you [name]?</i>\"\n\n");
@@ -224,6 +234,7 @@ public function NotReadyForTheTraining():void {
 }
 
 public function TrainingSoulArtsWithChiChi():void {
+	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	if (flags[kFLAGS.CHI_CHI_DAILY_TRAINING] < 1) {
 		if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] == 2) {
@@ -308,6 +319,7 @@ public function VeryReadyForTheFinalTraining():void {
 }
 
 public function SoulskilsManualsShop():void {
+	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	outputText("\"<i>I’m glad you take your training seriously, [name]. There are various scrolls I can teach you");
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 1) outputText(" but I would need a few spirit stones first");
@@ -323,6 +335,7 @@ public function SoulskilsManualsShop():void {
 }
 
 public function SoulskilsManualsShopIceFist():void {
+	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	outputText("\"<i>This one? Are you sure about that?</i>\"\n\n");
 	menu();
@@ -345,6 +358,7 @@ public function SoulskilsManualsShopIceFist2():void {
 }
 
 public function SoulskilsManualsShopFirePunch():void {
+	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	outputText("\"<i>This one? Are you sure about that?</i>\"\n\n");
 	menu();
@@ -367,6 +381,7 @@ public function SoulskilsManualsShopFirePunch2():void {
 }
 
 public function SoulskilsManualsShopHurricaneDance():void {
+	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	outputText("\"<i>This one? Are you sure about that?</i>\"\n\n");
 	menu();
@@ -389,6 +404,7 @@ public function SoulskilsManualsShopHurricaneDance2():void {
 }
 
 public function SoulskilsManualsShopEarthStance():void {
+	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	outputText("\"<i>This one? Are you sure about that?</i>\"\n\n");
 	menu();
@@ -411,6 +427,7 @@ public function SoulskilsManualsShopEarthStance2():void {
 }
 
 public function SoulskilsManualsShopPunishingKick():void {
+	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	outputText("\"<i>This one? Are you sure about that?</i>\"\n\n");
 	menu();
@@ -438,6 +455,7 @@ public function ChiChiCampMainMenu2():void {
 }
 
 public function ChiChiCampMainMenu():void {
+	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	outputText("You go over to Chi Chi who pauses her training to head to you once you are close.");
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 4) outputText("\"<i>Oh how are you doing [name]? I just finished a new set of kicks and punches. Did you want us to train together or did you have something else in mind?</i>\" She’s arm crossed waiting on your reply.");
@@ -452,6 +470,7 @@ public function ChiChiCampMainMenu():void {
 }
 
 public function chichiAppearance():void {
+	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	outputText("Chi Chi is an hinezumi, a subspecies of mouse morph with fiery affinities. Hair hair are fiery red, the strands turning pink at the tip the same color as the rest of her fur. Her face is that of a mouse with the characteristic buck teeths and twitching nose and her embery eyes have a serious expression to them which, unlike Jojo" + (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 ? " who is now Joy,":"") + " do warn those she teaches to that she will be merciless.");
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] >= 4) outputText(" That said Chi Chi tend to soften around you thanks to the feelings you both share. She wears the ruby ring you gave her at all time, symbol and reminder of your love.");
@@ -474,6 +493,7 @@ public function chichiAppearance():void {
 }
 
 public function chichiTalksMenu():void {
+	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	outputText("\"<i>What did you want to talk about? I need to keep training to maintain shape.</i>\"\n\n");
 	menu();
@@ -483,6 +503,7 @@ public function chichiTalksMenu():void {
 	
 }
 public function chichiTalksMartialArts():void {
+	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	outputText("Where and how did she learn to fight?\n\n");
 	outputText("\"<i>Ah, that was a long time ago. I was from the very eastern lands from beyond the mountains. Most of what I learned was from a... old creature I met in a cave, hidden behind a waterfall. He had scales green as emeralds yet a body like that of a snake. His eyes were full of wisdom and wisdom he was willing to share, even to a little girl like me... he told me... he told me that one day perhaps the future of Mareth might depend on my ability to teach what he would impart to me. After ten years under his tutelage I founded my own martial arts school and began teaching promising students what he had imparted on me. You were the first pupil I had in ages...</i>\"\n\n");
@@ -497,6 +518,7 @@ public function chichiTalksMartialArts():void {
 	cheatTime(1/4);
 }
 public function chichiTalksFormerStudents():void {
+	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	outputText("She said she had former students before. What happened to them?\n\n");
 	outputText("Chi Chi hands suddenly tremble and shake... as if she was containing her fury.\n\n");
@@ -525,6 +547,7 @@ public function chichiTalksFormerStudents():void {
 }
 
 public function chichiSparring():void {
+	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	outputText("You ask Chi Chi if she would like a friendly spar");
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 4) outputText(" now that she has recovered a little");
@@ -535,6 +558,7 @@ public function chichiSparring():void {
 }
 
 public function mishapsLunaChiChi():void {
+	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	outputText("As you go to visit Chi Chi you hear her scream. Running over to check whats going on you notice the fire mouse is now a sobbing mess, wet with water. You don’t recall her crying before so this must be serious.\n\n");
 	outputText("\"<i>Why why? Why would someone put a bucket right above my bedroll now I’m all wet and my fire will take hours to rise again!</i>\"\n\n");

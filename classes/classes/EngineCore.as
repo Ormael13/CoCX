@@ -833,7 +833,6 @@ public class EngineCore {
             trace("Do next setup cancelled by game over");
             return;
         }
-
         //trace("DoNext have item:", eventNo);
         //choices("Next", event, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
         menu();

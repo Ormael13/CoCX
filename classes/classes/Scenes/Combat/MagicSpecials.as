@@ -2077,7 +2077,7 @@ public class MagicSpecials extends BaseCombatContent {
 	 if (player.tailCount == 4) dmg *= 0.6;
 	 if (player.tailCount == 5) dmg *= 0.8;
 	 if (player.shieldName == "spirit focus") dmg *= 1.2;
-	 if (player.armorName == "white kimono" || player.armorName == "red kimono" || player.armorName == "blue kimono" || player.armorName == "purple kimono") dmg *= 1.2;
+	 if (player.armorName == "white kimono" || player.armorName == "red kimono" || player.armorName == "blue kimono" || player.armorName == "purple kimono" || player.armorName == "black kimono") dmg *= 1.2;
 	 if (player.headjewelryName == "fox hairpin") dmg *= 1.2;
 	 if (player.hasPerk(PerkLib.StarSphereMastery)) dmg *= (1 + (player.perkv1(PerkLib.StarSphereMastery) * 0.05));
 	 dmg = Math.round(dmg);
@@ -2165,7 +2165,7 @@ public class MagicSpecials extends BaseCombatContent {
 		corruptedfoxfiredmgmulti += spellMod() - 1;
 		corruptedfoxfiredmgmulti += soulskillMod() - 1;
 		if (player.shieldName == "spirit focus") corruptedfoxfiredmgmulti += .2;
-		if (player.armorName == "white kimono" || player.armorName == "red kimono" || player.armorName == "blue kimono" || player.armorName == "purple kimono") corruptedfoxfiredmgmulti += .2;
+		if (player.armorName == "white kimono" || player.armorName == "red kimono" || player.armorName == "blue kimono" || player.armorName == "purple kimono" || player.armorName == "black kimono") corruptedfoxfiredmgmulti += .2;
 		if (player.headjewelryName == "fox hairpin") corruptedfoxfiredmgmulti += .2;
 		if (player.hasPerk(PerkLib.StarSphereMastery)) corruptedfoxfiredmgmulti += player.perkv1(PerkLib.StarSphereMastery) * 0.05;
 		if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) corruptedfoxfiredmgmulti += .25;
@@ -2284,7 +2284,7 @@ public class MagicSpecials extends BaseCombatContent {
 		fusedfoxfiredmgmulti += spellMod() - 1;
 		fusedfoxfiredmgmulti += soulskillMod() - 1;
 		if (player.shieldName == "spirit focus") fusedfoxfiredmgmulti += .2;
-		if (player.armorName == "white kimono" || player.armorName == "red kimono" || player.armorName == "blue kimono" || player.armorName == "purple kimono") fusedfoxfiredmgmulti += .2;
+		if (player.armorName == "white kimono" || player.armorName == "red kimono" || player.armorName == "blue kimono" || player.armorName == "purple kimono" || player.armorName == "black kimono") fusedfoxfiredmgmulti += .2;
 		if (player.headjewelryName == "fox hairpin") fusedfoxfiredmgmulti += .2;
 		if (player.hasPerk(PerkLib.StarSphereMastery)) fusedfoxfiredmgmulti += player.perkv1(PerkLib.StarSphereMastery) * 0.05;
 		if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) fusedfoxfiredmgmulti += .5;
@@ -2396,7 +2396,7 @@ public class MagicSpecials extends BaseCombatContent {
 		purefoxfiredmgmulti += spellMod() - 1;
 		purefoxfiredmgmulti += soulskillMod() - 1;
 		if (player.shieldName == "spirit focus") purefoxfiredmgmulti += .2;
-		if (player.armorName == "white kimono" || player.armorName == "red kimono" || player.armorName == "blue kimono" || player.armorName == "purple kimono") purefoxfiredmgmulti += .2;
+		if (player.armorName == "white kimono" || player.armorName == "red kimono" || player.armorName == "blue kimono" || player.armorName == "purple kimono" || player.armorName == "black kimono") purefoxfiredmgmulti += .2;
 		if (player.headjewelryName == "fox hairpin") purefoxfiredmgmulti += .2;
 		if (player.hasPerk(PerkLib.StarSphereMastery)) purefoxfiredmgmulti += player.perkv1(PerkLib.StarSphereMastery) * 0.05;
 		if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) purefoxfiredmgmulti += .25;

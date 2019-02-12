@@ -97,15 +97,15 @@ public class PerkLib
 		public static const AscensionNaturalMetamorph:PerkType = mk("Ascension: Natural Metamorph", "Ascension: Natural Metamorph",
 				"When others needs to work hard on unlocking their metamorph potential you never had to do it. Whatever the reason for that is... truth be told you try not to think about it, affraid of what it might mean for you. You do not want to care about it as long as it's nothing harmfull for you in the long run.");
 		public static const AscensionTranscendentalGeneticMemoryStage1:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 1)", "Ascension: Transcendental Genetic Memory (Stage 1)",
-				"Allows to retain up to 10 choosen unlocked metamorph options.");
+				"Allows to retain up to 15 choosen unlocked metamorph options.");
 		public static const AscensionTranscendentalGeneticMemoryStage2:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 2)", "Ascension: Transcendental Genetic Memory (Stage 2)",
-				"Allows to retain up to 20 choosen unlocked metamorph options.");
-		public static const AscensionTranscendentalGeneticMemoryStage3:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 3)", "Ascension: Transcendental Genetic Memory (Stage 3)",
 				"Allows to retain up to 30 choosen unlocked metamorph options.");
+		public static const AscensionTranscendentalGeneticMemoryStage3:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 3)", "Ascension: Transcendental Genetic Memory (Stage 3)",
+				"Allows to retain up to 45 choosen unlocked metamorph options.");
 		public static const AscensionTranscendentalGeneticMemoryStage4:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 4)", "Ascension: Transcendental Genetic Memory (Stage 4)",
-				"Allows to retain up to 40 choosen unlocked metamorph options.");
+				"Allows to retain up to 60 choosen unlocked metamorph options.");
 		public static const AscensionTranscendentalGeneticMemoryStage5:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 5)", "Ascension: Transcendental Genetic Memory (Stage 5)",
-				"Allows to retain up to 50 choosen unlocked metamorph options.");
+				"Allows to retain up to 75 choosen unlocked metamorph options.");
 		public static const AscensionUnderdog:PerkType = mk("Ascension: Underdog", "Ascension: Underdog",
 				"You're underdog. Gains twice more exp for beating up enemies above your current level with doubled limit after which increase to gained exp stops.");// Also allow to use 'accidentally' finding all forgotten or hidden legacies from times before the demon invasion.");
 		public static const AscensionUnlockedPotential:PerkType = mk("Ascension: Unlocked Potential", "Ascension: Unlocked Potential",
@@ -114,12 +114,22 @@ public class PerkLib
 				"Due to reincarnation experience your body becoming strong faster than in previous life (increased passive wrath, mana, soulforce gains at lvl-up).");
 	//	public static const AscensionAdditionalOrganMutation02:PerkType = mk("Ascension: Additional Organ Mutation (2nd Stage)", "Ascension: Additional Organ Mutation (2nd Stage)",
 	//			"Numerous internal mutation changed your body to allow handle 3rd mutation of the same organ/internal body part.");
+	//	public static const AscensionAdditionalOrganMutation03:PerkType = mk("Ascension: Additional Organ Mutation (3rd Stage)", "Ascension: Additional Organ Mutation (3rd Stage)",
+	//			"Numerous internal mutation changed your body to allow handle 4th mutation of the same organ/internal body part.");
 	//	public static const AscensionTranscendentalGeneticMemoryStage6:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 6)", "Ascension: Transcendental Genetic Memory (Stage 6)",
-	//			"Allows to retain up to 60 choosen unlocked metamorph options.");
-	//	public static const Ascension:PerkType = mk("Ascension: Artifical-made Metamorph", "Ascension: Artifical-made Metamorph",
-	//			".");
+	//			"Allows to retain up to 90 choosen unlocked metamorph options.");
+	//	public static const AscensionTranscendentalGeneticMemoryStage7:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 7)", "Ascension: Transcendental Genetic Memory (Stage 7)",
+	//			"Allows to retain up to 105 choosen unlocked metamorph options.");
 	//	public static const AscensionBuildingPrestige06:PerkType = mk("Ascension: Building Prestige (6th Stage)", "Ascension: Building Prestige (6th Stage)",
 	//			"Your understanding of prestige jobs from previous life allows to pick 7th one at lvl 42+.");
+	//	public static const AscensionBuildingPrestige07:PerkType = mk("Ascension: Building Prestige (7th Stage)", "Ascension: Building Prestige (7th Stage)",
+	//			"Your understanding of prestige jobs from previous life allows to pick 8th one at lvl 42+.");
+	//	public static const Ascension:PerkType = mk("Ascension: Artifical-made Metamorph", "Ascension: Artifical-made Metamorph",
+	//			".");
+	//	public static const Ascension:PerkType = mk("Ascension: ", "Ascension: ",
+	//			".");
+	//	public static const Ascension:PerkType = mk("Ascension: ", "Ascension: ",
+	//			".");
 	//	public static const Ascension:PerkType = mk("Ascension: ", "Ascension: ",
 	//			".");
 	//	public static const Ascension:PerkType = mk("Ascension: ", "Ascension: ",
@@ -176,131 +186,8 @@ public class PerkLib
 				"Seductive experience causes your tease attacks to be 15% more effective.", null, true);
 		
 		// Ordinary (levelup) perks
-		public static const Wizened:PerkType = mk("Wizened", "Wizened",
-				". (+10% max Soulforce)",
-				"You choose the 'Wizened' perk, gaining +10% max Soulforce.");
-		public static const PathOfEnlightenment:PerkType = mk("Path of Enlightenment", "Path of Enlightenment",
-				". (+10% max Soulforce)",
-				"You choose the 'Path of Enlightenment' perk, gaining +10% max Soulforce.");
-		public static const Embodiment:PerkType = mk("Embodiment", "Embodiment",
-				". (+10% max Soulforce)",
-				"You choose the 'Embodiment' perk, gaining +10% max Soulforce.");
-		public static const InControl:PerkType = mk("In Control", "In Control",
-				". (+10% max Soulforce)",
-				"You choose the 'In Control' perk, gaining +10% max Soulforce.");
-		public static const Metamorphable:PerkType = mk("Metamorphable", "Metamorphable",
-				". (+10% max Soulforce)",
-				"You choose the 'Metamorphable' perk, gaining +10% max Soulforce.");
-		public static const SoulPowered:PerkType = mk("Soul Powered", "Soul Powered",
-				". (+10% max Soulforce)",
-				"You choose the 'Soul Powered' perk, gaining +10% max Soulforce.");
-		public static const AllSeeing:PerkType = mk("All-Seeing", "All-Seeing",
-				". (+10% max Soulforce)",
-				"You choose the 'All-Seeing' perk, gaining +10% max Soulforce.");
-		public static const PewWarmer:PerkType = mk("Pew Warmer", "Pew Warmer",
-				".",
-				"You choose the 'Pew Warmer' perk, .");
-		public static const Acolyte:PerkType = mk("Acolyte", "Acolyte",
-				".",
-				"You choose the 'Acolyte' perk, .");
-		public static const Priest:PerkType = mk("Priest", "Priest",
-				".",
-				"You choose the 'Priest' perk, .");
-		public static const Pastor:PerkType = mk("Pastor", "Pastor",
-				".",
-				"You choose the 'Pastor' perk, .");
-		public static const Saint:PerkType = mk("Saint", "Saint",
-				".",
-				"You choose the 'Saint' perk, .");
-		public static const Cardinal:PerkType = mk("Cardinal", "Cardinal",
-				".",
-				"You choose the 'Cardinal' perk, .");
-		public static const Pope:PerkType = mk("Pope", "Pope",
-				".",
-				"You choose the 'Pope' perk, .");
-		public static const Studious:PerkType = mk("Studious", "Studious",
-				". (+10% max Mana)",
-				"You choose the 'Studious' perk, gaining +10% max Mana.");
-		public static const Teacher:PerkType = mk("Teacher", "Teacher",
-				". (+10% max Mana)",
-				"You choose the 'Teacher' perk, gaining +10% max Mana.");
-		public static const Professor:PerkType = mk("Professor", "Professor",
-				". (+10% max Mana)",
-				"You choose the 'Professor' perk, gaining +10% max Mana.");
-		public static const Principle:PerkType = mk("Principle", "Principle",
-				". (+10% max Mana)",
-				"You choose the 'Principle' perk, gaining +10% max Mana.");
-		public static const Dean:PerkType = mk("Dean", "Dean",
-				". (+10% max Mana)",
-				"You choose the 'Dean' perk, gaining +10% max Mana.");
-		public static const President:PerkType = mk("President", "President",
-				". (+10% max Mana)",
-				"You choose the 'President' perk, gaining +10% max Mana.");
-		public static const Nerd:PerkType = mk("NERD!!!", "NERD!!!",
-				". (+10% max Mana)",
-				"You choose the 'NERD!!!' perk, gaining +10% max Mana.");
-		public static const SoldiersFriend:PerkType = mk("Soldier's Friend", "Soldier's Friend",
-				". (+10% range phys dmg)",
-				"You choose the 'Soldier's Friend' perk, gaining +10% range phys dmg.");
-		public static const PyrosFriend:PerkType = mk("Pyro's Friend", "Pyro's Friend",
-				". (+10% range phys dmg)",
-				"You choose the 'Pyro's Friend' perk, gaining +10% range phys dmg.");
-		public static const HeavysFriend:PerkType = mk("Heavy's Friend", "Heavy's Friend",
-				". (+10% range phys dmg)",
-				"You choose the 'Heavy's Friend' perk, gaining +10% range phys dmg.");
-		public static const EngineersFriend:PerkType = mk("Engineer's Friend", "Engineer's Friend",
-				". (+10% range phys dmg)",
-				"You choose the 'Engineer's Friend' perk, gaining +10% range phys dmg.");
-		public static const SnipersFriend:PerkType = mk("Sniper's Friend", "Sniper's Friend",
-				". (+10% range phys dmg)",
-				"You choose the 'Sniper's Friend' perk, gaining +10% range phys dmg.");
-		public static const SpysEnemy:PerkType = mk("Spy's Enemy", "Spy's Enemy",
-				". (+10% range phys dmg)",
-				"You choose the 'Spy's Enemy' perk, gaining +10% range phys dmg.");
-		public static const ShitYouTouchedSasha:PerkType = mk("SHIT YOU TOUCHED SASHA!!!", "SHIT YOU TOUCHED SASHA!!!",
-				". (+10% range phys dmg)",
-				"You choose the 'SHIT YOU TOUCHED SASHA!!!' perk, gaining +10% range phys dmg.");
-		public static const Whistles:PerkType = mk("Whistles", "Whistles",
-				". (+20% fatigue recovery rate)",
-				"You choose the 'Whistles' perk, gaining +20% fatigue recovery rate.");
-		public static const LyingDown:PerkType = mk("Lying Down", "Lying Down",
-				". (+20% fatigue recovery rate)",
-				"You choose the 'Lying Down' perk, gaining +20% fatigue recovery rate.");
-		public static const TakingABreak:PerkType = mk("Taking a Break", "Taking a Break",
-				". (+20% fatigue recovery rate)",
-				"You choose the 'Taking a Break' perk, gaining +20% fatigue recovery rate.");
-		public static const SkippingWork:PerkType = mk("Skipping Work", "Skipping Work",
-				". (+20% fatigue recovery rate)",
-				"You choose the 'Skipping Work' perk, gaining +20% fatigue recovery rate.");
-		public static const Napping:PerkType = mk("Napping", "Napping",
-				". (+20% fatigue recovery rate)",
-				"You choose the 'Napping' perk, gaining +20% fatigue recovery rate.");
-		public static const ZZZ:PerkType = mk("ZZZ", "ZZZ",
-				". (+20% fatigue recovery rate)",
-				"You choose the 'ZZZ' perk, gaining +20% fatigue recovery rate.");
-		public static const Lazy:PerkType = mk("LAZY!!!", "LAZY!!!",
-				". (+20% fatigue recovery rate)",
-				"You choose the 'LAZY!!!' perk, gaining +20% fatigue recovery rate.");
-		public static const Amateur:PerkType = mk("Amateur", "Amateur",
-				". (+15% tease dmg)",
-				"You choose the 'Amateur' perk, gaining +15% tease dmg.");
-		public static const Prostitute:PerkType = mk("Prostitute", "Prostitute",
-				". (+15% tease dmg)",
-				"You choose the 'Prostitute' perk, gaining +15% tease dmg.");
-		public static const Escort:PerkType = mk("Escort", "Escort",
-				". (+15% tease dmg)",
-				"You choose the 'Escort' perk, gaining +15% tease dmg.");
-		public static const BrothelOwner:PerkType = mk("Brothel Owner", "Brothel Owner",
-				". (+15% tease dmg)",
-				"You choose the 'Brothel Owner' perk, gaining +15% tease dmg.");
-		public static const Pornstar:PerkType = mk("Pornstar", "Pornstar",
-				". (+15% tease dmg)",
-				"You choose the 'Pornstar' perk, gaining +15% tease dmg.");
-		public static const SexChampion:PerkType = mk("Sex Champion", "Sex Champion",
-				". (+15% tease dmg)",
-				"You choose the 'Sex Champion' perk, gaining +15% tease dmg.");
 		public static const SexDeity:PerkType = mk("Sex Deity", "Sex Deity",
-				". (+15% tease dmg)",
+				"Screw ----, you're the true sex deity! You're holiness empowers your sex drive, increasing your tease damage by 15%.",
 				"You choose the 'Sex Deity' perk, gaining +15% tease dmg.");
 		public static const TooAngryToDie:PerkType = mk("Too Angry to Die", "Too Angry to Die",
 				".",//stay alive when berserking at cost of super fast 5-15% max wrath drain per turn when below min HP or above max Lust?
@@ -332,6 +219,9 @@ public class PerkLib
 		public static const Acclimation:PerkType = mk("Acclimation", "Acclimation",
 				"Reduces lust gain by 15%.",
 				"You choose the 'Acclimation' perk, making your body 15% more resistant to lust, up to a maximum of 75%.");
+		public static const Acolyte:PerkType = mk("Acolyte", "Acolyte",
+				"You carry that long pole with a lit flme on it... you no longer sleep during mass, so you know how to further decrease your minimum libido and boost lust resistance. (-2 min libido/+5% to lust resistance)",
+				"You choose the 'Acolyte' perk, lowering min libido by 2 and rise lust resistance by 5%.");
 		public static const AdvancedAerialCombat:PerkType = mk("Advanced Aerial Combat", "Advanced Aerial Combat",
 				"You are trained to fight while in flight. (extend flight duration by 2 turns and increase evasion when flying by 5%)",
 				"You choose the 'Advanced Aerial Combat' perk, you trained to fight while in flight.");
@@ -366,6 +256,12 @@ public class PerkLib
 		public static const Agility:PerkType = mk("Agility", "Agility",
 				"Boosts armor points by a portion of your speed on light/medium armors.",
 				"You choose the 'Agility' perk, increasing the effectiveness of Light/Medium armors by a portion of your speed.");
+		public static const AllSeeing:PerkType = mk("All-Seeing", "All-Seeing",
+				"You see everything... so you should have expected this description, and the 10% soul force gain.",
+				"You choose the 'All-Seeing' perk, gaining +10% max Soulforce.");
+		public static const Amateur:PerkType = mk("Amateur", "Amateur",
+				"You've just started out on your sex life. You don't know much, but you can tease well. (+15% tease dmg)",
+				"You choose the 'Amateur' perk, gaining +15% tease dmg.");
 		public static const AmateurGunslinger:PerkType = mk("Amateur Gunslinger", "Amateur Gunslinger",
 				"Gain an extra firearm attack per turn (2nd one).",
 				"You choose the 'Amateur Gunslinger' perk, gaining an extra firearm attack per turn.");
@@ -557,7 +453,10 @@ public class PerkLib
 				"You choose the 'Brawler' perk, allowing you to make two unarmed attacks in a turn!");
 		public static const Brawn:PerkType = mk("Brawn", "Brawn",
 				"You have increased your striking power. (+10% to phantom Str bonus, +5% to unarmed atk)",
-				"You choose the 'Brawn' perk, increasing your striking power.");
+				"You choose the 'Brawn' perk, increasing your striking power. (+10% to phantom Str bonus, +5% to unarmed atk)");
+		public static const BrothelOwner:PerkType = mk("Brothel Owner", "Brothel Owner",
+				"You are now above having sex by yourself, having created an industry and now teach new women and men to have sex. These allow you to refine your tricks, increasing your tease damage by 15%.",
+				"You choose the 'Brothel Owner' perk, gaining +15% tease dmg.");
 		public static const BrutalBlows:PerkType = mk("Brutal Blows", "Brutal Blows",
 				"[if(player.str>=75)" +
 						"Reduces enemy armor with each hit." +
@@ -567,7 +466,10 @@ public class PerkLib
 				"You choose the 'Brutal Blows' perk, which reduces enemy armor with each hit.");
 		public static const Brute:PerkType = mk("Brute", "Brute",
 				"You have increased your striking strength. (add 20 pts of phantom Str (scalable))",
-				"You choose the 'Brute' perk, increased your striking strength.");
+				"You choose the 'Brute' perk, increased your striking strength. (add 20 pts of phantom Str (scalable))");
+		public static const Cardinal:PerkType = mk("Cardinal", "Cardinal",
+				"You are on of the more important people of faith, and an aid to the pope themself. Your dedication to both the pope and your faith decreases the minimum libido you have and boost lust resistance. (-2 min libido/+5% to lust resistance)",
+				"You choose the 'Cardinal' perk, lowering min libido by 2 and rise lust resistance by 5%.");
 		public static const CarefulButRecklessAimAndShooting:PerkType = mk("Careful but Reckless Aim and Shooting", "Careful but Reckless Aim and Shooting",
 				"Increase accuracy by 30% at cost of loosing 15 Tou.",
 				"You choose the 'Careful but Reckless Aim and Shooting' perk, improving your accuracy by 30% at the cost of lowering by 15 your toughness.");
@@ -771,6 +673,9 @@ public class PerkLib
 		public static const DeadlyThrow:PerkType = mk("Deadly Throw", "Deadly Throw",
 				"You learned how to use throwing weapon with better efficiency adding your speed to the damage.",
 				"You choose the 'Deadly Throw' perk, adding your speed to throwing weapon damage.");
+		public static const Dean:PerkType = mk("Dean", "Dean",
+				"You control a section of the school as a member of the school board, answering only to the president. This increases max mana by 10%.",
+				"You choose the 'Dean' perk, gaining +10% max Mana.");
 		public static const DeathPlunge:PerkType = mk("Death plunge", "Death plunge",
 				"When using Great Dive you may add your weapon damage as part of the attack damage as if using power attack at its current maximum value consuming no wrath in the process.",
 				"You choose the 'Death plunge' perk. When using Great Dive you may add your weapon damage as part of the attack damage as if using power attack at its current maximum value consuming no wrath in the process.");
@@ -909,12 +814,18 @@ public class PerkLib
 		public static const ElvishPeripheralNervSysFinalForm:PerkType = mk("Elvish Peripheral NervSys (Final Form)", "Elvish Peripheral NervSys (Final Form)",
 				"Your Elvish Peripheral NervSys is giving you 15 pts of phantom Spe (scalable), increase your natural speed and evasion, decrease melee/range accuracy penalty when using multiattack options.",
 				"You choose the 'Elvish Peripheral NervSys (Final Form)' perk, your peripheral nervous system reached it final changes to reassamble elvish peripheral nervous system.");
+		public static const Embodiment:PerkType = mk("Embodiment", "Embodiment",
+				"You embody the principles of the monks... as usual you should only expect the 10% soulforce gain.",
+				"You choose the 'Embodiment' perk, gaining +10% max Soulforce.");
 		public static const EnableCriticals:PerkType = mk("Enable Criticals", "Enable Criticals",
 				"You now score crits on all naturaly immune to them enemies like constructs, goo or plants.",
 				"You choose the 'Enable Criticals' perk, allowing you to get crits on normaly immune to this enemy types.");
 		public static const Enchantment:PerkType = mk("Enchantment", "Enchantment",
 				"Using your arcane knowledge associated with alchemy,  you enchant each item to further power its effects +1 effect.",
 				"You choose the 'Enchantment' perk, number of possible effects of transformatives +1.");
+		public static const EngineersFriend:PerkType = mk("Engineer's Friend", "Engineer's Friend",
+				"Ah Spah's sappin' mah Sentrah! (Damn that's a thick accent... best take the +10% ranged damage buff before he turns it on you)",
+				"You choose the 'Engineer's Friend' perk, gaining +10% range phys dmg.");
 		public static const Enhancement:PerkType = mk("Enhancement", "Enhancement",
 				"Using your knowledge of alchemy, you've found a way to enhance the effects of transformatives +1 effect.",
 				"You choose the 'Enhancement' perk, number of possible effects of transformatives +1.");
@@ -923,10 +834,10 @@ public class PerkLib
 				"You choose the 'Envenomed Bolt' perk, allowing you to apply your own venom to arrows and bolts.");
 		public static const EpicBrawn:PerkType = mk("Epic Brawn", "Epic Brawn",
 				"You have improved your striking power to epic level. (+25% to phantom Str bonus, +20% to unarmed atk)",
-				"You choose the 'Epic Brawn' perk, improving your striking power to epic level.");
+				"You choose the 'Epic Brawn' perk, improving your striking power to epic level. (+25% to phantom Str bonus, +20% to unarmed atk)");
 		public static const EpicBrute:PerkType = mk("Epic Brute", "Epic Brute",
 				"You have improved your striking strength to epic level. (add 80 pts of phantom Str (scalable))",
-				"You choose the 'Epic Brute' perk, improving your striking strength to epic level.");
+				"You choose the 'Epic Brute' perk, improving your striking strength to epic level. (add 80 pts of phantom Str (scalable))");
 		public static const EpicDiehard:PerkType = mk("Epic Diehard", "Epic Diehard",
 				"You can't loose by HP until reaching droping into negative health larger than 8% of max HP + 800(scalable). HP limit cumulative with other Diehard perks and when below 0 HP will not longer loose 1% of max HP per turn.",
 				"You choose the 'Epic Diehard' perk, getting third upgrade of Diehard effect.");
@@ -978,6 +889,9 @@ public class PerkLib
 		public static const EromancyMaster:PerkType = mk("Eromancy (Master)", "Eromancy (Master)",
 				"+2 extra maximum mana for each point of intelligence and +2 extra maximum fatigue for each point of libido, tease exp for use of Arouse spell or m. specials dealing lust dmg.",
 				"You choose 'Eromancy (Master)' perk, granting +2 extra maximum mana for each point of intelligence and +2 extra maximum fatigue for each point of libido, tease exp for use of Arouse spell or m. specials dealing lust dmg.");
+		public static const Escort:PerkType = mk("Escort", "Escort",
+				"You've gotten so good you can now charge people money for having sex with you. There's many tricks you learned, increasing your tease damage by 15%.",
+				"You choose the 'Escort' perk, gaining +15% tease dmg.");
 		public static const EternalyLastingBuffs:PerkType = mk("(Eternaly) Lasting Buffs", "(Eternaly) Lasting Buffs",
 				"Buff spells last another 5 turns longer at another 2x increase of their costs.",
 				"You choose the '(Eternaly) Lasting Buffs' perk. Your mastery over buffs reached (eternaly) lasting level.");
@@ -1138,10 +1052,10 @@ public class PerkLib
 				"You choose the 'Greater Aerial Combat' perk, you learned to use air and gravity to your own benefit.");
 		public static const GreaterBrawn:PerkType = mk("Greater Brawn", "Greater Brawn",
 				"You have greatly improved your striking power. (+20% to phantom Str bonus, +15% to unarmed atk)",
-				"You choose the 'Greater Brawn' perk, greatly improving your striking power.");
+				"You choose the 'Greater Brawn' perk, greatly improving your striking power. (+20% to phantom Str bonus, +15% to unarmed atk)");
 		public static const GreaterBrute:PerkType = mk("Greater Brute", "Greater Brute",
 				"You have greatly improved your striking strength. (add 60 pts of phantom Str (scalable))",
-				"You choose the 'Greater Brute' perk, greatly improving your striking strength.");
+				"You choose the 'Greater Brute' perk, greatly improving your striking strength. (add 60 pts of phantom Str (scalable))");
 		public static const GreaterCrinosShape:PerkType = mk("Greater Crinos Shape", "Greater Crinos Shape",
 				"Crinos Shape increase to physical might rise to 80% of str/tou/spe.",
 				"You choose the 'Greater Crinos Shape' perk, gaining another increase to phys stats boost in Crinos Shape (+80%).");
@@ -1276,6 +1190,9 @@ public class PerkLib
 		public static const HeartOfSteel:PerkType = mk("Heart of Steel", "Heart of Steel",
 				"Even your heart has grown used to fighting, after all, the saying goes 'Steel your heart', further increasing your melee strength. (+10% melee phys dmg)",
 				"You choose the 'Heart of Steel' perk, gaining +10% melee phys dmg.");
+		public static const HeavysFriend:PerkType = mk("Heavy's Friend", "Heavy's Friend",
+				"I like you! Cover Heavy! (You'll definitely need that +10% ranged damage buff if you're going in front of that dude)",
+				"You choose the 'Heavy's Friend' perk, gaining +10% range phys dmg.");
 		public static const HectaAttackSmall:PerkType = mk("Hecta Attack (Small)", "Hecta Attack (Small)",
 				"Allows you to perform seven melee attacks with small weapons per round.",
 				"You choose the 'Hecta Attack (Small)' perk. This allows you to make seven melee attacks with small weapons.");
@@ -1327,10 +1244,10 @@ public class PerkLib
 				"You've chosen the 'Impale' perk. Your spear and lance critical hit attacks bonus damages are doubled.");
 		public static const ImprovedBrawn:PerkType = mk("Improved Brawn", "Improved Brawn",
 				"You have improved your striking power. (+15% to phantom Str bonus, +10% to unarmed atk)",
-				"You choose the 'Improved Brawn' perk, improving your striking power.");
+				"You choose the 'Improved Brawn' perk, improving your striking power. (+15% to phantom Str bonus, +10% to unarmed atk)");
 		public static const ImprovedBrute:PerkType = mk("Improved Brute", "Improved Brute",
 				"You have improved your striking strength. (add 40 pts of phantom Str (scalable))",
-				"You choose the 'Improved Brute' perk, improving your striking strength.");
+				"You choose the 'Improved Brute' perk, improving your striking strength. (add 40 pts of phantom Str (scalable))");
 		public static const ImprovedCrinosShape:PerkType = mk("Improved Crinos Shape", "Improved Crinos Shape",
 				"Crinos Shape increase to physical might rise to 40% of str/tou/spe.",
 				"You choose the 'Improved Crinos Shape' perk, increasing boost recived by using Crinos Shape (+40%).");
@@ -1364,6 +1281,9 @@ public class PerkLib
 		public static const ImprovingNaturesBlueprintsApexPredator:PerkType = mk("Improving Nature's Blueprints (Apex Predator)", "Improving Nature's Blueprints (Apex Predator)",
 				"Changing negative bonuses to max Int and Wis from Job: Beast Warrior is the same value positive bonuses. While using Crinos shape increasing natural regeneration by 2% of max HP per turn.",
 				"You choose the 'Improving Nature's Blueprints (Apex Predator)' perk, allowing you to become an Apex Predator that isn't dull and slow witted along with increased regeneration while using Crinos Shape.");
+		public static const InControl:PerkType = mk("In Control", "In Control",
+				"You are in control of your desires, that's it... except another 10% soul force gain.",
+				"You choose the 'In Control' perk, gaining +10% max Soulforce.");
 		public static const InhumanDesireI:PerkType = mk("Inhuman Desire I", "Inhuman Desire I",
 				"Raises max LP by 20.",
 				"You choose the 'Inhuman Desire I' perk, giving you an additional 20 LP!");
@@ -1535,12 +1455,15 @@ public class PerkLib
 		public static const LadyGodivasFavoriteChild:PerkType = mk("Lady Godiva's favorite Child", "Lady Godiva's favorite Child",
 				"That's the source of your fortune... not only are you her child... but you're also her favorite... take your bonus and leave me alone while I wallow in my moneyless despair... meanie (More money upon victory because the writer began to sulk). (15% more gems from victories)",
 				"You choose the 'Lady Godiva's favorite Child' perk, increasing gem gains from victories by 15%.");
+		public static const Lazy:PerkType = mk("LAZY!!!", "LAZY!!!",
+				"Sample Text Here/+20% fatigue recovery rate",
+				"You choose the 'LAZY!!!' perk, gaining +20% fatigue recovery rate.");
 		public static const LegendaryBrawn:PerkType = mk("Legendary Brawn", "Legendary Brawn",
 				"You have improved your striking power to epic level. (+30% to phantom Str bonus, +25% to unarmed atk)",
-				"You choose the 'Legendary Brawn' perk, improving your striking power to epic level.");
+				"You choose the 'Legendary Brawn' perk, improving your striking power to epic level. (+30% to phantom Str bonus, +25% to unarmed atk)");
 		public static const LegendaryBrute:PerkType = mk("Legendary Brute", "Legendary Brute",
 				"You have improved your striking strength to epic level. (add 100 pts of phantom Str (scalable))",
-				"You choose the 'Legendary Brute' perk, improving your striking strength to epic level.");
+				"You choose the 'Legendary Brute' perk, improving your striking strength to epic level. (add 100 pts of phantom Str (scalable))");
 		public static const LegendaryEndurance:PerkType = mk("Legendary Endurance", "Legendary Endurance",
 				"Increases maximum fatigue by 10000.",
 				"You choose the 'Legendary Endurance' perk. Thanks to your legendary physical conditioning, your maximum fatigue has been increased by 10000!");
@@ -1621,6 +1544,9 @@ public class PerkLib
 						"<b>You are too slow to benefit from this perk.</b>" +
 						"]",
 				"You choose the 'Lunging Attacks' perk, granting 50% armor penetration for standard attacks.");
+		public static const LyingDown:PerkType = mk("Lying Down", "Lying Down",
+				"Sample Text Here/+20% fatigue recovery rate",
+				"You choose the 'Lying Down' perk, gaining +20% fatigue recovery rate.");
 		public static const Mage:PerkType = mk("Mage", "Mage",
 				"[if (player.inte>=50)" +
 						"Increases base spell strength by 20% and mana pool by 30." +
@@ -1696,6 +1622,9 @@ public class PerkLib
 				"Grants 15% chance per round of cleansing poisons/drugs from your body. Increases HP restoration on rest.",
 				"You choose the 'Medicine' perk, giving you a chance to remove debilitating poisons automatically! Also, increases HP restoration on rest.");
 		public static const Metamorph:MetamorphPerk = new MetamorphPerk();
+		public static const Metamorphable:PerkType = mk("Metamorphable", "Metamorphable",
+				"You can manipulate your soul force to change your body... but this increases your soul force by 10%.",
+				"You choose the 'Metamorphable' perk, gaining +10% max Soulforce.");
 		public static const MindOfSteel:PerkType = mk("Mind of Steel", "Mind of Steel",
 				"Careful now, you're becoming too much like a weapon. You're mindset has become that of a weapon, allowing you to connect with your melee weapon to deal even more damage. (+10% melee phys dmg)",
 				"You choose the 'Mind of Steel' perk, gaining +10% melee phys dmg.");
@@ -1740,10 +1669,10 @@ public class PerkLib
 				"You choose the 'Muscles of Steel' perk, gaining +10% melee phys dmg.");
 		public static const MythicalBrawn:PerkType = mk("Mythical Brawn", "Mythical Brawn",
 				"You have improved your striking power to epic level. (+35% to phantom Str bonus, +30% to unarmed atk)",
-				"You choose the 'Mythical Brawn' perk, improving your striking power to epic level.");
+				"You choose the 'Mythical Brawn' perk, improving your striking power to epic level. (+35% to phantom Str bonus, +30% to unarmed atk)");
 		public static const MythicalBrute:PerkType = mk("Mythical Brute", "Mythical Brute",
 				"You have improved your striking strength to epic level. (add 120 pts of phantom Str (scalable))",
-				"You choose the 'Mythical Brute' perk, improving your striking strength to epic level.");
+				"You choose the 'Mythical Brute' perk, improving your striking strength to epic level. (add 120 pts of phantom Str (scalable))");
 		public static const MythicalEndurance:PerkType = mk("Mythical Endurance", "Mythical Endurance",
 				"Increases maximum fatigue by 20000.",
 				"You choose the 'Mythical Endurance' perk. Thanks to your mythical physical conditioning, your maximum fatigue has been increased by 20000!");
@@ -1783,6 +1712,9 @@ public class PerkLib
 		public static const NakedTruth:PerkType = mk("Naked Truth", "Naked Truth",
 				"Opponent have a hard time dealing serious damage as the sight of your naked body distract them (+10% dmg reduction).",
 				"You choose the 'Naked Truth' perk, causing opponent have a hard time dealing serious damage as the sight of your naked body distract them.");
+		public static const Napping:PerkType = mk("Napping", "Napping",
+				"Sample Text Here/+20% fatigue recovery rate",
+				"You choose the 'Napping' perk, gaining +20% fatigue recovery rate.");
 		public static const NaturalHealingEpic:PerkType = mk("Natural healing (Epic)", "Natural healing (Epic)",
 				"Incease healing power by 50% and lower healing spells mana costs by 20%.",
 				"You choose the 'Natural healing (Epic)' perk, increasing healing spells effectivnes and lowering their costs.");
@@ -1819,6 +1751,9 @@ public class PerkLib
 		public static const NaturesSpringVI:PerkType = mk("Nature's Spring VI", "Nature's Spring VI",
 				"Raises max fatigue by 20 and regain it 5% faster.",
 				"You choose the 'Nature's Spring VI' perk, giving you an additional 20 fatigue and boosting your fatigue recovery rate.");
+		public static const Nerd:PerkType = mk("NERD!!!", "NERD!!!",
+				"Piccolo's words, not mine... but they are perfect for describing you. Increase max mana by 10%.",
+				"You choose the 'NERD!!!' perk, gaining +10% max Mana.");
 		public static const NonaAttackSmall:PerkType = mk("Nona Attack (Small)", "Nona Attack (Small)",
 				"Allows you to perform nine melee attacks with small weapons per round.",
 				"You choose the 'Nona Attack (Small)' perk. This allows you to make nine melee attacks with small weapons.");
@@ -1868,6 +1803,12 @@ public class PerkLib
 						"<b>You are not fast enough to gain benefit from this perk.</b>" +
 						"]",
 				"You choose the 'Parry' perk, giving you a chance to deflect blow with your weapon. (Speed-based).");
+		public static const Pastor:PerkType = mk("Pastor", "Pastor",
+				"Congratulations! You went from sleeping during the sermon, to being the putting people to sleep with sermons! The sheer devotion to your faith lowers you minimum libido and boost lust resistance. (-2 min libido/+5% to lust resistance)",
+				"You choose the 'Pastor' perk, lowering min libido by 2 and rise lust resistance by 5%.");
+		public static const PathOfEnlightenment:PerkType = mk("Path of Enlightenment", "Path of Enlightenment",
+				"You walk a path of enlightenment... You should stop expecting anything other than the 10% more soulforce.",
+				"You choose the 'Path of Enlightenment' perk, gaining +10% max Soulforce.");
 		public static const PeerlessEndurance:PerkType = mk("Peerless Endurance", "Peerless Endurance",
 				"Increases maximum fatigue by 1000.",
 				"You choose the 'Peerless Endurance' perk. Thanks to your peerless physical conditioning, your maximum fatigue has been increased by 1000!</b>");
@@ -1895,6 +1836,9 @@ public class PerkLib
 		public static const PerfectStrike:PerkType = mk("Perfect strike", "Perfect strike",
 				"When you strike (with puch/kick/soulblast) a stunned or frozen solid opponent you deal extra damage (50%).",
 				"You choose the 'Perfect strike' perk, allowing to deal more damage to stunned or frozen solid enemeis with punch/kick type soulskills.");
+		public static const PewWarmer:PerkType = mk("Pew Warmer", "Pew Warmer",
+				"You attend mass, but have a small tendecy to sleep during the sermon... but hey, merely attending was enough to help lower your minimum libido and boost lust resistance. (-2 min libido/+5% to lust resistance)",
+				"You choose the 'Pew Warmer' perk, lowering min libido by 2 and rise lust resistance by 5%.");
 		public static const PhantomStrike:PerkType = mk("Phantom Strike", "Phantom Strike",
 				"Allows to attack twice with some P. Specials at double cost. (Wing Slap, Stone Claw, Tail Slam, Kick and few others)",
 				"You choose the 'Phantom Strike' perk, allowing to attack twice with some P. Specials at double cost.");
@@ -1907,6 +1851,12 @@ public class PerkLib
 		public static const PigBoarFatFinalForm:PerkType = mk("Pig/Boar Fat (Final Form)", "Pig/Boar Fat (Final Form)",
 				"Your altered fat tissue increased again your natural resistance to damage, toughness and thickness limit. Body Slam power increase twicefold and it not req. to be pig/boar to use it, also another lowering of min. thickness to use it.",
 				"You choose the 'Pig/Boar Fat (Final Form)' perk. Your pig fat tissue changes boosted your pig special once again.");
+		public static const Pope:PerkType = mk("Pope", "Pope",
+				"You are the most important mortal in your faith, the pinnacle of faith and devotion! Of course this means your minimum libido and lust resistance is as far as it will go! (-2 min libido/+5% to lust resistance)",
+				"You choose the 'Pope' perk, lowering min libido by 2 and rise lust resistance by 5%.");
+		public static const Pornstar:PerkType = mk("Pornstar", "Pornstar",
+				"You are famous for your acts of sex, with many teenagers dreaming of having a chance with you. All the tips you learned help your tease damage by 15%.",
+				"You choose the 'Pornstar' perk, gaining +15% tease dmg.");
 		public static const PowerSweep:PerkType = mk("Power Sweep", "Power Sweep",
 				"Allows the use of whirlwind using one handed weapons at 75% of the normal effect. Large weapon gain a 25% bonus to whirlwind damage (Does not include fist).",
 				"You choose the 'Power Sweep' perk.  This allows you to improve Whirlwind attack.");
@@ -1916,6 +1866,9 @@ public class PerkLib
 		public static const Precision:PerkType = mk("Precision", "Precision",
 				"Reduces enemy armor by 10. (Req's 25+ Intelligence)",
 				"You've chosen the 'Precision' perk.  Thanks to your intelligence, you're now more adept at finding and striking an enemy's weak points, reducing their damage resistance from armor by 10.  If your intelligence ever drops below 25 you'll no longer be smart enough to benefit from this perk.");
+		public static const President:PerkType = mk("President", "President",
+				"You own the school board, controlling what classes are taught, further increasing max mana by 10%.",
+				"You choose the 'President' perk, gaining +10% max Mana.");
 		public static const PrestigeJobArcaneArcher:PerkType = mk("Prestige Job: Arcane Archer", "Prestige Job: Arcane Archer",
 				"You've trained in prestige art of combining magic and arrows.",
 				"You choose 'Prestige Job: Arcane Archer' perk, training yourself to became Arcane Archer.");
@@ -1940,6 +1893,9 @@ public class PerkLib
 		public static const PrestigeJobTempest:PerkType = mk("Prestige Job: Tempest", "Prestige Job: Tempest",
 				"You've trained in prestige art of dual wielding as you hack and slice through your opponents like a raging storm of steel.",
 				"You choose 'Prestige Job: Tempest' perk, training yourself to became Tempest.");
+		public static const Priest:PerkType = mk("Priest", "Priest",
+				"You now speak during mass, your words of wisdom empowerin others and you to have a lower minimum libido and boost lust resistance. (-2 min libido/+5% to lust resistance)",
+				"You choose the 'Priest' perk, lowering min libido by 2 and rise lust resistance by 5%.");
 		public static const PrimalFuryI:PerkType = mk("Primal Fury I", "Primal Fury I",
 				"Raises max Wrath by 10, generates 1 point of Wrath out of combat and double this amount during fight.",
 				"You choose the 'Primal Fury I' perk, increasing passive wrath generation and max Wrath.");
@@ -1958,6 +1914,18 @@ public class PerkLib
 		public static const PrimalFuryVI:PerkType = mk("Primal Fury VI", "Primal Fury VI",
 				"Raises max Wrath by 10, generates 1 point of Wrath out of combat and double this amount during fight.",
 				"You choose the 'Primal Fury VI' perk, increasing passive wrath generation and max Wrath.");
+		public static const Principle:PerkType = mk("Principle", "Principle",
+				"You oversee the day to day actions inside the school, your studious nature increasing max mana by 10%.",
+				"You choose the 'Principle' perk, gaining +10% max Mana.");
+		public static const Professor:PerkType = mk("Professor", "Professor",
+				"You're more important than the standard teacher, and your paycheck reflects that. You're hired for your knowledge which increases max mana by 10%.",
+				"You choose the 'Professor' perk, gaining +10% max Mana.");
+		public static const Prostitute:PerkType = mk("Prostitute", "Prostitute",
+				"It's official, everyone knows to go to you for sex. You're still new to the business, but you learned some new tricks. (+15% tease dmg)",
+				"You choose the 'Prostitute' perk, gaining +15% tease dmg.");
+		public static const PyrosFriend:PerkType = mk("Pyro's Friend", "Pyro's Friend",
+				"Mmmphmm! (No idea what he? is trying to say... but same rules apply... +10% ranged damage buff)",
+				"You choose the 'Pyro's Friend' perk, gaining +10% range phys dmg.");
 		public static const QuadrupleAttack:PerkType = mk("Quadruple Attack", "Quadruple Attack",
 				"Allows you to perform four melee attacks with non-large weapons per round.",
 				"You choose the 'Quadruple Attack' perk.  This allows you to make four melee attacks with non-large weapons.");
@@ -2046,6 +2014,9 @@ public class PerkLib
 		public static const Sadist:PerkType = mk("Sadist", "Sadist",
 				"Deal 20% more damage, but gain lust at the same time.",
 				"You choose the 'Sadist' perk, increasing damage by 20 percent but causing you to gain lust from dealing damage.");
+		public static const Saint:PerkType = mk("Saint", "Saint",
+				"You go on periodic journeys to spread your faith and help those in need. These constant pilgrimages decrease your minimum libido and boost lust resistance. (-2 min libido/+5% to lust resistance)",
+				"You choose the 'Saint' perk, lowering min libido by 2 and rise lust resistance by 5%.");
 		public static const SalamanderAdrenalGlands:PerkType = mk("Salamander Adrenal Glands", "Salamander Adrenal Glands",
 				"Your Salamander adrenal glands are giving you slight boost to your natural stamina and libido.",
 				"You choose the 'Salamander Adrenal Glands' perk, due to repeadly exposure to effects of lustzerk your adrenal glands mutated.");
@@ -2073,6 +2044,9 @@ public class PerkLib
 		public static const Sensual:PerkType = mk("Sensual", "Sensual",
 				"Lowering by ~40% needed exp to lvl-up tease and +1 more tease exp after succes.",
 				"You choose the 'Sensual' perk, lowering by ~40% needed exp to lvl-up tease and +1 more tease exp after succes.");
+		public static const SexChampion:PerkType = mk("Sex Champion", "Sex Champion",
+				"You are the shining symbol of the sex industry, the beacon of hope for those aspiring in the industry. The sheer number of tricks and tips you have up your tease damage 15%.",
+				"You choose the 'Sex Champion' perk, gaining +15% tease dmg.");
 		public static const Sharpshooter:PerkType = mk("Sharpshooter", "Sharpshooter",
 				"Allow to increase non-bow range weapons attack up to 200% (Intelligence-based).",
 				"You choose the 'Sharpshooter' perk, allowing to slightly increase non-bow range weapons attack.");
@@ -2105,6 +2079,12 @@ public class PerkLib
 		public static const ShieldWard:PerkType = mk("Shield Ward", "Shield Ward",
 				"When you wearing a shield lower chance to be knocked back or disarmed by enemy attacks.",
 				"You choose the 'Shield Ward' perk, allowing to lower chance to be knocked back or disarmed when using shield.");
+		public static const ShitYouTouchedSasha:PerkType = mk("SHIT YOU TOUCHED SASHA!!!", "SHIT YOU TOUCHED SASHA!!!",
+				"DIE!!! (You're fucked... not even this final +10% ranged damage buff will save your sorry ass...)",
+				"You choose the 'SHIT YOU TOUCHED SASHA!!!' perk, gaining +10% range phys dmg.");
+		public static const SkippingWork:PerkType = mk("Skipping Work", "Skipping Work",
+				"Sample Text Here/+20% fatigue recovery rate",
+				"You choose the 'Skipping Work' perk, gaining +20% fatigue recovery rate.");
 		public static const Slayer:PerkType = mk("Slayer", "Slayer",
 				"Increase sneaky attack dmg by another 300% base value (7x).",
 				"You choose the 'Slayer' perk. Increase sneaky attack dmg by another 300% base value (7x).");
@@ -2114,6 +2094,12 @@ public class PerkLib
 		public static const SneakyAttack:PerkType = mk("Sneaky attack", "Sneaky attack",
 				"Strike the vitals of a stunned, blinded or distracted opponent for heavy damage (2x).",
 				"You choose the 'Sneaky attack' perk. Strike the vitals of a stunned, blinded or distracted opponent for heavy damage (2x).");
+		public static const SnipersFriend:PerkType = mk("Sniper's Friend", "Sniper's Friend",
+				"Angry Ausie Noises! (Did you understand him? Neither did I... be careful of the piss jars and get that +10% ranged damage buff!)",
+				"You choose the 'Sniper's Friend' perk, gaining +10% range phys dmg.");
+		public static const SoldiersFriend:PerkType = mk("Soldier's Friend", "Soldier's Friend",
+				"Get out there ya commie! (Just go, don't argue with him and take a +10% ranged damage buff)",
+				"You choose the 'Soldier's Friend' perk, gaining +10% range phys dmg.");
 		public static const SoulAncestor:PerkType = mk("Soul Ancestor", "Soul Ancestor",
 				"Allow reaching 12th stage of soul cultivation. (+35 max Hunger, +140 max SF at lvl 72, 74, 76; +25% to max SF at lvl 72)",
 				"You choose the 'Soul Ancestor' perk, reaching 12th stage of soul cultivation! (+35 max Hunger, +140 max SF at lvl 72, 74, 76; +25% to max SF at lvl 72)");
@@ -2141,6 +2127,9 @@ public class PerkLib
 		public static const SoulPersonage:PerkType = mk("Soul Personage", "Soul Personage",
 				"Allow reaching 2nd stage of soul cultivation. (+20 max Hunger, +40 max SF at lvl 12, 14, 16; +10% to max SF at lvl 12)",
 				"You choose the 'Soul Personage' perk, reaching 2nd stage of soul cultivation! (+20 max Hunger, +40 max SF at lvl 12, 14, 16; +10% to max SF at lvl 12)");
+		public static const SoulPowered:PerkType = mk("Soul Powered", "Soul Powered",
+				"You use your soul force more than anything else... increasing its size by 10%.",
+				"You choose the 'Soul Powered' perk, gaining +10% max Soulforce.");
 		public static const SoulScholar:PerkType = mk("Soul Scholar", "Soul Scholar",
 				"Allow reaching 5th stage of soul cultivation. (+25 max Hunger, +70 max SF at lvl 30, 32, 34; +15% to max SF at lvl 30)",
 				"You choose the 'Soul Scholar' perk, reaching 5th stage of soul cultivation! (+25 max Hunger, +70 max SF at lvl 30, 32, 34; +15% to max SF at lvl 30)");
@@ -2194,6 +2183,9 @@ public class PerkLib
 		public static const SpiritedDive:PerkType = mk("Spirited Dive", "Spirited Dive",
 				"You can perform a terrifying dive-bomb attack. (Great Dive have full AoE dmg bonus vs Groups)",
 				"You choose the 'Spirited Dive' perk, learning to perform terrifying dive-bomb attack. (AoE dmg on Great Dive)");
+		public static const SpysEnemy:PerkType = mk("Spy's Enemy", "Spy's Enemy",
+				"Backst- Enemy Spy is here! Aww Dammit! (Close call there... I'd take the +10% ranged damage buff before he comes back)",
+				"You choose the 'Spy's Enemy' perk, gaining +10% range phys dmg.");
 		public static const StarlightStrikes:PerkType = mk("Starlight Strikes", "Starlight Strikes",
 				"[if(player.spe>=60)" +
 						"Increases the attack damage for small weapons.</b>" +
@@ -2216,6 +2208,9 @@ public class PerkLib
 		public static const StrongestElementalBond:PerkType = mk("Strongest Elemental Bond", "Strongest Elemental Bond",
 				"Lower by 90 needed mana to sustain active elemental in combat.",
 				"You choose the 'Strongest Elemental Bond' perk, reaching near the peak of connection strength with your elementals.");
+		public static const Studious:PerkType = mk("Studious", "Studious",
+				"You're a new student, kinda have to be studious. Your hours of study has helped you increase max mana by 10%.",
+				"You choose the 'Studious' perk, gaining +10% max Mana.");
 		public static const SuperChargedCore:PerkType = mk("Super Charged Core", "Super Charged Core",
 				"At the cost of using additional mana you can super charge each temporal golem core attaing ever better effects than before.",
 				"You choose 'Super Charged Core' perk, learning how to make core charging more effective.");
@@ -2262,6 +2257,9 @@ public class PerkLib
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
 				"You choose the 'Tactician' perk, increasing physical critical hit chance by up to 10% (Intelligence-based).");
+		public static const TakingABreak:PerkType = mk("Taking a Break", "Taking a Break",
+				"Sample Text Here/+20% fatigue recovery rate",
+				"You choose the 'Taking a Break' perk, gaining +20% fatigue recovery rate.");
 		public static const TankI:PerkType = mk("Tank I", "Tank I",
 				"+3 extra HP per point of toughness.",
 				"You choose the 'Tank I' perk, granting +3 extra maximum HP for each point of toughness.");
@@ -2280,6 +2278,9 @@ public class PerkLib
 		public static const TankVI:PerkType = mk("Tank VI", "Tank VI",
 				"+3 extra HP per point of toughness.",
 				"You choose the 'Tank VI' perk, granting +3 extra maximum HP for each point of toughness.");
+		public static const Teacher:PerkType = mk("Teacher", "Teacher",
+				"Instead of being taught, now you teach others. Your skill allows you to increase max mana by 10%.",
+				"You choose the 'Teacher' perk, gaining +10% max Mana.");
 		public static const ThirstForBlood:PerkType = mk("Thirst for blood", "Thirst for blood",
 				"Weapon and effect that causes bleed damage have this damage increased by 50%.",
 				"You choose the 'Thirst for blood' perk, increasing damage done by bleed effects.");
@@ -2471,12 +2472,21 @@ public class PerkLib
 		public static const WhirlwindFeral:PerkType = mk("Feral Whirlwind", "Feral Whirlwind",
 				"Feral Whirlwind special deal increased damage based on current strength and unarmed bonus.",
 				"You choose the 'Feral Whirlwind' perk, making your Feral Whirlwind special stronger.");
+		public static const Whistles:PerkType = mk("Whistles", "Whistles",
+				"Sample Text Here/+20% fatigue recovery rate",
+				"You choose the 'Whistles' perk, gaining +20% fatigue recovery rate.");
 		public static const WildQuiver:PerkType = mk("Wild Quiver", "Wild Quiver",
 				"You grab and shoot arrows at blinding speed, gaining an extra shot.",
 				"You choose the 'Wild Quiver' perk, you combine it with triple attack and manyshot to shoot up to 5 times.");
 		public static const WisenedHealer:PerkType = mk("Wisened Healer", "Wisened Healer",
 				"Adds wisdom based scaling to healing spells at cost of doubling spells costs.",
 				"You choose the 'Wisened Healer' perk. Increasing healing spells effects based on current wisdom.");
+		public static const Wizened:PerkType = mk("Wizened", "Wizened",
+				"You are wise, what did you expect, something wise? You do get 10% more soulforce though.",
+				"You choose the 'Wizened' perk, gaining +10% max Soulforce.");
+		public static const ZZZ:PerkType = mk("ZZZ", "ZZZ",
+				"Sample Text Here/+20% fatigue recovery rate",
+				"You choose the 'ZZZ' perk, gaining +20% fatigue recovery rate.");
 		//Perki obecnie nie używanie nigdzie - do usuniecia lub wykorzystania w czymś innym
 		public static const UnlockMind:PerkType = mk("Unlock: Mind", "Unlock: Mind (1st Stage)",
 				"Unlocking mind potential grants additional 5 Mana on each lvl-up (retroactive effect).",
@@ -4886,7 +4896,8 @@ public class PerkLib
 					.requireAnyPerk(HistoryFortune, PastLifeFortune);
 			Nurse.requireLevel(6)
 					.requireAnyPerk(HistoryHealer, PastLifeHealer);
-			//Religious
+			PewWarmer.requireLevel(6)
+					.requireAnyPerk(HistoryReligious, PastLifeReligious);
 			Studious.requireLevel(6)
 					.requireAnyPerk(HistoryScholar, PastLifeScholar);
 			SoldiersFriend.requireLevel(6)
@@ -5203,7 +5214,8 @@ public class PerkLib
 					.requirePerk(Lucky);
 			Doctor.requireLevel(24)
 					.requirePerk(Nurse);
-			//Religious
+			Acolyte.requireLevel(24)
+					.requirePerk(PewWarmer);
 			Teacher.requireLevel(24)
 					.requirePerk(Studious);
 			PyrosFriend.requireLevel(24)
@@ -5383,7 +5395,8 @@ public class PerkLib
 					.requirePerk(ExtremelyLucky);
 			FirstResponse.requireLevel(42)
 					.requirePerk(Doctor);
-			//Religious
+			Priest.requireLevel(42)
+					.requirePerk(Acolyte);
 			Professor.requireLevel(42)
 					.requirePerk(Teacher);
 			HeavysFriend.requireLevel(42)
@@ -5452,7 +5465,8 @@ public class PerkLib
 					.requirePerk(MoneyFinder);
 			Paramedic.requireLevel(72)
 					.requirePerk(FirstResponse);
-			//Religious
+			Pastor.requireLevel(72)
+					.requirePerk(Priest);
 			Principle.requireLevel(72)
 					.requirePerk(Professor);
 			EngineersFriend.requireLevel(72)

@@ -66,20 +66,31 @@ public class HeXinDao extends BaseContent
 		else if (flags[kFLAGS.LUNAR_NEW_YEAR] >= 2019) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "pig";;
 		outputText("You go deeper in town and discover the whole place is indeed covered in red. The big question now is what should you check upon first?");
 		menu();
-		//addButton(0, "", riverislandVillageStuffLunarGifts);
+		if (!player.hasStatusEffect(StatusEffects.CanGetLunarGift)) addButton(0, "Gifts", riverislandVillageStuffLunarGifts);
 		addButton(1, "Food", riverislandVillageStuffLunarFood);
 		addButton(2, "Clothing", riverislandVillageStuffLunarClothing);
-		//addButton(3, "Fireworks", riverislandVillageStuffLunarFireworks);
-		//addButton(4, "Chi Chi", riverislandVillageStuffLunarChiChi);
+		if (model.time.hours > 19) addButton(3, "Fireworks", riverislandVillageStuffLunarFireworks);
+		else addButtonDisabled(3, "Fireworks", "You need to wait till 8 PM for that.");
+		if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 20 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 2 && model.time.hours > 17) addButton(4, "Chi Chi", riverislandVillageStuffLunarChiChi);
+		else addButtonDisabled(4, "Chi Chi", "You need to wait until it's 6 PM or later for that.");
 		addButton(14, "Back", riverislandVillageStuff1).hint("Leave festival part of He'Xin'Dao.");
 	}
 	public function riverislandVillageStuffLunarGifts():void {
-		
+		clearOutput();
+		outputText("There seems to be a gift exchange going about. Some people are handing over red envelopes, something about luck for the coming year. You get hold of one and open it hoping for great luck. You open the envelope and... ");
+		var Gems:Number = 501;
+		Gems += rand(1000);
+		outputText("Wow! You were lucky! There was " + Gems + " gems inside! This sure is good fortune for the coming year.");
+		player.createStatusEffect(StatusEffects.CanGetLunarGift,0,0,0,0);
+		player.gems += Gems;
+		statScreenRefresh();
+		doNext(riverislandVillageStuffLunar);
 	}
 	public function riverislandVillageStuffLunarFood():void {
 		clearOutput();
 		outputText("The local restaurant seems to be offering some speciality food and the best of it all; is it's free! Some " + flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] + "-morphs are handling it all over for extra thematics. You proceed to grab a plate of these strange ravioli the people calls jiǎozi taking this rice dessert they call niángāo right after. The meal is comforting and you would believe everything in mareth was going fine right now if not for the reddish stormy sky in the far distance which contrast with these festivities.");
 		player.refillHunger(50);
+		cheatTime2(30);
 		doNext(riverislandVillageStuffLunar);
 	}
 	public function riverislandVillageStuffLunarClothing():void {
@@ -113,23 +124,39 @@ public class HeXinDao extends BaseContent
 		outputText("\n\nYou put the dress in your bag for now. Now to put it on.");
 		outputText("\n\n<b>You got a Lunar new year dress.</b>\n\n");
 		player.gems -= 100;
-        statScreenRefresh();
+		cheatTime(1/3);
         inventory.takeItem(itype, riverislandVillageStuffLunar);
     }
 	public function riverislandVillageStuffLunarFireworks():void {
-		
+		clearOutput();
+		outputText("There are some extravagantly beautiful fireworks exploding in the sky above town. Red rockets are regularly shot up there exploding in bright flashes. You chuckle inside pondering what would happen if some harpy accidentally was to use this aerial space at the time… would it become roasted chicken? Speaking of chickens while you were thinking about harpies a few imps indeed drop dead from the sky, guess some demons indeed got a little too close to the explosion and got caught in the blast.");
+		doNext(camp.returnToCampUseFourHours);
 	}
 	public function riverislandVillageStuffLunarChiChi():void {
 		clearOutput();
 		outputText("You are surprised to spot Chi Chi in the crowd wearing a traditional kimono. The hinezumi notice you right away and invite you to join her.");
-		if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 4) {
-			outputText("\n\n\"<i>Oh it's you? Did you came to train? I’m sorry, but today I’m on a break. It's the Lunar festival and this event only happens once a year. How about we share a cup of sake and watch the fireworks? You could use a break too, ya know?</i>\"");
-			outputText("\n\nYou both share sake and food and jokes all night while watching the fireworks. It's only when it gets very late that you bid her farewell and head back to camp.");
-			doNext(riverislandVillageStuff);
+		if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 3) {
+			outputText("\n\n\"<i>Come over people! Look the part! Buy a dress for the festivities only for 50 gems! C'mon and buy while there's some left!</i>\"");
+			outputText("\n\nYou put the dress in your bag for now. Now to put it on.");
+		}
+		else if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 3) {
+			outputText("\n\n\"<i>Hey, Baka! I thought you'd never join in. You know I waited for you here all day? Sit right next to me and hold my hand. I want the folks out there to know we're together.</i>\"");
+			outputText("\n\nTogether as in a couple? Is she opening up or something? Your comment makes her light red cheeks even redder.");
+			outputText("\n\n\"<i>N..no! Nothing of the sort! It's not like I care if all the other girls look at you right now! I’m just preventing you from flirting with half of the town's feminine cast!</i>\"");
+			outputText("\n\nYou spend several hours watching the fireworks. Eventually Chi Chi asks you something.");
+			outputText("\n\n\"<i>Say [name] if.. if the both of us were hypothetically truly a couple... would you kiss me right now?</i>\"");
+			outputText("\n\nYou sure would, why?");
+			outputText("\n\n\"<i>Well w..would you please kiss me, then? It's not what you think it's only she to...</i>\"");
+			outputText("\n\nYou proceed to shut up her silly explanation by taking hold of her mouth and pulling her in for a deep kiss her eyes opening wide in surprise before she gives herself up to you fully her arms hugging you.");
+			outputText("\n\nYou both break the kiss a few seconds later Chi Chi redder than a canine pepper.");
+			outputText("\n\n\"<i>T..That was nice. Don’t you go around in camp telling everyone we did that though.</i>\"");
+			outputText("\n\nYeah sure whatever she say. You spend a little more time with her before returning to camp.");
 		}
 		else {
-			outputText("\n\n\"<i>Come over people! Look the part! Buy a dress for the festivities only for 50 gems! C'mon and buy while there's some left!</i>\"");
+			outputText("\n\n\"<i>Oh it's you? Did you came to train? I’m sorry, but today I’m on a break. It's the Lunar festival and this event only happens once a year. How about we share a cup of sake and watch the fireworks? You could use a break too, ya know?</i>\"");
+			outputText("\n\nYou both share sake and food and jokes all night while watching the fireworks. It's only when it gets very late that you bid her farewell and head back to camp.");
 		}
+		doNext(camp.returnToCampUseSixHours);
 	}
 
     public function riverislandVillageStuff():void {

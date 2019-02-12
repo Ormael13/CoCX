@@ -48,6 +48,8 @@ public class SpriteDb {
 	public static function get s_anemone(): Class {
 		return is8bit ? s_anemone_8bit : s_anemone_16bit;
 	}
+	[Embed(source="../../../res/sprites/aria.png")]
+	public static var s_aria:Class;
 	[Embed(source="../../../res/sprites8bit/assmole-old.png")]
 	public static var s_assmole_8bit:Class;
 	public static function get s_assmole(): Class {
@@ -102,6 +104,8 @@ public class SpriteDb {
 	public static function get s_chameleon(): Class {
 		return is8bit ? null : s_chameleon_16bit;
 	}
+	[Embed(source="../../../res/sprites/chichi.png")]
+	public static var s_chichi:Class;
 	[Embed(source="../../../res/sprites/chickenHarpy.png")]
 	public static var s_chickenHarpy_16bit:Class;
 	public static function get s_chickenHarpy(): Class {
@@ -154,6 +158,8 @@ public class SpriteDb {
 	public static function get s_dickworms(): Class {
 		return is8bit ? s_dickworms_8bit : s_dickworms_16bit;
 	}
+	[Embed(source="../../../res/sprites/diva.png")]
+	public static var s_diva:Class;
 	[Embed(source="../../../res/sprites/drider.png")]
 	public static var s_drider_16bit:Class;
 	[Embed(source="../../../res/sprites8bit/drider-old.png")]
@@ -175,6 +181,8 @@ public class SpriteDb {
 	public static function get s_edryn(): Class {
 		return is8bit ? s_edryn_8bit : s_edryn_16bit;
 	}
+	[Embed(source="../../../res/sprites/electra1.png")]
+	public static var s_electra:Class;
 	[Embed(source="../../../res/sprites/etna.png")]
 	public static var s_etna:Class;
 	[Embed(source="../../../res/sprites/exgartuan.png")]
@@ -426,6 +434,8 @@ public class SpriteDb {
 	public static function get s_lottie(): Class {
 		return is8bit ? s_lottie_8bit : s_lottie_16bit;
 	}
+	[Embed(source="../../../res/sprites/luna-maid.png")]
+	public static var s_luna_maid:Class;
 	[Embed(source="../../../res/sprites/lumi.png")]
 	public static var s_lumi_16bit:Class;
 	[Embed(source="../../../res/sprites8bit/lumi-old.png")]
@@ -536,6 +546,10 @@ public class SpriteDb {
 	public static function get s_oswald(): Class {
 		return is8bit ? s_oswald_8bit : s_oswald_16bit;
 	}
+	[Embed(source="../../../res/sprites/patts1.png")]
+	public static var s_patchouli_male:Class;
+	[Embed(source="../../../res/sprites/bimbo-cat.png")]
+	public static var s_patchouli_bimbo:Class;
 	[Embed(source="../../../res/sprites/poisontail.png")]
 	public static var s_poisontail_16bit:Class;
 	[Embed(source="../../../res/sprites8bit/roxanne-old.png")]

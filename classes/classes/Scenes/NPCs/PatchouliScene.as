@@ -14,6 +14,7 @@ import classes.Scenes.Areas.HighMountains.Phoenix;
 import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Areas.Swamp.CorruptedDrider;
 import classes.Scenes.Camp.Jabberwocky;
+import classes.display.SpriteDb;
 
 import coc.view.ButtonDataList;
 
@@ -58,6 +59,7 @@ public class PatchouliScene extends NPCAwareContent {
 	}
 
 	public function meetThePatchouli():void {
+		spriteSelect(SpriteDb.s_patchouli_male);
 		clearOutput();
 		var follower:* = flags[kFLAGS.PATCHOULI_FOLLOWER];
 		if (follower < 1) {
@@ -97,6 +99,7 @@ public class PatchouliScene extends NPCAwareContent {
 		}
 
 		function patchouliForgiveHim():void {
+			spriteSelect(SpriteDb.s_patchouli_male);
 			clearOutput();
 			outputText("You sigh and decide to forgive the cat for what he has done.\n\n");
 			outputText("\"<i>Thank you! Thank you! Don’t worry, I will never trick anyone again!</i>\"\n\n");
@@ -106,6 +109,7 @@ public class PatchouliScene extends NPCAwareContent {
 		}
 
 		function patchouliRapeHim():void {
+			spriteSelect(SpriteDb.s_patchouli_male);
 			clearOutput();
 			outputText("You got plans for this insolent cat. Let’s see how long he smiles once you're violating that ");
 			if (player.hasVagina()) {
@@ -147,6 +151,7 @@ public class PatchouliScene extends NPCAwareContent {
 		}
 
 		function patchouliKillHim(silly:Boolean = false):void {
+			spriteSelect(SpriteDb.s_patchouli_male);
 			clearOutput();
 			if (silly) {
 				outputText("You toss the cat into the air and start by punching its chest to increase his altitude, then kick his balls. You chain this with a hundred kicks, tossing him even higher into the air as you charge an energy ball and fire it at the feline. As the cat is disintegrated, a disembodied voice growls out <b>“FATALITY!”</b> in the background. You strike a vicious pose… And are immediately mortified of whatever came over to you.\n\n");
@@ -307,6 +312,7 @@ public class PatchouliScene extends NPCAwareContent {
 	public function patchouleMainCampMenu():void {
 		clearOutput();
 		if (flags[kFLAGS.PATCHOULI_FOLLOWER] == TIEDINCAMP) {
+			spriteSelect(SpriteDb.s_patchouli_male);
 			outputText("You approach the tied up cat wary of possible hidden tricks.\n\n");
 			outputText("\"<i>Hello again... felt like visiting your prisoner for a chat? You know I could do soooo many things If I was not tied up to the tree.</i>\"\n\n");
 			menu();
@@ -319,6 +325,7 @@ public class PatchouliScene extends NPCAwareContent {
 			}
 			addButton(14, "Back", camp.campSlavesMenu);
 		} else {
+			spriteSelect(SpriteDb.s_patchouli_bimbo);
 			outputText("You check on Patchoulie. The bimbo catgirl is lazily resting on a tree branch, smiling unsettlingly as you approach her.\n\n");
 			outputText("\"<i>Felt like havin fun, [name]? Else I can get us to " + (visitedAllAreas()? "my place anytime" : "a new place") + ".</i>\"\n\n");
 			menu();
@@ -332,6 +339,7 @@ public class PatchouliScene extends NPCAwareContent {
 	}
 
 	private function patchouleBimbofication():void {
+		spriteSelect(SpriteDb.s_patchouli_male);
 		clearOutput();
 		player.destroyItems(consumables.BIMBOLQ, 1);
 		outputText("You tell your prisoner he will soon be free to go so long as he drinks the weird bottle you are holding.\n\n");
@@ -362,12 +370,14 @@ public class PatchouliScene extends NPCAwareContent {
 	private function patchouleAppearance():void {
 		clearOutput();
 		if (flags[kFLAGS.PATCHOULI_FOLLOWER] == TIEDINCAMP) {
+			spriteSelect(SpriteDb.s_patchouli_male);
 			outputText("Patchouli looks like your typical cat morph. However, the color of his fur is clearly unnatural. Striped black on a background of purple, Patchouli’s fur clearly does not belong on any normal cat. His fur is hardly the only thing ‘unnatural’ about him, as he almost smiles constantly, not just once in awhile, with the most unsettling grin he can muster. You would believe him to be up to some crazy mischief ");
 			outputText("if somehow tying him up to a tree did not hold him from teleporting away. Go figure, why doesn’t he? It's likely some fucked up rule of his world. His green cat eyes have been observing you the whole time with interest, his tail twitching every now and then with the infinite patience of someone up to no good.\n\n");
 			outputText("\"<i>Nya, having a good view [name]? Feel free to admire me all you like I love being looked at.</i>\"\n\n");
 			outputText("You move your gaze away before it gets any more awkward than it already is.\n\n");
 		}
 		else {
+			spriteSelect(SpriteDb.s_patchouli_bimbo);
 			outputText("Patchoulie ");
 			if (flags[kFLAGS.PATCHOULI_GIRL_OR_MORPH] == 1) {
 				outputText("used to look like the typical cat morph but uses of transformatives allowed you to alter her into the perfect figure of a cat girl, with a human face and only a partially covered body. Regardless of her demi human look, Patchoulie’s tongue, eyes and abnormally long canine clearly still belong on a cat. The transformatives so far sparred her paws, ears and tail, not that you would ever get rid of them anyway");
@@ -387,6 +397,8 @@ public class PatchouliScene extends NPCAwareContent {
 	}
 
 	private function patchouleTalkMenu():void {
+		if (flags[kFLAGS.PATCHOULI_FOLLOWER] == TIEDINCAMP) spriteSelect(SpriteDb.s_patchouli_male);
+		else spriteSelect(SpriteDb.s_patchouli_bimbo);
 		clearOutput();
 		outputText("You tell Patchouli you have a few questions "+(tiedUp?"he":"she"));
 		var tiedUp:Boolean = flags[kFLAGS.PATCHOULI_FOLLOWER] == TIEDINCAMP;
@@ -401,6 +413,8 @@ public class PatchouliScene extends NPCAwareContent {
 	}
 
 	private function patchouleTalkMenuTrickPeople():void {
+		if (flags[kFLAGS.PATCHOULI_FOLLOWER] == TIEDINCAMP) spriteSelect(SpriteDb.s_patchouli_male);
+		else spriteSelect(SpriteDb.s_patchouli_bimbo);
 		var tiedUp:Boolean = flags[kFLAGS.PATCHOULI_FOLLOWER] == TIEDINCAMP;
 		clearOutput();
 		outputText("Seriously, what is with "+(tiedUp?"him":"her"));
@@ -416,6 +430,8 @@ public class PatchouliScene extends NPCAwareContent {
 	}
 
 	private function patchouleTalkMenuWhoIsSHe():void {
+		if (flags[kFLAGS.PATCHOULI_FOLLOWER] == TIEDINCAMP) spriteSelect(SpriteDb.s_patchouli_male);
+		else spriteSelect(SpriteDb.s_patchouli_bimbo);
 		var tiedUp:Boolean = flags[kFLAGS.PATCHOULI_FOLLOWER] == TIEDINCAMP;
 		clearOutput();
 		outputText("Just what is " + (tiedUp ? "he" : "she") + " really? You don’t know of cat morph with teleportation ability.\n\n");

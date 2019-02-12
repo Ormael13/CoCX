@@ -244,13 +244,14 @@ use namespace CoC;
 				//HERM
 				if(player.vaginas.length > 0 && player.cocks.length > 0) outputText("You feel your " + multiCockDescript() + " getting milked by many wet holes, though you are too busy sucking cocks and moaning in ecstasy to notice who they belong to.  ");
 				outputText("The next eight hours are lost to your desires as you cum over and over, feeling mind-shattering pleasure.  You recover a while on the floor, soaked with a mixture of milk, cum, and pussy-juice.  Getting dressed is a bit troublesome with the recent changes, but you manage to squeeze back into your [armor].  You walk away while still feeling horny, and the moaning of the girls behind you doesn't help.  Maybe you could stay for another round...");
+				if (!player.hasStatusEffect(StatusEffects.TensionReleased)) player.createStatusEffect(StatusEffects.TensionReleased, 0, 0, 0, 0);
 				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 				player.orgasm();
 				dynStats("int", -player.cor / 10, "lib", 2 * player.cor, "cor", 20);
 				player.slimeFeed();
 			}
 			//Third time, move on to bad end!
-			else if (player.perkv2(PerkLib.ProductivityDrugs) == 20) {
+			else if (player.hasPerk(PerkLib.ProductivityDrugs) && player.hasStatusEffect(StatusEffects.TensionReleased)) {
 				doBadEndTension();
 			}
 			doNext(roomMainChamber);

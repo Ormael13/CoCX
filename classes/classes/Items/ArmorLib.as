@@ -23,6 +23,8 @@ package classes.Items
 		public const BEEARMR:Armor = new BeeArmor();
 		public const BIMBOSK:ArmorWithPerk = new ArmorWithPerk("BimboSk","BimboSk","bimbo skirt","a skirt that looks like it belongs on a bimbo",1,0,40,"A tight, cleavage-inducing halter top and an extremely short miniskirt.  The sexual allure of this item is undoubtable.","Light",
 				PerkLib.SluttySeduction,10,0,0,0,"Your delightfully slutty yet upbeat garb helps you seduce your foes!", false, false);
+		public const BLKIMONO:ArmorWithPerk = new ArmorWithPerk("Bl.Kimono","Bl.Kimono","black kimono","a black kimono",0,1,200,"This lovely black kimono is adorned with a red floral pattern. It will likely increase your spiritual power as a kitsune.","Light",
+				PerkLib.WizardsAndDaoistsEndurance,20,20,0,0);
 		public const BKIMONO:ArmorWithPerk = new ArmorWithPerk("B.Kimono","B.Kimono","blue kimono","a blue kimono",0,1,200,"This lovely blue kimono is adorned with a floral pattern. It will likely increase your spiritual power as a kitsune.","Light",
 				PerkLib.WizardsAndDaoistsEndurance,20,20,0,0);
 		public const BONSTRP:ArmorWithPerk = new ArmorWithPerk("BonStrp","BonStrp","barely-decent bondage straps","a set of bondage straps",0,0,40,"These leather straps and well-placed hooks are actually designed in such a way as to be worn as clothing.  While they technically would cover your naughty bits, virtually every other inch of your body would be exposed.","Light",

@@ -6,6 +6,7 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.display.SpriteDb;
 	
 	public class ElectraFollower extends NPCAwareContent
 	{
@@ -24,6 +25,7 @@ public function electraAffection(changes:Number = 0):Number
 
 public function firstEnc():void
 {
+	spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("As you wander the mountain you hear the sound of echoing thunder through this time around it clearly didn’t come from the sky. You see multiple imps and even a minotaur run away from the spot where the sound was heard. As you go there to see what’s going on you come upon a single girl with animal morph features. She's panting on the ground a hand under her dress.\n\n");
 	outputText("\"<i>Ahhhh someone... someone help me get rid of this maddening desire... rape me... fuck me I don’t care how you do it. Gah why are they all fleeing!...come back! Come back so I can get rid of my itches... Come back so we can FUCK!</i>\"\n\n");
@@ -39,18 +41,21 @@ public function firstEnc():void
 }
 public function repeatMountainEnc():void
 {
+	spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("As you wander the mountain you hear the sound of echoing thunder through this time around it clearly didn’t come from the sky. You see multiple imps and even a minotaur run away from the spot where the sound was heard. ");
 	repeatElectraEnc();
 }
 public function repeatPlainsEnc():void
 {
+	spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("As you wander the plains you hear the sound of echoing thunder through this time around it clearly didn’t come from the sky. You see multiple imps and even a satyr run away from the spot where the sound was heard. ");
 	repeatElectraEnc();
 }
 public function repeatDeepwoodsEnc():void
 {
+	spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("As you wander the woods you hear the sound of echoing thunder through this time around it clearly didn’t come from the sky. You see multiple imps and even a satyr run away from the spot where the sound was heard. ");
 	repeatElectraEnc();
@@ -73,6 +78,7 @@ public function repeatElectraEnc():void
 }
 public function ElectraSexPlayer():void
 {
+	spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("You fall to the ground unable to continue fighting. The girl however seems to be really happy about this.\n\n");
 	outputText("\"<i>FINALLY!!!.. FUCKING FINALLY!!! I found someone to discharge my electricity! I felt I was going to go mad!</i>\"\n\n");
@@ -93,6 +99,7 @@ public function ElectraSexPlayer():void
 }
 public function PlayerSexElectra():void
 {
+	spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	if (flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 3) {
 		outputText("Electra falls to the ground defeated again.\n\n");
@@ -116,6 +123,7 @@ public function PlayerSexElectra():void
 }
 public function ElectraSeXYes():void
 {
+	spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	if (flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 3) outputText("Electra");
 	else outputText("The raiju");
@@ -201,6 +209,7 @@ public function ElectraSeXHeadpat():void
 }
 public function ElectraSeXNo():void
 {
+	spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("No, you ain't going to give her satisfaction after she tried to rape you. You walk away heading back to your camp barely hearing the echoes of her cries as the crazy girl begs for you to fuck her brains out.\n\n");
 	electraAffection(2);
