@@ -211,9 +211,10 @@ use namespace CoC;
 			addButton(5, "Enemies", EnemiesMenu).hint("For spawning various enemies to test fight them.");
 			addButton(6, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
 			addButton(7, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
-			if (flags[kFLAGS.HIDDEN_CAVE_BOSSES] >= 1 && flags[kFLAGS.TED_LVL_UP] == 0) addButton(8, "DragonBoyFix", settingTedFlag).hint("To fix one flag for him before save update would fix it anyway so testers can test him before public ver update time ^^");
-			if (player.perkv2(PerkLib.ProductivityDrugs) > 10) addButton(9, "P.Drugs Fix", fixingProductionDrugs).hint("To fix Productive Drug perk wild rampage.");
-			if (flags[kFLAGS.AURORA_LVL] >= 1) addButton(9, "Aurora", FightAurora).hint("Just to test her initial sparring form for now.");
+			if (flags[kFLAGS.AURORA_LVL] == 1) addButton(8, "AuroraReset", AuroraReset).hint("Reset for Jade Talisman dream to set flag right(better).");
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 8) addButton(8, "Repta-Tongue", AddReptaTongue).hint("Items bungle for Repta-Tongue Potion.");
+			if (player.perkv4(PerkLib.ProductivityDrugs) > 0 || player.hasPerk(PerkLib.ProductivityDrugs)) addButton(9, "P.Drugs Fix", fixingProductionDrugs).hint("To fix Productive Drug perk wild rampage.");
+			if (player.hasPerk(PerkLib.Metamorph)) addButton(9, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Metamorph all options unlock.");
 			//addButton(9, "ChimeraBodyUlt", ChimeraBodyUltimateStage).hint("Ultimate Stage of Chimera Body for tests and lulz. Now with on/off switch for more lulz.");
 			addButton(10, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
 			addButton(11, "PerkGalore1", GargoyleMenu2);
@@ -226,28 +227,30 @@ public function FightAria():void {
 	outputText("Entering battle with Melkie! Enjoy ^^");
 	startCombat(new Aria());
 }
-public function FightAurora():void {
+public function AuroraReset():void {
 	clearOutput();
-	outputText("Entering battle with Aurora! Enjoy ^^");
-	startCombat(new Aurora());
-}
-public function settingTedFlag():void {
-	clearOutput();
-	outputText("Fixed flag to encounter dragon boy outside hidden cave beofre save update will fix it for public users.");
-	flags[kFLAGS.TED_DEFEATS_COUNTER] = 1;
-	flags[kFLAGS.TED_LVL_UP] = 1;
+	outputText("Reseting dream about... mechanical gargoyles ^^");
+	flags[kFLAGS.AURORA_LVL] = 0;
 	doNext(SoulforceCheats);
 }
 public function fixingProductionDrugs():void {
 	clearOutput();
-	outputText("Fixed flag to encounter dragon boy outside hidden cave beofre save update will fix it for public users.");
+	outputText("Fixed Productive Drugs perk (again) before save update will fix it for public users too.");
 	player.removePerk(PerkLib.ProductivityDrugs);
-	player.createPerk(PerkLib.ProductivityDrugs,0,10,0,0);
-	player.addPerkValue(PerkLib.ProductivityDrugs, 1, Math.round(player.cor/2));	//minlibido += CURRENT cor / 2
-	player.addPerkValue(PerkLib.ProductivityDrugs, 3, player.lib);	//cumproduction += CURRENT lib (same as cum witch blessing)
-	player.addPerkValue(PerkLib.ProductivityDrugs, 4, player.lib);//milkproduction += CURRENT lib (same as level1 milkmaid)
 	doNext(SoulforceCheats);
 }
+		public function AddReptaTongue():void {
+			outputText("\n\n<b>(Gained set of items to make Repta-Tongue Potion!)</b>\n\n");
+			inventory.takeItem(consumables.HUMMUS_, AddReptaTongue1);
+		}
+		public function AddReptaTongue1():void {
+			outputText("\n\n");
+			inventory.takeItem(consumables.REPTLUM, AddReptaTongue2);
+		}
+		public function AddReptaTongue2():void {
+			outputText("\n\n");
+			inventory.takeItem(consumables.OVIELIX, SoulforceCheats);
+		}
 		public function ChimeraBodyUltimateStage():void {
 			if (player.hasPerk(PerkLib.ChimericalBodyUltimateStage)) {
 				player.removePerk(PerkLib.ChimericalBodyUltimateStage);
@@ -257,6 +260,228 @@ public function fixingProductionDrugs():void {
 				player.createPerk(PerkLib.ChimericalBodyUltimateStage, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Chimerical Body: Ultimate Stage!)</b>");
 			}
+			doNext(SoulforceCheats);
+		}
+		public function AllMetamorphOptionsUnlock():void {
+			if (!player.hasStatusEffect(StatusEffects.UnlockedFur)) player.createStatusEffect(StatusEffects.UnlockedFur,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedScales)) player.createStatusEffect(StatusEffects.UnlockedScales,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedChitin)) player.createStatusEffect(StatusEffects.UnlockedChitin,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDragonScales)) player.createStatusEffect(StatusEffects.UnlockedDragonScales,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedTattoed)) player.createStatusEffect(StatusEffects.UnlockedTattoed,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedBattleTattoed)) player.createStatusEffect(StatusEffects.UnlockedBattleTattoed,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) player.createStatusEffect(StatusEffects.UnlockedLightningTattoed,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedScarTattoed)) player.createStatusEffect(StatusEffects.UnlockedScarTattoed,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedFishGills)) player.createStatusEffect(StatusEffects.UnlockedFishGills,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanLowerBody)) player.createStatusEffect(StatusEffects.UnlockedHumanLowerBody,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanSkin)) player.createStatusEffect(StatusEffects.UnlockedHumanSkin,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanArms)) player.createStatusEffect(StatusEffects.UnlockedHumanArms,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanFace)) player.createStatusEffect(StatusEffects.UnlockedHumanFace,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanTongue)) player.createStatusEffect(StatusEffects.UnlockedHumanTongue,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanEyes)) player.createStatusEffect(StatusEffects.UnlockedHumanEyes,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanEars)) player.createStatusEffect(StatusEffects.UnlockedHumanEars,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanHair)) player.createStatusEffect(StatusEffects.UnlockedHumanHair,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern)) player.createStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanNoGills)) player.createStatusEffect(StatusEffects.UnlockedHumanNoGills,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanNoAntennae)) player.createStatusEffect(StatusEffects.UnlockedHumanNoAntennae,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanNoHorns)) player.createStatusEffect(StatusEffects.UnlockedHumanNoHorns,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanNoWings)) player.createStatusEffect(StatusEffects.UnlockedHumanNoWings,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanNoTail)) player.createStatusEffect(StatusEffects.UnlockedHumanNoTail,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedHumanNoRearBody)) player.createStatusEffect(StatusEffects.UnlockedHumanNoRearBody,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxLowerBody)) player.createStatusEffect(StatusEffects.UnlockedFoxLowerBody,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxArms)) player.createStatusEffect(StatusEffects.UnlockedFoxArms,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxEars)) player.createStatusEffect(StatusEffects.UnlockedFoxEars,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxTail)) player.createStatusEffect(StatusEffects.UnlockedFoxTail,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxFace)) player.createStatusEffect(StatusEffects.UnlockedFoxFace,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxEyes)) player.createStatusEffect(StatusEffects.UnlockedFoxEyes,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxTail2nd)) player.createStatusEffect(StatusEffects.UnlockedFoxTail2nd,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxTail3rd)) player.createStatusEffect(StatusEffects.UnlockedFoxTail3rd,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxTail4th)) player.createStatusEffect(StatusEffects.UnlockedFoxTail4th,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxTail5th)) player.createStatusEffect(StatusEffects.UnlockedFoxTail5th,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxTail6th)) player.createStatusEffect(StatusEffects.UnlockedFoxTail6th,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedKitsuneArms)) player.createStatusEffect(StatusEffects.UnlockedKitsuneArms,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDemonTail)) player.createStatusEffect(StatusEffects.UnlockedDemonTail,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDemonHorns)) player.createStatusEffect(StatusEffects.UnlockedDemonHorns,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDemonTonuge)) player.createStatusEffect(StatusEffects.UnlockedDemonTonuge,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDemonHighHeels)) player.createStatusEffect(StatusEffects.UnlockedDemonHighHeels,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDemonClawedLegs)) player.createStatusEffect(StatusEffects.UnlockedDemonClawedLegs,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDemonTinyBatWings)) player.createStatusEffect(StatusEffects.UnlockedDemonTinyBatWings,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDemonLargeBatWings)) player.createStatusEffect(StatusEffects.UnlockedDemonLargeBatWings,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDemonLargeBatWings2)) player.createStatusEffect(StatusEffects.UnlockedDemonLargeBatWings2,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedLizardLegs)) player.createStatusEffect(StatusEffects.UnlockedLizardLegs,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedLizardArms)) player.createStatusEffect(StatusEffects.UnlockedLizardArms,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedLizardTail)) player.createStatusEffect(StatusEffects.UnlockedLizardTail,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedLizardEyes)) player.createStatusEffect(StatusEffects.UnlockedLizardEyes,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedLizardEars)) player.createStatusEffect(StatusEffects.UnlockedLizardEars,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedLizardFace)) player.createStatusEffect(StatusEffects.UnlockedLizardFace,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedBeeAntennae)) player.createStatusEffect(StatusEffects.UnlockedBeeAntennae,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedBeeArms)) player.createStatusEffect(StatusEffects.UnlockedBeeArms,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedBeeLegs)) player.createStatusEffect(StatusEffects.UnlockedBeeLegs,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedBeeTail)) player.createStatusEffect(StatusEffects.UnlockedBeeTail,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedBeeWingsSmall)) player.createStatusEffect(StatusEffects.UnlockedBeeWingsSmall,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedBeeWingsLarge)) player.createStatusEffect(StatusEffects.UnlockedBeeWingsLarge,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedHarpyLegs)) player.createStatusEffect(StatusEffects.UnlockedHarpyLegs,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedHarpyTail)) player.createStatusEffect(StatusEffects.UnlockedHarpyTail,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedHarpyArms)) player.createStatusEffect(StatusEffects.UnlockedHarpyArms,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedHarpyHair)) player.createStatusEffect(StatusEffects.UnlockedHarpyHair,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedHarpyWings)) player.createStatusEffect(StatusEffects.UnlockedHarpyWings,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedElfinEars)) player.createStatusEffect(StatusEffects.UnlockedElfinEars,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedSpiderFourEyes)) player.createStatusEffect(StatusEffects.UnlockedSpiderFourEyes,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedSpiderFangs)) player.createStatusEffect(StatusEffects.UnlockedSpiderFangs,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedSpiderArms)) player.createStatusEffect(StatusEffects.UnlockedSpiderArms,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedSpiderLegs)) player.createStatusEffect(StatusEffects.UnlockedSpiderLegs,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedSpiderTail)) player.createStatusEffect(StatusEffects.UnlockedSpiderTail,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDriderLegs)) player.createStatusEffect(StatusEffects.UnlockedDriderLegs,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedSharkTeeth)) player.createStatusEffect(StatusEffects.UnlockedSharkTeeth,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedSharkTail)) player.createStatusEffect(StatusEffects.UnlockedSharkTail,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedSharkLegs)) player.createStatusEffect(StatusEffects.UnlockedSharkLegs,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedSharkArms)) player.createStatusEffect(StatusEffects.UnlockedSharkArms,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedSharkFin)) player.createStatusEffect(StatusEffects.UnlockedSharkFin,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicX2)) player.createStatusEffect(StatusEffects.UnlockedDraconicX2,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicX4)) player.createStatusEffect(StatusEffects.UnlockedDraconicX4,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxTail7th)) player.createStatusEffect(StatusEffects.UnlockedFoxTail7th,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxTail8th)) player.createStatusEffect(StatusEffects.UnlockedFoxTail8th,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedFoxTail9th)) player.createStatusEffect(StatusEffects.UnlockedFoxTail9th,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedSalamanderTail)) player.createStatusEffect(StatusEffects.UnlockedSalamanderTail,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedSalamanderLegs)) player.createStatusEffect(StatusEffects.UnlockedSalamanderLegs,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedSalamanderArms)) player.createStatusEffect(StatusEffects.UnlockedSalamanderArms,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedSalamanderFace)) player.createStatusEffect(StatusEffects.UnlockedSalamanderFace,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedPhoenixArms)) player.createStatusEffect(StatusEffects.UnlockedPhoenixArms,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedPhoenixWings)) player.createStatusEffect(StatusEffects.UnlockedPhoenixWings,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcaLegs)) player.createStatusEffect(StatusEffects.UnlockedOrcaLegs,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcaArms)) player.createStatusEffect(StatusEffects.UnlockedOrcaArms,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcaTail)) player.createStatusEffect(StatusEffects.UnlockedOrcaTail,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcaEars)) player.createStatusEffect(StatusEffects.UnlockedOrcaEars,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcaFace)) player.createStatusEffect(StatusEffects.UnlockedOrcaFace,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcaBlowhole)) player.createStatusEffect(StatusEffects.UnlockedOrcaBlowhole,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedSnakeTongue)) player.createStatusEffect(StatusEffects.UnlockedSnakeTongue,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedSnakeFangs)) player.createStatusEffect(StatusEffects.UnlockedSnakeFangs,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedSnakeLowerBody)) player.createStatusEffect(StatusEffects.UnlockedSnakeLowerBody,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedSnakeEyes)) player.createStatusEffect(StatusEffects.UnlockedSnakeEyes,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedSnakeEars)) player.createStatusEffect(StatusEffects.UnlockedSnakeEars,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedGorgonHair)) player.createStatusEffect(StatusEffects.UnlockedGorgonHair,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedGorgonEyes)) player.createStatusEffect(StatusEffects.UnlockedGorgonEyes,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicEars)) player.createStatusEffect(StatusEffects.UnlockedDraconicEars,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsSmall)) player.createStatusEffect(StatusEffects.UnlockedDraconicWingsSmall,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsLarge)) player.createStatusEffect(StatusEffects.UnlockedDraconicWingsLarge,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicWingsHuge)) player.createStatusEffect(StatusEffects.UnlockedDraconicWingsHuge,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicEyes)) player.createStatusEffect(StatusEffects.UnlockedDraconicEyes,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicTongue)) player.createStatusEffect(StatusEffects.UnlockedDraconicTongue,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicFace)) player.createStatusEffect(StatusEffects.UnlockedDraconicFace,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicFangs)) player.createStatusEffect(StatusEffects.UnlockedDraconicFangs,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicLegs)) player.createStatusEffect(StatusEffects.UnlockedDraconicLegs,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicArms)) player.createStatusEffect(StatusEffects.UnlockedDraconicArms,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDraconicTail)) player.createStatusEffect(StatusEffects.UnlockedDraconicTail,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedHoofedLegs)) player.createStatusEffect(StatusEffects.UnlockedHoofedLegs,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedCowTail)) player.createStatusEffect(StatusEffects.UnlockedCowTail,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedCowEars)) player.createStatusEffect(StatusEffects.UnlockedCowEars,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedCowMinotaurFace)) player.createStatusEffect(StatusEffects.UnlockedCowMinotaurFace,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedCowMinotaurHorns)) player.createStatusEffect(StatusEffects.UnlockedCowMinotaurHorns,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedClovenHoofedLegs)) player.createStatusEffect(StatusEffects.UnlockedClovenHoofedLegs,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedGoatTail)) player.createStatusEffect(StatusEffects.UnlockedGoatTail,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedGoatHorns)) player.createStatusEffect(StatusEffects.UnlockedGoatHorns,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedGoatEars)) player.createStatusEffect(StatusEffects.UnlockedGoatEars,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDevilArms)) player.createStatusEffect(StatusEffects.UnlockedDevilArms,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDevilFangs)) player.createStatusEffect(StatusEffects.UnlockedDevilFangs,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDevilEyes)) player.createStatusEffect(StatusEffects.UnlockedDevilEyes,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedMantisAntennae)) player.createStatusEffect(StatusEffects.UnlockedMantisAntennae,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedMantisLegs)) player.createStatusEffect(StatusEffects.UnlockedMantisLegs,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedMantisArms)) player.createStatusEffect(StatusEffects.UnlockedMantisArms,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedMantisTail)) player.createStatusEffect(StatusEffects.UnlockedMantisTail,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedMantisWingsSmall)) player.createStatusEffect(StatusEffects.UnlockedMantisWingsSmall,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedMantisWingsLarge)) player.createStatusEffect(StatusEffects.UnlockedMantisWingsLarge,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedElfLegs)) player.createStatusEffect(StatusEffects.UnlockedElfLegs,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedElfArms)) player.createStatusEffect(StatusEffects.UnlockedElfArms,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedElfEars)) player.createStatusEffect(StatusEffects.UnlockedElfEars,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedElfEyes)) player.createStatusEffect(StatusEffects.UnlockedElfEyes,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedElfHair)) player.createStatusEffect(StatusEffects.UnlockedElfHair,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedElfTongue)) player.createStatusEffect(StatusEffects.UnlockedElfTongue,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedOniLegs)) player.createStatusEffect(StatusEffects.UnlockedOniLegs,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedOniArms)) player.createStatusEffect(StatusEffects.UnlockedOniArms,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedOniEyes)) player.createStatusEffect(StatusEffects.UnlockedOniEyes,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedOniEars)) player.createStatusEffect(StatusEffects.UnlockedOniEars,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedOniFace)) player.createStatusEffect(StatusEffects.UnlockedOniFace,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedOniSingleHorn)) player.createStatusEffect(StatusEffects.UnlockedOniSingleHorn,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedOniTwinHorns)) player.createStatusEffect(StatusEffects.UnlockedOniTwinHorns,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuLegs)) player.createStatusEffect(StatusEffects.UnlockedRaijuLegs,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuArms)) player.createStatusEffect(StatusEffects.UnlockedRaijuArms,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuTail)) player.createStatusEffect(StatusEffects.UnlockedRaijuTail,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuMane)) player.createStatusEffect(StatusEffects.UnlockedRaijuMane,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuFace)) player.createStatusEffect(StatusEffects.UnlockedRaijuFace,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuEars)) player.createStatusEffect(StatusEffects.UnlockedRaijuEars,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuEyes)) player.createStatusEffect(StatusEffects.UnlockedRaijuEyes,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuHair)) player.createStatusEffect(StatusEffects.UnlockedRaijuHair,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedBatEars)) player.createStatusEffect(StatusEffects.UnlockedBatEars,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedBatWings)) player.createStatusEffect(StatusEffects.UnlockedBatWings,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedBatCollar)) player.createStatusEffect(StatusEffects.UnlockedBatCollar,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedVampireEars)) player.createStatusEffect(StatusEffects.UnlockedVampireEars,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedVampireWings)) player.createStatusEffect(StatusEffects.UnlockedVampireWings,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedVampireFace)) player.createStatusEffect(StatusEffects.UnlockedVampireFace,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedVampireEyes)) player.createStatusEffect(StatusEffects.UnlockedVampireEyes,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedPigEars)) player.createStatusEffect(StatusEffects.UnlockedPigEars,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedPigTail)) player.createStatusEffect(StatusEffects.UnlockedPigTail,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedPigArms)) player.createStatusEffect(StatusEffects.UnlockedPigArms,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedPigFace)) player.createStatusEffect(StatusEffects.UnlockedPigFace,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedBoarFace)) player.createStatusEffect(StatusEffects.UnlockedBoarFace,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedBoarArms)) player.createStatusEffect(StatusEffects.UnlockedBoarArms,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcLegs)) player.createStatusEffect(StatusEffects.UnlockedOrcLegs,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcArms)) player.createStatusEffect(StatusEffects.UnlockedOrcArms,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcFangs)) player.createStatusEffect(StatusEffects.UnlockedOrcFangs,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedOrcEyes)) player.createStatusEffect(StatusEffects.UnlockedOrcEyes,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedHorseFace)) player.createStatusEffect(StatusEffects.UnlockedHorseFace,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedHorseEars)) player.createStatusEffect(StatusEffects.UnlockedHorseEars,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedHorseTail)) player.createStatusEffect(StatusEffects.UnlockedHorseTail,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedUnicornHorn)) player.createStatusEffect(StatusEffects.UnlockedUnicornHorn,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedAlicornWings)) player.createStatusEffect(StatusEffects.UnlockedAlicornWings,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedBicornHorns)) player.createStatusEffect(StatusEffects.UnlockedBicornHorns,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedNightmareWings)) player.createStatusEffect(StatusEffects.UnlockedNightmareWings,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedRedPandaEars)) player.createStatusEffect(StatusEffects.UnlockedRedPandaEars,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedRedPandaFace)) player.createStatusEffect(StatusEffects.UnlockedRedPandaFace,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedRedPandaArms)) player.createStatusEffect(StatusEffects.UnlockedRedPandaArms,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedRedPandaLegs)) player.createStatusEffect(StatusEffects.UnlockedRedPandaLegs,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedRedPandaTail)) player.createStatusEffect(StatusEffects.UnlockedRedPandaTail,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedCatEars)) player.createStatusEffect(StatusEffects.UnlockedCatEars,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedCatTail)) player.createStatusEffect(StatusEffects.UnlockedCatTail,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedCatLegs)) player.createStatusEffect(StatusEffects.UnlockedCatLegs,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedCatArms)) player.createStatusEffect(StatusEffects.UnlockedCatArms,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedCatFace)) player.createStatusEffect(StatusEffects.UnlockedCatFace,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedCatFangs)) player.createStatusEffect(StatusEffects.UnlockedCatFangs,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedCatTongue)) player.createStatusEffect(StatusEffects.UnlockedCatTongue,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedCatEyes)) player.createStatusEffect(StatusEffects.UnlockedCatEyes,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedCheshireFace)) player.createStatusEffect(StatusEffects.UnlockedCheshireFace,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedCheshireSmile)) player.createStatusEffect(StatusEffects.UnlockedCheshireSmile,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedLionEars)) player.createStatusEffect(StatusEffects.UnlockedLionEars,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDisplacerArms)) player.createStatusEffect(StatusEffects.UnlockedDisplacerArms,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDisplacerBTentacles)) player.createStatusEffect(StatusEffects.UnlockedDisplacerBTentacles,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningTail)) player.createStatusEffect(StatusEffects.UnlockedHellcatBurningTail,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedHellcatInfernalEyes)) player.createStatusEffect(StatusEffects.UnlockedHellcatInfernalEyes,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningHair)) player.createStatusEffect(StatusEffects.UnlockedHellcatBurningHair,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedNekomataForkedTail1)) player.createStatusEffect(StatusEffects.UnlockedNekomataForkedTail1,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedNekomataForkedTail2)) player.createStatusEffect(StatusEffects.UnlockedNekomataForkedTail2,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedCatTail2nd)) player.createStatusEffect(StatusEffects.UnlockedCatTail2nd,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedLionMane)) player.createStatusEffect(StatusEffects.UnlockedLionMane,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedLionLegs)) player.createStatusEffect(StatusEffects.UnlockedLionLegs,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedLionArms)) player.createStatusEffect(StatusEffects.UnlockedLionArms,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedScorpionTail)) player.createStatusEffect(StatusEffects.UnlockedScorpionTail,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedManticoreTail)) player.createStatusEffect(StatusEffects.UnlockedManticoreTail,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedManticoreWingsSmall)) player.createStatusEffect(StatusEffects.UnlockedManticoreWingsSmall,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedManticoreWingsLarge)) player.createStatusEffect(StatusEffects.UnlockedManticoreWingsLarge,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedManticoreFace)) player.createStatusEffect(StatusEffects.UnlockedManticoreFace,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedManticoreEyes)) player.createStatusEffect(StatusEffects.UnlockedManticoreEyes,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedSphinxWings)) player.createStatusEffect(StatusEffects.UnlockedSphinxWings,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedSphinxArms)) player.createStatusEffect(StatusEffects.UnlockedSphinxArms,0,0,0,0);/*
+			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);*/
 			doNext(SoulforceCheats);
 		}
 		public function GargoyleMenu2():void {
@@ -348,73 +573,55 @@ public function fixingProductionDrugs():void {
 				player.createPerk(PerkLib.SensualLover, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Sensual Lover!)</b>");
 			}
-			if (player.findPerk(PerkLib.Refinement) >= 0 && player.findPerk(PerkLib.Saturation) < 0) {
-				player.createPerk(PerkLib.Saturation, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Saturation!)</b>");
+			if (player.findPerk(PerkLib.Saturation) >= 0 && player.findPerk(PerkLib.Perfection) < 0) {
 				player.createPerk(PerkLib.Perfection, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Perfection!)</b>");
 				player.createPerk(PerkLib.Creationism, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Creationism!)</b>");
 			}
-			if (player.findPerk(PerkLib.InControl) >= 0 && player.findPerk(PerkLib.Metamorphable) < 0) {
-				player.createPerk(PerkLib.Metamorphable, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Metamorphable!)</b>");
+			if (player.findPerk(PerkLib.Metamorphable) >= 0 && player.findPerk(PerkLib.SoulPowered) < 0) {
 				player.createPerk(PerkLib.SoulPowered, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Soul Powered!)</b>");
 				player.createPerk(PerkLib.AllSeeing, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: All-Seeing!)</b>");
 			}
-			if (player.findPerk(PerkLib.BodyOfSteel) >= 0 && player.findPerk(PerkLib.MindOfSteel) < 0) {
-				player.createPerk(PerkLib.MindOfSteel, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Mind of Steel!)</b>");
+			if (player.findPerk(PerkLib.MindOfSteel) >= 0 && player.findPerk(PerkLib.SoulOfSteel) < 0) {
 				player.createPerk(PerkLib.SoulOfSteel, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Soul of Steel!)</b>");
 				player.createPerk(PerkLib.GodOfSteel, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: God of Steel!)</b>");
 			}
-			if (player.findPerk(PerkLib.Collector) >= 0 && player.findPerk(PerkLib.Hoarder) < 0) {
-				player.createPerk(PerkLib.Hoarder, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Hoarder!)</b>");
+			if (player.findPerk(PerkLib.Hoarder) >= 0 && player.findPerk(PerkLib.BlessedByLadyGodiva) < 0) {
 				player.createPerk(PerkLib.BlessedByLadyGodiva, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Blessed by Lady Godiva!)</b>");
 				player.createPerk(PerkLib.LadyGodivasFavoriteChild, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Lady Godiva's favorite Child!)</b>");
 			}
-			if (player.findPerk(PerkLib.Paramedic) >= 0 && player.findPerk(PerkLib.SurgeonsAide) < 0) {
-				player.createPerk(PerkLib.SurgeonsAide, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Surgeon's Aide!)</b>");
+			if (player.findPerk(PerkLib.SurgeonsAide) >= 0 && player.findPerk(PerkLib.Surgeon) < 0) {
 				player.createPerk(PerkLib.Surgeon, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Surgeon!)</b>");
 				player.createPerk(PerkLib.Medic, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: MEDIC!!!!)</b>");
 			}
-			if (player.findPerk(PerkLib.Pastor) >= 0 && player.findPerk(PerkLib.Saint) < 0) {
-				player.createPerk(PerkLib.Saint, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Saint!)</b>");
+			if (player.findPerk(PerkLib.Saint) >= 0 && player.findPerk(PerkLib.Cardinal) < 0) {
 				player.createPerk(PerkLib.Cardinal, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Cardinal!)</b>");
 				player.createPerk(PerkLib.Pope, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Pope!)</b>");
 			}
-			if (player.findPerk(PerkLib.Principle) >= 0 && player.findPerk(PerkLib.Dean) < 0) {
-				player.createPerk(PerkLib.Dean, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Dean!)</b>");
+			if (player.findPerk(PerkLib.Dean) >= 0 && player.findPerk(PerkLib.President) < 0) {
 				player.createPerk(PerkLib.President, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: President!)</b>");
 				player.createPerk(PerkLib.Nerd, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: NERD!!!!)</b>");
 			}
-			if (player.findPerk(PerkLib.EngineersFriend) >= 0 && player.findPerk(PerkLib.SnipersFriend) < 0) {
-				player.createPerk(PerkLib.SnipersFriend, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Sniper's Friend!)</b>");
+			if (player.findPerk(PerkLib.SnipersFriend) >= 0 && player.findPerk(PerkLib.SpysEnemy) < 0) {
 				player.createPerk(PerkLib.SpysEnemy, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Spy's Enemy!)</b>");
 				player.createPerk(PerkLib.ShitYouTouchedSasha, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: SHIT YOU TOUCHED SASHA!!!)</b>");
 			}
-			if (player.findPerk(PerkLib.SkippingWork) >= 0 && player.findPerk(PerkLib.Napping) < 0) {
-				player.createPerk(PerkLib.Napping, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Napping!)</b>");
+			if (player.findPerk(PerkLib.Napping) >= 0 && player.findPerk(PerkLib.ZZZ) < 0) {
 				player.createPerk(PerkLib.ZZZ, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: ZZZ!)</b>");
 				player.createPerk(PerkLib.Lazy, 0, 0, 0, 0);
@@ -428,17 +635,13 @@ public function fixingProductionDrugs():void {
 				player.createPerk(PerkLib., 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: !)</b>");
 			}*/
-			if (player.findPerk(PerkLib.Hammer) >= 0 && player.findPerk(PerkLib.Anvil) < 0) {
-				player.createPerk(PerkLib.Anvil, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Anvil!)</b>");
+			if (player.findPerk(PerkLib.Anvil) >= 0 && player.findPerk(PerkLib.Weap0n) < 0) {
 				player.createPerk(PerkLib.Weap0n, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Weapon!)</b>");
 				player.createPerk(PerkLib.Arm0r, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Armor!)</b>");
 			}
-			if (player.findPerk(PerkLib.BrothelOwner) >= 0 && player.findPerk(PerkLib.Pornstar) < 0) {
-				player.createPerk(PerkLib.Pornstar, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Pornstar!)</b>");
+			if (player.findPerk(PerkLib.Pornstar) >= 0 && player.findPerk(PerkLib.SexChampion) < 0) {
 				player.createPerk(PerkLib.SexChampion, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Sex Champion!)</b>");
 				player.createPerk(PerkLib.SexDeity, 0, 0, 0, 0);
@@ -556,11 +759,7 @@ public function fixingProductionDrugs():void {
 				outputText("\n\n<b>(Gained Perk: Pilgrims Bounty!)</b>");
 			}
 			if (player.findPerk(PerkLib.ProductivityDrugs) < 0) {
-				player.createPerk(PerkLib.ProductivityDrugs, 0, 0, 0, 0);
-				player.addPerkValue(PerkLib.ProductivityDrugs, 1, player.cor);
-				player.addPerkValue(PerkLib.ProductivityDrugs, 2, 10);
-				player.addPerkValue(PerkLib.ProductivityDrugs, 3, player.lib);
-				player.addPerkValue(PerkLib.ProductivityDrugs, 4, player.lib);
+				player.createPerk(PerkLib.ProductivityDrugs,player.cor,10,player.lib,0);
 				outputText("\n\n<b>(Gained Perk: Productivity Drugs!)</b>");
 			}
 			if (player.findPerk(PerkLib.SenseCorruption) < 0) {
@@ -1178,25 +1377,19 @@ public function fixingProductionDrugs():void {
 			addButton(5, "DE Ranger", FightDarkElfRanger).hint("Test fight with Dark Elf Ranger. (lvl 39)");
 			addButton(6, "DE Sniper", FightDarkElfSniper).hint("Test fight with Dark Elf Sniper. (lvl 51)");
 			addButton(7, "Electra", FightElectra).hint("Test fight with Electra.");
-			addButton(8, "LvLUP Aurora", LvLUPAurora).hint("LvL UP forcefully Aurora for testing purpose up to the limit.");
-			addButton(9, "DELvL Aurora", DELvLAurora).hint("DE LvL forcefully Aurora for testing purpose down toward the lvl 1.");
-			addButton(10, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
-			addButton(11, "DELvL Eva", DELvLEva).hint("DE LvL forcefully Evangeline for testing purpose down toward the lvl 12.");
-			addButton(12, "FeralT.Beast", FightFeralImp).hint("Test fight with feral tentacle beast.");
-			addButton(13, "Miss Codex", AddManticoreRaijuCodex);
+			addButton(8, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
+			addButton(9, "DELvL Eva", DELvLEva).hint("DE LvL forcefully Evangeline for testing purpose down toward the lvl 12.");
+			if (flags[kFLAGS.AURORA_LVL] >= 1) addButton(10, "Aurora", FightAurora).hint("Just to test her initial sparring form for now.");
+			addButton(11, "LvLUP Aurora", LvLUPAurora).hint("LvL UP forcefully Aurora for testing purpose up to the limit.");
+			addButton(12, "DELvL Aurora", DELvLAurora).hint("DE LvL forcefully Aurora for testing purpose down toward the lvl 1.");
+			addButton(13, "FeralT.Beast", FightFeralImp).hint("Test fight with feral tentacle beast.");
 			addButton(14, "Back", SoulforceCheats);
 		}
-		public function AddManticoreRaijuCodex():void {
-			if (flags[kFLAGS.CODEX_ENTRY_MANTICORES] <= 0 && flags[kFLAGS.ETNA_AFFECTION] > 0) {
-				flags[kFLAGS.CODEX_ENTRY_MANTICORES] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Manticore!</b>")
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_RAIJU] <= 0 && flags[kFLAGS.ELECTRA_AFFECTION] > 0) {
-				flags[kFLAGS.CODEX_ENTRY_RAIJU] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Raiju!</b>")
-			}
-			doNext(EnemiesMenu);
-		}
+public function FightAurora():void {
+	clearOutput();
+	outputText("Entering battle with Aurora! Enjoy ^^");
+	startCombat(new Aurora());
+}
 		/*
 		public function AddBladeGrass():void {
 			outputText("\n\n<b>(Gained 1 Blade Grass!)</b>\n\n");

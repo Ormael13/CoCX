@@ -110,7 +110,7 @@ public function encounterTamanisDaughters():void {
 	}
 	if(flags[kFLAGS.TIMES_ENCOUNTED_TAMANIS_DAUGHTERS] > 0 && rand(10) == 0) {
 		tamaniPresent = true;
-		outputText("While roaming along, you find your path ahead blocked by " + num2Text(int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 4)) + " goblins.  At the forefront of the mob is Tamani");
+		outputText("While roaming along, you find your path ahead blocked by " + num2Text(int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 3)) + " goblins.  At the forefront of the mob is Tamani");
 		if(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] >= 10) outputText(", your wife");
 		outputText(".  You realize now that the other goblins must be your daughters.  Another crowd of small women emerges from the bushes, closing in a ring around you, preventing any chance of escape.  The largest of the younger goblin-women steps forwards, her " + tdCup() + " breasts jiggling, barely contained by the bondage ropes she has tied around herself.  She stops once she's next to her mother and Tamani explains, \"<i>I just can't keep their aching cunts at home anymore!  They're fertile adults now and they're wanting to get some experience with real dicks.  I figured you wouldn't mind helping them out a little.</i>\"\n\nWhat do you do? (Fight them off, Fuck them willingly, Let them fuck you)");
 		//[Fuck Them] [Let Them] [Fight]
@@ -119,7 +119,7 @@ public function encounterTamanisDaughters():void {
 	}
 	tamaniPresent = false;
 	outputText("While roaming along, you find your path ahead blocked by ");
-	outputText(num2Text(int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 4)) + " goblins.  You ");
+	outputText(num2Text(int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 3)) + " goblins.  You ");
 	if(player.weaponName == "fists") outputText("ready your fists ");
 	else outputText("draw your weapon ");
 	outputText("and glance around evaluating your options.   Another crowd of small women emerges from the bushes, closing in a ring around you, preventing any chance of escape.  The largest of the goblin-women steps forwards, her " + tdCup() + "-breasts jiggling, barely contained by the bondage ropes she has tied around herself.\n\n");
@@ -186,7 +186,7 @@ private function fuckYoDaughtersHomie():void {
 	spriteSelect(57);
 	flags[kFLAGS.TIMES_FUCKED_TAMANIS_DAUGHTERS]++;
 	var cocks:Number = player.cockTotal();
-	var daughters:Number = int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 2);
+	var daughters:Number = int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] * 0.75);
 	
 	clearOutput();
 	outputText("You shrug out of your [armor] and grab hold of ");

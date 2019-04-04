@@ -164,9 +164,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Sidonie checks
 			if (flags[kFLAGS.SIDONIE_RECOLLECTION] > 0) flags[kFLAGS.SIDONIE_RECOLLECTION]--;
 			if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) {
-				if (flags[kFLAGS.LUNA_JEALOUSY] < 200) flags[kFLAGS.LUNA_JEALOUSY]++;
-				if ((flags[kFLAGS.LUNA_FOLLOWER] == 6 || flags[kFLAGS.LUNA_FOLLOWER] == 8 || flags[kFLAGS.LUNA_FOLLOWER] == 10 || flags[kFLAGS.LUNA_FOLLOWER] == 12 || flags[kFLAGS.LUNA_FOLLOWER] == 14 || flags[kFLAGS.LUNA_FOLLOWER] == 16) && flags[kFLAGS.LUNA_JEALOUSY] < 50) flags[kFLAGS.LUNA_FOLLOWER]--;
-				if ((flags[kFLAGS.LUNA_FOLLOWER] == 5 || flags[kFLAGS.LUNA_FOLLOWER] == 7 || flags[kFLAGS.LUNA_FOLLOWER] == 9 || flags[kFLAGS.LUNA_FOLLOWER] == 11 || flags[kFLAGS.LUNA_FOLLOWER] == 13 || flags[kFLAGS.LUNA_FOLLOWER] == 15) && flags[kFLAGS.LUNA_JEALOUSY] >= 50 && (CoC.instance.model.time.hours > 6 && CoC.instance.model.time.hours < 23)) SceneLib.lunaFollower.warrningAboutJelously();
+				if (flags[kFLAGS.LUNA_JEALOUSY] < 400) flags[kFLAGS.LUNA_JEALOUSY]++;
+				if ((flags[kFLAGS.LUNA_FOLLOWER] == 6 || flags[kFLAGS.LUNA_FOLLOWER] == 8 || flags[kFLAGS.LUNA_FOLLOWER] == 10 || flags[kFLAGS.LUNA_FOLLOWER] == 12 || flags[kFLAGS.LUNA_FOLLOWER] == 14 || flags[kFLAGS.LUNA_FOLLOWER] == 16) && flags[kFLAGS.LUNA_JEALOUSY] < 100) flags[kFLAGS.LUNA_FOLLOWER]--;
+				if ((flags[kFLAGS.LUNA_FOLLOWER] == 5 || flags[kFLAGS.LUNA_FOLLOWER] == 7 || flags[kFLAGS.LUNA_FOLLOWER] == 9 || flags[kFLAGS.LUNA_FOLLOWER] == 11 || flags[kFLAGS.LUNA_FOLLOWER] == 13 || flags[kFLAGS.LUNA_FOLLOWER] == 15) && flags[kFLAGS.LUNA_JEALOUSY] >= 100 && (CoC.instance.model.time.hours > 6 && CoC.instance.model.time.hours < 23)) SceneLib.lunaFollower.warrningAboutJelously();
 			}
 			Begin("PlayerEvents","hourlyCheckRacialPerks");
 			needNext = hourlyCheckRacialPerks();
@@ -672,6 +672,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 					}
 					needNext = true;
 				}
+				if (flags[kFLAGS.SAMIRAH_HYPNOSIS] == 4 || flags[kFLAGS.SAMIRAH_HYPNOSIS] == 2) flags[kFLAGS.SAMIRAH_HYPNOSIS]++;
 				//Soul Arena Gaunlet reset
 				if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlets1)) {
 					if (player.statusEffectv1(StatusEffects.SoulArenaGaunlets1) > 1) player.addStatusValue(StatusEffects.SoulArenaGaunlets1, 1, -1);
@@ -968,6 +969,17 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				player.removePerk(PerkLib.ElectrifiedDesire);
 				needNext = true;
 			}
+			//Necromancy perk
+			if (((player.tailType == Tail.CAT && player.tailCount == 2) || player.tailType == Tail.NEKOMATA_FORKED_2_3 || player.tailType == Tail.NEKOMATA_FORKED_1_3) && player.findPerk(PerkLib.Necromancy) < 0) {
+				outputText("\nYou feel tremendous fell powers investing your being. You blink and almost jump as you realise you can literally can see the souls of the dead as well as those of the living now. Your powers over life and death have grown as <b>you seem to have acquired a natural talents for the darker arts.</b>\n\n(<b>Gained Perk: Necromancy</b>)\n");
+				player.createPerk(PerkLib.Necromancy, 0, 0, 0, 0);
+				needNext = true;
+			}
+			else if (player.findPerk(PerkLib.Necromancy) >= 0 && player.perkv4(PerkLib.Necromancy) == 0 && player.tailCount != 2 && player.tailType != Tail.CAT && player.tailType != Tail.NEKOMATA_FORKED_2_3 && player.tailType != Tail.NEKOMATA_FORKED_1_3) { //Remove Necromancy perk if not meeting requirements
+				outputText("\nHaving lost the source of your nekomata powers the fell energy in your body seems to recede and vanish completely.\n\n(<b>Lost Perk: Necromancy</b>)\n");
+				player.removePerk(PerkLib.Necromancy);
+				needNext = true;
+			}
 			//Elven Sense
 			if ((player.eyes.type != Eyes.ELF || player.ears.type != Ears.ELVEN) && player.findPerk(PerkLib.ElvenSense) >= 0 && player.findPerk(PerkLib.ElvishPeripheralNervSys) < 0) {
 				outputText("\nYou feels yourself less aware of your surrounding. Heck your vision seems less keen then it used to be. Likely it's because you no longer possess the senses of an elf.\n\n<b>(Lost the Elven Sense perk!)</b>\n");
@@ -984,6 +996,13 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 			if (player.orcScore() < 11 && player.findPerk(PerkLib.Ferocity) >= 0 && player.findPerk(PerkLib.OrcAdrenalGlandsFinalForm) < 0) {
 				outputText("\nYour natural ferocity start vanishing at a dramatic rate until finally there is no more. You realise you likely aren’t orc enough anymore, considering you felt so invincible with it, might not be a good thing.\n\n<b>(Lost the Ferocity perk!)</b>\n");
 				player.removePerk(PerkLib.Ferocity);
+				needNext = true;
+			}
+			//Acid Spit and Azureflame Breath
+			if (player.cavewyrmScore() < 7 && player.findPerk(PerkLib.AcidSpit) >= 0 && player.findPerk(PerkLib.AzureflameBreath) >= 0) {// && player.findPerk(PerkLib.) < 0
+				outputText("\nAs you become less of a cave wyrm your spit and fluids begins to lose their acidic propriety until its back to being ordinary drool and fluids. With no acid to ignite it seems you also lost the ability to breath fire.\n\n<b>(Lost the Acid Spit and Azureflame Breath perks!)</b>\n");
+				player.removePerk(PerkLib.AcidSpit);
+				player.removePerk(PerkLib.AzureflameBreath);
 				needNext = true;
 			}
 			//Soul Sense
@@ -1105,6 +1124,10 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				if (player.horns.type == Horns.UNICORN) {
 					outputText(" as your horn begins to split in two");
 					player.horns.type = Horns.BICORN;
+					if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedBicornHorns)) {
+						outputText("\n\n<b>Genetic Memory: Bicorn Horns - Memorized!</b>\n\n");
+						player.createStatusEffect(StatusEffects.UnlockedBicornHorns, 0, 0, 0, 0);
+					}
 				}
 				outputText(".");
 				if (player.hairColor != "black") {
@@ -1118,6 +1141,10 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				if (player.wings.type == Wings.FEATHERED_ALICORN) {
 					outputText(" Your wings aren’t spared either all the feather falling off to reveal a membranous demonic pair of bat wings.");
 					player.wings.type = Wings.NIGHTMARE;
+					if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedNightmareWings)) {
+						outputText("\n\n<b>Genetic Memory: Nightmare Wings - Memorized!</b>\n\n");
+						player.createStatusEffect(StatusEffects.UnlockedNightmareWings, 0, 0, 0, 0);
+					}
 				}
 				outputText(" <b>You giggle in delight of your own corruption as you fall from grace into a ");
 				if (player.wings.type == Wings.NIGHTMARE) outputText("nightmare");
@@ -1131,6 +1158,10 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 			if (player.horns.type == Horns.BICORN && player.wings.type == Wings.FEATHERED_ALICORN) {
 				outputText("\nYour wings changes as all the feather falling off to reveal a membranous demonic pair of bat wings.\n");
 				player.wings.type = Wings.NIGHTMARE;
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedNightmareWings)) {
+					outputText("\n\n<b>Genetic Memory: Nightmare Wings - Memorized!</b>\n\n");
+					player.createStatusEffect(StatusEffects.UnlockedNightmareWings, 0, 0, 0, 0);
+				}
 				needNext = true;
 			}
 			if (player.findPerk(PerkLib.AvatorOfCorruption) >= 0 && player.cor > 10 && player.horns.type != Horns.BICORN) {
@@ -1143,6 +1174,10 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				if (player.horns.type == Horns.BICORN) {
 					outputText(" Your two horns merges into a single one and you can feel the pure unity of your horn restored.");
 					player.horns.type = Horns.UNICORN;
+					if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedUnicornHorn)) {
+						outputText("\n\n<b>Genetic Memory: Unicorn Horn - Memorized!</b>\n\n");
+						player.createStatusEffect(StatusEffects.UnlockedUnicornHorn, 0, 0, 0, 0);
+					}
 				}
 				if (player.hairColor != "white") {
 					outputText(" You sigh in relief as your fur turns immaculate white.");
@@ -1155,6 +1190,10 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				if (player.wings.type == Wings.NIGHTMARE) {
 					outputText(" Your wings also redeem themselves changing into a pair of angelic wings covered with white feathers.");
 					player.wings.type = Wings.FEATHERED_ALICORN;
+					if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedAlicornWings)) {
+						outputText("\n\n<b>Genetic Memory: Alicorn Wings - Memorized!</b>\n\n");
+						player.createStatusEffect(StatusEffects.UnlockedAlicornWings, 0, 0, 0, 0);
+					}
 				}
 				outputText(" <b>You laugh heartily at your unblemish pure form as you realise you are an ");
 				if (player.wings.type == Wings.FEATHERED_ALICORN) outputText("alicorn");
@@ -1168,6 +1207,10 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 			if (player.horns.type == Horns.UNICORN && player.wings.type == Wings.NIGHTMARE) {
 				outputText("\nYour wings redeem themselves changing into a pair of angelic wings covered with white feathers.\n");
 				player.wings.type = Wings.FEATHERED_ALICORN;
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedAlicornWings)) {
+					outputText("\n\n<b>Genetic Memory: Alicorn Wings - Memorized!</b>\n\n");
+					player.createStatusEffect(StatusEffects.UnlockedAlicornWings, 0, 0, 0, 0);
+				}
 				needNext = true;
 			}
 			if (player.findPerk(PerkLib.AvatorOfPurity) >= 0 && player.cor < 90 && player.horns.type != Horns.UNICORN) {
@@ -1752,16 +1795,16 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 					flags[kFLAGS.SOUL_SENSE_WORLD_TREE] = 1;
 					EngineCore.doNext(playerMenu);
 					return true;
-				}/*
-				if (player.hasKeyItem("Jade Talisman") >= 0 && flags[kFLAGS.AURORA_LVL] < 1) {
+				}
+				if (player.hasKeyItem("Jade Talisman") >= 0 && flags[kFLAGS.AURORA_LVL] < 0.1) {
 					outputText("\nYou have weird dream tonight. In that dream you’re back in the Hidden Cave, exploring it room after room, smashing to pieces any of the golems or small bat golems you find and looting the treasures. Then you face the dragon-boy in short, but intensive fight, ending with him running away like coward, while still having enough courage to leave some witty remarks.");
 					outputText("\n\nMaking sure you not overlooked any valuable items you walk slowly toward stairway leading to first floor when... your gaze stops on one of walls in the room with the stairway. Compared to other nearby walls which are all without any damage or otherwise imperfections you spot on this particular wall something. Something like a crack or...keyhole? Intrigued you start to walk toward it...");
 					outputText("\n\nAnd you suddenly wake up. That was really weird. But even weirder is the fact that your holding in your hand that same Jade Talisman you got from your last fight with the weird dragon-boy. Coincidence?");
 					if (silly()) outputText(" I think not!");
-					flags[kFLAGS.AURORA_LVL] = 1;
+					flags[kFLAGS.AURORA_LVL] = 0.1;
 					EngineCore.doNext(playerMenu);
 					return true;
-				}*/
+				}
 				if (player.lib > 50 || player.lust > 40) { //Randomly generated dreams here
 					if (dreams.dreamSelect()) return true;
 				}
@@ -1786,4 +1829,4 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 		//End of Interface Implementation
 	}
 }
-
+

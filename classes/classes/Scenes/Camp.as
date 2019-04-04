@@ -1006,6 +1006,7 @@ public function loversCount():Number {
 	if (followerKiha()) counter++;
 	if (flags[kFLAGS.NIEVE_STAGE] == 5) counter++;
 	if (flags[kFLAGS.ANT_WAIFU] > 0) counter++;
+	if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) counter++;
 	for each (var npc:XXCNPC in _campFollowers){
         if(npc.isCompanion(XXCNPC.LOVER)){counter++;}
     }
@@ -1033,6 +1034,7 @@ public function loversHotBathCount():Number {
 	if (followerKiha()) counter++;
 	if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && flags[kFLAGS.JOY_COCK_SIZE] < 1) counter++;
 	if (flags[kFLAGS.SIDONIE_FOLLOWER] >= 1) counter++;
+	if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) counter++;
 	return counter;
 }
 
@@ -1375,6 +1377,11 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		outputText("\n\n");
         buttons.add( "Phylla", SceneLib.desert.antsScene.introductionToPhyllaFollower);
     }
+	//Samirah
+	if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) {
+		outputText("Samirah is quietly sunbathing on a rock, her long tail wrapped around on itself. She looks like she is very busy having a hissing conversation with a common snake which, considering her way of speech, isn’t really that strange.\n\n");
+		buttons.add( "Samirah", SceneLib.samirah.samirahMainCampMenu);
+	}
 	//Nieve (jako, ze jest sezonowym camp member powinna byc na koncu listy...chyba, ze zrobie cos w stylu utworzenia mini lodowej jaskini dla niej)
 	if(flags[kFLAGS.NIEVE_STAGE] == 5) {
 		Holidays.nieveCampDescs();
@@ -1643,7 +1650,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 	//Luna
 	if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) {
 		outputText("Luna wanders around the camp, doing her chores as usual.");
-		if (flags[kFLAGS.LUNA_JEALOUSY] >= 50) outputText(" She looks at you from time to time, as if expecting you to notice her.");
+		if (flags[kFLAGS.LUNA_JEALOUSY] >= 100) outputText(" She looks at you from time to time, as if expecting you to notice her.");
 		outputText("\n\n");
 		buttons.add( "Luna", SceneLib.lunaFollower.mainLunaMenu).hint("Visit Luna.").disableIf(player.statusEffectv1(StatusEffects.CampSparingNpcsTimers3) > 0,"Training.");
 	}
@@ -1728,12 +1735,12 @@ private function MagicWardMenu():void {
 }
 
 private function SparrableNPCsMenu():void {
-	clearOutput();/*
+	clearOutput();
 	outputText("Champion party composition: [name]");
 	if (player.hasPerk(PerkLib.BasicLeadership)) {
 		if (flags[kFLAGS.PLAYER_COMPANION_1] != "") outputText(", " + flags[kFLAGS.PLAYER_COMPANION_1]);
 		else outputText(", (no combat companion)");
-	}
+	}/*
 	if () {
 		if (flags[kFLAGS.PLAYER_COMPANION_2] != "") outputText(", " + flags[kFLAGS.PLAYER_COMPANION_2]);
 		else outputText(", (no combat companion)");
@@ -2327,6 +2334,11 @@ public function doSleep(clrScreen:Boolean = true):void {
 				return;
 			}
 			else outputText("Luna hugs you tightly, almost possessively so as you both doze off to sleep.");
+		}
+		else if(flags[kFLAGS.SLEEP_WITH] == "Samirah" && flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) {
+			outputText("As you both head to sleep, Samirah slithers to you and coils her tail around your legs, wrapping her arms around your torso as she rests her head on your shoulder. Her body is cold and she looks at you as if in a daze.");
+			if (player.isNaga()) outputText(" She’s not alone either. It indeed took you a while to realise that you are also cold blooded now. The cold night air sure puts you in a similar state as of late.");
+			outputText("\n\n\"<i>Sweet dreams [name], till morning and sunshine come.</i>\"\n");
 		}
 		else if (flags[kFLAGS.SLEEP_WITH] == "Ember" && flags[kFLAGS.EMBER_AFFECTION] >= 75 && followerEmber()) {
 			if (flags[kFLAGS.TIMES_SLEPT_WITH_EMBER] > 3) {
@@ -3055,6 +3067,8 @@ private function ascendForReal():void {
 	if (player.statusEffectv3(StatusEffects.AdventureGuildQuests1) >= 4) performancePoints += 2;
 	if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) >= 4) performancePoints += 2;
 	if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) >= 4) performancePoints += 2;
+	if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) >= 2) performancePoints++;
+	if (player.statusEffectv2(StatusEffects.AdventureGuildQuests4) >= 2) performancePoints++;
 	if (flags[kFLAGS.GALIA_LVL_UP] >= 0.5) performancePoints += 5;
 	//Camp structures
 	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) performancePoints += 10;
@@ -3688,15 +3702,43 @@ private function promptSaveUpdate():void {
 		doNext(doCamp);
 		return;
 	}
-/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 23) {
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 23) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 24;
+		clearOutput();
+		outputText("Reseting dream about... mechanical oranges i guess. And Drugs seems be so strong to stay at ascension. No worry PC just get detox therapy (again). But wait is it more to that all? Maybe some revolution silently started by mages?");
+		flags[kFLAGS.AURORA_LVL] = 0;
+		if (player.hasPerk(PerkLib.Archmage)) {
+			player.removePerk(PerkLib.Archmage);
+			player.createPerk(PerkLib.GrandMage, 0, 0, 0, 0);
+		}
+		if (player.hasPerk(PerkLib.GrandArchmage)) {
+			player.removePerk(PerkLib.GrandArchmage);
+			player.createPerk(PerkLib.Archmage, 0, 0, 0, 0);
+		}
+		if (player.hasPerk(PerkLib.GreyMage)) {
+			player.removePerk(PerkLib.GreyMage);
+			player.createPerk(PerkLib.GrandArchmage2ndCircle, 0, 0, 0, 0);
+		}
+		if (player.hasPerk(PerkLib.GreyArchmage)) {
+			player.removePerk(PerkLib.GreyArchmage);
+			player.createPerk(PerkLib.GrandArchmage3rdCircle, 0, 0, 0, 0);
+		}
+		if (player.hasPerk(PerkLib.Convergence)) {
+			player.removePerk(PerkLib.Convergence);
+			player.perkPoints += 1;
+		}
+		doNext(doCamp);
+		return;
+	}
+/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 24) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 25;
 		clearOutput();
 		outputText("Text.");
 		doNext(doCamp);
 		return;
 	}
-	if (flags[kFLAGS.MOD_SAVE_VERSION] == 24) {
-		flags[kFLAGS.MOD_SAVE_VERSION] = 25;
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 25) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 26;
 		clearOutput();
 		outputText("Text.");
 		doNext(doCamp);
@@ -3956,10 +3998,10 @@ private function updateAchievements():void {
 	if (player.gems >= 1000000) awardAchievement("Millionaire", kACHIEVEMENTS.WEALTH_MILLIONAIRE);
 	
 	//Combat
-	if (player.hasStatusEffect(StatusEffects.KnowsCharge) && player.hasStatusEffect(StatusEffects.KnowsChargeA) && player.hasStatusEffect(StatusEffects.KnowsBlind) && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && player.hasStatusEffect(StatusEffects.KnowsBlizzard) && player.hasStatusEffect(StatusEffects.KnowsLightningBolt) ) awardAchievement("Gandalf", kACHIEVEMENTS.COMBAT_GANDALF);
-	if (player.hasStatusEffect(StatusEffects.KnowsArouse) && player.hasStatusEffect(StatusEffects.KnowsHeal) && player.hasStatusEffect(StatusEffects.KnowsMight) && player.hasStatusEffect(StatusEffects.KnowsBlink) && player.hasStatusEffect(StatusEffects.KnowsIceSpike) && player.hasStatusEffect(StatusEffects.KnowsDarknessShard) ) awardAchievement("Sauron", kACHIEVEMENTS.COMBAT_SAURON);
-	if (player.hasStatusEffect(StatusEffects.KnowsCharge) && player.hasStatusEffect(StatusEffects.KnowsChargeA) && player.hasStatusEffect(StatusEffects.KnowsBlind) && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && player.hasStatusEffect(StatusEffects.KnowsBlizzard) && player.hasStatusEffect(StatusEffects.KnowsArouse) && player.hasStatusEffect(StatusEffects.KnowsHeal) && player.hasStatusEffect(StatusEffects.KnowsMight) &&
-		player.hasStatusEffect(StatusEffects.KnowsBlink) && player.hasStatusEffect(StatusEffects.KnowsIceSpike) && player.hasStatusEffect(StatusEffects.KnowsLightningBolt) && player.hasStatusEffect(StatusEffects.KnowsDarknessShard) ) awardAchievement("Merlin", kACHIEVEMENTS.COMBAT_WIZARD);
+	if (player.hasStatusEffect(StatusEffects.KnowsCharge) && player.hasStatusEffect(StatusEffects.KnowsChargeA) && player.hasStatusEffect(StatusEffects.KnowsBlind) && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && player.hasStatusEffect(StatusEffects.KnowsBlizzard) && player.hasStatusEffect(StatusEffects.KnowsLightningBolt) && player.hasStatusEffect(StatusEffects.KnowsChainLighting) && player.hasStatusEffect(StatusEffects.KnowsPyreBurst) ) awardAchievement("Gandalf", kACHIEVEMENTS.COMBAT_GANDALF);
+	if (player.hasStatusEffect(StatusEffects.KnowsArouse) && player.hasStatusEffect(StatusEffects.KnowsHeal) && player.hasStatusEffect(StatusEffects.KnowsMight) && player.hasStatusEffect(StatusEffects.KnowsBlink) && player.hasStatusEffect(StatusEffects.KnowsIceSpike) && player.hasStatusEffect(StatusEffects.KnowsDarknessShard) && player.hasStatusEffect(StatusEffects.KnowsDuskWave) && player.hasStatusEffect(StatusEffects.KnowsArcticGale) ) awardAchievement("Sauron", kACHIEVEMENTS.COMBAT_SAURON);
+	if (player.hasStatusEffect(StatusEffects.KnowsCharge) && player.hasStatusEffect(StatusEffects.KnowsChargeA) && player.hasStatusEffect(StatusEffects.KnowsBlind) && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && player.hasStatusEffect(StatusEffects.KnowsBlizzard) && player.hasStatusEffect(StatusEffects.KnowsArouse) && player.hasStatusEffect(StatusEffects.KnowsHeal) && player.hasStatusEffect(StatusEffects.KnowsMight) && player.hasStatusEffect(StatusEffects.KnowsBlink) &&
+		player.hasStatusEffect(StatusEffects.KnowsIceSpike) && player.hasStatusEffect(StatusEffects.KnowsLightningBolt) && player.hasStatusEffect(StatusEffects.KnowsDarknessShard) && player.hasStatusEffect(StatusEffects.KnowsChainLighting) && player.hasStatusEffect(StatusEffects.KnowsPyreBurst) && player.hasStatusEffect(StatusEffects.KnowsDuskWave) && player.hasStatusEffect(StatusEffects.KnowsArcticGale) ) awardAchievement("Merlin", kACHIEVEMENTS.COMBAT_WIZARD);
 	if (flags[kFLAGS.SPELLS_CAST] >= 1 ) awardAchievement("Are you a Wizard?", kACHIEVEMENTS.COMBAT_ARE_YOU_A_WIZARD);
 	
 	//Realistic
@@ -4127,4 +4169,4 @@ private function fixHistory():void {
 */
 }
 }
-
+

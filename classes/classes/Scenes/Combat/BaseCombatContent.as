@@ -123,6 +123,9 @@ public class BaseCombatContent extends BaseContent {
 	protected function scalingBonusStrength():Number {
 		return combat.scalingBonusStrength();
 	}
+	protected function scalingBonusStrengthCompanion():Number {
+		return combat.scalingBonusStrengthCompanion();
+	}
 	protected function scalingBonusToughness():Number {
 		return combat.scalingBonusToughness();
 	}

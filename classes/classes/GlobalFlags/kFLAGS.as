@@ -2598,8 +2598,8 @@ public static const LUNA_DEFEATS_COUNTER:int                                   	
 public static const LUNA_MOON_CYCLE:int                         					= 2590;
 public static const LUNA_MOONING:int                                   				= 2591;
 public static const UNKNOWN_FLAG_NUMBER_02592:int                                   = 2592;//Not Yet Used Flag
-public static const UNKNOWN_FLAG_NUMBER_02593:int                                   = 2593;//Not Yet Used Flag
-public static const UNKNOWN_FLAG_NUMBER_02594:int                                   = 2594;//Not Yet Used Flag
+public static const ENVENOMED_MELEE_ATTACK:int                                   	= 2593;
+public static const ERMA_ARCHERY_TRAINING:int                                   	= 2594;
 public static const RIVER_DUNGEON_FLOORS_PROGRESS:int                               = 2595;
 public static const ZERKER_COMBAT_MODE:int                                   		= 2596;
 public static const FERAL_EXTRAS:int                                                = 2597;
@@ -2678,16 +2678,16 @@ public static const DISCOVERED_02669:int                                   = 266
 public static const DISCOVERED_02670:int                                   = 2670;			//Not Yet Used Flag
 public static const DISCOVERED_02671:int                                   = 2671;			//Not Yet Used Flag
 public static const AURORA_LVL:int                                   				= 2672;
-public static const AURORA_02673:int                                   = 2673;				//Not Yet Used Flag
+public static const AURORA_DEFEATS_COUNTER:int                                   = 2673;	//Not Yet Used Flag
 public static const AURORA_02674:int                                   = 2674;				//Not Yet Used Flag
 public static const AURORA_02675:int                                   = 2675;				//Not Yet Used Flag
-public static const UNKNOWN_FLAG_NUMBER_02676:int                                   = 2676;
-public static const UNKNOWN_FLAG_NUMBER_02677:int                                   = 2677;
-public static const UNKNOWN_FLAG_NUMBER_02678:int                                   = 2678;
-public static const UNKNOWN_FLAG_NUMBER_02679:int                                   = 2679;
-public static const UNKNOWN_FLAG_NUMBER_02680:int                                   = 2680;
-public static const UNKNOWN_FLAG_NUMBER_02681:int                                   = 2681;
-public static const UNKNOWN_FLAG_NUMBER_02682:int                                   = 2682;
+public static const UNKNOWN_FLAG_NUMBER_02676:int                                   = 2676;	//Not Yet Used Flag
+public static const UNKNOWN_FLAG_NUMBER_02677:int                                   = 2677;	//Not Yet Used Flag
+public static const SAMIRAH_FOLLOWER:int                                   			= 2678;	
+public static const SAMIRAH_AFFECTION:int                                   		= 2679;
+public static const SAMIRAH_HYPNOSIS:int                                   			= 2680;
+public static const SAMIRAH_CLOTHES:int                                   			= 2681;
+public static const SAMIRAH_SCALES:int                                   			= 2682;	//Not Yet Used Flag
 public static const UNKNOWN_FLAG_NUMBER_02683:int                                   = 2683;
 public static const UNKNOWN_FLAG_NUMBER_02684:int                                   = 2684;
 public static const UNKNOWN_FLAG_NUMBER_02685:int                                   = 2685;
@@ -3007,4 +3007,4 @@ public static const HYPER_HAPPY:int                                             
 public static const UNKNOWN_FLAG_NUMBER_02999:int                                   = 2999; // ------------------------- Jojo Debug Flag?
 	}    
 }
-
+

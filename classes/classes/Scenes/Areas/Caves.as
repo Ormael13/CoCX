@@ -37,7 +37,8 @@ use namespace CoC;
 			//choice[choice.length] = 3; //Dark Slime (lvl 54 lub 55)
 			choice[choice.length] = 2; //4Displacer Beast (lvl 60)
 			//choice[choice.length] = 5; //Ebonbloom
-			if (rand(4) == 0) choice[choice.length] = 3; //6Find nothing!
+			choice[choice.length] = 3; //6Methir Crystal
+			if (rand(4) == 0) choice[choice.length] = 4; //7Find nothing!
 			
 			select = choice[rand(choice.length)];
 			switch(select) {
@@ -51,13 +52,8 @@ use namespace CoC;
 					dynStats("tou", .5);
 					outputText("You spend one hour exploring the caves but you don't
 					dynStats("tou", .5);
-					doNext(camp.returnToCampUseOneHour
-					clear
-					outputText("You spend one hour exploring the caves but you don't manage to find anything interesting, unless feeling of becoming slight tougher counts.");
-					dynStats("tou", .5);
-					doNext(camp.returnToCampUseOneHour);
 					clearOutput();
-					outputText("You spend one hour exploring the caves but you don't manage to find anything interesting, unless feeling of becoming slight tougher counts.");
+					outputText("You spend one hour exploring the caves but you don't manage to
 					dynStats("tou", .5);
 					doNext(camp.returnToCampUseOneHour);
 					break;*/
@@ -82,6 +78,11 @@ use namespace CoC;
 					dynStats("tou", .5);
 					doNext(camp.returnToCampUseOneHour);
 					break;*/
+				case 3://6
+					clearOutput();
+					outputText("As you explore the cave, you run into a weird neon blue crystal that glow in the dark. You pack it in your backpack in case it could be sold for a decent amount"+(silly() ? ", perhaps to a drug dealer" : "")+". ");
+					inventory.takeItem(consumables.METHIRC, camp.returnToCampUseOneHour);
+					break;
 				default:
 					clearOutput();
 					outputText("You spend one hour exploring the caves but you don't manage to find anything interesting, unless feeling of becoming slight tougher counts.");

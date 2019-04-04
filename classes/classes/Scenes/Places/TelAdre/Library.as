@@ -119,68 +119,88 @@ private function studyInTA():void {
 			outputText("\n\nSelecting a book at chance from the mess across the tables, you are delighted to find that it is a tome about magic.  Though the language used is archaic at first you slowly find yourself getting the grasp of it and understanding more of the theory put down in the text.  You find yourself thinking about how to apply the things you're reading about to your own abilities, and figuring out how to better utilize magic yourself.  In short, you experience the condition known as \"learning\", and feel smarter for it.");
 			dynStats("int", 3+rand(4));
 			//(Intelligence increase)
-			//Smart enough for arouse and doesnt have it
-			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsArouse)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Arouse.</b>");
-				player.createStatusEffect(StatusEffects.KnowsArouse, 0, 0, 0, 0);
-			}
-			//Smart enough for regenerate and doesnt have it
-			else if (player.inte >= 25 && !player.hasStatusEffect(StatusEffects.KnowsRegenerate)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Regenerate.</b>");
-				player.createStatusEffect(StatusEffects.KnowsRegenerate, 0, 0, 0, 0);
-			}
-			//Smart enough for might and doesnt have it
-			else if (player.inte >= 30 && !player.hasStatusEffect(StatusEffects.KnowsMight)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Might.</b>");
-				player.createStatusEffect(StatusEffects.KnowsMight, 0, 0, 0, 0);
-			}
-			//Smart enough for blink and doesnt have it
-			else if (player.inte >= 35 && !player.hasStatusEffect(StatusEffects.KnowsBlink)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Blink.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBlink, 0, 0, 0, 0);
-			}
 			//Smart enough for ice spike and doesnt have it
-			else if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsIceSpike)) {
+			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsIceSpike)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Ice Spike.</b>");
 				player.createStatusEffect(StatusEffects.KnowsIceSpike, 0, 0, 0, 0);
 			}
 			//Smart enough for darkness shard and doesnt have it
-			else if (player.inte >= 45 && !player.hasStatusEffect(StatusEffects.KnowsDarknessShard)) {
+			else if (player.inte >= 25 && !player.hasStatusEffect(StatusEffects.KnowsDarknessShard)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Darkness Shard.</b>");
 				player.createStatusEffect(StatusEffects.KnowsDarknessShard, 0, 0, 0, 0);
 			}
-			//Smart enough for charge weapon and doesnt have it
-			else if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsCharge)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Charge Weapon.</b>");
-				player.createStatusEffect(StatusEffects.KnowsCharge, 0, 0, 0, 0);
+			//Smart enough for arouse and doesnt have it
+			else if (player.inte >= 30 && !player.hasStatusEffect(StatusEffects.KnowsArouse)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Arouse.</b>");
+				player.createStatusEffect(StatusEffects.KnowsArouse, 0, 0, 0, 0);
 			}
-			//Smart enough for charge armor and doesnt have it
-			else if (player.inte >= 25 && !player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Charge Armor.</b>");
-				player.createStatusEffect(StatusEffects.KnowsChargeA, 0, 0, 0, 0);
+			//Smart enough for regenerate and doesnt have it
+			else if (player.inte >= 35 && !player.hasStatusEffect(StatusEffects.KnowsRegenerate)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Regenerate.</b>");
+				player.createStatusEffect(StatusEffects.KnowsRegenerate, 0, 0, 0, 0);
 			}
-			//Smart enough for heal and doesnt have it
-			else if (player.inte >= 30 && !player.hasStatusEffect(StatusEffects.KnowsHeal)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Heal.</b>");
-				player.createStatusEffect(StatusEffects.KnowsHeal, 0, 0, 0, 0);
+			//Smart enough for might and doesnt have it
+			else if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsMight)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Might.</b>");
+				player.createStatusEffect(StatusEffects.KnowsMight, 0, 0, 0, 0);
 			}
-			//Smart enough for blind and doesnt have it
-			else if (player.inte >= 35 && !player.hasStatusEffect(StatusEffects.KnowsBlind)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Blind.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBlind, 0, 0, 0, 0);
+			//Smart enough for blink and doesnt have it
+			else if (player.inte >= 45 && !player.hasStatusEffect(StatusEffects.KnowsBlink)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Blink.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBlink, 0, 0, 0, 0);
+			}
+			//Smart enough for arctic gale and doesnt have it
+			else if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsArcticGale)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Arctic Gale.</b>");
+				player.createStatusEffect(StatusEffects.KnowsDarknessShard, 0, 0, 0, 0);
+			}
+			//Smart enough for dusk wave and doesnt have it
+			else if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsDuskWave)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Dusk Wave.</b>");
+				player.createStatusEffect(StatusEffects.KnowsDarknessShard, 0, 0, 0, 0);
 			}
 			//Smart enough for whitefire and doesnt have it
-			else if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
+			else if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Whitefire.</b>");
 				player.createStatusEffect(StatusEffects.KnowsWhitefire, 0, 0, 0, 0);
 			}
 			//Smart enough for lightning bolt and doesnt have it
-			else if (player.inte >= 45 && !player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) {
+			else if (player.inte >= 25 && !player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Lightning Bolt.</b>");
 				player.createStatusEffect(StatusEffects.KnowsLightningBolt, 0, 0, 0, 0);
 			}
+			//Smart enough for charge weapon and doesnt have it
+			else if (player.inte >= 30 && !player.hasStatusEffect(StatusEffects.KnowsCharge)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Charge Weapon.</b>");
+				player.createStatusEffect(StatusEffects.KnowsCharge, 0, 0, 0, 0);
+			}
+			//Smart enough for charge armor and doesnt have it
+			else if (player.inte >= 35 && !player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Charge Armor.</b>");
+				player.createStatusEffect(StatusEffects.KnowsChargeA, 0, 0, 0, 0);
+			}
+			//Smart enough for heal and doesnt have it
+			else if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsHeal)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Heal.</b>");
+				player.createStatusEffect(StatusEffects.KnowsHeal, 0, 0, 0, 0);
+			}
+			//Smart enough for blind and doesnt have it
+			else if (player.inte >= 45 && !player.hasStatusEffect(StatusEffects.KnowsBlind)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Blind.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBlind, 0, 0, 0, 0);
+			}
+			//Smart enough for pyre burst and doesnt have it
+			else if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsPyreBurst)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Pyre Burst.</b>");
+				player.createStatusEffect(StatusEffects.KnowsHeal, 0, 0, 0, 0);
+			}
+			//Smart enough for chain lighting and doesnt have it
+			else if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsChainLighting)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Chain Lighting.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBlind, 0, 0, 0, 0);
+			}
 			//Smart enough for blizzard and doesnt have it
-			else if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
+			else if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Blizzard.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBlizzard, 0, 0, 0, 0);
 			}

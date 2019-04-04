@@ -5,12 +5,12 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Face;
 import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
+import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class Naga extends Monster
 	{
-
 		//2a)  Ability -  Poison Bite - poisons player
 		protected function nagaPoisonBiteAttack():void {
 			//(Deals damage over 4-5 turns, invariably reducing 
@@ -80,17 +80,24 @@ public class Naga extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.desert.nagaScene.nagaRapeChoice();
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) SceneLib.desert.nagaScene.nagaRapeChoice2();
+			else SceneLib.desert.nagaScene.nagaRapeChoice();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if(pcCameWorms){
-				outputText("\n\nThe naga's eyes go wide and she turns to leave, no longer interested in you.");
-				player.orgasm();
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) {
+				outputText("\n\nShe aproach you and gives you.");
 				doNext(cleanupAfterCombat);
-			} else {
-				SceneLib.desert.nagaScene.nagaFUCKSJOOOOOO();
+			}
+			else {
+				if(pcCameWorms){
+					outputText("\n\nThe naga's eyes go wide and she turns to leave, no longer interested in you.");
+					player.orgasm();
+					doNext(cleanupAfterCombat);
+				} else {
+					SceneLib.desert.nagaScene.nagaFUCKSJOOOOOO();
+				}
 			}
 		}
 
@@ -101,7 +108,23 @@ public class Naga extends Monster
 			this.a = "the ";
 			this.short = "naga";
 			this.imageName = "naga";
-			this.long = "You are fighting a naga. She resembles a beautiful and slender woman from the waist up, with dark hair hanging down to her neck. Her upper body is deeply tanned, while her lower body is covered with shiny scales, striped in a pattern reminiscent of the dunes around you. Instead of bifurcating into legs, her hips elongate into a snake's body which stretches far out behind her, leaving a long and curving trail in the sand.  She's completely naked, with her round C-cup breasts showing in plain sight. In her mouth you can see a pair of sharp, venomous fangs and a long forked tongue moving rapidly as she hisses at you.";
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) {
+				this.long = "You are fighting a naga. She resembles a beautiful and slender woman from the waist up, with dark hair hanging down to her neck. Her upper body is deeply tanned, covered with semi-visible web of purple lines, while her lower body is covered with shiny scales, striped in a pattern reminiscent of the dunes around you. Instead of bifurcating into legs, her hips elongate into a snake's body which stretches far out behind her, leaving a long and curving trail in the sand.  She's completely naked, with her round C-cup breasts showing in plain sight. In her mouth you can see a pair of sharp, venomous fangs and a long forked tongue moving rapidly as she hisses at you.";
+				this.drop = new WeightedDrop().
+					add(null,1).
+					add(useables.PCSHARD,6).
+					add(headjewelries.GNHAIR,5).
+					add(consumables.REPTLUM,4).
+					add(consumables.SNAKOIL,3);
+			}
+			else {
+				this.long = "You are fighting a naga. She resembles a beautiful and slender woman from the waist up, with dark hair hanging down to her neck. Her upper body is deeply tanned, while her lower body is covered with shiny scales, striped in a pattern reminiscent of the dunes around you. Instead of bifurcating into legs, her hips elongate into a snake's body which stretches far out behind her, leaving a long and curving trail in the sand.  She's completely naked, with her round C-cup breasts showing in plain sight. In her mouth you can see a pair of sharp, venomous fangs and a long forked tongue moving rapidly as she hisses at you.";
+				this.drop = new WeightedDrop().
+					add(null,1).
+					add(headjewelries.GNHAIR,5).
+					add(consumables.REPTLUM,4).
+					add(consumables.SNAKOIL,3);
+			}
 			// this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
@@ -113,6 +136,7 @@ public class Naga extends Monster
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
 			this.lowerBody = LowerBody.NAGA;
+			this.faceType = Face.SNAKE_FANGS;
 			this.skinTone = "mediterranean-toned";
 			this.hairColor = "brown";
 			this.hairLength = 16;
@@ -129,14 +153,9 @@ public class Naga extends Monster
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 9;
 			this.gems = rand(5) + 8;
-			this.drop = new WeightedDrop().
-					add(null,1).
-					add(consumables.REPTLUM,5).
-					add(consumables.SNAKOIL,4);
 			this.special1 = nagaPoisonBiteAttack;
 			this.special2 = nagaConstrict;
 			this.special3 = nagaTailWhip;
-			this.faceType = Face.SNAKE_FANGS;
 			checkMonster();
 		}
 

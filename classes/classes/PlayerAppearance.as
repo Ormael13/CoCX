@@ -1008,6 +1008,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  " + Num2Text(player.legCount) + " digitigrade legs grow down from your " + hipDescript() + ", ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.");
 		else if (player.lowerBody == LowerBody.SALAMANDER)
 			outputText("  " + Num2Text(player.legCount) + " digitigrade legs covered in thick, leathery red scales up to the mid-thigh grow down from your " + hipDescript() + ", ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.");
+		else if (player.lowerBody == LowerBody.CAVE_WYRM)
+			outputText("  " + Num2Text(player.legCount) + " digitigrade legs covered in thick, leathery black scales up to the mid-thigh grow down from your " + hipDescript() + ", ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.");
 		else if (player.lowerBody == LowerBody.BUNNY)
 			outputText("  Your " + num2Text(player.legCount) + " legs thicken below the waist as they turn into soft-furred rabbit-like legs.  You even have large bunny feet that make hopping around a little easier than walking.");
 		else if (player.lowerBody == LowerBody.HARPY)
@@ -1119,13 +1121,23 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  A long shark-tail trails down from your backside, swaying to and fro while giving you a dangerous air.");
 		}
 		if (player.tailType == Tail.CAT) {
-			outputText("  A soft [skin coat.color] cat-tail sprouts just above your " + buttDescript() + ", curling and twisting with every step to maintain perfect balance.");
+			if (player.tailCount <= 1) outputText("  A soft [skin coat.color] cat-tail sprouts just above your " + buttDescript() + ", curling and twisting with every step to maintain perfect balance.");
+			else outputText("  Pair of soft [skin coat.color] cat-tails sprouts just above your " + buttDescript() + ", curling and twisting with every step to maintain perfect balance.");
+		}
+		if (player.tailType == Tail.NEKOMATA_FORKED_1_3) {
+			outputText("  A soft [skin coat.color] forked on its one third length cat-tail sprouts just above your " + buttDescript() + ", curling and twisting with every step to maintain perfect balance.");
+		}
+		if (player.tailType == Tail.NEKOMATA_FORKED_2_3) {
+			outputText(" A soft [skin coat.color] forked on its two thirds length cat-tail sprouts just above your " + buttDescript() + ", curling and twisting with every step to maintain perfect balance.");
 		}
 		if (player.tailType == Tail.LIZARD) {
 			outputText("  A tapered tail hangs down from just above your " + assDescript() + ".  It sways back and forth, assisting you with keeping your balance.");
 		}
 		if (player.tailType == Tail.SALAMANDER) {
 			outputText("  A tapered, covered in red scales tail hangs down from just above your " + assDescript() + ".  It sways back and forth, assisting you with keeping your balance. When you are in battle or when you want could set ablaze whole tail in red-hot fire.");
+		}
+		if (player.tailType == Tail.CAVE_WYRM) {
+			outputText("  A large newt tail trails down from your " + buttDescript() + ", tapering on the ground behind you. While it is heavy and plump, it can allow you to swim underwater like any fish if necessary, just like a newt.");
 		}
 		if (player.tailType == Tail.RABBIT)
 			outputText("  A short, soft bunny tail sprouts just above your " + assDescript() + ", twitching constantly whenever you don't think about it.");
@@ -1221,6 +1233,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Shining black exoskeleton covers your arms from the biceps down, resembling a pair of long black gloves ended with a yellow fuzz from a distance.");
 		else if (armType == Arms.SALAMANDER)
 			outputText("  Shining thick, leathery red scales covers your arms from the biceps down and your fingernails are now a short curved claws.");
+		else if (armType == Arms.CAVE_WYRM)
+			outputText("  Shining thick, leathery black scales covers your arms from the biceps down and your fingernails are now a short curved claws.");
 		else if (armType == Arms.PLANT)
 			outputText("  Delicate vines crawl down from the upper parts of your arms to your wrists covered in spade-like leaves, that bob whenever you move.");
 		else if (armType == Arms.PLANT2)
@@ -1489,6 +1503,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  One could mistake you for a human but your voice is unnaturally beautiful and melodious giving you away as something else.");
 		else if (player.tongue.type == Tongue.DOG)
 			outputText("  You sometime let your panting canine tongue out to vent heat.");
+		else if (player.tongue.type == Tongue.CAVE_WYRM)
+			outputText("  A slowly undulating neon blue tongue that glow in the dark occasionally slips from between your lips.  It hangs nearly two feet long when you let the whole thing slide out, though you can retract it to appear normal.");
 	}
 	public function describeBeard():void {
 //Beards!
@@ -1552,6 +1568,9 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if(eyeType == Eyes.ORC){
 			outputText("  Your [eyecolor], slanted eyes have slitted pupils. They usually seem to gleam with a sort of malice, avarice, or lechery, giving off beady-eyed vibe.");
+		}
+		else if(eyeType == Eyes.CAVE_WYRM){
+			outputText("  Dark blue iris with neon blue eyes pupil that glow in the dark.");
 		}
 		else outputText("  Your eyes are [eyecolor].");
 	}
@@ -1636,6 +1655,9 @@ public class PlayerAppearance extends BaseContent {
 			}
 			if (earType == Ears.GRYPHON){
 				outputText("  A duo of triangular, streamlined ears are located at each side of your head, helping you to pinpoint sounds. They’re covered in soft, [skin coat.color] fur and end in tufts.");
+			}
+			if (earType == Ears.CAVE_WYRM){
+				outputText("  Your ears are furry yet they do not actually belong to any known type of mammal. You suspect them to be related to an ancestry closer to that of the serpentine dragons they emulate.");
 			}
 			//</mod>
 			if (player.gills.type == Gills.FISH)
@@ -1723,6 +1745,9 @@ public class PlayerAppearance extends BaseContent {
 			}
 			if (earType == Ears.GRYPHON){
 				outputText("  Two triangular ears part your [hair] at each side of your head. They’re streamlined and adapted to fly, and are quite useful to locate sounds. They’re covered in soft, [skin coat.color] fur and end in tufts.");
+			}
+			if (earType == Ears.CAVE_WYRM){
+				outputText("  Your ears are furry yet they do not actually belong to any known type of mammal. You suspect them to be related to an ancestry closer to that of the serpentine dragons they emulate.");
 			}
 			//</mod>
 			if(player.antennae.type == Antennae.MANTIS)
@@ -2173,6 +2198,11 @@ public function RacialScores():void {
 	}
 	else if (player.catScore() >= 1 && player.catScore() < 4) outputText("\n<font color=\"#008000\">Half Cat-morph: " + player.catScore() + "</font>");
 	else if (player.catScore() < 1) outputText("\n<font color=\"#ff0000\">Half Cat-morph: 0</font>");
+	//Cave Wyrm
+	if (player.cavewyrmScore() >= 10) outputText("\n<font color=\"#0000a0\">Cave Wyrm: " + player.cavewyrmScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Tou, -" + (30 * (1 + player.newGamePlusMod())) + " max Wis, +" + (50 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+	else if (player.cavewyrmScore() >= 5 && player.cavewyrmScore() < 10) outputText("\n<font color=\"#0000a0\">Half Cave Wyrm: " + player.cavewyrmScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (35 * (1 + player.newGamePlusMod())) + " max Tou, -" + (15 * (1 + player.newGamePlusMod())) + " max Wis, +" + (25 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+	else if (player.cavewyrmScore() >= 1 && player.cavewyrmScore() < 5) outputText("\n<font color=\"#008000\">Half Cave Wyrm: " + player.cavewyrmScore() + "</font>");
+	else if (player.cavewyrmScore() < 1) outputText("\n<font color=\"#ff0000\">Half Cave Wyrm: 0</font>");
 	//Centaur
 	if (player.centaurScore() >= 8) outputText("\n<font color=\"#0000a0\">Centaur: " + player.centaurScore() + " (+" + (40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (80 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max HP)</font>");
 	else if (player.centaurScore() >= 1 && player.centaurScore() < 8) outputText("\n<font color=\"#008000\">Centaur: " + player.centaurScore() + "</font>");
@@ -2517,16 +2547,18 @@ public function RacialScores():void {
 	else if (player.nagaScore() >= 1 && player.nagaScore() < 4) outputText("\n<font color=\"#008000\">Half-Naga: " + player.nagaScore() + "</font>");
 	else if (player.nagaScore() < 1) outputText("\n<font color=\"#ff0000\">Half-Naga: 0</font>");
 	//Nekomata
-	if (player.nekomataScore() >= 11) {
-		outputText("\n<font color=\"#0000a0\">Nekomata: " + player.nekomataScore() + " (");
+	if (player.nekomataScore() >= 10) {
+		if (player.tailType == 8 && player.tailCount >= 2 && player.nekomataScore() >= 12) outputText("\n<font color=\"#0000a0\">Elder Nekomata: " + player.nekomataScore() + " (");
+		else outputText("\n<font color=\"#0000a0\">Nekomata: " + player.nekomataScore() + " (");
 		if (player.findPerk(PerkLib.Flexibility) > 0) {
 			if (player.findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) outputText("+" + (60 * (1 + player.newGamePlusMod())) + " ");
 			else outputText("+" + (50 * (1 + player.newGamePlusMod())) + " ");
 		}
 		else outputText("+" + (40 * (1 + player.newGamePlusMod())) + " ");
-		outputText("max Spe, +" + (40 * (1 + player.newGamePlusMod())) + " max Int, +" + (85 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
+		if (player.tailType == 8 && player.tailCount >= 2 && player.nekomataScore() >= 12) outputText("max Spe, +" + (40 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max Wis, +20% max Soulforce)</font>");
+		else outputText("max Spe, +" + (30 * (1 + player.newGamePlusMod())) + " max Int, +" + (80 * (1 + player.newGamePlusMod())) + " max Wis, +10% max Soulforce)</font>");
 	}
-	else if (player.nekomataScore() >= 1 && player.nekomataScore() < 11) outputText("\n<font color=\"#008000\">Nekomata: " + player.nekomataScore() + "</font>");
+	else if (player.nekomataScore() >= 1 && player.nekomataScore() < 10) outputText("\n<font color=\"#008000\">Nekomata: " + player.nekomataScore() + "</font>");
 	else if (player.nekomataScore() < 1) outputText("\n<font color=\"#ff0000\">Nekomata: 0</font>");
 	outputText(" <font color=\"#ff0000\">NOT YET FULLY FUNCTIONAL RACE FOR PC</font>");
 	//Oni
@@ -2770,4 +2802,4 @@ public function GenderForcedSettingFemale():void {
 		else outputText("<b>Yo, this is an error.</b>");
 	}
 }
-}
+}

@@ -54,6 +54,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const AVIAN:int            	  = 44;//button 0 on 4th page of metamorph
 	public static const GRYPHON:int            	  = 45;
 	public static const ORC:int	            	  = 46;
+	public static const CAVE_WYRM:int	          = 47;
 	// Don't forget to add new types in DebugMenu.as list LOWER_TYPE_CONSTANTS
 	
 	override public function set type(value:int):void {
@@ -68,6 +69,7 @@ public class LowerBody extends SaveableBodyPart {
 			case BEE:
 			case BUNNY:
 			case CAT:
+			case CAVE_WYRM:
 			case CHITINOUS_SPIDER_LEGS:
 			case DEMONIC_CLAWS:
 			case DEMONIC_HIGH_HEELS:
@@ -87,12 +89,12 @@ public class LowerBody extends SaveableBodyPart {
 			case LIZARD:
 			case MANTIS:
 			case ONI:
+			case ORC:
 			case ORCA:
 			case PLANT_HIGH_HEELS:
 			case PLANT_ROOT_CLAWS:
 			case RACCOON:
 			case RAIJU:
-			case RED_PANDA:
 			case RED_PANDA:
 			case SALAMANDER:	
 			case SHARK:

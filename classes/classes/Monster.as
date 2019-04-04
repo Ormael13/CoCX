@@ -286,6 +286,11 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) temp += (150 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) temp += (225 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) temp += (300 * (1 + newGamePlusMod()));
+			var multimax:Number = 1;
+			if (findPerk(PerkLib.LimitBreakerBody1stStage) >= 0) multimax += 0.05;
+			if (findPerk(PerkLib.LimitBreakerBody2ndStage) >= 0) multimax += 0.1;
+			temp *= multimax;
+			temp = Math.round(temp);
 			return temp;
 		}
 		protected override function maxHP_mult():Number {
@@ -337,6 +342,7 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.DemonicDesireI) >= 0) temp += Math.round(this.lib * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.JobCourtesan) >= 0) temp += 20;
 			if (findPerk(PerkLib.JobSeducer) >= 0) temp += 10;
+			if (findPerk(PerkLib.PrestigeJobGreySage) >= 0) temp += 100;
 			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) temp += 50;
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) temp += (50 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) temp += (75 * (1 + newGamePlusMod()));
@@ -352,6 +358,11 @@ import flash.utils.getQualifiedClassName;
 			if (this.level >= 42) temp += (this.level - 42) * 5;
 			if (this.level >= 72) temp += (this.level - 72) * 10;
 			if (this.level >= 102) temp += (this.level - 102) * 20;
+			var multimax:Number = 1;
+			if (findPerk(PerkLib.LimitBreakerHeart1stStage) >= 0) multimax += 0.05;
+			if (findPerk(PerkLib.LimitBreakerHeart2ndStage) >= 0) multimax += 0.1;
+			temp *= multimax;
+			temp = Math.round(temp);
 			return temp;
 		}
 		
@@ -391,6 +402,11 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) temp += (100 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) temp += (150 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) temp += (200 * (1 + newGamePlusMod()));
+			var multimax:Number = 1;
+			if (findPerk(PerkLib.LimitBreakerHeart1stStage) >= 0) multimax += 0.05;
+			if (findPerk(PerkLib.LimitBreakerHeart2ndStage) >= 0) multimax += 0.1;
+			temp *= multimax;
+			temp = Math.round(temp);
 			return temp;
 		}
 		
@@ -453,7 +469,12 @@ import flash.utils.getQualifiedClassName;
 				if (findPerk(PerkLib.SoulEmperor) >= 0) temp += 60;
 				if (findPerk(PerkLib.SoulAncestor) >= 0) temp += 60;
 			}
-			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) temp *= 1.1;
+			var multimax:Number = 1;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.LimitBreakerSoul1stStage) >= 0) multimax += 0.05;
+			if (findPerk(PerkLib.LimitBreakerSoul2ndStage) >= 0) multimax += 0.1;
+			temp *= multimax;
+			temp = Math.round(temp);
 			if (hasPerk(PerkLib.EnemyTrueDemon) || (hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.Sentience))) temp = 0;
 			return temp;
 		}
@@ -501,7 +522,11 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.GreaterCrinosShape) >= 0) temp += 80;
 			if (findPerk(PerkLib.MasterCrinosShape) >= 0) temp += 160;
 			if (findPerk(PerkLib.Berzerker) >= 0) temp += 100;
+			if (findPerk(PerkLib.ColdFury) >= 0) temp += 50;
+			if (findPerk(PerkLib.ColderFury) >= 0) temp += 75;
 			if (findPerk(PerkLib.Lustzerker) >= 0) temp += 100;
+			if (findPerk(PerkLib.ColdLust) >= 0) temp += 50;
+			if (findPerk(PerkLib.ColderLust) >= 0) temp += 75;
 			if (findPerk(PerkLib.PrestigeJobBerserker) >= 0) temp += 200;
 			if (findPerk(PerkLib.PrestigeJobTempest) >= 0) temp += 100;
 			if (findPerk(PerkLib.Rage) >= 0) temp += 300;
@@ -512,6 +537,13 @@ import flash.utils.getQualifiedClassName;
 				temp += 500;
 				if (findPerk(PerkLib.EnemyGroupType) >= 0) temp += 2000;
 			}
+			var multimax:Number = 1;
+			if (game.player.orcScore() >= 5) multimax += 0.1;
+			if (game.player.orcScore() >= 11) multimax += 0.1;
+			if (findPerk(PerkLib.LimitBreakerBody1stStage) >= 0) multimax += 0.05;
+			if (findPerk(PerkLib.LimitBreakerBody2ndStage) >= 0) multimax += 0.1;
+			temp *= multimax;
+			temp = Math.round(temp);
 			if (hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.Sentience)) temp = 0;
 			return temp;
 		}
@@ -543,11 +575,14 @@ import flash.utils.getQualifiedClassName;
 				temp += Math.round(this.inte * (1 + newGamePlusMod()));
 				temp += Math.round(this.wis * (1 + newGamePlusMod()));
 			}
-			if (findPerk(PerkLib.Archmage) >= 0 && inte >= 75) temp += 45;
+			if (findPerk(PerkLib.Archmage) >= 0 && inte >= 100) temp += 60;
 			if (findPerk(PerkLib.Channeling) >= 0 && inte >= 60) temp += 30;
-			if (findPerk(PerkLib.GrandArchmage) >= 0 && inte >= 100) temp += 60;
-			if (findPerk(PerkLib.GreyArchmage) >= 0 && inte >= 125) temp += 150;
-			if (findPerk(PerkLib.GreyMage) >= 0 && inte >= 125) temp += 105;
+			if (findPerk(PerkLib.GrandArchmage) >= 0 && inte >= 125) temp += 75;
+			if (findPerk(PerkLib.GrandArchmage2ndCircle) >= 0 && inte >= 150) temp += 90;
+			if (findPerk(PerkLib.GrandArchmage3rdCircle) >= 0 && inte >= 175) temp += 105;
+			if (findPerk(PerkLib.GrandMage) >= 0 && inte >= 75) temp += 45;
+			if (findPerk(PerkLib.GreyArchmage) >= 0 && inte >= 225) temp += 200;
+			if (findPerk(PerkLib.GreyMage) >= 0 && inte >= 200) temp += 150;
 			if (findPerk(PerkLib.Mage) >= 0 && inte >= 50) temp += 30;
 			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) temp += 15;
 			if (findPerk(PerkLib.JobSorcerer) >= 0) temp += 15;
@@ -556,14 +591,16 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.EromancyBeginner) >= 0) temp += Math.round(this.inte);
 			if (findPerk(PerkLib.EromancyExpert) >= 0) temp += Math.round(this.inte);
 			if (findPerk(PerkLib.EromancyMaster) >= 0) temp += Math.round(this.inte * 2);
+			var tempmulti:Number = 1;
 			if (findPerk(PerkLib.ArcaneRegenerationMinor) >= 0) {
-				var tempmulti:Number = 1;
 				tempmulti += 0.1;
 				if (findPerk(PerkLib.ArcaneRegenerationMajor) >= 0) tempmulti += 0.2;
 				if (findPerk(PerkLib.ArcaneRegenerationEpic) >= 0) tempmulti += 0.3;
 				if (findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0) tempmulti += 0.4;
 				temp *= tempmulti;
 			}
+			if (findPerk(PerkLib.LimitBreakerSoul1stStage) >= 0) tempmulti += 0.05;
+			if (findPerk(PerkLib.LimitBreakerSoul2ndStage) >= 0) tempmulti += 0.1;
 			if (hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.Sentience)) temp = 0;
 			return temp;
 		}
@@ -1751,7 +1788,7 @@ import flash.utils.getQualifiedClassName;
 
 		public function doAI():void
 		{
-			if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FreezingBreathStun) || hasStatusEffect(StatusEffects.StunnedTornado) || hasStatusEffect(StatusEffects.Polymorphed)) {
+			if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FreezingBreathStun) || hasStatusEffect(StatusEffects.StunnedTornado) || hasStatusEffect(StatusEffects.Polymorphed) || hasStatusEffect(StatusEffects.HypnosisNaga)) {
 				if (!handleStun()) return;
 			}
 			if (hasStatusEffect(StatusEffects.Fear)) {
@@ -2270,6 +2307,14 @@ import flash.utils.getQualifiedClassName;
 				}
 				else outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " currently distracted!</b>\n\n");
 			}
+			if(hasStatusEffect(StatusEffects.HypnosisNaga)) {
+				addStatusValue(StatusEffects.HypnosisNaga,1,-1);
+				if(statusEffectv1(StatusEffects.HypnosisNaga) <= 0) {
+					outputText("<b>You try to prolong the trance but " + a + short + " finally snaps out.</b>\n\n");
+					removeStatusEffect(StatusEffects.HypnosisNaga);
+				}
+				else outputText("<b>" + capitalA + short + " is lost in your gaze unable to act.</b>\n\n");
+			}
 			if(hasStatusEffect(StatusEffects.Earthshield)) {
 				outputText("<b>" + capitalA + short + " is protected by a shield of rocks!</b>\n\n");
 			}
@@ -2526,7 +2571,8 @@ import flash.utils.getQualifiedClassName;
 				}
 				//Deal damage if still wounded.
 				else {
-					var store4:Number = (player.str + player.spe) * 2.5;
+					var store4:Number = (player.str + player.spe + player.tou) * 2.5;
+					store4 += maxHP() * statusEffectv2(StatusEffects.BurnDoT);
 					store4 = SceneLib.combat.doDamage(store4);
 					if(plural) outputText(capitalA + short + " burn from lingering Burn after-effect. <b>(<font color=\"#800000\">" + store4 + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " burns from lingering Burn after-effect. <b>(<font color=\"#800000\">" + store4 + "</font>)</b>\n\n");
@@ -2547,6 +2593,25 @@ import flash.utils.getQualifiedClassName;
 					store6 = SceneLib.combat.doDamage(store6);
 					if(plural) outputText(capitalA + short + " burn from lingering Fire Punch after-effect. <b>(<font color=\"#800000\">" + store6 + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " burns from lingering Fire Punch after-effect. <b>(<font color=\"#800000\">" + store6 + "</font>)</b>\n\n");
+				}
+			}
+			//Acid DoT
+			if (hasStatusEffect(StatusEffects.AcidDoT)) {
+				//Countdown to heal
+				addStatusValue(StatusEffects.AcidDoT,1,-1);
+				if(statusEffectv3(StatusEffects.AcidDoT) > 1) addStatusValue(StatusEffects.AcidDoT,3,-1);
+				//Heal wounds
+				if(statusEffectv1(StatusEffects.AcidDoT) <= 0) {
+					outputText("Wound left by Acid " + a + short + " finally close ups.\n\n");
+					removeStatusEffect(StatusEffects.AcidDoT);
+				}
+				//Deal damage if still wounded.
+				else {
+					var store7:Number = (player.str + player.spe + player.tou) * 2.5;
+					store7 += maxHP() * statusEffectv2(StatusEffects.AcidDoT);
+					store7 = SceneLib.combat.doDamage(store7);
+					if(plural) outputText(capitalA + short + " are hurt by lingering Acid after-effect. <b>(<font color=\"#800000\">" + store4 + "</font>)</b>\n\n");
+					else outputText(capitalA + short + " is hurt by lingering Acid after-effect. <b>(<font color=\"#800000\">" + store4 + "</font>)</b>\n\n");
 				}
 			}
 			//regeneration perks for monsters
@@ -2710,6 +2775,9 @@ import flash.utils.getQualifiedClassName;
 				str += (60 * (1 + newGamePlusMod()));
 				tou += (20 * (1 + newGamePlusMod()));
 			}
+			if (hasPerk(PerkLib.PrestigeJobGreySage)) {
+				inte += (80 * (1 + newGamePlusMod()));
+			}
 			if (hasPerk(PerkLib.PrestigeJobSeer)) {
 				inte += (60 * (1 + newGamePlusMod()));
 				wis += (20 * (1 + newGamePlusMod()));
@@ -2783,6 +2851,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.EpicSensitivity)) sens += (35 + (5 * (1 + newGamePlusMod())));
 			if (hasPerk(PerkLib.LegendarySensitivity)) sens += (50 + (10 * (1 + newGamePlusMod())));
 			if (hasPerk(PerkLib.MythicalSensitivity)) sens += (65 + (15 * (1 + newGamePlusMod())));
+			if (hasPerk(PerkLib.IronStomachSu)) tou += (5 * (1 + newGamePlusMod()));
 			if (level > 25) bonusStatsAmp += 0.1*((int)(level-1)/25);
 			bonusAscStr += bonusStatsAmp * str * newGamePlusMod();
 			bonusAscTou += bonusStatsAmp * tou * newGamePlusMod();
@@ -2805,6 +2874,19 @@ import flash.utils.getQualifiedClassName;
 			this.wis += bonusAscWis;
 			this.lib += bonusAscLib;
 			this.sens += bonusAscSen;
+			var multiStatsAmp1:Number = 0;
+			if (hasPerk(PerkLib.LimitBreakerFlesh1stStage)) multiStatsAmp1 += (10 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.LimitBreakerFlesh2ndStage)) multiStatsAmp1 += (20 * (1 + newGamePlusMod()));
+			this.str += multiStatsAmp1;
+			this.tou += multiStatsAmp1;
+			this.spe += multiStatsAmp1;
+			var multiStatsAmp2:Number = 0;
+			if (hasPerk(PerkLib.LimitBreakerPsyche1stStage)) multiStatsAmp2 += (10 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.LimitBreakerPsyche2ndStage)) multiStatsAmp2 += (20 * (1 + newGamePlusMod()));
+			this.inte += multiStatsAmp2;
+			this.wis += multiStatsAmp2;
+			this.lib += multiStatsAmp2;
+			this.sens += multiStatsAmp2;
 			bonusAscMaxHP += bonusAscStr + bonusAscTou + bonusAscSpe + bonusAscInt + bonusAscWis + bonusAscLib + bonusAscSen;
 			if (level > 10) bonusAscMaxHP *= (int)(level / 10 + 1);
 			weaponAttack += (1 + (int)(weaponAttack / 5)) * newGamePlusMod();
@@ -2818,4 +2900,4 @@ import flash.utils.getQualifiedClassName;
 		}
 	}
 }
-
+

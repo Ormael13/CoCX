@@ -153,7 +153,30 @@ public class CombatUI extends BaseCombatContent {
 			} else {
 				btnMelee.show("Approach", combat.approachAfterKnockback3, "Close some distance between you and your opponent.");
 			}
-		} else if (monster.hasStatusEffect(StatusEffects.Constricted)) {
+		} else if (monster.hasStatusEffect(StatusEffects.HypnosisNaga) && !monster.hasStatusEffect(StatusEffects.Constricted)) {
+			menu();
+			addButton(0, "Heal", combat.HypnosisHeal);
+			addButton(1, "Attack", combat.HypnosisAttack);
+			addButton(2, "Coil", combat.HypnosisCoil);
+			if (player.hasPerk(PerkLib.HollowFangsEvolved)) {
+				addButton(3, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
+				if (player.fatigueLeft() <= combat.physicalCost(20)) {
+					button(3).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
+				}
+			}
+			addButton(4, "Maintain", combat.HypnosisMaintain);
+		} else if (monster.hasStatusEffect(StatusEffects.HypnosisNaga) && monster.hasStatusEffect(StatusEffects.Constricted)) {
+			menu();
+			addButton(0, "Squeeze", SceneLib.desert.nagaScene.naggaSqueeze).hint("Squeeze some HP out of your opponent! Break hypnosis! \n\nFatigue Cost: " + physicalCost(20) + "");
+			addButton(1, "Tease", SceneLib.desert.nagaScene.naggaTease).hint("Deals lesser lust damage. Does not break hypnosis.");
+			if (player.hasPerk(PerkLib.HollowFangsEvolved)) {
+				addButton(3, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. Break hypnosis! \n\nFatigue Cost: " + physicalCost(20) + "");
+				if (player.fatigueLeft() <= combat.physicalCost(20)) {
+					button(3).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
+				}
+			}
+			addButton(4, "Maintain", combat.HypnosisMaintain);
+		} else if (monster.hasStatusEffect(StatusEffects.Constricted) && !monster.hasStatusEffect(StatusEffects.HypnosisNaga)) {
 			menu();
 			addButton(0, "Squeeze", SceneLib.desert.nagaScene.naggaSqueeze).hint("Squeeze some HP out of your opponent! \n\nFatigue Cost: " + physicalCost(20) + "");
 			addButton(1, "Tease", SceneLib.desert.nagaScene.naggaTease);
@@ -239,15 +262,11 @@ public class CombatUI extends BaseCombatContent {
 				}
 			}
 		} else if (flags[kFLAGS.PLAYER_COMPANION_1] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) {
-			flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") {
-				combat.comfoll.neisaCombatActions();
-			}
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") combat.comfoll.neisaCombatActions();
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") combat.comfoll.neisaCombatActions();
 		} else if (flags[kFLAGS.PLAYER_COMPANION_2] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) {
-			flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
-			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Neisa") {
-				combat.comfoll.neisaCombatActions();
-			}
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Etna") combat.comfoll.neisaCombatActions();
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Neisa") combat.comfoll.neisaCombatActions();
 		}
 		
 		// Modifications - monster-special actions

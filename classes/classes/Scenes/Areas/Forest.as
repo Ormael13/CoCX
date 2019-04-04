@@ -109,7 +109,7 @@ use namespace CoC;
 						chance: 0.6,
 						call  : function ():void {
 							if (flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0
-								&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 24) {
+								&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16) {
 								tamaniDaughtersScene.encounterTamanisDaughters();
 							} else {
 								tamaniScene.encounterTamani();
@@ -123,12 +123,11 @@ use namespace CoC;
 						}
 					}, {
 						name  : "Tamani_Daughters",
-						chance: 0.6,
 						call  : encounterTamanisDaughtersFn,
 						when  : function ():Boolean {
 							return player.gender > 0
 								&& player.cockTotal() > 0
-								&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 24
+								&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16
 								&& flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 3;
 						}
 					}, {
@@ -311,7 +310,7 @@ use namespace CoC;
 				chance: 0.6,
 				call  : function ():void {
 					if (flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0
-						&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 24) {
+						&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16) {
 						tamaniDaughtersScene.encounterTamanisDaughters();
 					} else {
 						tamaniScene.encounterTamani();
@@ -325,12 +324,11 @@ use namespace CoC;
 				}
 			}, {
 				name  : "Tamani_Daughters",
-				chance: 0.6,
 				call  : encounterTamanisDaughtersFn,
 				when  : function ():Boolean {
 					return player.gender > 0
 						   && player.cockTotal() > 0
-						   && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 24
+						   && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16
 						   && flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 3;
 				}
 			}, {

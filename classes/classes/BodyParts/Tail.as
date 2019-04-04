@@ -53,6 +53,9 @@ public class Tail extends SaveableBodyPart {
 	public static const GRIFFIN:int          	= 37;
 	public static const LION:int                = 38;
 	public static const BURNING:int             = 39;//button 0 on 5th page of metamorph
+	public static const NEKOMATA_FORKED_1_3:int = 40;
+	public static const NEKOMATA_FORKED_2_3:int = 41;
+	public static const CAVE_WYRM:int           = 42;
 	// Don't forget to add new types in DebugMenu.as list TAIL_TYPE_CONSTANTS
 
 	override public function set type(value:int):void {
@@ -75,7 +78,7 @@ public class Tail extends SaveableBodyPart {
 			DOG, DEMONIC, COW, SHARK, CAT,
 			LIZARD, KANGAROO, FOX, DRACONIC,
 			RACCOON, MOUSE, FERRET, BEHEMOTH, SCORPION,
-			WOLF
+			SALAMANDER, WOLF, LION, BURNING, CAVE_WYRM
 			   ].indexOf(type) >= 0;
 
 	}

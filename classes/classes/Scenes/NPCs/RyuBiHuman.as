@@ -19,7 +19,8 @@ public class RyuBiHuman extends Monster
 			this.a = " ";
 			this.short = "RyuBi";
 			this.imageName = "ryubihuman";
-			this.long = "You are currently 'battling' RyuBi in human form, in a playfight.  At least, that was the intention.  The way she lashes her tail along the ground, with claws spread and teeth bared ferociously, makes you wonder.";
+			this.long = "You are currently battling female soul cultivator.";
+			//this.long = "You are currently 'battling' RyuBi in human form, in a playfight.  At least, that was the intention.  The way she lashes her tail along the ground, with claws spread and teeth bared ferociously, makes you wonder.";
 			createVagina(true,VaginaClass.WETNESS_NORMAL,VaginaClass.LOOSENESS_NORMAL);
 			createStatusEffect(StatusEffects.BonusVCapacity,10,0,0,0);
 			createBreastRow(Appearance.breastCupInverse("F"));
@@ -45,7 +46,7 @@ public class RyuBiHuman extends Monster
 			this.lust = 20;
 			this.lustVuln = .25;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 21;
+			this.level = 42;
 			this.gems = 15 + rand(8);
 			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.2);//zamienić na worek of spirit stones ^^
 			this.horns.type = Horns.DRACONIC_X4_12_INCH_LONG;

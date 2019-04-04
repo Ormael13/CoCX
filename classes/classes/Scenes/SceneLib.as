@@ -167,6 +167,8 @@ public class SceneLib {
 
     public static var sheilaScene:SheilaScene = new SheilaScene();
 
+    public static var samirah:SamirahScene = new SamirahScene();
+
     public static var shouldraFollower:ShouldraFollower = new ShouldraFollower();
 
     public static var shouldraScene:ShouldraScene = new ShouldraScene();

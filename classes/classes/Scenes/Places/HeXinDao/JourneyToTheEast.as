@@ -8,9 +8,12 @@ package classes.Scenes.Places.HeXinDao
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.SceneLib;
 	import classes.BodyParts.Tail;
+	import classes.Scenes.Dungeons.RiverDungeon;
 	
 	public class JourneyToTheEast extends HeXinDaoAbstractContent
 	{
+		public var riverdungeon:RiverDungeon = new RiverDungeon();
+		
 		public function JourneyToTheEast() 
 		{}
 		
@@ -27,6 +30,9 @@ package classes.Scenes.Places.HeXinDao
 			menu();
 			addButton(0, "Drink", drinkAlcohol);
 			addButton(4, "Adv.Guild", BoardkeeperYangMain);
+			if (flags[kFLAGS.NEISA_FOLLOWER] == 1) addButton(11, "ShieldMaiden", firstTimeMeetingNeisa);
+			if (flags[kFLAGS.NEISA_FOLLOWER] == 2) addButton(11, "Neisa", meetingNeisaAfterDecline);
+			//if (flags[kFLAGS.NEISA_FOLLOWER] == 4) addButton(11, "Neisa", meetingNeisaPostDungeonExploration);
 			//addButtonDisabled(12, "???", "You see some suspicious looking squirrel in one of inn corners. (Liadri + Star should bring this npc to more completness)");
 			addButton(14, "Leave", heXinDao.riverislandVillageStuff);
 		}
@@ -120,18 +126,18 @@ package classes.Scenes.Places.HeXinDao
 			outputText("The panda girl nod and allow you to browse the board.\n\n");
 			outputText("\"<i>Plenty of quest available. Which one will you take?</i>\"\n\n");
 			menu();
-			addButton(0, "Imps", BoardkeeperYangQuestImps1).hint("Cooper tier Quest.");
-			addButton(1, "Ferals(1)", BoardkeeperYangQuestFerals1).hint("Cooper tier Quest.");
-			addButton(2, "Ferals(2)", BoardkeeperYangQuestFerals2).hint("Cooper tier Quest.");
-			addButton(3, "Minotaurs", BoardkeeperYangQuestMinotaurs).hint("Cooper tier Quest.");
+			addButton(0, "Imps", BoardkeeperYangQuestImps1).hint("Copper tier Quest.");
+			addButton(1, "Ferals(1)", BoardkeeperYangQuestFerals1).hint("Copper tier Quest.");
+			addButton(2, "Ferals(2)", BoardkeeperYangQuestFerals2).hint("Copper tier Quest.");
+			addButton(3, "Minotaurs", BoardkeeperYangQuestMinotaurs).hint("Copper tier Quest.");
 			if (player.hasKeyItem("Adventurer Guild: Iron plate") >= 0) {
 				addButton(4, "Demons", BoardkeeperYangQuestDemons1).hint("Iron tier Quest.");
 			}
 			else {
 				addButtonDisabled(4, "Demons", "Only for Iron tier Adventurer.");
 			}
-			//addButton(5, "Gel", BoardkeeperYangQuestGel).hint("Cooper tier Quest.");
-			addButton(6, "Chitin", BoardkeeperYangQuestChitin).hint("Cooper tier Quest.");
+			//addButton(5, "Gel", BoardkeeperYangQuestGel).hint("Copper tier Quest.");
+			addButton(6, "Chitin", BoardkeeperYangQuestChitin).hint("Copper tier Quest.");
 			if (flags[kFLAGS.GALIA_LVL_UP] == 0.53 || (flags[kFLAGS.GALIA_LVL_UP] >= 0.5 && flags[kFLAGS.GALIA_TALKS] > 0)) addButtonDisabled(10, "Ferals (C)", "You already finished this quest.");
 			else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) >= 2) {
 				if (flags[kFLAGS.GALIA_LVL_UP] >= 0.44 && flags[kFLAGS.GALIA_AFFECTION] == 10) addButton(10, "Ferals (C)", BoardkeeperYangQuestEzekiel1a);
@@ -478,11 +484,10 @@ package classes.Scenes.Places.HeXinDao
 						flags[kFLAGS.SPIRIT_STONES] += 3;
 						statScreenRefresh();
 					}
-					else outputText("You try to turn in the quest but Yang tells you you don’t have enough chitin yet.\n\n");
+					else outputText("You try to turn in the quest but Yang tells you you don’t have enough gel yet.\n\n");
 				}
 				else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests4) == 2) {
-					outputText("\"<i>You may or may not like that one. The good news is you are going out to gather chitin the bad news is it primarily drop from bee girls which is a friendly species so your morality may be put to the test. How you handle that is up to you, ");
-					outputText("for all I know chitin is often found on the forest ground where bee girls trives. Regardless bring us back 5 chitin and your job will be done.</i>\"\n\n");
+					outputText("\"<i>You may or may not like that one. The good news is you are going out to gather gel the bad news is it primarily drop from goo girls which is a friendly species so your morality may be put to the test. How you handle that is up to you. Regardless bring us back 5 gel and your job will be done.</i>\"\n\n");
 					player.addStatusValue(StatusEffects.AdventureGuildQuests4, 2, 2);
 				}
 				else {
@@ -498,8 +503,7 @@ package classes.Scenes.Places.HeXinDao
 				}
 			}
 			else {
-				outputText("\"<i>You may or may not like that one. The good news is you are going out to gather chitin the bad news is it primarily drop from bee girls which is a friendly species so your morality may be put to the test. How you handle that is up to you, ");
-				outputText("for all I know chitin is often found on the forest ground where bee girls trives. Regardless bring us back 5 chitin and your job will be done.</i>\"\n\n");
+				outputText("\"<i>You may or may not like that one. The good news is you are going out to gather gel the bad news is it primarily drop from goo girls which is a friendly species so your morality may be put to the test. How you handle that is up to you. Regardless bring us back 5 gel and your job will be done.</i>\"\n\n");
 				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests4)) player.addStatusValue(StatusEffects.AdventureGuildQuests4, 2, 1);
 				else player.createStatusEffect(StatusEffects.AdventureGuildQuests4, 0, 1, 0, 0);
 			}
@@ -697,6 +701,56 @@ package classes.Scenes.Places.HeXinDao
 				}
 			}
 			doNext(BoardkeeperYangMain);
+		}
+		
+		public function firstTimeMeetingNeisa():void {
+			clearOutput();
+			outputText("A woman figure in heavy armor is sitting on one of the chair. You can barely see that she got blue eyes and black hairs under that highly covering helmet visor.\n\n");
+			outputText("\"<i>What you looking at? If it's for a job yes I’m a merc and I will do my craft for cash if its not then leave me back to my drink.</i>\"\n\n");
+			outputText("You outright admit to indeed be looking for  a mercenary. What kind of payment shed require to simply accompany you in that cave outside?\n\n");
+			outputText("\"<i>Oh this again? Guess the guards had enough after the tenth idiot disappeared in the depths and never came back up. Sure I could accompany you in there providing you give me a proper pay in treasures. Hell It doesn't look like you are getting in otherwise so you might as well deal with it?</i>\"\n\n");
+			outputText("Do you purchase the mercenary Services?\n\n");
+			menu();
+			addButton(1, "Yes", firstTimeMeetingNeisaYes).hint("That will make you go to the dungeon right away!");
+			addButton(3, "No", firstTimeMeetingNeisaNo);
+		}
+		public function firstTimeMeetingNeisaYes():void {
+			outputText("You shake hand with the mercenary sealing the deal.\n\n");
+			outputText("\"<i>You won’t regret it down there, everything counts. By the way names Neisa try not to forget it too fast.</i>\"\n\n");
+			outputText("Well you finally can enter the dungeon. You guess having another warrior with you should at least reduce the chance whatever lives in there gets a shot at using your prone body if your defeated.\n\n");
+			outputText("Seeing as you come in pair the guards let you in thought with a final warning.\n\n");
+			outputText("\"<i>Try not to die down there a lot of people went in and never came back.</i>\"\n\n");
+			outputText("You will keep that in mind.\n\n");
+			var strNeisa:Number = 50;
+			strNeisa *= (1 + (0.2 * player.newGamePlusMod()));
+			strNeisa = Math.round(strNeisa);
+			var meleeAtkNeisa:Number = 12;
+			meleeAtkNeisa += (1 + (int)(meleeAtkNeisa / 5)) * player.newGamePlusMod();
+			player.createStatusEffect(StatusEffects.CombatFollowerNeisa, strNeisa, meleeAtkNeisa, 0, 0);
+			flags[kFLAGS.PLAYER_COMPANION_1] = "Neisa";
+			flags[kFLAGS.NEISA_FOLLOWER] = 3;
+			doNext(riverdungeon.enterDungeon);
+		}
+		public function firstTimeMeetingNeisaNo():void {
+			outputText("You are not interested into a mercenary right now but you thank her for proposing. She shrug it off.\n\n");
+			outputText("\"<i>No skin of my back come back over if ya change your mind.</i>\"\n\n");
+			flags[kFLAGS.NEISA_FOLLOWER] = 2;
+			doNext(curry(enteringInn,false));
+		}
+		public function meetingNeisaAfterDecline():void {
+			outputText("The mercenary come to attention as you approach her.\n\n");
+			outputText("\"<i>So changed your mind about it?</i>\"\n\n");
+			outputText("Do you hire her?\n\n");
+			menu();
+			addButton(1, "Yes", firstTimeMeetingNeisaYes).hint("That will make you go to the dungeon right away!");
+			addButton(3, "No", firstTimeMeetingNeisaNo);
+		}
+		public function meetingNeisaPostDungeonExploration():void {
+			outputText("Placeholder until this part of the text will be written.\n\n");
+			menu();
+			//addButton(1, "Yes", firstTimeMeetingNeisaYes);
+			//addButton(3, "No", firstTimeMeetingNeisaNo);
+			addButton(4, "Back", curry(enteringInn, false));
 		}
 		
 		public function ChiChiDrunkSex():void {

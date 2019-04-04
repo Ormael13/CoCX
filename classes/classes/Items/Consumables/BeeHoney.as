@@ -159,7 +159,7 @@ public class BeeHoney extends Consumable
 				player.removeBreastRow(player.breastRows.length - 1, 1);
 			}
 			//Antennae
-			if (changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && (player.antennae.type == Antennae.NONE || player.antennae.type == Antennae.MANTIS) && player.horns.count == 0 && Utils.rand(3) == 0) {
+			if (changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.antennae.type != Antennae.BEE && Utils.rand(3) == 0) {
 				if (player.antennae.type == Antennae.MANTIS) outputText("\n\nYour head itches momentarily as your two long prehensile antennae changes slowly into floppy ones similar to those seen at bees.");
 				else outputText("\n\nYour head itches momentarily as two floppy antennae sprout from your " + Appearance.hairDescription(player) + ".");
 				mutations.setAntennae(Antennae.BEE);
@@ -256,12 +256,11 @@ public class BeeHoney extends Consumable
 			//Grow new bee wings if player has none.
 			if (changes < changeLimit && player.wings.type == Wings.NONE && Utils.rand(4)) {
 				changes++;
-			//	if (player.wings.type == CoC.SHARK_FIN) outputText("\n\nYou feel an itching on your large back-fin as something begins growing there.  You twist and contort yourself, trying to scratch and bring yourself relief, and failing miserably.  A sense of relief erupts from you as you feel something new grow out from your fin.  You hastily remove the top portion of your [armor] and marvel as a pair of small bee-like wings sprout from your back, replacing the fin that once grew there.  Tenderly flexing your new muscles, you find you can flap them quite fast.  Unfortunately you can't seem to flap your little wings fast enough to fly, but they would certainly slow a fall.  A few quick modifications to your [armor] later and you are ready to continue your journey with <b>your new bee wings</b>.");
 				outputText("\n\nYou feel an itching between your shoulder-blades as something begins growing there.  You twist and contort yourself, trying to scratch and bring yourself relief, and failing miserably.  A sense of relief erupts from you as you feel something new grow out from your body.  You hastily remove the top portion of your [armor] and marvel as a pair of small bee-like wings sprout from your back.  Tenderly flexing your new muscles, you find you can flap them quite fast.  Unfortunately you can't seem to flap your little wings fast enough to fly, but they would certainly slow a fall.  A few quick modifications to your [armor] later and you are ready to continue your journey with <b>your new bee wings</b>.");
 				mutations.setWingType(Wings.BEE_LIKE_SMALL, "small bee-like");
 			}
 			//Melt demon wings!
-			if (changes < changeLimit && (player.wings.type != Wings.BEE_LIKE_SMALL || player.wings.type != Wings.BEE_LIKE_LARGE)) {
+			if (changes < changeLimit && player.wings.type != Wings.BEE_LIKE_SMALL && player.wings.type != Wings.BEE_LIKE_LARGE) {
 				changes++;
 				outputText("\n\nYour wings ripple, jelly-like.  Worried, you crane back to look, and to your horror, they're melting away!  Runnels of amber honey trail down the wings' edges, building into a steady flow.  <b>In a moment, the only remnant of your wings is a puddle of honey in the dirt</b>.  Even that is gone in seconds, wicked into the dry soil.");
 				mutations.removeWings();
