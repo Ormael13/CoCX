@@ -6,15 +6,14 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Dungeons.RiverDungeon;
 	
 	public class NeisaFollower extends NPCAwareContent
 	{
-		public var riverdungeon:RiverDungeon = new RiverDungeon();
 		
 		public function NeisaFollower() 
-		{}//between 4 and 13 she get her counter go up by 1 each night and if it hit 13 she leave at the morning xD
-		//neisa follower flag: 1 - first exploring river dungeon, 2 - after first exploring, 3 - left camp due to not paid weekly paycheck, 4 to 13 - hired and staying in camp (4 to 10 - with PC having not yet paid her weekly paycheck - up to 3 days after deadline stays this way, 11 to 13 - when she's paid in time), 14 - after her affection rise high enough and she move from mercenary to camp member
+		{}//between 6 and 15 she get her counter go up by 1 each night and if it hit 15 she leave at the morning xD
+		//neisa follower flag: 1-3 - first exploring river dungeon, 4 - after first exploring, 5 - left camp due to not paid weekly paycheck (to make her return to camp req. to pay her that mercenary fee with all costs for delay so 10 days of fee not 7 - also her affection should drop to 0/pretty low after leaving camp due to not paid weekly paycheck),
+		//6 to 15 - hired and staying in camp (6 to 12 - with PC having not yet paid her weekly paycheck - up to 3 days after deadline stays this way, 13 to 15 - when she's paid in time), 16 - after her affection rise high enough and she move from mercenary to camp member
 		public function neisaAffection(changes:Number = 0):Number
 		{
 			flags[kFLAGS.NEISA_AFFECTION] += changes;
@@ -34,7 +33,7 @@ package classes.Scenes.NPCs
 			player.createStatusEffect(StatusEffects.CombatFollowerNeisa, 0, 0, 0, 0);
 			flags[kFLAGS.PLAYER_COMPANION_1] = "Neisa";
 			flags[kFLAGS.NEISA_FOLLOWER] = 1;
-			doNext(riverdungeon.enterDungeon);
+			//doNext(riverdungeon.enterDungeon);
 		}
 		/*
 		public function firstTimeLeavingRiverDungeon():void {

@@ -13,7 +13,7 @@ package classes.Scenes.NPCs
 		public function EtnaFollower() 
 		{}
 
-//flag ETNA_TALKED_ABOUT_HER]: 0 - not know her name, 1 - know her name, 2 - Etna in Yandere mode
+//flag ETNA_TALKED_ABOUT_HER: 0 - not know her name, 1 - know her name, 2 - Etna in Yandere mode
 
 public function etnaAffection(changes:Number = 0):Number
 {
@@ -438,7 +438,7 @@ public function etnaRapeIntro2():void
 }
 
 public function etnaCampMenu2():void {
-	if ((flags[kFLAGS.LUNA_JEALOUSY] > 100 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 150 && rand(10) < 8)) mishapsLunaEtna();
+	if ((flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8)) mishapsLunaEtna();
 	else etnaCampMenu();
 }
 
@@ -454,6 +454,10 @@ public function etnaCampMenu():void
 	if (flags[kFLAGS.ETNA_DAILY_VENOM_VIAL] > 0) addButtonDisabled(3, "Req. Venom", "You already asked her for a vial today.");
 	else addButton(3, "Req. Venom", etnaDailyVenomVial).hint("Ask Etna for a vial of her venom.");
 	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(4, "Spar", etnaSparsWithPC).hint("Ask Etna for a mock battle with sex for the winner.");
+	if (player.hasPerk(PerkLib.BasicLeadership)) {
+		if (flags[kFLAGS.PLAYER_COMPANION_1] != "") addButtonDisabled(5, "Team", "You already have other henchman accompany you. Ask it to stay at camp before you talk with Etna about accompaning you.");
+		else addButton(5, "Team", etnaHenchmanOption).hint("Ask Etna to join you in adventures outside camp or to stay in camp.");
+	}
 	addButton(14, "Back", camp.campLoversMenu);
 }
 
@@ -500,6 +504,34 @@ public function etnaTalkManticores():void
 	outputText("\"<i>I see where you're getting at. You wonder if I'm actually as corrupt as the cows out there. Well... in a sense, I suppose I am, after all it’s not like we haven't been banging the demons too. Heck, we’ve been banging them so much that to reward our interest into sucking them off, they pretty much gave us a boon so we could suck them even better. Namely this tail pussy that everyone in my race shares. It is our sign of a deal with them. I,  myself, consider it an improvement, as it allows me to consume twice as much cum as I would with my pretty mouth. Is there anything else you want to know?</i>\"\n\n");
 	doNext(etnaTalkMenu);
 	cheatTime(1/4);
+}
+
+public function etnaHenchmanOption():void
+{
+	clearOutput();
+	if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
+		outputText("\"<i>Nyaaaaa we hunting together -pcname-? This is going to be enjoyable!</i>\"\n\n");
+		outputText("Etna is now following you around.\n\n");
+		var strEtna:Number = 100;
+		var libEtna:Number = 170;
+		if (flags[kFLAGS.ETNA_LVL_UP] >= 1) {
+			strEtna += 10 * flags[kFLAGS.ETNA_LVL_UP];
+			libEtna += 20 * flags[kFLAGS.ETNA_LVL_UP];
+		}
+		strEtna *= (1 + (0.2 * player.newGamePlusMod()));
+		strEtna = Math.round(strEtna);
+		libEtna *= (1 + (0.2 * player.newGamePlusMod()));
+		libEtna = Math.round(libEtna);
+		player.createStatusEffect(StatusEffects.CombatFollowerEtna, strEtna, libEtna, 0, 0);
+		flags[kFLAGS.PLAYER_COMPANION_1] = "Etna";
+	}
+	else {
+		outputText("Etna is no longer following you around.\n\n");
+		player.removeStatusEffect(StatusEffects.CombatFollowerEtna);
+		flags[kFLAGS.PLAYER_COMPANION_1] = "";
+	}
+	doNext(etnaCampMenu);
+	cheatTime(1/12);
 }
 
 public function etnaSexMenu():void

@@ -45,34 +45,47 @@ use namespace CoC;
 			"You look over the Tentacled Bark Plates.  Need some better desc I suppose.");
 		public const DBAPLAT:SimpleUseable = new SimpleUseable("DBaPlat", "D.BarkPlates", "a Divine Bark Plates", 1000, 
 			"A Divine Bark Plates.",
-			"You look over the Divine Bark Plates.  Need some better desc I suppose.");	
-		public const SOULGEM:SimpleUseable = new SimpleUseable("SoulGem", "Soul Gem", "a Soul Gem", 2500, 
-			"A Soul Gem.",
-			"You examine the purplish crystal. It must be soul gem. It's used to capture and hold souls.");
+			"You look over the Divine Bark Plates.  Need some better desc I suppose.");
 		public const LETHITE:SimpleUseable = new SimpleUseable("Lethite", "Lethicite", "a chunk of lethicite", 1000, 
 			"A chunk of lethicite. It's rare as lethicite is only produced when a mortal becomes a demon and cums their souls out. A demon's favourite treat.",
 			"You examine the pinkish-purple crystal. It must be lethicite. You know that the demons like to consume them but you're sure there might be a use for it.");
-		public const IMPSKLL:SimpleUseable = new SimpleUseable("ImpSkll", "ImpSkull", "an imp skull", 25, 
-			"A skull taken from a slain imp.",
-			"You look at the imp skull.  A pair of horns protrude from the skull.  You admire the overall frame of the skull yet you find no obvious uses for it.");
-		public const DEMSKLL:SimpleUseable = new SimpleUseable("DemSkll", "DemonSkull", "a demon skull", 50, 
-			"A skull taken from a slain demon.",
-			"You look at the demon skull.  A pair of horns protrude from the skull.  You admire the overall frame of the skull yet you find no obvious uses for it.");
-		public const SEVTENT:SimpleUseable = new SimpleUseable("SevTent", "SevTent", "a severed tentacle", 50, 
-			"A severed tentacle taken from a slain tentacle beast.",
-			"You look at the severed tentacle skull.  It certain look a bit of...deformed more than any other tentacle you seen so far.  Is it natural occuring or forced mutation?");
-		public const FIMPSKL:SimpleUseable = new SimpleUseable("FImpSkl", "FImpSkul", "a feral imp skull", 25, 
-			"A skull taken from a slain feral imp.",
-			"You look at the feral imp skull.  A two pairs of horns protrude from the deformed skull.  You admire the overall frame of the skull yet you find no obvious uses for it.");
-		public const MINOHOR:SimpleUseable = new SimpleUseable("MinoHor", "MinoHorns", "a minotaur horns", 35, 
-			"A horns taken from a slain minotaur.",
-			"You look at the pair of minotaur horns.  You admire the overall frame of the horns yet you find no obvious uses for them.");
-		public const GOBOEAR:SimpleUseable = new SimpleUseable("GoboEar", "GoblinEar", "a goblin ear", 25, 
-			"A goblin ear taken from a slain goblin.",
-			"You look at the goblin ear.  You admire the overall curve of the ear yet you find no obvious uses for it.");
 		public const GOLCORE:SimpleUseable = new SimpleUseable("GolCore", "GolemCore", "a golem core", 1, 
 			"An undamaged core taken from a defeated golem.",
 			"You look at the undamaged golem core.  A simple small crystal sphere no larger than your fist that glows gently.  For those that know art of golem making it will be great use and for others it's uselss and better to sell it, preferably to merchant that specificaly buying such items.");
+		public const PCSHARD:SimpleUseable = new SimpleUseable("PCShard", "Purple Crystal Shard", "a Purple Crystal Shard", 1, 
+			"A Purple Crystal Shard.",
+			"You look at the purple crystal shard. It occasionally glows gently in your hand, but you can't seem to find a use for the shard.");
+		//MISCELLANEOUS
+		public const CONDOM :SimpleUseable = new SimpleUseable("Condom ", "Condom", "a packet of condom", 6,
+			"This wrapper contains a latex condom that can be worn over penis. It's designed to prevent pregnancy most of the time. Can be used in certain sex scenes.",
+			"You look at the unopened packet of condom.  If applicable, you can use the condom to prevent pregnancy most of the time.");
+		public const DEMSKLL:SimpleUseable = new SimpleUseable("DemSkll", "DemonSkull", "a demon skull", 50, 
+			"A skull taken from a slain demon.",
+			"You look at the demon skull.  A pair of horns protrude from the skull.  You admire the overall frame of the skull yet you find no obvious uses for it.");
+		public const FIMPSKL:SimpleUseable = new SimpleUseable("FImpSkl", "FImpSkul", "a feral imp skull", 25, 
+			"A skull taken from a slain feral imp.",
+			"You look at the feral imp skull.  A two pairs of horns protrude from the deformed skull.  You admire the overall frame of the skull yet you find no obvious uses for it.");
+		public const GOBOEAR:SimpleUseable = new SimpleUseable("GoboEar", "GoblinEar", "a goblin ear", 25, 
+			"A goblin ear taken from a slain goblin.",
+			"You look at the goblin ear.  You admire the overall curve of the ear yet you find no obvious uses for it.");
+		public const GLDSTAT:SimpleUseable = new SimpleUseable("GldStat", "GldStat", "a golden statue", 2000,
+			"An intricate golden idol of an androgynous humanoid figure with nine long tails.  It probably had some spiritual significance to its owner.",
+			"", SceneLib.forest.kitsuneScene.kitsuneStatue);
+		public const IMPSKLL:SimpleUseable = new SimpleUseable("ImpSkll", "ImpSkull", "an imp skull", 25, 
+			"A skull taken from a slain imp.",
+			"You look at the imp skull.  A pair of horns protrude from the skull.  You admire the overall frame of the skull yet you find no obvious uses for it.");
+		public const MINOHOR:SimpleUseable = new SimpleUseable("MinoHor", "MinoHorns", "a minotaur horns", 35, 
+			"A horns taken from a slain minotaur.",
+			"You look at the pair of minotaur horns.  You admire the overall frame of the horns yet you find no obvious uses for them.");
+		public const SEVTENT:SimpleUseable = new SimpleUseable("SevTent", "SevTent", "a severed tentacle", 50, 
+			"A severed tentacle taken from a slain tentacle beast.",
+			"You look at the severed tentacle skull.  It certain look a bit of...deformed more than any other tentacle you seen so far.  Is it natural occuring or forced mutation?");
+		public const SOULGEM:SimpleUseable = new SimpleUseable("SoulGem", "Soul Gem", "a Soul Gem", 2500, 
+			"A Soul Gem.",
+			"You examine the purplish crystal. It must be soul gem. It's used to capture and hold souls.");
+		public const STAFISH:SimpleUseable = new SimpleUseable("StaFish", "StackFish", "a stack of fishes", 60, 
+			"A stack of fresh fish. It’s smelly but it can be sold at the pawn shop for gems.",
+			"You look at stack of fresh fish.  Too many to eat them all at once you can sold them at the pawn shop for gems.");
 		public const VIALCLE:SimpleUseable = new SimpleUseable("VialCle", "V.Clear", "a clear vial", 1, 
 			"A clear vial used to dye scales.",
 			"You look at clear vial.  It would help Arian change scales color.");
@@ -85,16 +98,6 @@ use namespace CoC;
 		public const VIALRAI:SimpleUseable = new SimpleUseable("VialRai", "V.Rainbow", "a rainbow vial", 1, 
 			"A rainbow vial used to dye scales.",
 			"You look at rainbow vial.  It would help Arian change scales color.");
-		public const STAFISH:SimpleUseable = new SimpleUseable("StaFish", "StackFish", "a stack of fishes", 60, 
-			"A stack of fresh fish. It’s smelly but it can be sold at the pawn shop for gems.",
-			"You look at stack of fresh fish.  Too many to eat them all at once you can sold them at the pawn shop for gems.");
-		public const GLDSTAT:SimpleUseable = new SimpleUseable("GldStat", "GldStat", "a golden statue", 2000,
-			"An intricate golden idol of an androgynous humanoid figure with nine long tails.  It probably had some spiritual significance to its owner.",
-			"", SceneLib.forest.kitsuneScene.kitsuneStatue);
-		//MISCELLANEOUS
-		public const CONDOM :SimpleUseable = new SimpleUseable("Condom ", "Condom", "a packet of condom", 6,
-			"This wrapper contains a latex condom that can be worn over penis. It's designed to prevent pregnancy most of the time. Can be used in certain sex scenes.",
-			"You look at the unopened packet of condom.  If applicable, you can use the condom to prevent pregnancy most of the time.");
 		//CHEAT ITEM
 		public const DBGWAND:DebugWand = new DebugWand();
 	}

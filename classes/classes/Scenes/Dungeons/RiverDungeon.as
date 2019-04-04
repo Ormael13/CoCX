@@ -53,7 +53,7 @@ import classes.StatusEffects;
 				outputText("\"<i>Nice going along with you [name], this was worth it. I’m going to go and spend this bling on some well earned reward. See you around up there. If you ever need of my services again I will be at the bar.</i>\"\n\n");
 				player.removeStatusEffect(StatusEffects.CombatFollowerNeisa);
 				flags[kFLAGS.PLAYER_COMPANION_1] = "";
-				flags[kFLAGS.NEISA_FOLLOWER] = 2;
+				flags[kFLAGS.NEISA_FOLLOWER] = 4;
 				outputText("Working together with another person has taught you how to manage and plan with a group of people. <b>Gained Perk: Basic Leadership</b>");
 				player.createPerk(PerkLib.BasicLeadership,0,0,0,0);
 			}
@@ -94,25 +94,28 @@ import classes.StatusEffects;
 				}
 				doNext(playerMenu);
 			}
-			else player.addStatusValue(StatusEffects.RiverDungeonA, 1, 15);
+			else player.addStatusValue(StatusEffects.RiverDungeonA, 1, 10);
 		}
 		public function defeatedByFeralImp():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
-			//[GAME OVER]
-			EventParser.gameOver();
+			outputText("Your opponent done toying with your body it carries you all the way back to the dungeon entrance and drop you there. Guess it's back to square one.\n\n");
+			inDungeon = true;
+			dungeonLoc = 68;
+			playerMenu();
 		}
 		public function defeatedByGreenSlime():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
-			//[GAME OVER]
-			EventParser.gameOver();
+			outputText("Your opponent done toying with your body it carries you all the way back to the dungeon entrance and drop you there. Guess it's back to square one.\n\n");
+			inDungeon = true;
+			dungeonLoc = 68;
+			playerMenu();
 		}
 		public function defeatedByHellHound():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
-			//[GAME OVER]
-			EventParser.gameOver();
+			outputText("Your opponent done toying with your body it carries you all the way back to the dungeon entrance and drop you there. Guess it's back to square one.\n\n");
+			inDungeon = true;
+			dungeonLoc = 68;
+			playerMenu();
 		}
 		public function defeatedByAetherGolem():void {
 			clearOutput();

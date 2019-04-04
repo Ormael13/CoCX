@@ -127,7 +127,7 @@ import classes.internals.*;
 			if (flags[kFLAGS.DINAH_LVL_UP] >= 1) {
 				this.a = "";
 				this.short = "Dinah";
-				this.long = "You are fighting Dinah. She's a cat chimera that mixes nearly all, if not all, cat races you could find in this demonic realm. Burning eyes like those of hellcats and, fiery hair with colors like those of cheshire cats, parted by twin pair of small horns. Behind her slowly moves two blazing tails, and two long tentacles similar to that of a calamari. Her four arms completes her chimeric visage.";
+				this.long = "You are fighting Dinah. She's a cat chimera that mixes nearly all, if not all, cat races you could find in this demonic realm. Burning eyes like those of hellcats and fiery hair with colors like those of cheshire cats, parted by twin pair of small horns. Behind her slowly moves two blazing tails, and two long tentacles similar to that of a calamari. Her four arms completes her chimeric visage.";
 				this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_NORMAL);
 				this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 				//createBreastRow(Appearance.breastCupInverse("A"));

@@ -60,7 +60,8 @@ package classes.Scenes
 		//Ensures that none of the codex entries can be Lost Forever.
 		public function setFlags():void {
 			if (player.hasStatusEffect(StatusEffects.KnowsCharge) || player.hasStatusEffect(StatusEffects.KnowsBlind) || player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasStatusEffect(StatusEffects.KnowsArouse) || player.hasStatusEffect(StatusEffects.KnowsHeal) || player.hasStatusEffect(StatusEffects.KnowsMight) || player.hasStatusEffect(StatusEffects.KnowsBlink)
-				|| player.hasStatusEffect(StatusEffects.KnowsBlizzard) || player.hasStatusEffect(StatusEffects.KnowsChargeA) || player.hasStatusEffect(StatusEffects.KnowsFireStorm) || player.hasStatusEffect(StatusEffects.KnowsIceRain) || player.hasStatusEffect(StatusEffects.KnowsIceSpike) || player.hasStatusEffect(StatusEffects.KnowsLightningBolt) || player.hasStatusEffect(StatusEffects.KnowsDarknessShard))
+				|| player.hasStatusEffect(StatusEffects.KnowsBlizzard) || player.hasStatusEffect(StatusEffects.KnowsChargeA) || player.hasStatusEffect(StatusEffects.KnowsFireStorm) || player.hasStatusEffect(StatusEffects.KnowsIceRain) || player.hasStatusEffect(StatusEffects.KnowsIceSpike) || player.hasStatusEffect(StatusEffects.KnowsLightningBolt)
+				|| player.hasStatusEffect(StatusEffects.KnowsDarknessShard) || player.hasStatusEffect(StatusEffects.KnowsArcticGale) || player.hasStatusEffect(StatusEffects.KnowsChainLighting) || player.hasStatusEffect(StatusEffects.KnowsDuskWave) || player.hasStatusEffect(StatusEffects.KnowsPyreBurst))
 			{
 				if (flags[kFLAGS.CODEX_ENTRY_MAGIC] <= 0) {
 					flags[kFLAGS.CODEX_ENTRY_MAGIC] = 1;

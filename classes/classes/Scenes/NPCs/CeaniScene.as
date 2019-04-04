@@ -208,12 +208,24 @@ public function oceanInteractionsAfterArcheryTraining():void
 public function ceaniCampMainMenu():void {
 	spriteSelect(SpriteDb.s_ceani);
 	clearOutput();
+	if (rand(2) == 0 && flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) {
+		outputText("As you go to check on Ceani you notice Samirah are sunbathing next to each other. Samirah heaves a content sigh as Ceani grabs a fish from a nearby bucket and eats it like a snack.\n\n");
+		outputText("The two of them notice you and Samirah excuses herself before leaving the both of you in private.\n\n");
+		outputText("\"<i>Heya, [name], how are you doing? I was looking forward to us talking.</i>\"\n\n");
+		ceaniCampMainMenu2();
+	}
+	else ceaniCampMainMenu1();
+}
+public function ceaniCampMainMenu1():void {
 	outputText("As you walk over to her Ceani greet with with a bright smile. Her tail swishing once or twice behind her.\n\n");
 	outputText("\"<i>Good ");
 	if (model.time.hours <= 9) outputText("Morning");
 	else if (model.time.hours <= 19) outputText("Afternoon");
 	else outputText("Evening");
 	outputText(" [name] are we heading out? Or did you want to do something else.</i>\"\n\n");
+	ceaniCampMainMenu2();
+}
+public function ceaniCampMainMenu2():void {
 	menu();
 	addButton(0, "Appearance", ceaniAppearance).hint("Examine Ceani detailed appearance.");
 	//addButton(1, "Talk", );
@@ -231,7 +243,7 @@ public function ceaniAppearance():void {
 	outputText("You don’t know if it’s because of the fact that she is a whale or because she eats fish everyday but her firm JJ cup breast could smash most cow girl’s flat and it's certainly not because she’s fat as her athletic waistline would tell. Likely it's just because she is this tall and as such needs to maintain proportion. You believe the absence of apparent muscle is mostly due to the fact she needs a linear shape for proper hydrodynamism, through, the fact she can lift an adult tuna with a single hand proves she’s clearly stronger than most human men.\n\n");
 	outputText("Her fairly well sized pussy is hidden under the pink bikini she wears at all time.\n\n");
 	menu();
-	addButton(14, "Back", ceaniCampMainMenu);
+	addButton(14, "Back", ceaniCampMainMenu1);
 }
 
 public function beachInteractionsTalk():void

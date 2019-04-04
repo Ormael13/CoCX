@@ -110,6 +110,7 @@ package classes.Scenes.Areas.Forest
 				if (player.horns.type != Horns.BICORN) {
 					outputText(" Just as you are about to achieve orgasm a pair of small parallel nub begins forming on your forehead.");
 					player.horns.type = Horns.BICORN;
+					if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedBicornHorns)) player.createStatusEffect(StatusEffects.UnlockedBicornHorns, 0, 0, 0, 0);
 				}
 				outputText(" The nightmare herself seems to lose control as the two of you keep fucking like wild animals.\n\n");
 				outputText("\"<i>Ahhhhh cummingggg!!!!</i>\"\n\n");
@@ -117,10 +118,12 @@ package classes.Scenes.Areas.Forest
 				if (player.horns.type != Horns.BICORN && player.horns.type != Horns.UNICORN) {
 					outputText(" Reaching your own orgasm you scream in delight as the two nubs finally grow into a pair of sensible spiraling horns.");
 					player.horns.type = Horns.BICORN;
+					if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedBicornHorns)) player.createStatusEffect(StatusEffects.UnlockedBicornHorns, 0, 0, 0, 0);
 				}
 				if (player.horns.type != Horns.BICORN && player.horns.type == Horns.UNICORN) {
 					outputText(" Reaching your own orgasm you scream in delight as your horn slit into a pair of sensible spiraling bicorn horns.");
 					player.horns.type = Horns.BICORN;
+					if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedBicornHorns)) player.createStatusEffect(StatusEffects.UnlockedBicornHorns, 0, 0, 0, 0);
 				}
 				outputText(" The pleasure of your transformation is so great your grab your twin horns with both hands and fiercely rub them like a pair of penis. Gosh you see white, the pleasure too great for you to handle as you cum again, and again your pussy exploding around the horsecock still flooding your hole.");
 				if (player.hasCock()) outputText(" Your own [cock] hardening spontaneously and splattering black cum at your feets.");
@@ -147,7 +150,9 @@ package classes.Scenes.Areas.Forest
 						player.skinTone = "blue";
 				}
 				player.horns.type = Horns.BICORN;
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedBicornHorns)) player.createStatusEffect(StatusEffects.UnlockedBicornHorns, 0, 0, 0, 0);
 				player.wings.type = Wings.NIGHTMARE;
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedNightmareWings)) player.createStatusEffect(StatusEffects.UnlockedNightmareWings, 0, 0, 0, 0);
 				outputText(" You try to meekly crawl away but the centauress is too fast for you. She has you easily pinned to the ground by her hoof as she lowers herself on your prone body aligning her meat with your hole. You try to scream for help but she cuts the air out with a swift blow now squeezing you between her horse body and the grass. You can only beg her as you feel her flare prod for the entrance of your cunt, smearing pre on your slit, she's clearly going to break you. ");
 				outputText("You ready a scream as her cock forces your lips apart but to your complete surprise her massive monster seamlessly slide in without further resistance. She begins to buck in and out filling you way past the cervix and, to your dismay, you actually realise you’re enjoying this.\n\n");
 				outputText("\"<i>My horn can penetrate anything, from the tightest pussy to the loosest hole. Leave it to me and I will turn you into a mess of pleasure.</i>\"\n\n");

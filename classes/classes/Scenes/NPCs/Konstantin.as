@@ -230,7 +230,10 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.KONSTANTIN_SERVICES] >= 2) outputText("\"<i>Also, since you’ve brought me some quite weird stuff to work with, I had to remove the dust from some old manuals about how handle magical and non-metal materials, and how turn them on solid plates and pieces of armor.</i>\"\n\n");
 			outputText("Curious, you ask him how hard was reaching his level of skill in smithing, and if he’s happy with his current situation.\n\n");
 			outputText("\"<i>Metalworking is a life-time office, [name]. Becoming a successful one takes years as an apprentice and some luck to get on your paws. ");
-			if (player.hasPerk(PerkLib.HistorySmith) >= 0 || player.hasPerk(PerkLib.PastLifeSmith) >= 0) outputText("You have to agree with him on this, as your years working as the smith apprentice taught you. ");
+			if (player.hasPerk(PerkLib.HistorySmith) || player.hasPerk(PerkLib.PastLifeSmith)) {
+				outputText("You have to agree with him on this, as your years working as the smith apprentice taught you. ");
+				if (player.hasPerk(PerkLib.PastLifeSmith)) outputText("Well years of working in your past life. ");
+			}
 			outputText("Once you’ve got the essentials, you have to find a place and a good clientele. You gave me a place in the camp, and you ");
 			if (camp.companionsCount() >= 2) outputText("and the others ");
 			outputText("make decent customer");

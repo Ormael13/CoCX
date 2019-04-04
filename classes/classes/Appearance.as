@@ -176,6 +176,11 @@ public class Appearance extends Utils
 			if (i_character.tongue.type == 1) return "serpentine tongue";
 			else if (i_character.tongue.type == 2) return "demonic tongue";
 			else if (i_character.tongue.type == 3) return "draconic tongue";
+			else if (i_character.tongue.type == 4) return "echidna tongue";
+			else if (i_character.tongue.type == 5) return "feline tongue";
+			else if (i_character.tongue.type == 6) return "elf tongue";
+			else if (i_character.tongue.type == 7) return "canine tongue";
+			else if (i_character.tongue.type == 8) return "draconic tongue that glow in the dark";
 			else return "tongue";
 		}
 
@@ -331,6 +336,12 @@ public class Appearance extends Utils
 				options = ["black ",
 					"ebony ",
 					"sable "];
+				description += randomChoice(options);
+			}
+			if (!haveDescription && i_creature.hasStatusEffect(StatusEffects.GlowingNipples)) {
+				description += "neon blue ";
+				options = ["luminescent ",
+					"glowing "];
 				description += randomChoice(options);
 			}
 
@@ -2201,7 +2212,12 @@ public class Appearance extends Utils
 		}
 		public static function eyesDescript(i_creature:Creature):String
 		{
-			return i_creature.eyes.colour + " " + DEFAULT_EYES_NAMES[i_creature.eyes.type] + " eyes";
+			var description:String = "";
+			description += i_creature.eyes.colour;
+			description += " " + DEFAULT_EYES_NAMES[i_creature.eyes.type];
+			if (i_creature.eyes.type == Eyes.CAVE_WYRM) description += " that glow in the dark"
+			description += " eyes"
+			return description;
 		}
 		public static function earsDescript(i_creature:Creature):String
 		{
@@ -2480,7 +2496,8 @@ public class Appearance extends Utils
 					[Tongue.ECHIDNA, "echidna"],
 					[Tongue.CAT, "cat"],
 					[Tongue.ELF, "elf"],
-					[Tongue.DOG, "dog"]
+					[Tongue.DOG, "dog"],
+					[Tongue.CAVE_WYRM, "draconic"]
 				]
 		);
 		public static const DEFAULT_EYES_NAMES:Object = createMapFromPairs(
@@ -2502,7 +2519,8 @@ public class Appearance extends Utils
 					[Eyes.RAIJU, "raiju"],
 					[Eyes.GEMSTONES, "gemstones"],
 					[Eyes.FERAL, "feral"],
-					[Eyes.GRYPHON, "gryphon"]
+					[Eyes.GRYPHON, "gryphon"],
+					[Eyes.CAVE_WYRM, "cave wyrm"]
 				]
 		);
 		public static const DEFAULT_EARS_NAMES:Object = createMapFromPairs(
@@ -2536,7 +2554,8 @@ public class Appearance extends Utils
 					[Ears.WEASEL, "weasel"],
 					[Ears.RED_PANDA, "red-panda"],
 					[Ears.AVIAN, "avian"],
-					[Ears.GRYPHON, "gryphon"]
+					[Ears.GRYPHON, "gryphon"],
+					[Ears.CAVE_WYRM, "cave wyrm"]
 				]
 		);
 		public static const DEFAULT_HORNS_NAMES:Object = createMapFromPairs(
@@ -2598,7 +2617,8 @@ public class Appearance extends Utils
 					[Arms.SPHINX, "sphinx"],
 					[Arms.PIG, "pig"],
 					[Arms.BOAR, "boar"],
-					[Arms.DISPLACER, "displacer"]
+					[Arms.DISPLACER, "displacer"],
+					[Arms.CAVE_WYRM, "cave wyrm"]
 				]
 		);
 		public static const DEFAULT_TAIL_NAMES:Object = createMapFromPairs(
@@ -2640,7 +2660,8 @@ public class Appearance extends Utils
 					[Tail.RED_PANDA, "red-panda"],
 					[Tail.GARGOYLE_2, "axe-shaped gargoyle"],
 					[Tail.AVIAN, "avian"],
-					[Tail.GRIFFIN, "griffin"]
+					[Tail.GRIFFIN, "griffin"],
+					[Tail.CAVE_WYRM, "cave wyrm"]
 				]
 		);
 		public static const DEFAULT_WING_NAMES:Object = createMapFromPairs(
@@ -2752,7 +2773,9 @@ public class Appearance extends Utils
 					[LowerBody.RAIJU, "raiju"],
 					[LowerBody.RED_PANDA, "red-panda"],
 					[LowerBody.AVIAN, "avian"],
-					[LowerBody.GRYPHON, "gryphon"]
+					[LowerBody.GRYPHON, "gryphon"],
+					[LowerBody.ORC, "orc"],
+					[LowerBody.CAVE_WYRM, "cave wyrm"]
 				]
 		);
 		// <mod name="Dragon patch" author="Stadler76">
@@ -2951,6 +2974,12 @@ public class Appearance extends Utils
 				}
 				else descript += "kitsune tail";
 			}
+			else if (i_creature.tailType == Tail.CAT && i_creature.tailCount >= 1)
+			{
+				// Kitsune tails, we're using tailCount to track tail count
+				if (i_creature.tailCount > 1) descript += "pair of cat tails";
+				else descript += "cat tail";
+			}
 			else
 			{
 				descript += DEFAULT_TAIL_NAMES[i_creature.tailType];
@@ -2979,6 +3008,17 @@ public class Appearance extends Utils
 				else
 				{
 					descript += "one of your kitsune tails";
+				}
+			}
+			else if (i_creature.tailType == Tail.CAT && i_creature.tailCount >= 1)
+			{
+				if (i_creature.tailCount == 1)
+				{
+					descript += "your cat tail";
+				}
+				else
+				{
+					descript += "one of your cat tails";
 				}
 			}
 			else

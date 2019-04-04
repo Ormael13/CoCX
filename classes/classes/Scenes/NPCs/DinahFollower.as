@@ -150,8 +150,7 @@ import classes.internals.Utils;
 			addButton(0, consumables.AGILI_E.shortName, buyItem1, 0).hint("Buy an agility elixir.");
 			addButton(1, consumables.W_FRUIT.shortName, buyItem1, 1).hint("Buy a piece of whisker-fruit.");
 			addButton(2, consumables.WOFRUIT.shortName, buyItem2, 2).hint("Buy a Wonder fruit.");
-			addButtonDisabled(3, "???", "NYI nekomata tf");
-			//addButton(3, consumables..shortName, buyItem2, 3).hint("Buy .");
+			addButton(3, consumables.G_FRUIT.shortName, buyItem2, 3).hint("Buy a Ghastly Fruit");
 			addButton(4, consumables.D_FRUIT.shortName, buyItem2, 4).hint("Buy a Displacement Fruit.");
 			addButton(5, consumables.MANTICV.shortName, buyItem3, 5).hint("Buy a vial of manticore venom.");
 			addButton(6, consumables.VOLTTOP.shortName, buyItem3, 6).hint("Buy a Voltage topaz.");
@@ -164,7 +163,7 @@ import classes.internals.Utils;
 		}
 		private function buyItem2(item:Number = 0):void {
 			if (item == 2) catChimeraBuy2(consumables.WOFRUIT);
-			//if (item == 3) catChimeraBuy2(consumables.);
+			if (item == 3) catChimeraBuy2(consumables.G_FRUIT);
 			if (item == 4) catChimeraBuy2(consumables.D_FRUIT);
 		}
 		private function buyItem3(item:Number = 0):void {

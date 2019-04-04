@@ -93,8 +93,12 @@ use namespace CoC;
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (flags[kFLAGS.HERM_CAVE_WYRM] == 1) cavewyrmScene.loosingToHermCaveWyrm();
-			cavewyrmScene.loosingToCaveWyrm();
+			if (flags[kFLAGS.HERM_CAVE_WYRM] == 1) {
+				if (player.hasCock() && rand(3) == 0) cavewyrmScene.loosingToCaveWyrmDMelting();
+				else cavewyrmScene.loosingToHermCaveWyrm();
+			}
+			if (player.hasCock() && rand(3) == 0) cavewyrmScene.loosingToCaveWyrmDMelting();
+			else cavewyrmScene.loosingToCaveWyrm();
 		}
 		
 		override public function get long():String {
@@ -142,6 +146,7 @@ use namespace CoC;
 			this.gems = rand(10) + 20;
 			this.drop = new ChainedDrop().
 					add(useables.EBONBLO,1/20).
+					//add(consumables.METHIRC,0.7);
 					add(consumables.SALAMFW,0.7);
 			//this.tailType = Tail.SALAMANDER;
 			//this.tailRecharge = 0;

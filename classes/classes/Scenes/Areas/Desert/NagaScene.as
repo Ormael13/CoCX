@@ -26,7 +26,11 @@ public function nagaEncounter():void {
 	//Create status if needed
 	if(!player.hasStatusEffect(StatusEffects.Naga)) player.createStatusEffect(StatusEffects.Naga,0,0,0,0);
 	clearOutput();
-	if(player.lowerBody == LowerBody.NAGA) {
+	if (player.lowerBody == LowerBody.NAGA && flags[kFLAGS.SAMIRAH_FOLLOWER] < 5) {
+		if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 5) {
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 1) flags[kFLAGS.SAMIRAH_FOLLOWER] = 1;
+			else flags[kFLAGS.SAMIRAH_FOLLOWER]++;
+		}
 		//Set 'last fuck as naga'
 		player.changeStatusValue(StatusEffects.Naga,1,1);
 		//Not met as naga before
@@ -97,7 +101,6 @@ public function nagaEncounter():void {
 				if(player.cumQ() > 250) outputText("You quickly fill her with your seed to the point where she overflows, leaving her pussy dripping with semen afterwards.");
 				//[JIZZ, JIZZ EVERYWHERE]
 				else if(player.cumQ() > 1000) outputText("Her stomach quickly swells from the sheer volume of seed pumped into her. The sperm that her womb is unable to hold starts to gush out from her stuffed cunt.");
-
 				outputText("\n\nThe two of you lay there for a moment, basking in the warm glow of orgasm. Eventually the naga slowly unwraps her tail from your own and gives you a kiss on the forehead. \"<i>I look forward to our next encounter,</i>\" she whispers softly into your ear before slithering off into the desert.  You watch as she leaves and wave her a kiss goodbye before she disappears from your sight.\n\n");
 			}
 			player.orgasm();
@@ -145,6 +148,14 @@ public function nagaEncounter():void {
 		doNext(camp.returnToCampUseOneHour);
 		dynStats("lus", player.lib/5);
 		return;
+	}
+	if (player.lowerBody == LowerBody.NAGA && (flags[kFLAGS.SAMIRAH_FOLLOWER] >= 5 && flags[kFLAGS.SAMIRAH_FOLLOWER] < 10)) {
+		SceneLib.samirah.desertEncounters();
+		return;
+	}
+	if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) {
+		outputText("You are walking through the shifting sands of the desert when you hear a sudden hiss behind you.  Not expecting to be attacked by a snake, you quickly leap forward and turn around.\n\n");
+		outputText("To your surprise, what you see is not Samirah even thou she looks very similar - a half-human half-snake hybrid with some purple lines over her body.  She surges up and hisses even louder than before, showing off a pair of formidable fangs dripping with venom and making purple lines on her body glowing faintly.");
 	}
 	//If player's last fight did not involve them being a naga
 	if(player.statusEffectv1(StatusEffects.Naga) == 0) {
@@ -890,6 +901,12 @@ public function nagaRapeChoice():void {
 	}
 	cleanupAfterCombat();
 }
+public function nagaRapeChoice2():void {
+	if (monster.HP < 1) outputText("You've defeated the naga!  ");
+	else outputText("The naga writhes in the sand, masturbating feverishly!  She's completely forgotten about fighting you.  ");
+	outputText("When you think over course of actions to take her body or more precise purple lines on her body starts to glow more and more until it blinds you.  After light subside she's gone.  ");
+	cleanupAfterCombat();
+}
 
 public function nagaPlayerConstrict():void {
 	flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
@@ -958,6 +975,8 @@ public function naggaSqueeze():void {
 	//Squeeze -
 	outputText("Your coils wrap tighter around your prey, leaving " + monster.pronoun2 + " short of breath. You can feel it in your tail as " + monster.pronoun3 + " struggles are briefly intensified. ");
 	var damage:int = monster.maxHP() * (.10 + rand(15) / 100);
+	if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= SceneLib.combat.oniRampagePowerMulti();
+	if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 	SceneLib.combat.doDamage(damage, true, true);
 	fatigue(20, USEFATG_PHYSICAL);
 	//Enemy faints -
@@ -970,25 +989,20 @@ public function naggaSqueeze():void {
 		return;
 	}
 	outputText("\n\n");
+	if (monster.hasStatusEffect(StatusEffects.HypnosisNaga)) monster.removeStatusEffect(StatusEffects.HypnosisNaga);
     SceneLib.combat.enemyAIImpl();
 }
 //Tease
 public function naggaTease():void {
 	clearOutput();
 	//(if poisoned)
-	if(monster.hasStatusEffect(StatusEffects.NagaVenom))
-	{
-		outputText("You attempt to stimulate " + monster.a + monster.short + " by rubbing " + monster.pronoun3 + " nether regions, but " + monster.pronoun3 + " seems too affected by your poison to react.\n\n");
-	}
-	else if(monster.gender == 0)
-	{
-		outputText("You look over " + monster.a + monster.short + ", but can't figure out how to tease such an unusual foe.\n\n");
-	}
-    if (monster.lustVuln == 0) {
-        outputText("You attempt to stimulate " + monster.a + monster.short + " by rubbing " + monster.pronoun3 + " nether regions, but it has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
+	if (monster.hasStatusEffect(StatusEffects.NagaVenom) || monster.gender == 0 || monster.lustVuln == 0) {
+		if (monster.hasStatusEffect(StatusEffects.NagaVenom)) outputText("You attempt to stimulate " + monster.a + monster.short + " by rubbing " + monster.pronoun3 + " nether regions, but " + monster.pronoun3 + " seems too affected by your poison to react.\n\n");
+		if (monster.gender == 0) outputText("You look over " + monster.a + monster.short + ", but can't figure out how to tease such an unusual foe.\n\n");
+		if (monster.lustVuln == 0) outputText("You attempt to stimulate " + monster.a + monster.short + " by rubbing " + monster.pronoun3 + " nether regions, but it has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
         enemyAI();
         return;
-    }
+	}
 	SceneLib.combat.wrathregeneration();
     SceneLib.combat.fatigueRecovery();
 	SceneLib.combat.manaregeneration();
@@ -1086,6 +1100,8 @@ public function naggaTease():void {
         if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
         if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
 		if (player.hasPerk(PerkLib.SuperSensual) && chance > 100) damagemultiplier += (0.01 * (chance - 100));
+		if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
+		if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
 		damage *= damagemultiplier;
         //Determine if critical tease!
         var crit:Boolean = false;
@@ -1098,6 +1114,7 @@ public function naggaTease():void {
             crit = true;
             damage *= 1.75;
         }
+		if (monster.hasStatusEffect(StatusEffects.HypnosisNaga)) damage *= 0.5;
 		monster.teased(monster.lustVuln * damage);
         if (crit == true) outputText(" <b>Critical!</b>");
         SceneLib.combat.teaseXP(1 + SceneLib.combat.bonusExpAfterSuccesfullTease());
@@ -1210,4 +1227,4 @@ private function beePositANagaPlease():void {
 	cleanupAfterCombat();
 }
 	}
-}
+}

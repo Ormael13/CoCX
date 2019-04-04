@@ -38,7 +38,7 @@ public class PerkMenu extends BaseContent {
 			addButton(button++, "Perk Up", CoC.instance.playerInfo.perkBuyMenu);
 		}
 		addButton(4, "Database", perkDatabase);
-		if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.DoubleAttackSmall) || player.hasPerk(PerkLib.Combo) || (player.hasPerk(PerkLib.JobBeastWarrior) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()))) {
+		if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.DoubleAttackSmall) || player.hasPerk(PerkLib.Combo) || player.hasPerk(PerkLib.Poisoning) || (player.hasPerk(PerkLib.JobBeastWarrior) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()))) {
 			outputText("\n<b>You can adjust your melee attack settings.</b>");
 			addButton(5, "Melee Opt",doubleAttackOptions);
 		}
@@ -96,6 +96,11 @@ public class PerkMenu extends BaseContent {
 			if (flags[kFLAGS.ZERKER_COMBAT_MODE] == 0 || flags[kFLAGS.ZERKER_COMBAT_MODE] == 1) outputText("Manual");
 			outputText("</b>");
 		}
+		if (player.findPerk(PerkLib.Poisoning) >= 0) {
+			outputText("\n\nIf you can naturaly produce venom then you could add it effects to weapon. (Working only with small weapons)");
+			if (flags[kFLAGS.ENVENOMED_MELEE_ATTACK] == 0) outputText("\n\nVenom effect added: <b>No</b>");
+			if (flags[kFLAGS.ENVENOMED_MELEE_ATTACK] == 1) outputText("\n\nVenom effect added: <b>Yes</b>");
+		}
 
         var maxCurrentAttacks:int = combat.maxCurrentAttacks();
 		var maxAttacks:int = Math.max(combat.maxFistAttacks(),combat.maxClawsAttacks(),combat.maxSmallAttacks(),combat.maxLargeAttacks(),combat.maxCommonAttacks());
@@ -145,6 +150,7 @@ public class PerkMenu extends BaseContent {
 	public function doubleAttackOptions2():void {
 		var toggleflag:Function = curry(toggleFlag, doubleAttackOptions2);
 		var zerkingStyle:Function = curry(setFlag,doubleAttackOptions2,kFLAGS.ZERKER_COMBAT_MODE);
+		var poisoningStyle:Function = curry(setFlag,doubleAttackOptions2,kFLAGS.ENVENOMED_MELEE_ATTACK);
 		menu();
 		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) {
 			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 0) addButton(0, "None", zerkingStyle,0);
@@ -153,9 +159,19 @@ public class PerkMenu extends BaseContent {
 			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 3) addButton(3, "Both", zerkingStyle,3);
 		}
 		if (player.findPerk(PerkLib.JobBeastWarrior) >= 0) {
-			if (flags[kFLAGS.FERAL_COMBAT_MODE] != 0) addButton(4, "Normal", toggleflag, kFLAGS.FERAL_COMBAT_MODE, false);
-			if (((player.weaponName == "fists" && player.haveNaturalClaws()) || player.haveNaturalClawsTypeWeapon()) && flags[kFLAGS.FERAL_COMBAT_MODE] != 1) addButton(9, "Feral", toggleflag , kFLAGS.FERAL_COMBAT_MODE, true);
-			else addButtonDisabled(9, "Feral", "You not meet all req. to use this.");
+			if (flags[kFLAGS.FERAL_COMBAT_MODE] != 0) addButton(5, "Normal", toggleflag, kFLAGS.FERAL_COMBAT_MODE, false);
+			if (((player.weaponName == "fists" && player.haveNaturalClaws()) || player.haveNaturalClawsTypeWeapon()) && flags[kFLAGS.FERAL_COMBAT_MODE] != 1) addButton(6, "Feral", toggleflag , kFLAGS.FERAL_COMBAT_MODE, true);
+			else addButtonDisabled(6, "Feral", "You not meet all req. to use this.");
+		}
+		if (player.findPerk(PerkLib.Poisoning) >= 0 && flags[kFLAGS.ENVENOMED_MELEE_ATTACK] != 0) addButton(7, "None", toggleflag,kFLAGS.ENVENOMED_MELEE_ATTACK,false);
+		if (player.findPerk(PerkLib.Poisoning) >= 0
+			&& (player.tailType == Tail.BEE_ABDOMEN
+			|| player.tailType == Tail.SCORPION
+			|| player.tailType == Tail.MANTICORE_PUSSYTAIL
+			|| player.faceType == Face.SNAKE_FANGS
+			|| player.faceType == Face.SPIDER_FANGS)
+			&& flags[kFLAGS.ENVENOMED_MELEE_ATTACK] != 1) {
+            addButton(8, "Venom", toggleflag,kFLAGS.ENVENOMED_MELEE_ATTACK,true);
 		}
 		addButton(14, "Back", doubleAttackOptions);
 	}
@@ -252,16 +268,13 @@ public class PerkMenu extends BaseContent {
 		if (player.findPerk(PerkLib.Cupid) >= 0 && flags[kFLAGS.CUPID_ARROWS] != 0) addButton(10, "None", toggleflag,kFLAGS.CUPID_ARROWS,false);
 		if (player.findPerk(PerkLib.Cupid) >= 0 && player.hasStatusEffect(StatusEffects.KnowsArouse) && flags[kFLAGS.CUPID_ARROWS] != 1) addButton(11, "Arouse", toggleflag,kFLAGS.CUPID_ARROWS,true);
 		if (player.findPerk(PerkLib.EnvenomedBolt) >= 0 && flags[kFLAGS.ENVENOMED_BOLTS] != 0) addButton(12, "None", toggleflag,kFLAGS.ENVENOMED_BOLTS,false);
-		if (
-				player.findPerk(PerkLib.EnvenomedBolt) >= 0
-				&& (player.tailType == Tail.BEE_ABDOMEN
-						|| player.tailType == Tail.SCORPION
-						|| player.tailType == Tail.MANTICORE_PUSSYTAIL
-						|| player.faceType == Face.SNAKE_FANGS
-						|| player.faceType == Face.SPIDER_FANGS)
-				&& flags[kFLAGS.ENVENOMED_BOLTS] != 1
-		)
-		{
+		if (player.findPerk(PerkLib.EnvenomedBolt) >= 0
+			&& (player.tailType == Tail.BEE_ABDOMEN
+			|| player.tailType == Tail.SCORPION
+			|| player.tailType == Tail.MANTICORE_PUSSYTAIL
+			|| player.faceType == Face.SNAKE_FANGS
+			|| player.faceType == Face.SPIDER_FANGS)
+			&& flags[kFLAGS.ENVENOMED_BOLTS] != 1) {
             addButton(13, "Venom", toggleflag,kFLAGS.ENVENOMED_BOLTS,true);
 		}
 		addButton(14, "Back", doubleStrikeOptions);

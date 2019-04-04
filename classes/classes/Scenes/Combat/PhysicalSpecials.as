@@ -873,6 +873,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Slayer)) SAMulti += 3;
 		damage += player.str;
 		damage += scalingBonusStrength() * 0.25;
+		if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
+			damage += player.spe;
+			damage += scalingBonusSpeed() * 0.20;
+		}
+		if (player.hasPerk(PerkLib.QuickStrike) && (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small")) {
+			damage += (player.spe / 2);
+			damage += scalingBonusSpeed() * 0.10;
+		}
 		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
 		if (damage < 10) damage = 10;
 		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
@@ -892,14 +900,15 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= SAMulti;
 		var crit:Boolean = false;
 		var critChance:int = 5;
+		var critMulti:Number = 1.75;//coś innego tu wpisać jako perk pozwalający na wyższy mnożnik krytyków
 		critChance += combat.combatPhysicalCritical();
 		if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
 		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
+		critChance *= 2;
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			/*if (player.hasPerk(PerkLib.Impale) && (!player.hasPerk(PerkLib.DoubleAttack) || (player.hasPerk(PerkLib.DoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
-			else */damage *= 1.75;//coś innego tu wpisać jako perk pozwalający na wyższy mnożnik krytyków
+			damage *= critMulti;
 		}
 		damage = Math.round(damage);
 		damage = doDamage(damage);
@@ -917,6 +926,89 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
+		if (flags[kFLAGS.ENVENOMED_MELEE_ATTACK] == 1 && (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small")) {
+			if (player.tailVenom >= 10) {
+				outputText("  ");
+				if(monster.lustVuln == 0) {
+					outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
+				}
+				if (player.tailType == Tail.BEE_ABDOMEN) {
+					outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
+					var damageB:Number = 35 + rand(player.lib/10);
+					if (player.level < 10) damageB += 20 + (player.level * 3);
+					else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
+					else if (player.level < 30) damageB += 70 + (player.level - 20) * 1;
+					else damageB += 80;
+					damageB *= 0.2;
+					monster.teased(monster.lustVuln * damageB);
+					if (monster.hasStatusEffect(StatusEffects.NagaVenom))
+					{
+						monster.addStatusValue(StatusEffects.NagaVenom,3,1);
+					}
+					else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
+					player.tailVenom -= 5;
+				}
+				if (player.tailType == Tail.SCORPION) {
+					outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
+					monster.spe -= 2;
+					if (monster.spe < 1) monster.spe = 1;
+					if (monster.hasStatusEffect(StatusEffects.NagaVenom))
+					{
+						monster.addStatusValue(StatusEffects.NagaVenom,3,1);
+					}
+					else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
+					player.tailVenom -= 5;
+				}
+				if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
+					outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
+					var lustdamage:Number = 35 + rand(player.lib / 10);
+					if (player.level < 10) damage += 20 + (player.level * 3);
+					else if (player.level < 20) damage += 50 + (player.level - 10) * 2;
+					else if (player.level < 30) damage += 70 + (player.level - 20) * 1;
+					else damage += 80;
+					lustdamage *= 0.14;
+					monster.teased(monster.lustVuln * lustdamage);
+					monster.tou -= 2;
+					if (monster.tou < 1) monster.tou = 1;
+					if (monster.hasStatusEffect(StatusEffects.NagaVenom))
+					{
+						monster.addStatusValue(StatusEffects.NagaVenom,3,1);
+					}
+					else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
+					player.tailVenom -= 5;
+				}
+				if (player.faceType == Face.SNAKE_FANGS) {
+					outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
+					monster.spe -= 0.4;
+					monster.spe -= 0.4;
+					if (monster.spe < 1) monster.spe = 1;
+					if (monster.spe < 1) monster.spe = 1;
+					if (monster.hasStatusEffect(StatusEffects.NagaVenom))
+					{
+						monster.addStatusValue(StatusEffects.NagaVenom,2,0.4);
+						monster.addStatusValue(StatusEffects.NagaVenom,1,0.4);
+					}
+					else monster.createStatusEffect(StatusEffects.NagaVenom, 0.4, 0.4, 0, 0);
+					player.tailVenom -= 5;
+				}
+				if (player.faceType == Face.SPIDER_FANGS) {
+					outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
+					var lustDmg:int = 6 * monster.lustVuln;
+					monster.teased(lustDmg);
+					if (monster.lustVuln > 0) {
+						monster.lustVuln += 0.01;
+						if (monster.lustVuln > 1) monster.lustVuln = 1;
+					}
+					player.tailVenom -= 5;
+				}
+				if (monster.lust >= monster.maxLust()) {
+					outputText("\n\n");
+					checkAchievementDamage(damage);
+					doNext(endLustVictory);
+				}
+			}
+			else outputText("  You do not have enough venom to apply on [weapon]!");
+		}
 		outputText("\n\n");
 		combat.checkAchievementDamage(damage);
 		combat.WrathWeaponsProc();
@@ -929,7 +1021,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("You attempt to feint " + monster.a + " " + monster.short + " into dropping " + monster.pronoun3 + " guards. It ");
 		if (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80) outputText("failed.");
 		else {
-			var feintduration:Number = 1;
+			var feintduration:Number = 2;
 			if (player.hasPerk(PerkLib.GreaterFeint)) feintduration += 2;
 			outputText("worked!");
 			monster.createStatusEffect(StatusEffects.Distracted, feintduration, 0, 0, 0);
@@ -1319,7 +1411,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				outputText("  Phantom strike dealing additional <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
 				damage *= 2;
 			}
-			monster.createStatusEffect(StatusEffects.BurnDoT,10,0,0,0);
+			monster.createStatusEffect(StatusEffects.BurnDoT,10,0.02,0,0);
 			checkAchievementDamage(damage);
 		}
 		outputText("\n\n");
@@ -1783,6 +1875,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		var pollen:Number = monster.lustVuln * (2 + rand(4));
+		if (player.headjewelryName == "pair of Golden Naga Hairpins") pollen *= 1.1;
 		monster.lust += pollen;
 		outputText("You send a cloud of your pollen outward into the air, smiling lustfully at your opponent. Sneezing slightly as they inhale the potent pollen, they begin showing clear signs of arousal. Just how long can they resist coming to pollinate you now? Not for long, you hope. (" + pollen + ")\n\n");
 		player.createStatusEffect(StatusEffects.AlraunePollen,0,0,0,0);
@@ -3900,4 +3993,4 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 }
 }
-
+

@@ -1209,7 +1209,6 @@ public final class Mutations extends MutationsHelper
 			}
 			// Remove gills
 			if (rand(3) == 0 && player.hasGills() && changes < changeLimit) updateGills();
-
 			//If no changes yay
 			if (changes == 0) {
 				outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n");
@@ -1217,6 +1216,7 @@ public final class Mutations extends MutationsHelper
 				dynStats("lus", 3);
 			}
 			player.refillHunger(15);
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
 //1-Oversized Pepper (+size, thickness)
@@ -1897,7 +1897,6 @@ public final class Mutations extends MutationsHelper
 			}
 			// Remove gills
 			if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
-
 			if (player.hasFullCoatOfType(Skin.FUR) && changes < changeLimit && rand(3) == 0 && type != 6) {
 				outputText("\n\nYou become more... solid.  Sinewy.  A memory comes unbidden from your youth of a grizzled wolf you encountered while hunting, covered in scars, yet still moving with an easy grace.  You imagine that must have felt something like this.");
 				dynStats("tou", 4, "sen", -3);
@@ -1910,6 +1909,7 @@ public final class Mutations extends MutationsHelper
 				dynStats("lus", 3);
 			}
 			player.refillHunger(15);
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
 		public function impFood(player:Player):void
@@ -3095,40 +3095,51 @@ public final class Mutations extends MutationsHelper
 				outputText("\n\nThe contents of the book did little for your already considerable intellect.");
 				dynStats("int", .6);
 			}
-			//Smart enough for arouse and doesnt have it
-			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsArouse)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Arouse.</b>");
-				player.createStatusEffect(StatusEffects.KnowsArouse, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for regenerate and doesnt have it
-			if (player.inte >= 25 && !player.hasStatusEffect(StatusEffects.KnowsRegenerate)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Regenerate.</b>");
-				player.createStatusEffect(StatusEffects.KnowsRegenerate, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for might and doesnt have it
-			if (player.inte >= 30 && !player.hasStatusEffect(StatusEffects.KnowsMight)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Might.</b>");
-				player.createStatusEffect(StatusEffects.KnowsMight, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for blink and doesnt have it
-			if (player.inte >= 35 && !player.hasStatusEffect(StatusEffects.KnowsBlink)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Blink.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBlink, 0, 0, 0, 0);
-				return;
-			}
 			//Smart enough for ice spike and doesnt have it
-			if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsIceSpike)) {
+			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsIceSpike)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Ice Spike.</b>");
 				player.createStatusEffect(StatusEffects.KnowsIceSpike, 0, 0, 0, 0);
 				return;
 			}
 			//Smart enough for darkness shard and doesnt have it
-			if (player.inte >= 45 && !player.hasStatusEffect(StatusEffects.KnowsDarknessShard)) {
+			if (player.inte >= 25 && !player.hasStatusEffect(StatusEffects.KnowsDarknessShard)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Darkness Shard.</b>");
 				player.createStatusEffect(StatusEffects.KnowsDarknessShard, 0, 0, 0, 0);
+			}
+			//Smart enough for arouse and doesnt have it
+			if (player.inte >= 30 && !player.hasStatusEffect(StatusEffects.KnowsArouse)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Arouse.</b>");
+				player.createStatusEffect(StatusEffects.KnowsArouse, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for regenerate and doesnt have it
+			if (player.inte >= 35 && !player.hasStatusEffect(StatusEffects.KnowsRegenerate)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Regenerate.</b>");
+				player.createStatusEffect(StatusEffects.KnowsRegenerate, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for might and doesnt have it
+			if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsMight)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Might.</b>");
+				player.createStatusEffect(StatusEffects.KnowsMight, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for blink and doesnt have it
+			if (player.inte >= 45 && !player.hasStatusEffect(StatusEffects.KnowsBlink)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Blink.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBlink, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for arctic gale and doesnt have it
+			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsArcticGale)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Arctic Gale.</b>");
+				player.createStatusEffect(StatusEffects.KnowsArcticGale, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for dusk wave and doesnt have it
+			if (player.inte >= 25 && !player.hasStatusEffect(StatusEffects.KnowsDuskWave)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Dusk Wave.</b>");
+				player.createStatusEffect(StatusEffects.KnowsDuskWave, 0, 0, 0, 0);
 			}
 		}
 
@@ -3209,44 +3220,56 @@ public final class Mutations extends MutationsHelper
 				outputText("\n\nThe contents of the book did little for your already considerable intellect.");
 				dynStats("int", .6);
 			}
-			//Smart enough for charge weapon and doesnt have it
-			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsCharge)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Charge Weapon.</b>");
-				player.createStatusEffect(StatusEffects.KnowsCharge, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for charge armor and doesnt have it
-			if (player.inte >= 25 && !player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Charge Armor.</b>");
-				player.createStatusEffect(StatusEffects.KnowsChargeA, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for heal and doesnt have it
-			if (player.inte >= 30 && !player.hasStatusEffect(StatusEffects.KnowsHeal)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Heal.</b>");
-				player.createStatusEffect(StatusEffects.KnowsHeal, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for blind and doesnt have it
-			if (player.inte >= 35 && !player.hasStatusEffect(StatusEffects.KnowsBlind)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Blind.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBlind, 0, 0, 0, 0);
-				return;
-			}
 			//Smart enough for whitefire and doesnt have it
-			if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
+			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Whitefire.</b>");
 				player.createStatusEffect(StatusEffects.KnowsWhitefire, 0, 0, 0, 0);
 				return;
 			}
 			//Smart enough for lightning bolt and doesnt have it
-			if (player.inte >= 45 && !player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) {
+			if (player.inte >= 25 && !player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Lightning Bolt.</b>");
 				player.createStatusEffect(StatusEffects.KnowsLightningBolt, 0, 0, 0, 0);
 				return;
 			}
+			//Smart enough for charge weapon and doesnt have it
+			if (player.inte >= 30 && !player.hasStatusEffect(StatusEffects.KnowsCharge)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Charge Weapon.</b>");
+				player.createStatusEffect(StatusEffects.KnowsCharge, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for charge armor and doesnt have it
+			if (player.inte >= 35 && !player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Charge Armor.</b>");
+				player.createStatusEffect(StatusEffects.KnowsChargeA, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for heal and doesnt have it
+			if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsHeal)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Heal.</b>");
+				player.createStatusEffect(StatusEffects.KnowsHeal, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for blind and doesnt have it
+			if (player.inte >= 45 && !player.hasStatusEffect(StatusEffects.KnowsBlind)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Blind.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBlind, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for pyre burst and doesnt have it
+			if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsPyreBurst)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Pyre Burst.</b>");
+				player.createStatusEffect(StatusEffects.KnowsPyreBurst, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for chain lightning and doesnt have it
+			if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsChainLighting)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Chain Lighting.</b>");
+				player.createStatusEffect(StatusEffects.KnowsChainLighting, 0, 0, 0, 0);
+				return;
+			}
 			//Smart enough for blizzard and doesnt have it
-			if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
+			if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Blizzard.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBlizzard, 0, 0, 0, 0);
 			}
@@ -3492,6 +3515,7 @@ public final class Mutations extends MutationsHelper
 				if (rand(2) == 0) player.modTone(15, 5);
 			}
 			player.refillHunger(15);
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
 		public function gooGasmic(player:Player):void
@@ -3627,6 +3651,7 @@ public final class Mutations extends MutationsHelper
 			if (rand(2) == 0) outputText(player.modFem(85, 3));
 			if (rand(2) == 0) outputText(player.modThickness(20, 3));
 			if (rand(2) == 0) outputText(player.modTone(15, 5));
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
 
@@ -4390,6 +4415,7 @@ public final class Mutations extends MutationsHelper
 			player.rearBody.type = RearBody.NONE;
 			player.removeStatusEffect(StatusEffects.Uniball);
 			player.removeStatusEffect(StatusEffects.BlackNipples);
+			player.removeStatusEffect(StatusEffects.GlowingNipples);
 			player.vaginaType(0);
 		}
 
@@ -4496,11 +4522,17 @@ public final class Mutations extends MutationsHelper
 			}
 			// Remove gills
 			if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
-			//Nipples Turn Back:
+			//Black Nipples Turn Back:
 			if (player.hasStatusEffect(StatusEffects.BlackNipples) && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nSomething invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
 				changes++;
 				player.removeStatusEffect(StatusEffects.BlackNipples);
+			}
+			//Glowing Nipples Turn Back:
+			if (player.hasStatusEffect(StatusEffects.GlowingNipples) && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYour nipple tingle before their coloration turns back to normal.");
+				changes++;
+				player.removeStatusEffect(StatusEffects.GlowingNipples);
 			}
 			//Remove feathery/quill hair (copy for equinum, canine peppers, Labova)
 			if (changes < changeLimit && (player.hairType == Hair.FEATHER || player.hairType == Hair.QUILL) && rand(3) == 0) {
@@ -5013,7 +5045,7 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//DA TAIL (IF ALREADY HAZ URZ)
-			if (player.tailType != Tail.CAT && (player.ears.type == Ears.CAT || player.ears.type == Ears.LION) && rand(3) == 0 && changes < changeLimit) {
+			if (player.tailType != Tail.CAT && player.ears.type == Ears.CAT && type != 1 && rand(3) == 0 && changes < changeLimit) {
 				if (player.tailType == Tail.NONE) {
 					choice = rand(3);
 					if (choice == 0) outputText("\n\nA pressure builds in your backside. You feel under your [armor] and discover an odd bump that seems to be growing larger by the moment. In seconds it passes between your fingers, bursts out the back of your clothes and grows most of the way to the ground. A thick coat of fur springs up to cover your new tail. You instinctively keep adjusting it to improve your balance. <b>You now have a cat-tail.</b>");
@@ -5024,8 +5056,38 @@ public final class Mutations extends MutationsHelper
 				setTailType(Tail.CAT);
 				changes++;
 			}
+			if (player.tailType != Tail.CAT && player.tailType != Tail.NEKOMATA_FORKED_1_3 && player.tailType != Tail.NEKOMATA_FORKED_2_3 && player.ears.type == Ears.CAT && type == 1 && rand(3) == 0 && changes < changeLimit) {
+				if (player.tailType == Tail.NONE) {
+					choice = rand(3);
+					if (choice == 0) outputText("\n\nA pressure builds in your backside. You feel under your [armor] and discover an odd bump that seems to be growing larger by the moment. In seconds it passes between your fingers, bursts out the back of your clothes and grows most of the way to the ground. A thick coat of fur springs up to cover your new tail. You instinctively keep adjusting it to improve your balance. <b>You now have a cat-tail.</b>");
+					if (choice == 1) outputText("\n\nYou feel your backside shift and change, flesh molding and displacing into a long, flexible tail! <b>You now have a cat tail.</b>");
+					if (choice == 2) outputText("\n\nYou feel an odd tingling in your spine and your tail bone starts to throb and then swell. Within a few moments it begins to grow, adding new bones to your spine. Before you know it, you have a tail. Just before you think it's over, the tail begins to sprout soft, glossy [skin coat.color] fur. <b>You now have a cat tail.</b>");
+				}
+				else outputText("\n\nYou pause and tilt your head... something feels different.  Ah, that's what it is; you turn around and look down at your tail as it starts to change shape, narrowing and sprouting glossy fur. <b>You now have a cat tail.</b>");
+				setTailType(Tail.CAT,1);
+				changes++;
+			}
+			if (player.tailType == Tail.CAT && player.tailCount == 1 && player.ears.type == Ears.CAT && type == 1 && rand(3) == 0 && changes < changeLimit) {
+				outputText("\n\nA tingling pressure builds on your backside, and your soft, glossy tail begins to glow with an eerie, ghostly light.  With a crackle of electrical energy, it starts splitting into two, stopping once the split reaches a third of the way down the length!  <b>You now have a cat tail that is forked on the last third of its length.</b>");
+				setTailType(Tail.NEKOMATA_FORKED_1_3);
+				changes++;
+			}
+			if (player.tailType == Tail.NEKOMATA_FORKED_1_3 && player.level >= 6 && player.inte >= 10 && player.wis >= 25 && type == 1 && rand(3) == 0 && changes < changeLimit) {
+				outputText("\n\nA tingling pressure builds on your backside, and your soft, glossy, and partially forked tail begins to glow with an eerie, ghostly light.  With a crackle of electrical energy, it starts splitting into two, stopping as another third of its length becomes forked!  <b>You now have a cat tail that is forked at two thirds of its length.</b>");
+				setTailType(Tail.NEKOMATA_FORKED_2_3);
+				changes++;
+			}
+			if (player.tailType == Tail.NEKOMATA_FORKED_2_3 && player.level >= 12 && player.inte >= 20 && player.wis >= 50 && type == 1 && rand(3) == 0 && changes < changeLimit) {
+				outputText("\n\nA tingling pressure builds on your backside, and your soft, glossy, and partially forked tail begins to glow with an eerie, ghostly light.  With a crackle of electrical energy, your tail finishes splitting in two!  <b>You now have a pair of cat-tails.</b>");
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedCatTail2nd)) {
+					outputText("\n\n<b>Genetic Memory: 2nd Cat Tail - Memorized!</b>\n\n");
+					player.createStatusEffect(StatusEffects.UnlockedCatTail2nd, 0, 0, 0, 0);
+				}
+				setTailType(Tail.CAT,2);
+				changes++;
+			}
 			//Da paws (if already haz tail)
-			if (player.tailType == Tail.CAT && rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.CAT) {
+			if ((player.tailType == Tail.CAT || player.tailType == Tail.NEKOMATA_FORKED_1_3 || player.tailType == Tail.NEKOMATA_FORKED_2_3) && rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.CAT) {
 				//hoof to cat:
 				if (player.lowerBody == LowerBody.HOOFED) {
 					outputText("\n\nYou feel your hooves suddenly splinter, growing into five unique digits. Their flesh softens as your hooves reshape into furred cat paws. <b>You now have cat paws.</b>");
@@ -5069,6 +5131,11 @@ public final class Mutations extends MutationsHelper
 				setRearBody(RearBody.DISPLACER_TENTACLES);
 				changes++;
 			}
+			if (player.arms.type == Arms.CAT && type == 1 && player.rearBody.type != RearBody.LION_MANE && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYou suddenly feel hair growing all around your neck at a crazy pace. It soon get so thick it almost looks as if you're wearing a [haircolor] fur collar. <b>You now have a full lion mane around your neck.</b>");
+				setRearBody(RearBody.LION_MANE);
+				changes++;
+			}
 			if ((player.faceType == Face.CAT || player.faceType == Face.CAT_CANINES) && type == 2 && rand(3) == 0 && changes < changeLimit && player.faceType != Face.CHESHIRE && player.faceType != Face.CHESHIRE_SMILE) {
 				outputText("\n\nYou suddenly feel like smiling. Why actually look so serious? Everything is easier if you take it with a smile and a laughter. Perhaps it's just you taking on that mentality or it's that weird wonderfruit you took but now you feel you could smile forever showing that wide grin of yours. <b>You now have a cheshire smile.</b>");
 				if (player.faceType == Face.CAT) setFaceType(Face.CHESHIRE);
@@ -5076,8 +5143,8 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//CAT-FACE!
-			if (player.lowerBody == LowerBody.CAT && rand(3) == 0 && changes < changeLimit && (player.faceType != Face.CAT || player.faceType != Face.CAT_CANINES || player.faceType != Face.CHESHIRE || player.faceType != Face.CHESHIRE_SMILE)) {
-				if (rand(2) == 0 && player.faceType != Face.CAT && type != 1) {
+			if (player.lowerBody == LowerBody.CAT && rand(3) == 0 && changes < changeLimit && type != 1 && (player.faceType != Face.CAT || player.faceType != Face.CAT_CANINES || player.faceType != Face.CHESHIRE || player.faceType != Face.CHESHIRE_SMILE)) {
+				if (player.faceType != Face.CAT) {
 					choice = rand(3);
 					if (choice == 0) outputText("\n\nYour face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something... different. You find a puddle to view your reflection and discover <b>your face is now a cross between human and feline features.</b>");
 					else if (choice == 1) outputText("\n\nMind-numbing pain courses through you as you feel your facial bones rearranging.  You clutch at your face in agony as your skin crawls and shifts, your visage reshaping to replace your facial characteristics with those of a feline. <b>You now have an anthropomorphic cat-face.</b>");
@@ -5090,6 +5157,13 @@ public final class Mutations extends MutationsHelper
 					outputText("You feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. You purr at the change it gives you a cute look. <b>Your mouth is now filled with Cat-like canines.</b>");
 					setFaceType(Face.CAT_CANINES);
 				}
+				changes++;
+			}
+			if (player.lowerBody == LowerBody.CAT && rand(3) == 0 && changes < changeLimit && type == 1 && player.faceType != Face.CAT_CANINES) {
+				outputText("\n\n");
+				if (player.faceType != Face.HUMAN) outputText("Your face suddenly mold back into its former human shape. However you feel your canine changing elongating into sharp dagger-like teeth capable of causing severe injuries. ");
+				outputText("You feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. You purr at the change it gives you a cute look. <b>Your mouth is now filled with Cat-like canines.</b>");
+				setFaceType(Face.CAT_CANINES);
 				changes++;
 			}
 			//CAT TOUNGE CUZ WHY NOT?
@@ -5688,7 +5762,6 @@ public final class Mutations extends MutationsHelper
 				player.breastRows[player.smallestTitRow()].breastRating++;
 				changes++;
 			}
-
 			//Physical changes:
 			//Tail - unlocks enhanced with fire tail whip attack
 			if (player.tailType != Tail.SALAMANDER && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
@@ -5758,7 +5831,200 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//Removing gills
-			// Remove gills
+			if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
+			//FAILSAFE CHANGE
+			if (changes == 0) {
+				outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n");
+				HPChange(100, true);
+				dynStats("lus", 5);
+			}
+			player.refillHunger(10);
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+		}
+
+		public function methircrystal(player:Player):void
+		{
+			player.slimeFeed();
+			//init variables
+			var changes:Number = 0;
+			var changeLimit:Number = 1;
+			var temp2:Number = 0;
+			//Randomly choose affects limit
+			if (rand(2) == 0) changeLimit++;
+			if (rand(3) == 0) changeLimit++;
+			if (rand(4) == 0) changeLimit++;
+			changeLimit += additionalTransformationChances();
+			//clear screen
+			clearOutput();
+			outputText("You chew on the weird glowy crystal, which begins to melt in your mouth like sugar. Your head spin for a moment as you begin to have hallucinations. This leaves you with weird feeling in your entire body, filling you with changes.");
+			//-Raises toughness up to 70.
+			//(+2 to 50, +1 to 70)
+			if (player.tou < 70 && changes < changeLimit && rand(3) == 0) {
+				//(+2)
+				if (player.tou < 50) {
+					outputText("\n\nYou grin as you feel your form getting a little more solid.  It seems like your whole body is toughening up quite nicely, and by the time the sensation goes away, you feel ready to take a hit.");
+					dynStats("tou", 2);
+				}
+				//(+1)
+				else {
+					outputText("\n\nYou snarl happily as you feel yourself getting even tougher.  It's a barely discernible difference, but you can feel your [skin.type] getting tough enough to make you feel invincible.");
+					dynStats("tou", 1);
+				}
+				changes++;
+			}
+			//-Raises strength to 60.
+			if (player.str < 60 && rand(3) == 0 && changes < changeLimit) {
+				outputText("\n\nWhile heat builds in your muscles, their already-potent mass shifting slightly as they gain even more strength than before.");
+				dynStats("str", 1);
+				changes++;
+			}
+			//Raises libido to 80.
+			if (player.lib < 80 && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nA knot of fire in your gut doubles you over but passes after a few moments.  As you straighten you can feel the heat seeping into you, ");
+				//(DICK)
+				if (player.cocks.length > 0 && (player.gender != 3 || rand(2) == 0)) {
+					outputText("filling ");
+					if (player.cocks.length > 1) outputText("each of ");
+					outputText("your [cocks] with the desire to breed.  You get a bit hornier when you realize your sex-drive has gotten a boost.");
+				}
+				//(COOCH)
+				else if (player.hasVagina()) outputText("puddling in your [vagina].  An instinctive desire to mate and lay eggs spreads through you, increasing your lust and boosting your sex-drive.");
+				//(TARDS)
+				else outputText("puddling in your featureless crotch for a split-second before it slides into your " + assDescript() + ".  You want to be fucked, filled, and perhaps even gain a proper gender again.  Through the lust you realize your sex-drive has been permanently increased.");
+				//+2 lib if less than 60
+				if (player.lib < 60) dynStats("lib", 1);
+				//+1 if above 60.
+				dynStats("lib", 1);
+				changes++;
+			}
+			//Lower wisdom down to 40
+			
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
+			
+			//-Grow hips out if narrow.
+			if (player.hips.type < 10 && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYour [hips] widens into a larger shape likely to fit your ass better.");
+				player.hips.type++;
+				changes++;
+			}
+			//-Big booty
+			if (player.butt.type < 8 && changes < changeLimit && rand(3) == 0) {
+				player.butt.type++;
+				changes++;
+				outputText("\n\nYour butt cheeks itch as they inflates to a larger plumper size. When it stops, you find yourself the proud owner of a " + buttDescript() + ".");
+			}
+			//Physical changes:
+			//Nipples Start Glowing:
+			if (!player.hasStatusEffect(StatusEffects.GlowingNipples) && !player.hasStatusEffect(StatusEffects.BlackNipples) && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
+				outputText("\n\nYou suddenly feel an itch in your nipples and undress to check up on them. To your surprise they begin to glow with a fluorescent blue light. Well, this will be interesting.  <b>You now have neon blue nipples that glow in the dark.</b>");
+				player.createStatusEffect(StatusEffects.GlowingNipples, 0, 0, 0, 0);
+				changes++;
+			}
+			//Nipples Turn Back:
+			if (player.hasStatusEffect(StatusEffects.BlackNipples) && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nSomething invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
+				changes++;
+				player.removeStatusEffect(StatusEffects.BlackNipples);
+			}
+			//Tail
+			if (player.tailType != Tail.CAVE_WYRM && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\n");
+				if (player.tailType != Tail.NONE) outputText("You feel something shifting in your backside. Then something detaches from your backside and it falls onto the ground.  ");
+				outputText("A large bump starts to grow out of your " + assDescript() + ", making you groan as your spine lengthens for this whole new appendage to form. You finally grow a tail with patches of black scales which taper on the ground. Its fat and chubby like that of a newt and its heavy weight helps you keep your balance not to mention that people will just want to outright hug it.  <b>You have grown a large earth wyrm tail.</b>");
+				setTailType(Tail.CAVE_WYRM);
+				changes++;
+			}
+			//Legs
+			if (player.lowerBody != LowerBody.CAVE_WYRM && player.tailType == Tail.CAVE_WYRM && changes < changeLimit && rand(3) == 0) {
+				//Hooves -
+				if (player.lowerBody == LowerBody.HOOFED) outputText("\n\nYou scream in agony as you feel your hooves crack and break apart, beginning to rearrange.  Your legs change to a digitigrade shape while your feet grow claws and shift to have three toes on the front and a smaller toe on the heel.");
+				//TAURS -
+				else if (player.isTaur()) outputText("\n\nYour lower body is wracked by pain!  Once it passes, you discover that you're standing on digitigrade legs with cave wyrm-like claws.");
+				//feet types -
+				else if (player.lowerBody == LowerBody.HUMAN || player.lowerBody == LowerBody.DOG || player.lowerBody == LowerBody.DEMONIC_HIGH_HEELS || player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.PLANT_HIGH_HEELS || player.lowerBody == LowerBody.BEE || player.lowerBody == LowerBody.CAT || player.lowerBody == LowerBody.LIZARD) outputText("\n\nYou scream in agony as you feel the bones in your legs break and begin to rearrange. They change to a digitigrade shape while your feet grow claws and shift to have three toes on the front and a smaller toe on the heel.");
+				//Else –
+				else outputText("\n\nPain rips through your [legs], morphing and twisting them until the bones rearrange into a digitigrade configuration.  The strange legs have three-toed, clawed feet, complete with a small vestigial claw-toe on the back for added grip.");
+				outputText("  <b>You have cave wyrm legs and claws!</b>");
+				setLowerBody(LowerBody.CAVE_WYRM);
+				player.legCount = 2;
+				changes++;
+			}
+			//Arms
+			if (player.arms.type != Arms.CAVE_WYRM && player.arms.type != Arms.GARGOYLE && player.lowerBody == LowerBody.CAVE_WYRM && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of cave wyrm one with leathery, black scales and short claws replacing your fingernails.  <b>You now have a cave wyrm arms.</b>");
+				setArmType(Arms.CAVE_WYRM);
+				changes++;
+			}
+			//Fanged face
+			if (player.faceType == Face.HUMAN && player.faceType != Face.SALAMANDER_FANGS && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYour tooth's suddenly hurt as you feel them changing. Your canines getting sharper and more adapted to eating meat.  <b>You now have fangs.</b>");
+				setFaceType(Face.SALAMANDER_FANGS);
+				changes++;
+			}
+			if (player.faceType != Face.HUMAN && player.faceType != Face.SALAMANDER_FANGS && changes < changeLimit && rand(4) == 0) {
+				humanizeFace();
+				changes++;
+			}
+			//Lizard eyes
+			if (changes < changeLimit && rand(3) == 0 && player.faceType == Face.SALAMANDER_FANGS && player.eyes.type == Eyes.HUMAN) {
+				outputText("\n\nSomething shift in your eyes as the level of light around you seems to increase. You go to check on what happened and discover your pupils not only changed to reptilian slits but now glow with a neon blue light. Well seeing in the dark will be easy with your <b>new dark blue iris with reptilian neon blue pupils that glow in the dark.</b>");
+				setEyeTypeAndColor(Eyes.CAVE_WYRM, "dark blue");
+				changes++;
+			}
+			//Remove odd eyes
+			if (changes < changeLimit && rand(4) == 0 && player.eyes.type > Eyes.HUMAN && player.eyes.type != Eyes.CAVE_WYRM) {
+				humanizeEyes();
+				changes++;
+			}
+			//Ears
+			if (player.faceType == Face.SALAMANDER_FANGS && player.ears.type != Ears.CAVE_WYRM && changes < changeLimit && rand(4) == 0) {
+				outputText("\n\nYour ears suddenly start to tingle. Strangely they change shape into something entirely different from what you would expect on a reptile covering in fur like those of cave wyrms. You can hear sound more acutely with your <b>new cave wyrm furry ears.</b>");
+				setEarType(Ears.CAVE_WYRM);
+				changes++;
+			}
+			//Tongue
+			if (player.tongue.type == Tongue.HUMAN && player.tongue.type != Tongue.CAVE_WYRM && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nSomething change in your mouth and you feel like you are about to choke! You stick your tongue out and discover to your surprise that it now glows with a neon blue light. Furthermore it stick out way further then it should, just like a lizard.  <b>You now have a neon blue lizard tongue that glow in the dark.</b>");
+				setTongueType(Tongue.CAVE_WYRM);
+				changes++;
+			}
+			if (player.tongue.type != Tongue.HUMAN && player.tongue.type != Tongue.CAVE_WYRM && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYou feel something strange inside your face as your tongue shrinks and recedes until it feels smooth and rounded.  <b>You realize your tongue has changed back into human tongue!</b>");
+				setTongueType(Tongue.HUMAN);
+				changes++;
+			}
+			//Partial scaled skin
+			if (player.hasPlainSkinOnly() && rand(3) == 0) {
+				outputText("\n\nYou feel your skin shift as black scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.");
+				outputText("  <b>Your body is now partially covered with small patches of black scales!</b>");
+				player.skin.growCoat(Skin.SCALES,{color:"black"},Skin.COVERAGE_LOW);
+				changes++;
+			}
+			if (!player.hasPartialCoat(Skin.SCALES) && !player.isGargoyle() && rand(4) == 0) {
+				humanizeSkin();
+				changes++;
+			}
+			//Skin color change
+			if (player.skinTone != "greyish blue" && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+				outputText("\n\nYou skin begin to itch as it darkens taking on <b>a greyish blue color.</b>");
+				player.skinTone = "greyish blue";
+				changes++;
+			}
+			//Acid Spit
+			if (player.findPerk(PerkLib.AcidSpit) < 0 && changes < changeLimit && rand(5) == 0 && player.cavewyrmScore() > 4) {
+				outputText("\n\nYour endowment begins to feel increasingly pleasurable to the point you drool small glowing blue drop of saliva on the ground lost in the pleasure of your oozing vagina/ and / dripping penis. You lose all desire as your eyes zero in on the smoking vegetation progressively corroded by your fluorescent drool. <b>It seems you now can drool acid!</b>\n");
+				outputText("(<b>Perk Gained: Acid Spit</b>)");
+				player.createPerk(PerkLib.AcidSpit, 0, 0, 0, 0);
+				changes++;
+			}
+			//Azureflame Breath
+			if (player.findPerk(PerkLib.AzureflameBreath) < 0 && changes < changeLimit && rand(5) == 0 && player.cavewyrmScore() > 4) {
+				outputText("\n\nYou suddenly belch a long neon blue flame in front of you roasting the nearby vegetation. It didn't hurt your throat however so you shrug. <b>Well you will have to control your blue fire breath better not to set fire to your own camp.</b>\n");
+				outputText("(<b>Perk Gained: Azureflame Breath</b>)");
+				player.createPerk(PerkLib.AzureflameBreath, 0, 0, 0, 0);
+				changes++;
+			}
+			//Removing gills
 			if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
 			//FAILSAFE CHANGE
 			if (changes == 0) {
@@ -5845,7 +6111,6 @@ public final class Mutations extends MutationsHelper
 				if (player.str > 90) dynStats("str", -1);
 				outputText("\n\nYou feel a little weaker, but maybe it's just the liqueur.");
 			}
-
 			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//Sexual Changes:
 			//-Lizard dick - first one
@@ -7515,8 +7780,9 @@ public final class Mutations extends MutationsHelper
 				}
 				else {
 					if (player.arms.type == Arms.BEE) outputText("The fizz covering your upper arms starting to fall down leaving only shiny black chitin clad arms.");
-					if (player.arms.type == Arms.SALAMANDER || player.arms.type == Arms.LIZARD || player.arms.type == Arms.DRAGON) outputText("The scales covering your upper arms starting to fall down leaving only shiny black chitin clad arms.");
-					if (player.arms.type == Arms.MANTIS) outputText("The long scythe extending from your wrist crumbling, while chitin covering your mantis arms slowly starting to change colors, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>.");
+					else if (player.arms.type == Arms.SALAMANDER || player.arms.type == Arms.LIZARD || player.arms.type == Arms.DRAGON) outputText("The scales covering your upper arms starting to fall down leaving only shiny black chitin clad arms.");
+					else if (player.arms.type == Arms.MANTIS) outputText("The long scythe extending from your wrist crumbling, while chitin covering your mantis arms slowly starting to change colors, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>.");
+					else outputText("You watch, spellbound, while your forearms gradually become shiny.  The entire outer structure of your arms tingles while it divides into segments, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>.  You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.");
 				}
 				setArmType(Arms.SPIDER);
 				changes++;
@@ -8894,6 +9160,7 @@ public final class Mutations extends MutationsHelper
 		{
 			clearOutput();
 			mutationStart("foxJewel" + (mystic ? "M" : ""), 3);
+			changeLimit += additionalTransformationChances();
 			if (mystic) changeLimit += 2;
 			if (mystic) outputText("You examine the jewel for a bit, rolling it around in your hand as you ponder its mysteries.  You hold it up to the light with fascinated curiosity, watching the eerie purple flame dancing within.  Without warning, the gem splits down the center, dissolving into nothing in your hand.  As the pale lavender flames swirl around you, the air is filled with a sickly sweet scent that drips with the bitter aroma of licorice, filling you with a dire warmth.");
 			else outputText("You examine the jewel for a bit, rolling it around in your hand as you ponder its mysteries.  You hold it up to the light with fascinated curiosity, watching the eerie blue flame dancing within.  Without warning, the gem splits down the center, dissolving into nothing in your hand.  As the pale azure flames swirl around you, the air is filled with a sweet scent that drips with the aroma of wintergreen, sending chills down your spine.");
@@ -10524,6 +10791,7 @@ public final class Mutations extends MutationsHelper
 			if (rand(5) == 0 && player.pigScore() >= 9 && player.findPerk(PerkLib.TransformationResistance) < 0) {
 				if (flags[kFLAGS.PIG_BAD_END_WARNING] == 0) {
 					outputText("\n\nYou find yourself idly daydreaming of flailing about in the mud, letting go of all of your troubles. Eventually, you shake off the thought. Why would you do something like that? Maybe you should cut back on all the truffles?");
+					flags[kFLAGS.PIG_BAD_END_WARNING] = 1;
 					dynStats("inte", -3);
 				}
 				else {
@@ -11617,7 +11885,7 @@ public final class Mutations extends MutationsHelper
 			
 			//Physical Changes:
 			//Antennae (nie wymaga innych body parts)
-			if (changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && (player.antennae.type == Antennae.NONE || player.antennae.type == Antennae.BEE) && player.horns.count == 0 && rand(3) == 0) {
+			if (changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.antennae.type == Antennae.MANTIS && rand(3) == 0) {
 				if (player.antennae.type == Antennae.BEE) outputText("\n\nYour head itches momentarily as your two floppy antennae changes slowly into long prehensile ones similar to those seen at mantis.");
 				else outputText("\n\nYour head itches momentarily as two long prehensile antennae sprout from your [hair].");
 				setAntennae(Antennae.MANTIS);
@@ -12077,7 +12345,7 @@ public final class Mutations extends MutationsHelper
 			if (player.isFemaleOrHerm()) {
 				if (player.biggestTitSize() <= 2 && changes < changeLimit && rand(3) == 0) {
 					player.growTits(1 + rand(2), 1, false, 3);
-					outputText("\n\nYour breasts feel constrained and painful against your top as they grow larger by the moment, finally stopping as they reach [breastcup] size. You rub the tender orbs as you get used to your larger breast flesh.");
+					outputText("\n\nYour breasts feel constrained and painful against your top as they grow larger by the moment, finally stopping as they reach "+player.breastCup(0)+" size. You rub the tender orbs as you get used to your larger breast flesh.");
 					changes++;
 					dynStats("lib", 1);
 				}
@@ -12305,7 +12573,7 @@ public final class Mutations extends MutationsHelper
 					outputText("The feel of that spicy root returns, but now the heat is felt on your tail, that shakes wildly while it elongates and becomes more bushy. Soon it has become almost as long as you. A very thick mass of soft, fluffy furs covers it in a matter of seconds. It acquires a lovely ringed pattern of red-russet and copperish-orange.");
 					outputText("\n\nWhen the effects finally subside, you decide to test the tail, making it coil around your body, realizing soon that you can control their moves with easy, and that its fur feels wonderful at the touch. Anyways, <b>you now have a long, bushy, red-panda tail!</b>");
 				}
-				setTailType(Tail.RED_PANDA);
+				setTailType(Tail.RED_PANDA, 1);
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && !player.hasFur()) {
@@ -12476,4 +12744,4 @@ public final class Mutations extends MutationsHelper
 		}
 	}
 }
-
+

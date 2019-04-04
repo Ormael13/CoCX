@@ -1035,6 +1035,7 @@ public class DebugMenu extends BaseContent
 			[Tongue.CAT, "5 CAT"],
 			[Tongue.ELF, "6 ELF"],
 			[Tongue.DOG, "7 DOG"],
+			[Tongue.CAVE_WYRM, "8 CAVE_WYRM"],
 		];
 		private static const EYE_TYPE_CONSTANTS:Array = [
 			[Eyes.HUMAN, "0 HUMAN"],
@@ -1058,6 +1059,7 @@ public class DebugMenu extends BaseContent
 			[Eyes.GRYPHON, "18 GRYPHON"],
 			[Eyes.INFERNAL, "19 INFERNAL"],
 			[Eyes.ORC, "20 ORC"],
+			[Eyes.CAVE_WYRM, "21 CAVE_WYRM"],
 		];
 		private static const EAR_TYPE_CONSTANTS:Array    = [
 			[Ears.HUMAN, "0 HUMAN"],
@@ -1092,6 +1094,7 @@ public class DebugMenu extends BaseContent
 			[Ears.RED_PANDA, "29 RED_PANDA"],
 			[Ears.AVIAN, "30 AVIAN"],
 			[Ears.GRYPHON, "31 GRYPHON"],
+			[Ears.CAVE_WYRM, "32 CAVE_WYRM"],
 		];
 		private static const HORN_TYPE_CONSTANTS:Array    = [
 			[Horns.NONE, "0 NONE"],
@@ -1254,6 +1257,7 @@ public class DebugMenu extends BaseContent
 			[Arms.BOAR, "30 BOAR"],
 			[Arms.ORC, "31 ORC"],
 			[Arms.DISPLACER, "32 DISPLACER"],
+			[Arms.CAVE_WYRM, "33 CAVE_WYRM"],
 		];
 		private static const CLAW_TYPE_CONSTANTS:Array = [
 			[Claws.NORMAL, "0 NORMAL"],
@@ -1309,6 +1313,9 @@ public class DebugMenu extends BaseContent
 			[Tail.GRIFFIN, "37 GRIFFIN"],
 			[Tail.LION, "38 LION"],
 			[Tail.BURNING, "39 BURNING"],
+			[Tail.NEKOMATA_FORKED_1_3, "40 NEKOMATA FORKED 1/3"],
+			[Tail.NEKOMATA_FORKED_2_3, "41 NEKOMATA FORKED 2/3"],
+			[Tail.CAVE_WYRM, "42 CAVE WYRM"],
 		];
 		private static const TAIL_COUNT_CONSTANTS:Array = [
 			[0,"0"],1,2,3,4,
@@ -1400,6 +1407,7 @@ public class DebugMenu extends BaseContent
 			[LowerBody.AVIAN, "44 AVIAN"],
 			[LowerBody.GRYPHON, "45 GRYPHON"],
 			[LowerBody.ORC, "46 ORC"],
+			[LowerBody.CAVE_WYRM, "47 CAVE_WYRM"],
 		];
 		private static const LEG_COUNT_CONSTANTS:Array = [
 			1,2,4,6,8,

@@ -38,7 +38,7 @@ package classes.Scenes.NPCs
 		public function lunaJealousy(changes:Number = 0):Number
 		{
 			flags[kFLAGS.LUNA_JEALOUSY] += changes;
-			if (flags[kFLAGS.LUNA_JEALOUSY] > 200) flags[kFLAGS.LUNA_JEALOUSY] = 200;
+			if (flags[kFLAGS.LUNA_JEALOUSY] > 400) flags[kFLAGS.LUNA_JEALOUSY] = 400;
 			if (flags[kFLAGS.LUNA_JEALOUSY] < 0) flags[kFLAGS.LUNA_JEALOUSY] = 0;
 			return flags[kFLAGS.LUNA_JEALOUSY];
 		}
@@ -113,7 +113,7 @@ package classes.Scenes.NPCs
 			outputText("\"<i>Wonderful actually! I get a person I get to take care of in every possible way and I get tons of resources to do it. Ah, [name], that smile on my master’s face while eating a perfectly cooked meal, that relieved sigh you make when I ease your rest, that peaceful look in your face when you sleep...</i>\"\n\n");
 			outputText("You are starting to ask yourself whether Luna is a maid, or a complete stalker, but then realise that all of this is also part of her job.");
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) outputText(" You did however spot a beastly green flash in her eyes as she spoke, so perhaps she is using her job as an excuse to stalk you after all.");
-			lunaJealousy(-50);
+			lunaJealousy(-100);
 			lunaAffection(2);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -125,7 +125,7 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) outputText(" Also, I...I suppose I wouldn’t mind relieving you of any “needs” you may have, that's also part of my job!");
 			outputText("</i>\"\n\nWell, you will make sure to make proper use of her services.\n\n");
 			if (flags[kFLAGS.LUNA_FOLLOWER] < 5) flags[kFLAGS.LUNA_FOLLOWER] = 5;
-			lunaJealousy(-50);
+			lunaJealousy(-100);
 			lunaAffection(2);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -143,7 +143,7 @@ package classes.Scenes.NPCs
 				outputText("Are your eyes deceiving you, or is she truly a genuine human?\n\n");
 				outputText("\"<i>Well, of course I’m human, I came from a different world. That said, it was an accident, I didn’t come here because I wanted to. See, I used to work cleaning things in a magic shop and accidentally triggered some arcane device that looked like a mirror, it sucked me in and next thing I knew I was in this dimension.</i>\"\n\n");
 			}
-			lunaJealousy(-50);
+			lunaJealousy(-100);
 			lunaAffection(2);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -153,7 +153,7 @@ package classes.Scenes.NPCs
 			outputText("What does she think of your camp?\n\n");
 			if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10) outputText("\"<i>I can’t say your home is as big as the ones I’m used to dwelling in. Perhaps one day the good " + player.mf("master","mistress") + " will consider expanding it?</i>\"\n\n");
 			else outputText("\"<i>By all means, you should build a proper house. It would be so much easier to clean.</i>\"\n\n");
-			lunaJealousy(-50);
+			lunaJealousy(-100);
 			lunaAffection(2);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -166,7 +166,7 @@ package classes.Scenes.NPCs
 			outputText("Guess she really is more than just a cute pup.\n\n");
 			if (flags[kFLAGS.LUNA_FOLLOWER] == 11) flags[kFLAGS.LUNA_FOLLOWER] = 13;
 			else flags[kFLAGS.LUNA_FOLLOWER] = 14;
-			lunaJealousy(-50);
+			lunaJealousy(-100);
 			lunaAffection(2);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -310,7 +310,7 @@ package classes.Scenes.NPCs
 				if (player.mana > player.maxMana()) player.mana = player.maxMana();
 				EngineCore.changeFatigue(-(Math.round(player.maxFatigue() * 0.1)));
 				flags[kFLAGS.LUNA_MEAL] = 1;
-				lunaJealousy(-50);
+				lunaJealousy(-100);
 				lunaAffection(10);
 				doNext(camp.returnToCampUseOneHour);
 			}
@@ -323,7 +323,7 @@ package classes.Scenes.NPCs
 			outputText("\"<i>I will tend to your wounds at once.</i>\"\n\n");
 			outputText("Luna casts a few healing spells on you to help your recovery. She traces your skin with her fingers, closing wounds wherever they pass. This treatment is highly effective, but leaves you somewhat aroused.\n\n");
 			dynStats("lus", 33);
-			lunaJealousy(-50);
+			lunaJealousy(-100);
 			lunaAffection(5);
 			HPChange(Math.round(player.maxHP() * .5), true);
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 10) {
@@ -605,7 +605,7 @@ package classes.Scenes.NPCs
 				outputText("Losing yourself to the search for pleasure, you put your hands on Luna’s head and push her down while desperately bucking your hips, trying to finally attain your desired release. Luna is more than happy to oblige your rather rough request and grips your [ass] as she begins zealously working away at your lust. Under her passionate assault you stand no hope of lasting against her, a loud moan signalling your impending release.\n\n");
 				outputText("Finally, and with a great cry, you release your lust into your maid’s waiting mouth, her tongue still working away to prolong your orgasm. You fall back as she finishes the last of your girlcum, licking her lips before laying beside you and wrapping her arms around you. You return her sweet gesture, pulling her close and falling asleep in her arms.\n\n");
 			}
-			lunaJealousy(-50);
+			lunaJealousy(-100);
 			lunaAffection(2);
 			player.orgasm();
 			if (flags[kFLAGS.LUNA_MOONING] == 2) {
@@ -642,7 +642,7 @@ package classes.Scenes.NPCs
 			outputText(", she pulls back and bows her head.\n\n");
 			outputText("\"<i>Was that pleasing, " + player.mf("Master","Mistress") + "?</i>\" You pat her on the head and tell her it was magnificent, thanking her for the pleasant session.\n\n");
 			outputText("You re-equip your [armor], turning to thank Luna once more, before you continue on with your day.\n\n");
-			lunaJealousy(-50);
+			lunaJealousy(-100);
 			lunaAffection(2);
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
@@ -658,7 +658,7 @@ package classes.Scenes.NPCs
 			outputText("Moaning at her zealous treatment, and placing your hands on her head to steady yourself, you work in time with Luna’s actions, thrusting your shaft deeper into the silken vice of her breasts and shoving more into her heavenly oral cavern. The soft clap of flesh rebounds off your thighs as you both work vehemently towards your orgasm.\n\n");
 			outputText("Cock twitching; ready to unload its payload, you push as deep as you possibly can into Luna’s velvety restraints. A single throb is all the warning Luna receives before your cock unloads its contents, warm cum filling her mouth and throat. Unphased, she drinks down every drop. After you finish rewarding your maid, she takes it upon herself to engulf the entirety of your cock, running her tongue over every bit of flesh and sucking on it again, your still sensitive shaft depositing a few more strings of cum, before she pulls away, leaving every inch of your [cock] glistening with her spit.\n\n");
 			outputText("Taking in a deep breath, you thank Luna for her work, patting her on the head, before re-dressing and moving on with your day.\n\n");
-			lunaJealousy(-50);
+			lunaJealousy(-100);
 			lunaAffection(2);
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
@@ -675,7 +675,7 @@ package classes.Scenes.NPCs
 			outputText("what with doggystyle being one of her favorite positions. Regardless, her ass molds to your cock just as good as a vagina, and the pleasure you feel from it is good enough for you to feel your -cock- starting to twitch in delight. Luna growls in pleasure from each thrust, and this only drives you further on. Eventually, you can’t hold it anymore and lose control of your [cock], Luna howling in pleasure as you flood her asshole with your cum, the excess puddling on the ground between her legs. ");
 			outputText("You fall limply on her back, needing some rest and she is all too happy to pull you into her embrace for a while, hugging snuggly to you and getting a full whiff of your scent.\n\n");
 			outputText("You rest like this for a moment before lifting back up and resuming your duties. Luna has regained her human form since then and is already starting to put back on her maid uniform.\n\n");
-			lunaJealousy(-50);
+			lunaJealousy(-100);
 			lunaAffection(2);
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
@@ -700,7 +700,7 @@ package classes.Scenes.NPCs
 			outputText("Their combined affection and skill eventually make short work of your restraint; " + (player.cocks.length > 1 ? "you pull out of their holes, " : "") + "cum flowing " + (player.balls > 0 ? "out of your balls and " : "") + "through your [cock], splattering the space between them up to their combined breasts with a massive load of semen. Fully satisfied, the pair lick their lips as they untangle from your cock, a large puddle forming on the ground. ");
 			outputText("They head for the spring to clean themselves giving you a pair of playful winks before leaving you to rest. Well, now that you think of it, they both won and you lost. But who cares; what a good time you had!\n\n");
 			outputText("You decide to take a nap to recover some energy. A few hour later, you wake up ready to resume adventuring.\n\n");
-			lunaJealousy(-50);
+			lunaJealousy(-100);
 			lunaAffection(2);
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
@@ -726,7 +726,7 @@ package classes.Scenes.NPCs
 				outputText("You're just beginning however, and start to pound the bitch in earnest. If being dominated by an Alpha male is her thing you are more than happy to oblige. The bitch pants, drool falling on the dirt as you fuck her, your crotch slapping against her well shaped backside with each thrust. Gosh her cunt is like a vice" + (flags[kFLAGS.LUNA_MOON_CYCLE] % 7 == 0 ? ", is she actually in heat every single full moon?" : ".") + " ");
 				outputText("If that's the case you’re going to abuse that wanting cunt every time the lunar disc is complete. Her tail is wagging from side to side as you fuck her for several minutes, soothing her " + (player.inRut ? "and your " : "") + "feral urges!\n\n");
 				outputText("Finally you reach your climax " + ((player.dogScore() > 5 || player.wolfScore() > 5) ? "howling in tandem with her" : "roaring in tandem with her howl") + " as you paint her cunt white like the moon with your hot seed. She sighs in relief, turning over without unplugging you from her cunt to embrace you.\n\n");
-				lunaJealousy(-50);
+				lunaJealousy(-100);
 				lunaAffection(2);
 				player.orgasm();
 				if (flags[kFLAGS.LUNA_MOONING] == 1) {
@@ -755,7 +755,7 @@ package classes.Scenes.NPCs
 				outputText("Finally you cum, flooding her thirsty mouth with your girl juices");
 				if (player.hasCock()) outputText(" as your cock explodes, covering her chest up to her belly in semen" + (player.werewolfScore() >= 12 ? " while you howl to the moon, savoring your mind blowing orgasm" : "") + "");
 				outputText(". The waters flooding your fingers a few seconds later are the only telltale sign your beta finally reached her climax, but you think it’s more than enough of a reward for her.\n\n");
-				lunaJealousy(-50);
+				lunaJealousy(-100);
 				lunaAffection(2);
 				player.orgasm();
 				if (flags[kFLAGS.LUNA_MOONING] == 1) {

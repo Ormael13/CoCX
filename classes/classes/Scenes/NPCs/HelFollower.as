@@ -476,7 +476,7 @@ public function angryHelAndIzzyCampHelHereFirst():void {
 }
 
 public function heliaFollowerMenu2():void {
-	if ((flags[kFLAGS.LUNA_JEALOUSY] > 100 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 150 && rand(10) < 8)) mishapsLunaHel();
+	if ((flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8)) mishapsLunaHel();
 	else heliaFollowerMenu();
 }
 
@@ -2442,3 +2442,4 @@ public function mishapsLunaHel():void {
 }
 	}
 }
+

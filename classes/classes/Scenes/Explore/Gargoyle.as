@@ -639,6 +639,7 @@ private function banishmentGargoyleRitual():void {
 	player.takePhysDamage(Math.round(player.maxHP()/3));
 	fatigue(10);
 	//(Display options: [Nothing] [Revenge] and [Cuddle])
+	menu();
 	addButton(0,"Nothing",dontFreakOutAfterBanishment);
 	addButton(1,"Cuddle",cuddleForBanishments);
 	addButton(2,"Revenge",getRevengeForBanishments);

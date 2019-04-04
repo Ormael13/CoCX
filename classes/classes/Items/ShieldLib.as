@@ -14,6 +14,7 @@ package classes.Items
 		
 		public static const NOTHING:Nothing = new Nothing();
 		
+		public const BSHIELD:BeautifulShield = new BeautifulShield();
 		public const BLASPHE:Blasphemy = new Blasphemy();
 		public const BUCKLER:Shield = new Shield("Buckler", "Buckler", "buckler", "a buckler", 5, 50, "A simple wooden rounded shield.");
 		public const GREATSH:Shield = new Shield("GreatSh", "GreatShld", "greatshield", "a greatshield", 12, 300, "A large metal shield.");

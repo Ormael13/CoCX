@@ -85,7 +85,10 @@ public class Questlog extends BaseContent
 			else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 1 || player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 3 || player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 6) outputText("In Progress");
 			else outputText("Not Started");
 			outputText("\n<i><b>Feral Demons Hunt:</b> Soon</i>");
-			outputText("\n<i><b>Green Gel Gathering:</b> Soon</i>");
+			outputText("\n<b>Green Gel Gathering:</b> ");
+			if (player.statusEffectv2(StatusEffects.AdventureGuildQuests4) == 2 || player.statusEffectv2(StatusEffects.AdventureGuildQuests4) == 5) outputText("Completed (for today)");
+			else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests4) == 1 || player.statusEffectv2(StatusEffects.AdventureGuildQuests4) == 4) outputText("In Progress");
+			else outputText("Not Started");
 			outputText("\n<b>Black Chitin Gathering:</b> ");
 			if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) == 2 || player.statusEffectv1(StatusEffects.AdventureGuildQuests4) == 5) outputText("Completed (for today)");
 			else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) == 1 || player.statusEffectv1(StatusEffects.AdventureGuildQuests4) == 4) outputText("In Progress");

@@ -322,6 +322,8 @@
         <cell rect="38,272,36,56" name="arms/kraken" dx="90" dy="66"/>
         <cell rect="211,63,56,34" name="horns_bg/demon" dx="65" dy="23"/>
         <cell rect="270,11,125,88" name="legs_bg/cattaur" dx="71" dy="101"/>
+        <cell rect="208,104,29,21" name="horns/unicorn" dx="71" dy="32"/>
+        <cell rect="203,127,33,23" name="horns/bicorn" dx="71" dy="27"/>
     </spritemap>
     <spritemap file="chitin.png">
         <cell rect="1,23,38,22" name="breasts/Dchitin" dx="76" dy="70"/>
@@ -409,6 +411,8 @@
         <cell rect="145,294,105,69" name="tail_fg/reptile_fire" dx="37" dy="97"/>
         <cell rect="258,226,53,119" name="wings_bg/scales_left" dx="32" dy="20"/>
         <cell rect="314,226,53,119" name="wings/scales_right" dx="104" dy="20"/>
+        <cell rect="218,161,110,64" name="tail/gargoyle_axe" dx="37" dy="97"/>
+        <cell rect="32,335,110,64" name="tail/gargoyle_mace" dx="37" dy="97"/>
     </spritemap>
     <layers>
         <layer name="antennae"/>
@@ -503,7 +507,12 @@
                 <show part="horns/devil"/>
                 <show part="horns_bg/devil"/>
             </case>
-            <case value="Horns.UNICORN"><!--TODO UNICORN--></case>
+            <case value="Horns.UNICORN">
+				<show part="horns/unicorn"/>
+			</case>
+            <case value="Horns.BICORN">
+				<show part="horns/bicorn"/>
+			</case>
             <case value="Horns.ORCHID">
                 <show part="horns/orchid"/>
                 <show part="horns_bg/orchid"/>
@@ -1120,8 +1129,10 @@
                 <show part="tail/manticore"/>
             </case>
             <case value="Tail.GARGOYLE">
-                <!--TODO -->
-                <show part="tail/reptile"/>
+                <show part="tail/gargoyle_mace"/>
+            </case>
+            <case value="Tail.GARGOYLE_2">
+                <show part="tail/gargoyle_axe"/>
             </case>
             <case values="Tail.ORCA,Tail.SHARK">
                 <show part="tail/orca"/>

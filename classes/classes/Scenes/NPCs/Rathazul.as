@@ -144,6 +144,7 @@ public function campRathazul():void {
 	outputText(images.showImage("rathazul-camp"));
 	outputText("Rathazul looks up from his equipment and gives you an uncertain smile.\n\n\"<i>Oh, don't mind me,</i>\" he says, \"<i>I'm just running some tests here.  Was there something you needed, [name]?</i>\"\n\n");
 	//player.createStatusEffect(StatusEffects.metRathazul,0,0,0,0);
+	cheatTime2(5);
 	offered = rathazulWorkOffer();
 	if (!offered) {
 		outputText("He sighs dejectedly, \"<i>I don't think there is.  Why don't you leave me be for a time, and I will see if I can find something to aid you.</i>\"");
@@ -279,6 +280,7 @@ private function rathazulWorkOffer():Boolean {
 			outputText("The rodent sniffs your possessions. \"<i>You know, I could make something with five bottles of Lactaid and two bottles of purified LaBova. I'll also need 250 gems.</i>\"");
 			outputText("\n\n");
 		}
+		if (flags[kFLAGS.SAMIRAH_FOLLOWER] == 6) rathazulReptaTonguePotionOffer();
 	}
 	if(totalOffers == 0 && spoken) {
 		doNext(camp.returnToCampUseOneHour);
@@ -288,23 +290,22 @@ private function rathazulWorkOffer():Boolean {
 		outputText("Will you take him up on an offer or leave?");
 		//In camp has no time passage if left.
 		menu();
-		if (dyes && player.hasItem(consumables.REPTLUM, 1) && flags[kFLAGS.ARIAN_SCALES] > 0) addButton(0, "Make Dye", makeDyes).hint("Ask him to make a special dye for you. \n\nCost: 50 Gems.");//dye for Arian scales atm only doable
 		//Shop sub-menu
 		if (dyes || philters || reductos)
-			addButton(1, "Shop", rathazulShopMenu).hint("Check Rathazul's wares.");
+			addButton(0, "Shop", rathazulShopMenu).hint("Check Rathazul's wares.");
 		else
-			addButtonDisabled(1, "Shop", "You can't afford anything Rathazul has to offer.");
-		addButton(4, "Purify", purifySomething).hint("Ask him to purify any tainted potions. \n\nCost: 20 Gems.");
-		
-		if (debimbo) addButton(5, "Debimbo", makeADeBimboDraft).hint("Ask Rathazul to make a debimbofying potion for you. \n\nCost: 250 Gems \nNeeds 5 Scholar Teas.");
+			addButtonDisabled(0, "Shop", "You can't afford anything Rathazul has to offer.");
+		addButton(1, "Purify", purifySomething).hint("Ask him to purify any tainted potions. \n\nCost: 20 Gems.");
+		if (dyes && player.hasItem(consumables.REPTLUM, 1) && flags[kFLAGS.ARIAN_SCALES] > 0) addButton(5, "Make Dye", makeDyes).hint("Ask him to make a special dye for you. (Only dyes here are for Arian) \n\nCost: 50 Gems.");
 		if (player.hasItem(consumables.BEEHONY)) addButton(6, consumables.PURHONY.shortName, rathazulMakesPureHoney).hint("Ask him to distill a vial of bee honey into a pure honey. \n\nCost: 25 Gems \nNeeds 1 vial of Bee Honey");
 		if (player.statusEffectv2(StatusEffects.MetRathazul) >= 5) addButton(7, "ProLactaid", rathazulMakesMilkPotion).hint("Ask him to brew a special lactation potion. \n\nCost: 250 Gems \nNeeds 5 Lactaids and 2 Purified LaBovas.");
-		if (lethiciteDefense != null) addButton(10, "Lethicite", lethiciteDefense).hint("Ask him if he can make use of that lethicite you've obtained from Marae.");
+		if (player.statusEffectv2(StatusEffects.MetRathazul) >= 5) addButton(8, "Scorpinum", rathazulMakesScorpioPotion).hint("Ask him to brew a special potion that could aid in gaining scorpion tail. \n\nCost: 100 Gems \nNeeds 2 vials of Bee Honey and 2 vials of Snake Oil.");
+		if (debimbo) addButton(10, "Debimbo", makeADeBimboDraft).hint("Ask Rathazul to make a debimbofying potion for you. \n\nCost: 250 Gems \nNeeds 5 Scholar Teas.");
+		if (flags[kFLAGS.SAMIRAH_FOLLOWER] == 7 && player.hasItem(consumables.HUMMUS_, 1) && player.hasItem(consumables.REPTLUM, 1) && player.hasItem(consumables.OVIELIX, 1)) addButton(11, "ReptaTongue P", makeReptaTonguePotion).hint("Ask him to make Repta-Tongue Potion. \n\nNeeds 1 Hummus, 1 Reptilium and 1 Ovi Elixir");
 		if (player.hasItem(consumables.PURHONY, 1) && player.hasItem(consumables.C__MINT, 1) && player.hasItem(consumables.PURPEAC, 1) && player.hasKeyItem("Rathazul's Purity Potion") < 0 &&(flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] == 2 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10)) {
-			addButton(11, "Pure Potion", rathazulMakesPurifyPotion).hint("Ask him to brew a purification potion for Minerva.");
+			addButton(12, "Pure Potion", rathazulMakesPurifyPotion).hint("Ask him to brew a purification potion for Minerva.");
 		}
-		if (player.statusEffectv2(StatusEffects.MetRathazul) >= 5) addButton(12, "Scorpinum", rathazulMakesScorpioPotion).hint("Ask him to brew a special potion that could aid in gaining scorpion tail. \n\nCost: 100 Gems \nNeeds 2 vials of Bee Honey and 2 vials of Snake Oil.");
-
+		if (lethiciteDefense != null) addButton(13, "Lethicite", lethiciteDefense).hint("Ask him if he can make use of that lethicite you've obtained from Marae.");
 		if(player.hasStatusEffect(StatusEffects.CampRathazul))
 			addButton(14,"Leave", camp.campFollowers);
 		else
@@ -456,6 +457,29 @@ private function rathazulDebimboOffer():void {
 		}
 		flags[kFLAGS.RATHAZUL_DEBIMBO_OFFERED]++;
 	}
+	//Rath menu
+	menu();
+	addButton(0,"Next",campRathazul);
+}
+
+private function rathazulReptaTonguePotionOffer():void {
+	spriteSelect(49);
+	clearOutput();
+	outputText("You mention the desert naga to Rathazul who look at you somewhat surprised.\n\n\"<i>Well that is an odd request? You need me to craft a potion that will allow some naga to understand the common language? Yes I can do that, but it would require some pretty rare ingredients such as hummus, reptilium, and one ovi elixir. Get me those three and I will make the potion for you.</i>\"\n\n");
+	flags[kFLAGS.SAMIRAH_FOLLOWER] = 7;
+	//Rath menu
+	menu();
+	addButton(0,"Next",campRathazul);
+}
+private function makeReptaTonguePotion():void {
+	spriteSelect(49);
+	clearOutput();
+	outputText("Rathazul picks up the hummus, the reptilium and the ovi elixir before mixing them up in his alchemical equipment. He hands you the potion and get back to his things. You realise he didn’t mix in the ovi elixir and you are about to ask him about it when you see that weird gleam in his eyes as he mix it with firemander whisky and what might be a massive dose of lust draft. You back down, some things are better left unknown...");
+	outputText("\n\n<b>Acquired Repta-Tongue potion</b>");
+	player.consumeItem(consumables.HUMMUS_, 1);
+	player.consumeItem(consumables.REPTLUM, 1);
+	player.consumeItem(consumables.OVIELIX, 1);
+	flags[kFLAGS.SAMIRAH_FOLLOWER] = 8;
 	//Rath menu
 	menu();
 	addButton(0,"Next",campRathazul);

@@ -198,6 +198,7 @@ public class CombatTeases extends BaseCombatContent {
 		//45 Lethicite Armor Tease
 		//46 Alraune Tease
 		//47 Manticore Tailpussy Tease
+		//48 Belly Dance (Naga races)
 		//==============================
 		//BUILD UP LIST OF TEASE CHOICES!
 		//==============================
@@ -611,6 +612,13 @@ public class CombatTeases extends BaseCombatContent {
 			choices[choices.length] = 47;
 			choices[choices.length] = 47;
 			choices[choices.length] = 47;
+		}
+		//48 - Belly Dance (Naga races)
+		if (player.isNaga() && flags[kFLAGS.SAMIRAH_HYPNOSIS] == 6) {
+			choices[choices.length] = 48;
+			choices[choices.length] = 48;
+			choices[choices.length] = 48;
+			choices[choices.length] = 48;
 		}
 		//=======================================================
 		//    CHOOSE YOUR TEASE AND DISPLAY IT!
@@ -1207,6 +1215,13 @@ public class CombatTeases extends BaseCombatContent {
 				chance += 3;
 				damage += 3;
 				break;
+				//naga races belly dance teases
+			case 48:
+				outputText("You give " + monster.a + monster.short + " a belly dance show, moving your hip from a side to another and displaying your assets.  " + monster.capitalA + monster.short + " is so distracted by your dancing it doesn’t realise the two of you are still in battle for a few seconds before snapping out only in time to realise " + monster.pronoun1 + " did absolutely nothing for the last six seconds.");
+				monster.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
+				chance += 3;
+				damage += 3;
+				break;
 		}
 		//===========================
 		//BUILD BONUSES IF APPLICABLE
@@ -1471,6 +1486,8 @@ public class CombatTeases extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
 			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
 			if (player.hasPerk(PerkLib.SuperSensual) && chance > 100) damagemultiplier += (0.01 * (chance - 100));
+			if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
+			if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
 			damage *= damagemultiplier;
 			bonusDamage *= damagemultiplier;
 			//Determine if critical tease!

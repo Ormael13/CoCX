@@ -174,8 +174,12 @@ public class HeXinDao extends BaseContent
         addButton(0, "Merchant", golemmerchant);
         addButton(1, "TFspec/Exch", mogahenmerchant);
         addButton(2, "SoulEquip", soulequipmentmerchant);
-        addButton(3, "SoulArrow", soularrowmerchant);
-		//addButton(4, "Dungeon", entranceToRiverDungeon);
+        addButton(3, "SoulArrow", ermaswiftarrowmerchant);
+		if (flags[kFLAGS.NEISA_FOLLOWER] == 0) addButton(4, "Dungeon", entranceToRiverDungeon);
+		else {
+			if (flags[kFLAGS.PLAYER_COMPANION_1] != "") addButton(4, "Dungeon", entranceToRiverDungeon);
+			else addButtonDisabled(4, "Dungeon", "Seems you need to find someone to form party with you.");
+		}
         //addButton(5, "", ); siedziba lokalnej grupy zrzeszającej soul cultivators - PC aby potem pojsc dalej bedzie musial dolaczyc tutaj (pomyslec nad wiarygodnym sposobem zmuszenia go do tego - moze jakies ciekawe itemy/inne rzeczy dla czlonkow beda a miejsce sie zwolni jak wywala tak goblinke tworzynie golemow, ktora potem oczywiscie wcisnie sie do obozu PC aby w spokoju rozwijac sie w tworzeniu golemow itp.)
         addButton(6, "JourTTEast", journeytotheeast.enteringInn);
         addButton(7, "Arena", soularena);
@@ -525,21 +529,29 @@ public class HeXinDao extends BaseContent
 	
 	public function entranceToRiverDungeon():void {
 		clearOutput();
-		if (flags[kFLAGS.NEISA_FOLLOWER] == 0) neisaScene.firstTimeEnteringRiverDungeon();
+		if (flags[kFLAGS.NEISA_FOLLOWER] == 0) {
+			outputText("As you approach the cave a bunch of heavily armored guards stops you its barely if you can see under that helmet.\n\n");
+			outputText("\"<i>Hey you hold there. This cave is dangerous we can’t just let you head in like that you should at least go with someone else where is your partner?</i>\"\n\n");
+			outputText("Partner what partner?\n\n");
+			outputText("\"<i>Your teammate you moron. This place has claimed more adventurers lives then the wild of Mareth by now and it's obvious no one should go in there alone.</i>\"\n\n");
+			outputText("It seems those peoples won’t let you go in the cave without a teammate.\n\n");
+			flags[kFLAGS.NEISA_FOLLOWER] = 1;
+			outputText("You decide to play by the rules and go find another hero to team with. The problem is where to even look for?\n\n");
+			doNext(riverislandVillageStuff);
+		}
 		else {
-			outputText("Repeat entering scene for dungeon. Till henchmans are added it will not be opened again. (Temporaly scene text!!!)");
-			menu();
-			if (flags[kFLAGS.PLAYER_COMPANION_1] != "") addButton(1, "Enter", riverdungeon.enterDungeon);
-			else addButtonDisabled(1, "Enter", "Seems you need to find someone to form party with you.");
-			addButton(3, "Back", riverislandVillageStuff);
+			outputText("Seeing as you come in pair the guards let you in thought with a final warning.\n\n");
+			outputText("\"<i>Try not to die down there a lot of people went in and never came back.</i>\"\n\n");
+			outputText("You will keep that in mind.\n\n");
+			doNext(riverdungeon.enterDungeon);
 		}
 	}
 
-    public function soularrowmerchant():void {
-        clearOutput();//później zamienić soulequipment na imie sprzedawczyni ^^ female centaur npc
-        outputText("After entering the shop with a sign saying 'Soul Arrow' over the doors you see a few shelves filled with various range weapons of all sorts from bows, throu crossbows to some more exotic ones tat you not even sure how to name them. ");
+    public function ermaswiftarrowmerchant():void {
+        clearOutput();
+        outputText("After entering the shop with a sign saying 'Soul Arrow' over the doors you see a few shelves filled with various range weapons of all sorts from bows, throu crossbows to some more exotic ones that you not even sure how to name them. ");
         outputText("Behind the desk that looks like a central point of the shop you see a centauress. She have no fancy or provocative clothes, average body with which she moves quite gracesfully around stalls with items for sale despite her naturaly larger body than most of people living here have.");
-        outputText("\n\n\"<i>Greeting dear customer.  Look around and if something catch your eyes let me know,</i>\" she say all that almost on one breath after noticing your near.");
+        outputText("\n\n\"<i>Greeting my name is Erma Swiftarrow and this is my shop. Go ahead and look around, if something catch your eyes let me know,</i>\" she say all that almost on one breath after noticing your near.");
         menu();
         addButton(0, weaponsrange.BOWLIGH.shortName, weaponrangeBuy, weaponsrange.BOWLIGH);
         addButton(1, weaponsrange.BOWHUNT.shortName, weaponrangeBuy, weaponsrange.BOWHUNT);
@@ -554,30 +566,67 @@ public class HeXinDao extends BaseContent
 		//addButton(4, weapons.MACE.shortName, weaponBuy, weapons.MACE);
         //addButton(8, weapons.MACE.shortName, weaponBuy, weapons.MACE);//awl - wymagać bedzie możliwość lewitacji czy coś od PC aby to używać
         //addButton(9, weapons.MACE.shortName, weaponBuy, weapons.MACE);//bow made for soul cultivator xD
-        //addButton(13, "Talk", ).hint("Tak with .");
+        addButton(13, "Training", ermaswiftarrowmerchantarcherytraining).hint("Archery training.");
         addButton(14, "Back", riverislandVillageStuff);
         statScreenRefresh();
     }
 
     private function weaponrangeBuy(itype:ItemType):void {
         clearOutput();
-        outputText("\"<i>That'll be " + itype.value + " gems.</i>\"");
+        outputText("The centauress nod at your purchase and reply: \"<i>That'll be " + itype.value + " gems.</i>\"");
         //outputText("The gruff metal-working husky gives you a slight nod and slams the weapon down on the edge of his stand.  He grunts, \"<i>That'll be " + itype.value + " gems.</i>\"");
         if(player.gems < itype.value) {
             outputText("\n\nYou count out your gems and realize it's beyond your price range.");
             //Goto shop main menu
-            doNext(soularrowmerchant);
+            doNext(ermaswiftarrowmerchant);
             return;
         }
         else outputText("\n\nDo you buy it?\n\n");
         //Go to debit/update function or back to shop window
-        doYesNo(curry(debitWeaponRange,itype), soularrowmerchant);
+        doYesNo(curry(debitWeaponRange,itype), ermaswiftarrowmerchant);
     }
     private function debitWeaponRange(itype:ItemType):void {
         player.gems -= itype.value;
         statScreenRefresh();
-        inventory.takeItem(itype, soularrowmerchant);
+        inventory.takeItem(itype, ermaswiftarrowmerchant);
     }
+	
+	public function ermaswiftarrowmerchantarcherytraining():void {
+		clearOutput();
+		if (flags[kFLAGS.ERMA_ARCHERY_TRAINING] > 0) outputText("\"<i>Need more training? Yea sure its 100 gems as usual paid up front.</i>\"");
+		else {
+			outputText("Bows are nice and all but they won’t be of much uses to you if you can’t wield them properly. You thus ask Erma if training service would be something the shop can provide.\n\n");
+			outputText("\"<i>Training new archers indeed is something I do but I don’t do it for free. It would be 100 gem a session if you can actually afford it.</i>\"");
+			flags[kFLAGS.ERMA_ARCHERY_TRAINING] = 1;
+		}
+		menu();
+		addButton(0, "Yes", ermaswiftarrowmerchantarcherytrainingYes);
+		addButton(1, "No", ermaswiftarrowmerchantarcherytrainingNo);
+	}
+	public function ermaswiftarrowmerchantarcherytrainingNo():void {
+		outputText("\n\nYou were just asking you didn’t really plan on training right now though you might later on.");
+		doNext(ermaswiftarrowmerchant);
+	}
+	public function ermaswiftarrowmerchantarcherytrainingYes():void {
+		if (player.statusEffectv1(StatusEffects.Kelt) > 99) {
+			outputText("\"<i>Need more training? Yea sure its 100 gems as usual paid up front.</i>\"");
+			doNext(ermaswiftarrowmerchant);
+		}
+		else {
+			if (player.gems < 100) {
+				outputText("\n\nSadly you lack the gems for training right now.");
+				doNext(ermaswiftarrowmerchant);
+			}
+			else {
+				player.gems -= 100;
+				outputText("\n\nYou fellow Erma behind the shop in a backyard. She has a field there for target practice. You spend the better part of the day shooting arrows and practicing and improving your aim while Erma correct your stance and gives advices. You later leave town with improved skills at archery.");
+				if (!player.hasStatusEffect(StatusEffects.Kelt)) player.createStatusEffect(StatusEffects.Kelt, 10, 0, 0, 0);
+				else player.addStatusValue(StatusEffects.Kelt, 1, 10);
+				if (player.statusEffectv1(StatusEffects.Kelt) >= 100) player.changeStatusValue(StatusEffects.Kelt,1,100);
+				doNext(camp.returnToCampUseSixHours);
+			}
+		}
+	}
 
 public function soularena():void {
 	clearOutput();//arena do walk z przeciwnikami na exp tylko - zadnych sex scenes tylko walk do wygranej niewazne czy przez hp czy lust - przeciwnicy: dummy golem, grupa dummy golems, true golem, ?group of true golems, weak deviant golem?, niskopoziomowi przeciwnicy uzywajacy soul skills (moze po prostu wesje zwyklych przeciwnikow ale z dodanymi soul attakami?)
@@ -780,11 +829,11 @@ public function soularena():void {
 
     private function restaurant(selected:Boolean):void {
         if(!selected){
-            outputText("You aren’t hungry at the time maybe you will eat later.");
+            outputText(" You aren’t hungry at the time maybe you will eat later.");
             doNext(riverislandVillageStuff);
             return;
         } else if (flags[kFLAGS.SPIRIT_STONES] < 1){
-            outputText("You would like to eat but you don’t have enough spirit stones to afford the food.");
+            outputText(" You would like to eat but you don’t have enough spirit stones to afford the food.");
             doNext(riverislandVillageStuff);
             return;
         }

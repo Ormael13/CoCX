@@ -68,6 +68,14 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.raijuScore() >= 7 && player.findPerk(PerkLib.ElectrifiedDesire) >= 0) {
 			bd = buttons.add("Orgasmic L.S.", OrgasmicLightningStrike, "Masturbate to unleash a massive discharge.", "Orgasmic Lightning Strike");
 		}
+		if (player.tailType == Tail.FOX && player.tailCount >= 2 && player.tailCount < 7) {
+			bd = buttons.add("Fox Fire", basicFoxFire, "Unleash fox flame at your opponent for high damage. \n");
+			bd.requireSoulforce(30 * soulskillCost() * soulskillcostmulti());
+			bd.requireMana(spellCost(75 * kitsuneskillCost()));
+			if(player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
+				bd.disable("You cannot focus to use this ability while you're having so much difficult breathing.");
+			}
+		}
 		if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.tailType == Tail.FOX && player.tailCount >= 7) {
 			bd = buttons.add("F.FoxFire", fusedFoxFire, "Unleash fused ethereal blue and corrupted purple flame at your opponent for high damage. \n");
 			bd.requireSoulforce(100 * soulskillCost() * soulskillcostmulti());
@@ -115,11 +123,11 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			// Illusion
 			bd = buttons.add("Illusion",kitsuneIllusion,"Warp the reality around your opponent to temporary boost your evasion for 3 rounds and arouse target slightly.");
-			if (player.tailCount == 9 && player.hasPerk(PerkLib.KitsuneThyroidGland)) {
+			if (player.tailType == 13 && player.tailCount == 9 && player.hasPerk(PerkLib.KitsuneThyroidGland)) {
 				bd.toolTipText += "\nWould go into cooldown after use for: 3 rounds\n";
 				bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
 				bd.requireFatigue(200);
-			} else if (player.tailCount == 9 || player.hasPerk(PerkLib.KitsuneThyroidGland)) {
+			} else if ((player.tailType == 13 && player.tailCount == 9) || player.hasPerk(PerkLib.KitsuneThyroidGland)) {
 				bd.toolTipText += "\nWould go into cooldown after use for: 6 rounds\n";
 				bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
 				bd.requireFatigue(100);
@@ -134,10 +142,23 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You cannot focus to use this ability while you're having so much difficult breathing.");
 			}
 		}
-	/*	if (player.tailType == CAT && player.tailCount == 2) {
-			ui.addMagicButton("FoxFire", foxFire).hint("Unleash a fox flame at your opponent for high damage. \n\nFatigue Cost: " + spellCost(60) + "\nSoulforce cost: " + 30 * soulskillCost() * soulskillcostmulti() + "");
-		}	//przerobic potem na ghost fire dla nekomata race special also combining fatigue and soulfroce
-	*/
+		if (player.tailType == Tail.NEKOMATA_FORKED_1_3 || player.tailType == Tail.NEKOMATA_FORKED_2_3 || (player.tailType == Tail.CAT && player.tailCount == 2)) {//player.hasPerk(PerkLib.NekomataThyroidGland) || 
+			bd = buttons.add("GhostFire", nekomataGhostFire).hint("Unleash a ghost flame at your opponent for high damage. It isn't stoped by barriers that stops magic spells or attacks. \n");
+			/*if (player.tailType == 8 && player.tailCount == 2 && player.hasPerk(PerkLib.)) {
+				bd.requireSoulforce(150 * soulskillCost() * soulskillcostmulti());
+				bd.requireMana(spellCost(150));
+			} else */if (player.tailType == 8 && player.tailCount == 2) {// || player.hasPerk(PerkLib.)
+				bd.requireSoulforce(100 * soulskillCost() * soulskillcostmulti());
+				bd.requireMana(spellCost(100));
+			} else {
+				bd.requireSoulforce(50 * soulskillCost() * soulskillcostmulti());
+				bd.requireMana(spellCost(50));
+			}
+			if(player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
+				bd.disable("You cannot focus to use this ability while you're having so much difficult breathing.");
+			}
+			//bd = buttons.add("Puppeteer", nekomataPuppeteer).hint(". \n");
+		}	//also combining fatigue and soulfroce
 		if (player.hasPerk(PerkLib.DarkCharm)) {
 			// Fascinate
 			bd = buttons.add("Fascinate",Fascinate, "Put on a sexy display capting the target attention, arrousing it and maybe even stunning for a short moment. \n");
@@ -287,6 +308,14 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You need more time before you can use Phoenix Fire again.");
 			}
 		}
+		if (player.hasPerk(PerkLib.AcidSpit)) {
+			bd = buttons.add("Acid Spit", acidSpit).hint("Spit acid at your opponent corroding his defence and dealing progressive damage.", "Acid Spit");
+			bd.requireFatigue(spellCost(40));
+		}
+		if (player.hasPerk(PerkLib.AzureflameBreath)) {
+			bd = buttons.add("Azureflame B.", azureflameBreath).hint("Inhale a cone of bluish flames at your opponent. Cause burn.", "Azureflame Breath");
+			bd.requireFatigue(spellCost(40));
+		}
 		if (player.hasPerk(PerkLib.JobWarrior)) {
 			bd = buttons.add("DwarfRage", dwarfrage).hint("Throw yourself into a dwarf rage!  Greatly increases your strength, speed and fortitude! \n", "Dwarf Rage");
 			bd.requireWrath(50);
@@ -365,6 +394,13 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.CooldownEveryAndNowhere)) {
 				bd.disable("You need more time before you can use Everywhere and nowhere again.\n\n");
 			}
+		}
+		if (player.isNaga() && flags[kFLAGS.SAMIRAH_HYPNOSIS] == 6 && !monster.plural) {
+			bd = buttons.add("Tactical Distraction", TacticalDistraction).hint("Make the target lose its current turn forcing it to interrupt whatever it is doing. \n\nWould go into cooldown after use for: 5 rounds", "Tactical Distraction");
+			if (player.hasStatusEffect(StatusEffects.CooldownTDistraction)) {
+				bd.disable("You need more time before you can use Tactical Distraction again.");
+			}
+			bd = buttons.add("Hypnosis", NagaHypnosis).hint("Lull your opponent into a trance but only allow a limited set of options.", "Hypnosis");
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) {
 			bd = buttons.add("Air E.Asp", ElementalAspectAir);
@@ -932,7 +968,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("You manage to block your own fire with your [shield]!");
 			}
 			else {
-				damage = player.takeMagicDamage(damage);
+				damage = player.takeFireDamage(damage);
 				outputText("Your own fire smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
@@ -963,6 +999,189 @@ public class MagicSpecials extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 		if (monster is Holli && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
+		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
+		{
+			outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
+			monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
+			enemyAI();
+		}
+		else combatRoundOver();
+	}
+
+	public function acidSpit():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		fatigue(40, USEFATG_MAGIC_NOBM);
+		var damage:Number = 0;
+		damage += player.str;
+		damage += scalingBonusStrength();// * 0.5
+		damage += player.tou;
+		damage += scalingBonusToughness();// * 0.5
+		damage = Math.round(damage);
+		//Shell
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
+			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
+			enemyAI();
+			return;
+		}
+		//Amily!
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
+			clearOutput();
+			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
+			enemyAI();
+			return;
+		}
+		if (monster is LivingStatue)
+		{
+			outputText("The acid courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
+			enemyAI();
+			return;
+		}
+		outputText("You spit a blob of neon blue acid at " + monster.a + monster.short + " your corrosive fluids burning at "+(monster.hasPerk(PerkLib.EnemyGroupType) ? "their" : "" + monster.pronoun3 + "")+" flesh.");
+		//Miss:
+		if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
+			outputText("  Despite the heavy impact caused by your attack, " + monster.a + monster.short + " manages to take it at an angle and remain on " + monster.pronoun3 + " feet and focuses on you, ready to keep fighting.");
+		}
+		//Special enemy avoidances
+		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
+			outputText("Vala beats her wings with surprising strength, blowing the acid spit back at you! ");
+			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
+				outputText("You dive out of the way and evade it!");
+			}
+			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
+				outputText("You use your flexibility to barely fold your body out of the way!");
+			}
+			//Determine if blocked!
+			else if (combatBlock(true)) {
+				outputText("You manage to block your own fire with your [shield]!");
+			}
+			else {
+				damage = player.takeMagicDamage(damage);
+				outputText("Your own spit smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+			}
+			outputText("\n\n");
+		}
+		else {
+			damage = doDamage(damage);
+			outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+		}
+		outputText("\n\n");
+		if (monster.hasStatusEffect(StatusEffects.AcidDoT)) {
+			monster.addStatusValue(StatusEffects.AcidDoT,1,1);
+			monster.addStatusValue(StatusEffects.AcidDoT,3,1);
+		}
+		else monster.createStatusEffect(StatusEffects.AcidDoT,4,0.02,1,0);
+		checkAchievementDamage(damage);
+		combat.heroBaneProc(damage);
+		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
+		{
+			outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
+			monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
+			enemyAI();
+		}
+		else combatRoundOver();
+	}
+
+	public function azureflameBreath():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		fatigue(40, USEFATG_MAGIC_NOBM);
+		var damage:Number = 0;
+		damage += player.str;
+		damage += scalingBonusStrength();// * 0.5
+		damage += player.tou;
+		damage += scalingBonusToughness();// * 0.5
+		damage = calcInfernoMod(damage);
+		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
+		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
+		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
+		if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
+		if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+		damage = Math.round(damage);
+		//Shell
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
+			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
+			enemyAI();
+			return;
+		}
+		//Amily!
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
+			clearOutput();
+			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
+			enemyAI();
+			return;
+		}
+		if (monster is LivingStatue)
+		{
+			outputText("The fire courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
+			enemyAI();
+			return;
+		}
+		else if (monster is Lethice && (monster as Lethice).fightPhase == 2)
+		{
+			//Attack gains burn DoT for 2-3 turns.
+			outputText("You let loose a roiling cone of flames that wash over the horde of demons like a tidal wave, scorching at their tainted flesh with vigor unlike anything you've seen before. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!\n\n");
+			monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
+			damage = int(player.level * 8 + 25 + rand(10));
+			if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
+				player.removeStatusEffect(StatusEffects.DragonBreathBoost);
+				damage *= 1.5;
+			}
+			damage *= 1.75;
+			outputText(" (" + damage + ")");
+			monster.HP -= damage;
+			combatRoundOver();
+			return;
+		}
+		outputText("You inhale and torch " + monster.a + monster.short + " with your bluish flames setting your opponent on fire.");
+		if(monster.hasStatusEffect(StatusEffects.Sandstorm)) {
+			outputText("  <b>Your breath is massively dissipated by the swirling vortex, causing it to hit with far less force!</b>");
+			damage = Math.round(0.5 * damage);
+		}
+		//Miss:
+		if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
+			outputText("  Despite the heavy impact caused by your attack, " + monster.a + monster.short + " manages to take it at an angle and remain on " + monster.pronoun3 + " feet and focuses on you, ready to keep fighting.");
+		}
+		//Special enemy avoidances
+		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
+			outputText("Vala beats her wings with surprising strength, blowing the fireball back at you! ");
+			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
+				outputText("You dive out of the way and evade it!");
+			}
+			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
+				outputText("You use your flexibility to barely fold your body out of the way!");
+			}
+			else if(player.hasStatusEffect(StatusEffects.Blizzard)) {
+				outputText("  <b>Surrounding you blizzard at the cost of loosing some of it remaining power massively dissipated most of the fireball energy, causing it to hit with far less force!</b>");
+				player.addStatusValue(StatusEffects.Blizzard,1,-1);
+				damage = Math.round(0.2 * damage);
+			}
+			//Determine if blocked!
+			else if (combatBlock(true)) {
+				outputText("You manage to block your own fire with your [shield]!");
+			}
+			else {
+				damage = player.takeFireDamage(damage);
+				outputText("Your own fire smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+			}
+			outputText("\n\n");
+		}
+		//Goos burn
+		else if(monster.short == "goo-girl") {
+			outputText(" Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer. ");
+			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
+			damage = Math.round(damage * 1.5);
+			damage = doDamage(damage);
+			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");
+		}
+		else {
+			damage = doDamage(damage);
+			outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+		}
+		outputText("\n\n");
+		monster.createStatusEffect(StatusEffects.BurnDoT,5,0.02,0,0);
+		checkAchievementDamage(damage);
+		combat.heroBaneProc(damage);
 		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 		{
 			outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
@@ -1896,6 +2115,28 @@ public class MagicSpecials extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.CooldownEveryAndNowhere,10,0,0,0);
 		enemyAI();
 	}
+
+	public function TacticalDistraction():void {
+		clearOutput();
+		outputText("You give " + monster.a + monster.short + " a belly dance show, moving your hip from a side to another and displaying your assets. " + monster.capitalA + monster.short + " is so distracted by your dancing it doesn’t realise the two of you are still in battle for a few seconds before snapping out only in time to realise " + monster.pronoun1 + " did absolutely nothing for the last six seconds. ");
+		var lustDmg:Number = monster.lustVuln * (5 + rand(5));
+		lustDmg = Math.round(lustDmg);
+		monster.teased(lustDmg);
+		outputText(" \n\n");
+		monster.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.CooldownTDistraction,5,0,0,0);
+		enemyAI();
+	}
+
+	public function NagaHypnosis():void {
+		clearOutput();
+		var hypnosisDuration:Number = 5;
+		if (player.armorName == "desert naga pink and black silk dress") hypnosisDuration += 1;
+		if (player.headjewelryName == "pair of Golden Naga Hairpins") hypnosisDuration += 1;
+		outputText("You give " + monster.a + monster.short + " a sexy belly dance show, moving your hip from a side to another and displaying your assets as you insidiously mesmerise it into laying down " + monster.pronoun3 + " guard, all the while maintaining eye contact. " + monster.capitalA + monster.short + " is completely captivated by your dancing.");
+		monster.createStatusEffect(StatusEffects.HypnosisNaga,hypnosisDuration,0,0,0);
+		enemyAI();
+	}
 	
 	public function maleficium():void {
 		clearOutput();
@@ -2015,127 +2256,231 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		enemyAI();
 	}
-	/*
-	 //(Basic Fox Fire) do przerobienia na ghost fire dla nekomanty
-	 public function foxFire():void {
-	 flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
-	 clearOutput();
-	 if ((!player.hasPerk(PerkLib.BloodMage) && player.fatigue + spellCost(60) > player.maxFatigue()) || (player.soulforce < 30 * soulskillCost() * soulskillcostmulti())) {
-	 outputText("You lacking enough magical energies to use this ability.", true);
-	 doNext(msMenu);
-	 return;
-	 }
-	 if(player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
-	 outputText("You cannot focus to use this ability while you're having so much difficult breathing.", true);
-	 doNext(msMenu);
-	 return;
-	 }
-	 var soulforcecost:int = 30 * soulskillCost() * soulskillcostmulti();
-	 player.soulforce -= soulforcecost;
-	 foxFire2();
-	 }
-	 public function foxFire2():void {
-	 	 fatigue(60, USEFATG_MAGIC);
-	 if(monster.hasStatusEffect(StatusEffects.Shell)) {
-	 outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-	 enemyAI();
-	 return;
-	 }
-	 //Deals direct damage and lust regardless of enemy defenses.  Especially effective against corrupted targets.
-	 outputText("Holding out your palm, you conjure an red flame that dances across your fingertips.  You launch it at " + monster.a + monster.short + " with a ferocious throw, and it bursts on impact, showering dazzling red sparks everywhere.  ");
-	 var dmg:Number = 0;
-	 dmg += inteligencescalingbonus();
-	 dmg *= spellMod();
-	 //Determine if critical hit!
-	 var crit:Boolean = false;
-	 var critChance:int = 5;
-	 critChance += combatMagicalCritical();
-	 if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-	 if (rand(100) < critChance) {
-	 crit = true;
-	 dmg *= 1.75;
-	 }
-	 dmg = calcInfernoMod(dmg);
-	 dmg *= 0.25;
-	 //Hosohi No Tama bonus dmg
-	 //	if (player.hasPerk(PerkLib.KitsuneThyroidGland)) dmg *= 2;
-	 //High damage to goes.
-	 if(monster.short == "goo-girl") dmg = Math.round(dmg * 1.5);
-	 //Using fire attacks on the goo]
-	 if(monster.short == "goo-girl") {
-	 outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ");
-	 if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
-	 }
-	 if (monster.hasPerk(PerkLib.IceNature)) dmg *= 5;
-	 if (monster.hasPerk(PerkLib.FireVulnerability)) dmg *= 2;
-	 if (monster.hasPerk(PerkLib.IceVulnerability)) dmg *= 0.5;
-	 if (monster.hasPerk(PerkLib.FireNature)) dmg *= 0.2;
-	 if (player.hasPerk(PerkLib.FireAffinity)) dmg *= 2;
-	 if ((player.tailType != FOX || (player.tailType == FOX && player.tailCount < 2)) && (player.hasPerk(PerkLib.EnlightenedNinetails) || player.hasPerk(PerkLib.CorruptedNinetails)) && !player.hasPerk(PerkLib.KitsuneThyroidGland)) dmg *= 0.2;
-	 if (player.tailCount == 2) dmg *= 0.2;
-	 if (player.tailCount == 3) dmg *= 0.4;
-	 if (player.tailCount == 4) dmg *= 0.6;
-	 if (player.tailCount == 5) dmg *= 0.8;
-	 if (player.shieldName == "spirit focus") dmg *= 1.2;
-	 if (player.armorName == "white kimono" || player.armorName == "red kimono" || player.armorName == "blue kimono" || player.armorName == "purple kimono" || player.armorName == "black kimono") dmg *= 1.2;
-	 if (player.headjewelryName == "fox hairpin") dmg *= 1.2;
-	 if (player.hasPerk(PerkLib.StarSphereMastery)) dmg *= (1 + (player.perkv1(PerkLib.StarSphereMastery) * 0.05));
-	 dmg = Math.round(dmg);
-	 dmg = doDamage(dmg);
-	 if (monster.lustVuln == 0) {
-	 outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
-	 }
-	 var lustDmg:Number = monster.lustVuln * (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
-	 if (monster.lust < (monster.eMaxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
-	 if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6)) {
-	 if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
-	 else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ");
-	 }
-	 if (monster.lust >= (monster.eMaxLust() * 0.6)) {
-	 outputText(monster.capitalA + monster.short + "'");
-	 if(!monster.plural) outputText("s");
-	 outputText(" eyes glaze over with desire for a moment.  ");
-	 }
-	 if (monster.cocks.length > 0) {
-	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
-	 if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ");
-	 if (monster.lust >= (monster.eMaxLust() * 0.3) && monster.lust < (monster.eMaxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
-	 }
-	 if (monster.vaginas.length > 0) {
-	 if (monster.plural) {
-	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s dampen perceptibly.  ");
-	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ");
-	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ");
-	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
-	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ");
-	 }
-	 else {
-	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ");
-	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ");
-	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " becomes sloppy and wet.  ");
-	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
-	 if (monster.lust >= (monster.eMaxLust() * 0.6) && monster.vaginas[0].vaginalWetness == WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ");
-	 }
-	 }
-	 lustDmg *= 0.25;
-	 if (player.shieldName == "spirit focus") lustDmg *= 1.2;
-	 if (player.headjewelryName == "fox hairpin") lustDmg *= 1.2;
-	 lustDmg = Math.round(lustDmg);
-	 monster.teased(lustDmg);
-	 outputText("  <b>(<font color=\"#800000\">" + dmg + "</font>)</b>");
-	 if (crit == true) outputText(" <b>*Critical Hit!*</b>");
-	 outputText("\n\n");
-	 statScreenRefresh();
-	 flags[kFLAGS.SPELLS_CAST]++;
-	 if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-	 spellPerkUnlock();
-	 if(monster.HP > 0 && monster.lust < monster.eMaxLust()) enemyAI();
-	 else {
-	 if(monster.HP <= 0) doNext(endHpVictory);
-	 if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
-	 }
-	 }
-	 */
+	//(Puppeter)
+	public function nekomataPuppeteer():void {
+		clearOutput();
+		var soulforcecost:int = 10 * soulskillCost() * soulskillcostmulti();/*
+		if (player.tailCount == 2 && player.tailType == Tail.CAT && player.hasPerk(PerkLib.KitsuneThyroidGland)) soulforcecost *= 3;*/
+		if (player.tailCount == 2 && player.tailType == Tail.CAT) soulforcecost *= 2;// || player.hasPerk(PerkLib.KitsuneThyroidGland)
+		player.soulforce -= soulforcecost;
+		nekomataPuppeteer2();
+	}
+	public function nekomataPuppeteer2():void {
+		
+	}
+	//(Ghost Fire)
+	public function nekomataGhostFire():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		var soulforcecost:int = 50 * soulskillCost() * soulskillcostmulti();/*
+		if (player.tailCount == 2 && player.tailType == Tail.CAT && player.hasPerk(PerkLib.KitsuneThyroidGland)) soulforcecost *= 3;*/
+		if (player.tailCount == 2 && player.tailType == Tail.CAT) soulforcecost *= 2;// || player.hasPerk(PerkLib.KitsuneThyroidGland)
+		player.soulforce -= soulforcecost;
+		nekomataGhostFire2();
+	}
+	public function nekomataGhostFire2():void {
+		/*if (player.tailCount == 2 && player.tailType == Tail.CAT && player.hasPerk(PerkLib.KitsuneThyroidGland)) useMana((150), 3);
+		else */if (player.tailCount == 2 && player.tailType == Tail.CAT) useMana((100), 3);// || player.hasPerk(PerkLib.KitsuneThyroidGland)
+		else useMana((50), 3);
+		outputText("Holding out your palm, you conjure ghastly greenish flame that dances across your fingertips.  You launch it at " + monster.a + monster.short + " with a ferocious throw, and it bursts on impact, showering dazzling emerald sparks everywhere.  ");
+		var damage:Number = (scalingBonusWisdom() * 0.5) + (scalingBonusIntelligence() * 0.5);
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = calcInfernoMod(damage);
+		//damage *= 1.25;
+		if (player.tailType == 8 && player.tailCount == 2) damage *= 0.5;
+		else damage *= 0.2;
+		var nekomatasfiredmgmulti:Number = 1;
+		nekomatasfiredmgmulti += spellMod() - 1;
+		nekomatasfiredmgmulti += soulskillMod() - 1;
+		//Bonus damage
+		//jakieś bonusy do obrażeń dodawać tu
+		damage *= nekomatasfiredmgmulti;
+		//High damage to goes.
+		if(monster.short == "goo-girl") damage = Math.round(damage * 1.5);
+		//Using fire attacks on the goo]
+		if(monster.short == "goo-girl") {
+			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ");
+			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
+		}
+		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
+		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
+		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
+		if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
+		if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+		damage = Math.round(damage);
+		damage = doDamage(damage);
+		if (monster.lustVuln == 0) {
+			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
+		}
+		var lustDmg:Number = monster.lustVuln * ((player.inte / 10 + player.wis / 10) * ((spellMod() + soulskillMod()) / 2) + rand(monster.lib + monster.cor) / 5);
+		if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
+		if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
+			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
+			else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ");
+		}
+		if (monster.lust >= (monster.maxLust() * 0.6)) {
+			outputText(monster.capitalA + monster.short + "'");
+			if(!monster.plural) outputText("s");
+			outputText(" eyes glaze over with desire for a moment.  ");
+		}
+		if (monster.cocks.length > 0) {
+			if (monster.lust >= (monster.maxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
+			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ");
+			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
+		}
+		if (monster.vaginas.length > 0) {
+			if (monster.plural) {
+				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s dampen perceptibly.  ");
+				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ");
+				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ");
+				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
+				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ");
+			}
+			else {
+				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ");
+				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ");
+				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " becomes sloppy and wet.  ");
+				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
+				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ");
+			}
+		}
+		if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
+		lustDmg *= 0.1;
+		//ew. bonusy do lust dmg tutaj
+		lustDmg = Math.round(lustDmg);
+		monster.teased(lustDmg);
+		outputText("  <b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");
+		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		outputText("\n\n");
+		statScreenRefresh();
+		flags[kFLAGS.SPELLS_CAST]++;
+		if (!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell, 0, 0, 0, 0);
+		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+		spellPerkUnlock();
+		combat.heroBaneProc(damage);
+		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
+		else {
+			if(monster.HP <= 0) doNext(endHpVictory);
+			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
+		}
+	}
+	//(Basic Fox Fire)
+	public function basicFoxFire():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		var soulforcecost:int = 30 * soulskillCost() * soulskillcostmulti();
+		player.soulforce -= soulforcecost;
+		basicFoxFire2();
+	}
+	public function basicFoxFire2():void {
+		useMana((75 * kitsuneskillCost()), 3);
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
+			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
+			enemyAI();
+			return;
+		}
+		outputText("Holding out your palm, you conjure fox flame that dances across your fingertips.  You launch it at " + monster.a + monster.short + " with a ferocious throw, and it bursts on impact, showering dazzling sparks everywhere.  ");
+		var damage:Number = (scalingBonusWisdom() * 0.4) + (scalingBonusIntelligence() * 0.4);
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = calcInfernoMod(damage);
+		damage *= 0.25;
+		var basicfoxfiredmgmulti:Number = 1;
+		basicfoxfiredmgmulti += spellMod() - 1;
+		basicfoxfiredmgmulti += soulskillMod() - 1;
+		if (player.shieldName == "spirit focus") basicfoxfiredmgmulti += .2;
+		if (player.armorName == "white kimono" || player.armorName == "red kimono" || player.armorName == "blue kimono" || player.armorName == "purple kimono" || player.armorName == "black kimono") basicfoxfiredmgmulti += .2;
+		if (player.headjewelryName == "fox hairpin") basicfoxfiredmgmulti += .2;
+		if (player.hasPerk(PerkLib.StarSphereMastery)) basicfoxfiredmgmulti += player.perkv1(PerkLib.StarSphereMastery) * 0.05;
+		if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) basicfoxfiredmgmulti += .5;
+		//Hosohi No Tama and bonus damage
+		if (player.hasPerk(PerkLib.KitsuneThyroidGlandEvolved)) basicfoxfiredmgmulti += 1;
+		damage *= basicfoxfiredmgmulti;
+		//High damage to goes.
+		if(monster.short == "goo-girl") damage = Math.round(damage * 1.5);
+		//Using fire attacks on the goo]
+		if(monster.short == "goo-girl") {
+			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ");
+			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
+		}
+		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
+		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
+		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
+		if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
+		if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+		damage = Math.round(damage);
+		damage = doDamage(damage);
+		if (monster.lustVuln == 0) {
+			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
+		}
+		var lustDmg:Number = monster.lustVuln * ((player.inte / 10 + player.wis / 10) * ((spellMod() + soulskillMod()) / 2) + rand(monster.lib + monster.cor) / 5);
+		if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
+		if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
+			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
+			else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ");
+		}
+		if (monster.lust >= (monster.maxLust() * 0.6)) {
+			outputText(monster.capitalA + monster.short + "'");
+			if(!monster.plural) outputText("s");
+			outputText(" eyes glaze over with desire for a moment.  ");
+		}
+		if (monster.cocks.length > 0) {
+			if (monster.lust >= (monster.maxLust() * 0.6) && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
+			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ");
+			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6) && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
+		}
+		if (monster.vaginas.length > 0) {
+			if (monster.plural) {
+				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s dampen perceptibly.  ");
+				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ");
+				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ");
+				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
+				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ");
+			}
+			else {
+				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ");
+				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ");
+				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " becomes sloppy and wet.  ");
+				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
+				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ");
+			}
+		}
+		if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
+		lustDmg *= 0.25;
+		if (player.shieldName == "spirit focus") lustDmg *= 1.2;
+		if (player.headjewelryName == "fox hairpin") lustDmg *= 1.2;
+		lustDmg = Math.round(lustDmg);
+		monster.teased(lustDmg);
+		outputText("  <b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");
+		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		outputText("\n\n");
+		statScreenRefresh();
+		flags[kFLAGS.SPELLS_CAST]++;
+		if (!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell, 0, 0, 0, 0);
+		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+		spellPerkUnlock();
+		combat.heroBaneProc(damage);
+		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
+		else {
+			if(monster.HP <= 0) doNext(endHpVictory);
+			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
+		}
+	}
 //Corrupted Fox Fire
 	public function corruptedFoxFire():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
@@ -2146,6 +2491,11 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	public function corruptedFoxFire2():void {
 		useMana((100 * kitsuneskillCost()), 3);
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
+			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
+			enemyAI();
+			return;
+		}
 		//Deals direct damage and lust regardless of enemy defenses.  Especially effective against non-corrupted targets.
 		outputText("Holding out your palm, you conjure corrupted purple flame that dances across your fingertips.  You launch it at " + monster.a + monster.short + " with a ferocious throw, and it bursts on impact, showering dazzling lavender sparks everywhere.  ");
 		var damage:Number = (scalingBonusWisdom() * 0.5) + (scalingBonusIntelligence() * 0.5);
@@ -3544,4 +3894,4 @@ public class MagicSpecials extends BaseCombatContent {
 }
 
 }
-
+

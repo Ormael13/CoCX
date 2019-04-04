@@ -106,6 +106,7 @@ public class Exploration extends BaseContent
 		private function explorePageII():void
 		{
 			flags[kFLAGS.EXPLORATION_PAGE] = 2;
+			hideMenus();
 			menu();
 			if (SceneLib.forest.deepwoodsDiscovered()) addButton(0, "Deepwoods", SceneLib.forest.exploreDeepwoods).hint("Visit the dark, bioluminescent deepwoods. \n\nRecommended level: 12" + (debug ? "\n\nTimes explored: " + SceneLib.forest.timesExploredDeepwoods() : ""));
 			if (flags[kFLAGS.DISCOVERED_OCEAN] > 0) addButton(1, "Ocean", SceneLib.ocean.exploreOcean).hint("Explore the ocean surface. But beware of... sharks. \n\nRecommended level: 50" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_OCEAN] : ""));
@@ -207,7 +208,64 @@ public class Exploration extends BaseContent
 			//Encounter Gobbalin!
 			//Encounter Golemuuu!
 			else {
-				if (player.level >= 6 && rand(10) < 5) {
+				if (player.level >= 6 && rand(10) < 7) {
+					var goblinChooser:int = rand(100);
+					//Level modifier
+					if (player.level < 20) goblinChooser += player.level;
+					else goblinChooser += 20;
+					//Limit chooser range
+					if (goblinChooser > 100) goblinChooser = 100;
+					if (player.level < 8 && goblinChooser >= 20) goblinChooser = 29;
+					else if (player.level < 16 && goblinChooser >= 60) goblinChooser = 49;
+					else if (player.level < 24 && goblinChooser >= 80) goblinChooser = 79;
+					//Goblin assassin!
+					if (goblinChooser >= 30 && goblinChooser < 50) {
+						SceneLib.goblinAssassinScene.goblinAssassinEncounter();
+						spriteSelect(24);
+						return;
+					}
+					//Goblin warrior! (Equal chance with Goblin Shaman)
+					else if (goblinChooser >= 50 && goblinChooser < 65) {
+						SceneLib.goblinWarriorScene.goblinWarriorEncounter();
+						spriteSelect(123);
+						return;
+					}
+					//Goblin shaman!
+					else if (goblinChooser >= 65 && goblinChooser < 80) {
+						SceneLib.goblinShamanScene.goblinShamanEncounter();
+						spriteSelect(124);
+						return;
+					}
+					//Goblin elder!
+					else if (goblinChooser >= 80) {
+						SceneLib.goblinElderScene.goblinElderEncounter();
+						spriteSelect(122);
+						return;
+					}
+					if (player.gender > 0) {
+						clearOutput();
+						outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fucked, " + player.mf("stud", "slut") + ".</i>\"");
+						if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
+							flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
+							outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
+						}
+						startCombat(new Goblin());
+						spriteSelect(24);
+						return;
+					}
+					else {
+						clearOutput();
+						outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fuc-oh shit, you don't even have anything to play with!  This is for wasting my time!</i>\"");
+						if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
+							flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
+							outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
+						}
+						startCombat(new Goblin());
+						spriteSelect(24);
+						return;
+					}
+				}
+				else {
 					var golemChooser:int = rand(70);
 					//Limit chooser range
 					if (player.level < 12 && golemChooser >= 10) golemChooser = 9;
@@ -296,63 +354,6 @@ public class Exploration extends BaseContent
 							outputText("\n\n<b>New codex entry unlocked: Golems!</b>")
 						}
 						startCombat(new GolemDummy());
-						return;
-					}
-				}
-				else {
-					var goblinChooser:int = rand(100);
-					//Level modifier
-					if (player.level < 20) goblinChooser += player.level;
-					else goblinChooser += 20;
-					//Limit chooser range
-					if (goblinChooser > 100) goblinChooser = 100;
-					if (player.level < 8 && goblinChooser >= 20) goblinChooser = 29;
-					else if (player.level < 16 && goblinChooser >= 60) goblinChooser = 49;
-					else if (player.level < 24 && goblinChooser >= 80) goblinChooser = 79;
-					//Goblin assassin!
-					if (goblinChooser >= 30 && goblinChooser < 50) {
-						SceneLib.goblinAssassinScene.goblinAssassinEncounter();
-						spriteSelect(24);
-						return;
-					}
-					//Goblin warrior! (Equal chance with Goblin Shaman)
-					else if (goblinChooser >= 50 && goblinChooser < 65) {
-						SceneLib.goblinWarriorScene.goblinWarriorEncounter();
-						spriteSelect(123);
-						return;
-					}
-					//Goblin shaman!
-					else if (goblinChooser >= 65 && goblinChooser < 80) {
-						SceneLib.goblinShamanScene.goblinShamanEncounter();
-						spriteSelect(124);
-						return;
-					}
-					//Goblin elder!
-					else if (goblinChooser >= 80) {
-						SceneLib.goblinElderScene.goblinElderEncounter();
-						spriteSelect(122);
-						return;
-					}
-					if (player.gender > 0) {
-						clearOutput();
-						outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fucked, " + player.mf("stud", "slut") + ".</i>\"");
-						if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
-							flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
-							outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
-						}
-						startCombat(new Goblin());
-						spriteSelect(24);
-						return;
-					}
-					else {
-						clearOutput();
-						outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fuc-oh shit, you don't even have anything to play with!  This is for wasting my time!</i>\"");
-						if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
-							flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
-							outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
-						}
-						startCombat(new Goblin());
-						spriteSelect(24);
 						return;
 					}
 				}
@@ -510,7 +511,7 @@ public class Exploration extends BaseContent
 			// CoC.instance.goblinAssassinScene.goblinAssassinEncounter();
 			// return;
 
-			if (flags[kFLAGS.EVANGELINE_AFFECTION] < 1 && rand(3) == 0) {
+			if (flags[kFLAGS.EVANGELINE_AFFECTION] < 1 && rand(2) == 0 && player.level > 0) {
 				Evangeline.enterTheEvangeline();
 				return;
 			}
