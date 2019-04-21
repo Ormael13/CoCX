@@ -6576,15 +6576,15 @@ private function touSpeStrScale(stat:int):Number{
 	for(var i:int = 20; (i <= 80) && (i <= stat); i += 20){
 		scale += stat - i;
 	}
-	for(i = 100; (i <= 2000) && (i <= stat); i += 50){
+	for(i = 100; (i <= 4000) && (i <= stat); i += 50){
 		scale += stat - i;
 	}
 	return scale;
 }
 private function inteWisLibScale(stat:int):Number{
-	var scale:Number = 10.75;
+	var scale:Number = 20.75;
 	var changeBy:Number = 0.50;
-	if(stat <= 2000){
+	if(stat <= 4000){
 		if(stat <= 100){
 			scale = (2/6) + ((int(stat/100)/20) * (1/6));
 			changeBy = 0.25;
@@ -6608,10 +6608,10 @@ public function scalingBonusSpeed():Number {
 	return touSpeStrScale(ghostRealSpeed());
 }
 public function scalingBonusWisdom():Number {
-	return touSpeStrScale(player.wis);
+	return inteWisLibScale(player.wis);
 }
 public function scalingBonusIntelligence():Number {
-	return touSpeStrScale(player.inte);
+	return inteWisLibScale(player.inte);
 }
 public function scalingBonusLibido():Number {
 	return inteWisLibScale(player.lib);

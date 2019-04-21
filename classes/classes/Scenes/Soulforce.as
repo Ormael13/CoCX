@@ -211,8 +211,8 @@ use namespace CoC;
 			addButton(5, "Enemies", EnemiesMenu).hint("For spawning various enemies to test fight them.");
 			addButton(6, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
 			addButton(7, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
-			if (flags[kFLAGS.AURORA_LVL] == 1) addButton(8, "AuroraReset", AuroraReset).hint("Reset for Jade Talisman dream to set flag right(better).");
-			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 8) addButton(8, "Repta-Tongue", AddReptaTongue).hint("Items bungle for Repta-Tongue Potion.");
+			if (flags[kFLAGS.NEISA_FOLLOWER] == 3) addButton(8, "NeisaFix", AuroraReset).hint("Fix Neisa to be less clingy.");
+			//if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 8) addButton(8, "Repta-Tongue", AddReptaTongue).hint("Items bungle for Repta-Tongue Potion.");
 			if (player.perkv4(PerkLib.ProductivityDrugs) > 0 || player.hasPerk(PerkLib.ProductivityDrugs)) addButton(9, "P.Drugs Fix", fixingProductionDrugs).hint("To fix Productive Drug perk wild rampage.");
 			if (player.hasPerk(PerkLib.Metamorph)) addButton(9, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Metamorph all options unlock.");
 			//addButton(9, "ChimeraBodyUlt", ChimeraBodyUltimateStage).hint("Ultimate Stage of Chimera Body for tests and lulz. Now with on/off switch for more lulz.");
@@ -229,8 +229,11 @@ public function FightAria():void {
 }
 public function AuroraReset():void {
 	clearOutput();
-	outputText("Reseting dream about... mechanical gargoyles ^^");
-	flags[kFLAGS.AURORA_LVL] = 0;
+	player.removeStatusEffect(StatusEffects.CombatFollowerNeisa);
+	flags[kFLAGS.PLAYER_COMPANION_1] = "";
+	flags[kFLAGS.NEISA_FOLLOWER] = 4;
+	outputText("<b>Gained Perk: Basic Leadership</b>");
+	player.createPerk(PerkLib.BasicLeadership,0,0,0,0);
 	doNext(SoulforceCheats);
 }
 public function fixingProductionDrugs():void {

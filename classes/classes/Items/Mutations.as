@@ -3163,40 +3163,42 @@ public final class Mutations extends MutationsHelper
 				outputText("\n\nThe contents of the book did little for your already considerable intellect.");
 				dynStats("int", .6);
 			}
-			//Smart enough for (single target fire spell) and doesnt have it (player.inte >= 120)
-			/*if (player.inte >= 120 && !player.hasStatusEffect(StatusEffects.)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: .</b>");
-				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
-				return;
-			}*/
-			//Smart enough for fire storm and doesnt have it
-			if (player.inte >= 125 && !player.hasStatusEffect(StatusEffects.KnowsFireStorm)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Fire Storm.</b>");
-				player.createStatusEffect(StatusEffects.KnowsFireStorm, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for (single target ice spell) and doesnt have it (player.inte >= 120)
-			/*if (player.inte >= 120 && !player.hasStatusEffect(StatusEffects.)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: .</b>");
-				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
-				return;
-			}*/
-			//Smart enough for ice rain and doesnt have it
-			if (player.inte >= 125 && !player.hasStatusEffect(StatusEffects.KnowsIceRain)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Ice Rain.</b>");
-				player.createStatusEffect(StatusEffects.KnowsIceRain, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for nosferatu and doesnt have it
-			if (player.inte >= 125 && !player.hasStatusEffect(StatusEffects.KnowsNosferatu)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Nosferatu.</b>");
-				player.createStatusEffect(StatusEffects.KnowsNosferatu, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for mana shield and doesnt have it
-			if (player.inte >= 130 && !player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Mana Shield.</b>");
-				player.createStatusEffect(StatusEffects.KnowsManaShield, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.PrestigeJobGreySage)) {
+				//Smart enough for (single target fire spell) and doesnt have it (player.inte >= 120)
+				/*if (player.inte >= 150 && !player.hasStatusEffect(StatusEffects.)) {
+					outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: .</b>");
+					player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+					return;
+				}*/
+				//Smart enough for fire storm and doesnt have it
+				if (player.inte >= 170 && !player.hasStatusEffect(StatusEffects.KnowsFireStorm)) {
+					outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Fire Storm.</b>");
+					player.createStatusEffect(StatusEffects.KnowsFireStorm, 0, 0, 0, 0);
+					return;
+				}
+				//Smart enough for (single target ice spell) and doesnt have it (player.inte >= 120)
+				/*if (player.inte >= 150 && !player.hasStatusEffect(StatusEffects.)) {
+					outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: .</b>");
+					player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+					return;
+				}*/
+				//Smart enough for ice rain and doesnt have it
+				if (player.inte >= 170 && !player.hasStatusEffect(StatusEffects.KnowsIceRain)) {
+					outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Ice Rain.</b>");
+					player.createStatusEffect(StatusEffects.KnowsIceRain, 0, 0, 0, 0);
+					return;
+				}
+				//Smart enough for nosferatu and doesnt have it
+				if (player.inte >= 170 && !player.hasStatusEffect(StatusEffects.KnowsNosferatu)) {
+					outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Nosferatu.</b>");
+					player.createStatusEffect(StatusEffects.KnowsNosferatu, 0, 0, 0, 0);
+					return;
+				}
+				//Smart enough for mana shield and doesnt have it
+				if (player.inte >= 190 && !player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
+					outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Mana Shield.</b>");
+					player.createStatusEffect(StatusEffects.KnowsManaShield, 0, 0, 0, 0);
+				}
 			}
 		}
 
@@ -5201,8 +5203,8 @@ public final class Mutations extends MutationsHelper
 			}
 			//TURN INTO A FURRAH!  OH SHIT
 			if (player.eyes.type == Eyes.CAT_SLITS && rand(3) == 0 && changes < changeLimit && !player.hasCoatOfType(Skin.FUR)) {
+				humanizeSkin();
 				if (type == 1) {
-					humanizeSkin();
 					player.skin.growCoat(Skin.FUR,{color:randomChoice(["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"])},Skin.COVERAGE_LOW);
 					outputText("\n\nYou feel your skin tickle as fur grow in various place over your body. It doesn’t cover your skin entirely but sure feels nice and silky to the touch wherever it has grown. Funnily the fur patterns looks nice on you and only helps your animalistic charm. <b>Some area of your body are now partially covered with fur!</b>");
 				}
@@ -6503,8 +6505,13 @@ public final class Mutations extends MutationsHelper
 					changes++;
 				}
 			}
-
 			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
+			//Shrink
+			if (rand(3) == 0 && player.tallness > 72) {
+				changes++;
+				outputText("\n\nYour skin crawls, making you close your eyes and shiver.  When you open them again the world seems... different.  After a bit of investigation, you realize you've become shorter!\n");
+				player.tallness -= (1 + rand(5));
+			}
 			//De-wettification of cunt (down to 3?)!
 			if (player.wetness() > 3 && changes < changeLimit && rand(3) == 0) {
 				//Just to be safe
@@ -6600,7 +6607,7 @@ public final class Mutations extends MutationsHelper
 				}
 			}
 			//Bunny feet! - requirez earz
-			if (player.lowerBody != LowerBody.BUNNY && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(5) == 0 && player.ears.type == Ears.BUNNY) {
+			if (player.lowerBody != LowerBody.BUNNY && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0 && player.ears.type == Ears.BUNNY) {
 				//Taurs
 				if (player.isTaur()) outputText("\n\nYour quadrupedal hind-quarters seizes, overbalancing your surprised front-end and causing you to stagger and fall to your side.  Pain lances throughout, contorting your body into a tightly clenched ball of pain while tendons melt and bones break, melt, and regrow.  When it finally stops, <b>you look down to behold your new pair of fur-covered rabbit feet</b>!");
 				//Non-taurs
@@ -6631,10 +6638,44 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//DAH BUNBUNTAILZ
-			if (player.tailType != Tail.RABBIT && player.lowerBody != LowerBody.GARGOYLE && rand(2) == 0 && changes < changeLimit) {
+			if (player.tailType != Tail.RABBIT && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
 				if (player.tailType > Tail.NONE) outputText("\n\nYour tail burns as it shrinks, pulling tighter and tighter to your backside until it's the barest hint of a stub.  At once, white, poofy fur explodes out from it.  <b>You've got a white bunny-tail!  It even twitches when you aren't thinking about it.</b>");
 				else outputText("\n\nA burning pressure builds at your spine before dissipating in a rush of relief. You reach back and discover a small, fleshy tail that's rapidly growing long, poofy fur.  <b>You have a rabbit tail!</b>");
 				setTailType(Tail.RABBIT);
+				changes++;
+			}
+			//Partial and full fur
+			if (rand(3) == 0 && changes < changeLimit && !player.hasCoatOfType(Skin.FUR)) {
+				humanizeSkin();
+				if (player.coatColor == "") player.coatColor = player.hairColor;
+				if (rand(2) == 0) {
+					player.skin.growCoat(Skin.FUR,{color:player.skin.coat.color},Skin.COVERAGE_LOW);
+					outputText("\n\nYou feel your skin tickle as fur grow in various place over your body. It doesn’t cover your skin entirely but sure feels nice and silky to the touch wherever it has grown. Funnily the fur patterns looks nice on you and only helps your animalistic charm. <b>Some area of your body are now partially covered with fur!</b>");
+				}
+				else {
+					outputText("\n\nYour [skin.type] begins to tingle, then itch. ");
+					player.skin.growCoat(Skin.FUR,{color:player.skin.coat.color},Skin.COVERAGE_COMPLETE);
+					outputText("You reach down to scratch your arm absent-mindedly and pull your fingers away to find strands of [skin coat.color] fur. Wait, fur?  What just happened?! You spend a moment examining yourself and discover that <b>you are now covered in glossy, soft fur.</b>");
+				}
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+					outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
+					player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
+				}
+				changes++;
+			}
+			//-Human arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
+			if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(3) == 0) {
+				humanizeArms();
+				changes++;
+			}
+			//-Human face
+			if (player.faceType != Face.HUMAN && changes < changeLimit && rand(3) == 0) {
+				humanizeFace();
+				changes++;
+			}
+			//Remove odd eyes
+			if (changes < changeLimit && rand(3) == 0 && player.eyes.type > Eyes.HUMAN) {
+				humanizeEyes();
 				changes++;
 			}
 			// Remove gills
@@ -7988,12 +8029,12 @@ public final class Mutations extends MutationsHelper
 			}
 			//(No dick)
 			else {
-				outputText("You hear a straining, tearing noise before you realize it's coming from your underwear.  Pulling open your [armor], you gasp in surprise at the huge, throbbing manhood that now lies between your [hips].  It rapidly stiffens to a full, ten inches, and goddamn, it feels fucking good.  You should totally find a warm hole to fuck!");
+				outputText("You hear a straining, tearing noise before you realize it's coming from your underwear.  Pulling open your [armor], you gasp in surprise at the huge, throbbing manhood that now lies between your [hips].  It rapidly stiffens to a full, twelve inches, and goddamn, it feels fucking good.  You should totally find a warm hole to fuck!");
 				if (player.balls == 0) outputText("  Two rounded orbs drop down below, filling out a new, fleshy sac above your [legs].  Sweet!  You can probably cum buckets with balls like these.");
 				outputText("\n\n");
 				player.createCock();
-				player.cocks[0].cockLength = 10;
-				player.cocks[0].cockThickness = 2;
+				player.cocks[0].cockLength = 12;
+				player.cocks[0].cockThickness = 3;
 				if (player.balls == 0) {
 					player.balls = 2;
 					player.ballSize = 3;

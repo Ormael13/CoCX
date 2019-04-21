@@ -2549,8 +2549,11 @@ use namespace CoC;
 					}
 				}
 			}
-			if (bunnyScore() >= 4)
-				race = "bunny-" + mf("boy", "girl");
+			if (bunnyScore() >= 5)
+			{
+				if (bunnyScore() >= 10) race = "bunny-" + mf("boy", "girl");
+				else race = "half bunny-" + mf("boy", "girl");
+			}
 			if (harpyScore() >= 4)
 			{
 				if (harpyScore() >= 8) {
@@ -3133,7 +3136,7 @@ use namespace CoC;
 				chimeraCounter++;
 			if (raijuScore() >= 5)
 				chimeraCounter++;
-			if (bunnyScore() >= 4)
+			if (bunnyScore() >= 5)
 				chimeraCounter++;
 			if (harpyScore() >= 4)
 				chimeraCounter++;
@@ -3258,8 +3261,8 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (raijuScore() >= 10)
 				grandchimeraCounter++;
-//			if (bunnyScore() >= 4)
-//				grandchimeraCounter++;
+			if (bunnyScore() >= 10)
+				grandchimeraCounter++;
 			if (harpyScore() >= 8)
 				grandchimeraCounter++;
 			if (spiderScore() >= 7)
@@ -3913,6 +3916,8 @@ use namespace CoC;
 			if (hasFur() || hasPartialCoat(Skin.FUR))
 				hellcatCounter++;
 			if (coatColor == "midnight black")
+				hellcatCounter++;
+			if (skinTone == "ashen")
 				hellcatCounter++;
 			if (findPerk(PerkLib.Flexibility) > 0)
 				hellcatCounter++;
@@ -4592,23 +4597,26 @@ use namespace CoC;
 			var bunnyCounter:Number = 0;
 			if (faceType == Face.BUNNY)
 				bunnyCounter++;
-			if (tailType == Tail.RABBIT)
+			if (eyes.type == Eyes.HUMAN)
 				bunnyCounter++;
 			if (ears.type == Ears.BUNNY)
 				bunnyCounter++;
 			if (lowerBody == LowerBody.BUNNY)
 				bunnyCounter++;
-			//More than 2 balls reduces bunny score
-			if (balls > 2 && bunnyCounter > 0)
-				bunnyCounter--;
-			//Human skin on bunmorph adds
-			if (hasPlainSkin() && bunnyCounter > 1 && skinTone != "slippery")
+			if (arms.type == Arms.HUMAN)
 				bunnyCounter++;
-			//No wings and antennae.type a plus
+			if (tailType == Tail.RABBIT)
+				bunnyCounter++;
+			if (hasFur() || hasPartialCoat(Skin.FUR))
+				bunnyCounter++;
 			if (bunnyCounter > 0 && antennae.type == 0)
 				bunnyCounter++;
 			if (bunnyCounter > 0 && wings.type == Wings.NONE)
 				bunnyCounter++;
+			if (tallness < 72)
+				bunnyCounter++;
+			if (balls > 2 && bunnyCounter > 0)
+				bunnyCounter--;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				bunnyCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && bunnyCounter >= 4)
@@ -6493,8 +6501,8 @@ use namespace CoC;
 		}
 		public function spellCountWhiteBlack():Number
 		{
-			return [StatusEffects.KnowsMight, StatusEffects.KnowsBlink, StatusEffects.KnowsRegenerate, StatusEffects.KnowsArouse, StatusEffects.KnowsCharge, StatusEffects.KnowsChargeA, StatusEffects.KnowsHeal, StatusEffects.KnowsBlind, StatusEffects.KnowsWhitefire, StatusEffects.KnowsIceSpike, StatusEffects.KnowsLightningBolt, StatusEffects.KnowsDarknessShard,
-			StatusEffects.KnowsBlizzard, StatusEffects.KnowsArcticGale, StatusEffects.KnowsChainLighting, StatusEffects.KnowsDuskWave, StatusEffects.KnowsPyreBurst]
+			return [StatusEffects.KnowsIceSpike, StatusEffects.KnowsDarknessShard, StatusEffects.KnowsMight, StatusEffects.KnowsBlink, StatusEffects.KnowsRegenerate, StatusEffects.KnowsArouse, StatusEffects.KnowsWhitefire, StatusEffects.KnowsLightningBolt, StatusEffects.KnowsCharge, StatusEffects.KnowsChargeA, StatusEffects.KnowsHeal, StatusEffects.KnowsBlind,
+			StatusEffects.KnowsPyreBurst, StatusEffects.KnowsChainLighting, StatusEffects.KnowsArcticGale, StatusEffects.KnowsDuskWave, StatusEffects.KnowsBlizzard]
 					.filter(function(item:StatusEffectType, index:int, array:Array):Boolean{
 						return this.hasStatusEffect(item);},this)
 					.length;
@@ -7219,8 +7227,19 @@ use namespace CoC;
 				maxWis -= (20 * newGamePlusMod);
 				maxLib += (60 * newGamePlusMod);
 			}
-			if (bunnyScore() >= 4) {
-				maxSpe += (10 * newGamePlusMod);
+			if (bunnyScore() >= 8) {/*
+				if (bunnyScore() >= 10) {
+					maxStr -= (20 * newGamePlusMod);
+					maxTou -= (10 * newGamePlusMod);
+					maxSpe += (90 * newGamePlusMod);
+					maxLib += (90 * newGamePlusMod);
+				}
+				else {*/
+					maxStr -= (20 * newGamePlusMod);
+					maxTou -= (10 * newGamePlusMod);
+					maxSpe += (75 * newGamePlusMod);
+					maxLib += (75 * newGamePlusMod);
+				//}
 			}//+10/10-20
 			if (raccoonScore() >= 4) {
 				maxSpe += (15 * newGamePlusMod);
@@ -7946,7 +7965,6 @@ use namespace CoC;
 				maxLib += (6 * newGamePlusMod);
 				maxSen += (6 * newGamePlusMod);
 			}
-			if (findPerk(PerkLib.JobSwordsman) >= 0) maxStr += (10 * newGamePlusMod);
 			if (findPerk(PerkLib.JobBeastWarrior) >= 0) {
 				maxStr += (5 * newGamePlusMod);
 				maxTou += (5 * newGamePlusMod);
@@ -7960,10 +7978,10 @@ use namespace CoC;
 					maxWis -= (5 * newGamePlusMod);
 				}
 			}
-			if (findPerk(PerkLib.JobCourtesan) >= 0) maxLib += (15 * newGamePlusMod);
 			if (findPerk(PerkLib.JobBrawler) >= 0) maxStr += (10 * newGamePlusMod);
-			if (findPerk(PerkLib.JobDervish) >= 0) maxSpe += (10 * newGamePlusMod);
+			if (findPerk(PerkLib.JobCourtesan) >= 0) maxLib += (15 * newGamePlusMod);
 			if (findPerk(PerkLib.JobDefender) >= 0) maxTou += (15 * newGamePlusMod);
+			if (findPerk(PerkLib.JobDervish) >= 0) maxSpe += (10 * newGamePlusMod);
 			if (findPerk(PerkLib.JobElementalConjurer) >= 0) maxWis += (5 * newGamePlusMod);
 			if (findPerk(PerkLib.JobEnchanter) >= 0) maxInt += (15 * newGamePlusMod);
 			if (findPerk(PerkLib.JobEromancer) >= 0) {
@@ -7994,6 +8012,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.JobSeducer) >= 0) maxLib += (5 * newGamePlusMod);
 			if (findPerk(PerkLib.JobSorcerer) >= 0) maxInt += (5 * newGamePlusMod);
 			if (findPerk(PerkLib.JobSoulCultivator) >= 0) maxWis += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.JobSwordsman) >= 0) maxStr += (10 * newGamePlusMod);
 			if (findPerk(PerkLib.JobWarlord) >= 0) maxTou += (20 * newGamePlusMod);
 			if (findPerk(PerkLib.JobWarrior) >= 0) maxStr += (5 * newGamePlusMod);
 			if (findPerk(PerkLib.PrestigeJobArcaneArcher) >= 0) {
@@ -9072,4 +9091,4 @@ use namespace CoC;
 		}
 	}
 }
-
+

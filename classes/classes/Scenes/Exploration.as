@@ -162,7 +162,7 @@ public class Exploration extends BaseContent
 				else if (player.level < 16 && impChooser >= 80) impChooser = 79;
 				//Imp Lord
 				if (impChooser >= 50 && impChooser < 70) {
-					if (rand(3) == 0) SceneLib.impScene.impLordFeralEncounter();
+					if (rand(4) == 0) SceneLib.impScene.impLordFeralEncounter();
 					else SceneLib.impScene.impLordEncounter();
 					spriteSelect(29);
 					
@@ -170,7 +170,7 @@ public class Exploration extends BaseContent
 				}
 				//Imp Warlord
 				else if (impChooser >= 70 && impChooser < 90) {
-					if (rand(3) == 0) SceneLib.impScene.impWarlordFeralEncounter();
+					if (rand(4) == 0) SceneLib.impScene.impWarlordFeralEncounter();
 					else SceneLib.impScene.impWarlordEncounter();
 					spriteSelect(125);
 					return;
@@ -183,7 +183,7 @@ public class Exploration extends BaseContent
 				}
 				else {
 					clearOutput();
-					if (rand(3) == 0) {
+					if (rand(4) == 0) {
 						outputText("A feral imp wings out of the sky and attacks!");
 						if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
 							flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
@@ -205,67 +205,10 @@ public class Exploration extends BaseContent
 				}
 				return;
 			}
-			//Encounter Gobbalin!
 			//Encounter Golemuuu!
+			//Encounter Gobbalin!
 			else {
-				if (player.level >= 6 && rand(10) < 7) {
-					var goblinChooser:int = rand(100);
-					//Level modifier
-					if (player.level < 20) goblinChooser += player.level;
-					else goblinChooser += 20;
-					//Limit chooser range
-					if (goblinChooser > 100) goblinChooser = 100;
-					if (player.level < 8 && goblinChooser >= 20) goblinChooser = 29;
-					else if (player.level < 16 && goblinChooser >= 60) goblinChooser = 49;
-					else if (player.level < 24 && goblinChooser >= 80) goblinChooser = 79;
-					//Goblin assassin!
-					if (goblinChooser >= 30 && goblinChooser < 50) {
-						SceneLib.goblinAssassinScene.goblinAssassinEncounter();
-						spriteSelect(24);
-						return;
-					}
-					//Goblin warrior! (Equal chance with Goblin Shaman)
-					else if (goblinChooser >= 50 && goblinChooser < 65) {
-						SceneLib.goblinWarriorScene.goblinWarriorEncounter();
-						spriteSelect(123);
-						return;
-					}
-					//Goblin shaman!
-					else if (goblinChooser >= 65 && goblinChooser < 80) {
-						SceneLib.goblinShamanScene.goblinShamanEncounter();
-						spriteSelect(124);
-						return;
-					}
-					//Goblin elder!
-					else if (goblinChooser >= 80) {
-						SceneLib.goblinElderScene.goblinElderEncounter();
-						spriteSelect(122);
-						return;
-					}
-					if (player.gender > 0) {
-						clearOutput();
-						outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fucked, " + player.mf("stud", "slut") + ".</i>\"");
-						if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
-							flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
-							outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
-						}
-						startCombat(new Goblin());
-						spriteSelect(24);
-						return;
-					}
-					else {
-						clearOutput();
-						outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fuc-oh shit, you don't even have anything to play with!  This is for wasting my time!</i>\"");
-						if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
-							flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
-							outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
-						}
-						startCombat(new Goblin());
-						spriteSelect(24);
-						return;
-					}
-				}
-				else {
+				if (player.level >= 6 && rand(10) >= 7) {
 					var golemChooser:int = rand(70);
 					//Limit chooser range
 					if (player.level < 12 && golemChooser >= 10) golemChooser = 9;
@@ -357,6 +300,63 @@ public class Exploration extends BaseContent
 						return;
 					}
 				}
+				else {
+					var goblinChooser:int = rand(100);
+					//Level modifier
+					if (player.level < 20) goblinChooser += player.level;
+					else goblinChooser += 20;
+					//Limit chooser range
+					if (goblinChooser > 100) goblinChooser = 100;
+					if (player.level < 8 && goblinChooser >= 20) goblinChooser = 29;
+					else if (player.level < 16 && goblinChooser >= 60) goblinChooser = 49;
+					else if (player.level < 24 && goblinChooser >= 80) goblinChooser = 79;
+					//Goblin assassin!
+					if (goblinChooser >= 30 && goblinChooser < 50) {
+						SceneLib.goblinAssassinScene.goblinAssassinEncounter();
+						spriteSelect(24);
+						return;
+					}
+					//Goblin warrior! (Equal chance with Goblin Shaman)
+					else if (goblinChooser >= 50 && goblinChooser < 65) {
+						SceneLib.goblinWarriorScene.goblinWarriorEncounter();
+						spriteSelect(123);
+						return;
+					}
+					//Goblin shaman!
+					else if (goblinChooser >= 65 && goblinChooser < 80) {
+						SceneLib.goblinShamanScene.goblinShamanEncounter();
+						spriteSelect(124);
+						return;
+					}
+					//Goblin elder!
+					else if (goblinChooser >= 80) {
+						SceneLib.goblinElderScene.goblinElderEncounter();
+						spriteSelect(122);
+						return;
+					}
+					if (player.gender > 0) {
+						clearOutput();
+						outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fucked, " + player.mf("stud", "slut") + ".</i>\"");
+						if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
+							flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
+							outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
+						}
+						startCombat(new Goblin());
+						spriteSelect(24);
+						return;
+					}
+					else {
+						clearOutput();
+						outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fuc-oh shit, you don't even have anything to play with!  This is for wasting my time!</i>\"");
+						if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
+							flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
+							outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
+						}
+						startCombat(new Goblin());
+						spriteSelect(24);
+						return;
+					}
+				}
 			}
 		}
 		public function genericImpEncounters2(even:Boolean = false):void {
@@ -370,7 +370,7 @@ public class Exploration extends BaseContent
 			if (player.level < 16 && impChooser >= 75) impChooser = 74;
 			//Imp Warlord
 			if (impChooser >= 50 && impChooser < 75) {
-				if (rand(3) == 0) SceneLib.impScene.impWarlordFeralEncounter();
+				if (rand(4) == 0) SceneLib.impScene.impWarlordFeralEncounter();
 				else SceneLib.impScene.impWarlordEncounter();
 				spriteSelect(125);
 				return;
@@ -383,7 +383,7 @@ public class Exploration extends BaseContent
 			}
 			//Pack of Imps
 			else {
-				if (rand(3) == 0) SceneLib.impScene.impPackEncounter2();
+				if (rand(4) == 0) SceneLib.impScene.impPackEncounter2();
 				else SceneLib.impScene.impPackEncounter();
 				return;
 			}

@@ -136,7 +136,7 @@ private function acceptDominikasKnowledge():void {
 		outputText("\"<i>Now then,</i>\" she says. Her hands glow with a brief sense of power, and many of the tattoos shine with equal illumination. She gestures with her hand and the lamps all acquire an unearthly light, as green glowing circles appear interlinked on the floor. \"<i>How much do you know about magic?</i>\"\n\n");
 
 		//[If player knows all spells]
-		if(player.spellCountWhiteBlack() == 13) {
+		if(player.spellCountWhiteBlack() == 17) {
 			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00154] == 0) {
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00154]++;
 				outputText("You blink, then casually mention that you actually know quite a bit about magic. Dominika listens to you explain your skill in white and black magic, then coughs awkwardly and glances to the side. \"<i>O-oh,</i>\" she says, \"<i>Well. Uhm. I guess we can talk about magical theory, maybe?</i>\"\n\n");

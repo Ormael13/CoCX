@@ -72,7 +72,7 @@ public class CoC extends MovieClip
     public var date:Date = new Date();
 
     //Mod save version.
-    public var modSaveVersion:Number = 24;
+    public var modSaveVersion:Number = 25;
     public var levelCap:Number = 150;
 
     //Used to restrict random drops from overlapping uniques
@@ -249,8 +249,8 @@ public class CoC extends MovieClip
         //model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8m";
-			version = ver + " (<b>Samirah, Nekomata TF, River Dungeon (1st floor), 4 new spells and Magic Revamp (part 1) and many small QoL changes</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8m2";
+			version = ver + " (<b>Bugfixing and few QoL changes</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

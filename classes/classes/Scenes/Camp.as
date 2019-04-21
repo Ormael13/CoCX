@@ -3730,15 +3730,52 @@ private function promptSaveUpdate():void {
 		doNext(doCamp);
 		return;
 	}
-/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 24) {
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 24) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 25;
+		clearOutput();
+		outputText("I know you all loved been with Neisa but she ned to begone but not like begone thot but just begone. As bonus you all will see scene of her leaving that should played at leaving river dungeon assuming your PC already visited it once ^^");
+		if (flags[kFLAGS.NEISA_FOLLOWER] == 3) {
+			outputText("As the pair of you leave the dungeon Neisa waves off, heading back to town.\n\n");
+			outputText("\"<i>Nice going along with you [name], this was worth it. I’m going to go and spend this bling on some well earned reward. See you around up there. If you ever need of my services again I will be at the bar.</i>\"\n\n");
+			player.removeStatusEffect(StatusEffects.CombatFollowerNeisa);
+			flags[kFLAGS.PLAYER_COMPANION_1] = "";
+			flags[kFLAGS.NEISA_FOLLOWER] = 4;
+			outputText("Working together with another person has taught you how to manage and plan with a group of people. <b>Gained Perk: Basic Leadership</b>");
+			player.createPerk(PerkLib.BasicLeadership,0,0,0,0);
+		}
+		doNext(doCamp);
+		return;
+	}
+/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 25) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 26;
 		clearOutput();
 		outputText("Text.");
 		doNext(doCamp);
 		return;
 	}
-	if (flags[kFLAGS.MOD_SAVE_VERSION] == 25) {
-		flags[kFLAGS.MOD_SAVE_VERSION] = 26;
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 26) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 27;
+		clearOutput();
+		outputText("Text.");
+		doNext(doCamp);
+		return;
+	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 27) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 28;
+		clearOutput();
+		outputText("Text.");
+		doNext(doCamp);
+		return;
+	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 28) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 29;
+		clearOutput();
+		outputText("Text.");
+		doNext(doCamp);
+		return;
+	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 29) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 30;
 		clearOutput();
 		outputText("Text.");
 		doNext(doCamp);
