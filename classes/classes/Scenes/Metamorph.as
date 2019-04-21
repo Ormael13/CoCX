@@ -953,10 +953,10 @@ private function accessPage1TailMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedCatTail) && player.tailType == Tail.CAT && player.tailCount == 1) addButtonDisabled(8, "Cat", "You already have single cat tail.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedCatTail) && player.tailType != Tail.CAT && player.soulforce < 100) addButtonDisabled(8, "Cat", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(8, "???", "You not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedCatTail2nd) && player.tailType != Tail.CAT && player.tailCount < 2 && player.soulforce >= 400) addButton(9, "Nekomata", metamorphCat2ndTail);
+	if (player.hasStatusEffect(StatusEffects.UnlockedCatTail2nd) && player.tailType == Tail.NEKOMATA_FORKED_2_3 && player.soulforce >= 400) addButton(9, "Nekomata", metamorphCat2ndTail);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedCatTail2nd) && player.tailType == Tail.CAT && player.tailCount >= 2) addButtonDisabled(9, "Nekomata", "You already have twin cat tail.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedCatTail2nd) && player.tailType != Tail.CAT && player.tailCount < 2 && player.soulforce < 400) addButtonDisabled(9, "Nekomata", "You not have enough Soulforce for this metamorphosis.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedCatTail2nd) && player.tailType != Tail.NEKOMATA_FORKED_1_3) addButtonDisabled(9, "Nekomata", "You not have proper type of tail for this metamorphosis.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedCatTail2nd) && player.tailType != Tail.NEKOMATA_FORKED_2_3) addButtonDisabled(9, "Nekomata", "You not have proper type of tail for this metamorphosis.");
 	else addButtonDisabled(2, "???", "You not yet unlocked this metamorphosis!");
 	if (player.hasStatusEffect(StatusEffects.UnlockedLizardTail) && player.tailType != Tail.LIZARD && player.soulforce >= 100) addButton(10, "Lizard", metamorphLizardTail);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedLizardTail) && player.tailType == Tail.LIZARD) addButtonDisabled(10, "Lizard", "You already have lizard tail.");

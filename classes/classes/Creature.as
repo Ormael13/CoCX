@@ -460,14 +460,14 @@ public class Creature extends Utils
 		}
 		public function maxHP():Number {
 			var max:Number = Math.round(maxHP_base()*maxHP_mult());
-			return Math.min(3299999,max);
+			return Math.min(3699999,max);
 		}
 		public function minHP():Number {
 			return 0;
 		}
 		public function maxLust():Number {
 			var max:Number = Math.round(maxLust_base()*maxLust_mult());
-			return Math.min(119999,max);
+			return Math.min(139999,max);
 		}
 		public function maxFatigue():Number {
 			return 150;

@@ -680,8 +680,8 @@ public class PerkLib
 				"Gain another extra attack with fist (weapon).",
 				"You choose the 'Combo Master' perk, gaining another extra attack with fist (weapon).");
 		public static const Convergence:PerkType = mk("Convergence", "Convergence",
-				"Grey magic area of effect spells strike twice against single targets.",
-				"You choose the 'Convergence' perk, gaining chance to attack single targets twice with grey aoe spells.");
+				"Grey magic area of effect spells strike three times against single targets.",
+				"You choose the 'Convergence' perk, gaining chance to attack single targets three times with grey aoe spells.");
 		public static const CorruptedLibido:PerkType = mk("Corrupted Libido", "Corrupted Libido",
 				"Reduces lust gain by 10%.",
 				"You choose the 'Corrupted Libido' perk.  As a result of your body's corruption, you've become a bit harder to turn on. (Lust gain reduced by 10%!)");
@@ -1159,14 +1159,14 @@ public class PerkLib
 				"Increases self heling by 180 out of combat and by 90 in combat (using defend option will double it).",
 				"You choose the 'Greater Lifeline' perk, greatly increasing your self healing.");
 		public static const GreyArchmage:PerkType = mk("Grey Archmage", "Grey Archmage",
-				"[if (player.inte>=150)" +
-						"Increases base spell strength by 100%, mana pool by 200, lust bar by 50 and regain it 150% faster." +
+				"[if (player.inte>=275)" +
+						"Increases base spell strength by 100%, mana pool by 200, lust bar by 50 and regain mana 150% faster." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
 				"You choose the 'Grey Archmage' perk, increasing base spell strength by 100%, mana pool by 150, lust bar by 40 and boosting mana recovery by large margin.");
 		public static const GreyMage:PerkType = mk("Grey Mage", "Grey Mage",
-				"[if (player.inte>=125)" +
+				"[if (player.inte>=225)" +
 						"Increases base spell strength by 80%, mana pool by 150, lust bar by 40, regain it 50% faster, treshold for Black Magic is 30 lust and for White 30 lust below current max." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
@@ -1366,7 +1366,7 @@ public class PerkLib
 				"Charge Weapon can be cast whenever PC hold any weapon or merely using bare fists. And slight boost unarmed attacks while under Crinos Shape effects.",
 				"You choose the 'Improving Nature's Blueprints (Natural Weapons)' perk, allowing you to use Charge Weapon even without holding any weapon and slight boost unarmed attacks when using Crinos Shape.");
 		public static const ImprovingNaturesBlueprintsApexPredator:PerkType = mk("Improving Nature's Blueprints (Apex Predator)", "Improving Nature's Blueprints (Apex Predator)",
-				"Changing negative bonuses to max Int and Wis from Job: Beast Warrior is the same value positive bonuses. While using Crinos shape increasing natural regeneration by 2% of max HP per turn.",
+				"Changing negative bonuses to max Int and Wis from Job: Beast Warrior is the same value positive bonuses. While using Crinos shape increasing natural regeneration by 2% of max HP per turn. (+10 to max int/wis - scalable)",
 				"You choose the 'Improving Nature's Blueprints (Apex Predator)' perk, allowing you to become an Apex Predator that isn't dull and slow witted along with increased regeneration while using Crinos Shape.");
 		public static const InControl:PerkType = mk("In Control", "In Control",
 				"You are in control of your desires, that's it... except another 10% soul force gain.",
@@ -1444,79 +1444,76 @@ public class PerkLib
 				"Reduces the fatigue cost of physical specials by 50%.",
 				"You choose the 'Iron Stomach' perk, reducing the fatigue cost of physical special attacks by 50%");*/
 		public static const JobAllRounder:PerkType = mk("Job: All-Rounder", "Job: All-Rounder",
-				"You've combined all basic jobs training effects into an all-round fighting style.",
+				"You've combined all basic jobs training effects into an all-round fighting style. (+10 to max str/tou/spe/int/wis, +6 to max lib/sens - scalable)",
 				"You choose 'Job: All-Rounder' perk, to combine effects of training in all six basic jobs.");
-		public static const JobBarbarian:PerkType = mk("Job: Barbarian", "Job: Barbarian",
-				"You've trained in using large weapons in fights.",
-				"You choose 'Job: Barbarian' perk, training yourself to became Barbarian.");
 		public static const JobBeastWarrior:PerkType = mk("Job: Beast Warrior", "Job: Beast Warrior",
-				"You've trained in use of your own body to it limits in fights.",
+				"You've trained in use of your own body to it limits in fights. (+5 to max str/tou/spe, -5 to max int/wis - scalable)",
 				"You choose 'Job: Beast Warrior' perk, training yourself to became Beast Warrior.");
 		public static const JobBrawler:PerkType = mk("Job: Brawler", "Job: Brawler",
-				"You've trained in unarmed combat.",
+				"You've trained in unarmed combat. (+10 to max str - scalable)",
 				"You choose 'Job: Brawler' perk, training yourself to became Brawler.");
 		public static const JobCourtesan:PerkType = mk("Job: Courtesan", "Job: Courtesan",
-				"You've mastered all various uses of tease.",
+				"You've mastered all various uses of tease. (+15 to max lib - scalable)",
 				"You choose 'Job: Courtesan' perk, training yourself to became Courtesan.");
 		public static const JobDefender:PerkType = mk("Job: Defender", "Job: Defender",
-				"You've trained in withstanding even the heaviest attacks head on.",
+				"You've trained in withstanding even the heaviest attacks head on. (+15 to max tou - scalable)",
 				"You choose 'Job: Defender' perk, training yourself to became Defender.");
 		public static const JobDervish:PerkType = mk("Job: Dervish", "Job: Dervish",
-				"You've trained in multi meele attacks combat and using of medium sized dual weapons.",
+				"You've trained in multi meele attacks combat and using of medium sized dual weapons. (+10 to max spe - scalable)",
 				"You choose 'Job: Dervish' perk, training yourself to became Dervish.");
 		public static const JobElementalConjurer:PerkType = mk("Job: Elemental Conjurer", "Job: Elemental Conjurer",
-				"You've trained in summoning various types of elementals.",
+				"You've trained in summoning various types of elementals. (+5 to max wis - scalable)",
 				"You choose 'Job: Elemental Conjurer' perk, training yourself to call elementals.");
 		public static const JobEnchanter:PerkType = mk("Job: Enchanter", "Job: Enchanter",
-				"You've trained in casting empowered buffs.",
+				"You've trained in casting empowered buffs. (+15 to max int - scalable)",
 				"You choose 'Job: Enchanter' perk, training yourself to became Enchanter.");
 		public static const JobEromancer:PerkType = mk("Job: Eromancer", "Job: Eromancer",
-				"You've mastered the power of erotic magics.",
+				"You've mastered the power of erotic magics. (+5 to max int/lib - scalable)",
 				"You choose 'Job: Eromancer' perk, training yourself to became Eromancer.");
 		public static const JobGolemancer:PerkType = mk("Job: Golemancer", "Job: Golemancer",
-				"You've mastered the art of making golems.",
+				"You've mastered the art of making golems. (+5 to max int/wis - scalable)",
 				"You choose 'Job: Golemancer' perk, training yourself to became golems maker.");
 		public static const JobGuardian:PerkType = mk("Job: Guardian", "Job: Guardian",
-				"You've trained in defensive combat.",
+				"You've trained in defensive combat. (+5 to max tou - scalable)",
 				"You choose 'Job: Guardian' perk, training yourself to became Guardian.");
 		public static const JobGunslinger:PerkType = mk("Job: Gunslinger", "Job: Gunslinger",
-				"You've trained in ranged combat using firearms.",
+				"You've trained in ranged combat using firearms. (+10 to max wis - scalable)",
 				"You choose 'Job: Gunslinger' perk, training yourself to became Gunslinger.");
-		public static const JobHunter:PerkType = mk("Job: Hunter", "Job: Hunter",
-				"You've trained in combat with traditional range weapons (like bows).",
-				"You choose 'Job: Hunter' perk, training yourself to became Hunter.");
 		public static const JobHealer:PerkType = mk("Job: Healer", "Job: Healer",
-				"You've trained in using more effectively heal spells and effects.",
+				"You've trained in using more effectively heal spells and effects. (+5 to max int/wis - scalable)",
 				"You choose 'Job: Healer' perk, training yourself to became Healer.");
+		public static const JobHunter:PerkType = mk("Job: Hunter", "Job: Hunter",
+				"You've trained in combat with traditional range weapons (like bows). (+10 to max spe, +5 to max int - scalable)",
+				"You choose 'Job: Hunter' perk, training yourself to became Hunter.");
 		public static const JobKnight:PerkType = mk("Job: Knight", "Job: Knight",
-				"You've trained in combat using shields and heaviest armors.",
+				"You've trained in combat using shields and heaviest armors. (+10 to max tou - scalable)",
 				"You choose 'Job: Knight' perk, training yourself to became Knight.");
 		public static const JobMonk:PerkType = mk("Job: Monk", "Job: Monk",
-				"You've trained in unarmed combat.",
+				"You've trained in unarmed combat. (+15 to max wis - scalable)",
 				"You choose 'Job: Monk' perk, training yourself to became Monk.");
 		public static const JobRanger:PerkType = mk("Job: Ranger", "Job: Ranger",
-				"You've trained in ranged combat.",
+				"You've trained in ranged combat. (+5 to max spe - scalable)",
 				"You choose 'Job: Ranger' perk, training yourself to became Ranger.");
 		public static const JobRogue:PerkType = mk("Job: Rogue", "Job: Rogue",
-				"You've trained in how to strike at your opponent's vital points and use various deadly tricks.",
+				"You've trained in how to strike at your opponent's vital points and use various deadly tricks. (+5 to max str/spe - scalable)",
 				"You choose 'Job: Rogue' perk, training yourself to became Rogue.");
 		public static const JobSeducer:PerkType = mk("Job: Seducer", "Job: Seducer",
-				"You've trained the art of seduction.",
+				"You've trained the art of seduction. (+5 to max lib - scalable)",
 				"You choose 'Job: Seducer' perk, training yourself to became Seducer.");
 		public static const JobSorcerer:PerkType = mk("Job: Sorcerer", "Job: Sorcerer",
-				"You've trained in magic combat.",
+				"You've trained in magic combat. (+5 to max int - scalable)",
 				"You choose 'Job: Sorcerer' perk, training yourself to became Sorcerer.");
 		public static const JobSoulCultivator:PerkType = mk("Job: Soul Cultivator", "Job: Soul Cultivator",
-				"You've cultivated powers of your soul.",
+				"You've cultivated powers of your soul. (+5 to max wis - scalable)",
 				"You choose the 'Job: Soul Cultivator' perk, starting journey of the soul cultivation path!");
 		public static const JobSwordsman:PerkType = mk("Job: Swordsman", "Job: Swordsman",
-				"You've trained in using large weapons in fights.",
+				"You've trained in using large weapons in fights. (+10 to max str - scalable)",
 				"You choose 'Job: Swordsman' perk, training yourself to became Swordsman.");
 		public static const JobWarlord:PerkType = mk("Job: Warlord", "Job: Warlord",
-				"You've trained in combat against group of enemies.",
+				"You've trained in combat against group of enemies. (+20 to max tou - scalable)",
 				"You choose 'Job: Warlord' perk, training yourself to became Warlord.");
 		public static const JobWarrior:PerkType = mk("Job: Warrior", "Job: Warrior",
-				"You've trained in melee combat.",
+				"You've trained in melee combat. (+5 to max str - scalable)",
 				"You choose 'Job: Warrior' perk, training yourself to became Warrior.");
 		public static const Juggernaut:PerkType = mk("Juggernaut", "Juggernaut",
 				"When wearing heavy armor, you have extra 10% damage resistance and are immune to damage from being constricted/squeezed (req. 100+ tou).",
@@ -1960,13 +1957,13 @@ public class PerkLib
 				"You own the school board, controlling what classes are taught, further increasing max mana by 10%.",
 				"You choose the 'President' perk, gaining +10% max Mana.");
 		public static const PrestigeJobArcaneArcher:PerkType = mk("Prestige Job: Arcane Archer", "Prestige Job: Arcane Archer",
-				"You've trained in prestige art of combining magic and arrows.",
+				"You've trained in prestige art of combining magic and arrows. (+40 to max spe/int - scalable)",
 				"You choose 'Prestige Job: Arcane Archer' perk, training yourself to became Arcane Archer.");
 		public static const PrestigeJobBerserker:PerkType = mk("Prestige Job: Berserker", "Prestige Job: Berserker",
-				"You've trained in prestige art of perfect mastery over all forms of berserking.",
+				"You've trained in prestige art of perfect mastery over all forms of berserking. (+60 to max str, +20 to max tou - scalable)",
 				"You choose 'Prestige Job: Berserker' perk, training yourself to became Berserker.");
 		public static const PrestigeJobGreySage:PerkType = mk("Prestige Job: Grey Sage", "Prestige Job: Grey Sage",
-				"You've trained in prestige art of perfect mastery over all forms of aoe magic spells.",
+				"You've trained in prestige art of perfect mastery over all forms of aoe magic spells. (+80 to max int - scalable)",
 				"You choose 'Prestige Job: Grey Sage' perk, training yourself to became Grey Sage - master of area spells.");
 		public static const PrestigeJobNecromancer:PerkType = mk("Prestige Job: Necromancer", "Prestige Job: Necromancer",
 				".",//golemancer + ?daoist path of soul cultivation or just soul cultivation path perk?
@@ -1975,16 +1972,16 @@ public class PerkLib
 				"You've trained in prestige art of combining soulforce and magic.",
 				"You choose 'Prestige Job: Seer' perk, training yourself to became Seer.");
 		public static const PrestigeJobSentinel:PerkType = mk("Prestige Job: Sentinel", "Prestige Job: Sentinel",
-				"You've trained in prestige art that brings 'tanking' to a whole new level.",
+				"You've trained in prestige art that brings 'tanking' to a whole new level. (+20 to max str, +60 to max tou - scalable)",
 				"You choose 'Prestige Job: Sentinel' perk, training yourself to became Sentinel.");
 		public static const PrestigeJobSoulArcher:PerkType = mk("Prestige Job: Soul Archer", "Prestige Job: Soul Archer",
 				"You've trained in prestige art of combining soulforce and arrows.",
 				"You choose 'Prestige Job: Soul Archer' perk, training yourself to became Soul Archer.");
 		public static const PrestigeJobSoulArtMaster:PerkType = mk("Prestige Job: Soul Art Master", "Prestige Job: Soul Art Master",
-				"You've trained in prestige art of combine soulforce with physical attacks to various deadly effect.",
+				"You've trained in prestige art of combine soulforce with physical attacks to various deadly effect. (+40 to max str/wis - scalable)",
 				"You choose 'Prestige Job: Soul Art Master' perk, training yourself to became Soul Art Master.");
 		public static const PrestigeJobTempest:PerkType = mk("Prestige Job: Tempest", "Prestige Job: Tempest",
-				"You've trained in prestige art of dual wielding as you hack and slice through your opponents like a raging storm of steel.",
+				"You've trained in prestige art of dual wielding as you hack and slice through your opponents like a raging storm of steel. (+40 to max str/spe - scalable)",
 				"You choose 'Prestige Job: Tempest' perk, training yourself to became Tempest.");
 		public static const Priest:PerkType = mk("Priest", "Priest",
 				"You now speak during mass, your words of wisdom empowerin others and you to have a lower minimum libido and boost lust resistance. (-2 min libido/+5% to lust resistance)",
@@ -2599,6 +2596,9 @@ public class PerkLib
 		public static const JobArcher:PerkType = mk("Job: Archer", "Job: Archer",
 				"You've trained in ranged combat.",
 				"You choose 'Job: Archer' perk, training yourself to became Archer.");
+		public static const JobBarbarian:PerkType = mk("Job: Barbarian", "Job: Barbarian",
+				"You've trained in using large weapons in fights.",
+				"You choose 'Job: Barbarian' perk, training yourself to became Barbarian.");
 		
 
 		// Needlework perks
@@ -4052,10 +4052,6 @@ public class PerkLib
                     .requirePerk(ArcaneRegenerationEpic)
                     .requireInt(125)
                     .requireLevel(24);
-            Battleshield.requireStatusEffect(StatusEffects.KnowsManaShield, "Mana Shield spell")
-                    .requirePerk(JobEnchanter)
-                    .requireInt(135)
-                    .requireLevel(24);
             //Tier 5 Intelligence perks
             GrandArchmage2ndCircle.requirePerk(GrandArchmage)
                     .requireInt(150)
@@ -4113,6 +4109,10 @@ public class PerkLib
                     .requireInt(240)
                     .requirePerk(SuperiorSpirituality)
                     .requireLevel(42);
+            Battleshield.requireStatusEffect(StatusEffects.KnowsManaShield, "Mana Shield spell")
+                    .requirePerk(JobEnchanter)
+                    .requireInt(200)
+                    .requireLevel(42);
             //Tier 8 Intelligence perks
             PeerlessSpirituality.requireWis(180)
                     .requireInt(270)
@@ -4124,12 +4124,18 @@ public class PerkLib
             Convergence.requirePerk(PrestigeJobGreySage)
                     .requireInt(225)
                     .requireLevel(48);
+            GreyMage.requirePerk(PrestigeJobGreySage)//później jeden z 2 grey mage prestige perks
+                    .requireInt(225)
+                    .requireLevel(48);
             //Tier 9 Intelligence perks
             HalfStepToInhumanSpirituality.requireWis(200)
                     .requireInt(300)
                     .requirePerk(PeerlessSpirituality)
                     .requireLevel(54);
             //Tier 10 Intelligence perks
+            GreyArchmage.requirePerk(GreyMage)
+                    .requireInt(275)
+                    .requireLevel(60);
             InhumanSpirituality.requireWis(220)
                     .requireInt(330)
                     .requirePerk(HalfStepToInhumanSpirituality)

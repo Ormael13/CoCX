@@ -42,15 +42,17 @@ use namespace CoC;
 					//game.commonEncounters,
 					{
 						name: "naga",
+						when: fn.ifLevelMin(4),
 						call: nagaScene.nagaEncounter
 					}, {
 						name  : "sandtrap",
 						chance: 0.5,
+						when  : fn.ifLevelMin(2),
 						call  : sandTrapScene.encounterASandTarp
 					}, {
 						name: "sandwitch",
 						when: function ():Boolean {
-							return flags[kFLAGS.SAND_WITCH_LEAVE_ME_ALONE] == 0;
+							return player.level >= 3 && flags[kFLAGS.SAND_WITCH_LEAVE_ME_ALONE] == 0;
 						},
 						call: sandWitchScene.encounter
 					}, {

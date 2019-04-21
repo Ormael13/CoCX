@@ -254,8 +254,8 @@ public class CombatMagic extends BaseCombatContent {
 		if(player.hasPerk(PerkLib.GrandArchmage2ndCircle) && player.inte >= 150) mod += .5;
 		if(player.hasPerk(PerkLib.GrandArchmage3rdCircle) && player.inte >= 175) mod += .6;
 		if(player.hasPerk(PerkLib.GrandMage) && player.inte >= 75) mod += .2;
-		if(player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 225) mod += 1;
-		if(player.hasPerk(PerkLib.GreyMage) && player.inte >= 200) mod += .8;
+		if(player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 275) mod += 1;
+		if(player.hasPerk(PerkLib.GreyMage) && player.inte >= 225) mod += .8;
 		if(player.hasPerk(PerkLib.JobSorcerer) && player.inte >= 25) mod += .1;
 		if(player.hasPerk(PerkLib.PrestigeJobGreySage)) mod += .2;
 		if(player.hasPerk(PerkLib.Mage) && player.inte >= 50) mod += .1;
@@ -347,8 +347,8 @@ public class CombatMagic extends BaseCombatContent {
 		if(player.hasPerk(PerkLib.GrandArchmage2ndCircle) && player.inte >= 150) mod += .5;
 		if(player.hasPerk(PerkLib.GrandArchmage3rdCircle) && player.inte >= 175) mod += .6;
 		if(player.hasPerk(PerkLib.GrandMage) && player.inte >= 75) mod += .2;
-		if(player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 225) mod += 1;
-		if(player.hasPerk(PerkLib.GreyMage) && player.inte >= 200) mod += .8;
+		if(player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 275) mod += 1;
+		if(player.hasPerk(PerkLib.GreyMage) && player.inte >= 225) mod += .8;
 		if(player.hasPerk(PerkLib.JobSorcerer) && player.inte >= 25) mod += .1;
 		if(player.hasPerk(PerkLib.PrestigeJobGreySage)) mod += .2;
 		if(player.hasPerk(PerkLib.Mage) && player.inte >= 50) mod += .1;
@@ -442,8 +442,8 @@ public class CombatMagic extends BaseCombatContent {
 		if(player.hasPerk(PerkLib.GrandArchmage2ndCircle) && player.inte >= 150) mod += .5;
 		if(player.hasPerk(PerkLib.GrandArchmage3rdCircle) && player.inte >= 175) mod += .6;
 		if(player.hasPerk(PerkLib.GrandMage) && player.inte >= 75) mod += .2;
-		if(player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 225) mod += 1;
-		if(player.hasPerk(PerkLib.GreyMage) && player.inte >= 200) mod += .8;
+		if(player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 275) mod += 1;
+		if(player.hasPerk(PerkLib.GreyMage) && player.inte >= 225) mod += .8;
 		if(player.hasPerk(PerkLib.JobSorcerer) && player.inte >= 25) mod += .1;
 		if(player.hasPerk(PerkLib.PrestigeJobGreySage)) mod += .2;
 		if(player.hasPerk(PerkLib.Mage) && player.inte >= 50) mod += .1;

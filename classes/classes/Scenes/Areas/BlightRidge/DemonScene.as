@@ -144,6 +144,7 @@ import classes.Scenes.UniqueSexScenes;
 		
 		public function IncubusGetsRapedByFemale():void {
 			player.slimeFeed();
+			clearOutput();
 			outputText("With a few deft motions, you shift your [armor] to expose your ");
 			//Herm
 			if(player.gender == 3) {
@@ -623,6 +624,7 @@ import classes.Scenes.UniqueSexScenes;
 		}
 		
 		public function SuccubusGetsRapedByFemale():void {
+			clearOutput();
 			if(monster.HP < 1) outputText("Your foe staggers and falls hard on her ass, utterly defeated.  Her bruises and lacerations slowly fade and heal, regenerating with the aid of her demonic powers.  You easily tear through her clothes. It doesn't take much to force her down on her back and straddle her as you disrobe, ready to take your pleasure.\n\n");
 			else outputText("Your foe drops to her knees, stuffing three digits into her greedy snatch as arousal overcomes her desire to subdue you.  With great care, you approach your insensible enemy and tear off her clothes as you force her down on her back.  As if possessing a will of their own, her legs lewdly spread as you disrobe.\n\n");
 			outputText("Her budding clit rises from between her folds, hardening like a tiny three inch dick.\n\n");
@@ -639,6 +641,7 @@ import classes.Scenes.UniqueSexScenes;
 		}
 		
 		public function ScissorSuccubus():void {
+			clearOutput();
 			outputText("You shiver with anticipation as you hook your leg under her thick thighs, lining up your " + vaginaDescript(0) + " as you press forwards.  The anticipation builds as your matched honeypots grow ever closer.  Making contact, your folds part as her purplish-red clit slips betwixt your nether-lips, vibrating slightly in tune with the succubus' heartbeats.  You gasp, feeling your own " + clitDescript() + " erecting and rubbing against her smooth mound.\n\n");
 			if(player.clitLength >= 3) outputText("You groan with wanton desire as your " + clitDescript() + " continues to grow and grow until reaching full size and slipping inside the defeated slut's sloppy pleasure-hole.  ");
 			outputText("It takes only a few seconds to get the succubus' juices really flowing, the sounds of your grinding hips dissolving into a cacophony of liquid squelches.  The gooey corrupt fem-cum tingles, spreading warmth through every patch of skin it touches.  Your locked hips writhe and twist with her's, eliciting pants and squeals from the both of you.  In no time flat, you find yourself cumming and feel your " + vaginaDescript(0) + "'s muscles clench hungrily with an unquenchable desire to be filled.  The succubus shivers in pleasure, probably feeding off your orgasm.  You back off, fingering your " + vaginaDescript(0) + " languidly and denying her a full meal.  Pouting, the succubus dips her fingers back in, determined to cum.");

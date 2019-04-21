@@ -48,7 +48,7 @@ import classes.StatusEffects;
 		public function exitDungeon():void {
 			inDungeon = false;
 			clearOutput();
-			if (flags[kFLAGS.NEISA_FOLLOWER] == 1) {
+			if (flags[kFLAGS.NEISA_FOLLOWER] == 3) {
 				outputText("As the pair of you leave the dungeon Neisa waves off, heading back to town.\n\n");
 				outputText("\"<i>Nice going along with you [name], this was worth it. I’m going to go and spend this bling on some well earned reward. See you around up there. If you ever need of my services again I will be at the bar.</i>\"\n\n");
 				player.removeStatusEffect(StatusEffects.CombatFollowerNeisa);

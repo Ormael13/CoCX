@@ -721,7 +721,7 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.LimitBreakerHeart2ndStage) >= 0) multimax += 0.1;
 			max *= multimax;
 			max = Math.round(max);
-			if (max > 999999) max = 999999;
+			if (max > 1099999) max = 1099999;
 			return max;
 		}
 		
@@ -851,7 +851,7 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.LimitBreakerSoul2ndStage) >= 0) multimax += 0.1;
 			max *= multimax;
 			max = Math.round(max);
-			if (max > 779999) max = 779999;
+			if (max > 819999) max = 819999;
 			return max;
 		}
 		
@@ -926,7 +926,7 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.LimitBreakerBody2ndStage) >= 0) multimax += 0.1;
 			max *= multimax;
 			max = Math.round(max);
-			if (max > 44849) max = 44849;
+			if (max > 50349) max = 50349;
 			return max;
 		}
 		
@@ -1031,7 +1031,7 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.LimitBreakerSoul2ndStage) >= 0) multimax += 0.1;
 			max *= multimax;
 			max = Math.round(max);
-			if (max > 1510999) max = 1510999;
+			if (max > 1599999) max = 1599999;
 			return max;
 		}
 		
