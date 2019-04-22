@@ -35,11 +35,11 @@ package classes.Scenes
 			outputText("-Moved Battleshield perk to tier 7 and increased int req. to 200+. Added bonuses from job perks to perk descriptions on perks list.\n");
 			outputText("-Using Grey Book will now only give PC int bonus. To have chance of learning any of grey spells PC must have perk Prestige Job: Grey Sage.\n");
 			outputText("-Req. int for grey spells learning increased to 170/190 from 125/130\n");
-			outputText("-Reenabled perks Grey Mage and Grey Archmage - they now are tier 8 and 10 perks req. respectively: any prestige job perk for mages (like Grey Sage) and 225+ int; Grey Mage perks and 275+ int\n");
+			outputText("-Reenabled perks Grey Mage and Grey Archmage - they now are tier 8 and 10 perks req. respectively: any prestige job perk for mages (like Grey Sage) and 225+ int; Grey Mage perks and 275+ int. Grey Book buy option at Giacomo will req. now perk Prestige Job: Grey Sage instead Grey mage perk\n");
 			outputText("-Bunny race got stats update - req. now to have 5+/9+ pts in it to get -10/20 to max Str, -5/10 to max Tou, +55/90 to max Spe and +35/90 to max Lib (scalable).\n");
 			outputText("-Aside current points there is additinal three - human arms and human eyes counts each as point + height below 6 feet. And instead of normal human skin it req. partial or full fur. All newly added or changed req. to get point to racial score are aslo added as effects in bunny tf.\n");
 			outputText("-Sand trap req. lvl 2+, Sand Witches 3+ and Naga 4+ to encounter at the desert.\n");
-			outputText("-Fixed bugs: Neisa been too clingy to PC, Nekomata forked tail/twin tail effects not unlocking/working in metamorph menu, bug with Dominika when PC learn more than 13 white & black spells, few missing screen clearing in BR post fight scenes, replacing goblins with golems in many places\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Neisa been too clingy to PC, Nekomata forked tail/twin tail effects not unlocking/working in metamorph menu, bug with Dominika when PC learn more than 13 white & black spells, few missing screen clearing in BR post fight scenes, replacing goblins with golems in many places, not keeping herm option unlocked during ascension\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			/*outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
