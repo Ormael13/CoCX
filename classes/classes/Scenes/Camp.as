@@ -3733,7 +3733,7 @@ private function promptSaveUpdate():void {
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 24) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 25;
 		clearOutput();
-		outputText("I know you all loved been with Neisa but she ned to begone but not like begone thot but just begone. As bonus you all will see scene of her leaving that should played at leaving river dungeon assuming your PC already visited it once ^^");
+		outputText("I know you all loved been with Neisa but she need to begone but not like begone thot but just begone. As bonus you all will see scene of her leaving that should played at leaving river dungeon assuming your PC already visited it once ^^");
 		if (flags[kFLAGS.NEISA_FOLLOWER] == 3) {
 			outputText("As the pair of you leave the dungeon Neisa waves off, heading back to town.\n\n");
 			outputText("\"<i>Nice going along with you [name], this was worth it. I’m going to go and spend this bling on some well earned reward. See you around up there. If you ever need of my services again I will be at the bar.</i>\"\n\n");
@@ -4206,4 +4206,4 @@ private function fixHistory():void {
 */
 }
 }
-
+

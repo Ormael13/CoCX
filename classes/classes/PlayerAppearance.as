@@ -2177,8 +2177,8 @@ public function RacialScores():void {
 	else if (player.beeScore() >= 1 && player.beeScore() < 5) outputText("\n<font color=\"#008000\">Half Bee-morph: " + player.beeScore() + "</font>");
 	else if (player.beeScore() < 1) outputText("\n<font color=\"#ff0000\">Half Bee-morph: 0</font>");
 	//Bunny
-	if (player.bunnyScore() >= 9) outputText("\n<font color=\"#0000a0\">Bunny-morph: " + player.bunnyScore() + " (-" + (20 * (1 + player.newGamePlusMod())) + " max Str, -" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (90 * (1 + player.newGamePlusMod())) + " max Spe, +" + (90 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.bunnyScore() >= 5 && player.bunnyScore() < 9) outputText("\n<font color=\"#0000a0\">Half Bunny-morph: " + player.bunnyScore() + " (-" + (10 * (1 + player.newGamePlusMod())) + " max Str, -" + (5 * (1 + player.newGamePlusMod())) + " max Tou, +" + (55 * (1 + player.newGamePlusMod())) + " max Spe, +" + (35 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+	if (player.bunnyScore() >= 10) outputText("\n<font color=\"#0000a0\">Bunny-morph: " + player.bunnyScore() + " (-" + (20 * (1 + player.newGamePlusMod())) + " max Str, -" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (90 * (1 + player.newGamePlusMod())) + " max Spe, +" + (90 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+	else if (player.bunnyScore() >= 5 && player.bunnyScore() < 10) outputText("\n<font color=\"#0000a0\">Half Bunny-morph: " + player.bunnyScore() + " (-" + (10 * (1 + player.newGamePlusMod())) + " max Str, -" + (5 * (1 + player.newGamePlusMod())) + " max Tou, +" + (55 * (1 + player.newGamePlusMod())) + " max Spe, +" + (35 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
 	else if (player.bunnyScore() >= 1 && player.bunnyScore() < 5) outputText("\n<font color=\"#008000\">Half Bunny-morph: " + player.bunnyScore() + "</font>");
 	else if (player.bunnyScore() < 1) outputText("\n<font color=\"#ff0000\">Half Bunny-morph: 0</font>");
 	//Cat

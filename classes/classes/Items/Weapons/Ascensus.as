@@ -23,7 +23,7 @@ package classes.Items.Weapons
 			//Value
 			desc += "\nBase value: " + String(value);
 			//Perk
-			desc += "\nSpecial: Daoist's Focus (+80% Spellpower)";
+			desc += "\nSpecial: Wizard's Focus (+80% Spellpower)";
 			return desc;
 		}
 		

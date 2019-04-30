@@ -4014,7 +4014,7 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//Dragon tongue
-			if (type == 2 && player.tongue.type != Tongue.DRACONIC && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && rand(3) == 0 && changes < changeLimit) {
+			if (type == 1 && player.tongue.type != Tongue.DRACONIC && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\nYour tongue suddenly falls out of your mouth and begins undulating as it grows longer.  For a moment it swings wildly, completely out of control; but then settles down and you find you can control it at will, almost like a limb.  You're able to stretch it to nearly 4 feet and retract it back into your mouth to the point it looks like a normal human tongue.  <b>You now have a draconic tongue.</b>");
 				setTongueType(Tongue.DRACONIC);
 				changes++;
@@ -12785,4 +12785,4 @@ public final class Mutations extends MutationsHelper
 		}
 	}
 }
-
+

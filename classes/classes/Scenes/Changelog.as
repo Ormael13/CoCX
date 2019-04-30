@@ -28,7 +28,7 @@ package classes.Scenes
 		}
 		private function Changelog27():void {
 			clearOutput();
-			outputText("<b>Version 0.8m2:</b>\n\n");
+			outputText("<b>Version 0.8m2 (Bugfixing and few QoL changes):</b>\n\n");
 			outputText("-Intelligence and Wisdom scaling was switched back to it old scaling (same that using atm libido). Spells or soulskills probably would get some increase in power as result (or maybe not as I lowered a bit all spellpower bonuses from mage perks due to adding 3 more last time). Increased scaling soft cap from 2k to 4k points in stat.\n");
 			outputText("-Ashen skin color gained during Witches Sabbath transformation into hellcat event will count toward their racial score.\n");
 			outputText("-Decreased from 33% to 25% chance to meet feral version of some of imp enemies.\n");
@@ -39,10 +39,16 @@ package classes.Scenes
 			outputText("-Bunny race got stats update - req. now to have 5+/9+ pts in it to get -10/20 to max Str, -5/10 to max Tou, +55/90 to max Spe and +35/90 to max Lib (scalable).\n");
 			outputText("-Aside current points there is additinal three - human arms and human eyes counts each as point + height below 6 feet. And instead of normal human skin it req. partial or full fur. All newly added or changed req. to get point to racial score are aslo added as effects in bunny tf.\n");
 			outputText("-Sand trap req. lvl 2+, Sand Witches 3+ and Naga 4+ to encounter at the desert.\n");
-			outputText("-Fixed bugs: Neisa been too clingy to PC, Nekomata forked tail/twin tail effects not unlocking/working in metamorph menu, bug with Dominika when PC learn more than 13 white & black spells, few missing screen clearing in BR post fight scenes, replacing goblins with golems in many places, not keeping herm option unlocked during ascension\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Fixed bugs: Neisa been too clingy to PC, Nekomata forked tail/twin tail effects not unlocking/working in metamorph menu, bug with Dominika when PC learn more than 13 white & black spells, few missing screen clearing in BR post fight scenes, replacing goblins with golems in many places, not keeping herm option unlocked during ascension\n\n");
+			outputText("<b>Version 0.8m3:</b>\n\n");
+			outputText("-Cum Cannon achievment can be gained also when using Cum cannon minotaur special (for now it was only gainable by using Infest special).\n");
+			outputText("-Human bodyparts that count to few of races scores was put behind having either few points of race score form race specific body parts or by having some certain bodypart like: centaur/naga scores not counting human parts before PC get taur/naga lower body.\n");
+			outputText("-Fixed bugs: fixed wrong perk name in tooltips for two bark staffs, dragon tongue triggering from wrong type of naga subtype tf item, Neisa and Etna mix up as hendchmans and freeze due to Neisa not been Etna, wrong bunny race bonuses and not matching score value showed with actual bonuses\n\n\n\n\n\n\n");/*ostatni punkt changelogu
 			/*outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-New TF item: . Gained by bringing Orc Mead to Lumi for enhancing. Using this item will turn PC into high orc. High Orc (scalable): +130 to max Str, +30 to max Tou, +10 to max Spe, -30 to max Int, +25 to max Lib, +20% to max Wrath.\n");
 			outputText("-New TF item: . Gained by bringing Elf Ear to Lumi for enhancing. Using this item will turn PC into high elf. High Elf (scalable): -10 to max Str, -15 to max Tou, +80 to max Spe, +80 to max Int, +60 to max Wis, +30 max/min Sens, +20% to max Mana.\n");
 			outputText("-New range weapon (by Ormael): Beautiful Bow - obtained by finding it at Lake. 1 atk, costing 100 gems, no accuracy penalty, can't be used above 33 (+ corruption tolerance bonus) corruption and each the less corruption PC have the stronger atk it'll have (max 4 pts).\n");
@@ -127,7 +133,7 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph
+			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph(what about Centaur race? need rework still or nah? or jsut adding to Metamorph menu but how i eman with what bodyparts?)
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -158,11 +164,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we wlasciwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

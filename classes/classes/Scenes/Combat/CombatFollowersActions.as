@@ -100,7 +100,7 @@ import classes.StatusEffects;
 			}
 			else {
 				outputText("Etna take flight her tail taking aim at " + monster.a + monster.short + " ready for aerial bombardment.\n\n");
-				player.createStatusEffect(StatusEffects.CombatFollowerEtna, 0, 0, 0, 0);
+				player.addStatusValue(StatusEffects.CombatFollowerEtna, 4, 1);
 			}
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Etna" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;

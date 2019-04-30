@@ -1515,6 +1515,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
+		awardAchievement("Cum Cannon", kACHIEVEMENTS.COMBAT_CUM_CANNON);
 		enemyAI();
 	}
 
