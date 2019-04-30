@@ -4098,9 +4098,9 @@ use namespace CoC;
 			if (hasVagina() && vaginaType() == VaginaClass.EQUINE)
 				horseCounter++;
 			if (hasFur()) {
+				horseCounter++;
 				if (arms.type == Arms.HUMAN)
 					horseCounter++;
-				horseCounter++;
 			}
 			if (isTaur()) {
 				if (horseCounter >= 7) horseCounter -= 7;
@@ -4402,13 +4402,14 @@ use namespace CoC;
 		public function nagaScore():Number {
 			Begin("Player","racialScore","naga");
 			var nagaCounter:Number = 0;
-			if (isNaga())
+			if (isNaga()) {
 				nagaCounter += 2;
+				if (arms.type == Arms.HUMAN)
+					nagaCounter++;
+			}
 			if (tongue.type == Tongue.SNAKE)
 				nagaCounter++;
 			if (faceType == Face.SNAKE_FANGS)
-				nagaCounter++;
-			if (arms.type == Arms.HUMAN)
 				nagaCounter++;
 			if (hasPartialCoat(Skin.SCALES))
 				nagaCounter++;
@@ -4597,18 +4598,20 @@ use namespace CoC;
 			var bunnyCounter:Number = 0;
 			if (faceType == Face.BUNNY)
 				bunnyCounter++;
-			if (eyes.type == Eyes.HUMAN)
-				bunnyCounter++;
 			if (ears.type == Ears.BUNNY)
 				bunnyCounter++;
 			if (lowerBody == LowerBody.BUNNY)
-				bunnyCounter++;
-			if (arms.type == Arms.HUMAN)
 				bunnyCounter++;
 			if (tailType == Tail.RABBIT)
 				bunnyCounter++;
 			if (hasFur() || hasPartialCoat(Skin.FUR))
 				bunnyCounter++;
+			if (bunnyCounter > 4) {
+				if (eyes.type == Eyes.HUMAN)
+					bunnyCounter++;
+				if (arms.type == Arms.HUMAN)
+					bunnyCounter++;
+			}
 			if (bunnyCounter > 0 && antennae.type == 0)
 				bunnyCounter++;
 			if (bunnyCounter > 0 && wings.type == Wings.NONE)
@@ -4784,7 +4787,7 @@ use namespace CoC;
 				oniCounter++;
 			if (tone >= 75)
 				oniCounter++;
-			if (tone >= 150)
+			if (tone >= 150 && oniCounter >= 4)
 				oniCounter++;
 			if ((hasVagina() && biggestTitSize() >= 19) || (cocks.length > 18))
 				oniCounter++;
@@ -5087,10 +5090,11 @@ use namespace CoC;
 			var salamanderCounter:Number = 0;
 			if (hasPartialCoat(Skin.SCALES))
 				salamanderCounter++;
-			if (faceType == Face.SALAMANDER_FANGS)
+			if (faceType == Face.SALAMANDER_FANGS) {
 				salamanderCounter++;
-			if (ears.type == Ears.HUMAN && faceType == Face.SALAMANDER_FANGS)
-				salamanderCounter++;
+				if (ears.type == Ears.HUMAN)
+					salamanderCounter++;
+			}
 			if (eyes.type == Eyes.REPTILIAN)
 				salamanderCounter++;
 			if (arms.type == Arms.SALAMANDER)
@@ -5203,23 +5207,24 @@ use namespace CoC;
 		//Centaur score
 		public function centaurScore():Number
 		{
-			if (horns.type == Horns.UNICORN)
+			if (horns.type == Horns.UNICORN || horns.type == Horns.BICORN)
 				return 0;
 			Begin("Player","racialScore","centaur");
 			var centaurCounter:Number = 0;
-			if (isTaur())
+			if (isTaur()) {
 				centaurCounter += 2;
+				if (arms.type == Arms.HUMAN)
+					centaurCounter++;
+				if (ears.type == Ears.HUMAN)
+					centaurCounter++;
+				if (faceType == Face.HUMAN)
+					centaurCounter++;
+			}
 			if (lowerBody == LowerBody.HOOFED || lowerBody == LowerBody.CLOVEN_HOOFED)
 				centaurCounter++;
 			if (tailType == Tail.HORSE)
 				centaurCounter++;
 			if (hasPlainSkinOnly())
-				centaurCounter++;
-			if (arms.type == Arms.HUMAN)
-				centaurCounter++;
-			if (ears.type == Ears.HUMAN || ears.type == Ears.HUMAN)
-				centaurCounter++;
-			if (faceType == Face.HUMAN)
 				centaurCounter++;
 			if (horseCocks() > 0)
 				centaurCounter++;
@@ -5411,19 +5416,18 @@ use namespace CoC;
 		public function phoenixScore():Number {
 			Begin("Player","racialScore","phoenix");
 			var phoenixCounter:Number = 0;
+			if (wings.type == Wings.FEATHERED_PHOENIX)
+				phoenixCounter++;
+			if (arms.type == Arms.PHOENIX)
+				phoenixCounter++;
 			if (hairType == Hair.FEATHER) {
-				if (hairType == Hair.FEATHER)
-					phoenixCounter++;
+				phoenixCounter++;
 				if (faceType == Face.HUMAN && phoenixCounter > 2)
 					phoenixCounter++;
 				if (ears.type == Ears.HUMAN && phoenixCounter > 2)
 					phoenixCounter++;
 			}
 			if (eyes.type == Eyes.REPTILIAN)
-				phoenixCounter++;
-			if (wings.type == Wings.FEATHERED_PHOENIX)
-				phoenixCounter++;
-			if (arms.type == Arms.PHOENIX)
 				phoenixCounter++;
 			if (lowerBody == LowerBody.SALAMANDER)
 				phoenixCounter++;
@@ -5786,8 +5790,6 @@ use namespace CoC;
 				pigCounter++;
 			if (faceType == Face.PIG)
 				pigCounter++;
-			if (arms.type == Arms.HUMAN)
-				pigCounter++;
 			if (arms.type == Arms.PIG)
 				pigCounter += 2;
 			if (lowerBody == LowerBody.CLOVEN_HOOFED)
@@ -5796,14 +5798,18 @@ use namespace CoC;
 				pigCounter++;
 			if (skinTone == "pink" || skinTone == "tan" || skinTone == "sable")
 				pigCounter++;
-			if (wings.type == Wings.NONE)
-				pigCounter++;
 			if (thickness >= 75)
-				pigCounter++;
-			if (thickness >= 150)
 				pigCounter++;
 			if (pigCocks() > 0)
 				pigCounter++;
+			if (pigCounter >= 4) {
+				if (arms.type == Arms.HUMAN)
+					pigCounter++;
+				if (wings.type == Wings.NONE)
+					pigCounter++;
+				if (thickness >= 150)
+					pigCounter++;
+			}
 			if (faceType == Face.BOAR || arms.type == Arms.BOAR) {
 				if (faceType == Face.BOAR)
 					pigCounter += 2;		
@@ -5842,9 +5848,9 @@ use namespace CoC;
 				satyrCounter++;
 			if (tailType == Tail.GOAT)
 				satyrCounter++;
-			if (satyrCounter >= 2) {
-				if (ears.type == Ears.ELFIN)
-					satyrCounter++;
+			if (ears.type == Ears.ELFIN)
+				satyrCounter++;
+			if (satyrCounter >= 3) {
 				if (faceType == Face.HUMAN)
 					satyrCounter++;
 				if (countCocksOfType(CockTypesEnum.HUMAN) > 0)
@@ -6108,12 +6114,14 @@ use namespace CoC;
 			var counter:int = 0;
 			if (ears.type == Ears.BAT) { counter++;}
 			if (ears.type == Ears.VAMPIRE) { counter -= 10;}
-			if (wings.type == Wings.BAT_ARM) {counter += 4;}
-			if (arms.type == Arms.HUMAN) {counter++;}
-			if (lowerBody == LowerBody.HUMAN) {counter++;}
+			if (wings.type == Wings.BAT_ARM) {counter += 4; }
 			if (faceType == Face.VAMPIRE) {counter += 2;}
 			if (eyes.type == Eyes.VAMPIRE) {counter++;}
 			if (rearBody.type == RearBody.BAT_COLLAR) {counter++;}
+			if (counter >= 8) {
+				if (arms.type == Arms.HUMAN) {counter++;}
+				if (lowerBody == LowerBody.HUMAN) {counter++;}
+			}
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && counter >= 4) {counter++;}
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && counter >= 8) {counter++;}
             if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0) {counter += 50;}
@@ -6129,10 +6137,12 @@ use namespace CoC;
             if (ears.type == Ears.BAT) {counter -= 10;}
             if (ears.type == Ears.VAMPIRE) { counter++;}
 			if (wings.type == Wings.VAMPIRE) {counter += 4;}
-			if (arms.type == Arms.HUMAN) {counter++;}
-            if (lowerBody == LowerBody.HUMAN) {counter++;}
             if (faceType == Face.VAMPIRE) {counter += 2;}
 			if (eyes.type == Eyes.VAMPIRE) {counter++; }
+			if (counter >= 8) {
+				if (arms.type == Arms.HUMAN) {counter++;}
+				if (lowerBody == LowerBody.HUMAN) {counter++;}
+			}
 			if (findPerk(PerkLib.VampiricBloodsteam) >= 0) {counter++;}
 			if (findPerk(PerkLib.VampiricBloodsteamEvolved) >= 0) {counter++;}
 			if (findPerk(PerkLib.VampiricBloodsteamFinalForm) >= 0) {counter++;}
@@ -7227,19 +7237,25 @@ use namespace CoC;
 				maxWis -= (20 * newGamePlusMod);
 				maxLib += (60 * newGamePlusMod);
 			}
-			if (bunnyScore() >= 8) {/*
+			if (bunnyScore() >= 5) {/*
+				if (bunnyScore() >= 10) {
+					maxStr -= (20 * newGamePlusMod);
+					maxTou -= (10 * newGamePlusMod);
+					maxSpe += (90 * newGamePlusMod);
+					maxLib += (90 * newGamePlusMod);
+				}*/
 				if (bunnyScore() >= 10) {
 					maxStr -= (20 * newGamePlusMod);
 					maxTou -= (10 * newGamePlusMod);
 					maxSpe += (90 * newGamePlusMod);
 					maxLib += (90 * newGamePlusMod);
 				}
-				else {*/
-					maxStr -= (20 * newGamePlusMod);
-					maxTou -= (10 * newGamePlusMod);
-					maxSpe += (75 * newGamePlusMod);
-					maxLib += (75 * newGamePlusMod);
-				//}
+				else {
+					maxStr -= (10 * newGamePlusMod);
+					maxTou -= (5 * newGamePlusMod);
+					maxSpe += (55 * newGamePlusMod);
+					maxLib += (35 * newGamePlusMod);
+				}
 			}//+10/10-20
 			if (raccoonScore() >= 4) {
 				maxSpe += (15 * newGamePlusMod);

@@ -455,8 +455,9 @@ public function etnaCampMenu():void
 	else addButton(3, "Req. Venom", etnaDailyVenomVial).hint("Ask Etna for a vial of her venom.");
 	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(4, "Spar", etnaSparsWithPC).hint("Ask Etna for a mock battle with sex for the winner.");
 	if (player.hasPerk(PerkLib.BasicLeadership)) {
-		if (flags[kFLAGS.PLAYER_COMPANION_1] != "") addButtonDisabled(5, "Team", "You already have other henchman accompany you. Ask it to stay at camp before you talk with Etna about accompaning you.");
-		else addButton(5, "Team", etnaHenchmanOption).hint("Ask Etna to join you in adventures outside camp or to stay in camp.");
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Team", etnaHenchmanOption).hint("Ask Etna to join you in adventures outside camp.");
+		else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") addButton(5, "Team", etnaHenchmanOption).hint("Ask Etna to stay in camp.");
+		else addButtonDisabled(5, "Team", "You already have other henchman accompany you. Ask it to stay at camp before you talk with Etna about accompaning you.");
 	}
 	addButton(14, "Back", camp.campLoversMenu);
 }
@@ -510,7 +511,7 @@ public function etnaHenchmanOption():void
 {
 	clearOutput();
 	if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
-		outputText("\"<i>Nyaaaaa we hunting together -pcname-? This is going to be enjoyable!</i>\"\n\n");
+		outputText("\"<i>Nyaaaaa we hunting together [name]? This is going to be enjoyable!</i>\"\n\n");
 		outputText("Etna is now following you around.\n\n");
 		var strEtna:Number = 100;
 		var libEtna:Number = 170;
