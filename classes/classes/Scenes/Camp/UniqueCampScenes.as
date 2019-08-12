@@ -111,6 +111,14 @@ public function droppingToZeroSatietyAsGargoyle():void
 	}
 }
 
+public function badendManticoreOuroboros():void {
+	clearOutput();
+	outputText("You eye your penis then your tail pussy then back at your penis. The smell of precum dripping from your maleness.. it drives you insane with desire.");
+	outputText("\n\nWithout thinking any further you curl your tail between your legs and plug it to your own twitching cock. The pleasure is instantaneous as you instinctively sting yourself and start cuming nonstop into your tail. Your legs twitches and spasms making you fall to the ground on short notice. Your brain begins to melt as your thoughts shrinks to cuming and feeding, your own fluids fueling you with the endless supply of stamina needed to never stop cuming.");
+	outputText("\n\nGuess this is what you get for messing around with designs known only to mother nature. Even if you tried to stop now you wouldn't be able to as you tail instinctively tries to milk your dick to a last drop that will never come. Unable to form coherent thought anymore you become a creature of pure basest instinct. Month and year will pass before ultimately you die out of old age having long lost the ability to process rational thought.");
+	EventParser.gameOver();
+}
+
 	}
 
 }

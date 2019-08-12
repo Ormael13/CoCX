@@ -6,9 +6,12 @@ package classes.Scenes.Areas.Mountain
 import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.UniqueSexScenes;
 
 public class HellHoundScene extends BaseContent
 	{
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		
 		public function HellHoundScene()
 		{
 		}
@@ -87,6 +90,14 @@ public class HellHoundScene extends BaseContent
 			cleanupAfterCombat();
 		}
 
+		public function hellHoundPostFightSexScenes():void
+		{
+			menu();
+			addButton(0, "Lick it", hellHoundGetsRaped);
+			if (player.hasVagina() && player.lust >= 33 && !player.isNaga()) addButton(1, "Fuck", hellHoundPropahRape);
+			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+			addButton(14, "Leave", cleanupAfterCombat);
+		}
 		public function hellHoundGetsRaped():void
 		{
 			clearOutput();

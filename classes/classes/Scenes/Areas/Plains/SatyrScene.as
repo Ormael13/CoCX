@@ -277,9 +277,8 @@ internal function defeatASatyr():void {
 	if(player.hasCock() && player.cockThatFits(monster.analCapacity()) >= 0) addButton(0, "FuckHisButt", malesTakeAdvantageOfSatyrs);
 	if(player.hasVagina()) addButton(1, "Ride Face", femaleTakesAdvantageOfSatyr);
 	if(player.hasVagina() && player.biggestTitSize() >= 4 && player.armor == armors.LMARMOR) addButton(2, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
-	if (player.tailType == Tail.MANTICORE_PUSSYTAIL) addButton(5, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
-	if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(6, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
-	addButton(4, "Leave", cleanupAfterCombat);
+	if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+	addButton(14, "Leave", cleanupAfterCombat);
 }
 //Female (Z)
 private function femaleTakesAdvantageOfSatyr():void {

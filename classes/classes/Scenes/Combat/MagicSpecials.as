@@ -1,8 +1,10 @@
 package classes.Scenes.Combat {
 import classes.*;
+import classes.BodyParts.Arms;
 import classes.BodyParts.Eyes;
 import classes.BodyParts.Face;
 import classes.BodyParts.Hair;
+import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
@@ -65,8 +67,9 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("<b>You need more time before you can use Possess again.</b>\n\n");
 			}
 		}
-		if (player.raijuScore() >= 7 && player.findPerk(PerkLib.ElectrifiedDesire) >= 0) {
+		if ((player.raijuScore() >= 7 || (player.thunderbirdScore() >= 10 && player.tailType == Tail.THUNDERBIRD)) && player.findPerk(PerkLib.ElectrifiedDesire) >= 0) {
 			bd = buttons.add("Orgasmic L.S.", OrgasmicLightningStrike, "Masturbate to unleash a massive discharge.", "Orgasmic Lightning Strike");
+			bd = buttons.add("Pleasure bolt", PleasureBolt, "Release a discharge of your lust inducing electricity. It will rise your lust by 2% of max lust after each use.", "Pleasure bolt");
 		}
 		if (player.tailType == Tail.FOX && player.tailCount >= 2 && player.tailCount < 7) {
 			bd = buttons.add("Fox Fire", basicFoxFire, "Unleash fox flame at your opponent for high damage. \n");
@@ -181,7 +184,8 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.Transference)) {
 			bd = buttons.add("Transfer", lustTransfer).hint("Transfer some of your own arousal to your opponent. \n");
-			if (player.hasPerk(PerkLib.GiftOfLust)) bd.requireFatigue(spellCost(30),true);
+			if (player.hasPerk(PerkLib.GreaterGiftOfLust)) bd.requireFatigue(spellCost(60),true);
+			else if (player.hasPerk(PerkLib.GiftOfLust)) bd.requireFatigue(spellCost(30),true);
 			else bd.requireFatigue(spellCost(40),true);
 		}
 		if (player.devilkinScore() >= 10 || player.hasPerk(PerkLib.ObsidianHeart)) {
@@ -316,6 +320,26 @@ public class MagicSpecials extends BaseCombatContent {
 			bd = buttons.add("Azureflame B.", azureflameBreath).hint("Inhale a cone of bluish flames at your opponent. Cause burn.", "Azureflame Breath");
 			bd.requireFatigue(spellCost(40));
 		}
+		if ((player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI) || player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring") {
+			bd = buttons.add("Blazing battle spirit", blazingBattleSpirit);
+			if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI && player.jewelryName == "Infernal Mouse ring") {
+				bd.hint("Unarmed damage is increased by 150% as fire damage, lust resistance is maximized. Take very highly increased damage from ice attacks. (Cannot be used underwater) \n", "Blazing battle spirit");
+			} else {
+				bd.hint("Unarmed damage is increased by 100% as fire damage, lust resistance is maximized. Take massively increased damage from ice attacks. (Cannot be used underwater) \n", "Blazing battle spirit");
+			}
+			if(player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
+				bd.disable("You already raging!");
+			}
+			if(player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
+				bd.disable("You can't use this underwater!");
+			}
+		}
+		if ((player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI) || player.hasPerk(PerkLib.HinezumiBurningBloodFinalForm)) {
+			bd = buttons.add("Cauterize", cauterize).hint("Flash burn your wounds to cause them to close. Take damage but recover over time. \n", "Cauterize");
+			if(player.hasStatusEffect(StatusEffects.Cauterize)) {
+				bd.disable("You already raging!");
+			}
+		}
 		if (player.hasPerk(PerkLib.JobWarrior)) {
 			bd = buttons.add("DwarfRage", dwarfrage).hint("Throw yourself into a dwarf rage!  Greatly increases your strength, speed and fortitude! \n", "Dwarf Rage");
 			bd.requireWrath(50);
@@ -337,7 +361,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You're already pretty goddamn mad!");
 			}
 		}
-		if (player.hasPerk(PerkLib.Lustzerker)) {
+		if (player.hasPerk(PerkLib.Lustzerker) || player.jewelryName == "Flame Lizard ring" || player.jewelryName2 == "Flame Lizard ring" || player.jewelryName3 == "Flame Lizard ring" || player.jewelryName4 == "Flame Lizard ring") {
 			bd = buttons.add("Lustserk", lustzerk);
 			if (player.hasPerk(PerkLib.ColderLust)) {
 				bd.hint("Throw yourself into a cold(er) lust rage!  Greatly increases the strength of your weapon and increases armor defense. \n");
@@ -768,6 +792,7 @@ public class MagicSpecials extends BaseCombatContent {
 			temp2 = 5 + rand(player.lib / 5 + player.cor / 10);
 			dynStats("lus", temp2, "scale", false);
 			var lustDmgF:Number = 20 + rand(6);
+			var lustBoostToLustDmg:Number = 0;
 			var bimbo:Boolean   = false;
 			var bro:Boolean     = false;
 			var futa:Boolean    = false;
@@ -807,6 +832,11 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) {
 				lustDmgF *= (1 + combat.historyWhoreBonus());
 			}
+			lustBoostToLustDmg += lustDmgF * 0.01;
+			lustDmgF *= 0.2;
+			if (player.lust100 * 0.01 >= 0.9) lustDmgF += (lustBoostToLustDmg * 140);
+			else if (player.lust100 * 0.01 < 0.2) lustDmgF += (lustBoostToLustDmg * 140);
+			else lustDmgF += (lustBoostToLustDmg * 2 * (20 - (player.lust100 * 0.01)));
 			//Determine if critical tease!
 			var crit:Boolean = false;
 			var critChance:int = 5;
@@ -852,6 +882,107 @@ public class MagicSpecials extends BaseCombatContent {
 			player.createStatusEffect(StatusEffects.ChanneledAttackType, 3, 0, 0, 0);
 			enemyAI();
 		}
+	}
+	
+	public function PleasureBolt():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		outputText("You gasp in pleasure your body charging up before discharging a bolt of electricity at your foe dealing ");
+		var damage:Number = scalingBonusIntelligence() * spellModWhite();
+		//Determine if critical hit!
+		var crit1:Boolean = false;
+		var critChance1:int = 5;
+		critChance1 += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance1 = 0;
+		if (rand(100) < critChance1) {
+			crit1 = true;
+			damage *= 1.75;
+		}
+		//High damage to goes.
+		damage = calcVoltageMod(damage);
+		if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 5;
+		if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 2;
+		if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 0.5;
+		if (monster.hasPerk(PerkLib.LightningNature)) damage *= 0.2;
+		if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 2;
+		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
+		damage = Math.round(damage);
+		outputText("<b><font color=\"#800000\">" + damage + "</font></b> damage. ");
+		if (crit1 == true) outputText(" <b>*Critical Hit!*</b>");
+		monster.HP -= damage;
+		dynStats("lus", (Math.round(player.maxLust() * 0.02)), "scale", false);
+		var lustDmgF:Number = 20 + rand(6);
+		var lustBoostToLustDmg:Number = 0;
+		var bimbo:Boolean   = false;
+		var bro:Boolean     = false;
+		var futa:Boolean    = false;
+		if (player.findPerk(PerkLib.SensualLover) >= 0) {
+			lustDmgF += 2;
+		}
+		if (player.findPerk(PerkLib.Seduction) >= 0) lustDmgF += 5;
+		if (player.findPerk(PerkLib.SluttySeduction) >= 0) lustDmgF += player.perkv1(PerkLib.SluttySeduction);
+		if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) lustDmgF += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+		if (bimbo || bro || futa) {
+			lustDmgF += 5;
+		}
+		if (player.findPerk(PerkLib.FlawlessBody) >= 0) lustDmgF += 10;
+		lustDmgF += scalingBonusLibido() * 0.1;
+		if (player.hasPerk(PerkLib.EromancyExpert)) lustDmgF *= 1.5;
+		if (player.findPerk(PerkLib.JobSeducer) >= 0) lustDmgF += player.teaseLevel * 3;
+		else lustDmgF += player.teaseLevel * 2;
+		if (player.findPerk(PerkLib.JobCourtesan) >= 0 && monster.findPerk(PerkLib.EnemyBossType) >= 0) lustDmgF *= 1.2;
+		switch (player.coatType()) {
+			case Skin.FUR:
+				lustDmgF += (1 + player.newGamePlusMod());
+				break;
+			case Skin.SCALES:
+				lustDmgF += (2 * (1 + player.newGamePlusMod()));
+				break;
+			case Skin.CHITIN:
+				lustDmgF += (3 * (1 + player.newGamePlusMod()));
+				break;
+			case Skin.BARK:
+				lustDmgF += (4 * (1 + player.newGamePlusMod()));
+				break;
+		}
+		if (player.findPerk(PerkLib.SluttySimplicity) >= 0 && player.armorName == "nothing") lustDmgF *= (1 + ((10 + rand(11)) / 100));
+		if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0) {
+				lustDmgF *= (1 + (player.lust100 * 0.01));
+		}
+		if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) {
+			lustDmgF *= (1 + combat.historyWhoreBonus());
+		}
+		lustBoostToLustDmg += lustDmgF * 0.01;
+		lustDmgF *= 0.2;
+		if (player.lust100 * 0.01 >= 0.9) lustDmgF += (lustBoostToLustDmg * 140);
+		else if (player.lust100 * 0.01 < 0.2) lustDmgF += (lustBoostToLustDmg * 140);
+		else lustDmgF += (lustBoostToLustDmg * 2 * (20 - (player.lust100 * 0.01)));
+		//Determine if critical tease!
+		var crit2:Boolean = false;
+		var critChance2:int = 5;
+		if (player.findPerk(PerkLib.CriticalPerformance) >= 0) {
+			if (player.lib <= 100) critChance2 += player.lib / 5;
+			if (player.lib > 100) critChance2 += 20;
+		}
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance2 = 0;
+		if (rand(100) < critChance2) {
+			crit2 = true;
+			lustDmgF *= 1.75;
+		}
+		if (player.findPerk(PerkLib.ChiReflowLust) >= 0) lustDmgF *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
+		if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && player.findPerk(PerkLib.EnemyGroupType) >= 0) lustDmgF *= 1.5;
+		lustDmgF = lustDmgF * monster.lustVuln;
+		lustDmgF = Math.round(lustDmgF);
+		monster.teased(lustDmgF);
+		if (crit2 == true) outputText(" <b>Critical!</b>");
+		outputText("\n\n");
+		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		checkAchievementDamage(damage);
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		if (monster.HP < 1) doNext(endHpVictory);
+		else enemyAI();
 	}
 
 	public function startOniRampage():void {
@@ -1997,6 +2128,27 @@ public class MagicSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 	
+	public function blazingBattleSpirit():void {
+		clearOutput();
+		var blazingBattleSpiritDuration:Number = 10;
+		if (player.hasPerk(PerkLib.HinezumiBurningBlood)) blazingBattleSpiritDuration += 1;
+		if (player.hasPerk(PerkLib.HinezumiBurningBloodEvolved)) blazingBattleSpiritDuration += 2;
+		if (player.hasPerk(PerkLib.HinezumiBurningBloodFinalForm)) blazingBattleSpiritDuration += 7;
+		outputText("Your bodily flames begin to rage as you enter a passionate battle fury.\n\n");
+		player.createStatusEffect(StatusEffects.BlazingBattleSpirit,blazingBattleSpiritDuration,0,0,0);
+		statScreenRefresh();
+		enemyAI();
+	}
+	
+	public function cauterize():void {
+		clearOutput();
+		player.HP -= player.HP * 0.05;
+		outputText("You wince in pain but feel relief as your wounds begin to smoke and close.\n\n");
+		player.createStatusEffect(StatusEffects.Cauterize,10,0,0,0);
+		statScreenRefresh();
+		enemyAI();
+	}
+	
 	public function dwarfrage():void {
 		clearOutput();
 		player.wrath -= 50;
@@ -3052,10 +3204,12 @@ public class MagicSpecials extends BaseCombatContent {
 //Transfer
 	public function lustTransfer():void {
 		clearOutput();
-		if (player.hasPerk(PerkLib.GiftOfLust)) fatigue(30, USEFATG_MAGIC_NOBM);
+		if (player.hasPerk(PerkLib.GreaterGiftOfLust)) fatigue(60, USEFATG_MAGIC_NOBM);
+		else if (player.hasPerk(PerkLib.GiftOfLust)) fatigue(30, USEFATG_MAGIC_NOBM);
 		else fatigue(40, USEFATG_MAGIC_NOBM);
 		var lusttransfered:Number = 0;
-		if (player.hasPerk(PerkLib.GiftOfLust)) lusttransfered += Math.round(player.lust * 0.25);
+		if (player.hasPerk(PerkLib.GreaterGiftOfLust)) lusttransfered += Math.round(player.lust * 0.4);
+		else if (player.hasPerk(PerkLib.GiftOfLust)) lusttransfered += Math.round(player.lust * 0.25);
 		else lusttransfered += Math.round(player.lust * 0.15);
 		player.lust -= lusttransfered;
 		outputText("Your eyes glaze over and you feel your mind suddenly becoming more clear after you transfered some blurs of every sexual perversion you could possibly think of to your enemy");
@@ -3894,4 +4048,4 @@ public class MagicSpecials extends BaseCombatContent {
 }
 
 }
-
+

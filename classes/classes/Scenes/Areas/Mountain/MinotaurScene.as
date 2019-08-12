@@ -120,21 +120,13 @@ private function postfightoptions():void {
 		if (player.canOvipositSpider() || (player.canOvipositBee() && player.gender > 0)) addButton(8, "Lay Eggs", layEggsInAMinotaurSpiderLike);
 		if ((temp2 == null || rand(2) == 0) && player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) addButton(9, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 		if (player.findPerk(PerkLib.Feeder) >= 0) addButton(10, "Nurse", minotaurDrinksMilkNewsAtEleven);
-		if (player.lowerBody == LowerBody.PLANT_FLOWER) {
-			addButton(11, "Vine in Butt", alrauneVineInButtScene);
-			addButton(12, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
-		}
+		if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(11, "Vine in Butt", alrauneVineInButtScene);
 	}
-	addButton(13, "Other", otherpostfightoptions);
+	addButton(12, "Kill", killMinotaur);
+	if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 	addButton(14, "Leave", cleanupAfterCombat);
 	if(x < 0 && player.hasCock()) outputText("\nSadly, you're too well endowed to penetrate the minotaur.");
 	if(player.gender == 3 && player.isTaur()) outputText("\nIf you had a different body type you might be able to penetrate him while taking him, but as a centaur that's not an option.");
-}
-private function otherpostfightoptions():void {
-	menu();
-	addButton(0, "Kill", killMinotaur);
-	if (player.tailType == Tail.MANTICORE_PUSSYTAIL) addButton(13, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
-	addButton(14, "Back", postfightoptions);
 }
 private function killMinotaur():void {
 	clearOutput();

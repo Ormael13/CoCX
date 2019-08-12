@@ -7,9 +7,11 @@ package classes.Scenes.NPCs
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.display.SpriteDb;
+	import classes.Scenes.UniqueSexScenes;
 	
 	public class ElectraFollower extends NPCAwareContent
 	{
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 		
 		public function ElectraFollower() 
 		{}
@@ -120,6 +122,7 @@ public function PlayerSexElectra():void
 	if (player.lust >= 33) addButton(0, "Yea Sure", ElectraSeXYes);
 	addButton(1, "No Way", ElectraSeXNo);
 	addButton(2, "Headpat", ElectraSeXHeadpat);
+	if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 }
 public function ElectraSeXYes():void
 {

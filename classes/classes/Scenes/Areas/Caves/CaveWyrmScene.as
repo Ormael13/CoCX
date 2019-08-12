@@ -7,9 +7,11 @@ package classes.Scenes.Areas.Caves
 	import classes.*;
 	import classes.internals.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.UniqueSexScenes;
 
 	public class CaveWyrmScene extends BaseContent
 	{
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 		
 		public function CaveWyrmScene() 
 		{
@@ -31,19 +33,21 @@ public function berserkingCaveWyrmEncounter():void {
 
 public function winningOverCaveWyrm():void {
 	clearOutput();
+	menu();
 	if (player.hasCock()) {
 		outputText("Defeated, the Cave Wyrm reels back and falls shoulders-first into the ground. There's a dull smack where she strikes the earth... followed by an odd 'hiss' sound between her legs. Your eyes drop down the busty but fearsome Wyrm's figure to her glistening vagina just in time to see discolored vapors rising from the ground in front of it: she's got acid femcum, and it's turning even the stone under her sex to smoke...! You quickly reconsider trying to fuck her...\n\n");
 		outputText("... then again, maybe you don't. It's definitely a risk- but since when have you ever played it safe in Mareth? The Wyrm's eyes light up curiously as she sees you eyeing her wet genitals, and something about the twisted grin on her face tells her she'd like you to try. Her scaly thighs part a little as she sizes-up your torso and, of course, your own sex.\n\n");
-		menu();
 		addButton(0, "Nope", cleanupAfterCombat);
 		addButton(1, "Fuck Her", winningOverCaveWyrmDMelting);
+		if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 	}
 	else {
 		outputText("You approach the defeated lizard girl intending to punish her for her assault but the drop of precum fuming on the ground like acid next to her cunt tells you that it's a VERY bad idea. Who knows what your ");
 		if (player.hasVagina()) outputText("pussy" + (player.hasCock() ?" or ":"") + "");
 		if (player.hasCock()) outputText("cock");
 		outputText(" might end up like if any of these fluids gets in contact with them. Deciding against it you smash the " + (flags[kFLAGS.HERM_CAVE_WYRM] > 0 ?"herm":"female") + " unconscious instead and get your spoils. The locals will better use her then you would.");
-		cleanupAfterCombat();
+		addButton(0, "Leave", cleanupAfterCombat);
+		if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 	}
 }	
 public function winningOverCaveWyrmDMelting():void {
@@ -65,8 +69,10 @@ public function winningOverCaveWyrmDMelting():void {
 	outputText("She huffs and groans; you're not sure how many times she came or if she's been cumming for minutes already, but ecstasy peaks on her face before she smiles and leans back, palms now on your knees. \"<i>Haaah~</i>\" She groans, wiggling her hips into your crotch- ... you don't actually feel much in her now, just a tiny tingle of pleasure before an eerie chill sweeps your groin. \"<i>Ah- good. Finally. Too bad I can only use a mate like this once...</i>\" She says, before pushing-up off your thighs. You immediately look with panic to where your sexes were joined-\n\n");
 	outputText("-there's just a wet smear of cum and glowing femcum where her thick-lipped pussy rises off your crotch. Strands of your shared fluids still connect her crotch to yours... but they snap as she stands up, and you realize something: your dick is gone, totally dissolved inside of her acidic pussy while you had sex with her. She looks like she's about to leave- but she stops when she sees the fear and shock in your eyes.\n\n");
 	outputText("She just shrugs. \"<i>You were warned, you know? I needed to melt your dick to feed my eggs. It's gone, but at least you'll probably make a hatchling.</i>\" She says- ... some effort to console you, maybe, but you still stare down at your dickless crotch with shrill surprise. Both pain and pleasure echo through your nerves. You hear her footsteps carrying her away, and by the time you look, the Cave Wyrm is gone.\n\n");
-	if (player.cocks.length > 1) player.removeCock(0, 1);
-	else player.killCocks(1);
+	if (!player.isGargoyle()) {
+		if (player.cocks.length > 1) player.removeCock(0, 1);
+		else player.killCocks(1);
+	}
 	player.orgasm();
 	cleanupAfterCombat();
 }
@@ -139,8 +145,10 @@ public function loosingToCaveWyrmDMelting():void {
 	outputText("You hear a 'pop' as her hips rise off yours. A long, ropey strand of her vaginal juices and your own cum connects from her pussy's now-swollen opening to your now dickless crotch. There's just smooth skin where your penis was and your body aches around it with an eerie, cold sensation that is simply... wrong. Her finger under your chin draws your attention away from your loss and then to her callous yet enraptured visage. ");
 	outputText("\"<i>Hey, just don't focus on it. You'll definitely make me a hatchling now, and I know you're definitely not a virgin anymore.</i>\" She says in some shallow effort to comfort you. Her hands push on your chest as she stands-up, then walks a ways backwards to pick up her axes.\n\n");
 	outputText("She turns and flashes you a grin before waving one of her axe holding hands. \"<i>Bye!</i>\" She says with satisfaction, before setting off at a much slower pace towards the inner caves. You now know why these Wyrm women are so sexually frustrated: they can only ever get one release from a single partner... and at a price you now know bitterly. You groan as you pick your sticky and sickly body off the ground, grimacing as you pull your clothes back over your dickless crotch and set-forward just to leave this place...\n\n");
-	if (player.cocks.length > 1) player.removeCock(0, 1);
-	else player.killCocks(1);
+	if (!player.isGargoyle()) {
+		if (player.cocks.length > 1) player.removeCock(0, 1);
+		else player.killCocks(1);
+	}
 	player.orgasm();
 	cleanupAfterCombat();
 }

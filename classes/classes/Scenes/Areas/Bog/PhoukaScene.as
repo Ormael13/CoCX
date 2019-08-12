@@ -6,6 +6,7 @@ package classes.Scenes.Areas.Bog
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
+import classes.Scenes.UniqueSexScenes;
 
 public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 
@@ -15,6 +16,8 @@ public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 		internal static const PHOUKA_FORM_GOAT:int = 2;
 		internal static const PHOUKA_FORM_HORSE:int = 3;
 
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		
 		public function PhoukaScene() 
 		{
 			EventParser.timeAwareClassAdd(this);
@@ -458,6 +461,7 @@ public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 					addButton(0, "Leave", phoukaLeaveOnLustWin);
 					addButton(1, "Anal Ride", phoukaSexFaeriePostCombat); //Works for all
 					if (player.hasCock()) addButton(2, "Fuck Faerie", phoukaSexFaerieFemalePostCombat); //Male or Herm Only
+					if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 				}
 			}
 		}  

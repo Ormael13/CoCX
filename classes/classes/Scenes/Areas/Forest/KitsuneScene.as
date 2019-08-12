@@ -11,10 +11,13 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Scenes.Monsters.Imp;
 import classes.Scenes.SceneLib;
+import classes.Scenes.UniqueSexScenes;
 import classes.display.SpriteDb;
 
 public class KitsuneScene extends BaseContent
 	{
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		
 		public function KitsuneScene()
 		{
 		}
@@ -1164,6 +1167,7 @@ public class KitsuneScene extends BaseContent
 				removeButton(7);
 				removeButton(8);
 			}
+			if (player.pcCanUseUniqueSexScene() && flags[kFLAGS.SFW_MODE] <= 0) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 			addButton(14, "Leave", leaveKitsune);
 		}
 

@@ -124,7 +124,7 @@ private function fapArenaPageII():void {
 	var c:Number = 0;
 	if(player.cocks[x].cockType == CockTypesEnum.DEMON) c = 10;
 	else if(player.cocks[x].cockType == CockTypesEnum.TENTACLE) c = 5;
-	else if(player.cocks[x].cockType == CockTypesEnum.LIZARD) c = 3;
+	else if(player.cocks[x].cockType == CockTypesEnum.LIZARD || player.cocks[x].cockType == CockTypesEnum.CAVE_WYRM) c = 3;
 	else if(player.cocks[x].cockType == CockTypesEnum.HORSE) c = 2;
 	//R the player's lust resistance (0<R<1)
 	var r:Number = EngineCore.lustPercent()/100;

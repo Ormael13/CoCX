@@ -16,7 +16,7 @@ package classes.Items.WeaponsRange
 		}
 		
 		override public function get attack():Number { 
-			var temp:int = 1 + (3 - game.player.cor / 10);
+			var temp:int = 4 - (game.player.cor / 10);
 			if (temp < 1) temp = 1;
 			return temp; 
 		}

@@ -239,7 +239,7 @@ public class Lethice extends Monster
 			else
 			{
 				outputText(" The cloying smoke gets in your eyes and your mouth, making you cough and sputter. Worst of all, you can’t see anything!");
-				player.createStatusEffect(StatusEffects.Blind, 2, 0, 0, 0);
+				if (!player.hasPerk(PerkLib.BlindImmunity)) player.createStatusEffect(StatusEffects.Blind, 2, 0, 0, 0);
 				player.takePhysDamage(1);
 				outputText(" (1)");
 			}
@@ -466,7 +466,7 @@ public class Lethice extends Monster
 			{
 				outputText(" You take a huge, fat, musky glob of spunk right to the eyes! You yelp in alarm, trying to wipe the salty, burning demonic cock-cream out, but it's simply too thick! Yuck!");
 				player.dynStats("lus", 5);
-				player.createStatusEffect(StatusEffects.Blind, 2 + rand(2), 0, 0, 0);
+				if (!player.hasPerk(PerkLib.BlindImmunity)) player.createStatusEffect(StatusEffects.Blind, 2 + rand(2), 0, 0, 0);
 			}
 		}
 

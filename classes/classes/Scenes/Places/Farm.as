@@ -350,10 +350,10 @@ private function talkWhitney():void {
 	else outputText("how poorly the farm has been going since the lake became tainted.  She has to work three times as hard to keep her livestock and crops from succumbing to the taint, and the demons and monsters of the forest are many times more bold");
 	outputText(".  It feels good to get a chance to talk with another sane individual, but before long Whitney has to return to work, and you should check back on your camp.");
 	//+3 int if less than 15, +2 int if less 20, +1 int if less than 30, +.5 int if less than 40.
-	if(player.inte < 15) dynStats("int", 1);
-	if(player.inte < 20) dynStats("int", 1);
-	if(player.inte < 30) dynStats("int", .5);
-	if(player.inte < 40) dynStats("int", .5);
+	if(player.inte100 < 15) dynStats("int", 1);
+	if(player.inte100 < 20) dynStats("int", 1);
+	if(player.inte100 < 30) dynStats("int", .5);
+	if(player.inte100 < 40) dynStats("int", .5);
 	dynStats("lus", -5);
 	doNext(camp.returnToCampUseOneHour);
 	//+3 int if less than 15, +2 int if less 20, +1 int if less than 30, +.5 int if less than 40.
@@ -373,10 +373,10 @@ private function breastMilkerNoPurchase():void {
 	clearOutput();
 	outputText("Whitney shrugs and the two of you chat about other things, just passing the time and enjoying a relatively normal chat.");
 	//+3 int if less than 15, +2 int if less 20, +1 int if less than 30, +.5 int if less than 40.
-	if (player.inte < 15) dynStats("int", 1);
-	if (player.inte < 20) dynStats("int", 1);
-	if (player.inte < 30) dynStats("int", .5);
-	if (player.inte < 40) dynStats("int", .5);
+	if (player.inte100 < 15) dynStats("int", 1);
+	if (player.inte100 < 20) dynStats("int", 1);
+	if (player.inte100 < 30) dynStats("int", .5);
+	if (player.inte100 < 40) dynStats("int", .5);
 }
 
 public function workFarm():void {
@@ -451,15 +451,21 @@ public function workFarm():void {
 		//[Lust increase based on libido, degree of cow/mino features] 
 		dynStats("lus", player.cowScore() + player.minotaurScore());
 		outputText("\n\nAn hour later you can stand it no more and exit the milking barn. Gulping down the fresher air and dragging the tools back to their shed, you admit to yourself that Whitney is a much harder worker and has a stronger constitution than you thought. You promise yourself you'll come back and help her out some more -- as soon as your nose recovers.");
-		//always +1 str till 50, then 50% chance.
-		if(player.str <= 50) dynStats("str", 1);
-		else dynStats("str", rand(2));
+		//always +1 str/tou till 25, then 50% chance.
+		if (player.str100 <= 25 || rand(2) == 0) dynStats("str", 1);
+		if (player.tou100 <= 25 || rand(2) == 0) dynStats("tou", 1);
+		player.gems += 5;
+		fatigue(20);
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	spriteSelect(62);
 	outputText("You ask Whitney if she could use help with anything and she points towards the pepper fields, \"<i>Ya mind gathering up some peppers for an hour or two?  I'm gonna need a few for supper tonight.  I'll even let you keep the best one!</i>\"\n\n");
 	outputText("You nod and borrow a basket, and set off towards the fields.  The next two hours are a blur of sweat and hard work as you prowl between the rows of plants, picking as many ripe red peppers as you can find.  When you finish, you drop the basket by Whitney's door, but not before taking your pepper.\n");
+	//always +1 spe/tou till 25, then 50% chance.
+	if (player.spe100 <= 25 || rand(2) == 0) dynStats("spe", 1);
+	if (player.tou100 <= 25 || rand(2) == 0) dynStats("tou", 1);
+	fatigue(20);
 	//(75% chance normal pepper, 25% chance \"<i>rare</i>\" pepper)
 	var itype:ItemType;
 	if(rand(4) <= 2) itype = consumables.CANINEP;
@@ -557,17 +563,17 @@ public function exploreFarm():void {
 		clearOutput();
 		outputText("You run around the farm, keeping an eye for any monsters or oddities around Whitney's property.  Eventually the she-dog joins you, and the two of you have a good time pushing your speed to its limits.  ");
 		//Less than 30 speed (+2 speed)
-		if(player.spe < 30) {
+		if(player.spe100 < 30) {
 			dynStats("spe", 2);
 			outputText("Whitney easily outpaces you, leaving you so far behind that she laps around the farm twice for each pass you make.");
 		}
 		//Less than 50 speed (+1 speed)
-		else if(player.spe < 50) {
+		else if(player.spe100 < 50) {
 			dynStats("spe", 1);
 			outputText("Whitney is still faster than you, and manages to get far enough ahead of you to disappear from time to time.");
 		}
 		//Less than 70 speed (+.75 speed)
-		else if(player.spe < 70) {
+		else if(player.spe100 < 70) {
 			dynStats("spe", .75);
 			outputText("Whitney and you are evenly matched, and the two of you run together for a while, each pushing yourself harder in an effort to best the other.");
 		}

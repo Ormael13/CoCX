@@ -63,7 +63,6 @@ public function helAffection(diff:Number = 0):Number {
 }
 public function isHeliaBirthday():Boolean {
 	return date.month == 7;
-
 }
 
 //The Pale Flame Lingers: Introduction -McGirt

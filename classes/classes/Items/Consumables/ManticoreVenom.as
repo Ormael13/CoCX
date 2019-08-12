@@ -43,7 +43,7 @@ public class ManticoreVenom extends Consumable {
 			changes++;
 		}
 		if (player.inte < 60 && changes < changeLimit && rand(2) == 0) {
-			outputText("\n\nYou can't help but think about the various way you will ambush and thoroughly rape your foes. That terrorised look on their face will be priceless.");
+			outputText("\n\nYou can't help but think about the various ways you will ambush and thoroughly rape your foes. That terrorised look on their face will be priceless.");
 			dynStats("int", 1);
 			changes++;
 		}
@@ -55,7 +55,7 @@ public class ManticoreVenom extends Consumable {
 		if (player.cor < 100 && changes < changeLimit && rand(2) == 0) {
 			outputText("\n\nYou daydream about your next victim. How will this one look as you take him? Various deliciously obscene designs play in your mind as you plan how you will torment whatever falls prey to you.");
 			if (player.cor < 50) outputText(" You suddenly realize what you're doing and shake your head, trying to clear your mind, disgusted with yourself.");
-			else outputText(" You idly start fingering yourself as you keep imagining the various tortures you will inflict on the cumdumps that are your victims. Seeing yourself drinking their cum as they beg you to stop. You almost orgasm at the thought of it, however, you're brought back to reality as your knees hit the ground.");
+			else outputText(" You idly start fingering yourself as you keep imagining the various tortures you will inflict on the cumpumps that are your victims. Seeing yourself drinking their cum as they beg you to stop. You almost orgasm at the thought of it, however, you're brought back to reality as your knees hit the ground.");
 			dynStats("cor", 1);
 			changes++;
 		}
@@ -77,7 +77,7 @@ public class ManticoreVenom extends Consumable {
 		if (player.lowerBody != LowerBody.LION && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
 			if (player.lowerBody != LowerBody.HUMAN) outputText("You watch, spellbound, while your legs gradually change its entire outer structure into a plain human-like form. ");
-			outputText("Your legs suddenly shift painfully, forcing you down on all fours as the bone of your feet changes shape into something entirely different. You feel hairs growing at a rapid rate all over your legs. Something juts out of your toe as they clench into the ground. As you feel the pain recede you sit and take a look at your [feet]; or rather, your large leonine hind paws, now armed with sharp, retractable claws. <b>You now have leonine paws.</b>");
+			outputText("Your legs suddenly shift painfully, forcing you down on all fours as the bones of your feet changes shape into something entirely different. You feel hairs growing at a rapid rate all over your legs. Something juts out of your toes as they clench into the ground. As you feel the pain recede you sit and take a look at your foot; or rather, your large leonine hind paws, now armed with sharp, retractable claws. <b>You now have leonine paws.</b>");
 			mutations.setLowerBody(LowerBody.LION);
 			player.legCount = 2;
 			changes++;
@@ -86,7 +86,7 @@ public class ManticoreVenom extends Consumable {
 		if (player.lowerBody == LowerBody.LION && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.LION) && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
 			if (player.arms.type != Arms.HUMAN) outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. ");
-			outputText("Your hands suddenly start to hurt as your arms grows a thick coat of [skin coat.color] fur up to your shoulders where it turns [haircolor]. You watch enthralled as your nails fall off your fingers, feline claws taking their place on your now five-fingered paw-like hands. <b>You now have leonine paw hands.</b>");
+			outputText("Your hands suddenly start to hurt as your arms grow a thick coat of -fur color- fur up to your shoulders where it turns -hair color-. You watch, enthralled, as your nails fall off your fingers, feline claws taking their place on your now five-fingered paw-like hands. <b>You now have leonine paw hands.</b>");
 			mutations.setArmType(Arms.LION);
 			changes++;
 		}
@@ -101,8 +101,8 @@ public class ManticoreVenom extends Consumable {
 		}
 		//PussyTail (only females)
 		if ((player.gender == 2 || (player.gender == 3 && player.mf("m", "f") == "f")) && player.tailType == Tail.SCORPION && changes < changeLimit && player.tailType != Tail.MANTICORE_PUSSYTAIL && rand(2) == 0) {
-			outputText("\n\nYour scorpion tail starts shifting as your stinger falls to the ground, leaving you with a wide hole at the tip of your tail. You have a feeling of emptiness in your tail, like if it was hollowed from the inside. The end of your tail where the stinger used to be suddenly explodes into a flower-like bulb of flesh. The petals open into what looks like the inside of a pussy, its folds moist and well lubricated. Right after the previous transformation’s finished, spikes starts to grow out of the bulbous tip giving your tail tip the appearance of a spiked bulb. ");
-			outputText("Flinging your tail randomly to test your new appendage you shoot one of them straight into a nearby tree. You idly wonder what it will feels like to milk men with this.  <b>It seems you've grown the tail of a manticore.</b>");
+			outputText("\n\nYour scorpion tail starts shifting as your stinger falls to the ground, leaving you with a wide hole at the tip of your tail. You have a feeling of emptiness in your tail, like if it was hollowed from the inside. The end of your tail where the stinger used to be suddenly explodes into a flower-like bulb of flesh. The petals open into what looks like the inside of a pussy, its folds moist and well lubricated. Right after the previous transformation’s finished, spikes start to grow out of the bulbous tip giving your tail tip the appearance of a spiked bulb. ");
+			outputText("Flinging your tail randomly to test your new appendage you shoot one of them straight into a nearby tree. You idly wonder what it will feel like to milk men with this.  <b>It seems you've grown the tail of a manticore.</b>");
 			mutations.setTailType(Tail.MANTICORE_PUSSYTAIL);
 			changes++;
 		}
@@ -110,7 +110,7 @@ public class ManticoreVenom extends Consumable {
 		if ((player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL) && player.wings.type != Wings.MANTICORE_LIKE_LARGE && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && changes < changeLimit && rand(4) == 0) {
 			//Grow bigger manticore wings!
 			if (player.wings.type == Wings.MANTICORE_LIKE_SMALL) {
-				outputText("\n\nYour feel your wings growing larger by the second. They keep growing until they reach three times their original size. The transformation finally stops as your wings reach a span of twice your arms length. These will be really useful should you want to fly around in search of a meal.  <b>You now have fully grown manticore wings.</b>");
+				outputText("\n\nYou feel your wings growing larger by the second. They keep growing until they reach three times their original size. The transformation finally stops as your wings reach a span of twice your arm’s length. These will be really useful should you want to fly around in search of a meal.  <b>You now have fully grown manticore wings.</b>");
 				mutations.setWingType(Wings.MANTICORE_LIKE_LARGE, "large manticore-like");
 			}
 			//Grow small manticore wings if player has none.

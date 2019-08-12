@@ -375,7 +375,7 @@ package classes.Scenes.NPCs
 				this.drop = new ChainedDrop().
 					add(weapons.W_STAFF,1/10).
 					add(consumables.H_PILL,1/5).
-					add(consumables.D_ARCON,1/5).
+					add(consumables.AREGCON,1/5).
 					add(consumables.UNICORN,1/2);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 8 && (flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5)) {
@@ -393,7 +393,7 @@ package classes.Scenes.NPCs
 				this.drop = new ChainedDrop().
 					add(weapons.W_STAFF,1/10).
 					add(consumables.H_PILL,1/5).
-					add(consumables.D_ARCON,1/5).
+					add(consumables.AREGCON,1/5).
 					add(consumables.ALICORN,1/2);
 			}
 			// this.plural = false;

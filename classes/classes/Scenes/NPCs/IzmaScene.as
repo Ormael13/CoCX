@@ -457,6 +457,7 @@ private function fightSharkCunt():void {
 	else if(flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON] < 0 && flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON] >= -2) outputText("\"<i>Hm, really?  Well, maybe you'll get lucky this time,</i>\" she mocks, gesturing at you to strike first.");
 	//(If Izmafight = -3 to -4)
 	else outputText("Izma laughs slightly and shakes her head.  \"<i>If you insist.  At least TRY this time, will ya?</i>\"");
+	player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 	startCombat(new Izma());
 	spriteSelect(32);
 }

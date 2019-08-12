@@ -131,6 +131,11 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			addButton(1, "Vitality T.", pitchVitailtyTincture);
 			addButton(2, "Scholars T.", pitchScholarsTea);
 			if (player.gender != 2 || player.gender != 0) addButton(3, "Cerulean P.", pitchCeruleanPotion);
+			addButton(11, consumables.SAPILL_.shortName, itemBuy2, consumables.SAPILL_);
+			if (player.level >= 24) addButton(12, consumables.MAPILL_.shortName, itemBuy2, consumables.MAPILL_);
+			else addButtonDisabled(12, "???", "Req. lvl 24+");
+			if (player.level >= 42) addButton(13, consumables.BAPILL_.shortName, itemBuy2, consumables.BAPILL_);
+			else addButtonDisabled(13, "???", "Req. lvl 42+");
 			addButton(14, "Back", giacomoEncounter);
 			statScreenRefresh();
 		}
@@ -251,6 +256,24 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				player.gems -= 75;
 				statScreenRefresh();
 			}
+		}
+		
+		private function itemBuy2(itype:ItemType):void {
+			clearOutput();
+			outputText("\"<i>Interested? It’s yours for only " + itype.value + " gems.</i>\"");
+			if(player.gems < itype.value) {
+				outputText("\n\nYou count out your gems and realize it's beyond your price range.");
+				doNext(potionMenu);
+				return;
+			}
+			else outputText("\n\nDo you buy it?\n\n");
+			doYesNo(curry(debitWeapon2,itype), potionMenu);
+		}
+		
+		private function debitWeapon2(itype:ItemType):void {
+			player.gems -= itype.value;
+			statScreenRefresh();
+			inventory.takeItem(itype, potionMenu);
 		}
 		
 		public function pitchCondom():void {

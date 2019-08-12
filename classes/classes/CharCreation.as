@@ -379,7 +379,8 @@ import coc.view.MainView;
 			//player.perkPoints = player.level - 1;
 			var newFlags:DefaultDict = new DefaultDict();
 			if (player.hasKeyItem("Ascension") >= 0) {
-				for each(var flag:int in [kFLAGS.NEW_GAME_PLUS_LEVEL, kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM, kFLAGS.HUNGER_ENABLED, kFLAGS.HARDCORE_MODE, kFLAGS.HARDCORE_SLOT, kFLAGS.GAME_DIFFICULTY, kFLAGS.EASY_MODE_ENABLE_FLAG, kFLAGS.SFW_MODE, kFLAGS.NO_GORE_MODE, kFLAGS.WATERSPORTS_ENABLED, kFLAGS.SILLY_MODE_ENABLE_FLAG, kFLAGS.LOW_STANDARDS_FOR_ALL, kFLAGS.HYPER_HAPPY, kFLAGS.STAT_GAIN_MODE]) {
+				for each(var flag:int in [kFLAGS.NEW_GAME_PLUS_LEVEL, kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM, kFLAGS.HUNGER_ENABLED, kFLAGS.HARDCORE_MODE, kFLAGS.HARDCORE_SLOT, kFLAGS.GAME_DIFFICULTY, kFLAGS.EASY_MODE_ENABLE_FLAG, kFLAGS.SFW_MODE, kFLAGS.NO_GORE_MODE, kFLAGS.WISDOM_SCALLING, kFLAGS.INTELLIGENCE_SCALLING,
+				kFLAGS.WATERSPORTS_ENABLED, kFLAGS.SILLY_MODE_ENABLE_FLAG, kFLAGS.LOW_STANDARDS_FOR_ALL, kFLAGS.HYPER_HAPPY, kFLAGS.STAT_GAIN_MODE]) {
 					newFlags[flag] = flags[flag];
 				}
 			}
@@ -3236,6 +3237,7 @@ import coc.view.MainView;
 			player.setHeadJewelry(HeadJewelryLib.NOTHING);
 			player.setNecklace(NecklaceLib.NOTHING);
 			player.setJewelry(JewelryLib.NOTHING);
+			player.setVehicle(VehiclesLib.NOTHING);
 			inventory.clearStorage();
 			inventory.clearGearStorage();
 			inventory.initializeGearStorage();

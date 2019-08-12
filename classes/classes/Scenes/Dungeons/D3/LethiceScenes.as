@@ -590,6 +590,7 @@ public class LethiceScenes extends BaseContent
 			outputText("\n\n<b>THE END</b>");
 
 			flags[kFLAGS.GAME_END] = GAME_END_REDEMPTION;
+			player.createStatusEffect(StatusEffects.LethiceRedemed, 0, 0, 0, 0);
 			saveExport();
 		}
 

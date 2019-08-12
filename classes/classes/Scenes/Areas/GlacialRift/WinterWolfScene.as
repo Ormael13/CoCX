@@ -7,9 +7,11 @@ package classes.Scenes.Areas.GlacialRift
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.CoC;
+	import classes.Scenes.UniqueSexScenes;
 	
 	public class WinterWolfScene extends BaseContent 
 	{
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 		
 		public function WinterWolfScene() 
 		{
@@ -30,7 +32,8 @@ package classes.Scenes.Areas.GlacialRift
 				if (player.hasVagina()) {
 					addButton(0, "RideHisCock", rideWinterWolfsCock);
 				}
-				addButton(4, "Leave", cleanupAfterCombat);
+				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else {
 				cleanupAfterCombat();

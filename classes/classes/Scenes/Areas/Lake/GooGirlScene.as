@@ -6,9 +6,12 @@ package classes.Scenes.Areas.Lake
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.Scenes.UniqueSexScenes;
 
 public class GooGirlScene extends AbstractLakeContent
 	{
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		
 		public function GooGirlScene()
 		{
 		}
@@ -306,8 +309,10 @@ public class GooGirlScene extends AbstractLakeContent
 				var sex3N:Function =null;
 				var sex4S:String = "";
 				var sex4N:Function =null;
+				var temp3:Function =null;
 				var valeria:Function = SceneLib.valeria.valeriaAndGooThreeStuff;
 				if (player.armorName != "goo armor" || player.isButtPregnant() || player.isPregnant()) valeria = null;
+				if (player.pcCanUseUniqueSexScene()) temp3 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
 				var eggs:Function =null;
 				if (player.canOvipositBee()) eggs = layBeeEggsInGoo;
 				if (player.hasCock()) {
@@ -365,7 +370,7 @@ public class GooGirlScene extends AbstractLakeContent
 					if (flags[kFLAGS.TIMES_VALERIA_GOO_THREESOMED] == 0) outputText("Do you offer a threesome with the girl to Valeria? It could get a little weird....");
 					else outputText("Do you offer a threesome with the girl to Valeria? She'll likely try flood with you with more sloshing, shuddering pleasure than your body can handle.");
 				}
-				choices(sex1S, sex1N, sex2S, sex2N, sex3S, sex3N, sex4S, sex4N, "Lay Eggs", eggs, "", null, "", null, "Valeria", valeria, "Make Slave", gooTF, "Leave", cleanupAfterCombat);
+				choices(sex1S, sex1N, sex2S, sex2N, sex3S, sex3N, sex4S, sex4N, "Lay Eggs", eggs, "", null, "Valeria", valeria, "Make Slave", gooTF, "U. Sex Scenes", temp3, "Leave", cleanupAfterCombat);
 			}
 		}
 

@@ -9,7 +9,7 @@ package classes.Scenes.NPCs
 		
 		public function Lily() 
 		{
-			
+			//drider cumdump slave from swamp area
 		}
 		
 	}

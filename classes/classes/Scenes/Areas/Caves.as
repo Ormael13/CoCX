@@ -40,6 +40,18 @@ use namespace CoC;
 			choice[choice.length] = 3; //6Methir Crystal
 			if (rand(4) == 0) choice[choice.length] = 4; //7Find nothing!
 			
+			//Wild manticore/malicore
+			if (flags[kFLAGS.ETNA_AFFECTION] >= 5 && rand(4) == 0) {
+				if (rand(2) == 0) {
+					player.createStatusEffect(StatusEffects.WildManticore, 0, 0, 0, 0);
+					SceneLib.etnaScene.repeatEnc();
+					return;
+				}
+				else {
+					SceneLib.bashemathScene.repeatEncWM();
+					return;
+				}
+			}
 			select = choice[rand(choice.length)];
 			switch(select) {
 				case 0:

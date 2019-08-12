@@ -6,12 +6,15 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
+import classes.Scenes.UniqueSexScenes;
 
 public class SandTrapScene extends BaseContent{
 		private function get sandTrap():SandTrap{
 			return monster as SandTrap;
 		}
 
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		
 		public function SandTrapScene()
 		{
 		}
@@ -165,7 +168,9 @@ internal function pcBeatsATrap():void {
 	var rideDatSantTrap:Function = null;
 	var useSandTarpsHand:Function = null;
 	var bikiniTits:Function = null;
-	if(player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster);
+	var temp3:Function = null;
+	if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster);
+	if (player.pcCanUseUniqueSexScene()) temp3 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
 	//Requirements: Player is naga with tail and fangs, has met desert naga as naga at least once
 	if(player.isNaga() && player.hasStatusEffect(StatusEffects.Naga) && player.gender > 0 && player.faceType == Face.SNAKE_FANGS) nagaThreeSome = nagaThreesomeWithSandTrap;
 	
@@ -182,7 +187,7 @@ internal function pcBeatsATrap():void {
 		outputText("\n\nBefore you go, you take in the helpless body of your would-be ambusher.  What do you do?");
 		
 		choices("Naga3Some", nagaThreeSome, "UseYourCock", putYourDickInIt, "RideVaginal", rideDatSantTrap, "Handjob", useSandTarpsHand, "", null,
-			"", null, "", null, "", null, "B.Titfuck", bikiniTits, "Leave", cleanupAfterCombat);
+			"", null, "", null, "U. Sex Scenes", temp3, "B.Titfuck", bikiniTits, "Leave", cleanupAfterCombat);
 	}
 	else cleanupAfterCombat();
 }

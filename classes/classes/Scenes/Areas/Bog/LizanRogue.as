@@ -55,7 +55,7 @@ public class LizanRogue extends Monster
 			}
 			else {
 				outputText("All you see is a flash of pink as the lizan’s long tongue hits your eyes. Some kind of chemical reaction causes your eyes to burn, you’ve been blinded!");
-				if (!player.hasStatusEffect(StatusEffects.Blind)) player.createStatusEffect(StatusEffects.Blind, 1 + rand(2), 0, 0, 0)
+				if (!player.hasStatusEffect(StatusEffects.Blind) && !player.hasPerk(PerkLib.BlindImmunity)) player.createStatusEffect(StatusEffects.Blind, 1 + rand(2), 0, 0, 0)
 			}
 		}
 		

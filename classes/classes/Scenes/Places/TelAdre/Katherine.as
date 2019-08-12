@@ -5362,7 +5362,7 @@ public function handjobbiesFurrDemCatFurries():void
 //First Time with Katherine (Part 2):
 private function firstTimeWithKatherinePartTwoUltraChampionshipEditionHyperTurbo():void
 {
-	clearOutput();
+	clearOutput();//bug z italics tutaj sie zaczyna ZAWSZE
 	outputText("You help Kath get to her feet and she gives you a big hug.  A few sniffles lead to some sobs before she pulls herself together enough to say, “<i>I didn’t believe anyone cared about me.</i>”");
 	//(corruption <25)
 	if(player.cor < 25) outputText("\n\nYou assure her that you do, and that you want to see her again.  In fact you hope to see her often and you would love to get to know her better.");
@@ -5379,7 +5379,7 @@ private function firstTimeWithKatherinePartTwoUltraChampionshipEditionHyperTurbo
 	outputText("\n\n“<i>[name]</i>” she says");
 	if(player.short == "Kath" || player.short == "Katherine" || player.short == "Helena" || player.short == "Evelyn" || player.short == "Oswald") outputText(".  “<i>Well isn’t that a coincidence! All right, ");
 	else outputText(", rolling the foreign word around in her mouth. “<i>Well, ");
-	outputText("[name], that was an amazing first date.  I hope we can do some more things like that - and believe me, I’ve got some ideas!");
+	outputText("[name], that was an amazing first date.  I hope we can do some more things like that - and believe me, I’ve got some ideas!</i>");
 	
 	//(Set KATHERINE_UNLOCKED to 1)
 	flags[kFLAGS.KATHERINE_UNLOCKED] = 1; //If Kath was recruited through Scyllia then KATHERINE_MET_SCYLLA will be set to 1
@@ -6102,3 +6102,4 @@ private function drunkFuck():void {
 }
 
 
+

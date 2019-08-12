@@ -38,6 +38,7 @@ import classes.Scenes.SceneLib;
 			}
 			//Etna
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && rand(5) == 0) {
+				player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 				SceneLib.etnaScene.repeatYandereEnc();
 				return;
 			}
@@ -83,6 +84,7 @@ import classes.Scenes.SceneLib;
 			select = choice[rand(choice.length)];
 			switch(select) {
 				case 0:
+					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 					demonsPack.demonspackEncounter();
 					break;
 			//	case 1:

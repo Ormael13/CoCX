@@ -150,6 +150,14 @@ public class PlayerInfo extends BaseContent {
 			else
 				miscStats += "<b>Stone:</b> " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/300" + "\n";
 		}
+		if (player.hasStatusEffect(StatusEffects.LumiWorkshop)) {
+			miscStats += "<b>Metal Pieces:</b> " + flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] + "/200" + "\n";
+		}
+
+		miscStats += "<b>Basic Jobs:</b> " + player.currentBasicJobs() + " / 10" + "\n";
+		miscStats += "<b>Advanced Jobs:</b> " + player.currentAdvancedJobs() + " / " + player.maxAdvancedJobs() + "\n";
+		miscStats += "<b>Hidden Jobs:</b> " + player.currentHiddenJobs() + " / " + player.maxHiddenJobs() + "\n";
+		miscStats += "<b>Prestige Jobs:</b> " + player.currentPrestigeJobs() + " / " + player.maxPrestigeJobs() + "\n";
 
 		if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] > 0) {
 			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100)
@@ -289,7 +297,13 @@ public class PlayerInfo extends BaseContent {
 
 		if (player.statusEffectv1(StatusEffects.Dysfunction) > 0)
 			statEffects += "Dysfunction - " + player.statusEffectv1(StatusEffects.Dysfunction) + " hours remaining. (Disables masturbation)\n";
-		
+
+		if (player.statusEffectv1(StatusEffects.HinezumiCoat) > 0)
+			statEffects += "Hinezumi Coat: Unarmed attacks minor deal fire damage and discharge lust (1 point per attack) when you are aroused above 50%.\n";
+
+		if (player.statusEffectv1(StatusEffects.Airweed) > 0)
+			statEffects += "Airweed: Water breathing for " + Math.round(player.statusEffectv1(StatusEffects.Airweed)) + " hours.\n";
+
 		var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
 		if (vthirst != null) {
 			statEffects += "Vampire Thirst: " + vthirst.value1 + "/" + vthirst.maxThirst() + " ";
@@ -389,10 +403,10 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Throwed Weapon Accuracy (1st range attack):</b> " + (combat.arrowsAccuracy() / 2) + "%\n";
 		if (player.findPerk(PerkLib.DoubleStrike) >= 0) combatStats += "<b>Throwed Weapon Accuracy (2nd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 15) + "%\n";
 		if (player.findPerk(PerkLib.TripleStrike) >= 0) combatStats += "<b>Throwed Weapon Accuracy (3rd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 30) + "%\n";
-		combatStats += "<b>Firearms Accuracy (1st range attack):</b> " + (combat.arrowsAccuracy() / 2) + "%\n";
-		if (player.findPerk(PerkLib.AmateurGunslinger) >= 0) combatStats += "<b>Firearms Accuracy (2nd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 10) + "%\n";
-		if (player.findPerk(PerkLib.ExpertGunslinger) >= 0) combatStats += "<b>Firearms Accuracy (3rd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 20) + "%\n";
-		if (player.findPerk(PerkLib.MasterGunslinger) >= 0) combatStats += "<b>Firearms Accuracy (4th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 30) + "%\n";
+		combatStats += "<b>Firearms Accuracy (1st range attack):</b> " + (combat.firearmsAccuracy() / 2) + "%\n";
+		if (player.findPerk(PerkLib.AmateurGunslinger) >= 0) combatStats += "<b>Firearms Accuracy (2nd range attack):</b> " + ((combat.firearmsAccuracy() / 2) - 10) + "%\n";
+		if (player.findPerk(PerkLib.ExpertGunslinger) >= 0) combatStats += "<b>Firearms Accuracy (3rd range attack):</b> " + ((combat.firearmsAccuracy() / 2) - 20) + "%\n";
+		if (player.findPerk(PerkLib.MasterGunslinger) >= 0) combatStats += "<b>Firearms Accuracy (4th range attack):</b> " + ((combat.firearmsAccuracy() / 2) - 30) + "%\n";
 		combatStats += "\n";
 		combatStats += "<b>Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillMod()) + "%\n";
 		combatStats += "<b>Physical Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillPhysicalMod()) + "%\n";

@@ -50,6 +50,7 @@ use namespace CoC;
 			switch(select) {
 				case 0:
 					flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] = 2;
+					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 					SceneLib.anemoneScene.mortalAnemoneeeeee();
 					break;
 			/*	case 1:
@@ -57,10 +58,12 @@ use namespace CoC;
 					break;
 			*/	case 1:
 					flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] = 1;
+					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 					sharkGirlScene.oceanSharkGirlEncounter();
 					break;
 				case 2:
 					flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] = 2;
+					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 					sharkGirlScene.oceanTigersharkGirlEncounter();
 					break;
 				case 3:

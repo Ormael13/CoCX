@@ -157,6 +157,51 @@ public class Creature extends Utils
 		public function set jewelryEffectId(value:Number):void { _jewelryEffectId = value; }
 		public function set jewelryEffectMagnitude(value:Number):void { _jewelryEffectId = value; }
 		public function set jewelryPerk(value:String):void { _jewelryPerk = value; }
+		private var _jewelryName2:String = "";
+		private var _jewelryEffectId2:Number = 0;
+		private var _jewelryEffectMagnitude2:Number = 0;
+		private var _jewelryPerk2:String = "";
+		private var _jewelryValue2:Number = 0;
+		public function get jewelryName2():String { return _jewelryName2; }
+		public function get jewelryEffectId2():Number { return _jewelryEffectId2; }
+		public function get jewelryEffectMagnitude2():Number { return _jewelryEffectMagnitude2; }
+		public function get jewelryPerk2():String { return _jewelryPerk2; }
+		public function get jewelryValue2():Number { return _jewelryValue2; }
+		public function set jewelryValue2(value:Number):void { _jewelryValue2 = value; }
+		public function set jewelryName2(value:String):void { _jewelryName2 = value; }
+		public function set jewelryEffectId2(value:Number):void { _jewelryEffectId2 = value; }
+		public function set jewelryEffectMagnitude2(value:Number):void { _jewelryEffectId2 = value; }
+		public function set jewelryPerk2(value:String):void { _jewelryPerk2 = value; }
+		private var _jewelryName3:String = "";
+		private var _jewelryEffectId3:Number = 0;
+		private var _jewelryEffectMagnitude3:Number = 0;
+		private var _jewelryPerk3:String = "";
+		private var _jewelryValue3:Number = 0;
+		public function get jewelryName3():String { return _jewelryName3; }
+		public function get jewelryEffectId3():Number { return _jewelryEffectId3; }
+		public function get jewelryEffectMagnitude3():Number { return _jewelryEffectMagnitude3; }
+		public function get jewelryPerk3():String { return _jewelryPerk3; }
+		public function get jewelryValue3():Number { return _jewelryValue3; }
+		public function set jewelryValue3(value:Number):void { _jewelryValue3 = value; }
+		public function set jewelryName3(value:String):void { _jewelryName3 = value; }
+		public function set jewelryEffectId3(value:Number):void { _jewelryEffectId3 = value; }
+		public function set jewelryEffectMagnitude3(value:Number):void { _jewelryEffectId3 = value; }
+		public function set jewelryPerk3(value:String):void { _jewelryPerk3 = value; }
+		private var _jewelryName4:String = "";
+		private var _jewelryEffectId4:Number = 0;
+		private var _jewelryEffectMagnitude4:Number = 0;
+		private var _jewelryPerk4:String = "";
+		private var _jewelryValue4:Number = 0;
+		public function get jewelryName4():String { return _jewelryName4; }
+		public function get jewelryEffectId4():Number { return _jewelryEffectId4; }
+		public function get jewelryEffectMagnitude4():Number { return _jewelryEffectMagnitude4; }
+		public function get jewelryPerk4():String { return _jewelryPerk4; }
+		public function get jewelryValue4():Number { return _jewelryValue4; }
+		public function set jewelryValue4(value:Number):void { _jewelryValue4 = value; }
+		public function set jewelryName4(value:String):void { _jewelryName4 = value; }
+		public function set jewelryEffectId4(value:Number):void { _jewelryEffectId4 = value; }
+		public function set jewelryEffectMagnitude4(value:Number):void { _jewelryEffectId4 = value; }
+		public function set jewelryPerk4(value:String):void { _jewelryPerk4 = value; }
 		//Shield
 		private var _shieldName:String = "";
 		private var _shieldBlock:Number = 0;
@@ -190,6 +235,22 @@ public class Creature extends Utils
 		public function set lowerGarmentName(value:String):void { _lowerGarmentName = value; }
 		public function set lowerGarmentPerk(value:String):void { _lowerGarmentPerk = value; }
 		public function set lowerGarmentValue(value:Number):void { _lowerGarmentValue = value; }
+		//Vehicles
+		private var _vehiclesName:String = "";
+		private var _vehiclesEffectId:Number = 0;
+		private var _vehiclesEffectMagnitude:Number = 0;
+		private var _vehiclesPerk:String = "";
+		private var _vehiclesValue:Number = 0;
+		public function get vehiclesName():String { return _vehiclesName; }
+		public function get vehiclesEffectId():Number { return _vehiclesEffectId; }
+		public function get vehiclesEffectMagnitude():Number { return _vehiclesEffectMagnitude; }
+		public function get vehiclesPerk():String { return _vehiclesPerk; }
+		public function get vehiclesValue():Number { return _vehiclesValue; }
+		public function set vehiclesValue(value:Number):void { _vehiclesValue = value; }
+		public function set vehiclesName(value:String):void { _vehiclesName = value; }
+		public function set vehiclesEffectId(value:Number):void { _vehiclesEffectId = value; }
+		public function set vehiclesEffectMagnitude(value:Number):void { _vehiclesEffectId = value; }
+		public function set vehiclesPerk(value:String):void { _vehiclesPerk = value; }
 		
 		/*
 		
@@ -361,6 +422,9 @@ public class Creature extends Utils
 			if (findPerk(PerkLib.UnlockBody4thStage) >= 0) max += level * 15;
 			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 20;
 			if (jewelryEffectId == JewelryLib.MODIFIER_HP) max += jewelryEffectMagnitude;
+			if (jewelryEffectId2 == JewelryLib.MODIFIER_HP) max += jewelryEffectMagnitude2;
+			if (jewelryEffectId3 == JewelryLib.MODIFIER_HP) max += jewelryEffectMagnitude3;
+			if (jewelryEffectId4 == JewelryLib.MODIFIER_HP) max += jewelryEffectMagnitude4;
 			if (findPerk(PerkLib.LimitBreakerBody1stStage) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerBody2ndStage) >= 0) multimax += 0.1;
 			max *= multimax;
@@ -441,7 +505,14 @@ public class Creature extends Utils
 			return max;
 		}
 		protected function maxHP_mult():Number {
-			return 1 + (countCockSocks("green") * 0.02);
+			var maxHP_mult1:Number = 1;
+			maxHP_mult1 += (countCockSocks("green") * 0.02);
+			if (game.player.vehiclesName == "Goblin Mech Alpha") {
+				if (game.player.hasKeyItem("Blueprint - Upgraded Armor plating 1.0") >= 0) maxHP_mult1 += 0.2;
+				if (game.player.hasKeyItem("Blueprint - Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.35;
+				if (game.player.hasKeyItem("Blueprint - Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 0.5;
+			}
+			return maxHP_mult1;
 		}
 		protected function maxLust_ElementalBondFleshMulti():Number {
 			var multiValue1a:Number = 1;
@@ -2398,6 +2469,10 @@ public class Creature extends Utils
 			return countCocksOfType(CockTypesEnum.LIZARD);
 		}
 
+		public function cavewyrmCocks():int { //How many cave wyrm-cocks?
+			return countCocksOfType(CockTypesEnum.CAVE_WYRM);
+		}
+
 		public function pigCocks():int { //How many lizard/snake-cocks?
 			return countCocksOfType(CockTypesEnum.PIG);
 		}
@@ -2614,9 +2689,34 @@ public class Creature extends Utils
 		//PC can swim underwater?
 		public function canSwimUnderwater():Boolean
 		{
-			if (gills.type != Gills.NONE || lowerBody == LowerBody.SCYLLA)
-				return true;	//dodać jeszcze trzeba bedzie tu efekt of itemów i inne opcje dające oddych. pod wodą
+			if (gills.type != Gills.NONE || lowerBody == LowerBody.SCYLLA || hasStatusEffect(StatusEffects.Airweed) || game.player.necklaceName == "Magic coral and pearl necklace" || game.player.headjewelryName == "Aqua breather" || (game.player.isInGoblinMech() && game.player.hasKeyItem("Safety bubble") >= 0))
+				return true;	//efekt of itemów dające oddych. pod wodą
 			return false;
+		}
+		public function underwaterCombatBoost():void
+		{
+			var oldHPratio:Number = hp100/100;
+			createStatusEffect(StatusEffects.UnderwaterCombatBoost, 0, 0, 0, 0);
+			var bonusStr:Number = 0;
+			var bonusSpe:Number = 0;
+			if (game.player.hasPerk(PerkLib.AquaticAffinity)) {
+				bonusStr += 30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				bonusSpe += 30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			}
+			if (game.player.armorName == "Sexy Aquamarine Bikini" || game.player.armorName == "Sexy Black Bikini" || game.player.armorName == "Sexy Blue Bikini" || game.player.armorName == "Sexy Green Bikini" || game.player.armorName == "Sexy Pink Bikini" || game.player.armorName == "Sexy Red Bikini" || game.player.armorName == "Sexy White Bikini" || game.player.armorName == "Sexy Yellow Bikini") {
+				bonusStr += 20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				bonusSpe += 20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			}
+			if (game.player.necklaceName == "Magic coral and pearl necklace") bonusSpe += 10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			if (bonusStr > 0) {
+				addStatusValue(StatusEffects.UnderwaterCombatBoost, 1, bonusStr);
+				game.player.str += bonusStr;
+			}
+			if (bonusSpe > 0) {
+				addStatusValue(StatusEffects.UnderwaterCombatBoost,2,bonusSpe);
+				game.player.spe += bonusSpe;
+			}
+			HP = oldHPratio * maxHP();
 		}
 
 		//Naked
@@ -2653,11 +2753,19 @@ public class Creature extends Utils
                     || (game.player.findPerk(PerkLib.EyesOfTheHunterMaster) >= 0 && game.player.sens >= 75 && (game.monster.findPerk(PerkLib.DarknessVulnerability) >= 0 || game.monster.findPerk(PerkLib.FireVulnerability) >= 0 || game.monster.findPerk(PerkLib.IceVulnerability) >= 0 || game.monster.findPerk(PerkLib.LightningVulnerability) >= 0));
 		}
 
+		//Unique sex scenes
+		public function pcCanUseUniqueSexScene():Boolean
+		{
+			if ((game.player.tailType == Tail.MANTICORE_PUSSYTAIL && game.monster.hasCock()) || (game.player.lowerBody == LowerBody.PLANT_FLOWER && game.monster.hasCock()) || (game.player.lowerBody == LowerBody.PLANT_FLOWER && game.monster.hasVagina()) || game.player.tailType == Tail.HINEZUMI || game.player.tailType == Tail.SALAMANDER || 
+			((game.player.gender == 1 || game.player.gender == 2) && (game.player.tailType == Tail.HINEZUMI || game.player.tailType == Tail.MOUSE || game.player.tailType == Tail.DEMONIC)))
+				return true;
+			return false;
+		}
+
 		//check for vagoo
 		public function hasVagina():Boolean
 		{
 			return vaginas.length > 0;
-
 		}
 
 		public function hasVirginVagina():Boolean
@@ -3469,6 +3577,8 @@ public class Creature extends Utils
 				case CockTypesEnum.HORSE:
 				case CockTypesEnum.KANGAROO:
 				case CockTypesEnum.LIZARD:
+				case CockTypesEnum.CAVE_WYRM:
+				case CockTypesEnum.RED_PANDA:
 				case CockTypesEnum.PIG:
 				case CockTypesEnum.TENTACLE:
 					if (countCocksOfType(cocks[0].cockType) == cocks.length) return Appearance.cockNoun(cocks[0].cockType) + "s";
@@ -3831,6 +3941,9 @@ public class Creature extends Utils
 			//if (findPerk(PerkLib.Unhindered) >= 0 && meetUnhinderedReq()) chance += 10;
 			if (findPerk(PerkLib.Unhindered) >= 0 && (game.player.armorName == "arcane bangles" || game.player.armorName == "practically indecent steel armor" || game.player.armorName == "revealing chainmail bikini" || game.player.armorName == "slutty swimwear" || game.player.armorName == "barely-decent bondage straps" || game.player.armorName == "nothing")) chance += 10;
 			if (game.player.armor == game.armors.R_CHANG || game.player.armor == game.armors.R_QIPAO || game.player.armor == game.armors.G_CHANG || game.player.armor == game.armors.G_QIPAO || game.player.armor == game.armors.B_CHANG || game.player.armor == game.armors.B_QIPAO || game.player.armor == game.armors.P_CHANG || game.player.armor == game.armors.P_QIPAO) chance += 5;
+			if (game.player.hasKeyItem("Spring Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) chance += 10;
+			if (game.player.hasKeyItem("Rocket Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) chance += 20;
+			if (game.player.hasKeyItem("Nitro Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) chance += 30;
 			if (findPerk(PerkLib.JunglesWanderer) >= 0) chance += 35;
 			if (hasStatusEffect(StatusEffects.Illusion)) {
 				if (findPerk(PerkLib.KitsuneThyroidGlandFinalForm) >= 0) chance += 20;
@@ -3882,8 +3995,11 @@ public class Creature extends Utils
 			if (generalevasion > 0) flyeavsion += generalevasion;
 			if (findPerk(PerkLib.AdvancedAerialCombat) >= 0) flyeavsion += 5;
 			if (findPerk(PerkLib.GreaterAerialCombat) >= 0) flyeavsion += 15;
+			if (game.player.hasKeyItem("Spring Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) generalevasion += 10;
+			if (game.player.hasKeyItem("Rocket Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) generalevasion += 20;
+			if (game.player.hasKeyItem("Nitro Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) generalevasion += 30;
 			// perks
-			if ((findPerk(PerkLib.Evade) >= 0 || findPerk(PerkLib.ElvenSense) >= 0) && (roll < generalevasion)) return "Evade";
+			if ((findPerk(PerkLib.Evade) >= 0 || findPerk(PerkLib.ElvenSense) >= 0 || ((game.player.hasKeyItem("Nitro Boots") >= 0 || game.player.hasKeyItem("Rocket Boots") >= 0 || game.player.hasKeyItem("Spring Boots") >= 0) && game.player.tallness < 48 && game.player.isBiped())) && (roll < generalevasion)) return "Evade";
 			if (findPerk(PerkLib.Flexibility) >= 0 && (roll < 6)) return "Flexibility";
 			if (findPerk(PerkLib.Misdirection) >= 0 && armorName == "red, high-society bodysuit" && (roll < 10)) return "Misdirection";
 			//if (findPerk(PerkLib.Unhindered) >= 0 && meetUnhinderedReq() && (roll < 10)) return "Unhindered";
@@ -4031,4 +4147,4 @@ public class Creature extends Utils
 		}
 	}
 }
-
+

@@ -23,7 +23,7 @@ public class Scylla extends Monster
 		public function scyllaInkSpray():void {
 			clearOutput();
 			outputText("" + this.capitalA + this.short + " stretches all her tentacles apart revealing a huge gaping pussy at the center which spray a cloud of ink all around you impairing your vision. ");
-			player.createStatusEffect(StatusEffects.Blind, 2, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.BlindImmunity)) player.createStatusEffect(StatusEffects.Blind, 2, 0, 0, 0);
 		}
 		
 		public function scyllaTentacleSlap():void {

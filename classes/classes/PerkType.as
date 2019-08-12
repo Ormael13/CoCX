@@ -240,10 +240,30 @@ public class PerkType extends BaseContent
 			});
 			return this;
 		}
+		public function requireAdvancedJobSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.freeAdvancedJobsSlots() > 0;
+				},
+				text: "Free Advanced Job Slot",
+				type: "advanced"
+			});
+			return this;
+		}
+		public function requireHiddenJobSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.freeHiddenJobsSlots() > 0;
+				},
+				text: "Free Hidden Job Slot",
+				type: "hidden"
+			});
+			return this;
+		}
 		public function requirePrestigeJobSlot():PerkType {
 			requirements.push({
 				fn  : function(player:Player):Boolean {
-					return player.maxPrestigeJobs() > 0;
+					return player.freePrestigeJobsSlots() > 0;
 				},
 				text: "Free Prestige Job Slot",
 				type: "prestige"
@@ -287,6 +307,16 @@ public class PerkType extends BaseContent
 				},
 				text: "Free Adrenal Glands Mutation Slot",
 				type: "adrenalglandsmutation"
+			});
+			return this;
+		}
+		public function requireBloodsteamMutationSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxBloodsteamMutations() > 0;
+				},
+				text: "Free Bloodsteam Mutation Slot",
+				type: "bloodsteammutation"
 			});
 			return this;
 		}

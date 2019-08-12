@@ -490,7 +490,7 @@ public function beachInteractionsDateOnTheBeach2():void
 	else {
 		outputText("\"<i>How about the two of us do something else my lower body seems to know exactly what it would want right now.</i>\"\n\n");
 		outputText("You ask her to elaborate.\n\n");
-		outputText("\"<i>Look must I spell it out for you? I’d like you and I to fuck.</i>\"\n\n");
+		outputText("\"<i>Look must I spell it out for you? I'd like us to fuck.</i>\"\n\n");
 	}
 	outputText("Oh, so that explains her behavior all along. Well there's no way you will miss on a chance to have a nice time with her, right? You begin to caress her smooth, white underbelly with your hand making Ceani coo. You slowly slide your hands all the way up to her massive breast circling her nipples and drawing her contour. You wonder if whales morph can produce milk like other mammals and begin to suckle on her tit to make sure. ");
 	outputText("Ceani hands pulls you closer as she moan at your attentions. After a few seconds of suckling you indeed find milk although she clearly won’t produce like a cow. You unplug your mouth from her now erect nipple as you head to her face for a gentle kiss. Ceani smile in rapture as the two of you begin a long duel of tongues.\n\n");

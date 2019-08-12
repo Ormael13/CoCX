@@ -85,9 +85,8 @@ public class LizanRogueScene extends BaseContent
 					outputText("You wonder what you should do to the lizan.");
 					if (player.hasCock()) addButton(0, "Use Dick", rapeLizanInTheAss).hint("Anally penetrate him with your " + player.multiCockDescriptLight() + ".");
 					if (player.hasVagina()) addButton(1, "Use Pussy", rapeLizanWithPussy).hint("Get on top of the lizan and stuff his cock into your " + player.vaginaDescript() + ".");
-					if (player.tailType == Tail.MANTICORE_PUSSYTAIL) addButton(2, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
-					if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(3, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
-					addButton(4, "Leave", cleanupAfterCombat);
+					if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+					addButton(14, "Leave", cleanupAfterCombat);
 					return;
 				}
 				else {
@@ -102,9 +101,8 @@ public class LizanRogueScene extends BaseContent
 				if (player.lust >= 33) {
 					outputText("<b>You could have sex with him if you like to.</b> ");
 					addButton(0, "Sex", haveSexWithLizan).hint("Have some fun with the oh-so-sexy lizan.");
-					if (player.tailType == Tail.MANTICORE_PUSSYTAIL) addButton(2, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
-					if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(3, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
-					addButton(4, "Leave", leaveLizanAfterCombat);
+					if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+					addButton(14, "Leave", leaveLizanAfterCombat);
 					return;
 				}
 				else leaveLizanAfterCombat();

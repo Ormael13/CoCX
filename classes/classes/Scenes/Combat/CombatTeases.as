@@ -1210,7 +1210,7 @@ public class CombatTeases extends BaseCombatContent {
 				break;
 				//manticore tailpussy teases
 			case 47:
-				outputText("You suddenly open your tail pussy presenting your drooling hole to " + monster.a + monster.short + " and smirking.\n\n");
+				outputText("You suddenly open your tail pussy presenting your drooling hole to " + monster.a + monster.short + " and smirk.\n\n");
 				outputText("\"<i>Bet you want a shot at this, look how much this bad girl is ready for you.</i>\"");
 				chance += 3;
 				damage += 3;

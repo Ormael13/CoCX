@@ -33,356 +33,388 @@ public class PhysicalSpecials extends BaseCombatContent {
 	//------------
 	internal function buildMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
-		buttons.add("PowerAttack", powerAttackMenu).hint("Do a single way more powerfull wrath-enhanced strike.");
-		if (player.haveWeaponForCleave() && player.hasStatusEffect(StatusEffects.KnowsCleave)) buttons.add("Cleave", pcCleave).hint("Deal extra damage to multiple foes. Cause area effect bleed damage.");
-		if (player.hasPerk(PerkLib.SneakyAttack) && player.haveWeaponForSneakAttack() && (monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.FreezingBreathStun) || monster.hasStatusEffect(StatusEffects.StunnedTornado)
-			|| monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind) || monster.hasStatusEffect(StatusEffects.Distracted))) buttons.add("SneakAttack", sneakAttack).hint("Strike the vitals of a stunned, blinded or distracted opponent for heavy damage.");
-		if (player.hasPerk(PerkLib.Feint)) buttons.add("Feint", feint).hint("Attempt to feint an opponent into dropping its guard.");
-		if (player.hairType == 4) {
-			buttons.add("AnemoneSting", anemoneSting).hint("Attempt to strike an opponent with the stinging tentacles growing from your scalp.  Reduces enemy speed and increases enemy lust.", "Anemone Sting");
-		}
-		//Bitez
-		if (player.faceType == Face.SHARK_TEETH) {
-			buttons.add("SharkBite", bite).hint("Attempt to bite your opponent with your shark-teeth.");
-		}
-		if (player.faceType == Face.ORCA) {
-			buttons.add("OrcaBite", bite).hint("Bite in your opponent with your sharp teeths causing bleed.");
-		}
-		if (player.faceType == Face.WOLF) {
-			buttons.add("ViciousBite", bite).hint("Vicious bite your opponent with your sharp teeths causing bleed.");
-			if (player.hasPerk(PerkLib.FreezingBreath)) buttons.add("Frostbite", fenrirFrostbite).hint("You bite in your foe slowly infecting it with cold chill weakening its strength and resolve.");
-		}
-		if (player.faceType == Face.SNAKE_FANGS || player.hasPerk(PerkLib.VenomGlands)) {
-			bd = buttons.add("SnakeBite", nagaBiteAttack).hint("Attempt to bite your opponent and inject venom. (lower enemy str and spe)  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-			if (player.tailVenom < 25) {
-				bd.disable("You do not have enough venom to use snake bite right now!");
+		if (!player.isInGoblinMech()) {
+			buttons.add("PowerAttack", powerAttackMenu).hint("Do a single way more powerfull wrath-enhanced strike.");
+			if (player.haveWeaponForCleave() && player.hasStatusEffect(StatusEffects.KnowsCleave)) buttons.add("Cleave", pcCleave).hint("Deal extra damage to multiple foes. Cause area effect bleed damage.");
+			if (player.hasPerk(PerkLib.SneakyAttack) && player.haveWeaponForSneakAttack() && (monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.FreezingBreathStun) || monster.hasStatusEffect(StatusEffects.StunnedTornado)
+				|| monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind) || monster.hasStatusEffect(StatusEffects.Distracted))) buttons.add("SneakAttack", sneakAttack).hint("Strike the vitals of a stunned, blinded or distracted opponent for heavy damage.");
+			if (player.hasPerk(PerkLib.Feint)) buttons.add("Feint", feint).hint("Attempt to feint an opponent into dropping its guard.");
+			if (player.hairType == 4) {
+				buttons.add("AnemoneSting", anemoneSting).hint("Attempt to strike an opponent with the stinging tentacles growing from your scalp.  Reduces enemy speed and increases enemy lust.", "Anemone Sting");
 			}
-		}
-		if (player.faceType == Face.SPIDER_FANGS || player.hasPerk(PerkLib.VenomGlands)) {
-			bd = buttons.add("SpiderBite", spiderBiteAttack).hint("Attempt to bite your opponent and inject venom. (deal lust dmg and lower gradualy enemy lust resistance)  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-			if (player.tailVenom < 25) {
-				bd.disable("You do not have enough venom to use spider bite right now!");
+			//Bitez
+			if (player.faceType == Face.SHARK_TEETH) {
+				buttons.add("SharkBite", bite).hint("Attempt to bite your opponent with your shark-teeth.");
 			}
-		}
-		//Constrict
-		if (player.lowerBody == LowerBody.NAGA) {
-			buttons.add("Constrict", SceneLib.desert.nagaScene.nagaPlayerConstrict).hint("Attempt to bind an enemy in your long snake-tail.");
-		}
-		//Grapple
-		if (player.lowerBody == LowerBody.SCYLLA) {
-			buttons.add("Grapple", scyllaGrapple).hint("Attempt to grapple a foe with your tentacles.");
-		}
-		//Engulf
-		if (player.lowerBody == LowerBody.GOO) {
-			buttons.add("Engulf", gooEngulf).hint("Attempt to engulf a foe with your body.");
-		}
-		//Embrace
-		if ((player.wings.type == Wings.BAT_ARM || player.wings.type == Wings.VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType)) {
-			buttons.add("Embrace", vampireEmbrace).hint("Embrace an opponent in your wings.");
-		}
-		//Pounce
-		if (player.canPounce() && !monster.hasPerk(PerkLib.EnemyGroupType)) {
-			buttons.add("Pounce", catPounce).hint("Pounce and rend your enemy using your claws, this initiate a grapple combo.");
-		}
-		//Kick attackuuuu
-		if (player.isTaur() || player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.BUNNY || player.lowerBody == LowerBody.KANGAROO) {
-			bd = buttons.add("Kick", kick).hint("Attempt to kick an enemy using your powerful lower body.");
-			if (player.hasStatusEffect(StatusEffects.CooldownKick)) {
-				bd.disable("<b>You need more time before you can perform Kick again.</b>\n\n");
+			if (player.faceType == Face.ORCA) {
+				buttons.add("OrcaBite", bite).hint("Bite in your opponent with your sharp teeths causing bleed.");
 			}
-		}
-		//Gore if mino horns or unicorn/alicorn horns
-		if (player.horns.type == Horns.COW_MINOTAUR && player.horns.count >= 6) {
-			buttons.add("Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horns.  This attack is stronger and easier to land with large horns.");
-		}
-		if (player.horns.type == Horns.UNICORN && player.horns.count >= 6) {
-			buttons.add("Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horns.  This attack is stronger and easier to land with large horns.");
-		}
-		//Upheaval - requires rhino horns
-		if (player.horns.type == Horns.RHINO && player.horns.count >= 2 && player.faceType == Face.RHINO) {
-			bd = buttons.add("Upheaval", upheavalAttack).hint("Send your foe flying with your dual nose mounted horns. \n");
-			if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(30));
-			else bd.requireFatigue(physicalCost(15));
-		}
-		//Infest if infested
-		if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5 && player.hasCock()) {
-			buttons.add("Infest", SceneLib.mountain.wormsScene.playerInfest).hint("The infest attack allows you to cum at will, launching a stream of semen and worms at your opponent in order to infest them.  Unless your foe is very aroused they are likely to simply avoid it.  Only works on males or herms. \n\nAlso great for reducing your lust.");
-		}
-		//Kiss supercedes bite.
-		if (player.hasStatusEffect(StatusEffects.LustStickApplied)) {
-			bd = buttons.add("Kiss", kissAttack).hint("Attempt to kiss your foe on the lips with drugged lipstick.  It has no effect on those without a penis.");
-			if(player.hasStatusEffect(StatusEffects.Blind)) {
-				bd.disable("There's no way you'd be able to find their lips while you're blind!");
+			if (player.faceType == Face.WOLF) {
+				buttons.add("ViciousBite", bite).hint("Vicious bite your opponent with your sharp teeths causing bleed.");
+				if (player.hasPerk(PerkLib.FreezingBreath)) buttons.add("Frostbite", fenrirFrostbite).hint("You bite in your foe slowly infecting it with cold chill weakening its strength and resolve.");
 			}
-		}
-		if (player.arms.type == Arms.MANTIS && player.weapon == WeaponLib.FISTS) {
-			bd = buttons.add("Multi Slash", mantisMultiSlash);
-			if (player.hasPerk(PerkLib.PhantomStrike)) {
-				if (monster.plural) {
-					bd.hint("Attempt to slash your foes with your wrists scythes! \n");
-					if (player.hasPerk(PerkLib.MantislikeAgilityEvolved)) bd.requireFatigue(100);
-					else bd.requireFatigue(120);
-				} else {
-					bd.hint("Attempt to slash your foe with your wrists scythes! \n");
-					if (player.hasPerk(PerkLib.MantislikeAgilityEvolved)) bd.requireFatigue(40);
-					else bd.requireFatigue(48);
+			if (player.faceType == Face.SNAKE_FANGS || player.hasPerk(PerkLib.VenomGlands)) {
+				bd = buttons.add("SnakeBite", nagaBiteAttack).hint("Attempt to bite your opponent and inject venom. (lower enemy str and spe)  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
+				if (player.tailVenom < 25) {
+					bd.disable("You do not have enough venom to use snake bite right now!");
 				}
 			}
-			else {
-				if (monster.plural) {
-					bd.hint("Attempt to slash your foes with your wrists scythes! \n");
-					if (player.hasPerk(PerkLib.MantislikeAgilityEvolved)) bd.requireFatigue(50);
-					else bd.requireFatigue(60);
-				} else {
-					bd.hint("Attempt to slash your foe with your wrists scythes! \n");
-					if (player.hasPerk(PerkLib.MantislikeAgilityEvolved)) bd.requireFatigue(20);
-					else bd.requireFatigue(24);
+			if (player.faceType == Face.SPIDER_FANGS || player.hasPerk(PerkLib.VenomGlands)) {
+				bd = buttons.add("SpiderBite", spiderBiteAttack).hint("Attempt to bite your opponent and inject venom. (deal lust dmg and lower gradualy enemy lust resistance)  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
+				if (player.tailVenom < 25) {
+					bd.disable("You do not have enough venom to use spider bite right now!");
 				}
 			}
-		}
-		if (player.tail.isAny(Tail.BEE_ABDOMEN, Tail.SCORPION)) {
-			bd = buttons.add("Sting", playerStinger);
-			var stingername:String,period:String;
-			if (player.tailType == Tail.BEE_ABDOMEN) {
-				stingername = "venomous bee stinger";
-				period = "your abdomen's refractory period";
-			} else if (player.tailType == Tail.SCORPION){
-				stingername = "venomous scorpion stinger";
-				period = "your refractory period";
+			//Constrict
+			if (player.lowerBody == LowerBody.NAGA) {
+				buttons.add("Constrict", SceneLib.desert.nagaScene.nagaPlayerConstrict).hint("Attempt to bind an enemy in your long snake-tail.");
 			}
-			bd.hint("Attempt to use your " + stingername + " on an enemy.  Be aware it takes quite a while for your venom to build up, so depending on " + period + ", you may have to wait quite a while between stings.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-			if (player.tailVenom < 25) {
-				bd.disable("You do not have enough venom to sting right now!");
+			//Grapple
+			if (player.lowerBody == LowerBody.SCYLLA) {
+				buttons.add("Grapple", scyllaGrapple).hint("Attempt to grapple a foe with your tentacles.");
 			}
-		}
-		if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
-			bd = buttons.add("Tail Spike", playerTailSpike).hint("Shoot an envenomed spike at your opponent dealing minor physical damage, slowing its movement speed and inflicting serious lust damage.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-			if (player.tailVenom < 25) {
-				bd.disable("You do not have enough venom to shoot spike right now!");
+			//Engulf
+			if (player.lowerBody == LowerBody.GOO) {
+				buttons.add("Engulf", gooEngulf).hint("Attempt to engulf a foe with your body.");
 			}
-		}
-		if (player.tailType == Tail.SPIDER_ADBOMEN) {
-			bd = buttons.add("Web", PCWebAttack).hint("Attempt to use your abdomen to spray sticky webs at an enemy and greatly slow them down.  Be aware it takes a while for your webbing to build up.  \n\nWeb Amount: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-			if (player.tailVenom < 30) {
-				bd.disable("You do not have enough webbing to shoot right now!");
+			//Embrace
+			if ((player.wings.type == Wings.BAT_ARM || player.wings.type == Wings.VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType)) {
+				buttons.add("Embrace", vampireEmbrace).hint("Embrace an opponent in your wings.");
 			}
-		}
-		if (player.tail.isAny(Tail.SHARK, Tail.LIZARD, Tail.KANGAROO, Tail.DRACONIC, Tail.RACCOON, Tail.RED_PANDA)) {
-			buttons.add("Tail Whip", tailWhipAttack).hint("Whip your foe with your tail to enrage them and lower their defense!");
-		}
-		if (player.tailType == Tail.SALAMANDER) {
-			bd = buttons.add("Tail Slap", tailSlapAttack).hint("Set ablaze in red-hot flames your tail to whip your foe with it to hurt and burn them!  \n\n<b>AoE attack.</b>");
-			if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(80));
-			else bd.requireFatigue(physicalCost(40));
-		}
-		if (player.tailType == Tail.ORCA) {
-			bd = buttons.add("Tail Smack", tailSmackAttack).hint("Smack your powerful tail at your opponent face.</b>");
-			bd.requireFatigue(physicalCost(40));
-			if (player.hasStatusEffect(StatusEffects.CooldownTailSmack)) {
-				bd.disable("<b>You need more time before you can perform Tail Smack again.</b>\n\n");
+			//Pounce
+			if (player.canPounce() && !monster.hasPerk(PerkLib.EnemyGroupType)) {
+				buttons.add("Pounce", catPounce).hint("Pounce and rend your enemy using your claws, this initiate a grapple combo.");
 			}
-		}
-		if (player.hasPerk(PerkLib.InkSpray) && player.gender > 0) {
-			var liftWhat:String = player.gender == 1 ? "your cock" : "your front tentacle";
-			var liftWha2:String = player.gender == 1 ? "Lift your cock and s" : "S";
-			var cooldown:int    = player.hasPerk(PerkLib.ScyllaInkGlands) ? 4 : 8;
-			bd = buttons.add("Ink Spray", inkSpray);
-			bd.requireFatigue(physicalCost(30));
-			if (player.isScylla()) bd.hint("Lift " + liftWhat + " and spray ink to the face of your foe surprising, arousing and blinding them (cooldown of " + cooldown + " rounds before it can be used again)");
-			else bd.hint("" + liftWha2 + "pray ink to the face of your foe surprising, arousing and blinding them (cooldown of " + cooldown + " rounds before it can be used again)");
-			if (monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind)) {
-				bd.disable("<b>" + monster.capitalA + monster.short + " is already affected by blind.</b>\n\n");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownInkSpray)) {
-				bd.disable("<b>You need more time before you can shoot ink again.</b>\n\n");
+			//Kick attackuuuu
+			if (player.isTaur() || player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.BUNNY || player.lowerBody == LowerBody.KANGAROO) {
+				bd = buttons.add("Kick", kick).hint("Attempt to kick an enemy using your powerful lower body.");
+				if (player.hasStatusEffect(StatusEffects.CooldownKick)) {
+					bd.disable("<b>You need more time before you can perform Kick again.</b>\n\n");
+				}
 			}
-		}
-		if (player.hasVagina() && (player.cowScore() >= 9 || player.hasPerk(PerkLib.LactaBovinaOvaries))) {
-			var blaaaast2:String = player.hasPerk(PerkLib.LactaBovinaOvariesFinalForm) ? " (cooldown of 4 rounds before it can be used again)" : "";
-			bd = buttons.add("Milk Blast", milkBlast).hint("Blast your opponent with a powerful stream of milk, arousing and damaging them. The power of the jet is related to arousal, libido and production." + blaaaast2 + "\n");
-			if (player.hasPerk(PerkLib.LactaBovinaOvariesFinalForm)) bd.requireLust(200);
-			else bd.requireLust(100);
-			if (player.hasStatusEffect(StatusEffects.CooldownMilkBlast)) {
-				if (player.hasPerk(PerkLib.LactaBovinaOvariesFinalForm)) bd.disable("\n<b>You need more time before you can do it again.</b>");
-				else bd.disable("You can't use it more than once during fight.");
+			//Gore if mino horns or unicorn/alicorn horns
+			if (player.horns.type == Horns.COW_MINOTAUR && player.horns.count >= 6) {
+				buttons.add("Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horns.  This attack is stronger and easier to land with large horns.");
 			}
-		}
-		if (player.hasCock() && (player.minotaurScore() >= 9 || player.hasPerk(PerkLib.MinotaurTesticles))) {
-			var blaaaast1:String = player.hasPerk(PerkLib.MinotaurTesticlesFinalForm) ? " (cooldown of 4 rounds before it can be used again)" : "";
-			bd = buttons.add("Cum Cannon", cumCannon).hint("Blast your opponent with a powerful stream of cum, arousing and damaging them. The power of the jet is related to arousal, libido and production. " + blaaaast1 + "\n");
-			if (player.hasPerk(PerkLib.MinotaurTesticlesFinalForm)) bd.requireLust(200);
-			else bd.requireLust(100);
-			if (player.hasStatusEffect(StatusEffects.CooldownCumCannon)) {
-				if (player.hasPerk(PerkLib.MinotaurTesticlesFinalForm)) bd.disable("\n<b>You need more time before you can do it again.</b>");
-				else bd.disable("You can't use it more than once during fight.");
+			if (player.horns.type == Horns.UNICORN && player.horns.count >= 6) {
+				buttons.add("Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horns.  This attack is stronger and easier to land with large horns.");
 			}
-		}
-		if ((player.pigScore() >= 8 || player.hasPerk(PerkLib.PigBoarFatFinalForm)) && player.thickness >= minThicknessReq()) {
-			bd = buttons.add("Body Slam", bodySlam).hint("Body slam your opponent (small chance to stun). Damage scale with toughness and thickness.");
-			bd.requireFatigue(physicalCost(50));
-		}
-		if (player.canFly()) {
-			var flightduration:Number = 6;
-			if (player.hasPerk(PerkLib.AdvancedAerialCombat)) flightduration += 2;
-			if (player.hasPerk(PerkLib.GreaterAerialCombat)) flightduration += 4;
-			buttons.add("Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to " + flightduration + " turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
-		}
-		if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 0) {
-			bd = buttons.add("Send T.Gol/1", sendTemporalGolem1)
-			  .hint("Send one golem from your bag to attack enemy. <b>After attack golem will fall apart and it core can shatter leaving it unable to be reused in future!</b>");
+			//Upheaval - requires rhino horns
+			if (player.horns.type == Horns.RHINO && player.horns.count >= 2 && player.faceType == Face.RHINO) {
+				bd = buttons.add("Upheaval", upheavalAttack).hint("Send your foe flying with your dual nose mounted horns. \n");
+				if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(30));
+				else bd.requireFatigue(physicalCost(15));
+			}
+			//Infest if infested
+			if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5 && player.hasCock()) {
+				buttons.add("Infest", SceneLib.mountain.wormsScene.playerInfest).hint("The infest attack allows you to cum at will, launching a stream of semen and worms at your opponent in order to infest them.  Unless your foe is very aroused they are likely to simply avoid it.  Only works on males or herms. \n\nAlso great for reducing your lust.");
+			}
+			//Kiss supercedes bite.
+			if (player.hasStatusEffect(StatusEffects.LustStickApplied)) {
+				bd = buttons.add("Kiss", kissAttack).hint("Attempt to kiss your foe on the lips with drugged lipstick.  It has no effect on those without a penis.");
+				if(player.hasStatusEffect(StatusEffects.Blind)) {
+					bd.disable("There's no way you'd be able to find their lips while you're blind!");
+				}
+			}
+			if (player.arms.type == Arms.MANTIS && player.weapon == WeaponLib.FISTS) {
+				bd = buttons.add("Multi Slash", mantisMultiSlash);
+				if (player.hasPerk(PerkLib.PhantomStrike)) {
+					if (monster.plural) {
+						bd.hint("Attempt to slash your foes with your wrists scythes! \n");
+						if (player.hasPerk(PerkLib.MantislikeAgilityEvolved)) bd.requireFatigue(100);
+						else bd.requireFatigue(120);
+					} else {
+						bd.hint("Attempt to slash your foe with your wrists scythes! \n");
+						if (player.hasPerk(PerkLib.MantislikeAgilityEvolved)) bd.requireFatigue(40);
+						else bd.requireFatigue(48);
+					}
+				}
+				else {
+					if (monster.plural) {
+						bd.hint("Attempt to slash your foes with your wrists scythes! \n");
+						if (player.hasPerk(PerkLib.MantislikeAgilityEvolved)) bd.requireFatigue(50);
+						else bd.requireFatigue(60);
+					} else {
+						bd.hint("Attempt to slash your foe with your wrists scythes! \n");
+						if (player.hasPerk(PerkLib.MantislikeAgilityEvolved)) bd.requireFatigue(20);
+						else bd.requireFatigue(24);
+					}
+				}
+			}
+			if (player.tail.isAny(Tail.BEE_ABDOMEN, Tail.SCORPION)) {
+				bd = buttons.add("Sting", playerStinger);
+				var stingername:String,period:String;
+				if (player.tailType == Tail.BEE_ABDOMEN) {
+					stingername = "venomous bee stinger";
+					period = "your abdomen's refractory period";
+				} else if (player.tailType == Tail.SCORPION){
+					stingername = "venomous scorpion stinger";
+					period = "your refractory period";
+				}
+				bd.hint("Attempt to use your " + stingername + " on an enemy.  Be aware it takes quite a while for your venom to build up, so depending on " + period + ", you may have to wait quite a while between stings.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
+				if (player.tailVenom < 25) {
+					bd.disable("You do not have enough venom to sting right now!");
+				}
+			}
+			if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
+				bd = buttons.add("Tail Spike", playerTailSpike).hint("Shoot an envenomed spike at your opponent dealing minor physical damage, slowing its movement speed and inflicting serious lust damage.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
+				if (player.tailVenom < 25) {
+					bd.disable("You do not have enough venom to shoot spike right now!");
+				}
+			}
+			if (player.tailType == Tail.SPIDER_ADBOMEN) {
+				bd = buttons.add("Web", PCWebAttack).hint("Attempt to use your abdomen to spray sticky webs at an enemy and greatly slow them down.  Be aware it takes a while for your webbing to build up.  \n\nWeb Amount: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
+				if (player.tailVenom < 30) {
+					bd.disable("You do not have enough webbing to shoot right now!");
+				}
+			}
+			if (player.tail.isAny(Tail.SHARK, Tail.LIZARD, Tail.KANGAROO, Tail.DRACONIC, Tail.RACCOON, Tail.RED_PANDA)) {
+				buttons.add("Tail Whip", tailWhipAttack).hint("Whip your foe with your tail to enrage them and lower their defense!");
+			}
+			if (player.tailType == Tail.SALAMANDER) {
+				bd = buttons.add("Tail Slap", tailSlapAttack).hint("Set ablaze in red-hot flames your tail to whip your foe with it to hurt and burn them!  \n\n<b>AoE attack.</b>");
+				if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(80));
+				else bd.requireFatigue(physicalCost(40));
+			}
+			if (player.tailType == Tail.ORCA) {
+				bd = buttons.add("Tail Smack", tailSmackAttack).hint("Smack your powerful tail at your opponent face.</b>");
+				bd.requireFatigue(physicalCost(40));
+				if (player.hasStatusEffect(StatusEffects.CooldownTailSmack)) {
+					bd.disable("<b>You need more time before you can perform Tail Smack again.</b>\n\n");
+				}
+			}
+			if (player.hasPerk(PerkLib.InkSpray) && player.gender > 0) {
+				var liftWhat:String = player.gender == 1 ? "your cock" : "your front tentacle";
+				var liftWha2:String = player.gender == 1 ? "Lift your cock and s" : "S";
+				var cooldown:int    = player.hasPerk(PerkLib.ScyllaInkGlands) ? 4 : 8;
+				bd = buttons.add("Ink Spray", inkSpray);
+				bd.requireFatigue(physicalCost(30));
+				if (player.isScylla()) bd.hint("Lift " + liftWhat + " and spray ink to the face of your foe surprising, arousing and blinding them (cooldown of " + cooldown + " rounds before it can be used again)");
+				else bd.hint("" + liftWha2 + "pray ink to the face of your foe surprising, arousing and blinding them (cooldown of " + cooldown + " rounds before it can be used again)");
+				if (monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind)) {
+					bd.disable("<b>" + monster.capitalA + monster.short + " is already affected by blind.</b>\n\n");
+				} else if (player.hasStatusEffect(StatusEffects.CooldownInkSpray)) {
+					bd.disable("<b>You need more time before you can shoot ink again.</b>\n\n");
+				}
+			}
+			if (player.hasVagina() && (player.cowScore() >= 9 || player.hasPerk(PerkLib.LactaBovinaOvaries))) {
+				var blaaaast2:String = player.hasPerk(PerkLib.LactaBovinaOvariesFinalForm) ? " (cooldown of 4 rounds before it can be used again)" : "";
+				bd = buttons.add("Milk Blast", milkBlast).hint("Blast your opponent with a powerful stream of milk, arousing and damaging them. The power of the jet is related to arousal, libido and production." + blaaaast2 + "\n");
+				if (player.hasPerk(PerkLib.LactaBovinaOvariesFinalForm)) bd.requireLust(200);
+				else bd.requireLust(100);
+				if (player.hasStatusEffect(StatusEffects.CooldownMilkBlast)) {
+					if (player.hasPerk(PerkLib.LactaBovinaOvariesFinalForm)) bd.disable("\n<b>You need more time before you can do it again.</b>");
+					else bd.disable("You can't use it more than once during fight.");
+				}
+			}
+			if (player.hasCock() && (player.minotaurScore() >= 9 || player.hasPerk(PerkLib.MinotaurTesticles))) {
+				var blaaaast1:String = player.hasPerk(PerkLib.MinotaurTesticlesFinalForm) ? " (cooldown of 4 rounds before it can be used again)" : "";
+				bd = buttons.add("Cum Cannon", cumCannon).hint("Blast your opponent with a powerful stream of cum, arousing and damaging them. The power of the jet is related to arousal, libido and production. " + blaaaast1 + "\n");
+				if (player.hasPerk(PerkLib.MinotaurTesticlesFinalForm)) bd.requireLust(200);
+				else bd.requireLust(100);
+				if (player.hasStatusEffect(StatusEffects.CooldownCumCannon)) {
+					if (player.hasPerk(PerkLib.MinotaurTesticlesFinalForm)) bd.disable("\n<b>You need more time before you can do it again.</b>");
+					else bd.disable("You can't use it more than once during fight.");
+				}
+			}
+			if ((player.pigScore() >= 8 || player.hasPerk(PerkLib.PigBoarFatFinalForm)) && player.thickness >= minThicknessReq()) {
+				bd = buttons.add("Body Slam", bodySlam).hint("Body slam your opponent (small chance to stun). Damage scale with toughness and thickness.");
+				bd.requireFatigue(physicalCost(50));
+			}
+			if (player.canFly()) {
+				var flightduration:Number = 6;
+				if (player.hasPerk(PerkLib.AdvancedAerialCombat)) flightduration += 2;
+				if (player.hasPerk(PerkLib.GreaterAerialCombat)) flightduration += 4;
+				buttons.add("Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to " + flightduration + " turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
+			}
+			if (player.isShieldsForShieldBash()) {
+				bd = buttons.add("Shield Bash", shieldBash).hint("Bash your opponent with a shield. Has a chance to stun. Bypasses stun immunity. \n\nThe more you stun your opponent, the harder it is to stun them again.");
+				bd.requireFatigue(physicalCost(20));
+			}
+			if (player.shieldName == "Battle Net") {
+				bd = buttons.add("Entangle", netEntangle).hint("Toss your net at the enemy to entangle it. (cooldown of 8 rounds before it can be used again)");
+				if (player.hasStatusEffect(StatusEffects.CooldownNet)) bd.disable("<b>You already used Sidewinder today.</b>\n\n");
+			}
+			if (player.weaponRangePerk == "Bow" && player.hasStatusEffect(StatusEffects.KnowsSidewinder)) {
+				bd = buttons.add("Sidewinder", archerSidewinder).hint("The pinacle art of the hunter. Once per day draw on your fatigue to shoot a single heavily infused arrow at a beast or animal morph. This attack never miss.");
+				if (player.hasStatusEffect(StatusEffects.CooldownSideWinder)) bd.disable("<b>You already used Sidewinder today.</b>\n\n");
+			}
 			if (monster.plural) {
-				if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 2) {
-					bd = buttons.add("Send T.Gol/3", sendTemporalGolem3)
-					  .hint("Send three golem from your bag to attack enemy. <b>After attack golems will fall apart and they cores can shatter leaving it unable to be reused in future!</b>");
-				}
-				if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 4) {
-					bd = buttons.add("Send T.Gol/5", sendTemporalGolem5)
-					  .hint("Send five golem from your bag to attack enemy. <b>After attack golems will fall apart and they cores can shatter leaving it unable to be reused in future!</b>");
-				}
-			}
-			if (monster.isFlying() && !player.hasPerk(PerkLib.ExpertGolemMaker)) {
-				bd.disable("Your golems can't attack flying targets. (Only golems made by expert golem maker can do this)");
-			}
-		}
-		if (flags[kFLAGS.PERNAMENT_GOLEMS_BAG] > 0) {
-			bd = buttons.add("Send P.Gol/1", sendPernamentGolem1)
-			  .hint("Send one golem from your bag to attack enemy.");
-			if (monster.plural) {
-				if (flags[kFLAGS.PERNAMENT_GOLEMS_BAG] > 2) {
-					bd = buttons.add("Send P.Gol/3", sendPernamentGolem3)
-					  .hint("Send three golem from your bag to attack enemy.");
-				}
-				if (flags[kFLAGS.PERNAMENT_GOLEMS_BAG] > 4) {
-					bd = buttons.add("Send P.Gol/5", sendPernamentGolem5)
-					  .hint("Send five golem from your bag to attack enemy.");
+				// Whipping
+				if (player.isWeaponsForWhipping()) buttons.add("Whipping", whipping).hint("Attack multiple opponent with your held weapon.  \n\n<b>AoE attack.</b>");
+				// Whirlwind
+				if ((player.isWeaponForWhirlwind() && !player.hasPerk(PerkLib.PowerSweep)) || ((player.isWeaponForWhirlwind() || player.isOneHandedWeapons()) && player.hasPerk(PerkLib.PowerSweep))) buttons.add("Whirlwind", whirlwind).hint("Spin your weapon around to attack multiple enemies at once.  \n\n<b>AoE attack.</b>");
+				// Whirlwind (Beast Warrior)
+				if (player.findPerk(PerkLib.JobBeastWarrior) >= 0 && ((player.weaponName == "fists" && player.haveNaturalClaws()) || player.haveNaturalClawsTypeWeapon())) buttons.add("F. Whirlwind", whirlwindClaws).hint("Spin yourself around to slash multiple enemies with your claws at once.  \n\n<b>AoE attack.</b>");
+				// Barrage
+				if (player.weaponRangePerk == "Bow" && player.hasStatusEffect(StatusEffects.KnowsBarrage)) {
+					buttons.add("Barrage", archerBarrage).hint("Draw multiple arrow and shoot them all at the same time to hit several target.  \n\n<b>AoE attack.</b>");
 				}
 			}
-			if (monster.isFlying() && !player.hasPerk(PerkLib.GrandMasterGolemMaker)) {
-				bd.disable("Your golems can't attack flying targets. (Only golems made by grand-master golem maker can do this)");
+			if (player.lowerBody == LowerBody.PLANT_FLOWER) {
+				// Pollen
+				bd = buttons.add("AlraunePollen", AlraunePollen).hint("Release a cloud of your pollen in the air to arouse your foe.");
+				if (player.hasStatusEffect(StatusEffects.AlraunePollen)) bd.disable("<b>You already spread your pollen over battlefield.</b>\n\n");
+				// Entangle
+				bd = buttons.add("Entangle", AlrauneEntangle).hint("Use your vines to hinder your opponent.");
+				if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) bd.disable("<b>You already entangle your opponent.</b>\n\n");
+			}
+			if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) {
+				bd = buttons.add("Strangulate", AlrauneStrangulate).hint("Strangle your opponent with your vines.");
+				bd.requireFatigue(physicalCost(60));
+				if (monster.tallness > 120 || monster.hasPerk(PerkLib.EnemyGigantType)) bd.disable("<b>Your opponent is too tall for Strangulate to have any effect on it.</b>\n\n");
+			}
+			if (player.hasKeyItem("Rocket Boots") >= 0 || player.hasKeyItem("Nitro Boots") >= 0) {
+				if (player.hasKeyItem("Nitro Boots") >= 0) bd = buttons.add("Blazing rocket kick", blazingRocketKick).hint("Deal fire damage using your boots. Also set burns.");
+				else bd = buttons.add("Rocket kick", blazingRocketKick).hint("Deal fire damage using your boots.");
+			}
+			if (player.arms.type == Arms.GARGOYLE) {
+				bd = buttons.add("Stone Claw", StoneClawAttack).hint("Rend your foe using your sharp stone claws.  \n\nWould go into cooldown after use for: 3 rounds");
+				if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(120));
+				else bd.requireFatigue(physicalCost(60));
+				if (player.hasStatusEffect(StatusEffects.CooldownStoneClaw)) {
+					bd.disable("<b>You need more time before you can perform Stone Claw again.</b>\n\n");
+				}
+			}
+			if (player.arms.type == Arms.GARGOYLE_2) {
+				bd = buttons.add("Stone Fist", StoneFistAttack).hint("Slam your two fist at your foe and attempt to stun them.  \n\nWould go into cooldown after use for: 3 rounds");
+				if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(120));
+				else bd.requireFatigue(physicalCost(60));
+				if (player.hasStatusEffect(StatusEffects.CooldownStoneFist)) {
+					bd.disable("<b>You need more time before you can perform Stone Fist again.</b>\n\n");
+				}
+			}
+			if (player.tailType == Tail.GARGOYLE) {
+				bd = buttons.add("Tail Slam", TailSlamAttack).hint("Slam your mace-like tail on your foe's head, dealing severe damage, crushing its defences, and stunning it.  \n\nWould go into cooldown after use for: 5 rounds");
+				if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(60));
+				else bd.requireFatigue(physicalCost(30));
+				if (player.hasStatusEffect(StatusEffects.CooldownTailSlam)) {
+					bd.disable("<b>You need more time before you can perform Tail Slam again.</b>\n\n");
+				}
+			}
+			if (player.tailType == Tail.GARGOYLE_2) {
+				bd = buttons.add("Tail Cleave", TailCleaveAttack).hint("Swipe your axe-bladed tail, cleaving through multiple opponents and dealing severe bleeding damage.  \n\nWould go into cooldown after use for: 5 rounds");
+				if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(60));
+				else bd.requireFatigue(physicalCost(30));
+				if (player.hasStatusEffect(StatusEffects.CooldownTailCleave)) {
+					bd.disable("<b>You need more time before you can perform Tail Cleave again.</b>\n\n");
+				}
+			}
+			if (player.wings.type == Wings.GARGOYLE_LIKE_LARGE) {
+				bd = buttons.add("Wing Buffet", WingBuffetAttack).hint("Buffet your foe using your two massive wings, staggering them.  \n\nWould go into cooldown after use for: 6 rounds");
+				if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(60));
+				else bd.requireFatigue(physicalCost(30));
+				if (player.hasStatusEffect(StatusEffects.CooldownWingBuffet)) {
+					bd.disable("<b>You need more time before you can perform Wing Buffet again.</b>\n\n");
+				}
 			}
 		}
-		if (player.isShieldsForShieldBash()) {
-			bd = buttons.add("Shield Bash", shieldBash).hint("Bash your opponent with a shield. Has a chance to stun. Bypasses stun immunity. \n\nThe more you stun your opponent, the harder it is to stun them again.");
-			bd.requireFatigue(physicalCost(20));
-		}
-		if (player.weaponRangePerk == "Bow" && player.hasStatusEffect(StatusEffects.KnowsSidewinder)) {
-			bd = buttons.add("Sidewinder", archerSidewinder).hint("The pinacle art of the hunter. Once per day draw on your fatigue to shoot a single heavily infused arrow at a beast or animal morph. This attack never miss.");
-			if (player.hasStatusEffect(StatusEffects.CooldownSideWinder)) bd.disable("<b>You already used Sidewinder today.</b>\n\n");
-		}
-		if (monster.plural) {
-			// Whipping
-			if (player.isWeaponsForWhipping()) buttons.add("Whipping", whipping).hint("Attack multiple opponent with your held weapon.  \n\n<b>AoE attack.</b>");
-			// Whirlwind
-			if ((player.isWeaponForWhirlwind() && !player.hasPerk(PerkLib.PowerSweep)) || ((player.isWeaponForWhirlwind() || player.isOneHandedWeapons()) && player.hasPerk(PerkLib.PowerSweep))) buttons.add("Whirlwind", whirlwind).hint("Spin your weapon around to attack multiple enemies at once.  \n\n<b>AoE attack.</b>");
-			// Whirlwind (Beast Warrior)
-			if (player.findPerk(PerkLib.JobBeastWarrior) >= 0 && ((player.weaponName == "fists" && player.haveNaturalClaws()) || player.haveNaturalClawsTypeWeapon())) buttons.add("F. Whirlwind", whirlwindClaws).hint("Spin yourself around to slash multiple enemies with your claws at once.  \n\n<b>AoE attack.</b>");
-			// Barrage
-			if (player.weaponRangePerk == "Bow" && player.hasStatusEffect(StatusEffects.KnowsBarrage)) {
-				buttons.add("Barrage", archerBarrage).hint("Draw multiple arrow and shoot them all at the same time to hit several target.  \n\n<b>AoE attack.</b>");
+		if (player.isInGoblinMech()) {
+			if (player.hasKeyItem("Taser") >= 0) {
+				if (player.hasKeyItem("Taser overcharge battery") >= 0) buttons.add("Tazer", mechTazer).hint("A voltage rod set on the mech as an upgrade can be used to temporarily paralyse the opponent. Deals some lesser lightning damage and stun for 4 rounds. \n\nWould go into cooldown after use for: 8 rounds");
+				else buttons.add("Tazer", mechTazer).hint("A voltage rod set on the mech as an upgrade can be used to temporarily paralyse the opponent. Deals no damage and stun for 2 rounds. \n\nWould go into cooldown after use for: 8 rounds");
+				if (player.hasStatusEffect(StatusEffects.CooldownTazer)) {
+					bd.disable("<b>You need more time before you can use Tazer again.</b>\n\n");
+				}
 			}
-		}
-		if (player.lowerBody == LowerBody.PLANT_FLOWER) {
-			// Pollen
-			bd = buttons.add("AlraunePollen", AlraunePollen).hint("Release a cloud of your pollen in the air to arouse your foe.");
-			if (player.hasStatusEffect(StatusEffects.AlraunePollen)) bd.disable("<b>You already spread your pollen over battlefield.</b>\n\n");
-			// Entangle
-			bd = buttons.add("Entangle", AlrauneEntangle).hint("Use your vines to hinder your opponent.");
-			if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) bd.disable("<b>You already entangle your opponent.</b>\n\n");
-		}
-		if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) {
-			bd = buttons.add("Strangulate", AlrauneStrangulate).hint("Strangle your opponent with your vines.");
-			bd.requireFatigue(physicalCost(60));
-			if (monster.tallness > 120 || monster.hasPerk(PerkLib.EnemyGigantType)) bd.disable("<b>Your opponent is too tall for Strangulate to have any effect on it.</b>\n\n");
-		}
-		if (player.arms.type == Arms.GARGOYLE) {
-			bd = buttons.add("Stone Claw", StoneClawAttack).hint("Rend your foe using your sharp stone claws.  \n\nWould go into cooldown after use for: 3 rounds");
-			if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(120));
-			else bd.requireFatigue(physicalCost(60));
-			if (player.hasStatusEffect(StatusEffects.CooldownStoneClaw)) {
-				bd.disable("<b>You need more time before you can perform Stone Claw again.</b>\n\n");
+			if (player.hasKeyItem("Dynapunch Glove") >= 0) {
+				buttons.add("Dynapunch G.", mechDynapunchGlove).hint("Shoot a springed gloved fist at the opponent with a rocket punch stunning for one round and dealing damage. \n\nWould go into cooldown after use for: 8 rounds");
+				if (player.hasStatusEffect(StatusEffects.CooldownDynapunchGlove)) {
+					bd.disable("<b>You need more time before you can use Dynapunch Glove again.</b>\n\n");
+				}
 			}
-		}
-		if (player.arms.type == Arms.GARGOYLE_2) {
-			bd = buttons.add("Stone Fist", StoneFistAttack).hint("Slam your two fist at your foe and attempt to stun them.  \n\nWould go into cooldown after use for: 3 rounds");
-			if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(120));
-			else bd.requireFatigue(physicalCost(60));
-			if (player.hasStatusEffect(StatusEffects.CooldownStoneFist)) {
-				bd.disable("<b>You need more time before you can perform Stone Fist again.</b>\n\n");
+			if (player.hasKeyItem("Whitefire Beam Cannon") >= 0) {
+				buttons.add("Whitefire B.C.", mechWhitefireBeamCannon).hint("Shoot with the whitefire beam cannon at enemy burning him. \n\nWould go into cooldown after use for: 8 rounds");
+				if (player.hasStatusEffect(StatusEffects.CooldownWhitefireBeamCannon)) {
+					bd.disable("<b>You need more time before you can use Whitefire Beam Cannon again.</b>\n\n");
+				}
 			}
-		}
-		if (player.tailType == Tail.GARGOYLE) {
-			bd = buttons.add("Tail Slam", TailSlamAttack).hint("Slam your mace-like tail on your foe's head, dealing severe damage, crushing its defences, and stunning it.  \n\nWould go into cooldown after use for: 5 rounds");
-			if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(60));
-			else bd.requireFatigue(physicalCost(30));
-			if (player.hasStatusEffect(StatusEffects.CooldownTailSlam)) {
-				bd.disable("<b>You need more time before you can perform Tail Slam again.</b>\n\n");
-			}
-		}
-		if (player.tailType == Tail.GARGOYLE_2) {
-			bd = buttons.add("Tail Cleave", TailCleaveAttack).hint("Swipe your axe-bladed tail, cleaving through multiple opponents and dealing severe bleeding damage.  \n\nWould go into cooldown after use for: 5 rounds");
-			if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(60));
-			else bd.requireFatigue(physicalCost(30));
-			if (player.hasStatusEffect(StatusEffects.CooldownTailCleave)) {
-				bd.disable("<b>You need more time before you can perform Tail Cleave again.</b>\n\n");
-			}
-		}
-		if (player.wings.type == Wings.GARGOYLE_LIKE_LARGE) {
-			bd = buttons.add("Wing Buffet", WingBuffetAttack).hint("Buffet your foe using your two massive wings, staggering them.  \n\nWould go into cooldown after use for: 6 rounds");
-			if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(60));
-			else bd.requireFatigue(physicalCost(30));
-			if (player.hasStatusEffect(StatusEffects.CooldownWingBuffet)) {
-				bd.disable("<b>You need more time before you can perform Wing Buffet again.</b>\n\n");
+			if (player.hasKeyItem("Snowball Generator") >= 0) {
+				buttons.add("Snowball G.", mechSnowballGenerator).hint("Activate the snowball generator taking aim and launching a volley of snowballs at the enemy. \n\nWould go into cooldown after use for: 8 rounds");
+				if (player.hasStatusEffect(StatusEffects.CooldownSnowballGenerator)) {
+					bd.disable("<b>You need more time before you can use Snowball Generator again.</b>\n\n");
+				}
 			}
 		}
 	}
 	internal function buildMenuForFlying(buttons:ButtonDataList):void {
 		var bd:ButtonData;
-		buttons.add("Great Dive", combat.greatDive).hint("Make a Great Dive to deal TONS of damage!");
-		//Embrace
-		if ((player.wings.type == Wings.BAT_ARM || player.wings.type == Wings.VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType)) {
-			buttons.add("Embrace", vampireEmbrace).hint("Embrace an opponent in your wings.");
-		}
-		//Sky Pounce
-		if (player.canPounce() && !monster.hasPerk(PerkLib.EnemyGroupType)) {
-			buttons.add("Skyrend", skyPounce).hint("Land into your enemy dealing damage and initiate a grapple combo. End flight.");
-		}				
-		//Tornado Strike
-		if (player.couatlScore() >= 11) {
-			bd = buttons.add("Tornado Strike", TornadoStrike).hint("Use wind to forcefully lift a foe in the air and deal damage.  \n\nWould go into cooldown after use for: 8 rounds");
-			if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(120));
-			else bd.requireFatigue(physicalCost(60));
-			if (player.hasStatusEffect(StatusEffects.CooldownTornadoStrike)) {
-				bd.disable("<b>You need more time before you can perform Tornado Strike again.</b>\n\n");
+		if (!player.isInGoblinMech()) {
+			buttons.add("Great Dive", combat.greatDive).hint("Make a Great Dive to deal TONS of damage!");
+			//Embrace
+			if ((player.wings.type == Wings.BAT_ARM || player.wings.type == Wings.VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType)) {
+				buttons.add("Embrace", vampireEmbrace).hint("Embrace an opponent in your wings.");
+			}
+			//Sky Pounce
+			if (player.canPounce() && !monster.hasPerk(PerkLib.EnemyGroupType)) {
+				buttons.add("Skyrend", skyPounce).hint("Land into your enemy dealing damage and initiate a grapple combo. End flight.");
+			}				
+			//Tornado Strike
+			if (player.couatlScore() >= 11) {
+				bd = buttons.add("Tornado Strike", TornadoStrike).hint("Use wind to forcefully lift a foe in the air and deal damage.  \n\nWould go into cooldown after use for: 8 rounds");
+				if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(120));
+				else bd.requireFatigue(physicalCost(60));
+				if (player.hasStatusEffect(StatusEffects.CooldownTornadoStrike)) {
+					bd.disable("<b>You need more time before you can perform Tornado Strike again.</b>\n\n");
+				}
+			}
+			//Wing Slap
+			if (player.haveWingsForWingSlap()) {
+				bd = buttons.add("Wing Slap", wingSlapAttack).hint("Slap enemy with your wings.");
+				if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(80));
+				else bd.requireFatigue(physicalCost(40));
 			}
 		}
-		//Wing Slap
-		if (player.haveWingsForWingSlap()) {
-			bd = buttons.add("Wing Slap", wingSlapAttack).hint("Slap enemy with your wings.");
-			if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(80));
-			else bd.requireFatigue(physicalCost(40));
+		if (player.isInGoblinMech()) {
+			if (player.hasKeyItem("Taser") >= 0) {
+				if (player.hasKeyItem("Taser overcharge battery") >= 0) buttons.add("Tazer", mechTazer).hint("A voltage rod set on the mech as an upgrade can be used to temporarily paralyse the opponent. Deals some lesser lightning damage and stun for 4 rounds. \n\nWould go into cooldown after use for: 8 rounds");
+				else buttons.add("Tazer", mechTazer).hint("A voltage rod set on the mech as an upgrade can be used to temporarily paralyse the opponent. Deals no damage and stun for 2 rounds. \n\nWould go into cooldown after use for: 8 rounds");
+				if (player.hasStatusEffect(StatusEffects.CooldownTazer)) {
+					bd.disable("<b>You need more time before you can use Tazer again.</b>\n\n");
+				}
+			}
+			if (player.hasKeyItem("Dynapunch Glove") >= 0) {
+				buttons.add("Dynapunch G.", mechDynapunchGlove).hint("Shoot a springed gloved fist at the opponent with a rocket punch stunning for one round and dealing damage. \n\nWould go into cooldown after use for: 8 rounds");
+				if (player.hasStatusEffect(StatusEffects.CooldownDynapunchGlove)) {
+					bd.disable("<b>You need more time before you can use Dynapunch Glove again.</b>\n\n");
+				}
+			}
+			if (player.hasKeyItem("Whitefire Beam Cannon") >= 0) {
+				buttons.add("Whitefire B.C.", mechWhitefireBeamCannon).hint("Shoot with the whitefire beam cannon at enemy burning him. \n\nWould go into cooldown after use for: 8 rounds");
+				if (player.hasStatusEffect(StatusEffects.CooldownWhitefireBeamCannon)) {
+					bd.disable("<b>You need more time before you can use Whitefire Beam Cannon again.</b>\n\n");
+				}
+			}
+			if (player.hasKeyItem("Snowball Generator") >= 0) {
+				buttons.add("Snowball G.", mechSnowballGenerator).hint("Activate the snowball generator taking aim and launching a volley of snowballs at the enemy. \n\nWould go into cooldown after use for: 8 rounds");
+				if (player.hasStatusEffect(StatusEffects.CooldownSnowballGenerator)) {
+					bd.disable("<b>You need more time before you can use Snowball Generator again.</b>\n\n");
+				}
+			}
 		}
 	}
 	
 	public function powerAttackMenu():void {
 		menu();
 		if (player.hasPerk(PerkLib.JobWarrior) || player.hasPerk(PerkLib.JobBeastWarrior)) {
-			addButton(0, "2x", powerAttack2x).disableIf(player.wrath < 50,"You are too calm to use this special. Req. 50+ wrath");
+			addButton(0, "2x", powerAttack2x).disableIf(player.wrath < powerfistscoooooost(),"You are too calm to use this special. Req. " + powerfistscoooooost() + "+ wrath");
 			if (player.level >= 6) {
-				addButton(1, "3x", powerAttack3x).disableIf(player.wrath < 100,"You are too calm to use this special. Req. 100+ wrath");
+				addButton(1, "3x", powerAttack3x).disableIf(player.wrath < (powerfistscoooooost() * 2),"You are too calm to use this special. Req. " + powerfistscoooooost() * 2 + "+ wrath");
 			} else addButtonDisabled(1, "???");
 			if (player.level >= 12) {
-				addButton(2, "4x", powerAttack4x).disableIf(player.wrath < 200,"You are too calm to use this special. Req. 200+ wrath");
+				addButton(2, "4x", powerAttack4x).disableIf(player.wrath < (powerfistscoooooost() * 4),"You are too calm to use this special. Req. " + powerfistscoooooost() * 4 + "+ wrath");
 			} else addButtonDisabled(2, "???");
 			if (player.level >= 18) {
-				addButton(3, "5x", powerAttack5x).disableIf(player.wrath < 300,"You are too calm to use this special. Req. 300+ wrath");
+				addButton(3, "5x", powerAttack5x).disableIf(player.wrath < (powerfistscoooooost() * 6),"You are too calm to use this special. Req. " + powerfistscoooooost() * 6 + "+ wrath");
 			} else addButtonDisabled(3, "???");
 			if (player.level >= 24) {
-				addButton(4, "6x", powerAttack6x).disableIf(player.wrath < 400,"You are too calm to use this special. Req. 400+ wrath");
+				addButton(4, "6x", powerAttack6x).disableIf(player.wrath < (powerfistscoooooost() * 8),"You are too calm to use this special. Req. " + powerfistscoooooost() * 8 + "+ wrath");
 			} else addButtonDisabled(4, "???");
 			if (player.level >= 30) {
-				addButton(5, "7x", powerAttack7x).disableIf(player.wrath < 500,"You are too calm to use this special. Req. 500+ wrath");
+				addButton(5, "7x", powerAttack7x).disableIf(player.wrath < (powerfistscoooooost() * 10),"You are too calm to use this special. Req. " + powerfistscoooooost() * 10 + "+ wrath");
 			} else addButtonDisabled(5, "???");
 			if (player.level >= 36) {
-				addButton(6, "8x", powerAttack8x).disableIf(player.wrath < 600,"You are too calm to use this special. Req. 600+ wrath");
+				addButton(6, "8x", powerAttack8x).disableIf(player.wrath < (powerfistscoooooost() * 12),"You are too calm to use this special. Req. " + powerfistscoooooost() * 12 + "+ wrath");
 			} else addButtonDisabled(6, "???");
 		}
 		else addButton(0, "2x", powerAttack2x).disableIf(player.wrath < 200,"You are too calm to use this special. Req. 200+ wrath");
@@ -390,7 +422,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function powerAttack2x():void {
 		clearOutput();
-		if (player.hasPerk(PerkLib.JobWarrior) || player.hasPerk(PerkLib.JobBeastWarrior)) player.wrath -= 50;
+		if (player.hasPerk(PerkLib.JobWarrior) || player.hasPerk(PerkLib.JobBeastWarrior)) player.wrath -= powerfistscoooooost();
 		else player.wrath -= 200;
 		if (player.canFly()) outputText("You fly by your opponent, striking with your [weapon], utilizing  your full strength in tandem with your flight momentum. ");
 		else if (player.isTaur()) {
@@ -402,7 +434,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 2;
-		if (player.weapon == weapons.PRURUMI && player.spe >= 150) PAMulti += powerfistsmultipoweeeeer();
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
 		damage += powerfistspoweeeeer();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -433,7 +465,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function powerAttack3x():void {
 		clearOutput();
-		player.wrath -= 100;
+		player.wrath -= powerfistscoooooost() * 2;
 		if (player.canFly()) outputText("You fly by your opponent, striking with your [weapon], utilizing  your full strength in tandem with your flight momentum. ");
 		else if (player.isTaur()) {
 			outputText("You ");
@@ -444,7 +476,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 3;
-		if (player.weapon == weapons.PRURUMI && player.spe >= 150) PAMulti += powerfistsmultipoweeeeer();
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
 		damage += powerfistspoweeeeer();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -475,7 +507,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function powerAttack4x():void {
 		clearOutput();
-		player.wrath -= 200;
+		player.wrath -= powerfistscoooooost() * 4;
 		if (player.canFly()) outputText("You fly by your opponent, striking with your [weapon], utilizing  your full strength in tandem with your flight momentum. ");
 		else if (player.isTaur()) {
 			outputText("You ");
@@ -486,7 +518,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 4;
-		if (player.weapon == weapons.PRURUMI && player.spe >= 150) PAMulti += powerfistsmultipoweeeeer();
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
 		damage += powerfistspoweeeeer();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -517,7 +549,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function powerAttack5x():void {
 		clearOutput();
-		player.wrath -= 300;
+		player.wrath -= powerfistscoooooost() * 6;
 		if (player.canFly()) outputText("You fly by your opponent, striking with your [weapon], utilizing  your full strength in tandem with your flight momentum. ");
 		else if (player.isTaur()) {
 			outputText("You ");
@@ -528,7 +560,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 5;
-		if (player.weapon == weapons.PRURUMI && player.spe >= 150) PAMulti += powerfistsmultipoweeeeer();
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
 		damage += powerfistspoweeeeer();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -559,7 +591,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function powerAttack6x():void {
 		clearOutput();
-		player.wrath -= 400;
+		player.wrath -= powerfistscoooooost() * 8;
 		if (player.canFly()) outputText("You fly by your opponent, striking with your [weapon], utilizing  your full strength in tandem with your flight momentum. ");
 		else if (player.isTaur()) {
 			outputText("You ");
@@ -570,7 +602,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 6;
-		if (player.weapon == weapons.PRURUMI && player.spe >= 150) PAMulti += powerfistsmultipoweeeeer();
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
 		damage += powerfistspoweeeeer();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -601,7 +633,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function powerAttack7x():void {
 		clearOutput();
-		player.wrath -= 500;
+		player.wrath -= powerfistscoooooost() * 10;
 		if (player.canFly()) outputText("You fly by your opponent, striking with your [weapon], utilizing  your full strength in tandem with your flight momentum. ");
 		else if (player.isTaur()) {
 			outputText("You ");
@@ -612,7 +644,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 7;
-		if (player.weapon == weapons.PRURUMI && player.spe >= 150) PAMulti += powerfistsmultipoweeeeer();
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
 		damage += powerfistspoweeeeer();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -643,7 +675,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function powerAttack8x():void {
 		clearOutput();
-		player.wrath -= 600;
+		player.wrath -= powerfistscoooooost() * 12;
 		if (player.canFly()) outputText("You fly by your opponent, striking with your [weapon], utilizing  your full strength in tandem with your flight momentum. ");
 		else if (player.isTaur()) {
 			outputText("You ");
@@ -654,7 +686,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 8;
-		if (player.weapon == weapons.PRURUMI && player.spe >= 150) PAMulti += powerfistsmultipoweeeeer();
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
 		damage += powerfistspoweeeeer();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -683,6 +715,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		enemyAI();
 	}
+	public function powerfistscoooooost():Number {
+		var powerfistscostvalue:Number = 50;
+		return powerfistscostvalue;
+	}
 	public function powerfistspoweeeeer():Number {
 		var powerfistspowervalue:Number = 0;
 		powerfistspowervalue += player.str;
@@ -704,29 +740,47 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.isMeetingNaturalJousterReq()) powerfistspowervalue *= 3;
 			if (player.isMeetingNaturalJousterMasterGradeReq()) powerfistspowervalue *= 5;
 		}
-		if (player.weapon == weapons.RCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+		if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
 			if (monster.hasPerk(PerkLib.IceNature)) powerfistspowervalue *= 5;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) powerfistspowervalue *= 2;
 			if (monster.hasPerk(PerkLib.IceVulnerability)) powerfistspowervalue *= 0.5;
 			if (monster.hasPerk(PerkLib.FireNature)) powerfistspowervalue *= 0.2;
 		}
-		if (player.weapon == weapons.SCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+		if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
 			if (monster.hasPerk(PerkLib.IceNature)) powerfistspowervalue *= 0.2;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) powerfistspowervalue *= 0.5;
 			if (monster.hasPerk(PerkLib.IceVulnerability)) powerfistspowervalue *= 2;
 			if (monster.hasPerk(PerkLib.FireNature)) powerfistspowervalue *= 5;
 		}
-			if (player.weapon == weapons.TCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+		if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
 			if (monster.findPerk(PerkLib.DarknessNature) >= 0) powerfistspowervalue *= 5;
 			if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) powerfistspowervalue *= 2;
 			if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) powerfistspowervalue *= 0.5;
 			if (monster.findPerk(PerkLib.LightningNature) >= 0) powerfistspowervalue *= 0.2;
 		}
-		if (player.weapon == weapons.ACLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+		if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
 			if (monster.findPerk(PerkLib.DarknessNature) >= 0) powerfistspowervalue *= 0.2;
 			if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) powerfistspowervalue *= 0.5;
 			if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) powerfistspowervalue *= 2;
 			if (monster.findPerk(PerkLib.LightningNature) >= 0) powerfistspowervalue *= 5;
+		}
+		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
+			if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) powerfistspowervalue *= 2.2;
+			else powerfistspowervalue *= 2;
+			if (monster.hasPerk(PerkLib.IceNature)) powerfistspowervalue *= 10;
+			if (monster.hasPerk(PerkLib.FireVulnerability)) powerfistspowervalue *= 4;
+			if (monster.hasPerk(PerkLib.FireNature)) powerfistspowervalue *= 0.4;
+			if (player.hasPerk(PerkLib.FireAffinity)) powerfistspowervalue *= 2;
+		}
+		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
+			var powerfistspowervalue1:Number = powerfistspowervalue;
+			if (monster.hasPerk(PerkLib.IceNature)) powerfistspowervalue1 += (powerfistspowervalue1 * 0.5);
+			if (monster.hasPerk(PerkLib.FireVulnerability)) powerfistspowervalue1 += (powerfistspowervalue1 * 0.2);
+			if (monster.hasPerk(PerkLib.IceVulnerability)) powerfistspowervalue1 += (powerfistspowervalue1 * 0.05);
+			if (monster.hasPerk(PerkLib.FireNature)) powerfistspowervalue1 += (powerfistspowervalue1 * 0.02);
+			if (player.hasPerk(PerkLib.FireAffinity)) powerfistspowervalue1 *= 2;
+			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
+			powerfistspowervalue += powerfistspowervalue1;
 		}
 		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) powerfistspowervalue *= combat.historyFighterBonus();
 		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) powerfistspowervalue *= 1 + player.perkv1(PerkLib.DemonSlayer);
@@ -745,6 +799,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 			powerfistsmultipowervalue += 1;
 			if (player.spe >= 225) powerfistsmultipowervalue += 1;
 			if (player.spe >= 300) powerfistsmultipowervalue += 1;
+		}
+		if (player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) {
+			powerfistsmultipowervalue += 1;
 		}
 		return powerfistsmultipowervalue;
 	}
@@ -776,25 +833,25 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (3.75 + ((player.weaponAttack - 100) * 0.02));
 		else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (4.75 + ((player.weaponAttack - 150) * 0.015));
 		else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
-		if (player.weapon == weapons.RCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+		if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
 			if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
 			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
 			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
 		}
-		if (player.weapon == weapons.SCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+		if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
 			if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.5;
 			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;
 			if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
 		}
-			if (player.weapon == weapons.TCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
 			if (monster.findPerk(PerkLib.DarknessNature) >= 0) damage *= 5;
 			if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) damage *= 2;
 			if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) damage *= 0.5;
 			if (monster.findPerk(PerkLib.LightningNature) >= 0) damage *= 0.2;
 		}
-		if (player.weapon == weapons.ACLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+		if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
 			if (monster.findPerk(PerkLib.DarknessNature) >= 0) damage *= 0.2;
 			if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) damage *= 0.5;
 			if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) damage *= 2;
@@ -869,6 +926,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("You strike " + monster.a + " " + monster.short + " vitals with your [weapon]. ");
 		var damage:Number = 0;
 		var SAMulti:Number = 2;
+		if (player.weapon == weapons.ANGSTD) SAMulti += 2;
 		if (player.hasPerk(PerkLib.DeadlySneaker)) SAMulti += 2;
 		if (player.hasPerk(PerkLib.Slayer)) SAMulti += 3;
 		damage += player.str;
@@ -1248,6 +1306,24 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.JobMonk)) damage += (10 * (1 + player.newGamePlusMod()));
 		if (player.hasStatusEffect(StatusEffects.Berzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 		if (player.hasStatusEffect(StatusEffects.Lustzerking)) damage += (30 + (15 * player.newGamePlusMod()));
+		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
+			if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
+			else damage *= 2;
+			if (monster.hasPerk(PerkLib.IceNature)) damage *= 10;
+			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 4;
+			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.4;
+			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+		}
+		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
+			var damage1:Number = damage;
+			if (monster.hasPerk(PerkLib.IceNature)) damage1 += (damage1 * 0.5);
+			if (monster.hasPerk(PerkLib.FireVulnerability)) damage1 += (damage1 * 0.2);
+			if (monster.hasPerk(PerkLib.IceVulnerability)) damage1 += (damage1 * 0.05);
+			if (monster.hasPerk(PerkLib.FireNature)) damage1 += (damage1 * 0.02);
+			if (player.hasPerk(PerkLib.FireAffinity)) damage1 *= 2;
+			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
+			damage += damage1;
+		}
 		//other bonuses
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
@@ -1584,6 +1660,24 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage += player.str;
 			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 			if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+			if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
+				if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
+				else damage *= 2;
+				if (monster.hasPerk(PerkLib.IceNature)) damage *= 10;
+				if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 4;
+				if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.4;
+				if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+			}
+			if (player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
+				var damage1:Number = damage;
+				if (monster.hasPerk(PerkLib.IceNature)) damage1 += (damage1 * 0.5);
+				if (monster.hasPerk(PerkLib.FireVulnerability)) damage1 += (damage1 * 0.2);
+				if (monster.hasPerk(PerkLib.IceVulnerability)) damage1 += (damage1 * 0.05);
+				if (monster.hasPerk(PerkLib.FireNature)) damage1 += (damage1 * 0.02);
+				if (player.hasPerk(PerkLib.FireAffinity)) damage1 *= 2;
+				if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
+				damage += damage1;
+			}
 			damage *= monster.damagePercent() / 100;
 			if (damage < 5) damage = 5;
 			damage = Math.round(damage);
@@ -1914,6 +2008,27 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage = doDamage(damage);
 		outputText("You tighten your vines around your opponent's neck to strangle it. " + monster.capitalA + monster.short + " struggles against your natural noose, getting obvious marks on its neck and " + damage + " damage for their trouble.\n\n");
 		enemyAI();
+	}
+
+	public function blazingRocketKick():void {
+		clearOutput();
+		outputText("You propel yourself up and kick " + monster.a + monster.short + " in the face leaving burns in the process.  ");
+		var damage:Number = 0;
+		damage += unarmedAttack();
+		damage *= spellMod();
+		damage = Math.round(damage);
+		damage = doDamage(damage);//phys dmg
+		damage = doDamage(damage);//fire dmg
+		if (player.hasKeyItem("Nitro Boots") >= 0) {
+			outputText(" Your foe catches on fire too.");
+			monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
+		}
+		checkAchievementDamage(damage);
+		outputText("\n\n");
+		combat.heroBaneProc(damage);
+		doNext(playerMenu);
+		if (monster.HP <= 0) doNext(endHpVictory);
+		else enemyAI();
 	}
 
 	public function StoneClawAttack():void {
@@ -2979,6 +3094,24 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 				if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 				if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+				if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
+					if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
+					else damage *= 2;
+					if (monster.hasPerk(PerkLib.IceNature)) damage *= 10;
+					if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 4;
+					if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.4;
+					if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+				}
+				if (player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
+					var damage1:Number = damage;
+					if (monster.hasPerk(PerkLib.IceNature)) damage1 += (damage1 * 0.5);
+					if (monster.hasPerk(PerkLib.FireVulnerability)) damage1 += (damage1 * 0.2);
+					if (monster.hasPerk(PerkLib.IceVulnerability)) damage1 += (damage1 * 0.05);
+					if (monster.hasPerk(PerkLib.FireNature)) damage1 += (damage1 * 0.02);
+					if (player.hasPerk(PerkLib.FireAffinity)) damage1 *= 2;
+					if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
+					damage += damage1;
+				}
 				damage = doDamage(damage);
 			}
 			//Different horns damage messages
@@ -3098,6 +3231,24 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 				if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 				if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+				if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
+					if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
+					else damage *= 2;
+					if (monster.hasPerk(PerkLib.IceNature)) damage *= 10;
+					if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 4;
+					if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.4;
+					if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+				}
+				if (player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
+					var damage1:Number = damage;
+					if (monster.hasPerk(PerkLib.IceNature)) damage1 += (damage1 * 0.5);
+					if (monster.hasPerk(PerkLib.FireVulnerability)) damage1 += (damage1 * 0.2);
+					if (monster.hasPerk(PerkLib.IceVulnerability)) damage1 += (damage1 * 0.05);
+					if (monster.hasPerk(PerkLib.FireNature)) damage1 += (damage1 * 0.02);
+					if (player.hasPerk(PerkLib.FireAffinity)) damage1 *= 2;
+					if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
+					damage += damage1;
+				}
 				//Round it off
 				damage = int(damage);
 				damage = doDamage(damage, true);
@@ -3662,6 +3813,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		else enemyAI();
 	}
+	public function netEntangle():void {
+		clearOutput();
+		outputText("You skillfully toss your net at " + monster.a + monster.short + " restraining " + monster.pronoun3 + " movement.");
+		player.createStatusEffect(StatusEffects.CooldownNet,8,0,0,0);
+		monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
+		enemyAI();
+	}
 	public function archerSidewinder():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
@@ -3713,6 +3871,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= combat.historyScoutBonus();
 		if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
+		if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 		if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
 			if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
 			else {
@@ -3933,6 +4092,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		dmgBarrage *= 6;
 		if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) dmgBarrage *= combat.historyScoutBonus();
 		if (player.hasPerk(PerkLib.JobRanger)) dmgBarrage *= 1.05;
+		if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) dmgBarrage *= 1 + (player.jewelryEffectMagnitude / 100);
 		if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
 			if (player.statusEffectv1(StatusEffects.Kelt) < 100) dmgBarrage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
 			else {
@@ -3989,9 +4149,159 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		return dmgBarrage;
 	}
+	
+	public function mechTazer():void {
+		clearOutput();
+		outputText("You press the lightning button and aim smirking at " + monster.a + monster.short + ", your mech delivering a ");
+		player.createStatusEffect(StatusEffects.CooldownTazer,8,0,0,0);
+		if (player.hasKeyItem("Taser overcharge battery") >= 0) {
+			var damage:Number = scalingBonusIntelligence() * spellModWhite();
+			//Determine if critical hit!
+			var crit:Boolean = false;
+			var critChance:int = 5;
+			critChance += combatMagicalCritical();
+			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+			if (rand(100) < critChance) {
+				crit = true;
+				damage *= 1.75;
+			}
+			//High damage to goes.
+			damage = calcVoltageMod(damage);
+			if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 5;
+			if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 2;
+			if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 0.5;
+			if (monster.hasPerk(PerkLib.LightningNature)) damage *= 0.2;
+			if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 2;
+			if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
+			damage *= 0.5;
+			damage = Math.round(damage);
+			outputText("potent discharge <b><font color=\"#800000\">" + damage + "</font></b> damage!");
+			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+			monster.createStatusEffect(StatusEffects.Stunned,4,0,0,0);
+			monster.HP -= damage;
+		}
+		else {
+			outputText("discharge!");
+			monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+		}
+		statScreenRefresh();
+		enemyAI();
+	}
+	
+	public function mechSnowballGenerator():void {
+		clearOutput();
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		outputText("You activate the snowball generator taking aim and launching a volley of snowballs at the " + monster.a + monster.short + " for ");
+		player.createStatusEffect(StatusEffects.CooldownSnowballGenerator,8,0,0,0);
+		var damage:Number;
+		damage = scalingBonusIntelligence() * spellModBlack() * 4;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
+		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.5;
+		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;
+		if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
+		if (player.hasPerk(PerkLib.ColdMastery)) damage *= 2;
+		if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
+		if (combat.wearingWinterScarf()) damage *= 1.2;
+		damage = Math.round(damage);
+		outputText(" (" + damage + ") damage!");
+		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		outputText("\n\n");
+		monster.HP -= damage;
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		enemyAI();
+	}
+	
+	public function mechWhitefireBeamCannon():void {
+		clearOutput();
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		outputText("You shoot with the whitefire beam cannon at " + monster.a + monster.short + " burning " + monster.pronoun3 + " badly for ");
+		player.createStatusEffect(StatusEffects.CooldownWhitefireBeamCannon,8,0,0,0);
+		var damage:Number;
+		damage = scalingBonusIntelligence() * spellModWhite() * 4;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
+		if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
+		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
+		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
+		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
+		if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
+		if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+		damage = Math.round(damage);
+		outputText(" (" + damage + ") damage!");
+		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		outputText("\n\n");
+		monster.HP -= damage;
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		enemyAI();
+	}
+	
+	public function mechDynapunchGlove():void {
+		clearOutput();
+		outputText("You launch the mech springed glove at " + monster.a + monster.short + " hitting " + monster.pronoun3 + " straight in the face for a K.O. " + monster.a + monster.short + " is hit for ");
+		player.createStatusEffect(StatusEffects.CooldownDynapunchGlove,8,0,0,0);
+		var damage:Number = 0;
+		damage += player.str;
+		damage += scalingBonusStrength() * 0.25;
+		if (damage < 10) damage = 10;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 15;
+		var critDamage:Number = 1.75;
+		critChance += combatPhysicalCritical();
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= critDamage;
+		}
+		//Apply AND DONE!
+		damage *= (monster.damagePercent() / 100);
+		damage = Math.round(damage);
+		if (damage < 10) damage = 10;
+		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
+		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
+		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
+		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
+		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+		if (player.hasPerk(PerkLib.GoblinoidBlood)) {
+			if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
+			if (player.hasKeyItem("Powboy") >= 0) damage *= 1.15;
+			if (player.hasKeyItem("M.G.S. bracer") >= 0) damage *= 1.2;
+		}
+		damage = doDamage(damage);
+		outputText(" damage");
+		if (!monster.hasPerk(PerkLib.Resolute)) {
+			outputText(" stunning " + monster.pronoun3 + " for the round");
+			monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
+		}
+		outputText(".");
+		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		outputText("\n\n");
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		enemyAI();
+	}
 
 	public function PhysicalSpecials() {
 	}
 }
 }
-
+

@@ -71,7 +71,7 @@ use namespace CoC;
 		public function moveBoobCrash():void {
 			if (game.flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1) outputText("Etna flies down");
 			else outputText("The flying manticore dives");
-			outputText(" in your direction crashing into you breasts first! For a few seconds you go red in confusion and arousal as your face is lost in her cleavage, then she pulls off leaving you dazed and aroused as she readies her next attack!");
+			outputText(" in your direction crashing into you breasts first! For a few seconds you go red in confusion and arousal as your face is lost in her cleavage then she pulls off leaving you dazed and aroused as she readies her next attack!");
 			var boobcrashdmg:Number = Math.round(this.str / 8);
 			var lustdmg:Number = Math.round(this.lib / 3);
 			player.dynStats("lus", lustdmg, "scale", false);

@@ -505,7 +505,7 @@ package classes.Scenes.NPCs
 					itype = undergarments.SS_LOIN;
 					break;
 				default:
-					outputText("Something bugged! Please report this bug to Ormael/Aimozg/Oxdeception.");
+					outputText("Something bugged! Please report this bug to Ormael/Aimozg.");
 					itype = armors.SS_ROBE;
 				}
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;
@@ -594,7 +594,7 @@ package classes.Scenes.NPCs
 					itype = undergarments.DS_LOIN;
 					break;
 				default:
-					outputText("Something bugged! Please report this bug to Ormael/Aimozg/Oxdeception.");
+					outputText("Something bugged! Please report this bug to Ormael/Aimozg.");
 					itype = armors.DSCLROB;
 				}
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;
@@ -727,7 +727,7 @@ package classes.Scenes.NPCs
 					itype = undergarments.R_THONG;
 					break;
 				default:
-					outputText("Something bugged! Please report this bug to Ormael/Aimozg/Oxdeception.");
+					outputText("Something bugged! Please report this bug to Ormael/Aimozg.");
 					itype = armors.EWJACK_;
 				}
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;
@@ -782,7 +782,7 @@ package classes.Scenes.NPCs
 				itype = weapons.WDSTAFF;
 				break;
 			default:
-				outputText("Something bugged! Please report this bug to Ormael/Aimozg/Oxdeception.");
+				outputText("Something bugged! Please report this bug to Ormael/Aimozg.");
 				itype = weapons.WGSWORD;
 			}
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;

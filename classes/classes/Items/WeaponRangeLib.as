@@ -18,10 +18,15 @@ package classes.Items
 		public const ADBSHOT:WeaponRangeWithPerk = new WeaponRangeWithPerk("DBShot", "A.D.B.Shotgun", "antique double barrel shotgun", "an antique double barrel shotgun", "shot", 26, 880, "This is a double barrel shotgun. It slug not fracture on many fragmetns after leaving muzzle but it's still not the most accurate weapon. Which it make up by high damage of each slug.", "Rifle",
 				PerkLib.Accuracy2,20,0,0,0);
 		public const ARTEMIS:Artemis = new Artemis();
+		public const AVELYNN:WeaponRangeWithPerk = new WeaponRangeWithPerk("Avelynn", "Avelynn", "Avelynn", "Avelynn", "shot", 40, 6000, "A marvel of goblin prehistory before the time the first firearms were created, Avelynn prototype 3.0 is designed with several chained mechanism in order to allow firing up to 3 bolts all at the same time. Despite being primitive by modern goblin design this exquisite tool of death does its job well.", "Crossbow",
+				PerkLib.Accuracy1,60,0,0,0);
 		public const BEA_BOW:BeautifulBow = new BeautifulBow();
+		public const B_F_BOW:BFBow = new BFBow();
+		public const BFXBOW_:WeaponRangeWithPerk = new WeaponRangeWithPerk("BFXBow", "BFXBow", "big fucking crossbow", "a big fucking crossbow", "shot", 60, 3000, "Big Fucking Crossbow - the best solution for a tiny e-pen complex at this side of the Mareth!", "Crossbow",
+				PerkLib.Accuracy1,60,0,0,0);
 		public const BLUNDER:WeaponRange = new WeaponRange("Blunder", "Blunderbuss", "blunderbuss rifle", "a blunderbuss rifle", "shot", 16, 590, "This is a blunderbuss rifle. It's effective at short range but poor at long range.", "Rifle");
-		public const BOWGUID:WeaponRange = new WeaponRange("BowGuid", "BowGuided", "Guided bow", "a Guided bow", "shot", 1, 400, "A bow ornemented with a small carving representing a target. It seems to never miss no mather how poorly you aim.", "Bow");
-		public const BOWHODR:WeaponRangeWithPerk = new WeaponRangeWithPerk("BowHodr", "BowHodr", "Hodr's bow", "a Hodr's bow", "shot", 22, 2200, "Once was a frost giant wielding this bow and boasting to be the best hunter. To punish him Fera cursed him and his weapon rendering him permanently blind. Regardless, arrows drawn by this bow seems to seek out the eyes of its target.", "Bow",
+		public const BOWGUID:WeaponRange = new WeaponRange("BowGuid", "BowGuided", "Guided bow", "a Guided bow", "shot", 6, 2400, "A bow ornemented with a small carving representing a target. It seems to never miss no mather how poorly you aim.", "Bow");
+		public const BOWHODR:WeaponRangeWithPerk = new WeaponRangeWithPerk("BowHodr", "BowHodr", "Hodr's bow", "a Hodr's bow", "shot", 25, 3000, "Once was a frost giant wielding this bow and boasting to be the best hunter. To punish him Fera cursed him and his weapon rendering him permanently blind. Regardless, arrows drawn by this bow seems to seek out the eyes of its target.", "Bow",
 				PerkLib.Accuracy2,10,0,0,0);
 		public const BOWHUNT:WeaponRange = new WeaponRange("BowHunt", "BowHunt", "hunter bow", "a hunter bow", "shot", 10, 500, "This is a hunter bow. It allow to attain better accuracy of shooted arrows than long bow at the cost of slight lower damage.", "Bow");
 		public const BOWKELT:WeaponRangeWithPerk = new WeaponRangeWithPerk("BowTain", "BowTain", "tainted bow", "a tainted bow", "shot", 30, 1500, "This bow is tainted by corruption in the past. It's quite effective at both short and long range. It balance helps uset to increase shooting accuracy quite a bit compared to other bows.", "Bow",
@@ -34,7 +39,7 @@ package classes.Items
 				PerkLib.Accuracy2,50,0,0,0);
 		public const DUEL_P_:WeaponRangeWithPerk = new WeaponRangeWithPerk("DuelP", "DuelingP", "dueling pistol", "a dueling pistol", "shot", 20, 430, "A pistol for duels between gentelmen. Or just for shooting. Can shoot only once before it need reload.", "Pistol",
 				PerkLib.Accuracy2,10,0,0,0);
-		public const EVELYN_:WeaponRangeWithPerk = new WeaponRangeWithPerk("Evelyn", "Evelyn", "Evelyn", "Evelyn", "shot", 40, 2000, "This is a blunderbuss rifle. It's effective at short range but poor at long range.", "Crossbow",
+		public const EVELYN_:WeaponRangeWithPerk = new WeaponRangeWithPerk("Evelyn", "Evelyn", "Evelyn", "Evelyn", "shot", 40, 6000, "A marvel of goblin prehistory before the time the first firearms were created, Avelynn prototype 3.0 is designed with several chained mechanism in order to allow firing up to 3 bolts all at the same time. Despite being primitive by modern goblin design this exquisite tool of death does its job well.", "Crossbow",
 				PerkLib.Accuracy1,60,0,0,0);
 		public const FLINTLK:WeaponRange = new WeaponRange("Flintlk", "Flintlock", "flintlock pistol", "a flintlock pistol", "shot", 14, 310, "A flintlock pistol. Pew pew pew. Can fire once before a reload is required.", "Pistol");
 		public const GTHRAXE:WeaponRange = new WeaponRange("GThrAxe", "GThrowAxes", "gnoll throwing axes", "a gnoll throwing axes", "shot", 25, 1250, "A set of throwing axes made and used by the gnoll barbarian, they are actually heavier than standard throwing weapon but all the more effective. You can carry up to 10 on you and need to retrieve them after battles.", "Throwing");

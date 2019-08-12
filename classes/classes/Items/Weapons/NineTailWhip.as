@@ -15,12 +15,10 @@ package classes.Items.Weapons
 		{
 			super("NTWhip ", "NineTailWhip", "nine tail whip", "a nine tail whip", "whipping", 18, 720, "A rope that unravelled into three small ropes, each of which is unravelled again designed to whip your foes into submission.", "Large");
 		}
-		
+		//przerobić na mid grade wrath weapon?
 		override public function get attack():Number {
 			var boost:int = 0;
 			var base:int = 0;
-			base += 5;
-			if (game.player.findPerk(PerkLib.ArcaneLash) >= 0) boost += 2;
 			if ((game.player.str + game.player.spe) >= 120) {
 				base += 9;
 				if (game.player.findPerk(PerkLib.ArcaneLash) >= 0) boost += 4;
@@ -29,7 +27,8 @@ package classes.Items.Weapons
 				base += 4;
 				if (game.player.findPerk(PerkLib.ArcaneLash) >= 0) boost += 2;
 			}
-			return (base + boost); 
+			if (((game.player.str + game.player.spe) < 60) && game.player.findPerk(PerkLib.ArcaneLash) >= 0) boost += 2;
+			return (5 + base + boost); 
 		}
 		
 		override public function canUse():Boolean {

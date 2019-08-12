@@ -275,8 +275,8 @@ package classes.GlobalFlags
 		public static const UNKNOWN_ACHIEVEMENT_235:int			= 235;
 		public static const UNKNOWN_ACHIEVEMENT_236:int			= 236;
 		public static const UNKNOWN_ACHIEVEMENT_237:int			= 237;
-		public static const UNKNOWN_ACHIEVEMENT_238:int			= 238;
-		public static const UNKNOWN_ACHIEVEMENT_239:int			= 239;
+		public static const EPIC_GUARDIAN_OF_NOTRE_DAME:int	= 238;
+		public static const EPIC_THE_DEVIL_WEARS_PRADA:int	= 239;
 		
 		
 		public static const GENERAL_JUST_TO_SPITE_YOU:int							= 240;
@@ -310,8 +310,6 @@ package classes.GlobalFlags
 		public static const UNDERGROUND_POPULATION_CITY_STATE:int			= 266; //Underground Population 5,000 (shadow achievement)
 		public static const UNDERGROUND_POPULATION_KINGDOM:int				= 267; //Underground Population 10,000 (shadow achievement)
 		public static const POPULATION_LARGE_EMPIRE:int						= 268; //Population 10,000 (shadow achievement)
-		
-		public static const LEVEL_SOVEREIGN:int								= 038; //Level 90
 		
 		public static const GENERAL_FAPSTER_2:int								= 269;
 		public static const GENERAL_LEGO_WO_MAN:int								= 270;
@@ -353,10 +351,40 @@ package classes.GlobalFlags
 		public static const ZONE_305:int		= 305;//100 exploration of x2
 		
 		public static const GENERAL_TEXAS_RANGER:int			= 306;
-		public static const UNKNOWN_ACHIEVEMENT_307:int			= 307;//GENERAL_VAN_DAMME_IT
-		public static const UNKNOWN_ACHIEVEMENT_308:int			= 308;
-		public static const UNKNOWN_ACHIEVEMENT_309:int			= 309;
-		public static const UNKNOWN_ACHIEVEMENT_310:int			= 310;
+		public static const UNKNOWN_ACHIEVEMENT_307:int			= 307;	//GENERAL_VAN_DAMME_IT
+		public static const LEVEL_SOVEREIGN:int					= 308;	//Level 90
+		public static const FASHION_KA_CHING:int				= 309;
+		public static const FASHION_ROYALTY:int					= 310;
+		public static const FASHION_COSPLAYER_1:int				= 311;
+		public static const FASHION_HELLBLAZER:int				= 312;
+		public static const FASHION_LESS_THAN_ZERO:int			= 313;
+		public static const FASHION_THUNDERSTUCK:int			= 314;
+		public static const FASHION_DARKNESS_WITHIN:int			= 315;
+		public static const FASHION_POISON_IVY:int				= 316;
+		public static const FASHION_POLAYBOY_BUNNY:int			= 317;
+		public static const FASHION_COSPLAYER_2:int				= 318;
+		public static const FASHION_COSPLAYER_3:int				= 319;
+		public static const FASHION_COSPLAYER_4:int				= 320;
+		public static const WEALTH_POOR_DAOIST:int				= 321;
+		public static const WEALTH_SECTS_CONCLAVE_STUDENT:int	= 322;
+		public static const WEALTH_SECTS_HEAD_ELDER:int			= 323;
+		public static const WEALTH_SECTS_PATRIARCH:int			= 324;
+		public static const WEALTH_MENG_HAO:int					= 325;
+		public static const FASHION_THRONE_OF_INTELLIGENCE:int	= 326;
+		public static const FASHION_THRONE_OF_LIBIDO:int		= 327;
+		public static const FASHION_THRONE_OF_SENSITIVITY:int	= 328;
+		public static const FASHION_THRONE_OF_SPEED:int			= 329;
+		public static const FASHION_THRONE_OF_STRENGTH:int		= 330;
+		public static const FASHION_THRONE_OF_TOUGHNESS:int		= 331;
+		public static const FASHION_THRONE_OF_WISDOM:int		= 332;
+		public static const UNKNOWN_ACHIEVEMENT_333:int			= 333;
+		public static const UNKNOWN_ACHIEVEMENT_334:int			= 334;
+		public static const UNKNOWN_ACHIEVEMENT_335:int			= 335;
+		public static const UNKNOWN_ACHIEVEMENT_336:int			= 336;
+		public static const UNKNOWN_ACHIEVEMENT_337:int			= 337;
+		public static const UNKNOWN_ACHIEVEMENT_338:int			= 338;
+		public static const UNKNOWN_ACHIEVEMENT_339:int			= 339;
+		public static const UNKNOWN_ACHIEVEMENT_340:int			= 340;
 		
 	}
 

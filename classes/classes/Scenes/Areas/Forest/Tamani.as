@@ -6,11 +6,14 @@ import classes.BodyParts.Hips;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Monsters.Goblin;
 import classes.Scenes.SceneLib;
+import classes.Scenes.UniqueSexScenes;
 import classes.internals.*;
 
 public class Tamani extends Goblin
 	{
 
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		
 		override protected function goblinTeaseAttack():void
 		{
 			if(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] > 0) {
@@ -90,12 +93,14 @@ public class Tamani extends Goblin
 				outputText("  You could fuck her, but if that's the case why did you bother fighting her?\n\nWhat do you do to her?");
 				var temp:Function = null;
 				var temp2:Function = null;
-				if(player.hasCock() && player.cockThatFits(analCapacity()) >= 0) temp = SceneLib.forest.tamaniScene.tamaniAnalShits;
+				var temp3:Function = null;
+				if (player.hasCock() && player.cockThatFits(analCapacity()) >= 0) temp = SceneLib.forest.tamaniScene.tamaniAnalShits;
+				if (player.pcCanUseUniqueSexScene()) temp3 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
 				//NOT PREGGERS
 				if (!SceneLib.forest.tamaniScene.pregnancy.isPregnant && player.canOvipositSpider()) {
 					temp2 = SceneLib.forest.tamaniScene.tamaniBeaten;
 				}
-				EngineCore.simpleChoices("Fuck", SceneLib.forest.tamaniScene.tamaniSexWon, "Buttfuck", temp, "", null, "Lay Eggs", temp2, "Leave", SceneLib.combat.cleanupAfterCombatImpl);
+				EngineCore.simpleChoices("Fuck", SceneLib.forest.tamaniScene.tamaniSexWon, "Buttfuck", temp, "Lay Eggs", temp2, "U. Sex Scenes", temp3, "Leave", SceneLib.combat.cleanupAfterCombatImpl);
 			}
 			else SceneLib.combat.cleanupAfterCombatImpl();
 		}

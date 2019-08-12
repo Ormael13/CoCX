@@ -98,6 +98,7 @@ use namespace CoC;
 		public function returnToCampUseFourHours():void { returnToCamp(4); } //Replacement for event number 15;
 		public function returnToCampUseSixHours():void { returnToCamp(6); }
 		public function returnToCampUseEightHours():void { returnToCamp(8); } //Replacement for event number 16;
+		public function returnToCampUseTwelveHours():void { returnToCamp(12); }
 		
 //  SLEEP_WITH:int = 701;
 
@@ -950,6 +951,8 @@ public function companionsCount():Number {
 
 public function followersCount():Number {
 	var counter:Number = 0;
+	if (flags[kFLAGS.ALVINA_FOLLOWER] > 12) counter++;
+	if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3) counter++;
 	if (emberScene.followerEmber()) counter++;
 	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
 	if (player.hasStatusEffect(StatusEffects.PureCampJojo)) counter++;
@@ -1015,6 +1018,7 @@ public function loversCount():Number {
 
 public function loversHotBathCount():Number {
 	var counter:Number = 0;
+	if (flags[kFLAGS.ALVINA_FOLLOWER] > 12) counter++;
 	if (emberScene.followerEmber()) counter++;
 	if (sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
 	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) counter++;
@@ -1035,6 +1039,18 @@ public function loversHotBathCount():Number {
 	if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && flags[kFLAGS.JOY_COCK_SIZE] < 1) counter++;
 	if (flags[kFLAGS.SIDONIE_FOLLOWER] >= 1) counter++;
 	if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) counter++;
+	return counter;
+}
+
+public function maleNpcsHotBathCount():Number {
+	var counter:Number = 0;
+	if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] < 3) counter++;
+	if (player.hasStatusEffect(StatusEffects.CampRathazul)) counter++;
+	if (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] < 1 && flags[kFLAGS.ARIAN_COCK_SIZE] > 0) counter++;
+	if (flags[kFLAGS.IZMA_BROFIED] == 1) counter++;
+	if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) counter++;
+	if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3) counter++;
+	if (emberScene.followerEmber() && flags[kFLAGS.EMBER_GENDER] == 1) counter++;
 	return counter;
 }
 
@@ -1468,6 +1484,16 @@ public function campFollowers(descOnly:Boolean = false):void {
         //ADD MENU FLAGS/INDIVIDUAL FOLLOWER TEXTS
 		menu();
 	}
+	//Alvina
+	if (flags[kFLAGS.ALVINA_FOLLOWER] > 12) {
+		outputText("Alvina isn’t so far from here, having made her camp in a corrupted plant groove she created so to have easy access to reagents.\n\n");
+		buttons.add( "Alvina", SceneLib.alvinaFollower.alvinaMainCampMenu).hint("Check up on Alvina.");
+	}
+	//Siegweird
+	if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3) {
+		outputText("\n\n");
+		buttons.add( "Siegweird", SceneLib.siegweirdFollower.siegweirdMainCampMenu).hint("Check up on Siegweird.");
+	}
 	//Ember
 	if(emberScene.followerEmber()) {
 		emberScene.emberCampDesc();
@@ -1511,7 +1537,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText(" cabin");
 			if (!(model.time.hours > 4 && model.time.hours < 23)) outputText(" and the mouse is sleeping on it right now.\n\n");
 			else outputText(", though the mouse is probably hanging around the camp's perimeter.\n\n");
-			buttons.add( "Jojo", jojoScene.jojoCamp2).hint("Go find Jojo around the edges of your camp and meditate with him or talk about watch duty.").disableIf(player.statusEffectv2(StatusEffects.CampLunaMishaps1) > 0,"Annoyed.");
+			buttons.add( "Jojo", jojoScene.jojoCamp2).hint("Go find Jojo around the edges of your camp and meditate with him or talk about watch duty.").disableIf(player.statusEffectv2(StatusEffects.CampLunaMishaps1) > 0,"Annoyed.");//wpisać blokowanie mishapów jak opcja wyłączenia jej jest aktywna
 		}
 	}
 	//Celess
@@ -1668,6 +1694,24 @@ private function campActions():void {
 	menu();
 	clearOutput();
 	outputText("What would you like to do?");
+	addButton(0, "SpentTime", campMiscActions).hint("Check your options to spend time in and around camp.");
+	addButton(1, "Build", campBuildingSim).hint("Check your camp build options.");
+	addButton(2, "Read Codex", codex.accessCodexMenu).hint("Read any codex entries you have unlocked.");
+	addButton(3, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
+	if (flags[kFLAGS.LETHICE_DEFEATED] > 0) addButton(4, "Ascension", promptAscend).hint("Perform an ascension? This will restart your adventures with your items, and gems carried over. The game will also get harder.");
+	//addButton(5, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
+	if (player.hasPerk(PerkLib.JobElementalConjurer) >= 0 || player.hasPerk(PerkLib.JobGolemancer) >= 0) addButton(6, "Winions", campWinionsArmySim).hint("Check your options for making some Winions.");
+	else addButtonDisabled(6, "Winions", "You need to be able to make some minions that fight for you to use this option like elementals or golems...");
+	if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) addButton(9, "Fishery", VisitFishery).hint("Visit Fishery.");
+	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2) addButton(10, "Ward", MagicWardMenu).hint("Activate or Deactivate Magic Ward around camp.");
+	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) addButton(11, "Kitsune Shrine", campScenes.KitsuneShrine).hint("Meditate at camp Kitsune Shrine.");
+	if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(12, "Hot Spring", campScenes.HotSpring).hint("Visit Hot Spring.");
+	addButton(13, "NPC's", SparrableNPCsMenu);
+	addButton(14, "Back", playerMenu);
+}
+
+private function campMiscActions():void {
+	menu();
 	addButton(0, "SwimInStream", swimInStream).hint("Swim in stream and relax to pass time.", "Swim In Stream");
 	addButton(1, "ExaminePortal", examinePortal).hint("Examine the portal. This scene is placeholder.", "Examine Portal"); //Examine portal.
 	if (model.time.hours == 19) {
@@ -1679,20 +1723,8 @@ private function campActions():void {
 	else {
 		addButtonDisabled(2, "Watch Sky", "The option to watch sunset is available at 7pm.");
 	}
-	addButton(3, "Read Codex", codex.accessCodexMenu).hint("Read any codex entries you have unlocked.");
-	if (flags[kFLAGS.LETHICE_DEFEATED] > 0) addButton(4, "Ascension", promptAscend).hint("Perform an ascension? This will restart your adventures with your items, and gems carried over. The game will also get harder.");
-	addButton(5, "Build", campBuildingSim).hint("Check your camp build options.");
-	if (player.hasPerk(PerkLib.JobElementalConjurer) >= 0 || player.hasPerk(PerkLib.JobGolemancer) >= 0) addButton(6, "Winions", campWinionsArmySim).hint("Check your options for making some Winions.");
-	else addButtonDisabled(6, "Winions", "You need to be able to make some minions that fight for you to use this option like elementals or golems...");
-	//addButton(7, "Heal", spellHealcamp).hint("Heal.  \n\nMana Cost: 30");
-	//addButton(8, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
-	if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) addButton(8, "Fishery", VisitFishery).hint("Visit Fishery.");
-	addButton(9, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
-	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2) addButton(10, "Ward", MagicWardMenu).hint("Activate or Deactivate Magic Ward around camp.");
-	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) addButton(11, "Kitsune Shrine", campScenes.KitsuneShrine).hint("Meditate at camp Kitsune Shrine.");
-	if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(12, "Hot Spring", campScenes.HotSpring).hint("Visit Hot Spring.");
-	addButton(13, "NPC's", SparrableNPCsMenu);
-	addButton(14, "Back", playerMenu);
+	addButton(3, "Fill bottle", fillUpPillBottle).hint("Fill up one of your pill bottles.");
+	addButton(14, "Back", campActions);
 }
 
 private function campBuildingSim():void {
@@ -1713,7 +1745,7 @@ private function campWinionsArmySim():void {
 	menu();
 	addButton(0, "Make", campMake.accessMakeWinionsMainMenu).hint("Check your options for making some golems.");
 	if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > 0) addButton(1, "Summon", campMake.accessSummonElementalsMainMenu).hint("Check your options for managing your elemental summons.");
-	else addButtonDisabled(1, "Summon", "You should first build Arcane Circle.");
+	else addButtonDisabled(1, "Summon", "You should first build Arcane Circle. Without some tools from the carpenter's toolbox it would be near impossible to do this.");
 	addButton(14, "Back", campActions);
 }
 
@@ -1731,6 +1763,25 @@ private function MagicWardMenu():void {
 		flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] = 2;
 		doNext(campActions);
 		return;
+	}
+}
+
+private function fillUpPillBottle():void {
+	if ((player.hasItem(consumables.LG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1)))) {
+		outputText("\n\nYou pick up one of your empty pills bottle and starts to put in some of your loose low-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
+		player.destroyItems(useables.E_P_BOT, 1);
+		player.destroyItems(consumables.LG_SFRP, 10);
+		inventory.takeItem(consumables.LGSFRPB, campMiscActions);
+	}
+	else if ((player.hasItem(consumables.MG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1)))) {
+		outputText("\n\nYou pick up one of your empty pills bottle and starts to put in some of your loose low-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
+		player.destroyItems(useables.E_P_BOT, 1);
+		player.destroyItems(consumables.MG_SFRP, 10);
+		inventory.takeItem(consumables.MGSFRPB, campMiscActions);
+	}
+	else {
+		outputText("\n\nYou not have either enough pills of any type or bottles to do this currently.");
+		doNext(campMiscActions);
 	}
 }
 
@@ -3039,6 +3090,8 @@ private function ascendForReal():void {
 	var performancePoints:int = 0;
 	//Companions
 	performancePoints += companionsCount();
+	if (flags[kFLAGS.ALVINA_FOLLOWER] == 12) performancePoints++;
+	if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 3) performancePoints++;
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 2) performancePoints++;
 	if (flags[kFLAGS.PATCHOULI_FOLLOWER] == 3) performancePoints++;
 	if (player.hasStatusEffect(StatusEffects.DianaOff)) performancePoints++;
@@ -4023,16 +4076,43 @@ private function updateAchievements():void {
 	
 	//Fashion
 	if (player.armor == armors.W_ROBES && player.weapon == weapons.W_STAFF) awardAchievement("Wannabe Wizard", kACHIEVEMENTS.FASHION_WANNABE_WIZARD);
-	if (player.previouslyWornClothes.length >= 10) awardAchievement("Cosplayer", kACHIEVEMENTS.FASHION_COSPLAYER);
-	if ((player.armor == armors.RBBRCLT || player.armor == armors.BONSTRP || player.armor == armors.NURSECL) && (player.weapon == weapons.RIDINGC || player.weapon == weapons.WHIP || player.weapon == weapons.SUCWHIP)) awardAchievement("Dominatrix", kACHIEVEMENTS.FASHION_DOMINATRIX);
+	if (player.previouslyWornClothes.length >= 10) awardAchievement("Cosplayer (Beginner)", kACHIEVEMENTS.FASHION_COSPLAYER);
+	if (player.previouslyWornClothes.length >= 30) awardAchievement("Cosplayer (Amateour)", kACHIEVEMENTS.FASHION_COSPLAYER_1);
+	if (player.previouslyWornClothes.length >= 60) awardAchievement("Cosplayer (Recognizable)", kACHIEVEMENTS.FASHION_COSPLAYER_2);
+	if (player.previouslyWornClothes.length >= 100) awardAchievement("Cosplayer (Seasonal)", kACHIEVEMENTS.FASHION_COSPLAYER_1);
+	if (player.previouslyWornClothes.length >= 150) awardAchievement("Cosplayer (Proffesional)", kACHIEVEMENTS.FASHION_COSPLAYER_2);
+	//if (player.previouslyWornClothes.length >= 210) awardAchievement("Jessica Nigri apprentice", kACHIEVEMENTS.FASHION_COSPLAYER_3);
+	//if (player.previouslyWornClothes.length >= 270) awardAchievement("Yaya Han apprentice", kACHIEVEMENTS.FASHION_COSPLAYER_4);
+	if ((player.armor == armors.RBBRCLT || player.armor == armors.BONSTRP || player.armor == armors.NURSECL) && 
+	(player.weapon == weapons.RIDINGC || player.weapon == weapons.WHIP || player.weapon == weapons.SUCWHIP || player.weapon == weapons.L_WHIP || player.weapon == weapons.PSWHIP || player.weapon == weapons.PWHIP || player.weapon == weapons.BFWHIP || player.weapon == weapons.DBFWHIP || player.weapon == weapons.NTWHIP || player.weapon == weapons.CNTWHIP)) awardAchievement("Dominatrix", kACHIEVEMENTS.FASHION_DOMINATRIX);
 	if (player.armor != ArmorLib.NOTHING && player.lowerGarment == UndergarmentLib.NOTHING && player.upperGarment == UndergarmentLib.NOTHING) awardAchievement("Going Commando", kACHIEVEMENTS.FASHION_GOING_COMMANDO);
+	if (player.headJewelry == headjewelries.FIRECRO && player.necklace == necklaces.FIRENEC && player.jewelry == jewelries.FIRERNG && player.jewelry2 == jewelries.FIRERNG && player.jewelry3 == jewelries.FIRERNG && player.jewelry4 == jewelries.FIRERNG) awardAchievement("Hellblazer", kACHIEVEMENTS.FASHION_HELLBLAZER);
+	if (player.headJewelry == headjewelries.ICECROW && player.necklace == necklaces.ICENECK && player.jewelry == jewelries.ICERNG && player.jewelry2 == jewelries.ICERNG && player.jewelry3 == jewelries.ICERNG && player.jewelry4 == jewelries.ICERNG) awardAchievement("Less than Zero", kACHIEVEMENTS.FASHION_LESS_THAN_ZERO);
+	if (player.headJewelry == headjewelries.LIGHCRO && player.necklace == necklaces.LIGHNEC && player.jewelry == jewelries.LIGHRNG && player.jewelry2 == jewelries.LIGHRNG && player.jewelry3 == jewelries.LIGHRNG && player.jewelry4 == jewelries.LIGHRNG) awardAchievement("Thunderstuck", kACHIEVEMENTS.FASHION_THUNDERSTUCK);
+	if (player.headJewelry == headjewelries.DARKCRO && player.necklace == necklaces.DARKNEC && player.jewelry == jewelries.DARKRNG && player.jewelry2 == jewelries.DARKRNG && player.jewelry3 == jewelries.DARKRNG && player.jewelry4 == jewelries.DARKRNG) awardAchievement("Darkness Within", kACHIEVEMENTS.FASHION_DARKNESS_WITHIN);
+	if (player.headJewelry == headjewelries.POISCRO && player.necklace == necklaces.POISNEC && player.jewelry == jewelries.POISRNG && player.jewelry2 == jewelries.POISRNG && player.jewelry3 == jewelries.POISRNG && player.jewelry4 == jewelries.POISRNG) awardAchievement("Poison Ivy", kACHIEVEMENTS.FASHION_POISON_IVY);
+	if (player.headJewelry == headjewelries.LUSTCRO && player.necklace == necklaces.LUSTNEC && player.jewelry == jewelries.LUSTRNG && player.jewelry2 == jewelries.LUSTRNG && player.jewelry3 == jewelries.LUSTRNG && player.jewelry4 == jewelries.LUSTRNG) awardAchievement("Playboy Bunny", kACHIEVEMENTS.FASHION_POLAYBOY_BUNNY);
+	if (player.headJewelry == headjewelries.CROWINT && player.necklace == necklaces.NECKINT && player.jewelry == jewelries.RINGINT && player.jewelry2 == jewelries.RINGINT && player.jewelry3 == jewelries.RINGINT && player.jewelry4 == jewelries.RINGINT) awardAchievement("Throne of Intelligence", kACHIEVEMENTS.FASHION_THRONE_OF_INTELLIGENCE);
+	if (player.headJewelry == headjewelries.CROWLIB && player.necklace == necklaces.NECKLIB && player.jewelry == jewelries.RINGLIB && player.jewelry2 == jewelries.RINGLIB && player.jewelry3 == jewelries.RINGLIB && player.jewelry4 == jewelries.RINGLIB) awardAchievement("Throne of Libido", kACHIEVEMENTS.FASHION_THRONE_OF_LIBIDO);
+	if (player.headJewelry == headjewelries.CROWSEN && player.necklace == necklaces.NECKSEN && player.jewelry == jewelries.RINGSEN && player.jewelry2 == jewelries.RINGSEN && player.jewelry3 == jewelries.RINGSEN && player.jewelry4 == jewelries.RINGSEN) awardAchievement("Throne of Sensitivity", kACHIEVEMENTS.FASHION_THRONE_OF_SENSITIVITY);
+	if (player.headJewelry == headjewelries.CROWSPE && player.necklace == necklaces.NECKSPE && player.jewelry == jewelries.RINGSPE && player.jewelry2 == jewelries.RINGSPE && player.jewelry3 == jewelries.RINGSPE && player.jewelry4 == jewelries.RINGSPE) awardAchievement("Throne of Speed", kACHIEVEMENTS.FASHION_THRONE_OF_SPEED);
+	if (player.headJewelry == headjewelries.CROWSTR && player.necklace == necklaces.NECKSTR && player.jewelry == jewelries.RINGSTR && player.jewelry2 == jewelries.RINGSTR && player.jewelry3 == jewelries.RINGSTR && player.jewelry4 == jewelries.RINGSTR) awardAchievement("Throne of Strength", kACHIEVEMENTS.FASHION_THRONE_OF_STRENGTH);
+	if (player.headJewelry == headjewelries.CROWTOU && player.necklace == necklaces.NECKTOU && player.jewelry == jewelries.RINGTOU && player.jewelry2 == jewelries.RINGTOU && player.jewelry3 == jewelries.RINGTOU && player.jewelry4 == jewelries.RINGTOU) awardAchievement("Throne of Toughness", kACHIEVEMENTS.FASHION_THRONE_OF_TOUGHNESS);
+	if (player.headJewelry == headjewelries.CROWWIS && player.necklace == necklaces.NECKWIS && player.jewelry == jewelries.RINGWIS && player.jewelry2 == jewelries.RINGWIS && player.jewelry3 == jewelries.RINGWIS && player.jewelry4 == jewelries.RINGWIS) awardAchievement("Throne of Wisdom", kACHIEVEMENTS.FASHION_THRONE_OF_WISDOM);
 	if (player.jewelry.value >= 1000) awardAchievement("Bling Bling", kACHIEVEMENTS.FASHION_BLING_BLING);
+	if (player.necklace.value >= 5000) awardAchievement("Ka-Ching!", kACHIEVEMENTS.FASHION_KA_CHING);
+	if (player.headJewelry.value >= 4000) awardAchievement("Royalty", kACHIEVEMENTS.FASHION_ROYALTY);
 	
 	//Wealth
 	if (player.gems >= 1000) awardAchievement("Rich", kACHIEVEMENTS.WEALTH_RICH);
 	if (player.gems >= 10000) awardAchievement("Hoarder", kACHIEVEMENTS.WEALTH_HOARDER);
 	if (player.gems >= 100000) awardAchievement("Gem Vault", kACHIEVEMENTS.WEALTH_GEM_VAULT);
 	if (player.gems >= 1000000) awardAchievement("Millionaire", kACHIEVEMENTS.WEALTH_MILLIONAIRE);
+	if (flags[kFLAGS.SPIRIT_STONES] >= 200) awardAchievement("Poor Daoist", kACHIEVEMENTS.WEALTH_POOR_DAOIST);
+	if (flags[kFLAGS.SPIRIT_STONES] >= 2000) awardAchievement("Sect's Conclave Student", kACHIEVEMENTS.WEALTH_SECTS_CONCLAVE_STUDENT);
+	if (flags[kFLAGS.SPIRIT_STONES] >= 20000) awardAchievement("Sect's Head Elder", kACHIEVEMENTS.WEALTH_SECTS_HEAD_ELDER);
+	if (flags[kFLAGS.SPIRIT_STONES] >= 500000) awardAchievement("Sect's Patriarch", kACHIEVEMENTS.WEALTH_SECTS_PATRIARCH);
+	if (flags[kFLAGS.SPIRIT_STONES] >= 20000000) awardAchievement("Meng Hao", kACHIEVEMENTS.WEALTH_MENG_HAO);
 	
 	//Combat
 	if (player.hasStatusEffect(StatusEffects.KnowsCharge) && player.hasStatusEffect(StatusEffects.KnowsChargeA) && player.hasStatusEffect(StatusEffects.KnowsBlind) && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && player.hasStatusEffect(StatusEffects.KnowsBlizzard) && player.hasStatusEffect(StatusEffects.KnowsLightningBolt) && player.hasStatusEffect(StatusEffects.KnowsChainLighting) && player.hasStatusEffect(StatusEffects.KnowsPyreBurst) ) awardAchievement("Gandalf", kACHIEVEMENTS.COMBAT_GANDALF);
@@ -4178,6 +4258,9 @@ private function updateAchievements():void {
 	if (player.newGamePlusMod() >= 1) awardAchievement("xXx2: The Next Level", kACHIEVEMENTS.EPIC_XXX2_THE_NEXT_LEVEL);
 	if (player.newGamePlusMod() >= 2) awardAchievement("xXx: The Return of Mareth Champion", kACHIEVEMENTS.EPIC_XXX_THE_RETURN_OF_MARETH_CHAMPION);
 	
+	if (player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) awardAchievement("Guardian of Notre-Dame", kACHIEVEMENTS.EPIC_GUARDIAN_OF_NOTRE_DAME);
+	if (player.hasStatusEffect(StatusEffects.PlayerPhylactery)) awardAchievement("The Devil Wears Prada", kACHIEVEMENTS.EPIC_THE_DEVIL_WEARS_PRADA);
+	
 	if (player.hasStatusEffect(StatusEffects.AchievementsNormalShadowTotal)) {
 		//Shadow
 		if (player.statusEffectv2(StatusEffects.AchievementsNormalShadowTotal) >= 1) awardAchievement("Shadow Initiate", kACHIEVEMENTS.SHADOW_INITIATE);
@@ -4206,4 +4289,4 @@ private function fixHistory():void {
 */
 }
 }
-
+

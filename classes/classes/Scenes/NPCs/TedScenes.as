@@ -6,9 +6,12 @@ package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.UniqueSexScenes;
 
 public class TedScenes extends NPCAwareContent
 	{
+		
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 		
 		public function TedScenes() 
 		{
@@ -57,10 +60,17 @@ public function introPostHiddenCave():void {
 	doNext(playerMenu);
 }
 public function defeatedTedPostHiddenCave():void {
-	if (flags[kFLAGS.TED_LVL_UP] >= 2) {
+	if (flags[kFLAGS.TED_LVL_UP] >= 3) {
 		outputText(".");
 		outputText("\n\n\"<i>My Dao Heart is firm.</i>\" he recite before escaping with help of smokescreen.\n\n");//WIP post combat version
-	}//w walce po której Ted awansuje do lvl 27 dać fragment gdzie on lub ktoś inny jak npc. jakiś loli bat golem co Ted ją znalazł do pomocy zdradza jego imi typu: mistrzu ted bla bla bla
+		menu();
+		if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+		addButton(14, "Leave", cleanupAfterCombat);
+	}
+	if (flags[kFLAGS.TED_LVL_UP] == 2) {
+		outputText(".");
+		outputText("\n\n\"<i>My Dao Heart is firm.</i>\" he recite before escaping with help of smokescreen.\n\n");//WIP post combat version
+	}//w walce po której Ted awansuje do lvl 27 dać fragment gdzie on lub ktoś inny jak npc. jakiś loli bat golem co Ted ją znalazł do pomocy zdradza jego imie typu: mistrzu ted bla bla bla
 	else if (flags[kFLAGS.TED_LVL_UP] == 1 && flags[kFLAGS.TED_DEFEATS_COUNTER] == 2) {
 		outputText(". Expecting him to pull some weird move again you try to reach him but he's again faster. He throws something on the ground, causing a bright flash of light that blinds you temporarily. After you can see again, he's already gone, without even leaving any witty remarks during his escape.\n\n");
 		levelingHimself();

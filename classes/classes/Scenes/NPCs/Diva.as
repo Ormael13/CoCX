@@ -7,6 +7,7 @@ import classes.BodyParts.Wings;
 import classes.CoC;
 import classes.EngineCore;
 import classes.Monster;
+import classes.PerkLib;
 import classes.StatusEffects;
 import classes.VaginaClass;
 import classes.internals.ChainedDrop;
@@ -125,7 +126,7 @@ public class Diva extends Monster {
     }
     private function moveDarkness():void{
         display("moves/darkness",{$final:finalFight});
-        player.createStatusEffect(StatusEffects.Blind,999,0,0,0);
+        if (!player.hasPerk(PerkLib.BlindImmunity)) player.createStatusEffect(StatusEffects.Blind,999,0,0,0);
     }
     private function moveSonicScream():void{
         display("moves/sonicScream",{$final:finalFight});

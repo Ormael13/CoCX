@@ -8,6 +8,7 @@ public class Achievements extends BaseContent
 	{
 		public var achievementsEarned:int = 0;
 		public var achievementsShadowEarned:int = 0;
+		public var achievementsTotalCurrentlyUnlocked:int = 0;
 		public var achievementsTotal:int = 0;
 		
 		public function Achievements() 
@@ -23,11 +24,13 @@ public class Achievements extends BaseContent
 			outputText("<li><b>" + title + ":</b> ");
 			if (achievements[achievement] > 0) {
 				outputText("<font color=\"#008000\">Unlocked</font> - " + descUnlocked);
+				achievementsTotalCurrentlyUnlocked++;
 				achievementsEarned++;
 			}
 			else outputText("<font color=\"#800000\">Locked</font> - " + descLocked);
 			if (isShadow) {
 				outputText(" - <font color=\"#660066\">Shadow Achievement</font>");
+				achievementsTotalCurrentlyUnlocked++;
 				achievementsShadowEarned++;
 			}
 			outputText("</li>");
@@ -40,6 +43,8 @@ public class Achievements extends BaseContent
 		
 		public function achievementsScreen():void {
 			achievementsEarned = 0;
+			achievementsShadowEarned = 0;
+			achievementsTotalCurrentlyUnlocked = 0;
 			achievementsTotal = 0;
 			clearOutput();
 			EngineCore.displayHeader("Achievements");
@@ -49,6 +54,7 @@ public class Achievements extends BaseContent
 			addAchievement("Marae's Savior", kACHIEVEMENTS.STORY_MARAE_SAVIOR, "Complete Marae's quest.");
 			addAchievement("Revenge at Last", kACHIEVEMENTS.STORY_ZETAZ_REVENGE, "Defeat Zetaz and obtain the map.");
 			addAchievement("Demon Slayer", kACHIEVEMENTS.STORY_FINALBOSS, "Defeat Lethice.");
+			
 			titleAchievementSection("Zones"); //23 achievements
 			addAchievement("Explorer", kACHIEVEMENTS.ZONE_EXPLORER, "Discover every zone.");
 			addAchievement("Sightseer", kACHIEVEMENTS.ZONE_SIGHTSEER, "Discover every place.");
@@ -142,18 +148,44 @@ public class Achievements extends BaseContent
 			addAchievement("Tiger stalking the Dragon", kACHIEVEMENTS.DUNGEON_TIGER_STALKING_THE_DRAGON, "Fully clear the Hidden Cave.");
 			addAchievement("Slain the Heroslayer", kACHIEVEMENTS.DUNGEON_SLAIN_THE_HEROSLAYER, "Fully clear the Den of Desire.");
 			
-			titleAchievementSection("Fashion"); //5 achievements
+			titleAchievementSection("Fashion"); //24 achievements
 			addAchievement("Wannabe Wizard", kACHIEVEMENTS.FASHION_WANNABE_WIZARD, "Equip wizard robes and magic staff.");
-			addAchievement("Cosplayer", kACHIEVEMENTS.FASHION_COSPLAYER, "Wear 10 different clothings/armors.");
+			addAchievement("Cosplayer (Begginer)", kACHIEVEMENTS.FASHION_COSPLAYER, "Wear 10 different clothings/armors.");
+			addAchievement("Cosplayer (Amateour)", kACHIEVEMENTS.FASHION_COSPLAYER_1, "Wear 30 different clothings/armors.");
+			addAchievement("Cosplayer (Recognizable)", kACHIEVEMENTS.FASHION_COSPLAYER_2, "Wear 60 different clothings/armors.");
+			addAchievement("Cosplayer (Seasonal)", kACHIEVEMENTS.FASHION_COSPLAYER_3, "Wear 100 different clothings/armors.");
+			addAchievement("Cosplayer (Proffesional)", kACHIEVEMENTS.FASHION_COSPLAYER_4, "Wear 150 different clothings/armors.");
+			//addAchievement("Jessica Nigri apprentice", kACHIEVEMENTS.FASHION_COSPLAYER_3, "Wear 135 different clothings/armors.");
+			//addAchievement("Yaya Han apprentice", kACHIEVEMENTS.FASHION_COSPLAYER_4, "Wear 290 different clothings/armors.");
 			addAchievement("Dominatrix", kACHIEVEMENTS.FASHION_DOMINATRIX, "Wear any form of kinky clothing and wield any form of whip.");
 			addAchievement("Going Commando", kACHIEVEMENTS.FASHION_GOING_COMMANDO, "Wear no undergarments while wearing any clothes or armours.");
-			addAchievement("Bling Bling", kACHIEVEMENTS.FASHION_BLING_BLING, "Wear ring that is valued over 1,000 gems.");
+			addAchievement("Bling Bling", kACHIEVEMENTS.FASHION_BLING_BLING, "Wear ring that is valued at least 1,000 gems.");
+			addAchievement("Ka-Ching!", kACHIEVEMENTS.FASHION_KA_CHING, "Wear necklace that is valued at least 5,000 gems.");
+			addAchievement("Royalty", kACHIEVEMENTS.FASHION_ROYALTY, "Wear head accessory that is valued at least 4,000 gems.");
+			addAchievement("Hellblazer", kACHIEVEMENTS.FASHION_HELLBLAZER, "Equip all fire protection accessories.");
+			addAchievement("Less than Zero", kACHIEVEMENTS.FASHION_LESS_THAN_ZERO, "Equip all ice protection accessories.");
+			addAchievement("Thunderstuck", kACHIEVEMENTS.FASHION_THUNDERSTUCK, "Equip all lightning protection accessories.");
+			addAchievement("Darkness Within", kACHIEVEMENTS.FASHION_DARKNESS_WITHIN, "Equip all darkness protection accessories.");
+			addAchievement("Poison Ivy", kACHIEVEMENTS.FASHION_POISON_IVY, "Equip all poison protection accessories.");
+			addAchievement("Playboy Bunny", kACHIEVEMENTS.FASHION_POLAYBOY_BUNNY, "Equip all lust protection accessories.");
+			addAchievement("Throne of Intelligence", kACHIEVEMENTS.FASHION_THRONE_OF_INTELLIGENCE, "Equip all intelligence boosting accessories.");
+			addAchievement("Throne of Libido", kACHIEVEMENTS.FASHION_THRONE_OF_LIBIDO, "Equip all libido boosting accessories.");
+			addAchievement("Throne of Sensitivity", kACHIEVEMENTS.FASHION_THRONE_OF_SENSITIVITY, "Equip all sensitivity boosting accessories.");
+			addAchievement("Throne of Speed", kACHIEVEMENTS.FASHION_THRONE_OF_SPEED, "Equip all speed boosting accessories.");
+			addAchievement("Throne of Strength", kACHIEVEMENTS.FASHION_THRONE_OF_STRENGTH, "Equip all strength boosting accessories.");
+			addAchievement("Throne of Toughness", kACHIEVEMENTS.FASHION_THRONE_OF_TOUGHNESS, "Equip all toughness boosting accessories.");
+			addAchievement("Throne of Wisdom", kACHIEVEMENTS.FASHION_THRONE_OF_WISDOM, "Equip all wisdom boosting accessories.");
 			
-			titleAchievementSection("Wealth"); //4 achievements
+			titleAchievementSection("Wealth"); //9 achievements
 			addAchievement("Rich", kACHIEVEMENTS.WEALTH_RICH, "Have 1,000 gems.");
 			addAchievement("Hoarder", kACHIEVEMENTS.WEALTH_HOARDER, "Have 10,000 gems.");
 			addAchievement("Gem Vault", kACHIEVEMENTS.WEALTH_GEM_VAULT, "Have 100,000 gems.");
 			addAchievement("Millionaire", kACHIEVEMENTS.WEALTH_MILLIONAIRE, "Have 1,000,000 gems.", "Have 1,000,000 gems. What are you going to spend these gems on?", true);
+			addAchievement("Poor Daoist", kACHIEVEMENTS.WEALTH_POOR_DAOIST, "Have 200 spirit stones.");
+			addAchievement("Sect's Conclave Student", kACHIEVEMENTS.WEALTH_SECTS_CONCLAVE_STUDENT, "Have 2,000 spirit stones.");
+			addAchievement("Sect's Head Elder", kACHIEVEMENTS.WEALTH_SECTS_HEAD_ELDER, "Have 20,000 spirit stones.");
+			addAchievement("Sect's Patriarch", kACHIEVEMENTS.WEALTH_SECTS_PATRIARCH, "Have 500,000 spirit stones.", "Have 500,000 spirit stones. Maybe it's time to retreat into secluded cultivation?", true);
+			addAchievement("Meng Hao", kACHIEVEMENTS.WEALTH_MENG_HAO, "Have 20,000,000 spirit stones.", "Have 20,000,000 spirit stones. You can now exchange tips on getting more spirit stones with Meng Hao himself.", true);
 			//addAchievement("Item Vault", kACHIEVEMENTS.WEALTH_ITEM_VAULT, "Fill up your inventory, chest, jewelry box, weapon and armor racks.");
 			
 			titleAchievementSection("Combat"); //18 achievements
@@ -196,9 +228,12 @@ public class Achievements extends BaseContent
 			addAchievement("Glutton", kACHIEVEMENTS.REALISTIC_GLUTTON, "Eat while hunger is above 90.");
 			addAchievement("Fasting", kACHIEVEMENTS.REALISTIC_FASTING, "Keep hunger below 25 for a week but don't let it reach 0.");
 			
-			titleAchievementSection("Epic"); //8 achievements
+			titleAchievementSection("Epic"); //10 achievements
 			addAchievement("xXx2: The Next Level", kACHIEVEMENTS.EPIC_XXX2_THE_NEXT_LEVEL, "Start NG+ (or higher) game.", "", true);
 			addAchievement("xXx: The Return of Mareth Champion", kACHIEVEMENTS.EPIC_XXX_THE_RETURN_OF_MARETH_CHAMPION, "Start NG++ (or higher) game.", "", true);
+			addAchievement("Guardian of Notre-Dame", kACHIEVEMENTS.EPIC_GUARDIAN_OF_NOTRE_DAME, "Become Gargoyle.", "", true);
+			addAchievement("The Devil Wears Prada", kACHIEVEMENTS.EPIC_THE_DEVIL_WEARS_PRADA, "Became Devil.", "", true);
+			//odblokowanie pierwszego animal ancestory starting bonus at chara creation
 			addAchievement("Achievementception", kACHIEVEMENTS.EPIC_ACHIEVEMENTCEPTION, "Unlocking 10 achievements.", "", true);
 			addAchievement("Achievement within Achievement", kACHIEVEMENTS.EPIC_ACHIEVEMENT_WITHIN_ACHIEVEMENT, "Unlocking 30 achievements.", "", true);
 			addAchievement("Achievements - Going Deeper (1st layer)", kACHIEVEMENTS.EPIC_ACHIEVEMENTS_GOING_DEEPER_1L, "Unlocking 60 achievements.", "", true);
@@ -320,7 +355,7 @@ public class Achievements extends BaseContent
 			addAchievement("Ultimate Lifeform", kACHIEVEMENTS.GENERAL_ULTIMATE_LIFEFORM, "Have at least 64 racial internal mutation perks.", "", true);
 			
 			if (achievementsTotal > 0) {
-				player.createStatusEffect(StatusEffects.AchievementsNormalShadowTotal, achievementsEarned, achievementsShadowEarned, achievementsTotal, 0);
+				player.createStatusEffect(StatusEffects.AchievementsNormalShadowTotal, achievementsEarned, achievementsShadowEarned, achievementsTotalCurrentlyUnlocked, 0);
 			}
 			menu();
 			addButton(5, "" + achievementsShadowEarned + " shadow", EngineCore.doNothing);
