@@ -5,9 +5,12 @@ import classes.BodyParts.Face;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.NPCs.JojoScene;
+import classes.Scenes.UniqueSexScenes;
 
 public class GoblinElderScene extends BaseContent
 	{
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		
 		public function GoblinElderScene()
 		{
 		}
@@ -278,6 +281,7 @@ public class GoblinElderScene extends BaseContent
 				menu();
 				if (player.hasStatusEffect(StatusEffects.Feeder)) addButton(5, "Breastfeed", feeder);
 				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
+				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else 

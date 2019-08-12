@@ -76,6 +76,8 @@ public class CombatUI extends BaseCombatContent {
 				}
 			} else if (player.hasStatusEffect(StatusEffects.KnockedBack)) {
 				outputText("\n<b>You'll need to close some distance before you can use any physical attacks!</b>");
+			} else if (player.isInGoblinMech()) {
+				btnMelee.disable("No way you could use your melee weapon while piloting goblin mech.");
 			}
 		}
 		// Ranged
@@ -99,7 +101,14 @@ public class CombatUI extends BaseCombatContent {
 			default:
 				btnRanged.showDisabled("Shoot");
 		}
-		if(player.isFlying() && player.wings.type == Wings.BAT_ARM){btnRanged.disable("It would be rather difficult to aim while flapping your arms.");}
+		if (player.isFlying() && player.wings.type == Wings.BAT_ARM){btnRanged.disable("It would be rather difficult to aim while flapping your arms."); }
+		if (player.isInGoblinMech()) {
+			if (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) {
+				if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle") btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon.");
+				else btnRanged.disable("You could use your range weapon while piloting goblin mech if it would be any form of firearms.");
+			}
+			else btnRanged.disable("No way you could use your range weapon while piloting goblin mech.");
+		}
 		btnItems.show("Items", inventory.inventoryMenu, "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
 		
 		// Submenus
@@ -107,7 +116,10 @@ public class CombatUI extends BaseCombatContent {
 		// Submenu - Physical Specials
 		if (player.isFlying()) combat.pspecials.buildMenuForFlying(physpButtons);
 		else combat.pspecials.buildMenu(physpButtons);
-		if (physpButtons.length > 0) btnPSpecials.show("P. Specials", submenuPhySpecials, "Physical special attack menu.", "Physical Specials");
+		if (physpButtons.length > 0) {
+			if (player.isInGoblinMech()) btnPSpecials.show("Mech", submenuPhySpecials, "Mech special attacks menu.", "Mech Specials");
+			else btnPSpecials.show("P. Specials", submenuPhySpecials, "Physical special attack menu.", "Physical Specials");
+		}
 		if (!player.isFlying() && monster.isFlying() && !player.canFly()) {
 			btnPSpecials.disable("No way you could reach enemy in air with p. specials.");
 		}
@@ -133,7 +145,11 @@ public class CombatUI extends BaseCombatContent {
 		if (otherButtons.length > 0) btnOther.show("Other", submenuOther, "Combat options and uncategorized actions");
 		
 		btnFantasize.show("Fantasize", combat.fantasize, "Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.");
-		btnTease.show("Tease", combat.teaseAttack, "Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.");
+		if (player.isInGoblinMech()) {
+			btnTease.disable("No way you could make an enemy more aroused by striking a seductive pose and exposing parts of your body while piloting goblin mech.");
+			
+		}
+		else btnTease.show("Tease", combat.teaseAttack, "Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.");
 		btnWait.show("Wait", combat.wait, "Take no action for this round.  Why would you do this?  This is a terrible idea.");
 		btnRun.show("Run", combat.runAway, "Choosing to run will let you try to escape from your enemy. However, it will be hard to escape enemies that are faster than you and if you fail, your enemy will get a free attack.");
 		
@@ -361,6 +377,24 @@ public class CombatUI extends BaseCombatContent {
 					case 4:
 						btnContinue.show("Continue", combat.mspecials.trueDragonBreath, "Continue gathering elemental energy.");
 						break;
+					case 5:
+						btnContinue.show("Continue", combat.magic.spellPolarMidnight, "Continue casting Polar Midnight spell.");
+						break;/*
+					case 6:
+						btnContinue.show("Continue", combat.magic., "Continue casting Meteor Shower spell.");
+						break;
+					case 7:
+						btnContinue.show("Continue", combat.magic., "Continue casting  spell.");
+						break;
+					case 8:
+						btnContinue.show("Continue", combat.magic., "Continue casting  spell.");
+						break;
+					case 9:
+						btnContinue.show("Continue", combat.magic., "Continue casting  spell.");
+						break;
+					case 10:
+						btnContinue.show("Continue", combat.magic., "Continue casting  spell.");
+						break;*/
 				}
 			}
 		}

@@ -616,6 +616,8 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 					if (flags[kFLAGS.CHI_CHI_LVL_UP] < 2) flags[kFLAGS.CHI_CHI_LVL_UP] = 2;
 					else flags[kFLAGS.CHI_CHI_LVL_UP]++;
 				}
+				//Alvina timer
+				if (SceneLib.dungeons.checkFactoryClear() && flags[kFLAGS.ALVINA_FOLLOWER] < 8) flags[kFLAGS.ALVINA_FOLLOWER]++;
 				//Mishaps reset
 				if (player.hasStatusEffect(StatusEffects.CampLunaMishaps1)) player.removeStatusEffect(StatusEffects.CampLunaMishaps1);
 				if (player.hasStatusEffect(StatusEffects.CampLunaMishaps2)) player.removeStatusEffect(StatusEffects.CampLunaMishaps2);
@@ -716,6 +718,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				if (player.findPerk(PerkLib.ManticoreCumAddict) >= 0) multiplier *= 2;
 				//Hunger drain rate. If above 50, 1.5 per hour. Between 25 and 50, 1 per hour. Below 25, 0.5 per hour.
 				//So it takes 100 hours to fully starve from 100/100 to 0/100 hunger. Can be increased to 125 then 166 hours with Survivalist perks.
+				if (player.hasStatusEffect(StatusEffects.FastingPill)) player.hunger += 2;
 				if (prison.inPrison) {
 					if (player.internalChimeraRating() >= 1) {
 						player.hunger -= ((4 + player.internalChimeraRating()) * 0.5 * multiplier); //Hunger depletes faster in prison.
@@ -791,6 +794,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 					}
 					if (player.hunger < 20) player.hunger = 20; 
 				}
+				if (player.hunger > player.maxHunger()) player.hunger = player.maxHunger();
 			}
 			return needNext;
 		}
@@ -930,12 +934,12 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				needNext = true;
 			}
 			//Fire Affinity
-			if ((player.salamanderScore() >= 4 || player.phoenixScore() >= 10 || player.hellcatScore() >= 10) && player.findPerk(PerkLib.FireAffinity) < 0) {
+			if ((player.salamanderScore() >= 4 || player.phoenixScore() >= 10 || player.hellcatScore() >= 10 || (player.mouseScore() >= 12 && player.lowerBody == LowerBody.HINEZUMI && player.arms.type == Arms.HINEZUMI && player.tailType == Tail.HINEZUMI)) && player.findPerk(PerkLib.FireAffinity) < 0) {
 				outputText("\nYou suddenly feels your body temperature rising to ridiculus level. You pant for several minutes until your finaly at ease with your bodily heat. You doubt any more heat is gunna make you more incomfortable then this as you quietly soak in the soothing warmth your body naturaly produce. Its like your body is made out of living fire.\n\n(<b>Gained Perk: Fire Affinity</b>)\n");
 				player.createPerk(PerkLib.FireAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if ((player.salamanderScore() < 4 && player.phoenixScore() < 10 && player.hellcatScore() < 10) && player.findPerk(PerkLib.FireAffinity) >= 0) {
+			else if ((player.salamanderScore() < 4 && player.phoenixScore() < 10 && player.hellcatScore() < 10 && player.mouseScore() < 12 && player.lowerBody != LowerBody.HINEZUMI && player.arms.type != Arms.HINEZUMI && player.tailType != Tail.HINEZUMI) && player.findPerk(PerkLib.FireAffinity) >= 0) {
 				outputText("\nYou suddenly feel chilly as your bodily temperature drop down to human level. You lost your natural warmth reverting to that of a standard human.\n\n<b>(Lost Perk: Fire Affinity)</b>\n");
 				player.removePerk(PerkLib.FireAffinity);
 				needNext = true;
@@ -956,19 +960,51 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				needNext = true;
 			}
 			//Lightning Affinity
-			if (player.raijuScore() >= 7 && player.findPerk(PerkLib.LightningAffinity) < 0) {
+			if ((player.raijuScore() >= 7 || player.thunderbirdScore() >= 12) && player.findPerk(PerkLib.LightningAffinity) < 0) {
 				outputText("\nYou suddenly feel a rush of electricity run across your skin as your arousal builds up and begin to masturbate in order to get rid of your creeping desire. However even after achieving orgasm not only are you still aroused but you are even hornier than before! You realise deep down that the only way for you to be freed from this jolting pleasure is to have sex with a partner!\n");
-				outputText("\n(<b>Gained the lightning affinity perk, electrified desire perk and Orgasmic lightning strike ability!</b>)\n");
+				outputText("\n(<b>Gained the lightning affinity perk, electrified desire perk, Pleasure bolt ability and Orgasmic lightning strike ability!</b>)\n");
+				if (player.thunderbirdScore() >= 12) player.createStatusEffect(StatusEffects.IsThunderbird,0,0,0,0);
+				if (player.raijuScore() >= 7) player.createStatusEffect(StatusEffects.IsRaiju,0,0,0,0);
 				player.createPerk(PerkLib.LightningAffinity, 0, 0, 0, 0);
 				player.createPerk(PerkLib.ElectrifiedDesire, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if (player.raijuScore() < 7 && player.findPerk(PerkLib.LightningAffinity) >= 0) {
-				outputText("\nYour natural electricity production start dropping at a dramatic rate until finally there is no more. You realise you likely aren’t raiju enough to build electricity anymore which, considering you can reach satisfaction again, might not be a bad thing.\n\n<b>(Lost the lightning affinity perk, electrified desire perk and Orgasmic lightning strike ability!)</b>\n");
+			else if (player.raijuScore() < 7 && player.findPerk(PerkLib.LightningAffinity) >= 0 && player.hasStatusEffect(StatusEffects.IsRaiju) && !player.hasStatusEffect(StatusEffects.IsThunderbird)) {
+				outputText("\nYour natural electricity production start dropping at a dramatic rate until finally there is no more. You realise you likely aren’t raiju enough to build electricity anymore which, considering you can reach satisfaction again, might not be a bad thing.\n\n<b>(Lost the lightning affinity perk, electrified desire perk, Pleasure bolt ability and Orgasmic lightning strike ability!)</b>\n");
+				player.removeStatusEffect(StatusEffects.IsRaiju);
 				player.removePerk(PerkLib.LightningAffinity);
 				player.removePerk(PerkLib.ElectrifiedDesire);
 				needNext = true;
 			}
+			else if (player.thunderbirdScore() < 12 && player.findPerk(PerkLib.LightningAffinity) >= 0 && player.hasStatusEffect(StatusEffects.IsThunderbird) && !player.hasStatusEffect(StatusEffects.IsRaiju)) {
+				outputText("\nYour natural electricity production start dropping at a dramatic rate until finally there is no more. You realise you likely aren’t thunderbird enough to build electricity anymore which, considering you can reach satisfaction again, might not be a bad thing.\n\n<b>(Lost the lightning affinity perk, electrified desire perk, Pleasure bolt ability and Orgasmic lightning strike ability!)</b>\n");
+				player.removeStatusEffect(StatusEffects.IsThunderbird);
+				player.removePerk(PerkLib.LightningAffinity);
+				player.removePerk(PerkLib.ElectrifiedDesire);
+				needNext = true;
+			}
+			if (player.raijuScore() >= 7 && player.findPerk(PerkLib.LightningAffinity) >= 0 && !player.hasStatusEffect(StatusEffects.IsRaiju)) {
+				player.createStatusEffect(StatusEffects.IsRaiju,0,0,0,0);
+			}
+			if (player.raijuScore() < 7 && player.hasStatusEffect(StatusEffects.IsThunderbird) && player.hasStatusEffect(StatusEffects.IsRaiju)) {
+				player.removeStatusEffect(StatusEffects.IsRaiju);
+			}
+			if (player.thunderbirdScore() >= 12 && player.findPerk(PerkLib.LightningAffinity) >= 0 && !player.hasStatusEffect(StatusEffects.IsThunderbird)) {
+				player.createStatusEffect(StatusEffects.IsThunderbird,0,0,0,0);
+			}
+			if (player.thunderbirdScore() < 12 && player.hasStatusEffect(StatusEffects.IsRaiju) && player.hasStatusEffect(StatusEffects.IsThunderbird)) {
+				player.removeStatusEffect(StatusEffects.IsThunderbird);
+			}/*
+			if (player.thundermantis() >= 10 && player.tailType == Tail.THUNDERBIRD && player.findPerk(PerkLib.LightningAffinity) < 0) {
+				outputText("\nYou suddenly feel a rush of electricity run across your skin as your static energy builds up. You realise deep down that the only way for you to be freed from this is to unleash it on someone else.\n\n(<b>Gained the lightning affinity perk and Orgasmic lightning strike ability!</b>)\n");
+				player.createPerk(PerkLib.LightningAffinity, 0, 0, 0, 0);
+				needNext = true;
+			}
+			else if (player.thundermantis() < 10 && player.tailType != Tail.THUNDERBIRD && player.findPerk(PerkLib.LightningAffinity) >= 0) {
+				outputText("\nYour natural electricity production start dropping at a dramatic rate until finally there is no more. You realise you likely aren’t thunderbird enough to build electricity anymore.\n\n<b>(Lost the lightning affinity perk and Orgasmic lightning strike ability!)</b>\n");
+				player.removePerk(PerkLib.LightningAffinity);
+				needNext = true;
+			}*/
 			//Necromancy perk
 			if (((player.tailType == Tail.CAT && player.tailCount == 2) || player.tailType == Tail.NEKOMATA_FORKED_2_3 || player.tailType == Tail.NEKOMATA_FORKED_1_3) && player.findPerk(PerkLib.Necromancy) < 0) {
 				outputText("\nYou feel tremendous fell powers investing your being. You blink and almost jump as you realise you can literally can see the souls of the dead as well as those of the living now. Your powers over life and death have grown as <b>you seem to have acquired a natural talents for the darker arts.</b>\n\n(<b>Gained Perk: Necromancy</b>)\n");
@@ -1010,6 +1046,31 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				outputText("\nDuring a casual walk around your camp you suddenly notice, or rather feel, something unexpected. Your surrounding blurs for a moment, to be replaced with a forest. You notice a goblin strolling nearby. Suddenly, she stops and slowly looks around, staring directly at you. A moment later, your vision of the forest becomes blurry, eventually fading away to be replaced by your camp and its surroundings. ");
 				outputText("You shake your head, trying to figure out what had just happened. The only solution that you find within yourself is something that the soul cultivators you met in He’Xin’Dao mentioned. Another sense that they had developed, which allowed them to perceive distant places or find specific people over long distances. It looks as though you developed it, even without training.\n");
 				player.createPerk(PerkLib.SoulSense, 0, 0, 0, 0);
+				needNext = true;
+			}
+			//Hinezumi Coat
+			if (player.mouseScore() >= 12 && player.lowerBody == LowerBody.HINEZUMI && player.arms.type == Arms.HINEZUMI && player.tailType == Tail.HINEZUMI && !player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
+				outputText("\nYour body suddenly coats itself with fire turning incandescent as your lust and body heat spikes up reaching a critical point, this must be the infamous hinezumi coat. You gasp as your lust reaches a critical point. The flare of desire burns in you and you need to vent it one way or another. ");
+				outputText("Feeling inspired you try and expel it through kick and punch on a tree and indeed it works the more you discharge your flames the clearer your mind get. Your hinezumi coat finally stable you sigh in relief.\n\n<b>(Gained Hinezumi Coat!)</b>\n");
+				player.createStatusEffect(StatusEffects.HinezumiCoat, 1, 0, 0, 0);
+				needNext = true;
+			}
+			if (player.mouseScore() < 12 && (player.lowerBody != LowerBody.HINEZUMI || player.arms.type != Arms.HINEZUMI || player.tailType != Tail.HINEZUMI) && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
+				outputText("\nFor one reason or another your inner flames finally die down leaving you penting but clear of mind. Seems you no longer are hinezumi enough for the coat to maintain itself.\n\n<b>(Lost the Hinezumi Coat!)</b>\n");
+				player.removeStatusEffect(StatusEffects.HinezumiCoat);
+				needNext = true;
+			}
+			//Goblinoid blood
+			if (player.goblinScore() >= 10 && player.findPerk(PerkLib.GoblinoidBlood) < 0) {
+				outputText("\nAs you become a goblinoid again you can feel the chemical pumped in by your gadgets resume working.\n");
+				outputText("\n(<b>Gained Perk: Goblinoid blood</b>)\n");
+				player.createPerk(PerkLib.GoblinoidBlood, 0, 0, 0, 0);
+				needNext = true;
+			}
+			else if (player.goblinScore() < 10 && player.findPerk(PerkLib.GoblinoidBlood) >= 0) {
+				outputText("\nYou feel the drugs in your blood losing effects. Damnit of course it won’t work since those chemical power ups where tested for goblinoid only. Guess perhaps a in few years you could try and develop a variants.\n");
+				outputText("\n<b>(Lost Perk: Goblinoid blood)</b>\n");
+				player.removePerk(PerkLib.GoblinoidBlood);
 				needNext = true;
 			}
 			//H class Heaven Tribulation
@@ -1565,6 +1626,14 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 			//Decrement mino withdrawal symptoms display cooldown
 			//flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00330] prevents PC getting two of the same notices overnite
 			else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00330] > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00330]--;
+			if (player.statusEffectv1(StatusEffects.Airweed) >= 1) {
+				if (player.statusEffectv1(StatusEffects.Airweed) == 1) {
+					player.removeStatusEffect(StatusEffects.Airweed);
+					outputText("\n<b>Effect of Airweed wears off.</b>\n");
+					needNext = true;
+				}
+				else player.addStatusValue(StatusEffects.Airweed, 1, -1);
+			}
 			//Konstantin buffs to equipment
 			if (player.hasStatusEffect(StatusEffects.KonstantinArmorPolishing)) {
 				if (player.statusEffectv1(StatusEffects.KonstantinArmorPolishing) <= 0) player.removeStatusEffect(StatusEffects.KonstantinArmorPolishing);
@@ -1813,6 +1882,11 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
                 SceneLib.lake.gooGirlScene.slimeBadEnd();
                 return true;
 			}
+			//Pussytail Bad End
+			if (player.tailType == Tail.MANTICORE_PUSSYTAIL && player.hasCock()) {
+				SceneLib.camp.campUniqueScenes.badendManticoreOuroboros();
+				return true;
+			}
 			//Bee cocks
 			if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE && player.lust >= player.maxLust()) {
 				if (player.hasItem(consumables.BEEHONY) || player.hasItem(consumables.PURHONY) || player.hasItem(consumables.SPHONEY)) {
@@ -1829,4 +1903,4 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 		//End of Interface Implementation
 	}
 }
-
+

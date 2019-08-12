@@ -132,7 +132,7 @@ import classes.Scenes.SceneLib;
 		}
 
 		public function canGatherWoods():Boolean {
-			return player.hasKeyItem("Carpenter's Toolbox") >= 0 || player.weapon == weapons.L__AXE || flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < maxWoodSupply;
+			return player.hasKeyItem("Carpenter's Toolbox") >= 0 || player.weapon == weapons.L__AXE || player.weapon == weapons.MACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.RIPPER2 || flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < maxWoodSupply;
 		}
 		//STAGE 4 - Gather woods, explore forest to encounter.
 		public function gatherWoods():void {
@@ -154,15 +154,30 @@ import classes.Scenes.SceneLib;
 				outputText("You are carrying carpenter's box with you. It contains an axe.\n");
 				addButton(0, "Axe", cutTreeTIMBER);
 			}
+			if (player.weapon == weapons.MACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.RIPPER2) 
+			{
+				if (player.weapon == weapons.RIPPER2) {
+					outputText("You are carrying a Ripper 2.0 with you.");
+					addButton(1, "Ripper 2.0", cutTreeMechTIMBER);
+				}
+				else if (player.weapon == weapons.RIPPER1) {
+					outputText("You are carrying a Ripper 1.0 with you.");
+					addButton(1, "Ripper 1.0", cutTreeMechTIMBER);
+				}
+				else {
+					outputText("You are carrying a Machined greatsword with you.");
+					addButton(1, "Mach.Greatsword", cutTreeMechTIMBER);
+				}
+			}
 			if (camp.followerKiha()) 
 			{
 				outputText("You have someone who might help you. Kiha might be able to assist you.\n");
-				addButton(1, "Kiha", getHelpFromKiha);
+				addButton(2, "Kiha", getHelpFromKiha);
 			}
 			if (silly() && player.str >= 70) 
 			{
 				outputText("You suddenly have the strange urge to punch trees. Do you punch the tree? \n");
-				addButton(2, "Punch Tree", punchTreeMinecraftStyle);
+				addButton(3, "Punch Tree", punchTreeMinecraftStyle);
 			}
 			if (!(buttonIsVisible(0) || buttonIsVisible(1) || buttonIsVisible(2))) {
 				outputText("<b>Unfortunately, there is nothing you can do right now.</b>");
@@ -195,6 +210,19 @@ import classes.Scenes.SceneLib;
 			outputText("With your strength, you hack away at the tree, making wedge-shaped cuts. After ten strikes, you yell \"<i>TIMMMMMMMMBER!</i>\" as the tree falls and lands on the ground with a loud crash. You are quite the fine lumberjack! You then cut the felled tree into pieces and you haul the wood back to your camp.\n\n");
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (10 + Math.floor(player.str / 8));
 			incrementWoodSupply(10 + Math.floor(player.str / 8));
+			fatigue(50, USEFATG_PHYSICAL);
+			doNext(camp.returnToCampUseTwoHours);
+		}
+		//Cut down the tree yourself with Machined greatsword.
+		private function cutTreeMechTIMBER():void {
+			clearOutput();
+			outputText("You rev up your ");
+			if (player.weapon == weapons.RIPPER2) outputText("Ripper 2.0");
+			else if (player.weapon == weapons.RIPPER1) outputText("Ripper 1.0");
+			else outputText("chainsaw sword");
+			outputText(" as the metal teeth begin to spin. Grabbing a hold of the handle, you press the blade into the trunk of the tree, watching it cut straight through as wood chips fly all over the place. Eventually you reach the other side of the trunk, and the tree falls over with a mighty thud. You then proceed to cut the trunk into smaller pieces and haul them back to your camp.\n\n");
+			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (13 + Math.floor(player.str / 7));
+			incrementWoodSupply(13 + Math.floor(player.str / 7));
 			fatigue(50, USEFATG_PHYSICAL);
 			doNext(camp.returnToCampUseTwoHours);
 		}

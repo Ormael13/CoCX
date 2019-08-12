@@ -125,6 +125,7 @@ import classes.internals.Utils;
 					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 6);
 					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 6, 0);
 					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.DINAH_SPELLS_CASTED] = 0;
 					flags[kFLAGS.DINAH_LVL_UP] = 2;
 				}
 				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 2 && flags[kFLAGS.DINAH_LVL_UP] == 2) {

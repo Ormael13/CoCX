@@ -30,6 +30,8 @@ import classes.Items.Shield;
 import classes.Items.ShieldLib;
 import classes.Items.Undergarment;
 import classes.Items.UndergarmentLib;
+import classes.Items.Vehicles;
+import classes.Items.VehiclesLib;
 import classes.Items.Weapon;
 import classes.Items.WeaponLib;
 import classes.Items.WeaponRange;
@@ -139,9 +141,13 @@ use namespace CoC;
 		private var _headjewelry:HeadJewelry = HeadJewelryLib.NOTHING;
 		private var _necklace:Necklace = NecklaceLib.NOTHING;
 		private var _jewelry:Jewelry = JewelryLib.NOTHING;
+		private var _jewelry2:Jewelry = JewelryLib.NOTHING;
+		private var _jewelry3:Jewelry = JewelryLib.NOTHING;
+		private var _jewelry4:Jewelry = JewelryLib.NOTHING;
 		private var _shield:Shield = ShieldLib.NOTHING;
 		private var _upperGarment:Undergarment = UndergarmentLib.NOTHING;
 		private var _lowerGarment:Undergarment = UndergarmentLib.NOTHING;
+		private var _vehicle:Vehicles = VehiclesLib.NOTHING;
 		private var _modArmorName:String = "";
 
 		//override public function set armors
@@ -299,6 +305,30 @@ use namespace CoC;
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.jewelryValue.");
 		}
+		override public function set jewelryName2(value:String):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.jewelryName2.");
+		}
+		
+		override public function set jewelryEffectId2(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.jewelryEffectId2.");
+		}
+		
+		override public function set jewelryEffectMagnitude2(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.jewelryEffectMagnitude2.");
+		}
+				
+		override public function set jewelryPerk2(value:String):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.jewelryPerk2.");
+		}
+		
+		override public function set jewelryValue2(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.jewelryValue2.");
+		}
 
 		//override public function set shields
 		override public function set shieldName(value:String):void
@@ -350,6 +380,32 @@ use namespace CoC;
 		override public function set lowerGarmentValue(value:Number):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.lowerGarmentValue.");
+		}
+
+		//override public function set vehicles
+		override public function set vehiclesName(value:String):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.vehiclesName.");
+		}
+		
+		override public function set vehiclesEffectId(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.vehiclesEffectId.");
+		}
+		
+		override public function set vehiclesEffectMagnitude(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.vehiclesEffectMagnitude.");
+		}
+				
+		override public function set vehiclesPerk(value:String):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.vehiclesPerk.");
+		}
+		
+		override public function set vehiclesValue(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.vehiclesValue.");
 		}
 		
 		
@@ -480,7 +536,7 @@ use namespace CoC;
 			//Agility boosts armor ratings!
 			var speedBonus:int = 0;
 			if (findPerk(PerkLib.Agility) >= 0) {
-				if (armorPerk == "Light" || _armor.name == "nothing") {
+				if (armorPerk == "Light" || _armor.name == "nothing" || _armor.name == "some taur paladin armor" || _armor.name == "some taur blackguard armor") {
 					speedBonus += Math.round(spe / 10);
 				}
 				else if (armorPerk == "Medium") {
@@ -510,6 +566,24 @@ use namespace CoC;
 			if (findPerk(PerkLib.PigBoarFat) >= 0) armorDef += (1 * newGamePlusMod);
 			if (findPerk(PerkLib.PigBoarFatEvolved) >= 0) armorDef += (2 * newGamePlusMod);
 			if (findPerk(PerkLib.PigBoarFatFinalForm) >= 0) armorDef += (12 * newGamePlusMod);
+			if (findPerk(PerkLib.GoblinoidBlood) >= 0) {
+				var goblinbracerBonus:int = 0;
+				if (hasKeyItem("Powboy") >= 0 && meetUnhinderedReq()) {
+					goblinbracerBonus += Math.round(inte / 10);
+					if (goblinbracerBonus > (10 * newGamePlusMod)) goblinbracerBonus = (10 * newGamePlusMod);
+				}
+				if (hasKeyItem("M.G.S. bracer") >= 0 && meetUnhinderedReq()) {
+					goblinbracerBonus += Math.round(inte / 10);
+					if (goblinbracerBonus > (20 * newGamePlusMod)) goblinbracerBonus = (20 * newGamePlusMod);
+				}
+				armorDef += goblinbracerBonus;
+			}
+			if (vehiclesName == "Goblin Mech Alpha") {
+				armorDef += 10;
+				if (hasKeyItem("Blueprint - Upgraded Armor plating 1.0") >= 0) armorDef += 5;
+				if (hasKeyItem("Blueprint - Upgraded Armor plating 2.0") >= 0) armorDef += 10;
+				if (hasKeyItem("Blueprint - Upgraded Armor plating 3.0") >= 0) armorDef += 15;
+			}
 			armorDef = Math.round(armorDef);
 			//Berzerking removes armor
 			if (hasStatusEffect(StatusEffects.Berzerking) && findPerk(PerkLib.ColdFury) < 1) {
@@ -525,7 +599,8 @@ use namespace CoC;
 				if(armorDef < 0) armorDef = 0;
 			}
 			if (hasStatusEffect(StatusEffects.Lustzerking)) {
-				armorDef = Math.round(armorDef * 1.1);
+				if (jewelryName == "Flame Lizard ring" || jewelryName2 == "Flame Lizard ring" || jewelryName3 == "Flame Lizard ring" || jewelryName4 == "Flame Lizard ring") armorDef = Math.round(armorDef * 1.15);
+				else armorDef = Math.round(armorDef * 1.1);
 				armorDef += 1;
 			}
 			if (hasStatusEffect(StatusEffects.CrinosShape) && findPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor) >= 0) {
@@ -658,6 +733,24 @@ use namespace CoC;
 			if (findPerk(PerkLib.PigBoarFat) >= 0) armorMDef += (1 * newGamePlusMod);
 			if (findPerk(PerkLib.PigBoarFatEvolved) >= 0) armorMDef += (2 * newGamePlusMod);
 			if (findPerk(PerkLib.PigBoarFatFinalForm) >= 0) armorMDef += (12 * newGamePlusMod);
+			if (findPerk(PerkLib.GoblinoidBlood) >= 0) {
+				var goblinbracerBonus:int = 0;
+				if (hasKeyItem("Powboy") >= 0 && meetUnhinderedReq()) {
+					goblinbracerBonus += Math.round(inte / 10);
+					if (goblinbracerBonus > (10 * newGamePlusMod)) goblinbracerBonus = (10 * newGamePlusMod);
+				}
+				if (hasKeyItem("M.G.S. bracer") >= 0 && meetUnhinderedReq()) {
+					goblinbracerBonus += Math.round(inte / 10);
+					if (goblinbracerBonus > (20 * newGamePlusMod)) goblinbracerBonus = (20 * newGamePlusMod);
+				}
+				armorMDef += goblinbracerBonus;
+			}
+			if (vehiclesName == "Goblin Mech Alpha") {
+				armorMDef += 10;
+				if (hasKeyItem("Blueprint - Upgraded Armor plating 1.0") >= 0) armorMDef += 5;
+				if (hasKeyItem("Blueprint - Upgraded Armor plating 2.0") >= 0) armorMDef += 10;
+				if (hasKeyItem("Blueprint - Upgraded Armor plating 3.0") >= 0) armorMDef += 15;
+			}
 			armorMDef = Math.round(armorMDef);
 			//Berzerking/Lustzerking removes magic resistance
 			if (hasStatusEffect(StatusEffects.Berzerking) && findPerk(PerkLib.ColderFury) < 1) {
@@ -714,38 +807,55 @@ use namespace CoC;
 		public function isWeaponForWhirlwind():Boolean
 		{
 			return weapon == game.weapons.BFSWORD || weapon == game.weapons.NPHBLDE || weapon == game.weapons.EBNYBLD || weapon == game.weapons.CLAYMOR || weapon == game.weapons.URTAHLB || weapon == game.weapons.KIHAAXE || weapon == game.weapons.L__AXE || weapon == game.weapons.L_HAMMR || weapon == game.weapons.TRASAXE || weapon == game.weapons.WARHAMR
-			 || weapon == game.weapons.OTETSU || weapon == game.weapons.NODACHI || weapon == game.weapons.WGSWORD || weapon == game.weapons.DBFSWO || weapon == game.weapons.D_WHAM_ || weapon == game.weapons.DL_AXE_ || weapon == game.weapons.DSWORD_ || weapon == game.weapons.HALBERD || weapon == game.weapons.GUANDAO || weapon == game.weapons.PRURUMI
-			 || weapon == game.weapons.ZWNDER || weapon == game.weapons.DEMSCYT;// || weapon == game.weapons.
+			 || weapon == game.weapons.OTETSU || weapon == game.weapons.POCDEST || weapon == game.weapons.DOCDEST || weapon == game.weapons.NODACHI || weapon == game.weapons.WGSWORD || weapon == game.weapons.DBFSWO || weapon == game.weapons.D_WHAM_ || weapon == game.weapons.DL_AXE_ || weapon == game.weapons.DSWORD_ || weapon == game.weapons.HALBERD
+			 || weapon == game.weapons.GUANDAO || weapon == game.weapons.PRURUMI || weapon == game.weapons.ZWNDER || weapon == game.weapons.UDKDEST || weapon == game.weapons.BFTHSWORD || weapon == game.weapons.DEMSCYT;// || weapon == game.weapons.
 		}
 		//Weapons for Whipping
 		public function isWeaponsForWhipping():Boolean
 		{
-			return weapon == game.weapons.FLAIL || weapon == game.weapons.L_WHIP || weapon == game.weapons.SUCWHIP || weapon == game.weapons.PSWHIP || weapon == game.weapons.WHIP || weapon == game.weapons.PWHIP || weapon == game.weapons.NTWHIP || weapon == game.weapons.CNTWHIP || weapon == game.weapons.RIBBON || weapon == game.weapons.ERIBBON
-			|| weapon == game.weapons.SNAKESW || weapon == game.weapons.DAGWHIP;
+			return weapon == game.weapons.FLAIL || weapon == game.weapons.L_WHIP || weapon == game.weapons.SUCWHIP || weapon == game.weapons.PSWHIP || weapon == game.weapons.WHIP || weapon == game.weapons.PWHIP || weapon == game.weapons.BFWHIP || weapon == game.weapons.DBFWHIP || weapon == game.weapons.NTWHIP || weapon == game.weapons.CNTWHIP
+			 || weapon == game.weapons.RIBBON || weapon == game.weapons.ERIBBON || weapon == game.weapons.SNAKESW || weapon == game.weapons.DAGWHIP;
 		}
 		//1H Weapons
 		public function isOneHandedWeapons():Boolean
 		{
-			return weaponPerk != "Dual Large" && weaponPerk != "Dual" && weaponPerk != "Dual Small" && weaponPerk != "Staff" && weaponPerk != "Large";
+			return weaponPerk != "Dual Large" && weaponPerk != "Dual" && weaponPerk != "Dual Small" && weaponPerk != "Staff" && weaponPerk != "Large" && weaponPerk != "Massive";
 		}
-		//Non Large weapons
+		//Non Large/Massive weapons
 		public function isNoLargeNoStaffWeapon():Boolean
 		{
-			return weaponPerk != "Dual Large" && weaponPerk != "Large" && !isStaffTypeWeapon();
+			return weaponPerk != "Dual Large" && weaponPerk != "Large" && weaponPerk != "Massive" && !isStaffTypeWeapon();
 		}
 		//Wrath Weapons
 		public function isLowGradeWrathWeapon():Boolean
 		{
-			return weapon == game.weapons.BFSWORD || weapon == game.weapons.NPHBLDE || weapon == game.weapons.EBNYBLD || weapon == game.weapons.OTETSU || weapon == game.weapons.POCDEST || weapon == game.weapons.DOCDEST || weapon == game.weapons.CNTWHIP;
+			return weapon == game.weapons.BFSWORD || weapon == game.weapons.NPHBLDE || weapon == game.weapons.EBNYBLD || weapon == game.weapons.OTETSU || weapon == game.weapons.POCDEST || weapon == game.weapons.DOCDEST || weapon == game.weapons.BFGAUNT || weapon == game.weapons.SKYPIER || weapon == game.weapons.DWARWA || weapon == game.weapons.BFWHIP
+			 || weapon == game.weapons.UDKDEST || weapon == game.weapons.BFTHSWORD || weaponRange == game.weaponsrange.B_F_BOW;
 		}
 		public function isDualLowGradeWrathWeapon():Boolean
 		{
-			return weapon == game.weapons.DBFSWO;
+			return weapon == game.weapons.DBFSWO || weapon == game.weapons.ANGSTD || weapon == game.weapons.DBFWHIP;
+		}/*
+		public function isMidGradeWrathWeapon():Boolean
+		{
+			return weapon == game.weapons.NTWHIP;
 		}
+		public function isDualMidGradeWrathWeapon():Boolean
+		{
+			return ;
+		}
+		public function isHighGradeWrathWeapon():Boolean
+		{
+			return weapon == game.weapons.CNTWHIP;
+		}
+		public function isDualHighGradeWrathWeapon():Boolean
+		{
+			return ;
+		}*/
 		//Fists and fist weapons
 		public function isFistOrFistWeapon():Boolean
 		{
-			return weaponName == "fists" || weapon == game.weapons.S_GAUNT || weapon == game.weapons.H_GAUNT || weapon == game.weapons.MASTGLO || weapon == game.weapons.KARMTOU || weapon == game.weapons.YAMARG || weapon == game.weapons.CLAWS;
+			return weaponName == "fists" || weapon == game.weapons.S_GAUNT || weapon == game.weapons.H_GAUNT || weapon == game.weapons.MASTGLO || weapon == game.weapons.KARMTOU || weapon == game.weapons.YAMARG || weapon == game.weapons.CLAWS || weapon == game.weapons.BFGAUNT;
 		}
 		//Sword-type weapons
 		public function isSwordTypeWeapon():Boolean {
@@ -755,11 +865,11 @@ use namespace CoC;
 		}
 		//Axe-type weapons
 		public function isAxeTypeWeapon():Boolean {
-			return weapon == game.weapons.DE_GAXE || weapon == game.weapons.DL_AXE_ || weapon == game.weapons.FRTAXE || weapon == game.weapons.KIHAAXE || weapon == game.weapons.L__AXE || weapon == game.weapons.TRASAXE || weapon == game.weapons.WG_GAXE;
+			return weapon == game.weapons.DE_GAXE || weapon == game.weapons.DL_AXE_ || weapon == game.weapons.DWARWA || weapon == game.weapons.FRTAXE || weapon == game.weapons.KIHAAXE || weapon == game.weapons.L__AXE || weapon == game.weapons.TRASAXE || weapon == game.weapons.WG_GAXE;
 		}
 		//Mace/Hammer-type weapons
 		public function isMaceHammerTypeWeapon():Boolean {
-			return weapon == game.weapons.D_WHAM_ || weapon == game.weapons.DOCDEST || weapon == game.weapons.FLAIL || weapon == game.weapons.L_HAMMR || weapon == game.weapons.MACE || weapon == game.weapons.OTETSU || weapon == game.weapons.PIPE || weapon == game.weapons.POCDEST || weapon == game.weapons.WARHAMR;
+			return weapon == game.weapons.D_WHAM_ || weapon == game.weapons.DOCDEST || weapon == game.weapons.FLAIL || weapon == game.weapons.L_HAMMR || weapon == game.weapons.MACE || weapon == game.weapons.OTETSU || weapon == game.weapons.PIPE || weapon == game.weapons.POCDEST || weapon == game.weapons.WARHAMR || weapon == game.weapons.UDKDEST;
 		}
 		//Dueling sword-type weapons (rapier & katana)
 		public function isDuelingTypeWeapon():Boolean {
@@ -767,7 +877,7 @@ use namespace CoC;
 		}
 		//Spear-type
 		public function isSpearTypeWeapon():Boolean {
-			return weapon == game.weapons.DSSPEAR || weapon == game.weapons.GUANDAO || weapon == game.weapons.HALBERD || weapon == game.weapons.LANCE || weapon == game.weapons.PTCHFRK || weapon == game.weapons.SESPEAR || weapon == game.weapons.SPEAR || weapon == game.weapons.TRIDENT || weapon == game.weapons.URTAHLB;
+			return weapon == game.weapons.DSSPEAR || weapon == game.weapons.GUANDAO || weapon == game.weapons.HALBERD || weapon == game.weapons.LANCE || weapon == game.weapons.PTCHFRK || weapon == game.weapons.SESPEAR || weapon == game.weapons.SKYPIER || weapon == game.weapons.SPEAR || weapon == game.weapons.TRIDENT || weapon == game.weapons.URTAHLB;
 		}
 		//Scythe-type DEMSCYT LHSCYTH
 		//Staff <<SCECOMM(scepter not staff)>>
@@ -784,12 +894,17 @@ use namespace CoC;
 		//Throwable melee weapons
 		public function haveThrowableMeleeWeapon():Boolean
 		{
-			return weapon == game.weapons.FRTAXE || weapon == game.weapons.TDAGGER;
+			return weapon == game.weapons.FRTAXE || weapon == game.weapons.TDAGGER || weapon == game.weapons.CHAKRAM;//wrath large weapon that can be throwed or used in melee xD
 		}
 		//Cleave compatibile weapons
 		public function haveWeaponForCleave():Boolean
 		{
 			return isAxeTypeWeapon() || isSwordTypeWeapon() || isDuelingTypeWeapon();
+		}
+		//Is in goblin mech
+		public function isInGoblinMech():Boolean
+		{
+			return vehicles == game.vehicles.GOBMALP;// || vehicles == game.vehicles.
 		}
 		//Natural Jouster perks req check
 		public function isMeetingNaturalJousterReq():Boolean
@@ -887,6 +1002,7 @@ use namespace CoC;
 				if (findPerk(PerkLib.ColdFury) >= 0 || findPerk(PerkLib.ColdLust) >= 0) zerkersboost += (5 + (5 * newGamePlusMod));
 				if (findPerk(PerkLib.ColderFury) >= 0 || findPerk(PerkLib.ColderLust) >= 0) zerkersboost += (10 + (10 * newGamePlusMod));
 				if (findPerk(PerkLib.SalamanderAdrenalGlandsFinalForm) >= 0) zerkersboost += (30 + (30 * newGamePlusMod));
+				if (findPerk(PerkLib.Lustzerker) >= 0 && (jewelryName == "Flame Lizard ring" || jewelryName2 == "Flame Lizard ring" || jewelryName3 == "Flame Lizard ring" || jewelryName4 == "Flame Lizard ring")) zerkersboost += (5 + (5 * newGamePlusMod));
 				if (hasStatusEffect(StatusEffects.Berzerking) && hasStatusEffect(StatusEffects.Lustzerking)) {
 					if (findPerk(PerkLib.ColderFury) >= 0 || findPerk(PerkLib.ColderLust) >= 0) zerkersboost *= 4;
 					else if (findPerk(PerkLib.ColderFury) >= 0 || findPerk(PerkLib.ColderLust) >= 0) zerkersboost *= 3;
@@ -1031,6 +1147,68 @@ use namespace CoC;
 		}
 		override public function get jewelryValue():Number {
 			return _jewelry.value;
+		}
+		override public function get jewelryName2():String {
+			return _jewelry2.name;
+		}
+		override public function get jewelryEffectId2():Number {
+			return _jewelry2.effectId;
+		}
+		override public function get jewelryEffectMagnitude2():Number {
+			return _jewelry2.effectMagnitude;
+		}
+		override public function get jewelryPerk2():String {
+			return _jewelry2.perk;
+		}
+		override public function get jewelryValue2():Number {
+			return _jewelry2.value;
+		}
+		override public function get jewelryName3():String {
+			return _jewelry3.name;
+		}
+		override public function get jewelryEffectId3():Number {
+			return _jewelry3.effectId;
+		}
+		override public function get jewelryEffectMagnitude3():Number {
+			return _jewelry3.effectMagnitude;
+		}
+		override public function get jewelryPerk3():String {
+			return _jewelry3.perk;
+		}
+		override public function get jewelryValue3():Number {
+			return _jewelry3.value;
+		}
+		override public function get jewelryName4():String {
+			return _jewelry4.name;
+		}
+		override public function get jewelryEffectId4():Number {
+			return _jewelry4.effectId;
+		}
+		override public function get jewelryEffectMagnitude4():Number {
+			return _jewelry4.effectMagnitude;
+		}
+		override public function get jewelryPerk4():String {
+			return _jewelry4.perk;
+		}
+		override public function get jewelryValue4():Number {
+			return _jewelry4.value;
+		}
+		
+		//override public function get vehicle.
+		override public function get vehiclesName():String {
+			return _vehicle.name;
+		}
+		override public function get vehiclesEffectId():Number {
+			return _vehicle.effectId;
+		}
+		override public function get vehiclesEffectMagnitude():Number {
+			return _vehicle.effectMagnitude;
+		}
+		override public function get vehiclesPerk():String {
+			return _vehicle.perk;
+		}
+		override public function get vehiclesValue():Number {
+			return _vehicle.value;
 		}
 		
 		//Shields for Bash
@@ -1250,6 +1428,72 @@ use namespace CoC;
 			this._jewelry = value;
 		}
 		
+		public function get jewelry2():Jewelry
+		{
+			return _jewelry2;
+		}
+
+		public function setJewelry2(newJewelry:Jewelry):Jewelry {
+			//Returns the old jewelry, allowing the caller to discard it, store it or try to place it in the player's inventory
+			//Can return null, in which case caller should discard.
+			var oldJewelry:Jewelry = _jewelry2.playerRemove(); //The armor is responsible for removing any bonuses, perks, etc.
+			if (newJewelry == null) {
+				CoC_Settings.error(short + ".jewelry2 is set to null");
+				newJewelry = JewelryLib.NOTHING;
+			}
+			_jewelry2 = newJewelry.playerEquip(); //The jewelry can also choose to equip something else - useful for Ceraph's trap armor
+			return oldJewelry;
+		}
+		// in case you don't want to call the value.equip
+		public function setJewelryHiddenField2(value:Jewelry):void
+		{
+			this._jewelry2 = value;
+		}
+		
+		public function get jewelry3():Jewelry
+		{
+			return _jewelry3;
+		}
+
+		public function setJewelry3(newJewelry:Jewelry):Jewelry {
+			//Returns the old jewelry, allowing the caller to discard it, store it or try to place it in the player's inventory
+			//Can return null, in which case caller should discard.
+			var oldJewelry:Jewelry = _jewelry3.playerRemove(); //The armor is responsible for removing any bonuses, perks, etc.
+			if (newJewelry == null) {
+				CoC_Settings.error(short + ".jewelry2 is set to null");
+				newJewelry = JewelryLib.NOTHING;
+			}
+			_jewelry3 = newJewelry.playerEquip(); //The jewelry can also choose to equip something else - useful for Ceraph's trap armor
+			return oldJewelry;
+		}
+		// in case you don't want to call the value.equip
+		public function setJewelryHiddenField3(value:Jewelry):void
+		{
+			this._jewelry3 = value;
+		}
+		
+		public function get jewelry4():Jewelry
+		{
+			return _jewelry4;
+		}
+
+		public function setJewelry4(newJewelry:Jewelry):Jewelry {
+			//Returns the old jewelry, allowing the caller to discard it, store it or try to place it in the player's inventory
+			//Can return null, in which case caller should discard.
+			var oldJewelry:Jewelry = _jewelry4.playerRemove(); //The armor is responsible for removing any bonuses, perks, etc.
+			if (newJewelry == null) {
+				CoC_Settings.error(short + ".jewelry2 is set to null");
+				newJewelry = JewelryLib.NOTHING;
+			}
+			_jewelry4 = newJewelry.playerEquip(); //The jewelry can also choose to equip something else - useful for Ceraph's trap armor
+			return oldJewelry;
+		}
+		// in case you don't want to call the value.equip
+		public function setJewelryHiddenField4(value:Jewelry):void
+		{
+			this._jewelry4 = value;
+		}
+		
 		public function setShield(newShield:Shield):Shield {
 			//Returns the old shield, allowing the caller to discard it, store it or try to place it in the player's inventory
 			//Can return null, in which case caller should discard.
@@ -1298,6 +1542,29 @@ use namespace CoC;
 			else this._lowerGarment = value;
 		}
 		
+		//Vehicles, added by Ormael
+		public function get vehicles():Vehicles
+		{
+			return _vehicle;
+		}
+
+		public function setVehicle(newVehicle:Vehicles):Vehicles {
+			//Returns the old vehicle, allowing the caller to discard it, store it or try to place it in the player's inventory
+			//Can return null, in which case caller should discard.
+			var oldVehicle:Vehicles = _vehicle.playerRemove();
+			if (newVehicle == null) {
+				CoC_Settings.error(short + ".vehicle is set to null");
+				newVehicle = VehiclesLib.NOTHING;
+			}
+			_vehicle = newVehicle.playerEquip(); //The vehicle can also choose to equip something else
+			return oldVehicle;
+		}
+		// in case you don't want to call the value.equip
+		public function setVehicleHiddenField(value:Vehicles):void
+		{
+			this._vehicle = value;
+		}
+		
 		public override function lustPercent():Number {
 			var lust:Number = 100;
 			var minLustCap:Number = 25;
@@ -1331,6 +1598,13 @@ use namespace CoC;
 			if(findPerk(PerkLib.MinotaurTesticlesEvolved) >= 0) lust -= 5;
 			if((findPerk(PerkLib.UnicornBlessing) >= 0 && cor <= 20) || (findPerk(PerkLib.BicornBlessing) >= 0 && cor >= 80)) lust -= 10;
 			if(findPerk(PerkLib.ChiReflowLust) >= 0) lust -= UmasShop.NEEDLEWORK_LUST_LUST_RESIST;
+			if(jewelryEffectId == JewelryLib.MODIFIER_LUST_R) lust -= jewelryEffectMagnitude;
+			if(jewelryEffectId2 == JewelryLib.MODIFIER_LUST_R) lust -= jewelryEffectMagnitude2;
+			if(jewelryEffectId3 == JewelryLib.MODIFIER_LUST_R) lust -= jewelryEffectMagnitude3;
+			if(jewelryEffectId4 == JewelryLib.MODIFIER_LUST_R) lust -= jewelryEffectMagnitude4;
+			if(headjewelryEffectId == JewelryLib.MODIFIER_LUST_R) lust -= headjewelryEffectMagnitude;
+			if(necklaceEffectId == JewelryLib.MODIFIER_LUST_R) lust -= necklaceEffectMagnitude;
+			if(jewelryEffectId == JewelryLib.MODIFIER_LUST_R && jewelryEffectId2 == JewelryLib.MODIFIER_LUST_R && jewelryEffectId3 == JewelryLib.MODIFIER_LUST_R && jewelryEffectId4 == JewelryLib.MODIFIER_LUST_R && headjewelryEffectId == JewelryLib.MODIFIER_LUST_R && necklaceEffectId == JewelryLib.MODIFIER_LUST_R) lust -= 15;
 			if(lust < minLustCap) lust = minLustCap;
 			if(statusEffectv1(StatusEffects.BlackCatBeer) > 0) {
 				if(lust >= 80) lust = 100;
@@ -1384,13 +1658,18 @@ use namespace CoC;
 			}
 			lust = Math.round(lust);
 			if (hasStatusEffect(StatusEffects.Lustzerking) && findPerk(PerkLib.ColdLust) < 1) lust = 100;
+			if (hasStatusEffect(StatusEffects.BlazingBattleSpirit)) lust = 0;
 			return lust;
 		}
 
 		public function wrathRatioToHP():Number {
 			var ratioWH:Number = 10;
-			if (hasPerk(PerkLib.FuelForTheFire)) ratioWH -= 5;
 			return ratioWH;
+		}
+		public function wrathFromHPmulti():Number {
+			var WHmulti:Number = 1;
+			if (hasPerk(PerkLib.FuelForTheFire)) WHmulti *= 2;
+			return WHmulti;
 		}
 		public override function damagePercent():Number {
 			var mult:Number = 100;
@@ -1476,7 +1755,7 @@ use namespace CoC;
 					damage = reducePhysDamage(damage);
 					//Wrath
 					var gainedWrath:Number = 0;
-					gainedWrath += Math.round(damage / wrathRatioToHP());
+					gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
 					wrath += gainedWrath;
 					if (wrath > maxWrath()) wrath = maxWrath();
 					//game.HPChange(-damage, display);
@@ -1588,7 +1867,7 @@ use namespace CoC;
 					damage = reduceMagicDamage(damage);
 					//Wrath
 					var gainedWrath:Number = 0;
-					gainedWrath += Math.round(damage / wrathRatioToHP());
+					gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
 					wrath += gainedWrath;
 					if (wrath > maxWrath()) wrath = maxWrath();
 					//game.HPChange(-damage, display);
@@ -1647,6 +1926,13 @@ use namespace CoC;
 			if (findPerk(PerkLib.FromTheFrozenWaste) >= 0 || findPerk(PerkLib.ColdAffinity) >= 0) mult += 100;
 			if (findPerk(PerkLib.FireAffinity) >= 0) mult -= 50;
 			if (hasStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1) && (statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1) > 0)) mult -= statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1);
+			if (jewelryEffectId == JewelryLib.MODIFIER_FIRE_R) mult -= jewelryEffectMagnitude;
+			if (jewelryEffectId2 == JewelryLib.MODIFIER_FIRE_R) mult -= jewelryEffectMagnitude2;
+			if (jewelryEffectId3 == JewelryLib.MODIFIER_FIRE_R) mult -= jewelryEffectMagnitude3;
+			if (jewelryEffectId4 == JewelryLib.MODIFIER_FIRE_R) mult -= jewelryEffectMagnitude4;
+			if (headjewelryEffectId == JewelryLib.MODIFIER_FIRE_R) mult -= headjewelryEffectMagnitude;
+			if (necklaceEffectId == JewelryLib.MODIFIER_FIRE_R) mult -= necklaceEffectMagnitude;
+			if (jewelryEffectId == JewelryLib.MODIFIER_FIRE_R && jewelryEffectId2 == JewelryLib.MODIFIER_FIRE_R && jewelryEffectId3 == JewelryLib.MODIFIER_FIRE_R && jewelryEffectId4 == JewelryLib.MODIFIER_FIRE_R && headjewelryEffectId == JewelryLib.MODIFIER_FIRE_R && necklaceEffectId == JewelryLib.MODIFIER_FIRE_R) mult -= 15;
 			//Caps damage reduction at 100%
 			if (mult < 0) mult = 0;
 			return mult;
@@ -1670,7 +1956,7 @@ use namespace CoC;
 					damage = reduceFireDamage(damage);
 					//Wrath
 					var gainedWrath:Number = 0;
-					gainedWrath += Math.round(damage / wrathRatioToHP());
+					gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
 					wrath += gainedWrath;
 					if (wrath > maxWrath()) wrath = maxWrath();
 					//game.HPChange(-damage, display);
@@ -1731,7 +2017,18 @@ use namespace CoC;
 			if (upperGarmentName == "Fur bikini top") mult -= 10;
 			if (lowerGarmentName == "Fur loincloth" || lowerGarmentName == "Fur panty") mult -= 10;
 			if (necklaceName == "Blue Winter scarf") mult -= 20;
+			if (jewelryEffectId == JewelryLib.MODIFIER_ICE_R) mult -= jewelryEffectMagnitude;
+			if (jewelryEffectId2 == JewelryLib.MODIFIER_ICE_R) mult -= jewelryEffectMagnitude2;
+			if (jewelryEffectId3 == JewelryLib.MODIFIER_ICE_R) mult -= jewelryEffectMagnitude3;
+			if (jewelryEffectId4 == JewelryLib.MODIFIER_ICE_R) mult -= jewelryEffectMagnitude4;
+			if (headjewelryEffectId == JewelryLib.MODIFIER_ICE_R) mult -= headjewelryEffectMagnitude;
+			if (necklaceEffectId == JewelryLib.MODIFIER_ICE_R) mult -= necklaceEffectMagnitude;
+			if (jewelryEffectId == JewelryLib.MODIFIER_ICE_R && jewelryEffectId2 == JewelryLib.MODIFIER_ICE_R && jewelryEffectId3 == JewelryLib.MODIFIER_ICE_R && jewelryEffectId4 == JewelryLib.MODIFIER_ICE_R && headjewelryEffectId == JewelryLib.MODIFIER_ICE_R && necklaceEffectId == JewelryLib.MODIFIER_ICE_R) mult -= 15;
 			if (hasStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1) && (statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff1) > 0)) mult -= statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff1);
+			if (hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
+				if (mouseScore() >= 12 && arms.type == Arms.HINEZUMI && lowerBody == LowerBody.HINEZUMI && (jewelryName == "Infernal Mouse ring" || jewelryName2 == "Infernal Mouse ring" || jewelryName3 == "Infernal Mouse ring" || jewelryName4 == "Infernal Mouse ring")) mult += 90;
+				else mult += 100;
+			}
 			//Caps damage reduction at 100%
 			if (mult < 0) mult = 0;
 			return mult;
@@ -1755,7 +2052,7 @@ use namespace CoC;
 					damage = reduceIceDamage(damage);
 					//Wrath
 					var gainedWrath:Number = 0;
-					gainedWrath += Math.round(damage / wrathRatioToHP());
+					gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
 					wrath += gainedWrath;
 					if (wrath > maxWrath()) wrath = maxWrath();
 					//game.HPChange(-damage, display);
@@ -1811,6 +2108,13 @@ use namespace CoC;
 
 		public override function damageLightningPercent():Number {
 			var mult:Number = damageMagicalPercent();
+			if (jewelryEffectId == JewelryLib.MODIFIER_LIGH_R) mult -= jewelryEffectMagnitude;
+			if (jewelryEffectId2 == JewelryLib.MODIFIER_LIGH_R) mult -= jewelryEffectMagnitude2;
+			if (jewelryEffectId3 == JewelryLib.MODIFIER_LIGH_R) mult -= jewelryEffectMagnitude3;
+			if (jewelryEffectId4 == JewelryLib.MODIFIER_LIGH_R) mult -= jewelryEffectMagnitude4;
+			if (headjewelryEffectId == JewelryLib.MODIFIER_LIGH_R) mult -= headjewelryEffectMagnitude;
+			if (necklaceEffectId == JewelryLib.MODIFIER_LIGH_R) mult -= necklaceEffectMagnitude;
+			if (jewelryEffectId == JewelryLib.MODIFIER_LIGH_R && jewelryEffectId2 == JewelryLib.MODIFIER_LIGH_R && jewelryEffectId3 == JewelryLib.MODIFIER_LIGH_R && jewelryEffectId4 == JewelryLib.MODIFIER_LIGH_R && headjewelryEffectId == JewelryLib.MODIFIER_LIGH_R && necklaceEffectId == JewelryLib.MODIFIER_LIGH_R) mult -= 15;
 			//Caps damage reduction at 100%
 			if (mult < 0) mult = 0;
 			return mult;
@@ -1834,7 +2138,7 @@ use namespace CoC;
 					damage = reduceLightningDamage(damage);
 					//Wrath
 					var gainedWrath:Number = 0;
-					gainedWrath += Math.round(damage / wrathRatioToHP());
+					gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
 					wrath += gainedWrath;
 					if (wrath > maxWrath()) wrath = maxWrath();
 					//game.HPChange(-damage, display);
@@ -1890,6 +2194,13 @@ use namespace CoC;
 
 		public override function damageDarknessPercent():Number {
 			var mult:Number = damageMagicalPercent();
+			if (jewelryEffectId == JewelryLib.MODIFIER_DARK_R) mult -= jewelryEffectMagnitude;
+			if (jewelryEffectId2 == JewelryLib.MODIFIER_DARK_R) mult -= jewelryEffectMagnitude2;
+			if (jewelryEffectId3 == JewelryLib.MODIFIER_DARK_R) mult -= jewelryEffectMagnitude3;
+			if (jewelryEffectId4 == JewelryLib.MODIFIER_DARK_R) mult -= jewelryEffectMagnitude4;
+			if (headjewelryEffectId == JewelryLib.MODIFIER_DARK_R) mult -= headjewelryEffectMagnitude;
+			if (necklaceEffectId == JewelryLib.MODIFIER_DARK_R) mult -= necklaceEffectMagnitude;
+			if (jewelryEffectId == JewelryLib.MODIFIER_DARK_R && jewelryEffectId2 == JewelryLib.MODIFIER_DARK_R && jewelryEffectId3 == JewelryLib.MODIFIER_DARK_R && jewelryEffectId4 == JewelryLib.MODIFIER_DARK_R && headjewelryEffectId == JewelryLib.MODIFIER_DARK_R && necklaceEffectId == JewelryLib.MODIFIER_DARK_R) mult -= 15;
 			//Caps damage reduction at 100%
 			if (mult < 0) mult = 0;
 			return mult;
@@ -1913,7 +2224,7 @@ use namespace CoC;
 					damage = reduceDarknessDamage(damage);
 					//Wrath
 					var gainedWrath:Number = 0;
-					gainedWrath += Math.round(damage / wrathRatioToHP());
+					gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
 					wrath += gainedWrath;
 					if (wrath > maxWrath()) wrath = maxWrath();
 					//game.HPChange(-damage, display);
@@ -1971,6 +2282,13 @@ use namespace CoC;
 			var mult:Number = damageMagicalPercent();
 			if (findPerk(PerkLib.VenomGlandsEvolved) >= 0) mult -= 5;
 			if (findPerk(PerkLib.VenomGlandsFinalForm) >= 0) mult -= 10;
+			if (jewelryEffectId == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude;
+			if (jewelryEffectId2 == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude2;
+			if (jewelryEffectId3 == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude3;
+			if (jewelryEffectId4 == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude4;
+			if (headjewelryEffectId == JewelryLib.MODIFIER_POIS_R) mult -= headjewelryEffectMagnitude;
+			if (necklaceEffectId == JewelryLib.MODIFIER_POIS_R) mult -= necklaceEffectMagnitude;
+			if (jewelryEffectId == JewelryLib.MODIFIER_POIS_R && jewelryEffectId2 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId3 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId4 == JewelryLib.MODIFIER_POIS_R && headjewelryEffectId == JewelryLib.MODIFIER_POIS_R && necklaceEffectId == JewelryLib.MODIFIER_POIS_R) mult -= 15;
 			//Caps damage reduction at 100%
 			if (mult < 0) mult = 0;
 			return mult;
@@ -1994,7 +2312,7 @@ use namespace CoC;
 					damage = reducePoisonDamage(damage);
 					//Wrath
 					var gainedWrath:Number = 0;
-					gainedWrath += Math.round(damage / wrathRatioToHP());
+					gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
 					wrath += gainedWrath;
 					if (wrath > maxWrath()) wrath = maxWrath();
 					//game.HPChange(-damage, display);
@@ -2474,7 +2792,17 @@ use namespace CoC;
 				race = "somewhat human mutant";
 			if (demonScore() >= 5)
 			{
-				if (demonScore() >= 11) {
+				if (demonScore() >= 16 && hasStatusEffect(StatusEffects.PlayerPhylactery)) {
+					if (isTaur()) {
+						race = "";
+						race += mf("incubi-taur", "succubi-taur");
+					}
+					else {
+						race = "";
+						race += mf("incubus", "succubus");
+					}
+				}
+				else if (demonScore() >= 11) {
 					if (isTaur()) {
 						race = "";
 						race += mf("incubi-kintaur", "succubi-kintaur");
@@ -2497,19 +2825,25 @@ use namespace CoC;
 			}
 			if (devilkinScore() >= 7)
 			{
-				if (devilkinScore() >= 10) {
-					if (devilkinScore() >= 14)  {
-						if (isTaur()) race = "greater devil-taur";
-						else race = "greater devil";
+				if (devilkinScore() >= 11) {
+					if (devilkinScore() >= 16 && hasStatusEffect(StatusEffects.PlayerPhylactery))  {
+						if (devilkinScore() >= 16) {
+							if (isTaur()) race = "archdevil-taur";
+							else race = "archdevil";
+						}
+						else {
+							if (isTaur()) race = "devil-taur";
+							else race = "devil";
+						}
 					}
 					else {
-						if (isTaur()) race = "devil-taur";
-						else race = "devil";
+						if (isTaur()) race = "devilkin-taur";
+						else race = "devilkin";
 					}
 				}
 				else {
-					if (isTaur()) race = "half devil-taur";
-					else race = "half devil";
+					if (isTaur()) race = "half fiend-taur";
+					else race = "half fiend";
 				}
 			}
 			if (sharkScore() >= 4)
@@ -2592,14 +2926,19 @@ use namespace CoC;
 			}
 			if (kangaScore() >= 4)
 				race = "kangaroo-morph";
-			if (mouseScore() >= 3)
+			if (mouseScore() >= 4)
 			{
-				if (isTaur()) race = "mouse-taur";
+				if (mouseScore() >= 12 && arms.type == Arms.HINEZUMI && lowerBody == LowerBody.HINEZUMI) {
+					if (isTaur()) race = "hinezumi-taur";
+					race = "hinezumi";
+				}
+				else if (mouseScore() >= 8) {
+					if (isTaur()) race = "mouse-taur";
+					race = "mouse-morph";
+				}
 				else {
-					if (faceType != 16)
-					race = "mouse-" + mf("boy", "girl");
-					else
-						race = "mouse-morph";
+					if (isTaur()) race = "mouse-" + mf("boy", "girl") + "-taur";
+					else race = "mouse-" + mf("boy", "girl");
 				}
 			}
 			if (scorpionScore() >= 4)
@@ -2757,6 +3096,10 @@ use namespace CoC;
 					else race = "half raiju";
 				}
 			}
+			if (thunderbirdScore() >= 12)
+			{
+				race = "Thunderbird";
+			}
 			//<mod>
 			if (pigScore() >= 5) 
 			{
@@ -2893,6 +3236,8 @@ use namespace CoC;
 			var humanCounter:Number = 0;
 			if (hasPlainSkinOnly() && skinTone != "slippery")
 				humanCounter++;
+			if (hairType == Hair.NORMAL)
+				humanCounter++;
 			if (faceType == Face.HUMAN)
 				humanCounter++;
 			if (eyes.type == Eyes.HUMAN)
@@ -2917,19 +3262,21 @@ use namespace CoC;
 				humanCounter++;
 			if (lowerBody == LowerBody.HUMAN)
 				humanCounter++;
+			if (rearBody.type == RearBody.NONE)
+				humanCounter++;
 			if (normalCocks() >= 1 || (hasVagina() && vaginaType() == 0))
 				humanCounter++;
 			if (breastRows.length == 1 && hasPlainSkinOnly() && skinTone != "slippery")
 				humanCounter++;
 			if (skin.base.pattern == Skin.PATTERN_NONE)
 				humanCounter++;
-			humanCounter += (56 - internalChimeraScore());
+			humanCounter += (59 - internalChimeraScore());
 			if (isGargoyle()) humanCounter = 0;
 			End("Player","racialScore");
 			return humanCounter;
 		}
 		public function humanMaxScore():Number {
-			var humanMaxCounter:Number = 71;//15 + 56 z perków mutacyjnych (każdy nowy mutation perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle)
+			var humanMaxCounter:Number = 76;//17 + 59 z perków mutacyjnych (każdy nowy mutation perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle)
 			return humanMaxCounter;
 		}
 		
@@ -2996,6 +3343,12 @@ use namespace CoC;
 			if (findPerk(PerkLib.GorgonsEyes) >= 0)
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.GorgonsEyesEvolved) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.HinezumiBurningBlood) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.HinezumiBurningBloodEvolved) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.HinezumiBurningBloodFinalForm) >= 0)
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.HollowFangs) >= 0)
 				internalChimeraCounter++;
@@ -3136,6 +3489,8 @@ use namespace CoC;
 				chimeraCounter++;
 			if (raijuScore() >= 5)
 				chimeraCounter++;
+			if (thunderbirdScore() >= 12)
+				chimeraCounter++;
 			if (bunnyScore() >= 5)
 				chimeraCounter++;
 			if (harpyScore() >= 4)
@@ -3144,7 +3499,7 @@ use namespace CoC;
 				chimeraCounter++;
 			if (kangaScore() >= 4)
 				chimeraCounter++;
-			if (mouseScore() >= 3)
+			if (mouseScore() >= 4)
 				chimeraCounter++;
 			if (scorpionScore() >= 4)
 				chimeraCounter++;
@@ -3247,7 +3602,7 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (demonScore() >= 11)
 				grandchimeraCounter++;
-			if (devilkinScore() >= 10)
+			if (devilkinScore() >= 11)
 				grandchimeraCounter++;
 			if (sharkScore() >= 8)
 				grandchimeraCounter++;
@@ -3261,19 +3616,21 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (raijuScore() >= 10)
 				grandchimeraCounter++;
+			if (thunderbirdScore() >= 12)
+				grandchimeraCounter++;
 			if (bunnyScore() >= 10)
 				grandchimeraCounter++;
 			if (harpyScore() >= 8)
 				grandchimeraCounter++;
 			if (spiderScore() >= 7)
 				grandchimeraCounter++;
-/*			if (kangaScore() >= 4)
+//			if (kangaScore() >= 4)
+//				grandchimeraCounter++;
+			if (mouseScore() >= 8)
 				grandchimeraCounter++;
-			if (mouseScore() >= 3)
-				grandchimeraCounter++;
-			if (scorpionScore() >= 4)
-				grandchimeraCounter++;
-*/			if (mantisScore() >= 12)
+//			if (scorpionScore() >= 4)
+//				grandchimeraCounter++;
+			if (mantisScore() >= 12)
 				grandchimeraCounter++;
 			if (salamanderScore() >= 7)
 				grandchimeraCounter++;
@@ -3360,6 +3717,8 @@ use namespace CoC;
 				demonCounter++;
 			if (demonCocks() > 0)
 				demonCounter++;
+			if (hasStatusEffect(StatusEffects.PlayerPhylactery))
+				demonCounter += 5;
 			if (horns.type == Horns.GOAT)
 				demonCounter -= 10;
 			if (findPerk(PerkLib.BlackHeart) >= 0)
@@ -3409,6 +3768,8 @@ use namespace CoC;
 				devilkinCounter++;
 			if (cor >= 60)
 				devilkinCounter++;
+			if (hasStatusEffect(StatusEffects.PlayerPhylactery))
+				devilkinCounter += 5;
 			if (findPerk(PerkLib.ObsidianHeart) >= 0)
 				devilkinCounter++;
 			if (findPerk(PerkLib.ObsidianHeartEvolved) >= 0)
@@ -3653,21 +4014,43 @@ use namespace CoC;
 			var mouseCounter:Number = 0;
 			if (ears.type == Ears.MOUSE)
 				mouseCounter++;
-			if (tailType == Tail.MOUSE)
+			if (tailType == Tail.MOUSE || tailType == Tail.HINEZUMI)
 				mouseCounter++;
-			if (faceType == Face.BUCKTEETH)
-				mouseCounter++;
-			if (faceType == Face.MOUSE)
+			if (faceType == Face.BUCKTEETH || faceType == Face.MOUSE)
 				mouseCounter += 2;
-			//Fur only counts if some canine features are present
-			if (hasFur() && mouseCounter > 0)
+			if (lowerBody == LowerBody.MOUSE || lowerBody == LowerBody.HINEZUMI)
 				mouseCounter++;
-			if (tallness < 55 && mouseCounter > 0)
+			if (arms.type == Arms.HINEZUMI)
 				mouseCounter++;
-			if (tallness < 45 && mouseCounter > 0)
+			if (eyes.type == Eyes.HINEZUMI && eyes.colour == "blazing red")
+				mouseCounter++;
+			if (hairType == Hair.BURNING)
+				mouseCounter++;
+			if (hairColor == "red" || hairColor == "orange" || hairColor == "pinkish orange")
+				mouseCounter++;
+			if (hasFur() || hasPartialCoat(Skin.FUR)) {
+				mouseCounter++;
+				if (tallness < 60)
+					mouseCounter++;
+				if (tallness < 48)
+					mouseCounter++;
+				}
+			if (findPerk(PerkLib.HinezumiBurningBlood) >= 0)
+				mouseCounter++;
+			if (findPerk(PerkLib.HinezumiBurningBloodEvolved) >= 0)
+				mouseCounter++;
+			if (findPerk(PerkLib.HinezumiBurningBloodFinalForm) >= 0)
+				mouseCounter++;
+			if (findPerk(PerkLib.HinezumiBurningBlood) >= 0 && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
+				mouseCounter++;
+			if (findPerk(PerkLib.HinezumiBurningBloodEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
 				mouseCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				mouseCounter += 50;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && mouseCounter >= 4)
+				mouseCounter += 1;
+			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && mouseCounter >= 8)
+				mouseCounter += 1;
 			if (isGargoyle()) mouseCounter = 0;
 			End("Player","racialScore");
 			return mouseCounter;
@@ -4352,6 +4735,8 @@ use namespace CoC;
 				if (lowerBody == LowerBody.HUMAN)
 					goblinCounter++;
 			}
+			if (findPerk(PerkLib.GoblinoidBlood) >= 0)
+				goblinCounter++;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && goblinCounter >= 4)
 				goblinCounter += 1;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && goblinCounter >= 8)
@@ -4971,6 +5356,43 @@ use namespace CoC;
 			return raijuCounter;
 		}
 
+		//Thunderbird score
+		public function thunderbirdScore():Number {
+			Begin("Player","racialScore","thunderbird");
+			var thunderbirdCounter:Number = 0;
+			if (ears.type == Ears.ELFIN)
+				thunderbirdCounter++;
+			if (eyes.type == Eyes.RAIJU)
+				thunderbirdCounter++;
+			if (faceType == Face.HUMAN)
+				thunderbirdCounter++;
+			if (arms.type == Arms.HARPY)
+				thunderbirdCounter++;
+			if (wings.type == Wings.FEATHERED_LARGE)
+				thunderbirdCounter += 2;
+			if (lowerBody == LowerBody.HARPY)
+				thunderbirdCounter++;
+			if (tailType == Tail.THUNDERBIRD)
+				thunderbirdCounter++;
+			if (rearBody.type == RearBody.RAIJU_MANE)
+				thunderbirdCounter++;
+			if (skin.base.pattern == Skin.PATTERN_LIGHTNING_SHAPED_TATTOO)
+				thunderbirdCounter++;
+			if (hairType == Hair.STORM)
+				thunderbirdCounter++;
+			if (hairColor == "purple" || hairColor == "light blue" || hairColor == "yellow" || hairColor == "white")
+				thunderbirdCounter++;
+			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+				thunderbirdCounter += 50;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && thunderbirdCounter >= 4)
+				thunderbirdCounter += 1;
+			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && thunderbirdCounter >= 8)
+				thunderbirdCounter += 1;
+			if (isGargoyle()) thunderbirdCounter = 0;
+			End("Player","racialScore");
+			return thunderbirdCounter;
+		}
+
 		//Determine Mutant Rating
 		public function mutantScore():Number{
 			Begin("Player","racialScore","mutant");
@@ -5152,7 +5574,9 @@ use namespace CoC;
 				cavewyrmCounter++;
 			if (tailType == Tail.CAVE_WYRM)
 				cavewyrmCounter++;
-			if (hasStatusEffect(StatusEffects.GlowingNipples))
+			if (hasStatusEffect(StatusEffects.GlowingNipples) || hasStatusEffect(StatusEffects.GlowingAsshole))
+				cavewyrmCounter++;
+			if (cavewyrmCocks() > 0 || vaginaType() == VaginaClass.CAVE_WYRM)
 				cavewyrmCounter++;
 			if (findPerk(PerkLib.AcidSpit) >= 0)
 				cavewyrmCounter++;
@@ -6205,36 +6629,135 @@ use namespace CoC;
 
 		//TODO: (logosK) elderSlime, succubus pussy/demonic eyes, arachne, wasp, lactabovine/slut, sleipnir, hellhound, ryu, quetzalcoatl, eredar, anihilan, 
 
-		public function maxPrestigeJobs():Number {
-			var prestigeJobs:Number = 1;
-			if (findPerk(PerkLib.PrestigeJobArcaneArcher) >= 0)
-				prestigeJobs--;
-			if (findPerk(PerkLib.PrestigeJobBerserker) >= 0)
-				prestigeJobs--;
-			if (findPerk(PerkLib.PrestigeJobGreySage) >= 0)
-				prestigeJobs--;
-			if (findPerk(PerkLib.PrestigeJobSeer) >= 0)
-				prestigeJobs--;
-			if (findPerk(PerkLib.PrestigeJobSentinel) >= 0)
-				prestigeJobs--;
-			if (findPerk(PerkLib.PrestigeJobSoulArcher) >= 0)
-				prestigeJobs--;
-			if (findPerk(PerkLib.PrestigeJobSoulArtMaster) >= 0)
-				prestigeJobs--;
-			if (findPerk(PerkLib.PrestigeJobTempest) >= 0)
-				prestigeJobs--;
-			if (findPerk(PerkLib.DeityJobMunchkin) >= 0)
-				prestigeJobs++;
-			if (findPerk(PerkLib.AscensionBuildingPrestige01) >= 0)
-				prestigeJobs++;
-			if (findPerk(PerkLib.AscensionBuildingPrestige02) >= 0)
-				prestigeJobs++;
-			if (findPerk(PerkLib.AscensionBuildingPrestige03) >= 0)
-				prestigeJobs++;
-			if (findPerk(PerkLib.AscensionBuildingPrestige04) >= 0)
-				prestigeJobs++;
-			return prestigeJobs;
+		public function currentBasicJobs():Number {
+			var basicJobs:Number = 0;
+			if (findPerk(PerkLib.JobAllRounder) >= 0)
+				basicJobs++;
+			if (findPerk(PerkLib.JobBeastWarrior) >= 0)
+				basicJobs++;
+			if (findPerk(PerkLib.JobElementalConjurer) >= 0)
+				basicJobs++;
+			if (findPerk(PerkLib.JobGolemancer) >= 0)
+				basicJobs++;
+			if (findPerk(PerkLib.JobGuardian) >= 0)
+				basicJobs++;
+			if (findPerk(PerkLib.JobRanger) >= 0)
+				basicJobs++;
+			if (findPerk(PerkLib.JobSeducer) >= 0)
+				basicJobs++;
+			if (findPerk(PerkLib.JobSorcerer) >= 0)
+				basicJobs++;
+			if (findPerk(PerkLib.JobSoulCultivator) >= 0)
+				basicJobs++;
+			if (findPerk(PerkLib.JobWarrior) >= 0)
+				basicJobs++;
+			return basicJobs;
 		}
+		public function currentAdvancedJobs():Number {
+			var advancedJobs1:Number = 0;
+			if (findPerk(PerkLib.JobBrawler) >= 0)
+				advancedJobs1++;
+			if (findPerk(PerkLib.JobCourtesan) >= 0)
+				advancedJobs1++;
+			if (findPerk(PerkLib.JobDefender) >= 0)
+				advancedJobs1++;
+			if (findPerk(PerkLib.JobDervish) >= 0)
+				advancedJobs1++;
+			if (findPerk(PerkLib.JobEnchanter) >= 0)
+				advancedJobs1++;
+			if (findPerk(PerkLib.JobEromancer) >= 0)
+				advancedJobs1++;
+			if (findPerk(PerkLib.JobGunslinger) >= 0)
+				advancedJobs1++;
+			if (findPerk(PerkLib.JobHealer) >= 0)
+				advancedJobs1++;
+			if (findPerk(PerkLib.JobHunter) >= 0)
+				advancedJobs1++;
+			if (findPerk(PerkLib.JobKnight) >= 0)
+				advancedJobs1++;
+			if (findPerk(PerkLib.JobMonk) >= 0)
+				advancedJobs1++;
+			if (findPerk(PerkLib.JobRogue) >= 0)
+				advancedJobs1++;
+			if (findPerk(PerkLib.JobSwordsman) >= 0)
+				advancedJobs1++;
+			if (findPerk(PerkLib.JobWarlord) >= 0)
+				advancedJobs1++;
+			return advancedJobs1;
+		}
+		public function maxAdvancedJobs():Number {
+			var advancedJobs2:Number = 3;
+			if (findPerk(PerkLib.BasicAllRounderEducation) >= 0)
+				advancedJobs2 += 3;
+			if (findPerk(PerkLib.IntermediateAllRounderEducation) >= 0)
+				advancedJobs2 += 3;
+			if (findPerk(PerkLib.AdvancedAllRounderEducation) >= 0)
+				advancedJobs2 += 3;
+			if (findPerk(PerkLib.ExpertAllRounderEducation) >= 0)
+				advancedJobs2 += 3;
+			return advancedJobs2;
+		}
+		public function freeAdvancedJobsSlots():Number {
+			var advancedJobs3:Number = 0;
+			advancedJobs3 += maxAdvancedJobs();
+			advancedJobs3 -= currentAdvancedJobs();
+			return advancedJobs3;
+		}
+		public function currentHiddenJobs():Number {
+			var hiddenJobs1:Number = 0;
+			return hiddenJobs1;
+		}
+		public function maxHiddenJobs():Number {
+			var hiddenJobs2:Number = 1;
+			return hiddenJobs2;
+		}
+		public function freeHiddenJobsSlots():Number {
+			var hiddenJobs2:Number = 0;
+			hiddenJobs2 += maxHiddenJobs();
+			hiddenJobs2 -= currentHiddenJobs();
+			return hiddenJobs2;
+		}
+		public function currentPrestigeJobs():Number {
+			var prestigeJobs1:Number = 0;
+			if (findPerk(PerkLib.PrestigeJobArcaneArcher) >= 0)
+				prestigeJobs1++;
+			if (findPerk(PerkLib.PrestigeJobBerserker) >= 0)
+				prestigeJobs1++;
+			if (findPerk(PerkLib.PrestigeJobGreySage) >= 0)
+				prestigeJobs1++;
+			if (findPerk(PerkLib.PrestigeJobSeer) >= 0)
+				prestigeJobs1++;
+			if (findPerk(PerkLib.PrestigeJobSentinel) >= 0)
+				prestigeJobs1++;
+			if (findPerk(PerkLib.PrestigeJobSoulArcher) >= 0)
+				prestigeJobs1++;
+			if (findPerk(PerkLib.PrestigeJobSoulArtMaster) >= 0)
+				prestigeJobs1++;
+			if (findPerk(PerkLib.PrestigeJobTempest) >= 0)
+				prestigeJobs1++;
+			return prestigeJobs1;
+		}
+		public function maxPrestigeJobs():Number {
+			var prestigeJobs2:Number = 1;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0)
+				prestigeJobs2++;
+			if (findPerk(PerkLib.AscensionBuildingPrestige01) >= 0)
+				prestigeJobs2++;
+			if (findPerk(PerkLib.AscensionBuildingPrestige02) >= 0)
+				prestigeJobs2++;
+			if (findPerk(PerkLib.AscensionBuildingPrestige03) >= 0)
+				prestigeJobs2++;
+			if (findPerk(PerkLib.AscensionBuildingPrestige04) >= 0)
+				prestigeJobs2++;
+			return prestigeJobs2;
+		}
+		public function freePrestigeJobsSlots():Number {
+			var prestigeJobs3:Number = 0;
+			prestigeJobs3 += maxPrestigeJobs();
+			prestigeJobs3 -= currentPrestigeJobs();
+			return prestigeJobs3;
+		}
+		
 		public function maxHeartMutations():Number {
 			var heartMutations:Number = 1;
 			if (findPerk(PerkLib.BlackHeart) >= 0)
@@ -6274,6 +6797,16 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
 				adrenalglandsMutations++;
 			return adrenalglandsMutations;
+		}
+		public function maxBloodsteamMutations():Number {
+			var bloodsteamMutations:Number = 1;
+			if (findPerk(PerkLib.VampiricBloodsteam) >= 0)
+				bloodsteamMutations--;
+			if (findPerk(PerkLib.HinezumiBurningBlood) >= 0)
+				bloodsteamMutations--;
+			if (findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
+				bloodsteamMutations++;
+			return bloodsteamMutations;
 		}
 
 		public function lactationQ():Number
@@ -6849,13 +7382,40 @@ use namespace CoC;
 			if (this.manticoreScore() >= 6) minSen += (30 * newGamePlusMod);
 			if (this.manticoreScore() >= 12) minSen += (15 * newGamePlusMod);
 			if (this.devilkinScore() >= 7) minSen += (10 * newGamePlusMod);
-			if (this.devilkinScore() >= 11) minSen += (15 * newGamePlusMod);
-			if (this.devilkinScore() >= 14) minSen += (30 * newGamePlusMod);
+			if (this.devilkinScore() >= 11) minSen += (5 * newGamePlusMod);
+			if (this.devilkinScore() >= 16) minSen += (25 * newGamePlusMod);
 			if (this.elfScore() >= 5) minSen += (15 * newGamePlusMod);
 			if (this.elfScore() >= 11) minSen += (15 * newGamePlusMod);
 			if (this.raijuScore() >= 5) minSen += (25 * newGamePlusMod);
 			if (this.raijuScore() >= 10) minSen += (25 * newGamePlusMod);
 			if (this.hellcatScore() >= 10) minSen += (25 * newGamePlusMod);
+			//Rings
+			if (this.jewelryName == "Ring of Intelligence") minInt += 5;
+			if (this.jewelryName == "Ring of Libido") minLib += 5;
+			if (this.jewelryName == "Ring of Sensitivity") minSen += 5;
+			if (this.jewelryName == "Ring of Speed") minSpe += 5;
+			if (this.jewelryName == "Ring of Strength") minStr += 5;
+			if (this.jewelryName == "Ring of Toughness") minTou += 5;
+			if (this.jewelryName == "Ring of Wisdom") minWis += 5;
+			//Other
+			if (this.hasPerk(PerkLib.GoblinoidBlood)) {
+				if (this.hasKeyItem("Drug injectors") >= 0) {
+					minLib += 25;
+					minSen += 5;
+				}
+				if (this.hasKeyItem("Improved Drug injectors") >= 0) {
+					minLib += 50;
+					minSen += 10;
+				}
+				if (this.hasKeyItem("Potent Drug injectors") >= 0) {
+					minLib += 75;
+					minSen += 15;
+				}
+				if (this.hasKeyItem("Power bracer") >= 0) minSen += 5;
+				if (this.hasKeyItem("Powboy") >= 0) minSen += 10;
+				if (this.hasKeyItem("M.G.S. bracer") >= 0) minSen += 15;
+			}
+			if (hasStatusEffect(StatusEffects.PlayerPhylactery)) minCor = 100;
 			if (minLib < 1) minLib = 1;
 			return {
 				str:minStr,
@@ -7133,6 +7693,24 @@ use namespace CoC;
 				maxSpe += (15 * newGamePlusMod);
 				maxInt -= (5 * newGamePlusMod);
 			}//+10/10-20
+			if (mouseScore() >= 4) {
+				if (mouseScore() >= 12 && arms.type == Arms.HINEZUMI && lowerBody == LowerBody.HINEZUMI) {
+					maxStr += (60 * newGamePlusMod);
+					maxTou -= (10 * newGamePlusMod);
+					maxSpe += (80 * newGamePlusMod);
+					maxWis += (50 * newGamePlusMod);
+				}
+				else if (mouseScore() >= 8) {
+					maxTou -= (10 * newGamePlusMod);
+					maxSpe += (80 * newGamePlusMod);
+					maxWis += (50 * newGamePlusMod);
+				}
+				else {
+					maxTou -= (10 * newGamePlusMod);
+					maxSpe += (40 * newGamePlusMod);
+					maxWis += (30 * newGamePlusMod);
+				}
+			}
 			if (wolfScore() >= 4) {
 				if (wolfScore() >= 10) {
 					maxStr += (60 * newGamePlusMod);
@@ -7473,6 +8051,11 @@ use namespace CoC;
 					maxSen += (25 * newGamePlusMod);
 				}
 			}//+10/10-20
+			if (thunderbirdScore() >= 12) {
+				maxTou -= (20 * newGamePlusMod);
+				maxSpe += (100 * newGamePlusMod);
+				maxLib += (100 * newGamePlusMod);
+			}//+10/10-20
 			if (demonScore() >= 5) {
 				if (demonScore() >= 11) {
 					maxSpe += (30 * newGamePlusMod);
@@ -7486,26 +8069,29 @@ use namespace CoC;
 				}
 			}//+60/50-60
 			if (devilkinScore() >= 7) {
-				if (devilkinScore() >= 14) {
-					maxStr += (60 * newGamePlusMod);
-					maxSpe -= (25 * newGamePlusMod);
-					maxInt += (75 * newGamePlusMod);
-					maxLib += (100 * newGamePlusMod);
-					maxSen += (55 * newGamePlusMod);
+				if (devilkinScore() >= 16 && hasStatusEffect(StatusEffects.PlayerPhylactery)) {
+					if (devilkinScore() >= 21) {
+						maxStr += (105 * newGamePlusMod);
+						maxInt += (150 * newGamePlusMod);
+						maxLib += (100 * newGamePlusMod);
+					}
+					else {
+						maxStr += (95 * newGamePlusMod);
+						maxInt += (85 * newGamePlusMod);
+						maxLib += (100 * newGamePlusMod);
+					}
 				}
-				else if (devilkinScore() >= 11 && devilkinScore() < 14) {
-					maxStr += (50 * newGamePlusMod);
+				else if (devilkinScore() >= 11) {
+					maxStr += (65 * newGamePlusMod);
 					maxSpe -= (20 * newGamePlusMod);
 					maxInt += (60 * newGamePlusMod);
 					maxLib += (75 * newGamePlusMod);
-					maxSen += (25 * newGamePlusMod);
 				}
 				else {
 					maxStr += (35 * newGamePlusMod);
 					maxSpe -= (10 * newGamePlusMod);
 					maxInt += (40 * newGamePlusMod);
 					maxLib += (50 * newGamePlusMod);
-					maxSen += (10 * newGamePlusMod);
 				}
 			}//+60/50-60
 			if (rhinoScore() >= 4) {
@@ -7895,6 +8481,7 @@ use namespace CoC;
 				maxSpe += (5 * newGamePlusMod);
 				maxSen += (10 * newGamePlusMod);
 			}
+			if (findPerk(PerkLib.HinezumiBurningBloodFinalForm) >= 0) maxTou += (10 * newGamePlusMod);
 			if (findPerk(PerkLib.KitsuneThyroidGland) >= 0) maxSpe += (5 * newGamePlusMod);
 			if (findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0) {
 				maxSpe += (5 * newGamePlusMod);
@@ -7973,13 +8560,13 @@ use namespace CoC;
 			}
 			//Perks
 			if (findPerk(PerkLib.JobAllRounder) >= 0) {
-				maxStr += (10 * newGamePlusMod);
-				maxTou += (10 * newGamePlusMod);
-				maxSpe += (10 * newGamePlusMod);
-				maxInt += (10 * newGamePlusMod);
-				maxWis += (10 * newGamePlusMod);
-				maxLib += (6 * newGamePlusMod);
-				maxSen += (6 * newGamePlusMod);
+				maxStr += (5 * newGamePlusMod);
+				maxTou += (5 * newGamePlusMod);
+				maxSpe += (5 * newGamePlusMod);
+				maxInt += (5 * newGamePlusMod);
+				maxWis += (5 * newGamePlusMod);
+				maxLib += (5 * newGamePlusMod);
+				maxSen += (5 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.JobBeastWarrior) >= 0) {
 				maxStr += (5 * newGamePlusMod);
@@ -8299,6 +8886,84 @@ use namespace CoC;
 				maxStr += statusEffectv1(StatusEffects.UnderwaterCombatBoost);
 				maxSpe += statusEffectv2(StatusEffects.UnderwaterCombatBoost);
 			}
+			if (hasStatusEffect(StatusEffects.PlayerPhylactery)) maxInt += (75 * newGamePlusMod);
+			//Equipment
+			if (this.jewelryName == "Ring of Intelligence") maxInt += 5;
+			if (this.jewelryName2 == "Ring of Intelligence") maxInt += 5;
+			if (this.jewelryName3 == "Ring of Intelligence") maxInt += 5;
+			if (this.jewelryName4 == "Ring of Intelligence") maxInt += 5;
+			if (this.jewelryName == "Ring of Libido") maxLib += 5;
+			if (this.jewelryName2 == "Ring of Libido") maxLib += 5;
+			if (this.jewelryName3 == "Ring of Libido") maxLib += 5;
+			if (this.jewelryName4 == "Ring of Libido") maxLib += 5;
+			if (this.jewelryName == "Ring of Sensitivity") maxSen += 5;
+			if (this.jewelryName2 == "Ring of Sensitivity") maxSen += 5;
+			if (this.jewelryName3 == "Ring of Sensitivity") maxSen += 5;
+			if (this.jewelryName4 == "Ring of Sensitivity") maxSen += 5;
+			if (this.jewelryName == "Ring of Speed") maxSpe += 5;
+			if (this.jewelryName2 == "Ring of Speed") maxSpe += 5;
+			if (this.jewelryName3 == "Ring of Speed") maxSpe += 5;
+			if (this.jewelryName4 == "Ring of Speed") maxSpe += 5;
+			if (this.jewelryName == "Ring of Strength") maxStr += 5;
+			if (this.jewelryName2 == "Ring of Strength") maxStr += 5;
+			if (this.jewelryName3 == "Ring of Strength") maxStr += 5;
+			if (this.jewelryName4 == "Ring of Strength") maxStr += 5;
+			if (this.jewelryName == "Ring of Toughness") maxTou += 5;
+			if (this.jewelryName2 == "Ring of Toughness") maxTou += 5;
+			if (this.jewelryName3 == "Ring of Toughness") maxTou += 5;
+			if (this.jewelryName4 == "Ring of Toughness") maxTou += 5;
+			if (this.jewelryName == "Ring of Wisdom") maxWis += 5;
+			if (this.jewelryName2 == "Ring of Wisdom") maxWis += 5;
+			if (this.jewelryName3 == "Ring of Wisdom") maxWis += 5;
+			if (this.jewelryName4 == "Ring of Wisdom") maxWis += 5;
+			if (this.headjewelryName == "Crown of Intelligence") maxInt += 20;
+			if (this.headjewelryName == "Crown of Libido") maxLib += 20;
+			if (this.headjewelryName == "Crown of Sensitivity") maxSen += 20;
+			if (this.headjewelryName == "Crown of Speed") maxSpe += 20;
+			if (this.headjewelryName == "Crown of Strength") maxStr += 20;
+			if (this.headjewelryName == "Crown of Toughness") maxTou += 20;
+			if (this.headjewelryName == "Crown of Wisdom") maxWis += 20;
+			if (this.necklaceName == "Necklace of Intelligence") maxInt += 25;
+			if (this.necklaceName == "Necklace of Libido") maxLib += 25;
+			if (this.necklaceName == "Necklace of Sensitivity") maxSen += 25;
+			if (this.necklaceName == "Necklace of Speed") maxSpe += 25;
+			if (this.necklaceName == "Necklace of Strength") maxStr += 25;
+			if (this.necklaceName == "Necklace of Toughness") maxTou += 25;
+			if (this.necklaceName == "Necklace of Wisdom") maxWis += 25;
+			if (this.jewelryName == "Ring of Intelligence" && this.jewelryName2 == "Ring of Intelligence" && this.jewelryName3 == "Ring of Intelligence" && this.jewelryName4 == "Ring of Intelligence" && this.headjewelryName == "Crown of Intelligence" && this.necklaceName == "Necklace of Intelligence") maxInt += 15;
+			if (this.jewelryName == "Ring of Libido" && this.jewelryName2 == "Ring of Libido" && this.jewelryName3 == "Ring of Libido" && this.jewelryName4 == "Ring of Libido" && this.headjewelryName == "Crown of Libido" && this.necklaceName == "Necklace of Libido") maxLib += 15;
+			if (this.jewelryName == "Ring of Sensitivity" && this.jewelryName2 == "Ring of Sensitivity" && this.jewelryName3 == "Ring of Sensitivity" && this.jewelryName4 == "Ring of Sensitivity" && this.headjewelryName == "Crown of Sensitivity" && this.necklaceName == "Necklace of Sensitivity") maxSen += 15;
+			if (this.jewelryName == "Ring of Speed" && this.jewelryName2 == "Ring of Speed" && this.jewelryName3 == "Ring of Speed" && this.jewelryName4 == "Ring of Speed" && this.headjewelryName == "Crown of Speed" && this.necklaceName == "Necklace of Speed") maxSpe += 15;
+			if (this.jewelryName == "Ring of Strength" && this.jewelryName2 == "Ring of Strength" && this.jewelryName3 == "Ring of Strength" && this.jewelryName4 == "Ring of Strength" && this.headjewelryName == "Crown of Strength" && this.necklaceName == "Necklace of Strength") maxStr += 15;
+			if (this.jewelryName == "Ring of Toughness" && this.jewelryName2 == "Ring of Toughness" && this.jewelryName3 == "Ring of Toughness" && this.jewelryName4 == "Ring of Toughness" && this.headjewelryName == "Crown of Toughness" && this.necklaceName == "Necklace of Toughness") maxTou += 15;
+			if (this.jewelryName == "Ring of Wisdom" && this.jewelryName2 == "Ring of Wisdom" && this.jewelryName3 == "Ring of Wisdom" && this.jewelryName4 == "Ring of Wisdom" && this.headjewelryName == "Crown of Wisdom" && this.necklaceName == "Necklace of Wisdom") maxWis += 15;
+			//Key Items
+			if (hasPerk(PerkLib.GoblinoidBlood)) {
+				if (hasKeyItem("Drug injectors") >= 0) {
+					maxLib += 25;
+					maxSen += 5;
+				}
+				if (hasKeyItem("Improved Drug injectors") >= 0) {
+					maxLib += 50;
+					maxSen += 10;
+				}
+				if (hasKeyItem("Potent Drug injectors") >= 0) {
+					maxLib += 75;
+					maxSen += 15;
+				}
+				if (hasKeyItem("Power bracer") >= 0) {
+					maxStr += 50;
+					maxSen += 5;
+				}
+				if (hasKeyItem("Powboy") >= 0) {
+					maxStr += 75;
+					maxSen += 10;
+				}
+				if (hasKeyItem("M.G.S. bracer") >= 0) {
+					maxStr += 100;
+					maxSen += 15;
+				}
+			}
 			End("Player","getAllMaxStats.effects");
 			End("Player","getAllMaxStats");
 			maxStr = Math.max(maxStr,1);
@@ -8355,6 +9020,12 @@ use namespace CoC;
 			}
 			if(hasStatusEffect(StatusEffects.EverywhereAndNowhere)) {
 				removeStatusEffect(StatusEffects.EverywhereAndNowhere);
+			}
+			if(hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
+				removeStatusEffect(StatusEffects.BlazingBattleSpirit);
+			}
+			if(hasStatusEffect(StatusEffects.Cauterize)) {
+				removeStatusEffect(StatusEffects.Cauterize);
 			}
 			if(CoC.instance.monster.hasStatusEffect(StatusEffects.TailWhip)) {
 				CoC.instance.monster.removeStatusEffect(StatusEffects.TailWhip);
@@ -8996,7 +9667,8 @@ use namespace CoC;
 			if (demonScore() >= 11) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (devilkinScore() >= 7) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (devilkinScore() >= 11) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (devilkinScore() >= 14) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (devilkinScore() >= 16) max += (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (devilkinScore() >= 21) max += (90 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (dragonScore() >= 20) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (dragonScore() >= 28) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (minotaurScore() >= 4) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -9107,4 +9779,4 @@ use namespace CoC;
 		}
 	}
 }
-
+

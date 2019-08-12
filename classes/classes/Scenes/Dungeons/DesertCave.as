@@ -8,6 +8,7 @@ import classes.Scenes.Areas.Desert.CumWitch;
 import classes.Scenes.Dungeons.DesertCave.*;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.SceneLib;
+import classes.Scenes.UniqueSexScenes;
 
 public class DesertCave extends DungeonAbstractContent
 	{
@@ -27,6 +28,8 @@ public class DesertCave extends DungeonAbstractContent
 		private static const DUNGEON_WITCH_CUM_WITCH_OFFICE:int		= 36;
 		private static const DUNGEON_WITCH_SACRIFICIAL_ALTAR:int	= 37;
 		private static const DUNGEON_WITCH_THRONE_ROOM:int			= 38;
+		
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 		
 		public function DesertCave() {}
 		
@@ -1105,7 +1108,7 @@ public class DesertCave extends DungeonAbstractContent
 			if(player.tentacleCocks() >= 3 || player.stamenCocks() > 2) addButton(2,"Tentacles",tentacleVictoryGangbangCumWitch).hint("Fuck the Cum Witch with your tentacle cocks.");
 			//Female Victory Sex
 			if(player.hasVagina()) addButton(3,"Ladysex",ladyVictorySex).hint("Ride the Cum Witch's cock until she cums!");
-
+			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 if (CoC.instance.inCombat) {
                 if(monster.HP >= 1) addButton(14,"Leave",declineSandWitch);
 				else addButton(14,"Leave",cleanupAfterCombat);

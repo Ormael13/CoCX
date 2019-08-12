@@ -5,13 +5,16 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.Scenes.UniqueSexScenes;
 
 public class NagaScene extends BaseContent{
         private var gorgonOrNaga:String = "naga";
         private var location:String = "desert";
 		private var isGorgon:Boolean=false;
 
-        public function NagaScene(gorgon:Boolean = false) {
+        public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		
+		public function NagaScene(gorgon:Boolean = false) {
             if (gorgon) {
 				isGorgon=gorgon;
                 gorgonOrNaga = "gorgon";
@@ -875,24 +878,22 @@ public function nagaRapeChoice():void {
 		outputText(" writhes in the sand, masturbating feverishly!  She's completely forgotten about fighting you.  ");
 	}
 	var eggs:Function = null;
-	if(player.canOvipositSpider()) eggs = eggUpANagaSpiderLike;
-	if(player.canOvipositBee() && player.gender > 0) eggs = beePositANagaPlease;
+	if (player.canOvipositSpider()) eggs = eggUpANagaSpiderLike;
+	if (player.canOvipositBee() && player.gender > 0) eggs = beePositANagaPlease;
 	if(player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
 		outputText("Your body aches for further satisfaction - do you rape the snake woman?");
-		if(player.lowerBody == LowerBody.GOO) {
-			if (player.gender == 0) simpleChoices("Yes", nagaVictoryGenderless, "Gooey Rape", gooNagaRape, "Lay Eggs", eggs, "", null, "Leave", cleanupAfterCombat);
-			if (player.gender == 1) simpleChoices("Yes", nagaVictoryMale, "Gooey Rape", gooNagaRape, "Lay Eggs", eggs, "", null, "Leave", cleanupAfterCombat);
-			if (player.gender == 2) simpleChoices("Yes", nagaVictoryFemale, "Gooey Rape", gooNagaRape, "Lay Eggs", eggs, "", null, "Leave", cleanupAfterCombat);
-			if (player.gender == 3) simpleChoices("As Male", nagaVictoryMale, "As Female", nagaVictoryFemale, "Gooey Rape", gooNagaRape, "Lay Eggs", eggs, "Leave", cleanupAfterCombat);
-			return;
+		menu();
+		if (player.gender == 0) addButton(0, "Yes", nagaVictoryGenderless);
+		if (player.gender == 1) addButton(0, "Yes", nagaVictoryMale);
+		if (player.gender == 2) addButton(0, "Yes", nagaVictoryFemale);
+		if (player.gender == 3) {
+			addButton(0, "As Male", nagaVictoryMale);
+			addButton(1, "As Female", nagaVictoryFemale);
 		}
-		else {
-			if (player.gender == 0) simpleChoices("Yes", nagaVictoryGenderless, "", null, "", null, "Lay Eggs", eggs, "No", cleanupAfterCombat);
-			if (player.gender == 1) simpleChoices("Yes", nagaVictoryMale, "", null, "", null, "Lay Eggs", eggs, "No", cleanupAfterCombat);
-			if (player.gender == 2) simpleChoices("Yes", nagaVictoryFemale, "", null, "", null, "Lay Eggs", eggs, "Leave", cleanupAfterCombat);
-			if (player.gender == 3) simpleChoices("As Male", nagaVictoryMale, "As Female", nagaVictoryFemale, "", null, "Lay Eggs", eggs, "Leave", cleanupAfterCombat);
-			return;
-		}
+		if (player.lowerBody == LowerBody.GOO) addButton(11, "Gooey Rape", gooNagaRape);
+		addButton(12, "Lay Eggs", eggs);
+		if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+		addButton(14, "Leave", cleanupAfterCombat);
 	}
 	if(player.lust < 33) {
 		outputText("You aren't aroused enough to fuck her.");

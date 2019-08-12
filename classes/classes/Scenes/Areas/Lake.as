@@ -39,11 +39,13 @@ use namespace CoC;
 			}
 			//Etna
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && rand(5) == 0) {
+				player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 				SceneLib.etnaScene.repeatYandereEnc();
 				return;
 			}
 			//Diana
 			if (player.level >= 3 && flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff) && rand(10) == 0) {
+				player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 				SceneLib.dianaScene.repeatLakeEnc();
 				return;
 			}
@@ -108,8 +110,9 @@ use namespace CoC;
 			//Amily Village discovery
 			if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] == 0)
 				choice[choice.length] = 9;
-			//Sword Discovery
-			if (!player.hasStatusEffect(StatusEffects.TookBlessedSword) && !player.hasStatusEffect(StatusEffects.BSwordBroken))
+			//Sword/Bow/Staff/Shield Discovery
+			if (!player.hasStatusEffect(StatusEffects.TookBlessedBow) && !player.hasStatusEffect(StatusEffects.BBowBroken) && !player.hasStatusEffect(StatusEffects.TookBlessedShield) && !player.hasStatusEffect(StatusEffects.BShieldBroken)
+			&& !player.hasStatusEffect(StatusEffects.TookBlessedStaff) && !player.hasStatusEffect(StatusEffects.BStaffBroken) && !player.hasStatusEffect(StatusEffects.TookBlessedSword) && !player.hasStatusEffect(StatusEffects.BSwordBroken))
 				choice[choice.length] = 10;
 			//Pre-emptive chance of finding the boat
 			if (!player.hasStatusEffect(StatusEffects.BoatDiscovery))
@@ -127,7 +130,14 @@ use namespace CoC;
 			}
 			//Pre-emptive chance of discovering the Beautiful Sword
 			else if (select == 10) {
-				swordInStone.findSwordInStone();
+				if (player.hasStatusEffect(StatusEffects.TookBlessedSword)) {
+					if (player.hasStatusEffect(StatusEffects.TookBlessedBow)) {
+						if (player.hasStatusEffect(StatusEffects.TookBlessedStaff)) swordInStone.findShieldInStone();
+						else swordInStone.findStaffInStone();
+					}
+					else swordInStone.findBowInStone();
+				}
+				else swordInStone.findSwordInStone();
 			}
 			//Pre-emptive chance of finding the boat
 			else if (select == 11) {
@@ -162,6 +172,7 @@ use namespace CoC;
 					girlOdds -= 25;
 				//Slimegirl!
 				if (rand(100) <= girlOdds) {
+					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 					gooGirlScene.encounterGooGirl();
 				}
 				//OOZE!
@@ -172,6 +183,7 @@ use namespace CoC;
 					if (player.inte >= 25) {
 						clearOutput();
 						outputText("A soft shuffling sound catches your attention and you turn around, spotting an amorphous green mass sliding towards you!  Realizing it's been spotted, the ooze's mass surges upwards into a humanoid form with thick arms and wide shoulders.  The beast surges forward to attack!");
+						player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 						startCombat(new GreenSlime());
 						if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) outputText("\n\n<b>You are amazed to encounter a slime creature with the factory shut down - most of them have disappeared.</b>");
 						return;
@@ -180,6 +192,7 @@ use namespace CoC;
 					if (player.spe >= 30) {
 						clearOutput();
 						outputText("You feel something moist brush the back of your ankle and instinctively jump forward and roll, coming up to face whatever it is behind you.  The nearly silent, amorphous green slime that was at your feet surges vertically, its upper body taking the form of a humanoid with thick arms and wide shoulders, which attacks!");
+						player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 						startCombat(new GreenSlime());
 						if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) outputText("\n\n<b>You are amazed to encounter a slime creature with the factory shut down - most of them have disappeared.</b>");
 						return;
@@ -189,6 +202,7 @@ use namespace CoC;
 						clearOutput();
 						outputText("Without warning, you feel something moist and spongy wrap around your ankle, nearly pulling you off balance.  With a ferocious tug, you pull yourself free and turn to face your assailant.  It is a large green ooze that surges upwards to take the form of humanoid with wide shoulders and massive arms.  It shudders for a moment, and its featureless face shifts into a green version of your own! The sight gives you pause for a moment, and the creature strikes!");
 						if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) outputText("\n\n<b>You are amazed to encounter a slime creature with the factory shut down - most of them have disappeared.</b>");
+						player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 						startCombat(new GreenSlime());
 						outputText("\n\n");
 						monster.eAttack();
@@ -275,6 +289,7 @@ use namespace CoC;
 				SceneLib.rathazul.encounterRathazul();
 			}
 			else if (select == 12) {
+				player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 				SceneLib.exploration.genericGolGobImpEncounters();
 			}
 			else {

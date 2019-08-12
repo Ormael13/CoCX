@@ -47,7 +47,7 @@ public class Shield extends Useable //Equipable
 		}
 		
 		override public function canUse():Boolean {
-			if ((game.player.weaponPerk == "Large" && game.player.findPerk(PerkLib.TitanGrip) < 0) || game.player.weaponPerk == "Dual" || game.player.weaponPerk == "Dual Large") {
+			if ((game.player.weaponPerk == "Large" && game.player.findPerk(PerkLib.TitanGrip) < 0) || game.player.weaponPerk == "Massive" || game.player.weaponPerk == "Dual" || game.player.weaponPerk == "Dual Large") {
 				outputText("Your current weapon requires two hands. Unequip your current weapon or switch to one-handed before equipping this shield. ");
 				return false;
 			}

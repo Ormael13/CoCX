@@ -5,6 +5,7 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.GlobalFlags.*;
 import classes.Scenes.SceneLib;
+import classes.Scenes.UniqueSexScenes;
 import classes.internals.*;
 
 public class FetishCultist extends Monster
@@ -16,6 +17,8 @@ public class FetishCultist extends Monster
 		private static const NOBLES_CLOTHING:String = "noble's clothing";
 		private static const PERVY_NUNS_CLOTHING:String = "pervy nun's clothing";
 
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		
 		override public function combatRoundUpdate():void
 		{
 			super.combatRoundUpdate();
@@ -119,7 +122,9 @@ public class FetishCultist extends Monster
 		override public function defeated(hpVictory:Boolean):void
 		{
 			var temp2:Function =null;
-			if(player.hasStatusEffect(StatusEffects.Feeder)) temp2 = SceneLib.lake.fetishCultistScene.fetishCultistHasAMilkFetish;
+			var temp3:Function =null;
+			if (player.hasStatusEffect(StatusEffects.Feeder)) temp2 = SceneLib.lake.fetishCultistScene.fetishCultistHasAMilkFetish;
+			if (player.pcCanUseUniqueSexScene()) temp3 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
 			if (hpVictory) {
 				outputText("Hurt too much to continue controlling her powers, the cultist collapses helplessly.", true);
 			} else {
@@ -127,12 +132,12 @@ public class FetishCultist extends Monster
 			}
 			if(player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("  You realize she'd make a perfect receptacle for your lusts.  Do you have your way with her?");
-				EngineCore.simpleChoices("Sex", SceneLib.lake.fetishCultistScene.playerRapesCultist, "", null, "", null, "B. Feed", temp2, "Leave", SceneLib.combat.cleanupAfterCombatImpl);
+				EngineCore.simpleChoices("Sex", SceneLib.lake.fetishCultistScene.playerRapesCultist, "", null, "B. Feed", temp2, "U. Sex Scenes", temp3, "Leave", SceneLib.combat.cleanupAfterCombatImpl);
 			}
 			else {
 				if(temp2!=null && flags[kFLAGS.SFW_MODE] <= 0) {
 					outputText("  She looks like she might take some of your milk if you offered it to her.  What do you do?");
-					EngineCore.simpleChoices("B. Feed", temp2, "", null, "", null, "", null, "Leave", SceneLib.combat.cleanupAfterCombatImpl);
+					EngineCore.simpleChoices("B. Feed", temp2, "", null, "", null, "U. Sex Scenes", temp3, "Leave", SceneLib.combat.cleanupAfterCombatImpl);
 				}
 				else SceneLib.combat.cleanupAfterCombatImpl();
 			}

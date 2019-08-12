@@ -9,11 +9,14 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
+import classes.Scenes.UniqueSexScenes;
 
 use namespace CoC;
 
 	public class CorruptedDriderScene extends BaseContent
 	{
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		
 		public function CorruptedDriderScene()
 		{
 		}
@@ -92,6 +95,8 @@ use namespace CoC;
 			var rideOvi:Function =null;
 			var bikiniTits:Function =null;
 			if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
+			var temp3:Function =null;
+			if (player.pcCanUseUniqueSexScene()) temp3 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
 			if (player.hasVagina() && player.lust >= 33) {
 				rideCock = winVSDriderTakeItsCockInCunt;
 				rideOvi = victoryVSDriderRideOviVaginal;
@@ -107,7 +112,7 @@ use namespace CoC;
 			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("\n\nWhat do you do?");
 				choices("Butt Fuck", buttFuckBUTTFUCKBUTTTFUCKBUTTFUCK, "Fuck Pussy", vagFuck, "Bondage Fuck", careful, "FuckSpinner", fuckSpinner, "Ride Cock", rideCock,
-					"Ride Ovi", rideOvi, "RideOviAnal", rideOviAss, "", null, "B.Titfuck", bikiniTits, "Leave", cleanupAfterCombat);
+					"Ride Ovi", rideOvi, "RideOviAnal", rideOviAss, "B.Titfuck", bikiniTits, "U. Sex Scenes", temp3, "Leave", cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();
 		}
@@ -1040,3 +1045,4 @@ use namespace CoC;
 		}
 	}
 }
+

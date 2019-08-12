@@ -5,9 +5,12 @@ package classes.Scenes.Areas.Plains
 {
 	import classes.*;
 	import classes.GlobalFlags.*;
+	import classes.Scenes.UniqueSexScenes;
 
 	public class GnollScene extends BaseContent
 	{
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		
 		public function GnollScene()
 		{
 		}
@@ -120,7 +123,8 @@ package classes.Scenes.Areas.Plains
 					addButton(2, "TakeHerClit", takeGnollClit).hint("Put your vagina to use and ride the gnoll's clit.", "Take Her Clit");
 				}
 				addButton(3, "SuckHerClit", suckGnollClit).hint("Suck the gnoll's clit.", "Suck Her Clit");
-				addButton(4, "Leave", cleanupAfterCombat);
+				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();
 		}

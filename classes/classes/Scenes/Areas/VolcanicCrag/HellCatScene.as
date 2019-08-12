@@ -11,9 +11,12 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.MutationsHelper;
+import classes.Scenes.UniqueSexScenes;
 
 	public class HellCatScene extends BaseContent
 	{
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		
 		public var mutations:MutationsHelper = new MutationsHelper();
 		
 		public function HellCatScene() 
@@ -36,6 +39,8 @@ public function DefeatedHellCat():void {
 	addButton(0, "Back", cleanupAfterCombat);
 	if (player.hasCock()) addButton(1, "Pussycat", DefeatedHellCatPussycat);
 	if (player.hasVagina()) addButton(2, "Catcock", DefeatedHellCatCatcock);
+	if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+	
 }
 public function DefeatedHellCatPussycat():void {
 	if (player.gender == 3) outputText("You ain’t gonna get any close to that feline penis of hers. " + (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] > 0 ? "If your hunch is good it’s likely even worse than that of the hellhounds. " : "") + "");

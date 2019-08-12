@@ -80,9 +80,8 @@ public class YetiScene extends BaseContent
 					addButton(1, "RideHisCock", rideYetisCock);
 				}
 			}
-			if (player.tailType == Tail.MANTICORE_PUSSYTAIL) addButton(2, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
-			if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(3, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
-			addButton(4, "Leave", cleanupAfterCombat);
+			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+			addButton(14, "Leave", cleanupAfterCombat);
 		}
 		
 		private function fuckYetiInTheAss():void {

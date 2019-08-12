@@ -5,10 +5,13 @@ package classes.Scenes.Areas.Lake
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.UniqueSexScenes;
 import classes.Items.Armors.LustyMaidensArmor;
 
 public class FetishZealotScene extends AbstractLakeContent
 	{
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		
 		public function FetishZealotScene()
 		{
 		}
@@ -256,9 +259,11 @@ public class FetishZealotScene extends AbstractLakeContent
 			else outputText("The zealot quivers for a moment before collapsing, his desires becoming too great for even him to control.");
 			if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("\n\nDo you want to take advantage of his vulnerable state to sate your lusts?");
-				var bikiniTits:Function = null;
-				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster);
-				simpleChoices("Yes", zealotWinRape, "", null, "", null, "B.Titfuck", bikiniTits, "Leave", cleanupAfterCombat);
+				menu();
+				addButton(0, "Yes", zealotWinRape);
+				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") addButton(1, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
+				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();
 		}

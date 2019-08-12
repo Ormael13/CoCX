@@ -152,12 +152,12 @@ private function studyInTA():void {
 			//Smart enough for arctic gale and doesnt have it
 			else if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsArcticGale)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Arctic Gale.</b>");
-				player.createStatusEffect(StatusEffects.KnowsDarknessShard, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.KnowsArcticGale, 0, 0, 0, 0);
 			}
 			//Smart enough for dusk wave and doesnt have it
 			else if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsDuskWave)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Dusk Wave.</b>");
-				player.createStatusEffect(StatusEffects.KnowsDarknessShard, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.KnowsDuskWave, 0, 0, 0, 0);
 			}
 			//Smart enough for whitefire and doesnt have it
 			else if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
@@ -192,12 +192,12 @@ private function studyInTA():void {
 			//Smart enough for pyre burst and doesnt have it
 			else if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsPyreBurst)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Pyre Burst.</b>");
-				player.createStatusEffect(StatusEffects.KnowsHeal, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.KnowsPyreBurst, 0, 0, 0, 0);
 			}
 			//Smart enough for chain lighting and doesnt have it
 			else if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsChainLighting)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Chain Lighting.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBlind, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.KnowsChainLighting, 0, 0, 0, 0);
 			}
 			//Smart enough for blizzard and doesnt have it
 			else if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {

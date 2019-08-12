@@ -7,9 +7,12 @@ import classes.*;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
+import classes.Scenes.UniqueSexScenes;
 
 public class CeraphScene extends NPCAwareContent
 	{
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		
 		public function CeraphScene()
 		{
 		}
@@ -658,21 +661,16 @@ public class CeraphScene extends NPCAwareContent
 			else outputText("Ceraph masturbates futilely, too driven by desire to fight.");
 			if (player.lust >= 33 && player.gender > 0) {
 				outputText("  Do you have your way with her? (And if so, which of your body parts do you do it with?)");
-
-				var dicking:Function =null;
-				var buttsmexing:Function =null;
-				//Dickings ahoyu!
+				menu();
 				if (player.hasCock()) {
-					dicking = maleFuckCeraphsPussy;
-					if (player.cockThatFits(monster.analCapacity()) != -1) buttsmexing = buttRapeCeraph;
+					addButton(0, "Fuck Her", maleFuckCeraphsPussy);
+					if (player.cockThatFits(monster.analCapacity()) != -1) addButton(2, "FuckHerAss", buttRapeCeraph);
 					else outputText("  <b>There's no way you could fit inside her ass - you're too big.</b>");
 				}
-				var cunting:Function =null;
-				if (player.hasVagina()) cunting = rideCeraphsCockLikeaBAWSSexclamation11eleven;
-				var bikiniTits:Function = null;
-				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster);
-
-				simpleChoices("Fuck Her", dicking, "Ride Her", cunting, "FuckHerAss", buttsmexing, "B.Titfuck", bikiniTits, "Leave", leave);
+				if (player.hasVagina()) addButton(1, "Ride Her", rideCeraphsCockLikeaBAWSSexclamation11eleven);
+				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") addButton(3, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
+				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+				addButton(14, "Leave", leave);
 				/*
 				 if(player.gender == 1) doYesNo(maleFuckCeraphsPussy,cleanupAfterCombat);
 				 if(player.gender == 2) doYesNo(rideCeraphsCockLikeaBAWSSexclamation11eleven,cleanupAfterCombat);

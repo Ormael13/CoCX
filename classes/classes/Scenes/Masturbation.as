@@ -1147,6 +1147,7 @@ public class Masturbation extends BaseContent {
 							outputText("down the mottled skin of ");
 							break;
 						case CockTypesEnum.LIZARD:
+						case CockTypesEnum.CAVE_WYRM:
 							outputText("down the bumpy purple skin of ");
 							break;
 						case CockTypesEnum.TENTACLE:
@@ -1198,6 +1199,7 @@ public class Masturbation extends BaseContent {
 							outputText("down the skin of ");
 							break;
 						case CockTypesEnum.LIZARD:
+						case CockTypesEnum.CAVE_WYRM:
 							outputText("over the purplish, bumpy flesh of ");
 							break;
 						case CockTypesEnum.TENTACLE:
@@ -1245,6 +1247,7 @@ public class Masturbation extends BaseContent {
 							outputText("it white.  Y");
 							break;
 						case CockTypesEnum.LIZARD:
+						case CockTypesEnum.CAVE_WYRM:
 							outputText("purple, bumpy flesh white.  Y");
 							break;
 						case CockTypesEnum.TENTACLE:
@@ -1312,6 +1315,7 @@ public class Masturbation extends BaseContent {
 							outputText("The swollen lips of your bloated nipple stretch around the tip of your [cock] swallowing it like an enormous mouth.  ");
 							break;
 						case CockTypesEnum.LIZARD:
+						case CockTypesEnum.CAVE_WYRM:
 							outputText("The swollen tips of your bloated nipple wrap around the pointed tip of your [cock], stretching oddly as it swallows the knot-covered appendage.  ");
 							break;
 						case CockTypesEnum.TENTACLE:
@@ -1366,6 +1370,7 @@ public class Masturbation extends BaseContent {
 							outputText("The swollen lips of your bloated nipple gape wide, but the tip of your [cock] spreads them even wider.  ");
 							break;
 						case CockTypesEnum.LIZARD:
+						case CockTypesEnum.CAVE_WYRM:
 							outputText("The swollen lips of your bloated nipple gape wide, but the pointed tip of your [cock] slowly spreads them even wider.  ");
 							break;
 						case CockTypesEnum.TENTACLE:
@@ -1414,6 +1419,7 @@ public class Masturbation extends BaseContent {
 							outputText("pooling in and around your sheath.  ");
 							break;
 						case CockTypesEnum.LIZARD:
+						case CockTypesEnum.CAVE_WYRM:
 							outputText("pooling around the bulbs near your base.  ");
 							break;
 						case CockTypesEnum.TENTACLE:
@@ -1469,6 +1475,7 @@ public class Masturbation extends BaseContent {
 							outputText("even swallowing your bulging knot without difficulty.  ");
 							break;
 						case CockTypesEnum.LIZARD:
+						case CockTypesEnum.CAVE_WYRM:
 							outputText("swallowing it completely as each of the bulgy knots along its length stretch the orifice further.  ");
 							break;
 						case CockTypesEnum.TENTACLE:

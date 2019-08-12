@@ -57,6 +57,22 @@ public class Mountain extends BaseContent
 						chance: 0.5,
 						call  : SceneLib.etnaScene.repeatYandereEnc
 					}, {
+						name  : "alvina1",
+						when  : function():Boolean {
+							return flags[kFLAGS.ALVINA_FOLLOWER] == 8;
+						},
+						chance: 0.5,
+						call  : SceneLib.alvinaFollower.alvinaSecondEncounter
+					}, {
+					}, {
+						name  : "alvina2",
+						when  : function():Boolean {
+							return flags[kFLAGS.ALVINA_FOLLOWER] == 9
+								   && !player.hasStatusEffect(StatusEffects.LethiceRedemed);
+						},
+						chance: 0.5,
+						call  : SceneLib.alvinaFollower.alvinaSecondBonusEncounter
+					}, {
 						name: "salon",
 						when: fn.not(salon.isDiscovered),
 						call: salon.hairDresser

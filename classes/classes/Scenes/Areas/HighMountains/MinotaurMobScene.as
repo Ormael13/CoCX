@@ -2,6 +2,7 @@
 import classes.*;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.UniqueSexScenes;
 
 public class MinotaurMobScene extends BaseContent implements TimeAwareInterface {
 
@@ -11,6 +12,8 @@ public class MinotaurMobScene extends BaseContent implements TimeAwareInterface 
 //327 Number of sons pending
 //328 growup countdown
 
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		
 		public function MinotaurMobScene()
 		{
 			EventParser.timeAwareClassAdd(this);
@@ -613,16 +616,15 @@ internal function victoryMinotaurGang():void {
 	dynStats("lus", 1);
 	outputText("Your body is burning up, buzzing with growing lust from the obscenity going on a few feet away from you.  What do you do?");
 	//	[win options]
-	var getSuck:Function = null;
-	if(player.hasCock()) getSuck = createCallBackFunction(forceMinitaurToGiveOral,1);
-	var nipFuck:Function = null;
-	if(player.hasFuckableNipples()) nipFuck = victoryBJNippleFuckMinotaurGang;
-	var titFuck:Function = null;
-	if(player.biggestTitSize() >= 6) titFuck = victoryMinotaurGangTitFuck;
-	choices("Gangbang", victoryAllThePenetrationsMinotaurGangBang,
-			"Tit-Fuck", titFuck, "Nipple-Fuck", nipFuck,
-			"Get Licked", createCallBackFunction(forceMinitaurToGiveOral, 0),
-			"Get Sucked", getSuck, "Discipline", disciplineEldestMinotaurSon, "", null, "", null, "", null, "Leave", cleanupAfterCombat);
+	menu();
+	addButton(0, "Gangbang", victoryAllThePenetrationsMinotaurGangBang);
+	if (player.biggestTitSize() >= 6) addButton(1, "Tit-Fuck", victoryMinotaurGangTitFuck);
+	if (player.hasFuckableNipples()) addButton(2, "Nipple-Fuck", victoryBJNippleFuckMinotaurGang);
+	if (player.hasVagina()) addButton(3, "Get Licked", createCallBackFunction(forceMinitaurToGiveOral, 0));
+	if (player.hasCock()) addButton(4, "Get Sucked", createCallBackFunction(forceMinitaurToGiveOral, 1));
+	addButton(5, "Discipline", disciplineEldestMinotaurSon);
+	if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+	addButton(14, "Leave", cleanupAfterCombat);
 }
 //*[Victory Tit-Fuck] (for only the fattest of fat bitch titties) 
 private function victoryMinotaurGangTitFuck():void {

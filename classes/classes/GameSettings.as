@@ -131,6 +131,22 @@ public class GameSettings extends BaseContent {
 
 		outputText("\n\n");
 
+		if (flags[kFLAGS.WISDOM_SCALLING] >= 1) {
+			outputText("Wisdom Scaling: <font color=\"#008000\"><b>New</b></font>\n Values are less randomn and a bit higher on averange than in old scalling.");
+		}
+		else
+			outputText("Wisdom Scaling: <font color=\"#800000\"><b>Old</b></font>\n Values are more randomn and a bit lower on averange than in new scalling.");
+
+		outputText("\n\n");
+
+		if (flags[kFLAGS.INTELLIGENCE_SCALLING] >= 1) {
+			outputText("Wisdom Scaling: <font color=\"#008000\"><b>New</b></font>\n Values are less randomn and a bit higher on averange than in old scalling.");
+		}
+		else
+			outputText("Wisdom Scaling: <font color=\"#800000\"><b>Old</b></font>\n Values are more randomn and a bit lower on averange than in new scalling.");
+
+		outputText("\n\n");
+
 		if (flags[kFLAGS.ITS_EVERY_DAY]) {
 			outputText("Eternal Holiday Mode: <font color=\"#008000\"><b>ON</b></font>\n All holiday events like Eastern/X-mas and etc. would happen at any day of the year.");
 		}
@@ -167,9 +183,8 @@ public class GameSettings extends BaseContent {
 		if (player) addButton(8, "Enable Surv", enableSurvivalPrompt).hint("Enable Survival mode. This will enable hunger. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off!</font>");
 		if (player) addButton(9, "Enable Real", enableRealisticPrompt).hint("Enable Realistic mode. This will make the game a bit realistic. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off! Do not turn this on if you have hyper endowments.</font>");
 		
-		addButton(10, "Eternal Holiday", toggleEternalHoliday).hint("Toggles eternal holiday mode. All holiday events like Eastern/X-mas and etc. would happen at any day of the year.");
 		addButton(11, "Fetishes", fetishSubMenu).hint("Toggle some of the weird fetishes such as watersports and worms.");
-		addButton(12, "No Blood Toggle", toggleNOGORE).hint("Toggles No Blood Mode. If enabled, scenes could have more grungesome/bloody variants showed. Not for weak of hearts players.");
+		addButton(12, "Other Settings", settingsScreenGameSettings2);
 
 		if (flags[kFLAGS.HUNGER_ENABLED] >= 0.5) {
 			removeButton(8);
@@ -188,6 +203,14 @@ public class GameSettings extends BaseContent {
 			flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = 0;
 		}
 		addButton(14, "Back", settingsScreenMain);
+	}
+	public function settingsScreenGameSettings2():void {
+		menu();
+		addButton(0, "Eternal Holiday", toggleEternalHoliday).hint("Toggles eternal holiday mode. All holiday events like Eastern/X-mas and etc. would happen at any day of the year.");
+		addButton(1, "No Blood Toggle", toggleNOGORE).hint("Toggles No Blood Mode. If enabled, scenes could have more grungesome/bloody variants showed. Not for the weak of heart players.");
+		addButton(3, "Wis scalling", toggleWisScaling).hint("Toggles Wisdom scalling for all attacks using it. If enabled, wisdom scaling would be less randomn with big generaly a bit higher values on averange.");
+		addButton(4, "Int scalling", toggleIntScaling).hint("Toggles Intelligance scalling for all attacks using it. If enabled, intelligence scaling would be less randomn with big generaly a bit higher values on averange.");
+		addButton(14, "Back", settingsScreenGameSettings);
 	}
 
 	public function toggleDebug():void {
@@ -279,7 +302,7 @@ public class GameSettings extends BaseContent {
 	public function toggleEternalHoliday():void {
 		//toggle eternal holiday
 		flags[kFLAGS.ITS_EVERY_DAY] = !flags[kFLAGS.ITS_EVERY_DAY];
-		settingsScreenGameSettings();
+		settingsScreenGameSettings2();
 	}
 
 	public function toggleSFW():void {
@@ -291,7 +314,19 @@ public class GameSettings extends BaseContent {
 	public function toggleNOGORE():void {
 		if (flags[kFLAGS.NO_GORE_MODE] < 1) flags[kFLAGS.NO_GORE_MODE] = 1;
 		else flags[kFLAGS.NO_GORE_MODE] = 0;
-		settingsScreenGameSettings();
+		settingsScreenGameSettings2();
+	}
+
+	public function toggleWisScaling():void {
+		if (flags[kFLAGS.WISDOM_SCALLING] < 1) flags[kFLAGS.WISDOM_SCALLING] = 1;
+		else flags[kFLAGS.WISDOM_SCALLING] = 0;
+		settingsScreenGameSettings2();
+	}
+
+	public function toggleIntScaling():void {
+		if (flags[kFLAGS.INTELLIGENCE_SCALLING] < 1) flags[kFLAGS.INTELLIGENCE_SCALLING] = 1;
+		else flags[kFLAGS.INTELLIGENCE_SCALLING] = 0;
+		settingsScreenGameSettings2();
 	}
 
 	public function toggleWatersports():void {

@@ -633,6 +633,8 @@ public function savePermObject(isFile:Boolean):void {
 		saveFile.data.flags[kFLAGS.USE_METRICS] = flags[kFLAGS.USE_METRICS];
 		saveFile.data.flags[kFLAGS.AUTO_LEVEL] = flags[kFLAGS.AUTO_LEVEL];
 		saveFile.data.flags[kFLAGS.NO_GORE_MODE] = flags[kFLAGS.NO_GORE_MODE];
+		saveFile.data.flags[kFLAGS.WISDOM_SCALLING] = flags[kFLAGS.WISDOM_SCALLING];
+		saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALLING] = flags[kFLAGS.INTELLIGENCE_SCALLING];
 		//saveFile.data.settings = [];
 		//saveFile.data.settings.useMetrics = Measurements.useMetrics;
 		//achievements
@@ -683,6 +685,8 @@ public function loadPermObject():void {
 			if (saveFile.data.flags[kFLAGS.USE_METRICS] != undefined) flags[kFLAGS.USE_METRICS] = saveFile.data.flags[kFLAGS.USE_METRICS];
 			if (saveFile.data.flags[kFLAGS.AUTO_LEVEL] != undefined) flags[kFLAGS.AUTO_LEVEL] = saveFile.data.flags[kFLAGS.AUTO_LEVEL];
 			if (saveFile.data.flags[kFLAGS.NO_GORE_MODE] != undefined) flags[kFLAGS.NO_GORE_MODE] = saveFile.data.flags[kFLAGS.NO_GORE_MODE];
+			if (saveFile.data.flags[kFLAGS.WISDOM_SCALLING] != undefined) flags[kFLAGS.WISDOM_SCALLING] = saveFile.data.flags[kFLAGS.WISDOM_SCALLING];
+			if (saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALLING] != undefined) flags[kFLAGS.INTELLIGENCE_SCALLING] = saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALLING];
 		}
 		//if(saveFile.data.settings){if(saveFile.data.settings.useMetrics != undefined){Measurements.useMetrics = saveFile.data.settings.useMetrics;}}
 		//achievements, will check if achievement exists.
@@ -804,10 +808,14 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.headJewelryId = player.headJewelry.id;
 		saveFile.data.necklaceId = player.necklace.id;
 		saveFile.data.jewelryId = player.jewelry.id;
+		saveFile.data.jewelryId2 = player.jewelry2.id;
+		saveFile.data.jewelryId3 = player.jewelry3.id;
+		saveFile.data.jewelryId4 = player.jewelry4.id;
 		saveFile.data.shieldId = player.shield.id;
 		saveFile.data.upperGarmentId = player.upperGarment.id;
 		saveFile.data.lowerGarmentId = player.lowerGarment.id;
 		saveFile.data.armorName = player.modArmorName;
+		saveFile.data.vehicleId = player.vehicles.id;
 		
 		//saveFile.data.weaponName = player.weaponName;// uncomment for backward compatibility
 		//saveFile.data.weaponVerb = player.weaponVerb;// uncomment for backward compatibility
@@ -1594,6 +1602,54 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			for each (itype in ItemType.getItemLibrary()) {
 				if (itype is Jewelry && (itype as Jewelry).name == saveFile.data.jewelryName){
 					player.setJewelryHiddenField(itype as Jewelry || JewelryLib.NOTHING);
+					found = true;
+					break;
+				}
+			}
+		}
+		if (saveFile.data.jewelryId2){
+			player.setJewelryHiddenField2((ItemType.lookupItem(saveFile.data.jewelryId2) as Jewelry) || JewelryLib.NOTHING);
+		} else {
+			player.setJewelry2(JewelryLib.NOTHING);
+			for each (itype in ItemType.getItemLibrary()) {
+				if (itype is Jewelry && (itype as Jewelry).name == saveFile.data.jewelryName2){
+					player.setJewelryHiddenField2(itype as Jewelry || JewelryLib.NOTHING);
+					found = true;
+					break;
+				}
+			}
+		}
+		if (saveFile.data.jewelryId3){
+			player.setJewelryHiddenField3((ItemType.lookupItem(saveFile.data.jewelryId3) as Jewelry) || JewelryLib.NOTHING);
+		} else {
+			player.setJewelry3(JewelryLib.NOTHING);
+			for each (itype in ItemType.getItemLibrary()) {
+				if (itype is Jewelry && (itype as Jewelry).name == saveFile.data.jewelryName3){
+					player.setJewelryHiddenField3(itype as Jewelry || JewelryLib.NOTHING);
+					found = true;
+					break;
+				}
+			}
+		}
+		if (saveFile.data.jewelryId4){
+			player.setJewelryHiddenField4((ItemType.lookupItem(saveFile.data.jewelryId4) as Jewelry) || JewelryLib.NOTHING);
+		} else {
+			player.setJewelry4(JewelryLib.NOTHING);
+			for each (itype in ItemType.getItemLibrary()) {
+				if (itype is Jewelry && (itype as Jewelry).name == saveFile.data.jewelryName4){
+					player.setJewelryHiddenField4(itype as Jewelry || JewelryLib.NOTHING);
+					found = true;
+					break;
+				}
+			}
+		}
+		if (saveFile.data.vehiclesId){
+			player.setVehicleHiddenField((ItemType.lookupItem(saveFile.data.vehiclesId) as Vehicles) || VehiclesLib.NOTHING);
+		} else {
+			player.setVehicle(VehiclesLib.NOTHING);
+			for each (itype in ItemType.getItemLibrary()) {
+				if (itype is Vehicles && (itype as Vehicles).name == saveFile.data.vehiclesName){
+					player.setVehicleHiddenField(itype as Vehicles || VehiclesLib.NOTHING);
 					found = true;
 					break;
 				}
@@ -2622,4 +2678,4 @@ public function unFuckSave():void
     }
 }
 }
-
+

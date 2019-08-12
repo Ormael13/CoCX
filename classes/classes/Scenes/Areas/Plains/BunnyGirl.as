@@ -3,8 +3,11 @@ import classes.*;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.UniqueSexScenes;
 
 public class BunnyGirl extends BaseContent{
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		
 		public function isItEaster():Boolean {
 			return (date.date >= 30 && date.date <= 31 && date.month == 2) || (date.month == 3 && date.date <= 1);
 		}
@@ -140,28 +143,27 @@ private function rapeBunBun():void {
 		
 		dynStats("lus", 10, "cor", 3);
 		outputText("(If you’re going to have sex with her, which of her body parts will you use?");
-		var DickInV:Function = null;
-		var Vagina:Function = null;
-		var sixtyNine:Function = null;
-		//Dick requires one 40 area or smaller.
-		if(player.hasVagina()) {
-			DickInV = bunbunFucksYourVag;
-			outputText("  Her dick in your vagina?");
-		}
-		if(player.cockThatFits(40) >= 0) {
-			Vagina = bunbunGetsFucked;
-			outputText("  Fuck her vagina?");
-		}
-		else if(player.cockTotal() > 0) outputText("  <b>You're too big to fit inside her...</b>");
-		if(player.gender > 0) {
-			sixtyNine = bunbun69;
-			outputText("  Sixty-nine her?");
-		}
-		outputText("  Her dick in your ass?)");
 		//var Ass:Number = 0;
 		//Dick In V] [Dick in A] [Vagina] [Ass] [Leave]
-		simpleChoices("Your Vagina",DickInV,"Your Ass",bunbunFucksPCInAss,"Her Vagina",Vagina,"69",sixtyNine,"Leave",camp.returnToCampUseOneHour);
-
+		menu();
+		//Dick requires one 40 area or smaller.
+		if (player.hasVagina()) {
+			addButton(0, "Your Vagina",bunbunFucksYourVag);
+			outputText("  Her dick in your vagina?");
+		}
+		outputText("  Her dick in your ass?)");
+		addButton(1, "Your Ass",bunbunFucksPCInAss);
+		if (player.cockThatFits(40) >= 0) {
+			addButton(2, "Her Vagina",bunbunGetsFucked);
+			outputText("  Fuck her vagina?");
+		}
+		else if (player.cockTotal() > 0) outputText("  <b>You're too big to fit inside her...</b>");
+		if (player.gender > 0) {
+			addButton(3, "69",bunbun69);
+			outputText("  Sixty-nine her?");
+		}
+		if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+		addButton(14, "Leave", camp.returnToCampUseOneHour);
 	}
 }
 

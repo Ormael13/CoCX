@@ -3,6 +3,7 @@ package classes.Scenes.Areas.HighMountains
 import classes.*;
 import classes.BodyParts.Horns;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.UniqueSexScenes;
 
 /**
 	 * Izumi, the fuckhuge Oni. TOUCH THE FLUFFY HORN.
@@ -13,6 +14,8 @@ import classes.GlobalFlags.kFLAGS;
 	 */
 	public class IzumiScene extends BaseContent
 	{
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		
 		public function IzumiScene() 
 		{
 		}
@@ -1477,6 +1480,48 @@ import classes.GlobalFlags.kFLAGS;
 		{
 			flags[kFLAGS.IZUMI_LAST_ENCOUNTER] = 3;
 			flags[kFLAGS.IZUMI_TIMES_GRABBED_THE_HORN]++;
+			if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] >= 1) flags[kFLAGS.IZUMI_DEFEATS_COUNTER]++;
+			else flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 1;
+			if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 1 && flags[kFLAGS.IZUMI_LVL_UP] < 1) {
+				flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
+				flags[kFLAGS.IZUMI_LVL_UP] = 1;
+			}
+			if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 2 && flags[kFLAGS.IZUMI_LVL_UP] == 1) {
+				flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
+				flags[kFLAGS.IZUMI_LVL_UP] = 2;
+			}
+			if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 3 && flags[kFLAGS.IZUMI_LVL_UP] == 2) {
+				flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
+				flags[kFLAGS.IZUMI_LVL_UP] = 3;
+			}
+			if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 4 && flags[kFLAGS.IZUMI_LVL_UP] == 3) {
+				flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
+				flags[kFLAGS.IZUMI_LVL_UP] = 4;
+			}
+			if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 5 && flags[kFLAGS.IZUMI_LVL_UP] == 4) {
+				flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
+				flags[kFLAGS.IZUMI_LVL_UP] = 5;
+			}
+			if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 6 && flags[kFLAGS.IZUMI_LVL_UP] == 5) {
+				flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
+				flags[kFLAGS.IZUMI_LVL_UP] = 6;
+			}
+			if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 7 && flags[kFLAGS.IZUMI_LVL_UP] == 6) {
+				flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
+				flags[kFLAGS.IZUMI_LVL_UP] = 7;
+			}
+			if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 8 && flags[kFLAGS.IZUMI_LVL_UP] == 7) {
+				flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
+				flags[kFLAGS.IZUMI_LVL_UP] = 8;
+			}
+			if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 9 && flags[kFLAGS.IZUMI_LVL_UP] == 8) {
+				flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
+				flags[kFLAGS.IZUMI_LVL_UP] = 9;
+			}
+			if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 10 && flags[kFLAGS.IZUMI_LVL_UP] == 9) {
+				flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
+				flags[kFLAGS.IZUMI_LVL_UP] = 10;
+			}
 			
 			clearOutput();
 
@@ -1596,15 +1641,14 @@ import classes.GlobalFlags.kFLAGS;
 			{
 				addButton(1, "TribHorn", tribThatRockyHornGirl);
 			}
-
 			if (player.hasCock())
 			{
 				addButton(2, "LetsFuck", letGoAndFuck);
 				addButton(3, "RevengeAnal", gonnaGetMeSomeRevengeButtsexin);
 				addButton(4, "RevengeOral", sayThatsAPrettyFaceBeAShameIfSomebodyJizzedAllOverIt);
-
 				if (player.tentacleCocks() >= 8 || player.stamenCocks() >= 8) addButton(5, "Tentacruel", tentacruelRevengeFux);
 			}
+			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 		}
 
 		// Pfft, nofux

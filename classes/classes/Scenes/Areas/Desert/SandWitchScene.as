@@ -3,6 +3,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.SceneLib;
+import classes.Scenes.UniqueSexScenes;
 
 public class SandWitchScene extends BaseContent implements TimeAwareInterface {
 
@@ -10,8 +11,10 @@ public class SandWitchScene extends BaseContent implements TimeAwareInterface {
 //const EGG_WITCH_COUNTER:int = 588;
 
 		public var pregnancy:PregnancyStore;
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 		public static var rapedBefore:Boolean = false;
-
+		
+		
 		public function SandWitchScene()
 		{
 			pregnancy = new PregnancyStore(kFLAGS.EGG_WITCH_TYPE, kFLAGS.EGG_WITCH_COUNTER, 0, 0);
@@ -621,16 +624,18 @@ internal function beatSandwitch():void {
 	outputText("  Of course, just taunting, teasing, and humiliating her for her arrogance would be equally amusing, <b>but it would give her plenty of time to turn the tables...</b>");
 	var temp2:Function = null;
 	var temp3:Function = null;
-	if(silly()) temp3 = missingoSex;
+	var temp4:Function = null;
+	if (silly()) temp3 = missingoSex;
+    if (player.pcCanUseUniqueSexScene()) temp4 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
     if (player.hasKeyItem("Deluxe Dildo") >= 0) temp2 = sandwitchGetsDildoed;
-    var shouldra:Function = null;
+	var shouldra:Function = null;
 	if(SceneLib.shouldraFollower.followerShouldra() && player.gender > 0) shouldra = SceneLib.shouldraFollower.sandWitchGetsGhostly;
 	//doYesNo(sandwitchRaped, cleanupAfterCombat);
 	var ovi:Function = null;
 	if(player.gender > 0 && player.canOviposit()) ovi = ovipositSandWitches;
 	
 	choices("Yes", sandwitchRaped, "Dildo Rape", temp2, "Use 3i@-", temp3, "Use Shouldra", shouldra, "Lay Eggs", ovi,
-		"Taunt Her", sandwitchSpanking, "", null, "", null, "", null, "Leave", cleanupAfterCombat);
+		"Taunt Her", sandwitchSpanking, "", null, "", null, "U. Sex Scenes", temp4, "Leave", cleanupAfterCombat);
 }
     //RAEP SAND-WITCH!
     private function sandwitchGetsDildoed():void {

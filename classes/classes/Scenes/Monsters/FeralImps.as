@@ -1,3 +1,7 @@
+/**
+ * ...
+ * @author Ormael
+ */
 package classes.Scenes.Monsters 
 {
 import classes.*;

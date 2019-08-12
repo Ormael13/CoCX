@@ -106,7 +106,7 @@ import classes.internals.ChainedDrop;
 			outputText("The animated sculpture brings its right foot around, dragging it through the gardens at a high enough speed to tear a half score of bushes out by the root. A cloud of shrubbery and dirt washes over you!");
 			
 			//blind
-			if (rand(2) == 0 && !player.hasStatusEffect(StatusEffects.Blind))
+			if (rand(2) == 0 && !player.hasStatusEffect(StatusEffects.Blind) && !player.hasPerk(PerkLib.BlindImmunity))
 			{
 				player.createStatusEffect(StatusEffects.Blind, 2, 0, 0, 0);
 				outputText(" <b>You are blinded!</b>");

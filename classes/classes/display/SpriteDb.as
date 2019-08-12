@@ -48,6 +48,8 @@ public class SpriteDb {
 	public static function get s_anemone(): Class {
 		return is8bit ? s_anemone_8bit : s_anemone_16bit;
 	}
+	[Embed(source="../../../res/sprites/archmage_alvina_shadowmantle2.png")]
+	public static const s_archmage_alvina_shadowmantle2_16bit:Class;
 	[Embed(source="../../../res/sprites/aria.png")]
 	public static var s_aria:Class;
 	[Embed(source="../../../res/sprites8bit/assmole-old.png")]

@@ -39,10 +39,12 @@ package classes.Scenes.Areas
 					break;
 				case 01:
 					flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] = 1;
+					player.underwaterCombatBoost();
 					sharkGirlScene.oceanSharkGirlEncounter();
 					break;
 				case 1:
 					flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] = 2;
+					player.underwaterCombatBoost();
 					sharkGirlScene.oceanTigersharkGirlEncounter();
 					break;
 				case 3:

@@ -49,31 +49,45 @@ use namespace CoC;
 			//Build choice list!
 			choice[choice.length] = 0; //Golem group enemies
 			choice[choice.length] = 1; //Golem group enemies
-			choice[choice.length] = 2; //Goblin/Imp group enemies
+			choice[choice.length] = 2; //Golem group enemies
 			choice[choice.length] = 3; //Goblin/Imp group enemies
-			choice[choice.length] = 4; //Items
-			choice[choice.length] = 5; //3 Find nothing! The rand will be removed from this once the Outer Battlefield is populated with more encounters.
+			choice[choice.length] = 4; //Goblin/Imp group enemies
+			choice[choice.length] = 5; //Items
+			choice[choice.length] = 6; //Find nothing!
 			
 			select = choice[rand(choice.length)];
 			switch(select) {
 				case 0:
 				case 1:
+				case 2:
 					SceneLib.exploration.genericGolemsEncounters1();
 					break;
-				case 2:
 				case 3:
+				case 4:
 					SceneLib.exploration.genericGobImpEncounters1();
 					break;
-				case 4:
+				case 5:
 					clearOutput();
 					outputText("You spot something on the ground among various items remains. Taking a closer look, it's ");
 					if (rand(2) == 0) {
-						outputText("a low-grade Soulforce Recovery Pill. ");
-						inventory.takeItem(consumables.LG_SFRP, camp.returnToCampUseOneHour);
+						if (player.level >= 24 && rand(3) == 0) {
+							outputText("a mid-grade Soulforce Recovery Pill. ");
+							inventory.takeItem(consumables.MG_SFRP, camp.returnToCampUseOneHour);
+						}
+						else {
+							outputText("a low-grade Soulforce Recovery Pill. ");
+							inventory.takeItem(consumables.LG_SFRP, camp.returnToCampUseOneHour);
+						}
 					}
 					else {
-						outputText("a very diluted Arcane Regen Concotion. ");
-						inventory.takeItem(consumables.VDARCON, camp.returnToCampUseOneHour);
+						if (player.level >= 24 && rand(3) == 0) {
+							outputText("a diluted Arcane Regen Concotion. ");
+							inventory.takeItem(consumables.D_ARCON, camp.returnToCampUseOneHour);
+						}
+						else {
+							outputText("a very diluted Arcane Regen Concotion. ");
+							inventory.takeItem(consumables.VDARCON, camp.returnToCampUseOneHour);
+						}
 					}
 					break;
 				default:

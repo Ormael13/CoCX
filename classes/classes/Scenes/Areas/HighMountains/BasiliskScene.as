@@ -7,9 +7,12 @@ import classes.*;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.Scenes.UniqueSexScenes;
 
 public class BasiliskScene extends BaseContent
 	{
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		
 		public function BasiliskScene()
 		{
 		}
@@ -62,11 +65,6 @@ public class BasiliskScene extends BaseContent
 		public function defeatBasilisk():void {
 			spriteSelect(75);
 			clearOutput();
-			var evil:Function =null;
-			var eggs:Function =null;
-			if(player.canOvipositSpider()) eggs = driderPCEggLaysBasilisk;
-			if(player.canOvipositBee() && player.gender > 0) eggs = layBeeEggsInABasilisk;
-			if(player.cockThatFits(monster.analCapacity()) >= 0 && (player.cor >= 66 - player.corruptionTolerance() || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1)) evil = defeatBasiliskAndAnal;
 			//Player HP victory: 
 			if(monster.HP < 1) outputText("Unable to stand anymore, the basilisk shakily sinks down on one knee, drops its head and looks at the ground, evidently demonstrating submission.");
 			//Player Lust victory: 
@@ -75,8 +73,13 @@ public class BasiliskScene extends BaseContent
 			//If victory and Player Lust above 30: 
 			if(player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("  Certain that the creature won't dare try and turn its eyes on you again, you take your time to look the tall reptile over directly for the first time.  Perhaps you could use it to satisfy your baser urges. If so, what part of it do you choose?");
-				//[Tongue][Ass]
-				simpleChoices("Tongue", tongueBasiliskSmex, "Ass", evil, "", null, "Lay Eggs", eggs, "Leave", cleanupAfterCombat);
+				menu();
+				addButton(0, "Tongue", tongueBasiliskSmex);
+				if (player.cockThatFits(monster.analCapacity()) >= 0 && (player.cor >= 66 - player.corruptionTolerance() || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1)) addButton(1, "Ass", defeatBasiliskAndAnal);
+				if (player.canOvipositSpider() || player.canOvipositMantis()) addButton(2, "Lay Eggs", driderPCEggLaysBasilisk);
+				if (player.canOvipositBee() && player.gender > 0) addButton(2, "Lay Eggs", layBeeEggsInABasilisk);
+				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();
 		}

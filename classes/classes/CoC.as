@@ -97,7 +97,11 @@ public class CoC extends MovieClip
     public var headjewelries:HeadJewelryLib		= new HeadJewelryLib();
     public var necklaces:NecklaceLib			= new NecklaceLib();
     public var jewelries:JewelryLib				= new JewelryLib();
+    public var jewelries2:JewelryLib			= new JewelryLib();
+    public var jewelries3:JewelryLib			= new JewelryLib();
+    public var jewelries4:JewelryLib			= new JewelryLib();
     public var shields:ShieldLib				= new ShieldLib();
+    public var vehicles:VehiclesLib				= new VehiclesLib();
 
 
     // Force updates in Pepper Flash ahuehue
@@ -249,8 +253,8 @@ public class CoC extends MovieClip
         //model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8m3";
-			version = ver + " (<b>Bugfixes adn QoL changes</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8n";
+			version = ver + " (<b>Matrix Armory voucher, Goblins Overhaul (p.1), Alvina (p.1), Cave Wyrm and Hinezumi TF's, 3 more ring slots, character viewer update (p.1) and many other too many smaller things to meantion</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

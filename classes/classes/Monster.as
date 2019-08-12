@@ -289,6 +289,9 @@ import flash.utils.getQualifiedClassName;
 			var multimax:Number = 1;
 			if (findPerk(PerkLib.LimitBreakerBody1stStage) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerBody2ndStage) >= 0) multimax += 0.1;
+			if (statusEffectv2(StatusEffects.SaiyanNumber1a) > 0) multimax += statusEffectv2(StatusEffects.SaiyanNumber1a);
+			if (statusEffectv2(StatusEffects.SaiyanNumber2a) > 0) multimax += statusEffectv2(StatusEffects.SaiyanNumber2a);
+			if (statusEffectv2(StatusEffects.SaiyanNumber3a) > 0) multimax += statusEffectv2(StatusEffects.SaiyanNumber3a);
 			temp *= multimax;
 			temp = Math.round(temp);
 			return temp;
@@ -361,6 +364,9 @@ import flash.utils.getQualifiedClassName;
 			var multimax:Number = 1;
 			if (findPerk(PerkLib.LimitBreakerHeart1stStage) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerHeart2ndStage) >= 0) multimax += 0.1;
+			if (statusEffectv3(StatusEffects.SaiyanNumber1a) > 0) multimax += statusEffectv3(StatusEffects.SaiyanNumber1a);
+			if (statusEffectv3(StatusEffects.SaiyanNumber2a) > 0) multimax += statusEffectv3(StatusEffects.SaiyanNumber2a);
+			if (statusEffectv3(StatusEffects.SaiyanNumber3a) > 0) multimax += statusEffectv3(StatusEffects.SaiyanNumber3a);
 			temp *= multimax;
 			temp = Math.round(temp);
 			return temp;
@@ -538,10 +544,11 @@ import flash.utils.getQualifiedClassName;
 				if (findPerk(PerkLib.EnemyGroupType) >= 0) temp += 2000;
 			}
 			var multimax:Number = 1;
-			if (game.player.orcScore() >= 5) multimax += 0.1;
-			if (game.player.orcScore() >= 11) multimax += 0.1;
 			if (findPerk(PerkLib.LimitBreakerBody1stStage) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerBody2ndStage) >= 0) multimax += 0.1;
+			if (statusEffectv4(StatusEffects.SaiyanNumber1a) > 0) multimax += statusEffectv4(StatusEffects.SaiyanNumber1a);
+			if (statusEffectv4(StatusEffects.SaiyanNumber2a) > 0) multimax += statusEffectv4(StatusEffects.SaiyanNumber2a);
+			if (statusEffectv4(StatusEffects.SaiyanNumber3a) > 0) multimax += statusEffectv4(StatusEffects.SaiyanNumber3a);
 			temp *= multimax;
 			temp = Math.round(temp);
 			if (hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.Sentience)) temp = 0;
@@ -610,8 +617,8 @@ import flash.utils.getQualifiedClassName;
 			var armorMod:Number = armorDef;
 			//--BASE--
 			//Modify armor rating based on melee weapons
-			if (game.player.weapon == game.weapons.JRAPIER || game.player.weapon == game.weapons.Q_GUARD || game.player.weapon == game.weapons.B_WIDOW || game.player.weapon == game.weapons.SPEAR || game.player.weapon == game.weapons.SESPEAR || game.player.weapon == game.weapons.DSSPEAR || game.player.weapon == game.weapons.LANCE || game.player.weapon == game.weapons.NORTHIP
-			 || (game.player.weaponName.indexOf("staff") != -1 && game.player.findPerk(PerkLib.StaffChanneling) >= 0)) armorMod = 0;
+			if (game.player.weapon == game.weapons.JRAPIER || game.player.weapon == game.weapons.Q_GUARD || game.player.weapon == game.weapons.B_WIDOW || game.player.weapon == game.weapons.SPEAR || game.player.weapon == game.weapons.SESPEAR || game.player.weapon == game.weapons.DSSPEAR || game.player.weapon == game.weapons.SKYPIER || game.player.weapon == game.weapons.LANCE
+			 || game.player.weapon == game.weapons.NORTHIP || (game.player.weaponName.indexOf("staff") != -1 && game.player.findPerk(PerkLib.StaffChanneling) >= 0)) armorMod = 0;
 			if (game.player.weapon == game.weapons.KATANA) armorMod -= 5;
 			if (game.player.weapon == game.weapons.HALBERD) armorMod *= 0.6;
 			if (game.player.weapon == game.weapons.GUANDAO) armorMod *= 0.4;
@@ -2044,11 +2051,11 @@ import flash.utils.getQualifiedClassName;
 				else outputText("'s attack ");
 				outputText("with your [weapon].\n");
 				if (game.player.findPerk(PerkLib.TwinRiposte) >= 0 && (game.player.weaponPerk == "Dual" || game.player.weaponPerk == "Dual Large") && game.player.wrath >= 2) {
-					player.createStatusEffect(StatusEffects.CounterAction,2,0,0,0);
+					player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
 					SceneLib.combat.basemeleeattacks();
 				}
 				if (game.player.findPerk(PerkLib.Backlash) >= 0 && game.player.isFistOrFistWeapon()) {
-					player.createStatusEffect(StatusEffects.CounterAction, 1, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
 					outputText(" As you block the blow you exploit the opening in your opponent’s guard to deliver a vicious kick.");
 					SceneLib.combat.basemeleeattacks();
 				}
@@ -2337,7 +2344,7 @@ import flash.utils.getQualifiedClassName;
 		public function teased(lustDelta:Number):void
 		{
 			outputDefaultTeaseReaction(lustDelta);
-			if(lustDelta > 0) {
+			if (lustDelta > 0) {
 				//Imp mob uber interrupt!
 			  	if(hasStatusEffect(StatusEffects.ImpUber)) { // TODO move to proper class
 					outputText("\nThe imps in the back stumble over their spell, their loincloths tenting obviously as your display interrupts their casting.  One of them spontaneously orgasms, having managed to have his spell backfire.  He falls over, weakly twitching as a growing puddle of whiteness surrounds his defeated form.");
@@ -2348,6 +2355,7 @@ import flash.utils.getQualifiedClassName;
 					createStatusEffect(StatusEffects.ImpSkip,0,0,0,0);
 				}
 			}
+			if (hasStatusEffect(StatusEffects.BerzerkingSiegweird)) lustDelta *= 0.5;
 			applyTease(lustDelta);
 		}
 
@@ -2619,7 +2627,7 @@ import flash.utils.getQualifiedClassName;
 					player.removeStatusEffect(StatusEffects.Blind);
 				}
 				else {
-					if(statusEffectv1(StatusEffects.Sandstorm) == 0 || statusEffectv1(StatusEffects.Sandstorm) % 4 == 0) {
+					if((statusEffectv1(StatusEffects.Sandstorm) == 0 || statusEffectv1(StatusEffects.Sandstorm) % 4 == 0) && !player.hasPerk(PerkLib.BlindImmunity)) {
 						player.createStatusEffect(StatusEffects.Blind,0,0,0,0);
 						outputText("<b>The sand is in your eyes!  You're blinded this turn!</b>\n\n");
 					}
@@ -2991,13 +2999,13 @@ import flash.utils.getQualifiedClassName;
 				sens += (5 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.JobAllRounder)) {
-				str += (10 * (1 + newGamePlusMod()));
-				tou += (10 * (1 + newGamePlusMod()));
-				spe += (10 * (1 + newGamePlusMod()));
-				inte += (10 * (1 + newGamePlusMod()));
-				wis += (10 * (1 + newGamePlusMod()));
-				lib += (6 * (1 + newGamePlusMod()));
-				sens += (6 * (1 + newGamePlusMod()));
+				str += (5 * (1 + newGamePlusMod()));
+				tou += (5 * (1 + newGamePlusMod()));
+				spe += (5 * (1 + newGamePlusMod()));
+				inte += (5 * (1 + newGamePlusMod()));
+				wis += (5 * (1 + newGamePlusMod()));
+				lib += (5 * (1 + newGamePlusMod()));
+				sens += (5 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.JobBeastWarrior) >= 0) {
 				str += (5 * (1 + newGamePlusMod()));

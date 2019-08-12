@@ -146,8 +146,7 @@ use namespace CoC;
 			this.gems = rand(10) + 20;
 			this.drop = new ChainedDrop().
 					add(useables.EBONBLO,1/20).
-					//add(consumables.METHIRC,0.7);
-					add(consumables.SALAMFW,0.7);
+					add(consumables.METHIRC,0.7);
 			//this.tailType = Tail.SALAMANDER;
 			//this.tailRecharge = 0;
 			checkMonster();

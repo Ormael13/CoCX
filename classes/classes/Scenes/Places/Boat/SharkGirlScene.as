@@ -3,9 +3,12 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
 import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
+import classes.Scenes.UniqueSexScenes;
 
 public class SharkGirlScene extends AbstractBoatContent{
 
+	public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		
 	public function SharkGirlScene()
 	{
 	}
@@ -113,15 +116,17 @@ internal function sharkWinChoices():void {
 	if(player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 		outputText("  Do you have your way with her or leave?");
         var dildo:Function = (player.hasKeyItem("Deluxe Dildo") >= 0 ? sharkGirlGetsDildoed : null);
+		var temp3:Function =null;
+		if (player.pcCanUseUniqueSexScene()) temp3 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
         if (player.gender == 1)
-			simpleChoices("Use Dick", sharkgirlDickFuck, "Pussy w/69", null, "Dildo Rape", dildo, "", null, "Leave", cleanupAfterCombat);
+			simpleChoices("Use Dick", sharkgirlDickFuck, "Pussy w/69", null, "Dildo Rape", dildo, "U. Sex Scenes", temp3, "Leave", cleanupAfterCombat);
 		else if (player.gender == 2) {
-			simpleChoices("Yes", sharkgirlSixtyNine, "", null, "Dildo Rape", dildo, "", null, "Leave", cleanupAfterCombat);
+			simpleChoices("Yes", sharkgirlSixtyNine, "", null, "Dildo Rape", dildo, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, "Leave", cleanupAfterCombat);
 		}
 		else if (player.gender == 3) {
 			if (player.isNaga())
-				simpleChoices("Use Dick", sharkgirlDickFuck, "Pussy Oral", sharkgirlSixtyNine, "Dildo Rape", dildo, "", null, "Leave", cleanupAfterCombat);
-			else simpleChoices("Use Dick", sharkgirlDickFuck, "Pussy w/69", sharkgirlSixtyNine, "Dildo Rape", dildo, "", null, "Leave", cleanupAfterCombat);
+				simpleChoices("Use Dick", sharkgirlDickFuck, "Pussy Oral", sharkgirlSixtyNine, "Dildo Rape", dildo, "U. Sex Scenes", temp3, "Leave", cleanupAfterCombat);
+			else simpleChoices("Use Dick", sharkgirlDickFuck, "Pussy w/69", sharkgirlSixtyNine, "Dildo Rape", dildo, "U. Sex Scenes", temp3, "Leave", cleanupAfterCombat);
 		}
 	}
 	else cleanupAfterCombat();
@@ -135,6 +140,7 @@ public function oceanSharkWinChoices():void {
 	if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 		if (player.hasCock()) addButton(1, "Fuck Her", sharkgirlOceanDickFuck1);
 		if (player.hasVagina()) addButton(2, "Sixty nine", sharkgirlOceanSixtyNine1);
+		if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 	}
 }
 public function oceanTigerSharkWinChoices():void {
@@ -146,6 +152,7 @@ public function oceanTigerSharkWinChoices():void {
 	if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 		if (player.hasCock()) addButton(1, "Fuck Her", sharkgirlOceanDickFuck2);
 		if (player.hasVagina()) addButton(2, "Sixty nine", sharkgirlOceanSixtyNine2);
+		if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 	}
 }
 

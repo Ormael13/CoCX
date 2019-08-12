@@ -35,6 +35,7 @@ public class Arms extends BodyPart {
 	public static const ORC:int			= 31;
 	public static const DISPLACER:int	= 32;
 	public static const CAVE_WYRM:int	= 33;
+	public static const HINEZUMI:int	= 34;
 	// Don't forget to add new types in DebugMenu.as list ARM_TYPE_CONSTANTS
 
 	public function Arms() {

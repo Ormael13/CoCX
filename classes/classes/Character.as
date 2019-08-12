@@ -644,6 +644,10 @@ import classes.Items.JewelryLib;
 				min -= lib;
 				min -= sens;
 			}
+			if (headjewelryName == "Crown of the Undefeated King") {
+				min -= maxHP() * 0.05;
+				min -= (500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}
 			min = Math.round(min);
 			return min;
 		}
@@ -776,7 +780,6 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.InsightfulResourcesVI) >= 0) max += Math.round(wis*3);
 			if (findPerk(PerkLib.PrestigeJobSoulArcher) >= 0) max += 1000;
 			if (findPerk(PerkLib.PrestigeJobSeer) >= 0) max += 500;
-			if (findPerk(PerkLib.AscensionSoulPurity) >= 0) max += perkv1(PerkLib.AscensionSoulPurity) * 50;
 			if (findPerk(PerkLib.DaoistCultivator) >= 0) max += 25;
 			if (findPerk(PerkLib.DaoistApprenticeStage) >= 0) {
 				if (findPerk(PerkLib.SoulApprentice) >= 0) max += 30;
@@ -799,7 +802,11 @@ import classes.Items.JewelryLib;
 				if (findPerk(PerkLib.SoulAncestor) >= 0) max += 60;
 			}
 			if (flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] > 0) max += flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING];//+310
-			if (jewelryEffectId == JewelryLib.MODIFIER_SF) max += jewelryEffectMagnitude;//+20
+			if (findPerk(PerkLib.AscensionSoulPurity) >= 0) max += perkv1(PerkLib.AscensionSoulPurity) * 50;
+			if (jewelryEffectId == JewelryLib.MODIFIER_SF) max += jewelryEffectMagnitude;//+100
+			if (jewelryEffectId2 == JewelryLib.MODIFIER_SF) max += jewelryEffectMagnitude2;//+100
+			if (jewelryEffectId3 == JewelryLib.MODIFIER_SF) max += jewelryEffectMagnitude3;//+100
+			if (jewelryEffectId4 == JewelryLib.MODIFIER_SF) max += jewelryEffectMagnitude4;//+100
 			if (necklaceName == "soulmetal necklace") max += necklaceEffectMagnitude;//+100
 			if (findPerk(PerkLib.UnlockSpirit) >= 0) max += level * 5;
 			if (findPerk(PerkLib.UnlockSpirit2ndStage) >= 0) max += level * 5;
@@ -914,6 +921,11 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.TooAngryToDie) >= 0) max += 600;
 			if (findPerk(PerkLib.PrestigeJobTempest) >= 0) max += 100;
 			if (findPerk(PerkLib.AscensionFury) >= 0) max += perkv1(PerkLib.AscensionFury) * 20;
+			if (jewelryEffectId == JewelryLib.MODIFIER_WR) max += jewelryEffectMagnitude;//+75 to +175
+			if (jewelryEffectId2 == JewelryLib.MODIFIER_WR) max += jewelryEffectMagnitude2;//+75 to +175
+			if (jewelryEffectId3 == JewelryLib.MODIFIER_WR) max += jewelryEffectMagnitude3;//+75 to +175
+			if (jewelryEffectId4 == JewelryLib.MODIFIER_WR) max += jewelryEffectMagnitude4;//+75 to +175
+			if (jewelryName == "Undefeated King's Signet" || jewelryName3 == "Undefeated King's Signet") max += 150;
 			if (findPerk(PerkLib.UnlockId) >= 0) max += level;
 			if (findPerk(PerkLib.UnlockId2ndStage) >= 0) max += level;
 			if (findPerk(PerkLib.UnlockId3rdStage) >= 0) max += level;
@@ -1021,6 +1033,9 @@ import classes.Items.JewelryLib;
 			}
 			if (findPerk(PerkLib.AscensionInnerPower) >= 0) max += perkv1(PerkLib.AscensionInnerPower) * 40;
 			if (jewelryEffectId == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude;
+			if (jewelryEffectId2 == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude2;
+			if (jewelryEffectId3 == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude3;
+			if (jewelryEffectId4 == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude4;
 			max += level * 10;
 			if (findPerk(PerkLib.UnlockForce) >= 0) max += level * 10;
 			if (findPerk(PerkLib.UnlockForce2ndStage) >= 0) max += level * 10;

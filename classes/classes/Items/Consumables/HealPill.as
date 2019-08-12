@@ -36,7 +36,7 @@ import classes.Items.ConsumableLib;
 			
 			if (rand >= 70 && rand <= 90) {
 				outputText("Your body tingles and feels more sensitive.");
-				dynStats("sens", 4);
+				dynStats("sens", 1);
 			}
 			
 			if (rand > 90) {

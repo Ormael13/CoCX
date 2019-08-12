@@ -8,9 +8,12 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.Scenes.UniqueSexScenes;
 
 public class GnollSpearThrowerScene extends BaseContent
 	{
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		
 		public function GnollSpearThrowerScene()
 		{
 		}
@@ -170,7 +173,8 @@ public class GnollSpearThrowerScene extends BaseContent
 				menu();
 				if (player.hasCock()) addButton(0, "Get BJ", hyenaVictoryRapeFellatio).hint("Make the gnoll suck you off.", "Get Blowjob");
 				if (player.hasVagina()) addButton(1, "Get Licked", victoryRapeHyenaCunnilingus).hint("Make the gnoll lick your pussy.");
-				addButton(4, "Leave", cleanupAfterCombat);
+				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else doNext(cleanupAfterCombat);
 		}

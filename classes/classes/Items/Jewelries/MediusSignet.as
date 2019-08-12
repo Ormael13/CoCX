@@ -7,6 +7,7 @@ package classes.Items.Jewelries
 	import classes.Items.Jewelry;
 	import classes.PerkLib;
 	import classes.Player;
+	import classes.StatusEffects;
 
 	public class MediusSignet extends Jewelry
 	{

@@ -3,9 +3,11 @@ package classes.Scenes.Areas.GlacialRift
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.UniqueSexScenes;
 	
 	public class ValkyrieScene extends BaseContent
 	{
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 		
 		public function ValkyrieScene() 
 		{
@@ -69,7 +71,8 @@ package classes.Scenes.Areas.GlacialRift
 					addButton(2, "Get Licked", valkyrieLicksYou);
 					addButton(3, "Scissor", valkyrieScissor);
 				}
-				addButton(4, "Leave", cleanupAfterCombat);
+				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else {
 				cleanupAfterCombat();

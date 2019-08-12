@@ -20,6 +20,8 @@ import classes.Items.ShieldLib;
 import classes.Items.Undergarment;
 import classes.Items.UndergarmentLib;
 import classes.Items.Useable;
+import classes.Items.Vehicles;
+import classes.Items.VehiclesLib;
 import classes.Items.Weapon;
 import classes.Items.WeaponLib;
 import classes.Items.WeaponRange;
@@ -87,11 +89,14 @@ use namespace CoC;
 			outputText("<b>Armour:</b> " + player.armor.name + " (Physical / Magical Defense: " + player.armorDef + " / " + player.armorMDef + ")\n");
 			outputText("<b>Upper underwear:</b> " + player.upperGarment.name + "\n");
 			outputText("<b>Lower underwear:</b> " + player.lowerGarment.name + "\n");
-			outputText("<b>Head Accessory:</b> " + player.headjewelryName + "\n");
+			outputText("<b>Head Accessory/Helm:</b> " + player.headjewelryName + "\n");
 			outputText("<b>Necklace:</b> " + player.necklaceName + "\n");
-			/*outputText("<b>Ring:</b> " + player.jewelryName + "\n");
-			outputText("<b>Ring:</b> " + player.jewelryName + "\n");*/
-			outputText("<b>Accessory:</b> " + player.jewelryName + "\n");
+			outputText("<b>Ring (1st):</b> " + player.jewelry.name + "\n");
+			if (player.findPerk(PerkLib.SecondRing) >= 0) outputText("<b>Ring (2nd):</b> " + player.jewelry2.name + "\n");
+			if (player.findPerk(PerkLib.ThirdRing) >= 0) outputText("<b>Ring (3rd):</b> " + player.jewelry3.name + "\n");
+			if (player.findPerk(PerkLib.FourthRing) >= 0) outputText("<b>Ring (4th):</b> " + player.jewelry4.name + "\n");
+			//outputText("<b>Accessory:</b> " + player.jewelryName + "\n");
+			//outputText("<b>Vehicle:</b> " + player.vehiclesName + "\n");
 			if (player.hasKeyItem("Bag of Cosmos") >= 0) outputText("\nAt your belt hangs bag of cosmos.\n");
 			if (player.hasKeyItem("Sky Poison Pearl") >= 0) outputText("\nThere is a circular green imprint at the palm of your left hand.\n");
 			if (player.keyItems.length > 0) outputText("<b><u>\nKey Items:</u></b>\n");
@@ -610,8 +615,29 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 				else takeItem(item, callNext);
 			}
 			else if (item is Jewelry) {
-				player.jewelry.removeText();
-				item = player.setJewelry(item as Jewelry); //Item is now the player's old jewelry
+				if (player.findPerk(PerkLib.FourthRing) >= 0 && player.jewelry4 == JewelryLib.NOTHING) { //if 4th ring slot is empty, equip in that slot
+					player.setJewelry4(item as Jewelry); 
+					itemGoNext();
+				}
+				else if (player.findPerk(PerkLib.ThirdRing) >= 0 && player.jewelry3 == JewelryLib.NOTHING) { //if 3rd ring slot is empty, equip in that slot
+					player.setJewelry3(item as Jewelry); 
+					itemGoNext();
+				}
+				else if (player.findPerk(PerkLib.SecondRing) >= 0 && player.jewelry2 == JewelryLib.NOTHING) { //if 2nd ring slot is empty, equip in that slot
+					player.setJewelry2(item as Jewelry); 
+					itemGoNext();
+				}
+				else { // otherwise replace 1nd ring slot
+					player.jewelry.removeText();
+					item = player.setJewelry(item as Jewelry); //Item is now the player's old jewelry
+					if (item == null)
+						itemGoNext();
+					else takeItem(item, callNext);
+				}
+			}
+			else if (item is Vehicles) {
+				player.vehicles.removeText();
+				item = player.setVehicle(item as Vehicles); //Item is now the player's old vehicle
 				if (item == null)
 					itemGoNext();
 				else takeItem(item, callNext);
@@ -818,10 +844,18 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 			if (player.shield != ShieldLib.NOTHING)
 			{
 				addButton(2, "Shield", unequipShield).hint(player.shield.description, capitalizeFirstLetter(player.shield.name));
-			}
+			}/*
 			if (player.jewelry != JewelryLib.NOTHING)
 			{
 				addButton(3, "Accessory", unequipJewel).hint(player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
+			}*/
+			if (player.jewelry != JewelryLib.NOTHING)
+			{
+				addButton(3, "Ring 1", unequipJewel1).hint(player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
+			}
+			if (player.jewelry2 != JewelryLib.NOTHING)
+			{
+				addButton(4, "Ring 2", unequipJewel2).hint(player.jewelry2.description, capitalizeFirstLetter(player.jewelry2.name));
 			}
 			if (player.armor != ArmorLib.NOTHING)
 			{
@@ -835,6 +869,14 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 			{
 				addButton(7, "Lowerwear", unequipLowerwear).hint(player.lowerGarment.description, capitalizeFirstLetter(player.lowerGarment.name));
 			}
+			if (player.jewelry3 != JewelryLib.NOTHING)
+			{
+				addButton(8, "Ring 3", unequipJewel3).hint(player.jewelry3.description, capitalizeFirstLetter(player.jewelry3.name));
+			}
+			if (player.jewelry4 != JewelryLib.NOTHING)
+			{
+				addButton(9, "Ring 4", unequipJewel4).hint(player.jewelry4.description, capitalizeFirstLetter(player.jewelry4.name));
+			}
 			if (player.headJewelry != HeadJewelryLib.NOTHING)
 			{
 				addButton(10, "Head Acc", unequipHeadJewel).hint(player.headJewelry.description, capitalizeFirstLetter(player.headJewelry.name));
@@ -842,15 +884,11 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 			if (player.necklace != NecklaceLib.NOTHING)
 			{
 				addButton(11, "Necklace", unequipNecklace).hint(player.necklace.description, capitalizeFirstLetter(player.necklace.name));
+			}
+			if (player.headJewelry != HeadJewelryLib.NOTHING)
+			{
+				addButton(12, "Vehicle", unequipVehicle).hint(player.vehicles.description, capitalizeFirstLetter(player.vehicles.name));
 			}/*
-			if (player.jewelry != JewelryLib.NOTHING)
-			{
-				addButton(3, "Ring 1", unequipJewel).hint(player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
-			}
-			if (player.jewelry != JewelryLib.NOTHING)
-			{
-				addButton(4 lub 8, "Ring 2", unequipJewel).hint(player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
-			}
 			zrobić sloty:
 			może jeszcze 1-3 kolejne ringi (poza pierwszym orginalnym slotem)
 			coś w stylu slotu na prawdziwe akcesoria
@@ -890,8 +928,20 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 		public function unequipNecklace():void {
 			takeItem(player.setNecklace(NecklaceLib.NOTHING), inventoryMenu);
 		}
-		public function unequipJewel():void {
+		public function unequipJewel1():void {
 			takeItem(player.setJewelry(JewelryLib.NOTHING), inventoryMenu);
+		}
+		public function unequipJewel2():void {
+			takeItem(player.setJewelry2(JewelryLib.NOTHING), inventoryMenu);
+		}
+		public function unequipJewel3():void {
+			takeItem(player.setJewelry3(JewelryLib.NOTHING), inventoryMenu);
+		}
+		public function unequipJewel4():void {
+			takeItem(player.setJewelry4(JewelryLib.NOTHING), inventoryMenu);
+		}
+		public function unequipVehicle():void {
+			takeItem(player.setVehicle(VehiclesLib.NOTHING), inventoryMenu);
 		}
 		public function unequipShield():void {
 			takeItem(player.setShield(ShieldLib.NOTHING), inventoryMenu);

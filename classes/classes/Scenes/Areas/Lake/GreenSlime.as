@@ -7,22 +7,26 @@ import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Dungeons.RiverDungeon;
 import classes.Scenes.SceneLib;
+import classes.Scenes.UniqueSexScenes;
 import classes.internals.*;
 
 public class GreenSlime extends Monster
 	{
 		public var floor1:RiverDungeon = new RiverDungeon();
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
 			outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.", true);
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) SceneLib.combat.cleanupAfterCombatImpl();
+			var temp3:Function = null;
+			if (player.pcCanUseUniqueSexScene()) temp3 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
 			//Boobfeed.
 			else if (player.hasStatusEffect(StatusEffects.Feeder) && flags[kFLAGS.SFW_MODE] <= 0) {
 				//Eligable to rape
 				if(player.lust >= 33 && player.gender > 0) {
 					outputText("\n\nYou're horny enough to try and rape it, though you'd rather see how much milk you can squirt into it.  What do you do?");
-					EngineCore.simpleChoices("B.Feed",SceneLib.lake.greenSlimeScene.rapeOozeWithMilk,"Rape",SceneLib.lake.greenSlimeScene.slimeVictoryRape,"",null,"",null,"Leave",SceneLib.combat.cleanupAfterCombatImpl);
+					EngineCore.simpleChoices("B.Feed",SceneLib.lake.greenSlimeScene.rapeOozeWithMilk,"Rape",SceneLib.lake.greenSlimeScene.slimeVictoryRape,"",null,"U. Sex Scenes",temp3,"Leave",SceneLib.combat.cleanupAfterCombatImpl);
 				}
 				//Rapes not on the table.
 				else {
@@ -33,7 +37,7 @@ public class GreenSlime extends Monster
 			//Not a breastfeeder
 			else if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("  Sadly you realize your own needs have not been met.  Of course, you could always play with the poor thing... Do you rape it?");
-				EngineCore.doYesNo(SceneLib.lake.greenSlimeScene.slimeVictoryRape, SceneLib.combat.cleanupAfterCombatImpl);
+				EngineCore.simpleChoices("Rape",SceneLib.lake.greenSlimeScene.slimeVictoryRape,"",null,"",null,"U. Sex Scenes",temp3,"Leave",SceneLib.combat.cleanupAfterCombatImpl);
 			}
 			else SceneLib.combat.cleanupAfterCombatImpl();
 		}

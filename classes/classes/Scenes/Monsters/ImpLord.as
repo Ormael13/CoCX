@@ -11,6 +11,14 @@ import classes.internals.*;
 
 public class ImpLord extends Imp
 	{
+		//sMaSh
+		protected function sMaSh():void
+		{
+			str *= 4;
+			eAttack();
+			str *= 0.25;
+		}
+		
 		//Special Attack 1
 		protected function impFire():void
 		{
@@ -68,22 +76,35 @@ public class ImpLord extends Imp
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.flags[kFLAGS.DEMONS_DEFEATED]++;
-			SceneLib.impScene.defeatImpLord();
+			if (player.hasStatusEffect(StatusEffects.SiegweirdImp)) {
+				player.removeStatusEffect(StatusEffects.SiegweirdImp);
+				cleanupAfterCombat();
+				SceneLib.siegweirdFollower.siegweirdFirstEncounterPostFight();
+			}
+			else {
+				game.flags[kFLAGS.DEMONS_DEFEATED]++;
+				SceneLib.impScene.defeatImpLord();
+			}
 		}
 
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			SceneLib.impScene.loseToAnImpLord();
+			if (player.hasStatusEffect(StatusEffects.SiegweirdImp)) {
+				player.removeStatusEffect(StatusEffects.SiegweirdImp);
+				SceneLib.impScene.impRapesYou();
+			}
+			else SceneLib.impScene.loseToAnImpLord();
 		}
 
 		public function ImpLord()
 		{
 			super(true);
 			this.a = "the ";
-			this.short = "imp lord";
+			if (player.hasStatusEffect(StatusEffects.SiegweirdImp)) this.short = "imp with a huge greatsword";
+			else this.short = "imp lord";
 			this.imageName = "implord";
-			this.long = "The greater imp has an angular face, complete with curved nose and burnt red skin typical of imps.  He has no hair on his head, leaving his cold, lust-clouded, black eyes unobstructed.  Just above his long pointed ears are two curved bovine horns.  While still short, he's much taller then the average imp, being nearly four feet tall, and extremely well-muscled.  A pair of powerful wings extends out from his shoulders, however, you suspect he wouldn't be able to fly for long due to his extreme bulk.  A thick coating of fur starts at his well toned hips and works its way down his powerful legs.  His legs end in a pair of oddly jointed, demonic hooves.  His demonic figure is completed by a thin tail that has an arrowhead shaped tip.\n\nThe greater imp, like most imps wear very little clothing; only a simple loincloth and satchel hang from his waist.  You also note that the imp has two barbell piercings in his nipples. The creature doesn't seem to have any weapons, aside from his sharp black finger nails.";
+			if (player.hasStatusEffect(StatusEffects.SiegweirdImp)) this.long = "You are under attack by an imp wielding a huge greatsword! The imp’s arms are so muscular it would be funny if not for the fact he’s trying to split you in half with a weapon trice his size!";
+			else this.long = "The greater imp has an angular face, complete with curved nose and burnt red skin typical of imps.  He has no hair on his head, leaving his cold, lust-clouded, black eyes unobstructed.  Just above his long pointed ears are two curved bovine horns.  While still short, he's much taller then the average imp, being nearly four feet tall, and extremely well-muscled.  A pair of powerful wings extends out from his shoulders, however, you suspect he wouldn't be able to fly for long due to his extreme bulk.  A thick coating of fur starts at his well toned hips and works its way down his powerful legs.  His legs end in a pair of oddly jointed, demonic hooves.  His demonic figure is completed by a thin tail that has an arrowhead shaped tip.\n\nThe greater imp, like most imps wear very little clothing; only a simple loincloth and satchel hang from his waist.  You also note that the imp has two barbell piercings in his nipples. The creature doesn't seem to have any weapons, aside from his sharp black finger nails.";
 			// this.plural = false;
 			// Imps now only have demon dicks.
 			// Not sure if I agree with this, I can imagine the little fuckers abusing the
@@ -93,7 +114,7 @@ public class ImpLord extends Imp
 			this.ballSize = 1;
 			this.cumMultiplier = 3;
 			this.hoursSinceCum = 20;
-			if (flags[kFLAGS.IMP_LORD_MALEHERM_PROGRESS] >= 10) this.createVagina();
+			if (flags[kFLAGS.IMP_LORD_MALEHERM_PROGRESS] >= 10 && !player.hasStatusEffect(StatusEffects.SiegweirdImp)) this.createVagina();
 			createBreastRow(0);
 			this.pronoun1 = "he";
 			this.pronoun2 = "him";
@@ -107,9 +128,16 @@ public class ImpLord extends Imp
 			this.skinTone = "red";
 			initStrTouSpeInte(55, 40, 45, 42);
 			initWisLibSensCor(42, 55, 35, 100);
-			this.weaponName = "fist";
-			this.weaponVerb="punch";
-			this.weaponAttack = 10;
+			if (player.hasStatusEffect(StatusEffects.SiegweirdImp)) {
+				this.weaponName = "fist";
+				this.weaponVerb="punch";
+				this.weaponAttack = 10;
+			}
+			else {
+				this.weaponName = "huge greatsword";
+				this.weaponVerb="slash";
+				this.weaponAttack = 40;
+			}
 			this.armorName = "leathery skin";
 			this.armorDef = 5;
 			this.armorMDef = 1;
@@ -126,7 +154,8 @@ public class ImpLord extends Imp
 					add(consumables.INCUBID,6).
 					add(consumables.SUCMILK,6);
 			this.wings.type = Wings.IMP;
-			this.special1 = lustMagicAttack;
+			if (player.hasStatusEffect(StatusEffects.SiegweirdImp)) this.special1 = sMaSh;
+			else this.special1 = lustMagicAttack;
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}

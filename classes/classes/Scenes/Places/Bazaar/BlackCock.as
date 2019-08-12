@@ -782,7 +782,7 @@ import classes.lists.Gender;
 			else if (player.findFirstCockType(CockTypesEnum.RHINO) >= 0) {
 				outputText("\n\nAndy chuckles fondly as his hands slide down to either side of your [cock]. Soft hands firmly massage the ridge on either side of your shaft. You groan as the sensation intensifies. Then his mouth is on you, a single hot wet tongue dragging up and down the belly of your [cock] and causing you to convulse each time he completes a circuit.");
 			}
-			else if (player.findFirstCockType(CockTypesEnum.LIZARD) >= 0) {
+			else if (player.findFirstCockType(CockTypesEnum.LIZARD) >= 0 || player.findFirstCockType(CockTypesEnum.CAVE_WYRM) >= 0) {
 				outputText("\n\nAndy kisses your shaft at the base, pulling off with a wet pop. When his lips return he slides up the side of your [cock] with a serene expression. Then his thumbs rubs against your sensitive [cockHead], swirling your pre-cum around the sensitive area. As he swirls your pre-cum and slobbers up your schlong, your hips jerk of their own accord and there is nothing you can do to stop them, not that you would if you could.");
 			}
 			else if (player.findFirstCockType(CockTypesEnum.TENTACLE) >= 0) {

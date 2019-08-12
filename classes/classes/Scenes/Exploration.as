@@ -117,10 +117,10 @@ public class Exploration extends BaseContent
 			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(5, "Glacial Rift", SceneLib.glacialRift.exploreGlacialRift).hint("Visit the chilly glacial rift. \n\nRecommended level: 35" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] : ""));
 			if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0) addButton(6, "Volcanic Crag", SceneLib.volcanicCrag.exploreVolcanicCrag).hint("Visit the infernal volcanic crag. \n\nRecommended level: 35" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] : ""));
 			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(5, "",	//Wuxia related area - ?latająca wyspa?
-		//	if (flags[kFLAGS.DISCOVERED_DEEP_SEA] > 0 && player.canSwimUnderwater()) addButton(7, "Deep Sea", SceneLib.deepsea.exploreDeepSea).hint("Visit the 'almost virgin' deep sea. But beware of... krakens. \n\nRecommended level: 75" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEEP_SEA] : ""));
-		//	if (player.gills.type == 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0) addButtonDisabled(7, "Deep Sea", "(Not yet ready to be unlockable - it wil happen after few more mod builds after 0.7c) Without any way to breathe underwater you can't explore this area!");
-			//if (flags[kFLAGS.DISCOVERED_PIT] > 0) addButton(8, "Pit", CoC.instance.abyss.explorePit).hint("Visit the pit. \n\nRecommended level: 36" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_PIT] : ""));
-			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(10, "",	//Wuxia related area - ?latająca wyspa?
+			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(9, "",	//Wuxia related area - ?latająca wyspa?
+			//if (flags[kFLAGS.DISCOVERED_PIT] > 0) addButton(10, "Pit", CoC.instance.abyss.explorePit).hint("Visit the pit. \n\nRecommended level: 36" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_PIT] : ""));
+			//if (flags[kFLAGS.DISCOVERED_DEEP_SEA] > 0 && player.canSwimUnderwater()) addButton(11, "Deep Sea", SceneLib.deepsea.exploreDeepSea).hint("Visit the 'almost virgin' deep sea. But beware of... krakens. \n\nRecommended level: 75" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEEP_SEA] : ""));
+			//if (!player.canSwimUnderwater() && flags[kFLAGS.DISCOVERED_BEACH] > 0) addButtonDisabled(11, "Deep Sea", "Without any way to breathe underwater you can't explore this area!");
 			//if (flags[kFLAGS.DISCOVERED_ABYSS] > 0) addButton(12, "Abyss", CoC.instance.abyss.exploreAbyss).hint("Visit the abyss. \n\nRecommended level: 51" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_ABYSS] : ""));
 			if (player.level >= 51) addButton(12, "ML Explore", tryDiscover2).hint("Explore to find new enemies.");
 			else addButtonDisabled(12, "ML Explore", "Req. lvl 51+");
@@ -539,6 +539,10 @@ public class Exploration extends BaseContent
 				SceneLib.helScene.helSexualAmbush();
 				return;
 			}
+			if (flags[kFLAGS.ALVINA_FOLLOWER] < 1 && rand(4) == 0) {
+				SceneLib.alvinaFollower.alvinaFirstEncounter();
+				return;
+			}
 			if (player.explored > 1) {
 
 				clearOutput();
@@ -549,7 +553,7 @@ public class Exploration extends BaseContent
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
-				if (player.exploredLake <= 0) {
+				if (player.exploredLake <= 0 && flags[kFLAGS.ALVINA_FOLLOWER] == 1) {
 					outputText("Your wanderings take you far and wide across the barren wasteland that surrounds the portal, until the smell of humidity and fresh water alerts you to the nearby lake.  With a few quick strides you find a lake so massive the distant shore cannot be seen.  Grass and a few sparse trees grow all around it.\n\n<b>You've discovered the Lake!</b>");
 					player.exploredLake = 1;
 					player.explored++;
@@ -776,6 +780,7 @@ public class Exploration extends BaseContent
 			if (rand(2) == 0) {
 				outputText("Traversing Mareth vast areas you're suddenly found yourself underwater!!!");
 				outputText("\n\n<b>Aaaand....A wild Scylla Appears.</b>");
+				player.underwaterCombatBoost();
 				if (!player.canSwimUnderwater()) player.createStatusEffect(StatusEffects.UnderwaterOutOfAir,0,0,0,0);
 				startCombat(new Scylla());//lvl 70
 				return;
@@ -789,6 +794,7 @@ public class Exploration extends BaseContent
 			else if (rand(2) == 0) {
 				outputText("Traversing Mareth vast areas you're suddenly found yourself underwater!!!");
 				outputText("\n\n<b>Aaaand....A wild Kraken Appears.</b>");
+				player.underwaterCombatBoost();
 				if (!player.canSwimUnderwater()) player.createStatusEffect(StatusEffects.UnderwaterOutOfAir,0,0,0,0);
 				startCombat(new Kraken());//lvl 100 GIGANT BOSS
 				return;
@@ -797,6 +803,7 @@ public class Exploration extends BaseContent
 				outputText("Traversing Mareth vast areas you're suddenly found yourself underwater tangled in some sort of vines!!!");
 				outputText("\n\n<b>Aaaand....A wild Seabed Alraune Appears.</b>");
 				player.createStatusEffect(StatusEffects.HeroBane, 10, 0, 0, 0);
+				player.underwaterCombatBoost();
 				if (!player.canSwimUnderwater()) player.createStatusEffect(StatusEffects.UnderwaterOutOfAir,0,0,0,0);
 				startCombat(new SeabedAlrauneBoss());//lvl 135 GIGANT PLANT BOSS
 				return;

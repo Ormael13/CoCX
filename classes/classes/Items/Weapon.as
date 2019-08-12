@@ -33,7 +33,8 @@ public class Weapon extends Useable //Equipable
 			var desc:String = _description;
 			//Type
 			desc += "\n\nType: Melee Weapon ";
-			if (perk == "Large") desc += "(Large)";
+			if (perk == "Massive") desc += "(Massive)";
+			else if (perk == "Large") desc += "(Large)";
 			else if (perk == "Small") desc += "(Small)";
 			else if (perk == "Staff") desc += "(Staff)";
 			else if (perk == "Dual") desc += "(Dual)";
@@ -53,8 +54,8 @@ public class Weapon extends Useable //Equipable
 		
 		override public function useText():void {
 			outputText("You equip " + longName + ".  ");
-			if (perk == "Large" && game.player.shield != ShieldLib.NOTHING && game.player.findPerk(PerkLib.TitanGrip) < 0) {
-				outputText("Because the weapon requires the use of two hands, you have unequipped your shield. ");
+			if ((perk == "Large" && game.player.shield != ShieldLib.NOTHING && game.player.findPerk(PerkLib.TitanGrip) < 0) || (perk == "Massive" && game.player.shield != ShieldLib.NOTHING)) {
+				outputText("Because this weapon requires the use of two hands, you have unequipped your shield. ");
 			}
 		}
 		
@@ -64,6 +65,7 @@ public class Weapon extends Useable //Equipable
 		
 		public function playerEquip():Weapon { //This item is being equipped by the player. Add any perks, etc. - This function should only handle mechanics, not text output
 			if ((perk == "Large" && game.player.shield != ShieldLib.NOTHING && game.player.findPerk(PerkLib.TitanGrip) < 0)
+			|| (perk == "Massive" && game.player.shield != ShieldLib.NOTHING)
 			|| (perk == "Dual" && game.player.shield != ShieldLib.NOTHING)
 			|| (perk == "Dual Large" && game.player.shield != ShieldLib.NOTHING)
 			|| (perk == "Dual Small" && game.player.shield != ShieldLib.NOTHING)) {

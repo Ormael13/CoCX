@@ -543,15 +543,25 @@ private function rathazulShopMenu():void {
 	}
 	//Philters
 	if (philters) {
-		addButton(5, consumables.H_PILL.shortName, buyPuritySomething, consumables.H_PILL);
+		addButton(5, consumables.NUMBOIL.shortName, buyPuritySomething, consumables.NUMBOIL);
 		addButton(6, consumables.PPHILTR.shortName, buyPuritySomething, consumables.PPHILTR);
-		addButton(7, consumables.NUMBOIL.shortName, buyPuritySomething, consumables.NUMBOIL);
 	}
 	else {
-		addButtonDisabled(5, consumables.H_PILL.shortName, "You can't afford to buy this.\n\n100 gems required.");
+		addButtonDisabled(5, consumables.NUMBOIL.shortName, "You can't afford to buy this.\n\n100 gems required.");
 		addButtonDisabled(6, consumables.PPHILTR.shortName, "You can't afford to buy this.\n\n100 gems required.");
-		addButtonDisabled(7, consumables.NUMBOIL.shortName, "You can't afford to buy this.\n\n100 gems required.");
 	}
+	if (player.gems >= 12) addButton(7, consumables.H_PILL.shortName, buyPuritySomething1, consumables.H_PILL);
+	else addButtonDisabled(7, consumables.H_PILL.shortName, "You can't afford to buy this.\n\n12 gems required.");
+	if (player.level >= 24) {
+		if (player.gems >= 30) addButton(8, consumables.MH_PILL.shortName, buyPuritySomething2, consumables.MH_PILL);
+		else addButtonDisabled(8, consumables.MH_PILL.shortName, "You can't afford to buy this.\n\n30 gems required.");
+	}
+	else addButtonDisabled(8, "???", "Required to be lvl 24+ for this.");
+	if (player.level >= 42) {
+		if (player.gems >= 85) addButton(9, consumables.BH_PILL.shortName, buyPuritySomething3, consumables.BH_PILL);
+		else addButtonDisabled(9, consumables.BH_PILL.shortName, "You can't afford to buy this.\n\n85 gems required.");
+	}
+	else addButtonDisabled(9, "???", "Required to be lvl 42+ for this.");
 	addButton(14, "Back", returnToRathazulMenu);
 }
 //Hair dyes
@@ -797,10 +807,30 @@ private function buyGroPlus():void {
 	}
 }
 
-
 	private function buyPuritySomething(item:ItemType):void {
 		clearOutput();
 		player.gems -= 100;
+		statScreenRefresh();
+		inventory.takeItem(item, rathazulShopMenu);
+		player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
+	}
+	private function buyPuritySomething1(item:ItemType):void {
+		clearOutput();
+		player.gems -= 12;
+		statScreenRefresh();
+		inventory.takeItem(item, rathazulShopMenu);
+		player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
+	}
+	private function buyPuritySomething2(item:ItemType):void {
+		clearOutput();
+		player.gems -= 30;
+		statScreenRefresh();
+		inventory.takeItem(item, rathazulShopMenu);
+		player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
+	}
+	private function buyPuritySomething3(item:ItemType):void {
+		clearOutput();
+		player.gems -= 85;
 		statScreenRefresh();
 		inventory.takeItem(item, rathazulShopMenu);
 		player.addStatusValue(StatusEffects.MetRathazul, 2, 1);

@@ -30,10 +30,10 @@ package classes.Scenes.Places.HeXinDao
 			menu();
 			addButton(0, "Drink", drinkAlcohol);
 			addButton(4, "Adv.Guild", BoardkeeperYangMain);
+			//addButtonDisabled(10, "???", "You see some suspicious looking squirrel in one of inn corners. (Liadri + Star should bring this npc to more completness)");
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 1) addButton(11, "ShieldMaiden", firstTimeMeetingNeisa);
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 2) addButton(11, "Neisa", meetingNeisaAfterDecline);
 			//if (flags[kFLAGS.NEISA_FOLLOWER] == 4) addButton(11, "Neisa", meetingNeisaPostDungeonExploration);
-			//addButtonDisabled(12, "???", "You see some suspicious looking squirrel in one of inn corners. (Liadri + Star should bring this npc to more completness)");
 			addButton(14, "Leave", heXinDao.riverislandVillageStuff);
 		}
 		
@@ -49,13 +49,14 @@ package classes.Scenes.Places.HeXinDao
 			addButton(1, "Gob.Ale", buyDrink, consumables.GOB_ALE);
 			addButton(2, "OrcMead", buyDrink, consumables.ORCMEAD);
 			addButton(3, "OniSake", buyDrink, consumables.ONISAKE);
-			addButton(5, "SalamFW", buyDrink, consumables.SALAMFW);
-			addButton(6, "NoceLiq", buyDrink, consumables.NOCELIQ);
+			addButton(5, "Fiery S", buyDrink, consumables.FIERYS_);
+			addButton(6, "SalamFW", buyDrink, consumables.SALAMFW);
+			addButton(7, "NoceLiq", buyDrink, consumables.NOCELIQ);
 			addButton(12, "BimboL", buyDrink, consumables.BIMBOLQ);
 			addButton(13, "BroBrew", buyDrink, consumables.BROBREW);
 			addButton(14, "Back", notThirsty);
 		}
-		//drink list (to be expanded)	fire mouse TF, some generic nonTF beers
+		//drink list (to be expanded) some generic nonTF beers
 		private function notThirsty():void {
 			clearOutput();
 			outputText("In the end you realise you are not thirsty after all and wave a goodbye before leaving.\n\n");
@@ -71,7 +72,7 @@ package classes.Scenes.Places.HeXinDao
 			}
 			player.gems -= cost;
 			statScreenRefresh();
-			outputText("\n\nThe barman hands over the drink you ordered.");
+			outputText("\n\nThe barman hands over the drink you ordered. ");
 			inventory.takeItem(drink, drinkAlcohol);
 		}
 		

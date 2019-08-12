@@ -181,7 +181,7 @@ private function TalkYourEyes():void {
 	evangelineAffection(1);
 	if (flags[kFLAGS.EVANGELINE_TALKS] == 0) flags[kFLAGS.EVANGELINE_TALKS]++;
 	doNext(evangelineTalkMenu);
-	cheatTime(1/4);
+	cheatTime2(1/4);
 }
 
 private function TalkDemons():void {
@@ -194,7 +194,7 @@ private function TalkDemons():void {
 	evangelineAffection(1);
 	if (flags[kFLAGS.EVANGELINE_TALKS] == 1) flags[kFLAGS.EVANGELINE_TALKS]++;
 	doNext(evangelineTalkMenu);
-	cheatTime(1/4);
+	cheatTime2(1/4);
 }
 
 private function TalkPastLife1():void {
@@ -211,7 +211,7 @@ private function TalkPastLife1():void {
 	evangelineAffection(1);
 	if (flags[kFLAGS.EVANGELINE_TALKS] == 2) flags[kFLAGS.EVANGELINE_TALKS]++;
 	doNext(evangelineTalkMenu);
-	cheatTime(1/4);
+	cheatTime2(1/4);
 }
 /*
 private function TalkPastLife2():void {
@@ -220,7 +220,7 @@ private function TalkPastLife2():void {
 	evangelineAffection(1);zajmie miejsce PastTalk1 w menu
 	if (flags[kFLAGS.EVANGELINE_TALKS] == 0) flags[kFLAGS.EVANGELINE_TALKS]++;
 	doNext(evangelineTalkMenu);
-	cheatTime(1/4);
+	cheatTime2(1/4);
 }
 
 private function TalkPastLife3():void {
@@ -229,7 +229,7 @@ private function TalkPastLife3():void {
 	evangelineAffection(1);zajmie miejsce PastTalk2 w menu
 	if (flags[kFLAGS.EVANGELINE_TALKS] == 0) flags[kFLAGS.EVANGELINE_TALKS]++;//ustalić na jakiej wartości flagi bedzie sie pokazywać
 	doNext(evangelineTalkMenu);
-	cheatTime(1/4);
+	cheatTime2(1/4);
 }
 
 private function TalkYourEyes():void {
@@ -238,7 +238,7 @@ private function TalkYourEyes():void {
 	evangelineAffection(1);
 	if (flags[kFLAGS.EVANGELINE_TALKS] == 3) flags[kFLAGS.EVANGELINE_TALKS]++;//ustalić na jakiej wartości flagi bedzie sie pokazywać
 	doNext(evangelineTalkMenu);
-	cheatTime(1/4);
+	cheatTime2(1/4);
 }
 
 private function TalkYourEyes():void {
@@ -247,7 +247,7 @@ private function TalkYourEyes():void {
 	evangelineAffection(1);
 	if (flags[kFLAGS.EVANGELINE_TALKS] == 4) flags[kFLAGS.EVANGELINE_TALKS]++;
 	doNext(evangelineTalkMenu);
-	cheatTime(1/4);
+	cheatTime2(1/4);
 }
 */
 private function evangelineSexMenu():void {
@@ -306,9 +306,9 @@ private function evangelineAlchemyMenu():void {
 	//addButton(5, "", ).hint(".");kitsune/salamander TF//Hybryd race TF
 	addButton(6, "Nocello Liq", MakingNocelloLiqueur).hint("Ask her to brew a special potion that could aid in becoming a phoenix. \n\nCost: 10 Gems \nNeeds 1 Golden Seed and 1 Salamander Firewater.");//Hybryd race TF
 	//addButton(7, "", ).hint(".");siren TF//Hybryd race TF
-	//addButton(8, "", ).hint(".");manticore TF//Hybryd race TF
+	addButton(8, "Storm Seed", MakingStormSeed).hint("Ask her to brew a special potion that could aid in becoming a thunderbird. \n\nCost: 10 Gems \nNeeds 1 Magically-enhanced Golden Seed and 1 Voltage topaz.");//Hybryd race TF
 	addButton(9, "Enigmanium", MakingEnigmaniumPotion).hint("Ask her to brew a special potion that could aid in becoming a sphinx. \n\nCost: 30 Gems \nNeeds 1 Centarium, 1 Golden Seed and 1 Whisker Fruit.");
-	addButton(10, "Alicornum", MakingAlicornumPotion).hint("Ask her to brew a special potion that could aid in becoming a unicorn. \n\nCost: 50 Gems \nNeeds 1 Unicornum and 4 Mid-grade Soulforce Recovery Pills.");//2nd stage Soul evolution race TF
+	addButton(10, "Alicornum", MakingAlicornumPotion).hint("Ask her to brew a special potion that could aid in becoming a unicorn. \n\nCost: 50 Gems \nNeeds 1 Unicornum and 20 Low-grade Soulforce Recovery Pills/2 bottles of Low-grade Soulforce Recovery Pills.");//2nd stage Soul evolution race TF
 	addButton(11, "Scylla Ink", MakingScyllaInkPotion).hint("Ask her to brew a special potion based on Black Ink.");
 	//addButton(12, "Abyssal Ink", ).hint("Ask her to brew a special potion based on Black Abbysal Ink.");
 	addButton(13, "InferWine", MakingInfernalWinePotion).hint("Ask her to brew a special potion that could aid in becoming a infernal goat/devil. \n\nCost: 480 Gems \nNeeds 1 Satyr Wine, 1 Succubi milk and 1 Incubi draft.");
@@ -445,6 +445,28 @@ private function MakingNocelloLiqueur():void {
 	cheatTime(1/6);
 }
 
+private function MakingStormSeed():void {
+	clearOutput();
+	if (player.gems < 10) {
+		outputText("\"<i>I'm sorry but you don't have the gems for this potion,</i>\" Evangeline says.");
+		doNext(evangelineAlchemyMenu);
+		return;
+	}
+	else if (!(player.hasItem(consumables.MAGSEED, 1) && player.hasItem(consumables.VOLTTOP, 1))) {
+		outputText("\"<i>I'm sorry but you don't have the materials I need. I need Magically-enhanced Golden Seed and Voltage topaz,</i>\" Evangeline says.");
+		doNext(evangelineAlchemyMenu);
+		return;
+	}
+	player.destroyItems(consumables.MAGSEED, 1);
+	player.destroyItems(consumables.VOLTTOP, 1);
+	player.gems -= 10;
+	statScreenRefresh();
+	outputText("You hand over one Magically-enhanced Golden Seed, one Voltage topaz and ten gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
+	outputText("\n\nAfter a while, she hands you a magical seed that radiate a faint aura of static as if struck by lightning.  ");
+	inventory.takeItem(consumables.SRMSEED, evangelineAlchemyMenu);
+	cheatTime(1/6);
+}
+
 private function MakingEnigmaniumPotion():void {
 	clearOutput();
 	if (player.gems < 30) {
@@ -475,16 +497,24 @@ private function MakingAlicornumPotion():void {
 		doNext(evangelineAlchemyMenu);
 		return;
 	}
-	else if (!(player.hasItem(consumables.UNICORN, 1) && player.hasItem(consumables.MG_SFRP, 4))) {
+	else if (!(player.hasItem(consumables.UNICORN, 1) && (player.hasItem(consumables.LG_SFRP, 20) || (player.hasItem(consumables.LGSFRPB, 2))))) {
 		outputText("\"<i>I'm sorry but you don't have the materials I need. I need vial of Unicornum and four Mid-grade Soulforce Recovery Pills,</i>\" Evangeline says.");
 		doNext(evangelineAlchemyMenu);
 		return;
 	}
 	player.destroyItems(consumables.UNICORN, 1);
-	player.destroyItems(consumables.MG_SFRP, 4);
 	player.gems -= 50;
 	statScreenRefresh();
-	outputText("You hand over one vial of Unicornum, four Mid-grade Soulforce Recovery Pills and fifty gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
+	outputText("You hand over one vial of Unicornum, ");
+	if (player.hasItem(consumables.LGSFRPB, 2)) {
+		outputText("two bottles of");
+		player.destroyItems(consumables.LGSFRPB, 2);
+	}
+	else {
+		outputText("twenty");
+		player.destroyItems(consumables.LG_SFRP, 20);
+	}
+	outputText(" Low-grade Soulforce Recovery Pills and fifty gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
 	outputText("\n\nAfter a while, she hands you a vial labeled \"Alicornum\".  ");
 	inventory.takeItem(consumables.ALICORN, evangelineAlchemyMenu);
 	cheatTime(1/6);

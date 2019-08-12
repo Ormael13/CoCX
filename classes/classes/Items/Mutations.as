@@ -138,6 +138,19 @@ public final class Mutations extends MutationsHelper
 			player.refillHunger(15);
 		}
 
+//Airweed
+		public function airweed(player:Player):void
+		{
+			player.slimeFeed();
+			clearOutput();
+			outputText("You eat the seaweed. It should allow you to breathe safely underwater for a day.");
+			if (player.hasStatusEffect(StatusEffects.Airweed)) {
+				player.removeStatusEffect(StatusEffects.Airweed);
+				player.createStatusEffect(StatusEffects.Airweed,24,0,0,0);
+			}
+			else player.createStatusEffect(StatusEffects.Airweed,24,0,0,0);
+		}
+
 		public function purePearl(player:Player):void
 		{
 			clearOutput();
@@ -154,6 +167,74 @@ public final class Mutations extends MutationsHelper
 			statScreenRefresh();
 			dynStats("str", 5, "tou", 5, "spe", 5, "inte", 5, "wis", 5, "lib", 5, "sen", 5);
 			player.refillHunger(50);
+		}
+
+		public function smallangrypill(player:Player):void {
+			clearOutput();
+			outputText("You pop the small pill into your mouth and swallow. You feel bit more angry now. So would you kindly go and kill something now?\n\n(Gained wrath: 20)");
+			player.wrath += 20;
+			if (player.wrath > player.maxWrath()) player.wrath = player.maxWrath();
+			statScreenRefresh();
+		}
+		public function mediumangrypill(player:Player):void {
+			clearOutput();
+			outputText("You pop the medium pill into your mouth and swallow. You feel bit more angry now. So would you kindly go and kill something now?\n\n(Gained wrath: 60)");
+			player.wrath += 60;
+			if (player.wrath > player.maxWrath()) player.wrath = player.maxWrath();
+			statScreenRefresh();
+		}
+		public function bigangrypill(player:Player):void {
+			clearOutput();
+			outputText("You pop the big pill into your mouth and swallow. You feel bit more angry now. So would you kindly go and kill something now?\n\n(Gained wrath: 180)");
+			player.wrath += 180;
+			if (player.wrath > player.maxWrath()) player.wrath = player.maxWrath();
+			statScreenRefresh();
+		}
+		
+		public function mediumhealpill(player:Player):void {
+			clearOutput();
+			var rand:int = Math.random() * 100;
+			outputText("You pop the medium pill into your mouth and swallow. ");
+			if (player.HP < player.maxHP()) {
+				HPChange((50 + player.tou) * 3, true);
+				outputText("Some of your wounds are healed. ");
+			}
+			else outputText("You feel an odd sensation. ");
+			if (rand < 70 && player.lib < 80) {
+				outputText("You feel a sense of warmth spread through your erogenous areas.");
+				dynStats("lib", 3);
+			}
+			if (rand >= 70 && rand <= 90) {
+				outputText("Your body tingles and feels more sensitive.");
+				dynStats("sens", 3);
+			}
+			if (rand > 90) {
+				outputText("You shudder as a small orgasm passes through you. When you recover you actually feel more aroused.");
+				dynStats("lus", 15);
+			}
+			statScreenRefresh();
+		}
+		public function bighealpill(player:Player):void {
+			var rand:int = Math.random() * 100;
+			outputText("You pop the big pill into your mouth and swallow. ");
+			if (player.HP < player.maxHP()) {
+				HPChange((50 + player.tou) * 9, true);
+				outputText("Some of your wounds are healed. ");
+			}
+			else outputText("You feel an odd sensation. ");
+			if (rand < 70 && player.lib < 120) {
+				outputText("You feel a sense of warmth spread through your erogenous areas.");
+				dynStats("lib", 9);
+			}
+			if (rand >= 70 && rand <= 90) {
+				outputText("Your body tingles and feels more sensitive.");
+				dynStats("sens", 9);
+			}
+			if (rand > 90) {
+				outputText("You shudder as a small orgasm passes through you. When you recover you actually feel more aroused.");
+				dynStats("lus", 45);
+			}
+			statScreenRefresh();
 		}
 
 		public function lowgradeelementalPearl(player:Player):void
@@ -204,6 +285,13 @@ public final class Mutations extends MutationsHelper
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(5);
 			statScreenRefresh();
 		}
+		public function lowgradesoulforcerecoverypill2(player:Player):void {
+			outputText("You open the bottle and start to cram the pills in your mouth, then swallowing them all.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 1000)");
+			player.soulforce += 1000;
+			if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(50);
+			statScreenRefresh();
+		}
 		public function midgradesoulforcerecoverypill(player:Player):void {
 			outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 600)");
 			player.soulforce += 600;
@@ -225,6 +313,12 @@ public final class Mutations extends MutationsHelper
 	//		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(625);
 	//		statScreenRefresh();
 	//	}
+		public function fasteningpill(player:Player):void {
+			outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a sensation of your stomach been full.");
+			if (player.hasStatusEffect(StatusEffects.FastingPill)) player.addStatusValue(StatusEffects.FastingPill, 1, 24);
+			else player.createStatusEffect(StatusEffects.FastingPill,73,0,0,0);
+			statScreenRefresh();
+		}
 
 		public function triplethrustmanual(player:Player):void
 		{
@@ -252,7 +346,7 @@ public final class Mutations extends MutationsHelper
 			}
 			if (player.hasStatusEffect(StatusEffects.KnowsDracoSweep)) {
 				outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-				player.soulforce += 20;
+				player.soulforce += 25;
 				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
 			}
 		}
@@ -267,45 +361,108 @@ public final class Mutations extends MutationsHelper
 			}
 			if (player.hasStatusEffect(StatusEffects.KnowsManyBirds)) {
 				outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-				player.soulforce += 20;
+				player.soulforce += 25;
 				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
 			}
 		}
 		public function cometmanual(player:Player):void
 		{
 			clearOutput();
-			outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Comet.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-			if (!player.hasStatusEffect(StatusEffects.KnowsComet)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Comet.</b>");
-				player.createStatusEffect(StatusEffects.KnowsComet, 0, 0, 0, 0);
-				return;
+			if (player.hasPerk(PerkLib.SoulWarrior)) {
+				outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Comet.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+				if (!player.hasStatusEffect(StatusEffects.KnowsComet)) {
+					outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Comet.</b>");
+					player.createStatusEffect(StatusEffects.KnowsComet, 0, 0, 0, 0);
+					return;
+				}
+				if (player.hasStatusEffect(StatusEffects.KnowsComet)) {
+					outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+					player.soulforce += 100;
+					if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+				}
 			}
-			if (player.hasStatusEffect(StatusEffects.KnowsComet)) {
-				outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-				player.soulforce += 100;
-				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-			}
+			else outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a momnet whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away.  You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
 		}
 		public function violetpupiltransformationmanual(player:Player):void
 		{
 			clearOutput();
-			outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Violet Pupil Transformation.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-			if (!player.hasStatusEffect(StatusEffects.KnowsVioletPupilTransformation)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Violet Pupil Transformation.</b>");
-				player.createStatusEffect(StatusEffects.KnowsVioletPupilTransformation, 0, 0, 0, 0);
-				return;
+			if (player.hasPerk(PerkLib.SoulWarrior)) {
+				outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Violet Pupil Transformation.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+				if (!player.hasStatusEffect(StatusEffects.KnowsVioletPupilTransformation)) {
+					outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Violet Pupil Transformation.</b>");
+					player.createStatusEffect(StatusEffects.KnowsVioletPupilTransformation, 0, 0, 0, 0);
+					return;
+				}
+				if (player.hasStatusEffect(StatusEffects.KnowsVioletPupilTransformation)) {
+					outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+					player.soulforce += 100;
+					if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+				}
 			}
-			if (player.hasStatusEffect(StatusEffects.KnowsVioletPupilTransformation)) {
-				outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-				player.soulforce += 100;
-				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-			}
+			else outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a momnet whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away.  You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
 		}
 		public function soulblastmanual(player:Player):void
 		{
 			clearOutput();
 			outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Soul Blast.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
 			outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Soul Blast.</b>");
+			player.createStatusEffect(StatusEffects.KnowsSoulBlast, 0, 0, 0, 0);
+		}
+		public function basicflamesoflovemanual(player:Player):void
+		{
+			clearOutput();
+			if (player.hasPerk(PerkLib.SoulApprentice)) {
+				outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into flames.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+				if (!player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
+					outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Flames of Love (Basic Rank).</b>");
+					player.createStatusEffect(StatusEffects.KnowsFlamesOfLove, 1, 0, 0, 0);
+					return;
+				}
+				if (player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
+					outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+					player.soulforce += 50;
+					if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+				}
+			}
+			else outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a momnet whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away.  You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+		}
+		public function basiciciclesoflovemanual(player:Player):void
+		{
+			clearOutput();
+			if (player.hasPerk(PerkLib.SoulApprentice)) {
+				outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into icicles.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+				if (!player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
+					outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Icicles of Love (Basic Rank).</b>");
+					player.createStatusEffect(StatusEffects.KnowsIciclesOfLove, 1, 0, 0, 0);
+					return;
+				}
+				if (player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
+					outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+					player.soulforce += 50;
+					if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+				}
+			}
+			else outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a momnet whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away.  You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+		}
+		public function devourermanual(player:Player):void
+		{
+			clearOutput();
+			outputText("You open the manual, and discover it seems to be almost unreadable.  It looks like it would teach reader to use some sort of soul skill but it seems all very fragmentary.  In no time at all you've read the whole thing and like others manuscripts it start to disappears into thin air.  Left without anything you thinking about next action when some new thought start to keep circling in your mind. The more it circle it seems to seemly literaly ");
+			outputText("'suck you in'.  You try stop it but it's too late.  last not devoured thought you have before blank out is.. 'would i at least not hit groun...'\n\nAfter unknown amount of time you wakes up on the floor with seared into your mind knowledge on <b>new soul skill: Devourer.</b>");
+			player.createStatusEffect(StatusEffects.KnowsHeavensDevourer, 1, 0, 0, 0);
+		}
+		public function higherrankflamesoflovemanual(player:Player):void
+		{
+			clearOutput();
+			outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into (burning hot) flames.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+			outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Flames of Love ( Rank).</b>");
+			player.createStatusEffect(StatusEffects.KnowsSoulBlast, 0, 0, 0, 0);
+		}
+		public function higherrankiciclesoflovemanual(player:Player):void
+		{
+			clearOutput();
+			outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into (freezing cold) icicles.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+			outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Icicles of Love ( Rank).</b>");
 			player.createStatusEffect(StatusEffects.KnowsSoulBlast, 0, 0, 0, 0);
 		}
 
@@ -318,6 +475,12 @@ public final class Mutations extends MutationsHelper
 		public function dilutedarcaneregenconcotion(player:Player):void {
 			outputText("You grab your mana potion, pull the cork off and swiftly chug it down.\n\n(Recovered mana: 1200)");
 			player.mana += 1200;
+			if (player.mana > player.maxMana()) player.mana = player.maxMana();
+			statScreenRefresh();
+		}
+		public function arcaneregenconcotion(player:Player):void {
+			outputText("You grab your mana potion, pull the cork off and swiftly chug it down.\n\n(Recovered mana: 7200)");
+			player.mana += 7200;
 			if (player.mana > player.maxMana()) player.mana = player.maxMana();
 			statScreenRefresh();
 		}
@@ -3063,7 +3226,7 @@ public final class Mutations extends MutationsHelper
 				player.removeStatusEffect(StatusEffects.BlackNipples);
 			}
 			//Debugcunt
-			if (changes < changeLimit && rand(3) == 0 && player.vaginaType() == 5 && player.hasVagina()) {
+			if (changes < changeLimit && rand(3) == 0 && (player.vaginaType() == 5 || player.vaginaType() == 6) && player.hasVagina()) {
 				outputText("\n\nSomething invisible brushes against your sex, making you twinge.  Undoing your clothes, you take a look at your vagina and find that it has turned back to its natural flesh colour.");
 				player.vaginaType(0);
 				changes++;
@@ -3131,16 +3294,30 @@ public final class Mutations extends MutationsHelper
 				return;
 			}
 			//Smart enough for arctic gale and doesnt have it
-			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsArcticGale)) {
+			if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsArcticGale)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Arctic Gale.</b>");
 				player.createStatusEffect(StatusEffects.KnowsArcticGale, 0, 0, 0, 0);
 				return;
 			}
 			//Smart enough for dusk wave and doesnt have it
-			if (player.inte >= 25 && !player.hasStatusEffect(StatusEffects.KnowsDuskWave)) {
+			if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsDuskWave)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Dusk Wave.</b>");
 				player.createStatusEffect(StatusEffects.KnowsDuskWave, 0, 0, 0, 0);
 			}
+			//Smart enough for wave of ecstasy and doesnt have it
+			if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsWaveOfEcstasy)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Wave of Ecstasy.</b>");
+				player.createStatusEffect(StatusEffects.KnowsWaveOfEcstasy, 0, 0, 0, 0);
+				return;
+			}
+		}
+		
+		public function blackPolarMidnight(player:Player):void
+		{
+			clearOutput();
+			outputText("You open the small scroll, and discover it to be an instructional scroll on the use of grey magic.  Most of it is filled with generic information about grey magic - how it is drawn from both mental focus and emotions (typically lust), is difficult to use when tired and too little or too much aroused, and is used to at the same time create or control energy and affect bodies or emotions to create final effect.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+			outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Polar Midnight.</b>");
+			player.createStatusEffect(StatusEffects.KnowsPolarMidnight, 0, 0, 0, 0);
 		}
 
 		public function greySpellbook(player:Player):void
@@ -3357,7 +3534,7 @@ public final class Mutations extends MutationsHelper
 			}
 			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
 			//Shrink
-			if (rand(2) == 0 && player.tallness > 48) {
+			if (rand(2) == 0 && player.tallness > 42) {
 				changes++;
 				outputText("\n\nThe world spins, and not just from the strength of the drink!  Your viewpoint is closer to the ground.  How fun!");
 				player.tallness -= (1 + rand(5));
@@ -3391,7 +3568,7 @@ public final class Mutations extends MutationsHelper
 				}
 			}
 			//Debugcunt
-			if (changes < changeLimit && rand(3) == 0 && player.vaginaType() == 5 && player.hasVagina()) {
+			if (changes < changeLimit && rand(3) == 0 && (player.vaginaType() == 5 || player.vaginaType() == 6) && player.hasVagina()) {
 				outputText("\n\nSomething invisible brushes against your sex, making you twinge.  Undoing your clothes, you take a look at your vagina and find that it has turned back to its natural flesh colour.");
 				player.vaginaType(0);
 				changes++;
@@ -4483,13 +4660,17 @@ public final class Mutations extends MutationsHelper
 			if (!player.hasPlainSkinOnly() && rand(3) == 0 && changes < changeLimit) {
 				if (player.skinAdj != "") player.skinAdj = "";
 				humanizeSkin();
-				if (player.skin.base.pattern != Skin.PATTERN_NONE) {
-					player.skin.base.pattern = Skin.PATTERN_NONE;
-					player.skin.base.adj = "";
-					if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern)) {
-						outputText("\n\n<b>Genetic Memory: No Skin Patterns - Memorized!</b>\n\n");
-						player.createStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern, 0, 0, 0, 0);
-					}
+				changes++;
+			}
+			//Raiju / Other skin pattern removal
+			if (player.skin.base.pattern != Skin.PATTERN_NONE) {
+				if (player.skin.base.pattern == Skin.PATTERN_LIGHTNING_SHAPED_TATTOO) outputText("\n\nYour skin tingle and you look down just in time to see your tatoo fades to nothingness back into your now uniform skin.");
+				else outputText("\n\nYour skin tingle and you look down just in time to see your skin color patterns fade and back into the color of your " + player.skinTone + " skin leaving you with a uniform skin coloration.");
+				player.skin.base.pattern = Skin.PATTERN_NONE;
+				player.skin.base.adj = "";
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern)) {
+					outputText("\n\n<b>Genetic Memory: No Skin Patterns - Memorized!</b>\n\n");
+					player.createStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern, 0, 0, 0, 0);
 				}
 				changes++;
 			}
@@ -4600,6 +4781,12 @@ public final class Mutations extends MutationsHelper
 			//Remove silken hair
 			if (changes < changeLimit && player.hairType == Hair.SILKEN && rand(3) == 0) {
 				outputText("\n\nYou feel something strange going in on your head. You reach your hands up to feel your silken-hair, only to find out that they have changed back to normal hair.  <b>Your hair is normal again!</b>");
+				setHairType(Hair.NORMAL);
+				changes++;
+			}
+			//Remove storm hair
+			if (changes < changeLimit && player.hairType == Hair.STORM && rand(3) == 0) {
+				outputText("\n\nYour charged up hairs begins to lose of their lusters, the fizzling bolts glows dying out as the current dies down before vanishing entirely leaving you with normal human hairs.  <b>Your hair is normal again!</b>");
 				setHairType(Hair.NORMAL);
 				changes++;
 			}
@@ -4747,7 +4934,7 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//Change vagina back to normal
-			if (changes < changeLimit && rand(3) == 0 && player.vaginaType() == 5 && player.hasVagina()) {
+			if (changes < changeLimit && rand(3) == 0 && (player.vaginaType() == 5 || player.vaginaType() == 6) && player.hasVagina()) {
 				outputText("\n\nSomething invisible brushes against your sex, making you twinge.  Undoing your clothes, you take a look at your vagina and find that it has turned back to its natural flesh colour.");
 				player.vaginaType(0);
 				changes++;
@@ -5915,6 +6102,29 @@ public final class Mutations extends MutationsHelper
 				changes++;
 				outputText("\n\nYour butt cheeks itch as they inflates to a larger plumper size. When it stops, you find yourself the proud owner of a " + buttDescript() + ".");
 			}
+			//Glowing Lizard Cock:
+			if (player.cockTotal() > 1 && player.lizardCocks() > 0 && player.cockTotal() > player.lizardCocks() && rand(4) == 0 && changes < changeLimit) {
+				for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
+					//Stop loopahn when dick be found
+					if (player.cocks[temp2].cockType != CockTypesEnum.CAVE_WYRM) break;
+				}
+				outputText("\n\nYou feel a sudden itch in your cock and undress as an irrepressible desire to masturbate takes hold of you. You keep stroking your twitching cock, moaning as you cum neon blue fluids. Wait, what? When you inspect your “cock descript” you discover it has not only changed color to neon blue but reshaped into a lizard cock. Furthermore it seems to naturally glow in the dark like the fluids that comes out of it. <b>You now have a neon blue lizard cock that glow in the dark.</b>");
+				//(REMOVE SHEATH IF NECESSARY)
+				if (player.hasSheath()) {
+					player.cocks[temp2].cockType = CockTypesEnum.CAVE_WYRM;
+					if (!player.hasSheath()) outputText("\n\nYour sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
+				}
+				else player.cocks[temp2].cockType = CockTypesEnum.CAVE_WYRM;
+				changes++;
+				dynStats("lib", 3, "lus", 10);
+			}
+			//Vagina Turns Glowing:
+			if (player.hasVagina() && player.vaginaType() != 6 && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
+				outputText("\n\nYou feel a sudden jolt in your pussy and undress as an irrepressible desire to masturbate takes hold of you. You keep fingering your itchy pussy moaning as you cum neon blue fluids. Wait, what? When you inspect your [vagina] you discover it has changed color to neon blue. Furthermore it seems to naturally glow in the dark like the fluids it now squirt.  <b>You now have a neon blue pussy that glow in the dark.</b>");
+				dynStats("sen", 2, "lus", 10);
+				player.vaginaType(6);
+				changes++;
+			}
 			//Physical changes:
 			//Nipples Start Glowing:
 			if (!player.hasStatusEffect(StatusEffects.GlowingNipples) && !player.hasStatusEffect(StatusEffects.BlackNipples) && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
@@ -7060,7 +7270,7 @@ public final class Mutations extends MutationsHelper
 				player.removeStatusEffect(StatusEffects.BlackNipples);
 			}
 			//Debugcunt
-			if (changes < changeLimit && rand(3) == 0 && player.vaginaType() == 5 && player.hasVagina()) {
+			if (changes < changeLimit && rand(3) == 0 && (player.vaginaType() == 5 || player.vaginaType() == 6) && player.hasVagina()) {
 				outputText("\n\nSomething invisible brushes against your sex, making you twinge.  Undoing your clothes, you take a look at your vagina and find that it has turned back to its natural flesh colour.");
 				player.vaginaType(0);
 				changes++;
@@ -8603,6 +8813,181 @@ public final class Mutations extends MutationsHelper
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
+		public function stormSeed(player:Player):void
+		{
+			player.slimeFeed();
+			clearOutput();
+			var changes:Number = 0;
+			var changeLimit:Number = 2;
+			var temp2:Number = 0;
+			if (rand(2) == 0) changeLimit++;
+			if (rand(3) == 0) changeLimit++;
+			changeLimit += additionalTransformationChances();
+			outputText("You eat up the seed and not to soon after let out a howling moan as your body spasms in pleasure before the feeling subsides into dull ecstasy. You twitch and drool as something seems to be happening to your body...");
+			//Stats
+			if (player.spe < 100 && rand(3) == 0 && changes < changeLimit) {
+				changes++;
+				if (player.spe >= 75) outputText("\n\nA familiar chill runs down your spine. Your muscles feel like well oiled machinery, ready to snap into action with lightning speed.");
+				else outputText("\n\nA chill runs through your spine, leaving you feeling like your reflexes are quicker and your body faster.");
+				//Speed gains diminish as it rises.
+				if (player.spe < 40) dynStats("spe", .5);
+				if (player.spe < 75) dynStats("spe", .5);
+				dynStats("spe", .5);
+			}
+			if (player.tou > 50 && rand(3) == 0 && changes < changeLimit) {
+				changes++;
+				if (rand(2) == 0) outputText("\n\nA nice, slow warmth rolls from your gut out to your limbs, flowing through them before dissipating entirely. As it leaves, you note that your body feels softer and less resilient.");
+				else outputText("\n\nYou feel somewhat lighter, but consequently more fragile.  Perhaps your bones have changed to be more harpy-like in structure?");
+				dynStats("tou", -1);
+			}
+			if (player.lib < 100 && rand(4) == 0 && changes < changeLimit) {
+				outputText("\n\nYou roll your tongue over your lips as residual tingles run all over your body. Your nipples are tight and your groin warmed with jolting pleasure. You growl as you feel hornier and hornier before the feeling ebbs. Part of you says you should be concerned by this turn of events, but there are <i>sooo</i> many cuties out there to molest!");
+				dynStats("lib", 2);
+				if (player.lib < 60) dynStats("lib", 2);
+				changes++;
+			}
+			if (player.sens < 70 && rand(4) == 0 && changes < changeLimit) {
+				outputText("\n\nYour skin tingles with delight as every slight movement of the wind feels more distinct. Thoughts about how it would feel against your sexual spots slip into your mind before you can even stop them, and you start idly ");
+					if (player.gender == 1 || player.gender == 3) outputText("stroking your [cock]");
+					if (player.gender == 3) outputText(" and ");
+					if (player.gender > 1) outputText("fingering your [clit]");
+					outputText(". This is going to be fun.");
+				dynStats("sen", 1);
+				if (player.sens < 40) dynStats("sen", 1);
+				changes++;
+			}
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
+			//Sexual
+			//-Remove extra breast rows
+			if (changes < changeLimit && player.breastRows.length > 1 && rand(3) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
+				changes++;
+				outputText("\n\nYou stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
+				if (player.breastRows.length >= 3) outputText("abdomen");
+				else outputText("chest");
+				outputText(". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
+				if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
+				else outputText(player.skinTone + " " + player.skinDesc);
+				outputText(" remains. <b>You've lost a row of breasts!</b>");
+				dynStats("sen", -5);
+				player.removeBreastRow(player.breastRows.length - 1, 1);
+			}
+			//-Shrink tits if above DDs.
+			//Cannot happen at same time as row removal
+			else if (changes < changeLimit && player.breastRows.length == 1 && rand(3) == 0 && player.breastRows[0].breastRating >= 7 && !flags[kFLAGS.HYPER_HAPPY])
+			{
+				changes++;
+				//(Use standard breast shrinking mechanism if breasts are under 'h')
+				if (player.breastRows[0].breastRating < 19)
+				{
+					player.shrinkTits();
+				}
+				//(H+)
+				else {
+					player.breastRows[0].breastRating -= (4 + rand(4));
+					outputText("\n\nYour chest pinches tight, wobbling dangerously for a second before the huge swell of your bust begins to shrink into itself. The weighty mounds jiggle slightly as they shed cup sizes like old, discarded coats, not stopping until they're " + player.breastCup(0) + "s.");
+				}
+			}
+			//-Grow tits to a B-cup if below.
+			if (changes < changeLimit && player.breastRows[0].breastRating < 2 && rand(3) == 0) {
+				changes++;
+				outputText("\n\nYour chest starts to tingle, the [skin.type] warming under your [armor]. Reaching inside to feel the tender flesh, you're quite surprised when it puffs into your fingers, growing larger and larger until it settles into a pair of B-cup breasts.");
+				if (player.breastRows[0].breastRating < 1) outputText("  <b>You have breasts now!</b>");
+				player.breastRows[0].breastRating = 2;
+			}//Physical
+			var raiju_hair:Array = ["purple", "light blue", "yellow", "white"];
+			if (!InCollection(player.hairColor, raiju_hair) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+				player.hairColor = randomChoice(raiju_hair);
+				outputText("\n\nYour hair stands up on end as bolts of lightning run through each strand, changing them to a <b>[haircolor] color!</b>");
+			}
+			//-Harpy legs
+			if (player.lowerBody != LowerBody.HARPY && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+				//(biped/taur)
+				if (!player.isGoo()) outputText("\n\nYour [legs] creak ominously a split-second before they go weak and drop you on the ground. They go completely limp, twisting and reshaping before your eyes in ways that make you wince. Your lower body eventually stops, but the form it's settled on is quite thick in the thighs. Even your [feet] have changed.  ");
+				//goo
+				else outputText("\n\nYour gooey undercarriage loses some of its viscosity, dumping you into the puddle that was once your legs. As you watch, the fluid pulls together into a pair of distinctly leg-like shapes, solidifying into a distinctly un-gooey form. You've even regained a pair of feet!  ");
+				setLowerBody(LowerBody.HARPY);
+				player.legCount = 2;
+				changes++;
+				//(cont)
+				outputText("While humanoid in shape, they have two large, taloned toes on the front and a single claw protruding from the heel. The entire ensemble is coated in [haircolor] feathers from ankle to hip, reminding you of the bird-women of the mountains. <b>You now have harpy legs!</b>");
+			}
+			//-Propah Wings
+			if (player.wings.type == Wings.NONE && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your [skin.type]. It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, [haircolor] wings.</b>");
+				setWingType(Wings.FEATHERED_LARGE, "large, feathered");
+				changes++;
+			}
+			//-Remove old wings
+			if (player.wings.type != Wings.FEATHERED_LARGE && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+				removeWings();
+				changes++;
+			}
+			//-Feathery Arms
+			if (!InCollection(player.arms.type, Arms.GARGOYLE, Arms.HARPY) && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYou smile impishly as you lick the last bits of the seed from your teeth, but when you go to wipe your mouth, instead of the usual texture of your [skin.type] on your lips, you feel feathers! You look on in horror while more of the avian plumage sprouts from your [skin.type], covering your forearms until <b>your arms look vaguely like wings</b>. Your hands remain unchanged thankfully. It'd be impossible to be a champion without hands! The feathery limbs might help you maneuver if you were to fly, but there's no way they'd support you alone.");
+				setArmType(Arms.HARPY);
+				changes++;
+			}
+			if (player.arms.type == Arms.HARPY && player.tailType != Tail.THUNDERBIRD && changes < changeLimit && rand(3) == 0) {
+				if (player.tailType == Tail.NONE) outputText("\n\nYou yelp as a huge lightning bolt bursts out the area just above your ass. You watch in amazement as it twist and curls, slowly becoming still before it fully fizzles out, <b>leaving you with a long sinuous bolt shaped thunderbird tail!</b>");
+				else outputText("\n\nYou nearly jump out of your skin as your tail burst into a huge lightning bolt. You watch as it curls and twist around before it fizzles out.  <b>You now have a long sinuous bolt shaped thunderbird tail!</b>");
+				setTailType(Tail.THUNDERBIRD);
+				changes++;
+			}
+			if (player.tailType == Tail.THUNDERBIRD && player.rearBody.type != RearBody.RAIJU_MANE && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nThe base of your neck tingles with delight as little sparks travel across your skin. Strands of hair quickly grow in, giving you a [haircolor] collar of fur around your neck. Several strands of your new fur collar are quite dark, arcing around it like lightning.");
+				setRearBody(RearBody.RAIJU_MANE);
+				changes++;
+			}
+			if (player.rearBody.type == RearBody.RAIJU_MANE && player.faceType != Face.HUMAN && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYour visage twists painfully, returning to a more normal human shape, albeit with flawless skin.  <b>Your face is human again!</b>");
+				setFaceType(Face.HUMAN);
+				changes++;
+			}
+			if (player.faceType == Face.HUMAN && player.ears.type != Ears.ELFIN && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+				if (player.ears.type != Ears.HUMAN) {
+				outputText("\n\nYour ears twitch once, twice, before starting to shake and tremble madly.  They migrate back towards where your ears USED to be, so long ago, finally settling down before twisting and stretching, changing to become <b>new, pointed elfin ears.</b>");
+				}
+				else {
+					outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed elfin ears</b>.  You bet they look cute!");
+				}
+				setEarType(Ears.ELFIN);
+				changes++;
+			}
+			var raiju_eyes_color:Array = ["blue", "green", "teal"];
+			if (player.ears.type == Ears.WEASEL && player.eyes.type != Eyes.RAIJU && changes < changeLimit && rand(3) == 0) {
+				if (player.eyes.type == Eyes.HUMAN) {
+					player.eyes.colour = randomChoice(raiju_eyes_color);
+					outputText("\n\nBright lights flash into your vision as your eyes glow with electric light. Blinded, you rapidly shake your head around, trying to clear your vision. It takes a moment, but your vision eventually returns to normal. Curious, you go over to a nearby puddle and find <b>glowing [eyecolor] bestial slitted eyes staring back at you.</b>");
+					setEyeType(Eyes.RAIJU);
+				}
+				else humanizeEyes();
+				changes++;
+			}
+			if (player.hairType != 11 && changes < changeLimit && rand(4) == 0) {
+				outputText("\n\nThe ends of your hair seem to split before a quick jolt smacks you in the back of the head. Irritated and confused, you rub the back of your head only to get a small zap in return. You wander over to a puddle and make note of several glowing strands of hair shaped like the typical stylized lightning bolt. There's even a single strand that floats just off the side of your face!");//<b></b>
+				setHairType(Hair.STORM);
+				changes++;
+			}
+			if (!player.skin.hasLightningShapedTattoo() && rand(3) == 0 && changes < changeLimit) {
+				outputText("\n\nYou suddenly feel a rush of electricity on your skin as glowing tattoos in the shape of lightning bolts form in various place across your body. Well, how shocking. <b>Your skin is now inscribed with some lightning shaped tattoos.</b>");
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
+					outputText("\n\n<b>Genetic Memory: Lighting Tattoed Skin - Memorized!</b>\n\n");
+					player.createStatusEffect(StatusEffects.UnlockedLightningTattoed, 0, 0, 0, 0);
+				}
+				player.skin.base.pattern = Skin.PATTERN_LIGHTNING_SHAPED_TATTOO;
+				player.skin.base.adj = "lightning shaped tattooed";
+				changes++;
+			}
+			if (player.hairType != 4 && player.hairLength < 26 && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+				temp2 += 1 + rand(3);
+				outputText("\n\nYour hair tingles as it grows longer, adding " + temp2 + " inches of length to your scalp.");
+				player.hairLength += temp2;
+				changes++;
+			}
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+		}
+
 		public function isabellaMilk(player:Player):void
 		{
 			player.slimeFeed();
@@ -9043,7 +9428,7 @@ public final class Mutations extends MutationsHelper
 				player.removeStatusEffect(StatusEffects.BlackNipples);
 			}
 			//Debugcunt
-			if (changes < changeLimit && rand(3) == 0 && player.vaginaType() == 5 && player.hasVagina()) {
+			if (changes < changeLimit && rand(3) == 0 && (player.vaginaType() == 5 || player.vaginaType() == 6) && player.hasVagina()) {
 				outputText("\n\nSomething invisible brushes against your sex, making you twinge.  Undoing your clothes, you take a look at your vagina and find that it has turned back to its natural flesh colour.");
 				player.vaginaType(0);
 				changes++;
@@ -9064,19 +9449,19 @@ public final class Mutations extends MutationsHelper
 
 			//Libido: No desc., always increases.
 			//Corruption: No desc., always decreases.
-			dynStats("lib", 1, "cor", -1);
+			dynStats("lib", 2, "cor", -2);
 			//Health/HP(Large increase; always occurs):
 			outputText("\n\nYou feel suddenly invigorated by the potent beverage, like you could take on a whole horde of barbarians or giants and come out victorious! ");
-			HPChange(Math.round(player.maxHP() * .33), true);
+			HPChange(Math.round(player.maxHP() * .25), true);
 			if (rand(3) == 0) {
 				outputText("\n\nThe alcohol fills your limbs with vigor, making you feel like you could take on the world with just your fists!");
 				if (silly()) outputText("  Maybe you should run around shirtless, drink, and fight!  Saxton Hale would be proud.");
-				dynStats("str", 1);
+				dynStats("str", 2);
 			}
 			//Tough:
 			else {
 				outputText("\n\nYou thump your chest and grin - your foes will have a harder time taking you down while you're fortified by liquid courage.");
-				dynStats("tou", 1);
+				dynStats("tou", 2);
 			}
 			//Grow Beard [ONLY if PC has a masculine face & a dick.)( -- Why? Bearded ladies are also a fetish [That's just nasty.] (I want a lady beard)): A sudden tingling runs along your chin. You rub it with your hand, and find a thin layer of bristles covering your lower face. You now sport a fine [player.HairColor] beard!
 			if (rand(6) == 0 && player.lowerBody != LowerBody.GARGOYLE && player.beardLength < 4) {
@@ -9096,26 +9481,30 @@ public final class Mutations extends MutationsHelper
 
 			//Libido: No desc., always increases.
 			//Corruption: No desc., always decreases.
-			dynStats("lib", 1, "cor", -1);
+			dynStats("lib", 10, "cor", -10);
 			//Health/HP(Large increase; always occurs):
 			outputText("\n\nYou feel suddenly invigorated by the potent beverage, like you could take on a whole horde of barbarians or giants and come out victorious!");
 			HPChange(Math.round(player.maxHP()), false);
-			dynStats("lus=", 20 + rand(6));
+			dynStats("lus=", 50 + rand(16));
 			if (rand(3) == 0) {
 				outputText("\n\nThe alcohol fills your limbs with vigor, making you feel like you could take on the world with just your fists!");
 				if (silly()) outputText("  Maybe you should run around shirtless, drink, and fight!  Saxton Hale would be proud.");
-				dynStats("str", 1);
+				dynStats("str", 10);
 			}
 			//Tough:
 			else {
 				outputText("\n\nYou thump your chest and grin - your foes will have a harder time taking you down while you're fortified by liquid courage.");
-				dynStats("tou", 1);
+				dynStats("tou", 10);
 			}
 			//Grow Beard [ONLY if PC has a masculine face & a dick.)( -- Why? Bearded ladies are also a fetish [That's just nasty.] (I want a lady beard)): A sudden tingling runs along your chin. You rub it with your hand, and find a thin layer of bristles covering your lower face. You now sport a fine [player.HairColor] beard!
-			//[If player already has beard] A sudden tingling runs along your chin. You stroke your beard proudly as it slowly grows in length and lustre.
+			if (rand(6) == 0 && player.lowerBody != LowerBody.GARGOYLE && player.beardLength < 6) {
+				if (player.beardLength <= 0) outputText("A sudden tingling runs along your chin. You rub it with your hand, and find a thin layer of bristles covering your lower face. <b>You now sport a fine [haircolor] beard!</b>");
+				else outputText("\n\nA sudden tingling runs along your chin. You stroke your beard proudly as it slowly grows in length and lustre.");
+				player.beardLength += 0.5;
+			}
 			//Grow hair: Your scalp is beset by pins and needles as your hair grows out, stopping after it reaches [medium/long] length.}
 			if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
-			player.refillHunger(60);
+			player.refillHunger(80);
 		}
 
 		public function sheepMilk(player:Player):void
@@ -9124,9 +9513,9 @@ public final class Mutations extends MutationsHelper
 			clearOutput();
 			outputText("You gulp the bottle's contents, and its sweet taste immediately invigorates you, making you feel calm and concentrated");
 			//-60 fatigue, -2 libido, -20 lust]
-			fatigue(-60);
-			dynStats("lib", -.25, "lus", -20, "cor", -0.5);
-			player.refillHunger(20);
+			fatigue(-180);
+			dynStats("lib", -1, "lus", -90, "cor", -2);
+			player.refillHunger(40);
 		}
 
 		public function springWater(player:Player):void
@@ -9135,12 +9524,12 @@ public final class Mutations extends MutationsHelper
 			clearOutput();
 			outputText("The water is cool and sweet to the taste, and every swallow makes you feel calmer, cleaner, and refreshed.  You drink until your thirst is quenched, feeling purer in both mind and body. ");
 			//-30 fatigue, -2 libido, -10 lust]
-			fatigue(-10);
-			dynStats("lus", -25, "cor", (-3 - rand(2)), "scale", false);
-			HPChange(20 + (5 * player.level) + rand(5 * player.level), true);
-			player.refillHunger(10);
-			if(player.cor > 50) dynStats("cor", -1);
-			if(player.cor > 75) dynStats("cor", -1);
+			fatigue(-40);
+			dynStats("lus", -100, "cor", (-4 - rand(3)), "scale", false);
+			HPChange(100 + (10 * player.level) + rand(10 * player.level), true);
+			player.refillHunger(30);
+			if(player.cor > 50) dynStats("cor", -2);
+			if(player.cor > 75) dynStats("cor", -2);
 		}
 		
 		public function akbalSaliva(player:Player):void
@@ -9454,7 +9843,7 @@ public final class Mutations extends MutationsHelper
 				player.removeStatusEffect(StatusEffects.BlackNipples);
 			});
 			//Debugcunt
-			mutationStep(player.vaginaType() == 5 && player.hasVagina(), 3, function(): void {
+			mutationStep((player.vaginaType() == 5 || player.vaginaType() == 6) && player.hasVagina(), 3, function(): void {
 				outputText("\n\nSomething invisible brushes against your sex, making you twinge.  Undoing your clothes, you take a look at your vagina and find that it has turned back to its natural flesh colour.");
 				player.vaginaType(0);
 			});
@@ -10200,7 +10589,7 @@ public final class Mutations extends MutationsHelper
 
 
 //Mouse Cocoa/MousCoco (you can change the name if you're saddlesore I guess but I'll make fun of you for having no plausible source of chocolate for your bakery if you do)
-		public function mouseCocoa(player:Player):void
+		public function mouseCocoa(type:Number,player:Player):void
 		{
 			clearOutput();
 			var changes:int = 0;
@@ -10210,24 +10599,26 @@ public final class Mutations extends MutationsHelper
 			if (rand(3) == 0) changeLimit++;
 			changeLimit += additionalTransformationChances();
 			//use:
-			outputText("You pop several of the beans in your mouth and suck; they immediately reward you by giving up an oily, chocolatey flavor with a hint of bitterness.  For several minutes you ");
-			if (!player.isTaur()) outputText("sit and ");
-			outputText("enjoy the taste.");
-
+			if (type == 0) {
+				outputText("You pop several of the beans in your mouth and suck; they immediately reward you by giving up an oily, chocolatey flavor with a hint of bitterness.  For several minutes you ");
+				if (!player.isTaur()) outputText("sit and ");
+				outputText("enjoy the taste.");
+			}
+			if (type == 1) outputText("You heat yourself a cup of the exotic alcohol and sip it. It tastes great, but leaves you somewhat tipsy. You also feel yourself pleasantly warming up from the sake as something changes in you.");
 			//stat changes:
 			//lose height + gain speed (42" height floor, no speed ceiling but no speed changes without height change)
-			if (player.tallness >= 45 && changes < changeLimit && rand(3) == 0) {
+			if (player.tallness >= 45 && changes < changeLimit && rand(5) > 2) {
 				//not horse
 				if (!player.isTaur()) outputText("\n\nYou tap your [feet] idly against the rock you sit upon as you enjoy the treat; it takes several minutes before you realize you don't reach as far down as you did when you sat down!  In shock, you jerk upright and leap off, nearly falling forward as your body moves more responsively than before!  Experimentally, you move in place as you look down at your now-closer [feet]; the sensation of a more compact agility stays with you.");
 				//horse
 				else outputText("\n\nYou trot idly in place as you eat, moving quicker and quicker as you become increasingly bored; on one step, the ground sneaks up on you and you hit it sharply, expecting a few more inches before contact!  Looking down, you notice better resolution than before - you can make out the dirt a bit more clearly.  It looks like you just shed some height, but... you're feeling too jittery to care.  You just want to run around.");
 				dynStats("spe", 1);
 				player.tallness--;
+				if (player.tallness > 50) player.tallness--;
 				if (player.tallness > 60) player.tallness--;
-				if (player.tallness > 70) player.tallness--;
-				if (player.tallness > 80) player.tallness--;
+				if (player.tallness > 70) player.tallness -= 2;
+				if (player.tallness > 80) player.tallness -= 2;
 				if (player.tallness > 90) player.tallness -= 2;
-				if (player.tallness > 100) player.tallness -= 2;
 				changes++;
 			}
 			//lose tough
@@ -10270,35 +10661,34 @@ public final class Mutations extends MutationsHelper
 
         var intensified:Boolean = player.inHeat;
         if(player.goIntoHeat(false)) {
-          if(intensified) {
-  					outputText("\n\nYour womb feels achingly empty, and your temperature shoots up.  Try as you might, you can't stop fantasizing about being filled with semen, drenched inside and out with it, enough to make a baker's dozen offspring.  ");
-  					//[(no mino cum in inventory)]
-  					if (!player.hasItem(consumables.MINOCUM)) {
-  						outputText("<b>Your heat has intensified as much as your fertility has increased, which is a considerable amount!</b>");
-  					}
-  					else if (player.lust < player.maxLust() || player.isTaur()) outputText("You even pull out a bottle of minotaur jism and spend several minutes considering the feasibility of pouring it directly in your [vagina], but regain your senses as you're unsealing the cap, setting it aside.  <b>Still, your heat is more intense than ever and your increasingly-fertile body is practically begging for dick - it'll be hard to resist any that come near!</b>");
-  					//(mino cum in inventory and non-horse, 100 lust)
-  					else {
-  						outputText("Desperately horny, you pull out your bottle of minotaur jism and break the seal in two shakes, then lie down with your hips elevated and upend it over your greedy vagina.  The gooey seed pours into you, and you orgasm fitfully, shaking and failing to hold the bottle in place as it coats your labia.  <b>As a hazy doze infiltrates your mind, you pray the pregnancy takes and dream of the sons you'll bear with your increasingly fertile body... you're going to go insane if you don't get a baby in you</b>.");
-  						//(consumes item, increment addiction/output addict message, small chance of mino preg, reduce lust)]", false);
-  						player.minoCumAddiction(5);
-						if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(25);
-						player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR, 175);
-  						player.consumeItem(consumables.MINOCUM);
-  					}
-          }
-          else {
-  					outputText("\n\nYour insides feel... roomy.  Accomodating, even.  You could probably carry a whole litter of little [name]s right now.  Filled with a sudden flush of desire, you look around furtively for any fertile males.  With a shake of your head, you try to clear your thoughts, but daydreams of being stuffed with seed creep right back in - it looks like your body is intent on probing the limits of your new fertility.  <b>You're in heat, and pregnable in several senses of the word!</b>");
-            
-            // Also make a permanent nudge.
-  					player.fertility++;
-				}
-			changes++;
+			if(intensified) {
+  				outputText("\n\nYour womb feels achingly empty, and your temperature shoots up.  Try as you might, you can't stop fantasizing about being filled with semen, drenched inside and out with it, enough to make a baker's dozen offspring.  ");
+  				//[(no mino cum in inventory)]
+  				if (!player.hasItem(consumables.MINOCUM)) {
+  					outputText("<b>Your heat has intensified as much as your fertility has increased, which is a considerable amount!</b>");
+  				}
+  				else if (player.lust < player.maxLust() || player.isTaur()) outputText("You even pull out a bottle of minotaur jism and spend several minutes considering the feasibility of pouring it directly in your [vagina], but regain your senses as you're unsealing the cap, setting it aside.  <b>Still, your heat is more intense than ever and your increasingly-fertile body is practically begging for dick - it'll be hard to resist any that come near!</b>");
+  				//(mino cum in inventory and non-horse, 100 lust)
+  				else {
+  					outputText("Desperately horny, you pull out your bottle of minotaur jism and break the seal in two shakes, then lie down with your hips elevated and upend it over your greedy vagina.  The gooey seed pours into you, and you orgasm fitfully, shaking and failing to hold the bottle in place as it coats your labia.  <b>As a hazy doze infiltrates your mind, you pray the pregnancy takes and dream of the sons you'll bear with your increasingly fertile body... you're going to go insane if you don't get a baby in you</b>.");
+  					//(consumes item, increment addiction/output addict message, small chance of mino preg, reduce lust)]", false);
+  					player.minoCumAddiction(5);
+					if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(25);
+					player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR, 175);
+  					player.consumeItem(consumables.MINOCUM);
+  				}
 			}
+			else {
+  				outputText("\n\nYour insides feel... roomy.  Accomodating, even.  You could probably carry a whole litter of little [name]s right now.  Filled with a sudden flush of desire, you look around furtively for any fertile males.  With a shake of your head, you try to clear your thoughts, but daydreams of being stuffed with seed creep right back in - it looks like your body is intent on probing the limits of your new fertility.  <b>You're in heat, and pregnable in several senses of the word!</b>");
+            // Also make a permanent nudge.
+  				player.fertility++;
+			}
+			changes++;
+		}
 		}
 			//bodypart changes:
 			//gain ears
-			if (player.ears.type != Ears.MOUSE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+			if (player.ears.type != Ears.MOUSE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYour ears ");
 				if (player.ears.type == Ears.HORSE || player.ears.type == Ears.COW || player.ears.type == Ears.DOG || player.ears.type == Ears.BUNNY || player.ears.type == Ears.KANGAROO) outputText("shrink suddenly");
 				else outputText("pull away from your head");
@@ -10308,7 +10698,7 @@ public final class Mutations extends MutationsHelper
 			}
 			//gain tail
 			//from no tail
-			if (player.ears.type == Ears.MOUSE && player.tailType != Tail.MOUSE && changes < changeLimit && rand(4) == 0) {
+			if (player.ears.type == Ears.MOUSE && player.tailType != Tail.MOUSE && changes < changeLimit && rand(3) == 0 && type == 0) {
 				//from other tail
 				if (player.tailType > Tail.NONE) {
 					outputText("\n\nYour tail clenches and itches simultaneously, leaving you wondering whether to cry out or try to scratch it.  The question is soon answered as the pain takes the forefront; looking backward is a horrible strain, but when you manage it, you can see your old appendage ");
@@ -10320,36 +10710,72 @@ public final class Mutations extends MutationsHelper
 				setTailType(Tail.MOUSE);
 				changes++;
 			}
-			//get teeth - from human, bunny, coonmask, or other humanoid teeth faces
-			if (player.ears.type == Ears.MOUSE && (player.faceType == Face.HUMAN || player.faceType == Face.SHARK_TEETH || player.faceType == Face.BUNNY || player.faceType == Face.SPIDER_FANGS || player.faceType == Face.RACCOON_MASK) && rand(4) == 0 && changes < changeLimit) {
-				outputText("\n\nYour teeth grind on their own, and you feel a strange, insistent pressure just under your nose.  As you open your mouth and run your tongue along them, you can feel ");
-				if (player.faceType != Face.HUMAN) outputText("the sharp teeth receding and ");
-				outputText("your incisors lengthening.  It's not long before they're twice as long as their neighbors and the obvious growth stops, but the pressure doesn't go away completely.  <b>Well, you now have mouse incisors and your face aches a tiny bit - wonder if they're going to keep growing?</b>");
-				setFaceType(Face.BUCKTEETH);
+			if (player.ears.type == Ears.MOUSE && player.tailType != Tail.HINEZUMI && changes < changeLimit && rand(3) == 0 && type == 1) {
+				if (player.tailType > Tail.NONE) outputText("\n\nY");
+				else outputText("\n\nA small nub pokes from your backside, and you turn to look at it.  Y");
+				outputText("ou jump in surprise as your tail suddenly sparks and lights ablaze. Oddly, it doesn’t hurt. Your tail doesn’t seem to burn your own skin but whatever it touches is set aflame. Pondering how difficult it will be to move around without torching everything, your tail’s fire suddenly dies down. Seems you can light it up or extinguish it at will.  <b>You now have a fiery mouse tail!</b>");
+				setTailType(Tail.HINEZUMI);
 				changes++;
 			}
-			//get mouse muzzle from mouse teeth or other muzzle
-			if (player.hasFur() && player.faceType != Face.MOUSE && (player.faceType != Face.HUMAN || player.faceType != Face.SHARK_TEETH || player.faceType != Face.BUNNY || player.faceType != Face.SPIDER_FANGS || player.faceType != Face.RACCOON_MASK) && rand(4) == 0 && changes < changeLimit) {
-				outputText("\n\nA wave of light-headedness hits you, and you black out.  In your unconsciousness, you dream of chewing - food, wood, cloth, paper, leather, even metal... whatever you can fit in your mouth, even if it doesn't taste like anything much.  For several minutes you just chew and chew your way through a parade of ordinary objects, savoring the texture of each one against your teeth, until finally you awaken.  Your teeth work, feeling longer and more prominent than before, and you hunt up your reflection.  <b>Your face has shifted to resemble a mouse's, down to the whiskers!</b>");
-				setFaceType(Face.MOUSE);
+			//gain legs
+			if (player.lowerBody != LowerBody.MOUSE && player.tailType == Tail.MOUSE && changes < changeLimit && rand(3) == 0 && type == 0) {
+				outputText("\n\nYour legs begins to change covering up to the tight with a thin layer of fur. Your feet distort to takes on a more animalistic appearance and the nails sharpens to points more like mouses claws. <b>Seems you now got mouses leg paws now.</b>");
+				setLowerBody(LowerBody.MOUSE);
+				player.legCount = 2;
+			}
+			if (player.lowerBody != LowerBody.HINEZUMI && player.tailType == Tail.HINEZUMI && changes < changeLimit && rand(3) == 0 && type == 1) {
+				outputText("\n\nYour legs grow increasingly hot until suddenly they light up and start blazing, just like your tail. Well wow! Kicking with these is sure to pack an extra punch. The fur under your fiery coat doesn’t seem to burn either, but you're pretty sure anything that gets a kick from your legs is in for a painful experience. <b>You now have blazing mouse legs!</b>");
+				setLowerBody(LowerBody.HINEZUMI);
+				player.legCount = 2;
+			}
+			//gain arms
+			if (player.arms.type != Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI && changes < changeLimit && rand(3) == 0 && type == 1) {
+				outputText("\n\nYou suddenly feel like your forearms are burning. Burning they indeed begin to do, as they suddenly start blazing, a thick coat of fire covering them up to the fist. That’s going to be a very interesting ability to use in combat. <b>You now have blazing arms!</b>");
+				setArmType(Arms.HINEZUMI);
+			}
+			//get hinezumi eyes
+			if (player.eyes.type != Eyes.HINEZUMI && player.eyes.type == Eyes.HUMAN && rand(3) == 0 && changes < changeLimit && type == 1) {
+				outputText("\n\nYour eyes start to hurt and as a reaction, you start shedding tears. Once your vision clears, you head to a puddle to check what is going on. <b>To your surprise, it seems your irises turned blazing red like those of an Hinezumi.</b>");
+				setEyeTypeAndColor(Eyes.HINEZUMI,"blazing red");
+				changes++;
+			}
+			//Remove odd eyes
+			if (player.eyes.type != Eyes.HUMAN && player.eyes.type != Eyes.HINEZUMI && rand(2) == 0 && changes < changeLimit && type == 1) {
+				outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.");
+				if (player.eyes.type == Eyes.FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>");
+				else if (player.eyes.type == Eyes.CAT_SLITS) outputText("  Your cat-like eyes are gone!</b>");
+				outputText("  <b>You have normal, humanoid eyes again.</b>");
+				setEyeType(Eyes.HUMAN);
+				changes++;
+			}
+			//Hair
+			if ((player.faceType == Face.BUCKTEETH || player.faceType == Face.MOUSE) && player.hairType != Hair.BURNING && changes < changeLimit && rand(3) == 0 && type == 1) {
+				if (rand(3) == 0) {
+					player.hairColor = "red";
+				} else {
+					if (rand (2) == 0) player.hairColor = "orange";
+					else player.hairColor = "pinkish orange";
+				}
+				outputText("\n\nSomething weird happen in your hairs. The strands coloration slowly shift to a [haircolor] hue and to your absolute surprise the tips turns incandescent like embers. There's no doubt to the heat your hairs now produce as if the tips were on fire. <b>Better keep watch not to set anything on fire with your fiery hairs now.</b>");
+				setHairType(Hair.BURNING);
 				changes++;
 			}
 			//get fur
-			if ((!player.hasFur() || (player.hasFur() && (player.coatColor != "brown" && player.coatColor != "white"))) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+			if ((!player.hasFur() || (player.hasFur() && (player.coatColor != "brown" && player.coatColor != "white"))) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
 				var color:String;
 				if (rand(10) < 8) {
-					color = "brown";
+					player.coatColor = "brown";
 				} else {
-					color = "white";
+					player.coatColor = "white";
 				}
 				//from skinscales
 				if (!player.hasFur()) {
 					outputText("\n\nYour [skin] "+player.skin.isAre("itches","itch")+outputText(" all over"));
 					if (player.tailType > Tail.NONE) outputText(", except on your tail");
-					outputText(".  Alarmed and suspicious, you tuck in your hands, trying to will yourself not to scratch, but it doesn't make much difference.  Tufts of "+color+" fur begin to force through your skin");
+					outputText(".  Alarmed and suspicious, you tuck in your hands, trying to will yourself not to scratch, but it doesn't make much difference.  Tufts of "+player.coatColor+" fur begin to force through your skin");
 					if (player.hasScales()) outputText(", pushing your scales out with little pinches");
 					outputText(", resolving the problem for you.  <b>You now have fur.</b>");
-					player.skin.growCoat(Skin.FUR, {color:color});
+					player.skin.growCoat(Skin.FUR, {color:player.coatColor});
 					if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
 						outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
 						player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
@@ -10357,9 +10783,42 @@ public final class Mutations extends MutationsHelper
 				}
 				//from other color fur
 				else {
-					outputText("\n\nYour fur stands on end, as if trying to leap from your body - which it does next.  You watch, dumb with shock, as your covering deserts you, but it's quickly replaced with another layer of "+color+" fuzz coming in behind it that soon grows to full-fledged fur.");
 					player.skin.coat.color = color;
+					outputText("\n\nYour fur stands on end, as if trying to leap from your body - which it does next.  You watch, dumb with shock, as your covering deserts you, but it's quickly replaced with another layer of "+player.coatColor+" fuzz coming in behind it that soon grows to full-fledged fur.");
 				}
+				changes++;
+			}
+			//get partial fur form full or full from partial fur
+			if (player.hasFur() && rand(3) == 0 && changes < changeLimit) {
+				if (player.skin.coverage == Skin.COVERAGE_COMPLETE || player.skin.coverage == Skin.COVERAGE_HIGH) {
+					outputText("\n\nWhat used to be a dense coat of fur begins to fall in patches on the ground leaving you with just enough fur to cover some area of your body.  <b>Some area of your body are now partially covered with fur!</b>");
+					player.skin.coverage = Skin.COVERAGE_LOW;
+					changes++;
+				}
+				else {
+					outputText("\n\nYou feel your skin tickle as more fur grows to cover the areas you did not already had fur at. Guess you have truly joined the furry club now.  <b>Your skin is now entirely coated with fur.</b>");
+					player.skin.coverage = Skin.COVERAGE_COMPLETE;
+					changes++;
+				}
+			}
+			//get teeth - from human, bunny, coonmask, or other humanoid teeth faces
+			if (player.ears.type == Ears.MOUSE && (player.faceType == Face.HUMAN || player.faceType == Face.SHARK_TEETH || player.faceType == Face.BUNNY || player.faceType == Face.SPIDER_FANGS || player.faceType == Face.RACCOON_MASK) && rand(3) == 0 && changes < changeLimit) {
+				outputText("\n\nYour teeth grind on their own, and you feel a strange, insistent pressure just under your nose.  As you open your mouth and run your tongue along them, you can feel ");
+				if (player.faceType != Face.HUMAN) outputText("the sharp teeth receding and ");
+				outputText("your incisors lengthening.  It's not long before they're twice as long as their neighbors and the obvious growth stops, but the pressure doesn't go away completely.  <b>Well, you now have mouse incisors and your face aches a tiny bit - wonder if they're going to keep growing?</b>");
+				setFaceType(Face.BUCKTEETH);
+				changes++;
+			}
+			//get mouse muzzle from mouse teeth or other muzzle
+			if (player.hasFur() && player.faceType != Face.MOUSE && (player.faceType != Face.HUMAN || player.faceType != Face.SHARK_TEETH || player.faceType != Face.BUNNY || player.faceType != Face.SPIDER_FANGS || player.faceType != Face.RACCOON_MASK) && rand(3) == 0 && changes < changeLimit) {
+				outputText("\n\nA wave of light-headedness hits you, and you black out.  In your unconsciousness, you dream of chewing - food, wood, cloth, paper, leather, even metal... whatever you can fit in your mouth, even if it doesn't taste like anything much.  For several minutes you just chew and chew your way through a parade of ordinary objects, savoring the texture of each one against your teeth, until finally you awaken.  Your teeth work, feeling longer and more prominent than before, and you hunt up your reflection.  <b>Your face has shifted to resemble a mouse's, down to the whiskers!</b>");
+				setFaceType(Face.MOUSE);
+				changes++;
+			}
+			//get mouse teeth from mouse muzzle
+			if (player.hasFur() && player.faceType == Face.MOUSE && rand(3) == 0 && changes < changeLimit) {
+				outputText("\n\nYour mouse face begins to change as if melting. When you pass your hand over it you discover to your surprise its back to being human.or well it would be if not for your buck teeth way larger than normal.  <b>Your face is now human save for your two incisor like buck teeth.</b>");
+				setFaceType(Face.BUCKTEETH);
 				changes++;
 			}
 			player.refillHunger(10);

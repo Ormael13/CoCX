@@ -67,7 +67,7 @@ public class DarkElfScout extends Monster
 		
 		public function AnkleShot():void
 		{
-			outputText("The dark skinned elf shoot you through the ankle and takes  some distance. Crippled like you are, it will be annoying to catch her--if not impossible. Better use ranged attacks until you recover mobility.");
+			outputText("The dark skinned elf shoot you through the ankle and takes some distance. Crippled like you are, it will be annoying to catch her--if not impossible. Better use ranged attacks until you recover mobility.");
 			player.createStatusEffect(StatusEffects.Sealed2, 4, 0, 0, 0);
 		}
 		

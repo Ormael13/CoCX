@@ -57,11 +57,11 @@ import classes.Scenes.UniqueSexScenes;
 					addButton (2, "Service Him", GiveIncubusOral);
 					addButton (3, "Catch Anal", FactoryScene.doRideIncubusAnally);
 				}
-				if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(7, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
+				//if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(7, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
 			}
-			addButton (4, "Leave", cleanupAfterCombat);
 			if (monster.HP < 1) addButton (5, "Kill Him", killDemon);
-			if (player.tailType == Tail.MANTICORE_PUSSYTAIL) addButton(6, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
+			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+			addButton (14, "Leave", cleanupAfterCombat);
 		}
 		
 		public function lustyPaizuri():void {
@@ -305,14 +305,15 @@ import classes.Scenes.UniqueSexScenes;
 			if (player.lust>=33 && player.gender > 0) {
 				outputText("\nNow would be the perfect opportunity to taste the fruits of her sex-ready form...\n\nDo you fuck her?");
 				if (player.gender == 1 || player.gender == 3) addButton (0, "M. Fuck", OmnibusGetsRapedByMale);
-				if (player.gender == 2 || player.gender == 3) addButton (1, "F. Fuck", OmnibusGetsRapedByFemale);
+				if (player.gender == 2 || player.gender == 3) addButton (1, "F. Fuck", OmnibusGetsRapedByFemale);/*
 				if (player.lowerBody == LowerBody.PLANT_FLOWER) {
 					addButton(2, "Seeding", uniquuuesexscene.alrauneSeedingScene);
 					addButton(3, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
-				}
+				}*/
 			}
-			addButton (4, "Leave", cleanupAfterCombat);
-			if(monster.HP < 1) addButton (5, "Kill Her", killDemon);
+			if (monster.HP < 1) addButton (5, "Kill Her", killDemon);
+			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+			addButton (14, "Leave", cleanupAfterCombat);
 		}
 		
 		public function OmnibusGetsRapedByMale():void {
@@ -557,10 +558,11 @@ import classes.Scenes.UniqueSexScenes;
 					addButton (0, "M. Fuck", SuccubusGetsRapedByMale);
 					addButton (1, "F. Fuck", SuccubusGetsRapedByFemale);
 				}
-				if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(2, "Seeding", uniquuuesexscene.alrauneSeedingScene);
+				//if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(2, "Seeding", uniquuuesexscene.alrauneSeedingScene);
 			}
-			addButton (4, "Leave", cleanupAfterCombat);
-			if(monster.HP < 1) addButton (5, "Kill Her", killDemon);
+			if (monster.HP < 1) addButton (5, "Kill Her", killDemon);
+			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+			addButton (14, "Leave", cleanupAfterCombat);
 		}
 		
 		public function SuccubusGetsRapedByMale():void {

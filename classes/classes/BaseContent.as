@@ -789,11 +789,23 @@ import coc.xxc.StoryContext;
 		protected function get jewelries():JewelryLib{
 			return CoC.instance.jewelries;
 		}
+		protected function get jewelries2():JewelryLib{
+			return CoC.instance.jewelries2;
+		}
+		protected function get jewelries3():JewelryLib{
+			return CoC.instance.jewelries3;
+		}
+		protected function get jewelries4():JewelryLib{
+			return CoC.instance.jewelries4;
+		}
 		protected function get shields():ShieldLib{
 			return CoC.instance.shields;
 		}
 		protected function get undergarments():UndergarmentLib{
 			return CoC.instance.undergarments;
+		}
+		protected function get vehicles():VehiclesLib{
+			return CoC.instance.vehicles;
 		}
 		protected function get inventory():Inventory{
 			return SceneLib.inventory;

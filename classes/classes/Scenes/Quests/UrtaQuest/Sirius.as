@@ -64,7 +64,7 @@ public class Sirius extends Naga
 		{
 			outputText("Hissing loudly, Sirius suddenly curls his lips and spits at your eyes!  ");
 //{Hit:
-			if (spe / 20 + rand(20) + 1 > player.spe / 20 + 10) {
+			if ((spe / 20 + rand(20) + 1 > player.spe / 20 + 10) && !player.hasPerk(PerkLib.BlindImmunity)) {
 				outputText("The vile spray hits your eyes and you scream in pain, clawing fiercely at your burning, watering, weeping eyes.  <b>You can't see!  It'll be much harder to fight in this state, but at the same time, his hypnosis won't be so effective...</b>");
 				player.createStatusEffect(StatusEffects.Blind, 3, 0, 0, 0);
 			}

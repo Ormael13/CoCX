@@ -5,9 +5,12 @@ package classes.Scenes.Areas.Bog
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.UniqueSexScenes;
 
 	public class ChameleonGirlScene extends BaseContent
 	{
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		
 		public function ChameleonGirlScene()
 		{
 		}
@@ -191,17 +194,14 @@ package classes.Scenes.Areas.Bog
 				return;
 			}
 			//(Display Options: [Fuck Her Face] [Pussy Rub] [Herm Style Pussyrub] [Incubi Draft] [Succubi Milk] [Lust&Sens Drafts])
-			var dick:Function =null;
-			var pussy:Function =null;
-			var herm:Function =null;
-			var item:Function =null;
-			if (player.hasCock()) dick = manFucksChameleonWithBiggishWang;
-			if (player.hasVagina()) pussy = femaleHasWinSexWithChamCham;
-			if (player.gender == 3) herm = fuckDatChameleonAsACoolGuyGirlHerm;
-			//let PC use item
-			if ((player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && player.hasCock()) item = useAnItemOnTheChamcham;
-			else if (player.hasItem(consumables.SENSDRF) && (player.hasItem(consumables.L_DRAFT) || player.hasItem(consumables.F_DRAFT))) item = useAnItemOnTheChamcham;
-			simpleChoices("Use Dick", dick, "Use Pussy", pussy, "Herm Style", herm, "Use Item", item, "Leave", cleanupAfterCombat);
+			menu();
+			if (player.hasCock()) addButton(0, "Use Dick", manFucksChameleonWithBiggishWang);
+			if (player.hasVagina()) addButton(1, "Use Pussy", femaleHasWinSexWithChamCham);
+			if (player.gender == 3) addButton(2, "Herm Style", fuckDatChameleonAsACoolGuyGirlHerm);
+			if ((player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && player.hasCock()) addButton(3, "Use Item", useAnItemOnTheChamcham);
+			else if (player.hasItem(consumables.SENSDRF) && (player.hasItem(consumables.L_DRAFT) || player.hasItem(consumables.F_DRAFT))) addButton(3, "Use Item", useAnItemOnTheChamcham);
+			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+			addButton(14, "Leave", cleanupAfterCombat);
 		}
 
 		//-Herm Victory (Z edited)

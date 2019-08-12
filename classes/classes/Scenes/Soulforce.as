@@ -33,6 +33,7 @@ import classes.Scenes.Monsters.DarkElfRanger;
 import classes.Scenes.Monsters.DarkElfScout;
 import classes.Scenes.Monsters.DarkElfSlaver;
 import classes.Scenes.Monsters.DarkElfSniper;
+import classes.Scenes.Monsters.Manticore;
 import classes.Scenes.NPCs.Aria;
 import classes.Scenes.NPCs.Aurora;
 import classes.Scenes.NPCs.CelessScene;
@@ -44,6 +45,7 @@ import classes.Scenes.Places.Boat.Marae;
 import classes.Scenes.Areas.Forest.Nightmare;
 import classes.Player;
 import classes.Items.*;
+import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 
 use namespace CoC;
 	
@@ -202,6 +204,11 @@ use namespace CoC;
 			clearOutput();
 			outputText("Collection of current used cheats that with time will be removed or replaced by new ones.");
 			outputText("\n\nAscension points: " + player.ascensionPerkPoints + "");
+			if (player.hasStatusEffect(StatusEffects.AchievementsNormalShadowTotal)) {
+				outputText("\n\nNormal achievs: " + player.statusEffectv1(StatusEffects.AchievementsNormalShadowTotal) + "");
+				outputText("\n\nShadow achievs: " + player.statusEffectv2(StatusEffects.AchievementsNormalShadowTotal) + "");
+				outputText("\n\nTotals achievs: " + player.statusEffectv3(StatusEffects.AchievementsNormalShadowTotal) + "");
+			}
 			menu();
 			addButton(0, "StatsAdj/Ascen", StatsAscensionMenu).hint("For more precise adjusting each of 8 main stats and Ascension related stuff.");
 			addButton(1, "P/G/XP/LvL", PerksGemsEXPLvL).hint("Adding/Removing perk points and adding gems/exp/lvl.");
@@ -1321,16 +1328,12 @@ public function fixingProductionDrugs():void {
 			addButton(2, "Ascensus", AddTheStaffs).hint("Add set of items for Ascensus.");
 			addButton(3, "Evelyn", AddTheEvelyn).hint("Add 1 Evelyn Crossbow.");
 			addButton(4, "DualLAxes", AddDualMinoAxes).hint("Add 1 pair of Large Axes.");
-			addButton(5, "T.Dagger", AddThrowingDagger).hint("Add 1 Throwing Dagger.");
-			addButton(6, "Tri-Dagger", AddTriDagger).hint("Add 1 Tri-Dagger.");
-			addButton(7, "Dagger Whip", AddDaggerWhip).hint("Add 1 Dagger Whip.");
-			addButton(8, "C.S.Necklace", AddCrinosShapeNecklace).hint("Add 1 Crinos Shape necklace.");
-			addButton(9, "Duel.Pistol", AddDuelingPistol).hint("Add 1 Dueling pistol.");
-			addButton(10, "ADBShotgun", AddAntiqueDoubleBarrelShotgun).hint("Add 1 Antique double barrel shotgun.");
-			addButton(11, "ADBScattergun", AddAntiqueDoubleBarrelScattergun).hint("Add 1 Antique double barrel scattergun.");
-			//addButton(9, "NineTailWhip", AddNineTailWhip).hint("Add 1 Nine Tail Whip.");
-			//addButton(10, "CatONIneTWhip", AddCatONineTailWhip).hint("Add 1 Bastet Whip.");
-			//addButton(10, "L Ayo Arm", AddLightAyoArmor).hint("Add 1 Light Ayo Armor for testing purposes.");
+			addButton(5, "Duel.Pistol", AddDuelingPistol).hint("Add 1 Dueling pistol.");
+			addButton(6, "ADBShotgun", AddAntiqueDoubleBarrelShotgun).hint("Add 1 Antique double barrel shotgun.");
+			addButton(7, "ADBScattergun", AddAntiqueDoubleBarrelScattergun).hint("Add 1 Antique double barrel scattergun.");
+			addButton(8, "NineTailWhip", AddNineTailWhip).hint("Add 1 Nine Tail Whip.");
+			addButton(9, "CatONIneTWhip", AddCatONineTailWhip).hint("Add 1 Bastet Whip.");
+			addButton(10, "L Ayo Arm", AddLightAyoArmor).hint("Add 1 Light Ayo Armor for testing purposes.");
 			addButton(12, "MatrixArmory1", AddTheSeerHairpinAndCo).hint("Adds: 1 Eldritch Staff, 1 master Gloves, 1 Gnoll Throwing Axes, 1 Hodr's Bow, 1 Truestrike Sword, 1 Sceptre of Command, 1 Demonic Scythe, 1 Seer's Hairpin, Sakura Petal Kimono, Oni bead necklace");
 			addButton(13, "InqTome", AddTheInquisitorsTome).hint("Add 1 Inquisitor's Tome.");
 			addButton(14, "Back", SoulforceCheats);
@@ -1348,6 +1351,7 @@ public function fixingProductionDrugs():void {
 			addButton(7, "Skelp", AddSkelp).hint("Add 1 Skelp (WIP Melkie TF).");
 			//addButton(7, "V.D.ARC", AddVeryDilutedArcaneRegenConcotion).hint("Add 1 very diluted Arcane Regen Concotion.");
 			//addButton(8, "D.ARC", AddDilutedArcaneRegenConcotion).hint("Add 1 diluted Arcane Regen Concotion.");
+			//addButton(9, "A.R.CON", AddArcaneRegenConcotion).hint("Add 1 Arcane Regen Concotion.");
 			addButton(8, "D.Fruit", AddDisplacerFruit).hint("Add 1 Displacer Fruit.");
 			addButton(9, "SBMan", AddSoulBlastManual).hint("Add 1 Soul Blast manual.");
 			addButton(10, "White B.", AddWhiteBook).hint("Add 1 White Book.");
@@ -1368,6 +1372,7 @@ public function fixingProductionDrugs():void {
 			addButton(7, "GreenGel", AddGreenGel).hint("Add 1 Green Gel.");
 			addButton(8, "DragonScale", AddDragonscale).hint("Add 1 Dragonscale.");
 			addButton(9, "F.Imp S.", AddFeralImpSkull).hint("Add 1 Feral Imp Skull.");
+			addButton(10, "PolMidScr", AddPolarMidnightScroll).hint("Add 1 Polar Midnight scroll");
 			addButton(14, "Back", SoulforceCheats);
 		}
 		public function EnemiesMenu():void {
@@ -1378,7 +1383,8 @@ public function fixingProductionDrugs():void {
 			addButton(3, "RyuBi", FightRyuBi).hint("Test fight with RyuBi.");
 			addButton(4, "Aria", FightAria).hint("Test fight with melkie huntress Aria.");
 			addButton(5, "DE Ranger", FightDarkElfRanger).hint("Test fight with Dark Elf Ranger. (lvl 39)");
-			addButton(6, "DE Sniper", FightDarkElfSniper).hint("Test fight with Dark Elf Sniper. (lvl 51)");
+			//addButton(6, "DE Sniper", FightDarkElfSniper).hint("Test fight with Dark Elf Sniper. (lvl 51)");
+			addButton(6, "SomeManticore", FightRandomnManticore).hint("Test fight with some manticore.");
 			addButton(7, "Electra", FightElectra).hint("Test fight with Electra.");
 			addButton(8, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
 			addButton(9, "DELvL Eva", DELvLEva).hint("DE LvL forcefully Evangeline for testing purpose down toward the lvl 12.");
@@ -1393,11 +1399,11 @@ public function FightAurora():void {
 	outputText("Entering battle with Aurora! Enjoy ^^");
 	startCombat(new Aurora());
 }
-		/*
-		public function AddBladeGrass():void {
-			outputText("\n\n<b>(Gained 1 Blade Grass!)</b>\n\n");
-			inventory.takeItem(consumables.BLADEGR, SoulforceCheats);
-		}*/
+		
+		public function AddPolarMidnightScroll():void {
+			outputText("\n\n<b>(Gained 1 Polar Midnight scroll!)</b>\n\n");
+			inventory.takeItem(consumables.POL_MID, MaterialMenu);
+		}
 		public function AddFeralImpSkull():void {
 			outputText("\n\n<b>(Gained 1 Feral Imp Skull!)</b>\n\n");
 			inventory.takeItem(useables.FIMPSKL, MaterialMenu);
@@ -1466,6 +1472,10 @@ public function FightAurora():void {
 			outputText("\n\n<b>(Gained 1 diluted Arcane Regen Concotion!)</b>\n\n");
 			inventory.takeItem(consumables.D_ARCON, NonEquipmentMenu);
 		}
+		public function AddArcaneRegenConcotion():void {
+			outputText("\n\n<b>(Gained 1 Arcane Regen Concotion!)</b>\n\n");
+			inventory.takeItem(consumables.AREGCON, NonEquipmentMenu);
+		}
 		public function AddSoulBlastManual():void {
 			outputText("\n\n<b>(Gained 1 Soul Blast Manual!)</b>\n\n");
 			inventory.takeItem(consumables.SOBLMAN, NonEquipmentMenu);
@@ -1509,22 +1519,6 @@ public function FightAurora():void {
 		public function AddTheEvelyn():void {
 			outputText("\n\n<b>(Gained 1 Evelyn Crossbow!)</b>\n\n");
 			inventory.takeItem(weaponsrange.EVELYN_, EquipmentMenu);
-		}
-		public function AddThrowingDagger():void {
-			outputText("\n\n<b>(Gained 1 Throwing Dagger!)</b>\n\n");
-			inventory.takeItem(weapons.TDAGGER, EquipmentMenu);
-		}
-		public function AddTriDagger():void {
-			outputText("\n\n<b>(Gained 1 Tri-Dagger!)</b>\n\n");
-			inventory.takeItem(weapons.TRIDAG, EquipmentMenu);
-		}
-		public function AddDaggerWhip():void {
-			outputText("\n\n<b>(Gained 1 Dagger Whip!)</b>\n\n");
-			inventory.takeItem(weapons.DAGWHIP, EquipmentMenu);
-		}
-		public function AddCrinosShapeNecklace():void {
-			outputText("\n\n<b>(Gained 1 Crinos Shape necklace!)</b>\n\n");
-			inventory.takeItem(necklaces.CSNECK, EquipmentMenu);
 		}
 		public function AddDuelingPistol():void {
 			outputText("\n\n<b>(Gained 1 Dueling pistol!)</b>\n\n");
@@ -2141,6 +2135,11 @@ public function FightAurora():void {
 			clearOutput();
 			outputText("Entering battle with Dark Elf Sniper! Enjoy ^^");
 			startCombat(new DarkElfSniper());
+		}
+		public function FightRandomnManticore():void {
+			clearOutput();
+			outputText("Entering battle with some manticore! Enjoy ^^");
+			startCombat(new Manticore());
 		}
 		public function FightElectra():void {
 			clearOutput();
@@ -3248,4 +3247,4 @@ public function FightAurora():void {
 			}
 		}
 	}
-}
+}

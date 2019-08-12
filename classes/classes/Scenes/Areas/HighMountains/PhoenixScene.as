@@ -2,9 +2,12 @@ package classes.Scenes.Areas.HighMountains
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.UniqueSexScenes;
 
 public class PhoenixScene extends BaseContent
 	{
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		
 		//" + (player.cocks.length == 1 ? "": "") + "
 		public function PhoenixScene() 
 		{
@@ -85,6 +88,7 @@ public class PhoenixScene extends BaseContent
 				addButton(3, "Ride Anal", rideAnal);
 				if (player.hasVagina()) addButton(4, "Ride Vaginal", rideVaginal);
 				//addButton(5, "Suck Her Dick", rideAnal);
+				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();

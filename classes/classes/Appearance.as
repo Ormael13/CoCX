@@ -715,6 +715,19 @@ public class Appearance extends Utils
 					"bulbous snake-shaft",
 					"bulging snake-dick");
 			}
+			else if (cockType == CockTypesEnum.CAVE_WYRM) {
+				return randomChoice("glowing reptilian dick",
+					"luminescent neon blue cock",
+					"glowing inhuman cock",
+					"luminescent reptilian prick",
+					"luminescent neon blue prick",
+					"glowing neon blue member",
+					"glowing serpentine member",
+					"luminescent serpentine shaft",
+					"glowing reptilian shaft",
+					"glowing bulbous snake-shaft",
+					"luminescent bulging snake-dick");
+			}
 			else if (cockType == CockTypesEnum.ANEMONE) {
 				return randomChoice("anemone dick",
 					"tentacle-ringed cock",
@@ -826,7 +839,7 @@ public class Appearance extends Utils
 		//New cock adjectives.  The old one sucked dicks
 		//This function handles all cockAdjectives. Previously there were separate functions for the player, monsters and NPCs.
 		public static function cockAdjective(cockType:CockTypesEnum, length:Number, girth:Number, lust:int = 50, cumQ:Number = 10, isPierced:Boolean = false, hasSock:Boolean = false, isGooey:Boolean = false):String {
-			//First, the three possible special cases
+			//First, the four possible special cases
 			if (isPierced && rand(5) == 0) return "pierced";
 			if (hasSock && rand(5) == 0) return randomChoice("sock-sheathed", "garment-wrapped", "smartly dressed", "cloth-shrouded", "fabric swaddled", "covered");
 			if (isGooey && rand(4) == 0) return randomChoice("goopey", "gooey", "slimy");
@@ -1288,6 +1301,20 @@ public class Appearance extends Utils
 					"snake dick"];
 				description += randomChoice(options);
 			}
+			else if (cockType == CockTypesEnum.CAVE_WYRM) {
+				options = ["glowing reptile-dick",
+					"luminescent neon blue cock",
+					"glowing inhuman cock",
+					"luminescent reptilian prick",
+					"luminescent neon blue prick",
+					"glowing neon blue member",
+					"glowing serpentine member",
+					"luminescent serpentine shaft",
+					"glowing reptilian shaft",
+					"glowing snake-shaft",
+					"luminescent snake dick"];
+				description += randomChoice(options);
+			}
 			else if (cockType == CockTypesEnum.RHINO) {
 				options = ["oblong cock",
 					"rhino dick",
@@ -1641,6 +1668,12 @@ public class Appearance extends Utils
 					"obsidian",
 					"midnight-hued",
 					"jet black"];
+				description += randomChoice(options);
+			}
+			if (i_creature.vaginaType() == 6 && (forceDesc || Math.floor(Math.random() * 2) == 0)) {
+				if (description != "") description += ", ";
+				options = ["neon blue luminescent",
+					"neon blue glowing"];
 				description += randomChoice(options);
 			}
 

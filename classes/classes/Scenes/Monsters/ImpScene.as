@@ -70,9 +70,8 @@ use namespace CoC;
 			if (canBikiniTits) addButton(4, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 			if (maleRape == rapeImpWithDick && player.hasItem(useables.CONDOM)) addButton(5, "Use Condom", rapeImpWithDick, 1);
 			addButton(6, "Kill Him", killImp);
-			if (player.tailType == Tail.MANTICORE_PUSSYTAIL) addButton(7, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
-			if (player.canOvipositBee()) addButton(8, "Oviposit", putBeeEggsInAnImpYouMonster);
-			if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(9, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
+			if (player.canOvipositBee()) addButton(7, "Oviposit", putBeeEggsInAnImpYouMonster);
+			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 			addButton(14, "Leave", cleanupAfterCombat);
 			
 		}
@@ -1602,7 +1601,7 @@ use namespace CoC;
 					cleanupAfterCombat();
 					return;
 				}
-				if (player.tailType == Tail.MANTICORE_PUSSYTAIL) addButton(1, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
+				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 				addButton(4, "Leave", cleanupAfterCombat);
 			}
 			else {
@@ -1610,7 +1609,7 @@ use namespace CoC;
 				//Leave // Rape]
 				menu();
 				if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) addButton(0, "Sex", sexAnImpLord);
-				if (player.tailType == Tail.MANTICORE_PUSSYTAIL) addButton(1, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
+				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 				addButton(4,"Leave",cleanupAfterCombat);
 			}
 		}

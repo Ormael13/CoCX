@@ -1725,6 +1725,18 @@ use namespace CoC;
 				player.removePerk(PerkLib.CatlikeNimblenessEvolved);
 				player.perkPoints += 1;
 			}
+			if (player.hasPerk(PerkLib.CaveWyrmLungs)) {
+				player.removePerk(PerkLib.HinezumiBurningBlood);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.CaveWyrmLungsEvolved)) {
+				player.removePerk(PerkLib.HinezumiBurningBloodEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.CaveWyrmLungsFinalForm)) {
+				player.removePerk(PerkLib.HinezumiBurningBloodFinalForm);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.DraconicLungs)) {
 				player.removePerk(PerkLib.DraconicLungs);
 				player.perkPoints += 1;
@@ -1755,6 +1767,30 @@ use namespace CoC;
 			}
 			if (player.hasPerk(PerkLib.GorgonsEyesEvolved)) {
 				player.removePerk(PerkLib.GorgonsEyesEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.HellcatParathyroidGlands)) {
+				player.removePerk(PerkLib.HinezumiBurningBlood);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.HellcatParathyroidGlandsEvolved)) {
+				player.removePerk(PerkLib.HinezumiBurningBloodEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.HellcatParathyroidGlandsFinalForm)) {
+				player.removePerk(PerkLib.HinezumiBurningBloodFinalForm);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.HinezumiBurningBlood)) {
+				player.removePerk(PerkLib.HinezumiBurningBlood);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.HinezumiBurningBloodEvolved)) {
+				player.removePerk(PerkLib.HinezumiBurningBloodEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.HinezumiBurningBloodFinalForm)) {
+				player.removePerk(PerkLib.HinezumiBurningBloodFinalForm);
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.HollowFangs)) {
@@ -1827,6 +1863,18 @@ use namespace CoC;
 			}
 			if (player.hasPerk(PerkLib.MinotaurTesticlesFinalForm)) {
 				player.removePerk(PerkLib.MinotaurTesticlesFinalForm);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.NekomataThyroidGland)) {
+				player.removePerk(PerkLib.HinezumiBurningBlood);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.NekomataThyroidGlandEvolved)) {
+				player.removePerk(PerkLib.HinezumiBurningBloodEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.NekomataThyroidGlandFinalForm)) {
+				player.removePerk(PerkLib.HinezumiBurningBloodFinalForm);
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.ObsidianHeart)) {

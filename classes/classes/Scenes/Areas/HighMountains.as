@@ -47,7 +47,7 @@ use namespace CoC;
 				return;
 			}
 			
-			var chooser:Number = rand(5);
+			var chooser:Number = rand(6);
 			//Boosts mino and hellhound rates!
 			if (player.findPerk(PerkLib.PiercedFurrite) >= 0 && rand(3) == 0) {
 				chooser = 1;
@@ -75,6 +75,21 @@ use namespace CoC;
 				if (flags[kFLAGS.ETNA_AFFECTION] < 5) SceneLib.etnaScene.firstEnc();
 				else SceneLib.etnaScene.repeatEnc();
 				return;
+			}
+			//Wild manticore/malicore
+			if (chooser == 5) {
+				if (flags[kFLAGS.ETNA_AFFECTION] < 5) chooser = rand(5);
+				else {
+					if (rand(2) == 0) {
+						player.createStatusEffect(StatusEffects.WildManticore, 0, 0, 0, 0);
+						SceneLib.etnaScene.repeatEnc();
+						return;
+					}
+					else {
+						SceneLib.bashemathScene.repeatEncWM();
+						return;
+					}
+				}
 			}
 			//Temple of the Divine
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] < 1 && rand(4) == 0) {

@@ -16,9 +16,9 @@ use namespace CoC;
 		public function UseableLib() {}
 		
 		//MATERIALS
-		public const AMETIST:SimpleUseable = new SimpleUseable("Ametist", "Flawless Ametist", "a Flawless Ametist", 1000, 
-			"A Flawless Ametist.",
-			"You look over the flawless ametyst. Likely worth a lot of gems.");
+		public const AMETIST:SimpleUseable = new SimpleUseable("Ametist", "Flawless Ametist Necklace", "a Flawless Ametist Necklace", 1000, 
+			"A Flawless Ametist Necklace.",
+			"You look over the flawless ametyst necklace. Likely worth a lot of gems.");
 		public const B_CHITN:SimpleUseable = new SimpleUseable("B.Chitn", "B.Chitn", "a large shard of chitinous plating", 100,
 			"A perfect piece of black chitin from a bee-girl.  It still has some fuzz on it.",
 			"You look over the scale carefully but cannot find a use for it.  Maybe someone else will know how to use it.");
@@ -62,6 +62,12 @@ use namespace CoC;
 		public const DEMSKLL:SimpleUseable = new SimpleUseable("DemSkll", "DemonSkull", "a demon skull", 50, 
 			"A skull taken from a slain demon.",
 			"You look at the demon skull.  A pair of horns protrude from the skull.  You admire the overall frame of the skull yet you find no obvious uses for it.");
+		public const E_P_BOT:SimpleUseable = new SimpleUseable("E P Bot.", "empty pills bottle", "an empty pills bottle", 10, 
+			"An empty pills bottle used to keep various pills.",
+			"You look at empty pills bottle.  It would help hold your sourforce pills more organized than keep all loose.");
+		public const ENECORE:SimpleUseable = new SimpleUseable("EneCore", "Energy Core", "an Energy Core", 1015, 
+			"A power source for devices.",
+			"You look at Energy Core.  It's component used to make goblin tech.");
 		public const FIMPSKL:SimpleUseable = new SimpleUseable("FImpSkl", "FImpSkul", "a feral imp skull", 25, 
 			"A skull taken from a slain feral imp.",
 			"You look at the feral imp skull.  A two pairs of horns protrude from the deformed skull.  You admire the overall frame of the skull yet you find no obvious uses for it.");
@@ -74,6 +80,9 @@ use namespace CoC;
 		public const IMPSKLL:SimpleUseable = new SimpleUseable("ImpSkll", "ImpSkull", "an imp skull", 25, 
 			"A skull taken from a slain imp.",
 			"You look at the imp skull.  A pair of horns protrude from the skull.  You admire the overall frame of the skull yet you find no obvious uses for it.");
+		public const MECHANI:SimpleUseable = new SimpleUseable("Mechani", "Mechanism", "a Mechanism", 1200, 
+			"A complex set of gear and gyro.",
+			"You look at Mechanism.  It's component used to make goblin tech.");
 		public const MINOHOR:SimpleUseable = new SimpleUseable("MinoHor", "MinoHorns", "a minotaur horns", 35, 
 			"A horns taken from a slain minotaur.",
 			"You look at the pair of minotaur horns.  You admire the overall frame of the horns yet you find no obvious uses for them.");

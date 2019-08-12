@@ -61,7 +61,7 @@ public class Clara extends Monster
 		{
 			outputText("Clara glares at you, clearly being worn down.  Then strange lights start dancing around her hand and she points it in your direction.");
 			//Successful: 
-			if(player.findPerk(PerkLib.GorgonsEyes) < 0 && player.inte / 5 + rand(20) + 1 < 14)
+			if((player.findPerk(PerkLib.GorgonsEyes) < 0 && player.inte / 5 + rand(20) + 1 < 14) && !player.hasPerk(PerkLib.BlindImmunity))
 			{
 				outputText("\nA bright flash of light erupts in your face, blinding you!  You desperately blink and rub your eyes while Clara cackles with glee.");
 				player.createStatusEffect(StatusEffects.Blind,1,0,0,0);

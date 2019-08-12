@@ -8,10 +8,11 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
+import classes.Scenes.UniqueSexScenes;
 
 public class AkbalScene extends BaseContent
 	{
-		
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 		
 		public function AkbalScene()
 		{
@@ -51,7 +52,10 @@ public class AkbalScene extends BaseContent
 						buttFuck = rapeAkbal;
 					outputText("\n\nDo you rape him?");
 					//Rape / Don't Rape
-					EngineCore.simpleChoices("Butt-fuck", buttFuck, "Take Vaginally", vagoo, "Force Lick", vagooLick, "B.Titfuck", bikiniTits, "Leave", cleanupAfterCombat);
+					menu();
+					if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+					addButton(14, "Leave", cleanupAfterCombat);
+					//EngineCore.simpleChoices("Butt-fuck", buttFuck, "Take Vaginally", vagoo, "Force Lick", vagooLick, "B.Titfuck", bikiniTits, );
 					return;
 				}
 			}
