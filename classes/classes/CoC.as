@@ -254,7 +254,7 @@ public class CoC extends MovieClip
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_0.8n";
-			version = ver + " (<b>matrix Armory voucher, Goblins Overhaul (p.1), Alvina (p.1), Cave Wyrm and Hinezumi TF's, 3 more ring slots, character viewer update (p.1) and many other too many smaller things to meantion</b>)";
+			version = ver + " (<b>Matrix Armory voucher, Goblins Overhaul (p.1), Alvina (p.1), Cave Wyrm and Hinezumi TF's, 3 more ring slots, character viewer update (p.1) and many other too many smaller things to meantion</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);
