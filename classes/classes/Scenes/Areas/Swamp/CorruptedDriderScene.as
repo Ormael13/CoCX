@@ -1045,4 +1045,3 @@ use namespace CoC;
 		}
 	}
 }
-
