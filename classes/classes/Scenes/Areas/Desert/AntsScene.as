@@ -2760,4 +2760,3 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 		}
 	}
 }
-

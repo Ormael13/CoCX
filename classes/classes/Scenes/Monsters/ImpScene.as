@@ -2341,4 +2341,3 @@ use namespace CoC;
 		}
 	}
 }
-

@@ -4285,4 +4285,4 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 		}
 	}
 
-}
+}

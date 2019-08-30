@@ -38,11 +38,11 @@
         <!ELEMENT layer (#PCDATA)>
         <!ATTLIST layer
                 name CDATA #REQUIRED>
-        <!ELEMENT logic (show|switch|if|hide)*>
+        <!ELEMENT logic (show|switch|if|hide|set)*>
         <!ELEMENT switch (case|default)*>
         <!ATTLIST switch
                 value CDATA #IMPLIED>
-        <!ELEMENT case (show|switch|if|hide)*>
+        <!ELEMENT case (show|switch|if|hide|set)*>
         <!ATTLIST case
                 test CDATA #IMPLIED
                 value CDATA #IMPLIED
@@ -50,13 +50,17 @@
         <!ELEMENT show (#PCDATA)>
         <!ATTLIST show
                 part CDATA #REQUIRED>
-        <!ELEMENT default (show|switch|if|hide)*>
-        <!ELEMENT if (show|switch|if|hide)*>
+        <!ELEMENT default (show|switch|if|hide|set)*>
+        <!ELEMENT if (show|switch|if|hide|set)*>
         <!ATTLIST if
                 test CDATA #REQUIRED>
         <!ELEMENT hide (#PCDATA)>
         <!ATTLIST hide
                 part CDATA #REQUIRED>
+        <!ELEMENT set (#PCDATA)>
+        <!ATTLIST set
+                var CDATA #REQUIRED
+                value CDATA #IMPLIED>
         ]>
 <!--suppress EqualityComparisonWithCoercionJS, CheckTagEmptyBody -->
 <model name="demo" dir="./res/charview/" width="180" height="220" scale="1" originX="15" originY="10">
@@ -446,21 +450,21 @@
     </spritemap>
     <spritemap file="lewd.png">
         <cell rect="11,80,49,29" name="breasts/0" dx="69" dy="68"/>
-        <cell rect="11,110,49,29" name="breasts/B" dx="69" dy="68"/>
+        <cell rect="11,110,49,29" name="breasts/Bhuman" dx="69" dy="68"/>
         <cell rect="61,110,49,29" name="breasts/Bfur" dx="69" dy="68"/>
         <cell rect="111,110,49,29" name="breasts/Bchitin" dx="69" dy="68"/>
         <cell rect="161,110,49,29" name="breasts/Bbee" dx="69" dy="68"/>
-        <cell rect="211,110,49,29" name="breasts/Bscales" dx="69" dy="68"/>
+        <cell rect="211,110,49,29" name="breasts/Bpscales" dx="69" dy="68"/>
         <cell rect="261,110,49,29" name="breasts/Bscales" dx="69" dy="68"/>
-        <cell rect="311,110,49,29" name="breasts/Bskin2" dx="69" dy="68"/>
+        <cell rect="311,110,49,29" name="breasts/Borca" dx="69" dy="68"/>
         <cell rect="361,110,49,29" name="breasts/Bgoo" dx="69" dy="68"/>
-        <cell rect="11,140,49,29" name="breasts/D" dx="69" dy="68"/>
+        <cell rect="11,140,49,29" name="breasts/Dhuman" dx="69" dy="68"/>
         <cell rect="61,140,49,29" name="breasts/Dfur" dx="69" dy="68"/>
         <cell rect="111,140,49,29" name="breasts/Dchitin" dx="69" dy="68"/>
         <cell rect="161,140,49,29" name="breasts/Dbee" dx="69" dy="68"/>
         <cell rect="211,140,49,29" name="breasts/Dpscales" dx="69" dy="68"/>
         <cell rect="261,140,49,29" name="breasts/Dscales" dx="69" dy="68"/>
-        <cell rect="311,140,49,29" name="breasts/Dskin2" dx="69" dy="68"/>
+        <cell rect="311,140,49,29" name="breasts/Dorca" dx="69" dy="68"/>
         <cell rect="361,140,49,29" name="breasts/Dgoo" dx="69" dy="68"/>
     </spritemap>
     <spritemap file="tails.png">
@@ -564,13 +568,19 @@
 
         Syntax:
 
-        Type item = show | hide | if | switch
+        Type item = show | hide | if | switch | set
 
-        Element <show part=""/>
-            attribute [part] - key in spritesheet or spritemap
+        Element <set var="name">value</set> - set local variable
+            attribute [name] - variable name
+        or <set var="name" value="expr"/> - set local variable
+            attribute [name] - variable name
+            attribute [value] - expression to evaluate
 
-        Element <hide part=""/>
-            attribute [part] - full name or "layer/*" mask
+        Element <show part=""/> - show layer part
+            attribute [part] - key in spritesheet or spritemap. Use $var to insert value of variable 'var'
+
+        Element <hide part=""/> - hide layer part or whole layer
+            attribute [part] - full name or "layer/*" mask. Use $var to insert value of variable 'var'
 
         Element <if test=""> item* </if>
             attribute [test] - evaluated as expression
@@ -836,12 +846,9 @@
         <switch value="skin.coverage">
             <case values="Skin.COVERAGE_NONE,Skin.COVERAGE_HIGH,Skin.COVERAGE_COMPLETE">
                 <switch value="skin.type">
-                    <case values="Skin.PLAIN,Skin.AQUA_RUBBER_LIKE">
-                        <show part="head/human"/>
-                        <show part="torso/human"/>
-                        <show part="arms/human"/>
-                        <show part="arms_bg/human"/>
-                        <show part="legs/human"/>
+                    <case values="Skin.PLAIN,Skin.AQUA_RUBBER_LIKE,Skin.AQUA_SCALES">
+                        <set var="skin">human</set>
+                        <set var="skinx">human</set>
 
                         <if test="skin.base.pattern==Pattern.ORCA_UNDERBODY">
                             <hide part="head/*"/>
@@ -864,11 +871,8 @@
                         <show part="legs/fur"/>
                     </case>
                     <case values="Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES">
-                        <show part="head/scales"/>
-                        <show part="torso/scales"/>
-                        <show part="arms/scales"/>
-                        <show part="arms_bg/scales"/>
-                        <show part="legs/scales"/>
+                        <set var="skin">scales</set>
+                        <set var="skinx">scales</set>
                     </case>
                     <case values="Skin.GOO">
                         <show part="head/goo"/>
@@ -884,55 +888,39 @@
                         <show part="head/chitin"/>
                         <show part="torso/chitin"/>
                         <if test="skin.coat.pattern==Pattern.BEE_STRIPES">
-                            <hide part="head/*"/>
-                            <show part="head/bee"/>
-                            <hide part="torso/*"/>
-                            <show part="torso/bee"/>
-                            <hide part="arms/*"/>
-                            <show part="arms/bee"/>
-                            <hide part="arms_bg/*"/>
-                            <show part="arms_bg/bee"/>
+                            <set var="skinx">bee</set>
                         </if>
-                        <show part="arms/chitin"/>
-                        <show part="arms_bg/chitin"/>
-                        <show part="legs/chitin"/>
                     </case>
                     <default>
-                        <show part="head/human"/>
-                        <show part="torso/human"/>
-                        <show part="arms/human"/>
-                        <show part="arms_bg/human"/>
-                        <show part="legs/human"/>
+                        <set var="skin">human</set>
+                        <set var="skinx">human</set>
                     </default>
                 </switch>
             </case>
             <case values="Skin.COVERAGE_LOW,Skin.COVERAGE_MEDIUM">
                 <switch value="skin.coat.type">
                     <case values="Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES">
-                        <show part="head/pscales"/>
-                        <show part="torso/pscales"/>
-                        <show part="arms/pscales"/>
-                        <show part="arms_bg/pscales"/>
-                        <show part="legs/pscales"/>
+                        <set var="skin">pscales</set>
+                        <set var="skinx">pscales</set>
                     </case>
                     <!--TODO partial fur/chitin/bark/moss-->
                     <default>
-                        <show part="head/human"/>
-                        <show part="torso/human"/>
-                        <show part="arms/human"/>
-                        <show part="arms_bg/human"/>
-                        <show part="legs/human"/>
+                        <set var="skin">human</set>
+                        <set var="skinx">human</set>
                     </default>
                 </switch>
             </case>
             <default>
-                <show part="head/human"/>
-                <show part="torso/human"/>
-                <show part="arms/human"/>
-                <show part="arms_bg/human"/>
-                <show part="legs/human"/>
+                <set var="skin">human</set>
+                <set var="skinx">human</set>
             </default>
         </switch>
+        <show part="head/$skinx"/>
+        <show part="torso/$skinx"/>
+        <show part="arms/$skinx"/>
+        <show part="arms_bg/$skinx"/>
+        <show part="legs/$skinx"/>
+
         <switch value="faceType">
             <case values="Face.HUMAN">
                 <show part="face/human"/>

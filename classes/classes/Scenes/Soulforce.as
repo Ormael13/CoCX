@@ -3260,4 +3260,4 @@ public function FightAurora():void {
 			}
 		}
 	}
-}
+}

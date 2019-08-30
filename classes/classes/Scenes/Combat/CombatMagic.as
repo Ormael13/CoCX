@@ -2991,4 +2991,3 @@ public class CombatMagic extends BaseCombatContent {
 
 }
 }
-
