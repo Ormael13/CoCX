@@ -63,6 +63,12 @@ public class PerkMenu extends BaseContent {
 	}
 
 	public function doubleAttackOptions():void {
+		const NONE:int = 0;
+		const FIRE:int = 1;
+		const ICE :int = 2;
+		const LIGHTNING:int = 3;
+		const DARKNESS:int = 4;
+        var elementalMelee:Function = curry(setFlag, doubleAttackOptions2, kFLAGS.ELEMENTAL_MELEE);
 		var toggleflag:Function = curry(toggleFlag,doubleAttackOptions);
 		clearOutput();
 		menu();
@@ -100,6 +106,18 @@ public class PerkMenu extends BaseContent {
 			outputText("\n\nIf you can naturaly produce venom then you could add it effects to weapon. (Working only with small weapons)");
 			if (flags[kFLAGS.ENVENOMED_MELEE_ATTACK] == 0) outputText("\n\nVenom effect added: <b>No</b>");
 			if (flags[kFLAGS.ENVENOMED_MELEE_ATTACK] == 1) outputText("\n\nVenom effect added: <b>Yes</b>");
+		}
+		if (player.findPerk(PerkLib.SwiftCasting) >= 0) {
+			outputText("\n\nIf you learned specific spells you could cast them after doing melee attack. (Working only with one handed weapons and no shield)");
+			outputText("\n\nSpell casted: <b>");
+			switch(flags[kFLAGS.ELEMENTAL_MELEE]){
+				case NONE: outputText("None");break;
+				case FIRE: outputText("Whitefire");break;
+				case ICE : outputText("Ice Spike") ;break;
+				case LIGHTNING: outputText("Lightning Bolt");break;
+				case DARKNESS: outputText("Darkness Shard");break;
+			}
+			outputText("</b>");
 		}
 
         var maxCurrentAttacks:int = combat.maxCurrentAttacks();
@@ -148,22 +166,21 @@ public class PerkMenu extends BaseContent {
         else addButton(14, "Back", displayPerks);
 	}
 	public function doubleAttackOptions2():void {
+		const NONE:int = 0;
+		const FIRE:int = 1;
+		const ICE :int = 2;
+		const LIGHTNING:int = 3;
+		const DARKNESS:int = 4;
 		var toggleflag:Function = curry(toggleFlag, doubleAttackOptions2);
-		var zerkingStyle:Function = curry(setFlag,doubleAttackOptions2,kFLAGS.ZERKER_COMBAT_MODE);
-		var poisoningStyle:Function = curry(setFlag,doubleAttackOptions2,kFLAGS.ENVENOMED_MELEE_ATTACK);
+		var zerkingStyle:Function = curry(setFlag, doubleAttackOptions2, kFLAGS.ZERKER_COMBAT_MODE);
+		var poisoningStyle:Function = curry(setFlag, doubleAttackOptions2, kFLAGS.ENVENOMED_MELEE_ATTACK);
+        var elementalMelee:Function = curry(setFlag, doubleAttackOptions2, kFLAGS.ELEMENTAL_MELEE);
 		menu();
-		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) {
-			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 0) addButton(0, "None", zerkingStyle,0);
-			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 1) addButton(1, "Berserking", zerkingStyle,1);
-			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 2) addButton(2, "Lustzerking", zerkingStyle,2);
-			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 3) addButton(3, "Both", zerkingStyle,3);
-		}
-		if (player.findPerk(PerkLib.JobBeastWarrior) >= 0) {
-			if (flags[kFLAGS.FERAL_COMBAT_MODE] != 0) addButton(5, "Normal", toggleflag, kFLAGS.FERAL_COMBAT_MODE, false);
-			if (((player.weaponName == "fists" && player.haveNaturalClaws()) || player.haveNaturalClawsTypeWeapon()) && flags[kFLAGS.FERAL_COMBAT_MODE] != 1) addButton(6, "Feral", toggleflag , kFLAGS.FERAL_COMBAT_MODE, true);
-			else addButtonDisabled(6, "Feral", "You not meet all req. to use this.");
-		}
-		if (player.findPerk(PerkLib.Poisoning) >= 0 && flags[kFLAGS.ENVENOMED_MELEE_ATTACK] != 0) addButton(7, "None", toggleflag,kFLAGS.ENVENOMED_MELEE_ATTACK,false);
+		if (player.findPerk(PerkLib.SwiftCasting) >= 0 && flags[kFLAGS.ELEMENTAL_MELEE] != 0) addButton(0, "None", elementalMelee,NONE);
+		if (player.findPerk(PerkLib.SwiftCasting) >= 0 && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && flags[kFLAGS.ELEMENTAL_MELEE] != 1) addButton(1, "Fire", elementalMelee,FIRE);
+		if (player.findPerk(PerkLib.SwiftCasting) >= 0 && player.hasStatusEffect(StatusEffects.KnowsIceSpike) && flags[kFLAGS.ELEMENTAL_MELEE] != 2) addButton(2, "Ice", elementalMelee,ICE);
+		if (player.findPerk(PerkLib.SwiftCasting) >= 0 && player.hasStatusEffect(StatusEffects.KnowsLightningBolt) && flags[kFLAGS.ELEMENTAL_MELEE] != 3) addButton(6, "Lightning", elementalMelee,LIGHTNING);
+		if (player.findPerk(PerkLib.SwiftCasting) >= 0 && player.hasStatusEffect(StatusEffects.KnowsDarknessShard) && flags[kFLAGS.ELEMENTAL_MELEE] != 4) addButton(7, "Darkness", elementalMelee,DARKNESS);
 		if (player.findPerk(PerkLib.Poisoning) >= 0
 			&& (player.tailType == Tail.BEE_ABDOMEN
 			|| player.tailType == Tail.SCORPION
@@ -171,7 +188,19 @@ public class PerkMenu extends BaseContent {
 			|| player.faceType == Face.SNAKE_FANGS
 			|| player.faceType == Face.SPIDER_FANGS)
 			&& flags[kFLAGS.ENVENOMED_MELEE_ATTACK] != 1) {
-            addButton(8, "Venom", toggleflag,kFLAGS.ENVENOMED_MELEE_ATTACK,true);
+            addButton(4, "Venom", toggleflag,kFLAGS.ENVENOMED_MELEE_ATTACK,true);
+		}
+		if (player.findPerk(PerkLib.JobBeastWarrior) >= 0) {
+			if (flags[kFLAGS.FERAL_COMBAT_MODE] != 0) addButton(5, "Normal", toggleflag, kFLAGS.FERAL_COMBAT_MODE, false);
+			if (((player.weaponName == "fists" && player.haveNaturalClaws()) || player.haveNaturalClawsTypeWeapon()) && flags[kFLAGS.FERAL_COMBAT_MODE] != 1) addButton(8, "Feral", toggleflag , kFLAGS.FERAL_COMBAT_MODE, true);
+			else addButtonDisabled(8, "Feral", "You not meet all req. to use this.");
+		}
+		if (player.findPerk(PerkLib.Poisoning) >= 0 && flags[kFLAGS.ENVENOMED_MELEE_ATTACK] != 0) addButton(9, "None", toggleflag,kFLAGS.ENVENOMED_MELEE_ATTACK,false);
+		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) {
+			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 0) addButton(10, "None", zerkingStyle,0);
+			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 1) addButton(11, "Berserking", zerkingStyle,1);
+			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 2) addButton(12, "Lustzerking", zerkingStyle,2);
+			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 3) addButton(13, "Both", zerkingStyle,3);
 		}
 		addButton(14, "Back", doubleAttackOptions);
 	}

@@ -193,6 +193,8 @@ public class Achievements extends BaseContent
 			addAchievement("Gandalf", kACHIEVEMENTS.COMBAT_GANDALF, "Learn all white spells.");
 			addAchievement("Sauron", kACHIEVEMENTS.COMBAT_SAURON, "Learn all black spells.");
 			addAchievement("Merlin", kACHIEVEMENTS.COMBAT_WIZARD, "Learn all black and white spells from spell books.");
+			//learn all grey spells
+			//learn all white/black/grey spells
 			addAchievement("Cum Cannon", kACHIEVEMENTS.COMBAT_CUM_CANNON, "Cum in the middle of battle.");
 			addAchievement("How Do I Shot Web?", kACHIEVEMENTS.COMBAT_SHOT_WEB, "Fire your webbings at your opponent.");
 			addAchievement("Pain", kACHIEVEMENTS.COMBAT_PAIN, "Deal 50 damage in one hit.");
@@ -221,7 +223,7 @@ public class Achievements extends BaseContent
 			addAchievement("The Lovable Snowman", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_III, "Have Nieve as lover (Christmas/Winter)", "", true);
 			addAchievement("Will You Be My Valentine?", kACHIEVEMENTS.HOLIDAY_VALENTINE, "Visit the Wet Bitch during Valentine's day. (Valentine)", "", true);
 			
-			titleAchievementSection("Survival/Realistic Mode"); //5 achievements
+			titleAchievementSection("Survival/Realistic Mode"); //4 achievements
 			addAchievement("Tastes Like Chicken", kACHIEVEMENTS.REALISTIC_TASTES_LIKE_CHICKEN, "Refill your hunger for the first time.");
 			addAchievement("Champion Needs Food Badly", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD, "Instantly refill your hunger from 0 to 100 in one go.");
 			//addAchievement("Gourmand", kACHIEVEMENTS.REALISTIC_GOURMAND, "Refill hunger from 5 different sources.");
@@ -231,9 +233,17 @@ public class Achievements extends BaseContent
 			titleAchievementSection("Epic"); //10 achievements
 			addAchievement("xXx2: The Next Level", kACHIEVEMENTS.EPIC_XXX2_THE_NEXT_LEVEL, "Start NG+ (or higher) game.", "", true);
 			addAchievement("xXx: The Return of Mareth Champion", kACHIEVEMENTS.EPIC_XXX_THE_RETURN_OF_MARETH_CHAMPION, "Start NG++ (or higher) game.", "", true);
+			addAchievement("xXx 4", kACHIEVEMENTS.EPIC_XXX_4, "Start NG+++ (or higher) game.", "", true);
+			//addAchievement("xXx 4", kACHIEVEMENTS.EPIC_XXX4, "Start NG++++ (or higher) game.", "", true);
+			//addAchievement("xXx 4", kACHIEVEMENTS.EPIC_XXX4, "Start NG+++++ (or higher) game.", "", true);
 			addAchievement("Guardian of Notre-Dame", kACHIEVEMENTS.EPIC_GUARDIAN_OF_NOTRE_DAME, "Become Gargoyle.", "", true);
 			addAchievement("The Devil Wears Prada", kACHIEVEMENTS.EPIC_THE_DEVIL_WEARS_PRADA, "Became Devil.", "", true);
 			//odblokowanie pierwszego animal ancestory starting bonus at chara creation
+			//znalezienie ewolującą broń
+			//znalezienie ewolującą zbroje
+			//znalezienie 1 ewolującego przedmiotu
+			//znalezienie 2 ewolujących przedmiotów
+			//znalezienie 4 ewolujących przedmiotów
 			addAchievement("Achievementception", kACHIEVEMENTS.EPIC_ACHIEVEMENTCEPTION, "Unlocking 10 achievements.", "", true);
 			addAchievement("Achievement within Achievement", kACHIEVEMENTS.EPIC_ACHIEVEMENT_WITHIN_ACHIEVEMENT, "Unlocking 30 achievements.", "", true);
 			addAchievement("Achievements - Going Deeper (1st layer)", kACHIEVEMENTS.EPIC_ACHIEVEMENTS_GOING_DEEPER_1L, "Unlocking 60 achievements.", "", true);
@@ -352,7 +362,8 @@ public class Achievements extends BaseContent
 			addAchievement("Normal Chimera", kACHIEVEMENTS.GENERAL_NORMAL_CHIMERA, "Have at least 8 racial internal mutation perks.");
 			addAchievement("Greater Chimera", kACHIEVEMENTS.GENERAL_GREATER_CHIMERA, "Have at least 16 racial internal mutation perks.");
 			addAchievement("Elder Chimera", kACHIEVEMENTS.GENERAL_ELDER_CHIMERA, "Have at least 32 racial internal mutation perks.");
-			addAchievement("Ultimate Lifeform", kACHIEVEMENTS.GENERAL_ULTIMATE_LIFEFORM, "Have at least 64 racial internal mutation perks.", "", true);
+			addAchievement("Legendary Chimera", kACHIEVEMENTS.GENERAL_LEGENDARY_CHIMERA, "Have at least 64 racial internal mutation perks.");
+			addAchievement("Ultimate Lifeform", kACHIEVEMENTS.GENERAL_ULTIMATE_LIFEFORM, "Have at least 128 racial internal mutation perks.", "", true);
 			
 			if (achievementsTotal > 0) {
 				player.createStatusEffect(StatusEffects.AchievementsNormalShadowTotal, achievementsEarned, achievementsShadowEarned, achievementsTotalCurrentlyUnlocked, 0);

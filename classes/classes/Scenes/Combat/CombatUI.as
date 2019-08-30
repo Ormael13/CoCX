@@ -151,7 +151,8 @@ public class CombatUI extends BaseCombatContent {
 		}
 		else btnTease.show("Tease", combat.teaseAttack, "Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.");
 		btnWait.show("Wait", combat.wait, "Take no action for this round.  Why would you do this?  This is a terrible idea.");
-		btnRun.show("Run", combat.runAway, "Choosing to run will let you try to escape from your enemy. However, it will be hard to escape enemies that are faster than you and if you fail, your enemy will get a free attack.");
+		if (monster.hasStatusEffect(StatusEffects.CreepingDoom)) btnRun.show("Struggle", combat.struggleCreepingDoom, "Shake away the pests.");
+		else btnRun.show("Run", combat.runAway, "Choosing to run will let you try to escape from your enemy. However, it will be hard to escape enemies that are faster than you and if you fail, your enemy will get a free attack.");
 		
 		// Modifications - full or partial replacements
 		if (isPlayerBound()) {
@@ -252,6 +253,16 @@ public class CombatUI extends BaseCombatContent {
 				}
 			}
 			addButton(4, "Release", combat.PussyLeggoMyEggo);
+		} else if (monster.hasStatusEffect(StatusEffects.GrabBear)) {
+			menu();
+			addButton(0, "Hug", combat.bearHug).hint("Crush your opponent with a bear hug. \n\nFatigue Cost: " + physicalCost(30) + "");
+			if (player.hasPerk(PerkLib.HollowFangsEvolved)) {
+				addButton(3, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
+				if (player.fatigueLeft() <= combat.physicalCost(20)) {
+					button(3).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
+				}
+			}
+			addButton(4, "Release", combat.BearLeggoMyEggo);
 		} else if (player.hasPerk(PerkLib.FirstAttackElementals) && flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] != 1) {
 			menu();
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) addButton(0, "Air", combat.baseelementalattacks, Combat.AIR);
@@ -379,10 +390,10 @@ public class CombatUI extends BaseCombatContent {
 						break;
 					case 5:
 						btnContinue.show("Continue", combat.magic.spellPolarMidnight, "Continue casting Polar Midnight spell.");
-						break;/*
-					case 6:
-						btnContinue.show("Continue", combat.magic., "Continue casting Meteor Shower spell.");
 						break;
+					case 6:
+						btnContinue.show("Continue", combat.magic.spellMeteorShower, "Continue casting Meteor Shower spell.");
+						break;/*
 					case 7:
 						btnContinue.show("Continue", combat.magic., "Continue casting  spell.");
 						break;

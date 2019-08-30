@@ -22,6 +22,7 @@ public class JewelryShop extends Shop {
         addButton(1, "Special rings", specialRings);
         addButton(2, "Ench. rings", enchantedRings1);
         addButton(3, "Ench. rings", enchantedRings2);
+        addButton(4, "Other materials", otherMaterials);
 		addButton(5, "Other jewelries", normalRings2);
 		addButton(6, "Other jewelries", normalRings3);
 		//3 i 4 for necklaces and head accesories - maybe more buttons then move Jewelry Box i statue do niższego rzedu
@@ -122,6 +123,16 @@ public class JewelryShop extends Shop {
         addButton(button++, jewelries.POISRNG.shortName, confirmBuy, jewelries.POISRNG);
         addButton(button++, jewelries.LUSTRNG.shortName, confirmBuy, jewelries.LUSTRNG);
         addButton(14,"Back",inside);
+    }
+    private function otherMaterials():void {
+        clearOutput();
+        //display("normalRings");
+        menu();
+        var button:int = 0;
+        addButton(button++, useables.AMETIST.shortName, confirmBuy, useables.AMETIST);
+        addButton(button++, useables.DIAMOND.shortName, confirmBuy, useables.DIAMOND);
+        addButton(button++, useables.S_INGOT.shortName, confirmBuy, useables.S_INGOT);
+        addButton(14, "Back", inside);
     }
 }
 }

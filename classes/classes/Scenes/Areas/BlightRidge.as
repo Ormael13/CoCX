@@ -63,13 +63,17 @@ use namespace CoC;
 				return;
 			}
 			//Alvina
-			if (flags[kFLAGS.ALVINA_FOLLOWER] > 8 && flags[kFLAGS.ALVINA_FOLLOWER] < 12 && SceneLib.dungeons.checkDeepCaveClear()) {
+			if (((rand(10) == 0 || flags[kFLAGS.ALVINA_FOLLOWER] > 8) && flags[kFLAGS.ALVINA_FOLLOWER] < 12) && SceneLib.dungeons.checkDeepCaveClear() && rand(2) == 0) {
 				SceneLib.alvinaFollower.alvinaThirdEncounter();
 				return;
 			}
 			//Siegweird
 			if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] < 2 && rand(2) == 0) {
 				SceneLib.siegweirdFollower.siegweirdFirstEncounter();
+				return;
+			}
+			if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 2.5 && rand(2) == 0) {
+				SceneLib.siegweirdFollower.siegweirdRepeatEncounterPostFight();
 				return;
 			}
 			if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 2 && rand(2) == 0) {

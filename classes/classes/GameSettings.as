@@ -147,6 +147,14 @@ public class GameSettings extends BaseContent {
 
 		outputText("\n\n");
 
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] >= 1) {
+			outputText("Spells Cooldowns: <font color=\"#008000\"><b>Off</b></font>\n Damage dealing spells have cooldowns and they dealing more damage than in default cooldownless variant.");
+		}
+		else
+			outputText("Spells Cooldowns: <font color=\"#800000\"><b>On</b></font>\n Damage dealing spells not have cooldowns and they keep their default power.");
+
+		outputText("\n\n");
+
 		if (flags[kFLAGS.ITS_EVERY_DAY]) {
 			outputText("Eternal Holiday Mode: <font color=\"#008000\"><b>ON</b></font>\n All holiday events like Eastern/X-mas and etc. would happen at any day of the year.");
 		}
@@ -210,6 +218,7 @@ public class GameSettings extends BaseContent {
 		addButton(1, "No Blood Toggle", toggleNOGORE).hint("Toggles No Blood Mode. If enabled, scenes could have more grungesome/bloody variants showed. Not for the weak of heart players.");
 		addButton(3, "Wis scalling", toggleWisScaling).hint("Toggles Wisdom scalling for all attacks using it. If enabled, wisdom scaling would be less randomn with big generaly a bit higher values on averange.");
 		addButton(4, "Int scalling", toggleIntScaling).hint("Toggles Intelligance scalling for all attacks using it. If enabled, intelligence scaling would be less randomn with big generaly a bit higher values on averange.");
+		addButton(5, "Spells Cooldowns", toggleSpellsCooldowns).hint("Toggles Spells cooldowns. If enabled, spells would not have cooldowns like before but they will not be any stronger.");
 		addButton(14, "Back", settingsScreenGameSettings);
 	}
 
@@ -326,6 +335,12 @@ public class GameSettings extends BaseContent {
 	public function toggleIntScaling():void {
 		if (flags[kFLAGS.INTELLIGENCE_SCALLING] < 1) flags[kFLAGS.INTELLIGENCE_SCALLING] = 1;
 		else flags[kFLAGS.INTELLIGENCE_SCALLING] = 0;
+		settingsScreenGameSettings2();
+	}
+
+	public function toggleSpellsCooldowns():void {
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] < 1) flags[kFLAGS.SPELLS_COOLDOWNS] = 1;
+		else flags[kFLAGS.SPELLS_COOLDOWNS] = 0;
 		settingsScreenGameSettings2();
 	}
 

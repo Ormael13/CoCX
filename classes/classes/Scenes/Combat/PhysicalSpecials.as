@@ -85,6 +85,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.canPounce() && !monster.hasPerk(PerkLib.EnemyGroupType)) {
 				buttons.add("Pounce", catPounce).hint("Pounce and rend your enemy using your claws, this initiate a grapple combo.");
 			}
+			//Grab & Slam
+			if (player.bearpandaScore() >= 10 && !monster.hasPerk(PerkLib.EnemyGroupType)) {
+				buttons.add("Grab", bearGrab).hint("Attempt to grab the opponent in your powerful paws. Does not work on opponent taller than you.");
+				bd = buttons.add("Slam", bearSlam).hint("Furiously slam your target with your powerful paw, staggering and stunning it.");
+				if (player.hasStatusEffect(StatusEffects.CooldownSlamBear)) {
+					bd.disable("<b>You need more time before you can perform Slam again.</b>\n\n");
+				}
+			}
 			//Kick attackuuuu
 			if (player.isTaur() || player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.BUNNY || player.lowerBody == LowerBody.KANGAROO) {
 				bd = buttons.add("Kick", kick).hint("Attempt to kick an enemy using your powerful lower body.");
@@ -2591,6 +2599,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		enemyAI();
 	}
+	
 	public function catPounce():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
@@ -2636,7 +2645,144 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		enemyAI();
 	}
-
+	
+	public function bearGrab():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		clearOutput();
+		if (player.fatigue + physicalCost(10) > player.maxFatigue()) {
+			clearOutput();
+			outputText("You just don't have the energy to grab at anyone right now...");
+			//Gone		menuLoc = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		if (monster.short == "pod") {
+			clearOutput();
+			outputText("You can't grab something you're trapped inside of!");
+			//Gone		menuLoc = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		if (monster.tallness > player.tallness) {
+			clearOutput();
+			outputText("The opponent is too big for you to grapple it.");
+			//Gone		menuLoc = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		fatigue(10, USEFATG_PHYSICAL);
+		//Amily!
+		if (monster.hasStatusEffect(StatusEffects.Concentration)) {
+			clearOutput();
+			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
+			enemyAI();
+			return;
+		}
+		outputText("You attempt to slam both of your powerful forepaws on " + monster.a + monster.short + ". ");
+		//WRAP IT UPPP
+		if (40 + rand(player.spe) > monster.spe) {
+			outputText("You land both paws on " + monster.a + monster.short + " with brutal power using your claws to grab " + monster.pronoun2 + ".");
+			monster.createStatusEffect(StatusEffects.GrabBear, 4 + rand(2),0,0,0);
+		}
+		//Failure
+		else outputText("Your opponent seeing it coming dodge to the side as you smash the ground where " + monster.pronoun1 + " used to stand.");
+		outputText("\n\n");
+		enemyAI();
+	}
+	
+	public function bearSlam():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		clearOutput();
+		if ((player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(60) > player.maxFatigue())) || (!player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(30) > player.maxFatigue()))) {
+			clearOutput();
+			outputText("You just don't have the energy to slap anyone right now...");
+			//Gone		menuLoc = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		if (monster.short == "pod") {
+			clearOutput();
+			outputText("You can't slap something you're trapped inside of!");
+			//Gone		menuLoc = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		if (player.hasPerk(PerkLib.PhantomStrike)) fatigue(60, USEFATG_PHYSICAL);
+		else fatigue(30, USEFATG_PHYSICAL);
+		player.createStatusEffect(StatusEffects.CooldownSlamBear,8,0,0,0);
+		//Amily!
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
+			clearOutput();
+			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
+			enemyAI();
+			return;
+		}
+		var damage:Number = 0;
+		//str bonuses
+		damage += player.str;
+		damage += scalingBonusStrength();
+		//addictive bonuses
+		if (player.hasPerk(PerkLib.IronFistsI)) damage += 10;
+		if (player.hasPerk(PerkLib.IronFistsII)) damage += 10;
+		if (player.hasPerk(PerkLib.IronFistsIII)) damage += 10;
+		if (player.hasPerk(PerkLib.IronFistsIV)) damage += 10;
+		if (player.hasPerk(PerkLib.IronFistsV)) damage += 10;
+		if (player.hasPerk(PerkLib.IronFistsVI)) damage += 10;
+		if (player.hasPerk(PerkLib.JobBrawler)) damage += (5 * (1 + player.newGamePlusMod()));
+		if (player.hasPerk(PerkLib.JobMonk)) damage += (10 * (1 + player.newGamePlusMod()));
+		if (player.hasStatusEffect(StatusEffects.Berzerking)) damage += (30 + (15 * player.newGamePlusMod()));
+		if (player.hasStatusEffect(StatusEffects.Lustzerking)) damage += (30 + (15 * player.newGamePlusMod()));
+		//multiplicative bonuses
+		if (player.hasPerk(PerkLib.HoldWithBothHands)) damage *= 1.2;
+		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
+		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
+		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
+		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
+		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+		if (player.armor == armors.SPKIMO) damage *= 1.2;
+		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
+		damage *= 1.6;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combat.combatPhysicalCritical();
+		if (player.hasPerk(PerkLib.Blademaster)) critChance += 5;
+		if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
+		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		damage = doDamage(damage);
+		outputText("You slam " + monster.a + monster.short + " with your full strength, crushing it under your weight. " + monster.capitalA + monster.short + " tries to recover but is stunned and grievously wounded by your assault. (<b><font color=\"#800000\">" + damage + "</font></b>)");
+		if (player.hasPerk(PerkLib.PhantomStrike)) {
+			damage = doDamage(damage);
+			outputText(" (<b><font color=\"#800000\">" + damage + "</font></b>)");
+			damage *= 2;
+		}
+		if (crit == true) {
+		outputText(" <b>*Critical Hit!*</b>");
+		if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
+		}
+		if (crit == false && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
+			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
+		}
+		checkAchievementDamage(damage);
+		outputText("\n\n");
+		combat.heroBaneProc(damage);
+		monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
+		outputText("\n\n");
+		enemyAI();
+	}
 
 	public function skyPounce():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
@@ -2709,6 +2855,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 			damage = Math.round(damage);
 			damage = doDamage(damage);
+			if (player.hasPerk(PerkLib.PhantomStrike)) {
+				damage = doDamage(damage);
+				damage *= 2;
+			}
 			outputText("You growl menacingly, and fold your wings, as you dive into " + monster.a + monster.short + " clawing at " + monster.pronoun2 + " body and leaving deep bleeding wounds dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!. You’re now grappling with your target ready to tear it to shreds.");
 			if (crit == true) {
 			outputText(" <b>*Critical Hit!*</b>");

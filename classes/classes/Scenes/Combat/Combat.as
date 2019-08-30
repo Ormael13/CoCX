@@ -730,8 +730,12 @@ public function unarmedAttack():Number {
 	}
 	if (player.hasStatusEffect(StatusEffects.CrinosShape) && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) unarmed *= 1.1;
 	if (player.findPerk(PerkLib.Lycanthropy) >= 0) unarmed += 8 * (1 + player.newGamePlusMod());
+	if (player.arms.type == Arms.MANTIS) unarmed += 15 * (1 + player.newGamePlusMod());
+	if (player.arms.type == Arms.YETI || player.arms.type == Arms.CAT) unarmed += 5 * (1 + player.newGamePlusMod());
 	if (player.arms.type == Arms.HINEZUMI) unarmed += 4 * (1 + player.newGamePlusMod());
+	if (player.arms.type == Arms.BEAR) unarmed += 5 * (1 + player.newGamePlusMod());
 	if (player.lowerBody == LowerBody.HINEZUMI) unarmed += 4 * (1 + player.newGamePlusMod());
+	if (player.lowerBody == LowerBody.BEAR) unarmed += 5 * (1 + player.newGamePlusMod());
 	if (player.tailType == Tail.HINEZUMI) unarmed += 4 * (1 + player.newGamePlusMod());
 	if (player.hasPerk(PerkLib.Brawn)) unarmedMulti += .05;
 	if (player.hasPerk(PerkLib.ImprovedBrawn)) unarmedMulti += .1;
@@ -3145,7 +3149,7 @@ public function meleeDamageAcc():void {
 				if (excaliburLustSelf > 0) dynStats("lus", -excaliburLustSelf);
 			}
 			//Weapon Procs!
-			WeaponStatusProcs();
+			WeaponMeleeStatusProcs();
 			if (player.weapon == weapons.RIPPER2) {
 				outputText("  Reeling in pain " + monster.a + monster.short + " begins to burn.");
 				monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
@@ -3277,6 +3281,32 @@ public function meleeDamageAcc():void {
 		checkAchievementDamage(damage);
 		WrathWeaponsProc();
 		heroBaneProc(damage);
+		if (player.hasPerk(PerkLib.SwiftCasting) && player.isOneHandedWeapons() && flags[kFLAGS.ELEMENTAL_MELEE] > 0) {
+			if (flags[kFLAGS.ELEMENTAL_MELEE] == 1 && player.mana >= spellCostWhite(40)) {
+				if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40)) player.HP -= spellCostWhite(40);
+				else useMana(40, 5);
+				outputText("\n");
+				magic.spellWhitefire2();
+			}
+			if (flags[kFLAGS.ELEMENTAL_MELEE] == 2 && player.mana >= spellCostBlack(40)) {
+				if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
+				else useMana(40, 6);
+				outputText("\n");
+				magic.spellIceSpike2();
+			}
+			if (flags[kFLAGS.ELEMENTAL_MELEE] == 3 && player.mana >= spellCostWhite(40)) {
+				if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40)) player.HP -= spellCostWhite(40);
+				else useMana(40, 5);
+				outputText("\n");
+				magic.spellLightningBolt2();
+			}
+			if (flags[kFLAGS.ELEMENTAL_MELEE] == 4 && player.mana >= spellCostBlack(40)) {
+				if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
+				else useMana(40, 6);
+				outputText("\n");
+				magic.spellDarknessShard2();
+			}
+		}
 	}
 	else {
 		if (monster is DisplacerBeast) outputText("\n\nThe displacer beast teleports, dodging your attack.\n");
@@ -3310,7 +3340,7 @@ public function meleeDamageAcc():void {
 	enemyAI();
 }
 
-public function WeaponStatusProcs():void {
+public function WeaponMeleeStatusProcs():void {
 	var stun:Boolean = false;
 	var stunChance:int = 0;
 	var bleed:Boolean = false;
@@ -3367,6 +3397,15 @@ public function WeaponStatusProcs():void {
 			else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your [weapon] leave behind.");
 		}
 	}
+	if (player.hasPerk(PerkLib.VampiricBlade)) {
+		if (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small") HPChange(Math.round(player.maxHP() * 0.005), false);
+		else if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large") HPChange(Math.round(player.maxHP() * 0.02), false);
+		else if (player.weaponPerk == "Massive") HPChange(Math.round(player.maxHP() * 0.04), false);
+		else HPChange(Math.round(player.maxHP() * 0.01), false);
+	}
+}
+public function WeaponRangeStatusProcs():void {
+	
 }
 
 public function WrathWeaponsProc():void {
@@ -3420,18 +3459,23 @@ public function combatMiss():Boolean {
 }
 public function combatParry():Boolean {
 	var parryChance:int = 0;
-	if (player.hasPerk(PerkLib.Parry) && player.spe >= 50 && player.str >= 50 && player.weapon != WeaponLib.FISTS) {
-		if (player.spe <= 100) parryChance += (player.spe - 50) / 5;
-		else parryChance += 10;
-		if (player.hasPerk(PerkLib.BladeBarrier) && (player.weaponPerk == "Dual" || player.weaponPerk == "Dual Large")) parryChance += 15;
-	}
-	if (player.weaponPerk == "Massive") parryChance += 5;
-	if (player.weaponName == "Undefeated King's Destroyer") parryChance += 15;
-	if (player.hasPerk(PerkLib.DexterousSwordsmanship)) parryChance += 10;
-	if (player.hasPerk(PerkLib.CatchTheBlade) && player.spe >= 50 && player.shieldName == "nothing" && player.isFistOrFistWeapon()) parryChance += 15;
-	if (player.hasPerk(PerkLib.Backlash) && player.shieldName == "nothing" && player.isFistOrFistWeapon()) parryChance += 5;
+	parryChance += combatParry2();
 	return rand(100) <= parryChance;
 //	trace("Parried!");
+}
+public function combatParry2():Number {
+	var parryChance2:int = 0;
+	if (player.hasPerk(PerkLib.Parry) && player.spe >= 50 && player.str >= 50 && player.weapon != WeaponLib.FISTS) {
+		if (player.spe <= 100) parryChance2 += (player.spe - 50) / 5;
+		else parryChance2 += 10;
+		if (player.hasPerk(PerkLib.BladeBarrier) && (player.weaponPerk == "Dual" || player.weaponPerk == "Dual Large")) parryChance2 += 15;
+	}
+	if (player.weaponPerk == "Massive") parryChance2 += 5;
+	if (player.weaponName == "Undefeated King's Destroyer") parryChance2 += 15;
+	if (player.hasPerk(PerkLib.DexterousSwordsmanship)) parryChance2 += 10;
+	if (player.hasPerk(PerkLib.CatchTheBlade) && player.spe >= 50 && player.shieldName == "nothing" && player.isFistOrFistWeapon()) parryChance2 += 15;
+	if (player.hasPerk(PerkLib.Backlash) && player.shieldName == "nothing" && player.isFistOrFistWeapon()) parryChance2 += 5;
+	return parryChance2;
 }
 public function combatPhysicalCritical():Number {
 	var critPChance:int = 0;
@@ -3442,6 +3486,10 @@ public function combatPhysicalCritical():Number {
 	if (player.hasPerk(PerkLib.GrandTactician) && player.inte >= 150) {
 		if (player.inte <= 300) critPChance += (player.inte - 150) / 5;
 		if (player.inte > 300) critPChance += 30;
+	}
+	if (player.hasPerk(PerkLib.WarCaster) && player.inte >= 50) {
+		if (player.inte <= 300) critPChance += (player.inte - 50) / 10;
+		if (player.inte > 300) critPChance += 25;
 	}
 	if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critPChance += 5;
 	if (player.hasPerk(PerkLib.Blademaster) && player.shield == ShieldLib.NOTHING && (player.isSwordTypeWeapon() || player.isDuelingTypeWeapon() || player.isAxeTypeWeapon())) critPChance += 5;
@@ -3461,6 +3509,10 @@ public function combatMagicalCritical():Number {
 	if (player.hasPerk(PerkLib.AdvancedMagiculesTheory) && player.wis >= 150) {
 		if (player.wis <= 300) critMChance += (player.wis - 150) / 5;
 		if (player.wis > 300) critMChance += 30;
+	}
+	if (player.hasPerk(PerkLib.WarCaster) && player.inte >= 50) {
+		if (player.inte <= 300) critMChance += (player.inte - 50) / 10;
+		if (player.inte > 300) critMChance += 25;
 	}
 	if (player.hasPerk(PerkLib.ElvenSense) && player.wis >= 50) critMChance += 5;
 	if (player.armor == armors.R_CHANG || player.armor == armors.R_QIPAO || player.armor == armors.G_CHANG || player.armor == armors.G_QIPAO || player.armor == armors.B_CHANG || player.armor == armors.B_QIPAO || player.armor == armors.P_CHANG || player.armor == armors.P_QIPAO) critMChance += 5;
@@ -3490,6 +3542,19 @@ public function combatBlock(doFatigue:Boolean = false):Boolean {
 		return true;
 	}
 	else return false;
+}
+public function combatBlock2():Number {
+	var blockChance2:Number = 20 + player.shieldBlock;
+	if (player.hasPerk(PerkLib.ShieldMastery) && player.tou >= 50) {
+		if (player.tou < 100) blockChance2 += (player.tou - 50) / 5;
+		else blockChance2 += 10;
+	}
+	if (player.hasPerk(PerkLib.ShieldGrandmastery) && player.tou >= 100) {
+		if (player.tou < 150) blockChance2 += (player.tou - 100) / 5;
+		else blockChance2 += 10;
+	}
+	if (blockChance2 < 10) blockChance2 = 10;
+	return blockChance2;
 }
 public function isWieldingRangedWeapon():Boolean {
 	return player.weaponName.indexOf("staff") != -1 && player.hasPerk(PerkLib.StaffChanneling);
@@ -4475,6 +4540,10 @@ private function combatStatusesUpdate():void {
 	if (player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 		outputText("<b>There is a large boulder coming your way. If you don't avoid it in time, you might take some serious damage.</b>\n\n");
 	}
+	//Creeping doom
+	if (monster.hasStatusEffect(StatusEffects.CreepingDoom)) {
+		dynStats("lus", 20);
+	}
 	//Berzerker/Lustzerker/Dwarf Rage/Oni Rampage/Maleficium/Blazing battle spirit/Cauterize
 	if (player.hasStatusEffect(StatusEffects.Berzerking)) {
 		if (player.statusEffectv1(StatusEffects.Berzerking) <= 0) {
@@ -4887,12 +4956,36 @@ private function combatStatusesUpdate():void {
 		}
 	}
 	//Spells
+	if (player.hasStatusEffect(StatusEffects.CooldownSpellArcticGale)) {
+		if (player.statusEffectv1(StatusEffects.CooldownSpellArcticGale) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownSpellArcticGale);
+		}
+		else {
+			player.addStatusValue(StatusEffects.CooldownSpellArcticGale,1,-1);
+		}
+	}
+	if (player.hasStatusEffect(StatusEffects.CooldownSpellChainLighting)) {
+		if (player.statusEffectv1(StatusEffects.CooldownSpellChainLighting) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownSpellChainLighting);
+		}
+		else {
+			player.addStatusValue(StatusEffects.CooldownSpellChainLighting,1,-1);
+		}
+	}
 	if (player.hasStatusEffect(StatusEffects.CooldownSpellDarknessShard)) {
 		if (player.statusEffectv1(StatusEffects.CooldownSpellDarknessShard) <= 0) {
 			player.removeStatusEffect(StatusEffects.CooldownSpellDarknessShard);
 		}
 		else {
 			player.addStatusValue(StatusEffects.CooldownSpellDarknessShard,1,-1);
+		}
+	}
+	if (player.hasStatusEffect(StatusEffects.CooldownSpellDuskWave)) {
+		if (player.statusEffectv1(StatusEffects.CooldownSpellDuskWave) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownSpellDuskWave);
+		}
+		else {
+			player.addStatusValue(StatusEffects.CooldownSpellDuskWave,1,-1);
 		}
 	}
 	if (player.hasStatusEffect(StatusEffects.CooldownSpellIceSpike)) {
@@ -4917,6 +5010,14 @@ private function combatStatusesUpdate():void {
 		}
 		else {
 			player.addStatusValue(StatusEffects.CooldownSpellPolarMidnight,1,-1);
+		}
+	}
+	if (player.hasStatusEffect(StatusEffects.CooldownSpellPyreBurst)) {
+		if (player.statusEffectv1(StatusEffects.CooldownSpellPyreBurst) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownSpellPyreBurst);
+		}
+		else {
+			player.addStatusValue(StatusEffects.CooldownSpellPyreBurst,1,-1);
 		}
 	}
 	if (player.hasStatusEffect(StatusEffects.CooldownSpellRegenerate)) {
@@ -6240,8 +6341,7 @@ public function GooTease():void {
 }
 public function GooLeggoMyEggo():void {
 	clearOutput();
-	outputText("You release [monster a] [monster name] from your body and [monster he] drops to the ground, catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more.");
-	outputText("\n\n");
+	outputText("You release [monster a] [monster name] from your body and [monster he] drops to the ground, catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more.\n\n");
 	monster.removeStatusEffect(StatusEffects.GooEngulf);
 	enemyAI();
 }
@@ -6372,6 +6472,31 @@ public function HypnosisMaintain():void {
 	outputText("You maintain the trance smiling as you prolong the mesmerising dance, moving your hips from side to side and displaying your assets. " + monster.capitalA + monster.short + " is lost in your gaze unable to act. ");
 	monster.teased(lustDmg);
 	outputText("\n\n");
+	enemyAI();
+}
+
+//Bear hug
+public function bearHug():void {
+	fatigue(30, USEFATG_PHYSICAL);
+	outputText("You squeeze [monster a] [monster name] with a mighty hug, slowly crushing the life out of " + monster.pronoun2 + ". ");
+	var damage:int = unarmedAttack();
+	damage += player.str;
+	damage += scalingBonusStrength() * 0.5;
+	damage += player.tou;
+	damage += scalingBonusToughness() * 0.5;
+	damage = Math.round(damage);
+	doDamage(damage, true, true);
+	if(monster.HP < 1) {
+		doNext(combat.endHpVictory);
+		return;
+	}
+	outputText("\n\n");
+	enemyAI();
+}
+public function BearLeggoMyEggo():void {
+	clearOutput();
+	outputText("You let your opponent free ending your grab.\n\n");
+	monster.removeStatusEffect(StatusEffects.GrabBear);
 	enemyAI();
 }
 
@@ -6708,6 +6833,12 @@ public function runAway(callHook:Boolean = true):void {
 		}
 	}
 	outputText("\n\n");
+	enemyAI();
+}
+
+public function struggleCreepingDoom():void {
+	outputText("You shake away the pests in disgust, managing to get rid of them for a time.\n\n");
+	monster.removeStatusEffect(StatusEffects.CreepingDoom);
 	enemyAI();
 }
 
@@ -7086,4 +7217,4 @@ public function scalingBonusLibido():Number {
 }
 }
 }
-
+

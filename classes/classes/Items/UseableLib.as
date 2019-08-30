@@ -16,15 +16,18 @@ use namespace CoC;
 		public function UseableLib() {}
 		
 		//MATERIALS
-		public const AMETIST:SimpleUseable = new SimpleUseable("Ametist", "Flawless Ametist Necklace", "a Flawless Ametist Necklace", 1000, 
-			"A Flawless Ametist Necklace.",
-			"You look over the flawless ametyst necklace. Likely worth a lot of gems.");
-		public const B_CHITN:SimpleUseable = new SimpleUseable("B.Chitn", "B.Chitn", "a large shard of chitinous plating", 100,
-			"A perfect piece of black chitin from a bee-girl.  It still has some fuzz on it.",
-			"You look over the scale carefully but cannot find a use for it.  Maybe someone else will know how to use it.");
+		public const AMETIST:SimpleUseable = new SimpleUseable("Amethyst", "Flawless Amethyst Necklace", "a Flawless Amethyst Necklace", 1000, 
+			"A Flawless Amethyst Necklace.",
+			"You look over the flawless amethyst necklace. Likely worth a lot of gems.");
 		public const DIAMOND:SimpleUseable = new SimpleUseable("Diamond", "Perfect Diamond", "a Perfect Diamond", 1000, 
 			"A Perfect Diamond.",
 			"You look over the perfect diamond. Likely worth a lot of gems.");
+		public const S_INGOT:SimpleUseable = new SimpleUseable("S.Ingot", "Silver ingot", "a Silver ingot", 500, 
+			"A Silver ingot.",
+			"You look over the Silver ingot. Likely usefull to making some accesories.");
+		public const B_CHITN:SimpleUseable = new SimpleUseable("B.Chitn", "B.Chitn", "a large shard of chitinous plating", 100,
+			"A perfect piece of black chitin from a bee-girl.  It still has some fuzz on it.",
+			"You look over the scale carefully but cannot find a use for it.  Maybe someone else will know how to use it.");
 		public const GREENGL:SimpleUseable = new SimpleUseable("GreenGl", "GreenGl", "a clump of green gel", 50,
 			"This tough substance has no obvious use that you can discern.",
 			"You examine the gel thoroughly, noting it is tough and resiliant, yet extremely pliable.  Somehow you know eating it would not be a good idea.");

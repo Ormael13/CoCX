@@ -41,7 +41,7 @@ package classes.Items
 		public const DBFSWO :DualBFSword = new DualBFSword();
 		public const DBFWHIP:DualBFWhip = new DualBFWhip();
 		public const DDAGGER:Weapon = new DualDaggers();
-		public const DEMSCYT:WeaponWithPerk = new WeaponWithPerk("DemScyt","D.Scythe","demonic scythe","a demonic scythe","slash",25,2000,"A mage catalyst of unknown origin ornamented with a blade mounted on a skull. This magical scythe is both charged with powerful energy and extremely sharp. The letters A.S are engraved in the weapon.", "Large", PerkLib.WizardsFocus, 1, 0, 0, 0);
+		public const DEMSCYT:WeaponWithPerk = new WeaponWithPerk("DemScyt","D.Scythe","demonic scythe","a demonic scythe","slash",25,2000,"A magic catalyst of unknown origin ornamented with a blade mounted on a skull. This magical scythe is both charged with powerful energy and extremely sharp. The letters A.S are engraved in the weapon.", "Large", PerkLib.WizardsFocus, 1, 0, 0, 0);
 		public const DEPRAVA:Depravatio = new Depravatio();
 		public const DE_GAXE:DemonicGreataxe = new DemonicGreataxe();
 		public const DRAPIER:DragonsRapier = new DragonsRapier();

@@ -217,7 +217,7 @@ package classes.GlobalFlags
 		public static const EPIC_ACHIEVEMENTS_LIMBO:int					= 185;
 		public static const EPIC_XXX2_THE_NEXT_LEVEL:int				= 186;
 		public static const EPIC_XXX_THE_RETURN_OF_MARETH_CHAMPION:int	= 187;
-		public static const EPIC_XXX4_:int			= 188;
+		public static const EPIC_XXX_4:int								= 188;
 		
 		
 		public static const GENERAL_PERKY_BEAST_OF_DEATH:int		= 189;
@@ -377,7 +377,7 @@ package classes.GlobalFlags
 		public static const FASHION_THRONE_OF_STRENGTH:int		= 330;
 		public static const FASHION_THRONE_OF_TOUGHNESS:int		= 331;
 		public static const FASHION_THRONE_OF_WISDOM:int		= 332;
-		public static const UNKNOWN_ACHIEVEMENT_333:int			= 333;
+		public static const GENERAL_LEGENDARY_CHIMERA:int		= 333;
 		public static const UNKNOWN_ACHIEVEMENT_334:int			= 334;
 		public static const UNKNOWN_ACHIEVEMENT_335:int			= 335;
 		public static const UNKNOWN_ACHIEVEMENT_336:int			= 336;

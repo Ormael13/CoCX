@@ -985,10 +985,6 @@ use namespace CoC;
 					attack += SceneLib.combat.unarmedAttack();
 				}
 			}
-			if (weaponName == "fists") {
-				if (arms.type == Arms.MANTIS) attack += (15 * newGamePlusMod);
-				if (arms.type == Arms.YETI || arms.type == Arms.CAT) attack += (5 * newGamePlusMod);
-			}
 			if (findPerk(PerkLib.PrestigeJobTempest) >= 0 && weaponPerk == "Dual") {
 				attack += (5 * newGamePlusMod);
 			}
@@ -3175,6 +3171,17 @@ use namespace CoC;
 						race = "half red-panda-taur";
 				}
 			}
+			if (bearpandaScore() >= 5)
+			{
+				if (bearpandaScore() >= 10) {
+					if (faceType == Face.PANDA) race = "panda-morph";
+					else race = "bear-morph";
+				}
+				else {
+					if (faceType == Face.PANDA) race = "half panda-morph";
+					else race = "half bear-morph";
+				}
+			}
 			if (sirenScore() >= 10)
 			{
 				if (isTaur()) race = "siren-taur";
@@ -3307,7 +3314,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.ChimericalBodySemiEpicStage) >= 0)
 				internalChimeraRatingCounter -= 11;//	65
 			if (findPerk(PerkLib.ChimericalBodyEpicStage) >= 0)
-				internalChimeraRatingCounter -= 12;//	77(potem legendary/mythical stages?)
+				internalChimeraRatingCounter -= 12;//	77	90	104	119	135(potem legendary/mythical stages?)
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				internalChimeraRatingCounter -= 18;
 			End("Player","racialScore");
@@ -3531,6 +3538,8 @@ use namespace CoC;
 				chimeraCounter++;
 			if (redpandaScore() >= 4)
 				chimeraCounter++;
+			if (bearpandaScore() >= 5)
+				chimeraCounter++;
 			if (sirenScore() >= 10)
 				chimeraCounter++;
 			if (yetiScore() >= 6)
@@ -3667,6 +3676,8 @@ use namespace CoC;
 */			if (manticoreScore() >= 12)
 				grandchimeraCounter += 2;
 			if (redpandaScore() >= 8)
+				grandchimeraCounter++;
+			if (bearpandaScore() >= 10)
 				grandchimeraCounter++;
 			if (sirenScore() >= 10)
 				grandchimeraCounter++;
@@ -5823,7 +5834,7 @@ use namespace CoC;
 			}
 			if (hasFur() || hasPlainSkinOnly())
 				alicornCounter++;
-			if ((horns.type != Horns.UNICORN && wings.type != Wings.FEATHERED_ALICORN) || (horns.type != Horns.BICORN && wings.type != Wings.NIGHTMARE))
+			if (horns.type != Horns.UNICORN && wings.type != Wings.FEATHERED_ALICORN && horns.type != Horns.BICORN && wings.type != Wings.NIGHTMARE)
 				alicornCounter = 0;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				alicornCounter += 50;
@@ -6499,6 +6510,39 @@ use namespace CoC;
 			return redpandaCounter;
 		}
 		
+		//Red Panda
+		public function bearpandaScore():Number {
+			Begin("Player","racialScore","bearpanda");
+			var bearpandaCounter:Number = 0;
+			if (faceType == Face.BEAR || faceType == Face.PANDA)
+				bearpandaCounter++;
+			if (ears.type == Ears.BEAR || ears.type == Ears.PANDA)
+				bearpandaCounter++;
+			if (tailType == Tail.BEAR)
+				bearpandaCounter++;
+			if (arms.type == Arms.BEAR)
+				bearpandaCounter++;
+			if (lowerBody == LowerBody.BEAR)
+				bearpandaCounter++;
+			if (eyes.type == Eyes.BEAR)
+				bearpandaCounter++;
+			if (skinType == Skin.FUR)
+				bearpandaCounter++;
+			if (InCollection(skin.coat.color, "black","brown","white") || (skin.coat.color == "white" && skin.coat.color2 == "black"))
+				bearpandaCounter++;
+			if (tallness > 72)
+				bearpandaCounter += 2;
+			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+				bearpandaCounter += 50;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && bearpandaCounter >= 4)
+				bearpandaCounter += 1;
+			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && bearpandaCounter >= 8)
+				bearpandaCounter += 1;
+			if (isGargoyle()) bearpandaCounter = 0;
+			End("Player","racialScore");
+			return bearpandaCounter;
+		}
+		
 		//Determine Avian Rating
 		public function avianScore():Number {
 			Begin("Player","racialScore","avian");
@@ -6732,6 +6776,8 @@ use namespace CoC;
 			if (findPerk(PerkLib.PrestigeJobSoulArcher) >= 0)
 				prestigeJobs1++;
 			if (findPerk(PerkLib.PrestigeJobSoulArtMaster) >= 0)
+				prestigeJobs1++;
+			if (findPerk(PerkLib.PrestigeJobSpellKnight) >= 0)
 				prestigeJobs1++;
 			if (findPerk(PerkLib.PrestigeJobTempest) >= 0)
 				prestigeJobs1++;
@@ -8127,6 +8173,18 @@ use namespace CoC;
 					maxInt += (15 * newGamePlusMod);
 				}
 			}
+			if (bearpandaScore() >= 5) {
+				if (bearpandaScore() >= 10) {
+					maxStr += (100 * newGamePlusMod);
+					maxTou += (70 * newGamePlusMod);
+					maxInt -= (20 * newGamePlusMod);
+				}
+				else {
+					maxStr += (50 * newGamePlusMod);
+					maxTou += (30 * newGamePlusMod);
+					maxInt -= (5 * newGamePlusMod);
+				}
+			}
 			if (pigScore() >= 5) {
 				if (pigScore() >= 15) {
 					maxStr += (125 * newGamePlusMod);
@@ -8644,6 +8702,10 @@ use namespace CoC;
 			if (findPerk(PerkLib.PrestigeJobSoulArtMaster) >= 0) {
 				maxStr += (40 * newGamePlusMod);
 				maxWis += (40 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.PrestigeJobSpellKnight) >= 0) {
+				maxStr += (40 * newGamePlusMod);
+				maxInt += (40 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.PrestigeJobTempest) >= 0) {
 				maxStr += (40 * newGamePlusMod);

@@ -181,7 +181,7 @@ private function TalkYourEyes():void {
 	evangelineAffection(1);
 	if (flags[kFLAGS.EVANGELINE_TALKS] == 0) flags[kFLAGS.EVANGELINE_TALKS]++;
 	doNext(evangelineTalkMenu);
-	cheatTime2(1/4);
+	cheatTime2(15);
 }
 
 private function TalkDemons():void {
@@ -194,7 +194,7 @@ private function TalkDemons():void {
 	evangelineAffection(1);
 	if (flags[kFLAGS.EVANGELINE_TALKS] == 1) flags[kFLAGS.EVANGELINE_TALKS]++;
 	doNext(evangelineTalkMenu);
-	cheatTime2(1/4);
+	cheatTime2(15);
 }
 
 private function TalkPastLife1():void {
@@ -211,7 +211,7 @@ private function TalkPastLife1():void {
 	evangelineAffection(1);
 	if (flags[kFLAGS.EVANGELINE_TALKS] == 2) flags[kFLAGS.EVANGELINE_TALKS]++;
 	doNext(evangelineTalkMenu);
-	cheatTime2(1/4);
+	cheatTime2(15);
 }
 /*
 private function TalkPastLife2():void {
@@ -220,7 +220,7 @@ private function TalkPastLife2():void {
 	evangelineAffection(1);zajmie miejsce PastTalk1 w menu
 	if (flags[kFLAGS.EVANGELINE_TALKS] == 0) flags[kFLAGS.EVANGELINE_TALKS]++;
 	doNext(evangelineTalkMenu);
-	cheatTime2(1/4);
+	cheatTime2(15);
 }
 
 private function TalkPastLife3():void {
@@ -229,7 +229,7 @@ private function TalkPastLife3():void {
 	evangelineAffection(1);zajmie miejsce PastTalk2 w menu
 	if (flags[kFLAGS.EVANGELINE_TALKS] == 0) flags[kFLAGS.EVANGELINE_TALKS]++;//ustalić na jakiej wartości flagi bedzie sie pokazywać
 	doNext(evangelineTalkMenu);
-	cheatTime2(1/4);
+	cheatTime2(15);
 }
 
 private function TalkYourEyes():void {
@@ -238,7 +238,7 @@ private function TalkYourEyes():void {
 	evangelineAffection(1);
 	if (flags[kFLAGS.EVANGELINE_TALKS] == 3) flags[kFLAGS.EVANGELINE_TALKS]++;//ustalić na jakiej wartości flagi bedzie sie pokazywać
 	doNext(evangelineTalkMenu);
-	cheatTime2(1/4);
+	cheatTime2(15);
 }
 
 private function TalkYourEyes():void {
@@ -247,7 +247,7 @@ private function TalkYourEyes():void {
 	evangelineAffection(1);
 	if (flags[kFLAGS.EVANGELINE_TALKS] == 4) flags[kFLAGS.EVANGELINE_TALKS]++;
 	doNext(evangelineTalkMenu);
-	cheatTime2(1/4);
+	cheatTime2(15);
 }
 */
 private function evangelineSexMenu():void {

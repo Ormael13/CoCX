@@ -51,6 +51,9 @@ public class BaseCombatContent extends BaseContent {
 	protected function combatParry():Boolean {
 		return combat.combatParry();
 	}
+	protected function combatParry2():Number {
+		return combat.combatParry2();
+	}
 	protected function combatPhysicalCritical():Number {
 		return combat.combatPhysicalCritical();
 	}
@@ -59,6 +62,9 @@ public class BaseCombatContent extends BaseContent {
 	}
 	protected function combatBlock(doFatigue:Boolean = false):Boolean {
 		return combat.combatBlock(doFatigue);
+	}
+	protected function combatBlock2():Number {
+		return combat.combatBlock2();
 	}
 	protected function unarmedAttack():Number {
 		return combat.unarmedAttack();

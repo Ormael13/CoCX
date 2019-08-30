@@ -18,7 +18,7 @@ package classes.Perks
 		public function Accuracy1Perk()
 		{
 			super("Accuracy+", "Accuracy+",
-					"You have mastered your control over the flow of energy in your star sphere. You are now able to recover fatigue and soulforce over time.");
+					"Your range weapon rising your accuracy when shooting.");
 		}		
 	}
 }

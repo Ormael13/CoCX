@@ -635,6 +635,7 @@ public function savePermObject(isFile:Boolean):void {
 		saveFile.data.flags[kFLAGS.NO_GORE_MODE] = flags[kFLAGS.NO_GORE_MODE];
 		saveFile.data.flags[kFLAGS.WISDOM_SCALLING] = flags[kFLAGS.WISDOM_SCALLING];
 		saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALLING] = flags[kFLAGS.INTELLIGENCE_SCALLING];
+		saveFile.data.flags[kFLAGS.SPELLS_COOLDOWNS] = flags[kFLAGS.SPELLS_COOLDOWNS];
 		//saveFile.data.settings = [];
 		//saveFile.data.settings.useMetrics = Measurements.useMetrics;
 		//achievements
@@ -687,6 +688,7 @@ public function loadPermObject():void {
 			if (saveFile.data.flags[kFLAGS.NO_GORE_MODE] != undefined) flags[kFLAGS.NO_GORE_MODE] = saveFile.data.flags[kFLAGS.NO_GORE_MODE];
 			if (saveFile.data.flags[kFLAGS.WISDOM_SCALLING] != undefined) flags[kFLAGS.WISDOM_SCALLING] = saveFile.data.flags[kFLAGS.WISDOM_SCALLING];
 			if (saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALLING] != undefined) flags[kFLAGS.INTELLIGENCE_SCALLING] = saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALLING];
+			if (saveFile.data.flags[kFLAGS.SPELLS_COOLDOWNS] != undefined) flags[kFLAGS.SPELLS_COOLDOWNS] = saveFile.data.flags[kFLAGS.SPELLS_COOLDOWNS];
 		}
 		//if(saveFile.data.settings){if(saveFile.data.settings.useMetrics != undefined){Measurements.useMetrics = saveFile.data.settings.useMetrics;}}
 		//achievements, will check if achievement exists.

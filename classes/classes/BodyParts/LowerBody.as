@@ -57,6 +57,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const CAVE_WYRM:int	          = 47;
 	public static const MOUSE:int	          	  = 48;
 	public static const HINEZUMI:int	          = 49;
+	public static const BEAR:int		          = 50;
 	// Don't forget to add new types in DebugMenu.as list LOWER_TYPE_CONSTANTS
 	
 	override public function set type(value:int):void {

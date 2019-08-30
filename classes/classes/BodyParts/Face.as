@@ -51,6 +51,8 @@ public class Face extends SaveableBodyPart {
 	public static const WOLF_FANGS:int		 = 42;//button 0 on 4th page of metamorph
 	public static const ORC_FANGS:int		 = 43;
 	public static const ANIMAL_TOOTHS:int	 = 44;
+	public static const BEAR:int			 = 45;
+	public static const PANDA:int			 = 46;
 	// Don't forget to add new types in DebugMenu.as list FACE_TYPE_CONSTANTS
 	
 	public function Face(creature:Creature) {

@@ -175,6 +175,7 @@ use namespace CoC;
 				outputText("Mortal\n");
 			outputText("<b>Cultivation level:</b> " + flags[kFLAGS.SOUL_CULTIVATION] + "\n");
 			outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " / 1430\n");
+			if (player.hasStatusEffect(StatusEffects.AlvinaTraining2)) outputText("ALvi training 2 value: " + player.statusEffectv1(StatusEffects.AlvinaTraining2) + "\n");
 		/*	outputText("<b>Progress toward clearing next meridian: </b>");
 			if (flags[kFLAGS.UNLOCKED_MERIDIANS] == 2)
 				outputText(flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] + " / wartość liczbowa\n");
@@ -197,7 +198,7 @@ use namespace CoC;
 			//addButton(5, "Upgrade", UpgradeItems).hint("."); //ulepszanie itemów
 			if (player.findPerk(PerkLib.Metamorph) >= 0) addButton(6, "Metamorf", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold freely your body.");//używanie metamorfowania z użyciem soulforce
 			if (player.findPerk(PerkLib.SoulSense) >= 0) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounter."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
-			//addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
+			addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
 			addButton(14, "Back", playerMenu);
 		}//w lini 28 w oOnLoadVariables zmian wprowadzić i w lini conditionalConverters w folderze parser zmian dot. wraith wprowadzić, zablokować perki soul king to soul ancestor w momencie robienia release version
 		public function SoulforceCheats():void {
@@ -218,7 +219,8 @@ use namespace CoC;
 			addButton(5, "Enemies", EnemiesMenu).hint("For spawning various enemies to test fight them.");
 			addButton(6, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
 			addButton(7, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
-			if (flags[kFLAGS.NEISA_FOLLOWER] == 3) addButton(8, "NeisaFix", AuroraReset).hint("Fix Neisa to be less clingy.");
+			addButton(8, "Phylactery", PhylacteryTesting);
+			//if (flags[kFLAGS.NEISA_FOLLOWER] == 3) addButton(8, "NeisaFix", AuroraReset).hint("Fix Neisa to be less clingy.");
 			//if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 8) addButton(8, "Repta-Tongue", AddReptaTongue).hint("Items bungle for Repta-Tongue Potion.");
 			if (player.perkv4(PerkLib.ProductivityDrugs) > 0 || player.hasPerk(PerkLib.ProductivityDrugs)) addButton(9, "P.Drugs Fix", fixingProductionDrugs).hint("To fix Productive Drug perk wild rampage.");
 			if (player.hasPerk(PerkLib.Metamorph)) addButton(9, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Metamorph all options unlock.");
@@ -233,6 +235,17 @@ public function FightAria():void {
 	clearOutput();
 	outputText("Entering battle with Melkie! Enjoy ^^");
 	startCombat(new Aria());
+}
+public function PhylacteryTesting():void {
+	clearOutput();
+	outputText("Entering phylactery creation simulation! Enjoy ^^");
+	flags[kFLAGS.ALVINA_FOLLOWER] = 13;
+	flags[kFLAGS.SIEGWEIRD_FOLLOWER] = 3;
+	player.createKeyItem("Stone Statue Lethicite", 0, 0, 0, 0);
+	player.itemSlot1.setItemAndQty(consumables.L_DRAFT,5);
+	player.itemSlot2.setItemAndQty(useables.SOULGEM,5);
+	player.itemSlot3.setItemAndQty(useables.SOULGEM,5);
+	doNext(SoulforceCheats);
 }
 public function AuroraReset():void {
 	clearOutput();
