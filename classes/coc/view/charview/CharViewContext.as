@@ -21,6 +21,7 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
+import classes.CockTypesEnum;
 import classes.lists.BreastCup;
 import classes.lists.Gender;
 
@@ -31,32 +32,34 @@ public class CharViewContext extends ExecContext {
 	private var charview:CharView;
 	public function CharViewContext(charview:CharView, character:*) {
 		super([
+			{}, // local variables
 			character,
-			{ // Revamp compatibility layer
-				Antennae : Antennae,
-				Arms     : Arms,
-				Beard    : Beard,
-				BreastCup: BreastCup,
-				Butt     : Butt,
-				Claws    : Claws,
-				Ears     : Ears,
-				Eyes     : Eyes,
-				Face     : Face,
-				Gender   : Gender,
-				Gills    : Gills,
-				Hair     : Hair,
-				Hips     : Hips,
-				Horns    : Horns,
-				LowerBody: LowerBody,
-				Neck     : Neck,
-				Pattern  : Pattern,
-				Piercing : Piercing,
-				RearBody : RearBody,
-				Skin     : Skin,
-				Tail     : Tail,
-				Tongue   : Tongue,
-				UnderBody: UnderBody,
-				Wings    : Wings
+			{
+				Antennae     : Antennae,
+				Arms         : Arms,
+				Beard        : Beard,
+				BreastCup    : BreastCup,
+				Butt         : Butt,
+				Claws        : Claws,
+				CockTypesEnum: CockTypesEnum,
+				Ears         : Ears,
+				Eyes         : Eyes,
+				Face         : Face,
+				Gender       : Gender,
+				Gills        : Gills,
+				Hair         : Hair,
+				Hips         : Hips,
+				Horns        : Horns,
+				LowerBody    : LowerBody,
+				Neck         : Neck,
+				Pattern      : Pattern,
+				Piercing     : Piercing,
+				RearBody     : RearBody,
+				Skin         : Skin,
+				Tail         : Tail,
+				Tongue       : Tongue,
+				UnderBody    : UnderBody,
+				Wings        : Wings
 			}
 		]);
 		this.charview = charview;

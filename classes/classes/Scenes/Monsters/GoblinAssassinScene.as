@@ -794,4 +794,3 @@ public class GoblinAssassinScene extends BaseContent
 		}
 	}
 }
-

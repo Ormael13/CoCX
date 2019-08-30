@@ -2291,4 +2291,3 @@ private function lvlUpCheckup():void {
 		}
 	}
 }
-
