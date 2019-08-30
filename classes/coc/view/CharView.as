@@ -209,9 +209,13 @@ public class CharView extends Sprite {
 				var f:String             = cell.@name;
 				var dx:int               = cell.@dx;
 				var dy:int               = cell.@dy;
-				var bd:BitmapData        = new BitmapData(w, h, true, 0);
-				bd.copyPixels(result, new Rectangle(x, y, w, h), new Point(0, 0));
-				sprites[f] = new CharViewSprite(bd, dx, dy);
+				try {
+					var bd:BitmapData = new BitmapData(w, h, true, 0);
+					bd.copyPixels(result, new Rectangle(x, y, w, h), new Point(0, 0));
+					sprites[f] = new CharViewSprite(bd, dx, dy);
+				} catch (e:Error) {
+					throw new Error("Error in model.xml <cell name='"+f+"'>: "+e.message)
+				}
 			}
 			ss_loaded++;
 			if (ss_loaded == ss_total) loadLayers(xml);
