@@ -254,7 +254,7 @@ public class CoC extends MovieClip
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_0.8n2";
-			version = ver + " (<b></b>)";
+			version = ver + " (<b>Goblins Overhaul (p.2), Alvina (p.2), Siegweird (p.2), character viewer update (p.2), bugfixes</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

@@ -50,6 +50,7 @@ public function pcUniqueSexScenesChoiceMenu():void {
 	/*if (player.hasStatusEffect(StatusEffects.HinezumiCoat) && player.lust >= player.lust100() * 0.5 && !monster.hasPerk(PerkLib.EnemyGigantType)) 
 	else */addButtonDisabled(6, "Heat transfer", "Req. to have Hinezumi Coat, over 50% of max lust, enemy must be humanoid and not giant. (not yet added scene)");
 	addButtonDisabled(7, "Cooldown", "Req. to have (Winter wolf/other cold cum creatures, pc must be female salamander or hinezumi). (not yet added scene)");
+	addButton (14, "Leave", cleanupAfterCombat);
 }
 public function cumOmeter(changes:Number = 0):Number {
 	flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] += changes;

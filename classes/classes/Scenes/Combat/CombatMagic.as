@@ -312,6 +312,11 @@ public class CombatMagic extends BaseCombatContent {
 		mod = Math.round(mod * 100)/100;
 		return mod;
 	}
+	internal function spellGreyCooldownImpl():Number {
+		var mod:Number = 3;
+		if (mod < 0) mod = 0;
+		return mod;
+	}
 	internal function healModImpl():Number {
 		var mod:Number = 1;
 		if(player.hasPerk(PerkLib.SpellpowerHealing) && player.wis >= 50) mod += .2;
@@ -425,6 +430,12 @@ public class CombatMagic extends BaseCombatContent {
 		mod = Math.round(mod * 100)/100;
 		return mod;
 	}
+	internal function spellWhiteCooldownImpl():Number {
+		var mod:Number = 3;
+		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod -= 1;
+		if (mod < 0) mod = 0;
+		return mod;
+	}
 	internal function healModWhiteImpl():Number {
 		var mod:Number = 1;
 		if(player.hasPerk(PerkLib.SpellpowerHealing) && player.wis >= 50) mod += .2;
@@ -536,6 +547,12 @@ public class CombatMagic extends BaseCombatContent {
 		mod = Math.round(mod * 100)/100;
 		return mod;
 	}
+	internal function spellBlackCooldownImpl():Number {
+		var mod:Number = 3;
+		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod -= 1;
+		if (mod < 0) mod = 0;
+		return mod;
+	}
 	internal function healModBlackImpl():Number {
 		var mod:Number = 1;
 		if(player.hasPerk(PerkLib.SpellpowerHealing) && player.wis >= 50) mod += .2;
@@ -627,13 +644,34 @@ public class CombatMagic extends BaseCombatContent {
 
 
 	private var fireMagicLastTurn:int = -100;
-	private var fireMagicCumulated:int = 0;
+	private var fireMagicCumulated:int = 0;/*
+	internal function calcInfernoModImpl(damage:Number):int {
+		if (player.hasPerk(PerkLib.RagingInferno)) {
+			var multiplier:Number = 1;
+			if (combatRound - fireMagicLastTurn == 2) {
+				if (fireMagicCumulated > 0) outputText("Traces of your previously used fire magic are still here, and you use them to empower another spell!\n\n");
+				multiplier += fireMagicCumulated * 0.05;
+				damage = Math.round(damage * multiplier);
+				fireMagicCumulated += 2;
+				//if (player.hasPerk(PerkLib.)) fireMagicCumulated++;
+				//if (player.hasPerk(PerkLib.)) fireMagicCumulated++;
+				// XXX: Message?
+			} else {
+				if (combatRound - fireMagicLastTurn > 2 && fireMagicCumulated > 0) {
+					if (fireMagicLastTurn == 2) fireMagicCumulated = 0;
+					else fireMagicCumulated -= 2;
+				}
+				if (fireMagicCumulated == 0) outputText("Unfortunately, traces of your previously used fire magic are too weak to be used.\n\n");
+			}
+			fireMagicLastTurn = combatRound;
+		}
+		return damage;
+	}*/
 	internal function calcInfernoModImpl(damage:Number):int {
 		if (player.hasPerk(PerkLib.RagingInferno)) {
 			var multiplier:Number = 1;
 			if (combatRound - fireMagicLastTurn == 2) {
 				outputText("Traces of your previously used fire magic are still here, and you use them to empower another spell!\n\n");
-				/*
 				switch(fireMagicCumulated) {
 					case 0:
 					case 1:
@@ -658,27 +696,6 @@ public class CombatMagic extends BaseCombatContent {
 				if (combatRound - fireMagicLastTurn > 2 && fireMagicLastTurn > 0)
 					outputText("Unfortunately, traces of your previously used fire magic are too weak to be used.\n\n");
 				fireMagicCumulated = 1;
-				*/
-				switch(fireMagicCumulated) {
-					case 0:
-					case 1:
-						multiplier = 1;
-						break;
-					default:
-						multiplier = 1.05 + ((fireMagicCumulated - 2) * 0.05);
-				}
-				damage = Math.round(damage * multiplier);
-				fireMagicCumulated += 2;
-				//if (player.hasPerk(PerkLib.)) fireMagicCumulated++;
-				//if (player.hasPerk(PerkLib.)) fireMagicCumulated++;
-				// XXX: Message?
-			} else {
-				if (fireMagicLastTurn == 1) outputText("Unfortunately, traces of your previously used fire magic are too weak to be used.\n\n");
-				if (fireMagicLastTurn > 2) {
-					if (fireMagicLastTurn == 2)  fireMagicLastTurn = 1;
-					else fireMagicCumulated -= 2;
-				}
-				
 			}
 			fireMagicLastTurn = combatRound;
 		}
@@ -1588,8 +1605,8 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
 		else useMana(40, 6);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellIceSpike,3,0,0,0);
-		if(handleShell()){return;}
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellIceSpike,spellBlackCooldown(),0,0,0);
+		if (handleShell()){return;}
 		//if (monster is Doppleganger)
 		//{
 		//(monster as Doppleganger).handleSpellResistance("whitefire");
@@ -1659,8 +1676,8 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
 		else useMana(40, 6);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellDarknessShard,3,0,0,0);
-		if(handleShell()){return;}
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellDarknessShard,spellBlackCooldown(),0,0,0);
+		if (handleShell()){return;}
 		//if (monster is Doppleganger)
 		//{
 		//(monster as Doppleganger).handleSpellResistance("whitefire");
@@ -1799,8 +1816,8 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(200)) player.HP -= spellCostBlack(200);
 		else useMana(200,6);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellArcticGale,3,0,0,0);
-		if(handleShell()){return;}
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellArcticGale,spellBlackCooldown(),0,0,0);
+		if (handleShell()){return;}
 		//if (monster is Doppleganger)
 		//{
 		//(monster as Doppleganger).handleSpellResistance("whitefire");
@@ -1868,8 +1885,8 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(200)) player.HP -= spellCostBlack(200);
 		else useMana(200,6);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellDuskWave,3,0,0,0);
-		if(handleShell()){return;}
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellDuskWave,spellBlackCooldown(),0,0,0);
+		if (handleShell()){return;}
 		//if (monster is Doppleganger)
 		//{
 		//(monster as Doppleganger).handleSpellResistance("whitefire");
@@ -2621,8 +2638,8 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40)) player.HP -= spellCostWhite(40);
 		else useMana(40, 5);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellWhitefire,3,0,0,0);
-		if(handleShell()){return;}
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellWhitefire,spellWhiteCooldown(),0,0,0);
+		if (handleShell()){return;}
 		if (monster is Doppleganger)
 		{
 			(monster as Doppleganger).handleSpellResistance("whitefire");
@@ -2735,8 +2752,8 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40)) player.HP -= spellCostWhite(40);
 		else useMana(40, 5);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellLightningBolt,3,0,0,0);
-		if(handleShell()){return;}
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellLightningBolt,spellWhiteCooldown(),0,0,0);
+		if (handleShell()){return;}
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
@@ -2798,8 +2815,8 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(200)) player.HP -= spellCostWhite(200);
 		else useMana(200,5);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellPyreBurst,3,0,0,0);
-		if(handleShell()){return;}
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellPyreBurst,spellWhiteCooldown(),0,0,0);
+		if (handleShell()){return;}
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
@@ -2892,8 +2909,8 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(200)) player.HP -= spellCostWhite(200);
 		else useMana(200,5);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellChainLighting,3,0,0,0);
-		if(handleShell()){return;}
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellChainLighting,spellWhiteCooldown(),0,0,0);
+		if (handleShell()){return;}
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
@@ -2987,7 +3004,5 @@ public class CombatMagic extends BaseCombatContent {
         }
 		return false;
 	}
-
-
 }
 }

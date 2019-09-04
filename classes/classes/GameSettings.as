@@ -140,18 +140,18 @@ public class GameSettings extends BaseContent {
 		outputText("\n\n");
 
 		if (flags[kFLAGS.INTELLIGENCE_SCALLING] >= 1) {
-			outputText("Wisdom Scaling: <font color=\"#008000\"><b>New</b></font>\n Values are less randomn and a bit higher on averange than in old scalling.");
+			outputText("Intelligence Scaling: <font color=\"#008000\"><b>New</b></font>\n Values are less randomn and a bit higher on averange than in old scalling.");
 		}
 		else
-			outputText("Wisdom Scaling: <font color=\"#800000\"><b>Old</b></font>\n Values are more randomn and a bit lower on averange than in new scalling.");
+			outputText("Intelligence Scaling: <font color=\"#800000\"><b>Old</b></font>\n Values are more randomn and a bit lower on averange than in new scalling.");
 
 		outputText("\n\n");
 
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] >= 1) {
-			outputText("Spells Cooldowns: <font color=\"#008000\"><b>Off</b></font>\n Damage dealing spells have cooldowns and they dealing more damage than in default cooldownless variant.");
+			outputText("Spells Cooldowns: <font color=\"#008000\"><b>Off</b></font>\n Damage dealing spells not have cooldowns and they keep their default power.");
 		}
 		else
-			outputText("Spells Cooldowns: <font color=\"#800000\"><b>On</b></font>\n Damage dealing spells not have cooldowns and they keep their default power.");
+			outputText("Spells Cooldowns: <font color=\"#800000\"><b>On</b></font>\n Damage dealing spells have cooldowns and they dealing more damage than in default cooldownless variant.");
 
 		outputText("\n\n");
 
@@ -218,7 +218,7 @@ public class GameSettings extends BaseContent {
 		addButton(1, "No Blood Toggle", toggleNOGORE).hint("Toggles No Blood Mode. If enabled, scenes could have more grungesome/bloody variants showed. Not for the weak of heart players.");
 		addButton(3, "Wis scalling", toggleWisScaling).hint("Toggles Wisdom scalling for all attacks using it. If enabled, wisdom scaling would be less randomn with big generaly a bit higher values on averange.");
 		addButton(4, "Int scalling", toggleIntScaling).hint("Toggles Intelligance scalling for all attacks using it. If enabled, intelligence scaling would be less randomn with big generaly a bit higher values on averange.");
-		addButton(5, "Spells Cooldowns", toggleSpellsCooldowns).hint("Toggles Spells cooldowns. If enabled, spells would not have cooldowns like before but they will not be any stronger.");
+		addButton(5, "Spells Cooldowns", toggleSpellsCooldowns).hint("Toggles Spells cooldowns. If enabled, spells would have cooldowns and they will be stronger.");
 		addButton(14, "Back", settingsScreenGameSettings);
 	}
 

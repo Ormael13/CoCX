@@ -57,6 +57,12 @@ public final class Mutations extends MutationsHelper
 			if (player.hasPerk(PerkLib.OniMusculatureEvolved)) bonusempoweroni -= 3;
 			return bonusempoweroni;
 		}
+				//split large wings to two pairs
+				/*else if (player.wings.type == Wings.BAT_LIKE_LARGE && player.cor >= 75) {
+					outputText("\n\n");
+					outputText("Your large demonic wings starts to tremble and then starts to split from the tip.  You stretch over your shoulder to stroke them as they divide, turning into two pairs of full-sized demon-wings.  <b>Your demonic wings have split into two pairs!</b>");
+					setWingType(Wings.BAT_LIKE_LARGE_2, "two large pairs of bat-like");
+				}*/
 
 //ManUp Beer
 		public function manUpBeer(player:Player):void
@@ -10936,18 +10942,12 @@ public final class Mutations extends MutationsHelper
 				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
 			//Grow demon wings
-			if (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.BAT_LIKE_LARGE_2) && rand(3) == 0 && player.cor >= 50) {
+			if (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.BAT_LIKE_LARGE) && rand(3) == 0 && player.cor >= 50) {
 				//grow smalls to large
 				if (player.wings.type == Wings.BAT_LIKE_TINY && player.cor >= 75) {
 					outputText("\n\n");
 					outputText("Your small demonic wings stretch and grow, tingling with the pleasure of being attached to such a tainted body.  You stretch over your shoulder to stroke them as they unfurl, turning into full-sized demon-wings.  <b>Your demonic wings have grown!</b>");
 					setWingType(Wings.BAT_LIKE_LARGE, "large, bat-like");
-				}
-				//split large wings to two pairs
-				else if (player.wings.type == Wings.BAT_LIKE_LARGE && player.cor >= 75) {
-					outputText("\n\n");
-					outputText("Your large demonic wings starts to tremble and then starts to split from the tip.  You stretch over your shoulder to stroke them as they divide, turning into two pairs of full-sized demon-wings.  <b>Your demonic wings have split into two pairs!</b>");
-					setWingType(Wings.BAT_LIKE_LARGE_2, "two large pairs of bat-like");
 				}
 				else if (player.wings.type == Wings.DRACONIC_SMALL || player.wings.type == Wings.DRACONIC_LARGE || player.wings.type == Wings.BEE_LIKE_SMALL || player.wings.type == Wings.BEE_LIKE_LARGE || player.wings.type == Wings.MANTIS_LIKE_SMALL || player.wings.type == Wings.MANTIS_LIKE_LARGE || player.wings.type == Wings.MANTICORE_LIKE_SMALL || player.wings.type == Wings.MANTICORE_LIKE_LARGE) {
 					outputText("\n\n");

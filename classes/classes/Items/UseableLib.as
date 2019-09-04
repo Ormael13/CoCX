@@ -84,7 +84,7 @@ use namespace CoC;
 			"A skull taken from a slain imp.",
 			"You look at the imp skull.  A pair of horns protrude from the skull.  You admire the overall frame of the skull yet you find no obvious uses for it.");
 		public const MECHANI:SimpleUseable = new SimpleUseable("Mechani", "Mechanism", "a Mechanism", 1200, 
-			"A complex set of gear and gyro.",
+			"A complex set of gears and gyros.",
 			"You look at Mechanism.  It's component used to make goblin tech.");
 		public const MINOHOR:SimpleUseable = new SimpleUseable("MinoHor", "MinoHorns", "a minotaur horns", 35, 
 			"A horns taken from a slain minotaur.",

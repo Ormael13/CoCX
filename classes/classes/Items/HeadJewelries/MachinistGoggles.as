@@ -13,7 +13,7 @@ package classes.Items.HeadJewelries
 		
 		public function MachinistGoggles() 
 		{
-			super("MachGog", "MachinistGoggles", "Machinist Goggles", "a Machinist Goggles", 0, 0, 400, "A pair of ordinary machinist google. One of the basic tools of anyone working with engine. Helps prevent blindness.","Helm");
+			super("MachGog", "MachinistGoggles", "Machinist Goggles", "a Machinist Goggles", 0, 0, 400, "A pair of ordinary machinist goggles. One of the basic tools of anyone working with engines. Helps prevent blindness.","Helm");
 		}
 		
 		override public function canUse():Boolean {
@@ -21,7 +21,7 @@ package classes.Items.HeadJewelries
 				return false;
 			}
 			if (game.player.tallness > 48) { //Taller than 4 ft
-				outputText("You try to put your google on but the things clearly weren't designed for someone your size. Frustrated you bag them back.\n\n");
+				outputText("You try to put your goggles on but the things clearly weren't designed for someone your size. Frustrated, you put them back in the bag.\n\n");
 				return false;
 			}
 			return true;

@@ -33,11 +33,7 @@ package classes.Scenes
 			outputText("-New tier 8 strength lvl-up perk: Swift casting. Req. Prestige Job: Spell-Knight perk and any of four elemental single target spell. Effect: When attacking with melee using a one handed weapon with no shield equiped, pc can choose an available spell in combat options to cast during the round. It will be used at the end of the full attack.\n");
 			outputText("-New tier 9 strength lvl-up perk: War caster. Req. Swift casting perk. Effect: Increases magical and physical critical chance by up to 25% based on intelligence..\n");
 			outputText("-New tier 10 strength lvl-up perk: Vampiric blade. Req. War caster perk. Effect: PC recovers 0.5/1/2/4 % of its health each time it strikes with a melee attack. (% restored depend on weapon size used).\n");
-			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
-			outputText("-(Heavy WIP) Raging Inferno now boost by 10% fire spells/attacks damage and each turn spend without casting fire spell lower that bonus damage by 10% till it return to 100%.\n");
-			outputText("-2 new achievments (1 shadow one).\n");
-			outputText("-Flawless Ametist Necklace needed to Alvina advanced studies could be bought in Jewelry shop in Tel'Adre in addition to finding one in Hidden cave (the one form Hidden cave may be ocassionaly glitch and not count).\n");
-			outputText("-Siegweird gained option to refuse recruit him after help with reclaiming his greatsword. After picking No option he can be ocassionaly found in Blight Ridge.\n");
+			outputText("-New enemy perk: Phylactery. Current added to Alvina Shadowmantle. With this perk any true demon-type enemy can have soulforce like any being with soul even been able to soul cultivate.\n");
 			outputText("-New TF item: Bayr leaf. Can be bought from Moga Hen shop in HXD. Using this item will turn PC into bear/panda. Half Bear/Panda///Bear/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.\n");
 			outputText("-New body part - ears: Bear Ears. No Req.\n");
 			outputText("-New body part - ears: Panda Ears. No Req.\n");
@@ -50,24 +46,38 @@ package classes.Scenes
 			outputText("-New p. special: Grab. Req. to be bearm-morph (10+ pts). Casue to grab enemy not taller than PC and hold for few turns opening option to use Bear hug.\n");
 			outputText("-New p. special: Bear hug. Req. to first use Grab. Deal damaged based on PC str, tou, unarmed atk value.\n");
 			outputText("-New p. special: Slam. Req. to be bearm-morph (10+ pts). Deal damage based on PC str and unarmed atk value + stun for 3 turns. Have cooldown of 8 turns.\n");
+			outputText("-New consumable (by Liadri): tome with Meteor Shower spell - gained from last advanced study session with Siegweird. Costs 200 gems and teach PC Meteor Shower spell.\n");
+			outputText("-New usable item: Silver ignot. Costing 500 gems and it's buyable at Jewelry shop in Tel'Adre. Usefull in making accesories.\n");
+			outputText("-New Grey Spell: Meteor Shower - learned from tome given by Siegweird. Cost 250 mana and deal AoE fire dmg and stun enemies for 1 turns. Have 1 turn channel time and cooldown of 12 turns.\n");
+			outputText("-6 new achievments (5 shadow one).\n");
+			outputText("-Flawless Ametist Necklace needed to Alvina advanced studies could be bought in Jewelry shop in Tel'Adre in addition to finding one in Hidden cave (the one form Hidden cave may be ocassionaly glitch and not count).\n");
+			outputText("-Siegweird gained option to refuse recruit him after help with reclaiming his greatsword. After picking No option he can be ocassionaly found in Blight Ridge.\n");
 			outputText("-Magic Bolt cost and power increased 5x. There is new toggle option in game settings that allow to choose between default spells powers without cooldowns and much stronger in terms of damage spells that have cooldowns.\n");
 			outputText("-Arctic Gale, Chain Lighting, Dusk Wave and Pyre Burst spells are 4x stronger now but each comes with 3 turns cooldown after use. Single target elemental spells also became buffed from 3x to 4x bonus compared to no cooldowns setting.\n");
-			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
-			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
-			//outputText("-New soulskill: Devourer. Req. ... Devour up to 400 lust and wrath from enemy transfering 50% of it back to player. Cooldown: 3 turns.\n");
 			outputText("-Siegweird can teach player on more effective usage of white magic - option Study. After final lession PC will be able to cast Charge Weapon and Charge Armor at half cost.\n");
 			outputText("-After this PC can start Advanced Study under Siegweird. Req. 0 corruption and later on some materials to make holy symbol. All would end with bringing him back proof of killing Avlina, after which he will give PC tome for powerfull fire spell.\n");
 			outputText("-When in camp Siegweird can share with PC once a day bowl of soup. It would restore 25% of HP and lower fatigue by 25%.\n");
+			outputText("-If PC bring Icicle, Canine pepper, Bayr leaf, Firemander whisky, La bova, Ringtail fig, Alicornium, Wonder fruit, Magic seed, Nocello or God Mead to Siegweird it can be added to soup causing pernament increase of soup effect by 5% (all 11 will make 25% base effect whooping 80%).\n");
 			outputText("-Option to reject Alvina offer is possible and it would lead to fight with her. It's pretty tough fight so be ready.\n");
-			outputText("-New enemy perk: Phylactery. Current added to Alvina Shadowmantle. With this perk any true demon-type enemy can have soulforce like any being with soul even been able to soul cultivate.\n");
 			outputText("-Added Appearance screen for Alvina. Also possible to encounter Alvina cave in Blight Ridge at low chance even without meeting her previously (but still req. to finish Deep Cave dungeon - yes that mean helping Vala too). So those that already lost to see her first two encounters can still find her and become devils under her hoof ;)\n");
-			outputText("-New consumable (by Liadri): tome with Meteor Shower spell - gained from last advanced study session with Siegweird. Costs 200 gems and teach PC Meteor Shower spell.\n");
-			outputText("-New Grey Spell: Meteor Shower - learned from tome given by Siegweird. Cost 250 mana and deal AoE fire dmg and stun enemies for 1 turns. Have 1 turn channel time and cooldown of 12 turns.\n");
-			outputText("-New usable item: Silver ignot. Costing 500 gems and it's buyable at Jewelry shop in Tel'Adre. Usefull in making accesories.\n");
+			outputText("-Demon tf will no longer grant second pair of bat wings. Racial score stay the same with small wings and large wings contribution to demon score doubling (small 1 > 2 pts, large 2 > 4 pts).\n");
 			outputText("-Small change to Camp Actions to make options to fill pill bottles with pills been less hidden under unexpected submenu - now all options to amke pills not lie in tons of seperate pills in inventory and be instead tidy put in bottle will be less complicated.\n");
+			outputText("-Avator of Purity/Corruption will as desc saying lower cooldown of white/black spells by 1 turn (if cooldown on spells setting is on). White/Black spells cooldown length would be showed on stats page in combat subpage.\n");
+			outputText("-Kick special accesable due to wearing goblin tech boots would take into account PC str too. Also both spell power and unarmed bonus to dmg will be doubled. Rocket/Nitro Boots would also give flat +2/4 bonus to unarmed atk value.\n");
+			outputText("-Goblin Mech Snowball Generator and Whitefire Beam Cannon would deal more damage if setting to have cooldowns on spells is turned on.\n");
+			outputText("-Character viewer was updated again due to hard work of Liadri and aimozg. It have now much more body parts or options that will more closely show PC appearance that would match desc in text. Still there are many places where chara viewer is lacking but it would be soon fixed.\n");
+			outputText("-In case player not buy goblin mech form Lumi there will be still option to buy it later on.\n");
+			outputText("-Fixed bugs: Wrong time passed by change in Eva and Alvi camp options, reseting alicorn/nightmare score down to 0, Manticore Metabolism perk causing venom to go into negative values, some Vala not progressing time at all, two lust fueled soulskills removing other combat options, Lumi Workshop and Garage options working properly without needless re-buying blueprints, ");
+			outputText("Inability to unequip vechicle when having any headgear, mech upgrade for more armor and HP when in mech not working, wrong desc intelligence scalling toggle in settings menu\n");/*ostatni punkt changelogu
+			outputText("<b>Version 0.8n3:</b>\n\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-Fixed bugs: Wrong time passed by change in Eva and Alvi camp options, reseting alicorn/nightmare score down to 0\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: \n");
+			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
+			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
+			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
+			//outputText("-New soulskill: Devourer. Req. ... Devour up to 400 lust and wrath from enemy transfering 50% of it back to player. Cooldown: 3 turns.\n");
+			//outputText("-(Heavy WIP) Raging Inferno now boost by 10% fire spells/attacks damage and each turn spend without casting fire spell lower that bonus damage by 10% till it return to 100%.\n");
 			outputText("-New TF item: . Gained by bringing Orc Mead to Lumi for enhancing. Using this item will turn PC into high orc. High Orc (scalable): +130 to max Str, +30 to max Tou, +10 to max Spe, -30 to max Int, +25 to max Lib, +20% to max Wrath.\n");
 			outputText("-New TF item: . Gained by bringing Elf Ear to Lumi for enhancing. Using this item will turn PC into high elf. High Elf (scalable): -10 to max Str, -15 to max Tou, +80 to max Spe, +80 to max Int, +60 to max Wis, +30 max/min Sens, +20% to max Mana.\n");
 			outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
@@ -168,14 +178,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we wlasciwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -504,7 +506,7 @@ package classes.Scenes
 			outputText("-New key Item (by Liadri): Upgraded Armor plating 2.0 - req. Upgraded Armor plating 1.0 - +10 armor/magic resistance to the mech. +35% Health.\n");
 			outputText("-New key Item (by Liadri): Upgraded Armor plating 3.0 - req. Upgraded Armor plating 2.0 - +15 armor/magic resistance to the mech. +50% Health.\n");
 			outputText("-New key Item (by Liadri): Taser - req. Toolbelt - A voltage rod set on the mech as an upgrade can be used to temporarily paralyse the opponent. Deals no damage and stun for 2 rounds but has a 8 round recharge.\n");
-			outputText("-New key Item (by Liadri): Taser overcharge battery - req. Taser - An upgrade to the Tazer. Increase the stun duration to 4 round. And add some lesser damage equal to half a lightning bolt.\n");
+			outputText("-New key Item (by Liadri): Taser with an overcharged battery - req. Taser - An upgrade to the Tazer. Increase the stun duration to 4 round. And add some lesser damage equal to half a lightning bolt.\n");
 			outputText("-New key Item (by Liadri): Safety bubble - req. Toolbelt - Allows to use the mech underwater.\n");
 			outputText("-New key Item (by Liadri): Repeater Gun - req. Toolbelt - Increase range attack by 20% if using a firearm. Change the firearm text to a goblin machine gun text. Allow to use firearms when in goblin mech.\n");
 			outputText("-New key Item (by Liadri): Machine Gun MK1 - req. Repeater Gun - Increase range attack by 40% if using a firearm. Change the firearm text to a goblin machine gun text.\n");

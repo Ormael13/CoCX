@@ -117,11 +117,20 @@ public class Combat extends BaseContent {
 	public function spellMod():Number {
 		return magic.spellModImpl();
 	}
+	public function spellGreyCooldown():Number {
+		return magic.spellGreyCooldownImpl();
+	}
 	public function spellModWhite():Number {
 		return magic.spellModWhiteImpl();
 	}
+	public function spellWhiteCooldown():Number {
+		return magic.spellWhiteCooldownImpl();
+	}
 	public function spellModBlack():Number {
 		return magic.spellModBlackImpl();
+	}
+	public function spellBlackCooldown():Number {
+		return magic.spellBlackCooldownImpl();
 	}
 	public function healMod():Number {
 		return magic.healModImpl();
@@ -607,7 +616,7 @@ internal function buildOtherActions(buttons:ButtonDataList):void {
 		}
 	}
 	if (player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
-		buttons.add("Flames of Love", flamesOfLove).hint("Use a little bit of lust to transform it into flames of love that you throw at enemy.  \n\nWould go into cooldown after use for: 3 rounds  \n\nLust cost: 90% of current lust");
+		bd = buttons.add("Flames of Love", flamesOfLove).hint("Use a little bit of lust to transform it into flames of love that you throw at enemy.  \n\nWould go into cooldown after use for: 3 rounds  \n\nLust cost: 90% of current lust");
 		if (player.hasStatusEffect(StatusEffects.CooldownFlamesOfLove)) {
 			bd.disable("You need more time before you can use Flames of Love again.");
 		} else if (player.lust < 50) {
@@ -615,7 +624,7 @@ internal function buildOtherActions(buttons:ButtonDataList):void {
 		}
 	}
 	if (player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
-		buttons.add("Icicles of Love", iciclesOfLove).hint("Use a little bit of lust to transform it into icicles of love that you throw at enemy.  \n\nWould go into cooldown after use for: 3 rounds  \n\nLust cost: 90% of current lust");
+		bd = buttons.add("Icicles of Love", iciclesOfLove).hint("Use a little bit of lust to transform it into icicles of love that you throw at enemy.  \n\nWould go into cooldown after use for: 3 rounds  \n\nLust cost: 90% of current lust");
 		if (player.hasStatusEffect(StatusEffects.CooldownIciclesOfLove)) {
 			bd.disable("You need more time before you can use Icicles of Love again.");
 		} else if (player.lust < 50) {
@@ -623,7 +632,7 @@ internal function buildOtherActions(buttons:ButtonDataList):void {
 		}
 	}
 	if (player.hasStatusEffect(StatusEffects.KnowsHeavensDevourer)) {
-		buttons.add("Devourer", heavensDevourer).hint("Form a small sphere inscribed by symbols to drain from enemy a bit of lust and/or wrath.  \n\nWould go into cooldown after use for: 3 rounds");
+		bd = buttons.add("Devourer", heavensDevourer).hint("Form a small sphere inscribed by symbols to drain from enemy a bit of lust and/or wrath.  \n\nWould go into cooldown after use for: 3 rounds");
 		if (player.hasStatusEffect(StatusEffects.CooldownHeavensDevourer)) {
 			bd.disable("You need more time before you can use Devourer again.");
 		}
@@ -737,6 +746,8 @@ public function unarmedAttack():Number {
 	if (player.lowerBody == LowerBody.HINEZUMI) unarmed += 4 * (1 + player.newGamePlusMod());
 	if (player.lowerBody == LowerBody.BEAR) unarmed += 5 * (1 + player.newGamePlusMod());
 	if (player.tailType == Tail.HINEZUMI) unarmed += 4 * (1 + player.newGamePlusMod());
+	if (player.hasKeyItem("Rocket Boots") >= 0) unarmed += 2;
+	if (player.hasKeyItem("Nitro Boots") >= 0) unarmed += 4;
 	if (player.hasPerk(PerkLib.Brawn)) unarmedMulti += .05;
 	if (player.hasPerk(PerkLib.ImprovedBrawn)) unarmedMulti += .1;
 	if (player.hasPerk(PerkLib.GreaterBrawn)) unarmedMulti += .15;
@@ -1171,6 +1182,185 @@ public function elementalattacks(elementType:int, summonedElementals:int):void {
 		if(monster.HP <= 0) doNext(endHpVictory);
 		else doNext(endLustVictory);
 	}
+}
+
+public function basemechmeleeattacks():void {
+	flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+	if (player.isInGoblinMech()) var weapon:String = "sawblade";
+	if(player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 0 && !isWieldingRangedWeapon()) {
+		outputText("You attempt to attack, but at the last moment your mech wrenches away, preventing you from even coming close to landing a blow!  The kitsune's seals have made normal melee attack impossible!  Maybe you could try something else?\n\n");
+		enemyAI();
+		return;
+	}
+	if(player.hasStatusEffect(StatusEffects.Sealed2) && player.statusEffectv2(StatusEffects.Sealed2) == 0) {
+		outputText("You attempt to attack, but at the last moment your mech wrenches away, preventing you from even coming close to landing a blow!  Recent enemy attack have made normal melee attack impossible!  Maybe you could try something else?\n\n");
+		enemyAI();
+		return;
+	}
+	//Amily!
+	if(monster.hasStatusEffect(StatusEffects.Concentration) && !isWieldingRangedWeapon()) {
+		clearOutput();
+		outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n");
+		enemyAI();
+		return;
+	}
+	if(monster.hasStatusEffect(StatusEffects.Level) && !player.hasStatusEffect(StatusEffects.FirstAttack) && !isWieldingRangedWeapon()) {
+		if (monster is SandTrap) {
+			outputText("It's all or nothing!  With a bellowing cry you charge down the treacherous slope and smite the sandtrap as hard as you can!  ");
+			(monster as SandTrap).trapLevel(-4);
+		}
+		if (monster is Alraune) {
+			outputText("It’s all or nothing!  If this leafy woman is so keen on pulling you in, you will let her do just that!  You use her own strength against her, using it to increase your momentum as you leap towards her and smash into her with your "+weapon+"!  ");
+			(monster as Alraune).trapLevel(-6);
+		}
+	}
+	//Blind
+	if(player.hasStatusEffect(StatusEffects.Blind)) {
+		outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
+	}
+	if (monster is Basilisk && player.findPerk(PerkLib.BasiliskResistance) < 0 && !isWieldingRangedWeapon()) {
+		if (monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind))
+			outputText("Blind basilisk can't use his eyes, so you can actually aim your strikes!  ");
+		//basilisk counter attack (block attack, significant speed loss): 
+		else if(player.inte/5 + rand(20) < 25) {
+			outputText("Holding the basilisk in your peripheral vision, you charge forward to strike it.  Before the moment of impact, the reptile shifts its posture, dodging and flowing backward skillfully with your movements, trying to make eye contact with you. You find yourself staring directly into the basilisk's face!  Quickly you snap your eyes shut and recoil backwards, swinging madly at the lizard to force it back, but the damage has been done; you can see the terrible grey eyes behind your closed lids, and you feel a great weight settle on your bones as it becomes harder to move.");
+			player.addCombatBuff('spe', -20);
+			player.removeStatusEffect(StatusEffects.FirstAttack);
+			combatRoundOver();
+			flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 2;
+			return;
+		}
+		//Counter attack fails: (random chance if PC int > 50 spd > 60; PC takes small physical damage but no block or spd penalty)
+		else {
+			outputText("Holding the basilisk in your peripheral vision, you charge forward to strike it.  Before the moment of impact, the reptile shifts its posture, dodging and flowing backward skillfully with your movements, trying to make eye contact with you. You twist unexpectedly, bringing your "+weapon+" up at an oblique angle; the basilisk doesn't anticipate this attack!  ");
+		}
+	}
+	if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+		if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(0);
+		if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(0);
+		enemyAI();
+		return;
+	}
+	//Worms are special
+	if(monster.short == "worms") {
+		//50% chance of hit (int boost)
+		if(rand(100) + player.inte/3 >= 50) {
+			var dam:int = int(player.str/5 - rand(5));
+			if(dam == 0) dam = 1;
+			outputText("You strike at the amalgamation, crushing countless worms into goo, dealing <b><font color=\"#800000\">" + dam + "</font></b> damage.\n\n");
+			monster.HP -= dam;
+			if(monster.HP <= 0) {
+				doNext(endHpVictory);
+				return;
+			}
+		}
+		//Fail
+		else {
+			outputText("You attempt to crush the worms with your reprisal, only to have the collective move its individual members, creating a void at the point of impact, leaving you to attack only empty air.\n\n");
+		}
+		if(player.hasStatusEffect(StatusEffects.FirstAttack)) {
+			attack();
+			return;
+		}
+		enemyAI();
+		return;
+	}
+	//Determine if dodged!
+	if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
+		//Akbal dodges special education
+		if (monster.short == "Akbal") outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
+		else if (monster.short == "plain girl") outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your "+weapon+" against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your "+weapon+" as if betrayed.\n");
+		else if (monster.short == "kitsune") {
+			//Player Miss:
+			outputText("You swing your "+weapon+" ferociously, confident that you can strike a crushing blow.  To your surprise, you stumble awkwardly as the attack passes straight through her - a mirage!  You curse as you hear a giggle behind you, turning to face her once again.\n\n");
+		}
+		else {
+			if (player.isInGoblinMech()) outputText("You activate the mech’s saw blade, intent on slicing your opponent in half. " + monster.capitalA + monster.short + " avoids the blade as best as it can.\n\n");
+		}
+		enemyAI();
+		return;
+	}
+	//BLOCKED ATTACK:
+	if(monster.hasStatusEffect(StatusEffects.Earthshield) && rand(4) == 0) {
+		outputText("Your strike is deflected by the wall of sand, dirt, and rock!  Damn!\n");
+		if(player.hasStatusEffect(StatusEffects.FirstAttack)) {
+			attack();
+			return;
+		}
+		else outputText("\n");
+		enemyAI();
+		return;
+	}
+	if (player.isInGoblinMech()) meleeDamageAccSawblade();
+}
+	
+public function meleeDamageAccSawblade():void {
+	var damage:Number = 0;
+	//------------
+	// DAMAGE
+	//------------
+	//Determine damage
+	//BASIC DAMAGE STUFF
+	damage += player.str;
+	damage += scalingBonusStrength() * 0.25;
+	if (damage < 10) damage = 10;
+	damage *= 1.3;
+	//Bonus sand trap damage!
+	if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);
+	//Determine if critical hit!
+	var crit:Boolean = false;
+	var critChance:int = 5;
+	critChance += combatPhysicalCritical();
+	if (player.hasPerk(PerkLib.WeaponMastery)) critChance += 10;
+	if (player.hasPerk(PerkLib.WeaponGrandMastery)) critChance += 10;
+	if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
+	if (rand(100) < critChance) {
+		crit = true;
+		damage *= 1.75;
+	}
+	//Apply AND DONE!
+	damage *= (monster.damagePercent() / 100);
+	//One final round
+	damage = Math.round(damage);
+	if (damage > 0) {
+		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= historyFighterBonus();
+		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
+		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
+		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
+		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+		if (player.hasPerk(PerkLib.GoblinoidBlood)) {
+			if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
+			if (player.hasKeyItem("Powboy") >= 0) damage *= 1.15;
+			if (player.hasKeyItem("M.G.S. bracer") >= 0) damage *= 1.2;
+		}
+		damage = doDamage(damage);
+	}
+	if (damage <= 0) {
+		damage = 0;
+		outputText("Your attacks are deflected or blocked by [monster a] [monster name].");
+	}
+	else {
+		outputText("You activate the mech’s saw blade, intent on slicing your opponent in half. " + monster.capitalA + monster.short + " takes <b>(<font color=\"#800000\">" + damage + "</font>)</b> damage.");
+		if (crit == true) {
+			outputText("<b>Critical! </b>");
+			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
+		}
+		if (crit == false && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
+			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
+		}
+	}
+	outputText("\n");
+	checkAchievementDamage(damage);
+	heroBaneProc(damage);
+	if (monster.HP <= 0){doNext(endHpVictory); return;}
+	if (monster.lust >= monster.maxLust()){doNext(endLustVictory); return; }
+	outputText("\n");
+	wrathregeneration();
+	fatigueRecovery();
+	manaregeneration();
+	soulforceregeneration();
+	enemyAI();
 }
 
 public function packAttack():void {
@@ -2343,14 +2533,14 @@ public function shootWeapon():void {
 		if (monster.short == "pod") {
 			outputText("The bullet lodges deep into the pod's fleshy wall");
 			if (player.isInGoblinMech()) {
-				if (player.hasKeyItem("Repeater Gun") >= 0) outputText("You shoot your opponent using the mech repeater gun for ");
-				if (player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) outputText("You fire metal rounds at pod using the mech machine gun for ");
+				if (player.hasKeyItem("Repeater Gun") >= 0) outputText("You shoot pod using the mech’s repeater gun for ");
+				if (player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) outputText("You fire metal rounds at pod using the mech’s machine gun for ");
 			}
 		}
 		else if (monster.plural) {
 			if (player.isInGoblinMech()) {
-				if (player.hasKeyItem("Repeater Gun") >= 0) outputText("You shoot your opponent using the mech repeater gun for ");
-				if (player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) outputText("You fire metal rounds at [monster a] [monster name] using the mech machine gun for ");
+				if (player.hasKeyItem("Repeater Gun") >= 0) outputText("You shoot your opponent using the mech’s repeater gun for ");
+				if (player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) outputText("You fire metal rounds at [monster a] [monster name] using the mech’s machine gun for ");
 			}
 			else {
 				var textChooser1:int = rand(12);
@@ -7217,4 +7407,3 @@ public function scalingBonusLibido():Number {
 }
 }
 }
-

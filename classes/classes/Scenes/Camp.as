@@ -4006,6 +4006,8 @@ private function updateAchievements():void {
 	if (player.level >= 75) awardAchievement("Overlord", kACHIEVEMENTS.LEVEL_OVERLORD);
 	if (player.level >= 90) awardAchievement("Sovereign", kACHIEVEMENTS.LEVEL_SOVEREIGN);
 	if (player.level >= 100) awardAchievement("Are you a god?", kACHIEVEMENTS.LEVEL_ARE_YOU_A_GOD);
+	if (player.level >= 120) awardAchievement("Newb God(ess)", kACHIEVEMENTS.LEVEL_NEWB_GOD_ESS);
+	if (player.level >= 150) awardAchievement("Mid-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS);
 	
 	//Population
 	if (getCampPopulation() >= 2) awardAchievement("My First Companion", kACHIEVEMENTS.POPULATION_FIRST);
@@ -4263,6 +4265,11 @@ private function updateAchievements():void {
 	if (player.newGamePlusMod() >= 1) awardAchievement("xXx2: The Next Level", kACHIEVEMENTS.EPIC_XXX2_THE_NEXT_LEVEL);
 	if (player.newGamePlusMod() >= 2) awardAchievement("xXx: The Return of Mareth Champion", kACHIEVEMENTS.EPIC_XXX_THE_RETURN_OF_MARETH_CHAMPION);
 	if (player.newGamePlusMod() >= 3) awardAchievement("xXx 4", kACHIEVEMENTS.EPIC_XXX_4);
+	if (player.newGamePlusMod() >= 4) awardAchievement("xXx 5: Mareth's Judgment_Day", kACHIEVEMENTS.EPIC_XXX5_MARETHS_JUDGMENT_DAY);
+	if (player.newGamePlusMod() >= 5) awardAchievement("xXx 6: Rise of the Demons", kACHIEVEMENTS.EPIC_XXX6_RISE_OF_THE_DEMONS);/*
+	if (player.newGamePlusMod() >= 6) awardAchievement("xXx 7: Salvation", kACHIEVEMENTS.EPIC_XXX7_SALVATION);
+	if (player.newGamePlusMod() >= 7) awardAchievement("xXx 8: Genisys", kACHIEVEMENTS.EPIC_XXX8_GENISYS);
+	if (player.newGamePlusMod() >= 8) awardAchievement("xXx 8: Dark Fate", kACHIEVEMENTS.EPIC_XXX9_DARK_FATE);*/
 	
 	if (player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) awardAchievement("Guardian of Notre-Dame", kACHIEVEMENTS.EPIC_GUARDIAN_OF_NOTRE_DAME);
 	if (player.hasStatusEffect(StatusEffects.PlayerPhylactery)) awardAchievement("The Devil Wears Prada", kACHIEVEMENTS.EPIC_THE_DEVIL_WEARS_PRADA);

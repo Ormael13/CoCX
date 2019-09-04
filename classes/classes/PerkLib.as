@@ -3981,6 +3981,8 @@ public class PerkLib
                     .requirePerk(Channeling)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsWhitefire)
+                                || player.hasStatusEffect(StatusEffects.KnowsPyreBurst)
+                                || player.hasStatusEffect(StatusEffects.KnowsFireStorm)
                                 || player.hasPerk(DragonFireBreath)
                                 || player.hasPerk(FireLord)
                                 || player.hasPerk(Hellfire)
@@ -3993,6 +3995,7 @@ public class PerkLib
                     .requirePerk(Channeling)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsIceSpike)
+                                || player.hasStatusEffect(StatusEffects.KnowsArcticGale)
                                 || player.hasStatusEffect(StatusEffects.KnowsIceRain)
                                 || player.hasPerk(DragonIceBreath)
                                 || player.hasPerk(FreezingBreath)
@@ -4004,6 +4007,7 @@ public class PerkLib
                     .requirePerk(Channeling)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsLightningBolt)
+                                || player.hasStatusEffect(StatusEffects.KnowsChainLighting)
                                 || player.hasPerk(DragonLightningBreath);
                     }, "Any lightning spell")
                     .requireLevel(12)
@@ -4012,6 +4016,7 @@ public class PerkLib
                     .requirePerk(Channeling)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsDarknessShard)
+                                || player.hasStatusEffect(StatusEffects.KnowsDuskWave)
                                 || player.hasPerk(DragonDarknessBreath);
                     }, "Any darkness spell")
                     .requireLevel(12)

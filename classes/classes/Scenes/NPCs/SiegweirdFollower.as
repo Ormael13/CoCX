@@ -141,6 +141,10 @@ public function siegweirdMainCampMenu():void
 	menu();
 	if (player.statusEffectv1(StatusEffects.SiegweirdSoup) == 1) addButtonDisabled(5, "Soup", "You already ate today bowl of Siegweird’s soup.");
 	else addButton(5, "Soup", siegweirdCampSoup);
+	if ((player.hasItem(consumables.ICICLE_, 1) && player.statusEffectv1(StatusEffects.SiegweirdSoup1) < 1) || (player.hasItem(consumables.CANINEP, 1) && player.statusEffectv1(StatusEffects.SiegweirdSoup2) < 1) || (player.hasItem(consumables.BAYRLEA, 1) && player.statusEffectv1(StatusEffects.SiegweirdSoup3) < 1) || (player.hasItem(consumables.SALAMFW, 1) && player.statusEffectv1(StatusEffects.SiegweirdSoup4) < 1) || 
+	(player.hasItem(consumables.LABOVA_, 1) && player.statusEffectv1(StatusEffects.SiegweirdSoup5) < 1) || (player.hasItem(consumables.RINGFIG, 1) && player.statusEffectv2(StatusEffects.SiegweirdSoup1) < 1) || (player.hasItem(consumables.ALICORN, 1) && player.statusEffectv2(StatusEffects.SiegweirdSoup2) < 1) || (player.hasItem(consumables.WOFRUIT, 1) && player.statusEffectv2(StatusEffects.SiegweirdSoup3) < 1) || 
+	(player.hasItem(consumables.MAGSEED, 1) && player.statusEffectv2(StatusEffects.SiegweirdSoup4) < 1) || (player.hasItem(consumables.NOCELIQ, 1) && player.statusEffectv2(StatusEffects.SiegweirdSoup5) < 1) || (player.hasItem(consumables.GODMEAD, 1) && player.statusEffectv3(StatusEffects.SiegweirdSoup1) < 1)) addButton(9, "Add an ingredient", siegweirdCampSoup2);
+	else addButtonDisabled(9, "Add an ingredient", "Need to have one of those: Icicle, Canine pepper, Bayr leaf, Firemander whisky, La bova, Ringtail fig, Alicornium, Wonder fruit, Magic seed, Nocello or God Mead to be able to improve soup.");
 	if (player.hasStatusEffect(StatusEffects.SiegweirdTraining)) addButtonDisabled(10, "Study", "You already completed basic Study.");
 	else addButton(10, "Study", siegweirdCampStudy);
 	if (player.hasStatusEffect(StatusEffects.SiegweirdTraining) && !player.hasStatusEffect(StatusEffects.SiegweirdTraining2)) addButton(11, "Advanced Study", siegweirdAdvancedCampStudy);
@@ -166,8 +170,20 @@ public function siegweirdCampSoup():void
 		outputText("You share the meal with Siegweird, the magical soup replenishing your endurance and healing your wounds.\n\n");
 		player.addStatusValue(StatusEffects.SiegweirdSoup, 1, 1);
 		player.hunger = player.maxHunger();
-		HPChange(Math.round(player.maxHP() * .25), true);
-		EngineCore.changeFatigue(-(Math.round(player.maxFatigue() * 0.25)));
+		var recoveryV:Number = 0.25;
+		if (player.statusEffectv1(StatusEffects.SiegweirdSoup1) == 1) recoveryV += 0.05;
+		if (player.statusEffectv1(StatusEffects.SiegweirdSoup2) == 1) recoveryV += 0.05;
+		if (player.statusEffectv1(StatusEffects.SiegweirdSoup3) == 1) recoveryV += 0.05;
+		if (player.statusEffectv1(StatusEffects.SiegweirdSoup4) == 1) recoveryV += 0.05;
+		if (player.statusEffectv1(StatusEffects.SiegweirdSoup5) == 1) recoveryV += 0.05;
+		if (player.statusEffectv2(StatusEffects.SiegweirdSoup1) == 1) recoveryV += 0.05;
+		if (player.statusEffectv2(StatusEffects.SiegweirdSoup2) == 1) recoveryV += 0.05;
+		if (player.statusEffectv2(StatusEffects.SiegweirdSoup3) == 1) recoveryV += 0.05;
+		if (player.statusEffectv2(StatusEffects.SiegweirdSoup4) == 1) recoveryV += 0.05;
+		if (player.statusEffectv2(StatusEffects.SiegweirdSoup5) == 1) recoveryV += 0.05;
+		if (player.statusEffectv3(StatusEffects.SiegweirdSoup1) == 1) recoveryV += 0.05;
+		HPChange(Math.round(player.maxHP() * recoveryV), true);
+		EngineCore.changeFatigue(-(Math.round(player.maxFatigue() * recoveryV)));
 		doNext(camp.campFollowers);
 		cheatTime2(15);
 	}
@@ -177,9 +193,66 @@ public function siegweirdCampSoup():void
 		outputText("Can the soup even be improved? It smells wonderful already.\n\n");
 		outputText("\"<i>Yeah, sure if you find some special ingredients across Mareth. Bring them here and I can add them to the soup.</i>\"\n\n");
 		player.createStatusEffect(StatusEffects.SiegweirdSoup, 0, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.SiegweirdSoup1, 0, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.SiegweirdSoup2, 0, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.SiegweirdSoup3, 0, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.SiegweirdSoup4, 0, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.SiegweirdSoup5, 0, 0, 0, 0);
 		menu();
 		addButton(14, "Back", siegweirdMainCampMenu);
 	}
+}
+public function siegweirdCampSoup2():void
+{
+	clearOutput();
+	outputText("You drop the ingredient into the pot and Siegweird looks at you surprised.\n\n");
+	outputText("\"<i>Oh how could I have not thought of that! Thank you [name] the soup should be even better now!</i>\"\n\n");
+	if (player.hasItem(consumables.ICICLE_, 1)) {
+		player.destroyItems(consumables.ICICLE_, 1);
+		player.addStatusValue(StatusEffects.SiegweirdSoup1, 1, 1);
+	}
+	if (player.hasItem(consumables.CANINEP, 1)) {
+		player.destroyItems(consumables.CANINEP, 1);
+		player.addStatusValue(StatusEffects.SiegweirdSoup2, 1, 1);
+	}
+	if (player.hasItem(consumables.BAYRLEA, 1)) {
+		player.destroyItems(consumables.BAYRLEA, 1);
+		player.addStatusValue(StatusEffects.SiegweirdSoup3, 1, 1);
+	}
+	if (player.hasItem(consumables.SALAMFW, 1)) {
+		player.destroyItems(consumables.SALAMFW, 1);
+		player.addStatusValue(StatusEffects.SiegweirdSoup4, 1, 1);
+	}
+	if (player.hasItem(consumables.LABOVA_, 1)) {
+		player.destroyItems(consumables.LABOVA_, 1);
+		player.addStatusValue(StatusEffects.SiegweirdSoup5, 1, 1);
+	}
+	if (player.hasItem(consumables.RINGFIG, 1)) {
+		player.destroyItems(consumables.RINGFIG, 1);
+		player.addStatusValue(StatusEffects.SiegweirdSoup1, 2, 1);
+	}
+	if (player.hasItem(consumables.ALICORN, 1)) {
+		player.destroyItems(consumables.ALICORN, 1);
+		player.addStatusValue(StatusEffects.SiegweirdSoup2, 2, 1);
+	}
+	if (player.hasItem(consumables.WOFRUIT, 1)) {
+		player.destroyItems(consumables.WOFRUIT, 1);
+		player.addStatusValue(StatusEffects.SiegweirdSoup3, 2, 1);
+	}
+	if (player.hasItem(consumables.MAGSEED, 1)) {
+		player.destroyItems(consumables.MAGSEED, 1);
+		player.addStatusValue(StatusEffects.SiegweirdSoup4, 2, 1);
+	}
+	if (player.hasItem(consumables.NOCELIQ, 1)) {
+		player.destroyItems(consumables.NOCELIQ, 1);
+		player.addStatusValue(StatusEffects.SiegweirdSoup5, 2, 1);
+	}
+	if (player.hasItem(consumables.GODMEAD, 1)) {
+		player.destroyItems(consumables.GODMEAD, 1);
+		player.addStatusValue(StatusEffects.SiegweirdSoup1, 3, 1);
+	}
+	doNext(camp.campFollowers);
+	cheatTime2(5);
 }
 
 public function siegweirdCampStudy():void

@@ -23,7 +23,7 @@ package classes.Items.Vehicles
 				return false;
 			}
 			if (game.player.elfScore() >= 11) { //Elf
-				outputText("No way your going into this mechanical abomination. Your an elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
+				outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
 				return false;
 			}
 			if (game.player.tallness > 48 || game.player.tailType != Tail.NONE || game.player.wings.type != Wings.NONE) { //Taller than 4 ft or having wings/tail
@@ -34,12 +34,18 @@ package classes.Items.Vehicles
 		}
 		
 		override public function playerEquip():Vehicles {
-			if (game.player.hasKeyItem("Blueprint - Upgraded Armor plating 1.0") >= 0) game.player.HP = 1.2 * game.player.maxHP();
-			if (game.player.hasKeyItem("Blueprint - Upgraded Armor plating 2.0") >= 0) game.player.HP = 1.35 * game.player.maxHP();
-			if (game.player.hasKeyItem("Blueprint - Upgraded Armor plating 3.0") >= 0) game.player.HP = 1.5 * game.player.maxHP();
+			if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) game.player.HP = 1.2 * game.player.maxHP();
+			if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) game.player.HP = 1.35 * game.player.maxHP();
+			if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) game.player.HP = 1.5 * game.player.maxHP();
 			return super.playerEquip();
 		}
 		
+		override public function playerRemove():Vehicles {
+			if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) game.player.HP /= 1.2;
+			if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) game.player.HP /= 1.35;
+			if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) game.player.HP /= 1.5;
+			game.player.HP = Math.round(game.player.HP);
+			return super.playerRemove();
+		}
 	}
-
 }

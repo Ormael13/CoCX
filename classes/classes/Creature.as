@@ -508,9 +508,9 @@ public class Creature extends Utils
 			var maxHP_mult1:Number = 1;
 			maxHP_mult1 += (countCockSocks("green") * 0.02);
 			if (game.player.vehiclesName == "Goblin Mech Alpha") {
-				if (game.player.hasKeyItem("Blueprint - Upgraded Armor plating 1.0") >= 0) maxHP_mult1 += 0.2;
-				if (game.player.hasKeyItem("Blueprint - Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.35;
-				if (game.player.hasKeyItem("Blueprint - Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 0.5;
+				if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) maxHP_mult1 += 0.2;
+				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.35;
+				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 0.5;
 			}
 			return maxHP_mult1;
 		}

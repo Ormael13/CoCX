@@ -744,7 +744,7 @@ public class ValaScene extends BaseContent
 				if(player.cor > 40) dynStats("cor", -.5);
 			}
 			//[End Encounter]
-			cheatTime(1);
+			cheatTime2(30);
 			doNext(SceneLib.telAdre.barTelAdre);
 		}
 		//[You]
@@ -793,7 +793,7 @@ public class ValaScene extends BaseContent
 			outputText("\n\n");
 
 			outputText("\"<i>You see?</i>\" Vala asks, holding the organic device aloft with a mischievous smile. \"<i>They don't last forever, but while they do, these little toys give us a very intimate connection to loved ones. This way, I can go all week with a reminder of you inside me.</i>\" She gives you a kiss on the lips and the fairies give you a tiny chorus of applause for the entertaining show. It's good that her little friends aren't around more often, you pant to yourself, or you'd be a drooling vegetable in no time.\n\n");
-			cheatTime(1);
+			cheatTime2(30);
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -812,7 +812,7 @@ public class ValaScene extends BaseContent
 			outputText("When you finally calm down enough to swallow your spittle, wipe the slick sweat from your face and body, and release the fairy girl from the death-grip between your " + hipDescript() + ", you try to ask what happened to the petals inside your body. The fae girl gives your " + clitDescript() + " a little kiss and places her lips on your pussy. She puffs her cheeks and whispers a string of strange words into your quivering cunt. All at once, the soft petals inside you meld into one warm, hard shape, perfectly mirroring your pussy, labia to cervix. Very carefully, Vala draws the verdant shaft from your body and produces the most intricately ridged, molded dildo that you've ever seen. It's a soft pink color, matching your engorged genitals, and even gently pulses with your every heartbeat.\n\n");
 
 			outputText("\"<i>You see?</i>\" Vala asks, holding the organic device aloft with a mischievous smile. \"<i>They don't last forever, but while they do, these little toys give us a very intimate connection to loved ones. This way, I can go about all week with a reminder of you inside me.</i>\" She gives you a kiss on the lips and the fairies give you a tiny chorus of applause for the entertaining show. It's good that her little friends aren't around more often, you gasp to yourself, or you'd be a drooling vegetable in no time.");
-			cheatTime(1);
+			cheatTime2(30);
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
 		}

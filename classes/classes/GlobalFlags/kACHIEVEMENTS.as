@@ -267,16 +267,16 @@ package classes.GlobalFlags
 		
 		
 		//Epic Achievements (230-239)
-		public static const EPIC_XXX5_:int			= 230;
-		public static const EPIC_XXX6_:int			= 231;
-		public static const UNKNOWN_ACHIEVEMENT_232:int			= 232;
-		public static const UNKNOWN_ACHIEVEMENT_233:int			= 233;
-		public static const UNKNOWN_ACHIEVEMENT_234:int			= 234;
+		public static const EPIC_XXX5_MARETHS_JUDGMENT_DAY:int	= 230;
+		public static const EPIC_XXX6_RISE_OF_THE_DEMONS:int	= 231;
+		public static const EPIC_XXX7_SALVATION:int				= 232;
+		public static const EPIC_XXX8_GENISYS:int				= 233;
+		public static const EPIC_XXX9_DARK_FATE:int				= 234;
 		public static const UNKNOWN_ACHIEVEMENT_235:int			= 235;
 		public static const UNKNOWN_ACHIEVEMENT_236:int			= 236;
 		public static const UNKNOWN_ACHIEVEMENT_237:int			= 237;
-		public static const EPIC_GUARDIAN_OF_NOTRE_DAME:int	= 238;
-		public static const EPIC_THE_DEVIL_WEARS_PRADA:int	= 239;
+		public static const EPIC_GUARDIAN_OF_NOTRE_DAME:int		= 238;
+		public static const EPIC_THE_DEVIL_WEARS_PRADA:int		= 239;
 		
 		
 		public static const GENERAL_JUST_TO_SPITE_YOU:int							= 240;
@@ -378,8 +378,8 @@ package classes.GlobalFlags
 		public static const FASHION_THRONE_OF_TOUGHNESS:int		= 331;
 		public static const FASHION_THRONE_OF_WISDOM:int		= 332;
 		public static const GENERAL_LEGENDARY_CHIMERA:int		= 333;
-		public static const UNKNOWN_ACHIEVEMENT_334:int			= 334;
-		public static const UNKNOWN_ACHIEVEMENT_335:int			= 335;
+		public static const LEVEL_NEWB_GOD_ESS:int				= 334; //Level 120 (shadow achievement)
+		public static const LEVEL_MID_TIER_GOD_ESS:int			= 335; //Level 150 (shadow achievement)
 		public static const UNKNOWN_ACHIEVEMENT_336:int			= 336;
 		public static const UNKNOWN_ACHIEVEMENT_337:int			= 337;
 		public static const UNKNOWN_ACHIEVEMENT_338:int			= 338;

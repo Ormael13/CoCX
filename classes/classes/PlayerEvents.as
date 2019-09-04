@@ -1065,13 +1065,13 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 			}
 			//Goblinoid blood
 			if (player.goblinScore() >= 10 && player.findPerk(PerkLib.GoblinoidBlood) < 0) {
-				outputText("\nAs you become a goblinoid again you can feel the chemical pumped in by your gadgets resume working.\n");
+				outputText("\nAs you become a goblinoid again you can feel the chemicals pumped in by your gadgets resume working.\n");
 				outputText("\n(<b>Gained Perk: Goblinoid blood</b>)\n");
 				player.createPerk(PerkLib.GoblinoidBlood, 0, 0, 0, 0);
 				needNext = true;
 			}
 			else if (player.goblinScore() < 10 && player.findPerk(PerkLib.GoblinoidBlood) >= 0) {
-				outputText("\nYou feel the drugs in your blood losing effects. Damnit of course it won’t work since those chemical power ups where tested for goblinoid only. Guess perhaps a in few years you could try and develop a variants.\n");
+				outputText("\nYou feel the drugs in your blood losing effect. Damnit, of course it won’t work since those chemical power ups were tested for goblinoids only. Guess perhaps a in few years you could try and develop a variant.\n");
 				outputText("\n<b>(Lost Perk: Goblinoid blood)</b>\n");
 				player.removePerk(PerkLib.GoblinoidBlood);
 				needNext = true;

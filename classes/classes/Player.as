@@ -580,9 +580,9 @@ use namespace CoC;
 			}
 			if (vehiclesName == "Goblin Mech Alpha") {
 				armorDef += 10;
-				if (hasKeyItem("Blueprint - Upgraded Armor plating 1.0") >= 0) armorDef += 5;
-				if (hasKeyItem("Blueprint - Upgraded Armor plating 2.0") >= 0) armorDef += 10;
-				if (hasKeyItem("Blueprint - Upgraded Armor plating 3.0") >= 0) armorDef += 15;
+				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorDef += 5;
+				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorDef += 10;
+				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorDef += 15;
 			}
 			armorDef = Math.round(armorDef);
 			//Berzerking removes armor
@@ -3711,10 +3711,8 @@ use namespace CoC;
 			if (tailType == Tail.DEMONIC)
 				demonCounter++;
 			if (wings.type == Wings.BAT_LIKE_TINY)
-				demonCounter++;
-			if (wings.type == Wings.BAT_LIKE_LARGE)
 				demonCounter += 2;
-			if (wings.type == Wings.BAT_LIKE_LARGE_2)
+			if (wings.type == Wings.BAT_LIKE_LARGE)
 				demonCounter += 4;
 			if (tongue.type == Tongue.DEMONIC)
 				demonCounter++;
@@ -5261,9 +5259,9 @@ use namespace CoC;
 			if (elfCounter >= 11) {
 				if (wings.type == Wings.)
 					elfCounter++;
-			}*/
+			}
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
-				elfCounter += 50;
+				elfCounter += 50;*/
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && elfCounter >= 4)
 				elfCounter += 1;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && elfCounter >= 8)

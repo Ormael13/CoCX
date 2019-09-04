@@ -77,7 +77,7 @@ public class CombatUI extends BaseCombatContent {
 			} else if (player.hasStatusEffect(StatusEffects.KnockedBack)) {
 				outputText("\n<b>You'll need to close some distance before you can use any physical attacks!</b>");
 			} else if (player.isInGoblinMech()) {
-				btnMelee.disable("No way you could use your melee weapon while piloting goblin mech.");
+				btnMelee.show("Sawblade", combat.basemechmeleeattacks, "Attempt to attack the enemy with your mech sawblade.  Damage done is determined by your strength and weapon.");
 			}
 		}
 		// Ranged

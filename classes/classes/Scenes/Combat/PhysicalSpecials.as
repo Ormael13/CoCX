@@ -166,7 +166,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 			if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
 				bd = buttons.add("Tail Spike", playerTailSpike).hint("Shoot an envenomed spike at your opponent dealing minor physical damage, slowing its movement speed and inflicting serious lust damage.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-				if (player.tailVenom < 25) {
+				if (player.tailVenom < 50 && player.hasPerk(PerkLib.ManticoreMetabolism)) {
+					bd.disable("You do not have enough venom to shoot spikes right now!");
+				}
+				else if (player.tailVenom < 25) {
 					bd.disable("You do not have enough venom to shoot spike right now!");
 				}
 			}
@@ -273,7 +276,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (monster.tallness > 120 || monster.hasPerk(PerkLib.EnemyGigantType)) bd.disable("<b>Your opponent is too tall for Strangulate to have any effect on it.</b>\n\n");
 			}
 			if (player.hasKeyItem("Rocket Boots") >= 0 || player.hasKeyItem("Nitro Boots") >= 0) {
-				if (player.hasKeyItem("Nitro Boots") >= 0) bd = buttons.add("Blazing rocket kick", blazingRocketKick).hint("Deal fire damage using your boots. Also set burns.");
+				if (player.hasKeyItem("Nitro Boots") >= 0) bd = buttons.add("Blazing rocket kick", blazingRocketKick).hint("Deal fire damage using your boots. Also burns.");
 				else bd = buttons.add("Rocket kick", blazingRocketKick).hint("Deal fire damage using your boots.");
 			}
 			if (player.arms.type == Arms.GARGOYLE) {
@@ -319,26 +322,26 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (player.isInGoblinMech()) {
 			if (player.hasKeyItem("Taser") >= 0) {
-				if (player.hasKeyItem("Taser overcharge battery") >= 0) buttons.add("Tazer", mechTazer).hint("A voltage rod set on the mech as an upgrade can be used to temporarily paralyse the opponent. Deals some lesser lightning damage and stun for 4 rounds. \n\nWould go into cooldown after use for: 8 rounds");
-				else buttons.add("Tazer", mechTazer).hint("A voltage rod set on the mech as an upgrade can be used to temporarily paralyse the opponent. Deals no damage and stun for 2 rounds. \n\nWould go into cooldown after use for: 8 rounds");
+				if (player.hasKeyItem("Taser with an overcharged battery") >= 0) bd = buttons.add("Tazer", mechTazer).hint("A voltage rod set on the mech as an upgrade can be used to temporarily paralyse the opponent. Deals some lesser lightning damage and stun for 4 rounds. \n\nWould go into cooldown after use for: 8 rounds");
+				else bd = buttons.add("Tazer", mechTazer).hint("A voltage rod set on the mech as an upgrade can be used to temporarily paralyse the opponent. Deals no damage and stun for 2 rounds. \n\nWould go into cooldown after use for: 8 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownTazer)) {
 					bd.disable("<b>You need more time before you can use Tazer again.</b>\n\n");
 				}
 			}
 			if (player.hasKeyItem("Dynapunch Glove") >= 0) {
-				buttons.add("Dynapunch G.", mechDynapunchGlove).hint("Shoot a springed gloved fist at the opponent with a rocket punch stunning for one round and dealing damage. \n\nWould go into cooldown after use for: 8 rounds");
+				bd = buttons.add("Dynapunch G.", mechDynapunchGlove).hint("Shoot a springed gloved fist at the opponent with a rocket punch stunning for one round and dealing damage. \n\nWould go into cooldown after use for: 8 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownDynapunchGlove)) {
 					bd.disable("<b>You need more time before you can use Dynapunch Glove again.</b>\n\n");
 				}
 			}
 			if (player.hasKeyItem("Whitefire Beam Cannon") >= 0) {
-				buttons.add("Whitefire B.C.", mechWhitefireBeamCannon).hint("Shoot with the whitefire beam cannon at enemy burning him. \n\nWould go into cooldown after use for: 8 rounds");
+				bd = buttons.add("Whitefire B.C.", mechWhitefireBeamCannon).hint("Shoot with the whitefire beam cannon at enemy burning him. \n\nWould go into cooldown after use for: 8 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownWhitefireBeamCannon)) {
 					bd.disable("<b>You need more time before you can use Whitefire Beam Cannon again.</b>\n\n");
 				}
 			}
 			if (player.hasKeyItem("Snowball Generator") >= 0) {
-				buttons.add("Snowball G.", mechSnowballGenerator).hint("Activate the snowball generator taking aim and launching a volley of snowballs at the enemy. \n\nWould go into cooldown after use for: 8 rounds");
+				bd = buttons.add("Snowball G.", mechSnowballGenerator).hint("Activate the snowball generator taking aim and launching a volley of snowballs at the enemy. \n\nWould go into cooldown after use for: 8 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownSnowballGenerator)) {
 					bd.disable("<b>You need more time before you can use Snowball Generator again.</b>\n\n");
 				}
@@ -375,26 +378,26 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (player.isInGoblinMech()) {
 			if (player.hasKeyItem("Taser") >= 0) {
-				if (player.hasKeyItem("Taser overcharge battery") >= 0) buttons.add("Tazer", mechTazer).hint("A voltage rod set on the mech as an upgrade can be used to temporarily paralyse the opponent. Deals some lesser lightning damage and stun for 4 rounds. \n\nWould go into cooldown after use for: 8 rounds");
-				else buttons.add("Tazer", mechTazer).hint("A voltage rod set on the mech as an upgrade can be used to temporarily paralyse the opponent. Deals no damage and stun for 2 rounds. \n\nWould go into cooldown after use for: 8 rounds");
+				if (player.hasKeyItem("Taser overcharge battery") >= 0) bd = buttons.add("Tazer", mechTazer).hint("A voltage rod set on the mech as an upgrade can be used to temporarily paralyse the opponent. Deals some lesser lightning damage and stun for 4 rounds. \n\nWould go into cooldown after use for: 8 rounds");
+				else bd = buttons.add("Tazer", mechTazer).hint("A voltage rod set on the mech as an upgrade can be used to temporarily paralyse the opponent. Deals no damage and stun for 2 rounds. \n\nWould go into cooldown after use for: 8 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownTazer)) {
 					bd.disable("<b>You need more time before you can use Tazer again.</b>\n\n");
 				}
 			}
 			if (player.hasKeyItem("Dynapunch Glove") >= 0) {
-				buttons.add("Dynapunch G.", mechDynapunchGlove).hint("Shoot a springed gloved fist at the opponent with a rocket punch stunning for one round and dealing damage. \n\nWould go into cooldown after use for: 8 rounds");
+				bd = buttons.add("Dynapunch G.", mechDynapunchGlove).hint("Shoot a springed gloved fist at the opponent with a rocket punch stunning for one round and dealing damage. \n\nWould go into cooldown after use for: 8 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownDynapunchGlove)) {
 					bd.disable("<b>You need more time before you can use Dynapunch Glove again.</b>\n\n");
 				}
 			}
 			if (player.hasKeyItem("Whitefire Beam Cannon") >= 0) {
-				buttons.add("Whitefire B.C.", mechWhitefireBeamCannon).hint("Shoot with the whitefire beam cannon at enemy burning him. \n\nWould go into cooldown after use for: 8 rounds");
+				bd = buttons.add("Whitefire B.C.", mechWhitefireBeamCannon).hint("Shoot with the whitefire beam cannon at enemy burning him. \n\nWould go into cooldown after use for: 8 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownWhitefireBeamCannon)) {
 					bd.disable("<b>You need more time before you can use Whitefire Beam Cannon again.</b>\n\n");
 				}
 			}
 			if (player.hasKeyItem("Snowball Generator") >= 0) {
-				buttons.add("Snowball G.", mechSnowballGenerator).hint("Activate the snowball generator taking aim and launching a volley of snowballs at the enemy. \n\nWould go into cooldown after use for: 8 rounds");
+				bd = buttons.add("Snowball G.", mechSnowballGenerator).hint("Activate the snowball generator taking aim and launching a volley of snowballs at the enemy. \n\nWould go into cooldown after use for: 8 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownSnowballGenerator)) {
 					bd.disable("<b>You need more time before you can use Snowball Generator again.</b>\n\n");
 				}
@@ -2020,15 +2023,18 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function blazingRocketKick():void {
 		clearOutput();
-		outputText("You propel yourself up and kick " + monster.a + monster.short + " in the face leaving burns in the process.  ");
-		var damage:Number = 0;
-		damage += unarmedAttack();
-		damage *= spellMod();
+		outputText("You propel yourself up and kick " + monster.a + monster.short + " in the face leaving burns in the process. ");
+		var damage:Number = player.str;
+		if (damage < 10) damage = 10;
+		damage += (unarmedAttack() * 2);
+		damage *= (spellMod() * 2);
 		damage = Math.round(damage);
 		damage = doDamage(damage);//phys dmg
+		outputText(" (" + damage + ") ");
 		damage = doDamage(damage);//fire dmg
+		outputText(" (" + damage + ") ");
 		if (player.hasKeyItem("Nitro Boots") >= 0) {
-			outputText(" Your foe catches on fire too.");
+			outputText(" Your foe catches on fire.");
 			monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
 		}
 		checkAchievementDamage(damage);
@@ -4302,7 +4308,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	
 	public function mechTazer():void {
 		clearOutput();
-		outputText("You press the lightning button and aim smirking at " + monster.a + monster.short + ", your mech delivering a ");
+		outputText("You press the lightning button and aim, smirking at " + monster.a + monster.short + ", your mech delivering a ");
 		player.createStatusEffect(StatusEffects.CooldownTazer,8,0,0,0);
 		if (player.hasKeyItem("Taser overcharge battery") >= 0) {
 			var damage:Number = scalingBonusIntelligence() * spellModWhite();
@@ -4341,10 +4347,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function mechSnowballGenerator():void {
 		clearOutput();
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
-		outputText("You activate the snowball generator taking aim and launching a volley of snowballs at the " + monster.a + monster.short + " for ");
+		outputText("You activate the snowball generator, taking aim and launching a volley of snowballs at the " + monster.a + monster.short + " for ");
 		player.createStatusEffect(StatusEffects.CooldownSnowballGenerator,8,0,0,0);
 		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModBlack() * 4;
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -4374,10 +4381,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function mechWhitefireBeamCannon():void {
 		clearOutput();
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
-		outputText("You shoot with the whitefire beam cannon at " + monster.a + monster.short + " burning " + monster.pronoun3 + " badly for ");
+		outputText("You shoot with the Whitefire beam cannon at " + monster.a + monster.short + " burning " + monster.pronoun3 + " badly for ");
 		player.createStatusEffect(StatusEffects.CooldownWhitefireBeamCannon,8,0,0,0);
 		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModWhite() * 4;
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -4437,7 +4445,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasKeyItem("M.G.S. bracer") >= 0) damage *= 1.2;
 		}
 		damage = doDamage(damage);
-		outputText(" damage");
+		outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b> damage");
 		if (!monster.hasPerk(PerkLib.Resolute)) {
 			outputText(" stunning " + monster.pronoun3 + " for the round");
 			monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);

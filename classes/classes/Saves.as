@@ -817,7 +817,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.upperGarmentId = player.upperGarment.id;
 		saveFile.data.lowerGarmentId = player.lowerGarment.id;
 		saveFile.data.armorName = player.modArmorName;
-		saveFile.data.vehicleId = player.vehicles.id;
+		saveFile.data.vehiclesId = player.vehicles.id;
 		
 		//saveFile.data.weaponName = player.weaponName;// uncomment for backward compatibility
 		//saveFile.data.weaponVerb = player.weaponVerb;// uncomment for backward compatibility

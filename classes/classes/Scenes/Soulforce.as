@@ -27,6 +27,7 @@ import classes.Scenes.Areas.Forest.TamaniScene;
 import classes.Scenes.Areas.Forest.TentacleBeastRaging;
 import classes.Scenes.Areas.Forest.WorldTree;
 import classes.Scenes.Areas.HighMountains.IzumiScene;
+import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
 import classes.Scenes.Dungeons.DenOfDesire.ObsidianGargoyle;
 import classes.Scenes.Monsters.DarkElfRanger;
@@ -198,18 +199,13 @@ use namespace CoC;
 			//addButton(5, "Upgrade", UpgradeItems).hint("."); //ulepszanie itemów
 			if (player.findPerk(PerkLib.Metamorph) >= 0) addButton(6, "Metamorf", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold freely your body.");//używanie metamorfowania z użyciem soulforce
 			if (player.findPerk(PerkLib.SoulSense) >= 0) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounter."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
-			addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
+			//addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
 			addButton(14, "Back", playerMenu);
 		}//w lini 28 w oOnLoadVariables zmian wprowadzić i w lini conditionalConverters w folderze parser zmian dot. wraith wprowadzić, zablokować perki soul king to soul ancestor w momencie robienia release version
 		public function SoulforceCheats():void {
 			clearOutput();
 			outputText("Collection of current used cheats that with time will be removed or replaced by new ones.");
 			outputText("\n\nAscension points: " + player.ascensionPerkPoints + "");
-			if (player.hasStatusEffect(StatusEffects.AchievementsNormalShadowTotal)) {
-				outputText("\n\nNormal achievs: " + player.statusEffectv1(StatusEffects.AchievementsNormalShadowTotal) + "");
-				outputText("\n\nShadow achievs: " + player.statusEffectv2(StatusEffects.AchievementsNormalShadowTotal) + "");
-				outputText("\n\nTotals achievs: " + player.statusEffectv3(StatusEffects.AchievementsNormalShadowTotal) + "");
-			}
 			menu();
 			addButton(0, "StatsAdj/Ascen", StatsAscensionMenu).hint("For more precise adjusting each of 8 main stats and Ascension related stuff.");
 			addButton(1, "P/G/XP/LvL", PerksGemsEXPLvL).hint("Adding/Removing perk points and adding gems/exp/lvl.");
@@ -235,6 +231,11 @@ public function FightAria():void {
 	clearOutput();
 	outputText("Entering battle with Melkie! Enjoy ^^");
 	startCombat(new Aria());
+}
+public function FightLethice():void {
+	clearOutput();
+	outputText("Entering battle with Lethice! Enjoy ^^");
+	startCombat(new Lethice());
 }
 public function PhylacteryTesting():void {
 	clearOutput();
@@ -1385,7 +1386,10 @@ public function fixingProductionDrugs():void {
 			addButton(7, "GreenGel", AddGreenGel).hint("Add 1 Green Gel.");
 			addButton(8, "DragonScale", AddDragonscale).hint("Add 1 Dragonscale.");
 			addButton(9, "F.Imp S.", AddFeralImpSkull).hint("Add 1 Feral Imp Skull.");
-			addButton(10, "PolMidScr", AddPolarMidnightScroll).hint("Add 1 Polar Midnight scroll");
+			addButton(10, "PolMidScr", AddPolarMidnightScroll).hint("Add 1 Polar Midnight scroll.");
+			addButton(11, "MetalPieces", AddMetalPieces).hint("Add 50 Metal Pieces (game not check for limits so not go overboard with using this cheat).");
+			addButton(12, "Mechanism", AddMechanism).hint("Add 1 Mechanism.");
+			addButton(13, "EnergyCore", AddEnergyCore).hint("Add 1 Energy Core.");
 			addButton(14, "Back", SoulforceCheats);
 		}
 		public function EnemiesMenu():void {
@@ -1395,7 +1399,8 @@ public function fixingProductionDrugs():void {
 			addButton(2, "Sonya", FightSonya).hint("Test fight with Sonya.");
 			addButton(3, "RyuBi", FightRyuBi).hint("Test fight with RyuBi.");
 			addButton(4, "Aria", FightAria).hint("Test fight with melkie huntress Aria.");
-			addButton(5, "DE Ranger", FightDarkElfRanger).hint("Test fight with Dark Elf Ranger. (lvl 39)");
+			addButton(5, "Lethice", FightLethice).hint("Test fight with Lethice.");
+			//addButton(5, "DE Ranger", FightDarkElfRanger).hint("Test fight with Dark Elf Ranger. (lvl 39)");
 			//addButton(6, "DE Sniper", FightDarkElfSniper).hint("Test fight with Dark Elf Sniper. (lvl 51)");
 			addButton(6, "SomeManticore", FightRandomnManticore).hint("Test fight with some manticore.");
 			addButton(7, "Electra", FightElectra).hint("Test fight with Electra.");
@@ -1413,6 +1418,20 @@ public function FightAurora():void {
 	startCombat(new Aurora());
 }
 		
+		public function AddEnergyCore():void {
+			outputText("\n\n<b>(Gained 1 Energy Core!)</b>\n\n");
+			inventory.takeItem(useables.ENECORE, MaterialMenu);
+		}
+		public function AddMechanism():void {
+			outputText("\n\n<b>(Gained 1 Mechanism!)</b>\n\n");
+			inventory.takeItem(useables.MECHANI, MaterialMenu);
+		}
+		public function AddMetalPieces():void {
+			outputText("\n\n<b>(Gained 50 Metal Pieces!)</b>\n\n");
+			flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += 50;
+			statScreenRefresh();
+			MaterialMenu();
+		}
 		public function AddPolarMidnightScroll():void {
 			outputText("\n\n<b>(Gained 1 Polar Midnight scroll!)</b>\n\n");
 			inventory.takeItem(consumables.POL_MID, MaterialMenu);

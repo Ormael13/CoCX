@@ -84,7 +84,7 @@ public class Achievements extends BaseContent
 			addAchievement("Farmer", kACHIEVEMENTS.ZONE_FARMER, "Visit Whitney's farm 30 times.");
 			addAchievement("Sailor", kACHIEVEMENTS.ZONE_SEA_LEGS, "Use the lake boat 15 times.");
 			
-			titleAchievementSection("Levels"); //8 achievements
+			titleAchievementSection("Levels"); //13 achievements
 			addAchievement("Level up!", kACHIEVEMENTS.LEVEL_LEVEL_UP, "Get to level 2.");
 			addAchievement("Novice", kACHIEVEMENTS.LEVEL_NOVICE, "Get to level 5.");
 			addAchievement("Apprentice", kACHIEVEMENTS.LEVEL_APPRENTICE, "Get to level 10.");
@@ -95,7 +95,9 @@ public class Achievements extends BaseContent
 			addAchievement("Illuistrous", kACHIEVEMENTS.LEVEL_ILLUSTRIOUS, "Get to level 60.");
 			addAchievement("Overlord", kACHIEVEMENTS.LEVEL_OVERLORD, "Get to level 75.");
 			addAchievement("Sovereign", kACHIEVEMENTS.LEVEL_SOVEREIGN, "Get to level 90.");
-			addAchievement("Are you a god?", kACHIEVEMENTS.LEVEL_ARE_YOU_A_GOD, "Get to level 100.", "Get to level 100. (Your powers would have surpassed Marae's by now.)", true);
+			addAchievement("Are you a god?", kACHIEVEMENTS.LEVEL_ARE_YOU_A_GOD, "Get to level 100.", "Get to level 100. (Your powers would have surpassed weakest god by now.)", true);
+			addAchievement("Newb God(ess)", kACHIEVEMENTS.LEVEL_NEWB_GOD_ESS, "Get to level 120.", "Get to level 120. (You still new to all this 'god' stuff.)", true);
+			addAchievement("Mid-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS, "Get to level 150.", "Get to level 150. (No more called newb god(ess) at least.)", true);// (Your powers would have surpassed Marae's by now.)
 			
 			titleAchievementSection("Population"); //21 achievements
 			addAchievement("My First Companion", kACHIEVEMENTS.POPULATION_FIRST, "Have a camp population of 2.");
@@ -230,12 +232,15 @@ public class Achievements extends BaseContent
 			addAchievement("Glutton", kACHIEVEMENTS.REALISTIC_GLUTTON, "Eat while hunger is above 90.");
 			addAchievement("Fasting", kACHIEVEMENTS.REALISTIC_FASTING, "Keep hunger below 25 for a week but don't let it reach 0.");
 			
-			titleAchievementSection("Epic"); //10 achievements
+			titleAchievementSection("Epic"); //13 achievements
 			addAchievement("xXx2: The Next Level", kACHIEVEMENTS.EPIC_XXX2_THE_NEXT_LEVEL, "Start NG+ (or higher) game.", "", true);
 			addAchievement("xXx: The Return of Mareth Champion", kACHIEVEMENTS.EPIC_XXX_THE_RETURN_OF_MARETH_CHAMPION, "Start NG++ (or higher) game.", "", true);
 			addAchievement("xXx 4", kACHIEVEMENTS.EPIC_XXX_4, "Start NG+++ (or higher) game.", "", true);
-			//addAchievement("xXx 4", kACHIEVEMENTS.EPIC_XXX4, "Start NG++++ (or higher) game.", "", true);
-			//addAchievement("xXx 4", kACHIEVEMENTS.EPIC_XXX4, "Start NG+++++ (or higher) game.", "", true);
+			addAchievement("xXx 5: Mareth's Judgment_Day", kACHIEVEMENTS.EPIC_XXX5_MARETHS_JUDGMENT_DAY, "Start NG 4+ (or higher) game.", "", true);
+			addAchievement("xXx 6: Rise of the Demons", kACHIEVEMENTS.EPIC_XXX6_RISE_OF_THE_DEMONS, "Start NG 5+ (or higher) game.", "", true);
+			//addAchievement("xXx 7: Salvation", kACHIEVEMENTS.EPIC_XXX7_SALVATION, "Start NG 6+ (or higher) game.", "", true);
+			//addAchievement("xXx 8: Genisys", kACHIEVEMENTS.EPIC_XXX8_GENISYS, "Start NG 7+ (or higher) game.", "", true);
+			//addAchievement("xXx 9: Dark Fate", kACHIEVEMENTS.EPIC_XXX9_DARK_FATE, "Start NG 8+ (or higher) game.", "", true);
 			addAchievement("Guardian of Notre-Dame", kACHIEVEMENTS.EPIC_GUARDIAN_OF_NOTRE_DAME, "Become Gargoyle.", "", true);
 			addAchievement("The Devil Wears Prada", kACHIEVEMENTS.EPIC_THE_DEVIL_WEARS_PRADA, "Became Devil.", "", true);
 			//odblokowanie pierwszego animal ancestory starting bonus at chara creation

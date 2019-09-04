@@ -213,7 +213,7 @@ public class HeXinDao extends BaseContent
         function sayLine2(itype:ItemType,desc:String):String{
             return introText+desc+costText+(itype.value*0.2)+endText2;
         }
-		addButton(1, "1st Stall", TierI).hint("Check out first of stalls with a common items and for cultivators that jsut started.");
+		addButton(1, "1st Stall", TierI).hint("Check out first of stalls with a common items and for cultivators that just started.");
         if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(2, "2nd Stall", TierII).hint("Check out second of stalls with a items for Soul Apprentices and Soul Warriors.");
 		else addButtonDisabled(2, "2nd Stall", "Need to be at least Soul Apprentice to check those items.");
         //addButton(3, "3rd Stall", TierIII).hint("Check out second of stalls with a items.");

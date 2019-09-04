@@ -147,7 +147,7 @@ public function alvinaThirdEncounterYesSure():void
 }
 public function alvinaThirdEncounterYesNever():void
 {
-	//outputText("(if Siegweird quest)You're here to kill this witch. There is no way you’d ever accept her offer.(End of cut) ");
+	if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 2) outputText("You're here to kill this witch. There is no way you’d ever accept her offer. ");
 	outputText("The demonic goat girl laughs.\n\n");
 	outputText("\"<i>How amusing, I didn’t think you had the willpower to deny my gracious offer. I imagine you expect I will simply let you go? Well that’s too bad… You see, while an apprentice would have been a useful pawn, willing subjects are on shortage these days.  I’m afraid you aren’t going anywhere.</i>\"\n\n");
 	outputText("You charge at the girl, " + (player.isFistOrFistWeapon() ? "and try to punch her in the face. However, she catches your fist in her paw, blocking your blow with disheartening ease" : "and attempt to strike her with your [weapon], but Alvina proves stronger than you, catching and holding your [weapon] in place with only two fingers") + ". Or is she? ");

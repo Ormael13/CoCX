@@ -174,6 +174,15 @@ public class BaseCombatContent extends BaseContent {
 	protected function spellModWhite():Number {
 		return combat.magic.spellModWhiteImpl();
 	}
+	protected function spellBlackCooldown():Number {
+		return combat.magic.spellBlackCooldownImpl();
+	}
+	protected function spellGreyCooldown():Number {
+		return combat.magic.spellGreyCooldownImpl();
+	}
+	protected function spellWhiteCooldown():Number {
+		return combat.magic.spellWhiteCooldownImpl();
+	}
 	protected function healMod():Number {
 		return combat.magic.healModImpl();
 	}

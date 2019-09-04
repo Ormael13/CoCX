@@ -156,7 +156,7 @@ public class PlayerInfo extends BaseContent {
 
 		miscStats += "<b>Basic Jobs:</b> " + player.currentBasicJobs() + " / 10" + "\n";
 		miscStats += "<b>Advanced Jobs:</b> " + player.currentAdvancedJobs() + " / " + player.maxAdvancedJobs() + "\n";
-		miscStats += "<b>Hidden Jobs:</b> " + player.currentHiddenJobs() + " / " + player.maxHiddenJobs() + "\n";
+		//miscStats += "<b>Hidden Jobs:</b> " + player.currentHiddenJobs() + " / " + player.maxHiddenJobs() + "\n";
 		miscStats += "<b>Prestige Jobs:</b> " + player.currentPrestigeJobs() + " / " + player.maxPrestigeJobs() + "\n";
 
 		if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] > 0) {
@@ -358,12 +358,14 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<i>Resistance (Poison):</i> " + (100 - Math.round(player.damagePoisonPercent())) + "%\n";
 		combatStats += "<b>Resistance (Lust):</b> " + (100 - Math.round(CoC.instance.player.lustPercent())) + "%\n";
 		combatStats += "\n";
-		combatStats += "<b>Spell Effect Multiplier:</b> " + Math.round(100 * combat.spellMod()) + "%\n";
-		combatStats += "<b>Spell Cost:</b> " + combat.spellCost(100) + "%\n";
-		combatStats += "<b>White Spell Effect Multiplier:</b> " + Math.round(100 * combat.spellModWhite()) + "%\n";
-		combatStats += "<b>White Spell Cost:</b> " + combat.spellCostWhite(100) + "%\n";
-		combatStats += "<b>Black Spell Effect Multiplier:</b> " + Math.round(100 * combat.spellModBlack()) + "%\n";
-		combatStats += "<b>Black Spell Cost:</b> " + combat.spellCostBlack(100) + "%\n";
+		combatStats += "<b>Spells Effect Multiplier:</b> " + Math.round(100 * combat.spellMod()) + "%\n";
+		combatStats += "<b>Spells Cost:</b> " + combat.spellCost(100) + "%\n";
+		combatStats += "<b>White Spells Effect Multiplier:</b> " + Math.round(100 * combat.spellModWhite()) + "%\n";
+		combatStats += "<b>White Spells Cost:</b> " + combat.spellCostWhite(100) + "%\n";
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) combatStats += "<b>White Spells Cooldowns:</b> " + combat.spellWhiteCooldown() + " turns\n";
+		combatStats += "<b>Black Spells Effect Multiplier:</b> " + Math.round(100 * combat.spellModBlack()) + "%\n";
+		combatStats += "<b>Black Spells Cost:</b> " + combat.spellCostBlack(100) + "%\n";
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) combatStats += "<b>Black Spells Cooldowns:</b> " + combat.spellBlackCooldown() + " turns\n";
 		combatStats += "\n";
 		combatStats += "<b>Heals Effect Multiplier:</b> " + Math.round(100 * combat.healMod()) + "%\n";
 		combatStats += "<b>Heals Cost:</b> " + combat.healCost(100) + "%\n";
