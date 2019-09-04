@@ -2295,7 +2295,7 @@ public class MagicSpecials extends BaseCombatContent {
 		player.lust += 50;
 		var maleficiumDuration:Number = 10;
 		if (player.hasPerk(PerkLib.ObsidianHeartEvolved)) maleficiumDuration += 5;
-		outputText("You laugh malevolently as your body fills with profane powers empowering your spells but making you blush with barely contained desire.\n\n");
+		outputText("You moan in delight as your body fills with profane powers, empowering your spells and making you blush with barely contained desire.\n\n");
 		if (player.cor < 60 && player.hasPerk(PerkLib.ObsidianHeart)) dynStats("cor", 0.3);
 		player.createStatusEffect(StatusEffects.Maleficium,maleficiumDuration,0,0,0);
 		enemyAI();
@@ -2324,11 +2324,12 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		clearOutput();
-		outputText("You grin malevolently and wave an arcane sign, causing infernal fire to surges from below and scorching your opponent \n");
+		outputText("You grin malevolently and weave an arcane sign, causing an infernal fire to surges from below and scorching your opponent \n");
 		var damage:Number = scalingBonusIntelligence() * 0.8;
 		if (player.hasPerk(PerkLib.ObsidianHeartEvolved)) damage += scalingBonusIntelligence() * 0.2;
 		if (player.hasPerk(PerkLib.ObsidianHeartFinalForm)) damage += scalingBonusIntelligence() * 0.4;
 		damage *= spellMod();
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -4046,6 +4047,4 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 
 }
-
 }
-

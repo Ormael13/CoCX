@@ -109,6 +109,7 @@ import classes.BodyParts.Wings;
 				case Arms.DEVIL:
 				case Arms.CAT:
 				case Arms.BOAR:
+				case Arms.BEAR:
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' [skin coat.color] fur is flaking away, leaving [skin base.type] behind.  Also the claws on your fingers reverts back into ordinary nails.");
 					break;
 				case Arms.DISPLACER:
@@ -311,6 +312,7 @@ import classes.BodyParts.Wings;
 	}
 	private const METAMORPH_ARMS:Object = createMapFromPairs([
 		[Arms.AVIAN, null],
+		[Arms.BEAR, null],
 		[Arms.BEE, StatusEffects.UnlockedBeeArms],
 		[Arms.BOAR, StatusEffects.UnlockedBoarArms],
 		[Arms.CAT, StatusEffects.UnlockedCatArms],
@@ -352,6 +354,7 @@ import classes.BodyParts.Wings;
 	private const METAMORPH_EARS:Object = createMapFromPairs([
 		[Ears.AVIAN, null],
 		[Ears.BAT, StatusEffects.UnlockedBatEars],
+		[Ears.BEAR, null],
 		[Ears.BUNNY, null],
 		[Ears.CAT, StatusEffects.UnlockedCatEars],
 		[Ears.COW, StatusEffects.UnlockedCowEars],
@@ -373,6 +376,7 @@ import classes.BodyParts.Wings;
 		[Ears.MOUSE, null],
 		[Ears.ONI, StatusEffects.UnlockedOniEars],
 		[Ears.ORCA, StatusEffects.UnlockedOrcaEars],
+		[Ears.PANDA, null],
 		[Ears.PIG, StatusEffects.UnlockedPigEars],
 		[Ears.RACCOON, null],
 		[Ears.RED_PANDA, StatusEffects.UnlockedRedPandaEars],
@@ -392,6 +396,7 @@ import classes.BodyParts.Wings;
 		return setBodyPartType("eyes.type", METAMORPH_EYES, eyeType);
 	}
 	private const METAMORPH_EYES:Object = createMapFromPairs([
+		[Eyes.BEAR, null],
 		[Eyes.BLACK_EYES_SAND_TRAP, null],
 		[Eyes.CAT_SLITS, StatusEffects.UnlockedCatEyes],
 		[Eyes.DRAGON, StatusEffects.UnlockedDraconicEyes],
@@ -420,6 +425,7 @@ import classes.BodyParts.Wings;
 	}
 	private const METAMORPH_FACES:Object = createMapFromPairs([
 		[Face.AVIAN, null],
+		[Face.BEAR, null],
 		[Face.BOAR, StatusEffects.UnlockedBoarFace],
 		[Face.BUCKTEETH, null],
 		[Face.BUCKTOOTH, null],
@@ -448,6 +454,7 @@ import classes.BodyParts.Wings;
 		[Face.ONI_TEETH, StatusEffects.UnlockedOniFace],
 		[Face.ORC_FANGS, StatusEffects.UnlockedOrcFangs],
 		[Face.ORCA, StatusEffects.UnlockedOrcaFace],
+		[Face.PANDA, null],
 		[Face.PIG, StatusEffects.UnlockedPigFace],
 		[Face.PLANT_DRAGON, null],
 		[Face.RACCOON, null],
@@ -526,6 +533,7 @@ import classes.BodyParts.Wings;
 	}
 	private const METAMORPH_LOWER_BODIES:Object = createMapFromPairs([
 		[LowerBody.AVIAN, null],
+		[LowerBody.BEAR, null],
 		[LowerBody.BEE, StatusEffects.UnlockedBeeLegs],
 		[LowerBody.BUNNY, null],
 		[LowerBody.CAT, StatusEffects.UnlockedCatLegs],
@@ -625,6 +633,7 @@ import classes.BodyParts.Wings;
 	}
 	private const METAMORPH_TAILS:Object     = createMapFromPairs([
 		[Tail.AVIAN, null],
+		[Tail.BEAR, null],
 		[Tail.BEE_ABDOMEN, StatusEffects.UnlockedBeeTail],
 		[Tail.BEHEMOTH, null],
 		[Tail.BURNING, StatusEffects.UnlockedHellcatBurningTail],

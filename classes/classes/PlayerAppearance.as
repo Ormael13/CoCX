@@ -1086,6 +1086,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  You stand on " + num2Text(player.legCount) + " digitigrade mouse legs ending in five toed clawed paws.");
 		else if (player.lowerBody == LowerBody.HINEZUMI)
 			outputText("  Your " + num2Text(player.legCount) + " digitigrade mouse legs are covered in flames up to your knee. Your kicks leave a vicious burn on those who cross you, which they are sure to remember.");
+		else if (player.lowerBody == LowerBody.BEAR)
+			outputText("  Your " + num2Text(player.legCount) + " legs are covered with [skin coat.color] fur. They end with powerful bear-like paws.");
 		if (player.findPerk(PerkLib.Incorporeality) >= 0)
 			outputText("  Of course, your [legs] are partially transparent due to their ghostly nature."); // isn't goo transparent anyway?
 	}
@@ -1239,6 +1241,9 @@ public class PlayerAppearance extends BaseContent {
 		else if(player.tailType == Tail.THUNDERBIRD) {
 			outputText("  From just above your " + assDescript() + " extend a long thin sinuous tail tipped with feathers which are shaped like a lightning bolt.");
 		}
+		else if(player.tailType == Tail.BEAR) {
+			outputText("  A cute, furry ursan tail sits up from your backside.");
+		}
 	}
 	public function describeArms():void {
 //Wing arms
@@ -1288,7 +1293,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (armType == Arms.ORCA)
 			outputText("  A middle sized orca-like fin has sprouted on each of your forearms near the elbow. Additionally, the skin between your fingers forms a small webbing that is helpful when swimming.");
 		else if (armType == Arms.DEVIL)
-			outputText("  Your forearms are covered with fur and end with four finger paws like hands, but armed with claws. Despite their weird shape you have more then enough manual dexterity to draw even the most complex magical designs when spellcasting.");
+			outputText("  Your forearms are covered with fur and end with four finger paw-like hands, but armed with claws. Despite their weird shape, you have more than enough manual dexterity to draw even the most complex magical designs when spellcasting.");
 		else if (armType == Arms.ONI)
 			outputText("  Your arms are mostly human, although covered in warlike tattoos. You have human hands with sharp black nails.");
 		else if (armType == Arms.ELF)
@@ -1315,6 +1320,11 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Where a normal creature would have only two arms you instead have four covered with [skin coat.color] fur. They end with a pair of five-toed lion paws armed with lethal claws. You generally use them to move around lightning fast or to seize and rend preys.");
 		else if (armType == Arms.HINEZUMI)
 			outputText("  Your forearms while human in shape are covered in a thick coat of flames that burn depending on your mood.");
+		else if (armType == Arms.BEAR) {
+			outputText("  Your arms are covered with [skin coat.color] fur");
+			if (player.skin.coverage >= Skin.COVERAGE_MEDIUM) outputText(" up to your shoulder and neck");
+			outputText(". They end with a pair of powerful five-toed bear-like paws armed with lethal claws.");
+		}
 		else if (player.wings.type == Wings.BAT_ARM)
 			outputText("  The bones in your arms are thin and light, as if made of only cartilage, granting you the ability to take flight. Instead of the five fingers you started out with, you now have three that are both larger and stronger. They allow you to hold various items even with your abnormal hands, albeit at the cost of preventing flight while doing so and making some things a little more awkward to grip.");
 	}
@@ -1568,7 +1578,7 @@ public class PlayerAppearance extends BaseContent {
 		else if(eyeType == Eyes.DRAGON)
 			outputText("  Your [eyecolor] eyes have slitted pupils like that of a dragon.");
 		else if(player.eyes.type == Eyes.DEVIL)
-			outputText("  Your eyes look fiendish with their black sclera and glowing [eyecolor] irises.");
+			outputText("  Your eyes look fiendish, with their black sclera and glowing [eyecolor] iris.");
 		else if(eyeType == Eyes.ONI)
 			outputText("  Your eyes look normal enough save for their fiendish [eyecolor] iris and slitted pupils.");
 		else if(eyeType == Eyes.ELF)
@@ -1598,6 +1608,9 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if(eyeType == Eyes.HINEZUMI){
 			outputText("  Your eyes are human-like. However, their [eyecolor] irises are clearly those of an Hinezumi.");
+		}
+		else if(eyeType == Eyes.BEAR){
+			outputText("  Your eyes are human save for your golden pupils closer to those of a bear.");
 		}
 		else outputText("  Your eyes are [eyecolor].");
 	}
@@ -1661,7 +1674,7 @@ public class PlayerAppearance extends BaseContent {
 			else if(earType == Ears.SNAKE)
 				outputText("  A pair of large pointy ears covered in small scales stick out from your skull.");
 			else if(earType == Ears.GOAT)
-				outputText("  A pair or ears looking similar to those of a goat flapping from time to time in response to sounds.");
+				outputText("  A pair of ears look similar to those of a goat, flapping from time to time in response to sounds.");
 			else if(earType == Ears.ONI)
 				outputText("  A pair of pointed elf-like oni ears stick out from your skull.");
 			else if(earType == Ears.ELVEN)
@@ -1685,6 +1698,12 @@ public class PlayerAppearance extends BaseContent {
 			}
 			if (earType == Ears.CAVE_WYRM){
 				outputText("  Your ears are furry yet they do not actually belong to any known type of mammal. You suspect them to be related to an ancestry closer to that of the serpentine dragons they emulate.");
+			}
+			if (earType == Ears.BEAR){
+				outputText("  A pair of two round fuzzy bear ears covered with [skin coat.color] and alert to sound stick out from your skull.");
+			}
+			if (earType == Ears.PANDA){
+				outputText("  A pair of two round fuzzy panda ears covered with black fur just like a panda and alert to sound stick out from your skull.");
 			}
 			//</mod>
 			if (player.gills.type == Gills.FISH)
@@ -1748,7 +1767,7 @@ public class PlayerAppearance extends BaseContent {
 			else if(earType == Ears.SNAKE)
 				outputText("  The [hair] on your head is parted by a pair of cute pointed ears covered in small scales, bigger than your old human ones.");
 			else if(earType == Ears.GOAT)
-				outputText("  The [hair] on your head is parted by a pair or ears looking similar to those of a goat flapping from time to time in response to sounds.");
+				outputText("  The [hair] on your head is parted by a pair of ears looking similar to those of a goat, flapping from time to time in response to sounds.");
 			else if(earType == Ears.ONI)
 				outputText("  The [hair] on your head is parted by a pair of pointed elf-like oni ears.");
 			else if(earType == Ears.ELVEN) {
@@ -1775,6 +1794,12 @@ public class PlayerAppearance extends BaseContent {
 			}
 			if (earType == Ears.CAVE_WYRM){
 				outputText("  Your ears are furry yet they do not actually belong to any known type of mammal. You suspect them to be related to an ancestry closer to that of the serpentine dragons they emulate.");
+			}
+			if (earType == Ears.BEAR){
+				outputText(" The [hair] on your head is parted by a pair of two round fuzzy bear ears covered with [skin coat.color] and alert to sound.");
+			}
+			if (earType == Ears.BEAR){
+				outputText(" The [hair] on your head is parted by a pair of two round fuzzy panda ears covered with black fur just like a panda and alert to sound.");
 			}
 			//</mod>
 			if(player.antennae.type == Antennae.MANTIS)
@@ -2063,7 +2088,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your face is a narrow, reptilian and regal, reminiscent of a dragon.  A [skin coat] decorates your visage.");
 		}
 		if (faceType == Face.DEVIL_FANGS) {
-			outputText("  Your mouth is somewhat human save for your fiendish canines.  It's decorated by [skin coat].");
+			outputText("  Your mouth looks human enough, save for your fiendish canines.  It's decorated by [skin coat].");
 		}
 		if (faceType == Face.ONI_TEETH) {
 			outputText("  Your face is human in shape and structure with [skin coat]. Your mouth could pass for human if not for your two large ogre like canines.");
@@ -2162,6 +2187,13 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  It's covered in [skin coat], making your face looks more unusual.");
 			}
 		}
+		if (faceType == Face.BEAR) {
+			outputText("  Your face is that of a bear with an adorable wet nose and sharp teeth.");
+			if (player.hasFullCoatOfType(Skin.FUR)) outputText("   A coat of soft, [skin coat.color] colored fur covers your head.");
+		}
+		if (faceType == Face.PANDA) {
+			outputText("  Your face is that of a panda with an adorable wet nose and sharp teeth. Over your [skin], your face fur, much like most of your body, is white with two black circles right around your eyes.");
+		}
 		if (faceType == Face.RED_PANDA) {
 			outputText("  Your face has a distinctive animalistic muzzle, proper from a red-panda, complete with a cute pink nose.");
 			if (player.hasFullCoatOfType(Skin.FUR)) outputText("   A coat of soft, [skin coat.color] colored fur covers your head, with patches of white on your muzzle, cheeks and eyebrows.")
@@ -2198,6 +2230,11 @@ public function RacialScores():void {
 	else if (player.batScore() >= 6 && player.batScore() < 10) outputText("\n<font color=\"#0000a0\">Half Batgirl/Batboy: " + player.batScore() + " (+" + (20 * (1 + player.newGamePlusMod())) + " max Str, +" + (20 * (1 + player.newGamePlusMod())) + " max Spe, +" + (20 * (1 + player.newGamePlusMod())) + " max Int, +" + (30 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
 	else if (player.batScore() >= 1 && player.batScore() < 6) outputText("\n<font color=\"#008000\">Half Batgirl/Batboy: " + player.batScore() + "</font>");
 	else if (player.batScore() < 1) outputText("\n<font color=\"#ff0000\">Half Batgirl/Batboy: 0</font>");
+	//Bear/Panda
+	if (player.bearpandaScore() >= 10) outputText("\n<font color=\"#0000a0\">Bear/Panda-morph: " + player.bearpandaScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Tou, -" + (20 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+	else if (player.bearpandaScore() >= 5 && player.bearpandaScore() < 10) outputText("\n<font color=\"#0000a0\">Half Bear/Panda-morph: " + player.bearpandaScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, +" + (5 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+	else if (player.bearpandaScore() >= 1 && player.bearpandaScore() < 4) outputText("\n<font color=\"#008000\">Half Bear/Panda-morph: " + player.bearpandaScore() + "</font>");
+	else if (player.bearpandaScore() < 1) outputText("\n<font color=\"#ff0000\">Half Bear/Panda-morph: 0</font>");
 	//Bee
 	if (player.beeScore() >= 9) outputText("\n<font color=\"#0000a0\">Bee-morph: " + player.beeScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Tou, +" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (35 * (1 + player.newGamePlusMod())) + " max Int)</font>");
 	else if (player.beeScore() >= 5 && player.beeScore() < 9) outputText("\n<font color=\"#0000a0\">Half Bee-morph: " + player.beeScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Tou, +" + (30 * (1 + player.newGamePlusMod())) + " max Spe, +" + (15 * (1 + player.newGamePlusMod())) + " max Int)</font>");
@@ -2648,7 +2685,7 @@ public function RacialScores():void {
 	else if (player.raijuScore() >= 1 && player.raijuScore() < 5) outputText("\n<font color=\"#008000\">Half Raiju: " + player.raijuScore() + "</font>");
 	else if (player.raijuScore() < 1) outputText("\n<font color=\"#ff0000\">Half Raiju: 0</font>");
 	//Red Panda
-	if (player.redpandaScore() >= 8) outputText("\n<font color=\"#0000a0\">Red Panda-morph: " + player.redpandaScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Str, +" + (75 * (1 + player.newGamePlusMod())) + " max Spe, -" + (30 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+	if (player.redpandaScore() >= 8) outputText("\n<font color=\"#0000a0\">Red Panda-morph: " + player.redpandaScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Str, +" + (75 * (1 + player.newGamePlusMod())) + " max Spe, +" + (30 * (1 + player.newGamePlusMod())) + " max Int)</font>");
 	else if (player.redpandaScore() >= 4 && player.redpandaScore() < 8) outputText("\n<font color=\"#0000a0\">Half Red Panda-morph: " + player.redpandaScore() + " (+" + (45 * (1 + player.newGamePlusMod())) + " max Spe, +" + (15 * (1 + player.newGamePlusMod())) + " max Int)</font>");
 	else if (player.redpandaScore() >= 1 && player.redpandaScore() < 4) outputText("\n<font color=\"#008000\">Half Red Panda-morph: " + player.redpandaScore() + "</font>");
 	else if (player.redpandaScore() < 1) outputText("\n<font color=\"#ff0000\">Half Red Panda-morph: 0</font>");
@@ -2846,4 +2883,4 @@ public function GenderForcedSettingFemale():void {
 		else outputText("<b>Yo, this is an error.</b>");
 	}
 }
-}
+}

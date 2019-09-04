@@ -1847,4 +1847,4 @@ use namespace CoC;
 			//addButton(2, "Use", useBathroom);
 		}
 	}
-}
+}

@@ -2597,7 +2597,7 @@ public static const LUNA_LVL_UP:int                                   				= 2588
 public static const LUNA_DEFEATS_COUNTER:int                                   		= 2589;
 public static const LUNA_MOON_CYCLE:int                         					= 2590;
 public static const LUNA_MOONING:int                                   				= 2591;
-public static const UNKNOWN_FLAG_NUMBER_02592:int                                   = 2592;//Not Yet Used Flag
+public static const ELEMENTAL_MELEE:int                                   			= 2592;
 public static const ENVENOMED_MELEE_ATTACK:int                                   	= 2593;
 public static const ERMA_ARCHERY_TRAINING:int                                   	= 2594;
 public static const RIVER_DUNGEON_FLOORS_PROGRESS:int                               = 2595;
@@ -2975,7 +2975,7 @@ public static const UNKNOWN_FLAG_NUMBER_02966:int                               
 public static const UNKNOWN_FLAG_NUMBER_02967:int                                   = 2967;
 public static const UNKNOWN_FLAG_NUMBER_02968:int                                   = 2968;
 public static const UNKNOWN_FLAG_NUMBER_02969:int                                   = 2969;
-public static const UNKNOWN_FLAG_NUMBER_02970:int                                   = 2970;
+public static const SPELLS_COOLDOWNS:int                                   			= 2970;
 public static const WISDOM_SCALLING:int                                   			= 2971;
 public static const INTELLIGENCE_SCALLING:int                                   	= 2972;
 public static const NO_GORE_MODE:int                                   				= 2973;
@@ -3007,4 +3007,3 @@ public static const HYPER_HAPPY:int                                             
 public static const UNKNOWN_FLAG_NUMBER_02999:int                                   = 2999; // ------------------------- Jojo Debug Flag?
 	}    
 }
-

@@ -55,9 +55,11 @@ use namespace CoC;
 			select = choice[rand(choice.length)];
 			switch(select) {
 				case 0:
+					player.createStatusEffect(StatusEffects.InsideSmallSpace,0,0,0,0);
 					cavewyrmScene.berserkingCaveWyrmEncounter();
 					break;/*
 				case 1:
+					player.createStatusEffect(StatusEffects.InsideSmallSpace,0,0,0,0);
 					//antworker.();
 					clearOutput();
 					outputText("You spend one hour exploring the caves but you don't manage to find anything interesting, unless feeling of becoming slight tougher counts
@@ -70,9 +72,11 @@ use namespace CoC;
 					doNext(camp.returnToCampUseOneHour);
 					break;*/
 				case 1://2:
+					player.createStatusEffect(StatusEffects.InsideSmallSpace,0,0,0,0);
 					darkelfScene.introDarkELfRangerCaves();
 					break;/*
 				case 3:
+					player.createStatusEffect(StatusEffects.InsideSmallSpace,0,0,0,0);
 					//darkslime.();
 					clearOutput();
 					outputText("You spend one hour exploring the caves but you don't manage to find anything interesting, unless feeling of becoming slight tougher counts.");
@@ -80,6 +84,7 @@ use namespace CoC;
 					doNext(camp.returnToCampUseOneHour);
 					break;*/
 				case 2://4:
+					player.createStatusEffect(StatusEffects.InsideSmallSpace,0,0,0,0);
 					displacerbeastScene.displacerBeastEncounter();
 					break;/*
 				case 5:

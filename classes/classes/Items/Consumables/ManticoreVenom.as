@@ -166,7 +166,7 @@ public class ManticoreVenom extends Consumable {
 			if (player.tailRecharge < 10) player.tailRecharge += 2;
 			if (player.tailRecharge < 15) player.tailRecharge += 2;
 			player.tailVenom += 50;
-			if (player.tailVenom > 200) player.tailVenom = 200;
+			if (player.tailVenom > player.maxVenom()) player.tailVenom = player.maxVenom();
 			outputText("\n\nYou feel your tail jolt with increased vitality as it starts producing venom in larger quantities. You smile wickedly at the idea of injecting this cocktail into someone.");
 			changes++;
 		}

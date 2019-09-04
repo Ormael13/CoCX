@@ -1491,7 +1491,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 	}
 	//Siegweird
 	if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3) {
-		outputText("\n\n");
+		outputText("The regular pensive 'Mmmmmm' by the campfire and the delicious smell of soup reminds you that Siegweird the paladin is now residing in your camp.\n\n");
 		buttons.add( "Siegweird", SceneLib.siegweirdFollower.siegweirdMainCampMenu).hint("Check up on Siegweird.");
 	}
 	//Ember
@@ -1694,7 +1694,7 @@ private function campActions():void {
 	menu();
 	clearOutput();
 	outputText("What would you like to do?");
-	addButton(0, "SpentTime", campMiscActions).hint("Check your options to spend time in and around camp.");
+	addButton(0, "SpentTime", campSpendTimeActions).hint("Check your options to spend time in and around camp.");
 	addButton(1, "Build", campBuildingSim).hint("Check your camp build options.");
 	addButton(2, "Read Codex", codex.accessCodexMenu).hint("Read any codex entries you have unlocked.");
 	addButton(3, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
@@ -1702,15 +1702,16 @@ private function campActions():void {
 	//addButton(5, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
 	if (player.hasPerk(PerkLib.JobElementalConjurer) >= 0 || player.hasPerk(PerkLib.JobGolemancer) >= 0) addButton(6, "Winions", campWinionsArmySim).hint("Check your options for making some Winions.");
 	else addButtonDisabled(6, "Winions", "You need to be able to make some minions that fight for you to use this option like elementals or golems...");
-	if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) addButton(9, "Fishery", VisitFishery).hint("Visit Fishery.");
-	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2) addButton(10, "Ward", MagicWardMenu).hint("Activate or Deactivate Magic Ward around camp.");
-	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) addButton(11, "Kitsune Shrine", campScenes.KitsuneShrine).hint("Meditate at camp Kitsune Shrine.");
-	if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(12, "Hot Spring", campScenes.HotSpring).hint("Visit Hot Spring.");
+	if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) addButton(8, "Fishery", VisitFishery).hint("Visit Fishery.");
+	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2) addButton(9, "Ward", MagicWardMenu).hint("Activate or Deactivate Magic Ward around camp.");
+	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) addButton(10, "Kitsune Shrine", campScenes.KitsuneShrine).hint("Meditate at camp Kitsune Shrine.");
+	if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(11, "Hot Spring", campScenes.HotSpring).hint("Visit Hot Spring.");
+	addButton(12, "Misc", campMiscActions).hint("Misc options to do things in and around camp.");
 	addButton(13, "NPC's", SparrableNPCsMenu);
 	addButton(14, "Back", playerMenu);
 }
 
-private function campMiscActions():void {
+private function campSpendTimeActions():void {
 	menu();
 	addButton(0, "SwimInStream", swimInStream).hint("Swim in stream and relax to pass time.", "Swim In Stream");
 	addButton(1, "ExaminePortal", examinePortal).hint("Examine the portal. This scene is placeholder.", "Examine Portal"); //Examine portal.
@@ -1723,7 +1724,15 @@ private function campMiscActions():void {
 	else {
 		addButtonDisabled(2, "Watch Sky", "The option to watch sunset is available at 7pm.");
 	}
-	addButton(3, "Fill bottle", fillUpPillBottle).hint("Fill up one of your pill bottles.");
+	addButton(14, "Back", campActions);
+}
+
+private function campMiscActions():void {
+	menu();
+	if (player.hasItem(consumables.LG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(0, "Fill bottle", fillUpPillBottle00).hint("Fill up one of your pill bottles with low-grade soulforce recovery pills.");
+	else addButtonDisabled(0, "Fill bottle", "You need one empty pill bottle and ten low-grade soulforce recovery pills.");
+	if (player.hasItem(consumables.MG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(1, "Fill bottle", fillUpPillBottle00).hint("Fill up one of your pill bottles with mid-grade soulforce recovery pills.");
+	else addButtonDisabled(1, "Fill bottle", "You need one empty pill bottle and ten mid-grade soulforce recovery pills.");
 	addButton(14, "Back", campActions);
 }
 
@@ -1766,23 +1775,18 @@ private function MagicWardMenu():void {
 	}
 }
 
-private function fillUpPillBottle():void {
-	if ((player.hasItem(consumables.LG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1)))) {
-		outputText("\n\nYou pick up one of your empty pills bottle and starts to put in some of your loose low-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
-		player.destroyItems(useables.E_P_BOT, 1);
-		player.destroyItems(consumables.LG_SFRP, 10);
-		inventory.takeItem(consumables.LGSFRPB, campMiscActions);
-	}
-	else if ((player.hasItem(consumables.MG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1)))) {
-		outputText("\n\nYou pick up one of your empty pills bottle and starts to put in some of your loose low-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
-		player.destroyItems(useables.E_P_BOT, 1);
-		player.destroyItems(consumables.MG_SFRP, 10);
-		inventory.takeItem(consumables.MGSFRPB, campMiscActions);
-	}
-	else {
-		outputText("\n\nYou not have either enough pills of any type or bottles to do this currently.");
-		doNext(campMiscActions);
-	}
+private function fillUpPillBottle00():void {
+	outputText("\n\nYou pick up one of your empty pills bottle and starts to put in some of your loose low-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
+	player.destroyItems(useables.E_P_BOT, 1);
+	player.destroyItems(consumables.LG_SFRP, 10);
+	inventory.takeItem(consumables.LGSFRPB, campMiscActions);
+}
+
+private function fillUpPillBottle01():void {
+	outputText("\n\nYou pick up one of your empty pills bottle and starts to put in some of your loose mid-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
+	player.destroyItems(useables.E_P_BOT, 1);
+	player.destroyItems(consumables.MG_SFRP, 10);
+	inventory.takeItem(consumables.MGSFRPB, campMiscActions);
 }
 
 private function SparrableNPCsMenu():void {
@@ -4002,6 +4006,8 @@ private function updateAchievements():void {
 	if (player.level >= 75) awardAchievement("Overlord", kACHIEVEMENTS.LEVEL_OVERLORD);
 	if (player.level >= 90) awardAchievement("Sovereign", kACHIEVEMENTS.LEVEL_SOVEREIGN);
 	if (player.level >= 100) awardAchievement("Are you a god?", kACHIEVEMENTS.LEVEL_ARE_YOU_A_GOD);
+	if (player.level >= 120) awardAchievement("Newb God(ess)", kACHIEVEMENTS.LEVEL_NEWB_GOD_ESS);
+	if (player.level >= 150) awardAchievement("Mid-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS);
 	
 	//Population
 	if (getCampPopulation() >= 2) awardAchievement("My First Companion", kACHIEVEMENTS.POPULATION_FIRST);
@@ -4220,7 +4226,8 @@ private function updateAchievements():void {
 	if (player.internalChimeraScore() >= 8) awardAchievement("Normal Chimera", kACHIEVEMENTS.GENERAL_NORMAL_CHIMERA);
 	if (player.internalChimeraScore() >= 16) awardAchievement("Greater Chimera", kACHIEVEMENTS.GENERAL_GREATER_CHIMERA);
 	if (player.internalChimeraScore() >= 32) awardAchievement("Elder Chimera", kACHIEVEMENTS.GENERAL_ELDER_CHIMERA);
-	if (player.internalChimeraScore() >= 64) awardAchievement("Ultimate Lifeform", kACHIEVEMENTS.GENERAL_ULTIMATE_LIFEFORM);
+	if (player.internalChimeraScore() >= 64) awardAchievement("Legendary Chimera", kACHIEVEMENTS.GENERAL_LEGENDARY_CHIMERA);
+	if (player.internalChimeraScore() >= 128) awardAchievement("Ultimate Lifeform", kACHIEVEMENTS.GENERAL_ULTIMATE_LIFEFORM);
 	if (player.str >= 50 && player.tou >= 50 && player.spe >= 50 && player.inte >= 50 && player.wis >= 50 && player.lib >= 40 && player.sens >= 20) awardAchievement("Jack of All Trades", kACHIEVEMENTS.GENERAL_STATS_50);
 	if (player.str >= 100 && player.tou >= 100 && player.spe >= 100 && player.inte >= 100 && player.wis >= 100 && player.lib >= 80 && player.sens >= 40) awardAchievement("Incredible Stats", kACHIEVEMENTS.GENERAL_STATS_100);
 	if (player.str >= 150 && player.tou >= 150 && player.spe >= 150 && player.inte >= 150 && player.wis >= 150 && player.lib >= 120 && player.sens >= 60) awardAchievement("Anmazing Stats", kACHIEVEMENTS.GENERAL_STATS_150);
@@ -4257,6 +4264,12 @@ private function updateAchievements():void {
 	
 	if (player.newGamePlusMod() >= 1) awardAchievement("xXx2: The Next Level", kACHIEVEMENTS.EPIC_XXX2_THE_NEXT_LEVEL);
 	if (player.newGamePlusMod() >= 2) awardAchievement("xXx: The Return of Mareth Champion", kACHIEVEMENTS.EPIC_XXX_THE_RETURN_OF_MARETH_CHAMPION);
+	if (player.newGamePlusMod() >= 3) awardAchievement("xXx 4", kACHIEVEMENTS.EPIC_XXX_4);
+	if (player.newGamePlusMod() >= 4) awardAchievement("xXx 5: Mareth's Judgment_Day", kACHIEVEMENTS.EPIC_XXX5_MARETHS_JUDGMENT_DAY);
+	if (player.newGamePlusMod() >= 5) awardAchievement("xXx 6: Rise of the Demons", kACHIEVEMENTS.EPIC_XXX6_RISE_OF_THE_DEMONS);/*
+	if (player.newGamePlusMod() >= 6) awardAchievement("xXx 7: Salvation", kACHIEVEMENTS.EPIC_XXX7_SALVATION);
+	if (player.newGamePlusMod() >= 7) awardAchievement("xXx 8: Genisys", kACHIEVEMENTS.EPIC_XXX8_GENISYS);
+	if (player.newGamePlusMod() >= 8) awardAchievement("xXx 8: Dark Fate", kACHIEVEMENTS.EPIC_XXX9_DARK_FATE);*/
 	
 	if (player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) awardAchievement("Guardian of Notre-Dame", kACHIEVEMENTS.EPIC_GUARDIAN_OF_NOTRE_DAME);
 	if (player.hasStatusEffect(StatusEffects.PlayerPhylactery)) awardAchievement("The Devil Wears Prada", kACHIEVEMENTS.EPIC_THE_DEVIL_WEARS_PRADA);
@@ -4289,4 +4302,3 @@ private function fixHistory():void {
 */
 }
 }
-

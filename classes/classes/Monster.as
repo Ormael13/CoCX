@@ -69,8 +69,14 @@ import flash.utils.getQualifiedClassName;
 		protected final function combatParry():Boolean {
 			return SceneLib.combat.combatParry();
 		}
+		protected final function combatParry2():Number {
+			return SceneLib.combat.combatParry2();
+		}
 		protected final function combatBlock(doFatigue:Boolean = false):Boolean {
 			return SceneLib.combat.combatBlock(doFatigue);
+		}
+		protected final function combatBlock2():Number {
+			return SceneLib.combat.combatBlock2();
 		}
 		protected function get consumables():ConsumableLib{
 			return game.consumables;
@@ -481,7 +487,7 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.LimitBreakerSoul2ndStage) >= 0) multimax += 0.1;
 			temp *= multimax;
 			temp = Math.round(temp);
-			if (hasPerk(PerkLib.EnemyTrueDemon) || (hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.Sentience))) temp = 0;
+			if ((hasPerk(PerkLib.EnemyTrueDemon) && !hasPerk(PerkLib.Phylactery)) || (hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.Sentience))) temp = 0;
 			return temp;
 		}
 		
@@ -2085,7 +2091,7 @@ import flash.utils.getQualifiedClassName;
 			if (game.player.hasStatusEffect(StatusEffects.Exgartuan) && game.player.statusEffectv2(StatusEffects.Exgartuan) == 0 && rand(3) == 0) {
 				if (SceneLib.exgartuan.exgartuanCombatUpdate()) EngineCore.outputText("\n\n");
 			}
-			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce)) {
+			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce) || hasStatusEffect(StatusEffects.GrabBear)) {
 				if (!handleConstricted()) return;
 			}
 			if (hasStatusEffect(StatusEffects.AbilityCooldown1) ) {
@@ -2110,6 +2116,14 @@ import flash.utils.getQualifiedClassName;
 				}
 				else {
 					addStatusValue(StatusEffects.AbilityCooldown3,1,-1);
+				}
+			}
+			if (hasStatusEffect(StatusEffects.AbilityCooldown4) ) {
+				if (statusEffectv1(StatusEffects.AbilityCooldown4) <= 0) {
+					removeStatusEffect(StatusEffects.AbilityCooldown4);
+				}
+				else {
+					addStatusValue(StatusEffects.AbilityCooldown4,1,-1);
 				}
 			}
 			if (hasStatusEffect(StatusEffects.Lustzerking)) {
@@ -2183,6 +2197,15 @@ import flash.utils.getQualifiedClassName;
 			addStatusValue(StatusEffects.EmbraceVampire, 1, -1);
 			return false;
 			}
+			else if (hasStatusEffect(StatusEffects.GrabBear)) {
+			if (statusEffectv1(StatusEffects.GrabBear) <= 0) {
+				EngineCore.outputText("You try to maintain your grip but " + a + short + " shove you off escaping your grab!");
+				removeStatusEffect(StatusEffects.GrabBear);
+			}
+			else EngineCore.outputText("" + capitalA + short + " struggle but you manage to maintain the grab.");
+			addStatusValue(StatusEffects.GrabBear, 1, -1);
+			return false;
+			}
 			else {
 			EngineCore.outputText("Your prey pushes at your tail, twisting and writhing in an effort to escape from your tail's tight bonds.");
 			if (statusEffectv1(StatusEffects.Constricted) <= 0) {
@@ -2224,6 +2247,10 @@ import flash.utils.getQualifiedClassName;
 		 */
 		protected function handleStun():Boolean
 		{
+			if (hasStatusEffect(StatusEffects.SoulTear)) {
+				removeStatusEffect(StatusEffects.SoulTear);
+				createStatusEffect(StatusEffects.AbilityCooldown4,6,0,0,0);
+			}
 			if (statusEffectv1(StatusEffects.Stunned) <= 0) removeStatusEffect(StatusEffects.Stunned);
 			else addStatusValue(StatusEffects.Stunned, 1, -1);
 			if (statusEffectv1(StatusEffects.StunnedTornado) <= 0) removeStatusEffect(StatusEffects.StunnedTornado);
@@ -2902,6 +2929,13 @@ import flash.utils.getQualifiedClassName;
 					else outputText(capitalA + short + " is hurt by lingering Acid after-effect. <b>(<font color=\"#800000\">" + store4 + "</font>)</b>\n\n");
 				}
 			}
+			if (hasStatusEffect(StatusEffects.Maleficium)) {
+				if (statusEffectv1(StatusEffects.Maleficium) <= 0) {
+					removeStatusEffect(StatusEffects.Maleficium);
+					outputText("<b>Enemy Maleficium effect wore off!</b>\n\n");
+				}
+				else addStatusValue(StatusEffects.Maleficium,1,-1);
+			}
 			//regeneration perks for monsters
 			if (((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.LizanMarrowEvolved) >= 0 || findPerk(PerkLib.EnemyPlantType) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0 || findPerk(PerkLib.MonsterRegeneration) >= 0 || findPerk(PerkLib.Lifeline) >= 0 || findPerk(PerkLib.ImprovedLifeline) >= 0 
 			|| findPerk(PerkLib.GreaterLifeline) >= 0 || findPerk(PerkLib.EpicLifeline) >= 0 || findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0 || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2)) && this.HP < maxHP()) 
@@ -3078,6 +3112,10 @@ import flash.utils.getQualifiedClassName;
 				str += (40 * (1 + newGamePlusMod()));
 				wis += (40 * (1 + newGamePlusMod()));
 			}
+			if (hasPerk(PerkLib.PrestigeJobSpellKnight)) {
+				str += (40 * (1 + newGamePlusMod()));
+				inte += (40 * (1 + newGamePlusMod()));
+			}
 			if (hasPerk(PerkLib.PrestigeJobTempest)) {
 				str += (40 * (1 + newGamePlusMod()));
 				spe += (40 * (1 + newGamePlusMod()));
@@ -3188,4 +3226,4 @@ import flash.utils.getQualifiedClassName;
 		}
 	}
 }
-
+

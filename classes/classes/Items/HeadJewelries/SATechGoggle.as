@@ -13,7 +13,7 @@ package classes.Items.HeadJewelries
 		
 		public function SATechGoggle() 
 		{
-			super("SATGog", "SATechGoggle", "S.A Tech Goggle", "a S.A Tech Goggle", 0, 0, 11105, "Better than its previous iteration the Scanner google, the tech google actually also reveal opponent's flaws and weaknesses highlighting their vulnerability in red within the google glass. The fact it also has a complete logbook and access to previous encounter informations also helps catalogise foes weaknesses.","Helm");
+			super("SATGog", "SATechGoggle", "S.A Tech Goggle", "a S.A Tech Goggle", 0, 0, 11105, "Better than its previous iteration the Scanner goggles, the tech goggles also reveal opponent's flaws and weaknesses, highlighting their vulnerabilities in red within the goggles glass. The fact it also has a complete logbook and access to previous encounter information also helps catalog foes weaknesses.","Helm");
 		}
 		
 		override public function canUse():Boolean {
@@ -21,7 +21,7 @@ package classes.Items.HeadJewelries
 				return false;
 			}
 			if (game.player.tallness > 48) { //Taller than 4 ft
-				outputText("You try to put your google on but the things clearly weren't designed for someone your size. Frustrated you bag them back.\n\n");
+				outputText("You try to put your goggles on but the things clearly weren't designed for someone your size. Frustrated, you put them back in the bag.\n\n");
 				return false;
 			}
 			return true;

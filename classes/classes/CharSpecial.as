@@ -372,7 +372,7 @@ import classes.Items.*;
 			//-Chainmail armor
 			player.setArmor(armors.FULLCHN);
 			//-Large Claymore (i understand 40 Strength is need so if he could start with that would be great if not hit the gyms)"
-			player.str = 41;
+			player.str = 40;
 			player.setWeapon(weapons.CLAYMOR);
 		}
 		

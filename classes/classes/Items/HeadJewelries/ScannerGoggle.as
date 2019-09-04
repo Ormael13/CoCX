@@ -13,7 +13,7 @@ package classes.Items.HeadJewelries
 		
 		public function ScannerGoggle() 
 		{
-			super("Scangog", "Scangoggle", "Scanner goggle", "a Scanner goggle", 0, 0, 4030, "This set of google naturally include a user interface and a scanner revealing information about your opponents.","Helm");
+			super("Scangog", "Scangoggle", "Scanner goggle", "a Scanner goggle", 0, 0, 4030, "This set of goggles naturally include a user interface and scanner, revealing information about your opponents.","Helm");
 		}
 		
 		override public function canUse():Boolean {
@@ -21,7 +21,7 @@ package classes.Items.HeadJewelries
 				return false;
 			}
 			if (game.player.tallness > 48) { //Taller than 4 ft
-				outputText("You try to put your google on but the things clearly weren't designed for someone your size. Frustrated you bag them back.\n\n");
+				outputText("You try to put your goggles on but the things clearly weren't designed for someone your size. Frustrated, you put them back in the bag.\n\n");
 				return false;
 			}
 			return true;

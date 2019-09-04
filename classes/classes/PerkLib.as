@@ -210,9 +210,21 @@ public class PerkLib
 		public static const IntermediateAllRounderEducation:PerkType = mk("Intermediate All-Rounder Education", "Intermediate All-Rounder Education",
 				"Limit of advanced job you can learn is increased by 3.",
 				"You choose the 'Intermediate All-Rounder Education' perk, expanding amount of advanced jobs you can learn. (+3)");
+		public static const SwiftCasting:PerkType = mk("Swift casting", "Swift casting",
+				"When attacking with melee using a one handed weapon with no shield equiped, pc can choose an available spell in combat options to cast during the round. It will be used at the end of the full attack.",
+				"You choose the 'Swift casting' perk, allowing to cast one of simple spells after melee attack.");
+		public static const VampiricBlade:PerkType = mk("Vampiric blade", "Vampiric blade",
+				"PC recovers 0.5/1/2/4 % of its health each time it strikes with a melee attack. (% restored depend on weapon size used)",
+				"You choose the 'Vampiric blade' perk, recovering some HP after each succesfull melee attack.");
+		public static const WarCaster:PerkType = mk("War caster", "War caster",
+				"Increases magical and physical critical chance by up to 25% based on intelligence.",
+				"You choose the 'War caster' perk, increasing magical and physical critical chance by up to 25% based on intelligence.");
 		public static const TooAngryToDie:PerkType = mk("Too Angry to Die", "Too Angry to Die",
 				"+600 to max Wrath.",//stay alive when berserking at cost of super fast 5-15% max wrath drain per turn when below min HP or above max Lust?
 				"You choose the 'Too Angry to Die' perk, .");
+		public static const ElementsOfMarethBasic:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
+				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
+				"You choose 'Elements of Mareth: ' perk, your time spent in Mareth allowed you to get basic understanding of native elements that aren't classified as one of four traditional.");
 		public static const NekomataThyroidGland:PerkType = mk("Nekomata Thyroid Gland", "Nekomata Thyroid Gland",
 				"Nekomata Thyroid Gland .",//lower cooldowns for Illusion and Terror by three turns, increase speed of the recovery after using magic and slightly boost PC speed
 				"You choose the 'Nekomata Thyroid Gland' perk. Some time after you become nekomata part of your body changed allowing to boost your nekomata powers.");
@@ -252,6 +264,9 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You choose the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
+		public static const :PerkType = mk("", "",
+				".",
+				"You choose the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You choose the '' perk, .");
@@ -806,14 +821,14 @@ public class PerkLib
 				"You gains bonus to max Lust depending on amount of summoned elementals and their ranks.",
 				"You choose the 'Elemental Bond: Urges' perk, allowing you to form bond with summoned elementals to share recived lust damage.");
 		public static const ElementalConjurerDedication:PerkType = mk("Elemental Conjurer Dedication", "Elemental Conjurer Dedication",
-				"Your intelligence and wisdom is greatly enhanced at the cost of physical body fragility.",
+				"Your elementals attack power is greatly enhanced at the cost of physical body fragility.",
 				"You choose 'Elemental Conjurer Dedication' perk, dedicating yourself to pursue path of elemental conjuring at the cost of physical fragility.");
 		public static const ElementalConjurerResolve:PerkType = mk("Elemental Conjurer Resolve", "Elemental Conjurer Resolve",
-				"Your mental attributes are greatly enhanced at the cost of weakening physical ones.",
-				"You choose 'Elemental Conjurer Resolve' perk, showing your resolve to purse mental perfection at the cost of physical weakening.");
+				"Your elementals attack power is enhanced at the cost of weakening physical body.",
+				"You choose 'Elemental Conjurer Resolve' perk, showing your resolve to purse elementals enhancing at the cost of physical weakening.");
 		public static const ElementalConjurerSacrifice:PerkType = mk("Elemental Conjurer Sacrifice", "Elemental Conjurer Sacrifice",
-				"Your mental attributes are enhanced beyond limits at the cost of similar weakening physical ones.",
-				"You choose 'Elemental Conjurer Sacrifice' perk, showing your will to sacrifice everything in reaching beyond mental perfection.");
+				"Your elementals attack power is enhanced beyond limits at the cost of similar weakening physical ones.",
+				"You choose 'Elemental Conjurer Sacrifice' perk, showing your will to sacrifice everything in reaching perfect elementals enhancing.");
 		public static const ElementalContractRank1:PerkType = mk("Elemental Contract Rank 1", "Elemental Contract Rank 1",
 				"As Elemental Contract rank increase, the number and maximum rank of elementals you can command increases by 1. Allow to rank-up summoned elementals to rank 1.",
 				"You choose 'Elemental Contract Rank 1' perk, rising your ability to command more and stronger elementals.");
@@ -2007,6 +2022,9 @@ public class PerkLib
 		public static const PrestigeJobSoulArtMaster:PerkType = mk("Prestige Job: Soul Art Master", "Prestige Job: Soul Art Master",
 				"You've trained in prestige art of combine soulforce with physical attacks to various deadly effect. (+40 to max str/wis - scalable)",
 				"You choose 'Prestige Job: Soul Art Master' perk, training yourself to became Soul Art Master.");
+		public static const PrestigeJobSpellKnight:PerkType = mk("Prestige Job: Spell-Knight", "Prestige Job: Spell-Knight",
+				"You've trained in prestige art of combining swordplay and magic.",
+				"You choose 'Prestige Job: Spell-Knight' perk, training yourself to became Spell-Knight.");
 		public static const PrestigeJobTempest:PerkType = mk("Prestige Job: Tempest", "Prestige Job: Tempest",
 				"You've trained in prestige art of dual wielding as you hack and slice through your opponents like a raging storm of steel. (+40 to max str/spe - scalable)",
 				"You choose 'Prestige Job: Tempest' perk, training yourself to became Tempest.");
@@ -2062,7 +2080,7 @@ public class PerkLib
 				"Allow to reload in middle of shooting as long PC have enough fatigue for that without ending turn.",
 				"You choose the 'Lightning Reload' perk, lowering even more time needed to reload with ammo range weapons like pistols.");
 		public static const RagingInferno:PerkType = mk("Raging Inferno", "Raging Inferno",
-				"Cumulative 20% damage increase for every subsequent ice spell without interruption.",//Cumulative 10% damage increase for every subsequent fire spell. Each turn without casted fire spell lower damage by 5%.
+				"Cumulative 10% damage increase for every subsequent fire spell. Each turn without casted fire spell lower damage by 10%.",
 				"You choose the 'Raging Inferno' perk. Cumulative 10% damage increase for every subsequent fire spell.");
 		public static const RecoveryMantra:PerkType = mk("Recovery mantra", "Recovery mantra",
 				"Gain soulforce recovery equal to 2% of your total soulforce.",
@@ -3150,6 +3168,13 @@ public class PerkLib
                     .requireAnyPerk(Berzerker, Lustzerker)
                     .requireStr(200)
                     .requireLevel(42);
+            PrestigeJobSpellKnight.requirePrestigeJobSlot()
+                    .requireStr(200)
+                    .requireInt(150)
+                    .requireLevel(42)
+					.requireCustomFunction(function (player:Player):Boolean {
+                        return player.statusEffectv1(StatusEffects.AlvinaTraining2) > 3 || player.statusEffectv1(StatusEffects.SiegweirdTraining2) > 2;
+                    }, "Finished one of the two mages (Alvina/Siegweird) quest lines up to the optional battle");
             HalfStepToPeerlessTranquilness.requireStr(240)
                     .requireTou(80)
                     .requireSpe(80)
@@ -3161,6 +3186,11 @@ public class PerkLib
             //Tier 8 Strength Perks
             Rage.requirePerk(PrestigeJobBerserker)
                     .requireLevel(48);
+            SwiftCasting.requireLevel(48)
+                    .requirePerk(PrestigeJobSpellKnight)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasStatusEffect(StatusEffects.KnowsIceSpike) || player.hasStatusEffect(StatusEffects.KnowsLightningBolt) || player.hasStatusEffect(StatusEffects.KnowsDarknessShard);
+                    }, "Whitefire or Ice Spike or Lightning Bolt or Darkness Shard spell");
             PeerlessTranquilness.requireStr(270)
                     .requireTou(90)
                     .requireSpe(90)
@@ -3173,6 +3203,8 @@ public class PerkLib
             //Tier 9 Strength Perks
             Anger.requirePerk(Rage)
                     .requireLevel(54);
+            WarCaster.requirePerk(SwiftCasting)
+                    .requireLevel(54);
             HalfStepToInhumanTranquilness.requireStr(300)
                     .requireTou(100)
                     .requireSpe(100)
@@ -3184,6 +3216,8 @@ public class PerkLib
             //Tier 10 Strength Perks
             FuelForTheFire.requirePerk(Anger)
                     .requireLevel(60);
+            VampiricBlade.requirePerk(WarCaster)
+                    .requireLevel(54);
             InhumanTranquilness.requireStr(330)
                     .requireTou(110)
                     .requireSpe(110)
@@ -3947,6 +3981,8 @@ public class PerkLib
                     .requirePerk(Channeling)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsWhitefire)
+                                || player.hasStatusEffect(StatusEffects.KnowsPyreBurst)
+                                || player.hasStatusEffect(StatusEffects.KnowsFireStorm)
                                 || player.hasPerk(DragonFireBreath)
                                 || player.hasPerk(FireLord)
                                 || player.hasPerk(Hellfire)
@@ -3959,6 +3995,7 @@ public class PerkLib
                     .requirePerk(Channeling)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsIceSpike)
+                                || player.hasStatusEffect(StatusEffects.KnowsArcticGale)
                                 || player.hasStatusEffect(StatusEffects.KnowsIceRain)
                                 || player.hasPerk(DragonIceBreath)
                                 || player.hasPerk(FreezingBreath)
@@ -3970,6 +4007,7 @@ public class PerkLib
                     .requirePerk(Channeling)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsLightningBolt)
+                                || player.hasStatusEffect(StatusEffects.KnowsChainLighting)
                                 || player.hasPerk(DragonLightningBreath);
                     }, "Any lightning spell")
                     .requireLevel(12)
@@ -3978,6 +4016,7 @@ public class PerkLib
                     .requirePerk(Channeling)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsDarknessShard)
+                                || player.hasStatusEffect(StatusEffects.KnowsDuskWave)
                                 || player.hasPerk(DragonDarknessBreath);
                     }, "Any darkness spell")
                     .requireLevel(12)
@@ -5800,4 +5839,3 @@ public class PerkLib
 	initDependencies();
 }
 }
-

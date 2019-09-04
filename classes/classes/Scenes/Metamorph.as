@@ -97,9 +97,9 @@ private function accessPage1FaceMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedHumanFace) && player.faceType == Face.HUMAN) addButtonDisabled(0, "Human", "You already have human face.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedHumanFace) && player.faceType != Face.HUMAN && player.soulforce < 500) addButtonDisabled(0, "Human", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(0, "???", "You not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedHorseFace) && player.faceType != Face.HORSE && player.soulforce >= 500) addButton(1, "Horse", metamorphHorseFace);
+	if (player.hasStatusEffect(StatusEffects.UnlockedHorseFace) && player.faceType != Face.HORSE && player.soulforce >= 100) addButton(1, "Horse", metamorphHorseFace);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedHorseFace) && player.faceType == Face.HORSE) addButtonDisabled(1, "Horse", "You already have horse face.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedHorseFace) && player.faceType != Face.HORSE && player.soulforce < 500) addButtonDisabled(1, "Horse", "You not have enough Soulforce for this metamorphosis.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedHorseFace) && player.faceType != Face.HORSE && player.soulforce < 100) addButtonDisabled(1, "Horse", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(1, "???", "You not yet unlocked this metamorphosis!");
 	if (player.hasStatusEffect(StatusEffects.UnlockedCowMinotaurFace) && player.faceType != Face.COW_MINOTAUR && player.soulforce >= 100) addButton(3, "Cow/Mino", metamorphCowMinotaurFace);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedCowMinotaurFace) && player.faceType == Face.COW_MINOTAUR) addButtonDisabled(3, "Cow/Mino", "You already have cow/minotaur face.");
@@ -313,9 +313,9 @@ private function accessPage1EarsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedHumanEars) && player.ears.type == Ears.HUMAN) addButtonDisabled(0, "Human", "You already have human ears.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedHumanEars) && player.ears.type != Ears.HUMAN && player.soulforce < 500) addButtonDisabled(0, "Human", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(0, "???", "You not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedHorseEars) && player.ears.type != Ears.HUMAN && player.soulforce >= 500) addButton(1, "Horse", metamorphHorseEars);
+	if (player.hasStatusEffect(StatusEffects.UnlockedHorseEars) && player.ears.type != Ears.HUMAN && player.soulforce >= 100) addButton(1, "Horse", metamorphHorseEars);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedHorseEars) && player.ears.type == Ears.HUMAN) addButtonDisabled(1, "Horse", "You already have horse ears.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedHorseEars) && player.ears.type != Ears.HUMAN && player.soulforce < 500) addButtonDisabled(1, "Horse", "You not have enough Soulforce for this metamorphosis.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedHorseEars) && player.ears.type != Ears.HUMAN && player.soulforce < 100) addButtonDisabled(1, "Horse", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(1, "???", "You not yet unlocked this metamorphosis!");
 	if (player.hasStatusEffect(StatusEffects.UnlockedCowEars) && player.ears.type != Ears.COW && player.soulforce >= 100) addButton(3, "Cow", metamorphCowEars);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedCowEars) && player.ears.type == Ears.COW) addButtonDisabled(3, "Cow", "You already have cow ears.");
@@ -925,9 +925,9 @@ private function accessPage1TailMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoTail) && player.tailType == Tail.NONE) addButtonDisabled(0, "Human", "You already not have tail.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoTail) && player.tailType != Tail.NONE && player.soulforce < 500) addButtonDisabled(0, "Human", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(0, "???", "You not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedHorseTail) && player.tailType != Tail.HORSE && player.soulforce >= 500) addButton(1, "Horse", metamorphHorseTail);
+	if (player.hasStatusEffect(StatusEffects.UnlockedHorseTail) && player.tailType != Tail.HORSE && player.soulforce >= 100) addButton(1, "Horse", metamorphHorseTail);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedHorseTail) && player.tailType == Tail.HORSE) addButtonDisabled(1, "Horse", "You already have horse tail.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedHorseTail) && player.tailType != Tail.HORSE && player.soulforce < 500) addButtonDisabled(1, "Horse", "You not have enough Soulforce for this metamorphosis.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedHorseTail) && player.tailType != Tail.HORSE && player.soulforce < 100) addButtonDisabled(1, "Horse", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(1, "???", "You not yet unlocked this metamorphosis!");
 	if (player.hasStatusEffect(StatusEffects.UnlockedDemonTail) && player.tailType != Tail.DEMONIC && player.soulforce >= 100) addButton(3, "Demon", metamorphTailDemonic);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedDemonTail) && player.tailType == Tail.DEMONIC) addButtonDisabled(3, "Demon", "You already have demon tail.");
@@ -3248,4 +3248,4 @@ private function restoreHumanArms():void {
 	player.arms.type = Arms.HUMAN;
 }
 	}
-}
+}

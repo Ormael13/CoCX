@@ -214,6 +214,7 @@ public class DebugMenu extends BaseContent
 			//------------
 			//Page 1
 			transformativeArray.push(consumables.B_GOSSR);
+			transformativeArray.push(consumables.BAYRLEA);
 			transformativeArray.push(consumables.BEEHONY);
 			transformativeArray.push(consumables.BLACKPP);
 			transformativeArray.push(consumables.BOARTRU);
@@ -224,8 +225,8 @@ public class DebugMenu extends BaseContent
 			transformativeArray.push(consumables.DRAKHRT);
 			transformativeArray.push(consumables.DRYTENT);
 			transformativeArray.push(consumables.ECTOPLS);
-			transformativeArray.push(consumables.EQUINUM);
 			//Page 2
+			transformativeArray.push(consumables.EQUINUM);
 			transformativeArray.push(consumables.FOXBERY);
 			transformativeArray.push(consumables.FOXJEWL);
 			transformativeArray.push(consumables.FRRTFRT);
@@ -237,10 +238,11 @@ public class DebugMenu extends BaseContent
 			transformativeArray.push(consumables.INCUBID);
 			transformativeArray.push(consumables.KANGAFT);
 			transformativeArray.push(consumables.KNOTTYP);
-			transformativeArray.push(consumables.LABOVA_);
 			//Page 3
+			transformativeArray.push(consumables.LABOVA_);
 			transformativeArray.push(consumables.LARGEPP);
 			transformativeArray.push(consumables.MAGSEED);
+			transformativeArray.push(consumables.METHIRC);
 			transformativeArray.push(consumables.MGHTYVG);
 			transformativeArray.push(consumables.MOUSECO);
 			transformativeArray.push(consumables.MINOBLO);
@@ -249,9 +251,9 @@ public class DebugMenu extends BaseContent
 			transformativeArray.push(consumables.PIGTRUF);
 			transformativeArray.push(consumables.PRFRUIT);
 			transformativeArray.push(consumables.PROBOVA);
+			//Page 4
 			transformativeArray.push(consumables.P_DRAFT);
 			transformativeArray.push(consumables.P_S_MLK);
-			//Page 4
 			transformativeArray.push(consumables.PSDELIT);
 			transformativeArray.push(consumables.PURHONY);
 			transformativeArray.push(consumables.SATYR_W);
@@ -262,9 +264,9 @@ public class DebugMenu extends BaseContent
 			transformativeArray.push(consumables.RINGFIG);
 			transformativeArray.push(consumables.RIZZART);
 			transformativeArray.push(consumables.S_GOSSR);
+			//Page 5
 			transformativeArray.push(consumables.SALAMFW);
 			transformativeArray.push(consumables.SHARK_T);
-			//Page 5
 			transformativeArray.push(consumables.SNAKOIL);
 			transformativeArray.push(consumables.SPHONEY);
 			transformativeArray.push(consumables.TRAPOIL);
@@ -1025,6 +1027,8 @@ public class DebugMenu extends BaseContent
 			[Face.WOLF_FANGS, "42 WOLF_FANGS"],
 			[Face.ORC_FANGS, "43 ORC_FANGS"],
 			[Face.ANIMAL_TOOTHS, "44 ANIMAL_TOOTHS"],
+			[Face.BEAR, "45 BEAR"],
+			[Face.PANDA, "46 PANDA"],
 		];
 		private static const TONGUE_TYPE_CONSTANTS:Array = [
 			[Tongue.HUMAN, "0 HUMAN"],
@@ -1061,6 +1065,7 @@ public class DebugMenu extends BaseContent
 			[Eyes.ORC, "20 ORC"],
 			[Eyes.CAVE_WYRM, "21 CAVE_WYRM"],
 			[Eyes.HINEZUMI, "22 HINEZUMI"],
+			[Eyes.BEAR, "23 BEAR"],
 		];
 		private static const EAR_TYPE_CONSTANTS:Array    = [
 			[Ears.HUMAN, "0 HUMAN"],
@@ -1096,6 +1101,8 @@ public class DebugMenu extends BaseContent
 			[Ears.AVIAN, "30 AVIAN"],
 			[Ears.GRYPHON, "31 GRYPHON"],
 			[Ears.CAVE_WYRM, "32 CAVE_WYRM"],
+			[Ears.BEAR, "33 BEAR"],
+			[Ears.PANDA, "34 PANDA"],
 		];
 		private static const HORN_TYPE_CONSTANTS:Array    = [
 			[Horns.NONE, "0 NONE"],
@@ -1260,6 +1267,7 @@ public class DebugMenu extends BaseContent
 			[Arms.DISPLACER, "32 DISPLACER"],
 			[Arms.CAVE_WYRM, "33 CAVE_WYRM"],
 			[Arms.HINEZUMI, "34 HINEZUMI"],
+			[Arms.BEAR, "35 BEAR"],
 		];
 		private static const CLAW_TYPE_CONSTANTS:Array = [
 			[Claws.NORMAL, "0 NORMAL"],
@@ -1320,6 +1328,7 @@ public class DebugMenu extends BaseContent
 			[Tail.CAVE_WYRM, "42 CAVE_WYRM"],
 			[Tail.HINEZUMI, "43 HINEZUMI"],
 			[Tail.THUNDERBIRD, "44 THUNDERBIRD"],
+			[Tail.BEAR, "45 BEAR"],
 		];
 		private static const TAIL_COUNT_CONSTANTS:Array = [
 			[0,"0"],1,2,3,4,
@@ -1414,6 +1423,7 @@ public class DebugMenu extends BaseContent
 			[LowerBody.CAVE_WYRM, "47 CAVE_WYRM"],
 			[LowerBody.MOUSE, "48 MOUSE"],
 			[LowerBody.HINEZUMI, "49 HINEZUMI"],
+			[LowerBody.BEAR, "50 BEAR"],
 		];
 		private static const LEG_COUNT_CONSTANTS:Array = [
 			1,2,4,6,8,

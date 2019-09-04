@@ -96,7 +96,7 @@ use namespace CoC;
 			if (player.findPerk(PerkLib.ThirdRing) >= 0) outputText("<b>Ring (3rd):</b> " + player.jewelry3.name + "\n");
 			if (player.findPerk(PerkLib.FourthRing) >= 0) outputText("<b>Ring (4th):</b> " + player.jewelry4.name + "\n");
 			//outputText("<b>Accessory:</b> " + player.jewelryName + "\n");
-			//outputText("<b>Vehicle:</b> " + player.vehiclesName + "\n");
+			outputText("<b>Vehicle:</b> " + player.vehiclesName + "\n");
 			if (player.hasKeyItem("Bag of Cosmos") >= 0) outputText("\nAt your belt hangs bag of cosmos.\n");
 			if (player.hasKeyItem("Sky Poison Pearl") >= 0) outputText("\nThere is a circular green imprint at the palm of your left hand.\n");
 			if (player.keyItems.length > 0) outputText("<b><u>\nKey Items:</u></b>\n");
@@ -885,7 +885,7 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 			{
 				addButton(11, "Necklace", unequipNecklace).hint(player.necklace.description, capitalizeFirstLetter(player.necklace.name));
 			}
-			if (player.headJewelry != HeadJewelryLib.NOTHING)
+			if (player.vehicles != VehiclesLib.NOTHING)
 			{
 				addButton(12, "Vehicle", unequipVehicle).hint(player.vehicles.description, capitalizeFirstLetter(player.vehicles.name));
 			}/*

@@ -57,6 +57,12 @@ public final class Mutations extends MutationsHelper
 			if (player.hasPerk(PerkLib.OniMusculatureEvolved)) bonusempoweroni -= 3;
 			return bonusempoweroni;
 		}
+				//split large wings to two pairs
+				/*else if (player.wings.type == Wings.BAT_LIKE_LARGE && player.cor >= 75) {
+					outputText("\n\n");
+					outputText("Your large demonic wings starts to tremble and then starts to split from the tip.  You stretch over your shoulder to stroke them as they divide, turning into two pairs of full-sized demon-wings.  <b>Your demonic wings have split into two pairs!</b>");
+					setWingType(Wings.BAT_LIKE_LARGE_2, "two large pairs of bat-like");
+				}*/
 
 //ManUp Beer
 		public function manUpBeer(player:Player):void
@@ -3318,6 +3324,14 @@ public final class Mutations extends MutationsHelper
 			outputText("You open the small scroll, and discover it to be an instructional scroll on the use of grey magic.  Most of it is filled with generic information about grey magic - how it is drawn from both mental focus and emotions (typically lust), is difficult to use when tired and too little or too much aroused, and is used to at the same time create or control energy and affect bodies or emotions to create final effect.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
 			outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Polar Midnight.</b>");
 			player.createStatusEffect(StatusEffects.KnowsPolarMidnight, 0, 0, 0, 0);
+		}
+		
+		public function whiteMeteorShower(player:Player):void
+		{
+			clearOutput();
+			outputText("You open the small tome, and discover it to be an instructional tome on the use of grey magic.  Most of it is filled with generic information about grey magic - how it is drawn from both mental focus and emotions (typically lust), is difficult to use when tired and too little or too much aroused, and is used to at the same time create or control energy and affect bodies or emotions to create final effect.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+			outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Meteor Shower.</b>");
+			player.createStatusEffect(StatusEffects.KnowsMeteorShower, 0, 0, 0, 0);
 		}
 
 		public function greySpellbook(player:Player):void
@@ -10928,18 +10942,12 @@ public final class Mutations extends MutationsHelper
 				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
 			//Grow demon wings
-			if (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.BAT_LIKE_LARGE_2) && rand(3) == 0 && player.cor >= 50) {
+			if (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.BAT_LIKE_LARGE) && rand(3) == 0 && player.cor >= 50) {
 				//grow smalls to large
 				if (player.wings.type == Wings.BAT_LIKE_TINY && player.cor >= 75) {
 					outputText("\n\n");
 					outputText("Your small demonic wings stretch and grow, tingling with the pleasure of being attached to such a tainted body.  You stretch over your shoulder to stroke them as they unfurl, turning into full-sized demon-wings.  <b>Your demonic wings have grown!</b>");
 					setWingType(Wings.BAT_LIKE_LARGE, "large, bat-like");
-				}
-				//split large wings to two pairs
-				else if (player.wings.type == Wings.BAT_LIKE_LARGE && player.cor >= 75) {
-					outputText("\n\n");
-					outputText("Your large demonic wings starts to tremble and then starts to split from the tip.  You stretch over your shoulder to stroke them as they divide, turning into two pairs of full-sized demon-wings.  <b>Your demonic wings have split into two pairs!</b>");
-					setWingType(Wings.BAT_LIKE_LARGE_2, "two large pairs of bat-like");
 				}
 				else if (player.wings.type == Wings.DRACONIC_SMALL || player.wings.type == Wings.DRACONIC_LARGE || player.wings.type == Wings.BEE_LIKE_SMALL || player.wings.type == Wings.BEE_LIKE_LARGE || player.wings.type == Wings.MANTIS_LIKE_SMALL || player.wings.type == Wings.MANTIS_LIKE_LARGE || player.wings.type == Wings.MANTICORE_LIKE_SMALL || player.wings.type == Wings.MANTICORE_LIKE_LARGE) {
 					outputText("\n\n");
@@ -11427,7 +11435,7 @@ public final class Mutations extends MutationsHelper
 				humanizeSkin();
 				changes++;
 			}
-			if (boar && rand(2) == 0 && player.hasPlainSkinOnly() && !player.hasFur()) {
+			if (boar && rand(2) == 0 && player.hasPlainSkinOnly() && !player.hasFur() && changes < changeLimit) {
 				var skinChoosen:int = rand(5);
 				var furToBeChosen:String = "";
 				if (skinChoosen == 0) furToBeChosen = "brown";
@@ -12492,7 +12500,7 @@ public final class Mutations extends MutationsHelper
 			
 			//int change
 			if (player.inte < 100 && changes < changeLimit && rand(3) == 0) {
-				outputText("\n\nArcane knowledge floods into your mind. You already imagine tons of new sinister ways to use this knowledge.");
+				outputText("\n\nArcane knowledge floods into your mind. You immediately imagine tons of new sinister ways to use this knowledge.");
 				dynStats("int", 1);
 				changes++;
 			}
@@ -12682,19 +12690,20 @@ public final class Mutations extends MutationsHelper
 			}
 			//Fangs
 			if (rand(3) == 0 && changes < changeLimit && player.faceType != Face.DEVIL_FANGS && player.ears.type == Ears.GOAT) {
-				outputText("\n\nYou feel your canines grow slightly longer to take on a sharp appearance like those of a beast. Perhaps not as long as you thought they would end up as but clearly they make your smile all the more fiendish. <b>You now have demonic fangs!</b>");
+				outputText("\n\nYou feel your canines grow slightly longer, taking on a sharp appearance like those of a beast. Perhaps not as long as you thought they would end up as, but clearly they make your smile all the more fiendish. <b>You now have demonic fangs!</b>");
 				setFaceType(Face.DEVIL_FANGS);
 				changes++;
 			}
 			//Eyes
 			if (rand(3) == 0 && changes < changeLimit && player.eyes.type != Eyes.DEVIL && player.faceType == Face.DEVIL_FANGS) {
-				outputText("\n\nYour eyes feels like they are burning. You try to soothe them, but to no avail. You endure the agony for a few minutes before it finally fades. You look at yourself in the nearest reflective surface and notice your eyes have taken on a demonic appearance: the sclera is black and the pupils ember. Furthermore they seem to glow with a faint inner light. <b>You now have fiendish eyes!</b>");
+				outputText("\n\nYour eyes feel like they are burning. You try to soothe them, but to no avail. You endure the agony for a few minutes before it finally fades. You look at yourself in the nearest reflective surface and notice your eyes have taken on a demonic appearance. ");
+				outputText("The sclera is black with a glowing ember iris. Furthermore, they seem to glow with a faint inner light. <b>You now have fiendish eyes!</b>");
 				setEyeTypeAndColor(Eyes.DEVIL,"ember");
 				changes++;
 			}
 			//Shrinkage!
 			if (rand(2) == 0 && player.tallness > 42) {
-				outputText("\n\nYou see the ground grow closer. Upon examining yourself you discover you are shorter than before.");
+				outputText("\n\nYou see the ground grow closer. Upon examining yourself, you discover you are shorter than before.");
 				player.tallness -= 1 + rand(3);
 				changes++;
 			}
@@ -12781,6 +12790,194 @@ public final class Mutations extends MutationsHelper
 				setWingType(Wings.FEY_DRAGON_WINGS, "large majestic fey draconic");
 				changes++;
 			}
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+		}
+
+		public function bayrleaf(player:Player):void
+		{
+			player.slimeFeed();
+			//init variables
+			var changes:Number = 0;
+			var changeLimit:Number = 1;
+			var temp2:Number = 0;
+			//Randomly choose affects limit
+			if (rand(2) == 0) changeLimit++;
+			if (rand(3) == 0) changeLimit++;
+			if (rand(4) == 0) changeLimit++;
+			changeLimit += additionalTransformationChances();
+			//Temporary storage
+			var temp:Number = 0;
+			//clear screen
+			clearOutput();
+			outputText("You drink the tea and feel relaxed and in harmony with your surroundings. As you are lost in those relaxing thoughts, your body begins to change.");
+			//-Raises toughness up to 100.
+			if (player.tou < 100 && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYou're feeling tougher and sturdier. A force of nature, really. Whoever is going to attack you is going to have a hard time damaging your solid athletic body.");
+				dynStats("tou", 1);
+				changes++;
+			}
+			//-Raises strength to 100.
+			if (player.str < 100 && rand(3) == 0 && changes < changeLimit) {
+				outputText("\n\nYou feel just as strong as a bear!");
+				if (player.tou < 50) outputText("Well maybe not a bear but you sure can pack a punch with your fist.");
+				dynStats("str", 1);
+				changes++;
+			}
+			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
+			if (changes < changeLimit && rand(2) == 0 && player.tallness < 84) {
+				temp = rand(5) + 3;
+				//Slow rate of growth near ceiling
+				if (player.tallness > 90) temp = Math.floor(temp / 2);
+				//Never 0
+				if (temp == 0) temp = 1;
+				//Flavor texts.  Flavored like 1950's cigarettes. Yum.
+				if (temp < 5) outputText("\n\nYou shift uncomfortably as you realize you feel off balance.  Gazing down, you realize you have grown SLIGHTLY taller.");
+				if (temp >= 5 && temp < 7) outputText("\n\nYou feel dizzy and slightly off, but quickly realize it's due to a sudden increase in height.");
+				if (temp == 7) outputText("\n\nStaggering forwards, you clutch at your head dizzily.  You spend a moment getting your balance, and stand up, feeling noticeably taller.");
+				player.tallness += temp;
+				changes++;
+			}
+			var boobsGrew:Boolean = false;
+			//Increase player's breast size
+			if (player.gender > 1 && player.biggestTitSize() <= 12 && changes < changeLimit && rand(3) == 0) {
+				if (rand(2) == 0) outputText("\n\nYour [breasts] tingle for a moment before becoming larger.");
+				else outputText("\n\nYou feel a little weight added to your chest as your [breasts] seem to inflate and settle in a larger size.");
+				player.growTits(1 + rand(3), 1, false, 3);
+				changes++;
+				dynStats("sen", .5);
+				boobsGrew = true;
+			}
+			//-Grow hips out if narrow.
+			if (player.hips.type < 10 && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYour gait shifts slightly to accommodate your widening [hips]. The change is subtle, but they're definitely broader.");
+				player.hips.type++;
+				changes++;
+			}
+			//-Narrow hips if crazy wide
+			if (player.hips.type >= 15 && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYour gait shifts inward, your [hips] narrowing significantly. They remain quite thick, but they're not as absurdly wide as before.");
+				player.hips.type--;
+				changes++;
+			}
+			//-Big booty
+			if (player.butt.type < 8 && changes < changeLimit && rand(3) == 0) {
+				player.butt.type++;
+				changes++;
+				outputText("\n\nA slight jiggle works through your rear, but instead of stopping it starts again. You can actually feel your [armor] being filled out by the growing cheeks. When it stops, you find yourself the proud owner of a " + buttDescript() + ".");
+			}
+			//-Narrow booty if crazy huge.
+			if (player.butt.type >= 14 && changes < changeLimit && rand(4) == 0) {
+				changes++;
+				player.butt.type--;
+				outputText("\n\nA feeling of tightness starts in your " + buttDescript() + ", increasing gradually. The sensation grows and grows, but as it does your center of balance shifts. You reach back to feel yourself, and sure enough your massive booty is shrinking into a more manageable size.");
+			}
+			//Physical changes
+			//Ears
+			if (player.lowerBody != LowerBody.GARGOYLE && player.ears.type != Ears.BEAR && player.ears.type != Ears.PANDA && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYour ears begin to tingle. You reach up with one hand and gently rub them. They appear to be growing fur. Within a few moments, they’ve migrated up to the top of your head and increased in size, taking on a rounded shape. The tingling stops and you find yourself hearing noises in a whole new way. ");
+				if (rand(2) == 0) {
+					outputText("<b>You could pass for cute with your new bear ears.</b>");
+					setEarType(Ears.BEAR);
+				}
+				else {
+					outputText("<b>You could pass for cute with your new panda ears.</b>");
+					setEarType(Ears.PANDA);
+				}
+				changes++;
+			}
+			//Eyes
+			if (changes < changeLimit && rand(3) == 0 && player.eyes.type == Eyes.HUMAN && player.ears.type == Ears.BEAR) {
+				outputText("\n\nYour eyes begin to water for a moment. When your view clears up you move on to a puddle and notice their coloration changed to a golden brown hue not unlike those of a bears. <b>You now have golden pupils.</b>");
+				setEyeTypeAndColor(Eyes.BEAR, "golden");
+				changes++;
+			}
+			//Remove odd eyes
+			if (changes < changeLimit && rand(4) == 0 && player.eyes.type > Eyes.HUMAN && player.eyes.type != Eyes.BEAR) {
+				humanizeEyes();
+				changes++;
+			}
+			//Arms
+			if (player.arms.type != Arms.BEAR && player.arms.type != Arms.GARGOYLE && player.eyes.type == Eyes.BEAR && changes < changeLimit && rand(3) == 0) {
+				if (player.arms.type == Arms.HUMAN) {
+					outputText("\n\nYour hands suddenly start to hurt as your arms grows a thick coat of [skin coat.color] fur up to your shoulders. You watch enthralled as your nails turn into large ursan claws on your now five-fingered paw-like hands. <b>You now have bear-like paw hands.</b>");
+					setArmType(Arms.BEAR);
+				}
+				else humanizeArms();
+				changes++;
+			}
+			//Legs
+			if (player.lowerBody != LowerBody.BEAR && player.arms.type == Arms.BEAR && changes < changeLimit && rand(3) == 0) {
+				if (player.lowerBody == LowerBody.HUMAN) {
+					outputText("\n\nYour legs suddenly shift, painfully forcing you down on all fours as the bones of your feet change shape into something different. You feel hair growing at a rapid rate all over your legs. Something juts out of your toe as they clench into the ground. As you feel the pain recede, you sit and take a look at your foot or rather, your large bear hind paws, now armed with sharp claws. <b>You now have bear-like paws.</b>");
+					setLowerBody(LowerBody.BEAR);
+				}
+				else humanizeLowerBody();
+				changes++;
+			}
+			//Tail
+			if (player.tailType != Tail.BEAR && player.lowerBody == LowerBody.BEAR && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\n");
+				if (player.tailType != Tail.NONE) outputText("You feel something shifting in your backside. Then something detaches from your backside and it falls onto the ground.  ");
+				outputText("You groan in surprise as you feel your spine lengthening and twisting, sprouting fur as it finishes growing. ");
+				if (!player.isNaked()) outputText("Luckily the new growth does not seem to have ruined your [armor]. ");
+				outputText("Curious, you examine the new appendage, wagging it and smiling as you see your cute, <b>brand new bear-like tail!</b>");
+				setTailType(Tail.BEAR);
+				changes++;
+			}
+			//Face
+			if (((player.ears.type == Ears.BEAR && player.faceType != Face.BEAR) || (player.ears.type == Ears.PANDA && player.faceType != Face.PANDA)) && player.faceType == Face.HUMAN && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYour nose start to tingle as your general face shape surge forward into a muzzle complete with sharp teeth. At first you though it was a dog face but after further examination conclude it has more in common with bears then canines. ");
+				if (player.ears.type == Ears.BEAR) {
+					outputText("<b>You now have a bear face.</b>");
+					setFaceType(Face.BEAR);
+				}
+				else {
+					outputText("<b>You now have a bear face.</b>");
+					setFaceType(Face.PANDA);
+				}
+				changes++;
+			}
+			if (player.faceType != Face.HUMAN && player.faceType != Face.BEAR && player.faceType != Face.PANDA && changes < changeLimit && rand(4) == 0) {
+				humanizeFace();
+				changes++;
+			}
+			//Fur
+			if (rand(3) == 0 && player.hasPlainSkinOnly() && !player.hasFur() && changes < changeLimit) {
+				outputText("\n\nYour skin itches intensely. You gaze down as more and more hairs break forth from your skin quickly transforming into a coat of ");
+				if (player.faceType == Face.PANDA) {
+					outputText("white fur. Your leg fur and your arms up to your neck and shoulders, on the other hand, turns pitch black. <b>You are now covered in white fur, your forepaw and hindpaw black as night. On your white face you have two black circle around the eye just like a panda.</b> As if to match your fur color pattern your hair shift color to black and white.");
+					player.hairColor = "white";
+					//player.hairColor2 = "black"; // TODO 2-color hair
+					player.skin.growCoat(Skin.FUR,{
+						color:"white",
+						color2:"black",
+						pattern:Skin.PATTERN_SPOTTED
+					});
+				}
+				else {
+					var skinChoosen:int = rand(3);
+					var furToBeChosen:String = "";
+					if (skinChoosen == 0) furToBeChosen = "brown";
+					else if (skinChoosen == 1) furToBeChosen = "white";
+					else furToBeChosen = "black";
+					player.skin.growCoat(Skin.FUR,{color:furToBeChosen});
+					outputText("[skin coat.color] fur. <b>You are now covered in [skin coat.color] fur from head to toe.</b>");
+				}
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+					outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
+					player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
+				}
+				changes++;
+			}
+			if (!player.hasPlainSkinOnly() && rand(4) == 0 && changes < changeLimit) {
+				if (player.skinAdj != "") player.skinAdj = "";
+				humanizeSkin();
+				changes++;
+			}
+			if (player.gender == 1 && changes < changeLimit && rand(2) == 0) outputText(player.modTone(85, 3));
+			if (player.gender == 2 && changes < changeLimit && rand(2) == 0) outputText(player.modTone(10, 5));
+			if (changes < changeLimit && rand(2) == 0) outputText(player.modThickness(70, 4));
+			player.refillHunger(10);
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 		
@@ -13244,4 +13441,3 @@ public final class Mutations extends MutationsHelper
 		}
 	}
 }
-

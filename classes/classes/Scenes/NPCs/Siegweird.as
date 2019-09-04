@@ -16,7 +16,7 @@ import classes.internals.*;
 		public var spellCostCharge:int = 6;
 		
 		public function siegweirdMagicWeapon():void {
-			outputText("Siegweird pass his armored paw on his greatsword, which begins to flash like a torch light. This is gonna hurt!");
+			outputText("Siegweird passes his armored paw over his greatsword, which begins to flash like a torchlight. This is gonna hurt!");
 			createStatusEffect(StatusEffects.ChargeWeapon, 40, 0, 0, 0);
 			this.weaponAttack += (40 + (40 * (1 + player.newGamePlusMod)));
 			mana -= spellCostCharge;
@@ -31,7 +31,7 @@ import classes.internals.*;
 			else if (this.weaponAttack >= 151 && this.weaponAttack < 201) damage *= (4.75 + ((this.weaponAttack - 150) * 0.015));
 			else damage *= (5.5 + ((this.weaponAttack - 200) * 0.01));
 			if (hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 2;
-			outputText("Siegweird smash his weapon at you! The impact make you reel for " + damage + " damage!");
+			outputText("Siegweird smashes his weapon at you! The impact makes you reel for " + damage + " damage!");
 			if (hasStatusEffect(StatusEffects.ChargeWeapon)) damage = player.takeFireDamage(damage);//, true
 			else damage = player.takePhysDamage(damage);//, true
 			statScreenRefresh();
@@ -39,12 +39,12 @@ import classes.internals.*;
 		}
 		
 		private function siegweirdBerserk():void {
-			outputText("Siegweird suddenly scream a war cry, becoming bigger, tougher and more intimidating by the second!\n\n");
+			outputText("Siegweird suddenly screams a war cry, becoming bigger, tougher and more intimidating by the second!\n\n");
 			createStatusEffect(StatusEffects.BerzerkingSiegweird,50,0,0,0);
 		}
 		
 		private function siegweirdHeal():void {
-			outputText("Siegweird swiftly cast a spell and you can see his wounds periodically closing.\n\n");
+			outputText("Siegweird swiftly casts a spell and you can see his wounds periodically closing.\n\n");
 			createStatusEffect(StatusEffects.HealingSiegweird,10,0,0,0);
 		}
 		
@@ -87,9 +87,9 @@ import classes.internals.*;
 		public function Siegweird() 
 		{
 			this.a = "";
-			this.short = "Siegweird of Catalyna";
+			this.short = "Siegweird of Catelyna";
 			this.imageName = "siegweird";
-			this.long = "You are fighting Siegweird of Catalyna a somewhat goofy albeith determined paladin of Mara. He wield his sword with both hands, his onion shaped spiked shield on his back. His Armor also Onion shaped hides most of his features tough you know him to be a white bear morph.";
+			this.long = "You are fighting Siegweird of Catelyna, a somewhat goofy albeith determined paladin of Marae. He wield his sword with both hands, his onion shaped spiked shield on his back. His Onion shaped Armor hides most of his features though you know him to be a white bear morph.";
 			// this.plural = false;
 			this.createCock(7.5,1.8);
 			this.balls = 2;

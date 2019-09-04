@@ -27,6 +27,7 @@ import classes.Scenes.Areas.Forest.TamaniScene;
 import classes.Scenes.Areas.Forest.TentacleBeastRaging;
 import classes.Scenes.Areas.Forest.WorldTree;
 import classes.Scenes.Areas.HighMountains.IzumiScene;
+import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
 import classes.Scenes.Dungeons.DenOfDesire.ObsidianGargoyle;
 import classes.Scenes.Monsters.DarkElfRanger;
@@ -175,6 +176,7 @@ use namespace CoC;
 				outputText("Mortal\n");
 			outputText("<b>Cultivation level:</b> " + flags[kFLAGS.SOUL_CULTIVATION] + "\n");
 			outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " / 1430\n");
+			if (player.hasStatusEffect(StatusEffects.AlvinaTraining2)) outputText("ALvi training 2 value: " + player.statusEffectv1(StatusEffects.AlvinaTraining2) + "\n");
 		/*	outputText("<b>Progress toward clearing next meridian: </b>");
 			if (flags[kFLAGS.UNLOCKED_MERIDIANS] == 2)
 				outputText(flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] + " / wartość liczbowa\n");
@@ -204,11 +206,6 @@ use namespace CoC;
 			clearOutput();
 			outputText("Collection of current used cheats that with time will be removed or replaced by new ones.");
 			outputText("\n\nAscension points: " + player.ascensionPerkPoints + "");
-			if (player.hasStatusEffect(StatusEffects.AchievementsNormalShadowTotal)) {
-				outputText("\n\nNormal achievs: " + player.statusEffectv1(StatusEffects.AchievementsNormalShadowTotal) + "");
-				outputText("\n\nShadow achievs: " + player.statusEffectv2(StatusEffects.AchievementsNormalShadowTotal) + "");
-				outputText("\n\nTotals achievs: " + player.statusEffectv3(StatusEffects.AchievementsNormalShadowTotal) + "");
-			}
 			menu();
 			addButton(0, "StatsAdj/Ascen", StatsAscensionMenu).hint("For more precise adjusting each of 8 main stats and Ascension related stuff.");
 			addButton(1, "P/G/XP/LvL", PerksGemsEXPLvL).hint("Adding/Removing perk points and adding gems/exp/lvl.");
@@ -218,7 +215,8 @@ use namespace CoC;
 			addButton(5, "Enemies", EnemiesMenu).hint("For spawning various enemies to test fight them.");
 			addButton(6, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
 			addButton(7, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
-			if (flags[kFLAGS.NEISA_FOLLOWER] == 3) addButton(8, "NeisaFix", AuroraReset).hint("Fix Neisa to be less clingy.");
+			addButton(8, "Phylactery", PhylacteryTesting);
+			//if (flags[kFLAGS.NEISA_FOLLOWER] == 3) addButton(8, "NeisaFix", AuroraReset).hint("Fix Neisa to be less clingy.");
 			//if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 8) addButton(8, "Repta-Tongue", AddReptaTongue).hint("Items bungle for Repta-Tongue Potion.");
 			if (player.perkv4(PerkLib.ProductivityDrugs) > 0 || player.hasPerk(PerkLib.ProductivityDrugs)) addButton(9, "P.Drugs Fix", fixingProductionDrugs).hint("To fix Productive Drug perk wild rampage.");
 			if (player.hasPerk(PerkLib.Metamorph)) addButton(9, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Metamorph all options unlock.");
@@ -233,6 +231,22 @@ public function FightAria():void {
 	clearOutput();
 	outputText("Entering battle with Melkie! Enjoy ^^");
 	startCombat(new Aria());
+}
+public function FightLethice():void {
+	clearOutput();
+	outputText("Entering battle with Lethice! Enjoy ^^");
+	startCombat(new Lethice());
+}
+public function PhylacteryTesting():void {
+	clearOutput();
+	outputText("Entering phylactery creation simulation! Enjoy ^^");
+	flags[kFLAGS.ALVINA_FOLLOWER] = 13;
+	flags[kFLAGS.SIEGWEIRD_FOLLOWER] = 3;
+	player.createKeyItem("Stone Statue Lethicite", 0, 0, 0, 0);
+	player.itemSlot1.setItemAndQty(consumables.L_DRAFT,5);
+	player.itemSlot2.setItemAndQty(useables.SOULGEM,5);
+	player.itemSlot3.setItemAndQty(useables.SOULGEM,5);
+	doNext(SoulforceCheats);
 }
 public function AuroraReset():void {
 	clearOutput();
@@ -1372,7 +1386,10 @@ public function fixingProductionDrugs():void {
 			addButton(7, "GreenGel", AddGreenGel).hint("Add 1 Green Gel.");
 			addButton(8, "DragonScale", AddDragonscale).hint("Add 1 Dragonscale.");
 			addButton(9, "F.Imp S.", AddFeralImpSkull).hint("Add 1 Feral Imp Skull.");
-			addButton(10, "PolMidScr", AddPolarMidnightScroll).hint("Add 1 Polar Midnight scroll");
+			addButton(10, "PolMidScr", AddPolarMidnightScroll).hint("Add 1 Polar Midnight scroll.");
+			addButton(11, "MetalPieces", AddMetalPieces).hint("Add 50 Metal Pieces (game not check for limits so not go overboard with using this cheat).");
+			addButton(12, "Mechanism", AddMechanism).hint("Add 1 Mechanism.");
+			addButton(13, "EnergyCore", AddEnergyCore).hint("Add 1 Energy Core.");
 			addButton(14, "Back", SoulforceCheats);
 		}
 		public function EnemiesMenu():void {
@@ -1382,7 +1399,8 @@ public function fixingProductionDrugs():void {
 			addButton(2, "Sonya", FightSonya).hint("Test fight with Sonya.");
 			addButton(3, "RyuBi", FightRyuBi).hint("Test fight with RyuBi.");
 			addButton(4, "Aria", FightAria).hint("Test fight with melkie huntress Aria.");
-			addButton(5, "DE Ranger", FightDarkElfRanger).hint("Test fight with Dark Elf Ranger. (lvl 39)");
+			addButton(5, "Lethice", FightLethice).hint("Test fight with Lethice.");
+			//addButton(5, "DE Ranger", FightDarkElfRanger).hint("Test fight with Dark Elf Ranger. (lvl 39)");
 			//addButton(6, "DE Sniper", FightDarkElfSniper).hint("Test fight with Dark Elf Sniper. (lvl 51)");
 			addButton(6, "SomeManticore", FightRandomnManticore).hint("Test fight with some manticore.");
 			addButton(7, "Electra", FightElectra).hint("Test fight with Electra.");
@@ -1400,6 +1418,20 @@ public function FightAurora():void {
 	startCombat(new Aurora());
 }
 		
+		public function AddEnergyCore():void {
+			outputText("\n\n<b>(Gained 1 Energy Core!)</b>\n\n");
+			inventory.takeItem(useables.ENECORE, MaterialMenu);
+		}
+		public function AddMechanism():void {
+			outputText("\n\n<b>(Gained 1 Mechanism!)</b>\n\n");
+			inventory.takeItem(useables.MECHANI, MaterialMenu);
+		}
+		public function AddMetalPieces():void {
+			outputText("\n\n<b>(Gained 50 Metal Pieces!)</b>\n\n");
+			flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += 50;
+			statScreenRefresh();
+			MaterialMenu();
+		}
 		public function AddPolarMidnightScroll():void {
 			outputText("\n\n<b>(Gained 1 Polar Midnight scroll!)</b>\n\n");
 			inventory.takeItem(consumables.POL_MID, MaterialMenu);
@@ -3247,4 +3279,4 @@ public function FightAurora():void {
 			}
 		}
 	}
-}
+}
