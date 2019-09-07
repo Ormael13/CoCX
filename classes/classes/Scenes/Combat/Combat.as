@@ -1303,6 +1303,77 @@ public function meleeDamageAccSawblade():void {
 	//BASIC DAMAGE STUFF
 	damage += player.str;
 	damage += scalingBonusStrength() * 0.25;
+	/* From there will be XWOLKX's alpha damage overhaul for melee sh*t coding
+	 * Base idea:
+	 * damage varies from 35% to 115%
+	 * Lower threshold scailing from wis up to 10%
+	 * Upper threshold scailing from int up to 10%
+	 * Speed difference add roll for random
+	 * If player > monster => roll for greater multiplier
+	 * else roll for worser
+	 */
+	var higher_threshold: Number = 115; // base highest damage multiplier value that deal player
+	var lower_threshold: Number = 35; // base lowest
+	var percent:Number;
+    var times:int = 1;
+	var lock:Boolean = false;
+	
+	/*
+	// threshold math
+	percent = player.spe / 100; // this var is needed for comprehension Player SPE and Monster SPE in % difference
+	percent = Math.round(monster.spe / percent) - 100; // this operation give us info how bigger/smaller monster SPE in comprehension with player SPE
+	if (percent >= 0) {
+		lower_threshold -= percent; // if Monster SPE higher, then we deal more likely weak damage
+	}
+	else {
+		lower_threshold += percent; // if Monster SPE lower, then we deal more likely good damage
+	}
+	if (lower_threshold < 0) { // We don't want to heal enemy with attack, do we? :D
+		lower_threshold = 0;  
+	}
+	// applying stats modificators for thresholds
+	if (player.wis > 200) {
+		lower_threshold += 10; // written value is how much you want to boost damage by wis
+	}
+	else {
+		lower_threshold += Math.round(player.wis / 20) // + percent damage per 20 wis
+	}
+	if (player.inte > 300) { 
+		higher_threshold += 10; // written value is how much you want to boost damage by int
+	}
+	else {
+		higher_threshold += Math.round(player.inte / 30) // + percent damage per 30 int
+	}
+	
+	// multiplier math
+	if ((percent > 20) || (percent <-20 )) {
+	if (percent < 0 ) {
+		percent *= ( -1);
+		lock = true; // that means that our speed greater then monsters
+	}
+		times = int(Math.round(percent / 5)); // how many times damage would be rolled
+	}
+	var random_value:Number = Math.round(Math.random() * higher_threshold) + lower_threshold;
+	for (var i:int = 1; i < times; i++)
+	{
+		var b:Number = Math.round(Math.random() * higher_threshold) + lower_threshold;
+		if (lock == true) {
+			if (random_value > b){  // we would deal greater damage
+				random_value = b;
+			}
+		}
+		else
+			if (random_value < b){ // we would deal worser damage
+			random_value = b;
+		}
+	}
+	random_value /= 100; // back to %
+	// damage math
+	*/
+	damage *= Math.round(Math.random() * higher_threshold) + lower_threshold;
+	
+	// End of overhaul and of sh*t coding
+	
 	if (damage < 10) damage = 10;
 	damage *= 1.3;
 	//Bonus sand trap damage!
@@ -1335,6 +1406,8 @@ public function meleeDamageAccSawblade():void {
 		}
 		damage = doDamage(damage);
 	}
+	
+
 	if (damage <= 0) {
 		damage = 0;
 		outputText("Your attacks are deflected or blocked by [monster a] [monster name].");
@@ -3783,6 +3856,96 @@ public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = 
 			damage *= sac.value2;
 		}
 	}
+	/* From there will be XWOLKX's alpha damage overhaul for melee sh*t coding
+	 * Base idea:
+	 * damage varies from 35% to 115%
+	 * Lower threshold scailing from wis up to 10%
+	 * Upper threshold scailing from int up to 10%
+	 * Speed difference add roll for random
+	 * If player.spe > monster.spe => roll for greater multiplier
+	 * else roll for worser
+	 */
+	if (flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] == 1)
+	{
+	var higher_threshold: Number = 115; // base highest damage multiplier value that deal player
+	var lower_threshold: Number = 35; // base lowest
+	var percent:Number;
+    var times:int = 1;
+	var lock:Boolean = false;
+	
+	
+	// threshold math
+	percent = player.spe / 100; // this var is needed for comprehension Player SPE and Monster SPE in % difference
+	percent = Math.round(monster.spe / percent) - 100; // this operation give us info how bigger/smaller monster SPE in comprehension with player SPE
+	if (percent >= 20) {
+		lower_threshold -= (percent-20); // if Monster SPE higher, then we deal more likely weak damage
+	}
+	else {
+		lower_threshold += (percent-20); // if Monster SPE lower, then we deal more likely good damage
+	}
+	if (lower_threshold < 0) { // We don't want to heal enemy with attack, do we? :D
+		lower_threshold = 0;  
+	}
+	// applying stats modificators for thresholds
+	if (player.wis > 200) {
+		lower_threshold += 10; // written value is how much you want to boost damage by wis
+	}
+	else {
+		lower_threshold += Math.round(player.wis / 20) // + percent damage per 20 wis
+	}
+	if (player.inte > 300) { 
+		higher_threshold += 10; // written value is how much you want to boost damage by int
+	}
+	else {
+		higher_threshold += Math.round(player.inte / 30) // + percent damage per 30 int
+	}
+	if (lower_threshold > 95) { // We still need some random space
+		lower_threshold = 95;  
+	}
+	// multiplier math
+	/* outputText(percent.toString());
+	outputText("    ");  for test only*/
+	if (percent != 0) {
+	if (percent < 0 ) {
+		percent *= ( -1);
+		lock = true; // that means that our speed greater then monsters
+	}
+		times = int(Math.round(percent / 15)); // how many times damage would be rolled
+	}
+	if (times > 7) times = 7;
+	var random_value:Number = Math.round(Math.random() * (higher_threshold - lower_threshold)) + lower_threshold; // roll multiplier from lower to higher threshold
+	for (var i:int = 1; i < times; i++) // rolling higher / lower value
+	{
+		var b:Number = Math.round(Math.random() * (higher_threshold-lower_threshold)) + lower_threshold;
+		if (lock) { // we would deal greater damage
+			if ((random_value < b) && (Math.round(Math.random() * (times*2/3)) == Math.round(times*2/6))){  // formula for random. If you don't like results - good luck to find nice formula.
+				random_value = b;
+			}
+		}
+		else // we would deal worser damage
+			if ((random_value > b) && (Math.round(Math.random() * (times*2/3)) == Math.round(times*2/6))){ 
+			random_value = b;
+		}
+	}
+		/* damage dialogs
+		if (damage > 0)
+		{
+			if (lock) 
+			{
+				if (random_value < 20) outputText("")
+			}
+			else
+			{
+				if (random_value > 95) outputText("")
+			}
+		} */
+	random_value /= 100; // back to %
+	// damage math
+	
+	damage *= random_value;
+	}
+	// outputText(random_value.toString()); for test only
+	// End of overhaul and of sh*t coding
 	damage = Math.round(damage);
 	if (damage < 0) damage = 1;
 	if (apply) {
