@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="xxc-story" xmlns:ns1="xxc-story">
+    <!-- core xlogic -->
+    <xs:group name="content">
+        <xs:sequence>
+            <xs:choice minOccurs="0">
+                <xs:element ref="ns1:b"/>
+                <xs:element ref="ns1:i"/>
+                <xs:element ref="ns1:font"/>
+                <xs:element ref="ns1:if"/>
+                <xs:element ref="ns1:switch"/>
+                <xs:element ref="ns1:xcc-content"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:group>
+    <xs:element name="if" type="ns1:ifBody"/>
+    <xs:complexType name="ifBody" mixed="true">
+        <xs:sequence>
+            <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:content"/>
+            <xs:choice minOccurs="0">
+                <xs:element ref="ns1:elseif"/>
+                <xs:element ref="ns1:else"/>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="test" use="required"/>
+        <xs:attribute name="then"/>
+        <xs:attribute name="else"/>
+    </xs:complexType>
+    <xs:element name="elseif" type="ns1:ifBody"/>
+    <xs:element name="else">
+        <xs:complexType mixed="true">
+            <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:content"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="switch">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:case"/>
+                <xs:element minOccurs="0" ref="ns1:default"/>
+            </xs:sequence>
+            <xs:attribute name="value"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="case">
+        <xs:complexType mixed="true">
+            <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:content"/>
+            <xs:attribute name="test"/>
+            <xs:attribute name="value"/>
+            <xs:attribute name="values"/>
+            <xs:attribute name="lt"/>
+            <xs:attribute name="gt"/>
+            <xs:attribute name="ne"/>
+            <xs:attribute name="lte"/>
+            <xs:attribute name="gte"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="default">
+        <xs:complexType mixed="true">
+            <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:content"/>
+        </xs:complexType>
+    </xs:element>
+    <!-- xxc statements -->
+    <xs:element name="b">
+        <xs:complexType mixed="true">
+            <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:content"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="i">
+        <xs:complexType mixed="true">
+            <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:content"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="font">
+        <xs:complexType mixed="true">
+            <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:content"/>
+            <xs:attribute name="color"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="xcc-named-content" abstract="true" substitutionGroup="ns1:xcc-content"/>
+    <xs:element name="xcc-content" abstract="true"/>
+    <xs:complexType name="namedBlock" mixed="true">
+        <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:content"/>
+        <xs:attribute name="name"/>
+    </xs:complexType>
+    <xs:element name="text" substitutionGroup="ns1:xcc-named-content" type="ns1:namedBlock"/>
+    <xs:element name="string" substitutionGroup="ns1:xcc-named-content" type="ns1:namedBlock"/>
+    <xs:element name="lib" substitutionGroup="ns1:xcc-named-content">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:xcc-named-content"/>
+            </xs:sequence>
+            <xs:attribute name="name" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="story" substitutionGroup="ns1:xcc-named-content" type="ns1:namedBlock"/>
+    <xs:element name="macro" substitutionGroup="ns1:xcc-named-content" type="ns1:namedBlock"/>
+    <xs:element name="set" substitutionGroup="ns1:xcc-content">
+        <xs:complexType mixed="true">
+            <xs:attribute name="var" use="required"/>
+            <xs:attribute name="value"/>
+            <xs:attribute name="op">
+                <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                        <xs:enumeration value="append"/>
+                        <xs:enumeration value="set"/>
+                        <xs:enumeration value="add"/>
+                        <xs:enumeration value="+="/>
+                        <xs:enumeration value="="/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="extend-story" substitutionGroup="ns1:xcc-named-content" type="ns1:namedBlock"/>
+    <xs:element name="zone" substitutionGroup="ns1:xcc-named-content">
+        <xs:complexType mixed="true">
+            <xs:complexContent>
+                <xs:extension base="ns1:namedBlock">
+                    <xs:sequence>
+                        <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:encounter"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="extend-zone" substitutionGroup="ns1:xcc-named-content">
+        <xs:complexType mixed="true">
+            <xs:complexContent>
+                <xs:extension base="ns1:namedBlock">
+                    <xs:sequence>
+                        <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:encounter"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="encounter">
+        <xs:complexType mixed="true">
+            <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:content"/>
+            <xs:attribute name="name" use="required"/>
+            <xs:attribute name="chance"/>
+            <xs:attribute name="when"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="display" substitutionGroup="ns1:xcc-content">
+        <xs:complexType>
+            <xs:attribute name="ref" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="dynStats" substitutionGroup="ns1:xcc-content">
+        <xs:complexType>
+            <xs:attribute name="str"/>
+            <xs:attribute name="tou"/>
+            <xs:attribute name="spe"/>
+            <xs:attribute name="int"/>
+            <xs:attribute name="lib"/>
+            <xs:attribute name="sen"/>
+            <xs:attribute name="lus"/>
+            <xs:attribute name="cor"/>
+            <xs:attribute name="scale"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="output" substitutionGroup="ns1:xcc-content" type="xs:string"/>
+    <xs:element name="include" substitutionGroup="ns1:xcc-content">
+        <xs:complexType>
+            <xs:attribute name="path" use="required"/>
+            <xs:attribute name="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                        <xs:enumeration value="true"/>
+                        <xs:enumeration value="false"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

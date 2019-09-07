@@ -1,0 +1,24 @@
+*.swf
+RECOVER_*
+Corruption-of-Champions.as3proj
+/img/*
+/bin-debug
+/debugStuff
+/CoCEd 1.0.3
+/bin
+/obj
+
+*.pyc
+/dist
+/generated
+.idea/shelf
+.idea/workspace.xml
+.idea/copyright/profiles_settings.xml
+node_modules
+*.sol
+*.swc
+/out
+/tmp
+CoC-AIR-app.xml
+CoC-AIR.airi
+.DS_Store

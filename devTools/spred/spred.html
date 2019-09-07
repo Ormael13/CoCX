@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Sprite model editor</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+	      integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/tether.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="tether.min.js"></script>
+	<script src="tinycolor-min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+	        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+	        crossorigin="anonymous"></script>
+	<script src="config.js"></script>
+	<script src="spred.js"></script>
+	<link rel="stylesheet" href="spred.css">
+</head>
+<body>
+<div class="container-fluid" id="main">
+	<div class="row" style="flex-shrink: 0;">
+		<div class="col-12">
+			<h3>CoC Sprite Editor</h3>
+			<button type="button" class="btn btn-secondary" onclick="spred.addCompositeView(spred.defaultPartList())">
+				<span class="fa fa-plus"></span> Add view
+			</button>
+			<button class="btn btn-secondary" onclick="spred.saveSpritemaps()">
+				<span class="fa fa-save"></span> Save spritemaps
+			</button>
+			<button class="btn btn-secondary" onclick="spred.savePalettes()">
+				<span class="fa fa-save"></span> Save palettes
+			</button>
+		</div>
+	</div>
+	<div class="row" id="Loading" style="flex-shrink:0;display:none">
+		<div class="col-12 card card-warning">
+			<div class="card-block">
+				<h5 class="card-header">Filesystem inaccessible</h5>
+
+				<div id="LoadingList"></div>
+				<h6>
+					<span class="text-muted small">(Tip: you can upload multiple files at once)</span>
+				</h6>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="flex-grow:1">
+		<div class="col col-lg-auto">
+			<h4>Controls</h4>
+			<h5>Left button</h5>
+			<div class="form-check">
+				<label for="lmba-drag" class="form-check-label">
+					<input type="radio" name="lmb-action" id="lmba-drag" value="drag" checked>
+					Drag
+				</label>
+			</div>
+			<div class="form-check">
+				<label for="lmba-nothing" class="form-check-label">
+					<input type="radio" id="lmba-nothing" name="lmb-action" value="nothing">
+					Nothing
+				</label>
+			</div>
+			<div class="form-check disabled">
+				<label for="lmba-erase" class="form-check-label">
+					<input type="radio" id="lmba-erase" name="lmb-action" value="erase" disabled>
+					Erase
+				</label>
+			</div>
+			<div class="form-check disabled">
+				<label for="lmba-keycolor" class="form-check-label">
+					<input type="radio" id="lmba-keycolor" name="lmb-action" value="keycolor" disabled>
+					Key color...
+				</label>
+			</div>
+			<div style="padding-left:calc(1.25rem + 17px)">
+				<select id="lmb-color" class="form-control" disabled>
+					<option value="#FF88FF">hair lighten(25)</option>
+					<option value="#CC00CC">hair</option>
+				</select>
+			</div>
+			<!--<h5>RMB</h5>-->
+			<!--<h4>Import</h4>
+			<input type="text" id="ClipboardGrabber" placeholder="Ctrl+V image or drop file" class="form-control">
+			<div class="form-check disabled">
+				<label for="clipboard-add" class="form-check-label">
+					<input type="radio" id="clipboard-add" name="clipboard-action" value="add" disabled>
+					Add layer
+				</label>
+			</div>
+			<div class="form-check">
+				<label for="clipboard-replace" class="form-check-label">
+					<input type="radio" id="clipboard-replace" name="clipboard-action" value="replace" checked>
+					Replace selected layer
+				</label>
+			</div>
+			<div class="d-flex align-items-baseline">
+				<label for="ClipboardMask" class="form-label">Mask&nbsp;color</label>
+				<input class="form-control" type="text" id="ClipboardMask" placeholder="hex (e.g. #FFFFFF)">
+			</div>-->
+		</div>
+		<div class="col" id="ViewList">
+
+		</div>
+		<div class="col col-lg-auto d-flex flex-column" style="flex-basis:280px;max-height:100%;">
+			<h4><button class="ctrl" type="button" onclick="$('#Palettes').toggle()"><span class="fa fa-plus-circle"></span></button> Palette</h4>
+			<div id="Palettes">
+
+			</div>
+			<h4><button class="ctrl" type="button" onclick="$('#Layers').toggle()"><span class="fa fa-plus-circle"></span></button> Layers</h4>
+			<div id="Layers">
+
+				<div id="LayerList" style="overflow-y:scroll;flex-shrink:1">
+
+				</div>
+				<div style="flex-shrink:0;flex-grow:0;">
+					<h4>Selected:</h4>
+					<h5 id="SelLayerName">
+					</h5>
+					<div>
+						<button class="ctrl" type="button" onclick="spred.selPartMove(-1,0)">
+							<span class="fa fa-caret-left"></span>
+						</button>
+						<button class="ctrl" type="button" onclick="spred.selPartMove(1,0)">
+							<span class="fa fa-caret-right"></span>
+						</button>
+						<button class="ctrl" type="button" onclick="spred.selPartMove(0,-1)">
+							<span class="fa fa-caret-up"></span>
+						</button>
+						<button class="ctrl" type="button" onclick="spred.selPartMove(0,1)">
+							<span class="fa fa-caret-down"></span>
+						</button>
+						<!--<button class="ctrl" type="button" onclick="spred.selLayerUp()">
+							<span class="fa fa-caret-up"></span>
+						</button>
+						<button class="ctrl" type="button" onclick="spred.selLayerDown()">
+							<span class="fa fa-caret-down"></span>
+						</button>-->
+					</div>
+					<h6 class="text-muted" id="SelLayerPos"></h6>
+					<h5>Canvas: </h5>
+					<div>
+						<em class="text-muted">right-click &amp; copy/save</em>
+					</div>
+					<div id="SelLayerCanvas"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

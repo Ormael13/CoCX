@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact name="dist">
+    <output-path>$PROJECT_DIR$/dist/</output-path>
+    <root id="root">
+      <element id="directory" name="img">
+        <element id="dir-copy" path="$PROJECT_DIR$/img" />
+      </element>
+      <element id="file-copy" path="$PROJECT_DIR$/CoC-debug.swf" />
+      <element id="file-copy" path="$PROJECT_DIR$/CoC-release.swf" />
+    </root>
+  </artifact>
+</component>

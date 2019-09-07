@@ -1,0 +1,103 @@
+default namespace = "xxc-story"
+
+start = story | zone
+# core xlogic
+content =
+    text | b | i | font | if | switch | xcc-content
+expression = text
+array-content-expression = text
+if = element if {
+    ifBody
+}
+ifBody =
+    attribute test { expression },
+    (content* | attribute then { text }),
+    (elseif|else|attribute else { text })?
+elseif = element elseif {
+    ifBody
+}
+else = element else {
+    content*
+}
+switch = element switch {
+    attribute value { expression }?,
+    case*,
+    Default?
+}
+case = element case {
+    attribute test { expression }?,
+    attribute value { expression }?,
+    attribute values { array-content-expression }?,
+    attribute lt { expression }?,
+    attribute gt { expression }?,
+    attribute ne { expression }?,
+    attribute lte { expression }?,
+    attribute gte { expression }?,
+    content*
+}
+Default = element default {
+    content*
+}
+# xxc statements
+b = element b { content* }
+i = element i { content* }
+font = element font {
+    attribute color { text }?,
+    content*
+}
+xcc-named-content = Text | String | lib | story | macro | extend-story | zone | extend-zone
+xcc-content = xcc-named-content
+    | display | dynStats | output | Include
+    | set
+namedBlock = attribute name { text }?, content*
+Text = element text { namedBlock }
+String = element string { namedBlock }
+lib = element lib {
+	attribute name { text },
+	xcc-named-content*
+}
+story = element story { namedBlock }
+macro = element macro { namedBlock }
+set = element set {
+    attribute var { text },
+    attribute value { expression }?,
+    attribute op { 'append' | 'set' | 'add' | "+=" | '=' }?,
+    text*
+}
+extend-story = element extend-story { namedBlock }
+zone = element zone {
+    namedBlock,
+    encounter*
+}
+extend-zone = element extend-zone {
+    namedBlock,
+    encounter*
+}
+encounter = element encounter {
+    attribute name { text },
+    attribute chance { expression }?,
+    attribute when { expression }?,
+    content*
+}
+display = element display {
+    attribute ref { text },
+    empty
+}
+dynStats = element dynStats {
+    attribute str { expression }?,
+    attribute tou { expression }?,
+    attribute spe { expression }?,
+    attribute int { expression }?,
+    attribute lib { expression }?,
+    attribute sen { expression }?,
+    attribute lus { expression }?,
+    attribute cor { expression }?,
+    attribute scale { expression }?,
+    empty
+}
+output = element output { expression }
+Include = element include {
+    attribute path { text },
+    attribute required { "true" | "false" }?,
+    empty
+}

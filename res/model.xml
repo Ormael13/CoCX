@@ -1,0 +1,1765 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE model [
+        <!ELEMENT model (palette|colorkeys|spritemap|layers|logic)*>
+        <!ATTLIST model
+                name CDATA #REQUIRED
+                dir CDATA #REQUIRED
+                width CDATA #REQUIRED
+                height CDATA #REQUIRED
+                scale CDATA #REQUIRED
+                originX CDATA #IMPLIED
+                originY CDATA #IMPLIED>
+        <!ELEMENT palette (common|property)*>
+        <!ELEMENT common (color)*>
+        <!ELEMENT color (#PCDATA)>
+        <!ATTLIST color
+                name CDATA #REQUIRED>
+        <!ELEMENT property (color)*>
+        <!ATTLIST property
+                default CDATA #REQUIRED
+                name CDATA #REQUIRED
+                src CDATA #REQUIRED>
+        <!ELEMENT colorkeys (key)*>
+        <!ELEMENT key (#PCDATA)>
+        <!ATTLIST key
+                base CDATA #REQUIRED
+                src CDATA #REQUIRED
+                transform CDATA #IMPLIED>
+        <!ELEMENT spritemap (cell)*>
+        <!ATTLIST spritemap
+                file CDATA #REQUIRED>
+        <!ELEMENT cell (#PCDATA)>
+        <!ATTLIST cell
+                dx CDATA #IMPLIED
+                dy CDATA #IMPLIED
+                name CDATA #REQUIRED
+                rect CDATA #REQUIRED>
+        <!ELEMENT layers (layer)*>
+        <!ELEMENT layer (#PCDATA)>
+        <!ATTLIST layer
+                name CDATA #REQUIRED>
+        <!ELEMENT logic (show|switch|if|hide|set)*>
+        <!ELEMENT switch (case|default)*>
+        <!ATTLIST switch
+                value CDATA #IMPLIED>
+        <!ELEMENT case (show|switch|if|hide|set)*>
+        <!ATTLIST case
+                test CDATA #IMPLIED
+                value CDATA #IMPLIED
+                values CDATA #IMPLIED>
+        <!ELEMENT show (#PCDATA)>
+        <!ATTLIST show
+                part CDATA #REQUIRED>
+        <!ELEMENT default (show|switch|if|hide|set)*>
+        <!ELEMENT if (show|switch|if|hide|set|else)*>
+        <!ATTLIST if
+                test CDATA #REQUIRED>
+        <!ELEMENT else (show|switch|if|hide|set)*>
+        <!ELEMENT hide (#PCDATA)>
+        <!ATTLIST hide
+                part CDATA #REQUIRED>
+        <!ELEMENT set (#PCDATA)>
+        <!ATTLIST set
+                var CDATA #REQUIRED
+                value CDATA #IMPLIED>
+        ]>
+<!--suppress EqualityComparisonWithCoercionJS, CheckTagEmptyBody -->
+<model name="demo" dir="./res/charview/" width="200" height="220" scale="1" originX="15" originY="10">
+    <palette>
+        <!--Colors common for skin/hair/fur/scales/... go here. Can be overriden later-->
+        <common>
+            <color name="albino">#f2f2e8</color>
+            <color name="aqua">#00cccc</color>
+            <color name="ashen">#817d79</color>
+            <color name="ashen2">#9f948e</color>
+            <color name="auburn">#732d26</color>
+            <color name="black">#333333</color>
+            <color name="blond">#e0c685</color>
+            <color name="blonde">#f2e4bf</color>
+            <color name="blue">#405fce</color>
+            <color name="bronzed">#a89148</color>
+            <color name="brown">#664400</color>
+            <color name="caramel">#c39350</color>
+            <color name="caramel2">#c38c50</color>
+            <color name="cerulean">#59cfde</color>
+            <color name="cerulean2">#377bc3</color>
+            <color name="chocolate">#4a3b2b</color>
+            <color name="crimson">#dc143c</color>
+            <color name="crystal">#bc81ca</color>
+            <color name="dark">#694e44</color>
+            <color name="dark2">#352722</color>
+            <color name="dusky">#f000f0</color>
+            <color name="ebony">#3d3529</color>
+            <color name="emerald">#4cc875</color>
+            <color name="fair">#edccbf</color>
+            <color name="golden">#ffdd00</color>
+            <color name="gray">#808080</color>
+            <color name="green">#08a108</color>
+            <color name="indigo">#4d0080</color>
+            <color name="light">#feebd7</color>
+            <color name="mahogany">#81473b</color>
+            <color name="mahogany2">#672828</color>
+            <color name="metallic">#9c9c9c</color>
+            <color name="midnight">#30354a</color>
+            <color name="olive">#90974e</color>
+            <color name="orange">#ffa600</color>
+            <color name="peach">#f4c0a4</color>
+            <color name="pink">#ffb3b3</color>
+            <color name="purple">#7a007a</color>
+            <color name="red">#f02c0a</color>
+            <color name="red2">#ff0000</color>
+            <color name="russet">#aa6546</color>
+            <color name="russet2">#793939</color>
+            <color name="sable">#d6caa9</color>
+            <color name="sanguine">#c03030</color>
+            <color name="silky">#ffd6ff</color>
+            <color name="silver">#d8e0e9</color>
+            <color name="tan">#af8750</color>
+            <color name="tan2">#cfaa30</color>
+            <color name="tawny">#b97f27</color>
+            <color name="turquoise">#1ed9dc</color>
+            <color name="white">#e6e6eb</color>
+            <color name="yellow">#edef6b</color>
+            <color name="aphotic blue-black">#08155e</color>
+            <color name="ashen grayish-blue">#93b6c8</color>
+            <color name="creamy-white">#f2ebde</color>
+            <color name="crimson platinum">#d56c6c</color>
+            <color name="dark blue">#3d529e</color>
+            <color name="dark gray">#534f59</color>
+            <color name="dark green">#36582d</color>
+            <color name="deep blue">#1e3667</color>
+            <color name="deep red">#742525</color>
+            <color name="ghostly pale">#e3deed</color>
+            <color name="glacial white">#dee5f2</color>
+            <color name="golden blonde">#f5d88a</color>
+            <color name="grayish-blue">#b0c9e3</color>
+            <color name="iridescent gray">#999999</color>
+            <color name="leaf green">#5eba5e</color>
+            <color name="light blonde">#ffe78f</color>
+            <color name="light blue">#b1c8ec</color>
+            <color name="light gray">#dddadd</color>
+            <color name="light green">#94f390</color>
+            <color name="light grey">#c4d1d9</color>
+            <color name="light purple">#e4cdf3</color>
+            <color name="lime green">#73df72</color>
+            <color name="mediterranean-toned">#ac7339</color>
+            <color name="metallic golden">#ddc469</color>
+            <color name="metallic silver">#cfedfc</color>
+            <color name="midnight black">#171622</color>
+            <color name="milky white">#f4dfdc</color>
+            <color name="pale white">#ffeac7</color>
+            <color name="pale yellow">#eeecaa</color>
+            <color name="platinum blonde">#f7f3e8</color>
+            <color name="platinum crimson">#ff745c</color>
+            <color name="platinum-blonde">#ffe5c7</color>
+            <color name="purplish-black">#794474</color>
+            <color name="quartz white">#ffffff</color>
+            <color name="reddish-orange">#df8453</color>
+            <color name="rough gray">#525252</color>
+            <color name="sandy blonde">#ebd69e</color>
+            <color name="sandy brown">#a28d57</color>
+            <color name="sandy-blonde">#e0cd9f</color>
+            <color name="shiny black">#1c262c</color>
+            <color name="silver blonde">#fcfaf8</color>
+            <color name="silver-white">#eff3f6</color>
+            <color name="snow white">#f9f9fa</color>
+            <color name="yellowish-green">#e1eca7</color>
+            <color name="black and yellow">#000000</color>
+            <color name="white and black">#eff3f6</color>
+        </common>
+        <property name="hair" src="hairColor" default="#ffffff">
+            <color name="red">#d85741</color>
+            <color name="flaxen">#e1ba94</color>
+            <color name="brown">#674f42</color>
+            <color name="black">#334252</color>
+            <color name="gray">#647a7d</color>
+            <color name="white">#aeaba3</color>
+            <color name="raven">#101728</color>
+            <color name="snowy">#dddfe4</color>
+        </property>
+        <property name="hair2" src="hairColor" default="#ffffff"></property>
+        <property name="fur" src="skin.coat.color" default="#ffffff"></property>
+        <property name="fur2" src="skin.coat.color2" default="#ffffff"></property>
+        <property name="scales" src="skin.coat.color" default="#ffffff"></property>
+        <property name="scales2" src="skin.coat.color2" default="#ffffff"></property>
+        <property name="chitin" src="skin.coat.color" default="#ffffff"></property>
+        <property name="chitin2" src="skin.coat.color2" default="#ffffff"></property>
+        <property name="skin" src="skinTone" default="#ffffff">
+            <color name="pale">#f2e8e3</color>
+        </property>
+        <property name="skin2" src="skin.base.color2" default="#ffffff">
+            <color name="pale">#f2e8e3</color>
+        </property>
+        <property name="iris" src="eyes.colour" default="#0000ff">
+        </property>
+    </palette>
+    <colorkeys>
+        <key src="#FF88FF" base="hair" transform="lighten(25)"/>
+        <key src="#CC00CC" base="hair"/>
+        <key src="#880088" base="hair" transform="darken(25)"/>
+        <key src="#440044" base="hair" transform="darken(50)"/>
+        <key src="#FFFF88" base="hair2" transform="lighten(25)"/>
+        <key src="#CCCC00" base="hair2"/>
+        <key src="#999900" base="hair2" transform="darken(25)"/>
+        <key src="#333300" base="hair2" transform="darken(50)"/>
+        <key src="#88FF88" base="fur" transform="lighten(25)"/>
+        <key src="#00CC00" base="fur"/>
+        <key src="#009900" base="fur" transform="darken(25)"/>
+        <key src="#003300" base="fur" transform="darken(50)"/>
+        <key src="#AA88FF" base="fur2" transform="lighten(25)"/>
+        <key src="#6633CC" base="fur2"/>
+        <key src="#442288" base="fur2" transform="darken(25)"/>
+        <key src="#220044" base="fur2" transform="darken(50)"/>
+        <key src="#8888FF" base="scales" transform="lighten(25)"/>
+        <key src="#4444FF" base="scales"/>
+        <key src="#0000CC" base="scales" transform="darken(25)"/>
+        <key src="#000033" base="scales" transform="darken(50)"/>
+        <key src="#AAFFAA" base="scales2" transform="lighten(25)"/>
+        <key src="#66CC66" base="scales2"/>
+        <key src="#448844" base="scales2" transform="darken(25)"/>
+        <key src="#223322" base="scales2" transform="darken(50)"/>
+        <key src="#88FFFF" base="chitin" transform="lighten(25)"/>
+        <key src="#44CCFF" base="chitin"/>
+        <key src="#0099CC" base="chitin" transform="darken(25)"/>
+        <key src="#006666" base="chitin" transform="darken(50)"/>
+        <key src="#AACCDD" base="chitin2" transform="lighten(25)"/>
+        <key src="#77AACC" base="chitin2"/>
+        <key src="#4477AA" base="chitin2" transform="darken(25)"/>
+        <key src="#114477" base="chitin2" transform="darken(50)"/>
+        <key src="#FFE9CC" base="skin" transform="lighten(25)"/>
+        <key src="#FACE8D" base="skin"/>
+        <key src="#BC9B6D" base="skin" transform="darken(25)"/>
+        <key src="#7C6647" base="skin" transform="darken(50)"/>
+        <key src="#1C0F0F" base="skin" transform="darken(75)"/>
+        <key src="#FFCCCC" base="skin2" transform="lighten(25)"/>
+        <key src="#FF9999" base="skin2"/>
+        <key src="#BB7777" base="skin2" transform="darken(25)"/>
+        <key src="#884444" base="skin2" transform="darken(50)"/>
+        <key src="#221111" base="skin2" transform="darken(75)"/>
+		<key src="#FF0000" base="iris"/>
+		<key src="#AA0000" base="iris" transform="darken(25)"/>
+        <!--<key src="#F9A98E" base="nipples"/>-->
+        <!--<key src="#FFFFFF" base="sclera"/>-->
+        <!--<key src="#0026FF" base="iris"/>-->
+    </colorkeys>
+    <!--<spritesheet file="char1.png" cellwidth="192" cellheight="192">
+        <row>name1,name2,,,,,,,,,,,,,</row>
+        <row>,,,,,,,,,,,,,,</row>
+        <row>,,breasts/Dfur,,,,,,,,,,,,</row>
+        <row>,,,,,,,,,,,,,,</row>
+        <row>,,,,,,,,,,,,,,</row>
+        <row>,,,,,,,,,,,,,,</row>
+        <row>,,,,,,,,,,,,,,</row>
+        <row>,,,,,,,,,,,,,,</row>
+        <row>,,,,,,,,,,,,,,</row>
+        <row>,,,,,,,,,,,,,,</row>
+    </spritesheet>-->
+
+
+	<!-- LOCATION IN SCREEN AREA -->
+    <spritemap file="body.png">
+        <cell rect="1,90,49,59" name="torso/human" dx="69" dy="64"/>
+        <cell rect="51,90,49,59" name="torso/fur" dx="69" dy="64"/>
+        <cell rect="101,90,49,59" name="torso/chitin" dx="69" dy="64"/>
+        <cell rect="151,90,49,59" name="torso/bee" dx="69" dy="64"/>
+        <cell rect="201,90,49,59" name="torso/orca" dx="69" dy="64"/>
+        <cell rect="251,90,49,59" name="torso/pscales" dx="69" dy="64"/>
+        <cell rect="301,90,49,59" name="torso/scales" dx="69" dy="64"/>
+        <cell rect="351,90,49,59" name="torso/goo" dx="69" dy="64"/>
+        <cell rect="401,90,49,59" name="torso/kraken" dx="69" dy="64"/>
+        <cell rect="451,90,49,59" name="torso_pattern/Bstripe" dx="69" dy="64"/>
+        <cell rect="501,90,49,59" name="torso_pattern/Blightning" dx="69" dy="64"/>
+        <cell rect="551,90,49,59" name="torso_pattern/Btatoo" dx="69" dy="64"/>
+        <cell rect="1,150,49,59" name="arms_bg/human" dx="46" dy="64"/>
+        <cell rect="51,150,49,59" name="arms_bg/fur" dx="46" dy="64"/>
+        <cell rect="552,150,49,59" name="arms_bg/furracoon" dx="46" dy="64"/>
+        <cell rect="101,150,49,59" name="arms_bg/chitin" dx="46" dy="64"/>
+        <cell rect="151,150,49,59" name="arms_bg/bee" dx="46" dy="64"/>
+        <cell rect="201,150,49,59" name="arms_bg/chitin2" dx="46" dy="64"/>
+        <cell rect="251,150,49,59" name="arms_bg/orca" dx="46" dy="64"/>
+        <cell rect="301,150,49,59" name="arms_bg/pscales" dx="46" dy="64"/>
+        <cell rect="351,150,49,59" name="arms_bg/scales" dx="46" dy="64"/>
+        <cell rect="401,150,49,59" name="arms_bg/goo" dx="46" dy="64"/>
+        <cell rect="451,150,49,59" name="arms_bg_pattern/Bstripe" dx="46" dy="64"/>
+        <cell rect="501,150,49,59" name="arms_bg_pattern/Blightning" dx="46" dy="64"/>
+        <cell rect="601,150,49,59" name="arms_bg_pattern/Btatoo" dx="46" dy="64"/>
+        <cell rect="1,210,49,59" name="arms/human" dx="94" dy="64"/>
+        <cell rect="51,210,49,59" name="arms/fur" dx="94" dy="64"/>
+        <cell rect="551,210,49,59" name="arms/furracoon" dx="94" dy="64"/>
+        <cell rect="101,210,49,59" name="arms/chitin" dx="94" dy="64"/>
+        <cell rect="151,210,49,59" name="arms/bee" dx="94" dy="64"/>
+        <cell rect="201,210,49,59" name="arms/chitin2" dx="94" dy="64"/>
+        <cell rect="251,210,49,59" name="arms/orca" dx="94" dy="64"/>
+        <cell rect="301,210,49,59" name="arms/pscales" dx="94" dy="64"/>
+        <cell rect="351,210,49,59" name="arms/scales" dx="94" dy="64"/>
+        <cell rect="401,210,49,59" name="arms/goo" dx="94" dy="64"/>
+        <cell rect="1,702,90,90" name="arms/manticore_sit" dx="50" dy="61"/>
+        <cell rect="92,702,90,90" name="arms/manticore_sit_fur" dx="50" dy="61"/>
+        <cell rect="183,702,90,90" name="arms/manticore_sit_scales" dx="50" dy="61"/>
+        <cell rect="274,702,90,90" name="arms/manticore_sit_pscales" dx="50" dy="61"/>
+        <cell rect="365,702,90,90" name="arms/manticore_sit_chitin" dx="50" dy="61"/>
+        <cell rect="451,210,49,59" name="arms_pattern/Bstripe" dx="94" dy="64"/>
+        <cell rect="501,210,49,59" name="arms_pattern/Blightning" dx="94" dy="64"/>
+        <cell rect="651,210,49,59" name="arms_pattern/Btatoo" dx="94" dy="64"/>
+        <cell rect="1,270,49,59" name="hands_bg/fur" dx="46" dy="64"/>
+        <cell rect="601,270,49,59" name="hands_bg/furracoon" dx="46" dy="64"/>
+        <cell rect="51,270,49,59" name="hands_bg/devil" dx="46" dy="64"/>
+        <cell rect="101,270,49,59" name="hands_bg/harpy" dx="46" dy="64"/>
+        <cell rect="151,270,49,59" name="hands_bg/kraken" dx="46" dy="64"/>
+        <cell rect="201,270,49,59" name="hands_bg/alraune" dx="46" dy="64"/>
+        <cell rect="251,270,49,59" name="hands_bg/chitin" dx="46" dy="64"/>
+        <cell rect="301,270,49,59" name="hands_bg/chitin2" dx="46" dy="64"/>
+        <cell rect="351,270,49,59" name="hands_bg/fire" dx="46" dy="64"/>
+        <cell rect="401,270,49,59" name="hands_bg/scales" dx="46" dy="64"/>
+        <cell rect="451,270,49,59" name="hands_bg/human" dx="46" dy="64"/>
+        <cell rect="501,270,49,59" name="hands_bg/fins-orca" dx="46" dy="64"/>
+        <cell rect="551,270,49,59" name="hands_bg/goo" dx="46" dy="64"/>
+        <cell rect="351,270,49,59" name="overhands_bg/fire" dx="46" dy="64"/>
+        <cell rect="1,330,49,59" name="hands/fur" dx="94" dy="64"/>
+        <cell rect="601,330,49,59" name="hands/furracoon" dx="94" dy="64"/>
+        <cell rect="51,330,49,59" name="hands/devil" dx="94" dy="64"/>
+        <cell rect="101,330,49,59" name="hands/harpy" dx="94" dy="64"/>
+        <cell rect="151,330,49,59" name="hands/kraken" dx="94" dy="64"/>
+        <cell rect="201,330,49,59" name="hands/alraune" dx="94" dy="64"/>
+        <cell rect="251,330,49,59" name="hands/chitin" dx="94" dy="64"/>
+        <cell rect="301,330,49,59" name="hands/chitin2" dx="94" dy="64"/>
+        <cell rect="401,330,49,59" name="hands/scales" dx="94" dy="64"/>
+        <cell rect="451,330,49,59" name="hands/human" dx="94" dy="64"/>
+        <cell rect="501,330,49,59" name="hands/fins-orca" dx="94" dy="64"/>
+        <cell rect="551,330,49,59" name="hands/goo" dx="94" dy="64"/>
+        <cell rect="351,330,49,59" name="overhands/fire" dx="94" dy="64"/>
+        <cell rect="1,390,49,59" name="legs/human" dx="69" dy="115"/>
+        <cell rect="51,390,49,59" name="legs/fur" dx="69" dy="115"/>
+        <cell rect="101,390,49,59" name="legs/chitin" dx="69" dy="115"/>
+        <cell rect="151,390,49,59" name="legs/chitin2" dx="69" dy="115"/>
+        <cell rect="201,390,49,59" name="legs/orca" dx="69" dy="115"/>
+        <cell rect="251,390,49,59" name="legs/pscales" dx="69" dy="115"/>
+        <cell rect="301,390,49,59" name="legs/scales" dx="69" dy="115"/>
+        <cell rect="351,390,49,59" name="legs/devil" dx="69" dy="115"/>
+        <cell rect="401,390,49,59" name="legs/goo" dx="69" dy="115"/>
+        <cell rect="551,390,49,59" name="legs/furracoon" dx="69" dy="115"/>
+        <cell rect="1,520,90,90" name="legs/harpy_human" dx="50" dy="99"/>
+        <cell rect="92,520,90,90" name="legs/harpy_fur" dx="50" dy="99"/>
+        <cell rect="183,520,90,90" name="legs/harpy_scales" dx="50" dy="99"/>
+        <cell rect="274,520,90,90" name="legs/harpy_pscales" dx="50" dy="99"/>
+        <cell rect="365,520,90,90" name="legs/harpy_chitin" dx="50" dy="99"/>
+        <cell rect="1,611,90,90" name="legs/manticore_sit" dx="50" dy="61"/>
+        <cell rect="92,611,90,90" name="legs/manticore_sit_fur" dx="50" dy="61"/>
+        <cell rect="183,611,90,90" name="legs/manticore_sit_scales" dx="50" dy="61"/>
+        <cell rect="274,611,90,90" name="legs/manticore_sit_pscales" dx="50" dy="61"/>
+        <cell rect="365,611,90,90" name="legs/manticore_sit_chitin" dx="50" dy="61"/>
+        <cell rect="451,390,49,59" name="legs_pattern/Bstripe" dx="69" dy="115"/>
+        <cell rect="501,390,49,59" name="legs_pattern/Blightning" dx="69" dy="115"/>
+        <cell rect="601,390,49,59" name="legs_pattern/Btatoo" dx="69" dy="115"/>
+        <cell rect="51,450,49,59" name="feet/fur" dx="68" dy="115"/>
+        <cell rect="101,450,49,59" name="feet/scales" dx="69" dy="115"/>
+        <cell rect="551,450,49,59" name="feet/furracoon" dx="69" dy="115"/>
+        <cell rect="151,450,49,59" name="overfeet/fire" dx="69" dy="115"/>
+    </spritemap>
+    <spritemap file="extra.png">
+        <cell rect="2,55,147,128" name="legs_fg/alraune" dx="24" dy="82"/>
+        <cell rect="1,188,173,156" name="legs_fg/liliraune" dx="-3" dy="58"/>
+        <cell rect="9,351,175,119" name="legs_fg/drider" dx="21" dy="64"/>
+        <cell rect="463,101,143,107" name="legs_fg/centaur" dx="47" dy="93"/>
+        <cell rect="255,230,125,88" name="legs_fg/cattaur" dx="71" dy="103"/>
+        <cell rect="382,230,125,88" name="legs_fg/reptaur" dx="72" dy="103"/>
+        <cell rect="371,325,175,119" name="legs_fg/crabtaur" dx="22" dy="65"/>
+        <cell rect="547,325,175,119" name="legs_fg/bugtaur" dx="22" dy="64"/>
+        <cell rect="607,101,143,107" name="legs/centaur" dx="47" dy="93"/>
+        <cell rect="507,230,125,88" name="legs/cattaur" dx="71" dy="103"/>
+        <cell rect="633,230,125,88" name="legs/reptaur" dx="72" dy="103"/>
+        <cell rect="131,491,117,117" name="legs/kraken" dx="35" dy="94"/>
+        <cell rect="251,450,118,158" name="legs/scylla" dx="34" dy="54"/>
+        <cell rect="201,101,130,108" name="legs/naga" dx="32" dy="97"/>
+        <cell rect="333,101,130,108" name="legs/melkie" dx="32" dy="96"/>
+        <cell rect="132,611,125,69" name="legs/gooblob" dx="31" dy="102"/>
+        <cell rect="260,620,21,28" name="neck/goocore" dx="85" dy="67"/>
+        <cell rect="162,59,54,31" name="neck/manticore" dx="67" dy="47"/>
+        <cell rect="217,59,54,31" name="neck/weasel" dx="67" dy="50"/>
+    </spritemap>
+    <spritemap file="hair.png">
+        <cell rect="1,70,59,65" name="hair/0" dx="65" dy="21"/>
+        <cell rect="1,136,59,65" name="hair_bg/0" dx="65" dy="21"/>
+        <cell rect="361,350,89,98" name="hair_bg/02" dx="50" dy="4"/>
+        <cell rect="61,70,59,65" name="hair/feather" dx="65" dy="21"/>
+        <cell rect="61,136,59,65" name="hair_bg/feather" dx="65" dy="21"/>
+        <cell rect="121,70,59,65" name="hair/gorgon" dx="65" dy="21"/>
+        <cell rect="121,136,59,65" name="hair_bg/gorgon" dx="65" dy="21"/>
+        <cell rect="1,251,89,98" name="hair/slime" dx="50" dy="4"/>
+        <cell rect="91,251,89,98" name="hair_bg/slime2" dx="50" dy="4"/>
+        <cell rect="1,350,89,98" name="hair/raiju" dx="50" dy="4"/>
+        <cell rect="91,350,89,164" name="hair_bg/raiju3" dx="50" dy="4"/>
+        <cell rect="181,350,89,98" name="hair/hellcat" dx="50" dy="4"/>
+        <cell rect="271,350,89,164" name="hair_bg/hellcat" dx="50" dy="4"/>
+    </spritemap>
+    <spritemap file="head.png">
+        <cell rect="1,70,29,32" name="head/human" dx="80" dy="37"/>
+        <cell rect="31,70,29,32" name="head/fur" dx="80" dy="37"/>
+        <cell rect="61,70,29,32" name="head/pscales" dx="80" dy="37"/>
+        <cell rect="91,70,29,32" name="head/scales" dx="80" dy="37"/>
+        <cell rect="121,70,29,32" name="head/chitin" dx="80" dy="37"/>
+        <cell rect="151,70,29,32" name="head/bee" dx="80" dy="37"/>
+        <cell rect="181,70,29,32" name="head/orca" dx="80" dy="37"/>
+        <cell rect="211,70,29,32" name="head/goo" dx="80" dy="37"/>
+        <cell rect="1,110,29,32" name="face/human" dx="80" dy="37"/>
+        <cell rect="31,110,29,32" name="face/human_fang" dx="80" dy="37"/>
+        <cell rect="61,110,29,32" name="face/fur" dx="80" dy="37"/>
+        <cell rect="91,110,29,32" name="face/spider" dx="80" dy="37"/>
+        <cell rect="121,110,29,32" name="face/insect" dx="80" dy="37"/>
+        <cell rect="151,110,29,32" name="face/mouse" dx="80" dy="37"/>
+        <cell rect="181,110,29,32" name="face/orca" dx="80" dy="37"/>
+        <cell rect="211,110,29,32" name="face/shark" dx="80" dy="37"/>
+        <cell rect="241,110,29,32" name="face/reptile" dx="80" dy="37"/>
+        <cell rect="271,110,29,32" name="face/fur2" dx="80" dy="37"/>
+        <cell rect="301,110,29,32" name="face/racoon" dx="80" dy="37"/>
+        <cell rect="331,110,29,32" name="face/racoon_mask" dx="80" dy="37"/>
+        <cell rect="361,110,29,32" name="face/goo" dx="80" dy="37"/>
+        <cell rect="391,110,29,32" name="face/bunny" dx="80" dy="37"/>
+        <cell rect="421,110,29,32" name="face/cheshire" dx="80" dy="37"/>
+        <cell rect="1,150,29,32" name="eyes/human" dx="80" dy="37"/>
+        <cell rect="31,150,29,32" name="eyes/devil" dx="80" dy="37"/>
+        <cell rect="61,150,29,32" name="eyes/cat" dx="80" dy="37"/>
+        <cell rect="91,150,29,32" name="eyes/spider" dx="80" dy="37"/>
+        <cell rect="121,150,29,32" name="eyes/sandtrap" dx="80" dy="37"/>
+        <cell rect="151,150,29,32" name="eyes/manticore" dx="80" dy="37"/>
+        <cell rect="181,150,29,32" name="eyes/orca" dx="80" dy="37"/>
+        <cell rect="211,150,29,32" name="eyes/raiju" dx="80" dy="37"/>
+        <cell rect="241,150,29,32" name="eyes/infernal" dx="80" dy="37"/>
+        <cell rect="1,190,29,32" name="ears_bg/human" dx="80" dy="37"/>
+        <cell rect="31,190,29,32" name="ears/fur" dx="80" dy="37"/>
+        <cell rect="61,190,59,32" name="ears_bg/elfin" dx="65" dy="37"/>
+        <cell rect="61,223,59,32" name="ears/elfin" dx="65" dy="37"/>
+        <cell rect="31,223,29,32" name="ears_bg/horse" dx="81" dy="24"/>
+        <cell rect="121,190,59,32" name="ears_bg/goat" dx="65" dy="37"/>
+        <cell rect="121,223,59,32" name="ears/goat" dx="65" dy="37"/>
+        <cell rect="121,256,59,32" name="ears_bg/dragon" dx="65" dy="37"/>
+        <cell rect="121,289,59,32" name="ears/dragon" dx="65" dy="37"/>
+        <cell rect="181,190,29,65" name="ears_bg/fox" dx="80" dy="4"/>
+        <cell rect="181,256,29,65" name="ears/fox" dx="80" dy="4"/>
+        <cell rect="211,190,29,65" name="ears_bg/wolf" dx="80" dy="4"/>
+        <cell rect="211,256,29,65" name="ears/wolf" dx="80" dy="4"/>
+        <cell rect="241,190,29,65" name="ears_bg/cat" dx="80" dy="4"/>
+        <cell rect="241,256,29,65" name="ears/cat" dx="80" dy="4"/>
+        <cell rect="271,190,29,65" name="ears_bg/mouse" dx="80" dy="4"/>
+        <cell rect="271,256,29,65" name="ears/mouse" dx="80" dy="4"/>
+        <cell rect="301,190,89,65" name="ears_bg/orca" dx="50" dy="37"/>
+        <cell rect="301,256,89,65" name="ears/orca" dx="50" dy="37"/>
+        <cell rect="391,190,59,32" name="ears_bg/naga" dx="65" dy="37"/>
+        <cell rect="391,223,59,32" name="ears/naga" dx="65" dy="37"/>
+        <cell rect="451,190,59,65" name="ears_bg/bunny" dx="65" dy="4"/>
+        <cell rect="451,256,59,65" name="ears/bunny" dx="65" dy="4"/>
+        <cell rect="511,190,89,65" name="ears_bg/weasel" dx="50" dy="4"/>
+        <cell rect="511,256,89,65" name="ears/weasel" dx="50" dy="4"/>
+        <cell rect="1,330,59,65" name="horns_bg/orchid" dx="65" dy="4"/>
+        <cell rect="1,396,59,65" name="horns/orchid" dx="65" dy="4"/>
+        <cell rect="61,330,59,65" name="horns_bg/devil" dx="62" dy="4"/>
+        <cell rect="61,396,59,65" name="horns/devil" dx="62" dy="4"/>
+        <cell rect="121,330,59,65" name="horns_bg/cow" dx="65" dy="4"/>
+        <cell rect="121,396,59,65" name="horns/cow" dx="65" dy="4"/>
+        <cell rect="181,330,29,65" name="horns/2small" dx="80" dy="4"/>
+        <cell rect="211,330,29,65" name="horns/2large" dx="80" dy="4"/>
+        <cell rect="241,330,59,65" name="horns_bg/kraken" dx="65" dy="4"/>
+        <cell rect="301,330,59,65" name="horns_bg/demon" dx="65" dy="4"/>
+        <cell rect="361,330,59,65" name="horns_bg/dragon" dx="65" dy="4"/>
+        <cell rect="361,396,59,65" name="horns/dragon" dx="65" dy="4"/>
+        <cell rect="421,330,29,32" name="horns/unicorn" dx="76" dy="24"/>
+        <cell rect="421,363,29,32" name="horns/bicorn" dx="73" dy="23"/>
+        <cell rect="451,363,29,32" name="horns/2oni" dx="79" dy="40"/>
+        <cell rect="1,470,59,65" name="antennae/bee" dx="65" dy="4"/>
+    </spritemap>
+    <spritemap file="lewd.png">
+        <cell rect="11,80,49,29" name="breasts/0" dx="69" dy="68"/>
+        <cell rect="11,110,49,29" name="breasts/Bhuman" dx="69" dy="68"/>
+        <cell rect="61,110,49,29" name="breasts/Bfur" dx="69" dy="68"/>
+        <cell rect="111,110,49,29" name="breasts/Bchitin" dx="69" dy="68"/>
+        <cell rect="161,110,49,29" name="breasts/Bbee" dx="69" dy="68"/>
+        <cell rect="211,110,49,29" name="breasts/Bpscales" dx="69" dy="68"/>
+        <cell rect="261,110,49,29" name="breasts/Bscales" dx="69" dy="68"/>
+        <cell rect="311,110,49,29" name="breasts/Borca" dx="69" dy="68"/>
+        <cell rect="361,110,49,29" name="breasts/Bgoo" dx="69" dy="68"/>
+        <cell rect="11,140,49,29" name="breasts/Dhuman" dx="69" dy="68"/>
+        <cell rect="61,140,49,29" name="breasts/Dfur" dx="69" dy="68"/>
+        <cell rect="111,140,49,29" name="breasts/Dchitin" dx="69" dy="68"/>
+        <cell rect="161,140,49,29" name="breasts/Dbee" dx="69" dy="68"/>
+        <cell rect="211,140,49,29" name="breasts/Dpscales" dx="69" dy="68"/>
+        <cell rect="261,140,49,29" name="breasts/Dscales" dx="69" dy="68"/>
+        <cell rect="311,140,49,29" name="breasts/Dorca" dx="69" dy="68"/>
+        <cell rect="361,140,49,29" name="breasts/Dgoo" dx="69" dy="68"/>
+        <cell rect="411,110,49,29" name="breasts_pattern/Bpstripe" dx="69" dy="68"/>
+        <cell rect="411,140,49,29" name="breasts_pattern/Bstripe" dx="69" dy="68"/>
+        <cell rect="461,110,49,29" name="breasts_pattern/Bplightning" dx="69" dy="68"/>
+        <cell rect="461,140,49,29" name="breasts_pattern/Blightning" dx="69" dy="68"/>
+        <cell rect="511,110,49,29" name="breasts_pattern/Bptatoo" dx="69" dy="68"/>
+        <cell rect="511,140,49,29" name="breasts_pattern/Btatoo" dx="69" dy="68"/>
+        <cell rect="11,230,49,29" name="penis/human" dx="68" dy="106"/>
+        <cell rect="11,260,49,29" name="penis/cat" dx="68" dy="106"/>
+        <cell rect="61,230,49,29" name="penis/canine" dx="69" dy="106"/>
+        <cell rect="61,260,49,29" name="penis/reptile" dx="67" dy="108"/>
+        <cell rect="111,230,49,58" name="penis/horse" dx="67" dy="103"/>
+        <cell rect="161,230,49,58" name="penis/humanbig" dx="67" dy="104"/>
+        <cell rect="211,230,49,58" name="penis/caninebig" dx="67" dy="103"/>
+        <cell rect="261,230,49,29" name="penis/human2" dx="68" dy="106"/>
+        <cell rect="311,230,49,58" name="penis/human2big" dx="68" dy="106"/>
+        <cell rect="261,260,49,29" name="penis/chitin" dx="68" dy="106"/>
+        <cell rect="361,230,49,58" name="penis/chitinbig" dx="68" dy="106"/>
+        <cell rect="11,290,49,29" name="balls/Bhumansmall" dx="69" dy="103"/>
+        <cell rect="11,320,49,29" name="balls/Bhumanlarge" dx="69" dy="104"/>
+        <cell rect="11,350,49,29" name="balls/Bhumanhuge" dx="69" dy="104"/>
+        <cell rect="11,380,49,29" name="balls/Bhumansillyhuge" dx="69" dy="104"/>
+        <cell rect="11,290,49,29" name="balls/Bpscalessmall" dx="69" dy="103"/>
+        <cell rect="11,320,49,29" name="balls/Bpscaleslarge" dx="69" dy="104"/>
+        <cell rect="11,350,49,29" name="balls/Bpscaleshuge" dx="69" dy="104"/>
+        <cell rect="11,380,49,29" name="balls/Bpscalessillyhuge" dx="69" dy="104"/>
+        <cell rect="61,290,49,29" name="balls/Bfursmall" dx="69" dy="103"/>
+        <cell rect="61,320,49,29" name="balls/Bfurlarge" dx="69" dy="104"/>
+        <cell rect="61,350,49,29" name="balls/Bfurhuge" dx="69" dy="104"/>
+        <cell rect="61,380,49,29" name="balls/Bfursillyhuge" dx="69" dy="104"/>
+        <cell rect="111,290,49,29" name="balls/Bchitinsmall" dx="69" dy="103"/>
+        <cell rect="111,320,49,29" name="balls/Bchitinlarge" dx="69" dy="104"/>
+        <cell rect="111,350,49,29" name="balls/Bchitinhuge" dx="69" dy="103"/>
+        <cell rect="111,380,49,29" name="balls/Bchitinsillyhuge" dx="69" dy="103"/>
+        <cell rect="161,290,49,29" name="balls/Bscalesmall" dx="69" dy="103"/>
+        <cell rect="161,320,49,29" name="balls/Bscaleslarge" dx="69" dy="103"/>
+        <cell rect="161,350,49,29" name="balls/Bscaleshuge" dx="69" dy="103"/>
+        <cell rect="161,380,49,29" name="balls/Bscalessillyhuge" dx="69" dy="103"/>
+        <cell rect="211,290,49,29" name="balls/Borcasmall" dx="69" dy="103"/>
+        <cell rect="211,320,49,29" name="balls/Borcalarge" dx="69" dy="103"/>
+        <cell rect="211,350,49,29" name="balls/Borcahuge" dx="69" dy="103"/>
+        <cell rect="211,380,49,29" name="balls/Borcasillhugehuge" dx="69" dy="103"/>
+        <cell rect="211,290,49,29" name="balls/Bbeesmall" dx="69" dy="103"/>
+        <cell rect="211,320,49,29" name="balls/Bbeelarge" dx="69" dy="103"/>
+        <cell rect="211,350,49,29" name="balls/Bbeehuge" dx="69" dy="103"/>
+        <cell rect="211,380,49,29" name="balls/Bbeesillyhuge" dx="69" dy="103"/>
+        <cell rect="11,230,49,29" name="penis/human_taur" dx="109" dy="135"/>
+        <cell rect="11,260,49,29" name="penis/cat_taur" dx="109" dy="135"/>
+        <cell rect="61,230,49,29" name="penis/canine_taur" dx="109" dy="135"/>
+        <cell rect="61,260,49,29" name="penis/reptile_taur" dx="109" dy="135"/>
+        <cell rect="111,230,49,58" name="penis/horse_taur" dx="107" dy="134"/>
+        <cell rect="161,230,49,58" name="penis/humanbig_taur" dx="108" dy="134"/>
+        <cell rect="211,230,49,58" name="penis/caninebig_taur" dx="106" dy="134"/>
+        <cell rect="261,230,49,29" name="penis/human2_taur" dx="109" dy="135"/>
+        <cell rect="311,230,49,58" name="penis/human2big_taur" dx="108" dy="134"/>
+        <cell rect="261,260,49,29" name="penis/chitin_taur" dx="109" dy="135"/>
+        <cell rect="361,230,49,58" name="penis/chitinbig_taur" dx="108" dy="134"/>
+        <cell rect="11,290,49,29" name="balls/Bhumansmall_taur" dx="111" dy="128"/>
+        <cell rect="11,320,49,29" name="balls/Bhumanlarge_taur" dx="111" dy="128"/>
+        <cell rect="11,350,49,29" name="balls/Bhumanhuge_taur" dx="111" dy="128"/>
+        <cell rect="11,380,49,29" name="balls/Bhumansillyhuge_taur" dx="111" dy="128"/>
+        <cell rect="11,290,49,29" name="balls/Bpscalessmall_taur" dx="111" dy="128"/>
+        <cell rect="11,320,49,29" name="balls/Bpscaleslarge_taur" dx="111" dy="128"/>
+        <cell rect="11,350,49,29" name="balls/Bpscaleshuge_taur" dx="111" dy="128"/>
+        <cell rect="11,380,49,29" name="balls/Bpscalessillyhuge_taur" dx="111" dy="128"/>
+        <cell rect="61,290,49,29" name="balls/Bfursmall_taur" dx="111" dy="128"/>
+        <cell rect="61,320,49,29" name="balls/Bfurlarge_taur" dx="111" dy="128"/>
+        <cell rect="61,350,49,29" name="balls/Bfurhuge_taur" dx="111" dy="128"/>
+        <cell rect="61,380,49,29" name="balls/Bfursillyhuge_taur" dx="111" dy="128"/>
+        <cell rect="111,290,49,29" name="balls/Bchitinsmall_taur" dx="111" dy="128"/>
+        <cell rect="111,320,49,29" name="balls/Bchitinlarge_taur" dx="111" dy="128"/>
+        <cell rect="111,350,49,29" name="balls/Bchitinhuge_taur" dx="111" dy="128"/>
+        <cell rect="111,380,49,29" name="balls/Bchitinsillyhuge_taur" dx="111" dy="128"/>
+        <cell rect="161,290,49,29" name="balls/Bscalesmall_taur" dx="111" dy="128"/>
+        <cell rect="161,320,49,29" name="balls/Bscaleslarge_taur" dx="111" dy="128"/>
+        <cell rect="161,350,49,29" name="balls/Bscaleshuge_taur" dx="111" dy="128"/>
+        <cell rect="161,380,49,29" name="balls/Bscalessillyhugehuge_taur" dx="111" dy="128"/>
+        <cell rect="211,290,49,29" name="balls/Borcasmall_taur" dx="111" dy="128"/>
+        <cell rect="211,320,49,29" name="balls/Borcalarge_taur" dx="111" dy="128"/>
+        <cell rect="211,350,49,29" name="balls/Borcahuge_taur" dx="111" dy="128"/>
+        <cell rect="211,380,49,29" name="balls/Borcasillhugehuge_taur" dx="111" dy="128"/>
+        <cell rect="211,290,49,29" name="balls/Bbeesmall_taur" dx="111" dy="128"/>
+        <cell rect="211,320,49,29" name="balls/Bbeelarge_taur" dx="111" dy="128"/>
+        <cell rect="211,350,49,29" name="balls/Bbeehuge_taur" dx="111" dy="128"/>
+        <cell rect="211,380,49,29" name="balls/Bbeesillyhuge_taur" dx="111" dy="128"/>
+    </spritemap>
+    <spritemap file="tails.png">
+        <cell rect="1,71,168,139" name="tail/manticore" dx="10" dy="40"/>
+        <cell rect="1,71,168,139" name="tail/manticore_taur" dx="36" dy="57"/>
+        <cell rect="1,211,83,139" name="tail/orca" dx="78" dy="39"/>
+        <cell rect="1,211,83,139" name="tail/orca_taur" dx="117" dy="49"/>
+        <cell rect="86,211,83,139" name="tail/mouse" dx="85" dy="40"/>
+        <cell rect="86,211,83,139" name="tail/mouse_taur" dx="135" dy="46"/>
+        <cell rect="170,211,83,139" name="tail/mouse_fire" dx="85" dy="40"/>
+        <cell rect="170,211,83,139" name="tail/mouse_fire_taur" dx="135" dy="46"/>
+        <cell rect="255,211,83,139" name="tail/cat" dx="85" dy="40"/>
+        <cell rect="255,211,83,139" name="tail/cat_taur" dx="138" dy="55"/>
+        <cell rect="339,211,83,139" name="tail/cat2" dx="85" dy="40"/>
+        <cell rect="339,211,83,139" name="tail/cat2_taur" dx="138" dy="55"/>
+        <cell rect="593,211,83,139" name="tail/hellcat" dx="85" dy="40"/>
+        <cell rect="593,211,83,139" name="tail/hellcat_taur" dx="138" dy="55"/>
+        <cell rect="509,211,83,139" name="tail/horse" dx="85" dy="40"/>
+        <cell rect="509,211,83,139" name="tail/horse_taur" dx="133" dy="45"/>
+        <cell rect="1,351,168,69" name="tail/reptile" dx="10" dy="90"/>
+        <cell rect="1,351,168,69" name="tail/reptile_taur" dx="57" dy="102"/>
+        <cell rect="170,351,168,69" name="tail/demon" dx="10" dy="90"/>
+        <cell rect="170,351,168,69" name="tail/demon_taur" dx="64" dy="93"/>
+        <cell rect="339,351,168,69" name="tail/gargoyle_axe" dx="10" dy="90"/>
+        <cell rect="339,421,168,69" name="tail/gargoyle_mace" dx="10" dy="90"/>
+        <cell rect="1,421,168,69" name="tail_fg/reptile_fire" dx="10" dy="90"/>
+        <cell rect="1,421,168,69" name="tail/reptile_fire_taur" dx="57" dy="102"/>
+        <cell rect="170,421,168,69" name="tail/cow" dx="10" dy="90"/>
+        <cell rect="170,421,168,69" name="tail/cow_taur" dx="64" dy="93"/>
+        <cell rect="1,491,83,69" name="tail/bunny" dx="85" dy="90"/>
+        <cell rect="1,491,83,69" name="tail/bunny_taur" dx="131" dy="97"/>
+        <cell rect="86,491,83,69" name="tail/goat" dx="84" dy="103"/>
+        <cell rect="86,491,83,69" name="tail/goat_taur" dx="139" dy="106"/>
+        <cell rect="170,491,83,69" name="tail/harpy" dx="85" dy="90"/>
+        <cell rect="170,491,83,69" name="tail/harpy_taur" dx="142" dy="97"/>
+        <cell rect="170,561,83,139" name="tail/bee_abdomen" dx="85" dy="40"/>
+        <cell rect="170,561,83,139" name="tail/bee_taur" dx="126" dy="48"/>
+        <cell rect="255,561,83,139" name="tail/spider" dx="85" dy="40"/>
+        <cell rect="255,561,83,139" name="tail/spider_taur" dx="125" dy="50"/>
+        <cell rect="339,561,83,139" name="tail/weasel" dx="85" dy="40"/>
+        <cell rect="339,561,83,139" name="tail/weasel_taur" dx="134" dy="49"/>
+        <cell rect="423,561,168,139" name="tail/thunderbird" dx="10" dy="46"/>
+        <cell rect="423,561,168,139" name="tail/thunderbird_taur" dx="64" dy="49"/>
+        <cell rect="592,561,82,139" name="tail/raccoon" dx="85" dy="40"/>
+        <cell rect="592,561,82,139" name="tail/raccoon_taur" dx="139" dy="50"/>
+        <cell rect="1,1015,173,156" name="tail/fox1" dx="-2" dy="37"/>
+        <cell rect="1,1015,173,156" name="tail/fox1_taur" dx="50" dy="47"/>
+        <cell rect="523,858,173,156" name="tail/fox2" dx="6" dy="36"/>
+        <cell rect="523,858,173,156" name="tail/fox2_taur" dx="53" dy="43"/>
+        <cell rect="349,858,173,156" name="tail/fox3" dx="7" dy="35"/>
+        <cell rect="349,858,173,156" name="tail/fox3_taur" dx="57" dy="47"/>
+        <cell rect="175,858,173,156" name="tail/fox4" dx="10" dy="36"/>
+        <cell rect="175,858,173,156" name="tail/fox4_taur" dx="55" dy="47"/>
+        <cell rect="1,858,173,156" name="tail/fox5" dx="11" dy="37"/>
+        <cell rect="1,858,173,156" name="tail/fox5_taur" dx="51" dy="47"/>
+        <cell rect="523,701,173,156" name="tail/fox6" dx="11" dy="37"/>
+        <cell rect="523,701,173,156" name="tail/fox6_taur" dx="50" dy="47"/>
+        <cell rect="349,701,173,156" name="tail/fox7" dx="11" dy="37"/>
+        <cell rect="349,701,173,156" name="tail/fox7_taur" dx="50" dy="47"/>
+        <cell rect="175,701,173,156" name="tail/fox8" dx="11" dy="37"/>
+        <cell rect="175,701,173,156" name="tail/fox8_taur" dx="50" dy="47"/>
+        <cell rect="1,701,173,156" name="tail/fox9" dx="11" dy="37"/>
+        <cell rect="1,701,173,156" name="tail/fox9_taur" dx="50" dy="47"/>
+    </spritemap>
+    <spritemap file="wings.png">
+        <cell rect="1,70,84,139" name="wings_bg/mantibig" dx="10" dy="20"/>
+        <cell rect="86,70,83,139" name="wings/mantibig" dx="95" dy="20"/>
+        <cell rect="1,490,83,139" name="wings_front/mantibig" dx="95" dy="20"/>
+        <cell rect="170,70,84,139" name="wings_bg/fairy" dx="10" dy="20"/>
+        <cell rect="255,70,83,139" name="wings/fairy" dx="95" dy="20"/>
+        <cell rect="255,490,83,139" name="wings_front/fairy" dx="95" dy="20"/>
+        <cell rect="339,70,84,139" name="wings_bg/feather_large" dx="10" dy="20"/>
+        <cell rect="424,70,83,139" name="wings/feather_large" dx="95" dy="20"/>
+        <cell rect="339,490,83,139" name="wings_front/feather_large" dx="95" dy="20"/>
+        <cell rect="1,210,84,139" name="wings_bg/scales" dx="10" dy="20"/>
+        <cell rect="86,210,83,139" name="wings/scales" dx="95" dy="20"/>
+        <cell rect="170,490,83,139" name="wings_front/scales" dx="95" dy="20"/>
+        <cell rect="170,210,168,139" name="wings/bee" dx="10" dy="20"/>
+        <cell rect="1,350,84,139" name="wings_bg/demon" dx="10" dy="20"/>
+        <cell rect="86,350,83,139" name="wings/demon" dx="95" dy="20"/>
+        <cell rect="86,490,83,139" name="wings_front/demon" dx="95" dy="20"/>
+    </spritemap>
+
+	<!-- LAYER AREA -->
+    <layers>
+        <layer name="antennae"/>
+        <layer name="horns"/>
+        <layer name="ears"/>
+        <layer name="eyes"/>
+        <layer name="hair"/>
+        <layer name="ears_bg"/>
+
+        <layer name="face"/>
+        <layer name="head"/>
+
+        <layer name="horns_bg"/>
+		<layer name="neck"/>
+		<layer name="breasts_pattern"/>
+        <layer name="breasts"/>
+		<layer name="overhands"/>
+        <layer name="hands"/>
+		<layer name="arms_pattern"/>
+        <layer name="arms"/>
+		<layer name="overhands_bg"/>
+        <layer name="hands_bg"/>
+		<layer name="arms_bg_pattern"/>
+        <layer name="arms_bg"/>
+		
+		<layer name="wings_front"/>
+        <layer name="legs_fg"/>
+		<layer name="penis"/>
+		<layer name="balls"/>
+		
+		<layer name="overfeet"/>
+        <layer name="feet"/>
+		<layer name="legs_pattern"/>
+        <layer name="legs"/>
+
+		<layer name="torso_pattern"/>	
+        <layer name="torso"/>	
+        <layer name="hair_bg"/>
+		<layer name="wings"/>
+        <layer name="tail_fg"/>
+        <layer name="tail"/>
+        <layer name="wings_bg"/>
+    </layers>
+
+    <logic>
+        <!--
+
+        Syntax:
+
+        Type item = show | hide | if | switch | set
+
+        Element <set var="name">value</set> - set local variable
+            attribute [name] - variable name
+        or <set var="name" value="expr"/> - set local variable
+            attribute [name] - variable name
+            attribute [value] - expression to evaluate
+
+        Element <show part=""/> - show layer part
+            attribute [part] - key in spritesheet or spritemap. Use $var to insert value of variable 'var'
+
+        Element <hide part=""/> - hide layer part or whole layer
+            attribute [part] - full name or "layer/*" mask. Use $var to insert value of variable 'var'
+
+        Element <if test=""> item* </if>
+            attribute [test] - evaluated as expression
+            children >item* - items to process if [test] evaluates to 'true'
+
+        Element <switch> case* default? </switch>
+            optional attribute [value] - evaluated as expression; allows using case[value]
+            children >case* - they are evaluated, if one passes test, its contents are processed
+                and case iteration stops
+            optional child >default? - processed if no cases passed the test
+
+        Element <case test=""|value=""> item* </case>
+            optional attribute [test] - evaluated as expression
+            optional attribute [value] - evaluated as expression
+            optional attribute [values] - evaluated as commaa-separated expressions
+            children >item* - if:
+                [test] is present and evaluates to 'true'
+                or:
+                [values] is present and any of it evaluates to same as parent
+                switch[value]
+                or:
+                [value] is present and evaluates to same as parent switch[value]
+                then items are processed
+
+        Element <default> item* </default>
+
+        -->
+		<!-- SETUP VARS -->
+		<if test="isTaur()">
+            <set var="taur">_taur</set>
+            <else>
+                <set var="taur"></set>
+            </else>
+        </if>
+		
+		 <set var="big" value="(cocks[0].cockLength gt 12) ? 'big' : ''"/>
+		
+		<!-- ANTENNAE AREA -->
+        <switch value="antennae.type">
+            <case values="Antennae.NONE"></case>
+            <case values="Antennae.MANTIS">
+                <show part="antennae/bee"/>
+            </case>
+            <case values="Antennae.BEE">
+                <show part="antennae/bee"/>
+            </case>
+            <default>
+                <show part="antennae/bee"/>
+            </default>
+        </switch>
+		
+		
+		<!-- HORN AREA -->
+        <switch value="horns.type">
+            <case values="Horns.NONE"></case>
+            <case values="Horns.DEMON,Horns.GARGOYLE">
+                <show part="horns_bg/demon"/>
+            </case>
+            <case values="Horns.COW_MINOTAUR">
+                <show part="horns_bg/cow"/>
+                <show part="horns/cow"/>
+            </case>
+            <case values="Horns.GOAT">
+                <show part="horns/devil"/>
+                <show part="horns_bg/devil"/>
+            </case>
+            <case values="Horns.ORCHID">
+                <show part="horns/orchid"/>
+                <show part="horns_bg/orchid"/>
+            </case>
+            <case values="'never'">
+                <show part="horns/2small"/>
+                <show part="horns_bg/kraken"/>
+            </case>
+            <case values="Horns.DRACONIC_X4_12_INCH_LONG">
+                <show part="horns_bg/dragon"/>
+            </case>
+            <default><!--TODO DRACONIC_X2, , ANTLERS, RHINO, OAK-->
+                <show part="horns/2large"/>
+            </default>
+			<case values="Horns.UNICORN,Horns.ONI">
+				<show part="horns/unicorn"/>
+			</case>
+			<case values="Horns.BICORN">
+				<show part="horns/bicorn"/>
+			</case>
+			<case values="Horns.ONI_X2">
+				<show part="horns/2oni"/>
+			</case>
+        </switch>
+		
+		
+		<!-- EAR AREA -->
+        <switch value="ears.type">
+            <case values="Ears.HUMAN">
+                <show part="ears_bg/human"/>
+            </case>
+            <case values="Ears.COW,Ears.KANGAROO,Ears.PIG,Ears.RHINO,Ears.ECHIDNA"><!--TODO-->
+                <show part="ears/goat"/>
+                <show part="ears_bg/goat"/>
+            </case>
+			<case values="Ears.HORSE,Ears.DEER">
+                <show part="ears_bg/horse"/>
+            </case>
+            <case values="Ears.DOG,Ears.WOLF">
+                <show part="ears/wolf"/>
+                <show part="ears_bg/wolf"/>
+            </case>
+			<case values="Ears.RACOON,Ears.FERRET">
+                <show part="ears_bg/cat"/>
+            </case>
+            <case values="Ears.ELFIN,Ears.ELVEN,Ears.ONI,Ears.VAMPIRE">
+                <show part="ears/elfin"/>
+                <show part="ears_bg/elfin"/>
+            </case>
+            <case values="Ears.CAT">
+                <show part="ears/cat"/>
+                <show part="ears_bg/cat"/>
+            </case>
+            <case values="Ears.LIZARD"></case>
+            <case values="Ears.BUNNY">
+                <show part="ears/bunny"/>
+                <show part="ears_bg/bunny"/>
+            </case>
+            <case values="Ears.DRAGON">
+                <show part="ears/dragon"/>
+                <show part="ears_bg/dragon"/>
+            </case>
+            <case values="Ears.FOX,Ears.BAT">
+                <show part="ears/fox"/>
+                <show part="ears_bg/fox"/>
+            </case>
+            <case values="Ears.MOUSE">
+                <show part="ears/mouse"/>
+                <show part="ears_bg/mouse"/>
+            </case>
+            <case values="Ears.LION">
+                <show part="ears/cat"/>
+                <show part="ears_bg/cat"/>
+            </case>
+            <case values="Ears.YETI">
+                <show part="ears/fur"/>
+            </case>
+            <case values="Ears.ORCA">
+                <show part="ears/orca"/>
+                <show part="ears_bg/orca"/>
+            </case>
+            <case values="Ears.SNAKE">
+                <show part="ears/naga"/>
+                <show part="ears_bg/naga"/>
+            </case>
+            <case values="Ears.GOAT">
+                <show part="ears/goat"/>
+                <show part="ears_bg/goat"/>
+            </case>
+            <case values="Ears.WEASEL">
+                <show part="ears/weasel"/>
+                <show part="ears_bg/weasel"/>
+                <show part="neck/weasel"/>
+            </case>
+            <default> <!-- TODO RED_PANDA, AVIAN, GRYPHON -->
+                <show part="ears_bg/human"/>
+            </default>
+        </switch>
+
+
+		<!-- EYE AREA -->
+        <switch value="eyes.type">
+            <case values="Eyes.HUMAN">
+                <show part="eyes/human"/>
+            </case>
+            <case values="Eyes.FOUR_SPIDER_EYES">
+                <show part="eyes/spider"/>
+            </case>
+            <case values="Eyes.BLACK_EYES_SAND_TRAP">
+                <show part="eyes/sandtrap"/>
+            </case>
+            <case values="Eyes.SLITS,Eyes.FENRIR,Eyes.REPTILIAN,Eyes.SNAKE,Eyes.GORGON,Eyes.DRAGON,Eyes.ONI,Eyes.ELF,Eyes.VAMPIRE,Eyes.CAVE_WYRM,Eyes.FERAL">
+                <show part="eyes/cat"/>
+            </case>
+            <case values="Eyes.DEVIL">
+                <show part="eyes/devil"/>
+            </case>
+            <case values="Eyes.RAIJU,Eyes.MANTICORE">
+                <show part="eyes/raiju"/>
+            </case>
+			<case values="Eyes.INFERNAL">
+                <show part="eyes/infernal"/>
+            </case>
+            <default>
+                <show part="eyes/human"/>
+            </default>
+        </switch>
+
+        <!--
+             = 0   bald
+             < 1   trim
+             < 3   short
+             < 6   shaggy
+             < 10  moderately long
+             < 16  long (shoulder-length)
+             < 26  very long
+             < 40  ass-length
+             < tallness
+                   obscenely long
+             >= tallness
+                   floor-length
+        -->
+		
+		
+		<!-- HAIR AREA -->
+        <if test="hairLength &gt; 0">
+            <switch value="hairType">
+                <case values="Hair.FEATHER">
+                    <show part="hair/feather"/>
+                    <show part="hair_bg/feather"/>
+                </case>
+                <case values="Hair.GORGON">
+                    <show part="hair/gorgon"/>
+                    <show part="hair_bg/gorgon"/>
+                </case>
+                <case values="Hair.STORM">
+                    <switch>
+                        <case test="hairLength lt 16">
+                            <show part="hair/raiju"/>
+                        </case>
+                        <default>
+                            <show part="hair/raiju"/>
+                            <show part="hair_bg/raiju3"/>
+                        </default>
+                    </switch>
+                </case>
+				<case values="Hair.BURNING">
+                    <switch>
+                        <case test="hairLength lt 16">
+                            <show part="hair/hellcat"/>
+                        </case>
+                        <default>
+                            <show part="hair/hellcat"/>
+                            <show part="hair_bg/hellcat"/>
+                        </default>
+                    </switch>
+                </case>
+                <case values="Hair.GOO">
+                    <switch>
+                        <case test="hairLength lt 16">
+                            <show part="hair/slime"/>
+                        </case>
+                        <default>
+                            <show part="hair/slime"/>
+                            <show part="hair_bg/slime2"/>
+                        </default>
+                    </switch>
+                </case>
+                <default> <!-- covers Hair.NORMAL, Hair.GHOST, Hair.ANEMONE, Hair.QUILL, Hair.LEAF, Hair.FLUFFY, Hair.GRASS, Hair.SILKEN, Hair.STORM --> <!-- TODO  -->
+                    <switch>
+                        <case test="hairLength lt 16">
+                            <show part="hair/0"/>
+                            <show part="hair_bg/0"/>
+                        </case>
+                        <default>
+                            <show part="hair/0"/>
+                            <show part="hair_bg/02"/>
+                        </default>
+                    </switch>
+                </default>
+            </switch>
+        </if>
+		
+        <!--
+        Sets following local variables:
+        $skinb - basic skin type: "human", "fur", "goo", "chitin", "pscales"
+        $skinx - extended skin type: also supports "orca", "bee"
+        -->
+        <switch value="skin.coverage">
+            <case values="Skin.COVERAGE_NONE,Skin.COVERAGE_HIGH,Skin.COVERAGE_COMPLETE">
+                <switch value="skin.type">
+                    <case values="Skin.PLAIN,Skin.AQUA_RUBBER_LIKE,Skin.AQUA_SCALES">
+                        <set var="skinb">human</set>
+                        <set var="skinx">human</set>
+
+                        <if test="skin.base.pattern==Pattern.ORCA_UNDERBODY">
+                            <set var="skinx">orca</set>
+                        </if>
+                    </case>
+                    <case values="Skin.FUR">
+                        <set var="skinb">fur</set>
+                        <set var="skinx">fur</set>
+                    </case>
+                    <case values="Skin.SCALES,Skin,Skin.DRAGON_SCALES">
+                        <set var="skinb">scales</set>
+                        <set var="skinx">scales</set>
+                    </case>
+                    <case values="Skin.GOO">
+                        <set var="skinb">goo</set>
+                        <set var="skinx">goo</set>
+                    </case>
+                    <!--<case values="Skin.BARK">TODO </case>-->
+                    <!--<case values="Skin.STONE">TODO </case>-->
+                    <!--<case values="Skin.MOSS">TODO </case>-->
+                    <case values="Skin.CHITIN">
+                        <set var="skinb">chitin</set>
+                        <set var="skinx">chitin</set>
+                        <if test="skin.coat.pattern==Pattern.BEE_STRIPES">
+                            <set var="skinx">bee</set>
+                        </if>
+                    </case>
+                    <default>
+                        <set var="skinb">human</set>
+                        <set var="skinx">human</set>
+                    </default>
+                </switch>
+            </case>
+            <case values="Skin.COVERAGE_LOW,Skin.COVERAGE_MEDIUM">
+                <switch value="skin.coat.type">
+                    <case values="Skin.SCALES,Skin.DRAGON_SCALES">
+                        <set var="skinb">pscales</set>
+                        <set var="skinx">pscales</set>
+                    </case>
+                    <!--TODO partial fur/chitin/bark/moss-->
+                    <default>
+                        <set var="skinb">human</set>
+                        <set var="skinx">human</set>
+                    </default>
+                </switch>
+            </case>
+            <default>
+                <set var="skinb">human</set>
+                <set var="skinx">human</set>
+            </default>
+        </switch>
+        <show part="head/$skinx"/>
+        <show part="torso/$skinx"/>
+        <show part="arms/$skinx"/>
+        <show part="arms_bg/$skinx"/>
+        <show part="legs/$skinx"/>
+
+        <switch value="faceType">
+            <case values="Face.HUMAN">
+                <show part="face/human"/>
+            </case>
+            <case values="Face.HORSE,Face.COW_MINOTAUR,Face.KANGAROO,Face.FOX,Face.PIG,Face.BOAR,Face.RHINO,Face.ECHIDNA,Face.DEER"><!--TODO -->
+                <show part="face/fur"/>
+            </case>
+            <case values="Face.DOG,Face.CAT,Face.WOLF">
+                <show part="face/fur"/>
+            </case>
+            <case values="Face.SHARK_TEETH">
+                <show part="face/shark"/>
+            </case>
+            <case values="Face.LIZARD,Face.DRAGON">
+                <show part="face/reptile"/>
+            </case>
+            <case values="Face.BUNNY,Face.BUCKTEETH,Face.JABBERWOCKY,Face.BUCKTOOTH">
+                <show part="face/bunny"/>
+            </case>
+            <case values="Face.SPIDER_FANGS">
+                <show part="face/spider"/>
+            </case>
+            <case values="Face.RACOON_MASK,Face.FERRET_MASK">
+                <show part="face/racoon_mask"/>
+            </case>
+			<case values="Face.RACOON,Face.FERRET">
+                <show part="face/racoon"/>
+            </case>
+            <case values="Face.SHARPTEETH,Face.VAMPIRE,Face.YETI_FANGS,Face.ONI_TEETH,Face.DRAGON_FANGS,Face.RAIJU_FANGS,Face.DEVIL_FANGS,Face.ANIMAL_TOOTHS,Face.WOLF_FANGS,Face.SNAKE_FANGS,Face.CAT_CANINES,Face.MANTICORE">
+                <show part="face/human_fang"/>
+            </case>
+            <case values="Face.ORCA">
+                <show part="face/orca"/>
+            </case>
+			<case values="Face.CHESHIRE,Face.CHESHIRE_SMILE">
+                <show part="face/cheshire"/>
+            </case>
+            <case values="'never'"><!--TODO-->
+                <show part="face/insect"/>
+            </case>
+            <default><!-- TODO Face.PLANT_DRAGON, -->
+                <show part="face/human"/>
+            </default>
+        </switch>
+		
+		
+		<!-- CHEST AREA -->
+        <if test="breastRows.length gt 0">
+            <switch>
+                <case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+                    <show part="breasts/0"/>
+                </case>
+                <case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+                    <show part="breasts/B$skinx"/>
+                        </case>
+                        <default>
+                    <show part="breasts/D$skinx"/>
+                </default>
+            </switch>
+        </if>
+
+
+		<!-- ARMS AREA -->
+        <switch value="arms.type">
+            <case values="Arms.HUMAN,Arms.KITSUNE,Arms.ONI,Arms.ELF,Arms.RAIJU">
+                <!--see switch[value=skin.coverage]-->
+            </case>
+            <case values="Arms.HARPY,Arms.PHOENIX">
+                <show part="hands/harpy"/>
+                <show part="hands_bg/harpy"/>
+            </case>
+            <case values="Arms.SPIDER,Arms.MANTIS">
+                <show part="hands/chitin2"/>
+                <show part="hands_bg/chitin2"/>
+            </case>
+            <case values="Arms.BEE">
+                <hide part="arms/*"/>
+                <hide part="arms_bg/*"/><hide part="hands_bg/*"/>
+                <show part="arms/bee"/>
+                <show part="arms_bg/bee"/>
+            </case>
+            <case values="Arms.SALAMANDER">
+                <hide part="arms/*"/>
+                <hide part="arms_bg/*"/>
+                <show part="arms/pscales"/>
+                <show part="arms_bg/pscales"/>
+            </case>
+            <case values="Arms.PLANT,Arms.PLANT2">
+                <show part="hands/alraune"/>
+                <show part="hands_bg/alraune"/>
+            </case>
+            <case values="Arms.FINS">
+                <show part="hands/fins-orca"/>
+                <show part="hands_bg/fins-orca"/>
+            </case>
+            <case values="Arms.GARGOYLE"><!--TODO -->
+                <hide part="arms/*"/>
+                <hide part="arms_bg/*"/>
+                <show part="arms/human"/>
+                <show part="arms_bg/human"/>
+            </case>
+            <case values="Arms.WOLF,Arms.FOX,Arms.YETI,Arms.CAT,Arms.SPHINX">
+                <show part="hands/fur"/>
+                <show part="hands_bg/fur"/>
+            </case>
+            <case values="Arms.LION">
+                <show part="neck/manticore"/>
+                <show part="hands/fur"/>
+                <show part="hands_bg/fur"/>
+                <if test="lowerBody==LowerBody.LION">
+                    <hide part="arms/*"/>
+                    <hide part="arms_bg/*"/>
+                    <hide part="hands/*"/>
+                    <hide part="hands_bg/*"/>
+                    <switch>
+                        <case test="hasPartialCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
+                            <show part="arms/manticore_sit_pscales"/>
+                            <show part="arms_bg/manticore_sit_pscales"/>
+                        </case>
+                        <case test="hasFullCoatOfType(Skin.FUR)">
+                            <show part="arms/manticore_sit_fur"/>
+                            <show part="arms_bg/manticore_sit_fur"/>
+                        </case>
+                        <case test="hasFullCoatOfType(Skin.CHITIN)">
+                            <show part="arms/manticore_sit_chitin"/>
+                            <show part="arms_bg/manticore_sit_chitin"/>
+                        </case>
+                        <case test="hasFullCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
+                            <show part="arms/manticore_sit_scales"/>
+                            <show part="arms_bg/manticore_sit_scales"/>
+                        </case>
+                        <default>
+                            <show part="arms/manticore_sit"/>
+                            <show part="arms_bg/manticore_sit"/>
+                        </default>
+                    </switch>
+                </if>
+            </case>
+            <case values="Arms.LIZARD,Arms.DRAGON">
+                <show part="hands/scales"/>
+                <show part="hands_bg/scales"/>
+            </case>
+            <case values="Arms.ORCA">
+                <hide part="arms/*"/>
+                <hide part="arms_bg/*"/>
+                <show part="arms_bg/orca"/>
+                <show part="arms/orca"/>
+                <show part="arms/fins-orca"/>
+                <show part="arms_bg/fins-orca"/>
+            </case>
+            <case values="Arms.DEVIL">
+                <show part="hands/devil"/>
+                <show part="hands_bg/devil"/>
+            </case>
+            <case values="Arms.HINEZUMI">
+				<show part="overhands/fire"/>
+                <show part="hands/fur"/>
+                <show part="overhands_bg/fire"/>
+                <show part="hands_bg/fur"/>
+            </case>
+			<case values="Arms.RACCOON,Arms.FOX">
+                <show part="hands/furracoon"/>
+                <show part="hands_bg/furracoon"/>
+            </case>
+            <case values="'never'"><!--TODO kraken-->
+                <hide part="arms/*"/>
+                <hide part="arms_bg/*"/>
+                <show part="arms/kraken"/>
+                <show part="arms_bg/kraken"/>
+            </case>
+            <default>
+                <!--see switch[value=skinType]-->
+            </default>
+        </switch>
+
+
+		<!-- LEGS AREA -->
+        <switch value="lowerBody">
+            <case values="LowerBody.HUMAN">
+                <!--see switch[value=skin.coverage]-->
+            </case>
+            <case values="LowerBody.HOOFED,LowerBody.PONY,LowerBody.CLOVEN_HOOFED">
+                <hide part="legs/*"/>
+                <switch>
+                    <case test="legCount==4">
+						<show part="legs/centaur"/>
+                        <show part="legs_fg/centaur"/>
+                    </case>
+                    <default>
+                        <show part="legs/devil"/>
+                    </default>
+                </switch>
+            </case>
+            <case values="LowerBody.BUNNY,LowerBody.KANGAROO,LowerBody.CAT,LowerBody.LION,LowerBody.FOX,LowerBody.RAIJU,LowerBody.CANINE,LowerBody.RACCOON,LowerBody.FERRET,LowerBody.MOUSE,LowerBody.HINEZUMI">
+                <switch>
+                    <case test="legCount==4">
+                        <hide part="legs/*"/>
+						<show part="legs/cattaur"/>
+                        <show part="legs_fg/cattaur"/>
+                    </case>
+					<case values="LowerBody.FOX,LowerBody.RACCOON,LowerBody.FERRET">
+						<show part="feet/furracoon"/>
+					</case>
+					<case values="LowerBody.HINEZUMI">
+						<show part="overfeet/fire"/>
+						<show part="feet/fur"/>
+					</case>
+                    <default>
+                        <show part="feet/fur"/>
+                    </default>
+                </switch>
+            </case>
+            <case values="LowerBody.NAGA">
+                <hide part="legs/*"/>
+                <show part="legs/naga"/>
+            </case>
+            <!--<case values="LowerBody.DEMONIC_HIGH_HEELS">TODO </case>-->
+            <!--<case values="LowerBody.DEMONIC_CLAWS"">TODO </case>-->
+            <case values="LowerBody.BEE">
+                <hide part="legs/*"/>
+                <show part="legs/chitin2"/>
+            </case>
+            <case values="LowerBody.GOO">
+                <hide part="legs/*"/>
+                <show part="legs/gooblob"/>
+            </case>
+			<case values="LowerBody.LIZARD,LowerBody.DRAGON,LowerBody.SALAMANDER">
+                <switch>
+                    <case test="legCount==4">
+                        <hide part="legs/*"/>
+						<show part="legs/reptaur"/>
+                        <show part="legs_fg/reptaur"/>
+                    </case>
+                    <default>
+                        <show part="feet/scales"/>
+                    </default>
+                </switch>
+            </case>
+            <case values="LowerBody.HARPY">
+                <hide part="legs/*"/>
+                <hide part="feet/*"/>
+                <switch>
+                    <case test="hasFullCoatOfType(Skin.FUR)">
+                        <show part="legs/harpy_fur"/>
+                    </case>
+                    <case test="hasFullCoatOfType(Skin.SCALES)">
+                        <show part="legs/harpy_scales"/>
+                    </case>
+                    <case test="hasFullCoatOfType(Skin.CHITIN)">
+                        <show part="legs/harpy_chitin"/>
+                    </case>
+                    <case test="hasPartialCoatOfType(Skin.SCALES)">
+                        <show part="legs/harpy_pscales"/>
+                    </case>
+                    <default>
+                        <show part="legs/harpy_human"/>
+                    </default>
+                </switch>
+            </case>
+            <case values="LowerBody.CHITINOUS_SPIDER_LEGS">
+                <hide part="legs/*"/>
+                <show part="legs/chitin2"/>
+            </case>
+            <case values="LowerBody.DRIDER">
+                <hide part="legs/*"/>
+                <show part="legs_fg/drider"/>
+            </case>
+            <!--<case values="LowerBody.ECHIDNA">TODO </case>-->
+            <case values="LowerBody.SCYLLA">
+                <hide part="legs/*"/>
+                <show part="legs/scylla"/>
+            </case>
+            <case values="LowerBody.MANTIS"><!--TODO -->
+                <hide part="legs/*"/>
+                <show part="legs/chitin"/>
+            </case>
+            <!--<case values="LowerBody.GARGOYLE">TODO </case>-->
+            <!--<case values="LowerBody.PLANT_HIGH_HEELS">TODO </case>-->
+            <!--<case values="LowerBody.PLANT_ROOT_CLAWS">TODO </case>-->
+            <case values="LowerBody.PLANT_FLOWER">
+                <hide part="legs/*"/>
+                <show part="legs_fg/alraune"/>
+            </case>
+            <case values="LowerBody.LION">
+                <show part="feet/fur"/>
+                <if test="arms.type==Arms.LION">
+                    <hide part="legs/*"/>
+                    <hide part="feet/*"/>
+                    <switch>
+                        <case test="hasPartialCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
+                            <show part="legs/manticore_sit_pscales"/>
+                        </case>
+                        <case test="hasFullCoatOfType(Skin.FUR)">
+                            <show part="legs/manticore_sit_fur"/>
+                        </case>
+                        <case test="hasFullCoatOfType(Skin.CHITIN)">
+                            <show part="legs/manticore_sit_chitin"/>
+                        </case>
+                        <case test="hasFullCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
+                            <show part="legs/manticore_sit_scales"/>
+                        </case>
+                        <default>
+                            <show part="legs/manticore_sit"/>
+                        </default>
+                    </switch>
+                </if>
+            </case>
+            <!--<case values="LowerBody.YETI">TODO </case>-->
+            <case values="LowerBody.ORCA,LowerBody.SHARK">
+                <hide part="legs/*"/>
+                <show part="legs/orca"/>
+            </case>
+            <!--<case values="LowerBody.YGG_ROOT_CLAWS">TODO </case>-->
+            <case values="'never'"><!--TODO liliraune-->
+                <hide part="legs/*"/>
+                <show part="legs_fg/liliraune"/>
+            </case>
+
+            <default>
+                <!--see switch[value=skin.coverage]-->
+            </default>
+        </switch>
+		
+		
+		<!-- WING AREA -->
+        <switch value="wings.type">
+            <case values="Wings.NONE"></case>
+            <case values="Wings.BEE_LIKE_SMALL,Wings.BEE_LIKE_LARGE">
+                <show part="wings/bee"/>
+            </case>
+            <case values="Wings.HARPY,Wings.FEATHERED,Wings.FEATHERED_SPHINX,Wings.FEATHERED_ALICORN">
+                <show part="wings/feather_large"/>
+                <show part="wings_bg/feather_large"/>
+				<show part="wings_front/feather_large"/>
+            </case>
+            <case values="Wings.IMP,Wings.BAT_LIKE_TINY,Wings.BAT_LIKE_LARGE,Wings.BAT_LIKE_LARGE_2,Wings.VAMPIRE,Wings.NIGHTMARE"><!--TODO sizes -->
+                <show part="wings/demon"/>
+                <show part="wings_bg/demon"/>
+				<show part="wings_front/demon"/>
+            </case>
+            <!--TODO Wings.SHARK_FIN-->
+            <case values="Wings.DRACONIC_SMALL,Wings.DRACONIC_LARGE,Wings.DRACONIC_HUGE"><!--TODO sizes -->
+                <show part="wings_bg/scales"/>
+                <show part="wings/scales"/>
+				<show part="wings_front/scales"/>
+            </case>
+            <case values="Wings.GIANT_DRAGONFLY,Wings.MANTIS_LIKE_SMALL,Wings.MANTIS_LIKE_LARGE,Wings.MANTIS_LIKE_LARGE2"><!--TODO -->
+                <show part="wings/bee"/>
+            </case>
+            <!--TODO Wings.PLANT, Wings.BAT_ARM, Wings.VAMPIRE-->
+            <case values="Wings.MANTICORE_LIKE_SMALL,Wings.MANTICORE_LIKE_LARGE">
+                <show part="wings/mantibig"/>
+                <show part="wings_bg/mantibig"/>
+				<show part="wings_front/mantibig"/>
+            </case>
+            <case values="Wings.FEY_DRAGON_WINGS">
+                <show part="wings/fairy"/>
+                <show part="wings_bg/fairy"/>
+				<show part="wings_front/fairy"/>
+            </case>
+            <default>
+            </default>
+        </switch>
+		
+		
+		<!-- TAIL AREA -->
+        <switch value="tailType">
+            <case values="Tail.NONE"></case>
+            <case values="Tail.DOG,Tail.WOLF"><!--TODO -->
+				<if test="isTaur()">
+					<show part="tail/goat_taur"/>
+					<else>
+						<show part="tail/goat"/>
+					</else>
+				</if>
+            </case>
+			<case values="Tail.HORSE"><!--TODO -->
+				<if test="isTaur()">
+					<show part="tail/horse_taur"/>
+					<else>
+						<show part="tail/horse"/>
+					</else>
+				</if>
+            </case>
+            <case values="Tail.DOG,Tail.COW,Tail.WOLF">
+				<if test="isTaur()">
+					<show part="tail/cow_taur"/>
+					<else>
+						<show part="tail/cow"/>
+					</else>
+				</if>
+            </case>
+            <case values="Tail.DEMONIC">
+				<if test="isTaur()">
+					<show part="tail/demon_taur"/>
+					<else>
+						<show part="tail/demon"/>
+					</else>
+				</if>
+            </case>
+            <case values="Tail.SPIDER_ABDOMEN">
+				<if test="isTaur()">
+					<show part="tail/spider_taur"/>
+					<else>
+						<show part="tail/spider"/>
+					</else>
+				</if>
+            </case>
+            <case values="Tail.BEE_ABDOMEN">
+				<if test="isTaur()">
+					<show part="tail/bee_abdomen_taur"/>
+					<else>
+						<show part="tail/bee_abdomen"/>
+					</else>
+				</if>
+            </case>
+            <case values="Tail.CAT">
+                <switch value="tailCount">
+                    <case values="1">
+						<if test="isTaur()">
+							<show part="tail/cat_taur"/>
+							<else>
+								<show part="tail/cat"/>
+							</else>
+						</if>
+                    </case>
+                    <case values="2">
+						<if test="isTaur()">
+							<show part="tail/cat2_taur"/>
+							<else>
+								<show part="tail/cat2"/>
+							</else>
+						</if>
+                    </case>
+                    <default>
+						<if test="isTaur()">
+							<show part="tail/cat2_taur"/>
+							<else>
+								<show part="tail/cat2"/>
+							</else>
+						</if>
+                    </default>
+                </switch>
+            </case>
+			<case values="Tail.BURNING">
+				<if test="isTaur()">
+					<show part="tail/hellcat_taur"/>
+					<else>
+						<show part="tail/hellcat"/>
+					</else>
+				</if>
+            </case>
+            <case values="Tail.LIZARD,Tail.DRACONIC">
+				<if test="isTaur()">
+					<show part="tail/reptile_taur"/>
+					<else>
+						<show part="tail/reptile"/>
+					</else>
+				</if>
+            </case>
+            <case values="Tail.RABBIT">
+				<if test="isTaur()">
+					<show part="tail/bunny_taur"/>
+					<else>
+						<show part="tail/bunny"/>
+					</else>
+				</if>
+			</case>
+            <case values="Tail.HARPY">
+				<if test="isTaur()">
+					<show part="tail/harpy_taur"/>
+					<else>
+						<show part="tail/harpy"/>
+					</else>
+				</if>
+            </case>
+            <case values="Tail.FOX">
+				<show part="tail/fox$tailCount$taur"/>
+            </case>
+            <case values="Tail.KANGAROO"><!--TODO -->
+                <show part="tail/cat"/>
+            </case>
+            <case values="Tail.MOUSE">
+				<if test="isTaur()">
+					<show part="tail/mouse_taur"/>
+					<else>
+						<show part="tail/mouse"/>
+					</else>
+				</if>
+            </case>
+            <case values="Tail.HINEZUMI">
+				<if test="isTaur()">
+					<show part="tail/mouse_fire_taur"/>
+					<else>
+						<show part="tail/mouse_fire"/>
+					</else>
+				</if>
+            </case>
+            <case values="Tail.BEHEMOTH">
+                <!--TODO -->
+				<if test="isTaur()">
+					<show part="tail/reptile_taur"/>
+					<else>
+						<show part="tail/reptile"/>
+					</else>
+				</if>
+            </case>
+            <case values="Tail.PIG"></case>
+            <case values="Tail.SCORPION"><!--TODO--></case>
+            <case values="Tail.GOAT">
+				<if test="isTaur()">
+					<show part="tail/goat_taur"/>
+					<else>
+						<show part="tail/goat"/>
+					</else>
+				</if>
+            </case>
+            <case values="Tail.RHINO"></case>
+            <case values="Tail.ECHIDNA"></case>
+            <case values="Tail.DEER"></case>
+            <case values="Tail.SALAMANDER">
+				<if test="isTaur()">
+					<show part="tail/reptile_taur"/>
+					<show part="tail_fg/reptile_fire_taur"/>
+					<else>
+						<show part="tail/reptile"/>
+						<show part="tail_fg/reptile_fire"/>
+					</else>
+				</if>
+            </case>
+            <case values="Tail.KITSHOO">
+                <!--TODO -->
+            </case>
+            <case values="Tail.MANTIS_ABDOMEN">
+                <!--TODO -->
+            </case>
+            <case values="Tail.MANTICORE_PUSSYTAIL">
+				<if test="isTaur()">
+					<show part="tail/manticore_taur"/>
+				<else>
+					<show part="tail/manticore"/>
+				</else>
+				</if>
+            </case>
+			<case values="Tail.GARGOYLE">
+                <show part="tail/gargoyle_mace"/>
+            </case>
+			<case values="Tail.GARGOYLE_2">
+                <show part="tail/gargoyle_axe"/>
+            </case>
+            <case values="Tail.ORCA,Tail.SHARK">
+				<if test="isTaur()">
+					<show part="tail/orca_taur"/>
+					<else>
+						<show part="tail/orca"/>
+					</else>
+				</if>
+            </case>
+			<case values="Tail.RAIJU">
+				<if test="isTaur()">
+					<show part="tail/weasel_taur"/>
+					<else>
+						<show part="tail/weasel"/>
+					</else>
+				</if>
+            </case>
+			<case values="Tail.THUNDERBIRD">
+				<if test="isTaur()">
+					<show part="tail/thunderbird_taur"/>
+					<else>
+						<show part="tail/thunderbird"/>
+					</else>
+				</if>
+            </case>
+			<case values="Tail.RACCOON,Tail.FERRET">
+				<if test="isTaur()">
+					<show part="tail/raccoon_taur"/>
+					<else>
+						<show part="tail/raccoon"/>
+					</else>
+				</if>
+            </case>
+            <case values="Tail.YGGDRASIL">
+                <!--TODO -->
+            </case>
+            <case values="'never'">
+				<if test="isTaur()">
+					<show part="tail/mouse_fire_taur"/>
+					<else>
+						<show part="tail/mouse_fire"/>
+					</else>
+				</if>
+            </case>
+            <default>
+            </default>
+        </switch>
+
+        <!-- Penis AREA -->
+        <if test="hasCock()">
+            <switch value="cocks[0].cockType">
+                <case values="CockTypesEnum.NONE"></case>
+
+                <case values="CockTypesEnum.DOG,CockTypesEnum.WOLF">
+                    <if test="big">
+                        <show part="penis/canine$taur"/>
+                        <else>
+                            <show part="penis/canine$taur"/>
+                        </else>
+                    </if>
+                </case>
+
+                <case values="CockTypesEnum.CAT,CockTypesEnum.DISPLACER">
+                    <show part="penis/cat$taur"/>
+                </case>
+
+                <case values="CockTypesEnum.LIZARD,CockTypesEnum.CAVE_WYRM">
+                    <show part="penis/reptile$taur"/>
+                </case>
+
+                <case values="CockTypesEnum.HORSE">
+                    <show part="penis/horse$taur"/>
+                </case>
+
+                <case values="CockTypesEnum.BEE">
+                    <if test="big">
+                        <show part="penis/chitinbig$taur"/>
+                        <else>
+                            <show part="penis/chitin$taur"/>
+                        </else>
+                    </if>
+                </case>
+                <!-- <case values="CockTypesEnum.HUMAN"></case> use default -->
+                <default>
+
+                    <if test="big">
+                        <show part="penis/humanbig$taur"/>
+                        <else>
+                            <show part="penis/human$taur"/>
+                        </else>
+                    </if>
+                </default>
+            </switch>
+            <if test="lowerBody == LowerBody.CRAB_TAUR">
+                <hide part="penis/*"/>
+            </if>
+        </if>
+
+		<!-- BALLS AREA -->
+        <if test="balls gt 0">
+            <switch>
+            <case test="ballSize ge 8">
+                <set var="ballsz">sillyhuge</set>
+            </case>
+            <case test="ballSize ge 6">
+                <set var="ballsz">huge</set>
+            </case>
+            <case test="ballSize ge 4">
+                <set var="ballsz">large</set>
+            </case>
+            <default>
+                <set var="ballsz">small</set>
+            </default>
+            </switch>
+            <show part="balls/B$skinx$ballsz$taur"/>
+			<if test="lowerBody == LowerBody.CRAB_TAUR">
+				<hide part="balls/*"/>
+			</if>
+        </if>
+		
+		<!-- PATTERN AREA -->
+        <switch value="skin.base.pattern">
+            <case values="Skin.PATTERN_NONE"></case>
+            <case values="Skin.PATTERN_MAGICAL_TATTOO,Skin.PATTERN_BATTLE_TATTOO">
+				<show part="breasts_pattern/Btatoo"/>
+				<show part="breasts_pattern/Bptatoo"/>
+				<show part="torso_pattern/Btatoo"/>
+				<show part="arms_pattern/Btatoo"/>
+				<show part="arms_bg_pattern/Btatoo"/>
+				<show part="legs_pattern/Btatoo"/>	
+            </case>
+			<case values="Skin.PATTERN_LIGHTNING_SHAPED_TATTOO">
+				<show part="breasts_pattern/Blightning"/>
+				<show part="breasts_pattern/Blightning"/>
+				<show part="torso_pattern/Blightning"/>
+				<show part="arms_pattern/Blightning"/>
+				<show part="arms_bg_pattern/Blightning"/>
+				<show part="legs_pattern/Blightning"/>	
+            </case>
+			<case values="Skin.PATTERN_TIGER_STRIPES">
+				<show part="breasts_pattern/Bstripe"/>
+				<show part="breasts_pattern/Bstripe"/>
+				<show part="torso_pattern/Bstripe"/>
+				<show part="arms_pattern/Bstripe"/>
+				<show part="arms_bg_pattern/Bstripe"/>
+				<show part="legs_pattern/Bstripe"/>	
+            </case>
+            <default>
+                <hide part="breasts_pattern/*"/>
+				<hide part="torso_pattern/*"/>
+				<hide part="arms_pattern/*"/>
+				<hide part="arms_bg_pattern/*"/>
+				<hide part="legs_pattern/*"/>
+            </default>
+			<if test="lowerBody == LowerBody.CRAB_TAUR,LowerBody.DRIDER">
+				<hide part="legs_pattern/*"/>
+			</if>
+			<if test="isTaur()">
+				<hide part="legs_pattern/*"/>
+			</if>
+        </switch>
+
+    </logic>
+</model>
