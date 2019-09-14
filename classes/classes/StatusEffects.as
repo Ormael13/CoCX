@@ -58,11 +58,12 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CampSparingNpcsTimers1:StatusEffectType			= mk("Camp Sparing Npc's Timers 1");//Ember / Isabella / Kiha / Etna
 		public static const CampSparingNpcsTimers2:StatusEffectType			= mk("Camp Sparing Npc's Timers 2");//Kindra / Chi Chi / Ceani / Diana
 		public static const CampSparingNpcsTimers3:StatusEffectType			= mk("Camp Sparing Npc's Timers 3");//Luna / Galia / Dinah /?Cai'Lin?
-		public static const CampSparingNpcsTimers4:StatusEffectType			= mk("Camp Sparing Npc's Timers 4");//Ted / x / x / x
+		public static const CampSparingNpcsTimers4:StatusEffectType			= mk("Camp Sparing Npc's Timers 4");//Ted / Aurora / x / x
 		public static const ClaraCombatRounds:StatusEffectType              = mk("Clara Combat Rounds");
 		public static const ClaraFoughtInCamp:StatusEffectType              = mk("Clara Fought In Camp");
 		public static const CockPumped:StatusEffectType                     = mk("Cock Pumped");
 		public static const CombatFollowerAlvina:StatusEffectType			= mk("Combat Follower: Alvina");
+		public static const CombatFollowerAurora:StatusEffectType			= mk("Combat Follower: Aurora");
 		public static const CombatFollowerAyane:StatusEffectType			= mk("Combat Follower: Ayane");
 		public static const CombatFollowerEtna:StatusEffectType				= mk("Combat Follower: Etna");
 		public static const CombatFollowerDiana:StatusEffectType			= mk("Combat Follower: Diana");
@@ -81,6 +82,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const DragonLightningBreathCooldown:StatusEffectType  = mk("Dragon Lightning Breath Cooldown");
 		public static const DrunkenPower:StatusEffectType                   = mk("Drunken Power");
 		public static const Dysfunction:StatusEffectType                    = mk("dysfunction");
+		public static const EbonLabyrinthA:StatusEffectType          		= mk("Ebon Labyrinth A");
+		public static const EbonLabyrinthB:StatusEffectType          		= mk("Ebon Labyrinth B");
 		public static const Edryn:StatusEffectType                          = mk("Edryn");
 		public static const Eggchest:StatusEffectType                       = mk("eggchest");
 		public static const Eggs:StatusEffectType                           = mk("eggs");
@@ -222,6 +225,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const RathazulArmor:StatusEffectType                  = mk("RathazulArmor");
 		public static const RepeatSuccubi:StatusEffectType                  = mk("repeatSuccubi");
 		public static const RiverDungeonA:StatusEffectType          		= mk("River Dungeon A");
+		public static const RiverDungeonFloorRewards:StatusEffectType       = mk("River Dungeon Floor Rewards");
 		public static const Rut:StatusEffectType                            = mk("rut");
 		public static const SaiyanNumber1a:StatusEffectType          		= mk("Saiyan Number 1a");//LVL-UP counter value / HP multi / Lust multi / Wrath multi
 		public static const SaiyanNumber1b:StatusEffectType          		= mk("Saiyan Number 1b");//Str+Spe multi / Tou multi / Lib multi / Other stats multi

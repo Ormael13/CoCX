@@ -136,8 +136,31 @@ use namespace CoC;
 		
 		public function Incubus()
 		{
+			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB))  {
+				this.short = "stray incubus";
+				initStrTouSpeInte(225, 150, 165, 155);
+				initWisLibSensCor(155, 165, 105, 100);
+				this.weaponAttack = 32;
+				this.armorDef = 36;
+				this.armorMDef = 6;
+				this.bonusHP = 1000;
+				this.bonusLust = 80;
+				this.level = 62;
+				this.additionalXP = 500;
+			}
+			else {
+				this.short = "incubus";
+				initStrTouSpeInte(150, 100, 110, 105);
+				initWisLibSensCor(105, 110, 70, 100);
+				this.weaponAttack = 16;
+				this.armorDef = 18;
+				this.armorMDef = 3;
+				this.bonusHP = 500;
+				this.bonusLust = 40;
+				this.level = 26;
+				this.additionalXP = 50;
+			}
 			this.a = "the ";
-			this.short = "incubus";
 			this.imageName = "incubus";
 			this.long = "The demon before you is clad only in cut-off denim overalls.  There is a large hole ripped in the crotch, allowing the demon's foot-long member to hang free.  His skin is light purple and perfect, face rugged and handsome, topped with a simple black ponytail and two large horns that sprout from his forehead like twisted tree-trunks.  He not seems to be using any weapon aside of his own claws.";
 			// this.plural = false;
@@ -156,27 +179,18 @@ use namespace CoC;
 			this.skinTone = "light purple";
 			this.hairColor = "black";
 			this.hairLength = 12;
-			initStrTouSpeInte(150, 100, 110, 105);
-			initWisLibSensCor(105, 110, 70, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 16;
 			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
-			this.armorDef = 18;
-			this.armorMDef = 3;
-			this.bonusHP = 500;
-			this.bonusLust = 40;
 			this.lust = 30;
 			this.lustVuln = .5;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 26;
 			this.drop = new WeightedDrop().
 					add(consumables.BROBREW, 1).
 					add(consumables.INCUBID, 12);
 			this.gems = rand(30) + 15;
-			this.additionalXP = 50;
 			this.special1 = cockTripAttack2;
 			this.special2 = spoogeAttack2;
 			this.tailType = Tail.DEMONIC;

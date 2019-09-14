@@ -34,6 +34,7 @@ import classes.Scenes.Monsters.DarkElfRanger;
 import classes.Scenes.Monsters.DarkElfScout;
 import classes.Scenes.Monsters.DarkElfSlaver;
 import classes.Scenes.Monsters.DarkElfSniper;
+import classes.Scenes.Monsters.Malicore;
 import classes.Scenes.Monsters.Manticore;
 import classes.Scenes.NPCs.Aria;
 import classes.Scenes.NPCs.Aurora;
@@ -1402,21 +1403,15 @@ public function fixingProductionDrugs():void {
 			addButton(5, "Lethice", FightLethice).hint("Test fight with Lethice.");
 			//addButton(5, "DE Ranger", FightDarkElfRanger).hint("Test fight with Dark Elf Ranger. (lvl 39)");
 			//addButton(6, "DE Sniper", FightDarkElfSniper).hint("Test fight with Dark Elf Sniper. (lvl 51)");
-			addButton(6, "SomeManticore", FightRandomnManticore).hint("Test fight with some manticore.");
+			addButton(6, "SomeMalicore", FightRandomnManticore).hint("Test fight with some malicore.");
 			addButton(7, "Electra", FightElectra).hint("Test fight with Electra.");
 			addButton(8, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
 			addButton(9, "DELvL Eva", DELvLEva).hint("DE LvL forcefully Evangeline for testing purpose down toward the lvl 12.");
-			if (flags[kFLAGS.AURORA_LVL] >= 1) addButton(10, "Aurora", FightAurora).hint("Just to test her initial sparring form for now.");
 			addButton(11, "LvLUP Aurora", LvLUPAurora).hint("LvL UP forcefully Aurora for testing purpose up to the limit.");
 			addButton(12, "DELvL Aurora", DELvLAurora).hint("DE LvL forcefully Aurora for testing purpose down toward the lvl 1.");
 			addButton(13, "FeralT.Beast", FightFeralImp).hint("Test fight with feral tentacle beast.");
 			addButton(14, "Back", SoulforceCheats);
 		}
-public function FightAurora():void {
-	clearOutput();
-	outputText("Entering battle with Aurora! Enjoy ^^");
-	startCombat(new Aurora());
-}
 		
 		public function AddEnergyCore():void {
 			outputText("\n\n<b>(Gained 1 Energy Core!)</b>\n\n");
@@ -2170,8 +2165,8 @@ public function FightAurora():void {
 		}
 		public function FightRandomnManticore():void {
 			clearOutput();
-			outputText("Entering battle with some manticore! Enjoy ^^");
-			startCombat(new Manticore());
+			outputText("Entering battle with some malicore! Enjoy ^^");
+			startCombat(new Malicore());
 		}
 		public function FightElectra():void {
 			clearOutput();
@@ -2179,8 +2174,8 @@ public function FightAurora():void {
 			startCombat(new Electra());
 		}
 		public function LvLUPAurora():void {
-			outputText("\n\n<b>Aurora get stronger! (cheat stop working when she reach max possible lvl for now (atm it's lvl 55))</b>");
-			if (flags[kFLAGS.AURORA_LVL] < 10) flags[kFLAGS.AURORA_LVL]++;
+			outputText("\n\n<b>Aurora get stronger! (cheat stop working when she reach max possible lvl for now (atm it's lvl 73))</b>");
+			if (flags[kFLAGS.AURORA_LVL] < 13) flags[kFLAGS.AURORA_LVL]++;
 			doNext(EnemiesMenu);
 		}
 		public function DELvLAurora():void {

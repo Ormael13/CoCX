@@ -855,7 +855,8 @@ use namespace CoC;
 		//Fists and fist weapons
 		public function isFistOrFistWeapon():Boolean
 		{
-			return weaponName == "fists" || weapon == game.weapons.S_GAUNT || weapon == game.weapons.H_GAUNT || weapon == game.weapons.MASTGLO || weapon == game.weapons.KARMTOU || weapon == game.weapons.YAMARG || weapon == game.weapons.CLAWS || weapon == game.weapons.BFGAUNT;
+			return weaponName == "fists" || weapon == game.weapons.S_GAUNT || weapon == game.weapons.H_GAUNT || weapon == game.weapons.MASTGLO || weapon == game.weapons.KARMTOU || weapon == game.weapons.YAMARG || weapon == game.weapons.CLAWS || weapon == game.weapons.BFGAUNT
+			 || (shield == game.shields.AETHERS && flags[kFLAGS.AETHER_SINISTER_EVO] == 1 && weapon == game.weapons.AETHERD && flags[kFLAGS.AETHER_DEXTER_EVO] == 1);
 		}
 		//Sword-type weapons
 		public function isSwordTypeWeapon():Boolean {
@@ -1219,6 +1220,7 @@ use namespace CoC;
 		override public function get shieldBlock():Number {
 			var block:Number = _shield.block;
 			if (findPerk(PerkLib.JobKnight) >= 0) block += 3;
+			if (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD) block += 1;
 			//miejce na sposoby boostowania block value like perks or status effects
 			block = Math.round(block);
 			return block;
@@ -2823,7 +2825,7 @@ use namespace CoC;
 			{
 				if (devilkinScore() >= 11) {
 					if (devilkinScore() >= 16 && hasStatusEffect(StatusEffects.PlayerPhylactery))  {
-						if (devilkinScore() >= 16) {
+						if (devilkinScore() >= 21) {
 							if (isTaur()) race = "archdevil-taur";
 							else race = "archdevil";
 						}
@@ -3452,81 +3454,107 @@ use namespace CoC;
 		public function chimeraScore():Number {
 			Begin("Player","racialScore","chimera");
 			var chimeraCounter:Number = 0;
-			if (catScore() >= 4)
+			if (catScore() >= 8)
 				chimeraCounter++;
-			if (lizardScore() >= 4)
+			if (nekomataScore() >= 12)
 				chimeraCounter++;
-			if (dragonScore() >= 4)
+			if (cheshireScore() >= 11)
 				chimeraCounter++;
-			if (raccoonScore() >= 4)
+			if (hellcatScore() >= 10)
+				chimeraCounter++;
+			if (displacerbeastScore() >= 13)
+				chimeraCounter++;
+			if (lizardScore() >= 8)
+				chimeraCounter++;
+			if (dragonScore() >= 10)
+				chimeraCounter++;
+/*			if (raccoonScore() >= 4)
 				chimeraCounter++;
 			if (dogScore() >= 4)
 				chimeraCounter++;
 			if (wolfScore() >= 6)
 				chimeraCounter++;
-			if (werewolfScore() >= 6)
+*/			if (werewolfScore() >= 12)
 				chimeraCounter++;
-			if (foxScore() >= 4)
+			if (foxScore() >= 7)
 				chimeraCounter++;
-			if (ferretScore() >= 4)
+//			if (ferretScore() >= 4)
+//				chimeraCounter++;
+			if (kitsuneScore() >= 6 && tailType == 13 && tailCount >= 2)
+				chimeraCounter++;	
+			if (horseScore() >= 7)
 				chimeraCounter++;
-			if (kitsuneScore() >= 5)
+			if (unicornScore() >= 10)
 				chimeraCounter++;
-			if (horseScore() >= 4)
+			if (alicornScore() >= 12)
+				chimeraCounter++;	
+			if (centaurScore() >= 8)
 				chimeraCounter++;
-			if (minotaurScore() >= 4)
+			if (minotaurScore() >= 9)
 				chimeraCounter++;
-			if (cowScore() >= 4)
+			if (cowScore() >= 9)
 				chimeraCounter++;
-			if (beeScore() >= 5)
+			if (beeScore() >= 9)
 				chimeraCounter++;
-			if (demonScore() >= 5)
+			if (goblinScore() >= 10)
 				chimeraCounter++;
-			if (devilkinScore() >= 7)
+			if (demonScore() >= 11)
 				chimeraCounter++;
-			if (sharkScore() >= 4)
+			if (devilkinScore() >= 11)
 				chimeraCounter++;
-			if (orcaScore() >= 6)
+			if (sharkScore() >= 8)
 				chimeraCounter++;
-			if (oniScore() >= 6)
+			if (orcaScore() >= 12)
 				chimeraCounter++;
-			if (elfScore() >= 5)
+			if (oniScore() >= 12)
 				chimeraCounter++;
-			if (orcScore() >= 5)
+			if (elfScore() >= 11)
 				chimeraCounter++;
-			if (raijuScore() >= 5)
+			if (orcScore() >= 11)
+				chimeraCounter++;
+			if (raijuScore() >= 10)
 				chimeraCounter++;
 			if (thunderbirdScore() >= 12)
 				chimeraCounter++;
-			if (bunnyScore() >= 5)
+			if (bunnyScore() >= 10)
 				chimeraCounter++;
-			if (harpyScore() >= 4)
+			if (harpyScore() >= 8)
 				chimeraCounter++;
-			if (spiderScore() >= 4)
+			if (spiderScore() >= 7)
 				chimeraCounter++;
-			if (kangaScore() >= 4)
+//			if (kangaScore() >= 4)
+//				chimeraCounter++;
+			if (mouseScore() >= 8)
 				chimeraCounter++;
-			if (mouseScore() >= 4)
+//			if (scorpionScore() >= 4)
+//				chimeraCounter++;
+			if (mantisScore() >= 12)
 				chimeraCounter++;
-			if (scorpionScore() >= 4)
+			if (salamanderScore() >= 7)
 				chimeraCounter++;
-			if (mantisScore() >= 6)
+			if (cavewyrmScore() >= 10)
 				chimeraCounter++;
-			if (salamanderScore() >= 4)
+			if (nagaScore() >= 8)
 				chimeraCounter++;
-			if (cavewyrmScore() >= 5)
+			if (gorgonScore() >= 11)
 				chimeraCounter++;
-			if (nagaScore() >= 4)
+			if (vouivreScore() >= 11)
+				chimeraCounter++;
+			if (couatlScore() >= 11)
 				chimeraCounter++;
 			if (phoenixScore() >= 10)
 				chimeraCounter++;
-			if (scyllaScore() >= 4)
+			if (scyllaScore() >= 7)
 				chimeraCounter++;
-			if (plantScore() >= 6)
+//			if (plantScore() >= 6)
+//				chimeraCounter++;
+			if (alrauneScore() >= 10)
 				chimeraCounter++;
-			if (pigScore() >= 5)
+			if (yggdrasilScore() >= 10)
 				chimeraCounter++;
-			if (satyrScore() >= 4)
+			if (pigScore() >= 10)
+				chimeraCounter++;
+/*			if (satyrScore() >= 4)
 				chimeraCounter++;
 			if (rhinoScore() >= 4)
 				chimeraCounter++;
@@ -3534,27 +3562,27 @@ use namespace CoC;
 				chimeraCounter++;
 			if (deerScore() >= 4)
 				chimeraCounter++;
-			if (manticoreScore() >= 6)
+*/			if (manticoreScore() >= 12)
+				chimeraCounter += 2;
+			if (redpandaScore() >= 8)
 				chimeraCounter++;
-			if (redpandaScore() >= 4)
-				chimeraCounter++;
-			if (bearpandaScore() >= 5)
+			if (bearpandaScore() >= 10)
 				chimeraCounter++;
 			if (sirenScore() >= 10)
 				chimeraCounter++;
-			if (yetiScore() >= 6)
+			if (yetiScore() >= 12)
 				chimeraCounter++;
-			if (batScore() >= 6)
+			if (batScore() >= 10)
 				chimeraCounter++;
-			if (vampireScore() >= 6)
+			if (vampireScore() >= 10)
 				chimeraCounter++;
-			if (jabberwockyScore() >= 4)
-				chimeraCounter++;
-			if (avianScore() >= 4)
+			if (jabberwockyScore() >= 10)
+				chimeraCounter++;	
+			if (avianScore() >= 9)
 				chimeraCounter++;
 			if (gargoyleScore() >= 20)
 				chimeraCounter++;
-			if (gooScore() >= 4)
+			if (gooScore() >= 8)
 				chimeraCounter++;
 			
 			End("Player","racialScore");
@@ -3565,136 +3593,40 @@ use namespace CoC;
 		public function grandchimeraScore():Number {
 			Begin("Player","racialScore","grandchimera");
 			var grandchimeraCounter:Number = 0;
-			if (catScore() >= 8)
+			if (dragonScore() >= 20)
 				grandchimeraCounter++;
-			if (nekomataScore() >= 12)
+			if (jabberwockyScore() >= 20)
 				grandchimeraCounter++;
-			if (cheshireScore() >= 11)
+			if (wolfScore() >= 10)
 				grandchimeraCounter++;
-			if (hellcatScore() >= 10)
-				grandchimeraCounter++;
-			if (displacerbeastScore() >= 13)
-				grandchimeraCounter++;
-			if (lizardScore() >= 8)
-				grandchimeraCounter++;
-			if (dragonScore() >= 10)
-				grandchimeraCounter++;
-/*			if (raccoonScore() >= 4)
-				grandchimeraCounter++;
-			if (dogScore() >= 4)
-				grandchimeraCounter++;
-			if (wolfScore() >= 6)
-				grandchimeraCounter++;
-*/			if (werewolfScore() >= 12)
-				grandchimeraCounter++;
+//			if (werewolfScore() >= 12)
+//				grandchimeraCounter++;
 			if (foxScore() >= 7)
 				grandchimeraCounter++;
-//			if (ferretScore() >= 4)
-//				grandchimeraCounter++;
-			if (kitsuneScore() >= 6 && tailType == 13 && tailCount >= 2)
+			if (ferretScore() >= 4)
+				grandchimeraCounter++;
+			if (kitsuneScore() >= 12 && tailType == 13 && tailCount == 9)
 				grandchimeraCounter++;	
-			if (horseScore() >= 7)
+			if (demonScore() >= 16 && hasStatusEffect(StatusEffects.PlayerPhylactery))
 				grandchimeraCounter++;
-			if (unicornScore() >= 10)
+			if (devilkinScore() >= 16 && hasStatusEffect(StatusEffects.PlayerPhylactery))
 				grandchimeraCounter++;
-			if (alicornScore() >= 12)
-				grandchimeraCounter++;	
-			if (centaurScore() >= 8)
+			if (sharkScore() >= 9 && vaginas.length > 0 && cocks.length > 0)
 				grandchimeraCounter++;
-			if (minotaurScore() >= 9)
-				grandchimeraCounter++;
-			if (cowScore() >= 9)
-				grandchimeraCounter++;
-			if (beeScore() >= 9)
-				grandchimeraCounter++;
-			if (goblinScore() >= 10)
-				grandchimeraCounter++;
-			if (demonScore() >= 11)
-				grandchimeraCounter++;
-			if (devilkinScore() >= 11)
-				grandchimeraCounter++;
-			if (sharkScore() >= 8)
-				grandchimeraCounter++;
-			if (orcaScore() >= 12)
-				grandchimeraCounter++;
-			if (oniScore() >= 12)
+/*			if (oniScore() >= 12)
 				grandchimeraCounter++;
 			if (elfScore() >= 11)
 				grandchimeraCounter++;
 			if (orcScore() >= 11)
 				grandchimeraCounter++;
-			if (raijuScore() >= 10)
+*/			if (mouseScore() >= 12 && arms.type == Arms.HINEZUMI && lowerBody == LowerBody.HINEZUMI)
 				grandchimeraCounter++;
-			if (thunderbirdScore() >= 12)
-				grandchimeraCounter++;
-			if (bunnyScore() >= 10)
-				grandchimeraCounter++;
-			if (harpyScore() >= 8)
-				grandchimeraCounter++;
-			if (spiderScore() >= 7)
-				grandchimeraCounter++;
-//			if (kangaScore() >= 4)
+//			if (mantisScore() >= 12)
 //				grandchimeraCounter++;
-			if (mouseScore() >= 8)
-				grandchimeraCounter++;
-//			if (scorpionScore() >= 4)
+//			if (scyllaScore() >= 7)
 //				grandchimeraCounter++;
-			if (mantisScore() >= 12)
-				grandchimeraCounter++;
-			if (salamanderScore() >= 7)
-				grandchimeraCounter++;
-			if (cavewyrmScore() >= 10)
-				grandchimeraCounter++;
-			if (nagaScore() >= 8)
-				grandchimeraCounter++;
-			if (gorgonScore() >= 11)
-				grandchimeraCounter++;
-			if (vouivreScore() >= 11)
-				grandchimeraCounter++;
-			if (couatlScore() >= 11)
-				grandchimeraCounter++;
-			if (phoenixScore() >= 10)
-				grandchimeraCounter++;
-			if (scyllaScore() >= 7)
-				grandchimeraCounter++;
-//			if (plantScore() >= 6)
-//				grandchimeraCounter++;
-			if (alrauneScore() >= 10)
-				grandchimeraCounter++;
-			if (yggdrasilScore() >= 10)
-				grandchimeraCounter++;
-			if (pigScore() >= 10)
-				grandchimeraCounter++;
-/*			if (satyrScore() >= 4)
-				grandchimeraCounter++;
-			if (rhinoScore() >= 4)
-				grandchimeraCounter++;
-			if (echidnaScore() >= 4)
-				grandchimeraCounter++;
-			if (deerScore() >= 4)
-				grandchimeraCounter++;
-*/			if (manticoreScore() >= 12)
-				grandchimeraCounter += 2;
-			if (redpandaScore() >= 8)
-				grandchimeraCounter++;
-			if (bearpandaScore() >= 10)
-				grandchimeraCounter++;
-			if (sirenScore() >= 10)
-				grandchimeraCounter++;
-			if (yetiScore() >= 12)
-				grandchimeraCounter++;
-			if (batScore() >= 10)
-				grandchimeraCounter++;
-			if (vampireScore() >= 10)
-				grandchimeraCounter++;
-			if (jabberwockyScore() >= 10)
+			if (pigScore() >= 15)
 				grandchimeraCounter++;	
-			if (avianScore() >= 9)
-				grandchimeraCounter++;
-			if (gargoyleScore() >= 20)
-				grandchimeraCounter++;
-			if (gooScore() >= 8)
-				grandchimeraCounter++;
 			
 			End("Player","racialScore");
 			return grandchimeraCounter;
@@ -6941,11 +6873,16 @@ use namespace CoC;
 				
 				var oldHunger:Number = hunger;
 				var weightChange:int = 0;
+				var overeatingLimit:int = 0;
 				
+				overeatingLimit += 10;/*(perki muszą dać zwiekszenie limitu przejedzenia sie bez przyrostu wagi powyżej 10 ^^)
+				overeatingLimit += 10;overating perk chyba
+				overeatingLimit += 20;overeating ex perk chyba
+				overeatingLimit += 40;overeating su perk chyba*/
 				hunger += amnt;
 				if (hunger > maxHunger())
 				{
-					while (hunger > (maxHunger() + 10) && !SceneLib.prison.inPrison) {
+					while (hunger > (maxHunger() + overeatingLimit) && !SceneLib.prison.inPrison) {
 						weightChange++;
 						hunger -= 10;
 					}
@@ -6966,6 +6903,9 @@ use namespace CoC;
 				EngineCore.awardAchievement("Tastes Like Chicken ", kACHIEVEMENTS.REALISTIC_TASTES_LIKE_CHICKEN);
 				if (oldHunger < 1 && hunger >= 100) EngineCore.awardAchievement("Champion Needs Food Badly ", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD);
 				if (oldHunger >= 90) EngineCore.awardAchievement("Glutton ", kACHIEVEMENTS.REALISTIC_GLUTTON);
+				if (oldHunger >= 240) EngineCore.awardAchievement("Epic Glutton ", kACHIEVEMENTS.REALISTIC_EPIC_GLUTTON);
+				if (oldHunger >= 490) EngineCore.awardAchievement("Legendary Glutton ", kACHIEVEMENTS.REALISTIC_LEGENDARY_GLUTTON);
+				if (oldHunger >= 990) EngineCore.awardAchievement("Mythical Glutton ", kACHIEVEMENTS.REALISTIC_MYTHICAL_GLUTTON);
 				if (hunger > oldHunger) CoC.instance.mainView.statsView.showStatUp("hunger");
 				dynStats("lus", 0, "scale", false);
 				EngineCore.statScreenRefresh();
@@ -9193,6 +9133,7 @@ use namespace CoC;
 				removeStatusEffect(StatusEffects.DriderIncubusVenom);
 			}
 			if(statusEffectv4(StatusEffects.CombatFollowerAlvina) > 0) addStatusValue(StatusEffects.CombatFollowerAlvina, 4, -1);
+			if(statusEffectv4(StatusEffects.CombatFollowerAurora) > 0) addStatusValue(StatusEffects.CombatFollowerAurora, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerAyane) > 0) addStatusValue(StatusEffects.CombatFollowerAyane, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerEtna) > 0) addStatusValue(StatusEffects.CombatFollowerEtna, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerDiana) > 0) addStatusValue(StatusEffects.CombatFollowerDiana, 4, -1);

@@ -253,8 +253,8 @@ public class CoC extends MovieClip
         //model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8n2";
-			version = ver + " (<b>Goblins Overhaul (p.2), Alvina (p.2), Siegweird (p.2), character viewer update (p.2), bugfixes</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8n3";
+			version = ver + " (<b>Aurora, Aether Twins and bugfixing</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

@@ -57,11 +57,14 @@ public class Questlog extends BaseContent
 			if (flags[kFLAGS.DEN_OF_DESIRE_QUEST] == 2) outputText("Completed (Reward taken)");
 			else if (SceneLib.dungeons.checkDenOfDesireClear()) outputText("Completed");
 			else if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 1) outputText("In Progress");
-			else outputText("Not Started");/*
+			else outputText("Not Started");
 			outputText("\n\n<u><b>River Dungeon Exploration</b></u>");
 			outputText("\n<b>1st Floor:</b> ");
-			if (SceneLib.dungeons.checkRiverDungeon1stFloorClear()) outputText("Completed");
-			else outputText("Not Started/In Progress");
+			if (SceneLib.dungeons.checkRiverDungeon1stFloorClear()) {
+				if (player.hasStatusEffect(StatusEffects.RiverDungeonFloorRewards)) outputText("Completed (Reward taken)");
+				else outputText("Completed");
+			}
+			else outputText("Not Started/In Progress");/*
 			outputText("\n<i><b>2nd Floor:</b> Soon</i>");*/
 			outputText("\n\n<u><b>Adventure Guild Quests</b></u>");
 			outputText("\n<b>Imps Hunt:</b> ");
@@ -112,6 +115,8 @@ public class Questlog extends BaseContent
 			if (SceneLib.dungeons.checkLethiceStrongholdClear() && flags[kFLAGS.LETHICE_DEFEATED] < 2) addButton(2, "Stronghold", takeRewardForStronghold);
 			if (SceneLib.dungeons.checkSandCaveClear() && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] < 2) addButton(5, "Sand Cave", takeRewardForSandCave);
 			if (SceneLib.dungeons.checkPhoenixTowerClear() && flags[kFLAGS.CLEARED_HEL_TOWER] < 2) addButton(6, "Phoenix Tower", takeRewardForPhoenixTower);
+			if (SceneLib.dungeons.checkRiverDungeon1stFloorClear() && !player.hasStatusEffect(StatusEffects.RiverDungeonFloorRewards)) addButton(8, "River Dungeon", takeRewardForRiverDungeon1stFloor).hint("1st floor");
+			//button 9 - Ebon Labyrinth
 			if (SceneLib.dungeons.checkHiddenCaveClear() && flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 6) addButton(10, "Hidden Cave", takeRewardForHiddenCave);
 			if (SceneLib.dungeons.checkHiddenCaveHiddenStageClear() && flags[kFLAGS.HIDDEN_CAVE_BOSSES] < 3) addButton(10, "Hidden C.(HS)", takeRewardForHiddenCaveHiddenStage).hint("Hidden Cave (Hidden Stage bonus)");
 			if (SceneLib.dungeons.checkDenOfDesireClear() && flags[kFLAGS.DEN_OF_DESIRE_QUEST] < 2) addButton(11, "Den of Desire", takeRewardForDenOfDesire);
@@ -167,6 +172,16 @@ public class Questlog extends BaseContent
 			player.statPoints = player.statPoints + 10;
 			statScreenRefresh();
 			flags[kFLAGS.CLEARED_HEL_TOWER] = 2;
+			doNext(accessQuestlogMainMenu);
+		}
+		public function takeRewardForRiverDungeon1stFloor():void {
+			clearOutput();
+			outputText("Your contribution in changing Mareth have been noticed.\n\n");
+			outputText("<b>Gained 1 perk points and 5 stat points</b>");
+			player.perkPoints = player.perkPoints + 1;
+			player.statPoints = player.statPoints + 5;
+			statScreenRefresh();
+			player.createStatusEffect(StatusEffects.RiverDungeonFloorRewards,1,0,0,0);
 			doNext(accessQuestlogMainMenu);
 		}
 		public function takeRewardForHiddenCave():void {

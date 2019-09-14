@@ -320,10 +320,10 @@ public class HiddenCave extends DungeonAbstractContent
 			outputText("<b><u>Stone Staircase (Basement)</u></b>\n");
 			outputText("In front of you is a stairway leading back to the upper level.");
 			dungeons.setDungeonButtons(roomTunnel00, null, null, null);
-			addButton(5, "Upstairs", roomSStaircase);/*
-			if (player.hasKeyItem("Jade Talisman") >= 0 && flags[kFLAGS.AURORA_LVL] == 1) {
+			addButton(5, "Upstairs", roomSStaircase);
+			if (player.hasKeyItem("Jade Talisman") >= 0 || flags[kFLAGS.AURORA_LVL] == 0.2) {
 				addButton(0, "J.Talisman", putInTheJadeTalisman);
-			}*/
+			}
 		}
 		public function roomTunnel00():void {
 			dungeonLoc = 56;
@@ -485,8 +485,49 @@ public class HiddenCave extends DungeonAbstractContent
 		
 		private function putInTheJadeTalisman():void {
 			clearOutput();
-			outputText("There is a loud rumbling from the direction of the tunnel...");
-			player.removeKeyItem("Jade Talisman");
+			if (flags[kFLAGS.AURORA_LVL] == 0.2) outputText("When you return to the chamber again, it lights up like last time. And the chained golem in the middle of it just looks at you for a long moment before asking. \"<i>Master?</i>\"\n\n");
+			else {
+				outputText("Coming back to the cave, you stand before a wall you’ve seen in your dreams and it indeed has some sort of crack. A crack you swear you didn’t see last time you were here. Holding the talisman in your hand, you slowly go forward, step by step towards the wall until you stop before it. Looking at the crack and the jade talisman in your hand, it looks like it may fit pretty well into that crack. ");
+				outputText("So was it actually some sort of key? But why did that dragon-boy call it severing karma by losing it? There are many questions and only one way to find any answers. With a short click you insert the talisman into the crack and steps back to see what will happen.\n\n");
+				player.removeKeyItem("Jade Talisman");
+				outputText("And nothing happens... for minute or two. When you start to doubt if it was the key...The wall gently trembles as it opens itself, revealing another room behind it. Almost fully covered in shadows and the only light that disperses the darkness is the light coming through the opened doors. Keeping your guard up you slowly enter inside. While your eyes slowly adapt to the darkness, ");
+				outputText("you see a pair of faint glowing green lights deeper inside. The moment when you look directly in the direction of the glowing lights, your hand touches something. Looking to the side you see it's something that begins in the nearby floor and runs across the room towards the direction of the glowing green lights. From touch, it feels like some sort of metal and it’s shape ");
+				outputText("looks like some sort of thick chain. Looking carefully around you, you start to distinguish other objects in darkness that seems to start on the nearby floor and they all go towards one point. They also look like chains but why are they here?\n\n");
+				outputText("Thinking over this probably important question, you seem to step on something, moments later the floor near your legs start to shine with some sort of runes. One after another, new runes start to glow, spreading outwards from your position toward the sides of the chamber. After a moment or two when you stop moving, preparing for what may come, some of runes start to glow on the walls. ");
+				outputText("Then you see some shadow before you or more accurately, you cast a shadow on the nearby wall due to a new source of light lightening up somewhere behind you. This causes the gradual vanishing of shadows and darkness inside, revealing the place where before you’ve seen glowing green lights.\n\n");
+				outputText("The source of this light gradually reveals itself to be ");
+				if (player.tallness < 72) outputText("towering above you");
+				else if (player.tallness >= 72 && player.tallness < 85) outputText("closely to your own height");
+				else outputText("shorter than you");
+				outputText(", a crouching figure sitting on some sort of wide pillar. It has a pair of quite big wings that stick out a bit from behind and on the left side you see something that looks like an end of a tail. When another two sources of light light up on the sides of the room, you can see the beings shape more clearly and it seems it's female or so you suspect due her chest rivaling many lower succubi ");
+				outputText("with its size, emphasized by fact she holds her hands to her sides, further squeezing them between them. What you took before as the dark grey color of her skin, after the room got brighter, it turns out to be light turquoise with blue markings and a white belly. Her face and head looks like one of those bat golems you fought before but looking much more mature and the pair of glowing lights ");
+				outputText("was her glowing eyes. She still stays motionlessly despite you being here for a longer moment, so you cautiously make a  few steps closer. Then you notice above her shapeful chest some mark. With all the light present in chamber it looks like black tattoo of the letter A above 3 lines, forming the Roman numeral 3.\n\n");
+				outputText("\"<i>Master?</i>\" your examination is interrupted when a low and much more mature voice than that of the other bat golems resounds in the chamber. To your surprise, sitting on the pedestal, the figure’s head is now looking at you with her glowing eyes, which dim a bit to show her normal looking green eyes without that glow that made them look alien a moment ago. What will you do now?\n\n");
+			}
+			menu();
+			if (silly()) addButton(1, "FTSIO", putInTheJadeTalisman1).hint("Fuck This Shit I'm out");
+			else addButton(1, "No", putInTheJadeTalisman1);
+			if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0 || player.hasKeyItem("Adventurer Guild: Iron plate") >= 0) addButton(3, "Yes", putInTheJadeTalisman2);
+			else addButtonDisabled(3, "Yes", "Req. to have Adventurer Guild plate.");
+		}
+		private function putInTheJadeTalisman1():void {
+			outputText("Wait she thinks you're her master? But wouldn't that be that weird and arrogant dragon boy?\n\n");
+			outputText("\"<i>No. He just sent me to check on you as he's busy,</i>\" you say as a fast put together lie. \"<i>Since I see you're okay,  I'll go back to report this.</i>\" You add and trying to not look suspicious, you turn around and slowly walks toward exit.\n\n");
+			outputText("She doesn’t say anything more and the lights in the chamber starts to slowly dim, letting shadows and darkness once again reclaim this place.\n\n");
+			flags[kFLAGS.AURORA_LVL] = 0.2;
+			doNext(playerMenu);
+		}
+		private function putInTheJadeTalisman2():void {
+			outputText("Wait she think you're her master? But wouldn't that be that weird and arrogant dragon boy?\n\n");
+			outputText("\"<i>No. He ran away like a coward</i>\" you speak the truth. Hearing this she seems stay silent for a longer moment before speaking again. \"<i>Are you my new master?</i>\"\n\n");
+			outputText("New master? Confused, you ask her what she means. She straightforwardly replies. \"<i>Since you came here, which required Master’s jade talisman, Master wouldn't give it to noone not his servant, so that makes you my new master, right?</i>\"\n\n");
+			outputText("You think for a moment. She looks like some sort of golem so having one in camp wouldn't be harmful. \"<i>Yes I’m your new Master</i>\" you reply with a confident voice.\n\n");
+			outputText("\"<i>Then would you set me free? Or should I stay chained here?</i>\" she asks. And that makes you realize you had no idea that she was chained here.\n\n");
+			outputText("\"<i>Stay here for a bit longer, I need to do few things first before I can take you with me</i>\" having said this, you turn around and start walking toward the exit of the room.\n\n");
+			outputText("\"<i>Yes Master.</i>\" Her words resounds before darkness starts to claim the chamber once again.\n\n");
+			outputText("After the doors close behind you, you start to think. Who could be helpful to remove those chains? Despite looking like she's some sort of sex golem, she may have other uses too. Few moments later some place comes to your mind. The Adventurer’s Guild. ");
+			outputText("You took and completed some quests for them but would they accept your request for finding a person to solve this problem? It's always worth it to give it a try.\n\n");
+			flags[kFLAGS.AURORA_LVL] = 0.3;
 			doNext(playerMenu);
 		}
 		private function pullTheLever():void {

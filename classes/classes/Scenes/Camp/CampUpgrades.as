@@ -178,6 +178,10 @@ private function doWoodStorageWork():void {
 		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
+	if (flags[kFLAGS.AURORA_LVL] >= 1) {
+		helperArray[helperArray.length] = "Aurora";
+		helpers++;
+	}
 	flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 250;
 	flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 250;
 	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 100;
@@ -241,6 +245,10 @@ private function doStoneStorageWork():void {
 	}
 	if (flags[kFLAGS.ANT_KIDS] > 100) {
 		helperArray[helperArray.length] = "group of your ant children";
+		helpers++;
+	}
+	if (flags[kFLAGS.AURORA_LVL] >= 1) {
+		helperArray[helperArray.length] = "Aurora";
 		helpers++;
 	}
 	flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 350;
@@ -345,6 +353,10 @@ private function do1stWarehouse1Work():void {
 		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
+	if (flags[kFLAGS.AURORA_LVL] >= 1) {
+		helperArray[helperArray.length] = "Aurora";
+		helpers++;
+	}
 	flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 200;
 	flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 100;
 	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 40;
@@ -413,6 +425,10 @@ private function do1stWarehouse2Work():void {
 		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
+	if (flags[kFLAGS.AURORA_LVL] >= 1) {
+		helperArray[helperArray.length] = "Aurora";
+		helpers++;
+	}
 	flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 400;
 	flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 300;
 	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 140;
@@ -479,6 +495,10 @@ private function doGranary1Work():void {
 	}
 	if (flags[kFLAGS.ANT_KIDS] > 100) {
 		helperArray[helperArray.length] = "group of your ant children";
+		helpers++;
+	}
+	if (flags[kFLAGS.AURORA_LVL] >= 1) {
+		helperArray[helperArray.length] = "Aurora";
 		helpers++;
 	}
 	flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 200;
@@ -550,6 +570,10 @@ private function doGranary2Work():void {
 		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
+	if (flags[kFLAGS.AURORA_LVL] >= 1) {
+		helperArray[helperArray.length] = "Aurora";
+		helpers++;
+	}
 	flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 300;
 	flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 225;
 	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 105;
@@ -616,6 +640,10 @@ private function do2ndWarehouse1Work():void {
 	}
 	if (flags[kFLAGS.ANT_KIDS] > 100) {
 		helperArray[helperArray.length] = "group of your ant children";
+		helpers++;
+	}
+	if (flags[kFLAGS.AURORA_LVL] >= 1) {
+		helperArray[helperArray.length] = "Aurora";
 		helpers++;
 	}
 	flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 250;
@@ -685,6 +713,10 @@ private function do2ndWarehouse2Work():void {
 	}
 	if (flags[kFLAGS.ANT_KIDS] > 100) {
 		helperArray[helperArray.length] = "group of your ant children";
+		helpers++;
+	}
+	if (flags[kFLAGS.AURORA_LVL] >= 1) {
+		helperArray[helperArray.length] = "Aurora";
 		helpers++;
 	}
 	flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 400;
@@ -782,6 +814,10 @@ private function doBuildStructure():void {
 		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
+	if (flags[kFLAGS.AURORA_LVL] >= 1) {
+		helperArray[helperArray.length] = "Aurora";
+		helpers++;
+	}
 	flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 200;
 	flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 500;
 	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 100;
@@ -845,6 +881,10 @@ private function doBuildAltair():void {
 	}
 	if (flags[kFLAGS.ANT_KIDS] > 100) {
 		helperArray[helperArray.length] = "group of your ant children";
+		helpers++;
+	}
+	if (flags[kFLAGS.AURORA_LVL] >= 1) {
+		helperArray[helperArray.length] = "Aurora";
 		helpers++;
 	}
 	flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 100;
@@ -939,6 +979,10 @@ private function doDigAPoolWork():void {
 		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
+	if (flags[kFLAGS.AURORA_LVL] >= 1) {
+		helperArray[helperArray.length] = "Aurora";
+		helpers++;
+	}
 	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 500;
 	clearOutput();
 	outputText("You proceed to dig a proper pool and line it and the border with rocks.");
@@ -1000,6 +1044,10 @@ private function doAddAWoodenWallsWork():void {
 	}
 	if (flags[kFLAGS.ANT_KIDS] > 100) {
 		helperArray[helperArray.length] = "group of your ant children";
+		helpers++;
+	}
+	if (flags[kFLAGS.AURORA_LVL] >= 1) {
+		helperArray[helperArray.length] = "Aurora";
 		helpers++;
 	}
 	flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 500;

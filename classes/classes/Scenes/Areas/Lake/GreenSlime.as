@@ -17,29 +17,31 @@ public class GreenSlime extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.", true);
+			outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.");
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) SceneLib.combat.cleanupAfterCombatImpl();
-			var temp3:Function = null;
-			if (player.pcCanUseUniqueSexScene()) temp3 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
-			//Boobfeed.
-			else if (player.hasStatusEffect(StatusEffects.Feeder) && flags[kFLAGS.SFW_MODE] <= 0) {
-				//Eligable to rape
-				if(player.lust >= 33 && player.gender > 0) {
-					outputText("\n\nYou're horny enough to try and rape it, though you'd rather see how much milk you can squirt into it.  What do you do?");
-					EngineCore.simpleChoices("B.Feed",SceneLib.lake.greenSlimeScene.rapeOozeWithMilk,"Rape",SceneLib.lake.greenSlimeScene.slimeVictoryRape,"",null,"U. Sex Scenes",temp3,"Leave",SceneLib.combat.cleanupAfterCombatImpl);
+			else {
+				var temp3:Function = null;
+				if (player.pcCanUseUniqueSexScene()) temp3 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
+				//Boobfeed.
+				else if (player.hasStatusEffect(StatusEffects.Feeder) && flags[kFLAGS.SFW_MODE] <= 0) {
+					//Eligable to rape
+					if(player.lust >= 33 && player.gender > 0) {
+						outputText("\n\nYou're horny enough to try and rape it, though you'd rather see how much milk you can squirt into it.  What do you do?");
+						EngineCore.simpleChoices("B.Feed",SceneLib.lake.greenSlimeScene.rapeOozeWithMilk,"Rape",SceneLib.lake.greenSlimeScene.slimeVictoryRape,"",null,"U. Sex Scenes",temp3,"Leave",SceneLib.combat.cleanupAfterCombatImpl);
+					}
+					//Rapes not on the table.
+					else {
+						outputText("\n\nYour nipples ache with the desire to forcibly breastfeed the gelatinous beast.  Do you?");
+						EngineCore.doYesNo(SceneLib.lake.greenSlimeScene.rapeOozeWithMilk,SceneLib.combat.cleanupAfterCombatImpl);
+					}
 				}
-				//Rapes not on the table.
-				else {
-					outputText("\n\nYour nipples ache with the desire to forcibly breastfeed the gelatinous beast.  Do you?");
-					EngineCore.doYesNo(SceneLib.lake.greenSlimeScene.rapeOozeWithMilk,SceneLib.combat.cleanupAfterCombatImpl);
+				//Not a breastfeeder
+				else if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
+					outputText("  Sadly you realize your own needs have not been met.  Of course, you could always play with the poor thing... Do you rape it?");
+					EngineCore.simpleChoices("Rape",SceneLib.lake.greenSlimeScene.slimeVictoryRape,"",null,"",null,"U. Sex Scenes",temp3,"Leave",SceneLib.combat.cleanupAfterCombatImpl);
 				}
+				else SceneLib.combat.cleanupAfterCombatImpl();
 			}
-			//Not a breastfeeder
-			else if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
-				outputText("  Sadly you realize your own needs have not been met.  Of course, you could always play with the poor thing... Do you rape it?");
-				EngineCore.simpleChoices("Rape",SceneLib.lake.greenSlimeScene.slimeVictoryRape,"",null,"",null,"U. Sex Scenes",temp3,"Leave",SceneLib.combat.cleanupAfterCombatImpl);
-			}
-			else SceneLib.combat.cleanupAfterCombatImpl();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void

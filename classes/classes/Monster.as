@@ -326,6 +326,16 @@ import flash.utils.getQualifiedClassName;
 			else if (this.HP > maxHP()) this.HP = maxHP();
 		}
 
+		public function addSoulforce(soulforce:Number):void{
+			this.soulforce += soulforce;
+			if (this.soulforce > maxSoulforce()) this.soulforce = maxSoulforce();
+		}
+
+		public function addMana(mana:Number):void{
+			this.mana += mana;
+			if (this.mana > maxMana()) this.mana = maxMana();
+		}
+
 		protected override function maxLust_base():Number {
 			//Base lust
 			var temp:Number = 70 + this.bonusLust;
@@ -2970,6 +2980,46 @@ import flash.utils.getQualifiedClassName;
 					outputText(" some HP! <b>(<font color=\"#008000\">+" + temp2 + "</font>)</b>.\n\n");
 				}
 				addHP(temp2);
+			}
+			//soulforce and mana regeneration for monsters
+			if (findPerk(PerkLib.JobSoulCultivator) >= 0 && this.soulforce < maxSoulforce()) {
+				var soulforceRecovery:Number = 0;
+				var soulforceRecoveryMulti:Number = 1;
+				if (findPerk(PerkLib.JobSoulCultivator) >= 0) soulforceRecovery += 4;
+				if (findPerk(PerkLib.SoulApprentice) >= 0) soulforceRecovery += 2;
+				if (findPerk(PerkLib.SoulPersonage) >= 0) soulforceRecovery += 2;
+				if (findPerk(PerkLib.SoulWarrior) >= 0) soulforceRecovery += 2;
+				if (findPerk(PerkLib.SoulSprite) >= 0) soulforceRecovery += 3;
+				if (findPerk(PerkLib.SoulScholar) >= 0) soulforceRecovery += 3;
+				if (findPerk(PerkLib.SoulElder) >= 0) soulforceRecovery += 3;
+				if (findPerk(PerkLib.SoulExalt) >= 0) soulforceRecovery += 4;
+				if (findPerk(PerkLib.SoulOverlord) >= 0) soulforceRecovery += 4;
+				if (findPerk(PerkLib.SoulTyrant) >= 0) soulforceRecovery += 4;
+				if (findPerk(PerkLib.SoulKing) >= 0) soulforceRecovery += 5;
+				if (findPerk(PerkLib.SoulEmperor) >= 0) soulforceRecovery += 5;
+				if (findPerk(PerkLib.SoulAncestor) >= 0) soulforceRecovery += 5;
+				if (findPerk(PerkLib.DaoistCultivator) >= 0) soulforceRecoveryMulti += 0.5;
+				soulforceRecovery *= soulforceRecoveryMulti;
+				addSoulforce(soulforceRecovery);
+			}
+			if (findPerk(PerkLib.JobSorcerer) >= 0 && this.mana < maxMana()) {
+				var manaRecovery:Number = 0;
+				var manaRecoveryMulti:Number = 1;
+				if (findPerk(PerkLib.JobSorcerer) >= 0) manaRecovery += 10;
+				if (findPerk(PerkLib.ArcaneRegenerationMinor) >= 0) manaRecovery += 5;
+				if (findPerk(PerkLib.ArcaneRegenerationMajor) >= 0) manaRecovery += 10;
+				if (findPerk(PerkLib.ArcaneRegenerationEpic) >= 0) manaRecovery += 15;
+				if (findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0) manaRecovery += 20;
+				if (findPerk(PerkLib.GreyMage) >= 0) manaRecoveryMulti += 0.5;
+				if (findPerk(PerkLib.GreyArchmage) >= 0) manaRecoveryMulti += 1.5;
+				if (findPerk(PerkLib.ManaAffinityI) >= 0) manaRecoveryMulti += 0.2;
+				if (findPerk(PerkLib.ManaAffinityII) >= 0) manaRecoveryMulti += 0.2;
+				if (findPerk(PerkLib.ManaAffinityIII) >= 0) manaRecoveryMulti += 0.2;
+				if (findPerk(PerkLib.ManaAffinityIV) >= 0) manaRecoveryMulti += 0.2;
+				if (findPerk(PerkLib.ManaAffinityV) >= 0) manaRecoveryMulti += 0.2;
+				if (findPerk(PerkLib.ManaAffinityVI) >= 0) manaRecoveryMulti += 0.2;
+				manaRecovery *= manaRecoveryMulti;
+				addMana(manaRecovery);
 			}
 		}
 		
