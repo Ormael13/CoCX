@@ -14,7 +14,35 @@ use namespace CoC;
 
 	public class Aurora extends Monster
 	{
-		
+		public function tripletrust():void {
+			outputText("Aurora ready her claws and prepare to thrust it towards you. ");
+			if (player.getEvasionRoll()) outputText(" You slide underneath the thrust!");
+			else {
+				this.soulforce -= 30;
+				var damage:Number = 0;
+				damage += this.str;
+				damage += eBaseStrengthDamage() * 0.5;
+				if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.04));
+				else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (3 + ((player.weaponAttack - 50) * 0.035));
+				else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (4.75 + ((player.weaponAttack - 100) * 0.03));
+				else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (6.25 + ((player.weaponAttack - 150) * 0.025));
+				else damage *= (7.5 + ((player.weaponAttack - 200) * 0.02));
+				var crit:Boolean = false;
+				var critChance:int = 5;
+				if (this.inte <= 200) critChance += this.inte / 10;
+				if (this.inte > 200) critChance += 20;
+				if (rand(100) < critChance) {
+					crit = true;
+					damage *= 1.75;
+				}
+				damage = Math.round(damage);
+				outputText(" Her hand hits you thrice dealing ");
+				damage = player.takePhysDamage(damage, true);
+				outputText(" damage!");
+				if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+			}
+			
+		}
 		
 		public function clawstrike():void {
 			outputText("Aurora thrust her hand at you.");
@@ -23,7 +51,7 @@ use namespace CoC;
 			else
 			{
 				var damage:Number = 0;
-				var storeTou:Number = tou;
+				var storeTou:Number = tou;//obniża tou dla ataku na gracza do poziomu str
 				tou = str;
 				damage += this.str;
 				damage += eBaseStrengthDamage() * 0.5;
@@ -49,7 +77,7 @@ use namespace CoC;
 		override protected function performCombatAction():void
 		{
 			if (flags[kFLAGS.AURORA_LVL] >= 10) {
-				var choice2:Number = rand(2);
+				var choice2:Number = rand(3);
 				if (choice2 == 0) {
 					eAttack();
 					if (rand(3) > 0) {
@@ -72,11 +100,14 @@ use namespace CoC;
 						clawstrike();
 					}
 				}
-				//if (choice2 == 2) x
+				if (choice2 == 2) {
+					if (this.soulforce >= 30) tripletrust();
+					else clawstrike();
+				}
 				//if (choice2 == 3) x
 			}
 			else if (flags[kFLAGS.AURORA_LVL] >= 6 && flags[kFLAGS.AURORA_LVL] < 10) {
-				var choice1:Number = rand(2);
+				var choice1:Number = rand(3);
 				if (choice1 == 0) {
 					eAttack();
 					if (rand(3) == 0) {
@@ -91,24 +122,31 @@ use namespace CoC;
 						clawstrike();
 					}
 				}
-				//if (choice1 == 2) x
+				if (choice1 == 2) {
+					if (this.soulforce >= 30) tripletrust();
+					else clawstrike();
+				}
 			}
 			else {
-				var choice0:Number = rand(2);
+				var choice0:Number = rand(3);
 				if (choice0 == 0) eAttack();
 				if (choice0 == 1) clawstrike();
+				if (choice0 == 2) {
+					if (this.soulforce >= 30) tripletrust();
+					else clawstrike();
+				}
 			}
 		}
-		/*
+		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			darkelf.wonWithDarkElf();
+			SceneLib.auroraFollower.AuroraLostSparring();
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			darkelf.lostToDarkElf();
+			SceneLib.auroraFollower.AuroraWonSparring();
 		}
-		*/
+		
 		public function Aurora() 
 		{
 			if (flags[kFLAGS.AURORA_LVL] == 1) {
@@ -244,7 +282,7 @@ use namespace CoC;
 			this.a = "";
 			this.short = "Aurora";
 			this.imageName = "aurora";
-			this.long = "Before you stands Aurora at 9 feet tall, and has an overall thicker body than most golems. She has HHH cup breasts. Right above where her cleavage begins, is a black tattoo with the letter A above 3 lines, forming the Roman numeral 3. Her skin is a light turquoise with blue markings all over, and a white belly. Her hair is a navy blue, with green eyes on a bat-like face. Two huge bat wings come from her back, and she has a long tail ending in blue fur. Around her neck is a mane of light blue fur. Two huge bat ears swivel around from the top of her head, detecting all noises in the area.";
+			this.long = "Before you stands Aurora at 9 feet tall, she has an overall thicker body than most golems. Right above where her cleavage begins, is a black tattoo with the letter A above 3 lines, forming the Roman numeral 3. Her skin is a light turquoise with blue markings all over and a white belly. Two huge bat wings come from her back, and she has a long tail ending in blue fur. Around her neck is a mane of light blue fur. Two huge bat ears swivel around from the top of her head, detecting all noises in the area.";
 			this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 30, 0, 0, 0);
@@ -272,51 +310,52 @@ use namespace CoC;
 			this.createPerk(PerkLib.Sentience, 0, 0, 0, 0);
 			this.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
 			if (flags[kFLAGS.AURORA_LVL] >= 2) {
-				this.createPerk(PerkLib.GoliathI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulApprentice, 0, 0, 0, 0);
 				this.createPerk(PerkLib.UnlockArdor, 0, 0, 0, 0);
+				this.createPerk(PerkLib.BodyCultivator, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 3) {
-				this.createPerk(PerkLib.SoulApprentice, 0, 0, 0, 0);
+				this.createPerk(PerkLib.FleshBodyApprenticeStage, 0, 0, 0, 0);
 				this.createPerk(PerkLib.BasicSelfControl, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 4) {
-				this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulPersonage, 0, 0, 0, 0);
 				this.createPerk(PerkLib.JobBeastWarrior, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 5) {
-				this.createPerk(PerkLib.SoulPersonage, 0, 0, 0, 0);
+				this.createPerk(PerkLib.ClawTraining, 0, 0, 0, 0);
 				this.createPerk(PerkLib.HalfStepToImprovedSelfControl, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 6) {
 				this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
-				this.createPerk(PerkLib.ClawTraining, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulWarrior, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 7) {
-				this.createPerk(PerkLib.SoulWarrior, 0, 0, 0, 0);
-				this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
+				this.createPerk(PerkLib.GoliathI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 8) {
+				this.createPerk(PerkLib.SoulSprite, 0, 0, 0, 0);
 				this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
-				this.createPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 9) {
-				this.createPerk(PerkLib.SoulSprite, 0, 0, 0, 0);
+				this.createPerk(PerkLib.FleshBodyWarriorStage, 0, 0, 0, 0);
 				this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 10) {
-				this.createPerk(PerkLib.FeralArmor, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulScholar, 0, 0, 0, 0);
 				this.createPerk(PerkLib.ExtraClawAttack, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 11) {
-				this.createPerk(PerkLib.SoulScholar, 0, 0, 0, 0);
+				this.createPerk(PerkLib.FeralArmor, 0, 0, 0, 0);
 				this.createPerk(PerkLib.EpicToughness, 0, 0, 0, 0);//czy coś innego związanego z spe/tou/str/lib statami jako perk?
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 12) {
+				this.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
 				this.createPerk(PerkLib.EpicSpeed, 0, 0, 0, 0);//czy coś innego związanego z spe/tou/str/lib statami jako perk?
-				this.createPerk(PerkLib.EpicStrength, 0, 0, 0, 0);//czy coś innego związanego z spe/tou/str/lib statami jako perk?
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 13) {
-				this.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EpicStrength, 0, 0, 0, 0);//czy coś innego związanego z spe/tou/str/lib statami jako perk?
 				this.createPerk(PerkLib.EpicLibido, 0, 0, 0, 0);//czy coś innego związanego z spe/tou/str/lib statami jako perk?
 			}
 			//prestige job sentinel? next step after epic tou/spe/str/lib?

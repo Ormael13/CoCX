@@ -367,7 +367,7 @@ public function alvinaCampAdvancedStudy():void
 		}
 		else {
 			outputText("You ask your mentor for more advanced applications of black magic but she replies in the negative.\n\n");
-			outputText("\"<iWhile there is one last thing I could teach you in the dark arts, I'm afraid you are still too pure for this knowledge. Come back when your soul is fully stained.</i>\"\n\n");
+			outputText("\"<i>While there is one last thing I could teach you in the dark arts, I'm afraid you are still too pure for this knowledge. Come back when your soul is fully stained.</i>\"\n\n");
 		}
 		doNext(camp.campFollowers);
 		cheatTime2(5);

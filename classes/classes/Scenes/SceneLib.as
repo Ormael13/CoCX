@@ -89,6 +89,8 @@ public class SceneLib {
 	
 	public static var displacerbeastScene:DisplacerBeastScene = new DisplacerBeastScene();
 
+    public static var aethertwins:AetherTwinsFollowers = new AetherTwinsFollowers();
+
     public static var alvinaFollower:AlvinaFollower = new AlvinaFollower();
 
     public static var amilyScene:AmilyScene = new AmilyScene();
@@ -98,6 +100,8 @@ public class SceneLib {
     public static var ariaScene:AriaFollower = new AriaFollower();
 
     public static var arianScene:ArianScene = new ArianScene();
+
+    public static var auroraFollower:AuroraFollower = new AuroraFollower();
 
     public static var ayaneFollower:AyaneFollower = new AyaneFollower();
 

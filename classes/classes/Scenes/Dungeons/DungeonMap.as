@@ -633,7 +633,7 @@ public class DungeonMap extends BaseContent
 				}
 				else if (flags[kFLAGS.HIDDEN_CAVE_2ND_FLOOR] > 0) {
 					if (DungeonAbstractContent.dungeonLoc == 55) {
-						rawOutputText(", Stone Staircase Basement<");
+						rawOutputText(", Stone Staircase Basement");
 						rawOutputText("\n    [ ]    ");
 						rawOutputText("\n     |     ");
 						rawOutputText("\n[ ]—[ ]—[ ]");
@@ -1137,6 +1137,21 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
 				}*/
+			}
+			else if (DungeonAbstractContent.dungeonLoc >= 131 && DungeonAbstractContent.dungeonLoc < 68) { //Den of Desire
+				rawOutputText("Ebon Labyrinth");
+				if (DungeonAbstractContent.dungeonLoc == 131) {
+					rawOutputText(", Corridor");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n   —[P]—   ");
+					rawOutputText("\n     |     ");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 132) {
+					rawOutputText(", Corridor");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n   —[P]—   ");
+					rawOutputText("\n     |     ");
+				}
 			}
 			
 			

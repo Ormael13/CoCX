@@ -64,6 +64,7 @@ use namespace CoC;
 		public var dungeonHC:HiddenCave = new HiddenCave();
 		public var dungeonDD:DenOfDesire = new DenOfDesire();
 		public var dungeonAP:AnzuPalace = new AnzuPalace();
+		public var dungeonEL:EbonLabyrinth = new EbonLabyrinth();
 		public var EvangelineF:EvangelineFollower = new EvangelineFollower();
 		public var HolliPure:HolliPureScene = new HolliPureScene();
 		public var templeofdivine:TempleOfTheDivine = new TempleOfTheDivine();
@@ -953,8 +954,11 @@ public function followersCount():Number {
 	var counter:Number = 0;
 	if (flags[kFLAGS.ALVINA_FOLLOWER] > 12) counter++;
 	if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3) counter++;
+	if (flags[kFLAGS.AURORA_LVL] >= 1) counter++;
 	if (emberScene.followerEmber()) counter++;
 	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
+	if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] > 0) counter++;
+	if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] > 0) counter++;
 	if (player.hasStatusEffect(StatusEffects.PureCampJojo)) counter++;
 	if (player.hasStatusEffect(StatusEffects.CampRathazul)) counter++;
 	if (followerShouldra()) counter++;
@@ -1057,6 +1061,7 @@ public function maleNpcsHotBathCount():Number {
 public function sparableCampMembersCount():Number {
 	var counter:Number = 0;
 	if (emberScene.followerEmber()) counter++;
+	if (flags[kFLAGS.AURORA_LVL] >= 1) counter++;
 	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
 	if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1) counter++;
 	if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
@@ -1483,6 +1488,14 @@ public function campFollowers(descOnly:Boolean = false):void {
         CoC.instance.inCombat = false;
         //ADD MENU FLAGS/INDIVIDUAL FOLLOWER TEXTS
 		menu();
+	}
+	//Aether Twins
+	if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] > 0 || flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] > 0) {
+		buttons.add( "Aether Twins", SceneLib.aethertwins.aethertwinsFollowers).hint("Visit Aether twins the sentient weapons. You can even take and wear them as weapon and shield if you like.");
+	}
+	//Aurora
+	if (flags[kFLAGS.AURORA_LVL] >= 1) {
+		buttons.add( "Aurora", SceneLib.auroraFollower.auroraCampMenu).hint("Check up on Aurora.");
 	}
 	//Alvina
 	if (flags[kFLAGS.ALVINA_FOLLOWER] > 12) {
@@ -2752,6 +2765,7 @@ private function dungeons():void {
 	//Side dungeons
 	if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(5, "Desert Cave", dungeonS.enterDungeon).hint("Visit the cave you've found in the desert." + (flags[kFLAGS.SAND_WITCHES_COWED] + flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0 ? "\n\nFrom what you've known, this is the source of the Sand Witches." : "") + (SceneLib.dungeons.checkSandCaveClear() ? "\n\nCLEARED!" : ""));
 	if (SceneLib.dungeons.checkPhoenixTowerClear()) addButton(6, "Phoenix Tower", dungeonH.returnToHeliaDungeon).hint("Re-visit the tower you went there as part of Helia's quest." + (SceneLib.dungeons.checkPhoenixTowerClear() ? "\n\nYou've helped Helia in the quest and resolved the problems. \n\nCLEARED!" : ""));
+	if (flags[kFLAGS.EBON_LABYRINTH] > 0) addButton(12, "EbonLabyrinth", dungeonEL.enterDungeon).hint("Visit Ebon Labyrinth." + (SceneLib.dungeons.checkEbonLabyrinthClear() ? "\n\nSEMI-CLEARED!" : ""));
 	if (flags[kFLAGS.HIDDEN_CAVE_FOUND] > 0) addButton(10, "Hidden Cave", dungeonHC.enterDungeon).hint("Visit the hidden cave in the hills." + (SceneLib.dungeons.checkHiddenCaveClear() ? "\n\nCLEARED!" : ""));
 	if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 0) addButton(11, "Den of Desire", dungeonDD.enterDungeon).hint("Visit the den in blight ridge." + (SceneLib.dungeons.checkDenOfDesireClear() ? "\n\nCLEARED!" : ""));
 	if (flags[kFLAGS.LUMI_MET] > 0) addButton(12, "Lumi's Lab", SceneLib.lumi.lumiEncounter).hint("Visit Lumi's laboratory.");
@@ -3112,6 +3126,7 @@ private function ascendForReal():void {
 	if (SceneLib.dungeons.checkHiddenCaveHiddenStageClear()) performancePoints++;
 	if (SceneLib.dungeons.checkRiverDungeon1stFloorClear()) performancePoints++;
 	if (SceneLib.dungeons.checkDenOfDesireClear()) performancePoints++;
+	if (SceneLib.dungeons.checkEbonLabyrinthClear()) performancePoints++;
 	if (SceneLib.dungeons.checkPhoenixTowerClear()) performancePoints += 2;
 	//Quests
 	if (flags[kFLAGS.MARBLE_PURIFIED] > 0) performancePoints += 2;
@@ -4070,15 +4085,25 @@ private function updateAchievements():void {
 		awardAchievement("Tiger stalking the Dragon", kACHIEVEMENTS.DUNGEON_TIGER_STALKING_THE_DRAGON);
 		dungeonsCleared++;
 	}
+	if (SceneLib.dungeons.checkRiverDungeon1stFloorClear()) {
+		awardAchievement("Mirror Flower, Water Moon", kACHIEVEMENTS.DUNGEON_MIRROR_FLOWER_WATER_MOON);
+		awardAchievement("Dungeon Seeker (1st layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_1ST_LAYER);
+		dungeonsCleared++;
+	}
 	if (SceneLib.dungeons.checkDenOfDesireClear()) {
 		awardAchievement("Slain the Heroslayer", kACHIEVEMENTS.DUNGEON_SLAIN_THE_HEROSLAYER);
+		dungeonsCleared++;
+	}
+	if (SceneLib.dungeons.checkEbonLabyrinthClear()) {
+		awardAchievement("Honorary Minotaur", kACHIEVEMENTS.DUNGEON_HONORARY_MINOTAUR);
+		awardAchievement("Dungeonmaster", kACHIEVEMENTS.DUNGEON_DUNGEONMASTER);
 		dungeonsCleared++;
 	}
 	if (dungeonsCleared >= 1) awardAchievement("Delver", kACHIEVEMENTS.DUNGEON_DELVER);
 	if (dungeonsCleared >= 2) awardAchievement("Delver Apprentice", kACHIEVEMENTS.DUNGEON_DELVER_APPRENTICE);
 	if (dungeonsCleared >= 4) awardAchievement("Delver Expert", kACHIEVEMENTS.DUNGEON_DELVER_MASTER);
 	if (dungeonsCleared >= 8) awardAchievement("Delver Master", kACHIEVEMENTS.DUNGEON_DELVER_EXPERT);
-	if (dungeonsCleared >= 16) awardAchievement("Delver Grand Master", kACHIEVEMENTS.DUNGEON_DELVER_GRAND_MASTER);//obecnie max 7
+	if (dungeonsCleared >= 16) awardAchievement("Delver Grand Master", kACHIEVEMENTS.DUNGEON_DELVER_GRAND_MASTER);//obecnie max 9
 	
 	//Fashion
 	if (player.armor == armors.W_ROBES && player.weapon == weapons.W_STAFF) awardAchievement("Wannabe Wizard", kACHIEVEMENTS.FASHION_WANNABE_WIZARD);
@@ -4129,6 +4154,11 @@ private function updateAchievements():void {
 	
 	//Realistic
 	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_FASTING] >= 168 && flags[kFLAGS.HUNGER_ENABLED] > 0) awardAchievement("Fasting", kACHIEVEMENTS.REALISTIC_FASTING);
+	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_FASTING] >= 960 && flags[kFLAGS.HUNGER_ENABLED] > 0) awardAchievement("Lent", kACHIEVEMENTS.REALISTIC_LENT);
+	if (player.maxHunger() > 100) awardAchievement("One more dish please", kACHIEVEMENTS.REALISTIC_ONE_MORE_DISH_PLEASE);
+	if (player.maxHunger() > 250) awardAchievement("You not gonna eat those ribs?", kACHIEVEMENTS.REALISTIC_YOU_NOT_GONNA_EAT_THOSE_RIBS);
+	if (player.maxHunger() > 500) awardAchievement("Dinner for Four", kACHIEVEMENTS.REALISTIC_DINNER_FOR_FOUR);
+	if (player.maxHunger() > 1000) awardAchievement("Dinner for Obelix", kACHIEVEMENTS.REALISTIC_DINNER_FOR_OBELIX);
 
 	//Holiday
 	if (flags[kFLAGS.NIEVE_STAGE] == 5) awardAchievement("The Lovable Snowman", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_III);
@@ -4270,6 +4300,15 @@ private function updateAchievements():void {
 	if (player.newGamePlusMod() >= 6) awardAchievement("xXx 7: Salvation", kACHIEVEMENTS.EPIC_XXX7_SALVATION);
 	if (player.newGamePlusMod() >= 7) awardAchievement("xXx 8: Genisys", kACHIEVEMENTS.EPIC_XXX8_GENISYS);
 	if (player.newGamePlusMod() >= 8) awardAchievement("xXx 8: Dark Fate", kACHIEVEMENTS.EPIC_XXX9_DARK_FATE);*/
+	
+	if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] > 0 || flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] > 0) awardAchievement("My own Demon Weapon", kACHIEVEMENTS.EPIC_MY_OWN_DEMON_WEAPON);
+	var EvolvingItems:int = 0;
+	if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] > 0) EvolvingItems++;
+	if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] > 0) EvolvingItems++;
+	if (EvolvingItems >= 1) awardAchievement("Me Evolve", kACHIEVEMENTS.EPIC_ME_EVOLVE);
+	if (EvolvingItems >= 2) awardAchievement("Us Evolve", kACHIEVEMENTS.EPIC_US_EVOLVE);
+	//if (EvolvingItems >= 4) awardAchievement("They Evolve", kACHIEVEMENTS.EPIC_THEY_EVOLVE);
+	//if (EvolvingItems >= 8) awardAchievement("Everyone Evolve", kACHIEVEMENTS.EPIC_EVERYONE_EVOLVE);
 	
 	if (player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) awardAchievement("Guardian of Notre-Dame", kACHIEVEMENTS.EPIC_GUARDIAN_OF_NOTRE_DAME);
 	if (player.hasStatusEffect(StatusEffects.PlayerPhylactery)) awardAchievement("The Devil Wears Prada", kACHIEVEMENTS.EPIC_THE_DEVIL_WEARS_PRADA);
