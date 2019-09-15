@@ -151,7 +151,10 @@ public function siegweirdMainCampMenu():void
 	if (player.hasStatusEffect(StatusEffects.SiegweirdTraining2)) {
 		if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 0 && player.hasItem(useables.DIAMOND, 1) && player.hasItem(useables.S_INGOT, 1) && (player.hasItem(useables.DBAPLAT, 1) || player.hasItem(useables.TBAPLAT, 1))) addButton(11, "Advanced Study", siegweirdAdvancedCampStudy);
 		else addButtonDisabled(11, "Advanced Study", "You need to gather a perfect Diamond, Silver ingot and a piece of bark from oldest tree (Marae) before you can progress.");
-		if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 1 && flags[kFLAGS.SIEGWEIRD_FOLLOWER] < 7) addButtonDisabled(11, "Advanced Study", "You need to wait until Siegweird ends his work. (It may take around three days)");
+		if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 1) {
+			if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] < 10) addButtonDisabled(11, "Advanced Study", "You need to wait until Siegweird ends his work. (It may take around three days)");
+			else addButton(11, "Advanced Study", siegweirdAdvancedCampStudy);
+		}
 		if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 2) {
 			if (player.hasKeyItem("Alvina's Shattered Phylactery") >= 0) addButton(11, "Advanced Study", siegweirdAdvancedCampStudy);
 			else addButtonDisabled(11, "Advanced Study", "You need to go kill certain dangerous devil in Blight Ridge.");
@@ -309,11 +312,13 @@ public function siegweirdAdvancedCampStudy():void
 			inventory.takeItem(consumables.MET_SHO, camp.campFollowers);
 			cheatTime2(5);
 		}
-		else if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 1 && flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 7) {
+		else if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 1 && flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 10) {
 			outputText("Siegweird notices your presence and stops hammering on his portable anvil to look at you with a cheerful smile… or at least what you can see through the small hole in his helmet.\n\n");
 			outputText("\"<i>Hey hello [name]!I finished your holy symbol, it should empower your white magic ability further. Consider this your graduation gift.</i>\"\n\n");
 			outputText("He brings over the fruits of his labor and hands it to you. The holy symbol shines with an inner light that simply cannot be snuffed out. You feel serene and safe with this item on you and thank Siegweird for it.\n\n");
 			outputText("\"<i>No need to thank me friend. Say I think I will stay in your camp a little longer. There's enough imps around here to keep me working for weeks! Also I will prepare a curative soup every day, so feel free to come by and take a bowl.</i>\"\n\n");
+			outputText("<b>You gained a Holy Symbol. +20% to white spells and white healing magic spellpower.</b>\n\n");
+			player.createKeyItem("Holy Symbol", 0, 0, 0, 0);
 			player.addStatusValue(StatusEffects.SiegweirdTraining2, 1, 1);
 			doNext(camp.campFollowers);
 			cheatTime2(5);

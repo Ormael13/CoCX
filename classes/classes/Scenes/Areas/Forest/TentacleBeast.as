@@ -66,6 +66,7 @@ public class TentacleBeast extends Monster
 				removeStatusEffect(StatusEffects.PhyllaFight);
 				SceneLib.desert.antsScene.phyllaTentacleDefeat();
 			}
+			else if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) cleanupAfterCombat();
 			else {
 				if(!hpVictory && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 					outputText("  Perhaps you could use it to sate yourself?", true);
@@ -108,10 +109,33 @@ public class TentacleBeast extends Monster
 		public function TentacleBeast()
 		{
 			trace("TentacleBeast Constructor!");
+			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
+				this.short = "ancient tentacle beast";
+				this.long = "You see the titanic, shambling form of the tentacle beast before you.  Appearing as a massive shrub, it shifts its bulbous mass and reveals a collection of thorny tendrils and cephalopodic limbs.";
+				initStrTouSpeInte(219, 270, 75, 135);
+				initWisLibSensCor(120, 270, 60, 100);
+				this.weaponAttack = 10;
+				this.armorDef = 90;
+				this.armorMDef = 20;
+				this.bonusHP = 4000;
+				this.bonusLust = 50;
+				this.level = 60;
+				this.additionalXP = 250;
+			}
+			else {
+				this.short = "tentacle beast";
+				this.long = "You see the massive, shambling form of the tentacle beast before you.  Appearing as a large shrub, it shifts its bulbous mass and reveals a collection of thorny tendrils and cephalopodic limbs.";
+				initStrTouSpeInte(73, 90, 25, 45);
+				initWisLibSensCor(40, 90, 20, 100);
+				this.weaponAttack = 10;
+				this.armorDef = 18;
+				this.armorMDef = 2;
+				this.bonusHP = 400;
+				this.bonusLust = 20;
+				this.level = 12;
+			}
 			this.a = "the ";
-			this.short = "tentacle beast";
 			this.imageName = "tentaclebeast";
-			this.long = "You see the massive, shambling form of the tentacle beast before you.  Appearing as a large shrub, it shifts its bulbous mass and reveals a collection of thorny tendrils and cephalopodic limbs.";
 			// this.plural = false;
 			this.createCock(40,1.5);
 			this.createCock(60,1.5);
@@ -134,20 +158,12 @@ public class TentacleBeast extends Monster
 			this.skinDesc = "bark";
 			this.hairColor = "green";
 			this.hairLength = 1;
-			initStrTouSpeInte(73, 90, 25, 45);
-			initWisLibSensCor(40, 90, 20, 100);
 			this.weaponName = "whip-tendril";
 			this.weaponVerb="thorny tendril";
-			this.weaponAttack = 10;
 			this.armorName = "rubbery skin";
-			this.armorDef = 18;
-			this.armorMDef = 2;
-			this.bonusHP = 400;
-			this.bonusLust = 20;
 			this.lust = 10;
 			this.lustVuln = 0.8;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 12;
 			this.gems = rand(25)+10;
 			this.drop = new WeightedDrop(null, 1);
 			this.special1 = tentaclePhysicalAttack;

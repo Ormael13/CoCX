@@ -50,7 +50,7 @@ import classes.StatusEffects;
 			}
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Neisa" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
-			if (monster.HP <= 0) enemyAI();
+			if (monster.HP <= 0 || monster.lust >= monster.maxLust()) enemyAI();
 			else {
 				menu();
 				addButton(0, "Next", combatMenu, false);
@@ -104,6 +104,54 @@ import classes.StatusEffects;
 			}
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Etna" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
+			if (monster.HP <= 0 || monster.lust >= monster.maxLust()) enemyAI();
+			else {
+				menu();
+				addButton(0, "Next", combatMenu, false);
+			}
+		}
+		
+		public function auroraCombatActions():void {
+			clearOutput();
+			if (player.statusEffectv4(StatusEffects.CombatFollowerAurora) > 0) {
+				var choice4:Number = rand(20);
+				var dmg3:Number = player.statusEffectv1(StatusEffects.CombatFollowerAurora);
+				var weaponAurora:Number = player.statusEffectv2(StatusEffects.CombatFollowerAurora);
+				if (choice4 < 10) outputText("Aurora look for an opening in the battle.\n\n");
+				if (choice4 >= 10 && choice4 < 14) {//
+					dmg3 += scalingBonusStrengthCompanion() * 0.25;
+					if (weaponAurora < 51) dmg3 *= (1 + (weaponAurora * 0.03));
+					else if (weaponAurora >= 51 && weaponAurora < 101) dmg3 *= (2.5 + ((weaponAurora - 50) * 0.025));
+					else if (weaponAurora >= 101 && weaponAurora < 151) dmg3 *= (3.75 + ((weaponAurora - 100) * 0.02));
+					else if (weaponAurora >= 151 && weaponAurora < 201) dmg3 *= (4.75 + ((weaponAurora - 150) * 0.015));
+					else dmg3 *= (5.5 + ((weaponAurora - 200) * 0.01));
+					dmg3 = Math.round(dmg3);
+					doDamage(dmg3);
+					outputText("Aurora thrust her hand at " + monster.a + monster.short + ". <b>(<font color=\"#800000\">" + String(dmg3) + "</font>)</b>\n\n");
+				}
+				if (choice4 >= 14 && choice4 < 17) {
+					outputText("Aurora move in front of you deflecting the opponent attacks with her body in order to assist your own defence.\n\n");
+					player.createStatusEffect(StatusEffects.CompBoostingPCArmorValue, 0, 0, 0, 0);
+				}
+				if (choice4 >= 17) {
+					dmg3 += scalingBonusStrengthCompanion() * 0.5;
+					if (weaponAurora < 51) dmg3 *= (1 + (weaponAurora * 0.03));
+					else if (weaponAurora >= 51 && weaponAurora < 101) dmg3 *= (2.5 + ((weaponAurora - 50) * 0.025));
+					else if (weaponAurora >= 101 && weaponAurora < 151) dmg3 *= (3.75 + ((weaponAurora - 100) * 0.02));
+					else if (weaponAurora >= 151 && weaponAurora < 201) dmg3 *= (4.75 + ((weaponAurora - 150) * 0.015));
+					else dmg3 *= (5.5 + ((weaponAurora - 200) * 0.01));
+					dmg3 *= 3;
+					dmg3 = Math.round(dmg3);
+					doDamage(dmg3);
+					outputText("Aurora thrust her hand at " + monster.a + monster.short + ". Her claws hits thrice against " + monster.a + monster.short + ", dealing <b>(<font color=\"#800000\">" + String(dmg3) + "</font>)</b> damage!\n\n");
+				}
+			}
+			else {
+				outputText("Aurora assume combat stance.\n\n");
+				player.addStatusValue(StatusEffects.CombatFollowerAurora, 4, 1);
+			}
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Aurora" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
 			if (monster.HP <= 0 || monster.lust >= monster.maxLust()) enemyAI();
 			else {
 				menu();

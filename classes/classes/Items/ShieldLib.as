@@ -14,6 +14,7 @@ package classes.Items
 		
 		public static const NOTHING:Nothing = new Nothing();
 		
+		public const AETHERS:AetherS = new AetherS();
 		public const BATTNET:Shield = new Shield("BattNet", "BattleNet", "Battle Net", "a Battle Net", 0, 500, "A battle net used in the off hand to impair the opponent's movement. Also very good for fishing.");
 		public const BSHIELD:BeautifulShield = new BeautifulShield();
 		public const BLASPHE:Blasphemy = new Blasphemy();

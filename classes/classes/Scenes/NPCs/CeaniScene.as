@@ -6,6 +6,8 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Items.ArmorLib;
+	import classes.Items.NecklaceLib;
 	import classes.Items.WeaponRangeLib;
 	import classes.Items.UndergarmentLib;
 	import classes.Scenes.NPCs.Ceani;
@@ -380,8 +382,8 @@ public function beachInteractionsDateUnderwater2():void
 	outputText("While you're busy looking this place spellbound, the Orca silently swam behind you and hugged your back squishing her JJ cup breast against you.\n\n");
 	outputText("\"<i>Say [name]... would it be ok if we did something... here under the water?</i>\"\n\n");
 	outputText("Why didn’t she ask you sooner? You begin to slowly remove her pink bikini exposing her generous white breast. All in all if she wasn’t this huge her JJ cup would look like a fairly normal E");
-//	if (player.armor != NOTHING) outputText(". You were too busy pondering these details to notice as Ceani slowly removed your [armor]");
-//	if (player.lowerGarment != UndergarmentLib.NOTHING) outputText(" and undergarment");
+	if (player.armor != ArmorLib.NOTHING) outputText(". You were too busy pondering these details to notice as Ceani slowly removed your [armor]");
+	if (player.lowerGarment != UndergarmentLib.NOTHING) outputText(" and undergarment");
 	outputText(". Ceani surprise you by grabbing your shoulder and kissing you. Is it just you or the water around you both is starting to get even warmer. The two of you play with each other tongue for a moment. You aren’t so surprised to find a sea salt taste on Ceani’s saliva, as the both of you have been pretty much talking underwater for this long.\n\n");
 	if (player.gender == 3) {
 		outputText("Now that you think of it, you could take her as a man or a woman, so which way do you prefer?\n\n");
@@ -435,7 +437,7 @@ public function underwaterDateFemaleVer():void
 	outputText("You barely register Ceani hand moving down to your pussy before she actually slide a finger in, making you gasp in surprise. You answer by breaking the kiss and taking in one of Ceani’s tits in your mouth. You begin to suckle on her tit, making her moan as she slide a second digit inside. If you weren't both standing on the ocean floor you would likely be drifting around as you try to pleasure each other. Yea the water is definitely getting warmer and your cheek flush as your pleasure increases.\n\n");
 	outputText("\"<i>Ahhhn say... how about we try a wheel?</i>\"\n\n");
 	outputText("You think she's joking when, but  you realise she's not the moment she grab’s you into a, somewhat, interesting pose. This is essentially a sixtynine but the interesting part about it is the fact you both drift around in the gentle current, eating each other pussy out. As her tail makes you two pretty much swim in circles. Thankfully due to your fish like senses ");
-//	if () outputText("or perhaps because of the necklace ");necklace part
+	if (player.necklace == necklaces.MCPNECK) outputText("or perhaps because of the necklace ");
 	outputText("you don’t get dizzy from having your world constantly turned upside down. The feeling of the waterflow on your sensitive skin and Ceani devious tongue soon send you over the edge making you cum. However since neither of you can actually taste each other cum, neither of you know when to exactly stop. The only warning you have are each other moans and you have trouble accurately interpreting wich one is the orgasm. ");
 	outputText("As such you both end up eating each other beyond your respective limits and cuming several time in a row. Its barely if you can feel your legs anymore as you force yourself to keep licking your partner. Eventually you both tire out and sink down to the ocean floor to rest.\n\n");
 	outputText("\"<i>Hey [name].... just how many time did you cum exactly... I think I did 39 times...</i>\"\n\n");

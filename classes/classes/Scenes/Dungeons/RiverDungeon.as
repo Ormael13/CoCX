@@ -7,11 +7,14 @@ package classes.Scenes.Dungeons
 {
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.Shield;
+import classes.Items.Weapon;
 import classes.Scenes.Areas.Lake.GreenSlime;
 import classes.Scenes.Areas.Mountain.HellHound;
 import classes.Scenes.Monsters.FeralImps;
 import classes.CoC;
 import classes.PerkLib;
+import classes.Scenes.Monsters.GolemDummyImproved;
 import classes.StatusEffects;
 
 	public class RiverDungeon extends DungeonAbstractContent
@@ -57,7 +60,7 @@ import classes.StatusEffects;
 				outputText("Working together with another person has taught you how to manage and plan with a group of people. <b>Gained Perk: Basic Leadership</b>");
 				player.createPerk(PerkLib.BasicLeadership,0,0,0,0);
 			}
-			else outputText("You leave the river dungeon behind and take off through the He'Xin'Dao back towards camp.");
+			else outputText("You leave the river dungeon behind and take off through the He'Xin'Dao back towards the camp.");
 			player.removeStatusEffect(StatusEffects.RiverDungeonA);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -119,11 +122,84 @@ import classes.StatusEffects;
 		}
 		public function defeatedByAetherGolem():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
+			outputText("Beaten, you don’t have strength left to stop the golem from knocking you unconscious. After you wake up you find out that you’ve got a pair of gauntlets on your hands connected to a net of thin goo-like things that cover your whole body.\n\n");
+			outputText("<i>This one would be much better than those mindless golems we used so far,</i> you suddenly hear a feminine voice in your head say. <i>Of course, living flesh is way better than simple animated stones. Goodnight old owner of this body.</i> With that you once again lose consciousness for the last time. You don’t wake up ever again.\n\n");
+			outputText("After taking over control of the champion’s body, the new owner commands it to go out of the dungeon, maintaining the most natural as possible movement before they leave He'Xin'Dao. Then the both gauntlets let out girlish laughter and commands their new host body to go towards a destination known only by them...\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
-		}/*
-		public function defeatedByFeralImp():void {
+		}
+		public function takeAetherSister1():void {
+			clearOutput();
+			outputText("Succumbing to your skill in battle, the aether golem slumps backwards against the wall, unable to stand.  You loom over it, grinning as you contemplate what to do with your helpless opponent.\n\n");
+			outputText("\"<i>Wait!</i>\" the voice resounds in your head. \"<i>You much better than this souless golem. So i decided to come back with you from this boring and dark place.");
+			if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) outputText(" You even have my twin sister.");
+			outputText(" So shall i come with you or wait at 'that camp' you thought moment ago?</i>\"");
+			flags[kFLAGS.AETHER_DEXTER_EVO] = 1;
+			menu();
+			addButton(0, "Wait", takeAetherSister1a);
+			addButton(1, "Come", takeAetherSister1b);
+		}
+		public function takeAetherSister1a():void {
+			outputText("You tell the voice to wait at the camp. The moment you say it from golem gaunlet extends a thin tendril that wrap around you for a moment and then it returns. Between extending and reciding all the other tendrils, which was covering golem also receeded into the gaunlet. Then it vanish in flash of light leaving behind damaged golem.\n\n");
+			flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
+			cleanupAfterCombat();
+			doNext(playerMenu);
+		}
+		public function takeAetherSister1b():void {
+			weapons.AETHERD.useText();
+			player.weapon.removeText();
+			cleanupAfterCombat();
+			outputText("You tell the voice to come. With a giggle the gasunlet that was covering golem arm start to literaly flow form it to the floor then over it till it reaches you and climbing over your body reforms into gaunelt on your right arm and half of the forearm. \"<i>That will a blast!");
+			if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) outputText("</i>\" After this you hear other voice in your head. \"<i>The Aether twins united. Go go go twins!!!");
+			outputText("</i>\"\n\n");
+			var item:Weapon = player.setWeapon(weapons.AETHERD); //Item is now the player's old weapon
+			if (item == null) doNext(roomA20);
+			else inventory.takeItem(item, roomA20);
+		}
+		public function takeAetherSister2():void {
+			clearOutput();
+			outputText("Succumbing to your skill in battle, the aether golem slumps backwards against the wall, unable to stand.  You loom over it, grinning as you contemplate what to do with your helpless opponent.\n\n");
+			outputText("\"<i>Wait!</i>\" the voice resounds in your head. \"<i>You much better than this souless golem. So i decided to come back with you from this boring and dark place.");
+			if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) outputText(" You even have my twin sister.");
+			outputText(" So shall i come with you or wait at 'that camp' you thought moment ago?</i>\"");
+			flags[kFLAGS.AETHER_SINISTER_EVO] = 1;
+			menu();
+			addButton(0, "Wait", takeAetherSister2a);
+			addButton(1, "Come", takeAetherSister2b);
+		}
+		public function takeAetherSister2a():void {
+			outputText("You tell the voice to wait at the camp. The moment you say it from golem gaunlet extends a thin tendril that wrap around you for a moment and then it returns. Between extending and reciding all the other tendrils, which was covering golem also receeded into the gaunlet. Then it vanish in flash of light leaving behind damaged golem.\n\n");
+			flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
+			cleanupAfterCombat();
+			doNext(playerMenu);
+		}
+		public function takeAetherSister2b():void {
+			shields.AETHERS.useText();
+			player.shield.removeText();
+			cleanupAfterCombat();
+			outputText("You tell the voice to come. With a giggle the gasunlet that was covering golem arm start to literaly flow form it to the floor then over it till it reaches you and climbing over your body reforms into gaunelt on your right arm and half of the forearm. \"<i>That will a blast!");
+			if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) outputText("</i>\" After this you hear other voice in your head. \"<i>The Aether twins united. Go go go twins!!!");
+			outputText("</i>\"\n\n");
+			var item:Shield = player.setShield(shields.AETHERS); //Item is now the player's old shield
+			if (item == null) doNext(roomA15);
+			else inventory.takeItem(item, roomA15);
+		}
+		
+		/*public function defeatedBy():void {
+			clearOutput();
+			outputText("Placeholder Bad End.\n\n");
+			inDungeon = true;
+			dungeonLoc = ;starting for each floor room
+			playerMenu();
+		}
+		public function defeatedBy():void {
+			clearOutput();
+			outputText("Placeholder Bad End.\n\n");
+			inDungeon = true;
+			dungeonLoc = ;starting for each floor room
+			playerMenu();
+		}
+		public function defeatedBy<Boss enemy>():void {
 			clearOutput();
 			outputText("Placeholder Bad End.\n\n");
 			//[GAME OVER]
@@ -265,9 +341,13 @@ import classes.StatusEffects;
 		public function roomA15():void {
 			dungeonLoc = 82;
 			clearOutput();
-			encountersRuletteA();
+			if (flags[kFLAGS.AETHER_SINISTER_EVO] < 1) {
+				flags[kFLAGS.AETHER_SINISTER_EVO] = 0.5;
+				outputText("As you peek into a room, out of nearby shadow emerge golem. Looks like you have encountered aether golem! You ready your [weapon] for a fight!");
+				startCombat(new GolemDummyImproved(), true);
+			}
+			else encountersRuletteA();
 			if (CoC.instance.inCombat) return;
-			//boss room
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("You find some old bones on the ground likely those of a beast that died here. These are at least the size of what could pass back in Ingnam for a cow.");
 			dungeons.setDungeonButtons(null, roomA13, null, null);
@@ -311,9 +391,13 @@ import classes.StatusEffects;
 		public function roomA20():void {
 			dungeonLoc = 87;
 			clearOutput();
-			encountersRuletteA();
+			if (flags[kFLAGS.AETHER_DEXTER_EVO] < 1) {
+				flags[kFLAGS.AETHER_DEXTER_EVO] = 0.5;
+				outputText("As you peek into a room, out of nearby shadow emerge golem. Looks like you have encountered aether golem! You ready your [weapon] for a fight!");
+				startCombat(new GolemDummyImproved(), true);
+			}
+			else encountersRuletteA();
 			if (CoC.instance.inCombat) return;
-			//boss room
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("You find some old bones on the ground likely those of a beast that died here. These are at least the size of what could pass back in Ingnam for a cow.");
 			dungeons.setDungeonButtons(null, roomA18, null, null);

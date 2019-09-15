@@ -9,6 +9,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.Areas.Caves.*;
+import classes.Scenes.Dungeons.EbonLabyrinth;
 import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.SceneLib;
 
@@ -19,6 +20,7 @@ use namespace CoC;
 		public var darkelfScene:DarkElfScene = new DarkElfScene();
 		public var cavewyrmScene:CaveWyrmScene = new CaveWyrmScene();
 		public var displacerbeastScene:DisplacerBeastScene = new DisplacerBeastScene();
+		public var dungeonEL:EbonLabyrinth = new EbonLabyrinth();
 		
 		public function Caves() 
 		{
@@ -42,6 +44,7 @@ use namespace CoC;
 			
 			//Wild manticore/malicore
 			if (flags[kFLAGS.ETNA_AFFECTION] >= 5 && rand(4) == 0) {
+				player.createStatusEffect(StatusEffects.InsideSmallSpace,0,0,0,0);
 				if (rand(2) == 0) {
 					player.createStatusEffect(StatusEffects.WildManticore, 0, 0, 0, 0);
 					SceneLib.etnaScene.repeatEnc();
@@ -51,7 +54,13 @@ use namespace CoC;
 					SceneLib.bashemathScene.repeatEncWM();
 					return;
 				}
-			}
+			}/*
+			//Ebon Labyrinth
+			if (flags[kFLAGS.EBON_LABYRINTH] < 1 && rand(4) == 0) {
+				flags[kFLAGS.EBON_LABYRINTH] == 1;
+				dungeonEL.enterDungeon();
+				return;
+			}*/
 			select = choice[rand(choice.length)];
 			switch(select) {
 				case 0:

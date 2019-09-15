@@ -1183,7 +1183,7 @@ public class Creature extends Utils
 				return -2;
 			for (var counter:int = 0; counter<perks.length; counter++)
 			{
-				if (perk(counter).ptype == ptype)
+				if (perk(counter).ptype.id == ptype.id)
 					return counter;
 			}
 			return -1;

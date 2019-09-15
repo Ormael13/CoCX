@@ -400,7 +400,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
 		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod += .2;
 		if (player.hasPerk(PerkLib.UnicornBlessing) && player.cor <= 20) mod += .2;
-		if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) > 1) mod += .2;
+		if (player.hasKeyItem("Holy Symbol") >= 0) mod += .2;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.jewelryEffectId2 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.jewelryEffectId3 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
@@ -461,7 +461,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
 		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod += .3;
 		if (player.hasPerk(PerkLib.UnicornBlessing) && player.cor <= 20) mod += .2;
-		if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) > 1) mod += .2;
+		if (player.hasKeyItem("Holy Symbol") >= 0) mod += .2;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.jewelryEffectId2 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.jewelryEffectId3 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);

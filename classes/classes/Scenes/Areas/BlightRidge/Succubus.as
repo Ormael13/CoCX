@@ -33,8 +33,31 @@ use namespace CoC;
 		
 		public function Succubus()
 		{
+			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
+				this.short = "stray succubus";
+				initStrTouSpeInte(210, 150, 165, 170);
+				initWisLibSensCor(170, 180, 90, 100);
+				this.weaponAttack = 32;
+				this.armorDef = 36;
+				this.armorMDef = 6;
+				this.bonusHP = 960;
+				this.bonusLust = 80;
+				this.level = 62;
+				this.additionalXP = 500;
+			}
+			else {
+				this.short = "succubus";
+				initStrTouSpeInte(140, 100, 110, 115);
+				initWisLibSensCor(115, 120, 60, 100);
+				this.weaponAttack = 16;
+				this.armorDef = 18;
+				this.armorMDef = 3;
+				this.bonusHP = 480;
+				this.bonusLust = 40;
+				this.level = 26;
+				this.additionalXP = 50;
+			}
 			this.a = "the ";
-			this.short = "succubus";
 			this.imageName = "succubus";
 			this.long = "She stands about six feet tall and is hugely voluptuous, her impressive breasts wobble delightfully as she moves.  Her hips flare out into an exaggerated hourglass shape, with a long tail tipped with a fleshy arrow-head spade that waves above her spankable butt.  She is wearing rags that cover only a tiny fraction of her body, concealing just her naughty bits to make the whole display more erotic.  She's using a leather whip as a weapon.";
 			// this.plural = false;
@@ -50,24 +73,15 @@ use namespace CoC;
 			this.skinTone = "blue";
 			this.hairColor = "black";
 			this.hairLength = 13;
-			initStrTouSpeInte(140, 100, 110, 115);
-			initWisLibSensCor(115, 120, 60, 100);
 			this.weaponName = "whip";
 			this.weaponVerb="whipping";
-			this.weaponAttack = 16;
 			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
-			this.armorDef = 18;
-			this.armorMDef = 3;
-			this.bonusHP = 480;
-			this.bonusLust = 40;
 			this.lust = 30;
 			this.lustVuln = .5;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 26;
 			this.gems = rand(30)+15;
-			this.additionalXP = 50;
 			this.drop = new WeightedDrop().
 					add(consumables.BIMBOLQ, 1).
 					add(weapons.WHIP, 2).

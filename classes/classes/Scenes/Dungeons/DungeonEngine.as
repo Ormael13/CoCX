@@ -307,7 +307,10 @@ public class DungeonEngine extends BaseContent
 			return (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 2);
 		}
 		public function checkRiverDungeon1stFloorClear():Boolean {
-			return (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 2);//1 - pok 1 golema, 2 pokonanie 2 golem, 3 pokonanie obu golemów
+			return (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 1);//1 - pok 1 golema, 2 pokonanie obu golemów
+		}
+		public function checkEbonLabyrinthClear():Boolean {
+			return (flags[kFLAGS.EBON_LABYRINTH] > 1);//exploracja 50 pokoi bez porażki
 		}
 		
 		public function enterFactory():void {

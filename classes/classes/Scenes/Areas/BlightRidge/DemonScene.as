@@ -390,10 +390,10 @@ import classes.Scenes.UniqueSexScenes;
 				else if (player.cor < 66) outputText("You groan, wondering why she just won't get over her little act.  Even though this wasn't your best idea, it isn't nearly as bad as she makes it out to be.  You get dressed and leave, eager to be rid of her.\n\n");
 				else outputText("You bend over, rub her belly softly and whisper into her ear, \"<i>I'll be sure to spit them on my cock first chance I get, dear.</i>\"\n\n");
 				outputText("As you leave, you don't bother to spare a glance at the confused omnibus; she isn't worth your time.");
-				}
-				player.orgasm();
-				dynStats("lib", 3, "sen", 3, "cor", 1);
-				cleanupAfterCombat();
+			}
+			player.orgasm();
+			dynStats("lib", 3, "sen", 3, "cor", 1);
+			cleanupAfterCombat();
 		}
 		
 		public function OmnibusGetsRapedByFemale():void {
