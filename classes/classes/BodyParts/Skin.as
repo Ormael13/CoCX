@@ -97,6 +97,10 @@ public class Skin extends SaveableBodyPart {
 	public function get adj():String {
 		return skinValue(base.adj, coat.adj);
 	}
+	public function get pattern():int {
+		if (coverage >= COVERAGE_NONE && coat.pattern != PATTERN_NONE) return coat.pattern;
+		return base.pattern;
+	}
 	/**
 	 * Returns `s` (default "is") if the skin main layer noun is singular (skin,fur,chitin)
 	 * and `p` (default "are") if plural (scales)

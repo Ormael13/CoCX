@@ -3946,6 +3946,17 @@ public final class Mutations extends MutationsHelper
 				setFaceType(Face.SHARK_TEETH);
 				changes++;
 			}
+            //Ear tf
+            if (player.faceType == Face.SHARK_TEETH && player.ears.type != Ears.SHARK && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+                if (player.ears.type != Ears.HUMAN) {
+                    outputText("\n\nYour ears twitch once, twice, before starting to shake and tremble madly.  They migrate back towards where your ears USED to be, so long ago, finally settling down before twisting and stretching, changing to become <b>new, fin like ears just like those of a shark girl.</b>");
+                }
+                else {
+                    outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed fin like ears just like those of a shark girl</b>.  You bet they look cute!");
+                }
+                setEarType(Ears.SHARK);
+                changes++;
+            }
 			//Remove odd eyes
 			if (changes < changeLimit && rand(5) == 0 && player.eyes.type != Eyes.HUMAN) {
 				humanizeEyes();
@@ -3968,7 +3979,7 @@ public final class Mutations extends MutationsHelper
 				player.hairColor = "silver";
 			}
 			//Skin
-			if (((player.skinTone != "rough gray" && player.skinTone != "orange and black striped") || !player.hasScales()) && !player.isGargoyle() && rand(7) == 0 && changes < changeLimit) {
+			if (((player.skinTone != "rough gray" && player.skinTone != "dark gray" && player.skinTone != "grayish-blue" && player.skinTone != "iridescent gray" && player.skinTone != "ashen grayish-blue" && player.skinTone != "gray" && player.skinTone != "orange") || !player.hasScales()) && !player.isGargoyle() && rand(7) == 0 && changes < changeLimit) {
 				outputText("\n\n");
 				if (player.hasFur()) outputText("Your [skin.type] falls out, collecting on the floor and exposing your scale covered skin underneath.  ");
 				else if (player.hasGooSkin()) outputText("Your gooey skin solidifies, thickening up as your body starts to solidy into a more normal form. ");
@@ -3976,18 +3987,26 @@ public final class Mutations extends MutationsHelper
 				else if (player.hasCoat()) outputText("Your skin itches and tingles starting to sheed your [skin coat]. Underneath them you can see new smaller gray colored scales.  ");
 				else outputText("You abruptly stop moving and gasp sharply as a shudder goes up your entire frame. Your skin begins to shift and morph, growing slightly thicker and became covered with a tiny shiny grey scales.  ");
 				if (type == 0) {
+					var color:String;
+					if (rand(10) == 0) {
+						color = randomChoice("rough gray");
+					} else {
+						color = randomChoice("dark gray","grayish-blue","iridescent gray","ashen grayish-blue","gray");
+					}
+					outputText("\n\nA tingling sensation runs across your skin in waves, growing stronger as <b>your skin's tone slowly shifts, darkening to become " + color + " in color.</b>");
 					outputText("It feels oddly rough too, comparable to that of a marine mammal. You smile and run your hands across your new shark skin.");
-					player.skin.growCoat(Skin.SCALES,{color:"rough gray"});
+					player.skin.growCoat(Skin.AQUA_SCALES,{color:color});
 					changes++;
 				}
 				else {
 					outputText("Your scales begins to tingle and itch, before rapidly shifting to a shiny orange color, marked by random black scales looking like a stripes. You take a quick look in a nearby pool of water, to see your skin has morphed in appearance and texture to become more like a tigershark!");
-					player.skin.growCoat(Skin.SCALES,{color:"orange and black"});
+					player.skin.growCoat(Skin.AQUA_SCALES,{color:"orange",color2:"black",pattern:Skin.PATTERN_TIGER_STRIPES});
+					player.skin.base.color2 = "black";
 					changes++;
 				}
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedScales)) {
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedAquaScales)) {
 					outputText("\n\n<b>Genetic Memory: Scales - Memorized!</b>\n\n");
-					player.createStatusEffect(StatusEffects.UnlockedScales, 0, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.UnlockedAquaScales, 0, 0, 0, 0);
 				}
 			}
 			//Legs
@@ -4439,10 +4458,7 @@ public final class Mutations extends MutationsHelper
 				else {
 					outputText("\n\nYou idly reach back to scratch yourself and nearly jump out of your [armor] when you hit something hard.  A quick glance down reveals that scales are growing out of your " + color + " skin with alarming speed.  As you watch, the surface of your skin is covered in smooth scales.  They interlink together so well that they may as well be seamless.  You peel back your [armor] and the transformation has already finished on the rest of your body.  <b>You're covered from head to waist in shiny scales.</b>");
 				}
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedScales)) {
-					outputText("\n\n<b>Genetic Memory: Scales - Memorized!</b>\n\n");
-					player.createStatusEffect(StatusEffects.UnlockedScales, 0, 0, 0, 0);
-				}
+				addGeneticMemory(StatusEffects.UnlockedScales,"Scales");
 				player.skin.growCoat(Skin.SCALES,{color:color});
 				changes++;
 			}
@@ -8674,6 +8690,7 @@ public final class Mutations extends MutationsHelper
 					player.createStatusEffect(StatusEffects.UnlockedScarTattoed, 0, 0, 0, 0);
 				}
 				player.skin.base.pattern = Skin.PATTERN_SCAR_SHAPED_TATTOO;
+				player.skin.base.color2 = "black";
 				player.skin.base.adj = "scar shaped tattooed";
 				changes++;
 			}
@@ -10090,6 +10107,7 @@ public final class Mutations extends MutationsHelper
 					player.createStatusEffect(StatusEffects.UnlockedTattoed, 0, 0, 0, 0);
 				}
 				player.skin.base.pattern = Skin.PATTERN_MAGICAL_TATTOO;
+				player.skin.base.color2 = "black";
 				player.skin.base.adj = "sexy tattooed";
 			});
 			//Nipples Turn Back:
