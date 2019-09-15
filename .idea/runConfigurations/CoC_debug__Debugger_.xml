@@ -1,12 +1,14 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="CoC-debug (Debugger)" type="FlashRunConfigurationType" factoryName="Flash App">
+  <configuration default="false" name="CoC-debug (Debugger)" type="FlashRunConfigurationType">
     <option name="BCName" value="CoC-debug" />
+    <option name="IOSSimulatorDevice" value="" />
     <option name="IOSSimulatorSdkPath" value="" />
     <option name="adlOptions" value="" />
     <option name="airProgramParameters" value="" />
     <option name="appDescriptorForEmulator" value="Android" />
+    <option name="clearAppDataOnEachLaunch" value="true" />
     <option name="debugTransport" value="USB" />
-    <option name="debuggerSdkRaw" value="BC SDK" />
+    <option name="debuggerSdkRaw" value="FLEX" />
     <option name="emulator" value="NexusOne" />
     <option name="emulatorAdlOptions" value="" />
     <option name="fastPackaging" value="true" />
@@ -18,7 +20,7 @@
         <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
         <option name="launcherType" value="Player" />
         <option name="newPlayerInstance" value="false" />
-        <option name="playerPath" value="$FLEX_SDK$/runtimes/player/11.1/win/FlashPlayerDebugger.exe" />
+        <option name="playerPath" value="D:/FLEX/runtimes/player/11.1/win/FlashPlayerDebugger.exe" />
       </LauncherParameters>
     </option>
     <option name="mobileRunTarget" value="Emulator" />
@@ -36,6 +38,8 @@
     <RunnerSettings RunnerId="FlexRunner" />
     <ConfigurationWrapper RunnerId="FlexDebugRunner" />
     <ConfigurationWrapper RunnerId="FlexRunner" />
-    <method />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
   </configuration>
 </component>

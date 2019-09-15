@@ -6,7 +6,7 @@
   <component name="ProjectPlainTextFileTypeManager">
     <file url="file://$PROJECT_DIR$/devTools/spred/spred.js" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" default="false" project-jdk-name="4.6.0" project-jdk-type="Flex SDK Type (new)">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" default="false" project-jdk-name="FLEX" project-jdk-type="Flex SDK Type (new)">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
