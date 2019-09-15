@@ -1441,13 +1441,13 @@ public class PerkLib
 				"Reduces the fatigue cost of physical specials by 50%.",
 				"You choose the 'Iron Man' perk, reducing the fatigue cost of physical special attacks by 50%");
 		public static const IronStomach:PerkType = mk("Iron Stomach", "Iron Stomach",
-				"Increase max Satiety by 50.",
+				"Increase max Satiety by 50 and limit when PC gain weight from eating too much by 5.",
 				"You choose the 'Iron Stomach' perk, increasing your limit for eating without getting fat.");
 		public static const IronStomachEx:PerkType = mk("Iron Stomach (Ex)", "Iron Stomach (Ex)",
-				"Increase max Satiety by 100.",
+				"Increase max Satiety by 100 and limit when PC gain weight from eating too much by another 10.",
 				"You choose the 'Iron Stomach (Ex)' perk, getting second increase to maximum amount of food you can eat before you start to getting fat.");
 		public static const IronStomachSu:PerkType = mk("Iron Stomach (Su)", "Iron Stomach (Su)",
-				"Increase max Satiety by 200 and max toughness by 5 (scalable).",
+				"Increase max Satiety by 200, limit when PC gain weight from eating too much by another 15 and max toughness by 5 (scalable).",
 				"You choose the 'Iron Stomach (Su)' perk, making yourself capable to eat more without getting overweigh.");
 		/*public static const IronStomach:PerkType = mk("Iron Stomach", "Iron Stomach",
 				"Reduces the fatigue cost of physical specials by 50%.",

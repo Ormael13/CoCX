@@ -118,7 +118,7 @@ import classes.StatusEffects;
 				var dmg3:Number = player.statusEffectv1(StatusEffects.CombatFollowerAurora);
 				var weaponAurora:Number = player.statusEffectv2(StatusEffects.CombatFollowerAurora);
 				if (choice4 < 10) outputText("Aurora look for an opening in the battle.\n\n");
-				if (choice4 >= 10 && choice4 < 14) {//
+				if (choice4 >= 10 && choice4 < 14) {
 					dmg3 += scalingBonusStrengthCompanion() * 0.25;
 					if (weaponAurora < 51) dmg3 *= (1 + (weaponAurora * 0.03));
 					else if (weaponAurora >= 51 && weaponAurora < 101) dmg3 *= (2.5 + ((weaponAurora - 50) * 0.025));
@@ -172,6 +172,13 @@ import classes.StatusEffects;
 		public function alvinaCombatActions():void {
 			clearOutput();
 			
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Alvina" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
+			if (monster.HP <= 0 || monster.lust >= monster.maxLust()) enemyAI();
+			else {
+				menu();
+				addButton(0, "Next", combatMenu, false);
+			}
 		}
 	}
 }

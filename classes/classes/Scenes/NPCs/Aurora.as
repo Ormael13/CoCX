@@ -18,7 +18,10 @@ use namespace CoC;
 			outputText("Aurora ready her claws and prepare to thrust it towards you. ");
 			if (player.getEvasionRoll()) outputText(" You slide underneath the thrust!");
 			else {
-				this.soulforce -= 30;
+				if (flags[kFLAGS.AURORA_LVL] >= 11) this.soulforce -= 120;
+				else if (flags[kFLAGS.AURORA_LVL] >= 8 && flags[kFLAGS.AURORA_LVL] < 11) this.soulforce -= 90;
+				else if (flags[kFLAGS.AURORA_LVL] >= 5 && flags[kFLAGS.AURORA_LVL] < 8) this.soulforce -= 60;
+				else this.soulforce -= 30;
 				var damage:Number = 0;
 				damage += this.str;
 				damage += eBaseStrengthDamage() * 0.5;
@@ -76,7 +79,60 @@ use namespace CoC;
 		
 		override protected function performCombatAction():void
 		{
-			if (flags[kFLAGS.AURORA_LVL] >= 10) {
+			if (flags[kFLAGS.AURORA_LVL] >= 11) {
+				var choice3:Number = rand(3);
+				if (choice3 == 0) {
+					eAttack();
+					if (rand(3) > 0) {
+						outputText("\n");
+						eAttack();
+					}
+					if (rand(3) == 0) {
+						outputText("\n");
+						eAttack();
+					}
+					if (rand(3) == 0) {
+						outputText("\n");
+						eAttack();
+					}
+				}
+				if (choice3 == 1) {
+					clawstrike();
+					if (rand(3) > 0) {
+						outputText("\n");
+						clawstrike();
+					}
+					if (rand(3) == 0) {
+						outputText("\n");
+						clawstrike();
+					}
+					if (rand(3) == 0) {
+						outputText("\n");
+						clawstrike();
+					}
+				}
+				if (choice3 == 2) {
+					if (this.soulforce >= 120) tripletrust();
+					else {
+						clawstrike();
+						if (rand(3) == 0) {
+							outputText("\n");
+							clawstrike();
+						}
+						if (rand(3) == 0) {
+							outputText("\n");
+							clawstrike();
+						}
+						if (rand(3) == 0) {
+							outputText("\n");
+							clawstrike();
+						}
+					}
+				}
+				//if (choice3 == 3) x
+				//if (choice3 == 4) x
+			}
+			if (flags[kFLAGS.AURORA_LVL] >= 8 && flags[kFLAGS.AURORA_LVL] < 11) {
 				var choice2:Number = rand(3);
 				if (choice2 == 0) {
 					eAttack();
@@ -101,12 +157,22 @@ use namespace CoC;
 					}
 				}
 				if (choice2 == 2) {
-					if (this.soulforce >= 30) tripletrust();
-					else clawstrike();
+					if (this.soulforce >= 90) tripletrust();
+					else {
+						clawstrike();
+						if (rand(3) == 0) {
+							outputText("\n");
+							clawstrike();
+						}
+						if (rand(3) == 0) {
+							outputText("\n");
+							clawstrike();
+						}
+					}
 				}
 				//if (choice2 == 3) x
 			}
-			else if (flags[kFLAGS.AURORA_LVL] >= 6 && flags[kFLAGS.AURORA_LVL] < 10) {
+			else if (flags[kFLAGS.AURORA_LVL] >= 5 && flags[kFLAGS.AURORA_LVL] < 8) {
 				var choice1:Number = rand(3);
 				if (choice1 == 0) {
 					eAttack();
@@ -123,8 +189,14 @@ use namespace CoC;
 					}
 				}
 				if (choice1 == 2) {
-					if (this.soulforce >= 30) tripletrust();
-					else clawstrike();
+					if (this.soulforce >= 60) tripletrust();
+					else {
+						clawstrike();
+						if (rand(3) == 0) {
+							outputText("\n");
+							clawstrike();
+						}
+					}
 				}
 			}
 			else {
@@ -305,7 +377,6 @@ use namespace CoC;
 			this.createPerk(PerkLib.Resolute, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
-			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Sentience, 0, 0, 0, 0);
 			this.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
@@ -332,11 +403,11 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 7) {
 				this.createPerk(PerkLib.GoliathI, 0, 0, 0, 0);
-				this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 8) {
 				this.createPerk(PerkLib.SoulSprite, 0, 0, 0, 0);
-				this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.ExtraClawAttack, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 9) {
 				this.createPerk(PerkLib.FleshBodyWarriorStage, 0, 0, 0, 0);
@@ -344,10 +415,10 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 10) {
 				this.createPerk(PerkLib.SoulScholar, 0, 0, 0, 0);
-				this.createPerk(PerkLib.ExtraClawAttack, 0, 0, 0, 0);
+				this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 11) {
-				this.createPerk(PerkLib.FeralArmor, 0, 0, 0, 0);
+				this.createPerk(PerkLib.MultiClawAttack, 0, 0, 0, 0);
 				this.createPerk(PerkLib.EpicToughness, 0, 0, 0, 0);//czy coś innego związanego z spe/tou/str/lib statami jako perk?
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 12) {

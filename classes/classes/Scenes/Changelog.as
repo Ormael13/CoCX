@@ -69,7 +69,7 @@ package classes.Scenes
 			outputText("-In case player not buy goblin mech form Lumi there will be still option to buy it later on.\n");
 			outputText("-Fixed bugs: Wrong time passed by change in Eva and Alvi camp options, reseting alicorn/nightmare score down to 0, Manticore Metabolism perk causing venom to go into negative values, some Vala not progressing time at all, two lust fueled soulskills removing other combat options, Lumi Workshop and Garage options working properly without needless re-buying blueprints, ");
 			outputText("Inability to unequip vechicle when having any headgear, mech upgrade for more armor and HP when in mech not working, wrong desc intelligence scalling toggle in settings menu\n\n");
-			outputText("<b>Version 0.8n3:</b>\n\n");
+			outputText("<b>Version 0.8n3 (Aurora, Aether Twins, character viewer update (p.3) and bugfixing):</b>\n\n");
 			outputText("-Added similary to wisdom/intelligence scalling setting in game menu options to choose strength and speed scalings too. Either less randomn or with larger margin to be randomn.\n");
 			outputText("-Removed recommended level from tooltips in exploration menu.\n");
 			outputText("-13 new achievments (4 shadow ones). Dungeon achiev for 8 dungeons cleared is now possible to attain.\n");
@@ -79,7 +79,9 @@ package classes.Scenes
 			outputText("-New PC camp npc's. Some of them can spar in camp, help with constructing structures, and even assist in one or another way in fight (like you use them directly to beat enemeis or have them help as henchman).\n");
 			outputText("-Chimera and Grand Chimera race desc been changed to req. full racial scores for Chimera and 3rd step in race for Grand Chimera (that meaning only 11 races can mixed to give Grand Chimera race desc instead of almost 70 racial scores).\n");
 			outputText("-Monsters could slowly recover mana and soulforce spent based on what perks they got that could affect speed of recovery of those two resources.\n");
-			outputText("-Fixed bugs: Siegweird Advanced Studies not proegressing beyond crafting holy symbol stage, 3rd bracer been uncraftable due to wrong one of requirements, one of Celess scenes having small error in code, opening map in one of Hidden cave room causing glitch\n\n");/*ostatni punkt changelogu
+			outputText("-Character viewer was updated onceagain due to hard work of Liadri and aimozg.\n");
+			outputText("-Fixed bugs: Siegweird Advanced Studies not progressing beyond crafting holy symbol stage, 3rd bracer been uncraftable due to wrong one of requirements, one of Celess scenes having small error in code, opening map in one of Hidden cave room causing glitch\n\n");
+			outputText("<b>Version 0.8n4:</b>\n\n");
 			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
 			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
@@ -88,9 +90,12 @@ package classes.Scenes
 			//outputText("-New dungeon: Ebon Labyrinth. Founded in Caves. It's endless dungeon without any usable map or end. PC can keep explore it and fight enemies inside it up to even needing to sleep inside it. Sleeping inside giving 50% chance of been attacked in sleep. It's possible to leave dungeon at any moment if player decide it getting too hard to keep staying inside labyrinth.\n");
 			//outputText("-New melee weapon (by Ormael): Dual large axes - dropped by Labyrinth Minotaur. Cost 1440 gems. Base atk is 28. Requires height of 6'6 to wield. They are dual large weapons.\n");
 			//outputText("-New types of enemies could be meet in Ebon Labyrinth: Stay demons (stray succubus/incubus/omnibus), Ancient tentacle beast, Labyrinth minotaur.\n");
+			outputText("-Iron Stomach perks would increase limit when PC gain weight form eating over max Hunger cap by 5/10/15 (so all 3 will grant increase of 30).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-Fixed bugs: None slime PC getting hunger refilled from sex scenes involving been filled with any liquid\n");/*ostatni punkt changelogu
 			outputText("-New TF item: . Gained by bringing Orc Mead to Lumi for enhancing. Using this item will turn PC into high orc. High Orc (scalable): +130 to max Str, +30 to max Tou, +10 to max Spe, -30 to max Int, +25 to max Lib, +20% to max Wrath.\n");
 			outputText("-New TF item: . Gained by bringing Elf Ear to Lumi for enhancing. Using this item will turn PC into high elf. High Elf (scalable): -10 to max Str, -15 to max Tou, +80 to max Spe, +80 to max Int, +60 to max Wis, +30 max/min Sens, +20% to max Mana.\n");
 			outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
@@ -144,8 +149,6 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -153,8 +156,6 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

@@ -6875,16 +6875,19 @@ use namespace CoC;
 				var weightChange:int = 0;
 				var overeatingLimit:int = 0;
 				
-				overeatingLimit += 10;/*(perki muszą dać zwiekszenie limitu przejedzenia sie bez przyrostu wagi powyżej 10 ^^)
-				overeatingLimit += 10;overating perk chyba
-				overeatingLimit += 20;overeating ex perk chyba
+				overeatingLimit += 10;
+				if (findPerk(PerkLib.IronStomach) >= 0) overeatingLimit += 5;
+				if (findPerk(PerkLib.IronStomachEx) >= 0) overeatingLimit += 10;
+				if (findPerk(PerkLib.IronStomachSu) >= 0) overeatingLimit += 15;/*(perki muszą dać zwiekszenie limitu przejedzenia sie bez przyrostu wagi powyżej 10 ^^)
+				overeatingLimit += 10;overating perk chyba			perki overating dające stałe utrzymywanie hunger powyżej limitu max hunger dopóki hunger naturalnie nie zostanie zużyty xD
+				overeatingLimit += 20;overeating ex perk chyba		achiev polegający na przeżyciu x dni bez jedzenie czegokolwiek wic każde podniesienie hunger resetuje ten timer xD
 				overeatingLimit += 40;overeating su perk chyba*/
 				hunger += amnt;
 				if (hunger > maxHunger())
 				{
 					while (hunger > (maxHunger() + overeatingLimit) && !SceneLib.prison.inPrison) {
 						weightChange++;
-						hunger -= 10;
+						hunger -= overeatingLimit;
 					}
 					modThickness(100, weightChange);
 					hunger = maxHunger();
@@ -6972,12 +6975,12 @@ use namespace CoC;
 				if(!hasStatusEffect(StatusEffects.SlimeCravingFeed)) {
 					createStatusEffect(StatusEffects.SlimeCravingFeed,0,0,0,0);
 				}
+				refillHunger(30);
 			}
 			if (findPerk(PerkLib.Diapause) >= 0) {
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228] += 3 + rand(3);
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] = 1;
 			}
-			refillHunger(30);
 			if (isGargoyle() && hasPerk(PerkLib.GargoyleCorrupted)) refillGargoyleHunger(30);
 		}
 
