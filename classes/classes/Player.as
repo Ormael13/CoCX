@@ -5091,6 +5091,8 @@ use namespace CoC;
 				sharkCounter++;
 			if (gills.type == Gills.FISH)
 				sharkCounter++;
+			if (ears.type == Ears.SHARK)
+				sharkCounter++;
 			if (rearBody.type == RearBody.SHARK_FIN)
 				sharkCounter++;
 			if (wings.type == Wings.SHARK_FIN)
@@ -5103,9 +5105,9 @@ use namespace CoC;
 				sharkCounter++;
 			if (hairType == Hair.NORMAL && hairColor == "silver")
 				sharkCounter++;
-			if (hasScales() && InCollection(skin.coat.color, "rough gray","orange and black"))
+			if (hasScales() && InCollection(skin.coat.color, "rough gray","orange","dark gray","iridescent gray","ashen grayish-blue","gray"))
 				sharkCounter++;
-			if (eyes.type == Eyes.HUMAN && hairType == Hair.NORMAL && hairColor == "silver" && hasScales() && InCollection(skin.coat.color, "rough gray","orange and black"))
+			if (eyes.type == Eyes.HUMAN && hairType == Hair.NORMAL && hairColor == "silver" && hasScales() && InCollection(skin.coat.color, "rough gray","orange","dark gray","iridescent gray","ashen grayish-blue","gray"))
 				sharkCounter++;
 			if (vaginas.length > 0 && cocks.length > 0)
 				sharkCounter++;
@@ -6197,7 +6199,7 @@ use namespace CoC;
 				sirenCounter++;
 			if (lowerBody == LowerBody.SHARK)
 				sirenCounter++;
-			if (skinType == Skin.SCALES && (skinTone == "rough gray" || skinTone == "orange and black"))
+			if (skinType == Skin.SCALES && (skinTone == "rough gray" || skinTone == "orange" || skinTone == "dark gray" || skinTone == "grayish-blue" || skinTone == "iridescent gray" || skinTone == "ashen grayish-blue" || skinTone == "gray"))
 				sirenCounter++;
 			if (gills.type == Gills.FISH)
 				sirenCounter++;
@@ -7974,14 +7976,14 @@ use namespace CoC;
 				maxSpe += (15 * newGamePlusMod);
 			}//+20/10-20
 			if (sharkScore() >= 4) {
-				if (sharkScore() >= 9 && vaginas.length > 0 && cocks.length > 0) {
+				if (sharkScore() >= 10 && vaginas.length > 0 && cocks.length > 0) {
 					maxStr += (60 * newGamePlusMod);
-					maxSpe += (70 * newGamePlusMod);
+					maxSpe += (85 * newGamePlusMod);
 					maxLib += (20 * newGamePlusMod);
 				}
-				else if (sharkScore() >= 8) {
+				else if (sharkScore() >= 9) {
 					maxStr += (40 * newGamePlusMod);
-					maxSpe += (70 * newGamePlusMod);
+					maxSpe += (85 * newGamePlusMod);
 					maxLib += (10 * newGamePlusMod);
 				}
 				else {
