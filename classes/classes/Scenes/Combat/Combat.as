@@ -46,7 +46,6 @@ import classes.StatusEffects.VampireThirstEffect;
 import coc.view.ButtonData;
 import coc.view.ButtonDataList;
 import coc.view.MainView;
-
 public class Combat extends BaseContent {
 	public var pspecials:PhysicalSpecials		= new PhysicalSpecials();
 	public var mspecials:MagicSpecials			= new MagicSpecials();
@@ -55,6 +54,11 @@ public class Combat extends BaseContent {
 	public var soulskills:CombatSoulskills		= new CombatSoulskills();
 	public var comfoll:CombatFollowersActions	= new CombatFollowersActions();
 	public var ui:CombatUI						= new CombatUI();
+	public var MDODialogs:Boolean = false; // JA dialogs, look 3875
+	public var MDOCount:int = 0; // count of how many times damage was deal
+	public var MSGControll:Boolean = false; // need to correctly display damage MSG
+	public var MSGControllForEvasion:Boolean = false; // need to correctly display damage MSG. This way as i use it game will show just first damage msg.
+	public var isBowDamageMDO:Boolean = false; // use it as a switch between melee and bow damage for correct calculations and display
 	
 	public static const AIR:int       = 1;
 	public static const EARTH:int     = 2;
@@ -486,6 +490,13 @@ public function canUseMagic():Boolean {
 
 public function combatMenu(newRound:Boolean = true):void { //If returning from a sub menu set newRound to false
 	clearOutput();
+		if (flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] == 1) {
+	MDODialogs = true; // JA dialogs, look 3875
+	MDOCount = 0;
+	MSGControll = false;
+	MSGControllForEvasion = false;
+	isBowDamageMDO = false;
+	}
 	flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 0;
 	if (newRound) {
 		flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 0;
@@ -797,11 +808,16 @@ private function normalAttack():void {
 	clearOutput();
 	attack();
 }
+
 public function basemeleeattacks():void {
+	/*if (flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] == 1) {
+	MDODialogs = true; // JA dialogs, look 3875
+	}*/
 	if (player.hasStatusEffect(StatusEffects.TaintedMind)) {
 		if (monster as DriderIncubus) taintedMindAttackAttempt();
 		return;
 	}
+	
 	clearOutput();
 	if (SceneLib.urtaQuest.isUrta()) {
 		flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
@@ -1810,8 +1826,8 @@ public function oneThrowTotalCost():Number {
 	var onearrowcost:Number = 25;
 	return onearrowcost;
 }
-
 public function fireBow():void {
+	if (flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] == 1) isBowDamageMDO = true;
 	clearOutput();
 	if (monster.hasStatusEffect(StatusEffects.BowDisabled)) {
 		outputText("You can't use your range weapon right now!");
@@ -2145,16 +2161,21 @@ public function multiArrowsStrike():void {
 				monster.createStatusEffect(StatusEffects.Blind, 3, 0, 0, 0);
 				outputText(",  your radiant shots blinded [monster he]");
 			}
+			if (MSGControll == false) {
 			outputText(".  It's clearly very painful. <b>(<font color=\"#800000\">" + String(damage) + "</font>)</b>");
+			MSGControll = true;
+			}
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 			heroBaneProc(damage);
 		}
 		if (flags[kFLAGS.CUPID_ARROWS] == 1) {
 			outputText("  ");
 			if(monster.lustVuln == 0) {
-				outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.");
+				if ((MDOCount == maxCurrentRangeAttacks()) && (MSGControll == false)) outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 			}
 			else {
+				if (MSGControll == false) {
+					MSGControll = true;
 				var lustArrowDmg:Number = monster.lustVuln * (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
 				if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects [monster him].  ");
 				if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
@@ -2165,6 +2186,7 @@ public function multiArrowsStrike():void {
 					outputText(monster.capitalA + monster.short + "'");
 					if(!monster.plural) outputText("s");
 					outputText(" eyes glaze over with desire for a moment.  ");
+				}
 				}
 				lustArrowDmg *= 0.25;
 				lustArrowDmg = Math.round(lustArrowDmg);
@@ -2343,7 +2365,8 @@ public function throwWeapon():void {
 			else if (monster.cor >= 10) damage = Math.round(damage * 1.3);
 			else damage = Math.round(damage * 1.4);
 		}
-		if (damage == 0) {
+		if ((MDOCount == maxCurrentRangeAttacks()) && (MSGControllForEvasion == true) && (MSGControll == false)) {
+		//if (damage == 0) {
 			if (monster.inte > 0) {
 				outputText(monster.capitalA + monster.short + " shrugs as the [weaponrangename] bounces off them harmlessly.\n\n");
 			}
@@ -2452,7 +2475,9 @@ public function throwWeapon():void {
 			return;
 		}
 		else {
-			outputText(".  It's clearly very painful. <b>(<font color=\"#800000\">" + String(damage) + "</font>)</b>");
+			if (MSGControll == false){ outputText(".  It's clearly very painful. <b>(<font color=\"#800000\">" + String(damage) + "</font>)</b>");
+			MSGControll = true;
+			}
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 			outputText("\n\n");
 		}
@@ -2470,7 +2495,7 @@ public function throwWeapon():void {
 		}
 		if (player.ammo == 0) outputText("\n\n<b>You're out of weapons to throw in this fight.</b>\n\n");
 		enemyAI();
-	}
+	}	
 	else if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) {
 		flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
 		flags[kFLAGS.ARROWS_ACCURACY] += 15;
@@ -2524,7 +2549,8 @@ public function shootWeapon():void {
 				if (damage < 80) damage = 80;
 			}
 		}
-		if (damage == 0) {
+		if ((MDOCount == maxCurrentRangeAttacks()) && (MSGControllForEvasion == true) && (MSGControll == false)) {
+		//if ((damage == 0) ){
 			if (monster.inte > 0) {
 				outputText(monster.capitalA + monster.short + " shrugs as the bullet bounces off them harmlessly.\n\n");
 			}
@@ -2646,7 +2672,9 @@ public function shootWeapon():void {
 		else {
 			if (player.isInGoblinMech() && (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0)) outputText(" damage.");
 			else {
-				outputText(".  It's clearly very painful. <b>(<font color=\"#800000\">" + String(damage) + "</font>)</b>");
+				if (MSGControll == false){ outputText(".  It's clearly very painful. <b>(<font color=\"#800000\">" + String(damage) + "</font>)</b>");
+				MSGControll == true;
+				}
 				if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 			//	if (flaga dla efektu arouse arrow) outputText(" tekst dla arouse arrow effect.");
 			//	if (flaga dla efektu poison arrow) outputText(" tekst dla poison arrow effect.");
@@ -2961,9 +2989,11 @@ public function attack():void {
 				if (rand(2) == 0) outputText("You slice through the air with your cane, completely missing your enemy.");
 				else outputText("You lunge at your enemy with the cane.  It glows with a golden light but fails to actually hit anything.");
 			}
-			if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
-			if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
-			if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
+			if (MSGControll == false) {
+				if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
+				if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
+				if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
+			}
 			outputText("\n");
 			if(player.hasStatusEffect(StatusEffects.FirstAttack)) {
 				attack();
@@ -2989,6 +3019,24 @@ public function attack():void {
 	meleeDamageAcc();
 }
 	
+public function CommasForDigits(damage:Number):void{ 
+	var damagemsg:Array = new Array (String(damage).length);
+	var damageTemp:Number = damage;
+	outputText("<b>(</b>");
+	for (var i:int = 0; i < damagemsg.length; i++) {
+		damagemsg[i] = int(damageTemp % 10);
+		damageTemp = int(damageTemp / 10);
+	}
+	for (var j:int = 0, k:int = (damagemsg.length%3); j < damagemsg.length; j++) {
+		if (k == 0){
+			if (j != 0) outputText(",");
+			k = 3;
+		}
+			outputText("<b><font color=\"#800000\">" + String(damagemsg[damagemsg.length - j - 1]) + "</font></b>");
+			k--;
+	}
+	outputText("<b>)</b>");
+}
 public function meleeDamageAcc():void {
 	var accMelee:Number = 0;
 	accMelee += (meleeAccuracy() / 2);
@@ -3243,13 +3291,15 @@ public function meleeDamageAcc():void {
 				if (player.spe >= 300) damage = doDamage(damage);
 			}
 		}
-		if(damage <= 0) {
+		if((damage <= 0) && ((MDOCount == maxCurrentRangeAttacks()) && (MSGControllForEvasion == true) && (MSGControll == false))) {
 			damage = 0;
 			outputText("Your attacks are deflected or blocked by [monster a] [monster name].");
 		}
 		else {
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) outputText("You growl and savagely rend [monster a] [monster name] with your claws. ");
 			else if (vbladeeffect == true) outputText("As you strike, the sword shine with a red glow as somehow you aim straight for [monster a] [monster name] throat. ");
+			else if (MDODialogs)  {
+			}
 			else outputText("You hit [monster a] [monster name]! ");
 			if (crit == true) {
 				outputText("<b>Critical! </b>");
@@ -3259,6 +3309,8 @@ public function meleeDamageAcc():void {
 				if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
 				else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 			}
+			if (damage > 1000) CommasForDigits(damage);
+			else
 			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			if (player.weapon == weapons.PRURUMI && player.spe >= 150) {
 				outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
@@ -3469,7 +3521,8 @@ public function meleeDamageAcc():void {
 			}
 			dynStats("lus", 25);
 		}
-		outputText("\n");
+		outputText(" ");
+		if (MDOCount == maxCurrentAttacks()) outputText("\n");
 		checkAchievementDamage(damage);
 		WrathWeaponsProc();
 		heroBaneProc(damage);
@@ -3751,9 +3804,139 @@ public function combatBlock2():Number {
 public function isWieldingRangedWeapon():Boolean {
 	return player.weaponName.indexOf("staff") != -1 && player.hasPerk(PerkLib.StaffChanneling);
 }
-
+// DamageOverhaul calculation
+public function DamageOverhaul(damage:Number):Number {
+		/* From here will be XWOLKX's alpha damage overhaul for melee sh*t coding
+	 * Base idea:
+	 * damage varies from 15% to 115%
+	 * Lower threshold scailing from wis up to 10%
+	 * Upper threshold scailing from int up to 10%
+	 * Speed difference add roll for random
+	 * If player.spe > monster.spe => roll for greater multiplier
+	 * else roll for worser
+	 */
+	if (flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] == 1)
+	{
+	var higher_threshold: Number = 105; // base highest damage multiplier value that deal player
+	var lower_threshold: Number = 55; // base lowest
+	var percent:Number;
+    var times:int = 1;
+	var lock:Boolean = false; // when false - enemy SPE greater
+	// threshold math
+	if (isBowDamageMDO) lower_threshold = 25, higher_threshold = 125; // Bow damage would have higher difference than melee.
+	percent = player.spe / 100; // this var is needed for comprehension Player SPE and Monster SPE in % difference
+	percent = Math.round(monster.spe / percent) - 100; // this operation give us info how bigger/smaller monster SPE in comprehension with player SPE
+	if (percent > 20) {
+		lower_threshold -= (percent-20); // if Monster SPE higher, then we deal more likely weak damage
+	}
+	else {
+		lower_threshold += (percent-20); // if Monster SPE lower, then we deal more likely good damage
+	}
+	
+	if ((lower_threshold < 15) && (!isBowDamageMDO)) { // Lowest possible value for melee
+		lower_threshold = 15;  
+	if ((lower_threshold < 10) && (isBowDamageMDO)) // Lowest possible value for bow
+		lower_threshold = 10;
+	}
+	// applying stats modificators for thresholds
+	if (player.wis >= 190) {
+		lower_threshold += 10; // written value is how much you want to boost damage by wis
+	}
+	else {
+		lower_threshold += Math.round(player.wis / 20) // + percent damage per 20 wis
+	}
+	if (player.inte >= 285) { 
+		higher_threshold += 10; // written value is how much you want to boost damage by int
+	}
+	else {
+		higher_threshold += Math.round(player.inte / 30) // + percent damage per 30 int
+	}
+	if (player.level > monster.level) lower_threshold ++;
+	if (lower_threshold > 95) { // We still need some random space
+		lower_threshold = 95;  
+	}
+	// multiplier math
+	/* outputText(percent.toString());
+	outputText("    ");  for test only*/
+	if (percent != 0) {
+	if (percent < 0 ) {
+		percent *= ( -1);
+		lock = true; // that means that our speed greater then monsters
+	}
+		times = int(Math.round(percent / 15)); // how many times damage would be rolled
+	}
+	if (times > 7) times = 7; // roll times limit
+	var random_value:Number = Math.round(Math.random() * (higher_threshold - lower_threshold)) + lower_threshold; // roll multiplier from lower to higher threshold
+	for (var i:int = 1; i < times; i++) // rolling higher / lower value
+	{
+		var b:Number = Math.round(Math.random() * (higher_threshold-lower_threshold)) + lower_threshold;
+		if (lock) { // we would deal greater damage
+			if ((random_value < b) && (Math.round(Math.random() * (times*2/3)) == Math.round(times*2/6))){  // formula for random multiplier calculation. If you don't like results - use another one. This one give us some-like exponential distribution when <times> rises up tp 7 and uniform distribution when <times> = 1
+				random_value = b;
+			}
+		}
+		else // we would deal worse damage
+			if ((random_value > b) && (Math.round(Math.random() * (times*2/3)) == Math.round(times*2/6))){ 
+			random_value = b;
+		}
+	}
+		function firstLetterUpperCase(strData:String):String  // for text
+		{
+		var strArray:Array = strData.split(' ');
+		var newArray:Array = [];
+		for (var str:String in strArray) 
+			{
+			newArray.push(strArray[str].charAt(0).toUpperCase() + strArray[str].slice(1));
+			}
+		return newArray.join(' ');
+		}
+		
+		// damage dialogs for just attack
+		if ((MDODialogs) && (!isBowDamageMDO) && (MDOCount == 1)) {
+				if (lock) {
+					if (percent > 30) {
+					if (random_value <= 20) outputText("Due to your recklessness, you barely hit [monster a] [monster name]. ");
+					if ((random_value > 20) && (random_value <= 40)) outputText("You underestimated [monster a] [monster name]'s moves and just slighty wounded your foe. ");
+					if ((random_value > 40) && (random_value <= 70)) outputText("As your [weapon] cracked the ground, you wounder how lucky [monster a] [monster name] are. ");
+					if ((random_value > 70) && (random_value <= 85)) outputText("You rush towards your foe. " + firstLetterUpperCase("[monster a]") + " [monster name] trying to parry your strike, but it's not enough to stop your hard blow! ");
+					if ((random_value > 85) && (random_value <= 100)) outputText("Your foe watching you coming closer and preparing to deal with your attack. But you move so fast that [monster a] [monster name] did not had time to react on your powerful slash! ");
+					if ((random_value > 100) && (random_value < higher_threshold)) outputText("As you watch [monster a] [monster name] moves like in the slow motion, you easily hit the vital point of your foe! ");
+					if (random_value == higher_threshold)  outputText("You unleashed a deadly blow with all your might upon [monster a] [monster name]! ");
+					}
+				}
+				if (percent <= 30) {
+					if (random_value <= 20) outputText("You were tricked by stance and barely hit [monster a] [monster name]. ");
+					if ((random_value > 20) && (random_value <= 40)) outputText("You underestimated [monster a] [monster name]'s moves and just slighty wounded your foe. "); // copy-pasta
+					if ((random_value > 40) && (random_value <= 70)) outputText("You face the splendid moves of [monster a] [monster name] which prevent you from attacking! But your will doesn't falter so easily and with the next swing you manage to strike your foe! ");
+					if ((random_value > 70) && (random_value <= 85)) outputText("You hit [monster a] [monster name]! "); // default one, sorry :D
+					if ((random_value > 85) && (random_value <= 100)) outputText("Predicting [monster a] [monster name] moves, you strike a powerful blow! ");
+					if ((random_value > 100) && (random_value < higher_threshold)) outputText("Your mighty blow made [monster a] [monster name] stagger for a moment! ");
+					if (random_value == higher_threshold) outputText("Nimbly shortening the distance, you hit [monster a] [monster name] with overwhelming power! ");
+				}
+				else if (!lock) {
+					if (random_value <= 20) outputText("You hit your opponent, but defence stance of [monster a] [monster name] almost totally absorbed your attack. ")
+					if ((random_value > 20) && (random_value <= 40)) outputText("You hit [monster a] [monster name], but [monster.pronoun1] moves so deft that yours strike loses most of its strenght. ");
+					if ((random_value > 40) && (random_value <= 70)) outputText("As you hurtle toward [monster a] [monster name], you draw your weapon and prepare to hit. Getting close enough, you swing and crush your [weapon] onto [monster.pronoun2]. No matter how agile your foe is, [monster.pronoun1] wasn't able to evade your attack! ");
+					if ((random_value > 70) && (random_value <= 85)) outputText("You take the [weapon] in steady grip of your hands and widely swing at the foe. " + firstLetterUpperCase("[monster a]") + " [monster name] predicted your attack, but you manage to change it's trajectory just in time! ");
+					if ((random_value > 85) && (random_value <= 100)) outputText("You miraculously reflected [monster a] [monster name] attack and did riposte to [monster.pronoun2]! ");
+					if ((random_value > 100) && (random_value < higher_threshold)) outputText("Fighting on the of edge of your capabilities, you managed to deal several certain hits to [monster a] [monster name]! ");
+					if (random_value == higher_threshold) outputText("You found a gap in [monster a] [monster name]'s defence. Using perfect timing, you put all your strength to break through it! ");
+				} 
+		}
+	random_value /= 100; // back to %
+	// damage math
+	
+	damage *= random_value;
+	damage = Math.round(damage);
+	isBowDamageMDO = false;
+	}
+	return damage;
+	// outputText(random_value.toString()); for test only
+	// End of overhaul and of sh*t coding
+}
 //DEAL DAMAGE
 public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+	MDOCount ++; // for multipile attacks to prevent stupid repeating of damage messages
 	if (player.hasPerk(PerkLib.Sadist)) {
 		damage *= 1.2;
 		dynStats("lus", 3);
@@ -3769,6 +3952,8 @@ public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = 
 	}
 	if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
 	if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
+	damage = DamageOverhaul(damage);
+	if (damage == 0) MSGControllForEvasion = true;
 	if (monster.HP - damage <= 0) {
 		/* No monsters use this perk, so it's been removed for now
 		if(monster.hasPerk(PerkLib.LastStrike)) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
@@ -3785,96 +3970,6 @@ public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = 
 			damage *= sac.value2;
 		}
 	}
-	/* From there will be XWOLKX's alpha damage overhaul for melee sh*t coding
-	 * Base idea:
-	 * damage varies from 35% to 115%
-	 * Lower threshold scailing from wis up to 10%
-	 * Upper threshold scailing from int up to 10%
-	 * Speed difference add roll for random
-	 * If player.spe > monster.spe => roll for greater multiplier
-	 * else roll for worser
-	 */
-	if (flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] == 1)
-	{
-	var higher_threshold: Number = 115; // base highest damage multiplier value that deal player
-	var lower_threshold: Number = 35; // base lowest
-	var percent:Number;
-    var times:int = 1;
-	var lock:Boolean = false;
-	
-	
-	// threshold math
-	percent = player.spe / 100; // this var is needed for comprehension Player SPE and Monster SPE in % difference
-	percent = Math.round(monster.spe / percent) - 100; // this operation give us info how bigger/smaller monster SPE in comprehension with player SPE
-	if (percent >= 20) {
-		lower_threshold -= (percent-20); // if Monster SPE higher, then we deal more likely weak damage
-	}
-	else {
-		lower_threshold += (percent-20); // if Monster SPE lower, then we deal more likely good damage
-	}
-	if (lower_threshold < 0) { // We don't want to heal enemy with attack, do we? :D
-		lower_threshold = 0;  
-	}
-	// applying stats modificators for thresholds
-	if (player.wis > 200) {
-		lower_threshold += 10; // written value is how much you want to boost damage by wis
-	}
-	else {
-		lower_threshold += Math.round(player.wis / 20) // + percent damage per 20 wis
-	}
-	if (player.inte > 300) { 
-		higher_threshold += 10; // written value is how much you want to boost damage by int
-	}
-	else {
-		higher_threshold += Math.round(player.inte / 30) // + percent damage per 30 int
-	}
-	if (lower_threshold > 95) { // We still need some random space
-		lower_threshold = 95;  
-	}
-	// multiplier math
-	/* outputText(percent.toString());
-	outputText("    ");  for test only*/
-	if (percent != 0) {
-	if (percent < 0 ) {
-		percent *= ( -1);
-		lock = true; // that means that our speed greater then monsters
-	}
-		times = int(Math.round(percent / 15)); // how many times damage would be rolled
-	}
-	if (times > 7) times = 7;
-	var random_value:Number = Math.round(Math.random() * (higher_threshold - lower_threshold)) + lower_threshold; // roll multiplier from lower to higher threshold
-	for (var i:int = 1; i < times; i++) // rolling higher / lower value
-	{
-		var b:Number = Math.round(Math.random() * (higher_threshold-lower_threshold)) + lower_threshold;
-		if (lock) { // we would deal greater damage
-			if ((random_value < b) && (Math.round(Math.random() * (times*2/3)) == Math.round(times*2/6))){  // formula for random. If you don't like results - good luck to find nice formula.
-				random_value = b;
-			}
-		}
-		else // we would deal worser damage
-			if ((random_value > b) && (Math.round(Math.random() * (times*2/3)) == Math.round(times*2/6))){ 
-			random_value = b;
-		}
-	}
-		/* damage dialogs
-		if (damage > 0)
-		{
-			if (lock) 
-			{
-				if (random_value < 20) outputText("")
-			}
-			else
-			{
-				if (random_value > 95) outputText("")
-			}
-		} */
-	random_value /= 100; // back to %
-	// damage math
-	
-	damage *= random_value;
-	}
-	// outputText(random_value.toString()); for test only
-	// End of overhaul and of sh*t coding
 	damage = Math.round(damage);
 	if (damage < 0) damage = 1;
 	if (apply) {
