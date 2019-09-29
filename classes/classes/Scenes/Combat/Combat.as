@@ -492,11 +492,11 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 	clearOutput();
 		if (flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] == 1) {
 	MDODialogs = true; // JA dialogs, look 3875
+	}
 	MDOCount = 0;
 	MSGControll = false;
 	MSGControllForEvasion = false;
 	isBowDamageMDO = false;
-	}
 	flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 0;
 	if (newRound) {
 		flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 0;
@@ -3300,7 +3300,9 @@ public function meleeDamageAcc():void {
 			else if (vbladeeffect == true) outputText("As you strike, the sword shine with a red glow as somehow you aim straight for [monster a] [monster name] throat. ");
 			else if (MDODialogs)  {
 			}
-			else outputText("You hit [monster a] [monster name]! ");
+			else if (MSGControll == false){ outputText("You hit [monster a] [monster name]! "); // for not displaying the same msg a lot of times.
+			MSGControll = true;
+			}
 			if (crit == true) {
 				outputText("<b>Critical! </b>");
 				if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
