@@ -1285,7 +1285,7 @@ public static const LETHICE_REDEEMED:int                                   			= 
 public static const LETHICE_KILLED:int                                   			= 1277;
 public static const LETHICE_LEFT_ALIVE:int                                   		= 1278;
 public static const GAME_END:int                                   					= 1279;
-public static const UNKNOWN_FLAG_NUMBER_01280:int                                   = 1280;
+public static const UNKNOWN_FLAG_NUMBER_01280:int  			                        = 1280;
 public static const UNKNOWN_FLAG_NUMBER_01281:int                                   = 1281;
 public static const UNKNOWN_FLAG_NUMBER_01282:int                                   = 1282;
 public static const UNKNOWN_FLAG_NUMBER_01283:int                                   = 1283;
@@ -2971,7 +2971,7 @@ public static const UNKNOWN_FLAG_NUMBER_02962:int                               
 public static const UNKNOWN_FLAG_NUMBER_02963:int                                   = 2963;
 public static const UNKNOWN_FLAG_NUMBER_02964:int                                   = 2964;
 public static const UNKNOWN_FLAG_NUMBER_02965:int                                   = 2965;
-public static const UNKNOWN_FLAG_NUMBER_02966:int                                   = 2966;
+public static const MELEE_DAMAGE_OVERHAUL    :int                                   = 2966;
 public static const UNKNOWN_FLAG_NUMBER_02967:int                                   = 2967;
 public static const SPEED_SCALLING:int                                   			= 2968;
 public static const STRENGTH_SCALLING:int                                   		= 2969;
