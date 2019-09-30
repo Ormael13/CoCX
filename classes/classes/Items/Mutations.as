@@ -305,9 +305,23 @@ public final class Mutations extends MutationsHelper
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(25);
 			statScreenRefresh();
 		}
+		public function midgradesoulforcerecoverypill2(player:Player):void {
+			outputText("You open the bottle and start to cram the pills in your mouth, then swallowing them all.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 6000)");
+			player.soulforce += 6000;
+			if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(250);
+			statScreenRefresh();
+		}
 		public function highgradesoulforcerecoverypill(player:Player):void {
 			outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 3600)");
 			player.soulforce += 3600;
+			if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(125);
+			statScreenRefresh();
+		}
+		public function highgradesoulforcerecoverypill2(player:Player):void {
+			outputText("You open the bottle and start to cram the pills in your mouth, then swallowing them all.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 36000)");
+			player.soulforce += 36000;
 			if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(125);
 			statScreenRefresh();
@@ -329,8 +343,8 @@ public final class Mutations extends MutationsHelper
 		public function triplethrustmanual(player:Player):void
 		{
 			clearOutput();
-			outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Triple Thrust.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
 			if (!player.hasStatusEffect(StatusEffects.KnowsTripleThrust)) {
+				outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Triple Thrust.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Triple Thrust.</b>");
 				player.createStatusEffect(StatusEffects.KnowsTripleThrust, 0, 0, 0, 0);
 				return;
@@ -341,11 +355,55 @@ public final class Mutations extends MutationsHelper
 				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
 			}
 		}
+		public function sextuplethrustmanual(player:Player):void
+		{
+			clearOutput();
+			if (player.hasPerk(PerkLib.SoulPersonage) && player.hasStatusEffect(StatusEffects.KnowsTripleThrust)) {
+				if (!player.hasStatusEffect(StatusEffects.KnowsSextupleThrust)) {
+					outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Sextuple Thrust.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+					outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Sextuple Thrust.</b>");
+					player.createStatusEffect(StatusEffects.KnowsSextupleThrust, 0, 0, 0, 0);
+					return;
+				}
+				if (player.hasStatusEffect(StatusEffects.KnowsSextupleThrust)) {
+					outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+					player.soulforce += 45;
+					if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+				}
+			}
+			else {
+				outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a momnet whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
+				outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+				if (!player.hasStatusEffect(StatusEffects.KnowsTripleThrust)) outputText(" Or the one that require other less complicated soulskill used as a base to learn the more advanced one.");
+			}
+		}
+		public function nonuplethrustmanual(player:Player):void
+		{
+			clearOutput();
+			if (player.hasPerk(PerkLib.SoulSprite) && player.hasStatusEffect(StatusEffects.KnowsSextupleThrust)) {
+				if (!player.hasStatusEffect(StatusEffects.KnowsNonupleThrust)) {
+					outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Nonuple Thrust.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+					outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Nonuple Thrust.</b>");
+					player.createStatusEffect(StatusEffects.KnowsNonupleThrust, 0, 0, 0, 0);
+					return;
+				}
+				if (player.hasStatusEffect(StatusEffects.KnowsNonupleThrust)) {
+					outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+					player.soulforce += 100;
+					if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+				}
+			}
+			else {
+				outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a momnet whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
+				outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+				if (!player.hasStatusEffect(StatusEffects.KnowsSextupleThrust)) outputText(" Or the one that require other less complicated soulskill used as a base to learn the more advanced one.");
+			}
+		}
 		public function dracosweepmanual(player:Player):void
 		{
 			clearOutput();
-			outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Draco Sweep.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
 			if (!player.hasStatusEffect(StatusEffects.KnowsDracoSweep)) {
+				outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Draco Sweep.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Draco Sweep.</b>");
 				player.createStatusEffect(StatusEffects.KnowsDracoSweep, 0, 0, 0, 0);
 				return;
@@ -359,8 +417,8 @@ public final class Mutations extends MutationsHelper
 		public function manybirdsmanual(player:Player):void
 		{
 			clearOutput();
-			outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Many Birds.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
 			if (!player.hasStatusEffect(StatusEffects.KnowsManyBirds)) {
+				outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Many Birds.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Many Birds.</b>");
 				player.createStatusEffect(StatusEffects.KnowsManyBirds, 0, 0, 0, 0);
 				return;
@@ -371,12 +429,93 @@ public final class Mutations extends MutationsHelper
 				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
 			}
 		}
+		public function hailofbladesmanual1(player:Player):void
+		{
+			clearOutput();
+			if (!player.hasStatusEffect(StatusEffects.KnowsHailOfBlades)) {
+				outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Hail of Blades.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Hail of Blades.</b>");
+				player.createStatusEffect(StatusEffects.KnowsHailOfBlades, 0, 0, 0, 0);
+				return;
+			}
+			if (player.hasStatusEffect(StatusEffects.KnowsHailOfBlades)) {
+				outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+				player.soulforce += 25;
+				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+			}
+		}
+		public function hailofbladesmanual2(player:Player):void
+		{
+			clearOutput();
+			if (player.hasPerk(PerkLib.SoulPersonage) && player.hasStatusEffect(StatusEffects.KnowsHailOfBlades)) {
+				if (!player.hasStatusEffect(StatusEffects.KnowsGrandioseHailOfBlades)) {
+					outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Sextuple Thrust.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+					outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Grandiose Hail of Blades.</b>");
+					player.createStatusEffect(StatusEffects.KnowsGrandioseHailOfBlades, 0, 0, 0, 0);
+					return;
+				}
+				if (player.hasStatusEffect(StatusEffects.KnowsGrandioseHailOfBlades)) {
+					outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+					player.soulforce += 45;
+					if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+				}
+			}
+			else {
+				outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a momnet whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
+				outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+				if (!player.hasStatusEffect(StatusEffects.KnowsHailOfBlades)) outputText(" Or the one that require other less complicated soulskill used as a base to learn the more advanced one.");
+			}
+		}
+		public function hailofbladesmanual3(player:Player):void
+		{
+			clearOutput();
+			if (player.hasPerk(PerkLib.SoulPersonage) && player.hasStatusEffect(StatusEffects.KnowsGrandioseHailOfBlades)) {
+				if (!player.hasStatusEffect(StatusEffects.KnowsGrandioseHailOfMoonBlades)) {
+					outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Sextuple Thrust.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+					outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Grandiose Hail of Moon Blades.</b>");
+					player.createStatusEffect(StatusEffects.KnowsGrandioseHailOfMoonBlades, 0, 0, 0, 0);
+					return;
+				}
+				if (player.hasStatusEffect(StatusEffects.KnowsGrandioseHailOfMoonBlades)) {
+					outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+					player.soulforce += 45;
+					if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+				}
+			}
+			else {
+				outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a momnet whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
+				outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+				if (!player.hasStatusEffect(StatusEffects.KnowsGrandioseHailOfBlades)) outputText(" Or the one that require other less complicated soulskill used as a base to learn the more advanced one.");
+			}
+		}
+		public function hailofbladesmanual4(player:Player):void
+		{
+			clearOutput();
+			if (player.hasPerk(PerkLib.SoulPersonage) && player.hasStatusEffect(StatusEffects.KnowsGrandioseHailOfMoonBlades)) {
+				if (!player.hasStatusEffect(StatusEffects.KnowsSextupleThrust)) {
+					outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Sextuple Thrust.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+					outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Sextuple Thrust.</b>");
+					player.createStatusEffect(StatusEffects.KnowsSextupleThrust, 0, 0, 0, 0);
+					return;
+				}
+				if (player.hasStatusEffect(StatusEffects.KnowsSextupleThrust)) {
+					outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+					player.soulforce += 45;
+					if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+				}
+			}
+			else {
+				outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a momnet whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
+				outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+				if (!player.hasStatusEffect(StatusEffects.KnowsGrandioseHailOfMoonBlades)) outputText(" Or the one that require other less complicated soulskill used as a base to learn the more advanced one.");
+			}
+		}
 		public function cometmanual(player:Player):void
 		{
 			clearOutput();
 			if (player.hasPerk(PerkLib.SoulWarrior)) {
-				outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Comet.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
 				if (!player.hasStatusEffect(StatusEffects.KnowsComet)) {
+					outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Comet.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
 					outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Comet.</b>");
 					player.createStatusEffect(StatusEffects.KnowsComet, 0, 0, 0, 0);
 					return;
@@ -387,14 +526,17 @@ public final class Mutations extends MutationsHelper
 					if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
 				}
 			}
-			else outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a momnet whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away.  You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+			else {
+				outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a momnet whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
+				outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+			}
 		}
 		public function violetpupiltransformationmanual(player:Player):void
 		{
 			clearOutput();
 			if (player.hasPerk(PerkLib.SoulWarrior)) {
-				outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Violet Pupil Transformation.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
 				if (!player.hasStatusEffect(StatusEffects.KnowsVioletPupilTransformation)) {
+					outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Violet Pupil Transformation.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
 					outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Violet Pupil Transformation.</b>");
 					player.createStatusEffect(StatusEffects.KnowsVioletPupilTransformation, 0, 0, 0, 0);
 					return;
@@ -405,7 +547,10 @@ public final class Mutations extends MutationsHelper
 					if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
 				}
 			}
-			else outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a momnet whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away.  You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+			else {
+				outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a momnet whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
+				outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+			}
 		}
 		public function soulblastmanual(player:Player):void
 		{
@@ -418,8 +563,8 @@ public final class Mutations extends MutationsHelper
 		{
 			clearOutput();
 			if (player.hasPerk(PerkLib.SoulApprentice)) {
-				outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into flames.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
 				if (!player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
+					outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into flames.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
 					outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Flames of Love (Basic Rank).</b>");
 					player.createStatusEffect(StatusEffects.KnowsFlamesOfLove, 1, 0, 0, 0);
 					return;
@@ -430,14 +575,17 @@ public final class Mutations extends MutationsHelper
 					if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
 				}
 			}
-			else outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a momnet whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away.  You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+			else {
+				outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a momnet whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
+				outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+			}
 		}
 		public function basiciciclesoflovemanual(player:Player):void
 		{
 			clearOutput();
 			if (player.hasPerk(PerkLib.SoulApprentice)) {
-				outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into icicles.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
 				if (!player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
+					outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into icicles.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
 					outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Icicles of Love (Basic Rank).</b>");
 					player.createStatusEffect(StatusEffects.KnowsIciclesOfLove, 1, 0, 0, 0);
 					return;
@@ -448,7 +596,10 @@ public final class Mutations extends MutationsHelper
 					if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
 				}
 			}
-			else outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a momnet whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away.  You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+			else {
+				outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a momnet whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
+				outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+			}
 		}
 		public function devourermanual(player:Player):void
 		{

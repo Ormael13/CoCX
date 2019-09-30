@@ -397,10 +397,14 @@ package classes.GlobalFlags
 		public static const EPIC_US_EVOLVE:int						= 350;
 		public static const EPIC_THEY_EVOLVE:int					= 351;
 		public static const EPIC_EVERYONE_EVOLVE:int				= 352;
-		public static const UNKNOWN_ACHIEVEMENT_353:int				= 353;
-		public static const UNKNOWN_ACHIEVEMENT_354:int				= 354;
-		public static const UNKNOWN_ACHIEVEMENT_355:int				= 355;
-		public static const UNKNOWN_ACHIEVEMENT_356:int				= 356;
+		public static const DUNGEON_GOT_LOST:int					= 353;
+		public static const DUNGEON_HUG_THE_LEFT_WALL:int			= 354;
+		public static const DUNGEON_PAN_AINT_GOT_NOTHING_ON_YOU:int	= 355;
+		public static const DUNGEON_MASTER_OF_THE_LABYRINT:int		= 356;
+		public static const DUNGEON_WHY_ARE_YOU_HERE:int			= 357;
+		public static const UNKNOWN_ACHIEVEMENT_358:int				= 358;
+		public static const UNKNOWN_ACHIEVEMENT_359:int				= 359;
+		public static const UNKNOWN_ACHIEVEMENT_360:int				= 360;
 		
 	}
 

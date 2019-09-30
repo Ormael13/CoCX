@@ -69,7 +69,7 @@ public function AuroraWonSparring():void {
 }
 public function AuroraLostSparring():void {
 	clearOutput();
-	outputText("\"<i>I need get stronger to be of better use to " + player.mf("Master", "Mistress") + ",</i>\" she mumbles under her breath.");/*
+	outputText("\"<i>I need get stronger to be of better use to " + player.mf("Master", "Mistress") + ",</i>\" she mumbles under her breath.");
 	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
 		if (flags[kFLAGS.AURORA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.AURORA_DEFEATS_COUNTER]++;
 		else flags[kFLAGS.AURORA_DEFEATS_COUNTER] = 1;
@@ -90,8 +90,20 @@ public function AuroraLostSparring():void {
 			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 18, 0, 0);
 			flags[kFLAGS.AURORA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.AURORA_LVL] = 4;
+		}/*
+		if (flags[kFLAGS.AURORA_DEFEATS_COUNTER] == 4 && flags[kFLAGS.AURORA_LVL] == 4) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, 24);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 24, 0, 0);
+			flags[kFLAGS.AURORA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.AURORA_LVL] = 5;
 		}
-	}*/
+		if (flags[kFLAGS.AURORA_DEFEATS_COUNTER] == 5 && flags[kFLAGS.AURORA_LVL] == 5) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, 30);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 30, 0, 0);
+			flags[kFLAGS.AURORA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.AURORA_LVL] = 6;
+		}*/
+	}
 	cleanupAfterCombat();
 }
 

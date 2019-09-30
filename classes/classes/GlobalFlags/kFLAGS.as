@@ -2004,7 +2004,7 @@ public static const UNKNOWN_FLAG_NUMBER_01995:int                               
 public static const UNKNOWN_FLAG_NUMBER_01996:int                                   = 1996;
 public static const UNKNOWN_FLAG_NUMBER_01997:int                                   = 1997;
 public static const UNKNOWN_FLAG_NUMBER_01998:int                                   = 1998;
-public static const UNKNOWN_FLAG_NUMBER_01999:int                                   = 1999;
+public static const HERO_BANE_DAMAGE_BANK:int                                   	= 1999;
 public static const CAMP_CABIN_METAL_PIECES_RESOURCES:int                           = 2000;
 public static const TIMES_ORGASMED:int                                              = 2001; //The reason flags are moved down there is to provide room when CoC ever gets updated and flags gets added. This is to avoid screwing up saves.
 public static const CORRUPTED_MARAE_KILLED:int                                      = 2002;

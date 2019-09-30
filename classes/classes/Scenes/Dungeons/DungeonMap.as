@@ -1084,7 +1084,7 @@ public class DungeonMap extends BaseContent
 			else if (DungeonAbstractContent.dungeonLoc >= 104 && DungeonAbstractContent.dungeonLoc < 131) { //River Dungeon: Floor 2
 				rawOutputText("River Dungeon");
 				if (DungeonAbstractContent.dungeonLoc == 104) {
-					rawOutputText(", Floor 1");
+					rawOutputText(", Floor 2");
 					rawOutputText("\n            [ ]-   ");
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]    ");
@@ -1138,19 +1138,39 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |     ");
 				}*/
 			}
-			else if (DungeonAbstractContent.dungeonLoc >= 131 && DungeonAbstractContent.dungeonLoc < 68) { //Den of Desire
+			else if (DungeonAbstractContent.dungeonLoc >= 131 && DungeonAbstractContent.dungeonLoc < 135) { //Ebon Labyrinth
 				rawOutputText("Ebon Labyrinth");
 				if (DungeonAbstractContent.dungeonLoc == 131) {
 					rawOutputText(", Corridor");
-					rawOutputText("\n     |     ");
-					rawOutputText("\n   —[P]—   ");
-					rawOutputText("\n     |     ");
+					rawOutputText("\n   |   |   ");
+					rawOutputText("\n —[P]—[ ]— ");
+					rawOutputText("\n   |   |   ");
+					rawOutputText("\n —[ ]—[ ]— ");
+					rawOutputText("\n   |   |   ");
 				}
 				else if (DungeonAbstractContent.dungeonLoc == 132) {
 					rawOutputText(", Corridor");
-					rawOutputText("\n     |     ");
-					rawOutputText("\n   —[P]—   ");
-					rawOutputText("\n     |     ");
+					rawOutputText("\n   |   |   ");
+					rawOutputText("\n —[ ]—[P]— ");
+					rawOutputText("\n   |   |   ");
+					rawOutputText("\n —[ ]—[ ]— ");
+					rawOutputText("\n   |   |   ");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 133) {
+					rawOutputText(", Corridor");
+					rawOutputText("\n   |   |   ");
+					rawOutputText("\n —[ ]—[ ]— ");
+					rawOutputText("\n   |   |   ");
+					rawOutputText("\n —[ ]—[P]— ");
+					rawOutputText("\n   |   |   ");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 134) {
+					rawOutputText(", Corridor");
+					rawOutputText("\n   |   |   ");
+					rawOutputText("\n —[ ]—[ ]— ");
+					rawOutputText("\n   |   |   ");
+					rawOutputText("\n —[P]—[ ]— ");
+					rawOutputText("\n   |   |   ");
 				}
 			}
 			

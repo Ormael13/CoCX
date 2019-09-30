@@ -85,7 +85,7 @@ import classes.internals.Utils;
 				addButton(1, "Spar", DinahSparring);
 				addButtonDisabled(3, "Talk", "NYI");
 				addButtonDisabled(4, "Sex", "NYI");
-				addButtonDisabled(5, "Present", "NYI");//2 i 3 skopiować z MarbleScene.as i dostosować
+				addButtonDisabled(5, "Present", "NYI");//5 i 6 skopiować z MarbleScene.as i dostosować
 				addButtonDisabled(6, "Give Item", "NYI");
 				//addButton(6, "Give Item", canGiveItem() ? giveItem : null);
 				addButton(14, "Back", camp.campFollowers);
@@ -118,14 +118,13 @@ import classes.internals.Utils;
 		public function DinahLostSparring():void {
 			clearOutput();
 			outputText("\"<i>Was that your will, Lady Godiva?</i>\" she mumbles under her breath.");
-			/*if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
+			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
 				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] >= 1) flags[kFLAGS.DINAH_DEFEATS_COUNTER]++;
 				else flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 1;
 				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 1 && flags[kFLAGS.DINAH_LVL_UP] == 1) {
 					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 6);
 					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 6, 0);
 					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.DINAH_SPELLS_CASTED] = 0;
 					flags[kFLAGS.DINAH_LVL_UP] = 2;
 				}
 				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 2 && flags[kFLAGS.DINAH_LVL_UP] == 2) {
@@ -140,7 +139,19 @@ import classes.internals.Utils;
 					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.DINAH_LVL_UP] = 4;
 				}
-			}*/
+				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 4 && flags[kFLAGS.DINAH_LVL_UP] == 4) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 24);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 24, 0);
+					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.DINAH_LVL_UP] = 5;
+				}
+				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 5 && flags[kFLAGS.DINAH_LVL_UP] == 5) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 30);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 30, 0);
+					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.DINAH_LVL_UP] = 6;
+				}
+			}
 			cleanupAfterCombat();
 		}
 		

@@ -189,6 +189,12 @@ public function alvinaMainCampMenu():void
 	outputText("\"<i>Well hello [name], what brings you to me today?</i>\"\n\n");
 	menu();
 	addButton(0, "Appearance", alvinaMainCampMenuAppearance).hint("Examine Alvina detailed appearance.");
+	if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 4 && flags[kFLAGS.ALVINA_FOLLOWER] >= 16) {
+		if (flags[kFLAGS.ALVINA_FOLLOWER] >= 19) addButtonDisabled(2, "Sex", "Still WIP section.");//alvinaMainCampSexMenu
+		if (flags[kFLAGS.ALVINA_FOLLOWER] == 16 || flags[kFLAGS.ALVINA_FOLLOWER] == 18) addButton(2, "Confession", alvinaMainCampMenuConfession).hint("If you not know what it mean then... whatever I lost faith in your player intelligance.");
+	}
+	else addButtonDisabled(2, "???", "Need to finish Advanced Study to unlock this option.");
+	if (flags[kFLAGS.ALVINA_FOLLOWER] >= 19) addButtonDisabled(4, "Team", "Still WIP section.");
 	if (player.hasStatusEffect(StatusEffects.AlvinaTraining)) addButtonDisabled(10, "Study", "You already completed basic Study.");
 	else addButton(10, "Study", alvinaCampStudy);
 	if (player.hasStatusEffect(StatusEffects.AlvinaTraining) && player.statusEffectv1(StatusEffects.AlvinaTraining2) < 2) addButton(11, "Advanced Study", alvinaCampAdvancedStudy);
@@ -217,10 +223,51 @@ public function alvinaMainCampMenuAppearance():void
 	outputText("Between those goat legs of hers is her vagina which, like most demon can likely wrinkle a cock dry within seconds if she decides to use it. This said, Alvina is as a general rule more interested in magic than sex and, unlike most succubi that are natural squirters, Alvina’s vagina looks about as standard as one of a human woman would be, both in the moistness and size.\n\n");
 	outputText("Alvina is perfectly aware that you are analysing her but, as usual, is more concerned about whatever lecture she is on then about you sizing her up.\n\n");
 	outputText("\"<i>Well then, when you are done sizing my body up, maybe you can tell me what you are here for?");
-	outputText(" I have little time for games as you know all too well.");//(If pc isn't in couple with her)
+	if (flags[kFLAGS.ALVINA_FOLLOWER] < 19) outputText(" I have little time for games as you know all too well.");
 	outputText("</i>\"\n\n");
 	menu();
 	addButton(14, "Back", alvinaMainCampMenu);
+}
+
+public function alvinaMainCampMenuConfession():void
+{
+	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
+	clearOutput();
+	if (flags[kFLAGS.ALVINA_FOLLOWER] == 18) {
+		outputText("You present the flower to Alvina who blushes in surprise. Delicately taking the flower from your hand, she places it in a glass display case.\n\n");
+		outputText("\"<i>I wasn’t sure you would come back alive and with the rose no less, but you did fulfill your end of the bargain and I will fulfill mine. I haven’t had proper sex in a century, so fine, I will give you a try, let’s see what you're made off.</i>\"\n\n");
+		flags[kFLAGS.ALVINA_FOLLOWER] = 19;
+		/*if (player.lib > 50) {
+			outputText("Alvina is perfectly aware that you are analysing her but, as usual, is more concerned about whatever lecture she is on then about you sizing her up.\n\n");
+			outputText("\"<i>Well then, when you are done sizing my body up, maybe you can tell me what you are here for?</i>\"\n\n");
+		}
+		else {*/
+			outputText("It's barely been an hour and Alvina has already become quite bored. She shakes her head negatively and removes herself from you.\n\n");
+			outputText("\"<i>You lack both originality and talent even for a demon, where’s your libido?! I’m quite disappointed, so nah, I don’t think you're worth my while on this field. Now if you would excuse me I have my stuff to pack up.</i>\"\n\n");
+			doNext(camp.campFollowers);
+			cheatTime2(5);
+		//}
+	}
+	if (flags[kFLAGS.ALVINA_FOLLOWER] == 16) {
+		outputText("You find Alvina somewhat busy packing up her gear. You're surprised she’s leaving this early.\n\n");
+		outputText("\"<i>There's no point in me staying here, you successfully learned all I know and did all I asked. I have no further need or interest for you.</i>\"\n\n");
+		outputText("Perhaps, but isn’t she at heart a proper succubus? Doesn’t she want to at least give you a try before ditching you and going back to her boring experiments?\n\n");
+		outputText("\"<i>Boring? I will have you know I aim to conquer creation itself through magical mastery! As for sharing my bed, good luck with that. I have no interest in love or matters of the flesh. Why do you think I exiled myself away from Lethice’s court when I had power and influence? ");
+		outputText("Yes, I’m a succubus, but I’m very picky about my partners. I’m two hundred years too old to just pick up the first poor bastard who happens to cross my path.</i>\"\n\n");
+		outputText("How about she steps out of her research for a moment and actually give you a chance to prove your worth?\n\n");
+		outputText("At first, she looks at you like she’s about to kill you and you realize she might indeed do just that. However, her expression softens into an amused smile instead.\n\n");
+		outputText("\"<i>Um… Perhaps… There is indeed a way you could prove yourself… That is if you can obtain the black rose for me.</i>\"\n\n");
+		outputText("The black rose? Just what is she going on about?\n\n");
+		outputText("\"<i>Deep underground, in one of Mareth’s labyrinthine dungeons, grows a fabled rose with petals as black as midnight. This flower is said to grant true immortality to whoever possesses it. Thousands of fools died trying to acquire it, either to the plant’s fatal poisonous spikes or to the horrors that guard it, it’s probably just a fairy tale. ");
+		outputText("Fact is, the black rose is the facet of a long lost deity related to death by natural causes and aging. I want to acquire it to study its properties. Bring me the rose and I will offer you a place in my bed.</i>\"\n\n");
+		flags[kFLAGS.ALVINA_FOLLOWER] = 17;
+		doNext(camp.campFollowers);
+		cheatTime2(5);
+	}
+}
+public function alvinaMainCampSexMenu():void
+{
+	
 }
 
 public function alvinaCampStudy():void
@@ -258,7 +305,7 @@ public function alvinaCampStudy():void
 		outputText("\"<i>Still daydreaming in the middle of my lectures [name]?</i>\"\n\n");
 		outputText("You quickly jerk back into action to show you're listening. Alvina resumes explaining the universal principle of how to channel desire into power. You learn a lot, but the way she flaunts her body, and the many innuendos she punctuates the lesson with, make you flush red in arousal.  During the entire lesson, your teacher is teasing you, ");
 		outputText("and there's nothing you can do about it but wait patiently for the end of the lecture. By the time you get to doing something practical, you are so aroused you feel your lust rise uncontrollably just from casting those spells as wild fantasies assault your mind.\n\n");
-		if (player.inte > 70 && player.lib > 70 && flags[kFLAGS.ALVINA_FOLLOWER] == 14) {
+		if (player.inte > 70 && player.lib > 70 && flags[kFLAGS.ALVINA_FOLLOWER] == 15) {
 			outputText("You finally achieved complete mastery over your lust, conquering your arousal and turning it into a weapon to use against your foe as you unleash a massive blast of black magic on the target dummy.\n\n");
 			outputText("\"<i>Very good [name], you finally achieved mastery of the theory. Tomorrow we will discuss more advanced principles.</i>\" She dismisses you with these congratulations as you head back to camp feeling both sexy and powerful.\n\n");
 			player.createStatusEffect(StatusEffects.AlvinaTraining, 0, 0, 0, 0);

@@ -1203,7 +1203,7 @@ public class CombatMagic extends BaseCombatContent {
 		monster.HP -= damage;
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		if(monster.HP < 1) doNext(endHpVictory);
+		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else
 		{
 			if (monster is Lethice && (monster as Lethice).fightPhase == 3)
@@ -1623,7 +1623,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		clearOutput();
 		spellIceSpike2();
-		if(monster.HP < 1) doNext(endHpVictory);
+		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 	public function spellIceSpike2():void {
@@ -1694,7 +1694,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		clearOutput();
 		spellDarknessShard2();
-		if(monster.HP < 1) doNext(endHpVictory);
+		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 	public function spellDarknessShard2():void {
@@ -1874,7 +1874,7 @@ public class CombatMagic extends BaseCombatContent {
 		monster.HP -= damage;
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		if(monster.HP < 1) doNext(endHpVictory);
+		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 
@@ -1942,7 +1942,7 @@ public class CombatMagic extends BaseCombatContent {
 		monster.HP -= damage;
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		if(monster.HP < 1) doNext(endHpVictory);
+		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 
@@ -2013,7 +2013,7 @@ public class CombatMagic extends BaseCombatContent {
 		monster.HP -= damage;
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		if(monster.HP < 1) doNext(endHpVictory);
+		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 
@@ -2067,7 +2067,7 @@ public class CombatMagic extends BaseCombatContent {
 			monster.HP -= damage;
 			combat.heroBaneProc(damage);
 			statScreenRefresh();
-			if(monster.HP < 1) doNext(endHpVictory);
+			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 			else enemyAI();
 		}
 		else {
@@ -2164,7 +2164,7 @@ public class CombatMagic extends BaseCombatContent {
 		monster.HP -= damage;
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		if(monster.HP < 1) doNext(endHpVictory);
+		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 
@@ -2221,7 +2221,7 @@ public class CombatMagic extends BaseCombatContent {
 			monster.HP -= damage;
 			combat.heroBaneProc(damage);
 			statScreenRefresh();
-			if(monster.HP < 1) doNext(endHpVictory);
+			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 			else enemyAI();
 		}
 		else {
@@ -2580,7 +2580,7 @@ public class CombatMagic extends BaseCombatContent {
 				flags[kFLAGS.SPELLS_CAST]++;
 				if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 				spellPerkUnlock();
-				if(monster.HP < 1) doNext(endHpVictory);
+				if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 				else enemyAI();
 				return;
 			}
@@ -2689,7 +2689,7 @@ public class CombatMagic extends BaseCombatContent {
 			clearOutput();
 			spellWhitefire2();
 		}
-		if (monster.HP < 1)
+		if (monster.HP <= monster.minHP())
 		{
 			doNext(endHpVictory);
 		}
@@ -2762,7 +2762,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		clearOutput();
 		spellLightningBolt2();
-		if(monster.HP < 1) doNext(endHpVictory);
+		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 	public function spellLightningBolt2():void {
@@ -2887,7 +2887,7 @@ public class CombatMagic extends BaseCombatContent {
 		monster.HP -= damage;
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		if (monster.HP < 1)
+		if (monster.HP <= monster.minHP())
 		{
 			doNext(endHpVictory);
 		}
@@ -2961,7 +2961,7 @@ public class CombatMagic extends BaseCombatContent {
 		monster.HP -= damage;
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		if(monster.HP < 1) doNext(endHpVictory);
+		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 

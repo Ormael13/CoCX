@@ -146,7 +146,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.tailType == Tail.NEKOMATA_FORKED_1_3 || player.tailType == Tail.NEKOMATA_FORKED_2_3 || (player.tailType == Tail.CAT && player.tailCount == 2)) {//player.hasPerk(PerkLib.NekomataThyroidGland) || 
-			bd = buttons.add("GhostFire", nekomataGhostFire).hint("Unleash a ghost flame at your opponent for high damage. It isn't stoped by barriers that stops magic spells or attacks. \n");
+			bd = buttons.add("GhostFire", nekomataGhostFire).hint("Unleash a ghost flame at your opponent for high damage. It's unstoped by barriers that stops magic spells or attacks. \n");
 			/*if (player.tailType == 8 && player.tailCount == 2 && player.hasPerk(PerkLib.)) {
 				bd.requireSoulforce(150 * soulskillCost() * soulskillcostmulti());
 				bd.requireMana(spellCost(150));
@@ -981,7 +981,7 @@ public class MagicSpecials extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		if (monster.HP < 1) doNext(endHpVictory);
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 
@@ -1935,7 +1935,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage *= 1.75;
 			outputText(" (" + damage + ")");
 			monster.HP -= damage;
-			if(monster.HP < 1) {
+			if(monster.HP <= monster.minHP()) {
 				doNext(endHpVictory);
 			}
 			else if(monster.lust >= 99) {
@@ -1961,7 +1961,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
-		if(monster.HP < 1) {
+		if(monster.HP <= monster.minHP()) {
 			doNext(endHpVictory);
 		}
 		else enemyAI();
@@ -2000,7 +2000,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage *= 1.75;
 			outputText(" (" + damage + ")");
 			monster.HP -= damage;
-			if(monster.HP < 1) {
+			if(monster.HP <= monster.minHP()) {
 				doNext(endHpVictory);
 			}
 			else if(monster.lust >= monster.maxLust()) {
@@ -2077,7 +2077,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("\n");
 		combat.heroBaneProc(damage);
 		if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
-		if(monster.HP < 1) {
+		if(monster.HP <= monster.minHP()) {
 			doNext(endHpVictory);
 		}
 		else if(monster.lust >= monster.maxLust()) {
@@ -2371,7 +2371,7 @@ public class MagicSpecials extends BaseCombatContent {
 		monster.HP -= damage;
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		if (monster.HP < 1)
+		if (monster.HP <= monster.minHP())
 		{
 			doNext(endHpVictory);
 		}
@@ -2521,7 +2521,7 @@ public class MagicSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else {
-			if(monster.HP <= 0) doNext(endHpVictory);
+			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
@@ -2630,7 +2630,7 @@ public class MagicSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else {
-			if(monster.HP <= 0) doNext(endHpVictory);
+			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
@@ -2750,7 +2750,7 @@ public class MagicSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else {
-			if(monster.HP <= 0) doNext(endHpVictory);
+			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
@@ -2862,7 +2862,7 @@ public class MagicSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else {
-			if(monster.HP <= 0) doNext(endHpVictory);
+			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
@@ -2980,7 +2980,7 @@ public class MagicSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else {
-			if(monster.HP <= 0) doNext(endHpVictory);
+			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
@@ -3198,7 +3198,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("\n\nTo your complete frustration, " + monster.a + monster.short + " answers correctly.");
 			outputText("\n\n");
 		}
-	if(monster.HP < 1) doNext(endHpVictory);
+	if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 	else enemyAI();
 	}
 
@@ -3468,7 +3468,7 @@ public class MagicSpecials extends BaseCombatContent {
 		checkAchievementDamage(damage * 2);
 		combat.heroBaneProc(damage * 2);
 		doNext(playerMenu);
-		if (monster.HP <= 0) doNext(endHpVictory);
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 
@@ -3507,7 +3507,7 @@ public class MagicSpecials extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 		doNext(playerMenu);
-		if (monster.HP <= 0) doNext(endHpVictory);
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 

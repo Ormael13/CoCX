@@ -98,6 +98,7 @@ use namespace CoC;
 		//Perks used to store 'queued' perk buys
 		public var perkPoints:Number = 0;
 		public var statPoints:Number = 0;
+		//public var superPerkPoints:Number = 0;	perk points for special perks buyable each 6 lvl's ???
 		public var ascensionPerkPoints:Number = 0;
 
 		public var tempStr:Number = 0;

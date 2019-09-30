@@ -41,6 +41,7 @@ import classes.Scenes.NPCs.Aurora;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.Diana;
 import classes.Scenes.NPCs.Electra;
+import classes.Scenes.NPCs.Neisa;
 import classes.Scenes.NPCs.RyuBiDragon;
 import classes.Scenes.NPCs.Sonya;
 import classes.Scenes.Places.Boat.Marae;
@@ -216,10 +217,7 @@ use namespace CoC;
 			addButton(5, "Enemies", EnemiesMenu).hint("For spawning various enemies to test fight them.");
 			addButton(6, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
 			addButton(7, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
-			addButton(8, "Phylactery", PhylacteryTesting);
-			//if (flags[kFLAGS.NEISA_FOLLOWER] == 3) addButton(8, "NeisaFix", AuroraReset).hint("Fix Neisa to be less clingy.");
 			//if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 8) addButton(8, "Repta-Tongue", AddReptaTongue).hint("Items bungle for Repta-Tongue Potion.");
-			if (player.perkv4(PerkLib.ProductivityDrugs) > 0 || player.hasPerk(PerkLib.ProductivityDrugs)) addButton(9, "P.Drugs Fix", fixingProductionDrugs).hint("To fix Productive Drug perk wild rampage.");
 			if (player.hasPerk(PerkLib.Metamorph)) addButton(9, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Metamorph all options unlock.");
 			//addButton(9, "ChimeraBodyUlt", ChimeraBodyUltimateStage).hint("Ultimate Stage of Chimera Body for tests and lulz. Now with on/off switch for more lulz.");
 			addButton(10, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
@@ -238,31 +236,10 @@ public function FightLethice():void {
 	outputText("Entering battle with Lethice! Enjoy ^^");
 	startCombat(new Lethice());
 }
-public function PhylacteryTesting():void {
+public function FightNeisa():void {
 	clearOutput();
-	outputText("Entering phylactery creation simulation! Enjoy ^^");
-	flags[kFLAGS.ALVINA_FOLLOWER] = 13;
-	flags[kFLAGS.SIEGWEIRD_FOLLOWER] = 3;
-	player.createKeyItem("Stone Statue Lethicite", 0, 0, 0, 0);
-	player.itemSlot1.setItemAndQty(consumables.L_DRAFT,5);
-	player.itemSlot2.setItemAndQty(useables.SOULGEM,5);
-	player.itemSlot3.setItemAndQty(useables.SOULGEM,5);
-	doNext(SoulforceCheats);
-}
-public function AuroraReset():void {
-	clearOutput();
-	player.removeStatusEffect(StatusEffects.CombatFollowerNeisa);
-	flags[kFLAGS.PLAYER_COMPANION_1] = "";
-	flags[kFLAGS.NEISA_FOLLOWER] = 4;
-	outputText("<b>Gained Perk: Basic Leadership</b>");
-	player.createPerk(PerkLib.BasicLeadership,0,0,0,0);
-	doNext(SoulforceCheats);
-}
-public function fixingProductionDrugs():void {
-	clearOutput();
-	outputText("Fixed Productive Drugs perk (again) before save update will fix it for public users too.");
-	player.removePerk(PerkLib.ProductivityDrugs);
-	doNext(SoulforceCheats);
+	outputText("Entering battle with Neisa! Enjoy ^^");
+	startCombat(new Neisa());
 }
 		public function AddReptaTongue():void {
 			outputText("\n\n<b>(Gained set of items to make Repta-Tongue Potion!)</b>\n\n");
@@ -1399,7 +1376,8 @@ public function fixingProductionDrugs():void {
 			addButton(1, "Marae", FightMarae).hint("Test fight with Marae (depending on game stage she can be buffed or unbuffed).");
 			addButton(2, "Sonya", FightSonya).hint("Test fight with Sonya.");
 			addButton(3, "RyuBi", FightRyuBi).hint("Test fight with RyuBi.");
-			addButton(4, "Aria", FightAria).hint("Test fight with melkie huntress Aria.");
+			//addButton(4, "Aria", FightAria).hint("Test fight with melkie huntress Aria.");
+			addButton(4, "Neisa", FightNeisa).hint("Test fight with Neisa.");
 			addButton(5, "Lethice", FightLethice).hint("Test fight with Lethice.");
 			//addButton(5, "DE Ranger", FightDarkElfRanger).hint("Test fight with Dark Elf Ranger. (lvl 39)");
 			//addButton(6, "DE Sniper", FightDarkElfSniper).hint("Test fight with Dark Elf Sniper. (lvl 51)");

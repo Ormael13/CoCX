@@ -64,34 +64,46 @@ package classes.Scenes.NPCs
 			if (findPerk(PerkLib.NaturalHealingEpic) >= 0) mod1 += .5;
 			if (findPerk(PerkLib.NaturalHealingLegendary) >= 0) mod1 += .6;
 			return mod1;
-		}
-		public function SpellMod():Number {
+		}/*
+		public function SpellMod():Number {		potem jak bdzie jakiś spell nie bedący healem używany przez nią
 			var mod2:Number = 1;
-			//if (findPerk(PerkLib.Channeling) >= 0) mod2 += .1;
-			//if (findPerk(PerkLib.JobSorcerer) >= 0) mod2 += .1;
+			if (findPerk(PerkLib.Channeling) >= 0) mod2 += .2;
+			if (findPerk(PerkLib.JobSorcerer) >= 0) mod2 += .1;
 			if (findPerk(PerkLib.WizardsFocus) >= 0) mod2 += .4;
 			return mod2;
+		}*/
+		public function SoulskillMod():Number {
+			var mod3:Number = 1;
+			if (findPerk(PerkLib.DaoistCultivator) >= 0) mod3 += .1;
+			if (findPerk(PerkLib.DaoistApprenticeStage) >= 0) {
+				if (findPerk(PerkLib.SoulApprentice) >= 0) mod3 += .2;
+				if (findPerk(PerkLib.SoulPersonage) >= 0) mod3 += .2;
+				if (findPerk(PerkLib.SoulWarrior) >= 0) mod3 += .2;
+			}
+			return mod3;
 		}
 		
 		public function usingHealPill():void {
 			var temp:Number = 50;
 			temp += this.tou;
+			if (flags[kFLAGS.DIANA_LVL_UP] >= 5) temp *= 3;
+			if (flags[kFLAGS.DIANA_LVL_UP] >= 10) temp *= 3;
 			outputText("She pop the small pill into her mouth and swallow. <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
 			addHP(temp);
 		}
 		public function usingARC():void {
 			outputText("She grab mana potion, pull the cork off and swiftly chug it down.");
-			if (flags[kFLAGS.DIANA_LVL_UP] >= 5) mana += 240;
+			if (flags[kFLAGS.DIANA_LVL_UP] >= 10) mana += 1440;
+			else if (flags[kFLAGS.DIANA_LVL_UP] >= 5) mana += 240;
 			else mana += 40;
 		}
 		
 		public function usingManyBirdsSoulskill():void {
 			outputText("She thrust her hand outwards with deadly intent, and in the blink of an eye a crystals shoots towards you.  Crystals hits you, dealing ");
-			var soulforcecost:int = 10;// * soulskillCost() * soulskillcostmulti()
-			soulforce -= soulforcecost;
-			var damage:Number = inteligencescalingbonus();
+			soulforce -= soulskillCostManyBirds();
+			var damage:Number = wisdomscalingbonus();
 			if (damage < 10) damage = 10;
-			damage *= SpellMod();
+			damage *= SoulskillMod();
 			damage = Math.round(damage);
 			player.takeMagicDamage(damage, true);
 			outputText(" damage!");
@@ -124,15 +136,32 @@ package classes.Scenes.NPCs
 		override protected function performCombatAction():void
 		{
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 8 && HPRatio() < .2 && soulforce >= 100 && !hasStatusEffect(StatusEffects.MonsterVPT)) {
-				outputText("Diana eyes starts to glow with a violet hua and you can see all of her wounds are now slowly healing.\n");
+				outputText("Diana eyes starts to glow with a violet hue and you can see all of her wounds are now slowly healing.\n");
 				createStatusEffect(StatusEffects.MonsterVPT, 200, 0, 0, 0);
 			}
 			if (hasStatusEffect(StatusEffects.MonsterVPT)) {
 				if (HPRatio() > .9 || soulforce < 100) removeStatusEffect(StatusEffects.MonsterVPT);
 				else soulforce -= 100;
 			}
-			if (HPRatio() < .2 && (mana >= spellCostHeal())) usingHealSpell();
-			else if (flags[kFLAGS.DIANA_LVL_UP] >= 5 && flags[kFLAGS.DIANA_LVL_UP] < 8) {
+			if (HPRatio() < .2 && (mana >= spellCostHeal())) usingHealSpell();/*
+			else if (flags[kFLAGS.DIANA_LVL_UP] >= 11 && flags[kFLAGS.DIANA_LVL_UP] < 14) {
+				var choice4:Number = rand(6);
+				if (choice4 < 3) {
+					if ((soulforce >= soulskillCostManyBirds()) && rand(2) == 0) usingManyBirdsSoulskill();
+					else eAttack();
+				}
+				if (choice4 > 2 && choice4 < 5) {
+					if (HPRatio() < .6 && rand(2) == 0 && (mana >= spellCostHeal())) usingHealSpell();
+					else if (HPRatio() < .6 && rand(2) == 0 && !hasStatusEffect(StatusEffects.MonsterRegen2) && (mana >= spellCostRegenerate())) usingRegenerateSpell();
+					else if (rand(2) == 0 && (mana < (this.maxMana() - 1500))) usingARC();
+					else eAttack();
+				}
+				if (choice4 == 5) {
+					if (HPRatio() < .8) usingHealPill();
+					else eAttack();
+				}
+			}*/
+			else if (flags[kFLAGS.DIANA_LVL_UP] >= 5 && flags[kFLAGS.DIANA_LVL_UP] < 11) {
 				var choice3:Number = rand(6);
 				if (choice3 < 3) {
 					if ((soulforce >= soulskillCostManyBirds()) && rand(2) == 0) usingManyBirdsSoulskill();
@@ -414,6 +443,7 @@ package classes.Scenes.NPCs
 			this.createPerk(PerkLib.AlwaysSuccesfullRunaway, 0, 0, 0, 0);
 			this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 1) {
+				this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
 				this.createPerk(PerkLib.JobHealer, 0, 0, 0, 0);
 				this.createPerk(PerkLib.BasicSpirituality, 0, 0, 0, 0);
 			}
@@ -439,18 +469,29 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 6) {
 				this.createPerk(PerkLib.NaturalHealingMajor, 0, 0, 0, 0);
+				this.createPerk(PerkLib.DaoistCultivator, 0, 0, 0, 0);
+				this.createPerk(PerkLib.ImprovedSpirituality, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 7) {
+				this.createPerk(PerkLib.HclassHeavenTribulationSurvivor, 0, 0, 0, 0);
 				this.createPerk(PerkLib.SoulSprite, 0, 0, 0, 0);
+				this.createPerk(PerkLib.DaoistApprenticeStage, 0, 0, 0, 0);
+				this.createPerk(PerkLib.Channeling, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 8) {
 				this.createPerk(PerkLib.NaturalHealingEpic, 0, 0, 0, 0);
+				this.createPerk(PerkLib.DaoistWarriorStage, 0, 0, 0, 0);
+				this.createPerk(PerkLib.HalfStepToAdvancedSpirituality, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 9) {
 				this.createPerk(PerkLib.SoulScholar, 0, 0, 0, 0);
+				this.createPerk(PerkLib.AdvancedSpirituality, 0, 0, 0, 0);
+				this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 10) {
 				this.createPerk(PerkLib.NaturalHealingLegendary, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EpicIntelligence, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_FOLLOWER] == 3 || flags[kFLAGS.DIANA_FOLLOWER] == 4) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			checkMonster();

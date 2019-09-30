@@ -214,9 +214,10 @@ public class HeXinDao extends BaseContent
             return introText+desc+costText+(itype.value*0.2)+endText2;
         }
 		addButton(1, "1st Stall", TierI).hint("Check out first of stalls with a common items and for cultivators that just started.");
-        if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(2, "2nd Stall", TierII).hint("Check out second of stalls with a items for Soul Apprentices and Soul Warriors.");
+        if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(2, "2nd Stall", TierII).hint("Check out second of stalls with a items for Soul Apprentice, Soul Personage and Soul Warrior stage cultivators.");
 		else addButtonDisabled(2, "2nd Stall", "Need to be at least Soul Apprentice to check those items.");
-        //addButton(3, "3rd Stall", TierIII).hint("Check out second of stalls with a items.");
+        if (player.findPerk(PerkLib.SoulSprite) >= 0) addButton(3, "3rd Stall", TierIII).hint("Check out second of stalls with a items for Soul Sprite, Soul Scholar and Soul Elder stage cultivators.");
+		else addButtonDisabled(3, "3rd Stall", "Need to be at least Soul Sprite to check those items.");
 		function TierI():void {
 			menu();
             addButton(0, "LGSFRecovPill", buyItem1,consumables.LG_SFRP,
@@ -229,7 +230,7 @@ public class HeXinDao extends BaseContent
 					sayLine1(consumables.INCOINS,"These incenses are quite special. They will grant you visions if only for a moment while meditating. This should help you find the wisdom and insight you need.")).hint("Incense of Insight.");
 			if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) {
 				addButton(5, "Triple Thrust", buyItem2,consumables.TRITMAN,
-						sayLine2(consumables.TRITMAN,"It's manual for Triple Thrust, this simple technique allows to unleash three thrusts that will became stronger and stronger as you train your body and soul."),
+						sayLine2(consumables.TRITMAN,"It's manual for Triple Thrust, this very simple technique allows to unleash three thrusts that will became stronger and stronger as you train your body and soul."),
 						"\n\nWherever you gonna try to go deeper into all that 'soulforce' stuff or not at least you now got something to begin.  Although seems even name of the manual mentioning thrusting seems like it could have been influenced by this realm nature...or it's just a coincidence.  "
 				).hint("Triple Thrust Manual.");
 				addButton(6, "Draco Sweep", buyItem2,consumables.DRASMAN,
@@ -240,6 +241,10 @@ public class HeXinDao extends BaseContent
 						sayLine2(consumables.MABIMAN,"It's manual for Many Birds, this simple technique allows to project a figment of your soulforce as a crystal traveling at extreme speeds that will became stronger and stronger as you train your body and soul."),
 						"\n\nWherever you gonna try to go deeper into all that 'soulforce' stuff or not at least you now got something to begin.  Although seems name of the manual is odd but it makes you remember something...but what and from where you not certain.  "
 				).hint("Many Birds Manual.");
+				addButton(8, "Hail of Blades", buyItem2,consumables.HOB1MAN,
+						sayLine2(consumables.HOB1MAN,"It's manual for Hail of Blades, this simple technique allows to form few etheral weapons traveling at extreme speeds that will became stronger and stronger as you train your body and soul."),
+						"\n\nWherever you gonna try to go deeper into all that 'soulforce' stuff or not at least you now got something to begin.  Although seems name of the manual is odd but it makes you remember something...but what and from where you not certain.  "
+				).hint("Hail of Blades Manual.");
 				if (flags[kFLAGS.HUNGER_ENABLED] > 0) addButton(13, "Fasting Pill", buyItem2,consumables.FATPILL,
 						sayLine1(consumables.FATPILL,"It's quite useful item for soul cultivators, this little pill can help you not feel hunger for a few days.")).hint("Fasting Pill.");
 			}
@@ -256,14 +261,24 @@ public class HeXinDao extends BaseContent
 					sayLine2(consumables.IOLBMAN,"It's manual for Icicles of Love (Basic Rank), this simple technique allows to covert excess lust into icicles."),
 					"\n\nSeems it's some sort of art to deal with needless lust by changing it into other....more deadly form.  But what does basic rank mean?  Is there some higher rank for this soulskill?  "
 			).hint("Icicles of Love (Basic Rank) Manual.");
+			if (player.findPerk(PerkLib.SoulPersonage) >= 0) {
+				addButton(4, "Sextuple Thrust", buyItem2,consumables.SEXTMAN,
+						sayLine2(consumables.SEXTMAN,"It's manual for Sextuple Thrust, this simple technique allows to unleash six thrusts that will became stronger and stronger as you train your body and soul."),
+						"\n\nWherever you gonna go deeper into all that 'soulforce' stuff or not at least you now got something to train.  Although seems even name of the manual mentioning thrusting seems like it could have been influenced by this realm nature...or it's just a coincidence.  "
+				).hint("Sextuple Thrust Manual.");
+				addButton(5, "Grandiose Hail of Blades", buyItem2,consumables.HOB2MAN,
+						sayLine2(consumables.HOB2MAN,"It's manual for Grandiose Hail of Blades, this technique allows to form many etheral weapons traveling at extreme speeds that will became stronger and stronger as you train your body and soul."),
+						"\n\nWherever you gonna go deeper into all that 'soulforce' stuff or not at least you now got something to begin.  Although seems name of the manual is odd but it makes you remember something...but what and from where you not certain.  "
+				).hint("Grandiose Hail of Blades Manual.");
+			}
 			if (player.findPerk(PerkLib.SoulWarrior) >= 0) {
-				addButton(5, "MGSFRecovPill", buyItem2,consumables.MG_SFRP,
+				addButton(7, "MGSFRecovPill", buyItem2,consumables.MG_SFRP,
 						sayLine2(consumables.MG_SFRP,"It's quite useful item for all cultivators at Soul Warrior or above stage, this small pill can help you restore some of used up soulforce and it would be much more than the low-grade one.")).hint("Mid-grade Soulforce Recovery Pill.");
-				addButton(6, "Comet", buyItem2,consumables.COMETMA,
+				addButton(8, "Comet", buyItem2,consumables.COMETMA,
 						sayLine2(consumables.COMETMA,"It's manual for Comet, this technique allows to project a shard of soulforce, which will come crashing down upon your opponent as a crystalline comet.  Perfect when you fight group of enemies and it also becoming more powerful as long you would train your body and soul."),
 						"\n\nWherever you gonna try to go deeper into all that 'soulforce' stuff or not at least you now got something to use when figthing group of enemies.  Although you not meet often so far more than singular enemy at once you're sure that deeper in this forsaken realm you will face groups or maybe even hordes of demons at once and would need something to deal with them.  "
 				).hint("Comet Manual.");
-				addButton(7, "V P Trans", buyItem2,consumables.VPTRMAN,
+				addButton(9, "V P Trans", buyItem2,consumables.VPTRMAN,
 						sayLine2(consumables.VPTRMAN,"It's manual for Violet Pupil Transformation, this advanced technique allows to channel soulforce into regenerative power that would fill whole body allowing recovering even from a brink of a death.  It only flaw is that it constantly drain cultivator soulforce so you could end in a tight situation without enough soulforce to use other skills."),
 						"\n\nSeems like it's similar to healing spell soul skill and on top of that the one which isn't one time used one time healed but with enough soulforce could be kept active for very long period of time.  It should give you another edge during your crusade against demons.  Additionaly ability to healing from brink of death could prove to be usefull in future fights.  "
 				).hint("Violet Pupil Transformation Manual.");
@@ -273,14 +288,27 @@ public class HeXinDao extends BaseContent
 		}
 		function TierIII():void {
 			menu();
-			
-            addButton(14, "Back", golemmerchant);
+			addButton(0, "Nonuple Thrust", buyItem2,consumables.NONTMAN,
+					sayLine2(consumables.NONTMAN,"It's manual for Nonuple Thrust, this technique allows to unleash nine thrusts that will became stronger and stronger as you train your body and soul."),
+					"\n\nSince you going deeper into all that 'soulforce' stuff you now got something to train.  Although seems even name of the manual mentioning thrusting seems like it could have been influenced by this realm nature...or it's just a coincidence.  "
+			).hint("Nonuple Thrust Manual.");
+			addButton(1, "GHoMB", buyItem2,consumables.HOB3MAN,
+					sayLine2(consumables.HOB3MAN,"It's manual for Grandiose Hail of Moon Blades, this technique allows to form huge amount of etheral weapons traveling at extreme speeds that will became stronger and stronger as you train your body and soul."),
+					"\n\nSince you going deeper into all that 'soulforce' stuff you now got something to train.  Although seems name of the manual is odd but it makes you remember something...but what and from where you not certain.  "
+			).hint("Grandiose Hail of Moon Blades Manual.");
+			addButton(14, "Back", golemmerchant);
             statScreenRefresh();
+		}/*
+		if (player.findPerk(PerkLib.SoulExalt) >= 0) { lub soul overlord - each soul stage above starting allow to extend channeling time by 1 round
+			addButton(1, "GHoMB", buyItem2,consumables.HOB4MAN,
+					sayLine2(consumables.HOB4MAN,"It's manual for Grandiose Hail of Moon Blades, this technique allows to form massive amount of etheral weapons traveling at extreme speeds that will became stronger and stronger as you train your body and soul."),
+					"\n\nYou already went so deep into becoming cultivator so why not?  'Few' more weapons formed will not hurt at this point, right?  "
+			).hint("Grandiose Heavenly Hail of Yin-Yang Blades: Endless Tide Manual.");
+		}*/
+		if (player.findPerk(PerkLib.SoulOverlord) >= 0) {
+			addButton(10, "HGSFRecovPill", buyItem2,consumables.HG_SFRP,
+					sayLine2(consumables.HG_SFRP,"It's quite useful item for all cultivators at Soul Overlord or above stage, this small pill can help you restore some of used up soulforce and it would be much more than the mid-grade one.")).hint("High-grade Soulforce Recovery Pill.");
 		}
-        if (player.findPerk(PerkLib.SoulOverlord) >= 0) {
-            addButton(10, "HGSFRecovPill", buyItem2,consumables.HG_SFRP,
-                    sayLine2(consumables.HG_SFRP,"It's quite useful item for all cultivators at Soul Overlord or above stage, this small pill can help you restore some of used up soulforce and it would be much more than the mid-grade one.")).hint("High-grade Soulforce Recovery Pill.");
-        }
         addButton(14, "Back", riverislandVillageStuff);
         statScreenRefresh();
     }

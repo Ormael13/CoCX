@@ -135,7 +135,7 @@ public class Achievements extends BaseContent
 			addAchievement("Century", kACHIEVEMENTS.TIME_CENTURY, "Get to day 36,500. (100 years)", "Get to day 36,500. (100 years | It's time to stop playing. Go outside.)", true);
 			addAchievement("Time Traveller", kACHIEVEMENTS.TIME_TRAVELLER, "Get to day 36,500+ by tampering with save", "", true);
 			
-			titleAchievementSection("Dungeons"); //16 achievements
+			titleAchievementSection("Dungeons"); //23 achievements
 			addAchievement("Delver", kACHIEVEMENTS.DUNGEON_DELVER, "Clear any dungeon.");
 			addAchievement("Delver Apprentice", kACHIEVEMENTS.DUNGEON_DELVER, "Clear 2 dungeons.");
 			addAchievement("Delver Expert", kACHIEVEMENTS.DUNGEON_DELVER_MASTER, "Clear 4 dungeons.");
@@ -155,11 +155,15 @@ public class Achievements extends BaseContent
 			//addAchievement("Dungeon Seeker (2nd layer)", kACHIEVEMENTS., "Clear 2nd floor of the River Dungeon.");
 			//addAchievement("Dungeon Seeker (3rd layer)", kACHIEVEMENTS., "Clear 3rd floor of the River Dungeon.");
 			//addAchievement("Dungeon Seeker (4th layer)", kACHIEVEMENTS., "Clear 4th floor of the River Dungeon.");
-			//addAchievement("Honorary Minotaur", kACHIEVEMENTS.DUNGEON_HONORARY_MINOTAUR, "Clear the Ebon Labyrinth.");
-			//addAchievement("Dungeonmaster", kACHIEVEMENTS.DUNGEON_DUNGEONMASTER, "Reach 50th room of Ebon Labyrinth.");
-			//addAchievement("", kACHIEVEMENTS., "Reach 100th room of Ebon Labyrinth.");
-			//addAchievement("", kACHIEVEMENTS., "Reach 150th room of Ebon Labyrinth.");
-			//addAchievement("", kACHIEVEMENTS., "Reach 200th room of Ebon Labyrinth.");
+			addAchievement("Honorary Minotaur", kACHIEVEMENTS.DUNGEON_HONORARY_MINOTAUR, "Reach 50th room of Ebon Labyrinth. Clear the Ebon Labyrinth.");
+			addAchievement("Got lost?", kACHIEVEMENTS.DUNGEON_GOT_LOST, "Reach 100th room of Ebon Labyrinth.");
+			addAchievement("Hug the left wall", kACHIEVEMENTS.DUNGEON_HUG_THE_LEFT_WALL, "Reach 150th room of Ebon Labyrinth.");
+			addAchievement("Pan ain't got nothing on you", kACHIEVEMENTS.DUNGEON_PAN_AINT_GOT_NOTHING_ON_YOU, "Reach 200th room of Ebon Labyrinth.");
+			addAchievement("Master of the labyrinth", kACHIEVEMENTS.DUNGEON_MASTER_OF_THE_LABYRINT, "Reach 250th room of Ebon Labyrinth.");
+			addAchievement("Why are you here?", kACHIEVEMENTS.DUNGEON_WHY_ARE_YOU_HERE, "Reach 300th room of Ebon Labyrinth.");
+			//addAchievement("", kACHIEVEMENTS., "Reach 350th room of Ebon Labyrinth.");
+			//addAchievement("", kACHIEVEMENTS., "Reach 400th room of Ebon Labyrinth.");
+			addAchievement("Four heads better then one", kACHIEVEMENTS.DUNGEON_DUNGEONMASTER, "Defeat the Chimera Boss in Ebon Labyrinth.");
 			
 			titleAchievementSection("Fashion"); //24 achievements
 			addAchievement("Wannabe Wizard", kACHIEVEMENTS.FASHION_WANNABE_WIZARD, "Equip wizard robes and magic staff.");

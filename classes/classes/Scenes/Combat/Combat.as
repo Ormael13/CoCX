@@ -34,6 +34,7 @@ import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
 import classes.Scenes.Dungeons.D3.*;
+import classes.Scenes.Dungeons.EbonLabyrinth.ChaosChimera;
 import classes.Scenes.Dungeons.HelDungeon.HarpyMob;
 import classes.Scenes.Dungeons.HelDungeon.HarpyQueen;
 import classes.Scenes.NPCs.*;
@@ -278,7 +279,7 @@ public function cleanupAfterCombatImpl(nextFunc:Function = null):void {
 		//Clear itemswapping in case it hung somehow
 //No longer used:		itemSwapping = false;
 		//Player won
-		if(monster.HP < 1 || monster.lust > monster.maxLust()) {
+		if(monster.HP <= monster.minHP() || monster.lust > monster.maxLust()) {
 			awardPlayer(nextFunc);
 		}
 		//Player lost
@@ -1179,32 +1180,35 @@ public function elementalattacks(elementType:int, summonedElementals:int):void {
 		}
 	}
 	else {
-		if(monster.HP <= 0) doNext(endHpVictory);
+		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else doNext(endLustVictory);
 	}
 }
 
 public function basemechmeleeattacks():void {
 	flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+	clearOutput();
 	if (player.isInGoblinMech()) var weapon:String = "sawblade";
-	if(player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 0 && !isWieldingRangedWeapon()) {
-		outputText("You attempt to attack, but at the last moment your mech wrenches away, preventing you from even coming close to landing a blow!  The kitsune's seals have made normal melee attack impossible!  Maybe you could try something else?\n\n");
+	if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 0 && !isWieldingRangedWeapon()) {
+		outputText("You attempt to attack, but at the last moment your mech wrenches away, preventing you from even coming close to landing a blow!  ");
+		if (monster is ChaosChimera) outputText("Curse");
+		else outputText("The kitsune's seals");
+		outputText(" have made normal melee attack impossible!  Maybe you could try something else?\n\n");
 		enemyAI();
 		return;
 	}
-	if(player.hasStatusEffect(StatusEffects.Sealed2) && player.statusEffectv2(StatusEffects.Sealed2) == 0) {
+	if (player.hasStatusEffect(StatusEffects.Sealed2) && player.statusEffectv2(StatusEffects.Sealed2) == 0) {
 		outputText("You attempt to attack, but at the last moment your mech wrenches away, preventing you from even coming close to landing a blow!  Recent enemy attack have made normal melee attack impossible!  Maybe you could try something else?\n\n");
 		enemyAI();
 		return;
 	}
 	//Amily!
-	if(monster.hasStatusEffect(StatusEffects.Concentration) && !isWieldingRangedWeapon()) {
-		clearOutput();
+	if (monster.hasStatusEffect(StatusEffects.Concentration) && !isWieldingRangedWeapon()) {
 		outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n");
 		enemyAI();
 		return;
 	}
-	if(monster.hasStatusEffect(StatusEffects.Level) && !player.hasStatusEffect(StatusEffects.FirstAttack) && !isWieldingRangedWeapon()) {
+	if (monster.hasStatusEffect(StatusEffects.Level) && !player.hasStatusEffect(StatusEffects.FirstAttack) && !isWieldingRangedWeapon()) {
 		if (monster is SandTrap) {
 			outputText("It's all or nothing!  With a bellowing cry you charge down the treacherous slope and smite the sandtrap as hard as you can!  ");
 			(monster as SandTrap).trapLevel(-4);
@@ -1215,7 +1219,7 @@ public function basemechmeleeattacks():void {
 		}
 	}
 	//Blind
-	if(player.hasStatusEffect(StatusEffects.Blind)) {
+	if (player.hasStatusEffect(StatusEffects.Blind)) {
 		outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
 	}
 	if (monster is Basilisk && player.findPerk(PerkLib.BasiliskResistance) < 0 && !isWieldingRangedWeapon()) {
@@ -1249,7 +1253,7 @@ public function basemechmeleeattacks():void {
 			if(dam == 0) dam = 1;
 			outputText("You strike at the amalgamation, crushing countless worms into goo, dealing <b><font color=\"#800000\">" + dam + "</font></b> damage.\n\n");
 			monster.HP -= dam;
-			if(monster.HP <= 0) {
+			if(monster.HP <= monster.minHP()) {
 				doNext(endHpVictory);
 				return;
 			}
@@ -1353,7 +1357,7 @@ public function meleeDamageAccSawblade():void {
 	outputText("\n");
 	checkAchievementDamage(damage);
 	heroBaneProc(damage);
-	if (monster.HP <= 0){doNext(endHpVictory); return;}
+	if (monster.HP <= monster.minHP()){doNext(endHpVictory); return;}
 	if (monster.lust >= monster.maxLust()){doNext(endLustVictory); return; }
 	outputText("\n");
 	wrathregeneration();
@@ -1735,7 +1739,7 @@ public function meleeAccuracy():Number {
 		if (player.hasPerk(PerkLib.Aerobatics)) accmod += 40;
 		if (player.hasPerk(PerkLib.AdvancedAerobatics)) accmod += 100;
 	}
-	if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport)) accmod -= 190;
+	if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport)) accmod -= player.statusEffectv1(StatusEffects.EvasiveTeleport);
 	if (player.jewelryName == "Ring of Ambidexty") accmod += 30;
 	return accmod;
 }
@@ -1773,7 +1777,7 @@ public function arrowsAccuracy():Number {
 		if (player.hasPerk(PerkLib.Aerobatics)) accmod += 40;
 		if (player.hasPerk(PerkLib.AdvancedAerobatics)) accmod += 100;
 	}
-	if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport)) accmod -= 190;
+	if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport)) accmod -= player.statusEffectv1(StatusEffects.EvasiveTeleport);
 	if (player.jewelryName == "Ring of deadeye aim") accmod += 40;
 	return accmod;
 }
@@ -2123,7 +2127,7 @@ public function multiArrowsStrike():void {
 		damage = Math.round(damage);
 		damage = doDamage(damage);
 		if (flags[kFLAGS.ARROWS_SHOT] >= 1) EngineCore.awardAchievement("Arrow to the Knee", kACHIEVEMENTS.COMBAT_ARROW_TO_THE_KNEE);
-		if (monster.HP <= 0) {
+		if (monster.HP <= monster.minHP()) {
 			if (monster.short == "pod")
 				outputText(". ");
 			else if (monster.plural)
@@ -2279,7 +2283,7 @@ public function multiArrowsStrike():void {
 		}
 		enemyAI();
 	}
-	if(monster.HP <= 0){ doNext(endHpVictory); return;}
+	if(monster.HP <= monster.minHP()){ doNext(endHpVictory); return;}
 	if(monster.lust >= monster.maxLust()){ doNext(endLustVictory); return;}
 	if(flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2) {
 		flags[kFLAGS.MULTIPLE_ARROWS_STYLE]--;
@@ -2437,7 +2441,7 @@ public function throwWeapon():void {
 		damage = doDamage(damage);
 		heroBaneProc(damage);
 		checkAchievementDamage(damage);
-		if (monster.HP <= 0) {
+		if (monster.HP <= monster.minHP()) {
 			if (monster.short == "pod")
 				outputText(". ");
 			else if (monster.plural)
@@ -2629,7 +2633,7 @@ public function shootWeapon():void {
 		damage = doDamage(damage);
 		heroBaneProc(damage);
 		checkAchievementDamage(damage);
-		if (monster.HP <= 0) {
+		if (monster.HP <= monster.minHP()) {
 			if (monster.short == "pod")
 				outputText(". ");
 			else if (monster.plural)
@@ -2842,7 +2846,10 @@ public function attack():void {
 //		fatigueRecovery();
 //	}
 	if(player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 0 && !isWieldingRangedWeapon()) {
-		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  The kitsune's seals have made normal melee attack impossible!  Maybe you could try something else?\n\n");
+		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  ");
+		if (monster is ChaosChimera) outputText("Curse");
+		else outputText("The kitsune's seals");
+		outputText(" have made normal melee attack impossible!  Maybe you could try something else?\n\n");
 		enemyAI();
 		return;
 	}
@@ -2928,7 +2935,7 @@ public function attack():void {
 			if(dam == 0) dam = 1;
 			outputText("You strike at the amalgamation, crushing countless worms into goo, dealing <b><font color=\"#800000\">" + dam + "</font></b> damage.\n\n");
 			monster.HP -= dam;
-			if(monster.HP <= 0) {
+			if(monster.HP <= monster.minHP()) {
 				doNext(endHpVictory);
 				return;
 			}
@@ -3138,7 +3145,7 @@ public function meleeDamageAcc():void {
 						enemyAI();
 					}
 					else {
-						if(monster.HP <= 0) doNext(endHpVictory);
+						if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 						else doNext(endLustVictory);
 					}
 					return;
@@ -3163,7 +3170,7 @@ public function meleeDamageAcc():void {
 						enemyAI();
 					}
 					else {
-						if(monster.HP <= 0) doNext(endHpVictory);
+						if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 						else doNext(endLustVictory);
 					}
 					return;
@@ -3443,7 +3450,7 @@ public function meleeDamageAcc():void {
 		}
 		if (monster is JeanClaude && !player.hasStatusEffect(StatusEffects.FirstAttack))
 		{
-			if (monster.HP < 1 || monster.lust > monster.maxLust())
+			if (monster.HP <= monster.minHP() || monster.lust > monster.maxLust())
 			{
 				// noop
 			}
@@ -3502,7 +3509,7 @@ public function meleeDamageAcc():void {
 		if (monster is DisplacerBeast) outputText("\n\nThe displacer beast teleports, dodging your attack.\n");
 		else outputText("\n\nYou swing your [weapon] ferociously, confident that you can strike a crushing blow. In the end you fails to actually hit anything.\n");
 	}
-	if (monster.HP <= 0){doNext(endHpVictory); return;}
+	if (monster.HP <= monster.minHP()){doNext(endHpVictory); return;}
 	if (monster.lust >= monster.maxLust()){doNext(endLustVictory); return; }
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] >= 2){
 		flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]--;
@@ -3637,6 +3644,16 @@ public function heroBaneProc(damage:int = 0):void {
 		if (player.HP <= player.minHP()) {
 			doNext(endHpLoss);
 		}
+	}
+}
+public function heroBaneProc2():void {
+	if (flags[kFLAGS.HERO_BANE_DAMAGE_BANK] > 0) {
+		outputText("\nYou feel [monster a] [monster name] wounds as well as your owns as the link mirrors the pain back to you for " + flags[kFLAGS.HERO_BANE_DAMAGE_BANK] + " damage!\n");
+		player.takePhysDamage(flags[kFLAGS.HERO_BANE_DAMAGE_BANK]);
+		flags[kFLAGS.HERO_BANE_DAMAGE_BANK] = 0;
+	}
+	if (player.HP <= player.minHP()) {
+		doNext(endHpLoss);
 	}
 }
 
@@ -3959,7 +3976,7 @@ public function fatigueImpl(mod:Number,type:Number  = USEFATG_NORMAL):void {
 	}
 //ENEMYAI!
 public function enemyAIImpl():void {
-	if(monster.HP < 1) {
+	if(monster.HP <= monster.minHP()) {
 		doNext(endHpVictory);
 		return;
 	}
@@ -3970,7 +3987,7 @@ public function enemyAIImpl():void {
 }
 public function finishCombat():void
 {
-	var hpVictory:Boolean = monster.HP < 1;
+	var hpVictory:Boolean = monster.HP <= monster.minHP();//monster.HP < 1
 	clearOutput();
 	if (hpVictory) {
 		outputText("You defeat [monster a] [monster name].\n");
@@ -4132,7 +4149,12 @@ private function combatStatusesUpdate():void {
 		if(player.statusEffectv1(StatusEffects.Sealed) > 0) {
 			player.addStatusValue(StatusEffects.Sealed,1,-1);
 			if(player.statusEffectv1(StatusEffects.Sealed) <= 0) player.removeStatusEffect(StatusEffects.Sealed);
-			else outputText("<b>One of your combat abilities is currently sealed by magic!</b>\n\n");
+			else {
+				outputText("<b>One of your combat abilities is currently sealed by ");
+				if (monster is ChaosChimera) outputText("curse");
+				else outputText("magic");
+				outputText("!</b>\n\n");
+			}
 		}
 	}
 	if(player.hasStatusEffect(StatusEffects.Sealed2)) {
@@ -5351,6 +5373,42 @@ private function combatStatusesUpdate():void {
 			player.addStatusValue(StatusEffects.CooldownTornadoStrike,1,-1);
 		}
 	}
+	//Sextuple Thrust
+	if (player.hasStatusEffect(StatusEffects.CooldownSextupleThrust)) {
+		if (player.statusEffectv1(StatusEffects.CooldownSextupleThrust) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownSextupleThrust);
+		}
+		else {
+			player.addStatusValue(StatusEffects.CooldownSextupleThrust,1,-1);
+		}
+	}
+	//Nonuple Thrust
+	if (player.hasStatusEffect(StatusEffects.CooldownNonupleThrust)) {
+		if (player.statusEffectv1(StatusEffects.CooldownNonupleThrust) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownNonupleThrust);
+		}
+		else {
+			player.addStatusValue(StatusEffects.CooldownNonupleThrust,1,-1);
+		}
+	}
+	//Grandiose Hail of Blades
+	if (player.hasStatusEffect(StatusEffects.CooldownGrandioseHailOfBlades)) {
+		if (player.statusEffectv1(StatusEffects.CooldownGrandioseHailOfBlades) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownGrandioseHailOfBlades);
+		}
+		else {
+			player.addStatusValue(StatusEffects.CooldownGrandioseHailOfBlades,1,-1);
+		}
+	}
+	//Grandiose Hail of Moon Blades
+	if (player.hasStatusEffect(StatusEffects.CooldownGrandioseHailOfMoonBlades)) {
+		if (player.statusEffectv1(StatusEffects.CooldownGrandioseHailOfMoonBlades) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownGrandioseHailOfMoonBlades);
+		}
+		else {
+			player.addStatusValue(StatusEffects.CooldownGrandioseHailOfMoonBlades,1,-1);
+		}
+	}
 	//Soul Blast
 	if (player.hasStatusEffect(StatusEffects.CooldownSoulBlast)) {
 		if (player.statusEffectv1(StatusEffects.CooldownSoulBlast) <= 0) {
@@ -6190,7 +6248,7 @@ public function ScyllaSqueeze():void {
 	damage = doDamage(damage);
 	outputText("\n\n" + monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + damage + "</font></b> damage.");
 	//Enemy faints -
-	if(monster.HP < 1) {
+	if(monster.HP <= monster.minHP()) {
 		outputText("\n\nYou can feel [monster a] [monster name]'s life signs beginning to fade, and before you crush all the life from [monster him], you let go, dropping [monster him] to the floor, unconscious but alive.  In no time, [monster his]'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");
 		if(monster.short == "demons")
 			outputText("The others quickly back off, terrified at the idea of what you might do to them.");
@@ -6574,7 +6632,7 @@ public function VampiricBite():void {
 		outputText(".");
 	}
 	//Enemy faints -
-	if(monster.HP < 1) {
+	if(monster.HP <= monster.minHP()) {
 		outputText("You can feel [monster a] [monster name]'s life signs beginning to fade, and before you crush all the life from [monster him], you let go, dropping [monster him] to the floor, unconscious but alive.  In no time, [monster his] eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");
 		if(monster.short == "demons")
 			outputText("The others quickly back off, terrified at the idea of what you might do to them.");
@@ -6604,7 +6662,7 @@ public function clawsRend():void {
 	damage = Math.round(damage);
 	doDamage(damage, true, true);
 	if (player.hasPerk(PerkLib.PhantomStrike)) doDamage(damage, true, true);
-	if(monster.HP < 1) {
+	if(monster.HP <= monster.minHP()) {
 		doNext(combat.endHpVictory);
 		return;
 	}
@@ -6676,7 +6734,7 @@ public function bearHug():void {
 	damage += scalingBonusToughness() * 0.5;
 	damage = Math.round(damage);
 	doDamage(damage, true, true);
-	if(monster.HP < 1) {
+	if(monster.HP <= monster.minHP()) {
 		doNext(combat.endHpVictory);
 		return;
 	}

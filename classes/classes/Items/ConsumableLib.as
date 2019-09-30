@@ -128,15 +128,18 @@ public final class ConsumableLib extends BaseContent
 
 		//PILLS
 		public const LG_SFRP:SimpleConsumable = mk("LGSFRP", "LGSFRPill", "a low-grade Soulforce Recovery Pill", 10, "This low-grade recovery pill could help you recover some of the spent soulforce.  Naturaly it won't be much but in tight situation it could make a difference between won or lost fight.", m.lowgradesoulforcerecoverypill);
-		public const LGSFRPB:SimpleConsumable = mk("LGSFRPB", "LGSFRPBottle", "a bottle of low-grade Soulforce Recovery Pills", 110, "This low-grade recovery pills could help you recover some of the spent soulforce.  Naturaly it won't be much but in tight situation it could make a difference between won or lost fight.", m.lowgradesoulforcerecoverypill);
+		public const LGSFRPB:SimpleConsumable = mk("LGSFRPB", "LGSFRPBottle", "a bottle of low-grade Soulforce Recovery Pills", 110, "This low-grade recovery pills could help you recover some of the spent soulforce.  Naturaly it won't be much but in tight situation it could make a difference between won or lost fight.", m.lowgradesoulforcerecoverypill2);
 		public const MG_SFRP:SimpleConsumable = mk("MGSFRP", "MGSFRPill", "a mid-grade Soulforce Recovery Pill", 60, "This mid-grade recovery pill could help you recover some of the spent soulforce.  It won't be much but still a few more time more than after using low-grade one version of this pill.", m.midgradesoulforcerecoverypill);
-		public const MGSFRPB:SimpleConsumable = mk("MGSFRPB", "MGSFRPBottle", "a bottle of mid-grade Soulforce Recovery Pills", 610, "This mid-grade recovery pills could help you recover some of the spent soulforce.  It won't be much but still a few more time more than after using low-grade one version of this pill.", m.lowgradesoulforcerecoverypill);
+		public const MGSFRPB:SimpleConsumable = mk("MGSFRPB", "MGSFRPBottle", "a bottle of mid-grade Soulforce Recovery Pills", 610, "This mid-grade recovery pills could help you recover some of the spent soulforce.  It won't be much but still a few more time more than after using low-grade one version of this pill.", m.midgradesoulforcerecoverypill2);
 		public const HG_SFRP:SimpleConsumable = mk("HGSFRP", "HGSFRPill", "a high-grade Soulforce Recovery Pill", 360, "This high-grade recovery pill could hep you recover some of the spent soulforce.  It can restore significant amount of soulforce compared to lower grade pills but still it's only an aid not a replacement for regular cultivation.", m.highgradesoulforcerecoverypill);
+		public const HGSFRPB:SimpleConsumable = mk("HGSFRPB", "HGSFRPBottle", "a bottle of high-grade Soulforce Recovery Pills", 3610, "This high-grade recovery pills could help you recover some of the spent soulforce.  It can restore significant amount of soulforce compared to lower grade pills but still it's only an aid not a replacement for regular cultivation.", m.highgradesoulforcerecoverypill2);
 		//public const SG_SFRP:SimpleConsumable = mk("SGSFRP", "SuperiorGradeSFRecovPill", "a superior-grade Soulforce Recovery Pill", 2160, "This superior-grade recovery pill could hep you recover some of the spent soulforce.  Best possible to obtain pill to fast recover soulforce in tight situations when you not have time to cultivate.", m.superiorgradesoulforcerecoverypill);
 		public const FATPILL:SimpleConsumable = mk("FATPILL", "FastingPill", "a Fasting Pill", 100, "This fasting pill could keep you from hunger for few days.", m.fasteningpill);
 
 		//SOUL SKILLS MANUALS
 		public const TRITMAN:SimpleConsumable = mk("TRITMAN", "TTManual", "a manual for Triple Thrust Soulskill", 50, "This manual would teach you how to use Triple Thrust soulskill.", m.triplethrustmanual);
+		public const SEXTMAN:SimpleConsumable = mk("SEXTMAN", "STManual", "a manual for Sextuple Thrust Soulskill", 120, "This manual would teach you how to use Sextuple Thrust soulskill.", m.sextuplethrustmanual);
+		public const NONTMAN:SimpleConsumable = mk("NONTMAN", "NTManual", "a manual for Nonuple Thrust Soulskill", 290, "This manual would teach you how to use Nonuple Thrust soulskill.", m.nonuplethrustmanual);
 		public const MABIMAN:SimpleConsumable = mk("MABIMAN", "MBManual", "a manual for Many Birds Soulskill", 50, "This manual would teach you how to use Many Birds soulskill.", m.manybirdsmanual);
 		public const DRASMAN:SimpleConsumable = mk("DRASMAN", "DSManual", "a manual for Draco Sweep Soulskill", 50, "This manual would teach you how to use Draco Sweep soulskill.", m.dracosweepmanual);
 		public const COMETMA:SimpleConsumable = mk("COMETMA", "COManual", "a manual for Comet Soulskill", 200, "This manual would teach you how to use Comet soulskill.", m.cometmanual);
@@ -145,13 +148,16 @@ public final class ConsumableLib extends BaseContent
 		public const FOLBMAN:SimpleConsumable = mk("FOLBMAN", "FOLBscManual", "a manual for Flames of Love (Basic Rank) Soulskill", 100, "This manual would teach you how to use Flames of Love (Basic Rank) soulskill.", m.basicflamesoflovemanual);
 		public const IOLBMAN:SimpleConsumable = mk("IOLBMAN", "IOLBscManual", "a manual for Icicles of Love (Basic Rank) Soulskill", 100, "This manual would teach you how to use Icicles of Love (Basic Rank) soulskill.", m.basiciciclesoflovemanual);
 		public const DEV_MAN:SimpleConsumable = mk("DEV_MAN", "DevourManual", "a manual for Devour Soulskill", 50, "This manual would teach you how to use Devour soulskill.", m.devourermanual);
+		public const HOB1MAN:SimpleConsumable = mk("HOB1MAN", "HoBManual", "a manual for Hail of Blades", 100, "This manual would teach you how to use Hail of Blades soulskill.", m.hailofbladesmanual1);
+		public const HOB2MAN:SimpleConsumable = mk("HOB2MAN", "GHoBManual", "a manual for Grandiose Hail of Blades", 400, "This manual would teach you how to use Grandiose Hail of Blades soulskill.", m.hailofbladesmanual2);
+		public const HOB3MAN:SimpleConsumable = mk("HOB3MAN", "GHoMBManual", "a manual for Grandiose Hail of Moon Blades", 1600, "This manual would teach you how to use Grandiose Hail of Moon Blades soulskill.", m.hailofbladesmanual3);
+		//public const HOB4MAN:SimpleConsumable = mk("HOB4MAN", "Manual", "a manual for Grandiose Hailstorm of Yin-Yang Blades: Endless Tide", x, ".", m.hailofbladesmanual4);secret grandmaster ver of Hail of Blades ^^
 	/*	public const MAN:SimpleConsumable = mk("MAN", "Manual", "a manual for Storm of Sisterhood (B) Soulskill", x, "This manual would teach you how to use basic Storm of Sisterhood soulskill.", m.xxx);
 		public const MAN:SimpleConsumable = mk("MAN", "Manual", "a manual for Night of Brotherhood (B) Soulskill", x, "This manual would teach you how to use basic Night of Brotherhood soulskill.", m.xxx);
 		public const XXXXMAN:SimpleConsumable = mk("MAN", "Manual", "a manual for Flames of Love () Soulskill", x, "This manual would teach you how to use ... Rank Flames of Love soulskill.", m.xxx);
 		public const XXXXMAN:SimpleConsumable = mk("MAN", "Manual", "a manual for Icicles of Love () Soulskill", x, ".", m.xxx);
 		public const XXXXMAN:SimpleConsumable = mk("MAN", "Manual", "a manual for Storm of Sisterhood () Soulskill", x, ".", m.xxx);
 		public const XXXXMAN:SimpleConsumable = mk("MAN", "Manual", "a manual for Night of Brotherhood () Soulskill", x, ".", m.xxx);
-		public const XXXXMAN:SimpleConsumable = mk("MAN", "Manual", "a manual for ", x, ".", m.xxx);
 		public const XXXXMAN:SimpleConsumable = mk("MAN", "Manual", "a manual for ", x, ".", m.xxx);
 		public const XXXXMAN:SimpleConsumable = mk("MAN", "Manual", "a manual for ", x, ".", m.xxx);
 		public const XXXXMAN:SimpleConsumable = mk("MAN", "Manual", "a manual for ", x, ".", m.xxx);*/

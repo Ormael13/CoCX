@@ -138,7 +138,7 @@ package classes.Scenes.Places.HeXinDao
 			else {
 				addButtonDisabled(4, "Demons", "Only for Iron tier Adventurer.");
 			}
-			//addButton(5, "Gel", BoardkeeperYangQuestGel).hint("Copper tier Quest.");
+			addButton(5, "Gel", BoardkeeperYangQuestGel).hint("Copper tier Quest.");
 			addButton(6, "Chitin", BoardkeeperYangQuestChitin).hint("Copper tier Quest.");
 			if (flags[kFLAGS.GALIA_LVL_UP] == 0.53 || (flags[kFLAGS.GALIA_LVL_UP] >= 0.5 && flags[kFLAGS.GALIA_TALKS] > 0)) addButtonDisabled(10, "Ferals (C)", "You already finished this quest.");
 			else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) >= 2) {

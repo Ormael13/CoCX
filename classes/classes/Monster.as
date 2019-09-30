@@ -319,6 +319,41 @@ import flash.utils.getQualifiedClassName;
 		public override function maxHP():Number {
             return Math.round(maxHP_base()*maxHP_mult());
         }
+		
+		public override function minHP():Number
+		{
+			var min:Number = 0;
+			if (findPerk(PerkLib.Diehard) >= 0) {
+				min -= maxHP() * 0.02;
+				min -= (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}
+			if (findPerk(PerkLib.ImprovedDiehard) >= 0) {
+				min -= maxHP() * 0.04;
+				min -= (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}
+			if (findPerk(PerkLib.GreaterDiehard) >= 0) {
+				min -= maxHP() * 0.06;
+				min -= (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}
+			if (findPerk(PerkLib.EpicDiehard) >= 0) {
+				min -= maxHP() * 0.08;
+				min -= (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}//nastepny diehard to 5% i 1000
+			if (findPerk(PerkLib.Ferocity) >= 0) min -= maxHP() * 0.07;
+			if (findPerk(PerkLib.OrcAdrenalGlands) >= 0) min -= maxHP() * 0.01;
+			if (findPerk(PerkLib.OrcAdrenalGlandsEvolved) >= 0) min -= maxHP() * 0.02;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) {
+				min -= str;
+				min -= tou;
+				min -= spe;
+				min -= inte;
+				min -= wis;
+				min -= lib;
+				min -= sens;
+			}
+			min = Math.round(min);
+			return min;
+		}
 
 		public function addHP(hp:Number):void{
 			this.HP += hp;
@@ -2960,6 +2995,8 @@ import flash.utils.getQualifiedClassName;
 				if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;
 				if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;
 				if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;
+				if (findPerk(PerkLib.Ferocity) >= 0 && this.HP < 1) healingPercent -= 1;
+				if (findPerk(PerkLib.Diehard) >= 0 && !findPerk(PerkLib.EpicDiehard) >= 0 && this.HP < 1) healingPercent -= 1;
 				if (findPerk(PerkLib.EnemyPlantType) >= 0) healingPercent += 1;
 				if (findPerk(PerkLib.MonsterRegeneration) >= 0) healingPercent += perkv1(PerkLib.MonsterRegeneration);
 				if (hasStatusEffect(StatusEffects.MonsterRegen)) healingPercent += statusEffectv2(StatusEffects.MonsterRegen);
@@ -3074,6 +3111,164 @@ import flash.utils.getQualifiedClassName;
 		}
 		public function prepareForCombat():void {
 			var bonusStatsAmp:Number = 0.2;
+			if (hasPerk(PerkLib.ChimericalBodyInitialStage)) {
+				tou += (5 * (1 + newGamePlusMod()));
+				lib += (5 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.ChimericalBodySemiBasicStage)) {
+				str += (5 * (1 + newGamePlusMod()));
+				spe += (5 * (1 + newGamePlusMod()));
+				inte += (5 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.ChimericalBodyBasicStage)) {
+				str += (5 * (1 + newGamePlusMod()));
+				tou += (5 * (1 + newGamePlusMod()));
+				spe += (5 * (1 + newGamePlusMod()));
+				wis += (5 * (1 + newGamePlusMod()));
+				sens += (5 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.ChimericalBodyAdvancedStage)) {
+				str += (5 * (1 + newGamePlusMod()));
+				tou += (5 * (1 + newGamePlusMod()));
+				inte += (5 * (1 + newGamePlusMod()));
+				wis += (5 * (1 + newGamePlusMod()));
+				lib += (5 * (1 + newGamePlusMod()));
+				sens += (5 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.ChimericalBodySemiSuperiorStage)) {
+				str += (5 * (1 + newGamePlusMod()));
+				tou += (5 * (1 + newGamePlusMod()));
+				spe += (5 * (1 + newGamePlusMod()));
+				inte += (5 * (1 + newGamePlusMod()));
+				wis += (5 * (1 + newGamePlusMod()));
+				lib += (5 * (1 + newGamePlusMod()));
+				sens += (5 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.ChimericalBodySuperiorStage)) {
+				str += (5 * (1 + newGamePlusMod()));
+				tou += (5 * (1 + newGamePlusMod()));
+				spe += (10 * (1 + newGamePlusMod()));
+				inte += (5 * (1 + newGamePlusMod()));
+				wis += (5 * (1 + newGamePlusMod()));
+				lib += (5 * (1 + newGamePlusMod()));
+				sens += (5 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.ChimericalBodyPeerlessStage)) {
+				str += (10 * (1 + newGamePlusMod()));
+				tou += (10 * (1 + newGamePlusMod()));
+				spe += (10 * (1 + newGamePlusMod()));
+				inte += (5 * (1 + newGamePlusMod()));
+				wis += (5 * (1 + newGamePlusMod()));
+				lib += (5 * (1 + newGamePlusMod()));
+				sens += (5 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.ChimericalBodySemiEpicStage)) {
+				str += (5 * (1 + newGamePlusMod()));
+				tou += (5 * (1 + newGamePlusMod()));
+				spe += (5 * (1 + newGamePlusMod()));
+				inte += (10 * (1 + newGamePlusMod()));
+				wis += (10 * (1 + newGamePlusMod()));
+				lib += (10 * (1 + newGamePlusMod()));
+				sens += (10 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.ChimericalBodyEpicStage)) {
+				str += (10 * (1 + newGamePlusMod()));
+				tou += (10 * (1 + newGamePlusMod()));
+				spe += (10 * (1 + newGamePlusMod()));
+				inte += (10 * (1 + newGamePlusMod()));
+				wis += (10 * (1 + newGamePlusMod()));
+				lib += (5 * (1 + newGamePlusMod()));
+				sens += (5 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.BlackHeartFinalForm)) {
+				wis += (5 * (1 + newGamePlusMod()));
+				lib += (10 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.CatlikeNimblenessEvolved)) spe += (10 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.DraconicLungs)) spe += (5 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.DraconicLungsEvolved)) {
+				tou += (5 * (1 + newGamePlusMod()));
+				spe += (5 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.DraconicLungsFinalForm)) {
+				str += (5 * (1 + newGamePlusMod()));
+				tou += (5 * (1 + newGamePlusMod()));
+				spe += (5 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.ElvishPeripheralNervSysEvolved)) spe += (5 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm)) spe += (5 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.GorgonsEyesEvolved)) {
+				spe += (5 * (1 + newGamePlusMod()));
+				sens += (10 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.HinezumiBurningBloodFinalForm)) tou += (10 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.KitsuneThyroidGland)) spe += (5 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.KitsuneThyroidGlandEvolved)) {
+				spe += (5 * (1 + newGamePlusMod()));
+				wis += (5 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.KitsuneThyroidGlandEvolved)) {
+				spe += (5 * (1 + newGamePlusMod()));
+				inte += (5 * (1 + newGamePlusMod()));
+				wis += (5 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.LactaBovinaOvariesEvolved)) lib += (10 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.LactaBovinaOvariesFinalForm)) {
+				str += (10 * (1 + newGamePlusMod()));
+				tou += (5 * (1 + newGamePlusMod()));
+				lib += (10 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.MantislikeAgility)) {/*
+				if (hasCoatOfType(Skin.CHITIN) && hasPerk(PerkLib.ThickSkin)) spe += (20 * (1 + newGamePlusMod()));
+				if ((skinType == Skin.SCALES && hasPerk(PerkLib.ThickSkin)) || hasCoatOfType(Skin.CHITIN)) spe += (15 * (1 + newGamePlusMod()));
+				if (skinType == Skin.SCALES) spe += (10 * (1 + newGamePlusMod()));*/
+				if (hasPerk(PerkLib.ThickSkin)) spe += (5 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.MantislikeAgilityEvolved)) {/*
+				if (hasCoatOfType(Skin.CHITIN) && hasPerk(PerkLib.ThickSkin)) spe += (25 * (1 + newGamePlusMod()));
+				if ((skinType == Skin.SCALES && hasPerk(PerkLib.ThickSkin)) || hasCoatOfType(Skin.CHITIN)) spe += (20 * (1 + newGamePlusMod()));
+				if (skinType == Skin.SCALES) spe += (15 * (1 + newGamePlusMod()));*/
+				if (hasPerk(PerkLib.ThickSkin)) spe += (10 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.MinotaurTesticlesEvolved)) lib += (10 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.MinotaurTesticlesFinalForm)) {
+				str += (10 * (1 + newGamePlusMod()));
+				tou += (5 * (1 + newGamePlusMod()));
+				lib += (10 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.ObsidianHeartFinalForm)) {
+				str += (5 * (1 + newGamePlusMod()));
+				tou += (5 * (1 + newGamePlusMod()));
+				spe += (5 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.OniMusculature)) str += (5 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.OniMusculatureEvolved)) str += (10 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.OniMusculatureFinalForm)) str += (15 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.OrcAdrenalGlandsEvolved)) str += (5 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.OrcAdrenalGlandsFinalForm)) str += (5 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.PigBoarFat)) tou += (5 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.PigBoarFatEvolved)) tou += (10 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.PigBoarFatFinalForm)) tou += (15 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.SalamanderAdrenalGlands)) {
+				tou += (5 * (1 + newGamePlusMod()));
+				lib += (5 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.SalamanderAdrenalGlandsEvolved)) {
+				str += (5 * (1 + newGamePlusMod()));
+				tou += (5 * (1 + newGamePlusMod()));
+				spe += (5 * (1 + newGamePlusMod()));
+				lib += (5 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) {
+				str += (15 * (1 + newGamePlusMod()));
+				tou += (5 * (1 + newGamePlusMod()));
+				spe += (15 * (1 + newGamePlusMod()));
+				lib += (5 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.ScyllaInkGlands)) str += (10 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.TrachealSystemEvolved)) str += (5 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.TrachealSystemFinalForm)) spe += (10 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.VenomGlandsFinalForm)) tou += (10 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.EzekielBlessing)) {
 				str += (5 * (1 + newGamePlusMod()));
 				tou += (5 * (1 + newGamePlusMod()));
@@ -3091,11 +3286,11 @@ import flash.utils.getQualifiedClassName;
 				lib += (5 * (1 + newGamePlusMod()));
 				sens += (5 * (1 + newGamePlusMod()));
 			}
-			if (hasPerk(PerkLib.JobBeastWarrior) >= 0) {
+			if (hasPerk(PerkLib.JobBeastWarrior)) {
 				str += (5 * (1 + newGamePlusMod()));
 				tou += (5 * (1 + newGamePlusMod()));
 				spe += (5 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator) >= 0) {
+				if (hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator)) {
 					inte += (5 * (1 + newGamePlusMod()));
 					wis += (5 * (1 + newGamePlusMod()));
 				}
@@ -3267,13 +3462,86 @@ import flash.utils.getQualifiedClassName;
 			if (level > 10) bonusAscMaxHP *= (int)(level / 10 + 1);
 			weaponAttack += (1 + (int)(weaponAttack / 5)) * newGamePlusMod();
 			if (weaponRangeAttack > 0) weaponRangeAttack += (1 + (int)(weaponRangeAttack / 5)) * newGamePlusMod();
+			if (hasPerk(PerkLib.ToughHide)) {
+				armorDef += (2 * (1 + newGamePlusMod()));
+				armorMDef += (1 * (1 + newGamePlusMod()));
+			}
 			if (hasPerk(PerkLib.FeralArmor)) {
 				armorDef += Math.round(tou / 20);
 				armorMDef += Math.round(tou / 20);
 			}
+			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
+				if (hasPerk(PerkLib.SoulApprentice)) {
+					armorDef += (2 * (1 + newGamePlusMod()));
+					armorMDef += (1 * (1 + newGamePlusMod()));
+				}
+				if (hasPerk(PerkLib.SoulPersonage)) {
+					armorDef += (2 * (1 + newGamePlusMod()));
+					armorMDef += (1 * (1 + newGamePlusMod()));
+				}
+				if (hasPerk(PerkLib.SoulWarrior)) {
+					armorDef += (2 * (1 + newGamePlusMod()));
+					armorMDef += (1 * (1 + newGamePlusMod()));
+				}
+			}
+			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
+				if (hasPerk(PerkLib.SoulSprite)) {
+					armorDef += (3 * (1 + newGamePlusMod()));
+					armorMDef += (2 * (1 + newGamePlusMod()));
+				}
+				if (hasPerk(PerkLib.SoulScholar)) {
+					armorDef += (3 * (1 + newGamePlusMod()));
+					armorMDef += (2 * (1 + newGamePlusMod()));
+				}
+				if (hasPerk(PerkLib.SoulElder)) {
+					armorDef += (3 * (1 + newGamePlusMod()));
+					armorMDef += (2 * (1 + newGamePlusMod()));
+				}
+			}
+			if (hasPerk(PerkLib.FleshBodyElderStage)) {
+				if (hasPerk(PerkLib.SoulExalt)) {
+					armorDef += (4 * (1 + newGamePlusMod()));
+					armorMDef += (3 * (1 + newGamePlusMod()));
+				}
+				if (hasPerk(PerkLib.SoulOverlord)) {
+					armorDef += (4 * (1 + newGamePlusMod()));
+					armorMDef += (3 * (1 + newGamePlusMod()));
+				}
+				if (hasPerk(PerkLib.SoulTyrant)) {
+					armorDef += (4 * (1 + newGamePlusMod()));
+					armorMDef += (3 * (1 + newGamePlusMod()));
+				}
+			}
+			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
+				if (hasPerk(PerkLib.SoulKing)) {
+					armorDef += (5 * (1 + newGamePlusMod()));
+					armorMDef += (4 * (1 + newGamePlusMod()));
+				}
+				if (hasPerk(PerkLib.SoulEmperor)) {
+					armorDef += (5 * (1 + newGamePlusMod()));
+					armorMDef += (4 * (1 + newGamePlusMod()));
+				}
+				if (hasPerk(PerkLib.SoulAncestor)) {
+					armorDef += (5 * (1 + newGamePlusMod()));
+					armorMDef += (4 * (1 + newGamePlusMod()));
+				}
+			}/*
+			if (hasPerk(PerkLib.FleshBodyTyrantStage)) {
+				if (hasPerk(PerkLib.soul)) {
+					armorDef += (2 * (1 + newGamePlusMod()));
+					armorMDef += (1 * (1 + newGamePlusMod()));
+				}
+				if (hasPerk(PerkLib.)) {
+					armorDef += (2 * (1 + newGamePlusMod()));
+					armorMDef += (1 * (1 + newGamePlusMod()));
+				}
+				if (hasPerk(PerkLib.)) {
+					armorDef += (2 * (1 + newGamePlusMod()));
+					armorMDef += (1 * (1 + newGamePlusMod()));
+				}
+			}*/
 			armorDef += ((int)(1 + armorDef / 10)) * newGamePlusMod();
 			armorMDef += ((int)(1 + armorMDef / 10)) * newGamePlusMod();
 		}
 	}
 }
-

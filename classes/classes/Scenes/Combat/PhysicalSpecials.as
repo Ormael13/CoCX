@@ -2041,7 +2041,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
 		doNext(playerMenu);
-		if (monster.HP <= 0) doNext(endHpVictory);
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 
@@ -3311,7 +3311,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Victory ORRRRR enemy turn.
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else {
-			if(monster.HP <= 0) doNext(endHpVictory);
+			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
@@ -3430,7 +3430,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Victory ORRRRR enemy turn.
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else {
-			if(monster.HP <= 0) doNext(endHpVictory);
+			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
@@ -3780,7 +3780,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			enemyAI();
 		}
 		else {
-			if(monster.HP <= 0) doNext(endHpVictory);
+			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 			else doNext(endLustVictory);
 		}
 	}
@@ -3838,7 +3838,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (dam == 0) dam = 1;
 				outputText("You strike at the amalgamation, crushing countless worms into goo, dealing " + dam + " damage.\n\n");
 				monster.HP -= dam;
-				if (monster.HP <= 0) {
+				if (monster.HP <= monster.minHP()) {
 					doNext(endHpVictory);
 					return;
 				}
@@ -4175,7 +4175,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		bowPerkUnlock();
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
-		if (monster.HP <= 0 || flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 1) enemyAI();
+		if (monster.HP <= monster.minHP() || flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 1) enemyAI();
 		else archerBarrage2();
 	}
 	private function archerBarrage2():void {
@@ -4229,7 +4229,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		bowPerkUnlock();
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
-		if (monster.HP <= 0 || flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 1) enemyAI();
+		if (monster.HP <= monster.minHP() || flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 1) enemyAI();
 		else archerBarrage2();
 	}
 	private function archerBarrage3():Number {

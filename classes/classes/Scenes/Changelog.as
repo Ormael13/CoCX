@@ -79,31 +79,45 @@ package classes.Scenes
 			outputText("-New PC camp npc's. Some of them can spar in camp, help with constructing structures, and even assist in one or another way in fight (like you use them directly to beat enemeis or have them help as henchman).\n");
 			outputText("-Chimera and Grand Chimera race desc been changed to req. full racial scores for Chimera and 3rd step in race for Grand Chimera (that meaning only 11 races can mixed to give Grand Chimera race desc instead of almost 70 racial scores).\n");
 			outputText("-Monsters could slowly recover mana and soulforce spent based on what perks they got that could affect speed of recovery of those two resources.\n");
-			outputText("-Character viewer was updated onceagain due to hard work of Liadri and aimozg.\n");
+			outputText("-Character viewer was updated once again due to hard work of Liadri and aimozg.\n");
 			outputText("-Fixed bugs: Siegweird Advanced Studies not progressing beyond crafting holy symbol stage, 3rd bracer been uncraftable due to wrong one of requirements, one of Celess scenes having small error in code, opening map in one of Hidden cave room causing glitch\n\n");
 			outputText("<b>Version 0.8n4:</b>\n\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("-Iron Stomach perks would increase limit when PC gain weight from eating over max Hunger cap by 5/10/15 (so all 3 will grant increase of 30).\n");
+			outputText("-Increased max lvl camp npc's can attain after reaching end of training: Aurora (lvl 19), Dinah (lvl 38)\n");
+			outputText("-7 new achievments.\n");
+			outputText("-Monsters can now go into negative HP without loosing by HP as long they got anything like Diehard/Ferocity effects active.\n");
+			outputText("-2 new things added to stats page (general subpage): current possesed amount of ascension points and possible to gain ascension points when PC will ascend.\n");
+			outputText("-Magical soulskill lost their spells power modifier. Since they not spells but soulskill they not needed it to wreck havoc anyway, right?\n");
 			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
 			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New soulskill: Devourer. Req. ... Devour up to 400 lust and wrath from enemy transfering 50% of it back to player. Cooldown: 3 turns.\n");
 			//outputText("-(Heavy WIP) Raging Inferno now boost by 10% fire spells/attacks damage and each turn spend without casting fire spell lower that bonus damage by 10% till it return to 100%.\n");
-			//outputText("-New dungeon: Ebon Labyrinth. Founded in Caves. It's endless dungeon without any usable map or end. PC can keep explore it and fight enemies inside it up to even needing to sleep inside it. Sleeping inside giving 50% chance of been attacked in sleep. It's possible to leave dungeon at any moment if player decide it getting too hard to keep staying inside labyrinth.\n");
-			//outputText("-New melee weapon (by Ormael): Dual large axes - dropped by Labyrinth Minotaur. Cost 1440 gems. Base atk is 28. Requires height of 6'6 to wield. They are dual large weapons.\n");
-			//outputText("-New types of enemies could be meet in Ebon Labyrinth: Stay demons (stray succubus/incubus/omnibus), Ancient tentacle beast, Labyrinth minotaur.\n");
-			outputText("-Iron Stomach perks would increase limit when PC gain weight form eating over max Hunger cap by 5/10/15 (so all 3 will grant increase of 30).\n");
+			//outputText("\n");cel na 0.8: dodać kitsune/salamander TF
+			//outputText("\n");cel na 0.8: dodać kitsune/nekomanta TF
+			//outputText("\n");cel na 0.8: dodać yuki-onna TF
+			outputText("-New dungeon: Ebon Labyrinth. Founded in Caves. It's endless dungeon without any usable map or end, traveling between rooms takes 15 min instead of 5. PC can keep explore it and fight enemies inside it up to even needing to sleep inside it. Sleeping inside giving 50% chance of been attacked in sleep. It's possible to leave dungeon at any moment if player decide it getting too hard to keep staying inside labyrinth.\n");
+			outputText("-New types of enemies could be meet in Ebon Labyrinth: Stay demons (stray succubus/incubus/omnibus), Ancient tentacle beast, Labyrinth minotaur.\n");
+			outputText("-New melee weapon (by Ormael): Dual large axes - dropped by Labyrinth Minotaur. Cost 1440 gems. Base atk is 28. Requires height of 6'6 to wield. They are dual large weapons.\n");
+			outputText("-New physical soulskill: Sextuple Thrust. Req. buying manual from golem merchant for 24 spirit stones after PC reach Soul Personage stage and knowing Triple Trust soulskill. Enhanced version of Triple Thrust with adding 3 more attacks. Base cost: 70 soulforce. Cooldown: 1 turns.\n");
+			outputText("-New physical soulskill: Nonuple Thrust. Req. buying manual from golem merchant for 58 spirit stones after PC reach Soul Sprite stage and knowing Sextuple Trust soulskill. Enhanced version of Sextuple Thrust with adding 3 more attacks. Base cost: 150 soulforce. Cooldown: 2 turns.\n");
+			outputText("-New magical soulskill: Hail of Blades. Req. buying manual from golem merchant for 20 spirit stones. Creates 6 magical blades that are then send toward enemy. Base cost: 50 soulforce.\n");
+			outputText("-New magical soulskill: Grandiose Hail of Blades. Req. buying manual from golem merchant for 80 spirit stones after PC reach Soul Personage and knowing Hail of Blades. Creates 18 magical blades that are then send toward enemy. Base cost: 200 soulforce. Cooldown: 3 turns.\n");
+			outputText("-New magical soulskill: Grandiose Hail of Moon Blades. Req. buying manual from golem merchant for 320 spirit stones after PC reach Soul Sprite and knowing Grandiose Hail of Blades. Creates 54 magical blades that are then send toward enemy. Base cost: 800 soulforce. Cooldown: 9 turns.\n");
+			outputText("-Req. for Toolbelt in Lumi workshop was moved form display in main screen section to tooltip on greyed out button below.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-Fixed bugs: None slime PC getting hunger refilled from sex scenes involving been filled with any liquid\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: None slime PC getting hunger refilled from sex scenes involving been filled with any liquid, option to make bottle with mid-grade pill redirect to get bottle of low-grade pills, bottle of low grade pill when swallowed giving effect of just 1 pill instead of 10, displacer beast and hellcat race scores not allowing to pick cat races mutation perks, green gel gathering quest on adventure guild been disabled, ");
+			outputText("using mech melee attack not clearing previous text\n");/*ostatni punkt changelogu
 			outputText("-New TF item: . Gained by bringing Orc Mead to Lumi for enhancing. Using this item will turn PC into high orc. High Orc (scalable): +130 to max Str, +30 to max Tou, +10 to max Spe, -30 to max Int, +25 to max Lib, +20% to max Wrath.\n");
 			outputText("-New TF item: . Gained by bringing Elf Ear to Lumi for enhancing. Using this item will turn PC into high elf. High Elf (scalable): -10 to max Str, -15 to max Tou, +80 to max Spe, +80 to max Int, +60 to max Wis, +30 max/min Sens, +20% to max Mana.\n");
 			outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
 			outputText("-New necklace (by Ormael):  - obtained by . Cost xx0 gems. \n");
 			outputText("-New head accesory (by Ormael):  - obtained by . Cost xx0 gems. \n");
 			outputText("-New ring (by Ormael):  - obtained by . Cost xx0 gems. \n");
-			outputText("\n");cel na 0.8: dodać kitsune/salamander TF
-			outputText("\n");cel na 0.8: dodać kitsune/nekomanta TF
 			outputText("\n");cel na 0.8: dodać yuki-onna TF
 			outputText("\n");cel na 0.8: dodać siren TF
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -149,6 +163,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -156,7 +171,6 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -186,17 +200,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we wlasciwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

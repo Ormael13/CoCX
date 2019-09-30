@@ -69,7 +69,7 @@ public class Evangeline3 extends Monster
 		
 		public function SpellMod():Number {
 			var mod:Number = 1;
-			if (findPerk(PerkLib.Channeling) >= 0) mod += .1;
+			if (findPerk(PerkLib.Channeling) >= 0) mod += .2;
 			if (findPerk(PerkLib.JobSorcerer) >= 0) mod += .1;
 			if (findPerk(PerkLib.Mage) >= 0) mod += .2;
 			if (findPerk(PerkLib.Spellpower) >= 0) mod += .2;

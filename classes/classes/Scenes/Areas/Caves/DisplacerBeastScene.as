@@ -61,6 +61,10 @@ public function displacerBeastDefeat():void {
 	}
 	if (player.hasVagina()) outputText(" squirt");
 	outputText(" in accordance with your breastgasm.\n\nThankfully the beast finally unplugs her tentacles from your tortured breasts, licking her lips in delight and done with her meal, teleports away from your view. You lay there still lost in the feeling of your heaving chest as you lose consciousness.\n\n");
+	if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
+		outputText(" You wake up somewhere out of the labyrinth still sore but otherwise unharmed.");
+		player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
+	}
 	cleanupAfterCombat();
 }
 

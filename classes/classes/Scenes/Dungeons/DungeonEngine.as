@@ -149,6 +149,11 @@ public class DungeonEngine extends BaseContent
 		private static const DUNGEON_RIVER_FLOOR_02_ROOM_26:int  = 129;
 		private static const DUNGEON_RIVER_FLOOR_02_ROOM_27:int  = 130;
 		
+		private static const DUNGEON_EBON_LABYRINTH_0:int	= 131;
+		private static const DUNGEON_EBON_LABYRINTH_1:int	= 132;
+		private static const DUNGEON_EBON_LABYRINTH_2:int	= 133;
+		private static const DUNGEON_EBON_LABYRINTH_3:int	= 134;
+		
 		//Register dungeons
 		public var factory:Factory = new Factory;
 		public var deepcave:DeepCave = new DeepCave;
@@ -159,6 +164,7 @@ public class DungeonEngine extends BaseContent
 		public var hiddencave:HiddenCave = new HiddenCave();
 		public var denofdesire:DenOfDesire = new DenOfDesire();
 		public var anzupalace:AnzuPalace = new AnzuPalace();
+		public var ebonlabyrinth:EbonLabyrinth = new EbonLabyrinth;
 		
 		public var map:DungeonMap = new DungeonMap;
 		
@@ -280,6 +286,11 @@ public class DungeonEngine extends BaseContent
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_ANZU_ROOF) anzupalace.roomRoof();
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_ANZU_BASEMENT) anzupalace.roomBasement();
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_ANZU_ARMORY) anzupalace.roomArmory();
+			//Ebon Labyrinth
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_EBON_LABYRINTH_0) ebonlabyrinth.roomAAA();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_EBON_LABYRINTH_1) ebonlabyrinth.roomBBB();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_EBON_LABYRINTH_2) ebonlabyrinth.roomCCC();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_EBON_LABYRINTH_3) ebonlabyrinth.roomDDD();
 		}
 		
 		public function checkFactoryClear():Boolean {
@@ -330,8 +341,12 @@ public class DungeonEngine extends BaseContent
 			denofdesire.enterDungeon();
 		}
 		
-		public function navigateToRoom(room:Function = null, timeToPass:Number = 1/12):void {
-			cheatTime(timeToPass);
+		public function navigateToRoom(room:Function = null):void {
+			cheatTime2(5);
+			room();
+		}
+		public function navigateToRoomEL(room:Function = null):void {
+			cheatTime2(15);
 			room();
 		}
 		
@@ -364,6 +379,23 @@ public class DungeonEngine extends BaseContent
 			if (eastFunction != null) addButton(12, "East", navigateToRoom, eastFunction);
             if (player.lust >= 30) addButton(8, "Masturbate", SceneLib.masturbation.masturbateGo);
             addButton(13, "Inventory", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
+			addButton(14, "Map", map.displayMap).hint("View the map of this dungeon.");
+			setTopButtons();
+		}
+		public function setDungeonButtonsEL(northFunction:Function = null, southFunction:Function = null, westFunction:Function = null, eastFunction:Function = null):void {
+			statScreenRefresh();
+			hideUpDown();
+			spriteSelect(-1);
+			menu();
+			if (northFunction != null) addButton(6, "North", navigateToRoomEL, northFunction);
+			if (southFunction != null) addButton(11, "South", navigateToRoomEL, southFunction);
+			if (westFunction != null) addButton(10, "West", navigateToRoomEL, westFunction);
+			if (eastFunction != null) addButton(12, "East", navigateToRoomEL, eastFunction);
+            addButton(3, "Exit", ebonlabyrinth.exitDungeon);
+            if (model.time.hours >= 21 || model.time.hours < 6) addButton(4, "Sleep", ebonlabyrinth.doSleepEL).hint("Turn yourself in for the night. May result in monster ambush!");
+			else addButtonDisabled(4, "Sleep", "It's still too early to go to sleep.");
+            if (player.lust >= 30) addButton(8, "Masturbate", SceneLib.masturbation.masturbateGo);
+			addButton(13, "Inventory", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
 			addButton(14, "Map", map.displayMap).hint("View the map of this dungeon.");
 			setTopButtons();
 		}

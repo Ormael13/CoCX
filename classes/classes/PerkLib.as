@@ -917,7 +917,7 @@ public class PerkLib
 				"Increases maximum libido by 35 + 5 * NG tier.",
 				"You choose the 'Epic Libido' perk. Increases maximum libido by 35 + 5 * NG tier.");
 		public static const EpicLifeline:PerkType = mk("Epic Lifeline", "Epic Lifeline",
-				"Increases self heling by 240 out of combat and by 120 in combat (using defend option will double it).",
+				"Increases self healing by 240 out of combat and by 120 in combat (using defend option will double it).",
 				"You choose the 'Epic Lifeline' perk, increasing your self healing to epic level.");
 		public static const EpicSelfControl:PerkType = mk("Epic Self-Control", "Epic Self-Control",
 				"Increases maximum lust by 2250.",
@@ -1156,7 +1156,7 @@ public class PerkLib
 				"Increase duration of enemy(ies) distraction by 2 turns.",
 				"You choose the 'Greater feint' perk. Increase duration of enemy(ies) distraction by 2 turns.");
 		public static const GreaterLifeline:PerkType = mk("Greater Lifeline", "Greater Lifeline",
-				"Increases self heling by 180 out of combat and by 90 in combat (using defend option will double it).",
+				"Increases self healing by 180 out of combat and by 90 in combat (using defend option will double it).",
 				"You choose the 'Greater Lifeline' perk, greatly increasing your self healing.");
 		public static const GreyArchmage:PerkType = mk("Grey Archmage", "Grey Archmage",
 				"[if (player.inte>=275)" +
@@ -1348,7 +1348,7 @@ public class PerkLib
 				"Increases chances of evading enemy attacks. (+10% to evasion)",
 				"You choose the 'Improved Evade' perk, allowing you to avoid enemy attacks more often! (+10% to evasion)");
 		public static const ImprovedLifeline:PerkType = mk("Improved Lifeline", "Improved Lifeline",
-				"Increases self heling by 120 out of combat and by 60 in combat (using defend option will double it).",
+				"Increases self healing by 120 out of combat and by 60 in combat (using defend option will double it).",
 				"You choose the 'Improved Lifeline' perk, improving your self healing.");
 		public static const ImprovedSelfControl:PerkType = mk("Improved Self-Control", "Improved Self-Control",
 				"Increases maximum lust by 40.",
@@ -1594,7 +1594,7 @@ public class PerkLib
 				"Increases maximum wisdom by 50 + 10 * NG tier.",
 				"You choose the 'Legendary Wisdom' perk. Increases wisdom libido by 50 + 10 * NG tier.");
 		public static const Lifeline:PerkType = mk("Lifeline", "Lifeline",
-				"Increases self heling by 90 out of combat and by 45 in combat (using defend option will double it).",
+				"Increases self healing by 90 out of combat and by 45 in combat (using defend option will double it).",
 				"You choose the 'Lifeline' perk, increasing your self healing.");
 		public static const LightningStrikes:PerkType = mk("Lightning Strikes", "Lightning Strikes",
 				"[if(player.spe>=60)" +
@@ -2435,8 +2435,8 @@ public class PerkLib
 				"Increasing damage of aoe like whirlwind by 100% of base value.",
 				"You choose the 'Tornado' perk, increasing damage by aoe specials like whirlwind.");
 		public static const ToughHide:PerkType = mk("Tough Hide", "Tough Hide",
-				"Increase your natural armor by 2 so long as you have scale chitin fur or other natural armor.",
-				"You choose the 'Tough Hide' perk, increase your natural armor as long you have any natural armor!");
+				"Increase your armor by 2 and magic resistance by 1 so long as you have scale chitin fur or other natural armor. (boost scalable with ng tiers)",
+				"You choose the 'Tough Hide' perk, increase your armor and magic resistance as long you have any natural armor!");
 		public static const TrachealSystem:PerkType = mk("Tracheal System", "Tracheal System",
 				"Your body posses rudimentary respiratory system of the insects.",
 				"You choose the 'Tracheal System' perk, by becoming much more insect-like your body started to denvelop crude version of insects breathing system.");
@@ -2793,7 +2793,7 @@ public class PerkLib
 		public static const FenrirSpikedCollar:PerkType = mk("Fenrir spiked collar", "Fenrir spiked collar",
 				"The magical chain as well as the strongly enchanted collar increase damage reduction by 10%.");
 		public static const Ferocity:PerkType = mk("Ferocity", "Ferocity",
-				"You can remains conscious and continue fighting even if your HP is below 0. You gonna loose 1% of max HP each round and would loose fight when negative HP reach 15% of max HP.");
+				"You can remains conscious and continue fighting even if your HP is below 0. You gonna loose 1% of max HP each round and would loose fight when negative HP reach 7% of max HP.");
 		public static const FireAffinity:PerkType = mk("Fire Affinity", "Fire Affinity",
 				"You have high resistance to fire effects, immunity to the burn condition, and mastery over fire abilities and magic. However, you are highly susceptible to ice.");
 		public static const FlawlessBody:PerkType = mk("Flawless Body", "Flawless Body",
@@ -4864,7 +4864,7 @@ public class PerkLib
                 return player.demonScore() >= 5;
             }, "Demon race");
             CatlikeNimbleness.requirePerk(Flexibility).requireCustomFunction(function (player:Player):Boolean {
-                return player.catScore() >= 4 || player.nekomataScore() >= 4 || player.cheshireScore() >= 4;
+                return player.catScore() >= 4 || player.nekomataScore() >= 4 || player.displacerbeastScore() >= 4 || player.hellcatScore() >= 4 || player.cheshireScore() >= 4;
             }, "Any cat race");
             DraconicLungs.requirePerk(DragonFireBreath)
                 .requirePerk(DragonIceBreath)
@@ -5019,7 +5019,7 @@ public class PerkLib
             CatlikeNimblenessEvolved.requireLevel(6)
 					.requirePerk(CatlikeNimbleness)
 					.requireCustomFunction(function (player:Player):Boolean {
-						return player.catScore() >= 8 || player.nekomataScore() >= 8 || player.cheshireScore() >= 8;
+						return player.catScore() >= 8 || player.nekomataScore() >= 8 || player.displacerbeastScore() >= 8 || player.hellcatScore() >= 8 || player.cheshireScore() >= 8;
 					}, "Any cat race");
             GorgonsEyesEvolved.requireLevel(6)
 				.requirePerk(GorgonsEyes)

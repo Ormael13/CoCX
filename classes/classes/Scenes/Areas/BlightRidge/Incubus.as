@@ -28,7 +28,8 @@ use namespace CoC;
 		
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			TrueDemons.loseToAIncubus();
+			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) SceneLib.dungeons.ebonlabyrinth.defeatedByStrayDemon();
+			else TrueDemons.loseToAIncubus();
 		}
 		
 		private function cockTripAttack():void {
@@ -138,8 +139,8 @@ use namespace CoC;
 		{
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB))  {
 				this.short = "stray incubus";
-				initStrTouSpeInte(225, 150, 165, 155);
-				initWisLibSensCor(155, 165, 105, 100);
+				initStrTouSpeInte(255, 170, 195, 165);
+				initWisLibSensCor(165, 165, 105, 100);
 				this.weaponAttack = 32;
 				this.armorDef = 36;
 				this.armorMDef = 6;

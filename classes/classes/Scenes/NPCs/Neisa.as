@@ -81,7 +81,46 @@ import classes.Scenes.SceneLib;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
 			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);
-			checkMonster();
+			this.createPerk(PerkLib.DraconicLungs, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OniMusculature, 0, 0, 0, 0);
+			this.createPerk(PerkLib.PigBoarFat, 0, 0, 0, 0);
+			this.createPerk(PerkLib.Ferocity, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OrcAdrenalGlands, 0, 0, 0, 0);
+			this.createPerk(PerkLib.LizanRegeneration, 0, 0, 0, 0);
+			this.createPerk(PerkLib.LizanMarrow, 0, 0, 0, 0);
+			if (flags[kFLAGS.NEISA_LVL_UP] >= 2) {
+				this.createPerk(PerkLib.CatlikeNimblenessEvolved, 0, 0, 0, 0);
+				this.createPerk(PerkLib.GorgonsEyesEvolved, 0, 0, 0, 0);
+				//this.createPerk(PerkLib., 0, 0, 0, 0);
+				//this.createPerk(PerkLib., 0, 0, 0, 0);
+				//this.createPerk(PerkLib., 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.NEISA_LVL_UP] >= 3) {
+				this.createPerk(PerkLib.DraconicLungsEvolved, 0, 0, 0, 0);
+				this.createPerk(PerkLib.LizanMarrowEvolved, 0, 0, 0, 0);
+				this.createPerk(PerkLib.OniMusculatureEvolved, 0, 0, 0, 0);
+				this.createPerk(PerkLib.OrcAdrenalGlandsEvolved, 0, 0, 0, 0);
+				this.createPerk(PerkLib.PigBoarFatEvolved, 0, 0, 0, 0);
+			}//nastepny lvl-up bedzie problemem z brakującymi stopniami perków rasowych :(
+			if (flags[kFLAGS.NEISA_LVL_UP] >= 4) {
+				this.createPerk(PerkLib.LactaBovinaOvariesEvolved, 0, 0, 0, 0);
+				//this.createPerk(PerkLib., 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.NEISA_LVL_UP] >= 5) {
+				//this.createPerk(PerkLib., 0, 0, 0, 0);
+				//this.createPerk(PerkLib., 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.NEISA_LVL_UP] >= 6) {
+				this.createPerk(PerkLib.DraconicLungsFinalForm, 0, 0, 0, 0);
+				this.createPerk(PerkLib.OniMusculatureFinalForm, 0, 0, 0, 0);
+				this.createPerk(PerkLib.OrcAdrenalGlandsFinalForm, 0, 0, 0, 0);
+				this.createPerk(PerkLib.PigBoarFatFinalForm, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.NEISA_LVL_UP] >= 7) {
+				//this.createPerk(PerkLib., 0, 0, 0, 0);
+				//this.createPerk(PerkLib., 0, 0, 0, 0);
+			}
+			checkMonster();//make her lvl 3 starting with internal mutation for: cat, dragon, gorgon, lacta bovina, lizard, oni, orc, pig/boar - plus job: guardian perk
 		}
 	}
 }
