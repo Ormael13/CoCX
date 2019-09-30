@@ -190,7 +190,7 @@ import classes.internals.*;
 						else alvinaInfernalFlare();
 						break;
 					case 4:
-						if (hasStatusEffect(StatusEffects.AbilityCooldown2)) alvinaPolarMidnight();
+						if (!hasStatusEffect(StatusEffects.AbilityCooldown2)) alvinaPolarMidnight();
 						else alvinaInfernalFlare();
 						break;
 					case 5:

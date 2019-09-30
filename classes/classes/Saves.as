@@ -633,6 +633,8 @@ public function savePermObject(isFile:Boolean):void {
 		saveFile.data.flags[kFLAGS.USE_METRICS] = flags[kFLAGS.USE_METRICS];
 		saveFile.data.flags[kFLAGS.AUTO_LEVEL] = flags[kFLAGS.AUTO_LEVEL];
 		saveFile.data.flags[kFLAGS.NO_GORE_MODE] = flags[kFLAGS.NO_GORE_MODE];
+		saveFile.data.flags[kFLAGS.STRENGTH_SCALLING] = flags[kFLAGS.STRENGTH_SCALLING];
+		saveFile.data.flags[kFLAGS.SPEED_SCALLING] = flags[kFLAGS.SPEED_SCALLING];
 		saveFile.data.flags[kFLAGS.WISDOM_SCALLING] = flags[kFLAGS.WISDOM_SCALLING];
 		saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALLING] = flags[kFLAGS.INTELLIGENCE_SCALLING];
 		saveFile.data.flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] = flags[kFLAGS.MELEE_DAMAGE_OVERHAUL];
@@ -687,6 +689,8 @@ public function loadPermObject():void {
 			if (saveFile.data.flags[kFLAGS.USE_METRICS] != undefined) flags[kFLAGS.USE_METRICS] = saveFile.data.flags[kFLAGS.USE_METRICS];
 			if (saveFile.data.flags[kFLAGS.AUTO_LEVEL] != undefined) flags[kFLAGS.AUTO_LEVEL] = saveFile.data.flags[kFLAGS.AUTO_LEVEL];
 			if (saveFile.data.flags[kFLAGS.NO_GORE_MODE] != undefined) flags[kFLAGS.NO_GORE_MODE] = saveFile.data.flags[kFLAGS.NO_GORE_MODE];
+			if (saveFile.data.flags[kFLAGS.STRENGTH_SCALLING] != undefined) flags[kFLAGS.STRENGTH_SCALLING] = saveFile.data.flags[kFLAGS.STRENGTH_SCALLING];
+			if (saveFile.data.flags[kFLAGS.SPEED_SCALLING] != undefined) flags[kFLAGS.SPEED_SCALLING] = saveFile.data.flags[kFLAGS.SPEED_SCALLING];
 			if (saveFile.data.flags[kFLAGS.WISDOM_SCALLING] != undefined) flags[kFLAGS.WISDOM_SCALLING] = saveFile.data.flags[kFLAGS.WISDOM_SCALLING];
 			if (saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALLING] != undefined) flags[kFLAGS.INTELLIGENCE_SCALLING] = saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALLING];
 			if (saveFile.data.flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] != undefined) flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] = saveFile.data.flags[kFLAGS.MELEE_DAMAGE_OVERHAUL];

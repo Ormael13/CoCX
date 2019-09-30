@@ -131,6 +131,22 @@ public class GameSettings extends BaseContent {
 
 		outputText("\n\n");
 
+		if (flags[kFLAGS.STRENGTH_SCALLING] >= 1) {
+			outputText("Strength Scaling: <font color=\"#008000\"><b>New</b></font>\n Values are less randomn and a bit higher on averange than in old scalling.");
+		}
+		else
+			outputText("Strength Scaling: <font color=\"#800000\"><b>Old</b></font>\n Values are more randomn and a bit lower on averange than in new scalling.");
+
+		outputText("\n\n");
+
+		if (flags[kFLAGS.SPEED_SCALLING] >= 1) {
+			outputText("Speed Scaling: <font color=\"#008000\"><b>New</b></font>\n Values are less randomn and a bit higher on averange than in old scalling.");
+		}
+		else
+			outputText("Speed Scaling: <font color=\"#800000\"><b>Old</b></font>\n Values are more randomn and a bit lower on averange than in new scalling.");
+
+		outputText("\n\n");
+
 		if (flags[kFLAGS.WISDOM_SCALLING] >= 1) {
 			outputText("Wisdom Scaling: <font color=\"#008000\"><b>New</b></font>\n Values are less randomn and a bit higher on averange than in old scalling.");
 		}
@@ -219,6 +235,8 @@ public class GameSettings extends BaseContent {
 		addButton(3, "Wis scalling", toggleWisScaling).hint("Toggles Wisdom scalling for all attacks using it. If enabled, wisdom scaling would be less randomn with big generaly a bit higher values on averange.");
 		addButton(4, "Int scalling", toggleIntScaling).hint("Toggles Intelligance scalling for all attacks using it. If enabled, intelligence scaling would be less randomn with big generaly a bit higher values on averange.");
 		addButton(5, "Spells Cooldowns", toggleSpellsCooldowns).hint("Toggles Spells cooldowns. If enabled, spells would have cooldowns and they will be stronger.");
+		addButton(8, "Str scalling", toggleStrScaling).hint("Toggles Strength scalling for all attacks using it. If enabled, strength scaling would be less randomn with big generaly a bit higher values on averange.");
+		addButton(9, "Spe scalling", toggleSpeScaling).hint("Toggles Speed scalling for all attacks using it. If enabled, speed scaling would be less randomn with big generaly a bit higher values on averange.");
 		addButton(14, "Back", settingsScreenGameSettings);
 	}
 
@@ -323,6 +341,18 @@ public class GameSettings extends BaseContent {
 	public function toggleNOGORE():void {
 		if (flags[kFLAGS.NO_GORE_MODE] < 1) flags[kFLAGS.NO_GORE_MODE] = 1;
 		else flags[kFLAGS.NO_GORE_MODE] = 0;
+		settingsScreenGameSettings2();
+	}
+
+	public function toggleStrScaling():void {
+		if (flags[kFLAGS.STRENGTH_SCALLING] < 1) flags[kFLAGS.STRENGTH_SCALLING] = 1;
+		else flags[kFLAGS.STRENGTH_SCALLING] = 0;
+		settingsScreenGameSettings2();
+	}
+
+	public function toggleSpeScaling():void {
+		if (flags[kFLAGS.SPEED_SCALLING] < 1) flags[kFLAGS.SPEED_SCALLING] = 1;
+		else flags[kFLAGS.SPEED_SCALLING] = 0;
 		settingsScreenGameSettings2();
 	}
 

@@ -198,7 +198,7 @@
 				It’s not everyday you get to see a centauress with such a fine pussy<if test="player.hasStatusEffect(StatusEffects.TelAdre) eq true">beside Edryn's of course</if>.
 				You ponder for a split second the implications of what you’re about to do, it’s about how long it takes you to dismiss them.
 				Amongst all of the people you know, the only one even remotely likely of still being a virgin is your daughter and with the way she debauches herself on a daily basis using the natural fauna
-				(if centaur toys) or the toys you brought back from Whitney’s farm(end of cut)
+				<if test="player.hasKeyItem('Fake Mare') ge 0 || player.hasKeyItem('Centaur Pole') ge 0"> or the toys you brought back from Whitney’s farm</if>
 				, you’re pretty sure her innocence died out a long time ago. <output>$name</output> is a big girl with… equally big assets, but today what you’re interested in is her gaping horsecunt.
 				<if test="silly()">You monster.</if>When you mention it to her, she doesn't even seem surprised, aside from asking what took you so long.
 				Merely smiling while teasingly flaunting her moistening cunt toward you, taunting you to take her already.

@@ -87,7 +87,8 @@ package classes.Scenes.Places.HeXinDao
 				if (player.keyItemv1("Adventurer Guild: Copper plate") > 1) addButton(2, "Promotion", BoardkeeperYangPromotion).hint("Ask Yang for a promotion once you have achieved enough jobs.");
 				else addButtonDisabled(2, "Promotion", "Not meet req.");
 				addButton(3, "Sex", BoardkeeperYangSex);
-				addButton(4, "Back", curry(enteringInn,false));
+				addButton(4, "Back", curry(enteringInn, false));
+				if (flags[kFLAGS.AURORA_LVL] == 0.3 || (flags[kFLAGS.AURORA_LVL] >= 0.6 && flags[kFLAGS.AURORA_LVL] < 0.75)) addButton(5, "GRJ", BoardkeeperYangGolemRetrievalJob).hint("Golem retrieval job");
 			}
 			else {
 				outputText("You approach the board covered in colorful papers and the panda girl next to it smile at you.\n\n");
@@ -629,6 +630,34 @@ package classes.Scenes.Places.HeXinDao
 		public function BoardkeeperYangQuest1():void {
 			clearOutput();
 			outputText("Placeholder for lazyLia writing ^^\n\n");
+			doNext(curry(enteringInn,false));
+		}
+		public function BoardkeeperYangGolemRetrievalJob():void {
+			clearOutput();
+			if (flags[kFLAGS.AURORA_LVL] == 0.3) {
+				outputText("You ask Yang if it would be possible for you to post a job. You happen to have a chained golem you want retrieved from the hidden cave and brought up back to your camp.\n\n");
+				outputText("Yang nods \"<i>Yeah, sure we can do that. Just write a full job description and I will post it on the board. It will cost 10 spirit stones.</i>\"\n\n");
+				if (flags[kFLAGS.SPIRIT_STONES] < 10) {
+					outputText("You tell her you’ll be back with the stones the moment you have them.\n\n");
+					doNext(curry(enteringInn,false));
+				}
+				else {
+					menu();
+					addButton(0, "Maybe later", BoardkeeperYangGolemRetrievalJob1);
+					addButton(1, "Post the Req", BoardkeeperYangGolemRetrievalJob2);
+				}
+			}
+			else SceneLib.auroraFollower.putInTheJadeTalismanEpilogue();
+		}
+		public function BoardkeeperYangGolemRetrievalJob1():void {
+			outputText("You tell Yang you will come back later to post the request.\n\n");
+			doNext(curry(enteringInn,false));
+		}
+		public function BoardkeeperYangGolemRetrievalJob2():void {
+			outputText("Yang wait at you arm crossed. You write a full job description and hand it over to Yang along with the stones. This done, she then posts it on the board as an iron plate request.\n\n");
+			flags[kFLAGS.SPIRIT_STONES] -= 10;
+			flags[kFLAGS.AURORA_LVL] = 0.35;
+			statScreenRefresh();
 			doNext(curry(enteringInn,false));
 		}
 		public function BoardkeeperYangTalk():void {

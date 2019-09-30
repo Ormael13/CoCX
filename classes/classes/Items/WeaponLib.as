@@ -16,11 +16,9 @@ package classes.Items
 
 		public static const FISTS:Fists = new Fists();
 
-		public const MACGRSW:Weapon = new Weapon("Macgrsw","Mach.greatsword","Machine Greatsword","a Machine Greatsword","slash",19,4415,"This greatsword is half invention and half weapon. Instead of a sharp straight blade, the weapon’s sides are a set of metal teeth that constantly move in order to properly saw through flesh and more solid matter, creating grievous wounds. Very good for cutting down trees too.", "Large");
-		public const RIPPER1:Weapon = new Weapon("Ripper1","Ripper1.0","Ripper 1.0","a Ripper 1.0","slash",24,14445,"Similar to the machine Greatsword, this weapon is highly mechanical. Instead of a sharp straight blade, the weapon’s sides are a set of sharp metal teeth that constantly move in order to properly saw through flesh and more solid matter, creating grievous wounds. Very good for cutting down trees too.", "Large");
-		public const RIPPER2:Weapon = new Weapon("Ripper2","Ripper2.0","Ripper 2.0","a Ripper 2.0","slash",29,37520,"Similar to the machine Greatsword, this weapon is highly mechanical. Instead of a sharp straight blade, the weapon’s sides are a set of sharp metal teeth that constantly move in order to properly saw through flesh and more solid matter, creating grievous wounds. The blades movement is so fast it creates heat along the length and thanks to a small system set, the saw is constantly aflame. Aside of cutting fleshy things in half, it is very good for taking down trees.", "Large");
 		public const ACLAYMO:AmphystClaymore = new AmphystClaymore();
 		public const ADAGGER:Weapon = new Weapon("ADagger","A.Dagger","amethyst dagger","an amethyst dagger","stab",3,240,"This dagger is made of obsidian and grotesquely decorated with amethysts and lead engravings. The magic within this murky blade will bleed unnatural darkness when charged with magic.", "Small");
+		public const AETHERD:AetherD = new AetherD();
 		public const ANGSTD :AngstDaggers = new AngstDaggers();
 		public const ASCENSU:Ascensus = new Ascensus();
 		public const B_STAFF:Weapon = new BeautifulStaff();
@@ -75,6 +73,7 @@ package classes.Items
 		public const L_WHIP :LethiciteWhip = new LethiciteWhip();
 		public const LANCE  :Lance = new Lance();
 		public const MACE   :Weapon = new Weapon("Mace   ", "Mace", "mace", "a mace", "smash", 9, 360, "This is a mace, designed to be able to crush against various defenses.");
+		public const MACGRSW:Weapon = new Weapon("Macgrsw","Mach.greatsword","Machine Greatsword","a Machine Greatsword","slash",19,4415,"This greatsword is half invention and half weapon. Instead of a sharp straight blade, the weapon’s sides are a set of metal teeth that constantly move in order to properly saw through flesh and more solid matter, creating grievous wounds. Very good for cutting down trees too.", "Large");
 		public const MASAMUN:Masamune = new Masamune();
 		public const MASTGLO:WeaponWithPerk = new WeaponWithPerk("MastGlo", "MasterGloves", "Master Gloves", "a Master Gloves", "punch", 0, 400, "These gloves belonged to Chi Chi. They seem to naturally strengthen the soulforce techniques of the user.", "Body Cultivator's Focus", PerkLib.BodyCultivatorsFocus, 0.4, 0, 0, 0);
 		public const N_STAFF:NocturnusStaff = new NocturnusStaff();
@@ -94,6 +93,8 @@ package classes.Items
 		public const RDAGGER:Weapon = new Weapon("RDagger","R.Dagger","ruby dagger","an ruby dagger","stab",3,240,"This dagger is made of crimson metal and richly decorated with rubies and gold engravings. The magic within this crimson blade will flare up with magical flames when charged with magic.", "Small");
 		public const RIBBON :Weapon = new Weapon("Ribbon ","Ribbon","long ribbon","a long ribbon","whip-like slash",5,200,"A long ribbon made of fine silk that despite it seemly fragile appearance can deal noticable damage to even few enemies at once.  Perfect example of weapon that is more dangerous than it looks.");
 		public const RIDINGC:Weapon = new Weapon("RidingC","RidingC","riding crop","a riding crop","whip-crack",5,200,"This riding crop appears to be made of black leather, and could be quite a painful (or exciting) weapon.");
+		public const RIPPER1:Weapon = new Weapon("Ripper1","Ripper1.0","Ripper 1.0","a Ripper 1.0","slash",24,14445,"Similar to the machine Greatsword, this weapon is highly mechanical. Instead of a sharp straight blade, the weapon’s sides are a set of sharp metal teeth that constantly move in order to properly saw through flesh and more solid matter, creating grievous wounds. Very good for cutting down trees too.", "Large");
+		public const RIPPER2:Weapon = new Weapon("Ripper2","Ripper2.0","Ripper 2.0","a Ripper 2.0","slash",29,37520,"Similar to the machine Greatsword, this weapon is highly mechanical. Instead of a sharp straight blade, the weapon’s sides are a set of sharp metal teeth that constantly move in order to properly saw through flesh and more solid matter, creating grievous wounds. The blades movement is so fast it creates heat along the length and thanks to a small system set, the saw is constantly aflame. Aside of cutting fleshy things in half, it is very good for taking down trees.", "Large");
 		public const RRAPIER:RaphaelsRapier = new RaphaelsRapier();
 		public const RCLAYMO:RubyClaymore = new RubyClaymore();
 		public const S_BLADE:Spellblade = new Spellblade();

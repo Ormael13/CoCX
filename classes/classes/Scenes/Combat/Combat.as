@@ -3595,7 +3595,7 @@ public function WeaponMeleeStatusProcs():void {
 	if (player.isMaceHammerTypeWeapon()) stunChance += 10;
 	if (player.isAxeTypeWeapon()) bleedChance += 25;
 	//10% Stun chance
-	if ((player.weapon == weapons.WARHAMR || player.weapon == weapons.D_WHAM_ || player.weapon == weapons.OTETSU || (player.weapon == weapons.S_GAUNT && player.findPerk(PerkLib.MightyFist) < 0))) stunChance += 10;
+	if (player.weapon == weapons.WARHAMR || player.weapon == weapons.D_WHAM_ || player.weapon == weapons.OTETSU || (player.weapon == weapons.S_GAUNT && player.findPerk(PerkLib.MightyFist) < 0)) stunChance += 10;
 	//15% Stun Chance
 	if (player.weapon == weapons.POCDEST || player.weapon == weapons.DOCDEST) stunChance += 15;
 	//20% Stun chance
@@ -7528,6 +7528,7 @@ private function ghostRealStrength():Number {
 }
 private function ghostRealStrengthCompanion():Number {
 	var ghostRealStrCompanion:Number = 0;
+	if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerAurora);
 	if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerEtna);
 	if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerNeisa);
 	//ghostRealStrCompanion += ghostStrength();
@@ -7572,16 +7573,19 @@ private function inteWisLibScale(stat:int):Number{
 }
 
 public function scalingBonusStrength():Number {
-	return touSpeStrScale(ghostRealStrength());
+	if (flags[kFLAGS.STRENGTH_SCALLING] == 1) return touSpeStrScale(ghostRealStrength());
+	else return inteWisLibScale(ghostRealStrength());
 }
 public function scalingBonusStrengthCompanion():Number {
-	return touSpeStrScale(ghostRealStrengthCompanion());
+	if (flags[kFLAGS.STRENGTH_SCALLING] == 1) return touSpeStrScale(ghostRealStrengthCompanion());
+	else return inteWisLibScale(ghostRealStrengthCompanion());
 }
 public function scalingBonusToughness():Number {
 	return touSpeStrScale(player.tou);
 }
 public function scalingBonusSpeed():Number {
-	return touSpeStrScale(ghostRealSpeed());
+	if (flags[kFLAGS.SPEED_SCALLING] == 1) return touSpeStrScale(ghostRealSpeed());
+	else return inteWisLibScale(ghostRealSpeed());
 }
 public function scalingBonusWisdom():Number {
 	if (flags[kFLAGS.WISDOM_SCALLING] == 1) return touSpeStrScale(player.wis);
@@ -7595,4 +7599,4 @@ public function scalingBonusLibido():Number {
 	return inteWisLibScale(player.lib);
 }
 }
-}
+}

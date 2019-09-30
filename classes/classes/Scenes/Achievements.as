@@ -97,7 +97,8 @@ public class Achievements extends BaseContent
 			addAchievement("Sovereign", kACHIEVEMENTS.LEVEL_SOVEREIGN, "Get to level 90.");
 			addAchievement("Are you a god?", kACHIEVEMENTS.LEVEL_ARE_YOU_A_GOD, "Get to level 100.", "Get to level 100. (Your powers would have surpassed weakest god by now.)", true);
 			addAchievement("Newb God(ess)", kACHIEVEMENTS.LEVEL_NEWB_GOD_ESS, "Get to level 120.", "Get to level 120. (You still new to all this 'god' stuff.)", true);
-			addAchievement("Mid-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS, "Get to level 150.", "Get to level 150. (No more called newb god(ess) at least.)", true);// (Your powers would have surpassed Marae's by now.)
+			addAchievement("Mid-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS, "Get to level 150.", "Get to level 150. (No more called newb god(ess) at least.)", true);
+			//lvl 180// (Your powers would have surpassed Marae's by now.)
 			
 			titleAchievementSection("Population"); //21 achievements
 			addAchievement("My First Companion", kACHIEVEMENTS.POPULATION_FIRST, "Have a camp population of 2.");
@@ -134,7 +135,7 @@ public class Achievements extends BaseContent
 			addAchievement("Century", kACHIEVEMENTS.TIME_CENTURY, "Get to day 36,500. (100 years)", "Get to day 36,500. (100 years | It's time to stop playing. Go outside.)", true);
 			addAchievement("Time Traveller", kACHIEVEMENTS.TIME_TRAVELLER, "Get to day 36,500+ by tampering with save", "", true);
 			
-			titleAchievementSection("Dungeons"); //12 achievements
+			titleAchievementSection("Dungeons"); //16 achievements
 			addAchievement("Delver", kACHIEVEMENTS.DUNGEON_DELVER, "Clear any dungeon.");
 			addAchievement("Delver Apprentice", kACHIEVEMENTS.DUNGEON_DELVER, "Clear 2 dungeons.");
 			addAchievement("Delver Expert", kACHIEVEMENTS.DUNGEON_DELVER_MASTER, "Clear 4 dungeons.");
@@ -149,6 +150,16 @@ public class Achievements extends BaseContent
 			addAchievement("Extremely Celibate Delver", kACHIEVEMENTS.DUNGEON_EXTREMELY_CHASTE_DELVER, "Complete Phoenix Tower without ever orgasming from the beginning.", "", true);
 			addAchievement("Tiger stalking the Dragon", kACHIEVEMENTS.DUNGEON_TIGER_STALKING_THE_DRAGON, "Fully clear the Hidden Cave.");
 			addAchievement("Slain the Heroslayer", kACHIEVEMENTS.DUNGEON_SLAIN_THE_HEROSLAYER, "Fully clear the Den of Desire.");
+			addAchievement("Mirror Flower, Water Moon", kACHIEVEMENTS.DUNGEON_MIRROR_FLOWER_WATER_MOON, "Clear the River Dungeon.");
+			addAchievement("Dungeon Seeker (1st layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_1ST_LAYER, "Clear 1st floor of the River Dungeon.");
+			//addAchievement("Dungeon Seeker (2nd layer)", kACHIEVEMENTS., "Clear 2nd floor of the River Dungeon.");
+			//addAchievement("Dungeon Seeker (3rd layer)", kACHIEVEMENTS., "Clear 3rd floor of the River Dungeon.");
+			//addAchievement("Dungeon Seeker (4th layer)", kACHIEVEMENTS., "Clear 4th floor of the River Dungeon.");
+			//addAchievement("Honorary Minotaur", kACHIEVEMENTS.DUNGEON_HONORARY_MINOTAUR, "Clear the Ebon Labyrinth.");
+			//addAchievement("Dungeonmaster", kACHIEVEMENTS.DUNGEON_DUNGEONMASTER, "Reach 50th room of Ebon Labyrinth.");
+			//addAchievement("", kACHIEVEMENTS., "Reach 100th room of Ebon Labyrinth.");
+			//addAchievement("", kACHIEVEMENTS., "Reach 150th room of Ebon Labyrinth.");
+			//addAchievement("", kACHIEVEMENTS., "Reach 200th room of Ebon Labyrinth.");
 			
 			titleAchievementSection("Fashion"); //24 achievements
 			addAchievement("Wannabe Wizard", kACHIEVEMENTS.FASHION_WANNABE_WIZARD, "Equip wizard robes and magic staff.");
@@ -186,7 +197,7 @@ public class Achievements extends BaseContent
 			addAchievement("Poor Daoist", kACHIEVEMENTS.WEALTH_POOR_DAOIST, "Have 200 spirit stones.");
 			addAchievement("Sect's Conclave Student", kACHIEVEMENTS.WEALTH_SECTS_CONCLAVE_STUDENT, "Have 2,000 spirit stones.");
 			addAchievement("Sect's Head Elder", kACHIEVEMENTS.WEALTH_SECTS_HEAD_ELDER, "Have 20,000 spirit stones.");
-			addAchievement("Sect's Patriarch", kACHIEVEMENTS.WEALTH_SECTS_PATRIARCH, "Have 500,000 spirit stones.", "Have 500,000 spirit stones. Maybe it's time to retreat into secluded cultivation?", true);
+			addAchievement("Sect's Patriarch", kACHIEVEMENTS.WEALTH_SECTS_PATRIARCH, "Have 500,000 spirit stones.", "Have 500,000 spirit stones. Maybe it's time to retreat into a secluded cultivation?", true);
 			addAchievement("Meng Hao", kACHIEVEMENTS.WEALTH_MENG_HAO, "Have 20,000,000 spirit stones.", "Have 20,000,000 spirit stones. You can now exchange tips on getting more spirit stones with Meng Hao himself.", true);
 			//addAchievement("Item Vault", kACHIEVEMENTS.WEALTH_ITEM_VAULT, "Fill up your inventory, chest, jewelry box, weapon and armor racks.");
 			
@@ -225,14 +236,34 @@ public class Achievements extends BaseContent
 			addAchievement("The Lovable Snowman", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_III, "Have Nieve as lover (Christmas/Winter)", "", true);
 			addAchievement("Will You Be My Valentine?", kACHIEVEMENTS.HOLIDAY_VALENTINE, "Visit the Wet Bitch during Valentine's day. (Valentine)", "", true);
 			
-			titleAchievementSection("Survival/Realistic Mode"); //4 achievements
+			titleAchievementSection("Survival/Realistic Mode"); //12 achievements
 			addAchievement("Tastes Like Chicken", kACHIEVEMENTS.REALISTIC_TASTES_LIKE_CHICKEN, "Refill your hunger for the first time.");
 			addAchievement("Champion Needs Food Badly", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD, "Instantly refill your hunger from 0 to 100 in one go.");
 			//addAchievement("Gourmand", kACHIEVEMENTS.REALISTIC_GOURMAND, "Refill hunger from 5 different sources.");
 			addAchievement("Glutton", kACHIEVEMENTS.REALISTIC_GLUTTON, "Eat while hunger is above 90.");
+			addAchievement("Epic Glutton", kACHIEVEMENTS.REALISTIC_EPIC_GLUTTON, "Eat while hunger is above 240.");
+			addAchievement("Legendary Glutton", kACHIEVEMENTS.REALISTIC_LEGENDARY_GLUTTON, "Eat while hunger is above 490.");
+			addAchievement("Mythical Glutton", kACHIEVEMENTS.REALISTIC_MYTHICAL_GLUTTON, "Eat while hunger is above 990.");
+			//addAchievement(" Glutton", kACHIEVEMENTS., "Eat while hunger is above 2490.", "", true);
+			//addAchievement(" Glutton", kACHIEVEMENTS., "Eat while hunger is above 4990.", "", true);
 			addAchievement("Fasting", kACHIEVEMENTS.REALISTIC_FASTING, "Keep hunger below 25 for a week but don't let it reach 0.");
+			addAchievement("Lent", kACHIEVEMENTS.REALISTIC_LENT, "Keep hunger below 25 for fourty days but don't let it reach 0.", "Keep hunger below 25 for fourty days but don't let it reach 0. Now you're ready for Easter.", true);
+			addAchievement("One more dish please", kACHIEVEMENTS.REALISTIC_ONE_MORE_DISH_PLEASE, "Increase your maximum hunger above 100.");
+			addAchievement("You not gonna eat those ribs?", kACHIEVEMENTS.REALISTIC_YOU_NOT_GONNA_EAT_THOSE_RIBS, "Increase your maximum hunger above 250.");
+			addAchievement("Dinner for Four", kACHIEVEMENTS.REALISTIC_DINNER_FOR_FOUR, "Increase your maximum hunger above 500.");
+			addAchievement("Dinner for Obelix", kACHIEVEMENTS.REALISTIC_DINNER_FOR_OBELIX, "Increase your maximum hunger above 1000.");
+			//HIDDEN ACHIEV - HUNGER OVER 2500 (feast for gluttons)
+			//HIDDEN ACHIEV - HUNGER OVER 5000 (tang wuxlin eating buddy)
+			//keep hunger above 0 with  5 internal mutation score
+			//keep hunger above 0 with 10 internal mutation score
+			//keep hunger above 0 with 20 internal mutation score
+			//keep hunger above 0 with 40 internal mutation score
+			//eat 15 pts over max hunger without gaining weight
+			//eat 30 pts over max hunger without gaining weight
+			//eat 50 pts over max hunger without gaining weight
+			//eat 75 pts over max hunger without gaining weight (perki muszą dać zwiekszenie limitu przejedzenia sie bez przyrostu wagi ^^)
 			
-			titleAchievementSection("Epic"); //13 achievements
+			titleAchievementSection("Epic"); //16 achievements
 			addAchievement("xXx2: The Next Level", kACHIEVEMENTS.EPIC_XXX2_THE_NEXT_LEVEL, "Start NG+ (or higher) game.", "", true);
 			addAchievement("xXx: The Return of Mareth Champion", kACHIEVEMENTS.EPIC_XXX_THE_RETURN_OF_MARETH_CHAMPION, "Start NG++ (or higher) game.", "", true);
 			addAchievement("xXx 4", kACHIEVEMENTS.EPIC_XXX_4, "Start NG+++ (or higher) game.", "", true);
@@ -244,11 +275,12 @@ public class Achievements extends BaseContent
 			addAchievement("Guardian of Notre-Dame", kACHIEVEMENTS.EPIC_GUARDIAN_OF_NOTRE_DAME, "Become Gargoyle.", "", true);
 			addAchievement("The Devil Wears Prada", kACHIEVEMENTS.EPIC_THE_DEVIL_WEARS_PRADA, "Became Devil.", "", true);
 			//odblokowanie pierwszego animal ancestory starting bonus at chara creation
-			//znalezienie ewolującą broń
+			addAchievement("My own Demon Weapon", kACHIEVEMENTS.EPIC_MY_OWN_DEMON_WEAPON, "Find an evolving weapon.", "", true);
 			//znalezienie ewolującą zbroje
-			//znalezienie 1 ewolującego przedmiotu
-			//znalezienie 2 ewolujących przedmiotów
+			addAchievement("Me Evolve", kACHIEVEMENTS.EPIC_ME_EVOLVE, "Find one evolving items.", "", true);
+			addAchievement("Us Evolve", kACHIEVEMENTS.EPIC_US_EVOLVE, "Find two evolving items.", "", true);
 			//znalezienie 4 ewolujących przedmiotów
+			//znalezienie 8 ewolujących przedmiotów
 			addAchievement("Achievementception", kACHIEVEMENTS.EPIC_ACHIEVEMENTCEPTION, "Unlocking 10 achievements.", "", true);
 			addAchievement("Achievement within Achievement", kACHIEVEMENTS.EPIC_ACHIEVEMENT_WITHIN_ACHIEVEMENT, "Unlocking 30 achievements.", "", true);
 			addAchievement("Achievements - Going Deeper (1st layer)", kACHIEVEMENTS.EPIC_ACHIEVEMENTS_GOING_DEEPER_1L, "Unlocking 60 achievements.", "", true);
@@ -262,6 +294,7 @@ public class Achievements extends BaseContent
 			addAchievement("Shadow Knight", kACHIEVEMENTS.SHADOW_KNIGHT, "Unlock 25 shadow achievements.", "", true);
 			addAchievement("Shadow Paladin", kACHIEVEMENTS.SHADOW_PALADIN, "Unlock 45 shadow achievements.", "", true);
 			addAchievement("Shadow General", kACHIEVEMENTS.SHADOW_GENERAL, "Unlock 70 shadow achievements.", "", true);
+			//addAchievement("Shadow ", kACHIEVEMENTS., "Unlock 100 shadow achievements.", "", true); 
 			
 			titleAchievementSection("General");
 			addAchievement("Portal Defender", kACHIEVEMENTS.GENERAL_PORTAL_DEFENDER, "Defeat 20 demons and sleep 10 times.");
